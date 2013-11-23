@@ -129,3 +129,42 @@ function fireOnClick(target){
 		}
 	}
 }
+
+/**
+ * Attach an event to hode/show a label
+ */
+function attachLabel(editor,label) {
+	require(["dojo/on","dojo/_base/fx"], function(on,fx){
+		on(editor.parentNode,"mouseover", function() {
+			fx.fadeOut({node:label}).play();
+		});
+		on(editor.parentNode,"mouseout", function() {
+			fx.fadeIn({node:label}).play();
+		});
+	});	
+}
+
+/**
+ * Show the documentation panel
+ */
+function toggleDocumentation() {
+	if(pageGlobal.docContainer) {
+		var show = dojo.style(pageGlobal.docContainer,"display")=="none";
+		dojo.style(pageGlobal.docContainer,"display",show?"inline":"none");
+		dijit.byId(pageGlobal.docContainer).getParent().resize();
+	}
+}
+
+/**
+ * Set an icon to code mirror tab
+ */
+function attachTabIcon(tabId,cm) {
+	if(tabId) {
+		cm.on('change', function() {
+			function isEmpty(cm) {
+				return (cm.lineCount() === 1) && (cm.getLine(0) === "");
+			}
+			dijit.byId(tabId).set('iconClass',isEmpty(cm)?'iconTabEmpty':'iconTabFull');
+		});
+	} 
+}

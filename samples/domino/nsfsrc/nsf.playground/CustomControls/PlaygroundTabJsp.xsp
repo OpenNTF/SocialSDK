@@ -11,12 +11,14 @@
 	</xp:inputTextarea>
 	<xp:span id="label" styleClass="framelabel">Jsp</xp:span>
 	<xp:scriptBlock>
-		<xp:this.value><![CDATA[pageGlobal.jspEditor = CodeMirror.fromTextArea(dojo.byId('#{id:jspEditor}'),
+		<xp:this.value><![CDATA[var editor = dojo.byId('#{id:jspEditor}');
+pageGlobal.jspEditor = CodeMirror.fromTextArea(editor,
 {
 	mode:"application/x-jsp",
 	readOnly: #{javascript:compositeData.readOnly||false},
 	lineNumbers: true
 });
-]]></xp:this.value>
+attachTabIcon(pageGlobal.tabJsp,pageGlobal.jspEditor);
+attachLabel(editor,'#{id:label}');]]></xp:this.value>
 	</xp:scriptBlock>
 </xp:view>

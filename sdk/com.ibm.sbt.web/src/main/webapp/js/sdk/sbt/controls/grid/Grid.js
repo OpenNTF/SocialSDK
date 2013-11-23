@@ -98,15 +98,14 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
             lang.mixin(this, args);
             
             this.selectedRows = [];
-  
             
             if (!this.store) {
                 if (args && args.storeArgs) {
-                    this._storeArgs = args.storeArgs;
+                    this._storeArgs = lang.mixin({}, args.storeArgs);
                     this._storeArgs.endpoint = this.endpoint;
                     this.store = this.createDefaultStore(args.storeArgs);
                 } else if (this.options) {
-                    this._storeArgs = this.options[this.defaultOption].storeArgs;
+                    this._storeArgs = lang.mixin({}, this.options[this.defaultOption].storeArgs);
                     this._storeArgs.endpoint = this.endpoint;
                     if (args && args.type && this.options.hasOwnProperty(args.type)) {
                         lang.mixin(this._storeArgs, this.options[args.type].storeArgs); 
@@ -202,6 +201,8 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
                  this.update();
               }
            }
+           
+           this.selectedRows = [];
         },
         
         /**
@@ -209,6 +210,8 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
          * @method - update
          */
         update: function(data) {
+        	this.selectedRows = [];
+        	
            if (arguments.length > 0) {
               this.data = data;
            }
@@ -280,18 +283,50 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
             }
         },
         
+        /**
+         * Helper method to display 10 items per page
+         * 
+         * @method show10ItemsPerPage
+         * @param el
+         * @param data
+         * @param event
+         */
         show10ItemsPerPage: function(el, data, ev) {
         	this.showItemsPerPage(el, data, ev, 10);
         },
         
+        /**
+         * Helper method to display 25 items per page
+         * 
+         * @method show25ItemsPerPage
+         * @param el
+         * @param data
+         * @param event
+         */
         show25ItemsPerPage: function(el, data, ev) {
         	this.showItemsPerPage(el, data, ev, 25);
         },
         
+        /**
+         * Helper method to display 50 items per page
+         * 
+         * @method show50ItemsPerPage
+         * @param el
+         * @param data
+         * @param event
+         */
         show50ItemsPerPage: function(el, data, ev) {
         	this.showItemsPerPage(el, data, ev, 50);
         },
         
+        /**
+         * Helper method to display 100 items per page
+         * 
+         * @method show100ItemsPerPage
+         * @param el
+         * @param data
+         * @param event
+         */
         show100ItemsPerPage: function(el, data, ev) {
         	this.showItemsPerPage(el, data, ev, 100);
         },

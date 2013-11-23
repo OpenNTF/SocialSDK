@@ -34,7 +34,7 @@ public class ProfileAction extends BaseGridTest {
 
     @Test
     public void profileActionTest() {
-        assertTrue("Expected the test to generate a grid", checkGrid("Social_Profiles_Controls_ProfileAction"));
+        assertTrue("Expected the test to generate a grid", checkGrid("Social_Profiles_Controls_Profile_Action"));
     }
 
 }

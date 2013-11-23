@@ -64,6 +64,10 @@ public abstract class AssetBean {
 	public String getSnippetsAsJson() throws NotesException, IOException {
 		RootNode root = readSnippetsNodes();
 		JsonTreeRenderer r = new JsonTreeRenderer();
+		String apisSearch = (String)ExtLibUtil.getViewScope().get("assetSearch");
+		if(StringUtil.isNotEmpty(apisSearch)) {
+			r.setFlat(true);
+		}
 		return r.generateAsStringHier(root,true);
 	}
 	protected RootNode readSnippetsNodes() throws NotesException {
@@ -77,11 +81,17 @@ public abstract class AssetBean {
 				String apisSearch = (String)ExtLibUtil.getViewScope().get("assetSearch");
 				if(StringUtil.isNotEmpty(apisSearch)) {
 					v.FTSearch(apisSearch);
-					ViewEntryCollection col = v.getAllEntriesByKey(getAssetForm());
+					//ViewEntryCollection col = v.getAllEntriesByKey(getAssetForm());
+					ViewEntryCollection col = v.getAllEntries();
 					for(ViewEntry e=col.getFirstEntry(); e!=null; e=col.getNextEntry()) {
 						Vector<?> values = e.getColumnValues();
 						String notesUnid = e.getUniversalID();
 						// 2 type
+						String type = (String)values.get(0);
+						if(!StringUtil.equals(type, getAssetForm())) {
+							// Ignore if it is not of the right type
+							continue;
+						}
 						String cat = (String)values.get(1);
 						String name = (String)values.get(2);
 						String jspUrl = (String)values.get(3);
@@ -173,6 +183,9 @@ public abstract class AssetBean {
 		return assetId;
 	}
 	private CategoryNode findCategory(RootNode node, String cat) {
+		if(StringUtil.isEmpty(cat)) {
+			return node;
+		}
 		String[] cats = StringUtil.splitString(cat, '/');
 		return findCategory(node, cats, 0);
 	}
@@ -206,11 +219,11 @@ public abstract class AssetBean {
 		View v = db.getView("AllSnippets");
 		ViewNavigator nav = v.createViewNavFromCategory(getAssetForm());
 		try {
-			nav.setMaxLevel(0);
+			nav.setMaxLevel(1);
 			//nav.setCacheSize(128);
 			List<String> categories = new ArrayList<String>();
 			for(ViewEntry ve=nav.getFirst(); ve!=null; ve=nav.getNext(ve)) {
-				categories.add((String)ve.getColumnValues().get(0));
+				categories.add((String)ve.getColumnValues().get(1));
 			}
 			return categories.toArray(new String[categories.size()]);
 		} finally {

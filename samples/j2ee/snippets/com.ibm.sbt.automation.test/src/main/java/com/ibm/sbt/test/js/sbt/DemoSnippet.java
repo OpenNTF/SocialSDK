@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -37,7 +37,7 @@ public class DemoSnippet extends BaseApiTest {
     
     @Test
     public void testDemoSnippet() {
-        addSnippetParam("sample.communityId", "foo");
+        addSnippetParam("CommunityService.communityUuid", "foo");
         
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         JsonJavaObject json = previewPage.getJson();

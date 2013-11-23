@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xp:this.afterPageLoad><![CDATA[#{javascript:getComponent("pager3").getAttributes().put("onStart","XSP.animateLoading('"+getClientId("dataView1")+"_ajax')")
+}]]></xp:this.afterPageLoad>
+	<xp:this.resources>
+		<xp:dojoModule name="extlib.dijit.Loading"></xp:dojoModule>
+	</xp:this.resources>
+	<xc:OneUILayout navigationPath="/Connections/Communities" title="Connections Communities" connection="connections">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftConnections></xc:LeftConnections>
+			</xp:panel>
+		</xp:this.facets>	
+		<xp:tabbedPanel id="tabbedPanel1">
+			<xp:tabPanel label="Communities View" id="tabPanel1">
+				<xe:djContentPane id="djContentPane1"
+					partialRefresh="true"
+					style="overflow-x:hidden; overflow-y:hidden">
+					<xe:dataView rows="10" id="dataView1"
+						value="connectionsAtom1" columnTitles="true" var="entry"
+						collapsibleDetail="true" detailsOnClient="true">
+						<xe:this.data>
+							<xe:connectionsData var="connectionsAtom1"
+								serviceUrl="/communities/service/atom/communities/all"
+								maxBlockCount="3">
+							</xe:connectionsData>
+						</xe:this.data>
+						<xe:this.summaryColumn>
+							<xe:viewSummaryColumn columnTitle="Content"
+								value="#{xpath:entry:title}">
+							</xe:viewSummaryColumn>
+						</xe:this.summaryColumn>
+						<xp:this.facets>
+							<xe:pagerDetail id="pagerDetail1"
+								xp:key="pagerTopLeft">
+							</xe:pagerDetail>
+							<xp:pager layout="Previous Group Next"
+								id="pager3" xp:key="pagerTopRight" partialRefresh="true"
+								partialExecute="true">
+							</xp:pager>
+							<xp:panel id="panel2" xp:key="detail">
+								<xp:text escape="true"
+									id="computedField2">
+									<xp:this.value><![CDATA[#{xpath:entry:summary}]]></xp:this.value>
+								</xp:text>
+								<xp:br></xp:br>
+								<xp:br></xp:br>
+								<xp:link escape="true"
+									text="See XML Content" id="link3">
+									<xp:eventHandler event="onclick"
+										submit="false">
+										<xp:this.script><![CDATA[XSP.openTooltipDialog("#{id:tooltipDialog1}",'#{id:link3}')]]></xp:this.script>
+									</xp:eventHandler>
+								</xp:link>
+								<xe:tooltipDialog id="tooltipDialog1"
+									title="XML content for the entry">
+									<xp:div
+										style="overflow: auto; height: 250px; width: 600px;">
+										<pre>
+											<xp:text escape="true"
+												id="computedField3"
+												value="#{javascript:entry.getXMLString(false)}">
+											</xp:text>
+										</pre>
+									</xp:div>
+								</xe:tooltipDialog>
+							</xp:panel>
+						</xp:this.facets>
+					</xe:dataView>
+				</xe:djContentPane>
+			</xp:tabPanel>
+			<xp:tabPanel label="As XML Text" id="tabPanel2">
+				<xp:button value="Read some communities entries"
+					id="button1">
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="complete">
+						<xp:this.action><![CDATA[#{javascript:var p = {
+	startIndex: 1,
+	count: 5
+}
+
+var data= nsf.XMLService().getCommunityXMLString();
+viewScope.text = data;
+}]]></xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
+				<br />
+				<pre>
+					<xp:text escape="true" id="computedField1"
+						value="#{viewScope.text}" style="font-family:Courier;">
+					</xp:text>
+				</pre>
+			</xp:tabPanel>
+		</xp:tabbedPanel>
+		</xc:OneUILayout>
+</xp:view>

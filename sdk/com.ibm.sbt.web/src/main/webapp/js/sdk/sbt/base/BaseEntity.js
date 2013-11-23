@@ -92,7 +92,7 @@ define([ "../declare", "../lang", "../log", "../stringUtil" ],
          * 
          * @param data
          */
-        setData : function(data) {
+        setData : function(data, response) {
         	this._fields = {};
         	this.dataHandler.setData(data);
         },

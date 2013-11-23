@@ -1,7 +1,7 @@
 package com.ibm.sbt.test.java.connections.profiles;
 
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -30,7 +30,7 @@ public class GetPhoneNumber extends BaseJavaServiceTest {
 
     @Test
     public void runTest() {
-        boolean result = checkNoError("Social_Profiles_GetPhoneNumber");
+        boolean result = checkNoError("Social_Profiles_Get_Phone_Number");
         assertTrue(getNoErrorMsg(), result);
     }
 

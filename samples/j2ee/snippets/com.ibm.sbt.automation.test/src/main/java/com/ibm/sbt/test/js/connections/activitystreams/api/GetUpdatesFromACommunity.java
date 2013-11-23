@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -38,7 +38,7 @@ public class GetUpdatesFromACommunity extends BaseActivityStreamsTest {
     
     @Test
     public void testGetUpdatesFromACommunity() {
-    	String commId = getProperty("sample.communityId");
+    	String commId = getProperty("CommunityService.communityUuid");
     	createEntry("urn:lsid:lconn.ibm.com:communities.community:"+commId, "@all", "@all");
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         List jsonList = previewPage.getJsonList();

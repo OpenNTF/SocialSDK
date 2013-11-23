@@ -19,16 +19,18 @@ package com.ibm.sbt.services.client.connections.forums.model;
 import java.util.Arrays;
 import java.util.List;
 
+import org.w3c.dom.Node;
+
 import com.ibm.commons.util.StringUtil;
+import com.ibm.commons.xml.xpath.XPathExpression;
+import com.ibm.sbt.services.client.base.AtomXPath;
 import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
-import com.ibm.sbt.services.client.connections.communities.model.CommunityXPath;
 import com.ibm.sbt.services.client.connections.forums.ForumService;
-import com.ibm.sbt.services.client.connections.forums.ForumServiceException;
 import com.ibm.sbt.services.client.connections.forums.ForumsXPath;
-import com.ibm.sbt.services.client.connections.forums.model.Author;
 
 /**
  * Base model object to be used with Forums, Topics and Replies
@@ -84,11 +86,13 @@ public class BaseForumEntity extends BaseEntity {
 
 	}
 	public Author getAuthor(){
-		return new Author(super.dataHandler);
+		return new Author(getService(),new XmlDataHandler((Node)this.getDataHandler().getData(), 
+	    		ConnectionsConstants.nameSpaceCtx, (XPathExpression)AtomXPath.author.getPath()));
 	}
 
 	public Contributor getContributor(){
-		return new Contributor(super.dataHandler);
+		return new Contributor(getService(), new XmlDataHandler((Node)this.getDataHandler().getData(), 
+	    		ConnectionsConstants.nameSpaceCtx, (XPathExpression)AtomXPath.contributor.getPath()));
 	}
 
 	public String getUpdated(){

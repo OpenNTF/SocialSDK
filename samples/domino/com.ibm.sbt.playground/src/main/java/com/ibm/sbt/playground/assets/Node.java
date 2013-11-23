@@ -53,15 +53,15 @@ public abstract class Node {
 	public String getPath() {
 		if(path==null) {
 			if(parent!=null) {
-				path = parent.getPath()+'/'+name;
+				path = parent.getPath()+'/'+getName();
 			} else {
-				path = name;
+				path = getName();
 			}
 		}
 		return path;
 	}
-	
-	private StringBuilder createJspUrl(StringBuilder b, Node n, char sep) {
+			
+	protected StringBuilder createJspUrl(StringBuilder b, Node n, char sep) {
 		if(n!=null) {
 			if(n.getParent()!=null) {
 				createJspUrl(b, n.getParent(),sep);
@@ -74,7 +74,7 @@ public abstract class Node {
 		return b;
 	}
 	
-	private StringBuilder createName(StringBuilder b, Node n, char sep) {
+	protected StringBuilder createName(StringBuilder b, Node n, char sep) {
 		if(n!=null) {
 			if(n.getParent()!=null) {
 				createName(b, n.getParent(),sep);

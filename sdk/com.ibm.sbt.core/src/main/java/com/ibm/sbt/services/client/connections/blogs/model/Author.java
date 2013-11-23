@@ -16,8 +16,9 @@
 
 package com.ibm.sbt.services.client.connections.blogs.model;
 
+import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
-import com.ibm.sbt.services.client.connections.blogs.model.BlogXPath;
+import com.ibm.sbt.services.client.connections.common.Person;
 
 
 /**
@@ -25,33 +26,39 @@ import com.ibm.sbt.services.client.connections.blogs.model.BlogXPath;
  * @author Swati Singh
  */
 
-public class Author {
-	private String name;
-	private String uid;
-	private String email;
-	private String state;
-	DataHandler<?> dataHandler;
-	public Author(DataHandler<?> dataHandler) {
-		this.dataHandler = dataHandler;
+@Deprecated
+public class Author extends Person {
+
+	public Author(BaseService svc, DataHandler<?> dataHandler) {
+		super(svc, dataHandler);
 	}
 	
-	public String getUid() {
-		return dataHandler.getAsString(BlogXPath.authorUserid);
-	}
-
-	
-	public String getName() {
-		return dataHandler.getAsString(BlogXPath.authorName);
-	}
-	
-	public String getEmail() {
-		return dataHandler.getAsString(BlogXPath.authorEmail);
-	}
-
-
-	public String getState() {
-		return dataHandler.getAsString(BlogXPath.authorUserState);
-	}
+//	private String name;
+//	private String uid;
+//	private String email;
+//	private String state;
+//	DataHandler<?> dataHandler;
+//	public Author(DataHandler<?> dataHandler) {
+//		this.dataHandler = dataHandler;
+//	}
+//	
+//	public String getUid() {
+//		return dataHandler.getAsString(BlogXPath.authorUserid);
+//	}
+//
+//	
+//	public String getName() {
+//		return dataHandler.getAsString(BlogXPath.authorName);
+//	}
+//	
+//	public String getEmail() {
+//		return dataHandler.getAsString(BlogXPath.authorEmail);
+//	}
+//
+//
+//	public String getState() {
+//		return dataHandler.getAsString(BlogXPath.authorUserState);
+//	}
 
 
 }

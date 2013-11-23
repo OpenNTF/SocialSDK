@@ -73,6 +73,15 @@ define([ "../../../declare",
                     paramSchema : ParamSchema
                 },
                 rendererArgs : null
+            },
+            "invited" : {
+                storeArgs : {
+                    url : consts.AtomCommunityInvitesMy,
+                    attributes : consts.CommunityXPath,
+                    feedXPath : consts.CommunityFeedXPath,
+                    paramSchema : ParamSchema
+                },
+                rendererArgs : null
             }
         },
         

@@ -9,6 +9,9 @@ function updateLabel(r) {
 	}
 }
 
+function updateDocumentation() {
+}
+
 /**
  * Create a new snippet 
  */
@@ -29,6 +32,7 @@ function createSnippet() {
 	selectStack(pageGlobal.previewParams);
 	updateLabel(null);
 	updateNavSelection();
+	updateDocumentation();
 }
 
 /**
@@ -50,6 +54,7 @@ function loadSnippet(id) {
 			}
 			updateLabel(r);
 			updateNavSelection();
+			updateDocumentation();
 			if(shouldAutoExec(pageGlobal.params)) {
 				runCode(false);
 			}

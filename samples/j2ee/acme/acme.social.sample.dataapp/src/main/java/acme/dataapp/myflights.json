@@ -1,39 +1,39 @@
 {
 	"myflights": [{
-		"FlightId":"102","UserId":"JasmineHaj@renovations.com","ApproverId":"LucilleSuarez@renovations.com","Reason":"business","state":"approved"
+		"FlightId":"102","UserId":"jhaj@renovations.com","ApproverId":"lsuarez@renovations.com","Reason":"business","state":"approved"
 	},
 	{
-		"FlightId":"102","UserId":"LouiseFitzgerald@renovations.com","ApproverId":"GeorgeBandini@renovations.com","Reason":"business","state":"approved"
+		"FlightId":"102","UserId":"lfitzgerald@renovations.com","ApproverId":"gbandini@renovations.com","Reason":"business","state":"approved"
 	},
 	{
-		"FlightId":"102","UserId":"DinaMaroni@renovations.com","ApproverId":"LucilleSuarez@renovations.com","Reason":"business","state":"approved"
+		"FlightId":"102","UserId":"dmaroni@renovations.com","ApproverId":"lsuarez@renovations.com","Reason":"business","state":"approved"
 	},
 	{
-		"FlightId":"102","UserId":"AllieSingh@renovations.com","ApproverId":"GeorgeBandini@renovations.com","Reason":"business","state":"approved"
+		"FlightId":"102","UserId":"asingh@renovations.com","ApproverId":"gbandini@renovations.com","Reason":"business","state":"approved"
 	},
 	{
-		"FlightId":"102","UserId":"BoydGossens@renovations.com","ApproverId":"GeorgeBandini@renovations.com","Reason":"business","state":"approved"
+		"FlightId":"102","UserId":"bgossens@renovations.com","ApproverId":"gbandini@renovations.com","Reason":"business","state":"approved"
 	},
 	{
-		"FlightId":"102","UserId":"MadisonArmond@renovations.com ","ApproverId":"GeorgeBandini@renovations.com","Reason":"business","state":"approved"
+		"FlightId":"102","UserId":"marmond@renovations.com ","ApproverId":"gbandini@renovations.com","Reason":"business","state":"approved"
 	},
 	{
-		"FlightId":"206","UserId":"JasmineHaj@renovations.com","ApproverId":"LucilleSuarez@renovations.com","Reason":"business","state":"approved"
+		"FlightId":"206","UserId":"jhaj@renovations.com","ApproverId":"lsuarez@renovations.com","Reason":"business","state":"approved"
 	},
 	{
-		"FlightId":"206","UserId":"LouiseFitzgerald@renovations.com","ApproverId":"GeorgeBandini@renovations.com","Reason":"business","state":"approved"
+		"FlightId":"206","UserId":"lfitzgerald@renovations.com","ApproverId":"gbandini@renovations.com","Reason":"business","state":"approved"
 	},
 	{
-		"FlightId":"206","UserId":"DinaMaroni@renovations.com","ApproverId":"LucilleSuarez@renovations.com","Reason":"business","state":"approved"
+		"FlightId":"206","UserId":"dmaroni@renovations.com","ApproverId":"lsuarez@renovations.com","Reason":"business","state":"approved"
 	},
 	{
-		"FlightId":"206","UserId":"AllieSingh@renovations.com","ApproverId":"GeorgeBandini@renovations.com","Reason":"business","state":"approved"
+		"FlightId":"206","UserId":"asingh@renovations.com","ApproverId":"gbandini@renovations.com","Reason":"business","state":"approved"
 	},
 	{
-		"FlightId":"206","UserId":"BoydGossens@renovations.com","ApproverId":"GeorgeBandini@renovations.com","Reason":"business","state":"approved"
+		"FlightId":"206","UserId":"bgossens@renovations.com","ApproverId":"gbandini@renovations.com","Reason":"business","state":"approved"
 	},
 	{
-		"FlightId":"206","UserId":"MadisonArmond@renovations.com ","ApproverId":"GeorgeBandini@renovations.com","Reason":"business","state":"approved"
+		"FlightId":"206","UserId":"marmond@renovations.com ","ApproverId":"gbandini@renovations.com","Reason":"business","state":"approved"
 	}]
 	 
 }

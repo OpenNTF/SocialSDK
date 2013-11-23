@@ -26,7 +26,7 @@ import javax.faces.context.ResponseWriter;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.xsp.application.ViewHandlerEx;
 import com.ibm.xsp.component.UIViewRootEx;
-import com.ibm.xsp.extlib.component.connections.UIConnectionsClient;
+import com.ibm.xsp.extlib.component.sbt.UISbtClient;
 import com.ibm.xsp.extlib.resources.ExtLibResources;
 import com.ibm.xsp.extlib.sbt.resources.SBTResources;
 import com.ibm.xsp.renderkit.ContentTypeRenderer;
@@ -65,7 +65,7 @@ public class VCard implements ContentTypeRenderer {
     public boolean render(FacesContext context, UIComponent component, ResponseWriter writer, String contentType, String value) throws IOException {
         if(contentType.equals(CONTENT_TYPE_PROFILE_VCARD)) {
             UIViewRootEx rootEx = (UIViewRootEx)context.getViewRoot();
-            if(UIConnectionsClient.isClientEnabled(rootEx)) {
+            if(UISbtClient.isClientEnabled(rootEx)) {
                 renderProfilesCard(context, writer, rootEx, component, value);
             } else {
                 renderConnectionsText(context, writer, rootEx, component, value);
@@ -73,7 +73,7 @@ public class VCard implements ContentTypeRenderer {
             return true;
         } else if (contentType.equals(CONTENT_TYPE_PROFILE_VCARD_INLINE)) {
             UIViewRootEx rootEx = (UIViewRootEx)context.getViewRoot();
-            if(UIConnectionsClient.isClientEnabled(rootEx)) {
+            if(UISbtClient.isClientEnabled(rootEx)) {
                 renderProfilesCardInline(context, writer, rootEx, component, value);
             } else {
                 renderConnectionsText(context, writer, rootEx, component, value);

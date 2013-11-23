@@ -23,6 +23,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -30,7 +31,9 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.json.JsonJavaObject;
+import com.ibm.sbt.automation.core.environment.TestEnvironment;
 import com.ibm.sbt.automation.core.test.connections.BaseFilesTest;
 import com.ibm.sbt.automation.core.test.pageobjects.BaseResultPage;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
@@ -77,16 +80,17 @@ public class UploadFile extends BaseFilesTest {
 			e.printStackTrace();
 		}
 	}
-	
-	@Override
-	protected boolean isEnvironmentValid() {
-		// Disabling for Dojo 1.4.3 which does not support FormData
-		if (environment.isLibrary("dojo") && !environment.isLibraryVersionGreatherThan("160")) return false;		
-		return super.isEnvironmentValid() ;
-	}
 
 	@Test
-	public void testUploadFile() {		
+	public void testUploadFile() {
+		// Disabling for Dojo 1.4.3 which does not support FormData
+        String jsLib = System.getProperty(TestEnvironment.PROP_JAVASCRIPT_LIB);
+        if (StringUtil.isEmpty(jsLib)) {
+            jsLib = environment.getProperty(TestEnvironment.PROP_JAVASCRIPT_LIB);
+        }
+        if("dojo143".equalsIgnoreCase(jsLib)){
+        	return;
+        }
 		UploadFilePage crudPage = launchSnippet();
 		boolean uploaded = crudPage.uploadFile();
 		Assert.assertTrue("Unable to upload the file", uploaded);

@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -31,32 +31,33 @@ public class CreateCommunity extends BaseCommunitiesTest {
     
     static final String SNIPPET_ID = "Social_Communities_API_CreateCommunity";
 
-    public CreateCommunity() {
-        createCommunity = false;
-    }
-
     @Test
     public void testCreateCommunity() {
+    	String name = createCommunityName();
+    	addSnippetParam("CommunityService.title", name);
+    	addSnippetParam("CommunityService.content", name);
+    	
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         JsonJavaObject json = previewPage.getJson();
         Assert.assertNull("Unexpected error detected on page", json.getString("code"));
 
         String communityUuid = json.getString("getCommunityUuid");
         community = getCommunity(communityUuid);
-        
-        Assert.assertEquals(community.getCommunityUuid(), json.getString("getCommunityUuid"));
-        Assert.assertEquals(community.getTitle(), json.getString("getTitle"));
-        Assert.assertEquals(community.getSummary(), json.getString("getSummary"));
-        Assert.assertEquals(community.getCommunityUrl(), json.getString("getCommunityUrl"));
-        Assert.assertEquals(community.getLogoUrl(), json.getString("getLogoUrl"));
-        Assert.assertEquals(community.getMemberCount(), json.getInt("getMemberCount"));
-        Assert.assertEquals(community.getCommunityType(), json.getString("getCommunityType"));
-        Assert.assertEquals(community.getAuthor().getName(), json.getJsonObject("getAuthor").getString("authorName"));
-        Assert.assertEquals(community.getAuthor().getEmail(), json.getJsonObject("getAuthor").getString("authorEmail"));
-        Assert.assertEquals(community.getAuthor().getUserid(), json.getJsonObject("getAuthor").getString("authorUserid"));
-        Assert.assertEquals(community.getContributor().getName(), json.getJsonObject("getContributor").getString("contributorName"));
-        Assert.assertEquals(community.getContributor().getEmail(), json.getJsonObject("getContributor").getString("contributorEmail"));
-        Assert.assertEquals(community.getContributor().getUserid(), json.getJsonObject("getContributor").getString("contributorUserid"));
+        assertCommunityValid(json);
     }
+
+    /*
+    @Test
+    public void testCreateCommunityInvalidTitle() {
+    	String name = community.getTitle();
+    	addSnippetParam("CommunityService.title", name);
+    	addSnippetParam("CommunityService.content", name);
+    	
+        JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
+        JsonJavaObject json = previewPage.getJson();
+        String message = json.getString("message");
+        Assert.assertEquals("A community with the requested name already exists, choose a different name and resubmit.", message);
+    }
+    */
     
 }

@@ -226,7 +226,7 @@ public class Community extends BaseEntity {
 	 * @return the authorUid
 	 */
 	public Member getAuthor(){
-		Member author = new Member(getService(), getAsString(CommunityXPath.authorUid));
+		Member author = new Member(getService(), getAsString(CommunityXPath.authorUserid));
 		author.setName(getAsString(CommunityXPath.authorName));
 		author.setEmail(getAsString(CommunityXPath.authorEmail));
 		return author;
@@ -236,7 +236,7 @@ public class Community extends BaseEntity {
 	 * @return the ContributorId
 	 */
 	public Member getContributor(){
-		Member contributor = new Member(getService(), getAsString(CommunityXPath.contributorUid));
+		Member contributor = new Member(getService(), getAsString(CommunityXPath.contributorUserid));
 		contributor.setName(getAsString(CommunityXPath.contributorName));
 		contributor.setEmail(getAsString(CommunityXPath.contributorEmail));
 		return contributor;

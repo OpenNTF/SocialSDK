@@ -1,0 +1,27 @@
+{
+    "entityId": "bjordan@renovations.com",
+    "response": {
+        "url": "https://localhost:8443/sbt.sample.web/service/proxy/connections/communities/service/atom/community/members",
+        "options": {
+            "method": "DELETE",
+            "query": {
+                "communityUuid": "b25f1a0f-663f-4d0f-897b-0655a1db9fcd",
+                "email": "bjordan@renovations.com"
+            },
+            "handleAs": "text"
+        },
+        "data": "",
+        "text": "",
+        "status": 200,
+        "xhr": {},
+        "_ioargs": {
+            "args": {
+                "url": "https://localhost:8443/sbt.sample.web/service/proxy/connections/communities/service/atom/community/members?communityUuid=b25f1a0f-663f-4d0f-897b-0655a1db9fcd&email=bjordan%40renovations.com",
+                "handleAs": "text"
+            },
+            "url": "https://localhost:8443/sbt.sample.web/service/proxy/connections/communities/service/atom/community/members?communityUuid=b25f1a0f-663f-4d0f-897b-0655a1db9fcd&email=bjordan%40renovations.com",
+            "query": "",
+            "handleAs": "text"
+        }
+    }
+}

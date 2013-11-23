@@ -93,13 +93,18 @@ public abstract class Endpoints {
 		private Property[] properties; 
 		private Group[] groups;
 		private String runtimeProperties;
+		private PropertyValues[] propertyValues; 
 		public Category(String platform, String label, String tabLabel, Property[] properties, Group[] groups, String runtimeProperties) {
+			this(platform, label, tabLabel, properties, groups, runtimeProperties, null);
+		}
+		public Category(String platform, String label, String tabLabel, Property[] properties, Group[] groups, String runtimeProperties, PropertyValues[] propertyValues) {
 			this.platform = platform;
 			this.label = label;
 			this.tabLabel = tabLabel;
 			this.properties = properties;
 			this.groups = groups;
 			this.runtimeProperties = runtimeProperties;
+			this.propertyValues = propertyValues;
 		}
 		public String toString() {
 			return label;
@@ -152,6 +157,20 @@ public abstract class Endpoints {
 		public String getRuntimeProperties() {
 			return runtimeProperties;
 		}
+		public PropertyValues[] getPropertyValues() {
+			return propertyValues;
+		}
+		public PropertyValues getPropertyValues(String name) {
+			if(propertyValues!=null) {
+				for(int i=0; i<propertyValues.length; i++) {
+					PropertyValues p = propertyValues[i];
+					if(StringUtil.equals(p.getName(), name)) {
+						return p;
+					}
+				}
+			}
+			return null;
+		}
 	}
 	public static class Property {
 		private String name; 
@@ -176,6 +195,23 @@ public abstract class Endpoints {
 		}
 		public String getDefaultValue() {
 			return defaultValue;
+		}
+	}
+	public static class PropertyValues {
+		private String name; 
+		private String[] values;
+		public PropertyValues(String name, String[] values) {
+			this.name = name;
+			this.values = values;
+		}
+		public String toString() {
+			return name;
+		}
+		public String getName() {
+			return name;
+		}
+		public String[] getValues() {
+			return values;
 		}
 	}
 	public static class Group {

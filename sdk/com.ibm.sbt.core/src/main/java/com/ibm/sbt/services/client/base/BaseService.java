@@ -19,6 +19,7 @@ package com.ibm.sbt.services.client.base;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.jslibrary.SBTEnvironment;
@@ -172,7 +173,7 @@ public abstract class BaseService {
 	/*
 	 * This method makes a network call and returns an entity
 	 */
-	protected BaseEntity getEntity(String url, Map<String, String> parameters, IFeedHandler feedHandler) throws IOException, ClientServicesException {
+	protected <T extends BaseEntity> T getEntity(String url, Map<String, String> parameters, IFeedHandler<T> feedHandler) throws IOException, ClientServicesException {
 		Response dataHolder = null;
 		dataHolder = retrieveData(url, parameters);
 		return feedHandler.createEntity(dataHolder);
@@ -181,7 +182,7 @@ public abstract class BaseService {
 	/*
 	 * This method makes a network call and returns a Collection of Entities
 	 */
-	protected EntityList<? extends BaseEntity> getEntities(String url, Map<String, String> parameters, IFeedHandler feedHandler) throws ClientServicesException, IOException {
+	protected <T extends BaseEntity> EntityList<T> getEntities(String url, Map<String, String> parameters, IFeedHandler<T> feedHandler) throws ClientServicesException, IOException {
 		Response dataHolder = retrieveData(url, parameters);
 		return feedHandler.createEntityList(dataHolder);
 	}
@@ -189,7 +190,7 @@ public abstract class BaseService {
 	/*
      * This method makes a network call and returns a Collection of Entities
      */
-    protected EntityList<? extends BaseEntity> getEntities(String url, Map<String, String> parameters, Map<String, String> headers, IFeedHandler feedHandler) throws ClientServicesException, IOException {
+    protected <T extends BaseEntity> EntityList<T> getEntities(String url, Map<String, String> parameters, Map<String, String> headers, IFeedHandler<T> feedHandler) throws ClientServicesException, IOException {
         Response dataHolder = retrieveData(url, parameters, headers, null);
         return feedHandler.createEntityList(dataHolder);
     }

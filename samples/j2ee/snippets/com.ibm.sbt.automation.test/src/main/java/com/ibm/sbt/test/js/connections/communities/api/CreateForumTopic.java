@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -39,12 +39,12 @@ public class CreateForumTopic extends BaseCommunitiesTest {
 
     @Test
     public void testCreateForumTopic() {
-        addSnippetParam("sample.communityId", community.getCommunityUuid());
+        addSnippetParam("CommunityService.communityUuid", community.getCommunityUuid());
+    	addSnippetParam("CommunityService.topicTitle", "ForumTopic"+community.getTitle());
+    	addSnippetParam("CommunityService.topicContent", "ForumTopic"+community.getTitle());
         
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
-        List jsonList = previewPage.getJsonList();
-        assertCommunityValid((JsonJavaObject)jsonList.get(0));
-        Assert.assertEquals(community.getCommunityUuid(), ((JsonJavaObject)jsonList.get(1)).getString("entityId"));
+        JsonJavaObject json = previewPage.getJson();
     }
     
 }

@@ -7,7 +7,7 @@
 	<properties>
 		<workingDir>${project.build.directory}</workingDir>
 		<finalAssemblyFolder>
-			${workingDir}
+			${workingDir}/kit
 		</finalAssemblyFolder>
 	</properties>
 

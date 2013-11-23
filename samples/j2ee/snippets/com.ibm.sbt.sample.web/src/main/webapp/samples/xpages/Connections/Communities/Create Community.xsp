@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xp:button value="Create a new community" id="button1">
+		<xp:eventHandler event="onclick" submit="true"
+			refreshMode="complete">
+			<xp:this.action><![CDATA[#{javascript:
+		var communityService = new com.ibm.sbt.services.client.connections.communities.CommunityService();
+		var community = communityService.newCommunity();
+		community.setTitle("Test Community lab");
+		community.setContent("Test Community updated by Update Community XPage snippet");
+		community.setCommunityType("public");
+		community = community.save(); 
+		getComponent("computedField4").setValue(community.getCommunityUuid());
+    	}]]></xp:this.action>
+		</xp:eventHandler>
+	</xp:button>
+	<xp:text escape="true" id="computedField4"></xp:text>
+
+</xp:view>

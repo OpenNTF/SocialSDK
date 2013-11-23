@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xe:singlePageApp id="mApp1" selectedPageName="home">
+		<xe:appPage resetContent="false" id="home" pageName="home">
+			<xe:djxmHeading id="djxmHeading0" label="Activity Stream">
+			</xe:djxmHeading>
+			<xe:dataView rows="5" id="dataView1" value="#{activityStreams1}"
+				columnTitles="true" var="entry" collapsibleDetail="true"
+				detailsOnClient="true">
+				<xe:this.data>
+					<xe:activityStreamsData var="activityStreams1"
+						serviceUrl="/vulcan/shindig/rest/activitystreams" endpoint="as">
+					</xe:activityStreamsData>
+				</xe:this.data>
+				<xe:this.summaryColumn>
+					<xe:viewSummaryColumn columnTitle="Content"
+						columnName="title">
+					</xe:viewSummaryColumn>
+				</xe:this.summaryColumn>
+				<xe:this.extraColumns>
+					<xe:viewExtraColumn columnTitle="Date">
+						<xe:this.converter>
+							<xp:convertDateTime></xp:convertDateTime>
+						</xe:this.converter>
+						<xe:this.value><![CDATA[#{javascript:if(entry.postedTime) {
+	return new java.util.Date(parseInt(entry.postedTime));
+}
+return null;}]]></xe:this.value>
+					</xe:viewExtraColumn>
+				</xe:this.extraColumns>
+				<xp:this.facets>
+					<xp:link escape="true" text="More..." id="link7" xp:key="pagerBottomRight">
+
+						<xp:eventHandler event="onclick" submit="false">
+							<xp:this.script>
+								<xe:addRows rowCount="5" for="dataView1" disableId="link7">
+								</xe:addRows>
+							</xp:this.script>
+						</xp:eventHandler>
+					</xp:link>
+				</xp:this.facets>
+			</xe:dataView>
+		</xe:appPage>
+	</xe:singlePageApp>
+
+</xp:view>

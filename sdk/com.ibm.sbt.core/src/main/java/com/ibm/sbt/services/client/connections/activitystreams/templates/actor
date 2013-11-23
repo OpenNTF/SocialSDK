@@ -1,0 +1,6 @@
+"actor": {
+    ${actorConnectionsState},
+    "objectType": "${actorObjectType}",
+    "id": "${actorId}",
+    "displayName": "${actorName}"
+}

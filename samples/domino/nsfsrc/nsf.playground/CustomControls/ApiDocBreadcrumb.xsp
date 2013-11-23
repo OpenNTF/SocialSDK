@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+<!-- 
+	<xe:breadCrumbs id="outline">
+		<xe:this.treeNodes>
+			<xe:basicLeafNode label="All Entries" href="#content=view"></xe:basicLeafNode>
+			<xe:pageTreeNode page="Domino_UserBean" label="User Bean">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="Domino_ViewState"
+				label="View State">
+			</xe:pageTreeNode>
+		</xe:this.treeNodes>
+	</xe:breadCrumbs>
+-->	
+</xp:view>

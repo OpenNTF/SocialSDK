@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:application="http://java.sun.com/xml/ns/javaee/application_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/application_5.xsd" id="Application_ID" version="5">
+  <display-name>Social Business Toolkit Sample Enterprise Application</display-name>
+  <module id="Module_1351598968534">
+    <web>
+      <web-uri>com.ibm.sbt.web.war</web-uri>
+      <context-root>sbt</context-root>
+    </web>
+  </module>
+  <module id="Module_1351598968552">
+    <web>
+      <web-uri>com.ibm.sbt.sample.web.war</web-uri>
+      <context-root>sbt.sample.web</context-root>
+    </web>
+  </module>
+  <module id="Module_1366299031096">
+    <web>
+      <web-uri>com.ibm.sbt.bootstrap211.war</web-uri>
+      <context-root>sbt.bootstrap211</context-root>
+    </web>
+  </module>
+  <module id="Module_1366299437786">
+    <web>
+      <web-uri>com.ibm.sbt.dojo180.war</web-uri>
+      <context-root>sbt.dojo180</context-root>
+    </web>
+  </module>
+  <module id="Module_1371736485342">
+    <web>
+      <web-uri>com.ibm.sbt.jquery182.war</web-uri>
+      <context-root>sbt.jquery182</context-root>
+    </web>
+  </module>
+  <library-directory>lib</library-directory>
+</application>

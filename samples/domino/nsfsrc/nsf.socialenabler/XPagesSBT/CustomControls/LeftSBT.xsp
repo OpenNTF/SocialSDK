@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xe:navigator id="outline">
+		<xe:this.treeNodes>
+			<xe:pageTreeNode page="SBTActivityStreamsJson"
+			   label="Activity Streams JSON" selection="/SBT/ActivityStreams">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="SBTActivityStreamsXml"
+			   label="Activity Streams XML" selection="/SBT/ActivityStreamsXml">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="SBTActivityStreamsAPI"
+			   label="API Test" selection="/SBT/ActivityStreamsAPI">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="SBTActivityStreamsMobile"
+			   label="Mobile" selection="/SBT/ActivityStreamsMobile">
+			</xe:pageTreeNode>
+ 			<xe:pageTreeNode page="SBTOAuth"
+				label="OAuth Dance" selection="/SBT/OAuthDance">
+			</xe:pageTreeNode>
+		</xe:this.treeNodes>
+	</xe:navigator>
+</xp:view>

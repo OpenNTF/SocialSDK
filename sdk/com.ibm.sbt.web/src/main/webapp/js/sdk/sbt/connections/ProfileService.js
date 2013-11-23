@@ -21,11 +21,13 @@
  */
 define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConstants", "../base/BaseService", "../base/BaseEntity", "../base/AtomEntity", "../base/XmlDataHandler", "../base/VCardDataHandler", "../Cache", "../util"  ], function(
         declare,lang,config,stringUtil,consts,BaseService,BaseEntity,AtomEntity,XmlDataHandler, VCardDataHandler, Cache, util) {
-
-	var updateProfileXmlTemplate = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><entry xmlns:app=\"http://www.w3.org/2007/app\" xmlns:thr=\"http://purl.org/syndication/thread/1.0\" xmlns:fh=\"http://purl.org/syndication/history/1.0\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\" xmlns:opensearch=\"http://a9.com/-/spec/opensearch/1.1/\" xmlns=\"http://www.w3.org/2005/Atom\"><category term=\"profile\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category><content type=\"text\">\nBEGIN:VCARD\nVERSION:2.1\n${jobTitle}${address}${telephoneNumber}${building}${floor}END:VCARD\n</content></entry>";
-    var updateProfileAttributeTemplate = "${attributeName}:${attributeValue}\n";
+	
+	var CategoryProfile = "<category term=\"profile\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category>";
+	var updateProfileXmlTemplate = "\nBEGIN:VCARD\nVERSION:2.1\n${jobTitle}${address}${telephoneNumber}${building}${floor}END:VCARD\n";
+	var updateProfileAttributeTemplate = "${attributeName}:${attributeValue}\n";
     var updateProfileAddressTemplate = "ADR;WORK:;;${streetAddress},${extendedAddress};${locality};${region};${postalCode};${countryName}\n";
-    var createProfileTemplate = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><entry xmlns:app=\"http://www.w3.org/2007/app\" xmlns:thr=\"http://purl.org/syndication/thread/1.0\" xmlns:fh=\"http://purl.org/syndication/history/1.0\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\" xmlns:opensearch=\"http://a9.com/-/spec/opensearch/1.1/\" xmlns=\"http://www.w3.org/2005/Atom\"><category term=\"profile\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category><content type=\"application/xml\"><person xmlns=\"http://ns.opensocial.org/2008/opensocial\"><com.ibm.snx_profiles.attrib>${guid}${email}${uid}${distinguishedName}${displayName}${givenNames}${surname}${userState}</com.ibm.snx_profiles.attrib></person></content></entry>";
+    var ContentTmpl = "<content type=\"${contentType}\">${content}</content>";   
+    var createProfileTemplate = "<person xmlns=\"http://ns.opensocial.org/2008/opensocial\"><com.ibm.snx_profiles.attrib>${guid}${email}${uid}${distinguishedName}${displayName}${givenNames}${surname}${userState}</com.ibm.snx_profiles.attrib></person>";
     var createProfileAttributeTemplate = "<entry><key>${attributeName}</key><value><type>text</type><data>${attributeValue}</data></value></entry>";
     
     var CategoryConnection = "<category term=\"connection\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\" />";
@@ -42,16 +44,60 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
      * @class Profile
      * @namespace sbt.connections
      */
-    var Profile = declare(BaseEntity, {
+    
+    /*
+     * ProfileDataHandler class.
+     */
+   
+    
+    
+    var Profile = declare(AtomEntity, {
 
-        /**
+    	xpath : consts.ProfileXPath,
+    	namespaces : consts.ProfileNamespaces,    	
+    	categoryScheme : CategoryProfile,
+    	_update : false,
+    	
+    	/**
          * 
          * @constructor
          * @param args
          */
         constructor : function(args) {            
         },
-
+        
+        /**
+         * Data handler for profile object based on the query paramter - "output", used to get the profile.
+         * If the value of output paramter is "vcard", the VCardDataHandler is associated with
+         * the profile object else, by default, XmlDataHandler is associated with the object.
+         *  
+         *  @param {Object} service  ProfileService instance associated with the profile object
+         *  @param {Object} data Profile document associated with the profile object
+         *  @response {Object} response Response object returned after the operation for get/create/update 
+         *  of the profile
+         *  @namespaces {Object} namespace NameSpace object associated with the profile 
+         *  @xpath {Object} xpath XPath object associated with the profile 
+         */
+        
+        
+        createDataHandler : function(service, data, response, namespaces, xpath) {            	
+    	  if (response.options && response.options.query && response.options.query.output == "vcard") {
+              return new VCardDataHandler({
+            	  service: service,
+                  data : data,
+                  namespaces : namespaces,
+                  xpath : consts.ProfileVCardXPath
+              });
+          } else {
+              return new XmlDataHandler({
+            	  service: service,
+                  data : data,
+                  namespaces : namespaces,
+                  xpath : xpath
+              });
+          }
+        },
+        
         /**
          * Get id of the profile
          * 
@@ -59,6 +105,7 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
          * @return {String} id of the profile
          * 
          */
+        
         getUserid : function() {
             return this.getAsString("userid");
         },
@@ -273,13 +320,8 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
             var self = this;
             var callbacks = {
                 createEntity : function(service,data,response) {
-                    self.dataHandler = new XmlDataHandler({
-                        data : data,
-                        namespaces : consts.Namespaces,
-                        xpath : consts.ProfileXPath
-                    });
-                    self.id = self.dataHandler.getEntityId();
-                    return self;
+            	  self.setData(data, response);
+                  return self;
                 }
             };
             var requestArgs = {};
@@ -331,7 +373,60 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
          */
         getColleagueConnections : function(args){
         	return this.service.getColleagueConnections(this, args);
+        },
+        
+        /**
+         * Return content element to be included in post data for the creation or updaton of new profile entry.
+         * 
+         * @method createContent
+         * @returns {String}
+         */
+        createContent : function() { 
+        	if(this._update){
+        		this._update = false;
+	        	var transformer = function(value,key) {
+	                if (key == "address") {                	
+	                	value = this.service._isAddressSet(this) ? stringUtil.transform(updateProfileAddressTemplate, {"streetAddress" : this._fields["streetAddress"], 
+	                	"extendedAddress" : this._fields["extendedAddress"], "locality" : this._fields["locality"], "region" : this._fields["region"],
+	                	"postalCode" : this._fields["postalCode"], "countryName" : this._fields["countryName"]}) : null;
+	                } 
+	                else{                	
+	                	value = (this._fields[key])? stringUtil.transform(updateProfileAttributeTemplate, {"attributeName" : consts.ProfileVCardXPath[key], "attributeValue" : this._fields[key]}) : null;
+	                	
+	                }
+	                return value;
+	            };
+	            var content = stringUtil.transform(updateProfileXmlTemplate, this, transformer, this);
+	            if (content) {
+	        		return stringUtil.transform(ContentTmpl, { "contentType" : "text", "content" : content });
+	        	}
+	        	return "";
+        	}else{
+        		var transformer = function(value,key) {
+                	if(this._fields[key]){
+    	                value = stringUtil.transform(createProfileAttributeTemplate, {"attributeName" : consts.profileCreateAttributes[key], "attributeValue" : this._fields[key]});
+    	                return value;
+                	}
+                };
+                var content = stringUtil.transform(createProfileTemplate, this, transformer, this);
+                if(content){
+                	return stringUtil.transform(ContentTmpl, { "contentType" : "application/xml", "content" : content });
+                }
+                return "";
+        	}
+        	
+        },
+        
+        /**
+         * Return tags elements to be included in post data for creation and updation of profile entry.
+         * 
+         * @method createTags
+         * @returns {String}
+         */
+        createTags : function() {            
+        	return "";
         }
+        
     });
     
     /**
@@ -340,7 +435,7 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
      * @class ConnectionEntry
      * @namespace sbt.connections
      */
-    var ColleagueConnection = declare(BaseEntity, {
+    var ColleagueConnection = declare(AtomEntity, {
 
         /**
          * 
@@ -348,125 +443,7 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
          * @param args
          */
         constructor : function(args) {            
-        },
-
-        /**
-         * Get id of the profile
-         * 
-         * @method getAuthorUserId
-         * @return {String} author id of the profile
-         * 
-         */
-        getAuthorUserId : function() {
-            return this.getAsString("authorUserid");
-        },
-        
-        /**
-         * Get id of the profile
-         * 
-         * @method getContributorUserId
-         * @return {String} contributor id of the profile
-         * 
-         */
-        getContributorUserId : function() {
-            return this.getAsString("contributorUserid");
-        },
-
-        /**
-         * Get name of the profile
-         * 
-         * @method getAuthorName
-         * @return {String} author name of the profile
-         * 
-         */
-        getAuthorName : function() {
-            return this.getAsString("authorName");
-        },
-        
-        /**
-         * Get name of the profile
-         * 
-         * @method getAuthorName
-         * @return {String} contributor name of the profile
-         * 
-         */
-        getContributorName : function() {
-            return this.getAsString("contributorName");
-        },
-
-        /**
-         * Get email of the profile
-         * 
-         * @method getAuthorEmail
-         * @return {String} contributor email of the profile
-         */
-        getAuthorEmail : function() {
-            return this.getAsString("authorEmail");
-        },
-        
-        /**
-         * Get email of the profile
-         * 
-         * @method getContributorEmail
-         * @return {String} contributor email of the profile
-         */
-        getContributorEmail : function() {
-            return this.getAsString("contributorEmail");
-        },
-
-        /**
-         * Get job title of the profile
-         * 
-         * @method getTitle
-         * @return {String} job title of the profile
-         */
-        getTitle : function() {
-            return this.getAsString("title");
-        },
-        
-        /**
-         * Get job title of the profile
-         * 
-         * @method getContent
-         * @return {String} content of the profile
-         */
-        getContent : function() {
-            return this.getAsString("content");
-        },
-
-        /**
-         * Get profile URL of the profile
-         * 
-         * @method getSelfLink
-         * @return {String} profile URL of the profile
-         */
-        
-        getSelfLink : function() {
-            return this.getAsString("selfLink");
-        },
-        
-        /**
-         * Get profile URL of the profile
-         * 
-         * @method getEditLink
-         * @return {String} profile URL of the profile
-         */
-        
-        getEditLink : function() {
-            return this.getAsString("editLink");
-        },
-        
-        /**
-         * Get profile URL of the profile
-         * 
-         * @method getUpdated
-         * @return {String} profile URL of the profile
-         */
-        
-        getUpdated : function() {
-            return this.getAsString("updated");
         }
-
     });
 
     /**
@@ -564,6 +541,17 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
         },
         
         /**
+         * Return tags elements to be included in post data for creation and updation of invite entry.
+         * 
+         * @method createTags
+         * @returns {String}
+         */
+        createTags : function() {            
+        	return "";
+        },
+        
+        
+        /**
          * Return the connection type associated with this invite. 
          * 
          * @method getConnectionType
@@ -632,24 +620,10 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
      */
     var ProfileCallbacks = {
         createEntity : function(service,data,response) {
-            var entryHandler = null;
-            if (response.args && response.args.format == "vcard") {
-                entryHandler = new VCardDataHandler({
-                    data : data,
-                    namespaces : consts.Namespaces,
-                    xpath : consts.ProfileVCardXPath
-                });
-            } else {
-                entryHandler = new XmlDataHandler({
-                    data : data,
-                    namespaces : consts.Namespaces,
-                    xpath : consts.ProfileXPath
-                });
-            }
             return new Profile({
                 service : service,
-                id : entryHandler.getEntityId(),
-                dataHandler : entryHandler
+                data : data,
+                response: response                
             });
         }
     };
@@ -665,25 +639,11 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
                 xpath : consts.ProfileFeedXPath
             });
         },
-        createEntity : function(service,data,response) {
-            var entryHandler = null;
-            if (response.args && response.args.format == "vcard") {
-                entryHandler = new VCardDataHandler({
-                    data : data,
-                    namespaces : consts.Namespaces,
-                    xpath : consts.ProfileVCardXPath
-                });
-            } else {
-                entryHandler = new XmlDataHandler({
-                    data : data,
-                    namespaces : consts.Namespaces,
-                    xpath : consts.ProfileXPath
-                });
-            }
+        createEntity : function(service,data,response) {            
             return new Profile({
                 service : service,
-                id : entryHandler.getEntityId(),
-                dataHandler : entryHandler
+                data: data,
+                response: response
             });
         }
     };
@@ -699,17 +659,11 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
                 xpath : consts.ProfileFeedXPath
             });
         },
-        createEntity : function(service,data,response) {
-            var entryHandler = null;
-            entryHandler = new XmlDataHandler({
-                data : data,
-                namespaces : consts.Namespaces,
-                xpath : consts.ColleagueConnectionXPath
-            });
+        createEntity : function(service,data,response) {            
             return new ColleagueConnection({
                 service : service,
-                id : entryHandler.getEntityId(),
-                dataHandler : entryHandler
+                data: data,
+                response: response
             });
         }
     };
@@ -826,6 +780,7 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
          */
         updateProfile : function(profileOrJson,args) {
             var profile = this._toProfile(profileOrJson);
+            profile._update = true;
             var promise = this._validateProfile(profile);
             if (promise) {
                 return promise;
@@ -844,7 +799,7 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
                     method : "PUT",
                     query : requestArgs,
                     headers : consts.AtomXmlHeaders,
-                    data : this._constructProfilePostData(profile)
+                    data : profile.createPostData()
                 };   
             var url = this.constructUrl(consts.AtomProfileEntryDo, {}, {authType : this._getProfileAuthString()});
 
@@ -1263,38 +1218,6 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
         	return (profile._fields["streetAddress"] || profile._fields["extendedAddress"] || profile._fields["locality"] || profile._fields["region"] || profile._fields["postalCode"] || profile._fields["countryName"]);
         },
         
-        /*
-         * Constructs update profile request body.
-         */
-        _constructProfilePostData : function(profile) {
-            var transformer = function(value,key) {
-                if (key == "address") {                	
-                	value = profile.service._isAddressSet(profile) ? stringUtil.transform(updateProfileAddressTemplate, {"streetAddress" : profile._fields["streetAddress"], 
-                	"extendedAddress" : profile._fields["extendedAddress"], "locality" : profile._fields["locality"], "region" : profile._fields["region"],
-                	"postalCode" : profile._fields["postalCode"], "countryName" : profile._fields["countryName"]}) : null;
-                } 
-                else{                	
-                	value = (profile._fields[key])? stringUtil.transform(updateProfileAttributeTemplate, {"attributeName" : consts.ProfileVCardXPath[key], "attributeValue" : profile._fields[key]}) : null;
-                	
-                }
-                return value;
-            };
-            return stringUtil.transform(updateProfileXmlTemplate, profile, transformer, profile);
-        },
-        
-        /*
-         * Constructs update profile request body.
-         */
-        _constructProfilePutData : function(profile) {
-            var transformer = function(value,key) {
-            	if(profile._fields[key]){
-	                value = stringUtil.transform(createProfileAttributeTemplate, {"attributeName" : consts.profileCreateAttributes[key], "attributeValue" : profile._fields[key]});
-	                return value;
-            	}
-            };
-            return stringUtil.transform(createProfileTemplate, profile, transformer, profile);
-        },
-
         /*
          * Validate a Profile object
          */

@@ -25,6 +25,7 @@ import com.ibm.sbt.services.client.connections.blogs.Blog;
 import com.ibm.sbt.services.client.connections.blogs.Comment;
 import com.ibm.sbt.services.client.connections.blogs.BlogPost;
 import com.ibm.sbt.services.client.connections.blogs.model.BaseBlogEntity;
+import com.ibm.sbt.services.client.connections.blogs.model.BlogXPath;
 
 
 /**
@@ -53,6 +54,7 @@ public class BaseBlogTransformer extends AbstractBaseTransformer {
 		String xml = getTemplateContent(sourcepath+"BaseEntryTmpl.xml");
 		
 		String tagsXml = "";
+		String summaryXml = "";
 		String contentXml = "";
 		String titleXml = "";
 		String handleXml = "";
@@ -66,25 +68,31 @@ public class BaseBlogTransformer extends AbstractBaseTransformer {
 			if(xmlEntry.getValue() != null){
 				currentValue = xmlEntry.getValue().toString();
 			}
-			if(currentElement.contains("tag")){
+			if(currentElement.contains(BlogXPath.tags.toString())){
 				tagsXml += getXMLRep(getStream(sourcepath+"CategoryTagTmpl.xml"),"tag",XmlTextUtil.escapeXMLChars(currentValue));
 			}
-			if(currentElement.equalsIgnoreCase("content")){
+			if(currentElement.equalsIgnoreCase(BlogXPath.summary.toString())){
+				summaryXml = getXMLRep(getStream(sourcepath+"SummaryTmpl.xml"),currentElement,XmlTextUtil.escapeXMLChars(currentValue));
+			}
+			if(currentElement.equalsIgnoreCase(BlogXPath.content.toString())){
 				contentXml = getXMLRep(getStream(sourcepath+"ContentTemplate.xml"),currentElement,XmlTextUtil.escapeXMLChars(currentValue));
 			}
-			if(currentElement.equalsIgnoreCase("title")){
+			if(currentElement.equalsIgnoreCase(BlogXPath.title.toString())){
 				titleXml = getXMLRep(getStream(sourcepath+"TitleTemplate.xml"),currentElement,XmlTextUtil.escapeXMLChars(currentValue));
 			}
-			if(currentElement.equalsIgnoreCase("handle")){
+			if(currentElement.equalsIgnoreCase(BlogXPath.handle.toString())){
 				handleXml = getXMLRep(getStream(sourcepath+"HandleTmpl.xml"),currentElement,XmlTextUtil.escapeXMLChars(currentValue));
 			}
-			if(currentElement.equalsIgnoreCase("timeZone")){
+			if(currentElement.equalsIgnoreCase(BlogXPath.timeZone.toString())){
 				timeZoneXml = getXMLRep(getStream(sourcepath+"TimeZoneTmpl.xml"),currentElement,XmlTextUtil.escapeXMLChars(currentValue));
 			}
 			
 		}
 		if(StringUtil.isNotEmpty(titleXml)){
 			xml = getXMLRep(xml, "getTitle",titleXml);
+		}
+		if(StringUtil.isNotEmpty(summaryXml)){
+			xml = getXMLRep(xml, "getSummary",summaryXml);
 		}
 		if(StringUtil.isNotEmpty(contentXml)){
 			xml = getXMLRep(xml, "getContent",contentXml);
@@ -96,14 +104,13 @@ public class BaseBlogTransformer extends AbstractBaseTransformer {
 			xml = getXMLRep(xml, "getHandle",handleXml);
 		}
 		if(StringUtil.isNotEmpty(timeZoneXml)){
-			xml = getXMLRep(xml, "getTags",timeZoneXml);
+			xml = getXMLRep(xml, "timeZoneXml",timeZoneXml);
 		}
 		if(entity instanceof Comment){
 			replyToXml = getXMLRep(getStream(sourcepath+"ReplyTmpl.xml"), "entryId", ((Comment)entity).getPostUuid());
 			xml = getXMLRep(xml, "getReplyTo", replyToXml);
 		}
 		xml = removeExtraPlaceholders(xml);
-
 		return xml;
 	}
 

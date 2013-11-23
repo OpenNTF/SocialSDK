@@ -15,12 +15,15 @@
  */
 package com.ibm.sbt.playground.assets;
 
+import com.ibm.sbt.playground.vfs.VFSFile;
+
 
 public interface NodeFactory {
 	
 	public String[] getAssetExtensions();
 	
 	public RootNode createRootNode();
+	public String getSnippetName(VFSFile s);
 	public CategoryNode createCategoryNode(CategoryNode parent, String name);
 	public AssetNode createAssetNode(CategoryNode parent, String name);
 }

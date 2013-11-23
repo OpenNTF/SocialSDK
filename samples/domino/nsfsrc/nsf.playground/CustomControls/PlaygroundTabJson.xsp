@@ -7,12 +7,14 @@
 	</xp:inputTextarea>
 	<xp:span id="label" styleClass="framelabel">Json</xp:span>
 	<xp:scriptBlock>
-		<xp:this.value><![CDATA[pageGlobal.jsonEditor = CodeMirror.fromTextArea(dojo.byId('#{id:jsonEditor}'),
+		<xp:this.value><![CDATA[var editor = dojo.byId('#{id:jsonEditor}');
+pageGlobal.jsonEditor = CodeMirror.fromTextArea(editor,
 {
 	mode:"javascript",
 	readOnly: #{javascript:compositeData.readOnly||false},
 	lineNumbers: true
 });
-]]></xp:this.value>
+attachTabIcon(pageGlobal.tabJson,pageGlobal.jsonEditor);
+attachLabel(editor,'#{id:label}');]]></xp:this.value>
 	</xp:scriptBlock>
 </xp:view>

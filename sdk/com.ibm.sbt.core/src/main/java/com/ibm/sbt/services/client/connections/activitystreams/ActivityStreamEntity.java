@@ -194,7 +194,12 @@ public class ActivityStreamEntity extends BaseEntity{
 	}
 
 	public int getNumComments() {
-		return getAsInt(ASJsonPath.NumComments);
+		try {
+			return getAsInt(ASJsonPath.NumComments);
+		} catch (Exception e) {
+			return 0;
+		}
+		
 	}
 
 	public String getContextId() {

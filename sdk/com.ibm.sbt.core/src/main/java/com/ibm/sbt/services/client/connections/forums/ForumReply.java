@@ -94,7 +94,7 @@ public class ForumReply extends BaseForumEntity{
 	 * @method getReplyUuid
 	 * @return String
 	 */
-	public String getReplyUuid() throws ForumServiceException{
+	public String getReplyUuid() {
 		return super.getUid();
 	}
 

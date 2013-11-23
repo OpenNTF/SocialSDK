@@ -24,8 +24,6 @@ import com.ibm.sbt.services.client.base.datahandlers.FieldEntry;
 public enum SearchXPath implements FieldEntry{
 	
 	entry("/a:entry"),
-	uid("./id"),
-	title("a:title"),
 	content("a:content"),
 	updated("a:updated"),
 	authorUserid("a:author/snx:userid"),

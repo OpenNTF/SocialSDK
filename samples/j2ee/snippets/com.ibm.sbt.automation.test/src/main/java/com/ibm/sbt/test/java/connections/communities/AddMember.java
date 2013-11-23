@@ -1,7 +1,7 @@
 package com.ibm.sbt.test.java.connections.communities;
 
 /*
- * © Copyright IBM Corp. 2012
+ * ï¿½ Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -30,7 +30,7 @@ public class AddMember extends BaseAuthJavaServiceTest {
 
     @Test
     public void runTest() {
-        boolean result = checkNoError("Social_Communities_AddMember");
+        boolean result = checkNoError("Social_Communities_Add_Member");
         assertTrue(getNoErrorMsg(), result);
     }
 

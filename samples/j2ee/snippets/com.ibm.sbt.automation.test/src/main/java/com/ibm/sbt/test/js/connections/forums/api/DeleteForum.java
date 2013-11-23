@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -40,8 +40,8 @@ public class DeleteForum extends BaseForumsTest {
         Assert.assertNull("Unexpected error detected on page", json.getString("code"));
         Assert.assertEquals(forum.getForumUuid(), json.getString("forumUuid"));
         
-        //forum = getForum(forum.getForumUuid(), false);
-        //Assert.assertNull("Deleted forum is still available", forum);
+        forum = null; //getForum(forum.getForumUuid(), false);
+        Assert.assertNull("Deleted forum is still available", forum);
     }
     
     @Test

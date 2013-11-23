@@ -12,7 +12,7 @@ public class ProfileVCardInline extends BaseVCardTest{
 
 	@Test
 	public void testProfileVCardInline() {
-		assertTrue("Expected to find the Inline Profile vCard on the page", checkProfileVCardInline("Social_Profiles_Controls_ProfileVCardInline"));
+		assertTrue("Expected to find the Inline Profile vCard on the page", checkProfileVCardInline("Social_Profiles_Controls_Profile_VCard_Inline"));
 	}
 	
 }

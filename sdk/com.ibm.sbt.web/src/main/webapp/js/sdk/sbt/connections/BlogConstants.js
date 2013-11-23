@@ -38,24 +38,23 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
         },
         
         /**
+         * Namespaces to be used when reading the Blogs ATOM entry or feed
+         */
+        BlogNamespaces : {
+			a : "http://www.w3.org/2005/Atom",
+			app : "http://www.w3.org/2007/app",
+			snx : "http://www.ibm.com/xmlns/prod/sn"
+		},
+        
+        /**
          * XPath expressions to be used when reading a Blog
          * 
          * @property BlogXPath
          * @type Object
          * @for sbt.connections.BlogService
          */
-        BlogXPath : {
-            entry : "/a:entry",
-            uid : "a:id",
+        BlogXPath : lang.mixin({}, conn.AtomEntryXPath, {
             blogUuid : "a:id",
-            title : "a:title",
-            summary : "a:summary[@type='html']",
-            blogUrl : "a:link[@rel='alternate']/@href",
-            published : "a:published",
-            updated : "a:updated",
-            authorUserid : "a:author/snx:userid",
-            authorName : "a:author/a:name",
-            authorEmail : "a:author/a:email",
             handle : "snx:handle",
             timezone : "snx:timezone",
             rank : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/recommendations']",
@@ -63,7 +62,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
             categoryfaq : "a:category[@term='faq']",
             categorywith : "a:category[@term='with']",
             categoryshared : "a:category[@term='shared']"
-        },
+        }),
         
         /**
          * XPath expressions to be used when reading a Blog Post
@@ -72,23 +71,10 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type Object
          * @for sbt.connections.BlogService
          */
-        BlogPostXPath : {
-            entry : "/a:entry",
-            uid : "a:id",
+        BlogPostXPath : lang.mixin({}, conn.AtomEntryXPath, {
             postUuid : "a:id",
-            title : "a:title",
-            summary : "a:summary[@type='html']",
-            blogEntryUrlAlternate : "a:link[@rel='alternate']/@href",
-            blogEntryUrl : "a:link[@rel='self']/@href",
             replies : "a:link[@rel='replies']/@href",
             recomendationsUrl : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/recommendations']/@href",
-            content : "a:content[@type='html']",
-            published : "a:published",
-            updated : "a:updated",
-            authorUserid : "a:author/snx:userid",
-            authorName : "a:author/a:name",
-            authorEmail : "a:author/a:email",
-            authorState : "a:author/a:state",
             rankRecommendations : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/recommendations']",
             rankComment : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/comment']",
             rankHit : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/hit']",
@@ -99,7 +85,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
             sourceUpdated : "a:source/a:updated",
             sourceCategory : "a:source/a:link[@scheme='http://www.ibm.com/xmlns/prod/sn/type']/@term",
             blogHandle : "blogHandle"
-        },
+        }),
         
         /**
          * XPath expressions to be used when reading a Blog Post Comment
@@ -108,22 +94,10 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type Object
          * @for sbt.connections.BlogService
          */
-        CommentXPath : {
-            entry : "/a:entry",
-            uid : "a:id",
+        CommentXPath : lang.mixin({}, conn.AtomEntryXPath, {
             commentUuid : "a:id",
-            title : "a:title",
-            summary : "a:summary[@type='html']",
-            commentUrlAlternate : "a:link[@rel='alternate']/@href",
             commentUrl : "a:link[@rel='self']/@href",
             recomendationsUrl : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/recommendations']/@href",
-            content : "a:content[@type='html']",
-            published : "a:published",
-            updated : "a:updated",
-            authorUserid : "a:author/snx:userid",
-            authorName : "a:author/a:name",
-            authorEmail : "a:author/a:email",
-            authorState : "a:author/a:state",
             trackbacktitle : "snx:trackbacktitle",
             replyTo : "thr:in-reply-to/@ref",
             replyToSource : "thr:in-reply-to/@source",
@@ -134,7 +108,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
             sourceLinkAlternate : "a:source/a:link[@rel='alternate']/@href",
             blogHandle : "blogHandle",
             blogPostUuid : "blogPostUuid"
-        },
+        }),
         
         /**
          * XPath expressions to be used when reading a Blog Post Recommenders feed
@@ -143,19 +117,10 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type Object
          * @for sbt.connections.BlogService
          */
-        RecommendersXPath : {
-            entry : "/a:entry",
-            uid : "a:id",
+        RecommendersXPath : lang.mixin({}, conn.AtomEntryXPath, {
             recommenderUuid : "a:id",
-            title : "a:title",
-            summary : "a:summary[@type='text']",
-            updated : "a:updated",
-            contributorUserid : "a:contributor/snx:userid",
-            contributorName : "a:contributor/a:name",
-            contributorEmail : "a:contributor/a:email",
-            contributorState : "a:contributor/a:state",
             category : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/type']/@term"            
-        },
+        }),
 
         /**
          * page  Page number. Specifies the page to be returned. The default value is 1, which returns the first page. 

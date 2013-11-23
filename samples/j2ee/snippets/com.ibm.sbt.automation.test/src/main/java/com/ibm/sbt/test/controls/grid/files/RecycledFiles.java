@@ -29,7 +29,7 @@ public class RecycledFiles extends BaseGridTest {
 
     @Test
     public void recycledFilesTest() {
-        assertTrue("Expected the test to generate a grid", checkGrid("Social_Files_Controls_RecycledFiles",true));
+        assertTrue("Expected the test to generate a grid", checkGrid("Social_Files_Controls_Recycled_Files",true));
     }
 
 }

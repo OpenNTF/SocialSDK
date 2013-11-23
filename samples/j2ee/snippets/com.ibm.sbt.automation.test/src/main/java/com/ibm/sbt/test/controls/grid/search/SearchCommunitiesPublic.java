@@ -7,7 +7,7 @@ import org.junit.Test;
 import com.ibm.sbt.automation.core.test.BaseGridTest;
 
 /*
- * © Copyright IBM Corp. 2012
+ * ï¿½ Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -29,6 +29,6 @@ import com.ibm.sbt.automation.core.test.BaseGridTest;
 public class SearchCommunitiesPublic extends BaseGridTest {
     @Test
     public void testGrid() {
-        assertTrue("Expected the test to generate a grid", checkGrid("Social_Search_Controls_SearchCommunitiesPublic",true,true));
+        assertTrue("Expected the test to generate a grid", checkGrid("Social_Search_Controls_Search_Communities_Public",true,true));
     }
 }

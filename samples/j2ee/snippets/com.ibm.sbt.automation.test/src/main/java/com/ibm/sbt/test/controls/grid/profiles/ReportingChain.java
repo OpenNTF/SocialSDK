@@ -34,7 +34,7 @@ public class ReportingChain extends BaseGridTest {
 
     @Test
     public void testReportingChainGrid() {
-        assertTrue("Expected the test to generate a grid", checkGrid("Social_Profiles_Controls_ReportingChain",true));
+        assertTrue("Expected the test to generate a grid", checkGrid("Social_Profiles_Controls_Reporting_Chain",true));
     }																
 
 }

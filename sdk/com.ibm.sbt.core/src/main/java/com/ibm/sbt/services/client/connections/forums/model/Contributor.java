@@ -16,8 +16,9 @@
 
 package com.ibm.sbt.services.client.connections.forums.model;
 
+import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
-import com.ibm.sbt.services.client.connections.forums.ForumsXPath;
+import com.ibm.sbt.services.client.connections.common.Person;
 
 
 /**
@@ -25,33 +26,39 @@ import com.ibm.sbt.services.client.connections.forums.ForumsXPath;
  * @author Swati Singh
  */
 
-public class Contributor {
-	private String name;
-	private String uid;
-	private String email;
-	private String state;
-	DataHandler<?> dataHandler;
-	public Contributor(DataHandler<?> dataHandler) {
-		this.dataHandler = dataHandler;
+@Deprecated
+public class Contributor extends Person {
+
+	public Contributor(BaseService svc, DataHandler<?> dataHandler) {
+		super(svc, dataHandler);
 	}
-
-	public String getUid() {
-		return dataHandler.getAsString(ForumsXPath.contributorUserid);
-	}
-
-
-	public String getName() {
-		return dataHandler.getAsString(ForumsXPath.contributorName);
-	}
-
-	public String getEmail() {
-		return dataHandler.getAsString(ForumsXPath.contributorEmail);
-	}
-
-
-	public String getState() {
-		return dataHandler.getAsString(ForumsXPath.contributorUserState);
-	}
-
+	
+//	private String name;
+//	private String uid;
+//	private String email;
+//	private String state;
+//	DataHandler<?> dataHandler;
+//	public Contributor(DataHandler<?> dataHandler) {
+//		this.dataHandler = dataHandler;
+//	}
+//
+//	public String getUid() {
+//		return dataHandler.getAsString(ForumsXPath.contributorUserid);
+//	}
+//
+//
+//	public String getName() {
+//		return dataHandler.getAsString(ForumsXPath.contributorName);
+//	}
+//
+//	public String getEmail() {
+//		return dataHandler.getAsString(ForumsXPath.contributorEmail);
+//	}
+//
+//
+//	public String getState() {
+//		return dataHandler.getAsString(ForumsXPath.contributorUserState);
+//	}
+//
 
 }

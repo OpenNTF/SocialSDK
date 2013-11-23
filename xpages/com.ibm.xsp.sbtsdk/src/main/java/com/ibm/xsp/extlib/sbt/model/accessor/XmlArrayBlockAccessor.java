@@ -22,7 +22,6 @@ import java.io.ObjectOutput;
 
 import javax.faces.FacesException;
 
-import org.apache.harmony.luni.util.NotImplementedException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -74,9 +73,8 @@ public abstract class XmlArrayBlockAccessor extends RestDataBlockAccessor {
         public void writeExternal(ObjectOutput out) throws IOException {
             super.writeExternal(out);
             try {
-            	//TODO: resolve classpath issue
-            	throw new java.lang.UnsupportedOperationException("dependency to class not found");
                 //XmlSerializer.writeDOMObject(out, doc);
+            	throw new UnsupportedOperationException("fix build path");
             } catch(Throwable ex) {
                 throw new AbstractIOException(ex);
             }
@@ -84,11 +82,11 @@ public abstract class XmlArrayBlockAccessor extends RestDataBlockAccessor {
         @Override
         public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
             super.readExternal(in);
-            try {           
-            	//TODO: resolve classpath issue
-            	throw new java.lang.UnsupportedOperationException("dependency to class not found");
+            try {
                 //this.doc = XmlSerializer.readDOMObject(in);
-                //this.nodes = null;
+                this.nodes = null;
+                throw new UnsupportedOperationException("fix build path");
+
             } catch(Throwable ex) {
                 throw new AbstractIOException(ex);
             }

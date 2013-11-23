@@ -7,12 +7,14 @@
 	</xp:inputTextarea>
 	<xp:span id="label" styleClass="framelabel">Properties</xp:span>
 	<xp:scriptBlock>
-		<xp:this.value><![CDATA[pageGlobal.propertiesEditor = CodeMirror.fromTextArea(dojo.byId('#{id:propertiesEditor}'),
+		<xp:this.value><![CDATA[var editor = dojo.byId('#{id:propertiesEditor}');
+pageGlobal.propertiesEditor = CodeMirror.fromTextArea(editor,
 {
 	mode:"properties",
 	readOnly: #{javascript:compositeData.readOnly||false},
 	lineNumbers: true
 });
-]]></xp:this.value>
+attachTabIcon(pageGlobal.tabProperties,pageGlobal.propertiesEditor);
+attachLabel(editor,'#{id:label}');]]></xp:this.value>
 	</xp:scriptBlock>
 </xp:view>

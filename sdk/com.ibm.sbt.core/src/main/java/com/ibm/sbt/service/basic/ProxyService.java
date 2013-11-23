@@ -133,8 +133,9 @@ public class ProxyService {
 	protected boolean isHeaderAllowed(String headerName) throws ServletException {
 		// content-length header will be automatically added by the HTTP client
 		// host header causes request failures when it does not match the proxy host see x-forwaded-for comment above
-		if(    StringUtil.equalsIgnoreCase(headerName, "content-length")
-				|| StringUtil.equalsIgnoreCase(headerName, "host")) {
+	    // Origin is added by chrome / safari in post/put/delete same-origin requests.
+		if(StringUtil.equalsIgnoreCase(headerName, "content-length")
+				|| StringUtil.equalsIgnoreCase(headerName, "host") || StringUtil.equalsIgnoreCase(headerName, "origin")) {
 			return false;
 		}
 		return true;

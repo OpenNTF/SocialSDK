@@ -5,22 +5,22 @@ require(["sbt/connections/ForumService", "sbt/dom"],
             var tr = document.createElement("tr");
             table.appendChild(tr);
             var td = document.createElement("td");
-            td.innerHTML = topic.getTitle();
+            td.appendChild(dom.createTextNode(topic.getTitle()));
             tr.appendChild(td);
             td = document.createElement("td");
-            td.innerHTML = topic.getTopicUuid();
+            td.appendChild(dom.createTextNode(topic.getTopicUuid()));
             tr.appendChild(td);
             td = document.createElement("td");
-            td.innerHTML = topic.isLocked();
+            td.appendChild(dom.createTextNode(topic.isLocked()));
             tr.appendChild(td);
             td = document.createElement("td");
-            td.innerHTML = topic.isPinned();
+            td.appendChild(dom.createTextNode(topic.isPinned()));
             tr.appendChild(td);
             td = document.createElement("td");
-            td.innerHTML = topic.isQuestion();
+            td.appendChild(dom.createTextNode(topic.isQuestion()));
             tr.appendChild(td);
             td = document.createElement("td");
-            td.innerHTML = topic.isAnswered();
+            td.appendChild(dom.createTextNode(topic.isAnswered()));
             tr.appendChild(td);
         };
 

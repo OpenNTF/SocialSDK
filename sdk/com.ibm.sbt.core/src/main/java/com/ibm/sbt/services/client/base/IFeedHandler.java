@@ -24,7 +24,7 @@ import com.ibm.sbt.services.client.base.datahandlers.EntityList;
  * @author Carlos Manias
  *
  */
-public interface IFeedHandler {
+public interface IFeedHandler<T extends BaseEntity> {
 	
 	/**
 	 * Returns a new entity from the data on the RequestData object
@@ -32,7 +32,7 @@ public interface IFeedHandler {
 	 * @return
 	 * @throws SBTServiceException
 	 */
-	public BaseEntity createEntity(Response dataHolder);
+	public T createEntity(Response dataHolder);
 	
 	/**
 	 * Return a new entity from a data object
@@ -40,7 +40,7 @@ public interface IFeedHandler {
 	 * @return
 	 * @throws SBTServiceException
 	 */
-	public BaseEntity createEntityFromData(Object data);
+	public T createEntityFromData(Object data);
 	
 	/**
 	 * Returns a Collection of entities from the data on the RequestData object
@@ -48,7 +48,7 @@ public interface IFeedHandler {
 	 * @return
 	 * @throws SBTServiceException
 	 */
-	public EntityList<? extends BaseEntity> createEntityList(Response dataHolder);
+	public EntityList<T> createEntityList(Response dataHolder);
 	
 	/**
 	 * 

@@ -7,12 +7,14 @@
 	</xp:inputTextarea>
 	<xp:span id="label" styleClass="framelabel">Gadget Xml</xp:span>
 	<xp:scriptBlock>
-		<xp:this.value><![CDATA[pageGlobal.gadgetEditor = CodeMirror.fromTextArea(dojo.byId('#{id:gadgetEditor}'),
+		<xp:this.value><![CDATA[var editor = dojo.byId('#{id:gadgetEditor}');
+pageGlobal.gadgetEditor = CodeMirror.fromTextArea(editor,
 {
 	mode:"xml",
 	readOnly: #{javascript:compositeData.readOnly||false},
 	lineNumbers: true
 });
-]]></xp:this.value>
+attachTabIcon(pageGlobal.tabGadget,pageGlobal.gadgetEditor);
+attachLabel(editor,'#{id:label}');]]></xp:this.value>
 	</xp:scriptBlock>
 </xp:view>

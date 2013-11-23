@@ -15,13 +15,13 @@
  */
 package com.ibm.sbt.playground.assets.apis;
 
+import com.ibm.sbt.playground.assets.AbstractNodeFactory;
 import com.ibm.sbt.playground.assets.AssetNode;
 import com.ibm.sbt.playground.assets.CategoryNode;
-import com.ibm.sbt.playground.assets.NodeFactory;
 import com.ibm.sbt.playground.assets.RootNode;
 
 
-public class APINodeFactory implements NodeFactory {
+public class APINodeFactory extends AbstractNodeFactory {
 	
 	public static final APINodeFactory instance = new APINodeFactory();
 	

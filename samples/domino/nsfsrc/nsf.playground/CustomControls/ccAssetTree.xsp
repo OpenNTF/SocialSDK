@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:this.resources>
+		<xp:dojoModule name="dojo.hash"></xp:dojoModule>
+		<xp:dojoModule name="dijit.tree.TreeStoreModel"></xp:dojoModule>
+		<xp:dojoModule name="dojo.data.ItemFileReadStore"></xp:dojoModule>
+		<xp:dojoModule name="dijit.Tree"></xp:dojoModule>
+		<xp:dojoModule name="dijit.Tooltip"></xp:dojoModule>
+	</xp:this.resources>
+
+	<xp:this.beforePageLoad><![CDATA[#{javascript:viewScope.assetSearch = context.getUrlParameter("search")}]]></xp:this.beforePageLoad>
+	<xe:djBorderContainer style="height: 100%">
+		<xe:djBorderPane region="top">
+			<span title="Expand All" style="margin-left:3px;margin-right:3px">
+				<xp:link escape="true" id="link1">
+					<xp:image id="image2" alt="Submit search" url="/expandall.png">
+					</xp:image>
+					<xp:eventHandler event="onclick" submit="false">
+						<xp:this.script><![CDATA[treeExpandAll('assetsTree');]]></xp:this.script>
+					</xp:eventHandler>
+				</xp:link>
+			</span>
+			<span title="Collapse All" style="margin-left:3px;margin-right:8px">
+				<xp:link escape="true" id="link2">
+					<xp:image id="image3" alt="Submit search" url="/collapseall.png">
+					</xp:image>
+					<xp:eventHandler event="onclick" submit="false">
+						<xp:this.script><![CDATA[treeCollapseAll('assetsTree');]]></xp:this.script>
+					</xp:eventHandler>
+				</xp:link>
+			</span>
+			<xp:span id="widgetContainer2" loaded="${javascript:database.isFTIndexed()}"
+				styleClass="lotusSearch">
+				<xp:inputText id="search1"
+					value="#{viewScope.assetSearch}" styleClass="searchbox"
+					size="20">
+					<xp:this.onkeypress><![CDATA[var kc=event.keyCode?event.keyCode:event.which;
+if(kc==13){dojo.byId('#{id:linkSearch1}').click(); return false;}
+return true;]]></xp:this.onkeypress>
+					<xp:this.attrs>
+						<xp:attr name="placeholder"
+							value="Find Snippets">
+						</xp:attr>
+					</xp:this.attrs></xp:inputText>
+				<span title="Submit search">
+					<xp:link escape="true" id="linkSearch1">
+						<xp:image id="image1" alt="Submit search" url="/search.png">
+						</xp:image>
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="partial" refreshId="widgetContainer1">
+						</xp:eventHandler>
+					</xp:link>
+				</span>
+			</xp:span>
+		</xe:djBorderPane>
+		<xe:djBorderPane
+			region="center" style="overflow: hidden;">
+			<xp:div id="widgetContainer1" styleClass="assetTreeContainer" style="width: 100%; height: 100%; overflow-x: hidden; overflow-y: auto">
+				<xp:scriptBlock id="scriptBlock1">
+					<xp:this.value><![CDATA[dojo.addOnLoad(function() {
+	var assetsData = #{javascript:
+	switch(compositeData.type){
+		case "snippet": 		return snippetBean.getSnippetsAsJson(); 
+		case "javaSnippet": 	return javaSnippetBean.getSnippetsAsJson(); 
+		case "xPagesSnippet": 	return xpagesSnippetBean.getSnippetsAsJson(); 
+		case "api": 			return apiBean.getSnippetsAsJson();
+		case "gadget": 			return gadgetSnippetBean.getSnippetsAsJson(); 
+	} return "";
+	};	var assetsStore = new dojo.data.ItemFileReadStore({data:{identifier:'id',label:'name',items:assetsData}});
+	var assetsModel = new dijit.tree.TreeStoreModel({		store: assetsStore	});
+	var navTree = new dijit.Tree({
+		model: assetsModel, 
+		showRoot: false,
+		_onNodeMouseEnter: function (node,evt) {
+			if(node.item.tooltip) {
+       			dijit.showTooltip(node.item.tooltip,node.domNode);
+       		}
+    	},
+    	_onNodeMouseLeave: function (node,evt) {
+       		dijit.hideTooltip(node.domNode);
+    	}
+	},"#{id:assetsTree}");
+	dojo.connect(navTree,"onLoad",function() {
+		if(!window.navTreeLoaded) {
+			window.navTreeLoaded = true;
+			treeClearSelection(navTree);
+		}
+	});
+	navTree.onClick = function(item){
+		if(item.url) {
+			var h = "#{javascript:compositeData.pname||'snippet'}="+item.jspUrl;
+			if(h==dojo.hash()) {
+				dojo.hash("");
+			}
+			dojo.hash(h);
+		}
+	};
+	// Suppress the wide out effect
+	dijit.defaultDuration = 0;
+	// Display the empty tree message
+	if(!assetsData[0].children || assetsData[0].children.length==0) {
+		dojo.style('emptyTree',{display:'block'});
+	}
+});]]></xp:this.value>				</xp:scriptBlock>				<div id="assetsTree" style="overflow: none;"></div>
+				<div id="emptyTree" style='display:none'>
+					The current filtering options don't match any snippets.<br/>Please select a different environment.
+				</div>
+			</xp:div>
+		</xe:djBorderPane>
+		<xe:djBorderPane region="bottom" loaded="false" style="height:15em">
+			<xp:section id="section3" header="Tags" style="width:100%">
+				<xe:tagCloud rendererType="com.ibm.xsp.extlib.OneUITagCloud"
+					alternateText="{0} Entries" sliderVisible="true">
+					<xe:this.cloudData>
+						<xe:dominoViewCloudData cacheMode="auto"
+							cacheRefreshInterval="120" viewName="AllTags"
+							maxTagLimit="25" linkMetaSeparator="~"
+							linkTargetPage="/Domino_ViewUserProfile.xsp"
+							linkRequestParam="name">
+
+						</xe:dominoViewCloudData>
+					</xe:this.cloudData>
+				</xe:tagCloud>
+			</xp:section>
+		</xe:djBorderPane>
+	</xe:djBorderContainer>
+</xp:view>

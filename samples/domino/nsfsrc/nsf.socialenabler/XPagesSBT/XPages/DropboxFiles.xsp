@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xc:OneUILayout navigationPath="/Dropbox/Files" title="Dropbox Files" connection="dropbox">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftDropbox></xc:LeftDropbox>
+			</xp:panel>
+		</xp:this.facets>	
+		
+		<xp:panel id="mainPanel">
+			<xc:sbtFilesDropbox ajaxUpdate="true" rows="15"></xc:sbtFilesDropbox>
+		</xp:panel>
+	</xc:OneUILayout>
+</xp:view>
+

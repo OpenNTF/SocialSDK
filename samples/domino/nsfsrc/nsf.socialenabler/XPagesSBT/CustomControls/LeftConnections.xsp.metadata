@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="85257876005A0DD2" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="436" sequence="10" unid="445F7FD528961B3E8525791700019DED">
+<created><datetime dst="true">20110925T201739,65-04</datetime></created>
+<modified><datetime dst="true">20111007T095101,37-04</datetime></modified>
+<revised><datetime dst="true">20111007T095101,36-04</datetime></revised>
+<lastaccessed><datetime dst="true">20111007T095101,37-04</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20110925T201739,93-04</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></updatedby>
+<wassignedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></wassignedby>
+<item name="$Flags"><text>gC~4;</text></item>
+<item name="$TITLE"><text>LeftConnections.xsp</text></item>
+
+
+
+
+<item name="$FileNames" sign="true"><text>LeftConnections.xsp</text></item>
+
+<item name="$DesignerVersion"><text>8.5</text></item>
+
+
+
+</note>

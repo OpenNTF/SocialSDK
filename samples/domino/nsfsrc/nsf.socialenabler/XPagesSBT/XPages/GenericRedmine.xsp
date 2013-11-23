@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex" xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xp:this.afterPageLoad><![CDATA[#{javascript:getComponent("pager3").getAttributes().put("onStart","XSP.animateLoading('"+getClientId("dataView1")+"_ajax')")
+		}]]></xp:this.afterPageLoad>
+	<xp:this.resources>
+		<xp:dojoModule name="extlib.dijit.Loading"></xp:dojoModule>
+	</xp:this.resources>
+	<xc:OneUILayout navigationPath="/Generic/Redmine" title="Redmine" connection="redmine">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftGeneric></xc:LeftGeneric>
+			</xp:panel>
+		</xp:this.facets>
+		<xp:tabbedPanel id="tabbedPanel1">
+			<xp:tabPanel label="Using a DataView control" id="tabPanel1">
+				<xe:djContentPane id="djContentPane1" partialRefresh="true" style="overflow-x:hidden; overflow-y:hidden">
+					<xe:dataView rows="10" id="dataView1" value="rest1" columnTitles="true" var="entry" collapsibleDetail="true"
+						detailsOnClient="true">
+						<xe:this.data>
+							<xe:restXmlData var='rest' endpoint="redmine" serviceUrl="/issues.xml" paramCount="count" paramFirst="startIndex"
+								paramFirstType="first1" splitPath="/issues/issue">
+							</xe:restXmlData>
+						</xe:this.data>
+						<xe:this.summaryColumn>
+							<xe:viewSummaryColumn columnTitle="Content" value="#{xpath:entry:project/@name}">
+							</xe:viewSummaryColumn>
+						</xe:this.summaryColumn>
+						<xe:this.extraColumns>
+							<xe:viewExtraColumn value="#{xpath:entry:id}" columnTitle="Id" style="width: 30px"></xe:viewExtraColumn>
+						</xe:this.extraColumns>
+						<xp:this.facets>
+							<xe:pagerDetail id="pagerDetail1" xp:key="pagerTopLeft">
+							</xe:pagerDetail>
+							<xp:pager layout="Previous Group Next" id="pager3" xp:key="pagerTopRight" partialRefresh="true" partialExecute="true">
+							</xp:pager>
+							<xp:panel id="panel2" xp:key="detail">
+								<xp:link escape="true" text="See XML Content" id="link3">
+									<xp:eventHandler event="onclick" submit="false">
+										<xp:this.script><![CDATA[XSP.openTooltipDialog("#{id:tooltipDialog1}",'#{id:link3}')]]></xp:this.script>
+									</xp:eventHandler>
+								</xp:link>
+								<xe:tooltipDialog id="tooltipDialog1" title="XML content for the entry">
+									<xp:div style="overflow: auto; height: 250px; width: 600px;">
+										<pre>
+											<xp:text escape="true" id="computedField3" value="#{javascript:entry.getXMLString(false)}">
+											</xp:text>
+										</pre>
+									</xp:div>
+								</xe:tooltipDialog>
+							</xp:panel>
+						</xp:this.facets>
+					</xe:dataView>
+				</xe:djContentPane>
+			</xp:tabPanel>
+			<xp:tabPanel label="Using a repeat control" id="tabPanel2">
+				<xe:djContentPane id="djContentPane2" partialRefresh="true" style="overflow-x:hidden; overflow-y:hidden">
+					<xp:panel>
+						<xe:this.data>
+							<xe:restXmlData var='rest' endpoint="redmine" serviceUrl="/issues.xml" paramCount="count" paramFirst="startIndex"
+								paramFirstType="first1" splitPath="/issues/issue">
+							</xe:restXmlData>
+						</xe:this.data>
+						<xp:text escape="true" id="computedField2" value="#{javascript:rest}"></xp:text>
+						<xp:repeat id="repeat1" rows="10" value="#{rest}" var="entry">
+							Project Name:&#160;
+							<xp:text escape="true" id="computedField1" value="#{xpath:entry:project/@name}"></xp:text>
+							<xp:br></xp:br>
+						</xp:repeat>
+					</xp:panel>
+				</xe:djContentPane>
+			</xp:tabPanel>
+		</xp:tabbedPanel>
+	</xc:OneUILayout>
+</xp:view>

@@ -1,0 +1,102 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Social Business Toolkit</title>
+<link href="images/sbt.png" rel="shortcut icon">
+
+<link
+	href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css"
+	rel="stylesheet">
+<link rel="stylesheet" type="text/css" title="Style"
+	href="http://infolib.lotus.com/resources/oneui/3.0/css/base/core.css"></link>
+
+<link rel="stylesheet" type="text/css" title="Style"
+	href="http://infolib.lotus.com/resources/oneui/3.0/css/defaultTheme/defaultTheme.css"></link>
+
+
+
+<script src="//ajax.googleapis.com/ajax/libs/dojo/1.9.1/dojo/dojo.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="http://ajax.googleapis.com/ajax/libs/dojo/1.9.1/dojo/resources/dojo.css">
+<link rel="stylesheet" type="text/css"
+	href="http://ajax.googleapis.com/ajax/libs/dojo/1.9.1/dijit/themes/claro/claro.css">
+<link rel="stylesheet" type="text/css" title="Style"
+	href="http://ajax.googleapis.com/ajax/libs/dojo/1.9.1/dojox/grid/enhanced/resources/claro/EnhancedGrid.css">
+<link rel="stylesheet" type="text/css" title="Style"
+	href="http://ajax.googleapis.com/ajax/libs/dojo/1.9.1/dojox/grid/enhanced/resources/EnhancedGrid_rtl.css">
+
+<script type="text/javascript" >
+window.onload = function() {
+	//crude but works well enough
+	if (window.location.hostname == 'localhost' || window.location.hostname == 'local') {
+		document.getElementById('alert').hidden = false;
+		document.getElementById('message').hidden = true;
+		var box = function(){
+			alert('LTPA will not work on localhost');
+		};
+		
+		document.getElementById('link1').onclick = box;
+		document.getElementById('link2').onclick = box;
+	}
+};
+
+</script>
+
+</head>
+
+<body>
+
+
+<div class="navbar navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container-fluid">
+			
+			<a class="brand" href="${symbol_pound}">Social Business Toolkit - Samples</a>
+		
+		</div>
+	</div>
+</div>
+	<div id="wrap">
+		<!-- main content starts -->
+		<div class='hero-unit'
+			style="background-color: ${symbol_pound}000066; color: white">
+			<h2>SSO Sample Application</h2>
+			<p>The Social Business Toolkit SDK is a set of libraries and code
+				samples that you use for connecting to the IBM Social Platform. The
+				samples application is a web-based live demonstration of the
+				JavaScript and Java APIs that are exposed by the SDK. The sample
+				application contains a large set of code snippets and examples that
+				you can use in your own applications.</p>
+			<div id="message">Make sure to authenticate to the configured connections service first!</div>
+			<div id="alert" hidden="true">The page must be accessed by a valid LTPA domain, not localhost</div>
+			
+			<p>
+				<a id="link1" class="btn btn-primary btn-large" href="java.jsp">Test the
+					Java API</a> 
+				<a id="link2" class="btn btn-primary btn-large" href="js.jsp">Test the Javascript API</a>
+			</p>
+			<p>
+				<a class="btn btn-primary btn-large"
+					href="https://www.ibmdw.net/social">Learn more</a>
+			</p>
+			
+		</div>
+		<!-- main content ends -->
+	</div>
+
+	<!-- footer start -->
+	<div id="footer">
+		<div class="container">
+			<p class="muted credit">
+				Social Business Toolkit SDK on <a href="http://ibmsbt.openntf.org/">OpenNTF</a>
+				and <a href="https://www.ibmdw.net/social/">developerWorks</a>.
+			</p>
+		</div>
+	</div>
+	<!-- footer ends -->
+</body>
+</html>

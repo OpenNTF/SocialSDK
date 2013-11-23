@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: App
 Main-Class: com.ibm.sbt.sample.app.GetAllCommunitiesApp
 Bundle-SymbolicName: sbt.sample.app
-Bundle-Version: 1.0.0
+Bundle-Version: 2.0.0.qualifier
 Export-Package: com.ibm.sbt.sample.app
 Require-Bundle: com.ibm.commons,
  com.ibm.commons.runtime,

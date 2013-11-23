@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xc:OneUILayout navigationPath="/Util/XmlNavigator" title="XML DataNavigator">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftUtilities></xc:LeftUtilities>
+			</xp:panel>
+		</xp:this.facets>	
+	
+		<xp:panel id="main">
+			<xp:this.data>
+				<xe:objectData var="xml">
+					<xe:this.createObject><![CDATA[#{javascript:var x = 
+ "<Persons>"
++"  <Person>"
++"    <FirstName>John</FirstName>"
++"    <LastName>Wayne</LastName>"
++"    <Age>54</Age>"
++"    <Since>2010-08-24T08:30:44</Since>"
++"    <Registered>true</Registered>"
++"    <Addresses>"
++"      <Address type='home'>"
++"        <City>NewYork</City>"
++"      </Address>"
++"      <Address type='business'>"
++"        <City>Boston</City>"
++"      </Address>"
++"    </Addresses>"
++"  </Person>"
++"  <Person>"
++"    <FirstName>Robert</FirstName>"
++"    <LastName>DeNiro</LastName>"
++"    <Age>43</Age>"
++"    <Since>2008-02-17T14:56:21</Since>"
++"    <Registered>false</Registered>"
++"    <Addresses>"
++"      <Address type='home'>"
++"        <City>Miami</City>"
++"      </Address>"
++"      <Address type='business'>"
++"        <City>Orlando</City>"
++"      </Address>"
++"    </Addresses>"
++"  </Person>"
++"</Persons>";
+var doc:DOMDocument = DOMUtil.createDocument()
+doc.setXMLString(x)
+return doc}]]></xe:this.createObject>
+				</xe:objectData>
+			</xp:this.data>
+			Script:<br/>
+			<xp:comboBox id="comboBox1">
+				<xp:selectItem itemLabel=""></xp:selectItem>
+				<xp:selectItem itemLabel="var d = new sbt.XmlNavigator(xml); d.stringValues('Persons/*/FirstName')"></xp:selectItem>
+				<xp:selectItem itemLabel="var d = new sbt.XmlNavigator(xml); d.stringValues('Persons/Person/FirstName')"></xp:selectItem>
+				<xp:selectItem itemLabel="var d = new sbt.XmlNavigator(xml); d.intValues('Persons/Person/Age')"></xp:selectItem>
+				<xp:selectItem itemLabel="var d = new sbt.XmlNavigator(xml); d.longValues('Persons/Person/Age')"></xp:selectItem>
+				<xp:selectItem itemLabel="var d = new sbt.XmlNavigator(xml); d.doubleValues('Persons/Person/Age')"></xp:selectItem>
+				<xp:selectItem itemLabel="var d = new sbt.XmlNavigator(xml); d.booleanValues('Persons/Person/Registered')"></xp:selectItem>
+				<xp:selectItem itemLabel="var d = new sbt.XmlNavigator(xml); d.dateValues('Persons/Person/Since')"></xp:selectItem>
+				<xp:selectItem itemLabel="var d = new sbt.XmlNavigator(xml); d.stringValues('Persons/Person/Addresses/Address/City')"></xp:selectItem>
+				<xp:selectItem itemLabel="var d = new sbt.XmlNavigator(xml); d.stringValues('Persons/Person/Addresses/Address/@type')"></xp:selectItem>
+				<xp:selectItem itemLabel="var d = new sbt.XmlNavigator(xml); d.stringValues('//FirstName')"></xp:selectItem>
+				<xp:selectItem itemLabel="var d = new sbt.XmlNavigator(xml); d.stringValues('Persons//FirstName')"></xp:selectItem>
+				<xp:selectItem itemLabel="var d = new sbt.XmlNavigator(xml); d.stringValues('//*')"></xp:selectItem>
+				<xp:selectItem itemLabel="var d = new sbt.XmlNavigator(xml); var d2=d.get('Persons/Person/Addresses'); d2.stringValues('Address/City')"></xp:selectItem>
+				<xp:selectItem itemLabel="var d = new sbt.XmlNavigator(xml); var d2=d.get('Persons/Person/Addresses/Address').get(1); d2.stringValues('City')"></xp:selectItem>
+				<xp:selectItem itemLabel="var d = new sbt.XmlNavigator(xml); d.get('Persons/Person').get(1).get('Addresses/Address').get(1).stringValues('City')"></xp:selectItem>
+				<xp:selectItem itemLabel="var d = new sbt.XmlNavigator(xml); d.get('Persons/Person/Addresses/Address').selectEq('@type','home').stringValues('City')"></xp:selectItem>
+				<xp:selectItem itemLabel="var d = new sbt.XmlNavigator(xml); d.get('Persons//Address').selectEq('@type','business').stringValues('City')"></xp:selectItem>
+				<xp:eventHandler event="onchange" submit="true"
+					refreshMode="partial">
+				</xp:eventHandler></xp:comboBox>
+			<hr/>
+			Result:<br/>
+			<xp:text escape="true" id="computedField2" tagName="pre">
+				<xp:this.value><![CDATA[#{javascript:var s = getComponent('comboBox1').getValue();
+if(s) {
+	eval(s)
+}}]]></xp:this.value>
+			</xp:text>
+			<hr/>
+			XML:
+			<xp:text escape="true" id="computedField1"
+				value="#{javascript:xml.getXMLString(false)}" tagName="pre">
+			</xp:text>
+			<xp:eventHandler event="onClientLoad" submit="true"
+				refreshMode="partial" refreshId="main">
+			</xp:eventHandler></xp:panel>
+	</xc:OneUILayout>
+</xp:view>

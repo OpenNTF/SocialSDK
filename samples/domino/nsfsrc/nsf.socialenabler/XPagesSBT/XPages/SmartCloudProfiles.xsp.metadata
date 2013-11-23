@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="80257B9C00399D4F" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="192" sequence="7" unid="CD22124AD503F32D80257B9C0039AC5A">
+<created><datetime dst="true">20130702T112956,74+01</datetime></created>
+<modified><datetime dst="true">20130702T113125,06+01</datetime></modified>
+<revised><datetime dst="true">20130702T113125,05+01</datetime></revised>
+<lastaccessed><datetime dst="true">20130702T113125,06+01</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20130702T112956,97+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=A Admin/O=ibm</name></updatedby>
+<wassignedby><name>CN=A Admin/O=ibm</name></wassignedby>
+<item name="$Flags"><text>gC~4K</text></item>
+<item name="$TITLE"><text>SmartCloudProfiles.xsp</text></item>
+
+
+<item name="$FileNames" sign="true"><text>SmartCloudProfiles.xsp</text></item>
+<item name="$DesignerVersion"><text>8.5</text></item>
+
+
+
+
+</note>

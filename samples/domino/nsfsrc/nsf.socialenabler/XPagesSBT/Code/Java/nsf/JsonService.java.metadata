@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="1.0" replicaid="80257C2700415633" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="2e6" sequence="2" unid="9CD94C9E35AEAF5C80257C24005ADB67">
+<created><datetime>20131115T163224,07+00</datetime></created>
+<modified><datetime>20131118T115342,85+00</datetime></modified>
+<revised><datetime>20131115T163224,15+00</datetime></revised>
+<lastaccessed><datetime>20131118T115342,85+00</datetime></lastaccessed>
+<addedtofile><datetime>20131118T115342,85+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=A Admin/O=ibm</name></updatedby>
+<wassignedby><name>CN=A Admin/O=ibm</name></wassignedby>
+<item name="$Flags"><text>34567Cg~[</text></item>
+<item name="$TITLE"><text>nsf/JsonService.java</text></item>
+
+
+
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+
+
+<item name="$FileNames" sign="true"><text>nsf/JsonService.java</text></item></note>

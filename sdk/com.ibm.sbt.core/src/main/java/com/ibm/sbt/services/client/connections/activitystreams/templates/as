@@ -1,0 +1,16 @@
+{
+   "published" : "${published}", 
+   "url" : "${url}", 
+   ${target}, 
+   ${provider}, 
+   ${generator}, 
+   ${actor}, 
+   "verb" : "${verb}", 
+   "title" : "${title}", 
+   "content" : "${content}", 
+   "updated" : "${updated}", 
+   ${object}, 
+   "id" : ${id}, 
+   ${to}, 
+   ${connections}
+}

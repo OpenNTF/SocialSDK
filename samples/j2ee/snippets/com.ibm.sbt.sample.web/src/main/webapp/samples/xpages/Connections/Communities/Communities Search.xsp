@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	
+	<xp:this.afterPageLoad><![CDATA[#{javascript:viewScope.tag="";}]]></xp:this.afterPageLoad>
+	<xp:viewPanel rows="30" id="viewPanel1" var="community">
+		<xp:this.facets>
+			<xp:pager partialRefresh="true" layout="Previous Group Next"
+				xp:key="headerPager" id="pager1">
+			</xp:pager>
+			<xp:viewTitle xp:key="viewTitle" id="viewTitle1" value="My Communities"></xp:viewTitle>
+		</xp:this.facets>
+
+		<xp:this.value><![CDATA[#{javascript:var svc = new com.ibm.sbt.services.client.connections.communities.CommunityService();
+return svc.getMyCommunities();}]]></xp:this.value>
+
+		<xp:viewColumn id="viewColumn8" contentType="html">
+			<xp:this.facets>
+				<xp:viewColumnHeader xp:key="header"
+					id="viewColumnHeader8" value="Logo">
+				</xp:viewColumnHeader>
+			</xp:this.facets>
+			<xp:this.value><![CDATA[#{javascript:var summary = community.getSummary();
+			//print(summary);
+var url = "<img src=\"" + community.getLogoUrl() + "\" title=\"" + summary + "\" width=\"40\" height=\"40\">";
+//print(url);
+return url;
+}]]></xp:this.value>
+		</xp:viewColumn>
+		<xp:viewColumn id="viewColumn1">
+			<xp:this.facets>
+				<xp:viewColumnHeader xp:key="header"
+					id="viewColumnHeader1" value="Community">
+				</xp:viewColumnHeader>
+			</xp:this.facets>
+			<xp:link escape="true"
+				text="#{javascript:community.getTitle()}" id="link1" value="#{javascript:community.getCommunityUrl();}">
+			</xp:link>
+		</xp:viewColumn>
+		<xp:viewColumn id="viewColumn2" style="text-align:right">
+			<xp:this.facets>
+				<xp:viewColumnHeader xp:key="header"
+					id="viewColumnHeader2" value="Member Count">
+				</xp:viewColumnHeader>
+			</xp:this.facets>
+			<xp:link escape="true" id="link2"
+				value="#{javascript:community.getMembersUrl();}">
+				<xp:this.text><![CDATA[#{javascript:var c:Number = community.getMemberCount();
+return c.toPrecision(0);}]]></xp:this.text>
+			</xp:link>
+		</xp:viewColumn>
+
+		
+		
+
+
+		<xp:viewColumn id="viewColumn3">
+			<xp:this.facets>
+				<xp:viewColumnHeader xp:key="header"
+					id="viewColumnHeader3" value="Type">
+				</xp:viewColumnHeader>
+			</xp:this.facets>
+			<xp:this.value><![CDATA[#{javascript://community.getSummary();
+community.getCommunityType();}]]></xp:this.value>
+		</xp:viewColumn>
+		<xp:viewColumn id="viewColumn4" contentType="html">
+			<xp:this.facets>
+				<xp:viewColumnHeader xp:key="header"
+					id="viewColumnHeader4" value="Creator">
+				</xp:viewColumnHeader>
+			</xp:this.facets>
+			<!--			<xp:this.value><![CDATA[#{javascript://return community.getAuthor().getName();-->
+			<!---->
+			<!--}]]></xp:this.value>-->
+
+			<xp:this.value><![CDATA[#{javascript:var uname = community.getAuthor().getName();
+var uid= community.getAuthor().getUserid();
+var ps = new com.ibm.sbt.services.client.connections.profiles.ProfileService();
+var Profile = ps.getProfile(uid);
+var url = "<img src=\"" + Profile.getThumbnailUrl() + "\" title=\"" + uname + "\" width=\"40\" height=\"40\">";
+return url;}]]></xp:this.value>
+			
+		</xp:viewColumn>
+		<xp:viewColumn id="viewColumn5"
+			value="#{javascript:community.getSummary()}">
+			<xp:this.facets>
+				<xp:viewColumnHeader xp:key="header"
+					id="viewColumnHeader5" value="Summary">
+				</xp:viewColumnHeader>
+			</xp:this.facets>
+		</xp:viewColumn>
+
+		<xp:viewColumn id="viewColumn7">
+			<xp:this.facets>
+				<xp:viewColumnHeader xp:key="header"
+					id="viewColumnHeader7" value="Tags">
+				</xp:viewColumnHeader>
+			</xp:this.facets>
+
+			<xp:comboBox id="comboBox1"
+				>
+				<xp:this.style><![CDATA[#{javascript:var tagCount = community.getTags().size();
+if (tagCount==0) {
+	return "display:none";
+} else {
+	return "width:160px"
+}}]]></xp:this.style>
+				<xp:selectItems id="selectItems1">
+					<xp:this.value><![CDATA[#{javascript:community.getTags();}]]></xp:this.value>
+				</xp:selectItems>
+			</xp:comboBox>
+
+		</xp:viewColumn>
+
+		<xp:viewColumn id="viewColumn6">
+			<xp:this.facets>
+				<xp:viewColumnHeader xp:key="header"
+					id="viewColumnHeader6">
+				</xp:viewColumnHeader>
+			</xp:this.facets>
+
+			<xp:button value="Search" id="button1">
+				<xp:this.style><![CDATA[#{javascript:var tagCount = community.getTags().size();
+if (tagCount == 0) {
+	return "display:none"
+}}]]></xp:this.style>
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="partial" refreshId="relevanceContainer">
+					<xp:this.action><![CDATA[#{javascript:var tagPicker = getComponent("comboBox1");
+viewScope.url = community.getCommunityUrl();
+viewScope.tag = tagPicker.getValue();
+print(viewScope.tag);
+}]]></xp:this.action>
+				</xp:eventHandler></xp:button>
+		</xp:viewColumn>
+	</xp:viewPanel>
+	
+<xp:panel id="relevanceContainer">
+<xp:table style="width:100%">
+			<xp:tr>
+
+				<xp:td style="width:20%"></xp:td>
+				<xp:td>
+					<xp:text escape="true" id="computedField3"
+						value="Other Relevant Communities">
+						<xp:this.style><![CDATA[#{javascript:if (viewScope.tag=="") {
+	return "display:none";
+} else {
+	return "font-size:14pt;color:rgb(255,128,255)";
+}}]]></xp:this.style>
+					</xp:text>
+				</xp:td>
+				<xp:td style="width:20%"></xp:td>
+			</xp:tr>
+</xp:table>
+<xp:repeat id="repeat1" rows="10"
+							var="rc">
+							<xp:this.value>
+	<![CDATA[#{javascript:
+	var svc = new com.ibm.sbt.services.client.connections.communities.CommunityService();
+	print("repeat tag=" + viewScope.tag);
+	if (viewScope.tag!="") { 
+		var relevantCommunties = svc.getPublicCommunities(viewScope.tag);
+		return relevantCommunties;
+	} else {
+		return null;
+	}
+}]]></xp:this.value>
+							<xp:div>
+								<xp:table style="width:700px">
+									<xp:tr>
+										<xp:this.style><![CDATA[#{javascript:if (rc.getCommunityUrl()==viewScope.url) {
+	return "display:none";
+}}]]></xp:this.style>
+										<xp:td style="width:300px">
+											<xp:text escape="true"
+												id="computedField1" value="#{javascript:rc.getTitle();}">
+											</xp:text>
+										</xp:td>
+										<xp:td style="width:400px">
+											
+											<xp:link escape="true"
+												text="#{javascript:rc.getSummary(); }" id="link3"
+												value="#{javascript:rc.getCommunityUrl(); }">
+											</xp:link>
+										</xp:td>
+									</xp:tr>
+								</xp:table>
+							</xp:div>
+						</xp:repeat>
+</xp:panel>
+
+</xp:view>

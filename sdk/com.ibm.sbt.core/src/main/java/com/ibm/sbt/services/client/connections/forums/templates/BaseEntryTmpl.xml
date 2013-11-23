@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app"  xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:snx="http://www.ibm.com/xmlns/prod/sn">
+${getTitle}
+${getContent}
+${getCategory}
+${getReference}
+${getFlags}
+${getTags}
+</entry>
+

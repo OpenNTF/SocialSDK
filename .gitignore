@@ -13,6 +13,8 @@ target/
 *~.nib
 local.properties
 #.settings/
+#*.prefs
+.apt_generated
 .loadpath
 
 # External tool builders
@@ -21,7 +23,6 @@ local.properties
 # Locally stored "Eclipse launch configurations"
 *.launch
 
-*.prefs
 
 ############
 ## Windows

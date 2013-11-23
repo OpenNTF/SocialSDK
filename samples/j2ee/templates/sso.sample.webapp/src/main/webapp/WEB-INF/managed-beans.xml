@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<faces-config>
+	<!-- Credential store physical implementation -->
+	<managed-bean>
+		<managed-bean-name>CredStore</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.security.credential.store.MemoryStore</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+
+	<!--  
+		Password store based on DBCredentialStore
+	-->
+	<managed-bean>
+		<managed-bean-name>CredStoreDB</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.security.credential.store.DBCredentialStore</managed-bean-class>
+		<!--  
+			Managed Property jdbcDriverClass is required to provide the driver class name, when jndi is not being used.
+			The Property can be provided in a way, mentioned below.
+		-->
+		<!-- <managed-property> 
+			<property-name>jdbcDriverClass</property-name> 
+			<value>org.apache.derby.jdbc.EmbeddedDriver</value> 
+		</managed-property> -->
+		<managed-property> 
+			<property-name>jndiName</property-name> 
+			<value>jdbc/ibmsbt-dbtokenstore</value> 
+		</managed-property>
+		<managed-property> 
+			<property-name>tableName</property-name> 
+			<value>SBTKREP</value> 
+		</managed-property>
+		<managed-bean-scope>application</managed-bean-scope>
+		<!-- Fixed OAuth Application parameters -->
+	</managed-bean>
+	
+	<!-- Default Environment -->
+	<managed-bean>
+		<managed-bean-name>defaultEnvironment</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.jslibrary.SBTEnvironment</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+		<managed-property>
+			<property-name>endpoints</property-name>
+			<value>connections,w3connections</value>
+		</managed-property>
+		<managed-property>
+		    <property-name>runtimes</property-name>
+		    <value>connections</value>
+		</managed-property>
+	</managed-bean>
+	
+	<!-- Connections SSO -->	
+	<managed-bean>
+		<managed-bean-name>connections</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.services.endpoints.ConnectionsSSOEndpoint</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>url</property-name>
+			<value>https://ralbz3166.raleigh.ibm.com</value> 
+		</managed-property>
+		<!-- Trust the connection -->
+		<managed-property>
+			<property-name>forceTrustSSLCertificate</property-name>
+			<value>true</value>
+		</managed-property>
+		<managed-property>
+		<property-name>serviceMaps</property-name>
+		<!-- <value>communities:community/groups</value>  -->
+		</managed-property>
+	</managed-bean>
+
+</faces-config>

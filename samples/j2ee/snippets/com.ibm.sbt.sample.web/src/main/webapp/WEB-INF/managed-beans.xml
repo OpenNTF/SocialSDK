@@ -1,0 +1,722 @@
+<?xml version="1.0"?>
+<faces-config>
+	<!-- Credential store physical implementation -->
+	<managed-bean>
+		<managed-bean-name>CredStore</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.security.credential.store.MemoryStore</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+
+	<!--  
+		Password store based on DBCredentialStore
+	-->
+	<managed-bean>
+		<managed-bean-name>CredStoreDB</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.security.credential.store.DBCredentialStore</managed-bean-class>
+		<!--  
+			Managed Property jdbcDriverClass is required to provide the driver class name, when jndi is not being used.
+			The Property can be provided in a way, mentioned below.
+		-->
+		<!-- <managed-property> 
+			<property-name>jdbcDriverClass</property-name> 
+			<value>org.apache.derby.jdbc.EmbeddedDriver</value> 
+		</managed-property> -->
+		<managed-property> 
+			<property-name>jndiName</property-name> 
+			<value>jdbc/ibmsbt-dbtokenstore</value> 
+		</managed-property>
+		<managed-property> 
+			<property-name>tableName</property-name> 
+			<value>SBTKREP</value> 
+		</managed-property>
+		<managed-bean-scope>application</managed-bean-scope>
+		<!-- Fixed OAuth Application parameters -->
+	</managed-bean>
+	
+	<!-- Default Environment -->
+	<managed-bean>
+		<managed-bean-name>defaultEnvironment</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.jslibrary.SBTEnvironment</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+		<managed-property>
+			<property-name>endpoints</property-name>
+			<value>connections,connectionsOA2,w3connections,smartcloud,smartcloudOA2,smartcloudBasic,smartcloudForm,domino,acmeAir,conAcmeApp,connectionsSSO,dropbox,twitter</value>
+			<!-- <value>connections,connectionsOA2,smartcloud,smartcloudOA2,domino,sametime</value> -->
+		</managed-property>
+		<managed-property>
+			<property-name>properties</property-name>
+			<value>sample.email1,sample.email2</value>
+		</managed-property>
+		<managed-property>
+		    <property-name>runtimes</property-name>
+		    <value>connections,smartcloud,domino,twitter,dropbox</value>
+		</managed-property>
+	</managed-bean>
+	
+	<!-- Connections Environment -->
+    <managed-bean>
+        <managed-bean-name>connectionsEnvironment</managed-bean-name>
+        <managed-bean-class>com.ibm.sbt.jslibrary.SBTEnvironment</managed-bean-class>
+        <managed-bean-scope>application</managed-bean-scope>
+        <managed-property>
+            <property-name>endpoints</property-name>
+            <value>connections:connections,w3connections,connectionsOA2,connectionsSSO</value>
+        </managed-property>
+        <managed-property>
+            <property-name>properties</property-name>
+            <value>sample.email1,sample.email2</value>
+        </managed-property>
+        <managed-property>
+            <property-name>runtimes</property-name>
+            <value>connections</value>
+        </managed-property>
+    </managed-bean>
+	
+	<!-- SmartCloud Environment -->
+	<managed-bean>
+		<managed-bean-name>smartcloudEnvironment</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.jslibrary.SBTEnvironment</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+		<managed-property>
+			<property-name>endpoints</property-name>
+			<value>smartcloud:connections,smartcloud</value>
+		</managed-property>
+		<managed-property>
+			<property-name>properties</property-name>
+			<value>sample.email1,sample.email2</value>
+		</managed-property>
+		<managed-property>
+            <property-name>runtimes</property-name>
+            <value>smartcloud</value>
+        </managed-property>
+	</managed-bean>
+	
+	<!-- Twitter, Dropbox... Environment -->
+    <managed-bean>
+        <managed-bean-name>thirdPartyAPIsEnvironment</managed-bean-name>
+        <managed-bean-class>com.ibm.sbt.jslibrary.SBTEnvironment</managed-bean-class>
+        <managed-bean-scope>application</managed-bean-scope>
+        <managed-property>
+            <property-name>endpoints</property-name>
+            <value>twitter,dropbox</value>
+        </managed-property>
+        <managed-property>
+            <property-name>runtimes</property-name>
+            <value>twitter,dropbox</value>
+        </managed-property>
+    </managed-bean>
+    
+    <!-- Domino Environment -->
+    <managed-bean>
+        <managed-bean-name>dominoEnvironment</managed-bean-name>
+        <managed-bean-class>com.ibm.sbt.jslibrary.SBTEnvironment</managed-bean-class>
+        <managed-bean-scope>application</managed-bean-scope>
+        <managed-property>
+            <property-name>endpoints</property-name>
+            <value>domino</value>
+        </managed-property>
+        <managed-property>
+            <property-name>runtimes</property-name>
+            <value>domino</value>
+        </managed-property>
+    </managed-bean>
+	
+	<!-- SmartCloud Basic Authentication Environment -->
+	<managed-bean>
+		<managed-bean-name>smartcloudBasicEnvironment</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.jslibrary.SBTEnvironment</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+		<managed-property>
+			<property-name>endpoints</property-name>
+			<value>smartcloudBasic:connections</value>
+		</managed-property>
+		<managed-property>
+            <property-name>runtimes</property-name>
+            <value>smartcloud</value>
+        </managed-property>
+	</managed-bean>
+	
+    <!--  OpenSocial Environment -->
+    <managed-bean>
+        <managed-bean-name>openSocial</managed-bean-name>
+        <managed-bean-class>com.ibm.sbt.jslibrary.SBTEnvironment</managed-bean-class>
+        <managed-bean-scope>application</managed-bean-scope>
+        <managed-property>
+            <property-name>endpoints</property-name>
+            <value>connectionsOS:connections,connectionsOSOA:connectionsOA2</value>
+        </managed-property>
+    </managed-bean>
+	
+	<!-- Connections Basic -->
+	<managed-bean>
+		<managed-bean-name>connections</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.services.endpoints.ConnectionsBasicEndpoint</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>url</property-name>
+			<value>%{connections.url}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>apiVersion</property-name>
+			<value>%{connections.apiVersion}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>credentialStore</property-name>
+			<value>CredStore</value>
+		</managed-property>
+		<managed-property>
+			<property-name>authenticationPage</property-name>
+			<value>/sbt/loginForm.html?endpoint=connections</value>
+		</managed-property>
+		<managed-property>
+			<property-name>authenticationService</property-name>
+			<value>communities/service/atom/communities/my</value>
+		</managed-property>
+		<!-- Trust the connection -->
+		<managed-property>
+			<property-name>forceTrustSSLCertificate</property-name>
+			<value>true</value>
+		</managed-property>
+	</managed-bean>
+	
+	<!-- W3 Connections Basic -->
+    <managed-bean>
+        <managed-bean-name>w3connections</managed-bean-name>
+        <managed-bean-class>com.ibm.sbt.services.endpoints.ConnectionsBasicEndpoint</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>url</property-name>
+            <value>%{w3connections.url}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>apiVersion</property-name>
+            <value>%{w3connections.apiVersion}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>credentialStore</property-name>
+            <value>CredStore</value>
+        </managed-property>
+        <managed-property>
+            <property-name>authenticationPage</property-name>
+            <value>/sbt/loginForm.html?endpoint=connections</value>
+        </managed-property>
+        <managed-property>
+            <property-name>authenticationService</property-name>
+            <value>communities/service/atom/communities/my</value>
+        </managed-property>
+        <!-- Trust the connection -->
+        <managed-property>
+            <property-name>forceTrustSSLCertificate</property-name>
+            <value>true</value>
+        </managed-property>
+        <!-- Add any custom service mappings below -->
+        <managed-property>
+            <property-name>serviceMaps</property-name>
+            <value>%{w3connections.contextRootMap}</value>
+        </managed-property>
+    </managed-bean>
+	
+	<!-- Connections SSO -->	
+	<managed-bean>
+		<managed-bean-name>connectionsSSO</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.services.endpoints.ConnectionsSSOEndpoint</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>url</property-name>
+			<value>%{sso.url}</value>
+		</managed-property>
+		<!-- Trust the connection -->
+		<managed-property>
+			<property-name>forceTrustSSLCertificate</property-name>
+			<value>true</value>
+		</managed-property>
+	</managed-bean>
+
+	<!-- Connections OAuth 2.0 -->
+	<managed-bean>
+		<managed-bean-name>connectionsOA2</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.services.endpoints.ConnectionsOAuth2Endpoint</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<!-- Endpoint URL -->
+		<managed-property>
+			<property-name>url</property-name>
+			<value>%{connectionsOA2.url}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>apiVersion</property-name>
+			<value>%{connectionsOA2.apiVersion}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>serviceName</property-name>
+			<value>%{connectionsOA2.serviceName}</value>
+		</managed-property>
+		<!-- OAuth parameters -->
+		<managed-property>
+			<property-name>appId</property-name>
+			<value>%{connectionsOA2.appId}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>consumerKey</property-name>
+			<value>%{connectionsOA2.consumerKey}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>consumerSecret</property-name>
+			<value>%{connectionsOA2.consumerSecret}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>authorizationURL</property-name>
+			<value>%{connectionsOA2.authorizationURL}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>accessTokenURL</property-name>
+			<value>%{connectionsOA2.accessTokenURL}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>forceTrustSSLCertificate</property-name>
+			<value>true</value>
+		</managed-property>
+	</managed-bean>
+
+	<!-- Connections OpenSocial -->
+    <managed-bean>
+        <managed-bean-name>connectionsOS</managed-bean-name>
+        <managed-bean-class>com.ibm.sbt.services.endpoints.GadgetEndpoint</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>url</property-name>
+            <value>%{connections.url}</value>
+        </managed-property>
+    </managed-bean>
+        
+	<!-- Connections OpenSocial OAuth -->
+    <managed-bean>
+        <managed-bean-name>connectionsOSOA</managed-bean-name>
+        <managed-bean-class>com.ibm.sbt.services.endpoints.GadgetOAuthEndpoint</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>url</property-name>
+            <value>%{connections.url}</value>
+        </managed-property>
+		<managed-property>
+			<property-name>apiVersion</property-name>
+			<value>%{connections.apiVersion}</value>
+		</managed-property>
+    </managed-bean>
+        
+	<!--  SmartCloud OAuth 1.0 -->	
+	<managed-bean>
+		<managed-bean-name>smartcloud</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.services.endpoints.SmartCloudOAuthEndpoint</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<!-- Endpoint URL -->
+		<managed-property>
+			<property-name>url</property-name>
+			<value>%{smartcloud.url}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>apiVersion</property-name>
+			<value>%{smartcloud.apiVersion}</value>
+		</managed-property>
+		<!-- Trust the connection -->
+		<managed-property>
+			<property-name>forceTrustSSLCertificate</property-name>
+			<value>true</value>
+		</managed-property>
+		<!-- Fixed values for the registered application -->
+		<managed-property>
+			<property-name>consumerKey</property-name>
+			<value>%{smartcloud.consumerKey}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>consumerSecret</property-name>
+			<value>%{smartcloud.consumerSecret}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>requestTokenURL</property-name>
+			<value>%{smartcloud.requestTokenURL}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>authorizationURL</property-name>
+			<value>%{smartcloud.authorizationURL}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>accessTokenURL</property-name>
+			<value>%{smartcloud.accessTokenURL}</value>
+		</managed-property>	
+		<managed-property>
+			<property-name>signatureMethod</property-name>
+			<!-- <value>HMAC-SHA1</value> -->
+			<value>PLAINTEXT</value>
+		</managed-property>
+		<!-- Access to the credential store -->
+		<managed-property>
+			<property-name>credentialStore</property-name>
+			<value>CredStore</value>
+		</managed-property>
+		<managed-property>
+			<property-name>serviceName</property-name>
+			<value>smartcloud</value>
+		</managed-property>
+		<managed-property>
+			<property-name>appId</property-name>
+			<value>%{smartcloud.appId}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>authenticationService</property-name>
+			<value>communities/service/atom/communities/my</value>
+		</managed-property>
+	</managed-bean>
+	
+	<!--  SmartCloud OAuth 2.0 -->	
+	<managed-bean>
+		<managed-bean-name>smartcloudOA2</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.services.endpoints.SmartCloudOAuth2Endpoint</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<!-- Endpoint URL -->
+		<managed-property>
+			<property-name>url</property-name>
+			<value>%{smartcloudOA2.url}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>apiVersion</property-name>
+			<value>%{smartcloudOA2.apiVersion}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>serviceName</property-name>
+			<value>%{smartcloudOA2.serviceName}</value>
+		</managed-property>
+		<!-- OAuth parameters -->
+		<managed-property>
+			<property-name>appId</property-name>
+			<value>%{smartcloudOA2.appId}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>consumerSecret</property-name>
+			<value>%{smartcloudOA2.consumerSecret}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>consumerKey</property-name>
+			<value>%{smartcloudOA2.consumerKey}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>authorizationURL</property-name>
+			<value>%{smartcloudOA2.authorizationURL}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>accessTokenURL</property-name>
+			<value>%{smartcloudOA2.accessTokenURL}</value>
+		</managed-property>	
+				<!-- Trust the connection -->
+		<managed-property>
+			<property-name>forceTrustSSLCertificate</property-name>
+			<value>true</value>
+		</managed-property>
+		<!-- Access to the credential store -->
+		<managed-property>
+			<property-name>credentialStore</property-name>
+			<value>CredStore</value>
+		</managed-property>
+	</managed-bean>
+	
+	<!-- SmartCloud Connections -->
+	<managed-bean>
+		<managed-bean-name>smartcloudBasic</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.services.endpoints.SmartCloudBasicEndpoint</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>url</property-name>
+			<value>%{smartcloud.basic.url}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>apiVersion</property-name>
+			<value>%{smartcloud.basic.apiVersion}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>credentialStore</property-name>
+			<value>CredStore</value>
+		</managed-property>
+		<managed-property>
+			<property-name>authenticationPage</property-name>
+			<value>/sbt/loginForm.html?endpoint=smartcloudBasic</value>
+		</managed-property>
+		<managed-property>
+			<property-name>authenticationService</property-name>
+			<value>communities/service/atom/communities/my</value>
+		</managed-property>
+		<!-- Trust the connection -->
+		<managed-property>
+			<property-name>forceTrustSSLCertificate</property-name>
+			<value>true</value>
+		</managed-property>
+	</managed-bean>	
+	
+	
+		<!-- SmartCloud FormBased endpoint -->
+	<managed-bean>
+		<managed-bean-name>smartcloudForm</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.services.endpoints.SmartCloudFormEndpoint</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>url</property-name>
+			<value>%{smartcloud.form.url}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>credentialStore</property-name>
+			<value>CredStore</value>
+		</managed-property> 
+		<managed-property>
+			<property-name>authenticationPage</property-name>
+			<value>/sbt/loginForm.html?endpoint=smartcloudForm</value>
+		</managed-property>
+		<managed-property>
+			<property-name>authenticationService</property-name>
+			<value>communities/service/atom/communities/my</value>
+		</managed-property>
+		<!-- Trust the connection -->
+		<managed-property>
+			<property-name>forceTrustSSLCertificate</property-name>
+			<value>true</value>
+		</managed-property>
+	</managed-bean>	
+	
+	<!-- Domino -->	
+	<managed-bean>
+		<managed-bean-name>domino</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.services.endpoints.DominoBasicEndpoint</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>url</property-name>
+			<value>%{domino.url}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>credentialStore</property-name>
+			<value>CredStore</value>
+		</managed-property>
+		<managed-property>
+			<property-name>authenticationPage</property-name>
+			<value></value>
+		</managed-property>
+		<managed-property>
+			<property-name>authenticationService</property-name>
+			<value></value>
+		</managed-property>
+		<!-- Trust the connection -->
+		<managed-property>
+			<property-name>forceTrustSSLCertificate</property-name>
+			<value>true</value>
+		</managed-property>
+	</managed-bean>
+
+    <!-- Acme Airlines -->
+    <managed-bean>
+        <managed-bean-name>acmeAir</managed-bean-name>
+        <managed-bean-class>
+            com.ibm.sbt.services.endpoints.AnonymousEndpoint
+        </managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>url</property-name>
+            <value>%{acme.url}</value>
+        </managed-property>
+    </managed-bean>
+    
+    <!-- 
+    Connections Basic Auth Endpoint
+    This endpoint is only used for the purpose of posting an activity stream entry
+    to streams other than the current user or if the app needs to post to the activity
+    stream from a class on the server where using 3-legged OAuth is not possible.  If
+    you can use 3-legged OAuth and you are using Connections 4.x please use OAuth it
+    is far more secure than basic auth.
+     -->
+    <managed-bean>
+        <managed-bean-name>conAcmeApp</managed-bean-name>
+        <managed-bean-class>
+            com.ibm.sbt.services.endpoints.ConnectionsBasicEndpoint
+        </managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>url</property-name>
+            <value>%{connections.url}</value>
+        </managed-property>
+        <managed-property>
+			<property-name>credentialStore</property-name>
+			<value>CredStore</value>
+        </managed-property>
+        <managed-property>
+            <!-- The user specified here must has the necessary privileges to post to any users activity stream -->
+            <!-- See  http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Distributing_events&content=pdcontent -->
+            <property-name>user</property-name>
+            <value>%{connections.app.as.user}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>password</property-name>
+            <value>%{connections.app.as.password}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>authenticationService</property-name>
+            <value>communities/service/atom/communities/my</value>
+        </managed-property>
+        <!-- Trust the connection -->
+        <managed-property>
+            <property-name>forceTrustSSLCertificate</property-name>
+            <value>true</value>
+        </managed-property>
+    </managed-bean>
+
+  	<!-- Mail Session Factory for the Email Service -->
+	<managed-bean>
+		<managed-bean-name>ibmsbt-sessionfactory</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.services.client.email.MailSessionFactory
+		</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+		<managed-property>
+			<property-name>auth</property-name>
+			<value>%{mail.auth}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>mailSmtpHost</property-name>
+			<value>%{mail.smtp.host}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>mailSmtpAuth</property-name>
+			<value>%{mail.smtp.auth}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>mailUser</property-name>
+			<value>%{mail.user}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>mailPassword</property-name>
+			<value>%{mail.password}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>mailFrom</property-name>
+			<value>%{mail.from}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>mailDebug</property-name>
+			<value>%{mail.debug}</value>
+		</managed-property>
+	</managed-bean>
+  
+  	<!-- Twitter -->
+	<!-- Fixed OAuth Application parameters -->
+	<managed-bean>
+		<managed-bean-name>twitter</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.services.endpoints.TwitterOAuthEndpoint</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+		<!-- Endpoint URL -->
+		<managed-property>
+			<property-name>url</property-name>
+			<value>%{name=twitter.url|value=https://api.twitter.com}</value>
+		</managed-property>
+
+		<!-- Trust the connection -->
+		<managed-property>
+			<property-name>forceTrustSSLCertificate</property-name>
+			<value>true</value>
+		</managed-property>
+		
+		<!-- Fixed values for the registered application -->
+		<managed-property>
+			<property-name>consumerKey</property-name>
+			<value>%{twitter.consumerKey}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>consumerSecret</property-name>
+			<value>%{twitter.consumerSecret}</value>
+		</managed-property>
+		<!--  Access Token obtained from the Twitter Application. This is required for authorizing the API calls  -->
+		<managed-property>
+			<property-name>applicationAccessToken</property-name>
+			<value>%{twitter.applicationAccessToken}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>requestTokenURL</property-name>
+			<value>%{name=twitter.requestTokenURL|value=https://api.twitter.com/oauth/request_token}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>authorizationURL</property-name>
+			<value>%{name=twitter.authorizeURL|value=https://api.twitter.com/oauth/authorize}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>accessTokenURL</property-name>
+			<value>%{name=twitter.accessTokenURL|value=https://api.twitter.com/oauth/access_token}</value>
+		</managed-property>		
+		<managed-property>
+			<property-name>signatureMethod</property-name>
+			<value>HMAC-SHA1</value>
+		</managed-property>
+
+		<!-- Access to the token store -->
+		<managed-property>
+			<property-name>credentialStore</property-name>
+			<value>CredStore</value>
+		</managed-property>
+		<managed-property>
+			<property-name>serviceName</property-name>
+			<value>Twitter</value>
+		</managed-property>
+		<managed-property>
+			<property-name>appId</property-name>
+			<value>%{twitter.appId}</value>
+		</managed-property>
+	</managed-bean>
+	
+	<!-- Dropbox -->
+	
+	<!-- Dropbox oauth endpoint -->
+	<managed-bean>
+		<managed-bean-name>dropbox</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.services.endpoints.DropBoxOAuthEndpoint</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<!-- Endpoint URL -->
+		<managed-property>
+			<property-name>url</property-name>
+			<value>%{name=dropbox.url|value=https://api.dropbox.com}</value>
+		</managed-property>
+
+		<!-- Trust the connection -->
+		<managed-property>
+			<property-name>forceTrustSSLCertificate</property-name>
+			<value>true</value>
+		</managed-property>
+		<managed-property>
+			<property-name>consumerKey</property-name>
+			<value>%{dropbox.consumerKey}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>consumerSecret</property-name>
+			<value>%{dropbox.consumerSecret}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>requestTokenURL</property-name>
+			<value>%{name=dropbox.requestTokenURL|value=https://api.dropbox.com/1/oauth/request_token}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>authorizationURL</property-name>
+			<value>%{name=dropbox.authorizeURL|value=https://www.dropbox.com/1/oauth/authorize}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>accessTokenURL</property-name>
+			<value>%{name=dropbox.accessTokenURL|value=https://api.dropbox.com/1/oauth/access_token}</value>
+		</managed-property>		
+		<managed-property>
+			<property-name>signatureMethod</property-name>
+			<value>PLAINTEXT</value>
+		</managed-property>
+		<managed-property>
+			<property-name>credentialStore</property-name>
+			<value>CredStore</value>
+		</managed-property>
+		<managed-property>
+			<property-name>serviceName</property-name>
+			<value>Dropbox</value>
+		</managed-property>
+		<managed-property>
+			<property-name>appId</property-name>
+			<value>%{dropbox.appId}</value>
+		</managed-property>
+	</managed-bean>
+  
+</faces-config>

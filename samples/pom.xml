@@ -30,9 +30,9 @@
 		<version>2.0.0-SNAPSHOT</version>
 	</parent>
 	<modules>
+		<module>com.ibm.sbt.samples.commons</module>
 		<module>j2ee</module>
 		<module>java</module>
-
 	</modules>
 
 </project>

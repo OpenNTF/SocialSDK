@@ -31,14 +31,14 @@ public class BasicMainWindow extends BaseServiceTest {
     @Test
     public void testBasicAutoDetect() {
         setAuthType(AuthType.AUTO_DETECT, true);
-        boolean result = checkExpected("Authentication_API_Basic_MainWindow", "Successfully logged in");
+        boolean result = checkExpected("Authentication_API_BasicMainWindow", "Successfully logged in");
         assertTrue(getExpectedErrorMsg(), result);
     }
 
     @Test
     public void testBasic() {
         setAuthType(AuthType.BASIC, true);
-        boolean result = checkExpected("Authentication_API_Basic_MainWindow", "Successfully logged in");
+        boolean result = checkExpected("Authentication_API_BasicMainWindow", "Successfully logged in");
         assertTrue(getExpectedErrorMsg(), result);
     }
 

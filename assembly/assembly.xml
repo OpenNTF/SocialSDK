@@ -40,7 +40,6 @@
 		<moduleSet>
 			<useAllReactorProjects>true</useAllReactorProjects>
 			<includes>
-				<include>com.ibm.sbt:com.ibm.sbt.web</include>
 				<include>com.ibm.sbt:sbt.dojo180</include>
 				<include>com.ibm.sbt:sbt.jquery182</include>
 				<include>com.ibm.sbt:sbt.bootstrap211</include>
@@ -48,6 +47,17 @@
 			<binaries>
 				<outputDirectory>sbtsdk/redist/war</outputDirectory>
 				<outputFileNameMapping>${module.artifactId}.war</outputFileNameMapping>
+				<unpack>false</unpack>
+			</binaries>
+		</moduleSet>
+		<moduleSet>
+			<useAllReactorProjects>true</useAllReactorProjects>
+			<includes>
+				<include>com.ibm.sbt:com.ibm.sbt.web</include>
+			</includes>
+			<binaries>
+				<outputDirectory>sbtsdk/redist/war</outputDirectory>
+				<outputFileNameMapping>sbt.war</outputFileNameMapping>
 				<unpack>false</unpack>
 			</binaries>
 		</moduleSet>

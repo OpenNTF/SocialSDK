@@ -10,7 +10,7 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/com.ibm.commons.xml"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/com.ibm.commons.runtime"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/com.ibm.sbt.core"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/com.ibm.sbt.playground"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/com.ibm.sbt.samples.commons"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6">
 		<attributes>

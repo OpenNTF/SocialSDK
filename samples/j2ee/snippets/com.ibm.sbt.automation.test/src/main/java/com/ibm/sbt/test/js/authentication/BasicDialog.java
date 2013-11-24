@@ -31,14 +31,14 @@ public class BasicDialog extends BaseServiceTest {
     @Test
     public void testBasicAutoDetect() {
         setAuthType(AuthType.AUTO_DETECT, true);
-        boolean result = checkExpected("Authentication_API_Basic_Dialog", "Successfully logged in");
+        boolean result = checkExpected("Authentication_API_BasicDialog", "Successfully logged in");
         assertTrue(getExpectedErrorMsg(), result);
     }
 
     @Test
     public void testBasic() {
         setAuthType(AuthType.BASIC, true);
-        boolean result = checkExpected("Authentication_API_Basic_Dialog", "Successfully logged in");
+        boolean result = checkExpected("Authentication_API_BasicDialog", "Successfully logged in");
         assertTrue(getExpectedErrorMsg(), result);
     }
 

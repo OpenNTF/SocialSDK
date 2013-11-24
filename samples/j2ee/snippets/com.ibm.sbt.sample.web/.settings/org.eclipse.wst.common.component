@@ -14,6 +14,9 @@
         <dependent-module archiveName="com.ibm.commons.xml-2.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/com.ibm.commons.xml/com.ibm.commons.xml">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="com.ibm.sbt.samples.commons-2.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/com.ibm.sbt.samples.commons/com.ibm.sbt.samples.commons">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="java-output-path" value="/com.ibm.sbt.sample.web/target/classes"/>
         <property name="context-root" value="sbt.sample.web"/>
     </wb-module>

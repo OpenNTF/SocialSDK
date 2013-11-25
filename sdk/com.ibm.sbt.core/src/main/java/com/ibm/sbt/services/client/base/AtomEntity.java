@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -15,7 +15,11 @@
  */
 package com.ibm.sbt.services.client.base;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.w3c.dom.Node;
 
@@ -123,27 +127,6 @@ public class AtomEntity extends BaseEntity {
     }
 
     /**
-     * Return array of category terms from ATOM entry document.
-     * 
-     * @method getTags
-     * @return {Object} Array of categories of the ATOM entry document
-     */
-    public String[] getCategoryTerms() {
-    	return getAsArray(AtomXPath.categoryTerm);
-    }
-
-    /**
-     * Set new category terms to be associated with this ATOM entry document.
-     * 
-     * @method setCategories
-     * @param {Object} Array of categories to be added to the ATOM entry document
-     */
-
-    public void setCategoryTerms(String[] categoryTerms) {
-        this.setAsArray(AtomXPath.categoryTerm, categoryTerms);
-    }
-
-    /**
      * Gets a author from ATOM entry document.
      * 
      * @method getAuthor
@@ -232,5 +215,20 @@ public class AtomEntity extends BaseEntity {
     public String createEntryData() {
     	return "";
     }
+    
+    /**
+     * Return the list of category terms that do not have a scheme attribute
+     * @return
+     */
+	public Set<String> getTags() {
+		return new HashSet<String>(Arrays.asList(getAsArray(AtomXPath.tags)));
+	}
 	
+	/**
+	 * Set the tags
+	 * @param tags
+	 */
+	public void setTags(Collection<String> tags) {
+		fields.put(AtomXPath.tags.getName(), tags);
+	}
 }

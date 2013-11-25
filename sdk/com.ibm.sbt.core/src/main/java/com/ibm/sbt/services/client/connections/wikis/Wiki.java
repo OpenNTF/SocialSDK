@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -16,16 +16,23 @@
 
 package com.ibm.sbt.services.client.connections.wikis;
 
+import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.w3c.dom.Node;
 
+import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.base.AtomEntity;
+import com.ibm.sbt.services.client.base.AtomXPath;
 import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.connections.activity.Member;
+import com.ibm.sbt.services.client.connections.common.Person;
 
 /**
  * @author Mario Duarte
@@ -103,11 +110,51 @@ public class Wiki extends AtomEntity {
 	}
 	
 	/**
+	 * @return
+	 */
+	public Person getModifier() {
+		return new Person(getService(), new XmlDataHandler((Node)this.getDataHandler().getData(), 
+    			ConnectionsConstants.nameSpaceCtx, (XPathExpression)AtomXPath.modifier.getPath()));
+	}
+	
+	/**
+	 * Date of the wiki creation
+	 * @return
+	 */
+	public Date getCreated() {
+		return this.getAsDate(WikiXPath.created);
+	}
+	
+	/**
+	 * Date of the last modification
+	 * @return
+	 */
+	public Date getModified() {
+		return this.getAsDate(WikiXPath.modified);
+	}
+	
+	/**
 	 * List of users who can access the wiki. 
 	 * @return
 	 */
 	public List<Member> getSharedWith() {
 		throw new UnsupportedOperationException(); // FIXME
+	}
+	
+	/**
+	 * Set of permissions available for the wiki.
+	 * @return
+	 */
+	public Set<String> getPermissions() {
+		Set<String> permissions = null;
+		String permissionsStr = getAsString(WikiXPath.permissions);
+		if(!StringUtil.isEmpty(permissionsStr)) {
+			permissions = new HashSet<String>();
+			for(String p : permissionsStr.split(",")) {
+				permissions.add(p.trim());
+			}
+		}
+		return permissions;
 	}
 	
 	/**

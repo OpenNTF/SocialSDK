@@ -65,11 +65,11 @@ public abstract class AtomEntitySerializer<T extends AtomEntity> extends BaseEnt
 	}
 	
 	protected Element published() {
-		return textElement("published", DataSerializer.toString(entity.getPublished()));
+		return textElement("published", DateSerializer.toString(entity.getPublished()));
 	}
 	
 	protected Element updated() {
-		return textElement("updated", DataSerializer.toString(entity.getUpdated()));
+		return textElement("updated", DateSerializer.toString(entity.getUpdated()));
 	}
 	
 	protected Element summary() {

@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -16,6 +16,7 @@
 
 package com.ibm.sbt.services.client.base.serializers;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -34,13 +35,22 @@ public class BaseEntitySerializer<T extends BaseEntity> extends XmlSerializer {
 		this.entity = entity;
 	}
 	
-	public static class DataSerializer {
+	public static class DateSerializer {
 		private static SimpleDateFormat dateFormat = 
 				new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 		
-		public static String toString(Date data) {
-			if(data == null) return null;
-			else return dateFormat.format(data);
+		public static String toString(Date date) {
+			if(date == null) return null;
+			else return dateFormat.format(date);
+		}
+
+		public static Date valueOf(String date) {
+			try {
+				return dateFormat.parse(date);
+			} catch (ParseException e) {
+				// FIXME log exception
+				return null;
+			}
 		}
 	}
 }

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entry xmlns:thr="http://purl.org/syndication/thread/1.0"
+	xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"
+	xmlns:td="urn:ibm.com/td" xmlns="http://www.w3.org/2005/Atom">
+	<id>urn:lsid:ibm.com:td:5ecb2b42-fce0-4a4b-9132-9f5b781db15a</id>
+	<td:uuid>5ecb2b42-fce0-4a4b-9132-9f5b781db15a</td:uuid>
+	<td:label>Private Community (wiki members)</td:label>
+	<link
+		href="https://qs.renovations.com:444/wikis/basic/api/wiki/Private%20Community%20%28wiki%20members%29/entry"
+		rel="self"></link>
+	<link
+		href="https://qs.renovations.com:444/wikis/home/wiki/Private%20Community%20%28wiki%20members%29"
+		rel="alternate" type="text/html"></link>
+	<link
+		href="https://qs.renovations.com:444/wikis/basic/api/wiki/Private%20Community%20%28wiki%20members%29/entry"
+		rel="edit"></link>
+	<category term="wiki" scheme="tag:ibm.com,2006:td/type" label="wiki"></category>
+	<author>
+		<name>Frank Adams</name>
+		<snx:userid>0EE5A7FA-3434-9A59-4825-7A7000278DAA</snx:userid>
+		<email>FrankAdams@renovations.com</email>
+		<snx:userState>active</snx:userState>
+	</author>
+	<td:modifier>
+		<name>Frank Adams</name>
+		<snx:userid>0EE5A7FA-3434-9A59-4825-7A7000278DAA</snx:userid>
+		<email>FrankAdams@renovations.com</email>
+		<snx:userState>active</snx:userState>
+	</td:modifier>
+	<td:themeName></td:themeName>
+	<title type="text">Private Wiki</title>
+	<published>2013-10-08T11:14:08.150Z</published>
+	<updated>2013-11-22T15:18:26.274Z</updated>
+	<td:created>2013-10-08T11:14:08.150Z</td:created>
+	<td:modified>2013-11-22T15:18:04.033Z</td:modified>
+	<td:librarySize>5246</td:librarySize>
+	<td:libraryQuota>524288000</td:libraryQuota>
+	<td:totalRemovedSize>0</td:totalRemovedSize>
+	<category term="private" label="private"></category>
+	<category term="test" label="test"></category>
+	<summary type="text">Small description of this private wiki.</summary>
+	<content type="application/atom+xml"></content>
+	<td:permissions>AddChild, Delete, Purge, EditProperties, EditContent,
+		Edit, ViewProperties, ViewContent, View, GrantAccess</td:permissions>
+</entry>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entry xmlns:thr="http://purl.org/syndication/thread/1.0"
+	xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"
+	xmlns:td="urn:ibm.com/td" xmlns="http://www.w3.org/2005/Atom">
+	<id>urn:lsid:ibm.com:td:46add1f8-dfe3-4ba4-b0b3-8fd3c89237b6</id>
+	<td:uuid>46add1f8-dfe3-4ba4-b0b3-8fd3c89237b6</td:uuid>
+	<td:label>W9e6ac2731c1e_4232_b4e5_df41fe1ac44c</td:label>
+	<link
+		href="https://qs.renovations.com:444/wikis/basic/api/wiki/W9e6ac2731c1e_4232_b4e5_df41fe1ac44c/entry"
+		rel="self"></link>
+	<link
+		href="https://qs.renovations.com:444/wikis/home/wiki/W9e6ac2731c1e_4232_b4e5_df41fe1ac44c"
+		rel="alternate" type="text/html"></link>
+	<link
+		href="https://qs.renovations.com:444/wikis/basic/api/wiki/W9e6ac2731c1e_4232_b4e5_df41fe1ac44c/entry"
+		rel="edit"></link>
+	<category term="wiki" scheme="tag:ibm.com,2006:td/type" label="wiki"></category>
+	<author>
+		<name>System User</name>
+		<snx:userid>00000000-0000-0000-0000-000000000000</snx:userid>
+	</author>
+	<td:modifier>
+		<name>Frank Adams</name>
+		<snx:userid>0EE5A7FA-3434-9A59-4825-7A7000278DAA</snx:userid>
+		<email>FrankAdams@renovations.com</email>
+		<snx:userState>active</snx:userState>
+	</td:modifier>
+	<snx:communityUuid>1385ec11-e8c4-475b-85b8-964e1262a372
+	</snx:communityUuid>
+	<link
+		href="https://qs.renovations.com:444/communities/service/atom/community/instance?communityUuid=1385ec11-e8c4-475b-85b8-964e1262a372"
+		rel="http://www.ibm.com/xmlns/prod/sn/container" type="application/atom+xml"></link>
+	<td:externalInstanceId>W9e6ac2731c1e_4232_b4e5_df41fe1ac44c
+	</td:externalInstanceId>
+	<td:themeName>default</td:themeName>
+	<title type="text">New Test Community</title>
+	<published>2013-10-08T11:11:01.047Z</published>
+	<updated>2013-11-22T15:08:17.678Z</updated>
+	<td:created>2013-10-08T11:11:01.047Z</td:created>
+	<td:modified>2013-10-25T14:47:08.856Z</td:modified>
+	<td:librarySize>3564</td:librarySize>
+	<td:libraryQuota>524288000</td:libraryQuota>
+	<td:totalRemovedSize>0</td:totalRemovedSize>
+	<category term="community" label="community"></category>
+	<summary type="text">New test community small description!!!!
+	</summary>
+	<content type="application/atom+xml"></content>
+	<td:permissions>AddChild, Delete, Purge, EditProperties, EditContent,
+		Edit, ViewProperties, ViewContent, View, GrantAccess</td:permissions>
+</entry>

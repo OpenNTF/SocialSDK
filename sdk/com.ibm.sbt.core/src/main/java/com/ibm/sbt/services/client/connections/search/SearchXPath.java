@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -24,15 +24,8 @@ import com.ibm.sbt.services.client.base.datahandlers.FieldEntry;
 public enum SearchXPath implements FieldEntry{
 	
 	entry("/a:entry"),
-	content("a:content"),
-	updated("a:updated"),
-	authorUserid("a:author/snx:userid"),
-    authorName("a:author/a:name"),
-    authorEmail("a:author/a:email"),
     rank("snx:rank"),
     score("./relevance:score"),
-    summary("a:summary"),
-    authorState("a:author/snx:userState"),
     type("a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/type']/@term"),
     application("a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/component']/@term"),
     applicationCount("count(a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/component']/@term)"),

@@ -82,4 +82,10 @@ public class WikiSerializer extends AtomEntitySerializer<Wiki> {
 	private Element permissions() {
 		return null; //FIXME
 	}
+	
+	@Override
+	protected Element content() {
+		return textElement("content", entity.getContent(), 
+				attribute("type", "application/atom+xml"));
+	}
 }

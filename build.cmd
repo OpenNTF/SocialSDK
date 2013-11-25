@@ -42,15 +42,18 @@ if "%7"=="-localRepo" set LOCAL_REPO=-Dmaven.repo.local="%~f8"
 
 if "%7"=="-notes-platform" set NOTES_PLATFORM=-Dnotes-platform="%8"
 
-if "%9"=="-label" set LABEL=%10
+SHIFT
+SHIFT
 
-if "%9"=="-tools" set toolsDir="%~f10"
+if "%7"=="-label" set LABEL=%8
 
-if "%9"=="-workdir" set WORKING_DIR=-DworkingDir="%~f10"
+if "%7"=="-tools" set toolsDir="%~f8"
 
-if "%9"=="-localRepo" set LOCAL_REPO=-Dmaven.repo.local="%~f10"
+if "%7"=="-workdir" set WORKING_DIR=-DworkingDir="%~f8"
 
-if "%9"=="-notes-platform" set NOTES_PLATFORM=-Dnotes-platform="%10"
+if "%7"=="-localRepo" set LOCAL_REPO=-Dmaven.repo.local="%~f8"
+
+if "%7"=="-notes-platform" set NOTES_PLATFORM=-Dnotes-platform="%8"
 
 
 if (%toolsDir%) == ()  echo Set toolsDir environment variable to the tools directory in your machine and REM this line

@@ -57,7 +57,7 @@ if (%toolsDir%) == ()  echo Set toolsDir environment variable to the tools direc
 if (%toolsDir%) == ()  set toolsDir=..\tools
 if (%LABEL%) ==    ()  set LABEL=SNAPSHOT
 
-echo building %LABEL% with tools from %toolsDir% 
+echo building %LABEL% with tools from %toolsDir%  passed platform: %NOTES_PLATFORM%
 
 
 

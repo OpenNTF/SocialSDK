@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * ï¿½ Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -16,7 +16,10 @@
 
 package com.ibm.sbt.services.client.base;
 
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
+
 import com.ibm.commons.xml.NamespaceContext;
 
 public class ConnectionsConstants {
@@ -28,34 +31,43 @@ public class ConnectionsConstants {
 	public static final String	OAUTH		= "oauth";
 	public static final String	UTF8		= "UTF-8";
 	
+	
+	public static class Namespaces {
+		public static final String ATOM       = "http://www.w3.org/2005/Atom";
+		public static final String TD         = "urn:ibm.com/td";
+		public static final String CA         = "http://www.ibm.com/xmlns/prod/composite-applications/v1.0";
+		public static final String SNX        = "http://www.ibm.com/xmlns/prod/sn";
+		public static final String THR        = "http://purl.org/syndication/thread/1.0";
+		public static final String OPENSEARCH = "http://a9.com/-/spec/opensearch/1.1/";
+		public static final String APP        = "http://www.w3.org/2007/app";
+		public static final String RELEVANCE  = "http://a9.com/-/opensearch/extensions/relevance/1.0/";
+		public static final String IBMSC      = "http://www.ibm.com/search/content/2010";
+		public static final String XS         = "http://www.w3.org/2001/XMLSchema";
+		public static final String XHTML      = "http://www.w3.org/1999/xhtml";
+
+		private static Map<String, String> namespaces = new HashMap<String, String>();
+		
+		static {
+			namespaces.put("a", ATOM);
+			namespaces.put("td", TD);
+			namespaces.put("ca", CA);
+			namespaces.put("snx", SNX);
+			namespaces.put("thr", THR);
+			namespaces.put("opensearch", OPENSEARCH);
+			namespaces.put("app", APP);
+			namespaces.put("relevance", RELEVANCE);
+			namespaces.put("ibmsc", IBMSC);
+			namespaces.put("xs", XS);
+			namespaces.put("h", XHTML);
+		}
+	}
+	
 	//TODO: Perhaps we could use a proper implementation, or extend NamespaceContextImpl?
 	public static NamespaceContext	nameSpaceCtx = new NamespaceContext() {
 
 		@Override
 		public String getNamespaceURI(String prefix) {
-			String uri;
-			if (prefix.equals("h")) {
-				uri = "http://www.w3.org/1999/xhtml";
-			} else if (prefix.equals("a")) {
-				uri = "http://www.w3.org/2005/Atom";
-            } else if (prefix.equals("snx")) {
-                uri = "http://www.ibm.com/xmlns/prod/sn";
-            } else if (prefix.equals("td")) {
-                uri = "urn:ibm.com/td";
-            } else if (prefix.equals("opensearch")) {
-                uri = "http://a9.com/-/spec/opensearch/1.1/";
-            } else if (prefix.equals("thr")){
-            	uri = "http://purl.org/syndication/thread/1.0";
-            } else if (prefix.equals("app")){
-            	uri = "http://www.w3.org/2007/app";
-            } else if(prefix.equals("relevance")){
-            	uri = "http://a9.com/-/opensearch/extensions/relevance/1.0/";
-            } else if (prefix.equals("ibmsc")){
-            	uri = "http://www.ibm.com/search/content/2010";
-            } else {
-				uri = null;
-			}
-			return uri;
+			return Namespaces.namespaces.get(prefix);
 		}
 
 		// Dummy implementation - not used!

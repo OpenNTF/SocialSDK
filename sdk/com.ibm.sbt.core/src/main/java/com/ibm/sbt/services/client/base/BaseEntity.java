@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * ï¿½ Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -246,7 +246,7 @@ public class BaseEntity {
 			return (String[])fields.get(field.getName());
 		}
 		if (dataHandler != null) {
-			return dataHandler.getAsArray(field.getName());
+			return dataHandler.getAsArray(field);
 		}
 		throw new NullPointerException(StringUtil.format("Field {0} was not found or had no value",field.getName()));
 	}

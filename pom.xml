@@ -5,7 +5,7 @@
 	<packaging>pom</packaging>
 
 	<groupId>com.ibm.sbt</groupId>
-	<version>2.0.0-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 
 	<properties>
 		<tycho-version>0.19.0</tycho-version>
@@ -41,8 +41,8 @@
 				<module>deps</module>
 				<module>sdk</module>
 				<module>samples</module>
-				<module>assembly</module>
 				<module>xpages</module>
+				<module>assembly</module>
 			</modules>
 			<repositories>
 				<repository>
@@ -177,21 +177,33 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>2.9</version>
-				<executions>
-					<execution>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>aggregate</goal>
-						</goals>
-						<inherited>false</inherited>
-					</execution>
-				</executions>
 				<configuration>
 					<aggregate>true</aggregate>
 					<failOnError>false</failOnError>
 					<excludePackageNames>com.sun.*:com.ibm.commons.*:com.ibm.sbt.core.*:com.ibm.sbt.plugin.*:com.ibm.sbt.jslibrray.*:com.ibm.sbt.proxy.*:com.ibm.sbt.security.*:*.util.*:com.ibm.sbt.portlet.*:com.ibm.sbt.playground.*:demo.*:acme.*</excludePackageNames>
 				</configuration>
 			</plugin>
+			<plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>1.4</version>
+        <executions>
+          <execution>
+            <phase>generate-resources</phase>
+            <configuration>
+
+              <tasks>
+                <echo message="Creating javadoc output directory"/>
+                <mkdir dir="./target/site/apidocs"/>
+              </tasks>
+
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
 		</plugins>
 
 

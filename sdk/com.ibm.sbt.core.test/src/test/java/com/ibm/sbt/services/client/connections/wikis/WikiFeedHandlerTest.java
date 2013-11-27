@@ -69,9 +69,9 @@ public class WikiFeedHandlerTest extends BaseWikiServiceTest {
 		assertEquals("Small description of this private wiki.", wiki.getSummary());
 		
 		Set<String> tags = new HashSet<String>();
-		tags.add("private");
 		tags.add("test");
-		assertEquals(tags, wiki.getTags());
+		tags.add("private");
+		assertEquals(toSet(tags), toSet(wiki.getTags()));
 		
 		Set<String> permissions = new HashSet<String>();
 		permissions.add("AddChild"); permissions.add("Delete"); permissions.add("Purge");

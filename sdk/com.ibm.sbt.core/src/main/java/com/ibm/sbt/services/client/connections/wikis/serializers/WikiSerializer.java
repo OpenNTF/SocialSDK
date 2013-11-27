@@ -16,9 +16,13 @@
 
 package com.ibm.sbt.services.client.connections.wikis.serializers;
 
+import java.util.Collection;
+import java.util.Set;
+
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
+import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.base.ConnectionsConstants.Namespaces;
 import com.ibm.sbt.services.client.base.serializers.AtomEntitySerializer;
 import com.ibm.sbt.services.client.connections.wikis.Wiki;
@@ -44,8 +48,6 @@ public class WikiSerializer extends AtomEntitySerializer<Wiki> {
 				permissions(),
 				summary()
 		);
-		
-		appendChilds(entry, tags());
 	}
 	
 	public void generateUpdate() {
@@ -80,12 +82,25 @@ public class WikiSerializer extends AtomEntitySerializer<Wiki> {
 	}
 	
 	private Element permissions() {
-		return null; //FIXME
+		return textElement(Namespaces.TD, "permissions", serializePermissions());
 	}
 	
 	@Override
 	protected Element content() {
 		return textElement("content", entity.getContent(), 
 				attribute("type", "application/atom+xml"));
+	}
+	
+	private String serializePermissions() {
+		Set<String> permissions = entity.getPermissions();
+		if(permissions == null) return null;
+		else {
+			return StringUtil.concatStrings(toArray(permissions), ',',  true);
+		}
+	}
+	
+	private String[] toArray(Collection<String> col) {
+		if(col == null) return null;
+		else return col.toArray(new String[0]);
 	}
 }

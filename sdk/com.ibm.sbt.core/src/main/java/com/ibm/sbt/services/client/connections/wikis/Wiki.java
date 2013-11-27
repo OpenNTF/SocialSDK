@@ -69,7 +69,7 @@ public class Wiki extends AtomEntity {
 	 * @param service
 	 */
 	public Wiki(BaseService service) {
-		super(service, null);
+		super(service, (XmlDataHandler)null);
 	}
 	
 	/**

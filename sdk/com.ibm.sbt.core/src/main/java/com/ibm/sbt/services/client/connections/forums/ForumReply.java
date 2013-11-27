@@ -18,7 +18,10 @@ package com.ibm.sbt.services.client.connections.forums;
 import java.util.Arrays;
 import java.util.List;
 
+import org.w3c.dom.Node;
 import com.ibm.commons.util.StringUtil;
+import com.ibm.commons.xml.NamespaceContext;
+import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
 import com.ibm.sbt.services.client.connections.forums.model.BaseForumEntity;
@@ -66,8 +69,8 @@ public class ForumReply extends BaseForumEntity{
 	 * @param BaseService
 	 * @param DataHandler
 	 */
-	public ForumReply(BaseService svc, DataHandler<?> handler) {
-		super(svc, handler);
+	public ForumReply(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
+		super(service, node, namespaceCtx, xpathExpression);
 	}
 	
 	/**

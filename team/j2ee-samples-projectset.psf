@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<psf version="2.0">
+<provider id="org.eclipse.egit.core.GitProvider">
+<project reference="1.0,https://github.com/OpenNTF/SocialSDK.git,master,deps/com.ibm.sbt.bootstrap211"/>
+<project reference="1.0,https://github.com/OpenNTF/SocialSDK.git,master,deps/com.ibm.sbt.dojo180"/>
+<project reference="1.0,https://github.com/OpenNTF/SocialSDK.git,master,deps/com.ibm.sbt.jquery182"/>
+<project reference="1.0,https://github.com/OpenNTF/SocialSDK.git,master,samples/com.ibm.sbt.samples.commons"/>
+<project reference="1.0,https://github.com/OpenNTF/SocialSDK.git,master,samples/domino/com.ibm.sbt.playground"/>
+<project reference="1.0,https://github.com/OpenNTF/SocialSDK.git,master,samples/j2ee/acme/acme.sample.webapp"/>
+<project reference="1.0,https://github.com/OpenNTF/SocialSDK.git,master,samples/j2ee/acme/acme.social.sample.dataapp"/>
+<project reference="1.0,https://github.com/OpenNTF/SocialSDK.git,master,samples/j2ee/acme/acme.social.sample.ear"/>
+<project reference="1.0,https://github.com/OpenNTF/SocialSDK.git,master,samples/j2ee/acme/acme.social.sample.webapp"/>
+<project reference="1.0,https://github.com/OpenNTF/SocialSDK.git,master,samples/j2ee/snippets/com.ibm.sbt.automation.core"/>
+<project reference="1.0,https://github.com/OpenNTF/SocialSDK.git,master,samples/j2ee/snippets/com.ibm.sbt.automation.test"/>
+<project reference="1.0,https://github.com/OpenNTF/SocialSDK.git,master,samples/j2ee/snippets/com.ibm.sbt.landing"/>
+<project reference="1.0,https://github.com/OpenNTF/SocialSDK.git,master,samples/j2ee/snippets/com.ibm.sbt.sample.ear"/>
+<project reference="1.0,https://github.com/OpenNTF/SocialSDK.git,master,samples/j2ee/snippets/com.ibm.sbt.sample.web"/>
+<project reference="1.0,https://github.com/OpenNTF/SocialSDK.git,master,samples/j2ee/templates/helloworld.webapp"/>
+<project reference="1.0,https://github.com/OpenNTF/SocialSDK.git,master,samples/j2ee/templates/smartcloud.webapp"/>
+<project reference="1.0,https://github.com/OpenNTF/SocialSDK.git,master,samples/j2ee/templates/social.helloworld.webapp"/>
+<project reference="1.0,https://github.com/OpenNTF/SocialSDK.git,master,samples/j2ee/templates/grantaccess.webapp"/>
+<project reference="1.0,https://github.com/OpenNTF/SocialSDK.git,master,samples/j2ee/templates/mysocial.webapp"/>
+</provider>
+</psf>

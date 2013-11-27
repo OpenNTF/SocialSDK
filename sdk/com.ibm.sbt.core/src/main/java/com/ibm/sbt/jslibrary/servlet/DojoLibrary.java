@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * ï¿½ Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -69,6 +69,8 @@ public class DojoLibrary extends AbstractLibrary {
                                                                 { MODULE_SBTX_WIDGET_AMD, PATH_DOJO2 } };
 
 	static private final String		DEFINE_MODULE			= MODULE_CONFIG;
+
+	static private final String		DEFINE_MODULE_LAYER		= MODULE_CONFIG_LAYER;
 
 	/**
 	 * Default constructor
@@ -158,6 +160,15 @@ public class DojoLibrary extends AbstractLibrary {
 	@Override
 	protected String getDefineModule() {
 		return DEFINE_MODULE;
+	}
+	/*
+	 * (non-Javadoc)
+	 * @see com.ibm.sbt.jslibrary.servlet.BaseLibrary#getDefineModule()
+	 */
+
+	@Override
+	protected String getDefineModuleLayer() {
+		return DEFINE_MODULE_LAYER;
 	}
 
 	/*

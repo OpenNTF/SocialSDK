@@ -99,14 +99,13 @@ public class MockSerializer {
 	}
 
 	private Iterator<Node> getReader() throws IOException {
-		String path = getResource();
+		String path = getPath();
 		if (replyStream.containsKey(path)) {
 			return replyStream.get(path);
 		}
 		Document doc;
 		try {
-
-			doc = DOMUtil.createDocument(getClass().getResourceAsStream(path),
+			doc = DOMUtil.createDocument(new FileInputStream(new File(path)),
 					false);
 
 			Iterator<Node> nodeIt = DOMUtil.evaluateXPath(doc, "//response")
@@ -370,27 +369,11 @@ public class MockSerializer {
 		String methodName = trace.getMethodName();
 		String endpointName = getEndpointName();
 		String path = new StringBuilder(basePath).append(File.separator)
-				.append("src").append(File.separator).append("test").append(File.separator).append("resources").append(File.separator).append(packageName)
+				.append("test").append(File.separator).append(packageName)
 				.append(File.separator).append("mockData")
 				.append(File.separator).append(endpointName)
-				.append(className).append("_")
+				.append(File.separator).append(className).append("_")
 				.append(methodName).append(".mock").toString();
 		return path;
-	}
-	private String getResource() {
-		StackTraceElement trace = getStackTraceElement();
-		String methodName = trace.getMethodName();
-		
-		String fullClassName = trace.getClassName()
-				.replace(".", "/");
-		String packageName = fullClassName.substring(0,
-				fullClassName.lastIndexOf("/"));
-		String className = fullClassName.substring(fullClassName
-				.lastIndexOf("/"));
-		String resource = new StringBuilder("/").append(packageName)
-		.append("/").append("mockData")
-		.append("/").append(endpointName).append(className).append("_")
-		.append(methodName).append(".mock").toString();
-		return resource;
 	}
 }

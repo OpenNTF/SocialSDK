@@ -31,7 +31,7 @@ public class OAuth10MainWindow extends BaseServiceTest {
     @Test
     public void testOAuth10AutoDetect() {
         setAuthType(AuthType.AUTO_DETECT,true);
-        boolean result = checkExpected("Authentication_API_OAuth10_MainWindow", "Successfully logged in");
+        boolean result = checkExpected("Authentication_API_OAuth10MainWindow", "Successfully logged in");
         assertTrue(getExpectedErrorMsg(), result);
     }
 

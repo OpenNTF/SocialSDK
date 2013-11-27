@@ -16,6 +16,7 @@
 
 package com.ibm.sbt.services.client.base.serializers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.w3c.dom.Element;
@@ -89,6 +90,14 @@ public abstract class AtomEntitySerializer<T extends AtomEntity> extends BaseEnt
 	}
 
 	protected List<Element> tags() {
-		return null;  //FIXME
+		List<Element> elements = new ArrayList<Element>();
+		if(entity.getTags() != null) {
+			for(String tag : entity.getTags()) {
+				elements.add(element("category", 
+						attribute("term", tag),
+						attribute("label", tag)));
+			}
+		}
+		return elements;
 	}
 }

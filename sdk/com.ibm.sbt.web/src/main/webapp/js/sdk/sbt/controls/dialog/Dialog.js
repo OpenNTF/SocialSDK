@@ -38,7 +38,27 @@ define([ "../../declare", "../../lang", "../../widget/_TemplatedDialog",
          */
         constructor: function(args) {
             lang.mixin(this, args);
-        }
+        },
+        
+        /**
+         * Construct the UI for this dialog from a template, setting this.domNode.
+         */
+		buildRendering: function() {
+			this.inherited(arguments);
+			
+			// create the dialog content
+			if (this.dialogContent) {
+				var widget = this.dialogContent;
+				if (lang.isString(widget)) {
+					widget = new _TemplatedWidget({
+						templateString : widget
+					});
+				}
+				
+				this.widget = widget;
+				this.contentNode.appendChild(widget.domNode);
+			}
+		}
     });
     
     return Dialog;

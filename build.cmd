@@ -76,4 +76,4 @@ rem queuing standard and domino builds to aggregate both
 call mvn -f commons\pom.xml install -DtoolsDir=%toolsDir%  %WORKING_DIR% %LOCAL_REPO% 
 
 
-mvn javadoc:aggregate install -DtoolsDir=%toolsDir%  %WORKING_DIR% %LOCAL_REPO% %NOTES_PLATFORM%
+mvn javadoc:aggregate clean install -DtoolsDir=%toolsDir%  %WORKING_DIR% %LOCAL_REPO% %NOTES_PLATFORM%

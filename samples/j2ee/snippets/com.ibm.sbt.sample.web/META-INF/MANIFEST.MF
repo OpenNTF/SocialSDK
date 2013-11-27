@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Web
 Bundle-SymbolicName: com.ibm.sbt.sample.web
-Bundle-Version: 2.0.0.qualifier
+Bundle-Version: 1.0.0.qualifier
 Require-Bundle: com.ibm.commons,
  com.ibm.commons.xml,
  com.ibm.commons.runtime,

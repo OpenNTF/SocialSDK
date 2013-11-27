@@ -41,6 +41,7 @@ import com.ibm.commons.xml.xpath.XPathExpression;
  */
 public class XmlDataHandler implements DataHandler<Node> {
 	
+	final private String CONNECTIONS_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ssX";
 	private final NamespaceContext nameSpaceCtx;
 	private Node data;
 	
@@ -306,19 +307,13 @@ public class XmlDataHandler implements DataHandler<Node> {
 	public Date getAsDate(FieldEntry field, final Locale locale) throws DataHandlerException {
 		String value = getAsString(field);
 		Date date = null;
-		DateFormat format = DateFormat.getDateInstance(DateFormat.SHORT, locale);
+		DateFormat format = new SimpleDateFormat(CONNECTIONS_DATE_FORMAT);
 		try {
 			if(value != null) {
 				date = format.parse(value);
 			}
 		} catch(ParseException e) {
-			// Dates from search service work with below format
-			// Example of such a date is : 2012-09-05T16:15:25+08:00
-			format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX",locale);
-			try {
-				date = format.parse(value);
-			} catch (ParseException e1) {
-			}
+			
 		}
 		return date;
 	}
@@ -332,17 +327,11 @@ public class XmlDataHandler implements DataHandler<Node> {
 	public Date getAsDate(String fieldName, final Locale locale) {
 		String value = getAsString(fieldName);
 		Date date = null;
-		DateFormat format = DateFormat.getDateInstance(DateFormat.SHORT, locale);
+		DateFormat format =new SimpleDateFormat(CONNECTIONS_DATE_FORMAT);
 		try {
 			date = format.parse(value);
 		} catch(ParseException e) {
-			// Dates from search service work with below format
-			// Example of such a date is : 2012-09-05T16:15:25+08:00
-			format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX",locale);
-			try {
-				date = format.parse(value);
-			} catch (ParseException e1) {
-			}
+			
 		}
 		return date;
 	}

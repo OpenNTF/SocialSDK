@@ -125,17 +125,17 @@ define(["../../declare", "../../lang", "../../dom", "../../widget/_TemplatedWidg
             while (el.childNodes[0]) {
                 this._destroy(el.childNodes[0]);
             }
-           var ediv = this._create("div", {
+            var ediv = this._create("div", {
               "class": this.errorClass,
-              innerHTML: error,
               role: "alert",
               tabIndex: 0
             }, el, "only");
+            ediv.appendChild(dom.createTextNode(error));
         },
         
     	_getTemplate: function(domId) {
             var domNode = dom.byId(domId);
-            return domNode ? domNode.innerHTML : "<strong>Unable to load template: "+domId+"</strong>";
+            return domNode ? (domNode.text || domNode.textContent) : "<strong>Unable to load template: "+domId+"</strong>";
         }
 
     });

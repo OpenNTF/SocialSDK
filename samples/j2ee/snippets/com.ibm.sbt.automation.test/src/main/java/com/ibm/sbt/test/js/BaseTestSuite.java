@@ -22,8 +22,10 @@ import org.junit.runners.Suite.SuiteClasses;
 
 import com.ibm.sbt.automation.core.environment.TestEnvironment;
 import com.ibm.sbt.test.js.base.BaseEntity;
+import com.ibm.sbt.test.js.base.BaseService;
 import com.ibm.sbt.test.js.base.BaseServiceConstructUrl;
 import com.ibm.sbt.test.js.base.BaseServiceDeleteEntity;
+import com.ibm.sbt.test.js.base.BaseServiceEndpoint;
 import com.ibm.sbt.test.js.base.BaseServiceGetEntities;
 import com.ibm.sbt.test.js.base.BaseServiceGetEntity;
 import com.ibm.sbt.test.js.base.BaseServiceUpdateEntity;
@@ -42,6 +44,8 @@ import com.ibm.sbt.test.js.base.VCardDataHandler;
 @RunWith(Suite.class)
 @SuiteClasses({ 
     BaseEntity.class, 
+    BaseService.class,
+    BaseServiceEndpoint.class,
     BaseServiceValidation.class,
     BaseServiceConstructUrl.class,
     BaseServiceGetEntity.class, 

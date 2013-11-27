@@ -17,7 +17,10 @@ package com.ibm.sbt.services.client.connections.forums;
 
 import java.util.Map;
 
+import org.w3c.dom.Node;
 import com.ibm.commons.util.StringUtil;
+import com.ibm.commons.xml.NamespaceContext;
+import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
 import com.ibm.sbt.services.client.connections.forums.ForumServiceException;
@@ -53,8 +56,8 @@ public class Forum extends BaseForumEntity {
             super(forumsService);
     }
 
-    public Forum(BaseService svc, DataHandler<?> handler) {
-		super(svc,handler);
+	public Forum(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
+		super(service, node, namespaceCtx, xpathExpression);
 	}
 	
 

@@ -17,7 +17,9 @@ package com.ibm.sbt.services.client.connections.forums.model;
  */
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.w3c.dom.Node;
 
@@ -129,8 +131,8 @@ public class BaseForumEntity extends AtomEntity {
 	 * @return the list of Tags
 	 */
 
-	public List<String> getTags() {
-		return (List<String>) Arrays.asList(getDataHandler().getAsArray(ForumsXPath.tags));
+	public Set<String> getTags() {
+		return new HashSet<String>(Arrays.asList(getAsArray((ForumsXPath.tags))));
 	}
 
 	/**

@@ -5,7 +5,7 @@
 
   <parent>
     <groupId>com.ibm.sbt</groupId>
-    <version>2.0.0-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <artifactId>com.ibm.samples.acme</artifactId>
   </parent>
   
@@ -44,13 +44,28 @@
     <dependency>
         <groupId>com.ibm.sbt</groupId>
         <artifactId>com.ibm.sbt.core</artifactId>
-        <version>2.0.0-SNAPSHOT</version>
+        <version>1.0.0-SNAPSHOT</version>
     </dependency>
     <dependency>
         <groupId>org.eclipse.core</groupId>
         <artifactId>org.eclipse.core.runtime</artifactId>
         <version>3.6.0.v20100505</version>
         <scope>provided</scope>
+    </dependency>
+        <dependency>
+    	<groupId>com.ibm.sbt</groupId>
+    	<artifactId>com.ibm.commons</artifactId>
+    	<version>1.0.0-SNAPSHOT</version>
+    </dependency>
+        <dependency>
+    	<groupId>com.ibm.sbt</groupId>
+    	<artifactId>com.ibm.commons.xml</artifactId>
+    	<version>1.0.0-SNAPSHOT</version>
+    </dependency>
+        <dependency>
+    	<groupId>com.ibm.sbt</groupId>
+    	<artifactId>com.ibm.commons.runtime</artifactId>
+    	<version>1.0.0-SNAPSHOT</version>
     </dependency>
   </dependencies>  
 </project>

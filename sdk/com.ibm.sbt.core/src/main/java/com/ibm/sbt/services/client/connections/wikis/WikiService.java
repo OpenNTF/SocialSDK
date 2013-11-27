@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -211,7 +211,7 @@ public class WikiService extends BaseService {
 	 * @param parameters
 	 * @throws ClientServicesException
 	 */
-	public void updateWiki(String wikiLabel, Wiki wiki, Map<String, String> parameters) 
+	public void updateWiki(Wiki wiki, Map<String, String> parameters) 
 			throws ClientServicesException {
 		String requestUrl = WikiUrls.WIKI_AUTH.format(endpoint, wiki.getLabel());
 		updateWikiAux(requestUrl, wiki, parameters);
@@ -314,7 +314,7 @@ public class WikiService extends BaseService {
 			headers.put("Content-Type", "application/atom+xml");
 			WikiSerializer serializer = new WikiSerializer(wiki);
 			serializer.generateUpdate();
-			return updateData(requestUrl, parameters, headers, serializer.serializeToString());
+			return updateData(requestUrl, parameters, headers, serializer.serializeToString(), null);
 		}
 		catch(ClientServicesException e) {
 			throw e;
@@ -348,7 +348,7 @@ public class WikiService extends BaseService {
 			headers.put("Content-Type", "application/atom+xml");
 			WikiPageSerializer serializer = new WikiPageSerializer(wikiPage);
 			serializer.generateUpdate();
-			return updateData(requestUrl, parameters, headers, serializer.serializeToString());
+			return updateData(requestUrl, parameters, headers, serializer.serializeToString(), null);
 		}
 		catch(ClientServicesException e) {
 			throw e;

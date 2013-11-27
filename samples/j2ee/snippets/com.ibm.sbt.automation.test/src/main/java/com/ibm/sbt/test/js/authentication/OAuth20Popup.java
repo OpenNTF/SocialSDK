@@ -31,7 +31,7 @@ public class OAuth20Popup extends BaseAuthServiceTest {
     @Test
     public void testOAuth20AutoDetect() {
         setAuthType(AuthType.AUTO_DETECT);
-        boolean result = checkExpected("Authentication_API_OAuth20_Popup", "Successfully logged in");
+        boolean result = checkExpected("Authentication_API_OAuth20Popup", "Successfully logged in");
         assertTrue(getExpectedErrorMsg(), result);
     }
 

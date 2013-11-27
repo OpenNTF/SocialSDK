@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path=".apt_generated">
 		<attributes>
 			<attribute name="optional" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/com.ibm.commons"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/com.ibm.commons.xml"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/com.ibm.commons.runtime"/>

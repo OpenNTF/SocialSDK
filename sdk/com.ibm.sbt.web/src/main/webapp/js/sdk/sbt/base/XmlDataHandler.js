@@ -208,7 +208,7 @@ define([ "../declare", "../lang", "../stringUtil", "../xml", "../xpath", "./Data
             }
             if (!this._values["entry"]) {
                 var nodes = xpath.selectNodes(document, entry, this.namespaces);
-                this._values["entry"] = nodes[0] || [];
+                this._values["entry"] = nodes[0] || null;
             }
             return this._values["entry"];
         },

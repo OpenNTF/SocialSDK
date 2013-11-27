@@ -20,6 +20,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -45,16 +50,32 @@ public class BaseWikiServiceTest extends BaseUnitTest {
 	protected Wiki newWiki() {
 		Wiki wiki = new Wiki(wikiService);
 		wiki.setTitle("Test wiki "+ System.currentTimeMillis());
-		
+		wiki.setSummary("Very basic summary "+System.currentTimeMillis());
+		Set<String> permissions = new HashSet<String>();
+		permissions.add("Edit"); permissions.add("View"); permissions.add("Delete"); 
+		wiki.setPermissions(permissions);
+		List<String> tags = new ArrayList<String>();
+		tags.add("tag1"); tags.add("rag2"); tags.add("tag3"); 
+		wiki.setTags(tags);
 		return wiki;
 	}
 	
 	protected Wiki createWiki() {
+		return createWiki(newWiki());
+	}
+	
+	protected Wiki createWiki(Wiki wiki) {
 		try {
-			return wikiService.createWiki(newWiki(), null);
+			return wikiService.createWiki(wiki, null);
 		} catch (ClientServicesException e) {
 			throw new RuntimeException("Failed to create a wiki.", e);
 		}
+	}
+	
+	protected void deleteWikiSilently(Wiki wiki) {
+		try {
+			wikiService.deleteWiki(wiki.getLabel());
+		} catch (ClientServicesException e) {}
 	}
 	
 	protected static Response createResponseFromResource(String resourcePath) {
@@ -78,7 +99,6 @@ public class BaseWikiServiceTest extends BaseUnitTest {
 	protected static String inputStreamToString(InputStream inputStream) {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 		try {
-			
 			StringBuilder out = new StringBuilder();
 			String line;
 			while ((line = reader.readLine()) != null) {
@@ -95,5 +115,9 @@ public class BaseWikiServiceTest extends BaseUnitTest {
 			}
 			catch(Exception e) {}
 		}
+	}
+	
+	protected static <T> Set<T> toSet(Collection<T> col) {
+		return new HashSet<T>(col);
 	}
 }

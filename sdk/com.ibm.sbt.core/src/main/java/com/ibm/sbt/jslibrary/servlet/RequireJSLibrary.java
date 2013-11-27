@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * ï¿½ Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -16,7 +16,7 @@
 package com.ibm.sbt.jslibrary.servlet;
 
 import java.util.Map;
-import java.util.logging.Level;
+
 import com.ibm.commons.util.io.json.JsonObject;
 
 /**
@@ -51,6 +51,8 @@ public abstract class RequireJSLibrary extends AbstractLibrary {
 	private static final String[]		REQUIRE_MODULES			= new String[0];
 
 	private static final String			DEFINE_MODULE			= MODULE_CONFIG;
+
+	static private final String		DEFINE_MODULE_LAYER		= MODULE_CONFIG_LAYER;
 
 	/**
 	 * Default constructor
@@ -94,6 +96,11 @@ public abstract class RequireJSLibrary extends AbstractLibrary {
 	@Override
 	protected String getDefineModule() {
 		return DEFINE_MODULE;
+	}
+
+	@Override
+	protected String getDefineModuleLayer() {
+		return DEFINE_MODULE_LAYER;
 	}
 
 	@Override

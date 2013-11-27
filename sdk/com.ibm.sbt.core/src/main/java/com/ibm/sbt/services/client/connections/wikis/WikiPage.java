@@ -58,7 +58,7 @@ public class WikiPage extends AtomEntity {
 	 * @param service
 	 */
 	public WikiPage(BaseService service) {
-		super(service, null);
+		super(service, (XmlDataHandler)null);
 	}
 	
 	/**

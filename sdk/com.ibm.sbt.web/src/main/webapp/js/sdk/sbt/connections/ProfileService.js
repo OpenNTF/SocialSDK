@@ -29,7 +29,9 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
     var ContentTmpl = "<content type=\"${contentType}\">${content}</content>";   
     var createProfileTemplate = "<person xmlns=\"http://ns.opensocial.org/2008/opensocial\"><com.ibm.snx_profiles.attrib>${guid}${email}${uid}${distinguishedName}${displayName}${givenNames}${surname}${userState}</com.ibm.snx_profiles.attrib></person>";
     var createProfileAttributeTemplate = "<entry><key>${attributeName}</key><value><type>text</type><data>${attributeValue}</data></value></entry>";
-    
+    var createProfileTagsTemplate = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><app:categories xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\" xmlns:atom=\"http://www.w3.org/2005/Atom\" xmlns:app=\"http://www.w3.org/2007/app\">${createTags}</app:categories>"
+    var	CategoryTmpl = "<atom:category term=\"${tag}\"></atom:category>";
+    	
     var CategoryConnection = "<category term=\"connection\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\" />";
     var CategoryConnectionType = "<category term=\"${getConnectionType}\" scheme=\"http://www.ibm.com/xmlns/prod/sn/connection/type\" />";
     var CategoryStatus = "<category term=\"${getStatus}\" scheme=\"http://www.ibm.com/xmlns/prod/sn/status\" />";
@@ -1065,6 +1067,60 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
             var url = this.constructUrl(consts.AtomConnectionsDo, {}, {authType : this._getProfileAuthString()});
             return this.updateEntity(url, options, callbacks, args);
         },
+        
+        /**
+         * Update profile tags. When you update profile tags, the existing tag information added by you is replaced with the new tag information.
+         * To avoid this, retrieve the tags that you want to retain first, and send them back with this request. 
+         * 
+         * @method updateTags
+         * @param {Array} tags
+         * @param {String} targetEmailOrUserId email address or userid of the person whose profile you want to apply the tags to
+         * @param {String} sourceEmailOrUserId email address or useridof the creator of the tags
+         * @param args
+         */
+        updateTags : function(tags, targetEmailOrUserId, sourceEmailOrUserId, args) {
+            // detect a bad request by validating required arguments
+			var promise = this._validateProfileId(targetEmailOrUserId);
+            if (promise) {
+                return promise;
+            }
+            
+            promise = this._validateProfileId(sourceEmailOrUserId);
+            if (promise) {
+                return promise;
+            }
+            
+            var requestArgs = {};
+            if (this.isEmail(targetEmailOrUserId)) {
+            	requestArgs.targetEmail = targetEmailOrUserId;
+            } else {
+            	requestArgs.targetKey = targetEmailOrUserId;
+            }
+            if (this.isEmail(sourceEmailOrUserId)) {
+            	requestArgs.sourceEmail = sourceEmailOrUserId;
+            } else {
+            	requestArgs.sourceKey = sourceEmailOrUserId;
+            }
+            lang.mixin(requestArgs, args || {});
+            
+            var callbacks = {
+				createEntity : function(service, data, response) {
+					return data; // Since this API does not return any response in case of success, returning empty data
+				}
+			};
+            
+            var options = {
+                method : "PUT",
+                query : requestArgs,
+                headers : consts.AtomXmlHeaders,
+                data : this._createTagsPostData(tags)
+            };
+            
+            
+            var url = this.constructUrl(consts.AtomTagsDo, {}, {authType : this._getProfileAuthString()});
+
+            return this.updateEntity(url, options, callbacks, args);
+        },
 
         //
         // Internals
@@ -1244,6 +1300,15 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
         	} else {
         		return defaultAuthString;
         	}
+        },
+        
+        _createTagsPostData : function(tags) {
+        	var value = "";
+            for (var i=0; i< tags.length;i++) {
+                value += stringUtil.transform(CategoryTmpl, { "tag" : tags[i] });
+            }
+            var postData = stringUtil.transform(createProfileTagsTemplate, {"createTags" : value});
+            return stringUtil.trim(postData);
         }
 
     });

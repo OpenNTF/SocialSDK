@@ -15,9 +15,12 @@
  */
 package com.ibm.sbt.services.client.connections.files.feedHandler;
 
+import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
+import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.Response;
+import com.ibm.sbt.services.client.base.AtomXPath;
 import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
@@ -52,9 +55,10 @@ public class FileFeedHandler implements IFeedHandler{
 	 */
     @Override
     public File createEntityFromData(Object data) {
-    	 XmlDataHandler handler = new XmlDataHandler((Node)data, ConnectionsConstants.nameSpaceCtx);
-         File file = new File(service, handler);
-         return file;
+    	XPathExpression xpath = (data instanceof Document) ? (XPathExpression)AtomXPath.singleEntry.getPath() : null;
+    	XmlDataHandler handler = new XmlDataHandler((Node)data, ConnectionsConstants.nameSpaceCtx, xpath);
+        File file = new File(service, handler);
+        return file;
     }
 
     /**

@@ -65,8 +65,8 @@ public class RecommendationsFeedHandler implements IFeedHandler {
 		Node node = (Node)data;
 
 		XPathExpression expr = (data instanceof Document) ? (XPathExpression)ForumsXPath.entry.getPath() : null;
-		XmlDataHandler handler = new XmlDataHandler(node, ConnectionsConstants.nameSpaceCtx, expr);
-		Recommendation recommendation = new Recommendation(service, handler);
+//		XmlDataHandler handler = new XmlDataHandler(node, ConnectionsConstants.nameSpaceCtx, expr);
+		Recommendation recommendation = new Recommendation(service, (Node)data, ConnectionsConstants.nameSpaceCtx, expr);
 		return recommendation;
 	}
 

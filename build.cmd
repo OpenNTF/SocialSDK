@@ -70,7 +70,6 @@ set PATH=%JAVA_HOME%\bin;%M2_HOME%\bin;%PATH%
 
 
 if not (%LABEL%) == SNAPSHOT echo changing version to %LABEL%
-if not (%LABEL%) == SNAPSHOT mvn org.eclipse.tycho:tycho-versions-plugin:0.19.0:set-version -DnewVersion=1.0.0-%LABEL%
 
 rem queuing standard and domino builds to aggregate both
 

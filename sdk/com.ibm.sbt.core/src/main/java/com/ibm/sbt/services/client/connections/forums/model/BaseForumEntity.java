@@ -1,7 +1,7 @@
 package com.ibm.sbt.services.client.connections.forums.model;
 
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -16,10 +16,7 @@ package com.ibm.sbt.services.client.connections.forums.model;
  * permissions and limitations under the License.
  */
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.w3c.dom.Node;
 
@@ -28,10 +25,8 @@ import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.base.AtomEntity;
 import com.ibm.sbt.services.client.base.AtomXPath;
-import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.ConnectionsConstants;
-import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.connections.forums.ForumService;
 import com.ibm.sbt.services.client.connections.forums.ForumsXPath;
@@ -96,13 +91,6 @@ public class BaseForumEntity extends AtomEntity {
 		return id;
 	}
 
-/*	public String getPublished(){
-		return getAsString(ForumsXPath.published);
-
-	}*/
-	
-	
-	
 	@Override
 	public Author getAuthor(){
 		return new Author(getService(),new XmlDataHandler((Node)this.getDataHandler().getData(), 
@@ -115,10 +103,6 @@ public class BaseForumEntity extends AtomEntity {
 	    		ConnectionsConstants.nameSpaceCtx, (XPathExpression)AtomXPath.contributor.getPath()));
 	}
 
-/*	public String getUpdated(){
-		return getAsString(ForumsXPath.updated);
-	}*/
-
 	public String createdBy(){
 		return this.getAuthor().getName();
 	}
@@ -127,17 +111,11 @@ public class BaseForumEntity extends AtomEntity {
 		return this.getContributor().getName();
 	}
 
-	/**
-	 * @return the list of Tags
-	 */
-
-	public Set<String> getTags() {
-		return new HashSet<String>(Arrays.asList(getAsArray((ForumsXPath.tags))));
-	}
 
 	/**
 	 * @sets the tags
 	 */
+	// FIXME this method should also be removed from here. 
 	public void setTags(List<String> tags) {
 		if(!tags.isEmpty()){
 			for (int i = 0; i < tags.size(); i++){

@@ -16,15 +16,17 @@
 package com.ibm.sbt.services.client.base;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.w3c.dom.Node;
 
+import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.xpath.XPathExpression;
+import com.ibm.sbt.services.client.base.datahandlers.FieldEntry;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.connections.common.Person;
 
@@ -240,15 +242,46 @@ public class AtomEntity extends BaseEntity {
      * Return the list of category terms that do not have a scheme attribute
      * @return
      */
-	public Set<String> getTags() {
-		return new HashSet<String>(Arrays.asList(getAsArray(AtomXPath.tags)));
+	public List<String> getTags() {
+		return getAsList(AtomXPath.tags);
 	}
 	
 	/**
 	 * Set the tags
 	 * @param tags
 	 */
-	public void setTags(Collection<String> tags) {
-		fields.put(AtomXPath.tags.getName(), tags);
+	public void setTags(List<String> tags) {
+		setAsList(AtomXPath.tags, tags);
+	}
+	
+	
+	protected void setAsSet(FieldEntry field, Set<String> value) {
+		fields.put(field.getName(), value);
+	}
+	
+	protected void setAsList(FieldEntry field, List<String> value) {
+		fields.put(field.getName(), value);
+	}
+	
+	@SuppressWarnings("unchecked")
+	protected Set<String> getAsSet(FieldEntry field) {
+		if (fields.containsKey(field.getName())){
+			return (Set<String>)fields.get(field.getName());
+		}
+		if (dataHandler != null) {
+			return new HashSet<String>(Arrays.asList((dataHandler.getAsArray(field))));
+		}
+		throw new NullPointerException(StringUtil.format("Field {0} was not found or had no value",field.getName()));
+	}
+	
+	@SuppressWarnings("unchecked")
+	protected List<String> getAsList(FieldEntry field) {
+		if (fields.containsKey(field.getName())){
+			return (List<String>)fields.get(field.getName());
+		}
+		if (dataHandler != null) {
+			return Arrays.asList((dataHandler.getAsArray(field)));
+		}
+		throw new NullPointerException(StringUtil.format("Field {0} was not found or had no value",field.getName()));
 	}
 }

@@ -35,6 +35,9 @@ import com.ibm.sbt.services.client.connections.activity.Member;
 import com.ibm.sbt.services.client.connections.common.Person;
 
 /**
+ * Wiki class represents an entry for a Wiki returned by the
+ * Connections REST API.
+ * 
  * @author Mario Duarte
  *
  */
@@ -94,7 +97,7 @@ public class Wiki extends AtomEntity {
 	}
 	
 	/**
-	 * Community to which the wiki belongs to
+	 * Return the community's unique ID if this wiki belongs to a community.
 	 * @return communityUuid
 	 */
 	public String getCommunityUuid() {
@@ -103,7 +106,7 @@ public class Wiki extends AtomEntity {
 	
 	/**
 	 * 
-	 * @return boolean indication whether or not this wiki is a community wiki.
+	 * @return boolean indicating whether or not this wiki is a community wiki.
 	 */
 	public boolean isCommunityWiki() {
 		return getCommunityUuid() != null;
@@ -118,7 +121,7 @@ public class Wiki extends AtomEntity {
 	}
 	
 	/**
-	 * Date of the wiki creation
+	 * Return the date the wiki was created.
 	 * @return
 	 */
 	public Date getCreated() {
@@ -134,27 +137,46 @@ public class Wiki extends AtomEntity {
 	}
 	
 	/**
+	 * Set of permissions available for the wiki.
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public Set<String> getPermissions() {
+		if (fields.containsKey(WikiXPath.permissions.getName())) {
+			return (Set<String>)fields.get(WikiXPath.permissions.getName());
+		}
+		
+		if (dataHandler != null) {
+			Set<String> permissions = null;
+			String permissionsStr = getAsString(WikiXPath.permissions);
+			if(!StringUtil.isEmpty(permissionsStr)) {
+				permissions = new HashSet<String>();
+				for(String p : permissionsStr.split(",")) {
+					permissions.add(p.trim());
+				}
+			}
+			return permissions;
+		}
+		else {
+			throw new NullPointerException(StringUtil.format("Field {0} was not found or had no value", 
+					WikiXPath.permissions.getName()));
+		}
+	}
+	
+	/**
+	 * Set the permissions available for the Wiki
+	 * @param permissions
+	 */
+	public void setPermissions(Set<String> permissions) {
+		setAsSet(WikiXPath.permissions, permissions);
+	}
+	
+	/**
 	 * List of users who can access the wiki. 
 	 * @return
 	 */
 	public List<Member> getSharedWith() {
 		throw new UnsupportedOperationException(); // FIXME
-	}
-	
-	/**
-	 * Set of permissions available for the wiki.
-	 * @return
-	 */
-	public Set<String> getPermissions() {
-		Set<String> permissions = null;
-		String permissionsStr = getAsString(WikiXPath.permissions);
-		if(!StringUtil.isEmpty(permissionsStr)) {
-			permissions = new HashSet<String>();
-			for(String p : permissionsStr.split(",")) {
-				permissions.add(p.trim());
-			}
-		}
-		return permissions;
 	}
 	
 	/**

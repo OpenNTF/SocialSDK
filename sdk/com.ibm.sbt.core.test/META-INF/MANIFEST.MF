@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SBT Core Unit Tests
 Bundle-SymbolicName: com.ibm.sbt.core.test
-Bundle-Version: 2.0.0.qualifier
+Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: IBM
 Fragment-Host: com.ibm.sbt.core
 Require-Bundle: org.junit;bundle-version="4.0.0"

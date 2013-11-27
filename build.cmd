@@ -73,7 +73,7 @@ if not (%LABEL%) == SNAPSHOT echo changing version to %LABEL%
 
 rem queuing standard and domino builds to aggregate both
 
-mvn -f commons\pom.xml install -DtoolsDir=%toolsDir%  %WORKING_DIR% %LOCAL_REPO% 
+call mvn -f commons\pom.xml install -DtoolsDir=%toolsDir%  %WORKING_DIR% %LOCAL_REPO% 
 
 
 mvn javadoc:aggregate install -DtoolsDir=%toolsDir%  %WORKING_DIR% %LOCAL_REPO% %NOTES_PLATFORM%

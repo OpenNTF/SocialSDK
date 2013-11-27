@@ -97,10 +97,10 @@ define(["../../../declare",
         renderError: function(el, error) {
             var ediv = domConstruct.create("div", {
                 "class": this.errorClass,
-                innerHTML: error.message,
                 role: "alert",
                 tabIndex: 0
               }, el, "only");
+            dom.setText(ediv, error.message);
         }
         
     });

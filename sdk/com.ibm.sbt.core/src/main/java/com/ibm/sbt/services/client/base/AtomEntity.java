@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2013
+ * @ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -56,6 +56,26 @@ public class AtomEntity extends BaseEntity {
 		super(service, dataHandler);
 	}
 	
+	
+	/**
+	 * Construct an AtomEntity instance.
+	 * 
+	 * @param service
+	 */
+	public AtomEntity(BaseService service) {
+		super(service, null);
+	}
+	/**
+	 * Construct an AtomEntity instance.
+	 * 
+	 * @param service
+	 * @param id
+	 */
+	public AtomEntity(BaseService service, String id) {
+		super(service, null);
+		setAsString(AtomXPath.id, id);
+		
+	}
     /**
      * Return the value of id from ATOM entry document.
      * 

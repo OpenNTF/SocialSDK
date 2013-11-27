@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * ï¿½ Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -163,7 +163,7 @@ public class LibraryRequest {
         this.toolkitExtUrl = StringUtil.replace(params.getToolkitExtUrl(), "%local_server%", UrlUtil.getServerUrl(httpRequest));
         this.toolkitExtJsUrl = StringUtil.replace(params.getToolkitExtJsUrl(), "%local_server%", UrlUtil.getServerUrl(httpRequest));
         this.serviceUrl = StringUtil.replace(params.getServiceUrl(), "%local_application%", UrlUtil.getContextUrl(httpRequest));
-        this.libraryUrl = UrlUtil.getRequestUrl(httpRequest);
+        this.libraryUrl = params.getLibraryUrl().indexOf("%")>-1?UrlUtil.getRequestUrl(httpRequest):params.getLibraryUrl();
         this.jsLibraryUrl = StringUtil.replace(params.getJsLibraryUrl(), "%local_server%", UrlUtil.getServerUrl(httpRequest));
         this.iframeUrl = StringUtil.replace(params.getIframeUrl(), "%local_server%", UrlUtil.getServerUrl(httpRequest));
 

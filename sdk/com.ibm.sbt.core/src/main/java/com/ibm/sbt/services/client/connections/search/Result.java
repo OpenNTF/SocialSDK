@@ -1,5 +1,5 @@
 /*
- * ï¿½ Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -36,6 +36,16 @@ public class Result extends AtomEntity{
 		super(service, node, namespaceCtx, xpathExpression);
 	}
 	
+	
+    /**
+     * Returns tags associated with search results
+     * @return String
+     */
+	public String getTags(){
+		return(getAsString(SearchXPath.tags));
+	}
+	
+	
     /**
      * Relevance ranking of the search result. 
      * This is a relative score of an individual search result. 
@@ -51,7 +61,7 @@ public class Result extends AtomEntity{
 	}
 	
 	/**
-	 * Identifies the IBMï¿½ Connections application in which the result was found
+	 * Identifies the IBM® Connections application in which the result was found
 	 * @return String
 	 */
 	public String getApplication(){

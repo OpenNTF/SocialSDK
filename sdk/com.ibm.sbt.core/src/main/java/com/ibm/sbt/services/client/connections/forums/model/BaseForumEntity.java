@@ -22,7 +22,9 @@ import java.util.List;
 import org.w3c.dom.Node;
 
 import com.ibm.commons.util.StringUtil;
+import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.xpath.XPathExpression;
+import com.ibm.sbt.services.client.base.AtomEntity;
 import com.ibm.sbt.services.client.base.AtomXPath;
 import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.base.BaseService;
@@ -39,7 +41,7 @@ import com.ibm.sbt.services.client.connections.forums.ForumsXPath;
  */
 
 
-public class BaseForumEntity extends BaseEntity {
+public class BaseForumEntity extends AtomEntity {
 
 	private final String FORUMID = "urn:lsid:ibm.com:forum:";
 
@@ -50,21 +52,32 @@ public class BaseForumEntity extends BaseEntity {
 	 * @param ForumId
 	 */
 	public BaseForumEntity(ForumService forumsService, String id) {
+		super(forumsService,id);
 		setService(forumsService);
 		setAsString(ForumsXPath.uid, id);
 	}
 	/**
      * Constructor
-     *
      * @param ForumService
      */
     public BaseForumEntity(ForumService forumsService) {
+            super(forumsService);
             setService(forumsService);
     }
-
-	public BaseForumEntity(BaseService svc, DataHandler<?> handler) {
-		super(svc,handler);
+    
+    
+	/**
+     * Constructor
+     * @param BaseService
+     * @param Node
+     * @param NamespaceContext
+     * @param XPathExpression
+     */
+	public BaseForumEntity(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
+		super(service, node, namespaceCtx, xpathExpression);
 	}
+
+
 	/**
     * To get Uuid of Forum Entity
 	*
@@ -81,23 +94,28 @@ public class BaseForumEntity extends BaseEntity {
 		return id;
 	}
 
-	public String getPublished(){
+/*	public String getPublished(){
 		return getAsString(ForumsXPath.published);
 
-	}
+	}*/
+	
+	
+	
+	@Override
 	public Author getAuthor(){
 		return new Author(getService(),new XmlDataHandler((Node)this.getDataHandler().getData(), 
 	    		ConnectionsConstants.nameSpaceCtx, (XPathExpression)AtomXPath.author.getPath()));
 	}
 
+	@Override
 	public Contributor getContributor(){
 		return new Contributor(getService(), new XmlDataHandler((Node)this.getDataHandler().getData(), 
 	    		ConnectionsConstants.nameSpaceCtx, (XPathExpression)AtomXPath.contributor.getPath()));
 	}
 
-	public String getUpdated(){
+/*	public String getUpdated(){
 		return getAsString(ForumsXPath.updated);
-	}
+	}*/
 
 	public String createdBy(){
 		return this.getAuthor().getName();
@@ -105,24 +123,6 @@ public class BaseForumEntity extends BaseEntity {
 
 	public String updatedBy(){
 		return this.getContributor().getName();
-	}
-
-
-	public String getTitle(){
-		return getAsString(ForumsXPath.title);
-	}
-
-
-	public void setTitle(String title) {
-		setAsString(ForumsXPath.title, title);
-	}
-
-	public String getContent(){
-		return getAsString(ForumsXPath.content);
-	}
-
-	public void setContent(String content) {
-		setAsString(ForumsXPath.content, content);
 	}
 
 	/**

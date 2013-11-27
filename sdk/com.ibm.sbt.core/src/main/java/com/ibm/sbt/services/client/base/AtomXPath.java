@@ -1,5 +1,5 @@
 /*
- * ï¿½ Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -45,7 +45,6 @@ public enum AtomXPath implements FieldEntry {
 	editUrl("./a:link[@rel='replies']/@href"),
 	selfUrl("./a:link[@rel='edit']/@href"),
 	alternateUrl("./a:link[@rel='alternate']/@href"),
-	tags("./a:category[not(@scheme)]/@term"),
 	
 	personName("./name"),
 	personEmail("./email"),

@@ -68,4 +68,12 @@ set JAVA_HOME=%toolsDir:"=%\ibm-java-sdk-60-win-i386
 set M2_HOME=%toolsDir:"=%\apache-maven-3.0.4
 set PATH=%JAVA_HOME%\bin;%M2_HOME%\bin;%PATH%
 
-mvn install  -DtoolsDir=%toolsDir%  -DbuildLabel=%LABEL% %WORKING_DIR% %LOCAL_REPO% %NOTES_PLATFORM%
+
+if not (%LABEL%) == SNAPSHOT echo changing version to %LABEL%
+
+rem queuing standard and domino builds to aggregate both
+
+call mvn -f commons\pom.xml install -DtoolsDir=%toolsDir%  %WORKING_DIR% %LOCAL_REPO% 
+
+
+mvn javadoc:aggregate install -DtoolsDir=%toolsDir%  %WORKING_DIR% %LOCAL_REPO% %NOTES_PLATFORM%

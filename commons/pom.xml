@@ -24,8 +24,6 @@
 				</property>
 			</activation>
 			<modules>
-			<module>com.ibm.commons</module>
-				<module>com.ibm.commons.xml</module>
 				<module>com.ibm.commons.runtime</module>
 			</modules>
 		</profile>

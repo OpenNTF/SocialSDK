@@ -35,7 +35,7 @@ public class BaseServiceEndpoint extends BaseApiTest {
     static final String SNIPPET_ID = "Toolkit_Base_BaseServiceEndpoint";
     
     @Test
-    public void testDeleteEntity() {
+    public void testBaseServiceEndpoint() {
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         List jsonList = previewPage.getJsonList();
         Assert.assertEquals(2, jsonList.size());

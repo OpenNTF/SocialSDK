@@ -1177,20 +1177,20 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
     };
     
     var ConnectionsEventInstCallbacks = {
-            createEntity : function(service,data,response) {
-                var entryHandler = new XmlDataHandler({
-                    service :  service,
-                    data : data,
-                    namespaces : consts.Namespaces,
-                    xpath : consts.EventXPath
-                });
-                return new EventInst({
-                    service : service,
-                    id : entryHandler.getEntityId(),
-                    dataHandler : entryHandler
-                });
-            }
-        };
+        createEntity : function(service,data,response) {
+            var entryHandler = new XmlDataHandler({
+                service :  service,
+                data : data,
+                namespaces : consts.Namespaces,
+                xpath : consts.EventXPath
+            });
+            return new EventInst({
+                service : service,
+                id : entryHandler.getEntityId(),
+                dataHandler : entryHandler
+            });
+        }
+    };
         
     /*
      * Callbacks used when reading an entry that contains a Community.

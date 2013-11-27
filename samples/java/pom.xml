@@ -8,11 +8,10 @@
 	<parent>
 		<artifactId>com.ibm.sbt.samples</artifactId>
 		<groupId>com.ibm.sbt</groupId>
-		<version>2.0.0-SNAPSHOT</version>
+		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	<modules>
 		<module>sbt.sample.app</module>
 	</modules>
 
-	<version>2.0.0-SNAPSHOT</version>
-</project>
+	</project>

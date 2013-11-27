@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:openSearch="http://a9.com/-/spec/opensearch/1.1/">
+	<generator uri="http://www.ibm.com/xmlns/prod/sn" version="4.5.0.0">IBM
+		Connections - Follow service</generator>
+	<title type="text">Followed resources for Frank Adams</title>
+	<updated>2013-11-27T20:37:40.840Z</updated>
+	<id>urn:lsid:ibm.com:follow:feed-com.ibm.lc.f4ba40d6-cee1-4752-b89d-8a12cf631703
+	</id>
+	<openSearch:itemsPerPage xmlns:openSearch="http://a9.com/-/spec/opensearch/1.1/">20
+	</openSearch:itemsPerPage>
+	<openSearch:startIndex xmlns:openSearch="http://a9.com/-/spec/opensearch/1.1/">1
+	</openSearch:startIndex>
+	<openSearch:totalResults xmlns:openSearch="http://a9.com/-/spec/opensearch/1.1/">1
+	</openSearch:totalResults>
+	<link rel="self"
+		href="https://qs.renovations.com:444/communities/follow/atom/resources?ps=20&amp;page=1&amp;source=communities&amp;type=community"
+		type="application/atom+xml"></link>
+	<link rel="alternate" href="https://qs.renovations.com:444/communities"
+		type="text/html"></link>
+	<author xmlns:snx="http://www.ibm.com/xmlns/prod/sn">
+		<name>Frank Adams</name>
+		<snx:userid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">0F19F8AD-37EA-6033-8525-7BBF005634B5
+		</snx:userid>
+		<snx:userState xmlns:snx="http://www.ibm.com/xmlns/prod/sn">active</snx:userState>
+		<email>fadams@renovations.com</email>
+		<uri>https://qs.renovations.com:444/profiles/html/profile.do?userid=0F19F8AD-37EA-6033-8525-7BBF005634B5
+		</uri>
+	</author>
+	<entry>
+		<id>urn:lsid:ibm.com:follow:resource-23c25271-bc1e-4e9e-8fb0-8599ea297ca8
+		</id>
+		<category term="resource-follow" scheme="http://www.ibm.com/xmlns/prod/sn/type"></category>
+		<category term="communities" scheme="http://www.ibm.com/xmlns/prod/sn/source"></category>
+		<category term="community"
+			scheme="http://www.ibm.com/xmlns/prod/sn/resource-type"></category>
+		<category term="23c25271-bc1e-4e9e-8fb0-8599ea297ca8" scheme="http://www.ibm.com/xmlns/prod/sn/resource-id"></category>
+		<title type="text">Lucille #5</title>
+		<link
+			href="https://qs.renovations.com:444/communities/follow/atom/resources/23c25271-bc1e-4e9e-8fb0-8599ea297ca8?source=COMMUNITIES&amp;type=COMMUNITY&amp;resource=23c25271-bc1e-4e9e-8fb0-8599ea297ca8"
+			rel="edit" type="application/atom+xml"></link>
+		<link
+			href="https://qs.renovations.com:444/communities/service/atom/community/instance?communityUuid=23c25271-bc1e-4e9e-8fb0-8599ea297ca8"
+			rel="related" type="application/atom+xml"></link>
+		<link
+			href="https://qs.renovations.com:444/communities/service/html/communityview?communityUuid=23c25271-bc1e-4e9e-8fb0-8599ea297ca8"
+			rel="alternate" type="text/html"></link>
+	</entry>
+</feed>

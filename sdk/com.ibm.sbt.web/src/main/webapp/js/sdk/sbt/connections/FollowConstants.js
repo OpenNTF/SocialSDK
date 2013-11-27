@@ -251,14 +251,27 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
         /**
          * XPath expressions to be used when reading a followed resource entry
          */
-    	FollowedResourceXPath : lang.mixin({
+    	FollowedResourceXPath : lang.mixin({}, conn.AtomEntryXPath, {
             followedResourceUuid : "a:id",
             categoryType : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/type']/@term",
             source : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/source']/@term",
             resourceType : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/resource-type']/@term",
             resourceId : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/resource-id']/@term",
             relatedUrl : "a:link[@rel='related']/@href"
-        }, conn.AtomEntryXPath),
+        }),
+        
+        /**
+         * XPath expressions to be used when reading a followed resource entry
+         */
+    	OneFollowedResourceXPath : lang.mixin({}, conn.AtomEntryXPath, {
+    		entry : "/a:feed/a:entry",
+            followedResourceUuid : "a:id",
+            categoryType : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/type']/@term",
+            source : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/source']/@term",
+            resourceType : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/resource-type']/@term",
+            resourceId : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/resource-id']/@term",
+            relatedUrl : "a:link[@rel='related']/@href"
+        }),
         
         /**
          * Get, follow or stop following a resource. 

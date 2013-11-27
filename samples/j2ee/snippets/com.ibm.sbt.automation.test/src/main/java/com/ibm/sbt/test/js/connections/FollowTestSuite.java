@@ -20,6 +20,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.ibm.sbt.test.js.connections.follow.api.GetFollowedResource;
 import com.ibm.sbt.test.js.connections.follow.api.GetFollowedResources;
 import com.ibm.sbt.test.js.connections.follow.api.StartFollowing;
 import com.ibm.sbt.test.js.connections.follow.api.StopFollowing;
@@ -33,6 +34,7 @@ import com.ibm.sbt.test.js.connections.follow.api.StopFollowing;
 @RunWith(Suite.class)
 @SuiteClasses({ 
 	GetFollowedResources.class,
+	GetFollowedResource.class,
 	StartFollowing.class,
 	StopFollowing.class
 })

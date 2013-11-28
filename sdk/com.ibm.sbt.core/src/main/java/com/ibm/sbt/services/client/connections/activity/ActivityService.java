@@ -35,7 +35,6 @@ import com.ibm.sbt.services.endpoints.Endpoint;
 
 /**
  * ActivityService can be used to perform operations related to Activities. 
- * This Service API allows application programs to create new activities, and to read and modify existing activities.
  * <p>
  * 
  * @author Vimal Dhupar

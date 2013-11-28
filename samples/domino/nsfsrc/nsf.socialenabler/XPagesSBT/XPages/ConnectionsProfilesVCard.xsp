@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
 	xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xp:this.resources>
+		<xp:dojoModule
+			name="sbt.connections.controls.vcard.ProfileVCardInline">
+		</xp:dojoModule>
+		<xp:dojoModule
+			name="sbt.connections.controls.vcard.ProfileVCard">
+		</xp:dojoModule>
+	</xp:this.resources>
 	<xc:OneUILayout navigationPath="/Connections/ProfilesVCard"
 		title="Connections Profiles VCard" connection="connections">
 		<xp:this.facets>
@@ -9,9 +17,8 @@
 			</xp:panel>
 		</xp:this.facets>
 		<xc:WarningConnectionsVersion></xc:WarningConnectionsVersion>
-		<xe:connectionsClient id="connectionsClient1"
-			profilesBusinessCard="true">
-		</xe:connectionsClient>
+		<xe:sbtClient id="sbtClient1" profilesBusinessCard="true">
+		</xe:sbtClient>
 		<xp:button id="button1">
 			<xp:this.value><![CDATA[#{javascript:var u = @Endpoint("connections").getUserIdentity()
 if(u) {
@@ -66,8 +73,8 @@ if(u) {
 		<xp:br />
 		<xp:span style="font-weight:bold">By user id</xp:span>
 		<xp:br />
-		<xe:connectionsWidget id="connectionsWidget1"
-			dojoType="extlib.dijit.ProfilesVCard">
+		<xe:sbtWidget id="sbtWidget1"
+			dojoType="sbt.connections.controls.vcard.ProfileVCard">
 			<xe:this.dojoAttributes>
 				<xp:dojoAttribute name="userName"
 					value="#{javascript:return userBean.lcName}">
@@ -76,11 +83,11 @@ if(u) {
 					value="#{javascript:return userBean.lcId}">
 				</xp:dojoAttribute>
 			</xe:this.dojoAttributes>
-		</xe:connectionsWidget>
+		</xe:sbtWidget>
 		<xp:br />
 		<xp:span style="font-weight:bold">By email address</xp:span>
-		<xe:connectionsWidget id="connectionsWidget2"
-			dojoType="extlib.dijit.ProfilesVCardInline">
+		<xe:sbtWidget id="sbtWidget2"
+			dojoType="sbt.connections.controls.vcard.ProfileVCardInline">
 			<xe:this.dojoAttributes>
 				<xp:dojoAttribute name="userName"
 					value="#{javascript:return userBean.lcName}">
@@ -89,7 +96,7 @@ if(u) {
 					value="#{javascript:return userBean.email}">
 				</xp:dojoAttribute>
 			</xe:this.dojoAttributes>
-		</xe:connectionsWidget>
+		</xe:sbtWidget>
 
 	</xc:OneUILayout>
 </xp:view>

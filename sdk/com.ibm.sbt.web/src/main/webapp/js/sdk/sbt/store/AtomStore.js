@@ -303,8 +303,7 @@ define(["../declare","../config","../lang", "../base/core", "../xml", "../xpath"
                         item[attrib] = null;
                     }
                 }
-                
-                //item[attrib] =  entities.decode(item[attrib]) ;
+
             }
            
             return item;

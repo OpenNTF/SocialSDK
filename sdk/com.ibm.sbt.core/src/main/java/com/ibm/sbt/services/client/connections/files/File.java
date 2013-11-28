@@ -16,6 +16,7 @@
 package com.ibm.sbt.services.client.connections.files;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,10 +28,9 @@ import com.ibm.commons.runtime.util.UrlUtil;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.service.basic.ConnectionsFileProxyService;
+import com.ibm.sbt.services.client.base.AtomEntity;
 import com.ibm.sbt.services.client.base.AtomXPath;
-import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.base.ConnectionsConstants;
-import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.files.model.Author;
@@ -43,7 +43,7 @@ import com.ibm.sbt.services.client.connections.files.model.Person;
  * @Represents Connections File
  * @author Vimal Dhupar
  */
-public class File extends BaseEntity {
+public class File extends AtomEntity {
 	private String			fileId;	
 	private Author			authorEntry;
 	private Modifier		modifierEntry;
@@ -65,7 +65,7 @@ public class File extends BaseEntity {
      * @param svc
      * @param dh
      */
-    public File(FileService svc, DataHandler<?> dh) {
+    public File(FileService svc, XmlDataHandler dh) {
         super(svc, dh);
         authorEntry = new Author(getService(), new XmlDataHandler((Node)this.getDataHandler().getData(), 
         		ConnectionsConstants.nameSpaceCtx, (XPathExpression)AtomXPath.author.getPath()));
@@ -444,8 +444,8 @@ public class File extends BaseEntity {
 	 * Method to get Tags
 	 * @return String
 	 */
-	public String getTags() {
-		return this.getAsString(FileEntryXPath.Tags);
+	public List<String> getTags() {
+		return this.getAsList(FileEntryXPath.Tags);
 	}
 	
 	/**

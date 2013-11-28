@@ -34,7 +34,7 @@ import com.ibm.sbt.services.client.connections.activity.feedHandler.TagFeedHandl
 import com.ibm.sbt.services.endpoints.Endpoint;
 
 /**
- * ActivityService can be used to perform operations related to Activities.
+ * ActivityService can be used to perform operations related to Activities. 
  * <p>
  * 
  * @author Vimal Dhupar

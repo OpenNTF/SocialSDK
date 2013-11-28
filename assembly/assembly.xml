@@ -316,7 +316,7 @@
 		</fileSet>
 
 		<fileSet>
-			<directory>../xpages/</directory>
+			<directory>../domino/</directory>
 			<outputDirectory>sbtsdk/source</outputDirectory>
 			<excludes>
 				<exclude>**/bin/</exclude>
@@ -498,7 +498,7 @@
 		</fileSet>
 
 		<fileSet>
-			<directory>../xpages/com.ibm.sbt.domino.updatesite/target</directory>
+			<directory>../domino/com.ibm.sbt.domino.updatesite/target</directory>
 			<outputDirectory>sbtsdk/redist/domino</outputDirectory>
 			<includes>
 				<include>com.ibm.sbt.domino.updatesite*</include>

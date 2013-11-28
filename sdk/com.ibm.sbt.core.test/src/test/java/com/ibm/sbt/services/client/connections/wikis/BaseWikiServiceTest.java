@@ -72,6 +72,14 @@ public class BaseWikiServiceTest extends BaseUnitTest {
 		}
 	}
 	
+	protected WikiPage newWikiPage() {
+		WikiPage wikiPage = new WikiPage(wikiService);
+		wikiPage.setTitle("Test wiki page "+ System.currentTimeMillis());
+		wikiPage.setSummary("Very basic summary "+System.currentTimeMillis());
+		wikiPage.setContent("Content of wiki page "+System.currentTimeMillis());
+		return wikiPage;
+	}
+	
 	protected void deleteWikiSilently(Wiki wiki) {
 		try {
 			wikiService.deleteWiki(wiki.getLabel());

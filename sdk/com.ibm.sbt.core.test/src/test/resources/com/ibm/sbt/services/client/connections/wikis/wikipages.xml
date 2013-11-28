@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns:thr="http://purl.org/syndication/thread/1.0"
+	xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"
+	xmlns:td="urn:ibm.com/td" xmlns="http://www.w3.org/2005/Atom">
+	<generator version="4.5.0.0" uri="http://www.ibm.com/xmlns/prod/sn">IBM Connections - Wikis
+	</generator>
+	<id>urn:lsid:ibm.com:td:b66cc73b-d19f-42ff-b6d0-e1c428af75d5</id>
+	<link
+		href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/wikis/basic/api/wiki/ACME%20airlines%20wiki/feed"
+		rel="self"></link>
+	<title type="text">ACME airlines wiki</title>
+	<td:label>ACME airlines wiki</td:label>
+	<author>
+		<name>Frank Adams</name>
+		<snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+		<email>fadams@renovations.com</email>
+		<snx:userState>active</snx:userState>
+	</author>
+	<updated>2013-11-28T15:05:53.029Z</updated>
+	<opensearch:totalResults>3</opensearch:totalResults>
+	<entry>
+		<id>urn:lsid:ibm.com:td:d0dc2833-442c-43fb-8b62-c55af45d36e6</id>
+		<td:uuid>d0dc2833-442c-43fb-8b62-c55af45d36e6</td:uuid>
+		<td:label>How to use it</td:label>
+		<link
+			href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/wikis/basic/api/wiki/ACME%20airlines%20wiki/page/How%20to%20use%20it/entry"
+			rel="self"></link>
+		<link
+			href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/wikis/home/wiki/ACME%20airlines%20wiki/page/How%20to%20use%20it"
+			rel="alternate" type="text/html"></link>
+		<link
+			href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/wikis/basic/api/wiki/ACME%20airlines%20wiki/page/How%20to%20use%20it/entry"
+			rel="edit"></link>
+		<link
+			href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/wikis/basic/api/wiki/b66cc73b-d19f-42ff-b6d0-e1c428af75d5/page/d0dc2833-442c-43fb-8b62-c55af45d36e6/media"
+			rel="edit-media"></link>
+		<link
+			href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/wikis/basic/anonymous/api/wiki/b66cc73b-d19f-42ff-b6d0-e1c428af75d5/page/d0dc2833-442c-43fb-8b62-c55af45d36e6/media/How%20to%20use%20it?convertTo=html&amp;errorPage=true&amp;f=How%20to%20use%20it"
+			rel="enclosure" type="application/xhtml+xml" title="How to use it"
+			hreflang="en" length="282"></link>
+		<link
+			href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/wikis/basic/api/wiki/b66cc73b-d19f-42ff-b6d0-e1c428af75d5/page/d0dc2833-442c-43fb-8b62-c55af45d36e6/entry"
+			rel="related"></link>
+		<category term="page" scheme="tag:ibm.com,2006:td/type"
+			label="page"></category>
+		<link
+			href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/wikis/basic/api/wiki/b66cc73b-d19f-42ff-b6d0-e1c428af75d5/page/d0dc2833-442c-43fb-8b62-c55af45d36e6/feed"
+			rel="replies" type="application/atom+xml" thr:count="0"
+			xmlns:thr="http://purl.org/syndication/thread/1.0"></link>
+		<author>
+			<name>Frank Adams</name>
+			<snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+			<email>fadams@renovations.com</email>
+			<snx:userState>active</snx:userState>
+		</author>
+		<title type="text">How to use it</title>
+		<published>2013-11-28T15:07:26.299Z</published>
+		<updated>2013-11-28T15:07:40.955Z</updated>
+		<td:created>2013-11-28T15:07:26.299Z</td:created>
+		<td:modified>2013-11-28T15:07:26.299Z</td:modified>
+		<td:lastAccessed></td:lastAccessed>
+		<td:modifier>
+			<name>Frank Adams</name>
+			<snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+			<email>fadams@renovations.com</email>
+			<snx:userState>active</snx:userState>
+		</td:modifier>
+		<td:visibility>public</td:visibility>
+		<td:versionUuid>a19db4f0-b41c-4c39-ad5f-fbef4513c779</td:versionUuid>
+		<td:versionLabel>1</td:versionLabel>
+		<td:propagation>false</td:propagation>
+		<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+		<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">0</snx:rank>
+		<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">3</snx:rank>
+		<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/anonymous_hit">3</snx:rank>
+		<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/share">0</snx:rank>
+		<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/collections">0</snx:rank>
+		<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/attachments">0</snx:rank>
+		<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/versions">1</snx:rank>
+		<td:totalMediaSize>282</td:totalMediaSize>
+		<summary type="text">Description on how to use the ACME airlines
+			application.</summary>
+		<content type="text/html" src="?convertTo=html"></content>
+	</entry>
+	<entry>
+		<id>urn:lsid:ibm.com:td:adb6e2dc-acac-467d-be88-ee1afe964ae1</id>
+		<td:uuid>adb6e2dc-acac-467d-be88-ee1afe964ae1</td:uuid>
+		<td:label>Setup and configuration</td:label>
+		<link
+			href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/wikis/basic/api/wiki/ACME%20airlines%20wiki/page/Setup%20and%20configuration/entry"
+			rel="self"></link>
+		<link
+			href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/wikis/home/wiki/ACME%20airlines%20wiki/page/Setup%20and%20configuration"
+			rel="alternate" type="text/html"></link>
+		<link
+			href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/wikis/basic/api/wiki/ACME%20airlines%20wiki/page/Setup%20and%20configuration/entry"
+			rel="edit"></link>
+		<link
+			href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/wikis/basic/api/wiki/b66cc73b-d19f-42ff-b6d0-e1c428af75d5/page/adb6e2dc-acac-467d-be88-ee1afe964ae1/media"
+			rel="edit-media"></link>
+		<link
+			href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/wikis/basic/anonymous/api/wiki/b66cc73b-d19f-42ff-b6d0-e1c428af75d5/page/adb6e2dc-acac-467d-be88-ee1afe964ae1/media/Setup%20and%20configuration?convertTo=html&amp;errorPage=true&amp;f=Setup%20and%20configuration"
+			rel="enclosure" type="application/xhtml+xml" title="Setup and configuration"
+			hreflang="en" length="314"></link>
+		<link
+			href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/wikis/basic/api/wiki/b66cc73b-d19f-42ff-b6d0-e1c428af75d5/page/adb6e2dc-acac-467d-be88-ee1afe964ae1/entry"
+			rel="related"></link>
+		<category term="page" scheme="tag:ibm.com,2006:td/type"
+			label="page"></category>
+		<link
+			href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/wikis/basic/api/wiki/b66cc73b-d19f-42ff-b6d0-e1c428af75d5/page/adb6e2dc-acac-467d-be88-ee1afe964ae1/feed"
+			rel="replies" type="application/atom+xml" thr:count="0"
+			xmlns:thr="http://purl.org/syndication/thread/1.0"></link>
+		<author>
+			<name>Frank Adams</name>
+			<snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+			<email>fadams@renovations.com</email>
+			<snx:userState>active</snx:userState>
+		</author>
+		<title type="text">Setup and configuration</title>
+		<published>2013-11-28T15:06:58.100Z</published>
+		<updated>2013-11-28T15:07:50.640Z</updated>
+		<td:created>2013-11-28T15:06:58.100Z</td:created>
+		<td:modified>2013-11-28T15:06:58.100Z</td:modified>
+		<td:lastAccessed></td:lastAccessed>
+		<td:modifier>
+			<name>Frank Adams</name>
+			<snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+			<email>fadams@renovations.com</email>
+			<snx:userState>active</snx:userState>
+		</td:modifier>
+		<td:visibility>public</td:visibility>
+		<td:versionUuid>a7852910-e40c-426d-8ed8-b68ccd1bfa2f</td:versionUuid>
+		<td:versionLabel>1</td:versionLabel>
+		<td:propagation>false</td:propagation>
+		<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+		<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">0</snx:rank>
+		<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">4</snx:rank>
+		<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/anonymous_hit">4</snx:rank>
+		<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/share">0</snx:rank>
+		<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/collections">0</snx:rank>
+		<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/attachments">0</snx:rank>
+		<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/versions">1</snx:rank>
+		<td:totalMediaSize>314</td:totalMediaSize>
+		<summary type="text">Wiki with information about the setup and
+			configuration of the ACME airlines application</summary>
+		<content type="text/html" src="?convertTo=html"></content>
+	</entry>
+	<entry>
+		<id>urn:lsid:ibm.com:td:02ec3495-4283-4f0e-aea4-3a2fb428c342</id>
+		<td:uuid>02ec3495-4283-4f0e-aea4-3a2fb428c342</td:uuid>
+		<td:label>Welcome to ACME airlines wiki</td:label>
+		<link
+			href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/wikis/basic/api/wiki/ACME%20airlines%20wiki/page/Welcome%20to%20ACME%20airlines%20wiki/entry"
+			rel="self"></link>
+		<link
+			href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/wikis/home/wiki/ACME%20airlines%20wiki/page/Welcome%20to%20ACME%20airlines%20wiki"
+			rel="alternate" type="text/html"></link>
+		<link
+			href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/wikis/basic/api/wiki/ACME%20airlines%20wiki/page/Welcome%20to%20ACME%20airlines%20wiki/entry"
+			rel="edit"></link>
+		<link
+			href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/wikis/basic/api/wiki/b66cc73b-d19f-42ff-b6d0-e1c428af75d5/page/02ec3495-4283-4f0e-aea4-3a2fb428c342/media"
+			rel="edit-media"></link>
+		<link
+			href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/wikis/basic/anonymous/api/wiki/b66cc73b-d19f-42ff-b6d0-e1c428af75d5/page/02ec3495-4283-4f0e-aea4-3a2fb428c342/media/Welcome%20to%20ACME%20airlines%20wiki?convertTo=html&amp;errorPage=true&amp;f=Welcome%20to%20ACME%20airlines%20wiki"
+			rel="enclosure" type="application/xhtml+xml" title="Welcome to ACME airlines wiki"
+			hreflang="en" length="1565"></link>
+		<link
+			href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/wikis/basic/api/wiki/b66cc73b-d19f-42ff-b6d0-e1c428af75d5/page/02ec3495-4283-4f0e-aea4-3a2fb428c342/entry"
+			rel="related"></link>
+		<category term="page" scheme="tag:ibm.com,2006:td/type"
+			label="page"></category>
+		<link
+			href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/wikis/basic/api/wiki/b66cc73b-d19f-42ff-b6d0-e1c428af75d5/page/02ec3495-4283-4f0e-aea4-3a2fb428c342/feed"
+			rel="replies" type="application/atom+xml" thr:count="0"
+			xmlns:thr="http://purl.org/syndication/thread/1.0"></link>
+		<author>
+			<name>Frank Adams</name>
+			<snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+			<email>fadams@renovations.com</email>
+			<snx:userState>active</snx:userState>
+		</author>
+		<title type="text">Welcome to ACME airlines wiki</title>
+		<published>2013-11-28T15:05:54.862Z</published>
+		<updated>2013-11-28T15:05:55.473Z</updated>
+		<td:created>2013-11-28T15:05:54.862Z</td:created>
+		<td:modified>2013-11-28T15:05:54.862Z</td:modified>
+		<td:lastAccessed></td:lastAccessed>
+		<td:modifier>
+			<name>Frank Adams</name>
+			<snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+			<email>fadams@renovations.com</email>
+			<snx:userState>active</snx:userState>
+		</td:modifier>
+		<td:visibility>public</td:visibility>
+		<td:versionUuid>a8421f7c-362b-4d30-96ee-86b3a788f883</td:versionUuid>
+		<td:versionLabel>1</td:versionLabel>
+		<td:propagation>false</td:propagation>
+		<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+		<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">0</snx:rank>
+		<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">4</snx:rank>
+		<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/anonymous_hit">4</snx:rank>
+		<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/share">0</snx:rank>
+		<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/collections">0</snx:rank>
+		<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/attachments">0</snx:rank>
+		<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/versions">1</snx:rank>
+		<td:totalMediaSize>1565</td:totalMediaSize>
+		<summary type="text">After logging in, what you can do depends on how
+			the wiki owners have set access. If you cannot contribute in a way
+			that you want, click Members to find an owner and ask them to give
+			you appropriate access. If this is a community wiki your access
+			depends on your community membership, and you must ask a community
+			owner to give you appropriate access. Here are some ways to start
+			contributing: To change the wiki title, click Wiki Actions and select
+			Edit Wiki. You must be an owner to see the Wiki Actions button. To
+			edit a page click Edit. To create new pages click Page Actions and
+			select Create Child or Create Peer. Child pages are created below the
+			current page, peer pages are created at the same level. To move a
+			page, click Page Actions and select Move Page. To be notified by
+			email about edits or comments to a page, click Following Actions and
+			select Follow this Page. To be notified about changes to the wiki,
+			click Following Actions and select Follow this Wiki. To see previous
+			versions of a page click Versions.</summary>
+		<content type="text/html" src="?convertTo=html"></content>
+	</entry>
+</feed>

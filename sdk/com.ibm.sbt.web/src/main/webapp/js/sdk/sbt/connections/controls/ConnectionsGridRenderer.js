@@ -22,8 +22,9 @@ define([ "../../declare", "../../controls/grid/GridRenderer",
         "../../text!../../controls/grid/templates/GridSorter.html",
         "../../text!../../controls/grid/templates/SortAnchor.html",
         "../../i18n!./nls/ConnectionsGridRenderer",
-        "../../text!../../controls/grid/templates/GridFooter.html"],
-        function(declare, GridRenderer, GridPager, GridSorter, SortAnchor, nls, GridFooter) {
+        "../../text!../../controls/grid/templates/GridFooter.html",
+        "../../lang"],
+        function(declare, GridRenderer, GridPager, GridSorter, SortAnchor, nls, GridFooter,lang) {
 
     /**
      * @module sbt.connections.controls.ConnectionsGridRenderer
@@ -31,8 +32,8 @@ define([ "../../declare", "../../controls/grid/GridRenderer",
      * @namespace sbt.connections.controls
      */
     var ConnectionsGridRenderer = declare(GridRenderer, {
-    	
-    	/**Strings used in the grid*/
+            
+            /**Strings used in the grid*/
         nls : {},
         /**CSS class for tables*/
         tableClass : "lotusTable",
@@ -65,8 +66,8 @@ define([ "../../declare", "../../controls/grid/GridRenderer",
          * @param args
          */
         constructor : function(args) {
-            this._mixin(this, args);
-            this.nls = this._mixin(nls, this._nls);
+            lang.mixin(this, args);
+            this.nls = lang.mixin(nls, this._nls);
         }
 
     });

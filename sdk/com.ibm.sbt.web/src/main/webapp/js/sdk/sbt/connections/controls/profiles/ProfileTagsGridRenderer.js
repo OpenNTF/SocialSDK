@@ -17,13 +17,14 @@
 /**
  * 
  */
-define(["../../../declare", "../../../stringUtil", "../../../xpath", "../../../xml",
+define(["../../../declare", "../../../dom","../../../lang",
+        "../../../stringUtil", "../../../xpath", "../../../xml",
         "../ConnectionsGridRenderer",
         "../../../i18n!sbt/connections/controls/profiles/nls/ProfileTagsGridRenderer",
         "../../../text!sbt/connections/controls/profiles/templates/TagListRow.html",
         "../../../text!sbt/connections/controls/profiles/templates/TagListHeader.html"],
-        function(declare, stringUtil, xpath, xml, ConnectionsGridRenderer, nls, tagListTmpl, tagListHdrTmpl) {
-		
+        function(declare, dom, lang, stringUtil, xpath, xml, ConnectionsGridRenderer, nls, tagListTmpl, tagListHdrTmpl) {
+                
     /**
      * @class ProfileTagsGridRenderer
      * @namespace sbt.connections.controls.profiles
@@ -47,7 +48,7 @@ define(["../../../declare", "../../../stringUtil", "../../../xpath", "../../../x
           * @param args
           */
          constructor: function(args) {
-        	 if (args.type == "list") {
+                 if (args.type == "list") {
                  this.template = tagListTmpl;
                  this.listHeaderTemplate = tagListHdrTmpl;
              }
@@ -55,68 +56,68 @@ define(["../../../declare", "../../../stringUtil", "../../../xpath", "../../../x
          
          render: function(grid, el, items, data) {
              while (el.childNodes[0]) {
-                 this._destroy(el.childNodes[0]);
+                 dom.destroy(el.childNodes[0]);
              }
              var size = items.length;
              if (size === 0) {
                 this.renderEmpty(grid, el);
              }
              else {
-            	 this._computeRenderValues(grid, el, items, data);
-            	 
-            	 //this.renderTagHeader(grid, el, items, data);
-            	 //this.renderInputForm(grid, el, items, data);
-            	 this.renderTagListHeader(grid, el, items, data);
-            	 var container = this.renderContainer(grid, el, items, data);
-            	 for (var i=0; i<items.length; i++) {
+                     this._computeRenderValues(grid, el, items, data);
+                     
+                     //this.renderTagHeader(grid, el, items, data);
+                     //this.renderInputForm(grid, el, items, data);
+                     this.renderTagListHeader(grid, el, items, data);
+                     var container = this.renderContainer(grid, el, items, data);
+                     for (var i=0; i<items.length; i++) {
                     this.renderItem(grid, container, data, items[i], i, items);
-            	 }
+                     }
              }
           },
           
           renderTagListHeader: function(grid, el, items, data) {   
-        	  if (this.listHeaderTemplate && !grid.hideListHeader) {
+                  if (this.listHeaderTemplate && !grid.hideListHeader) {
                   var node;
-                  if (this._isString(this.listHeaderTemplate)) {
+                  if (lang.isString(this.listHeaderTemplate)) {
                       var domStr = this._substituteItems(this.listHeaderTemplate, grid, this, items, data);
-                      node = this._toDom(domStr, el.ownerDocument);
+                      node = dom.toDom(domStr, el.ownerDocument);
                   } else {
                       node = this.listHeaderTemplate.cloneNode(true);
                   }
                   el.appendChild(node);
                   
-                  this._doAttachEvents(grid, el, data);
+                 grid._doAttachEvents(el, data);
               }
           },
 
           renderContainer: function(grid, el, items, data) {          
-              var div = this._create("div", { "class": this.containerClass }, el);
-              return this._create("ul", { "class": this.tagListClass }, div);
+              var div = dom.create("div", { "class": this.containerClass }, el);
+              return dom.create("ul", { "class": this.tagListClass }, div);
           },
 
           /**
            * Return the tag header label.
            */
           tagHeader: function(grid, renderer, items, data) {
-        	  if (grid.sourceEmail || grid.sourceKey) {
-        		  var params = { 
-        			  tagSource : grid.sourceName || grid.sourceEmail || grid.sourceKey,
-        			  tagTarget : grid.targetName || grid.targetEmail || grid.targetKey
-        		  };
-        		  return stringUtil.replace(nls.taggedBy, params);
-        	  } else {
-        		  var str = (this._numberOfContributors == 1) ? nls.taggedByPerson : nls.taggedByPeople;
-        		  return stringUtil.replace(str, { numberOfContributors : this._numberOfContributors });
-        	  }
+                  if (grid.sourceEmail || grid.sourceKey) {
+                          var params = { 
+                                  tagSource : grid.sourceName || grid.sourceEmail || grid.sourceKey,
+                                  tagTarget : grid.targetName || grid.targetEmail || grid.targetKey
+                          };
+                          return stringUtil.replace(nls.taggedBy, params);
+                  } else {
+                          var str = (this._numberOfContributors == 1) ? nls.taggedByPerson : nls.taggedByPeople;
+                          return stringUtil.replace(str, { numberOfContributors : this._numberOfContributors });
+                  }
           },
           
           //Internals
           
           _computeRenderValues: function(grid, el, items, data) {
-        	  var document = xml.parse(data.response);
-        	  this._numberOfContributors = parseInt(xpath.selectText(document, 
-        			  grid._storeArgs.feedXPath.numberOfContributors, 
-        			  grid._storeArgs.namespaces));
+                  var document = xml.parse(data.response);
+                  this._numberOfContributors = parseInt(xpath.selectText(document, 
+                                  grid._storeArgs.feedXPath.numberOfContributors, 
+                                  grid._storeArgs.namespaces));
           }
 
     });

@@ -2,7 +2,7 @@
     <wb-module deploy-name="sbt.sample-2.0.0-SNAPSHOT">
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/ear-resources"/>
         <wb-resource deploy-path="/" source-path="/src/main/application" tag="defaultRootSource"/>
-        <dependent-module archiveName="sbt.sample.web-1.0.0-SNAPSHOT.war" deploy-path="/" handle="module:/classpath/var/M2_REPO/com/ibm/sbt/sbt.sample.web/1.0.0-SNAPSHOT/sbt.sample.web-1.0.0-SNAPSHOT.war">
+        <dependent-module archiveName="sbt.sample.web-1.0.0-SNAPSHOT.war" deploy-path="/" handle="module:/resource/com.ibm.sbt.sample.web/com.ibm.sbt.sample.web">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="com.ibm.sbt.web-1.0.0-SNAPSHOT.war" deploy-path="/" handle="module:/resource/com.ibm.sbt.web/com.ibm.sbt.web">

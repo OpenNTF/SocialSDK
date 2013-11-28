@@ -12,47 +12,54 @@
 
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>make-a-war</id>
-						<phase>package</phase>
-						<goals>
-							<goal>war</goal>
-						</goals>
-						<configuration>
-							<warName>sbt-${project.version}</warName>
-						</configuration>
-					</execution>
-				</executions>
 
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-install-plugin</artifactId>
-				<executions>
-					<execution>
-						<phase>install</phase>
-						<goals>
-							<goal>install-file</goal>
-						</goals>
-						<configuration>
-							<packaging>war</packaging>
-							<artifactId>${project.artifactId}</artifactId>
-							<groupId>${project.groupId}</groupId>
-							<version>${project.version}</version>
-							<file>
-								${project.build.directory}/sbt-${project.version}.war
-							</file>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
 
 			<!-- to also deploy http://communitygrids.blogspot.com/2007/11/maven-making-war-and-jar-at-same-time.html -->
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-packaging-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<extensions>false</extensions>
+				<executions>
+					<execution>
+						<phase>none</phase>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
 
+				<executions>
+					<execution>
+						<id>war</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<descriptor>assembly-war.xml</descriptor>
+							<finalName>sbt-${project.version}</finalName>
+							<appendAssemblyId>false</appendAssemblyId>
+							<outputDirectory>${project.build.directory}</outputDirectory>
+						</configuration>
+					</execution>
+					<execution>
+						<id>jar</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<descriptor>assembly-jar.xml</descriptor>
+							<finalName>${project.artifactId}-${project.version}</finalName>
+							<appendAssemblyId>false</appendAssemblyId>
+							<outputDirectory>${project.build.directory}</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
+
 	</build>
 </project>

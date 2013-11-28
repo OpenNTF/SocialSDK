@@ -230,10 +230,111 @@
 		</fileSet>
 
 
+		<fileSet>
+			<directory>../commons/</directory>
+			<outputDirectory>sbtsdk/source</outputDirectory>
+			<excludes>
+				<exclude>**/bin/</exclude>
+				<exclude>**/target/</exclude>
+				<exclude>**/pom.xml</exclude>
+				<exclude>**/.jazzignore</exclude>
+				<exclude>**/.apt_generated</exclude>
+				<exclude>**/.factorypath</exclude>
+				<exclude>/.project</exclude>
+			</excludes>
+			<includes>
+				<include>**/*.*</include>
+			</includes>
+		</fileSet>
+		<fileSet>
+			<directory>../deps/</directory>
+			<outputDirectory>sbtsdk/source</outputDirectory>
+			<excludes>
+				<exclude>**/bin/</exclude>
+				<exclude>**/target/</exclude>
+				<exclude>**/pom.xml</exclude>
+				<exclude>**/.jazzignore</exclude>
+				<exclude>**/.apt_generated</exclude>
+				<exclude>**/.factorypath</exclude>
+				<exclude>/.project</exclude>
+
+			</excludes>
+			<includes>
+				<include>**/*.*</include>
+			</includes>
+		</fileSet>
+		<fileSet>
+			<directory>../domino/</directory>
+			<outputDirectory>sbtsdk/source</outputDirectory>
+			<excludes>
+				<exclude>**/bin/</exclude>
+				<exclude>**/target/</exclude>
+				<exclude>**/pom.xml</exclude>
+				<exclude>**/.jazzignore</exclude>
+				<exclude>**/.apt_generated</exclude>
+				<exclude>**/.factorypath</exclude>
+				<exclude>/.project</exclude>
+
+			</excludes>
+			<includes>
+				<include>**/*.*</include>
+			</includes>
+		</fileSet>
+		<fileSet>
+			<directory>../libraries/</directory>
+			<outputDirectory>sbtsdk/source</outputDirectory>
+			<excludes>
+				<exclude>**/bin/</exclude>
+				<exclude>**/target/</exclude>
+				<exclude>**/pom.xml</exclude>
+				<exclude>**/.jazzignore</exclude>
+				<exclude>**/.apt_generated</exclude>
+				<exclude>**/.factorypath</exclude>
+				<exclude>/.project</exclude>
+
+			</excludes>
+			<includes>
+				<include>**/*.*</include>
+			</includes>
+		</fileSet>
+
+		<fileSet>
+			<directory>../xpages/</directory>
+			<outputDirectory>sbtsdk/source</outputDirectory>
+			<excludes>
+				<exclude>**/bin/</exclude>
+				<exclude>**/target/</exclude>
+				<exclude>**/pom.xml</exclude>
+				<exclude>**/.jazzignore</exclude>
+				<exclude>**/.apt_generated</exclude>
+				<exclude>**/.factorypath</exclude>
+				<exclude>/.project</exclude>
+
+			</excludes>
+			<includes>
+				<include>**/*.*</include>
+			</includes>
+		</fileSet>
 
 
 		<fileSet>
-			<directory>../../test/selenium</directory>
+			<directory>../samples/com.ibm.samples.commons</directory>
+			<outputDirectory>sbtsdk/source/com.ibm.samples.commons</outputDirectory>
+			<excludes>
+				<exclude>**/bin/</exclude>
+				<exclude>**/target/</exclude>
+				<exclude>**/pom.xml</exclude>
+				<exclude>**/.jazzignore</exclude>
+				<exclude>**/.apt_generated</exclude>
+				<exclude>**/.factorypath</exclude>
+			</excludes>
+			<includes>
+				<include>**/*.*</include>
+			</includes>
+		</fileSet>
+
+		<fileSet>
+			<directory>../samples/j2ee/acme</directory>
 			<outputDirectory>sbtsdk/source</outputDirectory>
 			<excludes>
 				<exclude>**/bin/</exclude>
@@ -242,17 +343,15 @@
 				<exclude>**/.jazzignore</exclude>
 				<exclude>**/.apt_generated</exclude>
 				<exclude>**/.factorypath</exclude>
+				<exclude>/.project</exclude>
+
 			</excludes>
 			<includes>
 				<include>**/*.*</include>
 			</includes>
 		</fileSet>
 		<fileSet>
-			<directory>../../src/dbscripts</directory>
-			<outputDirectory>sbtsdk/source/dbscripts</outputDirectory>
-		</fileSet>
-		<fileSet>
-			<directory>../../src/eclipse/plugins</directory>
+			<directory>../samples/j2ee/snippets</directory>
 			<outputDirectory>sbtsdk/source</outputDirectory>
 			<excludes>
 				<exclude>**/bin/</exclude>
@@ -261,28 +360,15 @@
 				<exclude>**/.jazzignore</exclude>
 				<exclude>**/.apt_generated</exclude>
 				<exclude>**/.factorypath</exclude>
+				<exclude>/.project</exclude>
 			</excludes>
+
 			<includes>
 				<include>**/*.*</include>
 			</includes>
 		</fileSet>
 		<fileSet>
-			<directory>../../domino/eclipse/plugins/com.ibm.xsp.sbtsdk</directory>
-			<outputDirectory>sbtsdk/source/com.ibm.xsp.sbtsdk</outputDirectory>
-			<excludes>
-				<exclude>**/bin/</exclude>
-				<exclude>**/target/</exclude>
-				<exclude>**/pom.xml</exclude>
-				<exclude>**/.jazzignore</exclude>
-				<exclude>**/.apt_generated</exclude>
-				<exclude>**/.factorypath</exclude>
-			</excludes>
-			<includes>
-				<include>**/*.*</include>
-			</includes>
-		</fileSet>
-		<fileSet>
-			<directory>../../domino/eclipse/features</directory>
+			<directory>../samples/j2ee/templates</directory>
 			<outputDirectory>sbtsdk/source</outputDirectory>
 			<excludes>
 				<exclude>**/bin/</exclude>
@@ -291,14 +377,65 @@
 				<exclude>**/.jazzignore</exclude>
 				<exclude>**/.apt_generated</exclude>
 				<exclude>**/.factorypath</exclude>
+				<exclude>/.project</exclude>
 			</excludes>
 			<includes>
 				<include>**/*.*</include>
 			</includes>
 		</fileSet>
 		<fileSet>
-			<directory>../../src/j2ee</directory>
+			<directory>../samples/java</directory>
 			<outputDirectory>sbtsdk/source</outputDirectory>
+			<excludes>
+				<exclude>**/bin/</exclude>
+				<exclude>**/target/</exclude>
+				<exclude>**/pom.xml</exclude>
+				<exclude>**/.jazzignore</exclude>
+				<exclude>**/.apt_generated</exclude>
+				<exclude>**/.factorypath</exclude>
+				<exclude>/.project</exclude>
+			</excludes>
+			<includes>
+				<include>**/*.*</include>
+			</includes>
+		</fileSet>
+
+		<fileSet>
+			<directory>../samples/scripts</directory>
+			<outputDirectory>sbtsdk/scripts</outputDirectory>
+			<excludes>
+				<exclude>**/bin/</exclude>
+				<exclude>**/target/</exclude>
+				<exclude>**/pom.xml</exclude>
+				<exclude>**/.jazzignore</exclude>
+				<exclude>**/.apt_generated</exclude>
+				<exclude>**/.factorypath</exclude>
+			</excludes>
+			<includes>
+				<include>**/*.*</include>
+			</includes>
+		</fileSet>
+
+		<fileSet>
+			<directory>../samples/dbscripts</directory>
+			<outputDirectory>sbtsdk/dbscripts</outputDirectory>
+			<excludes>
+				<exclude>**/bin/</exclude>
+				<exclude>**/target/</exclude>
+				<exclude>**/pom.xml</exclude>
+				<exclude>**/.jazzignore</exclude>
+				<exclude>**/.apt_generated</exclude>
+				<exclude>**/.factorypath</exclude>
+			</excludes>
+			<includes>
+				<include>**/*.*</include>
+			</includes>
+		</fileSet>
+
+
+		<fileSet>
+			<directory>../samples/config</directory>
+			<outputDirectory>sbtsdk/config</outputDirectory>
 			<excludes>
 				<exclude>**/bin/</exclude>
 				<exclude>**/target/</exclude>
@@ -312,8 +449,8 @@
 			</includes>
 		</fileSet>
 		<fileSet>
-			<directory>../../samples/j2ee</directory>
-			<outputDirectory>sbtsdk/source</outputDirectory>
+			<directory>../samples/domino</directory>
+			<outputDirectory>sbtsdk/source/</outputDirectory>
 			<excludes>
 				<exclude>**/bin/</exclude>
 				<exclude>**/target/</exclude>
@@ -326,38 +463,8 @@
 				<include>**/*.*</include>
 			</includes>
 		</fileSet>
-		<fileSet>
-			<directory>../../samples/java</directory>
-			<outputDirectory>sbtsdk/source</outputDirectory>
-			<excludes>
-				<exclude>**/bin/</exclude>
-				<exclude>**/target/</exclude>
-				<exclude>**/pom.xml</exclude>
-				<exclude>**/.jazzignore</exclude>
-				<exclude>**/.apt_generated</exclude>
-				<exclude>**/.factorypath</exclude>
-			</excludes>
-			<includes>
-				<include>**/*.*</include>
-			</includes>
-		</fileSet>
-		<fileSet>
-			<directory>../../prereqs/eclipse/plugins</directory>
-			<outputDirectory>sbtsdk/source</outputDirectory>
-			<excludes>
-				<exclude>com.ibm.sbt.libs.was/</exclude>
-				<exclude>com.ibm.sbt.libs.j2ee.tomcat/</exclude>
-				<exclude>**/bin/</exclude>
-				<exclude>**/target/</exclude>
-				<exclude>**/pom.xml</exclude>
-				<exclude>**/.jazzignore</exclude>
-				<exclude>**/.apt_generated</exclude>
-				<exclude>**/.factorypath</exclude>
-			</excludes>
-			<includes>
-				<include>**/*.*</include>
-			</includes>
-		</fileSet>
+
+
 		<fileSet>
 			<directory>../samples/domino/nsf/playground</directory>
 			<outputDirectory>sbtsdk/redist/domino</outputDirectory>

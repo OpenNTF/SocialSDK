@@ -18,13 +18,14 @@
  * 
  */
 define(["../../../declare", "../../../stringUtil",
+        "../../../dom","../../../lang",
         "../ConnectionsGridRenderer",
         "../../../i18n!./nls/ColleagueGridRenderer",
         "../../../text!./templates/ColleagueItem.html",
         "../../../text!./templates/ViewAll.html",
         "../../../text!./templates/ColleagueItemFull.html"], 
-        function(declare, stringUtil, ConnectionsGridRenderer, nls, colleagueItemTemplate, viewAllTemplate, colleagueItemFullTemplate) {
-		
+        function(declare, stringUtil, dom, lang, ConnectionsGridRenderer, nls, colleagueItemTemplate, viewAllTemplate, colleagueItemFullTemplate) {
+                
     /**
      * @class ColleagueGridRenderer
      * @namespace sbt.connections.controls.profiles
@@ -45,7 +46,7 @@ define(["../../../declare", "../../../stringUtil",
         
          render: function(grid, el, items, data) {
              while (el.childNodes[0]) {
-                 this._destroy(el.childNodes[0]);
+                 dom.destroy(el.childNodes[0]);
              }
              var size = items.length;
              if (size === 0) {
@@ -61,21 +62,21 @@ define(["../../../declare", "../../../stringUtil",
           },
 
           renderContainer: function(grid, el, items, data) {          
-              return this._create("div", { "class": this.containerClass }, el);
+              return dom.create("div", { "class": this.containerClass }, el);
           },
           
           renderViewAll: function(grid, el, items, data) {          
               if (this.viewAllTemplate && !grid.hideViewAll) {
                   var node;
-                  if (this._isString(this.viewAllTemplate)) {
+                  if (lang.isString(this.viewAllTemplate)) {
                       var domStr = this._substituteItems(this.viewAllTemplate, grid, this, items, data);
-                      node = this._toDom(domStr, el.ownerDocument);
+                      node = dom.toDom(domStr, el.ownerDocument);
                   } else {
                       node = this.sortTemplate.cloneNode(true);
                   }
                   el.appendChild(node);
                   
-                  this._doAttachEvents(grid, el, data);
+                  grid._doAttachEvents(el, data);
               }
           },
           

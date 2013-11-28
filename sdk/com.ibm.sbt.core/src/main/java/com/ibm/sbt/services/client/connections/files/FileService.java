@@ -542,7 +542,7 @@ public class FileService extends BaseService {
 		String accessType = !isPublic ? AccessType.AUTHENTICATED.getAccessType() : AccessType.PUBLIC.getAccessType();
 		String category = !isPublic ? Categories.MYLIBRARY.getCategory() : null;
 		SubFilters downloadFilters = new SubFilters();
-		downloadFilters.setFileId(file.getFileId());
+		downloadFilters.setFileId(file.getId());
 		if(libraryId != null){
 			downloadFilters.setLibraryId(libraryId);
 		}
@@ -588,7 +588,7 @@ public class FileService extends BaseService {
 		if (fileEntry == null) {
             throw new FileServiceException(null, Messages.Invalid_File);
         }
-        if (StringUtil.isEmpty(fileEntry.getFileId())) {
+        if (StringUtil.isEmpty(fileEntry.getId())) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
         if (StringUtil.isEmpty(communityLibraryId)) {
@@ -596,14 +596,14 @@ public class FileService extends BaseService {
         }
         String accessType = AccessType.AUTHENTICATED.getAccessType();
         SubFilters subFilters = new SubFilters();
-        subFilters.setFileId(fileEntry.getFileId());
+        subFilters.setFileId(fileEntry.getId());
         subFilters.setLibraryId(communityLibraryId);
         String resultType = ResultType.ENTRY.getResultType();
         String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
                 null, subFilters, resultType); // we pass null value for non applicable types.
         Document updateFilePayload = null;
         try {
-        	updateFilePayload = this.constructPayload(fileEntry.getFileId(), fileEntry.getFieldsMap());
+        	updateFilePayload = this.constructPayload(fileEntry.getId(), fileEntry.getFieldsMap());
             Response result = (Response) super.updateData(requestUri, params, new ClientService.ContentXml(
             		updateFilePayload, "application/atom+xml"), null);
             return (File) new FileFeedHandler(this).createEntity(result);
@@ -3013,10 +3013,10 @@ public class FileService extends BaseService {
         if (fileEntry == null) {
             throw new FileServiceException(null, Messages.Invalid_File);
         }
-        if (StringUtil.isEmpty(fileEntry.getFileId())) {
+        if (StringUtil.isEmpty(fileEntry.getId())) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
-        return this.updateFileMetadata(fileEntry.getFileId(), params, requestBody);
+        return this.updateFileMetadata(fileEntry.getId(), params, requestBody);
     }
 
     /**
@@ -3033,10 +3033,10 @@ public class FileService extends BaseService {
         if (fileEntry == null) {
             throw new FileServiceException(null, Messages.Invalid_FileEntry);
         }
-        if (StringUtil.isEmpty(fileEntry.getFileId())) {
+        if (StringUtil.isEmpty(fileEntry.getId())) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
-        return this.updateFileMetadata(fileEntry.getFileId(), params, fileEntry.getFieldsMap());
+        return this.updateFileMetadata(fileEntry.getId(), params, fileEntry.getFieldsMap());
     }
 
     /**
@@ -3554,7 +3554,7 @@ public class FileService extends BaseService {
        
         String uri = null;
         for (File entry : resultantEntries) {
-            if (entry.getFileId().equalsIgnoreCase(contentId)) {
+            if (entry.getId().equalsIgnoreCase(contentId)) {
                 uri = entry.getAsString(FileEntryXPath.DeleteModeration);
             }
         }

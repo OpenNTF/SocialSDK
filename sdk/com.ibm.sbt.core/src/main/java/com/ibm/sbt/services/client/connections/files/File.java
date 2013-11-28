@@ -44,7 +44,7 @@ import com.ibm.sbt.services.client.connections.files.model.Person;
  * @author Vimal Dhupar
  */
 public class File extends AtomEntity {
-	private String			fileId;	
+//	private String			fileId;	
 	private Author			authorEntry;
 	private Modifier		modifierEntry;
 
@@ -57,7 +57,8 @@ public class File extends AtomEntity {
 	 * @param fileId
 	 */
 	public File(String fileId) {
-		this.fileId = fileId;
+//		this.fileId = fileId;
+		setAsString(AtomXPath.id, fileId);
 	}
 
     /**
@@ -77,11 +78,17 @@ public class File extends AtomEntity {
 	 * Method to get the FileId of the File
 	 * @return String 
 	 */
-	public String getFileId() {
-		if (!StringUtil.isEmpty(fileId)) {
-			return fileId;
+	public String getId() {
+		String id = super.getId();
+		// here we extract the id value from the string, by truncating the prefix.
+		if(StringUtil.isNotEmpty(id)) {
+			int startOfId = id.lastIndexOf(":");
+			if(startOfId == -1)
+				return id;
+			return id.substring(startOfId+1);
+		} else {
+			return id;
 		}
-		return getAsString(FileEntryXPath.Uuid);
 	}
 
 	/**
@@ -114,13 +121,13 @@ public class File extends AtomEntity {
 			return false;
 	}
 	
-	/**
-	 * Method to get the Title of the File
-	 * @return String 
-	 */
-	public String getTitle() {
-		return getAsString(FileEntryXPath.Title);
-	}
+//	/**
+//	 * Method to get the Title of the File
+//	 * @return String 
+//	 */
+//	public String getTitle() {
+//		return getAsString(FileEntryXPath.Title);
+//	}
 
 	/**
 	 * Method to get the Library Type of the File
@@ -144,7 +151,7 @@ public class File extends AtomEntity {
 	 */
 	public String getDownloadUrl() {
 		String proxypath = this.getService().getEndpoint().getProxyPath("connections");
-		String fileId = this.getFileId();
+		String fileId = this.getId();
 		String libId = this.getLibraryId();
 		HttpServletRequest req = Context.get().getHttpRequest();
 		String sbtServiceUrl = UrlUtil.getContextUrl(req);
@@ -170,21 +177,21 @@ public class File extends AtomEntity {
 		return getAsString(FileEntryXPath.TotalResults);
 	}
 
-	/**
-	 * Method to get the Published date
-	 * @return Date
-	 */
-	public Date getPublished() {
-		return getAsDate(FileEntryXPath.Published);
-	}
+//	/**
+//	 * Method to get the Published date
+//	 * @return Date
+//	 */
+//	public Date getPublished() {
+//		return getAsDate(FileEntryXPath.Published);
+//	}
 	
-	/**
-	 * Method to get the Updated date
-	 * @return Date
-	 */
-	public Date getUpdated() {
-		return getAsDate(FileEntryXPath.Updated);
-	}
+//	/**
+//	 * Method to get the Updated date
+//	 * @return Date
+//	 */
+//	public Date getUpdated() {
+//		return getAsDate(FileEntryXPath.Updated);
+//	}
 
 	/**
 	 * Method to get the Created Date
@@ -272,13 +279,13 @@ public class File extends AtomEntity {
 		return getAsString(FileEntryXPath.ObjectTypeId);
 	}
 	
-	/**
-	 * Method to get the Self Url
-	 * @return String
-	 */
-	public String getSelfUrl() {
-		return this.getAsString(FileEntryXPath.SelfUrl);
-	}
+//	/**
+//	 * Method to get the Self Url
+//	 * @return String
+//	 */
+//	public String getSelfUrl() {
+//		return this.getAsString(FileEntryXPath.SelfUrl);
+//	}
 	
 	/**
 	 * Method to get Type
@@ -288,13 +295,13 @@ public class File extends AtomEntity {
 		return this.getAsString(FileEntryXPath.Type);
 	}
 	
-	/**
-	 * Method to get Alternate Url
-	 * @return String
-	 */
-	public String getAlternateUrl() {
-		return this.getAsString(FileEntryXPath.AlternateUrl);
-	}
+//	/**
+//	 * Method to get Alternate Url
+//	 * @return String
+//	 */
+//	public String getAlternateUrl() {
+//		return this.getAsString(FileEntryXPath.AlternateUrl);
+//	}
 	
 	/**
 	 * Method to get Edit Link
@@ -392,13 +399,13 @@ public class File extends AtomEntity {
 		return this.getAsInt(FileEntryXPath.ReferencesCount);
 	}
 
-	/**
-	 * Method to get Summary
-	 * @return String
-	 */
-	public String 	getSummary() {
-		return this.getAsString(FileEntryXPath.Summary);
-	}
+//	/**
+//	 * Method to get Summary
+//	 * @return String
+//	 */
+//	public String 	getSummary() {
+//		return this.getAsString(FileEntryXPath.Summary);
+//	}
 	
 	/**
 	 * Method to get Content Url
@@ -454,7 +461,7 @@ public class File extends AtomEntity {
 	 * @throws FileServiceException
 	 */
 	public File load() throws FileServiceException {
-		return getService().getFile(getFileId());
+		return getService().getFile(getId());
     }
 	
 	/**
@@ -466,7 +473,7 @@ public class File extends AtomEntity {
 	 * @throws TransformerException
 	 */
 	public Comment addComment(String comment, Map<String, String> params) throws FileServiceException, TransformerException {
-		return this.getService().addCommentToFile(this.getFileId(), comment, this.getAuthor().getId(), params);
+		return this.getService().addCommentToFile(this.getId(), comment, this.getAuthor().getId(), params);
     }
 	
 	/**
@@ -474,7 +481,7 @@ public class File extends AtomEntity {
 	 * @throws FileServiceException
 	 */
 	public void pin() throws FileServiceException {
-		this.getService().pinFile(this.getFileId());
+		this.getService().pinFile(this.getId());
     }
 	
 	/**
@@ -482,7 +489,7 @@ public class File extends AtomEntity {
 	 * @throws FileServiceException
 	 */
 	public void unpin() throws FileServiceException {
-		this.getService().unPinFile(this.getFileId());
+		this.getService().unPinFile(this.getId());
     }
 	
 	/**
@@ -490,7 +497,7 @@ public class File extends AtomEntity {
 	 * @throws FileServiceException
 	 */
 	public void lock() throws FileServiceException {
-		this.getService().lock(this.getFileId());
+		this.getService().lock(this.getId());
     }
 	
 	/**
@@ -498,7 +505,7 @@ public class File extends AtomEntity {
 	 * @throws FileServiceException
 	 */
 	public void unlock() throws FileServiceException {
-		this.getService().unlock(this.getFileId());
+		this.getService().unlock(this.getId());
     }
 	
 	/**
@@ -506,7 +513,7 @@ public class File extends AtomEntity {
 	 * @throws FileServiceException
 	 */
 	public void remove() throws FileServiceException {
-		this.getService().deleteFile(this.getFileId());
+		this.getService().deleteFile(this.getId());
     }
 	
 	/**

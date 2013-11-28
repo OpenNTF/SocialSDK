@@ -245,6 +245,7 @@
 				<version>1.7</version>
 				<executions>
 					<execution>
+					<id>tomcat</id>
 						<phase>package</phase>
 						<configuration>
 							<target>

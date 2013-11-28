@@ -264,6 +264,23 @@
 			</includes>
 		</fileSet>
 		<fileSet>
+			<directory>../sdk/</directory>
+			<outputDirectory>sbtsdk/source</outputDirectory>
+			<excludes>
+				<exclude>**/bin/</exclude>
+				<exclude>**/target/</exclude>
+				<exclude>**/pom.xml</exclude>
+				<exclude>**/.jazzignore</exclude>
+				<exclude>**/.apt_generated</exclude>
+				<exclude>**/.factorypath</exclude>
+				<exclude>/.project</exclude>
+
+			</excludes>
+			<includes>
+				<include>**/*.*</include>
+			</includes>
+		</fileSet>
+		<fileSet>
 			<directory>../domino/</directory>
 			<outputDirectory>sbtsdk/source</outputDirectory>
 			<excludes>

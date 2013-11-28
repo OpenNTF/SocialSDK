@@ -79,10 +79,9 @@ public class AtomEntity extends BaseEntity {
 		
 	}
 	/**
-	 * Construct an AtomEntity instance.
+	 * Default Constructor
 	 */
 	public AtomEntity() {
-		super(null, null);
 	}
 	
     /**

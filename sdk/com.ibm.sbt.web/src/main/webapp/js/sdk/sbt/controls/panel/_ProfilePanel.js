@@ -24,19 +24,19 @@ define(["../../declare", "../../lang", "../../dom", "../../widget/_TemplatedWidg
      * @module sbt.controls.panel._ProfilePanel
      */
     var _ProfilePanel = declare([ _TemplatedWidget ], {
-    	
-    	templateString: "<div><strong> Loading profile... </strong></div>",
-    	template: null,
-    	
-    	profile: null,
-    	
-    	errorClass: null,
-    	
+            
+            templateString: "<div><strong> Loading profile... </strong></div>",
+            template: null,
+            
+            profile: null,
+            
+            errorClass: null,
+            
         constructor: function(args) {
             lang.mixin(this, args);
             
             if (this.templateId) {
-            	this.template = this._getTemplate(this.templateId);
+                    this.template = this._getTemplate(this.templateId);
             }
         },
         
@@ -44,13 +44,13 @@ define(["../../declare", "../../lang", "../../dom", "../../widget/_TemplatedWidg
         },
 
         postCreate: function() {
-        	this.inherited(arguments);
-        	
-        	if (this.email || this.userid) {
-        		this.getProfile(this.email || this.userid);
-        	} else {
-        		this.getMyProfile();
-        	}
+                this.inherited(arguments);
+                
+                if (this.email || this.userid) {
+                        this.getProfile(this.email || this.userid);
+                } else {
+                        this.getMyProfile();
+                }
         },
         
         getMyProfile: function() {
@@ -60,33 +60,33 @@ define(["../../declare", "../../lang", "../../dom", "../../widget/_TemplatedWidg
         },
         
         showProfile: function(profile) {
-        	this.profile = profile || this.profile;
-        	if (!this.profile) {
-        		this._displayError(new Error("Invalid profile"));
-        		return;
-        	}
-        	
-        	try {
-            	var el = this.domNode;
-            	while (el.childNodes[0]) {
-                    this._destroy(el.childNodes[0]);
+                this.profile = profile || this.profile;
+                if (!this.profile) {
+                        this._displayError(new Error("Invalid profile"));
+                        return;
                 }
-            	
-            	var node;
-                if (this._isString(this.template)) {
+                
+                try {
+                    var el = this.domNode;
+                    while (el.childNodes[0]) {
+                    dom.destroy(el.childNodes[0]);
+                }
+                    
+                    var node;
+                if (lang.isString(this.template)) {
                     var domStr = this._substituteItems(this.template, this.profile);
-                    node = this._toDom(domStr, el.ownerDocument);
+                    node = dom.toDom(domStr, el.ownerDocument);
                 } else {
                     node = this.template.cloneNode(true);
                 }
                 el.appendChild(node);
-        	} catch (error) {
-        		this._displayError(error);
-        	}
+                } catch (error) {
+                        this._displayError(error);
+                }
         },
         
         getThumbnailAlt: function() {
-        	return this.profile.getName() || "";
+                return this.profile.getName() || "";
         },
         
         // Internals
@@ -96,7 +96,7 @@ define(["../../declare", "../../lang", "../../dom", "../../widget/_TemplatedWidg
             return this._substitute(template, profile, function(value,key) {
                 if (typeof value == "undefined") {
                     // check the self for the property
-                    value = this._getObject(key, false, self);
+                    value = lang.getObject(key, false, self);
                 }
 
                 if (typeof value == 'function') {
@@ -119,23 +119,23 @@ define(["../../declare", "../../lang", "../../dom", "../../widget/_TemplatedWidg
                 return value;
             }, this);
         },
-                
+               
         _displayError: function(error) {
-        	var el = this.domNode;
+                var el = this.domNode;
             while (el.childNodes[0]) {
-                this._destroy(el.childNodes[0]);
+                dom.destroy(el.childNodes[0]);
             }
-            var ediv = this._create("div", {
+           var ediv = dom.create("div", {
               "class": this.errorClass,
+              innerHTML: error,
               role: "alert",
               tabIndex: 0
             }, el, "only");
-            ediv.appendChild(dom.createTextNode(error));
         },
         
-    	_getTemplate: function(domId) {
+            _getTemplate: function(domId) {
             var domNode = dom.byId(domId);
-            return domNode ? (domNode.text || domNode.textContent) : "<strong>Unable to load template: "+domId+"</strong>";
+            return domNode ? domNode.innerHTML : "<strong>Unable to load template: "+domId+"</strong>";
         }
 
     });

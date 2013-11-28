@@ -33,7 +33,7 @@ import com.ibm.sbt.services.client.ClientServicesException;
  * @author Mario Duarte
  *
  */
-public class WikiServiceTest extends BaseWikiServiceTest {
+public class WikiGetAndUpdate extends BaseWikiServiceTest {
 	protected Wiki wiki;
 	protected Wiki wikiCreated;
 	

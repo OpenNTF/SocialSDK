@@ -81,12 +81,12 @@ public abstract class AtomEntitySerializer<T extends AtomEntity> extends BaseEnt
 		return textElement("content", entity.getContent(), attribute("type", "text"));
 	}
 	
-	protected Element author() {
-		return null;  //FIXME
+	protected Node author() {
+		return (new PersonSerializer(entity.getAuthor())).xmlNode("author");
 	}
 	
-	protected Element contributor() {
-		return null;  //FIXME
+	protected Node contributor() {
+		return (new PersonSerializer(entity.getAuthor())).xmlNode("contributor");
 	}
 
 	protected List<Element> tags() {

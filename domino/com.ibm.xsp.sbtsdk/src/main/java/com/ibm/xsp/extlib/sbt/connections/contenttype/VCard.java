@@ -100,9 +100,9 @@ public class VCard implements ContentTypeRenderer {
             attr.put("id", component.getClientId(context)+"_cn");
             attr.put("userId", userId);
             attr.put("userName", userName);
-            DojoUtil.addDojoHtmlAttributes(context, "extlib.dijit.ProfilesVCard", null, attr);
+            DojoUtil.addDojoHtmlAttributes(context, SBTResources.SBT_PROFILE_VCARD.getName(), null, attr);
             writer.endElement("span");  // $NON-NLS-1$
-            ExtLibResources.addEncodeResource(rootEx, SBTResources.dojoProfilesVCard);
+            ExtLibResources.addEncodeResource(rootEx, SBTResources.SBT_PROFILE_VCARD);
         } else {
             writer.startElement("span", component); // $NON-NLS-1$
             writer.writeAttribute("class", "vcard", null); // $NON-NLS-1$ $NON-NLS-2$
@@ -149,9 +149,9 @@ public class VCard implements ContentTypeRenderer {
             Map<String,String> attr = new HashMap<String, String>();
             attr.put("userId", userId);
             attr.put("userName", userName);
-            DojoUtil.addDojoHtmlAttributes(context, "extlib.dijit.ProfilesVCardInline", null, attr);
+            DojoUtil.addDojoHtmlAttributes(context, SBTResources.SBT_PROFILE_VCARD_INLINE.getName(), null, attr);
             writer.endElement("span");  // $NON-NLS-1$
-            ExtLibResources.addEncodeResource(rootEx, SBTResources.dojoProfilesVCardInline);
+            ExtLibResources.addEncodeResource(rootEx, SBTResources.SBT_PROFILE_VCARD_INLINE);
         } else {
             writer.startElement("span", component); // $NON-NLS-1$
             writer.writeAttribute("class", "vcard X-person-display-inline", null); // $NON-NLS-1$ $NON-NLS-2$

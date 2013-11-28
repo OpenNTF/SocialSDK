@@ -113,7 +113,7 @@
 				<include>com.ibm.sbt:sbt.sample.app</include>
 			</includes>
 			<binaries>
-			<dependencySets>
+				<dependencySets>
 					<dependencySet>
 						<includes>
 							<include>com.ibm.sbt:com.ibm.commons</include>
@@ -398,6 +398,13 @@
 			<includes>
 				<include>**/*</include>
 			</includes>
+		</fileSet>
+		<fileSet>
+			<directory>${project.build.directory}/classes</directory>
+			<includes>
+				<include>version.txt</include>
+			</includes>
+			<outputDirectory>sbtsdk</outputDirectory>
 		</fileSet>
 	</fileSets>
 </assembly>

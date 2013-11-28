@@ -33,8 +33,8 @@ public class SBTResources {
 
     public static final DojoModuleResource dojoSametimeLogin = new DojoModuleResource("extlib.dojo.SametimeLogin"); // $NON-NLS-1$
 
-    public static final DojoModuleResource dojoProfilesVCard = new DojoModuleResource("extlib.dijit.ProfilesVCard"); // $NON-NLS-1$
-    public static final DojoModuleResource dojoProfilesVCardInline = new DojoModuleResource("extlib.dijit.ProfilesVCardInline"); // $NON-NLS-1$
+    public static final DojoModuleResource SBT_PROFILE_VCARD = new DojoModuleResource("sbt.connections.controls.vcard.ProfileVCard"); // $NON-NLS-1$
+    public static final DojoModuleResource SBT_PROFILE_VCARD_INLINE = new DojoModuleResource("sbt.connections.controls.vcard.ProfileVCardInline"); // $NON-NLS-1$
     
     //public static final DojoModuleResource sametimeLiveName = new DojoModuleResource("sametime.LiveName"); // $NON-NLS-1$
     

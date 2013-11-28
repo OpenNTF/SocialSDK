@@ -86,9 +86,16 @@ public abstract class AtomEntitySerializer<T extends AtomEntity> extends BaseEnt
 	}
 	
 	protected Node contributor() {
-		return (new PersonSerializer(entity.getAuthor())).xmlNode("contributor");
+		return (new PersonSerializer(entity.getContributor())).xmlNode("contributor");
 	}
 
+	protected Element categoryType(String type) {
+		return element("category", 
+				attribute("scheme", "tag:ibm.com,2006:td/type"), 
+				attribute("term", type), 
+				attribute("label", type));
+	}
+	
 	protected List<Element> tags() {
 		List<Element> elements = new ArrayList<Element>();
 		if(entity.getTags() != null) {

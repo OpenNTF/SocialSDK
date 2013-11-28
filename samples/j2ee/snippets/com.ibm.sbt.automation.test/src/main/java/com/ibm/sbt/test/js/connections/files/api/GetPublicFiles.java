@@ -30,7 +30,7 @@ public class GetPublicFiles extends BaseFilesTest {
 		}
 		// to make sure there is at least one public file
 		createFile();
-		addSnippetParam("sample.fileId", fileEntry.getFileId());
+		addSnippetParam("sample.fileId", fileEntry.getId());
 		try {
 			files = fileService.getPublicFiles(new HashMap<String, String>());
 		} catch (FileServiceException e) {

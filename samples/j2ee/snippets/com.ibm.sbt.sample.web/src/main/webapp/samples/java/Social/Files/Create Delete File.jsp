@@ -54,10 +54,10 @@
                     new ByteArrayInputStream(content.getBytes(Charset.forName("UTF-8"))), id,
                     content.length(), params);
 
-            out.println("Created file: " + entry.getFileId());
+            out.println("Created file: " + entry.getId());
 
-            fileService.deleteFile(entry.getFileId());
-            out.println("<br/>Deleted file: " + entry.getFileId());
+            fileService.deleteFile(entry.getId());
+            out.println("<br/>Deleted file: " + entry.getId());
         } catch (Throwable e) {
             out.println("<pre>");
             out.println(e.getMessage());

@@ -82,7 +82,8 @@ define([ "../_bridge/declare","../_bridge/dom","../_bridge/lang",
                                 scope[att] = nodes[i];
                         }
                     }
-       },      
+       },
+     
         _doAttachEvents: function(el, scope) {
             var nodes = (el.all || el.getElementsByTagName("*"));
             for (var i in nodes) {

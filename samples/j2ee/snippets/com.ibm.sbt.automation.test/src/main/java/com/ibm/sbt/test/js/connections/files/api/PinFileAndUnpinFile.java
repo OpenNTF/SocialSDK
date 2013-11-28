@@ -21,7 +21,7 @@ public class PinFileAndUnpinFile extends BaseFilesTest {
 	@Before
 	public void init() {
 		createFile();
-		addSnippetParam("sample.fileId", fileEntry.getFileId());
+		addSnippetParam("sample.fileId", fileEntry.getId());
 	}
 
 	@After
@@ -37,7 +37,7 @@ public class PinFileAndUnpinFile extends BaseFilesTest {
 
 		previewPage = executeSnippet(SNIPPET_ID_REMOVE_PIN);
 		json = previewPage.getJson();
-		assertEquals(fileEntry.getFileId(), json.getString("fileId"));
+		assertEquals(fileEntry.getId(), json.getString("fileId"));
 	}
 
 	@Test
@@ -48,6 +48,6 @@ public class PinFileAndUnpinFile extends BaseFilesTest {
 
 		previewPage = executeSnippet(SNIPPET_ID_REMOVE_PIN_FILE);
 		json = previewPage.getJson();
-		assertEquals(fileEntry.getFileId(), json.getString("fileId"));
+		assertEquals(fileEntry.getId(), json.getString("fileId"));
 	}
 }

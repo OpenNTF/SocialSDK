@@ -252,10 +252,10 @@ public class WikiService extends BaseService {
 	 * @return
 	 * @throws ClientServicesException
 	 */
-	public WikiPage createWikiPage(WikiPage wikiPage, Map<String, String> parameters) 
+	public WikiPage createWikiPage(String wikiLabel, WikiPage wikiPage, Map<String, String> parameters) 
 			throws ClientServicesException {
-		String requestUrl = WikiUrls.WIKI_PAGES_AUTH.format(endpoint, wikiPage.getLabel());
-		Response response = createWikiPage(requestUrl, wikiPage, parameters);
+		String requestUrl = WikiUrls.WIKI_PAGES_AUTH.format(endpoint, wikiLabel);
+		Response response = createWikiPageAux(requestUrl, wikiPage, parameters);
 		return getWikiPageFeedHandler().createEntity(response);
 	}
 	
@@ -324,7 +324,7 @@ public class WikiService extends BaseService {
 		}
 	}
 	
-	private Response createWikiPage(String requestUrl, WikiPage wikiPage,  
+	private Response createWikiPageAux(String requestUrl, WikiPage wikiPage,  
 			Map<String, String> parameters) throws ClientServicesException {
 		try {
 			Map<String,String> headers = new HashMap<String, String>();

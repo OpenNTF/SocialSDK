@@ -246,8 +246,8 @@ public class BaseGridTestSetup extends BaseApiTest{
 		fileService = getFileService();
 		try {
 			folder = fileService.createFolder("TestFolder");		
-			fileService.pinFolder(folder.getId());
-			Trace.log("Created test folder: " + folder.getId());			
+			fileService.pinFolder(folder.getFileId());
+			Trace.log("Created test folder: " + folder.getFileId());			
 		} catch (FileServiceException e) {
 			e.printStackTrace();
 			Assert.fail("Error creating test folder: " + e.getMessage());
@@ -282,17 +282,17 @@ public class BaseGridTestSetup extends BaseApiTest{
 			fileEntry = fileService.uploadFile(new ByteArrayInputStream(content.getBytes()), id, content.length(), params);
 
 			params = new HashMap<String, String>();
-			fileService.addCommentToFile(fileEntry.getId(), "Comment added by Grid Setup", params);
-			fileService.pinFile(fileEntry.getId());
+			fileService.addCommentToFile(fileEntry.getFileId(), "Comment added by Grid Setup", params);
+			fileService.pinFile(fileEntry.getFileId());
 			if(folder != null){
-				fileService.addFileToFolder(fileEntry.getId(), folder.getId());
+				fileService.addFileToFolder(fileEntry.getFileId(), folder.getFileId());
 			}else{
 				createFolder();
-				fileService.addFileToFolder(fileEntry.getId(), folder.getId());
+				fileService.addFileToFolder(fileEntry.getFileId(), folder.getFileId());
 			}
 			
 			
-			Trace.log("Created test file: " + fileEntry.getId());
+			Trace.log("Created test file: " + fileEntry.getFileId());
 		} catch (FileServiceException fse) {
 			fileEntry = null;
 	        fse.printStackTrace();
@@ -306,7 +306,7 @@ public class BaseGridTestSetup extends BaseApiTest{
 	public void deleteFileAndQuit() {
 		if (fileEntry != null) {
 			try {
-				fileService.deleteFile(fileEntry.getId());
+				fileService.deleteFile(fileEntry.getFileId());
 			} catch (FileServiceException fse) {
 				fileEntry = null;
 				if (failIfAfterDeletionFails()) {
@@ -317,7 +317,7 @@ public class BaseGridTestSetup extends BaseApiTest{
 		}
 		if (folder != null) {
 			try {
-				fileService.deleteFolder(folder.getId());
+				fileService.deleteFolder(folder.getFileId());
 			} catch (FileServiceException fse) {
 				folder = null;
 				if (failIfAfterDeletionFails()) {

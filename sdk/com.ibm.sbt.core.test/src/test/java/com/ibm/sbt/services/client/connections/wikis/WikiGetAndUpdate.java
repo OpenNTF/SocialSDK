@@ -27,13 +27,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.ibm.sbt.services.client.ClientServicesException;
-
 /**
  * @author Mario Duarte
  *
  */
-public class WikiServiceTest extends BaseWikiServiceTest {
+public class WikiGetAndUpdate extends BaseWikiServiceTest {
 	protected Wiki wiki;
 	protected Wiki wikiCreated;
 	
@@ -44,7 +42,7 @@ public class WikiServiceTest extends BaseWikiServiceTest {
 	}
 	
 	@Test
-	public void getWikiTest() throws ClientServicesException {
+	public void getWikiTest() throws Exception {
 		Wiki wikiGot = wikiService.getWiki(wikiCreated.getLabel(), null);
 		
 		assertEquals(wiki.getTitle(), wikiGot.getTitle());
@@ -55,7 +53,7 @@ public class WikiServiceTest extends BaseWikiServiceTest {
 	}
 	
 	@Test
-	public void updateWikiTest() throws ClientServicesException {
+	public void updateWikiTest() throws Exception {
 		Map<String,String> getParams = new HashMap<String, String>();
 		getParams.put("includeTags", "true");
 		getParams.put("acls", "true");

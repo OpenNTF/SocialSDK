@@ -16,7 +16,6 @@
 
 package com.ibm.sbt.services.client.connections.wikis;
 
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -26,13 +25,9 @@ import org.w3c.dom.Node;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.xpath.XPathExpression;
-import com.ibm.sbt.services.client.base.AtomEntity;
-import com.ibm.sbt.services.client.base.AtomXPath;
 import com.ibm.sbt.services.client.base.BaseService;
-import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.connections.activity.Member;
-import com.ibm.sbt.services.client.connections.common.Person;
 
 /**
  * Wiki class represents an entry for a Wiki returned by the
@@ -41,7 +36,7 @@ import com.ibm.sbt.services.client.connections.common.Person;
  * @author Mario Duarte
  *
  */
-public class Wiki extends AtomEntity {
+public class Wiki extends WikiBaseEntity {
 
 	/**
 	 * 
@@ -72,29 +67,6 @@ public class Wiki extends AtomEntity {
 		super(service, (XmlDataHandler)null);
 	}
 	
-	/**
-	 * Unique identifier of a wiki.
-	 * @return wikiUuid
-	 */
-	public String getUuid() {
-		return getAsString(WikiXPath.uuid);
-	}
-	
-	/**
-	 * Label of a wiki.
-	 * @return wikiUuid
-	 */
-	public String getLabel() {
-		return getAsString(WikiXPath.label);
-	}
-	
-	/**
-	 * 
-	 * @param label
-	 */
-	public void setLabel(String label) {
-		setAsString(WikiXPath.label, label);
-	}
 	
 	/**
 	 * Return the community's unique ID if this wiki belongs to a community.
@@ -110,30 +82,6 @@ public class Wiki extends AtomEntity {
 	 */
 	public boolean isCommunityWiki() {
 		return getCommunityUuid() != null;
-	}
-	
-	/**
-	 * @return
-	 */
-	public Person getModifier() {
-		return new Person(getService(), new XmlDataHandler((Node)this.getDataHandler().getData(), 
-    			ConnectionsConstants.nameSpaceCtx, (XPathExpression)AtomXPath.modifier.getPath()));
-	}
-	
-	/**
-	 * Return the date the wiki was created.
-	 * @return
-	 */
-	public Date getCreated() {
-		return this.getAsDate(WikiXPath.created);
-	}
-	
-	/**
-	 * Date of the last modification
-	 * @return
-	 */
-	public Date getModified() {
-		return this.getAsDate(WikiXPath.modified);
 	}
 	
 	/**

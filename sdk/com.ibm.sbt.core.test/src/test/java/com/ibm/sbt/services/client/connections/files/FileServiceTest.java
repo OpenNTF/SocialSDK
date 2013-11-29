@@ -48,10 +48,10 @@ public class FileServiceTest extends BaseUnitTest {
 	public void testReadFile() throws Exception {
 		FileService fileService = new FileService();
 		FileList listOfFiles = fileService.getMyFiles();
-		String testFileId = listOfFiles.get(0).getId();
+		String testFileId = listOfFiles.get(0).getFileId();
 		File entry = fileService.getFile(testFileId, true);
 		assertEquals(entry.getCategory(), "document");
-		assertEquals(entry.getId(), testFileId);
+		assertEquals(entry.getFileId(), testFileId);
 	}
 
 //	@Test
@@ -59,7 +59,7 @@ public class FileServiceTest extends BaseUnitTest {
 //		FileService fileService = new FileService();
 //
 //		FileEntryList listOfFiles = fileService.getMyFiles();
-//		String testFileId = listOfFiles.get(0).getId();
+//		String testFileId = listOfFiles.get(0).getFileId();
 //		FileEntry entry = fileService.getFile(testFileId, false);
 //		Assert.assertNull(entry.getCategory());
 //	}
@@ -159,17 +159,17 @@ public class FileServiceTest extends BaseUnitTest {
 		
 		//Pin the first folder in My Folders
 		List<File> fileEntries = fileService.getMyFolders(null);
-		fileService.pinFolder(fileEntries.get(0).getId());
+		fileService.pinFolder(fileEntries.get(0).getFileId());
 		
 		//Check that the folder is now in the list of Pinned Folders and the list is > 0
 		List<File> pinnedFolders = fileService.getPinnedFolders();
 		assertTrue(pinnedFolders.size() > 0);
-		assertEquals(fileEntries.get(0).getId(), pinnedFolders.get(0).getId());
+		assertEquals(fileEntries.get(0).getFileId(), pinnedFolders.get(0).getFileId());
 		
 		//Remove the Pinned folder and check that pinned folders no longer contains the folder
-		fileService.unPinFolder(pinnedFolders.get(0).getId());
+		fileService.unPinFolder(pinnedFolders.get(0).getFileId());
 		if(pinnedFolders.size() > 0){
-			assertTrue(fileEntries.get(0).getId() != pinnedFolders.get(0).getId());
+			assertTrue(fileEntries.get(0).getFileId() != pinnedFolders.get(0).getFileId());
 		}
 	}
 	
@@ -205,7 +205,7 @@ public class FileServiceTest extends BaseUnitTest {
 		FileService fileService = new FileService();
 
 		FileList listOfFolders = fileService.getMyFolders();
-		String testFolderId = listOfFolders.get(0).getId();
+		String testFolderId = listOfFolders.get(0).getFileId();
 		List<File> fileEntries = fileService.getFilesInFolder(testFolderId, null);
 		if (fileEntries != null && !fileEntries.isEmpty()) {
 			for (File fEntry : fileEntries) {
@@ -234,7 +234,7 @@ public class FileServiceTest extends BaseUnitTest {
 		FileService fileService = new FileService();
 
 		FileList files = fileService.getMyFiles();
-		String fileId = files.get(0).getId();
+		String fileId = files.get(0).getFileId();
 		CommentList commentEntries = fileService.getAllFileComments(fileId, null);
 		if (commentEntries != null && !commentEntries.isEmpty()) {
 			for (Comment fEntry : commentEntries) {
@@ -251,7 +251,7 @@ public class FileServiceTest extends BaseUnitTest {
 		FileService fileService = new FileService();
 
 		FileList files = fileService.getMyFiles();
-		String fileId = files.get(0).getId();
+		String fileId = files.get(0).getFileId();
 		CommentList commentEntries = fileService.getAllUserFileComments(fileId, TestEnvironment.getCurrentUserUuid(), true, null);
 		if (commentEntries != null && !commentEntries.isEmpty()) {
 			for (Comment fEntry : commentEntries) {
@@ -277,7 +277,7 @@ public class FileServiceTest extends BaseUnitTest {
 		FileService fileService = new FileService();
 
 		FileList listOfFiles = fileService.getMyFiles();
-		String testFileId = listOfFiles.get(0).getId();
+		String testFileId = listOfFiles.get(0).getFileId();
 		File fileEntry = fileService.getFile(testFileId, false);
 		Map<String, String> paramsMap = new HashMap<String, String>();
 		Random random = new Random();
@@ -296,7 +296,7 @@ public class FileServiceTest extends BaseUnitTest {
 		FileService fileService = new FileService();
 
 		FileList listOfFiles = fileService.getMyFiles();
-		String testFileId = listOfFiles.get(0).getId();
+		String testFileId = listOfFiles.get(0).getFileId();
 		fileService.lock(testFileId);
 		File fileEntry = fileService.getFile(testFileId, true);
 		assertEquals(fileEntry.getLockType(), "HARD");
@@ -310,7 +310,7 @@ public class FileServiceTest extends BaseUnitTest {
 		FileService fileService = new FileService();
 
 		FileList listOfFiles = fileService.getMyFiles();
-		String testFileId = listOfFiles.get(0).getId();
+		String testFileId = listOfFiles.get(0).getFileId();
 		fileService.unlock(testFileId);
 		File fileEntry = fileService.getFile(testFileId, true);
 		assertEquals(fileEntry.getLockType(), "NONE");
@@ -325,17 +325,17 @@ public class FileServiceTest extends BaseUnitTest {
 
 		
 		FileList listOfFiles = fileService.getMyFiles();
-		String testFileId = listOfFiles.get(0).getId();
+		String testFileId = listOfFiles.get(0).getFileId();
 		
 		fileService.pinFile(testFileId);
 		List<File> pinnedFiles = fileService.getPinnedFiles(null);
 		assertTrue(pinnedFiles.size() > 0);
-		assertEquals(testFileId,pinnedFiles.get(0).getId());
+		assertEquals(testFileId,pinnedFiles.get(0).getFileId());
 		
 		fileService.unPinFile(testFileId);
 		pinnedFiles = fileService.getPinnedFiles(null);
 		if(pinnedFiles.size() > 0){
-			assertTrue(testFileId != pinnedFiles.get(0).getId());
+			assertTrue(testFileId != pinnedFiles.get(0).getFileId());
 		}
 		
 	}
@@ -345,7 +345,7 @@ public class FileServiceTest extends BaseUnitTest {
 		FileService fileService = new FileService();
 
 		FileList listOfFiles = fileService.getMyFiles();
-		String testDeleteFileId = listOfFiles.get(0).getId();
+		String testDeleteFileId = listOfFiles.get(0).getFileId();
 		fileService.deleteFile(testDeleteFileId);
 	}
 
@@ -354,11 +354,11 @@ public class FileServiceTest extends BaseUnitTest {
 		FileService fileService = new FileService();
 
 		FileList listOfFiles = fileService.getMyFiles();
-		String testFileId = listOfFiles.get(0).getId();
+		String testFileId = listOfFiles.get(0).getFileId();
 		File fileEntry = fileService.getFile(testFileId, true);
 		String comment = "Junit Comment - Added from FileServiceTest, testAddCommentToFile";
 		Comment commentEntry;
-		commentEntry = fileService.addCommentToFile(fileEntry.getId(), comment, fileEntry.getAuthor().getId() , null);
+		commentEntry = fileService.addCommentToFile(fileEntry.getFileId(), comment, fileEntry.getAuthor().getId() , null);
 		assertEquals(commentEntry.getComment(),
 				"Junit Comment - Added from FileServiceTest, testAddCommentToFile");
 	}
@@ -368,10 +368,10 @@ public class FileServiceTest extends BaseUnitTest {
 		FileService fileService = new FileService();
 
 		FileList listOfFiles = fileService.getMyFiles();
-		String testFileId = listOfFiles.get(0).getId();
+		String testFileId = listOfFiles.get(0).getFileId();
 		File fileEntry = fileService.getFile(testFileId, true);
 		String comment = "Junit Comment - Added from FileServiceTest, testAddCommentToMyFile";
-		Comment commentEntry = fileService.addCommentToFile(fileEntry.getId(), comment, null);
+		Comment commentEntry = fileService.addCommentToFile(fileEntry.getFileId(), comment, null);
 		assertEquals(commentEntry.getComment(),
 				"Junit Comment - Added from FileServiceTest, testAddCommentToMyFile");
 	}
@@ -413,10 +413,10 @@ public class FileServiceTest extends BaseUnitTest {
 		FileList folders = fileService.getMyFolders();
 		List<String> listOfFolderIds = new ArrayList<String>();
 		for(File folder : folders) {
-			listOfFolderIds.add(folder.getId());
+			listOfFolderIds.add(folder.getFileId());
 		}
 		FileList listOfFiles = fileService.getMyFiles();
-		String fileId = listOfFiles.get(0).getId();
+		String fileId = listOfFiles.get(0).getFileId();
 		fileService.addFileToFolders(fileId, listOfFolderIds);
 		
 		// now removing file from folders. 
@@ -430,7 +430,7 @@ public class FileServiceTest extends BaseUnitTest {
 		FileService fileService = new FileService();
 
 		FileList listOfFiles = fileService.getMyFiles();
-		String fileId = listOfFiles.get(0).getId();
+		String fileId = listOfFiles.get(0).getFileId();
 		String comment = "TestCreateComment From FileServiceTest";
 		Comment commentObject = fileService.createComment(fileId, comment);
 		assertEquals(commentObject.getComment(), comment);
@@ -446,7 +446,7 @@ public class FileServiceTest extends BaseUnitTest {
 		assertEquals(folder.getTitle(), name);
 		
 		//now delete the folder created
-		fileService.deleteFolder(folder.getId());
+		fileService.deleteFolder(folder.getFileId());
 	}
 	
 	@Test
@@ -454,7 +454,7 @@ public class FileServiceTest extends BaseUnitTest {
 		FileService fileService = new FileService();
 
 		FileList listOfFiles = fileService.getMyFiles();
-		String fileId = listOfFiles.get(0).getId();
+		String fileId = listOfFiles.get(0).getFileId();
 		CommentList commentObject = fileService.getAllFileComments(fileId, null);
 		String commentId = commentObject.get(0).getCommentId();
 		fileService.deleteComment(fileId, commentId);
@@ -465,7 +465,7 @@ public class FileServiceTest extends BaseUnitTest {
 		FileService fileService = new FileService();
 
 		FileList listOfFiles = fileService.getFilesInMyRecycleBin();
-		String fileId = listOfFiles.get(0).getId();
+		String fileId = listOfFiles.get(0).getFileId();
 		fileService.deleteFileFromRecycleBin(fileId);
 	}
 	
@@ -483,7 +483,7 @@ public class FileServiceTest extends BaseUnitTest {
 		FileService fileService = new FileService();
 		FileList folders = fileService.getMyFolders();
 		if(folders != null) {
-			File folder = fileService.getFolder(folders.get(0).getId()); 
+			File folder = fileService.getFolder(folders.get(0).getFileId()); 
 			assertNotNull(folder.getTitle());
 		}
 	}
@@ -493,7 +493,7 @@ public class FileServiceTest extends BaseUnitTest {
 		FileService fileService = new FileService();
 		FileList files = fileService.getFilesInMyRecycleBin();
 		if(files != null) {
-			fileService.restoreFileFromRecycleBin(files.get(0).getId());
+			fileService.restoreFileFromRecycleBin(files.get(0).getFileId());
 		}
 	}
 	
@@ -502,7 +502,7 @@ public class FileServiceTest extends BaseUnitTest {
 		FileService fileService = new FileService();
 
 		FileList listOfFiles = fileService.getMyFiles();
-		String fileId = listOfFiles.get(0).getId();
+		String fileId = listOfFiles.get(0).getFileId();
 		Comment commentObject = fileService.createComment(fileId, "CommentCreated" + System.currentTimeMillis());
 		if(commentObject != null) {
 			String commentId = commentObject.getCommentId();

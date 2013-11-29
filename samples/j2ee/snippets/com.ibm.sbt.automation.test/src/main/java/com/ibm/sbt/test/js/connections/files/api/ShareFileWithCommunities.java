@@ -17,7 +17,7 @@ public class ShareFileWithCommunities extends BaseFilesTest {
 	public void init() {
 		createFile();
 		createCommunity();
-		addSnippetParam("sample.fileId", fileEntry.getId());
+		addSnippetParam("sample.fileId", fileEntry.getFileId());
 		addSnippetParam("sample.fileCommunityId", community.getCommunityUuid());
 	}
 

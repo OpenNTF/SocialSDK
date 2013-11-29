@@ -43,7 +43,7 @@
 			        FileService fileService = new FileService();
 			        FileList fileEntries = fileService.getMyFiles();
 			        File fileEntry = fileEntries.get(0);
-			        Comment commentEntry = fileService.addCommentToFile(fileEntry.getId(), "Comment added by Add Comment To File java sample at " + System.currentTimeMillis(), null);
+			        Comment commentEntry = fileService.addCommentToFile(fileEntry.getFileId(), "Comment added by Add Comment To File java sample at " + System.currentTimeMillis(), null);
 			        if (commentEntry != null) {
 			        	String commentId = commentEntry.getCommentId();
 			            out.println("Comment Id : " + commentId + "<br/>");

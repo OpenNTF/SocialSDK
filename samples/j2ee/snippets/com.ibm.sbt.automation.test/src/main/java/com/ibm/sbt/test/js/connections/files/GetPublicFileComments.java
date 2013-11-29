@@ -33,7 +33,7 @@ public class GetPublicFileComments extends BaseFilesTest {
 	@Before
 	public void init() {
 		createFile();
-		addSnippetParam("sample.fileId", fileEntry.getId());
+		addSnippetParam("sample.fileId", fileEntry.getFileId());
 	}
 
 	@After

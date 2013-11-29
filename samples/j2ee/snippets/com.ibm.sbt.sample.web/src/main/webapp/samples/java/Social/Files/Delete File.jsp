@@ -37,7 +37,7 @@
 				FileService service = new FileService(); 
 				List<File> fileEntries = service.getMyFiles();
         		File fileEntry = fileEntries.get(0);
-				String fileId = fileEntry.getFileId();
+				String fileId = fileEntry.getId();
 				out.println("<b> Deleting File </b>" + fileId);	
 			 	service.deleteFile(fileId);
 				out.println("<br> file deleted successfully"); 

@@ -173,7 +173,7 @@ public class BaseFilesTest extends BaseApiTest {
 		fileService = getFileService();
 		try {
 			folder = fileService.createFolder("TestFolder");
-			Trace.log("Created test folder: " + folder.getFileId());
+			Trace.log("Created test folder: " + folder.getId());
 		} catch (FileServiceException e) {
 			e.printStackTrace();
 			fail("Error creating test folder: ", e);
@@ -201,9 +201,9 @@ public class BaseFilesTest extends BaseApiTest {
 			fileEntry = fileService.uploadFile(new ByteArrayInputStream(content.getBytes()), id, content.length(), params);
 
 			params = new HashMap<String, String>();
-			fileService.addCommentToFile(fileEntry.getFileId(), "Comment added by BaseFilesTest", params);
+			fileService.addCommentToFile(fileEntry.getId(), "Comment added by BaseFilesTest", params);
 
-			Trace.log("Created test file: " + fileEntry.getFileId());
+			Trace.log("Created test file: " + fileEntry.getId());
 		} catch (FileServiceException fse) {
 			fileEntry = null;
 			fse.printStackTrace();
@@ -219,7 +219,7 @@ public class BaseFilesTest extends BaseApiTest {
 		communityService = getCommunityService();
 		if (fileEntry != null) {
 			try {
-				fileService.deleteFile(fileEntry.getFileId());
+				fileService.deleteFile(fileEntry.getId());
 			} catch (FileServiceException fse) {
 				fileEntry = null;
 				if (failIfAfterDeletionFails()) {
@@ -230,7 +230,7 @@ public class BaseFilesTest extends BaseApiTest {
 		}
 		if (folder != null) {
 			try {
-				fileService.deleteFolder(folder.getFileId());
+				fileService.deleteFolder(folder.getId());
 			} catch (FileServiceException fse) {
 				folder = null;
 				if (failIfAfterDeletionFails()) {

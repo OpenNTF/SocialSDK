@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entry xmlns:thr="http://purl.org/syndication/thread/1.0"
+	xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"
+	xmlns:td="urn:ibm.com/td" xmlns="http://www.w3.org/2005/Atom">
+	<id>urn:lsid:ibm.com:td:adb6e2dc-acac-467d-be88-ee1afe964ae1</id>
+	<td:uuid>adb6e2dc-acac-467d-be88-ee1afe964ae1</td:uuid>
+	<td:label>Setup and configuration</td:label>
+	<link
+		href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/wikis/basic/api/wiki/ACME%20airlines%20wiki/page/Setup%20and%20configuration/entry"
+		rel="self"></link>
+	<link
+		href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/wikis/home/wiki/ACME%20airlines%20wiki/page/Setup%20and%20configuration"
+		rel="alternate" type="text/html"></link>
+	<link
+		href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/wikis/basic/api/wiki/ACME%20airlines%20wiki/page/Setup%20and%20configuration/entry"
+		rel="edit"></link>
+	<link
+		href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/wikis/basic/api/wiki/b66cc73b-d19f-42ff-b6d0-e1c428af75d5/page/adb6e2dc-acac-467d-be88-ee1afe964ae1/media"
+		rel="edit-media"></link>
+	<link
+		href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/wikis/basic/anonymous/api/wiki/b66cc73b-d19f-42ff-b6d0-e1c428af75d5/page/adb6e2dc-acac-467d-be88-ee1afe964ae1/media/Setup%20and%20configuration?convertTo=html&amp;errorPage=true&amp;f=Setup%20and%20configuration"
+		rel="enclosure" type="application/xhtml+xml" title="Setup and configuration"
+		hreflang="en" length="314"></link>
+	<link
+		href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/wikis/basic/api/wiki/b66cc73b-d19f-42ff-b6d0-e1c428af75d5/page/adb6e2dc-acac-467d-be88-ee1afe964ae1/entry"
+		rel="related"></link>
+	<category term="page" scheme="tag:ibm.com,2006:td/type" label="page"></category>
+	<link
+		href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/wikis/basic/api/wiki/b66cc73b-d19f-42ff-b6d0-e1c428af75d5/page/adb6e2dc-acac-467d-be88-ee1afe964ae1/feed"
+		rel="replies" type="application/atom+xml" thr:count="0"
+		xmlns:thr="http://purl.org/syndication/thread/1.0"></link>
+	<author>
+		<name>Frank Adams</name>
+		<snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+		<email>***REMOVED***@renovations.com</email>
+		<snx:userState>active</snx:userState>
+	</author>
+	<title type="text">Setup and configuration</title>
+	<published>2013-11-28T15:06:58.100Z</published>
+	<updated>2013-11-28T15:07:50.640Z</updated>
+	<td:library>
+		<td:libraryTitle>ACME airlines wiki</td:libraryTitle>
+		<td:libraryUuid>b66cc73b-d19f-42ff-b6d0-e1c428af75d5</td:libraryUuid>
+	</td:library>
+	<td:created>2013-11-28T15:06:58.100Z</td:created>
+	<td:modified>2013-11-28T15:06:58.100Z</td:modified>
+	<td:modifier>
+		<name>Frank Adams</name>
+		<snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+		<email>***REMOVED***@renovations.com</email>
+		<snx:userState>active</snx:userState>
+	</td:modifier>
+	<td:visibility>public</td:visibility>
+	<td:versionUuid>a7852910-e40c-426d-8ed8-b68ccd1bfa2f</td:versionUuid>
+	<td:versionLabel>1</td:versionLabel>
+	<td:propagation>false</td:propagation>
+	<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">1</snx:rank>
+	<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">3</snx:rank>
+	<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/share">5</snx:rank>
+	<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/collections">1</snx:rank>
+	<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/attachments">0</snx:rank>
+	<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/versions">1</snx:rank>
+	<td:totalMediaSize>314</td:totalMediaSize>
+	<summary type="text">Wiki with information about the setup and
+		configuration of the ACME airlines application</summary>
+	<content type="text/html"
+		src="https://vhost0839.dc1.on.ca.compute.ihost.com:444/wikis/basic/api/wiki/b66cc73b-d19f-42ff-b6d0-e1c428af75d5/page/adb6e2dc-acac-467d-be88-ee1afe964ae1/media?convertTo=html"></content>
+	<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">4</snx:rank>
+	<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/anonymous_hit">6</snx:rank>
+</entry>

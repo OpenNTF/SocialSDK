@@ -17,8 +17,8 @@
 /**
  * 
  */
-define([ "../../declare", "../../data/AtomReadStore", "../../widget/_TemplatedWidget"], 
-        function(declare, AtomReadStore, _TemplatedWidget){
+define([ "../../declare", "../../data/AtomReadStore", "../../widget/_TemplatedWidget","../../lang"], 
+        function(declare, AtomReadStore, _TemplatedWidget,lang){
     /**
      * @module sbt.widget.grid._Grid
      */
@@ -60,7 +60,7 @@ define([ "../../declare", "../../data/AtomReadStore", "../../widget/_TemplatedWi
                 }
             };
             
-            var args = this._mixin(options, {
+            var args = lang.mixin(options, {
                 scope: this,
                 onComplete: handleComplete,
                 onError: handleError

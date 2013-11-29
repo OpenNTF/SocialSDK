@@ -50,15 +50,15 @@
           FileService fileService = new FileService();
           FileList fileEntries = fileService.getMyFiles();
           if(fileEntries != null && !fileEntries.isEmpty()) { 
-	          File fileEntry = fileService.getFile(fileEntries.get(0).getFileId(), false);
+	          File fileEntry = fileService.getFile(fileEntries.get(0).getId(), false);
 	          Map<String, String> paramsMap = new HashMap<String, String>();
 	          paramsMap.put(FileRequestParams.TAG.getFileRequestParams(), "NewVersionTag");
 			  
 	          String content = "New Version Uploaded";
 			  String name = "NewVersionFile" + System.nanoTime() + ".txt";
 			  fileEntry = fileService.updateFile(new ByteArrayInputStream(content.getBytes(Charset.forName("UTF-8"))), 
-					  fileEntry.getFileId(), name, paramsMap);
-	          out.println("New Version of File Uploaded  : " + fileEntry.getFileId());
+					  fileEntry.getId(), name, paramsMap);
+	          out.println("New Version of File Uploaded  : " + fileEntry.getId());
           } else {
         	  out.println("No Files to be updated");
           }
@@ -80,7 +80,7 @@
 			  String content = "New Version of Community File" + System.nanoTime();
 			  String name = fileUploaded.getLabel()+"NewVersion" + System.nanoTime() + ".txt";
 			  fileUploaded = fileService.updateCommunityFile(new ByteArrayInputStream(content.getBytes(Charset.forName("UTF-8"))), 
-					  fileUploaded.getFileId(), name, fileUploaded.getLibraryId(), paramsMap);
+					  fileUploaded.getId(), name, fileUploaded.getLibraryId(), paramsMap);
 	          out.println("New Version of File Uploaded  : " + fileUploaded.getLabel() + " , Community = " + commList.get(0).getTitle());
           } else {
         	  out.println("No Communities");

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:openSearch="http://a9.com/-/spec/opensearch/1.1/">
+	<generator uri="http://www.ibm.com/xmlns/prod/sn" version="4.5.0.0">IBM
+		Connections - Follow service</generator>
+	<title type="text">Followed resources for Frank Adams</title>
+	<updated>2013-11-27T20:24:49.365Z</updated>
+	<id>urn:lsid:ibm.com:follow:feed-com.ibm.lc.f4ba40d6-cee1-4752-b89d-8a12cf631703
+	</id>
+	<openSearch:itemsPerPage xmlns:openSearch="http://a9.com/-/spec/opensearch/1.1/">20
+	</openSearch:itemsPerPage>
+	<openSearch:startIndex xmlns:openSearch="http://a9.com/-/spec/opensearch/1.1/">1
+	</openSearch:startIndex>
+	<openSearch:totalResults xmlns:openSearch="http://a9.com/-/spec/opensearch/1.1/">0
+	</openSearch:totalResults>
+	<link rel="self"
+		href="https://qs.renovations.com:444/communities/follow/atom/resources?ps=20&amp;page=1&amp;source=communities&amp;type=community"
+		type="application/atom+xml"></link>
+	<link rel="alternate" href="https://qs.renovations.com:444/communities"
+		type="text/html"></link>
+	<author xmlns:snx="http://www.ibm.com/xmlns/prod/sn">
+		<name>Frank Adams</name>
+		<snx:userid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">0F19F8AD-37EA-6033-8525-7BBF005634B5
+		</snx:userid>
+		<snx:userState xmlns:snx="http://www.ibm.com/xmlns/prod/sn">active</snx:userState>
+		<email>***REMOVED***@renovations.com</email>
+		<uri>https://qs.renovations.com:444/profiles/html/profile.do?userid=0F19F8AD-37EA-6033-8525-7BBF005634B5
+		</uri>
+	</author>
+</feed>

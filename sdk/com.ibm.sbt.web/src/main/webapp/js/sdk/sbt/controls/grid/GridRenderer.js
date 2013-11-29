@@ -17,23 +17,23 @@
 /**
  * 
  */
-define([ "../../declare", "../../dom", "../../lang", "../../widget/grid/_GridRenderer" ], 
-         function(declare, dom, lang, _GridRenderer) {
+define([ "../../declare", "../../dom", "../../lang"], 
+         function(declare, dom, lang) {
 
     /**
      * @module sbt.controls.grid.GridRenderer
      * @class  GridRenderer
      * @namespace  sbt.controls.grid
      */
-    var GridRenderer = declare([ _GridRenderer ], {
+    var GridRenderer = declare(null, {
         /**
          * Strings used in the grid
          */
-    	nls: null,
-    	
-    	/**
-    	 * CSS class to be used for tables - see ConnectionsGridRenderer
-    	 */
+            nls: null,
+            
+            /**
+             * CSS class to be used for tables - see ConnectionsGridRenderer
+             */
         tableClass: null,
         emptyClass: null,
         errorClass: null,
@@ -58,7 +58,7 @@ define([ "../../declare", "../../dom", "../../lang", "../../widget/grid/_GridRen
          */
         render: function(grid, el, items, data) {
            while (el.childNodes[0]) {
-               this._destroy(el.childNodes[0]);
+               dom.destroy(el.childNodes[0]);
            }
            var size = items.length;
            if (size === 0) {
@@ -69,9 +69,9 @@ define([ "../../declare", "../../dom", "../../lang", "../../widget/grid/_GridRen
               this.renderSorter(grid, el, data);
               var container = null;
               if (!this.containerType || this.containerType == "table") {
-            	  container = this.renderTable(grid, el, items, data);
+                      container = this.renderTable(grid, el, items, data);
               } else {
-            	  container = this.renderList(grid, el, this.containerType, "");  
+                      container = this.renderList(grid, el, this.containerType, "");  
               }
               for (var i=0; i<items.length; i++) {
                   this.renderItem(grid, container, data, items[i], i, items);
@@ -92,15 +92,15 @@ define([ "../../declare", "../../dom", "../../lang", "../../widget/grid/_GridRen
         renderPager : function(grid,el,items,data) {
             if (this.pagerTemplate && !grid.hidePager) {
                 var node;
-                if (this._isString(this.pagerTemplate)) {
+                if (lang.isString(this.pagerTemplate)) {
                     var domStr = this._substituteItems(this.pagerTemplate, grid, this, items, data);
-                    node = this._toDom(domStr, el.ownerDocument);
+                    node = dom.toDom(domStr, el.ownerDocument);
                 } else {
                     node = this.pagerTemplate.cloneNode(true);
                 }
                 el.appendChild(node);
                 
-                this._doAttachEvents(grid, el, data);
+                grid._doAttachEvents(el, data);
             }
         },
         
@@ -116,15 +116,15 @@ define([ "../../declare", "../../dom", "../../lang", "../../widget/grid/_GridRen
         renderFooter : function(grid,el,items,data) {
             if (this.footerTemplate && !grid.hidePager) {
                 var node;
-                if (this._isString(this.footerTemplate)) {
+                if (lang.isString(this.footerTemplate)) {
                     var domStr = this._substituteItems(this.footerTemplate, grid, this, items, data);
-                    node = this._toDom(domStr, el.ownerDocument);
+                    node = dom.toDom(domStr, el.ownerDocument);
                 } else {
                     node = this.footerTemplate.cloneNode(true);
                 }
                 el.appendChild(node);
                 
-                this._doAttachEvents(grid, el, data);
+                grid._doAttachEvents(el, data);
             }
         },
         
@@ -140,15 +140,15 @@ define([ "../../declare", "../../dom", "../../lang", "../../widget/grid/_GridRen
                 var sortInfo = grid.getSortInfo();
                 if (sortInfo) {
                     var node;
-                    if (this._isString(this.sortTemplate)) {
+                    if (lang.isString(this.sortTemplate)) {
                         var domStr = this._substituteItems(this.sortTemplate, grid, this, sortInfo);
-                        node = this._toDom(domStr, el.ownerDocument);
+                        node = dom.toDom(domStr, el.ownerDocument);
                     } else {
                         node = this.sortTemplate.cloneNode(true);
                     }
                     el.appendChild(node);
                     
-                    this._doAttachEvents(grid, el, data);
+                    grid._doAttachEvents(el, data);
                 }
             }
         },
@@ -163,16 +163,15 @@ define([ "../../declare", "../../dom", "../../lang", "../../widget/grid/_GridRen
          * @param data - the data associated with the current row
          * @returns - A table body element, that is attached to a table
          */
-        renderTable: function(grid, el, items, data) {       	
-            var table = this._create("table", {
+        renderTable: function(grid, el, items, data) {               
+            var table = dom.create("table", {
                 "class": this.tableClass,
                 border:"0",
                 cellspacing:"0",
                 cellpadding:"0",
-               // summary:this.nls.summary
                 role:"presentation"
             }, el);
-            var tbody = this._create("tbody", null, table);
+            var tbody = dom.create("tbody", null, table);
             return tbody;
         },
         
@@ -187,8 +186,8 @@ define([ "../../declare", "../../dom", "../../lang", "../../widget/grid/_GridRen
          * @param data - the data associated with the current row
          * @returns - A list element (either ul or ol)
          */
-        renderList: function(grid, el, listType, listClass) {       	
-            var ol = this._create(listType, {
+        renderList: function(grid, el, listType, listClass) {               
+            var ol = dom.create(listType, {
                 role:"presentation",
                 class:listClass
             }, el);
@@ -203,14 +202,14 @@ define([ "../../declare", "../../dom", "../../lang", "../../widget/grid/_GridRen
          * @param el - The Current Element
          */
         renderLoading: function(grid, el) {
-           var div = this._create("div", {
+           var div = dom.create("div", {
               "class": this.loadingClass
            }, el, "only");
            dom.setText(div,this.nls.loading);
            
-           var img = this._create("img", {
+           var img = dom.create("img", {
               "class": this.loadingImgClass,
-              src: this._blankGif,
+              src: grid._blankGif,
               role: "presentation"
            }, div, "first");
         },
@@ -223,15 +222,14 @@ define([ "../../declare", "../../dom", "../../lang", "../../widget/grid/_GridRen
          */
         renderEmpty: function(grid, el) {
            while (el.childNodes[0]) {
-               this._destroy(el.childNodes[0]);
+               dom.destroy(el.childNodes[0]);
            }
-           var ediv = this._create("div", {
+           var ediv = dom.create("div", {
              "class": this.emptyClass,
              role: "document",
              tabIndex: 0
            }, el, "only");
            dom.setText(ediv,this.nls.empty);
-           //dijit.setWaiState(ediv, "label", this.nls.empty);
         },
         
         /**Creates a div to display a grid that has returned an error
@@ -241,9 +239,9 @@ define([ "../../declare", "../../dom", "../../lang", "../../widget/grid/_GridRen
          * @param - error - The error message to be displayed*/
         renderError: function(grid, el, error) {
             while (el.childNodes[0]) {
-                this._destroy(el.childNodes[0]);
+                dom.destroy(el.childNodes[0]);
             }
-           var ediv = this._create("div", {
+           var ediv = dom.create("div", {
               "class": this.errorClass,
               role: "alert",
               tabIndex: 0
@@ -251,20 +249,14 @@ define([ "../../declare", "../../dom", "../../lang", "../../widget/grid/_GridRen
            
            dom.setText(ediv, error);
         },
-        
-        /**
-         * @method getSortInfo
-         */
-        getSortInfo: function() {
-        },       
-        
+
         /**
          * Returns the paging results,  - How many pages of results there are
          * @method - pagingResults
          * @return - A String for paging - for example "0 - 5 Of 5"
          */
         pagingResults : function(grid,renderer,items,data) {
-            return this._substitute(renderer.nls.pagingResults, data);
+            return grid._substitute(renderer.nls.pagingResults, data);
         },
         
         /**If the user is on the first page of results, they cannot click
@@ -301,23 +293,6 @@ define([ "../../declare", "../../dom", "../../lang", "../../widget/grid/_GridRen
          */
         hideNextLabel : function(grid,renderer,items,data) {
             return (data.start + data.count >= data.totalCount) ? "" : "display: none;";
-        },
-
-        /**
-         * @method updateSort
-         * @param el
-         */
-        updateSort : function(el) {
-        },
-
-        /**
-         * @method renderSort
-         * @param el
-         * @param sort
-         * @param i
-         * @param sorts
-         */
-        renderSort : function(el,sort,i,sorts) {
         },
         
         /**
@@ -389,15 +364,15 @@ define([ "../../declare", "../../dom", "../../lang", "../../widget/grid/_GridRen
         renderItem : function(grid,el,data,item,i,items) {
             if (this.template) {
                 var node;
-                if (this._isString(this.template)) {
+                if (lang.isString(this.template)) {
                     var domStr = this._substituteItem(this.template, grid, item, i, items);
-                    node = this._toDom(domStr, el.ownerDocument);
+                    node = dom.toDom(domStr, el.ownerDocument);
                 } else {
                     node = this.template.cloneNode(true);
                 }
                 el.appendChild(node);
                 
-                this._doAttachEvents(grid, el, item);
+                grid._doAttachEvents(el, item);
             }
         },
 
@@ -408,10 +383,10 @@ define([ "../../declare", "../../dom", "../../lang", "../../widget/grid/_GridRen
          */
         _substituteItem : function(template,grid,item,i,items) {
             var self = this;
-            return this._substitute(template, item, function(value,key) {
+            return grid._substitute(template, item, function(value,key) {
                 if (typeof value == "undefined") {
                     // check the renderer for the property
-                    value = this._getObject(key, false, self);
+                    value = lang.getObject(key, false, self);
                 }
 
                 if (typeof value == 'function') {
@@ -442,10 +417,10 @@ define([ "../../declare", "../../dom", "../../lang", "../../widget/grid/_GridRen
 
         _substituteItems : function(template,grid,renderer,items,data) {
             var self = this;
-            return this._substitute(template, renderer, function(value,key) {
+            return grid._substitute(template, renderer, function(value,key) {
                 if (typeof value == "undefined") {
                     // check the renderer for the property
-                    value = this._getObject(key, false, self);
+                    lang = this.getObject(key, false, self);
                 }
 
                 if (typeof value == 'function') {
@@ -464,41 +439,13 @@ define([ "../../declare", "../../dom", "../../lang", "../../widget/grid/_GridRen
                 return value;
             }, this);
         },
-        
-        _doAttachEvents: function(grid, el, data) {
-            var nodes = (el.all || el.getElementsByTagName("*"));
-            for (var i in nodes) {
-                var attachEvent = (nodes[i].getAttribute) ? nodes[i].getAttribute("data-dojo-attach-event") : null;
-                if (attachEvent) {
-                    nodes[i].removeAttribute("data-dojo-attach-event");
-                    var event, events = attachEvent.split(/\s*,\s*/);
-                    while((event = events.shift())) {
-                        if (event) {
-                            var func = null;
-                            if (event.indexOf(":") != -1) {
-                                var eventFunc = event.split(":");
-                                event = this._trim(eventFunc[0]);
-                                func = this._trim(eventFunc[1]);
-                            } else {
-                                event = this._trim(event);
-                            }
-                            if (!func) {
-                                func = event;
-                            }
-                            var callback = this._hitch(grid, grid[func], nodes[i], data);
-                            grid._connect(nodes[i], event, callback);
-                        }
-                    }
-                }
-            }
-        },
-        
+               
         getProfileUrl: function(grid,id){
-        	var endpoint = grid.store.getEndpoint();
-        	var profileURL = "/${profiles}/html/profileView.do?userid="+id;
-        	profileURL = grid.constructUrl(profileURL,{},{},endpoint);
-        	profileURL = endpoint.baseUrl+profileURL;
-        	return profileURL;
+                var endpoint = grid.store.getEndpoint();
+                var profileURL = "/${profiles}/html/profileView.do?userid="+id;
+                profileURL = grid.constructUrl(profileURL,{},{},endpoint);
+                profileURL = endpoint.baseUrl+profileURL;
+                return profileURL;
         }
         
     });

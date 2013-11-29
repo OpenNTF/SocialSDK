@@ -29,10 +29,10 @@ define(["../../../declare", "../../../stringUtil", "../../../i18n", "../../../la
      * @namespace sbt.connections.controls.communities
      */
     var CommunityGridRenderer = declare(ConnectionsGridRenderer, {
-    	
-    	 /**
-    	  * Strings used in the grid
-    	  */
+            
+             /**
+              * Strings used in the grid
+              */
          _nls: nls,
          
          /**
@@ -86,7 +86,7 @@ define(["../../../declare", "../../../stringUtil", "../../../i18n", "../../../la
           * @returns The image url
           */
          communityImage: function(grid, item, i, items) {
-        	 var logoUrl = item.getValue("logoUrl");
+                 var logoUrl = item.getValue("logoUrl");
              return grid.encodeImageUrl(logoUrl);
          },
          
@@ -116,7 +116,7 @@ define(["../../../declare", "../../../stringUtil", "../../../i18n", "../../../la
           * @returns The date when the community was last updates
           */
          updatedDate: function(grid, item, i, items) {
-        	 return i18n.getUpdatedLabel((item.getValue("updated")));
+                 return i18n.getUpdatedLabel((item.getValue("updated")));
          },
          
          /**
@@ -128,7 +128,7 @@ define(["../../../declare", "../../../stringUtil", "../../../i18n", "../../../la
           * @returns {String}
           */
          displayTags: function(grid, item, i, items) {
-        	 var tags = item.getValue("tags");
+                 var tags = item.getValue("tags");
              if (tags == undefined) {
                  return "display: none";
              } else {
@@ -146,7 +146,7 @@ define(["../../../declare", "../../../stringUtil", "../../../i18n", "../../../la
           * @returns {String}
           */
          displayRestricted: function(grid, item, i, items) {
-        	 var communityType = item.getValue("communityType");
+                 var communityType = item.getValue("communityType");
              if (communityType == undefined || communityType != "publicInviteOnly") {
                  return "display: none;";
              } else {
@@ -163,7 +163,7 @@ define(["../../../declare", "../../../stringUtil", "../../../i18n", "../../../la
           * @returns an array of strings, that are tags for a community
           */
          tagsLabel: function(grid, item, i, items) {
-        	 var tags = item.getValue("tags");
+                 var tags = item.getValue("tags");
              if (tags == undefined) {
                  return "";
              } else {
@@ -188,20 +188,20 @@ define(["../../../declare", "../../../stringUtil", "../../../i18n", "../../../la
                  var tagsStr = "";
                  if (lang.isArray(tags)) {
                      for (var i=0; i<tags.length; i++) {
-                         tagsStr += this._substitute(this.tagAnchorTemplate, { tagName : tags[i] });
+                         tagsStr += grid._substitute(this.tagAnchorTemplate, { tagName : tags[i] });
                          if (i+1 < tags.length) {
                              tagsStr += ", ";
                          }
                      }
                  } else if (lang.isString(tags)) {
-                	 tagsStr = this._substitute(this.tagAnchorTemplate, { tagName : tags });
+                         tagsStr = grid._substitute(this.tagAnchorTemplate, { tagName : tags });
                  }
                  return tagsStr;
              }
          },
          
          getUserProfileHref: function(grid,item,i,items){
-        	 return this.getProfileUrl(grid,item.getValue("authorUserid"));
+                 return this.getProfileUrl(grid,item.getValue("authorUserid"));
          }
 
          

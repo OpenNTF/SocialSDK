@@ -71,7 +71,7 @@ public class File extends AtomEntity {
 	 * Method to get the FileId of the File
 	 * @return String 
 	 */
-	public String getId() {
+	public String getFileId() {
 		String id = super.getId();
 		// here we extract the id value from the string, by truncating the prefix.
 		if(StringUtil.isNotEmpty(id)) {
@@ -136,7 +136,7 @@ public class File extends AtomEntity {
 	 */
 	public String getDownloadUrl() {
 		String proxypath = this.getService().getEndpoint().getProxyPath("connections");
-		String fileId = this.getId();
+		String fileId = this.getFileId();
 		String libId = this.getLibraryId();
 		HttpServletRequest req = Context.get().getHttpRequest();
 		String sbtServiceUrl = UrlUtil.getContextUrl(req);
@@ -414,7 +414,7 @@ public class File extends AtomEntity {
 	 * @throws FileServiceException
 	 */
 	public File load() throws FileServiceException {
-		return getService().getFile(getId());
+		return getService().getFile(getFileId());
     }
 	
 	/**
@@ -426,7 +426,7 @@ public class File extends AtomEntity {
 	 * @throws TransformerException
 	 */
 	public Comment addComment(String comment, Map<String, String> params) throws FileServiceException, TransformerException {
-		return this.getService().addCommentToFile(this.getId(), comment, this.getAuthor().getId(), params);
+		return this.getService().addCommentToFile(this.getFileId(), comment, this.getAuthor().getId(), params);
     }
 	
 	/**
@@ -434,7 +434,7 @@ public class File extends AtomEntity {
 	 * @throws FileServiceException
 	 */
 	public void pin() throws FileServiceException {
-		this.getService().pinFile(this.getId());
+		this.getService().pinFile(this.getFileId());
     }
 	
 	/**
@@ -442,7 +442,7 @@ public class File extends AtomEntity {
 	 * @throws FileServiceException
 	 */
 	public void unpin() throws FileServiceException {
-		this.getService().unPinFile(this.getId());
+		this.getService().unPinFile(this.getFileId());
     }
 	
 	/**
@@ -450,7 +450,7 @@ public class File extends AtomEntity {
 	 * @throws FileServiceException
 	 */
 	public void lock() throws FileServiceException {
-		this.getService().lock(this.getId());
+		this.getService().lock(this.getFileId());
     }
 	
 	/**
@@ -458,7 +458,7 @@ public class File extends AtomEntity {
 	 * @throws FileServiceException
 	 */
 	public void unlock() throws FileServiceException {
-		this.getService().unlock(this.getId());
+		this.getService().unlock(this.getFileId());
     }
 	
 	/**
@@ -466,7 +466,7 @@ public class File extends AtomEntity {
 	 * @throws FileServiceException
 	 */
 	public void remove() throws FileServiceException {
-		this.getService().deleteFile(this.getId());
+		this.getService().deleteFile(this.getFileId());
     }
 	
 	/**

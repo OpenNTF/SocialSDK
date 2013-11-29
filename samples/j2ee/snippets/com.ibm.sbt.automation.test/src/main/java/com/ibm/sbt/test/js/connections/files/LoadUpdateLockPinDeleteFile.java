@@ -37,7 +37,7 @@ public class LoadUpdateLockPinDeleteFile extends BaseFilesTest {
 	@Before
 	public void init() {
 		createFile();
-		addSnippetParam("sample.fileId", fileEntry.getId());
+		addSnippetParam("sample.fileId", fileEntry.getFileId());
 	}
 
 	@Test
@@ -218,7 +218,7 @@ public class LoadUpdateLockPinDeleteFile extends BaseFilesTest {
 			if(webElement == null){
 				webElement = getError();
 				String error = webElement.getText();
-				Trace.log("Error updating File with ID " + fileEntry.getId() + " : " + error);
+				Trace.log("Error updating File with ID " + fileEntry.getFileId() + " : " + error);
 				return false;
 			}
 
@@ -236,7 +236,7 @@ public class LoadUpdateLockPinDeleteFile extends BaseFilesTest {
 			if(webElement == null){
 				webElement = getError();
 				String error = webElement.getText();
-				Trace.log("Error Locking/Unlocking File with ID " + fileEntry.getId() + " : " + error);
+				Trace.log("Error Locking/Unlocking File with ID " + fileEntry.getFileId() + " : " + error);
 				return false;
 			}
 			
@@ -253,7 +253,7 @@ public class LoadUpdateLockPinDeleteFile extends BaseFilesTest {
 			if(webElement == null){
 				webElement = getError();
 				String error = webElement.getText();
-				Trace.log("Error pinning/unpinning File with ID " + fileEntry.getId() + " : " + error);
+				Trace.log("Error pinning/unpinning File with ID " + fileEntry.getFileId() + " : " + error);
 				return false;
 			}
 
@@ -271,11 +271,11 @@ public class LoadUpdateLockPinDeleteFile extends BaseFilesTest {
 				webElement = getError();
 				String error = webElement.getText();
 				if(error.contains("ItemNotFound")) {
-					Trace.log("File with ID " + fileEntry.getId() + " not found, seems already deleted!");
+					Trace.log("File with ID " + fileEntry.getFileId() + " not found, seems already deleted!");
 					return true;
 				}
 				else {
-					Trace.log("Error deleting File with ID " + fileEntry.getId() + " : " + error);
+					Trace.log("Error deleting File with ID " + fileEntry.getFileId() + " : " + error);
 					return false;
 				}
 			}
@@ -292,7 +292,7 @@ public class LoadUpdateLockPinDeleteFile extends BaseFilesTest {
 			if(webElement == null){
 				webElement = getError();
 				String error = webElement.getText();
-				Trace.log("Error loading File with ID " + fileEntry.getId() + " : " + error);
+				Trace.log("Error loading File with ID " + fileEntry.getFileId() + " : " + error);
 				return null;
 			}
 

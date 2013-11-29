@@ -153,7 +153,7 @@ public class DownloadFileApp {
 			for (File file : files) {
 				if (file.getTitle().contains(".txt")) {
 
-					fileService.downloadFile(System.out, file.getId(),
+					fileService.downloadFile(System.out, file.getFileId(),
 							file.getLibraryId(), true);
 				}
 			}

@@ -45,7 +45,7 @@
           FileList fileEntries = fileService.getMyFiles();
           if(fileEntries != null) { 
 			  File fileEntry = fileEntries.get(0);
-	          String fileId = fileEntry.getId();
+	          String fileId = fileEntry.getFileId();
 	          String shareWithUserId = Context.get().getProperty("sample.userId2");
 	          fileEntry = fileService.getFile(fileId, false);
 	
@@ -62,7 +62,7 @@
 	          fileEntry.setSummary("SummaryNew" + System.currentTimeMillis());
 	          fileEntry = fileService.updateFileMetadata(fileEntry, paramsMap);
 	
-	          out.println("File Updated : " + fileEntry.getId());
+	          out.println("File Updated : " + fileEntry.getFileId());
           } else {
         	  out.println("No Files to be updated");
           }

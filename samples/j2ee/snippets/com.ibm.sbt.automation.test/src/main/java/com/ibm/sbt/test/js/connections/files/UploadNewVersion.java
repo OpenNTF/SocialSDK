@@ -48,7 +48,7 @@ public class UploadNewVersion extends BaseFilesTest {
 	public void init() {
 		try {
 			createFile();
-			addSnippetParam("sample.uploadNewVersionFileId", fileEntry.getId());
+			addSnippetParam("sample.uploadNewVersionFileId", fileEntry.getFileId());
 			file = new File("JSUpdateNewVersionTest " + System.currentTimeMillis() + ".txt");
 			file.createNewFile();
 			Trace.log("Created test file: " + file.getAbsolutePath());

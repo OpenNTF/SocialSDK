@@ -8,6 +8,20 @@
 	</formats>
 	<baseDirectory>target</baseDirectory>
 	<includeBaseDirectory>false</includeBaseDirectory>
+	<dependencySets>
+		<dependencySet>
+
+			<includes>
+				<include>com.ibm.sbt:com.ibm.commons</include>
+				<include>com.ibm.sbt:com.ibm.commons.xml</include>
+				<include>com.ibm.sbt:com.ibm.commons.runtime</include>
+				<include>com.ibm.sbt:com.ibm.sbt.core</include>
+			</includes>
+
+			<outputDirectory>WEB-INF/lib</outputDirectory>
+		</dependencySet>
+	</dependencySets>
+
 	<fileSets>
 		<fileSet>
 			<includes>
@@ -15,6 +29,9 @@
 				<include>META-INF/**</include>
 				<include>WEB-INF/**</include>
 				<include>xhr/**</include>
+
+				<include>index.html</include>
+				<include>loginForm.html</include>
 			</includes>
 			<directory>${project.build.directory}/classes</directory>
 			<outputDirectory>/</outputDirectory>

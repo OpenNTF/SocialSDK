@@ -40,7 +40,7 @@ import com.ibm.sbt.services.util.AuthUtil;
  * <p>
  * Relies on values of User, Group and Application to construct URLs and perform Network operations. Constructs {@link ActivityStreamEntity} objects after parsing the JSON response from Connections server
  * 
- * @author Manish Kataria 
+ * @author Manish Kataria  
  *         <pre>
  * Sample Usage
  *  {@code

@@ -50,7 +50,7 @@
 		    FileList list = serviceFS.getCommunityFiles(communityId, null);
 		    String fileId = "";
 		    if(list != null && ! list.isEmpty()) {
-		    	fileId = list.get(0).getId();
+		    	fileId = list.get(0).getFileId();
 			    OutputStream ostream = new ByteArrayOutputStream();
 		    	long noOfBytes = serviceFS.downloadCommunityFile(ostream, fileId, list.get(0).getLibraryId());
 			    out.println("File Downloaded in ostream = " + noOfBytes + "\nFile Name = " + list.get(0).getTitle());

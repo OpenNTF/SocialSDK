@@ -63,10 +63,7 @@ public class WikiSerializer extends AtomEntitySerializer<Wiki> {
 	}
 	
 	private Element wikiCategory() {
-		return element("category", 
-				attribute("scheme", "http://www.ibm.com/xmlns/prod/sn/type"), 
-				attribute("term", "wiki"), 
-				attribute("label", "wiki"));
+		return categoryType("wiki");
 	}
 	
 	private Element label() {

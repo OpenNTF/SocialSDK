@@ -158,6 +158,26 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         },
 
         /**
+         * Return an array containing the tags for this forum.
+         * 
+         * @method getTags
+         * @return {Array}
+         */
+        getTags : function() {
+        	return this.getAsArray("tags");
+        },
+        
+        /**
+         * Return an array containing the tags for this forum.
+         * 
+         * @method setTags
+         * @param {Array}
+         */
+        setTags : function(tags) {
+        	return this.setAsArray("tags", tags);
+        },
+        
+        /**
          * Loads the forum object with the atom entry associated with the
          * forum. By default, a network call is made to load the atom entry
          * document in the forum object.

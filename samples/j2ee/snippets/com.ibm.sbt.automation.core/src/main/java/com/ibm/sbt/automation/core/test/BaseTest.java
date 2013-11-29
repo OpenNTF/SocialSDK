@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
 
@@ -373,5 +374,14 @@ public abstract class BaseTest {
 
     public void setResultsReady() {
         this.resultsReady = true;
+    }
+    
+    public String join(List strList) {
+    	StringBuilder sb = new StringBuilder();
+    	for (Object str : strList) {
+    		if (sb.length() != 0) sb.append(",");
+    		sb.append(str);
+    	}
+    	return sb.toString();
     }
 }

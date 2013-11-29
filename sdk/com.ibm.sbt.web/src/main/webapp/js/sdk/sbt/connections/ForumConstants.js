@@ -62,6 +62,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
     	ForumXPath : lang.mixin({
             forumUuid : "a:id",
             content : "a:content[@type='text']",
+            tags : "a:category[not(@scheme)]/@term",
             moderation : "snx:moderation/@status",
             threadCount: "a:link[@rel='replies']/@thr:count",	
             forumUrl : "a:link[@rel='alternate']/@href",

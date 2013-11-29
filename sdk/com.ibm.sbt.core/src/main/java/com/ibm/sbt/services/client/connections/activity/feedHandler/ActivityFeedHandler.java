@@ -16,9 +16,12 @@
 
 package com.ibm.sbt.services.client.connections.activity.feedHandler;
 
+import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
+import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.Response;
+import com.ibm.sbt.services.client.base.AtomXPath;
 import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.ConnectionsConstants;
@@ -26,6 +29,7 @@ import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.connections.activity.Activity;
 import com.ibm.sbt.services.client.connections.activity.ActivityList;
+import com.ibm.sbt.services.client.connections.activity.ActivityNode;
 import com.ibm.sbt.services.client.connections.activity.ActivityService;
 
 
@@ -56,8 +60,11 @@ public class ActivityFeedHandler implements IFeedHandler  {
 
 	@Override
 	public Activity createEntityFromData(Object data) {
-		 XmlDataHandler handler = new XmlDataHandler((Node)data, ConnectionsConstants.nameSpaceCtx);
-         Activity activity = new Activity(service, handler);
+//		 XmlDataHandler handler = new XmlDataHandler((Node)data, ConnectionsConstants.nameSpaceCtx);
+//       Activity activity = new Activity(service, handler);
+//       return activity;
+         XPathExpression xpath = (data instanceof Document) ? (XPathExpression)AtomXPath.singleEntry.getPath() : null;
+         Activity activity = new Activity(service, (Node)data, ConnectionsConstants.nameSpaceCtx, xpath);
          return activity;
 	}
 

@@ -364,6 +364,9 @@ public class ForumTopic extends BaseForumEntity{
 		}
 		return answered;
 	}
+	public List<String> getTags() {
+		return super.getBaseTags();
+	}
 
 
 }

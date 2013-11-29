@@ -16,8 +16,13 @@
 
 package com.ibm.sbt.services.client.connections.activity;
 
+import org.w3c.dom.Node;
+
+import com.ibm.commons.xml.NamespaceContext;
+import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
+import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.connections.activity.model.ActivityXPath;
 /**
  * Class representing the File Field
@@ -26,11 +31,15 @@ import com.ibm.sbt.services.client.connections.activity.model.ActivityXPath;
  */
 public class FileField extends Field{
 	
+	public FileField(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
+		super(service, new XmlDataHandler(node, namespaceCtx, xpathExpression));
+	}
+	
 	public FileField() {
 		super("file");
 	}
 	
-	public FileField(BaseService svc, DataHandler<?> handler) {
+	public FileField(BaseService svc, XmlDataHandler handler) {
 		super("file",svc, handler);
 	}
 	

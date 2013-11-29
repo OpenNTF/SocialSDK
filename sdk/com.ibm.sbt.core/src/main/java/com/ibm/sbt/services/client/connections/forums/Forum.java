@@ -15,6 +15,7 @@
  */
 package com.ibm.sbt.services.client.connections.forums;
 
+import java.util.List;
 import java.util.Map;
 
 import org.w3c.dom.Node;
@@ -156,6 +157,10 @@ public class Forum extends BaseForumEntity {
     {
 		return getService().getForum(getUid());
     }
+
+	public List<String> getTags() {
+		return super.getBaseTags();
+	}
 	
 
 }

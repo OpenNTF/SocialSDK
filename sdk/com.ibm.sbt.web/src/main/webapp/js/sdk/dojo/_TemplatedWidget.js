@@ -17,8 +17,8 @@
 /**
  * 
  */
-define([ "../_bridge/declare", "dijit/_Widget", "dijit/_Templated"], 
-        function(declare, _Widget, _Templated) {
+define([ "../_bridge/declare", "dijit/_Widget", "dijit/_Templated","../_bridge/lang","../_bridge/dom"], 
+        function(declare, _Widget, _Templated, lang, dom) {
 
     /**
      * @module sbt.widget._TemplatedWidget
@@ -27,8 +27,12 @@ define([ "../_bridge/declare", "dijit/_Widget", "dijit/_Templated"],
         
         _blankGif: dijit._Widget.prototype._blankGif,
         
+        _attachEventAttribute: "data-dojo-attach-event",
+        
+        _attachPointAttribute: "data-dojo-attach-point",
+        
         _place: function(node, refNode, pos) {
-        	dojo.place(node, refNode, pos);
+                dojo.place(node, refNode, pos);
         },
 
         _stopEvent: function(event) {
@@ -38,35 +42,28 @@ define([ "../_bridge/declare", "dijit/_Widget", "dijit/_Templated"],
         _connect: function(object, event, method) {
             return this.connect(object, event, method);
         },
-        
-        _mixin: function(dest,sources) {
-            return dojo.mixin(dest,sources);
-        },
-        
-        _destroy: function(node) {
-            dojo.destroy(node);
-        },
-        
-        _create: function(name, attribs, parent) {
-            return dojo.create(name, attribs, parent);
-        },
-        
-        _toDom: function(frag, doc) {
-            return dojo._toDom(frag, doc);
-        },
-        
-        _isString: function(obj) {
-            return dojo.isString(obj);
-        },
-        
+       
         _substitute: function(template, map, transform, thisObject) {
-        	return dojo.string.substitute(template, map, transform, thisObject);
+                if (!transform) {
+                        transform = function(value, key) {
+                    if (typeof value == "undefined") {
+                        // check the renderer for the property
+                        value = lang.getObject(key, false, self);
+                    }
+
+                    if (typeof value == "undefined" || value == null) {
+                        return "";
+                    }
+
+                    return value;
+                        };
+                }
+                if (!thisObject) {
+                        thisObject = this;
+                }
+                return dojo.string.substitute(template, map, transform, thisObject);
         },
-        
-        _getObject: function(name, create, context) {
-            return dojo.getObject(name, create, context);
-        },
-        
+                
         _hitch: function(scope, method) {
             if (arguments.length > 2) {
                 return dojo._hitchArgs.apply(dojo, arguments);
@@ -76,33 +73,33 @@ define([ "../_bridge/declare", "dijit/_Widget", "dijit/_Templated"],
         },
         
         _doAttachPoints: function(scope,el){
-          	 var nodes = (el.all || el.getElementsByTagName("*"));
-   	            for (var i in nodes) {
-   	                var attachPoint = (nodes[i].getAttribute) ? nodes[i].getAttribute("data-dojo-attach-point") : null;
-   	                if (attachPoint) {
-   	                	
-   	                	var att = nodes[i].getAttribute("data-dojo-attach-point");
-   	                	scope[att] = nodes[i];
-   	                }
-   	            }
+                   var nodes = (el.all || el.getElementsByTagName("*"));
+                       for (var i in nodes) {
+                           var attachPoint = (nodes[i].getAttribute) ? nodes[i].getAttribute(this._attachPointAttribute) : null;
+                           if (attachPoint) {
+                                   
+                                   var att = nodes[i].getAttribute(this._attachPointAttribute);
+                                   scope[att] = nodes[i];
+                           }
+                       }
           },
           
         _doAttachEvents: function(el, scope) {
             var nodes = (el.all || el.getElementsByTagName("*"));
             for (var i in nodes) {
-                var attachEvent = (nodes[i].getAttribute) ? nodes[i].getAttribute("data-dojo-attach-event") : null;
+                var attachEvent = (nodes[i].getAttribute) ? nodes[i].getAttribute(this._attachEventAttribute) : null;
                 if (attachEvent) {
-                    nodes[i].removeAttribute("data-dojo-attach-event");
+                    nodes[i].removeAttribute(this._attachEventAttribute);
                     var event, events = attachEvent.split(/\s*,\s*/);
                     while((event = events.shift())) {
                         if (event) {
                             var func = null;
                             if (event.indexOf(":") != -1) {
                                 var eventFunc = event.split(":");
-                                event = this._trim(eventFunc[0]);
-                                func = this._trim(eventFunc[1]);
+                                event = lang.trim(eventFunc[0]);
+                                func = lang.trim(eventFunc[1]);
                             } else {
-                                event = this._trim(event);
+                                event = lang.trim(event);
                             }
                             if (!func) {
                                 func = event;

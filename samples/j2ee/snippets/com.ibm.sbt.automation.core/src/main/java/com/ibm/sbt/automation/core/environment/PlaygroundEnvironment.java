@@ -42,7 +42,7 @@ private String baseUrl;
         if (StringUtil.isEmpty(baseUrl)) {
             baseUrl = getProperty(TestEnvironment.PROP_SBT_PLAYGROUND_URL);
         }
-        if (!baseUrl.endsWith("/")) baseUrl = baseUrl.concat("/");
+        if (baseUrl!=null && !baseUrl.endsWith("/")) baseUrl = baseUrl.concat("/");
     }
     /* (non-Javadoc)
      * @see com.ibm.sbt.automation.core.environment.TestEnvironment#login()

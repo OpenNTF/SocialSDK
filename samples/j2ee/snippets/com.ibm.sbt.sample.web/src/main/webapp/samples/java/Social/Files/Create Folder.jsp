@@ -43,7 +43,7 @@
 			FileService fileService = new FileService();
 			File file = fileService.createFolder("Vimal'sJSP Folder 123", "123 description" );
 			if(file != null) {
-				out.println("Folder created : " + file.getId());
+				out.println("Folder created : " + file.getFileId());
 			} else {
 				out.println("No Results");
 			}

@@ -43,7 +43,7 @@
         String name = "Test File " + System.nanoTime() + ".txt";
         File entry = fileService.uploadFile(new ByteArrayInputStream(content.getBytes(Charset.forName("UTF-8"))), name, content.length(),null);
       
-        out.println("File created: id ["+entry.getId()+"] title [" + entry.getTitle() + "]");
+        out.println("File created: id ["+entry.getFileId()+"] title [" + entry.getTitle() + "]");
       } catch (Throwable e) {
         out.println("<pre>");
         out.println(e.getMessage());

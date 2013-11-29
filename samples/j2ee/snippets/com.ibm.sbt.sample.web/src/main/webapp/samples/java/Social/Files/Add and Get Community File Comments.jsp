@@ -56,10 +56,10 @@
             
             // adding comment to community file
             FileService fileService = new FileService();
-          	fileService.addCommentToCommunityFile(fileUploaded.getId(), "JSP Added community file comment"+System.currentTimeMillis(), communityId, null);
+          	fileService.addCommentToCommunityFile(fileUploaded.getFileId(), "JSP Added community file comment"+System.currentTimeMillis(), communityId, null);
 			
             // Get All community File Comments
-           CommentList comments = fileService.getAllCommunityFileComments(fileUploaded.getId(), communityId, null);
+           CommentList comments = fileService.getAllCommunityFileComments(fileUploaded.getFileId(), communityId, null);
             if(comments != null && ! comments.isEmpty())  { 
 				for(Comment comment : comments) {
 					out.println(comment.getComment());

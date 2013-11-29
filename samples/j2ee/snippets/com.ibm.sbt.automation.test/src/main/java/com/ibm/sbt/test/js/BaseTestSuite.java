@@ -35,6 +35,7 @@ import com.ibm.sbt.test.js.base.CommunityFeedDataHandler;
 import com.ibm.sbt.test.js.base.CommunityInvitesFeedDataHandler;
 import com.ibm.sbt.test.js.base.CommunityMembersFeedDataHandler;
 import com.ibm.sbt.test.js.base.VCardDataHandler;
+import com.ibm.sbt.test.js.base.XmlDataHandlerDate;
 
 /**
  * @author mwallace
@@ -57,6 +58,7 @@ import com.ibm.sbt.test.js.base.VCardDataHandler;
     CommunityFeedDataHandler.class, 
     CommunityInvitesFeedDataHandler.class,
     CommunityMembersFeedDataHandler.class,
+    XmlDataHandlerDate.class
 })
 public class BaseTestSuite {
     @AfterClass

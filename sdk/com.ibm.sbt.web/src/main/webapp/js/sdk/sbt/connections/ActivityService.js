@@ -44,6 +44,7 @@ define(
 			var MemberCategory = "<category scheme=\"http://www.ibm.com/xmlns/prod/sn/type\" term=\"${getCategory}\" label=\"${getCategory}\" />";
 
 			var extractId = function(id, token) {
+				id = decodeURIComponent(id); // to make sure the Id doesnt contain encoded characters
 				if (id) {
 					var index = id.indexOf(token);
 					if (index != -1) {

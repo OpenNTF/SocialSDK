@@ -21,9 +21,9 @@ public class GetFile extends BaseFilesTest {
 	public void init() {
 		try {
 			createFile();
-			addSnippetParam("sample.fileId", fileEntry.getFileId());
+			addSnippetParam("sample.fileId", fileEntry.getId());
 			fileService = getFileService();
-			file = fileService.getFile(fileEntry.getFileId(), true);
+			file = fileService.getFile(fileEntry.getId(), true);
 		} catch (FileServiceException e) {
 			Assert.fail(e.getMessage());
 			e.printStackTrace();

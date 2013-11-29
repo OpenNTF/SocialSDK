@@ -293,18 +293,17 @@ define(["../declare","../config","../lang", "../base/core", "../xml", "../xpath"
                 } else {
                     var nodes = xpath.selectNodes(element, access, this.namespaces);
                     if (nodes && nodes.length == 1) {
-                        item[attrib] = nodes[0].text || nodes[0].textContent;
+                        item[attrib] = entities.encode(nodes[0].text) || entities.encode(nodes[0].textContent);
                     } else if (nodes) {
                         item[attrib] = [];
                         for (var j=0; j<nodes.length; j++) {
-                            item[attrib].push(nodes[j].text || nodes[j].textContent);
+                            item[attrib].push(entities.encode(nodes[j].text) || entities.encode(nodes[j].textContent));
                         }
                     } else {
                         item[attrib] = null;
                     }
                 }
-                
-                //item[attrib] = (this.unescapeHTML) ? entities.decode(item[attrib]) : item[attrib];
+
             }
            
             return item;

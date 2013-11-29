@@ -18,7 +18,6 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	<modules>
-		<module>com.ibm.sbt.playground</module>
 		<module>com.ibm.xsp.sbtsdk.playground</module>
 		<module>com.ibm.sbt.domino.playground.feature</module>
 		<module>com.ibm.sbt.domino.playground.updatesite</module>

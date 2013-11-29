@@ -53,7 +53,7 @@
 		<moduleSet>
 			<useAllReactorProjects>true</useAllReactorProjects>
 			<includes>
-				<include>com.ibm.sbt:com.ibm.sbt.web</include>
+				<include>com.ibm.sbt:com.ibm.sbt.web:war:*</include>
 			</includes>
 			<binaries>
 				<outputDirectory>sbtsdk/redist/war</outputDirectory>
@@ -166,6 +166,15 @@
 			</includes>
 			<outputDirectory>sbtsdk/redist/domino</outputDirectory>
 			<outputFileNameMapping>com.ibm.sbt.domino.updatesite.zip</outputFileNameMapping>
+
+		</dependencySet>
+		
+		<dependencySet>
+			<includes>
+				<include>com.ibm.sbt:com.ibm.sbt.web:war</include>
+			</includes>
+			<outputDirectory>sbtsdk/redist/war</outputDirectory>
+			<outputFileNameMapping>sbt.war</outputFileNameMapping>
 
 		</dependencySet>
 	</dependencySets>

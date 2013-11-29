@@ -17,7 +17,7 @@ public abstract class SerializationUtil {
 			oos.writeObject(basentity);
 			oos.close();
 			validateSerializable();
-		} catch (Exception e) {}
+		} catch (Exception e) { }
 	}
 	
 	public abstract void validateSerializable();

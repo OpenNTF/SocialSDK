@@ -11,8 +11,8 @@ import com.ibm.sbt.services.client.connections.wikis.WikiServiceTestSuite;
 @RunWith(Suite.class)
 @SuiteClasses({
 	CommunityServiceTest.class, 
-	FileServiceTest.class,
-	WikiServiceTestSuite.class
+	FileServiceTest.class//,
+	//WikiServiceTestSuite.class
 })
 public class ConnectionsTestSuite {
 

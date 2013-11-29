@@ -78,6 +78,12 @@ public class AtomEntity extends BaseEntity {
 		setAsString(AtomXPath.id, id);
 		
 	}
+	/**
+	 * Default Constructor.
+	 */
+	public AtomEntity() {
+	}
+	
     /**
      * Return the value of id from ATOM entry document.
      * 

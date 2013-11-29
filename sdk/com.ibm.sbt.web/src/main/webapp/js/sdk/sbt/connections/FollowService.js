@@ -290,53 +290,9 @@ define(
 						 * Get the followed resources feed
 						 * 
 						 * @method getFollowedResources
-						 * @param {String} source String specifying the resource. Options are:
-						 *
-						 *	activities
-						 *	blogs
-						 *	communities
-						 *	files
-						 *	forums
-						 *	profiles
-						 *	wikis
-						 *	tags
-						 *
-						 * @param {String} resourceType String representing the resource type. Options are:
-						 * 
-						 * If source=activities
-						 * 	   activity
-						 * 
-						 * If source=blogs
-						 *     blog
-						 *     
-						 * If source=communities
-						 *     community
-						 *     
-						 * If source=files
-						 *     file
-						 *     file_folder
-						 *      
-						 * 
-						 * If source=forums
-						 *     forum
-						 *     forum_topic
-						 *      
-						 * 
-						 * If source=profiles
-						 *     profile
-						 *     
-						 * If source=wikis
-						 *     wiki
-						 *     wiki_page
-						 *      
-						 * 
-						 * If source=tags
-						 *     tag
-						 * 
-						 * @param {Object} [args] Object representing various parameters
-				         * that can be passed to get a feed of members of a
-				         * community. The parameters must be exactly as they are
-				         * supported by IBM Connections like ps, sortBy etc.
+						 * @param {String} source String specifying the resource.
+						 * @param {String} resourceType String representing the resource type.
+						 * @param {Object} [args] Addtional request arguments supported by Connections REST API.
 						 */
 						getFollowedResources : function(source, resourceType, args) {
 							var requestArgs = lang.mixin({
@@ -355,6 +311,47 @@ define(
 				            	service : this._getServiceName(source)
 							});
 							return this.getEntities(url, options, this._getFollowedResourceFeedCallbacks());
+						},
+						
+						/**
+						 * Get the followed resource
+						 * 
+						 * @method getFollowedResource
+				         * @param {String/Object} followedResource
+				         * @param {Object} [args] Object representing various parameters if any
+						 */
+						getFollowedResource : function(followedResourceOrJson, args) {
+							var followedResource = this._toFollowedResource(followedResourceOrJson);
+				            var promise = this._validateFollowedResource(followedResource, false, args);
+				            if (promise) {
+				                return promise;
+				            }
+			                
+							var requestArgs = lang.mixin({
+								source : followedResource.getSource(),
+								type : followedResource.getResourceType(),
+								resource : followedResource.getResourceId()
+							}, args || {});
+							
+							var options = {
+								method : "GET",
+								handleAs : "text",
+								query : requestArgs
+							};
+							
+						    var callbacks = {
+						        createEntity : function(service,data,response) {
+						        	followedResource.xpath = consts.OneFollowedResourceXPath;
+						        	followedResource.setData(data);
+						            return followedResource;
+						        }
+						    };
+							
+							var url = null;
+				            url = this.constructUrl(consts.AtomFollowAPI, null, {
+				            	service : this._getServiceName(followedResource.getSource())
+							});
+							return this.getEntity(url, options, followedResource.getResourceId(), callbacks);
 						},
 
 				        /**
@@ -451,7 +448,10 @@ define(
 				                return this.createBadRequestPromise("Invalid argument, resource with source must be specified.");
 				            }
 				            if (!followedResource.getResourceType()) {
-				                return this.createBadRequestPromise("Invalid argument, resource with resourseType must be specified.");
+				                return this.createBadRequestPromise("Invalid argument, resource with resource yype must be specified.");
+				            }
+				            if (!followedResource.getResourceId()) {
+				                return this.createBadRequestPromise("Invalid argument, resource with resource id must be specified.");
 				            }
 				            if (checkUuid && !followedResource.getFollowedResourceUuid()) {
 				                return this.createBadRequestPromise("Invalid argument, resource with UUID must be specified.");

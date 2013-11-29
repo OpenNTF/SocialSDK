@@ -20,7 +20,7 @@ import org.w3c.dom.Node;
 
 import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.xpath.XPathExpression;
-import com.ibm.sbt.services.client.base.AtomEntity;
+import com.ibm.sbt.services.client.base.AtomXPath;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 
@@ -31,7 +31,7 @@ import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
  * @author Mario Duarte
  *
  */
-public class WikiPage extends AtomEntity {
+public class WikiPage extends WikiBaseEntity {
 
 	/**
 	 * @param service
@@ -61,21 +61,22 @@ public class WikiPage extends AtomEntity {
 		super(service, (XmlDataHandler)null);
 	}
 	
-	/**
-	 * Unique identifier of the wiki page.
-	 * @return wikiUuid
-	 */
-	public String getUuid() {
-		return getAsString(WikiXPath.uuid);
+	@Override
+	public String getContent() {
+		if (fields.containsKey(AtomXPath.content.getName())){
+			Object value = fields.get(AtomXPath.content.getName());
+			return (value == null) ? null : value.toString();
+		}
+		else {
+			String contentUrl = this.getAsString(WikiXPath.contentSrc);
+			try {
+				return (String)getService().retrieveData(contentUrl, null).getData();
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+		}
 	}
 	
-	/**
-	 * Label of the wiki page.
-	 * @return wikiUuid
-	 */
-	public String getLabel() {
-		return getAsString(WikiXPath.label);
-	}
 	/**
 	 * Unique version identifier.
 	 * @return

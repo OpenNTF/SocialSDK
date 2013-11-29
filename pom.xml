@@ -40,8 +40,8 @@
 				<module>libraries</module>
 				<module>deps</module>
 				<module>sdk</module>
+				<module>domino</module>
 				<module>samples</module>
-				<module>xpages</module>
 				<module>assembly</module>
 			</modules>
 			<repositories>
@@ -184,32 +184,33 @@
 				</configuration>
 			</plugin>
 			<plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-antrun-plugin</artifactId>
-        <version>1.4</version>
-        <executions>
-          <execution>
-            <phase>generate-resources</phase>
-            <configuration>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.4</version>
+				<executions>
+					<execution>
+						<phase>generate-resources</phase>
+						<configuration>
 
-              <tasks>
-                <echo message="Creating javadoc output directory"/>
-                <mkdir dir="./target/site/apidocs"/>
-              </tasks>
+							<tasks>
+								<echo message="Creating javadoc output directory" />
+								<mkdir dir="./target/site/apidocs" />
+							</tasks>
 
-            </configuration>
-            <goals>
-              <goal>run</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 
 
 		<pluginManagement>
 			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>

@@ -43,8 +43,6 @@ public class WikiPageSerializer extends AtomEntitySerializer<WikiPage> {
 				summary(),
 				content()
 		);
-		
-		appendChilds(entry, tags());
 	}
 
 	public void generateUpdate() {
@@ -61,9 +59,11 @@ public class WikiPageSerializer extends AtomEntitySerializer<WikiPage> {
 	}
 	
 	private Element wikiPageCategory() {
-		return element("category", 
-				attribute("scheme", "tag:ibm.com,2006:td/type"), 
-				attribute("term", "page"), 
-				attribute("label", "page"));
+		return categoryType("page");
+	}
+	
+	@Override
+	protected Element content() {
+		return textElement("content", entity.getContent(), attribute("type", "html"));
 	}
 }

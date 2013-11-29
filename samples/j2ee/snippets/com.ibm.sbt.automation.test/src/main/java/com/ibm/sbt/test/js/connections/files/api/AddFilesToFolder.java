@@ -18,8 +18,8 @@ public class AddFilesToFolder extends BaseFilesTest {
 	public void init() {
 		createFile();
 		createFolder();
-		addSnippetParam("sample.fileId", fileEntry.getFileId());
-		addSnippetParam("sample.folderId", folder.getFileId());
+		addSnippetParam("sample.fileId", fileEntry.getId());
+		addSnippetParam("sample.folderId", folder.getId());
 	}
 
 	@After

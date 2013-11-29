@@ -16,6 +16,7 @@
 package com.ibm.sbt.services.client.connections.files;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,10 +28,9 @@ import com.ibm.commons.runtime.util.UrlUtil;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.service.basic.ConnectionsFileProxyService;
+import com.ibm.sbt.services.client.base.AtomEntity;
 import com.ibm.sbt.services.client.base.AtomXPath;
-import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.base.ConnectionsConstants;
-import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.files.model.Author;
@@ -43,13 +43,11 @@ import com.ibm.sbt.services.client.connections.files.model.Person;
  * @Represents Connections File
  * @author Vimal Dhupar
  */
-public class File extends BaseEntity {
-	private String			fileId;	
+public class File extends AtomEntity {
 	private Author			authorEntry;
 	private Modifier		modifierEntry;
 
 	public File() {
-		this(null,null);
 	}
 
 	/**
@@ -57,7 +55,7 @@ public class File extends BaseEntity {
 	 * @param fileId
 	 */
 	public File(String fileId) {
-		this.fileId = fileId;
+		setAsString(AtomXPath.id, fileId);
 	}
 
     /**
@@ -65,23 +63,25 @@ public class File extends BaseEntity {
      * @param svc
      * @param dh
      */
-    public File(FileService svc, DataHandler<?> dh) {
+    public File(FileService svc, XmlDataHandler dh) {
         super(svc, dh);
-        authorEntry = new Author(getService(), new XmlDataHandler((Node)this.getDataHandler().getData(), 
-        		ConnectionsConstants.nameSpaceCtx, (XPathExpression)AtomXPath.author.getPath()));
-        modifierEntry = new Modifier(getService(), new XmlDataHandler((Node)this.getDataHandler().getData(), 
-        		ConnectionsConstants.nameSpaceCtx, (XPathExpression)AtomXPath.modifier.getPath()));
     }
     
 	/**
 	 * Method to get the FileId of the File
 	 * @return String 
 	 */
-	public String getFileId() {
-		if (!StringUtil.isEmpty(fileId)) {
-			return fileId;
+	public String getId() {
+		String id = super.getId();
+		// here we extract the id value from the string, by truncating the prefix.
+		if(StringUtil.isNotEmpty(id)) {
+			int startOfId = id.lastIndexOf(":");
+			if(startOfId == -1)
+				return id;
+			return id.substring(startOfId+1);
+		} else {
+			return id;
 		}
-		return getAsString(FileEntryXPath.Uuid);
 	}
 
 	/**
@@ -113,14 +113,6 @@ public class File extends BaseEntity {
 		else 
 			return false;
 	}
-	
-	/**
-	 * Method to get the Title of the File
-	 * @return String 
-	 */
-	public String getTitle() {
-		return getAsString(FileEntryXPath.Title);
-	}
 
 	/**
 	 * Method to get the Library Type of the File
@@ -144,7 +136,7 @@ public class File extends BaseEntity {
 	 */
 	public String getDownloadUrl() {
 		String proxypath = this.getService().getEndpoint().getProxyPath("connections");
-		String fileId = this.getFileId();
+		String fileId = this.getId();
 		String libId = this.getLibraryId();
 		HttpServletRequest req = Context.get().getHttpRequest();
 		String sbtServiceUrl = UrlUtil.getContextUrl(req);
@@ -159,6 +151,10 @@ public class File extends BaseEntity {
 	 * @return Author
 	 */
 	public Author getAuthor() {
+		if(null == authorEntry) {
+			 authorEntry = new Author(getService(), new XmlDataHandler((Node)this.getDataHandler().getData(), 
+		        		ConnectionsConstants.nameSpaceCtx, (XPathExpression)AtomXPath.author.getPath()));
+		}
 		return authorEntry;
 	}
 
@@ -168,22 +164,6 @@ public class File extends BaseEntity {
 	 */
 	public String getTotalResults() {
 		return getAsString(FileEntryXPath.TotalResults);
-	}
-
-	/**
-	 * Method to get the Published date
-	 * @return Date
-	 */
-	public Date getPublished() {
-		return getAsDate(FileEntryXPath.Published);
-	}
-	
-	/**
-	 * Method to get the Updated date
-	 * @return Date
-	 */
-	public Date getUpdated() {
-		return getAsDate(FileEntryXPath.Updated);
 	}
 
 	/**
@@ -216,6 +196,10 @@ public class File extends BaseEntity {
 	 * @return Person
 	 */
 	public Person getModifier() {
+		if(null == modifierEntry) {
+			modifierEntry = new Modifier(getService(), new XmlDataHandler((Node)this.getDataHandler().getData(), 
+	        		ConnectionsConstants.nameSpaceCtx, (XPathExpression)AtomXPath.modifier.getPath()));
+		}
 		return modifierEntry;
 	}
 
@@ -273,27 +257,11 @@ public class File extends BaseEntity {
 	}
 	
 	/**
-	 * Method to get the Self Url
-	 * @return String
-	 */
-	public String getSelfUrl() {
-		return this.getAsString(FileEntryXPath.SelfUrl);
-	}
-	
-	/**
 	 * Method to get Type
 	 * @return String
 	 */
 	public String getType() {
 		return this.getAsString(FileEntryXPath.Type);
-	}
-	
-	/**
-	 * Method to get Alternate Url
-	 * @return String
-	 */
-	public String getAlternateUrl() {
-		return this.getAsString(FileEntryXPath.AlternateUrl);
 	}
 	
 	/**
@@ -391,14 +359,6 @@ public class File extends BaseEntity {
 	public int getReferencesCount() {
 		return this.getAsInt(FileEntryXPath.ReferencesCount);
 	}
-
-	/**
-	 * Method to get Summary
-	 * @return String
-	 */
-	public String 	getSummary() {
-		return this.getAsString(FileEntryXPath.Summary);
-	}
 	
 	/**
 	 * Method to get Content Url
@@ -444,8 +404,8 @@ public class File extends BaseEntity {
 	 * Method to get Tags
 	 * @return String
 	 */
-	public String getTags() {
-		return this.getAsString(FileEntryXPath.Tags);
+	public List<String> getTags() {
+		return this.getAsList(FileEntryXPath.Tags);
 	}
 	
 	/**
@@ -454,7 +414,7 @@ public class File extends BaseEntity {
 	 * @throws FileServiceException
 	 */
 	public File load() throws FileServiceException {
-		return getService().getFile(getFileId());
+		return getService().getFile(getId());
     }
 	
 	/**
@@ -466,7 +426,7 @@ public class File extends BaseEntity {
 	 * @throws TransformerException
 	 */
 	public Comment addComment(String comment, Map<String, String> params) throws FileServiceException, TransformerException {
-		return this.getService().addCommentToFile(this.getFileId(), comment, this.getAuthor().getId(), params);
+		return this.getService().addCommentToFile(this.getId(), comment, this.getAuthor().getId(), params);
     }
 	
 	/**
@@ -474,7 +434,7 @@ public class File extends BaseEntity {
 	 * @throws FileServiceException
 	 */
 	public void pin() throws FileServiceException {
-		this.getService().pinFile(this.getFileId());
+		this.getService().pinFile(this.getId());
     }
 	
 	/**
@@ -482,7 +442,7 @@ public class File extends BaseEntity {
 	 * @throws FileServiceException
 	 */
 	public void unpin() throws FileServiceException {
-		this.getService().unPinFile(this.getFileId());
+		this.getService().unPinFile(this.getId());
     }
 	
 	/**
@@ -490,7 +450,7 @@ public class File extends BaseEntity {
 	 * @throws FileServiceException
 	 */
 	public void lock() throws FileServiceException {
-		this.getService().lock(this.getFileId());
+		this.getService().lock(this.getId());
     }
 	
 	/**
@@ -498,7 +458,7 @@ public class File extends BaseEntity {
 	 * @throws FileServiceException
 	 */
 	public void unlock() throws FileServiceException {
-		this.getService().unlock(this.getFileId());
+		this.getService().unlock(this.getId());
     }
 	
 	/**
@@ -506,7 +466,7 @@ public class File extends BaseEntity {
 	 * @throws FileServiceException
 	 */
 	public void remove() throws FileServiceException {
-		this.getService().deleteFile(this.getFileId());
+		this.getService().deleteFile(this.getId());
     }
 	
 	/**

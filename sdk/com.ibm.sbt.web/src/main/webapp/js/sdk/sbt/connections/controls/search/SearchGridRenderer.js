@@ -18,8 +18,8 @@
  * 
  */
 define(["../../../declare",
-        "../ConnectionsGridRenderer",
         "../../../dom",
+        "../ConnectionsGridRenderer",
         "../../../lang", "../../../stringUtil", "../../../i18n",
         "../../../i18n!./nls/SearchGridRenderer",
         "../../../text!./templates/BookmarkBody.html",
@@ -42,7 +42,7 @@ define(["../../../declare",
         "../../../text!./templates/img.html",
         "../../../text!./templates/em.html",
         "../../../text!./templates/div.html"],
-        function(declare, ConnectionsGridRenderer, dom, lang, stringUtil, i18n, nls, bookmarkBodyTemplate, calendarBodyTemplate, communityBodyTemplate, defaultBodyTemplate, defaultHeaderTemplate, defaultSummaryTemplate, profileBodyTemplate, profileHeaderTemplate, personCardTemplate, statusUpdateExtraHeaderTemplate, statusUpdateHeaderTemplate, aElement, tdElement, trElement, liElement, ulElement, spanElement, imgElement, emElement, divElement) {
+        function(declare, dom, ConnectionsGridRenderer, lang, stringUtil, i18n, nls, bookmarkBodyTemplate, calendarBodyTemplate, communityBodyTemplate, defaultBodyTemplate, defaultHeaderTemplate, defaultSummaryTemplate, profileBodyTemplate, profileHeaderTemplate, personCardTemplate, statusUpdateExtraHeaderTemplate, statusUpdateHeaderTemplate, aElement, tdElement, trElement, liElement, ulElement, spanElement, imgElement, emElement, divElement) {
 
     /**
      * @class SearchGridRenderer
@@ -983,20 +983,21 @@ define(["../../../declare",
          */
         renderEmpty: function(grid, el) {
            while (el.childNodes[0]) {
-               this._destroy(el.childNodes[0]);
+               dom.destroy(el.childNodes[0]);
            }
-           var lotusUiDiv = this._create("div", { // here purely so a parent of the empty div has the lotusui class...
-             "class": "lotusui lconnSearchResults"
+           var lotusUiDiv = dom.create("div", { // here purely so a parent of the empty div has the lotusui class...
+             "class": "lotusui lconnSearchResults",
+             innerHTML: ""
            }, el);
-           dom.setText(lotusUiDiv, "");
-           var lotusEmptyDiv = this._create("div", {
+           var lotusEmptyDiv = dom.create("div", {
                "class": this.emptyClass,
+               innerHTML: "",
                "aria-relevant": "all",
                "aria-live": "assertive"
              }, lotusUiDiv);
-           dom.setText(lotusEmptyDiv, "");
-           var span = this._create("span", {}, lotusEmptyDiv);
-           dom.setText(span, this._nls.empty);
+           dom.create("span", {
+               innerHTML: this._nls.empty
+             }, lotusEmptyDiv);
         },
         
         tableClass: "lotusTable lconnSearchResults"

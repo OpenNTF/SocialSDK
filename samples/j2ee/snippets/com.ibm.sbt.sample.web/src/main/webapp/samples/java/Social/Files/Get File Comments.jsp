@@ -42,7 +42,7 @@
 			        FileService fileService = new FileService();
 			        FileList fileEntries = fileService.getMyFiles();
 			        File fileEntry = fileEntries.get(0);
-			        CommentList commentEntries = fileService.getAllFileComments(fileEntry.getFileId(), null);
+			        CommentList commentEntries = fileService.getAllFileComments(fileEntry.getId(), null);
 			        if (commentEntries != null && !commentEntries.isEmpty()) {
 			            for (Comment commentEntry : commentEntries) {
 			                out.println("Comment Id	: " + commentEntry.getCommentId() + " , ");

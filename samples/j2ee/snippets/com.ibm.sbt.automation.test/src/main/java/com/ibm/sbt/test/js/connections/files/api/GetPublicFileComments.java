@@ -27,9 +27,9 @@ public class GetPublicFileComments extends BaseFilesTest {
 			return;
 		}
 		createFile();
-		addSnippetParam("sample.fileId", fileEntry.getFileId());
+		addSnippetParam("sample.fileId", fileEntry.getId());
 		try {
-			comments = fileService.getAllFileComments(fileEntry.getFileId(), new HashMap<String, String>());
+			comments = fileService.getAllFileComments(fileEntry.getId(), new HashMap<String, String>());
 		} catch (FileServiceException e) {
 			Assert.fail(e.getMessage());
 			e.printStackTrace();

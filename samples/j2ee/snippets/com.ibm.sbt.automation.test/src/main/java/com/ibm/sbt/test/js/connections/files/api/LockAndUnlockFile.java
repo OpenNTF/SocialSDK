@@ -21,7 +21,7 @@ public class LockAndUnlockFile extends BaseFilesTest {
 	@Before
 	public void init() {
 		createFile();
-		addSnippetParam("sample.fileId", fileEntry.getFileId());
+		addSnippetParam("sample.fileId", fileEntry.getId());
 	}
 
 	@After

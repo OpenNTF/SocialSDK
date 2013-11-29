@@ -17,16 +17,18 @@
 package com.ibm.sbt.services.client.connections.activity;
 
 import com.ibm.commons.util.StringUtil;
+import com.ibm.sbt.services.client.base.AtomEntity;
 import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
+import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.connections.activity.model.ActivityXPath;
 /**
  * Abstract Class representing Field
  * @author Vimal Dhupar
  *
  */
-public abstract class Field extends BaseEntity{
+public abstract class Field extends AtomEntity{
 
 	protected String TYPE ;
 	
@@ -37,12 +39,12 @@ public abstract class Field extends BaseEntity{
 		setType(type);
 	}
 
-	public Field(String type, BaseService svc, DataHandler<?> handler) {
+	public Field(String type, BaseService svc, XmlDataHandler handler) {
 		super(svc,handler);
 		setType(type);
 	}
 	
-	public Field(BaseService svc, DataHandler<?> handler) {
+	public Field(BaseService svc, XmlDataHandler handler) {
 		super(svc,handler);
 	}
 	

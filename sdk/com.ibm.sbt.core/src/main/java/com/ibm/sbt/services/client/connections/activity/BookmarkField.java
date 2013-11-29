@@ -16,8 +16,13 @@
 
 package com.ibm.sbt.services.client.connections.activity;
 
+import org.w3c.dom.Node;
+
+import com.ibm.commons.xml.NamespaceContext;
+import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
+import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.connections.activity.model.ActivityXPath;
 /**
  * Class representing the Bookmark Field
@@ -26,11 +31,15 @@ import com.ibm.sbt.services.client.connections.activity.model.ActivityXPath;
  */
 public class BookmarkField extends Field{
 	
+	public BookmarkField(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
+		super(service, new XmlDataHandler(node, namespaceCtx, xpathExpression));
+	}
+	
 	public BookmarkField() {
 		super("link");
 	}
 	
-	public BookmarkField(BaseService svc, DataHandler<?> handler) {
+	public BookmarkField(BaseService svc, XmlDataHandler handler) {
 		super("link", svc, handler);
 	}
 	

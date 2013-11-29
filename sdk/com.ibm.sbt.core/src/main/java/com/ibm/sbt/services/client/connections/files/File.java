@@ -44,12 +44,10 @@ import com.ibm.sbt.services.client.connections.files.model.Person;
  * @author Vimal Dhupar
  */
 public class File extends AtomEntity {
-//	private String			fileId;	
 	private Author			authorEntry;
 	private Modifier		modifierEntry;
 
 	public File() {
-		this(null,null);
 	}
 
 	/**
@@ -57,7 +55,6 @@ public class File extends AtomEntity {
 	 * @param fileId
 	 */
 	public File(String fileId) {
-//		this.fileId = fileId;
 		setAsString(AtomXPath.id, fileId);
 	}
 
@@ -68,10 +65,6 @@ public class File extends AtomEntity {
      */
     public File(FileService svc, XmlDataHandler dh) {
         super(svc, dh);
-        authorEntry = new Author(getService(), new XmlDataHandler((Node)this.getDataHandler().getData(), 
-        		ConnectionsConstants.nameSpaceCtx, (XPathExpression)AtomXPath.author.getPath()));
-        modifierEntry = new Modifier(getService(), new XmlDataHandler((Node)this.getDataHandler().getData(), 
-        		ConnectionsConstants.nameSpaceCtx, (XPathExpression)AtomXPath.modifier.getPath()));
     }
     
 	/**
@@ -120,14 +113,6 @@ public class File extends AtomEntity {
 		else 
 			return false;
 	}
-	
-//	/**
-//	 * Method to get the Title of the File
-//	 * @return String 
-//	 */
-//	public String getTitle() {
-//		return getAsString(FileEntryXPath.Title);
-//	}
 
 	/**
 	 * Method to get the Library Type of the File
@@ -166,6 +151,10 @@ public class File extends AtomEntity {
 	 * @return Author
 	 */
 	public Author getAuthor() {
+		if(null == authorEntry) {
+			 authorEntry = new Author(getService(), new XmlDataHandler((Node)this.getDataHandler().getData(), 
+		        		ConnectionsConstants.nameSpaceCtx, (XPathExpression)AtomXPath.author.getPath()));
+		}
 		return authorEntry;
 	}
 
@@ -176,22 +165,6 @@ public class File extends AtomEntity {
 	public String getTotalResults() {
 		return getAsString(FileEntryXPath.TotalResults);
 	}
-
-//	/**
-//	 * Method to get the Published date
-//	 * @return Date
-//	 */
-//	public Date getPublished() {
-//		return getAsDate(FileEntryXPath.Published);
-//	}
-	
-//	/**
-//	 * Method to get the Updated date
-//	 * @return Date
-//	 */
-//	public Date getUpdated() {
-//		return getAsDate(FileEntryXPath.Updated);
-//	}
 
 	/**
 	 * Method to get the Created Date
@@ -223,6 +196,10 @@ public class File extends AtomEntity {
 	 * @return Person
 	 */
 	public Person getModifier() {
+		if(null == modifierEntry) {
+			modifierEntry = new Modifier(getService(), new XmlDataHandler((Node)this.getDataHandler().getData(), 
+	        		ConnectionsConstants.nameSpaceCtx, (XPathExpression)AtomXPath.modifier.getPath()));
+		}
 		return modifierEntry;
 	}
 
@@ -279,14 +256,6 @@ public class File extends AtomEntity {
 		return getAsString(FileEntryXPath.ObjectTypeId);
 	}
 	
-//	/**
-//	 * Method to get the Self Url
-//	 * @return String
-//	 */
-//	public String getSelfUrl() {
-//		return this.getAsString(FileEntryXPath.SelfUrl);
-//	}
-	
 	/**
 	 * Method to get Type
 	 * @return String
@@ -294,14 +263,6 @@ public class File extends AtomEntity {
 	public String getType() {
 		return this.getAsString(FileEntryXPath.Type);
 	}
-	
-//	/**
-//	 * Method to get Alternate Url
-//	 * @return String
-//	 */
-//	public String getAlternateUrl() {
-//		return this.getAsString(FileEntryXPath.AlternateUrl);
-//	}
 	
 	/**
 	 * Method to get Edit Link
@@ -398,14 +359,6 @@ public class File extends AtomEntity {
 	public int getReferencesCount() {
 		return this.getAsInt(FileEntryXPath.ReferencesCount);
 	}
-
-//	/**
-//	 * Method to get Summary
-//	 * @return String
-//	 */
-//	public String 	getSummary() {
-//		return this.getAsString(FileEntryXPath.Summary);
-//	}
 	
 	/**
 	 * Method to get Content Url

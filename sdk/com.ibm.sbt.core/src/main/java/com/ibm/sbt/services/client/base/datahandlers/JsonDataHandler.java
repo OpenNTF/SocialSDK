@@ -34,6 +34,8 @@ import com.ibm.commons.util.io.json.JsonJavaObject;
 public class JsonDataHandler implements DataHandler<JsonJavaObject>{
 	
 	private JsonJavaObject data;
+	
+	public JsonDataHandler(){}
 
 	/**
 	 * Constructor

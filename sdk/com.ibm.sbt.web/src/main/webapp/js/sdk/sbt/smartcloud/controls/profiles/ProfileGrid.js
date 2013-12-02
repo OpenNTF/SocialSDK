@@ -146,7 +146,7 @@ define([ "../../../declare",
         handleClick: function(el, data, ev) {
             if (this.profileAction) {
             	console.log(data);
-                dojo.stopEvent(ev);
+                this.stopEvent(ev);
                 
                 this.profileAction.execute(data, { grid : this.grid }, ev);
             }

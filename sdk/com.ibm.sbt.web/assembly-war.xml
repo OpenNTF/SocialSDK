@@ -14,6 +14,7 @@
 				<include>com.ibm.sbt:com.ibm.commons.xml</include>
 				<include>com.ibm.sbt:com.ibm.commons.runtime</include>
 				<include>com.ibm.sbt:com.ibm.sbt.core</include>
+				
 			</includes>
 
 			<outputDirectory>WEB-INF/lib</outputDirectory>
@@ -24,10 +25,9 @@
 		<fileSet>
 			<includes>
 				<include>js/**</include>
-				<include>META-INF/**</include>
+				<include>../META-INF/**</include>
 				<include>WEB-INF/**</include>
 				<include>xhr/**</include>
-
 				<include>index.html</include>
 				<include>loginForm.html</include>
 			</includes>

@@ -34,17 +34,12 @@ import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.AtomEntity;
-import com.ibm.sbt.services.client.base.AtomXPath;
-import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.base.BaseService;
-import com.ibm.sbt.services.client.base.ConnectionsConstants;
-import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.activity.feedHandler.MemberFeedHandler;
 import com.ibm.sbt.services.client.connections.activity.model.ActivityXPath;
 import com.ibm.sbt.services.client.connections.activity.transformers.ActivityTransformer;
-import com.ibm.sbt.services.client.connections.files.model.Author;
 
 
 /**
@@ -268,13 +263,13 @@ public class Activity extends AtomEntity {
 		return title;
 	}
 	
-//	public String getUpdated() {
-//		return getAsString(ActivityXPath.Updated);
-//	}
-//	
-//	public String getPublished() {
-//		return getAsString(ActivityXPath.Published);
-//	}
+	public Date getUpdated() {
+		return getAsDate(ActivityXPath.Updated);
+	}
+	
+	public Date getPublished() {
+		return getAsDate(ActivityXPath.Published);
+	}
 	
 	/* (non-Javadoc)
 	 * @see com.ibm.sbt.services.client.base.AtomEntity#getAuthor()

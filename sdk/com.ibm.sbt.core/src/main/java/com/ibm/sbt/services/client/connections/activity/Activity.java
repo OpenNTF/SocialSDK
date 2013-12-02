@@ -235,10 +235,15 @@ public class Activity extends AtomEntity {
 	}
 	
 	/**
-	 * returns the complete id of the activity
+	 * returns the complete id of the activity. 
 	 * @return
 	 */
 	public String getId() {
+		// This method is intentionally overriden in Activity, 
+		// due to the reason that the Id being fetched here is for Activity , 
+		// and in other case of Activity Node, if the object represents an Activity Node. 
+		// The Xpath given for AtomEntity representation of getId causes a regression and Null id is returned. 
+		// Thus we are Using separate implementation here.
 		return getAsString(ActivityXPath.Id); 
 	}
 	
@@ -256,6 +261,11 @@ public class Activity extends AtomEntity {
 	
 	@Override
 	public String getTitle() {
+		// This method is intentionally overriden in Activity, 
+		// due to the reason that the Title being fetched here is for Activity , 
+		// and in other case of Activity Node, if the object represents an Activity Node. 
+		// The Xpath given for AtomEntity representation of getTitle causes a regression and Null id is returned. 
+		// Thus we are Using separate implementation here.
 		String title = getAsString(ActivityXPath.Title);
 		if(StringUtil.isEmpty(title)) {
 			title = getAsString(ActivityXPath.ActivityNodeTitle);
@@ -263,11 +273,21 @@ public class Activity extends AtomEntity {
 		return title;
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.ibm.sbt.services.client.base.AtomEntity#getUpdated()
+	 */
 	public Date getUpdated() {
+		// Using overridden implementation as using AtomEntity representation causes a regression in these values. 
+		// Null values get returned for some instances where Activity Node gets returned.
 		return getAsDate(ActivityXPath.Updated);
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.ibm.sbt.services.client.base.AtomEntity#getPublished()
+	 */
 	public Date getPublished() {
+		// Using overridden implementation as using AtomEntity representation causes a regression in these values. 
+		// Null values get returned for some instances where Activity Node gets returned.
 		return getAsDate(ActivityXPath.Published);
 	}
 	
@@ -320,7 +340,12 @@ public class Activity extends AtomEntity {
 		return getAsString(ActivityXPath.Icon);
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.ibm.sbt.services.client.base.AtomEntity#getContent()
+	 */
 	public String getContent() {
+		// Using overridden implementation as using AtomEntity representation causes a regression in these values. 
+		// Null values get returned for some instances where Activity Node gets returned.
 		return getAsString(ActivityXPath.Content);
 	}
 	
@@ -340,10 +365,18 @@ public class Activity extends AtomEntity {
 		return getAsString(ActivityXPath.Category);
 	}
 	
+	/**
+	 * Method to fetch the Category Flag for delete
+	 * @return
+	 */
 	public String getCategoryFlagDelete() {
 		return getAsString(ActivityXPath.CategoryFlagDelete);
 	}
 	
+	/**
+	 * Method to check if the Category flag delete is present or not.  
+	 * @return
+	 */
 	public boolean hasCategoryFlagDelete() {
 		if(StringUtil.isNotEmpty(this.getCategoryFlagDelete())) { 
 			return true;
@@ -351,10 +384,18 @@ public class Activity extends AtomEntity {
 		return false;
 	}
 	
+	/**
+	 * Method to fetch the Category Flag for Completed
+	 * @return
+	 */
 	public String getCategoryFlagCompleted() {
 		return getAsString(ActivityXPath.CategoryFlagCompleted);
 	}
 	
+	/**
+	 * Method to fetch the Category Flag for Template
+	 * @return
+	 */
 	public String getCategoryFlagTemplate() {
 		return getAsString(ActivityXPath.CategoryFlagTemplate);
 	}

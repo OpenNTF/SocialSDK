@@ -422,6 +422,12 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
         	this.onRowSelectionChange(el,data);
         },
         
+        /**
+         * The Function is called whenever one of the grid rows is selected
+         * @method onRowSelectionChange
+         * @param el The element that fired the event
+         * @param data The Data associated with the grid row
+         */
         onRowSelectionChange: function(el,data){
         	//override this function to create an action for
         	//when the rows of the grid that are selected changes

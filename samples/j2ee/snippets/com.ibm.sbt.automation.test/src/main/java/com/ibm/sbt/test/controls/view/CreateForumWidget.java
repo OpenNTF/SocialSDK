@@ -53,7 +53,26 @@ public class CreateForumWidget extends BaseForumsTest {
     }
 	
 	@Test
-	public void testCreateForumConflict() {
+	public void testCreateForumNoFollow() {
+		WidgetResultPage resultPage = launchWidget(SNIPPET_ID);
+		
+		String name = createForumName();
+		String forumUuid = resultPage.createForum(name, "tag1,tag2,tag3", name, false);
+		Assert.assertNotNull("Error creating a forum: "+resultPage.getAlertText(), forumUuid);
+		Forum forum = getForum(forumUuid);
+		Assert.assertEquals("Forum title doesn't match", name, forum.getTitle());
+		Assert.assertTrue("Forum tag1 not found", forum.getTags().contains("tag1"));
+		Assert.assertTrue("Forum tag2 not found", forum.getTags().contains("tag2"));
+		Assert.assertTrue("Forum tag3 not found", forum.getTags().contains("tag3"));
+		Assert.assertEquals("Forum content doesn't match", name, forum.getContent());
+		
+		// TODO verify we are not following this forum
+		
+		deleteForum(forumUuid);
+    }
+	
+	@Test
+	public void testCreateForumNoName() {
 		WidgetResultPage resultPage = launchWidget(SNIPPET_ID);
 		
 		String forumUuid = resultPage.createForum("", "tag1,tag2,tag3", "", true);

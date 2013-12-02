@@ -248,7 +248,7 @@ public class AtomEntity extends BaseEntity {
      * Return the list of category terms that do not have a scheme attribute
      * @return
      */
-	public List<String> getTags() {
+	public List<String> getBaseTags() {
 		return getAsList(AtomXPath.tags);
 	}
 	
@@ -256,7 +256,7 @@ public class AtomEntity extends BaseEntity {
 	 * Set the tags
 	 * @param tags
 	 */
-	public void setTags(List<String> tags) {
+	public void setBaseTags(List<String> tags) {
 		setAsList(AtomXPath.tags, tags);
 	}
 	

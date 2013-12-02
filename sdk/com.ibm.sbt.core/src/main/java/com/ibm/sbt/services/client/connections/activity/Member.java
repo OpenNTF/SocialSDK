@@ -30,6 +30,7 @@ import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.activity.model.ActivityXPath;
 import com.ibm.sbt.services.client.connections.activity.transformers.ActivityMemberTransformer;
+import com.ibm.sbt.services.client.connections.common.Person;
 
 /**
  * This class represents a Connections Activity Member entity
@@ -37,7 +38,7 @@ import com.ibm.sbt.services.client.connections.activity.transformers.ActivityMem
  * @Represents Connections Activity Member
  * @author Vimal Dhupar
  */
-public class Member extends BaseEntity {
+public class Member extends Person {
 	
 	/**
      * The id of the Member Entry
@@ -183,12 +184,12 @@ public class Member extends BaseEntity {
 		
 	public Member load() throws ActivityServiceException
 	{
-	  	return getService().getMember(getActivityId(), getUserid());
+	  	return getService().getMember(getActivityId(), getId());
 	}
 	 
 	public void remove() throws ActivityServiceException
 	{
-	  	getService().deleteMember(getActivityId(), getUserid());
+	  	getService().deleteMember(getActivityId(), getId());
 	}
 	
 	@Override

@@ -41,7 +41,7 @@ import com.ibm.commons.xml.xpath.XPathExpression;
  */
 public class XmlDataHandler implements DataHandler<Node> {
 	
-	final private String CONNECTIONS_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ssX";
+	final private String CONNECTIONS_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss";
 	private final NamespaceContext nameSpaceCtx;
 	private Node data;
 	

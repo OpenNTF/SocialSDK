@@ -25,6 +25,10 @@ import com.ibm.sbt.services.client.connections.activity.model.ActivityXPath;
  */
 public class PersonField extends Field{
 	
+//	public PersonField(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
+//		super(service, new XmlDataHandler(node, namespaceCtx, xpathExpression));
+//	}
+	
 	public PersonField() {
 		super("person");
 	}

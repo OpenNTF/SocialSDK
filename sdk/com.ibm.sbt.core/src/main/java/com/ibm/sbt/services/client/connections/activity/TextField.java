@@ -16,6 +16,8 @@
 
 package com.ibm.sbt.services.client.connections.activity;
 
+import org.w3c.dom.Node;
+
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
 import com.ibm.sbt.services.client.connections.activity.model.ActivityXPath;
@@ -25,6 +27,10 @@ import com.ibm.sbt.services.client.connections.activity.model.ActivityXPath;
  *
  */
 public class TextField extends Field{
+	
+//	public TextField(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
+//		super(service, new XmlDataHandler(node, namespaceCtx, xpathExpression));
+//	}
 	
 	public TextField() {
 		super("text");

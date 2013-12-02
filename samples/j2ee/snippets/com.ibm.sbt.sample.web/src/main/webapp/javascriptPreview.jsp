@@ -16,6 +16,7 @@
 <html lang="en" style="height: 100%;">
   <%
       String snippetName = request.getParameter("snippet");
+      boolean layer = Boolean.parseBoolean(request.getParameter("layer"));
       String html = null;
       String js = null;
       String css = null;
@@ -95,7 +96,10 @@
         </script>
     <%} %>
     <jsp:include page="<%=Util.getLibraryInclude(request)%>" flush="false"/>
-    <script type="text/javascript" src="<%=Util.getLibraryUrl(request)%>"></script>
+
+  <% if (!layer) {%>
+    	<script type="text/javascript" src="<%=Util.getLibraryUrl(request)%>"></script>
+   <% } %>
   </head>
 
   <body class="<%=Util.getBodyClass(request, theme)%>" style="width: 90%; height: 100%;">

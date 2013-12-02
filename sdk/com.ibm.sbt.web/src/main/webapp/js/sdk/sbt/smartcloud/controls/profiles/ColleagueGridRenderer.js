@@ -3,11 +3,12 @@ define(["../../../declare",
         "../../../text!./templates/ColleagueItem.html",
         "../../../stringUtil",
         "../../../lang",
+        "../../../dom",
         "./nls/ColleagueGridRenderer",
         "../../../text!./templates/ColleagueItemFull.html",
         "../../../text!./templates/ViewAll.html"], 
 		
-function(declare, BaseGridRenderer, ColleagueItemTemplate, stringUtil, lang, nls, colleagueItemFullTemplate, viewAllTemplate){
+function(declare, BaseGridRenderer, ColleagueItemTemplate, stringUtil, lang, dom, nls, colleagueItemFullTemplate, viewAllTemplate){
 	
 	var ColleagueGridRenderer = declare(BaseGridRenderer, {
 		
@@ -66,7 +67,7 @@ function(declare, BaseGridRenderer, ColleagueItemTemplate, stringUtil, lang, nls
         
         render: function(grid, el, items, data) {
             while (el.childNodes[0]) {
-                this._destroy(el.childNodes[0]);
+                dom.destroy(el.childNodes[0]);
             }
             var size = items.length;
             if (size === 0) {
@@ -82,21 +83,21 @@ function(declare, BaseGridRenderer, ColleagueItemTemplate, stringUtil, lang, nls
          },
          
          renderContainer: function(grid, el, items, data) {          
-             return this._create("div", { "class": this.containerClass }, el);
+             return dom.create("div", { "class": this.containerClass }, el);
          },
          
          renderViewAll: function(grid, el, items, data){
         	if (this.viewAllTemplate && !grid.hideViewAll) {
                 var node;
-                if (this._isString(this.viewAllTemplate)) {
+                if (lang.isString(this.viewAllTemplate)) {
                     var domStr = this._substituteItems(this.viewAllTemplate, grid, this, items, data);
-                    node = this._toDom(domStr, el.ownerDocument);
+                    node = dom.toDom(domStr, el.ownerDocument);
                 } else {
                     node = this.sortTemplate.cloneNode(true);
                 }
                 el.appendChild(node);
                 
-                this._doAttachEvents(grid, el, data);
+                grid._doAttachEvents(el, data);
             }
          },
          

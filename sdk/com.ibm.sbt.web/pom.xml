@@ -55,6 +55,9 @@
 							<finalName>${project.artifactId}-${project.version}</finalName>
 							<appendAssemblyId>false</appendAssemblyId>
 							<outputDirectory>${project.build.directory}</outputDirectory>
+							<archive>
+								<manifestFile>META-INF\MANIFEST.MF</manifestFile>
+							</archive>
 						</configuration>
 					</execution>
 				</executions>

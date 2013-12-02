@@ -9,22 +9,23 @@
 	<fileSets>
 		<fileSet>
 			<includes>
-				<include>js/**</include>
-				<include>META-INF/**</include>
 				<include>WEB-INF/**</include>
-				<include>xhr/**</include>
+				<include>**/*.html</include>
+				<include>**/*.js</include>
 			</includes>
 			<directory>${project.build.directory}/classes</directory>
 			<outputDirectory>/WebContent</outputDirectory>
 		</fileSet>
 		<fileSet>
 			<excludes>
-				<exclude>js/**</exclude>
 				<exclude>WEB-INF/**</exclude>
-				<exclude>xhr/**</exclude>
-				<exclude>index.html</exclude>
-				<exclude>loginForm.html</exclude>
+				<exclude>**/*.js</exclude>
+				<exclude>**/*.html</exclude>
+				<exclude>META-INF/**</exclude>
 			</excludes>
+			<includes>
+				<include>**/*.class</include>
+			</includes>
 			<directory>${project.build.directory}/classes</directory>
 			<outputDirectory>/</outputDirectory>
 		</fileSet>

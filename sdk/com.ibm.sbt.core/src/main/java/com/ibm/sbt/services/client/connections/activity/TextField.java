@@ -18,11 +18,8 @@ package com.ibm.sbt.services.client.connections.activity;
 
 import org.w3c.dom.Node;
 
-import com.ibm.commons.xml.NamespaceContext;
-import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
-import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.connections.activity.model.ActivityXPath;
 /**
  * Class representing the Text Field
@@ -31,15 +28,15 @@ import com.ibm.sbt.services.client.connections.activity.model.ActivityXPath;
  */
 public class TextField extends Field{
 	
-	public TextField(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
-		super(service, new XmlDataHandler(node, namespaceCtx, xpathExpression));
-	}
+//	public TextField(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
+//		super(service, new XmlDataHandler(node, namespaceCtx, xpathExpression));
+//	}
 	
 	public TextField() {
 		super("text");
 	}
 	
-	public TextField(BaseService svc, XmlDataHandler handler) {
+	public TextField(BaseService svc, DataHandler<?> handler) {
 		super("text", svc, handler);
 	}
 	

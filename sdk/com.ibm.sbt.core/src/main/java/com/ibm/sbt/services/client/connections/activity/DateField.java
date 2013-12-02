@@ -18,13 +18,8 @@ package com.ibm.sbt.services.client.connections.activity;
 
 import java.util.Date;
 
-import org.w3c.dom.Node;
-
-import com.ibm.commons.xml.NamespaceContext;
-import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
-import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.connections.activity.model.ActivityXPath;
 /**
  * Class representing the Date Field
@@ -33,15 +28,15 @@ import com.ibm.sbt.services.client.connections.activity.model.ActivityXPath;
  */
 public class DateField extends Field{
 
-	public DateField(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
-		super(service, new XmlDataHandler(node, namespaceCtx, xpathExpression));
-	}
+//	public DateField(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
+//		super(service, new XmlDataHandler(node, namespaceCtx, xpathExpression));
+//	}
 	
 	public DateField() {
 		super("date");
 	}
 	
-	public DateField(BaseService svc, XmlDataHandler handler) {
+	public DateField(BaseService svc, DataHandler<?> handler) {
 		super("date", svc,handler);
 	}
 	

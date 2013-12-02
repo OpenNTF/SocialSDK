@@ -16,21 +16,19 @@
 
 package com.ibm.sbt.services.client.connections.activity;
 
-import com.ibm.sbt.services.client.base.AtomEntity;
 import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
-import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.connections.activity.model.ActivityXPath;
 
 /**
  * This class represents a Tag
  * @author Vimal Dhupar
  */
-public class Tag extends AtomEntity{
+public class Tag extends BaseEntity{
 
 
-	public Tag(BaseService svc, XmlDataHandler handler) {
+	public Tag(BaseService svc, DataHandler<?> handler) {
 		super(svc,handler);
 	}
 

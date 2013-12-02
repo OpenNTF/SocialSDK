@@ -15,13 +15,8 @@
  */
 package com.ibm.sbt.services.client.connections.activity;
 
-import org.w3c.dom.Node;
-
-import com.ibm.commons.xml.NamespaceContext;
-import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
-import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.connections.activity.model.ActivityXPath;
 /**
  * Class representing the Person Field
@@ -30,15 +25,15 @@ import com.ibm.sbt.services.client.connections.activity.model.ActivityXPath;
  */
 public class PersonField extends Field{
 	
-	public PersonField(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
-		super(service, new XmlDataHandler(node, namespaceCtx, xpathExpression));
-	}
+//	public PersonField(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
+//		super(service, new XmlDataHandler(node, namespaceCtx, xpathExpression));
+//	}
 	
 	public PersonField() {
 		super("person");
 	}
 	
-	public PersonField(BaseService svc, XmlDataHandler handler) {
+	public PersonField(BaseService svc, DataHandler<?> handler) {
 		super("person", svc, handler);
 	}
 	

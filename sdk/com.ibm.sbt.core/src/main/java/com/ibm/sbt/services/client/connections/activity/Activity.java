@@ -325,9 +325,9 @@ public class Activity extends AtomEntity {
 		return getAsString(ActivityXPath.Icon);
 	}
 	
-//	public String getContent() {
-//		return getAsString(ActivityXPath.Content);
-//	}
+	public String getContent() {
+		return getAsString(ActivityXPath.Content);
+	}
 	
 	/**
 	 * Method to fetch the Content Type

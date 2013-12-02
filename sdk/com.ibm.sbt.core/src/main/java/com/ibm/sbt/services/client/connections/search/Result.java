@@ -16,6 +16,8 @@
 
 package com.ibm.sbt.services.client.connections.search;
 
+import java.util.List;
+
 import org.w3c.dom.Node;
 
 import com.ibm.commons.xml.NamespaceContext;
@@ -56,5 +58,9 @@ public class Result extends AtomEntity{
 	 */
 	public String getApplication(){
 		return(getAsString(SearchXPath.application));
+	}
+	
+	public List<String> getTags() {
+		return super.getBaseTags();
 	}
 }

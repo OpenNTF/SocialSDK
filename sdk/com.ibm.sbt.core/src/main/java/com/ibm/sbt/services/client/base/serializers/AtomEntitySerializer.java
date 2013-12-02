@@ -98,8 +98,9 @@ public abstract class AtomEntitySerializer<T extends AtomEntity> extends BaseEnt
 	
 	protected List<Element> tags() {
 		List<Element> elements = new ArrayList<Element>();
-		if(entity.getTags() != null) {
-			for(String tag : entity.getTags()) {
+		if(entity.getBaseTags() != null) {
+			List<String> list = entity.getBaseTags();
+			for(String tag : list) {
 				elements.add(element("category", 
 						attribute("term", tag),
 						attribute("label", tag)));

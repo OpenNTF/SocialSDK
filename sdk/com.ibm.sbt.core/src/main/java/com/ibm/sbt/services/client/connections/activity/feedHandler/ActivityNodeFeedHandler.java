@@ -16,9 +16,12 @@
 
 package com.ibm.sbt.services.client.connections.activity.feedHandler;
 
+import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
+import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.Response;
+import com.ibm.sbt.services.client.base.AtomXPath;
 import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.ConnectionsConstants;
@@ -56,9 +59,11 @@ public class ActivityNodeFeedHandler implements IFeedHandler  {
 
 	@Override
 	public ActivityNode createEntityFromData(Object data) {
-		 XmlDataHandler handler = new XmlDataHandler((Node)data, ConnectionsConstants.nameSpaceCtx);
-         ActivityNode activity = new ActivityNode(service, handler);
-         return activity;
+		XmlDataHandler handler = new XmlDataHandler((Node)data, ConnectionsConstants.nameSpaceCtx);
+		ActivityNode activity = new ActivityNode(service, handler);
+//		XPathExpression xpath = (data instanceof Document) ? (XPathExpression)AtomXPath.singleEntry.getPath() : null;
+//      ActivityNode activity = new ActivityNode(service, (Node)data, ConnectionsConstants.nameSpaceCtx, xpath);
+        return activity;
 	}
 
 	@Override

@@ -89,7 +89,7 @@ function(declare, BaseGridRenderer, ColleagueItemTemplate, stringUtil, lang, dom
          renderViewAll: function(grid, el, items, data){
         	if (this.viewAllTemplate && !grid.hideViewAll) {
                 var node;
-                if (this._isString(this.viewAllTemplate)) {
+                if (lang.isString(this.viewAllTemplate)) {
                     var domStr = this._substituteItems(this.viewAllTemplate, grid, this, items, data);
                     node = dom.toDom(domStr, el.ownerDocument);
                 } else {
@@ -97,7 +97,7 @@ function(declare, BaseGridRenderer, ColleagueItemTemplate, stringUtil, lang, dom
                 }
                 el.appendChild(node);
                 
-                grid.doAttachEvents(grid, el, data);
+                grid._doAttachEvents(el, data);
             }
          },
          

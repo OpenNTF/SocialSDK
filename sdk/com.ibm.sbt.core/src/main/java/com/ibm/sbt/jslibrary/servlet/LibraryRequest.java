@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * ï¿½ Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -59,6 +59,7 @@ public class LibraryRequest {
     protected boolean debug;
     protected boolean debugTransport;
     protected boolean mockTransport;
+    protected boolean layer;
 
     protected SBTEnvironment environment;
 
@@ -67,6 +68,7 @@ public class LibraryRequest {
     public static final String DEFAULT_JSLIB = "dojo";
     public static final String DEFAULT_VERSION = "1.4";
     public static final Boolean DEFAULT_DEBUG = false;
+    public static final Boolean DEFAULT_LAYER = false;
     public static final Boolean DEFAULT_DEBUG_TRANSPORT = false;
     public static final Boolean DEFAULT_MOCK_TRANSPORT = false;
 
@@ -118,6 +120,11 @@ public class LibraryRequest {
     public static final String PARAM_MOCK_TRANSPORT = "mockTransport";
     
     /**
+     * Sets debug mode if true
+     */
+    public static final String PARAM_LAYER = "layer";
+
+    /**
      * Enables/Disables the aggregator (default is false)
      */
     public static final String PARAM_AGGREGATOR = "aggregator";
@@ -163,7 +170,7 @@ public class LibraryRequest {
         this.toolkitExtUrl = StringUtil.replace(params.getToolkitExtUrl(), "%local_server%", UrlUtil.getServerUrl(httpRequest));
         this.toolkitExtJsUrl = StringUtil.replace(params.getToolkitExtJsUrl(), "%local_server%", UrlUtil.getServerUrl(httpRequest));
         this.serviceUrl = StringUtil.replace(params.getServiceUrl(), "%local_application%", UrlUtil.getContextUrl(httpRequest));
-        this.libraryUrl = UrlUtil.getRequestUrl(httpRequest);
+        this.libraryUrl = params.getLibraryUrl().indexOf("%")>-1?UrlUtil.getRequestUrl(httpRequest):params.getLibraryUrl();
         this.jsLibraryUrl = StringUtil.replace(params.getJsLibraryUrl(), "%local_server%", UrlUtil.getServerUrl(httpRequest));
         this.iframeUrl = StringUtil.replace(params.getIframeUrl(), "%local_server%", UrlUtil.getServerUrl(httpRequest));
 
@@ -250,6 +257,14 @@ public class LibraryRequest {
      */
     public boolean isDebug() {
         return debug;
+    }
+
+    /**
+     * 
+     * @return
+     */
+    public boolean isLayer() {
+        return layer;
     }
 
     /**
@@ -347,6 +362,7 @@ public class LibraryRequest {
         jsLib = readString(req, PARAM_JSLIB, getDefaultJsLib());
         jsVersion = readString(req, PARAM_JSVERSION, DEFAULT_JSLIB.equals(jsLib) ? getDefaultJsVersion() : "");
         debug = Boolean.parseBoolean(readString(req, PARAM_DEBUG, getDefaultDebug()));
+        layer = Boolean.parseBoolean(readString(req, PARAM_LAYER, getDefaultLayer()));
         debugTransport = Boolean.parseBoolean(readString(req, PARAM_DEBUG_TRANSPORT, getDefaultDebugTransport()));
         mockTransport = Boolean.parseBoolean(readString(req, PARAM_MOCK_TRANSPORT, getDefaultMockTransport()));
         String environmentName = req.getParameter(PARAM_ENVIRONMENT);
@@ -377,6 +393,10 @@ public class LibraryRequest {
     
     protected String getDefaultDebug() {
     	return DEFAULT_DEBUG.toString();
+    }
+
+    protected String getDefaultLayer() {
+    	return DEFAULT_LAYER.toString();
     }
 
     protected String getDefaultDebugTransport() {

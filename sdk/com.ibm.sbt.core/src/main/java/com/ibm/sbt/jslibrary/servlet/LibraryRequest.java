@@ -59,6 +59,7 @@ public class LibraryRequest {
     protected boolean debug;
     protected boolean debugTransport;
     protected boolean mockTransport;
+    protected boolean layer;
 
     protected SBTEnvironment environment;
 
@@ -67,6 +68,7 @@ public class LibraryRequest {
     public static final String DEFAULT_JSLIB = "dojo";
     public static final String DEFAULT_VERSION = "1.4";
     public static final Boolean DEFAULT_DEBUG = false;
+    public static final Boolean DEFAULT_LAYER = false;
     public static final Boolean DEFAULT_DEBUG_TRANSPORT = false;
     public static final Boolean DEFAULT_MOCK_TRANSPORT = false;
 
@@ -117,6 +119,11 @@ public class LibraryRequest {
      */
     public static final String PARAM_MOCK_TRANSPORT = "mockTransport";
     
+    /**
+     * Sets debug mode if true
+     */
+    public static final String PARAM_LAYER = "layer";
+
     /**
      * Enables/Disables the aggregator (default is false)
      */
@@ -256,6 +263,14 @@ public class LibraryRequest {
      * 
      * @return
      */
+    public boolean isLayer() {
+        return layer;
+    }
+
+    /**
+     * 
+     * @return
+     */
     public boolean isDebugTransport() {
         return debugTransport;
     }
@@ -347,6 +362,7 @@ public class LibraryRequest {
         jsLib = readString(req, PARAM_JSLIB, getDefaultJsLib());
         jsVersion = readString(req, PARAM_JSVERSION, DEFAULT_JSLIB.equals(jsLib) ? getDefaultJsVersion() : "");
         debug = Boolean.parseBoolean(readString(req, PARAM_DEBUG, getDefaultDebug()));
+        layer = Boolean.parseBoolean(readString(req, PARAM_LAYER, getDefaultLayer()));
         debugTransport = Boolean.parseBoolean(readString(req, PARAM_DEBUG_TRANSPORT, getDefaultDebugTransport()));
         mockTransport = Boolean.parseBoolean(readString(req, PARAM_MOCK_TRANSPORT, getDefaultMockTransport()));
         String environmentName = req.getParameter(PARAM_ENVIRONMENT);
@@ -377,6 +393,10 @@ public class LibraryRequest {
     
     protected String getDefaultDebug() {
     	return DEFAULT_DEBUG.toString();
+    }
+
+    protected String getDefaultLayer() {
+    	return DEFAULT_LAYER.toString();
     }
 
     protected String getDefaultDebugTransport() {

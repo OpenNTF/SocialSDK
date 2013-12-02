@@ -87,9 +87,9 @@ define([ "../_bridge/declare","../_bridge/dom","../_bridge/lang",
         _doAttachEvents: function(el, scope) {
             var nodes = (el.all || el.getElementsByTagName("*"));
             for (var i in nodes) {
-                var attachEvent = (nodes[i].getAttribute) ? nodes[i].getAttribute(this.AttachEventAttribute) : null;
+                var attachEvent = (nodes[i].getAttribute) ? nodes[i].getAttribute(this._attachEventAttribute) : null;
                 if (attachEvent) {
-                    nodes[i].removeAttribute(this.AttachEventAttribute);
+                    nodes[i].removeAttribute(this._attachEventAttribute);
                     var event, events = attachEvent.split(/\s*,\s*/);
                     while((event = events.shift())) {
                         if (event) {

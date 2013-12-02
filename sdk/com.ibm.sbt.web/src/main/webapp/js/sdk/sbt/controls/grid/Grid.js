@@ -419,6 +419,12 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
         			}
         		}
         	}
+        	this.onRowSelectionChange(el,data);
+        },
+        
+        onRowSelectionChange: function(el,data){
+        	//override this function to create an action for
+        	//when the rows of the grid that are selected changes
         },
         
         /**

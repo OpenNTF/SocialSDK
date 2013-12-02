@@ -420,7 +420,7 @@ define([ "../../declare", "../../dom", "../../lang"],
             return grid._substitute(template, renderer, function(value,key) {
                 if (typeof value == "undefined") {
                     // check the renderer for the property
-                    lang = this.getObject(key, false, self);
+                    value = lang.getObject(key, false, self);
                 }
 
                 if (typeof value == 'function') {

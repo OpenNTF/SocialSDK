@@ -60,7 +60,7 @@ public class GitImport {
 
 //	var gh = new com.ibm.sbt.playground.git.GitImport("https://api.github.com",null,"OpenNTF/SocialSDK")	
 	public void browse(String path) throws Exception {
-		GitVFS vfs = new GitVFS("https://api.github.com/repos/OpenNTF/SocialSDK/contents/samples/j2ee/com.ibm.sbt.sample.web/WebContent/js/","priand","gith7934");
+		GitVFS vfs = new GitVFS("https://api.github.com/repos/OpenNTF/SocialSDK/contents/samples/j2ee/com.ibm.sbt.sample.web/WebContent/js/","priand","xxxxxx");
 		
 		VFSFile f = vfs.getRoot().getChild("Smartcloud").getChild("Profiles").getChild("Get About.js");
 		System.out.println("File:"+f.getName());

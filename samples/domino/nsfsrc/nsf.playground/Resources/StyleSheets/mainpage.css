@@ -18,13 +18,20 @@ h4.lotusSelected a {
 
 input.searchbox {
     border: 1px solid #999;
-    padding-left: 3px;
-    padding-right: 3px;
+  	padding:3px 18px 3px 4px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
     background-color: #fff;
     overflow: hidden;
+ 	background: url(clearbtn.png) no-repeat right -10px center;
+  	transition: background 0.4s;
+}
+input.searchbox.x {
+  	background-position: right 5px center;
+}
+input.searchbox.onx {
+  	cursor: pointer;
 }
 
 .assetTreeContainer .dijitTree {

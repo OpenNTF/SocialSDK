@@ -14,10 +14,15 @@
  * permissions and limitations under the License.
  */
 
-// NLS_CHARSET=UTF-8
+/**
+ * Social Business Toolkit SDK
+ * 
+ * Resource bundle for dialog control.
+ */
 define({
-    root: {
-    	labelOK : "OK",
-    	labelCancel : "Cancel"
-    }
+  root: ({	 
+	  OK : "OK",
+	  Cancel : "Cancel",
+	  Close : "Close"
+  })
 });

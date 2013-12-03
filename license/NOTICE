@@ -54,7 +54,7 @@ Available from http://commons.apache.org/io/
   This product includes software developed by
   The Apache Software Foundation (http://www.apache.org/).
 
-Apache HTTPComponents Client 4.2.1
+Apache HTTPComponents Client 4.3.1
 Licensed under Apache 2.0
 Available from http://hc.apache.org/downloads.cgi
   Copyright 1999-2012 The Apache Software Foundation
@@ -72,7 +72,7 @@ Available from http://archive.apache.org/dist/httpcomponents/
 
 _______________________________________________________
 
-DOJO TOOLKIT: The Program includes the Dojo Toolkit 1.8 software which IBM
+DOJO TOOLKIT: The Program includes the Dojo Toolkit 1.9.1 software which IBM
 obtained under the terms and conditions of the following license:
  
 Copyright (c) 2005-2013, The Dojo Foundation
@@ -726,7 +726,7 @@ has.js, 3d0c6e3
 Tri-Licensed under Academic Free or New BSD or MIT Licenses. 
 Available under https://github.com/phiggins42/has.js 
 
-Bootstrap (Subset) v2.1.1 
+Bootstrap 3.0 
 Licensed under Apache v2.0
 Available from http://twitter.github.com/bootstrap/
 
@@ -740,7 +740,7 @@ Licensed under the MIT license
 Copyright (c) 2007 Stefan Goessner (goessner.net)
 Available from http://code.google.com/p/jsonpath/ 
 
-jQuery 1.8.2
+jQuery 2.0.3
 Licensed under the MIT license
 Available from http://jquery.com/
 
@@ -800,4 +800,30 @@ Available from Eclipse download at http://download.eclipse.org/releases/juno
 Dojo toolkit linkage 1.4.3, 1.6.1, 1.7.4
 Licensed under the BSD liecnse
 Available from http://dojotoolkit.org/
+
+CKEditor 1.2
+Licensed under MPL.
+Available from http://ckeditor.com/
+
+Json2.js
+Public Domain
+Available from http://www.json.org/js.html
+
+envjs (rhino) 1.2
+Licensed under MIT
+Available from http://www.envjs.com/dist/env.rhino.1.2.js
+
+Wicked Good Xpath
+Licensed under MIT
+Available from http://code.google.com/p/wicked-good-xpath/
+
+Open Social Explorer 0.0.2
+Licensed under Apache 2.0
+Available from https://github.com/OpenSocial/explorer
+   This product includes software originally developed by IBM    Corporation
+   Copyright 2012 IBM Corp.
+
+
+
+
 

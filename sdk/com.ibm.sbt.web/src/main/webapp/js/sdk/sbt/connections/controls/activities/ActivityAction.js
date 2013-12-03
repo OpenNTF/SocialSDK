@@ -51,7 +51,7 @@ define([ "../../../declare", "../../../controls/grid/GridAction"],
          * @param event The event
          */
         execute: function(item, grid, event) {
-        	document.location.href = item.getValue("recentUpdatesUrl");
+        	document.location.href = item.getValue("historyUrl");
         }
 
 

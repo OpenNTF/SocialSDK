@@ -30,7 +30,7 @@ define([ "../../declare", "../../lang",
      */
     var Dialog = declare([ _TemplatedDialog ], {
     	
-    	nls : null,
+    	dialogStyle : "",
     	
     	templateString : DialogTemplate,
     	

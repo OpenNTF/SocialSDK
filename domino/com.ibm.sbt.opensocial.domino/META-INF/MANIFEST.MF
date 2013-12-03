@@ -1,0 +1,25 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Domino Opensocial App
+Bundle-SymbolicName: com.ibm.sbt.opensocial.domino;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: com.ibm.sbt.opensocial.domino.internal.OpenSocialPlugin
+Bundle-Vendor: IBM
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.core.runtime,
+ com.ibm.domino.osgi.core,
+ com.ibm.fiesta.commons,
+ com.ibm.commons,
+ com.ibm.notes.java.api,
+ com.ibm.pvc.webcontainer,
+ com.ibm.fiesta.libs,
+ com.ibm.xsp.core,
+ com.ibm.xsp.domino,
+ com.ibm.sbt.core,
+ com.ibm.commons.runtime
+Import-Package: javax.servlet,
+ javax.servlet.http,
+ org.osgi.service.webapplication
+Bundle-ClassPath: .
+Export-Package: com.ibm.sbt.opensocial.domino.config,
+ com.ibm.sbt.opensocial.domino.container

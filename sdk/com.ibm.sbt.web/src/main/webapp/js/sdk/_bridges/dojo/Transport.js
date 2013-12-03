@@ -131,7 +131,14 @@ define([ './declare', 'dojo/_base/xhr', 'dojox/xml/parser', '../util', '../Promi
             var pairs = [];
             for(var name in queryMap){
                 var value = queryMap[name];
-                pairs.push(encodeURIComponent(name) + "=" + encodeURIComponent(value));
+                if (dojo.isArray(value)) {
+                	name = encodeURIComponent(name);
+                	for (var i=0; i<value.length; i++) {
+                		pairs.push(name + "=" + encodeURIComponent(value[i]));
+                	}
+                } else {
+                	pairs.push(encodeURIComponent(name) + "=" + encodeURIComponent(value));
+                }
             }
             return pairs.join("&");
         },

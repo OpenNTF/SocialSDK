@@ -57,6 +57,9 @@ define([],function() {
         },
         getObject: function(name, create, context) {
             return dojo.getObject(name, create, context);
+        },
+        hitch: function(scope, method) {
+        	return dojo.hitch(scope, method);
         }
 	};
 });

@@ -153,6 +153,20 @@ define(["has", "./jquery"],function(has) {
 				context = (p in context ? context[p] : (create ? context[p] = {} : undefined));
 			}
 			return context;
+        },
+        hitch: function(scope, method) {
+        	if (!method) { 
+        		method = scope; 
+        		scope = null; 
+        	}
+            if (typeof method == "string") {
+                    scope = scope || window;
+                    if(!scope[method]) { 
+                    	throw(["Unable to find method: " + method]); 
+                    }
+                    return function() { return scope[method].apply(scope, arguments || []); };
+            }
+            return !scope ? method : function() { return method.apply(scope, arguments || []); };
         }
 	};
 });

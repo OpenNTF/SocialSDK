@@ -4,35 +4,14 @@
 	<artifactId>com.ibm.sbt.commons</artifactId>
 	<packaging>pom</packaging>
 
-	<profiles>
-		<profile>
-			<id>lite</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<modules>
-				<module>com.ibm.commons</module>
-				<module>com.ibm.commons.xml</module>
-				<module>com.ibm.commons.runtime</module>
-			</modules>
-		</profile>
-		<profile>
-			<id>full</id>
-			<activation>
-				<property>
-					<name>notes-platform</name>
-				</property>
-			</activation>
-			<modules>
-				<module>com.ibm.commons.runtime</module>
-			</modules>
-		</profile>
-	</profiles>
-
 	<parent>
 		<artifactId>com.ibm.sbt</artifactId>
 		<groupId>com.ibm.sbt</groupId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
-
+	<modules>
+		<module>com.ibm.commons</module>
+		<module>com.ibm.commons.xml</module>
+		<module>com.ibm.commons.runtime</module>
+	</modules>
 </project>

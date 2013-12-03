@@ -18,6 +18,7 @@ package com.ibm.sbt.test.js.sbt;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.ibm.commons.util.io.json.JsonJavaObject;
@@ -38,6 +39,7 @@ public class RequireModules extends BaseServiceTest {
     static final String SNIPPET_ID = "Toolkit_RequireModules";
     
     @Test
+    @Ignore
     public void testResponseHeaders() {
         boolean result = checkNoError(SNIPPET_ID);
         assertTrue(getNoErrorMsg(), result);

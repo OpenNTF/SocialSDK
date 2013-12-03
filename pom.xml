@@ -178,31 +178,9 @@
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>2.9</version>
 				<configuration>
-					<aggregate>true</aggregate>
 					<failOnError>false</failOnError>
 					<excludePackageNames>com.sun.*:com.ibm.commons.*:com.ibm.sbt.core.*:com.ibm.sbt.plugin.*:com.ibm.sbt.jslibrray.*:com.ibm.sbt.proxy.*:com.ibm.sbt.security.*:*.util.*:com.ibm.sbt.portlet.*:com.ibm.sbt.playground.*:demo.*:acme.*</excludePackageNames>
 				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-antrun-plugin</artifactId>
-				<version>1.4</version>
-				<executions>
-					<execution>
-						<phase>generate-resources</phase>
-						<configuration>
-
-							<tasks>
-								<echo message="Creating javadoc output directory" />
-								<mkdir dir="./target/site/apidocs" />
-							</tasks>
-
-						</configuration>
-						<goals>
-							<goal>run</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 

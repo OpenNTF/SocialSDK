@@ -56,7 +56,7 @@ public class GetUpdatesFromACommunity extends BaseActivityStreamsTest {
     	String commId = communitiesTest.getCommunity().getCommunityUuid();
     	createEntry("urn:lsid:lconn.ibm.com:communities.community:"+commId, "@all", "@all");
     	
-    	addSnippetParam("sample.communityId", commId);
+    	addSnippetParam("CommunityService.communityUuid", commId);
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         List jsonList = previewPage.getJsonList();
         Assert.assertFalse("GetUpdatesFromACommunity returned no results", jsonList.isEmpty());

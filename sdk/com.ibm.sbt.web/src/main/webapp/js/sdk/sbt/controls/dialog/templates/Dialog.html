@@ -8,10 +8,10 @@
 	<div class="" dojoattachpoint="containerNode">
 		<div class="lotusDialogBorder" style="${dialogStyle}">
 			<form class="lotusDialog lotusForm">
-				<div id="dialog_title_0" class="lotusDialogHeader" style="cursor: move;" aria-label="${title}">
+				<div class="lotusDialogHeader" style="cursor: move;" aria-label="${title}">
 					<h1 class="lotusHeading">${title}</h1>
-					<a class="lotusDialogClose" href="javascript:;" dojoattachevent="onclick: onCancel" title="Close" role="button">
-						<img alt="Close" src="images/blank.gif" role="presentation">
+					<a class="lotusDialogClose" href="javascript:;" dojoattachevent="onclick: onCancel" title="${nls.Close}" role="button">
+						<img alt="${nls.Close}" src="images/blank.gif" role="presentation">
 						<span class="lotusAltText">X</span>
 					</a>
 				</div>
@@ -19,9 +19,9 @@
 					<div class="lotusDialogContent" dojoattachpoint="contentNode">
 					</div>
 				</div>
-				<div class="lotusDialogFooter">
-					<input type="button" class="lotusFormButton" role="button" value="${nls.labelOK}" dojoattachevent="onclick: onExecute" >
-					<input type="button" class="lotusFormButton" role="button" value="${nls.labelCancel}" dojoattachevent="onclick: onCancel" >
+				<div class="lotusDialogFooter" dojoattachpoint="buttonsNode">
+					<input type="button" class="lotusFormButton" role="button" value="${nls.OK}" dojoattachevent="onclick: onExecute"  dojoattachpoint="buttonOK">
+					<input type="button" class="lotusFormButton" role="button" value="${nls.Cancel}" dojoattachevent="onclick: onCancel" dojoattachpoint="buttonCancel">
 				</div>
 			</form>
 		</div>

@@ -17,8 +17,8 @@
 /**
  * 
  */
-define([ "../_bridge/declare", "dijit/Dialog", "dijit/_TemplatedMixin"], 
-    function(declare, Dialog, _TemplatedMixin) {
+define([ "../_bridge/declare", "../lang", "dijit/Dialog", "dijit/_TemplatedMixin"], 
+    function(declare, lang, Dialog, _TemplatedMixin) {
 
     /**
      * @module sbt.widget._TemplatedDialog
@@ -34,7 +34,6 @@ define([ "../_bridge/declare", "dijit/Dialog", "dijit/_TemplatedMixin"],
 		 * @param args
 		 */
 		constructor: function(args) {	
-			this.nls = args.nls || {};
 		}
     });
     

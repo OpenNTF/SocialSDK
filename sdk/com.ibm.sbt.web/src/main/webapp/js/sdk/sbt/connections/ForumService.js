@@ -1167,7 +1167,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * Get a feed that includes the topics that the authenticated user created in stand-alone forums and in forums associated 
          * with communities to which the user belongs.
          * 
-         * @method getMyForums
+         * @method getMyTopics
          * @param requestArgs
          */
         getMyTopics: function(requestArgs) {
@@ -1199,7 +1199,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         /**
          * Get a feed that includes all stand-alone and forum forums created in the enterprise.
          * 
-         * @method getAllForums
+         * @method getPublicForums
          * @param args
          */
         getPublicForums: function(args) {
@@ -1215,7 +1215,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         /**
          * Get a list for forum topics that includes the topics in the specified forum.
          * 
-         * @method getTopics
+         * @method getForumTopics
          * @param forumUuid
          * @param args
          * @returns
@@ -1238,9 +1238,34 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         },
         
         /**
+         * Get a list for forum topics that includes the topics in the specified community.
+         * 
+         * @method getCommunityForumTopics
+         * @param forumUuid
+         * @param args
+         * @returns
+         */
+        getCommunityForumTopics: function(communityUuid, args) {
+            var promise = this._validateCommunityUuid(communityUuid);
+            if (promise) {
+                return promise;
+            }
+            
+            var requestArgs = lang.mixin({ communityUuid : communityUuid }, args || {});
+            
+            var options = {
+                method : "GET",
+                handleAs : "text",
+                query : requestArgs
+            };
+            
+            return this.getEntities(consts.AtomTopics, options, ForumTopicFeedCallbacks);
+        },
+        
+        /**
          * Get a list for forum recommendations that includes the recommendations in the specified post.
          * 
-         * @method getRecommendations
+         * @method getForumRecommendations
          * @param postUuid
          * @param args
          * @returns
@@ -1840,6 +1865,15 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         _validateForumUuid : function(forumUuid) {
             if (!forumUuid || forumUuid.length == 0) {
                 return this.createBadRequestPromise("Invalid argument, expected forumUuid.");
+            }
+        },
+        
+        /*
+         * Validate a community UUID, and return a Promise if invalid.
+         */
+        _validateCommunityUuid : function(communityUuid) {
+            if (!communityUuid || communityUuid.length == 0) {
+                return this.createBadRequestPromise("Invalid argument, expected communityUuid.");
             }
         },
         

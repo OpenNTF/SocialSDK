@@ -14,6 +14,16 @@
 				<include>com.ibm.sbt:com.ibm.commons.xml</include>
 				<include>com.ibm.sbt:com.ibm.commons.runtime</include>
 				<include>com.ibm.sbt:com.ibm.sbt.core</include>
+
+				<include>commons-logging:commons-logging</include>
+				<include>org.apache.james:apache-mime4j</include>
+				<include>commons-codec:commons-codec</include>
+				<include>org.apache.httpcomponents:httpclient</include>
+				<include>org.apache.httpcomponents:httpmime</include>
+				<include>org.apache.httpcomponents:httpcore</include>
+				<include>commons-io:commons-io</include>
+				<include>commons-fileupload:commons-fileupload</include>
+
 			</includes>
 
 			<outputDirectory>WEB-INF/lib</outputDirectory>
@@ -24,10 +34,9 @@
 		<fileSet>
 			<includes>
 				<include>js/**</include>
-				<include>META-INF/**</include>
+				<include>../META-INF/**</include>
 				<include>WEB-INF/**</include>
 				<include>xhr/**</include>
-
 				<include>index.html</include>
 				<include>loginForm.html</include>
 			</includes>

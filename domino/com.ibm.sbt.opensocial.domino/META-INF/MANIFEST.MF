@@ -12,14 +12,15 @@ Require-Bundle: org.eclipse.core.runtime,
  com.ibm.commons,
  com.ibm.notes.java.api,
  com.ibm.pvc.webcontainer,
- com.ibm.fiesta.libs,
  com.ibm.xsp.core,
  com.ibm.xsp.domino,
  com.ibm.sbt.core,
- com.ibm.commons.runtime
+ com.ibm.commons.runtime,
+ com.ibm.fiesta.libs
 Import-Package: javax.servlet,
  javax.servlet.http,
  org.osgi.service.webapplication
-Bundle-ClassPath: .
+Bundle-ClassPath: .,
+ config/
 Export-Package: com.ibm.sbt.opensocial.domino.config,
  com.ibm.sbt.opensocial.domino.container

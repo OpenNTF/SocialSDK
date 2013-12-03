@@ -27,6 +27,7 @@ import com.ibm.sbt.test.js.ConnectionsTestSuite;
 import com.ibm.sbt.test.js.ConnectionsTestSuite;
 import com.ibm.sbt.test.js.SmartCloudTestSuite;
 import com.ibm.sbt.test.js.SmartCloudTestSuite;
+import com.ibm.sbt.test.js.ToolkitTestSuite;
 
 /**
  * @author mwallace
@@ -34,7 +35,7 @@ import com.ibm.sbt.test.js.SmartCloudTestSuite;
  * @date 12 Mar 2013
  */
 @RunWith(Suite.class)
-@SuiteClasses({ AuthenticationTestSuite.class, BaseTestSuite.class, ConnectionsTestSuite.class })
+@SuiteClasses({ AuthenticationTestSuite.class, BaseTestSuite.class, ToolkitTestSuite.class, ConnectionsTestSuite.class })
 public class JavaScriptTestSuite {
     @AfterClass
     public static void cleanup() {

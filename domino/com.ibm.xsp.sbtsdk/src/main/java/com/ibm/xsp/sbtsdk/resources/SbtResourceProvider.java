@@ -21,6 +21,7 @@ import java.net.URL;
 import javax.servlet.http.HttpServletRequest;
 
 import com.ibm.sbt.web.SbtWebActivator;
+import com.ibm.xsp.extlib.minifier.SBTLoader;
 import com.ibm.xsp.extlib.plugin.DominoPluginActivator;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
 import com.ibm.xsp.sbtsdk.Activator;
@@ -61,7 +62,8 @@ public class SbtResourceProvider extends BundleResourceProvider {
                 name = "js/sdk/_bridges/dojo/"+name.substring("js/sdk/sbt/_bridge/".length());
             }
         }
-    	String path = "WebContent/"+name;
+    	
+        String path = SbtLoader.BASE_WEBRESOURCE_PATH+name;
     	return ExtLibUtil.getResourceURL(SbtWebActivator.instance.getBundle(), path);
     }
 }

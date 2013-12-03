@@ -56,7 +56,7 @@ define([ "../../../declare", "../../../stringUtil", "../../../controls/grid/Grid
          * @param event the event
          */
         execute: function(item, opts, event) {
-        	window.open(item.getValue("fileUrl"));
+        	window.open(item.getValue("downloadUrl"));
         }
 
     });

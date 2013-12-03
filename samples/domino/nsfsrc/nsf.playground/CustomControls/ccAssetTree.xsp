@@ -41,7 +41,26 @@ return true;]]></xp:this.onkeypress>
 						<xp:attr name="placeholder"
 							value="Find Snippets">
 						</xp:attr>
-					</xp:this.attrs></xp:inputText>
+					</xp:this.attrs>
+				</xp:inputText>
+				<xp:scriptBlock id="scriptBlock2">
+					<xp:this.value><![CDATA[var inpSearch = dojo.byId("#{id:search1}");
+dojo.connect(inpSearch,"oninput",function(e) {
+	(this.value?dojo.addClass:dojo.removeClass)(this,"x");
+});
+dojo.connect(inpSearch,"onmousemove",function(e) {
+	var set = this.offsetWidth-18 < e.clientX-this.getBoundingClientRect().left;
+	(set?dojo.addClass:dojo.removeClass)(this,"onx");
+});
+dojo.connect(inpSearch,"onclick",function(e) {
+	if(dojo.hasClass(this,"x")) {
+		this.value = "";
+		dojo.removeClass(this,"x");
+		dojo.byId('#{id:linkSearch1}').click()
+	}
+});
+]]></xp:this.value>
+				</xp:scriptBlock>
 				<span title="Submit search">
 					<xp:link escape="true" id="linkSearch1">
 						<xp:image id="image1" alt="Submit search" url="/search.png">
@@ -72,12 +91,14 @@ return true;]]></xp:this.onkeypress>
 		model: assetsModel, 
 		showRoot: false,
 		_onNodeMouseEnter: function (node,evt) {
-			if(node.item.tooltip) {
-       			dijit.showTooltip(node.item.tooltip,node.domNode);
-       		}
+			var tt = node.item.tooltip;
+			if(!tt) {
+				tt = node.item.name; 
+			} 
+      		dijit.showTooltip(tt,node.labelNode);
     	},
     	_onNodeMouseLeave: function (node,evt) {
-       		dijit.hideTooltip(node.domNode);
+       		dijit.hideTooltip(node.labelNode);
     	}
 	},"#{id:assetsTree}");
 	dojo.connect(navTree,"onLoad",function() {

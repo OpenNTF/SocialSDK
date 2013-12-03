@@ -56,7 +56,7 @@ define([ "../../../declare", "../../../controls/grid/GridAction", "../../../stri
          * @param event  the Event
          */
         execute: function(item, opts, event) {
-           window.open(item.getValue("communityUrl"));
+           window.open(item.getValue("alternateUrl"));
         }
 
     });

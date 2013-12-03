@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Commons Utilities
 Bundle-SymbolicName: com.ibm.commons;singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 9.0.0
 Bundle-Localization: plugin
 Export-Package: com.ibm.commons,com.ibm.commons.extension,com.ibm.comm
  ons.log,com.ibm.commons.log.eclipse,com.ibm.commons.log.jdk,com.ibm.c

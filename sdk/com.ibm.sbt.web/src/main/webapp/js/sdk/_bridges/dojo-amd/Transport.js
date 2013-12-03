@@ -133,7 +133,14 @@ define([ 'dojo/_base/declare', 'dojo/_base/xhr', 'dojo/_base/lang', 'dojox/xml/p
             var pairs = [];
             for(var name in queryMap){
                 var value = queryMap[name];
-                pairs.push(encodeURIComponent(name) + "=" + encodeURIComponent(value));
+                if (lang.isArray(value)) {
+                	name = encodeURIComponent(name);
+                	for (var i=0; i<value.length; i++) {
+                		pairs.push(name + "=" + encodeURIComponent(value[i]));
+                	}
+                } else {
+                	pairs.push(encodeURIComponent(name) + "=" + encodeURIComponent(value));
+                }
             }
             return pairs.join("&");
         },

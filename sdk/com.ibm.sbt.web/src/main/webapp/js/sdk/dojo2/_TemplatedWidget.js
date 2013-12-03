@@ -75,7 +75,7 @@ define([ "../_bridge/declare","../_bridge/dom","../_bridge/lang",
         
         _doAttachPoints: function(scope,el){
                 var nodes = (el.all || el.getElementsByTagName("*"));
-                    for (var i = 0; i < node.length; i++) {
+                    for (var i = 0; i < nodes.length; i++) {
                              var attachPoint = (nodes[i].getAttribute) ? nodes[i].getAttribute(this._attachPointAttribute) : null;
                         if (attachPoint) {
                                 var att = nodes[i].getAttribute(this._attachPointAttribute);
@@ -86,7 +86,7 @@ define([ "../_bridge/declare","../_bridge/dom","../_bridge/lang",
      
         _doAttachEvents: function(el, scope) {
             var nodes = (el.all || el.getElementsByTagName("*"));
-            for (var i = 0; i < node.length; i++) {
+            for (var i = 0; i < nodes.length; i++) {
                 var attachEvent = (nodes[i].getAttribute) ? nodes[i].getAttribute(this._attachEventAttribute) : null;
                 if (attachEvent) {
                     nodes[i].removeAttribute(this._attachEventAttribute);

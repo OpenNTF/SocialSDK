@@ -78,8 +78,9 @@ importExport.deleteAssets(type,name);}]]></xp:this.action>
 			<xp:this.data>
 				<xp:dominoDocument var="document1" formName="ImportSource">
 					<xp:this.postNewDocument><![CDATA[#{javascript:document1.replaceItemValue("Type",compositeData.type)
-document1.replaceItemValue("Source","file")}]]></xp:this.postNewDocument>
-				</xp:dominoDocument>
+document1.replaceItemValue("Source","file")
+viewScope.password = true}]]></xp:this.postNewDocument>
+					<xp:this.postOpenDocument><![CDATA[#{javascript:viewScope.password = false}]]></xp:this.postOpenDocument></xp:dominoDocument>
 			</xp:this.data>
 			<xe:formTable id="formTable2" formTitle="Assets"
 				formDescription="Import Source">
@@ -134,10 +135,20 @@ document1.replaceItemValue("Source","file")}]]></xp:this.postNewDocument>
 						disableClientSideValidation="true" size="40" value="#{document1.User}">
 					</xp:inputText>
 				</xe:formRow>
-				<xe:formRow id="formRow6" label="Password:">
+				<xe:formRow id="formRow2"
+					rendered="#{javascript:!viewScope.password}">
+					<xp:link escape="true" text="Edit Password"
+						id="link4">
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="complete">
+						<xp:this.action><![CDATA[#{javascript:viewScope.password=true}]]></xp:this.action>
+					</xp:eventHandler></xp:link>
+				</xe:formRow>
+				<xe:formRow id="formRow6" label="Password:"
+					rendered="#{javascript:viewScope.password}">
 					<xp:inputText id="inputText5"
-						disableClientSideValidation="true" size="40" value="#{document1.Password}"
-						password="true">
+						disableClientSideValidation="true" size="40"
+						value="#{document1.Password}" password="true">
 					</xp:inputText>
 				</xe:formRow>
 			</xe:formTable>

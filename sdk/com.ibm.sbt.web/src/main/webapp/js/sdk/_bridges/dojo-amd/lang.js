@@ -57,6 +57,9 @@ define(['dojo/_base/lang'],function(lang) {
         },
         getObject: function(name, create, context) {
             return lang.getObject(name, create, context);
+        },
+        hitch: function(scope, method) {
+        	return lang.hitch(scope, method);
         }
 	};
 });

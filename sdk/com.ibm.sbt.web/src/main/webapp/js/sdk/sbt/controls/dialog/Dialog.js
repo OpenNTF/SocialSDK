@@ -17,9 +17,11 @@
 /**
  * 
  */
-define([ "../../declare", "../../lang", "../../widget/_TemplatedDialog",
+define([ "../../declare", "../../lang", 
+         "../../i18n!./nls/dialog",
+         "../../widget/_TemplatedDialog",
          "../../text!./templates/Dialog.html" ], 
-        function(declare, lang, _TemplatedDialog, DialogTemplate) {
+        function(declare, lang, nls, _TemplatedDialog, DialogTemplate) {
 
     /**
      * @class Dialog
@@ -27,6 +29,8 @@ define([ "../../declare", "../../lang", "../../widget/_TemplatedDialog",
      * @module sbt.controls.dialog.Dialog
      */
     var Dialog = declare([ _TemplatedDialog ], {
+    	
+    	dialogStyle : "",
     	
     	templateString : DialogTemplate,
 
@@ -37,6 +41,11 @@ define([ "../../declare", "../../lang", "../../widget/_TemplatedDialog",
          * @param args
          */
         constructor: function(args) {
+        	this.nls = lang.mixin({}, nls, args.nls);
+        	if (args.nls) {
+        		delete args.nls;
+        	}
+        	
             lang.mixin(this, args);
         },
         

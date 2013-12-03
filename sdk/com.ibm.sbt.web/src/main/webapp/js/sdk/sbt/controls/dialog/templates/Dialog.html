@@ -1,14 +1,14 @@
 <div tabindex="-1" class="lotusDialogWrapper" role="dialog"	style="${style}" title="">
 	<div class="dijitDialogTitleBar" dojoattachpoint="titleBar" style="display: none;">
-		<span id="lconn_share_widget_Dialog_0_title" class="dijitDialogTitle" dojoattachpoint="titleNode"></span> 
+		<span class="dijitDialogTitle" dojoattachpoint="titleNode"></span> 
 		<span title="Cancel" dojoattachevent="onclick: onCancel" class="dijitDialogCloseIcon" dojoattachpoint="closeButtonNode">
 			<span title="Cancel" class="closeText" dojoattachpoint="closeText">x</span>
 		</span>
 	</div>
 	<div class="" dojoattachpoint="containerNode">
-		<div class="lotusDialogBorder" style="width: 525px;">
+		<div class="lotusDialogBorder" style="${dialogStyle}">
 			<form class="lotusDialog lotusForm">
-				<div id="dialog_title_0" class="lotusDialogHeader" style="cursor: move;" aria-label="Upload Files">
+				<div id="dialog_title_0" class="lotusDialogHeader" style="cursor: move;" aria-label="${title}">
 					<h1 class="lotusHeading">${title}</h1>
 					<a class="lotusDialogClose" href="javascript:;" dojoattachevent="onclick: onCancel" title="Close" role="button">
 						<img alt="Close" src="images/blank.gif" role="presentation">
@@ -20,8 +20,8 @@
 					</div>
 				</div>
 				<div class="lotusDialogFooter">
-					<input type="button" class="lotusFormButton" role="button" value="OK" dojoattachevent="onclick: onExecute" >
-					<input type="button" class="lotusFormButton" role="button" value="Cancel" dojoattachevent="onclick: onCancel" >
+					<input type="button" class="lotusFormButton" role="button" value="${nls.labelOK}" dojoattachevent="onclick: onExecute" >
+					<input type="button" class="lotusFormButton" role="button" value="${nls.labelCancel}" dojoattachevent="onclick: onCancel" >
 				</div>
 			</form>
 		</div>

@@ -149,6 +149,9 @@ public class PreviewJavaScriptHandler extends PreviewHandler {
 		if(libIdx==0) {
 			jsLibraryPath = getDefautLibraryPath(serverUrl);
 		}
+		if(jsLibraryPath.endsWith("/")) {
+			jsLibraryPath = jsLibraryPath.substring(0,jsLibraryPath.length()-1);
+		}
 		
 		DominoPlaygroundContext pgContext = new DominoPlaygroundContext(env, properties, jsLib);
 		List<JavaScriptPreviewExtension> pgExtensions = (List<JavaScriptPreviewExtension>)(List)PlaygroundExtensionFactory.getExtensions(JavaScriptPreviewExtension.class);
@@ -187,9 +190,9 @@ public class PreviewJavaScriptHandler extends PreviewHandler {
 		} else if( (ExtLibUtil.isXPages853() && StringUtil.equals(theme, "oneui")) || StringUtil.equals(theme, "oneuiv2.1")) {
 			pw.println("  <style type=\"text/css\">");
 			if(isDojo) {
-				pw.println("    @import \""+jsLibraryPath+"dijit/themes/claro/claro.css\";");
-				pw.println("    @import \""+jsLibraryPath+"dojo/resources/dojo.css\";");
-				pw.println("    @import \""+jsLibraryPath+"dijit/themes/dijit.css\";");
+				pw.println("    @import \""+jsLibraryPath+"/dijit/themes/claro/claro.css\";");
+				pw.println("    @import \""+jsLibraryPath+"/dojo/resources/dojo.css\";");
+				pw.println("    @import \""+jsLibraryPath+"/dijit/themes/dijit.css\";");
 			}
 			pw.println("    @import \"/xsp/.ibmxspres/domino/oneuiv2.1/base/core.css\";");
 			pw.println("    @import \"/xsp/.ibmxspres/domino/oneuiv2.1/base/dojo.css\";");
@@ -203,9 +206,9 @@ public class PreviewJavaScriptHandler extends PreviewHandler {
 		} else if( (!ExtLibUtil.isXPages853() && StringUtil.equals(theme, "oneui")) || StringUtil.equals(theme, "oneui302")) {
 			pw.println("  <style type=\"text/css\">");
 			if(isDojo) {
-				pw.println("    @import \""+jsLibraryPath+"dijit/themes/claro/claro.css\";");
-				pw.println("    @import \""+jsLibraryPath+"dojo/resources/dojo.css\";");
-				pw.println("    @import \""+jsLibraryPath+"dijit/themes/dijit.css\";");
+				pw.println("    @import \""+jsLibraryPath+"/dijit/themes/claro/claro.css\";");
+				pw.println("    @import \""+jsLibraryPath+"/dojo/resources/dojo.css\";");
+				pw.println("    @import \""+jsLibraryPath+"/dijit/themes/dijit.css\";");
 			}
 			pw.println("    @import \"/xsp/.ibmxspres/.oneuiv302/oneui/css/base/core.css\";");
 			pw.println("    @import \"/xsp/.ibmxspres/.oneuiv302/oneui/css/base/dojo.css\";");
@@ -218,26 +221,26 @@ public class PreviewJavaScriptHandler extends PreviewHandler {
 			bodyTheme = "lotusui30_body lotusui30_fonts lotusui30 lotusui30dojo";
 		} else if(StringUtil.equals(theme, "dojo") || StringUtil.equals(theme, "dojo-claro")) {
 			pw.println("  <style type=\"text/css\">");
-			pw.println("    @import \""+jsLibraryPath+"dijit/themes/claro/claro.css\";");
-			pw.println("    @import \""+jsLibraryPath+"dojo/resources/dojo.css\";");
+			pw.println("    @import \""+jsLibraryPath+"/dijit/themes/claro/claro.css\";");
+			pw.println("    @import \""+jsLibraryPath+"/dojo/resources/dojo.css\";");
 			pw.println("  </style>");
 			bodyTheme = "claro";
 		} else if(StringUtil.equals(theme, "dojo-tundra")) {
 			pw.println("  <style type=\"text/css\">");
-			pw.println("    @import \""+jsLibraryPath+"dijit/themes/tundra/tundra.css\";");
-			pw.println("    @import \""+jsLibraryPath+"dojo/resources/dojo.css\";");
+			pw.println("    @import \""+jsLibraryPath+"/dijit/themes/tundra/tundra.css\";");
+			pw.println("    @import \""+jsLibraryPath+"/dojo/resources/dojo.css\";");
 			pw.println("  </style>");
 			bodyTheme = "tundra";
 		} else if(StringUtil.equals(theme, "dojo-soria")) {
 			pw.println("  <style type=\"text/css\">");
-			pw.println("    @import \""+jsLibraryPath+"dijit/themes/soria/soria.css\";");
-			pw.println("    @import \""+jsLibraryPath+"dojo/resources/dojo.css\";");
+			pw.println("    @import \""+jsLibraryPath+"/dijit/themes/soria/soria.css\";");
+			pw.println("    @import \""+jsLibraryPath+"/dojo/resources/dojo.css\";");
 			pw.println("  </style>");
 			bodyTheme = "soria";
 		} else if(StringUtil.equals(theme, "dojo-nihilo")) {
 			pw.println("  <style type=\"text/css\">");
-			pw.println("    @import \""+jsLibraryPath+"dijit/themes/nihilo/nihilo.css\";");
-			pw.println("    @import \""+jsLibraryPath+"dojo/resources/dojo.css\";");
+			pw.println("    @import \""+jsLibraryPath+"/dijit/themes/nihilo/nihilo.css\";");
+			pw.println("    @import \""+jsLibraryPath+"/dojo/resources/dojo.css\";");
 			pw.println("  </style>");
 			bodyTheme = "soria";
 		}

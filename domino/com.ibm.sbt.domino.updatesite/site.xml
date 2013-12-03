@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
    <feature url="features/com.ibm.sbt.domino.feature_1.0.0.qualifier.jar" id="com.ibm.sbt.domino.feature" version="1.0.0.qualifier"/>
+   <feature url="features/com.ibm.sbt.opensocial.domino.feature_1.0.0.qualifier.jar" id="com.ibm.sbt.opensocial.domino.feature" version="1.0.0.qualifier"/>
 </site>

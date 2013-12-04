@@ -601,13 +601,13 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
 
             this._doQuery(this.store, options,query);
         },
-        
+         
         /*
          * Display the specified error message 
          */
         _updateWithError: function(e) {
         	console.error(e.message);
-            this.renderer.renderError(this, this.gridNode, e.message);
+            this.renderer.renderError(this, this.domNode, e.message);
         }
 
     });

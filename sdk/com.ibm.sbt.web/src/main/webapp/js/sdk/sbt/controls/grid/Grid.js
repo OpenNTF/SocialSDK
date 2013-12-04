@@ -607,7 +607,7 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
          */
         _updateWithError: function(e) {
         	console.error(e.message);
-            this.renderer.renderError(this, this.gridNode, e.message);
+            this.renderer.renderError(this, this.domNode, e.message);
         }
 
     });

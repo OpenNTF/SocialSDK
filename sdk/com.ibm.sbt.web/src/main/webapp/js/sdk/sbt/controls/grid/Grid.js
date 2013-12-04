@@ -601,7 +601,7 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
 
             this._doQuery(this.store, options,query);
         },
-        
+         
         /*
          * Display the specified error message 
          */

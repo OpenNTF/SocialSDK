@@ -19,8 +19,9 @@
  */
 define(["../../../declare", "../../../lang", "../../../stringUtil", "../BaseGridRenderer",
         "../../../i18n!./nls/ProfileGridRenderer",
-        "../../../text!./templates/ProfileRow.html"], 
-        function(declare, lang, stringUtil, BaseGridRenderer, nls, profileTemplate) {
+        "../../../text!./templates/ProfileRow.html",
+        "../../../text!./templates/CommunityMember.html"], 
+        function(declare, lang, stringUtil, BaseGridRenderer, nls, profileTemplate,communityMemberTemplate) {
 		
     /**
      * @class ProfileGridRenderer
@@ -47,6 +48,11 @@ define(["../../../declare", "../../../lang", "../../../stringUtil", "../BaseGrid
           * The template used to construct a no photo url
           */
          noContactImageUrl: "{baseUrl}/contacts/img/noContactImage.gif",
+         
+         /**
+          * URL for community member photos 
+          */
+         communityMemberImageUrl: "{baseUrl}/contacts/profiles/photo/{uid}",
         
          /**
           * The constructor function
@@ -54,6 +60,11 @@ define(["../../../declare", "../../../lang", "../../../stringUtil", "../BaseGrid
           * @param args
           */
          constructor: function(args) {
+        	 if(args){
+        		 if(args.type === "communityMembers"){
+        			 this.template = communityMemberTemplate;
+        		 }
+        	 }
          },
 
          /**
@@ -84,6 +95,18 @@ define(["../../../declare", "../../../lang", "../../../stringUtil", "../BaseGrid
         	 if (photos && lang.isArray(photos) && photos.length > 1) {
         		 return stringUtil.replace(this.contactImageUrl, { baseUrl : ep.baseUrl , photo : photos[1] });
         	 } else {
+        		 return stringUtil.replace(this.noContactImageUrl, { baseUrl : ep.baseUrl });
+        	 }
+         },
+         
+         getMemberPhoto: function(grid, item, i, items){
+        	 var ep = grid.store.getEndpoint();
+        	 if (!ep) return null;
+        	 
+        	 var id = item.getValue("uid");
+        	 if(lang.isString(id)){
+        		 return stringUtil.replace(this.communityMemberImageUrl, { baseUrl : ep.baseUrl , uid : id });
+        	 }else{
         		 return stringUtil.replace(this.noContactImageUrl, { baseUrl : ep.baseUrl });
         	 }
          },

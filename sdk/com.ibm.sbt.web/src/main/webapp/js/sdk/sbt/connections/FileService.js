@@ -1454,16 +1454,19 @@ define(
 					if (promise) {
 						return promise;
 					}
+					
 					var files = null;
 					if (typeof fileControlOrId == "string") {
 						var fileControl = document.getElementById(fileControlOrId);
-						filePath = fileControl.value;
 						files = fileControl.files;
 					} else if (typeof fileControlOrId == "object") {
-						filePath = fileControlOrId.value;
 						files = fileControlOrId.files;
 					} else {
 						return this.createBadRequestPromise("File Control or ID is required");
+					}
+					
+					if (files.length == 0) {
+						return this.createBadRequestPromise("No files selected for upload");
 					}
 
 					var file = files[0];

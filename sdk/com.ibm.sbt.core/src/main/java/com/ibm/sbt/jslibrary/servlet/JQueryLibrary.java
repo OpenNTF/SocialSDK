@@ -52,19 +52,19 @@ public class JQueryLibrary extends RequireJSLibrary {
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.ibm.sbt.jslibrary.servlet.BaseLibrary#getRegisterModules()
+	 * @see com.ibm.sbt.jslibrary.servlet.BaseLibrary#getRegisterModules(LibraryRequest)
 	 */
 	@Override
-	protected String[][] getRegisterModules() {
+	protected String[][] getRegisterModules(LibraryRequest request) {
 		return REGISTER_MODULES;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.ibm.sbt.jslibrary.servlet.AbstractLibrary#getRegisterModulesAmd()
+	 * @see com.ibm.sbt.jslibrary.servlet.AbstractLibrary#getRegisterModulesAmd(LibraryRequest)
 	 */
 	@Override
-	protected String[][] getRegisterModulesAmd() {
+	protected String[][] getRegisterModulesAmd(LibraryRequest request) {
 		return REGISTER_MODULES;
 	}
 	

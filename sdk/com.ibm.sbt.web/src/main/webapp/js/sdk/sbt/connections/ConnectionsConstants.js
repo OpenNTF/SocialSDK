@@ -39,6 +39,18 @@ define([ "../lang", "../base/BaseConstants" ], function(lang, base) {
             startIndex : "/a:feed/opensearch:startIndex",
             itemsPerPage : "/a:feed/opensearch:itemsPerPage"
         },
+        
+        /**
+		 * XPath expressions used when parsing a Connections service document ATOM feeds
+		 */
+        ConnectionsServiceDocsFeedXPath : {
+            // used by getEntitiesDataArray
+            entries : "/a:feed/a:entry",
+            // used by getSummary
+    		emailConfig : "/a:feed/a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/configuration']/@term",
+    		language : "/a:feed/a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/language']/@term",       
+    		languageLabels : "/a:feed/a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/language']/@label"
+        },
 
         /**
          * AuthType variable values for endpoint
@@ -60,7 +72,66 @@ define([ "../lang", "../base/BaseConstants" ], function(lang, base) {
 			term : "@term",
 			frequency : "@snx:frequency",
 			uid : "@term"
-		}
+		},
+		
+		/**
+         * XPath expressions to be used when reading a Blog
+         * 
+         * @property BlogXPath
+         * @type Object
+         * @for sbt.connections.BlogService
+         */
+        ServiceConfigXPath : lang.mixin({}, base.AtomEntryXPath, {
+        	alternateSSLUrl : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/alternate-ssl']/@href"
+        }),
+        
+        /**
+         * XPath expressions to be used when reading a Community Member Entry
+         * 
+         * @property MemberXPath
+         * @type Object
+         * @for sbt.connections.CommunityService
+         */
+        MemberXPath : lang.mixin({}, base.AtomEntryXPath, {
+            role : "snx:role"
+        }),
+        
+        /**
+         * XPath expressions to be used when reading a Community Member Entry
+         * 
+         * @property MemberXPath
+         * @type Object
+         * @for sbt.connections.CommunityService
+         */
+        ReportEntryXPath : lang.mixin({}, base.AtomEntryXPath, {
+            categoryIssue : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/issue']/@term",
+            reportItemLink : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/report-item']/@href",
+            relatedLink : "a:link[@rel='related']/@href",
+            inRefTo : "snx:in-ref-to[@rel='http://www.ibm.com/xmlns/prod/sn/report-item']/@ref"	
+        }),
+        
+        /**
+         * XPath expressions to be used when reading a Community Member Entry
+         * 
+         * @property MemberXPath
+         * @type Object
+         * @for sbt.connections.CommunityService
+         */
+        ModerationActionEntryXPath : lang.mixin({}, base.AtomEntryXPath, {
+            moderationAction : "snx:moderation/action",
+            relatedLink : "a:link[@rel='related']/@href",
+            inRefTo : "snx:in-ref-to[@rel='http://www.ibm.com/xmlns/prod/sn/report-item']/@ref"	
+        }),
 
-    });
+        /**
+         * Get service configs
+         */
+//        ServiceConfigs : "/${service}/serviceconfigs",
+
+		/**
+	     * Get service configs
+	     */
+	    ServiceConfigs : "/{service}/serviceconfigs"
+	
+	    });
 });

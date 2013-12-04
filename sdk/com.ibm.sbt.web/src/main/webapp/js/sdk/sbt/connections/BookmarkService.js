@@ -20,9 +20,9 @@
  * 
  * @module sbt.connections.BookmarkService
  */
-define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", "./BookmarkConstants", "../base/BaseService",
+define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", "./BookmarkConstants", "./ConnectionsService",
          "../base/AtomEntity", "../base/XmlDataHandler",  "./Tag"], 
-    function(declare,config,lang,stringUtil,Promise,consts,BaseService,AtomEntity,XmlDataHandler, Tag) {
+    function(declare,config,lang,stringUtil,Promise,consts,ConnectionsService,AtomEntity,XmlDataHandler, Tag) {
     
 	var BookmarkTmpl = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><entry xmlns=\"http://www.w3.org/2005/Atom\"><title type=\"text\">${getTitle}</title><category scheme=\"http://www.ibm.com/xmlns/prod/sn/type\" term=\"bookmark\"/><link href='${getUrl}'/>${isPrivate}<content type=\"html\">${getContent}</content>${getTags}</entry>";
 	var CategoryPrivateFlag = "<category scheme=\"http://www.ibm.com/xmlns/prod/sn/flags\" term=\"private\" />"
@@ -310,11 +310,13 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
      * @class BookmarkService
      * @namespace sbt.connections
      */
-    var BookmarkService = declare(BaseService, {
+    var BookmarkService = declare(ConnectionsService, {
     	
     	contextRootMap: {
         	dogear : "dogear"
         },
+        
+        serviceName : "dogear",
     	
         /**
          * Constructor for BookmarkService
@@ -326,14 +328,6 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             if (!this.endpoint) {
                 this.endpoint = config.findEndpoint(this.getDefaultEndpointName());
             }
-        },
-
-        /**
-         * Return the default endpoint name if client did not specify one.
-         * @returns {String}
-         */
-        getDefaultEndpointName : function() {
-            return "connections";
         },
         
         /**

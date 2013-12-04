@@ -1,5 +1,7 @@
 package com.ibm.sbt.services;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.Properties;
 
 import org.junit.After;
@@ -32,7 +34,19 @@ public abstract class BaseUnitTest {
 		application = runtimeFactory.initApplication(null);
 		context = Context.init(application, null, null);
 		TestEnvironment.setRequiresAuthentication(true);
+		loadProperties();
 	}
+	
+	public void loadProperties(){
+		if (properties.isEmpty()) {
+			try {
+				properties.load(new FileInputStream(new File(
+						"config/test.properties")));
+			} catch (Exception e) {
+			}
+		}
+	}
+
 
 	@After
 	public final void tearDown() {

@@ -86,9 +86,9 @@
 	startIndex: 1,
 	count: 5
 }
-var svc = new sbt.ConnectionsService("/activities/service/atom2/everything")
-var msg = svc.get(p,"xml");
-viewScope.text = msg.getXMLString(false)
+
+var data = nsf.XMLService().getActivityXMLString();
+viewScope.text = data;
 }]]></xp:this.action>
 					</xp:eventHandler>
 				</xp:button>

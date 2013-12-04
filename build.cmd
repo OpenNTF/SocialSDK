@@ -69,8 +69,8 @@ set M2_HOME=%toolsDir:"=%\apache-maven-3.0.4
 set PATH=%JAVA_HOME%\bin;%M2_HOME%\bin;%PATH%
 
 
-if not (%LABEL%) == SNAPSHOT echo changing version to %LABEL%
-if not (%LABEL%) == SNAPSHOT call mvn org.eclipse.tycho:tycho-versions-plugin:0.19.0:set-version -DnewVersion=1.0.0.%LABEL% %NOTES_PLATFORM%
+if not (%LABEL%) == (SNAPSHOT) echo changing version to %LABEL%
+if not (%LABEL%) == (SNAPSHOT) call mvn org.eclipse.tycho:tycho-versions-plugin:0.19.0:set-version -DnewVersion=1.0.0.%LABEL% %NOTES_PLATFORM%
 
 
 rem queuing standard and domino builds to aggregate both

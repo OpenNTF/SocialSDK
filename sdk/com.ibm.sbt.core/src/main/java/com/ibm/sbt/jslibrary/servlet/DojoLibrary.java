@@ -115,19 +115,24 @@ public class DojoLibrary extends AbstractLibrary {
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.ibm.sbt.jslibrary.servlet.BaseLibrary#getRegisterModules()
+	 * @see com.ibm.sbt.jslibrary.servlet.BaseLibrary#getRegisterModules(LibraryRequest)
 	 */
 	@Override
-	protected String[][] getRegisterModules() {
+	protected String[][] getRegisterModules(LibraryRequest request) {
 		return REGISTER_MODULES;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.ibm.sbt.jslibrary.servlet.AbstractLibrary#getRegisterModulesAmd()
+	 * @see com.ibm.sbt.jslibrary.servlet.AbstractLibrary#getRegisterModulesAmd(LibraryRequest)
 	 */
 	@Override
-	protected String[][] getRegisterModulesAmd() {
+	protected String[][] getRegisterModulesAmd(LibraryRequest request) {
+	    if (isExceedsVersion(request.getJsVersion(), minimumDojo2Version)) {
+	        REGISTER_MODULES_AMD[2][1] = PATH_SBTX_DOJO2;
+	    } else {
+            REGISTER_MODULES_AMD[2][1] = PATH_SBTX_DOJO;
+	    }
 		return REGISTER_MODULES_AMD;
 	}
 	
@@ -148,8 +153,7 @@ public class DojoLibrary extends AbstractLibrary {
 	        REGISTER_EXT_MODULES_AMD[1][1] = PATH_SBTX_DOJO2;
 	    } else {
             REGISTER_EXT_MODULES_AMD[1][1] = PATH_SBTX_DOJO;
-	    }
-	    
+	    }	    
 	    return REGISTER_EXT_MODULES_AMD;
 	}
 

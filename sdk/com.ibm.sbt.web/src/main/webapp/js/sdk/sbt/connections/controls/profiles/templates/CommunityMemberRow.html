@@ -11,7 +11,7 @@
 		<div>
 			<h4>
 				<span class="vcard" dojoAttachPoint="vcardNode">
-  					<a aria-label="${nls.ariaVcard}" href="javascript:void(0);" title="${tooltip}" data-dojo-attach-event="onclick: handleClick" class="fn url">${name}</a>
+  					<a aria-label="${nls.ariaVcard}" href="javascript:void(0);" title="${tooltip}" data-dojo-attach-event="onclick: handleClick" class="fn url">${contributorName}</a>
 		  			<span data-dojo-attach-point="idNode" class="x-lconn-userid" style="display: none;">${uid}</span>
   				</span>
   			</h4>
@@ -21,7 +21,7 @@
 	<td class=lotusLastCell>
 		<div>
 			<div>${nls.role}:&nbsp;${role}</div>
-			<div>${nls.email}&nbsp;<strong><a alt="${nls.clickToEmail}" href="mailto:${email}">${email}</a></strong></div>
+			<div>${nls.email}&nbsp;<strong><a alt="${nls.clickToEmail}" href="mailto:${email}">${contributorEmail}</a></strong></div>
 		</div>
 	</td>
 </tr>

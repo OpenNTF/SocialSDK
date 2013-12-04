@@ -8,7 +8,5 @@ require(["sbt/dom", "sbt/smartcloud/controls/profiles/ProfileGrid"], function(do
     dom.byId("gridDiv").appendChild(grid.domNode);
 
     grid.update();
-    
-    console.log("!");
   
 });

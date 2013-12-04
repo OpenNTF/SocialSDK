@@ -198,6 +198,8 @@ public class APIImporter extends AssetImporter {
 			}
 			
 			String[] products = StringUtil.splitString(doc.getString("Products"),',');
+			fixProducts(products);
+			
 			String s = doc.toString();
 			List mt = (List)doc.get("RequestsDetails");
 			if(mt!=null) {
@@ -209,6 +211,21 @@ public class APIImporter extends AssetImporter {
 					}
 					JsonJavaObject je = createAPIEntry(doc, i, action);
 					apiDoc.content.add(je);
+				}
+			}
+		}
+	}
+	protected void fixProducts(String[] products) {
+		// Fix the product labels coming from the Wikis
+		if(products!=null) {
+			for(int i=0; i<products.length; i++) {
+				String p = products[i];
+				if(StringUtil.indexOfIgnoreCase(p, "domino")>=0) {
+					products[i] = "domino";
+				} else if(StringUtil.indexOfIgnoreCase(p, "connections")>=0) {
+					products[i] = "connections";
+				} else if(StringUtil.indexOfIgnoreCase(p, "smartcloud")>=0) {
+					products[i] = "smartcloud";
 				}
 			}
 		}

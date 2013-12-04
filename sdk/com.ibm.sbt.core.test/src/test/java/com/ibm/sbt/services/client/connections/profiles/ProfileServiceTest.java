@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,6 +13,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import com.ibm.sbt.services.BaseUnitTest;
+import com.ibm.sbt.services.client.SerializationUtil;
 
 /**
  * Tests for the java connections Profile API by calling Connections server
@@ -269,6 +272,23 @@ public class ProfileServiceTest extends BaseUnitTest {
 		File file = new File("image1.jpg");
 		profile.setPhotoLocation(file.getAbsolutePath());
 		profileService.updateProfilePhoto(file, profile.getUserid());
+	}
+	
+	@Test
+	public final void testProfileSerialization() throws Exception {
+		ProfileService profileService = new ProfileService();
+		Profile profile = profileService.getProfile(properties.getProperty("email1"));
+		new SerializationUtil() {
+			@Override
+			public void validateSerializable() {
+				Profile profileObject = null;
+				try {
+					ObjectInputStream ois = new ObjectInputStream(new FileInputStream(serFile));
+					profileObject = (Profile) ois.readObject();
+				} catch (Exception e) {}
+				assertEquals(profileObject.getEmail(), properties.getProperty("email1"));
+			}
+		}.isSerializable(profile);
 	}
 
 }

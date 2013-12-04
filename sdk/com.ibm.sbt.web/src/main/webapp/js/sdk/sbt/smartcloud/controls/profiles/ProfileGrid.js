@@ -43,10 +43,6 @@ define([ "../../../declare",
 		photos : "o:person/o:photos/o:value"
 	};
 	
-	var CommunityMemberXPath = {
-		title: "o:title"	
-	};
-	
 	var FeedXPath = {
         "entry" : "/o:response/o:entry",
         "entries" : "/o:response/o:entry",

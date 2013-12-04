@@ -30,14 +30,12 @@ define([ "../../declare", "../../lang",
      */
     var Dialog = declare([ _TemplatedDialog ], {
     	
-    	dialogStyle : "",
+    	dialogStyle : "width: 525px;",
     	
     	templateString : DialogTemplate,
     	
     	buttonClass : "lotusFormButton",
     	
-    	style : "",
-
         /**
          * Constructor method for the grid.
          * Creates a default store and renderer, if none have been already created
@@ -69,17 +67,18 @@ define([ "../../declare", "../../lang",
 						templateString : widget
 					});
 				}
+				widget.dialog = this;
 				
 				this.widget = widget;
 				this.contentNode.appendChild(widget.domNode);
 			}
 			
-			// optionally hide the OK and Cancel buttons
-			if (this.hideOK && this.buttonOK) {
-				this.buttonOK.style.display = "none";
+			// optionally hide the execute and Cancel buttons
+			if (this.hideExecute && this.executeButton) {
+				this.executeButton.style.display = "none";
 			}
-			if (this.hideCancel && this.buttonCancel) {
-				this.buttonCancel.style.display = "none";
+			if (this.hideCancel && this.cancelButton) {
+				this.cancelButton.style.display = "none";
 			}
 		},
 		

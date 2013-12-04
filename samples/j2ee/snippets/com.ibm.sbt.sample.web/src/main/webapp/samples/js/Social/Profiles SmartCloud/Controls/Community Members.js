@@ -2,7 +2,7 @@ require(["sbt/dom", "sbt/smartcloud/controls/profiles/ProfileGrid"], function(do
     var grid = new ProfileGrid({
         type : "communityMembers",
         endpoint: "smartcloud",
-        communityUuid:"4791821f-de8c-4f8b-8699-1c0380d49a85"
+        communityUuid:"%{name=sample.fileCommunityId|helpSnippetId=Social_Communities_Get_My_Communities}"
     });
    
     dom.byId("gridDiv").appendChild(grid.domNode);

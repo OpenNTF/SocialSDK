@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2012
+ * © Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -21,6 +21,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import com.ibm.commons.xml.NamespaceContext;
+import com.ibm.commons.xml.NamespaceContextImpl;
 
 public class ConnectionsConstants {
 	
@@ -30,7 +31,6 @@ public class ConnectionsConstants {
 	public static final char 	EQUALS		= '=';
 	public static final String	OAUTH		= "oauth";
 	public static final String	UTF8		= "UTF-8";
-	
 	
 	public static class Namespaces {
 		public static final String ATOM       = "http://www.w3.org/2005/Atom";
@@ -44,48 +44,24 @@ public class ConnectionsConstants {
 		public static final String IBMSC      = "http://www.ibm.com/search/content/2010";
 		public static final String XS         = "http://www.w3.org/2001/XMLSchema";
 		public static final String XHTML      = "http://www.w3.org/1999/xhtml";
-
-		private static Map<String, String> namespaces = new HashMap<String, String>();
-		
-		static {
-			namespaces.put("a", ATOM);
-			namespaces.put("td", TD);
-			namespaces.put("ca", CA);
-			namespaces.put("snx", SNX);
-			namespaces.put("thr", THR);
-			namespaces.put("opensearch", OPENSEARCH);
-			namespaces.put("app", APP);
-			namespaces.put("relevance", RELEVANCE);
-			namespaces.put("ibmsc", IBMSC);
-			namespaces.put("xs", XS);
-			namespaces.put("h", XHTML);
-		}
 	}
 	
-	//TODO: Perhaps we could use a proper implementation, or extend NamespaceContextImpl?
-	public static NamespaceContext	nameSpaceCtx = new NamespaceContext() {
-
-		@Override
-		public String getNamespaceURI(String prefix) {
-			return Namespaces.namespaces.get(prefix);
-		}
-
-		// Dummy implementation - not used!
-		@Override
-		public Iterator<String> getPrefixes(String val) {
-			return null;
-		}
-
-		// Dummy implemenation - not used!
-		@Override
-		public String getPrefix(String uri) {
-			return null;
-		}
-
-		@Override
-		public Iterator<String> getPrefixes() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-	};
+	public static NamespaceContext	nameSpaceCtx = new NamespaceContextImpl();
+	
+	static{
+		((NamespaceContextImpl)nameSpaceCtx).addNamespace("a", Namespaces.ATOM);
+		((NamespaceContextImpl)nameSpaceCtx).addNamespace("td", Namespaces.TD);
+		((NamespaceContextImpl)nameSpaceCtx).addNamespace("ca", Namespaces.CA);
+		((NamespaceContextImpl)nameSpaceCtx).addNamespace("snx", Namespaces.SNX);
+		((NamespaceContextImpl)nameSpaceCtx).addNamespace("thr", Namespaces.THR);
+		((NamespaceContextImpl)nameSpaceCtx).addNamespace("opensearch", Namespaces.OPENSEARCH);
+		((NamespaceContextImpl)nameSpaceCtx).addNamespace("app", Namespaces.APP);
+		((NamespaceContextImpl)nameSpaceCtx).addNamespace("relevance", Namespaces.RELEVANCE);
+		((NamespaceContextImpl)nameSpaceCtx).addNamespace("ibmsc", Namespaces.IBMSC);
+		((NamespaceContextImpl)nameSpaceCtx).addNamespace("xs", Namespaces.XS);
+		((NamespaceContextImpl)nameSpaceCtx).addNamespace("h", Namespaces.XHTML);
+		
+		
+	}
+	
 }

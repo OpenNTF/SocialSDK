@@ -196,8 +196,7 @@ public class LibraryServlet extends BaseToolkitServlet {
             }
         } catch (Throwable thrown) {
             // send 500 response and display causing exception
-            serviceException(req, resp, thrown, null, false); // (no lang, no
-                                                              // RTL for now)
+            serviceException(req, resp, thrown, null, false); 
 
             if (logger.isLoggable(Level.WARNING)) {
                 logger.log(Level.WARNING, "Error servicing library GET request", thrown);

@@ -540,7 +540,7 @@ abstract public class AbstractLibrary {
 			if (enableDefineCheck(request.getJsVersion())) {
 				indent(sb).append("if(typeof define=='undefined'){").append(newLine());
 	
-				String[][] registerModules = getRegisterModules();
+				String[][] registerModules = getRegisterModules(request);
 				String[][] registerExtModules = StringUtil.isNotEmpty(request.getToolkitExtUrl()) ? getRegisterExtModules(request)
 						: null;
 				String[] requireModules = getRequireModules();
@@ -555,7 +555,7 @@ abstract public class AbstractLibrary {
 			}
 
 			// register the module paths and required modules
-			String[][] registerModulesAmd = getRegisterModulesAmd();
+			String[][] registerModulesAmd = getRegisterModulesAmd(request);
 			String toolkitExtUrl = request.getToolkitExtUrl();
 			String[][] registerExtModulesAmd = StringUtil.isNotEmpty(toolkitExtUrl) ? getRegisterExtModulesAmd(request) : null;
 			String[] requireModulesAmd = getRequireModulesAmd();
@@ -1049,12 +1049,12 @@ abstract public class AbstractLibrary {
 	/**
 	 * @return
 	 */
-	abstract protected String[][] getRegisterModules();
+	abstract protected String[][] getRegisterModules(LibraryRequest request);
 
 	/**
 	 * @return
 	 */
-	abstract protected String[][] getRegisterModulesAmd();
+	abstract protected String[][] getRegisterModulesAmd(LibraryRequest request);
 
 	/**
 	 * @return

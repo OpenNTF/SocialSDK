@@ -19,13 +19,15 @@
  * @module sbt.smartcloud.controls.profiles.ProfileGrid
  */
 define([ "../../../declare", 
+         "../../../lang",
 		 "../../../config",
 		 "../../../controls/grid/Grid", 
 		 "./ProfileGridRenderer", 
 		 "./ProfileAction", 
 		 "../../../store/parameter",
-		 "../../ProfileConstants"], 
-    function(declare, sbt, Grid, ProfileGridRenderer, ProfileAction, parameter, ProfileConstants) {
+		 "../../ProfileConstants",
+		 "../../CommunityConstants"], 
+    function(declare, lang, sbt, Grid, ProfileGridRenderer, ProfileAction, parameter, ProfileConstants,CommunityConstants) {
 
 	var ProfileXPath = {
         id : "o:person/o:id",
@@ -39,6 +41,10 @@ define([ "../../../declare",
 		address : "o:person/o:address",
 		phoneNumbers : "o:person/o:phoneNumbers/o:phone",
 		photos : "o:person/o:photos/o:value"
+	};
+	
+	var CommunityMemberXPath = {
+		title: "o:title"	
 	};
 	
 	var FeedXPath = {
@@ -94,6 +100,18 @@ define([ "../../../declare",
 	            rendererArgs : {
 	                type : "friends"
 	            }
+	        },
+	        "communityMembers" : {
+	            storeArgs : {
+	                url : CommunityConstants.AtomCommunityMembers,
+	                attributes : CommunityConstants.MemberXPath,
+	                paramSchema : ParamSchema,
+	                feedXPath : CommunityConstants.CommunityFeedXPath,
+	                namespaces: CommunityConstants.CommunityNamespaces
+	            },
+	            rendererArgs : {
+	                type : "communityMembers"
+	            }
 	        }
         },
         
@@ -120,6 +138,15 @@ define([ "../../../declare",
          * @method constructor
          */
         constructor: function(args){
+        },
+        
+        buildUrl: function(url, args, endpoint){
+        		var params;
+				if (this.communityUuid) {
+					params = {communityUuid: this.communityUuid};
+				}
+        	
+        	return this.constructUrl(url, params, {},endpoint);
         },
         
         /**

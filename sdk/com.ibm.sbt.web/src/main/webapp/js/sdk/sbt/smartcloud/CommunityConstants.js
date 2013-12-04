@@ -40,7 +40,7 @@ define([ "../lang", "../smartcloud/SmartcloudConstants" ], function(lang,conn) {
          * @type Object
          * @for sbt.connections.CommunityService
          */
-        CommunityFeedXPath : conn.ConnectionsFeedXPath,
+        CommunityFeedXPath : conn.SmartcloudFeedXPath,
 
         /**
          * XPath expressions to be used when reading a Community Entry

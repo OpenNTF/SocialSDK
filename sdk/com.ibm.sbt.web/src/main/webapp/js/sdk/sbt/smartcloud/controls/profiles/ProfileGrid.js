@@ -161,6 +161,17 @@ define([ "../../../declare",
             return new ProfileGridRenderer(args);
         },
         
+        postCreate: function(){
+        	this.inherited(arguments);  
+        	if(this.type === "communityMembers"){
+        		if(!arguments.communityUuid){
+        			this._updateWithError({message:this.renderer._nls.communityIdError});
+	
+        		}
+        	}
+        	
+        },
+        
         /**
          * In the grid HTML an element can have an event attached 
          * using dojo-attach-event="onClick: handleClick".

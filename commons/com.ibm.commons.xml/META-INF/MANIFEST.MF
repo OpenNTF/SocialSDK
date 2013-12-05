@@ -10,7 +10,7 @@ Require-Bundle: com.ibm.commons,
  org.apache.xalan;bundle-version="2.7.1";resolution:=optional
 Export-Package: com.ibm.commons.xml,com.ibm.commons.xml.drivers,com.ib
  m.commons.xml.util,com.ibm.commons.xml.xpath,com.ibm.commons.xml.xpat
- h.part,com.ibm.commons.xml.xpath.xml
+ h.part,com.ibm.commons.xml.xpath.xml, com.ibm.commons.xml.io
 Bundle-ClassPath: .
 Import-Package: javax.servlet,
  javax.servlet.http

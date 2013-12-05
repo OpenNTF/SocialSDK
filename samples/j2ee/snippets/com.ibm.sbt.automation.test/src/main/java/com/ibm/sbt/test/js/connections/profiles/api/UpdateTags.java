@@ -38,8 +38,8 @@ public class UpdateTags extends BaseProfilesTest {
 	
     @Test
     public void testUpdateTagsUsingEmail() {    
-    	addSnippetParam("sample.email1", "FrankAdams@renovations.com");
-    	addSnippetParam("sample.email2", "BillJordan@renovations.com");
+    	addSnippetParam("sample.email1", getProperty("sample.email1"));
+    	addSnippetParam("sample.email2", getProperty("sample.email2"));
     	JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);       
         List jsonList = previewPage.getJsonList();
         Assert.assertFalse("Create tags returned no results", jsonList.isEmpty());
@@ -52,7 +52,7 @@ public class UpdateTags extends BaseProfilesTest {
     @Test
     public void testUpdateTagsInvalidSourceUser() {    
     	addSnippetParam("sample.email1", "");
-    	addSnippetParam("sample.email2", "04F26086-1A63-D244-4825-7A70002586FA");
+    	addSnippetParam("sample.email2", getProperty("sample.id2"));
             
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         JsonJavaObject json = previewPage.getJson();
@@ -61,7 +61,7 @@ public class UpdateTags extends BaseProfilesTest {
     
     @Test
     public void testUpdateTagsInvalidTargetUser() {    
-    	addSnippetParam("sample.email1", "0EE5A7FA-3434-9A59-4825-7A7000278DAA");
+    	addSnippetParam("sample.email1", getProperty("sample.id1"));
     	addSnippetParam("sample.email2", "");
             
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);

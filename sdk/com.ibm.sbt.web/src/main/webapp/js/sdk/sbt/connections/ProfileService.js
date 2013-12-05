@@ -107,7 +107,6 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
          * @return {String} id of the profile
          * 
          */
-        
         getUserid : function() {
             return this.getAsString("userid");
         },

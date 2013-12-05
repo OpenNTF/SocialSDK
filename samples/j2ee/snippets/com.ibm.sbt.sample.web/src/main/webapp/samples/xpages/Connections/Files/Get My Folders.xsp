@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:br></xp:br>
+	<xp:viewPanel rows="30" id="viewPanel1" var="entry">
+		<xp:this.value><![CDATA[#{javascript://
+var fileService = new com.ibm.sbt.services.client.connections.files.FileService();
+return fileService.getMyFolders(null);
+}]]></xp:this.value>
+		<xp:this.facets>
+			<xp:pager partialRefresh="true" layout="Previous Group Next"
+				xp:key="headerPager" id="pager1">
+			</xp:pager>
+		</xp:this.facets>
+		<xp:viewColumn id="viewColumn1" value="#{javascript:entry.getTitle()}">
+			<xp:this.facets>
+				<xp:viewColumnHeader xp:key="header" id="viewColumnHeader1"
+					value="Folder Name" style="font-weight:bold">
+				</xp:viewColumnHeader>
+			</xp:this.facets>
+		</xp:viewColumn>
+		<xp:viewColumn id="viewColumn2" value="#{javascript:entry.getFileId()}">
+			<xp:this.facets>
+				<xp:viewColumnHeader xp:key="header" id="viewColumnHeader2"
+					value="ID" style="font-weight:bold">
+				</xp:viewColumnHeader>
+			</xp:this.facets>
+		</xp:viewColumn>
+	</xp:viewPanel>
+</xp:view>

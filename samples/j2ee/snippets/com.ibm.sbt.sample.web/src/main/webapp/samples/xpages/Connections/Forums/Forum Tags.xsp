@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:panel>
+		
+		<xp:this.dataContexts>
+			<xp:dataContext var="tags">
+				<xp:this.value><![CDATA[#{javascript:var svc = new new  com.ibm.sbt.services.client.connections.forums.ForumService();
+				return svc.getForumsTags();
+			}]]></xp:this.value>
+			</xp:dataContext>
+		</xp:this.dataContexts>
+		<xp:label value="Tags " id="label1">
+		</xp:label>
+		<br></br>
+		<xp:label value="Total tags found: " id="label2">
+		</xp:label>
+		<xp:text escape="true" id="computedField1">
+		<xp:this.value>
+		<![CDATA[#{javascript:
+		var c:Number = tags.size();
+		c.toPrecision(0);
+		}]]>
+		</xp:this.value>
+		</xp:text>
+		<br></br>
+	
+		<xp:comboBox id="tag" immediate="true">
+			<xp:this.rendered><![CDATA[#{javascript:tags.size()>0}]]></xp:this.rendered>
+			<xp:selectItem id="firstItem"
+				itemLabel="Please select a tag..." itemValue="-,-,-">
+			</xp:selectItem>
+			<xp:selectItems id="selectItems2">
+				<xp:this.value><![CDATA[#{javascript: 
+					var tagsArray=[];
+					for(tag in tags) {
+								tagsArray.push(tag.getTerm() + "|" + tag.getFrequency() + "," + tag.getVisibility() + "," + tag.getIntensity());
+					}
+					return tagsArray;
+			
+			}]]></xp:this.value>
+
+			</xp:selectItems>
+			<xp:eventHandler event="onchange" submit="true"
+				refreshMode="partial" refreshId="labels">
+				<xp:this.action><![CDATA[#{javascript:tagValue = getComponent("tag").getValue();
+requestScope.put("tagValue",tagValue);}]]></xp:this.action>
+			</xp:eventHandler>
+		</xp:comboBox>
+		<xp:label value="No tags present.." id="label4" 
+			rendered="#{javascript:tags.size()==0}">
+		</xp:label>
+		<br></br>
+		<br></br>
+		<xp:section id="labels">
+		<xp:label value="Frequency: " id="label5"></xp:label>
+		<xp:text>
+			<xp:this.value><![CDATA[#{javascript:var value = requestScope.get("tagValue")
+			if(value){
+				return value.split(",")[0];
+			}else
+			{
+			return "-";
+			}
+			}]]></xp:this.value>
+			</xp:text>
+			<br/>
+			<xp:label value="Visibility: " id="label6"></xp:label>
+		<xp:text>
+			<xp:this.value><![CDATA[#{javascript:var value = requestScope.get("tagValue")
+			if(value){
+				return value.split(",")[1];
+			}else
+			{
+			return "-";
+			}
+			}]]></xp:this.value>
+		</xp:text>
+		<br/>
+			<xp:label value="Intensity: " id="label7"></xp:label>
+		<xp:text>
+			<xp:this.value><![CDATA[#{javascript:var value = requestScope.get("tagValue")
+			if(value){
+				return value.split(",")[2];
+			}else
+			{
+			return "-";
+			}
+			}]]></xp:this.value>
+		</xp:text>
+		</xp:section>
+		
+		
+	</xp:panel>
+	
+	
+</xp:view>

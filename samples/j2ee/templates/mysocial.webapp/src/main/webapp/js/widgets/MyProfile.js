@@ -17,8 +17,10 @@
 /**
  * 
  */
-define([ "sbt/declare", "sbt/config", "sbt/lang", "sbt/dom", "sbt/widget/_TemplatedWidget", "sbt/Endpoint", "sbt/connections/ProfileService" ], 
-	function(declare, config, lang, dom, _TemplatedWidget, Endpoint, ProfileService) {
+define([ "sbt/declare", "sbt/config", "sbt/lang", "sbt/dom", 
+         "sbt/widget/_TemplatedWidget", "sbt/Endpoint", 
+         "sbt/connections/ProfileService", "sbt/smartcloud/ProfileService" ], 
+	function(declare, config, lang, dom, _TemplatedWidget, Endpoint, ConnectionsService, SmartcloudService) {
 	
 	function getTemplateString(domId) {
         var domNode = dom.byId(domId);
@@ -84,23 +86,42 @@ define([ "sbt/declare", "sbt/config", "sbt/lang", "sbt/dom", "sbt/widget/_Templa
         },
         
         retrieveProfile: function() {
-        	config.Properties["loginUi"] = "dialog";
-        	var self = this;
-        	var endpoint = Endpoint.find("connections");
-        	var url = "/connections/opensocial/basic/rest/people/@me/";
+        	var endpoint = config.findEndpoint("connections");
+        	var url = null;
+        	if (endpoint.isSmartCloud) {
+        		url = "/manage/oauth/getUserIdentity";
+        		config.Properties["loginUi"] = "popup";
+        	} else {
+        		url = "/connections/opensocial/basic/rest/people/@me/";
+            	config.Properties["loginUi"] = "popup";
+        	}
         	var options = { handleAs : "json" };
+        	var self = this;
         	endpoint.request(url, options).then(
         		function(response) {
-        			var userid = response.entry.id.replace('urn:lsid:lconn.ibm.com:profiles.person:', '');
-        			self.handleUserId(userid);
-        		}
+        			var userid = null;
+        			if (endpoint.isSmartCloud) {
+        				userid = response.subscriberid;
+        			} else {
+        				userid = response.entry.id.replace('urn:lsid:lconn.ibm.com:profiles.person:', '');
+        			}
+        			self.handleUserId(userid, endpoint.isSmartCloud);
+        		}, 
+    			function (error) {
+    				self.nameNode.innerHTML = error;
+    			}
         	);
         },
        
-    	handleUserId: function(userid) {
+    	handleUserId: function(userid, isSmartCloud) {
         	var self = this;
-    		var profileService = new ProfileService();
-    		profileService.getProfile(userid).then(
+        	var profileService = null;
+        	if (isSmartCloud) {
+        		profileService = new SmartcloudService({ endpoint : "connections" });
+        	} else {
+	    		profileService = new ConnectionsService();
+        	}
+        	profileService.getProfile(userid).then(
     			function(profile) {
     				self.profile = profile;
     				self.imgNode.src = profile.getThumbnailUrl();
@@ -110,6 +131,9 @@ define([ "sbt/declare", "sbt/config", "sbt/lang", "sbt/dom", "sbt/widget/_Templa
     				self.deptNode.innerHTML = profile.getDepartment();
     				
     				self.notifyListeners(profile);
+    			}, 
+    			function (error) {
+    				self.nameNode.innerHTML = error;
     			}
     		);
     	},

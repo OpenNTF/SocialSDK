@@ -21,7 +21,7 @@
  */
 define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
 
-    return lang.mixin({
+    return lang.mixin({}, conn, {
     	
     	BookmarkFeedXPath : conn.ConnectionsFeedXPath,
     	
@@ -109,5 +109,5 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          */
         AtomBookmarkCreateUpdateDelete : "/${dogear}/api/app"
 
-    }, conn);
+    });
 });

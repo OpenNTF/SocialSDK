@@ -16,6 +16,9 @@ import com.ibm.sbt.services.client.connections.blogs.BlogList;
 import com.ibm.sbt.services.client.connections.blogs.BlogService;
 import com.ibm.sbt.services.client.connections.blogs.model.BlogXPath;
 import com.ibm.sbt.services.client.connections.blogs.model.BaseBlogEntity;
+import com.ibm.sbt.services.client.connections.forums.Forum;
+import com.ibm.sbt.services.client.connections.forums.ForumsXPath;
+import com.ibm.sbt.services.client.connections.forums.model.BaseForumEntity;
 
 
 /**
@@ -45,10 +48,8 @@ public class BlogsFeedHandler implements IFeedHandler  {
 
 	@Override
 	public BaseEntity createEntityFromData(Object data) {
-		Node node = (Node)data;
-		XPathExpression expr = (data instanceof Document) ? (XPathExpression)BlogXPath.singleEntry.getPath() : null;
-		XmlDataHandler handler = new XmlDataHandler(node, ConnectionsConstants.nameSpaceCtx, expr);
-		BaseBlogEntity blog = new Blog(service, handler);
+		XPathExpression expr = (data instanceof Document) ? (XPathExpression)ForumsXPath.singleEntry.getPath() : null;
+		BaseBlogEntity blog = new Blog(service, (Node)data, ConnectionsConstants.nameSpaceCtx, expr);
 		return blog;
 	}
 

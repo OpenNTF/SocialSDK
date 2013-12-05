@@ -84,111 +84,141 @@ define(["../declare","../lang", "../config","../stringUtil","../Cache","./Subscr
 		},
 		
 		/**
+		 * Returns the id of the User
+		 * @method getUserid
+		 * @return {String} id of the User	
+		**/
+		getUserid: function () {
+			return this.getAsString("id");
+		},
+		
+		/**
 		 * Returns the object id of the User
 		 * @method getObjectId
 		 * @return {String} id of the User	
-		**/
+		 */
 		getObjectId: function () {
 			return this.getAsString("objectId");
 		},
+		
 		/**
-		Get display name of the User
-		@method getDisplayName
-		@return {String} display name of the User	
-		**/
+		 * Get display name of the User
+		 * @method getDisplayName
+		 * @return {String} display name of the User	
+		 */
 		getDisplayName: function () {
 			return this.getAsString("displayName");
 		},
+		
 		/**
-		Get email of the User
-		@method getEmail
-		@return {String} email of the User	
-		**/
+		 * Get display name of the User
+		 * @method getName
+		 * @return {String} display name of the User	
+		 */
+		getName: function () {
+			return this.getAsString("displayName");
+		},
+		
+		/**
+		 * Get email of the User
+		 * @method getEmail
+		 * @return {String} email of the User	
+		 */
 		getEmail: function () {
 			return this.getAsString("emailAddress");
 		},
+		
 		/**
-		Get thumbnail URL of the User
-		@method getThumbnailUrl
-		@return {String} thumbnail URL of the User
-		**/
+		 * Get thumbnail URL of the User
+		 * @method getThumbnailUrl
+		 * @return {String} thumbnail URL of the User
+		 */
 		getThumbnailUrl: function () {
 			var image = this.getAsString("thumbnailUrl");
 			if(image)
 				image = this.service.endpoint.baseUrl+"/contacts/img/photos/"+ image;  // TODO : work in making this generic
 			return image;
 		},
+		
 		/**
-		Get address of the profile
-		@method getAddress
-		@return {String} Address object of the profile
-		**/
+		 * Get address of the profile
+		 * @method getAddress
+		 * @return {String} Address object of the profile
+		 */
 		getAddress: function () { 
 			var address = this.getAsArray("address");
 			address = this.dataHandler.extractFirstElement(address);
 			return address;
 		},
+		
 		/**
-		Get department of the profile
-		@method getDepartment
-		@return {String} department of the profile
-		**/
+		 * Get department of the profile
+		 * @method getDepartment
+		 * @return {String} department of the profile
+		 */
 		getDepartment: function () {
 			return this.getAsString("department"); 
 		},
+		
 		/**
-		Get job title of the profile
-		@method getJobTitle
-		@return {String} job title of the profile
-		**/
+		 * Get job title of the profile
+		 * @method getJobTitle
+		 * @return {String} job title of the profile
+		 */
 		getJobTitle: function () {
 			return this.getAsString("jobTitle");
 		},
+		
 		/**
-		Get profile URL of the profile
-		@method getProfileUrl
-		@return {String} profile URL of the profile
-		**/
+		 * Get profile URL of the profile
+		 * @method getProfileUrl
+		 * @return {String} profile URL of the profile
+		 */
 		getProfileUrl: function () {
 			return this.getAsString("profileUrl");
 		},
+		
 		/**
-		Get telephone number of the profile
-		@method getTelehoneNumber
-		@return {String} Telephone number object of the profile
-		**/
+		 * Get telephone number of the profile
+		 * @method getTelehoneNumber
+		 * @return {String} Telephone number object of the profile
+		 */
 		getTelephoneNumber: function () {
 			return this.getAsString("telephone"); 
 		},
+		
 		/**
-		Get Country of the profile
-		@method getCountry
-		@return {String} country of the profile
-		**/
+		 * Get Country of the profile
+		 * @method getCountry
+		 * @return {String} country of the profile
+		 */
 		getCountry: function () { 
 			return this.getAsString("country"); 
 		},
+		
 		/**
-		Get Organization Id of the profile
-		@method getOrgId
-		@return {String} Organization Id of the profile
-		**/
+		 * Get Organization Id of the profile
+		 * @method getOrgId
+		 * @return {String} Organization Id of the profile
+		 */
 		getOrgId: function () { 
 			return this.getAsString("orgId"); 
 		},
+		
 		/**
-		Get Organization of the profile
-		@method getOrg
-		@return {String} Organization of the profile
-		**/
+		 * Get Organization of the profile
+		 * @method getOrg
+		 * @return {String} Organization of the profile
+		 */
 		getOrg: function () { 
 			return this.getAsString("org"); 
 		},
+		
 		/**
-		Get "About Me"/description of the profile
-		@method getAbout
-		@return {String} description of the profile
-		**/
+		 * Get "About Me"/description of the profile
+		 * @method getAbout
+		 * @return {String} description of the profile
+		 */
 		getAbout: function () { 
 			return this.getAsString("about"); 
 		}

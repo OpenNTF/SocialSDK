@@ -56,6 +56,7 @@ import com.ibm.commons.runtime.util.UrlUtil;
 import com.ibm.commons.util.FastStringBuffer;
 import com.ibm.commons.util.PathUtil;
 import com.ibm.commons.util.StringUtil;
+import com.ibm.commons.util.io.StreamUtil;
 import com.ibm.commons.util.io.json.JsonException;
 import com.ibm.commons.util.io.json.JsonFactory;
 import com.ibm.commons.util.io.json.JsonGenerator;
@@ -677,7 +678,16 @@ public abstract class ClientService {
 				}
 				Reader reader = createReader(request, response, entity, encoding);
 				try {
-					return JsonParser.fromJson(factory, reader);
+					if(false) {
+						String s= StreamUtil.readString(reader);
+						try {
+							return JsonParser.fromJson(factory, s);
+						} catch (JsonException ex) {
+							throw ex;
+						}
+					} else {
+						return JsonParser.fromJson(factory, reader);
+					}
 				} catch (JsonException ex) {
 					IOException e = new IOException();
 					e.initCause(ex);

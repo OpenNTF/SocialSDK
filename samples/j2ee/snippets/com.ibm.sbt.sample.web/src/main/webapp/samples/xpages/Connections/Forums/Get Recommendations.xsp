@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:panel>
+		
+		<xp:this.dataContexts>
+		<xp:dataContext var="svc">
+		<xp:this.value><![CDATA[#{javascript:return svc = new com.ibm.sbt.services.client.connections.forums.ForumService();
+		}]]></xp:this.value>
+		</xp:dataContext>
+			<xp:dataContext var="topics">
+				<xp:this.value><![CDATA[#{javascript:
+				//return svc.getForumsTopics();
+				var forumTopics = svc.getMyForumTopics();
+				var list = new java.util.ArrayList();
+				
+					for (ftopic in forumTopics) {
+						var index = 0;
+						var entry = {
+							id: ftopic.getTopicUuid(),
+							title: ftopic.getTitle(),
+							published: ftopic.getPublished(),
+							updated: ftopic.getUpdated(),
+							ispinned: ftopic.isPinned(),
+							islocked: ftopic.isLocked(),
+							isquestion:  ftopic.isQuestion(),
+							index: index,
+							recommendationcount: ftopic.getRecommendationCount()
+						};
+						list.add(index++,entry);
+					}
+					return list;
+			}]]></xp:this.value>
+			</xp:dataContext>
+		</xp:this.dataContexts>
+		<xp:label value="topics " id="label1">
+		</xp:label>
+		<br></br>
+		<xp:label value="Total topics found: " id="label2">
+		</xp:label>
+		<xp:text escape="true" id="computedField1">
+		<xp:this.value>
+		<![CDATA[#{javascript:
+		var c:Number = topics.size();
+		c.toPrecision(0);
+		}]]>
+		</xp:this.value>
+		</xp:text>
+		<br></br>
+	
+		<xp:repeat id="repeat1" rows="30" var="topic" value="#{topics}">
+		
+			<xp:section id="section1" header="#{topic.title}" initClosed="true">
+				
+				<xp:label value="isPinned: #{topic.ispinned}"
+					id="label4">
+				</xp:label>
+				<br />
+				<xp:label value="isLocked: #{topic.islocked}"
+					id="label3">
+				</xp:label>
+				<br />
+				<xp:label value="isQuestion: #{topic.isquestion}"
+					id="label6">
+				</xp:label>
+				<br />
+				<xp:label
+					value="Number of recommentation: #{topic.recommendationcount}"
+					id="label5">
+				</xp:label>
+				<br/>
+				<xp:panel>
+				<xp:this.rendered><![CDATA[#{topic.recommendationcount > 0}]]></xp:this.rendered>
+				<xp:label
+					value="List of users who recommended this thread:"
+					id="label7">
+				</xp:label>
+				<br/>
+				<xp:listBox id="listBox1">
+					<xp:selectItems id="selectItems2">
+				<xp:this.value>
+					<![CDATA[#{javascript:
+						var recs = svc.getRecommendations(topic.id);
+						var recsArray=[];
+					for(rec in recs) {
+								recsArray.push(rec.getName());
+					}
+					return recsArray;
+					}]]>
+				</xp:this.value>
+				</xp:selectItems>
+				</xp:listBox>
+				</xp:panel>
+			</xp:section>
+		</xp:repeat>
+		
+</xp:panel>
+</xp:view>

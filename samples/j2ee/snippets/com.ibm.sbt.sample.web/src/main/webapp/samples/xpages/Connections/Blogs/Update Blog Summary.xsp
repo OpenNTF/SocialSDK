@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+<xp:panel>
+		<xp:label value="Update Blog Summary:" style="font-size:14pt;font-weight:bold"></xp:label>
+		<xp:br />
+		<xp:table>
+			<xp:tr>
+				<xp:td>
+					<xp:label value="Choose Blog :" id="label1"></xp:label>
+				</xp:td>
+				<xp:td>
+					<xp:comboBox value="" id="comboBlog" style="width:251.0px">
+						<xp:selectItems id="selectItems2">
+							<xp:this.value><![CDATA[#{javascript:
+								var bar = new java.util.ArrayList();
+								var svc = new com.ibm.sbt.services.client.connections.blogs.BlogService();
+								var myBlogs = svc.getMyBlogs();
+								bar.add("Select a blog|select");
+								for (blog in myBlogs) {								
+									bar.add(blog.getTitle() + '|' + blog.getBlogUuid());
+								}
+								return bar;
+								}]]>
+							</xp:this.value>
+						</xp:selectItems>
+						<xp:eventHandler event="onchange"
+							submit="true" refreshMode="partial"
+							refreshId="contentChanger1">
+							<xp:this.action><![CDATA[#{javascript:
+								var blogId1 = getComponent('comboBlog').getValue();
+								var textarea = getComponent('newContent');
+								if(blogId1 != 'select') {
+									var service = new com.ibm.sbt.services.client.connections.blogs.BlogService();
+									//var blog2 = service.getBlog(blogId1); //not currently supported
+									var blog2 = null;
+									var myBlogs1 = service.getMyBlogs();
+									for(blogVar in myBlogs1) {
+										if(blogVar.getBlogUuid() == blogId1){
+											blog2 = blogVar;
+											break;
+										} 
+									}
+									if(null != blog2) {
+										textarea.value = blog2.getSummary();
+									}
+								}
+								}]]>
+							</xp:this.action>
+						</xp:eventHandler>
+					</xp:comboBox>
+				</xp:td>
+			</xp:tr>
+		</xp:table>
+		<xp:panel id="contentChanger1">
+			<xp:table>
+				<xp:tr>
+					<xp:td>
+						<xp:label value="Content: " id="label2"></xp:label>
+					</xp:td>
+					<xp:td>
+						<xp:inputTextarea id="newContent" style="width:252.0px;height:116.0px" readonly="false"></xp:inputTextarea>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>
+					</xp:td>
+					<xp:td>				
+						<xp:button value="Update Blog Summary" id="button1">
+							<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+								<xp:this.action><![CDATA[#{javascript:
+									var service = new com.ibm.sbt.services.client.connections.blogs.BlogService();
+									var blogId2 = getComponent('comboBlog').getValue();
+									var blogSummary = getComponent('newContent').getValue();
+									//var blog1 = service.getBlog(blogId2); //not currently supported
+									var blog1 = null;
+									var myBlogs1 = service.getMyBlogs();
+									for(blogVar in myBlogs1) {
+										if(blogVar.getBlogUuid() == blogId2){
+											blog1 = blogVar;
+											break;
+										} 
+									}
+									blog1.setSummary(blogSummary);
+									service.updateBlog(blog1);
+								}]]></xp:this.action>
+							</xp:eventHandler>
+						</xp:button>
+					</xp:td>
+				</xp:tr>
+			</xp:table>
+		</xp:panel>
+	</xp:panel>
+
+</xp:view>

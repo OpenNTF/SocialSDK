@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+<xp:panel id="panel23">
+		<xp:label value="Most popular blog posts:" style="font-size:14pt;font-weight:bold"></xp:label>
+		<xp:br />
+		<xe:dataView id="dataView8" var="post2" rows="5"
+			columnTitles="true" expandedDetail="true">
+			<xp:this.value>
+				<![CDATA[#{javascript:
+					var list2 = new Array();
+					var blogSvc = new com.ibm.sbt.services.client.connections.blogs.BlogService("connections");	
+					var posts = blogSvc.getAllPosts();
+					
+					for (thepost in posts) {
+						var postTitle = thepost.getTitle();
+						var hits = thepost.getHitCount();
+						var link = thepost.getAlternateUrl();
+						var stats = {
+							title: postTitle,
+							hitCount: hits,
+							url: link
+						};
+						list2.push(stats);
+					}
+					
+					var sorted = list2.sort(function(obj1, obj2){
+						return java.lang.Integer.parseInt(obj1.hitCount) - java.lang.Integer.parseInt(obj2.hitCount);
+					});
+					sorted.reverse();
+					return sorted;
+				}]]>
+			</xp:this.value>
+			<xe:this.summaryColumn>
+				<xe:viewSummaryColumn columnTitle="Post">
+				</xe:viewSummaryColumn>
+			</xe:this.summaryColumn>
+			<xe:this.extraColumns>
+				<xe:viewExtraColumn columnTitle="Hits"></xe:viewExtraColumn>
+			</xe:this.extraColumns>
+			<xp:this.facets>
+				<xp:panel xp:key="noRows" id="panel24">
+					<xp:text value="No Posts found"></xp:text>
+				</xp:panel>
+				<xp:panel id="panel25" xp:key="summary"
+					style="white-space:nowrap;">
+					<xp:link escape="true" id="link8"
+						target="_blank" value="#{javascript:return post2.url;}"
+						text="#{javascript:return post2.title;}">
+					</xp:link>
+				</xp:panel>
+				<xp:panel id="emailPanel" xp:key="extra0" style="width:45%;white-space:nowrap;">
+					<xp:text escape="true" id="link9" value="#{javascript:post2.hitCount;}"></xp:text>
+				</xp:panel>
+				<xp:pager xp:key="pagerBottomRight" pageCount="5" partialRefresh="true">
+					<xp:pagerControl type="Previous" id="pagerControl22">
+					</xp:pagerControl>
+					<xp:pagerControl type="Group" id="pagerControl23">
+					</xp:pagerControl>
+					<xp:pagerControl type="Next" id="pagerControl24">
+					</xp:pagerControl>
+				</xp:pager>
+			</xp:this.facets>
+		</xe:dataView>
+	</xp:panel>
+
+</xp:view>

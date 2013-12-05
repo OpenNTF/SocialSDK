@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xe:formTable id="formTable1" formTitle="Search Connections"
+		formDescription="Search public information returning the people associated with the results.">
+		<xe:formRow id="formRow1" label="Search" for="inputText1"
+			labelPosition="left">
+			<xp:inputText id="inputText1" value="#{viewScope.searchVal}"
+				accesskey="s">
+				<xp:this.attrs>
+					<xp:attr name="placeholder" value="Search..." />
+				</xp:this.attrs>
+			</xp:inputText>
+			<xp:button value="Search" id="button1">
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="partial" refreshId="formTable1" />
+			</xp:button>
+		</xe:formRow>
+		<xe:formRow id="formRow2" label="Results" labelPosition="left">
+			<xp:viewPanel rows="5" id="viewPanel1" var="val">
+				<xp:this.value><![CDATA[#{javascript:
+var list = new java.util.ArrayList();
+var svc = new com.ibm.sbt.services.client.connections.search.SearchService();
+var results = svc.getPeople(viewScope.searchVal);
+for (entry in results) {
+	var label = entry.getLabel();
+	var id = entry.getId();
+	var each = {
+		label: label,
+		id: id
+	};
+	list.add(each);
+}
+return list;
+}]]></xp:this.value>
+				<xp:this.facets>
+					<xp:pager partialRefresh="true" layout="Previous Group Next"
+						id="pager1" xp:key="headerPager" />
+				</xp:this.facets>
+				<xp:viewColumn value="#{javascript:val.label}">
+					<xp:viewColumnHeader value="Label" />
+				</xp:viewColumn>
+				<xp:viewColumn value="#{javascript:val.id}">
+					<xp:viewColumnHeader value="ID" />
+				</xp:viewColumn>
+			</xp:viewPanel>
+		</xe:formRow>
+	</xe:formTable>
+
+</xp:view>

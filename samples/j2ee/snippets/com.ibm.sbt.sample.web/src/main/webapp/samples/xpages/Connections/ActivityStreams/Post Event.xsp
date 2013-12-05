@@ -16,14 +16,14 @@
 			var randomGen = java.util.Random(19580427);
 			var randomNum = randomGen.nextInt();
 			object.put("id", randomNum);
-			object.put("displayName", "Attend to the XPages SBT Webinar");
+			object.put("displayName", "Attend to the XPages Sessions at Connect 2014r");
 			object.put("url", "http://www.ibm.com");
 	
 			postPayload.put("actor", actor);
 			postPayload.put("verb", "post");
-			postPayload.put("title", "XPages Webinar on July 10th");
+			postPayload.put("title", "XPages Sessions at Connect 2014");
 			
-				postPayload.put("content", "XPages Webinar on July 10th");
+				postPayload.put("content", "Attend to the XPages Sessions at Connect 2014");
 			postPayload.put("updated", new java.util.Date().getTime());
 			postPayload.put("object", object);
 

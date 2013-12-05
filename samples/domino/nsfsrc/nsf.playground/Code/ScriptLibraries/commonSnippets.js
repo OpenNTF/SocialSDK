@@ -34,7 +34,7 @@ function showParams() {
 // Gather the paraneter values from the dynamic panel
 function gatherParams() {
 	var params = {};
-	var e = dojo.byId("params");
+	var e = dojo.byId("previewParams");
 	if(e) {
 		var inps = e.getElementsByTagName("input");
 		for(var i=0; i<inps.length; i++) {

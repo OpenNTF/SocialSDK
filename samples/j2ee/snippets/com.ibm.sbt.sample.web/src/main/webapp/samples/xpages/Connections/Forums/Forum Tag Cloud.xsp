@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:panel>
+		<xp:this.dataContexts>
+			<xp:dataContext var="tags">
+				<xp:this.value><![CDATA[#{javascript:var svc = new new  com.ibm.sbt.services.client.connections.forums.ForumService();
+				return svc.getForumsTags();
+			}]]></xp:this.value>
+			</xp:dataContext>
+			<xp:dataContext var="tags">
+				<xp:this.value><![CDATA[#{javascript:
+				//return svc.getForumsTags();
+				var forumTags = svc.getForumsTags();
+				var list = new java.util.ArrayList();
+					for (tag in forumTags) {
+						var index = 0;
+						
+						var entry = {
+							term: tag.getTerm(),
+							frequency: tag.getFrequency().toPrecision(0),
+							visibility: tag.getVisibility().toPrecision(0),
+							intensity: tag.getIntensity().toPrecision(0),
+							index: index
+						};
+						list.add(index++,entry);
+					}
+					return list;
+			}]]></xp:this.value>
+			</xp:dataContext>
+		</xp:this.dataContexts>
+		<xp:label value="Tags " id="label1">
+		</xp:label>
+		<br></br>
+		<xp:label value="Total tags found: " id="label2">
+		</xp:label>
+		<xp:text escape="true" id="computedField1">
+		<xp:this.value>
+		<![CDATA[#{javascript:
+		var c:Number = tags.size();
+		c.toPrecision(0);
+		}]]>
+		</xp:this.value>
+		</xp:text>
+		<br></br>
+		<xp:label value="Name:  [Frequency,Visibility,Intensity]" id="label4">
+		</xp:label>
+		<br></br>
+	
+		<xp:repeat id="repeat1" rows="30" var="rtag" value="#{tags}">
+			<xp:label value="#{rtag.term}: [#{rtag.frequency},#{rtag.visibility},#{rtag.intensity}]"
+				id="label3" disableTheme="true" themeId="sdfsaf">
+				<xp:this.style><![CDATA[#{javascript:
+				var size = rtag.frequency * 2 + 5;
+				var visint = rtag.intensity + rtag.visibility;
+				var color1 = 200 + rtag.frequency * 10;
+				var color2 = visint * 10;
+				return "font-size:" + size + "pt;color:rgb(" + color1 + "," + color2 + ",0);font-weight:bold;";}]]></xp:this.style>
+			</xp:label>
+			<xp:br></xp:br>
+			
+		</xp:repeat>
+	</xp:panel>
+</xp:view>

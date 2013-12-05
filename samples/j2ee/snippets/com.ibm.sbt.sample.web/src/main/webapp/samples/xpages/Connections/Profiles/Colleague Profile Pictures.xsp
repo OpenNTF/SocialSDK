@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+	<xp:panel id="panel1">
+		<xp:repeat id="repeat1" rows="50"
+			value="#{javascript:
+						var profileService = new  com.ibm.sbt.services.client.connections.profiles.ProfileService();
+						var myProfile = profileService.getMyProfile();
+						var user = myProfile.getEmail();			
+						var colleagues = profileService.getColleagues(user);
+						return colleagues;
+						}"
+			var="rowdoc" repeatControls="true">
+			<xp:image alt="no image" id="image1">
+				<xp:this.url>
+					<![CDATA[#{javascript: 						
+						var profile = profileService.getProfile(rowdoc.getUserid());
+						var image = profile.getThumbnailUrl();
+						return image;}]]>
+				</xp:this.url>
+			</xp:image>
+		</xp:repeat>
+	</xp:panel>
+</xp:view>

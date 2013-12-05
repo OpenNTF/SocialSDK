@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<!--Upload a file-->
+	<xp:this.data>
+		<xe:fileServiceData var="fileServiceData1">
+			<xe:this.serviceType>
+				<xe:connectionsFileData></xe:connectionsFileData>
+			</xe:this.serviceType>
+		</xe:fileServiceData>
+	</xp:this.data>
+	<xp:messages id="messages1"></xp:messages>
+	<xp:fileUpload id="fileUpload1" value="#{requestScope.temporaryUploadLocation}">
+		<xp:eventHandler event="onchange" submit="true"
+			refreshMode="complete">
+			<xp:this.action>
+				<xp:actionGroup>
+					<xp:executeScript>
+						<xp:this.script><![CDATA[#{javascript:
+fileServiceData1.setUploadedFile( getComponent('fileUpload1').getValue() );
+}]]></xp:this.script>
+					</xp:executeScript>
+					<xp:save>
+					</xp:save>
+				</xp:actionGroup>
+			</xp:this.action>
+		</xp:eventHandler>
+	</xp:fileUpload>
+	<xp:br></xp:br>
+	<xp:br></xp:br>
+	<xp:viewPanel rows="30" id="viewPanel1" var="entry" value="#{fileServiceData1}">
+		<xp:this.facets>
+			<xp:pager partialRefresh="true" layout="Previous Group Next"
+				xp:key="headerPager" id="pager1">
+			</xp:pager>
+		</xp:this.facets>
+		<xp:viewColumn id="viewColumn1" value="#{javascript:entry.getTitle()}">
+			<xp:this.facets>
+				<xp:viewColumnHeader xp:key="header" id="viewColumnHeader1"
+					value="File Name" style="font-weight:bold">
+				</xp:viewColumnHeader>
+			</xp:this.facets>
+		</xp:viewColumn>
+	</xp:viewPanel>
+</xp:view>

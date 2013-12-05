@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:panel>
+		<xp:this.dataContexts>
+			<xp:dataContext var="topics">
+				<xp:this.value><![CDATA[#{javascript:var svc = new new  com.ibm.sbt.services.client.connections.forums.ForumService();
+				return svc.getMyForumTopics();
+			
+			}]]></xp:this.value>
+			</xp:dataContext>
+		</xp:this.dataContexts>
+		<xp:label value="My topics " id="label1">
+		</xp:label>
+		<br></br>
+		<xp:label value="Total topics found: " id="label2">
+		</xp:label>
+		<xp:text escape="true" id="computedField1">
+		<xp:this.value>
+		<![CDATA[#{javascript:
+		var c:Number = topics.getTotalResults();
+		c.toPrecision(0);
+		}]]>
+		</xp:this.value>
+		</xp:text>
+		<br></br>
+	
+		<xp:viewPanel rows="2" id="viewPanel1" var="topicView">
+			<xp:this.facets>
+				<xp:pager partialRefresh="true"
+					layout="Previous Group Next" xp:key="headerPager" id="pager1">
+				</xp:pager>
+			</xp:this.facets>
+			<xp:this.value><![CDATA[#{javascript:
+					var list = new java.util.ArrayList();
+					for (topic in topics) {
+						var author = topic.getAuthor();
+						var entry = {
+							forumuid: topic.getUid(),
+							authorname: author.getName(),
+							authorstate: author.getState(),
+							authorid: author.getId(),
+							authoremail:author.getEmail(),
+							topictitle: topic.getTitle(),
+							topicpublished: topic.getPublished(),
+							topicupdated: topic.getUpdated()
+						};
+						list.add(entry);
+					}
+					return list;
+}]]></xp:this.value>
+<xp:viewColumn columnName="Topic title"
+					value="#{javascript:topicView.topictitle}">
+					<xp:viewColumnHeader value="Topic title" ></xp:viewColumnHeader>
+</xp:viewColumn>
+<xp:viewColumn columnName="Author"
+					value="#{javascript:topicView.authorname}">
+					<xp:viewColumnHeader value="Author" ></xp:viewColumnHeader>
+</xp:viewColumn>
+<xp:viewColumn columnName="AuthorState"
+					
+					value="#{javascript:topicView.authorstate}">
+					<xp:viewColumnHeader value="Author State" ></xp:viewColumnHeader>
+</xp:viewColumn>
+<xp:viewColumn columnName="AuthorEmail"
+					value="#{javascript:topicView.authoremail}">
+					<xp:viewColumnHeader value="Author Email" ></xp:viewColumnHeader>
+</xp:viewColumn>
+<xp:viewColumn columnName="AuthorId"
+					value="#{javascript:topicView.authorid}">
+					<xp:viewColumnHeader value="Author Id" ></xp:viewColumnHeader>
+</xp:viewColumn>
+<xp:viewColumn columnName="TopicPublished"
+					value="#{javascript:topicView.topicpublished}">
+					<xp:viewColumnHeader value="Published on" ></xp:viewColumnHeader>
+</xp:viewColumn>
+<xp:viewColumn columnName="TopicUpdated"
+					value="#{javascript:topicView.topicupdated}">
+					<xp:viewColumnHeader value="Updated on" ></xp:viewColumnHeader>
+</xp:viewColumn>
+<xp:viewColumn columnName="ForumUid"
+					value="#{javascript:topicView.forumuid}">
+					<xp:viewColumnHeader value="Forum Uid" ></xp:viewColumnHeader>
+</xp:viewColumn>
+		</xp:viewPanel>
+	</xp:panel>
+</xp:view>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:panel id="blogs3">
+		<xp:label value="All Recent Blog Posts:" style="font-size:14pt;font-weight:bold"></xp:label>
+		<xp:br />
+		<xe:dataView id="dataView2" var="post1" rows="5"
+			columnTitles="true" expandedDetail="true">
+			<xp:this.value>
+				<![CDATA[#{javascript:											
+					var blogSvc = new com.ibm.sbt.services.client.connections.blogs.BlogService("connections");	
+					var posts = blogSvc.getAllPosts();
+					return posts;
+				}]]>
+			</xp:this.value>
+			<xe:this.summaryColumn>
+				<xe:viewSummaryColumn columnTitle="Post Title"
+					style="width:20%">
+				</xe:viewSummaryColumn>
+			</xe:this.summaryColumn>
+			<xp:this.facets>
+				<xp:panel xp:key="noRows" id="panel2">
+					<xp:text value="No Posts found"></xp:text>
+				</xp:panel>
+				<xp:panel id="panel3" xp:key="summary"
+					style="white-space:nowrap;">
+					<xp:link escape="true" id="link3"
+						target="_blank" value="#{javascript:return post1.getAlternateUrl();}"
+						text="#{javascript:return post1.getTitle();}">
+					</xp:link>
+				</xp:panel>
+				<xp:panel id="content" xp:key="detail">
+					<xp:text id="detailLabel1" value="Content: ">
+					</xp:text>	
+					<xp:inputRichText id="detailValue" value="#{javascript: return post1.getContent();}">
+					</xp:inputRichText>
+				</xp:panel>
+				<xp:pager xp:key="pagerBottomRight" pageCount="5" partialRefresh="true">
+					<xp:pagerControl type="Previous" id="pagerControl10">
+					</xp:pagerControl>
+					<xp:pagerControl type="Group" id="pagerControl11">
+					</xp:pagerControl>
+					<xp:pagerControl type="Next" id="pagerControl12">
+					</xp:pagerControl>
+				</xp:pager>
+			</xp:this.facets>
+		</xe:dataView>
+	</xp:panel>
+
+</xp:view>

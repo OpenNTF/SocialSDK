@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<!--Delete Selected Files-->
+	<xp:this.data>
+		<xe:fileServiceData var="fileServiceData1">
+			<xe:this.serviceType>
+				<xe:connectionsFileData></xe:connectionsFileData>
+			</xe:this.serviceType>
+		</xe:fileServiceData>
+	</xp:this.data>
+	<xp:button value="Delete Selected Files" id="button1">
+		<xp:eventHandler event="onclick" submit="true"
+			refreshMode="complete">
+			<xp:this.action>
+				<xp:actionGroup>
+					<xp:deleteSelectedDocuments view="viewPanel1"
+						message="Are you sure you want to delete these files?">
+					</xp:deleteSelectedDocuments>
+					<xp:executeScript script="#{javascript:fileServiceData1.refresh();}"></xp:executeScript>
+				</xp:actionGroup>
+			</xp:this.action>
+		</xp:eventHandler>
+	</xp:button>
+	<xp:viewPanel rows="30" id="viewPanel1" value="#{fileServiceData1}"
+		var="entry">
+		<xp:this.facets>
+			<xp:pager partialRefresh="true" layout="Previous Group Next"
+				xp:key="headerPager" id="pager1">
+			</xp:pager>
+		</xp:this.facets>
+		<xp:viewColumn id="viewColumn1" value="#{javascript:entry.getTitle()}"
+			showCheckbox="true">
+			<xp:this.facets>
+				<xp:viewColumnHeader xp:key="header" id="viewColumnHeader1"
+					value="Files">
+				</xp:viewColumnHeader>
+			</xp:this.facets>
+		</xp:viewColumn>
+	</xp:viewPanel>
+</xp:view>

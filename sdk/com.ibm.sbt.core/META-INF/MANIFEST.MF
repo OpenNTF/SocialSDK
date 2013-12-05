@@ -4,10 +4,10 @@ Bundle-Name: SBT core Java code
 Bundle-SymbolicName: com.ibm.sbt.core;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: IBM
-Require-Bundle: com.ibm.commons,
+Require-Bundle: com.ibm.sbt.libs,
+ com.ibm.commons,
  com.ibm.commons.xml,
- com.ibm.commons.runtime,
- com.ibm.sbt.libs
+ com.ibm.commons.runtime
 Bundle-ClassPath: .
 Export-Package: com.ibm.sbt.core.configuration,
  com.ibm.sbt.jslibrary,
@@ -89,7 +89,7 @@ Export-Package: com.ibm.sbt.core.configuration,
  com.ibm.sbt.services.util,
  com.ibm.sbt.services.util.extractor.field,
  com.ibm.sbt.services.util.navigable, com.ibm.sbt.util 
-Import-Package: javax.mail,
- javax.mail.internet,
- javax.servlet,
- javax.servlet.http
+Import-Package: javax.servlet,
+ javax.servlet.http,
+ javax.mail,
+ javax.mail.internet

@@ -54,6 +54,9 @@ define([ "../lang", "../base/BaseConstants" ], function(lang, base) {
 
         /**
          * AuthType variable values for endpoint
+         * 
+         * @property AuthTypes
+         * @type Object
          */
         AuthTypes : {
         	OAuth : "oauth",
@@ -65,7 +68,6 @@ define([ "../lang", "../base/BaseConstants" ], function(lang, base) {
          * 
          * @property TagsXPath
          * @type Object
-         * @for sbt.connections.Tag
          */
         TagsXPath : {
         	entries : "app:categories/a:category",
@@ -79,29 +81,26 @@ define([ "../lang", "../base/BaseConstants" ], function(lang, base) {
          * 
          * @property BlogXPath
          * @type Object
-         * @for sbt.connections.BlogService
          */
         ServiceConfigXPath : lang.mixin({}, base.AtomEntryXPath, {
         	alternateSSLUrl : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/alternate-ssl']/@href"
         }),
         
         /**
-         * XPath expressions to be used when reading a Community Member Entry
+         * XPath expressions to be used when reading a Member Entry
          * 
          * @property MemberXPath
          * @type Object
-         * @for sbt.connections.CommunityService
          */
         MemberXPath : lang.mixin({}, base.AtomEntryXPath, {
             role : "snx:role"
         }),
         
         /**
-         * XPath expressions to be used when reading a Community Member Entry
+         * XPath expressions to be used when reading a Report Entry
          * 
          * @property MemberXPath
          * @type Object
-         * @for sbt.connections.CommunityService
          */
         ReportEntryXPath : lang.mixin({}, base.AtomEntryXPath, {
             categoryIssue : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/issue']/@term",
@@ -111,11 +110,10 @@ define([ "../lang", "../base/BaseConstants" ], function(lang, base) {
         }),
         
         /**
-         * XPath expressions to be used when reading a Community Member Entry
+         * XPath expressions to be used when reading a Moderation Action Entry
          * 
          * @property MemberXPath
          * @type Object
-         * @for sbt.connections.CommunityService
          */
         ModerationActionEntryXPath : lang.mixin({}, base.AtomEntryXPath, {
             moderationAction : "snx:moderation/action",
@@ -123,15 +121,10 @@ define([ "../lang", "../base/BaseConstants" ], function(lang, base) {
             inRefTo : "snx:in-ref-to[@rel='http://www.ibm.com/xmlns/prod/sn/report-item']/@ref"	
         }),
 
-        /**
-         * Get service configs
-         */
-//        ServiceConfigs : "/${service}/serviceconfigs",
-
 		/**
 	     * Get service configs
 	     */
 	    ServiceConfigs : "/{service}/serviceconfigs"
 	
-	    });
+	});
 });

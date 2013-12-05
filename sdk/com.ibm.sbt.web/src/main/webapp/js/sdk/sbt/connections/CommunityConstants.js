@@ -100,6 +100,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
             tags : "a:category[not(@scheme)]/@term",
             memberCount : "snx:membercount",
             communityType : "snx:communityType",
+            communityUrl : "a:link[@rel='alternate']/@href",
             isExternal : "snx:isExternal"
         }),
         

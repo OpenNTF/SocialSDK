@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xe:formTable id="formTable1" formTitle="Search Connections"
+		formDescription="Search for public information.">
+		<xe:formRow id="formRow1" label="Search" for="inputText1"
+			labelPosition="left">
+			<xp:inputText id="inputText1" value="#{viewScope.searchVal}"
+				accesskey="s">
+				<xp:this.attrs>
+					<xp:attr name="placeholder" value="Search..." />
+				</xp:this.attrs>
+			</xp:inputText>
+			<xp:button value="Search" id="button1">
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="partial" refreshId="formTable1" />
+			</xp:button>
+		</xe:formRow>
+		<xe:formRow id="formRow2" label="Results" labelPosition="left">
+			<xp:viewPanel rows="5" id="viewPanel1" var="val">
+				<xp:this.value><![CDATA[#{javascript:
+var list = new java.util.ArrayList();
+var svc = new com.ibm.sbt.services.client.connections.search.SearchService();
+var results = svc.getResults(viewScope.searchVal);
+for (entry in results) {
+	var each = {
+		title: entry.getTitle(),
+		id: entry.getId(),
+		tags: entry.getTags(),
+		summary: entry.getSummary(),
+		score: entry.getScore(),
+		rank: entry.getRank(),
+		application: entry.getApplication()
+	};
+	list.add(each);
+}
+return list;
+}]]></xp:this.value>
+				<xp:this.facets>
+					<xp:pager partialRefresh="true" layout="Previous Group Next"
+						id="pager1" xp:key="headerPager" />
+				</xp:this.facets>
+				<xp:viewColumn value="#{javascript:val.title}"
+					contentType="html">
+					<xp:viewColumnHeader value="Title" />
+				</xp:viewColumn>
+				<xp:viewColumn value="#{javascript:val.id}">
+					<xp:viewColumnHeader value="ID" />
+				</xp:viewColumn>
+				<xp:viewColumn value="#{javascript:val.tags}">
+					<xp:viewColumnHeader value="Tags" />
+				</xp:viewColumn>
+				<xp:viewColumn value="#{javascript:val.summary}">
+					<xp:viewColumnHeader value="Summary" />
+				</xp:viewColumn>
+				<xp:viewColumn value="#{javascript:val.score}">
+					<xp:viewColumnHeader value="Score" />
+				</xp:viewColumn>
+				<xp:viewColumn value="#{javascript:val.rank}">
+					<xp:viewColumnHeader value="Rank" />
+				</xp:viewColumn>
+				<xp:viewColumn value="#{javascript:val.application}">
+					<xp:viewColumnHeader value="Application" />
+				</xp:viewColumn>
+			</xp:viewPanel>
+		</xe:formRow>
+	</xe:formTable>
+
+</xp:view>

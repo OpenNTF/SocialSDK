@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+	<xp:panel>
+		Check Colleagues:
+		<br></br>
+		Insert Colleague ID:&#160;<xp:inputText id="inputText1" required="true" style="width:300.0px"></xp:inputText>
+		<xp:button value="Check Colleague" id="button1" style="width:120px">
+			<xp:eventHandler event="onclick" submit="true"
+				refreshMode="complete">
+				<xp:this.action>
+					<xp:executeScript>
+						<xp:this.script><![CDATA[#{javascript:
+								var colleagueId=getComponent("inputText1").getValue();
+								var profileService = new com.ibm.sbt.services.client.connections.profiles.ProfileService();
+								var myProfile = profileService.getMyProfile();
+								var user = myProfile.getEmail();			
+								var colleagues = new Array();
+								colleagues = profileService.getColleagues(user);
+								var i=0;
+								var found=false;
+								while(found==false && i<colleagues.length){
+									if(colleagues[i].getUserid()==colleagueId){
+										found=true;
+									}
+									else 
+										i++;
+								}		
+								if(found==true)
+									getComponent("feedback").setValue("Feedback: Colleague found");
+								else
+									getComponent("feedback").setValue("Feedback: Colleague not found");}]]></xp:this.script>
+					</xp:executeScript>
+				</xp:this.action>
+			</xp:eventHandler>
+		</xp:button>
+		<xp:br></xp:br>
+		<xp:br></xp:br>
+		<xp:label id="feedback" value="Feedaback:"></xp:label>
+		<xp:br></xp:br>
+	</xp:panel>
+</xp:view>

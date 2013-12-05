@@ -21,7 +21,7 @@
  */
 define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
 
-    return lang.mixin({
+    return lang.mixin({}, conn, {
         
         /**
          * Public community
@@ -324,5 +324,5 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          */
         AtomCommunityInvites : "/${communities}/service/atom/community/invites"
         
-    }, conn);
+    });
 });

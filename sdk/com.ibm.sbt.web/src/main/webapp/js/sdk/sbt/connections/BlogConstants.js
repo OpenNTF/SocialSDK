@@ -21,7 +21,7 @@
  */
 define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
 
-    return lang.mixin({
+    return lang.mixin({}, conn, {
     	
     	/**
          * XPath expressions used when parsing a Connections Blogs ATOM feed
@@ -367,5 +367,5 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @for sbt.connections.BlogService
          */ 
         AtomRecommendBlogPost : "/${blogs}/{blogHandle}/api/recommend/entries/{postUuid}",
-    }, conn);
+    });
 });

@@ -2,14 +2,31 @@
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
 	<xp:panel>
 		<xp:this.dataContexts>
+		<xp:dataContext var="svc">
+				<xp:this.value><![CDATA[#{javascript:var svc = new com.ibm.sbt.services.client.connections.forums.ForumService();
+				return svc;
+			
+			}]]></xp:this.value>
+			
+			</xp:dataContext>
+			<xp:dataContext var="ps">
+			
+			<xp:this.value><![CDATA[#{javascript:var ps = new com.ibm.sbt.services.client.connections.profiles.ProfileService();
+				return ps;
+			
+			}]]></xp:this.value>
+			
+			</xp:dataContext>
 			<xp:dataContext var="forums">
-				<xp:this.value><![CDATA[#{javascript:var svc = new new  com.ibm.sbt.services.client.connections.forums.ForumService();
+				<xp:this.value><![CDATA[#{javascript:
 				return svc.getMyForums();
 			
 			}]]></xp:this.value>
+			
 			</xp:dataContext>
+			
 		</xp:this.dataContexts>
-		<xp:label value="Listing My forums " id="label1">
+		<xp:label value="Listing My Forums " id="label1">
 		</xp:label>
 		<br></br>
 		<xp:label value="Total forums found: " id="label2">
@@ -30,6 +47,7 @@
 
 			<xp:this.value><![CDATA[#{javascript: 
 					var forumsArray=[];
+					viewScope.put("forumId",null);
 					for(forum in forums){
 						var entry = {
 										title: forum.getTitle(),
@@ -38,7 +56,8 @@
 										moderation:forum.getModeration(),
 										content: forum.getContent(),
 										threads: forum.getThreadCount().toPrecision(0),
-										tags:  forum.getTags()
+										tags:  forum.getTags(),
+										topics:  forum.getTopics()
 									};
 							forumsArray.push(entry);
 					}
@@ -48,10 +67,10 @@
 				<xe:viewSummaryColumn columnTitle="Forum Title">
 				</xe:viewSummaryColumn>
 			</xe:this.summaryColumn>
+			
+			
 			<xe:this.extraColumns>
-				<xe:viewExtraColumn columnTitle="threads"></xe:viewExtraColumn>
-			</xe:this.extraColumns>
-			<xe:this.extraColumns>
+				<xe:viewExtraColumn columnTitle="topics"></xe:viewExtraColumn>
 				<xe:viewExtraColumn columnTitle="tags"></xe:viewExtraColumn>
 			</xe:this.extraColumns>
 			<xp:this.facets>
@@ -70,18 +89,32 @@
 						value="#{forumView.content}">
 					</xp:text>
 				</xp:panel>
-				<xp:panel id="panel3" xp:key="extra0">
-					<xp:text id="computedField11"
-						value="#{forumView.threads}">
-					</xp:text>
+				<xp:panel id="panel6" xp:key="extra0">
+					<xp:link escape="true" text="#{javascript: 
+						var topics =  forumView.topics;
+						return topics?topics.getTotalResults().toPrecision(0):0;
+						}" id="link2">
+						<xp:eventHandler event="onclick"
+						submit="true" refreshMode="partial"
+						refreshId="topics">
+						<xp:this.action><![CDATA[#{javascript:
+							viewScope.put("forumId",forumView.uid);}]]></xp:this.action>
+					</xp:eventHandler>
+					</xp:link>
 				</xp:panel>
 				<xp:panel id="panel5" xp:key="extra1">
-					<xp:text id="computedField3"
-						value="#{forumView.tags}">
-					</xp:text>
+				<xp:repeat id="repeat1" rows="30" var="tag" value="#{forumView.tags}">
+				<xp:link escape="true" id="link13" target="_blank"
+					text="#{tag}">
+					<xp:this.value><![CDATA[#{javascript:forumView.url + "&tags=" + tag}]]></xp:this.value>
+				</xp:link>
+				<xp:text value=" "> </xp:text>
+				</xp:repeat>
+				
 				</xp:panel>
+				
 				<xp:pager xp:key="pagerBottomRight" pageCount="5"
-					partialRefresh="true">
+					partialRefresh="false">
 					<xp:pagerControl type="Previous"
 						id="pagerControl1">
 					</xp:pagerControl>
@@ -89,11 +122,98 @@
 					</xp:pagerControl>
 					<xp:pagerControl type="Next" id="pagerControl3">
 					</xp:pagerControl>
-				</xp:pager>
-			</xp:this.facets>
+				</xp:pager></xp:this.facets>
 
 
 		</xe:dataView>
-
+		<xp:panel id="topics">
+		<xe:dataView id="dataView2" var="topicView"
+			columnTitles="true" expandedDetail="true" rows="2">
+			<xp:this.value><![CDATA[#{javascript:
+					var list = new java.util.ArrayList();
+					var forumId = viewScope.get("forumId");
+					if(forumId)
+					{
+					var forum = svc.getForum(forumId);
+					var topics = forum.getTopics();
+					var forumName = forum.getTitle();
+					for (topic in topics) {
+						var author = topic.getAuthor();
+						var authorprofile = ps.getProfile(author.getId());
+						var authorprofileurl = authorprofile.getProfileUrl();
+						var entry = {
+							forumname: forumName,
+							forumuid: topic.getUid(),
+							authorname: author.getName(),
+							authorstate: author.getState(),
+							authorid: author.getId(),
+							authoremail:author.getEmail(),
+							authorurl:authorprofileurl,
+							content:topic.getContent(),
+							title: topic.getTitle(),
+							published: topic.getPublished(),
+							updated: topic.getUpdated(),
+							url: topic.getTopicUrl(),
+							replies: topic.getReplies().getTotalResults().toPrecision(0),
+							likes: topic.getRecommendationCount()
+						};
+						list.add(entry);
+					}
+					}
+					return list;
+}]]></xp:this.value>
+<xe:this.summaryColumn>
+				<xe:viewSummaryColumn
+					columnTitle="Topics">
+				</xe:viewSummaryColumn>
+</xe:this.summaryColumn>
+			<xe:this.extraColumns>
+			
+			<xe:viewExtraColumn columnTitle="author">
+				</xe:viewExtraColumn>
+				<xe:viewExtraColumn columnTitle="likes"
+					value="#{topicView.likes}">
+				</xe:viewExtraColumn>
+				<xe:viewExtraColumn columnTitle="replies"
+					value="#{topicView.replies}">
+				</xe:viewExtraColumn>
+				<xe:viewExtraColumn columnTitle="updated"
+					value="#{topicView.updated}">
+				</xe:viewExtraColumn>
+				
+			</xe:this.extraColumns>
+			<xp:this.facets>
+				<xp:panel xp:key="noRows" id="panel3">
+					<xp:text value="No Topics found"></xp:text>
+				</xp:panel>
+				<xp:panel id="panel7" xp:key="summary"
+					style="white-space:nowrap;">
+					<xp:link escape="true" id="link3" target="_blank"
+						value="#{topicView.url}" text="#{topicView.title}">
+					</xp:link>
+				</xp:panel>
+				<xp:panel id="panel8" xp:key="detail">
+					<xp:inputRichText id="inputRichText1"
+						value="#{topicView.content}" disabled="true" readonly="true">
+					</xp:inputRichText>
+				</xp:panel>
+				<xp:panel id="panel9" xp:key="extra0">
+					<xp:link escape="true" target="_blank"
+					value="#{topicView.authorurl}" text="#{topicView.authorname}"  id="link4">
+					</xp:link>
+				</xp:panel>
+				<xp:pager xp:key="pagerBottomRight" pageCount="5"
+					partialRefresh="true" partialExecute="true">
+					<xp:pagerControl type="Previous"
+						id="pagerControl4">
+					</xp:pagerControl>
+					<xp:pagerControl type="Group" id="pagerControl5">
+					</xp:pagerControl>
+					<xp:pagerControl type="Next" id="pagerControl6">
+					</xp:pagerControl>
+				</xp:pager>
+			</xp:this.facets>
+			</xe:dataView>
+		</xp:panel>
 	</xp:panel>
 </xp:view>

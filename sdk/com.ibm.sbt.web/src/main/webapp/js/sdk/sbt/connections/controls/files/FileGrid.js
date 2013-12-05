@@ -163,6 +163,16 @@ function(declare, lang, dom, stringUtil, sbt, parameter, Grid,
 						rendererArgs : {
 							type : "file"
 						}
+					},
+					"communityFiles" : {
+						storeArgs : {
+							url : FileConstants.AtomGetAllCommunityFiles,
+							attributes : FileConstants.FileXPath,
+							paramSchema : ParamSchema
+						},
+						rendererArgs : {
+							type : "file"
+						}
 					}
 
 				},
@@ -292,7 +302,7 @@ function(declare, lang, dom, stringUtil, sbt, parameter, Grid,
 						params = lang.mixin(params, {
 							direction : this.direction
 						});
-					}
+					}					
 
 					return this.constructUrl(url, params, this
 							.getUrlParams(), endpoint);
@@ -316,6 +326,12 @@ function(declare, lang, dom, stringUtil, sbt, parameter, Grid,
 					if (this.documentId) {
 						params = lang.mixin(params, {
 							documentId : this.documentId
+						});
+					}
+					
+					if(this.communityId){
+						params = lang.mixin(params, {
+							communityId : this.communityId
 						});
 					}
 

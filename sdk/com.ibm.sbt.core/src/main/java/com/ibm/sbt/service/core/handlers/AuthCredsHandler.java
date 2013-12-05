@@ -188,6 +188,8 @@ public class AuthCredsHandler extends AbstractServiceHandler {
 	    			    pw.println("config.callback();");
 	    			    pw.println("delete config.callback;");
 	    				pw.println("}");
+	    				pw.println("delete window.opener.globalLoginFormStrings;");
+	    				pw.println("delete window.opener.globalEndpointAlias;");
 	    				pw.println("window.close();");
 	    			}
 	    			pw.println("});");

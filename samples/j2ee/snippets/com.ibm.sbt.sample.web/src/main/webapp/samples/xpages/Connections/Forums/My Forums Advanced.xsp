@@ -26,7 +26,7 @@
 			</xp:dataContext>
 			
 		</xp:this.dataContexts>
-		<xp:label value="Listing My forums " id="label1">
+		<xp:label value="Listing My Forums " id="label1">
 		</xp:label>
 		<br></br>
 		<xp:label value="Total forums found: " id="label2">

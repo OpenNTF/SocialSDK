@@ -459,9 +459,15 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
         AtomAddCommentToCommunityFile : "/${files}/basic/api/communitylibrary/{communityId}/document/{documentId}/feed",
         
         /**
-         * Get All Files in a Community
+         * Get All Community Files, Shows only files with with a libraryType of communityFiles
+         * TODO This should be renamed
          */
         AtomGetAllFilesInCommunity : "/${files}/basic/api/communitylibrary/{communityId}/feed",
+        
+        /**
+         * Get all files in a community, Shows public, private, communityFiles etc.
+         */
+        AtomGetAllCommunityFiles : "/${files}/basic/api/communitycollection/{communityId}/feed",
         
         /**
          * Get Community File

@@ -26,13 +26,13 @@ function submitOnClick(contentForm) {
     }
     if (loginUi == "popup") {
         contentForm.action = actionURL + "?loginUi=popup&redirectURLToLogin="
-                + encodeURIComponent(document.URL)+"&endpointAlias="+window.globalEndpointAlias;
+                + encodeURIComponent(document.URL)+"&endpointAlias="+opener.globalEndpointAlias;
     } else if (loginUi == "mainWindow") {
         var redirectURL = argsMap.redirectURL;
         contentForm.action = actionURL
                 + "?loginUi=mainWindow&redirectURLToLogin="
                 + encodeURIComponent(document.URL) + "&redirectURL="
-                + encodeURIComponent(redirectURL)+"&endpointAlias="+window.globalEndpointAlias;
+                + encodeURIComponent(redirectURL)+"&endpointAlias="+opener.globalEndpointAlias;
     }
     contentForm.submit();
 }
@@ -58,8 +58,8 @@ function onLoginPageLoad() {
     if (showWrongCredsMessage == "true") {
         document.getElementById("wrongCredsMessage").style.display = "block";
     }
-    if(window.globalLoginFormStrings){
-        var loginForm = window.globalLoginFormStrings;
+    if(opener.globalLoginFormStrings){
+        var loginForm = opener.globalLoginFormStrings;
     	document.getElementById('wrongCredsMessage').appendChild(document.createTextNode(loginForm.wrong_creds_message));
     	document.getElementById('basicLoginFormUsername').appendChild(document.createTextNode(loginForm.username));
     	document.getElementById('basicLoginFormPassword').appendChild(document.createTextNode(loginForm.password));

@@ -113,8 +113,8 @@ return declare(null, {
             sbtConfig.cancel = options.cancel;
             loginWindow.cancel = options.cancel;
         }
-        loginWindow.globalLoginFormStrings = loginForm;
-        loginWindow.globalEndpointAlias = options.name;
+        globalLoginFormStrings = loginForm;
+        globalEndpointAlias = options.name;
         loginWindow.focus();
         
         return true;

@@ -19,6 +19,7 @@
 	</managed-bean>
 	
 	<!-- Connections Basic -->
+	<!-- Comment out this endpoint when running against SmartCloud -->
 	<managed-bean>
 		<managed-bean-name>connections</managed-bean-name>
 		<managed-bean-class>com.ibm.sbt.services.endpoints.ConnectionsBasicEndpoint</managed-bean-class>
@@ -50,7 +51,7 @@
 	</managed-bean>
     
 	<!--  SmartCloud OAuth 1.0 -->	
-	<!-- 
+	<!-- Include this endpoint to run against SmartCloud with OAuth 1.0
 	<managed-bean>
 		<managed-bean-name>connections</managed-bean-name>
 		<managed-bean-class>com.ibm.sbt.services.endpoints.SmartCloudOAuthEndpoint</managed-bean-class>
@@ -110,8 +111,8 @@
 	</managed-bean>
 	-->
 	 
-	<!--  Smart Cloud OAuth 2.0 -->	
-	<!--  
+	<!--  Smart Cloud OAuth 2.0 -->	 
+	<!-- Include this endpoint to run against SmartCloud with OAuth 2.0
 	<managed-bean>
 		<managed-bean-name>connections</managed-bean-name>
 		<managed-bean-class>com.ibm.sbt.services.endpoints.SmartCloudOAuth2Endpoint</managed-bean-class>
@@ -157,5 +158,5 @@
 			<value>CredStore</value>
 		</managed-property>
 	</managed-bean>
-    -->
+	-->
 </faces-config>

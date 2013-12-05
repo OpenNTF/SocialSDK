@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<xp:repeat id="repeat1" rows="30" var="foo">
+		<xp:this.value><![CDATA[#{javascript:
+var list = new java.util.ArrayList();
+var svc = new com.ibm.sbt.services.client.connections.activity.ActivityService();
+var activities = svc.getMyActivities();
+if(activities.getTotalResults()!=0){
+if(activities != null && ! activities.isEmpty()) {
+	var act = activities.get(0);
+	var members = svc.getMembers(act.getActivityId());
+	var member = svc.getMember(act.getActivityId(), members.get(0).getMemberId());
+		
+	var name = member.getName();
+	var email = member.getEmail();
+	var id = member.getUserid();
+	var role = member.getRole();
+	var entry = {
+		name: name,
+		email: email,
+		id: id,
+		role: role
+	};
+	
+	list.add(entry);
+}
+return list;
+}
+else{
+var entry = {
+		name: "No Activities Found",
+		email: "No Activities Found",
+		id: "No Activities Found",
+		role: "No Activities Found"
+	};
+	list.add(entry);
+        return list;
+}
+
+}]]></xp:this.value>
+		<xp:text escape="true" id="computedField1" value="#{javascript:foo.name;}" />
+		<br />
+		<xp:text escape="true" id="computedField2" value="#{javascript:foo.email;}" />
+		<br />
+		<xp:text escape="true" id="computedField3" value="#{javascript:foo.id;}" />
+		<br />
+		<xp:text escape="true" id="computedField4" value="#{javascript:foo.role;}" />
+		<br />
+	</xp:repeat>
+
+</xp:view>
+

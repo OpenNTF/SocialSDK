@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:panel id="panel26">
+	<xp:label value="All posts from a chosen blog:" style="font-size:14pt;font-weight:bold"></xp:label>
+	<xp:br />
+	<xp:table>
+		<xp:tr>
+			<xp:td>
+				<xp:label value="Choose Blog :" id="label7"></xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:comboBox id="blogPicker" style="width:251.0px">
+					<xp:selectItems id="selectItems3">
+						<xp:this.value>
+							<![CDATA[#{javascript:						
+								var list = new java.util.ArrayList();
+								var blogSvc = new com.ibm.sbt.services.client.connections.blogs.BlogService("connections");	
+								var blogs = blogSvc.getBlogs();
+								list.add("Select a blog...|select");
+								for (var i = 0; i < blogs.size(); i++) {
+									var theblog = blogs.get(i);
+									var blogName = theblog.getTitle();
+									var blogId = theblog.getHandle();
+									var item = blogName + "|" + blogId;
+									list.add(item);
+								}
+								return list;
+							}]]>
+						</xp:this.value>
+					</xp:selectItems>
+					<xp:eventHandler event="onchange"
+						submit="true" refreshMode="partial"
+						refreshId="blogPosts">
+					</xp:eventHandler>
+				</xp:comboBox>
+			</xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td colspan="2">
+				<xp:panel id="blogPosts">
+					<xe:dataView id="dataView13" var="post5" rows="5"
+						columnTitles="true" expandedDetail="true">
+						<xp:this.value>
+							<![CDATA[#{javascript:											
+								var blogSvc = new com.ibm.sbt.services.client.connections.blogs.BlogService("connections");	
+								var theBlogId = getComponent("blogPicker").value;
+								var theBlogPosts = null;
+								if(null != theBlogId && theBlogId != "select") {
+									theBlogPosts = blogSvc.getBlogPosts(theBlogId);
+								}
+								return theBlogPosts;
+							}]]>
+						</xp:this.value>
+						<xe:this.summaryColumn>
+							<xe:viewSummaryColumn columnTitle="Posts">
+							</xe:viewSummaryColumn>
+						</xe:this.summaryColumn>
+						<xp:this.facets>
+							<xp:panel xp:key="noRows" id="panel38">
+								<xp:text value="No Posts found">
+								</xp:text>
+							</xp:panel>
+							<xp:panel id="panel36" xp:key="summary" style="white-space:nowrap;">
+								<xp:link escape="true" id="link13"
+									target="_blank" value="#{javascript:return post5.getAlternateUrl();}"
+									text="#{javascript:return post5.getTitle();}">
+								</xp:link>
+							</xp:panel>
+							<xp:panel id="panel37" xp:key="detail">
+								<xp:text id="computedField13" value="Content: ">
+								</xp:text>	
+								<xp:inputRichText id="computedField14"
+									value="#{javascript:return post5.getContent();}"
+									readonly="true">
+								</xp:inputRichText>
+							</xp:panel>
+							<xp:pager xp:key="pagerBottomRight" pageCount="5" partialRefresh="true">
+								<xp:pagerControl type="Previous"
+									id="pagerControl34">
+								</xp:pagerControl>
+								<xp:pagerControl type="Group"
+									id="pagerControl35">
+								</xp:pagerControl>
+								<xp:pagerControl type="Next"
+									id="pagerControl36">
+								</xp:pagerControl>
+							</xp:pager>
+						</xp:this.facets>
+					</xe:dataView>
+				</xp:panel>
+			</xp:td>
+		</xp:tr>
+	</xp:table>
+	</xp:panel>
+</xp:view>

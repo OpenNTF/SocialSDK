@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:panel>
+		<xp:this.dataContexts>
+			<xp:dataContext var="forums">
+				<xp:this.value><![CDATA[#{javascript:var svc = new new  com.ibm.sbt.services.client.connections.forums.ForumService();
+				return svc.getMyForums();
+			}]]></xp:this.value>
+			</xp:dataContext>
+		</xp:this.dataContexts>
+		<xp:label value="Delete one of My forums " id="label1">
+		</xp:label>
+		<br></br>
+		<xp:label value="Total forums found: " id="label2">
+		</xp:label>
+		<xp:text escape="true" id="computedField1">
+		<xp:this.value>
+		<![CDATA[#{javascript:
+		var c:Number = forums.getTotalResults();
+		c.toPrecision(0);
+		}]]>
+		</xp:this.value>
+		</xp:text>
+		<br></br>
+		<xp:listBox id="forum" multiple="true">
+			<xp:this.rendered><![CDATA[#{javascript:forums.getTotalResults()>0}]]></xp:this.rendered>
+			<xp:selectItems id="selectItems2">
+				<xp:this.value><![CDATA[#{javascript: 
+					var forumsArray=[];
+					for(var i=0;i<forums.getTotalResults();i++){
+								var forum = forums.get(i);
+								forumsArray.push(forum.getTitle() + "|" + forum.getForumUuid());
+					}
+					return forumsArray;
+			
+			}]]></xp:this.value>
+			</xp:selectItems>
+		</xp:listBox>
+		<xp:label value="No Forums present.." id="label4" 
+			rendered="#{javascript:forums.getTotalResults()==0}">
+		</xp:label>
+		<br></br>
+		<br></br>
+		<xp:button value="Delete" id="button1" disableTheme="true">
+			<xp:this.disabled><![CDATA[#{javascript:forums.getTotalResults()==0}]]></xp:this.disabled>
+			<xp:eventHandler event="onclick" submit="true"
+				refreshMode="complete" immediate="false" save="false"
+				id="eventHandler1">
+				<xp:this.action>
+					<xp:executeScript>
+						<xp:this.script>
+							<![CDATA[#{javascript: 
+										var selectedForums = getComponent("forum").getValue();
+										print("select: " + selectedForums);
+										var msg = "";
+										if( selectedForums.length > 0  )
+										{
+											//var forumA = selectedForums.split(",");
+											 msg = "Forums: ";
+											for ( selectedForum in selectedForums )
+											{ 
+												var svc = new new  com.ibm.sbt.services.client.connections.forums.ForumService();
+												var forum = svc.getForum(selectedForum);
+												if( forum ){
+													forum.remove();
+													msg += forum.getTitle() +",";
+												} 
+											}
+											msg += " have been deleted!!"
+										}
+										else
+										{
+											msg = "Please select a forum to be deleted!!";
+										}
+										requestScope.msg = msg;
+										}]]>
+						</xp:this.script>
+					</xp:executeScript>
+				</xp:this.action>
+			</xp:eventHandler>
+		</xp:button>
+		<br></br>
+		<xp:label value="#{javascript:requestScope.msg}" id="label3"></xp:label>
+	</xp:panel>
+</xp:view>

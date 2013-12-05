@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:panel>
+		<xp:this.dataContexts>
+			<xp:dataContext var="forums">
+				<xp:this.value><![CDATA[#{javascript:var svc = new new  com.ibm.sbt.services.client.connections.forums.ForumService();
+				return svc.getMyForums();
+			
+			}]]></xp:this.value>
+			</xp:dataContext>
+		</xp:this.dataContexts>
+		<xp:label value="Listing My forums " id="label1">
+		</xp:label>
+		<br></br>
+		<xp:label value="Total forums found: " id="label2">
+		</xp:label>
+		<xp:text escape="true" id="computedField1">
+		<xp:this.value>
+		<![CDATA[#{javascript:
+		var c:Number = forums.getTotalResults();
+		c.toPrecision(0);
+		}]]>
+		</xp:this.value>
+		</xp:text>
+		<br/>
+		
+		<br></br>
+		<xe:dataView id="dataView1" var="forumView"
+			columnTitles="true" expandedDetail="true" rows="2">
+
+			<xp:this.value><![CDATA[#{javascript: 
+					var forumsArray=[];
+					for(forum in forums){
+						var entry = {
+										title: forum.getTitle(),
+										uid:forum.getForumUuid(),
+										url:forum.getForumUrl(),
+										moderation:forum.getModeration(),
+										content: forum.getContent(),
+										threads: forum.getThreadCount().toPrecision(0),
+										tags:  forum.getTags()
+									};
+							forumsArray.push(entry);
+					}
+					return forumsArray;
+			}]]></xp:this.value>
+			<xe:this.summaryColumn>
+				<xe:viewSummaryColumn columnTitle="Forum Title">
+				</xe:viewSummaryColumn>
+			</xe:this.summaryColumn>
+			<xe:this.extraColumns>
+				<xe:viewExtraColumn columnTitle="threads"></xe:viewExtraColumn>
+			</xe:this.extraColumns>
+			<xe:this.extraColumns>
+				<xe:viewExtraColumn columnTitle="tags"></xe:viewExtraColumn>
+			</xe:this.extraColumns>
+			<xp:this.facets>
+				<xp:panel xp:key="noRows" id="panel1">
+					<xp:text value="No Forums found"></xp:text>
+				</xp:panel>
+				<xp:panel id="panel2" xp:key="summary"
+					style="white-space:nowrap;">
+					<xp:link escape="true" id="link1" target="_blank"
+						value="#{forumView.url}" text="#{forumView.title}">
+					</xp:link>
+				</xp:panel>
+				<xp:panel id="panel4" xp:key="detail">
+					<xp:text value="Description: "></xp:text>
+					<xp:text id="computedField2"
+						value="#{forumView.content}">
+					</xp:text>
+				</xp:panel>
+				<xp:panel id="panel3" xp:key="extra0">
+					<xp:text id="computedField11"
+						value="#{forumView.threads}">
+					</xp:text>
+				</xp:panel>
+				<xp:panel id="panel5" xp:key="extra1">
+					<xp:text id="computedField3"
+						value="#{forumView.tags}">
+					</xp:text>
+				</xp:panel>
+				<xp:pager xp:key="pagerBottomRight" pageCount="5"
+					partialRefresh="true">
+					<xp:pagerControl type="Previous"
+						id="pagerControl1">
+					</xp:pagerControl>
+					<xp:pagerControl type="Group" id="pagerControl2">
+					</xp:pagerControl>
+					<xp:pagerControl type="Next" id="pagerControl3">
+					</xp:pagerControl>
+				</xp:pager>
+			</xp:this.facets>
+
+
+		</xe:dataView>
+
+	</xp:panel>
+</xp:view>

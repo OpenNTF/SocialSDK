@@ -32,7 +32,7 @@ function submitOnClick(contentForm) {
         contentForm.action = actionURL
                 + "?loginUi=mainWindow&redirectURLToLogin="
                 + encodeURIComponent(document.URL) + "&redirectURL="
-                + encodeURIComponent(redirectURL)+"&endpointAlias="+opener.globalEndpointAlias;
+                + encodeURIComponent(redirectURL);
     }
     contentForm.submit();
 }
@@ -58,7 +58,7 @@ function onLoginPageLoad() {
     if (showWrongCredsMessage == "true") {
         document.getElementById("wrongCredsMessage").style.display = "block";
     }
-    if(opener.globalLoginFormStrings){
+    if(opener && opener.globalLoginFormStrings){
         var loginForm = opener.globalLoginFormStrings;
     	document.getElementById('wrongCredsMessage').appendChild(document.createTextNode(loginForm.wrong_creds_message));
     	document.getElementById('basicLoginFormUsername').appendChild(document.createTextNode(loginForm.username));

@@ -81,7 +81,7 @@ public abstract class TestEnvironment {
 	private boolean takeScreenshot;
 	private String screenshotsPath;
 
-    static final public String PROP_ENVIRONMENT                 = "environment"; //$NON-NLS-1$
+    static final public String PROP_ENVIRONMENT                 = "testingEnvironment"; //$NON-NLS-1$
     static final public String PROP_JAVASCRIPT_LIB              = "jslib"; //$NON-NLS-1$
     static final public String PROP_USERNAME                    = "username"; //$NON-NLS-1$
     static final public String PROP_PASSWORD                    = "password"; //$NON-NLS-1$

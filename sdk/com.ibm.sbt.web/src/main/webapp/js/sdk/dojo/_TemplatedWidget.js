@@ -72,7 +72,7 @@ define([ "../_bridge/declare", "dijit/_Widget", "dijit/_Templated","../_bridge/l
             }
         },
         
-        _doAttachPoints: function(scope,el){
+        _doAttachPoints: function(el,scope){
                    var nodes = (el.all || el.getElementsByTagName("*"));
                        for (var i = 0; i < nodes.length; i++) {
                            var attachPoint = (nodes[i].getAttribute) ? nodes[i].getAttribute(this._attachPointAttribute) : null;

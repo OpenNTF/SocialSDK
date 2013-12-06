@@ -44,7 +44,7 @@ return d;
 			<xp:label value="Activity" id="label2" xp:key="header"></xp:label>
 		</xp:this.facets>
 		<xp:text id="computedField1" value="#{javascript:comm.getTitle()}"
-			escape="false">
+			escape="true">
 		</xp:text>
 				
 			</xp:column>

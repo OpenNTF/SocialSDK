@@ -17,6 +17,7 @@
 package com.ibm.sbt.services.client.base;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,14 +38,14 @@ import com.ibm.sbt.services.endpoints.EndpointFactory;
  * @author Carlos Manias
  *
  */
-public abstract class BaseService {
+public abstract class BaseService implements Serializable{
 
 	public static final int						DEFAULT_CACHE_SIZE		= 0;
 	public static final String					DEFAULT_ENDPOINT_NAME	= "connections";
-	protected static HashMap<String, Object>	cache					= new HashMap<String, Object>();
-	protected int								cacheSize;
+	protected transient static HashMap<String, Object>	cache					= new HashMap<String, Object>();
+	protected transient int						cacheSize;
 	protected Handler							dataFormat;
-	protected Endpoint							endpoint;
+	protected transient Endpoint				endpoint;
 
 	/**
 	 * Constructor

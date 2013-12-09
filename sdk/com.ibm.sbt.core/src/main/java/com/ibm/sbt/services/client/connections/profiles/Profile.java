@@ -44,6 +44,7 @@ public class Profile extends BaseEntity{
 		setService(profileService);
 		setAsString(ProfileXPath.uid, id);
 	}
+	public Profile(){}
 
 	public Profile(BaseService svc, DataHandler<?> handler) {
 		super(svc,handler);

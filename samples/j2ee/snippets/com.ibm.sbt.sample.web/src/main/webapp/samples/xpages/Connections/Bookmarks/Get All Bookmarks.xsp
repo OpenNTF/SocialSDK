@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+<xp:panel id="bookmarks1">
+			<xp:label value="List of All Bookmarks:" style="font-size:14pt;font-weight:bold"></xp:label>
+			<xp:br />
+			<xe:dataView id="dataView9" var="bookmark1" rows="5" columnTitles="true" expandedDetail="true">			
+				<xp:this.value>
+					<![CDATA[#{javascript:											
+						var bkmkSvc = new com.ibm.sbt.services.client.connections.bookmarks.BookmarkService("connections");	
+						var bkmks = bkmkSvc.getAllBookmarks();
+						return bkmks;
+					}]]>
+				</xp:this.value>
+				<xe:this.summaryColumn>
+					<xe:viewSummaryColumn columnTitle="Bookmark">
+					</xe:viewSummaryColumn>
+				</xe:this.summaryColumn>
+				<xp:this.facets>
+					<xp:panel xp:key="noRows" id="panel27">
+						<xp:text value="No Bookmarks found">
+						</xp:text>
+					</xp:panel>
+					<xp:panel id="panel28" xp:key="summary" style="white-space:nowrap;">
+						<xp:link escape="true" id="link10"
+							target="_blank" value="#{javascript:return (bookmark1.getHref().substring(0, bookmark1.getHref().indexOf(' http', 6)));}"
+							text="#{javascript:return bookmark1.getTitle();}">
+						</xp:link>
+					</xp:panel>
+					<xp:panel id="panel29" xp:key="detail">
+						<xp:text id="computedField2" value="Description: ">
+						</xp:text>	
+						<xp:inputRichText id="computedField3" value="#{javascript:return bookmark1.getContent();}">
+						</xp:inputRichText>
+					</xp:panel>
+					<xp:pager xp:key="pagerBottomRight" pageCount="5" partialRefresh="true">
+						<xp:pagerControl type="Previous" id="pagerControl25">
+						</xp:pagerControl>
+						<xp:pagerControl type="Group" id="pagerControl26">
+						</xp:pagerControl>
+						<xp:pagerControl type="Next"
+							id="pagerControl27">
+						</xp:pagerControl>
+					</xp:pager>
+				</xp:this.facets>
+			</xe:dataView>
+		</xp:panel>
+
+</xp:view>

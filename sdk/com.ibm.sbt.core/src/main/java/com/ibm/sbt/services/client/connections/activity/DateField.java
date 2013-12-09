@@ -28,6 +28,10 @@ import com.ibm.sbt.services.client.connections.activity.model.ActivityXPath;
  */
 public class DateField extends Field{
 
+//	public DateField(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
+//		super(service, new XmlDataHandler(node, namespaceCtx, xpathExpression));
+//	}
+	
 	public DateField() {
 		super("date");
 	}

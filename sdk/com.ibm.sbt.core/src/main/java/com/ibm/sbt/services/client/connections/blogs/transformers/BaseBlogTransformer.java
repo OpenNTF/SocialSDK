@@ -17,8 +17,10 @@
 package com.ibm.sbt.services.client.connections.blogs.transformers;
 
 import java.util.Map;
+
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.util.XmlTextUtil;
+import com.ibm.sbt.services.client.base.AtomXPath;
 import com.ibm.sbt.services.client.base.transformers.AbstractBaseTransformer;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.blogs.Blog;
@@ -71,13 +73,13 @@ public class BaseBlogTransformer extends AbstractBaseTransformer {
 			if(currentElement.contains(BlogXPath.tags.toString())){
 				tagsXml += getXMLRep(getStream(sourcepath+"CategoryTagTmpl.xml"),"tag",XmlTextUtil.escapeXMLChars(currentValue));
 			}
-			if(currentElement.equalsIgnoreCase(BlogXPath.summary.toString())){
+			if(currentElement.equalsIgnoreCase(AtomXPath.summary.toString())){
 				summaryXml = getXMLRep(getStream(sourcepath+"SummaryTmpl.xml"),currentElement,XmlTextUtil.escapeXMLChars(currentValue));
 			}
-			if(currentElement.equalsIgnoreCase(BlogXPath.content.toString())){
+			if(currentElement.equalsIgnoreCase(AtomXPath.content.toString())){
 				contentXml = getXMLRep(getStream(sourcepath+"ContentTemplate.xml"),currentElement,XmlTextUtil.escapeXMLChars(currentValue));
 			}
-			if(currentElement.equalsIgnoreCase(BlogXPath.title.toString())){
+			if(currentElement.equalsIgnoreCase(AtomXPath.title.toString())){
 				titleXml = getXMLRep(getStream(sourcepath+"TitleTemplate.xml"),currentElement,XmlTextUtil.escapeXMLChars(currentValue));
 			}
 			if(currentElement.equalsIgnoreCase(BlogXPath.handle.toString())){

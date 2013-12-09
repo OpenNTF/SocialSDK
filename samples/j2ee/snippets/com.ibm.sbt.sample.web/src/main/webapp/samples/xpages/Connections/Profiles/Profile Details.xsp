@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core"
-	xmlns:xe="http://www.ibm.com/xsp/coreex" publish="false">
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
 
 	<xp:panel>
 <xe:formTable disableRequiredMarks="false"
@@ -11,7 +11,7 @@
 				<xp:inputText id="fldEmail" style="width:98%;">
 					<xp:this.value><![CDATA[#{javascript:
 						var connProfSvc = new com.ibm.sbt.services.client.connections.profiles.ProfileService();
-						var myProfile = connProfSvc.getProfile(@Endpoint("connections").getUserIdentity());
+						var myProfile = connProfSvc.getMyProfile();
 						return myProfile.getEmail();}]]></xp:this.value>
 				</xp:inputText>
 			</xe:formRow>
@@ -20,7 +20,7 @@
 				<xp:inputText id="fldDepartment" style="width:98%;">
 					<xp:this.value><![CDATA[#{javascript:
 						var connProfSvc = new com.ibm.sbt.services.client.connections.profiles.ProfileService();
-						var myProfile = connProfSvc.getProfile(@Endpoint("connections").getUserIdentity());
+var myProfile = connProfSvc.getMyProfile()
 						return myProfile.getDepartment();}]]></xp:this.value>
 				</xp:inputText>
 			</xe:formRow>
@@ -29,7 +29,7 @@
 				<xp:inputText id="fldLocation" style="width:98%;">
 					<xp:this.value><![CDATA[#{javascript:
 						var connProfSvc = new com.ibm.sbt.services.client.connections.profiles.ProfileService();
-						var myProfile = connProfSvc.getProfile(@Endpoint("connections").getUserIdentity());
+var myProfile = connProfSvc.getMyProfile();
 						return myProfile.getAddress();}]]></xp:this.value>
 				</xp:inputText>
 			</xe:formRow>
@@ -38,8 +38,8 @@
 				<xp:inputText id="fldPhone" style="width:98%;">
 					<xp:this.value><![CDATA[#{javascript:
 						var connProfSvc = new com.ibm.sbt.services.client.connections.profiles.ProfileService();
-						var myProfile = connProfSvc.getProfile(@Endpoint("connections").getUserIdentity());
-						return myProfile.getPhoneNumber();}]]></xp:this.value>
+var myProfile = connProfSvc.getMyProfile();
+						return myProfile.getTelephoneNumber();}]]></xp:this.value>
 				</xp:inputText>
 			</xe:formRow>
 
@@ -47,16 +47,16 @@
 				<xp:inputText id="fldJobTitle" style="width:98%;">
 					<xp:this.value><![CDATA[#{javascript:
 						var connProfSvc = new com.ibm.sbt.services.client.connections.profiles.ProfileService();
-						var myProfile = connProfSvc.getProfile(@Endpoint("connections").getUserIdentity());
-						return myProfile.getTitle();}]]></xp:this.value>
+var myProfile = connProfSvc.getMyProfile();
+						return myProfile.getJobTitle();}]]></xp:this.value>
 				</xp:inputText>
 			</xe:formRow>
 			<xe:formRow label=" Connections Id:" labelPosition="left">
 				<xp:inputText id="inputText1" style="width:98%;">
 					<xp:this.value><![CDATA[#{javascript:
 						var connProfSvc = new com.ibm.sbt.services.client.connections.profiles.ProfileService();
-						var myProfile = connProfSvc.getProfile(@Endpoint("connections").getUserIdentity());
-						return myProfile.getId();}]]></xp:this.value>
+var myProfile = connProfSvc.getMyProfile();
+						return myProfile.getUserid();}]]></xp:this.value>
 				</xp:inputText>
 			</xe:formRow>
 
@@ -68,7 +68,7 @@
 								width="118px" alt="" title="">
 								<xp:this.url><![CDATA[#{javascript:
 						var connProfSvc = new com.ibm.sbt.services.client.connections.profiles.ProfileService();
-						var myProfile = connProfSvc.getProfile(@Endpoint("connections").getUserIdentity());
+var myProfile = connProfSvc.getMyProfile();
 						return myProfile.getThumbnailUrl();}]]></xp:this.url>
 							</xp:image>
 						</xp:td>

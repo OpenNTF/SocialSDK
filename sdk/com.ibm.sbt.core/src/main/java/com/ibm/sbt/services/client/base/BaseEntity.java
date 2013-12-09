@@ -16,21 +16,29 @@
 
 package com.ibm.sbt.services.client.base;
 
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandlerException;
 import com.ibm.sbt.services.client.base.datahandlers.FieldEntry;
+import com.ibm.sbt.services.endpoints.AbstractEndpoint;
+import com.ibm.sbt.services.endpoints.Endpoint;
+import com.ibm.sbt.services.endpoints.EndpointFactory;
 
 /**
  * This class provides acts as a base class for all the entities, implementing some behaviour common to all Entities 
  * @author Carlos Manias
  *
  */
-public class BaseEntity {
+public class BaseEntity implements Externalizable {
 
 	private BaseService svc;
 	protected DataHandler<?> dataHandler;
@@ -376,11 +384,44 @@ public class BaseEntity {
 		return dataHandler;
 	}
 	
+	public void setDataHandler(DataHandler<?> dataHandler){
+		this.dataHandler = dataHandler;
+	}
 	/**
 	 * 
 	 * @return fields map
 	 */
 	public Map<String, Object> getFieldsMap(){
 		return fields;
+	}
+	@Override
+	public void readExternal(ObjectInput inputStream) throws IOException, ClassNotFoundException {
+		// Retrieve the entity data(handler), service and endpoint name
+		Map<String, Object> changedfields = (Map<String, Object>) inputStream.readObject();
+		DataHandler<?> dataHandler = (DataHandler<?>) inputStream.readObject();
+		String endpointName = inputStream.readUTF();
+		BaseService service = (BaseService) inputStream.readObject();
+		Endpoint endPoint = EndpointFactory.getEndpoint(endpointName);
+		
+
+		fields = changedfields;
+		setDataHandler(dataHandler);
+		service.setEndpoint(endPoint);
+		setService(service);
+	}
+
+	@Override
+	public void writeExternal(ObjectOutput outputStream) throws IOException {
+	
+		// Serialize the data elements
+		outputStream.writeObject(fields);	   // persist fields that could have been changed
+		outputStream.writeObject(dataHandler); 
+
+		// persist the endpoint name
+		outputStream.writeUTF(((AbstractEndpoint)getService().getEndpoint()).getName());
+
+		// persist the service name
+		outputStream.writeObject(getService());
+
 	}
 }

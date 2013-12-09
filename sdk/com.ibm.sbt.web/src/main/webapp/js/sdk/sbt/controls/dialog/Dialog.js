@@ -17,9 +17,11 @@
 /**
  * 
  */
-define([ "../../declare", "../../lang", "../../widget/_TemplatedDialog",
+define([ "../../declare", "../../lang",
+         "../../i18n!./nls/dialog",
+         "../../widget/_TemplatedDialog",
          "../../text!./templates/Dialog.html" ], 
-        function(declare, lang, _TemplatedDialog, DialogTemplate) {
+        function(declare, lang, nls, _TemplatedDialog, DialogTemplate) {
 
     /**
      * @class Dialog
@@ -28,8 +30,12 @@ define([ "../../declare", "../../lang", "../../widget/_TemplatedDialog",
      */
     var Dialog = declare([ _TemplatedDialog ], {
     	
+    	dialogStyle : "width: 525px;",
+    	
     	templateString : DialogTemplate,
-
+    	
+    	buttonClass : "lotusFormButton",
+    	
         /**
          * Constructor method for the grid.
          * Creates a default store and renderer, if none have been already created
@@ -37,11 +43,18 @@ define([ "../../declare", "../../lang", "../../widget/_TemplatedDialog",
          * @param args
          */
         constructor: function(args) {
-            lang.mixin(this, args);
+			this.nls = lang.mixin({}, nls, args.nls || {});
+			if (args.nls) {
+				delete args.nls;
+			}
+			
+            lang.mixin(this, args || {});
         },
         
         /**
          * Construct the UI for this dialog from a template, setting this.domNode.
+         * 
+         * @method buildRendering
          */
 		buildRendering: function() {
 			this.inherited(arguments);
@@ -54,10 +67,42 @@ define([ "../../declare", "../../lang", "../../widget/_TemplatedDialog",
 						templateString : widget
 					});
 				}
+				widget.dialog = this;
 				
 				this.widget = widget;
 				this.contentNode.appendChild(widget.domNode);
 			}
+			
+			// optionally hide the execute and Cancel buttons
+			if (this.hideExecute && this.executeButton) {
+				this.executeButton.style.display = "none";
+			}
+			if (this.hideCancel && this.cancelButton) {
+				this.cancelButton.style.display = "none";
+			}
+		},
+		
+		/**
+		 * Add a new button to the dialog
+		 * 
+		 * @method addButton
+		 * @param label
+		 * @param style
+		 * @param callback
+		 */
+		addButton: function(label, style, callback) {
+            var button = dom.create("input", {
+                type: "button",
+            	"class": this.buttonClass,
+            	"style": style || "",
+                role: "button",
+                value: label || ""
+            }, this.buttonsNode);
+            if (callback) {
+            	button.onclick = callback;
+            }
+            this.buttonsNode.appendChild(button);
+            return button;
 		}
     });
     

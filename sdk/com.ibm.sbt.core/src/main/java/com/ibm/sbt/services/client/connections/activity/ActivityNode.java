@@ -22,8 +22,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+
 import com.ibm.commons.util.StringUtil;
+import com.ibm.commons.xml.NamespaceContext;
+import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.Response;
+import com.ibm.sbt.services.client.base.AtomXPath;
+import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.activity.feedHandler.BookmarkFieldFeedHandler;
@@ -33,6 +41,7 @@ import com.ibm.sbt.services.client.connections.activity.feedHandler.PersonFieldF
 import com.ibm.sbt.services.client.connections.activity.feedHandler.TextFieldFeedHandler;
 import com.ibm.sbt.services.client.connections.activity.model.ActivityXPath;
 import com.ibm.sbt.services.client.connections.activity.transformers.ActivityTransformer;
+import com.ibm.sbt.services.client.connections.files.model.Author;
 
 /**
  * Activity Node Model Class representing an Activity Node Object
@@ -45,6 +54,10 @@ public class ActivityNode extends Activity {
 	public FieldList fieldElements; 
 	
 	public ActivityNode() {
+	}
+	
+	public ActivityNode(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
+		super(service, new XmlDataHandler(node, namespaceCtx, xpathExpression));
 	}
 	
 	/**
@@ -207,7 +220,8 @@ public class ActivityNode extends Activity {
 	 */
 	public FieldList getTextFields(){
 		TextFieldFeedHandler txtHandler = new TextFieldFeedHandler(getService());
-		Response response = new Response(getDataHandler().getData());
+		Document doc = (Document) getDataHandler().getData();
+		Response response = new Response(doc);
 		return txtHandler.createEntityList(response);
 	}
 	
@@ -339,10 +353,8 @@ public class ActivityNode extends Activity {
 		fields.putAll(newUpdatedFields);
 	}
 	
-	@Override
-	public TagList getTags() throws ActivityServiceException {
+	public TagList getTags()  throws ActivityServiceException {
 		return this.getService().getActivityNodeTags(this.getActivityId());
 	}
-	
 }
 

@@ -9,10 +9,10 @@
         <dependent-module archiveName="com.ibm.sbt.samples.commons-1.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/com.ibm.sbt.samples.commons/com.ibm.sbt.samples.commons">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="com.ibm.commons-1.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/com.ibm.commons/com.ibm.commons">
+        <dependent-module archiveName="com.ibm.commons-9.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/com.ibm.commons/com.ibm.commons">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="com.ibm.commons.xml-1.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/com.ibm.commons.xml/com.ibm.commons.xml">
+        <dependent-module archiveName="com.ibm.commons.xml-9.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/com.ibm.commons.xml/com.ibm.commons.xml">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="com.ibm.commons.runtime-1.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/com.ibm.commons.runtime/com.ibm.commons.runtime">

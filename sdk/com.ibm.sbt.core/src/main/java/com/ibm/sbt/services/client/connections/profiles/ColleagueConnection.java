@@ -31,6 +31,7 @@ import com.ibm.sbt.services.client.connections.profiles.model.ColleagueConnectio
 public class ColleagueConnection extends AtomEntity{
 
 	private final String CONNECTIONID = "tag:profiles.ibm.com,2006:entry";
+	
 	/**
 	 * Constructor
 	 *  
@@ -39,6 +40,7 @@ public class ColleagueConnection extends AtomEntity{
 	public ColleagueConnection(ProfileService svc) {
 		super(svc);
 	}
+	
 	/**
 	 * Constructor
 	 *  
@@ -48,6 +50,7 @@ public class ColleagueConnection extends AtomEntity{
 	public ColleagueConnection(BaseService svc,XmlDataHandler handler) {
 		super(svc, handler);
 	}
+	
 	/**
 	 * Constructor
 	 *  

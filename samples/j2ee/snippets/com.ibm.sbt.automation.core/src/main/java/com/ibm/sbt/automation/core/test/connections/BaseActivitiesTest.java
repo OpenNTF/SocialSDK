@@ -74,9 +74,7 @@ public class BaseActivitiesTest extends BaseApiTest {
 		Member member = null;
 		try {
 			member = new Member(activityService, memberId);
-			activityService.addMember(activityId, member);
-			MemberList memberList = activityService.getMembers(activityId);
-			member = memberList.get(0);
+			member = activityService.addMember(activityId, member);
 			Trace.log("Created Test Member " + member.getMemberId() + " in activity " + activityId);
 		} catch (ActivityServiceException e) {
 			e.printStackTrace();

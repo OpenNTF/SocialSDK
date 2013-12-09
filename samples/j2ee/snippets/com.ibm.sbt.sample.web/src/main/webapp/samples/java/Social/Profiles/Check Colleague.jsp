@@ -35,13 +35,13 @@
 	
 		String sourceUserId = Context.get().getProperty("sample.id1");
 		String targetUserId;
-		ProfileService connProfSvc = new ProfileService();
+		ProfileService connProfSvc = new ProfileService(); 
 		ColleagueConnectionList colleagues = connProfSvc.getColleagueConnections(sourceUserId);
 		if(colleagues != null && ! colleagues.isEmpty()) {
 			ColleagueConnection colleague = colleagues.iterator().next();
 			targetUserId = colleague.getAuthor().getId();
 			ColleagueConnection connection = connProfSvc.checkColleague(sourceUserId, targetUserId);
-			out.println("connection Id : "+connection.getConnectionId());
+			out.println("connectionId : "+connection.getConnectionId());
 		}
 		else
 			out.println("no colleagues exist for the user");

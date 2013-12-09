@@ -16,7 +16,11 @@
 
 package com.ibm.sbt.services.client.connections.blogs;
 
+import org.w3c.dom.Node;
+
 import com.ibm.commons.util.StringUtil;
+import com.ibm.commons.xml.NamespaceContext;
+import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
 import com.ibm.sbt.services.client.connections.blogs.model.BaseBlogEntity;
@@ -43,13 +47,15 @@ public class Blog extends BaseBlogEntity {
 	}
 	/**
      * Constructor
-     *
-     * @param BlogService
-     * @param DataHandler
+     * @param BaseService
+     * @param Node
+     * @param NamespaceContext
+     * @param XPathExpression
      */
-	public Blog(BaseService svc, DataHandler<?> handler) {
-		super(svc,handler);
+	public Blog(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
+		super(service, node, namespaceCtx, xpathExpression);
 	}
+	
    /**
 	* Sets id of IBM Connections blog.
 	*
@@ -104,24 +110,6 @@ public class Blog extends BaseBlogEntity {
 	*/
 	public void setTimeZone(String handle) {
         setAsString(BlogXPath.timeZone, handle);
-    }
-	/**
-	* Returns the summary of the Blog
-	*
-	* @method getSummary
-	* @return {String} Blog summary
-	*/
-	public String getSummary() throws BlogServiceException{
-		return getAsString(BlogXPath.summary);
-	}
-	/**
-	* Sets the summary of the Blog
-	*
-	* @method setSummary
-	* @param summary
-	*/
-	public void setSummary(String summary) {
-        setAsString(BlogXPath.summary, summary);
     }
 	/**
 	 * This method creates the blog on the server

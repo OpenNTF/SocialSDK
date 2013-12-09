@@ -19,10 +19,12 @@ package com.ibm.sbt.services.client.connections.blogs;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
+import com.ibm.sbt.services.client.base.AtomXPath;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.util.EntityUtil;
@@ -500,9 +502,9 @@ public class BlogService extends BaseService {
 			throw new BlogServiceException(null,"null blog");
 		}
 		try {
-			if(blog.getFieldsMap().get(BlogXPath.title)== null)
+			if(blog.getFieldsMap().get(AtomXPath.title)== null)
 				blog.setTitle(blog.getTitle());
-			if(blog.getFieldsMap().get(BlogXPath.summary)== null)
+			if(blog.getFieldsMap().get(AtomXPath.summary)== null)
 				blog.setSummary(blog.getSummary());
 			if(!blog.getFieldsMap().toString().contains(BlogXPath.tags.toString()))
 				blog.setTags(blog.getTags());
@@ -672,9 +674,9 @@ public class BlogService extends BaseService {
 			throw new BlogServiceException(null,"null post");
 		}
 		try {
-			if(post.getFieldsMap().get(BlogXPath.title)== null)
+			if(post.getFieldsMap().get(AtomXPath.title)== null)
 				post.setTitle(post.getTitle());
-			if(post.getFieldsMap().get(BlogXPath.content)== null)
+			if(post.getFieldsMap().get(AtomXPath.content)== null)
 				post.setContent(post.getContent());
 			if(!post.getFieldsMap().toString().contains(BlogXPath.tags.toString()))
 				post.setTags(post.getTags());

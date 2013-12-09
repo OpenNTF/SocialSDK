@@ -22,12 +22,12 @@ import java.util.List;
 import org.w3c.dom.Node;
 
 import com.ibm.commons.util.StringUtil;
+import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.xpath.XPathExpression;
+import com.ibm.sbt.services.client.base.AtomEntity;
 import com.ibm.sbt.services.client.base.AtomXPath;
-import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.ConnectionsConstants;
-import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.connections.blogs.BlogService;
 import com.ibm.sbt.services.client.connections.blogs.BlogServiceException;
@@ -39,7 +39,7 @@ import com.ibm.sbt.services.client.connections.blogs.BlogServiceException;
  */
 
 
-public class BaseBlogEntity extends BaseEntity {
+public class BaseBlogEntity extends AtomEntity {
 	
 	private final String BLOGID = "urn:lsid:ibm.com:blogs:blog-";
 	private final String POSTID = "urn:lsid:ibm.com:blogs:entry-";
@@ -52,17 +52,20 @@ public class BaseBlogEntity extends BaseEntity {
      * @param id
      */
 	public BaseBlogEntity(BlogService blogService, String id) {
+		super(blogService,id);
 		setService(blogService);
 		setAsString(BlogXPath.uid, id);
 	}
-	 /**
+	
+	/**
      * Constructor
-     *
-     * @param BlogService
-     * @param DataHandler
+     * @param BaseService
+     * @param Node
+     * @param NamespaceContext
+     * @param XPathExpression
      */
-	public BaseBlogEntity(BaseService svc, DataHandler<?> handler) {
-		super(svc,handler);
+	public BaseBlogEntity(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
+		super(service, node, namespaceCtx, xpathExpression);
 	}
 	/**
 	* Returns the Uuid of the Blog,post or comment
@@ -85,53 +88,19 @@ public class BaseBlogEntity extends BaseEntity {
 		}
 		return id;
 	}
-    /**
-	* Returns the published date
-	*
-	* @method getPublished
-	* @return Published date
-	*/
-	public String getPublished(){
-		return getAsString(BlogXPath.published);
-		
-	}
+   
 	/**
 	* Gets an author of IBM Connections Blog.
 	*
 	* @method getAuthor
 	* @return Author
 	*/
+	@Override
 	public Author getAuthor(){
 		return new Author(getService(),new XmlDataHandler((Node)this.getDataHandler().getData(), 
 	    		ConnectionsConstants.nameSpaceCtx, (XPathExpression)AtomXPath.author.getPath()));
 	}
-	  /**
-	* Returns the updated date
-	*
-	* @method getUpdated
-	* @return Updated date
-	*/
-	public String getUpdated(){
-		return getAsString(BlogXPath.updated);
-	}
-	/**
-	* Returns the title
-	*
-	* @method getTitle
-	* @return title
-	*/
-	public String getTitle(){
-		return getAsString(BlogXPath.title);
-	}
-	 /**
-	* Returns the alternate url
-	*
-	* @method getAlternateUrl
-	* @return alternate url
-	*/
-	public String getAlternateUrl() throws BlogServiceException{
-		return getAsString(BlogXPath.alternateUrl);
-	}
+	
 	/**
 	* Return the Recommendations count
 	*
@@ -141,15 +110,7 @@ public class BaseBlogEntity extends BaseEntity {
 	public String getRecommendationsCount() throws BlogServiceException{
 		return getAsString(BlogXPath.recommendationsCount);
 	}
-	/**sets the title
-    *
-    * @method setTitle()
-    *
-    * @param title
-    */
-	public void setTitle(String title) {
-		setAsString(BlogXPath.title, title);
-	}
+	
 	/**Returns the list of Tags
     *
     * @method getTags()

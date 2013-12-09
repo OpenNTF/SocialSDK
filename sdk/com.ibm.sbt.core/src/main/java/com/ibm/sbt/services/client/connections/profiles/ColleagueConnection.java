@@ -17,106 +17,48 @@ o * © Copyright IBM Corp. 2013
 package com.ibm.sbt.services.client.connections.profiles;
 
 
-import com.ibm.sbt.services.client.base.BaseEntity;
+import org.w3c.dom.Node;
+
+import com.ibm.commons.util.StringUtil;
+import com.ibm.commons.xml.NamespaceContext;
+import com.ibm.commons.xml.xpath.XPathExpression;
+import com.ibm.sbt.services.client.base.AtomEntity;
+import com.ibm.sbt.services.client.base.AtomXPath;
 import com.ibm.sbt.services.client.base.BaseService;
-import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
-import com.ibm.sbt.services.client.connections.profiles.model.ColleagueConnectionXPath;
 
-public class ColleagueConnection extends BaseEntity{
+public class ColleagueConnection extends AtomEntity{
 
-	public ColleagueConnection(BaseService svc, DataHandler<?> handler) {
-		super(svc, handler);
+	private final String CONNECTIONID = "tag:profiles.ibm.com,2006:entry";
+
+	public ColleagueConnection(ProfileService svc) {
+		super(svc);
 	}
-	
+
+	public ColleagueConnection(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
+
+		super(service, node, namespaceCtx, xpathExpression);
+
+	}
+
+
+
 	/**
 	 * @return the title
 	 */
 	public String getConnectionId() {
-		String selfLink = getSelfLink();
-		String connectionId = selfLink.substring(selfLink.lastIndexOf("=")+1,selfLink.length());
-		return connectionId;
+		String id = getId();
+		if(StringUtil.isNotEmpty(id)){
+			if(StringUtil.startsWithIgnoreCase(id, CONNECTIONID)){
+				id = id.substring(CONNECTIONID.length());
+			}
+		}
+		return id;
 	}
+
 
 	public void setConnectionId(String connectionId) {
-		setAsString(ColleagueConnectionXPath.id, connectionId);
-	}
-	/**
-	 * @return the title
-	 */
-	public String getTitle() {
-		return getAsString(ColleagueConnectionXPath.title);
+		setAsString(AtomXPath.id, connectionId);
 	}
 
-	public void setTitle(String title) {
-		setAsString(ColleagueConnectionXPath.title, title);
-	}
-
-
-	/**
-	 * @return the content
-	 */
-	public String getContent() {
-		return getAsString(ColleagueConnectionXPath.content);
-	}
-
-	/**
-	 * @return the Contributor Name
-	 */
-	public String getContributorName() {
-		return getAsString(ColleagueConnectionXPath.contributorName);
-	}
-
-	/**
-	 * @return the Contributor UserId
-	 */
-	public String getContributorUserId() {
-		return getAsString(ColleagueConnectionXPath.contributorUserId);
-	}
-
-	/**
-	 * @return the Contributor Email
-	 */
-	public String getContributorEmail() {
-		return getAsString(ColleagueConnectionXPath.contributorEmail);
-	}
-
-	/**
-	 * @return the Author Name
-	 */
-	public String getAuthorName() {
-		return getAsString(ColleagueConnectionXPath.authorName);
-	}
-
-	/**
-	 * @return the Author UserId
-	 */
-	public String getAuthorUserId() {
-		return getAsString(ColleagueConnectionXPath.authorUserId);
-	}
-
-	/**
-	 * @return the Author Email
-	 */
-	public String getAuthorEmail() {
-		return getAsString(ColleagueConnectionXPath.authorEmail);
-	}
-	
-	public void setContent(String content) {
-		setAsString(ColleagueConnectionXPath.content, content);
-	}
-
-	public String getUpdated() {
-		return getAsString(ColleagueConnectionXPath.updated);
-	}
-
-	public String getSelfLink(){
-		return getAsString(ColleagueConnectionXPath.selfLinkFromEntry);
-	}
-
-	public String getEditLink(){
-		return getAsString(ColleagueConnectionXPath.editLinkFromEntry);
-	}
-	
-	
 
 }

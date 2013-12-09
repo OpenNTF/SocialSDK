@@ -839,7 +839,7 @@ public class ProfileService extends BaseService {
 	 * @throws ProfileServiceException 
 	 */
 	protected Object constructSendInviteRequestBody(String inviteMsg) throws TransformerException, ProfileServiceException {
-		ColleagueConnection colleagueConnection = new ColleagueConnection(this, null);
+		ColleagueConnection colleagueConnection = new ColleagueConnection(this);
 		colleagueConnection.setContent(inviteMsg);
 		ColleagueConnectionTransformer transformer = new ColleagueConnectionTransformer(colleagueConnection);
 		String xml = transformer.createTransform(colleagueConnection.getFieldsMap());

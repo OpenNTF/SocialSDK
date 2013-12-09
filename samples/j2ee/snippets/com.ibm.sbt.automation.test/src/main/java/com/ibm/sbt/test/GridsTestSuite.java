@@ -27,6 +27,7 @@ import com.ibm.sbt.test.controls.ForumGridTestSuite;
 import com.ibm.sbt.test.controls.GridTestSuite;
 import com.ibm.sbt.test.controls.MySocialGridTestSuite;
 import com.ibm.sbt.test.controls.ProfilesGridTestSuite;
+import com.ibm.sbt.test.controls.widget.WidgetBaseClassTest;
 
 
 /**
@@ -35,7 +36,7 @@ import com.ibm.sbt.test.controls.ProfilesGridTestSuite;
  * @date 12 Mar 2013
  */
 @RunWith(Suite.class)
-@SuiteClasses({ GridTestSuite.class, CommunitiesGridTestSuite.class, FilesGridTestSuite.class, ForumGridTestSuite.class, ProfilesGridTestSuite.class, MySocialGridTestSuite.class})
+@SuiteClasses({ WidgetBaseClassTest.class,GridTestSuite.class, CommunitiesGridTestSuite.class, FilesGridTestSuite.class, ForumGridTestSuite.class, ProfilesGridTestSuite.class, MySocialGridTestSuite.class})
 public class GridsTestSuite {
     @AfterClass
     public static void cleanup() {

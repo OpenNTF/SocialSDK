@@ -68,7 +68,7 @@ public class SSOEndpoint extends AbstractEndpoint {
 	public void authenticate(boolean force) throws ClientServicesException {
     	  if(force || !isAuthenticated()) {
               String authPage = getAuthenticationPage();
-           	Context context = Context.get();
+              Context context = Context.get();
               if(StringUtil.isNotEmpty(authPage)) {
               	try{
               		if(!UrlUtil.isAbsoluteUrl(authPage)){
@@ -82,7 +82,7 @@ public class SSOEndpoint extends AbstractEndpoint {
                   	String servletPath = ServiceServlet.getServletPath();
                   	String basicProxyUrl = AuthCredsHandler.URL_PATH;
                       
-                  	//constructing proxy action url
+                  	// constructing proxy action url
                   	String postToProxy = PathUtil.concat(baseUrl, servletPath, '/');
                   	postToProxy = PathUtil.concat(postToProxy,basicProxyUrl, '/');
                   	postToProxy = PathUtil.concat(postToProxy,endPointName, '/');
@@ -99,10 +99,9 @@ public class SSOEndpoint extends AbstractEndpoint {
                   	authPage = PathUtil.concat(authPage,"redirectURL",'&');
                   	authPage = PathUtil.concat(authPage,redirectUrl,'=');
                   	context.sendRedirect(authPage);
-                         
                       
               	} catch (IOException e) {
-              		throw new ClientServicesException(null,"LTPA token expired or invalid. Cannot refresh: authentication page is not set");
+              		throw new ClientServicesException(e,"LTPA token refresh failed because: "+e.getMessage());
               	}
               } else {
               	throw new ClientServicesException(null,"LTPA token expired or invalid. Cannot refresh: authentication page is not set");

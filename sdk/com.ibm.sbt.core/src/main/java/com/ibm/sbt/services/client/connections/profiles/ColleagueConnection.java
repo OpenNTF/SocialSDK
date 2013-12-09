@@ -25,6 +25,7 @@ import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.base.AtomEntity;
 import com.ibm.sbt.services.client.base.AtomXPath;
 import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.connections.profiles.model.ColleagueConnectionXPath;
 
 public class ColleagueConnection extends AtomEntity{
 
@@ -58,6 +59,55 @@ public class ColleagueConnection extends AtomEntity{
 
 	public void setConnectionId(String connectionId) {
 		setAsString(AtomXPath.id, connectionId);
+	}
+	
+	/**
+	 * @return the Contributor Name
+	 * @deprecated
+	 */
+	public String getContributorName() {
+		return getAsString(ColleagueConnectionXPath.contributorName);
+	}
+
+	/**
+	 * @return the Contributor UserId
+	 * @deprecated
+	 */
+	public String getContributorUserId() {
+		return getAsString(ColleagueConnectionXPath.contributorUserId);
+	}
+
+	/**
+	 * @return the Contributor Email
+	 * @deprecated
+	 */
+	public String getContributorEmail() {
+		return getAsString(ColleagueConnectionXPath.contributorEmail);
+	}
+
+	/**
+	 * @return the Author Name
+	 * @deprecated
+	 */
+	public String getAuthorName() {
+		return getAsString(ColleagueConnectionXPath.authorName);
+	}
+
+	/**
+	 * @return the Author UserId
+	 * @deprecated
+	 */
+	public String getAuthorUserId() {
+		System.out.println(getAsString(ColleagueConnectionXPath.authorUserId));
+		return getAsString(ColleagueConnectionXPath.authorUserId);
+	}
+
+	/**
+	 * @return the Author Email
+	 * @deprecated
+	 */
+	public String getAuthorEmail() {
+		return getAsString(ColleagueConnectionXPath.authorEmail);
 	}
 
 

@@ -1,0 +1,121 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>com.ibm.sbt.opensocial.domino.explorer</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>eclipse-plugin</packaging>
+  <description>Provides the OpenSocial Explorer JavaScript</description>
+
+  <parent>
+    <groupId>com.ibm.sbt</groupId>
+    <artifactId>com.ibm.sbt.domino</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+
+  <!-- ====================================================================== -->
+  <!-- P R O P E R T I E S -->
+  <!-- ====================================================================== -->
+  <properties>
+    <opensocial-explorer-webcontent.version>0.0.2</opensocial-explorer-webcontent.version>
+    <com.github.goldin.version>0.2.5</com.github.goldin.version>    
+  </properties>
+  
+  <!-- ====================================================================== -->
+  <!-- R E P O S I T O R I E S -->
+  <!-- ====================================================================== -->
+  <repositories>
+    <repository>
+      <releases>
+        <enabled>false</enabled>
+        <updatePolicy>always</updatePolicy>
+        <checksumPolicy>warn</checksumPolicy>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>daily</updatePolicy>
+        <checksumPolicy>fail</checksumPolicy>
+      </snapshots>
+      <id>sonatype-snapshots</id>
+      <name>Sonatype Snapshots Repo</name>
+      <url>https://oss.sonatype.org/content/groups/public</url>
+    </repository>
+  </repositories>
+
+  <!-- ====================================================================== -->
+  <!-- B U I L D -->
+  <!-- ====================================================================== -->
+  <build>
+  	<defaultGoal>package</defaultGoal>
+    <plugins>
+      <plugin>
+        <groupId>com.github.goldin</groupId>
+        <artifactId>copy-maven-plugin</artifactId>
+        <version>${com.github.goldin.version}</version>
+        <executions>
+          <execution>
+            <id>unpack-webcontent</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>copy</goal>
+            </goals>
+            <configuration>
+              <resources>
+                <resource>
+                  <unpack>true</unpack>
+                  <targetPath>${project.build.directory}/webcontent</targetPath>
+                  <dependencies>
+                    <dependency>
+                      <groupId>org.opensocial.explorer</groupId>
+                      <artifactId>opensocial-explorer-webcontent</artifactId>
+                      <version>${opensocial-explorer-webcontent.version}</version>
+                    </dependency>
+                  </dependencies>
+                </resource>
+                <resource>
+                  <targetPath>${project.basedir}/WebContent/js</targetPath>
+                  <directory>${project.build.directory}/webcontent/js/modules</directory>
+                  <preservePath>true</preservePath>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+          <!-- Runs during the Maven clean phase to remove the copied files -->
+          <execution>
+            <id>clean-explorer</id>
+            <phase>clean</phase>
+            <goals>
+              <goal>copy</goal>
+            </goals>
+            <configuration>
+              <resources>
+                <resource>
+                  <directory>${project.basedir}/WebContent/js</directory>
+                  <includes>
+                    <include>**/*.js</include>
+                    <include>**/*.html</include>
+                    <include>**/*.xml</include>
+                  </includes>
+                  <clean>true</clean>
+                  <cleanEmptyDirectories>true</cleanEmptyDirectories>
+                  <!-- If we can't find the directory that means we are starting from a clean state, don't fail -->
+                  <failIfNotFound>false</failIfNotFound>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <!-- ====================================================================== -->
+  <!-- D E P E N D E N C I E S -->
+  <!-- ====================================================================== -->
+  <dependencies>
+    <dependency>
+      <groupId>org.opensocial.explorer</groupId>
+      <artifactId>opensocial-explorer-webcontent</artifactId>
+      <version>${opensocial-explorer-webcontent.version}</version>
+    </dependency>    
+  </dependencies>
+</project>

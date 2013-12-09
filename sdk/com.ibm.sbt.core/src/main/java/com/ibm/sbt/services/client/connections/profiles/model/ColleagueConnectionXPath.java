@@ -6,6 +6,7 @@ import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.base.datahandlers.FieldEntry;
 
 public enum ColleagueConnectionXPath implements FieldEntry {
+	
 	authorName("./snx:connection/a:contributor[@snx:rel=\"http://www.ibm.com/xmlns/prod/sn/connection/source\"]/a:name"),
 	authorUserId("./snx:connection/a:contributor[@snx:rel=\"http://www.ibm.com/xmlns/prod/sn/connection/source\"]/snx:userid"),
 	authorEmail("./snx:connection/a:contributor[@snx:rel=\"http://www.ibm.com/xmlns/prod/sn/connection/source\"]/a:email"),

@@ -98,7 +98,6 @@ public class ColleagueConnection extends AtomEntity{
 	 * @deprecated
 	 */
 	public String getAuthorUserId() {
-		System.out.println(getAsString(ColleagueConnectionXPath.authorUserId));
 		return getAsString(ColleagueConnectionXPath.authorUserId);
 	}
 

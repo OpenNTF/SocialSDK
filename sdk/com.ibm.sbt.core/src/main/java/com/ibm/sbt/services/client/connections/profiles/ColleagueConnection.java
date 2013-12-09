@@ -25,23 +25,40 @@ import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.base.AtomEntity;
 import com.ibm.sbt.services.client.base.AtomXPath;
 import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.connections.profiles.model.ColleagueConnectionXPath;
 
 public class ColleagueConnection extends AtomEntity{
 
 	private final String CONNECTIONID = "tag:profiles.ibm.com,2006:entry";
-
+	/**
+	 * Constructor
+	 *  
+	 * @param BaseService
+	 */
 	public ColleagueConnection(ProfileService svc) {
 		super(svc);
 	}
-
-	public ColleagueConnection(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
-
-		super(service, node, namespaceCtx, xpathExpression);
-
+	/**
+	 * Constructor
+	 *  
+	 * @param BaseService
+	 * @param XmlDataHandler 
+	 */
+	public ColleagueConnection(BaseService svc,XmlDataHandler handler) {
+		super(svc, handler);
 	}
-
-
+	/**
+	 * Constructor
+	 *  
+	 * @param BaseService
+	 * @param Node
+	 * @param NamespaceContext
+	 * @param XPathExpression 
+	 */
+	public ColleagueConnection(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
+		super(service, node, namespaceCtx, xpathExpression);
+	}
 
 	/**
 	 * @return the title

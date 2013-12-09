@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+<xp:panel id="panel40">
+			<xp:label value="Most Clicked Bookmarks:" style="font-size:14pt;font-weight:bold"></xp:label>
+			<xp:br />
+			<xe:dataView id="dataView12" var="bookmark3" rows="5" columnTitles="true" expandedDetail="true">			
+				<xp:this.value>
+					<![CDATA[#{javascript:											
+						var bkmkSvc = new com.ibm.sbt.services.client.connections.bookmarks.BookmarkService("connections");	
+						var bkmks = bkmkSvc.getAllBookmarks();
+						var list3 = new Array();
+						
+						for (thebm in bkmks) {
+							var bmTitle = thebm.getTitle();
+							var bmContent = thebm.getContent();
+							var clickCount = thebm.getClickCount();
+							var href = thebm.getHref().substring(0, thebm.getHref().indexOf(' http', 6));
+							var stats = {
+								title: bmTitle,
+								clicks: clickCount,
+								content: bmContent,
+								url: href
+							};
+							list3.push(stats);
+						}
+						
+						var sorted2 = list3.sort(function(obj1, obj2){
+							return obj1.clicks - obj2.clicks;
+						});
+						sorted2.reverse();
+						return sorted2;
+					}]]>
+				</xp:this.value>
+				<xe:this.summaryColumn>
+					<xe:viewSummaryColumn columnTitle="Bookmark">
+					</xe:viewSummaryColumn>
+				</xe:this.summaryColumn>
+				<xe:this.extraColumns>
+					<xe:viewExtraColumn columnTitle="Clicks"></xe:viewExtraColumn>
+				</xe:this.extraColumns>
+				<xp:this.facets>
+					<xp:panel xp:key="noRows" id="panel41">
+						<xp:text value="No Bookmarks found">
+						</xp:text>
+					</xp:panel>
+					<xp:panel id="panel42" xp:key="summary" style="white-space:nowrap;">
+						<xp:link escape="true" id="link14"
+							target="_blank" value="#{javascript:bookmark3.url;}"
+							text="#{javascript:bookmark3.title;}">
+						</xp:link>
+					</xp:panel>
+					<xp:panel id="panel43" xp:key="detail">
+						<xp:text id="computedField16" value="Description: ">
+						</xp:text>	
+						<xp:inputRichText id="inputRichText6" value="#{javascript:bookmark3.content;}">
+						</xp:inputRichText>
+					</xp:panel>
+					<xp:panel id="panel44" xp:key="extra0" style="width:45%;white-space:nowrap;">
+						<xp:text escape="true" id="computedField17" value="#{javascript:return Math.floor(bookmark3.clicks) + '';}"></xp:text>
+					</xp:panel>
+					<xp:pager xp:key="pagerBottomRight" pageCount="5" partialRefresh="true">
+						<xp:pagerControl type="Previous" id="pagerControl37">
+						</xp:pagerControl>
+						<xp:pagerControl type="Group" id="pagerControl38">
+						</xp:pagerControl>
+						<xp:pagerControl type="Next"
+							id="pagerControl39">
+						</xp:pagerControl>
+					</xp:pager>
+				</xp:this.facets>
+			</xe:dataView>
+		</xp:panel>
+</xp:view>

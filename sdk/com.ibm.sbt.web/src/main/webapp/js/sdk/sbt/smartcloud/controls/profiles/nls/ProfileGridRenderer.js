@@ -25,7 +25,8 @@ define({
       email: "Email:",
       altEmail: "Alternate Email",
       clickToEmail: "Click here to email the user, using their alternate email address",
-      ariaVcard: "Press control and enter for the business card"
+      ariaVcard: "Press control and enter for the business card",
+      communityIdError: "Community Uuid must not be empty"
   }
 });
 

@@ -21,7 +21,7 @@
  */
 define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
 
-    return lang.mixin({
+    return lang.mixin({}, conn, {
         
         /**
          * Public community
@@ -100,6 +100,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
             tags : "a:category[not(@scheme)]/@term",
             memberCount : "snx:membercount",
             communityType : "snx:communityType",
+            communityUrl : "a:link[@rel='alternate']/@href",
             isExternal : "snx:isExternal"
         }),
         
@@ -324,5 +325,5 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          */
         AtomCommunityInvites : "/${communities}/service/atom/community/invites"
         
-    }, conn);
+    });
 });

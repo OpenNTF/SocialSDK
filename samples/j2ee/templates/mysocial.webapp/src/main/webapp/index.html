@@ -30,11 +30,17 @@
 		padding-bottom: 40px;
 	}
 	</style>
+	
+	<!-- SmartCloud Navigation Bar -->
+	<!-- 
+	<link rel="stylesheet" href="https://apps.ce.collabserv.com/theming/theme/css/3" type="text/css" />
+	-->
 
 	<script type="text/javascript" src="/mysocial.webapp/library?lib=dojo&ver=1.8.0"></script>
 </head>
 
-<body class="claro">
+<body class="lotusui30_body">
+	<!-- Standard Navigation Bar -->
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
@@ -48,6 +54,12 @@
 			</div>
 		</div>
 	</div>
+	<!-- SmartCloud Navigation Bar -->
+	<!-- 
+	<div class="lotusui30 lotusui30_fonts scloud3" style="font-size: 12px">
+		<script src="https://apps.ce.collabserv.com/manage/navbar/banner/smartcloudExt?oneui=3"></script>
+	</div>
+	-->
 
 	<div class="container">
 		<div class="row">
@@ -57,7 +69,7 @@
 			<div class="span4">
 				<div class="btn-toolbar">
 					<div id="shareMyAppDiv">
-						<button class="btn"><img src="images/sbt.png"/> Share My App</button>
+						<button class="btn" style="display: none;"><img src="images/sbt.png"/> Share My App</button>
 					</div>
 				</div>
 			</div>
@@ -76,16 +88,16 @@
 		</div>
 
 		<div class="row">
-			<div class="span4">
+			<div class="span3">
 				<h4>My Colleagues</h4>
 				<div id="myColleaguesDiv"></div>
 			</div>
 			<div class="span4">
-				<h5>My Communities</h5>
+				<h4>My Communities</h4>
 				<div id="myCommunitiesDiv"></div>
 			</div>
-			<div class="span4">
-				<h5>My Files</h5>
+			<div class="span3">
+				<h4>My Files</h4>
 				<div id="myFilesDiv"></div>
 			</div>
 		</div>
@@ -121,7 +133,7 @@
 	<script type="text/template" id="myapp.MyColleaguesTmpl">
 	<div role="presentation" class="span3" style="padding: 0px 5px 4px 0px;">
         <a href="" title="${tooltip}" data-dojo-attach-event="onclick: handleClick">
-           	<img src="${photo}" width="64" height="64" class="img-polaroid" title="${title}" alt="${title}">
+           	<img src="${photoUrl}" width="64" height="64" class="img-polaroid" title="${name}" alt="${name}">
         </a>
 	</div>
 	</script>
@@ -143,36 +155,34 @@
 	</script>
 
 	<script type="text/javascript">
-	require([ "sbt/dom", "mysocial/widgets/MyProfile", 
+	require([ "sbt/dom", "sbt/config", "mysocial/widgets/MyProfile", 
+	          "sbt/smartcloud/controls/profiles/ColleagueGrid",
 	          "sbt/connections/controls/profiles/ColleagueGrid", 
 	          "sbt/connections/controls/communities/CommunityGrid", 
 	          "sbt/connections/controls/files/FileGrid" ],
-		function(dom, MyProfile, ColleagueGrid, CommunityGrid, FileGrid) {
-			try {
-				var myProfile = new MyProfile();
-				dom.byId("myProfileDiv").appendChild(myProfile.domNode);
+		function(dom, config, MyProfile, ColleagueGridSC, ColleagueGridOP, CommunityGrid, FileGrid) {
+			var myProfile = new MyProfile();
+			dom.byId("myProfileDiv").appendChild(myProfile.domNode);
+			
+			myProfile.addListener(function(profile) {
+				// show my colleages
+				var endpoint = config.findEndpoint("connections");
+			    createColleagueGrid(dom, profile, endpoint.isSmartCloud ? ColleagueGridSC : ColleagueGridOP);
 				
-				myProfile.addListener(function(profile) {
-					// show my colleages
-				    createColleagueGrid(dom, profile, ColleagueGrid);
-					
-				    // show my communities
-			        createCommunityGrid(dom, CommunityGrid);
-				    
-			        // show my files
-			        createFileGrid(dom, FileGrid);
-				});
-				
-			} catch (err) {
-				alert(err);
-			}
+			    // show my communities
+		        createCommunityGrid(dom, CommunityGrid);
+			    
+		        // show my files
+		        createFileGrid(dom, FileGrid);
+			});
 		}
 	);
 	
 	function createColleagueGrid(dom, profile, ColleagueGrid) {
 	    var colleagueGrid = new ColleagueGrid({
-	        email: profile.getEmail(),
-	        hideViewAll: false
+	    	endpoint: "connections",
+	        userid: profile.getUserid(),
+	        hideViewAll: true
 	    });
 	    colleagueGrid.renderer.containerClass = "row-fluid";
 	    colleagueGrid.renderer.template =  dom.byId("myapp.MyColleaguesTmpl").innerHTML;
@@ -226,7 +236,7 @@
 	
 	function createFileGrid(dom, FileGrid) {
         var fileGrid = new FileGrid({
-	         type : "library",
+	         type : "myFiles",
 		     hidePager: true,
 		     hideSorter: true
 	    });

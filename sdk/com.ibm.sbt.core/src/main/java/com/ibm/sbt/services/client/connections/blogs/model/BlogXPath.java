@@ -31,20 +31,8 @@ public enum BlogXPath implements FieldEntry{
 	entry("/a:feed/a:entry"),
 	singleEntry("/a:entry"),
 	uid("./id"),
-	title("./title"),
 	handle("./snx:handle"),
 	timeZone("./snx:timezone"),
-	authorName("./author/name"),
-	authorEmail("./author/email"),
-	authorUserid("./author/snx:userid"),
-	authorUserState("./author/snx:userState"),
-	contributorName("./contributor/name"),
-	contributorEmail("./contributor/email"),
-	contributorUserid("./contributor/snx:userid"),
-	contributorUserState("./contributor/snx:userState"),
-	published("./published"),
-	summary("./summary"),
-	updated("./updated"),
 	snxRank("./snx:rank"),
 	tags("./a:category[not(@scheme)]/@term"),
 	blogType("./category[@scheme='http://www.ibm.com/xmlns/prod/sn/type']/@term"),
@@ -55,21 +43,18 @@ public enum BlogXPath implements FieldEntry{
 	frequency("./@snx:frequency"),
 	intensity("./@snx:intensityBin"), 
 	visibility("./@snx:visibilityBin"),
-	content("./content"),
 	recommendationsCount("./snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/recommendations']"),
 	commentCount("./snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/comment']"),
 	hitCount("./snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/hit']"),
 	inReplyToUrl("./thr:in-reply-to/@href"),
 	inReplyToRef("./thr:in-reply-to/@ref"),
-	
 	trackbacktitle("./snx:trackbacktitle"),
 	flagTerm("./category/@term"),
 	flagLabel("./category/@label"),
 	repliesUrl("./a:link[@rel='replies']/@href"),
 	selfUrl("./a:link[@rel='self']/@href"),
 	alternateUrl("./a:link[@rel='alternate']/@href"),
-	recommendationsUrl("./a:link[@rel='http://www.ibm.com/xmlns/prod/sn/recommendations']/@href"),
-;
+	recommendationsUrl("./a:link[@rel='http://www.ibm.com/xmlns/prod/sn/recommendations']/@href");
 	
 
 	private final XPathExpression path;

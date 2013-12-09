@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:panel>
+		<xp:this.dataContexts>
+			<xp:dataContext var="forums">
+				<xp:this.value><![CDATA[#{javascript:var svc = new new  com.ibm.sbt.services.client.connections.forums.ForumService();
+				return svc.getMyForums();
+			
+			}]]></xp:this.value>
+			</xp:dataContext>
+		</xp:this.dataContexts>
+		<xp:label value="Listing My forums " id="label1">
+		</xp:label>
+		<br></br>
+		<xp:label value="Total forums found: " id="label2">
+		</xp:label>
+		<xp:text escape="true" id="computedField1">
+		<xp:this.value>
+		<![CDATA[#{javascript:
+		var c:Number = forums.getTotalResults();
+		c.toPrecision(0);
+		}]]>
+		</xp:this.value>
+		</xp:text>
+		<br></br>
+		<xp:listBox value="" id="forum">
+			<xp:selectItems id="selectItems2">
+
+				<xp:this.value><![CDATA[#{javascript: 
+			var forumsArray=[];
+			for(forum in forums){
+					forumsArray.push(forum.getTitle());
+			}
+			return forumsArray;
+			}]]></xp:this.value>
+			</xp:selectItems>
+		</xp:listBox>
+	</xp:panel>
+</xp:view>

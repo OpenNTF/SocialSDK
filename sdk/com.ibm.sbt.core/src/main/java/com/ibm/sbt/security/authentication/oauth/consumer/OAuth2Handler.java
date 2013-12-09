@@ -300,8 +300,9 @@ public class OAuth2Handler extends OAuthHandler {
 		if (responseCode != HttpStatus.SC_OK) {
 			String exceptionDetail = buildErrorMessage(responseCode, responseBody);
 			if (exceptionDetail != null) {
-				throw new OAuthException(null,
-						"OAuth2Handler.java : getAccessToken failed. " + exceptionDetail);
+				String msg = "Unable to retrieve access token because \"{0}\". Please check the access token URL is valid, current value: {1}.";
+				msg = MessageFormat.format(msg, exceptionDetail, getAccessTokenURL());
+				throw new OAuthException(null, msg);
 			}
 		} else {
 			setOAuthData(responseBody); //save the returned data

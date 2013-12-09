@@ -18,7 +18,7 @@
  */
 define([ "../lang", "./ConnectionsConstants" ], function(lang, conn) {
 
-	return lang.mixin({
+	return lang.mixin({}, conn, {
 
 		/**
 		* Namespaces to be used when reading the Activities ATOM entry or feed
@@ -221,5 +221,5 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang, conn) {
 		 */
 		AtomActivitiesTags : "${activities}/service/atom2/tags"
 
-	}, conn);
+	});
 });

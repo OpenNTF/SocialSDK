@@ -16,6 +16,7 @@
 
 package com.ibm.sbt.services.client.connections.wikis;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -133,5 +134,13 @@ public class Wiki extends WikiBaseEntity {
 	 */
 	public void setSharedWith(List<Member> members) {
 		throw new UnsupportedOperationException(); // FIXME
+	}
+
+	public List<String> getTags() {
+		return super.getBaseTags();
+	}
+
+	public void setTags(List<String> tags) {
+		super.setBaseTags(tags);
 	}
 }

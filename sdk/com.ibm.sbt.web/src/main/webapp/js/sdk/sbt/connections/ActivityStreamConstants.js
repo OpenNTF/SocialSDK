@@ -18,7 +18,7 @@
  */
 define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
 
-    return lang.mixin({
+    return lang.mixin({}, conn, {
     	
 		ASUser: {
 			ME : "@me",
@@ -169,5 +169,5 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
 			args_object	: "argument passed to get stream should be an Object",
 			required_communityid : "Community ID is required"
 		}
-    }, conn);
+    });
 });

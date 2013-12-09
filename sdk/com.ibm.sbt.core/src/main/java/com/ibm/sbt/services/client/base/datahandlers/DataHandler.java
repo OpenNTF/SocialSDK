@@ -16,6 +16,7 @@
 
 package com.ibm.sbt.services.client.base.datahandlers;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -26,7 +27,7 @@ import java.util.Locale;
  *
  * @param <DataType>
  */
-public interface DataHandler<DataType> {
+public interface DataHandler<DataType> extends Serializable{
 	
 	public String getAsString(FieldEntry field);
 	public String getAsString(String field);

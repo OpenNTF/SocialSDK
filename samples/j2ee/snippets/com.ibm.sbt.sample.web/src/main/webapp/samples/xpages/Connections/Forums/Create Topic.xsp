@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<xp:panel>
+		<xp:this.dataContexts>
+			<xp:dataContext var="forums">
+				<xp:this.value><![CDATA[#{javascript:var service = new new  com.ibm.sbt.services.client.connections.forums.ForumService();
+				return service.getMyForums();
+			
+			}]]></xp:this.value>
+			</xp:dataContext>
+		</xp:this.dataContexts>
+		<xp:label value="Create a Topic:" id="label5"></xp:label>
+		
+		<xp:br></xp:br>
+		
+		<xp:table>
+			<xp:tr>
+				<xp:td>
+					<xp:label value="Select a Forum: " id="label3"></xp:label></xp:td>
+				<xp:td>
+					<xp:listBox value="" id="forum">
+						<xp:selectItems id="selectItems2">
+
+							<xp:this.value><![CDATA[#{javascript: 
+			var forumsArray=[];
+			for(forum in forums){
+					forumsArray.push(forum.getTitle() + "|" + forum.getForumUuid());
+			}
+			return forumsArray;
+			}]]></xp:this.value>
+						</xp:selectItems>
+					</xp:listBox></xp:td>
+			</xp:tr>
+			<xp:tr>
+				<xp:td>
+					<xp:label value="Enter a Title" id="label1"></xp:label></xp:td>
+				<xp:td>
+					<xp:inputText id="inputTextTitle"></xp:inputText></xp:td>
+			</xp:tr>
+			<xp:tr>
+				<xp:td>
+					<xp:label value="Enter some content" id="label2"></xp:label></xp:td>
+				<xp:td>
+					<xp:inputText id="inputTextContent"></xp:inputText></xp:td>
+			</xp:tr>
+		</xp:table>
+		<xp:br></xp:br>
+		
+		
+	</xp:panel>
+
+
+
+	
+	<xp:br></xp:br>
+	<xp:br></xp:br>
+	<xp:button value="Create Topic" id="button1">
+		<xp:eventHandler event="onclick" submit="true"
+			refreshMode="complete">
+
+
+			<xp:this.action><![CDATA[#{javascript:var service = new com.ibm.sbt.services.client.connections.forums.ForumService();
+var forum = new com.ibm.sbt.services.client.connections.forums.Forum(service);
+var topic = new com.ibm.sbt.services.client.connections.forums.ForumTopic(service);
+
+
+
+	var selectedForum = getComponent("forum").getValue();
+	
+	if(selectedForum){
+	
+		topic.setTitle(getComponent('inputTextTitle').value);
+		topic.setContent(getComponent('inputTextContent').value);
+		topic.setForumUuid(selectedForum);
+		topic = topic.save();
+	
+
+		var comp1 = getComponent('computedField1');
+		comp1.value = "Congratulations, your Topic has been created";
+	
+	
+		var comp2 = getComponent('computedField2');
+		comp2.value = getComponent('forum').getValue();
+
+	}else{
+		var comp1 = getComponent('computedField1');
+		comp1.value = "Please select a valid Forum!";
+	}
+										
+	}]]></xp:this.action>
+		</xp:eventHandler>
+	</xp:button>
+	<xp:br></xp:br>
+	<xp:br></xp:br>
+	<xp:br></xp:br>
+	<xp:text escape="true" id="computedField1"></xp:text>
+	<xp:br></xp:br>
+
+
+
+
+	<xp:text escape="true" id="computedField2"></xp:text>
+</xp:view>

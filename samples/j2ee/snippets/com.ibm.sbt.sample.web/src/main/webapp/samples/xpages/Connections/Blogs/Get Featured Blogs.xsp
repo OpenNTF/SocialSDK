@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:panel id="panel10">
+		<xp:label value="List of Featured Blogs:" style="font-size:14pt;font-weight:bold"></xp:label>
+		<xp:br />
+		<xe:dataView id="dataView5" var="blog3" rows="5" columnTitles="true" expandedDetail="true">				
+			<xp:this.value>
+				<![CDATA[#{javascript:											
+					var blogSvc = new com.ibm.sbt.services.client.connections.blogs.BlogService("connections");	
+					var blogs = blogSvc.getFeaturedBlogs();
+					return blogs;
+				}]]>
+			</xp:this.value>
+			<xe:this.summaryColumn>
+				<xe:viewSummaryColumn columnTitle="Blog Name">
+				</xe:viewSummaryColumn>
+			</xe:this.summaryColumn>
+			<xp:this.facets>
+				<xp:panel xp:key="noRows" id="panel11">
+					<xp:text value="No Blogs found">
+					</xp:text>
+				</xp:panel>
+				<xp:panel id="panel12" xp:key="summary" style="white-space:nowrap;">
+					<xp:link escape="true" id="link2"
+						target="_blank" value="#{javascript:return blog3.getAlternateUrl();}"
+						text="#{javascript:return blog3.getTitle();}">
+					</xp:link>
+				</xp:panel>
+				<xp:panel id="panel22" xp:key="detail">
+					<xp:text id="computedField10" value="Description: ">
+					</xp:text>	
+					<xp:text id="computedField11" value="#{javascript:return blog3.getSummary();}">
+					</xp:text>
+				</xp:panel>
+				<xp:pager xp:key="pagerBottomRight" pageCount="5" partialRefresh="true">
+					<xp:pagerControl type="Previous" id="pagerControl7">
+					</xp:pagerControl>
+					<xp:pagerControl type="Group" id="pagerControl8">
+					</xp:pagerControl>
+					<xp:pagerControl type="Next" id="pagerControl9">
+					</xp:pagerControl>
+				</xp:pager>
+			</xp:this.facets>
+		</xe:dataView>
+	</xp:panel>
+</xp:view>

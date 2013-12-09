@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+	<xp:table>
+		<xp:tr>
+			<xp:td>
+				<xp:label value="Choose Blog :" id="label1"></xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:comboBox value="" id="comboBlog"
+					style="width:251.0px">
+					<xp:selectItems id="selectItems2">
+						<xp:this.value><![CDATA[#{javascript:
+							var list = new java.util.ArrayList();
+							list.add('|');
+							var svc = new com.ibm.sbt.services.client.connections.blogs.BlogService();
+							var myBlogs = svc.getMyBlogs();
+							for (blog in myBlogs) {								
+								list.add(blog.getTitle() + '|' + blog.getHandle());
+							}
+							return list;
+							}]]>
+						</xp:this.value>
+					</xp:selectItems>
+					<xp:eventHandler event="onchange" submit="true"
+						refreshMode="complete">
+					</xp:eventHandler></xp:comboBox>
+			</xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td>
+				<xp:label value="Choose Post :" id="label4"></xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:comboBox value="" id="comboPost"
+					style="width:251.0px">
+					<xp:selectItems id="selectItems1">
+						<xp:this.value><![CDATA[#{javascript:
+							var list = new java.util.ArrayList();
+							var svc = new com.ibm.sbt.services.client.connections.blogs.BlogService();
+							var blogHandle = getComponent('comboBlog').getValue();
+							if (blogHandle != '') {
+								var entries = svc.getBlogPosts(blogHandle);
+								for (entry in entries) {
+									list.add(entry.getTitle() + '|' + entry.getUid());
+								}
+							}									
+							return list;
+							}]]>
+						</xp:this.value>
+					</xp:selectItems>
+				</xp:comboBox>
+			</xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td>
+				<xp:label value="Enter Title:" id="label2"></xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:inputText id="inputTextTitle"
+					style="width:251.0px">
+				</xp:inputText>
+			</xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td>
+				<xp:label value="Enter Content:" id="label3"></xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:inputTextarea id="contentInputTextarea"
+					style="width:252.0px;height:116.0px">
+				</xp:inputTextarea>
+			</xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td>
+			</xp:td>
+			<xp:td>				
+				<xp:button value="Create Blog Comment" id="button1">
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="complete">
+						<xp:this.action><![CDATA[#{javascript:
+							var service = new com.ibm.sbt.services.client.connections.blogs.BlogService();
+							var blogComment = new com.ibm.sbt.services.client.connections.blogs.Comment(service, '');
+							var blogHandle = getComponent('comboBlog').getValue();
+							var postUid = getComponent('comboPost').getValue();
+							if (postUid != null) {
+								blogComment.setTitle(getComponent('inputTextTitle').value);
+								blogComment.setContent(getComponent('contentInputTextarea').value);
+								service.createBlogComment(blogComment, blogHandle, postUid); 	
+								getComponent('computedField1').value = "Congratulations, your Blog Comment has been created";															
+							}
+						}]]></xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
+			</xp:td>
+		</xp:tr>
+	</xp:table>
+	
+	<xp:br></xp:br>
+	<xp:br></xp:br>
+	<xp:br></xp:br>
+	<xp:text escape="true" id="computedField1"></xp:text>
+	<xp:br></xp:br>	
+</xp:view>

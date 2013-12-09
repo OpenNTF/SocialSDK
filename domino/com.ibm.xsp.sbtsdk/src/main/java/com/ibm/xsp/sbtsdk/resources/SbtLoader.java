@@ -36,6 +36,17 @@ import com.ibm.xsp.minifier.ResourceLoader;
  * Resource Loader that loads the resource from core DWA.
  */
 public class SbtLoader extends ResourceLoader {
+	
+	// This is to support both the development mode and the deployed (compiled) one
+	public static String BASE_WEBRESOURCE_PATH = "WebContent/";
+	static {
+		try {
+			URL u = ExtLibUtil.getResourceURL(SbtWebActivator.instance.getBundle(), "src/main/webapp/js/sdk/sbt/lang.js");
+			if(u!=null) {
+				BASE_WEBRESOURCE_PATH = "src/main/webapp/";
+			}
+        } catch(Throwable ex) {}
+	}
 
     public static class SbtDojoLocaleResource extends UrlDojoLocaleResource {
         public SbtDojoLocaleResource(DojoLibrary dojoLibrary, String name, String baseUrl) {
@@ -108,15 +119,15 @@ public class SbtLoader extends ResourceLoader {
             if(name.startsWith("sbt._bridge.")) {
             	dojoName = dojoName.substring(12);
             	if(ExtLibUtil.isXPages853()) {
-                	basePath = "WebContent/js/sdk/_bridges/dojo/"; // $NON-NLS-1$
+                	basePath = BASE_WEBRESOURCE_PATH+"js/sdk/_bridges/dojo/"; // $NON-NLS-1$
             	} else {
-            		basePath = "WebContent/js/sdk/_bridges/dojo-amd/"; // $NON-NLS-1$
+            		basePath = BASE_WEBRESOURCE_PATH+"js/sdk/_bridges/dojo-amd/"; // $NON-NLS-1$
             	}
             } else if(name.startsWith("sbt.dojo.")) {
             	dojoName = dojoName.substring(9);
-            	basePath = "WebContent/js/sdk/dojo/"; // $NON-NLS-1$
+            	basePath = BASE_WEBRESOURCE_PATH+"js/sdk/dojo/"; // $NON-NLS-1$
             } else {
-            	basePath = "WebContent/js/sdk/"; // $NON-NLS-1$
+            	basePath = BASE_WEBRESOURCE_PATH+"js/sdk/"; // $NON-NLS-1$
             }
             String path = basePath+StringUtil.replace(dojoName, '.', '/')+".js"; // $NON-NLS-1$
             URL u = ExtLibUtil.getResourceURL(SbtWebActivator.instance.getBundle(), path);
@@ -126,7 +137,7 @@ public class SbtLoader extends ResourceLoader {
         }
         // Look for resources...
         if( name.startsWith("!sbt.")) { // $NON-NLS-1$
-            return new SbtDojoLocaleResource(dojoLibrary,name,"WebContent/js/sdk");
+            return new SbtDojoLocaleResource(dojoLibrary,name,BASE_WEBRESOURCE_PATH+"js/sdk");
         }
         return null;
     }
@@ -185,7 +196,7 @@ public class SbtLoader extends ResourceLoader {
     }
     public CSSResource loadCSSResource(String name, DojoLibrary dojoLibrary) {
         if(name.startsWith("/.ibmxspres/.sbtsdk/bootstrap/")) { // $NON-NLS-1$
-            String path = "WebContent/bootstrap/"+name.substring(30); // $NON-NLS-1$
+            String path = BASE_WEBRESOURCE_PATH+"bootstrap/"+name.substring(30); // $NON-NLS-1$
             URL u = ExtLibUtil.getResourceURL(SbtWebActivator.instance.getBundle(), path);
             if(u!=null) {
                 return new SbtCSSResource(dojoLibrary,name,u);

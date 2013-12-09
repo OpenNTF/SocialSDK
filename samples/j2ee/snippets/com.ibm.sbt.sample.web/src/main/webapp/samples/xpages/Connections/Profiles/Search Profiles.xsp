@@ -14,7 +14,7 @@
 		var profiles = connProfSvc.searchProfiles(params);
 		return profiles;}]]></xp:this.value>
 			<xp:viewColumn columnName="DisplayName" id="viewColumn5"
-				value="#{javascript:profile.getDisplayName();}">
+				value="#{javascript:profile.getName();}">
 				<xp:viewColumnHeader value="Description"
 					id="viewColumnHeader1">
 				</xp:viewColumnHeader>

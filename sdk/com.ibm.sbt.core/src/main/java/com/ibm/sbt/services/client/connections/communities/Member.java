@@ -19,6 +19,7 @@ import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
+import com.ibm.sbt.services.client.connections.common.Person;
 import com.ibm.sbt.services.client.connections.communities.model.CommunityXPath;
 
 /**
@@ -28,7 +29,7 @@ import com.ibm.sbt.services.client.connections.communities.model.CommunityXPath;
  * @author Manish Kataria
  * @author Carlos Manias
  */
-public class Member extends BaseEntity {
+public class Member extends Person {
 	
 	/**
      * The Uuid of the community associated with this Member

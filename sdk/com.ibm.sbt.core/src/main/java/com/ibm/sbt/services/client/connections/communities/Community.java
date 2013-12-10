@@ -20,15 +20,20 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import org.w3c.dom.Node;
+
 import com.ibm.commons.util.StringUtil;
-import com.ibm.sbt.services.client.base.BaseEntity;
+import com.ibm.commons.xml.NamespaceContext;
+import com.ibm.commons.xml.xpath.XPathExpression;
+import com.ibm.sbt.services.client.base.AtomEntity;
+import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.connections.communities.CommunityList;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.communities.model.CommunityXPath;
 import com.ibm.sbt.services.client.connections.communities.transformers.CommunityTransformer;
 import com.ibm.sbt.services.client.connections.forums.ForumList;
 import com.ibm.sbt.services.client.connections.forums.TopicList;
-import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 
 /**
@@ -39,7 +44,7 @@ import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
  * @author Manish Kataria
  * @author Carlos Manias
  */
-public class Community extends BaseEntity {
+public class Community extends AtomEntity {
 
 	/**
 	 * Constructor
@@ -48,6 +53,7 @@ public class Community extends BaseEntity {
 	 * @param communityUuid
 	 */
 	public Community(CommunityService communityService, String communityUuid) {
+		super(communityService, communityUuid);
 		setService(communityService);
 		setAsString(CommunityXPath.communityUuid, communityUuid);
 	}
@@ -66,10 +72,22 @@ public class Community extends BaseEntity {
 	 * @param svc
 	 * @param handler
 	 */
-	public Community(CommunityService svc, DataHandler<?> handler) {
+	public Community(CommunityService svc, XmlDataHandler handler) {
 		super(svc,handler);
 	}
 
+	/**
+     * Constructor
+     * @param BaseService
+     * @param Node
+     * @param NamespaceContext
+     * @param XPathExpression
+     */
+	public Community(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
+		super(service, node, namespaceCtx, xpathExpression);
+	}
+	
+	
 	/**
 	 * Returns the communityUuid
 	 * 
@@ -88,32 +106,6 @@ public class Community extends BaseEntity {
 		setAsString(CommunityXPath.communityUuid, communityUuid);
 	}
 
-	/**
-	 * Returns the Title
-	 * 
-	 * @return title
-	 */
-	public String getTitle() {
-		return getAsString(CommunityXPath.title);
-	}
-	
-	/**
-	 * @sets the title
-	 * 
-	 * @param title
-	 */
-	public void setTitle(String title) {
-		setAsString(CommunityXPath.title, title);
-	}
-
-	/**
-	 * Returns the content
-	 * 
-	 * @return content
-	 */
-	public String getContent() {
-		return getAsString(CommunityXPath.content);
-	}
 
 	/**
 	 * Returns the communityUrl
@@ -131,24 +123,6 @@ public class Community extends BaseEntity {
 	 */
 	public String getLogoUrl() {
 		return getAsString(CommunityXPath.logoUrl);
-	}
-
-	/**
-	 * Returns the Summary
-	 * 
-	 * @return summary
-	 */
-	public String getSummary() {
-		return getAsString(CommunityXPath.summary);
-	}
-
-	/**
-	 * @sets the content
-	 * 
-	 * @param content
-	 */
-	public void setContent(String content) {
-		setAsString(CommunityXPath.content, content);
 	}
 
 	/**
@@ -198,13 +172,6 @@ public class Community extends BaseEntity {
 	}
 	
 	/**
-	 * @return the published date of community
-	 */
-	public Date getPublished(){
-		return getAsDate(CommunityXPath.published);
-	}
-	
-	/**
 	 * @return the community theme
 	 */
 	public String getCommunityTheme(){
@@ -214,17 +181,11 @@ public class Community extends BaseEntity {
 	public void setCommunityTheme(String theme) {
 		setAsString(CommunityXPath.communityTheme, theme);
 	}
-	/**
-	 * @return the update date of community
-	 */
-	public Date getUpdated(){
-		return getAsDate(CommunityXPath.updated);
-	}
-	
 	
 	/**
 	 * @return the authorUid
 	 */
+	@Override
 	public Member getAuthor(){
 		Member author = new Member(getService(), getAsString(CommunityXPath.authorUserid));
 		author.setName(getAsString(CommunityXPath.authorName));
@@ -235,6 +196,7 @@ public class Community extends BaseEntity {
 	/**
 	 * @return the ContributorId
 	 */
+	@Override
 	public Member getContributor(){
 		Member contributor = new Member(getService(), getAsString(CommunityXPath.contributorUserid));
 		contributor.setName(getAsString(CommunityXPath.contributorName));

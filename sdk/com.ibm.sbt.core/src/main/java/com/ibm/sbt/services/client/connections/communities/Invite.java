@@ -1,8 +1,13 @@
 package com.ibm.sbt.services.client.connections.communities;
 
+import org.w3c.dom.Node;
+
 import com.ibm.commons.util.StringUtil;
-import com.ibm.sbt.services.client.base.BaseEntity;
-import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
+import com.ibm.commons.xml.NamespaceContext;
+import com.ibm.commons.xml.xpath.XPathExpression;
+import com.ibm.sbt.services.client.base.AtomEntity;
+import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.connections.communities.model.CommunityXPath;
 
 /**
@@ -11,7 +16,7 @@ import com.ibm.sbt.services.client.connections.communities.model.CommunityXPath;
  * @author Swati Singh
  */
 
-public class Invite extends BaseEntity{
+public class Invite extends AtomEntity{
 	 /**
      * The UUID of the community associated with this Invite
      */
@@ -20,20 +25,44 @@ public class Invite extends BaseEntity{
      * The UUID if the invitee associated with this Invite
      */
 	private String inviteeUuid;
-	
+	/**
+     * Constructor
+     * @param communityService
+     */
 	public Invite(CommunityService communityService) {
+		super(communityService);
 		setService(communityService);
 	}
-
+	/**
+     * Constructor
+     * @param communityService
+     * @param id
+     */
 	public Invite(CommunityService communityService, String id) {
+		super(communityService, id);
 		setService(communityService);
 		setAsString(CommunityXPath.id, id);
 	}
-	
-	public Invite(CommunityService svc, DataHandler<?> handler)
+	/**
+     * Constructor
+     * @param svc
+     * @param handler
+     */
+	public Invite(CommunityService svc, XmlDataHandler handler)
 	{
 		super(svc,handler);
 	}
+	/**
+     * Constructor
+     * @param BaseService
+     * @param Node
+     * @param NamespaceContext
+     * @param XPathExpression
+     */
+	public Invite(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
+		super(service, node, namespaceCtx, xpathExpression);
+	}
+	
 	/**
      * Return the value of IBM Connections invite ID from invite ATOM
      * entry document.
@@ -140,45 +169,7 @@ public class Invite extends BaseEntity{
     public String getEmail() {
 		return getAsString(CommunityXPath.contributorEmail);
     }
-	/**
-	 * getId
-	 * 
-	 * @return id
-	 */	
-	public String getId() {
-		return getAsString(CommunityXPath.id);
-	}
-	/**
-	 * getTitle
-	 * 
-	 * @return title
-	 */	
-	public String getTitle() {
-		return getAsString(CommunityXPath.title);
-	}
-
-	/**
-	 * Method sets the Invite title
-	 */	
-	public void setTitle(String title) {
-		setAsString(CommunityXPath.title, title);
-	}
-	/**
-	 * Returns the content
-	 * 
-	 * @return content
-	 */
-	public String getContent() {
-		return getAsString(CommunityXPath.content);
-	}
-	/**
-	 * @sets the content
-	 * 
-	 * @param content
-	 */
-	public void setContent(String content) {
-		setAsString(CommunityXPath.content, content);
-	}
+	
 	 /**
      * Returns the invite Url.
      * 
@@ -220,6 +211,7 @@ public class Invite extends BaseEntity{
 	 * @method getAuthor
 	 * @return Author
 	 */
+	@Override
 	public Member getAuthor(){
 		Member author = new Member(getService(), getAsString(CommunityXPath.authorUserid));
 		author.setName(getAsString(CommunityXPath.authorName));
@@ -231,6 +223,7 @@ public class Invite extends BaseEntity{
 	 * @method getContributor
 	 * @return Contributor
 	 */
+	@Override
 	public Member getContributor(){
 		Member contributor = new Member(getService(), getAsString(CommunityXPath.contributorUserid));
 		contributor.setName(getAsString(CommunityXPath.contributorName));

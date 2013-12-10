@@ -1,5 +1,5 @@
 /*
-* �� Copyright IBM Corp. 2012
+* © Copyright IBM Corp. 2012
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -18,19 +18,16 @@
 * @module sbt.main
 */
 define([
-    'sbt/widget/_TemplatedWidget',
     'sbt/connections/controls/ConnectionsGridRenderer',
     'sbt/connections/controls/ViewAllAction',
     'sbt/connections/controls/WidgetWrapper',
     'sbt/connections/controls/_ConnectionsWidget',
+    'sbt/controls/dialog/Dialog',
     'sbt/controls/grid/Grid',
     'sbt/controls/grid/GridAction',
     'sbt/controls/grid/GridRenderer',
-    'sbt/controls/grid/ViewProfileAction',
     'sbt/controls/panel/_ProfilePanel',
     'sbt/smartcloud/controls/BaseGridRenderer',
-    'sbt/widget/grid/_Grid',
-    'sbt/widget/grid/_GridRenderer',
     'sbt/connections/controls/activities/ActivityAction',
     'sbt/connections/controls/activities/ActivityGrid',
     'sbt/connections/controls/activities/ActivityGridRenderer',
@@ -84,6 +81,8 @@ define([
     'sbt/connections/controls/vcard/SemanticTagService',
     'sbt/connections/controls/wrappers/FileGridWrapper',
     'sbt/connections/controls/wrappers/ProfileCardWrapper',
+    'sbt/controls/dialog/nls/dialog',
+    'sbt/controls/dialog/templates/Dialog.html',
     'sbt/controls/grid/bootstrap/GridRendererMixin',
     'sbt/controls/grid/templates/Grid.html',
     'sbt/controls/grid/templates/GridFooter.html',
@@ -101,6 +100,7 @@ define([
     'sbt/connections/controls/activities/templates/ActivityRow.html',
     'sbt/connections/controls/astream/templates/ActivityStreamContent.html',
     'sbt/connections/controls/bookmarks/nls/BookmarkGridRenderer',
+    'sbt/connections/controls/bookmarks/templates/BookmarkListItem.html',
     'sbt/connections/controls/bookmarks/templates/BookmarkRow.html',
     'sbt/connections/controls/bookmarks/templates/TagAnchor.html',
     'sbt/connections/controls/bootstrap/templates/CommunityRow.html',
@@ -183,6 +183,7 @@ define([
     'sbt/smartcloud/controls/profiles/nls/ProfileGridRenderer',
     'sbt/smartcloud/controls/profiles/templates/ColleagueItem.html',
     'sbt/smartcloud/controls/profiles/templates/ColleagueItemFull.html',
+    'sbt/smartcloud/controls/profiles/templates/CommunityMember.html',
     'sbt/smartcloud/controls/profiles/templates/ProfilePanel.html',
     'sbt/smartcloud/controls/profiles/templates/ProfileRow.html',
     'sbt/smartcloud/controls/profiles/templates/ViewAll.html'

@@ -17,13 +17,21 @@ import com.ibm.sbt.services.client.connections.communities.model.CommunityXPath;
 
 public class Bookmark extends AtomEntity{
 
-
+	/**
+     * Constructor
+     * @param communityService
+     * @param id
+     */
 	public Bookmark(CommunityService communityService, String id) {
 		super(communityService, id);
 		setService(communityService);
 		setAsString(CommunityXPath.id, id);
 	}
-	
+	/**
+     * Constructor
+     * @param svc
+     * @param handler
+     */
 	public Bookmark(CommunityService svc, XmlDataHandler handler)
 	{
 		super(svc,handler);

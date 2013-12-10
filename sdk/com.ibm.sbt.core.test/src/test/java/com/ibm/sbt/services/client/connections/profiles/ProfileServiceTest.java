@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import org.junit.Ignore;
@@ -290,5 +291,28 @@ public class ProfileServiceTest extends BaseUnitTest {
 			}
 		}.isSerializable(profile);
 	}
+	
+		
+	@Test
+	public final void testProfileListSerialization() throws Exception {
+		ProfileService profileService = new ProfileService();
+		ProfileList profiles = profileService.getReportingChain(properties.getProperty("email1"));
+		new SerializationUtil() {
+			
+			@Override
+			public void validateSerializable() { 
+				ProfileList allprofiles = null;
+				try {
+					ObjectInputStream ois = new ObjectInputStream(new FileInputStream(serFile));
+					allprofiles = (ProfileList) ois.readObject();
+					for (Iterator iterator = allprofiles.iterator(); iterator.hasNext();) {
+						Profile localprofile = (Profile) iterator.next();
+					}
+				} catch (Exception e) {}
+				assertEquals(true, (allprofiles.size()>0));
+			}
+		}.isSerializable(profiles);
+	}
+
 
 }

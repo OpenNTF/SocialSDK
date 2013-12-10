@@ -16,6 +16,10 @@
 
 package com.ibm.sbt.services.client.base.datahandlers;
 
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.AbstractList;
 import java.util.List;
 
@@ -32,16 +36,18 @@ import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.IFeedHandler;
 
 
-public abstract class EntityList<Entity extends BaseEntity> extends AbstractList<Entity> implements ResponseProvider {
+public abstract class EntityList<Entity extends BaseEntity> extends AbstractList<Entity> implements ResponseProvider, Externalizable {
 
-	private final Response requestData;
-	private final List<Entity> entities;
+	private Response requestData;
+	private List<Entity> entities;
 	
 	//Make it final
 	private IFeedHandler<Entity> feedHandler;
 	
 	//TO REMOVE
 	private BaseService service;
+	
+	public EntityList(){}
 	
 	public EntityList(Response requestData, IFeedHandler<Entity> feedHandler) {
 		this.requestData = requestData;
@@ -146,6 +152,28 @@ public abstract class EntityList<Entity extends BaseEntity> extends AbstractList
 	@Override
 	public int size() {
 		return entities.size();
+	}
+	
+	@Override
+	public void readExternal(ObjectInput inputStream) throws IOException, ClassNotFoundException {
+		// Retrieve the entity data and other values like endpoint name and service name
+		Response data = (Response) inputStream.readObject();
+		List<Entity> entities = (List<Entity>) inputStream.readObject();
+		BaseService service = (BaseService) inputStream.readObject();
+		
+		this.requestData = data;
+		this.entities = entities;
+		this.service = service;
+		
+	}
+
+	@Override
+	public void writeExternal(ObjectOutput outputStream) throws IOException {
+	
+		// Serialize the data elements
+		outputStream.writeObject(requestData); 
+		outputStream.writeObject(entities);
+		outputStream.writeObject(getService());
 	}
 
 }

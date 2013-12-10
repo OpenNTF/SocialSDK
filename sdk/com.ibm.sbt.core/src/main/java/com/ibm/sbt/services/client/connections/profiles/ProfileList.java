@@ -12,6 +12,9 @@ import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 
 public class ProfileList extends EntityList<Profile> {
+	
+	//Required for serialization
+	public ProfileList(){}
 
 	public ProfileList(Response requestData, ProfileFeedHandler feedHandler) {
 		super(requestData, feedHandler);

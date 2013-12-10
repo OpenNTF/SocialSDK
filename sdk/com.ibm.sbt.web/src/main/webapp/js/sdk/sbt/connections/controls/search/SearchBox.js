@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2013
+ * ��� Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -747,7 +747,7 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 			            		// just displayed in the results table
 			            		for(var i = 0; i < newResults.length; i++) {
 			            			// Render each item in the search results
-			            			if(context.searchType="myCommunities"){
+			            			if(context.searchType=="myCommunities"){
 			            				context.renderer.renderMemberListItem(context, newResults[i].getTitle(), results[i].getCommunityUuid());
 			            			}else{
 			            				context.renderer.renderMemberListItem(context, newResults[i].getTitle(), results[i].getId());

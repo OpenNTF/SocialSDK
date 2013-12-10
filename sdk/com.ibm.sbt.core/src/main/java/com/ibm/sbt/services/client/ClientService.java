@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Date;
@@ -32,7 +33,9 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.GZIPInputStream;
+
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -50,6 +53,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.w3c.dom.Node;
+
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.runtime.NoAccessSignal;
 import com.ibm.commons.runtime.util.UrlUtil;
@@ -265,7 +269,7 @@ public abstract class ClientService {
 	// Generic access
 	// =================================================================
 
-	public static class Args {
+	public static class Args implements Serializable{
 
 		private String serviceUrl; // Service URL to call, relative to the endpoint
 		private Map<String, String> parameters; // Query String parameters
@@ -614,7 +618,7 @@ public abstract class ClientService {
 	// Response Handler
 	// =================================================================
 
-	public static abstract class Handler {
+	public static abstract class Handler implements Serializable{
 		public abstract Object parseContent(HttpRequestBase request, HttpResponse response, HttpEntity entity)
 				throws ClientServicesException, IOException;
 	}

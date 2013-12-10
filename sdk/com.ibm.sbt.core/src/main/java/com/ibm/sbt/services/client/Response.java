@@ -17,6 +17,7 @@
 package com.ibm.sbt.services.client;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
@@ -32,12 +33,12 @@ import com.ibm.sbt.services.client.ClientServicesException;
  * @author Carlos Manias
  *
  */
-public class Response {
+public class Response implements Serializable{
 
 	private Object data;
-	private HttpResponse response;
-	private HttpRequestBase request;
-	private HttpClient httpClient;
+	private transient HttpResponse response;
+	private transient HttpRequestBase request;
+	private transient HttpClient httpClient;
 	private Handler handler;
 	private Args args;
 	private Header[] headers;

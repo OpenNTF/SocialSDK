@@ -17,15 +17,15 @@ package com.ibm.sbt.services.client.connections.profiles.feedhandler;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
+
 import com.ibm.commons.xml.xpath.XPathExpression;
+import com.ibm.sbt.services.client.base.AtomXPath;
 import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.IFeedHandler;
-import com.ibm.sbt.services.client.connections.profiles.model.ColleagueConnectionXPath;
 import com.ibm.sbt.services.client.connections.profiles.ColleagueConnection;
 import com.ibm.sbt.services.client.connections.profiles.ColleagueConnectionList;
 import com.ibm.sbt.services.client.connections.profiles.ProfileService;
 import com.ibm.sbt.services.client.Response;
-import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 
 /**
  * 
@@ -61,10 +61,8 @@ public class ColleagueConnectionFeedHandler implements IFeedHandler {
 	 */
 	@Override
 	public ColleagueConnection createEntityFromData(Object data) {
-		Node node = (Node)data;
-		XPathExpression expr = (data instanceof Document) ? (XPathExpression)ColleagueConnectionXPath.entry.getPath() : null;
-		XmlDataHandler handler = new XmlDataHandler(node, ConnectionsConstants.nameSpaceCtx, expr);
-		ColleagueConnection colleagueConnection = new ColleagueConnection(service, handler);
+		XPathExpression expr = (data instanceof Document) ? (XPathExpression)AtomXPath.singleEntry.getPath() : null;
+		ColleagueConnection colleagueConnection = new ColleagueConnection(service, (Node)data, ConnectionsConstants.nameSpaceCtx, expr);
 		return colleagueConnection;
 	}
 

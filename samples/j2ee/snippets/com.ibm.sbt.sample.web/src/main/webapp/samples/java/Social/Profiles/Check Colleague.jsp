@@ -35,7 +35,7 @@
 	
 		String sourceUserId = Context.get().getProperty("sample.id1");
 		String targetUserId;
-		ProfileService connProfSvc = new ProfileService();
+		ProfileService connProfSvc = new ProfileService(); 
 		ColleagueConnectionList colleagues = connProfSvc.getColleagueConnections(sourceUserId);
 		if(colleagues != null && ! colleagues.isEmpty()) {
 			ColleagueConnection colleague = colleagues.iterator().next();

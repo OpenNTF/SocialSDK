@@ -10,14 +10,14 @@ public abstract class SerializationUtil {
 	
 	protected String serFile = "serFile.out";
 	
-	public void isSerializable(BaseEntity basentity){
+	public void isSerializable(Object basentity){
 		try {
 			ByteArrayOutputStream out = new ByteArrayOutputStream();
 			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(serFile)); 
 			oos.writeObject(basentity);
 			oos.close();
 			validateSerializable();
-		} catch (Exception e) { }
+		} catch (Exception e) {}
 	}
 	
 	public abstract void validateSerializable();

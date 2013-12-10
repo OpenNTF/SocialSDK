@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2012,2013
+ * ��� Copyright IBM Corp. 2012,2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -83,7 +83,7 @@ define([ "../lang", "../smartcloud/SmartcloudConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.CommunityService
          */
-        AtomCommunityMembers : "${communities}/service/atom/community/members",
+        AtomCommunityMembers : "${communities}/service/atom/community/members"
 
         
     }, conn);

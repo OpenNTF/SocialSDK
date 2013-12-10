@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -128,7 +128,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * search  Well-formed full text search query. Performs a text search on community titles and descriptions.
          * since  Includes in the resulting feed all communities updated after a specified date. Specify the date using a date-time value that conforms to RFC3339. Use an upper case "T" to separate the date and time, and an uppercase "Z" in the absence of a numeric time zone offset. For example: 2009-01-04T20:32:31.171Z.
          * sortBy  Specifies what value to use as the basis for organizing the entries returned in the feed. The options are:
-         *                                          modified – Sorts the results by last modified date.
+         *                                          modified ï¿½ Sorts the results by last modified date.
          *                                          commented - Sorts the entries by the number of comments or replies an item has received.
          *                                          popularity - Sorts the entries by how popular the item is.
          *                                          recommended - Sorts the entries by the number of times the item was recommended.
@@ -366,6 +366,6 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.BlogService
          */ 
-        AtomRecommendBlogPost : "/${blogs}/{blogHandle}/api/recommend/entries/{postUuid}",
+        AtomRecommendBlogPost : "/${blogs}/{blogHandle}/api/recommend/entries/{postUuid}"
     });
 });

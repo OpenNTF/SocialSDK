@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -189,7 +189,7 @@ define([ "../../declare", "../../dom", "../../lang"],
         renderList: function(grid, el, listType, listClass) {               
             var ol = dom.create(listType, {
                 role:"presentation",
-                class:listClass
+                "class":listClass
             }, el);
             return ol;
         },

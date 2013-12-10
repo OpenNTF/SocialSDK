@@ -1,6 +1,6 @@
 {
 	"name": "sbt",
-	"version":"0.20131128",
+	"version":"0.20131210",
 	"directories": {
 		"lib": "."
 	},
@@ -15,5 +15,5 @@
 	"bugs": "https://github.com/OpenNTF/SocialSDK/issues",
 	"keywords": ["JavaScript", "Social", "Business", "Toolkit"],
 	"homepage": "http://ibmsbt.openntf.org/",
-	"dojoBuild": "../../sbt-dojo-amd.profile.js"
+	"dojoBuild": "../sbt-dojo-amd.profile.js"
 }

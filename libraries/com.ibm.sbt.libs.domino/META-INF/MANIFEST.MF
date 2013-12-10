@@ -47,4 +47,4 @@ Export-Package: org.apache.commons.codec,org.apache.commons.codec.bina
  uctured.parser,org.apache.james.mime4j.io,org.apache.james.mime4j.mes
  sage,org.apache.james.mime4j.parser,org.apache.james.mime4j.storage,o
  rg.apache.james.mime4j.util
-Require-Bundle: com.ibm.xsp.core
+Require-Bundle: com.ibm.xsp.core;resolution:=optional

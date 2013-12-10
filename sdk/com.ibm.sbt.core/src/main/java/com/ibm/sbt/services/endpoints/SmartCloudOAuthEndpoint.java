@@ -15,6 +15,7 @@
  */
 package com.ibm.sbt.services.endpoints;
 
+import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.smartcloud.SmartCloudService;
@@ -25,10 +26,30 @@ import com.ibm.sbt.services.client.smartcloud.SmartCloudService;
  */
 public class SmartCloudOAuthEndpoint extends OAuthEndpoint {
 
+	private static String REQUEST_TOKEN_PATH = "/manage/oauth/getRequestToken";
+	private static String AUTHORIZATION_PATH = "/manage/oauth/authorizeToken";
+	private static String ACCESS_TOKEN_PATH = "/manage/oauth/getAccessToken";
+	private static String AUTHENTICATION_SERVICE = "communities/service/atom/communities/my";
+	private static String SIGNATURE_METHOD = "PLAINTEXT";
+
 	private static final int authenticationErrorCode = 403;
 	
     public SmartCloudOAuthEndpoint() {
     	clientParams.put("isSmartCloud", true);
+    	
+    	initDefaults();
+    }
+    
+    /**
+     * Set default values for authentication service and signature method
+     */
+    protected void initDefaults() {
+    	if (StringUtil.isEmpty(getAuthenticationService())) {
+    		setAuthenticationService(AUTHENTICATION_SERVICE);
+    	}
+    	if (StringUtil.isEmpty(getSignatureMethod())) {
+    		setSignatureMethod(SIGNATURE_METHOD);
+    	}
     }
 
     @Override
@@ -53,5 +74,48 @@ public class SmartCloudOAuthEndpoint extends OAuthEndpoint {
     @Override
 	public int getAuthenticationErrorCode(){
     	return authenticationErrorCode;
+    }
+
+    @Override
+    public void setUrl(String url) {
+    	super.setUrl(url);
+
+    	// set defaults for other url's if not already set
+    	if (StringUtil.isEmpty(getRequestTokenURL())) {
+    		setRequestTokenURL(url + REQUEST_TOKEN_PATH);
+    	}
+    	if (StringUtil.isEmpty(getAuthorizationURL())) {
+    		setAuthorizationURL(url + AUTHORIZATION_PATH);
+    	}
+    	if (StringUtil.isEmpty(getAccessTokenURL())) {
+    		setAccessTokenURL(url + ACCESS_TOKEN_PATH);
+    	}
+    }
+    
+    /**
+     * Convenience method to set the serviceName and appId properties.
+     * 
+     * @param appName
+     */
+    public void setAppName(String appName) {
+    	setAppId(appName);
+    }
+    
+    /**
+     * Convenience method to set the consumerKey property.
+     * 
+     * @param clientID
+     */
+    public void setOAuthKey(String oAuthKey) {
+    	setConsumerKey(oAuthKey);
+    }
+    
+    /**
+     * Convenience method to set the consumerSecret property.
+     * 
+     * @param clientSecret
+     */
+    public void setOAuthSecret(String oAuthSecret) {
+    	setConsumerSecret(oAuthSecret);
     }
 }

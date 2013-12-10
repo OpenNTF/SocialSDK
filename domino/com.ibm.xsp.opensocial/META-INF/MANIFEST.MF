@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: OpenSocial Library for XPages
+Bundle-SymbolicName: com.ibm.xsp.opensocial;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: IBM
+Bundle-ClassPath: .
+Require-Bundle: org.eclipse.core.runtime,
+ com.ibm.commons,
+ com.ibm.commons.xml,
+ com.ibm.xsp.core,
+ com.ibm.xsp.extsn,
+ com.ibm.xsp.domino,
+ com.ibm.xsp.designer,
+ com.ibm.xsp.extlib,
+ com.ibm.sbt.opensocial.domino;visibility:=reexport,
+ com.ibm.fiesta.libs;visibility:=reexport
+Bundle-Activator: com.ibm.xsp.opensocial.OpenSocialActivator
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: com.ibm.xsp.opensocial

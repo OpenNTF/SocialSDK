@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012,2013
+ * ï¿½ Copyright IBM Corp. 2012,2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -44,7 +44,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
             authorEmail: "a:author/a:email",
             authorUri: "a:author/a:uri",
             tags : "a:category[not(@scheme)]/@term",
-            clickcount: "snx:clickcount",
+            clickcount: "snx:clickcount"
         }),
         
         /**

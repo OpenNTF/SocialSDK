@@ -6,10 +6,6 @@ import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.base.datahandlers.FieldEntry;
 
 public enum ColleagueConnectionXPath implements FieldEntry {
-	entry("/a:entry"),
-	id("./a:id"),
-	title("./a:title"),
-	updated("./a:updated"),
 	authorName("./snx:connection/a:contributor[@snx:rel=\"http://www.ibm.com/xmlns/prod/sn/connection/source\"]/a:name"),
 	authorUserId("./snx:connection/a:contributor[@snx:rel=\"http://www.ibm.com/xmlns/prod/sn/connection/source\"]/snx:userid"),
 	authorEmail("./snx:connection/a:contributor[@snx:rel=\"http://www.ibm.com/xmlns/prod/sn/connection/source\"]/a:email"),
@@ -17,8 +13,7 @@ public enum ColleagueConnectionXPath implements FieldEntry {
 	contributorUserId("./snx:connection/a:contributor[@snx:rel=\"http://www.ibm.com/xmlns/prod/sn/connection/target\"]/snx:userid"),
 	contributorEmail("./snx:connection/a:contributor[@snx:rel=\"http://www.ibm.com/xmlns/prod/sn/connection/target\"]/a:email"),
 	selfLinkFromEntry("./a:link[@rel=\"self\"]/@href"),
-	editLinkFromEntry("./a:link[@rel=\"edit\"]/@href"),
-	content("./a:content");
+	editLinkFromEntry("./a:link[@rel=\"edit\"]/@href");
 	
 	private final XPathExpression path;
 	
@@ -27,7 +22,6 @@ public enum ColleagueConnectionXPath implements FieldEntry {
 		try {
 			xpathExpr = DOMUtil.createXPath(xpath);
 		} catch (XMLException e) {
-			e.printStackTrace();
 		}
 		this.path = xpathExpr;
 	}

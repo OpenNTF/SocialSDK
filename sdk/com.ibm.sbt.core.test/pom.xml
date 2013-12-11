@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>com.ibm.sbt.core.test</artifactId>
-	<packaging>eclipse-test-plugin</packaging>
+	<packaging>jar</packaging>
 
 	<parent>
 		<groupId>com.ibm.sbt</groupId>
@@ -12,47 +12,31 @@
 	<build>
 
 		<plugins>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.11</version>
-				<executions>
-					<execution>
-						<id>test</id>
-						<phase>test</phase>
-						<goals>
-							<goal>test</goal>
-						</goals>
-						<inherited>false</inherited>
-						<configuration>
-							<systemPropertyVariables>
-								<testMode>mock</testMode>
-								<com.ibm.common.ExtensionManager>JavaServiceProvider</com.ibm.common.ExtensionManager>
-							</systemPropertyVariables>
-							<includes>
-								<include>**/ConnectionsTestSuite.java</include>
-								<include>**/SmartCloudTestSuite.java</include>
-							</includes>
-							<testClassesDirectory>${project.build.outputDirectory}</testClassesDirectory>
-						</configuration>
-					</execution>
-				</executions>
+
+				<configuration>
+					<systemPropertyVariables>
+						<testMode>mock</testMode>
+						<com.ibm.common.ExtensionManager>JavaServiceProvider</com.ibm.common.ExtensionManager>
+					</systemPropertyVariables>
+					<includes>
+						<include>**/ConnectionsTestSuite.java</include>
+						<include>**/SmartCloudTestSuite.java</include>
+						<include>**/ConnectionsJsTestSuite.java</include>
+					</includes>
+				</configuration>
+
 				<dependencies>
 					<dependency>
 						<groupId>org.apache.maven.surefire</groupId>
 						<artifactId>surefire-junit4</artifactId>
 						<version>2.11</version>
 					</dependency>
-
 				</dependencies>
-			</plugin>
-			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>tycho-surefire-plugin</artifactId>
-				<version>${tycho-version}</version>
-				<configuration>
-					<skipTests>true</skipTests>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
@@ -60,8 +44,78 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
+			<artifactId>com.ibm.commons</artifactId>
+			<version>9.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm.sbt</groupId>
+			<artifactId>com.ibm.commons.xml</artifactId>
+			<version>9.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm.sbt</groupId>
+			<artifactId>com.ibm.commons.runtime</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.sbt.core</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm.sbt</groupId>
+			<artifactId>com.ibm.sbt.web</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mozilla</groupId>
+			<artifactId>rhino</artifactId>
+			<version>1.7R4</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.james</groupId>
+			<artifactId>apache-mime4j</artifactId>
+			<version>0.6</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpmime</artifactId>
+			<version>4.2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpcore</artifactId>
+			<version>4.2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.2.2</version>
 		</dependency>
 	</dependencies>
 </project>

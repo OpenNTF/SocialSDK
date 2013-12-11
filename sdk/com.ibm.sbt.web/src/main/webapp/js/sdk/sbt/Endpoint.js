@@ -183,6 +183,7 @@ var Endpoint = declare(null, {
         	   	handleAs : "text"
         	};
         }
+        options.name = this.name;
         
         var promise = new Promise();
         promise.response = new Promise();       

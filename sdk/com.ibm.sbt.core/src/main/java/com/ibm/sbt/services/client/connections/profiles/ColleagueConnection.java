@@ -18,10 +18,12 @@ package com.ibm.sbt.services.client.connections.profiles;
 
 
 import org.w3c.dom.Node;
+
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.base.AtomEntity;
+import com.ibm.sbt.services.client.base.AtomXPath;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.connections.profiles.model.ColleagueConnectionXPath;
@@ -58,7 +60,7 @@ public class ColleagueConnection extends AtomEntity{
 	}
 
 	public void setConnectionId(String connectionId) {
-		setAsString(ColleagueConnectionXPath.id, connectionId);
+		setAsString(AtomXPath.id, connectionId);
 	}
 
 	/**

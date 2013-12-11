@@ -60,6 +60,25 @@ public class Member extends Person {
 			setUserid(id);
 		}
 	}
+	/**
+	 * Constructor
+	 * 
+	 * @param activityService
+	 * @param memberId
+	 * @param activityUUID
+	 * 
+	 */
+	protected Member(ActivityService activityService, String memberId, String activityUUID) {
+		setService(activityService);
+		if(memberId.contains("@")){
+			setEmail(memberId);
+		}
+		else{
+			setUserid(memberId);
+		}
+		this.id = memberId;
+		setActivityId(activityUUID);
+	}
 	
 	/**
 	 * Constructor
@@ -77,11 +96,9 @@ public class Member extends Person {
 	    		activityId = getAsString(ActivityXPath.Id);
 			} catch (Exception e) {}
 	    	
-	    	if(StringUtil.isEmpty(activityId)){
-	    		id = activityId;
-	    	}
-	    	id = id.substring(id.indexOf("=")+1, id.indexOf("&"));
-	    	return id;
+	    	if (activityId.contains("=") && activityId.contains("&"))
+	    	activityId = activityId.substring(activityId.indexOf("=")+1, activityId.indexOf("&"));
+	    	return activityId;
 	}
 	
 	/**
@@ -96,6 +113,10 @@ public class Member extends Person {
 	 */
 	public String getMemberId() {
 		String memberId =  getAsString(ActivityXPath.MemberId);
+		if (memberId==null) {
+			if (getUserid()!=null) return getUserid();
+			if (getEmail()!=null) return getEmail();
+		}
 		int start = memberId.lastIndexOf("memberid=");
 		memberId = memberId.substring(start);
 		int endAmp = memberId.indexOf("&");
@@ -157,13 +178,17 @@ public class Member extends Person {
 		setAsString(ActivityXPath.ContributorName, name);
 	}
 
+	protected void setActivityId(String id){
+		setAsString(ActivityXPath.Id, id);
+	}
+	
 	/**
 	 * @set id
 	 */
 	public void setUserid(String id) {
 		setAsString(ActivityXPath.ContributorUserUuid, id);
 	}
-	
+		
 	/**
 	 * @set email
 	 */
@@ -182,6 +207,11 @@ public class Member extends Person {
 		setAsString(ActivityXPath.role, role);
 	}
 		
+	@Override
+	public String getId() {
+		// overriding because id for a member can either be id or email, and the person xpath doesn't apply here
+		return id;
+	}
 	public Member load() throws ActivityServiceException
 	{
 	  	return getService().getMember(getActivityId(), getId());

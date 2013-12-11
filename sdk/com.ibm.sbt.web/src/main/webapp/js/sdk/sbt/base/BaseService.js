@@ -536,6 +536,21 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
                 message = stringUtil.substitute(message, [ entityId || "'undefined'" ]);
                 return this.createBadRequestPromise(message);
             }
+        },
+        
+        /**
+         * Returns HTML5 File Control object 
+         * @param {Object} fileControlOrId FileControl or ID of File Control
+         * @returns {Object} FileControl
+         */
+        getFileControl : function(fileControlOrId) {
+            var fileControl = null;
+            if (typeof fileControlOrId == "string") {
+                fileControl = document.getElementById(fileControlOrId);             
+            } else if (typeof fileControlOrId == "object") {
+                fileControl = fileControlOrId;
+            }
+            return fileControl;
         }
 
     });

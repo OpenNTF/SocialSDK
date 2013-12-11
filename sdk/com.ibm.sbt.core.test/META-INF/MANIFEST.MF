@@ -7,3 +7,4 @@ Bundle-Vendor: IBM
 Fragment-Host: com.ibm.sbt.core
 Require-Bundle: org.junit;bundle-version="4.0.0"
 Import-Package: org.apache.http.impl.client
+

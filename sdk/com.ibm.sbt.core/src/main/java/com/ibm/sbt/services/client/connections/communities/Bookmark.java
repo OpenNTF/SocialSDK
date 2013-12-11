@@ -1,7 +1,12 @@
 package com.ibm.sbt.services.client.connections.communities;
 
-import com.ibm.sbt.services.client.base.BaseEntity;
-import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
+import org.w3c.dom.Node;
+
+import com.ibm.commons.xml.NamespaceContext;
+import com.ibm.commons.xml.xpath.XPathExpression;
+import com.ibm.sbt.services.client.base.AtomEntity;
+import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.connections.communities.model.CommunityXPath;
 
 /**
@@ -10,52 +15,38 @@ import com.ibm.sbt.services.client.connections.communities.model.CommunityXPath;
  * @author Swati Singh
  */
 
-public class Bookmark extends BaseEntity{
+public class Bookmark extends AtomEntity{
 
-
+	/**
+     * Constructor
+     * @param communityService
+     * @param id
+     */
 	public Bookmark(CommunityService communityService, String id) {
+		super(communityService, id);
 		setService(communityService);
 		setAsString(CommunityXPath.id, id);
 	}
-	
-	public Bookmark(CommunityService svc, DataHandler<?> handler)
+	/**
+     * Constructor
+     * @param svc
+     * @param handler
+     */
+	public Bookmark(CommunityService svc, XmlDataHandler handler)
 	{
 		super(svc,handler);
 	}
 	
-	
 	/**
-	 * getId
-	 * 
-	 * @return id
-	 */	
-	public String getId() {
-		return getAsString(CommunityXPath.id);
+     * Constructor
+     * @param BaseService
+     * @param Node
+     * @param NamespaceContext
+     * @param XPathExpression
+     */
+	public Bookmark(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
+		super(service, node, namespaceCtx, xpathExpression);
 	}
 	
-	/**
-	 * getTitle
-	 * 
-	 * @return title
-	 */	
-	public String getTitle() {
-		return getAsString(CommunityXPath.title);
-	}
-
-	/**
-	 * getSummary
-	 * 
-	 * @return summary
-	 */	
-	public String getSummary() {
-		return getAsString(CommunityXPath.summary);
-	}
-
-	/**
-	 * Method sets the bookmark title
-	 */	
-	public void setTitle(String title) {
-		setAsString(CommunityXPath.title, title);
-	}
 
 }

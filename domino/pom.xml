@@ -20,8 +20,10 @@
 	<modules>
 		<module>com.ibm.xsp.sbtsdk</module>
 		<module>com.ibm.sbt.playground</module>
+		<module>com.ibm.sbt.opensocial.domino.explorer</module>
 		<module>com.ibm.sbt.opensocial.domino</module>
 		<module>com.ibm.xsp.opensocial</module>
+		<module>com.ibm.sbt.opensocial.domino.explorer.feature</module>
 		<module>com.ibm.sbt.opensocial.domino.feature</module>
 		<module>com.ibm.sbt.domino.feature</module>
 		<module>com.ibm.sbt.domino.updatesite</module>

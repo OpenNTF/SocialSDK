@@ -31,7 +31,11 @@ import com.ibm.sbt.services.client.connections.profiles.model.ColleagueConnectio
 public class ColleagueConnection extends AtomEntity{
 	
 	private final String CONNECTIONID = "tag:profiles.ibm.com,2006:entry";
-	
+	/**
+	 * Constructor
+	 * @param BaseService
+	 * @param handler
+	 */
 	public ColleagueConnection(BaseService svc, XmlDataHandler handler) {
 		super(svc, handler);
 	}
@@ -47,7 +51,7 @@ public class ColleagueConnection extends AtomEntity{
 	}
 
 	/**
-	 * @return the title
+	 * @return the Connection Id
 	 */
 	public String getConnectionId() {
 	       String id = getId();
@@ -58,7 +62,9 @@ public class ColleagueConnection extends AtomEntity{
 	        }
 	        return id;
 	}
-
+	/**
+	 * sets the Connection Id
+	 */
 	public void setConnectionId(String connectionId) {
 		setAsString(AtomXPath.id, connectionId);
 	}
@@ -110,11 +116,16 @@ public class ColleagueConnection extends AtomEntity{
 	public String getAuthorEmail() {
 		return getAsString(ColleagueConnectionXPath.authorEmail);
 	}
-
+	/**
+	 * @return self Url of colleague connection entry
+	 */
 	@Deprecated
 	public String getSelfLink(){
 		return getAsString(ColleagueConnectionXPath.selfLinkFromEntry);
 	}
+	/**
+	 * @return edit Url of colleague connection entry
+	 */
 	@Deprecated
 	public String getEditLink(){
 		return getAsString(ColleagueConnectionXPath.editLinkFromEntry);

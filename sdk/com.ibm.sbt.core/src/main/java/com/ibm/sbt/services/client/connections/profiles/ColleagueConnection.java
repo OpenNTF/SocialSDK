@@ -17,51 +17,54 @@ o * © Copyright IBM Corp. 2013
 package com.ibm.sbt.services.client.connections.profiles;
 
 
-import com.ibm.sbt.services.client.base.BaseEntity;
+import org.w3c.dom.Node;
+import com.ibm.commons.util.StringUtil;
+import com.ibm.commons.xml.NamespaceContext;
+import com.ibm.commons.xml.xpath.XPathExpression;
+import com.ibm.sbt.services.client.base.AtomEntity;
 import com.ibm.sbt.services.client.base.BaseService;
-import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
+import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.connections.profiles.model.ColleagueConnectionXPath;
 
-public class ColleagueConnection extends BaseEntity{
-
-	public ColleagueConnection(BaseService svc, DataHandler<?> handler) {
+public class ColleagueConnection extends AtomEntity{
+	
+	private final String CONNECTIONID = "tag:profiles.ibm.com,2006:entry";
+	
+	public ColleagueConnection(BaseService svc, XmlDataHandler handler) {
 		super(svc, handler);
 	}
-	
+	/**
+	 * Constructor
+	 * @param BaseService
+	 * @param Node
+	 * @param NamespaceContext
+	 * @param XPathExpression
+	 */
+	public ColleagueConnection(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
+		super(service, node, namespaceCtx, xpathExpression);
+	}
+
 	/**
 	 * @return the title
 	 */
 	public String getConnectionId() {
-		String selfLink = getSelfLink();
-		String connectionId = selfLink.substring(selfLink.lastIndexOf("=")+1,selfLink.length());
-		return connectionId;
+	       String id = getId();
+	        if(StringUtil.isNotEmpty(id)){
+	                if(StringUtil.startsWithIgnoreCase(id, CONNECTIONID)){
+	                        id = id.substring(CONNECTIONID.length());
+	                }
+	        }
+	        return id;
 	}
 
 	public void setConnectionId(String connectionId) {
 		setAsString(ColleagueConnectionXPath.id, connectionId);
 	}
-	/**
-	 * @return the title
-	 */
-	public String getTitle() {
-		return getAsString(ColleagueConnectionXPath.title);
-	}
-
-	public void setTitle(String title) {
-		setAsString(ColleagueConnectionXPath.title, title);
-	}
-
-
-	/**
-	 * @return the content
-	 */
-	public String getContent() {
-		return getAsString(ColleagueConnectionXPath.content);
-	}
 
 	/**
 	 * @return the Contributor Name
 	 */
+	@Deprecated
 	public String getContributorName() {
 		return getAsString(ColleagueConnectionXPath.contributorName);
 	}
@@ -69,6 +72,7 @@ public class ColleagueConnection extends BaseEntity{
 	/**
 	 * @return the Contributor UserId
 	 */
+	@Deprecated
 	public String getContributorUserId() {
 		return getAsString(ColleagueConnectionXPath.contributorUserId);
 	}
@@ -76,6 +80,7 @@ public class ColleagueConnection extends BaseEntity{
 	/**
 	 * @return the Contributor Email
 	 */
+	@Deprecated
 	public String getContributorEmail() {
 		return getAsString(ColleagueConnectionXPath.contributorEmail);
 	}
@@ -83,6 +88,7 @@ public class ColleagueConnection extends BaseEntity{
 	/**
 	 * @return the Author Name
 	 */
+	@Deprecated
 	public String getAuthorName() {
 		return getAsString(ColleagueConnectionXPath.authorName);
 	}
@@ -90,6 +96,7 @@ public class ColleagueConnection extends BaseEntity{
 	/**
 	 * @return the Author UserId
 	 */
+	@Deprecated
 	public String getAuthorUserId() {
 		return getAsString(ColleagueConnectionXPath.authorUserId);
 	}
@@ -97,26 +104,20 @@ public class ColleagueConnection extends BaseEntity{
 	/**
 	 * @return the Author Email
 	 */
+	@Deprecated
 	public String getAuthorEmail() {
 		return getAsString(ColleagueConnectionXPath.authorEmail);
 	}
-	
-	public void setContent(String content) {
-		setAsString(ColleagueConnectionXPath.content, content);
-	}
 
-	public String getUpdated() {
-		return getAsString(ColleagueConnectionXPath.updated);
-	}
-
+	@Deprecated
 	public String getSelfLink(){
 		return getAsString(ColleagueConnectionXPath.selfLinkFromEntry);
 	}
-
+	@Deprecated
 	public String getEditLink(){
 		return getAsString(ColleagueConnectionXPath.editLinkFromEntry);
 	}
-	
-	
+
+
 
 }

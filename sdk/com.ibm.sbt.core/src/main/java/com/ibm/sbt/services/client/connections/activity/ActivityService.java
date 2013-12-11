@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -20,7 +20,6 @@ import java.io.InputStream;
 import java.net.URI;
 import java.nio.charset.Charset;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -548,7 +547,7 @@ public class ActivityService extends BaseService {
 		}
 		String requestUri = ActivityServiceUrlBuilder.populateURL(ActivityAction.ACL.getActivityAction());
 		try {
-			Map<String, String> params = new LinkedHashMap<String, String>();
+			Map<String, String> params = new HashMap<String, String>();
 			params.put("activityUuid", activityId);
 			if(EntityUtil.isEmail(memberId)){
 				params.put("email", memberId);

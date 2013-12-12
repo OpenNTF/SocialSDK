@@ -20,6 +20,7 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.automation.core.test.BaseApiTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 
@@ -39,8 +40,8 @@ public class GetBlogsTags extends BaseApiTest {
     @Test
     public void testGetBlogsTags() {
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
-        List jsonList = previewPage.getJsonList();
-        Assert.assertFalse("GetBlogsTags returned no results", jsonList.isEmpty());
+        JsonJavaObject json = previewPage.getJson();         
+        Assert.assertEquals(200, json.getAsInt("status"));
     }
 
 }

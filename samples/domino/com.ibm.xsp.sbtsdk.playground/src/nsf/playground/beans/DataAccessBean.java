@@ -48,7 +48,6 @@ public abstract class DataAccessBean {
 	
 	private boolean cacheFilled;
 	private Map<String,PlaygroundEnvironment> environments = new HashMap<String,PlaygroundEnvironment>();
-	private Map<String, ContainerExtPoint> extPoints = new HashMap<String, ContainerExtPoint>();
 	private String[] envNames = StringUtil.EMPTY_STRING_ARRAY;
 	
 	public DataAccessBean() {
@@ -60,11 +59,9 @@ public abstract class DataAccessBean {
 		}
 		cacheFilled = false;
 		envNames = StringUtil.EMPTY_STRING_ARRAY;
-		environments.clear();
-		
 		ContainerExtPointManager.unregisterContainers(
-				new ImmutableList.Builder<ContainerExtPoint>().addAll(extPoints.values()).build());
-		extPoints.clear();
+				new ImmutableList.Builder<ContainerExtPoint>().addAll(environments.values()).build());
+		environments.clear();
 	}
 
 	public synchronized String getPreferredEnvironment() throws IOException {
@@ -191,9 +188,7 @@ public abstract class DataAccessBean {
 							PlaygroundEnvironment env = readEnvironment(d);
 							if(envs.length==0 || StringUtil.contains(envs, env.getName())) {
 								env.setDbPath(db.getFilePath());
-								env.setReplicaId(db.getReplicaID());
 								environments.put(env.getName(), env);
-								extPoints.put(env.getName(), env);
 								if(TRACE) {
 									System.out.println("Loading environment: "+env.getName());
 								}
@@ -209,7 +204,7 @@ public abstract class DataAccessBean {
 			(new QuickSort.JavaList(allEnvs)).sort();
 			//We don't want a custom container so register them before we add custom
 			ContainerExtPointManager.registerContainers(
-					new ImmutableList.Builder<ContainerExtPoint>().addAll(extPoints.values()).build());
+					new ImmutableList.Builder<ContainerExtPoint>().addAll(environments.values()).build());
 			
 			allEnvs.add(CUSTOM); // Always the last one...
 			

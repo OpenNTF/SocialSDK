@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -17,10 +17,15 @@
 package com.ibm.sbt.services.client.connections.activity;
 
 import java.io.InputStream;
+import java.net.URI;
+import java.nio.charset.Charset;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.http.HttpStatus;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.utils.URLEncodedUtils;
 
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.Response;
@@ -434,7 +439,19 @@ public class ActivityService extends BaseService {
 			Response requestData = createData(requestUri, params, headers, memberPayload);
 			member.clearFieldsMap();
 			if(requestData.getData() instanceof InputStream && requestData.getResponse().getStatusLine().getStatusCode() == HttpStatus.SC_CREATED) {
-				return null;
+				
+				if (requestData.getResponse().getFirstHeader("Location")!=null){
+				String location = requestData.getResponse().getFirstHeader("Location").getValue();
+				List<NameValuePair> parameters =  URLEncodedUtils.parse(new URI(location).getRawQuery(), Charset.forName("UTF-8"));
+				String activityUuid = null;
+				String memberid = null;
+				for (NameValuePair p : parameters) {
+					if (p.getName().equals("activityUuid")) activityUuid = p.getValue();
+					if (p.getName().equals("memberid")) memberid = p.getValue();
+				}
+				if (memberid!=null && activityUuid!=null)
+				return new Member(this, memberid, activityUuid);
+				}
 			}
 			return (Member) new MemberFeedHandler(this).createEntity(requestData);
 		} catch (Exception e) {
@@ -535,7 +552,7 @@ public class ActivityService extends BaseService {
 			if(EntityUtil.isEmail(memberId)){
 				params.put("email", memberId);
 			}else{
-				params.put("memberId", memberId);
+				params.put("memberid", memberId);
 			}
 			
         	return (Member) getEntity(requestUri, params, new MemberFeedHandler(this));

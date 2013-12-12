@@ -65,6 +65,7 @@ public class ColleagueConnection extends AtomEntity{
 	/**
 	 * sets the Connection Id
 	 */
+	@Deprecated
 	public void setConnectionId(String connectionId) {
 		super.setId(connectionId);
 	}

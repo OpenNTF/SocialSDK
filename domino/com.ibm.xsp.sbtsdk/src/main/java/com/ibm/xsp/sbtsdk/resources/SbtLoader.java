@@ -196,7 +196,7 @@ public class SbtLoader extends ResourceLoader {
     }
     public CSSResource loadCSSResource(String name, DojoLibrary dojoLibrary) {
         if(name.startsWith("/.ibmxspres/.sbtsdk/bootstrap/")) { // $NON-NLS-1$
-            String path = BASE_WEBRESOURCE_PATH+"bootstrap/"+name.substring(30); // $NON-NLS-1$
+            String path = "/resources/bootstrap/css/"+name.substring(30); // $NON-NLS-1$
             URL u = ExtLibUtil.getResourceURL(SbtWebActivator.instance.getBundle(), path);
             if(u!=null) {
                 return new SbtCSSResource(dojoLibrary,name,u);

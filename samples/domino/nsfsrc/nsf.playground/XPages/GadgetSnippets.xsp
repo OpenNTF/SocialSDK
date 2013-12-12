@@ -3,13 +3,13 @@
 	xmlns:xe="http://www.ibm.com/xsp/coreex">
 	<xp:this.resources>
 		<xp:script
-			src="/.ibmxspres/domino/osplayground/gadgets/js/container:embedded-experiences:open-views:actions:selection.js?c=1&amp;debug=1&amp;container=playground"
+			src="#{javascript:gadgetSnippetBean.getContainerUrl()}"
 			clientSide="true">
 		</xp:script>
 		<xp:script src="/commonSnippets.js" clientSide="true"></xp:script>
 		<xp:script src="/gadgetSnippets.js" clientSide="true"></xp:script>
 		<xp:dojoModulePath prefix="explorer"
-			url="/.ibmxspres/domino/osplayground/explorer">
+			url="/.ibmxspres/domino/explorer/js">
 		</xp:dojoModulePath>
 		<xp:dojoModulePath prefix="playground" url="/modules">
 		</xp:dojoModulePath>
@@ -119,6 +119,11 @@ return o;]]></xe:this.script>
 					splitter="true" style="width:300px">
 					<xe:djBorderContainer id="djBorderContainer2"
 						style="width: 100%">
+						<xe:djBorderPane id="djBorderPane3" region="top">
+							Environments:
+							<br />
+							<xc:ccEnvironmentComboBox></xc:ccEnvironmentComboBox>
+						</xe:djBorderPane>
 						<xe:djBorderPane id="djBorderPane5" region="center">
 							<xc:ccAssetTree type="gadget"></xc:ccAssetTree>
 						</xe:djBorderPane>

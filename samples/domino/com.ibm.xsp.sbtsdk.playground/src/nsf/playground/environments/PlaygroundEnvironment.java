@@ -164,17 +164,13 @@ public class PlaygroundEnvironment extends SBTEnvironment implements ContainerEx
 		}
 	}
 	
-	public void setReplicaId(String replicaId) {
-		this.replicaId = replicaId;
-	}
-	
 	public void setDbPath(String path) {
 		this.dbPath = path;
 	}
 	
 	@Override
 	public String getId() {
-		return dbPath + ":" + replicaId + ":" + getName();
+		return dbPath + ":" + getName();
 	}
 	
 	@Override

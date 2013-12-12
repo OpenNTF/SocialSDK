@@ -25,7 +25,7 @@ Require-Bundle: org.eclipse.core.runtime,
  com.ibm.sbt.web,
  com.ibm.pvc.servlet.jsp,
  com.ibm.xsp.sbtsdk,
- com.ibm.xsp.opensocial;resolution:=optional
+ com.ibm.xsp.opensocial
 Export-Package: com.ibm.xsp.sbtsdk.playground.sbt,com.ibm.xsp.sbtsdk.p
  layground.sbt.extension,nsf.playground.beans,nsf.playground.environme
  nts,nsf.playground.extension,nsf.playground.jobs,nsf.playground.json,

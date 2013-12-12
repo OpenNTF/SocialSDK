@@ -222,11 +222,16 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>manual</distribution>
+		</license>
+	</licenses>
 	<scm>
-		<connection>scm:git:https://github.com/LorenzoBoccaccia/SocialSDK.git</connection>
-		<url>https://github.com/LorenzoBoccaccia/SocialSDK.git</url>
-		<developerConnection>scm:git:git@github.com:LorenzoBoccaccia/SocialSDK.git</developerConnection>
-
-
+		<connection>scm:git:https://github.com/OpenNTF/SocialSDK.git</connection>
+		<url>https://github.com/OpenNTF/SocialSDK.git</url>
+		<developerConnection>scm:git:git@github.com:OpenNTF/SocialSDK.git</developerConnection>
 	</scm>
 </project>

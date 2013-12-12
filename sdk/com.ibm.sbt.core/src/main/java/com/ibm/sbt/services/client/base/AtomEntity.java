@@ -93,6 +93,7 @@ public class AtomEntity extends BaseEntity {
     public String getId() {
         return this.getAsString(AtomXPath.id);
     }
+
     /**
      * Sets Id of ATOM entry.
      * 

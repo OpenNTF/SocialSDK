@@ -250,6 +250,20 @@ public class BaseFilesTest extends BaseApiTest {
 
 	}
 
+	public void deleteFile(File file) {
+		fileService = getFileService();
+		if (file != null) {
+			try {
+				fileService.deleteFile(file.getFileId());
+			} catch (FileServiceException fse) {
+				if (failIfAfterDeletionFails()) {
+					fail("Error deleting test file: ", fse);
+					fse.printStackTrace();
+				}
+			}
+		}
+	}
+
 	/** @return */
 	protected boolean checkNoError(String snippetId) {
 		String text = executeSnippet1(snippetId);

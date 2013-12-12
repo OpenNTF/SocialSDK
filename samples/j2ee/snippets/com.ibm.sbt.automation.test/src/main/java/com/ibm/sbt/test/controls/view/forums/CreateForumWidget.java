@@ -13,17 +13,20 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-package com.ibm.sbt.test.controls.view;
+package com.ibm.sbt.test.controls.view.forums;
 
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import com.ibm.sbt.automation.core.test.BaseTest.AuthType;
+import com.ibm.sbt.automation.core.test.connections.BaseFilesTest;
 import com.ibm.sbt.automation.core.test.connections.BaseForumsTest;
 import com.ibm.sbt.automation.core.test.pageobjects.BaseResultPage;
 import com.ibm.sbt.automation.core.test.pageobjects.ResultPage;
 import com.ibm.sbt.services.client.connections.forums.Forum;
+import com.ibm.sbt.test.controls.view.files.AddTagsWidget.WidgetResultPage;
 
 public class CreateForumWidget extends BaseForumsTest {
 	

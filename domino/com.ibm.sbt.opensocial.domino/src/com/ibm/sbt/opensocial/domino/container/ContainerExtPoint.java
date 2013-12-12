@@ -12,10 +12,10 @@ import com.ibm.sbt.opensocial.domino.config.OpenSocialContainerConfig;
 public interface ContainerExtPoint {
 	
 	/**
-	 * The name of the container.  This should be unique among all other containers.
-	 * @return The name of the container.
+	 * The ID of the container.  This should be unique among all other containers.
+	 * @return The ID of the container.
 	 */
-	public String getName();
+	public String getId();
 	
 	/**
 	 * Gets the container configuration object for this container.

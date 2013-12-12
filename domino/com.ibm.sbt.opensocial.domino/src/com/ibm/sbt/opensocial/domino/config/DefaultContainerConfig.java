@@ -9,6 +9,7 @@ import org.apache.shindig.common.util.CharsetUtil;
 import org.apache.shindig.config.ContainerConfig;
 
 import com.google.caja.util.Maps;
+import com.google.common.base.Objects;
 
 /**
  * A default implementation of OpenSocialContainerConfig.  This implementation contains properties and
@@ -34,5 +35,23 @@ public class DefaultContainerConfig implements OpenSocialContainerConfig {
 	@Override
 	public Map<String, Object> getProperties() {
 		return props;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		boolean equal = false;
+		if(o instanceof OpenSocialContainerConfig) {
+			OpenSocialContainerConfig test = (OpenSocialContainerConfig)o;
+			equal = this.getProperties().keySet().size() == test.getProperties().size();
+			//Do not verify the security token keys match, there is no guarantee they will
+			equal &= this.getProperties().get(ContainerConfig.PARENT_KEY).equals(test.getProperties().get(ContainerConfig.PARENT_KEY)) &&
+					this.getProperties().get(SecurityTokenCodec.SECURITY_TOKEN_TTL_CONFIG).equals(test.getProperties().get(SecurityTokenCodec.SECURITY_TOKEN_TTL_CONFIG));
+		}
+		return equal;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hashCode(props);
 	}
 }

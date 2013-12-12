@@ -119,7 +119,7 @@ public class ContainerExtPointManager {
 	 */
 	public static void registerContainers(Collection<ContainerExtPoint> containers) {
 		for(ContainerExtPoint extPoint : containers) {
-			ContainerExtPointManager.containers.put(extPoint.getName(), extPoint);
+			ContainerExtPointManager.containers.put(extPoint.getId(), extPoint);
 		}
 		synchronized(listeners) {
 			for(ContainerExtPointListener listener : listeners) {
@@ -134,7 +134,7 @@ public class ContainerExtPointManager {
 	 */
 	public static void unregisterContainers(Collection<ContainerExtPoint> containers) {
 		for(ContainerExtPoint extPoint : containers) {
-			ContainerExtPointManager.containers.remove(extPoint.getName());
+			ContainerExtPointManager.containers.remove(extPoint.getId());
 		}
 		synchronized(listeners) {
 			for(ContainerExtPointListener listener : listeners) {

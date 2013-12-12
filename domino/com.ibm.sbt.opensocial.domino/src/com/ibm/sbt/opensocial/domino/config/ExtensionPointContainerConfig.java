@@ -79,11 +79,11 @@ public class ExtensionPointContainerConfig extends JsonContainerConfig {
 					Map<String, Object> containerProps = extPoint.getContainerConfig().getProperties();
 					if(!containerProps.containsKey(ContainerConfig.CONTAINER_KEY)) {
 						containerProps.put(ContainerConfig.CONTAINER_KEY, 
-								new ImmutableList.Builder<String>().add(extPoint.getName()).build());
+								new ImmutableList.Builder<String>().add(extPoint.getId()).build());
 					}
 					transaction.addContainer(containerProps);
 				} else {
-					transaction.removeContainer(extPoint.getName());
+					transaction.removeContainer(extPoint.getId());
 				}
 			}
 			try {

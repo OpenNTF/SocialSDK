@@ -7,11 +7,16 @@ import java.util.Map;
 
 import javax.faces.context.FacesContext;
 
+import org.apache.shindig.gadgets.oauth.OAuthStore;
+
 import nsf.playground.beans.DataAccessBean;
 import nsf.playground.extension.Endpoints;
 
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.jslibrary.SBTEnvironment;
+import com.ibm.sbt.opensocial.domino.config.DefaultContainerConfig;
+import com.ibm.sbt.opensocial.domino.config.OpenSocialContainerConfig;
+import com.ibm.sbt.opensocial.domino.container.ContainerExtPoint;
 import com.ibm.sbt.playground.extension.PlaygroundExtensionFactory;
 
 /**
@@ -19,7 +24,7 @@ import com.ibm.sbt.playground.extension.PlaygroundExtensionFactory;
  * @author priand
  *
  */
-public class PlaygroundEnvironment extends SBTEnvironment {
+public class PlaygroundEnvironment extends SBTEnvironment implements ContainerExtPoint {
 
 	public static final String SESSION_PARAMETERS_MAP	 = "sessionParamsMap";
 	
@@ -52,7 +57,11 @@ public class PlaygroundEnvironment extends SBTEnvironment {
 
 	private String noteID;
 	private String description;
-	private boolean preferred;	
+	private boolean preferred;
+	private String replicaId;
+	private String dbPath;
+	private OpenSocialContainerConfig containerConfig = new DefaultContainerConfig();
+	
 	
 	private FieldMap fields = new FieldMap();
 		
@@ -154,4 +163,29 @@ public class PlaygroundEnvironment extends SBTEnvironment {
 			}
 		}
 	}
+	
+	public void setReplicaId(String replicaId) {
+		this.replicaId = replicaId;
+	}
+	
+	public void setDbPath(String path) {
+		this.dbPath = path;
+	}
+	
+	@Override
+	public String getId() {
+		return dbPath + ":" + replicaId + ":" + getName();
+	}
+	
+	@Override
+	public OpenSocialContainerConfig getContainerConfig() {
+		return containerConfig;
+	}
+	
+	@Override
+	public OAuthStore getContainerOAuthStore() {
+		// TODO Return something once we have an implementation
+		return null;
+	}
+
 }

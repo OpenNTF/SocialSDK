@@ -95,6 +95,16 @@ public class AtomEntity extends BaseEntity {
     }
 
     /**
+     * Sets Id of ATOM entry.
+     * 
+     * @method setId
+     * @param {String} ID of the ATOM entry
+     */
+    public void setId(String id) {
+        setAsString(AtomXPath.id, id);
+    }
+
+    /**
      * Return the value of title from ATOM entry document.
      * 
      * @method getTitle

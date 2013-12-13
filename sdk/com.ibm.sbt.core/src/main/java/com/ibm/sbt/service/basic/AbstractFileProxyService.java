@@ -27,6 +27,7 @@ import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.ibm.commons.runtime.NoAccessSignal;
+import com.ibm.commons.runtime.mime.MIME;
 import com.ibm.commons.util.PathUtil;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.ClientService;
@@ -110,7 +111,7 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 				if (smethod.equalsIgnoreCase("POST") || (smethod.equalsIgnoreCase("PUT"))) {
 					FileItemFactory factory = new DiskFileItemFactory();
 					// Create a new file upload handler
-					ServletFileUpload upload = new ServletFileUpload(factory);
+					ServletFileUpload upload = new ServletFileUpload(factory);					
 					// Parse the request
 					@SuppressWarnings("unchecked")
 					List<FileItem> fileItems = upload.parseRequest(request);
@@ -118,21 +119,17 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 						writeErrorResponse(HttpServletResponse.SC_BAD_REQUEST, "No File Item found in Multipart Form data", new String[] {}, new String[] {}, response, request);
 						return;
 					}
-					for (FileItem uploadedFile : fileItems) {
+					for (FileItem uploadedFile : fileItems) {						 
 						InputStream uploadedFileContent = uploadedFile.getInputStream();
-						File file = convertInputStreamToFile(uploadedFileContent, uploadedFile.getSize());
 						Map<String, String[]> params = request.getParameterMap() != null ? request.getParameterMap() : new HashMap<String, String[]>();
-						
 						String contentType = uploadedFile.getContentType();
-						Content content = null;
 						if (StringUtil.isEmpty(contentType) || MIMETYPE_UNKNOWN.equalsIgnoreCase(contentType)) {
-							content = getFileContent(file, length, parameters.get("FileName"));
-						} else {
-							content = new ContentFile(file, contentType);
+							String fileExt = MIME.getFileExtension(parameters.get("FileName"));
+							contentType = MIME.getMIMETypeFromExtension(fileExt);
 						}
-						
-						Map<String, String> headers = createHeaders();
-
+						Content content = new com.ibm.sbt.services.client.ClientService.ContentStream(uploadedFile.getName(), uploadedFileContent, uploadedFile.getSize(), contentType);					
+						Map<String, String> headers = createHeaders();						
+						headers.put("Content-Type", contentType);
 						xhr(request, response, url.getPath(), params, headers, content, getFormat());
 					}
 				} else if (smethod.equalsIgnoreCase("GET")) {
@@ -151,34 +148,7 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 		}
 	}
 
-	protected abstract Handler getFormat();
-
-	private File convertInputStreamToFile(InputStream inputStream, Long size) throws IOException {
-
-		OutputStream out = null;
-		try {
-			File file = new File(parameters.get("FileName")); // TODO check with Phil to avoid conflict in name
-			out = new FileOutputStream(file);
-			int bufferSize = size.intValue() < 8192 ? size.intValue() : 8192;
-			byte[] bytes = new byte[bufferSize];
-			int read = 0;
-			while ((read = inputStream.read(bytes)) != -1) {
-				length += read;
-				out.write(bytes);
-				out.flush();
-			}
-			inputStream.close();
-			out.close();
-			return file;
-		} catch (IOException e) {
-			throw e;
-		} finally {
-			inputStream.close();
-			if (out != null) {
-				out.close();
-			}
-		}
-	}
+	protected abstract Handler getFormat();	
 
 	protected abstract Map<String, String> createHeaders();
 

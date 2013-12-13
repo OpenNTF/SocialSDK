@@ -43,9 +43,14 @@ public class Author extends Person {
 //		this.dataHandler = dataHandler;
 //	}
 //	
-//	public String getUserid() {
-//		return dataHandler.getAsString(ForumsXPath.actorUserid);
-//	}
+	/*
+	 *  Keeping this method for now to prevent breakage for existing users.
+	 *  New users should use getId() instead of getUserId()
+	 */
+	@Deprecated
+	public String getUserid() {
+		return super.getId();
+	}
 //
 //	
 //	public String getName() {

@@ -77,6 +77,10 @@ public class ConnectionsFileProxyService extends AbstractFileProxyService {
 	protected Map<String, String> createHeaders() {
 		Map<String, String> headers = new HashMap<String, String>();
 		headers.put(X_UPDATE_NONCE, "");
+		// Slug Header required in case not using ContentFile for File Upload
+		if (parameters.containsKey("FileName")) {
+			headers.put("Slug", parameters.get("FileName"));
+		}
 		return headers;
 	}
 

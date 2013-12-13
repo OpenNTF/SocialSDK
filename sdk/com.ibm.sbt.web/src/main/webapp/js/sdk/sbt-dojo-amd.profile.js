@@ -49,7 +49,7 @@ var profile = {
 	// this is a "new-version" profile since is sets the variable "profile" rather than "dependencies"; therefore
 	// the layers property is a map from AMD module id to layer properties...
 	layers: {
-		"sbt-core": {
+		"sbt-core-dojo-amd": {
 			// the module dojo/dojo is the default loader (you can make multiple bootstraps with the new builder)
 			include: [
 				"sbt/main"
@@ -60,7 +60,7 @@ var profile = {
 			customBase: true,
 			boot: false 
 		},
-		"sbt-extra-controls": {
+		"sbt-extra-controls-dojo-amd": {
 			include: [
 				"sbt/control-main"
 			],

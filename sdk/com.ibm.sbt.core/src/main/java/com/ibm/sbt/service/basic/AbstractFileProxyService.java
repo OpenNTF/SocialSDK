@@ -121,9 +121,14 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 					for (FileItem uploadedFile : fileItems) {						 
 						InputStream uploadedFileContent = uploadedFile.getInputStream();
 						Map<String, String[]> params = request.getParameterMap() != null ? request.getParameterMap() : new HashMap<String, String[]>();
-						Content content = new com.ibm.sbt.services.client.ClientService.ContentStream(uploadedFileContent);						
-						Map<String, String> headers = createHeaders();
-
+						String contentType = uploadedFile.getContentType();
+						if (StringUtil.isEmpty(contentType) || MIMETYPE_UNKNOWN.equalsIgnoreCase(contentType)) {
+							String fileExt = MIME.getFileExtension(parameters.get("FileName"));
+							contentType = MIME.getMIMETypeFromExtension(fileExt);
+						}
+						Content content = new com.ibm.sbt.services.client.ClientService.ContentStream(uploadedFile.getName(), uploadedFileContent, uploadedFile.getSize(), contentType);					
+						Map<String, String> headers = createHeaders();						
+						headers.put("Content-Type", contentType);
 						xhr(request, response, url.getPath(), params, headers, content, getFormat());
 					}
 				} else if (smethod.equalsIgnoreCase("GET")) {

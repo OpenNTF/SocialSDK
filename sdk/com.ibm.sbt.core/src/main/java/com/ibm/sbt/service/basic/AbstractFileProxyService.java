@@ -27,6 +27,7 @@ import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.ibm.commons.runtime.NoAccessSignal;
+import com.ibm.commons.runtime.mime.MIME;
 import com.ibm.commons.util.PathUtil;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.ClientService;

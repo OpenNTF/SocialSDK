@@ -94,7 +94,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
 			acls : "td:permissions",
 			hitCount : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/hit']",
 			anonymousHitCount : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/anonymous_hit']",
-			tags : "a:category/@term",
+			tags : "a:category[not(@scheme)]/@term",
 			category : "a:category/@label"
         },
         

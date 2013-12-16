@@ -20,8 +20,8 @@
  * 
  * @module sbt.connections.ForumService
  */
-define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", "./ForumConstants", "../base/BaseService", "../base/AtomEntity", "../base/XmlDataHandler" ], 
-    function(declare,config,lang,stringUtil,Promise,consts,BaseService,AtomEntity,XmlDataHandler) {
+define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", "./ForumConstants", "./ConnectionsService", "../base/AtomEntity", "../base/XmlDataHandler" ], 
+    function(declare,config,lang,stringUtil,Promise,consts,ConnectionsService,AtomEntity,XmlDataHandler) {
 	
 	var CategoryForum = "<category scheme=\"http://www.ibm.com/xmlns/prod/sn/type\" term=\"forum-forum\"></category>";
 	var CategoryTopic = "<category scheme=\"http://www.ibm.com/xmlns/prod/sn/type\" term=\"forum-topic\"></category>";
@@ -1088,11 +1088,13 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
      * @class ForumsService
      * @namespace sbt.connections
      */
-    var ForumService = declare(BaseService, {
+    var ForumService = declare(ConnectionsService, {
 
         contextRootMap: {
             forums: "forums"
         },
+        
+        serviceName : "forums",
         
         /**
          * Constructor for ForumsService
@@ -1104,14 +1106,6 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             if (!this.endpoint) {
                 this.endpoint = config.findEndpoint(this.getDefaultEndpointName());
             }
-        },
-
-        /**
-         * Return the default endpoint name if client did not specify one.
-         * @returns {String}
-         */
-        getDefaultEndpointName: function() {
-            return "connections";
         },
         
         /**

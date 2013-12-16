@@ -16,10 +16,6 @@
 
 package com.ibm.sbt.services.client.base;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-
 import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.NamespaceContextImpl;
 
@@ -44,6 +40,10 @@ public class ConnectionsConstants {
 		public static final String IBMSC      = "http://www.ibm.com/search/content/2010";
 		public static final String XS         = "http://www.w3.org/2001/XMLSchema";
 		public static final String XHTML      = "http://www.w3.org/1999/xhtml";
+		public static final String CMISRA 	  = "http://docs.oasis-open.org/ns/cmis/restatom/200908/";
+		public static final String CMISM	  = "http://docs.oasis-open.org/ns/cmis/messaging/200908/"; 
+		public static final String LCMIS	  = "http://www.ibm.com/xmlns/prod/sn/cmis";
+		public static final String CMIS		  = "http://docs.oasis-open.org/ns/cmis/core/200908/"; 
 	}
 	
 	public static NamespaceContext	nameSpaceCtx = new NamespaceContextImpl();
@@ -60,8 +60,10 @@ public class ConnectionsConstants {
 		((NamespaceContextImpl)nameSpaceCtx).addNamespace("ibmsc", Namespaces.IBMSC);
 		((NamespaceContextImpl)nameSpaceCtx).addNamespace("xs", Namespaces.XS);
 		((NamespaceContextImpl)nameSpaceCtx).addNamespace("h", Namespaces.XHTML);
-		
-		
+		((NamespaceContextImpl)nameSpaceCtx).addNamespace("cmisra", Namespaces.CMISRA);
+		((NamespaceContextImpl)nameSpaceCtx).addNamespace("cmism", Namespaces.CMISM);
+		((NamespaceContextImpl)nameSpaceCtx).addNamespace("lcmis", Namespaces.LCMIS);
+		((NamespaceContextImpl)nameSpaceCtx).addNamespace("cmis", Namespaces.CMIS);
 	}
 	
 }

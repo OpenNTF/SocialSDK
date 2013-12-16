@@ -27,7 +27,7 @@ import com.ibm.sbt.services.client.connections.files.File;
 
 public class AddTagsWidget extends BaseFilesTest {
 	
-	static String SNIPPET_ID = "ControlsEx_View_Files_Add_Tags_Widget";
+	static String SNIPPET_ID = "Social_Files_Views_Add_Tags_Widget";
 
 	public AddTagsWidget() {
 		setAuthType(AuthType.AUTO_DETECT);

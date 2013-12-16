@@ -45,6 +45,8 @@ public class Blog extends BaseBlogEntity {
 	public Blog(BlogService blogService, String id) {
 		super(blogService,id);
 	}
+	
+	public Blog(){}
 	/**
      * Constructor
      * @param BaseService

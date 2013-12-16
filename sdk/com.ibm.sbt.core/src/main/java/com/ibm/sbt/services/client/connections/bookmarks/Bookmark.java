@@ -43,6 +43,8 @@ public class Bookmark extends AtomEntity {
 		super(service, node, namespaceCtx, xpathExpression);
 	}
 	
+	public Bookmark(){}
+	
 	/**
 	 * Return the Bookmark universal id.
 	 * @return

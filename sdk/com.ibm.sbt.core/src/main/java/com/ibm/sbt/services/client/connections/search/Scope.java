@@ -38,6 +38,8 @@ public class Scope extends AtomEntity{
 		super(service, node, namespaceCtx, xpathExpression);
 	}
 	
+	public Scope(){}
+	
 	/**
 	 * Link to use to display the search result in the IBM Connections user interface. Not provided for bookmarks
 	 * @return String

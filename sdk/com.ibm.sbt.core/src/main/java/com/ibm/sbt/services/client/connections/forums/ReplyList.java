@@ -34,5 +34,7 @@ public class ReplyList extends BaseForumEntityList {
 	public ReplyList(Response requestData, ForumsFeedHandler feedHandler) {
 		super(requestData, feedHandler);
 	}
+	
+	public ReplyList(){}
 
 }

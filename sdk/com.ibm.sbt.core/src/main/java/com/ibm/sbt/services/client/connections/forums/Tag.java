@@ -50,5 +50,7 @@ public class Tag extends BaseEntity{
 	public int getVisibility() {
 		return getAsInt(ForumsXPath.visibility);
 	}
+	
+	public Tag(){}
 
 }

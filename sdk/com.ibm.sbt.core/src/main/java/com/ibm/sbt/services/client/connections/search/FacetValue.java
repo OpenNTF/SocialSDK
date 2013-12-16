@@ -39,6 +39,8 @@ public class FacetValue extends BaseEntity{
 		setService(searchService);
 		setAsString(FacetValueXPath.uid, id);
 	}
+	
+	public FacetValue(){}
 
 	public FacetValue(BaseService svc, DataHandler<?> handler) {
 		super(svc,handler);

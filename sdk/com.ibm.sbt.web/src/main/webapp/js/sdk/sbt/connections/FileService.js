@@ -178,7 +178,7 @@ define(
 				 * @returns {String} file Id
 				 */
 				getFileId : function() {
-					return this.id || this._fields.id || this.getAsString("uid");
+					return this.id || this.getAsString("uid") || this._fields.id;
 				},
 				/**
 				 * Returns the label

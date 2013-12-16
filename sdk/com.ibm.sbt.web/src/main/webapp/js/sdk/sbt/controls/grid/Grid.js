@@ -241,7 +241,6 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
          * @param data
          */
         onUpdate: function(data) {
-        	this._listenSelectionChanges();
         },
         
         /**

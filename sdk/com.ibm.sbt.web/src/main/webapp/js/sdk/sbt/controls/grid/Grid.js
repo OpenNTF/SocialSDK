@@ -81,7 +81,12 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
         /*
          * Regular expression used to remove // from url's
          */
-        _regExp : new RegExp("/{2}"),
+        _regExp: new RegExp("/{2}"),
+        
+        /*
+         * Array of selection listeners
+         */
+        _selListeners: [],
 
         /**
          * Empty context root map, can be overridden by subclasses of Grid. Represents Connections context roots.
@@ -236,6 +241,7 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
          * @param data
          */
         onUpdate: function(data) {
+        	this._listenSelectionChanges();
         },
         
         /**
@@ -407,7 +413,8 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
          * to retrieve the array call getSelected
          * @method handleCheckBox
          */
-        handleCheckBox: function (el, data, ev){       	
+        handleCheckBox: function (el, data, ev) {
+        	// keep track of current selection
         	if (el.checked) {
         		this.selectedRows.push(data);
         	} else if (!el.checked) {
@@ -417,6 +424,15 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
         				//selected row
         				this.selectedRows.splice(i,1);
         			}
+        		}
+        	}
+        	
+        	// notify selection listeners
+        	for (var i=0; i<this._selListeners.length; i++) {
+        		try {
+        			var selection = this.selectedRows.slice();
+        			this._selListeners[i].selectionChanged(selection, this);
+        		} catch (error) {
         		}
         	}
         },
@@ -431,28 +447,29 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
             var items = [];
             if (this.selectedRows) {
                 for (var i=0; i<this.selectedRows.length; i++) {
-                        var item = {
-                            data: this.selectedRows[i]
-                        };
-                        items.push(item);
+                    var item = {
+                        data: this.selectedRows[i]
+                    };
+                    items.push(item);
                 }
             }
             return items;
         },
         
-        addSelectionListener : function(listener,eventType){
-        	if(!eventType){
-        		eventType = "click"; 
-        	}
-    		var nodes = (this.domNode.all || this.domNode.getElementsByTagName("*"));
-            for (var i = 0; i < nodes.length; i++) {
-            		var attachPoint = (nodes[i].getAttribute) ? nodes[i].getAttribute(this._attachPointAttribute) : null;
-	                
-            		if (attachPoint === "rowSelectionInput") {
-	                	var callback = this._hitch(this, listener, this.data);
-	                    nodes[i].addEventListener(eventType,callback);    
-	                }
-            }
+        /**
+         * @method addSelectionListener
+         * @param listener
+         */
+        addSelectionListener : function(listener) {
+        	this._selListeners.push(listener);
+        },
+        
+        /**
+         * @method removeSelectionListener
+         * @param listener
+         */
+        removeSelectionListener : function(listener) {
+    		this._selListeners.pop(listener);
         },
         
         /**
@@ -624,7 +641,6 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
         	console.error(e.message);
             this.renderer.renderError(this, this.domNode, e.message);
         }
-
     });
     
     return Grid;

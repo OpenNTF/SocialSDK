@@ -30,6 +30,7 @@ import com.ibm.sbt.test.controls.ForumGridTestSuite;
 import com.ibm.sbt.test.controls.GridTestSuite;
 import com.ibm.sbt.test.controls.ProfilesGridTestSuite;
 import com.ibm.sbt.test.controls.VCardTestSuite;
+import com.ibm.sbt.test.controls.ViewTestSuite;
 import com.ibm.sbt.test.controls.WrapperTestSuite;
 import com.ibm.sbt.test.controls.grid.profiles.MyProfilePanel;
 import com.ibm.sbt.test.controls.grid.profiles.ProfilePanel;
@@ -43,8 +44,7 @@ import com.ibm.sbt.test.controls.grid.profiles.ProfileTags;
 @RunWith(Suite.class)
 @SuiteClasses({ GridTestSuite.class, ActivitiesGridTestSuite.class,BookmarksGridTestSuite.class,CommunitiesGridTestSuite.class,
 		FilesGridTestSuite.class, ForumGridTestSuite.class, ProfilesGridTestSuite.class,
-		VCardTestSuite.class, ActivityStreamTestSuite.class,
-		WrapperTestSuite.class })
+		VCardTestSuite.class, ActivityStreamTestSuite.class, WrapperTestSuite.class, ViewTestSuite.class })
 public class ControlsTestSuite {
 	@AfterClass
 	public static void cleanup() {

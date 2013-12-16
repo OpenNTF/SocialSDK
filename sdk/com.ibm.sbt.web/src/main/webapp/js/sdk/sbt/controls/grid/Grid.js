@@ -440,8 +440,10 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
             return items;
         },
         
-        setSelectionListener : function(listener,eventType){
-        	
+        addSelectionListener : function(listener,eventType){
+        	if(!eventType){
+        		eventType = "click"; 
+        	}
     		var nodes = (this.domNode.all || this.domNode.getElementsByTagName("*"));
             for (var i = 0; i < nodes.length; i++) {
             		var attachPoint = (nodes[i].getAttribute) ? nodes[i].getAttribute(this._attachPointAttribute) : null;

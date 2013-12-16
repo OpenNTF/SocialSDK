@@ -39,6 +39,7 @@ public class CMISFile extends AtomEntity {
 	private CMISAuthor authorEntry;
 	
 	public CMISFile() {
+		this(null,null);
 	}
 
 	/**
@@ -46,6 +47,7 @@ public class CMISFile extends AtomEntity {
 	 * @param fileId
 	 */
 	public CMISFile(String fileId) {
+		this(null,null);
 		setAsString(AtomXPath.id, fileId);
 	}
 

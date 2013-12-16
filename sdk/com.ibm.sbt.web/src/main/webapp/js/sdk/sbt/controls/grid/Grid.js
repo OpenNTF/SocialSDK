@@ -442,7 +442,7 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
         
         addSelectionListener : function(listener,eventType){
         	if(!eventType){
-        		eventType = "click";
+        		eventType = "click"; 
         	}
     		var nodes = (this.domNode.all || this.domNode.getElementsByTagName("*"));
             for (var i = 0; i < nodes.length; i++) {

@@ -19,8 +19,8 @@
  * 
  * @module sbt.connections.ActivityStreamService
  */
-define([ "../declare", "../lang", "../stringUtil", "../config", "../Promise", "./ActivityStreamConstants", "../base/BaseService","../base/BaseEntity",  "../base/DataHandler", 'sbt/json'], 
-		function(declare,lang,stringUtil,config,Promise,consts,BaseService, BaseEntity,DataHandler, json) {
+define([ "../declare", "../lang", "../stringUtil", "../config", "../Promise", "./ActivityStreamConstants", "./ConnectionsService","../base/BaseEntity",  "../base/DataHandler", 'sbt/json'], 
+		function(declare,lang,stringUtil,config,Promise,consts,ConnectionsService, BaseEntity,DataHandler, json) {
 
 	/**
      * JsonDataHandler class
@@ -155,11 +155,13 @@ define([ "../declare", "../lang", "../stringUtil", "../config", "../Promise", ".
      * @class ActivityStreamService
      * @namespace sbt.connections
      */
-    var ActivityStreamService = declare(BaseService, {
+    var ActivityStreamService = declare(ConnectionsService, {
         
         contextRootMap: {
             connections: "connections"
         },
+        
+        serviceName : "connections",
         
         /**
          * Constructor for ActivityStreamService
@@ -171,14 +173,6 @@ define([ "../declare", "../lang", "../stringUtil", "../config", "../Promise", ".
             if (!this.endpoint) {
                 this.endpoint = config.findEndpoint(this.getDefaultEndpointName());
             }
-        },
-
-        /**
-         * Return the default endpoint name if client did not specify one.
-         * @returns {String}
-         */
-        getDefaultEndpointName: function() {
-            return "connections";
         },
         
         /**

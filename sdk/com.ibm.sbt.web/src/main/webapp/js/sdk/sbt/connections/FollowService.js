@@ -38,10 +38,10 @@
  */
 define(
 		[ "../declare", "../config", "../lang", "../stringUtil", "../Promise",
-				"./FollowConstants", "../base/BaseService",
+				"./FollowConstants", "./ConnectionsService",
 				"../base/AtomEntity", "../base/XmlDataHandler" ],
 		function(declare, config, lang, stringUtil, Promise, consts,
-				BaseService, AtomEntity, XmlDataHandler) {
+				ConnectionsService, AtomEntity, XmlDataHandler) {
 			
 			var SourceTmpl = "<category term=\"${getSource}\" scheme=\"http://www.ibm.com/xmlns/prod/sn/source\"></category>";
 			var ResourceTypeTmpl = "<category term=\"${getResourceType}\" scheme=\"http://www.ibm.com/xmlns/prod/sn/resource-type\"></category>";
@@ -250,7 +250,7 @@ define(
 			 * @namespace sbt.connections
 			 */
 			var FollowService = declare(
-					BaseService,
+					ConnectionsService,
 					{
 						contextRootMap : {
 							activities : "activities",
@@ -262,6 +262,8 @@ define(
 							profiles : "profiles",
 							wikis : "wikis"
 						},
+						
+						serviceName : "connections",
 
 						/**
 						 * Constructor for FollowService
@@ -274,16 +276,6 @@ define(
 								this.endpoint = config.findEndpoint(this
 										.getDefaultEndpointName());
 							}
-						},
-
-						/**
-						 * Return the default endpoint name if client did not
-						 * specify one.
-						 * 
-						 * @returns {String}
-						 */
-						getDefaultEndpointName : function() {
-							return "connections";
 						},
 
 						/**

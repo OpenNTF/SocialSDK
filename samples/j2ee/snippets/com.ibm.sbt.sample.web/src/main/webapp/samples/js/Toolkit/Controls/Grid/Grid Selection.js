@@ -9,7 +9,7 @@ require(["sbt/dom","sbt/connections/controls/files/FileGrid"], function(dom,File
 	grid.update();
 	
 	grid.onUpdate = function(){
-		grid.setSelectionListener(function(){
+		grid.addSelectionListener(function(){
 			alert("row");
 		},"click");
 	}

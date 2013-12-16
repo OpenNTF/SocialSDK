@@ -19,8 +19,8 @@
  * 
  * @module sbt.connections.ProfileService
  */
-define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConstants", "../base/BaseService", "../base/BaseEntity", "../base/AtomEntity", "../base/XmlDataHandler", "../base/VCardDataHandler", "../Cache", "../util"  ], function(
-        declare,lang,config,stringUtil,consts,BaseService,BaseEntity,AtomEntity,XmlDataHandler, VCardDataHandler, Cache, util) {
+define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConstants", "./ConnectionsService", "../base/BaseEntity", "../base/AtomEntity", "../base/XmlDataHandler", "../base/VCardDataHandler", "../Cache", "../util"  ], function(
+        declare,lang,config,stringUtil,consts,ConnectionsService,BaseEntity,AtomEntity,XmlDataHandler, VCardDataHandler, Cache, util) {
 	
 	var CategoryProfile = "<category term=\"profile\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category>";
 	var updateProfileXmlTemplate = "\nBEGIN:VCARD\nVERSION:2.1\n${jobTitle}${address}${telephoneNumber}${building}${floor}END:VCARD\n";
@@ -700,11 +700,13 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
      * @class ProfileService
      * @namespace sbt.connections
      */
-    var ProfileService = declare(BaseService, {
+    var ProfileService = declare(ConnectionsService, {
         
         contextRootMap: {
             profiles: "profiles"
         },
+        
+        serviceName : "profiles",
 
         /**
          * 
@@ -720,14 +722,6 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./ProfileConsta
         			this._cache = new Cache(config.Properties.ProfileCacheSize || consts.DefaultCacheSize);
         		}        		
         	}            
-        },
-        
-        /**
-         * Return the default endpoint name if client did not specify one.
-         * @returns {String}
-         */
-        getDefaultEndpointName: function() {
-            return "connections";
         },
         
         /**

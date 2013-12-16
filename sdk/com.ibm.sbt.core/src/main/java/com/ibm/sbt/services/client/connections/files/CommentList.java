@@ -19,6 +19,8 @@ public class CommentList extends EntityList<Comment> {
 		super(requestData, handler);
 	}
 	
+	public CommentList(){}
+	
 	@Override
 	public Document getData(){
 		return (Document)super.getData();

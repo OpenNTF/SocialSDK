@@ -360,7 +360,7 @@ function(declare, lang, dom, stringUtil, sbt, parameter, Grid,
 					this.inherited(arguments);
 					if(this.displayBusinessCard){
 		        		SemanticTagService.loadSemanticTagService();
-		        	}
+		        	} 
 				},
 
 				/**

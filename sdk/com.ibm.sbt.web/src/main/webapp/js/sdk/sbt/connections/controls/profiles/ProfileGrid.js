@@ -268,7 +268,6 @@ define([ "../../../declare",
          */
         postCreate: function() {        	
         	this.inherited(arguments);
-        	
         	if(this.displayBusinessCard){
         		SemanticTagService.loadSemanticTagService();
         	}

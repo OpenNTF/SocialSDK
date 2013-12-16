@@ -148,7 +148,7 @@ define([ "../../../declare",
         	this.inherited(arguments);
         	if(this.displayBusinessCard){
         		SemanticTagService.loadSemanticTagService();
-        	}
+        	} 
         },
         
         /**

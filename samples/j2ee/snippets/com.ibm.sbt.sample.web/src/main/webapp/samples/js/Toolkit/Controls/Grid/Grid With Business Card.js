@@ -9,4 +9,4 @@ require(["sbt/dom", "sbt/connections/controls/files/FileGrid"], function(dom, Fi
   		grid.postCreate = function(){this.inherited(arguments);};
 		         
 	    grid.update();
-});
+}); 

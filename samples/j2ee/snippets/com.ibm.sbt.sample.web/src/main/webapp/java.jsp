@@ -37,7 +37,7 @@
             <div id="treeOutline" class="span3">
                 <%@include file="includes/outline.jsp"%>
             </div>
-            <div class="span8">
+            <div class="span9">
                 <div>
                     <ul class="nav nav-tabs">
                         <li class="active">

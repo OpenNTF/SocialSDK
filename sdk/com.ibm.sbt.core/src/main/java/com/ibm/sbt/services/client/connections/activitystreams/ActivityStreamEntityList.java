@@ -33,6 +33,8 @@ public class ActivityStreamEntityList extends EntityList<ActivityStreamEntity> {
 	public ActivityStreamEntityList(Response requestData, ActivityStreamFeedHandler feedHandler) {
 		super(requestData, feedHandler);
 	}
+	
+	public ActivityStreamEntityList(){}
 
 	@Override
 	public JsonJavaObject getData(){

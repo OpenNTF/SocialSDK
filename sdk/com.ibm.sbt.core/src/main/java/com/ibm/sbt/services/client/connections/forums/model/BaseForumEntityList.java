@@ -46,6 +46,8 @@ public class BaseForumEntityList extends EntityList<BaseForumEntity> {
 	public BaseForumEntityList(Response requestData, ForumsFeedHandler feedHandler) {
 		super(requestData, feedHandler);
 	}
+	
+	public BaseForumEntityList(){}
 
 	@Override
 	public Document getData(){

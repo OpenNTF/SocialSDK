@@ -52,6 +52,8 @@ public class Community extends BaseEntity {
 		setAsString(CommunityXPath.communityUuid, communityUuid);
 	}
 	
+	public Community(){}
+	
 	/**
 	 * Constructor
 	 * 

@@ -36,6 +36,8 @@ public class RecommendationList extends EntityList<Recommendation> {
 	public RecommendationList(Response requestData, RecommendationsFeedHandler feedHandler) {
 		super(requestData, feedHandler);
 	}
+	
+	public RecommendationList(){}
 
 	@Override
 	public Document getData(){

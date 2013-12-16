@@ -45,8 +45,8 @@
 				</ul>
                 
                 <form class="navbar-form pull-right">
-                    <span style="vertical-align: middle">Environment: </span> <select
-                        id="envChange">
+                    <span style="display: inline-block;padding: 10px 5px 10px;">Environment: </span> <select
+                        id="envChange" style="margin-top: 0px;">
                         <%
                             String[][] envs = Util.getEnvironments(request);
                             for (int i = 0; i < envs.length; i++) {
@@ -63,8 +63,8 @@
                 </form>
                 
 				<form class="navbar-form pull-right" style="<%=formStyle%>;margin-right: 10px;">
-					<span style="vertical-align: middle">JavaScript Library: </span> <select
-						id="libChange">
+					<span style="style="display: inline-block;padding: 10px 5px 10px;"">JavaScript Library: </span> <select
+						id="libChange" style="margin-top: 0px;">
 						<%
 							String[][] jsLibs = Util.getJavaScriptLibs(request);
 							for (int i = 0; i < jsLibs.length; i++) {

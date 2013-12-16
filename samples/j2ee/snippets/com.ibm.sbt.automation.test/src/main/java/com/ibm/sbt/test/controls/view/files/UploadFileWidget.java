@@ -32,7 +32,7 @@ import com.ibm.sbt.services.client.connections.files.File;
 
 public class UploadFileWidget extends BaseFilesTest {
 	
-	static String SNIPPET_ID = "ControlsEx_View_Files_Upload_File_Widget";
+	static String SNIPPET_ID = "Social_Files_Views_Upload_File_Widget";
 
 	public UploadFileWidget() {
 		setAuthType(AuthType.AUTO_DETECT);

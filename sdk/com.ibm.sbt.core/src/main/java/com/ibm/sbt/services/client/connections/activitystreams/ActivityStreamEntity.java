@@ -43,7 +43,8 @@ public class ActivityStreamEntity extends BaseEntity{
 	private Attachment					attachment;
 	private Actor						actor;
 	private List<Reply>	replies;
-	
+
+	public ActivityStreamEntity(){}
 
 	public ActivityStreamEntity(BaseService svc, DataHandler<?> handler) {
 		super(svc,handler);

@@ -40,6 +40,8 @@ public class Recommendation extends AtomEntity{
 	public Recommendation(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
 		super(service, node, namespaceCtx, xpathExpression);
 	}
+	
+	public Recommendation(){}
 
 /*	public String getId() {
 		return getAsString(ForumsXPath.uid);
@@ -54,6 +56,8 @@ public class Recommendation extends AtomEntity{
 		return new Author(getService(), new XmlDataHandler((Node)this.getDataHandler().getData(), 
     		ConnectionsConstants.nameSpaceCtx, (XPathExpression)AtomXPath.author.getPath()));
 	}
+	
+
 
 	public String getName() {
 		return this.getAuthor().getName();

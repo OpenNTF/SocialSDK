@@ -38,6 +38,8 @@ public class Result extends AtomEntity{
 		super(service, node, namespaceCtx, xpathExpression);
 	}
 	
+	public Result(){}
+	
     /**
      * Relevance ranking of the search result. 
      * This is a relative score of an individual search result. 

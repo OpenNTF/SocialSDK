@@ -50,7 +50,9 @@ public abstract class WikiBaseEntity extends AtomEntity {
 	public WikiBaseEntity(BaseService service) {
 		super(service);
 	}
-
+	
+	public WikiBaseEntity() {}
+	
 	/**
 	 * Unique identifier of a wiki or wiki page.
 	 * @return wikiUuid

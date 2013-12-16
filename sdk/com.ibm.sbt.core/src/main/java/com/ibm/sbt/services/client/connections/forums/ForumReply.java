@@ -73,6 +73,8 @@ public class ForumReply extends BaseForumEntity{
 		super(service, node, namespaceCtx, xpathExpression);
 	}
 	
+	public ForumReply(){}
+	
 	/**
 	 * Constructor
 	 *  

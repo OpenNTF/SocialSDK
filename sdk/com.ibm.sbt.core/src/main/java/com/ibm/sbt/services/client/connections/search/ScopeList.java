@@ -45,6 +45,8 @@ public class ScopeList extends EntityList<Scope>{
 		super(requestData, feedHandler);
 	}
 	
+	public ScopeList(){}
+	
 	private XmlDataHandler getMetaDataHandler(){
 		return new XmlDataHandler(getData(), ConnectionsConstants.nameSpaceCtx);
 	}

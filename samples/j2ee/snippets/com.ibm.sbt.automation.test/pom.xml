@@ -14,13 +14,11 @@
     <dependency>
     <groupId>org.seleniumhq.selenium</groupId>
     <artifactId>selenium-java</artifactId>
-    <version>2.32.0</version>
   </dependency>
   <!-- Change to version 10.5.3.0 --> 
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.11</version>
     </dependency>
     <dependency>
     	<groupId>com.ibm.sbt</groupId>

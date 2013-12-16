@@ -48,6 +48,8 @@ public class BookmarkList extends EntityList<Bookmark> {
 		
 		metaHandler = new XmlDataHandler((Document)response.getData(), ConnectionsConstants.nameSpaceCtx);
     }
+	
+	public BookmarkList(){}
 
 	/**
 	 * Construct a BookmarkList instance.

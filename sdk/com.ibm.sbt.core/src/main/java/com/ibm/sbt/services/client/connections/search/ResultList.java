@@ -46,6 +46,8 @@ public class ResultList extends EntityList<Result>{
 		super(requestData, feedHandler);
 	}
 	
+	public ResultList(){}
+	
 	private XmlDataHandler getMetaDataHandler(){
 		return new XmlDataHandler(getData(), ConnectionsConstants.nameSpaceCtx);
 	}

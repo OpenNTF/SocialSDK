@@ -57,6 +57,7 @@ public class BaseBlogEntity extends AtomEntity {
 		setAsString(BlogXPath.uid, id);
 	}
 	
+	public BaseBlogEntity(){}
 	/**
      * Constructor
      * @param BaseService

@@ -358,7 +358,9 @@ function(declare, lang, dom, stringUtil, sbt, parameter, Grid,
 				 */
 				postCreate : function() {
 					this.inherited(arguments);
-					SemanticTagService.loadSemanticTagService();
+					if(this.displayBusinessCard){
+		        		SemanticTagService.loadSemanticTagService();
+		        	}
 				},
 
 				/**

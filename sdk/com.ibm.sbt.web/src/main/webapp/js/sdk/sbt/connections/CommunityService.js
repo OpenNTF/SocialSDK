@@ -19,9 +19,9 @@
  * 
  * @module sbt.connections.CommunityService
  */
-define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", "./CommunityConstants", "../base/BaseService",
+define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", "./CommunityConstants", "./ConnectionsService",
          "../base/AtomEntity", "../base/XmlDataHandler", "./ForumService", "../pathUtil" ], 
-    function(declare,config,lang,stringUtil,Promise,consts,BaseService,AtomEntity,XmlDataHandler,ForumService,pathUtil) {
+    function(declare,config,lang,stringUtil,Promise,consts,ConnectionsService,AtomEntity,XmlDataHandler,ForumService,pathUtil) {
 
 	var CategoryCommunity = "<category term=\"community\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category>";
 	var CategoryMember = "<category term=\"person\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category>";
@@ -1231,13 +1231,15 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
      * @class CommunityService
      * @namespace sbt.connections
      */
-    var CommunityService = declare(BaseService, {
+    var CommunityService = declare(ConnectionsService, {
     	
     	forumService : null,
     	
     	contextRootMap: {
             communities: "communities"
         },
+        
+        serviceName : "communities",
 
         /**
          * Constructor for CommunityService
@@ -1249,14 +1251,6 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         	if (!this.endpoint) {
                 this.endpoint = config.findEndpoint(this.getDefaultEndpointName());
             }
-        },
-
-        /**
-         * Return the default endpoint name if client did not specify one.
-         * @returns {String}
-         */
-        getDefaultEndpointName : function() {
-            return "connections";
         },
         
         /**

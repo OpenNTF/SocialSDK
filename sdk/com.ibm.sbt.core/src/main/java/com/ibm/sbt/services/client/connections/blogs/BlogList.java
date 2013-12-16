@@ -35,5 +35,7 @@ public class BlogList extends BaseBlogEntityList  {
 	public BlogList(Response requestData, BlogsFeedHandler feedHandler) {
 		super(requestData, feedHandler);
 	}
+	
+	public BlogList(){}
 
 }

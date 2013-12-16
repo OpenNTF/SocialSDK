@@ -35,6 +35,8 @@ public class TagList extends EntityList<Tag> {
 	public TagList(Response requestData, TagFeedHandler feedHandler) {
 		super(requestData, feedHandler);
 	}
+	
+	public TagList(){}
 
 	@Override
 	public Document getData(){

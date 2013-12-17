@@ -68,7 +68,7 @@ require(['dojo/on', 'dojo/ready', 'playground/widgets/gadgetarea/PlaygroundGadge
 
 		//Don't like the fact that there is this pageGlobal variable, hopefully
 		//we can get rid of it at some point
-		securityToken.get().then(function(response) {
+		securityToken.get(pageGlobal.containerId).then(function(response) {
 			var gadgetArea = new PlaygroundGadgetArea(pageGlobal);
 			domConstruct.place(gadgetArea.domNode, 'osgadget', 'replace');
 			gadgetArea.startup();

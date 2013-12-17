@@ -40,7 +40,7 @@
 		<managed-bean-scope>application</managed-bean-scope>
 		<managed-property>
 			<property-name>endpoints</property-name>
-			<value>connections,w3connections</value>
+			<value>connections</value>
 		</managed-property>
 		<managed-property>
 		    <property-name>runtimes</property-name>
@@ -55,17 +55,29 @@
 		<managed-bean-scope>session</managed-bean-scope>
 		<managed-property>
 			<property-name>url</property-name>
-			<value>https://ralbz3166.raleigh.ibm.com</value> 
+			<value>https://ralbz3166.cloud.dst.ibm.com</value> 
 		</managed-property>
-		<!-- Trust the connection -->
 		<managed-property>
 			<property-name>forceTrustSSLCertificate</property-name>
 			<value>true</value>
 		</managed-property>
+	</managed-bean>
+ 
+	<!-- Connections W3 -->	
+	<!-- 
+	<managed-bean>
+		<managed-bean-name>connections</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.services.endpoints.ConnectionsSSOEndpoint</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
 		<managed-property>
-		<property-name>serviceMaps</property-name>
-		<!-- <value>communities:community/groups</value>  -->
+			<property-name>url</property-name>
+			<value>https://w3-connections.ibm.com</value> 
+		</managed-property>
+		<managed-property>
+			<property-name>forceTrustSSLCertificate</property-name>
+			<value>true</value>
 		</managed-property>
 	</managed-bean>
-
+	-->
+ 
 </faces-config>

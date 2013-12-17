@@ -17,9 +17,9 @@
 /**
  * NewFolderWidget
  */
-define([ "sbt/declare", "sbt/lang", "sbt/dom", 
-         "sbt/i18n!.s/nls/files", "sbt/controls/view/BaseDialogContent", "sbt/connections/FileService", 
-		 "sbt/text!./templates/NewFolder.html" ],
+define([ "../../../declare", "../../../lang", "../../../dom", 
+         "../../../i18n!./nls/files", "../../../controls/view/BaseDialogContent", "../../FileService", 
+		 "../../../text!./templates/NewFolder.html" ],
 		function(declare, lang, dom, nls, BaseDialogContent, FileService, NewFolder) {
 
 	/**

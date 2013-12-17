@@ -1,4 +1,4 @@
-require([ "sbt/declare", "sbt/dom", "sbt/lang", "sbt/connections/controls/ActionBar", 
+require([ "sbt/declare", "sbt/dom", "sbt/lang", "sbt/controls/view/ActionBar", 
           "sbt/connections/controls/files/UploadFileAction", 
           "sbt/connections/controls/files/NewFolderAction" ], 
 	function(declare, dom, lang, ActionBar, UploadFileAction, NewFolderAction) {

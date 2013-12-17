@@ -17,9 +17,10 @@
 /**
  * UploadFileAction
  */
-define([ "sbt/declare", "sbt/dom", "sbt/lang",
-         "sbt/i18n!./nls/files", "sbt/controls/dialog/Dialog", "./UploadFileWidget", "sbt/controls/view/Action"], 
-	function(declare, dom, lang, nls, Dialog, UploadFileWidget, Action) {
+define([ "../../../declare", "../../../dom", "../../../lang",
+         "../../../i18n!./nls/files", "./UploadFileWidget", 
+         "../../../controls/dialog/Dialog", "../../../controls/view/Action"], 
+	function(declare, dom, lang, nls, UploadFileWidget, Dialog, Action) {
 
 	/**
 	 * Action to upload a file.

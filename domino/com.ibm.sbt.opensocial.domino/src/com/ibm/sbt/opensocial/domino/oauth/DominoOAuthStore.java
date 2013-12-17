@@ -8,6 +8,7 @@ import org.apache.shindig.gadgets.GadgetException.Code;
 import org.apache.shindig.gadgets.oauth.OAuthStore;
 
 import com.ibm.sbt.opensocial.domino.container.ContainerExtPoint;
+import com.ibm.sbt.opensocial.domino.container.ContainerExtPointException;
 import com.ibm.sbt.opensocial.domino.container.ContainerExtPointManager;
 
 /**
@@ -31,7 +32,11 @@ public class DominoOAuthStore implements OAuthStore {
 			String serviceName, OAuthServiceProvider provider)
 			throws GadgetException {
 		ContainerExtPoint extPoint = getContainerExtPoint(securityToken.getContainer());
-		return extPoint.getContainerOAuthStore().getConsumerKeyAndSecret(securityToken, serviceName, provider);
+		try {
+			return extPoint.getContainerOAuthStore().getConsumerKeyAndSecret(securityToken, serviceName, provider);
+		} catch (ContainerExtPointException e) {
+			throw new GadgetException(GadgetException.Code.OAUTH_STORAGE_ERROR, e);
+		}
 	}
 
 	@Override
@@ -39,7 +44,11 @@ public class DominoOAuthStore implements OAuthStore {
 			ConsumerInfo consumerInfo, String serviceName, String tokenName)
 			throws GadgetException {
 		ContainerExtPoint extPoint = getContainerExtPoint(securityToken.getContainer());
-		return extPoint.getContainerOAuthStore().getTokenInfo(securityToken, consumerInfo, serviceName, tokenName);
+		try {
+			return extPoint.getContainerOAuthStore().getTokenInfo(securityToken, consumerInfo, serviceName, tokenName);
+		} catch (ContainerExtPointException e) {
+			throw new GadgetException(GadgetException.Code.OAUTH_STORAGE_ERROR, e);
+		}
 	}
 
 	@Override
@@ -47,7 +56,11 @@ public class DominoOAuthStore implements OAuthStore {
 			ConsumerInfo consumerInfo, String serviceName, String tokenName,
 			TokenInfo tokenInfo) throws GadgetException {
 		ContainerExtPoint extPoint = getContainerExtPoint(securityToken.getContainer());
-		extPoint.getContainerOAuthStore().setTokenInfo(securityToken, consumerInfo, serviceName, tokenName, tokenInfo);
+		try {
+			extPoint.getContainerOAuthStore().setTokenInfo(securityToken, consumerInfo, serviceName, tokenName, tokenInfo);
+		} catch (ContainerExtPointException e) {
+			throw new GadgetException(GadgetException.Code.OAUTH_STORAGE_ERROR, e);
+		}
 	}
 
 	@Override
@@ -55,7 +68,11 @@ public class DominoOAuthStore implements OAuthStore {
 			ConsumerInfo consumerInfo, String serviceName, String tokenName)
 			throws GadgetException {
 		ContainerExtPoint extPoint = getContainerExtPoint(securityToken.getContainer());
-		extPoint.getContainerOAuthStore().removeToken(securityToken, consumerInfo, serviceName, tokenName);
+		try {
+			extPoint.getContainerOAuthStore().removeToken(securityToken, consumerInfo, serviceName, tokenName);
+		} catch (ContainerExtPointException e) {
+			throw new GadgetException(GadgetException.Code.OAUTH_STORAGE_ERROR, e);
+		}
 	}
 	
 	private ContainerExtPoint getContainerExtPoint(String container) throws GadgetException {

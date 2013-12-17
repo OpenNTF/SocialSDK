@@ -17,10 +17,10 @@
 /**
  * AddTagsWidget
  */
-define([ "sbt/declare", "sbt/lang", "sbt/dom", "sbt/stringUtil", 
-         "sbt/i18n!./nls/files", 
-         "sbt/controls/view/BaseDialogContent", "sbt/connections/FileService", 
-		 "sbt/text!./templates/AddTags.html" ],
+define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUtil", 
+         "../../../i18n!./nls/files", 
+         "../../../controls/view/BaseDialogContent", "../../FileService", 
+		 "../../../text!./templates/AddTags.html" ],
 		function(declare, lang, dom, stringUtil, nls, BaseDialogContent, FileService, AddTags) {
 
 	/**

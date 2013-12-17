@@ -19,7 +19,6 @@ import com.google.inject.Singleton;
  * Security token codec responsible for encrypting/decrypting security tokens.
  *
  */
-//TODO we want to just use the one that is in the OpenSocial Explorer
 @Singleton
 public class DominoSecurityTokenCodec implements SecurityTokenCodec {
 	private static final String SECURITY_TOKEN_TYPE = "gadgets.securityTokenType";

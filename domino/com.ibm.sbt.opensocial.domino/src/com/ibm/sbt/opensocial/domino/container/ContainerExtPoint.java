@@ -1,6 +1,7 @@
 package com.ibm.sbt.opensocial.domino.container;
 
 import org.apache.shindig.gadgets.oauth.OAuthStore;
+import org.apache.shindig.gadgets.oauth2.OAuth2Store;
 
 import com.ibm.sbt.opensocial.domino.config.OpenSocialContainerConfig;
 
@@ -13,9 +14,15 @@ public interface ContainerExtPoint {
 	
 	/**
 	 * The ID of the container.  This should be unique among all other containers.
+	 * A container ID MUST
+	 * <ul>
+	 * 	<li>be URL encoded</li>
+	 *  <li>NOT contain a colon</li>
+	 * </ul>
 	 * @return The ID of the container.
+	 * @throws ContainerExtPointException Thrown when there is an error generating a container ID.
 	 */
-	public String getId();
+	public String getId() throws ContainerExtPointException;
 	
 	/**
 	 * Gets the container configuration object for this container.
@@ -26,6 +33,14 @@ public interface ContainerExtPoint {
 	/**
 	 * Gets the OAuth 1.0a store for the container.
 	 * @return The OAuth 1.0a store for the container.
+	 * @throws ContainerExtPointException Thrown when there is an error getting an OAuth store.
 	 */
-	public OAuthStore getContainerOAuthStore();
+	public OAuthStore getContainerOAuthStore() throws ContainerExtPointException;
+	
+	/**
+	 * Gets the OAuth 2.0 store for the container.
+	 * @return The OAuth 2.0 store for the container.
+	 * @throws ContainerExtPointException Thrown when there is an error getting an OAuth 2 store.
+	 */
+	public OAuth2Store getContainerOAuth2Store() throws ContainerExtPointException;
 }

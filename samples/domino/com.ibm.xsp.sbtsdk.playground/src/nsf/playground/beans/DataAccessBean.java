@@ -5,8 +5,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.faces.context.FacesContext;
+
+import org.apache.shindig.config.ContainerConfigException;
 
 import lotus.domino.Database;
 import lotus.domino.Document;
@@ -41,6 +45,8 @@ public abstract class DataAccessBean {
 	public static final String CUSTOM = "Custom...";
 
 	private static boolean TRACE = false;
+	private static final String CLASS = DataAccessBean.class.getName();
+	private static final Logger LOG = Logger.getLogger(CLASS);
 	
 	public static DataAccessBean get() {
 		return (DataAccessBean)ManagedBeanUtil.getBean(FacesContext.getCurrentInstance(), "dataAccess");
@@ -54,13 +60,18 @@ public abstract class DataAccessBean {
 	}
 	
 	public synchronized void clearCache() {
+		final String method = "clearCache";
 		if(TRACE) {
 			System.out.println("Clear cache");
 		}
 		cacheFilled = false;
 		envNames = StringUtil.EMPTY_STRING_ARRAY;
-		ContainerExtPointManager.unregisterContainers(
-				new ImmutableList.Builder<ContainerExtPoint>().addAll(environments.values()).build());
+		try {
+			ContainerExtPointManager.unregisterContainers(
+					new ImmutableList.Builder<ContainerExtPoint>().addAll(environments.values()).build());
+		} catch (ContainerConfigException e) {
+			LOG.logp(Level.WARNING, CLASS, method, "Error un-registering containers.", e);
+		}
 		environments.clear();
 	}
 
@@ -124,6 +135,7 @@ public abstract class DataAccessBean {
 	}
 
 	public PlaygroundEnvironment findPreferredEnvironment() throws IOException {
+		updateCache();
 		PlaygroundEnvironment first = null;
 		if(!environments.isEmpty()) {
 			for(PlaygroundEnvironment e: environments.values()) {
@@ -166,6 +178,7 @@ public abstract class DataAccessBean {
 	}
 	
 	private synchronized void updateCache() throws IOException {
+		final String method = "updateCache";
 		if(cacheFilled) {
 			return;
 		}
@@ -187,7 +200,7 @@ public abstract class DataAccessBean {
 						try {
 							PlaygroundEnvironment env = readEnvironment(d);
 							if(envs.length==0 || StringUtil.contains(envs, env.getName())) {
-								env.setDbPath(db.getFilePath());
+								env.setNotesUrl(d.getNotesURL());
 								environments.put(env.getName(), env);
 								if(TRACE) {
 									System.out.println("Loading environment: "+env.getName());
@@ -203,8 +216,12 @@ public abstract class DataAccessBean {
 			
 			(new QuickSort.JavaList(allEnvs)).sort();
 			//We don't want a custom container so register them before we add custom
-			ContainerExtPointManager.registerContainers(
-					new ImmutableList.Builder<ContainerExtPoint>().addAll(environments.values()).build());
+			try {
+				ContainerExtPointManager.registerContainers(
+						new ImmutableList.Builder<ContainerExtPoint>().addAll(environments.values()).build());
+			} catch (ContainerConfigException e) {
+				LOG.logp(Level.WARNING, CLASS, method, "Error contributing Playground containers.", e);
+			}
 			
 			allEnvs.add(CUSTOM); // Always the last one...
 			

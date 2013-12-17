@@ -1,0 +1,121 @@
+<div class="lotusDialogContent _qkrDialogCompact">
+	<table cellpadding="0" role="presentation" class="lotusFormTable">
+		<colgroup>
+			<col>
+			<col width="100%">
+			<col>
+		</colgroup>
+		<tbody>
+			<tr class="lotusFormFieldRow">
+				<td class="lotusFormLabel">
+					<!-- IE -->
+				</td>
+				<td colspan="2"><div>${numberFilesSelected}</div></td>
+			</tr>
+			<tr class="lotusFormFieldRow">
+				<td class="lotusFormLabel lotusNowrap"><span>${nls.labelShareWith}<span
+						role="presentation">&nbsp;</span><a href="javascript:;"
+						role="button" 
+						aria-label="Share with:"><img alt="Help"
+							class="lconnSprite lconnSprite-iconHelp16"
+							src="https://qs.renovations.com:444/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20120919.054848"><span
+							aria-label="Help" class="lotusAltText">?</span></a></span></td>
+				<td style="padding-bottom: 5px;">
+				<form action="">
+						<legend class="lotusAccess">${nls.labelShareWith}</legend>
+						<input dojoAttachEvent="click: radioButtonSelected"  type="radio"  name="sbtRadioButton" class="lotusCheckbox" value="${nls.labelPeople}" checked="true">
+							<label class="lotusCheckbox"><span>${nls.labelSharePeopleComms}</span></label><br>
+						<input dojoAttachEvent="click: radioButtonSelected" type="radio" name="sbtRadioButton" value="${nls.labelPublic}" class="lotusCheckbox"
+							value="${nls.labelPublic}" >
+							<label class="lotusCheckbox">
+							<span>${nls.labelPublic}</span></label>
+					</form></td>
+				<td></td>
+			</tr>
+			<tr dojoAttachPoint="shareWithRow" class="lotusFormFieldRow">
+				<td class="lotusFormLabel lotusNowrap"><label
+					
+					style="display: none;">Share with:<span role="presentation">&nbsp;</span><span
+						style="display: none;"><a href="javascript:;" role="button"
+						
+							aria-label="Share with:"><img alt="Help"
+								class="lconnSprite lconnSprite-iconHelp16"
+								src="https://qs.renovations.com:444/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20120919.054848"><span
+								aria-label="Help" class="lotusAltText">?</span></a></span></label></td>
+				<td><div style="white-space: nowrap;">
+						<table cellspacing="0" cellpadding="0" role="presentation"
+							style="width: 100%;">
+							<colgroup>
+								<col>
+								<col>
+								<col width="100%">
+							</colgroup>
+							<tbody>
+								<tr>
+									<td><label class="lotusHidden"
+										for="">Type</label><select
+										
+										name="searchSourceDropdown" title="Type" aria-label="Type">
+										<option dojoAttachEvent="click: handleShareWithSelection" value="undefined">${nls.labelAPerson}</option>
+										<option dojoAttachEvent="click: handleShareWithSelection" value="undefined">${nls.labelACommunity}</option></select></td>
+									<td><label class="lotusHidden"
+										for="">${nls.labelRole}</label>
+										<select name="_shareFileUserRole" title="Role" aria-label="Role">
+										<option dojoAttachEvent="click: handleSelectAccessType"
+												value="${nls.labelAsReader}">${nls.labelAsReader}</option>
+											<option dojoAttachEvent="click: handleSelectAccessType" 
+											value="${nls.labelAsEditor}">${nls.labelAsEditor}</option>
+											</select>
+										</td>
+
+									<td><div dojoAttachPoint="searchTypeAhead"></div></td>
+
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="lotusOffScreen" role="alert"></div></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><div role="alert" style="display: none;"
+						></div></td>
+			</tr>
+			<tr style="display: none;" class="lotusFormFieldRow">
+				<td class="lotusFormLabel lotusNowrap"><label
+					for="">Readers: </label></td>
+				<td ><span
+					class="lconnEmpty">None</span></td>
+				<td><a href="javascript:;" role="button"
+					 aria-label="Readers: "><img
+						alt="Help" class="lconnSprite lconnSprite-iconHelp16"
+						src="https://qs.renovations.com:444/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20120919.054848"><span
+						aria-label="Help" class="lotusAltText">?</span></a></td>
+			</tr>
+			<tr style="display: none;" class="lotusFormFieldRow">
+				<td class="lotusFormLabel lotusNowrap"><label
+					for="">Editors: </label></td>
+				<td 
+					><span
+					class="lconnEmpty">None</span></td>
+				<td><a href="javascript:;" role="button"
+					 aria-label="Editors: "><img
+						alt="Help" class="lconnSprite lconnSprite-iconHelp16"
+						src="https://qs.renovations.com:444/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20120919.054848"><span
+						aria-label="Help" class="lotusAltText">?</span></a></td>
+			</tr>
+			<tr dojoAttachPoint="messageRow" class="lotusFormFieldRow">
+				<td class="lotusFormLabel lotusNowrap"><label>${nls.labelMessage}</label></td>
+				<td><a dojoAttachEvent="click: setMessage"
+					href="javascript:;" role="button">${nls.labelAddMessage}</a></td>
+			</tr>
+			<tr dojoAttachPoint="messageTextArea" style="display: none;" class="lotusFormFieldRow">
+				<td class="lotusFormLabel lotusNowrap"><label
+					for="">${nls.labelMessage}</label></td>
+				<td><textarea 
+						class="lotusText" name="_shareFileMessage"></textarea></td>
+			</tr>
+		</tbody>
+	</table>
+</div>

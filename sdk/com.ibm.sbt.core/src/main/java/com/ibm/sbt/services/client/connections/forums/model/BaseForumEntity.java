@@ -73,6 +73,8 @@ public class BaseForumEntity extends AtomEntity {
 	public BaseForumEntity(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
 		super(service, node, namespaceCtx, xpathExpression);
 	}
+	
+	public BaseForumEntity(){}
 
 
 	/**

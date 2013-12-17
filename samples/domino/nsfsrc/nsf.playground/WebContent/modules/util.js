@@ -52,7 +52,6 @@ define(['dojo/dom', 'dijit/registry'], function(dom, registry) {
 		 * @param {String} id - The ID of the gadget sniped being displayed.
 		 */
 		updateEditorContent : function(r, id) {
-			showDocumentation(false);
 			pageGlobal.id = id;
 			pageGlobal.unid = r.unid;
 			if(pageGlobal.gadgetEditor) { pageGlobal.gadgetEditor.setValue(r.gadget); }
@@ -82,7 +81,6 @@ define(['dojo/dom', 'dijit/registry'], function(dom, registry) {
 		 * @memberof module:playground/util#
 		 */
 		clearEditors : function() {
-			showDocumentation(false);
 			pageGlobal.id = "";
 			pageGlobal.unid = "";
 			if(pageGlobal.gadgetEditor) {

@@ -1,5 +1,7 @@
 package nsf.playground.environments;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,16 +9,18 @@ import java.util.Map;
 
 import javax.faces.context.FacesContext;
 
-import org.apache.shindig.gadgets.oauth.OAuthStore;
-
 import nsf.playground.beans.DataAccessBean;
 import nsf.playground.extension.Endpoints;
+
+import org.apache.shindig.gadgets.oauth.OAuthStore;
+import org.apache.shindig.gadgets.oauth2.OAuth2Store;
 
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.jslibrary.SBTEnvironment;
 import com.ibm.sbt.opensocial.domino.config.DefaultContainerConfig;
 import com.ibm.sbt.opensocial.domino.config.OpenSocialContainerConfig;
 import com.ibm.sbt.opensocial.domino.container.ContainerExtPoint;
+import com.ibm.sbt.opensocial.domino.container.ContainerExtPointException;
 import com.ibm.sbt.playground.extension.PlaygroundExtensionFactory;
 
 /**
@@ -58,8 +62,7 @@ public class PlaygroundEnvironment extends SBTEnvironment implements ContainerEx
 	private String noteID;
 	private String description;
 	private boolean preferred;
-	private String replicaId;
-	private String dbPath;
+	private String notesUrl;
 	private OpenSocialContainerConfig containerConfig = new DefaultContainerConfig();
 	
 	
@@ -164,13 +167,17 @@ public class PlaygroundEnvironment extends SBTEnvironment implements ContainerEx
 		}
 	}
 	
-	public void setDbPath(String path) {
-		this.dbPath = path;
+	public void setNotesUrl(String url) {
+		this.notesUrl = url;
 	}
 	
 	@Override
-	public String getId() {
-		return dbPath + ":" + getName();
+	public String getId() throws ContainerExtPointException {
+		try {
+			return URLEncoder.encode(this.notesUrl, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			throw new ContainerExtPointException(e);
+		}
 	}
 	
 	@Override
@@ -180,6 +187,11 @@ public class PlaygroundEnvironment extends SBTEnvironment implements ContainerEx
 	
 	@Override
 	public OAuthStore getContainerOAuthStore() {
+		// TODO Return something once we have an implementation
+		return null;
+	}
+	@Override
+	public OAuth2Store getContainerOAuth2Store() {
 		// TODO Return something once we have an implementation
 		return null;
 	}

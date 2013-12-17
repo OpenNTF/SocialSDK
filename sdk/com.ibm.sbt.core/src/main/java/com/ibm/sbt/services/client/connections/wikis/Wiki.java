@@ -51,6 +51,8 @@ public class Wiki extends WikiBaseEntity {
 		super(service, node, namespaceCtx, xpathExpression);
 	}
 	
+	public Wiki(){}
+	
 	/**
 	 * 
 	 * @param service

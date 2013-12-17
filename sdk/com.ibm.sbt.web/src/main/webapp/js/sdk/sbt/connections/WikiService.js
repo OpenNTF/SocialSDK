@@ -20,9 +20,9 @@
  * 
  * @module sbt.connections.WikiService
  */
-define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", "./WikiConstants", "../base/BaseService",
+define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", "./WikiConstants", "./ConnectionsService",
          "../base/AtomEntity", "../base/XmlDataHandler" ], 
-    function(declare,config,lang,stringUtil,Promise,consts,BaseService,AtomEntity,XmlDataHandler) {
+    function(declare,config,lang,stringUtil,Promise,consts,ConnectionsService,AtomEntity,XmlDataHandler) {
 	
 	var CategoryWiki = "<category scheme=\"http://www.ibm.com/xmlns/prod/sn/type\" term=\"wiki\" label=\"wiki\"></category>";
 	var CategoryWikiPage = "<category term=\"page\" scheme=\"tag:ibm.com,2006:td/type\" label=\"page\"/>";
@@ -677,11 +677,13 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
      * @class WikisService
      * @namespace sbt.connections
      */
-    var WikiService = declare(BaseService, {
+    var WikiService = declare(ConnectionsService, {
 
         contextRootMap: {
             wikis: "wikis"
         },
+        
+        serviceName : "wikis",
         
         /**
          * Constructor for WikisService
@@ -693,14 +695,6 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             if (!this.endpoint) {
                 this.endpoint = config.findEndpoint(this.getDefaultEndpointName());
             }
-        },
-
-        /**
-         * Return the default endpoint name if client did not specify one.
-         * @returns {String}
-         */
-        getDefaultEndpointName: function() {
-            return "connections";
         },
         
         /**

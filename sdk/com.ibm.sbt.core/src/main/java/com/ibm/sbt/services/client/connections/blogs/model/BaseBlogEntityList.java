@@ -45,6 +45,8 @@ public class BaseBlogEntityList extends EntityList<BaseBlogEntity> {
 	public BaseBlogEntityList(Response requestData, BlogsFeedHandler feedHandler) {
 		super(requestData, feedHandler);
 	}
+	
+	public BaseBlogEntityList(){}
 
 	@Override
 	public Document getData(){

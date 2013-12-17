@@ -21,9 +21,9 @@
  * @module sbt.connections.ActivityService
  */
 define(
-		[ "../declare", "../config", "../lang", "../stringUtil", "../Promise", "./ActivityConstants", "../base/BaseService", "../base/AtomEntity",
+		[ "../declare", "../config", "../lang", "../stringUtil", "../Promise", "./ActivityConstants", "./ConnectionsService", "../base/AtomEntity",
 				"../base/BaseEntity", "../base/XmlDataHandler", "../xml" ],
-		function(declare, config, lang, stringUtil, Promise, consts, BaseService, AtomEntity, BaseEntity, XmlDataHandler, xml) {
+		function(declare, config, lang, stringUtil, Promise, consts, ConnectionsService, AtomEntity, BaseEntity, XmlDataHandler, xml) {
 			
 			var ActivityCategory = "<category scheme=\"http://www.ibm.com/xmlns/prod/sn/type\" term=\"${getType}\" label=\"${getType}\" />";
 			var PositionTmpl = "<snx:position>${getPosition}</snx:position>";
@@ -1684,11 +1684,13 @@ define(
 			 * @class ActivityService
 			 * @namespace sbt.connections
 			 */
-			var ActivityService = declare(BaseService, {
+			var ActivityService = declare(ConnectionsService, {
 
 				contextRootMap : {
 					activities : "activities"
 				},
+				
+				serviceName : "activities",
 
 				/**
 				 * Constructor for ActivitiesService
@@ -1700,15 +1702,6 @@ define(
 					if (!this.endpoint) {
 						this.endpoint = config.findEndpoint(this.getDefaultEndpointName());
 					}
-				},
-
-				/**
-				 * Return the default endpoint name if client did not specify one.
-				 * @method getDefaultEndpointName
-				 * @returns {String}
-				 */
-				getDefaultEndpointName : function() {
-					return "connections";
 				},
 
 				/**

@@ -57,6 +57,8 @@ public class ForumTopic extends BaseForumEntity{
 	public ForumTopic(ForumService forumsService, String id) {
 		super(forumsService,id);
 	}
+	
+	public ForumTopic(){}
 	/**
      * Constructor
      *

@@ -17,8 +17,8 @@
 /**
  * 
  */
-define([ "sbt/declare", "sbt/lang", "sbt/stringUtil", "sbt/log",
-         "./FileGrid", "sbt/controls/view/BaseView", "./DownloadFileAction", "./ShareFileAction",
+define([ "../../../declare", "../../../lang", "../../../stringUtil", "../../../log",
+         "./FileGrid", "../../../controls/view/BaseView", "./DownloadFileAction", "./ShareFileAction",
 		 "./UploadFileAction", "./MoveToTrashAction", "./AddTagsAction" ],
 		function(declare, lang, stringUtil, log, FileGrid, BaseView,DownloadFileAction,ShareFileAction, UploadFileAction, MoveToTrashAction,AddTagsAction) {
 

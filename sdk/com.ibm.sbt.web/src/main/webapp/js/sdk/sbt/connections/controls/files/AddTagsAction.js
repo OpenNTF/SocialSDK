@@ -17,10 +17,10 @@
 /**
  * UploadFileAction
  */
-define([ "sbt/declare", "sbt/dom", "sbt/lang",
-         "sbt/i18n!./nls/files",
-         "sbt/controls/dialog/Dialog", "./AddTagsWidget", "sbt/controls/view/Action"], 
-	function(declare, dom, lang, nls, Dialog, AddTagsWidget, Action) {
+define([ "../../../declare", "../../../dom", "../../../lang",
+         "../../../i18n!./nls/files", "./AddTagsWidget", 
+         "../../../controls/dialog/Dialog", "../../../controls/view/Action"], 
+	function(declare, dom, lang, nls, AddTagsWidget, Dialog, Action) {
 
 	/**
 	 * Action to add tags to a file

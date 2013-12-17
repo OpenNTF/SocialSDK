@@ -19,7 +19,9 @@ package com.ibm.sbt.services.endpoints;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.StringTokenizer;
+import java.text.MessageFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -55,6 +57,8 @@ public class SSOEndpoint extends AbstractEndpoint {
     
     private String authenticationPage = null;
     
+	static final String	sourceClass	= SSOEndpoint.class.getName();
+	static final Logger	logger = Logger.getLogger(sourceClass);
 
     public SSOEndpoint() {
     }
@@ -145,19 +149,31 @@ public class SSOEndpoint extends AbstractEndpoint {
 	                _domain = _domain.substring(0, _domain.indexOf(":"));
 	            }
         	}
+        	
+        	if (logger.isLoggable(Level.INFO)) {
+        		String msg = MessageFormat.format("SSO endpoint domain for {0} is {1}", url, _domain);
+        		logger.log(Level.INFO, msg);
+        	}
         }
         
         
         public String getRawCookieValue(javax.servlet.http.Cookie cookie, HttpServletRequest request) {
-        	String co = request.getHeader("cookie");
-        	StringTokenizer st = new StringTokenizer(co, "; ");
-        	while (st.hasMoreTokens()) {
-        		String cs = st.nextToken();
-        		if (cs.substring(0, cs.indexOf('=')).equals(cookie.getName())) {
-        			String value =  cs.substring(cs.indexOf('=')+1);
-        		return value;
+        	try {
+	        	String header = request.getHeader("cookie");
+	        	String[] headerParts = StringUtil.splitString(header, "; ", false);
+	        	String name = cookie.getName();
+	        	for (int i=0; i<headerParts.length; i++) {
+	        		String cookieHeader = headerParts[i];
+	        		if (cookieHeader.startsWith(name)) {
+	        			String value = cookieHeader.substring(name.length()+1);
+	        			return value;
+	        		}
+	        	}
+        	} catch (Exception e) {
+        		if (logger.isLoggable(Level.INFO)) {
+        			logger.log(Level.INFO, "Unable to parse cookie header", e);
         		}
-    		}
+        	}
         	return cookie.getValue();
         }
 
@@ -169,7 +185,9 @@ public class SSOEndpoint extends AbstractEndpoint {
             cookieStore = new BasicCookieStore();
 
             Context ctx = Context.get();
-
+            
+            boolean ltpaTokenFound = false;
+            
             java.util.Map<java.lang.String, java.lang.Object> cookieMap = ctx.getRequestCookieMap();
             if(cookieMap.containsKey("LtpaToken")) {
                 javax.servlet.http.Cookie cookie = (javax.servlet.http.Cookie) cookieMap.get("LtpaToken");
@@ -187,6 +205,7 @@ public class SSOEndpoint extends AbstractEndpoint {
                     cookie1.setPath("/");
                 }
                 cookieStore.addCookie(cookie1);
+                ltpaTokenFound = true;
             }
 
             if(cookieMap.containsKey("LtpaToken2")) {
@@ -205,6 +224,15 @@ public class SSOEndpoint extends AbstractEndpoint {
                     cookie2.setPath("/");
                 }
                 cookieStore.addCookie(cookie2);
+                ltpaTokenFound = true;
+            }
+            
+            if (!ltpaTokenFound && logger.isLoggable(Level.INFO)) {
+            	String uri = "";
+            	try {
+            		uri = request.getRequestLine().getUri();
+            	} catch (Exception e) {}
+        		logger.log(Level.INFO, "Unable to find LTPA token for request "+uri);
             }
 
             context.setAttribute(ClientContext.COOKIE_STORE, cookieStore);

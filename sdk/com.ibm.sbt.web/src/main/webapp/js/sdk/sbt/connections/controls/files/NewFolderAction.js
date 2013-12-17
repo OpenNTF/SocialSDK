@@ -17,9 +17,10 @@
 /**
  * NewFolderAction
  */
-define([ "sbt/declare", "sbt/dom", "sbt/lang",
-         "sbt/i18n!./nls/files", "sbt/controls/dialog/Dialog", "./NewFolderWidget", "sbt/controls/view/Action" ], 
-	function(declare, dom, lang, nls, Dialog, NewFolderWidget, Action) {
+define([ "../../../declare", "../../../dom", "../../../lang",
+         "../../../i18n!./nls/files", "./NewFolderWidget", 
+         "../../../controls/dialog/Dialog", "../../../controls/view/Action" ], 
+	function(declare, dom, lang, nls, NewFolderWidget, Dialog, Action) {
 
 	/**
 	 * Action to create a new folder.

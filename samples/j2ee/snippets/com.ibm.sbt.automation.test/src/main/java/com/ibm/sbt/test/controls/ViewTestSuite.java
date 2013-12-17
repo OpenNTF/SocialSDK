@@ -26,7 +26,13 @@ import com.ibm.sbt.test.controls.grid.CommunityRenderer;
 import com.ibm.sbt.test.controls.grid.ConnectionsRenderer;
 import com.ibm.sbt.test.controls.grid.Grid;
 import com.ibm.sbt.test.controls.grid.TemplatedGridRow;
+import com.ibm.sbt.test.controls.view.ActionBar;
+import com.ibm.sbt.test.controls.view.Section;
+import com.ibm.sbt.test.controls.view.ShowMessageView;
+import com.ibm.sbt.test.controls.view.TabBar;
 import com.ibm.sbt.test.controls.view.files.AddTagsWidget;
+import com.ibm.sbt.test.controls.view.files.FileActions;
+import com.ibm.sbt.test.controls.view.files.FilesView;
 import com.ibm.sbt.test.controls.view.files.UploadFileWidget;
 import com.ibm.sbt.test.controls.view.forums.CreateForumWidget;
 
@@ -36,7 +42,18 @@ import com.ibm.sbt.test.controls.view.forums.CreateForumWidget;
  * @date 12 Dec 2013
  */
 @RunWith(Suite.class)
-@SuiteClasses({ AddTagsWidget.class, UploadFileWidget.class })
+@SuiteClasses({ 
+	ActionBar.class,
+	Section.class,
+	ShowMessageView.class,
+	TabBar.class,
+	
+	AddTagsWidget.class, 
+	UploadFileWidget.class,
+
+	FileActions.class,
+	FilesView.class
+})
 public class ViewTestSuite {
 	 
 	@BeforeClass

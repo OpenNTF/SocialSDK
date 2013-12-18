@@ -61,10 +61,8 @@ public class BookmarkFeedHandler implements IFeedHandler {
 	 */
 	@Override
 	public Bookmark createEntityFromData(Object data) {
-		Node node = (Node)data;
 		XPathExpression expr = (data instanceof Document) ? (XPathExpression)CommunityXPath.entry.getPath() : null;
-		XmlDataHandler handler = new XmlDataHandler(node, ConnectionsConstants.nameSpaceCtx, expr);
-		Bookmark bookmark = new Bookmark(service, handler);
+		Bookmark bookmark = new Bookmark(service, (Node)data, ConnectionsConstants.nameSpaceCtx, expr);
 		return bookmark;
 	}
 

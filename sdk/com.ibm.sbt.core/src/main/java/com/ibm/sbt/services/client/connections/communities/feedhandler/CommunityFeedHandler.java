@@ -25,8 +25,6 @@ import com.ibm.sbt.services.client.connections.communities.CommunityList;
 import com.ibm.sbt.services.client.connections.communities.CommunityService;
 import com.ibm.sbt.services.client.connections.communities.model.CommunityXPath;
 import com.ibm.sbt.services.client.Response;
-import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
-
 /**
  * 
  * @author Carlos Manias
@@ -61,10 +59,8 @@ public class CommunityFeedHandler implements IFeedHandler {
 	 */
 	@Override
 	public Community createEntityFromData(Object data) {
-		Node node = (Node)data;
 		XPathExpression expr = (data instanceof Document) ? (XPathExpression)CommunityXPath.entry.getPath() : null;
-		XmlDataHandler handler = new XmlDataHandler(node, ConnectionsConstants.nameSpaceCtx, expr);
-		Community community = new Community(service, handler);
+		Community community = new Community(service, (Node)data, ConnectionsConstants.nameSpaceCtx, expr);
 		return community;
 	}
 

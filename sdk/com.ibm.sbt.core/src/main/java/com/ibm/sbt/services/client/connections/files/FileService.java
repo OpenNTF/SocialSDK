@@ -27,6 +27,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -73,6 +75,9 @@ import com.ibm.sbt.services.endpoints.Endpoint;
  *      #action=openDocument&res_title=Files_API_ic40a&content=pdcontent
  */
 public class FileService extends BaseService {
+	
+	static final String sourceClass = FileService.class.getName();
+	static final Logger logger = Logger.getLogger(sourceClass);
 
     /**
      * Default Constructor - 0 argument constructor Calls the Constructor of BaseService Class.
@@ -135,6 +140,7 @@ public class FileService extends BaseService {
         try {
             super.updateData(requestUri, null, headers, payload, commentId);
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInStatusChange);
         }
     }
@@ -166,6 +172,7 @@ public class FileService extends BaseService {
         try {
             super.updateData(requestUri, null,  headers, payload, fileId);
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInStatusChange);
         }
     }
@@ -198,6 +205,7 @@ public class FileService extends BaseService {
         try {
             super.updateData(requestUri, null, headers, payload, commentId);
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInFlaggingComment);
         }
     }
@@ -229,6 +237,7 @@ public class FileService extends BaseService {
         try {
             super.updateData(requestUri, null, headers, payload, fileId);
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MesssageExceptionInFlaggingFile);
         }
     }
@@ -282,6 +291,7 @@ public class FileService extends BaseService {
             Response result = (Response) super.createData(requestUri, null, new ClientService.ContentXml(payload,"application/atom+xml"));
             return (Comment)new CommentFeedHandler(this).createEntity(result);
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInCreatingComment);
         }
     }
@@ -338,6 +348,7 @@ public class FileService extends BaseService {
             Response result = (Response) super.createData(requestUri, null, new ClientService.ContentXml(payload,"application/atom+xml"));
             return (Comment)new CommentFeedHandler(this).createEntity(result);
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInCreatingComment);
         }
     }
@@ -608,6 +619,7 @@ public class FileService extends BaseService {
             		updateFilePayload, "application/atom+xml"), null);
             return (File) new FileFeedHandler(this).createEntity(result);
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInUpdate);
         }
 	}
@@ -654,6 +666,7 @@ public class FileService extends BaseService {
             return new FileFeedHandler(this).createEntityList(result);
             
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageGenericException);
         }
     }
@@ -751,6 +764,7 @@ public class FileService extends BaseService {
         try {
             super.createData(requestUri, params, headers, payload);
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageGenericException);
         }
     }
@@ -818,6 +832,7 @@ public class FileService extends BaseService {
                     payload, "application/atom+xml"));
             return (Comment) new CommentFeedHandler(this).createEntity(result);
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInCreatingComment);
         }
     }
@@ -860,6 +875,7 @@ public class FileService extends BaseService {
                             payload, "application/atom+xml"));
             return (File) new FileFeedHandler(this).createEntity(result);
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInCreatingFolder);
         }
 
@@ -889,6 +905,7 @@ public class FileService extends BaseService {
         try {
             super.deleteData(requestUri, null, null);
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInDeletingFile);
         }
 
@@ -928,6 +945,7 @@ public class FileService extends BaseService {
         try {
             super.deleteData(requestUri, null, null);
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInDeletingFile);
         }
 
@@ -975,6 +993,7 @@ public class FileService extends BaseService {
         try {
             super.deleteData(requestUri, params, null);
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInDeletingFile);
         }
 
@@ -1026,6 +1045,7 @@ public class FileService extends BaseService {
         try {
             super.deleteData(requestUri, null, null);
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInDeletingComment);
         }
     }
@@ -1038,6 +1058,7 @@ public class FileService extends BaseService {
         try {
             super.deleteData(requestUri, null, null);
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInDeletingFile);
         }
     }
@@ -1085,6 +1106,7 @@ public class FileService extends BaseService {
         try {
             super.deleteData(requestUri, null, null);
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInDeletingFile);
         }
     }
@@ -1138,6 +1160,7 @@ public class FileService extends BaseService {
         try {
             super.deleteData(requestUri, params, null);
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInDeletingFileShare);
         }
     }
@@ -1153,6 +1176,7 @@ public class FileService extends BaseService {
         try {
             super.deleteData(requestUri, null, null);
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInDeletingComment);
         }
     }
@@ -1168,6 +1192,7 @@ public class FileService extends BaseService {
         try {
             super.deleteData(requestUri, null, null);
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInDeletingFile);
         }
     }
@@ -1192,6 +1217,7 @@ public class FileService extends BaseService {
         try {
             super.deleteData(requestUri, null, null);
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInDeleteFolder);
         }
     }
@@ -1229,6 +1255,7 @@ public class FileService extends BaseService {
         try {
             super.updateData(requestUri, null, headers, payload, id);
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInFlaggingInappropriate);
         }
     }
@@ -1266,6 +1293,7 @@ public class FileService extends BaseService {
         try {
             fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler(this));
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
         return fileEntries;
@@ -1285,6 +1313,7 @@ public class FileService extends BaseService {
         try {
             commentEntries = (CommentList) getEntities(requestUri, params, new CommentFeedHandler(this));
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
         
@@ -1350,6 +1379,7 @@ public class FileService extends BaseService {
             try {
                 return (File) super.getEntity(requestUri, parameters, new FileFeedHandler(this));
             } catch (Exception e) {
+            	logger.log(Level.SEVERE, e.getMessage(), e);
                throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
             }
         }
@@ -1385,6 +1415,7 @@ public class FileService extends BaseService {
         try {
            return (File) super.getEntity(requestUri, parameters, new FileFeedHandler(this));
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
           throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }        
     }
@@ -1397,6 +1428,7 @@ public class FileService extends BaseService {
         try {
             return (File) super.getEntity(requestUri, null, new FileFeedHandler(this));
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
            throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
     }
@@ -1517,6 +1549,7 @@ public class FileService extends BaseService {
             commentEntries = (CommentList) getEntities(uriBuilder.populateURL(accessType,   null, null, null, subFilters, null), parameters, headers, new CommentFeedHandler(this));
             return commentEntries;
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
     }
@@ -1564,6 +1597,7 @@ public class FileService extends BaseService {
         try {
         	return (CommentList) getEntities(requestUri, parameters, null, new CommentFeedHandler(this));
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
     }
@@ -1626,6 +1660,7 @@ public class FileService extends BaseService {
         try {
             return (File) super.getEntity(requestUri, params, new FileFeedHandler(this));
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
            throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
     }
@@ -1651,6 +1686,7 @@ public class FileService extends BaseService {
         try {
             fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler(this));
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
 
@@ -1696,6 +1732,7 @@ public class FileService extends BaseService {
         try {
             fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler(this));
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
 
@@ -1734,6 +1771,7 @@ public class FileService extends BaseService {
         try {
             fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler(this));
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
 
@@ -1774,6 +1812,7 @@ public class FileService extends BaseService {
         try {
             fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler(this));
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
 
@@ -1795,6 +1834,7 @@ public class FileService extends BaseService {
         try {
             result = super.retrieveData(requestUri, null);
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
         	throw new FileServiceException(e, Messages.MessageExceptionInFetchingServiceDocument);
         }
         return (Document) result.getData();
@@ -1818,6 +1858,7 @@ public class FileService extends BaseService {
         try {
             result = this.getClientService().get(requestUri, null, ClientService.FORMAT_XML);
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInFetchingServiceDocument);
         }
         return (Document) result;
@@ -1864,6 +1905,7 @@ public class FileService extends BaseService {
         try {
             fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler(this));
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
 
@@ -1912,6 +1954,7 @@ public class FileService extends BaseService {
         try {
             fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler(this));
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
 
@@ -2007,6 +2050,7 @@ public class FileService extends BaseService {
         try {
             file = (File) getEntity(requestUri, params, new FileFeedHandler(this));
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
 
@@ -2022,6 +2066,7 @@ public class FileService extends BaseService {
         try {
             Comment = (Comment) getEntity(requestUri, null, new CommentFeedHandler(this));
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
 
@@ -2042,6 +2087,7 @@ public class FileService extends BaseService {
         try {
             commentEntries = (CommentList) getEntities(requestUri, params, new FileFeedHandler(this));
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
 
@@ -2057,6 +2103,7 @@ public class FileService extends BaseService {
         try {
             fileEntry = (File) getEntity(requestUri, null, new FileFeedHandler(this));
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
 
@@ -2080,6 +2127,7 @@ public class FileService extends BaseService {
         try {
             return (Document) super.retrieveData(requestUri, params).getData();
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
            throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
 
@@ -2099,6 +2147,7 @@ public class FileService extends BaseService {
         try {
             fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler(this));
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
 
@@ -2127,6 +2176,7 @@ public class FileService extends BaseService {
         try {
             fileEntry = (File) getEntity(requestUri, null, new FileFeedHandler(this));
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
 
@@ -2161,6 +2211,7 @@ public class FileService extends BaseService {
         try {
             fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler(this));
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e,
                     Messages.MessageExceptionInReadingObject);
         }
@@ -2206,6 +2257,7 @@ public class FileService extends BaseService {
         try {
             fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler(this));
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
 
@@ -2236,6 +2288,7 @@ public class FileService extends BaseService {
         try {
             fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler(this));
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
 
@@ -2261,6 +2314,7 @@ public class FileService extends BaseService {
         try {
             result = this.getClientService().get(requestUri, null, ClientService.FORMAT_TEXT);
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInGettingNonce);
         }
         if (result == null) {
@@ -2296,6 +2350,7 @@ public class FileService extends BaseService {
         try {
             fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler(this));
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
 
@@ -2328,6 +2383,7 @@ public class FileService extends BaseService {
         try {
             fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler(this));
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
 
@@ -2364,6 +2420,7 @@ public class FileService extends BaseService {
         try {
             fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler(this));
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
 
@@ -2396,6 +2453,7 @@ public class FileService extends BaseService {
         try {
             fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler(this));
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         }
 
@@ -2428,6 +2486,7 @@ public class FileService extends BaseService {
         try {
             super.createData(requestUri, params, null);
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInLockingFile);
         }
     }
@@ -2458,6 +2517,7 @@ public class FileService extends BaseService {
         try {
             super.createData(requestUri, params, null);
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInPinningFile);
         }
     }
@@ -2501,6 +2561,7 @@ public class FileService extends BaseService {
         try {
             super.createData(requestUri, params,  null);
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInPinningFolder);
         }
     }
@@ -2535,6 +2596,7 @@ public class FileService extends BaseService {
         try {
             super.deleteData(requestUri, params, null);
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInDeletingFile);
         }
     }
@@ -2590,6 +2652,7 @@ public class FileService extends BaseService {
             Response data = (Response) this.updateData(requestUri, params, headers, null, null);
             return (File)new FileFeedHandler(this).createEntity(data);
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInRestoreFile);
         }
        
@@ -2637,6 +2700,7 @@ public class FileService extends BaseService {
         try {
             super.createData(requestUri, params, headers, payload);
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, "Error sharing the file");
         }
     }
@@ -2666,6 +2730,7 @@ public class FileService extends BaseService {
         try {
             super.createData(requestUri, params, null);
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, "Error unlocking the file");
         }
     }
@@ -2696,6 +2761,7 @@ public class FileService extends BaseService {
         try {
             super.deleteData(requestUri, params ,null);
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, "Error unpinning the file");
         }
     } 
@@ -2714,6 +2780,7 @@ public class FileService extends BaseService {
         try {
             super.deleteData(requestUri, params, null);
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, "Error unpinning the folder");
         }
     }
@@ -2813,6 +2880,7 @@ public class FileService extends BaseService {
             Response result = (Response) this.updateData(requestUri, params, headers, payload, null);
             return (Comment) new CommentFeedHandler(this).createEntity(result);
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInUpdatingComment);
         }
        
@@ -2897,6 +2965,7 @@ public class FileService extends BaseService {
             Response result = (Response) this.updateData(requestUri, params, headers, contentFile, null);
             return (File) new FileFeedHandler(this).createEntity(result);
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInUpdate);
         }
     }
@@ -2943,6 +3012,7 @@ public class FileService extends BaseService {
         try {
             return uploadNewVersion(requestUri, contentFile, params, headers);
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInUpload);
         }
     }
@@ -3088,6 +3158,7 @@ public class FileService extends BaseService {
                     requestBody, "application/atom+xml"), null);
             return (File) new FileFeedHandler(this).createEntity(result);
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInRestoreFile);
         }
     }
@@ -3139,6 +3210,7 @@ public class FileService extends BaseService {
         try {
             this.updateData(requestUri, null, headers, payload, null);
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInRestoreFile);
         }
     }
@@ -3164,6 +3236,7 @@ public class FileService extends BaseService {
         try {
             this.updateData(requestUri, null, headers, payload, null);
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInRestoreFile);
         }
     }
@@ -3185,6 +3258,7 @@ public class FileService extends BaseService {
             Response result = (Response) this.updateData(requestUri, null, headers, payload, null);
             return (File) new FileFeedHandler(this).createEntity(result);
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInRestoreFile);
         }
         
@@ -3258,6 +3332,9 @@ public class FileService extends BaseService {
      */
     public File uploadFile(java.io.InputStream stream, final String title, long length,
             Map<String, String> p) throws FileServiceException {
+    	if (logger.isLoggable(Level.FINEST)) {
+			logger.entering(sourceClass, "uploadFile", title);
+		}
         if (stream == null) {
             throw new FileServiceException(null, Messages.Invalid_Stream);
         }
@@ -3275,9 +3352,13 @@ public class FileService extends BaseService {
         headers.put("X-Update-Nonce", getNonce()); // It is not clearly documented which Content Type requires Nonce, thus adding nonce in header for all upload requests. 
         try {
             Response data = (Response) super.createData(requestUri, p, headers, contentFile);
+            if (logger.isLoggable(Level.FINEST)) {
+    			logger.exiting(sourceClass, "uploadFile", data);
+    		}
            
             return (File)new FileFeedHandler(this).createEntity(data);
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new FileServiceException(e, Messages.MessageExceptionInUpload);
         }
     }
@@ -3494,6 +3575,7 @@ public class FileService extends BaseService {
             builder = factory.newDocumentBuilder();
             document = builder.parse(new InputSource(new StringReader(requestBody.toString())));
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
             throw new RuntimeException(e);
         }
         return document;
@@ -3549,6 +3631,7 @@ public class FileService extends BaseService {
             resultantEntries = (FileList) this.getEntities(requestUri, null,
                     new FileFeedHandler(this));
         } catch (Exception e) {
+        	logger.log(Level.SEVERE, e.getMessage(), e);
            throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         } 
        

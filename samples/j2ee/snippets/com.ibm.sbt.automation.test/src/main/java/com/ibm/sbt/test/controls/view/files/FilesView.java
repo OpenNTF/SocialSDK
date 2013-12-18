@@ -10,7 +10,7 @@ import com.ibm.sbt.automation.core.test.pageobjects.ResultPage;
 
 public class FilesView extends BaseApiTest {
 
-	static String SNIPPET_ID = "Toolkit_Views_FilesView";
+	static String SNIPPET_ID = "Social_Files_Views_FilesView";
 
 	public FilesView() {
 		setAuthType(AuthType.AUTO_DETECT);
@@ -20,7 +20,7 @@ public class FilesView extends BaseApiTest {
 	public void testFilesView() {
 		WidgetResultPage resultPage = launchWidget(SNIPPET_ID);
 		
-		Assert.assertEquals("First Tab\nSecond Tab\nThird Tab", resultPage.getText());
+		Assert.assertTrue(resultPage.getText().startsWith("Files"));
     }
 	
 	protected WidgetResultPage launchWidget(String snippetId) {
@@ -41,7 +41,7 @@ public class FilesView extends BaseApiTest {
      */
     @Override
     public String getAuthenticatedMatch() {
-        return "uniqName_0_0";
+        return "uniqName_9_0";
     }
 	
 	public class WidgetResultPage extends BaseResultPage {

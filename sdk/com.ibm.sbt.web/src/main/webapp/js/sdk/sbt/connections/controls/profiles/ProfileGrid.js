@@ -194,7 +194,7 @@ define([ "../../../declare",
        	                }
             	};
        		 	this._activeSortAnchor = this._sortInfo.created;
-       		 	this._activeSortIsDesc = false;
+       		 	this._activeSortIsDesc = true;
             } else {
             	this._sortInfo = {
             			displayName: { 
@@ -210,7 +210,7 @@ define([ "../../../declare",
                
             	};
             	this._activeSortAnchor = this._sortInfo.recent;
-                this._activeSortIsDesc = false;
+                this._activeSortIsDesc = true;
             }
             
         },

@@ -75,4 +75,4 @@ if not (%LABEL%) == (SNAPSHOT) call mvn org.eclipse.tycho:tycho-versions-plugin:
 
 rem queuing standard and domino builds to aggregate both
 
-mvn clean dependency:purge-local-repository install javadoc:aggregate site -DreResolve=false -DtoolsDir=%toolsDir%  %WORKING_DIR% %LOCAL_REPO% %NOTES_PLATFORM%
+mvn clean dependency:purge-local-repository install javadoc:aggregate -DreResolve=false -DtoolsDir=%toolsDir%  %WORKING_DIR% %LOCAL_REPO% %NOTES_PLATFORM%

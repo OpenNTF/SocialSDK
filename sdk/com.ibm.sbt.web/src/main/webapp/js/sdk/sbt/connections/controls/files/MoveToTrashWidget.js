@@ -17,10 +17,11 @@
 /**
  * MoveToTrashWidget
  */
-define([ "sbt/declare", "sbt/lang", "sbt/dom", 
-         "sbt/i18n!./nls/files", "sbt/controls/view/BaseDialogContent", "../../FileService", 
-		 "sbt/text!./templates/MoveToTrash.html" ],
-		function(declare, lang, dom, nls, BaseDialogContent, FileService, MoveToTrash) {
+define([ "../../../declare", "../../../lang", "../../../dom", 
+         "../../../i18n!./nls/files", "../../../controls/view/BaseDialogContent", "../../FileService", 
+		 "../../../text!./templates/MoveToTrash.html",
+		 "../../../stringUtil"],
+		function(declare, lang, dom, nls, BaseDialogContent, FileService, MoveToTrash,stringUtil) {
 
 	/**
 	 * Widget which can be used to move a collection of files to trash.
@@ -40,6 +41,11 @@ define([ "sbt/declare", "sbt/lang", "sbt/dom",
 		 * Computed message displayed in the move to trash dialog.
 		 */
 		moveToTrashMessage : "",
+		
+		/**
+		 * name of file(s) to be displayed
+		 */
+		fileName: "fileName",
 		
 		/**
 		 * Constructor method for the UploadFileWidget.
@@ -71,6 +77,7 @@ define([ "sbt/declare", "sbt/lang", "sbt/dom",
 			this.errorMessage = nls.moveToTrashError;
 			this.successMessage = nls.moveToTrashSuccess;
 			this._setMoveToTrashMessage(this.files);
+			this._getSelectedFileNames(this.files);
 		},
 				
 		/**
@@ -92,12 +99,10 @@ define([ "sbt/declare", "sbt/lang", "sbt/dom",
 		 * @method onExecute
 		 */
 		onExecute : function() {
-			//TODO Check some files have been selected
-			//if(files && files.length > 0){
-				//this._moveToTrash(files);
-			
+			this._moveToTrash(this.files);	
 		},
-
+		
+	
 		//
 		// Internals
 		//
@@ -109,27 +114,59 @@ define([ "sbt/declare", "sbt/lang", "sbt/dom",
 			var self = this;
 			this.setExecuteEnabled(false);
 			var fileService = this.getFileService();
-			for (var i=0;i<files.length;i++) {
+			var deletedFiles = [];
+			var errorCount = 0;
+			
+			for(var i=0;i<files.length;i++){
 				files[i] = fileService.newFile(files[i]);
-				var id = files[i].data.uid;
-				fileService.getFile(id, {}).then(
-		            function(file) {						
-						var context = self;
-						fileService.deleteFile(file.getFileId()).then(
-							function(updatedFile) {
-								context.onSuccess();									
-							}, 
-							function(error) {
-								context.onError();		
-							}
-						);
-		            },
-		            function(error) {
-		                console.log(error);
-		            }       
-		    	);
-				context.setExecuteEnabled(true);
+				fileService.deleteFile(files[i].getFileId()).then(
+						function(deletedFileId) {
+							deletedFiles.push(deletedFileId);
+							self._handleRequestComplete(deletedFiles, errorCount,files);								
+						}, 
+						function(error) {
+							errorCount++;
+							self._handleRequestComplete(deletedFiles, errorCount,files);		
+						}
+					);
 			}
+			this.setExecuteEnabled(true);
+		},
+		
+		/*
+		 * Called after a request has completed to check are we done yet
+		 */
+		_handleRequestComplete : function(deletedFiles, errorCount, files) {
+			if (deletedFiles.length + errorCount == files.length) {
+				this.setExecuteEnabled(true);
+				if (deletedFiles.length > 0) {
+					this._setSuccessMessage(files, deletedFiles);
+					this.onSuccess();
+				} else {
+					this._setErrorMessage(files);
+					this.onError();
+				}
+			}
+		},
+		
+		/*
+		 * Set the successMessage for the specified operation
+		 */
+		_setSuccessMessage : function(files) {
+			if (files.length == 1) {
+				this.successTemplate = stringUtil.replace(nls.moveToTrashSuccess, {fileName : files[0]._fields.title});
+			} else {	
+				this.successTemplate = stringUtil.replace(nls.moveToTrashSuccessMulti, {count : files.length});
+			}
+		},
+		
+		/*
+		 * Set the errorMessage for the specified  operation
+		 */
+		_setErrorMessage : function(files) {
+
+			this.errorTemplate = stringUtil.replace(nls.moveToTrashErrorMulti, {fileName : files[0]._fields.title});
+
 		},
 		
 		/*
@@ -143,6 +180,14 @@ define([ "sbt/declare", "sbt/lang", "sbt/dom",
 			} else {
 				this.moveToTrashMessage = nls.labelMoveFiles;
 			}
+		},
+		
+		_getSelectedFileNames: function(files){
+			var fileNames="";
+			for(var i=0;i<files.length;i++){
+				fileNames = fileNames+(files[i].title+"<br />");
+			}
+			this.fileName = fileNames;
 		}
 		
 	});

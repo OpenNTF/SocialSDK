@@ -17,9 +17,9 @@
 /**
  * ShareFileAction
  */
-define([ "sbt/declare", "sbt/dom", "sbt/lang",
-         "sbt/i18n!sbt/connections/controls/files/nls/files",
-         "sbt/controls/dialog/Dialog", "./ShareFileWidget", "sbt/controls/view/Action"], 
+define([ "../../../declare", "../../../dom", "../../../lang",
+         "../../../i18n!sbt/connections/controls/files/nls/files",
+         "../../../controls/dialog/Dialog", "./ShareFileWidget", "../../../controls/view/Action"], 
 	function(declare, dom, lang, nls, Dialog, ShareFileWidget, Action) {
 
 	/**
@@ -39,6 +39,17 @@ define([ "sbt/declare", "sbt/dom", "sbt/lang",
 		isEnabled : function(selection, context) {
 			return (selection.length > 0);
 		},
+		
+		/**
+		 * Set files on the associated widget. 
+		 */
+		selectionChanged : function(state, selection, context) {
+			this.inherited(arguments);
+			
+			if (this.widget) {
+				this.widget.selectionChanged(selection, context);
+			}
+		},
 
 		/**
 		 * Open dialog to share a file.
@@ -56,7 +67,6 @@ define([ "sbt/declare", "sbt/dom", "sbt/lang",
 			
 			var dialog = new Dialog({ 
     			title: this.name,
-    			grid: this.grid,
     			dialogStyle : "width: 600px;",
     			nls: { OK: nls.share },
     			dialogContent: widget,

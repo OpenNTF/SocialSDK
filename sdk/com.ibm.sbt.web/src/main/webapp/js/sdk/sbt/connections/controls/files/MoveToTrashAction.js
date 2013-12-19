@@ -17,8 +17,8 @@
 /**
  * MoveToTrashAction
  */
-define([ "sbt/declare", "sbt/dom", "sbt/lang",
-         "sbt/i18n!./nls/files", "sbt/controls/dialog/Dialog", "./MoveToTrashWidget", "sbt/controls/view/Action" ], 
+define([ "../../../declare", "../../../dom", "../../../lang",
+         "../../../i18n!./nls/files", "../../../controls/dialog/Dialog", "./MoveToTrashWidget", "../../../controls/view/Action" ], 
 	function(declare, dom, lang, nls, Dialog, MoveToTrashWidget, Action) {
 
 	/**
@@ -31,6 +31,17 @@ define([ "sbt/declare", "sbt/dom", "sbt/lang",
 	var MoveToTrashAction = declare([ Action ], {
 		
 		name : nls.moveToTrash,
+		
+		/**
+		 * Set files on the associated widget. 
+		 */
+		selectionChanged : function(state, selection, context) {
+			this.inherited(arguments);
+			
+			if (this.widget) {
+				this.widget.selectionChanged(selection, context);
+			}
+		},
 	
 		/**
 		 * Only enabled when at least on file is selected.

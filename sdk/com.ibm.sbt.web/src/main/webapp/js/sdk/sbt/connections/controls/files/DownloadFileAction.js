@@ -17,8 +17,8 @@
 /**
  * 
  */
-define([ "sbt/declare", 
-         "sbt/controls/view/Action", 
+define([ "../../../declare", 
+         "../../../controls/view/Action", 
          "./nls/files"], 
 	function(declare, Action, nls) {
 
@@ -28,6 +28,7 @@ define([ "sbt/declare",
 	var DownloadFileAction = declare([ Action ], {
 		
 		name : nls.root.download,
+		
 		
 		/**
 		 * Constructor method for the BaseView.
@@ -57,16 +58,10 @@ define([ "sbt/declare",
 		 * @method execute
 		 */
 		execute : function(selection, context) {
-			// Download file	
-			if (this.args.grid) {
-				var selectedFiles = this.args.grid.getSelected();
-				var frame = document.createElement("iframe");
-				frame.setAttribute("style", "display:none;");
-				this.args.grid.domNode.appendChild(frame);
-				for (var i = 0; i < selectedFiles.length; i++) {					
-					frame.setAttribute("src", selectedFiles[i].data.downloadUrl);	
-				}
-				this.args.grid.domNode.removeChild(frame);
+			for (var i = 0; i < selection.length; i++) {			
+				var src = selection[i].downloadUrl;	
+				window.open(src);
+				
 			}
 		},
 		

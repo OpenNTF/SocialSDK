@@ -24,6 +24,7 @@ import com.ibm.sbt.services.endpoints.ConnectionsOAuth2Endpoint;
 import com.ibm.sbt.services.endpoints.DominoBasicEndpoint;
 import com.ibm.sbt.services.endpoints.DropBoxOAuthEndpoint;
 import com.ibm.sbt.services.endpoints.SametimeBasicEndpoint;
+import com.ibm.sbt.services.endpoints.SmartCloudBasicEndpoint;
 import com.ibm.sbt.services.endpoints.SmartCloudOAuth2Endpoint;
 import com.ibm.sbt.services.endpoints.SmartCloudOAuthEndpoint;
 import com.ibm.sbt.services.endpoints.TwitterOAuthEndpoint;
@@ -60,6 +61,7 @@ public class SbtEndpoints extends Endpoints {
 				new Property("Sma_OA2_AuthorizationURL", "OAuth2 - Authorization URL", "https://apps.na.collabserv.com/manage/oauth2/authorize"),
 				new Property("Sma_OA2_AccessTokenURL", "OAuth2 - Access Token URL", "https://apps.na.collabserv.com/manage/oauth2/token"),
 		}, new Group[] {
+				new Group("Basic Authentication", new String[] {"Sma_URL"}, "# Make SmartCloud Basic the default server for Connections\nsbt.endpoint.connections=smartcloudBasic\nsbt.endpoint.smartcloud=smartcloudBasic"),
 				new Group("OAuth 1", new String[] {"Sma_URL","Sma_OA_ConsumerKey","Sma_OA_ConsumerSecret","Sma_OA_RequestTokenURL","Sma_OA_AuthorizationURL","Sma_OA_AccessTokenURL"}, "# Make SmartCloud OAuth 1 the default server for Connections\nsbt.endpoint.connections=smartcloudOA\nsbt.endpoint.smartcloud=smartcloudOA"),
 				new Group("OAuth 2", new String[] {"Sma_URL","Sma_OA2_ConsumerKey","Sma_OA2_ConsumerSecret","Sma_OA2_AuthorizationURL","Sma_OA2_AccessTokenURL"}, "# Make SmartCloud OAuth 2 the default server for Connections\nsbt.endpoint.connections=smartcloudOA2\nsbt.endpoint.smartcloud=smartcloudOA2",1),
 		}, null,
@@ -147,6 +149,16 @@ public class SbtEndpoints extends Endpoints {
 					ep.setConsumerSecret(env.getField("Con_OA2_ConsumerSecret"));
 					ep.setAuthorizationURL(env.getField("Con_OA2_AuthorizationURL"));
 					ep.setAccessTokenURL(env.getField("Con_OA2_AccessTokenURL"));
+				} else {
+					ep.setUrl(null);
+				}
+			}
+		}
+		{
+			SmartCloudBasicEndpoint ep = (SmartCloudBasicEndpoint)ManagedBeanUtil.getBean(context, "smartcloudBasic");
+			if(ep!=null) {
+				if(env.hasRuntime("smartcloud")) {
+					ep.setUrl(env.getField("Sma_URL"));
 				} else {
 					ep.setUrl(null);
 				}

@@ -46,7 +46,6 @@ public class BlogServiceGetTests extends BaseBlogServiceTest {
 				assertValid((Blog)blog);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
 			fail("Error calling blogService.getBlogs() caused by: "+e.getMessage());
 		}
 	}
@@ -61,7 +60,6 @@ public class BlogServiceGetTests extends BaseBlogServiceTest {
 				assertValid((Blog)blog);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
 			fail("Error calling blogService.getMyBlogs() caused by: "+e.getMessage());
 		}
 	}
@@ -76,7 +74,6 @@ public class BlogServiceGetTests extends BaseBlogServiceTest {
 				assertValid((Blog)blog);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
 			fail("Error calling blogService.getFeaturedBlogs() caused by: "+e.getMessage());
 		}
 	}
@@ -90,9 +87,7 @@ public class BlogServiceGetTests extends BaseBlogServiceTest {
 			for (BaseBlogEntity comment : entries) {
 				assertValid((Comment)comment);
 			}
-			
 		} catch (Exception e) {
-			e.printStackTrace();
 			fail("Error calling blogService.getAllComments() caused by: "+e.getMessage());
 		}
 	}
@@ -107,9 +102,7 @@ public class BlogServiceGetTests extends BaseBlogServiceTest {
 			for (BaseBlogEntity blogPost : entries) {
 				assertValid((BlogPost)blogPost);
 			}
-
 		} catch (Exception e) {
-			e.printStackTrace();
 			fail("Error calling blogService.getAllPosts() caused by: "+e.getMessage());
 		}
 	}
@@ -122,7 +115,6 @@ public class BlogServiceGetTests extends BaseBlogServiceTest {
 			assertNotNull(entries);
 
 		} catch (Exception e) {
-			e.printStackTrace();
 			fail("Error calling blogService.getAllTags() caused by: "+e.getMessage());
 		}
 	}
@@ -137,7 +129,6 @@ public class BlogServiceGetTests extends BaseBlogServiceTest {
 				assertValid((BlogPost)blogPost);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
 			fail("Error calling blogService.getRecommendedPosts() caused by: "+e.getMessage());
 		}
 	}
@@ -153,7 +144,6 @@ public class BlogServiceGetTests extends BaseBlogServiceTest {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
 			fail("Error calling blogService.getFeaturedPosts() caused by: "+e.getMessage());
 		}
 	}
@@ -169,9 +159,7 @@ public class BlogServiceGetTests extends BaseBlogServiceTest {
 				assertValid((BlogPost)blogPost);
 			}
 			deleteBlog(blog);
-
 		} catch (Exception e) {
-			e.printStackTrace();
 			fail("Error calling blogService.getBlogPosts() caused by: "+e.getMessage());
 		}
 	}
@@ -186,10 +174,8 @@ public class BlogServiceGetTests extends BaseBlogServiceTest {
 			for (BaseBlogEntity commment : entries) {
 				assertValid((Comment)commment);
 			}
-
 			deleteBlog(blog);
 		} catch (Exception e) {
-			e.printStackTrace();
 			fail("Error calling blogService.getBlogComments() caused by: "+e.getMessage());
 		}
 	}
@@ -204,10 +190,8 @@ public class BlogServiceGetTests extends BaseBlogServiceTest {
 			for (Tag tag : entries) {
 				assertValid((Tag)tag);
 			}
-
 			deleteBlog(blog);
 		} catch (Exception e) {
-			e.printStackTrace();
 			fail("Error calling blogService.getBlogComments() caused by: "+e.getMessage());
 		}
 	}

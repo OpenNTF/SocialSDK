@@ -39,7 +39,6 @@ public class BlogServiceGetTests extends BaseBlogServiceTest {
 	@Test
 	public void getAllBlogs() {
 		try {
-			BlogService blogService = new BlogService();
 			BlogList entries = blogService.getBlogs();
 			assertNotNull(entries);
 			for (BaseBlogEntity blog : entries) {
@@ -53,7 +52,6 @@ public class BlogServiceGetTests extends BaseBlogServiceTest {
 	@Test
 	public void getMyBlogs() {
 		try {
-			BlogService blogService = new BlogService();
 			BlogList entries = blogService.getMyBlogs();
 			assertNotNull(entries);
 			for (BaseBlogEntity blog : entries) {
@@ -67,7 +65,6 @@ public class BlogServiceGetTests extends BaseBlogServiceTest {
 	@Test
 	public void getFeaturedBlogs() {
 		try {
-			BlogService blogService = new BlogService();
 			BlogList entries = blogService.getFeaturedBlogs();
 			assertNotNull(entries);
 			for (BaseBlogEntity blog : entries) {
@@ -81,7 +78,6 @@ public class BlogServiceGetTests extends BaseBlogServiceTest {
 	@Test
 	public void getAllComments() {
 		try {
-			BlogService blogService = new BlogService();
 			CommentList entries = blogService.getAllComments();
 			assertNotNull(entries);
 			for (BaseBlogEntity comment : entries) {
@@ -96,7 +92,6 @@ public class BlogServiceGetTests extends BaseBlogServiceTest {
 	@Test
 	public void getAllPosts() {
 		try {
-			BlogService blogService = new BlogService();
 			BlogPostList entries = blogService.getAllPosts();
 			assertNotNull(entries);
 			for (BaseBlogEntity blogPost : entries) {
@@ -110,10 +105,11 @@ public class BlogServiceGetTests extends BaseBlogServiceTest {
 	@Test
 	public void getAllTags() {
 		try {
-			BlogService blogService = new BlogService();
 			TagList entries = blogService.getAllTags();
 			assertNotNull(entries);
-
+			for (Tag tag : entries) {
+				assertValid((Tag)tag);
+			}
 		} catch (Exception e) {
 			fail("Error calling blogService.getAllTags() caused by: "+e.getMessage());
 		}
@@ -122,7 +118,6 @@ public class BlogServiceGetTests extends BaseBlogServiceTest {
 	@Test
 	public void getRecommendedPosts() {
 		try {
-			BlogService blogService = new BlogService();
 			BlogPostList entries = blogService.getRecommendedPosts();
 			assertNotNull(entries);
 			for (BaseBlogEntity blogPost : entries) {
@@ -136,7 +131,6 @@ public class BlogServiceGetTests extends BaseBlogServiceTest {
 	@Test
 	public void getFeaturedPosts() {
 		try {
-			BlogService blogService = new BlogService();
 			BlogPostList entries = blogService.getFeaturedPosts();
 			assertNotNull(entries);
 			for (BaseBlogEntity blogPost : entries) {
@@ -151,7 +145,6 @@ public class BlogServiceGetTests extends BaseBlogServiceTest {
 	@Test
 	public void getBlogPosts() {
 		try {
-			BlogService blogService = new BlogService();
 			Blog blog = createBlog();
 			BlogPostList entries = blogService.getBlogPosts(blog.getHandle());
 			assertNotNull(entries);
@@ -167,7 +160,6 @@ public class BlogServiceGetTests extends BaseBlogServiceTest {
 	@Test
 	public void getBlogComments() {
 		try {
-			BlogService blogService = new BlogService();
 			Blog blog = createBlog();
 			CommentList entries = blogService.getBlogComments(blog.getHandle());
 			assertNotNull(entries);
@@ -183,7 +175,6 @@ public class BlogServiceGetTests extends BaseBlogServiceTest {
 	@Test
 	public void getBlogTags() {
 		try {
-			BlogService blogService = new BlogService();
 			Blog blog = createBlog();
 			TagList entries = blogService.getBlogTags(blog.getHandle());
 			assertNotNull(entries);

@@ -94,7 +94,7 @@ function(declare, Grid, parameter, ActivityGridRenderer, ActivityAction, consts)
                     sortParameter: "name"
                 }
             };
-            this._activeSortAnchor = this._sortInfo.name;
+            this._activeSortAnchor = this._sortInfo.modified;
             this._activeSortIsDesc = true;
 		},
 		

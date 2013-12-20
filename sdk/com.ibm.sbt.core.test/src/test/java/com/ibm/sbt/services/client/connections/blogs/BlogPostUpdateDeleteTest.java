@@ -62,7 +62,6 @@ public class BlogPostUpdateDeleteTest extends BaseBlogServiceTest {
 			assertEquals(blogPost.getContent(), blogPostReturned.getContent());
 			deleteBlogPost(blogPostReturned);
 		} catch (Exception e) {
-			e.printStackTrace();
 			fail("Error calling blogService.createBlogPost() caused by: "+e.getMessage());
 		}
 
@@ -76,7 +75,6 @@ public class BlogPostUpdateDeleteTest extends BaseBlogServiceTest {
 			assertEquals(blogPost.getTitle(), blogPostGot.getTitle());
 			assertEquals(blogPost.getContent(), blogPostGot.getContent());
 		} catch (Exception e) {
-			e.printStackTrace();
 			fail("Error calling blogService.getBlog() caused by: "+e.getMessage());
 		}
 	}
@@ -84,23 +82,17 @@ public class BlogPostUpdateDeleteTest extends BaseBlogServiceTest {
 	@Test
 	public void UpdateBlogPost() {
 
-
 		try {
-			
 			blogPost.setTitle("New title " + System.currentTimeMillis());
 			blogPost.setContent("New content " + System.currentTimeMillis());
 			blogService.updateBlogPost(blogPost, blogPost.getBlogHandle());
-
 			BlogPost postUpdated = blogService.getBlogPost(blogPost.getBlogHandle(), blogPost.getPostUuid());
-			
 			assertEquals(blogPost.getTitle(), postUpdated.getTitle());
 			assertEquals(blogPost.getContent(), postUpdated.getContent());
-
 		} catch (Exception e) {
 			fail("Error calling blogService.updateBlog() caused by: "+e.getMessage());
 		}
 	}
-
 
 	@Test
 	public void deleteBlogPost() throws Exception {
@@ -121,11 +113,7 @@ public class BlogPostUpdateDeleteTest extends BaseBlogServiceTest {
 
 			blogService.removeBlogPost(blogPost.getPostUuid(), blogPost.getBlogHandle());
 		} catch (BlogServiceException e) {
-			e.printStackTrace();
 			fail("Error calling blogService.removeBlogPost() caused by: "+e.getMessage());
 		}
-
 	}
-
-
 }

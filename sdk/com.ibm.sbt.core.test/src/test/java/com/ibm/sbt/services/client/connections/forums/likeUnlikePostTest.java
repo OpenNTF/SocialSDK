@@ -13,7 +13,7 @@ import org.junit.Test;
 public class likeUnlikePostTest extends BaseForumServiceTest {
 
 	@Before
-	public void initForum() {
+	public void initForumTopic() {
 		topic = createForumTopic();
 	}
 	
@@ -35,7 +35,7 @@ public class likeUnlikePostTest extends BaseForumServiceTest {
     }
 
     @After
-    public void deleteBlogPostTestDataOnExit() {
+    public void deleteForumTopicDataOnExit() {
             try {
 
             	forumService.removeForumTopic(topic.getTopicUuid());

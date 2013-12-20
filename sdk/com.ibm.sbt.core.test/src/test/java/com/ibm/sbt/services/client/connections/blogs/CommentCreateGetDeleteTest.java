@@ -47,7 +47,6 @@ public class CommentCreateGetDeleteTest extends BaseBlogServiceTest {
 			assertEquals(comment.getTitle(), commentReturned.getTitle());
 			deleteBlogComment(commentReturned);
 		} catch (Exception e) {
-			e.printStackTrace();
 			fail("Error calling blogService.createBlogComment() caused by: "+e.getMessage());
 		}
 	}
@@ -61,7 +60,6 @@ public class CommentCreateGetDeleteTest extends BaseBlogServiceTest {
 			assertEquals(comment.getTitle(), commentGot.getTitle());
 			assertEquals(comment.getContent(), commentGot.getContent());
 		} catch (Exception e) {
-			e.printStackTrace();
 			fail("Error calling blogService.getBlogComment() caused by: "+e.getMessage());
 		}
 	}
@@ -71,11 +69,10 @@ public class CommentCreateGetDeleteTest extends BaseBlogServiceTest {
 		try {
 			blogService.removeBlogComment(blog.getBlogUuid(), comment.getCommentUuid());
 			blogService.getBlogComment(blog.getHandle(), comment.getCommentUuid());
-		
 		}
 		catch(Exception e) {
 			assertNotNull(e.getMessage());
-			}
+		}
 	}
 	
 

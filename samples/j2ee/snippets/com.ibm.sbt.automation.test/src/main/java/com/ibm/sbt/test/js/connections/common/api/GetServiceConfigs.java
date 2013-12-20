@@ -45,7 +45,6 @@ public class GetServiceConfigs extends BaseApiTest {
         for (int i=0; i<jsonList.size(); i++) {
             JsonJavaObject json = (JsonJavaObject)jsonList.get(i);
             Assert.assertNotNull(json.getString("getTitle"));
-            Assert.assertNotNull(json.getString("getAlternateSSLUrl"));
             Assert.assertNotNull(json.getString("getUpdated"));
         }
     }

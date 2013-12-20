@@ -35,8 +35,7 @@ define(["../stringUtil", "../config"], function(stringUtil, config) {
         },
         
         sortOrder: function(param,val){
-        	var v = (val === "asc") ? "desc" : "asc";
-            return param.key + "=" + v;
+            return param.key + "=" + val;
         },
         
         oneBasedInteger: function(param, val) {

@@ -370,6 +370,15 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.BlogService
          */ 
-        AtomRecommendBlogPost : "/${blogs}/{blogHandle}/api/recommend/entries/{postUuid}"
+        AtomRecommendBlogPost : "/${blogs}/{blogHandle}/api/recommend/entries/{postUuid}",
+        
+        /**
+         * Get list of voted Ideas by user. 
+         * 
+         * @property AtomVotedIdeas
+         * @type String
+         * @for sbt.connections.IdeationBlogService
+         */ 
+        AtomVotedIdeas : "/${blogs}/{blogHomepageHandle}/feed/myvotes/atom"
     });
 });

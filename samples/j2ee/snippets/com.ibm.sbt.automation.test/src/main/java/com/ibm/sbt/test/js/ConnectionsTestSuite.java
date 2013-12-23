@@ -34,6 +34,7 @@ import com.ibm.sbt.test.js.connections.FilesTestSuite;
 import com.ibm.sbt.test.js.connections.FollowTestSuite;
 import com.ibm.sbt.test.js.connections.ForumsRestTestSuite;
 import com.ibm.sbt.test.js.connections.ForumsTestSuite;
+import com.ibm.sbt.test.js.connections.IdeationBlogTestSuite;
 import com.ibm.sbt.test.js.connections.ProfilesRestTestSuite;
 import com.ibm.sbt.test.js.connections.ProfilesTestSuite;
 import com.ibm.sbt.test.js.connections.SearchRestTestSuite;
@@ -52,6 +53,7 @@ import com.ibm.sbt.test.sample.SampleFrameworkTestSuite;
 	ActivitiesRestTestSuite.class,
 	ActivitiesStreamsTestSuite.class,
 	BlogsTestSuite.class,
+	IdeationBlogTestSuite.class,
 	BookmarksTestSuite.class,
 	BookmarksRestTestSuite.class,
 	CommunitiesRestTestSuite.class, 

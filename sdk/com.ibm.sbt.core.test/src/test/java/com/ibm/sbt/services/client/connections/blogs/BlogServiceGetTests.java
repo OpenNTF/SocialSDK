@@ -17,17 +17,9 @@
 package com.ibm.sbt.services.client.connections.blogs;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-
-import org.junit.Before;
 import org.junit.Test;
-
-import com.ibm.sbt.services.BaseUnitTest;
-import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.connections.blogs.model.BaseBlogEntity;
-import com.ibm.sbt.services.client.connections.wikis.Wiki;
-import com.ibm.sbt.services.endpoints.ConnectionsBasicEndpoint;
 
 /**
  * @author Swati Singh

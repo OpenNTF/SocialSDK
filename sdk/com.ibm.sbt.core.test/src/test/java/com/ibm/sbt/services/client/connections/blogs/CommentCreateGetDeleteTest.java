@@ -18,15 +18,9 @@ package com.ibm.sbt.services.client.connections.blogs;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
-
-import com.ibm.sbt.services.client.ClientServicesException;
 
 /**
  * @author Swati Singh

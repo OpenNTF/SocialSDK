@@ -100,7 +100,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang, conn) {
 			authorLdapid : "a:author/snx:ldapid",
 			contributorLdapid : "a:contributor/snx:ldapid",
 
-			type : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/type']/@label",
+			type : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/type']/@term",
 			priority : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/priority']/@label",
 
 			coummunityUuid : "snx:communityUuid",

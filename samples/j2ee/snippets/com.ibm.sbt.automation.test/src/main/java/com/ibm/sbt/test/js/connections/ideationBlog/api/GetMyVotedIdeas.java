@@ -40,7 +40,7 @@ public class GetMyVotedIdeas extends BaseApiTest {
     public void testGetMyVotedIdeas() {
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         List jsonList = previewPage.getJsonList();
-        Assert.assertFalse("GetAllBlogs returned no results", jsonList.isEmpty());
+        Assert.assertFalse("GetMyVotedIdeas returned no results", jsonList.isEmpty());
     }
 
 }

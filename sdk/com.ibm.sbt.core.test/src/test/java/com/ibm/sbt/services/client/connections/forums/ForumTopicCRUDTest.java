@@ -20,22 +20,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import com.ibm.sbt.services.BaseUnitTest;
-import com.ibm.sbt.services.client.ClientServicesException;
-import com.ibm.sbt.services.client.connections.blogs.model.BaseBlogEntity;
-import com.ibm.sbt.services.client.connections.wikis.Wiki;
-import com.ibm.sbt.services.client.connections.wikis.WikiService;
-import com.ibm.sbt.services.endpoints.ConnectionsBasicEndpoint;
 
 /**
  * @author Swati Singh

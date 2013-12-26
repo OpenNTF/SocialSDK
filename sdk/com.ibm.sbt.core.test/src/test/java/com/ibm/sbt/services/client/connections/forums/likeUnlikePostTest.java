@@ -19,7 +19,7 @@ public class likeUnlikePostTest extends BaseForumServiceTest {
 	
 
     @Test
-    public void likeUnlikePostTest() {
+    public void likeunlikePostTest() {
             try {
                     forumService.createRecommendation(topic.getTopicUuid());
                     ForumTopic recommendedPost = forumService.getForumTopic(topic.getTopicUuid());

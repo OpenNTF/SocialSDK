@@ -34,7 +34,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	ForumTopicCRUDTest.class,
 	ForumServiceGetTests.class,
 	likeUnlikePostTest.class,
-	SerializationTests.class
+	ForumSerializationTests.class
 })
 public class ForumServiceTestSuite {
 

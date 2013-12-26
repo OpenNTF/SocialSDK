@@ -19,18 +19,11 @@ package com.ibm.sbt.services.client.connections.forums;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
-
 import com.ibm.sbt.services.BaseUnitTest;
-import com.ibm.sbt.services.client.connections.blogs.BlogPost;
-import com.ibm.sbt.services.client.connections.blogs.model.BaseBlogEntity;
-import com.ibm.sbt.services.client.connections.bookmarks.Bookmark;
-import com.ibm.sbt.services.client.connections.forums.model.BaseForumEntity;
 
 /**
  * @author Swati Singh

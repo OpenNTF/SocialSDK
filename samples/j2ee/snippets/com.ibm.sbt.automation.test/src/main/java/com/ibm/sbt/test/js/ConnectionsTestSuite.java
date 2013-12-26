@@ -27,12 +27,14 @@ import com.ibm.sbt.test.js.connections.ActivitiesTestSuite;
 import com.ibm.sbt.test.js.connections.BlogsTestSuite;
 import com.ibm.sbt.test.js.connections.BookmarksRestTestSuite;
 import com.ibm.sbt.test.js.connections.BookmarksTestSuite;
+import com.ibm.sbt.test.js.connections.CommonServicesTestSuite;
 import com.ibm.sbt.test.js.connections.CommunitiesRestTestSuite;
 import com.ibm.sbt.test.js.connections.CommunitiesTestSuite;
 import com.ibm.sbt.test.js.connections.FilesTestSuite;
 import com.ibm.sbt.test.js.connections.FollowTestSuite;
 import com.ibm.sbt.test.js.connections.ForumsRestTestSuite;
 import com.ibm.sbt.test.js.connections.ForumsTestSuite;
+import com.ibm.sbt.test.js.connections.IdeationBlogTestSuite;
 import com.ibm.sbt.test.js.connections.ProfilesRestTestSuite;
 import com.ibm.sbt.test.js.connections.ProfilesTestSuite;
 import com.ibm.sbt.test.js.connections.SearchRestTestSuite;
@@ -51,6 +53,7 @@ import com.ibm.sbt.test.sample.SampleFrameworkTestSuite;
 	ActivitiesRestTestSuite.class,
 	ActivitiesStreamsTestSuite.class,
 	BlogsTestSuite.class,
+	IdeationBlogTestSuite.class,
 	BookmarksTestSuite.class,
 	BookmarksRestTestSuite.class,
 	CommunitiesRestTestSuite.class, 
@@ -64,7 +67,8 @@ import com.ibm.sbt.test.sample.SampleFrameworkTestSuite;
 	SearchTestSuite.class, 
 	WikisTestSuite.class,
 	FollowTestSuite.class,
-	SampleFrameworkTestSuite.class })
+	CommonServicesTestSuite.class,
+	SampleFrameworkTestSuite.class, })
 public class ConnectionsTestSuite {
 	@AfterClass
 	public static void cleanup() {

@@ -4,26 +4,18 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.util.Iterator;
-
 import org.junit.Before;
 import org.junit.Test;
-
-import com.ibm.sbt.services.BaseUnitTest;
 import com.ibm.sbt.services.client.SerializationUtil;
-import com.ibm.sbt.services.client.connections.forums.BaseForumServiceTest;
-import com.ibm.sbt.services.client.connections.profiles.Profile;
-import com.ibm.sbt.services.client.connections.profiles.ProfileList;
-import com.ibm.sbt.services.client.connections.profiles.ProfileService;
 
 /**
  * @author Swati Singh
  *
  */
-public class SerializationTests extends BaseBlogServiceTest {
+public class BlogSerializationTests extends BaseBlogServiceTest {
 	
 	
 	@Test

@@ -32,7 +32,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	BlogPostLikeUnlikeTest.class,
 	BlogPostUpdateDeleteTest.class,
 	CommentCreateGetDeleteTest.class,
-	SerializationTests.class
+	BlogSerializationTests.class
 })
 public class BlogServiceTestSuite {
 

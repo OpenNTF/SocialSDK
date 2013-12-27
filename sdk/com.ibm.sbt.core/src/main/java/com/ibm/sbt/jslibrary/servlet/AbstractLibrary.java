@@ -39,7 +39,11 @@ import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.commons.util.io.json.JsonObject;
 import com.ibm.commons.util.io.json.JsonReference;
 import com.ibm.sbt.jslibrary.SBTEnvironment.Property;
+import com.ibm.sbt.service.proxy.Proxy;
+import com.ibm.sbt.service.proxy.ProxyConfigException;
+import com.ibm.sbt.service.proxy.ProxyFactory;
 import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.services.endpoints.AbstractEndpoint;
 import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
 import com.ibm.sbt.services.endpoints.GadgetOAuthEndpoint;
@@ -119,6 +123,7 @@ abstract public class AbstractLibrary {
 	public static final String		MODULE_LANG						= "sbt/lang";
 	public static final String		MODULE_PORTLET					= "sbt/Portlet";
 	public static final String		MODULE_PROXY					= "sbt/Proxy";
+	public static final String		MODULE_WPS_PROXY				= "sbt/WPSProxy";	
 	public static final String		MODULE_XML						= "sbt/xml";
 	public static final String		MODULE_XPATH					= "sbt/xpath";
 	public static final String		MODULE_XSL						= "sbt/xsl";
@@ -633,6 +638,7 @@ abstract public class AbstractLibrary {
 					// add proxy module if not already in the list
 					if (!modules.contains(MODULE_PROXY)) {
 						modules.add(MODULE_PROXY);
+						modules.add(MODULE_WPS_PROXY);
 					}
 				}
 
@@ -919,9 +925,26 @@ abstract public class AbstractLibrary {
 	 */
 	protected JsonReference createProxyRef(LibraryRequest request, Endpoint endpoint, String logicalName)
 			throws LibraryException {
+		String proxyUrl = "";
 		// define the proxy URL
+		
+		if(endpoint.getProxyConfig()!=null){
+			Proxy proxy;
+			try {
+				proxy = ProxyFactory.getProxyConfig(endpoint.getProxyConfig());
+				proxyUrl = proxy.getProxyUrl();
+				String proxyClass = proxy.getClass().toString();
+				proxyClass = proxyClass.substring(StringUtil.lastIndexOfIgnoreCase(proxyClass, ".")+1);
+				// Assumption here is that class name of Proxy would be same on Java and JS side, for eg : WPSProxy.java and WPSProxy.js
+				return new JsonReference("new "+proxyClass+"({proxyUrl:'" + proxyUrl + "'})");
+			} catch (ProxyConfigException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
 		if (endpoint.isUseProxy()) {
-			String proxyUrl = PathUtil.concat(request.getServiceUrl(), endpoint.getProxyHandlerPath(), '/');
+			proxyUrl = PathUtil.concat(request.getServiceUrl(), endpoint.getProxyHandlerPath(), '/');
 			return new JsonReference("new Proxy({proxyUrl:'" + proxyUrl + "'})");
 		}
 		return null;

@@ -75,6 +75,10 @@ import com.ibm.commons.xml.XMLException;
 import com.ibm.commons.xml.util.XMIConverter;
 import com.ibm.sbt.plugin.SbtCoreLogger;
 import com.ibm.sbt.service.debug.ProxyDebugUtil;
+import com.ibm.sbt.service.proxy.Proxy;
+import com.ibm.sbt.service.proxy.ProxyConfigException;
+import com.ibm.sbt.service.proxy.ProxyFactory;
+import com.ibm.sbt.services.endpoints.AbstractEndpoint;
 import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
 import com.ibm.sbt.services.endpoints.SmartCloudFormEndpoint;
@@ -1143,6 +1147,7 @@ public abstract class ClientService {
 	protected String composeRequestUrl(Args args) throws ClientServicesException {
 		// Compose the URL
 		StringBuilder b = new StringBuilder(256);
+		Proxy proxy = null;
 		
 		if(!(UrlUtil.isAbsoluteUrl(args.getServiceUrl()))){ // check if url supplied is absolute
 			String url = getUrlPath(args);
@@ -1156,8 +1161,17 @@ public abstract class ClientService {
 			b.append(args.getServiceUrl()); 
 		}
 		
-		addUrlParameters(b, args);
-		return b.toString();
+		try {
+			proxy = ProxyFactory.getProxyConfig(endpoint.getProxyConfig());
+		} catch (ProxyConfigException e) {
+			if (logger.isLoggable(Level.FINE)) {
+				String msg = "Exception ocurred while fetching proxy information : composeRequestUrl";
+				logger.log(Level.FINE, msg, e);
+			}
+		}
+		StringBuilder proxyUrl = new StringBuilder(proxy.reWriteUrl(b.toString()));
+		addUrlParameters(proxyUrl, args);
+		return proxyUrl.toString();
 	}
 
 	protected String getUrlPath(Args args) {

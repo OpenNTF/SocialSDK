@@ -302,4 +302,10 @@ public class ApplicationEndpoint implements Endpoint {
     public Map<String, String> getServiceMappings() {
         return null;
     }
+
+	@Override
+	public String getProxyConfig() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

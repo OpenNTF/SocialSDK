@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -46,7 +46,7 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
         /**
          * The number of grid rows displayed per page
          */
-        pageSize: 5,
+        pageSize: 10,
         
         /**
          * Flag to hide the pager

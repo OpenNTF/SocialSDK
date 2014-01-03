@@ -32,6 +32,8 @@ public class TopicList extends BaseForumEntityList {
 		super(requestData, service);
 	}
 	
+	public TopicList(){}
+	
 	public TopicList(Response requestData, ForumsFeedHandler feedHandler) {
 		super(requestData, feedHandler);
 	}

@@ -814,8 +814,10 @@ public abstract class TestEnvironment {
                     failIfPageCrashed(getPageObject(webDriver).getWebDriver());
                     WebElement element = getPageObject(webDriver).getWebDriver().findElement(By.id(id));
                     String text = element.getText();
-                    if (text != null && text.contains(match)) {
-                        return element;
+                    if (text != null) {
+                    	if ("*".equals(match) || text.contains(match)) {
+                    		return element;
+                    	}
                     }
                     return null;
                 }

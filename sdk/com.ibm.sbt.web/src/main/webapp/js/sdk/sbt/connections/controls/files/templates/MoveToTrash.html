@@ -1,0 +1,21 @@
+<div class="lotusDialogContent _qkrDialogCompact">
+	<form class="lotusForm">
+	<table cellpadding="0" class="lotusFormTable" role="presentation">
+		<tbody>
+			<tr class="lotusFormFieldRow">
+				<td>
+					<div dojoattachpoint="messageDiv">
+						${nls.labelMoveFiles}
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="lotusFormFooter" colspan="3" dojoattachpoint="buttonsNode">
+					<button type="button" class="lotusBtn" dojoattachevent="onclick: onExecute" dojoattachpoint="executeButton">${nls.moveToTrash}</button>
+					<button type="button" class="lotusBtn" dojoattachevent="onclick: onCancel" dojoattachpoint="cancelButton">${nls.labelCancel}</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	</form>
+</div>

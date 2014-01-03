@@ -48,6 +48,8 @@ public class FacetValueList extends EntityList<FacetValue> {
 	private XmlDataHandler getMetaDataHandler(){
 		return new XmlDataHandler(getData(), ConnectionsConstants.nameSpaceCtx);
 	}
+	
+	public FacetValueList(){}
 
 	@Override
 	public int getTotalResults() {

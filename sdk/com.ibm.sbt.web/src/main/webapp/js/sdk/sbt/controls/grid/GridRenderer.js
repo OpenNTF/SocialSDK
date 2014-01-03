@@ -101,6 +101,7 @@ define([ "../../declare", "../../dom", "../../lang"],
                 el.appendChild(node);
                 
                 grid._doAttachEvents(el, data);
+                grid._doAttachPoints(el,grid);
             }
         },
         
@@ -125,6 +126,7 @@ define([ "../../declare", "../../dom", "../../lang"],
                 el.appendChild(node);
                 
                 grid._doAttachEvents(el, data);
+                grid._doAttachPoints(el,grid);
             }
         },
         
@@ -149,6 +151,7 @@ define([ "../../declare", "../../dom", "../../lang"],
                     el.appendChild(node);
                     
                     grid._doAttachEvents(el, data);
+                    grid._doAttachPoints(el,grid);
                 }
             }
         },
@@ -373,6 +376,7 @@ define([ "../../declare", "../../dom", "../../lang"],
                 el.appendChild(node);
                 
                 grid._doAttachEvents(el, item);
+                grid._doAttachPoints(el,grid);
             }
         },
 

@@ -13,40 +13,34 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-package com.ibm.sbt.test.js.connections.common.api;
-
-import java.util.List;
+package com.ibm.sbt.test.js.connections.ideationBlog.api;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.automation.core.test.BaseApiTest;
+import com.ibm.sbt.automation.core.test.BaseTest.AuthType;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 
 /**
  * @author rajmeetbal
  *  
- * @date 30 Oct 2013
+ * @date 30 Sep 2013
  */
-public class GetServiceConfigs extends BaseApiTest {
+public class UnvoteIdea extends BaseApiTest {
     
-    static final String SNIPPET_ID = "Social_Common_API_GetServiceConfigs";
+    static final String SNIPPET_ID = "Social_IdeationBlog_API_UnvoteIdea";
 
-    public GetServiceConfigs() {
+    public UnvoteIdea() {
         setAuthType(AuthType.AUTO_DETECT);
     }
-    
-    @Test
-    public void testGetServiceConfigs() {
-        JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
-        List jsonList = previewPage.getJsonList();
-        Assert.assertFalse("GetServiceConfigs returned no results", jsonList.isEmpty());
-        for (int i=0; i<jsonList.size(); i++) {
-            JsonJavaObject json = (JsonJavaObject)jsonList.get(i);
-            Assert.assertNotNull(json.getString("getTitle"));
-            Assert.assertNotNull(json.getString("getUpdated"));
-        }
-    }
 
+    @Test
+    public void testUnRecommendPost() {
+        JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
+        JsonJavaObject json = previewPage.getJson();
+        Assert.assertTrue(json.getString("status").equals("204.0"));
+    }
+    
 }

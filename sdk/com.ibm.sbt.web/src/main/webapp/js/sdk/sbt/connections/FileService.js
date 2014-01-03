@@ -21,9 +21,9 @@
  */
 
 define(
-		[ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstants", "../base/BaseService", "../base/BaseEntity", "../base/XmlDataHandler",
+		[ "../declare", "../lang", "../stringUtil", "../Promise", "./FileConstants", "./ConnectionsService", "../base/BaseEntity", "../base/XmlDataHandler",
 				"../config", "../util", "../xml" ],
-		function(declare, lang, stringUtil, Promise, consts, BaseService, BaseEntity, XmlDataHandler, config, util, xml) {
+		function(declare, lang, stringUtil, Promise, consts, ConnectionsService, BaseEntity, XmlDataHandler, config, util, xml) {
 
 			var FolderTmpl = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><entry xmlns=\"http://www.w3.org/2005/Atom\">${getCategory}${getId}${getFolderLabel}${getTitle}${getSummary}${getVisibility}${getVisibilityShare}</entry>";
 			var FolderLabelTmpl = "<label xmlns=\"urn:ibm.com/td\" makeUnique=\"true\">${label}</label>";
@@ -178,7 +178,7 @@ define(
 				 * @returns {String} file Id
 				 */
 				getFileId : function() {
-					return this.id || this._fields.id || this.getAsString("uid");
+					return this.id || this.getAsString("uid") || this._fields.id;
 				},
 				/**
 				 * Returns the label
@@ -836,11 +836,13 @@ define(
 			 * @class FileService
 			 * @namespace sbt.connections
 			 */
-			var FileService = declare(BaseService, {
+			var FileService = declare(ConnectionsService, {
 
 				contextRootMap : {
 					files : "files"
 				},
+		        
+		        serviceName : "files",
 
 				/**
 				 * Constructor for FileService
@@ -853,15 +855,6 @@ define(
 					if (!this.endpoint) {
 						this.endpoint = config.findEndpoint(endpointName);
 					}
-				},
-
-				/**
-				 * Return the default endpoint name if client did not specify one.
-				 * 
-				 * @returns {String}
-				 */
-				getDefaultEndpointName : function() {
-					return "connections";
 				},
 
 				/**

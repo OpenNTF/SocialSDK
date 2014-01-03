@@ -61,6 +61,8 @@ public class WikiPage extends WikiBaseEntity {
 		super(service, (XmlDataHandler)null);
 	}
 	
+	public WikiPage(){}
+	
 	@Override
 	public String getContent() {
 		if (fields.containsKey(AtomXPath.content.getName())){

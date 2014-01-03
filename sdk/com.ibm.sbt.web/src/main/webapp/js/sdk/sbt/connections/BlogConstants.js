@@ -61,7 +61,11 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
             categoryupdates : "a:category[@term='updates']",
             categoryfaq : "a:category[@term='faq']",
             categorywith : "a:category[@term='with']",
-            categoryshared : "a:category[@term='shared']"
+            categoryshared : "a:category[@term='shared']",
+            communityUuid : "snx:communityUuid",
+            containerUrl : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/container']/@href",
+            containerType : "snx:containertype",
+            categoryFlags : "a:link[@scheme='http://www.ibm.com/xmlns/prod/sn/flags']/@term"
         }),
         
         /**
@@ -156,7 +160,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.BlogService
          */
-        AtomBlogsAll : "/${blogs}/${blogHomepageHandle}/feed/blogs/atom",
+        AtomBlogsAll : "/${blogs}/{blogHomepageHandle}/feed/blogs/atom",
         
         /**
          * A feed of my blogs.
@@ -169,7 +173,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.BlogService
          */
-        AtomBlogsMy : "/${blogs}/${blogHomepageHandle}/api/blogs",
+        AtomBlogsMy : "/${blogs}/{blogHomepageHandle}/api/blogs",
         
         /**
          * A blog instance.
@@ -178,7 +182,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.BlogService
          */
-        AtomBlogInstance : "/${blogs}/${blogHomepageHandle}/api/blogs/{blogUuid}",
+        AtomBlogInstance : "/${blogs}/{blogHomepageHandle}/api/blogs/{blogUuid}",
         
         /**
          * A blog post entry.
@@ -187,7 +191,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.BlogService
          */
-        AtomBlogPostInstance : "/${blogs}/${blogHomepageHandle}/api/entries/{postUuid}",
+        AtomBlogPostInstance : "/${blogs}/{blogHomepageHandle}/api/entries/{postUuid}",
         
         /**
          * A feed of all blogs posts.
@@ -200,7 +204,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.BlogService
          */
-        AtomEntriesAll : "/${blogs}/${blogHomepageHandle}/feed/entries/atom",
+        AtomEntriesAll : "/${blogs}/{blogHomepageHandle}/feed/entries/atom",
         
         /**
          * A feed of a blog's posts.
@@ -239,7 +243,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.BlogService
          */
-        AtomBlogCommentsAll : "/${blogs}/${blogHomepageHandle}/feed/comments/atom",
+        AtomBlogCommentsAll : "/${blogs}/{blogHomepageHandle}/feed/comments/atom",
         
         /**
          * A feed of featured blogs.
@@ -253,7 +257,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.BlogService
          */
-        AtomBlogsFeatured : "/${blogs}/${blogHomepageHandle}/feed/featuredblogs/atom",
+        AtomBlogsFeatured : "/${blogs}/{blogHomepageHandle}/feed/featuredblogs/atom",
         	
         /**
          * A feed of featured blogs posts.
@@ -267,7 +271,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.BlogService
          */
-        AtomBlogsPostsFeatured : "/${blogs}/${blogHomepageHandle}/feed/featured/atom",
+        AtomBlogsPostsFeatured : "/${blogs}/{blogHomepageHandle}/feed/featured/atom",
         
         /**
          * A feed of featured blogs posts.
@@ -281,7 +285,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.BlogService
          */
-        AtomBlogsPostsRecommended : "/${blogs}/${blogHomepageHandle}/feed/recommended/atom",
+        AtomBlogsPostsRecommended : "/${blogs}/{blogHomepageHandle}/feed/recommended/atom",
         
         /**
          * A feed of blogs tags.
@@ -293,7 +297,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.BlogService
          */
-        AtomBlogsTags : "/${blogs}/${blogHomepageHandle}/feed/tags/atom",
+        AtomBlogsTags : "/${blogs}/{blogHomepageHandle}/feed/tags/atom",
 
         /**
          * A feed of blog tags.
@@ -314,7 +318,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.BlogService
          */
-        AtomBlogCreate : "/${blogs}/${blogHomepageHandle}/api/blogs",
+        AtomBlogCreate : "/${blogs}/{blogHomepageHandle}/api/blogs",
         
         /**
          * Edit or remove a Blog. 
@@ -323,7 +327,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.BlogService
          */
-        AtomBlogEditDelete : "/${blogs}/${blogHomepageHandle}/api/blogs/{blogUuid}",
+        AtomBlogEditDelete : "/${blogs}/{blogHomepageHandle}/api/blogs/{blogUuid}",
         /**
          * Create, Edit or remove a Blog Post. 
          * 
@@ -366,6 +370,15 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.BlogService
          */ 
-        AtomRecommendBlogPost : "/${blogs}/{blogHandle}/api/recommend/entries/{postUuid}"
+        AtomRecommendBlogPost : "/${blogs}/{blogHandle}/api/recommend/entries/{postUuid}",
+        
+        /**
+         * Get list of voted Ideas by user. 
+         * 
+         * @property AtomVotedIdeas
+         * @type String
+         * @for sbt.connections.IdeationBlogService
+         */ 
+        AtomVotedIdeas : "/${blogs}/{blogHomepageHandle}/feed/myvotes/atom"
     });
 });

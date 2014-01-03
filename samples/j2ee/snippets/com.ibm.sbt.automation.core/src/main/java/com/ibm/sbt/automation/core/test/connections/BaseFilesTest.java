@@ -15,12 +15,15 @@
  */
 package com.ibm.sbt.automation.core.test.connections;
 
+import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.After;
 import org.junit.Assert;
 
 import com.ibm.commons.util.StringUtil;
@@ -185,12 +188,15 @@ public class BaseFilesTest extends BaseApiTest {
 	}
 
 	public void createFile() {
+		String id = "File" + System.currentTimeMillis() + ".txt";
+		createFile(id);
+	}
 
+	public void createFile(String id) {
 		try {
 			setFailIfAfterDeletionFails(true);
 			fileService = getFileService();
 			String content = "Content uploaded by Create Delete File java sample";
-			String id = "File" + System.currentTimeMillis() + ".txt";
 
 			FileCreationParameters p = new FileCreationParameters();
 			p.visibility = FileCreationParameters.Visibility.PUBLIC;
@@ -314,5 +320,29 @@ public class BaseFilesTest extends BaseApiTest {
 	public String getNoErrorMsg() {
 		return noErrorMsg;
 	}
+	
+	protected java.io.File createLocalFile() {
+		String name = this.getClass().getName() + "#" + this.hashCode() + "-" + System.currentTimeMillis();
+		return createLocalFile(name, ".tmp", 1024);
+	}
+	
+	protected java.io.File createLocalFile(String name, String ext, int size) {
+		try {
+			java.io.File tempFile = java.io.File.createTempFile(name, ext);
+			
+			FileWriter fw = new FileWriter(tempFile.getAbsoluteFile());
+			BufferedWriter bw = new BufferedWriter(fw);
+			char[] chars = new char[size];
+			Arrays.fill(chars, 'X');
+			bw.write(chars);
+			bw.close();
+			
+			return tempFile;
+		} catch (IOException ioe) {
+			fail("Unable to create temporary local file: ", ioe);
+			return null;
+		}
+	}
+	
 
 }

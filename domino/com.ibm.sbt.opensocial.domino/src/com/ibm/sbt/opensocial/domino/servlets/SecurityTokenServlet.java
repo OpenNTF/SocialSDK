@@ -50,6 +50,7 @@ public class SecurityTokenServlet extends InjectedServlet {
     private static final String RESP_TTL_KEY = "ttl"; //$NON-NLS-1$
 	private static final String RESP_TOKEN_KEY = "token"; //$NON-NLS-1$
 	private static final String METHOD = "doGet"; //$NON-NLS-1$
+	private static final String ANONYMOUS = "@anonymous";
 	private static final String CLASSNAME = SecurityTokenServlet.class.getName();
 	private final Logger logger = OpenSocialPlugin.getLogger();
 	private SecurityTokenCodec codec;
@@ -86,8 +87,8 @@ public class SecurityTokenServlet extends InjectedServlet {
 				sendError(
 					req, 
 					resp, 
-					"This servlet does not allow anonymous access.",
-					HttpServletResponse.SC_UNAUTHORIZED,
+					"There was an error getting the user id.",
+					HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
 					t
 				);
 				
@@ -129,7 +130,7 @@ public class SecurityTokenServlet extends InjectedServlet {
 	
 	private String getUserId() throws Throwable {
 		if(ContextInfo.isAnonymous() || ContextInfo.getUserSession() == null) {
-			return "@anonymous";
+			return ANONYMOUS;
 		} else {
 			return getUserIdFromSession(ContextInfo.getUserSession());
 		}
@@ -180,11 +181,6 @@ public class SecurityTokenServlet extends InjectedServlet {
 		this.logger.logp(Level.WARNING, CLASSNAME, METHOD, t.getMessage(), t);
 	}
 
-	//c=default
-	//d=ibm.com
-	//i=https://the-clash.swg.usma.ibm.com/mail/rjbaxter.nsf/iNotes/Proxy/
-	//m=0
-	//u=https://the-clash.swg.usma.ibm.com/mail/rjbaxter.nsf/iNotes/Proxy/
 	private SimpleSecurityToken generateSecurityToken(HttpServletRequest req, String viewerId, String ownerId) {
 		Map<String, String> sanitizedParameters = Maps.newHashMap();
 		
@@ -203,11 +199,25 @@ public class SecurityTokenServlet extends InjectedServlet {
 		// and add it based on the user session
 		sanitizedParameters.put(Keys.VIEWER.getKey(), viewerId);
 		sanitizedParameters.put(Keys.OWNER.getKey(), ownerId);
-		return new SimpleSecurityToken(sanitizedParameters);
+		return new DominoSecurityToken(sanitizedParameters);
 	}
 
 	private void logRequestInfo(HttpServletRequest req) {
 		this.logger.finest("SecurityTokenServlet - remote address: " + req.getRemoteAddr()); //$NON-NLS-1$
 		this.logger.finest("SecurityTokenServlet - query string: " + req.getQueryString()); //$NON-NLS-1$
+	}
+	
+	private class DominoSecurityToken extends SimpleSecurityToken {
+		private boolean isAnonymous = false;
+		public DominoSecurityToken(Map<String, String> params) {
+			super(params);
+			if(ANONYMOUS.equals(params.get(Keys.VIEWER.getKey()))) {
+				isAnonymous = true;
+			}
+		}
+		@Override
+		public boolean isAnonymous() {
+			return isAnonymous;
+		}
 	}
 }

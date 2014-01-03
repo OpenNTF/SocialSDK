@@ -8,6 +8,9 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.apache.shindig.common.uri.Uri;
+import org.apache.shindig.common.uri.Uri.UriException;
+import org.apache.shindig.config.ContainerConfigException;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtension;
@@ -90,9 +93,17 @@ public class ContainerExtPointManager {
 			}
 		}
 		if(add) {
-			registerContainers(containers);
+			try {
+				registerContainers(containers);
+			} catch (ContainerConfigException e) {
+				log.logp(Level.WARNING, CLASS, method, "Error registering containers from extension point.", e);
+			}
 		} else {
-			unregisterContainers(containers);
+			try {
+				unregisterContainers(containers);
+			} catch (ContainerConfigException e) {
+				log.logp(Level.WARNING, CLASS, method, "Error un-registering containers from extension point.", e);
+			}
 		}
 	}
 	
@@ -116,10 +127,16 @@ public class ContainerExtPointManager {
 	/**
 	 * Registers containers with the OpenSocial implementation.
 	 * @param containers The container to register.
+	 * @throws ContainerConfigException Thrown if there is a container extension point that is not valid.
 	 */
-	public static void registerContainers(Collection<ContainerExtPoint> containers) {
+	public static void registerContainers(Collection<ContainerExtPoint> containers) throws ContainerConfigException {
 		for(ContainerExtPoint extPoint : containers) {
-			ContainerExtPointManager.containers.put(extPoint.getId(), extPoint);
+			try {
+				validateContainerId(extPoint.getId());
+				ContainerExtPointManager.containers.put(extPoint.getId(), extPoint);
+			} catch (ContainerExtPointException e) {
+				throw new ContainerConfigException(e);
+			}
 		}
 		synchronized(listeners) {
 			for(ContainerExtPointListener listener : listeners) {
@@ -129,12 +146,48 @@ public class ContainerExtPointManager {
 	}
 	
 	/**
+	 * Validates that the container IDs. Container IDs MUST
+	 * <ul>
+	 * 	<li>be URL encoded</li>
+	 * <li>NOT contain a colon</li>
+	 * </ul>
+	 * This is due to limitations in Shindig.  We enforce this here to make sure consumers
+	 * do not harm themselves and then be left scratching their heads when things go wrong.
+	 * Container IDs are part of the security token in Shindig and there are places in Shindig where
+	 * the assumption is made that the security token is safe to place in a URL.  So if the container ID
+	 * has a space in it for example we will get errors because Shindig does not try to URL encoded the 
+	 * security token.  Container IDs cannot container colons because Shindig uses colons as separators
+	 * for the different parts of the security token.  If a container ID contains a colon then the code
+	 * in Shindig that parses the security token will be confused by the extra colons.
+	 * @param id The container ID to validate.
+	 * @throws ContainerConfigException  Thrown when the container ID is not valid.
+	 */
+	private static void validateContainerId(String id) throws ContainerConfigException {
+		try{
+			//This is an easy way to make sure the id is URL encoded, if parse throws an error 
+			//than there is a problem.
+			Uri.parse("http://foo/" + id);
+		} catch(UriException e) {
+			throw new ContainerConfigException("Container IDs must be URL encoded. ID: " + id, e);
+		}
+		if(id.contains(":")) {
+			throw new ContainerConfigException("Container IDs cannot contain colons. ID: " + id);
+		}
+	}
+
+
+	/**
 	 * Unregisters containers with the OpenSocial implementation.
 	 * @param containers The container to unregister.
+	 * @throws ContainerConfigException Thrown if there is an error un-registering the containers.
 	 */
-	public static void unregisterContainers(Collection<ContainerExtPoint> containers) {
+	public static void unregisterContainers(Collection<ContainerExtPoint> containers) throws ContainerConfigException {
 		for(ContainerExtPoint extPoint : containers) {
-			ContainerExtPointManager.containers.remove(extPoint.getId());
+			try {
+				ContainerExtPointManager.containers.remove(extPoint.getId());
+			} catch (ContainerExtPointException e) {
+				throw new ContainerConfigException(e);
+			}
 		}
 		synchronized(listeners) {
 			for(ContainerExtPointListener listener : listeners) {

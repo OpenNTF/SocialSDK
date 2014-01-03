@@ -462,6 +462,16 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
      * @param serviceMappings the serviceMappings to set. Stored as a Map.
      * @throws Exception 
      */
+    public void setServiceMappings(String serviceMappings) {
+    	setServiceMaps(serviceMappings);
+    }
+    
+    /**
+     * @param serviceMappings the serviceMappings to set. Stored as a Map.
+     * @throws Exception 
+     * 
+     * TODO Check with Francis if this is needed
+     */
     public void setServiceMaps(String serviceMappings) {
         if(StringUtil.isEmpty(serviceMappings)){
             return;

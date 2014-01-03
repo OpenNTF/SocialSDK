@@ -1,0 +1,21 @@
+<div class="lotusSection" aria-labelledby="descText" role="region">
+	<h2>
+		<span id="descArrowOpen" dojoAttachPoint="openNode">
+			<a title="${nls.closeSection}" 
+				data-dojo-attach-event="onclick: closeContent" 
+				href="javascript:void(0);" class="lotusSprite lotusArrow lotusTwistyOpen" role="button">
+				<span class="lotusAltText" id="altDescOpen">&#9660;</span>
+			</a>
+		</span> 
+		<span style="display:none;" dojoAttachPoint="closedNode">
+			<a title="${nls.openSection}"
+				data-dojo-attach-event="onclick: openContent"
+				href="javascript:void(0);" class="lotusSprite lotusArrow lotusTwistyClosed" role="button">
+				<span class="lotusAltText" id="altDescClosed">&#9654;</span>
+			</a>
+		</span> 
+		<span onclick="toggleContent();	" class="lotusLeft" role="button" dojoAttachPoint="titleNode">${title}</span>
+	</h2>
+	<div class="lotusSectionBody" dojoAttachPoint="sectionNode">
+	</div>
+</div>

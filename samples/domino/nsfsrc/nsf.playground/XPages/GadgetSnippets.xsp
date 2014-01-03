@@ -28,6 +28,7 @@
 		<xp:this.value><![CDATA[var pageGlobal = {
 	id:				"",		// Current Snippet ID
 	unid:			"",		// Snippet UNID
+	containerId:   "#{javascript:gadgetSnippetBean.getContainerId()}",
 	
 	// Code mirror Editors
 	gadgetEditor:		null,	// Gadget XML editor ID

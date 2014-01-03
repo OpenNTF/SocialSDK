@@ -22,11 +22,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.StringReader;
+import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -73,6 +76,9 @@ import com.ibm.sbt.services.endpoints.Endpoint;
  *      #action=openDocument&res_title=Files_API_ic40a&content=pdcontent
  */
 public class FileService extends BaseService {
+	
+	static final String sourceClass = FileService.class.getName();
+	static final Logger logger = Logger.getLogger(sourceClass);
 
     /**
      * Default Constructor - 0 argument constructor Calls the Constructor of BaseService Class.
@@ -1350,6 +1356,7 @@ public class FileService extends BaseService {
             try {
                 return (File) super.getEntity(requestUri, parameters, new FileFeedHandler(this));
             } catch (Exception e) {
+            	
                throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
             }
         }
@@ -3258,6 +3265,9 @@ public class FileService extends BaseService {
      */
     public File uploadFile(java.io.InputStream stream, final String title, long length,
             Map<String, String> p) throws FileServiceException {
+    	if (logger.isLoggable(Level.FINEST)) {
+			logger.entering(sourceClass, "uploadFile", new Object[] {stream, title, length, p});
+		}
         if (stream == null) {
             throw new FileServiceException(null, Messages.Invalid_Stream);
         }
@@ -3275,9 +3285,16 @@ public class FileService extends BaseService {
         headers.put("X-Update-Nonce", getNonce()); // It is not clearly documented which Content Type requires Nonce, thus adding nonce in header for all upload requests. 
         try {
             Response data = (Response) super.createData(requestUri, p, headers, contentFile);
+            if (logger.isLoggable(Level.FINEST)) {
+    			logger.exiting(sourceClass, "uploadFile", data);
+    		}
            
             return (File)new FileFeedHandler(this).createEntity(data);
         } catch (Exception e) {
+        	if (logger.isLoggable(Level.FINE)) {
+        		String msg = MessageFormat.format("Error uploading file {0} length {1}", title, length);
+        		logger.log(Level.FINE, msg, e);
+        	}
             throw new FileServiceException(e, Messages.MessageExceptionInUpload);
         }
     }

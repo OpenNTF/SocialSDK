@@ -40,6 +40,8 @@ public class CommunityList extends EntityList<Community> {
 	//	dataHandler = new XmlDataHandler(getData(), ConnectionsConstants.nameSpaceCtx);
 	}
 	
+	public CommunityList(){}
+	
 	@Override
 	public Document getData(){
 		return (Document)super.getData();

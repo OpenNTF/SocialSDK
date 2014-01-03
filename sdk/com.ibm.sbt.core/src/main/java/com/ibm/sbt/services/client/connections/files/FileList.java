@@ -38,6 +38,8 @@ public class FileList extends EntityList<File> {
 		return (File)super.getEntity(data);
 	}
 	
+	public FileList(){}
+	
 	@Override
 	protected ArrayList<File> createEntities() {
 		XmlDataHandler dataHandler = new XmlDataHandler(getData(), ConnectionsConstants.nameSpaceCtx);

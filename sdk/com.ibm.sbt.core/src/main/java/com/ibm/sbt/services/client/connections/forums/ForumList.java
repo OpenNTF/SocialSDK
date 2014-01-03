@@ -34,5 +34,7 @@ public class ForumList extends BaseForumEntityList  {
 	public ForumList(Response requestData, ForumsFeedHandler feedHandler) {
 		super(requestData, feedHandler);
 	}
+	
+	public ForumList(){}
 
 }

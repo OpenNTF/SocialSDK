@@ -33,8 +33,8 @@
  * @module sbt.connections.SearchService
  */
 define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", "../json", "./SearchConstants", 
-         "../base/BaseService", "../base/BaseEntity", "../base/AtomEntity", "../base/XmlDataHandler" ], 
-    function(declare,config,lang,stringUtil,Promise,json,consts,BaseService,BaseEntity,AtomEntity,XmlDataHandler) {
+         "./ConnectionsService", "../base/BaseEntity", "../base/AtomEntity", "../base/XmlDataHandler" ], 
+    function(declare,config,lang,stringUtil,Promise,json,consts,ConnectionsService,BaseEntity,AtomEntity,XmlDataHandler) {
 
     /**
      * Scope class represents an entry for a scopes feed returned by the
@@ -232,11 +232,13 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
      * @class SearchService
      * @namespace sbt.connections
      */
-    var SearchService = declare(BaseService, {
+    var SearchService = declare(ConnectionsService, {
         
         contextRootMap: {
             search: "search"
         },
+        
+        serviceName : "search",
 
         /**
          * Constructor for SearchService
@@ -248,16 +250,6 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             if (!this.endpoint) {
                 this.endpoint = config.findEndpoint(this.getDefaultEndpointName());
             }
-        },
-
-        /**
-         * Return the default endpoint name if client did not specify one.
-         * 
-         * @method getDefaultEndpointName
-         * @returns {String}
-         */
-        getDefaultEndpointName: function() {
-            return "connections";
         },
         
         /**

@@ -12,15 +12,14 @@ import javax.faces.context.FacesContext;
 import nsf.playground.beans.DataAccessBean;
 import nsf.playground.extension.Endpoints;
 
-import org.apache.shindig.gadgets.oauth.OAuthStore;
-import org.apache.shindig.gadgets.oauth2.OAuth2Store;
-
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.jslibrary.SBTEnvironment;
 import com.ibm.sbt.opensocial.domino.config.DefaultContainerConfig;
 import com.ibm.sbt.opensocial.domino.config.OpenSocialContainerConfig;
 import com.ibm.sbt.opensocial.domino.container.ContainerExtPoint;
 import com.ibm.sbt.opensocial.domino.container.ContainerExtPointException;
+import com.ibm.sbt.opensocial.domino.oauth.DominoOAuth2Store;
+import com.ibm.sbt.opensocial.domino.oauth.DominoOAuthStore;
 import com.ibm.sbt.playground.extension.PlaygroundExtensionFactory;
 
 /**
@@ -67,6 +66,8 @@ public class PlaygroundEnvironment extends SBTEnvironment implements ContainerEx
 	
 	
 	private FieldMap fields = new FieldMap();
+	private DominoOAuth2Store oauth2Store;
+	private DominoOAuthStore oauthStore;
 		
 	public PlaygroundEnvironment() {
 		this(null,null);
@@ -186,14 +187,18 @@ public class PlaygroundEnvironment extends SBTEnvironment implements ContainerEx
 	}
 	
 	@Override
-	public OAuthStore getContainerOAuthStore() {
-		// TODO Return something once we have an implementation
-		return null;
+	public DominoOAuthStore getContainerOAuthStore() {
+		if(oauthStore == null) {
+			oauthStore = new PlaygroundOAuthStore(this);
+		}
+		return oauthStore;
 	}
 	@Override
-	public OAuth2Store getContainerOAuth2Store() {
-		// TODO Return something once we have an implementation
-		return null;
+	public DominoOAuth2Store getContainerOAuth2Store() {
+		if(oauth2Store == null) {
+			oauth2Store = new PlaygroundOAuth2Store(this);
+		}
+		return oauth2Store;
 	}
 
 }

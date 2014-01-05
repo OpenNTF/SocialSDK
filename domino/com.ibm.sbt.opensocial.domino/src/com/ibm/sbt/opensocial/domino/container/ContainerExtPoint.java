@@ -1,9 +1,8 @@
 package com.ibm.sbt.opensocial.domino.container;
 
-import org.apache.shindig.gadgets.oauth.OAuthStore;
-import org.apache.shindig.gadgets.oauth2.OAuth2Store;
-
 import com.ibm.sbt.opensocial.domino.config.OpenSocialContainerConfig;
+import com.ibm.sbt.opensocial.domino.oauth.DominoOAuth2Store;
+import com.ibm.sbt.opensocial.domino.oauth.DominoOAuthStore;
 
 /**
  * Applications wishing to register their container should implement this class and use the ContainerExtPointManager to 
@@ -35,12 +34,12 @@ public interface ContainerExtPoint {
 	 * @return The OAuth 1.0a store for the container.
 	 * @throws ContainerExtPointException Thrown when there is an error getting an OAuth store.
 	 */
-	public OAuthStore getContainerOAuthStore() throws ContainerExtPointException;
+	public DominoOAuthStore getContainerOAuthStore() throws ContainerExtPointException;
 	
 	/**
 	 * Gets the OAuth 2.0 store for the container.
 	 * @return The OAuth 2.0 store for the container.
 	 * @throws ContainerExtPointException Thrown when there is an error getting an OAuth 2 store.
 	 */
-	public OAuth2Store getContainerOAuth2Store() throws ContainerExtPointException;
+	public DominoOAuth2Store getContainerOAuth2Store() throws ContainerExtPointException;
 }

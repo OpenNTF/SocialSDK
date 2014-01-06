@@ -19,7 +19,12 @@ package com.ibm.sbt.services.client.connections.files;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,6 +35,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import com.ibm.sbt.services.BaseUnitTest;
+import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.connections.communities.Community;
 import com.ibm.sbt.services.client.connections.communities.CommunityList;
 import com.ibm.sbt.services.client.connections.communities.CommunityService;
@@ -41,7 +47,7 @@ public class FileServiceTest extends BaseUnitTest {
 	public final static String	TEST_CONTENT			= "This is a sample Content in the Test File. "
 																+ "Used mainly for Testing the Upload functionality of the FileService Connections API."
 																+ "Test Input : ddsfafw4t547�%*�^U�^JUL&><\03242";
-	public final static String	TEST_NAME				= "FS_TestUpload.txt";
+	public final static String	TEST_NAME				= "FS_TestUploadTest.txt";
 
 
 	@Test
@@ -54,22 +60,16 @@ public class FileServiceTest extends BaseUnitTest {
 		assertEquals(entry.getFileId(), testFileId);
 	}
 
-//	@Test
-//	public void testReadFileWithLoadFalse() throws Exception {
-//		FileService fileService = new FileService();
-//
-//		FileEntryList listOfFiles = fileService.getMyFiles();
-//		String testFileId = listOfFiles.get(0).getFileId();
-//		FileEntry entry = fileService.getFile(testFileId, false);
-//		Assert.assertNull(entry.getCategory());
-//	}
+	@Test
+	public void testReadFileWithLoadFalse() throws Exception {
+		FileService fileService = new FileService();
 
-//	@Test
-//	public void testReadFileWithNullFileId() throws IOException, Exception {
-//		FileService fileService = new FileService();
-//		FileEntry entry = fileService.getFile(null, true);
-//		Assert.assertNull(entry);
-//	}
+		FileList listOfFiles = fileService.getMyFiles();
+		String testFileId = listOfFiles.get(0).getFileId();
+		File entry = fileService.getFile(testFileId, false);
+		assertNull(entry.getCategory());
+	}
+
 
 	@Test
 	public void testGetMyFiles() throws Exception {
@@ -90,8 +90,7 @@ public class FileServiceTest extends BaseUnitTest {
 
 		List<File> fileEntries = fileService.getFilesSharedWithMe();
 		if (fileEntries != null && !fileEntries.isEmpty()) {
-			for (File fEntry : fileEntries) {
-				// assertEquals(fEntry.getFieldUsingXPath("/feed/title"), "Files Shared With You");
+			for (File fEntry : fileEntries) {				
 				assertNotNull(fEntry.getVisibility());
 			}
 		}
@@ -272,7 +271,8 @@ public class FileServiceTest extends BaseUnitTest {
 		}
 	}
 
-	@Test @Ignore
+	@Test 
+	@Ignore
 	public void testUpdateFileMetadata() throws Exception {
 		FileService fileService = new FileService();
 
@@ -376,20 +376,21 @@ public class FileServiceTest extends BaseUnitTest {
 				"Junit Comment - Added from FileServiceTest, testAddCommentToMyFile");
 	}
 
-//	@Ignore
-//	@Test
-//	public void testFileUpload() throws IOException, ClientServicesException, Exception {
-//		File t = new File(TEST_NAME);
-//		FileOutputStream s = new FileOutputStream(t);
-//		s.write(TEST_CONTENT.getBytes());
-//		s.flush();
-//		s.close();
-//		String fileName = t.getPath();
-//		FileService service = new FileService();
-//		authenticateEndpoint(service.getEndpoint(), USERNAME, PASSWORD);
-//		File entry = service.upload(fileName);
-//		assertNotNull(entry.getCategory());
-//	}
+	
+	@Test
+	public void testFileUpload() throws IOException, ClientServicesException, Exception {		
+		java.io.File t = new java.io.File(TEST_NAME);
+		FileOutputStream s = new FileOutputStream(t);
+		s.write(TEST_CONTENT.getBytes());
+		s.flush();
+		s.close();
+		String fileName = t.getPath();
+		FileService service = new FileService();
+		FileInputStream inputStream = new FileInputStream(t);
+		File entry = service.uploadFile(inputStream, TEST_NAME, TEST_CONTENT.length());
+		assertNotNull(entry.getCategory());
+		service.deleteFile(entry.getFileId());
+	}
 
 	@Test
 	public void testGetNonce() {
@@ -404,7 +405,7 @@ public class FileServiceTest extends BaseUnitTest {
 		assertNotNull(nonce);
 	}
 	
-	@Ignore
+	
 	@Test
 	public void testAddRemoveFileToFolders() throws Exception {
 		//TODO: fix for connections and smartcloud

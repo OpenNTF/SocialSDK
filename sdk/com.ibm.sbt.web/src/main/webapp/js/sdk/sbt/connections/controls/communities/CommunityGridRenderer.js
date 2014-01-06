@@ -128,7 +128,7 @@ define(["../../../declare", "../../../stringUtil", "../../../i18n", "../../../la
           * @returns {String}
           */
          displayTags: function(grid, item, i, items) {
-                 var tags = item.getValue("tags");
+             var tags = item.getValue("tags");
              if (tags.length == 0) {
                  return "display: none";
              } else {

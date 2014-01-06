@@ -85,7 +85,7 @@ define(["../../../declare", "../../../i18n",
                   * @returns {String}
                   */
                  displayTags: function(grid, item, i, items) {
-                         var tags = item.getValue("tags");
+                     var tags = item.getValue("tags");
                      if (tags.length == 0) {
                          return "display: none";
                      } else {

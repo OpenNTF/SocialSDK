@@ -1,0 +1,2 @@
+connections/activity-streams/post/spec.json
+smartcloud/oauth10a/spec.json

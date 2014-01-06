@@ -63,6 +63,52 @@ define(["../../../declare", "../../../i18n",
                         return grid.bookmarkAction.getTooltip(item);
 
                  },
+                 
+                 /**
+                  * Gets the last updated date in human readable format. 
+                  * @param grid The Grid Element
+                  * @param item An Object containing all of the data for the current row
+                  * @param i the number of the current grid row
+                  * @param items an object array containing the data for all of the grid rows
+                  * @returns The date when the community was last updates
+                  */
+                 updatedDate: function(grid, item, i, items) {
+                         return i18n.getSearchUpdatedLabel((item.getValue("updated")));
+                 },
+                 
+                 /**
+                  * Returns a CSS style based on if a community has tags. 
+                  * @param grid The Grid Element
+                  * @param item An Object containing all of the data for the current row
+                  * @param i The number of the current row
+                  * @param items  an object array containing the data for all of the grid rows
+                  * @returns {String}
+                  */
+                 displayTags: function(grid, item, i, items) {
+                         var tags = item.getValue("tags");
+                     if (tags.length == 0) {
+                         return "display: none";
+                     } else {
+                         return "";
+                     }
+                 },
+                 
+                 /**
+                  * Get the tag label, if a community has no tags and empty string is returned
+                  * @param grid The Grid Element
+                  * @param item An Object containing all of the data for the current row
+                  * @param i The number of the current row
+                  * @param items  an object array containing the data for all of the grid rows
+                  * @returns an array of strings, that are tags for a community
+                  */
+                 tagsLabel: function(grid, item, i, items) {
+                         var tags = item.getValue("tags");
+                     if (tags.length == 0) {
+                         return "";
+                     } else {
+                         return this.nls.tags;
+                     }
+                 },
                         /**
                   * Substitutes tag labels(Strings) from the nls file into the tag
                   * Anchor template which creates a tag links, and displays these tags on the page 
@@ -77,7 +123,7 @@ define(["../../../declare", "../../../i18n",
                      if (tags == undefined) {
                          return "";
                      } else {
-                         var tagsStr = nls.noTags;
+                         var tagsStr="";
                          if (lang.isArray(tags)) {
                              for (var i=0; i<tags.length; i++) {
                                  tagsStr += grid._substitute(this.tagAnchorTemplate, { tagName : tags[i] });

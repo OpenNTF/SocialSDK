@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+  <ModulePrefs title="Connections Actvity Stream Post">
+    <OAuth2>
+      <Service name="connections" scope="Connections">
+      </Service>
+    </OAuth2>
+    <Require feature="oauthpopup" />
+  </ModulePrefs>
+  <Content type="html" href="as-post.html"></Content>
+</Module>

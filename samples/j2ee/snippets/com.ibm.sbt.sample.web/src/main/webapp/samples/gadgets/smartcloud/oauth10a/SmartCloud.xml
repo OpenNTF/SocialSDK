@@ -1,0 +1,14 @@
+<Module>
+  <ModulePrefs title="Sample SmartCloud Gadget">
+    <OAuth>
+      <Service name="SmartCloud">
+        <Request url="https://apps.lotuslive.com/manage/oauth/getRequestToken" />
+        <Authorization url="https://apps.lotuslive.com/manage/oauth/authorizeToken" />
+        <Access url="https://apps.lotuslive.com/manage/oauth/getAccessToken" />
+      </Service>
+    </OAuth>
+    <Require feature="oauthpopup" />
+    <Require feature="dynamic-height" />
+  </ModulePrefs>
+  <Content type="html" href="SmartCloud.html" />
+</Module>

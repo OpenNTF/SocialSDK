@@ -16,7 +16,7 @@
       org.apache.shindig.social.sample.SampleModule:
       com.ibm.sbt.opensocial.domino.modules.DominoOAuthModule:
       org.apache.shindig.gadgets.oauth2.OAuth2MessageModule:
-      org.apache.shindig.gadgets.oauth2.handler.OAuth2HandlerModule: 
+      com.ibm.sbt.opensocial.domino.modules.DominoOAuth2HandlerModule: 
       org.apache.shindig.common.cache.ehcache.EhCacheModule:
       org.apache.shindig.sample.shiro.ShiroGuiceModule:
       org.apache.shindig.sample.container.SampleContainerGuiceModule:
@@ -189,7 +189,7 @@
   <servlet>
     <servlet-name>oauth2callback</servlet-name>
     <servlet-class>
-      org.apache.shindig.gadgets.servlet.OAuth2CallbackServlet
+      com.ibm.sbt.opensocial.domino.servlets.DominoOAuth2CallbackServlet
     </servlet-class>
   </servlet>
   

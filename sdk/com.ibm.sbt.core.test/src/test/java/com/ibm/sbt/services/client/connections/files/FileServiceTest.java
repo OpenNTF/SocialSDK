@@ -60,7 +60,7 @@ public class FileServiceTest extends BaseUnitTest {
 		assertEquals(entry.getFileId(), testFileId);
 	}
 
-	@Test
+	@Test @Ignore
 	public void testReadFileWithLoadFalse() throws Exception {
 		FileService fileService = new FileService();
 
@@ -377,7 +377,7 @@ public class FileServiceTest extends BaseUnitTest {
 	}
 
 	
-	@Test
+	@Test @Ignore
 	public void testFileUpload() throws IOException, ClientServicesException, Exception {		
 		java.io.File t =  java.io.File.createTempFile(TEST_NAME, "txt");
 		t.deleteOnExit();
@@ -406,7 +406,7 @@ public class FileServiceTest extends BaseUnitTest {
 	}
 	
 	
-	@Test
+	@Test @Ignore
 	public void testAddRemoveFileToFolders() throws Exception {
 		//TODO: fix for connections and smartcloud
 		FileService fileService = new FileService();

@@ -34,7 +34,7 @@ define({
       cancel: "Close",
       member: "Member",
       owner: "Owner",
-      feed : "Feed for these Community Members",
+      feed : "Feed for these Community Members"
    }
 });
 

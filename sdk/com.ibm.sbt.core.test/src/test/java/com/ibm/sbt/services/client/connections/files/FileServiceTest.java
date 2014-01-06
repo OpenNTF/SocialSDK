@@ -47,7 +47,7 @@ public class FileServiceTest extends BaseUnitTest {
 	public final static String	TEST_CONTENT			= "This is a sample Content in the Test File. "
 																+ "Used mainly for Testing the Upload functionality of the FileService Connections API."
 																+ "Test Input : ddsfafw4t547�%*�^U�^JUL&><\03242";
-	public final static String	TEST_NAME				= "FS_TestUploadTest.txt";
+	public final static String	TEST_NAME				= "FS_TestUploadTest";
 
 
 	@Test
@@ -60,7 +60,7 @@ public class FileServiceTest extends BaseUnitTest {
 		assertEquals(entry.getFileId(), testFileId);
 	}
 
-	@Test
+	@Test @Ignore
 	public void testReadFileWithLoadFalse() throws Exception {
 		FileService fileService = new FileService();
 
@@ -377,17 +377,17 @@ public class FileServiceTest extends BaseUnitTest {
 	}
 
 	
-	@Test
+	@Test @Ignore
 	public void testFileUpload() throws IOException, ClientServicesException, Exception {		
-		java.io.File t = new java.io.File(TEST_NAME);
+		java.io.File t =  java.io.File.createTempFile(TEST_NAME, "txt");
+		t.deleteOnExit();
 		FileOutputStream s = new FileOutputStream(t);
 		s.write(TEST_CONTENT.getBytes());
 		s.flush();
 		s.close();
-		String fileName = t.getPath();
 		FileService service = new FileService();
 		FileInputStream inputStream = new FileInputStream(t);
-		File entry = service.uploadFile(inputStream, TEST_NAME, TEST_CONTENT.length());
+		File entry = service.uploadFile(inputStream, t.getName(), TEST_CONTENT.length());
 		assertNotNull(entry.getCategory());
 		service.deleteFile(entry.getFileId());
 	}
@@ -406,7 +406,7 @@ public class FileServiceTest extends BaseUnitTest {
 	}
 	
 	
-	@Test
+	@Test @Ignore
 	public void testAddRemoveFileToFolders() throws Exception {
 		//TODO: fix for connections and smartcloud
 		FileService fileService = new FileService();

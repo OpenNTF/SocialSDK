@@ -37,22 +37,42 @@ import com.ibm.xsp.util.ManagedBeanUtil;
  * Endpoints used by the SBT.
  */
 public class SbtEndpoints extends Endpoints {
+	
+	public static final String CON_URL = "Con_URL";
+	public static final String CON_OA2_CONSUMERKEY = "Con_OA2_ConsumerKey";
+	public static final String CON_OA2_CONSUMERSECRET = "Con_OA2_ConsumerSecret";
+	public static final String CON_GADGET_OA2_SERVICE_NAME = "Con_Gadget_OA2_Service_Name";
+	public static final String CON_GADGET_OA2_CONSUMERKEY = "Con_Gadget_OA2_ConsumerKey";
+	public static final String CON_GADGET_OA2_CONSUMERSECRET = "Con_Gadget_OA2_ConsumerSecret";
+	public static final String CON_OA2_AUTHORIZATIONURL = "Con_OA2_AuthorizationURL";
+	public static final String CON_OA2_ACCESSTOKENURL = "Con_OA2_AccessTokenURL";
+	public static final String GOOGLE_GADGET_OA_SERVICE_NAME = "Google_Gadget_OA_Service_Name";
+	public static final String GOOGLE_GADGET_OA_CONSUMERKEY = "Google_Gadget_OA_ConsumerKey";
+	public static final String GOOGLE_GADGET_OA_CONSUMERSECRET = "Google_Gadget_OA_ConsumerSecret";
+	public static final String SMA_URL = "Sma_URL";
+	public static final String SMA_OA_GADGET_SERVICE = "Sma_OA_Gadget_Service";
+	public static final String SMA_OA_COUNSUMERKEY = "Sma_OA_ConsumerKey";
+	public static final String SMA_OA_CONSUMERSECRET = "Sma_OA_ConsumerSecret";
 
 	private Category[] PROPERTIES = new Category[] {
 		new Category("connections","IBM Connections on Premises","IBM Connections", new Property[] {
-				new Property("Con_URL", "URL", "https://[myconnections-server]"),
-				new Property("Con_OA2_ConsumerKey", "OAuth2 - Consumer Key"),
-				new Property("Con_OA2_ConsumerSecret", "OAuth2 - Consumer Secret"),
-				new Property("Con_OA2_AuthorizationURL", "OAuth2 - Authorization URL", "https://[myconnections-server]/oauth2/endpoint/connectionsProvider/authorize"),
-				new Property("Con_OA2_AccessTokenURL", "OAuth2 - Access Token URL", "https://[myconnections-server]/oauth2/endpoint/connectionsProvider/token"),
+				new Property(CON_URL, "URL", "https://[myconnections-server]"),
+				new Property(CON_OA2_CONSUMERKEY, "OAuth2 - Consumer Key"),
+				new Property(CON_OA2_CONSUMERSECRET, "OAuth2 - Consumer Secret"),
+				new Property(CON_GADGET_OA2_SERVICE_NAME, "OpenSocial Gadget OAuth2 Service Name"),
+				new Property(CON_GADGET_OA2_CONSUMERKEY, "OpenSocial Gadget OAuth2 - Consumer Key"),
+				new Property(CON_GADGET_OA2_CONSUMERSECRET, "OpenSocial Gadget OAuth2 - Consumer Secret"),
+				new Property(CON_OA2_AUTHORIZATIONURL, "OAuth2 - Authorization URL", "https://[myconnections-server]/oauth2/endpoint/connectionsProvider/authorize"),
+				new Property(CON_OA2_ACCESSTOKENURL, "OAuth2 - Access Token URL", "https://[myconnections-server]/oauth2/endpoint/connectionsProvider/token"),
 		}, new Group[] {
 				new Group("Basic Authentication", new String[] {"Con_URL"}, "# Connections default is Basic Auth\n\nsbt.endpoint.connections=connectionsBasic\n"),
-				new Group("OAuth 2", new String[] {"Con_URL","Con_OA2_ConsumerKey","Con_OA2_ConsumerSecret","Con_OA2_AuthorizationURL","Con_OA2_AccessTokenURL"}, "# Connections default is OAuth 2\nsbt.endpoint.connections=connectionsOA2\n", 1),
+				new Group("OAuth 2", new String[] {CON_URL,CON_OA2_CONSUMERKEY,CON_OA2_CONSUMERSECRET,CON_GADGET_OA2_SERVICE_NAME,CON_GADGET_OA2_CONSUMERKEY,CON_GADGET_OA2_CONSUMERSECRET,CON_OA2_AUTHORIZATIONURL,CON_OA2_ACCESSTOKENURL}, "# Connections default is OAuth 2\nsbt.endpoint.connections=connectionsOA2\n", 1),
 		}, null),
 		new Category("smartcloud","IBM SmartCloud for Social Business", "IBM SmartCloud", new Property[] {
-				new Property("Sma_URL", "URL", "https://apps.na.collabserv.com"),
-				new Property("Sma_OA_ConsumerKey", "OAuth1 - Consumer Key"),
-				new Property("Sma_OA_ConsumerSecret", "OAuth1 - Consumer Secret"),
+				new Property(SMA_URL, "URL", "https://apps.na.collabserv.com"),
+				new Property(SMA_OA_GADGET_SERVICE, "OAuth Service Name For OpenSocial Gadgets"),
+				new Property(SMA_OA_COUNSUMERKEY, "OAuth1 - Consumer Key"),
+				new Property(SMA_OA_CONSUMERSECRET, "OAuth1 - Consumer Secret"),
 				new Property("Sma_OA_RequestTokenURL", "OAuth1 - Request Token URL", "https://apps.na.collabserv.com/manage/oauth/getRequestToken"),
 				new Property("Sma_OA_AuthorizationURL", "OAuth1 - Authorization URL", "https://apps.na.collabserv.com/manage/oauth/authorizeToken"),
 				new Property("Sma_OA_AccessTokenURL", "OAuth1 - AccessToken URL", "https://apps.na.collabserv.com/manage/oauth/getAccessToken"),
@@ -62,8 +82,8 @@ public class SbtEndpoints extends Endpoints {
 				new Property("Sma_OA2_AccessTokenURL", "OAuth2 - Access Token URL", "https://apps.na.collabserv.com/manage/oauth2/token"),
 		}, new Group[] {
 				new Group("Basic Authentication", new String[] {"Sma_URL"}, "# Make SmartCloud Basic the default server for Connections\nsbt.endpoint.connections=smartcloudBasic\nsbt.endpoint.smartcloud=smartcloudBasic"),
-				new Group("OAuth 1", new String[] {"Sma_URL","Sma_OA_ConsumerKey","Sma_OA_ConsumerSecret","Sma_OA_RequestTokenURL","Sma_OA_AuthorizationURL","Sma_OA_AccessTokenURL"}, "# Make SmartCloud OAuth 1 the default server for Connections\nsbt.endpoint.connections=smartcloudOA\nsbt.endpoint.smartcloud=smartcloudOA"),
-				new Group("OAuth 2", new String[] {"Sma_URL","Sma_OA2_ConsumerKey","Sma_OA2_ConsumerSecret","Sma_OA2_AuthorizationURL","Sma_OA2_AccessTokenURL"}, "# Make SmartCloud OAuth 2 the default server for Connections\nsbt.endpoint.connections=smartcloudOA2\nsbt.endpoint.smartcloud=smartcloudOA2",1),
+				new Group("OAuth 1", new String[] {SMA_URL,SMA_OA_GADGET_SERVICE,SMA_OA_COUNSUMERKEY,SMA_OA_CONSUMERSECRET,"Sma_OA_RequestTokenURL","Sma_OA_AuthorizationURL","Sma_OA_AccessTokenURL"}, "# Make SmartCloud OAuth 1 the default server for Connections\nsbt.endpoint.connections=smartcloudOA\nsbt.endpoint.smartcloud=smartcloudOA"),
+				new Group("OAuth 2", new String[] {SMA_URL,"Sma_OA2_ConsumerKey","Sma_OA2_ConsumerSecret","Sma_OA2_AuthorizationURL","Sma_OA2_AccessTokenURL"}, "# Make SmartCloud OAuth 2 the default server for Connections\nsbt.endpoint.connections=smartcloudOA2\nsbt.endpoint.smartcloud=smartcloudOA2",1),
 		}, null,
 		new PropertyValues[] {
 			   new PropertyValues("Test - C1", new String[] {
@@ -102,6 +122,13 @@ public class SbtEndpoints extends Endpoints {
 				new Property("Dropbox_OA_ConsumerSecret", "Dropbox Consumer Secret"),
 		}, new Group[] {
 				new Group("OAuth", new String[] {"Dropbox_OA_ConsumerKey","Dropbox_OA_ConsumerSecret"}, null),
+		}, null),
+		new Category("google","Google","Google", new Property[] {
+				new Property(GOOGLE_GADGET_OA_SERVICE_NAME, "OpenSocial Gadgets OAuth2 Service Name"),
+				new Property(GOOGLE_GADGET_OA_CONSUMERKEY, "Consumer Key For OpenSocial Gadgets"),
+				new Property(GOOGLE_GADGET_OA_CONSUMERSECRET, "Consumer Secret For OpenSocial Gadgets"),
+		}, new Group[] {
+				new Group("OAuth", new String[] {GOOGLE_GADGET_OA_SERVICE_NAME, GOOGLE_GADGET_OA_CONSUMERKEY, GOOGLE_GADGET_OA_CONSUMERSECRET}, null),
 		}, null),
 	};
 

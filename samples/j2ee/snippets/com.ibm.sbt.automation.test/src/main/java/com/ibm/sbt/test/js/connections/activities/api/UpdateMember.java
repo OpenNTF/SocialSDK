@@ -14,9 +14,9 @@ import com.ibm.sbt.services.client.connections.activity.Activity;
 import com.ibm.sbt.services.client.connections.activity.Member;
 
 public class UpdateMember extends BaseActivitiesTest {
-	
+
 	static final String SNIPPET_ID = "Social_Activities_API_UpdateMember";
-	
+
 	Activity activity;
 	String id;
 	Member member;
@@ -24,27 +24,25 @@ public class UpdateMember extends BaseActivitiesTest {
 	@Before
 	public void init() {
 		activity = createActivity();
-		addSnippetParam("sample.activityId", activity.getActivityId());
-		
 		id = getProperty("sample.id2");
-    	if (environment.isSmartCloud()) {
-    		id = getProperty("smartcloud.id2");
-    	}
-    	member = addMember(activity.getActivityId(), id);  
-    	addSnippetParam("sample.memberId", member.getMemberId());
-    	addSnippetParam("sample.userId2", member.getUserid());
-    	
+		if (environment.isSmartCloud()) {
+			id = getProperty("smartcloud.id2");
+		}
+		member = addMember(activity.getActivityId(), id);
 	}
-	
+
 	@After
 	public void destroy() {
 		deleteActivity(activity.getActivityId());
 	}
-	
-	@Test
+
+	@Ignore
 	public void testUpdateActivityMember() {
+		addSnippetParam("sample.activityId", activity.getActivityId());
+		addSnippetParam("sample.memberId", member.getMemberId());
+		addSnippetParam("sample.userId2", member.getUserid());
 		JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
 		JsonJavaObject json = previewPage.getJson();
-		Assert.assertEquals(json.getAsInt("status"), 200); // OK		
+		Assert.assertEquals(200, json.getAsInt("status")); // OK
 	}
 }

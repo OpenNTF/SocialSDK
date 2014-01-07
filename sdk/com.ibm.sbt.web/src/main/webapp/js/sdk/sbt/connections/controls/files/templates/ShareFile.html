@@ -105,6 +105,19 @@
 						src="https://qs.renovations.com:444/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20120919.054848"><span
 						aria-label="Help" class="lotusAltText">?</span></a></td>
 			</tr>
+			<tr dojoAttachPoint="makePublicWarning" style="display:none">
+				<td></td>
+				<td><div role="alert" style=""
+						id="lconn_share_widget_MessageContainer_3"
+						widgetid="lconn_share_widget_MessageContainer_3">
+						<div class="lotusMessage lotusWarning">
+							<img title="Warning" alt="Warning"
+								class="lconnSprite lconnSprite-iconWarning16"
+								src="https://qs.renovations.com:444/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20120919.054848"><span
+								class="lotusAltText">${nls.warning}</span><span>${nls.shareWarning}</span>
+						</div>
+					</div></td>
+			</tr>
 			<tr dojoAttachPoint="messageRow" class="lotusFormFieldRow">
 				<td class="lotusFormLabel lotusNowrap"><label>${nls.labelMessage}</label></td>
 				<td><a dojoAttachEvent="click: setMessage"
@@ -113,7 +126,7 @@
 			<tr dojoAttachPoint="messageTextArea" style="display: none;" class="lotusFormFieldRow">
 				<td class="lotusFormLabel lotusNowrap"><label
 					for="">${nls.labelMessage}</label></td>
-				<td><textarea 
+				<td><textarea dojoAttachPoint="textArea" 
 						class="lotusText" name="_shareFileMessage"></textarea></td>
 			</tr>
 		</tbody>

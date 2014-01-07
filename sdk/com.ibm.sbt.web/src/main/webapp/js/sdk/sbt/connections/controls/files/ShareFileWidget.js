@@ -16,14 +16,15 @@
 /**
  * UploadFileWidget
  */
-define([ "sbt/declare", "sbt/lang", "sbt/dom", 
-         "sbt/i18n!./nls/files", 
-         "sbt/controls/view/BaseDialogContent", "sbt/connections/FileService", 
-		 "sbt/text!./templates/ShareFile.html",
-		 "sbt/controls/TypeAhead",
-		 "sbt/stringUtil",
-		 "sbt/connections/FileService"],
-		function(declare, lang, dom, nls, BaseDialogContent, FileService, ShareFile,TypeAhead,stringUtil,FileService) {
+define([ "../../../declare", "../../../lang", "../../../dom", 
+         "../../../i18n!./nls/files", 
+         "../../../controls/view/BaseDialogContent", "../../../connections/FileService", 
+		 "../../../text!./templates/ShareFile.html",
+		 "../../../controls/TypeAhead",
+		 "../../../stringUtil",
+		 "../../../connections/FileService",
+		 "../../../connections/CommunityService"],
+		function(declare, lang, dom, nls, BaseDialogContent, FileService, ShareFile,TypeAhead,stringUtil,FileService,CommunityService) {
 
 	/**
 	 * Widget which can be used to upload a file.
@@ -54,6 +55,7 @@ define([ "sbt/declare", "sbt/lang", "sbt/dom",
 		 */
 		sharePermission: "View",
 		
+		
 		/*
 		 *The type ahead text field used to select a person or community 
 		 */
@@ -64,6 +66,14 @@ define([ "sbt/declare", "sbt/lang", "sbt/dom",
 		 *between public and private views.
 		 */
 		_displayMessageTextArea: false,
+		
+		/*
+		 * If sharing with person is selected use updateFile() from the FileService API
+		 * if share with community is selected use shareFileWithCommunity()
+		 * This variable is used to keep track of the user's selection
+		 */
+		_shareWithCommunityOrPerson: "person",
+		
 		
 		/**
 		 * Constructor method for the UploadFileWidget.
@@ -110,6 +120,13 @@ define([ "sbt/declare", "sbt/lang", "sbt/dom",
 			return this.fileService;
 		},
 		
+		getCommunityService: function(){
+			if (!this.communityService) {
+				var args = this.endpoint ? { endpoint : this.endpoint } : {};
+				this.communityService = new CommunityService(args);
+			}
+			return this.communityService;
+		},
 		/**
 		 * Post create function is called after section has been created.
 		 * The input for searching for users or coomunities is created
@@ -119,16 +136,32 @@ define([ "sbt/declare", "sbt/lang", "sbt/dom",
 		postCreate : function() {
 			this.inherited(arguments);
 			try {
+				var self = this;
 			    this._typeAhead = new TypeAhead({
 			    	placeholder: nls.labelPersonName,
 			    	className: "lotusText",
+			    	searchAttr: "name",
+			    	queryExpr: "${0}*",
 			        storeArgs : {
 			        	url: "/profiles/atom/search.do",
 			            attributes : {
-			    			"entry" : "/a:entry",
+			    			"entry" : "a:entry",
 			    			"name" :"a:title",			
-			    			"id" :"snx:communityUuid"
+			    			"id" :"a:contributor/snx:userid"
 			    		}
+			        },
+			        onChange: function(){
+			        	if(self._shareWithCommunityOrPerson === "community"){
+			        		if(this.item.visibility === "public"){
+			        			self._checkIfFileIsPrivate();
+			        		}
+			        	}
+			        	
+			        },
+			        onKeyDown:function(event){
+			        	if(event.key === "Enter"){
+			        		event.preventDefault();
+			        	}
 			        }
 			    });       
 			    this.searchTypeAhead.appendChild(this._typeAhead.domNode);
@@ -138,6 +171,7 @@ define([ "sbt/declare", "sbt/lang", "sbt/dom",
 			}
 			
 		},
+
 		
 		radioButtonSelected: function(event){
 			var radioButton = event.target;
@@ -159,11 +193,31 @@ define([ "sbt/declare", "sbt/lang", "sbt/dom",
 		
 		handleShareWithSelection: function(event){
 			if(event.target.textContent === nls.labelAPerson){
+				var attributes = {
+		    			"entry" : "a:entry",
+		    			"name" :"a:title",			
+		    			"id" :"snx:userid"
+		    		};
+				this._typeAhead.searchAttr = "name";
+				this._typeAhead.queryExpr = "${0}*";
+				this._typeAhead.store.setAttributes(attributes);
 				this._typeAhead.store.setUrl("/profiles/atom/search.do");
 				this._typeAhead.domNode.placeholder = nls.labelPersonName;
+				this._shareWithCommunityOrPerson = "person";
 			}else if (event.target.textContent === nls.labelACommunity){
-				this._typeAhead.store.setUrl("/communities/service/atom/communities/all");
+				var attributes = {
+	    			"entry" : "a:entry",
+	    			"name" :"a:title",			
+	    			"id" :"snx:communityUuid",
+	    			"visibility":"snx:communityType",
+	    			"search":"a:title"
+	    		};
+				this._typeAhead.searchAttr = "search";
+				this._typeAhead.queryExpr = "${0}*";
+				this._typeAhead.store.setAttributes(attributes);
+				this._typeAhead.store.setUrl("/communities/service/atom/communities/my");
 				this._typeAhead.domNode.placeholder = nls.labelCommunityName;
+				this._shareWithCommunityOrPerson = "community";
 			}
 		},
 		
@@ -191,35 +245,164 @@ define([ "sbt/declare", "sbt/lang", "sbt/dom",
 		 * 
 		 * @method onExecute
 		 */
-		onExecute : function() {
-			
-			//TODO add check for selected files
-			//if files > 0 
-			this._shareFiles();
-			//else keep share files button disabled 
+		onExecute : function(event) {
+			this._shareFiles(this.files);
 		},
-
-		_shareFiles: function(){
-			 
-			this.fileService = this.getFileService();
-			
+		
+		
+		_getUrlParams: function(){
 			var params = {};
-			
 			if(this.visibility){
 				params.visibility = this.visibility;
 			}
-			if (this._typeAhead.domNode.value.trim() != "") {
-				params.shareWith = this._typeAhead.domNode.value;
+			if (this._typeAhead.item) {
+				params.shareWith = this._typeAhead.item.id;
 			}
-			if(this.messageTextArea.value.trim() != ""){
-				params.summary = this.messageTextArea.value;
+			if(this.textArea.value.trim() != ""){
+				params.summary = this.textArea.value;
 			}
 			if(this.sharePermission){
 				params.sharePermission = this.sharePermission;
 			}
 			
-			//TODO get selectedFiles
-			//fileservice.updateFile()
+			return params;
+		},
+
+		_shareFiles: function(files){ 
+			this.fileService = this.getFileService();
+			var params = this._getUrlParams();
+			var itemId = params.shareWith;
+			var sharedFiles = [];
+			var self = this;
+			var errorCount = 0;
+			
+			for(var i=0;i<files.length;i++){
+				files[i] = this.fileService.newFile(files[i]);
+				if(this._shareWithCommunityOrPerson === "person"){
+					this.fileService.updateFile(files[i].getFileId(),params).then(
+							function(file) {
+								sharedFiles.push(file);
+								self._handleRequestComplete(sharedFiles, errorCount, files);
+							},
+							function(error) {
+								errorCount++;
+								self._handleRequestComplete(sharedFiles, errorCount, files);
+							}
+					);	
+				}else if(this._shareWithCommunityOrPerson === "community"){
+					this._shareFileWithCommunity(files[i], itemId,this._typeAhead.item.visibility);				
+				}
+				
+			}
+			
+		},
+		
+		_shareFileWithCommunity: function(file,communityId,communityType){
+			var communityIds = [];
+			communityIds.push(communityId);
+			var sharedFiles = [];
+			var self = this;
+			var errorCount = 0;
+			this.fileService = this.getFileService();
+			
+			var fileType = file.getVisibility();
+			if(fileType === "private" || fileType==="shared" && communityType === "public"){
+				var param = {
+					visibility: "public"
+				};
+				this.fileService.updateFile(file.getFileId(),param).then(
+						function(){
+							return self.fileService.shareFileWithCommunities(file.getFileId(),communityIds);
+						}
+						
+				).then(
+						function(success){
+							sharedFiles.push(file);
+							self._handleRequestComplete(sharedFiles, errorCount, self.files);
+						},
+						function(error){
+							errorCount++;
+							self._handleRequestComplete(sharedFiles, errorCount, self.files);
+						}
+				);
+			}else{
+				this.fileService.shareFileWithCommunities(file.getFileId(),communityIds).then(
+						function(file){
+							sharedFiles.push(file);
+							self._handleRequestComplete(sharedFiles, errorCount, self.files);
+						},function(error){
+							errorCount++;
+							self._handleRequestComplete(sharedFiles, errorCount, self.files);
+						}
+				);
+			}
+			
+		},
+		
+		_checkIfFileIsPrivate: function(){
+			if(this._shareWithCommunityOrPerson==="community"){
+        		for(var i=0;i<this.files.length;i++){
+        			this.fileService = this.getFileService();
+        			this.files[i] = this.fileService.newFile(this.files[i]);
+        			if(this.files[i].getVisibility() === "private" || this.files[i].getVisibility() === "shared"){
+        				this._displayShareWarning(true);
+        			}
+        		}
+        	}
+		},
+		
+		/*
+		 * Called after a request has completed to check are we done yet
+		 */
+		_handleRequestComplete : function(sharedFiles, errorCount, files) {
+			if (sharedFiles.length + errorCount == files.length) {
+				this.setExecuteEnabled(true);
+				if (sharedFiles.length > 0) {
+					this._setSuccessMessage(files, sharedFiles);
+					this.onSuccess();
+				} else {
+					this._setErrorMessage(files);
+					this.onError();
+				}
+			}else {
+				this.setExecuteEnabled(true);
+				this._setErrorMessage(files);
+				this.onError();
+			}
+		},
+		
+		/*
+		 * Set the successMessage for the specified operation
+		 */
+		_setSuccessMessage : function(files) {
+			if (files.length == 1) {
+				this.successTemplate = stringUtil.replace(nls.shareSuccess, {fileName : files[0]._fields.title});
+			} else {	
+				this.successTemplate = stringUtil.replace(nls.shareSuccessMulti, {count : files.length});
+			}
+		},
+		
+		/*
+		 * Set the errorMessage for the specified  operation
+		 */
+		_setErrorMessage : function(files) {
+			if(files.length == 1){
+				this.errorTemplate = stringUtil.replace(nls.shareError, {fileName : files[0]._fields.title});
+			}else{
+				this.errorTemplate = stringUtil.replace(nls.shareErrorMulti, {count : files.length});
+			}
+		},
+		
+		/*
+		 * displays a warning if the user is about to share a private file
+		 * with a public community that the file must be made public
+		 */
+		_displayShareWarning: function(showWarning){
+			if(showWarning){
+				this.makePublicWarning.setAttribute("style","");
+			}else if(!showWarning){
+				this.makePublicWarning.setAttribute("style","display:none");
+			}
 		},
 		
 		/*

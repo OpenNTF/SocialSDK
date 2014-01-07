@@ -6,6 +6,10 @@
 			src="#{javascript:gadgetSnippetBean.getContainerUrl()}"
 			clientSide="true">
 		</xp:script>
+		<xp:script
+			src="#{javascript:@AbsoluteUrl(@FullUrl(apiBean.getToolkitUrl()))}"
+			clientSide="true">
+		</xp:script>
 		<xp:script src="/commonSnippets.js" clientSide="true"></xp:script>
 		<xp:script src="/gadgetSnippets.js" clientSide="true"></xp:script>
 		<xp:dojoModulePath prefix="explorer"

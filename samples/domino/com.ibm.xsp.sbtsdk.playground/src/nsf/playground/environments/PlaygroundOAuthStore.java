@@ -6,8 +6,9 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 
 import com.ibm.sbt.opensocial.domino.oauth.DominoOAuthClient;
-import com.ibm.sbt.opensocial.domino.oauth.DominoOAuthClient.KeyType;
 import com.ibm.sbt.opensocial.domino.oauth.DominoOAuthStore;
+import com.ibm.sbt.opensocial.domino.oauth.clients.DropBoxOAuthClient;
+import com.ibm.sbt.opensocial.domino.oauth.clients.SmartCloudOAuthClient;
 import com.ibm.xsp.sbtsdk.playground.sbt.extension.SbtEndpoints;
 
 /**
@@ -33,23 +34,15 @@ public class PlaygroundOAuthStore implements DominoOAuthStore {
 				createDropBoxClient(fieldMap));
 	}
 
-	private DominoOAuthClient createDropBoxClient(
-			Map<String, String> fieldMap) {
-		DominoOAuthClient client = new DominoOAuthClient();
-		client.setConsumerKey(StringUtils.trim(fieldMap.get(SbtEndpoints.DROPBOX_OA_CONSUMERKEY)));
-		client.setConsumerSecret(StringUtils.trim(fieldMap.get(SbtEndpoints.DROPBOX_OA_CONSUMERSECRET)));
-		client.setKeyType(KeyType.HMAC_SYMMETRIC);
-		client.setForceCallbackOverHttps(false);
+	private DominoOAuthClient createDropBoxClient(Map<String, String> fieldMap) {
+		DominoOAuthClient client = new DropBoxOAuthClient(StringUtils.trim(fieldMap.get(SbtEndpoints.DROPBOX_OA_CONSUMERKEY)),
+				StringUtils.trim(fieldMap.get(SbtEndpoints.DROPBOX_OA_CONSUMERSECRET)));
 		return client;
 	}
 	
-	private DominoOAuthClient createSmartCloudClient(
-			Map<String, String> fieldMap) {
-		DominoOAuthClient client = new DominoOAuthClient();
-		client.setConsumerKey(StringUtils.trim(fieldMap.get(SbtEndpoints.SMA_OA_COUNSUMERKEY)));
-		client.setConsumerSecret(StringUtils.trim(fieldMap.get(SbtEndpoints.SMA_OA_CONSUMERSECRET)));
-		client.setKeyType(KeyType.PLAINTEXT);
-		client.setForceCallbackOverHttps(true);
+	private DominoOAuthClient createSmartCloudClient(Map<String, String> fieldMap) {
+		DominoOAuthClient client = new SmartCloudOAuthClient(StringUtils.trim(fieldMap.get(SbtEndpoints.SMA_OA_COUNSUMERKEY)),
+				StringUtils.trim(fieldMap.get(SbtEndpoints.SMA_OA_CONSUMERSECRET)));
 		return client;
 	}
 

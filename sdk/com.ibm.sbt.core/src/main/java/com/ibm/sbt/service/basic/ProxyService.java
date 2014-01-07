@@ -29,6 +29,9 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -84,7 +87,8 @@ public class ProxyService {
 	private static boolean TRACE = false;
 
 	private static final ProfilerType profilerRequest           = new ProfilerType("Proxy request, "); //$NON-NLS-1$
-
+	
+	
 	/**
 	 * The wrapper for cookie domain and path.  These are stored in the cookie value
 	 * when the cookie is passed to the browser.  So that the proxy domain and path
@@ -110,18 +114,23 @@ public class ProxyService {
 		//BasicHttpParams params = new BasicHttpParams();
 		//params.setRedirecting(params, false);
 		//DefaultHttpClient httpClient = new DefaultHttpClient(params);
+		Object timedObject = ProxyProfiler.getTimedObject();
 		DefaultHttpClient httpClient = new DefaultHttpClient();
+		ProxyProfiler.profileTimedRequest(timedObject, "httpclient creation");
 		return httpClient;
+		
 	}
 
 	//
 	// Security options - defensive mode by default
 	//
 	protected void checkRequestAllowed(HttpServletRequest request) throws ServletException {
+		Object timedObject = ProxyProfiler.getTimedObject();
 		String method = request.getMethod();
 		if(!isMethodAllowed(method)) {
 			throw new ServletException(StringUtil.format("Invalid request method {0}",method));
 		}
+		ProxyProfiler.profileTimedRequest(timedObject, "checkRequestAllowed");
 	}
 
 	protected boolean isMethodAllowed(String method) throws ServletException {
@@ -154,6 +163,7 @@ public class ProxyService {
 	}
 
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Object timedObject = ProxyProfiler.getTimedObject();
 		if (Profiler.isEnabled()) {
 			StringBuffer b = request.getRequestURL();
 			String url = b.toString();
@@ -168,6 +178,7 @@ public class ProxyService {
 		else {
 			serviceProxy(request, response);
 		}
+		ProxyProfiler.profileTimedRequest(timedObject, "service request");
 	}
 	protected void serviceProxy(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		this.debugHook = (DebugProxyHook)DebugServiceHookFactory.get().get(Type.PROXY,request,response);
@@ -246,31 +257,39 @@ public class ProxyService {
 	}
 
 	protected HttpRequestBase createMethod(String smethod, URI uri,HttpServletRequest request) throws ServletException {
+		Object timedObject = ProxyProfiler.getTimedObject();
 		if(getDebugHook()!=null) {
 			getDebugHook().getDumpRequest().setMethod(smethod);
 			getDebugHook().getDumpRequest().setUrl(uri.toString());
 		}
 		if (smethod.equalsIgnoreCase("get")) {
 			HttpGet method = new HttpGet(uri);
+			ProxyProfiler.profileTimedRequest(timedObject, "create HttpGet");
 			return method;
 		} else if (smethod.equalsIgnoreCase("put")) {
 			HttpPut method = new HttpPut(uri);
 			method = (HttpPut) prepareMethodWithUpdatedContent(method, request);
+			ProxyProfiler.profileTimedRequest(timedObject, "create HttpPut");
 			return method;
 		} else if (smethod.equalsIgnoreCase("post")) {
 			HttpPost method = new HttpPost(uri);
 			method = (HttpPost) prepareMethodWithUpdatedContent(method, request);
+			ProxyProfiler.profileTimedRequest(timedObject, "create HttpPost");
 			return method;
 		} else if (smethod.equalsIgnoreCase("delete")) {
 			HttpDelete method = new HttpDelete(uri);
+			ProxyProfiler.profileTimedRequest(timedObject, "create HttpDelete");
 			return method;
 		} else if (smethod.equalsIgnoreCase("head")) {
 			HttpHead method = new HttpHead(uri);
+			ProxyProfiler.profileTimedRequest(timedObject, "create HttpHead");
 			return method;
 		} else if (smethod.equalsIgnoreCase("options")) {
 			HttpOptions method = new HttpOptions(uri);
+			ProxyProfiler.profileTimedRequest(timedObject, "create HttpOptions");
 			return method;
 		} else {
+			ProxyProfiler.profileTimedRequest(timedObject, "failed creating method");
 			throw new ServletException("Illegal method, should be GET, PUT, POST, DELETE or HEAD");
 		}
 	}
@@ -282,6 +301,7 @@ public class ProxyService {
 	}
 
 	protected boolean prepareForwardingCookies(HttpRequestBase method, HttpServletRequest request, DefaultHttpClient httpClient) throws ServletException {
+		Object timedObject = ProxyProfiler.getTimedObject();
 		Cookie[] cookies = request.getCookies();
 		BasicCookieStore cs = new BasicCookieStore();
 		httpClient.setCookieStore(cs);
@@ -336,12 +356,13 @@ public class ProxyService {
 				}
 			}
 		}
-
+		ProxyProfiler.profileTimedRequest(timedObject, "perpareForwardingCookie");
 		return true;
 	}
 
 	@SuppressWarnings("unchecked")
 	protected boolean prepareForwardingHeaders(HttpRequestBase method, HttpServletRequest request) throws ServletException {
+		Object timedObject = ProxyProfiler.getTimedObject();
 		// Forward any headers that should be forwarded. Except cookies.
 		StringBuffer xForwardedForHeader = new StringBuffer();
 		for (Enumeration<String> e = request.getHeaderNames(); e.hasMoreElements();) {
@@ -371,6 +392,7 @@ public class ProxyService {
 				getDebugHook().getDumpRequest().addHeader("X-Forwarded-For", xForward);
 			}
 		}
+		ProxyProfiler.profileTimedRequest(timedObject, "prepareForwardingHeaders");
 		return true;
 	}
 
@@ -399,7 +421,9 @@ public class ProxyService {
 
 	public HttpResponse executeMethod(HttpClient client, HttpRequestBase method) throws ServletException {
 		try {
+			Object timedObject = ProxyProfiler.getTimedObject();
 			HttpResponse response = client.execute(method);
+			ProxyProfiler.profileTimedRequest(timedObject, "remote call");
 			return response;
 		} catch(IOException ex) {
 			throw new ServletException(ex);
@@ -407,6 +431,7 @@ public class ProxyService {
 	}
 
 	public void prepareResponse(HttpRequestBase method, HttpServletRequest request, HttpServletResponse response, HttpResponse clientResponse, boolean isCopy) throws ServletException {
+		Object timedObject = ProxyProfiler.getTimedObject();
 		try {
 			int statusCode = clientResponse.getStatusLine().getStatusCode();
 			if(statusCode == 401 || statusCode == 403){
@@ -569,6 +594,7 @@ public class ProxyService {
 		} catch(IOException ex) {
 			throw new ServletException(ex);
 		}
+		ProxyProfiler.profileTimedRequest(timedObject, "prepareResponse");
 	}
 
 	protected void writeErrorResponse(String errorMessage, String[] parameters, String[] values, HttpServletResponse response, HttpServletRequest request) throws ServletException {
@@ -623,12 +649,14 @@ public class ProxyService {
 
 	protected URI getRequestURI(HttpServletRequest request) throws ServletException {
 		try {
+			Object timedObject = ProxyProfiler.getTimedObject();
 			String orgUrl = getRequestURIPath(request);
 			String queryargs = getRequestURLQueryString(request);
 			if(StringUtil.isNotEmpty(queryargs)) {
 				orgUrl += '?' + queryargs;
 			}
 			URI url = new URI(orgUrl);
+			ProxyProfiler.profileTimedRequest(timedObject, "get request uri");
 			return url;
 		} catch (URISyntaxException ex) {
 			throw new ServletException(ex);

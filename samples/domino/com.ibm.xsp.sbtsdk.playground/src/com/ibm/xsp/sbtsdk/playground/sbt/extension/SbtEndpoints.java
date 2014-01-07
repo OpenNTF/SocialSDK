@@ -41,25 +41,32 @@ public class SbtEndpoints extends Endpoints {
 	public static final String CON_URL = "Con_URL";
 	public static final String CON_OA2_CONSUMERKEY = "Con_OA2_ConsumerKey";
 	public static final String CON_OA2_CONSUMERSECRET = "Con_OA2_ConsumerSecret";
+	public static final String DEFAULT_CONNECTIONS_SERVICE_NAME = "connections";
 	public static final String CON_GADGET_OA2_SERVICE_NAME = "Con_Gadget_OA2_Service_Name";
 	public static final String CON_GADGET_OA2_CONSUMERKEY = "Con_Gadget_OA2_ConsumerKey";
 	public static final String CON_GADGET_OA2_CONSUMERSECRET = "Con_Gadget_OA2_ConsumerSecret";
 	public static final String CON_OA2_AUTHORIZATIONURL = "Con_OA2_AuthorizationURL";
 	public static final String CON_OA2_ACCESSTOKENURL = "Con_OA2_AccessTokenURL";
+	public static final String DEFAULT_GOOGLE_SERVICE_NAME = "googleAPI";
 	public static final String GOOGLE_GADGET_OA_SERVICE_NAME = "Google_Gadget_OA_Service_Name";
 	public static final String GOOGLE_GADGET_OA_CONSUMERKEY = "Google_Gadget_OA_ConsumerKey";
 	public static final String GOOGLE_GADGET_OA_CONSUMERSECRET = "Google_Gadget_OA_ConsumerSecret";
 	public static final String SMA_URL = "Sma_URL";
+	public static final String DEFAULT_SC_SERVICE_NAME = "smartcloud";
 	public static final String SMA_OA_GADGET_SERVICE = "Sma_OA_Gadget_Service";
 	public static final String SMA_OA_COUNSUMERKEY = "Sma_OA_ConsumerKey";
 	public static final String SMA_OA_CONSUMERSECRET = "Sma_OA_ConsumerSecret";
+	public static final String DROPBOX_GADGET_OA_SERVICE_NAME = "DropBox_Gadget_OA_Service_Name";
+	public static final String DROPBOX_OA_CONSUMERKEY = "Dropbox_OA_ConsumerKey";
+	public static final String DROPBOX_OA_CONSUMERSECRET = "Dropbox_OA_ConsumerSecret";
+	public static final String DEFAULT_DROPBOX_SERVICE_NAME = "DropBox";
 
 	private Category[] PROPERTIES = new Category[] {
 		new Category("connections","IBM Connections on Premises","IBM Connections", new Property[] {
 				new Property(CON_URL, "URL", "https://[myconnections-server]"),
 				new Property(CON_OA2_CONSUMERKEY, "OAuth2 - Consumer Key"),
 				new Property(CON_OA2_CONSUMERSECRET, "OAuth2 - Consumer Secret"),
-				new Property(CON_GADGET_OA2_SERVICE_NAME, "OpenSocial Gadget OAuth2 Service Name"),
+				new Property(CON_GADGET_OA2_SERVICE_NAME, "OpenSocial Gadget OAuth2 Service Name", DEFAULT_CONNECTIONS_SERVICE_NAME),
 				new Property(CON_GADGET_OA2_CONSUMERKEY, "OpenSocial Gadget OAuth2 - Consumer Key"),
 				new Property(CON_GADGET_OA2_CONSUMERSECRET, "OpenSocial Gadget OAuth2 - Consumer Secret"),
 				new Property(CON_OA2_AUTHORIZATIONURL, "OAuth2 - Authorization URL", "https://[myconnections-server]/oauth2/endpoint/connectionsProvider/authorize"),
@@ -70,7 +77,7 @@ public class SbtEndpoints extends Endpoints {
 		}, null),
 		new Category("smartcloud","IBM SmartCloud for Social Business", "IBM SmartCloud", new Property[] {
 				new Property(SMA_URL, "URL", "https://apps.na.collabserv.com"),
-				new Property(SMA_OA_GADGET_SERVICE, "OAuth Service Name For OpenSocial Gadgets"),
+				new Property(SMA_OA_GADGET_SERVICE, "OAuth Service Name For OpenSocial Gadgets", DEFAULT_SC_SERVICE_NAME),
 				new Property(SMA_OA_COUNSUMERKEY, "OAuth1 - Consumer Key"),
 				new Property(SMA_OA_CONSUMERSECRET, "OAuth1 - Consumer Secret"),
 				new Property("Sma_OA_RequestTokenURL", "OAuth1 - Request Token URL", "https://apps.na.collabserv.com/manage/oauth/getRequestToken"),
@@ -118,13 +125,15 @@ public class SbtEndpoints extends Endpoints {
 				new Group("OAuth", new String[] {"Twitter_OA_AppplicationAccessToken","Twitter_OA_ConsumerKey","Twitter_OA_ConsumerSecret"}, null, 1),
 		}, null),
 		new Category("dropbox","Dropbox","Dropbox", new Property[] {
-				new Property("Dropbox_OA_ConsumerKey", "Dropbox Consumer Key"),
-				new Property("Dropbox_OA_ConsumerSecret", "Dropbox Consumer Secret"),
+				new Property(DROPBOX_GADGET_OA_SERVICE_NAME, "OpenSocial Gadgets OAuth 1.0a Service Name",
+						DEFAULT_DROPBOX_SERVICE_NAME),
+				new Property(DROPBOX_OA_CONSUMERKEY, "Dropbox Consumer Key"),
+				new Property(DROPBOX_OA_CONSUMERSECRET, "Dropbox Consumer Secret"),
 		}, new Group[] {
-				new Group("OAuth", new String[] {"Dropbox_OA_ConsumerKey","Dropbox_OA_ConsumerSecret"}, null),
+				new Group("OAuth", new String[] {DROPBOX_GADGET_OA_SERVICE_NAME, DROPBOX_OA_CONSUMERKEY, DROPBOX_OA_CONSUMERSECRET}, null),
 		}, null),
 		new Category("google","Google","Google", new Property[] {
-				new Property(GOOGLE_GADGET_OA_SERVICE_NAME, "OpenSocial Gadgets OAuth2 Service Name"),
+				new Property(GOOGLE_GADGET_OA_SERVICE_NAME, "OpenSocial Gadgets OAuth2 Service Name", DEFAULT_GOOGLE_SERVICE_NAME),
 				new Property(GOOGLE_GADGET_OA_CONSUMERKEY, "Consumer Key For OpenSocial Gadgets"),
 				new Property(GOOGLE_GADGET_OA_CONSUMERSECRET, "Consumer Secret For OpenSocial Gadgets"),
 		}, new Group[] {

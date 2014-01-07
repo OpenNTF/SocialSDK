@@ -15,7 +15,6 @@ import com.ibm.xsp.sbtsdk.playground.sbt.extension.SbtEndpoints;
  *
  */
 public class PlaygroundOAuthStore implements DominoOAuthStore {
-	private static final String DEFAULT_SC_SERVICE_NAME = "smartcloud";
 	private Map<String, DominoOAuthClient> clients;
 	
 	/**
@@ -28,11 +27,22 @@ public class PlaygroundOAuthStore implements DominoOAuthStore {
 	}
 
 	private void populateOAuthClients(Map<String, String> fieldMap) {
-		clients.put(StringUtils.defaultString(StringUtils.trim(fieldMap.get(SbtEndpoints.SMA_OA_GADGET_SERVICE)), DEFAULT_SC_SERVICE_NAME), 
+		clients.put(StringUtils.defaultIfBlank(fieldMap.get(SbtEndpoints.SMA_OA_GADGET_SERVICE), SbtEndpoints.DEFAULT_SC_SERVICE_NAME), 
 				createSmartCloudClient(fieldMap));
-		
+		clients.put(StringUtils.defaultIfBlank(fieldMap.get(SbtEndpoints.DROPBOX_GADGET_OA_SERVICE_NAME), SbtEndpoints.DEFAULT_DROPBOX_SERVICE_NAME), 
+				createDropBoxClient(fieldMap));
 	}
 
+	private DominoOAuthClient createDropBoxClient(
+			Map<String, String> fieldMap) {
+		DominoOAuthClient client = new DominoOAuthClient();
+		client.setConsumerKey(StringUtils.trim(fieldMap.get(SbtEndpoints.DROPBOX_OA_CONSUMERKEY)));
+		client.setConsumerSecret(StringUtils.trim(fieldMap.get(SbtEndpoints.DROPBOX_OA_CONSUMERSECRET)));
+		client.setKeyType(KeyType.HMAC_SYMMETRIC);
+		client.setForceCallbackOverHttps(false);
+		return client;
+	}
+	
 	private DominoOAuthClient createSmartCloudClient(
 			Map<String, String> fieldMap) {
 		DominoOAuthClient client = new DominoOAuthClient();

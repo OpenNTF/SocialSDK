@@ -16,9 +16,6 @@ import com.ibm.xsp.sbtsdk.playground.sbt.extension.SbtEndpoints;
  *
  */
 public class PlaygroundOAuth2Store implements DominoOAuth2Store {
-		
-	private static final String DEFAULT_CONNECTIONS_SERVICE_NAME = "connections";
-	private static final String DEFAULT_GOOGLE_SERVICE_NAME = "google";
 	private Map<String, DominoOAuth2Client> clients;
 	
 	/**
@@ -38,10 +35,10 @@ public class PlaygroundOAuth2Store implements DominoOAuth2Store {
 	
 	
 	private void populateClients(Map<String, String> fieldMap) {
-		String connectionsServiceName = StringUtils.defaultString(StringUtils.trim(fieldMap.get(SbtEndpoints.CON_GADGET_OA2_SERVICE_NAME)), 
-				DEFAULT_CONNECTIONS_SERVICE_NAME);
-		String googleServiceName = StringUtils.defaultString(StringUtils.trim(fieldMap.get(SbtEndpoints.GOOGLE_GADGET_OA_SERVICE_NAME)), 
-				DEFAULT_GOOGLE_SERVICE_NAME);
+		String connectionsServiceName = StringUtils.defaultIfBlank(fieldMap.get(SbtEndpoints.CON_GADGET_OA2_SERVICE_NAME), 
+				SbtEndpoints.DEFAULT_CONNECTIONS_SERVICE_NAME);
+		String googleServiceName = StringUtils.defaultIfBlank(fieldMap.get(SbtEndpoints.GOOGLE_GADGET_OA_SERVICE_NAME), 
+				SbtEndpoints.DEFAULT_GOOGLE_SERVICE_NAME);
 		clients.put(connectionsServiceName, createConnectionsClient(fieldMap));
 		clients.put(googleServiceName, createGoogleClient(fieldMap));
 	}

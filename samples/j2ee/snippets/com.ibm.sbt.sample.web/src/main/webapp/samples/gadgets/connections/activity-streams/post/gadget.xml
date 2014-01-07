@@ -6,6 +6,9 @@
       </Service>
     </OAuth2>
     <Require feature="oauthpopup" />
+    <Require feature="dynamic-height" />
   </ModulePrefs>
+  <UserPref name="connections_url" display_name="Connections URL" default_value="" 
+  datatype="string" required="true"/>
   <Content type="html" href="as-post.html"></Content>
 </Module>

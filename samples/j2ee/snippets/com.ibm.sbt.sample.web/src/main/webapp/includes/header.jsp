@@ -63,7 +63,7 @@
                 </form>
                 
 				<form class="navbar-form pull-right" style="<%=formStyle%>;margin-right: 10px;">
-					<span style="style="display: inline-block;padding: 10px 5px 10px;"">JavaScript Library: </span> <select
+					<span style="display: inline-block;padding: 10px 5px 10px;">JavaScript Library: </span> <select
 						id="libChange" style="margin-top: 0px;">
 						<%
 							String[][] jsLibs = Util.getJavaScriptLibs(request);

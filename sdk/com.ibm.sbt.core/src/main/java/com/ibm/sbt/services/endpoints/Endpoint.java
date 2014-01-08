@@ -102,6 +102,11 @@ public interface Endpoint {
      * Gets the error code for authentication failure.
      * @return
      */
+    
+    /**
+     * Return proxy config for this endpoint
+     */
+    public String getProxyConfig();
     public int getAuthenticationErrorCode();
     
     /**

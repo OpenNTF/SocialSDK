@@ -16,8 +16,7 @@ require(["sbt/connections/CommunityService", "sbt/dom"],
     	communityService.getPublicCommunities({ ps: 5 }).then(
             function(communities){
                 if (communities.length == 0) {
-                    text = "There are no public communities.";
-                    dom.setText("content", text);
+                	dom.setText("content", "There are no public communities.");
                 } else {
                     for(var i=0; i<communities.length; i++){
                         var community = communities[i];

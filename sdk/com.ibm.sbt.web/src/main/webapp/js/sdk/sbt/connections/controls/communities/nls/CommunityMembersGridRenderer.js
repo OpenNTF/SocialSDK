@@ -33,7 +33,8 @@ define({
       save: "Save",
       cancel: "Close",
       member: "Member",
-      owner: "Owner"
+      owner: "Owner",
+      feed : "Feed for these Community Members"
    }
 });
 

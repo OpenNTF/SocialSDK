@@ -1,0 +1,7 @@
+{
+  "isDefault" : false,
+  "title" : "Activity Stream Post",
+  "gadget" : "gadget.xml",
+  "htmlFiles" : ["as-post.html"],
+  "jsFiles" : ["as-post.js"]
+}

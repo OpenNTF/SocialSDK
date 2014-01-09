@@ -29,7 +29,7 @@ define(
 			var PositionTmpl = "<snx:position>${getPosition}</snx:position>";
 			var CommunityTmpl = "<category scheme=\"http://www.ibm.com/xmlns/prod/sn/type\" term=\"community_activity\" label=\"Community Activity\"/><snx:communityUuid>${getCommunityUuid}</communityUuid>"
 					+ "<link rel=\"http://www.ibm.com/xmlns/prod/sn/container\" type=\"application/atom+xml\" href=\"${getCommunityUrl}\"/>";			
-			var CompletedTmpl = "<category scheme=\"http://www.ibm.com/xmlns/prod/sn/flags\" term=\"completed\"/>";
+			var CompletedTmpl = "<category scheme=\"http://www.ibm.com/xmlns/prod/sn/flags\" term=\"completed\" label=\"Completed\"/>";
 			var TemplateTmpl = "<category scheme=\"http://www.ibm.com/xmlns/prod/sn/flags\" term=\"template\"/>";
 			var DueDateTmpl = "<snx:duedate>${getDueDate}</duedate>";
 			var InReplytoTmpl = "<thr:in-reply-to ref=\"${getInReplyToId}\" type=\"application/atom+xml\" href=\"${getInReplyToUrl}\" source=\"${getActivityUuid}\" />";
@@ -42,6 +42,8 @@ define(
 			var AssignedToTmpl = "<snx:assignedto name=\"${getAssignedToName}\" userid=\"${getAssignedToUserId}\">${getAssignedToEmail}</snx:assignedto>";
 			var RoleTmpl = "<snx:role xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\" component=\"http://www.ibm.com/xmlns/prod/sn/activities\">${getRole}</snx:role>";
 			var MemberCategory = "<category scheme=\"http://www.ibm.com/xmlns/prod/sn/type\" term=\"${getCategory}\" label=\"${getCategory}\" />";
+			var ActivityIdTmpl = "<snx:activity>${getActivityUuid}</snx:activity>";
+			var ActivityNodeIdTmpl = "<id>urn:lsid:ibm.com:oa:${getActivityNodeUuid}</id>";
 
 			var extractId = function(id, token) {
 				id = decodeURIComponent(id); // to make sure the Id doesnt contain encoded characters
@@ -836,6 +838,12 @@ define(
 					}
 					if (this.getCommunityUuid && this.getCommunityUuid()) {
 						postData += stringUtil.transform(CommunityTmpl, this, transformer, this);
+					}
+					if (this.getActivityUuid && this.getActivityUuid()) {
+						postData += stringUtil.transform(ActivityIdTmpl, this, transformer, this);
+					}
+					if (this.getActivityNodeUuid && this.getActivityNodeUuid()) {
+						postData += stringUtil.transform(ActivityNodeIdTmpl, this, transformer, this);
 					}
 					if (this.isCompleted && this.isCompleted()) {
 						postData += CompletedTmpl;

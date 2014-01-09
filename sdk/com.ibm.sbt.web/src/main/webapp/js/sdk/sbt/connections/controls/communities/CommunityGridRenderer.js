@@ -120,7 +120,7 @@ define(["../../../declare", "../../../stringUtil", "../../../i18n", "../../../la
          },
          
          /**
-          * Displays the tags for a community
+          * Returns a CSS style based on if a community has tags. 
           * @param grid The Grid Element
           * @param item An Object containing all of the data for the current row
           * @param i The number of the current row
@@ -128,8 +128,8 @@ define(["../../../declare", "../../../stringUtil", "../../../i18n", "../../../la
           * @returns {String}
           */
          displayTags: function(grid, item, i, items) {
-                 var tags = item.getValue("tags");
-             if (tags == undefined) {
+             var tags = item.getValue("tags");
+             if (tags.length == 0) {
                  return "display: none";
              } else {
                  return "";
@@ -155,7 +155,7 @@ define(["../../../declare", "../../../stringUtil", "../../../i18n", "../../../la
          },
          
          /**
-          * Get the tags for a community
+          * Get the tag label, if a community has no tags and empty string is returned
           * @param grid The Grid Element
           * @param item An Object containing all of the data for the current row
           * @param i The number of the current row
@@ -164,7 +164,7 @@ define(["../../../declare", "../../../stringUtil", "../../../i18n", "../../../la
           */
          tagsLabel: function(grid, item, i, items) {
                  var tags = item.getValue("tags");
-             if (tags == undefined) {
+             if (tags.length == 0) {
                  return "";
              } else {
                  return this.nls.tags;

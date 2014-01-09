@@ -52,7 +52,7 @@ public class SbtEndpoints extends Endpoints {
 	public static final String GOOGLE_GADGET_OA_CONSUMERKEY = "Google_Gadget_OA_ConsumerKey";
 	public static final String GOOGLE_GADGET_OA_CONSUMERSECRET = "Google_Gadget_OA_ConsumerSecret";
 	public static final String SMA_URL = "Sma_URL";
-	public static final String DEFAULT_SC_SERVICE_NAME = "smartcloud";
+	public static final String DEFAULT_SC_SERVICE_NAME = "SmartCloud";
 	public static final String SMA_OA_GADGET_SERVICE = "Sma_OA_Gadget_Service";
 	public static final String SMA_OA_COUNSUMERKEY = "Sma_OA_ConsumerKey";
 	public static final String SMA_OA_CONSUMERSECRET = "Sma_OA_ConsumerSecret";

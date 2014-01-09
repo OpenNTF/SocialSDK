@@ -37,7 +37,7 @@ define({
     	labelFileSelected : "1 file selected",
     	labelFilesSelected : "{length} files selected",
     	labelMoveFile : "Are you sure you want to move this file to the trash?",
-    	labelMoveFiles : "Are you sure you want to move the selected item(s) to the trash?",
+    	labelMoveFiles: "Are you sure you want to move these files to the trash?",
     	labelAddMessage: "Add an optional message",
     	labelMessage: "message",
     	labelAPerson: "a Person",
@@ -62,16 +62,22 @@ define({
     	newFolderError : "Unable to create folder because: ${message}",
     	downloadSuccess : "",
     	downloadError : "",
-    	shareSuccess : "",
-    	shareError : "",
-    	moveToTrashSuccess : "Successfully moved to trash",
-    	moveToTrashError : "Error moving to trash",
+    	shareSuccess : "{fileName} was shared successfully.",
+    	shareSuccessMulti: "{count} files were shared successfully.",
+    	shareError : "{fileName} has been deleted or is no longer visible to you and cannot be shared",
+    	shareErrorMulti: "{count} files have been deleted or are no longer visible to you and cannot be shared",
+    	moveToTrashSuccess : "{fileName} was moved to the trash",
+    	moveToTrashSuccessMulti : "{count} files were moved to the trash",
+    	moveToTrashError : "{fileName }could not be deleted because the file has been already been deleted or is no longer visible.",
+    	shareWarning: "Sharing with a public community will make these files public",
+
     	
     	uploadFile : "Upload File",
     	newFolder : "New Folder",
     	download : "Download",
     	share : "Share",
     	addTags : "Add Tags",
-    	moveToTrash : "Move to Trash"
+    	moveToTrash : "Move to Trash",
+    	warning: "Warning"
     }
 });

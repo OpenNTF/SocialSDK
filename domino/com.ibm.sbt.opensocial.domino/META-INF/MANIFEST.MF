@@ -23,4 +23,6 @@ Import-Package: javax.servlet,
 Bundle-ClassPath: .,
  config/
 Export-Package: com.ibm.sbt.opensocial.domino.config,
- com.ibm.sbt.opensocial.domino.container
+ com.ibm.sbt.opensocial.domino.container,
+ com.ibm.sbt.opensocial.domino.oauth,
+ com.ibm.sbt.opensocial.domino.oauth.clients

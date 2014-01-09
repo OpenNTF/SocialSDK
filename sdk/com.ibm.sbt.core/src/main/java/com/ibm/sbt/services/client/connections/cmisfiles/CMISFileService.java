@@ -76,10 +76,10 @@ public class CMISFileService extends BaseService {
     	if(StringUtil.isNotEmpty(repositoryId)){
     		return repositoryId;
 		} else {
-	    	if(this.endpoint instanceof ConnectionsBasicEndpoint) { // all types of connections ??
+	    	if(!this.endpoint.getClientParams().containsKey("isSmartCloud")) { 
 	    		// fetch the connections userid here 
 	    		repositoryId = getRepositoryId(CMISFilesUrlBuilder.ATOM_GET_USER_ID.getUrl());
-	    	} else if(this.endpoint instanceof SmartCloudBasicEndpoint) { // all types of smartcloud ?? 
+	    	} else if(this.endpoint.getClientParams().get("isSmartCloud").equals(Boolean.TRUE)) {  
 	    		// fetch the smartcloud subscriber id here 
 	    		repositoryId = getRepositoryId(CMISFilesUrlBuilder.ATOM_GET_SUBSCRIBER_ID.getUrl());
 	    	}

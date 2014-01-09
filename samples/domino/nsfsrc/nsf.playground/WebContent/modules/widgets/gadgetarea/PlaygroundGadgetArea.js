@@ -125,10 +125,8 @@ define(['dojo/_base/declare', 'explorer/widgets/gadgetarea/GadgetArea', 'dojo/on
         		  debug: debug
         	  });
         	  var self = this;
-        	  gadgetSpecService.postGadgetSpec(form).then(function(data){
-        		  // https require the certificates on the server... 
+        	  gadgetSpecService.postGadgetSpec(form).then(function(data){ 
         		  var url = form.action+"/"+gadgetId+"/gadget.xml";
-        		  url = url.replace("https://","http://");
         		  var jsonCode = self.jsonEditor.getValue();
         		  if(!jsonCode) {
         			  var params = {};

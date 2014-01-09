@@ -84,10 +84,10 @@ DominoOAuth2Accessor {
 	public String getRedirectUri() {
 		String redirect = super.getRedirectUri();
 		//If we are using standard ports no need to put them in the URL
-		if(redirect.contains(HTTP)) {
+		if(redirect.contains(HTTP_PORT)) {
 			redirect = redirect.replace(HTTP_PORT, "");
 		}
-		if(redirect.contains(HTTPS)) {
+		if(redirect.contains(HTTPS_PORT)) {
 			redirect = redirect.replace(HTTPS_PORT, "");
 		}
 		setRedirectUri(redirect);

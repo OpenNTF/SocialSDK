@@ -1,0 +1,7 @@
+{
+  "isDefault" : false,
+  "gadget" : "SmartCloud.xml",
+  "title" : "IBM SmartCloud Profile",
+  "jsFiles" : ["SmartCloud.js"],
+  "htmlFiles" : ["SmartCloud.html"]
+}

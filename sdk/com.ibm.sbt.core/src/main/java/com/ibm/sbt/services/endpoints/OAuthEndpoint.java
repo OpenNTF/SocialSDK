@@ -83,19 +83,19 @@ public class OAuthEndpoint extends AbstractEndpoint {
 	public void checkValid() throws SBTException {
 		super.checkValid();
 		if (StringUtil.isEmpty(oAuthHandler.getConsumerKey())) {
-			throw new SBTException(null, "The Endpoint consumer key is empty, class {0}", getClass());
+			throw new SBTException(null, "The Endpoint consumer key is empty for {0}", getClass());
 		}
 		if (StringUtil.isEmpty(oAuthHandler.getConsumerSecret())) {
-			throw new SBTException(null, "The Endpoint consumer secret is empty, class {0}", getClass());
+			throw new SBTException(null, "The Endpoint consumer secret is empty for {0}", getClass());
 		}
 		if (StringUtil.isEmpty(oAuthHandler.getAuthorizationURL())) {
-			throw new SBTException(null, "The Endpoint authorization URL is empty, class {0}", getClass());
+			throw new SBTException(null, "The Endpoint authorization URL is empty for {0}", getClass());
 		}
 		if (StringUtil.isEmpty(oAuthHandler.getRequestTokenURL())) {
-			throw new SBTException(null, "The Endpoint request token URL is empty, class {0}", getClass());
+			throw new SBTException(null, "The Endpoint request token URL is empty for {0}", getClass());
 		}
 		if (StringUtil.isEmpty(oAuthHandler.getAccessTokenURL())) {
-			throw new SBTException(null, "The Endpoint access token URL is empty, class {0}", getClass());
+			throw new SBTException(null, "The Endpoint access token URL is empty for {0}", getClass());
 		}
 	}
 

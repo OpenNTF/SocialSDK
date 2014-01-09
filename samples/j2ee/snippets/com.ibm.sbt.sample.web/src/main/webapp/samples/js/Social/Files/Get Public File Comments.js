@@ -20,7 +20,7 @@ require([ "sbt/connections/FileService", "sbt/dom" ], function(FileService, dom)
 			var file = files[0];
 			fileService.getPublicFileComments(file.getAuthor().authorUserId, file.getFileId()).then(function(comments) {
 				if (comments.length == 0) {
-					text = "There are no comments for this file.";
+					dom.setText("content", "There are no comments for this file.");
 				} else {
 					for ( var i = 0; i < comments.length; i++) {
 						var comment = comments[i];

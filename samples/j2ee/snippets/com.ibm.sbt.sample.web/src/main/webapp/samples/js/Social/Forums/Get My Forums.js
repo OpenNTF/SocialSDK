@@ -23,7 +23,7 @@ require(["sbt/connections/ForumService", "sbt/dom"],
         forumService.getMyForums({ since : 0 }).then(
             function(forums) {
                 if (forums.length == 0) {
-                    text = "You do not have any forums.";
+                	dom.setText("content", "You do not have any forums.");
                 } else {
                     for(var i=0; i<forums.length; i++){
                         var forum = forums[i];

@@ -24,7 +24,7 @@ require(["sbt/connections/WikiService", "sbt/dom"],
         wikiService.getMyWikiPages(wikiLabel).then(
             function(wikiPages) {
                 if (wikiPages.length == 0) {
-                    text = "You do not have any wiki pages.";
+                	dom.setText("content", "You do not have any wiki pages.");
                 } else {
                     for(var i=0; i<wikiPages.length; i++){
                         var wikiPage = wikiPages[i];

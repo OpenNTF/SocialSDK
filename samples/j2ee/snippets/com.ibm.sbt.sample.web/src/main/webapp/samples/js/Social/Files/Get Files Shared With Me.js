@@ -16,7 +16,7 @@ require(["sbt/connections/FileService", "sbt/dom"],
     	fileService.getFilesSharedWithMe().then(
             function(files) {
                 if (files.length == 0) {
-                    text = "No Files are currently shared by you.";
+                    dom.setText("content", "No Files are currently shared by you.");
                 } else {
                     for(var i=0; i<files.length; i++){
                         var file = files[i];

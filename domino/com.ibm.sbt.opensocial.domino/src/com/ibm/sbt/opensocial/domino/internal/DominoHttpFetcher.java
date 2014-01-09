@@ -85,7 +85,7 @@ import com.ibm.sbt.opensocial.domino.container.ContainerExtPoint;
 import com.ibm.sbt.opensocial.domino.container.ContainerExtPointManager;
 
 /**
- * A simple Http fetcher that will allow connections over SSL to untrusted servers.
+ * A simple HTTP fetcher that will allow connections over SSL to untrusted servers.
  * This should not be allowed in production but for development use cases it is useful and saves time
  * and frustration.  For this reason we allow each container to specify whether they want to allow this.
  * For a container to allow unsecure connections they should add domino.allowuntrustedsslconnections and

@@ -23,7 +23,7 @@ require(["sbt/connections/WikiService", "sbt/dom"],
         wikiService.getMyWikis({ since : 0 }).then(
             function(wikis) {
                 if (wikis.length == 0) {
-                    text = "You do not have any wikis.";
+                	dom.setText("content", "You do not have any wikis.");
                 } else {
                     for(var i=0; i<wikis.length; i++){
                         var wiki = wikis[i];

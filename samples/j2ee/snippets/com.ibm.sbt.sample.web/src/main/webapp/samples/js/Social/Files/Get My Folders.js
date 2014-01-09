@@ -16,7 +16,7 @@ require(["sbt/connections/FileService", "sbt/dom"],
     	fileService.getMyFolders().then(
             function(folders) {
                 if (folders.length == 0) {
-                    text = "You are not an owner of any folders.";
+                	dom.setText("content", "You are not an owner of any folders.");
                 } else {
                     for(var i=0; i<folders.length; i++){
                         var file = folders[i];

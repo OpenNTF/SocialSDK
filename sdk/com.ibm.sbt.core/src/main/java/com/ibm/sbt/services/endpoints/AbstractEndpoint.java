@@ -86,7 +86,7 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
     @Override
 	public void checkValid() throws SBTException {
     	if(StringUtil.isEmpty(getUrl())) {
-    		throw new SBTException(null,"The Endpoint url is empty, class {0}",getClass());
+    		throw new SBTException(null,"The Endpoint url is empty for {0}",getClass());
     	}
     }
     

@@ -9,6 +9,8 @@ import java.util.Map;
 
 import javax.faces.context.FacesContext;
 
+import org.apache.commons.lang3.StringUtils;
+
 import nsf.playground.beans.DataAccessBean;
 import nsf.playground.extension.Endpoints;
 
@@ -82,6 +84,7 @@ public class PlaygroundEnvironment extends SBTEnvironment implements ContainerEx
 			  null,
 			  properties);
 		setEndpointsArray(createEndpoints());
+		containerConfig.getProperties().put(OpenSocialContainerConfig.ALLOW_UNTRUSTED_SSL_CONNECTIONS, true);
 	}
 	
 	public Map<String,String> getFieldMap() {
@@ -175,7 +178,10 @@ public class PlaygroundEnvironment extends SBTEnvironment implements ContainerEx
 	@Override
 	public String getId() throws ContainerExtPointException {
 		try {
-			return URLEncoder.encode(this.notesUrl, "UTF-8");
+			//There cannot be any colons in this id or else they end up in the security token
+			//The security token uses colons for separators of different parts so remove all
+			//the colons.  In this case since it is a URL there should only be 1
+			return URLEncoder.encode(StringUtils.defaultString(this.notesUrl).replaceAll(":", ""), "UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			throw new ContainerExtPointException(e);
 		}

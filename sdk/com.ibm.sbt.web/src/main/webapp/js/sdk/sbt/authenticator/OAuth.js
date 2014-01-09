@@ -39,12 +39,14 @@ define(['../declare','../lang', '../util'], function(declare, lang, util) {
 		 */
 		authenticate: function(options) {
 		    var self = this;
-			require(["sbt/config"], function(config){
+			require(["sbt/config"], function(config) {
 			    var mode = options.loginUi || config.Properties["loginUi"] || this.loginUi;
+            	var width = config.Properties["login.oauth.width"] || 800;
+            	var height = config.Properties["login.oauth.height"] || 450;
 	            if(mode=="popup") {
-	                return self._authPopup(options, self.url);
+	                return self._authPopup(options, self.url, width, height);
 	            } else if(mode=="dialog") {
-	                return self._authDialog(options, self.url);
+	                return self._authDialog(options, self.url, width, height);
 	            } else {
 	                return self._authMainWindow(options, self.url);
 	            }
@@ -58,25 +60,24 @@ define(['../declare','../lang', '../util'], function(declare, lang, util) {
 			
 		},
 		
-		_authPopup: function(options, sbtUrl) {
+		_authPopup: function(options, sbtUrl, width, height) {
 		    require(["sbt/config"], function(config){
 		        config.callback = options.callback;
 	            var url = sbtUrl + "?loginUi=popup";
 	            
 	            var windowQueryMap = {
-                    height: window.screen.availHeight / 2,
-                    width: window.screen.availWidth / 3
+                    height: height,
+                    width: width
 	            };
 	            var windowQuery = util.createQuery(windowQueryMap, ",");
-	            newwindow=window.open(url,'Authentication',windowQuery);
+	            newwindow = window.open(url,'Authentication',windowQuery);
 	            return true;
 		    });
 		},
 		
-		_authDialog: function(options, sbtUrl) {
-			require(["sbt/_bridge/ui/OAuth10_Dialog"], function(dialog) {
-				// TODO: should run the dance when done...
-				dialog.show(sbtUrl);
+		_authDialog: function(options, sbtUrl, width, height) {
+			require(["sbt/_bridge/ui/OAuthDialog"], function(dialog) {
+				dialog.show(sbtUrl, widht, height);
 			});
 			return true;
 		}

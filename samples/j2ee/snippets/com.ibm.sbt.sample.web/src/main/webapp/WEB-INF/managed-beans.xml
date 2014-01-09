@@ -40,8 +40,7 @@
 		<managed-bean-scope>application</managed-bean-scope>
 		<managed-property>
 			<property-name>endpoints</property-name>
-			<value>connections,connectionsOA2,w3connections,smartcloud,smartcloudOA2,smartcloudBasic,smartcloudForm,domino,acmeAir,conAcmeApp,connectionsSSO,dropbox,twitter</value>
-			<!-- <value>connections,connectionsOA2,smartcloud,smartcloudOA2,domino,sametime</value> -->
+			<value>connections,connectionsOA2,connectionsSSO,smartcloud,smartcloudOA2,smartcloudBasic,smartcloudForm,domino,acmeAir,conAcmeApp,dropbox,twitter</value>
 		</managed-property>
 		<managed-property>
 			<property-name>properties</property-name>
@@ -60,7 +59,7 @@
         <managed-bean-scope>application</managed-bean-scope>
         <managed-property>
             <property-name>endpoints</property-name>
-            <value>connections:connections,w3connections,connectionsOA2,connectionsSSO</value>
+            <value>connections,connectionsOA2,connectionsSSO</value>
         </managed-property>
         <managed-property>
             <property-name>properties</property-name>
@@ -79,7 +78,7 @@
 		<managed-bean-scope>application</managed-bean-scope>
 		<managed-property>
 			<property-name>endpoints</property-name>
-			<value>smartcloud:connections,smartcloud</value>
+			<value>smartcloud:connections,smartcloud,smartcloudOA2,smartcloudBasic,smartcloudForm</value>
 		</managed-property>
 		<managed-property>
 			<property-name>properties</property-name>
@@ -178,43 +177,6 @@
 			<value>true</value>
 		</managed-property>
 	</managed-bean>
-	
-	<!-- W3 Connections Basic -->
-    <managed-bean>
-        <managed-bean-name>w3connections</managed-bean-name>
-        <managed-bean-class>com.ibm.sbt.services.endpoints.ConnectionsBasicEndpoint</managed-bean-class>
-        <managed-bean-scope>session</managed-bean-scope>
-        <managed-property>
-            <property-name>url</property-name>
-            <value>%{w3connections.url}</value>
-        </managed-property>
-        <managed-property>
-            <property-name>apiVersion</property-name>
-            <value>%{w3connections.apiVersion}</value>
-        </managed-property>
-        <managed-property>
-            <property-name>credentialStore</property-name>
-            <value>CredStore</value>
-        </managed-property>
-        <managed-property>
-            <property-name>authenticationPage</property-name>
-            <value>/sbt/loginForm.html?endpoint=connections</value>
-        </managed-property>
-        <managed-property>
-            <property-name>authenticationService</property-name>
-            <value>communities/service/atom/communities/my</value>
-        </managed-property>
-        <!-- Trust the connection -->
-        <managed-property>
-            <property-name>forceTrustSSLCertificate</property-name>
-            <value>true</value>
-        </managed-property>
-        <!-- Add any custom service mappings below -->
-        <managed-property>
-            <property-name>serviceMaps</property-name>
-            <value>%{w3connections.contextRootMap}</value>
-        </managed-property>
-    </managed-bean>
 	
 	<!-- Connections SSO -->	
 	<managed-bean>
@@ -536,7 +498,7 @@
         <managed-bean-scope>session</managed-bean-scope>
         <managed-property>
             <property-name>url</property-name>
-            <value>%{connections.url}</value>
+            <value>%{connections.app.as.url}</value>
         </managed-property>
         <managed-property>
 			<property-name>credentialStore</property-name>

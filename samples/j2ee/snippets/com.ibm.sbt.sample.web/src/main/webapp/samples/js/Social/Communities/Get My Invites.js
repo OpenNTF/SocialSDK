@@ -19,7 +19,7 @@ require(["sbt/connections/CommunityService", "sbt/dom"],
     	communityService.getMyInvites().then(
             function(invites) {
                 if (invites.length == 0) {
-                    text = "You do not have any outstanding invites.";
+                	dom.setText("content", "You do not have any outstanding invites.");
                 } else {
                     for(var i=0; i<invites.length; i++){
                         var invite = invites[i];

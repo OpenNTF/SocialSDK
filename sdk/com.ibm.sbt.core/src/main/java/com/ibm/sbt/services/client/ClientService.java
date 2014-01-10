@@ -1190,7 +1190,7 @@ public abstract class ClientService {
 	protected void addUrlParameters(StringBuilder b, Args args) throws ClientServicesException {
 		Map<String, String> parameters = args.getParameters();
 		if (parameters != null) {
-			boolean first = true;
+			boolean first = !b.toString().contains("?");
 			for (Map.Entry<String, String> e : parameters.entrySet()) {
 				String name = e.getKey();
 				if (StringUtil.isNotEmpty(name) && isValidUrlParameter(args, name)) {

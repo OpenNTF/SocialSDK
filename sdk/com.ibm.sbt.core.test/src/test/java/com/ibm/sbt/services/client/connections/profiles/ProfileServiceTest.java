@@ -196,7 +196,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 
 	}
 
-	@Test
+	@Test @Ignore
 	public final void testUpdateProfile() throws Exception {
 
 		ProfileService profileService = new ProfileService();
@@ -275,7 +275,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 		profileService.updateProfilePhoto(file, profile.getUserid());
 	}
 	
-	@Test
+	@Test @Ignore
 	public final void testProfileSerialization() throws Exception {
 		ProfileService profileService = new ProfileService();
 		Profile profile = profileService.getProfile(properties.getProperty("email1"));
@@ -293,7 +293,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 	}
 	
 		
-	@Test
+	@Test @Ignore
 	public final void testProfileListSerialization() throws Exception {
 		ProfileService profileService = new ProfileService();
 		ProfileList profiles = profileService.getReportingChain(properties.getProperty("email1"));

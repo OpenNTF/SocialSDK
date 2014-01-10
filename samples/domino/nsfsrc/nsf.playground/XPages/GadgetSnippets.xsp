@@ -108,6 +108,7 @@ return o;]]></xe:this.script>
 				</xe:remoteMethod>
 			</xe:this.methods>
 		</xe:jsonRpcService>
+		<xc:ccAnonOAuthWarning loaded="${javascript:context.getUser().isAnonymous()}"></xc:ccAnonOAuthWarning>
 		<xc:ccLayout navigationPath="/GadgetSnippets"
 			title="#{javascript:optionsBean.getApplicationTitle('OpenSocial Gadgets')}"
 			wholePage="true">

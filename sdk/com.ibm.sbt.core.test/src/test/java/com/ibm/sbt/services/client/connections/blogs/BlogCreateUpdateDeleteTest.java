@@ -19,8 +19,10 @@ package com.ibm.sbt.services.client.connections.blogs;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
+
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -34,7 +36,7 @@ public class BlogCreateUpdateDeleteTest extends BaseBlogServiceTest {
 		blog = createBlog();
 	}
 
-	@Test
+	@Test @Ignore
 	public void CreateBlogTest() {
 		try {
 			Blog blog = new Blog(blogService, "");
@@ -54,7 +56,7 @@ public class BlogCreateUpdateDeleteTest extends BaseBlogServiceTest {
 
 	}
 
-	@Test
+	@Test @Ignore
 	public void GetBlog() {
 		try {
 			Blog blogGot = blogService.getBlog(blog.getBlogUuid());
@@ -67,7 +69,7 @@ public class BlogCreateUpdateDeleteTest extends BaseBlogServiceTest {
 		}
 	}
 
-	@Test
+	@Test @Ignore
 	public void UpdateBlog() {
 		try {
 			blog.setTitle("New title " + System.currentTimeMillis());

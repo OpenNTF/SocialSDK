@@ -1,0 +1,2187 @@
+<?xml version="1.0"?>
+<responses>
+<response statusCode="200" statusReason="OK">
+<headers>
+    <header>
+        <name><![CDATA[Date]]></name>
+        <value><![CDATA[Fri, 10 Jan 2014 15:26:37 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-Powered-By]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-LConn-Auth]]></name>
+        <value><![CDATA[false]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-UA-Compatible]]></name>
+        <value><![CDATA[IE=EmulateIE7]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Expires]]></name>
+        <value><![CDATA[Fri, 10 Jan 2014 15:36:37 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Last-Modified]]></name>
+        <value><![CDATA[Fri, 10 Jan 2014 15:26:31 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken=PUBjyRNSiMicDeydwCeSe/gUuml0fCDnccXoWVT0q2G+DB9N76HWlKqqf16uAHfzzNbPAEwptZNqH4INVmo/K5xuXFrznl08HW6qMsaWqiSnnoONNOeWPNzOVhjHbAXgyNVu+Z7c4oaxpsqHYzYe4Wwtaiu5GX1TlgSbpofbB7B6coN9ik2nPZhmlRvipNQ2y7hL0foIb6UhwN2+/LCf3IUc/YAk1jgjH4C8lPIHUypv6ZF0FmKyy8mxpdGXaA/KStdm/ujfrbSN07lkfddhCtyrtr9ocGeO6hPIeOQYNnx+Aucg4i8u+rcgnrcfaAsZDETkgxXipmMunpY6JIQiyg==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=OiXv+fZ5jsbv538SneUjaCs9oLbk5Eix3vVugLnXd+V7gHF9BGegiMzsCGcouwBhRH60w1D8VIiZ/aJZBX5UP+uajx+w4nka1RDaRXm4F+/JQq4kb9j2FPULgsLU2HG6mGO/5KEi4umm+d/rg8obK5bzk7wnAjsbQHvf1fDuaaimNoNG7ffR7phBVSrq8OQuhqAACxgznXJYdoJirMshVp4U3BQ5Wodw/0boRlamsejPJMFFhp6gHDw1DnmfMcMqabfu5opQI2RNHuywKlwOAh23tzfcHEvorquJ+u224TLqxvIySx+vjxPA6RjGI7sNkVKa3Osac24cKYkJ4vysldoae6XwrQt2rkNVYbgAbrPjXJQPqNzUYLP0jWEH+8lqydBYNTw8ZyHd+jMkhT8wT8RD8k6U7p15y1L1/Hgx93QdvrwQ1uTQB9O6yrm6c+k6fd7pwlJYOQF0ta/jk+b5IgY9SaQcnKaS2lbbFfdVSya+ofPTtzXU6OFWsV+Bb/Zca2OuI2z4SUahTLJyCn8Ic0GUOCfQtuB5hikuxlNTtf/QdwpCidTmw3Uj+WptdbHGfyn52bvOvwa9iEL45F0ZMV2y28XwToPct+Yn4C8byX2Y7ZVGTnUKajJY7ffgCind7ZU80SLAWyU/H8MLTvNRaA==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LCSESSIONID=0000JBYI4Cma4tijtrr_h-FLLWp:180t512oj; Path=/; HttpOnly]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Cache-Control]]></name>
+        <value><![CDATA[public, max-age=600, s-maxage=600, no-cache=set-cookie]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Keep-Alive]]></name>
+        <value><![CDATA[timeout=10, max=100]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Connection]]></name>
+        <value><![CDATA[Keep-Alive]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Transfer-Encoding]]></name>
+        <value><![CDATA[chunked]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Type]]></name>
+        <value><![CDATA[application/atom+xml; charset=utf-8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header></headers>
+<data><![CDATA[<?xml version="1.0" encoding='utf-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom" 
+      xmlns:app="http://www.w3.org/2007/app"
+      xmlns:thr="http://purl.org/syndication/thread/1.0"
+      xmlns:snx="http://www.ibm.com/xmlns/prod/sn"
+      xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/"
+      xml:lang="en-US">
+      <title type="text">Blogs</title>
+      <subtitle type="html"></subtitle>
+    <id>urn:lsid:ibm.com:blogs:entries</id>
+    <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs?lang=en_us" />
+    <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/homepage/feed/entries/atom" />
+    <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/homepage/feed/comments/atom?lang=en_us" />
+    <link rel="first" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/homepage/feed/entries/atom?ps=50&amp;lang=en_us" />
+    <link rel="next" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/homepage/feed/entries/atom?ps=50&amp;page=1&amp;lang=en_us" />
+    <opensearch:totalResults>5452</opensearch:totalResults>
+    <app:categories href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/homepage/feed/tags/atom?lang=en_us"/>
+    <updated>2013-07-30T13:27:06-04:00</updated>
+    <generator uri="http://www.ibm.com/xmlns/prod/sn" version="4.5.0.0">IBM Connections - Blogs</generator>
+        <entry xml:base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366820617/entry/test_blog_post1389366821556" xml:lang="en-US" >
+      <id>urn:lsid:ibm.com:blogs:entry-27c3de67-28b7-448d-8474-85d06c6c3dcd</id>
+      <title type="text">Test Blog Post1389366821556</title>
+      <author>
+        <name>Frank Adams</name>
+                <email>fadams@renovations.com</email>
+                <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+                <snx:userState>active</snx:userState>
+              </author>
+            <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366820617/entry/test_blog_post1389366821556?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366820617/feed/entry/atom?entryid=27c3de67-28b7-448d-8474-85d06c6c3dcd&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366820617/feed/entrycomments/test_blog_post1389366821556/atom?lang=en_us" thr:count="1"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366820617/feed/entryrecommendations/27c3de67-28b7-448d-8474-85d06c6c3dcd/atom?lang=en_us"/>
+      <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366820617/api/entrycomments/27c3de67-28b7-448d-8474-85d06c6c3dcd?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366820617/api/recommend/entries/27c3de67-28b7-448d-8474-85d06c6c3dcd?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-01-10T10:13:38-05:00</published>
+      <updated>2014-01-10T10:13:38-05:00</updated>
+         <content type="html">Test Blog Post Content1389366821556</content>
+         <summary type="html">Test Blog Post Content1389366821556</summary>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">1</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-21674396-cf66-409a-b9cf-e6889c686743</id>
+        <title type="text">Test Blog1389366820617</title>
+        <link type="application/atom+xml" rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366820617/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366820617?lang=en_us"/>
+        <updated>2014-01-10T10:13:39-05:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+
+    <entry xml:base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366817798/entry/test_blog_post1389366818755" xml:lang="en-US" >
+      <id>urn:lsid:ibm.com:blogs:entry-23e460fb-1828-41f7-a67c-a45063ea8d28</id>
+      <title type="text">Test Blog Post1389366818755</title>
+      <author>
+        <name>Frank Adams</name>
+                <email>fadams@renovations.com</email>
+                <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+                <snx:userState>active</snx:userState>
+              </author>
+            <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366817798/entry/test_blog_post1389366818755?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366817798/feed/entry/atom?entryid=23e460fb-1828-41f7-a67c-a45063ea8d28&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366817798/feed/entrycomments/test_blog_post1389366818755/atom?lang=en_us" thr:count="0"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366817798/feed/entryrecommendations/23e460fb-1828-41f7-a67c-a45063ea8d28/atom?lang=en_us"/>
+      <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366817798/api/entrycomments/23e460fb-1828-41f7-a67c-a45063ea8d28?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366817798/api/recommend/entries/23e460fb-1828-41f7-a67c-a45063ea8d28?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-01-10T10:13:35-05:00</published>
+      <updated>2014-01-10T10:13:35-05:00</updated>
+         <content type="html">Test Blog Post Content1389366818755</content>
+         <summary type="html">Test Blog Post Content1389366818755</summary>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-6f6ab648-598d-42d8-8812-244fe6dd2772</id>
+        <title type="text">Test Blog1389366817798</title>
+        <link type="application/atom+xml" rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366817798/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366817798?lang=en_us"/>
+        <updated>2014-01-10T10:13:35-05:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+
+    <entry xml:base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366811711/entry/test_blog_post1389366812673" xml:lang="en-US" >
+      <id>urn:lsid:ibm.com:blogs:entry-0304706a-fe8a-43a9-a9f2-c006fc915779</id>
+      <title type="text">Test Blog Post1389366812673</title>
+      <author>
+        <name>Frank Adams</name>
+                <email>fadams@renovations.com</email>
+                <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+                <snx:userState>active</snx:userState>
+              </author>
+            <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366811711/entry/test_blog_post1389366812673?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366811711/feed/entry/atom?entryid=0304706a-fe8a-43a9-a9f2-c006fc915779&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366811711/feed/entrycomments/test_blog_post1389366812673/atom?lang=en_us" thr:count="1"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366811711/feed/entryrecommendations/0304706a-fe8a-43a9-a9f2-c006fc915779/atom?lang=en_us"/>
+      <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366811711/api/entrycomments/0304706a-fe8a-43a9-a9f2-c006fc915779?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366811711/api/recommend/entries/0304706a-fe8a-43a9-a9f2-c006fc915779?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-01-10T10:13:29-05:00</published>
+      <updated>2014-01-10T10:13:29-05:00</updated>
+         <content type="html">Test Blog Post Content1389366812673</content>
+         <summary type="html">Test Blog Post Content1389366812673</summary>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">1</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-3bad1aec-2d90-41e6-8abd-c3163952b6e2</id>
+        <title type="text">Test Blog1389366811711</title>
+        <link type="application/atom+xml" rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366811711/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366811711?lang=en_us"/>
+        <updated>2014-01-10T10:13:30-05:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+
+    <entry xml:base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366806992/entry/test_blog_post1389366807937" xml:lang="en-US" >
+      <id>urn:lsid:ibm.com:blogs:entry-074e5777-2a81-4463-ab65-d977fbaae5a9</id>
+      <title type="text">Test Blog Post1389366807937</title>
+      <author>
+        <name>Frank Adams</name>
+                <email>fadams@renovations.com</email>
+                <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+                <snx:userState>active</snx:userState>
+              </author>
+            <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366806992/entry/test_blog_post1389366807937?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366806992/feed/entry/atom?entryid=074e5777-2a81-4463-ab65-d977fbaae5a9&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366806992/feed/entrycomments/test_blog_post1389366807937/atom?lang=en_us" thr:count="1"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366806992/feed/entryrecommendations/074e5777-2a81-4463-ab65-d977fbaae5a9/atom?lang=en_us"/>
+      <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366806992/api/entrycomments/074e5777-2a81-4463-ab65-d977fbaae5a9?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366806992/api/recommend/entries/074e5777-2a81-4463-ab65-d977fbaae5a9?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-01-10T10:13:24-05:00</published>
+      <updated>2014-01-10T10:13:24-05:00</updated>
+         <content type="html">Test Blog Post Content1389366807937</content>
+         <summary type="html">Test Blog Post Content1389366807937</summary>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">1</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-d629119b-f136-47f6-ba1e-ed0f2dee12ea</id>
+        <title type="text">Test Blog1389366806992</title>
+        <link type="application/atom+xml" rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366806992/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366806992?lang=en_us"/>
+        <updated>2014-01-10T10:13:27-05:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+
+    <entry xml:base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366803008/entry/test_blog_post1389366803963" xml:lang="en-US" >
+      <id>urn:lsid:ibm.com:blogs:entry-f29c2f45-4c41-48d6-a9a2-03aa36674c33</id>
+      <title type="text">Test Blog Post1389366803963</title>
+      <author>
+        <name>Frank Adams</name>
+                <email>fadams@renovations.com</email>
+                <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+                <snx:userState>active</snx:userState>
+              </author>
+            <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366803008/entry/test_blog_post1389366803963?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366803008/feed/entry/atom?entryid=f29c2f45-4c41-48d6-a9a2-03aa36674c33&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366803008/feed/entrycomments/test_blog_post1389366803963/atom?lang=en_us" thr:count="1"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366803008/feed/entryrecommendations/f29c2f45-4c41-48d6-a9a2-03aa36674c33/atom?lang=en_us"/>
+      <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366803008/api/entrycomments/f29c2f45-4c41-48d6-a9a2-03aa36674c33?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366803008/api/recommend/entries/f29c2f45-4c41-48d6-a9a2-03aa36674c33?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-01-10T10:13:20-05:00</published>
+      <updated>2014-01-10T10:13:20-05:00</updated>
+         <content type="html">Test Blog Post Content1389366803963</content>
+         <summary type="html">Test Blog Post Content1389366803963</summary>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">1</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-45f78451-46f1-41c2-9df8-6e364baea14c</id>
+        <title type="text">Test Blog1389366803008</title>
+        <link type="application/atom+xml" rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366803008/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366803008?lang=en_us"/>
+        <updated>2014-01-10T10:13:21-05:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+
+    <entry xml:base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366410667/entry/test_blog_post1389366437676" xml:lang="en-US" >
+      <id>urn:lsid:ibm.com:blogs:entry-23f61570-4cc8-4bc5-9182-1b5990fd6cc4</id>
+      <title type="text">Test Blog Post1389366437676</title>
+      <author>
+        <name>Frank Adams</name>
+                <email>fadams@renovations.com</email>
+                <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+                <snx:userState>active</snx:userState>
+              </author>
+            <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366410667/entry/test_blog_post1389366437676?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366410667/feed/entry/atom?entryid=23f61570-4cc8-4bc5-9182-1b5990fd6cc4&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366410667/feed/entrycomments/test_blog_post1389366437676/atom?lang=en_us" thr:count="1"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366410667/feed/entryrecommendations/23f61570-4cc8-4bc5-9182-1b5990fd6cc4/atom?lang=en_us"/>
+      <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366410667/api/entrycomments/23f61570-4cc8-4bc5-9182-1b5990fd6cc4?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366410667/api/recommend/entries/23f61570-4cc8-4bc5-9182-1b5990fd6cc4?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-01-10T10:07:15-05:00</published>
+      <updated>2014-01-10T10:07:15-05:00</updated>
+         <content type="html">Test Blog Post Content</content>
+         <summary type="html">Test Blog Post Content</summary>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">1</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-70fc9df1-ee6e-417d-bbef-80a8cf3a749d</id>
+        <title type="text">Test Blog1389366410667</title>
+        <link type="application/atom+xml" rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366410667/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389366410667?lang=en_us"/>
+        <updated>2014-01-10T10:07:27-05:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+
+    <entry xml:base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361299491/entry/blogpost_at_1389361496678" xml:lang="en-GB" >
+      <id>urn:lsid:ibm.com:blogs:entry-f8a36aa1-bb6b-48b5-a25a-9e3c5ef062d7</id>
+      <title type="text">BlogPost at 1389361496678</title>
+      <author>
+        <name>Frank Adams</name>
+                <email>fadams@renovations.com</email>
+                <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+                <snx:userState>active</snx:userState>
+              </author>
+            <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361299491/entry/blogpost_at_1389361496678?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361299491/feed/entry/atom?entryid=f8a36aa1-bb6b-48b5-a25a-9e3c5ef062d7&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361299491/feed/entrycomments/blogpost_at_1389361496678/atom?lang=en_us" thr:count="0"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361299491/feed/entryrecommendations/f8a36aa1-bb6b-48b5-a25a-9e3c5ef062d7/atom?lang=en_us"/>
+      <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361299491/api/entrycomments/f8a36aa1-bb6b-48b5-a25a-9e3c5ef062d7?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361299491/api/recommend/entries/f8a36aa1-bb6b-48b5-a25a-9e3c5ef062d7?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-01-10T08:44:54-05:00</published>
+      <updated>2014-01-10T08:44:54-05:00</updated>
+         <content type="html">BlogPost Content at 1389361496678</content>
+         <summary type="html">BlogPost Content at 1389361496678</summary>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-7f43db76-cfbd-4827-89ca-af71ce6949a7</id>
+        <title type="text">Blog Updated at 1389361348095</title>
+        <link type="application/atom+xml" rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361299491/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361299491?lang=en_us"/>
+        <updated>2014-01-10T08:44:55-05:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+
+    <entry xml:base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361299491/entry/blogpost_at_1389361473036" xml:lang="en-GB" >
+      <id>urn:lsid:ibm.com:blogs:entry-e76face0-4998-4210-8d2a-c650d1f1255a</id>
+      <title type="text">BlogPost at 1389361473036</title>
+      <author>
+        <name>Frank Adams</name>
+                <email>fadams@renovations.com</email>
+                <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+                <snx:userState>active</snx:userState>
+              </author>
+            <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361299491/entry/blogpost_at_1389361473036?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361299491/feed/entry/atom?entryid=e76face0-4998-4210-8d2a-c650d1f1255a&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361299491/feed/entrycomments/blogpost_at_1389361473036/atom?lang=en_us" thr:count="0"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361299491/feed/entryrecommendations/e76face0-4998-4210-8d2a-c650d1f1255a/atom?lang=en_us"/>
+      <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361299491/api/entrycomments/e76face0-4998-4210-8d2a-c650d1f1255a?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361299491/api/recommend/entries/e76face0-4998-4210-8d2a-c650d1f1255a?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-01-10T08:44:31-05:00</published>
+      <updated>2014-01-10T08:44:31-05:00</updated>
+         <content type="html">BlogPost Content at 1389361473036</content>
+         <summary type="html">BlogPost Content at 1389361473036</summary>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-7f43db76-cfbd-4827-89ca-af71ce6949a7</id>
+        <title type="text">Blog Updated at 1389361348095</title>
+        <link type="application/atom+xml" rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361299491/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361299491?lang=en_us"/>
+        <updated>2014-01-10T08:44:55-05:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+
+    <entry xml:base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361299491/entry/blogpost_at_1389361391637" xml:lang="en-GB" >
+      <id>urn:lsid:ibm.com:blogs:entry-4e2bb7c1-edb6-452c-9bbc-ff20cd1a3cff</id>
+      <title type="text">BlogPost at 1389361391637</title>
+      <author>
+        <name>Frank Adams</name>
+                <email>fadams@renovations.com</email>
+                <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+                <snx:userState>active</snx:userState>
+              </author>
+            <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361299491/entry/blogpost_at_1389361391637?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361299491/feed/entry/atom?entryid=4e2bb7c1-edb6-452c-9bbc-ff20cd1a3cff&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361299491/feed/entrycomments/blogpost_at_1389361391637/atom?lang=en_us" thr:count="0"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361299491/feed/entryrecommendations/4e2bb7c1-edb6-452c-9bbc-ff20cd1a3cff/atom?lang=en_us"/>
+      <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361299491/api/entrycomments/4e2bb7c1-edb6-452c-9bbc-ff20cd1a3cff?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361299491/api/recommend/entries/4e2bb7c1-edb6-452c-9bbc-ff20cd1a3cff?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-01-10T08:43:09-05:00</published>
+      <updated>2014-01-10T08:43:09-05:00</updated>
+         <content type="html">BlogPost Content at 1389361391637</content>
+         <summary type="html">BlogPost Content at 1389361391637</summary>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-7f43db76-cfbd-4827-89ca-af71ce6949a7</id>
+        <title type="text">Blog Updated at 1389361348095</title>
+        <link type="application/atom+xml" rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361299491/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361299491?lang=en_us"/>
+        <updated>2014-01-10T08:44:55-05:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+
+    <entry xml:base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361299491/entry/blogpost_at_1389361370329" xml:lang="en-GB" >
+      <id>urn:lsid:ibm.com:blogs:entry-113deb65-8c26-4200-b7a0-af9266486681</id>
+      <title type="text">BlogPost at 1389361370329</title>
+      <author>
+        <name>Frank Adams</name>
+                <email>fadams@renovations.com</email>
+                <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+                <snx:userState>active</snx:userState>
+              </author>
+            <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361299491/entry/blogpost_at_1389361370329?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361299491/feed/entry/atom?entryid=113deb65-8c26-4200-b7a0-af9266486681&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361299491/feed/entrycomments/blogpost_at_1389361370329/atom?lang=en_us" thr:count="0"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361299491/feed/entryrecommendations/113deb65-8c26-4200-b7a0-af9266486681/atom?lang=en_us"/>
+      <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361299491/api/entrycomments/113deb65-8c26-4200-b7a0-af9266486681?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361299491/api/recommend/entries/113deb65-8c26-4200-b7a0-af9266486681?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-01-10T08:42:49-05:00</published>
+      <updated>2014-01-10T08:42:49-05:00</updated>
+         <content type="html">BlogPost Content at 1389361370329</content>
+         <summary type="html">BlogPost Content at 1389361370329</summary>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-7f43db76-cfbd-4827-89ca-af71ce6949a7</id>
+        <title type="text">Blog Updated at 1389361348095</title>
+        <link type="application/atom+xml" rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361299491/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361299491?lang=en_us"/>
+        <updated>2014-01-10T08:44:55-05:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+
+    <entry xml:base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361299491/entry/blogpost_at_1389361325175" xml:lang="en-GB" >
+      <id>urn:lsid:ibm.com:blogs:entry-b9946399-df19-44d6-b757-da544314820e</id>
+      <title type="text">BlogPost at 1389361325175</title>
+      <author>
+        <name>Frank Adams</name>
+                <email>fadams@renovations.com</email>
+                <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+                <snx:userState>active</snx:userState>
+              </author>
+            <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361299491/entry/blogpost_at_1389361325175?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361299491/feed/entry/atom?entryid=b9946399-df19-44d6-b757-da544314820e&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361299491/feed/entrycomments/blogpost_at_1389361325175/atom?lang=en_us" thr:count="1"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361299491/feed/entryrecommendations/b9946399-df19-44d6-b757-da544314820e/atom?lang=en_us"/>
+      <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361299491/api/entrycomments/b9946399-df19-44d6-b757-da544314820e?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361299491/api/recommend/entries/b9946399-df19-44d6-b757-da544314820e?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-01-10T08:42:03-05:00</published>
+      <updated>2014-01-10T08:42:03-05:00</updated>
+         <content type="html">BlogPost Content at 1389361325175</content>
+         <summary type="html">BlogPost Content at 1389361325175</summary>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">1</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-7f43db76-cfbd-4827-89ca-af71ce6949a7</id>
+        <title type="text">Blog Updated at 1389361348095</title>
+        <link type="application/atom+xml" rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361299491/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361299491?lang=en_us"/>
+        <updated>2014-01-10T08:44:55-05:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+
+    <entry xml:base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361203277/entry/blogpost_at_1389361252687" xml:lang="en-GB" >
+      <id>urn:lsid:ibm.com:blogs:entry-85f20b7f-68eb-4be0-8379-d20527b2ca89</id>
+      <title type="text">BlogPost at 1389361252687</title>
+      <author>
+        <name>Frank Adams</name>
+                <email>fadams@renovations.com</email>
+                <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+                <snx:userState>active</snx:userState>
+              </author>
+            <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361203277/entry/blogpost_at_1389361252687?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361203277/feed/entry/atom?entryid=85f20b7f-68eb-4be0-8379-d20527b2ca89&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361203277/feed/entrycomments/blogpost_at_1389361252687/atom?lang=en_us" thr:count="0"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361203277/feed/entryrecommendations/85f20b7f-68eb-4be0-8379-d20527b2ca89/atom?lang=en_us"/>
+      <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361203277/api/entrycomments/85f20b7f-68eb-4be0-8379-d20527b2ca89?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361203277/api/recommend/entries/85f20b7f-68eb-4be0-8379-d20527b2ca89?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-01-10T08:40:50-05:00</published>
+      <updated>2014-01-10T08:40:50-05:00</updated>
+         <content type="html">BlogPost Content at 1389361252687</content>
+         <summary type="html">BlogPost Content at 1389361252687</summary>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-8f634037-9d45-43d1-8806-8f1b954fcfa8</id>
+        <title type="text">Blog at 1389361203277</title>
+        <link type="application/atom+xml" rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361203277/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361203277?lang=en_us"/>
+        <updated>2014-01-10T08:40:50-05:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+
+    <entry xml:base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361203277/entry/blogpost_at_1389361226547" xml:lang="en-GB" >
+      <id>urn:lsid:ibm.com:blogs:entry-61275fc7-4edc-4381-87bd-2d2950d213b8</id>
+      <title type="text">BlogPost at 1389361226547</title>
+      <author>
+        <name>Frank Adams</name>
+                <email>fadams@renovations.com</email>
+                <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+                <snx:userState>active</snx:userState>
+              </author>
+            <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361203277/entry/blogpost_at_1389361226547?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361203277/feed/entry/atom?entryid=61275fc7-4edc-4381-87bd-2d2950d213b8&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361203277/feed/entrycomments/blogpost_at_1389361226547/atom?lang=en_us" thr:count="1"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361203277/feed/entryrecommendations/61275fc7-4edc-4381-87bd-2d2950d213b8/atom?lang=en_us"/>
+      <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361203277/api/entrycomments/61275fc7-4edc-4381-87bd-2d2950d213b8?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361203277/api/recommend/entries/61275fc7-4edc-4381-87bd-2d2950d213b8?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-01-10T08:40:24-05:00</published>
+      <updated>2014-01-10T08:40:24-05:00</updated>
+         <content type="html">BlogPost Content at 1389361226547</content>
+         <summary type="html">BlogPost Content at 1389361226547</summary>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">1</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-8f634037-9d45-43d1-8806-8f1b954fcfa8</id>
+        <title type="text">Blog at 1389361203277</title>
+        <link type="application/atom+xml" rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361203277/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361203277?lang=en_us"/>
+        <updated>2014-01-10T08:40:50-05:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+
+    <entry xml:base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361088213/entry/blogpost_at_1389361180340" xml:lang="en-GB" >
+      <id>urn:lsid:ibm.com:blogs:entry-dc20d345-dbc9-46ef-9bc5-bd36b9f323ff</id>
+      <title type="text">BlogPost at 1389361180340</title>
+      <author>
+        <name>Frank Adams</name>
+                <email>fadams@renovations.com</email>
+                <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+                <snx:userState>active</snx:userState>
+              </author>
+            <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361088213/entry/blogpost_at_1389361180340?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361088213/feed/entry/atom?entryid=dc20d345-dbc9-46ef-9bc5-bd36b9f323ff&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361088213/feed/entrycomments/blogpost_at_1389361180340/atom?lang=en_us" thr:count="0"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361088213/feed/entryrecommendations/dc20d345-dbc9-46ef-9bc5-bd36b9f323ff/atom?lang=en_us"/>
+      <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361088213/api/entrycomments/dc20d345-dbc9-46ef-9bc5-bd36b9f323ff?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361088213/api/recommend/entries/dc20d345-dbc9-46ef-9bc5-bd36b9f323ff?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-01-10T08:39:38-05:00</published>
+      <updated>2014-01-10T08:39:38-05:00</updated>
+         <content type="html">BlogPost Content at 1389361180340</content>
+         <summary type="html">BlogPost Content at 1389361180340</summary>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-4bedbbf6-7edb-481a-a344-3c9588ce6c07</id>
+        <title type="text">Blog at 1389361088213</title>
+        <link type="application/atom+xml" rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361088213/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361088213?lang=en_us"/>
+        <updated>2014-01-10T08:39:38-05:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+
+    <entry xml:base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361088213/entry/blogpost_at_1389361156247" xml:lang="en-GB" >
+      <id>urn:lsid:ibm.com:blogs:entry-0cf55991-cbae-4592-b6c2-c34328d7fbb0</id>
+      <title type="text">BlogPost at 1389361156247</title>
+      <author>
+        <name>Frank Adams</name>
+                <email>fadams@renovations.com</email>
+                <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+                <snx:userState>active</snx:userState>
+              </author>
+            <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361088213/entry/blogpost_at_1389361156247?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361088213/feed/entry/atom?entryid=0cf55991-cbae-4592-b6c2-c34328d7fbb0&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361088213/feed/entrycomments/blogpost_at_1389361156247/atom?lang=en_us" thr:count="1"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361088213/feed/entryrecommendations/0cf55991-cbae-4592-b6c2-c34328d7fbb0/atom?lang=en_us"/>
+      <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361088213/api/entrycomments/0cf55991-cbae-4592-b6c2-c34328d7fbb0?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361088213/api/recommend/entries/0cf55991-cbae-4592-b6c2-c34328d7fbb0?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-01-10T08:39:14-05:00</published>
+      <updated>2014-01-10T08:39:14-05:00</updated>
+         <content type="html">BlogPost Content at 1389361156247</content>
+         <summary type="html">BlogPost Content at 1389361156247</summary>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">1</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-4bedbbf6-7edb-481a-a344-3c9588ce6c07</id>
+        <title type="text">Blog at 1389361088213</title>
+        <link type="application/atom+xml" rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361088213/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361088213?lang=en_us"/>
+        <updated>2014-01-10T08:39:38-05:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+
+    <entry xml:base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361088213/entry/blogpost_at_1389361135016" xml:lang="en-GB" >
+      <id>urn:lsid:ibm.com:blogs:entry-6b7d2bea-c920-4cdb-877a-0412646c6692</id>
+      <title type="text">BlogPost at 1389361135016</title>
+      <author>
+        <name>Frank Adams</name>
+                <email>fadams@renovations.com</email>
+                <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+                <snx:userState>active</snx:userState>
+              </author>
+            <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361088213/entry/blogpost_at_1389361135016?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361088213/feed/entry/atom?entryid=6b7d2bea-c920-4cdb-877a-0412646c6692&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361088213/feed/entrycomments/blogpost_at_1389361135016/atom?lang=en_us" thr:count="1"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361088213/feed/entryrecommendations/6b7d2bea-c920-4cdb-877a-0412646c6692/atom?lang=en_us"/>
+      <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361088213/api/entrycomments/6b7d2bea-c920-4cdb-877a-0412646c6692?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361088213/api/recommend/entries/6b7d2bea-c920-4cdb-877a-0412646c6692?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-01-10T08:38:53-05:00</published>
+      <updated>2014-01-10T08:38:53-05:00</updated>
+         <content type="html">BlogPost Content at 1389361135016</content>
+         <summary type="html">BlogPost Content at 1389361135016</summary>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">1</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-4bedbbf6-7edb-481a-a344-3c9588ce6c07</id>
+        <title type="text">Blog at 1389361088213</title>
+        <link type="application/atom+xml" rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361088213/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361088213?lang=en_us"/>
+        <updated>2014-01-10T08:39:38-05:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+
+    <entry xml:base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361088213/entry/blogpost_at_1389361112447" xml:lang="en-GB" >
+      <id>urn:lsid:ibm.com:blogs:entry-037a79fc-d5b1-4207-91e3-2bd97abcd4d4</id>
+      <title type="text">BlogPost at 1389361112447</title>
+      <author>
+        <name>Frank Adams</name>
+                <email>fadams@renovations.com</email>
+                <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+                <snx:userState>active</snx:userState>
+              </author>
+            <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361088213/entry/blogpost_at_1389361112447?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361088213/feed/entry/atom?entryid=037a79fc-d5b1-4207-91e3-2bd97abcd4d4&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361088213/feed/entrycomments/blogpost_at_1389361112447/atom?lang=en_us" thr:count="0"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361088213/feed/entryrecommendations/037a79fc-d5b1-4207-91e3-2bd97abcd4d4/atom?lang=en_us"/>
+      <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361088213/api/entrycomments/037a79fc-d5b1-4207-91e3-2bd97abcd4d4?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361088213/api/recommend/entries/037a79fc-d5b1-4207-91e3-2bd97abcd4d4?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-01-10T08:38:30-05:00</published>
+      <updated>2014-01-10T08:38:30-05:00</updated>
+         <content type="html">BlogPost Content at 1389361112447</content>
+         <summary type="html">BlogPost Content at 1389361112447</summary>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-4bedbbf6-7edb-481a-a344-3c9588ce6c07</id>
+        <title type="text">Blog at 1389361088213</title>
+        <link type="application/atom+xml" rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361088213/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389361088213?lang=en_us"/>
+        <updated>2014-01-10T08:39:38-05:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+
+    <entry xml:base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389351413944/entry/test_blog_post1389351440765" xml:lang="en-US" >
+      <id>urn:lsid:ibm.com:blogs:entry-35bc6ef4-9a37-4785-9980-7715cd29a83d</id>
+      <title type="text">Test Blog Post1389351440765</title>
+      <author>
+        <name>Frank Adams</name>
+                <email>fadams@renovations.com</email>
+                <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+                <snx:userState>active</snx:userState>
+              </author>
+            <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389351413944/entry/test_blog_post1389351440765?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389351413944/feed/entry/atom?entryid=35bc6ef4-9a37-4785-9980-7715cd29a83d&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389351413944/feed/entrycomments/test_blog_post1389351440765/atom?lang=en_us" thr:count="1"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389351413944/feed/entryrecommendations/35bc6ef4-9a37-4785-9980-7715cd29a83d/atom?lang=en_us"/>
+      <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389351413944/api/entrycomments/35bc6ef4-9a37-4785-9980-7715cd29a83d?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389351413944/api/recommend/entries/35bc6ef4-9a37-4785-9980-7715cd29a83d?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-01-10T05:57:18-05:00</published>
+      <updated>2014-01-10T05:57:18-05:00</updated>
+         <content type="html">Test Blog Post Content</content>
+         <summary type="html">Test Blog Post Content</summary>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">1</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-9ab17d77-6182-4f4e-8447-e81b3764ce32</id>
+        <title type="text">Test Blog1389351413944</title>
+        <link type="application/atom+xml" rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389351413944/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389351413944?lang=en_us"/>
+        <updated>2014-01-10T05:57:30-05:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+
+    <entry xml:base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346304403/entry/blogpost_at_1389346500899" xml:lang="en-GB" >
+      <id>urn:lsid:ibm.com:blogs:entry-1aa88c60-84ec-468c-b5f0-d8b186038484</id>
+      <title type="text">BlogPost at 1389346500899</title>
+      <author>
+        <name>Frank Adams</name>
+                <email>fadams@renovations.com</email>
+                <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+                <snx:userState>active</snx:userState>
+              </author>
+            <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346304403/entry/blogpost_at_1389346500899?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346304403/feed/entry/atom?entryid=1aa88c60-84ec-468c-b5f0-d8b186038484&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346304403/feed/entrycomments/blogpost_at_1389346500899/atom?lang=en_us" thr:count="0"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346304403/feed/entryrecommendations/1aa88c60-84ec-468c-b5f0-d8b186038484/atom?lang=en_us"/>
+      <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346304403/api/entrycomments/1aa88c60-84ec-468c-b5f0-d8b186038484?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346304403/api/recommend/entries/1aa88c60-84ec-468c-b5f0-d8b186038484?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-01-10T04:34:59-05:00</published>
+      <updated>2014-01-10T04:34:59-05:00</updated>
+         <content type="html">BlogPost Content at 1389346500899</content>
+         <summary type="html">BlogPost Content at 1389346500899</summary>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-60e9e865-9bd4-4485-999b-3a2a3e8ef6a2</id>
+        <title type="text">Blog Updated at 1389346352381</title>
+        <link type="application/atom+xml" rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346304403/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346304403?lang=en_us"/>
+        <updated>2014-01-10T04:34:59-05:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+
+    <entry xml:base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346304403/entry/blogpost_at_1389346479854" xml:lang="en-GB" >
+      <id>urn:lsid:ibm.com:blogs:entry-2405bb78-7ef2-4959-b40e-412988ff6023</id>
+      <title type="text">BlogPost at 1389346479854</title>
+      <author>
+        <name>Frank Adams</name>
+                <email>fadams@renovations.com</email>
+                <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+                <snx:userState>active</snx:userState>
+              </author>
+            <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346304403/entry/blogpost_at_1389346479854?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346304403/feed/entry/atom?entryid=2405bb78-7ef2-4959-b40e-412988ff6023&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346304403/feed/entrycomments/blogpost_at_1389346479854/atom?lang=en_us" thr:count="0"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346304403/feed/entryrecommendations/2405bb78-7ef2-4959-b40e-412988ff6023/atom?lang=en_us"/>
+      <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346304403/api/entrycomments/2405bb78-7ef2-4959-b40e-412988ff6023?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346304403/api/recommend/entries/2405bb78-7ef2-4959-b40e-412988ff6023?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-01-10T04:34:38-05:00</published>
+      <updated>2014-01-10T04:34:38-05:00</updated>
+         <content type="html">BlogPost Content at 1389346479854</content>
+         <summary type="html">BlogPost Content at 1389346479854</summary>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-60e9e865-9bd4-4485-999b-3a2a3e8ef6a2</id>
+        <title type="text">Blog Updated at 1389346352381</title>
+        <link type="application/atom+xml" rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346304403/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346304403?lang=en_us"/>
+        <updated>2014-01-10T04:34:59-05:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+
+    <entry xml:base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346304403/entry/blogpost_at_1389346396928" xml:lang="en-GB" >
+      <id>urn:lsid:ibm.com:blogs:entry-3019c9c2-b8ec-4882-ab19-4474134f8f13</id>
+      <title type="text">BlogPost at 1389346396928</title>
+      <author>
+        <name>Frank Adams</name>
+                <email>fadams@renovations.com</email>
+                <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+                <snx:userState>active</snx:userState>
+              </author>
+            <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346304403/entry/blogpost_at_1389346396928?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346304403/feed/entry/atom?entryid=3019c9c2-b8ec-4882-ab19-4474134f8f13&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346304403/feed/entrycomments/blogpost_at_1389346396928/atom?lang=en_us" thr:count="0"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346304403/feed/entryrecommendations/3019c9c2-b8ec-4882-ab19-4474134f8f13/atom?lang=en_us"/>
+      <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346304403/api/entrycomments/3019c9c2-b8ec-4882-ab19-4474134f8f13?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346304403/api/recommend/entries/3019c9c2-b8ec-4882-ab19-4474134f8f13?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-01-10T04:33:15-05:00</published>
+      <updated>2014-01-10T04:33:15-05:00</updated>
+         <content type="html">BlogPost Content at 1389346396928</content>
+         <summary type="html">BlogPost Content at 1389346396928</summary>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-60e9e865-9bd4-4485-999b-3a2a3e8ef6a2</id>
+        <title type="text">Blog Updated at 1389346352381</title>
+        <link type="application/atom+xml" rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346304403/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346304403?lang=en_us"/>
+        <updated>2014-01-10T04:34:59-05:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+
+    <entry xml:base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346304403/entry/blogpost_at_1389346374924" xml:lang="en-GB" >
+      <id>urn:lsid:ibm.com:blogs:entry-a16381ee-57b4-4a77-ac4e-365eb5a03114</id>
+      <title type="text">BlogPost at 1389346374924</title>
+      <author>
+        <name>Frank Adams</name>
+                <email>fadams@renovations.com</email>
+                <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+                <snx:userState>active</snx:userState>
+              </author>
+            <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346304403/entry/blogpost_at_1389346374924?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346304403/feed/entry/atom?entryid=a16381ee-57b4-4a77-ac4e-365eb5a03114&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346304403/feed/entrycomments/blogpost_at_1389346374924/atom?lang=en_us" thr:count="0"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346304403/feed/entryrecommendations/a16381ee-57b4-4a77-ac4e-365eb5a03114/atom?lang=en_us"/>
+      <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346304403/api/entrycomments/a16381ee-57b4-4a77-ac4e-365eb5a03114?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346304403/api/recommend/entries/a16381ee-57b4-4a77-ac4e-365eb5a03114?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-01-10T04:32:53-05:00</published>
+      <updated>2014-01-10T04:32:53-05:00</updated>
+         <content type="html">BlogPost Content at 1389346374924</content>
+         <summary type="html">BlogPost Content at 1389346374924</summary>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-60e9e865-9bd4-4485-999b-3a2a3e8ef6a2</id>
+        <title type="text">Blog Updated at 1389346352381</title>
+        <link type="application/atom+xml" rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346304403/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346304403?lang=en_us"/>
+        <updated>2014-01-10T04:34:59-05:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+
+    <entry xml:base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346304403/entry/blogpost_at_1389346330950" xml:lang="en-GB" >
+      <id>urn:lsid:ibm.com:blogs:entry-81a909c3-6f9b-469f-b92b-dbc60d7d1fbd</id>
+      <title type="text">BlogPost at 1389346330950</title>
+      <author>
+        <name>Frank Adams</name>
+                <email>fadams@renovations.com</email>
+                <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+                <snx:userState>active</snx:userState>
+              </author>
+            <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346304403/entry/blogpost_at_1389346330950?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346304403/feed/entry/atom?entryid=81a909c3-6f9b-469f-b92b-dbc60d7d1fbd&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346304403/feed/entrycomments/blogpost_at_1389346330950/atom?lang=en_us" thr:count="1"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346304403/feed/entryrecommendations/81a909c3-6f9b-469f-b92b-dbc60d7d1fbd/atom?lang=en_us"/>
+      <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346304403/api/entrycomments/81a909c3-6f9b-469f-b92b-dbc60d7d1fbd?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346304403/api/recommend/entries/81a909c3-6f9b-469f-b92b-dbc60d7d1fbd?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-01-10T04:32:09-05:00</published>
+      <updated>2014-01-10T04:32:09-05:00</updated>
+         <content type="html">BlogPost Content at 1389346330950</content>
+         <summary type="html">BlogPost Content at 1389346330950</summary>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">1</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-60e9e865-9bd4-4485-999b-3a2a3e8ef6a2</id>
+        <title type="text">Blog Updated at 1389346352381</title>
+        <link type="application/atom+xml" rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346304403/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346304403?lang=en_us"/>
+        <updated>2014-01-10T04:34:59-05:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+
+    <entry xml:base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346207012/entry/blogpost_at_1389346257100" xml:lang="en-GB" >
+      <id>urn:lsid:ibm.com:blogs:entry-1f6033ae-914e-48bd-8872-aaceb4ccf904</id>
+      <title type="text">BlogPost at 1389346257100</title>
+      <author>
+        <name>Frank Adams</name>
+                <email>fadams@renovations.com</email>
+                <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+                <snx:userState>active</snx:userState>
+              </author>
+            <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346207012/entry/blogpost_at_1389346257100?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346207012/feed/entry/atom?entryid=1f6033ae-914e-48bd-8872-aaceb4ccf904&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346207012/feed/entrycomments/blogpost_at_1389346257100/atom?lang=en_us" thr:count="0"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346207012/feed/entryrecommendations/1f6033ae-914e-48bd-8872-aaceb4ccf904/atom?lang=en_us"/>
+      <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346207012/api/entrycomments/1f6033ae-914e-48bd-8872-aaceb4ccf904?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346207012/api/recommend/entries/1f6033ae-914e-48bd-8872-aaceb4ccf904?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-01-10T04:30:55-05:00</published>
+      <updated>2014-01-10T04:30:55-05:00</updated>
+         <content type="html">BlogPost Content at 1389346257100</content>
+         <summary type="html">BlogPost Content at 1389346257100</summary>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-c342aee0-74e5-4e7d-8ffa-d9ce46d04809</id>
+        <title type="text">Blog at 1389346207012</title>
+        <link type="application/atom+xml" rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346207012/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346207012?lang=en_us"/>
+        <updated>2014-01-10T04:30:55-05:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+
+    <entry xml:base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346207012/entry/blogpost_at_1389346231593" xml:lang="en-GB" >
+      <id>urn:lsid:ibm.com:blogs:entry-eb38162f-fa62-41c1-9108-3f0136a83f73</id>
+      <title type="text">BlogPost at 1389346231593</title>
+      <author>
+        <name>Frank Adams</name>
+                <email>fadams@renovations.com</email>
+                <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+                <snx:userState>active</snx:userState>
+              </author>
+            <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346207012/entry/blogpost_at_1389346231593?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346207012/feed/entry/atom?entryid=eb38162f-fa62-41c1-9108-3f0136a83f73&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346207012/feed/entrycomments/blogpost_at_1389346231593/atom?lang=en_us" thr:count="1"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346207012/feed/entryrecommendations/eb38162f-fa62-41c1-9108-3f0136a83f73/atom?lang=en_us"/>
+      <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346207012/api/entrycomments/eb38162f-fa62-41c1-9108-3f0136a83f73?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346207012/api/recommend/entries/eb38162f-fa62-41c1-9108-3f0136a83f73?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-01-10T04:30:29-05:00</published>
+      <updated>2014-01-10T04:30:29-05:00</updated>
+         <content type="html">BlogPost Content at 1389346231593</content>
+         <summary type="html">BlogPost Content at 1389346231593</summary>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">1</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-c342aee0-74e5-4e7d-8ffa-d9ce46d04809</id>
+        <title type="text">Blog at 1389346207012</title>
+        <link type="application/atom+xml" rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346207012/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346207012?lang=en_us"/>
+        <updated>2014-01-10T04:30:55-05:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+
+    <entry xml:base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346092902/entry/blogpost_at_1389346182493" xml:lang="en-GB" >
+      <id>urn:lsid:ibm.com:blogs:entry-478dd856-8169-49cf-bd7d-37c23a1f27ce</id>
+      <title type="text">BlogPost at 1389346182493</title>
+      <author>
+        <name>Frank Adams</name>
+                <email>fadams@renovations.com</email>
+                <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+                <snx:userState>active</snx:userState>
+              </author>
+            <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346092902/entry/blogpost_at_1389346182493?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346092902/feed/entry/atom?entryid=478dd856-8169-49cf-bd7d-37c23a1f27ce&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346092902/feed/entrycomments/blogpost_at_1389346182493/atom?lang=en_us" thr:count="0"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346092902/feed/entryrecommendations/478dd856-8169-49cf-bd7d-37c23a1f27ce/atom?lang=en_us"/>
+      <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346092902/api/entrycomments/478dd856-8169-49cf-bd7d-37c23a1f27ce?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346092902/api/recommend/entries/478dd856-8169-49cf-bd7d-37c23a1f27ce?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-01-10T04:29:40-05:00</published>
+      <updated>2014-01-10T04:29:40-05:00</updated>
+         <content type="html">BlogPost Content at 1389346182493</content>
+         <summary type="html">BlogPost Content at 1389346182493</summary>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-ee721ea4-935c-47cb-937a-a1cfd4247f0a</id>
+        <title type="text">Blog at 1389346092902</title>
+        <link type="application/atom+xml" rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346092902/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346092902?lang=en_us"/>
+        <updated>2014-01-10T04:29:40-05:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+
+    <entry xml:base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346092902/entry/blogpost_at_1389346160615" xml:lang="en-GB" >
+      <id>urn:lsid:ibm.com:blogs:entry-5e954f6a-77ab-43cf-8cd9-680cf1f444ed</id>
+      <title type="text">BlogPost at 1389346160615</title>
+      <author>
+        <name>Frank Adams</name>
+                <email>fadams@renovations.com</email>
+                <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+                <snx:userState>active</snx:userState>
+              </author>
+            <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346092902/entry/blogpost_at_1389346160615?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346092902/feed/entry/atom?entryid=5e954f6a-77ab-43cf-8cd9-680cf1f444ed&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346092902/feed/entrycomments/blogpost_at_1389346160615/atom?lang=en_us" thr:count="1"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346092902/feed/entryrecommendations/5e954f6a-77ab-43cf-8cd9-680cf1f444ed/atom?lang=en_us"/>
+      <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346092902/api/entrycomments/5e954f6a-77ab-43cf-8cd9-680cf1f444ed?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346092902/api/recommend/entries/5e954f6a-77ab-43cf-8cd9-680cf1f444ed?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-01-10T04:29:18-05:00</published>
+      <updated>2014-01-10T04:29:18-05:00</updated>
+         <content type="html">BlogPost Content at 1389346160615</content>
+         <summary type="html">BlogPost Content at 1389346160615</summary>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">1</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-ee721ea4-935c-47cb-937a-a1cfd4247f0a</id>
+        <title type="text">Blog at 1389346092902</title>
+        <link type="application/atom+xml" rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346092902/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346092902?lang=en_us"/>
+        <updated>2014-01-10T04:29:40-05:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+
+    <entry xml:base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346092902/entry/blogpost_at_1389346139431" xml:lang="en-GB" >
+      <id>urn:lsid:ibm.com:blogs:entry-488350ae-52f9-4e50-96bd-97b9fdb855fc</id>
+      <title type="text">BlogPost at 1389346139431</title>
+      <author>
+        <name>Frank Adams</name>
+                <email>fadams@renovations.com</email>
+                <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+                <snx:userState>active</snx:userState>
+              </author>
+            <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346092902/entry/blogpost_at_1389346139431?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346092902/feed/entry/atom?entryid=488350ae-52f9-4e50-96bd-97b9fdb855fc&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346092902/feed/entrycomments/blogpost_at_1389346139431/atom?lang=en_us" thr:count="1"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346092902/feed/entryrecommendations/488350ae-52f9-4e50-96bd-97b9fdb855fc/atom?lang=en_us"/>
+      <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346092902/api/entrycomments/488350ae-52f9-4e50-96bd-97b9fdb855fc?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346092902/api/recommend/entries/488350ae-52f9-4e50-96bd-97b9fdb855fc?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-01-10T04:28:57-05:00</published>
+      <updated>2014-01-10T04:28:57-05:00</updated>
+         <content type="html">BlogPost Content at 1389346139431</content>
+         <summary type="html">BlogPost Content at 1389346139431</summary>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">1</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-ee721ea4-935c-47cb-937a-a1cfd4247f0a</id>
+        <title type="text">Blog at 1389346092902</title>
+        <link type="application/atom+xml" rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346092902/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346092902?lang=en_us"/>
+        <updated>2014-01-10T04:29:40-05:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+
+    <entry xml:base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346092902/entry/blogpost_at_1389346116808" xml:lang="en-GB" >
+      <id>urn:lsid:ibm.com:blogs:entry-dd4511fc-73b1-460a-9456-8f8394876719</id>
+      <title type="text">BlogPost at 1389346116808</title>
+      <author>
+        <name>Frank Adams</name>
+                <email>fadams@renovations.com</email>
+                <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+                <snx:userState>active</snx:userState>
+              </author>
+            <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346092902/entry/blogpost_at_1389346116808?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346092902/feed/entry/atom?entryid=dd4511fc-73b1-460a-9456-8f8394876719&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346092902/feed/entrycomments/blogpost_at_1389346116808/atom?lang=en_us" thr:count="0"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346092902/feed/entryrecommendations/dd4511fc-73b1-460a-9456-8f8394876719/atom?lang=en_us"/>
+      <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346092902/api/entrycomments/dd4511fc-73b1-460a-9456-8f8394876719?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346092902/api/recommend/entries/dd4511fc-73b1-460a-9456-8f8394876719?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-01-10T04:28:35-05:00</published>
+      <updated>2014-01-10T04:28:35-05:00</updated>
+         <content type="html">BlogPost Content at 1389346116808</content>
+         <summary type="html">BlogPost Content at 1389346116808</summary>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-ee721ea4-935c-47cb-937a-a1cfd4247f0a</id>
+        <title type="text">Blog at 1389346092902</title>
+        <link type="application/atom+xml" rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346092902/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389346092902?lang=en_us"/>
+        <updated>2014-01-10T04:29:40-05:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+
+    <entry xml:base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389336506263/entry/test_blog_post1389336532507" xml:lang="en-US" >
+      <id>urn:lsid:ibm.com:blogs:entry-3cd9137a-5193-4fc3-94a0-b274e717455e</id>
+      <title type="text">Test Blog Post1389336532507</title>
+      <author>
+        <name>Frank Adams</name>
+                <email>fadams@renovations.com</email>
+                <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+                <snx:userState>active</snx:userState>
+              </author>
+            <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389336506263/entry/test_blog_post1389336532507?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389336506263/feed/entry/atom?entryid=3cd9137a-5193-4fc3-94a0-b274e717455e&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389336506263/feed/entrycomments/test_blog_post1389336532507/atom?lang=en_us" thr:count="1"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389336506263/feed/entryrecommendations/3cd9137a-5193-4fc3-94a0-b274e717455e/atom?lang=en_us"/>
+      <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389336506263/api/entrycomments/3cd9137a-5193-4fc3-94a0-b274e717455e?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389336506263/api/recommend/entries/3cd9137a-5193-4fc3-94a0-b274e717455e?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-01-10T01:48:50-05:00</published>
+      <updated>2014-01-10T01:48:50-05:00</updated>
+         <content type="html">Test Blog Post Content</content>
+         <summary type="html">Test Blog Post Content</summary>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">1</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-00d3e53d-7da3-4c0c-986e-2b1e0e165c55</id>
+        <title type="text">Test Blog1389336506263</title>
+        <link type="application/atom+xml" rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389336506263/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389336506263?lang=en_us"/>
+        <updated>2014-01-10T01:49:02-05:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+
+    <entry xml:base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331276246/entry/blogpost_at_1389331472501" xml:lang="en-GB" >
+      <id>urn:lsid:ibm.com:blogs:entry-ae60a8b4-17a3-4679-aa39-790e79dec0ad</id>
+      <title type="text">BlogPost at 1389331472501</title>
+      <author>
+        <name>Frank Adams</name>
+                <email>fadams@renovations.com</email>
+                <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+                <snx:userState>active</snx:userState>
+              </author>
+            <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331276246/entry/blogpost_at_1389331472501?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331276246/feed/entry/atom?entryid=ae60a8b4-17a3-4679-aa39-790e79dec0ad&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331276246/feed/entrycomments/blogpost_at_1389331472501/atom?lang=en_us" thr:count="0"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331276246/feed/entryrecommendations/ae60a8b4-17a3-4679-aa39-790e79dec0ad/atom?lang=en_us"/>
+      <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331276246/api/entrycomments/ae60a8b4-17a3-4679-aa39-790e79dec0ad?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331276246/api/recommend/entries/ae60a8b4-17a3-4679-aa39-790e79dec0ad?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-01-10T00:24:30-05:00</published>
+      <updated>2014-01-10T00:24:30-05:00</updated>
+         <content type="html">BlogPost Content at 1389331472501</content>
+         <summary type="html">BlogPost Content at 1389331472501</summary>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-aa8c27f7-5c45-4efc-a954-8a6c30dda967</id>
+        <title type="text">Blog Updated at 1389331324114</title>
+        <link type="application/atom+xml" rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331276246/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331276246?lang=en_us"/>
+        <updated>2014-01-10T00:24:31-05:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+
+    <entry xml:base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331276246/entry/blogpost_at_1389331451233" xml:lang="en-GB" >
+      <id>urn:lsid:ibm.com:blogs:entry-08a42bd9-71ca-4118-8687-429a9ced5c6a</id>
+      <title type="text">BlogPost at 1389331451233</title>
+      <author>
+        <name>Frank Adams</name>
+                <email>fadams@renovations.com</email>
+                <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+                <snx:userState>active</snx:userState>
+              </author>
+            <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331276246/entry/blogpost_at_1389331451233?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331276246/feed/entry/atom?entryid=08a42bd9-71ca-4118-8687-429a9ced5c6a&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331276246/feed/entrycomments/blogpost_at_1389331451233/atom?lang=en_us" thr:count="0"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331276246/feed/entryrecommendations/08a42bd9-71ca-4118-8687-429a9ced5c6a/atom?lang=en_us"/>
+      <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331276246/api/entrycomments/08a42bd9-71ca-4118-8687-429a9ced5c6a?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331276246/api/recommend/entries/08a42bd9-71ca-4118-8687-429a9ced5c6a?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-01-10T00:24:09-05:00</published>
+      <updated>2014-01-10T00:24:09-05:00</updated>
+         <content type="html">BlogPost Content at 1389331451233</content>
+         <summary type="html">BlogPost Content at 1389331451233</summary>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-aa8c27f7-5c45-4efc-a954-8a6c30dda967</id>
+        <title type="text">Blog Updated at 1389331324114</title>
+        <link type="application/atom+xml" rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331276246/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331276246?lang=en_us"/>
+        <updated>2014-01-10T00:24:31-05:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+
+    <entry xml:base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331276246/entry/blogpost_at_1389331369405" xml:lang="en-GB" >
+      <id>urn:lsid:ibm.com:blogs:entry-0b6dc3e6-cfb1-4df4-810c-12db41bbdf33</id>
+      <title type="text">BlogPost at 1389331369405</title>
+      <author>
+        <name>Frank Adams</name>
+                <email>fadams@renovations.com</email>
+                <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+                <snx:userState>active</snx:userState>
+              </author>
+            <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331276246/entry/blogpost_at_1389331369405?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331276246/feed/entry/atom?entryid=0b6dc3e6-cfb1-4df4-810c-12db41bbdf33&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331276246/feed/entrycomments/blogpost_at_1389331369405/atom?lang=en_us" thr:count="0"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331276246/feed/entryrecommendations/0b6dc3e6-cfb1-4df4-810c-12db41bbdf33/atom?lang=en_us"/>
+      <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331276246/api/entrycomments/0b6dc3e6-cfb1-4df4-810c-12db41bbdf33?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331276246/api/recommend/entries/0b6dc3e6-cfb1-4df4-810c-12db41bbdf33?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-01-10T00:22:47-05:00</published>
+      <updated>2014-01-10T00:22:47-05:00</updated>
+         <content type="html">BlogPost Content at 1389331369405</content>
+         <summary type="html">BlogPost Content at 1389331369405</summary>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-aa8c27f7-5c45-4efc-a954-8a6c30dda967</id>
+        <title type="text">Blog Updated at 1389331324114</title>
+        <link type="application/atom+xml" rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331276246/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331276246?lang=en_us"/>
+        <updated>2014-01-10T00:24:31-05:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+
+    <entry xml:base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331276246/entry/blogpost_at_1389331347615" xml:lang="en-GB" >
+      <id>urn:lsid:ibm.com:blogs:entry-f8d02642-6dd4-4f8f-834d-691f751537d9</id>
+      <title type="text">BlogPost at 1389331347615</title>
+      <author>
+        <name>Frank Adams</name>
+                <email>fadams@renovations.com</email>
+                <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+                <snx:userState>active</snx:userState>
+              </author>
+            <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331276246/entry/blogpost_at_1389331347615?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331276246/feed/entry/atom?entryid=f8d02642-6dd4-4f8f-834d-691f751537d9&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331276246/feed/entrycomments/blogpost_at_1389331347615/atom?lang=en_us" thr:count="0"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331276246/feed/entryrecommendations/f8d02642-6dd4-4f8f-834d-691f751537d9/atom?lang=en_us"/>
+      <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331276246/api/entrycomments/f8d02642-6dd4-4f8f-834d-691f751537d9?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331276246/api/recommend/entries/f8d02642-6dd4-4f8f-834d-691f751537d9?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-01-10T00:22:26-05:00</published>
+      <updated>2014-01-10T00:22:26-05:00</updated>
+         <content type="html">BlogPost Content at 1389331347615</content>
+         <summary type="html">BlogPost Content at 1389331347615</summary>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-aa8c27f7-5c45-4efc-a954-8a6c30dda967</id>
+        <title type="text">Blog Updated at 1389331324114</title>
+        <link type="application/atom+xml" rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331276246/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331276246?lang=en_us"/>
+        <updated>2014-01-10T00:24:31-05:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+
+    <entry xml:base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331276246/entry/blogpost_at_1389331303068" xml:lang="en-GB" >
+      <id>urn:lsid:ibm.com:blogs:entry-b3315dcc-064c-42ab-8356-9cbe1f9bb43e</id>
+      <title type="text">BlogPost at 1389331303068</title>
+      <author>
+        <name>Frank Adams</name>
+                <email>fadams@renovations.com</email>
+                <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+                <snx:userState>active</snx:userState>
+              </author>
+            <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331276246/entry/blogpost_at_1389331303068?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331276246/feed/entry/atom?entryid=b3315dcc-064c-42ab-8356-9cbe1f9bb43e&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331276246/feed/entrycomments/blogpost_at_1389331303068/atom?lang=en_us" thr:count="1"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331276246/feed/entryrecommendations/b3315dcc-064c-42ab-8356-9cbe1f9bb43e/atom?lang=en_us"/>
+      <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331276246/api/entrycomments/b3315dcc-064c-42ab-8356-9cbe1f9bb43e?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331276246/api/recommend/entries/b3315dcc-064c-42ab-8356-9cbe1f9bb43e?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-01-10T00:21:41-05:00</published>
+      <updated>2014-01-10T00:21:41-05:00</updated>
+         <content type="html">BlogPost Content at 1389331303068</content>
+         <summary type="html">BlogPost Content at 1389331303068</summary>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">1</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-aa8c27f7-5c45-4efc-a954-8a6c30dda967</id>
+        <title type="text">Blog Updated at 1389331324114</title>
+        <link type="application/atom+xml" rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331276246/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331276246?lang=en_us"/>
+        <updated>2014-01-10T00:24:31-05:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+
+    <entry xml:base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331182543/entry/blogpost_at_1389331231625" xml:lang="en-GB" >
+      <id>urn:lsid:ibm.com:blogs:entry-d32549d1-e114-492f-a977-fafec21ea137</id>
+      <title type="text">BlogPost at 1389331231625</title>
+      <author>
+        <name>Frank Adams</name>
+                <email>fadams@renovations.com</email>
+                <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+                <snx:userState>active</snx:userState>
+              </author>
+            <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331182543/entry/blogpost_at_1389331231625?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331182543/feed/entry/atom?entryid=d32549d1-e114-492f-a977-fafec21ea137&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331182543/feed/entrycomments/blogpost_at_1389331231625/atom?lang=en_us" thr:count="0"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331182543/feed/entryrecommendations/d32549d1-e114-492f-a977-fafec21ea137/atom?lang=en_us"/>
+      <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331182543/api/entrycomments/d32549d1-e114-492f-a977-fafec21ea137?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331182543/api/recommend/entries/d32549d1-e114-492f-a977-fafec21ea137?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-01-10T00:20:29-05:00</published>
+      <updated>2014-01-10T00:20:29-05:00</updated>
+         <content type="html">BlogPost Content at 1389331231625</content>
+         <summary type="html">BlogPost Content at 1389331231625</summary>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-f99fc5ef-f5cf-4b90-ad89-433ad3a41cd5</id>
+        <title type="text">Blog at 1389331182543</title>
+        <link type="application/atom+xml" rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331182543/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331182543?lang=en_us"/>
+        <updated>2014-01-10T00:20:29-05:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+
+    <entry xml:base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331182543/entry/blogpost_at_1389331205653" xml:lang="en-GB" >
+      <id>urn:lsid:ibm.com:blogs:entry-3b8c5747-fd64-4969-9d20-d163e01d85f3</id>
+      <title type="text">BlogPost at 1389331205653</title>
+      <author>
+        <name>Frank Adams</name>
+                <email>fadams@renovations.com</email>
+                <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+                <snx:userState>active</snx:userState>
+              </author>
+            <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331182543/entry/blogpost_at_1389331205653?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331182543/feed/entry/atom?entryid=3b8c5747-fd64-4969-9d20-d163e01d85f3&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331182543/feed/entrycomments/blogpost_at_1389331205653/atom?lang=en_us" thr:count="1"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331182543/feed/entryrecommendations/3b8c5747-fd64-4969-9d20-d163e01d85f3/atom?lang=en_us"/>
+      <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331182543/api/entrycomments/3b8c5747-fd64-4969-9d20-d163e01d85f3?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331182543/api/recommend/entries/3b8c5747-fd64-4969-9d20-d163e01d85f3?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-01-10T00:20:03-05:00</published>
+      <updated>2014-01-10T00:20:03-05:00</updated>
+         <content type="html">BlogPost Content at 1389331205653</content>
+         <summary type="html">BlogPost Content at 1389331205653</summary>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">1</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-f99fc5ef-f5cf-4b90-ad89-433ad3a41cd5</id>
+        <title type="text">Blog at 1389331182543</title>
+        <link type="application/atom+xml" rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331182543/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331182543?lang=en_us"/>
+        <updated>2014-01-10T00:20:29-05:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+
+    <entry xml:base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331064939/entry/blogpost_at_1389331158970" xml:lang="en-GB" >
+      <id>urn:lsid:ibm.com:blogs:entry-51959e28-6ec2-454c-b81f-14155cf8449f</id>
+      <title type="text">BlogPost at 1389331158970</title>
+      <author>
+        <name>Frank Adams</name>
+                <email>fadams@renovations.com</email>
+                <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+                <snx:userState>active</snx:userState>
+              </author>
+            <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331064939/entry/blogpost_at_1389331158970?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331064939/feed/entry/atom?entryid=51959e28-6ec2-454c-b81f-14155cf8449f&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331064939/feed/entrycomments/blogpost_at_1389331158970/atom?lang=en_us" thr:count="0"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331064939/feed/entryrecommendations/51959e28-6ec2-454c-b81f-14155cf8449f/atom?lang=en_us"/>
+      <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331064939/api/entrycomments/51959e28-6ec2-454c-b81f-14155cf8449f?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331064939/api/recommend/entries/51959e28-6ec2-454c-b81f-14155cf8449f?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-01-10T00:19:17-05:00</published>
+      <updated>2014-01-10T00:19:17-05:00</updated>
+         <content type="html">BlogPost Content at 1389331158970</content>
+         <summary type="html">BlogPost Content at 1389331158970</summary>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-6c33c280-f811-4618-8cdb-06dcea9ef69d</id>
+        <title type="text">Blog at 1389331064939</title>
+        <link type="application/atom+xml" rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331064939/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331064939?lang=en_us"/>
+        <updated>2014-01-10T00:19:17-05:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+
+    <entry xml:base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331064939/entry/blogpost_at_1389331135697" xml:lang="en-GB" >
+      <id>urn:lsid:ibm.com:blogs:entry-2e49ada2-12fd-4c23-a9a5-f118d9593e64</id>
+      <title type="text">BlogPost at 1389331135697</title>
+      <author>
+        <name>Frank Adams</name>
+                <email>fadams@renovations.com</email>
+                <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+                <snx:userState>active</snx:userState>
+              </author>
+            <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331064939/entry/blogpost_at_1389331135697?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331064939/feed/entry/atom?entryid=2e49ada2-12fd-4c23-a9a5-f118d9593e64&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331064939/feed/entrycomments/blogpost_at_1389331135697/atom?lang=en_us" thr:count="1"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331064939/feed/entryrecommendations/2e49ada2-12fd-4c23-a9a5-f118d9593e64/atom?lang=en_us"/>
+      <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331064939/api/entrycomments/2e49ada2-12fd-4c23-a9a5-f118d9593e64?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331064939/api/recommend/entries/2e49ada2-12fd-4c23-a9a5-f118d9593e64?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-01-10T00:18:54-05:00</published>
+      <updated>2014-01-10T00:18:54-05:00</updated>
+         <content type="html">BlogPost Content at 1389331135697</content>
+         <summary type="html">BlogPost Content at 1389331135697</summary>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">1</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-6c33c280-f811-4618-8cdb-06dcea9ef69d</id>
+        <title type="text">Blog at 1389331064939</title>
+        <link type="application/atom+xml" rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331064939/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331064939?lang=en_us"/>
+        <updated>2014-01-10T00:19:17-05:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+
+    <entry xml:base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331064939/entry/blogpost_at_1389331112306" xml:lang="en-GB" >
+      <id>urn:lsid:ibm.com:blogs:entry-f5ca9724-f0bb-4f4b-aab5-11a4cf6add2a</id>
+      <title type="text">BlogPost at 1389331112306</title>
+      <author>
+        <name>Frank Adams</name>
+                <email>fadams@renovations.com</email>
+                <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+                <snx:userState>active</snx:userState>
+              </author>
+            <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331064939/entry/blogpost_at_1389331112306?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331064939/feed/entry/atom?entryid=f5ca9724-f0bb-4f4b-aab5-11a4cf6add2a&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331064939/feed/entrycomments/blogpost_at_1389331112306/atom?lang=en_us" thr:count="1"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331064939/feed/entryrecommendations/f5ca9724-f0bb-4f4b-aab5-11a4cf6add2a/atom?lang=en_us"/>
+      <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331064939/api/entrycomments/f5ca9724-f0bb-4f4b-aab5-11a4cf6add2a?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331064939/api/recommend/entries/f5ca9724-f0bb-4f4b-aab5-11a4cf6add2a?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-01-10T00:18:30-05:00</published>
+      <updated>2014-01-10T00:18:30-05:00</updated>
+         <content type="html">BlogPost Content at 1389331112306</content>
+         <summary type="html">BlogPost Content at 1389331112306</summary>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">1</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-6c33c280-f811-4618-8cdb-06dcea9ef69d</id>
+        <title type="text">Blog at 1389331064939</title>
+        <link type="application/atom+xml" rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331064939/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331064939?lang=en_us"/>
+        <updated>2014-01-10T00:19:17-05:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+
+    <entry xml:base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331064939/entry/blogpost_at_1389331090819" xml:lang="en-GB" >
+      <id>urn:lsid:ibm.com:blogs:entry-852076c2-5fe5-48b9-abdb-3a928c7d0586</id>
+      <title type="text">BlogPost at 1389331090819</title>
+      <author>
+        <name>Frank Adams</name>
+                <email>fadams@renovations.com</email>
+                <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+                <snx:userState>active</snx:userState>
+              </author>
+            <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331064939/entry/blogpost_at_1389331090819?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331064939/feed/entry/atom?entryid=852076c2-5fe5-48b9-abdb-3a928c7d0586&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331064939/feed/entrycomments/blogpost_at_1389331090819/atom?lang=en_us" thr:count="0"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331064939/feed/entryrecommendations/852076c2-5fe5-48b9-abdb-3a928c7d0586/atom?lang=en_us"/>
+      <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331064939/api/entrycomments/852076c2-5fe5-48b9-abdb-3a928c7d0586?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331064939/api/recommend/entries/852076c2-5fe5-48b9-abdb-3a928c7d0586?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-01-10T00:18:09-05:00</published>
+      <updated>2014-01-10T00:18:09-05:00</updated>
+         <content type="html">BlogPost Content at 1389331090819</content>
+         <summary type="html">BlogPost Content at 1389331090819</summary>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-6c33c280-f811-4618-8cdb-06dcea9ef69d</id>
+        <title type="text">Blog at 1389331064939</title>
+        <link type="application/atom+xml" rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331064939/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389331064939?lang=en_us"/>
+        <updated>2014-01-10T00:19:17-05:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+
+    <entry xml:base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389321534524/entry/test_blog_post1389321561906" xml:lang="en-US" >
+      <id>urn:lsid:ibm.com:blogs:entry-f6655381-58e9-4775-a9bf-11fcfac00c90</id>
+      <title type="text">Test Blog Post1389321561906</title>
+      <author>
+        <name>Frank Adams</name>
+                <email>fadams@renovations.com</email>
+                <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+                <snx:userState>active</snx:userState>
+              </author>
+            <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389321534524/entry/test_blog_post1389321561906?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389321534524/feed/entry/atom?entryid=f6655381-58e9-4775-a9bf-11fcfac00c90&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389321534524/feed/entrycomments/test_blog_post1389321561906/atom?lang=en_us" thr:count="1"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389321534524/feed/entryrecommendations/f6655381-58e9-4775-a9bf-11fcfac00c90/atom?lang=en_us"/>
+      <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389321534524/api/entrycomments/f6655381-58e9-4775-a9bf-11fcfac00c90?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389321534524/api/recommend/entries/f6655381-58e9-4775-a9bf-11fcfac00c90?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-01-09T21:39:19-05:00</published>
+      <updated>2014-01-09T21:39:19-05:00</updated>
+         <content type="html">Test Blog Post Content</content>
+         <summary type="html">Test Blog Post Content</summary>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">1</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-3b474d88-54c3-4295-89e9-7b7765ba7f9c</id>
+        <title type="text">Test Blog1389321534524</title>
+        <link type="application/atom+xml" rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389321534524/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/TestHandle1389321534524?lang=en_us"/>
+        <updated>2014-01-09T21:39:32-05:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+
+    <entry xml:base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316347134/entry/blogpost_at_1389316543060" xml:lang="en-GB" >
+      <id>urn:lsid:ibm.com:blogs:entry-87d598f9-1cc0-4ec0-9bbf-b7d70e5a0505</id>
+      <title type="text">BlogPost at 1389316543060</title>
+      <author>
+        <name>Frank Adams</name>
+                <email>fadams@renovations.com</email>
+                <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+                <snx:userState>active</snx:userState>
+              </author>
+            <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316347134/entry/blogpost_at_1389316543060?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316347134/feed/entry/atom?entryid=87d598f9-1cc0-4ec0-9bbf-b7d70e5a0505&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316347134/feed/entrycomments/blogpost_at_1389316543060/atom?lang=en_us" thr:count="0"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316347134/feed/entryrecommendations/87d598f9-1cc0-4ec0-9bbf-b7d70e5a0505/atom?lang=en_us"/>
+      <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316347134/api/entrycomments/87d598f9-1cc0-4ec0-9bbf-b7d70e5a0505?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316347134/api/recommend/entries/87d598f9-1cc0-4ec0-9bbf-b7d70e5a0505?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-01-09T20:15:41-05:00</published>
+      <updated>2014-01-09T20:15:41-05:00</updated>
+         <content type="html">BlogPost Content at 1389316543060</content>
+         <summary type="html">BlogPost Content at 1389316543060</summary>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-10801f39-ba32-4eb2-b807-904f64f5bbb6</id>
+        <title type="text">Blog Updated at 1389316395232</title>
+        <link type="application/atom+xml" rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316347134/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316347134?lang=en_us"/>
+        <updated>2014-01-09T20:15:42-05:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+
+    <entry xml:base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316347134/entry/blogpost_at_1389316521609" xml:lang="en-GB" >
+      <id>urn:lsid:ibm.com:blogs:entry-f667086c-79f3-4ec3-aa5e-51e7f8d42301</id>
+      <title type="text">BlogPost at 1389316521609</title>
+      <author>
+        <name>Frank Adams</name>
+                <email>fadams@renovations.com</email>
+                <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+                <snx:userState>active</snx:userState>
+              </author>
+            <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316347134/entry/blogpost_at_1389316521609?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316347134/feed/entry/atom?entryid=f667086c-79f3-4ec3-aa5e-51e7f8d42301&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316347134/feed/entrycomments/blogpost_at_1389316521609/atom?lang=en_us" thr:count="0"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316347134/feed/entryrecommendations/f667086c-79f3-4ec3-aa5e-51e7f8d42301/atom?lang=en_us"/>
+      <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316347134/api/entrycomments/f667086c-79f3-4ec3-aa5e-51e7f8d42301?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316347134/api/recommend/entries/f667086c-79f3-4ec3-aa5e-51e7f8d42301?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-01-09T20:15:19-05:00</published>
+      <updated>2014-01-09T20:15:19-05:00</updated>
+         <content type="html">BlogPost Content at 1389316521609</content>
+         <summary type="html">BlogPost Content at 1389316521609</summary>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-10801f39-ba32-4eb2-b807-904f64f5bbb6</id>
+        <title type="text">Blog Updated at 1389316395232</title>
+        <link type="application/atom+xml" rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316347134/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316347134?lang=en_us"/>
+        <updated>2014-01-09T20:15:42-05:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+
+    <entry xml:base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316347134/entry/blogpost_at_1389316439589" xml:lang="en-GB" >
+      <id>urn:lsid:ibm.com:blogs:entry-38cb8dbe-310e-456d-b426-57115f1f4c00</id>
+      <title type="text">BlogPost at 1389316439589</title>
+      <author>
+        <name>Frank Adams</name>
+                <email>fadams@renovations.com</email>
+                <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+                <snx:userState>active</snx:userState>
+              </author>
+            <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316347134/entry/blogpost_at_1389316439589?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316347134/feed/entry/atom?entryid=38cb8dbe-310e-456d-b426-57115f1f4c00&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316347134/feed/entrycomments/blogpost_at_1389316439589/atom?lang=en_us" thr:count="0"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316347134/feed/entryrecommendations/38cb8dbe-310e-456d-b426-57115f1f4c00/atom?lang=en_us"/>
+      <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316347134/api/entrycomments/38cb8dbe-310e-456d-b426-57115f1f4c00?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316347134/api/recommend/entries/38cb8dbe-310e-456d-b426-57115f1f4c00?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-01-09T20:13:57-05:00</published>
+      <updated>2014-01-09T20:13:57-05:00</updated>
+         <content type="html">BlogPost Content at 1389316439589</content>
+         <summary type="html">BlogPost Content at 1389316439589</summary>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-10801f39-ba32-4eb2-b807-904f64f5bbb6</id>
+        <title type="text">Blog Updated at 1389316395232</title>
+        <link type="application/atom+xml" rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316347134/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316347134?lang=en_us"/>
+        <updated>2014-01-09T20:15:42-05:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+
+    <entry xml:base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316347134/entry/blogpost_at_1389316417846" xml:lang="en-GB" >
+      <id>urn:lsid:ibm.com:blogs:entry-dac7764b-8229-4ebb-8839-b4bc88e821b8</id>
+      <title type="text">BlogPost at 1389316417846</title>
+      <author>
+        <name>Frank Adams</name>
+                <email>fadams@renovations.com</email>
+                <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+                <snx:userState>active</snx:userState>
+              </author>
+            <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316347134/entry/blogpost_at_1389316417846?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316347134/feed/entry/atom?entryid=dac7764b-8229-4ebb-8839-b4bc88e821b8&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316347134/feed/entrycomments/blogpost_at_1389316417846/atom?lang=en_us" thr:count="0"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316347134/feed/entryrecommendations/dac7764b-8229-4ebb-8839-b4bc88e821b8/atom?lang=en_us"/>
+      <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316347134/api/entrycomments/dac7764b-8229-4ebb-8839-b4bc88e821b8?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316347134/api/recommend/entries/dac7764b-8229-4ebb-8839-b4bc88e821b8?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-01-09T20:13:36-05:00</published>
+      <updated>2014-01-09T20:13:36-05:00</updated>
+         <content type="html">BlogPost Content at 1389316417846</content>
+         <summary type="html">BlogPost Content at 1389316417846</summary>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-10801f39-ba32-4eb2-b807-904f64f5bbb6</id>
+        <title type="text">Blog Updated at 1389316395232</title>
+        <link type="application/atom+xml" rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316347134/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316347134?lang=en_us"/>
+        <updated>2014-01-09T20:15:42-05:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+
+    <entry xml:base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316347134/entry/blogpost_at_1389316373253" xml:lang="en-GB" >
+      <id>urn:lsid:ibm.com:blogs:entry-4583dafe-47ba-4d16-a672-fa05540764eb</id>
+      <title type="text">BlogPost at 1389316373253</title>
+      <author>
+        <name>Frank Adams</name>
+                <email>fadams@renovations.com</email>
+                <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+                <snx:userState>active</snx:userState>
+              </author>
+            <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316347134/entry/blogpost_at_1389316373253?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316347134/feed/entry/atom?entryid=4583dafe-47ba-4d16-a672-fa05540764eb&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316347134/feed/entrycomments/blogpost_at_1389316373253/atom?lang=en_us" thr:count="1"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316347134/feed/entryrecommendations/4583dafe-47ba-4d16-a672-fa05540764eb/atom?lang=en_us"/>
+      <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316347134/api/entrycomments/4583dafe-47ba-4d16-a672-fa05540764eb?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316347134/api/recommend/entries/4583dafe-47ba-4d16-a672-fa05540764eb?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-01-09T20:12:51-05:00</published>
+      <updated>2014-01-09T20:12:51-05:00</updated>
+         <content type="html">BlogPost Content at 1389316373253</content>
+         <summary type="html">BlogPost Content at 1389316373253</summary>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">1</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-10801f39-ba32-4eb2-b807-904f64f5bbb6</id>
+        <title type="text">Blog Updated at 1389316395232</title>
+        <link type="application/atom+xml" rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316347134/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316347134?lang=en_us"/>
+        <updated>2014-01-09T20:15:42-05:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+
+    <entry xml:base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316251702/entry/blogpost_at_1389316301899" xml:lang="en-GB" >
+      <id>urn:lsid:ibm.com:blogs:entry-e0183c77-c74f-4104-adcf-1489c55e4d62</id>
+      <title type="text">BlogPost at 1389316301899</title>
+      <author>
+        <name>Frank Adams</name>
+                <email>fadams@renovations.com</email>
+                <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+                <snx:userState>active</snx:userState>
+              </author>
+            <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316251702/entry/blogpost_at_1389316301899?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316251702/feed/entry/atom?entryid=e0183c77-c74f-4104-adcf-1489c55e4d62&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316251702/feed/entrycomments/blogpost_at_1389316301899/atom?lang=en_us" thr:count="0"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316251702/feed/entryrecommendations/e0183c77-c74f-4104-adcf-1489c55e4d62/atom?lang=en_us"/>
+      <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316251702/api/entrycomments/e0183c77-c74f-4104-adcf-1489c55e4d62?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316251702/api/recommend/entries/e0183c77-c74f-4104-adcf-1489c55e4d62?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-01-09T20:11:40-05:00</published>
+      <updated>2014-01-09T20:11:40-05:00</updated>
+         <content type="html">BlogPost Content at 1389316301899</content>
+         <summary type="html">BlogPost Content at 1389316301899</summary>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-5430fb64-1d3a-4b3a-b5d3-0b874ec8104f</id>
+        <title type="text">Blog at 1389316251702</title>
+        <link type="application/atom+xml" rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316251702/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316251702?lang=en_us"/>
+        <updated>2014-01-09T20:11:40-05:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+
+    <entry xml:base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316251702/entry/blogpost_at_1389316276036" xml:lang="en-GB" >
+      <id>urn:lsid:ibm.com:blogs:entry-0edeb0f3-6c01-4434-abc2-ed8b53e03a16</id>
+      <title type="text">BlogPost at 1389316276036</title>
+      <author>
+        <name>Frank Adams</name>
+                <email>fadams@renovations.com</email>
+                <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+                <snx:userState>active</snx:userState>
+              </author>
+            <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316251702/entry/blogpost_at_1389316276036?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316251702/feed/entry/atom?entryid=0edeb0f3-6c01-4434-abc2-ed8b53e03a16&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316251702/feed/entrycomments/blogpost_at_1389316276036/atom?lang=en_us" thr:count="1"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316251702/feed/entryrecommendations/0edeb0f3-6c01-4434-abc2-ed8b53e03a16/atom?lang=en_us"/>
+      <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316251702/api/entrycomments/0edeb0f3-6c01-4434-abc2-ed8b53e03a16?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316251702/api/recommend/entries/0edeb0f3-6c01-4434-abc2-ed8b53e03a16?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-01-09T20:11:14-05:00</published>
+      <updated>2014-01-09T20:11:14-05:00</updated>
+         <content type="html">BlogPost Content at 1389316276036</content>
+         <summary type="html">BlogPost Content at 1389316276036</summary>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">1</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-5430fb64-1d3a-4b3a-b5d3-0b874ec8104f</id>
+        <title type="text">Blog at 1389316251702</title>
+        <link type="application/atom+xml" rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316251702/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316251702?lang=en_us"/>
+        <updated>2014-01-09T20:11:40-05:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+
+    <entry xml:base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316134038/entry/blogpost_at_1389316227853" xml:lang="en-GB" >
+      <id>urn:lsid:ibm.com:blogs:entry-15399429-e885-4ecb-ae6b-abf951476f91</id>
+      <title type="text">BlogPost at 1389316227853</title>
+      <author>
+        <name>Frank Adams</name>
+                <email>fadams@renovations.com</email>
+                <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+                <snx:userState>active</snx:userState>
+              </author>
+            <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316134038/entry/blogpost_at_1389316227853?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316134038/feed/entry/atom?entryid=15399429-e885-4ecb-ae6b-abf951476f91&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316134038/feed/entrycomments/blogpost_at_1389316227853/atom?lang=en_us" thr:count="0"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316134038/feed/entryrecommendations/15399429-e885-4ecb-ae6b-abf951476f91/atom?lang=en_us"/>
+      <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316134038/api/entrycomments/15399429-e885-4ecb-ae6b-abf951476f91?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316134038/api/recommend/entries/15399429-e885-4ecb-ae6b-abf951476f91?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-01-09T20:10:26-05:00</published>
+      <updated>2014-01-09T20:10:26-05:00</updated>
+         <content type="html">BlogPost Content at 1389316227853</content>
+         <summary type="html">BlogPost Content at 1389316227853</summary>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-f296373a-f8d5-4b6d-a4de-9cd409de5a6c</id>
+        <title type="text">Blog at 1389316134038</title>
+        <link type="application/atom+xml" rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316134038/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/blogs/BlogHandle1389316134038?lang=en_us"/>
+        <updated>2014-01-09T20:10:26-05:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+
+</feed>
+]]></data>
+</response>
+</responses>

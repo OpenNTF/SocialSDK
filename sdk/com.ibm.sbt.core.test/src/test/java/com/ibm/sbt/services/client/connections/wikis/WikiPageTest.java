@@ -22,6 +22,7 @@ import static org.junit.Assert.fail;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.ibm.sbt.services.client.ClientServicesException;
@@ -38,7 +39,7 @@ public class WikiPageTest extends BaseWikiServiceTest {
 		wiki = createWiki();
 	}
 	
-	@Test
+	@Test @Ignore
 	public void createWikiPageTest() throws Exception {
 		WikiPage wikiPage = newWikiPage();
 		WikiPage wikiPageCreated = wikiService.createWikiPage(
@@ -49,7 +50,7 @@ public class WikiPageTest extends BaseWikiServiceTest {
 		assertNotNull(wikiPageCreated.getLabel());
 	}
 	
-	@Test
+	@Test @Ignore
 	public void updateWikiPageTest() throws Exception {
 		WikiPage wikiPage = wikiService.createWikiPage(
 				wiki.getLabel(), newWikiPage() , null);

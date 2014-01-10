@@ -4,7 +4,7 @@
    <extension-point id="com.ibm.sbt.opensocial.domino.container" name="OpenSocial Container" schema="schema/com.ibm.sbt.opensocial.domino.container.exsd"/>
     <extension point="com.ibm.pvc.webcontainer.application">
 		<contextRoot>
-			/osplayground
+			/sbtos
       	</contextRoot>
       	<contentLocation>
         	WebContent

@@ -1,0 +1,979 @@
+<?xml version="1.0"?>
+<responses>
+<response statusCode="201" statusReason="Created">
+<headers>
+    <header>
+        <name><![CDATA[Date]]></name>
+        <value><![CDATA[Fri, 10 Jan 2014 15:29:19 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-Powered-By]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-LConn-Auth]]></name>
+        <value><![CDATA[false]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-UA-Compatible]]></name>
+        <value><![CDATA[IE=EmulateIE7]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Expires]]></name>
+        <value><![CDATA[Thu, 1 Jan 1970 00:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Cache-Control]]></name>
+        <value><![CDATA[no-store, no-cache, must-revalidate]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Accept]]></name>
+        <value><![CDATA[application/atom+xml]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Location]]></name>
+        <value><![CDATA[https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/activitynode?activityNodeUuid=3e00e912-1148-4147-a817-0669e3438562]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-UUID]]></name>
+        <value><![CDATA[3e00e912-1148-4147-a817-0669e3438562]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[lcLang=en_us; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken=PUBjyRNSiMicDeydwCeSe/gUuml0fCDnccXoWVT0q2G+DB9N76HWlKqqf16uAHfzzNbPAEwptZNqH4INVmo/K5xuXFrznl08HW6qMsaWqiSnnoONNOeWPNzOVhjHbAXgyNVu+Z7c4oaxpsqHYzYe4Wwtaiu5GX1TlgSbpofbB7B6coN9ik2nPZhmlRvipNQ2y7hL0foIb6UhwN2+/LCf3IUc/YAk1jgjH4C8lPIHUypv6ZF0FmKyy8mxpdGXaA/KStdm/ujfrbSN07lkfddhCtyrtr9ocGeO6hPIeOQYNnx+Aucg4i8u+rcgnrcfaAsZDETkgxXipmMunpY6JIQiyg==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=OiXv+fZ5jsbv538SneUjaCs9oLbk5Eix3vVugLnXd+V7gHF9BGegiMzsCGcouwBhRH60w1D8VIiZ/aJZBX5UP+uajx+w4nka1RDaRXm4F+/JQq4kb9j2FPULgsLU2HG6mGO/5KEi4umm+d/rg8obK5bzk7wnAjsbQHvf1fDuaaimNoNG7ffR7phBVSrq8OQuhqAACxgznXJYdoJirMshVp4U3BQ5Wodw/0boRlamsejPJMFFhp6gHDw1DnmfMcMqabfu5opQI2RNHuywKlwOAh23tzfcHEvorquJ+u224TLqxvIySx+vjxPA6RjGI7sNkVKa3Osac24cKYkJ4vysldoae6XwrQt2rkNVYbgAbrPjXJQPqNzUYLP0jWEH+8lqydBYNTw8ZyHd+jMkhT8wT8RD8k6U7p15y1L1/Hgx93QdvrwQ1uTQB9O6yrm6c+k6fd7pwlJYOQF0ta/jk+b5IgY9SaQcnKaS2lbbFfdVSya+ofPTtzXU6OFWsV+Bb/Zca2OuI2z4SUahTLJyCn8Ic0GUOCfQtuB5hikuxlNTtf/QdwpCidTmw3Uj+WptdbHGfyn52bvOvwa9iEL45F0ZMV2y28XwToPct+Yn4C8byX2Y7ZVGTnUKajJY7ffgCind7ZU80SLAWyU/H8MLTvNRaA==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LCSESSIONID=0000Ej1xS0bOf9xwn9PKHXRdG_g:180t512oj; Path=/; HttpOnly]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Keep-Alive]]></name>
+        <value><![CDATA[timeout=10, max=100]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Connection]]></name>
+        <value><![CDATA[Keep-Alive]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Transfer-Encoding]]></name>
+        <value><![CDATA[chunked]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Type]]></name>
+        <value><![CDATA[application/atom+xml;charset=UTF-8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header></headers>
+<data><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+
+
+
+
+
+
+
+
+
+
+
+
+<entry xmlns="http://www.w3.org/2005/Atom"
+  xmlns:app="http://www.w3.org/2007/app"   
+  xmlns:snx="http://www.ibm.com/xmlns/prod/sn"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+  xmlns:thr="http://purl.org/syndication/thread/1.0"
+  >
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <id>urn:lsid:ibm.com:oa:3e00e912-1148-4147-a817-0669e3438562</id>
+  <title type="text">Java Test Activity1389367762664</title>
+  <updated>2014-01-10T15:29:19Z</updated>
+  <published>2014-01-10T15:29:19Z</published>
+  <author>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <name>Frank Adams</name>
+  <email>***REMOVED***@renovations.com</email>
+  <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+  <snx:ldapid>aa7f282e-2ef1-4223-b412-82e93c79ca2c</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </author>
+  <contributor>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <name>Frank Adams</name>
+  <email>***REMOVED***@renovations.com</email>
+  <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+  <snx:ldapid>aa7f282e-2ef1-4223-b412-82e93c79ca2c</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </contributor>
+  	
+    
+    
+  	     
+  	  
+  	    
+  	  
+ 	      <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="activity" label="Activity"/>
+  	  
+  	
+    
+  
+
+  <category scheme="http://www.ibm.com/xmlns/prod/sn/priority" term="1" label="Normal"/>
+  
+    
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    <category term="tag1" />
+  
+    <category term="tag2" />
+  
+  
+    <link rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/acl?activityUuid=3e00e912-1148-4147-a817-0669e3438562" />
+    <link rel="http://www.ibm.com/xmlns/prod/sn/history" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/activity/history?activityUuid=3e00e912-1148-4147-a817-0669e3438562" />
+    <link rel="http://www.ibm.com/xmlns/prod/sn/templates" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/entrytemplates?activityUuid=3e00e912-1148-4147-a817-0669e3438562" />
+   
+  
+  
+
+  
+    <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/activity?activityUuid=3e00e912-1148-4147-a817-0669e3438562">
+      <title type="text">Java Test Activity1389367762664</title>
+      <app:categories href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/categories?activityUuid=3e00e912-1148-4147-a817-0669e3438562"/>
+    </app:collection> 
+  
+  <snx:activity>3e00e912-1148-4147-a817-0669e3438562</snx:activity>
+  
+  
+  
+    <link rel="edit" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/activitynode?activityNodeUuid=3e00e912-1148-4147-a817-0669e3438562" />
+  
+   
+  
+    
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/activity?activityUuid=3e00e912-1148-4147-a817-0669e3438562"/>
+      
+        <link rel="alternate" type="application/xhtml+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/html/activity/recent?activityUuid=3e00e912-1148-4147-a817-0669e3438562"/>
+      	<link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/html/activity/recent?activityUuid=3e00e912-1148-4147-a817-0669e3438562"/>
+      
+     
+    
+  
+ 
+  <snx:position>-2147483648</snx:position>
+  <snx:depth>0</snx:depth>  
+  
+  <snx:permissions>none, create_activity, view_activity, edit_activity, delete_activity, activity_owner, edit_activity_tags, design_activity, edit_statements, delete_statements, add_members, delete_members, create_entries, edit_personal_entries, edit_all_entries, delete_personal_entries, delete_all_entries, edit_personal_entry_tags, edit_all_entry_tags, view_members</snx:permissions>
+  <snx:icon>https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/nav/common/images/iconActivities16.png</snx:icon>
+
+  
+    
+    
+    
+    
+      
+      
+        
+          <content type="text">
+          	GoalOfActivity - 1389367762664
+      	  </content>
+        
+        
+      
+    
+  
+  
+  
+
+    
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</entry>
+]]></data>
+</response>
+<response statusCode="201" statusReason="Created">
+<headers>
+    <header>
+        <name><![CDATA[Date]]></name>
+        <value><![CDATA[Fri, 10 Jan 2014 15:29:20 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-Powered-By]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-LConn-Auth]]></name>
+        <value><![CDATA[false]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-UA-Compatible]]></name>
+        <value><![CDATA[IE=EmulateIE7]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Expires]]></name>
+        <value><![CDATA[Thu, 1 Jan 1970 00:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Cache-Control]]></name>
+        <value><![CDATA[no-store, no-cache, must-revalidate]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Accept]]></name>
+        <value><![CDATA[application/atom+xml, multipart/related; q=0.5, */*; q=0.2]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Location]]></name>
+        <value><![CDATA[https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/activitynode?activityNodeUuid=af0e54d9-98e4-4e05-b82b-f3ceff214551]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-UUID]]></name>
+        <value><![CDATA[af0e54d9-98e4-4e05-b82b-f3ceff214551]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[lcLang=en_us; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken=PUBjyRNSiMicDeydwCeSe/gUuml0fCDnccXoWVT0q2G+DB9N76HWlKqqf16uAHfzzNbPAEwptZNqH4INVmo/K5xuXFrznl08HW6qMsaWqiSnnoONNOeWPNzOVhjHbAXgyNVu+Z7c4oaxpsqHYzYe4Wwtaiu5GX1TlgSbpofbB7B6coN9ik2nPZhmlRvipNQ2y7hL0foIb6UhwN2+/LCf3IUc/YAk1jgjH4C8lPIHUypv6ZF0FmKyy8mxpdGXaA/KStdm/ujfrbSN07lkfddhCtyrtr9ocGeO6hPIeOQYNnx+Aucg4i8u+rcgnrcfaAsZDETkgxXipmMunpY6JIQiyg==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=OiXv+fZ5jsbv538SneUjaCs9oLbk5Eix3vVugLnXd+V7gHF9BGegiMzsCGcouwBhRH60w1D8VIiZ/aJZBX5UP+uajx+w4nka1RDaRXm4F+/JQq4kb9j2FPULgsLU2HG6mGO/5KEi4umm+d/rg8obK5bzk7wnAjsbQHvf1fDuaaimNoNG7ffR7phBVSrq8OQuhqAACxgznXJYdoJirMshVp4U3BQ5Wodw/0boRlamsejPJMFFhp6gHDw1DnmfMcMqabfu5opQI2RNHuywKlwOAh23tzfcHEvorquJ+u224TLqxvIySx+vjxPA6RjGI7sNkVKa3Osac24cKYkJ4vysldoae6XwrQt2rkNVYbgAbrPjXJQPqNzUYLP0jWEH+8lqydBYNTw8ZyHd+jMkhT8wT8RD8k6U7p15y1L1/Hgx93QdvrwQ1uTQB9O6yrm6c+k6fd7pwlJYOQF0ta/jk+b5IgY9SaQcnKaS2lbbFfdVSya+ofPTtzXU6OFWsV+Bb/Zca2OuI2z4SUahTLJyCn8Ic0GUOCfQtuB5hikuxlNTtf/QdwpCidTmw3Uj+WptdbHGfyn52bvOvwa9iEL45F0ZMV2y28XwToPct+Yn4C8byX2Y7ZVGTnUKajJY7ffgCind7ZU80SLAWyU/H8MLTvNRaA==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LCSESSIONID=0000nYYuX8SFF_duMj7HMwAVU7y:180t512oj; Path=/; HttpOnly]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Keep-Alive]]></name>
+        <value><![CDATA[timeout=10, max=100]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Connection]]></name>
+        <value><![CDATA[Keep-Alive]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Transfer-Encoding]]></name>
+        <value><![CDATA[chunked]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Type]]></name>
+        <value><![CDATA[application/atom+xml;charset=UTF-8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header></headers>
+<data><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+
+
+
+
+
+
+
+
+
+
+
+
+<entry xmlns="http://www.w3.org/2005/Atom"
+  xmlns:app="http://www.w3.org/2007/app"   
+  xmlns:snx="http://www.ibm.com/xmlns/prod/sn"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+  xmlns:thr="http://purl.org/syndication/thread/1.0"
+  >
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <id>urn:lsid:ibm.com:oa:af0e54d9-98e4-4e05-b82b-f3ceff214551</id>
+  <title type="text">entryNode from Java Test 1389367764094</title>
+  <updated>2014-01-10T15:29:20Z</updated>
+  <published>2014-01-10T15:29:20Z</published>
+  <author>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <name>Frank Adams</name>
+  <email>***REMOVED***@renovations.com</email>
+  <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+  <snx:ldapid>aa7f282e-2ef1-4223-b412-82e93c79ca2c</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </author>
+  <contributor>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <name>Frank Adams</name>
+  <email>***REMOVED***@renovations.com</email>
+  <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+  <snx:ldapid>aa7f282e-2ef1-4223-b412-82e93c79ca2c</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </contributor>
+  	
+    
+    
+  	     
+  	  
+  	    
+  	  
+ 	      <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="entry" label="Entry"/>
+  	  
+  	
+    
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    <category term="tag1" />
+  
+    <category term="tag2" />
+  
+   
+  
+    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:3e00e912-1148-4147-a817-0669e3438562" 
+       type="application/atom+xml" 
+       href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/activitynode?activityNodeUuid=3e00e912-1148-4147-a817-0669e3438562"
+       source="urn:lsid:ibm.com:oa:3e00e912-1148-4147-a817-0669e3438562"
+    />
+  
+  
+
+  
+  <snx:activity>3e00e912-1148-4147-a817-0669e3438562</snx:activity>
+  
+  
+  
+    <link rel="edit" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/activitynode?activityNodeUuid=af0e54d9-98e4-4e05-b82b-f3ceff214551" />
+  
+   
+  
+    
+    
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/activitynode?activityNodeUuid=af0e54d9-98e4-4e05-b82b-f3ceff214551"/>
+ 	  <link rel="alternate" type="application/xhtml+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/html/activityentry?uuid=af0e54d9-98e4-4e05-b82b-f3ceff214551"/>
+      <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/html/activityentry?uuid=af0e54d9-98e4-4e05-b82b-f3ceff214551"/>
+          
+    
+  
+ 
+  <snx:position>1000</snx:position>
+  <snx:depth>1</snx:depth>  
+  
+  <snx:permissions>none, create_activity, view_activity, edit_activity, delete_activity, activity_owner, edit_activity_tags, design_activity, edit_statements, delete_statements, add_members, delete_members, create_entries, edit_personal_entries, edit_all_entries, delete_personal_entries, delete_all_entries, edit_personal_entry_tags, edit_all_entry_tags, view_members</snx:permissions>
+  
+
+  
+    
+    
+    
+    
+      
+      
+        
+          <content type="text">
+          	entryNode Content 1389367764094
+      	  </content>
+        
+        
+      
+    
+  
+  
+  
+
+    
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</entry>
+]]></data>
+</response>
+<response statusCode="204" statusReason="No Content">
+<headers>
+    <header>
+        <name><![CDATA[Date]]></name>
+        <value><![CDATA[Fri, 10 Jan 2014 15:29:22 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-Powered-By]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-LConn-Auth]]></name>
+        <value><![CDATA[false]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-UA-Compatible]]></name>
+        <value><![CDATA[IE=EmulateIE7]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Expires]]></name>
+        <value><![CDATA[Thu, 1 Jan 1970 00:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Cache-Control]]></name>
+        <value><![CDATA[no-store, no-cache, must-revalidate]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Accept]]></name>
+        <value><![CDATA[application/atom+xml]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Location]]></name>
+        <value><![CDATA[https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/trashednode?activityNodeUuid=af0e54d9-98e4-4e05-b82b-f3ceff214551]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Length]]></name>
+        <value><![CDATA[0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[lcLang=en_us; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken=PUBjyRNSiMicDeydwCeSe/gUuml0fCDnccXoWVT0q2G+DB9N76HWlKqqf16uAHfzzNbPAEwptZNqH4INVmo/K5xuXFrznl08HW6qMsaWqiSnnoONNOeWPNzOVhjHbAXgyNVu+Z7c4oaxpsqHYzYe4Wwtaiu5GX1TlgSbpofbB7B6coN9ik2nPZhmlRvipNQ2y7hL0foIb6UhwN2+/LCf3IUc/YAk1jgjH4C8lPIHUypv6ZF0FmKyy8mxpdGXaA/KStdm/ujfrbSN07lkfddhCtyrtr9ocGeO6hPIeOQYNnx+Aucg4i8u+rcgnrcfaAsZDETkgxXipmMunpY6JIQiyg==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=OiXv+fZ5jsbv538SneUjaCs9oLbk5Eix3vVugLnXd+V7gHF9BGegiMzsCGcouwBhRH60w1D8VIiZ/aJZBX5UP+uajx+w4nka1RDaRXm4F+/JQq4kb9j2FPULgsLU2HG6mGO/5KEi4umm+d/rg8obK5bzk7wnAjsbQHvf1fDuaaimNoNG7ffR7phBVSrq8OQuhqAACxgznXJYdoJirMshVp4U3BQ5Wodw/0boRlamsejPJMFFhp6gHDw1DnmfMcMqabfu5opQI2RNHuywKlwOAh23tzfcHEvorquJ+u224TLqxvIySx+vjxPA6RjGI7sNkVKa3Osac24cKYkJ4vysldoae6XwrQt2rkNVYbgAbrPjXJQPqNzUYLP0jWEH+8lqydBYNTw8ZyHd+jMkhT8wT8RD8k6U7p15y1L1/Hgx93QdvrwQ1uTQB9O6yrm6c+k6fd7pwlJYOQF0ta/jk+b5IgY9SaQcnKaS2lbbFfdVSya+ofPTtzXU6OFWsV+Bb/Zca2OuI2z4SUahTLJyCn8Ic0GUOCfQtuB5hikuxlNTtf/QdwpCidTmw3Uj+WptdbHGfyn52bvOvwa9iEL45F0ZMV2y28XwToPct+Yn4C8byX2Y7ZVGTnUKajJY7ffgCind7ZU80SLAWyU/H8MLTvNRaA==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LCSESSIONID=0000MVWFysOMpHEEAaUvNC3rHih:180t512oj; Path=/; HttpOnly]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Keep-Alive]]></name>
+        <value><![CDATA[timeout=10, max=100]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Connection]]></name>
+        <value><![CDATA[Keep-Alive]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Type]]></name>
+        <value><![CDATA[text/html]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header></headers>
+</response>
+<response statusCode="200" statusReason="OK">
+<headers>
+    <header>
+        <name><![CDATA[Date]]></name>
+        <value><![CDATA[Fri, 10 Jan 2014 15:29:23 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-Powered-By]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-LConn-Auth]]></name>
+        <value><![CDATA[false]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-UA-Compatible]]></name>
+        <value><![CDATA[IE=EmulateIE7]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Expires]]></name>
+        <value><![CDATA[Thu, 1 Jan 1970 00:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Last-Modified]]></name>
+        <value><![CDATA[Fri, 10 Jan 2014 15:29:22 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Pragma]]></name>
+        <value><![CDATA[no-cache]]></value>
+    </header>
+    <header>
+        <name><![CDATA[ETag]]></name>
+        <value><![CDATA[W/"1389367762046-aa7f282e-2ef1-4223-b412-82e93c79ca2c"]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Accept]]></name>
+        <value><![CDATA[application/atom+xml]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[lcLang=en_us; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken=PUBjyRNSiMicDeydwCeSe/gUuml0fCDnccXoWVT0q2G+DB9N76HWlKqqf16uAHfzzNbPAEwptZNqH4INVmo/K5xuXFrznl08HW6qMsaWqiSnnoONNOeWPNzOVhjHbAXgyNVu+Z7c4oaxpsqHYzYe4Wwtaiu5GX1TlgSbpofbB7B6coN9ik2nPZhmlRvipNQ2y7hL0foIb6UhwN2+/LCf3IUc/YAk1jgjH4C8lPIHUypv6ZF0FmKyy8mxpdGXaA/KStdm/ujfrbSN07lkfddhCtyrtr9ocGeO6hPIeOQYNnx+Aucg4i8u+rcgnrcfaAsZDETkgxXipmMunpY6JIQiyg==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=OiXv+fZ5jsbv538SneUjaCs9oLbk5Eix3vVugLnXd+V7gHF9BGegiMzsCGcouwBhRH60w1D8VIiZ/aJZBX5UP+uajx+w4nka1RDaRXm4F+/JQq4kb9j2FPULgsLU2HG6mGO/5KEi4umm+d/rg8obK5bzk7wnAjsbQHvf1fDuaaimNoNG7ffR7phBVSrq8OQuhqAACxgznXJYdoJirMshVp4U3BQ5Wodw/0boRlamsejPJMFFhp6gHDw1DnmfMcMqabfu5opQI2RNHuywKlwOAh23tzfcHEvorquJ+u224TLqxvIySx+vjxPA6RjGI7sNkVKa3Osac24cKYkJ4vysldoae6XwrQt2rkNVYbgAbrPjXJQPqNzUYLP0jWEH+8lqydBYNTw8ZyHd+jMkhT8wT8RD8k6U7p15y1L1/Hgx93QdvrwQ1uTQB9O6yrm6c+k6fd7pwlJYOQF0ta/jk+b5IgY9SaQcnKaS2lbbFfdVSya+ofPTtzXU6OFWsV+Bb/Zca2OuI2z4SUahTLJyCn8Ic0GUOCfQtuB5hikuxlNTtf/QdwpCidTmw3Uj+WptdbHGfyn52bvOvwa9iEL45F0ZMV2y28XwToPct+Yn4C8byX2Y7ZVGTnUKajJY7ffgCind7ZU80SLAWyU/H8MLTvNRaA==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LCSESSIONID=0000kHN3Rb5hEGqgtljOfopdQYa:180t512oj; Path=/; HttpOnly]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Cache-Control]]></name>
+        <value><![CDATA[private, must-revalidate, max-age=0, no-cache=set-cookie]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Keep-Alive]]></name>
+        <value><![CDATA[timeout=10, max=100]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Connection]]></name>
+        <value><![CDATA[Keep-Alive]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Transfer-Encoding]]></name>
+        <value><![CDATA[chunked]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Type]]></name>
+        <value><![CDATA[application/atom+xml;charset=UTF-8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header></headers>
+<data><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+
+
+
+
+
+
+
+
+
+
+
+
+<entry xmlns="http://www.w3.org/2005/Atom"
+  xmlns:app="http://www.w3.org/2007/app"   
+  xmlns:snx="http://www.ibm.com/xmlns/prod/sn"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+  xmlns:thr="http://purl.org/syndication/thread/1.0"
+  >
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <id>urn:lsid:ibm.com:oa:af0e54d9-98e4-4e05-b82b-f3ceff214551</id>
+  <title type="text">entryNode from Java Test 1389367764094</title>
+  <updated>2014-01-10T15:29:22Z</updated>
+  <published>2014-01-10T15:29:20Z</published>
+  <author>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <name>Frank Adams</name>
+  <email>***REMOVED***@renovations.com</email>
+  <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+  <snx:ldapid>aa7f282e-2ef1-4223-b412-82e93c79ca2c</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </author>
+  <contributor>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <name>Frank Adams</name>
+  <email>***REMOVED***@renovations.com</email>
+  <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+  <snx:ldapid>aa7f282e-2ef1-4223-b412-82e93c79ca2c</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </contributor>
+  	
+    
+    
+  	     
+  	  
+  	    
+  	  
+ 	      <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="entry" label="Entry"/>
+  	  
+  	
+    
+  
+
+  
+  
+  
+  
+  
+    <category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="deleted" label="Deleted"/>
+  
+  
+  
+  
+  
+  
+    <category term="tag1" />
+  
+    <category term="tag2" />
+  
+   
+  
+    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:3e00e912-1148-4147-a817-0669e3438562" 
+       type="application/atom+xml" 
+       href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/activitynode?activityNodeUuid=3e00e912-1148-4147-a817-0669e3438562"
+       source="urn:lsid:ibm.com:oa:3e00e912-1148-4147-a817-0669e3438562"
+    />
+  
+  
+
+  
+  <snx:activity>3e00e912-1148-4147-a817-0669e3438562</snx:activity>
+  
+  
+  
+    <link rel="edit" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/trashednode?activityNodeUuid=af0e54d9-98e4-4e05-b82b-f3ceff214551" />
+  
+   
+  
+    
+    
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/trashednode?activityNodeUuid=af0e54d9-98e4-4e05-b82b-f3ceff214551"/>
+ 	  <link rel="alternate" type="application/xhtml+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/html/activityentry?uuid=af0e54d9-98e4-4e05-b82b-f3ceff214551"/>
+      <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/html/activityentry?uuid=af0e54d9-98e4-4e05-b82b-f3ceff214551"/>
+          
+    
+  
+ 
+  <snx:position>1000</snx:position>
+  <snx:depth>1</snx:depth>  
+  
+  <snx:permissions>none, create_activity, view_activity, edit_activity, delete_activity, activity_owner, edit_activity_tags, design_activity, edit_statements, delete_statements, add_members, delete_members, create_entries, edit_personal_entries, edit_all_entries, delete_personal_entries, delete_all_entries, edit_personal_entry_tags, edit_all_entry_tags, view_members</snx:permissions>
+  
+
+  
+    
+    
+    
+    
+      
+      
+        
+          <content type="text">
+          	entryNode Content 1389367764094
+      	  </content>
+        
+        
+      
+    
+  
+  
+  
+
+    
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</entry>
+]]></data>
+</response>
+<response statusCode="204" statusReason="No Content">
+<headers>
+    <header>
+        <name><![CDATA[Date]]></name>
+        <value><![CDATA[Fri, 10 Jan 2014 15:29:24 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-Powered-By]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-LConn-Auth]]></name>
+        <value><![CDATA[false]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-UA-Compatible]]></name>
+        <value><![CDATA[IE=EmulateIE7]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Expires]]></name>
+        <value><![CDATA[Thu, 1 Jan 1970 00:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Cache-Control]]></name>
+        <value><![CDATA[no-store, no-cache, must-revalidate]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Accept]]></name>
+        <value><![CDATA[application/atom+xml]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Location]]></name>
+        <value><![CDATA[https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/trashednode?activityNodeUuid=3e00e912-1148-4147-a817-0669e3438562]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Length]]></name>
+        <value><![CDATA[0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[lcLang=en_us; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken=PUBjyRNSiMicDeydwCeSe/gUuml0fCDnccXoWVT0q2G+DB9N76HWlKqqf16uAHfzzNbPAEwptZNqH4INVmo/K5xuXFrznl08HW6qMsaWqiSnnoONNOeWPNzOVhjHbAXgyNVu+Z7c4oaxpsqHYzYe4Wwtaiu5GX1TlgSbpofbB7B6coN9ik2nPZhmlRvipNQ2y7hL0foIb6UhwN2+/LCf3IUc/YAk1jgjH4C8lPIHUypv6ZF0FmKyy8mxpdGXaA/KStdm/ujfrbSN07lkfddhCtyrtr9ocGeO6hPIeOQYNnx+Aucg4i8u+rcgnrcfaAsZDETkgxXipmMunpY6JIQiyg==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=OiXv+fZ5jsbv538SneUjaCs9oLbk5Eix3vVugLnXd+V7gHF9BGegiMzsCGcouwBhRH60w1D8VIiZ/aJZBX5UP+uajx+w4nka1RDaRXm4F+/JQq4kb9j2FPULgsLU2HG6mGO/5KEi4umm+d/rg8obK5bzk7wnAjsbQHvf1fDuaaimNoNG7ffR7phBVSrq8OQuhqAACxgznXJYdoJirMshVp4U3BQ5Wodw/0boRlamsejPJMFFhp6gHDw1DnmfMcMqabfu5opQI2RNHuywKlwOAh23tzfcHEvorquJ+u224TLqxvIySx+vjxPA6RjGI7sNkVKa3Osac24cKYkJ4vysldoae6XwrQt2rkNVYbgAbrPjXJQPqNzUYLP0jWEH+8lqydBYNTw8ZyHd+jMkhT8wT8RD8k6U7p15y1L1/Hgx93QdvrwQ1uTQB9O6yrm6c+k6fd7pwlJYOQF0ta/jk+b5IgY9SaQcnKaS2lbbFfdVSya+ofPTtzXU6OFWsV+Bb/Zca2OuI2z4SUahTLJyCn8Ic0GUOCfQtuB5hikuxlNTtf/QdwpCidTmw3Uj+WptdbHGfyn52bvOvwa9iEL45F0ZMV2y28XwToPct+Yn4C8byX2Y7ZVGTnUKajJY7ffgCind7ZU80SLAWyU/H8MLTvNRaA==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LCSESSIONID=00004gtlQipFNhC3vqikkDOPDtS:180t512oj; Path=/; HttpOnly]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Keep-Alive]]></name>
+        <value><![CDATA[timeout=10, max=100]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Connection]]></name>
+        <value><![CDATA[Keep-Alive]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Type]]></name>
+        <value><![CDATA[text/html]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header></headers>
+</response>
+</responses>

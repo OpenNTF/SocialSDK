@@ -4,7 +4,7 @@
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Sat, 23 Nov 2013 12:22:53 GMT]]></value>
+        <value><![CDATA[Fri, 10 Jan 2014 15:23:07 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -28,23 +28,27 @@
     </header>
     <header>
         <name><![CDATA[Last-Modified]]></name>
-        <value><![CDATA[Sat, 23 Nov 2013 12:22:53 GMT]]></value>
+        <value><![CDATA[Fri, 10 Jan 2014 15:23:07 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Location]]></name>
-        <value><![CDATA[https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/instance?communityUuid=04b9d6d7-a5e6-4724-a24a-ee43c5f11e86]]></value>
+        <value><![CDATA[https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/instance?communityUuid=a1be9e09-a91c-4c0e-a18f-46fcf76aa975]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken=PUBjyRNSiMicDeydwCeSe/gUuml0fCDnccXoWVT0q2G+DB9N76HWlKqqf16uAHfzzNbPAEwptZNqH4INVmo/K0C8TDspK5fVHW6qMsaWqiSnnoONNOeWPNzOVhjHbAXgyNVu+Z7c4oaxpsqHYzYe4Wwtaiu5GX1TlgSbpofbB7B6coN9ik2nPZhmlRvipNQ2y7hL0foIb6UhwN2+/LCf3IUc/YAk1jgjH4C8lPIHUypv6ZF0FmKyy8mxpdGXaA/KStdm/ujfrbSN07lkfddhCtyrtr9ocGeO6hPIeOQYNnx+Aucg4i8u+rcgnrcfaAsZDETkgxXipmMunpY6JIQiyg==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
+        <value><![CDATA[lcLang=en_us; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=Yg3ZFtZPf6iSBKoKZjQ4xmElHzbN3qfjCx+4WdS5Mqw+Tg46DJsKqNBnQ7aGid92OHCre0MJIjda9TjbypDws9UfJ/vOTOk1PK899uEZsuQLTnZsh+tflG5S6hZV1uRFH77GRdBC9nUquFl8V7plSlM/LCvPumGthVAHbXP8VEPttLsP81WYQ2PbqHKkWHO7wXObhnAt3dL4FVxYEo4VD88ZnkkkZQD7cWo7hhhMjC/nvXbnOrHFLzQDyAGNj+NjbRCL1ZOKyHejl6LY1riBzoRy6zmsAWOX1I3fVcn0OhZTZukPhR04OObK+BG+INMJB3PN/h5x58t4Gm5bduFY1aBZMfym6/yodfFO+0bDdrkCLE5hnVgO6fmmJ3EW3BEKVTk+llIB5TlnY3L7AhwWJz5/6+MO8qBjQ96voDmUR48FdGM9lsDHx//LGeYGOu9NicCaFJrPIIA2OIGvJvP0lNBf+so7iOe/iIt9LOKeu3NfKgrxztAWzRlV8nS2hua7IsoYq34HnqPMko5Y2tfGQgrSX8XuVOvSKqSxq3qemQGru0RFRK69wnGLp1jMguXszMKk5wRSrCIU6jlIOseXsjss+2Y0eXhzv+v4ZU7pfT2H1nqzrEtuq0gkPgYxyLAP1rMBMzETMU98B/jf8qFsBA==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
+        <value><![CDATA[LtpaToken=PUBjyRNSiMicDeydwCeSe/gUuml0fCDnccXoWVT0q2G+DB9N76HWlKqqf16uAHfzzNbPAEwptZNqH4INVmo/K5xuXFrznl08HW6qMsaWqiSnnoONNOeWPNzOVhjHbAXgyNVu+Z7c4oaxpsqHYzYe4Wwtaiu5GX1TlgSbpofbB7B6coN9ik2nPZhmlRvipNQ2y7hL0foIb6UhwN2+/LCf3IUc/YAk1jgjH4C8lPIHUypv6ZF0FmKyy8mxpdGXaA/KStdm/ujfrbSN07lkfddhCtyrtr9ocGeO6hPIeOQYNnx+Aucg4i8u+rcgnrcfaAsZDETkgxXipmMunpY6JIQiyg==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LCSESSIONID=0000dyMvMsIicI3CkJAIe3eVRwS:180t512oj; Path=/; HttpOnly]]></value>
+        <value><![CDATA[LtpaToken2=OiXv+fZ5jsbv538SneUjaCs9oLbk5Eix3vVugLnXd+V7gHF9BGegiMzsCGcouwBhRH60w1D8VIiZ/aJZBX5UP+uajx+w4nka1RDaRXm4F+/JQq4kb9j2FPULgsLU2HG6mGO/5KEi4umm+d/rg8obK5bzk7wnAjsbQHvf1fDuaaimNoNG7ffR7phBVSrq8OQuhqAACxgznXJYdoJirMshVp4U3BQ5Wodw/0boRlamsejPJMFFhp6gHDw1DnmfMcMqabfu5opQI2RNHuywKlwOAh23tzfcHEvorquJ+u224TLqxvIySx+vjxPA6RjGI7sNkVKa3Osac24cKYkJ4vysldoae6XwrQt2rkNVYbgAbrPjXJQPqNzUYLP0jWEH+8lqydBYNTw8ZyHd+jMkhT8wT8RD8k6U7p15y1L1/Hgx93QdvrwQ1uTQB9O6yrm6c+k6fd7pwlJYOQF0ta/jk+b5IgY9SaQcnKaS2lbbFfdVSya+ofPTtzXU6OFWsV+Bb/Zca2OuI2z4SUahTLJyCn8Ic0GUOCfQtuB5hikuxlNTtf/QdwpCidTmw3Uj+WptdbHGfyn52bvOvwa9iEL45F0ZMV2y28XwToPct+Yn4C8byX2Y7ZVGTnUKajJY7ffgCind7ZU80SLAWyU/H8MLTvNRaA==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LCSESSIONID=0000aVSF7voj02usppUW-04bmrZ:180t512oj; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Content-Length]]></name>
@@ -72,7 +76,7 @@
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Sat, 23 Nov 2013 12:22:56 GMT]]></value>
+        <value><![CDATA[Fri, 10 Jan 2014 15:23:11 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -96,7 +100,7 @@
     </header>
     <header>
         <name><![CDATA[Last-Modified]]></name>
-        <value><![CDATA[Sat, 23 Nov 2013 12:22:56 GMT]]></value>
+        <value><![CDATA[Fri, 10 Jan 2014 15:23:11 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Pragma]]></name>
@@ -104,15 +108,19 @@
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken=PUBjyRNSiMicDeydwCeSe/gUuml0fCDnccXoWVT0q2G+DB9N76HWlKqqf16uAHfzzNbPAEwptZNqH4INVmo/K0C8TDspK5fVHW6qMsaWqiSnnoONNOeWPNzOVhjHbAXgyNVu+Z7c4oaxpsqHYzYe4Wwtaiu5GX1TlgSbpofbB7B6coN9ik2nPZhmlRvipNQ2y7hL0foIb6UhwN2+/LCf3IUc/YAk1jgjH4C8lPIHUypv6ZF0FmKyy8mxpdGXaA/KStdm/ujfrbSN07lkfddhCtyrtr9ocGeO6hPIeOQYNnx+Aucg4i8u+rcgnrcfaAsZDETkgxXipmMunpY6JIQiyg==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
+        <value><![CDATA[lcLang=en_us; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=Yg3ZFtZPf6iSBKoKZjQ4xmElHzbN3qfjCx+4WdS5Mqw+Tg46DJsKqNBnQ7aGid92OHCre0MJIjda9TjbypDws9UfJ/vOTOk1PK899uEZsuQLTnZsh+tflG5S6hZV1uRFH77GRdBC9nUquFl8V7plSlM/LCvPumGthVAHbXP8VEPttLsP81WYQ2PbqHKkWHO7wXObhnAt3dL4FVxYEo4VD88ZnkkkZQD7cWo7hhhMjC/nvXbnOrHFLzQDyAGNj+NjbRCL1ZOKyHejl6LY1riBzoRy6zmsAWOX1I3fVcn0OhZTZukPhR04OObK+BG+INMJB3PN/h5x58t4Gm5bduFY1aBZMfym6/yodfFO+0bDdrkCLE5hnVgO6fmmJ3EW3BEKVTk+llIB5TlnY3L7AhwWJz5/6+MO8qBjQ96voDmUR48FdGM9lsDHx//LGeYGOu9NicCaFJrPIIA2OIGvJvP0lNBf+so7iOe/iIt9LOKeu3NfKgrxztAWzRlV8nS2hua7IsoYq34HnqPMko5Y2tfGQgrSX8XuVOvSKqSxq3qemQGru0RFRK69wnGLp1jMguXszMKk5wRSrCIU6jlIOseXsjss+2Y0eXhzv+v4ZU7pfT2H1nqzrEtuq0gkPgYxyLAP1rMBMzETMU98B/jf8qFsBA==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
+        <value><![CDATA[LtpaToken=PUBjyRNSiMicDeydwCeSe/gUuml0fCDnccXoWVT0q2G+DB9N76HWlKqqf16uAHfzzNbPAEwptZNqH4INVmo/K5xuXFrznl08HW6qMsaWqiSnnoONNOeWPNzOVhjHbAXgyNVu+Z7c4oaxpsqHYzYe4Wwtaiu5GX1TlgSbpofbB7B6coN9ik2nPZhmlRvipNQ2y7hL0foIb6UhwN2+/LCf3IUc/YAk1jgjH4C8lPIHUypv6ZF0FmKyy8mxpdGXaA/KStdm/ujfrbSN07lkfddhCtyrtr9ocGeO6hPIeOQYNnx+Aucg4i8u+rcgnrcfaAsZDETkgxXipmMunpY6JIQiyg==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LCSESSIONID=0000jVugmdMILWUt3ouWDZu8q2N:180t512oj; Path=/; HttpOnly]]></value>
+        <value><![CDATA[LtpaToken2=OiXv+fZ5jsbv538SneUjaCs9oLbk5Eix3vVugLnXd+V7gHF9BGegiMzsCGcouwBhRH60w1D8VIiZ/aJZBX5UP+uajx+w4nka1RDaRXm4F+/JQq4kb9j2FPULgsLU2HG6mGO/5KEi4umm+d/rg8obK5bzk7wnAjsbQHvf1fDuaaimNoNG7ffR7phBVSrq8OQuhqAACxgznXJYdoJirMshVp4U3BQ5Wodw/0boRlamsejPJMFFhp6gHDw1DnmfMcMqabfu5opQI2RNHuywKlwOAh23tzfcHEvorquJ+u224TLqxvIySx+vjxPA6RjGI7sNkVKa3Osac24cKYkJ4vysldoae6XwrQt2rkNVYbgAbrPjXJQPqNzUYLP0jWEH+8lqydBYNTw8ZyHd+jMkhT8wT8RD8k6U7p15y1L1/Hgx93QdvrwQ1uTQB9O6yrm6c+k6fd7pwlJYOQF0ta/jk+b5IgY9SaQcnKaS2lbbFfdVSya+ofPTtzXU6OFWsV+Bb/Zca2OuI2z4SUahTLJyCn8Ic0GUOCfQtuB5hikuxlNTtf/QdwpCidTmw3Uj+WptdbHGfyn52bvOvwa9iEL45F0ZMV2y28XwToPct+Yn4C8byX2Y7ZVGTnUKajJY7ffgCind7ZU80SLAWyU/H8MLTvNRaA==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LCSESSIONID=0000KY3fDciZbCT011_c7EdqFgs:180t512oj; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Keep-Alive]]></name>
@@ -136,44 +144,44 @@
     </header></headers>
 <data><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <entry xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns="http://www.w3.org/2005/Atom">
-  <snx:communityUuid>04b9d6d7-a5e6-4724-a24a-ee43c5f11e86</snx:communityUuid>
-  <id>http://communities.ibm.com:2006/service/atom/community/instance?communityUuid=04b9d6d7-a5e6-4724-a24a-ee43c5f11e86</id>
-  <title type="text">testCommunity 1385209372694</title>
+  <snx:communityUuid>a1be9e09-a91c-4c0e-a18f-46fcf76aa975</snx:communityUuid>
+  <id>http://communities.ibm.com:2006/service/atom/community/instance?communityUuid=a1be9e09-a91c-4c0e-a18f-46fcf76aa975</id>
+  <title type="text">testCommunity 1389367391291</title>
   <category term="community" scheme="http://www.ibm.com/xmlns/prod/sn/type">
   </category>
-  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/instance?communityUuid=04b9d6d7-a5e6-4724-a24a-ee43c5f11e86" rel="self">
+  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/instance?communityUuid=a1be9e09-a91c-4c0e-a18f-46fcf76aa975" rel="self">
   </link>
-  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/instance?communityUuid=04b9d6d7-a5e6-4724-a24a-ee43c5f11e86" rel="edit">
+  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/instance?communityUuid=a1be9e09-a91c-4c0e-a18f-46fcf76aa975" rel="edit">
   </link>
-  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/html/communityview?communityUuid=04b9d6d7-a5e6-4724-a24a-ee43c5f11e86" rel="alternate" type="text/html">
+  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/html/communityview?communityUuid=a1be9e09-a91c-4c0e-a18f-46fcf76aa975" rel="alternate" type="text/html">
   </link>
-  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/html/image?communityUuid=04b9d6d7-a5e6-4724-a24a-ee43c5f11e86&amp;lastMod=1385209373648" rel="http://www.ibm.com/xmlns/prod/sn/logo">
+  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/html/image?communityUuid=a1be9e09-a91c-4c0e-a18f-46fcf76aa975&amp;lastMod=1389367387905" rel="http://www.ibm.com/xmlns/prod/sn/logo">
   </link>
-  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/service?communityUuid=04b9d6d7-a5e6-4724-a24a-ee43c5f11e86" rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml">
+  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/service?communityUuid=a1be9e09-a91c-4c0e-a18f-46fcf76aa975" rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml">
   </link>
-  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/members?communityUuid=04b9d6d7-a5e6-4724-a24a-ee43c5f11e86" rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml">
+  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/members?communityUuid=a1be9e09-a91c-4c0e-a18f-46fcf76aa975" rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml">
   </link>
-  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/bookmarks?communityUuid=04b9d6d7-a5e6-4724-a24a-ee43c5f11e86" rel="http://www.ibm.com/xmlns/prod/sn/bookmarks" type="application/atom+xml">
+  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/bookmarks?communityUuid=a1be9e09-a91c-4c0e-a18f-46fcf76aa975" rel="http://www.ibm.com/xmlns/prod/sn/bookmarks" type="application/atom+xml">
   </link>
-  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/feeds?communityUuid=04b9d6d7-a5e6-4724-a24a-ee43c5f11e86" rel="http://www.ibm.com/xmlns/prod/sn/feeds" type="application/atom+xml">
+  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/feeds?communityUuid=a1be9e09-a91c-4c0e-a18f-46fcf76aa975" rel="http://www.ibm.com/xmlns/prod/sn/feeds" type="application/atom+xml">
   </link>
-  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/remoteApplications?communityUuid=04b9d6d7-a5e6-4724-a24a-ee43c5f11e86" rel="http://www.ibm.com/xmlns/prod/sn/remote-applications" type="application/atom+xml">
+  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/remoteApplications?communityUuid=a1be9e09-a91c-4c0e-a18f-46fcf76aa975" rel="http://www.ibm.com/xmlns/prod/sn/remote-applications" type="application/atom+xml">
   </link>
-  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/forum/topics?communityUuid=04b9d6d7-a5e6-4724-a24a-ee43c5f11e86" rel="http://www.ibm.com/xmlns/prod/sn/forum-topics" type="application/atom+xml">
+  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/forum/topics?communityUuid=a1be9e09-a91c-4c0e-a18f-46fcf76aa975" rel="http://www.ibm.com/xmlns/prod/sn/forum-topics" type="application/atom+xml">
   </link>
-  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/invites?communityUuid=04b9d6d7-a5e6-4724-a24a-ee43c5f11e86" rel="http://www.ibm.com/xmlns/prod/sn/invitations-list" type="application/atom+xml">
+  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/invites?communityUuid=a1be9e09-a91c-4c0e-a18f-46fcf76aa975" rel="http://www.ibm.com/xmlns/prod/sn/invitations-list" type="application/atom+xml">
   </link>
-  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/widgets?communityUuid=04b9d6d7-a5e6-4724-a24a-ee43c5f11e86" rel="http://www.ibm.com/xmlns/prod/sn/widgets" type="application/atom+xml">
+  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/widgets?communityUuid=a1be9e09-a91c-4c0e-a18f-46fcf76aa975" rel="http://www.ibm.com/xmlns/prod/sn/widgets" type="application/atom+xml">
   </link>
   <snx:membercount>1</snx:membercount>
   <snx:communityType>public</snx:communityType>
   <snx:handle></snx:handle>
-  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/subcommunities?communityUuid=04b9d6d7-a5e6-4724-a24a-ee43c5f11e86" rel="http://www.ibm.com/xmlns/prod/sn/subcommunities" type="application/atom+xml">
+  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/subcommunities?communityUuid=a1be9e09-a91c-4c0e-a18f-46fcf76aa975" rel="http://www.ibm.com/xmlns/prod/sn/subcommunities" type="application/atom+xml">
   </link>
   <snx:preModeration>true</snx:preModeration>
   <snx:postModeration>true</snx:postModeration>
-  <published>2013-11-23T12:22:53.648Z</published>
-  <updated>2013-11-23T12:22:55.648Z</updated>
+  <published>2014-01-10T15:23:07.905Z</published>
+  <updated>2014-01-10T15:23:10.792Z</updated>
   <content type="html">Java Community Content</content>
   <summary type="text">Java Community Content</summary>
   <author>
@@ -188,13 +196,13 @@
     <snx:userState>active</snx:userState>
     <email>***REMOVED***@renovations.com</email>
   </contributor>
-  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/connections/opensocial/rest/activitystreams/urn:lsid:lconn.ibm.com:communities.community:04b9d6d7-a5e6-4724-a24a-ee43c5f11e86/@all/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/activitystream" type="application/atom+xml">
+  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/connections/opensocial/rest/activitystreams/urn:lsid:lconn.ibm.com:communities.community:a1be9e09-a91c-4c0e-a18f-46fcf76aa975/@all/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/activitystream" type="application/atom+xml">
   </link>
-  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/connections/opensocial/rest/ublog/urn:lsid:lconn.ibm.com:communities.community:04b9d6d7-a5e6-4724-a24a-ee43c5f11e86/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/microblog" type="application/atom+xml">
+  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/connections/opensocial/rest/ublog/urn:lsid:lconn.ibm.com:communities.community:a1be9e09-a91c-4c0e-a18f-46fcf76aa975/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/microblog" type="application/atom+xml">
   </link>
   <snx:communityTheme snx:uuid="default">
   </snx:communityTheme>
-  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/broadcasts?communityUuid=04b9d6d7-a5e6-4724-a24a-ee43c5f11e86" rel="http://www.ibm.com/xmlns/prod/sn/community-broadcasts" type="application/atom+xml">
+  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/broadcasts?communityUuid=a1be9e09-a91c-4c0e-a18f-46fcf76aa975" rel="http://www.ibm.com/xmlns/prod/sn/community-broadcasts" type="application/atom+xml">
   </link>
 </entry>]]></data>
 </response>
@@ -202,7 +210,7 @@
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Sat, 23 Nov 2013 12:22:57 GMT]]></value>
+        <value><![CDATA[Fri, 10 Jan 2014 15:23:12 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -226,19 +234,23 @@
     </header>
     <header>
         <name><![CDATA[Last-Modified]]></name>
-        <value><![CDATA[Sat, 23 Nov 2013 12:22:57 GMT]]></value>
+        <value><![CDATA[Fri, 10 Jan 2014 15:23:12 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken=PUBjyRNSiMicDeydwCeSe/gUuml0fCDnccXoWVT0q2G+DB9N76HWlKqqf16uAHfzzNbPAEwptZNqH4INVmo/K0C8TDspK5fVHW6qMsaWqiSnnoONNOeWPNzOVhjHbAXgyNVu+Z7c4oaxpsqHYzYe4Wwtaiu5GX1TlgSbpofbB7B6coN9ik2nPZhmlRvipNQ2y7hL0foIb6UhwN2+/LCf3IUc/YAk1jgjH4C8lPIHUypv6ZF0FmKyy8mxpdGXaA/KStdm/ujfrbSN07lkfddhCtyrtr9ocGeO6hPIeOQYNnx+Aucg4i8u+rcgnrcfaAsZDETkgxXipmMunpY6JIQiyg==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
+        <value><![CDATA[lcLang=en_us; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=Yg3ZFtZPf6iSBKoKZjQ4xmElHzbN3qfjCx+4WdS5Mqw+Tg46DJsKqNBnQ7aGid92OHCre0MJIjda9TjbypDws9UfJ/vOTOk1PK899uEZsuQLTnZsh+tflG5S6hZV1uRFH77GRdBC9nUquFl8V7plSlM/LCvPumGthVAHbXP8VEPttLsP81WYQ2PbqHKkWHO7wXObhnAt3dL4FVxYEo4VD88ZnkkkZQD7cWo7hhhMjC/nvXbnOrHFLzQDyAGNj+NjbRCL1ZOKyHejl6LY1riBzoRy6zmsAWOX1I3fVcn0OhZTZukPhR04OObK+BG+INMJB3PN/h5x58t4Gm5bduFY1aBZMfym6/yodfFO+0bDdrkCLE5hnVgO6fmmJ3EW3BEKVTk+llIB5TlnY3L7AhwWJz5/6+MO8qBjQ96voDmUR48FdGM9lsDHx//LGeYGOu9NicCaFJrPIIA2OIGvJvP0lNBf+so7iOe/iIt9LOKeu3NfKgrxztAWzRlV8nS2hua7IsoYq34HnqPMko5Y2tfGQgrSX8XuVOvSKqSxq3qemQGru0RFRK69wnGLp1jMguXszMKk5wRSrCIU6jlIOseXsjss+2Y0eXhzv+v4ZU7pfT2H1nqzrEtuq0gkPgYxyLAP1rMBMzETMU98B/jf8qFsBA==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
+        <value><![CDATA[LtpaToken=PUBjyRNSiMicDeydwCeSe/gUuml0fCDnccXoWVT0q2G+DB9N76HWlKqqf16uAHfzzNbPAEwptZNqH4INVmo/K5xuXFrznl08HW6qMsaWqiSnnoONNOeWPNzOVhjHbAXgyNVu+Z7c4oaxpsqHYzYe4Wwtaiu5GX1TlgSbpofbB7B6coN9ik2nPZhmlRvipNQ2y7hL0foIb6UhwN2+/LCf3IUc/YAk1jgjH4C8lPIHUypv6ZF0FmKyy8mxpdGXaA/KStdm/ujfrbSN07lkfddhCtyrtr9ocGeO6hPIeOQYNnx+Aucg4i8u+rcgnrcfaAsZDETkgxXipmMunpY6JIQiyg==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LCSESSIONID=0000-SuSA5G9usMyMUKmYJf5i0g:180t512oj; Path=/; HttpOnly]]></value>
+        <value><![CDATA[LtpaToken2=OiXv+fZ5jsbv538SneUjaCs9oLbk5Eix3vVugLnXd+V7gHF9BGegiMzsCGcouwBhRH60w1D8VIiZ/aJZBX5UP+uajx+w4nka1RDaRXm4F+/JQq4kb9j2FPULgsLU2HG6mGO/5KEi4umm+d/rg8obK5bzk7wnAjsbQHvf1fDuaaimNoNG7ffR7phBVSrq8OQuhqAACxgznXJYdoJirMshVp4U3BQ5Wodw/0boRlamsejPJMFFhp6gHDw1DnmfMcMqabfu5opQI2RNHuywKlwOAh23tzfcHEvorquJ+u224TLqxvIySx+vjxPA6RjGI7sNkVKa3Osac24cKYkJ4vysldoae6XwrQt2rkNVYbgAbrPjXJQPqNzUYLP0jWEH+8lqydBYNTw8ZyHd+jMkhT8wT8RD8k6U7p15y1L1/Hgx93QdvrwQ1uTQB9O6yrm6c+k6fd7pwlJYOQF0ta/jk+b5IgY9SaQcnKaS2lbbFfdVSya+ofPTtzXU6OFWsV+Bb/Zca2OuI2z4SUahTLJyCn8Ic0GUOCfQtuB5hikuxlNTtf/QdwpCidTmw3Uj+WptdbHGfyn52bvOvwa9iEL45F0ZMV2y28XwToPct+Yn4C8byX2Y7ZVGTnUKajJY7ffgCind7ZU80SLAWyU/H8MLTvNRaA==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LCSESSIONID=0000BuJ8pTyMG_GWy_7G-gR5Fc6:180t512oj; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Content-Length]]></name>

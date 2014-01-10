@@ -1,0 +1,1825 @@
+<?xml version="1.0"?>
+<responses>
+<response statusCode="200" statusReason="OK">
+<headers>
+    <header>
+        <name><![CDATA[Date]]></name>
+        <value><![CDATA[Fri, 10 Jan 2014 15:28:30 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-Powered-By]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-LConn-Auth]]></name>
+        <value><![CDATA[false]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-UA-Compatible]]></name>
+        <value><![CDATA[IE=EmulateIE7]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Expires]]></name>
+        <value><![CDATA[Thu, 1 Jan 1970 00:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Last-Modified]]></name>
+        <value><![CDATA[Fri, 10 Jan 2014 15:28:30 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Pragma]]></name>
+        <value><![CDATA[no-cache]]></value>
+    </header>
+    <header>
+        <name><![CDATA[ETag]]></name>
+        <value><![CDATA[W/"1389367710701-aa7f282e-2ef1-4223-b412-82e93c79ca2c"]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[lcLang=en_us; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken=PUBjyRNSiMicDeydwCeSe/gUuml0fCDnccXoWVT0q2G+DB9N76HWlKqqf16uAHfzzNbPAEwptZNqH4INVmo/K5xuXFrznl08HW6qMsaWqiSnnoONNOeWPNzOVhjHbAXgyNVu+Z7c4oaxpsqHYzYe4Wwtaiu5GX1TlgSbpofbB7B6coN9ik2nPZhmlRvipNQ2y7hL0foIb6UhwN2+/LCf3IUc/YAk1jgjH4C8lPIHUypv6ZF0FmKyy8mxpdGXaA/KStdm/ujfrbSN07lkfddhCtyrtr9ocGeO6hPIeOQYNnx+Aucg4i8u+rcgnrcfaAsZDETkgxXipmMunpY6JIQiyg==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=OiXv+fZ5jsbv538SneUjaCs9oLbk5Eix3vVugLnXd+V7gHF9BGegiMzsCGcouwBhRH60w1D8VIiZ/aJZBX5UP+uajx+w4nka1RDaRXm4F+/JQq4kb9j2FPULgsLU2HG6mGO/5KEi4umm+d/rg8obK5bzk7wnAjsbQHvf1fDuaaimNoNG7ffR7phBVSrq8OQuhqAACxgznXJYdoJirMshVp4U3BQ5Wodw/0boRlamsejPJMFFhp6gHDw1DnmfMcMqabfu5opQI2RNHuywKlwOAh23tzfcHEvorquJ+u224TLqxvIySx+vjxPA6RjGI7sNkVKa3Osac24cKYkJ4vysldoae6XwrQt2rkNVYbgAbrPjXJQPqNzUYLP0jWEH+8lqydBYNTw8ZyHd+jMkhT8wT8RD8k6U7p15y1L1/Hgx93QdvrwQ1uTQB9O6yrm6c+k6fd7pwlJYOQF0ta/jk+b5IgY9SaQcnKaS2lbbFfdVSya+ofPTtzXU6OFWsV+Bb/Zca2OuI2z4SUahTLJyCn8Ic0GUOCfQtuB5hikuxlNTtf/QdwpCidTmw3Uj+WptdbHGfyn52bvOvwa9iEL45F0ZMV2y28XwToPct+Yn4C8byX2Y7ZVGTnUKajJY7ffgCind7ZU80SLAWyU/H8MLTvNRaA==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LCSESSIONID=0000mDgm6u07nn1SNrp2Et2O8Am:180t512oj; Path=/; HttpOnly]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Cache-Control]]></name>
+        <value><![CDATA[private, must-revalidate, max-age=0, no-cache=set-cookie]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Keep-Alive]]></name>
+        <value><![CDATA[timeout=10, max=100]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Connection]]></name>
+        <value><![CDATA[Keep-Alive]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Transfer-Encoding]]></name>
+        <value><![CDATA[chunked]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Type]]></name>
+        <value><![CDATA[application/atom+xml;charset=UTF-8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header></headers>
+<data><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<feed xmlns="http://www.w3.org/2005/Atom"
+  xmlns:app="http://www.w3.org/2007/app"   
+  xmlns:snx="http://www.ibm.com/xmlns/prod/sn"
+  xmlns:os="http://a9.com/-/spec/opensearch/1.1/"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+  xmlns:thr="http://purl.org/syndication/thread/1.0">
+  
+  
+  
+  
+  <generator uri="http://www.ibm.com/xmlns/prod/sn" version="4.5.0.0">IBM Connections - Activities</generator>
+  <icon>https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/styles/images/favicon.ico</icon>
+  <logo>https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/nav/common/images/iconActivities128.png</logo>
+  <id>https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/everything</id>
+  <title type="text">Everything for Frank Adams</title>
+  <updated>2014-01-10T15:28:19Z</updated> 
+  <author>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <name>Frank Adams</name>
+  <email>***REMOVED***@renovations.com</email>
+  <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+  
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </author> 
+  <link rel="self" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/everything"/>
+  <link rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/service" />
+  <link rel="http://www.ibm.com/xmlns/prod/sn/tag-cloud" type="application/atomcat+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/tags" />
+  <link rel="alternate" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/html/everything" />
+  
+
+
+
+
+
+
+
+	
+  <link rel="current" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/everything"/>
+  <link rel="first" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/everything" />
+  <link rel="last" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/everything?page=312" />
+  
+  <link rel="next" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/everything?page=2" />
+  
+  
+
+ 
+  <os:totalResults>3115</os:totalResults>
+  <os:startIndex>1</os:startIndex>
+  
+  
+  
+  
+    
+    <entry>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <id>urn:lsid:ibm.com:oa:dab1a169-c300-4a9e-93bc-577f0278d32c</id>
+  <title type="text">Java Test Activity1389367691618</title>
+  <updated>2014-01-10T15:28:19Z</updated>
+  <published>2014-01-10T15:28:08Z</published>
+  <author>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <name>Frank Adams</name>
+  <email>***REMOVED***@renovations.com</email>
+  <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+  <snx:ldapid>aa7f282e-2ef1-4223-b412-82e93c79ca2c</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </author>
+  <contributor>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <name>Frank Adams</name>
+  <email>***REMOVED***@renovations.com</email>
+  <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+  <snx:ldapid>aa7f282e-2ef1-4223-b412-82e93c79ca2c</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </contributor>
+  	
+    
+    
+  	     
+  	  
+  	    
+  	  
+ 	      <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="activity" label="Activity"/>
+  	  
+  	
+    
+  
+
+  <category scheme="http://www.ibm.com/xmlns/prod/sn/priority" term="1" label="Normal"/>
+  
+    
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    <category term="tag1" />
+  
+    <category term="tag2" />
+  
+  
+    <link rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/acl?activityUuid=dab1a169-c300-4a9e-93bc-577f0278d32c" />
+    <link rel="http://www.ibm.com/xmlns/prod/sn/history" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/activity/history?activityUuid=dab1a169-c300-4a9e-93bc-577f0278d32c" />
+    <link rel="http://www.ibm.com/xmlns/prod/sn/templates" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/entrytemplates?activityUuid=dab1a169-c300-4a9e-93bc-577f0278d32c" />
+   
+  
+  
+
+  
+    <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/activity?activityUuid=dab1a169-c300-4a9e-93bc-577f0278d32c">
+      <title type="text">Java Test Activity1389367691618</title>
+      <app:categories href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/categories?activityUuid=dab1a169-c300-4a9e-93bc-577f0278d32c"/>
+    </app:collection> 
+  
+  <snx:activity>dab1a169-c300-4a9e-93bc-577f0278d32c</snx:activity>
+  
+  
+  
+    <link rel="edit" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/activitynode?activityNodeUuid=dab1a169-c300-4a9e-93bc-577f0278d32c" />
+  
+   
+  
+    
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/activity?activityUuid=dab1a169-c300-4a9e-93bc-577f0278d32c"/>
+      
+        <link rel="alternate" type="application/xhtml+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/html/activity/recent?activityUuid=dab1a169-c300-4a9e-93bc-577f0278d32c"/>
+      	<link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/html/activity/recent?activityUuid=dab1a169-c300-4a9e-93bc-577f0278d32c"/>
+      
+     
+    
+  
+ 
+  <snx:position>-2147483648</snx:position>
+  <snx:depth>0</snx:depth>  
+  
+  <snx:permissions>none, create_activity, view_activity, edit_activity, delete_activity, activity_owner, edit_activity_tags, design_activity, edit_statements, delete_statements, add_members, delete_members, create_entries, edit_personal_entries, edit_all_entries, delete_personal_entries, delete_all_entries, edit_personal_entry_tags, edit_all_entry_tags, view_members</snx:permissions>
+  <snx:icon>https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/nav/common/images/iconActivities16.png</snx:icon>
+
+  
+    
+    
+    
+    
+      
+      
+        
+          <content type="text">
+          	GoalOfActivity - 1389367691618
+      	  </content>
+        
+        
+      
+    
+  
+  
+  
+
+    
+  
+  
+  
+  
+
+    </entry>
+  
+    
+    <entry>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <id>urn:lsid:ibm.com:oa:db531bca-17ef-4f4f-8717-7d9465b115b3</id>
+  <title type="text">entryNode from Java Test 1389367692788</title>
+  <updated>2014-01-10T15:28:09Z</updated>
+  <published>2014-01-10T15:28:09Z</published>
+  <author>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <name>Frank Adams</name>
+  <email>***REMOVED***@renovations.com</email>
+  <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+  <snx:ldapid>aa7f282e-2ef1-4223-b412-82e93c79ca2c</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </author>
+  <contributor>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <name>Frank Adams</name>
+  <email>***REMOVED***@renovations.com</email>
+  <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+  <snx:ldapid>aa7f282e-2ef1-4223-b412-82e93c79ca2c</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </contributor>
+  	
+    
+    
+  	     
+  	  
+  	    
+  	  
+ 	      <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="entry" label="Entry"/>
+  	  
+  	
+    
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    <category term="tag1" />
+  
+    <category term="tag2" />
+  
+   
+  
+    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:dab1a169-c300-4a9e-93bc-577f0278d32c" 
+       type="application/atom+xml" 
+       href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/activitynode?activityNodeUuid=dab1a169-c300-4a9e-93bc-577f0278d32c"
+       source="urn:lsid:ibm.com:oa:dab1a169-c300-4a9e-93bc-577f0278d32c"
+    />
+  
+  
+
+  
+  <snx:activity>dab1a169-c300-4a9e-93bc-577f0278d32c</snx:activity>
+  
+  
+  
+    <link rel="edit" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/activitynode?activityNodeUuid=db531bca-17ef-4f4f-8717-7d9465b115b3" />
+  
+   
+  
+    
+    
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/activitynode?activityNodeUuid=db531bca-17ef-4f4f-8717-7d9465b115b3"/>
+ 	  <link rel="alternate" type="application/xhtml+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/html/activityentry?uuid=db531bca-17ef-4f4f-8717-7d9465b115b3"/>
+      <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/html/activityentry?uuid=db531bca-17ef-4f4f-8717-7d9465b115b3"/>
+          
+    
+  
+ 
+  <snx:position>1000</snx:position>
+  <snx:depth>1</snx:depth>  
+  
+  <snx:permissions>none, create_activity, view_activity, edit_activity, delete_activity, activity_owner, edit_activity_tags, design_activity, edit_statements, delete_statements, add_members, delete_members, create_entries, edit_personal_entries, edit_all_entries, delete_personal_entries, delete_all_entries, edit_personal_entry_tags, edit_all_entry_tags, view_members</snx:permissions>
+  
+
+  
+    
+    
+    
+    
+      
+      
+        
+          <content type="text">
+          	entryNode Content 1389367692788
+      	  </content>
+        
+        
+      
+    
+  
+  
+  
+
+    
+  
+  
+  
+  
+
+    </entry>
+  
+    
+    <entry>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <id>urn:lsid:ibm.com:oa:fed18614-e45c-4d49-9095-acf4e2bc1456</id>
+  <title type="text">Entry under Section..1389367684470</title>
+  <updated>2014-01-10T15:28:04Z</updated>
+  <published>2014-01-10T15:28:02Z</published>
+  <author>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <name>Frank Adams</name>
+  <email>***REMOVED***@renovations.com</email>
+  <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+  <snx:ldapid>aa7f282e-2ef1-4223-b412-82e93c79ca2c</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </author>
+  <contributor>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <name>Frank Adams</name>
+  <email>***REMOVED***@renovations.com</email>
+  <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+  <snx:ldapid>aa7f282e-2ef1-4223-b412-82e93c79ca2c</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </contributor>
+  	
+    
+    
+  	     
+  	  
+  	    
+  	  
+ 	      <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="entry" label="Entry"/>
+  	  
+  	
+    
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    <category term="tag2" />
+  
+   
+  
+    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:ff8a5367-31e2-4508-9c99-981ee2fd6923" 
+       type="application/atom+xml" 
+       href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/activitynode?activityNodeUuid=ff8a5367-31e2-4508-9c99-981ee2fd6923"
+       source="urn:lsid:ibm.com:oa:6878500f-72e1-4278-a6c5-936ef81492dd"
+    />
+  
+  
+
+  
+  <snx:activity>6878500f-72e1-4278-a6c5-936ef81492dd</snx:activity>
+  
+  
+  
+    <link rel="edit" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/activitynode?activityNodeUuid=fed18614-e45c-4d49-9095-acf4e2bc1456" />
+  
+   
+  
+    
+    
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/activitynode?activityNodeUuid=fed18614-e45c-4d49-9095-acf4e2bc1456"/>
+ 	  <link rel="alternate" type="application/xhtml+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/html/activityentry?uuid=fed18614-e45c-4d49-9095-acf4e2bc1456"/>
+      <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/html/activityentry?uuid=fed18614-e45c-4d49-9095-acf4e2bc1456"/>
+          
+    
+  
+ 
+  <snx:position>9000</snx:position>
+  <snx:depth>2</snx:depth>  
+  
+  <snx:permissions>none, create_activity, view_activity, edit_activity, delete_activity, activity_owner, edit_activity_tags, design_activity, edit_statements, delete_statements, add_members, delete_members, create_entries, edit_personal_entries, edit_all_entries, delete_personal_entries, delete_all_entries, edit_personal_entry_tags, edit_all_entry_tags, view_members</snx:permissions>
+  
+
+  
+    
+    
+    
+    
+      
+      
+        
+          <content type="text">
+          	
+          	Entry moved under Section Programmatically
+      	  
+      	  </content>
+        
+        
+      
+    
+  
+  
+  
+
+    
+  
+  
+  
+  
+
+    </entry>
+  
+    
+    <entry>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <id>urn:lsid:ibm.com:oa:6878500f-72e1-4278-a6c5-936ef81492dd</id>
+  <title type="text">JSPActivity1389367427674</title>
+  <updated>2014-01-10T15:28:04Z</updated>
+  <published>2014-01-10T15:23:45Z</published>
+  <author>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <name>Frank Adams</name>
+  <email>***REMOVED***@renovations.com</email>
+  <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+  <snx:ldapid>aa7f282e-2ef1-4223-b412-82e93c79ca2c</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </author>
+  <contributor>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <name>Frank Adams</name>
+  <email>***REMOVED***@renovations.com</email>
+  <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+  <snx:ldapid>aa7f282e-2ef1-4223-b412-82e93c79ca2c</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </contributor>
+  	
+    
+    
+  	     
+  	  
+  	    
+  	  
+ 	      <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="activity" label="Activity"/>
+  	  
+  	
+    
+  
+
+  <category scheme="http://www.ibm.com/xmlns/prod/sn/priority" term="1" label="Normal"/>
+  
+    
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    <category term="tag1" />
+  
+    <category term="tag2" />
+  
+  
+    <link rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/acl?activityUuid=6878500f-72e1-4278-a6c5-936ef81492dd" />
+    <link rel="http://www.ibm.com/xmlns/prod/sn/history" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/activity/history?activityUuid=6878500f-72e1-4278-a6c5-936ef81492dd" />
+    <link rel="http://www.ibm.com/xmlns/prod/sn/templates" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/entrytemplates?activityUuid=6878500f-72e1-4278-a6c5-936ef81492dd" />
+   
+  
+  
+
+  
+    <app:collection href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/activity?activityUuid=6878500f-72e1-4278-a6c5-936ef81492dd">
+      <title type="text">JSPActivity1389367427674</title>
+      <app:categories href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/categories?activityUuid=6878500f-72e1-4278-a6c5-936ef81492dd"/>
+    </app:collection> 
+  
+  <snx:activity>6878500f-72e1-4278-a6c5-936ef81492dd</snx:activity>
+  
+  
+  
+    <link rel="edit" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/activitynode?activityNodeUuid=6878500f-72e1-4278-a6c5-936ef81492dd" />
+  
+   
+  
+    
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/activity?activityUuid=6878500f-72e1-4278-a6c5-936ef81492dd"/>
+      
+        <link rel="alternate" type="application/xhtml+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/html/activity/recent?activityUuid=6878500f-72e1-4278-a6c5-936ef81492dd"/>
+      	<link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/html/activity/recent?activityUuid=6878500f-72e1-4278-a6c5-936ef81492dd"/>
+      
+     
+    
+  
+ 
+  <snx:position>-2147483648</snx:position>
+  <snx:depth>0</snx:depth>  
+  
+  <snx:permissions>none, create_activity, view_activity, edit_activity, delete_activity, activity_owner, edit_activity_tags, design_activity, edit_statements, delete_statements, add_members, delete_members, create_entries, edit_personal_entries, edit_all_entries, delete_personal_entries, delete_all_entries, edit_personal_entry_tags, edit_all_entry_tags, view_members</snx:permissions>
+  <snx:icon>https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/nav/common/images/iconActivities16.png</snx:icon>
+
+  
+    
+    
+    
+    
+      
+      
+        
+          <content type="text">
+          	GoalOfActivity - 1389367427674
+      	  </content>
+        
+        
+      
+    
+  
+  
+  
+
+    
+  
+  
+  
+  
+
+    </entry>
+  
+    
+    <entry>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <id>urn:lsid:ibm.com:oa:ff8a5367-31e2-4508-9c99-981ee2fd6923</id>
+  <title type="text">sectionNode from JSP 1389367685156</title>
+  <updated>2014-01-10T15:28:03Z</updated>
+  <published>2014-01-10T15:28:03Z</published>
+  <author>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <name>Frank Adams</name>
+  <email>***REMOVED***@renovations.com</email>
+  <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+  <snx:ldapid>aa7f282e-2ef1-4223-b412-82e93c79ca2c</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </author>
+  <contributor>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <name>Frank Adams</name>
+  <email>***REMOVED***@renovations.com</email>
+  <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+  <snx:ldapid>aa7f282e-2ef1-4223-b412-82e93c79ca2c</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </contributor>
+  	
+    
+    
+  	     
+  	  
+  	    
+  	  
+ 	      <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="section" label="Section"/>
+  	  
+  	
+    
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+   
+  
+    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:6878500f-72e1-4278-a6c5-936ef81492dd" 
+       type="application/atom+xml" 
+       href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/activitynode?activityNodeUuid=6878500f-72e1-4278-a6c5-936ef81492dd"
+       source="urn:lsid:ibm.com:oa:6878500f-72e1-4278-a6c5-936ef81492dd"
+    />
+  
+  
+
+  
+  <snx:activity>6878500f-72e1-4278-a6c5-936ef81492dd</snx:activity>
+  
+  
+  
+    <link rel="edit" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/activitynode?activityNodeUuid=ff8a5367-31e2-4508-9c99-981ee2fd6923" />
+  
+   
+  
+    
+    
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/activitynode?activityNodeUuid=ff8a5367-31e2-4508-9c99-981ee2fd6923"/>
+ 	  <link rel="alternate" type="application/xhtml+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/html/activityentry?uuid=ff8a5367-31e2-4508-9c99-981ee2fd6923"/>
+      <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/html/activityentry?uuid=ff8a5367-31e2-4508-9c99-981ee2fd6923"/>
+          
+    
+  
+ 
+  <snx:position>2000</snx:position>
+  <snx:depth>1</snx:depth>  
+  
+  <snx:permissions>none, create_activity, view_activity, edit_activity, delete_activity, activity_owner, edit_activity_tags, design_activity, edit_statements, delete_statements, add_members, delete_members, create_entries, edit_personal_entries, edit_all_entries, delete_personal_entries, delete_all_entries, edit_personal_entry_tags, edit_all_entry_tags, view_members</snx:permissions>
+  
+
+  
+    
+    
+    
+    
+      
+      
+        
+          <content type="text">
+          	SectionNode Content 1389367685156
+      	  </content>
+        
+        
+      
+    
+  
+  
+  
+
+    
+  
+  
+  
+  
+
+    </entry>
+  
+    
+    <entry>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <id>urn:lsid:ibm.com:oa:e1838187-d81a-4fc7-96cc-b8e361521eb0</id>
+  <title type="text">ActivityNode for testing &#034;GET&#034;1389367568585</title>
+  <updated>2014-01-10T15:26:06Z</updated>
+  <published>2014-01-10T15:26:06Z</published>
+  <author>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <name>Frank Adams</name>
+  <email>***REMOVED***@renovations.com</email>
+  <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+  <snx:ldapid>aa7f282e-2ef1-4223-b412-82e93c79ca2c</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </author>
+  <contributor>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <name>Frank Adams</name>
+  <email>***REMOVED***@renovations.com</email>
+  <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+  <snx:ldapid>aa7f282e-2ef1-4223-b412-82e93c79ca2c</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </contributor>
+  	
+    
+    
+  	     
+  	  
+  	    
+  	  
+ 	      <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="chat" label="Chat"/>
+  	  
+  	
+    
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+   
+  
+    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:6878500f-72e1-4278-a6c5-936ef81492dd" 
+       type="application/atom+xml" 
+       href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/activitynode?activityNodeUuid=6878500f-72e1-4278-a6c5-936ef81492dd"
+       source="urn:lsid:ibm.com:oa:6878500f-72e1-4278-a6c5-936ef81492dd"
+    />
+  
+  
+
+  
+  <snx:activity>6878500f-72e1-4278-a6c5-936ef81492dd</snx:activity>
+  
+  
+  
+    <link rel="edit" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/activitynode?activityNodeUuid=e1838187-d81a-4fc7-96cc-b8e361521eb0" />
+  
+   
+  
+    
+    
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/activitynode?activityNodeUuid=e1838187-d81a-4fc7-96cc-b8e361521eb0"/>
+ 	  <link rel="alternate" type="application/xhtml+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/html/activityentry?uuid=e1838187-d81a-4fc7-96cc-b8e361521eb0"/>
+      <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/html/activityentry?uuid=e1838187-d81a-4fc7-96cc-b8e361521eb0"/>
+          
+    
+  
+ 
+  <snx:position>8000</snx:position>
+  <snx:depth>1</snx:depth>  
+  
+  <snx:permissions>none, create_activity, view_activity, edit_activity, delete_activity, activity_owner, edit_activity_tags, design_activity, edit_statements, delete_statements, add_members, delete_members, create_entries, edit_personal_entries, edit_all_entries, delete_personal_entries, delete_all_entries, edit_personal_entry_tags, edit_all_entry_tags, view_members</snx:permissions>
+  
+
+  
+    
+    
+    
+    
+      
+      
+        
+          <content type="text">
+          	ActivityNodeContent
+      	  </content>
+        
+        
+      
+    
+  
+  
+  
+
+    
+  
+  
+  
+  
+
+    </entry>
+  
+    
+    <entry>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <id>urn:lsid:ibm.com:oa:298f4cce-d002-4de2-8de0-78052b7c8e54</id>
+  <title type="text">todoNode from JSP 1389367501164</title>
+  <updated>2014-01-10T15:24:59Z</updated>
+  <published>2014-01-10T15:24:59Z</published>
+  <author>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <name>Frank Adams</name>
+  <email>***REMOVED***@renovations.com</email>
+  <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+  <snx:ldapid>aa7f282e-2ef1-4223-b412-82e93c79ca2c</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </author>
+  <contributor>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <name>Frank Adams</name>
+  <email>***REMOVED***@renovations.com</email>
+  <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+  <snx:ldapid>aa7f282e-2ef1-4223-b412-82e93c79ca2c</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </contributor>
+  	
+    
+    
+  	     
+  	  
+  	    
+  	  
+ 	      <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="todo" label="To Do"/>
+  	  
+  	
+    
+  
+
+  
+  
+    
+  
+  
+  
+  
+  
+  
+  
+     
+
+
+
+
+
+
+
+ 
+   <snx:assignedto name="Frank Adams" userid="0F19F8AD-37EA-6033-8525-7BBF005634B5">***REMOVED***@renovations.com</snx:assignedto>
+ 
+ 
+
+  
+  
+  
+    <category term="todonodetag" />
+  
+   
+  
+    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:6878500f-72e1-4278-a6c5-936ef81492dd" 
+       type="application/atom+xml" 
+       href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/activitynode?activityNodeUuid=6878500f-72e1-4278-a6c5-936ef81492dd"
+       source="urn:lsid:ibm.com:oa:6878500f-72e1-4278-a6c5-936ef81492dd"
+    />
+  
+  
+
+  
+  <snx:activity>6878500f-72e1-4278-a6c5-936ef81492dd</snx:activity>
+  
+  
+  
+    <link rel="edit" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/activitynode?activityNodeUuid=298f4cce-d002-4de2-8de0-78052b7c8e54" />
+  
+   
+  
+    
+    
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/activitynode?activityNodeUuid=298f4cce-d002-4de2-8de0-78052b7c8e54"/>
+ 	  <link rel="alternate" type="application/xhtml+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/html/activityentry?uuid=298f4cce-d002-4de2-8de0-78052b7c8e54"/>
+      <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/html/activityentry?uuid=298f4cce-d002-4de2-8de0-78052b7c8e54"/>
+          
+    
+  
+ 
+  <snx:position>1000</snx:position>
+  <snx:depth>1</snx:depth>  
+  
+  <snx:permissions>none, create_activity, view_activity, edit_activity, delete_activity, activity_owner, edit_activity_tags, design_activity, edit_statements, delete_statements, add_members, delete_members, create_entries, edit_personal_entries, edit_all_entries, delete_personal_entries, delete_all_entries, edit_personal_entry_tags, edit_all_entry_tags, view_members</snx:permissions>
+  <snx:icon>https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/nav/common/styles/images/activities/icon_taskIncomplete.gif</snx:icon>
+
+  
+    
+    
+    
+    
+      
+      
+        
+          <content type="text">
+          	Todo Node Content 1389367501164
+      	  </content>
+        
+        
+      
+    
+  
+  
+  
+
+    
+  
+  
+  
+  
+  <snx:communityUuid></snx:communityUuid>
+  
+
+    </entry>
+  
+    
+    <entry>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <id>urn:lsid:ibm.com:oa:29397f03-d38a-4525-aab4-a6b611966582</id>
+  <title type="text">sectionNode from JSP 1389367489415</title>
+  <updated>2014-01-10T15:24:47Z</updated>
+  <published>2014-01-10T15:24:47Z</published>
+  <author>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <name>Frank Adams</name>
+  <email>***REMOVED***@renovations.com</email>
+  <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+  <snx:ldapid>aa7f282e-2ef1-4223-b412-82e93c79ca2c</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </author>
+  <contributor>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <name>Frank Adams</name>
+  <email>***REMOVED***@renovations.com</email>
+  <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+  <snx:ldapid>aa7f282e-2ef1-4223-b412-82e93c79ca2c</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </contributor>
+  	
+    
+    
+  	     
+  	  
+  	    
+  	  
+ 	      <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="section" label="Section"/>
+  	  
+  	
+    
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+   
+  
+    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:6878500f-72e1-4278-a6c5-936ef81492dd" 
+       type="application/atom+xml" 
+       href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/activitynode?activityNodeUuid=6878500f-72e1-4278-a6c5-936ef81492dd"
+       source="urn:lsid:ibm.com:oa:6878500f-72e1-4278-a6c5-936ef81492dd"
+    />
+  
+  
+
+  
+  <snx:activity>6878500f-72e1-4278-a6c5-936ef81492dd</snx:activity>
+  
+  
+  
+    <link rel="edit" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/activitynode?activityNodeUuid=29397f03-d38a-4525-aab4-a6b611966582" />
+  
+   
+  
+    
+    
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/activitynode?activityNodeUuid=29397f03-d38a-4525-aab4-a6b611966582"/>
+ 	  <link rel="alternate" type="application/xhtml+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/html/activityentry?uuid=29397f03-d38a-4525-aab4-a6b611966582"/>
+      <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/html/activityentry?uuid=29397f03-d38a-4525-aab4-a6b611966582"/>
+          
+    
+  
+ 
+  <snx:position>4000</snx:position>
+  <snx:depth>1</snx:depth>  
+  
+  <snx:permissions>none, create_activity, view_activity, edit_activity, delete_activity, activity_owner, edit_activity_tags, design_activity, edit_statements, delete_statements, add_members, delete_members, create_entries, edit_personal_entries, edit_all_entries, delete_personal_entries, delete_all_entries, edit_personal_entry_tags, edit_all_entry_tags, view_members</snx:permissions>
+  
+
+  
+    
+    
+    
+    
+      
+      
+        
+          <content type="text">
+          	SectionNode Content 1389367489415
+      	  </content>
+        
+        
+      
+    
+  
+  
+  
+
+    
+  
+  
+  
+  
+
+    </entry>
+  
+    
+    <entry>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <id>urn:lsid:ibm.com:oa:12cd2fb7-1230-4c31-b77c-bf702f8a8bec</id>
+  <title type="text">reply to chat..1389367477666</title>
+  <updated>2014-01-10T15:24:35Z</updated>
+  <published>2014-01-10T15:24:35Z</published>
+  <author>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <name>Frank Adams</name>
+  <email>***REMOVED***@renovations.com</email>
+  <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+  <snx:ldapid>aa7f282e-2ef1-4223-b412-82e93c79ca2c</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </author>
+  <contributor>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <name>Frank Adams</name>
+  <email>***REMOVED***@renovations.com</email>
+  <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+  <snx:ldapid>aa7f282e-2ef1-4223-b412-82e93c79ca2c</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </contributor>
+  	
+    
+    
+  	     
+  	  
+  	    
+  	  
+ 	      <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="reply" label="Reply"/>
+  	  
+  	
+    
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+   
+  
+    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:46286c90-5966-4f44-b44c-02ba6cc98b34" 
+       type="application/atom+xml" 
+       href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/activitynode?activityNodeUuid=46286c90-5966-4f44-b44c-02ba6cc98b34"
+       source="urn:lsid:ibm.com:oa:6878500f-72e1-4278-a6c5-936ef81492dd"
+    />
+  
+  
+
+  
+  <snx:activity>6878500f-72e1-4278-a6c5-936ef81492dd</snx:activity>
+  
+  
+  
+    <link rel="edit" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/activitynode?activityNodeUuid=12cd2fb7-1230-4c31-b77c-bf702f8a8bec" />
+  
+   
+  
+    
+    
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/activitynode?activityNodeUuid=12cd2fb7-1230-4c31-b77c-bf702f8a8bec"/>
+ 	  <link rel="alternate" type="application/xhtml+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/html/activityentry?uuid=12cd2fb7-1230-4c31-b77c-bf702f8a8bec"/>
+      <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/html/activityentry?uuid=12cd2fb7-1230-4c31-b77c-bf702f8a8bec"/>
+          
+    
+  
+ 
+  <snx:position>1000</snx:position>
+  <snx:depth>2</snx:depth>  
+  
+  <snx:permissions>none, create_activity, view_activity, edit_activity, delete_activity, activity_owner, edit_activity_tags, design_activity, edit_statements, delete_statements, add_members, delete_members, create_entries, edit_personal_entries, edit_all_entries, delete_personal_entries, delete_all_entries, edit_personal_entry_tags, edit_all_entry_tags, view_members</snx:permissions>
+  
+
+  
+    
+    
+    
+    
+      
+      
+        
+          <content type="text">
+          	Hi! Jsp1389367477666
+      	  </content>
+        
+        
+      
+    
+  
+  
+  
+
+    
+  
+  
+  
+  
+
+    </entry>
+  
+    
+    <entry>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <id>urn:lsid:ibm.com:oa:46286c90-5966-4f44-b44c-02ba6cc98b34</id>
+  <title type="text">Chatting ..1389367476652</title>
+  <updated>2014-01-10T15:24:34Z</updated>
+  <published>2014-01-10T15:24:34Z</published>
+  <author>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <name>Frank Adams</name>
+  <email>***REMOVED***@renovations.com</email>
+  <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+  <snx:ldapid>aa7f282e-2ef1-4223-b412-82e93c79ca2c</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </author>
+  <contributor>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <name>Frank Adams</name>
+  <email>***REMOVED***@renovations.com</email>
+  <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+  <snx:ldapid>aa7f282e-2ef1-4223-b412-82e93c79ca2c</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </contributor>
+  	
+    
+    
+  	     
+  	  
+  	    
+  	  
+ 	      <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="chat" label="Chat"/>
+  	  
+  	
+    
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+   
+  
+    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:6878500f-72e1-4278-a6c5-936ef81492dd" 
+       type="application/atom+xml" 
+       href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/activitynode?activityNodeUuid=6878500f-72e1-4278-a6c5-936ef81492dd"
+       source="urn:lsid:ibm.com:oa:6878500f-72e1-4278-a6c5-936ef81492dd"
+    />
+  
+  
+
+  
+  <snx:activity>6878500f-72e1-4278-a6c5-936ef81492dd</snx:activity>
+  
+  
+  
+    <link rel="edit" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/activitynode?activityNodeUuid=46286c90-5966-4f44-b44c-02ba6cc98b34" />
+  
+   
+  
+    
+    
+      <link rel="self" type="application/atom+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/atom2/activitynode?activityNodeUuid=46286c90-5966-4f44-b44c-02ba6cc98b34"/>
+ 	  <link rel="alternate" type="application/xhtml+xml" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/html/activityentry?uuid=46286c90-5966-4f44-b44c-02ba6cc98b34"/>
+      <link rel="alternate" type="text/html" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/activities/service/html/activityentry?uuid=46286c90-5966-4f44-b44c-02ba6cc98b34"/>
+          
+    
+  
+ 
+  <snx:position>7000</snx:position>
+  <snx:depth>1</snx:depth>  
+  
+  <snx:permissions>none, create_activity, view_activity, edit_activity, delete_activity, activity_owner, edit_activity_tags, design_activity, edit_statements, delete_statements, add_members, delete_members, create_entries, edit_personal_entries, edit_all_entries, delete_personal_entries, delete_all_entries, edit_personal_entry_tags, edit_all_entry_tags, view_members</snx:permissions>
+  
+
+  
+    
+    
+    
+    
+      
+      
+        
+          <content type="text">
+          	Jsp Content
+      	  </content>
+        
+        
+      
+    
+  
+  
+  
+
+    
+  
+  
+  
+  
+
+    </entry>
+  	
+       
+  
+  
+</feed>
+]]></data>
+</response>
+</responses>

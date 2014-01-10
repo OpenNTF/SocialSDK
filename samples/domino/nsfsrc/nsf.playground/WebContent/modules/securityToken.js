@@ -13,7 +13,7 @@ define(['dojo/request/xhr', 'dojo/_base/url'], function(xhr, Url) {
 		//We need to encode the container id here even though it is already encoded
 		//This is because the encoded container id is the ID so if we just place the container
 		//id in the URL and it gets decoded than Shindig will not be able to find the container
-		return 'osplayground/container/stgen?c=' + encodeURIComponent(container) + 
+		return 'sbtos/container/stgen?c=' + encodeURIComponent(container) + 
 		'&d=' + domain + '&i=' + appId + '&u=' + appUrl + '&m=0';
 	};
 	return {

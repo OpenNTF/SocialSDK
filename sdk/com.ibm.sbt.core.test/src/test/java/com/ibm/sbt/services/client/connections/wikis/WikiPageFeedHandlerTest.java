@@ -56,10 +56,10 @@ public class WikiPageFeedHandlerTest extends BaseWikiServiceTest {
 		assertEquals("fadams@renovations.com", wikiPage.getModifier().getEmail());
 		assertEquals("active", wikiPage.getModifier().getState());
 		
-		assertEquals(DateSerializer.valueOf("2013-11-28T15:06:58.100Z"), wikiPage.getPublished());
-		assertEquals(DateSerializer.valueOf("2013-11-28T15:07:50.640Z"), wikiPage.getUpdated());
-		assertEquals(DateSerializer.valueOf("2013-11-28T15:06:58.100Z"), wikiPage.getCreated());
-		assertEquals(DateSerializer.valueOf("2013-11-28T15:06:58.100Z"), wikiPage.getModified());
+		assertEquals("2013-11-28T15:06:58.000Z", DateSerializer.toString(wikiPage.getPublished()));
+		assertEquals("2013-11-28T15:07:50.000Z", DateSerializer.toString(wikiPage.getUpdated()));
+		assertEquals("2013-11-28T15:06:58.000Z", DateSerializer.toString(wikiPage.getCreated()));
+		assertEquals("2013-11-28T15:06:58.000Z", DateSerializer.toString(wikiPage.getModified()));
 	
 		assertEquals("1", wikiPage.getVersionLabel());
 		assertEquals("a7852910-e40c-426d-8ed8-b68ccd1bfa2f", wikiPage.getVersionUuid());

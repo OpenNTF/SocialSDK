@@ -362,7 +362,7 @@ public class ForumService extends BaseService {
 	public Forum getForum(String forumUuid) throws ForumServiceException {
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put(FORUM_UNIQUE_IDENTIFIER, forumUuid);
-		String url = resolveUrl(ForumType.FORUM,null,parameters);
+		String url = resolveUrl(ForumType.FORUM,null,null);
 		Forum forum;
 		try {
 			forum = (Forum)getEntity(url, parameters, new ForumsFeedHandler(this));

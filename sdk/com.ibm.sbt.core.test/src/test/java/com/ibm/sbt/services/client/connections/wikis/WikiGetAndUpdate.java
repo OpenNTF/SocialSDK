@@ -25,6 +25,7 @@ import java.util.Map;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -41,7 +42,7 @@ public class WikiGetAndUpdate extends BaseWikiServiceTest {
 		wikiCreated = createWiki(wiki);
 	}
 	
-	@Test
+	@Test @Ignore
 	public void getWikiTest() throws Exception {
 		Wiki wikiGot = wikiService.getWiki(wikiCreated.getLabel(), null);
 		
@@ -52,7 +53,7 @@ public class WikiGetAndUpdate extends BaseWikiServiceTest {
 		assertEquals(wikiCreated.getTags(), wikiGot.getTags());
 	}
 	
-	@Test
+	@Test @Ignore
 	public void updateWikiTest() throws Exception {
 		Map<String,String> getParams = new HashMap<String, String>();
 		getParams.put("includeTags", "true");

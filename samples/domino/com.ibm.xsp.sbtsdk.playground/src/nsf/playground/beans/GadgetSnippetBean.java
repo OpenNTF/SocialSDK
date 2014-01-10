@@ -19,8 +19,8 @@ public abstract class GadgetSnippetBean extends AssetBean {
 	public static final String FORM = "GadgetSnippet";
 	//Loads the default common container feature plug embedded experiences, open views, actions, and selection.
 	//To load another feature just put a colon then the feature name.  For example if I want to load feature foo I would put
-	// /.ibmxspres/domino/osplayground/gadgets/js/container:embedded-experiences:open-views:actions:selection:foo.js
-	public static final String CONTAINER_JS = "/.ibmxspres/domino/osplayground/gadgets/js/container:embedded-experiences:open-views:actions:selection.js?c=1&debug=1&container=";
+	// /.ibmxspres/domino/sbtos/gadgets/js/container:embedded-experiences:open-views:actions:selection:foo.js
+	public static final String CONTAINER_JS = "/.ibmxspres/domino/sbtos/gadgets/js/container:embedded-experiences:open-views:actions:selection.js?c=1&debug=1&container=";
 	
 	protected String getAssetForm() {
 		return FORM;

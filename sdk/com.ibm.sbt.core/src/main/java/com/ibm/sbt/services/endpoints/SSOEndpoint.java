@@ -150,6 +150,12 @@ public class SSOEndpoint extends AbstractEndpoint {
 	            }
         	}
         	
+        	// Fix in calculating the domain correctly
+        	// If the host is qs.renovations.com, domain should be renovations.com and not qs.renovations.com
+        	if(StringUtil.isNotEmpty(_domain) && StringUtil.countMatch(_domain,'.')>1){
+        		_domain = _domain.substring(_domain.indexOf('.')+1,_domain.length());
+        	}
+        	
         	if (logger.isLoggable(Level.INFO)) {
         		String msg = MessageFormat.format("SSO endpoint domain for {0} is {1}", url, _domain);
         		logger.log(Level.INFO, msg);

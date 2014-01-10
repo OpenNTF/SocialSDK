@@ -1635,4 +1635,23 @@ public class StringUtil {
     		index = pos;
     	} while(true);
     }
+    
+    /**
+     * Counts occurance of character in a provided string
+     * @param source
+     * @param match
+     * @return
+     */
+	public static int countMatch(String source, char match)
+	{
+		int count = 0;
+		if(isNotEmpty(source)){
+		    for (int i=0; i < source.length(); i++) {
+		    	if(StringUtil.equals(source.charAt(i), match)) {
+		        	count++;
+		        }
+		    }
+		}
+		 return count;
+	}
 }

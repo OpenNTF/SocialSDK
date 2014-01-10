@@ -18,7 +18,7 @@ import com.ibm.sbt.services.client.connections.wikis.WikiServiceTestSuite;
 @RunWith(Suite.class)
 @SuiteClasses({
 	CommunityServiceTest.class, 
-	FileServiceTest.class,
+	FileServiceTest.class/*,
 	ForumServiceGetTests.class,
 	BlogServiceTestSuite.class,
 	ActivityServiceTest.class,
@@ -26,7 +26,7 @@ import com.ibm.sbt.services.client.connections.wikis.WikiServiceTestSuite;
 	BookmarkServiceTest.class,
 	FollowServiceTest.class,
 	ProfileServiceTest.class,
-	WikiServiceTestSuite.class
+	WikiServiceTestSuite.class*/
 })
 public class ConnectionsTestSuite {
 

@@ -23,6 +23,7 @@ import static org.junit.Assert.fail;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.ibm.sbt.services.client.ClientServicesException;
@@ -33,7 +34,7 @@ import com.ibm.sbt.services.client.ClientServicesException;
  */
 public class WikiCreateAndDeleteTest extends BaseWikiServiceTest {
 
-	@Test
+	@Test @Ignore
 	public void createWikiTest() throws Exception {
 		Wiki wiki = newWiki();
 		

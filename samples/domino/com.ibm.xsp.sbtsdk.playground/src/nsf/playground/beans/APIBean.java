@@ -3,8 +3,11 @@ package nsf.playground.beans;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.StringTokenizer;
 import java.util.Vector;
 
 import lotus.domino.Database;
@@ -288,4 +291,22 @@ public abstract class APIBean extends AssetBean {
 		return a;
 	}
 
+	public String[] split(Object value) {
+		if(value==null) {
+			return null;
+		}
+		String s = value.toString();
+		if(StringUtil.isEmpty(s)) {
+			return null;
+		}
+		ArrayList<String> l = new ArrayList<String>();
+		StringTokenizer tk = new StringTokenizer(s,",;\n");
+		while(tk.hasMoreElements()) {
+			String v = ((String)tk.nextElement()).trim();
+			if(StringUtil.isNotEmpty(v)) {
+				l.add(v);
+			}
+		}
+		return l.toArray(new String[l.size()]);
+	}
 }

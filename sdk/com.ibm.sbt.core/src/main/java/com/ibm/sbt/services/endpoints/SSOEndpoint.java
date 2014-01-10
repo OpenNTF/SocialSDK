@@ -152,7 +152,7 @@ public class SSOEndpoint extends AbstractEndpoint {
         	
         	// Fix in calculating the domain correctly
         	// If the host is qs.renovations.com, domain should be renovations.com and not qs.renovations.com
-        	if(StringUtil.isNotEmpty(_domain) && StringUtil.countMatch(_domain,'.')>1){
+        	if(StringUtil.isNotEmpty(_domain) && countMatch(_domain,'.')>1){
         		_domain = _domain.substring(_domain.indexOf('.')+1,_domain.length());
         	}
         	
@@ -161,7 +161,17 @@ public class SSOEndpoint extends AbstractEndpoint {
         		logger.log(Level.INFO, msg);
         	}
         }
-        
+		private static int countMatch(String source, char match) {
+			int count=0;
+			if(StringUtil.isNotEmpty(source)) {
+				for(int i=0; i<source.length(); i++) {
+					if(StringUtil.equals(source.charAt(i), match)) {
+						count++;
+					}
+				}
+			}
+			return count;
+		}        
         
         public String getRawCookieValue(javax.servlet.http.Cookie cookie, HttpServletRequest request) {
         	try {

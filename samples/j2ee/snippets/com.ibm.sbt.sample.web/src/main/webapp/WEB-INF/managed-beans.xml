@@ -6,6 +6,18 @@
 		<managed-bean-class>com.ibm.sbt.security.credential.store.MemoryStore</managed-bean-class>
 		<managed-bean-scope>application</managed-bean-scope>
 	</managed-bean>
+	
+	
+	<!-- Sample configuration for WebSphere Portal Proxy -->
+	<managed-bean>
+		<managed-bean-name>ProxyConfig</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.service.proxy.WPSProxy</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+		<managed-property> 
+			<property-name>proxyUrl</property-name> 
+			<value>/wps/proxy</value> 
+		</managed-property>
+	</managed-bean>
 
 	<!--  
 		Password store based on DBCredentialStore
@@ -177,6 +189,10 @@
 			<property-name>forceTrustSSLCertificate</property-name>
 			<value>true</value>
 		</managed-property>
+		<managed-property>
+			<property-name>proxyConfig</property-name>
+			<value>ProxyConfig</value>
+		</managed-property>
 	</managed-bean>
 	
 	<!-- W3 Connections Basic -->
@@ -229,6 +245,11 @@
 		<managed-property>
 			<property-name>forceTrustSSLCertificate</property-name>
 			<value>true</value>
+		</managed-property>
+				<!-- Sample proxy config usage -->
+		<managed-property>
+			<property-name>proxyConfig</property-name>
+			<value>ProxyConfig</value>
 		</managed-property>
 	</managed-bean>
 

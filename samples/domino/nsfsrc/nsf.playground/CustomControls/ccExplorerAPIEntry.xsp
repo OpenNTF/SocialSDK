@@ -165,7 +165,7 @@
 									</xp:attr>
 								</xp:this.attrs>
 								<xp:selectItems>
-									<xp:this.value><![CDATA[#{javascript:p.values}]]></xp:this.value>
+									<xp:this.value><![CDATA[#{javascript:apiBean.split(p.values)}]]></xp:this.value>
 								</xp:selectItems>
 							</xp:comboBox>
 						</xp:this.facets>

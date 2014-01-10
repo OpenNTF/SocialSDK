@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+	<xp:div styleClass="warning1">
+		<xp:this.loaded><![CDATA[${javascript:@ClientType()=="Web"}]]></xp:this.loaded>
+		<style>
+			div.warning1 { padding: 5px; font-weight:bold; border: 1px
+			solid #EFA6A5; background-color: #FFE3E0; border-radius:3px;
+			-moz-border-radius:3px; -webkit-border-radius:3px; }
+		</style>
+		<xp:image url="/warning.png" id="image1"></xp:image>
+		OpenSocial gadgets which use OAuth 1.0a or 2.0 will not work if you are not logged into the Playground.  Click &#160;
+		<xp:link escape="true" text="HERE" id="link1">
+			<xp:this.value><![CDATA[/?opendatabase&login]]></xp:this.value>
+		</xp:link>
+		&#160; to Login.
+	</xp:div>
+</xp:view>

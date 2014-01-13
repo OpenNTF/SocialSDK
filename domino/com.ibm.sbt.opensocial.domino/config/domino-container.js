@@ -6,5 +6,5 @@
   //null will be sent to the servlet and that is not a valid security token
   "gadgets.uri.iframe.alwaysAppendSecurityToken" : "true",
   "gadgets.securityTokenType" : "secure",
-  "gadgets.securityTokenTTL" : 3600
+  "gadgets.securityTokenTTL" : 86400
 }

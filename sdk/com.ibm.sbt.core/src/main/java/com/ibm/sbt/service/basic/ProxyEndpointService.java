@@ -124,7 +124,9 @@ public class ProxyEndpointService extends ProxyService {
     @Override
     protected boolean prepareForwardingMethod(HttpRequestBase method, HttpServletRequest request, DefaultHttpClient client) throws ServletException {
         boolean ret = super.prepareForwardingMethod(method, request, client);
+    	Object timedObject = ProxyProfiler.getTimedObject();
         initEndpoint(method, request, client, endpoint);
+        ProxyProfiler.profileTimedRequest(timedObject, "Endpoint initialization");
         return ret;
     }
 

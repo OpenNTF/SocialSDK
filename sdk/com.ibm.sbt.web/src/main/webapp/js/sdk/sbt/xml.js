@@ -65,7 +65,7 @@ define(['./lang'], function(lang) {
 			}
 		},
 		getText : function (xmlElement){
-			if(navigator.appName == 'Microsoft Internet Explorer'){
+			if(!document.evaluate){
 				return xmlElement.text;
 			}else{
 				return xmlElement.textContent;

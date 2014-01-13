@@ -40,6 +40,6 @@ public class ChangeEntryType extends BaseActivitiesTest {
 	public void testChangeActivityNodeType() {
 		JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
 		JsonJavaObject json = previewPage.getJson();
-		Assert.assertEquals(json.getAsString("getType"), "To Do");
+		Assert.assertEquals("todo", json.getAsString("getType"));
 	}
 }

@@ -185,7 +185,7 @@
 		<managed-bean-scope>session</managed-bean-scope>
 		<managed-property>
 			<property-name>url</property-name>
-			<value>%{sso.url}</value>
+			<value>%{connections.url}</value>
 		</managed-property>
 		<!-- Trust the connection -->
 		<managed-property>

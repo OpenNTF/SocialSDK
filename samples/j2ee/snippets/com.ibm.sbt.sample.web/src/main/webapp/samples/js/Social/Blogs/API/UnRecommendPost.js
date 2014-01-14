@@ -8,7 +8,7 @@ require(["sbt/connections/BlogService", "sbt/dom", "sbt/json"],
         post.setTitle("BlogPost at " + now.getTime());
         post.setContent("BlogPost Content at " + now.getTime());
         
-    	blogService.getBlogs({ ps: 1 }).then(
+    	blogService.getAllBlogs({ ps: 1 }).then(
             function(blogs){
             	post.setBlogHandle(blogs[0].getHandle());
             	return blogService.createPost(post);

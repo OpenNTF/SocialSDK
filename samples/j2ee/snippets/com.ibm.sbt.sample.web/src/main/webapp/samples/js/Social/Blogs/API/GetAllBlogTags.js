@@ -1,7 +1,7 @@
 require(["sbt/connections/BlogService", "sbt/dom", "sbt/json"], 
     function(BlogService, dom, json) {
         var blogService = new BlogService();  
-        var promise = blogService.getBlogsTags();
+        var promise = blogService.getAllBlogTags();
     	promise.then(
 			function(tags) {
 				dom.setText("json", json.jsonBeanStringify(promise.response));
@@ -11,7 +11,5 @@ require(["sbt/connections/BlogService", "sbt/dom", "sbt/json"],
                 dom.setText("json", json.jsonBeanStringify(error));
             }
     	);
-					        
-					        
     }
 );

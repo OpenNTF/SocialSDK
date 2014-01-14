@@ -443,8 +443,13 @@ var Endpoint = declare(null, {
 		var promise = new Promise();
 		args = args || {};
 		var self = this;
-		var proxy = this.proxy.proxyUrl;
-		var actionURL = proxy.substring(0, proxy.lastIndexOf("/")) + "/authHandler/" + this.proxyPath + "/isAuthValid";
+		var actionURL = "";
+		if (!args.actionURL) {
+			var proxy = this.proxy.proxyUrl;
+			actionURL = proxy.substring(0, proxy.lastIndexOf("/")) + "/authHandler/" + this.proxyPath + "/isAuthValid";
+		} else {
+			actionURL = args.actionURL;
+		}
 		this.transport.xhr('POST',{			
 			handleAs : "json",
 			url : actionURL,

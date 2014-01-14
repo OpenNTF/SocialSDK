@@ -37,11 +37,16 @@ define([ "../../../declare", "../../../lang", "../../../stringUtil", "../../../l
 		
 		grid : null,
 		
+		actionButtonTemplate: null,
+		
 		/**
 		 * 
 		 */
 		postMixInProperties : function() {
 			this.inherited(arguments);
+			if(this.template){
+				this.templateString = this.template;
+			}
 		},
 
 		/**
@@ -52,6 +57,10 @@ define([ "../../../declare", "../../../lang", "../../../stringUtil", "../../../l
 		postCreate : function() {
 			this.inherited(arguments);
 			
+			if(this.disabledActionClass){
+				this.actionBar.disabledClass = this.disabledActionClass;
+			}
+			
 			if (!this.grid && this.defaultGrid) {
 				var gridArgs = (this.type) ? {type : this.type} : {};
 				gridArgs = lang.mixin(gridArgs, this.gridArgs || {});
@@ -60,12 +69,54 @@ define([ "../../../declare", "../../../lang", "../../../stringUtil", "../../../l
 				this.setContent(this.grid);
 			}
 			
+			if(this.actionButtonTemplate){
+				this.actionBar.actionTemplate = this.actionButtonTemplate;
+			}
+			
 			if (this.grid && this.defaultActions) {
+				var _dialogArgs = {};
+				var _shareFileArgs = {};
+				var _uploadFileArgs = {};
+				var _addTagsArgs = {};
+				var _moveToTrashArgs = {};
+				
+				if(this.dialogTemplate){
+					_dialogArgs = {templateString: this.dialogTemplate};
+				}
+				if(this.shareFilesTemplate){
+					_shareFileArgs = {templateString:this.shareFilesTemplate};	
+				}
+				if(this.uploadFileTemplate){
+					_uploadFileArgs = {templateString:this.uploadFileTemplate};
+				}
+				if(this.addTagsTemplate){
+					_addTagsArgs = {templateString:this.addTagsTemplate};
+				}
+				if(this.moveToTrashTemplate){
+					_moveToTrashArgs = {templateString:this.moveToTrashTemplate};
+				}	
+				
 				//this.addAction(new DownloadFileAction({grid : this.grid}));
-				//this.addAction(new ShareFileAction({grid : this.grid}));
-				this.addAction(new UploadFileAction({grid : this.grid}));
-				this.addAction(new AddTagsAction({grid : this.grid}));
-				//this.addAction(new MoveToTrashAction({grid : this.grid}));
+				this.addAction(new ShareFileAction({
+					grid : this.grid,
+					dialogArgs:_dialogArgs,
+					widgetArgs:_shareFileArgs
+				}));
+				this.addAction(new UploadFileAction({
+					grid : this.grid,
+					dialogArgs:_dialogArgs,
+					widgetArgs:_uploadFileArgs
+				}));
+				this.addAction(new AddTagsAction({
+					grid : this.grid,
+					dialogArgs:_dialogArgs,
+					widgetArgs:_addTagsArgs
+				}));
+				this.addAction(new MoveToTrashAction({
+					grid : this.grid, 
+					dialogArgs: _dialogArgs,
+					widgetArgs:_moveToTrashArgs
+				}));
 			}
 		}
 	

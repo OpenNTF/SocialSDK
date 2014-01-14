@@ -64,12 +64,14 @@ define([ "../../../declare", "../../../dom", "../../../lang",
 			}, this.widgetArgs || {});
 			this.widget = new MoveToTrashWidget(widgetArgs);
 			
-			var dialog = new Dialog({ 
-    			title: this.name,
+			var dialogArgs = lang.mixin({
+				title: this.name,
     			nls: { OK: nls.moveToTrash },
     			dialogContent: this.widget,
     			onExecute: lang.hitch(this.widget, this.widget.onExecute)
-    		});
+			},this.dialogArgs || {});
+			
+			var dialog = new Dialog(dialogArgs);
     		dialog.show();
 		}
 	});

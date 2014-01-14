@@ -148,8 +148,8 @@ define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUt
 		 * Set the successMessage for the specified upload operation
 		 */
 		_setSuccessMessage : function(file) {
-			var file = "<a href=\"" + file.getDownloadUrl() + "\">" + file.getTitle() + "</a>";
-			this.successTemplate = "<div>" + stringUtil.transform(nls.uploadFileSuccess, { file : file }) + "</div>";
+			var file = file.getTitle() ;
+			this.successTemplate =  stringUtil.transform(nls.uploadFileSuccess, { file : file });
 		},
 		
 		/*

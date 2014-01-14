@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import lotus.domino.Session;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shindig.auth.AbstractSecurityToken;
 import org.apache.shindig.auth.AbstractSecurityToken.Keys;
 import org.apache.shindig.auth.SecurityTokenCodec;
@@ -141,7 +142,7 @@ public class SecurityTokenServlet extends InjectedServlet {
 		String userId = null;
 		String userName = userSession.getEffectiveUserName();
 		try {
-			if(userName.contains("CN=")) {
+			if(StringUtils.containsIgnoreCase(userName, "CN=")) {
 				userId = getCanonicalShindigId(userName);
 			} else {
 				userId = IdUtil.getShindigId(userName);

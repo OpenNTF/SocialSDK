@@ -23,15 +23,15 @@ import org.junit.runners.Suite.SuiteClasses;
 import com.ibm.sbt.test.js.connections.blogs.api.DeleteBlog;
 import com.ibm.sbt.test.js.connections.blogs.api.DeleteComment;
 import com.ibm.sbt.test.js.connections.blogs.api.DeletePost;
-import com.ibm.sbt.test.js.connections.blogs.api.GetBlogsPosts;
+import com.ibm.sbt.test.js.connections.blogs.api.GetAllBlogPosts;
 import com.ibm.sbt.test.js.connections.blogs.api.CreateBlog;
 import com.ibm.sbt.test.js.connections.blogs.api.CreateComment;
 import com.ibm.sbt.test.js.connections.blogs.api.CreatePost;
 import com.ibm.sbt.test.js.connections.blogs.api.GetBlogComments;
 import com.ibm.sbt.test.js.connections.blogs.api.GetBlogPosts;
-import com.ibm.sbt.test.js.connections.blogs.api.GetBlogs;
-import com.ibm.sbt.test.js.connections.blogs.api.GetBlogsComments;
-import com.ibm.sbt.test.js.connections.blogs.api.GetBlogsTags;
+import com.ibm.sbt.test.js.connections.blogs.api.GetAllBlogs;
+import com.ibm.sbt.test.js.connections.blogs.api.GetAllBlogComments;
+import com.ibm.sbt.test.js.connections.blogs.api.GetAllBlogTags;
 import com.ibm.sbt.test.js.connections.blogs.api.GetComment;
 import com.ibm.sbt.test.js.connections.blogs.api.GetFeaturedBlogs;
 import com.ibm.sbt.test.js.connections.blogs.api.GetMyBlogs;
@@ -54,9 +54,9 @@ import com.ibm.sbt.test.js.connections.blogs.api.GetBlogTags;
 	CreateComment.class,
 	GetBlogComments.class,
 	GetBlogPosts.class,
-	GetBlogs.class,
-	GetBlogsComments.class,
-	GetBlogsPosts.class,
+	GetAllBlogs.class,
+	GetAllBlogComments.class,
+	GetAllBlogPosts.class,
 	GetFeaturedBlogs.class,
 	GetMyBlogs.class,
 	GetComment.class,
@@ -66,7 +66,7 @@ import com.ibm.sbt.test.js.connections.blogs.api.GetBlogTags;
 	DeletePost.class,
 	DeleteBlog.class,
 //	GetBlogTags.class, commented out for now because there is an open question regarding this with API team. tags added to a post are not found in all blog tags feed.
-	GetBlogsTags.class,
+	GetAllBlogTags.class,
 	RecommendPost.class,
 	UnRecommendPost.class
 })

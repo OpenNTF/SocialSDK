@@ -7,7 +7,7 @@ require(["sbt/connections/BlogService", "sbt/dom", "sbt/json"],
         post.setContent("BlogPost Content at " + now.getTime());
         var comment = blogService.newComment();
         comment.setContent("Comment Content at " + now.getTime());
-    	blogService.getBlogs({ ps: 1 }).then(
+    	blogService.getAllBlogs({ ps: 1 }).then(
 			function(blogs){
 				post.setBlogHandle(blogs[0].getHandle());
 				return blogService.createPost(post); // returning newly created blog post
@@ -15,7 +15,7 @@ require(["sbt/connections/BlogService", "sbt/dom", "sbt/json"],
     	).then(
 			function(createdPost){
 				comment.setBlogHandle(createdPost.getBlogHandle());
-				comment.setBlogPostUuid(createdPost.getBlogPostUuid());
+				comment.setPostUuid(createdPost.getPostUuid());
 				return blogService.createComment(comment); // returning newly created comment
             }
     	).then(

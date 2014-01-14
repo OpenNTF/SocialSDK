@@ -28,11 +28,11 @@ import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
  *  
  * @date 08 May 2013
  */
-public class GetBlogs extends BaseApiTest {
+public class GetAllBlogs extends BaseApiTest {
     
     static final String SNIPPET_ID = "Social_Blogs_API_GetAllBlogs";
 
-    public GetBlogs() {
+    public GetAllBlogs() {
         setAuthType(AuthType.AUTO_DETECT);
     }
     

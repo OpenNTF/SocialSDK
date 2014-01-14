@@ -7,7 +7,7 @@ require(["sbt/connections/BlogService", "sbt/dom", "sbt/json"],
         blog.setHandle("BlogHandle " + now.getTime());
     	blogService.createBlog(blog).then(
             function(){
-            	return blogService.getBlogs({ ps: 5 });
+            	return blogService.getAllBlogs({ ps: 5 });
             }
        ).then(
        		function(blogs) {

@@ -2,7 +2,7 @@ require(["sbt/connections/BlogService", "sbt/dom", "sbt/json"],
     function(BlogService, dom, json) {
 		var now = new Date();
         var blogService = new BlogService();  
-    	blogService.getBlogs({ ps: 1 }).then(
+    	blogService.getAllBlogs({ ps: 1 }).then(
             function(blogs){
             	var blog = blogs[0];
                 blog.setTitle("Blog Updated at " + now.getTime());

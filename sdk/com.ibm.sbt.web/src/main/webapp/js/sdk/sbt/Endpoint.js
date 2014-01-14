@@ -382,8 +382,13 @@ var Endpoint = declare(null, {
 		var promise = new Promise();
 		args = args || {};
 		var self = this;
-		var proxy = this.proxy.proxyUrl;
-		var actionURL = proxy.substring(0, proxy.lastIndexOf("/")) + "/authHandler/" + this.proxyPath + "/logout";
+		var actionURL = "";
+		if (!args.actionUrl) {
+			var proxy = this.proxy.proxyUrl;
+			actionURL = proxy.substring(0, proxy.lastIndexOf("/")) + "/authHandler/" + this.proxyPath + "/logout";
+		} else {
+			actionURL = args.actionUrl;
+		}
 		this.transport.xhr('POST',{
 			handleAs : "json",
 			url : actionURL,

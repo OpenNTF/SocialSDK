@@ -409,11 +409,11 @@ var Endpoint = declare(null, {
 		var promise = new Promise();
 		args = args || {};
 		var actionURL = "";
-		if (!args.actionURL) {
+		if (!args.actionUrl) {
 			var proxy = this.proxy.proxyUrl;
 			actionURL = proxy.substring(0, proxy.lastIndexOf("/")) + "/authHandler/" + this.proxyPath + "/isAuth";
 		} else {
-			actionURL = args.actionURL;
+			actionURL = args.actionUrl;
 		}
 		this.transport.xhr('POST',{
 			handleAs : "json",
@@ -444,11 +444,11 @@ var Endpoint = declare(null, {
 		args = args || {};
 		var self = this;
 		var actionURL = "";
-		if (!args.actionURL) {
+		if (!args.actionUrl) {
 			var proxy = this.proxy.proxyUrl;
 			actionURL = proxy.substring(0, proxy.lastIndexOf("/")) + "/authHandler/" + this.proxyPath + "/isAuthValid";
 		} else {
-			actionURL = args.actionURL;
+			actionURL = args.actionUrl;
 		}
 		this.transport.xhr('POST',{			
 			handleAs : "json",

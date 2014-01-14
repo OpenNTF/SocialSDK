@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * ï¿½ Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -152,7 +152,7 @@ var Endpoint = declare(null, {
      *            be sent with the request.
      * @param {Boolean}
      *            [options.preventCache=false] If true will send an extra
-     *            query parameter to ensure the the server won’t supply
+     *            query parameter to ensure the the server wonï¿½t supply
      *            cached values.
      * @param {String}
      *            [options.method=GET] The HTTP method that should be used
@@ -408,9 +408,13 @@ var Endpoint = declare(null, {
 	isAuthenticated : function(args) {
 		var promise = new Promise();
 		args = args || {};
-		var self = this;
-		var proxy = this.proxy.proxyUrl;
-		var actionURL = proxy.substring(0, proxy.lastIndexOf("/")) + "/authHandler/" + this.proxyPath + "/isAuth";
+		var actionURL = "";
+		if (!args.actionURL) {
+			var proxy = this.proxy.proxyUrl;
+			actionURL = proxy.substring(0, proxy.lastIndexOf("/")) + "/authHandler/" + this.proxyPath + "/isAuth";
+		} else {
+			actionURL = args.actionURL;
+		}
 		this.transport.xhr('POST',{
 			handleAs : "json",
 			url : actionURL,

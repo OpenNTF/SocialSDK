@@ -171,7 +171,7 @@ define([ "../declare", "../lang", "../stringUtil", "./BaseConstants", "./BaseEnt
         /**
          * Return array of category terms from ATOM entry document.
          * 
-         * @method getTags
+         * @method getCategoryTerms
          * @return {Object} Array of categories of the ATOM entry
          */
         getCategoryTerms : function() {

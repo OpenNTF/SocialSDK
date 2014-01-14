@@ -144,7 +144,7 @@ return declare(null, {
 	}
 	
 	_computeActionURL: function(options) {
-		if (this.actionUrl == "") {
+		if (this.actionUrl == "" || this.actionUrl == null) {
 			var proxy = options.proxy.proxyUrl;
 			return proxy.substring(0,proxy.lastIndexOf("/"))+"/basicAuth/"+options.proxyPath+"/JSApp";
 		}

@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * ï¿½ Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -39,8 +39,7 @@ define(["sbt/config", 'jquery/ui'], function(config) {
 				jQuery("#wrongCredsMessage").css("display","block");
 				return;
 			}else{
-				var proxy = options.proxy.proxyUrl;
-				var proxyServletURL = proxy.substring(0,proxy.lastIndexOf("/"))+"/basicAuth/"+options.proxyPath+"/JSApp";
+				var proxyServletURL = options.actionUrl;
 	    		var postToProxy = {
 					url: proxyServletURL, 
 					content: contentForm,

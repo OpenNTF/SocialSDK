@@ -141,7 +141,7 @@ return declare(null, {
 		window.location.href = url;
 		
 		return true;
-	}
+	},
 	
 	_computeActionURL: function(options) {
 		if (this.actionUrl == "" || this.actionUrl == null) {

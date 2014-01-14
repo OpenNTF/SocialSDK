@@ -65,12 +65,13 @@ return declare(null, {
 	},	
 	
 	_authDialog: function(options, dialogLoginPage, sbtConfig) {
+		var self = this;
 		require(["sbt/_bridge/ui/BasicAuth_Dialog", "sbt/dom"], function(dialog, dom) {
 		    if(options.cancel){
 	            sbtConfig.cancel = options.cancel;
 	        }
 		    
-		    options.actionUrl = this._computeActionURL(options);
+		    options.actionUrl = self._computeActionURL(options);
 	        
 			dialog.show(options, dialogLoginPage);
 			dom.setText('wrongCredsMessage', loginForm.wrong_creds_message);

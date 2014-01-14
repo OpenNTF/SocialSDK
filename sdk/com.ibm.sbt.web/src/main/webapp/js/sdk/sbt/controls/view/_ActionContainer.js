@@ -176,8 +176,10 @@ define([ "../../declare", "../../lang", "../../stringUtil", "../../log", "../../
 		_setActionEnabled : function(actionElement, enabled) {
 			if (enabled == false) {
 				dom.addClass(actionElement.element, this.disabledClass);
+				actionElement.element.firstElementChild.setAttribute("disabled",true);
 			} else {
 				dom.removeClass(actionElement.element, this.disabledClass);
+				actionElement.element.firstElementChild.removeAttribute("disabled");
 			}
 		},
 

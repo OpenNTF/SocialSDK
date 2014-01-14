@@ -65,12 +65,14 @@ define([ "../../../declare", "../../../dom", "../../../lang",
 			}, this.widgetArgs || {});
 			this.widget = new AddTagsWidget(widgetArgs);
 			
-			var dialog = new Dialog({ 
-    			title: this.name,
-    			nls: { OK: nls.labelAddTags },
-    			dialogContent: this.widget,
-    			onExecute: lang.hitch(this.widget, this.widget.onExecute)
-    		});
+			var dialogArgs = lang.mixin({ 
+	    			title: this.name,
+	    			nls: { OK: nls.labelAddTags },
+	    			dialogContent: this.widget,
+	    			onExecute: lang.hitch(this.widget, this.widget.onExecute)
+	    	},this.dialogArgs || {});
+			
+			var dialog = new Dialog(dialogArgs);
     		dialog.show();
 		}
 	});

@@ -65,13 +65,14 @@ define([ "../../../declare", "../../../dom", "../../../lang",
 			}, this.widgetArgs || {});
 			var widget = new ShareFileWidget(widgetArgs);
 			
-			var dialog = new Dialog({ 
+			var dialogArgs = lang.mixin({ 
     			title: this.name,
     			dialogStyle : "width: 600px;",
     			nls: { OK: nls.share },
     			dialogContent: widget,
     			onExecute: lang.hitch(widget, widget.onExecute)
-    		});
+    		},this.dialogArgs || {});
+			var dialog = new Dialog(dialogArgs);
     		dialog.show();
 		}
 	});

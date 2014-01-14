@@ -82,6 +82,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
             rankRecommendations : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/recommendations']",
             rankComment : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/comment']",
             rankHit : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/hit']",
+            repliesUrl : "a:link[@rel='replies']/@href",
             sourceId : "a:source/a:id",
             sourceTitle  : "a:source/a:title ",
             sourceLink : "a:source/a:link[@rel='self']/@href",
@@ -379,6 +380,15 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.IdeationBlogService
          */ 
-        AtomVotedIdeas : "/${blogs}/{blogHomepageHandle}/feed/myvotes/atom"
+        AtomVotedIdeas : "/${blogs}/{blogHomepageHandle}/feed/myvotes/atom",
+        
+        /**
+         * Get list of comments to the specified blog entry.
+         * 
+         * @property AtomBlogEntryComments
+         * @type String
+         * @for sbt.connections.BlogService
+         */
+        AtomBlogEntryComments : "/${blogs}/{blogHandle}/feed/entrycomments/{entryAnchor}/atom"
     });
 });

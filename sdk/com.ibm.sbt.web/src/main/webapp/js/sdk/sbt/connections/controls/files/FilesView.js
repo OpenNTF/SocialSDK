@@ -61,11 +61,11 @@ define([ "../../../declare", "../../../lang", "../../../stringUtil", "../../../l
 			}
 			
 			if (this.grid && this.defaultActions) {
-				//this.addAction(new DownloadFileAction({grid : this.grid}));
-				//this.addAction(new ShareFileAction({grid : this.grid}));
+				this.addAction(new DownloadFileAction({grid : this.grid}));
+				this.addAction(new ShareFileAction({grid : this.grid}));
 				this.addAction(new UploadFileAction({grid : this.grid}));
 				this.addAction(new AddTagsAction({grid : this.grid}));
-				//this.addAction(new MoveToTrashAction({grid : this.grid}));
+				this.addAction(new MoveToTrashAction({grid : this.grid}));
 			}
 		}
 	

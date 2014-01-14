@@ -3,13 +3,12 @@ require(["sbt/connections/BlogService", "sbt/dom", "sbt/json"],
         var blogService = new BlogService(); 
         console.log("blogService blogService "+blogService);
         try{
-    	blogService.getBlogs({ ps: 1 }).then(   //getting first blog by setting page size to 1
+    	blogService.getAllBlogs({ ps: 1 }).then(   //getting first blog by setting page size to 1
             function(blogs){
             	return blogService.getBlog(blogs[0].getBlogUuid());
             }
     	).then(
 			function(blog) {
-				console.log("blog blog "+blog);
 				dom.setText("json", json.jsonBeanStringify(blog.toJson()));
             },
             function(error) {

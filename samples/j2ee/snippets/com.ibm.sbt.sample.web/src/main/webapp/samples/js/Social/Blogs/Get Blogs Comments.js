@@ -13,7 +13,7 @@ require(["sbt/connections/BlogService", "sbt/dom"],
 	    };
     
     	var blogService = new BlogService();
-    	blogService.getBlogsComments({ ps: 5 }).then(
+    	blogService.getAllBlogComments({ ps: 5 }).then(
             function(comments){
                 if (comments.length == 0) {
                     text = "All blogs returned no results.";

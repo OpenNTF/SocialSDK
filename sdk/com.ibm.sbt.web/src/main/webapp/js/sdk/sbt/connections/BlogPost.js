@@ -47,6 +47,7 @@ define(["../declare", "../base/AtomEntity", "./BlogConstants" ],
          * Return the value of IBM Connections blog post ID
          * entry document.
          * 
+         * @deprecated Use getPostUuid instead.
          * @method getBlogPostUuid
          * @return {String} ID of the blog post
          */
@@ -62,11 +63,52 @@ define(["../declare", "../base/AtomEntity", "./BlogConstants" ],
         /**
          * Sets id of IBM Connections blog post Id.
          * 
+         * @deprecated Use setPostUuid instead
          * @method setBlogPostUuid
          * @param {String} BlogPostUuid of the blog post
          */
         setBlogPostUuid : function(postUuid) {
             return this.setAsString("postUuid", postUuid);
+        },
+        
+        /**
+         * Return the value of IBM Connections blog post ID.
+         * 
+         * @method getPostUuid
+         * @return {String} Unique id of the blog post
+         */
+        getPostUuid : function() {
+        	var postUuidPrefix = "urn:lsid:ibm.com:blogs:entry-";
+        	var postUuid = this.getAsString("postUuid");
+        	if(postUuid && postUuid.indexOf(postUuidPrefix) != -1){
+        		postUuid = postUuid.substring(postUuidPrefix.length, postUuid.length);
+        	}
+            return postUuid;
+        },
+
+        /**
+         * Sets id of IBM Connections blog post Id.
+         * 
+         * @method setPostUuid
+         * @param {String} Unique id of the blog post
+         */
+        setPostUuid : function(postUuid) {
+            return this.setAsString("postUuid", postUuid);
+        },
+        
+        /**
+         * Return the entry anchor for this blog post.
+         * 
+         * @method getEntryAnchor
+         * @return {String} Entry anchor for this blog post
+         */
+        getEntryAnchor : function() {
+        	var entry = this.dataHandler.getData();
+        	var base = entry.getAttribute("xml:base");
+        	if (base) {
+        		var n = base.lastIndexOf("/"); 
+        		return base.substring(n+1);
+        	}
         },
         
         /**
@@ -129,6 +171,16 @@ define(["../declare", "../base/AtomEntity", "./BlogConstants" ],
         },
         
         /**
+         * Return the replies url of the ATOM entry document.
+         * 
+         * @method getRepliesUrl
+         * @return {String} Replies url
+         */
+        getRepliesUrl : function() {
+            return this.getAsString("repliesUrl");
+        },
+        
+        /**
          * Return the last updated dateRecomendations URL of the IBM Connections blog post from
          * blog ATOM entry document.
          * 
@@ -147,7 +199,7 @@ define(["../declare", "../base/AtomEntity", "./BlogConstants" ],
          * @return {String} Last updated date of the Blog post
          */
         getRecomendationsCount : function() {
-            return this.getAsString("rankRecommendations");
+            return this.getAsNumber("rankRecommendations");
         },
         
         /**
@@ -158,7 +210,7 @@ define(["../declare", "../base/AtomEntity", "./BlogConstants" ],
          * @return {String} Last updated date of the Blog post
          */
         getCommentCount : function() {
-            return this.getAsString("rankComment");
+            return this.getAsNumber("rankComment");
         },
         
         /**
@@ -169,7 +221,7 @@ define(["../declare", "../base/AtomEntity", "./BlogConstants" ],
          * @return {String} Last updated date of the Blog post
          */
         getHitCount : function() {
-            return this.getAsDate("rankHit");
+            return this.getAsNumber("rankHit");
         },
 
         /**
@@ -256,6 +308,18 @@ define(["../declare", "../base/AtomEntity", "./BlogConstants" ],
             } else {
                 return this.service.createPost(this, args);
             }
+        },
+        
+        /**
+         * Return comments associated with this blog post.
+         * 
+         * @method getComments
+         * @param {Object} [args] Argument object
+         */
+        getComments : function(args) {
+        	var blogHandle = this.getBlogHandle();
+        	var entryAnchor = this.getEntryAnchor();
+        	return this.service.getEntryComments(blogHandle, entryAnchor, args);
         }
     });
     return BlogPost;

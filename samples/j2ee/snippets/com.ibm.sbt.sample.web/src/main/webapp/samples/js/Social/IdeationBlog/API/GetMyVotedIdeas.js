@@ -6,7 +6,7 @@ require(["sbt/connections/IdeationBlogService", "sbt/connections/BlogService", "
         var post = blogService.newBlogPost(); // assumes that atleast one community has Ideation blog widget added to it. 
         post.setTitle("Idea at " + now.getTime());
         post.setContent("Idea at " + now.getTime());
-        blogService.getBlogs({ ps: 1, blogType: "ideationblog" }).then(
+        blogService.getAllBlogs({ ps: 1, blogType: "ideationblog" }).then(
 			function(IdeationBlogs) {
 				post.setBlogHandle(IdeationBlogs[0].getHandle());
 				return ideationBlogService.contributeIdea(post);

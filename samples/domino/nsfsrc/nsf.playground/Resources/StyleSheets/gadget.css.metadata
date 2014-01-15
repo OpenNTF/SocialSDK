@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="85257AA80077A28B" version="9.0" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="73e" sequence="6" unid="2CBC25646E33CC2A85257C19007BD973">
-<created><datetime>20131104T173245,95-05</datetime></created>
-<modified><datetime>20131114T114744,55-05</datetime></modified>
-<revised><datetime>20131114T114744,54-05</datetime></revised>
-<lastaccessed><datetime>20131114T114744,55-05</datetime></lastaccessed>
-<addedtofile><datetime>20131104T173245,96-05</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></updatedby>
-<wassignedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></wassignedby>
+<?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="85257BC0006BB913" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="7fe" sequence="15" unid="747DD3F209AEFF5D85257C3600705922">
+<created><datetime>20131203T152708,50-05</datetime></created>
+<modified><datetime>20140115T114555,75-05</datetime></modified>
+<revised><datetime>20140115T114555,74-05</datetime></revised>
+<lastaccessed><datetime>20140115T114555,75-05</datetime></lastaccessed>
+<addedtofile><datetime>20131203T152710,67-05</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Renovations Administrator/O=renovations</name></updatedby>
+<wassignedby><name>CN=Renovations Administrator/O=renovations</name></wassignedby>
 <item name="$TITLE"><text>gadget.css</text></item>
 <item name="$MimeType"><text>text/css</text></item>
 <item name="$Flags"><text>34C=Q</text></item>

@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * Â©  Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -28,6 +28,7 @@ return declare(null, {
 	loginPage:		"/sbt/authenticator/templates/login.html",
 	dialogLoginPage:"authenticator/templates/loginDialog.html",
 	url: "",
+	actionUrl: "",
 	
 	/**
 	 * Constructor, necessary so that this.url is not empty. 
@@ -64,10 +65,13 @@ return declare(null, {
 	},	
 	
 	_authDialog: function(options, dialogLoginPage, sbtConfig) {
+		var self = this;
 		require(["sbt/_bridge/ui/BasicAuth_Dialog", "sbt/dom"], function(dialog, dom) {
 		    if(options.cancel){
 	            sbtConfig.cancel = options.cancel;
 	        }
+		    
+		    options.actionUrl = self._computeActionURL(options);
 	        
 			dialog.show(options, dialogLoginPage);
 			dom.setText('wrongCredsMessage', loginForm.wrong_creds_message);
@@ -80,8 +84,7 @@ return declare(null, {
 	},
 	
 	_authPopup: function(options, loginPage, sbtConfig, sbtUrl) {
-        var proxy = options.proxy.proxyUrl;
-        var actionURL = proxy.substring(0,proxy.lastIndexOf("/"))+"/basicAuth/"+options.proxyPath+"/JSApp";
+        var actionURL = this._computeActionURL(options);
         var urlParamsMap = {
             actionURL: actionURL,
             redirectURL: 'empty',
@@ -121,8 +124,7 @@ return declare(null, {
 	},
 	
 	_authMainWindow: function(options, loginPage, sbtUrl) {
-		var proxy = options.proxy.proxyUrl;
-		var actionURL = proxy.substring(0,proxy.lastIndexOf("/"))+"/basicAuth/"+options.proxyPath+"/JSApp";
+		var actionURL = this._computeActionURL(options);
 		var urlParamsMap = {
             actionURL: actionURL,
             redirectURL: document.URL,
@@ -140,6 +142,14 @@ return declare(null, {
 		window.location.href = url;
 		
 		return true;
+	},
+	
+	_computeActionURL: function(options) {
+		if (!this.actionUrl) {
+			var proxy = options.proxy.proxyUrl;
+			return proxy.substring(0,proxy.lastIndexOf("/"))+"/basicAuth/"+options.proxyPath+"/JSApp";
+		}
+		return this.actionUrl;
 	}
 	
 }

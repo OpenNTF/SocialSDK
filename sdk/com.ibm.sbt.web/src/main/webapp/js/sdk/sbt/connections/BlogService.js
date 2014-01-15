@@ -301,24 +301,24 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         },
         
         /**
-         * Return the last updated dateRecomendations URL of the IBM Connections blog post comment from
+         * Return the last updated dateRecommendations URL of the IBM Connections blog post comment from
          * blog ATOM entry document.
          * 
-         * @method getRecomendationsURL
-         * @return {String} Recomendations URL of the Blog Post comment
+         * @method getRecommendationsURL
+         * @return {String} Recommendations URL of the Blog Post comment
          */
-        getRecomendationsURL : function() {
-            return this.getAsString("recomendationsUrl");
+        getRecommendationsURL : function() {
+            return this.getAsString("recommendationsUrl");
         },
         
         /**
-         * Return the Recomendations count of the IBM Connections blog post comment from
+         * Return the Recommendations count of the IBM Connections blog post comment from
          * blog ATOM entry document.
          * 
-         * @method getRecomendationsCount
+         * @method getRecommendationsCount
          * @return {String} Number of recommendations for the Blog post comment
          */
-        getRecomendationsCount : function() {
+        getRecommendationsCount : function() {
             return this.getAsString("rankRecommendations");
         },
         

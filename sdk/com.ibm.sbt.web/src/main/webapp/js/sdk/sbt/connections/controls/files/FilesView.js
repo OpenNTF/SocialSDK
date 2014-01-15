@@ -44,8 +44,8 @@ define([ "../../../declare", "../../../lang", "../../../stringUtil", "../../../l
 		 */
 		postMixInProperties : function() {
 			this.inherited(arguments);
-			if(this.template){
-				this.templateString = this.template;
+			if(this.filesViewTemplate){
+				this.templateString = this.filesViewTemplate;
 			}
 		},
 
@@ -74,48 +74,26 @@ define([ "../../../declare", "../../../lang", "../../../stringUtil", "../../../l
 			}
 			
 			if (this.grid && this.defaultActions) {
-				var _dialogArgs = {};
-				var _shareFileArgs = {};
-				var _uploadFileArgs = {};
-				var _addTagsArgs = {};
-				var _moveToTrashArgs = {};
 				
-				if(this.dialogTemplate){
-					_dialogArgs = {templateString: this.dialogTemplate};
-				}
-				if(this.shareFilesTemplate){
-					_shareFileArgs = {templateString:this.shareFilesTemplate};	
-				}
-				if(this.uploadFileTemplate){
-					_uploadFileArgs = {templateString:this.uploadFileTemplate};
-				}
-				if(this.addTagsTemplate){
-					_addTagsArgs = {templateString:this.addTagsTemplate};
-				}
-				if(this.moveToTrashTemplate){
-					_moveToTrashArgs = {templateString:this.moveToTrashTemplate};
-				}	
-				
-				//this.addAction(new DownloadFileAction({grid : this.grid}));
 				this.addAction(new ShareFileAction({
 					grid : this.grid,
-					dialogArgs:_dialogArgs,
-					widgetArgs:_shareFileArgs
+					dialogArgs: this.dialogArgs,
+					widgetArgs: this.shareFileArgs
 				}));
 				this.addAction(new UploadFileAction({
 					grid : this.grid,
-					dialogArgs:_dialogArgs,
-					widgetArgs:_uploadFileArgs
+					dialogArgs: this.dialogArgs,
+					widgetArgs: this.uploadFileArgs
 				}));
 				this.addAction(new AddTagsAction({
 					grid : this.grid,
-					dialogArgs:_dialogArgs,
-					widgetArgs:_addTagsArgs
+					dialogArgs: this.dialogArgs,
+					widgetArgs: this.addTagsArgs
 				}));
 				this.addAction(new MoveToTrashAction({
 					grid : this.grid, 
-					dialogArgs: _dialogArgs,
-					widgetArgs:_moveToTrashArgs
+					dialogArgs: this.dialogArgs,
+					widgetArgs: this.moveToTrashArgs
 				}));
 			}
 		}

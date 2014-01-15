@@ -11,14 +11,16 @@ require(["sbt/declare", "sbt/dom", "sbt/connections/controls/files/FilesView"],
 		
 		var filesView = new FilesView({
 			actionButtonTemplate: actionTemplate,
-			template: viewTemplate,
-			moveToTrashTemplate: moveToTrashTemplate,
-			shareFilesTemplate:shareFilesTemplate,
-			uploadFileTemplate: uploadFileTemplate,
-			addTagsTemplate: addTagsTemplate,
-			dialogTemplate:dialogTemplate,
-			disabledActionClass: "btn-disabled",
-			gridArgs: {type : "myFiles",hideSorter:true,hidePager:true}
+			filesViewTemplate: viewTemplate,
+			
+			moveToTrashArgs: {templateString : moveToTrashTemplate},
+			shareFileArgs: {templateString: shareFilesTemplate},
+			uploadFileArgs: {templateString: uploadFileTemplate},
+			addTagsArgs: {templateString: addTagsTemplate},
+			dialogArgs:{templateString: dialogTemplate},
+			gridArgs: {type : "myFiles",hideSorter:true,hidePager:true},
+			
+			disabledActionClass: "btn-disabled"
 		});
 	
 	    filesView.grid.renderer.tableClass = "table";

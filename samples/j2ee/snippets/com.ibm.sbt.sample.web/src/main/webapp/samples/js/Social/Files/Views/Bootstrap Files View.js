@@ -10,8 +10,7 @@ require(["sbt/declare", "sbt/dom", "sbt/connections/controls/files/FilesView"],
 		var dialogTemplate = dom.byId("dialogTemplate").textContent;
 		
 		var filesView = new FilesView({
-			actionButtonTemplate: actionTemplate,
-			filesViewTemplate: viewTemplate,
+			templateString: viewTemplate,
 			
 			moveToTrashArgs: {templateString : moveToTrashTemplate},
 			shareFileArgs: {templateString: shareFilesTemplate},
@@ -19,8 +18,7 @@ require(["sbt/declare", "sbt/dom", "sbt/connections/controls/files/FilesView"],
 			addTagsArgs: {templateString: addTagsTemplate},
 			dialogArgs:{templateString: dialogTemplate},
 			gridArgs: {type : "myFiles",hideSorter:true,hidePager:true},
-			
-			disabledActionClass: "btn-disabled"
+			actionBarArgs: {actionTemplate:actionTemplate, disabledClass: "btn-disabled"}
 		});
 	
 	    filesView.grid.renderer.tableClass = "table";

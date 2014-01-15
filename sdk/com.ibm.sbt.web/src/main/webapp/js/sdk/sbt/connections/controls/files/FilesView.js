@@ -44,9 +44,6 @@ define([ "../../../declare", "../../../lang", "../../../stringUtil", "../../../l
 		 */
 		postMixInProperties : function() {
 			this.inherited(arguments);
-			if(this.filesViewTemplate){
-				this.templateString = this.filesViewTemplate;
-			}
 		},
 
 		/**

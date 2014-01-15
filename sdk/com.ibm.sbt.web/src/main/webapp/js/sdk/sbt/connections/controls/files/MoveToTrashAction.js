@@ -71,7 +71,7 @@ define([ "../../../declare", "../../../dom", "../../../lang",
     			onExecute: lang.hitch(this.widget, this.widget.onExecute)
 			},this.dialogArgs || {});
 			
-			var dialog = new Dialog(dialogArgs);
+			var dialog = this.showDialog(this.widget,{ OK: nls.moveToTrash },this.dialogArgs);
     		dialog.show();
 		}
 	});

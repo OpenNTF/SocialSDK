@@ -63,17 +63,10 @@ define([ "../../../declare", "../../../dom", "../../../lang",
 					self.displayMessage(template, isError);
 				}
 			}, this.widgetArgs || {});
-			var widget = new ShareFileWidget(widgetArgs);
+			this.widget = new ShareFileWidget(widgetArgs);
 			
-			var dialogArgs = lang.mixin({ 
-    			title: this.name,
-    			dialogStyle : "width: 600px;",
-    			nls: { OK: nls.share },
-    			dialogContent: widget,
-    			onExecute: lang.hitch(widget, widget.onExecute)
-    		},this.dialogArgs || {});
-			var dialog = new Dialog(dialogArgs);
-    		dialog.show();
+			var dialog = this.showDialog(this.widget,{ OK: nls.share },this.dialogArgs);
+    		
 		}
 	});
 

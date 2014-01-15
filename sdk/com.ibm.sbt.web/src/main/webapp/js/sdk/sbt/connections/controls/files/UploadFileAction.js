@@ -49,15 +49,8 @@ define([ "../../../declare", "../../../dom", "../../../lang",
 			}, this.widgetArgs || {});
 			this.widget = new UploadFileWidget(widgetArgs);
 			
-			var dialogArgs = lang.mixin({ 
-    			title: this.name,
-    			style: this.style,
-    			nls: { OK: nls.labelUpload },
-    			dialogContent: this.widget,
-    			onExecute: lang.hitch(this.widget, this.widget.onExecute)
-    		},this.dialogArgs || {});
-			var dialog = new Dialog(dialogArgs);
-    		dialog.show();
+			var dialog = this.showDialog(this.widget,{ OK: nls.labelUpload },this.dialogArgs);
+    		
 		}
 	});
 

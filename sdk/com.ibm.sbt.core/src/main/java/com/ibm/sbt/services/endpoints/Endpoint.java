@@ -418,5 +418,11 @@ public interface Endpoint {
      * Notifies the endpoint that en authentication error was detected for the specified request.
      */
     public void handleAuthenticationError();
+    
+   /**
+    * Return proxy config for this endpoint
+    */
+    public String getProxyConfig();
+
 
 }

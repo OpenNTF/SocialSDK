@@ -66,6 +66,7 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
     private boolean requiresAuthentication;
     private boolean forceTrustSSLCertificate;
     private String httpProxy;
+    private String proxyConfig;
     private boolean allowClientAccess = true;
     private boolean useProxy = true;
     
@@ -224,6 +225,14 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
 	 */
 	public void setUseProxy(boolean useProxy) {
 		this.useProxy = useProxy;
+	}
+	
+	public String getProxyConfig() {
+		return proxyConfig;
+	}
+
+	public void setProxyConfig(String proxyConfig) {
+		this.proxyConfig = proxyConfig;
 	}
     
     @Override
@@ -504,4 +513,5 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
         
         return true;
     }
+
 }

@@ -188,10 +188,6 @@
 			<property-name>forceTrustSSLCertificate</property-name>
 			<value>true</value>
 		</managed-property>
-		<managed-property>
-			<property-name>proxyConfig</property-name>
-			<value>ProxyConfig</value>
-		</managed-property>
 	</managed-bean>
 	
 	<!-- Connections SSO -->	
@@ -208,11 +204,13 @@
 			<property-name>forceTrustSSLCertificate</property-name>
 			<value>true</value>
 		</managed-property>
-				<!-- Sample proxy config usage -->
+		<!-- Sample proxy config usage -->
+		<!-- 
 		<managed-property>
 			<property-name>proxyConfig</property-name>
 			<value>ProxyConfig</value>
 		</managed-property>
+		-->
 	</managed-bean>
 
 	<!-- Connections OAuth 2.0 -->

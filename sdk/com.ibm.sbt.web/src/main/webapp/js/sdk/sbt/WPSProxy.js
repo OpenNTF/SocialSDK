@@ -50,8 +50,8 @@ define(['./declare','./lang','./pathUtil'],function(declare,lang,pathUtil) {
         			} else if(baseUrl.indexOf("https://")==0) {
         				baseUrl = "/https/"+baseUrl.substring(8);
         			}
-    				var networkUrl = pathUtil.concat(this.proxyUrl,baseUrl);
-    				networkUrl = networkUrl+serviceUrl;
+    				var networkUrl = pathUtil.concat(this.proxyUrl, baseUrl);
+    				networkUrl = pathUtil.concat(networkUrl, serviceUrl);
     				return networkUrl;
     		}
     		return u;

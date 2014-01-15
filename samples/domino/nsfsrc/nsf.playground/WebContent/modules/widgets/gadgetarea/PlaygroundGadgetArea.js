@@ -163,7 +163,7 @@ define(['dojo/_base/declare', 'explorer/widgets/gadgetarea/GadgetArea', 'dojo/on
           
           setEndpointPrefsDefaultValues : function(prefs) {
         	  var endpoint = config.findEndpoint("connections");
-			  if(!prefs['connections_url'].defaultValue || prefs['connections_url'].defaultValue.length == 0) {
+			  if(prefs['connections_url'] && (!prefs['connections_url'].defaultValue || prefs['connections_url'].defaultValue.length == 0)) {
 				  prefs['connections_url'].defaultValue = endpoint.baseUrl;
 			  }
           },

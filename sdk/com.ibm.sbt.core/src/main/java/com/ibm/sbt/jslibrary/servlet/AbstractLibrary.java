@@ -18,6 +18,7 @@ package com.ibm.sbt.jslibrary.servlet;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -31,6 +32,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ibm.commons.runtime.Context;
+import com.ibm.commons.runtime.util.UrlUtil;
 import com.ibm.commons.util.PathUtil;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.json.JsonGenerator;
@@ -39,6 +41,9 @@ import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.commons.util.io.json.JsonObject;
 import com.ibm.commons.util.io.json.JsonReference;
 import com.ibm.sbt.jslibrary.SBTEnvironment.Property;
+import com.ibm.sbt.service.proxy.Proxy;
+import com.ibm.sbt.service.proxy.ProxyConfigException;
+import com.ibm.sbt.service.proxy.ProxyFactory;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
@@ -119,6 +124,7 @@ abstract public class AbstractLibrary {
 	public static final String		MODULE_LANG						= "sbt/lang";
 	public static final String		MODULE_PORTLET					= "sbt/Portlet";
 	public static final String		MODULE_PROXY					= "sbt/Proxy";
+	public static final String		MODULE_WPS_PROXY				= "sbt/WPSProxy";
 	public static final String		MODULE_XML						= "sbt/xml";
 	public static final String		MODULE_XPATH					= "sbt/xpath";
 	public static final String		MODULE_XSL						= "sbt/xsl";
@@ -633,6 +639,7 @@ abstract public class AbstractLibrary {
 					// add proxy module if not already in the list
 					if (!modules.contains(MODULE_PROXY)) {
 						modules.add(MODULE_PROXY);
+						modules.add(MODULE_WPS_PROXY);
 					}
 				}
 
@@ -919,6 +926,27 @@ abstract public class AbstractLibrary {
 	 */
 	protected JsonReference createProxyRef(LibraryRequest request, Endpoint endpoint, String logicalName)
 			throws LibraryException {
+		
+		// If a proxy config has been defined explicitly for the endpoint use it
+		if(endpoint.getProxyConfig()!=null){
+			Proxy proxy;
+			try {
+				proxy = ProxyFactory.getProxyConfig(endpoint.getProxyConfig());
+				String proxyUrl = proxy.getProxyUrl();
+				if(!(UrlUtil.isAbsoluteUrl(proxyUrl))){ // if proxy url specified in proxy config is relative, assume server same as of SBT
+					// Url is relative, append server to it
+					proxyUrl = UrlUtil.makeUrlAbsolute(request.getHttpRequest(),proxyUrl);
+				}
+				String proxyClass = proxy.getProxyModule();
+				return new JsonReference("new "+proxyClass+"({proxyUrl:'" + proxyUrl + "'})");
+			} catch (ProxyConfigException e) {
+				if (logger.isLoggable(Level.SEVERE)) {
+					logger.entering(sourceClass, "createProxyRef failed", e.getMessage());
+				}
+			}
+			
+		}
+		
 		// define the proxy URL
 		if (endpoint.isUseProxy()) {
 			String proxyUrl = PathUtil.concat(request.getServiceUrl(), endpoint.getProxyHandlerPath(), '/');

@@ -108,7 +108,7 @@ public class BaseBlogEntity extends AtomEntity {
 	* @method getRecomendationsCount
 	* @return {String} recommendations Count
 	*/
-	public String getRecommendationsCount() throws BlogServiceException{
+	public String getRecommendationsCount() {
 		return getAsString(BlogXPath.recommendationsCount);
 	}
 	

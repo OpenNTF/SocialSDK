@@ -209,7 +209,7 @@ public class APIImporter extends AssetImporter {
 						apiDoc = new APIDocument(products,apiExplorerPath);
 						apiDocs.put(apiExplorerPath, apiDoc);
 					}
-					JsonJavaObject je = createAPIEntry(doc, i, action);
+					JsonJavaObject je = createAPIEntry(client, doc, i, action);
 					apiDoc.content.add(je);
 				}
 			}
@@ -230,7 +230,7 @@ public class APIImporter extends AssetImporter {
 			}
 		}
 	}
-	protected JsonJavaObject createAPIEntry(JsonJavaObject e, int method, AsyncAction action) throws Exception {
+	protected JsonJavaObject createAPIEntry(RestClient client, JsonJavaObject e, int method, AsyncAction action) throws Exception {
 		JsonJavaObject je = new JsonJavaObject();
 		String name = (String)e.get("Title");
 		put(je,"name", name);
@@ -265,6 +265,13 @@ public class APIImporter extends AssetImporter {
 			}
 			put(je,"queryParameters", e.get("QueryParameters") );
 			put(je,"headers", e.get("Headers") );
+			
+			String resId = e.getString("res_title");
+			if(StringUtil.isEmpty(resId)) {
+				resId = unid;
+			}
+			String docUrl = PathUtil.concat(client.getBaseUrl(), "/dx/"+resId, '/');
+			put(je,"doc_url",docUrl);
 		}
 		return je;
 	}

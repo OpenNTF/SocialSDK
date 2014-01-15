@@ -201,7 +201,7 @@ public abstract class ClientService {
 	 * 
 	 * @return
 	 */
-	protected String getBaseUrl() {
+	public String getBaseUrl() {
 		if (endpoint != null) {
 			return endpoint.getUrl();
 		}
@@ -1159,18 +1159,21 @@ public abstract class ClientService {
 			b.append(args.getServiceUrl()); 
 		}
 		
-		Proxy proxy = null;
-		try {
-			proxy = ProxyFactory.getProxyConfig(endpoint.getProxyConfig());
-		} catch (ProxyConfigException e) {
-			if (logger.isLoggable(Level.FINE)) {
-				String msg = "Exception ocurred while fetching proxy information : composeRequestUrl";
-				logger.log(Level.FINE, msg, e);
+		if(endpoint!=null) { // The endpoint can be null
+			Proxy proxy = null;
+			try {
+				proxy = ProxyFactory.getProxyConfig(endpoint.getProxyConfig());
+			} catch (ProxyConfigException e) {
+				if (logger.isLoggable(Level.FINE)) {
+					String msg = "Exception ocurred while fetching proxy information : composeRequestUrl";
+					logger.log(Level.FINE, msg, e);
+				}
 			}
+			StringBuilder proxyUrl = new StringBuilder(proxy.rewriteUrl(b.toString()));
+			addUrlParameters(proxyUrl, args);
+			return proxyUrl.toString();
 		}
-		StringBuilder proxyUrl = new StringBuilder(proxy.rewriteUrl(b.toString()));
-		addUrlParameters(proxyUrl, args);
-		return proxyUrl.toString();
+		return b.toString();
 	}
 
 	protected String getUrlPath(Args args) {

@@ -104,10 +104,12 @@ define(["../declare", "../base/AtomEntity", "./BlogConstants" ],
          */
         getEntryAnchor : function() {
         	var entry = this.dataHandler.getData();
-        	var base = entry.getAttribute("xml:base");
-        	if (base) {
-        		var n = base.lastIndexOf("/"); 
-        		return base.substring(n+1);
+        	if (entry) {
+            	var base = entry.getAttribute("xml:base");
+            	if (base) {
+            		var n = base.lastIndexOf("/"); 
+            		return base.substring(n+1);
+            	}
         	}
         },
         
@@ -181,24 +183,24 @@ define(["../declare", "../base/AtomEntity", "./BlogConstants" ],
         },
         
         /**
-         * Return the last updated dateRecomendations URL of the IBM Connections blog post from
+         * Return the last updated dateRecommendations URL of the IBM Connections blog post from
          * blog ATOM entry document.
          * 
-         * @method getRecomendationsURL
-         * @return {String} Recomendations URL of the Blog Post
+         * @method getRecommendationsURL
+         * @return {String} Recommendations URL of the Blog Post
          */
-        getRecomendationsURL : function() {
-            return this.getAsString("recomendationsUrl");
+        getRecommendationsURL : function() {
+            return this.getAsString("recommendationsUrl");
         },
         
         /**
-         * Return the Recomendations count of the IBM Connections blog post from
+         * Return the Recommendations count of the IBM Connections blog post from
          * blog ATOM entry document.
          * 
-         * @method getRecomendationsCount
+         * @method getRecommendationsCount
          * @return {String} Last updated date of the Blog post
          */
-        getRecomendationsCount : function() {
+        getRecommendationsCount : function() {
             return this.getAsNumber("rankRecommendations");
         },
         

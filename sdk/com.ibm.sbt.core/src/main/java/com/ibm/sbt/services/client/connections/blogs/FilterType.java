@@ -23,25 +23,26 @@ package com.ibm.sbt.services.client.connections.blogs;
 
 public enum FilterType {
 	
-	ALL("feed/blogs/atom"),
-	MY("api/blogs"),
-	FEATURED_BLOGS("feed/featuredblogs/atom"),
-	BLOGS_POSTS("feed/entries/atom"),
-	FEATURED_BLOGS_POSTS("feed/featured/atom"),
-	RECOMMENDED_BLOGS_POSTS("feed/recommended/atom"),
-	BLOGS_COMMENTS("feed/comments/atom"),
-	BLOGS_TAGS("feed/tags/atom"),
-	BLOG_POSTS("feed/entries/atom"),
-	BLOG_COMMENTS("feed/comments/atom"),
-	BLOG_TAGS("feed/tags/atom"),
-	CREATE_BLOG("api/blogs"),
-	GET_UPDATE_REMOVE_BLOG("api/blogs/"),
-	BLOG_POST("feed/entry/atom"),
-	CREATE_BLOG_POST("api/entries"),
-	UPDATE_REMOVE_POST("api/entries/"),
-	CREATE_COMMENT("api/comments/"),
-	GET_REMOVE_COMMENT("api/comments/"),
-	RECOMMEND_POST("api/recommend/entries/");
+	ALL_BLOGS("/{blogs}/{blogHandle}/feed/blogs/atom"),
+	MY_BLOGS("/{blogs}/{blogHandle}/api/blogs"),
+	FEATURED_BLOGS("/{blogs}/{blogHandle}/feed/featuredblogs/atom"),
+	ALL_BLOG_POSTS("/{blogs}/{blogHandle}/feed/entries/atom"),
+	ALL_FEATURED_BLOG_POSTS("/{blogs}/{blogHandle}/feed/featured/atom"),
+	ALL_RECOMMENDED_BLOG_POSTS("/{blogs}/{blogHandle}/feed/recommended/atom"),
+	ALL_BLOG_COMMENTS("/{blogs}/{blogHandle}/feed/comments/atom"),
+	ALL_BLOG_TAGS("/{blogs}/{blogHandle}/feed/tags/atom"),
+	BLOG_POSTS("/{blogs}/{blogHandle}/feed/entries/atom"),
+	BLOG_COMMENTS("/{blogs}/{blogHandle}/feed/comments/atom"),
+	BLOG_TAGS("/{blogs}/{blogHandle}/feed/tags/atom"),
+	CREATE_BLOG("/{blogs}/{blogHandle}/api/blogs"),
+	GET_UPDATE_REMOVE_BLOG("/{blogs}/{blogHandle}/api/blogs/{entryAnchor}"),
+	BLOG_POST("/{blogs}/{blogHandle}/feed/entry/atom"),
+	CREATE_BLOG_POST("/{blogs}/{blogHandle}/api/entries"),
+	UPDATE_REMOVE_POST("/{blogs}/{blogHandle}/api/entries/{entryAnchor}"),
+	CREATE_COMMENT("/{blogs}/{blogHandle}/api/comments/{entryAnchor}"),
+	GET_REMOVE_COMMENT("/{blogs}/{blogHandle}/api/comments/{entryAnchor}"),
+	BLOG_ENTRYCOMMENTS("/{blogs}/{blogHandle}/feed/entrycomments/{entryAnchor}/atom"),
+	RECOMMEND_POST("api/recommend/entries/{entryAnchor}");
 	
 
 	String filterType;

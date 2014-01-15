@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -25,8 +25,7 @@ define(['dijit/Dialog',"dojo/cache","sbt/i18n!sbt/nls/loginForm", "sbt/config", 
 		  try{
 		      
 		    
-			var proxy = options.proxy.proxyUrl;
-			var proxyServletURL = proxy.substring(0,proxy.lastIndexOf("/"))+"/basicAuth/"+options.proxyPath+"/JSApp";
+			var proxyServletURL = options.actionUrl;
 			var d = new Dialog({
 				title: loginForm.authentication_dialog_title,
 	            style: "width: 350px",

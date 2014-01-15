@@ -31,6 +31,14 @@
 			<property-name>url</property-name>
 			<value>%{connections.url}</value>
 		</managed-property>
+        <managed-property>
+            <property-name>user</property-name>
+            <value>%{connections.user}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>password</property-name>
+            <value>%{connections.password}</value>
+        </managed-property>
 		<managed-property>
 			<property-name>passwordStore</property-name>
 			<value>PwdStore</value>

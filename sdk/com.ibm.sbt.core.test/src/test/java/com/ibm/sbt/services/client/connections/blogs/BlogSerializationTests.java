@@ -40,7 +40,7 @@ public class BlogSerializationTests extends BaseBlogServiceTest {
 		
 	@Test
 	public final void testBlogListSerialization() throws Exception {
-		BlogList blogs = blogService.getBlogs();
+		BlogList blogs = blogService.getAllBlogs();
 		new SerializationUtil() {
 			
 			@Override

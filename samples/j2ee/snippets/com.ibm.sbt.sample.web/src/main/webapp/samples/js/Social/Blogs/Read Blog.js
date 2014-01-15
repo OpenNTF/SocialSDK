@@ -9,7 +9,7 @@ require([ "sbt/config", "sbt/connections/BlogService", "sbt/dom", "sbt/json" ],
 					", published=" + post.getPublished() +
 					", updated=" + post.getUpdated() +
 					", tags=" + post.getTags() +
-					", recomendations=" + post.getRecomendationsCount() +
+					", recommendations=" + post.getRecommendationsCount() +
 					", comments=" + post.getCommentCount() +
 					", hits=" + post.getHitCount() + 
 					", summary=" + post.getSummary() + "]";

@@ -53,21 +53,13 @@ define([ "../../../declare", "../../../lang", "../../../stringUtil", "../../../l
 		 */
 		postCreate : function() {
 			this.inherited(arguments);
-			
-			if(this.disabledActionClass){
-				this.actionBar.disabledClass = this.disabledActionClass;
-			}
-			
+
 			if (!this.grid && this.defaultGrid) {
 				var gridArgs = (this.type) ? {type : this.type} : {};
 				gridArgs = lang.mixin(gridArgs, this.gridArgs || {});
 
 				this.grid = new FileGrid(gridArgs);
 				this.setContent(this.grid);
-			}
-			
-			if(this.actionButtonTemplate){
-				this.actionBar.actionTemplate = this.actionButtonTemplate;
 			}
 			
 			if (this.grid && this.defaultActions) {

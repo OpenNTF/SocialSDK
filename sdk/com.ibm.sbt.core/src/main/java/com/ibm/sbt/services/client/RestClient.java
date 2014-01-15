@@ -50,7 +50,7 @@ public class RestClient extends ClientService {
 	}
 
 	@Override
-	protected String getBaseUrl() {
+	public String getBaseUrl() {
 		return baseUrl;
 	}
 	

@@ -65,13 +65,8 @@ define([ "../../../declare", "../../../dom", "../../../lang",
 			}, this.widgetArgs || {});
 			this.widget = new AddTagsWidget(widgetArgs);
 			
-			var dialog = new Dialog({ 
-    			title: this.name,
-    			nls: { OK: nls.labelAddTags },
-    			dialogContent: this.widget,
-    			onExecute: lang.hitch(this.widget, this.widget.onExecute)
-    		});
-    		dialog.show();
+			var dialog = this.showDialog(this.widget,{ OK: nls.labelAddTags },this.dialogArgs);
+    		
 		}
 	});
 

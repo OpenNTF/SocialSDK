@@ -17,8 +17,8 @@
 /**
  * 
  */
-define([ "../../declare", "../../lang", "../../stringUtil", "../../log" ], function(
-		declare, lang, stringUtil, log) {
+define([ "../../declare", "../../lang", "../../stringUtil", "../../log", "../dialog/Dialog", ], function(
+		declare, lang, stringUtil, log, Dialog) {
 
 	/*
 	 * @module sbt.controls.view.Action
@@ -119,6 +119,19 @@ define([ "../../declare", "../../lang", "../../stringUtil", "../../log" ], funct
 			if (this.view) {
 				this.view.displayMessage(template, isError);
 			}
+		},
+		
+		showDialog: function(widget, nls, dialogArgs){
+			var args = lang.mixin({ 
+    			title: this.name,
+    			nls: nls,
+    			dialogContent: widget,
+    			onExecute: lang.hitch(widget, widget.onExecute)
+    		},dialogArgs || {});
+			
+			var dialog = new Dialog(args);
+			dialog.show();
+			return dialog;
 		}
 		
 	});

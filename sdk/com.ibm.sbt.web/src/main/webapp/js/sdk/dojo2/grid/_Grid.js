@@ -50,7 +50,7 @@ define([ "../../declare", "../../store/AtomStore", "dojo/_base/lang", "dojo/_bas
                      start : options.start,
                      end : options.start + items.length,
                      count : items.length,
-                     totalCount : totalCount,
+                     totalCount : items.length,
                      response : results.response
                     };
                     try {

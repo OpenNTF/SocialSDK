@@ -78,7 +78,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
         BlogPostXPath : lang.mixin({}, conn.AtomEntryXPath, {
             postUuid : "a:id",
             replies : "a:link[@rel='replies']/@href",
-            recomendationsUrl : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/recommendations']/@href",
+            recommendationsUrl : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/recommendations']/@href",
             rankRecommendations : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/recommendations']",
             rankComment : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/comment']",
             rankHit : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/hit']",
@@ -102,7 +102,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
         CommentXPath : lang.mixin({}, conn.AtomEntryXPath, {
             commentUuid : "a:id",
             commentUrl : "a:link[@rel='self']/@href",
-            recomendationsUrl : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/recommendations']/@href",
+            recommendationsUrl : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/recommendations']/@href",
             trackbacktitle : "snx:trackbacktitle",
             replyTo : "thr:in-reply-to/@ref",
             replyToSource : "thr:in-reply-to/@source",

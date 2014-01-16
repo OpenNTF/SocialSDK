@@ -14,20 +14,15 @@
 			</tr>
 			<tr class="lotusFormFieldRow">
 				<td class="lotusFormLabel lotusNowrap"><span>${nls.labelShareWith}<span
-						role="presentation">&nbsp;</span><a href="javascript:;"
-						role="button" 
-						aria-label="Share with:"><img alt="Help"
-							class="lconnSprite lconnSprite-iconHelp16"
-							src="https://qs.renovations.com:444/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20120919.054848"><span
-							aria-label="Help" class="lotusAltText">?</span></a></span></td>
+						role="presentation">&nbsp;</span></span></td>
 				<td style="padding-bottom: 5px;">
 				<form action="">
 						<legend class="lotusAccess">${nls.labelShareWith}</legend>
 						<input dojoAttachEvent="click: radioButtonSelected"  type="radio"  name="sbtRadioButton" class="lotusCheckbox" value="${nls.labelPeople}" checked="true">
 							<label class="lotusCheckbox"><span>${nls.labelSharePeopleComms}</span></label><br>
 						<input dojoAttachEvent="click: radioButtonSelected" type="radio" name="sbtRadioButton" value="${nls.labelPublic}" class="lotusCheckbox"
-							value="${nls.labelPublic}" >
-							<label class="lotusCheckbox">
+							value="${nls.labelPublic}" dojoAttachPoint="sharePublicRadioButton" >
+							<label class="lotusCheckbox" dojoAttachPoint="sharePublicRadioButtonLabel">
 							<span>${nls.labelPublic}</span></label>
 					</form></td>
 				<td></td>

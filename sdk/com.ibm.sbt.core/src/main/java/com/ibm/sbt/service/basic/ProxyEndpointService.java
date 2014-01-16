@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.CoreProtocolPNames;
 
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.runtime.RuntimeConstants;
@@ -83,6 +84,10 @@ public class ProxyEndpointService extends ProxyService {
             if(endpoint.isForceTrustSSLCertificate() && requestURI!=null) {
             	httpClient = SSLUtil.wrapHttpClient(httpClient);
             }
+    		if (endpoint.isForceDisableExpectedContinue()) {
+    			httpClient.getParams().setParameter(
+    					CoreProtocolPNames.USE_EXPECT_CONTINUE, false);
+    		}
             String httpProxy = getHttpProxy(endpoint);
             if(StringUtil.isNotEmpty(httpProxy)) {
             	httpClient = ProxyDebugUtil.wrapHttpClient(httpClient, httpProxy);
@@ -124,9 +129,7 @@ public class ProxyEndpointService extends ProxyService {
     @Override
     protected boolean prepareForwardingMethod(HttpRequestBase method, HttpServletRequest request, DefaultHttpClient client) throws ServletException {
         boolean ret = super.prepareForwardingMethod(method, request, client);
-    	Object timedObject = ProxyProfiler.getTimedObject();
         initEndpoint(method, request, client, endpoint);
-        ProxyProfiler.profileTimedRequest(timedObject, "Endpoint initialization");
         return ret;
     }
 

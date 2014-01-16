@@ -51,6 +51,9 @@ import org.apache.http.entity.FileEntity;
 import org.apache.http.entity.InputStreamEntity;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.CoreProtocolPNames;
+import org.apache.http.params.HttpParams;
+import org.apache.http.params.HttpParamsNames;
 import org.apache.http.util.EntityUtils;
 import org.w3c.dom.Node;
 
@@ -233,6 +236,20 @@ public abstract class ClientService {
 		return false;
 	}
 
+	/**
+	 * Return true if force trust SSL certificate is set for the associated Endpoint.
+	 * 
+	 * @return
+	 * @throws ClientServicesException
+	 */
+	protected boolean isForceDisableExpectedContinue() throws ClientServicesException {
+		if (endpoint != null) {
+			return endpoint.isForceDisableExpectedContinue();
+		}
+		return false;
+	}
+
+	
 	/**
 	 * Return the proxy info from the associated Endpoint or an empty string
 	 * 
@@ -1358,6 +1375,11 @@ public abstract class ClientService {
 			httpClient = SSLUtil.wrapHttpClient(httpClient);
 			// }
 		}
+		if(isForceDisableExpectedContinue()) {
+			logger.fine("Disabling Expected Continue Header");
+			httpClient.getParams().setParameter(CoreProtocolPNames.USE_EXPECT_CONTINUE,false);
+		}
+		
 		// Capture network traffic through a network proxy like Fiddler or WireShark for debug purposes
 		if (StringUtil.isNotEmpty(getHttpProxy())) {
 			return ProxyDebugUtil.wrapHttpClient(httpClient, getHttpProxy());

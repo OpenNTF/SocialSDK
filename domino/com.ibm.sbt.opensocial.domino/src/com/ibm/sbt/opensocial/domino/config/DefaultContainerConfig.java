@@ -20,7 +20,6 @@ import com.google.common.base.Objects;
  */
 public class DefaultContainerConfig implements OpenSocialContainerConfig {
 	private static final String DOMINO_CONTAINER_NAME = "domino";
-	private static final int DEFAULT_ST_TTL = 3600; //in seconds
 	
 	protected Map<String, Object> props;
 	
@@ -29,7 +28,6 @@ public class DefaultContainerConfig implements OpenSocialContainerConfig {
 		props.put(BlobCrypterSecurityTokenCodec.SECURITY_TOKEN_KEY, 
 				CharsetUtil.newUtf8String(Crypto.getRandomBytes(20)));
 		props.put(ContainerConfig.PARENT_KEY, DOMINO_CONTAINER_NAME);
-		props.put(SecurityTokenCodec.SECURITY_TOKEN_TTL_CONFIG, DEFAULT_ST_TTL);
 	}
 	
 	@Override
@@ -44,8 +42,7 @@ public class DefaultContainerConfig implements OpenSocialContainerConfig {
 			OpenSocialContainerConfig test = (OpenSocialContainerConfig)o;
 			equal = this.getProperties().keySet().size() == test.getProperties().size();
 			//Do not verify the security token keys match, there is no guarantee they will
-			equal &= this.getProperties().get(ContainerConfig.PARENT_KEY).equals(test.getProperties().get(ContainerConfig.PARENT_KEY)) &&
-					this.getProperties().get(SecurityTokenCodec.SECURITY_TOKEN_TTL_CONFIG).equals(test.getProperties().get(SecurityTokenCodec.SECURITY_TOKEN_TTL_CONFIG));
+			equal &= this.getProperties().get(ContainerConfig.PARENT_KEY).equals(test.getProperties().get(ContainerConfig.PARENT_KEY));
 		}
 		return equal;
 	}

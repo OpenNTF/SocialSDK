@@ -38,7 +38,7 @@
 	<%
 		try {
 			BlogService service = new BlogService();
-			BlogList blogs = service.getBlogs();
+			BlogList blogs = service.getAllBlogs();
 			Blog blog = (Blog)blogs.get(0);
 			// above blog entity is used to get the blogUuid
 			// so that it can be used in showcasing how to ise the getBlog wrapper which requires a blogUuid  

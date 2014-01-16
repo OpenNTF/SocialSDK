@@ -41,7 +41,7 @@
 	<%
 		try {
 			BlogService service = new BlogService();
-			BlogList blogs = service.getBlogs();
+			BlogList blogs = service.getAllBlogs();
 			Blog blog = (Blog)blogs.get(0);
 			
 			BlogPostList posts = service.getBlogPosts(blog.getHandle());

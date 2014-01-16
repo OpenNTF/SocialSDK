@@ -40,7 +40,7 @@
 	<%
 		try {
 			BlogService service = new BlogService();
-			BlogList entries = service.getBlogs();
+			BlogList entries = service.getAllBlogs();
 
 			if (entries.size() <= 0)
 				out.println("No updates to be displayed");

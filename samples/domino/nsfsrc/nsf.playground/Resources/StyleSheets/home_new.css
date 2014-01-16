@@ -1,0 +1,209 @@
+/* General */
+
+body {
+	font-family: "Source Sans Pro", Helvetica, Arial, sans-serif;
+	color: #000;
+}
+
+.btn {
+	display: inline-block;
+  	*display: inline;
+  	padding: 13px 25px;
+  	margin-bottom: 0;
+  	margin-top: 30px;
+  	font-family: "Source Sans Pro", Helvetica, Arial, sans-serif;
+  	font-size: 0.9em;
+  	font-weight: 600;
+  	line-height: 20px;
+  	letter-spacing: 0.5px;
+  	color: #fff;
+  	text-shadow: none;
+  	text-transform: uppercase;
+  	vertical-align: middle;
+  	cursor: pointer;
+  	background-color: #00add6;
+  	*background-color: #00add6;
+  	background-image: none;
+  	background-repeat: no-repeat;
+  	border: none;
+  	*border: 0;
+  -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
+  *zoom: 1;
+  -webkit-box-shadow: 0 3px 0 #3c8395;
+     -moz-box-shadow: 0 3px 0 #3c8395;
+}
+
+.btn:hover,
+.btn:focus,
+.btn:active,
+.btn.active,
+.btn.disabled,
+.btn[disabled] {
+  color: #fff;
+  background-color: #0197ba;
+  *background-color: #0197ba;
+}
+
+.btn.learnmore {
+	margin-right: 30px;
+  	background-color: #bcbcbc;
+  	*background-color: #bcbcbc;
+  -webkit-box-shadow: 0 3px 0 #9a9a9a;
+     -moz-box-shadow: 0 3px 0 #9a9a9a;
+}
+
+.learnmore:hover,
+.learnmore:focus,
+.learnmore:active,
+.learnmore.active,
+.learnmore.disabled,
+.learnmore[disabled] {
+  color: #fff;
+  background-color: #aaaaaa;
+  *background-color: #aaaaaa;
+}
+
+.btn.large {
+	display: inline-block;
+  *display: inline;
+  padding: 20px 40px;
+  font-size: 1.2em;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0.5px;
+  	-webkit-box-shadow: 0 3px 0 #3c8395;
+    -moz-box-shadow: 0 3px 0 #3c8395;
+  margin-top: -30px;
+}
+
+/* Hero */
+
+.top-navi img {
+	width: 100%;
+	height: 100%;
+}
+
+.hero {
+	background: #f0f0f0;
+}
+
+.glamourshot {
+	margin-top: 80px;
+  margin-bottom: 40px;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.hero-caption {
+  margin-top: 30px;
+  margin-bottom: 40px;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.hero-header {
+	font-family: "Futura", Helvetica, Arial, sans-serif;
+	text-transform: uppercase;
+	font-size: 1.6em;
+	letter-spacing: 1px;
+}
+
+.hero-catch {
+	font-size: 1.4em;
+	margin-top: 25px;
+	line-height: 1.4em;
+}
+
+.captionbtns {
+  margin-top: 15px;
+}
+
+/* Using the Playground */
+
+.usingtheplygrd {
+	height: 800px;
+	background: #fff;
+}
+
+.title {
+	text-transform: uppercase;
+	font-size: 0.85em;
+	font-weight: 600;
+	letter-spacing: 0.5px;
+	color: #a0a0a0;
+	text-align: center;
+	margin-top: 70px;
+	margin-bottom: 80px;
+}
+
+.step {
+	float: left;
+}
+
+.stepnumber {
+	font-weight: 600;
+	color: #4f4f4f;
+}
+
+.stepheader {
+	color: #00add6;
+	font-size: 1.4em;
+	letter-spacing: 0.5px;
+	margin-top: 10px;
+}
+
+.stepimage {
+	width: 100%;
+	height: 100%;
+	margin-top: 30px;
+}
+
+.stepdscrptn {
+	color: #6b6b6b;
+	margin-top: 40px;
+}
+
+/* Footer */
+
+.footer {
+	background: #f0f0f0;
+	height: 200px;
+  text-align: center;
+}
+
+
+/* If's */
+
+@media (max-width: 767px) {
+
+  body {
+    padding: 0px;
+    text-align: center;
+  }
+  .container {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+  .stepdscrptn {
+    margin-bottom: 60px;
+  }
+  .stepimage {
+    zoom: 130%;
+  }
+  .footer {
+    margin-top: 50px;
+  }
+
+}
+
+@media (max-width: 979px) and (min-width: 768px) {
+
+  .hero-caption {
+    zoom: 80%;
+  }
+
+}

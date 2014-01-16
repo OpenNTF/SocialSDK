@@ -41,7 +41,7 @@
 	<%
 		try {
 			BlogService service = new BlogService();
-			Blog blog = (Blog)service.getBlogs().get(0);
+			Blog blog = (Blog)service.getAllBlogs().get(0);
 			String blogHandle = blog.getHandle();
 			CommentList entries = service.getBlogComments(blogHandle);
 

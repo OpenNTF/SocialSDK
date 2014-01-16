@@ -90,6 +90,18 @@ public class BlogService extends BaseService {
 	/**
 	 * This method returns the all blogs
 	 * 
+	 * @deprecated use getAllBlogs instead
+	 * @return
+	 * @throws ForumServiceException
+	 */
+	public BlogList getBlogs() throws BlogServiceException{
+		return getAllBlogs();
+		
+	}
+	
+	/**
+	 * This method returns the all blogs
+	 * 
 	 * @return
 	 * @throws ForumServiceException
 	 */

@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex" dojoParseOnLoad="true">
+	<xp:this.resources>
+		<xp:script src="/home.js" clientSide="true"></xp:script>
+		<xp:styleSheet href="/home_new.css"></xp:styleSheet>
+		<xp:dojoModule name="dijit.layout.TabContainer"></xp:dojoModule>
+		<xp:dojoModule name="dijit.layout.ContentPane"></xp:dojoModule>
+		<xp:dojoModule name="dijit.layout.AccordionContainer"></xp:dojoModule>
+		<xp:dojoModule name="dojox.layout.RadioGroup"></xp:dojoModule>
+	</xp:this.resources>
+
+	<style type="text/css">
+		@import
+		"/xsp/.ibmxspres/.sbtsdk/bootstrap/css/bootstrap.min.css";
+  	</style>
+
+	<xc:ccOneUIStylesFixes></xc:ccOneUIStylesFixes>
+
+	<xc:ccLayout navigationPath="/Home">
+		<xe:djStackContainer id="stack"
+			dojoType="dojox.layout.RadioGroupFade" style="width:100%; height:1000px; overflow-y: hidden">
+			<xe:this.dojoAttributes>
+				<xp:dojoAttribute name="hasButtons" value="true"></xp:dojoAttribute>
+			</xe:this.dojoAttributes>
+
+			<xe:djStackPane id="djStackPane1">
+				<header class="jumbotron hero">
+					<xp:table styleClass="container">
+						<xp:tr>
+							<xp:td>
+								<div class="glamourshot">
+									<img src="glamourshot.png" alt="glamour shot" />
+								</div>
+							</xp:td>
+							<xp:td>
+								<div class="hero-caption">
+									<div class="hero-header">The SBT Playground</div>
+									<div class="hero-catch">A web-based live demonstration of the
+										APIs that
+										are exposed by the SDK. Customize your
+										applications
+										with the
+										Playground code snippets and examples.
+									</div>
+									<div class="hero-catch">Experiment with the Social APIs
+										through
+										the API Explorer.
+									</div>
+									<div class="captionbtns">
+										<xp:button value="Learn More" id="button4"
+											onclick="dijit.byId('#{id:stack}').forward()">
+										</xp:button>
+										<xp:button value="Play Now" id="button2">
+											<xp:eventHandler event="onclick" submit="false">
+												<xp:this.script><![CDATA[window.location.href="JavaScriptSnippets.xsp"]]></xp:this.script>
+											</xp:eventHandler>
+										</xp:button>
+									</div>
+								</div>
+							</xp:td>
+						</xp:tr>
+					</xp:table>
+				</header>
+			</xe:djStackPane>
+
+			<xe:djStackPane id="djStackPane4">
+				<xp:table styleClass="container">
+					<xp:tr valign="top">
+						<xp:td>
+							<div class="hero-caption">
+								<div class="hero-header">The Top Navigation bar</div>
+								<div class="hero-catch">
+									Let you navigate between the different modules:
+									code snippets, API explorer...
+								</div>
+							</div>
+						</xp:td>
+					</xp:tr>
+					<xp:tr valign="top">
+						<xp:td>
+							<div class="captionbtns">
+								<xp:button value="Previous" id="button1"
+									onclick="dijit.byId('#{id:stack}').back()">
+								</xp:button>
+								<xp:button value="Next" id="button6"
+									onclick="dijit.byId('#{id:stack}').forward()">
+								</xp:button>
+							</div>
+						</xp:td>
+					</xp:tr>
+				</xp:table>
+			</xe:djStackPane>
+
+			<xe:djStackPane id="djStackPane2">
+				<xp:table styleClass="container">
+					<xp:tr valign="top">
+						<xp:td>
+							<xp:table styleClass="container">
+								<xp:tr valign="top">
+									<xp:td valign="top">
+										<div class="hero-caption">
+											<div class="hero-header">Working With Code Snippets</div>
+										</div>
+									</xp:td>
+								</xp:tr>
+								<xp:tr valign="top">
+									<xp:td valign="top">
+										<div class="step">
+											<div class="stepnumber">Step 1</div>
+											<div class="stepheader">Select an environment.</div>
+											<div class="stepimage">
+												<img src="step1img.png" alt="step1img.png" />
+											</div>
+											<div class="stepdscrptn">
+												<p>Go to the Playground tab, and select an Environment
+													from
+													the
+													drop-down menu.</p>
+												<p>* If you select the Greenhouse Environment, the
+													Playground
+													is
+													connected to the Connections 4 instance in
+													Greenhouse.</p>
+												<p>* If you select Custom, you can enter a URL and the
+													OAuth
+													information to connect to your own Connections
+													instance.</p>
+											</div>
+										</div>
+									</xp:td>
+									<xp:td valign="top">
+										<div class="step">
+											<div class="stepnumber">Step 2</div>
+											<div class="stepheader">Start coding.</div>
+											<div class="stepdscrptn">
+												<p>Follow this procedure: Connections > Profiles > Get
+													Display Name</p>
+												<p>* If you are in the Greenhouse Environment, enter your
+													Greenhouse login credentials when prompted.</p>
+												<p>When JavaScript code appears in the code pane, modify
+													Line
+													2 of the code to replace the substitution variable
+													%{sample.email} with an email address of a user in the
+													environment that you have selected.</p>
+											</div>
+										</div>
+									</xp:td>
+									<xp:td valign="top">
+										<div class="step">
+											<div class="stepnumber">Step 3</div>
+											<div class="stepheader">Run the code.</div>
+											<div class="stepdscrptn">
+												<p>Click Run.</p>
+												<p>After a few seconds the name associated with the
+													email
+													address appears in the result pane.</p>
+											</div>
+										</div>
+									</xp:td>
+								</xp:tr>
+							</xp:table>
+						</xp:td>
+					</xp:tr>
+					<xp:tr valign="top">
+						<xp:td>
+							<div class="captionbtns">
+								<xp:button value="Previous" id="button5"
+									onclick="dijit.byId('#{id:stack}').back()">
+								</xp:button>
+								<xp:button value="Next" id="button7"
+									onclick="dijit.byId('#{id:stack}').forward()">
+								</xp:button>
+							</div>
+						</xp:td>
+					</xp:tr>
+				</xp:table>
+			</xe:djStackPane>
+
+			<xe:djStackPane id="djStackPane3">
+				<xp:table styleClass="container">
+					<xp:tr valign="top">
+						<xp:td>
+							<xp:table styleClass="container">
+								<xp:tr valign="top">
+									<xp:td valign="top">
+										<div class="hero-caption">
+											<div class="hero-header">Working With The API Explorer</div>
+										</div>
+									</xp:td>
+								</xp:tr>
+								<xp:tr valign="top">
+									<xp:td valign="top">
+										<div class="step">
+											<div class="stepnumber">Step 1</div>
+											<div class="stepheader">Select an environment.</div>
+											<div class="stepimage">
+												<img src="step1img.png" alt="step1img.png" />
+											</div>
+											<div class="stepdscrptn">
+												<p>TODO...</p>
+											</div>
+										</div>
+									</xp:td>
+									<xp:td valign="top">
+										<div class="step">
+											<div class="stepnumber">Step 2</div>
+											<div class="stepheader">Start coding.</div>
+											<div class="stepdscrptn">
+												<p>TODO...</p>
+											</div>
+										</div>
+									</xp:td>
+									<xp:td valign="top">
+										<div class="step">
+											<div class="stepnumber">Step 3</div>
+											<div class="stepheader">Run the code.</div>
+											<div class="stepdscrptn">
+												<p>TODO...</p>
+											</div>
+										</div>
+									</xp:td>
+								</xp:tr>
+							</xp:table>
+						</xp:td>
+					</xp:tr>
+					<xp:tr valign="top">
+						<xp:td>
+							<div class="captionbtns">
+								<xp:button value="Previous" id="button3"
+									onclick="dijit.byId('#{id:stack}').back()">
+								</xp:button>
+							</div>
+						</xp:td>
+					</xp:tr>
+				</xp:table>
+			</xe:djStackPane>
+
+		</xe:djStackContainer>
+
+	</xc:ccLayout>
+</xp:view>

@@ -65,6 +65,7 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
     private String credentialStore;
     private boolean requiresAuthentication;
     private boolean forceTrustSSLCertificate;
+    private boolean forceDisableExpectedContinue;
     private String httpProxy;
     private String proxyConfig;
     private boolean allowClientAccess = true;
@@ -326,8 +327,17 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
     public void setForceTrustSSLCertificate(boolean forceTrustSSLCertificate) {
         this.forceTrustSSLCertificate = forceTrustSSLCertificate;
     }
-    
+        
 
+
+    @Override
+	public boolean isForceDisableExpectedContinue() {
+        return forceDisableExpectedContinue;
+    }
+    public void setForceDisableExpectedContinue(boolean forceDisableExpectedContinue) {
+        this.forceDisableExpectedContinue = forceDisableExpectedContinue;
+    }
+    
     @Override
 	public String getHttpProxy(){
 		return httpProxy;

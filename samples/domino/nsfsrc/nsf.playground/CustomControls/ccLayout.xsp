@@ -97,7 +97,7 @@ if(compositeData.wholePage)view.setStyle("overflow: hidden");}]]></xp:this.after
 				</xe:this.bannerUtilityLinks>
 				<xe:this.titleBarTabs></xe:this.titleBarTabs>
 				<xe:this.banner><![CDATA[#{javascript:!optionsBean.getBanner()}]]></xe:this.banner>
-				<xe:this.mastHeader><![CDATA[#{javascript:optionsBean.getBanner()}]]></xe:this.mastHeader>
+				<xe:this.mastHeader><![CDATA[#{javascript:optionsBean.getBanner() && compositeData.wholePage}]]></xe:this.mastHeader>
 			</xe:applicationConfiguration>
 		</xe:this.configuration>
 		<xp:callback></xp:callback>

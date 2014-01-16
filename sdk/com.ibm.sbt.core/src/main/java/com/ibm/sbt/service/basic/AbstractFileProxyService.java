@@ -23,8 +23,10 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.CoreProtocolPNames;
 
 import com.ibm.commons.runtime.NoAccessSignal;
 import com.ibm.commons.runtime.mime.MIME;
@@ -225,20 +227,30 @@ public abstract class AbstractFileProxyService extends ProxyEndpointService {
 
 		String smethod = request.getMethod();
 		HttpRequestBase method = createMethod(smethod, new URI(composeRequestUrl(args, parameters)), request);
-		DefaultHttpClient httpClient = new DefaultHttpClient();
+		DefaultHttpClient defaultHttpClient = new DefaultHttpClient();
 		if (endpoint.isForceTrustSSLCertificate()) {
-			httpClient = SSLUtil.wrapHttpClient(httpClient);
+			defaultHttpClient = SSLUtil.wrapHttpClient(defaultHttpClient);
 		}
-		endpoint.initialize(httpClient);
+		if (endpoint.isForceDisableExpectedContinue()) {
+			defaultHttpClient.getParams().setParameter(
+					CoreProtocolPNames.USE_EXPECT_CONTINUE, false);
+		}
+		endpoint.initialize(defaultHttpClient);
+
 		for (Map.Entry<String, String> e : args.getHeaders().entrySet()) {
 			String headerName = e.getKey();
 			String headerValue = e.getValue();
 			method.addHeader(headerName, headerValue);
 		}
 		if (content != null) {
-			content.initRequestContent(httpClient, method, args);
+			content.initRequestContent(defaultHttpClient, method, args);
 		}
-		endpoint.updateHeaders(httpClient, method);
+		endpoint.updateHeaders(defaultHttpClient, method);
+		//getting to interface to avoid 
+		//java.lang.NoSuchMethodError: org/apache/http/impl/client/DefaultHttpClient.execute(Lorg/apache/http/client/methods/HttpUriRequest;)Lorg/apache/http/client/methods/CloseableHttpResponse;
+		//when run from different version of HttpClient (that's why it is deprecated)
+		HttpClient httpClient = defaultHttpClient;
+
 		HttpResponse clientResponse = httpClient.execute(method);
 
 		if ("get".equalsIgnoreCase(smethod) && (clientResponse.getStatusLine().getStatusCode() == HttpServletResponse.SC_UNAUTHORIZED)

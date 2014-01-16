@@ -21,6 +21,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.w3c.dom.Document;
@@ -272,7 +273,7 @@ public class SnippetFactory {
     
     private static String httpGet(String url) {
         try {
-            DefaultHttpClient httpClient = SSLUtil.wrapHttpClient(new DefaultHttpClient());
+            HttpClient httpClient = SSLUtil.wrapHttpClient(new DefaultHttpClient());
             HttpGet request = new HttpGet(url);
             HttpResponse response = httpClient.execute(request);
             if (response.getStatusLine().getStatusCode() == 200) {

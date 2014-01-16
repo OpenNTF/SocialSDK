@@ -425,4 +425,6 @@ public interface Endpoint {
     public String getProxyConfig();
 
 
+	public boolean isForceDisableExpectedContinue();
+
 }

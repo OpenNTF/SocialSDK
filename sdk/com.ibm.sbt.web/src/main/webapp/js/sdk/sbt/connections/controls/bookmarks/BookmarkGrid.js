@@ -46,6 +46,17 @@ define(["../../../declare",
 	 */
 	var BookmarkGrid = declare(Grid,{
 		
+		/**
+		 * Specifies how the bookmark should open, new tab, same window etc.
+		 * Should match values for the name parameter from the window.open function
+		 * _blank is default, 
+		 * _parent - URL is loaded into the parent frame
+		 * _self - URL replaces the current page
+		 * _top - URL replaces any framesets that may be loaded
+		 */
+		targetName: "_blank",
+		
+		
 		 options : {
 	            "any" : {
 	                storeArgs : {
@@ -194,9 +205,9 @@ define(["../../../declare",
         handleClick: function(el, data, ev){
         	
         	this._stopEvent(ev);
-        	this.bookmarkAction.execute(data);
+        	this.bookmarkAction.execute(data,this);
         },
-        
+
         /**
          * Default Action for handling click events and returning tooltip text.
          */
@@ -217,9 +228,9 @@ define(["../../../declare",
         	 * @method execute
         	 * @param data the Data associated with the grid
         	 */
-        	execute: function(data){
+        	execute: function(data,context){
         		var url = data.getValue("url");
-        		window.location.assign(url);
+        		window.open(url,context.targetName);
         	}
         }
 	

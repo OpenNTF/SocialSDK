@@ -15,7 +15,7 @@
         <link rel="stylesheet" type="text/css" title="Style" href="${cssUrl}"></link>
         
         <script type="text/javascript" src="${proxyUrl}/${connections}/resources/web/_js/?include=dojo.dojo.js"></script>
-        <script>
+        <script defer="defer">
         var secure = window.location.href.indexOf("https") == 0 ? true : false;
         // This mixin is used to provide the urls for the services that will be accessed, in particular opensocial.
         // This approach is ok because eventually our sdk will know these urls (it needs to to correctly make api calls).
@@ -155,7 +155,7 @@
             <div id="activityStream"></div>
             <div id="sideNav"></div>
             <div id="inputForm"></div>
-            <script>
+            <script defer="defer">
             require(["sbt/config", "sbt/connections/controls/astream/_ActivityStream"], function(config, _ActivityStream){
                 config.Properties = ${sbtProps};
                 new _ActivityStream(${args});

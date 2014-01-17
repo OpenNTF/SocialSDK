@@ -311,7 +311,7 @@ public class PreviewJavaScriptHandler extends PreviewHandler {
 		html = html + ParameterProcessor.process(customHtml, prov);
 		
 		// Hidden progress indicator image 
-		html = html + "\n<img id='loading' src='../progressIndicator.gif' style='visibility: hidden'></img>";
+		html = html + "\n<div id='loading' style='visibility: hidden'><img src='../progressIndicator.gif' alt='loading...'></img></div>";
 		
 		// Read an process the JS
 		String js = requestParams.js;

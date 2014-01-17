@@ -13,7 +13,7 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-define(["../../../declare", "../../../config", "../../../url"], function(declare, config, Url){
+define(["../../../declare", "../../../config", "../../../url", "com.ibm.social.as.gadget.ActivityStreamConfigUtil"], function(declare, config, Url){
     /*
      * @class sbt.controls.astream._SbtAsConfigUtil A helper module for building ActivityStream config objects.
      */

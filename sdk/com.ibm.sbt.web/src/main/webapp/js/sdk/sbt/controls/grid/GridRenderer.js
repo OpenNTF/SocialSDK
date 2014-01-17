@@ -115,7 +115,7 @@ define([ "../../declare", "../../dom", "../../lang"],
          * @param data - the data associated with the current element
          */
         renderFooter : function(grid,el,items,data) {
-            if (this.footerTemplate && !grid.hidePager) {
+            if (this.footerTemplate && !grid.hideFooter) {
                 var node;
                 if (lang.isString(this.footerTemplate)) {
                     var domStr = this._substituteItems(this.footerTemplate, grid, this, items, data);

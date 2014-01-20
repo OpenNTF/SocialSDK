@@ -1,15 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="80257B9C00399D4F" version="9.0" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="2a6" sequence="5" unid="8E8F68F044A41C3080257B9C0039ADBA">
-<created><datetime dst="true">20130702T113000,26+01</datetime></created>
-<modified><datetime dst="true">20130702T113135,13+01</datetime></modified>
-<revised><datetime dst="true">20130702T113135,12+01</datetime></revised>
-<lastaccessed><datetime dst="true">20130702T113135,13+01</datetime></lastaccessed>
-<addedtofile><datetime dst="true">20130702T113001,41+01</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=A Admin/O=ibm</name></updatedby>
-<wassignedby><name>CN=A Admin/O=ibm</name></wassignedby>
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="1.0" replicaid="85257C66006415BE" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="2aa" sequence="9" unid="FAA7733BEF2AB6D985257C66006428DD">
+<created><datetime>20140120T131400,61-05</datetime></created>
+<modified><datetime>20140120T131920,34-05</datetime></modified>
+<revised><datetime>20140120T131920,33-05</datetime></revised>
+<lastaccessed><datetime>20140120T131920,34-05</datetime></lastaccessed>
+<addedtofile><datetime>20140120T131403,68-05</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Renovations Administrator/O=renovations</name></updatedby>
+<wassignedby><name>CN=Renovations Administrator/O=renovations</name></wassignedby>
 <item name="$TITLE"><text>OneUILayout.xsp</text></item>
 <item name="$Flags"><text>gC~4;</text></item>
+
+
 <item name="$DesignerVersion"><text>8.5</text></item>
+
+
+
 
 
 

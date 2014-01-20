@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="1.0" replicaid="85257C66006415BE" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="31a" sequence="3" unid="BB82F8C9F64BF0A585257C660065520E">
+<created><datetime>20140120T132641,42-05</datetime></created>
+<modified><datetime>20140120T132641,49-05</datetime></modified>
+<revised><datetime>20140120T132641,48-05</datetime></revised>
+<lastaccessed><datetime>20140120T132641,49-05</datetime></lastaccessed>
+<addedtofile><datetime>20140120T132641,43-05</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Renovations Administrator/O=renovations</name></updatedby>
+<wassignedby><name>CN=Renovations Administrator/O=renovations</name></wassignedby>
+<item name="$Flags"><text>34567Cg~[</text></item>
+<item name="$TITLE"><text>demo/SocialEnablerContainerExtPoint.java</text></item>
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+
+
+<item name="$FileNames" sign="true"><text>demo/SocialEnablerContainerExtPoint.java</text></item></note>

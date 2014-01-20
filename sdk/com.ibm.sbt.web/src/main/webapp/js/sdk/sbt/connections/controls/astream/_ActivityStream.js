@@ -13,7 +13,7 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-define(["../../../declare", "../../../lang", "../../../dom", "../../../connections/controls/_ConnectionsWidget", "../../../connections/controls/astream/_SbtAsConfigUtil", "../../../connections/controls/sharebox/_InputForm"], function(declare, lang, dom, _ConnectionsWidget, _SbtAsConfigUtil, _InputForm){
+define(["../../../declare", "../../../lang", "../../../dom", "../../../connections/controls/_ConnectionsWidget", "../../../connections/controls/astream/_SbtAsConfigUtil", "../../../connections/controls/sharebox/_InputForm", "com.ibm.social.as.ActivityStream"], function(declare, lang, dom, _ConnectionsWidget, _SbtAsConfigUtil, _InputForm){
     /**
      * Wrapper for the connections ActivityStream Dijit.
      * 

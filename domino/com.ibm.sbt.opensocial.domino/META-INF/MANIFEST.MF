@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Domino Opensocial App
 Bundle-SymbolicName: com.ibm.sbt.opensocial.domino;singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 1.0.1.qualifier
 Bundle-Activator: com.ibm.sbt.opensocial.domino.internal.OpenSocialPlugin
 Bundle-Vendor: IBM
 Bundle-ActivationPolicy: lazy
@@ -22,7 +22,6 @@ Import-Package: javax.servlet,
  org.osgi.service.webapplication
 Bundle-ClassPath: .,
  config/
-Export-Package: com.ibm.sbt.opensocial.domino.config,
- com.ibm.sbt.opensocial.domino.container,
- com.ibm.sbt.opensocial.domino.oauth,
- com.ibm.sbt.opensocial.domino.oauth.clients
+Export-Package: com.ibm.sbt.opensocial.domino.config,com.ibm.sbt.opens
+ ocial.domino.container,com.ibm.sbt.opensocial.domino.oauth,com.ibm.sb
+ t.opensocial.domino.oauth.clients

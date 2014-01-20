@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Common Runtime Classes
 Bundle-SymbolicName: com.ibm.commons.runtime
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 1.0.1.qualifier
 Bundle-Vendor: IBM
 Export-Package: com.ibm.commons.runtime,com.ibm.commons.runtime.beans,
  com.ibm.commons.runtime.impl,com.ibm.commons.runtime.impl.app,com.ibm

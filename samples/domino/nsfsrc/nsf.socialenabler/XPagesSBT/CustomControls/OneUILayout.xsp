@@ -82,6 +82,9 @@
          		<xe:pageTreeNode label="Generic Services" page="/GenericStackoverflow.xsp"
          			selected="/Generic/.*">
          		</xe:pageTreeNode>
+         		<xe:pageTreeNode label="OpenSocial Container" page="/OSContainer.xsp"
+         			selected="/OSContainer/.*">
+         		</xe:pageTreeNode>
          		<xe:pageTreeNode page="UtilUserBean" label="Utilities"
          			selection="/Util/.*">
          		</xe:pageTreeNode>

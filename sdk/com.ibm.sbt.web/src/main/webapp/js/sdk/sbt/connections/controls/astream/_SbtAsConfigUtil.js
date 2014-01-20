@@ -13,9 +13,7 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-define(["../../../declare", "../../../config", "../../../url", "com.ibm.social.as.gadget.ActivityStreamConfigUtil", "lconn.core.util.LCDeferred"], function(declare, config, Url){
-//    dojo.require("com.ibm.social.as.gadget.ActivityStreamConfigUtil");
-//    dojo.require("lconn.core.util.LCDeferred");
+define(["../../../declare", "../../../config", "../../../url"], function(declare, config, Url){
     /*
      * @class sbt.controls.astream._SbtAsConfigUtil A helper module for building ActivityStream config objects.
      */

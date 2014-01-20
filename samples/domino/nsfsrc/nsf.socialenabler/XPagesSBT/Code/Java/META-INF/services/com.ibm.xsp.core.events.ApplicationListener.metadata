@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="1.0" replicaid="85257C66006415BE" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="30e" sequence="2" unid="D28324C47CA9A11085257C6600651558">
+<created><datetime>20140120T132406,00-05</datetime></created>
+<modified><datetime>20140120T132406,03-05</datetime></modified>
+<revised><datetime>20140120T132406,02-05</datetime></revised>
+<lastaccessed><datetime>20140120T132406,03-05</datetime></lastaccessed>
+<addedtofile><datetime>20140120T132406,01-05</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Renovations Administrator/O=renovations</name></updatedby>
+<wassignedby><name>CN=Renovations Administrator/O=renovations</name></wassignedby>
+<item name="$Flags"><text>34567Cg~[</text></item>
+<item name="$TITLE"><text>META-INF/services/com.ibm.xsp.core.events.ApplicationListener</text></item>
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+
+
+<item name="$FileNames" sign="true"><text>META-INF/services/com.ibm.xsp.core.events.ApplicationListener</text></item></note>

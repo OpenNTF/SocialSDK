@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+  <ModulePrefs title="Hello World">
+  </ModulePrefs>
+  <Content type="html">
+    <![CDATA[
+		<h1>Hello From An OpenSocial Gadget</h1>
+    ]]>
+  </Content>
+
+</Module>

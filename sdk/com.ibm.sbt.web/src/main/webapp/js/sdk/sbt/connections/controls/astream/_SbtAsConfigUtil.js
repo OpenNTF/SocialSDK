@@ -123,8 +123,6 @@ define(["../../../declare", "../../../config", "../../../url", "com.ibm.social.a
          * @returns {lconn.core.util.LCDeferred} A promise which, when resolved, will contain a completed ActivityStream config object.
          */
         buildSbtConfigFull: function(cfg){
-            if(cfg.eeManager)
-                delete cfg.eeManager;
             var cfgPromise = new lconn.core.util.LCDeferred();
             if (!cfg.userInfo || !cfg.userInfo.id || !cfg.userInfo.displayName) {
                 cfg.boardId = this.getBoardIdFromAppId(cfg.defaultUrlTemplateValues.appId);
@@ -194,8 +192,6 @@ define(["../../../declare", "../../../config", "../../../url", "com.ibm.social.a
                 if(args.extensions.deleteButton)
                     cfg.extensions.push("com.ibm.social.as.lconn.extension.MicroblogDeletionExtension");
             }
-            if(cfg.eeManager)
-                delete cfg.eeManager;
             
             if(args.feedUrl.indexOf("anonymous") === -1){
                 this.getUserInfo().then(

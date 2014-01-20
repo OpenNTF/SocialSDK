@@ -4,8 +4,7 @@
         <script type="text/javascript">
             djConfig={
                 baseUrl: '${proxyUrl}/${connections}/resources/web/dojo/',
-                localizationComplete: true,
-                locale: "en-us"
+                localizationComplete: true
             };
             asc = {
                 useOAuth : false
@@ -17,6 +16,8 @@
         
         <script type="text/javascript" src="${proxyUrl}/${connections}/resources/web/_js/?include=dojo.dojo.js"></script>
         <script>
+        dojo.locale = "en";
+        dojo.config.locale="en";
         var secure = window.location.href.indexOf("https") == 0 ? true : false;
         // This mixin is used to provide the urls for the services that will be accessed, in particular opensocial.
         // This approach is ok because eventually our sdk will know these urls (it needs to to correctly make api calls).
@@ -148,7 +149,7 @@
             }
           });
         </script>
-        <script type="text/javascript" src="${proxyUrl}/${connections}/resources/web/_js/?include=com.ibm.social.as.ActivityStream.js~com.ibm.lconn.personcard.legacy.js~com.ibm.social.as.gadget.ActivityStreamConfigUtil.js${connectionsASNav}~com.ibm.social.as.util.hashtag.HashtagUtil.js~com.ibm.social.as.gadget.refresh.RefreshButton.js~lconn.core.util.dojoPatches.js~com.ibm.social.as.ee.EEManager.js~lconn.homepage.as.extension.SavedActionExtension.js~com.ibm.social.as.gadget.refresh.RefreshButtonExtension.js~com.ibm.social.as.lconn.extension.MicroblogDeletionExtension.js~com.ibm.social.as.extension.CommentExtension.js~lconn.core.filesutil.js~lconn.news.microblogging.sharebox.InputForm.js~com.ibm.social.as.extension.DirtyCheckExtension.js~com.ibm.social.as.lconn.extension.ShareboxStatusUpdateExtension.js~com.ibm.social.as.lconn.extension.DisableDynamicLoadExtension.js~lconn.homepage.as.extension.SavedViewExtension.js~lconn.homepage.as.extension.ActivityReplyExtension.js~lconn.homepage.as.extension.NetworkInviteExtension.js~lconn.homepage.as.extension.ActionRequiredViewExtension.js~com.ibm.social.as.lconn.extension.GadgetPreloaderExtension.js&exclude=lconn.core.config.services.js~dojo.dojo.js"></script>
+        <script type="text/javascript" src="${proxyUrl}/${connections}/resources/web/_js/?include=com.ibm.social.as.ActivityStream.js~com.ibm.lconn.personcard.legacy.js~com.ibm.social.as.gadget.ActivityStreamConfigUtil.js${connectionsASNav}~com.ibm.social.as.util.hashtag.HashtagUtil.js~com.ibm.social.as.gadget.refresh.RefreshButton.js~lconn.core.util.dojoPatches.js~com.ibm.social.as.ee.EEManager.js~lconn.homepage.as.extension.SavedActionExtension.js~com.ibm.social.as.gadget.refresh.RefreshButtonExtension.js~com.ibm.social.as.lconn.extension.MicroblogDeletionExtension.js~com.ibm.social.as.extension.CommentExtension.js~lconn.core.filesutil.js~lconn.news.microblogging.sharebox.InputForm.js~com.ibm.social.as.extension.DirtyCheckExtension.js~com.ibm.social.as.lconn.extension.ShareboxStatusUpdateExtension.js~com.ibm.social.as.lconn.extension.DisableDynamicLoadExtension.js~lconn.homepage.as.extension.SavedViewExtension.js~lconn.homepage.as.extension.ActivityReplyExtension.js~lconn.homepage.as.extension.NetworkInviteExtension.js~lconn.homepage.as.extension.ActionRequiredViewExtension.js~com.ibm.social.as.lconn.extension.GadgetPreloaderExtension.js&exclude=lconn.core.config.services.js~dojo.dojo.js&lang=en"></script>
         <script type="text/javascript" src="${libraryUrl}"></script>
     </head>
     <body class="lotusui30_body lotusui30_fonts lotusui30">

@@ -48,7 +48,6 @@ define(["../../declare", "../../config", "../../connections/controls/astream/_Xh
             window.ibmConfig = window.ibmConfig || {};
             window.ibmConfig.versionStamp = window.ibmConfig.versionStamp || 1234567890;
             
-            dojo.config.locale="en";
             this.registerModulePaths();
             this.xhrHandler = args.xhrHandler || this.requireXhr(args.endpoint);
         },

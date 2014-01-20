@@ -60,6 +60,9 @@ define([],function() {
         },
         hitch: function(scope, method) {
         	return dojo.hitch(scope, method);
+        },
+        isIE: function(){
+            return dojo.isIE;
         }
 	};
 });

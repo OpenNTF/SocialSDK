@@ -20,7 +20,8 @@ define({
       empty : "Empty",
       loading : "Loading...",
       msgNoData : "Please wait...",
-      defaultTemplate : "No template specified."
+      defaultTemplate : "No template specified.",
+      unsupportedBrowser : "Unsupported browser."
   }
 });
 

@@ -15,7 +15,7 @@
         <link rel="stylesheet" type="text/css" title="Style" href="${cssUrl}"></link>
         
         <script type="text/javascript" src="${proxyUrl}/${connections}/resources/web/_js/?include=dojo.dojo.js"></script>
-        <script defer="defer">
+        <script>
         dojo.locale = "en";
         dojo.config.locale="en";
         var secure = window.location.href.indexOf("https") == 0 ? true : false;
@@ -157,7 +157,7 @@
             <div id="activityStream"></div>
             <div id="sideNav"></div>
             <div id="inputForm"></div>
-            <script defer="defer">
+            <script>
             require(["sbt/config", "sbt/connections/controls/astream/_ActivityStream"], function(config, _ActivityStream){
                 config.Properties = ${sbtProps};
                 new _ActivityStream(${args});

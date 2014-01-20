@@ -167,6 +167,14 @@ define(["has", "./jquery"],function(has) {
                     return function() { return scope[method].apply(scope, arguments || []); };
             }
             return !scope ? method : function() { return method.apply(scope, arguments || []); };
+        },
+        isIE: function(){
+            if($.browser.msie) {
+                return $.browser.version;
+            }
+            else{
+                return undefined;
+            }
         }
 	};
 });

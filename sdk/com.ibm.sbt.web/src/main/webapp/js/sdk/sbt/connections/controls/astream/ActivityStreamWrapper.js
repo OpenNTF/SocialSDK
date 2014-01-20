@@ -13,7 +13,7 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-define(["../../../declare", "../../../url", "../../../config", "../../../util", "../../../lang", "../../../connections/controls/WidgetWrapper", "../../../text!../../../connections/controls/astream/templates/ActivityStreamContent.html"], function(declare, Url, config, util, lang, WidgetWrapper, defaultTemplate) {
+define(["../../../declare", "../../../lang", "../../../url", "../../../config", "../../../util", "../../../connections/controls/WidgetWrapper", "../../../text!../../../connections/controls/astream/templates/ActivityStreamContent.html"], function(declare, lang, Url, config, util, WidgetWrapper, defaultTemplate) {
 
     /**
      * The wrapper for the ActivityStream.
@@ -140,6 +140,10 @@ define(["../../../declare", "../../../url", "../../../config", "../../../util", 
             }
             if(args.sideNavClassName){
                 this.sideNavClassName = args.sideNavClassName;
+            }
+            
+            if(lang.isIE() < 10){ // Don't load the stream for IE < 10
+                this.defaultTemplate = "";
             }
         }
         

@@ -74,7 +74,7 @@ import com.ibm.sbt.test.js.connections.activities.api.UpdateActivityNode;
 	GetAllToDos.class,	
 	MoveEntryToSection.class,
 	UpdateActivity.class,
-	UpdateMember.class,
+	//UpdateMember.class,
 	UpdateActivityNode.class,
 	GetActivityNode.class,
 	GetActivityNodes.class})

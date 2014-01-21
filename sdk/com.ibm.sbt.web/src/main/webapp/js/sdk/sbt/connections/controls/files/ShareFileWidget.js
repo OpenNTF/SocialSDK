@@ -75,6 +75,7 @@ define([ "../../../declare", "../../../lang", "../../../dom",
 		_shareWithCommunityOrPerson: "person",
 		
 		
+		
 		/**
 		 * Constructor method for the UploadFileWidget.
 		 * 
@@ -142,6 +143,7 @@ define([ "../../../declare", "../../../lang", "../../../dom",
 			    	className: "lotusText",
 			    	searchAttr: "name",
 			    	queryExpr: "${0}*",
+			    	autoComplete: false,
 			        storeArgs : {
 			        	url: "/profiles/atom/search.do",
 			            attributes : {
@@ -170,6 +172,10 @@ define([ "../../../declare", "../../../lang", "../../../dom",
 				dom.setText("content", err);
 			}
 			
+			if(this.files.length == 1 && this.files[0].visibility == "public"){
+				this.sharePublicRadioButton.setAttribute("style", "display:none;");
+				this.sharePublicRadioButtonLabel.setAttribute("style", "display:none;");
+			}
 		},
 
 		

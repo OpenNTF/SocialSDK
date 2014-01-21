@@ -2,7 +2,7 @@
 <feature
       id="com.ibm.sbt.opensocial.domino.explorer.feature"
       label="OpenSocial Explorer Feature"
-      version="1.0.0.qualifier"
+      version="1.0.1.qualifier"
       provider-name="IBM">
 
    <license url="http://www.apache.org/licenses/LICENSE-2.0">

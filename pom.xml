@@ -3,14 +3,33 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>com.ibm.sbt</artifactId>
 	<packaging>pom</packaging>
+	<name>IBM Social Business Toolkit SDK</name>
+
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>7</version>
+	</parent>
+
+	<description>
+	The Social Business Toolkit SDK is a set of libraries and code samples that you use for connecting to the IBM Social Platform. 
+	It covers many products like IBM Connections, IBM Notes/Domino, IBM Sametime. 
+	It includes support for many authentication mechanisms, as well as comprehensive wrappers for the REST APIs. 
+	The SDK can be run on Java-based application servers such WebSphere Application Server, WebSphere Portal, IBM Domino, and Apache Tomcat.
+
+	Source code is available at https://github.com/OpenNTF/SocialSDK 
+	</description>
+
+	<url>http://ibmsbt.openntf.org/</url>
 
 	<groupId>com.ibm.sbt</groupId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.1-SNAPSHOT</version>
 
 	<properties>
 		<tycho-version>0.19.0</tycho-version>
 		<compiler>1.6</compiler>
 	</properties>
+
 
 
 	<profiles>
@@ -177,10 +196,31 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>2.9</version>
+				  <executions>
+			    <execution>
+			      <id>attach-javadocs</id>
+			      <goals>
+			        <goal>jar</goal>
+			      </goals>
+			    </execution>
+			  </executions>
 				<configuration>
 					<failOnError>false</failOnError>
 					<excludePackageNames>com.sun.*:com.ibm.commons.*:com.ibm.sbt.core.*:com.ibm.sbt.plugin.*:com.ibm.sbt.jslibrray.*:com.ibm.sbt.proxy.*:com.ibm.sbt.security.*:*.util.*:com.ibm.sbt.portlet.*:com.ibm.sbt.playground.*:demo.*:acme.*</excludePackageNames>
 				</configuration>
+			</plugin>
+			<plugin>
+			  <groupId>org.apache.maven.plugins</groupId>
+			  <artifactId>maven-source-plugin</artifactId>
+			  <version>2.2.1</version>
+			  <executions>
+			    <execution>
+			      <id>attach-sources</id>
+			      <goals>
+			        <goal>jar</goal>
+			      </goals>
+			    </execution>
+			  </executions>
 			</plugin>
 		</plugins>
 
@@ -298,4 +338,5 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+
 </project>

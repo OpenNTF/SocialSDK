@@ -2,14 +2,13 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <artifactId>com.ibm.sbt.opensocial.domino.explorer</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
   <packaging>eclipse-plugin</packaging>
   <description>Provides the OpenSocial Explorer JavaScript</description>
 
   <parent>
     <groupId>com.ibm.sbt</groupId>
     <artifactId>com.ibm.sbt.domino</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.1-SNAPSHOT</version>
   </parent>
 
   <!-- ====================================================================== -->

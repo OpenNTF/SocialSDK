@@ -59,6 +59,11 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
         hideSorter: false,
         
         /**
+         * flag to hide the footer
+         */
+        hideFooter: false,
+        
+        /**
          * FilterTag, is used for sorting and paging, as to only sort as filtered set of results
          */
         filterTag: "",

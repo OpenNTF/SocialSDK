@@ -1,18 +1,18 @@
 /*
-* © Copyright IBM Corp. 2013
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at:
-*
-* http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
-* implied. See the License for the specific language governing
-* permissions and limitations under the License.
-*/
+ * © Copyright IBM Corp. 2012
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); 
+ * you may not use this file except in compliance with the License. 
+ * You may obtain a copy of the License at:
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0 
+ * 
+ * Unless required by applicable law or agreed to in writing, software 
+ * distributed under the License is distributed on an "AS IS" BASIS, 
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or 
+ * implied. See the License for the specific language governing 
+ * permissions and limitations under the License.
+ */
 
 /**
  * Definition of the endpoint module
@@ -183,7 +183,6 @@ var Endpoint = declare(null, {
         	   	handleAs : "text"
         	};
         }
-        options.name = this.name;
         
         var promise = new Promise();
         promise.response = new Promise();       
@@ -205,6 +204,7 @@ var Endpoint = declare(null, {
 			if (!error.message) {
 				error.message = self.getErrorMessage(error.cause);
 			}
+
 			var authRequiredPromise = self._isAuthRequired(error, options);
 			authRequiredPromise.then(
 				function(response) {
@@ -356,6 +356,7 @@ var Endpoint = declare(null, {
 				transport : this.transport,
 				proxy : this.proxy,
 				proxyPath : this.proxyPath,
+				actionUrl : args.actionUrl,
 				loginUi : args.loginUi || this.loginUi,
 				name: this.name,
 				callback: function(response) {
@@ -389,6 +390,7 @@ var Endpoint = declare(null, {
 		} else {
 			actionURL = args.actionUrl;
 		}
+		
 		this.transport.xhr('POST',{
 			handleAs : "json",
 			url : actionURL,
@@ -413,6 +415,7 @@ var Endpoint = declare(null, {
 	isAuthenticated : function(args) {
 		var promise = new Promise();
 		args = args || {};
+		var self = this;
 		var actionURL = "";
 		if (!args.actionUrl) {
 			var proxy = this.proxy.proxyUrl;
@@ -448,6 +451,7 @@ var Endpoint = declare(null, {
 		var promise = new Promise();
 		args = args || {};
 		var self = this;
+
 		var actionURL = "";
 		if (!args.actionUrl) {
 			var proxy = this.proxy.proxyUrl;
@@ -455,6 +459,7 @@ var Endpoint = declare(null, {
 		} else {
 			actionURL = args.actionUrl;
 		}
+
 		this.transport.xhr('POST',{			
 			handleAs : "json",
 			url : actionURL,
@@ -526,6 +531,7 @@ var Endpoint = declare(null, {
             transport: this.transport, 
             proxy: this.proxy,
             proxyPath: this.proxyPath,
+            actionUrl: options.actionUrl,
             loginUi: options.loginUi || this.loginUi,
             name: this.name,
             callback: function() {
@@ -566,7 +572,9 @@ var Endpoint = declare(null, {
 			if (!isAuthErr) {
 				promise.fulfilled(false);
 			} else {
-				this.isAuthenticationValid().then(
+				console.log(">>> isAuth");
+				console.log(options);
+				this.isAuthenticationValid(options).then(
 					function(response) {
 						promise.fulfilled(!response.result);
 					}, 

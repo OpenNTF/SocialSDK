@@ -152,7 +152,7 @@ var Endpoint = declare(null, {
      *            be sent with the request.
      * @param {Boolean}
      *            [options.preventCache=false] If true will send an extra
-     *            query parameter to ensure the the server won�t supply
+     *            query parameter to ensure the the server won't supply
      *            cached values.
      * @param {String}
      *            [options.method=GET] The HTTP method that should be used

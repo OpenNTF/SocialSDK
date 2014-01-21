@@ -17,7 +17,7 @@
 // NLS_CHARSET=UTF-8
 define({
   root: {
-      IE9Unsupported : "Unsupported browser, Internet Explorer 10 or higher is required."
+      IE9Unsupported : "Unsupported browser, Internet Explorer 10 or later is required."
   }
 });
 

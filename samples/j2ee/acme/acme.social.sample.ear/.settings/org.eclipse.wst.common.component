@@ -14,7 +14,7 @@
         <dependent-module archiveName="com.ibm.sbt.web-1.0.1-SNAPSHOT.war" deploy-path="/" handle="module:/resource/com.ibm.sbt.web/com.ibm.sbt.web">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="sbt.dojo180-1.0.1-SNAPSHOT.war" deploy-path="/" handle="module:/resource/com.ibm.sbt.dojo180/com.ibm.sbt.dojo180">
+        <dependent-module archiveName="sbt.dojo180-1.0.1.war" deploy-path="/" handle="module:/resource/com.ibm.sbt.dojo180/com.ibm.sbt.dojo180">
             <dependency-type>uses</dependency-type>
         </dependent-module>
     </wb-module>

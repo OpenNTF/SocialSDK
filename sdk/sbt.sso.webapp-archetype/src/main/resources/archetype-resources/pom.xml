@@ -5,8 +5,8 @@
 	<artifactId>${artifactId}</artifactId>
 	<parent>
 		<groupId>com.ibm.sbt</groupId>
-		<artifactId>com.ibm.samples.j2ee</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
+		<artifactId>com.ibm.sbt</artifactId>
+		<version>1.0.1-SNAPSHOT</version>
 	</parent>
 	<groupId>${groupId}</groupId>
 	
@@ -15,7 +15,7 @@
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.sbt.core</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
+			<version>1.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 	<version>${version}</version>

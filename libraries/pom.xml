@@ -7,7 +7,7 @@
 	<parent>
 		<artifactId>com.ibm.sbt</artifactId>
 		<groupId>com.ibm.sbt</groupId>
-		<version>1.0.1-SNAPSHOT</version>
+		<version>1.0.1</version>
 	</parent>
 	<modules>
 	<module>com.ibm.sbt.libs</module>

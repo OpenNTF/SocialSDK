@@ -84,7 +84,7 @@ define([ "../../declare", "../../config", "../../lang", "../../stringUtil", "../
 		postMixInProperties : function() {
 			this.endpoint = this.getEndpoint();
 			this.title = this.title || "";
-			this.actionBar = this.actionBar || new ActionBar();
+			this.actionBar = this.actionBar || new ActionBar(this.actionBarArgs);
 		    this.navTree = this.navTree || new NavTree();
 		},
 

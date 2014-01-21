@@ -101,14 +101,13 @@ public class GadgetSnippetAssetNode extends AssetNode {
 		}
 		return null;
 	}
-	
-//	public Asset createAsset(VFSFile root) throws IOException {
-//		VFSFile parent = getParentFile(root);
-//		String xml = loadResource(parent,"xml");
-//		String docHtml = loadResource(parent,"doc.html");
-//		GadgetSnippet s = (GadgetSnippet)new GadgetSnippet();
-//		s.setXml(xml);
-//		s.setDocHtml(docHtml);
-//		return s;
-//	}
+
+	@Override
+	protected String loadResource(VFSFile parent, String ext) throws IOException {
+		// Special case for properties as we have one single named file
+		if(StringUtil.equals(ext, "properties")) {
+			return loadFile(parent, "gadget.properties");
+		}
+		return super.loadResource(parent, ext);
+	}
 }

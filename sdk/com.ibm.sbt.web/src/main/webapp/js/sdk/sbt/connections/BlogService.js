@@ -39,9 +39,10 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
      */
     var Blog = declare(AtomEntity, {
 
-    xpath : consts.BlogXPath,
-    namespaces : consts.BlogNamespaces,
-    categoryScheme : CategoryBlog,
+    	xpath : consts.BlogXPath,
+    	namespaces : consts.BlogNamespaces,
+    	categoryScheme : CategoryBlog,
+    
         /**
          * Construct a Blog entity.
          * 
@@ -300,24 +301,24 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         },
         
         /**
-         * Return the last updated dateRecomendations URL of the IBM Connections blog post comment from
+         * Return the last updated dateRecommendations URL of the IBM Connections blog post comment from
          * blog ATOM entry document.
          * 
-         * @method getRecomendationsURL
-         * @return {String} Recomendations URL of the Blog Post comment
+         * @method getRecommendationsURL
+         * @return {String} Recommendations URL of the Blog Post comment
          */
-        getRecomendationsURL : function() {
-            return this.getAsString("recomendationsUrl");
+        getRecommendationsURL : function() {
+            return this.getAsString("recommendationsUrl");
         },
         
         /**
-         * Return the Recomendations count of the IBM Connections blog post comment from
+         * Return the Recommendations count of the IBM Connections blog post comment from
          * blog ATOM entry document.
          * 
-         * @method getRecomendationsCount
+         * @method getRecommendationsCount
          * @return {String} Number of recommendations for the Blog post comment
          */
-        getRecomendationsCount : function() {
+        getRecommendationsCount : function() {
             return this.getAsString("rankRecommendations");
         },
         
@@ -354,10 +355,10 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         /**
          * Sets blog post id of IBM Connections blog post comment.
          * 
-         * @method setBlogPostUuid
+         * @method setPostUuid
          * @param {String} blogPostUuid of the comment's blog post
          */
-        setBlogPostUuid : function(blogPostUuid) {
+        setPostUuid : function(blogPostUuid) {
             return this.setAsString("blogPostUuid", blogPostUuid);
         },
         
@@ -672,14 +673,14 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * Get the All Blogs feed to see a list of all blogs to which the 
          * authenticated user has access.
          * 
-         * @method getBlogs
+         * @method getAllBlogs
          * 
          * @param {Object} [args] Object representing various parameters
          * that can be passed to get a feed of all blogs. The
          * parameters must be exactly as they are supported by IBM
          * Connections like ps, sortBy etc.
          */
-        getBlogs : function(args) {
+        getAllBlogs : function(args) {
             var options = {
                 method : "GET",
                 handleAs : "text",
@@ -777,13 +778,13 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         /**
          * Get the blog posts feed to see a list of posts for all blog .
          * 
-         * @method getBlogsPosts
+         * @method getAllBlogPosts
          * @param {Object} [args] Object representing various parameters
          * that can be passed to get a feed of all blogs posts. The
          * parameters must be exactly as they are supported by IBM
          * Connections like ps, sortBy etc.
          */
-        getBlogsPosts : function(args) {
+        getAllBlogPosts : function(args) {
             var options = {
                 method : "GET",
                 handleAs : "text",
@@ -849,13 +850,13 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         /**
          * Get the blog comments feed to see a list of comments for all blogs .
          * 
-         * @method getBlogsComments
+         * @method getAllBlogComments
          * @param {Object} [args] Object representing various parameters
          * that can be passed to get a feed of posts of a blog . The
          * parameters must be exactly as they are supported by IBM
          * Connections like ps, sortBy etc.
          */
-        getBlogsComments : function(args) {
+        getAllBlogComments : function(args) {
             var options = {
                 method : "GET",
                 handleAs : "text",
@@ -1038,6 +1039,29 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 _fields : { postUuid : blogPostUuid }
             });
             return blogPost.load(args);
+        },
+
+        /**
+         * Retrieve a list of comments for the specified entry in the specified blog.
+         * 
+         * @method getEntryComments
+         * @param {String} blogHandle blog handle
+         * @param {String} entryAnchor entry anchor
+         * @param {Object} args Object containing the query arguments to be 
+         * sent (defined in IBM Connections Blogs REST API) 
+         */
+        getEntryComments : function(blogHandle, entryAnchor, args) {
+            var options = {
+                method : "GET",
+                handleAs : "text",
+                query : args || {}
+            };
+            var url = null;
+            url = this.constructUrl(consts.AtomBlogEntryComments, null, {
+				blogHandle : blogHandle,
+				entryAnchor : entryAnchor
+			});
+            return this.getEntities(url, options, this.getBlogPostCommentsCallbacks());
         },
 
         /**
@@ -1308,12 +1332,12 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         /**
          * Get the tags feed to see a list of the tags for all blogs.
          * 
-         * @method getBlogsTags
+         * @method getAllBlogTags
          * @param {Object} [args] Object representing various parameters. 
          * The parameters must be exactly as they are supported by IBM
          * Connections.
          */
-        getBlogsTags : function(args) {
+        getAllBlogTags : function(args) {
             var options = {
                 method : "GET",
                 handleAs : "text",

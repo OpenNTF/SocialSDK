@@ -40,7 +40,7 @@ define(['./lang'], function(lang) {
 		parse: function(xml) {
 			var xmlDoc=null;
 			try {
-				if(navigator.appName == 'Microsoft Internet Explorer'){
+				if(!document.evaluate){
 					xmlDoc=new ActiveXObject("Microsoft.XMLDOM");
 					xmlDoc.async="false";
 					xmlDoc.loadXML(xml);
@@ -65,7 +65,7 @@ define(['./lang'], function(lang) {
 			}
 		},
 		getText : function (xmlElement){
-			if(navigator.appName == 'Microsoft Internet Explorer'){
+			if(!document.evaluate){
 				return xmlElement.text;
 			}else{
 				return xmlElement.textContent;

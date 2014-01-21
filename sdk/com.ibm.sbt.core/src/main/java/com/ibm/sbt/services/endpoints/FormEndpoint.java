@@ -18,10 +18,8 @@ package com.ibm.sbt.services.endpoints;
 
 import java.io.IOException;
 import java.net.URLEncoder;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -31,12 +29,13 @@ import org.apache.http.HttpRequestInterceptor;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.protocol.HttpContext;
 
 import com.ibm.commons.runtime.Context;
@@ -143,20 +142,29 @@ public abstract class FormEndpoint extends AbstractEndpoint {
 			}
 			requestUrl = requestUrl.concat(getLoginFormUrl());
 			BasicCookieStore cookieStore = new BasicCookieStore();
-			DefaultHttpClient httpClient = new DefaultHttpClient();
+			DefaultHttpClient defaultHttpClient = new DefaultHttpClient();
 			
 			if(isForceTrustSSLCertificate()){
-				httpClient = SSLUtil.wrapHttpClient(httpClient); // Configure httpclient to accept all SSL certificates
+				defaultHttpClient = SSLUtil.wrapHttpClient(defaultHttpClient); // Configure httpclient to accept all SSL certificates
 			}
-			
+			if (isForceDisableExpectedContinue()) {
+				defaultHttpClient.getParams().setParameter(
+						CoreProtocolPNames.USE_EXPECT_CONTINUE, false);
+			}
 			if (StringUtil.isNotEmpty(getHttpProxy())) {
-				httpClient = ProxyDebugUtil.wrapHttpClient(httpClient, getHttpProxy()); // Configure httpclient to direct all traffic through proxy clients
+				defaultHttpClient = ProxyDebugUtil.wrapHttpClient(defaultHttpClient, getHttpProxy()); // Configure httpclient to direct all traffic through proxy clients
 			}
 
-			httpClient.setCookieStore(cookieStore);
+			defaultHttpClient.setCookieStore(cookieStore);
 			HttpPost httpost = new HttpPost(requestUrl);
 			List<NameValuePair> formParams = getLoginFormParameters(); // retrieve platform specific login parameters
 			httpost.setEntity(new UrlEncodedFormEntity(formParams, "UTF-8"));
+			
+			//getting to interface to avoid 
+			//java.lang.NoSuchMethodError: org/apache/http/impl/client/DefaultHttpClient.execute(Lorg/apache/http/client/methods/HttpUriRequest;)Lorg/apache/http/client/methods/CloseableHttpResponse;
+			//when run from different version of HttpClient (that's why it is deprecated)
+			HttpClient httpClient = defaultHttpClient;
+
 			HttpResponse resp = httpClient.execute(httpost);
 			int code = resp.getStatusLine().getStatusCode();
 			if (code == HttpStatus.SC_OK) {

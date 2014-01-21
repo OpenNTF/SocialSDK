@@ -28,19 +28,19 @@ import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
  *  
  * @date 08 May 2013
  */
-public class GetBlogsPosts extends BaseApiTest {
+public class GetAllBlogComments extends BaseApiTest {
     
-    static final String SNIPPET_ID = "Social_Blogs_API_GetBlogsPosts";
+    static final String SNIPPET_ID = "Social_Blogs_API_GetAllBlogComments";
 
-    public GetBlogsPosts() {
+    public GetAllBlogComments() {
         setAuthType(AuthType.AUTO_DETECT);
     }
     
     @Test
-    public void testGetBlogsPosts() {
+    public void testGetAllBlogComments() {
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         List jsonList = previewPage.getJsonList();
-        Assert.assertFalse("GetBlogsPosts returned no results", jsonList.isEmpty());
+        Assert.assertFalse("GetAllBlogComments returned no results", jsonList.isEmpty());
     }
 
 }

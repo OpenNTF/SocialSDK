@@ -45,8 +45,11 @@ define({
     	labelAsReader: "as Reader",
     	labelAsEditor: "as Editor",
     	labelRole: "Role",
-    	labelPersonName: "Person name",
+    	labelPersonName: "Person name or email",
     	labelCommunityName: "Community name...",
+    	labelEditors: "Editors",
+    	labelReaders: "Readers",
+    	labelNone: "None",
     	
     	titleEnterTags : "Please enter the tags you want to add.",
     	titleShareMeOnly : "(shared with me only)",

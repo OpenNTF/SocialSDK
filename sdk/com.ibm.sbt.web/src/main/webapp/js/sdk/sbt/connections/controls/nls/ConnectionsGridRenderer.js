@@ -23,7 +23,7 @@ define({
       previousPage : "Previous Page",
       next : "Next",
       nextPage : "Next Page",
-      pagingResults : "${start} - ${end} of ${totalCount}",
+      pagingResults : "${start}-${end} of ${totalCount}",
       sortBy : "Sort by:",
       msgNoData : "Please wait...",
       show10Items : "Show 10 items",

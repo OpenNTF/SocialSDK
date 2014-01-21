@@ -12,9 +12,9 @@ require(["sbt/connections/BlogService", "sbt/dom", "sbt/json"],
 		    tr.appendChild(td);
 		};
 	    var blogService = new BlogService(); 
-		blogService.getBlogs({ ps: 1 }).then(
+		blogService.getAllBlogs({ ps: 1 }).then(
 			function(blogs){
-				return blogService.getBlogComments(blogs[0].getHandle(), { ps: 5 })
+				return blogService.getBlogComments(blogs[0].getHandle(), { ps: 5 });
 	        }
 		).then(
 	        function(comments){

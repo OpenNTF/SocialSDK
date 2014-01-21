@@ -13,10 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import lotus.domino.Session;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shindig.auth.AbstractSecurityToken;
 import org.apache.shindig.auth.AbstractSecurityToken.Keys;
 import org.apache.shindig.auth.SecurityTokenCodec;
 import org.apache.shindig.common.servlet.InjectedServlet;
+import org.apache.shindig.config.ContainerConfig;
 
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
@@ -54,12 +56,18 @@ public class SecurityTokenServlet extends InjectedServlet {
 	private static final String CLASSNAME = SecurityTokenServlet.class.getName();
 	private final Logger logger = OpenSocialPlugin.getLogger();
 	private SecurityTokenCodec codec;
+	private ContainerConfig config;
 
 	@Inject
 	public void setSecurityTokenCodec(SecurityTokenCodec codec) {
 		// Call checkInitialized() as part of the contract with InjectedServlet
 		checkInitialized();
 		this.codec = codec;
+	}
+	
+	@Inject
+	public void setContainerConfig(ContainerConfig config) {
+		this.config = config;
 	}
 
 	@Override
@@ -141,7 +149,7 @@ public class SecurityTokenServlet extends InjectedServlet {
 		String userId = null;
 		String userName = userSession.getEffectiveUserName();
 		try {
-			if(userName.contains("CN=")) {
+			if(StringUtils.containsIgnoreCase(userName, "CN=")) {
 				userId = getCanonicalShindigId(userName);
 			} else {
 				userId = IdUtil.getShindigId(userName);
@@ -199,7 +207,7 @@ public class SecurityTokenServlet extends InjectedServlet {
 		// and add it based on the user session
 		sanitizedParameters.put(Keys.VIEWER.getKey(), viewerId);
 		sanitizedParameters.put(Keys.OWNER.getKey(), ownerId);
-		return new DominoSecurityToken(sanitizedParameters);
+		return new DominoSecurityToken(sanitizedParameters, this.config);
 	}
 
 	private void logRequestInfo(HttpServletRequest req) {
@@ -209,15 +217,23 @@ public class SecurityTokenServlet extends InjectedServlet {
 	
 	private class DominoSecurityToken extends SimpleSecurityToken {
 		private boolean isAnonymous = false;
-		public DominoSecurityToken(Map<String, String> params) {
+		private ContainerConfig config;
+		public DominoSecurityToken(Map<String, String> params, ContainerConfig config) {
 			super(params);
 			if(ANONYMOUS.equals(params.get(Keys.VIEWER.getKey()))) {
 				isAnonymous = true;
 			}
+			this.config = config;
 		}
 		@Override
 		public boolean isAnonymous() {
 			return isAnonymous;
 		}
+		@Override
+		public int getTokenTTL() {
+			//Use the gadget security token ttl for the container security token ttl
+			return config.getInt(getContainer(), SecurityTokenCodec.SECURITY_TOKEN_TTL_CONFIG);
+		}
+		
 	}
 }

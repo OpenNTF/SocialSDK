@@ -20,7 +20,6 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.automation.core.test.BaseApiTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 
@@ -29,19 +28,19 @@ import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
  *  
  * @date 08 May 2013
  */
-public class GetBlogsTags extends BaseApiTest {
+public class GetAllBlogPosts extends BaseApiTest {
     
-    static final String SNIPPET_ID = "Social_Blogs_API_GetBlogsTags";
+    static final String SNIPPET_ID = "Social_Blogs_API_GetAllBlogPosts";
 
-    public GetBlogsTags() {
+    public GetAllBlogPosts() {
         setAuthType(AuthType.AUTO_DETECT);
     }
     
     @Test
-    public void testGetBlogsTags() {
+    public void testGetAllBlogPosts() {
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
-        JsonJavaObject json = previewPage.getJson();         
-        Assert.assertEquals(200, json.getAsInt("status"));
+        List jsonList = previewPage.getJsonList();
+        Assert.assertFalse("GetAllBlogPosts returned no results", jsonList.isEmpty());
     }
 
 }

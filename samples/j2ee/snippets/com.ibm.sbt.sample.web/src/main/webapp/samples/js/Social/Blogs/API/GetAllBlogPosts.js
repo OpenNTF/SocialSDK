@@ -8,28 +8,22 @@ require(["sbt/connections/BlogService", "sbt/dom", "sbt/json"],
         var comment = blogService.newComment();
         comment.setContent("Comment Content at " + now.getTime());
         
-    	blogService.getBlogs({ ps: 1 }).then(
+    	blogService.getAllBlogs({ ps: 1 }).then(
 			function(blogs){
 				post.setBlogHandle(blogs[0].getHandle());
 				return blogService.createPost(post); // returning newly created blog post
             }
     	).then(
 			function(createdPost){
-				comment.setBlogHandle(createdPost.getBlogHandle());
-				comment.setBlogPostUuid(createdPost.getBlogPostUuid());
-				return blogService.createComment(comment); // returning newly created comment
+				return blogService.getAllBlogPosts();
             }
     	).then(
-			function(comment){
-				return blogService.getBlogsComments({ ps: 5 });
-            }
-    	).then(
-			function(comments) {
-				dom.setText("json", json.jsonBeanStringify(comments));
+    		function(posts) {
+                dom.setText("json", json.jsonBeanStringify(posts));
             },
             function(error) {
                 dom.setText("json", json.jsonBeanStringify(error));
             }
-         );
+        );
 	}
 );

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex" xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xp:this.resources>
+		<xp:dojoModulePath prefix="se"
+			url="/">
+		</xp:dojoModulePath>
+		<xp:script src="/.ibmxspres/domino/sbtos/gadgets/js/container:embedded-experiences:open-views:actions:selection.js?c=1&amp;debug=1&amp;container=com.ibm.sbt.socialenablercontainer" clientSide="true"></xp:script>
+		<xp:dojoModule name="extlib.dijit.Loading"></xp:dojoModule>
+	</xp:this.resources>
+	<xp:scriptBlock>
+		<xp:this.value><![CDATA[
+			var gadgetUrl = "#{javascript:@AbsoluteUrl(@FullUrl('/demo-gadget.xml'))}";
+			dojo.addOnLoad(function() {
+	          require(['se/Container', 'dojo/request/xhr', 'dojo/_base/url'], 
+	            function(Container, xhr, Url) {
+		          var url = new Url(window.location.href);
+		          var domain = url.host;
+		          var appUrl = encodeURIComponent(url.scheme + '://' + url.authority + url.path);
+		          var appId = appUrl;
+		          function createSecurityTokenUrl() {
+			        return 'sbtos/container/stgen?c=' + encodeURIComponent('com.ibm.sbt.socialenablercontainer') + 
+			        '&d=' + domain + '&i=' + appId + '&u=' + appUrl + '&m=0';
+		          };
+		          xhr(createSecurityTokenUrl(), {
+				    handleAs : "json"
+			      }).then(function(response) {
+				    var container = new Container(response);
+				    container.renderGadget(gadgetUrl);
+			      }, function(error){
+				  });
+	          });
+            });
+		]]></xp:this.value>
+	</xp:scriptBlock>
+	<xc:OneUILayout navigationPath="/Generic/OSContainer" title="OpenSocial Container">
+	<h1>Demo Container Page</h1>
+	<div id="gadgetSite" style="height: 90%; width: 90%; border: 1px dashed #0266C8"></div>
+	</xc:OneUILayout>
+</xp:view>

@@ -47,6 +47,7 @@ public class ApplicationEndpoint implements Endpoint {
     protected Map<String, Object> clientParams = new HashMap<String, Object>();
     	
 	private static final int authenticationErrorCode = 401;
+	private boolean forceDisableExpectedContinue;
 	
     public ApplicationEndpoint() {
     }
@@ -302,4 +303,21 @@ public class ApplicationEndpoint implements Endpoint {
     public Map<String, String> getServiceMappings() {
         return null;
     }
+    
+    
+	@Override
+	public String getProxyConfig() {
+		return null;
+	}
+
+	@Override
+	public boolean isForceDisableExpectedContinue() {		
+		return forceDisableExpectedContinue;
+	}
+	
+	public void setForceDisableExpectedContinue(
+			boolean forceDisableExpectedContinue) {
+		this.forceDisableExpectedContinue = forceDisableExpectedContinue;
+	}
+	
 }

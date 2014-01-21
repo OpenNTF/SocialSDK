@@ -3,6 +3,7 @@ package com.ibm.sbt.opensocial.domino.security;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,19 +34,32 @@ public class DominoSecurityTokenCodec implements SecurityTokenCodec {
 	private Map<String, String> tokenTypes;
 	private ContainerConfig config;
 	private final Logger log;
+	private ContainerConfig.ConfigObserver observer = new ContainerConfig.ConfigObserver() {
+		@Override
+		public void containersChanged(ContainerConfig config,
+				Collection<String> changed, Collection<String> removed) {
+			populateTokenTypes(config, changed, removed, DominoSecurityTokenCodec.this.tokenTypes);
+		}
+	};
 
 	@Inject
 	public DominoSecurityTokenCodec(ContainerConfig config, Logger log) {
 		this.config = config;
 		this.tokenTypes = Maps.newHashMap();
 		this.log = log;
-		populateTokenTypes(config, config.getContainers(), this.tokenTypes);
+		config.addConfigObserver(observer, false);
+		populateTokenTypes(config, config.getContainers(), Collections.EMPTY_LIST, this.tokenTypes);
 	}
 
-	private void populateTokenTypes(ContainerConfig config, Collection<String> containerNames,
+	private void populateTokenTypes(ContainerConfig config, Collection<String> added, Collection<String> removed,
 			Map<String, String> tokenTypes) {
-		for (String container : containerNames) {
-			tokenTypes.put(container, config.getString(container, SECURITY_TOKEN_TYPE));
+		synchronized(tokenTypes) {
+			for (String container : added) {
+				tokenTypes.put(container, config.getString(container, SECURITY_TOKEN_TYPE));
+			}
+			for(String container : removed) {
+				tokenTypes.remove(container);
+			}
 		}
 	}
 
@@ -120,8 +134,10 @@ public class DominoSecurityTokenCodec implements SecurityTokenCodec {
 	}
 
 	private SecurityTokenCodec getCodec(String container) {
-		String tokenType = this.tokenTypes.get(container);
-		return getCodecByType(tokenType);
+		synchronized(tokenTypes) {
+			String tokenType = this.tokenTypes.get(container);
+			return getCodecByType(tokenType);
+		}
 	}
 
 	SecurityTokenCodec getCodecByType(String tokenType) {

@@ -78,10 +78,11 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
         BlogPostXPath : lang.mixin({}, conn.AtomEntryXPath, {
             postUuid : "a:id",
             replies : "a:link[@rel='replies']/@href",
-            recomendationsUrl : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/recommendations']/@href",
+            recommendationsUrl : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/recommendations']/@href",
             rankRecommendations : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/recommendations']",
             rankComment : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/comment']",
             rankHit : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/hit']",
+            repliesUrl : "a:link[@rel='replies']/@href",
             sourceId : "a:source/a:id",
             sourceTitle  : "a:source/a:title ",
             sourceLink : "a:source/a:link[@rel='self']/@href",
@@ -101,7 +102,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
         CommentXPath : lang.mixin({}, conn.AtomEntryXPath, {
             commentUuid : "a:id",
             commentUrl : "a:link[@rel='self']/@href",
-            recomendationsUrl : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/recommendations']/@href",
+            recommendationsUrl : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/recommendations']/@href",
             trackbacktitle : "snx:trackbacktitle",
             replyTo : "thr:in-reply-to/@ref",
             replyToSource : "thr:in-reply-to/@source",
@@ -379,6 +380,15 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.IdeationBlogService
          */ 
-        AtomVotedIdeas : "/${blogs}/{blogHomepageHandle}/feed/myvotes/atom"
+        AtomVotedIdeas : "/${blogs}/{blogHomepageHandle}/feed/myvotes/atom",
+        
+        /**
+         * Get list of comments to the specified blog entry.
+         * 
+         * @property AtomBlogEntryComments
+         * @type String
+         * @for sbt.connections.BlogService
+         */
+        AtomBlogEntryComments : "/${blogs}/{blogHandle}/feed/entrycomments/{entryAnchor}/atom"
     });
 });

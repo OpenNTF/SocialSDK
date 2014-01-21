@@ -51,6 +51,9 @@ import org.apache.http.entity.FileEntity;
 import org.apache.http.entity.InputStreamEntity;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.CoreProtocolPNames;
+import org.apache.http.params.HttpParams;
+import org.apache.http.params.HttpParamsNames;
 import org.apache.http.util.EntityUtils;
 import org.w3c.dom.Node;
 
@@ -75,6 +78,9 @@ import com.ibm.commons.xml.XMLException;
 import com.ibm.commons.xml.util.XMIConverter;
 import com.ibm.sbt.plugin.SbtCoreLogger;
 import com.ibm.sbt.service.debug.ProxyDebugUtil;
+import com.ibm.sbt.service.proxy.Proxy;
+import com.ibm.sbt.service.proxy.ProxyConfigException;
+import com.ibm.sbt.service.proxy.ProxyFactory;
 import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
 import com.ibm.sbt.services.endpoints.SmartCloudFormEndpoint;
@@ -198,7 +204,7 @@ public abstract class ClientService {
 	 * 
 	 * @return
 	 */
-	protected String getBaseUrl() {
+	public String getBaseUrl() {
 		if (endpoint != null) {
 			return endpoint.getUrl();
 		}
@@ -230,6 +236,20 @@ public abstract class ClientService {
 		return false;
 	}
 
+	/**
+	 * Return true if force trust SSL certificate is set for the associated Endpoint.
+	 * 
+	 * @return
+	 * @throws ClientServicesException
+	 */
+	protected boolean isForceDisableExpectedContinue() throws ClientServicesException {
+		if (endpoint != null) {
+			return endpoint.isForceDisableExpectedContinue();
+		}
+		return false;
+	}
+
+	
 	/**
 	 * Return the proxy info from the associated Endpoint or an empty string
 	 * 
@@ -1156,7 +1176,20 @@ public abstract class ClientService {
 			b.append(args.getServiceUrl()); 
 		}
 		
-		addUrlParameters(b, args);
+		if(endpoint!=null) { // The endpoint can be null
+			Proxy proxy = null;
+			try {
+				proxy = ProxyFactory.getProxyConfig(endpoint.getProxyConfig());
+			} catch (ProxyConfigException e) {
+				if (logger.isLoggable(Level.FINE)) {
+					String msg = "Exception ocurred while fetching proxy information : composeRequestUrl";
+					logger.log(Level.FINE, msg, e);
+				}
+			}
+			StringBuilder proxyUrl = new StringBuilder(proxy.rewriteUrl(b.toString()));
+			addUrlParameters(proxyUrl, args);
+			return proxyUrl.toString();
+		}
 		return b.toString();
 	}
 
@@ -1342,6 +1375,11 @@ public abstract class ClientService {
 			httpClient = SSLUtil.wrapHttpClient(httpClient);
 			// }
 		}
+		if(isForceDisableExpectedContinue()) {
+			logger.fine("Disabling Expected Continue Header");
+			httpClient.getParams().setParameter(CoreProtocolPNames.USE_EXPECT_CONTINUE,false);
+		}
+		
 		// Capture network traffic through a network proxy like Fiddler or WireShark for debug purposes
 		if (StringUtil.isNotEmpty(getHttpProxy())) {
 			return ProxyDebugUtil.wrapHttpClient(httpClient, getHttpProxy());

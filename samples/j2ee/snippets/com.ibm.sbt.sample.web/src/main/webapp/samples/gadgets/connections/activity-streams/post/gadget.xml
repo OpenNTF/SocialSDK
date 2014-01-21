@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-  <ModulePrefs title="Connections Actvity Stream Post">
+  <ModulePrefs title="Connections Activity Streams Post">
     <OAuth2>
       <Service name="connections" scope="Connections">
       </Service>

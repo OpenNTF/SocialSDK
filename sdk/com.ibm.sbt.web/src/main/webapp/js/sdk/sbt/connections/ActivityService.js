@@ -1280,6 +1280,7 @@ define(
 					};
 					return this.service.getEntity(consts.AtomActivityNode, options, this.getActivityNodeUuid(), callbacks);
 				},
+				
 				/**
 				 * Creats an entry in an activity, such as a to-do item or to add a reply to another entry, send an Atom entry document containing the new
 				 * activity node of the appropriate type to the parent activity's node list.
@@ -1319,6 +1320,7 @@ define(
 				restore : function() {
 					return this.service.restoreActivityNode(this.getActivityNodeUuid());
 				},
+				
 				/**
 				 * Changes certain activity entries from one type to another.
 				 * 
@@ -1331,14 +1333,15 @@ define(
 				 * todo<
 				 * </pre>
 				 * 
-				 * @method changeType
+				 * @method changeEntryType
 				 * @param {String} newType
 				 * @returns {Object} ActivityNode
 				 */
-				changeType : function(newType) {
+				changeEntryType : function(newType) {
 					this.setType(newType);
-					return this.service.changeType(this);
+					return this.service.changeEntryType(this);
 				},
+				
 				/**
 				 * Moves a standard entry or a to-do entry to a section in an activity, send an updated Atom entry document to the parent activity's node list.
 				 * 

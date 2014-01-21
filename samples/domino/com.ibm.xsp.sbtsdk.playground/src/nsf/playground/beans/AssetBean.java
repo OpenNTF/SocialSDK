@@ -73,6 +73,9 @@ public abstract class AssetBean {
 	protected RootNode readSnippetsNodes() throws NotesException {
 		this.assetLoaderEnvironment = PlaygroundEnvironment.getCurrentEnvironment();
 		try {
+			// Make sure that the endpoints are updated for the filtering
+			this.assetLoaderEnvironment.prepareEndpoints();
+			
 			//PlaygroundEnvironment env = DataAccessBean.get().findCurrentEnvironment();
 			Database db = ExtLibUtil.getCurrentDatabase();
 			View v = db.getView("AllSnippetsFlat");
@@ -149,7 +152,7 @@ public abstract class AssetBean {
 			String[] eps = StringUtil.splitString(filterRuntimes, ',', true);
 			for(int i=0; i<eps.length; i++) {
 				String ep = eps[i];
-				if(runtimeExists(ep)) {
+				if(runtimeExists(assetLoaderEnvironment,ep)) {
 					ok = true;
 				}
 			}
@@ -160,8 +163,8 @@ public abstract class AssetBean {
 		
 		return true;
 	}
-	protected boolean runtimeExists(String name) {
-		String[] runtimes = assetLoaderEnvironment.getRuntimesArray();
+	protected boolean runtimeExists(PlaygroundEnvironment env, String name) {
+		String[] runtimes = env.getRuntimesArray();
 		if(runtimes!=null && runtimes.length>0) {
 			for(int i=0; i<runtimes.length; i++) {
 				if(StringUtil.equalsIgnoreCase(runtimes[i], name)) {

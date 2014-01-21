@@ -31,7 +31,7 @@ public class BlogServiceGetTests extends BaseBlogServiceTest {
 	@Test
 	public void getAllBlogs() {
 		try {
-			BlogList entries = blogService.getBlogs();
+			BlogList entries = blogService.getAllBlogs();
 			assertNotNull(entries);
 			for (BaseBlogEntity blog : entries) {
 				assertValid((Blog)blog);

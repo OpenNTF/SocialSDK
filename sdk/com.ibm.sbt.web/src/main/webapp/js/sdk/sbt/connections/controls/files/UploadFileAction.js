@@ -47,16 +47,10 @@ define([ "../../../declare", "../../../dom", "../../../lang",
 					self.displayMessage(template, isError);
 				}
 			}, this.widgetArgs || {});
-			var widget = new UploadFileWidget(widgetArgs);
+			this.widget = new UploadFileWidget(widgetArgs);
 			
-			var dialog = new Dialog({ 
-    			title: this.name,
-    			style: this.style,
-    			nls: { OK: nls.labelUpload },
-    			dialogContent: widget,
-    			onExecute: lang.hitch(widget, widget.onExecute)
-    		});
-    		dialog.show();
+			var dialog = this.showDialog(this.widget,{ OK: nls.labelUpload },this.dialogArgs);
+    		
 		}
 	});
 

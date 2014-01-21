@@ -17,11 +17,7 @@
 // NLS_CHARSET=UTF-8
 define({
   root: {
-      empty : "Empty",
-      loading : "Loading...",
-      msgNoData : "Please wait...",
-      defaultTemplate : "No template specified.",
-      unsupportedBrowser : "Unsupported browser."
+      IE9Unsupported : "Unsupported browser, Internet Explorer 10 or later is required."
   }
 });
 

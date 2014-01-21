@@ -17,7 +17,7 @@
 /**
  * Social Business Toolkit SDK - Some language utilities.
  */
-define(['dojo/_base/lang'],function(lang) {
+define(['dojo/_base/lang', 'dojo/has', 'dojo/_base/sniff'],function(lang, has, sniff) {
 	return {
 		mixin: function(dest,sources) {
 		    return lang.mixin.apply(this, arguments);
@@ -60,6 +60,9 @@ define(['dojo/_base/lang'],function(lang) {
         },
         hitch: function(scope, method) {
         	return lang.hitch(scope, method);
+        },
+        isIE: function(){
+            return has("ie");
         }
 	};
 });

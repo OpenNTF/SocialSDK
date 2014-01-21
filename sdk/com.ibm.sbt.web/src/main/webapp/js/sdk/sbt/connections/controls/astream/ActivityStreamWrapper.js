@@ -16,7 +16,7 @@
 define(["../../../declare", "../../../lang", "../../../url", 
         "../../../config", "../../../util", "../../../connections/controls/WidgetWrapper", 
         "../../../text!../../../connections/controls/astream/templates/ActivityStreamContent.html",
-        "../../i18n!sbt/connections/controls/nls/WidgetWrapper"], 
+        "../../../i18n!sbt/connections/controls/astream/nls/ActivityStreamWrapper"], 
         function(declare, lang, Url, config, util, WidgetWrapper, defaultTemplate, nls) {
 
     /**

@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * (C) Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -152,7 +152,7 @@ var Endpoint = declare(null, {
      *            be sent with the request.
      * @param {Boolean}
      *            [options.preventCache=false] If true will send an extra
-     *            query parameter to ensure the the server won’t supply
+     *            query parameter to ensure the the server won't supply
      *            cached values.
      * @param {String}
      *            [options.method=GET] The HTTP method that should be used
@@ -382,8 +382,13 @@ var Endpoint = declare(null, {
 		var promise = new Promise();
 		args = args || {};
 		var self = this;
-		var proxy = this.proxy.proxyUrl;
-		var actionURL = proxy.substring(0, proxy.lastIndexOf("/")) + "/authHandler/" + this.proxyPath + "/logout";
+		var actionURL = "";
+		if (!args.actionUrl) {
+			var proxy = this.proxy.proxyUrl;
+			actionURL = proxy.substring(0, proxy.lastIndexOf("/")) + "/authHandler/" + this.proxyPath + "/logout";
+		} else {
+			actionURL = args.actionUrl;
+		}
 		this.transport.xhr('POST',{
 			handleAs : "json",
 			url : actionURL,
@@ -409,8 +414,13 @@ var Endpoint = declare(null, {
 		var promise = new Promise();
 		args = args || {};
 		var self = this;
-		var proxy = this.proxy.proxyUrl;
-		var actionURL = proxy.substring(0, proxy.lastIndexOf("/")) + "/authHandler/" + this.proxyPath + "/isAuth";
+		var actionURL = "";
+		if (!args.actionUrl) {
+			var proxy = this.proxy.proxyUrl;
+			actionURL = proxy.substring(0, proxy.lastIndexOf("/")) + "/authHandler/" + this.proxyPath + "/isAuth";
+		} else {
+			actionURL = args.actionUrl;
+		}
 		this.transport.xhr('POST',{
 			handleAs : "json",
 			url : actionURL,
@@ -439,8 +449,13 @@ var Endpoint = declare(null, {
 		var promise = new Promise();
 		args = args || {};
 		var self = this;
-		var proxy = this.proxy.proxyUrl;
-		var actionURL = proxy.substring(0, proxy.lastIndexOf("/")) + "/authHandler/" + this.proxyPath + "/isAuthValid";
+		var actionURL = "";
+		if (!args.actionUrl) {
+			var proxy = this.proxy.proxyUrl;
+			actionURL = proxy.substring(0, proxy.lastIndexOf("/")) + "/authHandler/" + this.proxyPath + "/isAuthValid";
+		} else {
+			actionURL = args.actionUrl;
+		}
 		this.transport.xhr('POST',{			
 			handleAs : "json",
 			url : actionURL,
@@ -512,6 +527,7 @@ var Endpoint = declare(null, {
             transport: this.transport, 
             proxy: this.proxy,
             proxyPath: this.proxyPath,
+            actionUrl: options.actionUrl,
             loginUi: options.loginUi || this.loginUi,
             name: this.name,
             callback: function() {

@@ -1,4 +1,5 @@
 language: java
+install: echo 'Skipping mvn install'
 before_script: 
 - ./test-whitespaces.sh
 script: "mvn install"

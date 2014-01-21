@@ -69,7 +69,7 @@
 		
 		<script type="text/javascript">
 		require([ "sbt/dom", "sbt/config" ],
-			function(dom, config, FileService) {
+			function(dom, config) {
 				var endpoint = config.findEndpoint("connections");
 				endpoint.isAuthenticationValid().then(function(response) {
 					if (response.result) {

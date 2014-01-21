@@ -17,7 +17,7 @@ function loadMyWikis(wikiService, dom) {
     wikiService.getMyWikis({ includeTags:true, acls:true }).then(
         function(wikis) {
         	if (wikis.length == 0) {
-        		displayError("You do not have any wikis. Please login to IBM Connecitons and create one to use this sample.");
+        		displayError(dom, "You do not have any wikis. Please login to IBM Connections and create one to use this sample.");
             } else {
             	handleMyWikis(wikis, wikiService, dom);
             }

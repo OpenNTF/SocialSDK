@@ -5,7 +5,7 @@ require(["sbt/config", "sbt/connections/CommunityService", "sbt/dom"], function(
     
     var endpoint = config.findEndpoint("connections");
     var url = "/connections/opensocial/basic/rest/people/@me/";
-    if (endpoint.proxyPath == "smartcloud") {
+    if (endpoint.isSmartCloud) {
         url = "/manage/oauth/getUserIdentity";
     }
     endpoint.request(url, {handleAs: "json"}).then(

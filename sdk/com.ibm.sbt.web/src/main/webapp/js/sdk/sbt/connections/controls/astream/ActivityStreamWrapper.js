@@ -145,10 +145,17 @@ define(["../../../declare", "../../../lang", "../../../url",
             if(args.sideNavClassName){
                 this.sideNavClassName = args.sideNavClassName;
             }
-            
-            if(lang.isIE() < 10){ // Don't load the stream for IE < 10
+            if(!this.isSupportedBrowser()){
                 this.defaultTemplate = nls.IE9Unsupported;
             }
+        },
+        
+        isSupportedBrowser: function(){
+            if(lang.isIE() < 10){ // Don't load the stream for IE < 10
+                return false;
+            }
+            
+            return true;
         }
         
     });

@@ -17,7 +17,7 @@
 /**
  * Social Business Toolkit SDK - Some language utilities.
  */
-define(['dojo/_base/lang', 'dojo/has', 'dojo/_base/sniff'],function(lang, has, sniff) {
+define(['dojo/_base/lang', 'dojo/has', 'dojo/_base/sniff'],function(lang, has) {
 	return {
 		mixin: function(dest,sources) {
 		    return lang.mixin.apply(this, arguments);

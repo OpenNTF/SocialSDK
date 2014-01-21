@@ -18,7 +18,7 @@ function loadMyWikis(wikiService, dom) {
     wikiService.getMyWikis({ includeTags:true, acls:true }).then(
         function(wikis) {
         	if (wikis.length == 0) {
-        		displayError("You do not have any wikis. Please login to IBM Connecitons and create one to use this sample.");
+        		displayError(dom, "You do not have any wikis. Please login to IBM Connections and create one to use this sample.");
             } else {
             	handleMyWikis(wikis, wikiService, dom);
             }
@@ -30,12 +30,14 @@ function loadMyWikis(wikiService, dom) {
 }
 
 function loadMyWikiPages(wikiHandle, wikiService, dom) {
-    dom.setText("success", "Please wait... Loading your wiki pages from: "+wikiHandle);
+    displayMessage(dom, "Please wait... Loading your wiki pages from: "+wikiHandle);
 
     wikiService.getMyWikiPages(wikiHandle, { includeTags:true, acls:true }).then(
         function(wikiPages) {
         	if (wikiPages.length == 0) {
-        		displayError("You do not have any wiki pages in: "+wikiHandle+". Please login to IBM Connecitons and create one to use this sample.");
+        		addOnClickHandlers(wikiService, dom);
+        		
+        		displayMessage(dom, "You do not have any wiki pages in: "+wikiHandle);
             } else {
             	handleMyWikiPages(wikiPages, wikiService, dom);
             }
@@ -47,23 +49,23 @@ function loadMyWikiPages(wikiHandle, wikiService, dom) {
 }
 
 function handleMyWikis(wikis, wikiService, dom) {
-	currentWiki = wikis[0];
+    displayMessage(dom, "Successfully loaded your wiki: " + wikis[0].getLabel());
+
+    currentWiki = wikis[0];
 	
 	dom.byId("wikiLabel").value = wikis[0].getLabel();
 
     loadMyWikiPages(wikis[0].getLabel(), wikiService, dom);
-    
-    displayMessage(dom, "Successfully loaded your wiki: " + wikis[0].getLabel());
 }
 
 function handleMyWikiPages(wikiPages, wikiService, dom) {
-	currentWikiPage = wikiPages[0];
+    displayMessage(dom, "Successfully loaded your wiki page: " + wikiPages[0].getLabel());
+
+    currentWikiPage = wikiPages[0];
 
     resetWikiPage(currentWikiPage, dom);
     
     addOnClickHandlers(wikiService, dom);
-    
-    displayMessage(dom, "Successfully loaded your wiki page: " + wikiPages[0].getLabel());
 }
 
 function createWikiPage(wikiService, title, summary, tags, label, dom) {
@@ -159,20 +161,22 @@ function handleWikiPageUpdated(wikiPage, dom) {
 
 function addOnClickHandlers(wikiService, dom) {
     dom.byId("createBtn").onclick = function(evt) {
-        dom.byId("wikiPageUuid").value = "";
-        var title = dom.byId("wikiPageTitle");       
-        var summary = dom.byId("wikiPageSummary");
-        var tags = dom.byId("wikiPageTags");
-        var label = dom.byId("wikiPageLabel");
-        createWikiPage(wikiService, title.value, summary.value, tags.value.split(","), label.value, dom);
+    	if (currentWiki) {
+	        dom.byId("wikiPageUuid").value = "";
+	        var title = dom.byId("wikiPageTitle");       
+	        var summary = dom.byId("wikiPageSummary");
+	        var tags = dom.byId("wikiPageTags");
+	        var label = dom.byId("wikiPageLabel");
+	        createWikiPage(wikiService, title.value, summary.value, tags.value.split(","), label.value, dom);
+    	}
     };
     dom.byId("deleteBtn").onclick = function(evt) {
-        if (currentWiki) {
-            deleteWikiPage(currentWiki, dom);
+        if (currentWikiPage) {
+            deleteWikiPage(currentWikiPage, dom);
         }
     };
     dom.byId("updateBtn").onclick = function(evt) {
-        if (currentWiki) {
+        if (currentWikiPage) {
             var title = dom.byId("wikiPageTitle");       
             var summary = dom.byId("wikiPageSummary");
             var tags = dom.byId("wikiPageTags");

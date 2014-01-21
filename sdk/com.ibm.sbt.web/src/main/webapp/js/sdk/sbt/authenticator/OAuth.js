@@ -77,7 +77,7 @@ define(['../declare','../lang', '../util'], function(declare, lang, util) {
 		
 		_authDialog: function(options, sbtUrl, width, height) {
 			require(["sbt/_bridge/ui/OAuthDialog"], function(dialog) {
-				dialog.show(sbtUrl, widht, height);
+				dialog.show(sbtUrl, width, height);
 			});
 			return true;
 		}

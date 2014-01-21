@@ -24,6 +24,6 @@ public class CreateActivity extends BaseActivitiesTest {
 		JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
 		JsonJavaObject json = previewPage.getJson();
 		activityId = json.getAsString("getActivityUuid");
-		Assert.assertNotNull(activityId);
+		Assert.assertNotNull("Error creating activity", activityId);
 	}
 }

@@ -1,2 +1,4 @@
 language: java
+before_script: 
+- ./test-whitespaces.sh
 script: "mvn install"

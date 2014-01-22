@@ -1,0 +1,19 @@
+<html lang=en>
+<head>
+<title id="messageTitle"></title>
+</head>
+<body onLoad="self.focus()">
+	<div>
+		<label id="reloginMessage"></label>
+	</div>
+</body>
+
+<script>
+if(opener && opener.globalSSOMessageStrings){
+        var ssoMsg = opener.globalSSOMessageStrings;
+    	document.getElementById('reloginMessage').innerHTML = ssoMsg.message;
+    	document.getElementById('messageTitle').innerHTML = ssoMsg.message_title;
+    }
+
+</script>
+</html>

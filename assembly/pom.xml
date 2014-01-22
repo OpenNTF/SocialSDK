@@ -54,21 +54,18 @@
 				</executions>
 			</plugin>
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>buildnumber-maven-plugin</artifactId>
-				<version>1.1</version>
+				<groupId>ru.concerteza.buildnumber</groupId>
+				<artifactId>maven-jgit-buildnumber-plugin</artifactId>
+				<version>1.2.7</version>
 				<executions>
 					<execution>
-						<phase>validate</phase>
+						<id>git-buildnumber</id>
 						<goals>
-							<goal>create</goal>
+							<goal>extract-buildnumber</goal>
 						</goals>
+						<phase>validate</phase>
 					</execution>
 				</executions>
-				<configuration>
-					<doCheck>false</doCheck>
-					<doUpdate>false</doUpdate>
-				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>com.googlecode.maven-download-plugin</groupId>
@@ -95,8 +92,9 @@
 							<goal>wget</goal>
 						</goals>
 						<configuration>
-							<url>https://github.com/OpenNTF/SocialSDK/archive/${buildNumber}.zip</url>
+							<url>https://github.com/OpenNTF/SocialSDK/archive/${git.revision}.zip</url>
 							<unpack>false</unpack>
+							
 							<outputFileName>SocialSDK.zip</outputFileName>
 							<outputDirectory>${project.build.directory}/sources/</outputDirectory>
 						</configuration>
@@ -289,7 +287,7 @@
 				<executions>
 					<execution>
 						<id>removedownloads</id>
-						<phase>validate</phase>
+						<phase>generate-sources</phase>
 						<configuration>
 							<target>
 								<!-- Remove Tomcat -->

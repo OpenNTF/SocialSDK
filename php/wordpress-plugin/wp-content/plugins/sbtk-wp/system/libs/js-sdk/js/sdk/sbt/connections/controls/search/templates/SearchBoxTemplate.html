@@ -1,0 +1,39 @@
+<span class="lotusTitleBar2">
+	<span style="max-width:100%; padding:0px 0px 0px 0px;" class="lotusWrapper">
+		<span style="border-bottom: none;"class="lotusInner">
+			<div style="position:relative; margin-top:0px; top:0px;" class="lotusSearch" >
+					<table cellspacing="0" role="presentation" class="lotusLayout">
+						<tbody>
+							<tr>
+								<td>
+									<div class="lotusHidden">${nls.refine}</div>
+									<div>
+										<a data-dojo-attach-event="onclick: handleClick" class="lotusScope" href="javascript:;">
+											<img src="images/blank.gif?etag=20120919.054848"
+												alt="${nls.allConnectionsIcon}" class="lotusIcon lconnSprite lconnSprite-iconConnections16">
+											<span>${nls.allConnections}</span>
+											<span role="presentation" class="lotusAltText">▼</span>
+										</a>
+									</div>
+								</td>
+								
+								<td>
+									<span><label for="input" style="display:none;">text</label>
+										<input id="input" type="text" data-dojo-attach-event="onkeyup: suggest, blur: setSearchQuery" class="lotusText lotusInactive" />
+									</span>
+								</td>
+								
+								<td>
+									<span class="lotusBtnImg"> 
+										<input data-dojo-attach-event="click: search" class="lotusSearchButton" type="image" title="${nls.search}" alt="${nls.search}"
+											src="images/blank.gif?etag=20120919.054848"> 
+										<a class="lotusAltText" alt="${nls.search}" href="javascript:;">${nls.search}</a>
+									</span>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+			</div>
+		</span>
+	</span>
+</span>

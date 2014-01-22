@@ -1,0 +1,1 @@
+<input style="display: none;" size="50" type="password" id="basic_auth_password" name="basic_auth_password" value="" />

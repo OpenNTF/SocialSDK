@@ -69,17 +69,30 @@ var k = new java.util.Vector(); k.add("JavaSnippet"); k.add(snippetId);
 var e = database.getView('AllSnippetsById').getEntryByKey(k)
 if(e) {
 	// Ok, we found it by key
-	doc = e.getDocument();} else {
+	doc = e.getDocument();
+} else {
 	// Else, we try the UNID
 	doc = database.getDocumentByUNID(snippetId);
 }
-if(doc) {	o = {		status:			"ok",		id:				snippetId,		unid:			doc.getUniversalID(),
-		category:		doc.getItemValueString("category"),		author:			doc.getAuthors().get(0),		name:			doc.getItemValueString("name"),		tags:			doc.getItemValueString("tags"),		jsp:			nsf.playground.jsp.JspCompiler.cleanCode(doc.getItemValueString("jsp")),
+if(doc) {
+	o = {
+		status:			"ok",
+		id:				snippetId,
+		unid:			doc.getUniversalID(),
+		category:		doc.getItemValueString("category"),
+		author:			doc.getAuthors().get(0),		name:			doc.getItemValueString("name"),
+		tags:			doc.getItemValueString("tags"),
+		jsp:			nsf.playground.jsp.JspCompiler.cleanCode(doc.getItemValueString("jsp")),
 		properties:		doc.getItemValueString("properties"),
 		documentation:	doc.getItemValueString("documentation") || doc.getItemValueString("description") 
 	}
 	o.params = snippetBean.extractParams([o.jsp]);
-	return o;}o = {	status:		"error",	msg:		"Cannot open document with id "+id}return o;]]></xe:this.script>
+	return o;
+}
+o = {	status:		"error",
+	msg:		"Cannot open document with id "+id
+}
+return o;]]></xe:this.script>
 				</xe:remoteMethod>
 			</xe:this.methods>
 		</xe:jsonRpcService>

@@ -80,13 +80,16 @@ dojo.connect(inpSearch,"onclick",function(e) {
 	var assetsData = #{javascript:
 	switch(compositeData.type){
 		case "snippet": 		return snippetBean.getSnippetsAsJson(); 
-		case "javaSnippet": 	return javaSnippetBean.getSnippetsAsJson(); 
+		ase "javaSnippet": 	return javaSnippetBean.getSnippetsAsJson(); 
 		case "xPagesSnippet": 	return xpagesSnippetBean.getSnippetsAsJson(); 
 		case "api": 			return apiBean.getSnippetsAsJson();
 		case "gadget": 			return gadgetSnippetBean.getSnippetsAsJson(); 
 	} return "";
-	};	var assetsStore = new dojo.data.ItemFileReadStore({data:{identifier:'id',label:'name',items:assetsData}});
-	var assetsModel = new dijit.tree.TreeStoreModel({		store: assetsStore	});
+	};
+	var assetsStore = new dojo.data.ItemFileReadStore({data:{identifier:'id',label:'name',items:assetsData}});
+	var assetsModel = new dijit.tree.TreeStoreModel({
+		store: assetsStore
+	});
 	var navTree = new dijit.Tree({
 		model: assetsModel, 
 		showRoot: false,
@@ -122,7 +125,10 @@ dojo.connect(inpSearch,"onclick",function(e) {
 	if(!assetsData[0].children || assetsData[0].children.length==0) {
 		dojo.style('emptyTree',{display:'block'});
 	}
-});]]></xp:this.value>				</xp:scriptBlock>				<div id="assetsTree" style="overflow: none;"></div>
+});
+]]></xp:this.value>
+				</xp:scriptBlock>
+				<div id="assetsTree" style="overflow: none;"></div>
 				<div id="emptyTree" style='display:none'>
 					The current filtering options don't match any snippets.<br/>Please select a different environment.
 				</div>

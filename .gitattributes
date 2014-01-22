@@ -32,7 +32,7 @@
 *.gif binary
 
 #XPages
-*.xsp
+*.xsp text
 
 # Standard to msysgit
 *.doc diff=astextplain

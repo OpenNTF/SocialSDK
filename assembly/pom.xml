@@ -15,7 +15,7 @@
 	<parent>
 		<groupId>com.ibm.sbt</groupId>
 		<artifactId>com.ibm.sbt</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
+		<version>1.0.1-SNAPSHOT</version>
 	</parent>
 
 	<build>
@@ -320,28 +320,28 @@
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>sbt.dojo180</artifactId>
 
-			<version>1.0.0-SNAPSHOT</version>
+			<version>1.0.1</version>
 			<type>war</type>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>sbt.jquery182</artifactId>
 
-			<version>1.0.0-SNAPSHOT</version>
+			<version>1.0.1</version>
 			<type>war</type>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>sbt.bootstrap211</artifactId>
 
-			<version>1.0.0-SNAPSHOT</version>
+			<version>1.0.1</version>
 			<type>war</type>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>sbt.sample.web</artifactId>
 
-			<version>1.0.0-SNAPSHOT</version>
+			<version>1.0.1-SNAPSHOT</version>
 			<type>war</type>
 		</dependency>
 
@@ -351,7 +351,7 @@
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.sbt.landing</artifactId>
 
-			<version>1.0.0-SNAPSHOT</version>
+			<version>1.0.1</version>
 			<type>war</type>
 		</dependency>
 
@@ -359,21 +359,21 @@
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>acme.social.sample.dataapp</artifactId>
 
-			<version>1.0.0-SNAPSHOT</version>
+			<version>1.0.1-SNAPSHOT</version>
 			<type>war</type>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>acme.social.sample.webapp</artifactId>
 
-			<version>1.0.0-SNAPSHOT</version>
+			<version>1.0.1-SNAPSHOT</version>
 			<type>war</type>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>helloworld.webapp</artifactId>
 
-			<version>1.0.0-SNAPSHOT</version>
+			<version>1.0.1-SNAPSHOT</version>
 			<type>war</type>
 		</dependency>
 
@@ -386,21 +386,21 @@
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>smartcloud.webapp</artifactId>
 
-			<version>1.0.0-SNAPSHOT</version>
+			<version>1.0.1-SNAPSHOT</version>
 			<type>war</type>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>grantaccess.webapp</artifactId>
 
-			<version>1.0.0-SNAPSHOT</version>
+			<version>1.0.1-SNAPSHOT</version>
 			<type>war</type>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>acme.sample.webapp</artifactId>
 
-			<version>1.0.0-SNAPSHOT</version>
+			<version>1.0.1-SNAPSHOT</version>
 			<type>war</type>
 		</dependency>
 
@@ -412,7 +412,7 @@
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.sbt.web</artifactId>
 
-			<version>1.0.0-SNAPSHOT</version>
+			<version>1.0.1-SNAPSHOT</version>
 			<type>war</type>
 		</dependency>
 		<dependency>
@@ -423,7 +423,7 @@
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.commons.runtime</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
+			<version>1.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>

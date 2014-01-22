@@ -7,7 +7,7 @@
   <parent>
     <groupId>com.ibm.sbt</groupId>
     <artifactId>com.ibm.samples.snippets</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.1-SNAPSHOT</version>
   </parent>
 
 
@@ -56,31 +56,31 @@
     <dependency>
     	<groupId>com.ibm.sbt</groupId>
     	<artifactId>sbt.dojo180</artifactId>
-    	<version>1.0.0-SNAPSHOT</version>
+    	<version>1.0.1</version>
     	<type>war</type>
     </dependency>
     <dependency>
     	<groupId>com.ibm.sbt</groupId>
     	<artifactId>com.ibm.sbt.web</artifactId>
-    	<version>1.0.0-SNAPSHOT</version>
+    	<version>1.0.1-SNAPSHOT</version>
     	<type>war</type>
     </dependency>
     <dependency>
     	<groupId>com.ibm.sbt</groupId>
     	<artifactId>sbt.sample.web</artifactId>
-    	<version>1.0.0-SNAPSHOT</version>
+    	<version>1.0.1-SNAPSHOT</version>
     	<type>war</type>
     </dependency>
     <dependency>
     	<groupId>com.ibm.sbt</groupId>
     	<artifactId>sbt.bootstrap211</artifactId>
-    	<version>1.0.0-SNAPSHOT</version>
+    	<version>1.0.1</version>
     	<type>war</type>
     </dependency>
     <dependency>
     	<groupId>com.ibm.sbt</groupId>
     	<artifactId>sbt.jquery182</artifactId>
-    	<version>1.0.0-SNAPSHOT</version>
+    	<version>1.0.1</version>
     	<type>war</type>
     </dependency>
   </dependencies>

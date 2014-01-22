@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<assembly>
+	<id>beta</id>
+	<formats>
+		<format>zip</format>
+	</formats>
+	<baseDirectory>src</baseDirectory>
+	<includeBaseDirectory>false</includeBaseDirectory>
+	<fileSets>
+		<fileSet>
+			<includes>
+				<include>**/*</include>
+			</includes>
+			<directory>src</directory>
+			<outputDirectory>/</outputDirectory>
+		</fileSet>
+	</fileSets>
+</assembly>

@@ -64,6 +64,19 @@
 		<moduleSet>
 			<useAllReactorProjects>true</useAllReactorProjects>
 			<includes>
+				<include>com.ibm.sbt:com.ibm.sbt.php.core:zip:*</include>
+				<include>com.ibm.sbt:com.ibm.sbt.php.moodle:zip:*</include>
+				<include>com.ibm.sbt:com.ibm.sbt.php.wordpress:zip:*</include>
+			</includes>
+			<binaries>
+				<outputDirectory>sbtsdk/redist/php</outputDirectory>
+
+				<unpack>false</unpack>
+			</binaries>
+		</moduleSet>
+		<moduleSet>
+			<useAllReactorProjects>true</useAllReactorProjects>
+			<includes>
 				<include>com.ibm.sbt:sbt.sample</include>
 			</includes>
 			<binaries>
@@ -168,13 +181,23 @@
 			<outputFileNameMapping>com.ibm.sbt.domino.updatesite.zip</outputFileNameMapping>
 
 		</dependencySet>
-		
+
 		<dependencySet>
 			<includes>
 				<include>com.ibm.sbt:com.ibm.sbt.web:war</include>
 			</includes>
 			<outputDirectory>sbtsdk/redist/war</outputDirectory>
 			<outputFileNameMapping>sbt.war</outputFileNameMapping>
+
+		</dependencySet>
+		<dependencySet>
+			<includes>
+				<include>com.ibm.sbt:com.ibm.sbt.php.core:zip</include>
+				<include>com.ibm.sbt:com.ibm.sbt.php.moodle:zip</include>
+				<include>com.ibm.sbt:com.ibm.sbt.php.wordpress:zip</include>
+			</includes>
+			<outputDirectory>sbtsdk/redist/php</outputDirectory>
+
 
 		</dependencySet>
 	</dependencySets>
@@ -337,6 +360,6 @@
 			</includes>
 			<outputDirectory>sbtsdk/sources</outputDirectory>
 		</fileSet>
-		
+
 	</fileSets>
 </assembly>

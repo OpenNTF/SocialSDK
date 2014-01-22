@@ -1,0 +1,3 @@
+***REMOVED***
+// Silence is golden.
+?>

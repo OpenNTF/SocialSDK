@@ -1,0 +1,46 @@
+<tr>
+	<td width=35>
+		<img alt="" src="${logoUrl}" width=64 height=64 class="img-polaroid"></img>
+	</td>
+	<td>
+		<h4>
+			<span dojoAttachPoint="placeLinkNode">
+				<a href="javascript: void(0)" target="_self" title="${tooltip}" dojoAttachPoint="placeTitleLink" data-dojo-attach-event="onclick: handleClick">${title}</a>
+			</span>
+			<span class="" dojoAttachPoint="sourceTypePlaceHolder"></span>
+			<span style="display: none" class= role=presentation dojoAttachPoint="sourceTypeSectionDevider">|</span>
+			<span style="display: none" class="" dojoAttachPoint="moderatedIconNode">
+				<img style="display: inline" class="" title="${nls.moderated}" alt="${nls.moderated}" src="${blankGif}">
+				${nls.moderated} 
+			</span>
+			<span style="display: none" class="lotusType commType" dojoAttachPoint="restrictedIconNode">
+				<img style="display: inline" class="" title="${nls.restricted}" alt="${nls.restricted}" src="${blankGif}">
+				${nls.restricted} 
+			</span>
+		</h4>
+		<div class="">
+			<span role="list">
+				<span role=listitem dojoAttachPoint="numOfMembersPlaceHolder">${numOfMembers}</span>
+				<span class="" role=presentation dojoAttachPoint="membersSectionDevider">|</span>
+				<span role=listitem dojoAttachPoint="personPlaceHolder">
+					${nls.updatedBy}
+					<a class="fn lotusPerson vcard hasHover" href="javascript: void(0)" icbizcard_ref="1" icbizcard_idx="1">
+						${contributorName}
+						<span style="display: none" class=x-lconn-userid>${contributorUid}</span>
+					</a> 
+				</span>
+				<span class="" role=presentation dojoAttachPoint="authorSectionDevider">|</span>
+				<span role=listitem dojoAttachPoint="lastUpdateNode">${updatedDate}</span>
+				<span style="${displayTags}" class=lotusDivider role=presentation dojoAttachPoint="tagsSectionDevider">|</span>
+				<span class="" role=listitem dojoAttachPoint="tagsSection">
+					${tagsLabel}
+					${tagsAnchors}
+				</span>
+			</span>
+		</div>
+		<div class=lotusLastCell dojoAttachPoint="detailsSection">
+			<p dojoAttachPoint="placeDescNode">${summary}</p>
+			
+		</div>
+	</td>
+</tr>

@@ -231,194 +231,6 @@
 			</includes>
 		</fileSet>
 
-
-		<fileSet>
-			<directory>../commons/</directory>
-			<outputDirectory>sbtsdk/source</outputDirectory>
-			<excludes>
-				<exclude>**/bin/</exclude>
-				<exclude>**/target/</exclude>
-				<exclude>**/pom.xml</exclude>
-				<exclude>**/.jazzignore</exclude>
-				<exclude>**/.apt_generated</exclude>
-				<exclude>**/.factorypath</exclude>
-				<exclude>/.project</exclude>
-			</excludes>
-			<includes>
-				<include>**/*.*</include>
-			</includes>
-		</fileSet>
-		<fileSet>
-			<directory>../deps/</directory>
-			<outputDirectory>sbtsdk/source</outputDirectory>
-			<excludes>
-				<exclude>**/bin/</exclude>
-				<exclude>**/target/</exclude>
-				<exclude>**/pom.xml</exclude>
-				<exclude>**/.jazzignore</exclude>
-				<exclude>**/.apt_generated</exclude>
-				<exclude>**/.factorypath</exclude>
-				<exclude>/.project</exclude>
-
-			</excludes>
-			<includes>
-				<include>**/*.*</include>
-			</includes>
-		</fileSet>
-		<fileSet>
-			<directory>../sdk/</directory>
-			<outputDirectory>sbtsdk/source</outputDirectory>
-			<excludes>
-				<exclude>**/bin/</exclude>
-				<exclude>**/target/</exclude>
-				<exclude>**/pom.xml</exclude>
-				<exclude>**/.jazzignore</exclude>
-				<exclude>**/.apt_generated</exclude>
-				<exclude>**/.factorypath</exclude>
-				<exclude>/.project</exclude>
-
-			</excludes>
-			<includes>
-				<include>**/*.*</include>
-			</includes>
-		</fileSet>
-		<fileSet>
-			<directory>../domino/</directory>
-			<outputDirectory>sbtsdk/source</outputDirectory>
-			<excludes>
-				<exclude>**/bin/</exclude>
-				<exclude>**/target/</exclude>
-				<exclude>**/pom.xml</exclude>
-				<exclude>**/.jazzignore</exclude>
-				<exclude>**/.apt_generated</exclude>
-				<exclude>**/.factorypath</exclude>
-				<exclude>/.project</exclude>
-
-			</excludes>
-			<includes>
-				<include>**/*.*</include>
-			</includes>
-		</fileSet>
-		<fileSet>
-			<directory>../libraries/</directory>
-			<outputDirectory>sbtsdk/source</outputDirectory>
-			<excludes>
-				<exclude>**/bin/</exclude>
-				<exclude>**/target/</exclude>
-				<exclude>**/pom.xml</exclude>
-				<exclude>**/.jazzignore</exclude>
-				<exclude>**/.apt_generated</exclude>
-				<exclude>**/.factorypath</exclude>
-				<exclude>/.project</exclude>
-
-			</excludes>
-			<includes>
-				<include>**/*.*</include>
-			</includes>
-		</fileSet>
-
-		<fileSet>
-			<directory>../domino/</directory>
-			<outputDirectory>sbtsdk/source</outputDirectory>
-			<excludes>
-				<exclude>**/bin/</exclude>
-				<exclude>**/target/</exclude>
-				<exclude>**/pom.xml</exclude>
-				<exclude>**/.jazzignore</exclude>
-				<exclude>**/.apt_generated</exclude>
-				<exclude>**/.factorypath</exclude>
-				<exclude>/.project</exclude>
-
-			</excludes>
-			<includes>
-				<include>**/*.*</include>
-			</includes>
-		</fileSet>
-
-
-		<fileSet>
-			<directory>../samples/com.ibm.samples.commons</directory>
-			<outputDirectory>sbtsdk/source/com.ibm.samples.commons</outputDirectory>
-			<excludes>
-				<exclude>**/bin/</exclude>
-				<exclude>**/target/</exclude>
-				<exclude>**/pom.xml</exclude>
-				<exclude>**/.jazzignore</exclude>
-				<exclude>**/.apt_generated</exclude>
-				<exclude>**/.factorypath</exclude>
-			</excludes>
-			<includes>
-				<include>**/*.*</include>
-			</includes>
-		</fileSet>
-
-		<fileSet>
-			<directory>../samples/j2ee/acme</directory>
-			<outputDirectory>sbtsdk/source</outputDirectory>
-			<excludes>
-				<exclude>**/bin/</exclude>
-				<exclude>**/target/</exclude>
-				<exclude>**/pom.xml</exclude>
-				<exclude>**/.jazzignore</exclude>
-				<exclude>**/.apt_generated</exclude>
-				<exclude>**/.factorypath</exclude>
-				<exclude>/.project</exclude>
-
-			</excludes>
-			<includes>
-				<include>**/*.*</include>
-			</includes>
-		</fileSet>
-		<fileSet>
-			<directory>../samples/j2ee/snippets</directory>
-			<outputDirectory>sbtsdk/source</outputDirectory>
-			<excludes>
-				<exclude>**/bin/</exclude>
-				<exclude>**/target/</exclude>
-				<exclude>**/pom.xml</exclude>
-				<exclude>**/.jazzignore</exclude>
-				<exclude>**/.apt_generated</exclude>
-				<exclude>**/.factorypath</exclude>
-				<exclude>/.project</exclude>
-			</excludes>
-
-			<includes>
-				<include>**/*.*</include>
-			</includes>
-		</fileSet>
-		<fileSet>
-			<directory>../samples/j2ee/templates</directory>
-			<outputDirectory>sbtsdk/source</outputDirectory>
-			<excludes>
-				<exclude>**/bin/</exclude>
-				<exclude>**/target/</exclude>
-				<exclude>**/pom.xml</exclude>
-				<exclude>**/.jazzignore</exclude>
-				<exclude>**/.apt_generated</exclude>
-				<exclude>**/.factorypath</exclude>
-				<exclude>/.project</exclude>
-			</excludes>
-			<includes>
-				<include>**/*.*</include>
-			</includes>
-		</fileSet>
-		<fileSet>
-			<directory>../samples/java</directory>
-			<outputDirectory>sbtsdk/source</outputDirectory>
-			<excludes>
-				<exclude>**/bin/</exclude>
-				<exclude>**/target/</exclude>
-				<exclude>**/pom.xml</exclude>
-				<exclude>**/.jazzignore</exclude>
-				<exclude>**/.apt_generated</exclude>
-				<exclude>**/.factorypath</exclude>
-				<exclude>/.project</exclude>
-			</excludes>
-			<includes>
-				<include>**/*.*</include>
-			</includes>
-		</fileSet>
-
 		<fileSet>
 			<directory>../samples/scripts</directory>
 			<outputDirectory>sbtsdk/scripts</outputDirectory>
@@ -467,21 +279,7 @@
 				<include>**/*.*</include>
 			</includes>
 		</fileSet>
-		<fileSet>
-			<directory>../samples/domino</directory>
-			<outputDirectory>sbtsdk/source/</outputDirectory>
-			<excludes>
-				<exclude>**/bin/</exclude>
-				<exclude>**/target/</exclude>
-				<exclude>**/pom.xml</exclude>
-				<exclude>**/.jazzignore</exclude>
-				<exclude>**/.apt_generated</exclude>
-				<exclude>**/.factorypath</exclude>
-			</excludes>
-			<includes>
-				<include>**/*.*</include>
-			</includes>
-		</fileSet>
+
 
 
 		<fileSet>
@@ -532,5 +330,13 @@
 			</includes>
 			<outputDirectory>sbtsdk</outputDirectory>
 		</fileSet>
+		<fileSet>
+			<directory>${project.build.directory}/sources</directory>
+			<includes>
+				<include>*</include>
+			</includes>
+			<outputDirectory>sbtsdk/sources</outputDirectory>
+		</fileSet>
+		
 	</fileSets>
 </assembly>

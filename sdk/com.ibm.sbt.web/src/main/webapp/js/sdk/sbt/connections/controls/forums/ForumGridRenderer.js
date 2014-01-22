@@ -207,8 +207,11 @@ define(["../../../declare",
                         
                         if(grid.params.type == "myTopics"){
                                 return item.getValue("topicForumTitle");
+                        }else{
+                        	return "";
                         }
-                        return '<a class="lotusBreakWord" href="#" data-dojo-attach-event="onclick: previousPage" >'+item.getValue("topicForumTitle")+'</a>';
+                        
+                       
                 },
                  
                 /**

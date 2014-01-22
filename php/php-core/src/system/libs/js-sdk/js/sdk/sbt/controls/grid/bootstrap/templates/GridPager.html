@@ -1,0 +1,20 @@
+<div class="" dojoAttachPoint="pagingHeader">
+	<ul class="pager">
+		<li>
+			<a style="${hidePreviousLink}" title="${nls.previousPage}" href="javascript: void(0)" data-dojo-attach-event="onclick: prevPage">${nls.previous}</a>
+			<span style="${hidePreviousLabel}">${nls.previous}</span>
+		</li>
+		<li>
+			<span>${pagingResults}</span>
+		</li>
+		<li>
+			<a style="${hideNextLink}" title="${nls.nextPage}" href="javascript: void(0)" data-dojo-attach-event="onclick: nextPage">${nls.next}</a>
+			<span style="${hideNextLabel}">${nls.next}</span>
+		</li>
+	</ul>
+	<div>
+		<div dojoAttachPoint="catCenterPagingTop"></div>
+	</div>
+</div>
+
+

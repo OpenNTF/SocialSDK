@@ -97,7 +97,7 @@ define([ "../../declare", "../../config", "../../lang", "../../stringUtil", "../
 			this.inherited(arguments);
 			
 			if (this.forceAuthentication) {
-				this.authenticate();
+				this.authenticate(true);
 			}
 		},
 

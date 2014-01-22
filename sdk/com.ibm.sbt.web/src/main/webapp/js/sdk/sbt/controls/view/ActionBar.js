@@ -79,6 +79,14 @@ define([ "../../declare", "../../lang", "../../stringUtil", "../../log",
 				this._place(element, this.domNode);
 			}
 		},
+		
+		hideAction: function(action){
+			action.actionNameNode.setAttribute("style","display:none");
+		},
+		
+		showAction: function(action){
+			action.actionNameNode.setAttribute("style","");
+		},
 
 		//
 		// Internals

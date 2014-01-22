@@ -196,7 +196,7 @@ define([ "../../declare", "../../config", "../../lang", "../../stringUtil", "../
 					this.content.removeSelectionListener(this);
 				}
 				
-				el.removeChild(content.domNode);
+				el.removeChild(this.content.domNode);
 			}
 			
 			this.content = content;

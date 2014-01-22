@@ -9,7 +9,7 @@
 		<finalAssemblyFolder>
 			${workingDir}/kit
 		</finalAssemblyFolder>
-
+		<git.revision>HEAD</git.revision>
 	</properties>
 
 

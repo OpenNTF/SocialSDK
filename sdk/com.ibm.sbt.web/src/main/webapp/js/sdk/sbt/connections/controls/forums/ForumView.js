@@ -22,7 +22,7 @@ define([ "../../../declare", "../../../lang", "../../../stringUtil", "../../../l
 		function(declare, lang, stringUtil, log, ForumGrid, BaseView, StartTopicAction) {
 
 	/*
-	 * @module sbt.connections.controls.FilesView
+	 * @module sbt.connections.forums.ForumView
 	 */
 	var ForumView = declare([ BaseView ], {
 
@@ -36,9 +36,7 @@ define([ "../../../declare", "../../../lang", "../../../stringUtil", "../../../l
 		
 		grid : null,
 		
-		/**
-		 * 
-		 */
+
 		postMixInProperties : function() {
 			this.inherited(arguments);
 		},

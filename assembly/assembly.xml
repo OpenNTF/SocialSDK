@@ -356,10 +356,16 @@
 		<fileSet>
 			<directory>${project.build.directory}/sources</directory>
 			<includes>
-				<include>*</include>
+				<include>*.zip</include>
 			</includes>
 			<outputDirectory>sbtsdk/sources</outputDirectory>
 		</fileSet>
-
+		<fileSet>
+			<directory>${project.build.directory}/sources/SocialSDK-iOS/library</directory>
+			<includes>
+				<include>**/*</include>
+			</includes>
+			<outputDirectory>sbtsdk/redist/ios</outputDirectory>
+		</fileSet>
 	</fileSets>
 </assembly>

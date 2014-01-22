@@ -34,7 +34,7 @@ define([ "../../../declare", "../../../dom", "../../../lang",
 		name : nls.startTopic,
 	
 		/**
-		 * Set files on the associated widget. 
+		 * Set forums on the associated widget. 
 		 */
 		selectionChanged : function(state, selection, context) {
 			this.inherited(arguments);
@@ -46,7 +46,7 @@ define([ "../../../declare", "../../../dom", "../../../lang",
 		
 
 		/**
-		 * Open dialog to upload a file.
+		 * Open the forum to create a new topic
 		 */
 		execute : function(selection, context) {
 			var self = this;

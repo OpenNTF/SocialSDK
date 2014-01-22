@@ -9,7 +9,7 @@
 		<finalAssemblyFolder>
 			${workingDir}/kit
 		</finalAssemblyFolder>
-		<git.revision>HEAD</git.revision>
+		<git.revision>master</git.revision>
 	</properties>
 
 
@@ -98,10 +98,10 @@
 						</goals>
 						<configuration>
 							<url>https://github.com/OpenNTF/SocialSDK/archive/${git.revision}.zip</url>
-							<unpack>false</unpack>
-
+							<unpack>true</unpack>
+							<skipCache>true</skipCache>
 							<outputFileName>SocialSDK.zip</outputFileName>
-							<outputDirectory>${project.build.directory}/sources/</outputDirectory>
+							<outputDirectory>${project.build.directory}/sources/SocialSDK</outputDirectory>
 						</configuration>
 					</execution>
 					<execution>
@@ -112,9 +112,10 @@
 						</goals>
 						<configuration>
 							<url>https://github.com/OpenNTF/SocialSDK-iOS/archive/master.zip</url>
-							<unpack>false</unpack>
+							<unpack>true</unpack>
+							<skipCache>true</skipCache>
 							<outputFileName>SocialSDK-iOS.zip</outputFileName>
-							<outputDirectory>${project.build.directory}/sources/</outputDirectory>
+							<outputDirectory>${project.build.directory}/sources/SocialSDK-iOS</outputDirectory>
 						</configuration>
 					</execution>
 				</executions>
@@ -334,10 +335,39 @@
 									</fileset>
 								</copy>
 
-								<zip basedir="${project.build.directory}/tomcat/unzip"
-									destfile="${project.build.directory}/tomcat/apache-tomcat-7.0.30-sbt.zip"
-									compress="true" />
+								<path id="source_folder_name">
+									<dirset dir="${project.build.directory}/sources/SocialSDK">
+										<include name="SocialSDK*" />
+									</dirset>
+								</path>
+								<property name="psource_folder_name" refid="source_folder_name" />
+								<move todir="${project.build.directory}/sources/SocialSDK">
+									<fileset dir="${psource_folder_name}">
+										<include name="**/*" />
+									</fileset>
+								</move>
+								<delete dir="${psource_folder_name}" />
 
+								<path id="source_folder_name_ios">
+									<dirset dir="${project.build.directory}/sources/SocialSDK-iOS">
+										<include name="SocialSDK*" />
+									</dirset>
+								</path>
+								<property name="psource_folder_name_ios" refid="source_folder_name_ios" />
+								<move todir="${project.build.directory}/sources/SocialSDK-iOS">
+									<fileset dir="${psource_folder_name_ios}">
+										<include name="**/*" />
+									</fileset>
+								</move>
+								<delete dir="${psource_folder_name_ios}" />
+
+
+								<zip basedir="${project.build.directory}/sources/SocialSDK"
+									destfile="${project.build.directory}/sources/SocialSDK.zip"
+									compress="true" />
+								<zip basedir="${project.build.directory}/sources/SocialSDK-iOS"
+									destfile="${project.build.directory}/sources/SocialSDK-iOS.zip"
+									compress="true" />
 							</target>
 						</configuration>
 						<goals>

@@ -38,7 +38,7 @@ define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUt
 		templateString : StartATopic,
 		
 		/**
-		 * Constructor method for the UploadFileWidget.
+		 * Constructor method for the StartTopicWidget.
 		 * 
 		 * @method constructor
 		 * @param args
@@ -49,7 +49,7 @@ define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUt
 		},
 
 		/**
-		 * Return the FileService.
+		 * Return the ForumService.
 		 */
 		getForumService : function() {
 			if (!this.forumService) {

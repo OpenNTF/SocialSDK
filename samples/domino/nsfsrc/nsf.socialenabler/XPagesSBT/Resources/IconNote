@@ -1,15 +1,14 @@
 <?xml version='1.0' encoding='utf-8'?>
-<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
-<note default='true' class='icon' xmlns='http://www.lotus.com/dxl' version='8.5'
- maintenanceversion='3.0' replicaid='802579280052B4D0'>
-<noteinfo noteid='11a' unid='57D701AEA6C8547B802579280052B4D4' sequence='28'>
-<created><datetime dst='true'>20111013T160322,44+01</datetime></created>
-<modified><datetime dst='true'>20120413T143935,79-04</datetime></modified>
-<revised><datetime dst='true'>20120413T143935,78-04</datetime></revised>
-<lastaccessed><datetime dst='true'>20120413T143935,79-04</datetime></lastaccessed>
-<addedtofile><datetime dst='true'>20111013T160322,47+01</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></updatedby>
-<wassignedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></wassignedby>
+<note default='true' class='icon' xmlns='http://www.lotus.com/dxl' version='9.0'
+ maintenanceversion='1.0' replicaid='80257C3800410083'>
+<noteinfo noteid='11a' unid='CDDC426AA121146680257C3800410088' sequence='29'>
+<created><datetime>20131205T114959,76+00</datetime></created>
+<modified><datetime>20140122T122053,49+00</datetime></modified>
+<revised><datetime>20140122T122053,48+00</datetime></revised>
+<lastaccessed><datetime>20140122T122053,49+00</datetime></lastaccessed>
+<addedtofile><datetime>20131205T114959,79+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=A Admin/O=ibm</name></updatedby>
+<wassignedby><name>CN=A Admin/O=ibm</name></wassignedby>
 <item name='IconBitmap' summary='true'>
 <rawitemdata type='6'>
 AiAgAQAA///////wD///gAH//gAAf/wAAD/4AAAf8AAAD+AAAAfgAAAHwAAAA8AAAAPAAAADgAAA
@@ -28,7 +27,8 @@ AAAAUEECICABAAD/////+A4DgA==
 <item name='$Daos'><text>0</text></item>
 <item name='$DBTheme'><text>oneuiv2.1</text></item>
 <item name='$DefaultXPage'><text>Home.xsp</text></item>
-<item name='$TITLE'><text>XPages Social Enabler</text></item>
 <item name='$Flags'><text>J!</text></item>
-<item name='$FlagsNoRefresh'><text>rv</text></item></note>
+<item name='$FlagsNoRefresh'><text>rv</text></item>
+<item name='$TITLE'><text>IBM XPages SBT Demo
+</text></item></note>
 

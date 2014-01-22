@@ -39,7 +39,7 @@
          		<xe:basicLeafNode label="Extension Library"
          			href="http://extlib.openntf.org">
          		</xe:basicLeafNode>
-         		<xe:basicLeafNode label="Social Enabler"
+         		<xe:basicLeafNode label="IBM XPages SBT Demo App"
          			href="http://socialenabler.openntf.org">
          		</xe:basicLeafNode>
          		<xe:basicLeafNode label="XPages.info"
@@ -89,7 +89,7 @@
          			selection="/Util/.*">
          		</xe:pageTreeNode>
          	</xe:this.titleBarTabs>
-         	<xe:this.placeBarName><![CDATA[${javascript:var s = "XPages Social Enabler"
+         	<xe:this.placeBarName><![CDATA[${javascript:var s = "XPages IBM XPages SBT Demo App"
 if(compositeData.title) {
 	s += " - " + compositeData.title
 	if(compositeData.connection) {

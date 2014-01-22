@@ -75,7 +75,7 @@ FB.ui(
      picture: 'http://xpages.info/XPagesHome.nsf/xpagesp.png',
      caption: 'Check out XPages.info',
      description: 'XPages.info is THE home page for XPages developers',
-     message: 'Trying the OpenNTF Social Enabler project'
+     message: 'Trying the OpenNTF IBM XPages SBT Demo project'
    },
    function(response) {
      if (response && response.post_id) {

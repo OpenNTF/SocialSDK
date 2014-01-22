@@ -1,0 +1,10 @@
+{
+    "name": "IBM Social Business Toolkit",
+    "description": "IBM Social Business Toolkit JavaScript API",
+    "version": "1.0.0",
+    "url": "www.ibm.com/software/lotus/products/connections/",
+    "logo": "http://www.ibm.com/i/v16/t/ibm-logo.gif",
+    "options": {
+        "outdir": "../../../../../../../target/docs/yuidoc"
+    }
+}

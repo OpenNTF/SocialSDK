@@ -1,0 +1,1 @@
+<input size="50" type="text" id="sdk_deploy_url" name="sdk_deploy_url" value="<?php echo $viewData['sdk_deploy_url'];?>" />

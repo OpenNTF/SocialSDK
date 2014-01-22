@@ -69,15 +69,35 @@ foreach ($scripts as $script) {
 	
 	print '<link href="' . $pageURL . '/../blocks/ibmsbtk/core/system/libs/code-mirror/lib/codemirror.css" type="text/css" rel="stylesheet" />';
 	print '<link href="' . $pageURL . '/../blocks/ibmsbtk/views/css/codeEditor.css" type="text/css" rel="stylesheet" />';
-	
-	print '<script type="text/javascript">';
-	include BASE_PATH . '/system/libs/code-mirror/lib/codemirror.js';
-	include BASE_PATH . '/system/libs/code-mirror/mode/javascript/javascript.js';
-	print '</script>';
 
-	ob_start();
-	include BASE_PATH . '/../views/js/customPluginEditor.js';
+	print '<script language="javascript" type="text/javascript" src="' . BASE_LOCATION . '/system/libs/code-mirror/lib/codemirror.js"></script>';
+	print '<script language="javascript" type="text/javascript" src="' . BASE_LOCATION . '/system/libs/code-mirror/mode/javascript/javascript.js"></script>';
+	$pluginURL = str_replace('/core/', '', BASE_LOCATION);
+	print '<script language="javascript" type="text/javascript" src="' . $pluginURL . '/views/js/customPluginEditor.js"></script>';
 	
-	// Print JavaScript for adding event listener to type dropdown and integrate CodeMirror
-	$mform->addElement('html', '<script type="text/javascript">' . ob_get_clean() . '</script>');
-
+	
+	$mform->addElement('html', '<script language="javascript" type="text/javascript">var jsEditor = CodeMirror.fromTextArea(document.getElementById("id_config_customCode"), {
+		lineNumbers: true,
+		mode: "javascript",
+		lineWrapping: true
+	});
+	jsEditor.on("blur", function() {jsEditor.save();});
+	
+	var htmlEditor = CodeMirror.fromTextArea(document.getElementById("id_config_customHTML"), {
+		lineNumbers: true,
+		mode: "text/html",
+		lineWrapping: true
+	});
+	htmlEditor.on("blur", function() {htmlEditor.save();});
+	
+	
+	var types = document.getElementById("id_config_type");
+	types.setAttribute("onchange", type_change);
+	
+	types.addEventListener(
+	"change",
+	type_change,
+	false
+	);</script>');
+	
+	

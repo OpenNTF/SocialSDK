@@ -18,19 +18,7 @@
  * @author Benjamin Jakobus 
  */
 
-	var jsEditor = CodeMirror.fromTextArea(document.getElementById("id_config_customCode"), {
-		lineNumbers: true,
-        mode: "javascript",
-        lineWrapping: true
-    });
-	jsEditor.on("blur", function() {jsEditor.save();});
 
-	var htmlEditor = CodeMirror.fromTextArea(document.getElementById("id_config_customHTML"), {
-		lineNumbers: true,
-        mode: "text/html",
-        lineWrapping: true
-    });
-	htmlEditor.on("blur", function() {htmlEditor.save();});
 	
 	
 	function type_change() {
@@ -52,11 +40,3 @@
 		htmlEditor.setValue(html);
 		jsEditor.setValue(javascript);
 	}
-	var types = document.getElementById("id_config_type");
-	types.setAttribute("onchange", type_change);
-
-	types.addEventListener(
-	 	"change",
- 		type_change,
- 		false
-		);

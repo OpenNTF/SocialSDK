@@ -9,6 +9,7 @@
 		<finalAssemblyFolder>
 			${workingDir}/kit
 		</finalAssemblyFolder>
+
 	</properties>
 
 
@@ -37,23 +38,39 @@
 
 		</resources>
 		<plugins>
-	<plugin>
-		<groupId>org.apache.maven.plugins</groupId>
-		<artifactId>maven-resources-plugin</artifactId>
-		<version>2.6</version>
-		<executions>
-		<execution>
-            <id>generate-version</id>
-            <phase>generate-resources</phase>
-            <goals>
-              <goal>resources</goal>
-            </goals>
-            <inherited>false</inherited>
-          </execution>
-		</executions>
-	</plugin>
-
-	<plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+				<executions>
+					<execution>
+						<id>generate-version</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>resources</goal>
+						</goals>
+						<inherited>false</inherited>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>buildnumber-maven-plugin</artifactId>
+				<version>1.1</version>
+				<executions>
+					<execution>
+						<phase>validate</phase>
+						<goals>
+							<goal>create</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<doCheck>false</doCheck>
+					<doUpdate>false</doUpdate>
+				</configuration>
+			</plugin>
+			<plugin>
 				<groupId>com.googlecode.maven-download-plugin</groupId>
 				<artifactId>maven-download-plugin</artifactId>
 				<version>1.0.0</version>
@@ -69,6 +86,32 @@
 							<unpack>true</unpack>
 							<outputDirectory>${project.build.directory}/tomcat/unzip</outputDirectory>
 							<md5>3a1fd1825202631e6c43461fa018c4f6</md5>
+						</configuration>
+					</execution>
+					<execution>
+						<id>download-sources</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>wget</goal>
+						</goals>
+						<configuration>
+							<url>https://github.com/OpenNTF/SocialSDK/archive/${buildNumber}.zip</url>
+							<unpack>false</unpack>
+							<outputFileName>SocialSDK.zip</outputFileName>
+							<outputDirectory>${project.build.directory}/sources/</outputDirectory>
+						</configuration>
+					</execution>
+					<execution>
+						<id>download-sources-ios</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>wget</goal>
+						</goals>
+						<configuration>
+							<url>https://github.com/OpenNTF/SocialSDK-iOS/archive/master.zip</url>
+							<unpack>false</unpack>
+							<outputFileName>SocialSDK-iOS.zip</outputFileName>
+							<outputDirectory>${project.build.directory}/sources/</outputDirectory>
 						</configuration>
 					</execution>
 				</executions>
@@ -245,7 +288,20 @@
 				<version>1.7</version>
 				<executions>
 					<execution>
-					<id>tomcat</id>
+						<id>removedownloads</id>
+						<phase>validate</phase>
+						<configuration>
+							<target>
+								<!-- Remove Tomcat -->
+								<delete dir="${project.build.directory}/tomcat/unzip" />
+								<!-- Remove Other Sources -->
+								<delete dir="${project.build.directory}/sources" />
+
+							</target>
+						</configuration>
+					</execution>
+					<execution>
+						<id>tomcat</id>
 						<phase>package</phase>
 						<configuration>
 							<target>
@@ -278,7 +334,6 @@
 								<zip basedir="${project.build.directory}/tomcat/unzip"
 									destfile="${project.build.directory}/tomcat/apache-tomcat-7.0.30-sbt.zip"
 									compress="true" />
-								<delete dir="${project.build.directory}/tomcat/unzip" />
 
 							</target>
 						</configuration>

@@ -64,10 +64,12 @@
 							<goal>extract-buildnumber</goal>
 						</goals>
 						<phase>validate</phase>
+						<configuration>
+						</configuration>
 					</execution>
 				</executions>
 				<configuration>
-				<runOnlyAtExecutionRoot>false</runOnlyAtExecutionRoot>
+					<runOnlyAtExecutionRoot>false</runOnlyAtExecutionRoot>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -97,7 +99,7 @@
 						<configuration>
 							<url>https://github.com/OpenNTF/SocialSDK/archive/${git.revision}.zip</url>
 							<unpack>false</unpack>
-							
+
 							<outputFileName>SocialSDK.zip</outputFileName>
 							<outputDirectory>${project.build.directory}/sources/</outputDirectory>
 						</configuration>

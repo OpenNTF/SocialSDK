@@ -175,6 +175,11 @@ define(["../../../declare",
 	        	this.update(null);
 	        },
 	        
+	        /*
+	         * Used for going back from topic replies
+	         * to a list of topics in a forum, this keeps track of which 
+	         * forum is being view. 
+	         */
 	        _forumID: "",
 	        
 	        /**
@@ -195,14 +200,16 @@ define(["../../../declare",
 	        	this.store.setAttributes(consts.ForumTopicXPath);
 	        	this.hideBreadCrumb = false;
 	        	var endpoint = this.store.getEndpoint();
-	        	if(this.params.type == "forumTopics"){
-	        		this.hideBreadCrumb = true;
-	        	}
+	        	
 	        		
 	        	if(this.params.type=="myTopics"){
 	        		var url = this.buildUrl(consts.AtomTopicsMy, {},endpoint);
 	        		this.store.setUrl(url);
 	        		this.hideBreadCrumb = true;
+	        	}else if(this.params.type == "forumTopics"){
+	        		this.hideBreadCrumb = true;
+	        		var url = this.buildUrl(consts.AtomTopics+"?forumUuid="+this.forumUuid, {}, endpoint);
+	        		this.store.setUrl(url);
 	        	}else{
 	        		var url = this.buildUrl(consts.AtomTopics+"?forumUuid="+this._forumID, {}, endpoint);
 	        		this.store.setUrl(url);

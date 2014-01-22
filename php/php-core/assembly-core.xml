@@ -14,5 +14,13 @@
 			<directory>src</directory>
 			<outputDirectory>/</outputDirectory>
 		</fileSet>
+		<fileSet>
+			<includes>
+				<include>**/*</include>
+			</includes>
+			<directory>../../sdk/com.ibm.sbt.web/src/main/webapp/</directory>
+			<outputDirectory>/system/libs/js-sdk</outputDirectory>
+		</fileSet>
+		
 	</fileSets>
 </assembly>

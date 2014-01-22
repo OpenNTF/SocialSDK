@@ -94,6 +94,7 @@
 						<configuration>
 							<url>https://github.com/OpenNTF/SocialSDK/archive/${git.revision}.zip</url>
 							<unpack>false</unpack>
+							
 							<outputFileName>SocialSDK.zip</outputFileName>
 							<outputDirectory>${project.build.directory}/sources/</outputDirectory>
 						</configuration>
@@ -286,7 +287,7 @@
 				<executions>
 					<execution>
 						<id>removedownloads</id>
-						<phase>validate</phase>
+						<phase>generate-sources</phase>
 						<configuration>
 							<target>
 								<!-- Remove Tomcat -->

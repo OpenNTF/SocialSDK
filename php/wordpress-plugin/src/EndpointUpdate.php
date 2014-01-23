@@ -90,6 +90,7 @@ class EndpointUpdate {
 		$endpoint['selected'] = true;
 		$endpoint['basic_auth_username'] = $_POST['basic_auth_username'];
 		$endpoint['basic_auth_password'] = $_POST['basic_auth_password'];
+		$endpoint['basic_auth_method'] = $_POST['basic_auth_method'];
 		
 		
 		// If deletion_point is set to "yes", then the endpoint will be deleted.

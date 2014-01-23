@@ -97,7 +97,6 @@ define(["../../../declare",
         	dom.setAttr(this.idNode, "class", (this.userId.indexOf("@") >= 0)  ? "email" : "x-lconn-userid");
         	
         	this.inherited(arguments);
-        	this.inclCss = true;
         	SemanticTagService.loadSemanticTagService({
         	    endpoint: this.endpointName,
         	    inclDojo: false,

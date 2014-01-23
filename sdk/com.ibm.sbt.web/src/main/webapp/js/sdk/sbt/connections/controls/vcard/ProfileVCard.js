@@ -61,27 +61,31 @@ define(["../../../declare",
          * @default ""
          */
         userName: "",
-        /**
-        A url flag specifying whether or not connections should include the css when loading the Semantic Tag Service.
-        @property inclCss
-        @type Boolean
-        @default false
-        **/
-        inclCss: false,
-        /**
-        The class of the html error element.
         
-        @property errorClass 
-        @type String
-        @default ""
-        **/
-        errorClass: "",
         /**
-        @property endpointName 
-        @type String
-        @default ""
-        **/
+         * A url flag specifying whether or not connections should include the css when loading the Semantic Tag Service.
+         * @property inclCss
+         * @type Boolean
+         * @default false
+         */
+        inclCss: false,
+        
+        /**
+         * The class of the html error element.
+         *
+         * @property errorClass 
+         * @type String
+         * @default ""
+         */
+        errorClass: "",
+        
+        /**
+         * @property endpointName 
+         * @type String
+         * @default ""
+         */
         endpointName: "connections",
+        
         /**
          * 
          * @param args

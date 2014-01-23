@@ -23,40 +23,41 @@ define([ "../../../declare", "../../../Endpoint", "sbt/config", "../../../log"],
 
     
     /**
-    Configuration Object.
-    
-    isBidiRTL - Whether or not to enable bidirectional language support.
-    
-    @property SemTagSvcConfig
-    @type Object
-    **/
+     * Configuration Object.
+     *
+     * isBidiRTL - Whether or not to enable bidirectional language support.
+     *
+     * @property SemTagSvcConfig
+     * @type Object
+     */
     var SemTagSvcConfig = {
         isBidiRTL: true
     };
     
     /**  
-    The class which handles loading of the semantic tag service for connections, this is needed for displaying vcards.
-
-    @class sbt.controls.vcard.connections.SemanticTagService  
-    **/
+     * The class which handles loading of the semantic tag service for connections, this is needed for displaying vcards.
+     *
+     * @class sbt.controls.vcard.connections.SemanticTagService  
+     */
     var SemanticTagService = declare(null, {
     });
 
     /**
-    @param {Object} [options]
-      @param {Function} [options.error]
-        An optional error callback, to be fired 
-        in the event of a problem loading the 
-        SemanticTagService from Connections.
-      @param {Boolean} [options.inclCss]
-        If true include's the card's css,
-        otherwise false.
-      @param {String} [options.endpoint]
-        The name of the endpoint to be 
-        used when fetching the
-        SemanticTagService.
-      
-    **/
+     * Load the Semantic tag service to parse any cards on the page.
+     * 
+     * @param {Object} [options]
+     *   @params {Function} [options.error]
+     *     An optional error callback, to be fired 
+     *     in the event of a problem loading the 
+     *     SemanticTagService from Connections.
+     *   @params {Boolean} [options.inclCss]
+     *     If true include's the card's css,
+     *     otherwise false.
+     *   @params {String} [options.endpoint]
+     *     The name of the endpoint to be 
+     *     used when fetching the
+     *     SemanticTagService.
+     */
     SemanticTagService.loadSemanticTagService = function(options){
         // Only load the service once.
         if (SemTagSvcConfig.loading || SemTagSvcConfig.loaded) {

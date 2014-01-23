@@ -116,8 +116,12 @@ define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUt
 		},
 		
 		onCancel : function() {
-			this.view.actionBar.showAction(this.action);
-			this.view.setContent(this.view.grid);
+			//if this widget is part of a view
+			if(this.view && this.action){
+				this.view.actionBar.showAllActions();
+				this.view.setContent(this.view.grid);
+			}
+			
 			
 		},
 		
@@ -132,11 +136,13 @@ define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUt
 			
 			this.setExecuteEnabled(true);
 			this._setSuccessMessage(success);
-			this.view.actionBar.showAction(this.action);
-			this.view.grid.update(null);
 			this.onSuccess();
-			this.view.setContent(this.view.grid);
-			
+			//if this widget is part of a view
+			if(this.view && this.action){
+				this.view.actionBar.showAllActions();
+				this.view.grid.update(null);
+				this.view.setContent(this.view.grid);
+			}
 		},
 		
 		/*
@@ -145,9 +151,13 @@ define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUt
 		_handleError: function(error){
 			this.setExecuteEnabled(true);
 			this._setErrorMessage(error);
-			this.view.actionBar.showAction(this.action);
 			this.onError();
-			this.view.setContent(this.view.grid);
+			//if this widget is part of a view
+			if(this.view && this.action){
+				this.view.actionBar.showAction(this.action);
+				this.view.setContent(this.view.grid);
+			}
+			
 		},
 		
 		/*

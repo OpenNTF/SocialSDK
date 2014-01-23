@@ -90,7 +90,7 @@ define(["../../../declare",
 	                    paramSchema: ParamSchema
 	                },
 	                rendererArgs : {
-	                    type : "myTopics"
+	                    type : "forumTopics"
 	                }
 	            }
 	        },
@@ -194,19 +194,19 @@ define(["../../../declare",
 	        		this._forumID = forumId;
 	        	}
 
-	        	this.renderer.template = this.renderer.topicTemplate;
 	        	this.renderer.headerTemplate = this.renderer.topicHeader;
 	        	this.renderer.breadCrumb = this.renderer.topicBreadCrumb;
 	        	this.store.setAttributes(consts.ForumTopicXPath);
 	        	this.hideBreadCrumb = false;
 	        	var endpoint = this.store.getEndpoint();
-	        	
-	        		
+	        		        		
 	        	if(this.params.type=="myTopics"){
+	        		this.renderer.template = this.renderer.topicTemplate;
 	        		var url = this.buildUrl(consts.AtomTopicsMy, {},endpoint);
 	        		this.store.setUrl(url);
 	        		this.hideBreadCrumb = true;
 	        	}else if(this.params.type == "forumTopics"){
+	        		this.renderer.template = this.renderer.forumTopicTemplate;
 	        		this.hideBreadCrumb = true;
 	        		var url = this.buildUrl(consts.AtomTopics+"?forumUuid="+this.forumUuid, {}, endpoint);
 	        		this.store.setUrl(url);

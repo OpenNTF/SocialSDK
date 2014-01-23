@@ -22,10 +22,12 @@ function change_authentication_method() {
 		document.getElementById("request_token_url").style.display = 'block';
 		document.getElementById("basic_auth_username").style.display = 'none';
 		document.getElementById("basic_auth_password").style.display = 'none';
+		document.getElementById("basic_auth_method").style.display = 'none';
 		
 		document.getElementById("lb_endpoint_name").style.display = 'none';
 		document.getElementById("lb_basic_auth_username").style.display = 'none';
 		document.getElementById("lb_basic_auth_password").style.display = 'none';
+		document.getElementById("lb_basic_auth_method").style.display = 'none';
 		document.getElementById("lb_consumer_secret").style.display = 'block';
 		document.getElementById("lb_endpoint_url").style.display = 'block';
 		document.getElementById("lb_consumer_key").style.display = 'block';
@@ -41,6 +43,8 @@ function change_authentication_method() {
 		document.getElementById("endpoint_url").style.display = 'block';
 		document.getElementById("basic_auth_username").style.display = 'block';
 		document.getElementById("basic_auth_password").style.display = 'block';
+		document.getElementById("lb_basic_auth_method").style.display = 'block';
+		document.getElementById("basic_auth_method").style.display = 'block';
 		document.getElementById("consumer_key").style.display = 'none';
 		document.getElementById("authorization_url").style.display = 'none';
 		document.getElementById("access_token_url").style.display = 'none';
@@ -86,7 +90,7 @@ function sdk_deploy_default_values() {
 
 function show_selected_endpoint(selected_endpoint) {
 	var id_str = selected_endpoint.replace(/ /g, "_");
-	
+
 	document.getElementById("endpoint_name").value = document.getElementById(id_str + "_name").value;
 	document.getElementById("consumer_secret").value = document.getElementById(id_str + "_consumer_secret").value;
 	document.getElementById("endpoint_url").value = document.getElementById(id_str + "_endpoint_url").value;
@@ -115,6 +119,7 @@ function create_new_endpoint() {
 	document.getElementById("access_token_url").value = "";
 	document.getElementById("request_token_url").value = "";
 }
-
-endpoint_change();
-change_authentication_method();
+window.onload = function () {
+	endpoint_change();
+	change_authentication_method();
+}

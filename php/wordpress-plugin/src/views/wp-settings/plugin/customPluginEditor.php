@@ -8,12 +8,10 @@
 	print '<link href="' . $pageURL . '/../wp-content/plugins/sbtk-wp/views/js/codeMirror/lib/codemirror.css" type="text/css" rel="stylesheet" />';
 	print '<link href="' . $pageURL . '/../wp-content/plugins/sbtk-wp/views/css/codeEditor.css" type="text/css" rel="stylesheet" />';
 	
-	print '<script type="text/javascript">';
-
-	require_once BASE_PATH . '/views/js/codeMirror/lib/codemirror.js';
-	require_once BASE_PATH . '/views/js/codeMirror/mode/javascript/javascript.js';
-	
-	print '</script>';
+	print '<script language="javascript" type="text/javascript" src="' . $pageURL . '/../wp-content/plugins/sbtk-wp/system/libs/code-mirror/lib/codemirror.js"></script>';
+	print '<script language="javascript" type="text/javascript" src="' . $pageURL . '/../wp-content/plugins/sbtk-wp/system/libs/code-mirror/mode/javascript/javascript.js"></script>';
+	$pluginURL = str_replace('/core/', '', $pageURL);
+	print '<script language="javascript" type="text/javascript" src="' . $pluginURL . '/../wp-content/plugins/sbtk-wp/views/js/customPluginEditor.js"></script>';
 ?>
 <input type="hidden" id="delete_widget" name="delete_widget" value="no" />
 <table>
@@ -22,48 +20,20 @@
 		<td><select onchange="plugin_change();" id="plugin_list" name="plugin_list">
     	<?php 
     	
-    		$sampleTypes = array(
-				'blogs',
-				'bookmarks',
-				'communities',
-				'files',
-				'forums',
-				'profiles'
-			);
-    	
-    		function getPluginName($pluginFile) {
-				$plugin = str_replace('.php', '', $pluginFile);
-				$plugin = str_replace('-', ' ', $plugin);
-				return ucwords($plugin);
-			}
-			
-			function endsWith($haystack, $needle) {
-				return $needle === "" || substr($haystack, -strlen($needle)) === $needle;
-			}
-    	
     		if (isset($viewData['plugins'])) {
 	    		$plugins = $viewData['plugins'];
 	    		echo '<optgroup label="Custom Widgets"></optgroup>';
 	    		foreach ($plugins as $plugin) {
-					if (endsWith($plugin, '.php')) {
-						continue;
+					if (isset($viewData['selected_custom_plugin']) && $viewData['selected_custom_plugin'] == $plugin) {
+						echo '<option selected="selected" value="' . $plugin . '">' . $plugin . '</option>';
+					} else {
+						echo '<option value="' . $plugin . '">' . $plugin . '</option>';
 					}
-					echo '<option value="' . $plugin . '">' . $plugin . '</option>';
 				}
-				$plugin = $plugins[0];
-				$pluginData = $viewData[$plugin];
-			}
-
-			foreach ($sampleTypes as $sample) {
-				$samples = scandir(SAMPLES_PATH . '/' . $sample);
-				if (isset($samples)) {
-					echo '<optgroup label="' . ucwords($sample) . '"></optgroup>';
-					foreach ($samples as $plugin) {
-						if ($plugin == '.' || $plugin == '..') {
-							continue;
-						}
-						echo '<option value="' . $plugin . '">&nbsp;&nbsp;' . getPluginName($plugin) . '</option>';
-					}
+// 				$plugin = $plugins[0];
+// 				$pluginData = $viewData[$plugin];
+				if (isset($viewData['selected_custom_plugin'])) {
+					$pluginData = $viewData[$viewData['selected_custom_plugin']];
 				}
 			}
     	?>
@@ -72,7 +42,7 @@
 	</tr>
 	<tr>
 		<td><strong>Selected Widget:</strong></td>
-		<td><input type="text" name="plugin_name" id="plugin_name" value="<?php echo (isset($plugins) ? $plugins[0] : '') ?>" /></td>
+		<td><input type="text" name="plugin_name" id="plugin_name" value="<?php echo (isset($viewData['selected_custom_plugin']) ? $viewData['selected_custom_plugin'] : '') ?>" /></td>
 		<td><input type="button" onclick="confirm_delete_widget();" name="btn_delete_widget" id="btn_delete_widget" class="button button-primary" value="Delete Widget" /></td>
 	</tr>
 </table>
@@ -99,5 +69,8 @@
     });
 	htmlEditor.on("blur", function() {htmlEditor.save();});
 
-	<?php require_once BASE_PATH . '/views/js/customPluginEditor.js'; ?>
+	<?php //require_once BASE_PATH . '/views/js/customPluginEditor.js'; ?>
 </script>
+	
+	
+<input type="hidden" name="selected_custom_plugin" id="selected_custom_plugin" value="<?php echo (isset($viewData['selected_custom_plugin']) ? $viewData['selected_custom_plugin'] : '') ?>" />

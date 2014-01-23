@@ -18,12 +18,14 @@
 define({
     root: {
     	startTopic: "Start a Topic",
+    	deleteTopic: "Delete Topic",
     	ok: "Ok",
     	loading: "Loading...",
     	attachAFile: "Attach a File",
     	attachments: "Attachments",
     	forum: "Forum",
     	cancel: "Cancel",
+    	Delete: "Delete",
     	save: "Save",
     	addTags: "Add Tags",
     	required: "Required",
@@ -34,6 +36,12 @@ define({
     	title: "Title",
     	titleError: "Enter a title before posting.",
     	topicSuccess: "New topic created successfully.",
-    	topicError: "Error creating new topic."
+    	topicError: "Error creating new topic.",
+    	deleteCheck: "Are you sure you want to delete this topic?",
+    	deleteMultipleCheck: "Are you sure you want to delete the selected topics?",
+    	deleteTopicSuccess: "The topic has been successfully deleted.",
+    	deleteTopicsSuccess: "The topics have been successfully deleted.",
+    	deleteTopicError: "Error: The topic could not be deleted."
+    		
     }
 });

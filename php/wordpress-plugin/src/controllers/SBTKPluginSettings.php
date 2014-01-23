@@ -137,6 +137,42 @@ class SBTKPluginSettings extends BasePluginController
         ***REMOVED***
     }
     
+    
+    /**
+     * Extracts the plugin name given a PHP sample filename.
+     *
+     * @param unknown $pluginFile
+     * @return string
+     *
+     * @author Benjamin Jakobus
+     */
+    function extractSampleName($pluginFile) {
+    	$plugin = str_replace('.php', '', $pluginFile);
+    	$plugin = str_replace('-', ' ', $plugin);
+    	return ucwords($plugin);
+    }
+    
+    function extractSampleContents($type, $plugin) {
+    	$sbtkPlugin = BASE_PATH . '/views/social/' . $type . '/' . $plugin;
+
+    	$file = file_get_contents($sbtkPlugin);
+    
+    	// Extract HTML
+    	$html = preg_replace('#<script.*</script>#is', '', $file);
+    
+    	// Extract JavaScript
+    	preg_match('#<script.*</script>#is', $file, $javascript);
+    	$javascript = str_replace('</script>', '', $javascript);
+    	$javascript = str_replace('<script type="text/javascript">', '', $javascript);
+    	$javascript = preg_replace("/\<\?php.*?>/is", "true", $javascript);
+    	$javascript = str_replace('rendererArgs : { containerType : "true" }', '', $javascript);
+    
+    	$contents = array();
+    	$contents['html'] = $html;
+    	$contents['javascript'] = $javascript;
+    	return $contents;
+    }
+    
    
     
     /**
@@ -319,6 +355,14 @@ class SBTKPluginSettings extends BasePluginController
     	);
     	
     	add_settings_field(
+    		'basic_auth_method',
+    		'<span style="display: none;" id="lb_basic_auth_method">Basic Authentication Method</span>',
+    		array( $this, 'basicAuthMethodListCallback' ),
+    		$this->settingsPage,
+    		$this->settingSectionId
+    	);
+    	
+    	add_settings_field(
 	    	'basic_auth_username',
 	    	'<span style="display: none;" id="lb_basic_auth_username">Username</span>',
 	    	array( $this, 'basicAuthCallback' ),
@@ -438,7 +482,6 @@ class SBTKPluginSettings extends BasePluginController
      */
     public function printHiddenSettings() {
     	$viewData['options'] = $this->options;
-    	$viewData['default_sdk_deploy_url'] = plugins_url('sbtk-wp') . '/system/libs/js-sdk/';
     	$this->loadView('wp-settings/hiddenSettings', $viewData);
     }
     
@@ -588,26 +631,24 @@ class SBTKPluginSettings extends BasePluginController
      * @author Benjamin Jakobus
      */
     public function gridDisplayCallback() {   
-// 		$viewData['bookmark_grid_pager'] = $this->communityGridSettings['bookmark_grid_pager'];
-// 		$viewData['bookmark_grid_sorter'] = $this->communityGridSettings['bookmark_grid_sorter'];
-// 		$viewData['bookmark_grid_container_type'] = $this->communityGridSettings['bookmark_grid_container_type'];
-// 		$this->loadView('wp-settings/plugin/bookmarkGridDisplay', $viewData);
-
-// 		$viewData['community_grid_pager'] = $this->communityGridSettings['community_grid_pager'];
-// 		$viewData['community_grid_sorter'] = $this->communityGridSettings['community_grid_sorter'];
-// 		$viewData['community_grid_container_type'] = $this->communityGridSettings['community_grid_container_type'];
-// 		$this->loadView('wp-settings/plugin/communityGridDisplay', $viewData);
 		
 		$viewData['plugins'] = $this->customPlugins;
 		
 		if (isset($this->customPlugins) && $this->customPlugins != null) {
+
 			foreach ($this->customPlugins as $plugin) {
 				$viewData[$plugin] = get_option($plugin);
 			}
-		}
+		} 
+		
+		$viewData['selected_custom_plugin'] = get_option('selected_custom_plugin');
 		
 		$this->loadView('wp-settings/plugin/customPluginEditor', $viewData);
 		$this->loadView('wp-settings/plugin/hiddenPlugins', $viewData);
+    }
+    
+    function strEndsWith($haystack, $needle) {
+    	return $needle === "" || substr($haystack, -strlen($needle)) === $needle;
     }
     
     /**
@@ -627,6 +668,29 @@ class SBTKPluginSettings extends BasePluginController
      */
     public function requestTokenUrlCallback() {
     	$this->loadView('wp-settings/requestTokenUrl', array());
+    }
+    
+    /**
+     * Prints the basic authentication methods list.
+     *
+     * @author Benjamin Jakobus
+     */
+    public function basicAuthMethodListCallback() {
+		// Determine the selected endpoint by the user
+		$basic_auth_method = "";
+		foreach ($this->options as $val) {
+			$endpoint = (array)json_decode($val, true);
+				
+			if ($endpoint['selected']) {
+				if (isset($endpoint['basic_auth_method'])) {
+					$basic_auth_method = $endpoint['basic_auth_method'];
+				}
+				break;
+			}
+		}
+		$viewData['basic_auth_method'] = $basic_auth_method;
+
+    	$this->loadView('wp-settings/basicAuthMethodList', $viewData);
     }
     
     /**

@@ -87,6 +87,18 @@ define([ "../../declare", "../../lang", "../../stringUtil", "../../log",
 		showAction: function(action){
 			action.actionNameNode.setAttribute("style","");
 		},
+		
+		hideAllActions: function(){
+			for(var i=0;i<this._actionElements.length;i++){
+				this._actionElements[i].element.setAttribute("style","display:none;");
+			}
+		},
+		
+		showAllActions: function(){
+			for(var i=0;i<this._actionElements.length;i++){
+				this._actionElements[i].element.setAttribute("style","");
+			}
+		},
 
 		//
 		// Internals

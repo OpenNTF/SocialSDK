@@ -22,6 +22,7 @@ define(["../../../declare",
         "../../../text!./templates/ForumRow.html",
         "../../../text!./templates/TableHeader.html",
         "../../../text!./templates/TopicRow.html",
+        "../../../text!./templates/ForumTopicRow.html",
         "../../../text!./templates/TopicHeader.html",
         "../../../text!./templates/ReplyRow.html",
         "../../../text!./templates/ReplyHeader.html",
@@ -30,7 +31,7 @@ define(["../../../declare",
         "../../../text!./templates/MyTopicsBreadCrumb.html",
         "../../../i18n!./nls/ForumGridRenderer"], 
 
-    function(declare, ConnectionsGridRenderer, i18n, dom, lang, ForumRow, tableHeader, TopicRow, 
+    function(declare, ConnectionsGridRenderer, i18n, dom, lang, ForumRow, tableHeader, TopicRow, ForumTopicRow,
                     TopicHeader, ReplyTemplate, ReplyHeader,ReplyBreadCrumb,TopicBreadCrumb, 
                     MyTopicsBreadCrumb, nls){
                 
@@ -45,6 +46,8 @@ define(["../../../declare",
                     _nls:nls,
                     
                     topicTemplate: TopicRow,
+                    
+                    forumTopicTemplate: ForumTopicRow,
                     
                     topicHeader: TopicHeader,
                     
@@ -76,7 +79,10 @@ define(["../../../declare",
                             if(args.type=="myTopics"){
                                     this.template = this.topicTemplate;
                                     this.headerTemplate = this.topicHeader;
+                            }else if(args.type=="forumTopics"){
+                            	 this.template = this.forumTopicTemplate;
                             }else{
+                            
                                     this.template = this.forumTemplate;
                             }
                             

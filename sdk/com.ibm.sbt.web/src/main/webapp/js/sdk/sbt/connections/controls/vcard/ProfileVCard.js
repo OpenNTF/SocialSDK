@@ -62,22 +62,26 @@ define(["../../../declare",
          */
         userName: "",
         /**
-         * A url flag specifying whether or not connections should return dojo with the semantic tag service.
-         * 
-         * @property inclDojo 
-         * @type Boolean
-         * @default false
-         */
-        inclDojo: false,
+        A url flag specifying whether or not connections should include the css when loading the Semantic Tag Service.
+        @property inclCss
+        @type Boolean
+        @default false
+        **/
+        inclCss: false,
         /**
-         * The class of the html error element.
-         * 
-         * @property errorClass 
-         * @type String
-         * @default ""
-         */
-        errorClass: "",
+        The class of the html error element.
         
+        @property errorClass 
+        @type String
+        @default ""
+        **/
+        errorClass: "",
+        /**
+        @property endpointName 
+        @type String
+        @default ""
+        **/
+        endpointName: "connections",
         /**
          * 
          * @param args
@@ -93,8 +97,12 @@ define(["../../../declare",
         	dom.setAttr(this.idNode, "class", (this.userId.indexOf("@") >= 0)  ? "email" : "x-lconn-userid");
         	
         	this.inherited(arguments);
-        	
-        	SemanticTagService.loadSemanticTagService();
+        	this.inclCss = true;
+        	SemanticTagService.loadSemanticTagService({
+        	    endpoint: this.endpointName,
+        	    inclDojo: false,
+        	    inclCss: this.inclCss
+        	});
         },
         
         /**

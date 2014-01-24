@@ -369,6 +369,10 @@
 								<delete dir="${psource_folder_name_ios}" />
 
 
+								<zip basedir="${project.build.directory}/tomcat/unzip"
+									destfile="${project.build.directory}/tomcat/apache-tomcat-7.0.30-sbt.zip"
+									compress="true" />
+
 								<zip basedir="${project.build.directory}/sources/SocialSDK"
 									destfile="${project.build.directory}/sources/SocialSDK.zip"
 									compress="true" />

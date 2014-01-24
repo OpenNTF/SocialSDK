@@ -71,6 +71,17 @@ define(["../../../declare",
         inclCss: false,
         
         /**
+         * A url flag specifying whether or not connections should include dojo when loading the Semantic Tag Service.
+         * 
+         * Careful.
+         * 
+         * @property inclDojo
+         * @type Boolean
+         * @default false
+         */
+        inclDojo: false,
+        
+        /**
          * The class of the html error element.
          *
          * @property errorClass 
@@ -103,7 +114,7 @@ define(["../../../declare",
         	this.inherited(arguments);
         	SemanticTagService.loadSemanticTagService({
         	    endpoint: this.endpointName,
-        	    inclDojo: false,
+        	    inclDojo: this.inclDojo,
         	    inclCss: this.inclCss
         	});
         },

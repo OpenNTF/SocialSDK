@@ -90,6 +90,7 @@ define([ "../../../declare", "../../../Endpoint", "sbt/config", "../../../log"],
             isBidiRTL = options.isBidiRTL || isBidiRTL;
             endpointName = options.endpoint || endpointName;
             inclCss = options.inclCss || inclCss;
+            inclDojo = options.inclDojo || inclDojo;
             //we need dojo from somewhere.
             if(!dojo){
                 if(!options.inclDojo){
@@ -109,7 +110,7 @@ define([ "../../../declare", "../../../Endpoint", "sbt/config", "../../../log"],
         var proxy = endpoint.proxy.proxyUrl + "/" + endpoint.proxyPath;
         
         window.SemTagSvcConfig = window.SemTagSvcConfig || {};
-        window.SemTagSvcConfig.baseUrl = endpoint.baseUrl; 
+        window.SemTagSvcConfig.baseUrl = proxy;
         window.SemTagSvcConfig.proxyURL = proxy;
         
         var serviceUrl = "/profiles/ibm_semanticTagServlet/javascript/semanticTagService.js";
@@ -120,14 +121,18 @@ define([ "../../../declare", "../../../Endpoint", "sbt/config", "../../../log"],
         
         if(inclCss){
             window.SemTagSvcConfig.loadCssFiles = inclCss;
-            window.SemTagSvcConfig.resourcesSvc = proxy + "/" + endpointName + "/resources";
+            var pathToResources = "connections";
+            pathToResources = endpoint.serviceMappings["pathToResources"] || pathToResources;
+            
+            window.SemTagSvcConfig.resourcesSvc = endpoint.baseUrl + "/" + pathToResources + "/resources"; //resourcesSvc is used when loading css. 
+            //Load straight from connections so that relative css urls work.
         }
         
         var requestArgs = {
             method : "GET",
             handleAs : "text",
             query : {
-                'inclDojo': false
+                'inclDojo': inclDojo
             },
             headers: {
                 "Accept-Language": locale + ",en;q=0.8"

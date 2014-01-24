@@ -1,0 +1,1 @@
+Downloaded from: http://download.cksource.com/CKEditor/CKEditor/CKEditor%204.2.2/ckeditor_4.2.2_full.zip

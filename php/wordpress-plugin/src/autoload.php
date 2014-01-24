@@ -34,57 +34,16 @@ if (!defined('SBT_SDK')) {
 if (!defined('BASE_PATH')) {
 	define('BASE_PATH', dirname(__FILE__) );
 }
-//relative url path used for proxy, services and relative things
-
-$projectDir = explode("/", $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
-$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-
-// Determine base location
-$indexDir = $protocol . "$_SERVER[HTTP_HOST]/";
-
-// Remove arguments
-if (strpos($indexDir, '?') !== FALSE) {
-	$indexDir = substr($indexDir, 0, strpos($indexDir, '?'));
-}
-
-for ($i = 1; $i < sizeof($projectDir); $i++) {
-	$dir = $projectDir[$i];
-	// Remove arguments
-	if (strpos($dir, '?') === FALSE) {
-		$indexDir = $indexDir . $dir . '/';
-	}
-
-	if (defined('IBM_SBT_MOODLE_BLOCK')) {
-		$index = $indexDir . 'blocks/ibmsbtk/core/ibm-sbt-sdk-root-id.php';
-	} else if (defined('IBM_SBT_WORDPRESS_PLUGIN')) {
-			$indexDir = $indexDir . 'wp-content/plugins/sbtk-wp/ibm-sbt-sdk-root-id.php';
-	} else {
-		$index = $indexDir . 'ibm-sbt-sdk-root-id.php';
-	}
-	
-	$ch = @curl_init($index);
-	
-	@curl_setopt($ch, CURLOPT_NOBODY, true);
-	@curl_exec($ch);
-	$retcode = @curl_getinfo($ch, CURLINFO_HTTP_CODE);
-	@curl_close($ch);
-
-	if ($retcode == 200) {
-		if (defined('IBM_SBT_MOODLE_BLOCK')) {
-			$indexDir = $indexDir . 'blocks/ibmsbtk/core/';
-		} else if (defined('IBM_SBT_WORDPRESS_PLUGIN')) {
-			$indexDir = $indexDir . 'wp-content/plugins/sbtk-wp/';
-		}
-		break;
-	}	
-}
-
-// Remove ibm-sbt-sdk-root-id.php from base location
-$indexDir = str_replace('ibm-sbt-sdk-root-id.php', '', $indexDir);
-
 // Define the base location
-// define('BASE_LOCATION',  $indexDir);
-define('BASE_LOCATION',  'https://localhost/wordpress/wp-content/plugins/sbtk-wp/'); // TODO: Remove
+if (defined('IBM_SBT_MOODLE_BLOCK')) {
+	define('BASE_LOCATION',  $CFG->wwwroot . '/blocks/ibmsbtk/core/');
+} else if (defined('IBM_SBT_WORDPRESS_PLUGIN')) {
+	define('BASE_LOCATION',  get_site_url() . '/wp-content/plugins/sbtk-wp/');
+} else {
+	define('BASE_LOCATION',  'http://localhost/core/src');
+}
+
+// define('BASE_LOCATION',  'https://localhost/wp-content/plugins/sbtk-wp/'); // TODO: Remove
 
 spl_autoload_register(function ($class) {
 	$coreFile = BASE_PATH . '/system/core/' . $class . '.php';

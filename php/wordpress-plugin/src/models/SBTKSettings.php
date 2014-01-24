@@ -42,6 +42,9 @@ class SBTKSettings {
 	// Bookmarks grid settings
 	private $bookmarksGridSettings;
 	
+	// Basic authentication method - must be global|prompt|profile
+	private $basicAuthMethod;
+	
 	/**
 	 * Constructor.
 	 *
@@ -253,5 +256,15 @@ class SBTKSettings {
 	 */
 	public function getBasicAuthPassword() {
 		return $this->selectedEndpoint['basic_auth_password'];
+	}
+	
+	/**
+	 * Returns the authentication method used for basic authentication.
+	 *
+	 * @return string		global|profile|prompt
+	 * @author Benjamin Jakobus
+	 */
+	public function getBasicAuthMethod() {
+		return $this->selectedEndpoint['basic_auth_method'];
 	}
 }

@@ -20,6 +20,10 @@
  *
  * @author Benjamin Jakobus
  */
+if (!defined('BASE_LOCATION')) {
+	$autoload = __DIR__ . '/core/autoload.php';
+	include $autoload;
+}
 class block_ibmsbtk_edit_form extends block_edit_form {
  
     protected function specific_definition($mform) {
@@ -61,9 +65,6 @@ class block_ibmsbtk_edit_form extends block_edit_form {
         		'social/forums/forum-entries-grid' => '&nbsp;&nbsp;&nbsp;Forum entries',
         		'social/forums/forums-grid' => '&nbsp;&nbsp;&nbsp;Forums',
         		'social/forums/topics-grid' => '&nbsp;&nbsp;&nbsp;Forum topics',
-        		
-        		'<optgroup label="Profiles"></optgroup>',
-        		'social/profiles/my-profile-panel' => '&nbsp;&nbsp;&nbsp;My profile panel',
         		
         		'<optgroup label="Sametime"></optgroup>',
         		'social/sametime/smartcloud-chat' => '&nbsp;&nbsp;&nbsp;SmartCloud Chat Client'

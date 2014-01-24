@@ -75,7 +75,7 @@
 			<plugin>
 				<groupId>com.googlecode.maven-download-plugin</groupId>
 				<artifactId>maven-download-plugin</artifactId>
-				<version>1.0.0</version>
+				<version>1.1.0</version>
 				<executions>
 					<execution>
 						<id>download-tomcat-7</id>
@@ -119,6 +119,13 @@
 						</configuration>
 					</execution>
 				</executions>
+				<dependencies>
+				<dependency>
+					<groupId>org.codehaus.plexus</groupId>
+					<artifactId>plexus-archiver</artifactId>
+					<version>2.4.4</version>
+				</dependency>
+				</dependencies>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

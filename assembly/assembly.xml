@@ -43,6 +43,7 @@
 				<include>com.ibm.sbt:sbt.dojo180</include>
 				<include>com.ibm.sbt:sbt.jquery182</include>
 				<include>com.ibm.sbt:sbt.bootstrap211</include>
+				<include>com.ibm.sbt:sbt.ckeditor422</include>
 			</includes>
 			<binaries>
 				<outputDirectory>sbtsdk/redist/war</outputDirectory>

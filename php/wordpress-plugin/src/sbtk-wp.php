@@ -84,13 +84,7 @@ function widget_sbtk_custom_plugin($args) {
 	if ($settings->getAuthenticationMethod() == 'basic' && $settings->getBasicAuthMethod() == 'prompt') {
 		echo '</div>';
 		require_once 'views/basic-auth-login-display.php';
-	}
-	
-}
-
-
-function widget_sbtk_my_files($args) {
-	create('views/social/files/files-grid-compact.php');
+	}	
 }
 
 function create($widgetPath) {
@@ -219,57 +213,23 @@ if (isset($plugins) && $plugins != null) {
 	}
 }	
 
+function widget_sbtk_my_files($args) {
+	create('views/my-files.php');
+}
+
+function widget_sbtk_my_communities($args) {
+	create('views/my-communities.php');
+}
+
+function widget_sbtk_my_communities_grid($args) {
+	create('views/my-communities-grid.php');
+}
+
 // REGISTRATION GOES HERE
-wp_register_sidebar_widget('files_widget_id', 'My Files', 'widget_sbtk_my_files', array('description' => 'Displays a files grid.'));
+wp_register_sidebar_widget('my_files_widget_id', 'My Files', 'widget_sbtk_my_files', array('description' => 'Displays files owned by the current user.'));
+wp_register_sidebar_widget('my_communities_widget_id', 'My Communities', 'widget_sbtk_my_communities', array('description' => 'Displays communities owned by the current user.'));
+wp_register_sidebar_widget('my_communities_grid_widget_id', 'My Communities Grid', 'widget_sbtk_my_communities_grid', array('description' => 'Displays communities owned by the current user.'));
 
-// 	$sampleTypes = array(
-// 			'blogs',
-// 			'bookmarks',
-// 			'communities',
-// 			'files'
-// 	);
-	
-// 	$customPlugins = get_option('custom_plugins');
-	
-// 	// If no plugins exist, then create a new array
-// 	if ($customPlugins === FALSE) {
-// 		$customPlugins = array();
-// 	}
-	
-// 	foreach ($sampleTypes as $sample) {
-// 		$samples = scandir(SAMPLES_PATH . '/' . $sample);
-
-// 		if (isset($samples)) {
-// 			foreach ($samples as $plugin) {
-// 				try {
-// 						if (!strEndsWith($plugin, '.php')) {
-// 							continue;
-// 						}
-		
-// 						// Check if sample code is already in database - if not, insert it
-// 						$pluginData = get_option($plugin);
-// 						if ($pluginData === FALSE) {
-// 							array_push($customPlugins, $plugin);
-							
-// 							if(get_option('custom_plugins') === FALSE){
-// 								add_option('custom_plugins',  $customPlugins);
-// 							} else {
-// 								update_option('custom_plugins', $customPlugins);
-// 							}
-			
-// 							$pluginData['javascript'] = "N/A - Sample. JavaScript not stored in DB.";
-// 							$pluginData['html'] = "N/A - Sample. HTML not stored in DB.";
-// 							add_option($plugin,  $pluginData);
-// 						}
-					
-// 						wp_register_sidebar_widget('sample_plugin_' . $plugin, extractSampleName($plugin), 
-// 						'widget_sbtk_custom_plugin', array('description' => 'Displays a sample SBT plugin.'));
-// 					} catch (Exception $e) {
-						
-// 					}
-// 				}
-// 		}
-// 	}
 
 // Register options page
 require_once 'sbtk-options.php';

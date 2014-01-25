@@ -84,8 +84,8 @@ define(["../declare","../config","../lang", "../base/core", "../xml", "../xpath"
             }
             
             // add the sorting information to the query
-            if(options.sort && options.sort[0]) {
-                if(options.sort[0].attribute) {
+            if (options.sort && options.sort[0]) {
+                if (options.sort[0].attribute) {
                     query.sortBy = options.sort[0].attribute;
                 }
 

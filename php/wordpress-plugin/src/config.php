@@ -10,6 +10,7 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+***REMOVED***
 	
 ***REMOVED***
 ***REMOVED***
@@ -20,6 +21,9 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+***REMOVED***
+***REMOVED***
+	
 	
 ***REMOVED***
 ***REMOVED***
@@ -27,6 +31,38 @@
 ***REMOVED***
 ***REMOVED***
  	
- 	$config['session_name'] = 'IBM_SBT_Wordpress_Session';
+***REMOVED***
  	
 ***REMOVED***
+ 	
+ 	
+ ***REMOVED***
+***REMOVED***
+***REMOVED***
+ 	$config['wp_endpoint_2_consumer_key'] 				= '***REMOVED***';
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+ 	
+ ***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+ 	
+	//session bridging
+	//require_once ('sbridge.php');
+	

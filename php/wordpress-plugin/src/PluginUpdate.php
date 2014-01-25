@@ -79,6 +79,13 @@ class PluginUpdate {
 				update_option('custom_plugins', $customPlugins);
 			}
 		}
+		if(get_option('selected_custom_plugin') === FALSE){
+			add_option('selected_custom_plugin',  $_POST['plugin_name']);
+		} else {
+			update_option('selected_custom_plugin', $_POST['plugin_name']);
+		}
+		
+	
 // 	delete_option('custom_plugins');
 		// Direct the user to the settings page and display a success message
 		if(is_admin()) {

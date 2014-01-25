@@ -16,10 +16,13 @@ function plugin_change() {
 	var javascript = document.getElementById(selected_plugin + "_js").value;
 	htmlEditor.setValue(html);
 	jsEditor.setValue(javascript);
+	
+	document.getElementById("plugin_name").value = name;
 }
 
 function new_widget() {
 	document.getElementById("plugin_name").value = "";
+	document.getElementById("selected_custom_plugin").value = "";
 	jsEditor.setValue("\n\n\n\n\n\n\n\n\n\n\n\n");
 	htmlEditor.setValue("\n\n\n\n\n\n\n\n\n\n\n\n");
 }

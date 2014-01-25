@@ -27,19 +27,19 @@ use Guzzle\Service\Exception\DescriptionBuilderException;
  * @author Benjamin Jakobus
  *
  */
-
+// Load settings object and default configuration
+require_once BASE_PATH . '/config.php';
+include_once BASE_PATH . '/autoload.php';
 class Proxy extends BaseController {
 	
 	/**
 	 * Routes requests.
 	 * 
+	 * @param string server			The URL of the server to which to re-direct the request to. Uses SBTKSettings if none given.
+	 * 
 	 * @author Benjamin Jakobus
 	 */
-	public function route() {				
-		// Load settings object and default configuration
-		require_once BASE_PATH . '/config.php';
-		include_once BASE_PATH . '/autoload.php';
-	
+	public function route($server = null) {				
 		$this->loadModel('SBTKSettings');
 		$this->loadModel('CredentialStore');
 		
@@ -49,7 +49,7 @@ class Proxy extends BaseController {
 		if (!isset($_REQUEST["_redirectUrl"])) {
 			// Request to check if the user is authenticated
 			if (isset($_REQUEST["isAuthenticated"])) {
-				$_REQUEST["_redirectUrl"] = '/connections/files/basic/api/myuserlibrary/feed';
+				$_REQUEST["_redirectUrl"] = '/files/basic/api/myuserlibrary/feed'; //used to be /connections/files/basic/api/myuserlibrary/feed
 				$_SERVER['REQUEST_METHOD'] = 'GET';
 			} else if (isset($_REQUEST["basicAuthLogout"])) {
 				// Logout request
@@ -71,7 +71,9 @@ class Proxy extends BaseController {
 			print_r(json_encode($result));
 			return;
 		}
-		
+	
+		$method = $_SERVER['REQUEST_METHOD'];
+
 		// Use basic authentication
 		if ($settings->getAuthenticationMethod() == "basic") {
 			// Load the autoloader for the Guzzle API
@@ -80,9 +82,7 @@ class Proxy extends BaseController {
 			$client = new Client($settings->getURL());
 		
 			$client->setDefaultOption('verify', false);
-		
-			$method = $_SERVER['REQUEST_METHOD'];
-	
+				
 			$parameters = file_get_contents('php://input');
 
 			$options = $_REQUEST;
@@ -109,14 +109,17 @@ class Proxy extends BaseController {
 				unset($options['isAuthenticated']);
 			}
 			
+			if (isset($options['actionType'])) {
+				unset($options['actionType']);
+			}
+			
 			$headers = null;
 			$body = null;
 
 			$token = $store->getToken();
 
 			// If global username and password is set, then use it; otherwise use user-specific credentials
-			if ($settings->getBasicAuthUsername() != null && $settings->getBasicAuthPassword() != null
-				&& $settings->getBasicAuthUsername() != "" && $settings->getBasicAuthPassword() != "") {
+			if ($settings->getBasicAuthMethod() == 'global' || $settings->getBasicAuthMethod() == 'profile') {
 				$user = $settings->getBasicAuthUsername();
 				$password = $settings->getBasicAuthPassword();
 			} else {
@@ -125,8 +128,11 @@ class Proxy extends BaseController {
 			}
 
 			$response = null;
+			
+// 			$headers = apache_request_headers();
+			$body = $_POST;
 
-			try {
+			try {	
 				$request = $client->createRequest($method, $url , $headers, $body,  $options);
 				$request->setAuth($user, $password);
 				
@@ -141,11 +147,22 @@ class Proxy extends BaseController {
 		
 			header(':', true, $response->getStatusCode());
 			header('X-PHP-Response-Code: ' . $response->getStatusCode(), true, $response->getStatusCode());
-	
+			
 			if (isset($_REQUEST["isAuthenticated"])) {
 				$result = array('status' => $response->getStatusCode(), 'result' => ($response->getStatusCode() == 401 ? false : true));
 				print_r(json_encode($result));
 			} else {
+				if (isset($_REQUEST['actionType']) && $_REQUEST['actionType'] == 'download') {
+					$headers = $response->getHeaders();
+					header('Content-Description: File Transfer');
+					header('Content-Type: application/octet-stream');
+					header('Content-Disposition: ' . $headers['content-disposition']);
+					header('Content-Transfer-Encoding: binary'); //changed to chunked
+					header('Expires: 0');
+					header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+					header('Pragma: public');
+				}
+			
 				print_r($response->getBody(TRUE));
 			}
 		} else if ($settings->getAuthenticationMethod() == "oauth1") {	
@@ -160,7 +177,6 @@ class Proxy extends BaseController {
 					'authorize_uri' => $settings->getAuthorizationURL(),
 					'access_token_uri' => $settings->getAccessTokenURL()
 			);
-			
 
 			$token = $store->getRequestToken();
 
@@ -190,13 +206,14 @@ class Proxy extends BaseController {
 				$tokenResultParams = $token;
 				
 				$accessToken = $store->getOAuthAccessToken();
-				
+			
 				if ($accessToken == null || $accessToken == false) {
 					try {
 						SBTKOAuthRequester::requestAccessToken($settings->getConsumerKey(), $oauthToken, 0, $method, $token);
 					}
 					catch (OAuth1Exception2 $e)
 					{
+						
 						var_dump($e);
 						// Something wrong with the oauth_token.
 						// Could be:
@@ -206,14 +223,42 @@ class Proxy extends BaseController {
 					}
 					$store->storeOAuthAccessToken(true);
 				}
+				if ($server == null) {
+					$server = $settings->getURL();
+				}
+				
+				// Get headers and request method
+				$headers = apache_request_headers();
+				$method = $_SERVER['REQUEST_METHOD'];
+				
+				if ($method == 'POST') {
+					$files = null;
 
-				$request = new SBTKOAuthRequester($settings->getURL() . "/" . $url, 'GET', $tokenResultParams);
+					$request = new SBTKOAuthRequester($server . "/" . $url, $method, $tokenResultParams);
+				} else {
+					$request = new SBTKOAuthRequester($server . "/" . $url, $method, $tokenResultParams);
+				}			
 				
 				$result = $request->doRequest(0);
+				
 				if ($result['code'] == 200) {
+					if (isset($_REQUEST['actionType']) && $_REQUEST['actionType'] == 'download') {
+						$headers =$result['headers'];
+						header('Content-Description: File Transfer');
+						header('Content-Type: application/octet-stream');
+						header('Content-Disposition: ' . $headers['content-disposition']);
+						header('Content-Transfer-Encoding: binary'); //changed to chunked
+						header('Expires: 0');
+						header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+						header('Pragma: public');
+					}
+							
 					print_r($result['body']);
-				}
-				else {
+				} else if ($result['code'] == 302) {
+					$headers = $result['headers'];
+					$this->route($headers['location']);
+				} else {
+					print_r($result);
 					echo 'Error';
 				}
 			} else {
@@ -222,9 +267,51 @@ class Proxy extends BaseController {
 			
 	 			// Send request
 				$body = $oauth->request($url, 'https://localhost/core/src/index.php?plugin=guzzle&class=OAuth1Endpoint&method=callback');
-			
+
 				print_r($body);
 			}
+		}
+	}
+	
+	/**
+	 * Re-writes the URL for the file download request (because the files API does something funny with the
+	 * URL generation) and then routes the requests.
+	 *
+	 * @author Benjamin Jakobus
+	 */
+	public function fileOperations() {
+	
+		if (isset($_GET["_redirectUrl"])) {
+			if (strpos($_GET["_redirectUrl"], '/DownloadFile/') !== FALSE) {
+				$url = $_GET['_redirectUrl'];
+				
+				// Extract library ID and file ID
+				$keys = parse_url($url); 
+				$path = explode("/", $keys['path']);
+	
+				$libraryID = $path[sizeof($path) - 1];
+				$fileID = $path[sizeof($path) - 2];
+				
+				// Create new URL
+				$url = "/files/basic/api/library/" . $libraryID . "/document/" . $fileID . "/media";
+			
+				// Update request
+				$_REQUEST['_redirectUrl'] = $url;
+				$_GET['_redirectUrl'] = $url;
+				$_REQUEST['actionType'] = 'download';
+				
+			} else if (strpos($_GET["_redirectUrl"], '/UploadFile/') !== FALSE) {
+				// Create new URL
+// 				$url = "/files/form/api/myuserlibrary/feed";
+				$url = "/files/basic/api/myuserlibrary/feed";
+				
+				// Update request
+				$_REQUEST['_redirectUrl'] = $url;
+				$_GET['_redirectUrl'] = $url;
+				$_POST['visibility'] = $_GET['visibility'];
+			}
+			// Route
+			$this->route();
 		}
 	}
 }

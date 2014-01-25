@@ -1,4 +1,4 @@
-<?php 
+<?php ob_start();
 /*
  * © Copyright IBM Corp. 2013
 *
@@ -38,7 +38,6 @@ include 'config.php';
 if (!session_id()) {
 	session_name($config['session_name']);
 	session_start();
-	syslog(LOG_INFO, "Started PHP Session via core/index.php");
 }
 
 

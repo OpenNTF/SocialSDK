@@ -74,10 +74,14 @@ class OAuth1Endpoint extends BaseController
 
 				// get a request token
 				$tokenResultParams = SBTKOAuthRequester::requestRequestToken($this->options['consumer_key'], 0, $getAuthTokenParams);
-				
+			
 				// redirect to the authorization page, they will redirect back
-// 				echo '<script type="text/javascript" language="javascript">window.location = "'.$this->options['authorize_uri'] . "?oauth_token=" . $tokenResultParams['token'].'";</script>';
-				header("Location: " . $this->options['authorize_uri'] . "?oauth_token=" . $tokenResultParams['token']);
+// 			
+				if (!headers_sent()) {
+					header("Location: " . $this->options['authorize_uri'] . "?oauth_token=" . $tokenResultParams['token']);
+				} else {
+					echo '<script type="text/javascript" language="javascript">window.location = "'.$this->options['authorize_uri'] . "?oauth_token=" . $tokenResultParams['token'].'";</script>';
+				}
 				
 			}
 			
@@ -142,7 +146,7 @@ class OAuth1Endpoint extends BaseController
 		if (empty($_GET["oauth_token"])) {
 			return;
 		}
-
+	
 		// Store $tokenResultParams
 		$this->loadModel('CredentialStore');
 		$store = new CredentialStore();

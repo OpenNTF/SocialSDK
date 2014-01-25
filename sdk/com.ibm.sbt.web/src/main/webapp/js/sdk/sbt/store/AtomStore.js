@@ -47,7 +47,7 @@ define(["../declare","../config","../lang", "../base/core", "../xml", "../xpath"
         attributes : core.entryXPath,
         namespaces : core.namespaces,
         paramSchema: {},
-        total: new SbtPromise(),
+        total: null,
         
         /**
          * Constructor for the AtomStore promise.
@@ -59,6 +59,7 @@ define(["../declare","../config","../lang", "../base/core", "../xml", "../xpath"
             this._options = options;
             this._callbacks = [];
             this._errbacks = [];
+            this.total = new SbtPromise();
             
             if (args) {
                 this.url = args.url;

@@ -38,15 +38,13 @@ if (!defined('BASE_PATH')) {
 if (defined('IBM_SBT_MOODLE_BLOCK')) {
 	define('BASE_LOCATION',  $CFG->wwwroot . '/blocks/ibmsbtk/core/');
 } else if (defined('IBM_SBT_WORDPRESS_PLUGIN')) {
-	define('BASE_LOCATION',  get_site_url() . '/blocks/ibmsbtk/core/');
+	define('BASE_LOCATION',  get_site_url() . '/wp-content/plugins/sbtk-wp/');
 } else {
-	define('BASE_LOCATION',  'INSERT YOUR BASE LOCATION HERE');
+	define('BASE_LOCATION',  'http://localhost/core/src');
 }
 
-
-// define('BASE_LOCATION',  'https://localhost/wp-content/plugins/sbtk-wp/'); // TODO: Remove
-
-spl_autoload_register(function ($class) {
+spl_autoload_register(function ($class) 
+{
 	$coreFile = BASE_PATH . '/system/core/' . $class . '.php';
 	$applicationFile = BASE_PATH . '/controllers/' . $class . '.php';
 	$applicationEndpointFile = BASE_PATH . '/controllers/endpoint/' . $class . '.php';

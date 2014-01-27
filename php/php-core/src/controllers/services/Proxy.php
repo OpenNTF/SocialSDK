@@ -30,7 +30,8 @@ use Guzzle\Service\Exception\DescriptionBuilderException;
 // Load settings object and default configuration
 require_once BASE_PATH . '/config.php';
 include_once BASE_PATH . '/autoload.php';
-class Proxy extends BaseController {
+class Proxy extends BaseController 
+{
 	
 	/**
 	 * Routes requests.
@@ -39,7 +40,8 @@ class Proxy extends BaseController {
 	 * 
 	 * @author Benjamin Jakobus
 	 */
-	public function route($server = null) {				
+	public function route($server = null) 
+	{				
 		$this->loadModel('SBTKSettings');
 		$this->loadModel('CredentialStore');
 		
@@ -129,7 +131,6 @@ class Proxy extends BaseController {
 
 			$response = null;
 			
-// 			$headers = apache_request_headers();
 			$body = $_POST;
 
 			try {	
@@ -213,6 +214,7 @@ class Proxy extends BaseController {
 					}
 					catch (OAuth1Exception2 $e)
 					{
+						
 						var_dump($e);
 						// Something wrong with the oauth_token.
 						// Could be:
@@ -278,7 +280,8 @@ class Proxy extends BaseController {
 	 *
 	 * @author Benjamin Jakobus
 	 */
-	public function fileOperations() {
+	public function fileOperations() 
+	{
 	
 		if (isset($_GET["_redirectUrl"])) {
 			if (strpos($_GET["_redirectUrl"], '/DownloadFile/') !== FALSE) {
@@ -301,7 +304,6 @@ class Proxy extends BaseController {
 				
 			} else if (strpos($_GET["_redirectUrl"], '/UploadFile/') !== FALSE) {
 				// Create new URL
-// 				$url = "/files/form/api/myuserlibrary/feed";
 				$url = "/files/basic/api/myuserlibrary/feed";
 				
 				// Update request

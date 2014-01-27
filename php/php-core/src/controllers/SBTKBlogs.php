@@ -23,7 +23,8 @@
  * @author Benjamin Jakobus
  */
 defined('SBT_SDK') OR exit('Access denied.');
-class SBTKBlogs extends BasePluginController {
+class SBTKBlogs extends BasePluginController 
+{
 	/**
 	 * Creates a grid displaying all blogs.
 	 *
@@ -31,7 +32,8 @@ class SBTKBlogs extends BasePluginController {
 	 *
 	 * @author Benjamin Jakobus
 	 */
-	public function createAllBlogsGrid($args) {
+	public function createAllBlogsGrid($args) 
+	{
 		$this->loadView('social/blogs/all-blogs-grid', array());
 	}
 	
@@ -42,7 +44,8 @@ class SBTKBlogs extends BasePluginController {
 	 *
 	 * @author Benjamin Jakobus
 	 */
-	public function createBlogCommentsGrid($args) {
+	public function createBlogCommentsGrid($args) 
+	{
 		$this->loadView('social/blogs/blog-comments-grid', array());
 	}
 	
@@ -53,7 +56,8 @@ class SBTKBlogs extends BasePluginController {
 	 *
 	 * @author Benjamin Jakobus
 	 */
-	public function createMyBlogsGrid($args) {
+	public function createMyBlogsGrid($args) 
+	{
 		$this->loadView('social/blogs/my-blogs-grid', array());
 	}
 	
@@ -64,7 +68,8 @@ class SBTKBlogs extends BasePluginController {
 	 *
 	 * @author Benjamin Jakobus
 	 */
-	public function createFeaturedPostsGrid($args) {
+	public function createFeaturedPostsGrid($args) 
+	{
 		$this->loadView('social/blogs/featured-posts-grid', array());
 	}
 	
@@ -75,7 +80,8 @@ class SBTKBlogs extends BasePluginController {
 	 *
 	 * @author Benjamin Jakobus
 	 */
-	public function createFeaturedBlogsGrid($args) {
+	public function createFeaturedBlogsGrid($args) 
+	{
 		$this->loadView('social/blogs/featured-blogs-grid', array());
 	}
 

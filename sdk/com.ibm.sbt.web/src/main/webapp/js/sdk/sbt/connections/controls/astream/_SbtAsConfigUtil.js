@@ -194,7 +194,6 @@ define(["../../../declare", "../../../config", "../../../url"], function(declare
             }
             if(cfg.eeManager)
                 delete cfg.eeManager;
-            
             if(args.feedUrl.indexOf("anonymous") === -1){
                 this.getUserInfo().then(
                     function(ui) {

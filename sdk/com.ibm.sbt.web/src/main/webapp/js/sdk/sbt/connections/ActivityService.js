@@ -46,7 +46,8 @@ define(
 			var ActivityNodeIdTmpl = "<id>urn:lsid:ibm.com:oa:${getActivityNodeUuid}</id>";
 
 			var extractId = function(id, token) {
-				id = decodeURIComponent(id); // to make sure the Id doesnt contain encoded characters
+				//decode uri component returns "null" for null input
+				if(id) id = decodeURIComponent(id); // to make sure the Id doesnt contain encoded characters
 				if (id) {
 					var index = id.indexOf(token);
 					if (index != -1) {

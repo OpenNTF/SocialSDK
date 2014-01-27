@@ -4,7 +4,7 @@
 
 	<xc:OneUILayout navigationPath="/Home" title="Home">
 		<xp:div style="font-weight:bold;text-align:center;font-size:24pt">
-			<xp:label value="Welcome to XPages Social Enabler"
+			<xp:label value="Welcome to IBM XPages SBT Demo App"
 				id="label5" style="font-size:24pt;font-weight:bold">
 			</xp:label>
 			<xp:br></xp:br>

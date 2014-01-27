@@ -64,6 +64,19 @@
 		<moduleSet>
 			<useAllReactorProjects>true</useAllReactorProjects>
 			<includes>
+				<include>com.ibm.sbt:com.ibm.sbt.php.core:zip:*</include>
+				<include>com.ibm.sbt:com.ibm.sbt.php.moodle:zip:*</include>
+				<include>com.ibm.sbt:com.ibm.sbt.php.wordpress:zip:*</include>
+			</includes>
+			<binaries>
+				<outputDirectory>sbtsdk/redist/php</outputDirectory>
+
+				<unpack>false</unpack>
+			</binaries>
+		</moduleSet>
+		<moduleSet>
+			<useAllReactorProjects>true</useAllReactorProjects>
+			<includes>
 				<include>com.ibm.sbt:sbt.sample</include>
 			</includes>
 			<binaries>
@@ -168,13 +181,23 @@
 			<outputFileNameMapping>com.ibm.sbt.domino.updatesite.zip</outputFileNameMapping>
 
 		</dependencySet>
-		
+
 		<dependencySet>
 			<includes>
 				<include>com.ibm.sbt:com.ibm.sbt.web:war</include>
 			</includes>
 			<outputDirectory>sbtsdk/redist/war</outputDirectory>
 			<outputFileNameMapping>sbt.war</outputFileNameMapping>
+
+		</dependencySet>
+		<dependencySet>
+			<includes>
+				<include>com.ibm.sbt:com.ibm.sbt.php.core:zip</include>
+				<include>com.ibm.sbt:com.ibm.sbt.php.moodle:zip</include>
+				<include>com.ibm.sbt:com.ibm.sbt.php.wordpress:zip</include>
+			</includes>
+			<outputDirectory>sbtsdk/redist/php</outputDirectory>
+
 
 		</dependencySet>
 	</dependencySets>
@@ -231,194 +254,6 @@
 			</includes>
 		</fileSet>
 
-
-		<fileSet>
-			<directory>../commons/</directory>
-			<outputDirectory>sbtsdk/source</outputDirectory>
-			<excludes>
-				<exclude>**/bin/</exclude>
-				<exclude>**/target/</exclude>
-				<exclude>**/pom.xml</exclude>
-				<exclude>**/.jazzignore</exclude>
-				<exclude>**/.apt_generated</exclude>
-				<exclude>**/.factorypath</exclude>
-				<exclude>/.project</exclude>
-			</excludes>
-			<includes>
-				<include>**/*.*</include>
-			</includes>
-		</fileSet>
-		<fileSet>
-			<directory>../deps/</directory>
-			<outputDirectory>sbtsdk/source</outputDirectory>
-			<excludes>
-				<exclude>**/bin/</exclude>
-				<exclude>**/target/</exclude>
-				<exclude>**/pom.xml</exclude>
-				<exclude>**/.jazzignore</exclude>
-				<exclude>**/.apt_generated</exclude>
-				<exclude>**/.factorypath</exclude>
-				<exclude>/.project</exclude>
-
-			</excludes>
-			<includes>
-				<include>**/*.*</include>
-			</includes>
-		</fileSet>
-		<fileSet>
-			<directory>../sdk/</directory>
-			<outputDirectory>sbtsdk/source</outputDirectory>
-			<excludes>
-				<exclude>**/bin/</exclude>
-				<exclude>**/target/</exclude>
-				<exclude>**/pom.xml</exclude>
-				<exclude>**/.jazzignore</exclude>
-				<exclude>**/.apt_generated</exclude>
-				<exclude>**/.factorypath</exclude>
-				<exclude>/.project</exclude>
-
-			</excludes>
-			<includes>
-				<include>**/*.*</include>
-			</includes>
-		</fileSet>
-		<fileSet>
-			<directory>../domino/</directory>
-			<outputDirectory>sbtsdk/source</outputDirectory>
-			<excludes>
-				<exclude>**/bin/</exclude>
-				<exclude>**/target/</exclude>
-				<exclude>**/pom.xml</exclude>
-				<exclude>**/.jazzignore</exclude>
-				<exclude>**/.apt_generated</exclude>
-				<exclude>**/.factorypath</exclude>
-				<exclude>/.project</exclude>
-
-			</excludes>
-			<includes>
-				<include>**/*.*</include>
-			</includes>
-		</fileSet>
-		<fileSet>
-			<directory>../libraries/</directory>
-			<outputDirectory>sbtsdk/source</outputDirectory>
-			<excludes>
-				<exclude>**/bin/</exclude>
-				<exclude>**/target/</exclude>
-				<exclude>**/pom.xml</exclude>
-				<exclude>**/.jazzignore</exclude>
-				<exclude>**/.apt_generated</exclude>
-				<exclude>**/.factorypath</exclude>
-				<exclude>/.project</exclude>
-
-			</excludes>
-			<includes>
-				<include>**/*.*</include>
-			</includes>
-		</fileSet>
-
-		<fileSet>
-			<directory>../domino/</directory>
-			<outputDirectory>sbtsdk/source</outputDirectory>
-			<excludes>
-				<exclude>**/bin/</exclude>
-				<exclude>**/target/</exclude>
-				<exclude>**/pom.xml</exclude>
-				<exclude>**/.jazzignore</exclude>
-				<exclude>**/.apt_generated</exclude>
-				<exclude>**/.factorypath</exclude>
-				<exclude>/.project</exclude>
-
-			</excludes>
-			<includes>
-				<include>**/*.*</include>
-			</includes>
-		</fileSet>
-
-
-		<fileSet>
-			<directory>../samples/com.ibm.samples.commons</directory>
-			<outputDirectory>sbtsdk/source/com.ibm.samples.commons</outputDirectory>
-			<excludes>
-				<exclude>**/bin/</exclude>
-				<exclude>**/target/</exclude>
-				<exclude>**/pom.xml</exclude>
-				<exclude>**/.jazzignore</exclude>
-				<exclude>**/.apt_generated</exclude>
-				<exclude>**/.factorypath</exclude>
-			</excludes>
-			<includes>
-				<include>**/*.*</include>
-			</includes>
-		</fileSet>
-
-		<fileSet>
-			<directory>../samples/j2ee/acme</directory>
-			<outputDirectory>sbtsdk/source</outputDirectory>
-			<excludes>
-				<exclude>**/bin/</exclude>
-				<exclude>**/target/</exclude>
-				<exclude>**/pom.xml</exclude>
-				<exclude>**/.jazzignore</exclude>
-				<exclude>**/.apt_generated</exclude>
-				<exclude>**/.factorypath</exclude>
-				<exclude>/.project</exclude>
-
-			</excludes>
-			<includes>
-				<include>**/*.*</include>
-			</includes>
-		</fileSet>
-		<fileSet>
-			<directory>../samples/j2ee/snippets</directory>
-			<outputDirectory>sbtsdk/source</outputDirectory>
-			<excludes>
-				<exclude>**/bin/</exclude>
-				<exclude>**/target/</exclude>
-				<exclude>**/pom.xml</exclude>
-				<exclude>**/.jazzignore</exclude>
-				<exclude>**/.apt_generated</exclude>
-				<exclude>**/.factorypath</exclude>
-				<exclude>/.project</exclude>
-			</excludes>
-
-			<includes>
-				<include>**/*.*</include>
-			</includes>
-		</fileSet>
-		<fileSet>
-			<directory>../samples/j2ee/templates</directory>
-			<outputDirectory>sbtsdk/source</outputDirectory>
-			<excludes>
-				<exclude>**/bin/</exclude>
-				<exclude>**/target/</exclude>
-				<exclude>**/pom.xml</exclude>
-				<exclude>**/.jazzignore</exclude>
-				<exclude>**/.apt_generated</exclude>
-				<exclude>**/.factorypath</exclude>
-				<exclude>/.project</exclude>
-			</excludes>
-			<includes>
-				<include>**/*.*</include>
-			</includes>
-		</fileSet>
-		<fileSet>
-			<directory>../samples/java</directory>
-			<outputDirectory>sbtsdk/source</outputDirectory>
-			<excludes>
-				<exclude>**/bin/</exclude>
-				<exclude>**/target/</exclude>
-				<exclude>**/pom.xml</exclude>
-				<exclude>**/.jazzignore</exclude>
-				<exclude>**/.apt_generated</exclude>
-				<exclude>**/.factorypath</exclude>
-				<exclude>/.project</exclude>
-			</excludes>
-			<includes>
-				<include>**/*.*</include>
-			</includes>
-		</fileSet>
-
 		<fileSet>
 			<directory>../samples/scripts</directory>
 			<outputDirectory>sbtsdk/scripts</outputDirectory>
@@ -467,21 +302,7 @@
 				<include>**/*.*</include>
 			</includes>
 		</fileSet>
-		<fileSet>
-			<directory>../samples/domino</directory>
-			<outputDirectory>sbtsdk/source/</outputDirectory>
-			<excludes>
-				<exclude>**/bin/</exclude>
-				<exclude>**/target/</exclude>
-				<exclude>**/pom.xml</exclude>
-				<exclude>**/.jazzignore</exclude>
-				<exclude>**/.apt_generated</exclude>
-				<exclude>**/.factorypath</exclude>
-			</excludes>
-			<includes>
-				<include>**/*.*</include>
-			</includes>
-		</fileSet>
+
 
 
 		<fileSet>
@@ -531,6 +352,20 @@
 				<include>version.txt</include>
 			</includes>
 			<outputDirectory>sbtsdk</outputDirectory>
+		</fileSet>
+		<fileSet>
+			<directory>${project.build.directory}/sources</directory>
+			<includes>
+				<include>*.zip</include>
+			</includes>
+			<outputDirectory>sbtsdk/sources</outputDirectory>
+		</fileSet>
+		<fileSet>
+			<directory>${project.build.directory}/sources/SocialSDK-iOS/library</directory>
+			<includes>
+				<include>**/*</include>
+			</includes>
+			<outputDirectory>sbtsdk/redist/ios</outputDirectory>
 		</fileSet>
 	</fileSets>
 </assembly>

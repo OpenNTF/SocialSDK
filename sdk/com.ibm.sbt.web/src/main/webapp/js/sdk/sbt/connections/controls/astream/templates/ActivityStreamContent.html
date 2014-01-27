@@ -8,14 +8,16 @@
             };
             asc = {
                 useOAuth : false
-            }; // don't use oauth yet...
+            }; 
         </script>
         <link rel="stylesheet" type="text/css" title="Style" href="${connectionsUrl}/${connections}/resources/web/_style?include=com.ibm.lconn.core.styles.oneui3/base/package3.css~com.ibm.lconn.core.styles.oneui3/sprites.css"></link>
         <link rel="stylesheet" type="text/css" title="Style" href="${connectionsUrl}/${connections}/resources/web/_lconntheme/default.css?version=oneui3&rtl=false"></link>
         <link rel="stylesheet" type="text/css" title="Style" href="${cssUrl}"></link>
         
         <script type="text/javascript" src="${proxyUrl}/${connections}/resources/web/_js/?include=dojo.dojo.js"></script>
-        <script defer="defer">
+        <script>
+        dojo.locale = "en";
+        dojo.config.locale="en";
         var secure = window.location.href.indexOf("https") == 0 ? true : false;
         // This mixin is used to provide the urls for the services that will be accessed, in particular opensocial.
         // This approach is ok because eventually our sdk will know these urls (it needs to to correctly make api calls).
@@ -147,7 +149,7 @@
             }
           });
         </script>
-        <script type="text/javascript" src="${proxyUrl}/${connections}/resources/web/_js/?include=com.ibm.social.as.ActivityStream.js~com.ibm.lconn.personcard.legacy.js~com.ibm.social.as.gadget.ActivityStreamConfigUtil.js${connectionsASNav}~com.ibm.social.as.util.hashtag.HashtagUtil.js~com.ibm.social.as.gadget.refresh.RefreshButton.js~lconn.core.util.dojoPatches.js~com.ibm.social.as.ee.EEManager.js~lconn.homepage.as.extension.SavedActionExtension.js~com.ibm.social.as.gadget.refresh.RefreshButtonExtension.js~com.ibm.social.as.lconn.extension.MicroblogDeletionExtension.js~com.ibm.social.as.extension.CommentExtension.js~lconn.core.filesutil.js~lconn.news.microblogging.sharebox.InputForm.js~com.ibm.social.as.extension.DirtyCheckExtension.js~com.ibm.social.as.lconn.extension.ShareboxStatusUpdateExtension.js~com.ibm.social.as.lconn.extension.DisableDynamicLoadExtension.js~lconn.homepage.as.extension.SavedViewExtension.js~lconn.homepage.as.extension.ActivityReplyExtension.js~lconn.homepage.as.extension.NetworkInviteExtension.js~lconn.homepage.as.extension.ActionRequiredViewExtension.js~com.ibm.social.as.lconn.extension.GadgetPreloaderExtension.js&exclude=lconn.core.config.services.js~dojo.dojo.js"></script>
+        <script type="text/javascript" src="${proxyUrl}/${connections}/resources/web/_js/?include=com.ibm.social.as.ActivityStream.js~com.ibm.lconn.personcard.legacy.js~com.ibm.social.as.gadget.ActivityStreamConfigUtil.js${connectionsASNav}~com.ibm.social.as.util.hashtag.HashtagUtil.js~com.ibm.social.as.gadget.refresh.RefreshButton.js~lconn.core.util.dojoPatches.js~com.ibm.social.as.ee.EEManager.js~lconn.homepage.as.extension.SavedActionExtension.js~com.ibm.social.as.gadget.refresh.RefreshButtonExtension.js~com.ibm.social.as.lconn.extension.MicroblogDeletionExtension.js~com.ibm.social.as.extension.CommentExtension.js~lconn.core.filesutil.js~lconn.news.microblogging.sharebox.InputForm.js~com.ibm.social.as.extension.DirtyCheckExtension.js~com.ibm.social.as.lconn.extension.ShareboxStatusUpdateExtension.js~com.ibm.social.as.lconn.extension.DisableDynamicLoadExtension.js~lconn.homepage.as.extension.SavedViewExtension.js~lconn.homepage.as.extension.ActivityReplyExtension.js~lconn.homepage.as.extension.NetworkInviteExtension.js~lconn.homepage.as.extension.ActionRequiredViewExtension.js~com.ibm.social.as.lconn.extension.GadgetPreloaderExtension.js&exclude=lconn.core.config.services.js~dojo.dojo.js&lang=en"></script>
         <script type="text/javascript" src="${libraryUrl}"></script>
     </head>
     <body class="lotusui30_body lotusui30_fonts lotusui30">
@@ -155,7 +157,7 @@
             <div id="activityStream"></div>
             <div id="sideNav"></div>
             <div id="inputForm"></div>
-            <script defer="defer">
+            <script>
             require(["sbt/config", "sbt/connections/controls/astream/_ActivityStream"], function(config, _ActivityStream){
                 config.Properties = ${sbtProps};
                 new _ActivityStream(${args});

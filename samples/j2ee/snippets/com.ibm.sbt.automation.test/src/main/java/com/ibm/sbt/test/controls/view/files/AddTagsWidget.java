@@ -33,6 +33,11 @@ public class AddTagsWidget extends BaseFilesTest {
 		setAuthType(AuthType.AUTO_DETECT);
 	}
 	
+	@Override
+    protected boolean isEnvironmentValid() {
+        return super.isEnvironmentValid() && !environment.isLibrary("jquery");
+    }
+	
 	@Test
 	public void testTagFile() {
 		createFile();

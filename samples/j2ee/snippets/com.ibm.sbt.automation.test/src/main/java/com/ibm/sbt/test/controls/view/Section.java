@@ -4,11 +4,11 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
 
-import com.ibm.sbt.automation.core.test.BaseApiTest;
+import com.ibm.sbt.automation.core.test.BaseViewTest;
 import com.ibm.sbt.automation.core.test.pageobjects.BaseResultPage;
 import com.ibm.sbt.automation.core.test.pageobjects.ResultPage;
 
-public class Section extends BaseApiTest {
+public class Section extends BaseViewTest {
 
 	static String SNIPPET_ID = "Toolkit_Views_Section";
 

@@ -9,6 +9,7 @@
 		<finalAssemblyFolder>
 			${workingDir}/kit
 		</finalAssemblyFolder>
+		<git.revision>master</git.revision>
 	</properties>
 
 
@@ -37,26 +38,44 @@
 
 		</resources>
 		<plugins>
-	<plugin>
-		<groupId>org.apache.maven.plugins</groupId>
-		<artifactId>maven-resources-plugin</artifactId>
-		<version>2.6</version>
-		<executions>
-		<execution>
-            <id>generate-version</id>
-            <phase>generate-resources</phase>
-            <goals>
-              <goal>resources</goal>
-            </goals>
-            <inherited>false</inherited>
-          </execution>
-		</executions>
-	</plugin>
-
-	<plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+				<executions>
+					<execution>
+						<id>generate-version</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>resources</goal>
+						</goals>
+						<inherited>false</inherited>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>ru.concerteza.buildnumber</groupId>
+				<artifactId>maven-jgit-buildnumber-plugin</artifactId>
+				<version>1.2.7</version>
+				<executions>
+					<execution>
+						<id>git-buildnumber</id>
+						<goals>
+							<goal>extract-buildnumber</goal>
+						</goals>
+						<phase>validate</phase>
+						<configuration>
+						</configuration>
+					</execution>
+				</executions>
+				<configuration>
+					<runOnlyAtExecutionRoot>false</runOnlyAtExecutionRoot>
+				</configuration>
+			</plugin>
+			<plugin>
 				<groupId>com.googlecode.maven-download-plugin</groupId>
 				<artifactId>maven-download-plugin</artifactId>
-				<version>1.0.0</version>
+				<version>1.1.0</version>
 				<executions>
 					<execution>
 						<id>download-tomcat-7</id>
@@ -71,7 +90,42 @@
 							<md5>3a1fd1825202631e6c43461fa018c4f6</md5>
 						</configuration>
 					</execution>
+					<execution>
+						<id>download-sources</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>wget</goal>
+						</goals>
+						<configuration>
+							<url>https://github.com/OpenNTF/SocialSDK/archive/${git.revision}.zip</url>
+							<unpack>true</unpack>
+							<skipCache>true</skipCache>
+							<outputFileName>SocialSDK.zip</outputFileName>
+							<outputDirectory>${project.build.directory}/sources/SocialSDK</outputDirectory>
+						</configuration>
+					</execution>
+					<execution>
+						<id>download-sources-ios</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>wget</goal>
+						</goals>
+						<configuration>
+							<url>https://github.com/OpenNTF/SocialSDK-iOS/archive/master.zip</url>
+							<unpack>true</unpack>
+							<skipCache>true</skipCache>
+							<outputFileName>SocialSDK-iOS.zip</outputFileName>
+							<outputDirectory>${project.build.directory}/sources/SocialSDK-iOS</outputDirectory>
+						</configuration>
+					</execution>
 				</executions>
+				<dependencies>
+				<dependency>
+					<groupId>org.codehaus.plexus</groupId>
+					<artifactId>plexus-archiver</artifactId>
+					<version>2.4.4</version>
+				</dependency>
+				</dependencies>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -245,7 +299,20 @@
 				<version>1.7</version>
 				<executions>
 					<execution>
-					<id>tomcat</id>
+						<id>removedownloads</id>
+						<phase>generate-sources</phase>
+						<configuration>
+							<target>
+								<!-- Remove Tomcat -->
+								<delete dir="${project.build.directory}/tomcat/unzip" />
+								<!-- Remove Other Sources -->
+								<delete dir="${project.build.directory}/sources" />
+
+							</target>
+						</configuration>
+					</execution>
+					<execution>
+						<id>tomcat</id>
 						<phase>package</phase>
 						<configuration>
 							<target>
@@ -275,11 +342,43 @@
 									</fileset>
 								</copy>
 
+								<path id="source_folder_name">
+									<dirset dir="${project.build.directory}/sources/SocialSDK">
+										<include name="SocialSDK*" />
+									</dirset>
+								</path>
+								<property name="psource_folder_name" refid="source_folder_name" />
+								<move todir="${project.build.directory}/sources/SocialSDK">
+									<fileset dir="${psource_folder_name}">
+										<include name="**/*" />
+									</fileset>
+								</move>
+								<delete dir="${psource_folder_name}" />
+
+								<path id="source_folder_name_ios">
+									<dirset dir="${project.build.directory}/sources/SocialSDK-iOS">
+										<include name="SocialSDK*" />
+									</dirset>
+								</path>
+								<property name="psource_folder_name_ios" refid="source_folder_name_ios" />
+								<move todir="${project.build.directory}/sources/SocialSDK-iOS">
+									<fileset dir="${psource_folder_name_ios}">
+										<include name="**/*" />
+									</fileset>
+								</move>
+								<delete dir="${psource_folder_name_ios}" />
+
+
 								<zip basedir="${project.build.directory}/tomcat/unzip"
 									destfile="${project.build.directory}/tomcat/apache-tomcat-7.0.30-sbt.zip"
 									compress="true" />
-								<delete dir="${project.build.directory}/tomcat/unzip" />
 
+								<zip basedir="${project.build.directory}/sources/SocialSDK"
+									destfile="${project.build.directory}/sources/SocialSDK.zip"
+									compress="true" />
+								<zip basedir="${project.build.directory}/sources/SocialSDK-iOS"
+									destfile="${project.build.directory}/sources/SocialSDK-iOS.zip"
+									compress="true" />
 							</target>
 						</configuration>
 						<goals>
@@ -415,6 +514,31 @@
 			<version>1.0.0-SNAPSHOT</version>
 			<type>war</type>
 		</dependency>
+
+		<dependency>
+			<groupId>com.ibm.sbt</groupId>
+			<artifactId>com.ibm.sbt.php.wordpress</artifactId>
+
+			<version>1.0.0-SNAPSHOT</version>
+			<type>zip</type>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm.sbt</groupId>
+			<artifactId>com.ibm.sbt.php.core</artifactId>
+
+			<version>1.0.0-SNAPSHOT</version>
+			<type>zip</type>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm.sbt</groupId>
+			<artifactId>com.ibm.sbt.php.moodle</artifactId>
+
+			<version>1.0.0-SNAPSHOT</version>
+			<type>zip</type>
+		</dependency>
+
+
+
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.commons</artifactId>

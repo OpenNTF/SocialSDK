@@ -13,7 +13,11 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-define(["../../../declare", "../../../url", "../../../config", "../../../util", "../../../lang", "../../../connections/controls/WidgetWrapper", "../../../text!../../../connections/controls/astream/templates/ActivityStreamContent.html"], function(declare, Url, config, util, lang, WidgetWrapper, defaultTemplate) {
+define(["../../../declare", "../../../lang", "../../../url", 
+        "../../../config", "../../../util", "../../../connections/controls/WidgetWrapper", 
+        "../../../text!../../../connections/controls/astream/templates/ActivityStreamContent.html",
+        "../../../i18n!sbt/connections/controls/astream/nls/ActivityStreamWrapper"], 
+        function(declare, lang, Url, config, util, WidgetWrapper, defaultTemplate, nls) {
 
     /**
      * The wrapper for the ActivityStream.
@@ -141,6 +145,17 @@ define(["../../../declare", "../../../url", "../../../config", "../../../util", 
             if(args.sideNavClassName){
                 this.sideNavClassName = args.sideNavClassName;
             }
+            if(!this.isSupportedBrowser()){
+                this.defaultTemplate = nls.IE9Unsupported;
+            }
+        },
+        
+        isSupportedBrowser: function(){
+            if(lang.isIE() < 10){ // Don't load the stream for IE < 10
+                return false;
+            }
+            
+            return true;
         }
         
     });

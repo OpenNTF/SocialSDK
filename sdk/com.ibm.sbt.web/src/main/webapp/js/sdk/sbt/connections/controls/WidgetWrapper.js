@@ -132,7 +132,7 @@ define(["../../declare", "../../config", "../../lang", "../../widget/_TemplatedW
                     });
                 }
                 else{
-                    this.defaultTemplate = nls.root.defaultTemplate;
+                    this.defaultTemplate = nls.unsupportedBrowser;
                 }
                 
                 iframe.open();

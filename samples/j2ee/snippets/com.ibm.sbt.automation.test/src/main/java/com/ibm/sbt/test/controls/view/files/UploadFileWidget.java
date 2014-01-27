@@ -15,7 +15,6 @@
  */
 package com.ibm.sbt.test.controls.view.files;
 
-import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 
@@ -28,7 +27,6 @@ import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.automation.core.test.connections.BaseFilesTest;
 import com.ibm.sbt.automation.core.test.pageobjects.BaseResultPage;
 import com.ibm.sbt.automation.core.test.pageobjects.ResultPage;
-import com.ibm.sbt.services.client.connections.files.File;
 
 public class UploadFileWidget extends BaseFilesTest {
 	
@@ -37,6 +35,11 @@ public class UploadFileWidget extends BaseFilesTest {
 	public UploadFileWidget() {
 		setAuthType(AuthType.AUTO_DETECT);
 	}
+	
+	@Override
+    protected boolean isEnvironmentValid() {
+        return super.isEnvironmentValid() && !environment.isLibrary("jquery");
+    }
 	
 	@Test
 	public void testUploadFile() {

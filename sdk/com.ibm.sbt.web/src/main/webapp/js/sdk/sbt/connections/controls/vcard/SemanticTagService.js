@@ -18,100 +18,150 @@
  * 
  */
 
-define([ "../../../declare", "../../../Endpoint", "dojo/_base/config", "sbt/config"], function(declare, Endpoint, dojoConfig, config) {
+define([ "../../../declare", "../../../Endpoint", "../../../config", "../../../log"], 
+        function(declare, Endpoint, config, log) {
 
+    
     /**
+     * Configuration Object.
+     *
+     * isBidiRTL - Whether or not to enable bidirectional language support.
+     *
+     * @property SemTagSvcConfig
+     * @type Object
+     */
+    var SemTagSvcConfig = {
+        isBidiRTL: true
+    };
+    
+    /**  
      * The class which handles loading of the semantic tag service for connections, this is needed for displaying vcards.
-     * 
-     * @class sbt.controls.vcard.connections.SemanticTagService
+     *
+     * @class sbt.controls.vcard.connections.SemanticTagService  
      */
     var SemanticTagService = declare(null, {
     });
 
     /**
-     * Whether or not to enable bidirectional language support.
+     * Load the Semantic tag service to parse any cards on the page.
      * 
-     * @property SemTagSvcConfig
-     * @type Object
+     * @param {Object} [options]
+     *   @params {Function} [options.error]
+     *     An optional error callback, to be fired 
+     *     in the event of a problem loading the 
+     *     SemanticTagService from Connections.
+     *   @params {Boolean} [options.inclCss]
+     *     If true include's the card's css,
+     *     otherwise false.
+     *   @params {String} [options.endpoint]
+     *     The name of the endpoint to be 
+     *     used when fetching the
+     *     SemanticTagService.
      */
-    var SemTagSvcConfig = { 
-        isBidiRTL: true
-    };
-
-    /**
-     * Do not support loading semantic tag service from multiple different locations.
-     * 
-     * @method SemanticTagService.loadSemanticTagService
-     * 
-     * @param {Object} [args] Can contain an error function.
-     *     @param {Function} [args.error]
-     *     
-     */
-    SemanticTagService.loadSemanticTagService = function(args) {
-        if (SemTagSvcConfig.error) {
-            if (args.error) {
-                args.error(SemTagSvcConfig.error);
-            }
-            return;
-        }
-
-        // load the semantic tag service (only once!!!)
+    SemanticTagService.loadSemanticTagService = function(options){
+        // Only load the service once.
         if (SemTagSvcConfig.loading || SemTagSvcConfig.loaded) {
             return;
         }
+        
+        if (SemTagSvcConfig.error) {
+            if (errBack) {
+                errBack(SemTagSvcConfig.error);
+            }
+            return;
+        }
+        //Set up defaults.
+        var inclDojo = false; 
+        var inclCss = false;
+        var isBidiRTL = false;
+        var endpointName = "connections";
+        var errBack = null;
+        var missingDojoError = function missingDojoError(){
+            log.error("SemanticTagService.loadSemanticTagService:" +
+            " Dojo is not available, set arg inclDojo : true to load Dojo from Connections.");
+            if(errBack){
+                errBack(SemTagSvcConfig.error);
+            }
+            return;
+        };
+        
+        if(options){
+            errBack = options.error || errBack;
+            isBidiRTL = options.isBidiRTL || isBidiRTL;
+            endpointName = options.endpoint || endpointName;
+            inclCss = options.inclCss || inclCss;
+            inclDojo = options.inclDojo || inclDojo;
+            //we need dojo from somewhere.
+            if(!dojo){
+                if(!options.inclDojo){
+                    missingDojoError();
+                }else{
+                    inclDojo = true;
+                }
+            }
+        }else{
+            if(!dojo){
+                missingDojoError();
+            }
+        }
+        // We'll be loading the card now.
         SemTagSvcConfig.loading = true;
+        var endpoint = config.findEndpoint(endpointName);
+        var proxy = endpoint.getProxyUrl();
         
-        var inclDojo = false;
-        if (args && args.inclDojo) {
-            inclDojo = args.inclDojo;
-        }
+        window.SemTagSvcConfig = window.SemTagSvcConfig || {};
+        window.SemTagSvcConfig.baseUrl = proxy;
+        window.SemTagSvcConfig.proxyURL = proxy;
         
-        var endpoint = config.findEndpoint("connections");
-        if (args && args.endpoint) {
-            endpoint = args.endpoint;
-        }
-        var proxy = endpoint.proxy.proxyUrl + "/" + endpoint.proxyPath;
-        if (!SemTagSvcConfig.baseUrl) {
-            SemTagSvcConfig.baseUrl = endpoint.baseUrl; 
-            SemTagSvcConfig.proxyURL = proxy;
-        }
-
-        var serviceUrl = "/profiles/ibm_semanticTagServlet/javascript/semanticTagService.js?inclDojo=" + inclDojo;
+        var serviceUrl = "/profiles/ibm_semanticTagServlet/javascript/semanticTagService.js";
         
         var locale = "en";
-        if (dojoConfig) {
-        	dojoConfig.proxy = proxy;
-        	locale = dojoConfig.locale;
+        dojo.config.proxy = proxy;
+        locale = dojo.config.locale;
+        
+        if(inclCss){
+            window.SemTagSvcConfig.loadCssFiles = inclCss;
+            var pathToResources = "connections";
+            pathToResources = endpoint.serviceMappings["pathToResources"] || pathToResources;
+            
+            window.SemTagSvcConfig.resourcesSvc = endpoint.baseUrl + "/" + pathToResources + "/resources"; //resourcesSvc is used when loading css. 
+            //Load straight from connections so that relative css urls work.
         }
-        endpoint.xhrGet({
-            serviceUrl : serviceUrl,
+        
+        var requestArgs = {
+            method : "GET",
             handleAs : "text",
-            headers: {
-                "Accept-Language": locale + ",en;q=0.8" // set request locale to dojo locale, fall back to english if unavailable.
+            query : {
+                'inclDojo': inclDojo
             },
-            load : function(response) {
+            headers: {
+                "Accept-Language": locale + ",en;q=0.8"
+            }
+        };
+        
+        endpoint.request(serviceUrl, requestArgs).then(
+            function(semTagScript){
                 SemTagSvcConfig.loading = false;
                 try {
                     var re = new RegExp(endpoint.baseUrl, "g");
-                    var _response = response.replace(re, proxy);
-                    eval(_response);
+                    var _semTagScript = semTagScript.replace(re, proxy);
+                    eval(_semTagScript);
                     SemTagSvcConfig.loaded = true;
                 } catch (error) {
                     SemTagSvcConfig.error = error;
-                    if (args && args.error) {
-                        args.error(error);
+                    if (errBack) {
+                        errBack(error);
                     }
                 }
             },
-            error : function(error) {
+            function(error){
                 SemTagSvcConfig.loading = false;
                 SemTagSvcConfig.error = error;
-                if (args && args.error) {
-                    args.error(error);
+                if (errBack) {
+                    errBack(error);
                 }
             }
-        });
-        
+        );
     };
     
     return SemanticTagService;

@@ -629,6 +629,10 @@ var Endpoint = declare(null, {
         } else {
             return error;
         }
+    },
+    
+    getProxyUrl: function(){
+        return this.proxy.proxyUrl + "/" + this.proxyPath;
     }
 	
 });

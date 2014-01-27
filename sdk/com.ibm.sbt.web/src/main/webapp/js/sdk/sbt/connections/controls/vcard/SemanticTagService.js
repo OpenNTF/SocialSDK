@@ -18,7 +18,7 @@
  * 
  */
 
-define([ "../../../declare", "../../../Endpoint", "sbt/config", "../../../log"], 
+define([ "../../../declare", "../../../Endpoint", "../../../config", "../../../log"], 
         function(declare, Endpoint, config, log) {
 
     
@@ -76,7 +76,7 @@ define([ "../../../declare", "../../../Endpoint", "sbt/config", "../../../log"],
         var isBidiRTL = false;
         var endpointName = "connections";
         var errBack = null;
-        var missingDojoError = function(){
+        var missingDojoError = function missingDojoError(){
             log.error("SemanticTagService.loadSemanticTagService:" +
             " Dojo is not available, set arg inclDojo : true to load Dojo from Connections.");
             if(errBack){
@@ -107,7 +107,7 @@ define([ "../../../declare", "../../../Endpoint", "sbt/config", "../../../log"],
         // We'll be loading the card now.
         SemTagSvcConfig.loading = true;
         var endpoint = config.findEndpoint(endpointName);
-        var proxy = endpoint.proxy.proxyUrl + "/" + endpoint.proxyPath;
+        var proxy = endpoint.getProxyUrl();
         
         window.SemTagSvcConfig = window.SemTagSvcConfig || {};
         window.SemTagSvcConfig.baseUrl = proxy;

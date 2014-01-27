@@ -19,8 +19,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.List;
 
-import org.junit.Rule;
 import org.junit.After;
+import org.junit.Rule;
 import org.junit.rules.TestName;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

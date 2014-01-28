@@ -48,6 +48,37 @@ define(["../../../declare",
         encodeHtml: true,
         
         /**
+         * The uuid of the community.
+         * 
+         * @property uuid 
+         * @type String
+         * @default ""
+         */
+        uuid: "",
+        
+        /**
+         *  A text string that corresponds to the widgetDefId of the widget that has been added to the community. 
+         *  This text string is used to highlight the menu item in the navigation bar. 
+         *  This argument is optional, and must only be provided for iWidgets that are integrated into Communities. 
+         *  The widget ID is defined by the iWidget developer, and you need to request it from your administrator or the iWidget developer.
+         *  
+         * @property selectedWidgetId 
+         * @type String
+         * @default ""
+         */
+        selectedWidgetId: "",
+        
+        
+        /**
+         * The name of the community.
+         * 
+         * @property name 
+         * @type String
+         * @default ""
+         */
+        name: "",
+        
+        /**
          * The constructor
          * 
          * @method constructor

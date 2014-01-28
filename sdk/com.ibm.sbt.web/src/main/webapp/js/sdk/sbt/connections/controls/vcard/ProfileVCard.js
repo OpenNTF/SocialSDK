@@ -53,6 +53,7 @@ define(["../../../declare",
          * @default "javascript:void(0);"
          */
         href: "javascript:void(0);",
+        
         /**
          * The person's name to be displayed with this vcard.
          * 
@@ -61,6 +62,15 @@ define(["../../../declare",
          * @default ""
          */
         userName: "",
+        
+        /**
+         * The connections profile id. This is the sole determinant of which vcard will be displayed.
+         * 
+         * @property userId
+         * @type String
+         * @default ""
+         */
+        userId: "",
         
         /**
          * A url flag specifying whether or not connections should include the css when loading the Semantic Tag Service.

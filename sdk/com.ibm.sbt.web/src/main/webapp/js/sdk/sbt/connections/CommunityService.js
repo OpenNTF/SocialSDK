@@ -1350,7 +1350,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         /**
          * Retrieve the member entry to view a member who belongs to a given community.
          * 
-         * @method getMembers
+         * @method getMember
          * @param {Object} [args] Object representing various parameters
          * that can be passed to get a feed of members of a
          * community. The parameters must be exactly as they are

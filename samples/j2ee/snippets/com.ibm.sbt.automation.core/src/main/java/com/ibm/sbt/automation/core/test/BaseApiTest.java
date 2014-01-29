@@ -19,6 +19,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.After;
 import org.junit.rules.TestName;
@@ -60,17 +61,18 @@ public class BaseApiTest extends BaseTest {
     private Context context;
     private String snippetId;
     
-    public BaseApiTest() {
-        RuntimeFactory runtimeFactory = new RuntimeFactoryStandalone() {
-            @Override
-            public Context initContext(Application application, Object request, Object response) {
-                Context context = super.initContext(application, request, response);
-                TestEnvironmentFactory.getEnvironment().decorateContext(context);
-                return context;
-            }
-        };
-        application = runtimeFactory.initApplication(null);
-        createContext();
+    @Before
+    public void setupTest() {
+    	 RuntimeFactory runtimeFactory = new RuntimeFactoryStandalone() {
+             @Override
+             public Context initContext(Application application, Object request, Object response) {
+                 Context context = super.initContext(application, request, response);
+                 TestEnvironmentFactory.getEnvironment().decorateContext(context);
+                 return context;
+             }
+         };
+         application = runtimeFactory.initApplication(null);
+         createContext();
     }
 
     /**
@@ -108,11 +110,7 @@ public class BaseApiTest extends BaseTest {
     @After
     public void destroyContext() {
         if (context != null) {
-        	try {
-        		Context.destroy(context);
-        	} catch (IllegalStateException ise) {
-        		// can ignore this
-        	}
+            Context.destroy(context);
             context = null;
         }
     }
@@ -138,7 +136,7 @@ public class BaseApiTest extends BaseTest {
      * @param snippetId
      * @return
      */
-    protected JavaScriptPreviewPage executeSnippet(String snippetId) {
+    public JavaScriptPreviewPage executeSnippet(String snippetId) {
         return executeSnippet(snippetId, 0);
     }
     
@@ -146,7 +144,7 @@ public class BaseApiTest extends BaseTest {
      * @param snippetId
      * @return
      */
-    protected JavaScriptPreviewPage executeSnippet(String snippetId, long delay) {
+    public JavaScriptPreviewPage executeSnippet(String snippetId, long delay) {
     	this.snippetId = snippetId;
         ResultPage resultPage = launchSnippet(snippetId, authType, delay);
         JavaScriptPreviewPage previewPage = new JavaScriptPreviewPage(resultPage);

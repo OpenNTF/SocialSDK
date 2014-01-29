@@ -97,7 +97,7 @@
 							<goal>wget</goal>
 						</goals>
 						<configuration>
-							<url>https://github.com/OpenNTF/SocialSDK/archive/${git.revision}.zip</url>
+							<url>https://codeload.github.com/OpenNTF/SocialSDK/zip/${git.revision}</url>
 							<unpack>true</unpack>
 							<skipCache>true</skipCache>
 							<outputFileName>SocialSDK.zip</outputFileName>

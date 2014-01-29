@@ -37,6 +37,7 @@ define(["../../../declare",
          * @type String
          */
         templateString: template,
+        
         /**
          * Whether or not to encode HTML.
          * 
@@ -45,6 +46,7 @@ define(["../../../declare",
          * @default true
          */
         encodeHtml: true,
+        
         /**
          * The href of the vcard link. By default clicking the link does nothing.
          * 
@@ -53,6 +55,7 @@ define(["../../../declare",
          * @default "javascript:void(0);"
          */
         href: "javascript:void(0);",
+        
         /**
          * The person's name to be displayed with this vcard.
          * 
@@ -61,6 +64,16 @@ define(["../../../declare",
          * @default ""
          */
         userName: "",
+        
+        /**
+         * The connections profile id. This is the sole determinant of which vcard will be displayed.
+         * 
+         * @property userId
+         * @type String
+         * @default ""
+         */
+        userId: "",
+        
         /**
          * A url flag specifying whether or not connections should return dojo with the semantic tag service.
          * 
@@ -69,6 +82,7 @@ define(["../../../declare",
          * @default false
          */
         inclDojo: false,
+        
         /**
          * The class of the html error element.
          * 

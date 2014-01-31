@@ -105,14 +105,24 @@ public abstract class BaseTest {
      * the tests need file write permission to the configured path etc)
      */
 	public void takeScreenshot() {
+		System.out.println("taking screenshot");
         try {
+        	System.out.println("testing env");
             if (environment.isTakeScreenshots()) {
+            	
                 WebDriver wd = environment.getCurrentDriver();
-                if (wd instanceof TakesScreenshot) {
+            	System.out.println("testing driver");
+                //if (wd instanceof TakesScreenshot) {
+                	System.out.println("getting file");
                     File snap = ((TakesScreenshot) wd).getScreenshotAs(OutputType.FILE);
                     File dest = new File(environment.getScreenshotsPath(), this.getClass().getName());
-                    FileUtils.copyFileToDirectory(snap, dest);
-                }
+                    System.out.println("copying to file " + dest.getAbsolutePath() +" from " + snap.getAbsolutePath());
+                    String sc = environment.isSmartCloud() ? "smartcloud-":"connections-";
+                    String br = environment.getProperty(TestEnvironment.PROP_BROWSER) == null?"firefox":environment.getProperty(TestEnvironment.PROP_BROWSER);
+                    String js = environment.getProperty(TestEnvironment.PROP_JAVASCRIPT_LIB) == null? "dojo180" : environment.getProperty(TestEnvironment.PROP_JAVASCRIPT_LIB);
+                    dest = new File(dest, sc + br +"-"+js+"-" +snap.getName());
+                    FileUtils.copyFile(snap, dest);
+                //}
             }
         } catch (Throwable t) {
             System.err.println("Unable to take snapshot because: " + t.getMessage());

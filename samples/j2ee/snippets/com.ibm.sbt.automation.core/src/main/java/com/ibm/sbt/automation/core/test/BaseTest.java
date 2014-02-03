@@ -106,24 +106,33 @@ public abstract class BaseTest {
      */
 	public void takeScreenshot() {
 		System.out.println("taking screenshot");
+		File snap = null;
         try {
             if (environment.isTakeScreenshots()) {
             	
                 WebDriver wd = environment.getCurrentDriver();
-                    File snap = ((TakesScreenshot) wd).getScreenshotAs(OutputType.FILE);
+                    snap = ((TakesScreenshot) wd).getScreenshotAs(OutputType.FILE);
                     File dest = new File(environment.getScreenshotsPath(), this.getClass().getName());
                     String sc = environment.isSmartCloud() ? "smartcloud-":"connections-";
                     String br = environment.getProperty(TestEnvironment.PROP_BROWSER) == null?"firefox":environment.getProperty(TestEnvironment.PROP_BROWSER);
                     String js = environment.getProperty(TestEnvironment.PROP_JAVASCRIPT_LIB) == null? "dojo180" : environment.getProperty(TestEnvironment.PROP_JAVASCRIPT_LIB);
                     dest = new File(dest, sc + br +"-"+js+"-" +snap.getName());
                     FileUtils.copyFile(snap, dest);
-
             }
         } catch (Throwable t) {
             System.err.println("Unable to take snapshot");
             t.printStackTrace(System.err);
             System.err.println("continuing with tests");
-
+        }
+        if (snap!=null) {
+        	try {
+        		snap.delete();
+        	}catch(Throwable t1) {
+        		try {
+        			snap.deleteOnExit();
+        		}catch(Throwable t2) {
+        		}
+        	}
         }
 	}
 	

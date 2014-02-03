@@ -1300,6 +1300,9 @@ public abstract class TestEnvironment {
 		if (text.contains("Your account has been expired or suspended.")) {
 			fail("Smartcloud credential probably expired\n" + text);
 		}
+		if (text.contains("Your account has expired or has been suspended.")) {
+			fail("Smartcloud credential probably expired\n" + text);
+		}
 	}
 
 	// Abstract stuff

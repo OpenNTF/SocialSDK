@@ -312,6 +312,7 @@ public abstract class TestEnvironment {
 		// browser to test with
 		String browserName = System.getProperty(PROP_BROWSER);
 		if (webDriver == null) {
+			logger.info("Creating WebDriver instance");
 			if (StringUtil.isEmpty(System.getProperty(SELENIUM_HUB))) {
 
 				if ("ie".equals(browserName)) {
@@ -350,8 +351,9 @@ public abstract class TestEnvironment {
 				}
 
 			}
+			webDriver = new Augmenter().augment(webDriver);
 		}
-		return new Augmenter().augment(webDriver);
+		return webDriver;
 	}
 
 	/**
@@ -374,6 +376,7 @@ public abstract class TestEnvironment {
 	 * Quit the web driver
 	 */
 	public void quitDriver() {
+		logger.info("Destroying WebDriver instance");
 		if (webDriver != null) {
 			webDriver.quit();
 			webDriver = null;

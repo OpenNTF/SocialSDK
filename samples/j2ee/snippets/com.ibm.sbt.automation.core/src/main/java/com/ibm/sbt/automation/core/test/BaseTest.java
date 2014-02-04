@@ -123,6 +123,8 @@ public abstract class BaseTest {
             System.err.println("Unable to take snapshot");
             t.printStackTrace(System.err);
             System.err.println("continuing with tests");
+            //driver might be crashed after failing test, cleaning up.
+            environment.quitDriver();
         }
         if (snap!=null) {
         	try {

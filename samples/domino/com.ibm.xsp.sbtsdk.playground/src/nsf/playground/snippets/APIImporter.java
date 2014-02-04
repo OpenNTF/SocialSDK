@@ -232,7 +232,8 @@ public class APIImporter extends AssetImporter {
 	}
 	protected JsonJavaObject createAPIEntry(RestClient client, JsonJavaObject e, int method, AsyncAction action) throws Exception {
 		JsonJavaObject je = new JsonJavaObject();
-		String name = (String)e.get("Title");
+		//String name = (String)e.get("Title");
+		String name = (String)e.get("displaysubject");
 		put(je,"name", name);
 		put(je,"description", e.get("Abstract"));
 		String unid=Node.encodeUnid(name);
@@ -271,6 +272,15 @@ public class APIImporter extends AssetImporter {
 				resId = unid;
 			}
 			String docUrl = PathUtil.concat(client.getBaseUrl(), "/dx/"+resId, '/');
+			// Fix when it comes from the staging server
+			// ex: http://dwlhub.swg.usma.ibm.com/ldd/apiwiki.nsf/dx/Getting_the_All_Communities_feed_ic45
+			//     http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.5+API+Documentation#action=openDocument&res_title=Getting_the_All_Communities_feed_ic45&content=pdcontent
+			//     http://www-10.lotus.com/ldd/ddwiki.nsf/dx/Database_collection_GET_dds10
+			if(docUrl.startsWith("http://dwlhub.swg.usma.ibm.com/ldd/apiwiki.nsf/")) {
+				docUrl = "http://www-10.lotus.com/ldd/appdevwiki.nsf/"+docUrl.substring("http://dwlhub.swg.usma.ibm.com/ldd/apiwiki.nsf/".length());
+//			} else if(docUrl.startsWith("http://dwlhub.swg.usma.ibm.com/ldd/apiwiki.nsf/")) {
+//				docUrl = "http://www-10.lotus.com/ldd/ddwiki.nsf/"+docUrl.substring("http://dwlhub.swg.usma.ibm.com/ldd/apiwiki.nsf/".length());
+			}
 			put(je,"doc_url",docUrl);
 		}
 		return je;

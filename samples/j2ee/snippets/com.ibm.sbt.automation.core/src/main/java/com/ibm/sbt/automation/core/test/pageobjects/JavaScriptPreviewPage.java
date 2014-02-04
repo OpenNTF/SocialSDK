@@ -69,16 +69,20 @@ public class JavaScriptPreviewPage extends BaseResultPage {
      * Return the contents of the json div
      */
     public String getJsonContent() {
-        WebElement webElement = getWebElement();
-        return webElement.findElement(By.id("json")).getText();
+    	return getElementTextContent("json");
     }
+
+	protected String getElementTextContent(String divId) {
+		WebElement webElement = getWebElement();
+        String divText =  webElement.findElement(By.id(divId)).getText();
+		return divText;
+	}
     
     /**
      * Return the contents of the json div as a JSON object
      */
     public JsonJavaObject getJson() {
-        WebElement webElement = getWebElement();
-        String text = webElement.findElement(By.id("json")).getText();
+        String text= getElementTextContent("json");
         try {
             return (JsonJavaObject)JsonParser.fromJson(JsonJavaFactory.instanceEx, text);
         } catch (Throwable t) {
@@ -91,8 +95,7 @@ public class JavaScriptPreviewPage extends BaseResultPage {
      * Return the contents of the json div as a list of JSON objects
      */
     public List getJsonList() {
-        WebElement webElement = getWebElement();
-        String text = webElement.findElement(By.id("json")).getText();
+    	String text= getElementTextContent("json");
         try {
             return (List)JsonParser.fromJson(JsonJavaFactory.instanceEx, text);
         } catch (Throwable t) {

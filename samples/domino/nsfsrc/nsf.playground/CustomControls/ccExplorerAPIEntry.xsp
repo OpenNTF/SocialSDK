@@ -33,12 +33,13 @@
 								</xp:text>
 							</h4>
 							<p>
-								<xp:text escape="true" id="computedField1"
-									value="#{javascript:item.description}" disableTheme="true">
+								<xp:text escape="true"
+									id="computedField1" value="#{javascript:item.description}"
+									style="white-space: pre-wrap">
 								</xp:text>
 							</p>
 							<p>
-								<xp:text escape="true" id="computedField7" value="#{javascript:item.uri}">
+								<xp:text escape="true" id="computedField7" value="#{javascript:item.uri}" style="font-style:italic">
 								</xp:text>
 							</p>
 						</xp:div>

@@ -62,6 +62,11 @@ public class SSOEndpoint extends AbstractEndpoint {
 
     public SSOEndpoint() {
     }
+    
+    @Override
+	public String getAuthType(){
+    	return "sso"; 
+    }
 
     @Override
 	public boolean isAuthenticated() throws ClientServicesException {

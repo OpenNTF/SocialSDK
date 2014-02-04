@@ -65,7 +65,7 @@ public abstract class AbstractRhinoTest {
 		cx.evaluateString(scope, options, "opt", 1, null);
 
 		String load = "window.location = 'file:///"
-				+ getTestFolder().replace("\\", "/")
+				+ getFrameworkFolder().replace("\\", "/")
 				+ "/src/main/resources/com/ibm/javascript/units/base.html' ";
 
 		cx.evaluateString(scope, load, "loadPage", 1, null);
@@ -78,7 +78,7 @@ public abstract class AbstractRhinoTest {
 				"var prefix = 'file:///" + getPrefixFolder().replace("\\", "/")
 						+ "';", "setPrefix");
 		executeScript(
-				"var overload = 'file:///" + getTestFolder().replace("\\", "/")
+				"var overload = 'file:///" + getFrameworkFolder().replace("\\", "/")
 						+ "';", "setOverload");
 
 		setUpJavaSide();
@@ -95,6 +95,8 @@ public abstract class AbstractRhinoTest {
 	abstract protected String getPrefixFolder();
 
 	abstract protected String getTestFolder();
+	
+	abstract protected String getFrameworkFolder();
 	
 	private void createMockConfig() {
 		try {

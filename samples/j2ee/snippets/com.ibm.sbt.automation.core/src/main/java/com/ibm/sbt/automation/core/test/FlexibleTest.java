@@ -118,7 +118,13 @@ class EmbeddedDelegate extends AbstractRhinoTest implements TestDelegate {
 		sbt = new File(sbt, "sdk");
 		return sbt.getAbsolutePath();
 	}
+	@Override
+	protected String getFrameworkFolder() {
+		File project = new File(System.getProperty("user.dir"),"../../../../sdk/");
+		File sbt = new File(project, "com.ibm.sbt.core.test");
 
+		return sbt.getAbsolutePath();
+	}
 	@Override
 	protected String getTestFolder() {
 		String currentDir = System.getProperty("user.dir");

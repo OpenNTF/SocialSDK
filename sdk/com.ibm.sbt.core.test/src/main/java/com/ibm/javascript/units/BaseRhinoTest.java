@@ -19,4 +19,9 @@ public class BaseRhinoTest extends AbstractRhinoTest {
 		String currentDir = System.getProperty("user.dir");
 		return currentDir;
 	}
+	@Override
+	protected String getFrameworkFolder() {
+		String currentDir = System.getProperty("user.dir");
+		return currentDir;
+	}
 }

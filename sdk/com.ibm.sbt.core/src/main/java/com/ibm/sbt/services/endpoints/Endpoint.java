@@ -424,7 +424,18 @@ public interface Endpoint {
     */
     public String getProxyConfig();
 
-
+	/**
+	 * force 100-Continue header off for old version of httpclient libraries 
+	 * https://issues.apache.org/jira/browse/HTTPCLIENT-889
+	 */
 	public boolean isForceDisableExpectedContinue();
+
+	/**
+	 * control endpoint url generation
+	 * @returns 
+	 *   true to use the client request url as base for generating response url, 
+	 *   false to use the server configured host and port to generate response url 
+	 */
+	public boolean useClientRequestURLForResponses();
 
 }

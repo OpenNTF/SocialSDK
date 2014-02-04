@@ -162,7 +162,7 @@ public class BasicEndpoint extends AbstractEndpoint {
             	}
             	try{
             		if(!UrlUtil.isAbsoluteUrl(authPage)){
-            			authPage = UrlUtil.makeUrlAbsolute((HttpServletRequest)context.getHttpRequest(), authPage);
+            			authPage = UrlUtil.makeUrlAbsolute((HttpServletRequest)context.getHttpRequest(), authPage, useClientRequestURLForResponses());
                 	}
 
             		String redirectUrl = UrlUtil.getRequestUrl((HttpServletRequest)context.getHttpRequest());// change needed to handle portlethttprequest

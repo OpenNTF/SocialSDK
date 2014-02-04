@@ -192,7 +192,7 @@ public abstract class FormEndpoint extends AbstractEndpoint {
             if(StringUtil.isNotEmpty(authPage)) {
             	try{
             		if(!UrlUtil.isAbsoluteUrl(authPage)){
-            			authPage = UrlUtil.makeUrlAbsolute((HttpServletRequest)context.getHttpRequest(), authPage);
+            			authPage = UrlUtil.makeUrlAbsolute((HttpServletRequest)context.getHttpRequest(), authPage, useClientRequestURLForResponses());
                 	}
 
             		String redirectUrl = UrlUtil.getRequestUrl((HttpServletRequest)context.getHttpRequest());// change needed to handle portlethttprequest

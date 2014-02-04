@@ -70,8 +70,10 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
     private String proxyConfig;
     private boolean allowClientAccess = true;
     private boolean useProxy = true;
+	private boolean useClientRequestURLForResponses;
     
     protected Map<String, Object> clientParams = new HashMap<String, Object>();
+
     
     private static final int authenticationErrorCode = 401;
     
@@ -337,6 +339,16 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
     public void setForceDisableExpectedContinue(boolean forceDisableExpectedContinue) {
         this.forceDisableExpectedContinue = forceDisableExpectedContinue;
     }
+    
+    @Override
+	public boolean useClientRequestURLForResponses() {
+        return forceDisableExpectedContinue;
+    }
+    public void useClientRequestURLForResponses(boolean useClientRequestURLForResponses) {
+        this.useClientRequestURLForResponses = useClientRequestURLForResponses;
+    }
+    
+    
     
     @Override
 	public String getHttpProxy(){

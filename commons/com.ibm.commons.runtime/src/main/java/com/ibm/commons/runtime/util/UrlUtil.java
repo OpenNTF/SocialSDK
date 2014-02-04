@@ -15,6 +15,8 @@
  */
 package com.ibm.commons.runtime.util;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Map;
 import java.util.TreeMap;
 import javax.servlet.http.HttpServletRequest;
@@ -152,20 +154,45 @@ public class UrlUtil {
 	}
 
 	public static String makeUrlAbsolute(HttpServletRequest request, String path) {
+		return makeUrlAbsolute(request, path, false);
+	}
+	
+	public static String makeUrlAbsolute(HttpServletRequest request, String path, boolean useClientAddress) {
 		if (path.indexOf("://") < 0) {
+			String server = null;
+			int port = -1;
+			String protocol = null;
+			if (useClientAddress) {
+				URL clientRequest;
+				try {
+					clientRequest = new URL(request.getRequestURL().toString());
+				} catch (MalformedURLException e) {
+					//unrecoverable exception at this point
+					
+					throw new RuntimeException("get request url was not a well formed url" + e);
+				}
+				server = clientRequest.getHost();
+				port = clientRequest.getPort() == -1 ? clientRequest.getDefaultPort() : clientRequest.getPort();
+				protocol = clientRequest.getProtocol();
+			} else {
+				server = request.getServerName();
+				port = request.getServerPort();
+				protocol = request.getScheme();
+			}
+			
 			// Put that in a utility!
 			StringBuilder b = new StringBuilder();
-			String scheme = request.getScheme();
-			b.append(scheme);
+			
+			b.append(protocol);
 			b.append("://");
-			b.append(request.getServerName());
-			if (scheme.equals("http") && request.getServerPort() != 80) { //$NON-NLS-1$
+			b.append(server);
+			if (port != -1 && port != 80 && protocol.equals("http") ) { //$NON-NLS-1$
 				b.append(":");
-				b.append(request.getServerPort());
+				b.append(port);
 			}
-			if (scheme.equals("https") && request.getServerPort() != 443) { //$NON-NLS-1$
+			if (port != -1 && port != 443 && protocol.equals("https") ) { //$NON-NLS-1$
 				b.append(":");
-				b.append(request.getServerPort());
+				b.append(port);
 			}
 			if (!path.startsWith("/")) {
 				b.append("/");

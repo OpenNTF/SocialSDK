@@ -319,5 +319,10 @@ public class ApplicationEndpoint implements Endpoint {
 			boolean forceDisableExpectedContinue) {
 		this.forceDisableExpectedContinue = forceDisableExpectedContinue;
 	}
+
+	@Override
+	public boolean useClientRequestURLForResponses() {
+		return false;
+	}
 	
 }

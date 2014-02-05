@@ -1,35 +1,67 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <artifactId>com.ibm.sbt.automation.test</artifactId>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>com.ibm.sbt.automation.test</artifactId>
 
-  <parent>
-    <groupId>com.ibm.sbt</groupId>
-    <artifactId>com.ibm.samples.snippets</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-  </parent>
+	<parent>
+		<groupId>com.ibm.sbt</groupId>
+		<artifactId>com.ibm.samples.snippets</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
 
-  
-  <dependencies>
-    <dependency>
-    <groupId>org.seleniumhq.selenium</groupId>
-    <artifactId>selenium-java</artifactId>
-  </dependency>
-  <!-- Change to version 10.5.3.0 --> 
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-    </dependency>
-    <dependency>
-    	<groupId>com.ibm.sbt</groupId>
-    	<artifactId>com.ibm.sbt.core</artifactId>
-    	<version>1.0.0-SNAPSHOT</version>
-    </dependency>
-    <dependency>
-    	<groupId>com.ibm.sbt</groupId>
-    	<artifactId>com.ibm.sbt.automation.core</artifactId>
-    	<version>1.0.0-SNAPSHOT</version>
-    </dependency>
-  </dependencies>
-  
+	<build>
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.11</version>
+
+				<configuration>
+					<systemPropertyVariables>
+						<testMode>mock</testMode>
+						<com.ibm.common.ExtensionManager>JavaServiceProvider</com.ibm.common.ExtensionManager>
+					</systemPropertyVariables>
+					<includes>
+						<include>com/ibm/sbt/test/js/connections/communities/api/GetMyCommunities.java</include>
+					</includes>
+					<testClassesDirectory>${project.build.directory}/classes</testClassesDirectory>
+					<testSourceDirectory>${project.build.sourceDirectory}</testSourceDirectory>
+					<additionalClasspathElements>
+						<additionalClasspathElement>${project.build.directory}/test-classes</additionalClasspathElement>
+					</additionalClasspathElements>
+				</configuration>
+
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.maven.surefire</groupId>
+						<artifactId>surefire-junit4</artifactId>
+						<version>2.11</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+	</build>
+	<dependencies>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+		</dependency>
+		<!-- Change to version 10.5.3.0 -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm.sbt</groupId>
+			<artifactId>com.ibm.sbt.core</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm.sbt</groupId>
+			<artifactId>com.ibm.sbt.automation.core</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+
 </project>

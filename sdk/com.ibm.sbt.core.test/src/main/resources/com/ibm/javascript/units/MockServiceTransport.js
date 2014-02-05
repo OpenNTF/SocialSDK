@@ -41,8 +41,13 @@ define(
 								var headers = options.headers || {};
 								var method = options.method || 'GET'
 								var query = options.query || {};
-
-								jargs.setParameters(query);
+								var stringed = {};
+								
+								for (var key in query) {
+									 stringed[key] = query[key].toString(); 
+								}
+								
+								jargs.setParameters(stringed);
 
 								var resp = ep.xhr(method, jargs, content);
 								

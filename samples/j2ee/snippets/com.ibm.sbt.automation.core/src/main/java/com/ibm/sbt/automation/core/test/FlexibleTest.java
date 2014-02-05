@@ -2,6 +2,8 @@ package com.ibm.sbt.automation.core.test;
 
 import java.io.File;
 
+import javax.management.RuntimeErrorException;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -54,7 +56,10 @@ class EmbeddedDelegate extends AbstractRhinoTest implements TestDelegate {
 
 	@Override
 	public JavaScriptPreviewPage executeSnippet(String snippetName) {
-		BaseFileLister.jsRootPath = System.getProperty("user.dir")+"/../com.ibm.sbt.sample.web/WebContent/samples/js";
+		File f = new File(System.getProperty("user.dir")+"/../com.ibm.sbt.sample.web/src/main/webapp/samples/js");
+		if (!f.exists()) throw new RuntimeException("File Not Found: " + f.getAbsolutePath());
+		BaseFileLister.jsRootPath = f.getAbsolutePath();
+
 		JSSnippet snippet = (JSSnippet) BaseFileLister
 				.getJsSnippet(snippetName);
 

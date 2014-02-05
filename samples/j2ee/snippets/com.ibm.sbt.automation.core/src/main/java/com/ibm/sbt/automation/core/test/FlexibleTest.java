@@ -54,9 +54,10 @@ class EmbeddedDelegate extends AbstractRhinoTest implements TestDelegate {
 
 	@Override
 	public JavaScriptPreviewPage executeSnippet(String snippetName) {
-		BaseFileLister.jsRootPath = "C:/SBTK/SocialSDK/samples/j2ee/com.ibm.sbt.sample.web/WebContent/samples/js";
+		BaseFileLister.jsRootPath = System.getProperty("user.dir")+"/../com.ibm.sbt.sample.web/WebContent/samples/js";
 		JSSnippet snippet = (JSSnippet) BaseFileLister
 				.getJsSnippet(snippetName);
+
 		try {
 			checkSnippet(snippet);
 		} catch (Exception e) {

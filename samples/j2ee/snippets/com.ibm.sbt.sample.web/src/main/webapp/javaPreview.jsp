@@ -16,14 +16,14 @@
      Context.get().setProperty("environment", envName);
  }
  
-Map<String, String[]> paramMap = request.getParameterMap();
-
-for(String paramName : paramMap.keySet()){
-	if(paramName.startsWith("sample.")){
-		Context.get().setProperty(paramName, paramMap.get(paramName)[0]);
-	}
-}
- 
+ Map<String, String[]> paramMap = request.getParameterMap();
+ if(paramMap != null){
+     for(String paramName : paramMap.keySet()){
+         if(paramName.startsWith("sample.")){
+             Context.get().setProperty(paramName, paramMap.get(paramName)[0]);
+         }
+     }
+ }
  JavaSnippet snippet = SnippetFactory.getJavaSnippet(application, request, snippetId);
  if (snippet != null) {
      pagePath = snippet.getJspPath();

@@ -23,6 +23,7 @@ import org.junit.Test;
 
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.automation.core.test.BaseApiTest;
+import com.ibm.sbt.automation.core.test.FlexibleTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 
 /**
@@ -30,7 +31,7 @@ import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
  *  
  * @date 25 Mar 2013
  */
-public class BaseServiceValidation extends BaseApiTest {
+public class BaseServiceValidation extends FlexibleTest {
     
     static final String SNIPPET_ID = "Toolkit_Base_BaseServiceValidation";
     

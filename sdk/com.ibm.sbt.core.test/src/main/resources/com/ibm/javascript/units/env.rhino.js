@@ -2888,7 +2888,7 @@ __extend__(Node.prototype, {
                Node.DOCUMENT_POSITION_FOLLOWING|
                Node.DOCUMENT_POSITION_DISCONNECTED;
         }
-        if(a.parentNode === b.parentNode){
+        if(a.parentNode && a.parentNode === b.parentNode){
             length = a.parentNode.childNodes.length;
             for(i=0;i<length;i++){
                 if(a.parentNode.childNodes[i] === a){
@@ -9841,6 +9841,20 @@ __extend__(HTMLParagraphElement.prototype, {
     }
 });
 
+/*
+* HTMLPreElement
+*
+* Note: Copied from HTMLParagraphElement
+*/
+HTMLPreElement = function(ownerDocument) {
+    HTMLElement.apply(this, arguments);
+};
+HTMLPreElement.prototype = new HTMLElement();
+__extend__(HTMLPreElement.prototype, {
+    toString: function(){
+        return '[object HTMLPreElement]';
+    }
+});
 
 /**
  * HTMLParamElement

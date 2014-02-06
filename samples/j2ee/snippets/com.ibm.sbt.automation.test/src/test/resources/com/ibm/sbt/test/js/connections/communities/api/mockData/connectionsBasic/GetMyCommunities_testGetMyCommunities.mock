@@ -4,7 +4,7 @@
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Mon, 27 Jan 2014 16:59:12 GMT]]></value>
+        <value><![CDATA[Wed, 05 Feb 2014 16:28:21 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -28,7 +28,7 @@
     </header>
     <header>
         <name><![CDATA[Last-Modified]]></name>
-        <value><![CDATA[Mon, 27 Jan 2014 16:59:12 GMT]]></value>
+        <value><![CDATA[Wed, 05 Feb 2014 16:28:21 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Pragma]]></name>
@@ -36,19 +36,15 @@
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[lcLang=en_us; Path=/]]></value>
+        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/gqT7sa/aGfWQJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken=PUBjyRNSiMicDeydwCeSe/gUuml0fCDnccXoWVT0q2G+DB9N76HWlKqqf16uAHfzzNbPAEwptZNqH4INVmo/K32Q5R7T1SugHW6qMsaWqiSnnoONNOeWPNzOVhjHbAXgyNVu+Z7c4oaxpsqHYzYe4Wwtaiu5GX1TlgSbpofbB7B6coN9ik2nPZhmlRvipNQ2y7hL0foIb6UhwN2+/LCf3IUc/YAk1jgjH4C8lPIHUypv6ZF0FmKyy8mxpdGXaA/KStdm/ujfrbSN07lkfddhCtyrtr9ocGeO6hPIeOQYNnx+Aucg4i8u+rcgnrcfaAsZDETkgxXipmMunpY6JIQiyg==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
+        <value><![CDATA[LtpaToken2=dLoJpMwuzka91JClFPzdPe2OPYoo/7d6aV25uJ6PHqHps7YLFOOvHcUCe4UqKvfeEh50lMUIkDj6MNZPAF5sRoZFy2LLu/KekFGrEXaNW+T5yE7RL+DuxR0zzYbF5LHHudi+w7aNzVZsTkufD75b39tJDX8C8vURStD7V2JeyIOM72N+ZKc86GeeXgmTN0lw+Xn0EUg/nXU98MDEyUUerScaDikjIKt3qSnAjTyyFygXmEzfvb4sFe3XftZHSUdOmLHk/f55lBAaf+ZI//vWRirZN4s2ZrWvyivf8P2BIxoMMDv33F9dIbEjB8OVNfRksN1BTwOspxInN/n7WGgxrIDzUaMZsjX0+GlOkeBiO+OfO0n3n4PRQ3P1dt+9NHiVYIghybtq1DgsL33kxyuzrzdm5kDabT8BGNdSbhuyyxhSglDz2gXhenTrB2lMz5rmj10fTUy/jUCZPIhUhEecUX32dERUH00tke3piqmU9S/yMq3BOcGHjQixleGI1qCPb4/XNNc8fxCL50Ek26RSVRP6sPvW/K0Colb3lCRW69km8yGTJXLsZElgSyjJi0W/JisFoesjnUwgFeBTPVrU89tsNw8dLEd+CVflMS5evS1t8d8famsmW3TRZfV4uCL3t2/2gISb55t/UsfxAqbwPJ82hoDEfbBAjZ26S39tyQQHvjrk3EbVI8Kbwjjusjq1jggk/MROfGytTfZG7WR6/Ini/GAfJIq46RuXNmpZg9U=; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=foEm165oa/GvXKkVVtrTNG8bcKh1Qq+/pddGMZvVaRK51gJIqU2AIwdulebuwSjiH3opl97r4nzVxcAkZxjCmUZkLWGdwO/2VAOT3yTF4RSlEVFI9JjHmbs+0XZGxuQ6Hil0KxXSguzdeyGuWCu9sb7QdS+7ahFD9S+ZEBT7NC3NCk7dWTGOg8hq4jfxNofkc/v37z0kGITkPeT6SnTP866KwFzLpRbwVm5e0DXLpVaAw1nWDVpJcbS2U7IVItxVHwIdqJzEI9VY2UsLijInvvRpoyb1x29HYXegHpstFwSUakRsoQTPIYTmJeK3u4HmIWX0T7XQSUQt7MYbN8Dm9X316T7zAUt86U0Ub/quIR4bnHC/o4hlFFtDzMKcoHPaJwty0XF4Ts8U9gGgXQWRauyByZZVgNlgIsBdwq562SFJt3Sg1LQKbv5HCK7NnqAl+cEbOktBwD0c/1OMQaX8V36fuSJ8MegeiqNST+WnoamzKDrIN+gNriBOmzJ0bvuvYhi2gUQkUVYQ/gTUtN90zifYNIVeJz5EmyGks8N8nozboB2xTr3N0Wy8ckUB1l0RWlrPxDy6LUa4agIaEzhjNt5UsfyUQuX+J1/tePluvtIl6BL5HV6Jcvpm1pwqDNlqoQ04iFFlwewPiQIIvbIYjA==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
-    </header>
-    <header>
-        <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LCSESSIONID=0000rxaxT_aeSS3Keo_b0T7WIll:180t512oj; Path=/; HttpOnly]]></value>
+        <value><![CDATA[LCSESSIONID=00001F-mrSWDAhtxWXg5knpeC5x:18dna4k6n; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Keep-Alive]]></name>
@@ -72,155 +68,151 @@
     </header></headers>
 <data><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns="http://www.w3.org/2005/Atom">
-  <id>https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/communities/my?asc=true&amp;ps=2</id>
+  <id>https://qs.renovations.com:444/communities/service/atom/communities/my?asc=true&amp;ps=2</id>
   <title type="text">My Communities</title>
-  <updated>2014-01-27T16:59:12.793Z</updated>
+  <updated>2014-02-05T16:28:21.752Z</updated>
   <generator version="4.5.0.0" uri="http://www.ibm.com/xmlns/prod/sn">IBM Connections - Communities</generator>
-  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/service" rel="http://www.ibm.com/xmlns/prod/sn/service">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/service" rel="http://www.ibm.com/xmlns/prod/sn/service">
   </link>
-  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/service" rel="service">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/service" rel="service">
   </link>
-  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/communities/my?asc=true&amp;page=1&amp;ps=2" rel="self">
+  <link href="https://qs.renovations.com:444/communities/service/atom/communities/my?asc=true&amp;page=1&amp;ps=2" rel="self">
   </link>
-  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/html/mycommunities" rel="alternate">
+  <link href="https://dev.sdkdemo.com:444/communities/service/html/mycommunities" rel="alternate">
   </link>
-  <opensearch:totalResults>2252</opensearch:totalResults>
+  <opensearch:totalResults>231</opensearch:totalResults>
   <opensearch:startIndex>1</opensearch:startIndex>
   <opensearch:itemsPerPage>2</opensearch:itemsPerPage>
-  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/communities/my?asc=true&amp;ps=2" rel="first">
+  <link href="https://qs.renovations.com:444/communities/service/atom/communities/my?asc=true&amp;ps=2" rel="first">
   </link>
-  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/communities/my?asc=true&amp;ps=2&amp;page=1126" rel="last">
+  <link href="https://qs.renovations.com:444/communities/service/atom/communities/my?asc=true&amp;ps=2&amp;page=116" rel="last">
   </link>
-  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/communities/my?asc=true&amp;ps=2&amp;page=2" rel="next">
+  <link href="https://qs.renovations.com:444/communities/service/atom/communities/my?asc=true&amp;ps=2&amp;page=2" rel="next">
   </link>
-  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/communities/my?asc=true&amp;ps=2&amp;outputType=categories" rel="http://www.ibm.com/xmlns/prod/sn/tag-cloud" type="application/atomcat+xml">
+  <link href="https://qs.renovations.com:444/communities/service/atom/communities/my?asc=true&amp;ps=2&amp;outputType=categories" rel="http://www.ibm.com/xmlns/prod/sn/tag-cloud" type="application/atomcat+xml">
   </link>
   <entry>
-    <snx:communityUuid>a8ccb2be-157d-4519-9e94-9aa9a6d5868c</snx:communityUuid>
-    <id>http://communities.ibm.com:2006/service/atom/community/instance?communityUuid=a8ccb2be-157d-4519-9e94-9aa9a6d5868c</id>
-    <title type="text">Test Community1379415070423</title>
+    <snx:communityUuid>bfab3e05-cb21-41e4-a9b0-0ab8aebc4219</snx:communityUuid>
+    <id>http://communities.ibm.com:2006/service/atom/community/instance?communityUuid=bfab3e05-cb21-41e4-a9b0-0ab8aebc4219</id>
+    <title type="text">CreateCommunity Test 1391207774872 - 1</title>
     <category term="community" scheme="http://www.ibm.com/xmlns/prod/sn/type">
     </category>
-    <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/instance?communityUuid=a8ccb2be-157d-4519-9e94-9aa9a6d5868c" rel="self">
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=bfab3e05-cb21-41e4-a9b0-0ab8aebc4219" rel="self">
     </link>
-    <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/instance?communityUuid=a8ccb2be-157d-4519-9e94-9aa9a6d5868c" rel="edit">
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=bfab3e05-cb21-41e4-a9b0-0ab8aebc4219" rel="edit">
     </link>
-    <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/html/communityview?communityUuid=a8ccb2be-157d-4519-9e94-9aa9a6d5868c" rel="alternate" type="text/html">
+    <link href="https://dev.sdkdemo.com:444/communities/service/html/communityview?communityUuid=bfab3e05-cb21-41e4-a9b0-0ab8aebc4219" rel="alternate" type="text/html">
     </link>
-    <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/html/image?communityUuid=a8ccb2be-157d-4519-9e94-9aa9a6d5868c&amp;lastMod=1379415024400" rel="http://www.ibm.com/xmlns/prod/sn/logo">
+    <link href="https://dev.sdkdemo.com:444/communities/service/html/image?communityUuid=bfab3e05-cb21-41e4-a9b0-0ab8aebc4219&amp;lastMod=1391207777626" rel="http://www.ibm.com/xmlns/prod/sn/logo">
     </link>
-    <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/service?communityUuid=a8ccb2be-157d-4519-9e94-9aa9a6d5868c" rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml">
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/service?communityUuid=bfab3e05-cb21-41e4-a9b0-0ab8aebc4219" rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml">
     </link>
-    <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/members?communityUuid=a8ccb2be-157d-4519-9e94-9aa9a6d5868c" rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml">
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/members?communityUuid=bfab3e05-cb21-41e4-a9b0-0ab8aebc4219" rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml">
     </link>
-    <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/bookmarks?communityUuid=a8ccb2be-157d-4519-9e94-9aa9a6d5868c" rel="http://www.ibm.com/xmlns/prod/sn/bookmarks" type="application/atom+xml">
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/bookmarks?communityUuid=bfab3e05-cb21-41e4-a9b0-0ab8aebc4219" rel="http://www.ibm.com/xmlns/prod/sn/bookmarks" type="application/atom+xml">
     </link>
-    <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/feeds?communityUuid=a8ccb2be-157d-4519-9e94-9aa9a6d5868c" rel="http://www.ibm.com/xmlns/prod/sn/feeds" type="application/atom+xml">
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/feeds?communityUuid=bfab3e05-cb21-41e4-a9b0-0ab8aebc4219" rel="http://www.ibm.com/xmlns/prod/sn/feeds" type="application/atom+xml">
     </link>
-    <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/remoteApplications?communityUuid=a8ccb2be-157d-4519-9e94-9aa9a6d5868c" rel="http://www.ibm.com/xmlns/prod/sn/remote-applications" type="application/atom+xml">
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/remoteApplications?communityUuid=bfab3e05-cb21-41e4-a9b0-0ab8aebc4219" rel="http://www.ibm.com/xmlns/prod/sn/remote-applications" type="application/atom+xml">
     </link>
-    <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/forum/topics?communityUuid=a8ccb2be-157d-4519-9e94-9aa9a6d5868c" rel="http://www.ibm.com/xmlns/prod/sn/forum-topics" type="application/atom+xml">
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/forum/topics?communityUuid=bfab3e05-cb21-41e4-a9b0-0ab8aebc4219" rel="http://www.ibm.com/xmlns/prod/sn/forum-topics" type="application/atom+xml">
     </link>
-    <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/invites?communityUuid=a8ccb2be-157d-4519-9e94-9aa9a6d5868c" rel="http://www.ibm.com/xmlns/prod/sn/invitations-list" type="application/atom+xml">
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/invites?communityUuid=bfab3e05-cb21-41e4-a9b0-0ab8aebc4219" rel="http://www.ibm.com/xmlns/prod/sn/invitations-list" type="application/atom+xml">
     </link>
-    <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/widgets?communityUuid=a8ccb2be-157d-4519-9e94-9aa9a6d5868c" rel="http://www.ibm.com/xmlns/prod/sn/widgets" type="application/atom+xml">
-    </link>
-    <snx:membercount>2</snx:membercount>
-    <snx:communityType>public</snx:communityType>
-    <snx:handle></snx:handle>
-    <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/subcommunities?communityUuid=a8ccb2be-157d-4519-9e94-9aa9a6d5868c" rel="http://www.ibm.com/xmlns/prod/sn/subcommunities" type="application/atom+xml">
-    </link>
-    <snx:preModeration>true</snx:preModeration>
-    <snx:postModeration>true</snx:postModeration>
-    <published>2013-09-17T10:50:24.400Z</published>
-    <updated>2013-09-17T12:42:15.706Z</updated>
-    <content type="html"></content>
-    <summary type="text">Test Community updated by Update Community Java snippet</summary>
-    <author>
-      <name>Frank Adams</name>
-      <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
-      <snx:userState>active</snx:userState>
-      <email>fadams@renovations.com</email>
-    </author>
-    <contributor>
-      <name>Frank Adams</name>
-      <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
-      <snx:userState>active</snx:userState>
-      <email>fadams@renovations.com</email>
-    </contributor>
-    <category term="demotag">
-    </category>
-    <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/connections/opensocial/rest/activitystreams/urn:lsid:lconn.ibm.com:communities.community:a8ccb2be-157d-4519-9e94-9aa9a6d5868c/@all/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/activitystream" type="application/atom+xml">
-    </link>
-    <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/connections/opensocial/rest/ublog/urn:lsid:lconn.ibm.com:communities.community:a8ccb2be-157d-4519-9e94-9aa9a6d5868c/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/microblog" type="application/atom+xml">
-    </link>
-    <snx:communityTheme>
-    </snx:communityTheme>
-    <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/broadcasts?communityUuid=a8ccb2be-157d-4519-9e94-9aa9a6d5868c" rel="http://www.ibm.com/xmlns/prod/sn/community-broadcasts" type="application/atom+xml">
-    </link>
-  </entry>
-  <entry>
-    <snx:communityUuid>2ab5f690-206e-428d-84d5-e0cecdcb283b</snx:communityUuid>
-    <id>http://communities.ibm.com:2006/service/atom/community/instance?communityUuid=2ab5f690-206e-428d-84d5-e0cecdcb283b</id>
-    <title type="text">Test Community1379421802217</title>
-    <category term="community" scheme="http://www.ibm.com/xmlns/prod/sn/type">
-    </category>
-    <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/instance?communityUuid=2ab5f690-206e-428d-84d5-e0cecdcb283b" rel="self">
-    </link>
-    <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/instance?communityUuid=2ab5f690-206e-428d-84d5-e0cecdcb283b" rel="edit">
-    </link>
-    <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/html/communityview?communityUuid=2ab5f690-206e-428d-84d5-e0cecdcb283b" rel="alternate" type="text/html">
-    </link>
-    <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/html/image?communityUuid=2ab5f690-206e-428d-84d5-e0cecdcb283b&amp;lastMod=1379421751648" rel="http://www.ibm.com/xmlns/prod/sn/logo">
-    </link>
-    <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/service?communityUuid=2ab5f690-206e-428d-84d5-e0cecdcb283b" rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml">
-    </link>
-    <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/members?communityUuid=2ab5f690-206e-428d-84d5-e0cecdcb283b" rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml">
-    </link>
-    <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/bookmarks?communityUuid=2ab5f690-206e-428d-84d5-e0cecdcb283b" rel="http://www.ibm.com/xmlns/prod/sn/bookmarks" type="application/atom+xml">
-    </link>
-    <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/feeds?communityUuid=2ab5f690-206e-428d-84d5-e0cecdcb283b" rel="http://www.ibm.com/xmlns/prod/sn/feeds" type="application/atom+xml">
-    </link>
-    <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/remoteApplications?communityUuid=2ab5f690-206e-428d-84d5-e0cecdcb283b" rel="http://www.ibm.com/xmlns/prod/sn/remote-applications" type="application/atom+xml">
-    </link>
-    <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/forum/topics?communityUuid=2ab5f690-206e-428d-84d5-e0cecdcb283b" rel="http://www.ibm.com/xmlns/prod/sn/forum-topics" type="application/atom+xml">
-    </link>
-    <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/invites?communityUuid=2ab5f690-206e-428d-84d5-e0cecdcb283b" rel="http://www.ibm.com/xmlns/prod/sn/invitations-list" type="application/atom+xml">
-    </link>
-    <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/widgets?communityUuid=2ab5f690-206e-428d-84d5-e0cecdcb283b" rel="http://www.ibm.com/xmlns/prod/sn/widgets" type="application/atom+xml">
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/widgets?communityUuid=bfab3e05-cb21-41e4-a9b0-0ab8aebc4219" rel="http://www.ibm.com/xmlns/prod/sn/widgets" type="application/atom+xml">
     </link>
     <snx:membercount>1</snx:membercount>
-    <snx:communityType>public</snx:communityType>
+    <snx:communityType>private</snx:communityType>
     <snx:handle></snx:handle>
-    <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/subcommunities?communityUuid=2ab5f690-206e-428d-84d5-e0cecdcb283b" rel="http://www.ibm.com/xmlns/prod/sn/subcommunities" type="application/atom+xml">
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/subcommunities?communityUuid=bfab3e05-cb21-41e4-a9b0-0ab8aebc4219" rel="http://www.ibm.com/xmlns/prod/sn/subcommunities" type="application/atom+xml">
     </link>
     <snx:preModeration>true</snx:preModeration>
     <snx:postModeration>true</snx:postModeration>
-    <published>2013-09-17T12:42:31.648Z</published>
-    <updated>2013-09-17T13:22:36.572Z</updated>
+    <published>2014-01-31T22:36:17.626Z</published>
+    <updated>2014-01-31T22:36:27.410Z</updated>
     <content type="html"></content>
-    <summary type="text">Test Community updated by Update Community Java snippet</summary>
+    <summary type="text">Create community test content: 1391207774872 - 1</summary>
     <author>
       <name>Frank Adams</name>
-      <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+      <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
       <snx:userState>active</snx:userState>
       <email>fadams@renovations.com</email>
     </author>
     <contributor>
       <name>Frank Adams</name>
-      <snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid>
+      <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
       <snx:userState>active</snx:userState>
       <email>fadams@renovations.com</email>
     </contributor>
-    <category term="demotag">
-    </category>
-    <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/connections/opensocial/rest/activitystreams/urn:lsid:lconn.ibm.com:communities.community:2ab5f690-206e-428d-84d5-e0cecdcb283b/@all/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/activitystream" type="application/atom+xml">
+    <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/activitystreams/urn:lsid:lconn.ibm.com:communities.community:bfab3e05-cb21-41e4-a9b0-0ab8aebc4219/@all/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/activitystream" type="application/atom+xml">
     </link>
-    <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/connections/opensocial/rest/ublog/urn:lsid:lconn.ibm.com:communities.community:2ab5f690-206e-428d-84d5-e0cecdcb283b/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/microblog" type="application/atom+xml">
+    <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/ublog/urn:lsid:lconn.ibm.com:communities.community:bfab3e05-cb21-41e4-a9b0-0ab8aebc4219/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/microblog" type="application/atom+xml">
     </link>
-    <snx:communityTheme>
+    <snx:communityTheme snx:uuid="default">
     </snx:communityTheme>
-    <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/broadcasts?communityUuid=2ab5f690-206e-428d-84d5-e0cecdcb283b" rel="http://www.ibm.com/xmlns/prod/sn/community-broadcasts" type="application/atom+xml">
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/broadcasts?communityUuid=bfab3e05-cb21-41e4-a9b0-0ab8aebc4219" rel="http://www.ibm.com/xmlns/prod/sn/community-broadcasts" type="application/atom+xml">
+    </link>
+  </entry>
+  <entry>
+    <snx:communityUuid>6d3e8279-802a-4cb1-9d47-f16d46bdf0fa</snx:communityUuid>
+    <id>http://communities.ibm.com:2006/service/atom/community/instance?communityUuid=6d3e8279-802a-4cb1-9d47-f16d46bdf0fa</id>
+    <title type="text">CreateCommunity Test 1391207852686 - 2</title>
+    <category term="community" scheme="http://www.ibm.com/xmlns/prod/sn/type">
+    </category>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=6d3e8279-802a-4cb1-9d47-f16d46bdf0fa" rel="self">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=6d3e8279-802a-4cb1-9d47-f16d46bdf0fa" rel="edit">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/html/communityview?communityUuid=6d3e8279-802a-4cb1-9d47-f16d46bdf0fa" rel="alternate" type="text/html">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/html/image?communityUuid=6d3e8279-802a-4cb1-9d47-f16d46bdf0fa&amp;lastMod=1391207855133" rel="http://www.ibm.com/xmlns/prod/sn/logo">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/service?communityUuid=6d3e8279-802a-4cb1-9d47-f16d46bdf0fa" rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/members?communityUuid=6d3e8279-802a-4cb1-9d47-f16d46bdf0fa" rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/bookmarks?communityUuid=6d3e8279-802a-4cb1-9d47-f16d46bdf0fa" rel="http://www.ibm.com/xmlns/prod/sn/bookmarks" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/feeds?communityUuid=6d3e8279-802a-4cb1-9d47-f16d46bdf0fa" rel="http://www.ibm.com/xmlns/prod/sn/feeds" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/remoteApplications?communityUuid=6d3e8279-802a-4cb1-9d47-f16d46bdf0fa" rel="http://www.ibm.com/xmlns/prod/sn/remote-applications" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/forum/topics?communityUuid=6d3e8279-802a-4cb1-9d47-f16d46bdf0fa" rel="http://www.ibm.com/xmlns/prod/sn/forum-topics" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/invites?communityUuid=6d3e8279-802a-4cb1-9d47-f16d46bdf0fa" rel="http://www.ibm.com/xmlns/prod/sn/invitations-list" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/widgets?communityUuid=6d3e8279-802a-4cb1-9d47-f16d46bdf0fa" rel="http://www.ibm.com/xmlns/prod/sn/widgets" type="application/atom+xml">
+    </link>
+    <snx:membercount>1</snx:membercount>
+    <snx:communityType>private</snx:communityType>
+    <snx:handle></snx:handle>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/subcommunities?communityUuid=6d3e8279-802a-4cb1-9d47-f16d46bdf0fa" rel="http://www.ibm.com/xmlns/prod/sn/subcommunities" type="application/atom+xml">
+    </link>
+    <snx:preModeration>true</snx:preModeration>
+    <snx:postModeration>true</snx:postModeration>
+    <published>2014-01-31T22:37:35.133Z</published>
+    <updated>2014-01-31T22:37:36.371Z</updated>
+    <content type="html"></content>
+    <summary type="text">Create community test content: 1391207852686 - 2</summary>
+    <author>
+      <name>Frank Adams</name>
+      <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+      <snx:userState>active</snx:userState>
+      <email>fadams@renovations.com</email>
+    </author>
+    <contributor>
+      <name>Frank Adams</name>
+      <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+      <snx:userState>active</snx:userState>
+      <email>fadams@renovations.com</email>
+    </contributor>
+    <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/activitystreams/urn:lsid:lconn.ibm.com:communities.community:6d3e8279-802a-4cb1-9d47-f16d46bdf0fa/@all/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/activitystream" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/ublog/urn:lsid:lconn.ibm.com:communities.community:6d3e8279-802a-4cb1-9d47-f16d46bdf0fa/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/microblog" type="application/atom+xml">
+    </link>
+    <snx:communityTheme snx:uuid="default">
+    </snx:communityTheme>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/broadcasts?communityUuid=6d3e8279-802a-4cb1-9d47-f16d46bdf0fa" rel="http://www.ibm.com/xmlns/prod/sn/community-broadcasts" type="application/atom+xml">
     </link>
   </entry>
 </feed>]]></data>
@@ -229,7 +221,7 @@
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Mon, 27 Jan 2014 16:59:14 GMT]]></value>
+        <value><![CDATA[Wed, 05 Feb 2014 16:28:22 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -237,7 +229,7 @@
     </header>
     <header>
         <name><![CDATA[X-LConn-Auth]]></name>
-        <value><![CDATA[true]]></value>
+        <value><![CDATA[false]]></value>
     </header>
     <header>
         <name><![CDATA[X-UA-Compatible]]></name>
@@ -245,7 +237,7 @@
     </header>
     <header>
         <name><![CDATA[Expires]]></name>
-        <value><![CDATA[Mon, 27 Jan 2014 16:59:14 GMT]]></value>
+        <value><![CDATA[Wed, 05 Feb 2014 16:28:22 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Accept]]></name>
@@ -253,7 +245,19 @@
     </header>
     <header>
         <name><![CDATA[Last-Modified]]></name>
-        <value><![CDATA[Mon, 27 Jan 2014 16:59:14 GMT]]></value>
+        <value><![CDATA[Wed, 05 Feb 2014 16:28:22 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/gqT7sa/aGfWQJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/; Domain=.sdkdemo.com]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=dLoJpMwuzka91JClFPzdPe2OPYoo/7d6aV25uJ6PHqHps7YLFOOvHcUCe4UqKvfeEh50lMUIkDj6MNZPAF5sRoZFy2LLu/KekFGrEXaNW+T5yE7RL+DuxR0zzYbF5LHHudi+w7aNzVZsTkufD75b39tJDX8C8vURStD7V2JeyIOM72N+ZKc86GeeXgmTN0lw+Xn0EUg/nXU98MDEyUUerScaDikjIKt3qSnAjTyyFygXmEzfvb4sFe3XftZHSUdOmLHk/f55lBAaf+ZI//vWRirZN4s2ZrWvyivf8P2BIxoMMDv33F9dIbEjB8OVNfRksN1BTwOspxInN/n7WGgxrIDzUaMZsjX0+GlOkeBiO+OfO0n3n4PRQ3P1dt+9NHiVYIghybtq1DgsL33kxyuzrzdm5kDabT8BGNdSbhuyyxhSglDz2gXhenTrB2lMz5rmj10fTUy/jUCZPIhUhEecUX32dERUH00tke3piqmU9S/yMq3BOcGHjQixleGI1qCPb4/XNNc8fxCL50Ek26RSVRP6sPvW/K0Colb3lCRW69km8yGTJXLsZElgSyjJi0W/JisFoesjnUwgFeBTPVrU89tsNw8dLEd+CVflMS5evS1t8d8famsmW3TRZfV4uCL3t2/2gISb55t/UsfxAqbwPJ82hoDEfbBAjZ26S39tyQQHvjrk3EbVI8Kbwjjusjq1jggk/MROfGytTfZG7WR6/Ini/GAfJIq46RuXNmpZg9U=; Path=/; Domain=.sdkdemo.com]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LCSESSIONID=0000c3u8G_noNZ8XGS_p8vt_7Qr:18dna4k6n; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
@@ -261,7 +265,7 @@
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[ForumsUserId=0F19F8AD-37EA-6033-8525-7BBF005634B5; Path=/forums]]></value>
+        <value><![CDATA[ForumsUserId=EFD413BC-E572-760A-8625-7C6E00506453; Path=/forums]]></value>
     </header>
     <header>
         <name><![CDATA[Cache-Control]]></name>
@@ -269,7 +273,7 @@
     </header>
     <header>
         <name><![CDATA[Keep-Alive]]></name>
-        <value><![CDATA[timeout=10, max=99]]></value>
+        <value><![CDATA[timeout=10, max=100]]></value>
     </header>
     <header>
         <name><![CDATA[Connection]]></name>
@@ -287,13 +291,13 @@
         <name><![CDATA[Content-Language]]></name>
         <value><![CDATA[en-US]]></value>
     </header></headers>
-<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:thr="http://purl.org/syndication/thread/1.0"><opensearch:totalResults xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">0</opensearch:totalResults><opensearch:startIndex xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">0</opensearch:startIndex><opensearch:itemsPerPage xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">10</opensearch:itemsPerPage><id>https://vhost0839.dc1.on.ca.compute.ihost.com:444/forums/atom/topics?communityUuid=a8ccb2be-157d-4519-9e94-9aa9a6d5868c</id><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/forums/html/public" rel="alternate"></link><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/forums/atom/topics?communityUuid=a8ccb2be-157d-4519-9e94-9aa9a6d5868c" rel="self"></link><title type="text">Test Community1379415070423</title><updated>2014-01-27T16:59:14.685Z</updated><generator uri="http://www.ibm.com/xmlns/prod/sn" version="4.5.0.0">IBM Connections - Discussion Forum</generator><link href="http://vhost0839.dc1.on.ca.compute.ihost.com:81/communities/service/atom/community/instance?communityUuid=a8ccb2be-157d-4519-9e94-9aa9a6d5868c" rel="http://www.ibm.com/xmlns/prod/sn/container" type="application/atom+xml"></link><snx:communityUuid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">a8ccb2be-157d-4519-9e94-9aa9a6d5868c</snx:communityUuid></feed>]]></data>
+<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:thr="http://purl.org/syndication/thread/1.0"><opensearch:totalResults xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">0</opensearch:totalResults><opensearch:startIndex xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">0</opensearch:startIndex><opensearch:itemsPerPage xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">10</opensearch:itemsPerPage><id>https://dev.sdkdemo.com:444/forums/atom/topics?communityUuid=bfab3e05-cb21-41e4-a9b0-0ab8aebc4219</id><link href="https://dev.sdkdemo.com:444/forums/html/public" rel="alternate"></link><link href="https://dev.sdkdemo.com:444/forums/atom/topics?communityUuid=bfab3e05-cb21-41e4-a9b0-0ab8aebc4219" rel="self"></link><title type="text">CreateCommunity Test 1391207774872 - 1</title><updated>2014-02-05T16:28:22.974Z</updated><generator uri="http://www.ibm.com/xmlns/prod/sn" version="4.5.0.0">IBM Connections - Discussion Forum</generator><link href="http://dev.sdkdemo.com:81/communities/service/atom/community/instance?communityUuid=bfab3e05-cb21-41e4-a9b0-0ab8aebc4219" rel="http://www.ibm.com/xmlns/prod/sn/container" type="application/atom+xml"></link><snx:communityUuid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">bfab3e05-cb21-41e4-a9b0-0ab8aebc4219</snx:communityUuid></feed>]]></data>
 </response>
 <response statusCode="200" statusReason="OK">
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Mon, 27 Jan 2014 16:59:15 GMT]]></value>
+        <value><![CDATA[Wed, 05 Feb 2014 16:28:23 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -317,7 +321,7 @@
     </header>
     <header>
         <name><![CDATA[Last-Modified]]></name>
-        <value><![CDATA[Mon, 27 Jan 2014 16:59:15 GMT]]></value>
+        <value><![CDATA[Wed, 05 Feb 2014 16:28:23 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Pragma]]></name>
@@ -325,19 +329,15 @@
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[lcLang=en_us; Path=/]]></value>
+        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/gqT7sa/aGfWQJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken=PUBjyRNSiMicDeydwCeSe/gUuml0fCDnccXoWVT0q2G+DB9N76HWlKqqf16uAHfzzNbPAEwptZNqH4INVmo/K32Q5R7T1SugHW6qMsaWqiSnnoONNOeWPNzOVhjHbAXgyNVu+Z7c4oaxpsqHYzYe4Wwtaiu5GX1TlgSbpofbB7B6coN9ik2nPZhmlRvipNQ2y7hL0foIb6UhwN2+/LCf3IUc/YAk1jgjH4C8lPIHUypv6ZF0FmKyy8mxpdGXaA/KStdm/ujfrbSN07lkfddhCtyrtr9ocGeO6hPIeOQYNnx+Aucg4i8u+rcgnrcfaAsZDETkgxXipmMunpY6JIQiyg==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
+        <value><![CDATA[LtpaToken2=dLoJpMwuzka91JClFPzdPe2OPYoo/7d6aV25uJ6PHqHps7YLFOOvHcUCe4UqKvfeEh50lMUIkDj6MNZPAF5sRoZFy2LLu/KekFGrEXaNW+T5yE7RL+DuxR0zzYbF5LHHudi+w7aNzVZsTkufD75b39tJDX8C8vURStD7V2JeyIOM72N+ZKc86GeeXgmTN0lw+Xn0EUg/nXU98MDEyUUerScaDikjIKt3qSnAjTyyFygXmEzfvb4sFe3XftZHSUdOmLHk/f55lBAaf+ZI//vWRirZN4s2ZrWvyivf8P2BIxoMMDv33F9dIbEjB8OVNfRksN1BTwOspxInN/n7WGgxrIDzUaMZsjX0+GlOkeBiO+OfO0n3n4PRQ3P1dt+9NHiVYIghybtq1DgsL33kxyuzrzdm5kDabT8BGNdSbhuyyxhSglDz2gXhenTrB2lMz5rmj10fTUy/jUCZPIhUhEecUX32dERUH00tke3piqmU9S/yMq3BOcGHjQixleGI1qCPb4/XNNc8fxCL50Ek26RSVRP6sPvW/K0Colb3lCRW69km8yGTJXLsZElgSyjJi0W/JisFoesjnUwgFeBTPVrU89tsNw8dLEd+CVflMS5evS1t8d8famsmW3TRZfV4uCL3t2/2gISb55t/UsfxAqbwPJ82hoDEfbBAjZ26S39tyQQHvjrk3EbVI8Kbwjjusjq1jggk/MROfGytTfZG7WR6/Ini/GAfJIq46RuXNmpZg9U=; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=foEm165oa/GvXKkVVtrTNG8bcKh1Qq+/pddGMZvVaRK51gJIqU2AIwdulebuwSjiH3opl97r4nzVxcAkZxjCmUZkLWGdwO/2VAOT3yTF4RSlEVFI9JjHmbs+0XZGxuQ6Hil0KxXSguzdeyGuWCu9sb7QdS+7ahFD9S+ZEBT7NC3NCk7dWTGOg8hq4jfxNofkc/v37z0kGITkPeT6SnTP866KwFzLpRbwVm5e0DXLpVaAw1nWDVpJcbS2U7IVItxVHwIdqJzEI9VY2UsLijInvvRpoyb1x29HYXegHpstFwSUakRsoQTPIYTmJeK3u4HmIWX0T7XQSUQt7MYbN8Dm9X316T7zAUt86U0Ub/quIR4bnHC/o4hlFFtDzMKcoHPaJwty0XF4Ts8U9gGgXQWRauyByZZVgNlgIsBdwq562SFJt3Sg1LQKbv5HCK7NnqAl+cEbOktBwD0c/1OMQaX8V36fuSJ8MegeiqNST+WnoamzKDrIN+gNriBOmzJ0bvuvYhi2gUQkUVYQ/gTUtN90zifYNIVeJz5EmyGks8N8nozboB2xTr3N0Wy8ckUB1l0RWlrPxDy6LUa4agIaEzhjNt5UsfyUQuX+J1/tePluvtIl6BL5HV6Jcvpm1pwqDNlqoQ04iFFlwewPiQIIvbIYjA==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
-    </header>
-    <header>
-        <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LCSESSIONID=0000NwmSBlOq7pVhUrK3-jFgulr:180t512oj; Path=/; HttpOnly]]></value>
+        <value><![CDATA[LCSESSIONID=0000KDIqky2ssgZbt1vSRcB8ZFz:18dna4k6n; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Keep-Alive]]></name>
@@ -361,22 +361,22 @@
     </header></headers>
 <data><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns="http://www.w3.org/2005/Atom">
-  <id>https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/subcommunities?communityUuid=a8ccb2be-157d-4519-9e94-9aa9a6d5868c</id>
-  <title type="text">Test Community1379415070423 -  Subcommunities</title>
-  <updated>2014-01-27T16:59:15.316Z</updated>
+  <id>https://qs.renovations.com:444/communities/service/atom/community/subcommunities?communityUuid=bfab3e05-cb21-41e4-a9b0-0ab8aebc4219</id>
+  <title type="text">CreateCommunity Test 1391207774872 - 1 -  Subcommunities</title>
+  <updated>2014-02-05T16:28:23.650Z</updated>
   <generator version="4.5.0.0" uri="http://www.ibm.com/xmlns/prod/sn">IBM Connections - Communities</generator>
-  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/service" rel="http://www.ibm.com/xmlns/prod/sn/service">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/service" rel="http://www.ibm.com/xmlns/prod/sn/service">
   </link>
-  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/service" rel="service">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/service" rel="service">
   </link>
-  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/subcommunities?communityUuid=a8ccb2be-157d-4519-9e94-9aa9a6d5868c" rel="self">
+  <link href="https://qs.renovations.com:444/communities/service/atom/community/subcommunities?communityUuid=bfab3e05-cb21-41e4-a9b0-0ab8aebc4219" rel="self">
   </link>
-  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/html/allcommunities" rel="alternate">
+  <link href="https://dev.sdkdemo.com:444/communities/service/html/allcommunities" rel="alternate">
   </link>
   <opensearch:totalResults>0</opensearch:totalResults>
   <opensearch:startIndex>0</opensearch:startIndex>
   <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
-  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/subcommunities?communityUuid=a8ccb2be-157d-4519-9e94-9aa9a6d5868c&amp;outputType=categories" rel="http://www.ibm.com/xmlns/prod/sn/tag-cloud" type="application/atomcat+xml">
+  <link href="https://qs.renovations.com:444/communities/service/atom/community/subcommunities?communityUuid=bfab3e05-cb21-41e4-a9b0-0ab8aebc4219&amp;outputType=categories" rel="http://www.ibm.com/xmlns/prod/sn/tag-cloud" type="application/atomcat+xml">
   </link>
 </feed>]]></data>
 </response>
@@ -384,7 +384,7 @@
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Mon, 27 Jan 2014 16:59:15 GMT]]></value>
+        <value><![CDATA[Wed, 05 Feb 2014 16:28:24 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -408,7 +408,7 @@
     </header>
     <header>
         <name><![CDATA[Last-Modified]]></name>
-        <value><![CDATA[Mon, 27 Jan 2014 16:59:15 GMT]]></value>
+        <value><![CDATA[Wed, 05 Feb 2014 16:28:24 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Pragma]]></name>
@@ -416,19 +416,15 @@
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[lcLang=en_us; Path=/]]></value>
+        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/gqT7sa/aGfWQJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken=PUBjyRNSiMicDeydwCeSe/gUuml0fCDnccXoWVT0q2G+DB9N76HWlKqqf16uAHfzzNbPAEwptZNqH4INVmo/K32Q5R7T1SugHW6qMsaWqiSnnoONNOeWPNzOVhjHbAXgyNVu+Z7c4oaxpsqHYzYe4Wwtaiu5GX1TlgSbpofbB7B6coN9ik2nPZhmlRvipNQ2y7hL0foIb6UhwN2+/LCf3IUc/YAk1jgjH4C8lPIHUypv6ZF0FmKyy8mxpdGXaA/KStdm/ujfrbSN07lkfddhCtyrtr9ocGeO6hPIeOQYNnx+Aucg4i8u+rcgnrcfaAsZDETkgxXipmMunpY6JIQiyg==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
+        <value><![CDATA[LtpaToken2=dLoJpMwuzka91JClFPzdPe2OPYoo/7d6aV25uJ6PHqHps7YLFOOvHcUCe4UqKvfeEh50lMUIkDj6MNZPAF5sRoZFy2LLu/KekFGrEXaNW+T5yE7RL+DuxR0zzYbF5LHHudi+w7aNzVZsTkufD75b39tJDX8C8vURStD7V2JeyIOM72N+ZKc86GeeXgmTN0lw+Xn0EUg/nXU98MDEyUUerScaDikjIKt3qSnAjTyyFygXmEzfvb4sFe3XftZHSUdOmLHk/f55lBAaf+ZI//vWRirZN4s2ZrWvyivf8P2BIxoMMDv33F9dIbEjB8OVNfRksN1BTwOspxInN/n7WGgxrIDzUaMZsjX0+GlOkeBiO+OfO0n3n4PRQ3P1dt+9NHiVYIghybtq1DgsL33kxyuzrzdm5kDabT8BGNdSbhuyyxhSglDz2gXhenTrB2lMz5rmj10fTUy/jUCZPIhUhEecUX32dERUH00tke3piqmU9S/yMq3BOcGHjQixleGI1qCPb4/XNNc8fxCL50Ek26RSVRP6sPvW/K0Colb3lCRW69km8yGTJXLsZElgSyjJi0W/JisFoesjnUwgFeBTPVrU89tsNw8dLEd+CVflMS5evS1t8d8famsmW3TRZfV4uCL3t2/2gISb55t/UsfxAqbwPJ82hoDEfbBAjZ26S39tyQQHvjrk3EbVI8Kbwjjusjq1jggk/MROfGytTfZG7WR6/Ini/GAfJIq46RuXNmpZg9U=; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=foEm165oa/GvXKkVVtrTNG8bcKh1Qq+/pddGMZvVaRK51gJIqU2AIwdulebuwSjiH3opl97r4nzVxcAkZxjCmUZkLWGdwO/2VAOT3yTF4RSlEVFI9JjHmbs+0XZGxuQ6Hil0KxXSguzdeyGuWCu9sb7QdS+7ahFD9S+ZEBT7NC3NCk7dWTGOg8hq4jfxNofkc/v37z0kGITkPeT6SnTP866KwFzLpRbwVm5e0DXLpVaAw1nWDVpJcbS2U7IVItxVHwIdqJzEI9VY2UsLijInvvRpoyb1x29HYXegHpstFwSUakRsoQTPIYTmJeK3u4HmIWX0T7XQSUQt7MYbN8Dm9X316T7zAUt86U0Ub/quIR4bnHC/o4hlFFtDzMKcoHPaJwty0XF4Ts8U9gGgXQWRauyByZZVgNlgIsBdwq562SFJt3Sg1LQKbv5HCK7NnqAl+cEbOktBwD0c/1OMQaX8V36fuSJ8MegeiqNST+WnoamzKDrIN+gNriBOmzJ0bvuvYhi2gUQkUVYQ/gTUtN90zifYNIVeJz5EmyGks8N8nozboB2xTr3N0Wy8ckUB1l0RWlrPxDy6LUa4agIaEzhjNt5UsfyUQuX+J1/tePluvtIl6BL5HV6Jcvpm1pwqDNlqoQ04iFFlwewPiQIIvbIYjA==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
-    </header>
-    <header>
-        <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LCSESSIONID=0000Ldj_FL0RheB2QB2XPE-VT3a:180t512oj; Path=/; HttpOnly]]></value>
+        <value><![CDATA[LCSESSIONID=0000EJE4PldRr2w6jaUk47OYMvz:18dna4k6n; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Keep-Alive]]></name>
@@ -450,13 +446,13 @@
         <name><![CDATA[Content-Language]]></name>
         <value><![CDATA[en-US]]></value>
     </header></headers>
-<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"><opensearch:totalResults xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">2</opensearch:totalResults><opensearch:startIndex xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">1</opensearch:startIndex><opensearch:itemsPerPage xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">10</opensearch:itemsPerPage><title type="text">Test Community1379415070423 - Members</title><id>https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/members?communityUuid=a8ccb2be-157d-4519-9e94-9aa9a6d5868c</id><updated>2014-01-27T16:59:15.947Z</updated><generator uri="http://www.ibm.com/xmlns/prod/sn" version="4.5.0.0">IBM Connections - Communities</generator><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/members?communityUuid=a8ccb2be-157d-4519-9e94-9aa9a6d5868c" rel="self"></link><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/members?communityUuid=a8ccb2be-157d-4519-9e94-9aa9a6d5868c&amp;outputType=categories" rel="http://www.ibm.com/xmlns/prod/sn/tag-cloud" type="application/atomcat+xml"></link><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/service?communityUuid=a8ccb2be-157d-4519-9e94-9aa9a6d5868c" rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml"></link><snx:communityLastMod xmlns:snx="http://www.ibm.com/xmlns/prod/sn" component="http://www.ibm.com/xmlns/prod/sn/communities">1379421735706</snx:communityLastMod><snx:rank xmlns:snx="http://www.ibm.com/xmlns/prod/sn" scheme="http://www.ibm.com/xmlns/prod/sn/user">2</snx:rank><snx:rank xmlns:snx="http://www.ibm.com/xmlns/prod/sn" scheme="http://www.ibm.com/xmlns/prod/sn/group">0</snx:rank><entry><id>http://communities.ibm.com:2006/service/atom/community/members?communityUuid=a8ccb2be-157d-4519-9e94-9aa9a6d5868c&amp;email=fadams@renovations.com</id><title type="text">Frank Adams</title><summary type="text">Frank Adams</summary><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/profiles/atom/profile.do?email=fadams@renovations.com" type="application/atom+xml"></link><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/profiles/vcard/profile.do?email=fadams@renovations.com" type="text/directory"></link><published>2013-09-17T10:50:24.439Z</published><updated>2013-09-17T10:50:24.439Z</updated><contributor><email>fadams@renovations.com</email><snx:userid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid><snx:userState xmlns:snx="http://www.ibm.com/xmlns/prod/sn">active</snx:userState><name>Frank Adams</name></contributor><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/members?communityUuid=a8ccb2be-157d-4519-9e94-9aa9a6d5868c&amp;email=fadams@renovations.com" rel="self"></link><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/members?communityUuid=a8ccb2be-157d-4519-9e94-9aa9a6d5868c&amp;email=fadams@renovations.com" rel="edit"></link><snx:role xmlns:snx="http://www.ibm.com/xmlns/prod/sn" component="http://www.ibm.com/xmlns/prod/sn/communities">owner</snx:role><category term="person" scheme="http://www.ibm.com/xmlns/prod/sn/type"></category><snx:orgId xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:orgId><content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml"><span><a href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/profiles/atom/profile.do?email=fadams@renovations.com" class="url fn">Frank Adams</a><div><a href="mailto:fadams@renovations.com" class="email">fadams@renovations.com</a></div><div class="x-guid">0F19F8AD-37EA-6033-8525-7BBF005634B5</div><div class="x-community-role">owner</div></span></div></content></entry><entry><id>http://communities.ibm.com:2006/service/atom/community/members?communityUuid=a8ccb2be-157d-4519-9e94-9aa9a6d5868c&amp;email=bjordan@renovations.com</id><title type="text">Bill Jordan</title><summary type="text">Bill Jordan</summary><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/profiles/atom/profile.do?email=bjordan@renovations.com" type="application/atom+xml"></link><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/profiles/vcard/profile.do?email=bjordan@renovations.com" type="text/directory"></link><published>2013-09-17T12:42:15.693Z</published><updated>2013-09-17T12:42:15.693Z</updated><contributor><email>bjordan@renovations.com</email><snx:userid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">70855A57-719D-FC49-8525-7BBF0055FAD4</snx:userid><snx:userState xmlns:snx="http://www.ibm.com/xmlns/prod/sn">active</snx:userState><name>Bill Jordan</name></contributor><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/members?communityUuid=a8ccb2be-157d-4519-9e94-9aa9a6d5868c&amp;email=bjordan@renovations.com" rel="self"></link><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/members?communityUuid=a8ccb2be-157d-4519-9e94-9aa9a6d5868c&amp;email=bjordan@renovations.com" rel="edit"></link><snx:role xmlns:snx="http://www.ibm.com/xmlns/prod/sn" component="http://www.ibm.com/xmlns/prod/sn/communities">member</snx:role><category term="person" scheme="http://www.ibm.com/xmlns/prod/sn/type"></category><snx:orgId xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:orgId><content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml"><span><a href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/profiles/atom/profile.do?email=bjordan@renovations.com" class="url fn">Bill Jordan</a><div><a href="mailto:bjordan@renovations.com" class="email">bjordan@renovations.com</a></div><div class="x-guid">70855A57-719D-FC49-8525-7BBF0055FAD4</div><div class="x-community-role">member</div></span></div></content></entry></feed>]]></data>
+<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"><opensearch:totalResults xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">1</opensearch:totalResults><opensearch:startIndex xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">1</opensearch:startIndex><opensearch:itemsPerPage xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">10</opensearch:itemsPerPage><title type="text">CreateCommunity Test 1391207774872 - 1 - Members</title><id>https://dev.sdkdemo.com:444/communities/service/atom/community/members?communityUuid=bfab3e05-cb21-41e4-a9b0-0ab8aebc4219</id><updated>2014-02-05T16:28:24.340Z</updated><generator uri="http://www.ibm.com/xmlns/prod/sn" version="4.5.0.0">IBM Connections - Communities</generator><link href="https://qs.renovations.com:444/communities/service/atom/community/members?communityUuid=bfab3e05-cb21-41e4-a9b0-0ab8aebc4219" rel="self"></link><link href="https://dev.sdkdemo.com:444/communities/service/atom/community/members?communityUuid=bfab3e05-cb21-41e4-a9b0-0ab8aebc4219&amp;outputType=categories" rel="http://www.ibm.com/xmlns/prod/sn/tag-cloud" type="application/atomcat+xml"></link><link href="https://dev.sdkdemo.com:444/communities/service/atom/community/service?communityUuid=bfab3e05-cb21-41e4-a9b0-0ab8aebc4219" rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml"></link><snx:communityLastMod xmlns:snx="http://www.ibm.com/xmlns/prod/sn" component="http://www.ibm.com/xmlns/prod/sn/communities">1391207777906</snx:communityLastMod><snx:rank xmlns:snx="http://www.ibm.com/xmlns/prod/sn" scheme="http://www.ibm.com/xmlns/prod/sn/user">1</snx:rank><snx:rank xmlns:snx="http://www.ibm.com/xmlns/prod/sn" scheme="http://www.ibm.com/xmlns/prod/sn/group">0</snx:rank><entry><id>http://communities.ibm.com:2006/service/atom/community/members?communityUuid=bfab3e05-cb21-41e4-a9b0-0ab8aebc4219&amp;email=fadams@renovations.com</id><title type="text">Frank Adams</title><summary type="text">Frank Adams</summary><link href="https://dev.sdkdemo.com:444/profiles/atom/profile.do?email=fadams@renovations.com" type="application/atom+xml"></link><link href="https://dev.sdkdemo.com:444/profiles/vcard/profile.do?email=fadams@renovations.com" type="text/directory"></link><published>2014-01-31T22:36:17.760Z</published><updated>2014-01-31T22:36:17.760Z</updated><contributor><email>fadams@renovations.com</email><snx:userid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">EFD413BC-E572-760A-8625-7C6E00506453</snx:userid><snx:userState xmlns:snx="http://www.ibm.com/xmlns/prod/sn">active</snx:userState><name>Frank Adams</name></contributor><link href="https://dev.sdkdemo.com:444/communities/service/atom/community/members?communityUuid=bfab3e05-cb21-41e4-a9b0-0ab8aebc4219&amp;email=fadams@renovations.com" rel="self"></link><link href="https://dev.sdkdemo.com:444/communities/service/atom/community/members?communityUuid=bfab3e05-cb21-41e4-a9b0-0ab8aebc4219&amp;email=fadams@renovations.com" rel="edit"></link><snx:role xmlns:snx="http://www.ibm.com/xmlns/prod/sn" component="http://www.ibm.com/xmlns/prod/sn/communities">owner</snx:role><category term="person" scheme="http://www.ibm.com/xmlns/prod/sn/type"></category><snx:orgId xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:orgId><content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml"><span><a href="https://dev.sdkdemo.com:444/profiles/atom/profile.do?email=fadams@renovations.com" class="url fn">Frank Adams</a><div><a href="mailto:fadams@renovations.com" class="email">fadams@renovations.com</a></div><div class="x-guid">EFD413BC-E572-760A-8625-7C6E00506453</div><div class="x-community-role">owner</div></span></div></content></entry></feed>]]></data>
 </response>
 <response statusCode="200" statusReason="OK">
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Mon, 27 Jan 2014 16:59:16 GMT]]></value>
+        <value><![CDATA[Wed, 05 Feb 2014 16:28:24 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -480,23 +476,19 @@
     </header>
     <header>
         <name><![CDATA[Last-Modified]]></name>
-        <value><![CDATA[Mon, 27 Jan 2014 16:59:16 GMT]]></value>
+        <value><![CDATA[Wed, 05 Feb 2014 16:28:24 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[lcLang=en_us; Path=/]]></value>
+        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/gqT7sa/aGfWQJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken=PUBjyRNSiMicDeydwCeSe/gUuml0fCDnccXoWVT0q2G+DB9N76HWlKqqf16uAHfzzNbPAEwptZNqH4INVmo/K32Q5R7T1SugHW6qMsaWqiSnnoONNOeWPNzOVhjHbAXgyNVu+Z7c4oaxpsqHYzYe4Wwtaiu5GX1TlgSbpofbB7B6coN9ik2nPZhmlRvipNQ2y7hL0foIb6UhwN2+/LCf3IUc/YAk1jgjH4C8lPIHUypv6ZF0FmKyy8mxpdGXaA/KStdm/ujfrbSN07lkfddhCtyrtr9ocGeO6hPIeOQYNnx+Aucg4i8u+rcgnrcfaAsZDETkgxXipmMunpY6JIQiyg==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
+        <value><![CDATA[LtpaToken2=dLoJpMwuzka91JClFPzdPe2OPYoo/7d6aV25uJ6PHqHps7YLFOOvHcUCe4UqKvfeEh50lMUIkDj6MNZPAF5sRoZFy2LLu/KekFGrEXaNW+T5yE7RL+DuxR0zzYbF5LHHudi+w7aNzVZsTkufD75b39tJDX8C8vURStD7V2JeyIOM72N+ZKc86GeeXgmTN0lw+Xn0EUg/nXU98MDEyUUerScaDikjIKt3qSnAjTyyFygXmEzfvb4sFe3XftZHSUdOmLHk/f55lBAaf+ZI//vWRirZN4s2ZrWvyivf8P2BIxoMMDv33F9dIbEjB8OVNfRksN1BTwOspxInN/n7WGgxrIDzUaMZsjX0+GlOkeBiO+OfO0n3n4PRQ3P1dt+9NHiVYIghybtq1DgsL33kxyuzrzdm5kDabT8BGNdSbhuyyxhSglDz2gXhenTrB2lMz5rmj10fTUy/jUCZPIhUhEecUX32dERUH00tke3piqmU9S/yMq3BOcGHjQixleGI1qCPb4/XNNc8fxCL50Ek26RSVRP6sPvW/K0Colb3lCRW69km8yGTJXLsZElgSyjJi0W/JisFoesjnUwgFeBTPVrU89tsNw8dLEd+CVflMS5evS1t8d8famsmW3TRZfV4uCL3t2/2gISb55t/UsfxAqbwPJ82hoDEfbBAjZ26S39tyQQHvjrk3EbVI8Kbwjjusjq1jggk/MROfGytTfZG7WR6/Ini/GAfJIq46RuXNmpZg9U=; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=foEm165oa/GvXKkVVtrTNG8bcKh1Qq+/pddGMZvVaRK51gJIqU2AIwdulebuwSjiH3opl97r4nzVxcAkZxjCmUZkLWGdwO/2VAOT3yTF4RSlEVFI9JjHmbs+0XZGxuQ6Hil0KxXSguzdeyGuWCu9sb7QdS+7ahFD9S+ZEBT7NC3NCk7dWTGOg8hq4jfxNofkc/v37z0kGITkPeT6SnTP866KwFzLpRbwVm5e0DXLpVaAw1nWDVpJcbS2U7IVItxVHwIdqJzEI9VY2UsLijInvvRpoyb1x29HYXegHpstFwSUakRsoQTPIYTmJeK3u4HmIWX0T7XQSUQt7MYbN8Dm9X316T7zAUt86U0Ub/quIR4bnHC/o4hlFFtDzMKcoHPaJwty0XF4Ts8U9gGgXQWRauyByZZVgNlgIsBdwq562SFJt3Sg1LQKbv5HCK7NnqAl+cEbOktBwD0c/1OMQaX8V36fuSJ8MegeiqNST+WnoamzKDrIN+gNriBOmzJ0bvuvYhi2gUQkUVYQ/gTUtN90zifYNIVeJz5EmyGks8N8nozboB2xTr3N0Wy8ckUB1l0RWlrPxDy6LUa4agIaEzhjNt5UsfyUQuX+J1/tePluvtIl6BL5HV6Jcvpm1pwqDNlqoQ04iFFlwewPiQIIvbIYjA==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
-    </header>
-    <header>
-        <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LCSESSIONID=00001dspBmuBNo9D4i9f747Pzws:180t512oj; Path=/; HttpOnly]]></value>
+        <value><![CDATA[LCSESSIONID=0000Htex03miEO264tCofjAh0dv:18dna4k6n; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Keep-Alive]]></name>
@@ -520,15 +512,15 @@
     </header></headers>
 <data><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns="http://www.w3.org/2005/Atom">
-  <id>urn:lsid:ibm.com:communities:invites-a8ccb2be-157d-4519-9e94-9aa9a6d5868c</id>
-  <title type="text">Invitations for Test Community1379415070423</title>
-  <updated>2014-01-27T16:59:16.604Z</updated>
+  <id>urn:lsid:ibm.com:communities:invites-bfab3e05-cb21-41e4-a9b0-0ab8aebc4219</id>
+  <title type="text">Invitations for CreateCommunity Test 1391207774872 - 1</title>
+  <updated>2014-02-05T16:28:24.932Z</updated>
   <generator version="4.5.0.0" uri="http://www.ibm.com/xmlns/prod/sn">IBM Connections - Communities</generator>
-  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/service" rel="http://www.ibm.com/xmlns/prod/sn/service">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/service" rel="http://www.ibm.com/xmlns/prod/sn/service">
   </link>
-  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/service" rel="service">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/service" rel="service">
   </link>
-  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/invites?communityUuid=a8ccb2be-157d-4519-9e94-9aa9a6d5868c" rel="self">
+  <link href="https://qs.renovations.com:444/communities/service/atom/community/invites?communityUuid=bfab3e05-cb21-41e4-a9b0-0ab8aebc4219" rel="self">
   </link>
   <opensearch:totalResults>0</opensearch:totalResults>
   <opensearch:startIndex>0</opensearch:startIndex>
@@ -539,7 +531,7 @@
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Mon, 27 Jan 2014 16:59:17 GMT]]></value>
+        <value><![CDATA[Wed, 05 Feb 2014 16:28:25 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -555,7 +547,7 @@
     </header>
     <header>
         <name><![CDATA[Expires]]></name>
-        <value><![CDATA[Mon, 27 Jan 2014 16:59:17 GMT]]></value>
+        <value><![CDATA[Wed, 05 Feb 2014 16:28:25 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Accept]]></name>
@@ -563,23 +555,19 @@
     </header>
     <header>
         <name><![CDATA[Last-Modified]]></name>
-        <value><![CDATA[Mon, 27 Jan 2014 16:59:17 GMT]]></value>
+        <value><![CDATA[Wed, 05 Feb 2014 16:28:25 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[lcLang=en_us; Path=/]]></value>
+        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/gqT7sa/aGfWQJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken=PUBjyRNSiMicDeydwCeSe/gUuml0fCDnccXoWVT0q2G+DB9N76HWlKqqf16uAHfzzNbPAEwptZNqH4INVmo/K32Q5R7T1SugHW6qMsaWqiSnnoONNOeWPNzOVhjHbAXgyNVu+Z7c4oaxpsqHYzYe4Wwtaiu5GX1TlgSbpofbB7B6coN9ik2nPZhmlRvipNQ2y7hL0foIb6UhwN2+/LCf3IUc/YAk1jgjH4C8lPIHUypv6ZF0FmKyy8mxpdGXaA/KStdm/ujfrbSN07lkfddhCtyrtr9ocGeO6hPIeOQYNnx+Aucg4i8u+rcgnrcfaAsZDETkgxXipmMunpY6JIQiyg==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
+        <value><![CDATA[LtpaToken2=dLoJpMwuzka91JClFPzdPe2OPYoo/7d6aV25uJ6PHqHps7YLFOOvHcUCe4UqKvfeEh50lMUIkDj6MNZPAF5sRoZFy2LLu/KekFGrEXaNW+T5yE7RL+DuxR0zzYbF5LHHudi+w7aNzVZsTkufD75b39tJDX8C8vURStD7V2JeyIOM72N+ZKc86GeeXgmTN0lw+Xn0EUg/nXU98MDEyUUerScaDikjIKt3qSnAjTyyFygXmEzfvb4sFe3XftZHSUdOmLHk/f55lBAaf+ZI//vWRirZN4s2ZrWvyivf8P2BIxoMMDv33F9dIbEjB8OVNfRksN1BTwOspxInN/n7WGgxrIDzUaMZsjX0+GlOkeBiO+OfO0n3n4PRQ3P1dt+9NHiVYIghybtq1DgsL33kxyuzrzdm5kDabT8BGNdSbhuyyxhSglDz2gXhenTrB2lMz5rmj10fTUy/jUCZPIhUhEecUX32dERUH00tke3piqmU9S/yMq3BOcGHjQixleGI1qCPb4/XNNc8fxCL50Ek26RSVRP6sPvW/K0Colb3lCRW69km8yGTJXLsZElgSyjJi0W/JisFoesjnUwgFeBTPVrU89tsNw8dLEd+CVflMS5evS1t8d8famsmW3TRZfV4uCL3t2/2gISb55t/UsfxAqbwPJ82hoDEfbBAjZ26S39tyQQHvjrk3EbVI8Kbwjjusjq1jggk/MROfGytTfZG7WR6/Ini/GAfJIq46RuXNmpZg9U=; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=foEm165oa/GvXKkVVtrTNG8bcKh1Qq+/pddGMZvVaRK51gJIqU2AIwdulebuwSjiH3opl97r4nzVxcAkZxjCmUZkLWGdwO/2VAOT3yTF4RSlEVFI9JjHmbs+0XZGxuQ6Hil0KxXSguzdeyGuWCu9sb7QdS+7ahFD9S+ZEBT7NC3NCk7dWTGOg8hq4jfxNofkc/v37z0kGITkPeT6SnTP866KwFzLpRbwVm5e0DXLpVaAw1nWDVpJcbS2U7IVItxVHwIdqJzEI9VY2UsLijInvvRpoyb1x29HYXegHpstFwSUakRsoQTPIYTmJeK3u4HmIWX0T7XQSUQt7MYbN8Dm9X316T7zAUt86U0Ub/quIR4bnHC/o4hlFFtDzMKcoHPaJwty0XF4Ts8U9gGgXQWRauyByZZVgNlgIsBdwq562SFJt3Sg1LQKbv5HCK7NnqAl+cEbOktBwD0c/1OMQaX8V36fuSJ8MegeiqNST+WnoamzKDrIN+gNriBOmzJ0bvuvYhi2gUQkUVYQ/gTUtN90zifYNIVeJz5EmyGks8N8nozboB2xTr3N0Wy8ckUB1l0RWlrPxDy6LUa4agIaEzhjNt5UsfyUQuX+J1/tePluvtIl6BL5HV6Jcvpm1pwqDNlqoQ04iFFlwewPiQIIvbIYjA==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
-    </header>
-    <header>
-        <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LCSESSIONID=00002MFcviEj956SGAbJ1WYajyy:180t512oj; Path=/; HttpOnly]]></value>
+        <value><![CDATA[LCSESSIONID=0000yFUOVRvok1anGYOpET5ycGp:18dna4k6n; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
@@ -587,7 +575,7 @@
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[ForumsUserId=0F19F8AD-37EA-6033-8525-7BBF005634B5; Path=/forums]]></value>
+        <value><![CDATA[ForumsUserId=EFD413BC-E572-760A-8625-7C6E00506453; Path=/forums]]></value>
     </header>
     <header>
         <name><![CDATA[Cache-Control]]></name>
@@ -613,13 +601,13 @@
         <name><![CDATA[Content-Language]]></name>
         <value><![CDATA[en-US]]></value>
     </header></headers>
-<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:thr="http://purl.org/syndication/thread/1.0"><opensearch:totalResults xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">1</opensearch:totalResults><opensearch:startIndex xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">1</opensearch:startIndex><opensearch:itemsPerPage xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">10</opensearch:itemsPerPage><generator uri="http://www.ibm.com/xmlns/prod/sn" version="4.5.0.0">IBM Connections - Discussion Forum</generator><title type="text">Default Root Page</title><updated>2013-09-17T10:50:24.969Z</updated><author><email>Forum Administrator</email><name>Forum Administrator</name><snx:userid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">-Activities-Administrator-ID-</snx:userid><snx:userState xmlns:snx="http://www.ibm.com/xmlns/prod/sn">active</snx:userState></author><contributor><email>Forum Administrator</email><name>Forum Administrator</name><snx:userid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">-Activities-Administrator-ID-</snx:userid><snx:userState xmlns:snx="http://www.ibm.com/xmlns/prod/sn">active</snx:userState></contributor><id>https://vhost0839.dc1.on.ca.compute.ihost.com:444/forums/atom/forums</id><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/forums/html/public" rel="alternate"></link><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/forums/atom/tags/forums?categoryUuid=00000000-0000-000000000-000000000005" rel="http://www.ibm.com/xmlns/prod/sn/tag-cloud" type="application/atomcat+xml"></link><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/forums/atom/forums?communityUuid=a8ccb2be-157d-4519-9e94-9aa9a6d5868c" rel="self"></link><entry xmlns:app="http://www.w3.org/2007/app" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:thr="http://purl.org/syndication/thread/1.0"><id>urn:lsid:ibm.com:forum:499ed768-e62f-49f3-a3ae-c7ad79d46d24</id><title type="text">Test Community 1ab1379415026340</title><snx:moderation xmlns:snx="http://www.ibm.com/xmlns/prod/sn" status="active"></snx:moderation><published>2013-09-17T10:50:24.969Z</published><author><email>fadams@renovations.com</email><name>Frank Adams</name><snx:userid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid><snx:userState xmlns:snx="http://www.ibm.com/xmlns/prod/sn">active</snx:userState></author><updated>2013-09-17T10:50:24.969Z</updated><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/forums/atom/forum?forumUuid=499ed768-e62f-49f3-a3ae-c7ad79d46d24" rel="self" type="application/atom+xml"></link><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/forums/atom/forum?forumUuid=499ed768-e62f-49f3-a3ae-c7ad79d46d24" rel="edit" type="application/atom+xml"></link><category term="forum-forum" scheme="http://www.ibm.com/xmlns/prod/sn/type"></category><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/forums/html/forum?id=499ed768-e62f-49f3-a3ae-c7ad79d46d24" rel="alternate" type="text/html"></link><link xmlns:thr="http://purl.org/syndication/thread/1.0" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/forums/atom/topics?forumUuid=499ed768-e62f-49f3-a3ae-c7ad79d46d24" rel="replies" type="application/atom+xml" thr:count="0"></link><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/forums/atom/acl?forumUuid=499ed768-e62f-49f3-a3ae-c7ad79d46d24" rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml"></link><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/forums/atom/service?forumUuid=499ed768-e62f-49f3-a3ae-c7ad79d46d24" rel="service" type="application/atomsvc+xml" title="Atom Publishing Protocol"></link><thr:in-reply-to xmlns:thr="http://purl.org/syndication/thread/1.0" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/forums/atom/forums?categoryUuid=00000000-0000-000000000-000000000006" ref="urn:lsid:ibm.com:forum:00000000-0000-000000000-000000000006" type="application/atom+xml"></thr:in-reply-to><content type="html"></content><link href="http://vhost0839.dc1.on.ca.compute.ihost.com:81/communities/service/atom/community/instance?communityUuid=a8ccb2be-157d-4519-9e94-9aa9a6d5868c" rel="http://www.ibm.com/xmlns/prod/sn/container" type="application/atom+xml"></link><snx:communityUuid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">a8ccb2be-157d-4519-9e94-9aa9a6d5868c</snx:communityUuid></entry></feed>]]></data>
+<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:thr="http://purl.org/syndication/thread/1.0"><opensearch:totalResults xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">1</opensearch:totalResults><opensearch:startIndex xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">1</opensearch:startIndex><opensearch:itemsPerPage xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">10</opensearch:itemsPerPage><generator uri="http://www.ibm.com/xmlns/prod/sn" version="4.5.0.0">IBM Connections - Discussion Forum</generator><title type="text">Default Root Page</title><updated>2014-01-31T22:36:21.422Z</updated><author><email>Forum Administrator</email><name>Forum Administrator</name><snx:userid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">-Activities-Administrator-ID-</snx:userid><snx:userState xmlns:snx="http://www.ibm.com/xmlns/prod/sn">active</snx:userState></author><contributor><email>Forum Administrator</email><name>Forum Administrator</name><snx:userid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">-Activities-Administrator-ID-</snx:userid><snx:userState xmlns:snx="http://www.ibm.com/xmlns/prod/sn">active</snx:userState></contributor><id>https://dev.sdkdemo.com:444/forums/atom/forums</id><link href="https://dev.sdkdemo.com:444/forums/html/public" rel="alternate"></link><link href="https://dev.sdkdemo.com:444/forums/atom/tags/forums?categoryUuid=00000000-0000-000000000-000000000005" rel="http://www.ibm.com/xmlns/prod/sn/tag-cloud" type="application/atomcat+xml"></link><link href="https://dev.sdkdemo.com:444/forums/atom/forums?communityUuid=bfab3e05-cb21-41e4-a9b0-0ab8aebc4219" rel="self"></link><entry xmlns:app="http://www.w3.org/2007/app" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:thr="http://purl.org/syndication/thread/1.0"><id>urn:lsid:ibm.com:forum:33f6c836-82f9-4377-89ae-8eec566374a5</id><title type="text">CreateCommunity Test 1391207774872 - 1</title><snx:moderation xmlns:snx="http://www.ibm.com/xmlns/prod/sn" status="active"></snx:moderation><published>2014-01-31T22:36:21.422Z</published><author><email>fadams@renovations.com</email><name>Frank Adams</name><snx:userid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">EFD413BC-E572-760A-8625-7C6E00506453</snx:userid><snx:userState xmlns:snx="http://www.ibm.com/xmlns/prod/sn">active</snx:userState></author><updated>2014-01-31T22:36:21.422Z</updated><link href="https://dev.sdkdemo.com:444/forums/atom/forum?forumUuid=33f6c836-82f9-4377-89ae-8eec566374a5" rel="self" type="application/atom+xml"></link><link href="https://dev.sdkdemo.com:444/forums/atom/forum?forumUuid=33f6c836-82f9-4377-89ae-8eec566374a5" rel="edit" type="application/atom+xml"></link><category term="forum-forum" scheme="http://www.ibm.com/xmlns/prod/sn/type"></category><link href="https://dev.sdkdemo.com:444/forums/html/forum?id=33f6c836-82f9-4377-89ae-8eec566374a5" rel="alternate" type="text/html"></link><link xmlns:thr="http://purl.org/syndication/thread/1.0" href="https://dev.sdkdemo.com:444/forums/atom/topics?forumUuid=33f6c836-82f9-4377-89ae-8eec566374a5" rel="replies" type="application/atom+xml" thr:count="0"></link><link href="https://dev.sdkdemo.com:444/forums/atom/acl?forumUuid=33f6c836-82f9-4377-89ae-8eec566374a5" rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml"></link><link href="https://dev.sdkdemo.com:444/forums/atom/service?forumUuid=33f6c836-82f9-4377-89ae-8eec566374a5" rel="service" type="application/atomsvc+xml" title="Atom Publishing Protocol"></link><thr:in-reply-to xmlns:thr="http://purl.org/syndication/thread/1.0" href="https://dev.sdkdemo.com:444/forums/atom/forums?categoryUuid=00000000-0000-000000000-000000000006" ref="urn:lsid:ibm.com:forum:00000000-0000-000000000-000000000006" type="application/atom+xml"></thr:in-reply-to><content type="html"></content><link href="http://dev.sdkdemo.com:81/communities/service/atom/community/instance?communityUuid=bfab3e05-cb21-41e4-a9b0-0ab8aebc4219" rel="http://www.ibm.com/xmlns/prod/sn/container" type="application/atom+xml"></link><snx:communityUuid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">bfab3e05-cb21-41e4-a9b0-0ab8aebc4219</snx:communityUuid></entry></feed>]]></data>
 </response>
 <response statusCode="200" statusReason="OK">
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Mon, 27 Jan 2014 16:59:18 GMT]]></value>
+        <value><![CDATA[Wed, 05 Feb 2014 16:28:26 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -627,7 +615,7 @@
     </header>
     <header>
         <name><![CDATA[X-LConn-Auth]]></name>
-        <value><![CDATA[true]]></value>
+        <value><![CDATA[false]]></value>
     </header>
     <header>
         <name><![CDATA[X-UA-Compatible]]></name>
@@ -635,7 +623,7 @@
     </header>
     <header>
         <name><![CDATA[Expires]]></name>
-        <value><![CDATA[Mon, 27 Jan 2014 16:59:18 GMT]]></value>
+        <value><![CDATA[Wed, 05 Feb 2014 16:28:26 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Accept]]></name>
@@ -643,7 +631,19 @@
     </header>
     <header>
         <name><![CDATA[Last-Modified]]></name>
-        <value><![CDATA[Mon, 27 Jan 2014 16:59:18 GMT]]></value>
+        <value><![CDATA[Wed, 05 Feb 2014 16:28:26 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/gqT7sa/aGfWQJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/; Domain=.sdkdemo.com]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=dLoJpMwuzka91JClFPzdPe2OPYoo/7d6aV25uJ6PHqHps7YLFOOvHcUCe4UqKvfeEh50lMUIkDj6MNZPAF5sRoZFy2LLu/KekFGrEXaNW+T5yE7RL+DuxR0zzYbF5LHHudi+w7aNzVZsTkufD75b39tJDX8C8vURStD7V2JeyIOM72N+ZKc86GeeXgmTN0lw+Xn0EUg/nXU98MDEyUUerScaDikjIKt3qSnAjTyyFygXmEzfvb4sFe3XftZHSUdOmLHk/f55lBAaf+ZI//vWRirZN4s2ZrWvyivf8P2BIxoMMDv33F9dIbEjB8OVNfRksN1BTwOspxInN/n7WGgxrIDzUaMZsjX0+GlOkeBiO+OfO0n3n4PRQ3P1dt+9NHiVYIghybtq1DgsL33kxyuzrzdm5kDabT8BGNdSbhuyyxhSglDz2gXhenTrB2lMz5rmj10fTUy/jUCZPIhUhEecUX32dERUH00tke3piqmU9S/yMq3BOcGHjQixleGI1qCPb4/XNNc8fxCL50Ek26RSVRP6sPvW/K0Colb3lCRW69km8yGTJXLsZElgSyjJi0W/JisFoesjnUwgFeBTPVrU89tsNw8dLEd+CVflMS5evS1t8d8famsmW3TRZfV4uCL3t2/2gISb55t/UsfxAqbwPJ82hoDEfbBAjZ26S39tyQQHvjrk3EbVI8Kbwjjusjq1jggk/MROfGytTfZG7WR6/Ini/GAfJIq46RuXNmpZg9U=; Path=/; Domain=.sdkdemo.com]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LCSESSIONID=0000CYTF435DO_waGRfBEGizJRP:18dna4k6n; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
@@ -651,7 +651,7 @@
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[ForumsUserId=0F19F8AD-37EA-6033-8525-7BBF005634B5; Path=/forums]]></value>
+        <value><![CDATA[ForumsUserId=EFD413BC-E572-760A-8625-7C6E00506453; Path=/forums]]></value>
     </header>
     <header>
         <name><![CDATA[Cache-Control]]></name>
@@ -659,7 +659,7 @@
     </header>
     <header>
         <name><![CDATA[Keep-Alive]]></name>
-        <value><![CDATA[timeout=10, max=99]]></value>
+        <value><![CDATA[timeout=10, max=100]]></value>
     </header>
     <header>
         <name><![CDATA[Connection]]></name>
@@ -677,13 +677,13 @@
         <name><![CDATA[Content-Language]]></name>
         <value><![CDATA[en-US]]></value>
     </header></headers>
-<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:thr="http://purl.org/syndication/thread/1.0"><opensearch:totalResults xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">0</opensearch:totalResults><opensearch:startIndex xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">0</opensearch:startIndex><opensearch:itemsPerPage xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">10</opensearch:itemsPerPage><id>https://vhost0839.dc1.on.ca.compute.ihost.com:444/forums/atom/topics?communityUuid=2ab5f690-206e-428d-84d5-e0cecdcb283b</id><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/forums/html/public" rel="alternate"></link><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/forums/atom/topics?communityUuid=2ab5f690-206e-428d-84d5-e0cecdcb283b" rel="self"></link><title type="text">Test Community1379421802217</title><updated>2014-01-27T16:59:18.102Z</updated><generator uri="http://www.ibm.com/xmlns/prod/sn" version="4.5.0.0">IBM Connections - Discussion Forum</generator><link href="http://vhost0839.dc1.on.ca.compute.ihost.com:81/communities/service/atom/community/instance?communityUuid=2ab5f690-206e-428d-84d5-e0cecdcb283b" rel="http://www.ibm.com/xmlns/prod/sn/container" type="application/atom+xml"></link><snx:communityUuid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">2ab5f690-206e-428d-84d5-e0cecdcb283b</snx:communityUuid></feed>]]></data>
+<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:thr="http://purl.org/syndication/thread/1.0"><opensearch:totalResults xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">0</opensearch:totalResults><opensearch:startIndex xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">0</opensearch:startIndex><opensearch:itemsPerPage xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">10</opensearch:itemsPerPage><id>https://dev.sdkdemo.com:444/forums/atom/topics?communityUuid=6d3e8279-802a-4cb1-9d47-f16d46bdf0fa</id><link href="https://dev.sdkdemo.com:444/forums/html/public" rel="alternate"></link><link href="https://dev.sdkdemo.com:444/forums/atom/topics?communityUuid=6d3e8279-802a-4cb1-9d47-f16d46bdf0fa" rel="self"></link><title type="text">CreateCommunity Test 1391207852686 - 2</title><updated>2014-02-05T16:28:26.704Z</updated><generator uri="http://www.ibm.com/xmlns/prod/sn" version="4.5.0.0">IBM Connections - Discussion Forum</generator><link href="http://dev.sdkdemo.com:81/communities/service/atom/community/instance?communityUuid=6d3e8279-802a-4cb1-9d47-f16d46bdf0fa" rel="http://www.ibm.com/xmlns/prod/sn/container" type="application/atom+xml"></link><snx:communityUuid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">6d3e8279-802a-4cb1-9d47-f16d46bdf0fa</snx:communityUuid></feed>]]></data>
 </response>
 <response statusCode="200" statusReason="OK">
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Mon, 27 Jan 2014 16:59:18 GMT]]></value>
+        <value><![CDATA[Wed, 05 Feb 2014 16:28:27 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -707,7 +707,7 @@
     </header>
     <header>
         <name><![CDATA[Last-Modified]]></name>
-        <value><![CDATA[Mon, 27 Jan 2014 16:59:18 GMT]]></value>
+        <value><![CDATA[Wed, 05 Feb 2014 16:28:27 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Pragma]]></name>
@@ -715,19 +715,15 @@
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[lcLang=en_us; Path=/]]></value>
+        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/gqT7sa/aGfWQJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken=PUBjyRNSiMicDeydwCeSe/gUuml0fCDnccXoWVT0q2G+DB9N76HWlKqqf16uAHfzzNbPAEwptZNqH4INVmo/K32Q5R7T1SugHW6qMsaWqiSnnoONNOeWPNzOVhjHbAXgyNVu+Z7c4oaxpsqHYzYe4Wwtaiu5GX1TlgSbpofbB7B6coN9ik2nPZhmlRvipNQ2y7hL0foIb6UhwN2+/LCf3IUc/YAk1jgjH4C8lPIHUypv6ZF0FmKyy8mxpdGXaA/KStdm/ujfrbSN07lkfddhCtyrtr9ocGeO6hPIeOQYNnx+Aucg4i8u+rcgnrcfaAsZDETkgxXipmMunpY6JIQiyg==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
+        <value><![CDATA[LtpaToken2=dLoJpMwuzka91JClFPzdPe2OPYoo/7d6aV25uJ6PHqHps7YLFOOvHcUCe4UqKvfeEh50lMUIkDj6MNZPAF5sRoZFy2LLu/KekFGrEXaNW+T5yE7RL+DuxR0zzYbF5LHHudi+w7aNzVZsTkufD75b39tJDX8C8vURStD7V2JeyIOM72N+ZKc86GeeXgmTN0lw+Xn0EUg/nXU98MDEyUUerScaDikjIKt3qSnAjTyyFygXmEzfvb4sFe3XftZHSUdOmLHk/f55lBAaf+ZI//vWRirZN4s2ZrWvyivf8P2BIxoMMDv33F9dIbEjB8OVNfRksN1BTwOspxInN/n7WGgxrIDzUaMZsjX0+GlOkeBiO+OfO0n3n4PRQ3P1dt+9NHiVYIghybtq1DgsL33kxyuzrzdm5kDabT8BGNdSbhuyyxhSglDz2gXhenTrB2lMz5rmj10fTUy/jUCZPIhUhEecUX32dERUH00tke3piqmU9S/yMq3BOcGHjQixleGI1qCPb4/XNNc8fxCL50Ek26RSVRP6sPvW/K0Colb3lCRW69km8yGTJXLsZElgSyjJi0W/JisFoesjnUwgFeBTPVrU89tsNw8dLEd+CVflMS5evS1t8d8famsmW3TRZfV4uCL3t2/2gISb55t/UsfxAqbwPJ82hoDEfbBAjZ26S39tyQQHvjrk3EbVI8Kbwjjusjq1jggk/MROfGytTfZG7WR6/Ini/GAfJIq46RuXNmpZg9U=; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=foEm165oa/GvXKkVVtrTNG8bcKh1Qq+/pddGMZvVaRK51gJIqU2AIwdulebuwSjiH3opl97r4nzVxcAkZxjCmUZkLWGdwO/2VAOT3yTF4RSlEVFI9JjHmbs+0XZGxuQ6Hil0KxXSguzdeyGuWCu9sb7QdS+7ahFD9S+ZEBT7NC3NCk7dWTGOg8hq4jfxNofkc/v37z0kGITkPeT6SnTP866KwFzLpRbwVm5e0DXLpVaAw1nWDVpJcbS2U7IVItxVHwIdqJzEI9VY2UsLijInvvRpoyb1x29HYXegHpstFwSUakRsoQTPIYTmJeK3u4HmIWX0T7XQSUQt7MYbN8Dm9X316T7zAUt86U0Ub/quIR4bnHC/o4hlFFtDzMKcoHPaJwty0XF4Ts8U9gGgXQWRauyByZZVgNlgIsBdwq562SFJt3Sg1LQKbv5HCK7NnqAl+cEbOktBwD0c/1OMQaX8V36fuSJ8MegeiqNST+WnoamzKDrIN+gNriBOmzJ0bvuvYhi2gUQkUVYQ/gTUtN90zifYNIVeJz5EmyGks8N8nozboB2xTr3N0Wy8ckUB1l0RWlrPxDy6LUa4agIaEzhjNt5UsfyUQuX+J1/tePluvtIl6BL5HV6Jcvpm1pwqDNlqoQ04iFFlwewPiQIIvbIYjA==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
-    </header>
-    <header>
-        <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LCSESSIONID=0000LmMdHz5eOWT6JXv-65gdk75:180t512oj; Path=/; HttpOnly]]></value>
+        <value><![CDATA[LCSESSIONID=0000b7ic_QKx-dgoOiyJ01rWMQ2:18dna4k6n; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Keep-Alive]]></name>
@@ -751,22 +747,22 @@
     </header></headers>
 <data><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns="http://www.w3.org/2005/Atom">
-  <id>https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/subcommunities?communityUuid=2ab5f690-206e-428d-84d5-e0cecdcb283b</id>
-  <title type="text">Test Community1379421802217 -  Subcommunities</title>
-  <updated>2014-01-27T16:59:18.721Z</updated>
+  <id>https://qs.renovations.com:444/communities/service/atom/community/subcommunities?communityUuid=6d3e8279-802a-4cb1-9d47-f16d46bdf0fa</id>
+  <title type="text">CreateCommunity Test 1391207852686 - 2 -  Subcommunities</title>
+  <updated>2014-02-05T16:28:27.413Z</updated>
   <generator version="4.5.0.0" uri="http://www.ibm.com/xmlns/prod/sn">IBM Connections - Communities</generator>
-  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/service" rel="http://www.ibm.com/xmlns/prod/sn/service">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/service" rel="http://www.ibm.com/xmlns/prod/sn/service">
   </link>
-  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/service" rel="service">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/service" rel="service">
   </link>
-  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/subcommunities?communityUuid=2ab5f690-206e-428d-84d5-e0cecdcb283b" rel="self">
+  <link href="https://qs.renovations.com:444/communities/service/atom/community/subcommunities?communityUuid=6d3e8279-802a-4cb1-9d47-f16d46bdf0fa" rel="self">
   </link>
-  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/html/allcommunities" rel="alternate">
+  <link href="https://dev.sdkdemo.com:444/communities/service/html/allcommunities" rel="alternate">
   </link>
   <opensearch:totalResults>0</opensearch:totalResults>
   <opensearch:startIndex>0</opensearch:startIndex>
   <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
-  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/subcommunities?communityUuid=2ab5f690-206e-428d-84d5-e0cecdcb283b&amp;outputType=categories" rel="http://www.ibm.com/xmlns/prod/sn/tag-cloud" type="application/atomcat+xml">
+  <link href="https://qs.renovations.com:444/communities/service/atom/community/subcommunities?communityUuid=6d3e8279-802a-4cb1-9d47-f16d46bdf0fa&amp;outputType=categories" rel="http://www.ibm.com/xmlns/prod/sn/tag-cloud" type="application/atomcat+xml">
   </link>
 </feed>]]></data>
 </response>
@@ -774,7 +770,7 @@
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Mon, 27 Jan 2014 16:59:19 GMT]]></value>
+        <value><![CDATA[Wed, 05 Feb 2014 16:28:28 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -798,7 +794,7 @@
     </header>
     <header>
         <name><![CDATA[Last-Modified]]></name>
-        <value><![CDATA[Mon, 27 Jan 2014 16:59:19 GMT]]></value>
+        <value><![CDATA[Wed, 05 Feb 2014 16:28:28 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Pragma]]></name>
@@ -806,19 +802,15 @@
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[lcLang=en_us; Path=/]]></value>
+        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/gqT7sa/aGfWQJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken=PUBjyRNSiMicDeydwCeSe/gUuml0fCDnccXoWVT0q2G+DB9N76HWlKqqf16uAHfzzNbPAEwptZNqH4INVmo/K32Q5R7T1SugHW6qMsaWqiSnnoONNOeWPNzOVhjHbAXgyNVu+Z7c4oaxpsqHYzYe4Wwtaiu5GX1TlgSbpofbB7B6coN9ik2nPZhmlRvipNQ2y7hL0foIb6UhwN2+/LCf3IUc/YAk1jgjH4C8lPIHUypv6ZF0FmKyy8mxpdGXaA/KStdm/ujfrbSN07lkfddhCtyrtr9ocGeO6hPIeOQYNnx+Aucg4i8u+rcgnrcfaAsZDETkgxXipmMunpY6JIQiyg==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
+        <value><![CDATA[LtpaToken2=dLoJpMwuzka91JClFPzdPe2OPYoo/7d6aV25uJ6PHqHps7YLFOOvHcUCe4UqKvfeEh50lMUIkDj6MNZPAF5sRoZFy2LLu/KekFGrEXaNW+T5yE7RL+DuxR0zzYbF5LHHudi+w7aNzVZsTkufD75b39tJDX8C8vURStD7V2JeyIOM72N+ZKc86GeeXgmTN0lw+Xn0EUg/nXU98MDEyUUerScaDikjIKt3qSnAjTyyFygXmEzfvb4sFe3XftZHSUdOmLHk/f55lBAaf+ZI//vWRirZN4s2ZrWvyivf8P2BIxoMMDv33F9dIbEjB8OVNfRksN1BTwOspxInN/n7WGgxrIDzUaMZsjX0+GlOkeBiO+OfO0n3n4PRQ3P1dt+9NHiVYIghybtq1DgsL33kxyuzrzdm5kDabT8BGNdSbhuyyxhSglDz2gXhenTrB2lMz5rmj10fTUy/jUCZPIhUhEecUX32dERUH00tke3piqmU9S/yMq3BOcGHjQixleGI1qCPb4/XNNc8fxCL50Ek26RSVRP6sPvW/K0Colb3lCRW69km8yGTJXLsZElgSyjJi0W/JisFoesjnUwgFeBTPVrU89tsNw8dLEd+CVflMS5evS1t8d8famsmW3TRZfV4uCL3t2/2gISb55t/UsfxAqbwPJ82hoDEfbBAjZ26S39tyQQHvjrk3EbVI8Kbwjjusjq1jggk/MROfGytTfZG7WR6/Ini/GAfJIq46RuXNmpZg9U=; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=foEm165oa/GvXKkVVtrTNG8bcKh1Qq+/pddGMZvVaRK51gJIqU2AIwdulebuwSjiH3opl97r4nzVxcAkZxjCmUZkLWGdwO/2VAOT3yTF4RSlEVFI9JjHmbs+0XZGxuQ6Hil0KxXSguzdeyGuWCu9sb7QdS+7ahFD9S+ZEBT7NC3NCk7dWTGOg8hq4jfxNofkc/v37z0kGITkPeT6SnTP866KwFzLpRbwVm5e0DXLpVaAw1nWDVpJcbS2U7IVItxVHwIdqJzEI9VY2UsLijInvvRpoyb1x29HYXegHpstFwSUakRsoQTPIYTmJeK3u4HmIWX0T7XQSUQt7MYbN8Dm9X316T7zAUt86U0Ub/quIR4bnHC/o4hlFFtDzMKcoHPaJwty0XF4Ts8U9gGgXQWRauyByZZVgNlgIsBdwq562SFJt3Sg1LQKbv5HCK7NnqAl+cEbOktBwD0c/1OMQaX8V36fuSJ8MegeiqNST+WnoamzKDrIN+gNriBOmzJ0bvuvYhi2gUQkUVYQ/gTUtN90zifYNIVeJz5EmyGks8N8nozboB2xTr3N0Wy8ckUB1l0RWlrPxDy6LUa4agIaEzhjNt5UsfyUQuX+J1/tePluvtIl6BL5HV6Jcvpm1pwqDNlqoQ04iFFlwewPiQIIvbIYjA==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
-    </header>
-    <header>
-        <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LCSESSIONID=0000AhrsRVojhVC0MmhI9dWfgDi:180t512oj; Path=/; HttpOnly]]></value>
+        <value><![CDATA[LCSESSIONID=0000Ev_45W1Hj4icmirem5cfndU:18dna4k6n; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Keep-Alive]]></name>
@@ -840,13 +832,13 @@
         <name><![CDATA[Content-Language]]></name>
         <value><![CDATA[en-US]]></value>
     </header></headers>
-<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"><opensearch:totalResults xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">1</opensearch:totalResults><opensearch:startIndex xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">1</opensearch:startIndex><opensearch:itemsPerPage xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">10</opensearch:itemsPerPage><title type="text">Test Community1379421802217 - Members</title><id>https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/members?communityUuid=2ab5f690-206e-428d-84d5-e0cecdcb283b</id><updated>2014-01-27T16:59:19.326Z</updated><generator uri="http://www.ibm.com/xmlns/prod/sn" version="4.5.0.0">IBM Connections - Communities</generator><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/members?communityUuid=2ab5f690-206e-428d-84d5-e0cecdcb283b" rel="self"></link><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/members?communityUuid=2ab5f690-206e-428d-84d5-e0cecdcb283b&amp;outputType=categories" rel="http://www.ibm.com/xmlns/prod/sn/tag-cloud" type="application/atomcat+xml"></link><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/service?communityUuid=2ab5f690-206e-428d-84d5-e0cecdcb283b" rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml"></link><snx:communityLastMod xmlns:snx="http://www.ibm.com/xmlns/prod/sn" component="http://www.ibm.com/xmlns/prod/sn/communities">1379424156572</snx:communityLastMod><snx:rank xmlns:snx="http://www.ibm.com/xmlns/prod/sn" scheme="http://www.ibm.com/xmlns/prod/sn/user">1</snx:rank><snx:rank xmlns:snx="http://www.ibm.com/xmlns/prod/sn" scheme="http://www.ibm.com/xmlns/prod/sn/group">0</snx:rank><entry><id>http://communities.ibm.com:2006/service/atom/community/members?communityUuid=2ab5f690-206e-428d-84d5-e0cecdcb283b&amp;email=fadams@renovations.com</id><title type="text">Frank Adams</title><summary type="text">Frank Adams</summary><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/profiles/atom/profile.do?email=fadams@renovations.com" type="application/atom+xml"></link><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/profiles/vcard/profile.do?email=fadams@renovations.com" type="text/directory"></link><published>2013-09-17T12:42:31.653Z</published><updated>2013-09-17T12:42:31.653Z</updated><contributor><email>fadams@renovations.com</email><snx:userid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid><snx:userState xmlns:snx="http://www.ibm.com/xmlns/prod/sn">active</snx:userState><name>Frank Adams</name></contributor><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/members?communityUuid=2ab5f690-206e-428d-84d5-e0cecdcb283b&amp;email=fadams@renovations.com" rel="self"></link><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/members?communityUuid=2ab5f690-206e-428d-84d5-e0cecdcb283b&amp;email=fadams@renovations.com" rel="edit"></link><snx:role xmlns:snx="http://www.ibm.com/xmlns/prod/sn" component="http://www.ibm.com/xmlns/prod/sn/communities">owner</snx:role><category term="person" scheme="http://www.ibm.com/xmlns/prod/sn/type"></category><snx:orgId xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:orgId><content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml"><span><a href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/profiles/atom/profile.do?email=fadams@renovations.com" class="url fn">Frank Adams</a><div><a href="mailto:fadams@renovations.com" class="email">fadams@renovations.com</a></div><div class="x-guid">0F19F8AD-37EA-6033-8525-7BBF005634B5</div><div class="x-community-role">owner</div></span></div></content></entry></feed>]]></data>
+<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"><opensearch:totalResults xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">1</opensearch:totalResults><opensearch:startIndex xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">1</opensearch:startIndex><opensearch:itemsPerPage xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">10</opensearch:itemsPerPage><title type="text">CreateCommunity Test 1391207852686 - 2 - Members</title><id>https://dev.sdkdemo.com:444/communities/service/atom/community/members?communityUuid=6d3e8279-802a-4cb1-9d47-f16d46bdf0fa</id><updated>2014-02-05T16:28:28.102Z</updated><generator uri="http://www.ibm.com/xmlns/prod/sn" version="4.5.0.0">IBM Connections - Communities</generator><link href="https://qs.renovations.com:444/communities/service/atom/community/members?communityUuid=6d3e8279-802a-4cb1-9d47-f16d46bdf0fa" rel="self"></link><link href="https://dev.sdkdemo.com:444/communities/service/atom/community/members?communityUuid=6d3e8279-802a-4cb1-9d47-f16d46bdf0fa&amp;outputType=categories" rel="http://www.ibm.com/xmlns/prod/sn/tag-cloud" type="application/atomcat+xml"></link><link href="https://dev.sdkdemo.com:444/communities/service/atom/community/service?communityUuid=6d3e8279-802a-4cb1-9d47-f16d46bdf0fa" rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml"></link><snx:communityLastMod xmlns:snx="http://www.ibm.com/xmlns/prod/sn" component="http://www.ibm.com/xmlns/prod/sn/communities">1391207855206</snx:communityLastMod><snx:rank xmlns:snx="http://www.ibm.com/xmlns/prod/sn" scheme="http://www.ibm.com/xmlns/prod/sn/user">1</snx:rank><snx:rank xmlns:snx="http://www.ibm.com/xmlns/prod/sn" scheme="http://www.ibm.com/xmlns/prod/sn/group">0</snx:rank><entry><id>http://communities.ibm.com:2006/service/atom/community/members?communityUuid=6d3e8279-802a-4cb1-9d47-f16d46bdf0fa&amp;email=fadams@renovations.com</id><title type="text">Frank Adams</title><summary type="text">Frank Adams</summary><link href="https://dev.sdkdemo.com:444/profiles/atom/profile.do?email=fadams@renovations.com" type="application/atom+xml"></link><link href="https://dev.sdkdemo.com:444/profiles/vcard/profile.do?email=fadams@renovations.com" type="text/directory"></link><published>2014-01-31T22:37:35.171Z</published><updated>2014-01-31T22:37:35.171Z</updated><contributor><email>fadams@renovations.com</email><snx:userid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">EFD413BC-E572-760A-8625-7C6E00506453</snx:userid><snx:userState xmlns:snx="http://www.ibm.com/xmlns/prod/sn">active</snx:userState><name>Frank Adams</name></contributor><link href="https://dev.sdkdemo.com:444/communities/service/atom/community/members?communityUuid=6d3e8279-802a-4cb1-9d47-f16d46bdf0fa&amp;email=fadams@renovations.com" rel="self"></link><link href="https://dev.sdkdemo.com:444/communities/service/atom/community/members?communityUuid=6d3e8279-802a-4cb1-9d47-f16d46bdf0fa&amp;email=fadams@renovations.com" rel="edit"></link><snx:role xmlns:snx="http://www.ibm.com/xmlns/prod/sn" component="http://www.ibm.com/xmlns/prod/sn/communities">owner</snx:role><category term="person" scheme="http://www.ibm.com/xmlns/prod/sn/type"></category><snx:orgId xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:orgId><content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml"><span><a href="https://dev.sdkdemo.com:444/profiles/atom/profile.do?email=fadams@renovations.com" class="url fn">Frank Adams</a><div><a href="mailto:fadams@renovations.com" class="email">fadams@renovations.com</a></div><div class="x-guid">EFD413BC-E572-760A-8625-7C6E00506453</div><div class="x-community-role">owner</div></span></div></content></entry></feed>]]></data>
 </response>
 <response statusCode="200" statusReason="OK">
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Mon, 27 Jan 2014 16:59:19 GMT]]></value>
+        <value><![CDATA[Wed, 05 Feb 2014 16:28:28 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -870,23 +862,19 @@
     </header>
     <header>
         <name><![CDATA[Last-Modified]]></name>
-        <value><![CDATA[Mon, 27 Jan 2014 16:59:19 GMT]]></value>
+        <value><![CDATA[Wed, 05 Feb 2014 16:28:28 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[lcLang=en_us; Path=/]]></value>
+        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/gqT7sa/aGfWQJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken=PUBjyRNSiMicDeydwCeSe/gUuml0fCDnccXoWVT0q2G+DB9N76HWlKqqf16uAHfzzNbPAEwptZNqH4INVmo/K32Q5R7T1SugHW6qMsaWqiSnnoONNOeWPNzOVhjHbAXgyNVu+Z7c4oaxpsqHYzYe4Wwtaiu5GX1TlgSbpofbB7B6coN9ik2nPZhmlRvipNQ2y7hL0foIb6UhwN2+/LCf3IUc/YAk1jgjH4C8lPIHUypv6ZF0FmKyy8mxpdGXaA/KStdm/ujfrbSN07lkfddhCtyrtr9ocGeO6hPIeOQYNnx+Aucg4i8u+rcgnrcfaAsZDETkgxXipmMunpY6JIQiyg==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
+        <value><![CDATA[LtpaToken2=dLoJpMwuzka91JClFPzdPe2OPYoo/7d6aV25uJ6PHqHps7YLFOOvHcUCe4UqKvfeEh50lMUIkDj6MNZPAF5sRoZFy2LLu/KekFGrEXaNW+T5yE7RL+DuxR0zzYbF5LHHudi+w7aNzVZsTkufD75b39tJDX8C8vURStD7V2JeyIOM72N+ZKc86GeeXgmTN0lw+Xn0EUg/nXU98MDEyUUerScaDikjIKt3qSnAjTyyFygXmEzfvb4sFe3XftZHSUdOmLHk/f55lBAaf+ZI//vWRirZN4s2ZrWvyivf8P2BIxoMMDv33F9dIbEjB8OVNfRksN1BTwOspxInN/n7WGgxrIDzUaMZsjX0+GlOkeBiO+OfO0n3n4PRQ3P1dt+9NHiVYIghybtq1DgsL33kxyuzrzdm5kDabT8BGNdSbhuyyxhSglDz2gXhenTrB2lMz5rmj10fTUy/jUCZPIhUhEecUX32dERUH00tke3piqmU9S/yMq3BOcGHjQixleGI1qCPb4/XNNc8fxCL50Ek26RSVRP6sPvW/K0Colb3lCRW69km8yGTJXLsZElgSyjJi0W/JisFoesjnUwgFeBTPVrU89tsNw8dLEd+CVflMS5evS1t8d8famsmW3TRZfV4uCL3t2/2gISb55t/UsfxAqbwPJ82hoDEfbBAjZ26S39tyQQHvjrk3EbVI8Kbwjjusjq1jggk/MROfGytTfZG7WR6/Ini/GAfJIq46RuXNmpZg9U=; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=foEm165oa/GvXKkVVtrTNG8bcKh1Qq+/pddGMZvVaRK51gJIqU2AIwdulebuwSjiH3opl97r4nzVxcAkZxjCmUZkLWGdwO/2VAOT3yTF4RSlEVFI9JjHmbs+0XZGxuQ6Hil0KxXSguzdeyGuWCu9sb7QdS+7ahFD9S+ZEBT7NC3NCk7dWTGOg8hq4jfxNofkc/v37z0kGITkPeT6SnTP866KwFzLpRbwVm5e0DXLpVaAw1nWDVpJcbS2U7IVItxVHwIdqJzEI9VY2UsLijInvvRpoyb1x29HYXegHpstFwSUakRsoQTPIYTmJeK3u4HmIWX0T7XQSUQt7MYbN8Dm9X316T7zAUt86U0Ub/quIR4bnHC/o4hlFFtDzMKcoHPaJwty0XF4Ts8U9gGgXQWRauyByZZVgNlgIsBdwq562SFJt3Sg1LQKbv5HCK7NnqAl+cEbOktBwD0c/1OMQaX8V36fuSJ8MegeiqNST+WnoamzKDrIN+gNriBOmzJ0bvuvYhi2gUQkUVYQ/gTUtN90zifYNIVeJz5EmyGks8N8nozboB2xTr3N0Wy8ckUB1l0RWlrPxDy6LUa4agIaEzhjNt5UsfyUQuX+J1/tePluvtIl6BL5HV6Jcvpm1pwqDNlqoQ04iFFlwewPiQIIvbIYjA==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
-    </header>
-    <header>
-        <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LCSESSIONID=0000CAWVcI2qa4S0nDor2E0aL4o:180t512oj; Path=/; HttpOnly]]></value>
+        <value><![CDATA[LCSESSIONID=0000T14SHg__1FcbqH48coET5hA:18dna4k6n; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Keep-Alive]]></name>
@@ -910,15 +898,15 @@
     </header></headers>
 <data><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns="http://www.w3.org/2005/Atom">
-  <id>urn:lsid:ibm.com:communities:invites-2ab5f690-206e-428d-84d5-e0cecdcb283b</id>
-  <title type="text">Invitations for Test Community1379421802217</title>
-  <updated>2014-01-27T16:59:19.943Z</updated>
+  <id>urn:lsid:ibm.com:communities:invites-6d3e8279-802a-4cb1-9d47-f16d46bdf0fa</id>
+  <title type="text">Invitations for CreateCommunity Test 1391207852686 - 2</title>
+  <updated>2014-02-05T16:28:28.689Z</updated>
   <generator version="4.5.0.0" uri="http://www.ibm.com/xmlns/prod/sn">IBM Connections - Communities</generator>
-  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/service" rel="http://www.ibm.com/xmlns/prod/sn/service">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/service" rel="http://www.ibm.com/xmlns/prod/sn/service">
   </link>
-  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/service" rel="service">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/service" rel="service">
   </link>
-  <link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/communities/service/atom/community/invites?communityUuid=2ab5f690-206e-428d-84d5-e0cecdcb283b" rel="self">
+  <link href="https://qs.renovations.com:444/communities/service/atom/community/invites?communityUuid=6d3e8279-802a-4cb1-9d47-f16d46bdf0fa" rel="self">
   </link>
   <opensearch:totalResults>0</opensearch:totalResults>
   <opensearch:startIndex>0</opensearch:startIndex>
@@ -929,7 +917,7 @@
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Mon, 27 Jan 2014 16:59:20 GMT]]></value>
+        <value><![CDATA[Wed, 05 Feb 2014 16:28:29 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -945,7 +933,7 @@
     </header>
     <header>
         <name><![CDATA[Expires]]></name>
-        <value><![CDATA[Mon, 27 Jan 2014 16:59:20 GMT]]></value>
+        <value><![CDATA[Wed, 05 Feb 2014 16:28:29 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Accept]]></name>
@@ -953,23 +941,19 @@
     </header>
     <header>
         <name><![CDATA[Last-Modified]]></name>
-        <value><![CDATA[Mon, 27 Jan 2014 16:59:20 GMT]]></value>
+        <value><![CDATA[Wed, 05 Feb 2014 16:28:29 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[lcLang=en_us; Path=/]]></value>
+        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/gqT7sa/aGfWQJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken=PUBjyRNSiMicDeydwCeSe/gUuml0fCDnccXoWVT0q2G+DB9N76HWlKqqf16uAHfzzNbPAEwptZNqH4INVmo/K32Q5R7T1SugHW6qMsaWqiSnnoONNOeWPNzOVhjHbAXgyNVu+Z7c4oaxpsqHYzYe4Wwtaiu5GX1TlgSbpofbB7B6coN9ik2nPZhmlRvipNQ2y7hL0foIb6UhwN2+/LCf3IUc/YAk1jgjH4C8lPIHUypv6ZF0FmKyy8mxpdGXaA/KStdm/ujfrbSN07lkfddhCtyrtr9ocGeO6hPIeOQYNnx+Aucg4i8u+rcgnrcfaAsZDETkgxXipmMunpY6JIQiyg==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
+        <value><![CDATA[LtpaToken2=dLoJpMwuzka91JClFPzdPe2OPYoo/7d6aV25uJ6PHqHps7YLFOOvHcUCe4UqKvfeEh50lMUIkDj6MNZPAF5sRoZFy2LLu/KekFGrEXaNW+T5yE7RL+DuxR0zzYbF5LHHudi+w7aNzVZsTkufD75b39tJDX8C8vURStD7V2JeyIOM72N+ZKc86GeeXgmTN0lw+Xn0EUg/nXU98MDEyUUerScaDikjIKt3qSnAjTyyFygXmEzfvb4sFe3XftZHSUdOmLHk/f55lBAaf+ZI//vWRirZN4s2ZrWvyivf8P2BIxoMMDv33F9dIbEjB8OVNfRksN1BTwOspxInN/n7WGgxrIDzUaMZsjX0+GlOkeBiO+OfO0n3n4PRQ3P1dt+9NHiVYIghybtq1DgsL33kxyuzrzdm5kDabT8BGNdSbhuyyxhSglDz2gXhenTrB2lMz5rmj10fTUy/jUCZPIhUhEecUX32dERUH00tke3piqmU9S/yMq3BOcGHjQixleGI1qCPb4/XNNc8fxCL50Ek26RSVRP6sPvW/K0Colb3lCRW69km8yGTJXLsZElgSyjJi0W/JisFoesjnUwgFeBTPVrU89tsNw8dLEd+CVflMS5evS1t8d8famsmW3TRZfV4uCL3t2/2gISb55t/UsfxAqbwPJ82hoDEfbBAjZ26S39tyQQHvjrk3EbVI8Kbwjjusjq1jggk/MROfGytTfZG7WR6/Ini/GAfJIq46RuXNmpZg9U=; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=foEm165oa/GvXKkVVtrTNG8bcKh1Qq+/pddGMZvVaRK51gJIqU2AIwdulebuwSjiH3opl97r4nzVxcAkZxjCmUZkLWGdwO/2VAOT3yTF4RSlEVFI9JjHmbs+0XZGxuQ6Hil0KxXSguzdeyGuWCu9sb7QdS+7ahFD9S+ZEBT7NC3NCk7dWTGOg8hq4jfxNofkc/v37z0kGITkPeT6SnTP866KwFzLpRbwVm5e0DXLpVaAw1nWDVpJcbS2U7IVItxVHwIdqJzEI9VY2UsLijInvvRpoyb1x29HYXegHpstFwSUakRsoQTPIYTmJeK3u4HmIWX0T7XQSUQt7MYbN8Dm9X316T7zAUt86U0Ub/quIR4bnHC/o4hlFFtDzMKcoHPaJwty0XF4Ts8U9gGgXQWRauyByZZVgNlgIsBdwq562SFJt3Sg1LQKbv5HCK7NnqAl+cEbOktBwD0c/1OMQaX8V36fuSJ8MegeiqNST+WnoamzKDrIN+gNriBOmzJ0bvuvYhi2gUQkUVYQ/gTUtN90zifYNIVeJz5EmyGks8N8nozboB2xTr3N0Wy8ckUB1l0RWlrPxDy6LUa4agIaEzhjNt5UsfyUQuX+J1/tePluvtIl6BL5HV6Jcvpm1pwqDNlqoQ04iFFlwewPiQIIvbIYjA==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
-    </header>
-    <header>
-        <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LCSESSIONID=00000EJyuHNQrGmKJ1DjEG-AaJN:180t512oj; Path=/; HttpOnly]]></value>
+        <value><![CDATA[LCSESSIONID=0000TKGgbd2s2PqjulpkeE-LjW0:18dna4k6n; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
@@ -977,7 +961,7 @@
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[ForumsUserId=0F19F8AD-37EA-6033-8525-7BBF005634B5; Path=/forums]]></value>
+        <value><![CDATA[ForumsUserId=EFD413BC-E572-760A-8625-7C6E00506453; Path=/forums]]></value>
     </header>
     <header>
         <name><![CDATA[Cache-Control]]></name>
@@ -1003,6 +987,6 @@
         <name><![CDATA[Content-Language]]></name>
         <value><![CDATA[en-US]]></value>
     </header></headers>
-<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:thr="http://purl.org/syndication/thread/1.0"><opensearch:totalResults xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">1</opensearch:totalResults><opensearch:startIndex xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">1</opensearch:startIndex><opensearch:itemsPerPage xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">10</opensearch:itemsPerPage><generator uri="http://www.ibm.com/xmlns/prod/sn" version="4.5.0.0">IBM Connections - Discussion Forum</generator><title type="text">Default Root Page</title><updated>2013-09-17T12:42:31.818Z</updated><author><email>Forum Administrator</email><name>Forum Administrator</name><snx:userid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">-Activities-Administrator-ID-</snx:userid><snx:userState xmlns:snx="http://www.ibm.com/xmlns/prod/sn">active</snx:userState></author><contributor><email>Forum Administrator</email><name>Forum Administrator</name><snx:userid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">-Activities-Administrator-ID-</snx:userid><snx:userState xmlns:snx="http://www.ibm.com/xmlns/prod/sn">active</snx:userState></contributor><id>https://vhost0839.dc1.on.ca.compute.ihost.com:444/forums/atom/forums</id><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/forums/html/public" rel="alternate"></link><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/forums/atom/tags/forums?categoryUuid=00000000-0000-000000000-000000000005" rel="http://www.ibm.com/xmlns/prod/sn/tag-cloud" type="application/atomcat+xml"></link><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/forums/atom/forums?communityUuid=2ab5f690-206e-428d-84d5-e0cecdcb283b" rel="self"></link><entry xmlns:app="http://www.w3.org/2007/app" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:thr="http://purl.org/syndication/thread/1.0"><id>urn:lsid:ibm.com:forum:34c42a58-7473-4390-8caf-1f8bb2110e1f</id><title type="text">Test Community 1ab1379421753625</title><snx:moderation xmlns:snx="http://www.ibm.com/xmlns/prod/sn" status="active"></snx:moderation><published>2013-09-17T12:42:31.818Z</published><author><email>fadams@renovations.com</email><name>Frank Adams</name><snx:userid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid><snx:userState xmlns:snx="http://www.ibm.com/xmlns/prod/sn">active</snx:userState></author><updated>2013-09-17T12:42:31.818Z</updated><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/forums/atom/forum?forumUuid=34c42a58-7473-4390-8caf-1f8bb2110e1f" rel="self" type="application/atom+xml"></link><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/forums/atom/forum?forumUuid=34c42a58-7473-4390-8caf-1f8bb2110e1f" rel="edit" type="application/atom+xml"></link><category term="forum-forum" scheme="http://www.ibm.com/xmlns/prod/sn/type"></category><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/forums/html/forum?id=34c42a58-7473-4390-8caf-1f8bb2110e1f" rel="alternate" type="text/html"></link><link xmlns:thr="http://purl.org/syndication/thread/1.0" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/forums/atom/topics?forumUuid=34c42a58-7473-4390-8caf-1f8bb2110e1f" rel="replies" type="application/atom+xml" thr:count="0"></link><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/forums/atom/acl?forumUuid=34c42a58-7473-4390-8caf-1f8bb2110e1f" rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml"></link><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/forums/atom/service?forumUuid=34c42a58-7473-4390-8caf-1f8bb2110e1f" rel="service" type="application/atomsvc+xml" title="Atom Publishing Protocol"></link><thr:in-reply-to xmlns:thr="http://purl.org/syndication/thread/1.0" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/forums/atom/forums?categoryUuid=00000000-0000-000000000-000000000006" ref="urn:lsid:ibm.com:forum:00000000-0000-000000000-000000000006" type="application/atom+xml"></thr:in-reply-to><content type="html"></content><link href="http://vhost0839.dc1.on.ca.compute.ihost.com:81/communities/service/atom/community/instance?communityUuid=2ab5f690-206e-428d-84d5-e0cecdcb283b" rel="http://www.ibm.com/xmlns/prod/sn/container" type="application/atom+xml"></link><snx:communityUuid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">2ab5f690-206e-428d-84d5-e0cecdcb283b</snx:communityUuid></entry></feed>]]></data>
+<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:thr="http://purl.org/syndication/thread/1.0"><opensearch:totalResults xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">1</opensearch:totalResults><opensearch:startIndex xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">1</opensearch:startIndex><opensearch:itemsPerPage xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">10</opensearch:itemsPerPage><generator uri="http://www.ibm.com/xmlns/prod/sn" version="4.5.0.0">IBM Connections - Discussion Forum</generator><title type="text">Default Root Page</title><updated>2014-01-31T22:37:35.555Z</updated><author><email>Forum Administrator</email><name>Forum Administrator</name><snx:userid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">-Activities-Administrator-ID-</snx:userid><snx:userState xmlns:snx="http://www.ibm.com/xmlns/prod/sn">active</snx:userState></author><contributor><email>Forum Administrator</email><name>Forum Administrator</name><snx:userid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">-Activities-Administrator-ID-</snx:userid><snx:userState xmlns:snx="http://www.ibm.com/xmlns/prod/sn">active</snx:userState></contributor><id>https://dev.sdkdemo.com:444/forums/atom/forums</id><link href="https://dev.sdkdemo.com:444/forums/html/public" rel="alternate"></link><link href="https://dev.sdkdemo.com:444/forums/atom/tags/forums?categoryUuid=00000000-0000-000000000-000000000005" rel="http://www.ibm.com/xmlns/prod/sn/tag-cloud" type="application/atomcat+xml"></link><link href="https://dev.sdkdemo.com:444/forums/atom/forums?communityUuid=6d3e8279-802a-4cb1-9d47-f16d46bdf0fa" rel="self"></link><entry xmlns:app="http://www.w3.org/2007/app" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:thr="http://purl.org/syndication/thread/1.0"><id>urn:lsid:ibm.com:forum:d8848ba2-b005-4175-9a3c-5694d6cc47e2</id><title type="text">CreateCommunity Test 1391207852686 - 2</title><snx:moderation xmlns:snx="http://www.ibm.com/xmlns/prod/sn" status="active"></snx:moderation><published>2014-01-31T22:37:35.555Z</published><author><email>fadams@renovations.com</email><name>Frank Adams</name><snx:userid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">EFD413BC-E572-760A-8625-7C6E00506453</snx:userid><snx:userState xmlns:snx="http://www.ibm.com/xmlns/prod/sn">active</snx:userState></author><updated>2014-01-31T22:37:35.555Z</updated><link href="https://dev.sdkdemo.com:444/forums/atom/forum?forumUuid=d8848ba2-b005-4175-9a3c-5694d6cc47e2" rel="self" type="application/atom+xml"></link><link href="https://dev.sdkdemo.com:444/forums/atom/forum?forumUuid=d8848ba2-b005-4175-9a3c-5694d6cc47e2" rel="edit" type="application/atom+xml"></link><category term="forum-forum" scheme="http://www.ibm.com/xmlns/prod/sn/type"></category><link href="https://dev.sdkdemo.com:444/forums/html/forum?id=d8848ba2-b005-4175-9a3c-5694d6cc47e2" rel="alternate" type="text/html"></link><link xmlns:thr="http://purl.org/syndication/thread/1.0" href="https://dev.sdkdemo.com:444/forums/atom/topics?forumUuid=d8848ba2-b005-4175-9a3c-5694d6cc47e2" rel="replies" type="application/atom+xml" thr:count="0"></link><link href="https://dev.sdkdemo.com:444/forums/atom/acl?forumUuid=d8848ba2-b005-4175-9a3c-5694d6cc47e2" rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml"></link><link href="https://dev.sdkdemo.com:444/forums/atom/service?forumUuid=d8848ba2-b005-4175-9a3c-5694d6cc47e2" rel="service" type="application/atomsvc+xml" title="Atom Publishing Protocol"></link><thr:in-reply-to xmlns:thr="http://purl.org/syndication/thread/1.0" href="https://dev.sdkdemo.com:444/forums/atom/forums?categoryUuid=00000000-0000-000000000-000000000006" ref="urn:lsid:ibm.com:forum:00000000-0000-000000000-000000000006" type="application/atom+xml"></thr:in-reply-to><content type="html"></content><link href="http://dev.sdkdemo.com:81/communities/service/atom/community/instance?communityUuid=6d3e8279-802a-4cb1-9d47-f16d46bdf0fa" rel="http://www.ibm.com/xmlns/prod/sn/container" type="application/atom+xml"></link><snx:communityUuid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">6d3e8279-802a-4cb1-9d47-f16d46bdf0fa</snx:communityUuid></entry></feed>]]></data>
 </response>
 </responses>

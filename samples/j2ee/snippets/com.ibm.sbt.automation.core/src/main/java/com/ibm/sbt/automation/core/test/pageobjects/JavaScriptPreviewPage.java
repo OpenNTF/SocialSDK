@@ -99,8 +99,8 @@ public class JavaScriptPreviewPage extends BaseResultPage {
         try {
             return (List)JsonParser.fromJson(JsonJavaFactory.instanceEx, text);
         } catch (Throwable t) {
-        	Assert.fail("Unable to parse JSON List from: " + text);
-            return null;
+        	Assert.fail("Unable to parse JSON List from page text: " + text);
+        	return null;
         }
     }
 

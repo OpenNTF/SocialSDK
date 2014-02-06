@@ -318,7 +318,7 @@ define([ "../declare", "../lang", "../stringUtil", "../xml", "../xpath", "./Data
         		return null;
         	}
             var text = this._selectText(property);
-            return text ? new Date(text) : null;
+            return text ? new Date(Date.parse(text)) : null;
         },
         
         /*

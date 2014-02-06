@@ -4,6 +4,7 @@
 <%@page import="com.ibm.commons.util.StringUtil"%>
 <%@page import="com.ibm.sbt.sample.web.util.Util"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
+<%@page import="java.util.Map"%>
  <%
  String snippetId = request.getParameter("snippet");
  String envId = request.getParameter("env");
@@ -14,6 +15,14 @@
  if(Context.get().getProperty("environment") == null){
      Context.get().setProperty("environment", envName);
  }
+ 
+Map<String, String[]> paramMap = request.getParameterMap();
+
+for(String paramName : paramMap.keySet()){
+	if(paramName.startsWith("sample.")){
+		Context.get().setProperty(paramName, paramMap.get(paramName)[0]);
+	}
+}
  
  JavaSnippet snippet = SnippetFactory.getJavaSnippet(application, request, snippetId);
  if (snippet != null) {

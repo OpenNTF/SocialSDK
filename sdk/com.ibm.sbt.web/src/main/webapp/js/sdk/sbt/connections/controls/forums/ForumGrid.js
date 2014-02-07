@@ -114,7 +114,7 @@ define(["../../../declare",
 	         * @returns an instance of a ForumGridRenderer.
 	         */
 	        createDefaultRenderer : function(args) {
-	            return new ForumGridRenderer(args);
+	            return new ForumGridRenderer(args,this);
 	        },
 	        
 	        /**

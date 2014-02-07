@@ -58,13 +58,12 @@ define([ "../../../declare", "../../../controls/grid/GridAction" ],
          * which works from the Semantic tag service so nothing is done here.
          * @method execute
          * @param item The item which fired the event
-         * @param opts
+         * @param grid The profile grid class
          * @param event The event
          */
-        execute: function(item, opts, event) {
-        
-        	//for default the semantic tag service will pop up the business card
-        	//so do nothing here
+        execute: function(item, grid, event) {
+        	var url = grid.renderer.getProfileUrl(grid,item.getValue("id"));
+			window.open(url);
         }
 
     });

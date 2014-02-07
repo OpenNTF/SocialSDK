@@ -25,8 +25,12 @@ define(["../../../declare",
         "../../../text!./templates/FileRow.html",
         "../../../text!./templates/RecycledFileRow.html",
         "../../../text!./templates/FolderRow.html", 
-        "../../../text!./templates/CommentRow.html"], 
-        function(declare, stringUtil, i18n, ConnectionsGridRenderer, nls, fileTemplate, recycledFileTemplate, folderTemplate, commentTemplate) {
+        "../../../text!./templates/CommentRow.html",
+        "../../../text!./templates/BootstrapFileRow.html",
+        "../../../text!./templates/BootstrapFolderRow.html"], 
+        function(declare, stringUtil, i18n, ConnectionsGridRenderer, nls, 
+        		fileTemplate, recycledFileTemplate, folderTemplate, commentTemplate,
+        		bootstrapFileTemplate,bootstrapFolderTemplate) {
     
     /**
      * @class FileGridRenderer
@@ -48,16 +52,27 @@ define(["../../../declare",
           * @method constructor
           * @param args, setting args.type, will set the appropriate template
           */
-         constructor: function(args) {
-             if (args.type == "file") {
-                 this.template = fileTemplate;
-             } else if (args.type == "recycledFile") {
-                 this.template = recycledFileTemplate;
-             } else if (args.type == "folder") {
-                 this.template = folderTemplate;
-             } else if (args.type == "comment"){
-                 this.template = commentTemplate;
-             }
+         constructor: function(args,grid) {
+        	  if(grid.theme == "bootstrap"){
+        		 if (args.type == "file" || args.type == "recycledFile") {
+                     this.template = bootstrapFileTemplate;
+                 } else if (args.type == "folder") {
+                     this.template = bootstrapFolderTemplate;
+                 } else if (args.type == "comment"){
+                     this.template = bootstrapCommentTemplate;
+                 }
+        	 }else{
+        		 if (args.type == "file") {
+                     this.template = fileTemplate;
+                 } else if (args.type == "recycledFile") {
+                     this.template = recycledFileTemplate;
+                 } else if (args.type == "folder") {
+                     this.template = folderTemplate;
+                 } else if (args.type == "comment"){
+                     this.template = commentTemplate;
+                 }
+        	 }
+             
          },
          
          /**

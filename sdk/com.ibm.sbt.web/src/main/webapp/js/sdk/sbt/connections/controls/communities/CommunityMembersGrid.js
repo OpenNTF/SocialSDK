@@ -202,7 +202,7 @@ define([ "../../../declare",
          * @returns an instance of a  profile gird renderer.
          */
         createDefaultRenderer : function(args) {
-            return new ProfileGridRenderer(args);
+            return new ProfileGridRenderer(args,this);
         },
         
         /**
@@ -218,7 +218,7 @@ define([ "../../../declare",
             if (this.communityMembersAction) {
                 this._stopEvent(ev);
                 
-                this.communityMembersAction.execute(data, { grid : this.grid }, ev);
+                this.communityMembersAction.execute(data, this, ev);
             }
         },
         

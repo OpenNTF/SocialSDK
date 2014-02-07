@@ -137,7 +137,7 @@ define(["../../../declare",
          * @returns {BookmarkGridRenderer}
          */
 	     createDefaultRenderer: function(args){
-	    	 return new BookmarkGridRenderer(args);
+	    	 return new BookmarkGridRenderer(args,this);
 	     },
 	     
 	     /**

@@ -1,15 +1,12 @@
 require(["sbt/dom", "sbt/connections/controls/activities/ActivityGrid"], function(dom, ActivityGrid) {
-    
-    var domNode = dom.byId("myActivities");
-    var CustomBookmarkRow = domNode.text || domNode.textContent;
 	
     var grid = new ActivityGrid({
 		type: "my",
+		theme: "bootstrap",
+		hidePager: true,
 		hideSorter: true,
-		hidePager: true
+		hideFooter:true
 	});
-
-	 grid.renderer.template = CustomBookmarkRow;
      
      dom.byId("gridDiv").appendChild(grid.domNode);
               

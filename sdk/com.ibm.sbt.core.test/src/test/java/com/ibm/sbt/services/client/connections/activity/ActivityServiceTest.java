@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.ibm.sbt.services.BaseUnitTest;
@@ -228,7 +227,6 @@ public class ActivityServiceTest extends BaseUnitTest {
 	}
 
 	@Test
-	@Ignore
 	public void testUpdateMember() throws ActivityServiceException {
 		activityService = new ActivityService();
 		Activity activity = createActivity();
@@ -256,7 +254,6 @@ public class ActivityServiceTest extends BaseUnitTest {
 	}
 
 	@Test
-	@Ignore
 	public void testGetMember() throws ActivityServiceException {
 		activityService = new ActivityService();
 		Activity activity = createActivity();
@@ -267,7 +264,6 @@ public class ActivityServiceTest extends BaseUnitTest {
 	}
 
 	@Test
-	@Ignore
 	public void testDeleteMember() throws ActivityServiceException {
 		activityService = new ActivityService();
 		Activity activity = createActivity();
@@ -354,7 +350,6 @@ public class ActivityServiceTest extends BaseUnitTest {
 	}
 
 	@Test
-	@Ignore
 	public void testDeleteActivityNode() throws ActivityServiceException {
 		activityService = new ActivityService();
 		Activity activity = createActivity();
@@ -366,7 +361,6 @@ public class ActivityServiceTest extends BaseUnitTest {
 	}
 
 	@Test
-	@Ignore
 	public void testGetActivityTags() throws ActivityServiceException {
 		activityService = new ActivityService();
 		Activity activity = createActivity();
@@ -387,7 +381,6 @@ public class ActivityServiceTest extends BaseUnitTest {
 	}
 
 	@Test
-	@Ignore
 	public void testMoveEntryToSection() throws ActivityServiceException {
 		activityService = new ActivityService();
 		Activity activity = createActivity();

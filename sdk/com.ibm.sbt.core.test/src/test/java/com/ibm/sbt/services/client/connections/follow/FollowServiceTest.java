@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -19,8 +19,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
+import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.ibm.commons.util.StringUtil;
@@ -30,6 +30,7 @@ import com.ibm.sbt.services.client.connections.communities.Community;
 import com.ibm.sbt.services.client.connections.communities.CommunityService;
 import com.ibm.sbt.services.client.connections.follow.model.Source;
 import com.ibm.sbt.services.client.connections.follow.model.Type;
+import com.ibm.sbt.test.lib.TestEnvironment;
 
 /*
  * @author Manish Kataria 
@@ -41,26 +42,30 @@ public class FollowServiceTest extends BaseUnitTest {
 	
 	@Before
 	public void createCommunity(){
-		if(StringUtil.isNotEmpty(communityId)){
-		}else{
-			try {
-				CommunityService service = new CommunityService();
-				Community community = new Community(service, "");
-				community.setTitle("Test Followservice Community " + System.currentTimeMillis());
-				community.setContent("Java Community Content");
-				String type = "public";
-				community.setCommunityType(type);
-				community = community.save();
-				communityId = community.getCommunityUuid();
-			} catch (Exception e) {
-				e.printStackTrace();
-				fail("Error calling Communityservice.save() caused by: "+e.getMessage());
-			}
+		try {
+			CommunityService service = new CommunityService();
+			Community community = new Community(service, "");
+			community.setTitle("Test Followservice Community " + System.currentTimeMillis());
+			community.setContent("Java Community Content");
+			String type = "public";
+			community.setCommunityType(type);
+			community = community.save();
+			communityId = community.getCommunityUuid();
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail("Error calling Communityservice.save() caused by: "+e.getMessage());
 		}
-		
+	}
+
+	@After
+	public void deleteCommunity() throws Exception {
+		if (!StringUtil.isEmpty(communityId)) {
+			CommunityService communityService = new CommunityService();
+			communityService.deleteCommunity(communityId);
+		}
 	}
 	
-	@Test @Ignore
+	@Test
 	public void getFollowedResource() {
 		try {
 			FollowService service = new FollowService();
@@ -110,7 +115,6 @@ public class FollowServiceTest extends BaseUnitTest {
 			fail("Error calling FollowService.startFollowing() caused by: "+e.getMessage());
 		}
 	}
-	
 	
 	@Test
 	public void stopFollowing() {

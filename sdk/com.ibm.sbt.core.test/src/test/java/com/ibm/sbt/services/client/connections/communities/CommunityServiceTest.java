@@ -184,7 +184,7 @@ public class CommunityServiceTest extends BaseUnitTest {
 	}
 
 	@Test
-	public final void testCreateCommuniy() throws Exception {
+	public final void testCreateCommunity() throws Exception {
 		CommunityService communityService = new CommunityService();
 
 		Community community = new Community(communityService, "");
@@ -204,7 +204,7 @@ public class CommunityServiceTest extends BaseUnitTest {
 	}
 
 	@Test
-	public final void testUpdateCommuniy() throws Exception {
+	public final void testUpdateCommunity() throws Exception {
 		CommunityService communityService = new CommunityService();
 		String newTitle = "test Title" + System.currentTimeMillis();
 		String oldTitle = community.getTitle();

@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -15,33 +15,28 @@
  */
 package com.ibm.sbt.services.client.connections.bookmarks;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
-
-import org.junit.Test;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import com.ibm.sbt.security.authentication.AuthenticationException;
-import com.ibm.sbt.services.endpoints.ConnectionsBasicEndpoint;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.junit.Test;
+
+import com.ibm.sbt.services.BaseUnitTest;
 
 /**
  * @author mwallace
  *
  */
-public class BookmarkServiceTest {
+public class BookmarkServiceTest extends BaseUnitTest {
 
 	@Test
 	public void testGetAllBookmarks() {
 		try {
-			BookmarkService service = createBookmarkService();
+			BookmarkService service = new BookmarkService();
 			BookmarkList list = service.getAllBookmarks();
 			assertValid(list);
 			for (Bookmark bookmark : list) {
@@ -56,7 +51,7 @@ public class BookmarkServiceTest {
 	@Test
 	public void testGetPrivateBookmarks() {
 		try {
-			BookmarkService service = createBookmarkService();
+			BookmarkService service = new BookmarkService();
 			Map<String, String> params = new HashMap<String, String>();
 			params.put("access", "private");
 			BookmarkList list = service.getAllBookmarks();
@@ -73,7 +68,7 @@ public class BookmarkServiceTest {
 	@Test
 	public void testGetMyBookmarks() {
 		try {
-			BookmarkService service = createBookmarkService();
+			BookmarkService service = new BookmarkService();
 			Map<String, String> params = new HashMap<String, String>();
 			params.put("email", "fadams@renovations.com");
 			BookmarkList list = service.getAllBookmarks();
@@ -90,7 +85,7 @@ public class BookmarkServiceTest {
 	@Test
 	public void testGetPopularBookmarks() {
 		try {
-			BookmarkService service = createBookmarkService();
+			BookmarkService service = new BookmarkService();
 			BookmarkList list = service.getPopularBookmarks();
 			assertNotNull("Expected non null BookmarkList", list);
 			for (Bookmark bookmark : list) {
@@ -105,7 +100,7 @@ public class BookmarkServiceTest {
 	@Test
 	public void testGetMyNotifications() {
 		try {
-			BookmarkService service = createBookmarkService();
+			BookmarkService service = new BookmarkService();
 			BookmarkList list = service.getMyNotifications();
 			assertNotNull("Expected non null BookmarkList", list);
 			for (Bookmark bookmark : list) {
@@ -120,7 +115,7 @@ public class BookmarkServiceTest {
 	@Test
 	public void testGetMySentNotifications() {
 		try {
-			BookmarkService service = createBookmarkService();
+			BookmarkService service = new BookmarkService();
 			BookmarkList list = service.getMySentNotifications();
 			assertNotNull("Expected non null BookmarkList", list);
 			for (Bookmark bookmark : list) {
@@ -130,15 +125,6 @@ public class BookmarkServiceTest {
 			e.printStackTrace();
 			fail("Error calling BookmarkService.getAllBookmarks() caused by: "+e.getMessage());
 		}
-	}
-	
-	private BookmarkService createBookmarkService() throws AuthenticationException {
-		ConnectionsBasicEndpoint endpoint = new ConnectionsBasicEndpoint();
-		endpoint.setUrl("https://qs.renovations.com:444");
-		endpoint.setForceTrustSSLCertificate(true);
-		endpoint.login("fadams", "passw0rd"); // TODO externalize these
-		BookmarkService service = new BookmarkService(endpoint);
-		return service;			
 	}
 	
 	protected void assertValid(BookmarkList list) {

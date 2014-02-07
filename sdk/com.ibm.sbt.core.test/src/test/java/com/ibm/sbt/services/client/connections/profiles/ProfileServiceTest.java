@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.ibm.sbt.services.BaseUnitTest;
@@ -25,7 +24,6 @@ import com.ibm.sbt.services.client.SerializationUtil;
  */
 public class ProfileServiceTest extends BaseUnitTest {
 
-	@Ignore
 	@Test
 	public final void tempMethodPrePopulatedData() throws Exception {
 		ProfileService profileService = new ProfileService();
@@ -139,15 +137,14 @@ public class ProfileServiceTest extends BaseUnitTest {
 		assertEquals(0, connectionEntries.size());
 	}
 
-	@Ignore
 	@Test
 	public void testCheckColleague() throws Exception {
 		ProfileService profileService = new ProfileService();
-		ColleagueConnection Connection = profileService.checkColleague(
+		ColleagueConnection connection = profileService.checkColleague(
 				properties.getProperty("email1"),
-				properties.getProperty("email3"));
-		assertNotNull(Connection.getTitle());
-		assertNotNull(Connection.getConnectionId());
+				properties.getProperty("email2"));
+		assertNotNull(connection.getTitle());
+		assertNotNull(connection.getConnectionId());
 	}
 
 	@Test
@@ -187,7 +184,6 @@ public class ProfileServiceTest extends BaseUnitTest {
 		}
 	}
 
-	@Ignore
 	@Test
 	public void testSendInvite() throws Exception {
 		ProfileService profileService = new ProfileService();
@@ -196,7 +192,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 
 	}
 
-	@Test @Ignore
+	@Test
 	public final void testUpdateProfile() throws Exception {
 
 		ProfileService profileService = new ProfileService();
@@ -237,7 +233,6 @@ public class ProfileServiceTest extends BaseUnitTest {
 		profileService.updateProfile(null);
 	}
 
-	@Ignore
 	@Test
 	public final void testUpdateProfilePhoto() throws Exception {
 
@@ -249,7 +244,6 @@ public class ProfileServiceTest extends BaseUnitTest {
 		profileService.updateProfilePhoto(file, profile.getUserid());
 	}
 
-	@Ignore
 	@Test
 	public final void testUpdateProfilePhotoNullExtension() throws Exception {
 
@@ -261,7 +255,6 @@ public class ProfileServiceTest extends BaseUnitTest {
 		profileService.updateProfilePhoto(file, profile.getUserid());
 	}
 
-	@Ignore
 	@Test
 	public final void testUpdateProfilePhotoForInvalidFilePath()
 			throws Exception {
@@ -275,7 +268,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 		profileService.updateProfilePhoto(file, profile.getUserid());
 	}
 	
-	@Test @Ignore
+	@Test
 	public final void testProfileSerialization() throws Exception {
 		ProfileService profileService = new ProfileService();
 		Profile profile = profileService.getProfile(properties.getProperty("email1"));
@@ -293,7 +286,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 	}
 	
 		
-	@Test @Ignore
+	@Test
 	public final void testProfileListSerialization() throws Exception {
 		ProfileService profileService = new ProfileService();
 		ProfileList profiles = profileService.getReportingChain(properties.getProperty("email1"));

@@ -1,0 +1,47 @@
+{
+  "Customer" : {
+    "Organization" : {
+      "OrgName" : "Test Enterprise",
+      "Phone" : "999-999-9999",
+      "AddressSet" :  [{
+          "AddressLine1" : "5 Technology Park Drive",
+          "AddressLine2" : "",
+          "AddressType" : "MAILING",
+          "City" : "Westford",
+          "Country" : "United States",
+          "PostalCode" : "01866",
+          "State" : "Massachusetts"
+        }
+      ],
+      "Contact" : {
+        "FamilyName" : "Doe",
+        "GivenName" : "John",
+        "EmailAddress" : "johndoe@example.com",
+        "NamePrefix" : "Mr",
+        "EmployeeNumber" : "6A77777",
+        "LanguagePreference" : "EN_US",
+        "WorkPhone" : "800-555-1234",
+        "MobilePhone" : "800-555-2345",
+        "HomePhone" : "800-555-3456",
+        "Fax" : "800-555-4567",
+        "JobTitle" : "Director",
+        "WebSiteAddress" : "office.example.com",
+        "TimeZone" : "America/Central",
+        "Photo" : "",
+      }
+    },
+    "CustomerAccountSet" :  [{
+        "AccountNumber" : "0000123456",
+        "LocationName" : "Westford Lab",
+        "PaymentMethodType" : "INVOICE",
+        "CurrencyType" : "USD"
+      }
+    ],
+    "CustomerIdentifierSet" :  [{
+        "Value" : "9999999999",
+        "CustomerIdType" : "IBM_CUSTOMER_NUMBER"
+      }
+    ]
+  }
+}
+

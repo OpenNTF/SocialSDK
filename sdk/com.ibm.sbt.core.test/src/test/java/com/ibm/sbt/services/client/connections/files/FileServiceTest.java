@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * ï¿½ Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -16,11 +16,10 @@
 
 package com.ibm.sbt.services.client.connections.files;
 
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
-
+import static org.junit.Assert.assertTrue;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -31,14 +30,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.ibm.sbt.services.BaseUnitTest;
 import com.ibm.sbt.services.client.ClientServicesException;
-import com.ibm.sbt.services.client.connections.communities.Community;
-import com.ibm.sbt.services.client.connections.communities.CommunityList;
-import com.ibm.sbt.services.client.connections.communities.CommunityService;
 import com.ibm.sbt.services.client.connections.files.model.FileRequestParams;
 import com.ibm.sbt.test.lib.TestEnvironment;
 
@@ -46,7 +41,7 @@ public class FileServiceTest extends BaseUnitTest {
 
 	public final static String	TEST_CONTENT			= "This is a sample Content in the Test File. "
 																+ "Used mainly for Testing the Upload functionality of the FileService Connections API."
-																+ "Test Input : ddsfafw4t547ï¿½%*ï¿½^Uï¿½^JUL&><\03242";
+																+ "Test Input : ddsfafw4t547ï¿½ï¿½ï¿½%*ï¿½ï¿½ï¿½^Uï¿½ï¿½ï¿½^JUL&><\03242";
 	public final static String	TEST_NAME				= "FS_TestUploadTest";
 
 
@@ -60,7 +55,7 @@ public class FileServiceTest extends BaseUnitTest {
 		assertEquals(entry.getFileId(), testFileId);
 	}
 
-	@Test @Ignore
+	@Test
 	public void testReadFileWithLoadFalse() throws Exception {
 		FileService fileService = new FileService();
 
@@ -242,14 +237,14 @@ public class FileServiceTest extends BaseUnitTest {
 		}
 	}
 
-	@Test @Ignore
+	@Test 
 	public void testGetFilesComments() throws Exception {
 		//TODO: fix for smartcloud
 		if (TestEnvironment.isSmartCloud()) return;
 		
 		FileService fileService = new FileService();
 
-		FileList files = fileService.getMyFiles();
+		FileList files = fileService.getPublicFiles();
 		String fileId = files.get(0).getFileId();
 		CommentList commentEntries = fileService.getAllUserFileComments(fileId, TestEnvironment.getCurrentUserUuid(), true, null);
 		if (!commentEntries.isEmpty()) {
@@ -274,7 +269,6 @@ public class FileServiceTest extends BaseUnitTest {
 	}
 
 	@Test 
-	@Ignore
 	public void testUpdateFileMetadata() throws Exception {
 		FileService fileService = new FileService();
 
@@ -284,7 +278,7 @@ public class FileServiceTest extends BaseUnitTest {
 		Map<String, String> paramsMap = new HashMap<String, String>();
 		Random random = new Random();
 		paramsMap.put(FileRequestParams.TAG.getFileRequestParams(), "Junit_Tag" + random.nextInt());
-		String label = "Junit_Label_New";
+		String label = "Junit_Label_New"+random.nextInt();
 		fileEntry.setLabel(label);
 		fileEntry = fileService.updateFileMetadata(fileEntry, paramsMap);
 		assertEquals(fileEntry.getTitle(), label);
@@ -304,7 +298,7 @@ public class FileServiceTest extends BaseUnitTest {
 		assertEquals(fileEntry.getLockType(), "HARD");
 	}
 
-	@Test @Ignore
+	@Test 
 	public void testUnlock() throws Exception {
 		//TODO: fix for smartcloud
 		if (TestEnvironment.isSmartCloud()) return;
@@ -379,7 +373,7 @@ public class FileServiceTest extends BaseUnitTest {
 	}
 
 	
-	@Test @Ignore
+	@Test
 	public void testFileUpload() throws IOException, ClientServicesException, Exception {		
 		java.io.File t =  java.io.File.createTempFile(TEST_NAME, "txt");
 		t.deleteOnExit();
@@ -408,7 +402,7 @@ public class FileServiceTest extends BaseUnitTest {
 	}
 	
 	
-	@Test @Ignore
+	@Test
 	public void testAddRemoveFileToFolders() throws Exception {
 		//TODO: fix for connections and smartcloud
 		FileService fileService = new FileService();

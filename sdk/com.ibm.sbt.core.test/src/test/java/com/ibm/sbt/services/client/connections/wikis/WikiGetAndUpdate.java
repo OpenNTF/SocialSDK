@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * �� Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -42,7 +42,7 @@ public class WikiGetAndUpdate extends BaseWikiServiceTest {
 		wikiCreated = createWiki(wiki);
 	}
 	
-	@Test @Ignore
+	@Test
 	public void getWikiTest() throws Exception {
 		Wiki wikiGot = wikiService.getWiki(wikiCreated.getLabel(), null);
 		
@@ -53,7 +53,7 @@ public class WikiGetAndUpdate extends BaseWikiServiceTest {
 		assertEquals(wikiCreated.getTags(), wikiGot.getTags());
 	}
 	
-	@Test @Ignore
+	@Test
 	public void updateWikiTest() throws Exception {
 		Map<String,String> getParams = new HashMap<String, String>();
 		getParams.put("includeTags", "true");

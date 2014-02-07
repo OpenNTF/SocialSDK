@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2013
+ * ��� Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -34,7 +34,7 @@ import com.ibm.sbt.services.client.ClientServicesException;
  */
 public class WikiCreateAndDeleteTest extends BaseWikiServiceTest {
 
-	@Test @Ignore
+	@Test
 	public void createWikiTest() throws Exception {
 		Wiki wiki = newWiki();
 		

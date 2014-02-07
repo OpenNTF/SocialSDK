@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * ï¿½ Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -23,9 +23,11 @@ package com.ibm.sbt.services.client.connections.activitystreams;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+
 import java.util.Date;
-import org.junit.Ignore;
+
 import org.junit.Test;
+
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.services.BaseUnitTest;
 import com.ibm.sbt.services.client.SBTServiceException;
@@ -49,7 +51,6 @@ public class ActivityStreamServiceTest extends BaseUnitTest {
 		}
 	}
 
-	@Ignore
 	@Test
 	public final void testGetUpdatesFromCommunity() {
 		try {
@@ -74,7 +75,6 @@ public class ActivityStreamServiceTest extends BaseUnitTest {
 		}
 	}
 
-	@Ignore
 	@Test
 	public final void testPostEntry() {
 		try {
@@ -117,7 +117,6 @@ public class ActivityStreamServiceTest extends BaseUnitTest {
 		}
 	}
 
-	@Ignore
 	@Test
 	public final void testSearchForTags() {
 		try {

@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -684,6 +684,7 @@ public class CommunityService extends BaseService {
 				community.setCommunityType(community.getCommunityType());
 			if(!community.getFieldsMap().toString().contains(CommunityXPath.tags.toString()))
 				community.setTags(community.getTags());
+			community.setAsString(CommunityXPath.communityUuid, community.getCommunityUuid());
 			
 			try {
 				communityPayload = community.constructCreateRequestBody();
@@ -812,9 +813,9 @@ public class CommunityService extends BaseService {
 			throw new CommunityServiceException(e, Messages.CreateCommunityPayloadException);
 		}
 		
-		String communityUpdateMembertUrl = resolveCommunityUrl(CommunityEntity.COMMUNITY.getCommunityEntityType(),CommunityType.MEMBERS.getCommunityType());
+		String communityUpdateMemberUrl = resolveCommunityUrl(CommunityEntity.COMMUNITY.getCommunityEntityType(),CommunityType.MEMBERS.getCommunityType());
 		try {
-			Response response = super.createData(communityUpdateMembertUrl, parameters, communityPayload);
+			Response response = super.createData(communityUpdateMemberUrl, parameters, communityPayload);
 			int statusCode = response.getResponse().getStatusLine().getStatusCode();
 			return statusCode == HttpServletResponse.SC_CREATED;
 		} catch (ClientServicesException e) {

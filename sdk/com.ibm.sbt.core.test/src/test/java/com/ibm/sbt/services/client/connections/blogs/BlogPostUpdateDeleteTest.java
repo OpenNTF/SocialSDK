@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * �� Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -22,7 +22,6 @@ import static org.junit.Assert.fail;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -37,7 +36,7 @@ public class BlogPostUpdateDeleteTest extends BaseBlogServiceTest {
 		blogPost = createBlogPost();
 	}
 
-	@Test @Ignore
+	@Test
 	public void CreateBlogPostTest() {
 		try {
 			BlogPost blogPost = new BlogPost(blogService, "");
@@ -66,7 +65,7 @@ public class BlogPostUpdateDeleteTest extends BaseBlogServiceTest {
 		}
 	}
 
-	@Test @Ignore
+	@Test
 	public void UpdateBlogPost() {
 
 		try {
@@ -81,7 +80,7 @@ public class BlogPostUpdateDeleteTest extends BaseBlogServiceTest {
 		}
 	}
 
-	@Test @Ignore
+	@Test
 	public void deleteBlogPost() throws Exception {
 		try {
 			BlogPost createdBlogPost = createBlogPost();

@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2013
+ * ��� Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -22,7 +22,6 @@ import static org.junit.Assert.fail;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.ibm.sbt.services.client.ClientServicesException;
@@ -39,7 +38,7 @@ public class WikiPageTest extends BaseWikiServiceTest {
 		wiki = createWiki();
 	}
 	
-	@Test @Ignore
+	@Test
 	public void createWikiPageTest() throws Exception {
 		WikiPage wikiPage = newWikiPage();
 		WikiPage wikiPageCreated = wikiService.createWikiPage(
@@ -50,7 +49,7 @@ public class WikiPageTest extends BaseWikiServiceTest {
 		assertNotNull(wikiPageCreated.getLabel());
 	}
 	
-	@Test @Ignore
+	@Test
 	public void updateWikiPageTest() throws Exception {
 		WikiPage wikiPage = wikiService.createWikiPage(
 				wiki.getLabel(), newWikiPage() , null);

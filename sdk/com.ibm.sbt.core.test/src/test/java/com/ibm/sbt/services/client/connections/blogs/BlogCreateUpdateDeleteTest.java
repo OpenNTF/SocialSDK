@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * �� Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -22,7 +22,6 @@ import static org.junit.Assert.fail;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -36,7 +35,7 @@ public class BlogCreateUpdateDeleteTest extends BaseBlogServiceTest {
 		blog = createBlog();
 	}
 
-	@Test @Ignore
+	@Test
 	public void CreateBlogTest() {
 		try {
 			Blog blog = new Blog(blogService, "");
@@ -56,7 +55,7 @@ public class BlogCreateUpdateDeleteTest extends BaseBlogServiceTest {
 
 	}
 
-	@Test @Ignore
+	@Test
 	public void GetBlog() {
 		try {
 			Blog blogGot = blogService.getBlog(blog.getBlogUuid());
@@ -69,7 +68,7 @@ public class BlogCreateUpdateDeleteTest extends BaseBlogServiceTest {
 		}
 	}
 
-	@Test @Ignore
+	@Test
 	public void UpdateBlog() {
 		try {
 			blog.setTitle("New title " + System.currentTimeMillis());

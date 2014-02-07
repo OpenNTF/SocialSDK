@@ -1,34 +1,18 @@
 <div id="filesViewDiv"></div>
 <script type="text/template" id="gridTemplate">
 <tr>
-	
-	<td><input type="checkbox" data-dojo-attach-point="rowSelectionInput" data-dojo-attach-event="onclick: handleCheckBox"></input>
-    <td style="width: 100%;">
-        <h4>
-            <a class="entry-title" rel="bookmark" title="${tooltip}" href="" data-dojo-attach-event="onclick: handleClick">${title}</a>    
-        </h4>
-        <div>
-            <ul>
-                <li>
-                    ${authorName}
-                ${_nls.created} ${createdLabel}
-                </li>
-                <li>
-                    ${hitCount} ${_nls.downloads}
-                </li>
-                <li>
-                    ${commentCount} ${_nls.comments}
-                </li>
-            </ul>
-        </div>
+	<td>
+		<input type="checkbox" data-dojo-attach-point="rowSelectionInput" data-dojo-attach-event="onclick: handleCheckBox">
+	</input>
+    <td valign="bottom" style="width: 100%;">
+        <a class="entry-title" rel="bookmark" title="${tooltip}" href="" data-dojo-attach-event="onclick: handleClick">${title}</a>    
     </td>
-  
 </tr>
 </script>
 
 <script type="text/template" id="actionTemplate">
 <span id="${id}">
-<input type="button" value="${name}" class="btn btn-primary" role="button" data-dojo-attach-point="actionNameNode"></input>
+<input type="button" value="${name}" class="btn" role="button" data-dojo-attach-point="actionNameNode"></input>
 </span>
 </script>
 
@@ -168,30 +152,24 @@
 				<td>
 					Share with:<span role="presentation">&nbsp;</span>
 				</td>
-				
-
-									<td>
-										<span>Type</span>
-										<select style="width:50%" name="searchSourceDropdown" title="Type" aria-label="Type">
-											<option dojoAttachEvent="click: handleShareWithSelection" >${nls.labelAPerson}</option>
-											<option dojoAttachEvent="click: handleShareWithSelection" >${nls.labelACommunity}</option>
-										</select>
-									
-									<br /><span>${nls.labelRole}</span>
-										<select style="width:50%" name="_shareFileUserRole" title="Role" aria-label="Role">
-											<option dojoAttachEvent="click: handleSelectAccessType" value="${nls.labelAsReader}">${nls.labelAsReader}</option>
-											<option dojoAttachEvent="click: handleSelectAccessType" value="${nls.labelAsEditor}">${nls.labelAsEditor}</option>
-										</select>
-									</td>
-
-									<td>
-										<div dojoAttachPoint="searchTypeAhead"></div>
-									</td>
-
-
+				<td>
+					<span>Type</span>
+					<select style="width:50%" name="searchSourceDropdown" title="Type" aria-label="Type">
+						<option dojoAttachEvent="click: handleShareWithSelection" >${nls.labelAPerson}</option>
+						<option dojoAttachEvent="click: handleShareWithSelection" >${nls.labelACommunity}</option>
+					</select>
+					<br /><span>${nls.labelRole}</span>
+					<select style="width:50%" name="_shareFileUserRole" title="Role" aria-label="Role">
+						<option dojoAttachEvent="click: handleSelectAccessType" value="${nls.labelAsReader}">${nls.labelAsReader}</option>
+						<option dojoAttachEvent="click: handleSelectAccessType" value="${nls.labelAsEditor}">${nls.labelAsEditor}</option>
+					</select>
+				</td>
+				<td>
+					<div dojoAttachPoint="searchTypeAhead"></div>
+				</td>
+				<td>
 					<div  role="alert"></div>
 				</td>
-				
 			</tr>
 			<tr>
 				<td>
@@ -205,14 +183,12 @@
 					<span>${nls.labelNone}</span>
 				</td>
 			</tr>
-
 			<tr style="display: none;">
 				<td><span>${nls.labelEditors} </span></td>
 				<td>
 					<span>${nls.labelNone}</span>
 				</td>
 			</tr>
-
 			<tr dojoAttachPoint="makePublicWarning" style="display:none">
 				<td>
 					<div role="alert" style="">
@@ -220,7 +196,6 @@
 					</div>
 				</td>
 			</tr>
-
 			<tr dojoAttachPoint="messageRow">
 				<td>
 					<span>${nls.labelMessage}</span>
@@ -243,12 +218,10 @@
 
 <script type="text/template" id="dialogTemplate">
 <div role="dialog" style="${style}" >
-	
 	<div dojoattachpoint="titleBar" style="display: none;">
 		<span dojoattachpoint="titleNode"></span> 
 		<span title="Cancel" dojoattachevent="onclick: onCancel" class="dijitDialogCloseIcon" dojoattachpoint="closeButtonNode"></span>
 	</div>
-
 	<div dojoattachpoint="containerNode">
 		<div style="${dialogStyle}">
 			<form>
@@ -272,19 +245,6 @@
 
 <script type="text/template" id="viewTemplate">
 <div dojoAttachPoint="domNode" class="lotusFrame lotusui30_layout">
-	<div dojoAttachPoint="bannerNode" role="banner">
-		<!-- <div class="lotusBanner" id="lotusBanner"></div> -->
-		<div class="lotusTitleBar2">
-			<div class="lotusWrapper">
-				<div class="lotusInner">
-					<h1>${title}</h1>
-					<div role="search" class="lotusGlobalSearch">
-						<div dojoAttachPoint="searchNode" class="lotusSearch"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 	<div dojoAttachPoint="mainNode" class="lotusMain">
 		<div role="alert" class="alert alert-success" style="margin: 20px 0px 0px 0px; display: none;" dojoattachpoint="messageNode">
 			<span class="alert alert-success" dojoattachpoint="messageBody"></span>

@@ -346,7 +346,7 @@ function(declare, lang, dom, stringUtil, sbt, parameter, Grid,
 				 * @returns {FileGridRenderer}
 				 */
 				createDefaultRenderer : function(args) {
-					return new FileGridRenderer(args);
+					return new FileGridRenderer(args,this);
 				},
 
 				/**

@@ -1,0 +1,22 @@
+<div style="padding:05.em;">
+<div dojoattachpoint="pagingFooter">
+	<span dojoattachpoint="itemsPerPageList">
+		Show:
+		<span>
+			<a href="javascript: void(0)" data-dojo-attach-event="onclick: show10ItemsPerPage">10</a>
+		</span>|
+		<span>
+			<a href="javascript: void(0)" data-dojo-attach-event="onclick: show25ItemsPerPage">25</a>
+		</span>|
+		<span>
+			<a href="javascript: void(0)" data-dojo-attach-event="onclick: show50ItemsPerPage">50</a>
+		</span>|
+		<span>
+			<a href="javascript: void(0)" data-dojo-attach-event="onclick: show100ItemsPerPage">100</a>
+		</span> ${nls.items}
+	</span>
+</div>
+<div>
+	<a href="javascript: void(0)" data-dojo-attach-event="onclick: viewFeed" >${nls.feed}</a>
+</div>
+</div>

@@ -17,38 +17,46 @@
 define(["../../../declare", "../../../i18n", 
         "../../../connections/controls/ConnectionsGridRenderer",
         "../../../text!../../../connections/controls/bookmarks/templates/BookmarkRow.html",
+        "../../../text!../../../connections/controls/bookmarks/templates/BootstrapBookmarkRow.html",
         "../../../text!../../../connections/controls/bookmarks/templates/TagAnchor.html",
         "../../../i18n!../../../connections/controls/bookmarks/nls/BookmarkGridRenderer",
         "../../../lang",
         "../../../text!../../../connections/controls/bookmarks/templates/BookmarkListItem.html"], 
-        function(declare, i18n,  ConnectionsGridRenderer, BookmarkRow,TagAnchor, nls, lang, BookmarkListItem) {
+        function(declare, i18n,  ConnectionsGridRenderer, BookmarkRow,BootstrapBookmarkRow,
+        		TagAnchor, nls, lang, BookmarkListItem) {
 
                 /**
                 * @class BookmarkGridRenderer
             * @namespace sbt.connections.controls.bookmarks
             * @module sbt.connections.controls.bookmarks.BookmarkGridRenderer
             * */
-                var BookmarkGridRenderer = declare(ConnectionsGridRenderer,{
+            var BookmarkGridRenderer = declare(ConnectionsGridRenderer,{
+                    
+                _nls: nls,
+                
+                /**
+                 * The Constructor function
+                 * @method constructor
+                 * @param args
+                 */
+                constructor: function(args,grid){
+                	if(grid.theme == "bootstrap"){
+                		this.template = BootstrapBookmarkRow;
+                	}else{
+                		if (args && args.containerType) {
+	                        if(args.containerType == "ol" || args.containerType == "ul"){
+	                            this.template = BookmarkListItem;
+	                        }else if(args.containerType == "table"){
+	                            this.template = BookmarkRow;
+	                        }
+                        }else{
+                            this.template = BookmarkRow;
+                        }
                         
-                        _nls: nls,
-                        
-                        /**
-                         * The Constructor function
-                         * @method constructor
-                         * @param args
-                         */
-                        constructor: function(args){
-                                if (args && args.containerType) {
-                                        if (args.containerType == "ol" || args.containerType == "ul") {
-                                                this.template = BookmarkListItem;
-                                        } else if (args.containerType == "table") {
-                                                this.template = BookmarkRow;
-                                        }
-                                } else {
-                                        this.template = BookmarkRow;
-                                }
-                                this.tagAnchorTemplate = TagAnchor;
-                        },
+                	}
+                	
+                	this.tagAnchorTemplate = TagAnchor;  
+                },
                         
                          /**
                   * Displays a tooltip by calling the getTooltip function in the bookmarkAction.
@@ -106,7 +114,7 @@ define(["../../../declare", "../../../i18n",
                      if (tags.length == 0) {
                          return "";
                      } else {
-                         return this.nls.tags;
+                         return this._nls.tags;
                      }
                  },
                         /**

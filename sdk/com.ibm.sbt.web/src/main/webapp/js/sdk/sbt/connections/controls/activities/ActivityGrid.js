@@ -81,7 +81,7 @@ function(declare, Grid, parameter, ActivityGridRenderer, ActivityAction, consts)
                 modified: { 
                     title: this.renderer._nls.modified, 
                     sortMethod: "sortBylastModified",
-                    sortParameter: "date"
+                    sortParameter: "modified"
                 },
                 dueDate: {
                     title: this.renderer._nls.dueDate, 
@@ -169,7 +169,7 @@ function(declare, Grid, parameter, ActivityGridRenderer, ActivityAction, consts)
          * @returns an instance of an ActivitiesGridRenderer.
          */
         createDefaultRenderer : function(args) {
-            return new ActivityGridRenderer(args);
+            return new ActivityGridRenderer(args,this);
         }
 				
 	});

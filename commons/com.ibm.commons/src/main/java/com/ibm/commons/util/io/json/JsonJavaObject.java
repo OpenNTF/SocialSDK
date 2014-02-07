@@ -262,6 +262,21 @@ public class JsonJavaObject extends HashMap<String,Object> implements JsonObject
 	}
 
 	/** @ibm-api */
+	public long getAsLong(String property) {
+		Object v = get(property);
+		if(v instanceof Number) {
+			return ((Number)v).longValue();
+		}
+		if(v instanceof String) {
+			return Long.parseLong((String)v);
+		}
+		if(v instanceof Boolean) {
+			return (Boolean)v ? 1 : 0;
+		}
+		return 0;
+	}
+
+	/** @ibm-api @deprecated */
 	public long getAsLong(JsonObject o, String property) {
 		Object v = get(property);
 		if(v instanceof Number) {
@@ -277,6 +292,25 @@ public class JsonJavaObject extends HashMap<String,Object> implements JsonObject
 	}
 
 	/** @ibm-api */
+	public boolean getAsBoolean(String property) {
+		Object v = get(property);
+		if(v instanceof Boolean) {
+			return ((Boolean)v).booleanValue();
+		}
+		if(v instanceof String) {
+			String s = (String)v;
+			if(s.equalsIgnoreCase("false") || s.equals("0")) {
+				return false;
+			}
+			return true;
+		}
+		if(v instanceof Number) {
+			return ((Number)v).doubleValue()!=0.0;
+		}
+		return v!=null;
+	}
+
+	/** @ibm-api @deprecated */
 	public boolean getAsBoolean(JsonObject o, String property) {
 		Object v = get(property);
 		if(v instanceof Boolean) {

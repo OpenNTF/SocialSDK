@@ -97,7 +97,7 @@ define([ "../../declare", "../../config", "../../lang", "../../stringUtil", "../
 			this.inherited(arguments);
 			
 			if (this.forceAuthentication) {
-				this.authenticate();
+				this.authenticate(true);
 			}
 		},
 
@@ -196,7 +196,7 @@ define([ "../../declare", "../../config", "../../lang", "../../stringUtil", "../
 					this.content.removeSelectionListener(this);
 				}
 				
-				el.removeChild(content.domNode);
+				el.removeChild(this.content.domNode);
 			}
 			
 			this.content = content;

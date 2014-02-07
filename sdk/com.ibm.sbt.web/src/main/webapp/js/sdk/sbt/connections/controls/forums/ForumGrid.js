@@ -15,13 +15,14 @@
  */
 
 define(["../../../declare",
+        "../../../lang",
         "../../../controls/grid/Grid",
         "../../../store/parameter",
         "./ForumGridRenderer", 
 		 "./ForumAction",
 		 "./BackAction",
         "../../../connections/ForumConstants"], 
-    function(declare, Grid, parameter, ForumGridRenderer, ForumAction, BackAction, consts){
+    function(declare, lang, Grid, parameter, ForumGridRenderer, ForumAction, BackAction, consts){
 	
 		/**Values that forums Can be sorted By, NOTE Sotring is not enabled in Connections*/
 		var sortVals = {
@@ -61,7 +62,7 @@ define(["../../../declare",
 	            },
 	            "public" : {
 	                storeArgs : {
-	                    url : consts. AtomForumsPublic,
+	                    url : consts.AtomForumsPublic,
 	                    attributes : consts.ForumXPath,
 	                    feedXPath : consts.ForumsFeedXPath,
 	                    paramSchema: ParamSchema
@@ -72,7 +73,7 @@ define(["../../../declare",
 	            },
 	            "myTopics" : {
 	                storeArgs : {
-	                    url : consts. AtomTopicsMy,
+	                    url : consts.AtomTopicsMy,
 	                    attributes : consts.ForumTopicXPath,
 	                    feedXPath : consts.ForumsFeedXPath,
 	                    paramSchema: ParamSchema
@@ -80,7 +81,18 @@ define(["../../../declare",
 	                rendererArgs : {
 	                    type : "myTopics"
 	                }
-	            }	            
+	            },
+	            "forumTopics" : {
+	            	storeArgs : {
+	                    url : consts.AtomTopics,
+	                    attributes : consts.ForumTopicXPath,
+	                    feedXPath : consts.ForumsFeedXPath,
+	                    paramSchema: ParamSchema
+	                },
+	                rendererArgs : {
+	                    type : "forumTopics"
+	                }
+	            }
 	        },
 		    
 	        /**The default Forum Grid that will be created, if another type is not specified */
@@ -163,6 +175,11 @@ define(["../../../declare",
 	        	this.update(null);
 	        },
 	        
+	        /*
+	         * Used for going back from topic replies
+	         * to a list of topics in a forum, this keeps track of which 
+	         * forum is being view. 
+	         */
 	        _forumID: "",
 	        
 	        /**
@@ -177,17 +194,22 @@ define(["../../../declare",
 	        		this._forumID = forumId;
 	        	}
 
-	        	this.renderer.template = this.renderer.topicTemplate;
 	        	this.renderer.headerTemplate = this.renderer.topicHeader;
 	        	this.renderer.breadCrumb = this.renderer.topicBreadCrumb;
 	        	this.store.setAttributes(consts.ForumTopicXPath);
 	        	this.hideBreadCrumb = false;
 	        	var endpoint = this.store.getEndpoint();
-	        	        	
+	        		        		
 	        	if(this.params.type=="myTopics"){
+	        		this.renderer.template = this.renderer.topicTemplate;
 	        		var url = this.buildUrl(consts.AtomTopicsMy, {},endpoint);
 	        		this.store.setUrl(url);
 	        		this.hideBreadCrumb = true;
+	        	}else if(this.params.type == "forumTopics"){
+	        		this.renderer.template = this.renderer.forumTopicTemplate;
+	        		this.hideBreadCrumb = true;
+	        		var url = this.buildUrl(consts.AtomTopics+"?forumUuid="+this.forumUuid, {}, endpoint);
+	        		this.store.setUrl(url);
 	        	}else{
 	        		var url = this.buildUrl(consts.AtomTopics+"?forumUuid="+this._forumID, {}, endpoint);
 	        		this.store.setUrl(url);
@@ -202,8 +224,11 @@ define(["../../../declare",
 	        	this.renderer.headerTemplate = this.renderer.replyHeader;
 	        	this.store.setAttributes(consts.ForumReplyXPath);
 	        	this.hideBreadCrumb = false;
-	        	var endpoint = this.store.getEndpoint();
+	        	var endpoint = this.store.getEndpoint();      	
+	        	
 	        	if(this.params.type=="myTopics"){
+	        		this.renderer.breadCrumb = this.renderer.myTopicsBreadCrumb;
+	        	}else if(this.params.type == "forumTopics"){
 	        		this.renderer.breadCrumb = this.renderer.myTopicsBreadCrumb;
 	        	}else{
 	        		this.renderer.breadCrumb = this.renderer.replyBreadCrumb;
@@ -242,14 +267,15 @@ define(["../../../declare",
 	         * @returns
 	         */
 	        buildUrl: function(url, args, endpoint) {	        	
-	            var urlParams = { since: 1};
+	            var params = { since: 1};
 	            if (this.query) {
 	            	params = lang.mixin(params, this.query);
 	            }
-	            if (this.direction) {
-	            	params = lang.mixin(params, { direction : this.direction });
-	            } 
-	            return this.constructUrl(url, urlParams, {}, endpoint);
+	            if(this.forumUuid){
+	            	params = lang.mixin(params, { forumUuid : this.forumUuid });
+	            }
+	            
+	            return this.constructUrl(url, params, {}, endpoint);
 	        }
 	        
 

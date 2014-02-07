@@ -10,6 +10,7 @@ import java.util.concurrent.TimeoutException;
 import java.util.logging.Logger;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.http.client.utils.DateUtils;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -42,6 +43,7 @@ public abstract class AbstractRhinoTest {
 		cx = ContextFactory.getGlobal().enterContext();
 		cx.setOptimizationLevel(-1);
 		cx.setLanguageVersion(Context.VERSION_1_6);
+		
 		scope = cx.initStandardObjects();
 		// Assumes we have env.rhino.js as a resource on the classpath.
 
@@ -60,6 +62,33 @@ public abstract class AbstractRhinoTest {
 
 		cx.evaluateString(scope, envjs, "env.rhino.js", 1, null);
 
+		
+		
+		String extend = "var __pt = DOMParser.prototype.parseFromString; " +
+				" DOMParser.prototype.parseFromString = function(a,b) {" +
+				" var doc = __pt(a,b);" +
+				"console.log(doc);" +
+				" doc.evaluate = undefined; " +
+				" t = {}; t.document = doc;" +
+				" wgxpath.install(t);" +
+				" return doc;" +
+				"};" +
+				"";
+		cx.evaluateString(scope, extend, "extend_parser", 1, null);
+		
+		String fixDate = 
+				"Date.parse = function(a) {\n" +
+				"try {\n" +
+				"var d = Packages.javax.xml.bind.DatatypeConverter.parseDateTime(a);\n" +
+				"console.log(a + ' -----> ' + d.getTimeInMillis()); \n" +
+				"return d.getTimeInMillis();\n" +
+				"} catch(e) { console.log(e); return 'Invalid Date';}" +
+				"};" +
+				"";
+		
+		cx.evaluateString(scope, fixDate, "fix_date", 1, null);
+		
+		
 		// This will load the home page DOM.
 		String options = "Envjs.scriptTypes['text/javascript'] = true;";
 		cx.evaluateString(scope, options, "opt", 1, null);

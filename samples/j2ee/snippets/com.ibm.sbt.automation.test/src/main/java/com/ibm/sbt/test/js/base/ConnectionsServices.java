@@ -23,10 +23,12 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.automation.core.test.BaseApiTest;
+import com.ibm.sbt.automation.core.test.FlexibleTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 import com.ibm.sbt.services.client.connections.communities.CommunityService;
 
@@ -35,13 +37,13 @@ import com.ibm.sbt.services.client.connections.communities.CommunityService;
  *  
  * @date 25 Mar 2013
  */
-public class ConnectionsServices extends BaseApiTest {
+public class ConnectionsServices extends FlexibleTest {
 	
 	private List<String> errors = new ArrayList<String>();
     
     static final String SNIPPET_ID = "Toolkit_Base_ConnectionsServices";
     
-    @Test
+    @Test @Ignore
     public void testConnectionsServices() {
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         List jsonList = previewPage.getJsonList();

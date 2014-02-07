@@ -1,14 +1,11 @@
 require(["sbt/dom", "sbt/connections/controls/forums/ForumGrid"], function(dom, ForumGrid) {    
-    var domNode = dom.byId("myForums");
-    var CustomForumRow = domNode.text || domNode.textContent;
 	
     var grid = new ForumGrid({
         type: "my",
-    	hideSorter: true,
-		hidePager: true
+        theme: "bootstrap"
     });
 
-	 grid.renderer.template = CustomForumRow;
+	 grid.renderer.tableClass = "table-striped";
      
      dom.byId("gridDiv").appendChild(grid.domNode);
               

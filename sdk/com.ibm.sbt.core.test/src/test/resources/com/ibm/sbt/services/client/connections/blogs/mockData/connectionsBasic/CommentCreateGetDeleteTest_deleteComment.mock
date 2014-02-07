@@ -4,7 +4,7 @@
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Fri, 10 Jan 2014 15:27:47 GMT]]></value>
+        <value><![CDATA[Fri, 07 Feb 2014 15:54:01 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -36,15 +36,11 @@
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[lcLang=en_us; Path=/]]></value>
-    </header>
-    <header>
-        <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LCSESSIONID=0000uW0sKiPOWhrRDQb_8GgLxWr:180t512oj; Path=/; HttpOnly]]></value>
+        <value><![CDATA[LCSESSIONID=0000cxWJ3gvHww_nVgqbyPQYoLb:18dna4k6n; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Content-Length]]></name>
-        <value><![CDATA[6318]]></value>
+        <value><![CDATA[6164]]></value>
     </header>
     <header>
         <name><![CDATA[Keep-Alive]]></name>
@@ -78,16 +74,16 @@
 <!--[if IE 7]><script>document.getElementsByTagName("html")[0].className+=" lotusui_ie lotusui_ie7";</script><![endif]-->
 <!--[if IE 8]><script>document.getElementsByTagName("html")[0].className+=" lotusui_ie8";</script><![endif]-->
 <!--[if IE 9]><script>document.getElementsByTagName("html")[0].className+=" lotusui_ie9";</script><![endif]-->
-<link rel="stylesheet" type="text/css" id="lotusBaseStylesheet" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/connections/resources/web/_style?include=com.ibm.lconn.core.styles.oneui3/base/package3.css&etag=20130801.182141" appName="blogs" base="https://vhost0839.dc1.on.ca.compute.ihost.com:444/connections/resources/web/" query="?version=oneui3&rtl=false&etag=20130801.182141" theme="default" defaultTheme="default" oneui="3"></link>
-<link rel="stylesheet" type="text/css" id="lotusSpritesStylesheet" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/connections/resources/web/_style?include=com.ibm.lconn.core.styles.oneui3/sprites.css&etag=20130801.182141"></link>
-<link rel="stylesheet" type="text/css" id="lotusThemeStylesheet" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/connections/resources/web/_lconntheme/default.css?version=oneui3&rtl=false&etag=20130801.182141"></link>
+<link rel="stylesheet" type="text/css" id="lotusBaseStylesheet" href="https://dev.sdkdemo.com:444/connections/resources/web/_style?include=com.ibm.lconn.core.styles.oneui3/base/package3.css&etag=20140117.183045" appName="blogs" base="https://dev.sdkdemo.com:444/connections/resources/web/" query="?version=oneui3&rtl=false&etag=20140117.183045" theme="default" defaultTheme="default" oneui="3"></link>
+<link rel="stylesheet" type="text/css" id="lotusSpritesStylesheet" href="https://dev.sdkdemo.com:444/connections/resources/web/_style?include=com.ibm.lconn.core.styles.oneui3/sprites.css&etag=20140117.183045"></link>
+<link rel="stylesheet" type="text/css" id="lotusThemeStylesheet" href="https://dev.sdkdemo.com:444/connections/resources/web/_lconntheme/default.css?version=oneui3&rtl=false&etag=20140117.183045"></link>
 <!-- Copyright IBM Corp. 2012, 2013  All Rights Reserved.              -->
 
-<link rel="stylesheet" type="text/css" id="lotusAppStylesheet" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/connections/resources/web/_lconnappstyles/default/blogs.css?version=oneui3&rtl=false&etag=20130801.182141"></link>
+<link rel="stylesheet" type="text/css" id="lotusAppStylesheet" href="https://dev.sdkdemo.com:444/connections/resources/web/_lconnappstyles/default/blogs.css?version=oneui3&rtl=false&etag=20140117.183045"></link>
 
    <!-- Copyright IBM Corp. 2012, 2013  All Rights Reserved.              -->
 
-<link rel="shortcut icon" href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/connections/resources/web/com.ibm.oneui3.styles/imageLibrary/Branding/Other/ConnectionsBlue16.ico?etag=20130801.182141" type="image/x-icon">
+<link rel="shortcut icon" href="https://dev.sdkdemo.com:444/connections/resources/web/com.ibm.oneui3.styles/imageLibrary/Branding/Other/ConnectionsBlue16.ico?etag=20140117.183045" type="image/x-icon">
 
    
 </head>
@@ -98,7 +94,7 @@
         
             
             
-                <img class="iconsMessages48 iconsMessages48-msgWarning48" src="https://vhost0839.dc1.on.ca.compute.ihost.com:444/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20130801.182141" alt="" role="presentation">
+                <img class="iconsMessages48 iconsMessages48-msgWarning48" src="https://dev.sdkdemo.com:444/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140117.183045" alt="" role="presentation">
             
         
         <div class="lotusErrorForm" role="region" aria-labelledby="scene-title">
@@ -157,7 +153,7 @@
                   text.push("---");
                   
                   // Do not remove this line unless you wish to completely hide all reporting info from the user. 
-                  text.push("Identifier: LC48DFD299DBB94274AF019B00C81BA357\njava.io.FileNotFoundException: SRVE0190E: File not found: \/bdbe4876-2e0f-4005-9b10-89dad8b7074c\/api\/comments\/9d2b2f0b-825b-4ec0-a134-7339953b153d");
+                  text.push("Identifier: LCE55B494CE46A49D6843BFC26E2246D7C\njava.io.FileNotFoundException: SRVE0190E: File not found: \/be41e0ca-da9c-4f8d-b9d5-202f97a7bc4b\/api\/comments\/252fdd51-209c-4235-94fc-74ebde8ff50c");
                   input.value = text.join("\n");
               
                   self.parentNode.style.display='none';

@@ -24,7 +24,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
+import com.ibm.commons.util.io.json.JsonException;
+import com.ibm.commons.util.io.json.JsonJavaFactory;
 import com.ibm.commons.util.io.json.JsonJavaObject;
+import com.ibm.commons.util.io.json.JsonParser;
 
 /**
  * This class provides an implementation of the DataHandler class to use data in JSON format. 
@@ -34,8 +37,14 @@ import com.ibm.commons.util.io.json.JsonJavaObject;
 public class JsonDataHandler implements DataHandler<JsonJavaObject>{
 	
 	private JsonJavaObject data;
+
+	private static final long serialVersionUID = 1L;
 	
-	public JsonDataHandler(){}
+	/**
+	 * Default constructor
+	 */
+	public JsonDataHandler() {
+	}
 
 	/**
 	 * Constructor
@@ -43,6 +52,17 @@ public class JsonDataHandler implements DataHandler<JsonJavaObject>{
 	 * @param jsonObject
 	 */
 	public JsonDataHandler(JsonJavaObject jsonObject) {
+		this.data = jsonObject;
+	}
+	
+	/**
+	 * Constructor
+	 *  
+	 * @param jsonObject
+	 * @throws JsonException 
+	 */
+	public JsonDataHandler(String jsonString) throws JsonException {
+		JsonJavaObject jsonObject = (JsonJavaObject)JsonParser.fromJson(JsonJavaFactory.instanceEx, jsonString);
 		this.data = jsonObject;
 	}
 	
@@ -59,9 +79,38 @@ public class JsonDataHandler implements DataHandler<JsonJavaObject>{
 	 * @param path
 	 * @return value 
 	 */
+	public Object getAsObject(String path) {
+		return path.indexOf("/")==-1 ? data.get(path) : getNested(path);
+	}
+	
+	/*
+	 * @param path
+	 * @return
+	 */
+	private Object getNested(String path){
+		Object value = null;
+		String[] pathParts = path.split("/");
+		JsonJavaObject currentObject = data;
+		int index = 0;
+		for (String part : pathParts){
+			if (!containsKey(currentObject,part)) break;
+			if (index<pathParts.length-1) {
+				currentObject = currentObject.getJsonObject(part);
+			} else {
+				value = currentObject.get(part);
+			}
+			index++;
+		}
+		return value;
+	}
+	
+	/**
+	 * @param path
+	 * @return value 
+	 */
 	@Override
 	public String getAsString(String path) {
-		return path.indexOf("/")==-1?data.getString(path):getNestedField(path);
+		return path.indexOf("/")==-1 ? data.getString(path) : getNestedField(path);
 	}
 	
 	/*
@@ -85,10 +134,12 @@ public class JsonDataHandler implements DataHandler<JsonJavaObject>{
 		return value;
 	}
 	
-	public boolean containsKey(JsonJavaObject j, String key) {
+	private boolean containsKey(JsonJavaObject j, String key) {
 	    Iterator<String> i = j.getProperties();
 	    while(i.hasNext()) {
-	        if(i.next().matches(key))return true;
+	        if(i.next().matches(key)) {
+	        	return true;
+	        }
 	    }
 	    return false;
 	}
@@ -153,15 +204,17 @@ public class JsonDataHandler implements DataHandler<JsonJavaObject>{
 		if(path.contains("/")){
 			JsonJavaObject object = (JsonJavaObject) getNestedObject(path);
 			String pathinfo = path.substring(path.lastIndexOf("/")+1,path.length());
-			if(containsKey(object,pathinfo)){
-				for (Object obj : (List)object.get(pathinfo)) {
+			if(containsKey(object, pathinfo)){
+				List list = (List)object.get(pathinfo);
+				for (Object obj : list) {
 					jsonList.add((JsonJavaObject)obj);
 				}
 			}else{
 				return null;
 			}
-		}else{
-			for (Object obj : (List)data.get(path)) {
+		} else {
+			List list = (List)data.get(path);
+			for (Object obj : list) {
 				jsonList.add((JsonJavaObject)obj);
 			}
 		}
@@ -305,7 +358,14 @@ public class JsonDataHandler implements DataHandler<JsonJavaObject>{
 	@Override
 	public Long getAsLong(String fieldName) {
 		try {
-			return Long.parseLong(getAsString(fieldName));
+			Object value = getAsObject(fieldName);
+			if (value == null) {
+				return (long) 0;
+			}
+			if (value instanceof Number) {
+				return ((Number)value).longValue();
+			}
+			return Long.parseLong(value.toString());
 		} catch (NumberFormatException e) {
 			return (long) 0;
 		}
@@ -318,11 +378,7 @@ public class JsonDataHandler implements DataHandler<JsonJavaObject>{
 	@Override
 	public Long getAsLong(FieldEntry fieldName) {
 		String field = (String)fieldName.getPath();
-		try {
-			return Long.parseLong(getAsString(field));
-		} catch (NumberFormatException e) {
-			return (long) 0;
-		}
+		return getAsLong(field);
 	}
 
     /**

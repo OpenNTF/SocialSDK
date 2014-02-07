@@ -117,7 +117,7 @@ public class VCardResultPage extends BaseResultPage{
 		
 		new Actions(driver).moveToElement(cardAttachPoint).perform(); // hover over the attachpoint to make the semtagmenu appear.
 		
-		WebDriverWait wait = new WebDriverWait(driver, 2);
+		WebDriverWait wait = new WebDriverWait(driver, 5);
 		WebElement semtagmenu = wait.until(ExpectedConditions.elementToBeClickable(By.id("semtagmenu"))); // wait until the hover menu is clickable.
 		
 		WebElement semTagHoverMenu = semtagmenu.findElement(By.xpath(".//a"));

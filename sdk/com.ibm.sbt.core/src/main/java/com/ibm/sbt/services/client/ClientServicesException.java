@@ -18,11 +18,11 @@ package com.ibm.sbt.services.client;
 
 import java.io.IOException;
 import java.net.URI;
-import java.util.logging.Level;
 
-import org.apache.http.HttpRequest;
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.util.EntityUtils;
 
 import com.ibm.commons.util.AbstractException;
 import com.ibm.commons.util.StringUtil;
@@ -35,8 +35,13 @@ import com.ibm.sbt.services.client.ClientService.HandlerRaw;
  */
 public class ClientServicesException extends AbstractException {
 
-	private static final long	serialVersionUID	= 1L;
-	private int					responseStatusCode;
+	private int responseStatusCode;
+	private String reasonPhrase;
+	private URI requestURI;
+	private String responseBody;
+	private HttpResponse response;
+	private HttpRequestBase request;
+
 
 	// TODO fill more response code from rfc2616, section 10
 	public static final int	BAD_REQUEST						= 400;
@@ -57,6 +62,54 @@ public class ClientServicesException extends AbstractException {
 	public static final int	UNSUPPORTED_MEDIA_TYPE			= 415;
 	public static final int	REQUEST_RANGE_NOT_SATISFIABLE	= 416;
 	public static final int	EXPECTATION_FAILED				= 416;
+
+	private static final long	serialVersionUID	= 1L;
+
+	public ClientServicesException(Throwable nextException) {
+		super(nextException);
+	}
+
+	public ClientServicesException(Throwable nextException, String msg, Object... params) {
+		super(nextException, msg, params);
+	}
+
+	public ClientServicesException(HttpResponse response, HttpRequestBase request) {
+		this(null, createMessage(request, response));
+		
+		this.response = response;
+		this.request = request;
+		
+		this.setResponseStatusCode(response.getStatusLine().getStatusCode());
+		this.setReasonPhrase(response.getStatusLine().getReasonPhrase());
+		this.setRequestURI(request.getURI());
+		
+		try {
+			HttpEntity entity = response.getEntity();
+			this.responseBody = EntityUtils.toString(entity, "UTF-8");
+		} catch (IOException ioe) {
+		}
+	}
+	
+	/**
+	 * @return the request
+	 */
+	public HttpRequestBase getRequest() {
+		return request;
+	}
+	
+	/**
+	 * @return the response
+	 */
+	public HttpResponse getResponse() {
+		return response;
+	}
+	
+	/**
+	 * @return the responseBody
+	 */
+	public String getResponseBody() {
+		return responseBody;
+	}
 
 	public String getReasonPhrase() {
 		return reasonPhrase;
@@ -80,24 +133,6 @@ public class ClientServicesException extends AbstractException {
 
 	public URI getRequestURI() {
 		return requestURI;
-	}
-
-	private String	reasonPhrase;
-	private URI		requestURI;
-
-	public ClientServicesException(Throwable nextException) {
-		super(nextException);
-	}
-
-	public ClientServicesException(Throwable nextException, String msg, Object... params) {
-		super(nextException, msg, params);
-	}
-
-	public ClientServicesException(HttpResponse response, HttpRequestBase request) {
-		this(null, createMessage(request, response));
-		this.setResponseStatusCode(response.getStatusLine().getStatusCode());
-		this.setReasonPhrase(response.getStatusLine().getReasonPhrase());
-		this.setRequestURI(request.getURI());
 	}
 
 	public boolean isInformational() {

@@ -20,10 +20,9 @@
 				<configuration>
 					<systemPropertyVariables>
 						<testMode>mock</testMode>
-						<com.ibm.common.ExtensionManager>JavaServiceProvider</com.ibm.common.ExtensionManager>
 					</systemPropertyVariables>
 					<includes>
-						<include>com/ibm/sbt/test/js/connections/communities/api/GetMyCommunities.java</include>
+						<include>com/ibm/sbt/HeadlessTestsSuite.java</include>
 					</includes>
 					<testClassesDirectory>${project.build.directory}/classes</testClassesDirectory>
 					<testSourceDirectory>${project.build.sourceDirectory}</testSourceDirectory>

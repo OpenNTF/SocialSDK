@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.junit.Before;
+
 import junit.framework.Assert;
 
 import com.ibm.sbt.automation.core.test.BaseApiTest;
@@ -26,9 +28,10 @@ import com.ibm.sbt.services.client.connections.activity.MemberList;
  */
 public class BaseActivitiesTest extends BaseApiTest {
 	ActivityService activityService;
-
-	public BaseActivitiesTest() {
-		super();
+	
+	@Before
+	public void setupService(){
+		
 		setAuthType(AuthType.AUTO_DETECT);
 		activityService = getActivityService();
 	}

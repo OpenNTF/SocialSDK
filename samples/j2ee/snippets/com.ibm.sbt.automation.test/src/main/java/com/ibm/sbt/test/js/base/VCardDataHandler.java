@@ -20,6 +20,7 @@ import org.junit.Test;
 
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.automation.core.test.BaseApiTest;
+import com.ibm.sbt.automation.core.test.FlexibleTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 
 /**
@@ -32,7 +33,7 @@ public class VCardDataHandler extends BaseApiTest {
     static final String SNIPPET_ID = "Toolkit_Base_VCardDataHandler";
     
     public VCardDataHandler() {
-        setAuthType(AuthType.NONE);
+        setAuthType(BaseApiTest.AuthType.NONE);
     }
     
     @Test

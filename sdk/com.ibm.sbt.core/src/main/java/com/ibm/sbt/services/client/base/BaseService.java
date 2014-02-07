@@ -38,7 +38,7 @@ import com.ibm.sbt.services.endpoints.EndpointFactory;
  * @author Carlos Manias
  *
  */
-public abstract class BaseService implements Serializable{
+public abstract class BaseService implements Serializable {
 
 	public static final int						DEFAULT_CACHE_SIZE		= 0;
 	public static final String					DEFAULT_ENDPOINT_NAME	= "connections";
@@ -349,7 +349,7 @@ public abstract class BaseService implements Serializable{
 	            dataHolder = new Response(data);
 	        }
 	        if (data == null) {
-	            dataHolder = getClientService().get(url, parameters, headers, dataFormat);
+	            dataHolder = getClientService().get(url, parameters, headers, getDataFormat());
 	            //in case of 401 errors  client service returns null
 	            if (dataHolder == null) return null;
 	            data = dataHolder.getData();
@@ -414,7 +414,10 @@ public abstract class BaseService implements Serializable{
             uniqueId = parameters.get(nameParameterId);
         }
 
-        headers.put("Content-Type", "application/atom+xml");
+        if (!headers.containsKey("Content-Type")) {
+            // TODO shouldn't assume this
+        	headers.put("Content-Type", "application/atom+xml");
+        }
         Response result = getClientService().put(serviceUrl, parameters, headers, content, dataFormat);
         if (cacheSize > 0 && nameParameterId != null) {
             addDataToCache(uniqueId, content);

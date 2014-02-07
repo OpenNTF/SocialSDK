@@ -17,6 +17,7 @@ package com.ibm.sbt.test.controls.grid.communities;
 
 import static org.junit.Assert.assertTrue;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.ibm.sbt.automation.core.test.BaseGridTest;
@@ -30,7 +31,7 @@ public class OneClickToJoin extends BaseGridTest {
 
 	
 	
-    @Test 
+	@Test @Ignore 
     public void testGrid() {
         assertTrue("Expected the test to generate a grid", checkGrid("Social_Communities_Controls_One_Click_To_Join"));
         

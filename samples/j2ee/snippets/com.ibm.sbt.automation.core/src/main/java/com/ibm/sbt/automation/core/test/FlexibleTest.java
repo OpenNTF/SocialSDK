@@ -1,6 +1,7 @@
 package com.ibm.sbt.automation.core.test;
 
 import java.io.File;
+import java.io.IOException;
 
 import javax.management.RuntimeErrorException;
 
@@ -62,7 +63,27 @@ class EmbeddedDelegate extends AbstractRhinoTest implements TestDelegate {
 
 		JSSnippet snippet = (JSSnippet) BaseFileLister
 				.getJsSnippet(snippetName);
+		
+		if (snippet == null) {
+			throw new IllegalArgumentException("Snippet "+snippetName+ " not found at " + BaseFileLister.jsRootPath);
+		}
+		
+		if (snippet.getHtml()!= null) {
+		String html = snippet.getHtml().replaceAll("'","\'").replaceAll("\n", "\\\\n").replaceAll("\r", "");
+		
+		String script = " "+
+				"var __bdy = document.getElementsByTagName('body')[0]; \n" +
+				"__bdy.innerHTML = '';\n" +
+				"__bdy.innerHTML = '"+html+"';\n" +
+				" if (!document.getElementById('json')){\n" +
+				"var __testcontent = document.createElement('div'); __testcontent.id= 'json';\n" +
+				"__bdy.appendChild(__testcontent);\n" +
+				"};\n" ;
 
+		
+		super.executeScript(script, "injecting_html");
+		
+		}
 		try {
 			checkSnippet(snippet);
 		} catch (Exception e) {

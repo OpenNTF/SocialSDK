@@ -23,8 +23,10 @@ define(["../../../declare",
         "../../../text!./templates/ProfileRow.html",
         "../../../text!./templates/SharedConnectionsRow.html",
         "../../../text!./templates/StatusUpdateRow.html",
-        "../../../text!./templates/CommunityMemberRow.html"], 
-        function(declare, ConnectionsGridRenderer, nls, profileTemplate, sharedConnTemplate, statusUpdateTemplate, communityMemberTemplate) {
+        "../../../text!./templates/CommunityMemberRow.html",
+        "../../../text!./templates/BootstrapProfile.html"], 
+        function(declare, ConnectionsGridRenderer, nls, profileTemplate, 
+        		sharedConnTemplate, statusUpdateTemplate, communityMemberTemplate,bootstrapProfile) {
 		
     /**
      * @class ProfileGridRenderer
@@ -41,14 +43,19 @@ define(["../../../declare",
           * @method constructor
           * @param args
           */
-         constructor: function(args) {
-             if (args.type == "profile") {
-                 this.template = profileTemplate;
-             } else if(args.type == "statusUpdates"){
-            	 this.template = statusUpdateTemplate;
-             } else if (args.type == "communityMembers") {
-            	 this.template = communityMemberTemplate;
+         constructor: function(args,grid) {
+             if(grid.theme == "bootstrap"){
+            	 this.template = bootstrapProfile;
+             }else{
+            	 if (args.type == "profile") {
+                     this.template = profileTemplate;
+                 } else if(args.type == "statusUpdates"){
+                	 this.template = statusUpdateTemplate;
+                 } else if (args.type == "communityMembers") {
+                	 this.template = communityMemberTemplate;
+                 }
              }
+        	 
          },
 
          /**

@@ -53,19 +53,25 @@ define([ "../../../declare", "../../../controls/grid/GridAction","../../../i18n!
          * @param event The event
          */
         execute: function(item, grid, event) {
-        
-        	var startOfId = item.getValue("id").lastIndexOf(":")+1;
-        	var id = item.getValue("id").substring(startOfId,item.getValue("id").length);
         	
-        	var options = {
-                start: grid.data.start, count: grid.pageSize
-            };
-        	
-        	if(grid.renderer.template == grid.renderer.topicTemplate){
-        		grid.getTopicReplies(id,options);      		
+        	if(grid.theme == "bootstrap"){
+        		var url = item.getValue("forumUrl");
+        		window.open(url);
         	}else{
-            	grid.getTopics(id,options);
+        		var startOfId = item.getValue("id").lastIndexOf(":")+1;
+            	var id = item.getValue("id").substring(startOfId,item.getValue("id").length);
+            	
+            	var options = {
+                    start: grid.data.start, count: grid.pageSize
+                };
+            	
+            	if(grid.renderer.template == grid.renderer.topicTemplate){
+            		grid.getTopicReplies(id,options);      		
+            	}else{
+                	grid.getTopics(id,options);
+            	}
         	}
+        	
 	
         }
 

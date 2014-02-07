@@ -28,11 +28,13 @@ define(["../../../declare",
         "../../../text!./templates/ReplyBreadCrumb.html",
         "../../../text!./templates/TopicBreadCrumb.html",
         "../../../text!./templates/MyTopicsBreadCrumb.html",
+        "../../../text!./templates/BootstrapForumRow.html",
+        "../../../text!./templates/BootstrapTopicRow.html",
         "../../../i18n!./nls/ForumGridRenderer"], 
 
     function(declare, ConnectionsGridRenderer, i18n, dom, lang, ForumRow, tableHeader, TopicRow, 
                     TopicHeader, ReplyTemplate, ReplyHeader,ReplyBreadCrumb,TopicBreadCrumb, 
-                    MyTopicsBreadCrumb, nls){
+                    MyTopicsBreadCrumb, BootstrapForumRow,BootstrapTopicRow, nls){
                 
                 /**
                  * @class ForumGridRenderer
@@ -66,20 +68,30 @@ define(["../../../declare",
                     
                     breadCrumb: ReplyBreadCrumb,
                     
+                    bootstrapForumRow: BootstrapForumRow,
+                    
+                    bootstrapTopicRow: BootstrapTopicRow,
+                    
                     /**
                      * The constructor function
                      * @method constructor
                      * @param args
                      */
-                    constructor: function(args){
-                            
-                            if(args.type=="myTopics"){
-                                    this.template = this.topicTemplate;
-                                    this.headerTemplate = this.topicHeader;
-                            }else{
-                                    this.template = this.forumTemplate;
-                            }
-                            
+                    constructor: function(args,grid){
+                          if(grid.theme == "bootstrap"){
+                        	  if(args.type=="myTopics"){
+                                  this.template = this.bootstrapTopicRow;
+                        	  }else{
+                                  this.template = this.bootstrapForumRow;
+                        	  }	
+                          }else{
+	                            if(args.type=="myTopics"){
+	                                    this.template = this.topicTemplate;
+	                                    this.headerTemplate = this.topicHeader;
+	                            }else{
+	                                    this.template = this.forumTemplate;
+	                            }
+                          }
                     },
                     
                     /**
@@ -124,7 +136,7 @@ define(["../../../declare",
                  * @param data - the data associated with the current element
                  */
                 renderHeader : function(grid,el,items,data,tbody) {
-                    if (this.headerTemplate && !grid.hideHeader) {
+                    if (this.headerTemplate && !grid.hideHeader && grid.theme != "bootstrap") {
                         var node;
                         if (lang.isString(this.headerTemplate)) {
                             var domStr = this._substituteItems(this.headerTemplate, grid, this, items, data);

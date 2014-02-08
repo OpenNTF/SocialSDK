@@ -57,8 +57,8 @@ public class SuspendSubscriberTest extends BaseBssTest {
 			JsonJavaObject subscriberObject = rootObject.getAsObject("Subscriber");
 			System.out.println(subscriberObject);
 			Assert.assertEquals("SUSPENDED", subscriberObject.get("SubscriberState"));
-    	} catch (BssException cme) {
-    		JsonJavaObject jsonObject = cme.getResponseJson();
+    	} catch (BssException be) {
+    		JsonJavaObject jsonObject = be.getResponseJson();
     		System.out.println(jsonObject);
     		Assert.fail("Error suspending customer caused by: "+jsonObject);
     	} catch (Exception e) {

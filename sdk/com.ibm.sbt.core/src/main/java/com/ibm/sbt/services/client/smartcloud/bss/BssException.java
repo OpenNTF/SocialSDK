@@ -127,7 +127,11 @@ public class BssException extends AbstractException {
 		if (responseJson != null) {
 			try {
 				JsonJavaObject bssResponse = responseJson.getAsObject("BSSResponse");
-				return bssResponse.getAsString("userAction");
+				String userAction = bssResponse.getAsString("userAction");
+				if (StringUtil.isEmpty(userAction)) {
+					userAction = bssResponse.getAsString("Useraction");
+				}
+				return userAction;
 			} catch (Exception e) {
 				logger.log(Level.WARNING, "Unable to extract user action: "+responseJson, e);
 			}
@@ -145,7 +149,11 @@ public class BssException extends AbstractException {
 		if (responseJson != null) {
 			try {
 				JsonJavaObject bssResponse = responseJson.getAsObject("BSSResponse");
-				return bssResponse.getAsString("severity");
+				String severity = bssResponse.getAsString("severity");
+				if (StringUtil.isEmpty(severity)) {
+					severity = bssResponse.getAsString("Severity");
+				}
+				return severity;
 			} catch (Exception e) {
 				logger.log(Level.WARNING, "Unable to extract severity: "+responseJson, e);
 			}
@@ -163,7 +171,11 @@ public class BssException extends AbstractException {
 		if (responseJson != null) {
 			try {
 				JsonJavaObject bssResponse = responseJson.getAsObject("BSSResponse");
-				return bssResponse.getAsString("messageId");
+				String messageId = bssResponse.getAsString("messageId");
+				if (StringUtil.isEmpty(messageId)) {
+					messageId = bssResponse.getAsString("MessageCode");
+				}
+				return messageId;
 			} catch (Exception e) {
 				logger.log(Level.WARNING, "Unable to extract message id: "+responseJson, e);
 			}

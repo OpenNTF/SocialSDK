@@ -27,38 +27,36 @@ import com.ibm.sbt.services.client.base.JsonEntity;
  * @author mwallace
  *
  */
-public class DeleteSubscriberTest extends BaseBssTest {
+public class AssignRoleTest extends BaseBssTest {
 
-	@Test
-    public void testDeleteSubscriber() {
+    @Test
+    public void testAssignRole() {
     	try {
-    		registerCustomer();
     		BigInteger subscriberId = addSubscriber();
-
-    		SubscriberManagementService subscriberManagement = getSubscriberManagementService();
+    		JsonEntity subscriber = getSubscriberById(subscriberId);
+    		String loginName = subscriber.getAsString("Subscriber/Person/EmailAddress");
+    		System.out.println(loginName);
     		
-    		JsonEntity jsonEntity = subscriberManagement.getSubscriberById(subscriberId);
-			Assert.assertNotNull("Unable to retrieve subscriber: "+subscriberId, jsonEntity);
-			Assert.assertEquals(subscriberId, subscriberManagement.getSubscriberId(jsonEntity.getJsonObject()));
-
-			subscriberManagement.deleteSubsciber(subscriberId);
-			
-			try {
-				jsonEntity = subscriberManagement.getSubscriberById(subscriberId);
-				Assert.assertNull("Able to retrieve deleted subscriber: "+subscriberId, jsonEntity);				
-			} catch (BssException be) {
-				String responseCode = be.getResponseCode();
-				Assert.assertEquals("404", responseCode);
+    		AuthorizationService authorizationService = getAuthorizationService();
+    		authorizationService.assignRole(loginName, "CustomerAdministrator");
+    		authorizationService.assignRole(loginName, "CustomerPurchaser");
+    		
+    		String[] roles = authorizationService.getRoles(loginName);
+			for (String role : roles) {
+				System.out.println(role);
 			}
-				
+			Assert.assertTrue(arrayContains("User", roles));
+			Assert.assertTrue(arrayContains("CustomerAdministrator", roles));
+			Assert.assertTrue(arrayContains("CustomerPurchaser", roles));
+
     	} catch (BssException be) {
     		JsonJavaObject jsonObject = be.getResponseJson();
-    		System.out.println(jsonObject);
-    		Assert.fail("Error deleting subscriber caused by: "+jsonObject);
+    		System.err.println(jsonObject);
+    		Assert.fail("Error retrieving roles caused by: "+jsonObject);
     	} catch (Exception e) {
     		e.printStackTrace();
-    		Assert.fail("Error deleting subscriber caused by: "+e.getMessage());    		
+    		Assert.fail("Error retrieving roles caused by: "+e.getMessage());    		
     	}
     }
-	
+
 }

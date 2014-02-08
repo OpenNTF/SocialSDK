@@ -41,16 +41,19 @@ public class CreateSubscriptionTest extends BaseBssTest {
     		System.out.println(order.toJson());
         	
     		getSubscriptionManagementService().createSubscription(order);
-    	} catch (BssException cme) {
+
+    		Assert.fail("Expected bad request response");
+    		
+    	} catch (BssException be) {
     		// expecting this exception
-    		JsonJavaObject jsonObject = cme.getResponseJson();
+    		JsonJavaObject jsonObject = be.getResponseJson();
     		System.err.println(jsonObject);
     		Assert.assertNotNull("Expected JSON response", jsonObject);
-    		Assert.assertEquals("400", cme.getResponseCode());
-    		Assert.assertEquals("The [] input value that was provided for the [BillingFrequency] field is invalid.", cme.getResponseMessage());
-    		Assert.assertEquals("Error", cme.getSeverity());
-    		Assert.assertEquals("Provide a valid input value for the [BillingFrequency] field.", cme.getUserAction());
-    		Assert.assertEquals("BZSAP1011E", cme.getMessageId());
+    		Assert.assertEquals("400", be.getResponseCode());
+    		Assert.assertEquals("The [] input value that was provided for the [BillingFrequency] field is invalid.", be.getResponseMessage());
+    		Assert.assertEquals("Error", be.getSeverity());
+    		Assert.assertEquals("Provide a valid input value for the [BillingFrequency] field.", be.getUserAction());
+    		Assert.assertEquals("BZSAP1011E", be.getMessageId());
     	} catch (Exception e) {
     		e.printStackTrace();
     		Assert.fail("Error creating subscription caused by: "+e.getMessage());    		
@@ -80,7 +83,7 @@ public class CreateSubscriptionTest extends BaseBssTest {
     	} catch (BssException be) {
     		JsonJavaObject jsonObject = be.getResponseJson();
     		System.err.println(jsonObject);
-    		//cme.printStackTrace();
+    		//be.printStackTrace();
     		Assert.fail("Error creating subscription because: "+jsonObject);
     	} catch (Exception e) {
     		e.printStackTrace();

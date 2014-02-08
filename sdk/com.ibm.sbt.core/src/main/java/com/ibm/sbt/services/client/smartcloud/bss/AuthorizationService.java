@@ -15,12 +15,14 @@
  */
 package com.ibm.sbt.services.client.smartcloud.bss;
 
+import java.net.URLEncoder;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import com.ibm.commons.util.io.json.JsonJavaObject;
+import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.Response;
-import com.ibm.sbt.services.client.base.JsonEntity;
-import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.endpoints.Endpoint;
 
 /**
@@ -83,11 +85,16 @@ public class AuthorizationService extends BssService {
      * @return
      * @throws BssException
      */
-    public EntityList<JsonEntity> getRoles(String loginName) throws BssException {
+    public String[] getRoles(String loginName) throws BssException {
     	try {
     		Map<String, String> params = new HashMap<String, String>();
     		params.put("loginName", loginName);
-			return (EntityList<JsonEntity>)getEntities(API_AUTHORIZATION_GETROLELIST, params, getJsonFeedHandler());
+			Response serverResponse = createData(API_AUTHORIZATION_GETROLELIST, params, null, null, ClientService.FORMAT_JSON);
+			
+			JsonJavaObject rolesObject = (JsonJavaObject)serverResponse.getData();
+			List<Object> roles = rolesObject.getAsList(PROPERTY_LIST);
+			return (String[])roles.toArray(new String[roles.size()]);
+			
 		} catch (Exception e) {
 			throw new BssException(e, "Error retrieving role list");
 		}
@@ -102,10 +109,10 @@ public class AuthorizationService extends BssService {
      */
     public void assignRole(String loginName, String role) throws BssException {
     	try {
-    		Map<String, String> params = new HashMap<String, String>();
-    		params.put("loginName", loginName);
-    		params.put("role", role);
-			Response response = createData(API_AUTHORIZATION_ASSIGNROLE, params, null);
+    		loginName = URLEncoder.encode(loginName, "UTF-8");
+    		role = URLEncoder.encode(role, "UTF-8");
+    		String serviceUrl = API_AUTHORIZATION_ASSIGNROLE + "?loginName=" + loginName + "&role=" + role;
+			Response response = createData(serviceUrl, null, null);
     		
     		// expect a 204
     		int statusCode = response.getResponse().getStatusLine().getStatusCode();
@@ -126,10 +133,10 @@ public class AuthorizationService extends BssService {
      */
     public void unassignRole(String loginName, String role) throws BssException {
     	try {
-    		Map<String, String> params = new HashMap<String, String>();
-    		params.put("loginName", loginName);
-    		params.put("role", role);
-			Response response = createData(API_AUTHORIZATION_UNASSIGNROLE, params, null);
+    		loginName = URLEncoder.encode(loginName, "UTF-8");
+    		role = URLEncoder.encode(role, "UTF-8");
+    		String serviceUrl = API_AUTHORIZATION_UNASSIGNROLE + "?loginName=" + loginName + "&role=" + role;
+			Response response = createData(serviceUrl, null, null);
     		
     		// expect a 204
     		int statusCode = response.getResponse().getStatusLine().getStatusCode();

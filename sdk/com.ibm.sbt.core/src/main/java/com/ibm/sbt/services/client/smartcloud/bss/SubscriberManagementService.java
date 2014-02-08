@@ -156,6 +156,27 @@ public class SubscriberManagementService extends BssService {
     }
     
     /**
+     * Activate a subscriber.
+     * 
+     * @param subscriberId
+     * @throws BssException
+     */
+    public void activateSubscriber(BigInteger subscriberId) throws BssException {
+    	try {
+    		String serviceUrl = API_RESOURCE_SUBSCRIBER + "/" + subscriberId;
+    		Response response = createData(serviceUrl, (Map<String, String>)null, ActivateSubscriberHeader, (Object)null);
+    		
+    		// expect a 204
+    		int statusCode = response.getResponse().getStatusLine().getStatusCode();
+    		if (statusCode != 204) {
+    			throw new BssException(response, "Error deleting subscriber {0}", subscriberId);
+    		}
+		} catch (Exception e) {
+			throw new BssException(e, "Error deleting subscriber {0}", subscriberId);
+		}
+    }
+    
+    /**
      * Delete a subscriber from an organization. 
      * This action also frees the assigned seats to the subscribers. 
      * The subscriber must be owned by the organization of the authenticated user.

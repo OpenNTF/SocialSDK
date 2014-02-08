@@ -34,16 +34,19 @@ public class RegisterCustomerTest extends BaseBssTest {
         	        .setPhone("999-999-9999");
         	
         	getCustomerManagementService().registerCustomer(customer);
-    	} catch (BssException cme) {
+
+    		Assert.fail("Expected bad request response");
+    		
+    	} catch (BssException be) {
     		// expecting this exception
-    		JsonJavaObject jsonObject = cme.getResponseJson();
+    		JsonJavaObject jsonObject = be.getResponseJson();
     		System.err.println(jsonObject);
     		Assert.assertNotNull("Expected JSON response", jsonObject);
-    		Assert.assertEquals("400", cme.getResponseCode());
-    		Assert.assertEquals("The [LocationName] field requires a string value.", cme.getResponseMessage());
-    		Assert.assertEquals("Error", cme.getSeverity());
-    		Assert.assertEquals("Provide a valid string value for the [LocationName] field.", cme.getUserAction());
-    		Assert.assertEquals("BZSAP1033E", cme.getMessageId());
+    		Assert.assertEquals("400", be.getResponseCode());
+    		Assert.assertEquals("The [LocationName] field requires a string value.", be.getResponseMessage());
+    		Assert.assertEquals("Error", be.getSeverity());
+    		Assert.assertEquals("Provide a valid string value for the [LocationName] field.", be.getUserAction());
+    		Assert.assertEquals("BZSAP1033E", be.getMessageId());
     	} catch (Exception e) {
     		e.printStackTrace();
     		Assert.fail("Error registering customer caused by: "+e.getMessage());    		
@@ -54,7 +57,7 @@ public class RegisterCustomerTest extends BaseBssTest {
     public void testRegisterCustomer() {
     	try {
     		CustomerJsonBuilder customer = new CustomerJsonBuilder();
-        	customer.setOrgName("Acme Industrial")
+        	customer.setOrgName("Abe Industrial")
         	        .setPhone("999-999-9999")
         	        .setOrganizationAddressLine1("5 Technology Park Drive")
         	        .setOrganizationAddressLine2("")
@@ -88,10 +91,10 @@ public class RegisterCustomerTest extends BaseBssTest {
         	long customerId = response.getAsLong("Long");
         	Assert.assertNotNull("Invalid customer id", customerId);
         	System.out.println(customerId);
-    	} catch (BssException cme) {
-    		JsonJavaObject jsonObject = cme.getResponseJson();
+    	} catch (BssException be) {
+    		JsonJavaObject jsonObject = be.getResponseJson();
     		System.err.println(jsonObject);
-    		//cme.printStackTrace();
+    		//be.printStackTrace();
     		Assert.fail("Error registering customer because: "+jsonObject);
     	} catch (Exception e) {
     		e.printStackTrace();

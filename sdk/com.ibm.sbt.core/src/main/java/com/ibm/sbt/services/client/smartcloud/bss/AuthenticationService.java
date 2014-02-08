@@ -121,8 +121,13 @@ public class AuthenticationService extends BssService {
      */
     public void changePassword(JsonJavaObject userCredentialObject) throws BssException {
 		try {
-			Response serverResponse = createData(API_AUTHENTICATION_CHANGEPASSWORD, null, JsonHeader, userCredentialObject, ClientService.FORMAT_JSON);
-			//return (JsonJavaObject)serverResponse.getData();
+			Response response = createData(API_AUTHENTICATION_CHANGEPASSWORD, null, JsonHeader, userCredentialObject, ClientService.FORMAT_JSON);
+    		
+    		// expect a 204
+    		int statusCode = response.getResponse().getStatusLine().getStatusCode();
+    		if (statusCode != 204) {
+    			throw new BssException(response, "Error changing password {0}", userCredentialObject);
+    		}
 		} catch (Exception e) {
 			throw new BssException(e);
 		}
@@ -139,8 +144,13 @@ public class AuthenticationService extends BssService {
 		try {
     		Map<String, String> params = new HashMap<String, String>();
     		params.put("loginName", loginName);
-			Response serverResponse = createData(API_AUTHENTICATION_RESETPASSWORD, params, null);
-			//return (JsonJavaObject)serverResponse.getData();
+			Response response = createData(API_AUTHENTICATION_RESETPASSWORD, params, null);
+    		
+    		// expect a 204
+    		int statusCode = response.getResponse().getStatusLine().getStatusCode();
+    		if (statusCode != 204) {
+    			throw new BssException(response, "Error resetting password {0}", loginName);
+    		}
 		} catch (Exception e) {
 			throw new BssException(e);
 		}
@@ -182,8 +192,13 @@ public class AuthenticationService extends BssService {
      */
     public void setOneTimePassword(JsonJavaObject userCredentialObject) throws BssException {
 		try {
-			Response serverResponse = createData(API_AUTHENTICATION_SETONETIMEPASSWORD, null, JsonHeader, userCredentialObject, ClientService.FORMAT_JSON);
-			//return (JsonJavaObject)serverResponse.getData();
+			Response response = createData(API_AUTHENTICATION_SETONETIMEPASSWORD, null, JsonHeader, userCredentialObject, ClientService.FORMAT_JSON);
+    		
+    		// expect a 204
+    		int statusCode = response.getResponse().getStatusLine().getStatusCode();
+    		if (statusCode != 204) {
+    			throw new BssException(response, "Error setting one time password {0}", userCredentialObject);
+    		}
 		} catch (Exception e) {
 			throw new BssException(e);
 		}

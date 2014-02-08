@@ -37,16 +37,19 @@ public class AddSubscriberTest extends BaseBssTest {
         	System.out.println(subscriber.toJson());
     		
         	getSubscriberManagementService().addSubsciber(subscriber);
-    	} catch (BssException cme) {
+
+    		Assert.fail("Expected bad request response");
+    		
+    	} catch (BssException be) {
     		// expecting this exception
-    		JsonJavaObject jsonObject = cme.getResponseJson();
+    		JsonJavaObject jsonObject = be.getResponseJson();
     		System.err.println(jsonObject);
     		Assert.assertNotNull("Expected JSON response", jsonObject);
-    		Assert.assertEquals("400", cme.getResponseCode());
-    		Assert.assertNotNull(cme.getResponseMessage());
-    		Assert.assertEquals("Error", cme.getSeverity());
-    		Assert.assertNotNull(cme.getUserAction());
-    		Assert.assertNotNull(cme.getMessageId());
+    		Assert.assertEquals("400", be.getResponseCode());
+    		Assert.assertNotNull(be.getResponseMessage());
+    		Assert.assertEquals("Error", be.getSeverity());
+    		Assert.assertNotNull(be.getUserAction());
+    		Assert.assertNotNull(be.getMessageId());
     	} catch (Exception e) {
     		e.printStackTrace();
     		Assert.fail("Error registering customer caused by: "+e.getMessage());    		
@@ -82,10 +85,9 @@ public class AddSubscriberTest extends BaseBssTest {
         	long subscriberId = response.getAsLong("Long");
         	Assert.assertNotNull("Invalid subscriber id", subscriberId);
         	System.out.println(subscriberId);
-    	} catch (BssException cme) {
-    		JsonJavaObject jsonObject = cme.getResponseJson();
+    	} catch (BssException be) {
+    		JsonJavaObject jsonObject = be.getResponseJson();
     		System.err.println(jsonObject);
-    		//cme.printStackTrace();
     		Assert.fail("Error registering customer because: "+jsonObject);
     	} catch (Exception e) {
     		e.printStackTrace();

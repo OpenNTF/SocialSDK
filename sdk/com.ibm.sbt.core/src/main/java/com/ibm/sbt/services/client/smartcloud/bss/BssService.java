@@ -35,8 +35,7 @@ import com.ibm.sbt.services.endpoints.Endpoint;
  */
 public class BssService extends JsonService {
 
-	public static String LIST = "List";
-	
+	public static String PROPERTY_LIST = "List";
 	public static String PROPERTY_CUSTOMER = "Customer";
 	public static String PROPERTY_SUBSCRIBER = "Subscriber";
 	public static String PROPERTY_SUBSCRIPTION = "Subscription";
@@ -48,11 +47,11 @@ public class BssService extends JsonService {
 	public static String API_RESOURCE_SUBSCRIBER = "/api/bss/resource/subscriber";
 	public static String API_RESOURCE_SUBSCRIPTION = "/api/bss/resource/subscription";
 	public static String API_AUTHORIZATION_GETROLELIST = "/api/bss/service/authorization/getRoleList";
-	public static String API_AUTHORIZATION_ASSIGNROLE = "/service/authorization/assignRole";
-	public static String API_AUTHORIZATION_UNASSIGNROLE = "/service/authorization/unassignRole";
-	public static String API_AUTHENTICATION_CHANGEPASSWORD = "service/authentication/changePassword";
-	public static String API_AUTHENTICATION_RESETPASSWORD = "service/authentication/resetPassword";
-	public static String API_AUTHENTICATION_SETONETIMEPASSWORD = "service/authentication/setOneTimePassword";
+	public static String API_AUTHORIZATION_ASSIGNROLE = "/api/bss/service/authorization/assignRole";
+	public static String API_AUTHORIZATION_UNASSIGNROLE = "/api/bss/service/authorization/unassignRole";
+	public static String API_AUTHENTICATION_CHANGEPASSWORD = "/api/bss/service/authentication/changePassword";
+	public static String API_AUTHENTICATION_RESETPASSWORD = "/api/bss/service/authentication/resetPassword";
+	public static String API_AUTHENTICATION_SETONETIMEPASSWORD = "/api/bss/service/authentication/setOneTimePassword";
 	
 	public enum DurationUnits {
 		YEARS, MONTHS, DAYS
@@ -107,6 +106,11 @@ public class BssService extends JsonService {
 	protected static Map<String, String> UnsuspendCustomerHeader = new HashMap<String, String>();
 	static {
 		UnsuspendCustomerHeader.put("x-operation", "unsuspendCustomer");
+	}
+
+	protected static Map<String, String> ActivateSubscriberHeader = new HashMap<String, String>();
+	static {
+		ActivateSubscriberHeader.put("x-operation", "activateSubscriber");
 	}
 
 	protected static Map<String, String> SuspendSubscriberHeader = new HashMap<String, String>();
@@ -224,7 +228,7 @@ public class BssService extends JsonService {
     //
 	
 	protected IFeedHandler<JsonEntity> getJsonFeedHandler() {
-		return new JsonFeedHandler<JsonEntity>(this, LIST);
+		return new JsonFeedHandler<JsonEntity>(this, PROPERTY_LIST);
 	}
     
 }

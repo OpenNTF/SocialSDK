@@ -65,8 +65,8 @@ public class UpdateSubscriberProfileTest extends BaseBssTest {
 			Assert.assertEquals("Fred", personObject.getAsString("GivenName"));
 			Assert.assertEquals("800-666-1234", personObject.getAsString("WorkPhone"));
 				
-    	} catch (BssException cme) {
-    		JsonJavaObject jsonObject = cme.getResponseJson();
+    	} catch (BssException be) {
+    		JsonJavaObject jsonObject = be.getResponseJson();
     		System.out.println(jsonObject);
     		Assert.fail("Error updating subscriber profile caused by: "+jsonObject);
     	} catch (Exception e) {

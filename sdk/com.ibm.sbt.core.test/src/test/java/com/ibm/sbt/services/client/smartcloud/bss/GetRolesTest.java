@@ -27,38 +27,28 @@ import com.ibm.sbt.services.client.base.JsonEntity;
  * @author mwallace
  *
  */
-public class UnregisterCustomerTest extends BaseBssTest {
+public class GetRolesTest extends BaseBssTest {
 
     @Test
-    public void testUnregisterCustomer() {
+    public void testGetRoles() {
     	try {
-    		BigInteger customerId = registerCustomer();
-
-    		CustomerManagementService customerManagement = getCustomerManagementService();
+    		BigInteger subscriberId = addSubscriber();
+    		JsonEntity subscriber = getSubscriberById(subscriberId);
+    		String loginName = subscriber.getAsString("Subscriber/Person/EmailAddress");
+    		System.out.println(loginName);
     		
-    		JsonEntity jsonEntity = customerManagement.getCustomerById(customerId);
-			Assert.assertNotNull("Unable to retrieve customer: "+customerId, jsonEntity);
-			Assert.assertEquals(customerId, customerManagement.getCustomerId(jsonEntity.getJsonObject()));
-
-			customerManagement.unregisterCustomer(customerId);
-			
-			try {
-				jsonEntity = customerManagement.getCustomerById(customerId);
-				Assert.assertNull("Able to retrieve unregistered customer: "+customerId, jsonEntity);				
-			} catch (BssException be) {
-				String responseCode = be.getResponseCode();
-				Assert.assertEquals("404", responseCode);
-				
-				setCustomerId(null);
+    		String[] roles = getAuthorizationService().getRoles(loginName);
+			for (String role : roles) {
+				System.out.println(role);
 			}
     	} catch (BssException be) {
     		JsonJavaObject jsonObject = be.getResponseJson();
     		System.out.println(jsonObject);
-    		Assert.fail("Error unregistering customer caused by: "+jsonObject);
+    		Assert.fail("Error retrieving roles caused by: "+jsonObject);
     	} catch (Exception e) {
     		e.printStackTrace();
-    		Assert.fail("Error unregistering customer caused by: "+e.getMessage());    		
+    		Assert.fail("Error retrieving roles caused by: "+e.getMessage());    		
     	}
     }
-		
+	
 }

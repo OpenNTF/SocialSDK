@@ -38,6 +38,8 @@ public class BaseBssTest {
 	private CustomerManagementService customerManagement;
 	private SubscriberManagementService subscriberManagement;
 	private SubscriptionManagementService subscriptionManagement;
+	private AuthorizationService authorizationService;
+	private AuthenticationService authenticationService;
 	
     @After
     public void cleanup() {
@@ -46,9 +48,12 @@ public class BaseBssTest {
 	    	if (customerId != null) {
 	    		unregisterCustomer(customerId);
 	    	}
-	    	
 	    	customerManagement = null;
     	}
+    	subscriberManagement = null;
+    	subscriptionManagement = null;
+    	authenticationService = null;
+    	authorizationService = null;
     }
     
     /**
@@ -97,10 +102,24 @@ public class BaseBssTest {
     	return subscriptionManagement;
     }
     
+    public AuthorizationService getAuthorizationService() {
+    	if (authorizationService == null) {
+    		authorizationService = new AuthorizationService(getBasicEndpoint());
+    	}
+    	return authorizationService;
+    }
+    
+    public AuthenticationService getAuthenticationService() {
+    	if (authenticationService == null) {
+    		authenticationService = new AuthenticationService(getBasicEndpoint());
+    	}
+    	return authenticationService;
+    }
+    
     public BigInteger registerCustomer() {
     	try {
     		CustomerJsonBuilder customer = new CustomerJsonBuilder();
-        	customer.setOrgName("Acme Industrial")
+        	customer.setOrgName("Abe Industrial")
         	        .setPhone("999-999-9999")
         	        .setOrganizationAddressLine1("5 Technology Park Drive")
         	        .setOrganizationAddressLine2("")
@@ -184,6 +203,17 @@ public class BaseBssTest {
     	return null;
     }
     
+    public JsonEntity getSubscriberById(BigInteger subscriberId) {
+    	try {
+    		JsonEntity jsonEntity = getSubscriberManagementService().getSubscriberById(subscriberId);
+    		System.out.println(jsonEntity.toJsonString());
+    		return jsonEntity;
+    	} catch (Exception e) {
+    		Assert.fail("Error retrieving subscriber caused by: "+e.getMessage());    		
+    	}
+    	return null;
+    }
+    
     public void deleteSubscriber(BigInteger subscriberId) {
     	try {
     		getSubscriberManagementService().deleteSubsciber(subscriberId);
@@ -220,4 +250,14 @@ public class BaseBssTest {
     	return "ibmsbt_"+System.currentTimeMillis()+"@mailinator.com";
     }
 	
+	protected boolean arrayContains(String value, String[] expectedValues) {
+		for (String nextValue : expectedValues) {
+			if (value.equalsIgnoreCase(nextValue)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+    
 }

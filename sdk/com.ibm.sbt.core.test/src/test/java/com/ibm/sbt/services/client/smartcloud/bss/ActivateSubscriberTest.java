@@ -27,10 +27,10 @@ import com.ibm.sbt.services.client.base.JsonEntity;
  * @author mwallace
  *
  */
-public class DeleteSubscriberTest extends BaseBssTest {
+public class ActivateSubscriberTest extends BaseBssTest {
 
 	@Test
-    public void testDeleteSubscriber() {
+    public void testActivateSubscriber() {
     	try {
     		registerCustomer();
     		BigInteger subscriberId = addSubscriber();
@@ -41,16 +41,20 @@ public class DeleteSubscriberTest extends BaseBssTest {
 			Assert.assertNotNull("Unable to retrieve subscriber: "+subscriberId, jsonEntity);
 			Assert.assertEquals(subscriberId, subscriberManagement.getSubscriberId(jsonEntity.getJsonObject()));
 
-			subscriberManagement.deleteSubsciber(subscriberId);
+			subscriberManagement.activateSubscriber(subscriberId);
 			
-			try {
-				jsonEntity = subscriberManagement.getSubscriberById(subscriberId);
-				Assert.assertNull("Able to retrieve deleted subscriber: "+subscriberId, jsonEntity);				
-			} catch (BssException be) {
-				String responseCode = be.getResponseCode();
-				Assert.assertEquals("404", responseCode);
-			}
+			jsonEntity = subscriberManagement.getSubscriberById(subscriberId);
+			Assert.assertNotNull("Unable to retrieve activated subscriber: "+subscriberId, jsonEntity);
+			Assert.assertEquals(subscriberId, subscriberManagement.getSubscriberId(jsonEntity.getJsonObject()));
 				
+			JsonJavaObject rootObject = jsonEntity.getJsonObject();
+			Assert.assertNotNull("Unable to retrieve subscriber: "+subscriberId, rootObject);
+			
+			System.out.println(rootObject);
+			JsonJavaObject subscriberObject = rootObject.getAsObject("Subscriber");
+			System.out.println(subscriberObject);
+			Assert.assertEquals("ACTIVE", subscriberObject.get("SubscriberState"));
+			
     	} catch (BssException be) {
     		JsonJavaObject jsonObject = be.getResponseJson();
     		System.out.println(jsonObject);

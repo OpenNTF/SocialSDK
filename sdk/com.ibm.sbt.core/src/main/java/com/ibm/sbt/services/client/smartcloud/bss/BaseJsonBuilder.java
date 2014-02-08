@@ -34,15 +34,17 @@ abstract public class BaseJsonBuilder {
 	/**
 	 * @param strict the strict to set
 	 */
-	public void setStrict(boolean strict) {
+	public BaseJsonBuilder setStrict(boolean strict) {
 		this.strict = strict;
+		return this;
 	}
 	
 	/**
 	 * @param template the template to set
 	 */
-	public void setTemplate(String template) {
+	public BaseJsonBuilder setTemplate(String template) {
 		this.template = template;
+		return this;
 	}
 		
 	/**

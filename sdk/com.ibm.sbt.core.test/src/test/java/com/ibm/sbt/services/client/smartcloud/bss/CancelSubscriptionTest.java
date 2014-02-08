@@ -60,8 +60,8 @@ public class CancelSubscriptionTest extends BaseBssTest {
 			System.out.println(subscriptionObject);
 			Assert.assertEquals("CANCEL_PENDING", subscriptionObject.get("SubscriptionState"));
 			
-    	} catch (BssException cme) {
-    		JsonJavaObject jsonObject = cme.getResponseJson();
+    	} catch (BssException be) {
+    		JsonJavaObject jsonObject = be.getResponseJson();
     		System.out.println(jsonObject);
     		Assert.fail("Error cancelling subscription caused by: "+jsonObject);
     	} catch (Exception e) {

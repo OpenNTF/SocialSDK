@@ -72,8 +72,8 @@ public class UnsuspendSubscriptionTest extends BaseBssTest {
 			System.out.println(subscriptionObject);
 			Assert.assertEquals("ACTIVE", subscriptionObject.get("SubscriptionState"));
 			
-    	} catch (BssException cme) {
-    		JsonJavaObject jsonObject = cme.getResponseJson();
+    	} catch (BssException be) {
+    		JsonJavaObject jsonObject = be.getResponseJson();
     		System.out.println(jsonObject);
     		Assert.fail("Error suspending customer caused by: "+jsonObject);
     	} catch (Exception e) {

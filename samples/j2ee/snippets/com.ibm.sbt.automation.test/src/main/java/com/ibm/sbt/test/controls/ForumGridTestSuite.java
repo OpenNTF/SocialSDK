@@ -15,7 +15,9 @@
  */
 package com.ibm.sbt.test.controls;
 
+import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -33,16 +35,16 @@ import com.ibm.sbt.test.controls.grid.forum.PublicForums;
 @RunWith(Suite.class)
 @SuiteClasses({ PublicForums.class, MyForums.class })
 public class ForumGridTestSuite {
-	private static BaseGridTestSetup setup ;
+	private BaseGridTestSetup setup ;
 	 
-	@BeforeClass
-	public static void setup(){
+	@Before
+	public void setup(){
 		setup = new BaseGridTestSetup();
 		setup.createForum();
 	}
 	
-	@AfterClass
-    public static void cleanup() {
+	@After
+    public void cleanup() {
 		setup.deleteForum();
     }
 }

@@ -15,7 +15,9 @@
  */
 package com.ibm.sbt.test.controls;
 
+import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -35,16 +37,16 @@ import com.ibm.sbt.test.controls.grid.TemplatedGridRow;
 @RunWith(Suite.class)
 @SuiteClasses({ CommunityRenderer.class, ConnectionsRenderer.class, Grid.class, TemplatedGridRow.class })
 public class GridTestSuite {
-	private static BaseGridTestSetup setup ;
+	private BaseGridTestSetup setup ;
 	 
-	@BeforeClass
-	public static void setup(){
+	@Before
+	public void setup(){
 		setup = new BaseGridTestSetup();
 		setup.createCommunity("TestCommunity", "public", "content", "TestTag, tag2", false);
 	}
 	
-	@AfterClass
-    public static void cleanup() {
+	@After
+    public void cleanup() {
 		setup.deleteCommunity();
     }
 }

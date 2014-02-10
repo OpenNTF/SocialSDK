@@ -1,6 +1,8 @@
 package com.ibm.sbt.test.controls;
 
+import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -15,17 +17,17 @@ import com.ibm.sbt.test.controls.grid.actvities.MyActivities;
 public class ActivitiesGridTestSuite {
 
 	
-	private static BaseGridTestSetup setup ;
+	private BaseGridTestSetup setup ;
 	 
-	@BeforeClass
-	public static void setup(){
+	@Before
+	public void setup(){
 		System.out.println("setting up activty");
 		setup = new BaseGridTestSetup();
 		setup.createActivity();
 	}
 	
-	@AfterClass
-    public static void cleanup() {
+	@After
+    public void cleanup() {
 		System.out.println("Deleting activty");
 		setup.deleteActivity();
     }

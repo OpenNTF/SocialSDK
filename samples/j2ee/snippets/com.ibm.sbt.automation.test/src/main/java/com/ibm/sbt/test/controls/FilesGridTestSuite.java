@@ -15,7 +15,9 @@
  */
 package com.ibm.sbt.test.controls;
 
+import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -40,17 +42,17 @@ import com.ibm.sbt.test.controls.grid.files.RecycledFiles;
         PinnedFolders.class, PublicFiles.class, PublicFolders.class, RecycledFiles.class, MyFolders.class })
 public class FilesGridTestSuite {
     
-	private static BaseGridTestSetup setup ;
+	private BaseGridTestSetup setup ;
 	 
-	@BeforeClass
-	public static void setup(){
+	@Before
+	public void setup(){
 		setup = new BaseGridTestSetup();
 		setup.createFolder();
 		setup.createFile();
 	}
 	
-	@AfterClass
-    public static void cleanup() {
+	@After
+    public void cleanup() {
 		
     	setup.deleteFileAndQuit();
     	setup.emptyTrash();

@@ -12,12 +12,12 @@ require(["sbt/declare", "sbt/dom", "sbt/connections/controls/files/FilesView"],
 		var filesView = new FilesView({
 			templateString: viewTemplate,
 			
-			moveToTrashArgs: {templateString : moveToTrashTemplate},
-			shareFileArgs: {templateString: shareFilesTemplate},
-			uploadFileArgs: {templateString: uploadFileTemplate},
-			addTagsArgs: {templateString: addTagsTemplate},
-			dialogArgs:{templateString: dialogTemplate},
-			gridArgs: {type : "myFiles",hideSorter:true,hidePager:true},
+			moveToTrashArgs: {templateString:moveToTrashTemplate},
+			shareFileArgs: {templateString:shareFilesTemplate},
+			uploadFileArgs: {templateString:uploadFileTemplate},
+			addTagsArgs: {templateString:addTagsTemplate},
+			dialogArgs:{templateString:dialogTemplate},
+			gridArgs: {type:"myFiles", hideSorter:true, hidePager:true, hideFooter:true},
 			actionBarArgs: {actionTemplate:actionTemplate, disabledClass: "btn-disabled"}
 		});
 	

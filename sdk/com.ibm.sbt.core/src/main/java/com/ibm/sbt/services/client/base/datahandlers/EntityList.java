@@ -50,12 +50,17 @@ public abstract class EntityList<Entity extends BaseEntity> extends AbstractList
 	public EntityList(){}
 	
 	public EntityList(Response requestData, IFeedHandler<Entity> feedHandler) {
+		init(requestData, feedHandler);
+	}
+	
+	protected void init(Response requestData, IFeedHandler<Entity> feedHandler) {
 		this.requestData = requestData;
         this.feedHandler = feedHandler;
-        //in case of 401 errors  client service returns null
-        if (requestData!=null)
-		this.entities = createEntities();
-        else {
+        
+        // in case of 401 errors  client service returns null
+        if (requestData != null) {
+        	this.entities = createEntities();
+        } else {
         	this.entities = null;
         }
     }

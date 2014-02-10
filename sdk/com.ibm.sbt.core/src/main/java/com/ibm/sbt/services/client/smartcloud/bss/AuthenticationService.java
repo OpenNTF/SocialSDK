@@ -24,6 +24,7 @@ import com.ibm.commons.util.io.json.JsonJavaFactory;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.commons.util.io.json.JsonParser;
 import com.ibm.sbt.services.client.ClientService;
+import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.endpoints.Endpoint;
 
@@ -128,8 +129,10 @@ public class AuthenticationService extends BssService {
     		if (statusCode != 204) {
     			throw new BssException(response, "Error changing password {0}", userCredentialObject);
     		}
-		} catch (Exception e) {
-			throw new BssException(e);
+		} catch (IOException e) {
+			throw new BssException(e, "Error changing password {0}", userCredentialObject);			
+		} catch (ClientServicesException e) {
+			throw new BssException(e, "Error changing password {0}", userCredentialObject);
 		}
     }
     
@@ -151,8 +154,10 @@ public class AuthenticationService extends BssService {
     		if (statusCode != 204) {
     			throw new BssException(response, "Error resetting password {0}", loginName);
     		}
-		} catch (Exception e) {
-			throw new BssException(e);
+		} catch (IOException e) {
+			throw new BssException(e, "Error resetting password {0}", loginName);			
+		} catch (ClientServicesException e) {
+			throw new BssException(e, "Error resetting password {0}", loginName);
 		}
     }
     
@@ -199,8 +204,10 @@ public class AuthenticationService extends BssService {
     		if (statusCode != 204) {
     			throw new BssException(response, "Error setting one time password {0}", userCredentialObject);
     		}
-		} catch (Exception e) {
-			throw new BssException(e);
+		} catch (IOException e) {
+			throw new BssException(e, "Error setting one time password {0}", userCredentialObject);			
+		} catch (ClientServicesException e) {
+			throw new BssException(e, "Error setting one time password {0}", userCredentialObject);
 		}
     }
 	

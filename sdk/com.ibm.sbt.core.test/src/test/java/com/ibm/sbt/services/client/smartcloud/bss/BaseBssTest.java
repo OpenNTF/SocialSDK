@@ -153,6 +153,10 @@ public class BaseBssTest {
         	customerId = BigInteger.valueOf(response.getAsLong("Long"));
         	Assert.assertNotNull("Invalid customer id", customerId);
         	return customerId;
+    	} catch (BssException be) {
+    		JsonJavaObject jsonObject = be.getResponseJson();
+    		System.err.println(jsonObject);
+    		Assert.fail("Error registering customer because: "+jsonObject);
     	} catch (Exception e) {
     		Assert.fail("Error registering customer caused by: "+e.getMessage());    		
     	}
@@ -168,11 +172,15 @@ public class BaseBssTest {
     }
     
     public BigInteger addSubscriber() {
-    	try {
-    		if (customerId == null) {
-    			customerId = registerCustomer();
-    		}
+   		if (customerId == null) {
+   			customerId = registerCustomer();
+   		}
+   		
+   		return addSubscriber(customerId);
+    }
     		
+    public BigInteger addSubscriber(BigInteger customerId) {
+       	try {
     		SubscriberJsonBuilder subscriber = new SubscriberJsonBuilder();
     		subscriber.setCustomerId(customerId)
     				  .setRole(SubscriberManagementService.Role.User)
@@ -197,12 +205,103 @@ public class BaseBssTest {
         	BigInteger subscriberId = BigInteger.valueOf(response.getAsLong("Long"));
         	Assert.assertNotNull("Invalid subscriber id", subscriberId);
         	return subscriberId;
+    	} catch (BssException be) {
+    		JsonJavaObject jsonObject = be.getResponseJson();
+    		System.err.println(jsonObject);
+    		Assert.fail("Error registering customer because: "+jsonObject);
     	} catch (Exception e) {
     		Assert.fail("Error adding subscriber caused by: "+e.getMessage());    		
     	}
     	return null;
     }
     
+	public String getLoginName(BigInteger subscriberId) {
+    	try {
+    		JsonEntity subscriber = getSubscriberById(subscriberId);
+    		return subscriber.getAsString("Subscriber/Person/EmailAddress");
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    		Assert.fail("Error getting login name caused by: "+e.getMessage());    		
+    	}
+    	return null;
+	}
+    
+	public void setOneTimePassword(String loginName, String password) {
+    	try {
+    		UserCredentialJsonBuilder userCredential = new UserCredentialJsonBuilder();
+    		userCredential.setLoginName(loginName)
+    					  .setNewPassword(password);
+    		
+    		AuthenticationService authenticationService = getAuthenticationService();
+    		authenticationService.setOneTimePassword(userCredential);
+    	} catch (BssException be) {
+    		JsonJavaObject jsonObject = be.getResponseJson();
+    		System.err.println(jsonObject);
+    		Assert.fail("Error setting one time password because: "+jsonObject);
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    		Assert.fail("Error setting one time password caused by: "+e.getMessage());    		
+    	}
+	}
+    
+    public void changePassword(String loginName, String oldPassword, String newPassword) {
+    	try {
+    		UserCredentialJsonBuilder userCredential = new UserCredentialJsonBuilder();
+    		userCredential.setLoginName(loginName)
+    					  .setOldPassword(oldPassword)
+    					  .setNewPassword(newPassword)
+    					  .setConfirmPassword(newPassword);
+    		
+    		authenticationService.changePassword(userCredential);
+    		
+    	} catch (BssException be) {
+    		JsonJavaObject jsonObject = be.getResponseJson();
+    		System.err.println(jsonObject);
+    		Assert.fail("Error changing password because: "+jsonObject);
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    		Assert.fail("Error changing password caused by: "+e.getMessage());    		
+    	}
+    }
+    
+    public void updateSubscriberEmail(BigInteger subscriberId, String emailAddress) {
+    	try {
+    		SubscriberManagementService subscriberManagement = getSubscriberManagementService();
+    		
+    		JsonEntity jsonEntity = subscriberManagement.getSubscriberById(subscriberId);
+			JsonJavaObject rootObject = jsonEntity.getJsonObject();
+			
+			JsonJavaObject subscriberObject = rootObject.getAsObject("Subscriber");
+			JsonJavaObject personObject = subscriberObject.getAsObject("Person");
+			personObject.putString("EmailAddress", emailAddress);
+			
+			subscriberManagement.updateSubscribeProfile(rootObject);
+				
+    	} catch (BssException be) {
+    		JsonJavaObject jsonObject = be.getResponseJson();
+    		System.out.println(jsonObject);
+    		Assert.fail("Error updating subscriber profile caused by: "+jsonObject);
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    		Assert.fail("Error updating subscriber profile caused by: "+e.getMessage());    		
+    	}
+    }
+    
+    public void activateSubscriber(BigInteger subscriberId) {
+    	try {
+    		SubscriberManagementService subscriberManagement = getSubscriberManagementService();
+			subscriberManagement.activateSubscriber(subscriberId);
+    	} catch (BssException be) {
+    		JsonJavaObject jsonObject = be.getResponseJson();
+    		System.out.println(jsonObject);
+    		Assert.fail("Error activating subscriber caused by: "+jsonObject);
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    		Assert.fail("Error activating subscriber caused by: "+e.getMessage());    		
+    	}
+    }
+    
+	
     public JsonEntity getSubscriberById(BigInteger subscriberId) {
     	try {
     		JsonEntity jsonEntity = getSubscriberManagementService().getSubscriberById(subscriberId);

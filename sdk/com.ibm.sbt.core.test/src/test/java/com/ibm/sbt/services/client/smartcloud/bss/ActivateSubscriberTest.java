@@ -58,10 +58,10 @@ public class ActivateSubscriberTest extends BaseBssTest {
     	} catch (BssException be) {
     		JsonJavaObject jsonObject = be.getResponseJson();
     		System.out.println(jsonObject);
-    		Assert.fail("Error deleting subscriber caused by: "+jsonObject);
+    		Assert.fail("Error activating subscriber caused by: "+jsonObject);
     	} catch (Exception e) {
     		e.printStackTrace();
-    		Assert.fail("Error deleting subscriber caused by: "+e.getMessage());    		
+    		Assert.fail("Error activating subscriber caused by: "+e.getMessage());    		
     	}
     }
 	

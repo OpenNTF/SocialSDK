@@ -26,12 +26,14 @@ import com.ibm.sbt.services.client.smartcloud.bss.CancelSubscriptionTest;
 import com.ibm.sbt.services.client.smartcloud.bss.ChangePasswordTest;
 import com.ibm.sbt.services.client.smartcloud.bss.CreateSubscriptionTest;
 import com.ibm.sbt.services.client.smartcloud.bss.DeleteSubscriberTest;
+import com.ibm.sbt.services.client.smartcloud.bss.EntitleSubscriberTest;
 import com.ibm.sbt.services.client.smartcloud.bss.GetCustomerByIdTest;
 import com.ibm.sbt.services.client.smartcloud.bss.GetCustomersTest;
 import com.ibm.sbt.services.client.smartcloud.bss.GetRolesTest;
 import com.ibm.sbt.services.client.smartcloud.bss.GetSubscriberByIdTest;
 import com.ibm.sbt.services.client.smartcloud.bss.GetSubscribersPagingTest;
 import com.ibm.sbt.services.client.smartcloud.bss.GetSubscribersTest;
+import com.ibm.sbt.services.client.smartcloud.bss.ProvisionSubscriberTest;
 import com.ibm.sbt.services.client.smartcloud.bss.RegisterCustomerTest;
 import com.ibm.sbt.services.client.smartcloud.bss.ResetPasswordTest;
 import com.ibm.sbt.services.client.smartcloud.bss.SetOneTimePasswordTest;
@@ -59,12 +61,14 @@ import com.ibm.sbt.services.client.smartcloud.bss.UpdateSubscriberProfileTest;
 	ChangePasswordTest.class,
 	CreateSubscriptionTest.class,
 	DeleteSubscriberTest.class,
+	EntitleSubscriberTest.class,
 	GetCustomerByIdTest.class,
 	GetCustomersTest.class,
 	GetRolesTest.class,
 	GetSubscriberByIdTest.class,
 	GetSubscribersPagingTest.class,
 	GetSubscribersTest.class,
+	ProvisionSubscriberTest.class,
 	RegisterCustomerTest.class,
 	ResetPasswordTest.class,
 	SetOneTimePasswordTest.class,

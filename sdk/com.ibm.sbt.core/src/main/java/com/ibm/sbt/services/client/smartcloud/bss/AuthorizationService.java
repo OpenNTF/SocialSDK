@@ -15,6 +15,7 @@
  */
 package com.ibm.sbt.services.client.smartcloud.bss;
 
+import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
@@ -22,6 +23,7 @@ import java.util.Map;
 
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.services.client.ClientService;
+import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.endpoints.Endpoint;
 
@@ -119,8 +121,10 @@ public class AuthorizationService extends BssService {
     		if (statusCode != 204) {
     			throw new BssException(response, "Error assigning role {0} to {1}", role, loginName);
     		}
-		} catch (Exception e) {
-			throw new BssException(e, "Error retrieving role list");
+		} catch (IOException e) {
+			throw new BssException(e, "Error assigning role {0} to {1}", role, loginName);			
+		} catch (ClientServicesException e) {
+			throw new BssException(e, "Error assigning role {0} to {1}", role, loginName);
 		}
     }
 
@@ -141,10 +145,12 @@ public class AuthorizationService extends BssService {
     		// expect a 204
     		int statusCode = response.getResponse().getStatusLine().getStatusCode();
     		if (statusCode != 204) {
-    			throw new BssException(response, "Error assigning role {0} to {1}", role, loginName);
+    			throw new BssException(response, "Error unassigning role {0} to {1}", role, loginName);
     		}
-		} catch (Exception e) {
-			throw new BssException(e, "Error retrieving role list");
+		} catch (IOException e) {
+			throw new BssException(e, "Error unassigning role {0} to {1}", role, loginName);			
+		} catch (ClientServicesException e) {
+			throw new BssException(e, "Error unassigning role {0} to {1}", role, loginName);
 		}
     }
 

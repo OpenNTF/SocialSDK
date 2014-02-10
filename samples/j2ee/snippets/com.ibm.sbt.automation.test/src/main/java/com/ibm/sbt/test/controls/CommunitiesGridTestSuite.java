@@ -15,7 +15,9 @@
  */
 package com.ibm.sbt.test.controls;
 
+import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -40,16 +42,16 @@ import com.ibm.sbt.test.controls.grid.communities.PublicCommunitiesGrid;
 @SuiteClasses({BootstrapCommunitiesGrid.class, CommunityMembersGrid.class, CommunityActionGrid.class, CustomTemplateCommunity.class, MyCommunitiesGrid.class,OneClickToJoin.class, PublicCommunitiesDijit.class,
         PublicCommunitiesGrid.class })
 public class CommunitiesGridTestSuite {
-	private static BaseGridTestSetup setup ;
+	private BaseGridTestSetup setup ;
 	 
-	@BeforeClass
-	public static void setup(){
+	@Before
+	public void setup(){
 		setup = new BaseGridTestSetup();
 		setup.createCommunity("TestCommunity", "public", "content", "TestTag, tag2", false);
 	}
 	
-	@AfterClass
-    public static void cleanup() {
+	@After
+    public void cleanup() {
 		setup.deleteCommunity();
     }
 }

@@ -61,7 +61,7 @@ define([ "../../../declare", "../../../controls/grid/GridAction","../../../i18n!
                 start: grid.data.start, count: grid.pageSize
             };
         	
-        	if(grid.renderer.template == grid.renderer.topicTemplate){
+        	if(grid.renderer.template == grid.renderer.topicTemplate || grid.renderer.template == grid.renderer.forumTopicTemplate){
         		grid.getTopicReplies(id,options);      		
         	}else{
             	grid.getTopics(id,options);

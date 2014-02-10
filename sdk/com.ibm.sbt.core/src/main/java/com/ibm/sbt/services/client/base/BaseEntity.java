@@ -146,6 +146,22 @@ public class BaseEntity implements Externalizable {
 	}
 	
 	/**
+	 * Returns the value of a field as a long
+	 * 
+	 * @param field
+	 * @return returns null, if the field doesn't exist
+	 */
+	public Long getAsLong(String fieldName){
+		if (fields.containsKey(fieldName)){
+			return (Long)fields.get(fieldName);
+		}
+		if (dataHandler != null){
+			return dataHandler.getAsLong(fieldName);
+		}
+		return null;
+	}
+	
+	/**
 	 * Returns the value of a field as a float
 	 * 
 	 * @param field
@@ -173,6 +189,22 @@ public class BaseEntity implements Externalizable {
 		}
 		if (dataHandler != null){
 			return dataHandler.getAsBoolean(field);
+		}
+		return false;
+	}
+	
+	/**
+	 * Returns the value of a field as a boolean
+	 * 
+	 * @param fieldName
+	 * @return returns false, if the field doesn't exist
+	 */
+	public boolean getAsBoolean(String fieldName){
+		if (fields.containsKey(fieldName)){
+			return (Boolean)fields.get(fieldName);
+		}
+		if (dataHandler != null){
+			return dataHandler.getAsBoolean(fieldName);
 		}
 		return false;
 	}

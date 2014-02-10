@@ -13,5 +13,6 @@
 		<module>com.ibm.sbt.bootstrap211</module>
 		<module>com.ibm.sbt.dojo180</module>
 		<module>com.ibm.sbt.jquery182</module>
+		<module>com.ibm.sbt.ckeditor422</module>
 	</modules>
 </project>

@@ -79,6 +79,26 @@ define([ "../../declare", "../../lang", "../../stringUtil", "../../log",
 				this._place(element, this.domNode);
 			}
 		},
+		
+		hideAction: function(action){
+			action.actionNameNode.setAttribute("style","display:none");
+		},
+		
+		showAction: function(action){
+			action.actionNameNode.setAttribute("style","");
+		},
+		
+		hideAllActions: function(){
+			for(var i=0;i<this._actionElements.length;i++){
+				this._actionElements[i].element.setAttribute("style","display:none;");
+			}
+		},
+		
+		showAllActions: function(){
+			for(var i=0;i<this._actionElements.length;i++){
+				this._actionElements[i].element.setAttribute("style","");
+			}
+		},
 
 		//
 		// Internals

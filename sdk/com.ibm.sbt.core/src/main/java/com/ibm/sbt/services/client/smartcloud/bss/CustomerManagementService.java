@@ -26,6 +26,7 @@ import com.ibm.commons.util.io.json.JsonJavaFactory;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.commons.util.io.json.JsonParser;
 import com.ibm.sbt.services.client.ClientService;
+import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.JsonEntity;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
@@ -137,7 +138,9 @@ public class CustomerManagementService extends BssService {
     		if (statusCode != 204) {
     			throw new BssException(response, "Error updating customer profile {0}", customerObject);
     		}
-		} catch (Exception e) {
+		} catch (IOException e) {
+			throw new BssException(e, "Error updating customer profile {0}", customerObject);			
+		} catch (ClientServicesException e) {
 			throw new BssException(e, "Error updating customer profile {0}", customerObject);
 		}
     }
@@ -161,8 +164,10 @@ public class CustomerManagementService extends BssService {
     		if (statusCode != 204) {
     			throw new BssException(response, "Error unregistering customer {0}", customerId);
     		}
-		} catch (Exception e) {
-			throw new BssException(e, "Error retrieving customer {0}", customerId);
+		} catch (IOException e) {
+			throw new BssException(e, "Error unregistering customer {0}", customerId);			
+		} catch (ClientServicesException e) {
+			throw new BssException(e, "Error unregistering customer {0}", customerId);
 		}
     }
     
@@ -184,7 +189,9 @@ public class CustomerManagementService extends BssService {
     		if (statusCode != 204) {
     			throw new BssException(response, "Error suspending customer {0}", customerId);
     		}
-		} catch (Exception e) {
+		} catch (IOException e) {
+			throw new BssException(e, "Error suspending customer {0}", customerId);			
+		} catch (ClientServicesException e) {
 			throw new BssException(e, "Error suspending customer {0}", customerId);
 		}
     }
@@ -207,8 +214,10 @@ public class CustomerManagementService extends BssService {
     		if (statusCode != 204) {
     			throw new BssException(response, "Error suspending customer {0}", customerId);
     		}
-		} catch (Exception e) {
-			throw new BssException(e, "Error suspending customer {0}", customerId);
+		} catch (IOException e) {
+			throw new BssException(e, "Error unsuspending customer {0}", customerId);			
+		} catch (ClientServicesException e) {
+			throw new BssException(e, "Error unsuspending customer {0}", customerId);
 		}
     }
     

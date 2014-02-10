@@ -26,6 +26,7 @@ import com.ibm.commons.util.io.json.JsonJavaFactory;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.commons.util.io.json.JsonParser;
 import com.ibm.sbt.services.client.ClientService;
+import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.JsonEntity;
@@ -233,7 +234,9 @@ public class SubscriptionManagementService extends BssService {
     		if (statusCode != 204) {
     			throw new BssException(response, "Error suspending subscription {0}", subscriptionId);
     		}
-		} catch (Exception e) {
+		} catch (IOException e) {
+			throw new BssException(e, "Error suspending subscription {0}", subscriptionId);			
+		} catch (ClientServicesException e) {
 			throw new BssException(e, "Error suspending subscription {0}", subscriptionId);
 		}
     }
@@ -255,10 +258,12 @@ public class SubscriptionManagementService extends BssService {
     		// expect a 204
     		int statusCode = response.getResponse().getStatusLine().getStatusCode();
     		if (statusCode != 204) {
-    			throw new BssException(response, "Error suspending subscription {0}", subscriptionId);
+    			throw new BssException(response, "Error unsuspending subscription {0}", subscriptionId);
     		}
-		} catch (Exception e) {
-			throw new BssException(e, "Error suspending subscription {0}", subscriptionId);
+		} catch (IOException e) {
+			throw new BssException(e, "Error unsuspending subscription {0}", subscriptionId);			
+		} catch (ClientServicesException e) {
+			throw new BssException(e, "Error unsuspending subscription {0}", subscriptionId);
 		}
     }
 	
@@ -281,7 +286,9 @@ public class SubscriptionManagementService extends BssService {
     		if (statusCode != 204) {
     			throw new BssException(response, "Error cancelling subscription {0}", subscriptionId);
     		}
-		} catch (Exception e) {
+		} catch (IOException e) {
+			throw new BssException(e, "Error cancelling subscription {0}", subscriptionId);			
+		} catch (ClientServicesException e) {
 			throw new BssException(e, "Error cancelling subscription {0}", subscriptionId);
 		}
     }
@@ -304,7 +311,9 @@ public class SubscriptionManagementService extends BssService {
     		if (statusCode != 204) {
     			throw new BssException(response, "Error updating subscription {0}", subscriptionObject);
     		}
-		} catch (Exception e) {
+		} catch (IOException e) {
+			throw new BssException(e, "Error updating subscription {0}", subscriptionObject);			
+		} catch (ClientServicesException e) {
 			throw new BssException(e, "Error updating subscription {0}", subscriptionObject);
 		}
     }

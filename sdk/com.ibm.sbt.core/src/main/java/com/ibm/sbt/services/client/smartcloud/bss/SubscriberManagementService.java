@@ -26,6 +26,7 @@ import com.ibm.commons.util.io.json.JsonJavaFactory;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.commons.util.io.json.JsonParser;
 import com.ibm.sbt.services.client.ClientService;
+import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.JsonEntity;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
@@ -361,19 +362,16 @@ public class SubscriberManagementService extends BssService {
      * @param acceptTOU
      * @throws BssException
      */
-    public void entitleSubscriber(BigInteger subscriberId, BigInteger subscriptionId, boolean acceptTOU) throws BssException {
+    public JsonEntity entitleSubscriber(BigInteger subscriberId, BigInteger subscriptionId, boolean acceptTOU) throws BssException {
        	try {
     		Map<String, String> params = new HashMap<String, String>();
     		params.put("acceptTOU", acceptTOU ? "true" : "false");
     		String serviceUrl = API_RESOURCE_SUBSCRIBER + "/" + subscriberId + "/subscription/" + subscriptionId;
     		Response response = createData(serviceUrl, params, EntitleSubscriberHeader, (Object)null);
-    		
-    		// expect a 204
-    		int statusCode = response.getResponse().getStatusLine().getStatusCode();
-    		if (statusCode != 204) {
-    			throw new BssException(response, "Error entitling subscriber {0}", subscriberId);
-    		}
-		} catch (Exception e) {
+    		return getJsonFeedHandler().createEntity(response);
+		} catch (ClientServicesException e) {
+			throw new BssException(e, "Error entitling subscriber {0}", subscriberId);
+		}  catch (IOException e) {
 			throw new BssException(e, "Error entitling subscriber {0}", subscriberId);
 		}
     }

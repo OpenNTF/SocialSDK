@@ -20,6 +20,9 @@ import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.util.EntityUtils;
+
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.json.JsonException;
 import com.ibm.commons.util.io.json.JsonJavaFactory;
@@ -368,6 +371,8 @@ public class SubscriberManagementService extends BssService {
     		params.put("acceptTOU", acceptTOU ? "true" : "false");
     		String serviceUrl = API_RESOURCE_SUBSCRIBER + "/" + subscriberId + "/subscription/" + subscriptionId;
     		Response response = createData(serviceUrl, params, EntitleSubscriberHeader, (Object)null);
+    		//HttpEntity entity = response.getResponse().getEntity();
+    		//System.out.println(EntityUtils.toString(entity));
     		return getJsonFeedHandler().createEntity(response);
 		} catch (ClientServicesException e) {
 			throw new BssException(e, "Error entitling subscriber {0}", subscriberId);

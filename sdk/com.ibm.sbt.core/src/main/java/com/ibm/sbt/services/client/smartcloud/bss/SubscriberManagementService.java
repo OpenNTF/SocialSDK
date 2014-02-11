@@ -368,6 +368,8 @@ public class SubscriberManagementService extends BssService {
     		params.put("acceptTOU", acceptTOU ? "true" : "false");
     		String serviceUrl = API_RESOURCE_SUBSCRIBER + "/" + subscriberId + "/subscription/" + subscriptionId;
     		Response response = createData(serviceUrl, params, EntitleSubscriberHeader, (Object)null);
+    		//HttpEntity entity = response.getResponse().getEntity();
+    		//System.out.println(EntityUtils.toString(entity));
     		return getJsonFeedHandler().createEntity(response);
 		} catch (ClientServicesException e) {
 			throw new BssException(e, "Error entitling subscriber {0}", subscriberId);

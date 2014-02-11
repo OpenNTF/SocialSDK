@@ -78,7 +78,7 @@ public class EntitleSubscriberTest extends BaseBssTest {
 						
 			JsonEntity entitlement = subscriberManagement.entitleSubscriber(subscriberId, subscriptionId, true);
 			Assert.assertNotNull("Unable to entitle subscriber: "+subscriberId, entitlement);
-			System.out.println(entitlement.toJsonString());
+			System.out.println("Entitlement: " + entitlement.toJsonString());
 			
 			jsonEntity = subscriberManagement.getSubscriberById(subscriberId);
 			Assert.assertNotNull("Unable to retrieve activated subscriber: "+subscriberId, jsonEntity);
@@ -99,10 +99,10 @@ public class EntitleSubscriberTest extends BaseBssTest {
     	} catch (BssException be) {
     		JsonJavaObject jsonObject = be.getResponseJson();
     		System.out.println(jsonObject);
-    		Assert.fail("Error deleting subscriber caused by: "+jsonObject);
+    		Assert.fail("Error entitling subscriber caused by: "+jsonObject);
     	} catch (Exception e) {
     		e.printStackTrace();
-    		Assert.fail("Error deleting subscriber caused by: "+e.getMessage());    		
+    		Assert.fail("Error entitling subscriber caused by: "+e.getMessage());    		
     	}
     }
 	

@@ -269,7 +269,7 @@ public class ExportBlog {
 	 */
 	public static void main(String[] args) {
 		if (args.length < 2) {
-			System.out.println("Usage: java com.ibm.sbt.sample.app.ExplorBlog <blog_handle> <output_csv>");
+			System.out.println("Usage: java com.ibm.sbt.sample.app.ExplortBlog <blog_handle> <output_csv>");
 			return;
 		}
 		

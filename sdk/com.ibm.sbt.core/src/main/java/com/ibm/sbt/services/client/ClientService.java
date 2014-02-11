@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * ï¿½ Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -52,8 +52,6 @@ import org.apache.http.entity.InputStreamEntity;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreProtocolPNames;
-import org.apache.http.params.HttpParams;
-import org.apache.http.params.HttpParamsNames;
 import org.apache.http.util.EntityUtils;
 import org.w3c.dom.Node;
 
@@ -83,7 +81,6 @@ import com.ibm.sbt.service.proxy.ProxyConfigException;
 import com.ibm.sbt.service.proxy.ProxyFactory;
 import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
-import com.ibm.sbt.services.endpoints.SmartCloudFormEndpoint;
 import com.ibm.sbt.services.util.SSLUtil;
 
 /**
@@ -967,10 +964,10 @@ public abstract class ClientService {
 		} else if (StringUtil.equalsIgnoreCase(method, METHOD_POST)) {
 			HttpPost httpPost = new HttpPost(url);
 			response = execRequest(httpPost, args, content);
-		} else if (StringUtil.equalsIgnoreCase(method, "put")) {
+		} else if (StringUtil.equalsIgnoreCase(method, METHOD_PUT)) {
 			HttpPut httpPut = new HttpPut(url);
 			response = execRequest(httpPut, args, content);
-		} else if (StringUtil.equalsIgnoreCase(method, "delete")) {
+		} else if (StringUtil.equalsIgnoreCase(method, METHOD_DELETE)) {
 			HttpDelete httpDelete = new HttpDelete(url);
 			response = execRequest(httpDelete, args, content);
 		} else {

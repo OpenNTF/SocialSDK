@@ -15,7 +15,6 @@
  */
 package com.ibm.sbt.services.client.smartcloud.bss;
 
-import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -207,17 +206,17 @@ public class BssService extends JsonService {
      * @param jsonObject
      * @return
      */
-    public BigInteger getId(JsonJavaObject jsonObject, String propertyName) {
+    public String getId(JsonJavaObject jsonObject, String propertyName) {
     	if (jsonObject == null) {
     		return null;
     	}
     	Object value = jsonObject.get(PROPERTY_ID);
-    	BigInteger subscriberId = (value == null) ? null : BigInteger.valueOf(((Number)value).longValue());
+    	String subscriberId = (value == null) ? null : String.valueOf(((Number)value).longValue());
     	if (subscriberId == null) {
     		jsonObject = (JsonJavaObject)jsonObject.getAsObject(propertyName);
     		if (jsonObject != null) {
     			value = jsonObject.get(PROPERTY_ID);
-    	    	subscriberId = (value == null) ? null : BigInteger.valueOf(((Number)value).longValue());
+    	    	subscriberId = (value == null) ? null : String.valueOf(((Number)value).longValue());
     		}
     	}
     	return subscriberId;

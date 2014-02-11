@@ -15,7 +15,6 @@
  */
 package com.ibm.sbt.services.client.smartcloud.bss;
 
-import java.math.BigInteger;
 import java.util.List;
 
 import org.junit.Assert;
@@ -35,8 +34,8 @@ public class EntitleSubscriberTest extends BaseBssTest {
 	@Test
     public void testEntitleSubscriber() {
     	try {
-    		BigInteger customerId = registerCustomer();
-    		BigInteger subscriberId = addSubscriber();
+    		String customerId = registerCustomer();
+    		String subscriberId = addSubscriber();
 
     		SubscriptionManagementService subscriptionManagement = getSubscriptionManagementService();
     		OrderJsonBuilder order = new OrderJsonBuilder();
@@ -50,7 +49,7 @@ public class EntitleSubscriberTest extends BaseBssTest {
     		for (JsonEntity subscription : subscriptionList) {
     			System.out.println(subscription.toJsonString());
     		}
-    		BigInteger subscriptionId = BigInteger.valueOf(subscriptionList.get(0).getAsLong("SubscriptionId"));
+    		String subscriptionId = String.valueOf(subscriptionList.get(0).getAsLong("SubscriptionId"));
     		System.out.println(subscriptionId);
     		
     		JsonEntity subscription = subscriptionManagement.getSubscriptionById(subscriptionId);
@@ -94,7 +93,7 @@ public class EntitleSubscriberTest extends BaseBssTest {
     		}
 			JsonJavaObject seat = (JsonJavaObject)seatSet.get(0);
 			System.out.println(seat.getAsLong("SubscriptionId"));
-			Assert.assertEquals(subscriptionId, BigInteger.valueOf(seat.getAsLong("SubscriptionId")));
+			Assert.assertEquals(subscriptionId, String.valueOf(seat.getAsLong("SubscriptionId")));
 			
     	} catch (BssException be) {
     		JsonJavaObject jsonObject = be.getResponseJson();

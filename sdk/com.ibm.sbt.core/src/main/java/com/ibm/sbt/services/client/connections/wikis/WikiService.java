@@ -134,6 +134,17 @@ public class WikiService extends BaseService {
 	/**
 	 * Get a feed that lists all of the pages in a specific wiki. 
 	 * @param wikiLabel
+	 * @return
+	 * @throws ClientServicesException
+	 */
+	public EntityList<WikiPage> getWikiPages(String wikiLabel) 
+			throws ClientServicesException {
+		return getWikiPages(wikiLabel, new HashMap<String, String>());
+	}
+	
+	/**
+	 * Get a feed that lists all of the pages in a specific wiki. 
+	 * @param wikiLabel
 	 * @param parameters
 	 * @return
 	 * @throws ClientServicesException

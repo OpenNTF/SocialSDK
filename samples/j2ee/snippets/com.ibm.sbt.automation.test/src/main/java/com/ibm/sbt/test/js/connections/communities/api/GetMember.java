@@ -21,6 +21,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.ibm.commons.util.io.json.JsonJavaObject;
+import com.ibm.sbt.automation.core.test.BaseTest.AuthType;
 import com.ibm.sbt.automation.core.test.connections.BaseCommunitiesTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 
@@ -42,14 +43,14 @@ public class GetMember extends BaseCommunitiesTest {
     	String name1 = getProperty("sample.displayName1");
     	String userid1 = getProperty("sample.userId1");
     	String email1 = getProperty("sample.email1");
-    	if (environment.isSmartCloud()) {
+    	if (getEnvironment().isSmartCloud()) {
         	name1 = getProperty("smartcloud.displayName1");
         	userid1 = getProperty("smartcloud.userId1");
         	email1 = getProperty("smartcloud.email1");
     	}
     	
     	String id = getProperty("sample.email1");
-    	if (environment.isSmartCloud()) {
+    	if (getEnvironment().isSmartCloud()) {
     		id = getProperty("smartcloud.id1");
     	}
     	

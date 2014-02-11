@@ -38,7 +38,7 @@ public class CommunityServiceTest extends BaseUnitTest {
 		community.setTitle("JavaTestCommunity " + System.currentTimeMillis());
 		community.setContent("Java Community Content");
 		String type = "public";
-		if (TestEnvironment.isSmartCloud()) {
+		if (TestEnvironment.isSmartCloudEnvironment()) {
 			type = "private";
 		}
 		community.setCommunityType(type);
@@ -191,7 +191,7 @@ public class CommunityServiceTest extends BaseUnitTest {
 		community.setTitle("testCommunity " + System.currentTimeMillis());
 		community.setContent("Java Community Content");
 		String type = "public";
-		if (TestEnvironment.isSmartCloud()) {
+		if (TestEnvironment.isSmartCloudEnvironment()) {
 			type = "private";
 		}
 		community.setCommunityType(type);
@@ -221,7 +221,7 @@ public class CommunityServiceTest extends BaseUnitTest {
 		CommunityService communityService = new CommunityService();
 
 		String id = TestEnvironment.getSecondaryUserEmail();
-		if (TestEnvironment.isSmartCloud()) id = TestEnvironment.getSecondaryUserUuid();
+		if (TestEnvironment.isSmartCloudEnvironment()) id = TestEnvironment.getSecondaryUserUuid();
 		Member newMember = new Member(communityService,
 				id);
 		communityService.addMember(community.getCommunityUuid(), newMember);
@@ -261,7 +261,7 @@ public class CommunityServiceTest extends BaseUnitTest {
 
 	@Test
 	public void testCreateCommunityTwice() {
-		if (TestEnvironment.isSmartCloud()) return;
+		if (TestEnvironment.isSmartCloudEnvironment()) return;
 		String uuid1 = null;
 		String uuid2 = null;
 		

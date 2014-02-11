@@ -32,6 +32,7 @@ import org.junit.Before;
 
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.automation.core.test.BaseApiTest;
+import com.ibm.sbt.automation.core.test.FlexibleTest;
 import com.ibm.sbt.automation.core.utils.Trace;
 import com.ibm.sbt.security.authentication.AuthenticationException;
 import com.ibm.sbt.services.client.ClientServicesException;
@@ -54,7 +55,7 @@ import com.ibm.sbt.services.client.connections.forums.transformers.BaseForumTran
  *  
  * @date 13 Mar 2013
  */
-public class BaseCommunitiesTest extends BaseApiTest {
+public class BaseCommunitiesTest extends FlexibleTest {
     
     protected boolean createCommunity = true;
     protected CommunityService communityService;
@@ -69,15 +70,14 @@ public class BaseCommunitiesTest extends BaseApiTest {
 		    "</entry>";    		
 
     public BaseCommunitiesTest() {
-        setAuthType(AuthType.AUTO_DETECT);
+        setAuthType(BaseApiTest.AuthType.AUTO_DETECT);
     }
     
     @Before
     public void createCommunity() {
-        createContext();
         if (createCommunity) {
         	String type = "public";
-        	if (environment.isSmartCloud()) {
+        	if (getEnvironment().isSmartCloud()) {
         		type = "private";
         	}
         	String name = createCommunityName();
@@ -86,14 +86,17 @@ public class BaseCommunitiesTest extends BaseApiTest {
         }
     }
     
-    @After
+	public String getProperty(String name) {
+	    return getEnvironment().getProperty(name);
+	}
+
+	@After
     public void deleteCommunityAndQuit() {
     	deleteCommunity(community);
     	community = null;
-    	destroyContext();
     	
-    	if (environment.isDebugTransport()) {
-    		saveTestDataAndResults();
+    	if (getEnvironment().isDebugTransport()) {
+    		//saveTestDataAndResults();
     	}
     }
     
@@ -144,7 +147,7 @@ public class BaseCommunitiesTest extends BaseApiTest {
     
     protected CommunityService getCommunityService() {
         if (communityService == null) {
-            communityService = new CommunityService(getEndpointName());
+            communityService = new CommunityService(getEnvironment().getEndpointName());
         }
         return communityService;
     }
@@ -172,7 +175,7 @@ public class BaseCommunitiesTest extends BaseApiTest {
         Assert.assertEquals(communityUuid, json.getString("getCommunityUuid"));
         Assert.assertEquals(name, json.getString("getName"));
         Assert.assertEquals(userid, json.getString("getUserid"));
-        if (!environment.isSmartCloud()) {
+        if (!getEnvironment().isSmartCloud()) {
         	Assert.assertTrue("Expect match "+email+" <> "+json.getString("getEmail"), email.equalsIgnoreCase(json.getString("getEmail")));
         }
         Assert.assertEquals(role, json.getString("getRole"));
@@ -189,8 +192,6 @@ public class BaseCommunitiesTest extends BaseApiTest {
     protected Community getLastCreatedCommunity() {
         Community community = null;
         try {
-            loginConnections();
-            
             CommunityService communityService = getCommunityService();
             Collection<Community> communities = communityService.getMyCommunities();
             community = communities.iterator().next();
@@ -203,11 +204,6 @@ public class BaseCommunitiesTest extends BaseApiTest {
             	Trace.log("Last created community: "+c.getTitle());
             	Trace.log("Last created community: "+c.getPublished());
             }
-        } catch (AuthenticationException pe) {
-        	if (pe.getCause() != null) {
-        		pe.getCause().printStackTrace();
-        	}
-            Assert.fail("Error authenicating: " + pe.getMessage());
         } catch (CommunityServiceException cse) {
             fail("Error getting last created community", cse);
         } 
@@ -222,16 +218,11 @@ public class BaseCommunitiesTest extends BaseApiTest {
     protected Community getCommunity(String communityUuid, boolean failOnCse) {
         Community community = null;
         try {
-            loginConnections();
+          
             
             CommunityService communityService = getCommunityService();
             community = communityService.getCommunity(communityUuid);
             Trace.log("Got community: "+community.getCommunityUuid());
-        } catch (AuthenticationException pe) {
-        	if (pe.getCause() != null) {
-        		pe.getCause().printStackTrace();
-        	}
-            Assert.fail("Error authenicating: " + pe.getMessage());
         } catch (CommunityServiceException cse) {
         	if (failOnCse) {
         		fail("Error retrieving community", cse);
@@ -247,7 +238,6 @@ public class BaseCommunitiesTest extends BaseApiTest {
     protected Community createCommunity(String title, String type, String content, String tags, boolean retry) {
         Community community = null;
         try {
-            loginConnections();
             CommunityService communityService = getCommunityService();
             
         	long start = System.currentTimeMillis();
@@ -261,12 +251,8 @@ public class BaseCommunitiesTest extends BaseApiTest {
             
             long duration = System.currentTimeMillis() - start;
             Trace.log("Created test community: "+communityUuid + " took "+duration+"(ms)");
-        } catch (AuthenticationException pe) {
-        	if (pe.getCause() != null) {
-        		pe.getCause().printStackTrace();
-        	}
-            Assert.fail("Error authenicating: " + pe.getMessage());
-        } catch (CommunityServiceException cse) {
+        }
+        catch (CommunityServiceException cse) {
         	// TODO remove this when we upgrade the QSI
         	Throwable t = cse.getCause();
         	if (t instanceof ClientServicesException) {
@@ -285,14 +271,9 @@ public class BaseCommunitiesTest extends BaseApiTest {
     protected void deleteCommunity(Community community) {
         if (community != null) {
             try {
-            	loginConnections();
+            
                 CommunityService communityService = getCommunityService();
                 communityService.deleteCommunity(community.getCommunityUuid());
-            } catch (AuthenticationException pe) {
-            	if (pe.getCause() != null) {
-            		pe.getCause().printStackTrace();
-            	}
-                Assert.fail("Error authenicating: " + pe.getMessage());
             } catch (CommunityServiceException cse) {
                 community = null;
             	// check if community delete failed because
@@ -314,14 +295,9 @@ public class BaseCommunitiesTest extends BaseApiTest {
     protected void deleteCommunity(String communityId) {
         if (communityId != null) {
             try {
-            	loginConnections();
+            	
                 CommunityService communityService = getCommunityService();
                 communityService.deleteCommunity(communityId);
-            } catch (AuthenticationException pe) {
-            	if (pe.getCause() != null) {
-            		pe.getCause().printStackTrace();
-            	}
-                Assert.fail("Error authenicating: " + pe.getMessage());
             } catch (CommunityServiceException cse) {
                 fail("Error deleting community "+communityId, cse);
             }

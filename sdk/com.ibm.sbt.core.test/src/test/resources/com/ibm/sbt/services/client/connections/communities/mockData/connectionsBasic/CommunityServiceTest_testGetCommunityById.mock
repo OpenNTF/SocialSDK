@@ -4,7 +4,7 @@
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Fri, 07 Feb 2014 15:52:09 GMT]]></value>
+        <value><![CDATA[Tue, 11 Feb 2014 11:04:57 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -28,7 +28,7 @@
     </header>
     <header>
         <name><![CDATA[Last-Modified]]></name>
-        <value><![CDATA[Fri, 07 Feb 2014 15:52:09 GMT]]></value>
+        <value><![CDATA[Tue, 11 Feb 2014 11:04:57 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Pragma]]></name>
@@ -36,15 +36,15 @@
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/iQBi0nELAeDQJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
+        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/ujgeArI1xvNQJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=uRTbMC45aDZD87JyZYJtWd6orun3Uf4pi8ijHfJqVp9W3RD4/UcrJQrXOkB5dTxbpnthvdRgA0zoB/IoJk7yCAJF3r3j4GhEzFwqLrbyqt92eUW7mjWpy4JsAcb++As6vXNUhhTACYrRS/C2TK1sb1AV94/q08r4xszPMKaVzHIK5xF4eMLLsbHtqPKJbVtQtcew1BCK0oH69kvfm2BVNIhqF2B7GDpvlwkQQJnHBfzA6NNIsc9YItdPn03FZoIcFOeX2PQMGBnn94Zw44TRRAmc8sbHz8xeBu9WIjkIW+z5t3fyW/kaDp9TWOJ/Lj63VVI6D8bNmhxL+N0D2hDg+TaAEHDH4k356PFRQOQXHPQAXNeXKhG+oIhBsD4fP509yr105sAq8w5lffqModMck292SITWd7O1wNpU/1vUxRN34xHTj3M1cJejUy0KjsQM+fSEyzPrEdY4phc68H/OY/bws17Z8rTp8OLdsr3rIMIizVX8GUQ9uD0HQfNWMP3wJxrKGoyM2oemfwwwTgCsliQ2D6vBKAMjViUiHZ/qdVDZUmRKfxNexS6BFsxGnsEef6bN8Yck/JIYbZ6H6lRqqahtZ9HPFjCNd+b+cTqajIlJgidLm6dvtuCgKcASVWzLaO68XGAeFFSgJFTVB91suW+fc9CTElNvgpLnFZSvX171zirgj8Yhnaee3WZHBML9rOhXeWGen/GpdgDR3wzNaVcuHprfR0TQvAIBf6HVdwk=; Path=/]]></value>
+        <value><![CDATA[LtpaToken2=ccQBtQiUu+itCXTpZodoR/YZCDV0tWgSIzlAQc1Yx1NbO3RSl/lF3h3yBMGpjMcv9OAXwvEdqDfrtxw6sMadf4tHQa81wVhbFjQlr2GRadRqT5rEb2bfc+Xd03Dz0hN4NWVCOAtik6kOa9WdeGz5M+g1yVqmYLB5UH0Jny5hjIy+TD1tWaLKR9XgXv7ltcgyG9gO1Aied7J8ZYp0QhjY/9CgClFTqKoXm113FRnoXbU4osfqgi37N9x7W8oaEvfUiydF3cdHTeI4rOvr7TrfmMQqun7chFp18Tnp/DS17muSoOeMLM9UvqiG3xR/MV/RsK2P4o6eiFEYPujy8SqyITdzLA6hK7/FVd7IRsBn4bciyrgJwXYww7bre6svshlgUBXB1OvdONHpCiBnaP4WOJ2oSsGf2+UjluhBbkkocF/JfCkE3FtA+9Qwyl8nvKyNu91SnZQ3uv9NMvK1jfG6yIT3OGrGRtfdrqJlajvazQ0riDB0wcMQX52vJQyKMuEz9Wd5HBqVTv38+C+PuZkv20s1XI0cjpAzFVN3TNnei5vZANZsm2sqHCuwJqYd4xIfXdIhxzvVQmn/4joRlWcfQY5RmfbQzTS/q7094Ge84URIX/ajq/c8ZG0oSpbjwxvalhqF10v1A9GXXb4KtuZJA29J5PesnmWSFQ15GGJdAUwp7wRsIEIQMiT/yaNEsdnSPPYcOFuonZuBkuV3WfrBtyFt2AQa/h+Jis1q1octte4=; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LCSESSIONID=00003qLoIriY6NSqq6y2ZdblWLl:18dna4k6n; Path=/; HttpOnly]]></value>
+        <value><![CDATA[LCSESSIONID=0000cGLE-zOIieiaDSEr9nZzpZA:18dna4k6n; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Keep-Alive]]></name>
@@ -68,44 +68,44 @@
     </header></headers>
 <data><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <entry xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns="http://www.w3.org/2005/Atom">
-  <snx:communityUuid>1abc4cba-504c-45ec-900e-4c5ae54ab1d8</snx:communityUuid>
-  <id>http://communities.ibm.com:2006/service/atom/community/instance?communityUuid=1abc4cba-504c-45ec-900e-4c5ae54ab1d8</id>
-  <title type="text">JavaTestCommunity 1391788319897</title>
+  <snx:communityUuid>3ce36ab1-39af-42f6-93ad-c63b54ff9739</snx:communityUuid>
+  <id>http://communities.ibm.com:2006/service/atom/community/instance?communityUuid=3ce36ab1-39af-42f6-93ad-c63b54ff9739</id>
+  <title type="text">JavaTestCommunity 1392116685296</title>
   <category term="community" scheme="http://www.ibm.com/xmlns/prod/sn/type">
   </category>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=1abc4cba-504c-45ec-900e-4c5ae54ab1d8" rel="self">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=3ce36ab1-39af-42f6-93ad-c63b54ff9739" rel="self">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=1abc4cba-504c-45ec-900e-4c5ae54ab1d8" rel="edit">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=3ce36ab1-39af-42f6-93ad-c63b54ff9739" rel="edit">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/html/communityview?communityUuid=1abc4cba-504c-45ec-900e-4c5ae54ab1d8" rel="alternate" type="text/html">
+  <link href="https://dev.sdkdemo.com:444/communities/service/html/communityview?communityUuid=3ce36ab1-39af-42f6-93ad-c63b54ff9739" rel="alternate" type="text/html">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/html/image?communityUuid=1abc4cba-504c-45ec-900e-4c5ae54ab1d8&amp;lastMod=1391788327163" rel="http://www.ibm.com/xmlns/prod/sn/logo">
+  <link href="https://dev.sdkdemo.com:444/communities/service/html/image?communityUuid=3ce36ab1-39af-42f6-93ad-c63b54ff9739&amp;lastMod=1392116695068" rel="http://www.ibm.com/xmlns/prod/sn/logo">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/service?communityUuid=1abc4cba-504c-45ec-900e-4c5ae54ab1d8" rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/service?communityUuid=3ce36ab1-39af-42f6-93ad-c63b54ff9739" rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/members?communityUuid=1abc4cba-504c-45ec-900e-4c5ae54ab1d8" rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/members?communityUuid=3ce36ab1-39af-42f6-93ad-c63b54ff9739" rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/bookmarks?communityUuid=1abc4cba-504c-45ec-900e-4c5ae54ab1d8" rel="http://www.ibm.com/xmlns/prod/sn/bookmarks" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/bookmarks?communityUuid=3ce36ab1-39af-42f6-93ad-c63b54ff9739" rel="http://www.ibm.com/xmlns/prod/sn/bookmarks" type="application/atom+xml">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/feeds?communityUuid=1abc4cba-504c-45ec-900e-4c5ae54ab1d8" rel="http://www.ibm.com/xmlns/prod/sn/feeds" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/feeds?communityUuid=3ce36ab1-39af-42f6-93ad-c63b54ff9739" rel="http://www.ibm.com/xmlns/prod/sn/feeds" type="application/atom+xml">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/remoteApplications?communityUuid=1abc4cba-504c-45ec-900e-4c5ae54ab1d8" rel="http://www.ibm.com/xmlns/prod/sn/remote-applications" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/remoteApplications?communityUuid=3ce36ab1-39af-42f6-93ad-c63b54ff9739" rel="http://www.ibm.com/xmlns/prod/sn/remote-applications" type="application/atom+xml">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/forum/topics?communityUuid=1abc4cba-504c-45ec-900e-4c5ae54ab1d8" rel="http://www.ibm.com/xmlns/prod/sn/forum-topics" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/forum/topics?communityUuid=3ce36ab1-39af-42f6-93ad-c63b54ff9739" rel="http://www.ibm.com/xmlns/prod/sn/forum-topics" type="application/atom+xml">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/invites?communityUuid=1abc4cba-504c-45ec-900e-4c5ae54ab1d8" rel="http://www.ibm.com/xmlns/prod/sn/invitations-list" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/invites?communityUuid=3ce36ab1-39af-42f6-93ad-c63b54ff9739" rel="http://www.ibm.com/xmlns/prod/sn/invitations-list" type="application/atom+xml">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/widgets?communityUuid=1abc4cba-504c-45ec-900e-4c5ae54ab1d8" rel="http://www.ibm.com/xmlns/prod/sn/widgets" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/widgets?communityUuid=3ce36ab1-39af-42f6-93ad-c63b54ff9739" rel="http://www.ibm.com/xmlns/prod/sn/widgets" type="application/atom+xml">
   </link>
   <snx:membercount>1</snx:membercount>
   <snx:communityType>public</snx:communityType>
   <snx:handle></snx:handle>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/subcommunities?communityUuid=1abc4cba-504c-45ec-900e-4c5ae54ab1d8" rel="http://www.ibm.com/xmlns/prod/sn/subcommunities" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/subcommunities?communityUuid=3ce36ab1-39af-42f6-93ad-c63b54ff9739" rel="http://www.ibm.com/xmlns/prod/sn/subcommunities" type="application/atom+xml">
   </link>
   <snx:preModeration>true</snx:preModeration>
   <snx:postModeration>true</snx:postModeration>
-  <published>2014-02-07T15:52:07.163Z</published>
-  <updated>2014-02-07T15:52:08.220Z</updated>
+  <published>2014-02-11T11:04:55.068Z</published>
+  <updated>2014-02-11T11:04:56.291Z</updated>
   <content type="html">Java Community Content</content>
   <summary type="text">Java Community Content</summary>
   <author>
@@ -120,13 +120,13 @@
     <snx:userState>active</snx:userState>
     <email>fadams@renovations.com</email>
   </contributor>
-  <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/activitystreams/urn:lsid:lconn.ibm.com:communities.community:1abc4cba-504c-45ec-900e-4c5ae54ab1d8/@all/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/activitystream" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/activitystreams/urn:lsid:lconn.ibm.com:communities.community:3ce36ab1-39af-42f6-93ad-c63b54ff9739/@all/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/activitystream" type="application/atom+xml">
   </link>
-  <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/ublog/urn:lsid:lconn.ibm.com:communities.community:1abc4cba-504c-45ec-900e-4c5ae54ab1d8/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/microblog" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/ublog/urn:lsid:lconn.ibm.com:communities.community:3ce36ab1-39af-42f6-93ad-c63b54ff9739/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/microblog" type="application/atom+xml">
   </link>
   <snx:communityTheme snx:uuid="default">
   </snx:communityTheme>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/broadcasts?communityUuid=1abc4cba-504c-45ec-900e-4c5ae54ab1d8" rel="http://www.ibm.com/xmlns/prod/sn/community-broadcasts" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/broadcasts?communityUuid=3ce36ab1-39af-42f6-93ad-c63b54ff9739" rel="http://www.ibm.com/xmlns/prod/sn/community-broadcasts" type="application/atom+xml">
   </link>
 </entry>]]></data>
 </response>

@@ -23,7 +23,6 @@ import static org.junit.Assert.fail;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.ibm.sbt.services.client.ClientServicesException;
@@ -42,7 +41,7 @@ public class WikiCreateAndDeleteTest extends BaseWikiServiceTest {
 		Wiki wikiReturned = wikiService.createWiki(wiki, params);
 		
 		assertNotNull(wikiReturned.getLabel());
-		assertEquals(wiki.getTitle(), wikiReturned.getTitle());
+		assertEquals(unRandomize(wiki.getTitle()), unRandomize(wikiReturned.getTitle()));
 		
 		deleteWikiSilently(wikiReturned);
 	}

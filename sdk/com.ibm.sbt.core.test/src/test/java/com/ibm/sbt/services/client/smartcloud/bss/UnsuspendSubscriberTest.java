@@ -15,8 +15,6 @@
  */
 package com.ibm.sbt.services.client.smartcloud.bss;
 
-import java.math.BigInteger;
-
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -33,7 +31,7 @@ public class UnsuspendSubscriberTest extends BaseBssTest {
     public void testUnsuspendScriber() {
     	try {
     		registerCustomer();
-    		BigInteger subscriberId = addSubscriber();
+    		String subscriberId = addSubscriber();
     		
     		SubscriberManagementService subscriberManagement = getSubscriberManagementService();
     		

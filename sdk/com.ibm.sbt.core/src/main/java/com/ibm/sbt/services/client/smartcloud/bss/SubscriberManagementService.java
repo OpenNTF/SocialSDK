@@ -16,7 +16,6 @@
 package com.ibm.sbt.services.client.smartcloud.bss;
 
 import java.io.IOException;
-import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -92,7 +91,7 @@ public class SubscriberManagementService extends BssService {
      * @param subscriberObject
      * @return
      */
-    public BigInteger getSubscriberId(JsonJavaObject subscriberObject) {
+    public String getSubscriberId(JsonJavaObject subscriberObject) {
     	return getId(subscriberObject, PROPERTY_SUBSCRIBER);
     }
     
@@ -147,7 +146,7 @@ public class SubscriberManagementService extends BssService {
      * @return
      * @throws BssException
      */
-    public JsonEntity getSubscriberById(BigInteger subscriberId) throws BssException {
+    public JsonEntity getSubscriberById(String subscriberId) throws BssException {
     	try {
     		String serviceUrl = API_RESOURCE_SUBSCRIBER + "/" + subscriberId;
 			return getEntity(serviceUrl, null, getJsonFeedHandler());
@@ -162,7 +161,7 @@ public class SubscriberManagementService extends BssService {
      * @param subscriberId
      * @throws BssException
      */
-    public void activateSubscriber(BigInteger subscriberId) throws BssException {
+    public void activateSubscriber(String subscriberId) throws BssException {
     	try {
     		String serviceUrl = API_RESOURCE_SUBSCRIBER + "/" + subscriberId;
     		Response response = createData(serviceUrl, (Map<String, String>)null, ActivateSubscriberHeader, (Object)null);
@@ -186,7 +185,7 @@ public class SubscriberManagementService extends BssService {
      * @return
      * @throws BssException
      */
-    public void deleteSubsciber(BigInteger subscriberId) throws BssException {
+    public void deleteSubsciber(String subscriberId) throws BssException {
     	try {
     		String serviceUrl = API_RESOURCE_SUBSCRIBER + "/" + subscriberId;
     		Response response = deleteData(serviceUrl, null, null);
@@ -211,7 +210,7 @@ public class SubscriberManagementService extends BssService {
      */
     public void updateSubscribeProfile(JsonJavaObject subscriberObject) throws BssException {
     	try {
-    		BigInteger subscriberId = getSubscriberId(subscriberObject);
+    		String subscriberId = getSubscriberId(subscriberObject);
     		String serviceUrl = API_RESOURCE_SUBSCRIBER + "/" + subscriberId;
     		Response response = updateData(serviceUrl, null, JsonHeader, subscriberObject, null);
     		
@@ -313,7 +312,7 @@ public class SubscriberManagementService extends BssService {
      * @return
      * @throws BssException
      */
-    public void suspendSubscriber(BigInteger subscriberId, boolean force) throws BssException {
+    public void suspendSubscriber(String subscriberId, boolean force) throws BssException {
     	try {
     		Map<String, String> params = new HashMap<String, String>();
     		params.put("_force", force ? "true" : "false");
@@ -338,7 +337,7 @@ public class SubscriberManagementService extends BssService {
      * @return
      * @throws BssException
      */
-    public void unsuspendSubscriber(BigInteger subscriberId) throws BssException {
+    public void unsuspendSubscriber(String subscriberId) throws BssException {
     	try {
     		String serviceUrl = API_RESOURCE_SUBSCRIBER + "/" + subscriberId;
     		Response response = createData(serviceUrl, (Map<String, String>)null, UnsuspendSubscriberHeader, (Object)null);
@@ -362,7 +361,7 @@ public class SubscriberManagementService extends BssService {
      * @param acceptTOU
      * @throws BssException
      */
-    public JsonEntity entitleSubscriber(BigInteger subscriberId, BigInteger subscriptionId, boolean acceptTOU) throws BssException {
+    public JsonEntity entitleSubscriber(String subscriberId, String subscriptionId, boolean acceptTOU) throws BssException {
        	try {
     		Map<String, String> params = new HashMap<String, String>();
     		params.put("acceptTOU", acceptTOU ? "true" : "false");
@@ -388,7 +387,7 @@ public class SubscriberManagementService extends BssService {
      * @param force
      * @throws BssException
      */
-    public void revokeSubscriber(BigInteger subscriberId, BigInteger seatId, boolean force) throws BssException {
+    public void revokeSubscriber(String subscriberId, String seatId, boolean force) throws BssException {
        	try {
     		Map<String, String> params = new HashMap<String, String>();
     		params.put("_force", force ? "true" : "false");

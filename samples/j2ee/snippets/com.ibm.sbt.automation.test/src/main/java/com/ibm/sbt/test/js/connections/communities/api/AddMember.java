@@ -19,6 +19,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.ibm.commons.util.io.json.JsonJavaObject;
+import com.ibm.sbt.automation.core.test.BaseTest.AuthType;
 import com.ibm.sbt.automation.core.test.connections.BaseCommunitiesTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 
@@ -35,7 +36,7 @@ public class AddMember extends BaseCommunitiesTest {
     @Test
     public void testAddMember() {
     	String id2 = getProperty("sample.id2");
-    	if (environment.isSmartCloud()) {
+    	if (getEnvironment().isSmartCloud()) {
     		id2 = getProperty("smartcloud.id2");
     	}
     	
@@ -47,7 +48,7 @@ public class AddMember extends BaseCommunitiesTest {
         Assert.assertNull("Unexpected error detected on page", json.getString("code"));
         Assert.assertEquals(id2, json.getString("getId"));
         Assert.assertEquals("member", json.getString("getRole"));
-        if (!environment.isSmartCloud()) {
+        if (!getEnvironment().isSmartCloud()) {
         	Assert.assertTrue(getProperty("sample.email2").equalsIgnoreCase(json.getString("getEmail")));
         }
         Assert.assertEquals(id2, json.getString("getUserid"));
@@ -66,13 +67,13 @@ public class AddMember extends BaseCommunitiesTest {
 
     @Test
     public void testAddMemberError2() {
-    	if (environment.isSmartCloud()) {
+    	if (getEnvironment().isSmartCloud()) {
     		// status 403 causes login
     		return;
     	}
 
     	String id1 = getProperty("sample.id1");
-    	if (environment.isSmartCloud()) {
+    	if (getEnvironment().isSmartCloud()) {
     		id1 = getProperty("smartcloud.id1");
     	}
     	

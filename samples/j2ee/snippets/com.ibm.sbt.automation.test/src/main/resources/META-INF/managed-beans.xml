@@ -3,60 +3,266 @@
 	<!-- Credential store physical implementation -->
 	<managed-bean>
 		<managed-bean-name>CredStore</managed-bean-name>
-		<managed-bean-class>com.ibm.sbt.security.credential.store.MemoryStore</managed-bean-class>
+		<managed-bean-class>com.ibm.sbt.security.credential.store.MemoryStore
+		</managed-bean-class>
 		<managed-bean-scope>application</managed-bean-scope>
 	</managed-bean>
 
 	<!-- Default Environment -->
 	<managed-bean>
 		<managed-bean-name>defaultEnvironment</managed-bean-name>
-		<managed-bean-class>com.ibm.sbt.jslibrary.SBTEnvironment</managed-bean-class>
+		<managed-bean-class>com.ibm.sbt.jslibrary.SBTEnvironment
+		</managed-bean-class>
 		<managed-bean-scope>application</managed-bean-scope>
 		<managed-property>
 			<property-name>endpoints</property-name>
-			<value>connections</value>
+			<value>connections,smartcloud</value>
 		</managed-property>
 		<managed-property>
 			<property-name>properties</property-name>
 			<value></value>
 		</managed-property>
 	</managed-bean>
-	
+
+	<managed-bean>
+		<managed-bean-name>connectionsRecordingEnvironment</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.jslibrary.SBTEnvironment
+		</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+		<managed-property>
+			<property-name>endpoints</property-name>
+			<value>connectionsRec:connections,smartcloudRec:smartcloud</value>
+		</managed-property>
+		<managed-property>
+			<property-name>properties</property-name>
+			<value></value>
+		</managed-property>
+	</managed-bean>
+
+	<managed-bean>
+		<managed-bean-name>connectionsMockingEnvironment</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.jslibrary.SBTEnvironment
+		</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+		<managed-property>
+			<property-name>endpoints</property-name>
+			<value>connectionsMock:connections,smartcloudMock:smartcloud</value>
+		</managed-property>
+		<managed-property>
+			<property-name>properties</property-name>
+			<value></value>
+		</managed-property>
+	</managed-bean>
+
+	<managed-bean>
+		<managed-bean-name>smartcloudPassthroughEnvironment</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.jslibrary.SBTEnvironment
+		</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+		<managed-property>
+			<property-name>endpoints</property-name>
+			<value>smartcloud:connections,smartcloud</value>
+		</managed-property>
+		<managed-property>
+			<property-name>properties</property-name>
+			<value></value>
+		</managed-property>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>connectionsPassthroughEnvironment
+		</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.jslibrary.SBTEnvironment
+		</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+		<managed-property>
+			<property-name>endpoints</property-name>
+			<value>connections,smartcloud</value>
+		</managed-property>
+		<managed-property>
+			<property-name>properties</property-name>
+			<value></value>
+		</managed-property>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>smartcloudMockingEnvironment</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.jslibrary.SBTEnvironment
+		</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+		<managed-property>
+			<property-name>endpoints</property-name>
+			<value>smartcloudMock:connections,smartcloudMock:smartcloud</value>
+		</managed-property>
+		<managed-property>
+			<property-name>properties</property-name>
+			<value></value>
+		</managed-property>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>smartcloudRecordingEnvironment</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.jslibrary.SBTEnvironment
+		</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+		<managed-property>
+			<property-name>endpoints</property-name>
+			<value>smartcloudRec:connections,smartcloudRec:smartcloud</value>
+		</managed-property>
+		<managed-property>
+			<property-name>properties</property-name>
+			<value></value>
+		</managed-property>
+	</managed-bean>
+
 	<!-- Connections -->
 	<managed-bean>
-		<managed-bean-name>connections</managed-bean-name>
-		<managed-bean-class>com.ibm.sbt.services.endpoints.ConnectionsBasicEndpoint</managed-bean-class>
+		<managed-bean-name>connectionsBasic</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.services.endpoints.ConnectionsBasicEndpoint
+		</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 		<managed-property>
 			<property-name>url</property-name>
-			<value>https://qs.renovations.com:444/</value>
+			<value>%{connections.url}</value>
 		</managed-property>
 		<managed-property>
-			<property-name>apiVersion</property-name>
-			<value>4.0</value>
+			<property-name>user</property-name>
+			<value>%{connections.username}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>password</property-name>
+			<value>%{connections.password}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>authenticationPage</property-name>
+			<value>/sbt/loginForm.html?endpoint=connections</value>
+		</managed-property>
+		<managed-property>
+			<property-name>credentialStore</property-name>
+			<value>CredStore</value>
 		</managed-property>
 		<managed-property>
 			<property-name>forceTrustSSLCertificate</property-name>
 			<value>true</value>
 		</managed-property>
 	</managed-bean>
-	
-	<!-- SmartCloud Connections -->
+
 	<managed-bean>
-		<managed-bean-name>smartcloud</managed-bean-name>
-		<managed-bean-class>com.ibm.sbt.services.endpoints.SmartCloudBasicEndpoint</managed-bean-class>
+		<managed-bean-name>connectionsMock</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.test.lib.MockEndpoint</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>mockMode</property-name>
+			<value>replay</value>
+		</managed-property>
+		<managed-property>
+			<property-name>innerEndpoint</property-name>
+			<value>connectionsBasic</value>
+		</managed-property>
+	</managed-bean>
+
+	<managed-bean>
+		<managed-bean-name>connectionsRec</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.test.lib.MockEndpoint</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>mockMode</property-name>
+			<value>record</value>
+		</managed-property>
+		<managed-property>
+			<property-name>innerEndpoint</property-name>
+			<value>connectionsBasic</value>
+		</managed-property>
+	</managed-bean>
+
+	<managed-bean>
+		<managed-bean-name>connections</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.test.lib.MockEndpoint</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>mockMode</property-name>
+			<value>passthrough</value>
+		</managed-property>
+		<managed-property>
+			<property-name>innerEndpoint</property-name>
+			<value>connectionsBasic</value>
+		</managed-property>
+	</managed-bean>
+
+
+
+
+	<!-- Smartcloud -->
+	<managed-bean>
+		<managed-bean-name>smartcloudBasic</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.services.endpoints.ConnectionsBasicEndpoint
+		</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 		<managed-property>
 			<property-name>url</property-name>
-			<value>https://apps.na.collabserv.com</value>
+			<value>%{smartcloud.url}</value>
 		</managed-property>
 		<managed-property>
-			<property-name>apiVersion</property-name>
-			<value>3.0</value>
+			<property-name>user</property-name>
+			<value>%{smartcloud.username}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>password</property-name>
+			<value>%{smartcloud.password}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>authenticationPage</property-name>
+			<value>/sbt/loginForm.html?endpoint=smartcloud</value>
+		</managed-property>
+		<managed-property>
+			<property-name>credentialStore</property-name>
+			<value>CredStore</value>
 		</managed-property>
 		<managed-property>
 			<property-name>forceTrustSSLCertificate</property-name>
 			<value>true</value>
 		</managed-property>
-	</managed-bean>	
+	</managed-bean>
+
+	<managed-bean>
+		<managed-bean-name>smartcloudMock</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.test.lib.MockEndpoint</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>mockMode</property-name>
+			<value>replay</value>
+		</managed-property>
+		<managed-property>
+			<property-name>innerEndpoint</property-name>
+			<value>smartcloudBasic</value>
+		</managed-property>
+	</managed-bean>
+
+	<managed-bean>
+		<managed-bean-name>smartcloudRec</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.test.lib.MockEndpoint</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>mockMode</property-name>
+			<value>record</value>
+		</managed-property>
+		<managed-property>
+			<property-name>innerEndpoint</property-name>
+			<value>smartcloudBasic</value>
+		</managed-property>
+	</managed-bean>
+
+	<managed-bean>
+		<managed-bean-name>smartcloud</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.test.lib.MockEndpoint</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>mockMode</property-name>
+			<value>passthrough</value>
+		</managed-property>
+		<managed-property>
+			<property-name>innerEndpoint</property-name>
+			<value>smartcloudBasic</value>
+		</managed-property>
+	</managed-bean>
+
+
+
 </faces-config>

@@ -36,7 +36,7 @@ public class RemoveInvite extends BaseCommunitiesTest {
     public void testRemoveInvite() {
     	String displayName2 = getProperty("sample.displayName2");
     	String id2 = getProperty("sample.id2");
-    	if (environment.isSmartCloud()) {
+    	if (getEnvironment().isSmartCloud()) {
     		displayName2 = getProperty("smartcloud.displayName2");
     		id2 = getProperty("smartcloud.id2");
     	}
@@ -57,7 +57,7 @@ public class RemoveInvite extends BaseCommunitiesTest {
     public void testRemoveInviteInvalidCommunity() {
     	String displayName2 = getProperty("sample.displayName2");
     	String id2 = getProperty("sample.id2");
-    	if (environment.isSmartCloud()) {
+    	if (getEnvironment().isSmartCloud()) {
     		displayName2 = getProperty("smartcloud.displayName2");
     		id2 = getProperty("smartcloud.id2");
     	}
@@ -76,7 +76,7 @@ public class RemoveInvite extends BaseCommunitiesTest {
     public void testRemoveInviteNoCommunity() {
     	String displayName2 = getProperty("sample.displayName2");
     	String id2 = getProperty("sample.id2");
-    	if (environment.isSmartCloud()) {
+    	if (getEnvironment().isSmartCloud()) {
     		displayName2 = getProperty("smartcloud.displayName2");
     		id2 = getProperty("smartcloud.id2");
     	}
@@ -95,7 +95,7 @@ public class RemoveInvite extends BaseCommunitiesTest {
     public void testRemoveInviteInvalidInvitee() {
     	String displayName2 = getProperty("sample.displayName2");
     	String id2 = getProperty("sample.id2");
-    	if (environment.isSmartCloud()) {
+    	if (getEnvironment().isSmartCloud()) {
     		displayName2 = getProperty("smartcloud.displayName2");
     		id2 = getProperty("smartcloud.id2");
     	}
@@ -114,7 +114,7 @@ public class RemoveInvite extends BaseCommunitiesTest {
     public void testRemoveInviteNoInvitee() {
     	String displayName2 = getProperty("sample.displayName2");
     	String id2 = getProperty("sample.id2");
-    	if (environment.isSmartCloud()) {
+    	if (getEnvironment().isSmartCloud()) {
     		displayName2 = getProperty("smartcloud.displayName2");
     		id2 = getProperty("smartcloud.id2");
     	}

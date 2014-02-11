@@ -52,6 +52,8 @@ define(['./declare'],function(declare) {
 				}
 			} else {
 				var _this = this;
+				if (xmlDomCtx.documentElement) xmlDomCtx = xmlDomCtx.documentElement;
+
 				var result = doc.evaluate(this.xpath, xmlDomCtx,
 					function(prefix) {
 						return _this.nsArray[prefix];

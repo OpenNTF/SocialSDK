@@ -15,7 +15,6 @@
  */
 package com.ibm.sbt.services.client.smartcloud.bss;
 
-import java.math.BigInteger;
 import java.util.List;
 
 import org.junit.Assert;
@@ -34,17 +33,17 @@ public class AddSubscriptionTest extends BaseBssTest {
     public void testEntitleSubscriber() {
     	try {
     		// Step 1. Create customer
-    		BigInteger customerId = registerCustomer();
+    		String customerId = registerCustomer();
     		
     		// Step 2. Add Subscriber
-    		BigInteger subscriberId = addSubscriber(customerId);
+    		String subscriberId = addSubscriber(customerId);
 
     		// Step 3. Create "SC Engage" Subscription
-    		BigInteger engageSubscriptionId = createSubscription(customerId, 3, "D0NWLLL", 5);
+    		String engageSubscriptionId = createSubscription(customerId, 3, "D0NWLLL", 5);
     		System.out.println(engageSubscriptionId);
 
     		// Step 4. Create Extra Storage Subscription
-    		BigInteger storageSubscriptionId = createSubscription(customerId, 3, "D100PLL", 5);
+    		String storageSubscriptionId = createSubscription(customerId, 3, "D100PLL", 5);
     		System.out.println(storageSubscriptionId);
 
     		// Step 5. Activate the subscriber

@@ -15,8 +15,6 @@
  */
 package com.ibm.sbt.services.client.smartcloud.bss;
 
-import java.math.BigInteger;
-
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -32,7 +30,7 @@ public class UnassignRoleTest extends BaseBssTest {
     @Test
     public void testUnassignRole() {
     	try {
-    		BigInteger subscriberId = addSubscriber();
+    		String subscriberId = addSubscriber();
     		JsonEntity subscriber = getSubscriberById(subscriberId);
     		String loginName = subscriber.getAsString("Subscriber/Person/EmailAddress");
     		System.out.println(loginName);

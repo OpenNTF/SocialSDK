@@ -25,6 +25,8 @@ import com.ibm.commons.util.io.json.JsonException;
 import com.ibm.commons.util.io.json.JsonJavaFactory;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.commons.util.io.json.JsonParser;
+import com.ibm.sbt.automation.core.environment.TestEnvironment;
+import com.ibm.sbt.automation.core.environment.TestEnvironmentFactory;
 
 /**
  * @author mwallace
@@ -73,6 +75,7 @@ public class JavaScriptPreviewPage extends BaseResultPage {
     }
 
 	protected String getElementTextContent(String divId) {
+        TestEnvironmentFactory.getEnvironment().waitForText("json", 10);
 		WebElement webElement = getWebElement();
         String divText =  webElement.findElement(By.id(divId)).getText();
 		return divText;
@@ -95,6 +98,7 @@ public class JavaScriptPreviewPage extends BaseResultPage {
      * Return the contents of the json div as a list of JSON objects
      */
     public List getJsonList() {
+    	
     	String text= getElementTextContent("json");
         try {
             return (List)JsonParser.fromJson(JsonJavaFactory.instanceEx, text);

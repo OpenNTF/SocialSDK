@@ -46,13 +46,5 @@ public class GetSaveCommunity extends BaseCommunitiesTest {
         community = getCommunity(json.getString("getCommunityUuid"));
         assertCommunityValid(json);
     }
-  
-    /* (non-Javadoc)
-     * @see com.ibm.sbt.automation.core.test.BaseTest#waitForResult(int)
-     */
-    @Override
-    public WebElement waitForResult(int timeout) {
-        return waitForJsonList(3, timeout);
-    }
     
 }

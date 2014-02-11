@@ -45,8 +45,8 @@ public class BlogCreateUpdateDeleteTest extends BaseBlogServiceTest {
 
 			Blog blogReturned = blogService.createBlog(blog);
 			assertNotNull(blogReturned.getTitle());
-			assertEquals(blog.getTitle(), blogReturned.getTitle());
-			assertEquals(blog.getHandle(), blogReturned.getHandle());
+			assertEquals(unRandomize(blog.getTitle()), unRandomize(blogReturned.getTitle()));
+			assertEquals(unRandomize(blog.getHandle()), unRandomize(blogReturned.getHandle()));
 			deleteBlog(blogReturned);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -75,8 +75,8 @@ public class BlogCreateUpdateDeleteTest extends BaseBlogServiceTest {
 			blog.setSummary("New Summary " + System.currentTimeMillis());
 			blogService.updateBlog(blog);
 			Blog blogReturned = blogService.getBlog(blog.getBlogUuid());
-			assertEquals(blogReturned.getTitle(), blog.getTitle());
-			assertEquals(blogReturned.getSummary(), blog.getSummary());
+			assertEquals(unRandomize(blogReturned.getTitle()), unRandomize(blog.getTitle()));
+			assertEquals(unRandomize(blogReturned.getSummary()), unRandomize(blog.getSummary()));
 
 		} catch (Exception e) {
 			fail("Error calling blogService.updateBlog() caused by: "+e.getMessage());

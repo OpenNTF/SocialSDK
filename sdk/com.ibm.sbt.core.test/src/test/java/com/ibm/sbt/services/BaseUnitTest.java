@@ -46,6 +46,16 @@ public abstract class BaseUnitTest {
 			}
 		}
 	}
+	
+	/**
+	 * This method can be used to remove trailing numbers (random or Timestamp in millis)
+	 * to assert the equality of a string compared against mocked data
+	 * @param inputString
+	 * @return
+	 */
+	protected String unRandomize(String inputString){
+		return TestEnvironment.isMockMode()?inputString.replaceAll("-?\\d*$", ""):inputString;
+	}
 
 
 	@After

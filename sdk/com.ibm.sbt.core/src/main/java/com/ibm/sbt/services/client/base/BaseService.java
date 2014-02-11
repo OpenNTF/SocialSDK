@@ -210,7 +210,7 @@ public abstract class BaseService implements Serializable {
 	 * @throws IOException
 	 */
     public Response createData(String serviceUrl, Map<String, String> parameters, Map<String,String> headers, Object content) throws ClientServicesException, IOException {
-        return createData(serviceUrl, parameters, headers, content, dataFormat);
+        return createData(serviceUrl, parameters, headers, content, getDataFormat());
     }
 	
     /**
@@ -258,7 +258,7 @@ public abstract class BaseService implements Serializable {
 	 */
 	public Response createData(String serviceUrl, Map<String, String> parameters, Object content)
 			throws ClientServicesException, IOException {
-		return createData(serviceUrl, parameters, content, dataFormat);
+		return createData(serviceUrl, parameters, content, getDataFormat());
 	}
 
 	/**
@@ -306,7 +306,7 @@ public abstract class BaseService implements Serializable {
             uniqueId = parameters.get(nameParameterId);
         }
 
-        Response r = getClientService().delete(serviceUrl, parameters, headers, dataFormat);
+        Response r = getClientService().delete(serviceUrl, parameters, headers, getDataFormat());
         if (cacheSize > 0 && nameParameterId != null) {
             removeFromCache(uniqueId);
         }
@@ -418,7 +418,7 @@ public abstract class BaseService implements Serializable {
             // TODO shouldn't assume this
         	headers.put("Content-Type", "application/atom+xml");
         }
-        Response result = getClientService().put(serviceUrl, parameters, headers, content, dataFormat);
+        Response result = getClientService().put(serviceUrl, parameters, headers, content, getDataFormat());
         if (cacheSize > 0 && nameParameterId != null) {
             addDataToCache(uniqueId, content);
         }

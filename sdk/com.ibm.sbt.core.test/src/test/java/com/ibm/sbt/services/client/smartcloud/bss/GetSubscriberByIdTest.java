@@ -15,8 +15,6 @@
  */
 package com.ibm.sbt.services.client.smartcloud.bss;
 
-import java.math.BigInteger;
-
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -32,7 +30,7 @@ public class GetSubscriberByIdTest extends BaseBssTest {
     public void testGetCustomer() {
     	try {
     		registerCustomer();
-    		BigInteger subscriberId = addSubscriber();
+    		String subscriberId = addSubscriber();
     		
     		JsonEntity jsonEntity = getSubscriberManagementService().getSubscriberById(subscriberId);
 			System.out.println(jsonEntity.toJsonString());

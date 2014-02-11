@@ -15,7 +15,6 @@
  */
 package com.ibm.sbt.services.client.smartcloud.bss;
 
-import java.math.BigInteger;
 
 /**
  * @author mwallace
@@ -78,15 +77,15 @@ public class SubscriberJsonBuilder extends BaseJsonBuilder {
 	/**
 	 * @return the customerId
 	 */
-	public BigInteger getCustomerId() {
+	public String getCustomerId() {
 		Object value = CustomerId.getValue();
-		return (value == null) ? null : (BigInteger)value;
+		return (value == null) ? null : (String)value;
 	}
 
 	/**
 	 * @param customerId the customerId to set
 	 */
-	public SubscriberJsonBuilder setCustomerId(BigInteger customerId) {
+	public SubscriberJsonBuilder setCustomerId(String customerId) {
 		CustomerId.setValue(customerId);
 		return this;
 	}

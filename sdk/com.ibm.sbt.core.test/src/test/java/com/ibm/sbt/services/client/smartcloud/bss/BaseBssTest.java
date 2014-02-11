@@ -215,6 +215,32 @@ public class BaseBssTest {
     	return null;
     }
     
+    public BigInteger createSubscription(BigInteger customerId, int duration, String partNumber, int quantity) {
+    	try {
+    		SubscriptionManagementService subscriptionManagement = getSubscriptionManagementService();
+    		OrderJsonBuilder order = new OrderJsonBuilder();
+    		order.setCustomerId(customerId)
+    			 .setDurationUnits(SubscriptionManagementService.DurationUnits.YEARS)
+    		     .setDurationLength(duration)
+    		     .setPartNumber(partNumber)
+    		     .setPartQuantity(quantity)
+    		     .setBillingFrequency(BillingFrequency.ARC);
+    		EntityList<JsonEntity> subscriptionList = subscriptionManagement.createSubscription(order);
+    		for (JsonEntity subscription : subscriptionList) {
+    			System.out.println(subscription.toJsonString());
+    		}
+    		return BigInteger.valueOf(subscriptionList.get(0).getAsLong("SubscriptionId"));
+    		
+    	} catch (BssException be) {
+    		JsonJavaObject jsonObject = be.getResponseJson();
+    		System.err.println(jsonObject);
+    		Assert.fail("Error creating subscription because: "+jsonObject);
+    	} catch (Exception e) {
+    		Assert.fail("Error creating subscription caused by: "+e.getMessage());    		
+    	}
+    	return null;
+    }
+    
 	public String getLoginName(BigInteger subscriberId) {
     	try {
     		JsonEntity subscriber = getSubscriberById(subscriberId);
@@ -301,6 +327,20 @@ public class BaseBssTest {
     	}
     }
     
+    public JsonEntity entitleSubscriber(BigInteger subscriberId, BigInteger subscriptionId, boolean acceptTOU) {
+    	try {
+    		SubscriberManagementService subscriberManagement = getSubscriberManagementService();
+			return subscriberManagement.entitleSubscriber(subscriberId, subscriptionId, acceptTOU);
+    	} catch (BssException be) {
+    		JsonJavaObject jsonObject = be.getResponseJson();
+    		System.out.println(jsonObject);
+    		Assert.fail("Error entitling subscriber caused by: "+jsonObject);
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    		Assert.fail("Error entitling subscriber caused by: "+e.getMessage());    		
+    	}
+    	return null;
+    }
 	
     public JsonEntity getSubscriberById(BigInteger subscriberId) {
     	try {

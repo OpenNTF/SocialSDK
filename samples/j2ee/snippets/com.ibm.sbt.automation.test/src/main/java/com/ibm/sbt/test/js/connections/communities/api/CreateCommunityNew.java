@@ -23,6 +23,7 @@ import org.openqa.selenium.WebElement;
 
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.automation.core.test.BaseApiTest;
+import com.ibm.sbt.automation.core.test.BaseTest.AuthType;
 import com.ibm.sbt.automation.core.test.connections.BaseCommunitiesTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 
@@ -42,7 +43,8 @@ public class CreateCommunityNew extends BaseCommunitiesTest {
 
     @Test
     public void testCreateCommunityJson() {
-        JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID, 10000);
+        JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
+
         JsonJavaObject json = previewPage.getJson();
         Assert.assertNull("Unexpected error detected on page", json.getString("code"));
 

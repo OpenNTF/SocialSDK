@@ -15,10 +15,10 @@
  */
 package com.ibm.sbt.test.controls;
 
+import java.util.ArrayList;
+
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
@@ -42,7 +42,10 @@ public class GridTestSuite {
 	@Before
 	public void setup(){
 		setup = new BaseGridTestSetup();
-		setup.createCommunity("TestCommunity", "public", "content", "TestTag, tag2", false);
+		ArrayList<String> tags = new ArrayList<String>();
+		tags.add("tag1"); 
+		tags.add("tag2"); 
+		setup.createCommunity("TestCommunity", "public", "content",tags, false);
 	}
 	
 	@After

@@ -37,10 +37,11 @@ public class CheckProfileCache extends BaseProfilesTest {
 	
     @Test
     public void testProfileCache() {     	
-    	
+    	addSnippetParam("sample.userId1", getProperty("sample.id1"));
+    	addSnippetParam("sample.updateProfileJobTitle","Consultant");
     	JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
-    	 List jsonList = previewPage.getJsonList();
-    	 JsonJavaObject json = (JsonJavaObject)jsonList.get(0);         
+    	List jsonList = previewPage.getJsonList();
+    	JsonJavaObject json = (JsonJavaObject)jsonList.get(0);         
         Assert.assertEquals(1, json.getInt("Cache count after first get operation"));   
         
     }       

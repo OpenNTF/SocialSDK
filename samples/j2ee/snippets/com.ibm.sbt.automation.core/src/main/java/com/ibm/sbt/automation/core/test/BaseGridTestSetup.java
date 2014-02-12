@@ -154,42 +154,21 @@ public class BaseGridTestSetup extends BaseApiTest{
 	 * @param retry
 	 * @return
 	 */
-	public Community createCommunity(String title, String type, String content, String tags, boolean retry) {
+	public Community createCommunity(String title, String type, String content, ArrayList<String> tags, boolean retry) {
         Community community = null;
         try {
-            loginConnections();
-            CommunityService communityService = getCommunityService();
-            
-        	long start = System.currentTimeMillis();
-            community = new Community(communityService, "");
-            community.setTitle(title+start);
-            community.setCommunityType(type);
-            community.setContent(content);
-            community.setTags(tags);
-            String communityUuid = communityService.createCommunity(community);
-            testCommunityID = communityUuid;
-            
-            community = communityService.getCommunity(communityUuid);
-            
-            long duration = System.currentTimeMillis() - start;
-            Trace.log("Created test community: "+communityUuid + " took "+duration+"(ms)");
-        } catch (AuthenticationException pe) {
-        	if (pe.getCause() != null) {
-        		pe.getCause().printStackTrace();
-        	}
-            Assert.fail("Error authenicating: " + pe.getMessage());
-        } catch (CommunityServiceException cse) {
-        	// TODO remove this when we upgrade the QSI
-        	Throwable t = cse.getCause();
-        	if (t instanceof ClientServicesException) {
-        		ClientServicesException csex = (ClientServicesException)t;
-        		int statusCode = csex.getResponseStatusCode();
-        		if (statusCode == 500 && retry) {
-        			return createCommunity(title, type, content, tags, false);
-        		}
-        	}
-            fail("Error creating test community", cse);
-        } 
+    		CommunityService communityService = new CommunityService();
+     		community =  new Community(communityService, "");
+     		community.setTitle("Test Community 1ab" + System.currentTimeMillis()); 
+     		community.setContent("");
+    		community.setCommunityType("public");
+    		community.setTags(tags);
+     		community = community.save(); 
+	 
+	     	} catch (Exception e) {
+	     		System.out.println("Grid Setup Error: cannot create community");
+	     		e.printStackTrace();
+	    	}
         
         return community;
     }

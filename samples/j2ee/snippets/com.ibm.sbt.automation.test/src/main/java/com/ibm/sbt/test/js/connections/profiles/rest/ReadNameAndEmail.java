@@ -30,6 +30,7 @@ public class ReadNameAndEmail extends BaseServiceTest {
 
     @Test
     public void testExpected() {
+    	addSnippetParam("sample.id1", getProperty("sample.userId1"));
         String expected = getProperty("sample.displayName1");
         boolean result = checkExpected("Social_Profiles_REST_Read_Name_and_Email", expected);
         assertTrue(getExpectedErrorMsg(), result);

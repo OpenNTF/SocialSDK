@@ -33,6 +33,7 @@ public class ResponseHeaders extends BaseCommunitiesTest {
     
     @Test
     public void testResponseHeaders() {
+        addSnippetParam("CommunityService.communityUuid", community.getCommunityUuid());
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         JsonJavaObject json = previewPage.getJson();
         Assert.assertNotNull(json.getString("Location"));

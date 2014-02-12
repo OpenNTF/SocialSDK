@@ -33,7 +33,7 @@ public class TestAddMember extends BaseCommunitiesTest {
     @Test
     public void testAddMember() {
     	String id = getProperty("sample.email2");
-    	if (environment.isSmartCloud()) {
+    	if (getEnvironment().isSmartCloud()) {
     		id = getProperty("smartcloud.id2");
     	}
         

@@ -53,26 +53,53 @@ define(
 								
 								if (resp.getResponse().getStatusLine()
 										.getStatusCode() < 300) {
-									var data = this.extractEntity(resp);
 									
+									console.log('serializing');
+									var entityString = this.serializeEntity(resp);
+									console.log('converting to object ' + entityString);
+									var data = this.extractEntity(resp);
+									console.log('creating response');
+
 									
 									var response = {
 										url : url,
 										options : options,
 										data : data,
-										text : null,
-										status : resp.getResponse()
+										text : entityString,
+										status : parseInt(''+resp.getResponse()
 												.getStatusLine()
-												.getStatusCode(),
+												.getStatusCode()),
 										getHeader : function(headerName) {
-											return resp.getResponse()
-													.getFirstHeader(headerName);
+											var h = null;
+											if (headerName && resp.getResponse()
+													.getFirstHeader(headerName)) {
+											var h = ''+resp.getResponse()
+													.getFirstHeader(headerName).getValue();
+											
+											}
+											return h;
 										},
-										xhr : null,
+										xhr : {
+											statusText : ''+resp.getResponse().getStatusLine().getReasonPhrase(),
+											status : parseInt(''+resp.getResponse()
+											.getStatusLine()
+											.getStatusCode()),
+											response: entityString,
+											responseType: '',
+											responseText: entityString,
+											upload: null,
+											withCredentials: false,
+											timeout: 0,
+											readyState: 4
+										},
 										_ioargs : null
 									};
+									
+									console.log('creating promise');
+
 									var promise = new Promise(response);
 									response.response = promise;
+									console.log('returning');
 									return response;
 								} else {
 								}
@@ -120,9 +147,30 @@ define(
 							response.response = promise;
 							return response;
 						},
+						serializeEntity: function(response) {
+							var data = response.getData();
+							console.log('converting ' + data.getClass().toString());
+							
+							var type = response.response.getFirstHeader("Content-Type").getValue();
+							if (type.indexOf('xml') !== -1) {
+								var sw = new Packages.java.io.StringWriter();
+								Packages.com.ibm.commons.xml.DOMUtil.serialize(sw,data,true,true);
+								sw.flush();
+								sw.close();
+								
+								return '' + sw.toString();
+							} else if (type.indexOf('text/html') !== -1) {
+							
+							return ''+ Packages.org.apache.commons.io.IOUtils.toString(data);
+							} else {
+								console.log('ADD PROCESSING FOR ' + type);
+								
+							}
+						},
+						
 						extractEntity : function(response) {
 								var data = response.getData();
-
+								
 								var type = response.response.getFirstHeader("Content-Type").getValue();
 								if (type.indexOf('xml') !== -1) {
 									var sw = new Packages.java.io.StringWriter();
@@ -131,13 +179,20 @@ define(
 									sw.close();
 									
 									var serialized = '' + sw.toString();
+									console.log('converting to xml' + serialized);
 									data  = xml.parse(serialized);
 									data.evaluate = undefined;
 									t = {};
 									t.document = data;
 									wgxpath.install(t);
 
-
+									
+								} else if (type.indexOf('text/html') !== -1) {
+									if (data)
+										data = ''+ Packages.org.apache.commons.io.IOUtils.toString(data).toString();
+									if(data)
+										data = undefined;
+									console.log('converting to text' + data);
 								} else {
 									console.log('ADD PROCESSING FOR ' + type);
 									

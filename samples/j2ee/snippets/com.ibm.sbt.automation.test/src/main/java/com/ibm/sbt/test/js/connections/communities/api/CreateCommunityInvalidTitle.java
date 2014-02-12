@@ -22,6 +22,7 @@ import org.junit.Test;
 import org.openqa.selenium.WebElement;
 
 import com.ibm.commons.util.io.json.JsonJavaObject;
+import com.ibm.sbt.automation.core.test.BaseTest.AuthType;
 import com.ibm.sbt.automation.core.test.connections.BaseCommunitiesTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 
@@ -41,7 +42,8 @@ public class CreateCommunityInvalidTitle extends BaseCommunitiesTest {
 
     @Test
     public void testCreateCommunityInvalidTitle() {
-        JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID, 10000);
+        JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
+
         List jsonList = previewPage.getJsonList();
         Assert.assertEquals(2, jsonList.size());
         JsonJavaObject json = (JsonJavaObject)jsonList.get(0);
@@ -52,13 +54,5 @@ public class CreateCommunityInvalidTitle extends BaseCommunitiesTest {
         Assert.assertEquals("A community with the requested name already exists, choose a different name and resubmit.", message);
         deleteCommunity(communityUuid);
     }
-
-    /* (non-Javadoc)
-     * @see com.ibm.sbt.automation.core.test.BaseTest#waitForResult(int)
-     */
-    @Override
-    public WebElement waitForResult(int timeout) {
-        return waitForJsonList(2, timeout);
-    }
-
+    
 }

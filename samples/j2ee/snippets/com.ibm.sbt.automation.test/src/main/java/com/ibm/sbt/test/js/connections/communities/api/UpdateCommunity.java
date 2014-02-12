@@ -57,7 +57,7 @@ public class UpdateCommunity extends BaseCommunitiesTest {
     
     @Test
     public void testUpdateCommunityDuplicate(){
-    	if (environment.isSmartCloud()) {
+    	if (getEnvironment().isSmartCloud()) {
     		return;
     	}
     	

@@ -35,7 +35,7 @@ public class RemoveMember extends BaseCommunitiesTest {
     @Test
     public void testRemoveMember() {
     	String id = getProperty("sample.email2");
-    	if (environment.isSmartCloud()) {
+    	if (getEnvironment().isSmartCloud()) {
     		id = getProperty("smartcloud.id2");
     	}
         addMember(community, id, "member");

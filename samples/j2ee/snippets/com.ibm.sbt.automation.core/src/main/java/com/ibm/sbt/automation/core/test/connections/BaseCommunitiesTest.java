@@ -75,7 +75,6 @@ public class BaseCommunitiesTest extends FlexibleTest {
     
     @Before
     public void createCommunity() {
-        if (createCommunity) {
         	String type = "public";
         	if (getEnvironment().isSmartCloud()) {
         		type = "private";
@@ -83,7 +82,6 @@ public class BaseCommunitiesTest extends FlexibleTest {
         	String name = createCommunityName();
         	//System.out.println(name);
             community = createCommunity(name, type, name, "tag1,tag2,tag3");
-        }
     }
     
 	public String getProperty(String name) {

@@ -28,7 +28,7 @@ import com.ibm.sbt.services.client.base.JsonEntity;
 public class SuspendSubscriptionTest extends BaseBssTest {
 
     @Test
-    public void testSuspendCustomer() {
+    public void testSuspendSubscription() {
     	try {
     		registerCustomer();
     		String subscriptionId = createSubscription();

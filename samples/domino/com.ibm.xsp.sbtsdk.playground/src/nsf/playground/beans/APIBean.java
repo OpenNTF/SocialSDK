@@ -165,6 +165,8 @@ public abstract class APIBean extends AssetBean {
 		fixUriParameters(item);
 		// Load the Query parameters
 		fixQueryParameters(item);
+		// Load the Header parameters
+		fixHeaders(item);
 		// Load the full documentation URL
 		fixDocUrl(item,baseDocUrl);
 	}
@@ -191,6 +193,13 @@ public abstract class APIBean extends AssetBean {
 		if(!(params instanceof ArrayObject)) {
 			params = new ArrayObject();
 			((ObjectObject)o).put("queryParameters",params);
+		}
+	}
+	protected void fixHeaders(ObjectObject o) throws Exception {
+		FBSValue params = o.get("headers");
+		if(!(params instanceof ArrayObject)) {
+			params = new ArrayObject();
+			((ObjectObject)o).put("headers",params);
 		}
 	}
 	protected void fixDocUrl(ObjectObject o, String baseDocUrl) throws Exception {
@@ -267,6 +276,13 @@ public abstract class APIBean extends AssetBean {
 		if(a2.isArray()) {
 			for(int i=0; i<a2.getArrayLength(); i++) {
 				a.addArrayValue(a2.getArrayValue(i));
+			}
+		}
+		
+		FBSValue a3 = (FBSValue)item.get("headers");
+		if(a3.isArray()) {
+			for(int i=0; i<a3.getArrayLength(); i++) {
+				a.addArrayValue(a3.getArrayValue(i));
 			}
 		}
 

@@ -17,7 +17,7 @@
 /**
  * 
  */
-define([ "../../declare", "../../lang", "../../stringUtil", "../../log", "../dialog/Dialog", ], function(
+define([ "../../declare", "../../lang", "../../stringUtil", "../../log", "../dialog/Dialog" ], function(
 		declare, lang, stringUtil, log, Dialog) {
 
 	/*

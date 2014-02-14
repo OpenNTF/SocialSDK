@@ -22,9 +22,8 @@ define([ "../../../declare", "../../../lang", "../../../dom",
 		 "../../../text!./templates/ShareFile.html",
 		 "../../../controls/TypeAhead",
 		 "../../../stringUtil",
-		 "../../../connections/FileService",
 		 "../../../connections/CommunityService"],
-		function(declare, lang, dom, nls, BaseDialogContent, FileService, ShareFile,TypeAhead,stringUtil,FileService,CommunityService) {
+		function(declare, lang, dom, nls, BaseDialogContent, FileService, ShareFile,TypeAhead,stringUtil,CommunityService) {
 
 	/**
 	 * Widget which can be used to upload a file.

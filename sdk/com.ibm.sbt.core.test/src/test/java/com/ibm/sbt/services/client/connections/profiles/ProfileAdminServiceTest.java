@@ -1,17 +1,16 @@
 package com.ibm.sbt.services.client.connections.profiles;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+
 import com.ibm.sbt.services.BaseUnitTest;
-import com.ibm.sbt.services.client.connections.profiles.ProfileAdminService;
-import com.ibm.sbt.services.client.connections.profiles.Profile;
 
 /**
  * Tests for the java connections Profile API by calling Connections server using configuration in
@@ -22,12 +21,19 @@ import com.ibm.sbt.services.client.connections.profiles.Profile;
  */
 public class ProfileAdminServiceTest extends BaseUnitTest {
 
+	protected ProfileAdminService profileAdminService;
+
+	@Before
+	public void initProfileServiceTest() {
+		if (profileAdminService==null){
+			profileAdminService = new ProfileAdminService();
+		}
+	}
+	
 	@Test
 	public final void testCreateAndDeleteProfile() throws Exception{
 //		ProfilesDataGenerator pdc = new ProfilesDataGenerator()
 //		pdc.createProfile();
-		ProfileAdminService profileAdminService = new ProfileAdminService();
-
 		Profile profile = profileAdminService.getProfile("testUser@renovations.com");
 		
 		profile.setAsString("guid", "testUser"+System.currentTimeMillis());
@@ -45,13 +51,9 @@ public class ProfileAdminServiceTest extends BaseUnitTest {
 
 	}
 
-
 	@Ignore
 	@Test
 	public final void testDeleteProfile() throws Exception {
-		ProfileAdminService profileAdminService = new ProfileAdminService();
-
-		ProfileService profileService = new ProfileService();
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("name", "testUser");
 		ProfileList profileEntries = profileAdminService.searchProfiles(parameters);

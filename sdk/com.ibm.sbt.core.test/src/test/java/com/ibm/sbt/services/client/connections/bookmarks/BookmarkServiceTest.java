@@ -23,6 +23,7 @@ import static org.junit.Assert.fail;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import com.ibm.sbt.services.BaseUnitTest;
@@ -33,10 +34,18 @@ import com.ibm.sbt.services.BaseUnitTest;
  */
 public class BookmarkServiceTest extends BaseUnitTest {
 
+	protected BookmarkService service;
+	
+	@Before
+	public void initBookmarkServiceTest() {
+		if (service==null) {
+			service = new BookmarkService();
+		}
+	}
+
 	@Test
 	public void testGetAllBookmarks() {
 		try {
-			BookmarkService service = new BookmarkService();
 			BookmarkList list = service.getAllBookmarks();
 			assertValid(list);
 			for (Bookmark bookmark : list) {
@@ -51,7 +60,6 @@ public class BookmarkServiceTest extends BaseUnitTest {
 	@Test
 	public void testGetPrivateBookmarks() {
 		try {
-			BookmarkService service = new BookmarkService();
 			Map<String, String> params = new HashMap<String, String>();
 			params.put("access", "private");
 			BookmarkList list = service.getAllBookmarks();
@@ -68,7 +76,6 @@ public class BookmarkServiceTest extends BaseUnitTest {
 	@Test
 	public void testGetMyBookmarks() {
 		try {
-			BookmarkService service = new BookmarkService();
 			Map<String, String> params = new HashMap<String, String>();
 			params.put("email", "***REMOVED***@renovations.com");
 			BookmarkList list = service.getAllBookmarks();
@@ -85,7 +92,6 @@ public class BookmarkServiceTest extends BaseUnitTest {
 	@Test
 	public void testGetPopularBookmarks() {
 		try {
-			BookmarkService service = new BookmarkService();
 			BookmarkList list = service.getPopularBookmarks();
 			assertNotNull("Expected non null BookmarkList", list);
 			for (Bookmark bookmark : list) {
@@ -100,7 +106,6 @@ public class BookmarkServiceTest extends BaseUnitTest {
 	@Test
 	public void testGetMyNotifications() {
 		try {
-			BookmarkService service = new BookmarkService();
 			BookmarkList list = service.getMyNotifications();
 			assertNotNull("Expected non null BookmarkList", list);
 			for (Bookmark bookmark : list) {
@@ -115,7 +120,6 @@ public class BookmarkServiceTest extends BaseUnitTest {
 	@Test
 	public void testGetMySentNotifications() {
 		try {
-			BookmarkService service = new BookmarkService();
 			BookmarkList list = service.getMySentNotifications();
 			assertNotNull("Expected non null BookmarkList", list);
 			for (Bookmark bookmark : list) {
@@ -159,5 +163,4 @@ public class BookmarkServiceTest extends BaseUnitTest {
 		assertEquals("Invalid bookmark click count", clicks, bookmark.getClickCount());
 		assertEquals("Invalid bookmark link count", links, bookmark.getLinkCount());
 	}
-	
 }

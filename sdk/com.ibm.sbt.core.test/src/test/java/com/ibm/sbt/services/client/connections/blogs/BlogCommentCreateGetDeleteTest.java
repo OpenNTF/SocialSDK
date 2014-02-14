@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ?? Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -19,6 +19,8 @@ package com.ibm.sbt.services.client.connections.blogs;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
+
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -26,11 +28,11 @@ import org.junit.Test;
  * @author Swati Singh
  *
  */
-public class CommentCreateGetDeleteTest extends BaseBlogServiceTest {
+public class BlogCommentCreateGetDeleteTest extends BaseBlogServiceTest {
+
 	@Before
 	public void createCommentInit() {
 		comment = createBlogComment();
-		
 	}
 
 	@Test
@@ -48,11 +50,11 @@ public class CommentCreateGetDeleteTest extends BaseBlogServiceTest {
 	@Test
 	public void GetComment() {
 		try {
-			
 			Comment commentGot = blogService.getBlogComment(blog.getHandle(), comment.getCommentUuid());
 			
 			assertEquals(comment.getTitle(), commentGot.getTitle());
 			assertEquals(comment.getContent(), commentGot.getContent());
+			deleteBlogComment(comment);
 		} catch (Exception e) {
 			fail("Error calling blogService.getBlogComment() caused by: "+e.getMessage());
 		}
@@ -68,6 +70,10 @@ public class CommentCreateGetDeleteTest extends BaseBlogServiceTest {
 			assertNotNull(e.getMessage());
 		}
 	}
-	
 
+	@After
+	public void cleanUp() {
+		deleteBlogPost(blogPost);
+		deleteBlog(blog);
+	}
 }

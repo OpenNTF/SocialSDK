@@ -26,6 +26,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Date;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import com.ibm.commons.util.io.json.JsonJavaObject;
@@ -33,12 +34,19 @@ import com.ibm.sbt.services.BaseUnitTest;
 import com.ibm.sbt.services.client.SBTServiceException;
 
 public class ActivityStreamServiceTest extends BaseUnitTest {
-
 	
+	protected ActivityStreamService service;
+	
+	@Before
+	public void initBlogServiceTest() {
+		if (service==null) {
+			service = new ActivityStreamService();
+		}
+	}
+
 	@Test
 	public final void testGetUpdatesFromUser() {
 		try {
-			ActivityStreamService service = new ActivityStreamService();
 			ActivityStreamEntityList updates = service
 					.getUpdatesFromUser("0EE5A7FA-3434-9A59-4825-7A7000278DAA");
 
@@ -54,8 +62,6 @@ public class ActivityStreamServiceTest extends BaseUnitTest {
 	@Test
 	public final void testGetUpdatesFromCommunity() {
 		try {
-			ActivityStreamService service = new ActivityStreamService();
-
 			ActivityStreamEntityList updates = service
 					.getUpdatesFromCommunity("b4f12458-3cc2-49d2-9cf3-08d3fcbd81d5");
 
@@ -98,8 +104,6 @@ public class ActivityStreamServiceTest extends BaseUnitTest {
 			postPayload.put("object", object);
 			System.err.println(postPayload.toString());
 
-			ActivityStreamService service = new ActivityStreamService();
-
 			service.postEntry(postPayload);
 
 			ActivityStreamEntityList updates = service.getAllUpdates();
@@ -121,8 +125,6 @@ public class ActivityStreamServiceTest extends BaseUnitTest {
 	public final void testSearchForTags() {
 		try {
 			String searchfortag = "test";
-			ActivityStreamService service = new ActivityStreamService();
-
 			ActivityStreamEntityList updates = service.searchByTags(searchfortag);
 
 			for (ActivityStreamEntity asentry : updates) {

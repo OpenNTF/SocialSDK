@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-package com.ibm.sbt.services.client.connections.blogs;
+package com.ibm.sbt.services.client.connections.activity;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -22,19 +22,13 @@ import org.junit.runners.Suite.SuiteClasses;
 
 /**
  * 
- * @author Swati Singh
+ * @author Carlos Manias
  *
  */
 @RunWith(Suite.class)
 @SuiteClasses({ 
-	BlogCommentCreateGetDeleteTest.class,
-	BlogGetUpdateTest.class, 
-	BlogPostCreateTest.class,
-	BlogPostDeleteTest.class,
-	BlogPostGetUpdateLikeUnlikeTest.class,
-	BlogSerializationTests.class,
-	BlogServiceGetTests.class,
+	ActivityServiceGetTest.class,
+	ActivityServiceCreateUpdateDeleteTest.class
 })
-public class BlogServiceTestSuite {
-
+public class ActivityServiceTestSuite {
 }

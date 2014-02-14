@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * �� Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -17,11 +17,8 @@
 package com.ibm.sbt.services.client.connections.forums;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-import java.util.ArrayList;
-import java.util.List;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,33 +27,11 @@ import org.junit.Test;
  * @author Swati Singh
  *
  */
-public class ForumCRUDTest extends BaseForumServiceTest {
+public class ForumGetUpdateTest extends BaseForumServiceTest {
 
 	@Before
 	public void initForum() {
 		forum = createForum();
-	}
-
-	@Test
-	public void CreateForumTest() {
-		try {
-			Forum forum = new Forum(forumService);
-			forum.setTitle("Test forum title" + System.currentTimeMillis());
-			forum.setContent("Test forum content");
-			List<String> tags = new ArrayList<String>();
-			tags.add("tag1"); 
-			tags.add("tag2"); 
-			forum.setTags(tags);
-
-			Forum forumReturned = forumService.createForum(forum);
-			assertNotNull(forumReturned.getTitle());
-			assertEquals(forum.getTitle(), forumReturned.getTitle());
-			assertEquals(forum.getContent(), forumReturned.getContent());
-			deleteForum(forumReturned);
-		} catch (Exception e) {
-			fail("Error calling forumService.createForum() caused by: "+e.getMessage());
-		}
-
 	}
 
 	@Test
@@ -85,30 +60,8 @@ public class ForumCRUDTest extends BaseForumServiceTest {
 		}
 	}
 
-
-	@Test
-	public void deleteForum() throws Exception {
-		try {
-			Forum createdForum = createForum();
-			Forum forumGot = forumService.getForum(createdForum.getForumUuid());
-			assertEquals(createdForum.getTitle(), forumGot.getTitle());
-			forumService.removeForum(createdForum.getForumUuid());
-			forumService.getForum(createdForum.getForumUuid());
-		}
-		catch(Exception e) {
-			assertNotNull(e.getMessage());
-		}
-	}
-
 	@After
 	public void deleteForumOnExit() {
-		try {
-			forumService.removeForum(forum.getForumUuid());
-		} catch (ForumServiceException e) {
-			fail("Error calling forumService.removeForum() caused by: "+e.getMessage());
-		}
-
+		deleteForum(forum);
 	}
-
-
 }

@@ -63,7 +63,7 @@ define([ "../../../declare",
 				window.open(src);
 				
 			}
-		},
+		}
 		
 	});
 

@@ -21,6 +21,7 @@ import org.junit.Test;
 import org.openqa.selenium.WebElement;
 
 import com.ibm.commons.util.io.json.JsonJavaObject;
+import com.ibm.sbt.automation.core.test.BaseTest.AuthType;
 import com.ibm.sbt.automation.core.test.connections.BaseCommunitiesTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 
@@ -39,23 +40,16 @@ public class Community extends BaseCommunitiesTest {
 
     @Test
     public void testCommunity() {
-        AuthType authType = environment.isSmartCloud() ? AuthType.AUTO_DETECT : AuthType.NONE;
+        AuthType authType = getEnvironment().isSmartCloud() ? AuthType.AUTO_DETECT : AuthType.NONE;
         setAuthType(authType);
         addSnippetParam("CommunityService.communityUuid", community.getCommunityUuid());
         
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
+        
         List jsonList = previewPage.getJsonList();
         for (int i=0; i<jsonList.size(); i++) {
             assertCommunityValid((JsonJavaObject)jsonList.get(i));
         }
-    }
-    
-    /* (non-Javadoc)
-     * @see com.ibm.sbt.automation.core.test.BaseTest#waitForResult(int)
-     */
-    @Override
-    public WebElement waitForResult(int timeout) {
-        return waitForJsonList(2, timeout);
     }
 
 }

@@ -107,7 +107,7 @@ public class FileServiceTest extends BaseUnitTest {
 	@Test
 	public void testGetPublicFiles() throws Exception {
 		//TODO: fix for smartcloud
-		if (TestEnvironment.isSmartCloud()) return;
+		if (TestEnvironment.isSmartCloudEnvironment()) return;
 		List<File> fileEntries = fileService.getPublicFiles(null);
 		if (fileEntries != null && !fileEntries.isEmpty()) {
 			for (File fEntry : fileEntries) {
@@ -139,7 +139,7 @@ public class FileServiceTest extends BaseUnitTest {
 	@Test
 	public void pinAndUnpinFolder() throws Exception{
 		//TODO: fix for smartcloud
-		if (TestEnvironment.isSmartCloud()) return;
+		if (TestEnvironment.isSmartCloudEnvironment()) return;
 
 		//Pin the first folder in My Folders
 		List<File> fileEntries = fileService.getMyFolders(null);
@@ -180,7 +180,7 @@ public class FileServiceTest extends BaseUnitTest {
 	@Test
 	public void testGetFilesInFolder() throws Exception {
 		//TODO: fix for smartcloud
-		if (TestEnvironment.isSmartCloud()) return;
+		if (TestEnvironment.isSmartCloudEnvironment()) return;
 
 		FileList listOfFolders = fileService.getMyFolders();
 		String testFolderId = listOfFolders.get(0).getFileId();
@@ -195,7 +195,7 @@ public class FileServiceTest extends BaseUnitTest {
 	@Test
 	public void testGetAllUserFiles() throws Exception {
 		//TODO: fix for smartcloud
-		if (TestEnvironment.isSmartCloud()) return;
+		if (TestEnvironment.isSmartCloudEnvironment()) return;
 
 		List<File> fileEntries = fileService.getAllUserFiles(TestEnvironment.getCurrentUserUuid());
 		if (fileEntries != null && !fileEntries.isEmpty()) {
@@ -220,7 +220,7 @@ public class FileServiceTest extends BaseUnitTest {
 	@Test 
 	public void testGetFilesComments() throws Exception {
 		//TODO: fix for smartcloud
-		if (TestEnvironment.isSmartCloud()) return;
+		if (TestEnvironment.isSmartCloudEnvironment()) return;
 		
 		FileList files = fileService.getPublicFiles();
 		String fileId = files.get(0).getFileId();
@@ -261,7 +261,7 @@ public class FileServiceTest extends BaseUnitTest {
 	@Test
 	public void testLock() throws Exception {
 		//TODO: fix for smartcloud
-		if (TestEnvironment.isSmartCloud()) return;
+		if (TestEnvironment.isSmartCloudEnvironment()) return;
 
 		FileList listOfFiles = fileService.getMyFiles();
 		File file = listOfFiles.get(0);
@@ -278,7 +278,7 @@ public class FileServiceTest extends BaseUnitTest {
 	@Test 
 	public void testUnlock() throws Exception {
 		//TODO: fix for smartcloud
-		if (TestEnvironment.isSmartCloud()) return;
+		if (TestEnvironment.isSmartCloudEnvironment()) return;
 
 		FileList listOfFiles = fileService.getMyFiles();
 		File file = listOfFiles.get(0);
@@ -295,7 +295,7 @@ public class FileServiceTest extends BaseUnitTest {
 	@Test
 	public void testPinAndUnPin() throws Exception {
 		//TODO: fix for smartcloud
-		if (TestEnvironment.isSmartCloud()) return;
+		if (TestEnvironment.isSmartCloudEnvironment()) return;
 
 		FileList listOfFiles = fileService.getMyFiles();
 		String testFileId = listOfFiles.get(0).getFileId();
@@ -433,7 +433,7 @@ public class FileServiceTest extends BaseUnitTest {
 	@Test
 	public void testGetFolder() throws Exception {
 		//TODO: fix for smartcloud
-		if (TestEnvironment.isSmartCloud()) return;
+		if (TestEnvironment.isSmartCloudEnvironment()) return;
 
 		FileList folders = fileService.getMyFolders();
 		if(folders != null) {

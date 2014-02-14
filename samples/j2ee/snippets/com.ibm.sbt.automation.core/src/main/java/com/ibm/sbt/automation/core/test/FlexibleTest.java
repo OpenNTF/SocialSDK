@@ -1,24 +1,35 @@
 package com.ibm.sbt.automation.core.test;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Properties;
 
 import javax.management.RuntimeErrorException;
 
+import org.apache.xml.utils.UnImplNode;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import com.ibm.commons.runtime.Application;
 import com.ibm.commons.runtime.Context;
+import com.ibm.commons.runtime.RuntimeFactory;
+import com.ibm.commons.runtime.impl.app.RuntimeFactoryStandalone;
+import com.ibm.commons.runtime.util.ParameterProcessor;
 import com.ibm.javascript.units.AbstractRhinoTest;
 import com.ibm.javascript.units.BaseRhinoTest;
+import com.ibm.sbt.automation.core.environment.TestEnvironment;
+import com.ibm.sbt.automation.core.environment.TestEnvironmentFactory;
 import com.ibm.sbt.automation.core.test.BaseTest.AuthType;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 import com.ibm.sbt.automation.core.test.pageobjects.ResultPage;
 import com.ibm.sbt.jslibrary.SBTEnvironment.Endpoint;
 import com.ibm.sbt.playground.assets.jssnippets.JSSnippet;
+import com.ibm.sbt.security.authentication.AuthenticationException;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
 import com.ibm.sbt.test.lib.MockEndpoint;
 
@@ -46,9 +57,33 @@ public class FlexibleTest {
 		return delegate.executeSnippet(snippetId);
 	}
 
+	public TestEnvironment getEnvironment() {
+		// TODO Auto-generated method stub
+		return delegate.getEnvironment();
+	}
+
+	protected void addSnippetParam(String string, String communityUuid) {
+		delegate.addSnippetParam(string, communityUuid);
+	}
+	
+	
+
 }
 
 class EmbeddedDelegate extends AbstractRhinoTest implements TestDelegate {
+	
+	public void loadProperties(){
+		if (properties.isEmpty()) {
+			try {
+				properties.load(new FileInputStream(new File(
+						"config/test.properties")));
+			} catch (Exception e) {
+			}
+		}
+	}
+
+	
+	private HashMap<String, String> params = new HashMap<String, String>();
 
 	@Override
 	public void setAuthType(AuthType autoDetect) {
@@ -80,7 +115,6 @@ class EmbeddedDelegate extends AbstractRhinoTest implements TestDelegate {
 				"__bdy.appendChild(__testcontent);\n" +
 				"};\n" ;
 
-		
 		super.executeScript(script, "injecting_html");
 		
 		}
@@ -128,8 +162,11 @@ class EmbeddedDelegate extends AbstractRhinoTest implements TestDelegate {
 	private void checkSnippet(JSSnippet snippet) throws Exception {
 		if (snippet != null) {
 			String script = snippet.getJs();
+			
+			String parameterized  = ParameterProcessor.process(script,params);
+			
 			if (script != null) {
-				executeScript(script, "test");
+				executeScript(parameterized, "test");
 			}
 		}
 	}
@@ -179,6 +216,17 @@ class EmbeddedDelegate extends AbstractRhinoTest implements TestDelegate {
 		//Assert.assertTrue(EndpointFactory.getEndpoint("connections") instanceof MockEndpoint);
 
 	}
+
+	@Override
+	public TestEnvironment getEnvironment() {
+		// TODO Auto-generated method stub
+		return TestEnvironmentFactory.getEnvironment();
+	}
+
+	@Override
+	public void addSnippetParam(String parameter, String value) {
+		this.params.put(parameter, value);
+	}
 }
 
 class SeleniumDelegate extends BaseApiTest implements TestDelegate {
@@ -190,19 +238,31 @@ class SeleniumDelegate extends BaseApiTest implements TestDelegate {
 
 	@Override
 	public void setupDelegate() {
-		super.setupTest();
+		try {
+			super.setupTest();
+		} catch (AuthenticationException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
+	@Override
+	public TestEnvironment getEnvironment() {
+		return environment;
+	}
+	
 }
 
 interface TestDelegate {
 
 	void setAuthType(AuthType autoDetect);
 
+	void addSnippetParam(String parameter, String value);
+
 	void teardownDelegate();
 
 	void setupDelegate();
 
 	JavaScriptPreviewPage executeSnippet(String snippetId);
-
+	
+	TestEnvironment getEnvironment();
 }

@@ -35,7 +35,7 @@ public class CreateInvite extends BaseCommunitiesTest {
     public void testCreateInvite() {
     	String displayName2 = getProperty("sample.displayName2");
     	String id2 = getProperty("sample.id2");
-    	if (environment.isSmartCloud()) {
+    	if (getEnvironment().isSmartCloud()) {
     		displayName2 = getProperty("smartcloud.displayName2");
     		id2 = getProperty("smartcloud.id2");
     	}
@@ -55,7 +55,7 @@ public class CreateInvite extends BaseCommunitiesTest {
     @Test
     public void testCreateInviteInvalidCommunity() {
     	String id2 = getProperty("sample.id2");
-    	if (environment.isSmartCloud()) {
+    	if (getEnvironment().isSmartCloud()) {
     		id2 = getProperty("smartcloud.id2");
     	}
     	
@@ -82,7 +82,7 @@ public class CreateInvite extends BaseCommunitiesTest {
     @Test
     public void testCreateInviteNoCommunity() {
     	String id2 = getProperty("sample.id2");
-    	if (environment.isSmartCloud()) {
+    	if (getEnvironment().isSmartCloud()) {
     		id2 = getProperty("smartcloud.id2");
     	}
     	

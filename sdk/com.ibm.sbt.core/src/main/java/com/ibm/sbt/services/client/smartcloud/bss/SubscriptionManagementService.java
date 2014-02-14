@@ -16,7 +16,6 @@
 package com.ibm.sbt.services.client.smartcloud.bss;
 
 import java.io.IOException;
-import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -93,7 +92,7 @@ public class SubscriptionManagementService extends BssService {
      * @param subscriptionObject
      * @return
      */
-    public BigInteger getSubscriptionId(JsonJavaObject subscriptionObject) {
+    public String getSubscriptionId(JsonJavaObject subscriptionObject) {
     	return getId(subscriptionObject, PROPERTY_SUBSCRIPTION);
     }
     
@@ -149,7 +148,7 @@ public class SubscriptionManagementService extends BssService {
      * @return
      * @throws BssException
      */
-    public JsonEntity getSubscriptionById(BigInteger subscriptionId) throws BssException {
+    public JsonEntity getSubscriptionById(String subscriptionId) throws BssException {
     	try {
     		String serviceUrl = API_RESOURCE_SUBSCRIPTION + "/" + subscriptionId;
 			return getEntity(serviceUrl, null, getJsonFeedHandler());
@@ -224,7 +223,7 @@ public class SubscriptionManagementService extends BssService {
      * @return
      * @throws BssException
      */
-    public void suspendSubscription(BigInteger subscriptionId) throws BssException {
+    public void suspendSubscription(String subscriptionId) throws BssException {
     	try {
     		String serviceUrl = API_RESOURCE_SUBSCRIPTION + "/" + subscriptionId;
     		Response response = createData(serviceUrl, null, SuspendSubscriptionHeader, (Object)null);
@@ -250,7 +249,7 @@ public class SubscriptionManagementService extends BssService {
      * @return
      * @throws BssException
      */
-    public void unsuspendSubscription(BigInteger subscriptionId) throws BssException {
+    public void unsuspendSubscription(String subscriptionId) throws BssException {
     	try {
     		String serviceUrl = API_RESOURCE_SUBSCRIPTION + "/" + subscriptionId;
     		Response response = createData(serviceUrl, (Map<String, String>)null, UnsuspendSubscriptionHeader, (Object)null);
@@ -276,7 +275,7 @@ public class SubscriptionManagementService extends BssService {
      * @return
      * @throws BssException
      */
-    public void cancelSubscription(BigInteger subscriptionId) throws BssException {
+    public void cancelSubscription(String subscriptionId) throws BssException {
     	try {
     		String serviceUrl = API_RESOURCE_SUBSCRIPTION + "/" + subscriptionId;
     		Response response = deleteData(serviceUrl, null, null);
@@ -302,7 +301,7 @@ public class SubscriptionManagementService extends BssService {
      */
     public void updateSubscription(JsonJavaObject subscriptionObject) throws BssException {
     	try {
-    		BigInteger subscriptionId = getSubscriptionId(subscriptionObject);
+    		String subscriptionId = getSubscriptionId(subscriptionObject);
     		String serviceUrl = API_RESOURCE_SUBSCRIPTION + "/" + subscriptionId;
     		Response response = updateData(serviceUrl, null, JsonHeader, subscriptionObject, null);
     		

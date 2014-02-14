@@ -21,6 +21,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.ibm.commons.util.io.json.JsonJavaObject;
+import com.ibm.sbt.automation.core.test.BaseTest.AuthType;
 import com.ibm.sbt.automation.core.test.connections.BaseCommunitiesTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 import com.ibm.sbt.services.client.connections.communities.Invite;
@@ -43,7 +44,7 @@ public class GetAllInvites extends BaseCommunitiesTest {
     	String name2 = getProperty("sample.displayName2");
     	String userid2 = getProperty("sample.userId2");
     	String email2 = getProperty("sample.email2");
-    	if (environment.isSmartCloud()) {
+    	if (getEnvironment().isSmartCloud()) {
         	name2 = getProperty("smartcloud.displayName2");
         	userid2 = getProperty("smartcloud.userId2");
         	email2 = getProperty("smartcloud.email2");

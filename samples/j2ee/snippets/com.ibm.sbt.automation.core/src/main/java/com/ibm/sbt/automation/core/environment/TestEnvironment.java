@@ -1,6 +1,6 @@
 package com.ibm.sbt.automation.core.environment;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 import static org.junit.Assert.fail;
 
 import java.io.IOException;
@@ -68,7 +68,7 @@ import com.ibm.sbt.services.endpoints.EndpointFactory;
  * 
  * @date Jan 10, 2013
  */
-public abstract class TestEnvironment {
+public abstract class TestEnvironment extends com.ibm.sbt.test.lib.TestEnvironment{
 
 	private WebDriver webDriver;
 	private boolean quitDriver = true;
@@ -167,6 +167,7 @@ public abstract class TestEnvironment {
 	 * Default constructor
 	 */
 	public TestEnvironment() {
+		setRequiresAuthentication(true);
         properties = loadProperties();
 
         // JS toolkit to test with
@@ -310,6 +311,7 @@ public abstract class TestEnvironment {
 	 */
 	public WebDriver getWebDriver() {
 		// browser to test with
+		assertTrue("Requesting webdriver while using the mock transport: "+System.getProperty("testMode"), System.getProperty("testMode")==null);
 		String browserName = System.getProperty(PROP_BROWSER);
 		if (webDriver == null) {
 			logger.info("Creating WebDriver instance");
@@ -1361,4 +1363,13 @@ public abstract class TestEnvironment {
 			logger.severe(e.getMessage());
 		}
 	}
+	
+    public String getEndpointName() {
+        if (isSmartCloud()) {
+            return "smartcloud";
+        } else {
+            return "connections";
+        }
+    }
+
 }

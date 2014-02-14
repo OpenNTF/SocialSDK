@@ -15,8 +15,6 @@
  */
 package com.ibm.sbt.services.client.smartcloud.bss;
 
-import java.math.BigInteger;
-
 import org.junit.After;
 import org.junit.Assert;
 
@@ -32,7 +30,7 @@ import com.ibm.sbt.services.endpoints.BasicEndpoint;
  */
 public class BaseBssTest {
 	
-	private BigInteger customerId;
+	private String customerId;
 	
 	private BasicEndpoint basicEndpoint;
 	private CustomerManagementService customerManagement;
@@ -59,7 +57,7 @@ public class BaseBssTest {
     /**
 	 * @param customerId the customerId to set
 	 */
-	public void setCustomerId(BigInteger customerId) {
+	public void setCustomerId(String customerId) {
 		this.customerId = customerId;
 	}
     
@@ -116,7 +114,7 @@ public class BaseBssTest {
     	return authenticationService;
     }
     
-    public BigInteger registerCustomer() {
+    public String registerCustomer() {
     	try {
     		CustomerJsonBuilder customer = new CustomerJsonBuilder();
         	customer.setOrgName("Abe Industrial")
@@ -150,7 +148,7 @@ public class BaseBssTest {
         	        .setCustomerIdentifierValue("9999999999");
         	
         	JsonJavaObject response = getCustomerManagementService().registerCustomer(customer);
-        	customerId = BigInteger.valueOf(response.getAsLong("Long"));
+        	customerId = String.valueOf(response.getAsLong("Long"));
         	Assert.assertNotNull("Invalid customer id", customerId);
         	return customerId;
     	} catch (BssException be) {
@@ -163,7 +161,7 @@ public class BaseBssTest {
     	return null;
     }
     
-    public void unregisterCustomer(BigInteger customerId) {
+    public void unregisterCustomer(String customerId) {
     	try {
     		getCustomerManagementService().unregisterCustomer(customerId);
     	} catch (Exception e) {
@@ -171,7 +169,7 @@ public class BaseBssTest {
     	}
     }
     
-    public BigInteger addSubscriber() {
+    public String addSubscriber() {
    		if (customerId == null) {
    			customerId = registerCustomer();
    		}
@@ -179,7 +177,7 @@ public class BaseBssTest {
    		return addSubscriber(customerId);
     }
     		
-    public BigInteger addSubscriber(BigInteger customerId) {
+    public String addSubscriber(String customerId) {
        	try {
     		SubscriberJsonBuilder subscriber = new SubscriberJsonBuilder();
     		subscriber.setCustomerId(customerId)
@@ -202,7 +200,7 @@ public class BaseBssTest {
         	System.out.println(subscriber.toJson());
     		
         	JsonJavaObject response = getSubscriberManagementService().addSubsciber(subscriber);
-        	BigInteger subscriberId = BigInteger.valueOf(response.getAsLong("Long"));
+        	String subscriberId = String.valueOf(response.getAsLong("Long"));
         	Assert.assertNotNull("Invalid subscriber id", subscriberId);
         	return subscriberId;
     	} catch (BssException be) {
@@ -215,7 +213,33 @@ public class BaseBssTest {
     	return null;
     }
     
-	public String getLoginName(BigInteger subscriberId) {
+    public String createSubscription(String customerId, int duration, String partNumber, int quantity) {
+    	try {
+    		SubscriptionManagementService subscriptionManagement = getSubscriptionManagementService();
+    		OrderJsonBuilder order = new OrderJsonBuilder();
+    		order.setCustomerId(customerId)
+    			 .setDurationUnits(SubscriptionManagementService.DurationUnits.YEARS)
+    		     .setDurationLength(duration)
+    		     .setPartNumber(partNumber)
+    		     .setPartQuantity(quantity)
+    		     .setBillingFrequency(BillingFrequency.ARC);
+    		EntityList<JsonEntity> subscriptionList = subscriptionManagement.createSubscription(order);
+    		for (JsonEntity subscription : subscriptionList) {
+    			System.out.println(subscription.toJsonString());
+    		}
+    		return String.valueOf(subscriptionList.get(0).getAsLong("SubscriptionId"));
+    		
+    	} catch (BssException be) {
+    		JsonJavaObject jsonObject = be.getResponseJson();
+    		System.err.println(jsonObject);
+    		Assert.fail("Error creating subscription because: "+jsonObject);
+    	} catch (Exception e) {
+    		Assert.fail("Error creating subscription caused by: "+e.getMessage());    		
+    	}
+    	return null;
+    }
+    
+	public String getLoginName(String subscriberId) {
     	try {
     		JsonEntity subscriber = getSubscriberById(subscriberId);
     		return subscriber.getAsString("Subscriber/Person/EmailAddress");
@@ -264,7 +288,7 @@ public class BaseBssTest {
     	}
     }
     
-    public void updateSubscriberEmail(BigInteger subscriberId, String emailAddress) {
+    public void updateSubscriberEmail(String subscriberId, String emailAddress) {
     	try {
     		SubscriberManagementService subscriberManagement = getSubscriberManagementService();
     		
@@ -287,7 +311,7 @@ public class BaseBssTest {
     	}
     }
     
-    public void activateSubscriber(BigInteger subscriberId) {
+    public void activateSubscriber(String subscriberId) {
     	try {
     		SubscriberManagementService subscriberManagement = getSubscriberManagementService();
 			subscriberManagement.activateSubscriber(subscriberId);
@@ -301,8 +325,22 @@ public class BaseBssTest {
     	}
     }
     
+    public JsonEntity entitleSubscriber(String subscriberId, String subscriptionId, boolean acceptTOU) {
+    	try {
+    		SubscriberManagementService subscriberManagement = getSubscriberManagementService();
+			return subscriberManagement.entitleSubscriber(subscriberId, subscriptionId, acceptTOU);
+    	} catch (BssException be) {
+    		JsonJavaObject jsonObject = be.getResponseJson();
+    		System.out.println(jsonObject);
+    		Assert.fail("Error entitling subscriber caused by: "+jsonObject);
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    		Assert.fail("Error entitling subscriber caused by: "+e.getMessage());    		
+    	}
+    	return null;
+    }
 	
-    public JsonEntity getSubscriberById(BigInteger subscriberId) {
+    public JsonEntity getSubscriberById(String subscriberId) {
     	try {
     		JsonEntity jsonEntity = getSubscriberManagementService().getSubscriberById(subscriberId);
     		System.out.println(jsonEntity.toJsonString());
@@ -313,7 +351,7 @@ public class BaseBssTest {
     	return null;
     }
     
-    public void deleteSubscriber(BigInteger subscriberId) {
+    public void deleteSubscriber(String subscriberId) {
     	try {
     		getSubscriberManagementService().deleteSubsciber(subscriberId);
     	} catch (Exception e) {
@@ -321,9 +359,9 @@ public class BaseBssTest {
     	}
     }
     
-    public BigInteger createSubscription() {
+    public String createSubscription() {
     	try {
-    		BigInteger customerId = registerCustomer();
+    		String customerId = registerCustomer();
     		OrderJsonBuilder order = new OrderJsonBuilder();
     		order.setCustomerId(customerId)
     			 .setDurationUnits(SubscriptionManagementService.DurationUnits.YEARS)
@@ -336,7 +374,7 @@ public class BaseBssTest {
     		EntityList<JsonEntity> subscriptionList = getSubscriptionManagementService().createSubscription(order);
 
     		JsonEntity subscription = subscriptionList.get(0);
-    		BigInteger subscriptionId = BigInteger.valueOf(subscription.getAsLong("SubscriptionId"));
+    		String subscriptionId = String.valueOf(subscription.getAsLong("SubscriptionId"));
         	Assert.assertNotNull("Invalid subscription id", subscriptionId);
         	return subscriptionId;
     	} catch (Exception e) {

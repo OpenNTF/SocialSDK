@@ -144,6 +144,7 @@
 		<moduleSet>
 			<useAllReactorProjects>true</useAllReactorProjects>
 			<includes>
+				<include>com.ibm.sbt:com.ibm.sbt.core.test</include>
 				<include>com.ibm.sbt:com.ibm.sbt.automation.core</include>
 				<include>com.ibm.sbt:com.ibm.sbt.automation.test</include>
 			</includes>

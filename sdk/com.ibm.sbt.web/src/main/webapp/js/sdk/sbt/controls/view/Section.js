@@ -18,7 +18,7 @@
  * 
  */
 define([ "../../declare", "../../lang", "../../dom", "../../stringUtil", "../../widget/_TemplatedWidget",
-		"../../text!../../controls/view/templates/Section.html", ],
+		"../../text!../../controls/view/templates/Section.html" ],
 		function(declare, lang, dom, stringUtil, _TemplatedWidget, SectionTmpl) {
 
 	/*

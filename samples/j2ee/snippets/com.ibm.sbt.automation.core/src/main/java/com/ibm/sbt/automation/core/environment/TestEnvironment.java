@@ -348,12 +348,14 @@ public abstract class TestEnvironment extends com.ibm.sbt.test.lib.TestEnvironme
 				try {
 					webDriver = new RemoteWebDriver(new URL(
 							System.getProperty(SELENIUM_HUB)), cap);
+					webDriver = new Augmenter().augment(webDriver);
 				} catch (MalformedURLException e) {
 					throw new RuntimeException(e);
 				}
 
 			}
-			webDriver = new Augmenter().augment(webDriver);
+			
+			
 		}
 		return webDriver;
 	}

@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * �� Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -28,7 +28,6 @@ import com.ibm.sbt.services.client.connections.forums.model.BaseForumEntity;
  *
  */
 public class ForumServiceGetTests extends BaseForumServiceTest {
-
 
 	@Test
 	public void getAllForums() {
@@ -158,7 +157,5 @@ public class ForumServiceGetTests extends BaseForumServiceTest {
 			fail("Error calling forumService.getForumTopicsTags() caused by: "+e.getMessage());
 		}
 	}
-
-
 
 }

@@ -1,5 +1,5 @@
 /*
- * �� Copyright IBM Corp. 2013
+ * ?? Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-package com.ibm.sbt.services.client.connections.blogs;
+package com.ibm.sbt.services.client.connections.profiles;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -22,19 +22,14 @@ import org.junit.runners.Suite.SuiteClasses;
 
 /**
  * 
- * @author Swati Singh
+ * @author Carlos Manias
  *
  */
 @RunWith(Suite.class)
 @SuiteClasses({ 
-	BlogCommentCreateGetDeleteTest.class,
-	BlogGetUpdateTest.class, 
-	BlogPostCreateTest.class,
-	BlogPostDeleteTest.class,
-	BlogPostGetUpdateLikeUnlikeTest.class,
-	BlogSerializationTests.class,
-	BlogServiceGetTests.class,
+	ProfileServiceTest.class,
+	ProfileAdminServiceTest.class
 })
-public class BlogServiceTestSuite {
+public class ProfileServiceTestSuite {
 
 }

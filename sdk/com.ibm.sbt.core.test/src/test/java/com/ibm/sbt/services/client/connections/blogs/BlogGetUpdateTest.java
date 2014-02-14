@@ -17,7 +17,6 @@
 package com.ibm.sbt.services.client.connections.blogs;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 import org.junit.After;
@@ -28,31 +27,11 @@ import org.junit.Test;
  * @author Swati Singh
  *
  */
-public class BlogCreateUpdateDeleteTest extends BaseBlogServiceTest {
+public class BlogGetUpdateTest extends BaseBlogServiceTest {
 
 	@Before
 	public void initBlog() {
 		blog = createBlog();
-	}
-
-	@Test
-	public void CreateBlogTest() {
-		try {
-			Blog blog = new Blog(blogService, "");
-			blog.setTitle("Test Blog" +  System.currentTimeMillis());
-			blog.setHandle("TestHandle"+ System.currentTimeMillis());
-			blog.setTimeZone("Asia/Calcutta");
-
-			Blog blogReturned = blogService.createBlog(blog);
-			assertNotNull(blogReturned.getTitle());
-			assertEquals(unRandomize(blog.getTitle()), unRandomize(blogReturned.getTitle()));
-			assertEquals(unRandomize(blog.getHandle()), unRandomize(blogReturned.getHandle()));
-			deleteBlog(blogReturned);
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail("Error calling blogService.createBlog() caused by: "+e.getMessage());
-		}
-
 	}
 
 	@Test
@@ -77,36 +56,13 @@ public class BlogCreateUpdateDeleteTest extends BaseBlogServiceTest {
 			Blog blogReturned = blogService.getBlog(blog.getBlogUuid());
 			assertEquals(unRandomize(blogReturned.getTitle()), unRandomize(blog.getTitle()));
 			assertEquals(unRandomize(blogReturned.getSummary()), unRandomize(blog.getSummary()));
-
 		} catch (Exception e) {
 			fail("Error calling blogService.updateBlog() caused by: "+e.getMessage());
 		}
 	}
 
-
-	@Test
-	public void deleteBlog() throws Exception {
-		try {
-			Blog createdBlog = createBlog();
-			Blog blogGot = blogService.getBlog(createdBlog.getBlogUuid());
-			assertEquals(createdBlog.getTitle(), blogGot.getTitle());
-			blogService.removeBlog(createdBlog.getBlogUuid());
-			blogService.getBlog(createdBlog.getBlogUuid());
-		}
-		catch(Exception e) {
-			assertNotNull(e.getMessage());
-		}
-	}
-
 	@After
 	public void deleteBlogOnExit() {
-		try {
-			blogService.removeBlog(blog.getBlogUuid());
-		} catch (BlogServiceException e) {
-			fail("Error calling blogService.removeBlog() caused by: "+e.getMessage());
-		}
-
+		deleteBlog(blog);
 	}
-
-
 }

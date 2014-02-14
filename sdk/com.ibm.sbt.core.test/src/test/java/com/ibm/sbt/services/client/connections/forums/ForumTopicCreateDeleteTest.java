@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * �� Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -18,22 +18,15 @@ package com.ibm.sbt.services.client.connections.forums;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-import org.junit.After;
-import org.junit.Before;
+
 import org.junit.Test;
 
 /**
  * @author Swati Singh
  *
  */
-public class ForumTopicCRUDTest extends BaseForumServiceTest {
-
-	@Before
-	public void initForum() {
-		topic = createForumTopic();
-	}
+public class ForumTopicCreateDeleteTest extends BaseForumServiceTest {
 
 	@Test
 	public void CreateForumTopicTest() {
@@ -51,40 +44,7 @@ public class ForumTopicCRUDTest extends BaseForumServiceTest {
 			e.printStackTrace();
 			fail("Error calling forumService.createForumTopic() caused by: "+e.getMessage());
 		}
-
 	}
-
-	@Test
-	public void GetForumTopic() {
-		try {
-			ForumTopic topicGot = forumService.getForumTopic(topic.getTopicUuid());
-
-			assertEquals(topic.getTitle(), topicGot.getTitle());
-			assertEquals(topic.getContent(), topicGot.getContent());
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail("Error calling forumService.getForumTopic() caused by: "+e.getMessage());
-		}
-	}
-
-	@Test
-	public void UpdateTopic() {
-		try {
-			topic.setTitle("new Test topic title" + System.currentTimeMillis());
-			topic.setContent("new Test topic content" + System.currentTimeMillis());
-			forumService.updateForumTopic(topic);
-			
-			ForumTopic updatedTopic = forumService.getForumTopic(topic.getTopicUuid());
-			
-			assertEquals(topic.getTitle(), updatedTopic.getTitle());
-			assertEquals(topic.getTopicUuid(), updatedTopic.getTopicUuid());
-			assertEquals(topic.getContent(), updatedTopic.getContent().trim());
-
-		} catch (Exception e) {
-			fail("Error calling forumService.updateForumTopic() caused by: "+e.getMessage());
-		}
-	}
-
 
 	@Test
 	public void deleteTopic() throws Exception {
@@ -100,16 +60,5 @@ public class ForumTopicCRUDTest extends BaseForumServiceTest {
 			assertNotNull(e.getMessage());
 		}
 	}
-
-	@After
-	public void deleteTopicOnExit() {
-		try {
-			forumService.removeForumTopic(topic.getTopicUuid());
-		} catch (ForumServiceException e) {
-			fail("Error calling forumService.removeForum() caused by: "+e.getMessage());
-		}
-
-	}
-
-
+	
 }

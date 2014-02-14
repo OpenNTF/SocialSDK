@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * �� Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -18,12 +18,8 @@ package com.ibm.sbt.services.client.connections.forums;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,12 +28,7 @@ import org.junit.Test;
  * @author Swati Singh
  *
  */
-public class ForumReplyCRUDTest extends BaseForumServiceTest {
-
-	@Before
-	public void initForum() {
-		reply = createForumReply();
-	}
+public class ForumReplyCreateDeleteTest extends BaseForumServiceTest {
 
 	@Test
 	public void CreateForumReplyTest() {
@@ -54,35 +45,7 @@ public class ForumReplyCRUDTest extends BaseForumServiceTest {
 		} catch (Exception e) {
 			fail("Error calling forumService.createForumReply() caused by: "+e.getMessage());
 		}
-
 	}
-
-	@Test
-	public void GetForumReply() {
-		try {
-			ForumReply replyGot = forumService.getForumReply(reply.getReplyUuid());
-			assertEquals(reply.getTitle(), replyGot.getTitle());
-			assertEquals(reply.getContent(), replyGot.getContent());
-		} catch (Exception e) {
-			fail("Error calling forumService.getForum() caused by: "+e.getMessage());
-		}
-	}
-
-	@Test
-	public void UpdateReply() {
-		try {
-			reply.setTitle("new Test reply title" + System.currentTimeMillis());
-			reply.setContent("new Test reply content" + System.currentTimeMillis());
-			forumService.updateForumReply(reply);
-			ForumReply updatedReply = forumService.getForumReply(reply.getReplyUuid());
-			assertEquals(reply.getTitle(), updatedReply.getTitle());
-			assertEquals(reply.getReplyUuid(), updatedReply.getReplyUuid());
-			assertEquals(reply.getContent(), updatedReply.getContent().trim());
-		} catch (Exception e) {
-			fail("Error calling forumService.updateForumReply() caused by: "+e.getMessage());
-		}
-	}
-
 
 	@Test
 	public void deleteReply() throws Exception {
@@ -98,16 +61,4 @@ public class ForumReplyCRUDTest extends BaseForumServiceTest {
 			assertNotNull(e.getMessage());
 		}
 	}
-
-	@After
-	public void deleteRepyOnExit() {
-		try {
-			forumService.removeForumReply(reply.getReplyUuid());
-		} catch (ForumServiceException e) {
-			fail("Error calling forumService.removeForum() caused by: "+e.getMessage());
-		}
-
-	}
-
-
 }

@@ -161,7 +161,7 @@ define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUt
 				this.successTemplate = "<div>"+nls.deleteTopicSuccess+"</div>";
 			}
 			
-		},
+		}
 	});
 
 	return DeleteTopicWidget;

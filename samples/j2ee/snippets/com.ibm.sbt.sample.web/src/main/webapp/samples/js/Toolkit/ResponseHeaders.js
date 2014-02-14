@@ -1,19 +1,21 @@
 require([ "sbt/config", "sbt/lang", "sbt/dom", "sbt/json", "sbt/xml", "sbt/stringUtil" ], 
     function(config,lang,dom,json,xml,stringUtil) {
-    
+    console.log('A---------------------------------');
     var now = new Date();
     var title = "EndpointPost Test " + now.getTime();
     var content = "EndpointPost test content: " + now.getTime();
-
+    console.log('B---------------------------------');
     var domNode = dom.byId("communityTmpl");
     var CommunityTmpl = stringUtil.trim(domNode.text || domNode.textContent);
+    console.log('C---------------------------------');
     var communityJson = {
         communityType : "public",
         title : title,
         content : content,
     };
+    console.log('D---------------------------------');
     var postData = stringUtil.transform(CommunityTmpl, communityJson);
-    
+    console.log('E---------------------------------');
     var options = { 
         method : "POST",
         headers : {
@@ -21,12 +23,13 @@ require([ "sbt/config", "sbt/lang", "sbt/dom", "sbt/json", "sbt/xml", "sbt/strin
         },
         data : postData
     };
-    
+    console.log('F---------------------------------');
     var endpoint = config.findEndpoint("connections");
     var promise = endpoint.request("/communities/service/atom/communities/my", options);
-    
+    console.log('G---------------------------------');
     promise.response.then(
         function(response) {
+        	console.log('H---------------------------------');
             response = lang.mixin({ 
                 Location : response.getHeader("Location"),
                 Date : response.getHeader("Date"),
@@ -44,8 +47,10 @@ require([ "sbt/config", "sbt/lang", "sbt/dom", "sbt/json", "sbt/xml", "sbt/strin
                 ContentType : response.getHeader("Content-Type"),
                 TransferEncoding : response.getHeader("Transfer-Encoding")
             }, response);
+            console.log('I---------------------------------');
             dom.setText("json", json.jsonBeanStringify(response));
         }, function(response) {
+        	console.log('J---------------------------------');
             dom.setText("json", json.jsonBeanStringify(response));
         }
     );

@@ -15,8 +15,6 @@
  */
 package com.ibm.sbt.services.client.smartcloud.bss;
 
-import java.math.BigInteger;
-
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -30,10 +28,10 @@ import com.ibm.sbt.services.client.base.JsonEntity;
 public class SuspendSubscriptionTest extends BaseBssTest {
 
     @Test
-    public void testSuspendCustomer() {
+    public void testSuspendSubscription() {
     	try {
     		registerCustomer();
-    		BigInteger subscriptionId = createSubscription();
+    		String subscriptionId = createSubscription();
     		
     		SubscriptionManagementService subscriptionManagement = getSubscriptionManagementService();
     		

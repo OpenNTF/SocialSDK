@@ -19,6 +19,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.ibm.commons.util.io.json.JsonJavaObject;
+import com.ibm.sbt.automation.core.test.BaseTest.AuthType;
 import com.ibm.sbt.automation.core.test.connections.BaseCommunitiesTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 

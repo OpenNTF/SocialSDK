@@ -17,14 +17,18 @@ package com.ibm.sbt.test.lib;
 
 
 
+import org.apache.commons.codec.binary.StringUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.junit.Assert;
+import org.junit.runner.Request;
 
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.services.endpoints.BasicEndpoint;
 
 /**
  * 
@@ -66,6 +70,7 @@ public class MockService extends ClientService {
 		case RECORD:
 			HttpResponse response;
 			response = super.executeRequest(httpClient, httpRequestBase, args);
+			System.out.println(httpRequestBase.getMethod() + " " + httpRequestBase.getURI() + ": " + response.getStatusLine().getStatusCode());
 			return serializer.recordResponse(response);
 		default:
 			throw new UnsupportedOperationException("Invalid mode " + this.mode);
@@ -75,6 +80,9 @@ public class MockService extends ClientService {
 	protected void initialize(DefaultHttpClient httpClient)
 			throws ClientServicesException {
 		if (TestEnvironment.getRequiresAuthentication()) {
+			if (StringUtil.isEmpty(((BasicEndpoint)endpoint).getPassword())){
+				Assert.fail("configure the endpoint " + endpoint.getLabel() + " password, in /config/test.properties");
+			}
 			super.initialize(httpClient);
 		}
 

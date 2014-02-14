@@ -127,13 +127,26 @@ function executeService(params,details,results,callback) {
 			uri += (uri.match(/\?/) ? '&' : '?') + encodeURI(qs); 
 		}
 
+		// Compose the headers
+		var headers = {};
+		if(item.headers) {
+			var pp = item.headers;
+			for(var i=0; i<pp.length; i++) {
+				var r = paramValue(pp[i].name);
+				if(r) {
+					headers[pp[i].name] = r;
+				}
+			}
+		}
+		
 		var env = (pageGlobal && pageGlobal.cbEnv) ? dojo.byId(pageGlobal.cbEnv).value : "";
+		headers["x-env"] = env;
 
 		var startTs = Date.now();
 		var args = {
 			serviceUrl : uri,
 			handleAs : "text",
-			headers: {"x-env":env},
+			headers: headers,
 			loginUi: "popup",
 	    	load : function(response,ioArgs) {
 	    		updatePanel(results,m+" "+ep.baseUrl+this.serviceUrl,200,"",response,ioArgs,startTs);

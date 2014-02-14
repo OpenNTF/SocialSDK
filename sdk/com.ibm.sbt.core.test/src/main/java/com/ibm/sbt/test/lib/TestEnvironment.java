@@ -17,7 +17,7 @@ public class TestEnvironment {
 	private static String mockMode;
 	private static final TestEnvironment instance = new TestEnvironment();
 
-	private TestEnvironment() {
+	protected TestEnvironment() {
 		selectEnvironment();
 	}
 	
@@ -57,14 +57,13 @@ public class TestEnvironment {
 		return requiresAuthentication;
 	}
 	private static String getPropertyBasePath() {
-		if (isSmartCloud()) {
+		if (isSmartCloudEnvironment()) {
 			return SMARTCLOUD + ".";
 		}
 		return CONNECTIONS+".";
 	}
 	
-	public static boolean isSmartCloud() {
-		// TODO Auto-generated method stub
+	public static boolean isSmartCloudEnvironment() {
 		return enableSmartcloud;
 	}
 

@@ -64,7 +64,7 @@ define([ "../../declare", "../../lang", "../../stringUtil", "../../log",
 //            if (this.defaultActions) {
 //            }
 
-        },
+        }
         
     
         //

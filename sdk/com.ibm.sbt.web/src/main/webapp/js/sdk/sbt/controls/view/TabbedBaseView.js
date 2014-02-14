@@ -170,7 +170,7 @@ define([ "../../declare", "../../lang", "../../stringUtil", "../../log",
 		 * @param addToBeginning
 		 */
 		addToRightCol : function(node, addToBeginning) {
-		},
+		}
 		
 		//
 		// Internals

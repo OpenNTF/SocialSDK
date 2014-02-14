@@ -63,7 +63,7 @@ public class BaseApiTest extends BaseTest {
     private String snippetId;
     
     @Before
-    public void setupTest() {
+    public void setupTest() throws AuthenticationException {
     	 RuntimeFactory runtimeFactory = new RuntimeFactoryStandalone() {
              @Override
              public Context initContext(Application application, Object request, Object response) {
@@ -74,17 +74,14 @@ public class BaseApiTest extends BaseTest {
          };
          application = runtimeFactory.initApplication(null);
          createContext();
+         loginConnections();
     }
 
     /**
      * Return the endpoint name to use
      */
     public String getEndpointName() {
-        if (environment.isSmartCloud()) {
-            return "smartcloud";
-        } else {
-            return "connections";
-        }
+       return environment.getEndpointName();
     }
     
     /* (non-Javadoc)

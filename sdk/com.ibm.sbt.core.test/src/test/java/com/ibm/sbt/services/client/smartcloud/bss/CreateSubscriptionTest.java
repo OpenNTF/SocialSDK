@@ -15,8 +15,6 @@
  */
 package com.ibm.sbt.services.client.smartcloud.bss;
 
-import java.math.BigInteger;
-
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -35,7 +33,7 @@ public class CreateSubscriptionTest extends BaseBssTest {
     public void testCreateSubscriptionBadRequest() {
     	try {
     		OrderJsonBuilder order = new OrderJsonBuilder();
-    		order.setCustomerId(BigInteger.ZERO)
+    		order.setCustomerId("0")
     			 .setDurationUnits(SubscriptionManagementService.DurationUnits.YEARS)
     		     .setDurationLength(3);
     		System.out.println(order.toJson());
@@ -63,7 +61,7 @@ public class CreateSubscriptionTest extends BaseBssTest {
     @Test
     public void testCreateSubscription() {
     	try {
-    		BigInteger customerId = registerCustomer();
+    		String customerId = registerCustomer();
     		OrderJsonBuilder order = new OrderJsonBuilder();
     		order.setCustomerId(customerId)
     			 .setDurationUnits(SubscriptionManagementService.DurationUnits.YEARS)
@@ -90,6 +88,5 @@ public class CreateSubscriptionTest extends BaseBssTest {
     		Assert.fail("Error creating subscription caused by: "+e.getMessage());    		
     	}
     }
-	
 	
 }

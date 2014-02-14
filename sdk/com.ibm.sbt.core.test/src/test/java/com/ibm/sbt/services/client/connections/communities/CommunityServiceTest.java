@@ -35,7 +35,7 @@ public class CommunityServiceTest extends BaseUnitTest {
 		community.setTitle("JavaTestCommunity " + System.currentTimeMillis());
 		community.setContent("Java Community Content");
 		String type = "public";
-		if (TestEnvironment.isSmartCloud()) {
+		if (TestEnvironment.isSmartCloudEnvironment()) {
 			type = "private";
 		}
 		community.setCommunityType(type);
@@ -67,7 +67,7 @@ public class CommunityServiceTest extends BaseUnitTest {
 	@Test
 	public final void testAddRemoveMember() throws Exception {
 		String id = TestEnvironment.getSecondaryUserEmail();
-		if (TestEnvironment.isSmartCloud()) id = TestEnvironment.getSecondaryUserUuid();
+		if (TestEnvironment.isSmartCloudEnvironment()) id = TestEnvironment.getSecondaryUserUuid();
 		Member newMember = new Member(communityService,
 				id);
 		communityService.addMember(community.getCommunityUuid(), newMember);

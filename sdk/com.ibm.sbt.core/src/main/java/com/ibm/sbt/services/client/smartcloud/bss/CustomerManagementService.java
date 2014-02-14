@@ -16,7 +16,6 @@
 package com.ibm.sbt.services.client.smartcloud.bss;
 
 import java.io.IOException;
-import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -92,7 +91,7 @@ public class CustomerManagementService extends BssService {
      * @param customerObject
      * @return
      */
-    public BigInteger getCustomerId(JsonJavaObject customerObject) {
+    public String getCustomerId(JsonJavaObject customerObject) {
     	return getId(customerObject, PROPERTY_CUSTOMER);
     }
     
@@ -103,7 +102,7 @@ public class CustomerManagementService extends BssService {
      * @return
      * @throws BssException
      */
-    public JsonEntity getCustomerById(BigInteger customerId) throws BssException {
+    public JsonEntity getCustomerById(String customerId) throws BssException {
     	try {
     		String serviceUrl = API_RESOURCE_CUSTOMER + "/" + customerId;
 			return getEntity(serviceUrl, null, getJsonFeedHandler());
@@ -129,7 +128,7 @@ public class CustomerManagementService extends BssService {
      */
     public void updateCustomerProfile(JsonJavaObject customerObject) throws BssException {
     	try {
-    		BigInteger customerId = getCustomerId(customerObject);
+    		String customerId = getCustomerId(customerObject);
     		String serviceUrl = API_RESOURCE_CUSTOMER + "/" + customerId;
     		Response response = updateData(serviceUrl, null, JsonHeader, customerObject, null);
     		
@@ -154,7 +153,7 @@ public class CustomerManagementService extends BssService {
      * @return
      * @throws BssException
      */
-    public void unregisterCustomer(BigInteger customerId) throws BssException {
+    public void unregisterCustomer(String customerId) throws BssException {
     	try {
     		String serviceUrl = API_RESOURCE_CUSTOMER + "/" + customerId;
     		Response response = deleteData(serviceUrl, null, null);
@@ -179,7 +178,7 @@ public class CustomerManagementService extends BssService {
      * @return
      * @throws BssException
      */
-    public void suspendCustomer(BigInteger customerId) throws BssException {
+    public void suspendCustomer(String customerId) throws BssException {
     	try {
     		String serviceUrl = API_RESOURCE_CUSTOMER + "/" + customerId;
     		Response response = createData(serviceUrl, (Map<String, String>)null, SuspendCustomerHeader, (Object)null);
@@ -204,7 +203,7 @@ public class CustomerManagementService extends BssService {
      * @return
      * @throws BssException
      */
-    public void unsuspendCustomer(BigInteger customerId) throws BssException {
+    public void unsuspendCustomer(String customerId) throws BssException {
     	try {
     		String serviceUrl = API_RESOURCE_CUSTOMER + "/" + customerId;
     		Response response = createData(serviceUrl, (Map<String, String>)null, UnsuspendCustomerHeader, (Object)null);

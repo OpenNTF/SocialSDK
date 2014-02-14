@@ -91,6 +91,7 @@ public class MockSerializer {
 		File file = getFile(true);
 		RandomAccessFile raf = new RandomAccessFile(file, "rw");
 		// Seek to end of file
+		System.out.println("Writing Record @" + file.length() + " in " + file.getAbsolutePath());
 		raf.seek((file.length() - "\n</responses>".length()));
 
 		raf.write(data.getBytes("UTF-8"));
@@ -120,7 +121,7 @@ public class MockSerializer {
 
 	}
 
-	public HttpResponse recordResponse(HttpResponse response) {
+	public synchronized HttpResponse recordResponse(HttpResponse response) {
 		try {
 
 			StringWriter out = new StringWriter();

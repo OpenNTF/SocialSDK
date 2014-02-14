@@ -144,7 +144,7 @@ public class CommunityServiceNoCommonCommunityTest extends BaseUnitTest {
 		community.setTitle("testCommunity " + System.currentTimeMillis());
 		community.setContent("Java Community Content");
 		String type = "public";
-		if (TestEnvironment.isSmartCloud()) {
+		if (TestEnvironment.isSmartCloudEnvironment()) {
 			type = "private";
 		}
 		community.setCommunityType(type);
@@ -158,7 +158,7 @@ public class CommunityServiceNoCommonCommunityTest extends BaseUnitTest {
 
 	@Test
 	public void testCreateCommunityTwice() {
-		if (TestEnvironment.isSmartCloud()) return;
+		if (TestEnvironment.isSmartCloudEnvironment()) return;
 		String uuid1 = null;
 		String uuid2 = null;
 		

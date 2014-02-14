@@ -15,7 +15,6 @@
  */
 package com.ibm.sbt.services.client.smartcloud.bss;
 
-import java.math.BigInteger;
 import java.util.List;
 
 import org.junit.Assert;
@@ -35,8 +34,8 @@ public class EntitleSubscriberTest extends BaseBssTest {
 	@Test
     public void testEntitleSubscriber() {
     	try {
-    		BigInteger customerId = registerCustomer();
-    		BigInteger subscriberId = addSubscriber();
+    		String customerId = registerCustomer();
+    		String subscriberId = addSubscriber();
 
     		SubscriptionManagementService subscriptionManagement = getSubscriptionManagementService();
     		OrderJsonBuilder order = new OrderJsonBuilder();
@@ -50,7 +49,7 @@ public class EntitleSubscriberTest extends BaseBssTest {
     		for (JsonEntity subscription : subscriptionList) {
     			System.out.println(subscription.toJsonString());
     		}
-    		BigInteger subscriptionId = BigInteger.valueOf(subscriptionList.get(0).getAsLong("SubscriptionId"));
+    		String subscriptionId = String.valueOf(subscriptionList.get(0).getAsLong("SubscriptionId"));
     		System.out.println(subscriptionId);
     		
     		JsonEntity subscription = subscriptionManagement.getSubscriptionById(subscriptionId);
@@ -78,7 +77,7 @@ public class EntitleSubscriberTest extends BaseBssTest {
 						
 			JsonEntity entitlement = subscriberManagement.entitleSubscriber(subscriberId, subscriptionId, true);
 			Assert.assertNotNull("Unable to entitle subscriber: "+subscriberId, entitlement);
-			System.out.println(entitlement.toJsonString());
+			System.out.println("Entitlement: " + entitlement.toJsonString());
 			
 			jsonEntity = subscriberManagement.getSubscriberById(subscriberId);
 			Assert.assertNotNull("Unable to retrieve activated subscriber: "+subscriberId, jsonEntity);
@@ -94,15 +93,15 @@ public class EntitleSubscriberTest extends BaseBssTest {
     		}
 			JsonJavaObject seat = (JsonJavaObject)seatSet.get(0);
 			System.out.println(seat.getAsLong("SubscriptionId"));
-			Assert.assertEquals(subscriptionId, BigInteger.valueOf(seat.getAsLong("SubscriptionId")));
+			Assert.assertEquals(subscriptionId, String.valueOf(seat.getAsLong("SubscriptionId")));
 			
     	} catch (BssException be) {
     		JsonJavaObject jsonObject = be.getResponseJson();
     		System.out.println(jsonObject);
-    		Assert.fail("Error deleting subscriber caused by: "+jsonObject);
+    		Assert.fail("Error entitling subscriber caused by: "+jsonObject);
     	} catch (Exception e) {
     		e.printStackTrace();
-    		Assert.fail("Error deleting subscriber caused by: "+e.getMessage());    		
+    		Assert.fail("Error entitling subscriber caused by: "+e.getMessage());    		
     	}
     }
 	

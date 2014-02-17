@@ -1,8 +1,6 @@
 require(["sbt/dom", "sbt/config", "sbt/connections/controls/astream/ActivityStreamWrapper"], function(dom, config, ActivityStreamWrapper) {
-    config.Properties["loginUi"] = "popup";
     var activityStreamWrapper = new ActivityStreamWrapper({
-        feedUrl: "/anonymous/rest/activitystreams/@public/@all/@all?rollup=true",
-        activityStreamNode: "activityStream"
+        feedUrl: "/basic/rest/activitystreams/@me/@all/@all?rollup=true"
     });
     
     dom.byId("activityStreamDiv").appendChild(activityStreamWrapper.domNode);

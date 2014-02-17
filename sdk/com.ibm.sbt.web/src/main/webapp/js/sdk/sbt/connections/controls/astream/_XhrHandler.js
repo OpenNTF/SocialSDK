@@ -28,14 +28,47 @@ define(["../../../declare", "../../../config", "../../../stringUtil", "../../../
          */
         endpoint: null,
         
+        
+        authString: "basic/",
+        
+        /*
+         * If it is public, make sure the AS urls go through the "anonymous" (i.e. requires no auth) urls.
+         * 
+         * @property isPublic 
+         * @type Boolean
+         * @default false
+         */
+        isPublic: false,
+        
+        /*
+         * Service mappings, e.g. if /files path is customised to /myfiles
+         * 
+         * @property contextRootMap 
+         * @type Object
+         */
         contextRootMap: {
             connections: "connections"
         },
         
         /*
-         * A helper method to ensure things like a proxy and and authentication protocol are present in the url.
+         * The endpoint auth mapped to their AS url equivalents. This will be used to ensure each request uses the right url.
          * 
-         * Most internal connections ActivityStream urls don't use an authentication protocol.
+         * @property _authStrings 
+         * @type Object
+         */
+        _authStrings : {
+            "sso" : "",
+            "basic" : "basic/",
+            "oauth" : "oauth/",
+            "public" : "anonymous/"
+        },
+        
+        /*
+         * This method modifies the activitystream request urls so that they
+         * 1. Go through our proxy, and has the correct service mapping.
+         * 
+         * 
+         * Most urls will be using sso by default.
          * 
          * @method modifyUrl
          * 
@@ -44,28 +77,6 @@ define(["../../../declare", "../../../config", "../../../stringUtil", "../../../
          * @param {String} args.url The url which we will xhr to. If this is not present this method does nothing.
          */
         modifyUrl: function(args){
-            if(this.endpoint){
-                lang.mixin(this.contextRootMap, this.endpoint.serviceMappings);
-                
-                if(this.contextRootMap && !util.isEmptyObject(this.contextRootMap)){
-                    var url = args.url || args.serviceUrl;
-                    url = stringUtil.transform(url, this.contextRootMap, function(value, key){
-                        if(!value){
-                            return key;
-                        }
-                        else{
-                            return value;
-                        }
-                    }, this);
-                    if(args.url){
-                        args.url = url;
-                    }
-                    else{
-                        args.serviceUrl = url;
-                    }
-                }
-            }
-            
             if(!args.url){
                 return;
             }
@@ -73,13 +84,24 @@ define(["../../../declare", "../../../config", "../../../stringUtil", "../../../
                 args.serviceUrl = args.url;
                 delete args.url;
             } else if (args.url.indexOf("proxy") === -1){
-                if(args.url.indexOf("https") !== -1)
+                if(args.url.indexOf("https") !== -1){
                     args.url = this.endpoint.proxy.proxyUrl + "/" + this.endpoint.proxyPath + "/" + args.url.replace(/https:\/\/.[^\/]+\//, "");
-                else if(args.url.indexOf("http") !== -1)
+                }
+                else if(args.url.indexOf("http") !== -1){
                     args.url = this.endpoint.proxy.proxyUrl + "/" + this.endpoint.proxyPath + "/" + args.url.replace(/http:\/\/.[^\/]+\//, "");
+                }
             }
-            if(args.url.indexOf("opensocial/rest") !== -1)
-                args.url = args.url.replace("opensocial/","opensocial/" + this.endpoint.authType +  "/");
+            var authType = this.isPublic ? "anonymous/" : this._authStrings[this.endpoint.authType];
+            var correctASAuthSig = "opensocial/" + authType + "rest/";
+            var opensocialIndex = args.url.indexOf("opensocial/");
+            var restEndIndex = args.url.indexOf("rest/") + 5;
+            if(opensocialIndex !== -1 && restEndIndex !== -1 && args.url.indexOf(correctASAuthSig) === -1){
+                args.url = args.url.slice(0, opensocialIndex) + correctASAuthSig + args.url.slice(restEndIndex);
+            }
+        },
+        
+        getEndpoint: function(){
+            return this.endpoint;
         },
         
         /*

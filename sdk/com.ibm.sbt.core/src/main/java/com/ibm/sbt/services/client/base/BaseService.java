@@ -21,9 +21,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.ibm.commons.runtime.Context;
 import com.ibm.commons.util.StringUtil;
-import com.ibm.sbt.jslibrary.SBTEnvironment;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientService.Handler;
 import com.ibm.sbt.services.client.ClientServicesException;
@@ -74,7 +72,7 @@ public abstract class BaseService implements Serializable{
             endpointName = DEFAULT_ENDPOINT_NAME;
         }
         
-        this.endpoint = getEnvironmentEndpoint(endpointName);
+        this.endpoint = EndpointFactory.getEndpointFromEnvironment(endpointName, null);
         this.cacheSize = cacheSize;
     }
 
@@ -98,34 +96,6 @@ public abstract class BaseService implements Serializable{
         this.endpoint = endpoint;
         this.cacheSize = cacheSize;
     }
-
-    /*
-     * Check the environment to see which endpoints are available.
-     * @param endpointName Requested endpoint.
-     * @return The Endpoint which matches endpointName, first by alias then by name. 
-     * @throws SBTException if endpointName is not found in the environment.
-     */
-    private Endpoint getEnvironmentEndpoint(String endpointName){
-    	Context context = Context.getUnchecked();
-    	if (context == null) {
-    		return null;
-    	}
-        String environment = context.getProperty("environment");
-        if(environment != null) {
-            SBTEnvironment env = (SBTEnvironment) context.getBean(environment);
-            SBTEnvironment.Endpoint[] endpointsArray = env.getEndpointsArray();
-            for(SBTEnvironment.Endpoint endpoint : endpointsArray){
-                if(StringUtil.equals(endpointName, endpoint.getAlias())){
-                    endpointName = endpoint.getName();
-                    break;
-                } else if (StringUtil.equals(endpointName, endpoint.getName())){
-                    break;
-                }
-            }
-        }
-        return EndpointFactory.getEndpoint(endpointName);
-    }
-
 
 	/**
 	 * @return dataFormat

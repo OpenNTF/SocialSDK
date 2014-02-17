@@ -25,7 +25,6 @@ import com.ibm.commons.runtime.Context;
 import com.ibm.commons.runtime.util.UrlUtil;
 import com.ibm.commons.util.PathUtil;
 import com.ibm.commons.util.StringUtil;
-import com.ibm.sbt.jslibrary.SBTEnvironment;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
 
 
@@ -212,27 +211,11 @@ public class Util {
         if (StringUtil.isEmpty(themeId)) {
             themeId = getThemeId(request);
         }
-        Context context = Context.get();
         String jsLibId = getJsLibId(request);
         String environment = request.getParameter("env");
 
-        if(StringUtil.isEmpty(environment)){
-            environment = context.getProperty("environment");
-        }
         String endpointName = "connections";
-        
-        if(environment != null) {// Find out if the 'connections' endpoint is mapped to anything
-            SBTEnvironment env = (SBTEnvironment) context.getBean(environment);
-            SBTEnvironment.Endpoint[] endpointsArray = env.getEndpointsArray();
-            for(SBTEnvironment.Endpoint endpoint : endpointsArray){
-                if(StringUtil.equals(endpointName, endpoint.getAlias())){
-                    endpointName = endpoint.getName();
-                    break;
-                }
-            }
-        }
-        
-        String baseUrl = EndpointFactory.getEndpoint(endpointName).getUrl();
+        String baseUrl = EndpointFactory.getEndpointFromEnvironment(endpointName, environment).getUrl();
         
         String[] result;
         if (_styleMap.containsKey(themeId)) {

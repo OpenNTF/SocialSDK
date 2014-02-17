@@ -121,7 +121,9 @@ public class EndpointFactory {
     	if (context == null) {
     		return null;
     	}
-        if (environment == null )  environment = context.getProperty("environment");
+        if (environment == null ){
+        	environment = context.getProperty("environment");
+        }
         if(environment != null) {
             SBTEnvironment env = (SBTEnvironment) context.getBean(environment);
             SBTEnvironment.Endpoint[] endpointsArray = env.getEndpointsArray();

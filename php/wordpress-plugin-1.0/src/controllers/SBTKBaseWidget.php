@@ -60,7 +60,8 @@ class SBTKBaseWidget extends WP_Widget {
 		}
 
 		if (($settings->getAuthenticationMethod() == 'basic' && $store->getBasicAuthUsername() != null 
-			&& $store->getBasicAuthPassword() != null) || ($settings->getAuthenticationMethod() == 'oauth1' && $store->getOAuthAccessToken() != null)) {
+			&& $store->getBasicAuthPassword() != null) || ($settings->getAuthenticationMethod() == 'oauth1' && $store->getOAuthAccessToken() != null)
+			|| ($settings->getAuthenticationMethod() == 'basic' && $settings->getBasicAuthMethod() == 'global')) {
 			require $this->widget_location;
 		}
 

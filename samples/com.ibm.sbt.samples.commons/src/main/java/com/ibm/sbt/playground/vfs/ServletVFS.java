@@ -100,6 +100,7 @@ public class ServletVFS extends VFS {
 					}
 					files[i++]= new ServletVFSFile(getVFS(),this, name, context, s);
 				}
+				this.children = files;
 				return files;
 			}
 			return children;

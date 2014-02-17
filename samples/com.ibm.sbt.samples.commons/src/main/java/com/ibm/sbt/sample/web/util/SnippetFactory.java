@@ -16,6 +16,8 @@
 package com.ibm.sbt.sample.web.util;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -49,7 +51,9 @@ public class SnippetFactory {
 
 	static String jsRootPath = "/samples/js/";
 	static String javaRootPath = "/samples/java/";
-	
+
+	static Map<String, ServletVFS> mappedServlets = new HashMap<String, ServletVFS>();
+
 	/**
 	 * Get a JSSnippet by name, if it is not found in sbt.sample.web it will look in sbtx.sample.web.
 	 * 
@@ -164,10 +168,12 @@ public class SnippetFactory {
 	 * @return VFSFile from the relPath and context.
 	 */
 	private static VFSFile getRootFile(ServletContext context, String relPath) {
+		String rootKey = context.getContextPath()+relPath;
+		if (mappedServlets.containsKey(rootKey)) return mappedServlets.get(rootKey).getRoot();
 		ServletVFS vfs = new ServletVFS(context, relPath);
+		mappedServlets.put(rootKey,vfs);
 		return vfs.getRoot();
 	}
-
 	/**
 	 * Get a RootNode object corresponding to the NodeFactory type and ServletContext
 	 * 

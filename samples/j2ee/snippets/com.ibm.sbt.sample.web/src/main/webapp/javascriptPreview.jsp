@@ -14,66 +14,63 @@
 
 <!DOCTYPE html>
 <html lang="en" style="height: 100%;">
-  <%
-      String snippetName = request.getParameter("snippet");
-      boolean layer = Boolean.parseBoolean(request.getParameter("layer"));
-      String html = null;
-      String js = null;
-      String css = null;
-      String theme = request.getParameter("themeId");
-      boolean debug = false;
-      boolean debugTransport = false;
-      boolean loadDojo = true;
-      final HttpServletRequest finalRequest = request;
-      final HttpSession finalSession = session;
-      final String finalSnippetName = snippetName;
-      ParameterProvider parameterProvider = ParameterProcessor.getWebProvider(finalRequest, finalSession, finalSnippetName);
-      // doGet
-      if(request.getMethod().equals("GET")){
-          JSSnippet snippet = (JSSnippet)SnippetFactory.getJsSnippet(application, request, snippetName);
-          if (snippet != null) {
-              if (html == null)
-                  html = snippet.getHtml();
-              if (js == null)
-                  js = snippet.getJs();
-              if (css == null)
-                  css = snippet.getCss();
-              if(StringUtil.isEmpty(theme))
-                  theme = snippet.getTheme();
-          
-              if (StringUtil.isNotEmpty(js)) {
-          		js = ParameterProcessor.process(js, parameterProvider);
-              }
-              if (StringUtil.isNotEmpty(html)) {
-          		html = ParameterProcessor.process(html, parameterProvider);
-              }
-          }
-      } 
-      // doPost
-      else if (request.getMethod().equals("POST")){
-    	  JSSnippet snippet = null;
-          if (StringUtil.isEmpty(theme)){
-              snippet = (JSSnippet)SnippetFactory.getJsSnippet(application, request, snippetName);
-              theme = snippet.getTheme();
-          }
-          html = request.getParameter("htmlData");
-          js = request.getParameter("jsData");
-          if (StringUtil.isNotEmpty(js)) {
-              js = ParameterProcessor.process(js, parameterProvider);
-          }
-          if (StringUtil.isNotEmpty(html)) {
-              html = ParameterProcessor.process(html, parameterProvider);
-          }
-          css = request.getParameter("cssData");
-          loadDojo = Boolean.parseBoolean(request.getParameter("loadDojo"));
-      }
-      debug = Boolean.parseBoolean(request.getParameter("debug"));
-      debugTransport = Boolean.parseBoolean(request.getParameter("debugTransport"));
-  %>
+
   <head>
-    <meta charset="utf-8">
+   <meta charset="utf-8">
     <title>Social Business Toolkit - JavaScript Preview</title>
-    <script type="text/javascript">
+    <jsp:include page="<%=Util.getLibraryInclude(request)%>" flush="false"/>
+    <% 
+    String snippetName = request.getParameter("snippet");
+    boolean layer = Boolean.parseBoolean(request.getParameter("layer"));
+    if (!layer) {%>
+    	<script type="text/javascript" src="<%=Util.getLibraryUrl(request)%>"></script>
+   <% } 
+   out.flush();
+   
+   String html = null;
+   String js = null;
+   String css = null;
+   String theme = request.getParameter("themeId");
+   boolean debug = false;
+   boolean debugTransport = false;
+   boolean loadDojo = true;
+   final HttpServletRequest finalRequest = request;
+   final HttpSession finalSession = session;
+   final String finalSnippetName = snippetName;
+   ParameterProvider parameterProvider = ParameterProcessor.getWebProvider(finalRequest, finalSession, finalSnippetName);
+   // doGet
+   if(request.getMethod().equals("GET")){
+       JSSnippet snippet = (JSSnippet)SnippetFactory.getJsSnippet(application, request, snippetName);
+       if (snippet != null) {
+           if (html == null)
+               html = snippet.getHtml();
+           if (js == null)
+               js = snippet.getJs();
+           if (css == null)
+               css = snippet.getCss();
+           if(StringUtil.isEmpty(theme))
+               theme = snippet.getTheme();
+        
+       }
+   } 
+   // doPost
+   else if (request.getMethod().equals("POST")){
+ 	  JSSnippet snippet = null;
+       if (StringUtil.isEmpty(theme)){
+           snippet = (JSSnippet)SnippetFactory.getJsSnippet(application, request, snippetName);
+           theme = snippet.getTheme();
+       }
+       html = request.getParameter("htmlData");
+       js = request.getParameter("jsData");
+
+       css = request.getParameter("cssData");
+       loadDojo = Boolean.parseBoolean(request.getParameter("loadDojo"));
+   }
+   debug = Boolean.parseBoolean(request.getParameter("debug"));
+   debugTransport = Boolean.parseBoolean(request.getParameter("debugTransport"));
+   %>
+     
+   <script type="text/javascript">
       window.onerror = function(msg, url, linenumber) {
     	var d =  document.createElement('div');
     	d.innerHTML += 'Unhandled error: '+msg+'\n in page: '+url+'\nat: '+linenumber;
@@ -95,13 +92,11 @@
         {startOpened: true}
         </script>
     <%} %>
-    <jsp:include page="<%=Util.getLibraryInclude(request)%>" flush="false"/>
+    
 
-  <% if (!layer) {%>
-    	<script type="text/javascript" src="<%=Util.getLibraryUrl(request)%>"></script>
-   <% } %>
+
   </head>
-
+<% out.flush(); %>
   <body class="<%=Util.getBodyClass(request, theme)%>" style="width: 90%; height: 100%; margin: 10px;">
     <div id="content"></div>
     <div id="loading" style="visibility: hidden;">
@@ -110,6 +105,14 @@
     <div id="_jsErrors">
     </div>
     <%
+    if (StringUtil.isNotEmpty(js)) {
+        js = ParameterProcessor.process(js, parameterProvider);
+    }
+    if (StringUtil.isNotEmpty(html)) {
+        html = ParameterProcessor.process(html, parameterProvider);
+    }
+
+    
     if (StringUtil.isNotEmpty(css)) {
         String s = "<style>\n" + css + "</style>\n";
         out.println(s);

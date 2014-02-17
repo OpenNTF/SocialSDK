@@ -431,11 +431,15 @@ public interface Endpoint {
 	public boolean isForceDisableExpectedContinue();
 
 	/**
-	 * control endpoint url generation
+	 * The endpoint needs to generate absolute URLs for returning after a login page redirect<br/>
+	 * When this flag is false the return URL is generated using the server address and port<br/>
+	 * When this flag is true the return URL is generated from the client's request header<br/>
+	 * If the client is behind a redirecting proxy this property allow to generate the URL as needed by the client.  
+	 * 
 	 * @returns 
 	 *   true to use the client request url as base for generating response url, 
 	 *   false to use the server configured host and port to generate response url 
 	 */
-	public boolean useClientRequestURLForResponses();
+	public boolean isUseRequestUrl();
 
 }

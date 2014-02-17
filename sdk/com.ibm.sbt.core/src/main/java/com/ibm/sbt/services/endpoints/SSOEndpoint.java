@@ -76,7 +76,7 @@ public class SSOEndpoint extends AbstractEndpoint {
               if(StringUtil.isNotEmpty(authPage)) {
               	try{
               		if(!UrlUtil.isAbsoluteUrl(authPage)){
-              			authPage = UrlUtil.makeUrlAbsolute((HttpServletRequest)context.getHttpRequest(), authPage, useClientRequestURLForResponses());
+              			authPage = UrlUtil.makeUrlAbsolute((HttpServletRequest)context.getHttpRequest(), authPage, isUseRequestUrl());
                   	}
 
               		String redirectUrl = UrlUtil.getRequestUrl((HttpServletRequest)context.getHttpRequest());// change needed to handle portlethttprequest

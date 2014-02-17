@@ -321,7 +321,7 @@ public class ApplicationEndpoint implements Endpoint {
 	}
 
 	@Override
-	public boolean useClientRequestURLForResponses() {
+	public boolean isUseRequestUrl() {
 		return false;
 	}
 	

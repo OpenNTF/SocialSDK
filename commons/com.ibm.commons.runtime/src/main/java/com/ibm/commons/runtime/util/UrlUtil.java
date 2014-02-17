@@ -167,9 +167,8 @@ public class UrlUtil {
 				try {
 					clientRequest = new URL(request.getRequestURL().toString());
 				} catch (MalformedURLException e) {
-					//unrecoverable exception at this point
-					
-					throw new RuntimeException("get request url was not a well formed url" + e);
+					//unrecoverable exception at this point - URL is generated from a valid URL.
+					throw new RuntimeException("The request URL is not valid", e);
 				}
 				server = clientRequest.getHost();
 				port = clientRequest.getPort() == -1 ? clientRequest.getDefaultPort() : clientRequest.getPort();
@@ -182,7 +181,6 @@ public class UrlUtil {
 			
 			// Put that in a utility!
 			StringBuilder b = new StringBuilder();
-			
 			b.append(protocol);
 			b.append("://");
 			b.append(server);

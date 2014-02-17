@@ -341,7 +341,7 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
     }
     
     @Override
-	public boolean useClientRequestURLForResponses() {
+	public boolean isUseRequestUrl() {
         return forceDisableExpectedContinue;
     }
     public void useClientRequestURLForResponses(boolean useClientRequestURLForResponses) {

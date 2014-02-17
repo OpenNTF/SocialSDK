@@ -35,10 +35,10 @@ define(["../../../declare", "../../../config", "../../../util", "../../../lang",
         /**
          * Overriding the method in WidgetWrapper for providing the substitutions for variables in the template.
          * 
-         * @method getTransformObject
+         * @method getTemplateReplacements
          * @returns {Object}
          */
-        getTransformObject: function(){
+        getTemplateReplacements: function(){
             var connectionsUrl = this._endpoint.baseUrl;
             var libUrl = new Url(config.Properties.libraryUrl);
             var libQuery = libUrl.getQuery();

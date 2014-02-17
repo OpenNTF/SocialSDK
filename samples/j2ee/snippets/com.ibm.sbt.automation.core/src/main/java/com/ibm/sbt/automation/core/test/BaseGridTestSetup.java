@@ -11,7 +11,6 @@ import junit.framework.Assert;
 
 import com.ibm.sbt.automation.core.utils.Trace;
 import com.ibm.sbt.security.authentication.AuthenticationException;
-import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.activity.Activity;
 import com.ibm.sbt.services.client.connections.activity.ActivityService;
@@ -158,16 +157,19 @@ public class BaseGridTestSetup extends BaseApiTest{
         Community community = null;
         try {
     		CommunityService communityService = new CommunityService();
+    		long start = System.currentTimeMillis();
      		community =  new Community(communityService, "");
      		community.setTitle("Test Community 1ab" + System.currentTimeMillis()); 
      		community.setContent("");
     		community.setCommunityType("public");
     		community.setTags(tags);
      		community = community.save(); 
-	 
-	     	} catch (Exception e) {
+     		long duration = System.currentTimeMillis() - start;
+     		Trace.log("Created test community: "+community.getCommunityUuid() + " took "+duration+"(ms)");
+	     	} catch (CommunityServiceException e) {
 	     		System.out.println("Grid Setup Error: cannot create community");
-	     		e.printStackTrace();
+
+	     		fail("Error creating test community", e);
 	    	}
         
         return community;

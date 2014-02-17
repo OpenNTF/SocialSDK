@@ -52,6 +52,7 @@ define([
     'sbt/xml',
     'sbt/xpath',
     'sbt/xsl',
+    'sbt/WPSProxy',
     'sbt/authenticator/Basic',
     'sbt/authenticator/GadgetOAuth',
     'sbt/authenticator/OAuth',

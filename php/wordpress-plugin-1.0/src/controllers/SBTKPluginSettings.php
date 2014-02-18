@@ -342,7 +342,9 @@ class SBTKPluginSettings extends BasePluginController
     			}
     		}
     	}
-    	
+    	$callbackURL = BASE_LOCATION . '/core/index.php?classpath=endpoint&class=OAuth2Endpoint&method=authenticationCallback';
+    	$callbackURL = str_replace('http://', 'https://', $callbackURL);
+    	$viewData['callback_url'] = $callbackURL;
     	$viewData['basic_auth_method'] = $basic_auth_method;
     	$viewData['server_type'] = $server_type;
     	$viewData['force_ssl_trust'] = $ssl_trust;

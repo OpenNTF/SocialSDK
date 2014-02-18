@@ -137,6 +137,14 @@ print '<script type="text/javascript" src="' . plugins_url(PLUGIN_NAME) . '/view
 				</select>
 			</td>
 		</tr>
+		<tr style="display: none;" id="tr_new_callback_url">
+			<td style="width: 200px;">
+				***REMOVED*** echo $GLOBALS[LANG]['callback_url'];?>
+			</td>
+			<td>
+				<input disabled="disabled" size="50" type="text" id="new_callback_url" name="new_callback_url" value="" />
+			</td>
+		</tr>
 		<tr style="display: none;" id="tr_new_basic_auth_username">
 			<td style="width: 200px;">
 				***REMOVED*** echo $GLOBALS[LANG]['username'];?>

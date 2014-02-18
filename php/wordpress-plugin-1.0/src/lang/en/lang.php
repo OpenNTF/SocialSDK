@@ -87,3 +87,4 @@ $lang['my-pinned-folders']		= 'My pinned folders';
 $lang['active-folders']			= 'Active folders';
 $lang['file-shares']			= 'File shares';
 $lang['community-files']		= 'Community files';
+$lang['callback_url']			= 'Callback URL';

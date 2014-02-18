@@ -50,7 +50,7 @@ define([ "../../../declare", "../../../config", "../../../lang", "../../../xml",
          * @returns an instance of a  profile gird renderer.
          */
         createDefaultRenderer : function(args) {
-            return new ColleagueGridRenderer(args);
+            return new ColleagueGridRenderer(args,this);
         },
         
         contextRootMap: {

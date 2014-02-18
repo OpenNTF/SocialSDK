@@ -30,6 +30,7 @@ function change_new_authentication_method() {
 	var selected_type = server_type.options[server_type.selectedIndex].value;
 
 	if (authMethod == "oauth1") {
+		document.getElementById("tr_new_callback_url").style.display = 'none';
 		document.getElementById("tr_new_consumer_secret").style.display = 'block';
 		document.getElementById("tr_new_consumer_key").style.display = 'block';
 		document.getElementById("tr_new_authorization_url").style.display = 'none';
@@ -47,6 +48,7 @@ function change_new_authentication_method() {
 		document.getElementById("new_access_token_url").value = document.getElementById("new_endpoint_url").value + '/manage/oauth/getAccessToken';
 		document.getElementById("new_request_token_url").value = document.getElementById("new_endpoint_url").value + '/manage/oauth/getRequestToken';
 	} else if (authMethod == "basic") {
+		document.getElementById("tr_new_callback_url").style.display = 'none';
 		document.getElementById("lb_endpoint_url").value = 'URL to the Connections server';
 		document.getElementById("tr_force_ssl_trust").style.display = 'block';
 		document.getElementById("tr_new_basic_auth_method").style.display = 'block';
@@ -67,18 +69,21 @@ function change_new_authentication_method() {
 		document.getElementById("tr_new_basic_auth_method").style.display = 'none';
 		document.getElementById("tr_new_basic_auth_username").style.display = 'none';
 		document.getElementById("tr_new_basic_auth_password").style.display = 'none';
+		document.getElementById("tr_new_callback_url").style.display = 'block';
 		document.getElementById("tr_force_ssl_trust").style.display = 'block';
 		document.getElementById("lb_endpoint_url").value = strSmartcloudEndpointURL;
 		if (document.getElementById("new_endpoint_url").value == '') {
 			document.getElementById("new_endpoint_url").value = 'https://apps.na.collabserv.com';
 		}
-		document.getElementById("new_authorization_url").value = document.getElementById("new_endpoint_url").value + '/manage/oauth/authorizeToken';
-		document.getElementById("new_access_token_url").value = document.getElementById("new_endpoint_url").value + '/manage/oauth/getRequestToken';
-		document.getElementById("new_request_token_url").value = document.getElementById("new_endpoint_url").value + '/manage/oauth/getAccessToken';
 		
-		document.getElementById("lb_new_consumer_secret").value = 'ClientSecret';
-		document.getElementById("lb_new_consumer_key").value = 'ClientID';
+		document.getElementById("new_authorization_url").value = document.getElementById("new_endpoint_url").value + '/manage/oauth2/authorize';
+		document.getElementById("new_access_token_url").value = document.getElementById("new_endpoint_url").value + '/manage/oauth2/token';
+		document.getElementById("new_request_token_url").value = document.getElementById("new_endpoint_url").value + '';
+		
+		document.getElementById("lb_new_consumer_secret").innerHTML = 'ClientSecret';
+		document.getElementById("lb_new_consumer_key").innerHTML = 'ClientID';
 	} else if (authMethod == "oauth2" && selected_type == "connections") {
+		document.getElementById("tr_new_callback_url").style.display = 'block';
 		document.getElementById("tr_new_consumer_secret").style.display = 'block';
 		document.getElementById("tr_new_consumer_key").style.display = 'block';
 		document.getElementById("tr_new_authorization_url").style.display = 'block';
@@ -98,6 +103,7 @@ function reset() {
 	document.getElementById("new_endpoint_name").disabled = false;
 	document.getElementById("tr_new_consumer_secret").style.display = 'none';
 	document.getElementById("tr_new_consumer_key").style.display = 'none';
+	document.getElementById("tr_new_callback_url").style.display = 'none';
 	document.getElementById("tr_new_authorization_url").style.display = 'none';
 	document.getElementById("tr_new_access_token_url").style.display = 'none';
 	document.getElementById("tr_new_request_token_url").style.display = 'none';

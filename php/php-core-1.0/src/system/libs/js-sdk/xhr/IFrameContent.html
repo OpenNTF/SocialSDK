@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- © Copyright IBM Corp. 2010                                          -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     --> 
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   --> 
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        --> 
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+<html>
+<head>
+	<title>SBT Client Proxy</title>
+	<script type="text/javascript" src="/sbt.dojo172/dojo/dojo.js" djConfig="parseOnLoad: true"></script>
+<!-- 	
+	<script type="text/javascript" src="/portal_dojo/v1.4.3/dojo/dojo.js"></script>
+ -->		
+</head>
+<body>
+	<div id='holder' style="position: absolute; top: -10000px; width: 1px; height: 1px"></div>
+	<script>
+		function processMessage(e) {
+			
+			// Should we verify the authorized applications?
+			// Should we prevent any cookie from being automatically submitted (use a proxy)?
+			//		-> prevent requests that are already authenticated
+			if(e.source==parent) {
+				var o = dojo.fromJson(e.data);
+				
+				o.args.load = function(data,ioArgs) {
+					//console.log("IFRAME: Handle load")
+				//	parent.postMessage(dojo.toJson({method:"load",id:o.id,data:data,ioArgs:null}),"*");
+					parent.postMessage(JSON.stringify({method:"load",id:o.id,data:data,ioArgs:null}),"*");
+				}
+				o.args.error = function(data,ioArgs) {
+					//console.log("IFRAME: Handle error")
+				//	parent.postMessage(dojo.toJson({method:"error",id:o.id,data:data,ioArgs:null}),"*");
+						parent.postMessage(JSON.stringify({method:"error",id:o.id,data:data,ioArgs:null}),"*");
+				
+				}
+				dojo.xhr(o.method,o.args,o.hasBody);
+			}
+		};
+		if(window.addEventListener) {
+			window.addEventListener("message", processMessage, false );
+		} else {
+			window.attachEvent("onmessage", processMessage);
+		}
+		
+		// Notify the parent that the frame is now initialized
+		//alert("POST INIT")
+		//parent.postMessage(dojo.toJson({method:"ready"}),"*");
+			parent.postMessage(JSON.stringify({method:"ready"}),"*");
+
+	</script>
+</body>
+</html>

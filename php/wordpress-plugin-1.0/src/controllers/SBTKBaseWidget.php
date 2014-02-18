@@ -53,7 +53,7 @@ class SBTKBaseWidget extends WP_Widget {
 		$settings = new SBTKSettings();
 		$store = new CredentialStore();
 
-		if ($settings->getAuthenticationMethod() == 'oauth1' && $store->getOAuthAccessToken() == null &&
+		if (($settings->getAuthenticationMethod() == 'oauth1' || $settings->getAuthenticationMethod() == 'oauth2') && $store->getOAuthAccessToken() == null &&
 		(!isset($_COOKIE['IBMSBTKOAuthLogin']) || $_COOKIE['IBMSBTKOAuthLogin'] != 'yes')) {
 			require BASE_PATH . '/core/views/oauth-login-display.php';
 			return;
@@ -61,7 +61,8 @@ class SBTKBaseWidget extends WP_Widget {
 
 		if (($settings->getAuthenticationMethod() == 'basic' && $store->getBasicAuthUsername() != null 
 			&& $store->getBasicAuthPassword() != null) || ($settings->getAuthenticationMethod() == 'oauth1' && $store->getTokenSecret() != null)
-			|| ($settings->getAuthenticationMethod() == 'basic' && $settings->getBasicAuthMethod() == 'global')) {
+			|| ($settings->getAuthenticationMethod() == 'basic' && $settings->getBasicAuthMethod() == 'global')
+			|| ($settings->getAuthenticationMethod() == 'oauth2' && $store->getOAuthAccessToken() != null)) {
 			require $this->widget_location;
 		}
 

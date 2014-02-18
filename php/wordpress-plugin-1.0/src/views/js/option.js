@@ -71,6 +71,7 @@ function edit_selected_endpoint() {
 }
 
 window.onload = function () {
+	document.getElementById("new_callback_url").value = document.getElementById("callback_url").value;
 	document.getElementById("submit").value = "Activate Endpoint";
 	endpoint_change();
 }

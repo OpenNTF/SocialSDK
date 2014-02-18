@@ -72,7 +72,7 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
          * Selected rows are the rows of the grid that have been selected by checking a check box 
          */
         selectedRows: null,
-        
+                
         /*
          * TODO remove this?
          */
@@ -126,14 +126,14 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
             
             if (!this.renderer) {
                 if (args && args.rendererArgs) {
-                    this.renderer = this.createDefaultRenderer(args.rendererArgs);
+                    this.renderer = this.createDefaultRenderer(args.rendererArgs,this);
                 } else if (this.options) {
                     var rendererArgs = this.options[this.defaultOption].rendererArgs;
                     if (args && args.type && this.options.hasOwnProperty(args.type)) {
                         rendererArgs = this.options[args.type].rendererArgs;
                     }
 
-                    this.renderer = this.createDefaultRenderer(rendererArgs);
+                    this.renderer = this.createDefaultRenderer(rendererArgs,this);
                 }
             }
         },

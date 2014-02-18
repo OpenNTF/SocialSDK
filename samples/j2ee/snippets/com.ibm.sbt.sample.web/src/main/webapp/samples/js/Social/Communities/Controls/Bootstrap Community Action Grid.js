@@ -1,11 +1,15 @@
 require(["sbt/dom", 
          "sbt/stringUtil", 
          "sbt/connections/controls/communities/CommunityGrid", 
-         "sbt/connections/controls/bootstrap/CommunityRendererMixin",
          "sbt/lang"], 
          
-function(dom, stringUtil, CommunityGrid, CommunityRendererMixin, lang) {
-    var grid = new CommunityGrid();
+function(dom, stringUtil, CommunityGrid, lang) {
+    var grid = new CommunityGrid({
+    	theme:"bootstrap",
+    	hidePager:true,
+    	hideSorter:true,
+    	hideFooter:true
+    	});
 
     // create custom action
     grid.communityAction = {
@@ -23,7 +27,7 @@ function(dom, stringUtil, CommunityGrid, CommunityRendererMixin, lang) {
         }
     };
     
-    lang.mixin(grid.renderer, CommunityRendererMixin);
+    grid.renderer.tableClass = "table";
 
     dom.byId("gridDiv").appendChild(grid.domNode);
 

@@ -126,7 +126,7 @@ define(["../../../declare",
 	         * @returns an instance of a ForumGridRenderer.
 	         */
 	        createDefaultRenderer : function(args) {
-	            return new ForumGridRenderer(args);
+	            return new ForumGridRenderer(args,this);
 	        },
 	        
 	        /**
@@ -196,6 +196,7 @@ define(["../../../declare",
 
 	        	this.renderer.headerTemplate = this.renderer.topicHeader;
 	        	this.renderer.breadCrumb = this.renderer.topicBreadCrumb;
+	        	this.renderer.template = this.renderer.topicTemplate;
 	        	this.store.setAttributes(consts.ForumTopicXPath);
 	        	this.hideBreadCrumb = false;
 	        	var endpoint = this.store.getEndpoint();

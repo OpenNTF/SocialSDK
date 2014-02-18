@@ -64,15 +64,13 @@ echo building %LABEL% with tools from %toolsDir%  passed platform: %NOTES_PLATFO
 
 
 
-set JAVA_HOME=%toolsDir:"=%\ibm-java-sdk-60-win-i386
+set JAVA_HOME=%toolsDir:"=%\ibm-java-sdk
 set M2_HOME=%toolsDir:"=%\apache-maven-3.0.4
 set PATH=%JAVA_HOME%\bin;%M2_HOME%\bin;%PATH%
-
+set MAVEN_OPTS=-Xmx1536m
 
 if not (%LABEL%) == (SNAPSHOT) echo changing version to %LABEL%
 if not (%LABEL%) == (SNAPSHOT) call mvn org.eclipse.tycho:tycho-versions-plugin:0.19.0:set-version -DnewVersion=1.0.0.%LABEL% %NOTES_PLATFORM%
 
 
-rem queuing standard and domino builds to aggregate both
-
-mvn clean install javadoc:aggregate -DtoolsDir=%toolsDir%  %WORKING_DIR% %LOCAL_REPO% %NOTES_PLATFORM%
+mvn clean install javadoc:aggregate -DtoolsDir=%toolsDir%  %WORKING_DIR% %LOCAL_REPO% %NOTES_PLATFORM% 

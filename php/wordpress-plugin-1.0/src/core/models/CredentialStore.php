@@ -24,6 +24,11 @@ if (!defined('SESSION_PREFIX')) {
 	define('SESSION_PREFIX', 'ibm_sbtk_');
 }
 
+if (!defined('CRYPT')) {
+	$path = str_replace('core', '', BASE_PATH);
+	require_once $path . '/ibm-sbtk-constants.php';
+}
+
 // If the CredentialStore file is called outside the wordpress context, then
 // we need to load the Wordpress API and associated dependencies manually
 // in order to access the required settings
@@ -120,8 +125,8 @@ class CredentialStore {
 		$sessions = get_option(USER_SESSIONS);
 		
 		array_push($sessions, array(
-		'id' => $sessionID,
-		'created' => $timestamp)
+			'id' => $sessionID,
+			'created' => $timestamp)
 		);
 			
 		$etimestamp = $this->_encrypt($pivKey, $timestamp, $pivIv);

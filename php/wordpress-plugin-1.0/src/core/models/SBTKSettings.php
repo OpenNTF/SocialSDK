@@ -157,6 +157,16 @@ class SBTKSettings {
 	}
 	
 	/**
+	 * Returns the OAuth 2.0 callback URL
+	 *
+	 * @return
+	 * @author Benjamin Jakobus
+	 */
+	public function getOAuth2CallbackURL() {
+		return $this->selectedEndpoint['oauth2_callback_url'];
+	}
+	
+	/**
 	 * Returns the URL that points to where the SDK is deployed.
 	 *
 	 * @return
@@ -165,6 +175,8 @@ class SBTKSettings {
 	public function getSDKDeployURL() {
 		return $this->sdkSettings['sdk_deploy_url'];
 	}
+	
+	
 	
 	/**
 	 * Returns the endpoint name.

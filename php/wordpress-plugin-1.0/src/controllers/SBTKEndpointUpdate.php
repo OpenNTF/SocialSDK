@@ -100,6 +100,7 @@ class SBTKEndpointUpdate {
 			$endpoint['basic_auth_method'] = (isset($_POST['basic_auth_method']) ? $_POST['basic_auth_method'] : "");
 			$endpoint['server_type'] = (isset($_POST['server_type']) ? $_POST['server_type'] : "");
 			$endpoint['force_ssl_trust'] = (isset($_POST['force_ssl_trust']) && $_POST['force_ssl_trust'] == 'force_ssl_trust' ? $_POST['force_ssl_trust'] : "");
+			$endpoint['oauth2_callback_url'] = (isset($_POST['callback_url']) ? $_POST['callback_url'] : "");
 			
 			// If deletion_point is set to "yes", then the endpoint will be deleted.
 			// Note: The deletion UI controls will need to be uncommented in

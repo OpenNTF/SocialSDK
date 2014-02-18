@@ -19,8 +19,9 @@ define({
     root: {
     	updatedBy: "Updated by",
     	modified: "Last Updated",
-    	dueDate: "Due Date",
+    	dueDate: "Due Date: ",
     	name: "Name",
-        feed : "Feed for these Activities"
+        feed : "Feed for these Activities",
+        tags:"Tags: "
     }
 });

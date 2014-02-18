@@ -4,7 +4,8 @@ require(["sbt/connections/FileService", "sbt/connections/controls/files/FileGrid
         var grid = new FileGrid({
              type : "myFileComments",
              userId : userId,
-             documentId : fileId
+             documentId : fileId,
+             theme:"oneui"
         });
                  
         dom.byId("gridDiv").appendChild(grid.domNode);

@@ -29,11 +29,13 @@ define(["../../../declare",
         "../../../text!./templates/ReplyBreadCrumb.html",
         "../../../text!./templates/TopicBreadCrumb.html",
         "../../../text!./templates/MyTopicsBreadCrumb.html",
+        "../../../text!./templates/BootstrapForumRow.html",
+        "../../../text!./templates/BootstrapTopicRow.html",
         "../../../i18n!./nls/ForumGridRenderer"], 
 
     function(declare, ConnectionsGridRenderer, i18n, dom, lang, ForumRow, tableHeader, TopicRow, ForumTopicRow,
                     TopicHeader, ReplyTemplate, ReplyHeader,ReplyBreadCrumb,TopicBreadCrumb, 
-                    MyTopicsBreadCrumb, nls){
+                    MyTopicsBreadCrumb, BootstrapForumRow,BootstrapTopicRow, nls){
                 
                 /**
                  * @class ForumGridRenderer
@@ -69,22 +71,36 @@ define(["../../../declare",
                     
                     breadCrumb: ReplyBreadCrumb,
                     
+                    bootstrapForumRow: BootstrapForumRow,
+                    
+                    bootstrapTopicRow: BootstrapTopicRow,
+                    
                     /**
                      * The constructor function
                      * @method constructor
                      * @param args
                      */
-                    constructor: function(args){
+                    constructor: function(args,grid){
                             
-                            if(args.type=="myTopics"){
+                          if(grid.theme == "bootstrap"){
+                        	  if(args.type=="myTopics" || grid.type == "forumTopics"){
+                                  this.template = this.bootstrapTopicRow;
+                                  this.headerTemplate = null;
+                        	  }else{
+                                  this.template = this.bootstrapForumRow;
+                                  this.headerTemplate = null;
+                        	  }	
+                          }else{
+	                       if(args.type=="myTopics"){
                                     this.template = this.topicTemplate;
                                     this.headerTemplate = this.topicHeader;
                             }else if(args.type=="forumTopics"){
                             	 this.template = this.forumTopicTemplate;
+                            	 this.headerTemplate = this.topicHeader;
                             }else{
-                            
                                     this.template = this.forumTemplate;
-                            }
+                            }      
+                          }
                             
                     },
                     

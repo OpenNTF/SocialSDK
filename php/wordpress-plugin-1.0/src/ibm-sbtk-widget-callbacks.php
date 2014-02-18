@@ -33,7 +33,7 @@ function ibm_sbtk_header($args = array()) {
 	$settings = new SBTKSettings();
 	$store = new CredentialStore();
 
-	if ($settings->getAuthenticationMethod() == 'oauth1' && $store->getOAuthAccessToken() == null &&
+	if (($settings->getAuthenticationMethod() == 'oauth1' || $settings->getAuthenticationMethod() == 'oauth2') && $store->getOAuthAccessToken() == null &&
 	(!isset($_COOKIE['IBMSBTKOAuthLogin']) || $_COOKIE['IBMSBTKOAuthLogin'] != 'yes')) {
 		return;
 	}

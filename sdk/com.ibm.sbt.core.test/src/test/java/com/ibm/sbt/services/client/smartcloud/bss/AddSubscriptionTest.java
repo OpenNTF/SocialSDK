@@ -41,10 +41,12 @@ public class AddSubscriptionTest extends BaseBssTest {
     		// Step 3. Create "IBM SmartCloud Connections" Subscription
     		String engageSubscriptionId = createSubscription(customerId, 3, "D0NWLLL", 5);
     		System.out.println(engageSubscriptionId);
+    		System.out.println(getSubscriptionBYid(engageSubscriptionId).toJsonString());
 
     		// Step 4. Create Extra Storage Subscription
     		String storageSubscriptionId = createSubscription(customerId, 3, "D100PLL", 5);
     		System.out.println(storageSubscriptionId);
+    		System.out.println(getSubscriptionBYid(storageSubscriptionId).toJsonString());
 
     		// Step 5. Activate the subscriber
     		activateSubscriber(subscriberId);

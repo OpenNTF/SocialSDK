@@ -29,15 +29,16 @@ import org.junit.Test;
 public class ForumTopicCreateDeleteTest extends BaseForumServiceTest {
 
 	@Test
-	public void CreateForumTopicTest() {
+	public void testCreateForumTopic() {
 		try {
+			forum = createForum();
 			ForumTopic topic = new ForumTopic(forumService);
 			topic.setTitle("Test topic titile" + System.currentTimeMillis());
 			topic.setContent("Test topic content");
 			topic.setForumUuid(forum.getForumUuid());
 			ForumTopic topicReturned = forumService.createForumTopic(topic);
 			assertNotNull(topicReturned.getTitle());
-			assertEquals(topic.getTitle(), topicReturned.getTitle());
+			assertEquals(unRandomize(topic.getTitle()), unRandomize(topicReturned.getTitle()));
 			assertEquals(topic.getContent(), topicReturned.getContent().trim());
 			deleteForumTopic(topicReturned);
 		} catch (Exception e) {
@@ -47,7 +48,7 @@ public class ForumTopicCreateDeleteTest extends BaseForumServiceTest {
 	}
 
 	@Test
-	public void deleteTopic() throws Exception {
+	public void testDeleteForumTopic() throws Exception {
 		try {
 			ForumTopic createdTopic = createForumTopic();
 			ForumTopic topicGot = forumService.getForumTopic(createdTopic.getTopicUuid());

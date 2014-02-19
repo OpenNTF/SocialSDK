@@ -23,8 +23,6 @@ import static org.junit.Assert.fail;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -34,7 +32,7 @@ import org.junit.Test;
 public class ForumCreateDeleteTest extends BaseForumServiceTest {
 
 	@Test
-	public void CreateForumTest() {
+	public void testCreateForum() {
 		try {
 			Forum forum = new Forum(forumService);
 			forum.setTitle("Test forum title" + System.currentTimeMillis());
@@ -46,7 +44,7 @@ public class ForumCreateDeleteTest extends BaseForumServiceTest {
 
 			Forum forumReturned = forumService.createForum(forum);
 			assertNotNull(forumReturned.getTitle());
-			assertEquals(forum.getTitle(), forumReturned.getTitle());
+			assertEquals(unRandomize(forum.getTitle()), unRandomize(forumReturned.getTitle()));
 			assertEquals(forum.getContent(), forumReturned.getContent());
 			deleteForum(forumReturned);
 		} catch (Exception e) {
@@ -56,7 +54,7 @@ public class ForumCreateDeleteTest extends BaseForumServiceTest {
 	}
 
 	@Test
-	public void deleteForum() throws Exception {
+	public void testDeleteForum() throws Exception {
 		try {
 			Forum createdForum = createForum();
 			Forum forumGot = forumService.getForum(createdForum.getForumUuid());

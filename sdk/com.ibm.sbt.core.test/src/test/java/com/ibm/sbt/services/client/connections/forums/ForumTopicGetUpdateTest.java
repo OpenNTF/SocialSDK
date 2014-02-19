@@ -35,7 +35,7 @@ public class ForumTopicGetUpdateTest extends BaseForumServiceTest {
 	}
 
 	@Test
-	public void GetForumTopic() {
+	public void testGetForumTopic() {
 		try {
 			ForumTopic topicGot = forumService.getForumTopic(topic.getTopicUuid());
 
@@ -48,7 +48,7 @@ public class ForumTopicGetUpdateTest extends BaseForumServiceTest {
 	}
 
 	@Test
-	public void UpdateTopic() {
+	public void testUpdateTopic() {
 		try {
 			topic.setTitle("new Test topic title" + System.currentTimeMillis());
 			topic.setContent("new Test topic content" + System.currentTimeMillis());
@@ -56,9 +56,9 @@ public class ForumTopicGetUpdateTest extends BaseForumServiceTest {
 			
 			ForumTopic updatedTopic = forumService.getForumTopic(topic.getTopicUuid());
 			
-			assertEquals(topic.getTitle(), updatedTopic.getTitle());
+			assertEquals(unRandomize(topic.getTitle()), unRandomize(updatedTopic.getTitle()));
 			assertEquals(topic.getTopicUuid(), updatedTopic.getTopicUuid());
-			assertEquals(topic.getContent(), updatedTopic.getContent().trim());
+			assertEquals(unRandomize(topic.getContent()), unRandomize(updatedTopic.getContent().trim()));
 
 		} catch (Exception e) {
 			fail("Error calling forumService.updateForumTopic() caused by: "+e.getMessage());

@@ -22,7 +22,7 @@ public class BaseActivityServiceTest extends BaseUnitTest {
 	protected Activity activity;
 	
 	@Before
-	protected void initActivityServiceTest() {
+	public void initActivityServiceTest() {
 		if (activityService==null) {
 			activityService = new ActivityService();
 		}

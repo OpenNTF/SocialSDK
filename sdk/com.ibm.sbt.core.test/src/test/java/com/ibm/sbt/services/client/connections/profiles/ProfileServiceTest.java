@@ -11,7 +11,9 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import com.ibm.sbt.services.BaseUnitTest;
 import com.ibm.sbt.services.client.SerializationUtil;
@@ -25,6 +27,7 @@ import com.ibm.sbt.services.client.SerializationUtil;
  */
 public class ProfileServiceTest extends BaseUnitTest {
 
+	@Rule public ExpectedException thrown= ExpectedException.none();
 	protected ProfileService profileService;
 
 	@Before
@@ -129,11 +132,18 @@ public class ProfileServiceTest extends BaseUnitTest {
 
 	@Test
 	public void testCheckColleague() throws Exception {
+		String connectionId = profileService.sendInvite(properties.getProperty("email2"));
 		ColleagueConnection connection = profileService.checkColleague(
 				properties.getProperty("email1"),
 				properties.getProperty("email2"));
 		assertNotNull(connection.getTitle());
 		assertNotNull(connection.getConnectionId());
+		//assertEquals(connection.getConnectionId(), connectionId);
+		//profileService.deleteInvite(connectionId);
+		profileService.deleteInvite(connection.getConnectionId());
+		//Interestingly, the connectionId retrieved when the invite is sent and the one on the ColleagueConnection are different
+		//but both work to delete the invite
+		//Also, if there is an invite it is like an actual connection, so we must probably check the "status" of the connection
 	}
 
 	@Test
@@ -172,7 +182,8 @@ public class ProfileServiceTest extends BaseUnitTest {
 
 	@Test
 	public void testSendInvite() throws Exception {
-		profileService.sendInvite(properties.getProperty("email2"));
+		String connectionId = profileService.sendInvite(properties.getProperty("email2"));
+		profileService.deleteInvite(connectionId);
 	}
 
 	@Test
@@ -206,10 +217,12 @@ public class ProfileServiceTest extends BaseUnitTest {
 
 	@Test
 	public final void testUpdateProfilePhoto() throws Exception {
-		Profile profile = profileService.getProfile(properties
-				.getProperty("email1"));
-		File file = new File("config/image.jpg");
+		Profile profile = profileService.getProfile(properties.getProperty("email1"));
+		File file = new File("src/test/java/com/ibm/sbt/config/image1.jpg");
 		profileService.updateProfilePhoto(file, profile.getUserid());
+		//profile = profileService.getProfile(properties.getProperty("email1"));
+		//TODO: To improve the test, we could download the file after updating and do a checksum test to see if that is the updated file
+		// also, do a checksum before updating to see that it is the other file, and update to the first or to the second file
 	}
 
 	@Test
@@ -217,6 +230,8 @@ public class ProfileServiceTest extends BaseUnitTest {
 		Profile profile = profileService.getProfile(properties
 				.getProperty("email1"));
 		File file = new File("config/image");
+		thrown.expect(ProfileServiceException.class);
+		thrown.expectMessage("Cannot open the file");
 		profileService.updateProfilePhoto(file, profile.getUserid());
 	}
 
@@ -227,6 +242,8 @@ public class ProfileServiceTest extends BaseUnitTest {
 				.getProperty("email1"));
 		File file = new File("image1.jpg");
 		profile.setPhotoLocation(file.getAbsolutePath());
+		thrown.expect(ProfileServiceException.class);
+		thrown.expectMessage("Cannot open the file");
 		profileService.updateProfilePhoto(file, profile.getUserid());
 	}
 	

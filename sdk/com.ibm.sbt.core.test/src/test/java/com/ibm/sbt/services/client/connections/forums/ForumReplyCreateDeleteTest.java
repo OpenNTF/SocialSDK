@@ -20,8 +20,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -31,16 +29,17 @@ import org.junit.Test;
 public class ForumReplyCreateDeleteTest extends BaseForumServiceTest {
 
 	@Test
-	public void CreateForumReplyTest() {
+	public void testCreateForumReply() {
 		try {
+			topic = createForumTopic();
 			ForumReply reply = new ForumReply(forumService);
 			reply.setTitle("Test reply title" + System.currentTimeMillis());
 			reply.setContent("Test reply content" + System.currentTimeMillis());
 			reply.setReplyToPostUuid(topic.getTopicUuid());
 			ForumReply replyReturned = forumService.createForumReply(reply);
 			assertNotNull(replyReturned.getTitle());
-			assertEquals(reply.getTitle(), replyReturned.getTitle().trim());
-			assertEquals(reply.getContent(), replyReturned.getContent().trim());
+			assertEquals(unRandomize(reply.getTitle()), unRandomize(replyReturned.getTitle().trim()));
+			assertEquals(unRandomize(reply.getContent()), unRandomize(replyReturned.getContent().trim()));
 			deleteForumReply(replyReturned);
 		} catch (Exception e) {
 			fail("Error calling forumService.createForumReply() caused by: "+e.getMessage());
@@ -48,7 +47,7 @@ public class ForumReplyCreateDeleteTest extends BaseForumServiceTest {
 	}
 
 	@Test
-	public void deleteReply() throws Exception {
+	public void testDeleteForumReply() throws Exception {
 		try {
 			ForumReply createdReply = createForumReply();
 			ForumReply replyGot = forumService.getForumReply(createdReply.getReplyUuid());

@@ -20,8 +20,10 @@
 define(["../../../declare",
         "../ConnectionsGridRenderer",
         "../../../i18n!./nls/CommunityMembersGridRenderer",
-        "../../../text!./templates/CommunityMemberRow.html"], 
-        function(declare, ConnectionsGridRenderer, nls, communityMemberTemplate) {
+        "../../../text!./templates/CommunityMemberRow.html",
+        "../../../text!./templates/BootstrapCommunityMember.html"], 
+        function(declare, ConnectionsGridRenderer, nls, communityMemberTemplate,
+        		bootstrapCommunityMemberTemplate) {
 		
     /**
      * @class ProfileGridRenderer
@@ -38,10 +40,16 @@ define(["../../../declare",
           * @method constructor
           * @param args
           */
-         constructor: function(args) {
-             if (args.type == "communityMembers") {
-            	 this.template = communityMemberTemplate;
+         constructor: function(args,grid) {
+        	 if (grid.theme == "bootstrap"){
+            	 this.template = bootstrapCommunityMemberTemplate;
+             }else{
+            	  if (args.type == "communityMembers") {
+            		  this.template = communityMemberTemplate;
+            	  }
              }
+        	
+        	 
          },
 
          /**

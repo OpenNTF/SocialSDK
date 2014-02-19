@@ -135,7 +135,7 @@ define([ "../../../declare",
          * @returns {CommunityGridRenderer}
          */
         createDefaultRenderer : function(args) {
-            return new CommunityGridRenderer(args);
+            return new CommunityGridRenderer(args,this);
         },
         
         /**

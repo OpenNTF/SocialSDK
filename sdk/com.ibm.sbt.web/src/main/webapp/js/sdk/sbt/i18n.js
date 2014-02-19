@@ -20,7 +20,7 @@
  */
 define(['./_bridge/i18n'],function(i18n) {
     var nls = {
-        todayAt : "today at ",
+        todayAt : "Today at ",
         on : "on "
     };
     

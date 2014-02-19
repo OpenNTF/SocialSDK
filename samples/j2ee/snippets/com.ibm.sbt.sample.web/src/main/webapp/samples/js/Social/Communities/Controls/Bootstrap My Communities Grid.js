@@ -1,16 +1,19 @@
 require(["sbt/dom", 
          "sbt/connections/controls/communities/CommunityGrid",
-         "sbt/connections/controls/bootstrap/CommunityRendererMixin",
          "sbt/lang"], 
          
-function(dom, CommunityGrid, CommunityRendererMixin, lang) {
-	  var grid = new CommunityGrid({
-	        type: "my"
-	  });
+      function(dom, CommunityGrid, lang) {
+		  var grid = new CommunityGrid({
+		        type: "my",
+		        theme: "bootstrap",
+		        hidePager:true,
+		    	hideSorter:true,
+		    	hideFooter:true
+		  });
 
-	  lang.mixin(grid.renderer, CommunityRendererMixin);
-	  dom.byId("gridDiv").appendChild(grid.domNode);
-	  grid.update();
-});
+		  grid.renderer.tableClass = "table";
+		  dom.byId("gridDiv").appendChild(grid.domNode);
+		  grid.update();
+	});
 
 

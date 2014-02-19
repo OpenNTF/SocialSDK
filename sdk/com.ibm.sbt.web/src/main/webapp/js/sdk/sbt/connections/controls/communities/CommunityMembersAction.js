@@ -56,11 +56,7 @@ define(
 						 *            The element that will use the tooltip
 						 */
 						getTooltip : function(item) {
-
-							// for default the semantic tag service will pop up
-							// the business card
-							// so do nothing here
-
+							return item.getValue("title");
 						},
 
 						/**
@@ -76,11 +72,9 @@ define(
 						 * @param event
 						 *            The event
 						 */
-						execute : function(item, opts, event) {
-
-							// for default the semantic tag service will pop up
-							// the business card
-							// so do nothing here
+						execute : function(item, grid, event) {
+							var url = grid.renderer.getProfileUrl(grid,item.getValue("id"));
+							window.open(url);
 						},
 
 						/**

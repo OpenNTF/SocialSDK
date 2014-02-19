@@ -3,16 +3,13 @@ require(["sbt/dom",
          
  function(dom, BookmarkGrid) {
     
-	var domNode = dom.byId("publicBookmarksRow");
-    var CustomBookmarkRow = domNode.text || domNode.textContent;
-	
     var grid = new BookmarkGrid({
 		type: "public",
-		hideSorter: true,
-		hidePager: true
+		theme: "bootstrap",
+		hidePager:true,
+		hideSorter:true,
+		hideFooter:true
 	});
-
-	grid.renderer.template = CustomBookmarkRow;
 
     dom.byId("gridDiv").appendChild(grid.domNode);
 

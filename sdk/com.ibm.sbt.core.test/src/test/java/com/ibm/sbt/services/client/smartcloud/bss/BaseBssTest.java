@@ -239,6 +239,21 @@ public class BaseBssTest {
     	return null;
     }
     
+    public JsonEntity getSubscriptionBYid(String subscriptionId) {
+    	try {
+    		SubscriptionManagementService subscriptionManagement = getSubscriptionManagementService();
+    		return subscriptionManagement.getSubscriptionById(subscriptionId);
+    		
+    	} catch (BssException be) {
+    		JsonJavaObject jsonObject = be.getResponseJson();
+    		System.err.println(jsonObject);
+    		Assert.fail("Error retrieving subscription because: "+jsonObject);
+    	} catch (Exception e) {
+    		Assert.fail("Error retrieving subscription caused by: "+e.getMessage());    		
+    	}
+    	return null;
+    }
+    
 	public String getLoginName(String subscriberId) {
     	try {
     		JsonEntity subscriber = getSubscriberById(subscriberId);

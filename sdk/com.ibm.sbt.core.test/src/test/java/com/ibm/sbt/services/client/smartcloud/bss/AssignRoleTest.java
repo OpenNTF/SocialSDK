@@ -35,11 +35,16 @@ public class AssignRoleTest extends BaseBssTest {
     		String loginName = subscriber.getAsString("Subscriber/Person/EmailAddress");
     		System.out.println(loginName);
     		
-    		AuthorizationService authorizationService = getAuthorizationService();
+			AuthorizationService authorizationService = getAuthorizationService();
+    		String[] roles = authorizationService.getRoles(loginName);
+			for (String role : roles) {
+				System.out.println(role);
+			}
+
     		authorizationService.assignRole(loginName, "CustomerAdministrator");
     		authorizationService.assignRole(loginName, "CustomerPurchaser");
     		
-    		String[] roles = authorizationService.getRoles(loginName);
+    		roles = authorizationService.getRoles(loginName);
 			for (String role : roles) {
 				System.out.println(role);
 			}

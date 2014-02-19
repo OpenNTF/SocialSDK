@@ -80,6 +80,7 @@ public class EntitleSubscriberTest extends BaseBssTest {
 			System.out.println("Entitlement: " + entitlement.toJsonString());
 			
 			jsonEntity = subscriberManagement.getSubscriberById(subscriberId);
+			System.out.println("Entitled subscriber: " + jsonEntity.toJsonString());
 			Assert.assertNotNull("Unable to retrieve activated subscriber: "+subscriberId, jsonEntity);
 			Assert.assertEquals(subscriberId, subscriberManagement.getSubscriberId(jsonEntity.getJsonObject()));
 				

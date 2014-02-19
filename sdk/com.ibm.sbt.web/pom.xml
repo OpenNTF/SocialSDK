@@ -12,9 +12,6 @@
 
 	<build>
 		<plugins>
-
-
-			<!-- to also deploy http://communitygrids.blogspot.com/2007/11/maven-making-war-and-jar-at-same-time.html -->
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-packaging-plugin</artifactId>
@@ -29,7 +26,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
-
 				<executions>
 					<execution>
 						<id>war</id>
@@ -65,61 +61,5 @@
 		</plugins>
 
 	</build>
-	<dependencies>
-		<dependency>
-			<groupId>com.ibm.sbt</groupId>
-			<artifactId>com.ibm.commons.xml</artifactId>
-			<version>9.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.ibm.sbt</groupId>
-			<artifactId>com.ibm.commons.runtime</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>com.ibm.sbt</groupId>
-			<artifactId>com.ibm.commons</artifactId>
-			<version>9.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.ibm.sbt</groupId>
-			<artifactId>com.ibm.sbt.core</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
 
-
-		<dependency>
-			<groupId>commons-logging</groupId>
-			<artifactId>commons-logging</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.james</groupId>
-			<artifactId>apache-mime4j</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>commons-codec</groupId>
-			<artifactId>commons-codec</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpmime</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpcore</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>commons-fileupload</groupId>
-			<artifactId>commons-fileupload</artifactId>
-		</dependency>
-
-	</dependencies>
 </project>

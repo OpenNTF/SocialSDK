@@ -1,0 +1,45 @@
+<html>
+<head>
+<title>Authenticate to qs.renovations.com</title>
+<script type="text/javascript" src="login.js"></script>
+</head>
+
+<body onLoad="self.focus()">
+	<form method='post' id='ibmsbt.loginActionForm' onSubmit='submitOnClick(this);'>
+		<table>
+			<tr>
+				<td>
+					Welcome to IBM Connections
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label name='wrongCredsMessage' id='wrongCredsMessage' style='color: red; display: none;'> Wrong Credentials </label>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for='name'>User name: </label><br>
+					<input type='text' id='username' name='username' />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for='name'>Password: </label><br>
+					<input type='password' id='password' name='password' />
+				</td>
+			</tr>
+			<tr>
+				<td colspan=2>
+					<input type='submit' value='Log In' name='submitBtn'  /> 
+					<input type='button' onClick='cancelOnClick()' value='Cancel' />
+				</td>
+			</tr>
+		</table>
+	</form>
+	<script>
+        onLoginPageLoad();
+    </script>
+</body>
+</html>
+

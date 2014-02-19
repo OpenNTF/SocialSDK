@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2013
+ * ��� Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -22,10 +22,10 @@ import static org.junit.Assert.fail;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.test.lib.TestEnvironment;
 
 /**
  * @author Mario Duarte
@@ -39,19 +39,20 @@ public class WikiPageTest extends BaseWikiServiceTest {
 		wiki = createWiki();
 	}
 	
-	@Test @Ignore
+	@Test
 	public void createWikiPageTest() throws Exception {
 		WikiPage wikiPage = newWikiPage();
 		WikiPage wikiPageCreated = wikiService.createWikiPage(
 				wiki.getLabel(), wikiPage , null);
 		
-		assertEquals(wikiPage.getTitle(), wikiPageCreated.getTitle());
-		assertEquals(wikiPage.getSummary(), wikiPageCreated.getSummary());
+		assertEquals(unRandomize(wikiPage.getTitle()), unRandomize(wikiPageCreated.getTitle()));
+		assertEquals(unRandomize(wikiPage.getSummary()), unRandomize(wikiPageCreated.getSummary()));
 		assertNotNull(wikiPageCreated.getLabel());
 	}
 	
-	@Test @Ignore
+	@Test
 	public void updateWikiPageTest() throws Exception {
+		if (TestEnvironment.isSmartCloudEnvironment()) return;
 		WikiPage wikiPage = wikiService.createWikiPage(
 				wiki.getLabel(), newWikiPage() , null);
 		
@@ -64,9 +65,9 @@ public class WikiPageTest extends BaseWikiServiceTest {
 		WikiPage wikiPageGot = wikiService.getWikiPage(
 				wiki.getLabel(), wikiPage.getLabel(), null);
 		
-		assertEquals(wikiPage.getLabel(), wikiPageGot.getLabel());
-		assertEquals(wikiPage.getTitle(), wikiPageGot.getTitle());
-		assertEquals(wikiPage.getSummary(), wikiPageGot.getSummary());
+		assertEquals(unRandomize(wikiPage.getLabel()), unRandomize(wikiPageGot.getLabel()));
+		assertEquals(unRandomize(wikiPage.getTitle()), unRandomize(wikiPageGot.getTitle()));
+		assertEquals(unRandomize(wikiPage.getSummary()), unRandomize(wikiPageGot.getSummary()));
 	}
 	
 	@Test

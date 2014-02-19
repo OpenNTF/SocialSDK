@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * �� Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -55,7 +55,7 @@ public class BaseWikiServiceTest extends BaseUnitTest {
 		permissions.add("Edit"); permissions.add("View"); permissions.add("Delete"); 
 		wiki.setPermissions(permissions);
 		List<String> tags = new ArrayList<String>();
-		tags.add("tag1"); tags.add("rag2"); tags.add("tag3"); 
+		tags.add("tag1"); tags.add("tag2"); tags.add("tag3"); 
 		wiki.setTags(tags);
 		return wiki;
 	}

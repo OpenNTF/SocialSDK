@@ -845,8 +845,11 @@ public class ActivityService extends BaseService {
 		if (null == sectionId){
 			throw new ActivityServiceException(null, "Null sectionId");
 		}
+		//TODO: I would pass the activityNode object and the sectionNode object instead of their id's....
 		ActivityNode actNode = getActivityNode(activityNodeId);
-		actNode.setInReplyTo(sectionId, actNode.getNodeUrl());
+		ActivityNode sectionNode = getActivityNode(sectionId);
+		actNode.setInReplyTo(sectionNode.getId(), sectionNode.getNodeUrl());
+		//TODO: Why is it setting the title, and why is it setting it to its own value?
 		if(StringUtil.isEmpty(title)) {
 			title = actNode.getTitle();
 		}

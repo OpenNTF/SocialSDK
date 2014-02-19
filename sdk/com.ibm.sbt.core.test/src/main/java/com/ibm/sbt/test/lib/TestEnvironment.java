@@ -14,6 +14,7 @@ public class TestEnvironment {
 
 	private static boolean requiresAuthentication;
 	private static boolean enableSmartcloud = System.getProperty("testEnvironment","connections").equals("smartcloud");
+	private static String mockMode;
 	private static final TestEnvironment instance = new TestEnvironment();
 
 	protected TestEnvironment() {
@@ -21,23 +22,21 @@ public class TestEnvironment {
 	}
 	
 	private static void selectEnvironment() {
-		String mode = System.getProperty("testMode","pass");
+		mockMode = System.getProperty("testMode","pass");
 		String environment = enableSmartcloud ? "smartcloud":"connections";
 		String parsed = null;
-		if (mode.equalsIgnoreCase("pass")) {
+		if (mockMode.equalsIgnoreCase("pass")) {
 			parsed = "Passthrough";
 		}
-		if (mode.equalsIgnoreCase("mock")) {
+		if (mockMode.equalsIgnoreCase("mock")) {
 			parsed = "Mocking";
 		}
-		if (mode.equalsIgnoreCase("record")) {
+		if (mockMode.equalsIgnoreCase("record")) {
 			parsed = "Recording";
 		}
-		if (parsed == null) throw new MockingException(null, "Unrecognized mode "+mode+ " use one of [pass, mocked, record]");
+		if (parsed == null) throw new MockingException(null, "Unrecognized mode "+mockMode+ " use one of [pass, mocked, record]");
 
 		System.setProperty("environment", environment+parsed+"Environment");
-		
-		
 	}
 
 	public TestEnvironment get() {
@@ -66,6 +65,10 @@ public class TestEnvironment {
 	
 	public static boolean isSmartCloudEnvironment() {
 		return enableSmartcloud;
+	}
+
+	public static boolean isMockMode() {
+		return mockMode.equalsIgnoreCase("mock");
 	}
 
 	public static String getSecondaryUserEmail() {

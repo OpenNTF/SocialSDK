@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -23,10 +23,15 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.http.Header;
+
 import com.ibm.commons.util.StringUtil;
+import com.ibm.commons.util.io.json.JsonJavaObject;
+import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.base.datahandlers.JsonDataHandler;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.profiles.feedhandler.ColleagueConnectionFeedHandler;
 import com.ibm.sbt.services.client.connections.profiles.feedhandler.ProfileFeedHandler;
@@ -35,9 +40,6 @@ import com.ibm.sbt.services.client.connections.profiles.transformers.ColleagueCo
 import com.ibm.sbt.services.client.connections.profiles.transformers.ProfileTransformer;
 import com.ibm.sbt.services.client.connections.profiles.utils.Messages;
 import com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants;
-import com.ibm.sbt.services.client.base.datahandlers.JsonDataHandler;
-import com.ibm.commons.util.io.json.JsonJavaObject;
-import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.services.util.AuthUtil;
 /**
@@ -613,12 +615,12 @@ public class ProfileService extends BaseService {
 	 *  
 	 * @param id
 	 * 		   unique identifier of the user to whom the invite is to be sent, it can be email or userID
+	 * @return Id of the Connection
 	 * @throws ProfileServiceException
 	 */
-	public void sendInvite(String id)throws ProfileServiceException{
+	public String sendInvite(String id)throws ProfileServiceException{
 		String defaultInviteMsg = Messages.SendInviteMsg;
-		sendInvite(id, defaultInviteMsg);
-
+		return sendInvite(id, defaultInviteMsg);
 	}
 
 	/**
@@ -628,10 +630,10 @@ public class ProfileService extends BaseService {
 	 * 		   unique identifier of the user to whom the invite is to be sent, it can be email or userID
 	 * @param inviteMsg 
 	 * 				Invite message to the other user
-	 * @return value is true if invite is sent successfully else value is false
+	 * @return Id of the Connection
 	 * @throws ProfileServiceException
 	 */
-	public void sendInvite(String id, String inviteMsg)throws ProfileServiceException{
+	public String sendInvite(String id, String inviteMsg)throws ProfileServiceException{
 		if (StringUtil.isEmpty(id)) {
 			throw new ProfileServiceException(null, Messages.InvalidArgument_1);
 		}
@@ -643,7 +645,8 @@ public class ProfileService extends BaseService {
 			setIdParameter(parameters, id);
 			parameters.put("connectionType","colleague");
 			Object payload = constructSendInviteRequestBody(inviteMsg);
-			super.createData(url, parameters, payload);
+			Response response = super.createData(url, parameters, payload);
+			return extractConnectionIdFromHeaders(response);
 		} catch (ClientServicesException e) {
 			throw new ProfileServiceException(e, Messages.SendInviteException, id);
 		} catch (TransformerException e) {
@@ -654,7 +657,7 @@ public class ProfileService extends BaseService {
 
 	}
 
-
+	
 	/**
 	 * Wrapper method to accept a Invite 
 	 * 
@@ -772,7 +775,10 @@ public class ProfileService extends BaseService {
 	 * @throws ProfileServiceException
 	 */
 	public void updateProfilePhoto(File file, String userId) throws ProfileServiceException{
-
+        if (file == null || !file.canRead()) {
+            throw new ProfileServiceException(null, Messages.MessageCannotReadFile,
+                    file.getAbsolutePath());
+        }
 		try {
 			Map<String, String> parameters = new HashMap<String, String>();
 			setIdParameter(parameters, userId);
@@ -930,5 +936,11 @@ public class ProfileService extends BaseService {
 		}
 	}
 
+	private String extractConnectionIdFromHeaders(Response requestData){
+		String CONNECTION_UNIQUE_IDENTIFIER = "connectionId";
+		Header header = requestData.getResponse().getFirstHeader("Location");
+		String urlLocation = header!=null?header.getValue():"";
+		return urlLocation.substring(urlLocation.indexOf(CONNECTION_UNIQUE_IDENTIFIER+"=") + (CONNECTION_UNIQUE_IDENTIFIER+"=").length());
+	}
 
 }

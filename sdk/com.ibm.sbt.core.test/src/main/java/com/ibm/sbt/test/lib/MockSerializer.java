@@ -1,6 +1,6 @@
 package com.ibm.sbt.test.lib;
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,6 @@ package com.ibm.sbt.test.lib;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -123,7 +122,6 @@ public class MockSerializer {
 
 	public synchronized HttpResponse recordResponse(HttpResponse response) {
 		try {
-
 			StringWriter out = new StringWriter();
 			out.write("\n<response ");
 
@@ -143,6 +141,7 @@ public class MockSerializer {
 				out.write("</headers>\n<data><![CDATA[");
 			 serializedEntity = serialize(response.getEntity()
 					.getContent());
+			 serializedEntity = serializedEntity.replaceAll("<!\\[CDATA\\[", "\\!\\[CDATA\\[").replaceAll("\\]\\]>", "\\]\\]");
 			out.write(serializedEntity);
 			out.write("]]></data>\n</response>");
 			} else {
@@ -159,7 +158,7 @@ public class MockSerializer {
 			throw new UnsupportedOperationException(e);
 		}
 	}
-
+	
 	private HttpResponse buildResponse(Header[] allHeaders, int statusCode,
 			String reasonPhrase, String serializedEntity) {
 		BasicHttpResponse r = new BasicHttpResponse(new ProtocolVersion("HTTP",
@@ -186,13 +185,13 @@ public class MockSerializer {
 		return r;
 	}
 
-	String serialize(InputStream is) throws IOException {
+	private String serialize(InputStream is) throws IOException {
 		ByteArrayOutputStream w = new ByteArrayOutputStream();
 		IOUtils.copy(is, w);
 		return w.toString("UTF-8");
 	}
 
-	String serialize(Node o) throws IOException {
+	private String serialize(Node o) throws IOException {
 		ByteArrayOutputStream w = new ByteArrayOutputStream();
 		try {
 			DOMUtil.serialize(w, o, null);
@@ -203,7 +202,7 @@ public class MockSerializer {
 
 	}
 
-	String serialize(Header[] o) {
+	private String serialize(Header[] o) {
 		StringWriter w = new StringWriter();
 		for (Header h : o) {
 			w.write("\n    <header>\n        <name><![CDATA[");
@@ -217,7 +216,7 @@ public class MockSerializer {
 		return w.toString();
 	}
 
-	String serialize(Object o) throws IOException {
+	private String serialize(Object o) throws IOException {
 		if (o instanceof EofSensorInputStream)
 			return serialize((EofSensorInputStream) o);
 		if (o instanceof Node)
@@ -235,7 +234,7 @@ public class MockSerializer {
 		return w.toString("UTF-8");
 	}
 
-	Object deserialize(String o) throws IOException {
+	private Object deserialize(String o) throws IOException {
 		ObjectInputStream is = new ObjectInputStream(new ByteArrayInputStream(
 				o.getBytes()));
 		try {

@@ -1,0 +1,784 @@
+<?xml version="1.0"?>
+<responses>
+<response statusCode="200" statusReason="OK">
+<headers>
+    <header>
+        <name><![CDATA[Date]]></name>
+        <value><![CDATA[Wed, 19 Feb 2014 11:10:34 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-Powered-By]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Expires]]></name>
+        <value><![CDATA[Thu, 1 Jan 1970 00:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Cache-Control]]></name>
+        <value><![CDATA[no-store, no-cache, must-revalidate]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-LConn-Auth]]></name>
+        <value><![CDATA[false]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-UA-Compatible]]></name>
+        <value><![CDATA[IE=EmulateIE7]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Last-Modified]]></name>
+        <value><![CDATA[Wed, 19 Feb 2014 11:10:34 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Pragma]]></name>
+        <value><![CDATA[no-cache]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/q3lS73nqvmvQJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/; Domain=.sdkdemo.com]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=7pdGH6r6EY0RRfeX8aQMqXzmL+Z79Ucdy3NKkVfEHCvptmAz7VjVCNAGgpD9JOi5soCmzccc9SywXwvLeZaJeQUX4eK1t/jm75/iutZeh/jq0xWm5azj+MKgwchpdNhS5ayLgkl3HlRnd65huCTkTTqLhUioFC141/3P7YAtItZ7synJOJiSgr5M4OMhKNbK5Kkcx+lrhLO+T30QCKnreQCnfYIWro4x2sKgiNFshIIzvQ6832dq8dGFLrYN1YlWAFlFkBeFF7uQYP10gGI+hAOHL11U7JYQ441MqW8JSkhfq4coH56/4wQNJJ/fiUuKVEKuD1V7IhYFnugIP4JYiTTHNxa0FVZv2Q8RHnJ5DzwaZ9y4IdE28Fim0l1dvV6/YkCdaVAwujW12qvuT9UgxyCirb2yeJD0qnzw7pJv7h29MghWTXd2lEyCK7Pnu5JuCTfnLBLLG6DolF4tFJTxhb1MVAAFa9PLWhe3BmuGFLZ/35NBJLbNGeU0E2alGmlRTAOBJuWWTvbwlIFppZHY5aNtALhg4ghhqdfLizCMeYFoPTMO4Ziq7dkPeZOTV1YS3bJI27U4s5h3LzylQt52Uy7D+7QbwWc6zbUFqdTK/K/I9iwRjOh8/f3iIXVrVmj7pNWelrLb3Hg0Mz6Aj6A6y/KkAf1zayBk9xDSTunoSJMsiDhQMfuqDqS2xrcGodVVzRwF8vrJdG6jhcMz91TInkNaFKSVFNuDPIRU7c7hPfs=; Path=/; Domain=.sdkdemo.com]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LCSESSIONID=0000zbmMoYKu0ydSbeRu9U6tCfp:18dna4k6n; Path=/; HttpOnly]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Keep-Alive]]></name>
+        <value><![CDATA[timeout=10, max=100]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Connection]]></name>
+        <value><![CDATA[Keep-Alive]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Transfer-Encoding]]></name>
+        <value><![CDATA[chunked]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Type]]></name>
+        <value><![CDATA[application/atom+xml;charset=UTF-8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header></headers>
+<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://dev.sdkdemo.com:444/communities/service/atom/communities/all</id>
+  <title type="text">Public Communities</title>
+  <updated>2014-02-19T11:10:34.574Z</updated>
+  <generator version="4.5.0.0" uri="http://www.ibm.com/xmlns/prod/sn">IBM Connections - Communities</generator>
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/service" rel="http://www.ibm.com/xmlns/prod/sn/service">
+  </link>
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/service" rel="service">
+  </link>
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/communities/all" rel="self">
+  </link>
+  <link href="https://dev.sdkdemo.com:444/communities/service/html/allcommunities" rel="alternate">
+  </link>
+  <opensearch:totalResults>1492</opensearch:totalResults>
+  <opensearch:startIndex>1</opensearch:startIndex>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/communities/all" rel="first">
+  </link>
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/communities/all?page=150" rel="last">
+  </link>
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/communities/all?page=2" rel="next">
+  </link>
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/communities/all?outputType=categories" rel="http://www.ibm.com/xmlns/prod/sn/tag-cloud" type="application/atomcat+xml">
+  </link>
+  <entry>
+    <snx:communityUuid>0fa4772b-1bad-48c7-952d-397b95c16cc8</snx:communityUuid>
+    <id>http://communities.ibm.com:2006/service/atom/community/instance?communityUuid=0fa4772b-1bad-48c7-952d-397b95c16cc8</id>
+    <title type="text">CreateCommunity.js 1392800075901</title>
+    <category term="community" scheme="http://www.ibm.com/xmlns/prod/sn/type">
+    </category>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=0fa4772b-1bad-48c7-952d-397b95c16cc8" rel="self">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=0fa4772b-1bad-48c7-952d-397b95c16cc8" rel="edit">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/html/communityview?communityUuid=0fa4772b-1bad-48c7-952d-397b95c16cc8" rel="alternate" type="text/html">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/html/image?communityUuid=0fa4772b-1bad-48c7-952d-397b95c16cc8&amp;lastMod=1392800080332" rel="http://www.ibm.com/xmlns/prod/sn/logo">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/service?communityUuid=0fa4772b-1bad-48c7-952d-397b95c16cc8" rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/members?communityUuid=0fa4772b-1bad-48c7-952d-397b95c16cc8" rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/bookmarks?communityUuid=0fa4772b-1bad-48c7-952d-397b95c16cc8" rel="http://www.ibm.com/xmlns/prod/sn/bookmarks" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/feeds?communityUuid=0fa4772b-1bad-48c7-952d-397b95c16cc8" rel="http://www.ibm.com/xmlns/prod/sn/feeds" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/remoteApplications?communityUuid=0fa4772b-1bad-48c7-952d-397b95c16cc8" rel="http://www.ibm.com/xmlns/prod/sn/remote-applications" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/forum/topics?communityUuid=0fa4772b-1bad-48c7-952d-397b95c16cc8" rel="http://www.ibm.com/xmlns/prod/sn/forum-topics" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/invites?communityUuid=0fa4772b-1bad-48c7-952d-397b95c16cc8" rel="http://www.ibm.com/xmlns/prod/sn/invitations-list" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/widgets?communityUuid=0fa4772b-1bad-48c7-952d-397b95c16cc8" rel="http://www.ibm.com/xmlns/prod/sn/widgets" type="application/atom+xml">
+    </link>
+    <snx:membercount>1</snx:membercount>
+    <snx:communityType>private</snx:communityType>
+    <snx:handle></snx:handle>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/subcommunities?communityUuid=0fa4772b-1bad-48c7-952d-397b95c16cc8" rel="http://www.ibm.com/xmlns/prod/sn/subcommunities" type="application/atom+xml">
+    </link>
+    <snx:preModeration>true</snx:preModeration>
+    <snx:postModeration>true</snx:postModeration>
+    <published>2014-02-19T08:54:40.332Z</published>
+    <updated>2014-02-19T09:31:40.395Z</updated>
+    <content type="html"></content>
+    <summary type="text">Test community created: Wed Feb 19 2014 03:54:35 GMT-0500 (Eastern Standard Time)</summary>
+    <author>
+      <name>Frank Adams</name>
+      <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+      <snx:userState>active</snx:userState>
+      <email>***REMOVED***@renovations.com</email>
+    </author>
+    <contributor>
+      <name>Frank Adams</name>
+      <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+      <snx:userState>active</snx:userState>
+      <email>***REMOVED***@renovations.com</email>
+    </contributor>
+    <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/activitystreams/urn:lsid:lconn.ibm.com:communities.community:0fa4772b-1bad-48c7-952d-397b95c16cc8/@all/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/activitystream" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/ublog/urn:lsid:lconn.ibm.com:communities.community:0fa4772b-1bad-48c7-952d-397b95c16cc8/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/microblog" type="application/atom+xml">
+    </link>
+    <snx:communityTheme snx:uuid="default">
+    </snx:communityTheme>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/broadcasts?communityUuid=0fa4772b-1bad-48c7-952d-397b95c16cc8" rel="http://www.ibm.com/xmlns/prod/sn/community-broadcasts" type="application/atom+xml">
+    </link>
+  </entry>
+  <entry>
+    <snx:communityUuid>ef52cab2-f608-4c16-a941-10569524ae81</snx:communityUuid>
+    <id>http://communities.ibm.com:2006/service/atom/community/instance?communityUuid=ef52cab2-f608-4c16-a941-10569524ae81</id>
+    <title type="text">com.ibm.sbt.test.js.connections.communities.api.CrudCommunity#-938931557 Community - 1392797670898</title>
+    <category term="community" scheme="http://www.ibm.com/xmlns/prod/sn/type">
+    </category>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=ef52cab2-f608-4c16-a941-10569524ae81" rel="self">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=ef52cab2-f608-4c16-a941-10569524ae81" rel="edit">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/html/communityview?communityUuid=ef52cab2-f608-4c16-a941-10569524ae81" rel="alternate" type="text/html">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/html/image?communityUuid=ef52cab2-f608-4c16-a941-10569524ae81&amp;lastMod=1392797675278" rel="http://www.ibm.com/xmlns/prod/sn/logo">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/service?communityUuid=ef52cab2-f608-4c16-a941-10569524ae81" rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/members?communityUuid=ef52cab2-f608-4c16-a941-10569524ae81" rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/bookmarks?communityUuid=ef52cab2-f608-4c16-a941-10569524ae81" rel="http://www.ibm.com/xmlns/prod/sn/bookmarks" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/feeds?communityUuid=ef52cab2-f608-4c16-a941-10569524ae81" rel="http://www.ibm.com/xmlns/prod/sn/feeds" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/remoteApplications?communityUuid=ef52cab2-f608-4c16-a941-10569524ae81" rel="http://www.ibm.com/xmlns/prod/sn/remote-applications" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/forum/topics?communityUuid=ef52cab2-f608-4c16-a941-10569524ae81" rel="http://www.ibm.com/xmlns/prod/sn/forum-topics" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/invites?communityUuid=ef52cab2-f608-4c16-a941-10569524ae81" rel="http://www.ibm.com/xmlns/prod/sn/invitations-list" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/widgets?communityUuid=ef52cab2-f608-4c16-a941-10569524ae81" rel="http://www.ibm.com/xmlns/prod/sn/widgets" type="application/atom+xml">
+    </link>
+    <snx:membercount>1</snx:membercount>
+    <snx:communityType>public</snx:communityType>
+    <snx:handle></snx:handle>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/subcommunities?communityUuid=ef52cab2-f608-4c16-a941-10569524ae81" rel="http://www.ibm.com/xmlns/prod/sn/subcommunities" type="application/atom+xml">
+    </link>
+    <snx:preModeration>true</snx:preModeration>
+    <snx:postModeration>true</snx:postModeration>
+    <published>2014-02-19T08:14:35.278Z</published>
+    <updated>2014-02-19T08:46:16.788Z</updated>
+    <content type="html"></content>
+    <summary type="text">com.ibm.sbt.test.js.connections.communities.api.CrudCommunity#-938931557 Community - 1392797670898</summary>
+    <author>
+      <name>Frank Adams</name>
+      <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+      <snx:userState>active</snx:userState>
+      <email>***REMOVED***@renovations.com</email>
+    </author>
+    <contributor>
+      <name>Frank Adams</name>
+      <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+      <snx:userState>active</snx:userState>
+      <email>***REMOVED***@renovations.com</email>
+    </contributor>
+    <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/activitystreams/urn:lsid:lconn.ibm.com:communities.community:ef52cab2-f608-4c16-a941-10569524ae81/@all/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/activitystream" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/ublog/urn:lsid:lconn.ibm.com:communities.community:ef52cab2-f608-4c16-a941-10569524ae81/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/microblog" type="application/atom+xml">
+    </link>
+    <snx:communityTheme snx:uuid="default">
+    </snx:communityTheme>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/broadcasts?communityUuid=ef52cab2-f608-4c16-a941-10569524ae81" rel="http://www.ibm.com/xmlns/prod/sn/community-broadcasts" type="application/atom+xml">
+    </link>
+  </entry>
+  <entry>
+    <snx:communityUuid>a31a04df-2b89-40c8-90b9-bd4bdb89a97e</snx:communityUuid>
+    <id>http://communities.ibm.com:2006/service/atom/community/instance?communityUuid=a31a04df-2b89-40c8-90b9-bd4bdb89a97e</id>
+    <title type="text">com.ibm.sbt.test.js.connections.communities.api.NewSaveCommunity#-2103589840 Community - 1392797640150</title>
+    <category term="community" scheme="http://www.ibm.com/xmlns/prod/sn/type">
+    </category>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=a31a04df-2b89-40c8-90b9-bd4bdb89a97e" rel="self">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=a31a04df-2b89-40c8-90b9-bd4bdb89a97e" rel="edit">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/html/communityview?communityUuid=a31a04df-2b89-40c8-90b9-bd4bdb89a97e" rel="alternate" type="text/html">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/html/image?communityUuid=a31a04df-2b89-40c8-90b9-bd4bdb89a97e&amp;lastMod=1392797644501" rel="http://www.ibm.com/xmlns/prod/sn/logo">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/service?communityUuid=a31a04df-2b89-40c8-90b9-bd4bdb89a97e" rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/members?communityUuid=a31a04df-2b89-40c8-90b9-bd4bdb89a97e" rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/bookmarks?communityUuid=a31a04df-2b89-40c8-90b9-bd4bdb89a97e" rel="http://www.ibm.com/xmlns/prod/sn/bookmarks" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/feeds?communityUuid=a31a04df-2b89-40c8-90b9-bd4bdb89a97e" rel="http://www.ibm.com/xmlns/prod/sn/feeds" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/remoteApplications?communityUuid=a31a04df-2b89-40c8-90b9-bd4bdb89a97e" rel="http://www.ibm.com/xmlns/prod/sn/remote-applications" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/forum/topics?communityUuid=a31a04df-2b89-40c8-90b9-bd4bdb89a97e" rel="http://www.ibm.com/xmlns/prod/sn/forum-topics" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/invites?communityUuid=a31a04df-2b89-40c8-90b9-bd4bdb89a97e" rel="http://www.ibm.com/xmlns/prod/sn/invitations-list" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/widgets?communityUuid=a31a04df-2b89-40c8-90b9-bd4bdb89a97e" rel="http://www.ibm.com/xmlns/prod/sn/widgets" type="application/atom+xml">
+    </link>
+    <snx:membercount>1</snx:membercount>
+    <snx:communityType>public</snx:communityType>
+    <snx:handle></snx:handle>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/subcommunities?communityUuid=a31a04df-2b89-40c8-90b9-bd4bdb89a97e" rel="http://www.ibm.com/xmlns/prod/sn/subcommunities" type="application/atom+xml">
+    </link>
+    <snx:preModeration>true</snx:preModeration>
+    <snx:postModeration>true</snx:postModeration>
+    <published>2014-02-19T08:14:04.501Z</published>
+    <updated>2014-02-19T08:14:08.586Z</updated>
+    <content type="html"></content>
+    <summary type="text">com.ibm.sbt.test.js.connections.communities.api.NewSaveCommunity#-2103589840 Community - 1392797640150</summary>
+    <author>
+      <name>Frank Adams</name>
+      <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+      <snx:userState>active</snx:userState>
+      <email>***REMOVED***@renovations.com</email>
+    </author>
+    <contributor>
+      <name>Frank Adams</name>
+      <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+      <snx:userState>active</snx:userState>
+      <email>***REMOVED***@renovations.com</email>
+    </contributor>
+    <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/activitystreams/urn:lsid:lconn.ibm.com:communities.community:a31a04df-2b89-40c8-90b9-bd4bdb89a97e/@all/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/activitystream" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/ublog/urn:lsid:lconn.ibm.com:communities.community:a31a04df-2b89-40c8-90b9-bd4bdb89a97e/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/microblog" type="application/atom+xml">
+    </link>
+    <snx:communityTheme snx:uuid="default">
+    </snx:communityTheme>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/broadcasts?communityUuid=a31a04df-2b89-40c8-90b9-bd4bdb89a97e" rel="http://www.ibm.com/xmlns/prod/sn/community-broadcasts" type="application/atom+xml">
+    </link>
+  </entry>
+  <entry>
+    <snx:communityUuid>0d91a1a4-22af-4ac4-9f78-ec2b1ad0e75b</snx:communityUuid>
+    <id>http://communities.ibm.com:2006/service/atom/community/instance?communityUuid=0d91a1a4-22af-4ac4-9f78-ec2b1ad0e75b</id>
+    <title type="text">CreateCommunity.js 1392797380999</title>
+    <category term="community" scheme="http://www.ibm.com/xmlns/prod/sn/type">
+    </category>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=0d91a1a4-22af-4ac4-9f78-ec2b1ad0e75b" rel="self">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=0d91a1a4-22af-4ac4-9f78-ec2b1ad0e75b" rel="edit">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/html/communityview?communityUuid=0d91a1a4-22af-4ac4-9f78-ec2b1ad0e75b" rel="alternate" type="text/html">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/html/image?communityUuid=0d91a1a4-22af-4ac4-9f78-ec2b1ad0e75b&amp;lastMod=1392797394727" rel="http://www.ibm.com/xmlns/prod/sn/logo">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/service?communityUuid=0d91a1a4-22af-4ac4-9f78-ec2b1ad0e75b" rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/members?communityUuid=0d91a1a4-22af-4ac4-9f78-ec2b1ad0e75b" rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/bookmarks?communityUuid=0d91a1a4-22af-4ac4-9f78-ec2b1ad0e75b" rel="http://www.ibm.com/xmlns/prod/sn/bookmarks" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/feeds?communityUuid=0d91a1a4-22af-4ac4-9f78-ec2b1ad0e75b" rel="http://www.ibm.com/xmlns/prod/sn/feeds" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/remoteApplications?communityUuid=0d91a1a4-22af-4ac4-9f78-ec2b1ad0e75b" rel="http://www.ibm.com/xmlns/prod/sn/remote-applications" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/forum/topics?communityUuid=0d91a1a4-22af-4ac4-9f78-ec2b1ad0e75b" rel="http://www.ibm.com/xmlns/prod/sn/forum-topics" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/invites?communityUuid=0d91a1a4-22af-4ac4-9f78-ec2b1ad0e75b" rel="http://www.ibm.com/xmlns/prod/sn/invitations-list" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/widgets?communityUuid=0d91a1a4-22af-4ac4-9f78-ec2b1ad0e75b" rel="http://www.ibm.com/xmlns/prod/sn/widgets" type="application/atom+xml">
+    </link>
+    <snx:membercount>1</snx:membercount>
+    <snx:communityType>private</snx:communityType>
+    <snx:handle></snx:handle>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/subcommunities?communityUuid=0d91a1a4-22af-4ac4-9f78-ec2b1ad0e75b" rel="http://www.ibm.com/xmlns/prod/sn/subcommunities" type="application/atom+xml">
+    </link>
+    <snx:preModeration>true</snx:preModeration>
+    <snx:postModeration>true</snx:postModeration>
+    <published>2014-02-19T08:09:54.727Z</published>
+    <updated>2014-02-19T08:10:07.776Z</updated>
+    <content type="html"></content>
+    <summary type="text">Test community created: Wed Feb 19 2014 08:09:40 GMT+0000 (GMT)</summary>
+    <author>
+      <name>Frank Adams</name>
+      <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+      <snx:userState>active</snx:userState>
+      <email>***REMOVED***@renovations.com</email>
+    </author>
+    <contributor>
+      <name>Frank Adams</name>
+      <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+      <snx:userState>active</snx:userState>
+      <email>***REMOVED***@renovations.com</email>
+    </contributor>
+    <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/activitystreams/urn:lsid:lconn.ibm.com:communities.community:0d91a1a4-22af-4ac4-9f78-ec2b1ad0e75b/@all/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/activitystream" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/ublog/urn:lsid:lconn.ibm.com:communities.community:0d91a1a4-22af-4ac4-9f78-ec2b1ad0e75b/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/microblog" type="application/atom+xml">
+    </link>
+    <snx:communityTheme snx:uuid="default">
+    </snx:communityTheme>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/broadcasts?communityUuid=0d91a1a4-22af-4ac4-9f78-ec2b1ad0e75b" rel="http://www.ibm.com/xmlns/prod/sn/community-broadcasts" type="application/atom+xml">
+    </link>
+  </entry>
+  <entry>
+    <snx:communityUuid>69dff48c-e30d-4325-b91d-62e8e098beb1</snx:communityUuid>
+    <id>http://communities.ibm.com:2006/service/atom/community/instance?communityUuid=69dff48c-e30d-4325-b91d-62e8e098beb1</id>
+    <title type="text">com.ibm.sbt.test.js.connections.communities.api.CreateCommunity#1187765121 Community - 1392797381045</title>
+    <category term="community" scheme="http://www.ibm.com/xmlns/prod/sn/type">
+    </category>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=69dff48c-e30d-4325-b91d-62e8e098beb1" rel="self">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=69dff48c-e30d-4325-b91d-62e8e098beb1" rel="edit">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/html/communityview?communityUuid=69dff48c-e30d-4325-b91d-62e8e098beb1" rel="alternate" type="text/html">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/html/image?communityUuid=69dff48c-e30d-4325-b91d-62e8e098beb1&amp;lastMod=1392797385399" rel="http://www.ibm.com/xmlns/prod/sn/logo">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/service?communityUuid=69dff48c-e30d-4325-b91d-62e8e098beb1" rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/members?communityUuid=69dff48c-e30d-4325-b91d-62e8e098beb1" rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/bookmarks?communityUuid=69dff48c-e30d-4325-b91d-62e8e098beb1" rel="http://www.ibm.com/xmlns/prod/sn/bookmarks" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/feeds?communityUuid=69dff48c-e30d-4325-b91d-62e8e098beb1" rel="http://www.ibm.com/xmlns/prod/sn/feeds" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/remoteApplications?communityUuid=69dff48c-e30d-4325-b91d-62e8e098beb1" rel="http://www.ibm.com/xmlns/prod/sn/remote-applications" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/forum/topics?communityUuid=69dff48c-e30d-4325-b91d-62e8e098beb1" rel="http://www.ibm.com/xmlns/prod/sn/forum-topics" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/invites?communityUuid=69dff48c-e30d-4325-b91d-62e8e098beb1" rel="http://www.ibm.com/xmlns/prod/sn/invitations-list" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/widgets?communityUuid=69dff48c-e30d-4325-b91d-62e8e098beb1" rel="http://www.ibm.com/xmlns/prod/sn/widgets" type="application/atom+xml">
+    </link>
+    <snx:membercount>1</snx:membercount>
+    <snx:communityType>public</snx:communityType>
+    <snx:handle></snx:handle>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/subcommunities?communityUuid=69dff48c-e30d-4325-b91d-62e8e098beb1" rel="http://www.ibm.com/xmlns/prod/sn/subcommunities" type="application/atom+xml">
+    </link>
+    <snx:preModeration>true</snx:preModeration>
+    <snx:postModeration>true</snx:postModeration>
+    <published>2014-02-19T08:09:45.399Z</published>
+    <updated>2014-02-19T08:09:49.207Z</updated>
+    <content type="html"></content>
+    <summary type="text">com.ibm.sbt.test.js.connections.communities.api.CreateCommunity#1187765121 Community - 1392797381045</summary>
+    <author>
+      <name>Frank Adams</name>
+      <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+      <snx:userState>active</snx:userState>
+      <email>***REMOVED***@renovations.com</email>
+    </author>
+    <contributor>
+      <name>Frank Adams</name>
+      <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+      <snx:userState>active</snx:userState>
+      <email>***REMOVED***@renovations.com</email>
+    </contributor>
+    <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/activitystreams/urn:lsid:lconn.ibm.com:communities.community:69dff48c-e30d-4325-b91d-62e8e098beb1/@all/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/activitystream" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/ublog/urn:lsid:lconn.ibm.com:communities.community:69dff48c-e30d-4325-b91d-62e8e098beb1/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/microblog" type="application/atom+xml">
+    </link>
+    <snx:communityTheme snx:uuid="default">
+    </snx:communityTheme>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/broadcasts?communityUuid=69dff48c-e30d-4325-b91d-62e8e098beb1" rel="http://www.ibm.com/xmlns/prod/sn/community-broadcasts" type="application/atom+xml">
+    </link>
+  </entry>
+  <entry>
+    <snx:communityUuid>f060d290-fca2-4253-bd2b-c224c1af7cc6</snx:communityUuid>
+    <id>http://communities.ibm.com:2006/service/atom/community/instance?communityUuid=f060d290-fca2-4253-bd2b-c224c1af7cc6</id>
+    <title type="text">EndpointPost Test 1392796087504</title>
+    <category term="community" scheme="http://www.ibm.com/xmlns/prod/sn/type">
+    </category>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=f060d290-fca2-4253-bd2b-c224c1af7cc6" rel="self">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=f060d290-fca2-4253-bd2b-c224c1af7cc6" rel="edit">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/html/communityview?communityUuid=f060d290-fca2-4253-bd2b-c224c1af7cc6" rel="alternate" type="text/html">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/html/image?communityUuid=f060d290-fca2-4253-bd2b-c224c1af7cc6&amp;lastMod=1392796091839" rel="http://www.ibm.com/xmlns/prod/sn/logo">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/service?communityUuid=f060d290-fca2-4253-bd2b-c224c1af7cc6" rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/members?communityUuid=f060d290-fca2-4253-bd2b-c224c1af7cc6" rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/bookmarks?communityUuid=f060d290-fca2-4253-bd2b-c224c1af7cc6" rel="http://www.ibm.com/xmlns/prod/sn/bookmarks" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/feeds?communityUuid=f060d290-fca2-4253-bd2b-c224c1af7cc6" rel="http://www.ibm.com/xmlns/prod/sn/feeds" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/remoteApplications?communityUuid=f060d290-fca2-4253-bd2b-c224c1af7cc6" rel="http://www.ibm.com/xmlns/prod/sn/remote-applications" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/forum/topics?communityUuid=f060d290-fca2-4253-bd2b-c224c1af7cc6" rel="http://www.ibm.com/xmlns/prod/sn/forum-topics" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/invites?communityUuid=f060d290-fca2-4253-bd2b-c224c1af7cc6" rel="http://www.ibm.com/xmlns/prod/sn/invitations-list" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/widgets?communityUuid=f060d290-fca2-4253-bd2b-c224c1af7cc6" rel="http://www.ibm.com/xmlns/prod/sn/widgets" type="application/atom+xml">
+    </link>
+    <snx:membercount>1</snx:membercount>
+    <snx:communityType>public</snx:communityType>
+    <snx:handle></snx:handle>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/subcommunities?communityUuid=f060d290-fca2-4253-bd2b-c224c1af7cc6" rel="http://www.ibm.com/xmlns/prod/sn/subcommunities" type="application/atom+xml">
+    </link>
+    <snx:preModeration>true</snx:preModeration>
+    <snx:postModeration>true</snx:postModeration>
+    <published>2014-02-19T07:48:11.839Z</published>
+    <updated>2014-02-19T07:48:14.992Z</updated>
+    <content type="html"></content>
+    <summary type="text">EndpointPost test content: 1392796087504</summary>
+    <author>
+      <name>Frank Adams</name>
+      <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+      <snx:userState>active</snx:userState>
+      <email>***REMOVED***@renovations.com</email>
+    </author>
+    <contributor>
+      <name>Frank Adams</name>
+      <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+      <snx:userState>active</snx:userState>
+      <email>***REMOVED***@renovations.com</email>
+    </contributor>
+    <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/activitystreams/urn:lsid:lconn.ibm.com:communities.community:f060d290-fca2-4253-bd2b-c224c1af7cc6/@all/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/activitystream" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/ublog/urn:lsid:lconn.ibm.com:communities.community:f060d290-fca2-4253-bd2b-c224c1af7cc6/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/microblog" type="application/atom+xml">
+    </link>
+    <snx:communityTheme snx:uuid="default">
+    </snx:communityTheme>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/broadcasts?communityUuid=f060d290-fca2-4253-bd2b-c224c1af7cc6" rel="http://www.ibm.com/xmlns/prod/sn/community-broadcasts" type="application/atom+xml">
+    </link>
+  </entry>
+  <entry>
+    <snx:communityUuid>1e19a350-a821-43b6-bc04-6265adffc262</snx:communityUuid>
+    <id>http://communities.ibm.com:2006/service/atom/community/instance?communityUuid=1e19a350-a821-43b6-bc04-6265adffc262</id>
+    <title type="text">EndpointPost Test 1392796070856</title>
+    <category term="community" scheme="http://www.ibm.com/xmlns/prod/sn/type">
+    </category>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=1e19a350-a821-43b6-bc04-6265adffc262" rel="self">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=1e19a350-a821-43b6-bc04-6265adffc262" rel="edit">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/html/communityview?communityUuid=1e19a350-a821-43b6-bc04-6265adffc262" rel="alternate" type="text/html">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/html/image?communityUuid=1e19a350-a821-43b6-bc04-6265adffc262&amp;lastMod=1392796075193" rel="http://www.ibm.com/xmlns/prod/sn/logo">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/service?communityUuid=1e19a350-a821-43b6-bc04-6265adffc262" rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/members?communityUuid=1e19a350-a821-43b6-bc04-6265adffc262" rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/bookmarks?communityUuid=1e19a350-a821-43b6-bc04-6265adffc262" rel="http://www.ibm.com/xmlns/prod/sn/bookmarks" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/feeds?communityUuid=1e19a350-a821-43b6-bc04-6265adffc262" rel="http://www.ibm.com/xmlns/prod/sn/feeds" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/remoteApplications?communityUuid=1e19a350-a821-43b6-bc04-6265adffc262" rel="http://www.ibm.com/xmlns/prod/sn/remote-applications" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/forum/topics?communityUuid=1e19a350-a821-43b6-bc04-6265adffc262" rel="http://www.ibm.com/xmlns/prod/sn/forum-topics" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/invites?communityUuid=1e19a350-a821-43b6-bc04-6265adffc262" rel="http://www.ibm.com/xmlns/prod/sn/invitations-list" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/widgets?communityUuid=1e19a350-a821-43b6-bc04-6265adffc262" rel="http://www.ibm.com/xmlns/prod/sn/widgets" type="application/atom+xml">
+    </link>
+    <snx:membercount>1</snx:membercount>
+    <snx:communityType>private</snx:communityType>
+    <snx:handle></snx:handle>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/subcommunities?communityUuid=1e19a350-a821-43b6-bc04-6265adffc262" rel="http://www.ibm.com/xmlns/prod/sn/subcommunities" type="application/atom+xml">
+    </link>
+    <snx:preModeration>true</snx:preModeration>
+    <snx:postModeration>true</snx:postModeration>
+    <published>2014-02-19T07:47:55.193Z</published>
+    <updated>2014-02-19T07:47:58.980Z</updated>
+    <content type="html"></content>
+    <summary type="text">EndpointPost test content: 1392796070856</summary>
+    <author>
+      <name>Frank Adams</name>
+      <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+      <snx:userState>active</snx:userState>
+      <email>***REMOVED***@renovations.com</email>
+    </author>
+    <contributor>
+      <name>Frank Adams</name>
+      <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+      <snx:userState>active</snx:userState>
+      <email>***REMOVED***@renovations.com</email>
+    </contributor>
+    <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/activitystreams/urn:lsid:lconn.ibm.com:communities.community:1e19a350-a821-43b6-bc04-6265adffc262/@all/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/activitystream" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/ublog/urn:lsid:lconn.ibm.com:communities.community:1e19a350-a821-43b6-bc04-6265adffc262/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/microblog" type="application/atom+xml">
+    </link>
+    <snx:communityTheme snx:uuid="default">
+    </snx:communityTheme>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/broadcasts?communityUuid=1e19a350-a821-43b6-bc04-6265adffc262" rel="http://www.ibm.com/xmlns/prod/sn/community-broadcasts" type="application/atom+xml">
+    </link>
+  </entry>
+  <entry>
+    <snx:communityUuid>0941e811-5b0d-4d23-809e-f812301902f5</snx:communityUuid>
+    <id>http://communities.ibm.com:2006/service/atom/community/instance?communityUuid=0941e811-5b0d-4d23-809e-f812301902f5</id>
+    <title type="text">com.ibm.sbt.test.js.connections.communities.api.CrudCommunity#263458740 Community - 1392794887189</title>
+    <category term="community" scheme="http://www.ibm.com/xmlns/prod/sn/type">
+    </category>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=0941e811-5b0d-4d23-809e-f812301902f5" rel="self">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=0941e811-5b0d-4d23-809e-f812301902f5" rel="edit">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/html/communityview?communityUuid=0941e811-5b0d-4d23-809e-f812301902f5" rel="alternate" type="text/html">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/html/image?communityUuid=0941e811-5b0d-4d23-809e-f812301902f5&amp;lastMod=1392794900768" rel="http://www.ibm.com/xmlns/prod/sn/logo">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/service?communityUuid=0941e811-5b0d-4d23-809e-f812301902f5" rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/members?communityUuid=0941e811-5b0d-4d23-809e-f812301902f5" rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/bookmarks?communityUuid=0941e811-5b0d-4d23-809e-f812301902f5" rel="http://www.ibm.com/xmlns/prod/sn/bookmarks" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/feeds?communityUuid=0941e811-5b0d-4d23-809e-f812301902f5" rel="http://www.ibm.com/xmlns/prod/sn/feeds" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/remoteApplications?communityUuid=0941e811-5b0d-4d23-809e-f812301902f5" rel="http://www.ibm.com/xmlns/prod/sn/remote-applications" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/forum/topics?communityUuid=0941e811-5b0d-4d23-809e-f812301902f5" rel="http://www.ibm.com/xmlns/prod/sn/forum-topics" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/invites?communityUuid=0941e811-5b0d-4d23-809e-f812301902f5" rel="http://www.ibm.com/xmlns/prod/sn/invitations-list" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/widgets?communityUuid=0941e811-5b0d-4d23-809e-f812301902f5" rel="http://www.ibm.com/xmlns/prod/sn/widgets" type="application/atom+xml">
+    </link>
+    <snx:membercount>1</snx:membercount>
+    <snx:communityType>public</snx:communityType>
+    <snx:handle></snx:handle>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/subcommunities?communityUuid=0941e811-5b0d-4d23-809e-f812301902f5" rel="http://www.ibm.com/xmlns/prod/sn/subcommunities" type="application/atom+xml">
+    </link>
+    <snx:preModeration>true</snx:preModeration>
+    <snx:postModeration>true</snx:postModeration>
+    <published>2014-02-19T07:28:20.768Z</published>
+    <updated>2014-02-19T07:28:24.213Z</updated>
+    <content type="html"></content>
+    <summary type="text">com.ibm.sbt.test.js.connections.communities.api.CrudCommunity#263458740 Community - 1392794887189</summary>
+    <author>
+      <name>Frank Adams</name>
+      <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+      <snx:userState>active</snx:userState>
+      <email>***REMOVED***@renovations.com</email>
+    </author>
+    <contributor>
+      <name>Frank Adams</name>
+      <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+      <snx:userState>active</snx:userState>
+      <email>***REMOVED***@renovations.com</email>
+    </contributor>
+    <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/activitystreams/urn:lsid:lconn.ibm.com:communities.community:0941e811-5b0d-4d23-809e-f812301902f5/@all/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/activitystream" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/ublog/urn:lsid:lconn.ibm.com:communities.community:0941e811-5b0d-4d23-809e-f812301902f5/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/microblog" type="application/atom+xml">
+    </link>
+    <snx:communityTheme snx:uuid="default">
+    </snx:communityTheme>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/broadcasts?communityUuid=0941e811-5b0d-4d23-809e-f812301902f5" rel="http://www.ibm.com/xmlns/prod/sn/community-broadcasts" type="application/atom+xml">
+    </link>
+  </entry>
+  <entry>
+    <snx:communityUuid>84ab7fec-eaa1-4d05-bfa7-217224fc91ca</snx:communityUuid>
+    <id>http://communities.ibm.com:2006/service/atom/community/instance?communityUuid=84ab7fec-eaa1-4d05-bfa7-217224fc91ca</id>
+    <title type="text">com.ibm.sbt.test.js.connections.communities.api.NewSaveCommunity#1140212726 Community - 1392794847718</title>
+    <category term="community" scheme="http://www.ibm.com/xmlns/prod/sn/type">
+    </category>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=84ab7fec-eaa1-4d05-bfa7-217224fc91ca" rel="self">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=84ab7fec-eaa1-4d05-bfa7-217224fc91ca" rel="edit">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/html/communityview?communityUuid=84ab7fec-eaa1-4d05-bfa7-217224fc91ca" rel="alternate" type="text/html">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/html/image?communityUuid=84ab7fec-eaa1-4d05-bfa7-217224fc91ca&amp;lastMod=1392794861295" rel="http://www.ibm.com/xmlns/prod/sn/logo">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/service?communityUuid=84ab7fec-eaa1-4d05-bfa7-217224fc91ca" rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/members?communityUuid=84ab7fec-eaa1-4d05-bfa7-217224fc91ca" rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/bookmarks?communityUuid=84ab7fec-eaa1-4d05-bfa7-217224fc91ca" rel="http://www.ibm.com/xmlns/prod/sn/bookmarks" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/feeds?communityUuid=84ab7fec-eaa1-4d05-bfa7-217224fc91ca" rel="http://www.ibm.com/xmlns/prod/sn/feeds" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/remoteApplications?communityUuid=84ab7fec-eaa1-4d05-bfa7-217224fc91ca" rel="http://www.ibm.com/xmlns/prod/sn/remote-applications" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/forum/topics?communityUuid=84ab7fec-eaa1-4d05-bfa7-217224fc91ca" rel="http://www.ibm.com/xmlns/prod/sn/forum-topics" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/invites?communityUuid=84ab7fec-eaa1-4d05-bfa7-217224fc91ca" rel="http://www.ibm.com/xmlns/prod/sn/invitations-list" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/widgets?communityUuid=84ab7fec-eaa1-4d05-bfa7-217224fc91ca" rel="http://www.ibm.com/xmlns/prod/sn/widgets" type="application/atom+xml">
+    </link>
+    <snx:membercount>1</snx:membercount>
+    <snx:communityType>public</snx:communityType>
+    <snx:handle></snx:handle>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/subcommunities?communityUuid=84ab7fec-eaa1-4d05-bfa7-217224fc91ca" rel="http://www.ibm.com/xmlns/prod/sn/subcommunities" type="application/atom+xml">
+    </link>
+    <snx:preModeration>true</snx:preModeration>
+    <snx:postModeration>true</snx:postModeration>
+    <published>2014-02-19T07:27:41.295Z</published>
+    <updated>2014-02-19T07:27:45.070Z</updated>
+    <content type="html"></content>
+    <summary type="text">com.ibm.sbt.test.js.connections.communities.api.NewSaveCommunity#1140212726 Community - 1392794847718</summary>
+    <author>
+      <name>Frank Adams</name>
+      <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+      <snx:userState>active</snx:userState>
+      <email>***REMOVED***@renovations.com</email>
+    </author>
+    <contributor>
+      <name>Frank Adams</name>
+      <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+      <snx:userState>active</snx:userState>
+      <email>***REMOVED***@renovations.com</email>
+    </contributor>
+    <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/activitystreams/urn:lsid:lconn.ibm.com:communities.community:84ab7fec-eaa1-4d05-bfa7-217224fc91ca/@all/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/activitystream" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/ublog/urn:lsid:lconn.ibm.com:communities.community:84ab7fec-eaa1-4d05-bfa7-217224fc91ca/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/microblog" type="application/atom+xml">
+    </link>
+    <snx:communityTheme snx:uuid="default">
+    </snx:communityTheme>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/broadcasts?communityUuid=84ab7fec-eaa1-4d05-bfa7-217224fc91ca" rel="http://www.ibm.com/xmlns/prod/sn/community-broadcasts" type="application/atom+xml">
+    </link>
+  </entry>
+  <entry>
+    <snx:communityUuid>ca75f436-9d78-48bc-bb96-fb03852d5cff</snx:communityUuid>
+    <id>http://communities.ibm.com:2006/service/atom/community/instance?communityUuid=ca75f436-9d78-48bc-bb96-fb03852d5cff</id>
+    <title type="text">com.ibm.sbt.test.js.connections.communities.api.CreateCommunity#1196181324 Community - 1392794568662</title>
+    <category term="community" scheme="http://www.ibm.com/xmlns/prod/sn/type">
+    </category>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=ca75f436-9d78-48bc-bb96-fb03852d5cff" rel="self">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=ca75f436-9d78-48bc-bb96-fb03852d5cff" rel="edit">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/html/communityview?communityUuid=ca75f436-9d78-48bc-bb96-fb03852d5cff" rel="alternate" type="text/html">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/html/image?communityUuid=ca75f436-9d78-48bc-bb96-fb03852d5cff&amp;lastMod=1392794582232" rel="http://www.ibm.com/xmlns/prod/sn/logo">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/service?communityUuid=ca75f436-9d78-48bc-bb96-fb03852d5cff" rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/members?communityUuid=ca75f436-9d78-48bc-bb96-fb03852d5cff" rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/bookmarks?communityUuid=ca75f436-9d78-48bc-bb96-fb03852d5cff" rel="http://www.ibm.com/xmlns/prod/sn/bookmarks" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/feeds?communityUuid=ca75f436-9d78-48bc-bb96-fb03852d5cff" rel="http://www.ibm.com/xmlns/prod/sn/feeds" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/remoteApplications?communityUuid=ca75f436-9d78-48bc-bb96-fb03852d5cff" rel="http://www.ibm.com/xmlns/prod/sn/remote-applications" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/forum/topics?communityUuid=ca75f436-9d78-48bc-bb96-fb03852d5cff" rel="http://www.ibm.com/xmlns/prod/sn/forum-topics" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/invites?communityUuid=ca75f436-9d78-48bc-bb96-fb03852d5cff" rel="http://www.ibm.com/xmlns/prod/sn/invitations-list" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/widgets?communityUuid=ca75f436-9d78-48bc-bb96-fb03852d5cff" rel="http://www.ibm.com/xmlns/prod/sn/widgets" type="application/atom+xml">
+    </link>
+    <snx:membercount>1</snx:membercount>
+    <snx:communityType>public</snx:communityType>
+    <snx:handle></snx:handle>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/subcommunities?communityUuid=ca75f436-9d78-48bc-bb96-fb03852d5cff" rel="http://www.ibm.com/xmlns/prod/sn/subcommunities" type="application/atom+xml">
+    </link>
+    <snx:preModeration>true</snx:preModeration>
+    <snx:postModeration>true</snx:postModeration>
+    <published>2014-02-19T07:23:02.232Z</published>
+    <updated>2014-02-19T07:23:05.964Z</updated>
+    <content type="html"></content>
+    <summary type="text">com.ibm.sbt.test.js.connections.communities.api.CreateCommunity#1196181324 Community - 1392794568662</summary>
+    <author>
+      <name>Frank Adams</name>
+      <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+      <snx:userState>active</snx:userState>
+      <email>***REMOVED***@renovations.com</email>
+    </author>
+    <contributor>
+      <name>Frank Adams</name>
+      <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+      <snx:userState>active</snx:userState>
+      <email>***REMOVED***@renovations.com</email>
+    </contributor>
+    <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/activitystreams/urn:lsid:lconn.ibm.com:communities.community:ca75f436-9d78-48bc-bb96-fb03852d5cff/@all/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/activitystream" type="application/atom+xml">
+    </link>
+    <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/ublog/urn:lsid:lconn.ibm.com:communities.community:ca75f436-9d78-48bc-bb96-fb03852d5cff/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/microblog" type="application/atom+xml">
+    </link>
+    <snx:communityTheme snx:uuid="default">
+    </snx:communityTheme>
+    <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/broadcasts?communityUuid=ca75f436-9d78-48bc-bb96-fb03852d5cff" rel="http://www.ibm.com/xmlns/prod/sn/community-broadcasts" type="application/atom+xml">
+    </link>
+  </entry>
+</feed>]]></data>
+</response>
+<response statusCode="200" statusReason="OK">
+<headers>
+    <header>
+        <name><![CDATA[Date]]></name>
+        <value><![CDATA[Wed, 19 Feb 2014 11:10:35 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-Powered-By]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Expires]]></name>
+        <value><![CDATA[Thu, 1 Jan 1970 00:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Cache-Control]]></name>
+        <value><![CDATA[no-store, no-cache, must-revalidate]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-LConn-Auth]]></name>
+        <value><![CDATA[false]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-UA-Compatible]]></name>
+        <value><![CDATA[IE=EmulateIE7]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Last-Modified]]></name>
+        <value><![CDATA[Wed, 19 Feb 2014 11:10:35 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Pragma]]></name>
+        <value><![CDATA[no-cache]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/q3lS73nqvmvQJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/; Domain=.sdkdemo.com]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=7pdGH6r6EY0RRfeX8aQMqXzmL+Z79Ucdy3NKkVfEHCvptmAz7VjVCNAGgpD9JOi5soCmzccc9SywXwvLeZaJeQUX4eK1t/jm75/iutZeh/jq0xWm5azj+MKgwchpdNhS5ayLgkl3HlRnd65huCTkTTqLhUioFC141/3P7YAtItZ7synJOJiSgr5M4OMhKNbK5Kkcx+lrhLO+T30QCKnreQCnfYIWro4x2sKgiNFshIIzvQ6832dq8dGFLrYN1YlWAFlFkBeFF7uQYP10gGI+hAOHL11U7JYQ441MqW8JSkhfq4coH56/4wQNJJ/fiUuKVEKuD1V7IhYFnugIP4JYiTTHNxa0FVZv2Q8RHnJ5DzwaZ9y4IdE28Fim0l1dvV6/YkCdaVAwujW12qvuT9UgxyCirb2yeJD0qnzw7pJv7h29MghWTXd2lEyCK7Pnu5JuCTfnLBLLG6DolF4tFJTxhb1MVAAFa9PLWhe3BmuGFLZ/35NBJLbNGeU0E2alGmlRTAOBJuWWTvbwlIFppZHY5aNtALhg4ghhqdfLizCMeYFoPTMO4Ziq7dkPeZOTV1YS3bJI27U4s5h3LzylQt52Uy7D+7QbwWc6zbUFqdTK/K/I9iwRjOh8/f3iIXVrVmj7pNWelrLb3Hg0Mz6Aj6A6y/KkAf1zayBk9xDSTunoSJMsiDhQMfuqDqS2xrcGodVVzRwF8vrJdG6jhcMz91TInkNaFKSVFNuDPIRU7c7hPfs=; Path=/; Domain=.sdkdemo.com]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LCSESSIONID=0000j88nSz87-fRqwuBqe_jEja6:18dna4k6n; Path=/; HttpOnly]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Keep-Alive]]></name>
+        <value><![CDATA[timeout=10, max=100]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Connection]]></name>
+        <value><![CDATA[Keep-Alive]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Transfer-Encoding]]></name>
+        <value><![CDATA[chunked]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Type]]></name>
+        <value><![CDATA[application/atom+xml;charset=UTF-8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header></headers>
+<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"><opensearch:totalResults xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">1</opensearch:totalResults><opensearch:startIndex xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">1</opensearch:startIndex><opensearch:itemsPerPage xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">10</opensearch:itemsPerPage><title type="text">CreateCommunity.js 1392800075901 - Members</title><id>https://dev.sdkdemo.com:444/communities/service/atom/community/members?communityUuid=0fa4772b-1bad-48c7-952d-397b95c16cc8</id><updated>2014-02-19T11:10:35.963Z</updated><generator uri="http://www.ibm.com/xmlns/prod/sn" version="4.5.0.0">IBM Connections - Communities</generator><link href="https://dev.sdkdemo.com:444/communities/service/atom/community/members?communityUuid=0fa4772b-1bad-48c7-952d-397b95c16cc8" rel="self"></link><link href="https://dev.sdkdemo.com:444/communities/service/atom/community/members?communityUuid=0fa4772b-1bad-48c7-952d-397b95c16cc8&amp;outputType=categories" rel="http://www.ibm.com/xmlns/prod/sn/tag-cloud" type="application/atomcat+xml"></link><link href="https://dev.sdkdemo.com:444/communities/service/atom/community/service?communityUuid=0fa4772b-1bad-48c7-952d-397b95c16cc8" rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml"></link><snx:communityLastMod xmlns:snx="http://www.ibm.com/xmlns/prod/sn" component="http://www.ibm.com/xmlns/prod/sn/communities">1392800080358</snx:communityLastMod><snx:rank xmlns:snx="http://www.ibm.com/xmlns/prod/sn" scheme="http://www.ibm.com/xmlns/prod/sn/user">1</snx:rank><snx:rank xmlns:snx="http://www.ibm.com/xmlns/prod/sn" scheme="http://www.ibm.com/xmlns/prod/sn/group">0</snx:rank><entry><id>http://communities.ibm.com:2006/service/atom/community/members?communityUuid=0fa4772b-1bad-48c7-952d-397b95c16cc8&amp;email=***REMOVED***@renovations.com</id><title type="text">Frank Adams</title><summary type="text">Frank Adams</summary><link href="https://dev.sdkdemo.com:444/profiles/atom/profile.do?email=***REMOVED***@renovations.com" type="application/atom+xml"></link><link href="https://dev.sdkdemo.com:444/profiles/vcard/profile.do?email=***REMOVED***@renovations.com" type="text/directory"></link><published>2014-02-19T08:54:40.345Z</published><updated>2014-02-19T08:54:40.345Z</updated><contributor><email>***REMOVED***@renovations.com</email><snx:userid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">EFD413BC-E572-760A-8625-7C6E00506453</snx:userid><snx:userState xmlns:snx="http://www.ibm.com/xmlns/prod/sn">active</snx:userState><name>Frank Adams</name></contributor><link href="https://dev.sdkdemo.com:444/communities/service/atom/community/members?communityUuid=0fa4772b-1bad-48c7-952d-397b95c16cc8&amp;email=***REMOVED***@renovations.com" rel="self"></link><link href="https://dev.sdkdemo.com:444/communities/service/atom/community/members?communityUuid=0fa4772b-1bad-48c7-952d-397b95c16cc8&amp;email=***REMOVED***@renovations.com" rel="edit"></link><snx:role xmlns:snx="http://www.ibm.com/xmlns/prod/sn" component="http://www.ibm.com/xmlns/prod/sn/communities">owner</snx:role><category term="person" scheme="http://www.ibm.com/xmlns/prod/sn/type"></category><snx:orgId xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:orgId><content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml"><span><a href="https://dev.sdkdemo.com:444/profiles/atom/profile.do?email=***REMOVED***@renovations.com" class="url fn">Frank Adams</a><div><a href="mailto:***REMOVED***@renovations.com" class="email">***REMOVED***@renovations.com</a></div><div class="x-guid">EFD413BC-E572-760A-8625-7C6E00506453</div><div class="x-community-role">owner</div></span></div></content></entry></feed>]]></data>
+</response>
+</responses>

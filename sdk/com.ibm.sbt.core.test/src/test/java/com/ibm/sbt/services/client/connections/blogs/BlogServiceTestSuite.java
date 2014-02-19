@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * �� Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -27,12 +27,13 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({ 
+	BlogCommentCreateGetDeleteTest.class,
+	BlogGetUpdateTest.class, 
+	BlogPostCreateTest.class,
+	BlogPostDeleteTest.class,
+	BlogPostGetUpdateLikeUnlikeTest.class,
+	BlogSerializationTests.class,
 	BlogServiceGetTests.class,
-	BlogCreateUpdateDeleteTest.class, 
-	BlogPostLikeUnlikeTest.class,
-	BlogPostUpdateDeleteTest.class,
-	CommentCreateGetDeleteTest.class,
-	BlogSerializationTests.class
 })
 public class BlogServiceTestSuite {
 

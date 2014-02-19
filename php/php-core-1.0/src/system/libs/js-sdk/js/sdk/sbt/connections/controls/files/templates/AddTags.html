@@ -1,0 +1,34 @@
+<div class="lotusDialogContent _qkrDialogCompact">
+	<form class="lotusForm">
+	<table cellpadding="0" class="lotusFormTable">
+		<colgroup>
+			<col>
+			<col width="100%">
+			<col>
+		</colgroup>
+		<tbody>
+			<tr class="lotusFormFieldRow">
+				<td class="lotusFormLabel">
+					<!-- IE -->
+				</td>
+				<td colspan="2">${numberFilesSelected}</td>
+			</tr>
+			<tr class="lotusFormFieldRow">
+				<td class="lotusFormLabel lotusNowrap">
+					<label for="">${nls.labelTags}</label>
+				</td>
+				<td>
+					<input type="text" name="tags" value="" class=" lotusText" dojoattachpoint="tagsInput" title="${nls.titleEnterTags}">
+				</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td class="lotusFormFooter" colspan="3" dojoattachpoint="buttonsNode">
+					<button type="button" class="lotusBtn" dojoattachevent="onclick: onExecute" dojoattachpoint="executeButton">${nls.labelAddTags}</button>
+					<button type="button" class="lotusBtn" dojoattachevent="onclick: onCancel" dojoattachpoint="cancelButton">${nls.labelCancel}</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	</form>
+</div>

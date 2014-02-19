@@ -17,7 +17,6 @@
 package com.ibm.sbt.services.client.connections.forums;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 import org.junit.After;
@@ -36,7 +35,7 @@ public class ForumReplyGetUpdateTest extends BaseForumServiceTest {
 	}
 
 	@Test
-	public void GetForumReply() {
+	public void testGetForumReply() {
 		try {
 			ForumReply replyGot = forumService.getForumReply(reply.getReplyUuid());
 			assertEquals(reply.getTitle(), replyGot.getTitle());
@@ -47,15 +46,15 @@ public class ForumReplyGetUpdateTest extends BaseForumServiceTest {
 	}
 
 	@Test
-	public void UpdateReply() {
+	public void testUpdateReply() {
 		try {
 			reply.setTitle("new Test reply title" + System.currentTimeMillis());
 			reply.setContent("new Test reply content" + System.currentTimeMillis());
 			forumService.updateForumReply(reply);
 			ForumReply updatedReply = forumService.getForumReply(reply.getReplyUuid());
-			assertEquals(reply.getTitle(), updatedReply.getTitle());
+			assertEquals(unRandomize(reply.getTitle()), unRandomize(updatedReply.getTitle()));
 			assertEquals(reply.getReplyUuid(), updatedReply.getReplyUuid());
-			assertEquals(reply.getContent(), updatedReply.getContent().trim());
+			assertEquals(unRandomize(reply.getContent()), unRandomize(updatedReply.getContent().trim()));
 		} catch (Exception e) {
 			fail("Error calling forumService.updateForumReply() caused by: "+e.getMessage());
 		}

@@ -35,7 +35,7 @@ public class ForumGetUpdateTest extends BaseForumServiceTest {
 	}
 
 	@Test
-	public void GetForum() {
+	public void testGetForum() {
 		try {
 			Forum forumGot = forumService.getForum(forum.getForumUuid());
 
@@ -47,13 +47,13 @@ public class ForumGetUpdateTest extends BaseForumServiceTest {
 	}
 
 	@Test
-	public void UpdateForum() {
+	public void testUpdateForum() {
 		try {
 			forum.setTitle("new Test forum title" + System.currentTimeMillis());
 			forum.setContent("new Test forum content");
 			forumService.updateForum(forum);
 			Forum updatedForum = forumService.getForum(forum.getForumUuid());
-			assertEquals(forum.getTitle(), updatedForum.getTitle());
+			assertEquals(unRandomize(forum.getTitle()), unRandomize(updatedForum.getTitle()));
 			assertEquals(forum.getContent(), updatedForum.getContent());
 		} catch (Exception e) {
 			fail("Error calling forumService.updateForum() caused by: "+e.getMessage());

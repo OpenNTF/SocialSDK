@@ -50,7 +50,7 @@ public class FollowServiceTest extends BaseUnitTest {
 	public void createCommunity(){
 		try {
 			CommunityService service = new CommunityService();
-			Community community = new Community(service, "");
+			community = new Community(service, "");
 			community.setTitle("Test Followservice Community " + System.currentTimeMillis());
 			community.setContent("Java Community Content");
 			String type = "public";
@@ -98,14 +98,7 @@ public class FollowServiceTest extends BaseUnitTest {
 	@Test
 	public void startFollowing() {
 		try {
-			CommunityService service = new CommunityService();
-			Community community = new Community(service, "");
-			community.setTitle("Test StartFollow Community " + System.currentTimeMillis());
-			community.setContent("Java Community Content");
-			String type = "public";
-			community.setCommunityType(type);
-			community = community.save();
-			
+			createCommunity();
 			followService.stopFollowing(Source.COMMUNITIES.getSourceType(),Type.COMMUNITIES.getType(), community.getCommunityUuid());
 			
 			FollowedResource resource = followService.startFollowing(Source.COMMUNITIES.getSourceType(),Type.COMMUNITIES.getType(), community.getCommunityUuid());

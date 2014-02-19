@@ -17,18 +17,18 @@ import com.ibm.sbt.services.client.connections.profiles.ProfileServiceTestSuite;
 import com.ibm.sbt.services.client.connections.wikis.WikiServiceTestSuite;
 @RunWith(Suite.class)
 @SuiteClasses({
-										// 		Errors/Failures
-	ActivityServiceTestSuite.class,		//		1/2
-	ActivityStreamServiceTest.class,	//		0/0
-	BlogServiceTestSuite.class,			//		0/0
-	BookmarkServiceTest.class,			//		0/0
-	CMISFileServiceTest.class,			//		?/?
-	CommunityServiceTestSuite.class, 	// 		0/0
-	FileServiceTest.class,				// 		0/0
-	FollowServiceTest.class,			//		0/0
-	ForumServiceTestSuite.class,		// 		?/?
-	ProfileServiceTestSuite.class,		//		4/0
-	WikiServiceTestSuite.class			//		0/0
+										// 		Errors/Failures/Ignored
+	ActivityServiceTestSuite.class,		//		1/0/2
+	ActivityStreamServiceTest.class,	//		0/0/0
+	BlogServiceTestSuite.class,			//		0/0/0
+	BookmarkServiceTest.class,			//		0/0/0
+	CMISFileServiceTest.class,			//		0/0/0
+	CommunityServiceTestSuite.class, 	// 		0/0/0
+	FileServiceTest.class,				// 		0/0/0
+	FollowServiceTest.class,			//		0/0/0
+	ForumServiceTestSuite.class,		// 		0/0/0
+	ProfileServiceTestSuite.class,		//		0/0/0
+	WikiServiceTestSuite.class			//		0/0/0
 })
 public class ConnectionsTestSuite {
 

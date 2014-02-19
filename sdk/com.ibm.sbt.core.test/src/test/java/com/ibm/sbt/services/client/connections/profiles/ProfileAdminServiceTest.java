@@ -3,11 +3,7 @@ package com.ibm.sbt.services.client.connections.profiles;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.ibm.sbt.services.BaseUnitTest;
@@ -32,12 +28,11 @@ public class ProfileAdminServiceTest extends BaseUnitTest {
 	
 	@Test
 	public final void testCreateAndDeleteProfile() throws Exception{
-//		ProfilesDataGenerator pdc = new ProfilesDataGenerator()
-//		pdc.createProfile();
 		Profile profile = profileAdminService.getProfile("testUser@renovations.com");
 		
 		profile.setAsString("guid", "testUser"+System.currentTimeMillis());
-		profile.setAsString("email", "testUser"+System.currentTimeMillis()+"@renovations.com");
+		String email = "testUser"+System.currentTimeMillis()+"@renovations.com";
+		profile.setAsString("email", email);
 		profile.setAsString("uid", "testUser"+System.currentTimeMillis());
 		profile.setAsString("distinguishedName", "CN=testUser def,o=renovations");
 		profile.setAsString("displayName", "testUser"+System.currentTimeMillis());
@@ -46,20 +41,10 @@ public class ProfileAdminServiceTest extends BaseUnitTest {
 		profile.setAsString("userState", "active");
 		 
 		profileAdminService.createProfile(profile);
-		profile = profileAdminService.getProfile("testUser@renovations.com");
+		profile = profileAdminService.getProfile(email);
 		assertNotNull(profile.getName());
-
-	}
-
-	@Ignore
-	@Test
-	public final void testDeleteProfile() throws Exception {
-		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put("name", "testUser");
-		ProfileList profileEntries = profileAdminService.searchProfiles(parameters);
-		Profile profile = profileEntries.iterator().next();
-		profileAdminService.deleteProfile(profile.getUserid());
-		profile = profileAdminService.getProfile("testUser@renovations.com");
+		profileAdminService.deleteProfile(email);
+		profile = profileAdminService.getProfile(email);
 		assertNull(profile.getName());
 	}
 

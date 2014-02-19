@@ -130,7 +130,7 @@ public class BaseForumServiceTest extends BaseUnitTest {
 	
 	protected void deleteForumReply(ForumReply reply) {
 		try {
-			forumService.removeForum(reply.getReplyUuid());
+			forumService.removeForumReply(reply.getReplyUuid());
 		} catch (ForumServiceException e) {
 			fail("Error calling forumService.removeForum() caused by: "+e.getMessage());
 		}

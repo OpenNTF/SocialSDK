@@ -29,7 +29,7 @@ import org.junit.Test;
 public class BlogPostCreateTest extends BaseBlogServiceTest {
 
 	@Test
-	public void CreateBlogTest() {
+	public void createBlogTest() {
 		try {
 			Blog blog = new Blog(blogService, "");
 			blog.setTitle("Test Blog" +  System.currentTimeMillis());
@@ -50,6 +50,7 @@ public class BlogPostCreateTest extends BaseBlogServiceTest {
 	@Test
 	public void createBlogPostTest() {
 		try {
+			blog = createBlog();
 			BlogPost blogPost = new BlogPost(blogService, "");
 			blogPost.setTitle("Test Blog Post" + System.currentTimeMillis());
 			blogPost.setContent("Test Blog Post Content"+ System.currentTimeMillis());

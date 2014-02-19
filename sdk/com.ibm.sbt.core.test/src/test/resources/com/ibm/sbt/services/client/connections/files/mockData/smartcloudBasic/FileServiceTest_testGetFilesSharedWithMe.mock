@@ -12,19 +12,15 @@
     </header>
     <header>
         <name><![CDATA[ETag]]></name>
-        <value><![CDATA["myshares:modified=1385209438380:updated=1385209438442"]]></value>
+        <value><![CDATA["myshares:modified=1392810430308:updated=1392810430311"]]></value>
     </header>
     <header>
         <name><![CDATA[Last-Modified]]></name>
-        <value><![CDATA[Sat, 23 Nov 2013 12:23:58 GMT]]></value>
+        <value><![CDATA[Wed, 19 Feb 2014 11:47:10 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[p3p]]></name>
         <value><![CDATA[CP="NON CUR OTPi OUR NOR UNI"]]></value>
-    </header>
-    <header>
-        <name><![CDATA[Server]]></name>
-        <value><![CDATA[WebSphere Application Server/8.0]]></value>
     </header>
     <header>
         <name><![CDATA[x-powered-by]]></name>
@@ -48,7 +44,7 @@
     </header>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Sat, 23 Nov 2013 12:23:58 GMT]]></value>
+        <value><![CDATA[Wed, 19 Feb 2014 11:47:10 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Content-Length]]></name>
@@ -60,7 +56,7 @@
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=zqbOwdpyIfVyhQc0AOiP6zIADn+S8MTvpVT+AwlKR42yxmlKI3LjgY6q+9EtPGdnL5+riPxxwNbgAxUkLCQkXjK4PqLy4przMbU6diOyVctXOxhV47uwfUSaCHHW3eD0uuVFnd3jfh0Qn+7THSlVJsuYjrYOXj1lgKKuyiTea7VgIF7X/pIokqImnX8d3iqr10nLmb2HyK8nXzWoFw4pxXWbwVSXd1zgHabnL+KUjaMenq/yfuCrh5uVugoRfUiOGQSmBDRBo5WYQxysOKF43er/BrhYmi7f+Sfq4e91N0ScvI/Fios0Ni7xlTo3cNF7t4gc3JnEJz/kkIgyv6uvD4vmX2jV7L9rDa7hJeRncvtVPnqBAEphXg/zmQhgyNwtDDCsY4AO4B4gRj0VdmXZSTJA6ZnT8W+Mm73Jg34TP3tru8A0E+lNbTtwEpOfhBJwi/xqx8TgLeG5y8ZpY7PCPGNH6wCmUl9V5yBdMikX2Y8AdpZseH0mBX2fIyqslrhuffs4W28584u6x95OK8Hvanjh4X8mtpPCYK40AGn2NdZojZWxQXkgjfxsvRalmdEEPjMGeGnTlsyCKXL0lULXeayaDqxKHLJcy2gKTWj0qkpwLL4YfJ02hnU+JlvMtRtdYiv+P87++WTbfPCVfrnp95aRpV6p6dZy8yleZQrbh5g8MiZ4WGcBdh+fnGtx/iC0f63remflD1DBq0G7QsVX1F1qmip9FYoI6tz6CIBOcWjrtHrYZKorcUaT6nYPK75zmbB6X1N1rdGavqOUB7XcFA==;Secure; Path=/]]></value>
+        <value><![CDATA[LtpaToken2=IUYq6lUcWMd9+sXZniWkayYfhWibVm9Qj+rQBQO2lXRJDnCFU0JjhiwuOuliMLSpMmg+68yPu0Uimz+rTijL2Pp7mAJlaP2Xc7lueaFHHtdy4CexVyqsGkJcNHhbIlTppVVCASVrFXAV6MKgUz8pRz3i5jmi9YIDrlgQ/RBHCB9Y0oaHg9hC0mmzqx3m68rfErv5+IWHNHQgWeH1Z1ZHS9Cl2yr2NrXkDEu+2uju7racIxlb5KLQBfT90Rgitr2I5q8ZYbWJtVA5hva7rr03VCMBtyIw5KTa/N2gEDn6xi2l1s+WawnZ3Ob0bXiRSSDYxM/vPNYziXbZLNT6SP+xmpoF+G+87wo5WvVWuyYAB/OOUP+OzcTtrqj8eFLLG88Ce7vVukMh/afxtgClkFTrIVhAbwTUkaqWFIZvGY8h8P4qQpB6A9y/hD+oKuRSiJyhkdZB9lVGSYe69hM4vsG0xuvSWgJLrfETHo2CbrFneijDOQLC4T9g2BAxBw7f03tBBJMQSlr+UWGPxygW0on+3lNBazIE+x+elswrNzb0Hc8rGyNPdMMCYjGObDMBXSA09fTiHHGL+QDaYhk5bT2O43iZZvIlbcMA9z3g3Ng+2kT8jX3V1m91zx9yBtp567LnFxJ6EduQgNSh4YmhPfZ6fB/J13y9ocXPajhIsC7g89SQLDQbNwE8/k+7kHsFvri4lYcVvirxRU3uXdz/kWGXlKCAssY/gPrPEycIbEN3upcdpUkGJGOxJinMrTc5Ah3U/BGFblu5lDEOs6jjLXFWIw==;Secure; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
@@ -68,28 +64,28 @@
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[csrf_token=e2730917-8914-470a-90b4-4fe31789376b;Secure; Path=/]]></value>
+        <value><![CDATA[csrf_token=8330c665-ea76-4432-a530-5dc661429341;Secure; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[csrf_token_forum=698133f6-f52e-4c9b-b33b-ba874f39165e;Secure; Path=/]]></value>
+        <value><![CDATA[csrf_token_forum=e021a170-b0b1-4a91-909b-cfd6c7d32a3f;Secure; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[JSESSIONID=0000xovaD4BMbfvJHqxFGGC7ohJ:1882dmlce;Secure; Path=/]]></value>
+        <value><![CDATA[JSESSIONID=0000-bZu-x86HynoCEE44SS-h05:18dl2igds;Secure; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[user_lang=ZW5fVVM%3D-MjA1NDc1NzQ%3D;Secure; Domain=na.collabserv.com; Path=/; Expires=Sun, 24-Nov-13 12:23:58 GMT;Secure;]]></value>
+        <value><![CDATA[user_lang=ZW5fVVM%3D-MjA1NDc1NzQ%3D;Secure; Domain=na.collabserv.com; Path=/; Expires=Thu, 20-Feb-14 11:47:10 GMT;Secure;]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[BIGipServerE3B-AC-9081-fe=2267221770.31011.0000;Secure; Path=/]]></value>
+        <value><![CDATA[BIGipServerE3A-AC-9081-fe=2116226826.31011.0000;Secure; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[BIGipServerE3B-WebSEAL-80-fe=2317356298.20480.0000;secure; path=/]]></value>
+        <value><![CDATA[BIGipServerE3A-WebSEAL-80-fe=2116029706.20480.0000;secure; path=/]]></value>
     </header></headers>
-<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?><feed xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:td="urn:ibm.com/td" xmlns="http://www.w3.org/2005/Atom"><id>urn:lsid:ibm.com:td:documents</id><link href="https://apps.na.collabserv.com/files/basic/api/documents/shared/feed" rel="self"></link><title type="text">Files Shared With You</title><updated>2013-11-23T12:23:58.442Z</updated><generator version="4.5.0.0" uri="http://www.ibm.com/xmlns/prod/sn">IBM Connections - Files</generator><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/item">1</snx:rank><opensearch:totalResults>1</opensearch:totalResults><entry><id>urn:lsid:ibm.com:td:b643c6fc-da03-4b33-a22e-fb4d768d71ea</id><td:uuid>b643c6fc-da03-4b33-a22e-fb4d768d71ea</td:uuid><td:label>Penguins.jpg</td:label><link href="https://apps.na.collabserv.com/files/basic/api/library/a3c99ec9-e876-4ff1-8ac9-b51aceb1bf0d/document/b643c6fc-da03-4b33-a22e-fb4d768d71ea/entry" rel="self"></link><link href="https://apps.na.collabserv.com/files/app/file/b643c6fc-da03-4b33-a22e-fb4d768d71ea" rel="alternate" type="text/html"></link><link href="https://apps.na.collabserv.com/files/basic/api/library/a3c99ec9-e876-4ff1-8ac9-b51aceb1bf0d/document/b643c6fc-da03-4b33-a22e-fb4d768d71ea/entry" rel="edit"></link><link href="https://apps.na.collabserv.com/files/basic/api/library/a3c99ec9-e876-4ff1-8ac9-b51aceb1bf0d/document/b643c6fc-da03-4b33-a22e-fb4d768d71ea/media" rel="edit-media"></link><link href="https://apps.na.collabserv.com/files/basic/api/library/a3c99ec9-e876-4ff1-8ac9-b51aceb1bf0d/document/b643c6fc-da03-4b33-a22e-fb4d768d71ea/media/Penguins.jpg" rel="enclosure" type="image/jpeg" title="Penguins.jpg" hreflang="en" length="777835"></link><link href="https://apps.na.collabserv.com/files/basic/api/library/a3c99ec9-e876-4ff1-8ac9-b51aceb1bf0d/document/b643c6fc-da03-4b33-a22e-fb4d768d71ea/thumbnail?renditionKind=mediumview" rel="thumbnail"></link><category term="document" scheme="tag:ibm.com,2006:td/type" label="document"></category><link href="https://apps.na.collabserv.com/files/basic/api/library/a3c99ec9-e876-4ff1-8ac9-b51aceb1bf0d/document/b643c6fc-da03-4b33-a22e-fb4d768d71ea/feed" rel="replies" type="application/atom+xml" thr:count="0" xmlns:thr="http://purl.org/syndication/thread/1.0"></link><author><name>Alan Goodwin</name><snx:userid>20548027</snx:userid><snx:orgId>20542369</snx:orgId><snx:orgName>IBM Test - SDK Renovations</snx:orgName><email></email><snx:userState>active</snx:userState></author><title type="text">Penguins.jpg</title><published>2012-12-03T06:01:17.338Z</published><updated>2012-12-03T06:02:38.915Z</updated><td:created>2012-12-03T06:01:17.338Z</td:created><td:modified>2012-12-03T06:01:17.338Z</td:modified><td:lastAccessed></td:lastAccessed><td:modifier><name>Alan Goodwin</name><snx:userid>20548027</snx:userid><snx:orgId>20542369</snx:orgId><snx:orgName>IBM Test - SDK Renovations</snx:orgName><email></email><snx:userState>active</snx:userState></td:modifier><td:shared>2012-12-03T06:02:38.939Z</td:shared><td:sharedBy><name>Alan Goodwin</name><snx:userid>20548027</snx:userid><snx:orgId>20542369</snx:orgId><snx:orgName>IBM Test - SDK Renovations</snx:orgName><email></email><snx:userState>active</snx:userState></td:sharedBy><td:visibility>shared</td:visibility><snx:isExternal>true</snx:isExternal><td:libraryId>a3c99ec9-e876-4ff1-8ac9-b51aceb1bf0d</td:libraryId><td:libraryType>personalFiles</td:libraryType><td:policy><td:organizationPublic>true</td:organizationPublic><td:contentFollowing>true</td:contentFollowing></td:policy><td:versionUuid>607df58f-d298-4ba4-9b34-6b5e431f0199</td:versionUuid><td:versionLabel>1</td:versionLabel><td:propagation>false</td:propagation><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/share">1</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/collections">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/attachments">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/versions">1</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/references">0</snx:rank><td:totalMediaSize>777835</td:totalMediaSize><summary type="text"></summary><content type="image/jpeg" src="https://apps.na.collabserv.com/files/basic/api/library/a3c99ec9-e876-4ff1-8ac9-b51aceb1bf0d/document/b643c6fc-da03-4b33-a22e-fb4d768d71ea/media"></content><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/anonymous_hit">0</snx:rank><td:restrictedVisibility>false</td:restrictedVisibility><td:objectTypeName>snx:file</td:objectTypeName><td:lock type="NONE"></td:lock><snx:encrypt>false</snx:encrypt><snx:isExternal>true</snx:isExternal><snx:orgId>20542369</snx:orgId><snx:orgName>IBM Test - SDK Renovations</snx:orgName></entry></feed>]]></data>
+<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?><feed xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:td="urn:ibm.com/td" xmlns="http://www.w3.org/2005/Atom"><id>urn:lsid:ibm.com:td:documents</id><link href="https://apps.na.collabserv.com/files/basic/api/documents/shared/feed" rel="self"></link><title type="text">Files Shared With You</title><updated>2014-02-19T11:47:10.311Z</updated><generator version="4.5.0.0" uri="http://www.ibm.com/xmlns/prod/sn">IBM Connections - Files</generator><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/item">1</snx:rank><opensearch:totalResults>1</opensearch:totalResults><entry><id>urn:lsid:ibm.com:td:b643c6fc-da03-4b33-a22e-fb4d768d71ea</id><td:uuid>b643c6fc-da03-4b33-a22e-fb4d768d71ea</td:uuid><td:label>Penguins.jpg</td:label><link href="https://apps.na.collabserv.com/files/basic/api/library/a3c99ec9-e876-4ff1-8ac9-b51aceb1bf0d/document/b643c6fc-da03-4b33-a22e-fb4d768d71ea/entry" rel="self"></link><link href="https://apps.na.collabserv.com/files/app/file/b643c6fc-da03-4b33-a22e-fb4d768d71ea" rel="alternate" type="text/html"></link><link href="https://apps.na.collabserv.com/files/basic/api/library/a3c99ec9-e876-4ff1-8ac9-b51aceb1bf0d/document/b643c6fc-da03-4b33-a22e-fb4d768d71ea/entry" rel="edit"></link><link href="https://apps.na.collabserv.com/files/basic/api/library/a3c99ec9-e876-4ff1-8ac9-b51aceb1bf0d/document/b643c6fc-da03-4b33-a22e-fb4d768d71ea/media" rel="edit-media"></link><link href="https://apps.na.collabserv.com/files/basic/api/library/a3c99ec9-e876-4ff1-8ac9-b51aceb1bf0d/document/b643c6fc-da03-4b33-a22e-fb4d768d71ea/media/Penguins.jpg" rel="enclosure" type="image/jpeg" title="Penguins.jpg" hreflang="en" length="777835"></link><link href="https://apps.na.collabserv.com/files/basic/api/library/a3c99ec9-e876-4ff1-8ac9-b51aceb1bf0d/document/b643c6fc-da03-4b33-a22e-fb4d768d71ea/thumbnail?renditionKind=mediumview" rel="thumbnail"></link><category term="document" scheme="tag:ibm.com,2006:td/type" label="document"></category><link href="https://apps.na.collabserv.com/files/basic/api/library/a3c99ec9-e876-4ff1-8ac9-b51aceb1bf0d/document/b643c6fc-da03-4b33-a22e-fb4d768d71ea/feed" rel="replies" type="application/atom+xml" thr:count="0" xmlns:thr="http://purl.org/syndication/thread/1.0"></link><author><name>Alan Goodwin</name><snx:userid>20548027</snx:userid><snx:orgId>20542369</snx:orgId><snx:orgName>IBM Test - SDK Renovations</snx:orgName><email></email><snx:userState>active</snx:userState></author><title type="text">Penguins.jpg</title><published>2012-12-03T06:01:17.338Z</published><updated>2012-12-03T06:02:38.915Z</updated><td:created>2012-12-03T06:01:17.338Z</td:created><td:modified>2012-12-03T06:01:17.338Z</td:modified><td:lastAccessed></td:lastAccessed><td:modifier><name>Alan Goodwin</name><snx:userid>20548027</snx:userid><snx:orgId>20542369</snx:orgId><snx:orgName>IBM Test - SDK Renovations</snx:orgName><email></email><snx:userState>active</snx:userState></td:modifier><td:shared>2012-12-03T06:02:38.939Z</td:shared><td:sharedBy><name>Alan Goodwin</name><snx:userid>20548027</snx:userid><snx:orgId>20542369</snx:orgId><snx:orgName>IBM Test - SDK Renovations</snx:orgName><email></email><snx:userState>active</snx:userState></td:sharedBy><td:visibility>shared</td:visibility><snx:isExternal>true</snx:isExternal><td:libraryId>a3c99ec9-e876-4ff1-8ac9-b51aceb1bf0d</td:libraryId><td:libraryType>personalFiles</td:libraryType><td:policy><td:organizationPublic>true</td:organizationPublic><td:contentFollowing>true</td:contentFollowing></td:policy><td:versionUuid>607df58f-d298-4ba4-9b34-6b5e431f0199</td:versionUuid><td:versionLabel>1</td:versionLabel><td:propagation>false</td:propagation><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/share">1</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/collections">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/attachments">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/versions">1</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/references">0</snx:rank><td:totalMediaSize>777835</td:totalMediaSize><summary type="text"></summary><content type="image/jpeg" src="https://apps.na.collabserv.com/files/basic/api/library/a3c99ec9-e876-4ff1-8ac9-b51aceb1bf0d/document/b643c6fc-da03-4b33-a22e-fb4d768d71ea/media"></content><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/anonymous_hit">0</snx:rank><td:restrictedVisibility>false</td:restrictedVisibility><td:objectTypeName>snx:file</td:objectTypeName><td:lock type="NONE"></td:lock><snx:encrypt>false</snx:encrypt><snx:isExternal>true</snx:isExternal><snx:orgId>20542369</snx:orgId><snx:orgName>IBM Test - SDK Renovations</snx:orgName></entry></feed>]]></data>
 </response>
 </responses>

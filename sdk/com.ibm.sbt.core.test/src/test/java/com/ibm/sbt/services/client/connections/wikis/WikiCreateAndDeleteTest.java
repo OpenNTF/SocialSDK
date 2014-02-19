@@ -26,6 +26,7 @@ import java.util.Map;
 import org.junit.Test;
 
 import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.test.lib.TestEnvironment;
 
 /**
  * @author Mario Duarte
@@ -48,6 +49,7 @@ public class WikiCreateAndDeleteTest extends BaseWikiServiceTest {
 	
 	@Test
 	public void deleteWikiTest() throws Exception {
+		if (TestEnvironment.isSmartCloudEnvironment()) return;
 		Wiki createdWiki = createWiki();
 		
 		Wiki wikiGot = wikiService.getWiki(createdWiki.getLabel(), null);

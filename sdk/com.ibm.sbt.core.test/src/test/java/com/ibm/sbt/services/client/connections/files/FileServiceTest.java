@@ -371,7 +371,8 @@ public class FileServiceTest extends BaseUnitTest {
 	
 	@Test
 	public void testAddRemoveFileToFolders() throws Exception {
-		//TODO: fix for connections and smartcloud
+		//TODO: fix for smartcloud
+		if (TestEnvironment.isSmartCloudEnvironment()) return;
 		FileList folders = fileService.getMyFolders();
 		List<String> listOfFolderIds = new ArrayList<String>();
 		for(File folder : folders) {

@@ -12,19 +12,15 @@
     </header>
     <header>
         <name><![CDATA[ETag]]></name>
-        <value><![CDATA["myshares:modified=1385209439434:updated=1385209439482"]]></value>
+        <value><![CDATA["myshares:modified=1392810429786:updated=1392810429789"]]></value>
     </header>
     <header>
         <name><![CDATA[Last-Modified]]></name>
-        <value><![CDATA[Sat, 23 Nov 2013 12:23:59 GMT]]></value>
+        <value><![CDATA[Wed, 19 Feb 2014 11:47:09 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[p3p]]></name>
         <value><![CDATA[CP="NON CUR OTPi OUR NOR UNI"]]></value>
-    </header>
-    <header>
-        <name><![CDATA[Server]]></name>
-        <value><![CDATA[WebSphere Application Server/8.0]]></value>
     </header>
     <header>
         <name><![CDATA[x-powered-by]]></name>
@@ -48,7 +44,7 @@
     </header>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Sat, 23 Nov 2013 12:23:59 GMT]]></value>
+        <value><![CDATA[Wed, 19 Feb 2014 11:47:09 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Content-Length]]></name>
@@ -60,7 +56,7 @@
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=zqbOwdpyIfVyhQc0AOiP6zIADn+S8MTvpVT+AwlKR42yxmlKI3LjgY6q+9EtPGdnL5+riPxxwNbgAxUkLCQkXjK4PqLy4przMbU6diOyVctXOxhV47uwfUSaCHHW3eD0FxWisu4KqWQwHOpfG2xeMOhsfXqxNW32uuxYmrWRJyt+a/AF5EsJypYmaMREMAtghlpSg1AJlOG2ylLqHPmQOH706afY8E8BLsFMSEkV+bJVdIMYMBzSpPl/qzq2KlG7NaRLfnfov0cieRlMIPUelOM1zWGraac0KU8O7of0MBl26A39PfKvv1mYJcAHLLlz6OUevB4xEuEd/1eTtkT3Og0ASKRC6Jyw6kQrpqeX7TMenFodzWKdmXaoZcOJ5/lkJTlF3GTFpWXKhP4vD3i4VulEBUZK1DJ6QRB+0cAWrGI1dDmBbTqbKEJUeEs23DzG9OEnxzQdQieSTErRb8/cqOeyZoviBcOyWhWoJL5j7pvOgkr0Yhy2yo3zUtEWDII7GD9Hg3wpPPF4hnHE6IkTqyLO3R8v4NejY57GBk5hnbYcmpeWe3EtlApK/xt8CHtxDG9IYuKecuzXEP2NyDU2QS6jN5/IJLXAW7qrm8BabvwB/f2HAwanAMovSkosUun5eOoHegC8HKG1OURo7LvZTTKfKlLZrNg14k9Ady1Fl+PNLIiisUosu66aThyyD2pW6oe9QTc5inUxSVAKMY5dbD8EquqzKe5qUCWj8Z3L4XYMVn8G7EqyhTEHImG/rJ3TMUjzf2wfXhdshdjohTx+IA==;Secure; Path=/]]></value>
+        <value><![CDATA[LtpaToken2=IUYq6lUcWMd9+sXZniWkayYfhWibVm9Qj+rQBQO2lXRJDnCFU0JjhiwuOuliMLSpMmg+68yPu0Uimz+rTijL2Pp7mAJlaP2Xc7lueaFHHtdy4CexVyqsGkJcNHhbIlTpPVy7YQ7JSz3XNq1+wu4w1xJ92D9Uk0HbxPnHeI/53FyGKyiRUVwoULRaKmbNzaGr3NTM4ikgw+eLhsoEHhgVhTHNxOsesR6ZKakaf3OBq+JB5mjDwFV7TYhewAx/2AhmRbWzI5un0EmDedOyXmp82GDUS0UyQIf5L1+/us9lcYf2kEdQ6EbV31w+NNxh4CScb1ZgSbkCdnBp5AMBzY1jehBSZvf6R60wv57UepK1Gk+lOnZyJifPK9arlAs9ex/IvVnG5sDsouaI+fk60k6EIiO5FIX9rCKZ/RI3B24txusw36y+LsNxE4ROX8zACAfejtBOPuqDVLy2s9Mx3E0SejpMMQ4Km1aDl4fYTSt5q2mU+0WFZl+SlVMAqP4lZ/07bSKL8486TQ9uEFHD/ZR1NxkBRbp9TaAQhKSCcWKshbUoXld/RUWaiURg0/Iwvm+BIB1YrFPO4vm9DZVZZ8oAYZHTay1wHb5ekNY/ZnbNT/dYmbdf8EGZmLx9JwttAxSYbuPmMaqc215KZXA4Fra4sBAS2nXQMaOw+0AyJUqQOvuVhURUQL/GPAGaRCAWPw2dFVovBBK0jjhxpKxE4YLiPMLbOCcsYwCvMh37OQ+S1WztSmXyqIAVUVp3jIWSsfQDgfV29JMiaUTr7maqjpP7Jw==;Secure; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
@@ -68,28 +64,28 @@
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[csrf_token=61101963-5f69-4e15-b352-3ca682b715be;Secure; Path=/]]></value>
+        <value><![CDATA[csrf_token=0cf2182a-e65b-4ff7-a17c-08fa95cb8218;Secure; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[csrf_token_forum=41e95297-03e3-4c66-b679-4e7deb3c8142;Secure; Path=/]]></value>
+        <value><![CDATA[csrf_token_forum=1be0d58a-ab73-49ca-a39e-3c2a5a073c35;Secure; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[JSESSIONID=0000eqSl0O03KrHZmnAE0wLG-2m:1882ds7uc;Secure; Path=/]]></value>
+        <value><![CDATA[JSESSIONID=0000jyq8wxscRbyawP05o_cdsig:18dl566a0;Secure; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[user_lang=ZW5fVVM%3D-MjA1NDc1NzQ%3D;Secure; Domain=na.collabserv.com; Path=/; Expires=Sun, 24-Nov-13 12:23:59 GMT;Secure;]]></value>
+        <value><![CDATA[user_lang=ZW5fVVM%3D-MjA1NDc1NzQ%3D;Secure; Domain=na.collabserv.com; Path=/; Expires=Thu, 20-Feb-14 11:47:09 GMT;Secure;]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[BIGipServerE3B-AC-9081-fe=2250444554.31011.0000;Secure; Path=/]]></value>
+        <value><![CDATA[BIGipServerE3A-AC-9081-fe=2149781258.31011.0000;Secure; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[BIGipServerE3B-WebSEAL-80-fe=2317356298.20480.0000;secure; path=/]]></value>
+        <value><![CDATA[BIGipServerE3A-WebSEAL-80-fe=2132806922.20480.0000;secure; path=/]]></value>
     </header></headers>
-<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?><feed xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:td="urn:ibm.com/td" xmlns="http://www.w3.org/2005/Atom"><id>urn:lsid:ibm.com:td:documents</id><link href="https://apps.na.collabserv.com/files/basic/api/documents/feed" rel="self"></link><title type="text">Files Shared By You</title><updated>2013-11-23T12:23:59.482Z</updated><generator version="4.5.0.0" uri="http://www.ibm.com/xmlns/prod/sn">IBM Connections - Files</generator><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/item">1</snx:rank><opensearch:totalResults>1</opensearch:totalResults><entry><id>urn:lsid:ibm.com:td:f6f6418b-bf34-40d7-8b75-2d6e100e7f81</id><td:uuid>f6f6418b-bf34-40d7-8b75-2d6e100e7f81</td:uuid><td:label>Updated Label</td:label><link href="https://apps.na.collabserv.com/files/basic/api/library/72340930-3547-4a94-8b8c-f19e87283606/document/f6f6418b-bf34-40d7-8b75-2d6e100e7f81/entry" rel="self"></link><link href="https://apps.na.collabserv.com/files/app/file/f6f6418b-bf34-40d7-8b75-2d6e100e7f81" rel="alternate" type="text/html"></link><link href="https://apps.na.collabserv.com/files/basic/api/library/72340930-3547-4a94-8b8c-f19e87283606/document/f6f6418b-bf34-40d7-8b75-2d6e100e7f81/entry" rel="edit"></link><link href="https://apps.na.collabserv.com/files/basic/api/library/72340930-3547-4a94-8b8c-f19e87283606/document/f6f6418b-bf34-40d7-8b75-2d6e100e7f81/media" rel="edit-media"></link><link href="https://apps.na.collabserv.com/files/basic/api/library/72340930-3547-4a94-8b8c-f19e87283606/document/f6f6418b-bf34-40d7-8b75-2d6e100e7f81/media/Updated%20Label" rel="enclosure" type="binary/octet-stream" title="Updated Label" hreflang="en" length="896062"></link><link href="" rel="thumbnail"></link><category term="document" scheme="tag:ibm.com,2006:td/type" label="document"></category><link href="https://apps.na.collabserv.com/files/basic/api/library/72340930-3547-4a94-8b8c-f19e87283606/document/f6f6418b-bf34-40d7-8b75-2d6e100e7f81/feed" rel="replies" type="application/atom+xml" thr:count="3" xmlns:thr="http://purl.org/syndication/thread/1.0"></link><author><name>Frank Adams</name><snx:userid>20547574</snx:userid><snx:orgId>20542369</snx:orgId><snx:orgName>IBM Test - SDK Renovations</snx:orgName><email></email><snx:userState>active</snx:userState></author><title type="text">Updated Label</title><published>2012-12-03T05:28:14.446Z</published><updated>2013-05-30T09:39:54.231Z</updated><td:created>2012-12-03T05:28:14.446Z</td:created><td:modified>2013-03-22T10:21:20.449Z</td:modified><td:lastAccessed></td:lastAccessed><td:modifier><name>Frank Adams</name><snx:userid>20547574</snx:userid><snx:orgId>20542369</snx:orgId><snx:orgName>IBM Test - SDK Renovations</snx:orgName><email></email><snx:userState>active</snx:userState></td:modifier><td:shared>2012-12-03T05:28:44.285Z</td:shared><td:visibility>public</td:visibility><snx:isExternal>false</snx:isExternal><td:libraryId>72340930-3547-4a94-8b8c-f19e87283606</td:libraryId><td:libraryType>personalFiles</td:libraryType><td:policy><td:organizationPublic>true</td:organizationPublic><td:contentFollowing>true</td:contentFollowing></td:policy><td:versionUuid>dfc83cba-4baf-484e-8a27-6d760cb37b71</td:versionUuid><td:versionLabel>4</td:versionLabel><td:propagation>false</td:propagation><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">3</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/share">1</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/collections">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/attachments">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/versions">4</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/references">0</snx:rank><td:totalMediaSize>3283470</td:totalMediaSize><summary type="text">Updated Summary</summary><content type="binary/octet-stream" src="https://apps.na.collabserv.com/files/basic/api/library/72340930-3547-4a94-8b8c-f19e87283606/document/f6f6418b-bf34-40d7-8b75-2d6e100e7f81/media"></content><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">2</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/anonymous_hit">0</snx:rank><td:restrictedVisibility>false</td:restrictedVisibility><td:objectTypeName>snx:file</td:objectTypeName><td:lock type="NONE"></td:lock><snx:encrypt>false</snx:encrypt><snx:isExternal>false</snx:isExternal><snx:orgId>20542369</snx:orgId><snx:orgName>IBM Test - SDK Renovations</snx:orgName></entry></feed>]]></data>
+<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?><feed xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:td="urn:ibm.com/td" xmlns="http://www.w3.org/2005/Atom"><id>urn:lsid:ibm.com:td:documents</id><link href="https://apps.na.collabserv.com/files/basic/api/documents/feed" rel="self"></link><title type="text">Files Shared By You</title><updated>2014-02-19T11:47:09.789Z</updated><generator version="4.5.0.0" uri="http://www.ibm.com/xmlns/prod/sn">IBM Connections - Files</generator><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/item">1</snx:rank><opensearch:totalResults>1</opensearch:totalResults><entry><id>urn:lsid:ibm.com:td:f6f6418b-bf34-40d7-8b75-2d6e100e7f81</id><td:uuid>f6f6418b-bf34-40d7-8b75-2d6e100e7f81</td:uuid><td:label>Updated Label</td:label><link href="https://apps.na.collabserv.com/files/basic/api/library/72340930-3547-4a94-8b8c-f19e87283606/document/f6f6418b-bf34-40d7-8b75-2d6e100e7f81/entry" rel="self"></link><link href="https://apps.na.collabserv.com/files/app/file/f6f6418b-bf34-40d7-8b75-2d6e100e7f81" rel="alternate" type="text/html"></link><link href="https://apps.na.collabserv.com/files/basic/api/library/72340930-3547-4a94-8b8c-f19e87283606/document/f6f6418b-bf34-40d7-8b75-2d6e100e7f81/entry" rel="edit"></link><link href="https://apps.na.collabserv.com/files/basic/api/library/72340930-3547-4a94-8b8c-f19e87283606/document/f6f6418b-bf34-40d7-8b75-2d6e100e7f81/media" rel="edit-media"></link><link href="https://apps.na.collabserv.com/files/basic/api/library/72340930-3547-4a94-8b8c-f19e87283606/document/f6f6418b-bf34-40d7-8b75-2d6e100e7f81/media/Updated%20Label" rel="enclosure" type="binary/octet-stream" title="Updated Label" hreflang="en" length="896062"></link><link href="" rel="thumbnail"></link><category term="document" scheme="tag:ibm.com,2006:td/type" label="document"></category><link href="https://apps.na.collabserv.com/files/basic/api/library/72340930-3547-4a94-8b8c-f19e87283606/document/f6f6418b-bf34-40d7-8b75-2d6e100e7f81/feed" rel="replies" type="application/atom+xml" thr:count="3" xmlns:thr="http://purl.org/syndication/thread/1.0"></link><author><name>Frank Adams</name><snx:userid>20547574</snx:userid><snx:orgId>20542369</snx:orgId><snx:orgName>IBM Test - SDK Renovations</snx:orgName><email></email><snx:userState>active</snx:userState></author><title type="text">Updated Label</title><published>2012-12-03T05:28:14.446Z</published><updated>2013-05-30T09:39:54.231Z</updated><td:created>2012-12-03T05:28:14.446Z</td:created><td:modified>2013-03-22T10:21:20.449Z</td:modified><td:lastAccessed></td:lastAccessed><td:modifier><name>Frank Adams</name><snx:userid>20547574</snx:userid><snx:orgId>20542369</snx:orgId><snx:orgName>IBM Test - SDK Renovations</snx:orgName><email></email><snx:userState>active</snx:userState></td:modifier><td:shared>2012-12-03T05:28:44.285Z</td:shared><td:visibility>public</td:visibility><snx:isExternal>false</snx:isExternal><td:libraryId>72340930-3547-4a94-8b8c-f19e87283606</td:libraryId><td:libraryType>personalFiles</td:libraryType><td:policy><td:organizationPublic>true</td:organizationPublic><td:contentFollowing>true</td:contentFollowing></td:policy><td:versionUuid>dfc83cba-4baf-484e-8a27-6d760cb37b71</td:versionUuid><td:versionLabel>4</td:versionLabel><td:propagation>false</td:propagation><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">3</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/share">1</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/collections">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/attachments">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/versions">4</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/references">0</snx:rank><td:totalMediaSize>3283470</td:totalMediaSize><summary type="text">Updated Summary</summary><content type="binary/octet-stream" src="https://apps.na.collabserv.com/files/basic/api/library/72340930-3547-4a94-8b8c-f19e87283606/document/f6f6418b-bf34-40d7-8b75-2d6e100e7f81/media"></content><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">2</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/anonymous_hit">0</snx:rank><td:restrictedVisibility>false</td:restrictedVisibility><td:objectTypeName>snx:file</td:objectTypeName><td:lock type="NONE"></td:lock><snx:encrypt>false</snx:encrypt><snx:isExternal>false</snx:isExternal><snx:orgId>20542369</snx:orgId><snx:orgName>IBM Test - SDK Renovations</snx:orgName></entry></feed>]]></data>
 </response>
 </responses>

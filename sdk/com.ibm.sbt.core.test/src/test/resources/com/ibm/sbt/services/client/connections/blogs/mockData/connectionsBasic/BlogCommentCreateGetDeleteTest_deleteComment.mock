@@ -1,0 +1,174 @@
+<?xml version="1.0"?>
+<responses>
+<response statusCode="404" statusReason="Not Found">
+<headers>
+    <header>
+        <name><![CDATA[Date]]></name>
+        <value><![CDATA[Wed, 19 Feb 2014 11:07:58 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-Powered-By]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-LConn-Auth]]></name>
+        <value><![CDATA[false]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-UA-Compatible]]></name>
+        <value><![CDATA[IE=EmulateIE7]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Expires]]></name>
+        <value><![CDATA[Thu, 1 Jan 1970 00:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Cache-Control]]></name>
+        <value><![CDATA[no-store, no-cache, must-revalidate]]></value>
+    </header>
+    <header>
+        <name><![CDATA[$WSEP]]></name>
+        <value><![CDATA[]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Pragma]]></name>
+        <value><![CDATA[no-cache]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LCSESSIONID=0000an-llDfED33ft13mMKoazZw:18dna4k6n; Path=/; HttpOnly]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Length]]></name>
+        <value><![CDATA[6164]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Keep-Alive]]></name>
+        <value><![CDATA[timeout=10, max=100]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Connection]]></name>
+        <value><![CDATA[Keep-Alive]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Type]]></name>
+        <value><![CDATA[text/html; charset=UTF-8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header></headers>
+<data><![CDATA[<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" dir="ltr">
+<head>
+   <meta http-equiv="content-type" content="text/html;charset=UTF-8">
+   <meta http-equiv="pragma" content="no-cache">
+   <meta http-equiv="cache-control" content="no-cache">
+
+   <title>Page Not Found</title>
+
+   <!-- Copyright IBM Corp. 2013  All Rights Reserved.                    -->
+
+
+<!--[if IE 6]><script>document.getElementsByTagName("html")[0].className+=" lotusui_ie lotusui_ie6";</script><![endif]-->
+<!--[if IE 7]><script>document.getElementsByTagName("html")[0].className+=" lotusui_ie lotusui_ie7";</script><![endif]-->
+<!--[if IE 8]><script>document.getElementsByTagName("html")[0].className+=" lotusui_ie8";</script><![endif]-->
+<!--[if IE 9]><script>document.getElementsByTagName("html")[0].className+=" lotusui_ie9";</script><![endif]-->
+<link rel="stylesheet" type="text/css" id="lotusBaseStylesheet" href="https://dev.sdkdemo.com:444/connections/resources/web/_style?include=com.ibm.lconn.core.styles.oneui3/base/package3.css&etag=20140117.183045" appName="blogs" base="https://dev.sdkdemo.com:444/connections/resources/web/" query="?version=oneui3&rtl=false&etag=20140117.183045" theme="default" defaultTheme="default" oneui="3"></link>
+<link rel="stylesheet" type="text/css" id="lotusSpritesStylesheet" href="https://dev.sdkdemo.com:444/connections/resources/web/_style?include=com.ibm.lconn.core.styles.oneui3/sprites.css&etag=20140117.183045"></link>
+<link rel="stylesheet" type="text/css" id="lotusThemeStylesheet" href="https://dev.sdkdemo.com:444/connections/resources/web/_lconntheme/default.css?version=oneui3&rtl=false&etag=20140117.183045"></link>
+<!-- Copyright IBM Corp. 2012, 2013  All Rights Reserved.              -->
+
+<link rel="stylesheet" type="text/css" id="lotusAppStylesheet" href="https://dev.sdkdemo.com:444/connections/resources/web/_lconnappstyles/default/blogs.css?version=oneui3&rtl=false&etag=20140117.183045"></link>
+
+   <!-- Copyright IBM Corp. 2012, 2013  All Rights Reserved.              -->
+
+<link rel="shortcut icon" href="https://dev.sdkdemo.com:444/connections/resources/web/com.ibm.oneui3.styles/imageLibrary/Branding/Other/ConnectionsBlue16.ico?etag=20140117.183045" type="image/x-icon">
+
+   
+</head>
+<body class="lotusui lotusui30_body lotusui30_fonts lotusui30 lotusError " onload="window.loadTime = new Date();">
+  <div id="lotusFrame" role="main" class="lotusFrame lotusui30_layout" style="">
+    <div class="lotusErrorBox">
+      <div class="lotusErrorContent">
+        
+            
+            
+                <img class="iconsMessages48 iconsMessages48-msgWarning48" src="https://dev.sdkdemo.com:444/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140117.183045" alt="" role="presentation">
+            
+        
+        <div class="lotusErrorForm" role="region" aria-labelledby="scene-title">
+        
+        
+          <h1 class="lotusHeading" id="scene-title">Page Not Found</h1>
+          <p>The page you were looking for could not be found.  If someone sent you this link, check that it is correct.  Otherwise, the page may have been moved or deleted.</p>
+          
+          
+        
+          
+          
+            
+            
+          
+        
+          
+          
+            <div class="lotusBtnContainer">
+              <a href="javascript:;" onclick="showErrorDetails(this);">
+                 Report this Problem...
+              </a>
+            </div>
+            <p id="lconnErrorDetails" style="display:none;" class="lotusErrorDetails">
+              <label for="lconnErrorText">Contact your administrator and include the information below:</label>
+              <textarea id="lconnErrorText" readonly="readonly" class="lotusText" wrap="off"></textarea>
+            </p>
+            <script type="text/javascript">
+               function showErrorDetails(self) {
+                  var details = document.getElementById('lconnErrorDetails');
+                  var input = document.getElementById('lconnErrorText');
+         
+                  var text = [];
+                  try {
+                     text.push("Time: "+(window.loadTime || new Date()));
+                     if (window.location)
+                        text.push("Location: "+window.location.href);
+                     if (window.navigator) {
+                        text.push("User-Agent: "+window.navigator.userAgent);
+                        text.push("Language: "+ (window.navigator.language || window.navigator.userLanguage));
+                     }
+                     try {
+                        var plugins = window.navigator.plugins;
+                        if (plugins) {
+                           for (var i=0; i<plugins.length; i++) {
+                              var plugin = plugins[i];
+                              text.push("Plugin: [name='"+plugin.name+"' filename='"+plugin.filename+"' version='"+plugin.version+"' description='"+plugin.description+"']");
+                           }
+                        }
+                     } catch (e) {
+                        text.push("Plugins: "+e);
+                     }
+                  } catch (e) {
+                     text.push("Browser Error: "+e);
+                  }
+                  text.push("---");
+                  
+                  // Do not remove this line unless you wish to completely hide all reporting info from the user. 
+                  text.push("Identifier: LCF187A908EB614822843BECA906A14411\njava.io.FileNotFoundException: SRVE0190E: File not found: \/e780286f-34fa-4f0b-99ae-3cc4800c830f\/api\/comments\/15cef12e-6d8c-4ea8-a0ba-134f42d89177");
+                  input.value = text.join("\n");
+              
+                  self.parentNode.style.display='none';
+                  details.style.display='';
+                  input.focus();
+                  input.select();
+               }
+            </script>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+]]></data>
+</response>
+</responses>

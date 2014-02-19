@@ -14,8 +14,8 @@ import com.ibm.sbt.test.lib.TestEnvironment;
 @RunWith(Suite.class)
 @SuiteClasses({
 	CommunityServiceTest.class, 
-	FileServiceTest.class//,
-	//WikiServiceTestSuite.class
+	FileServiceTest.class,
+	WikiServiceTestSuite.class
 })
 public class SmartCloudTestSuite {
 	@BeforeClass

@@ -18,7 +18,7 @@ import com.ibm.sbt.services.client.connections.wikis.WikiServiceTestSuite;
 @RunWith(Suite.class)
 @SuiteClasses({
 										// 		Errors/Failures/Ignored
-	ActivityServiceTestSuite.class,		//		1/0/2
+	ActivityServiceTestSuite.class,		//		0/0/3
 	ActivityStreamServiceTest.class,	//		0/0/0
 	BlogServiceTestSuite.class,			//		0/0/0
 	BookmarkServiceTest.class,			//		0/0/0

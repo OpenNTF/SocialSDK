@@ -25,6 +25,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.test.lib.TestEnvironment;
 
 /**
  * @author Mario Duarte
@@ -51,6 +52,7 @@ public class WikiPageTest extends BaseWikiServiceTest {
 	
 	@Test
 	public void updateWikiPageTest() throws Exception {
+		if (TestEnvironment.isSmartCloudEnvironment()) return;
 		WikiPage wikiPage = wikiService.createWikiPage(
 				wiki.getLabel(), newWikiPage() , null);
 		

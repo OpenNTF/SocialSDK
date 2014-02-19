@@ -14,7 +14,7 @@
 		<managed-bean-scope>application</managed-bean-scope>
 		<managed-property>
 			<property-name>endpoints</property-name>
-			<value>smartcloudOA2:connections</value>
+			<value>connectionsBasic:connections</value>
 		</managed-property>
 	</managed-bean>
 	

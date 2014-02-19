@@ -15,6 +15,8 @@
  */
 package com.ibm.sbt.test.js.connections.profiles.api;
 
+import junit.framework.Assert;
+
 import org.junit.Test;
 
 import com.ibm.commons.util.io.json.JsonJavaObject;
@@ -33,11 +35,11 @@ public class GetProfile extends BaseProfilesTest {
 
     @Test
     public void testGetProfile() {
-        Profile profile = getProfile(getProperty("sample.id1"));
-        addSnippetParam("sample.email1", getProperty("sample.email1"));
+
+        addSnippetParam("sample.email1", getProperty("sample.userId1"));
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         JsonJavaObject json = previewPage.getJson();
-        validate(profile, json);
+        Assert.assertEquals(getProperty("sample.email1"), json.getString("getEmail")); 
     }
     
 }

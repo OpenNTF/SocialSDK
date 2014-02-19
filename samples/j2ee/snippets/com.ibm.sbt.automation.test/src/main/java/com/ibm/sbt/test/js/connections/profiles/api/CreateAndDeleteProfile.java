@@ -45,12 +45,12 @@ public class CreateAndDeleteProfile extends BaseProfilesTest {
     public void testCreateAndDeleteProfile() {        
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID1);
         JsonJavaObject json = previewPage.getJson();
-        Assert.assertEquals("QWERAB04-F2E1-1222-4825-7A700026E92C", json.getString("getUserid"));
-        Assert.assertEquals("MikeAdams@renovations.com", json.getString("getEmail"));
-        Assert.assertEquals("Mike Adams", json.getString("getName"));
+        Assert.assertEquals(getProperty("sample.id1"), json.getString("getUserid"));
+        Assert.assertEquals(getProperty("sample.email1"), json.getString("getEmail"));
+        Assert.assertEquals(getProperty("sample.displayName1"), json.getString("getName"));
         previewPage = executeSnippet(SNIPPET_ID2);
         json = previewPage.getJson();
-        Assert.assertEquals("QWERAB04-F2E1-1222-4825-7A700026E92C", json.getString("id"));
+        Assert.assertEquals(getProperty("sample.id1"), json.getString("id"));
         previewPage = executeSnippet(SNIPPET_ID2);
         json = previewPage.getJson();
         Assert.assertEquals(404, json.getInt("code"));

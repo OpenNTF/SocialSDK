@@ -25,6 +25,7 @@ import com.ibm.commons.runtime.Context;
 import com.ibm.commons.runtime.util.UrlUtil;
 import com.ibm.commons.util.PathUtil;
 import com.ibm.commons.util.StringUtil;
+import com.ibm.sbt.services.endpoints.EndpointFactory;
 
 
 /**
@@ -210,16 +211,11 @@ public class Util {
         if (StringUtil.isEmpty(themeId)) {
             themeId = getThemeId(request);
         }
-        
         String jsLibId = getJsLibId(request);
         String environment = request.getParameter("env");
 
-        if(StringUtil.isEmpty(environment))
-            environment = Context.get().getProperty("environment");
-        
         String endpointName = "connections";
-        String baseUrl = Context.get().getProperty(endpointName + ".url");
-
+        String baseUrl = EndpointFactory.getEndpointFromEnvironment(endpointName, environment).getUrl();
         
         String[] result;
         if (_styleMap.containsKey(themeId)) {

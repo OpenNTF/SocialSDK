@@ -20,9 +20,11 @@
 define(["../../../declare", "../../../stringUtil", "../../../i18n", "../../../lang",
         "../../../connections/controls/ConnectionsGridRenderer",
         "../../../text!../../../connections/controls/communities/templates/CommunityRow.html",
+        "../../../text!../../../connections/controls/communities/templates/BootstrapCommunityRow.html",
         "../../../text!../../../connections/controls/communities/templates/TagAnchor.html",
         "../../../i18n!../../../connections/controls/communities/nls/CommunityGridRenderer"], 
-        function(declare, stringUtil, i18n, lang, ConnectionsGridRenderer, CommunityRow, TagAnchor, nls) {
+        function(declare, stringUtil, i18n, lang, ConnectionsGridRenderer, CommunityRow,
+        		BootstrapCommunityRow, TagAnchor, nls) {
 
     /**
      * @class CommunityGridRenderer
@@ -30,15 +32,10 @@ define(["../../../declare", "../../../stringUtil", "../../../i18n", "../../../la
      */
     var CommunityGridRenderer = declare(ConnectionsGridRenderer, {
             
-             /**
-              * Strings used in the grid
-              */
-         _nls: nls,
-         
          /**
-          * The HTML template to be used for this grid
+          * Strings used in the grid
           */
-         template: CommunityRow,
+         _nls: nls,
          
          /**
           * The HTML template for tag anchors
@@ -48,7 +45,12 @@ define(["../../../declare", "../../../stringUtil", "../../../i18n", "../../../la
          /**
           * @param args
           */
-         constructor: function(args) {
+         constructor: function(args,grid){
+        	 if(grid.theme == "bootstrap"){
+        		 this.template = BootstrapCommunityRow;
+        	 }else{
+        		 this.template = CommunityRow;
+        	 }
          },
          
          /**

@@ -39,13 +39,17 @@ define([ "../../declare", "../../dom", "../../lang"],
         errorClass: null,
         loadingClass: null,
         loadingImgClass: null,
+        grid: null,
         
         /**
          * Constructor function
          * @method - constructor
          */
-        constructor: function(args) {
-           lang.mixin(this, args);
+        constructor: function(args,grid) {
+        	
+        	this.grid = grid;
+        	lang.mixin(this, args);
+           
         },
         
         /**
@@ -59,6 +63,10 @@ define([ "../../declare", "../../dom", "../../lang"],
         render: function(grid, el, items, data) {
            while (el.childNodes[0]) {
                dom.destroy(el.childNodes[0]);
+           }
+           if(!grid.theme || grid.theme == "oneui"){
+        	   dom.addClass(el,"lotusui30");
+        	   dom.addClass(el,"lotusui30_body");
            }
            var size = items.length;
            if (size === 0) {
@@ -90,19 +98,31 @@ define([ "../../declare", "../../dom", "../../lang"],
          * @param data - the data associated with the current element
          */
         renderPager : function(grid,el,items,data) {
-            if (this.pagerTemplate && !grid.hidePager) {
-                var node;
-                if (lang.isString(this.pagerTemplate)) {
-                    var domStr = this._substituteItems(this.pagerTemplate, grid, this, items, data);
-                    node = dom.toDom(domStr, el.ownerDocument);
-                } else {
-                    node = this.pagerTemplate.cloneNode(true);
+            if(!grid.hidePager){
+            	var node;
+            	if(grid.theme == "bootstrap"){
+                	if (lang.isString(this.bootstrapPagerTemplate)) {
+                        var domStr = this._substituteItems(this.bootstrapPagerTemplate, grid, this, items, data);
+                        node = dom.toDom(domStr, el.ownerDocument);
+                    } else {
+                        node = this.bootstrapPagerTemplate.cloneNode(true);
+                    }
+                    el.appendChild(node);
+                }else {//use oneui by default
+                    if (lang.isString(this.pagerTemplate)) {
+                        var domStr = this._substituteItems(this.pagerTemplate, grid, this, items, data);
+                        node = dom.toDom(domStr, el.ownerDocument);
+                    } else {
+                        node = this.pagerTemplate.cloneNode(true);
+                    }
+                    el.appendChild(node);
+    
                 }
-                el.appendChild(node);
-                
-                grid._doAttachEvents(el, data);
+            	
+            	grid._doAttachEvents(el, data);
                 grid._doAttachPoints(el,grid);
             }
+        	
         },
         
         /**
@@ -115,19 +135,31 @@ define([ "../../declare", "../../dom", "../../lang"],
          * @param data - the data associated with the current element
          */
         renderFooter : function(grid,el,items,data) {
-            if (this.footerTemplate && !grid.hideFooter) {
-                var node;
-                if (lang.isString(this.footerTemplate)) {
-                    var domStr = this._substituteItems(this.footerTemplate, grid, this, items, data);
-                    node = dom.toDom(domStr, el.ownerDocument);
-                } else {
-                    node = this.footerTemplate.cloneNode(true);
+        	if(!grid.hideFooter){
+        		var node;
+        		if(grid.theme == "bootstrap"){
+                	 if (lang.isString(this.bootstrapFooterTemplate)) {
+                         var domStr = this._substituteItems(this.bootstrapFooterTemplate, grid, this, items, data);
+                         node = dom.toDom(domStr, el.ownerDocument);
+                     } else {
+                         node = this.bootstrapFooterTemplate.cloneNode(true);
+                     }
+                     el.appendChild(node);   
+                }else {
+                    if (lang.isString(this.footerTemplate)) {
+                        var domStr = this._substituteItems(this.footerTemplate, grid, this, items, data);
+                        node = dom.toDom(domStr, el.ownerDocument);
+                    } else {
+                        node = this.footerTemplate.cloneNode(true);
+                    }
+                    el.appendChild(node);   
                 }
-                el.appendChild(node);
-                
-                grid._doAttachEvents(el, data);
+        		
+        		grid._doAttachEvents(el, data);
                 grid._doAttachPoints(el,grid);
-            }
+        		
+        	}
+            
         },
         
         /**
@@ -138,22 +170,36 @@ define([ "../../declare", "../../dom", "../../lang"],
          * @param data - the data associated with the current element
          */
         renderSorter : function(grid,el,data) {
-            if (this.sortTemplate && !grid.hideSorter) {
-                var sortInfo = grid.getSortInfo();
-                if (sortInfo) {
-                    var node;
-                    if (lang.isString(this.sortTemplate)) {
-                        var domStr = this._substituteItems(this.sortTemplate, grid, this, sortInfo);
-                        node = dom.toDom(domStr, el.ownerDocument);
-                    } else {
-                        node = this.sortTemplate.cloneNode(true);
+            if(!grid.hideSorter){
+            	var sortInfo = grid.getSortInfo();
+            	if (grid.theme == "bootstrap"){
+                	 if (sortInfo) {
+                         var node;
+                         if (lang.isString(this.bootstrapSortTemplate)) {
+                             var domStr = this._substituteItems(this.bootstrapSortTemplate, grid, this, sortInfo);
+                             node = dom.toDom(domStr, el.ownerDocument);
+                         } else {
+                             node = this.bootstrapSortTemplate.cloneNode(true);
+                         }
+                         el.appendChild(node);  
+                     }
+                }else{
+                    if (sortInfo) {
+                        var node;
+                        if (lang.isString(this.sortTemplate)) {
+                            var domStr = this._substituteItems(this.sortTemplate, grid, this, sortInfo);
+                            node = dom.toDom(domStr, el.ownerDocument);
+                        } else {
+                            node = this.sortTemplate.cloneNode(true);
+                        }
+                        el.appendChild(node);  
                     }
-                    el.appendChild(node);
-                    
-                    grid._doAttachEvents(el, data);
-                    grid._doAttachPoints(el,grid);
                 }
+            	
+            	grid._doAttachEvents(el, data);
+                grid._doAttachPoints(el,grid);
             }
+            
         },
         
         /***
@@ -179,7 +225,7 @@ define([ "../../declare", "../../dom", "../../lang"],
         },
         
         /***
-         * Creates an ordered list.
+         * Creates a list.
          * 
          * @method - renderList
          * @param grid - the grid
@@ -313,7 +359,12 @@ define([ "../../declare", "../../dom", "../../lang"],
             } else {
                 var sortStr = "";
                 for ( var i = 0; i < items.list.length; i++) {
-                    sortStr += this._substituteItem(this.sortAnchor, grid, items.list[i], i, items);
+                	if(grid.theme == "bootstrap"){
+                		sortStr += this._substituteItem(this.bootstrapSortAnchor, grid, items.list[i], i, items);
+                	}else{
+                		sortStr += this._substituteItem(this.sortAnchor, grid, items.list[i], i, items);
+                	}
+                    
                 }
                 return sortStr;
             }

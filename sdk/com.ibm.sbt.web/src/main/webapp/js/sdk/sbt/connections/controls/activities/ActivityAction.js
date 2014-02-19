@@ -51,7 +51,10 @@ define([ "../../../declare", "../../../controls/grid/GridAction"],
          * @param event The event
          */
         execute: function(item, grid, event) {
-        	document.location.href = item.getValue("historyUrl");
+        	//there are two urls returned because the atom feed has two identical elements
+        	var urls = item.getValue("alternateUrl");
+        	
+        	window.open(urls[0]);
         }
 
 

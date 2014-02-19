@@ -1,16 +1,21 @@
 require(["sbt/dom", 
          "sbt/stringUtil", 
          "sbt/connections/controls/communities/CommunityGrid",
-         "sbt/connections/controls/bootstrap/CommunityRendererMixin",
          "sbt/connections/CommunityService",
          "sbt/lang"], 
          
-function(dom, stringUtil, CommunityGrid, CommunityRendererMixin, CommunityService, lang) {
-    var grid = new CommunityGrid({ type: "my" });
+function(dom, stringUtil, CommunityGrid, CommunityService, lang) {
+    var grid = new CommunityGrid({ 
+    		type: "my",
+    		theme:"bootstrap",
+    		hidePager:true,
+	    	hideSorter:true,
+	    	hideFooter:true
+    	});
+    
+    
     var communityService = new CommunityService();
     
-    lang.mixin(grid.renderer, CommunityRendererMixin);
-
     // create custom action
     grid.communityAction = {
         getTooltip : function(item) {

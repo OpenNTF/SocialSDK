@@ -15,8 +15,20 @@
 				<span> <a href="${getUserProfileHref}" data-dojo-attach-event="onclick: viewUserProfile">${authorName}</a></span> 
 				
 				<span class="lotusDivider">|</span> 
-				<span class="oaFormatDate">${updated}</span>
+				<span class="oaFormatDate">${updatedDate}</span>
+				
 
+			</span>
+			
+			<span>
+				<span class="lotusDivider">|</span> 
+				${nls.dueDate}				
+				<span class="oaFormatDate">${getDueDate}</span>
+			</span>
+			<span>
+				<span class="lotusDivider">|</span> 
+				${nls.tags}				
+				<span class="oaFormatDate">${tags}</span>
 			</span>
 		</div>
 	</td>

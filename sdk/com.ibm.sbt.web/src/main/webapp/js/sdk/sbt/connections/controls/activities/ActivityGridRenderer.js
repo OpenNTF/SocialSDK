@@ -18,9 +18,10 @@ define(["../../../declare",
         "../ConnectionsGridRenderer",
         "../../../i18n",
         "../../../text!./templates/ActivityRow.html",
+        "../../../text!./templates/BootstrapActivityRow.html",
         "../../../i18n!./nls/ActivityGridRenderer"], 
 
-    function(declare, ConnectionsGridRenderer, i18n, ActivityRow, nls){
+    function(declare, ConnectionsGridRenderer, i18n, ActivityRow, BootstrapActivityRow, nls){
 		
 		/**
 		 * @class ActivityGridRenderer
@@ -37,8 +38,13 @@ define(["../../../declare",
 	    	 * @method constructor
 	    	 * @param args
 	    	 */
-	    	constructor: function(args){
-	    		this.template = ActivityRow;
+	    	constructor: function(args,grid){
+	    		
+	    		if(grid.theme == "bootstrap"){
+	    			this.template = BootstrapActivityRow;
+	    		}else{
+	    			this.template = ActivityRow;
+	    		}
 	    	},
 
 	        /**
@@ -58,6 +64,30 @@ define(["../../../declare",
 	         
 	         getUserProfileHref: function(grid,item,i,items){
 	        	 return this.getProfileUrl(grid,item.getValue("authorUserId"));
+	         },
+	         
+	         /**
+	          * Gets the last updated date for an activity
+	          * @param grid The Grid Element
+	          * @param item An Object containing all of the data for the current row
+	          * @param i the number of the current grid row
+	          * @param items an object array containing the data for all of the grid rows
+	          * @returns The date when the community was last updates
+	          */
+	         updatedDate: function(grid, item, i, items) {
+	                 return i18n.getUpdatedLabel((item.getValue("updated")));
+	         },
+	         
+	         /**
+	          * Gets the due date for an activity
+	          * @param grid The Grid Element
+	          * @param item An Object containing all of the data for the current row
+	          * @param i the number of the current grid row
+	          * @param items an object array containing the data for all of the grid rows
+	          * @returns The date when the community was last updates
+	          */
+	         getDueDate: function(grid, item, i, items) {
+	                 return i18n.getSearchUpdatedLabel((item.getValue("dueDate")));
 	         }
 	    	
 	    });

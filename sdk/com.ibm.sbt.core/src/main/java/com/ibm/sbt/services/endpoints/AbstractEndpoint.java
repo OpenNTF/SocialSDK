@@ -25,6 +25,7 @@ import java.util.logging.Logger;
 
 
 
+
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.DefaultHttpClient;
 
@@ -292,6 +293,14 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
      */
     @Override
     public JSReference getTransport(String endpointName, String moduleId) {
+    	return new JSReference(moduleId);
+    }
+    
+    /* (non-Javadoc)
+     * @see com.ibm.sbt.services.endpoints.Endpoint#getProxy(java.lang.String, java.lang.String)
+     */
+    @Override
+    public JSReference getProxy(String endpointName, String moduleId) {
     	return new JSReference(moduleId);
     }
 

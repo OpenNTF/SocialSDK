@@ -116,6 +116,11 @@ public class ApplicationEndpoint implements Endpoint {
 	public JSReference getTransport(String endpointName, String moduleId) {
     	return null;
     }
+    
+    @Override
+    public JSReference getProxy(String endpointName, String moduleId) {
+    	return null;
+    }
 
     @Override
 	public String getLabel() {

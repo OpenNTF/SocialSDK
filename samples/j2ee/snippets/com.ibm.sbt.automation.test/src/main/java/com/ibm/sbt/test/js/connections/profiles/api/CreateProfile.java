@@ -35,13 +35,11 @@ public class CreateProfile extends BaseProfilesTest {
     static final String SNIPPET_ID = "Social_Profiles_API_CreateProfile"; 
         
     @Test
-    public void testCreateProfileWithMissingInputs() {    	
-        addSnippetParam("sample.createProfileDistinguishedName", ""); // missing input here
-        
+    public void testCreateProfileWithMissingInputs() {    	        
     	JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         JsonJavaObject json = previewPage.getJson();        
-        Assert.assertEquals(500, json.getInt("code"));
-        Assert.assertEquals("CLFRN1120E: An error occurred.", json.getString("message"));
+        Assert.assertEquals(400, json.getInt("code"));
+        Assert.assertEquals("Invalid argument, profile with valid userid or email must be specified.", json.getString("message"));
     }
     
     /* (non-Javadoc)

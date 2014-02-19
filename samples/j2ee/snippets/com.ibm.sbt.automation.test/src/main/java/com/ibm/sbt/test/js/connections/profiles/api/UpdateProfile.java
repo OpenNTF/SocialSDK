@@ -36,7 +36,8 @@ public class UpdateProfile extends BaseProfilesTest {
     static final String SNIPPET_ID2 = "Social_Profiles_API_UpdateProfileJson"; 
 	
     @Test
-    public void testUpdateProfile() { 	    	
+    public void testUpdateProfile() { 	  
+    	addSnippetParam("sample.id1", getProperty("sample.id1"));
     	addSnippetParam("sample.updateProfileJobTitle", "Software Engineer");
         addSnippetParam("sample.updateProfileBuilding", "1");
         addSnippetParam("sample.updateProfileFloor", "2nd");
@@ -53,6 +54,7 @@ public class UpdateProfile extends BaseProfilesTest {
     
     @Test
     public void testUpdateProfilePattern2() {    
+    	addSnippetParam("sample.id1", getProperty("sample.id1"));
     	addSnippetParam("sample.updateProfileJobTitle", "Software Associate Engineer");
         addSnippetParam("sample.updateProfileBuilding", "2");
         addSnippetParam("sample.updateProfileFloor", "3rd");

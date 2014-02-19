@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2013
+ * ��� Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -23,10 +23,10 @@ import static org.junit.Assert.fail;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.test.lib.TestEnvironment;
 
 /**
  * @author Mario Duarte
@@ -34,7 +34,7 @@ import com.ibm.sbt.services.client.ClientServicesException;
  */
 public class WikiCreateAndDeleteTest extends BaseWikiServiceTest {
 
-	@Test @Ignore
+	@Test
 	public void createWikiTest() throws Exception {
 		Wiki wiki = newWiki();
 		
@@ -42,13 +42,14 @@ public class WikiCreateAndDeleteTest extends BaseWikiServiceTest {
 		Wiki wikiReturned = wikiService.createWiki(wiki, params);
 		
 		assertNotNull(wikiReturned.getLabel());
-		assertEquals(wiki.getTitle(), wikiReturned.getTitle());
+		assertEquals(unRandomize(wiki.getTitle()), unRandomize(wikiReturned.getTitle()));
 		
 		deleteWikiSilently(wikiReturned);
 	}
 	
 	@Test
 	public void deleteWikiTest() throws Exception {
+		if (TestEnvironment.isSmartCloudEnvironment()) return;
 		Wiki createdWiki = createWiki();
 		
 		Wiki wikiGot = wikiService.getWiki(createdWiki.getLabel(), null);

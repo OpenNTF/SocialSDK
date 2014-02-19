@@ -97,6 +97,7 @@ abstract public class AbstractLibrary {
 	public static final String		PROP_MODULE_PREFIX				= "_module";
 	public static final String		PROP_MODULE_AUTHENTICATOR		= "_moduleAuthenticator";
 	public static final String		PROP_MODULE_TRANSPORT			= "_moduleTransport";
+	public static final String		PROP_MODULE_PROXY				= "_moduleProxy";
 
 	public static final String		REF_SBT_TRANSPORT				= "sbtTransport";
 	public static final String		REF_ERR_TRANSPORT				= "errTransport";
@@ -356,6 +357,8 @@ abstract public class AbstractLibrary {
 				JsonReference proxyRef = createProxyRef(request, endpoint, endpointName);
 				if (proxyRef != null) {
 					jsonEndpoint.putJsonProperty(PROP_PROXY, proxyRef);
+					String moduleName = getProxy(request, endpoint, endpointName).getModuleName();
+					jsonEndpoint.putJsonProperty(PROP_MODULE_PROXY, moduleName);
 				}
 				String proxyPath = endpoint.getProxyPath(endpointName);
 				if (!StringUtil.isEmpty(proxyPath)) {
@@ -637,9 +640,12 @@ abstract public class AbstractLibrary {
 				// is proxy being used for this endpoint
 				if (jsonObject.getJsonProperty(PROP_PROXY) != null) {
 					// add proxy module if not already in the list
-					if (!modules.contains(MODULE_PROXY)) {
-						modules.add(MODULE_PROXY);
-						modules.add(MODULE_WPS_PROXY);
+					String proxyModule = (String) jsonObject.getJsonProperty(PROP_MODULE_PROXY);
+					if (StringUtil.isEmpty(proxyModule)) {
+						proxyModule = MODULE_PROXY;
+					}
+					if (!modules.contains(proxyModule)) {
+						modules.add(proxyModule);
 					}
 				}
 
@@ -843,6 +849,13 @@ abstract public class AbstractLibrary {
 	}
 
 	/*
+	 * Return the JSReference for the Proxy module to use
+	 */
+	protected JSReference getProxy(LibraryRequest request, Endpoint endpoint, String endpointName) {
+		return endpoint.getProxy(endpointName, getDefaultProxy(request));
+	}
+
+	/*
 	 * Return the JSReference for the Transport module to use
 	 */
 	protected String getDefaultTransport(LibraryRequest request) {
@@ -852,6 +865,13 @@ abstract public class AbstractLibrary {
 			return MODULE_MOCK_TRANSPORT;
 		}
 		return MODULE_TRANSPORT;
+	}
+
+	/*
+	 * Return the JSReference for the Proxy module to use
+	 */
+	protected String getDefaultProxy(LibraryRequest request) {
+		return MODULE_PROXY;
 	}
 
 	/*

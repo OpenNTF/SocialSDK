@@ -105,7 +105,7 @@
 		<hr>
 
 		<footer>
-			<p>&copy; My Social Web App 2013</p>
+			<p>&copy; My Social Web App 2014</p>
 		</footer>
 	</div>
 
@@ -182,7 +182,8 @@
 	    var colleagueGrid = new ColleagueGrid({
 	    	endpoint: "connections",
 	        userid: profile.getUserid(),
-	        hideViewAll: true
+	        hideViewAll: true,
+	        hideFooter: true
 	    });
 	    colleagueGrid.renderer.containerClass = "row-fluid";
 	    colleagueGrid.renderer.template =  dom.byId("myapp.MyColleaguesTmpl").innerHTML;
@@ -210,7 +211,8 @@
         var communityGrid = new CommunityGrid({
             type: "my",
             hidePager: true,
-            hideSorter: true
+            hideSorter: true,
+            hideFooter: true
         });
         communityGrid.renderer.template = dom.byId("myapp.MyCommunitiesTmpl").innerHTML;
         communityGrid.renderer.tableClass = "table table-striped";
@@ -238,7 +240,8 @@
         var fileGrid = new FileGrid({
 	         type : "myFiles",
 		     hidePager: true,
-		     hideSorter: true
+		     hideSorter: true,
+		     hideFooter: true
 	    });
        fileGrid.renderer.template = dom.byId("myapp.MyFilesTmpl").innerHTML;
        fileGrid.renderer.tableClass = "table table-striped";

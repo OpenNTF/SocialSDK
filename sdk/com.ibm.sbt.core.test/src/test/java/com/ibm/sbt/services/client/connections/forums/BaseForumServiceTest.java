@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * �� Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -17,12 +17,13 @@
 package com.ibm.sbt.services.client.connections.forums;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import org.junit.Before;
-import org.junit.Test;
+
 import com.ibm.sbt.services.BaseUnitTest;
 
 /**
@@ -37,7 +38,9 @@ public class BaseForumServiceTest extends BaseUnitTest {
 
 	@Before
 	public void initForumServiceTest() {
-		forumService = new ForumService();
+		if (forumService==null){
+			forumService = new ForumService();
+		}
 	}
 
 	protected Forum newForum() {
@@ -112,19 +115,25 @@ public class BaseForumServiceTest extends BaseUnitTest {
 	protected void deleteForum(Forum forum) {
 		try {
 			forumService.removeForum(forum.getForumUuid());
-		} catch (ForumServiceException e) {}
+		} catch (ForumServiceException e) {
+			fail("Error calling forumService.removeForum() caused by: "+e.getMessage());
+		}
 	}
 	
 	protected void deleteForumTopic(ForumTopic topic) {
 		try {
 			forumService.removeForumTopic(topic.getTopicUuid());
-		} catch (ForumServiceException e) {}
+		} catch (ForumServiceException e) {
+			fail("Error calling forumService.removeForumTopic() caused by: "+e.getMessage());
+		}
 	}
 	
 	protected void deleteForumReply(ForumReply reply) {
 		try {
-			forumService.removeForum(reply.getReplyUuid());
-		} catch (ForumServiceException e) {}
+			forumService.removeForumReply(reply.getReplyUuid());
+		} catch (ForumServiceException e) {
+			fail("Error calling forumService.removeForum() caused by: "+e.getMessage());
+		}
 	}
 	
 	protected void assertValid(Forum forum) {

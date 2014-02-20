@@ -1,16 +1,14 @@
 package com.ibm.sbt.services.client.connections.forums;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.util.Iterator;
-import org.junit.Before;
+
 import org.junit.Test;
+
 import com.ibm.sbt.services.client.SerializationUtil;
-import com.ibm.sbt.services.client.connections.forums.BaseForumServiceTest;
 
 /**
  * @author Swati Singh
@@ -37,7 +35,6 @@ public class ForumSerializationTests extends BaseForumServiceTest {
 		}.isSerializable(forumGot);
 	}
 	
-		
 	@Test
 	public final void testForumListSerialization() throws Exception {
 		ForumList forums = forumService.getAllForums();

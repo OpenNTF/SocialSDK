@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -52,6 +52,8 @@ public class CommunityTransformer extends AbstractBaseTransformer {
 		String contentXml = "";
 		String titleXml = "";
 		String typeXml = "";
+		String communityUuidXml = "";
+		String communityIdXml = "";
 		
 		for(Map.Entry<String, Object> xmlEntry : fieldmap.entrySet()){
 			
@@ -68,6 +70,9 @@ public class CommunityTransformer extends AbstractBaseTransformer {
 				titleXml = getXMLRep(getStream(sourcepath+"CommunityTitleTemplate.xml"),currentElement,XmlTextUtil.escapeXMLChars(currentValue));
 			}else if(currentElement.equalsIgnoreCase(CommunityXPath.communityType.toString())){
 				typeXml = getXMLRep(getStream(sourcepath+"CommunityTypeTemplate.xml"),currentElement,XmlTextUtil.escapeXMLChars(currentValue));
+			}else if(currentElement.equalsIgnoreCase(CommunityXPath.communityUuid.toString())){
+				communityUuidXml = getXMLRep(getStream(sourcepath+"CommunityUuidTmpl.xml"),currentElement,XmlTextUtil.escapeXMLChars(currentValue));
+				communityIdXml = getXMLRep(getStream(sourcepath+"CommunityIdTmpl.xml"),currentElement,XmlTextUtil.escapeXMLChars(currentValue));
 			}
 			
 		}
@@ -83,6 +88,12 @@ public class CommunityTransformer extends AbstractBaseTransformer {
 		}
 		if(StringUtil.isNotEmpty(tagsXml)){
 			xml = getXMLRep(xml, "getTags",tagsXml);
+		}
+		if(StringUtil.isNotEmpty(communityUuidXml)){
+			xml = getXMLRep(xml, "getCommunityUuid",communityUuidXml);
+		}
+		if(StringUtil.isNotEmpty(communityIdXml)){
+			xml = getXMLRep(xml, "getCommunityId",communityIdXml);
 		}
 		
 		if(StringUtil.isNotEmpty(typeXml)){

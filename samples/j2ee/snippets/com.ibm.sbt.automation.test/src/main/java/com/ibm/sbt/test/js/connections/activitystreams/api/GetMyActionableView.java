@@ -20,6 +20,7 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.ibm.sbt.automation.core.test.BaseTest.AuthType;
 import com.ibm.sbt.automation.core.test.connections.BaseActivityStreamsTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 
@@ -38,7 +39,7 @@ public class GetMyActionableView extends BaseActivityStreamsTest {
     
     @Test
     public void testGetMyActionableView() {
-//    	createEntry("@me","@actions","@all");
+    	createEntry("@me","@actions","@all", true,false);
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         List jsonList = previewPage.getJsonList();
         Assert.assertFalse("GetMyActionableView returned no results", jsonList.isEmpty());

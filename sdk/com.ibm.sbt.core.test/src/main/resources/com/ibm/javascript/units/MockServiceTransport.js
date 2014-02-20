@@ -44,18 +44,22 @@ define(
 								var stringed = {};
 								
 								for (var key in query) {
+									
 									 stringed[key] = query[key].toString(); 
+								}
+								if (options.handleAs === 'json' && !headers['Content-Type']) {
+									headers['Content-Type']='application/json';
 								}
 								
 								jargs.setParameters(stringed);
-
+								jargs.setHeaders(headers);
 								var resp = ep.xhr(method, jargs, content);
 								
 								if (resp.getResponse().getStatusLine()
 										.getStatusCode() < 300) {
 									
 									console.log('serializing');
-									var entityString = this.serializeEntity(resp);
+									var entityString = (options.handleAs == "text") ? this.serializeEntity(resp) : null;
 									console.log('converting to object ' + entityString);
 									var data = this.extractEntity(resp);
 									console.log('creating response');
@@ -162,7 +166,10 @@ define(
 							} else if (type.indexOf('text/html') !== -1) {
 							
 							return ''+ Packages.org.apache.commons.io.IOUtils.toString(data);
-							} else {
+							} else if (type.indexOf('application/json') !== -1) {
+								return '' + data.toString();
+							}	else {
+								
 								console.log('ADD PROCESSING FOR ' + type);
 								
 							}
@@ -193,6 +200,8 @@ define(
 									if(data)
 										data = undefined;
 									console.log('converting to text' + data);
+								} else if (type.indexOf('application/json') !== -1) {
+									return eval('(' + data.toString()+')');
 								} else {
 									console.log('ADD PROCESSING FOR ' + type);
 									

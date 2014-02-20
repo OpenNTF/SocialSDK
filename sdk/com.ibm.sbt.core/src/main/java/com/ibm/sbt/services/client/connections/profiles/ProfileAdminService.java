@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.ibm.commons.util.StringUtil;
-import com.ibm.sbt.services.client.ClientService.Handler;
-import com.ibm.sbt.services.client.ClientService.HandlerXml;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.profiles.feedhandler.ProfileFeedHandler;

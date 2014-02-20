@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -42,8 +42,7 @@ public enum FilterType {
 	CREATE_COMMENT("/{blogs}/{blogHandle}/api/comments/{entryAnchor}"),
 	GET_REMOVE_COMMENT("/{blogs}/{blogHandle}/api/comments/{entryAnchor}"),
 	BLOG_ENTRYCOMMENTS("/{blogs}/{blogHandle}/feed/entrycomments/{entryAnchor}/atom"),
-	RECOMMEND_POST("api/recommend/entries/{entryAnchor}");
-	
+	RECOMMEND_POST("/{blogs}/{blogHandle}/api/recommend/entries/{entryAnchor}");
 
 	String filterType;
 	

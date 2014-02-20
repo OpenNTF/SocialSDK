@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * �� Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -25,7 +25,6 @@ import java.util.Map;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -42,18 +41,18 @@ public class WikiGetAndUpdate extends BaseWikiServiceTest {
 		wikiCreated = createWiki(wiki);
 	}
 	
-	@Test @Ignore
+	@Test
 	public void getWikiTest() throws Exception {
 		Wiki wikiGot = wikiService.getWiki(wikiCreated.getLabel(), null);
 		
-		assertEquals(wiki.getTitle(), wikiGot.getTitle());
-		assertEquals(wikiCreated.getLabel(), wikiGot.getLabel());
+		assertEquals(unRandomize(wiki.getTitle()), unRandomize(wikiGot.getTitle()));
+		assertEquals(unRandomize(wikiCreated.getLabel()), unRandomize(wikiGot.getLabel()));
 		assertEquals(wikiCreated.getPermissions(), wikiGot.getPermissions());
-		assertEquals(wiki.getSummary(), wikiGot.getSummary());
+		assertEquals(unRandomize(wiki.getSummary()), unRandomize(wikiGot.getSummary()));
 		assertEquals(wikiCreated.getTags(), wikiGot.getTags());
 	}
 	
-	@Test @Ignore
+	@Test
 	public void updateWikiTest() throws Exception {
 		Map<String,String> getParams = new HashMap<String, String>();
 		getParams.put("includeTags", "true");
@@ -72,9 +71,9 @@ public class WikiGetAndUpdate extends BaseWikiServiceTest {
 		
 		Wiki wikiUpdated = wikiService.getWiki(wikiGot.getLabel(), getParams);
 		
-		assertEquals(wikiGot.getTitle(), wikiUpdated.getTitle());
-		assertEquals(wikiGot.getLabel(), wikiUpdated.getLabel());
-		assertEquals(wikiGot.getSummary(), wikiUpdated.getSummary());
+		assertEquals(unRandomize(wikiGot.getTitle()), unRandomize(wikiUpdated.getTitle()));
+		assertEquals(unRandomize(wikiGot.getLabel()), unRandomize(wikiUpdated.getLabel()));
+		assertEquals(unRandomize(wikiGot.getSummary()), unRandomize(wikiUpdated.getSummary()));
 		assertEquals(wikiGot.getTags(), wikiUpdated.getTags());
 	}
 	

@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * �� Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -18,9 +18,12 @@ package com.ibm.sbt.services.client.connections.forums;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
+
 import java.util.HashMap;
 import java.util.Map;
+
 import org.junit.Test;
+
 import com.ibm.sbt.services.client.connections.forums.model.BaseForumEntity;
 
 /**
@@ -29,9 +32,8 @@ import com.ibm.sbt.services.client.connections.forums.model.BaseForumEntity;
  */
 public class ForumServiceGetTests extends BaseForumServiceTest {
 
-
 	@Test
-	public void getAllForums() {
+	public void testGetAllForums() {
 		try {
 			ForumList entries = forumService.getAllForums();
 			assertNotNull(entries);
@@ -44,7 +46,7 @@ public class ForumServiceGetTests extends BaseForumServiceTest {
 	}
 
 	@Test
-	public void getMyForums() {
+	public void testGetMyForums() {
 		try {
 			ForumList entries = forumService.getMyForums();
 			assertNotNull(entries);
@@ -57,7 +59,7 @@ public class ForumServiceGetTests extends BaseForumServiceTest {
 	}
 
 	@Test
-	public void getPublicForums() {
+	public void testGetPublicForums() {
 		try {
 			ForumList entries = forumService.getPublicForums();
 			assertNotNull(entries);
@@ -70,7 +72,7 @@ public class ForumServiceGetTests extends BaseForumServiceTest {
 	}
 
 	@Test
-	public void getPublicForumTopics() {
+	public void testGetPublicForumTopics() {
 		try {
 			TopicList entries = forumService.getPublicForumTopics();
 			assertNotNull(entries);
@@ -83,7 +85,7 @@ public class ForumServiceGetTests extends BaseForumServiceTest {
 	}
 
 	@Test
-	public void getMyForumTopics() {
+	public void testGetMyForumTopics() {
 		try {
 			TopicList entries = forumService.getMyForumTopics();
 			assertNotNull(entries);
@@ -97,7 +99,7 @@ public class ForumServiceGetTests extends BaseForumServiceTest {
 
 
 	@Test
-	public void getForumReplies() {
+	public void testGetForumReplies() {
 		try {
 			TopicList topics = forumService.getMyForumTopics();
 			ForumTopic topic = (ForumTopic) topics.iterator().next();
@@ -115,7 +117,7 @@ public class ForumServiceGetTests extends BaseForumServiceTest {
 	}
 
 	@Test
-	public void getRecommendations() {
+	public void testGetRecommendations() {
 		try {
 			TopicList topics = forumService.getMyForumTopics();
 			ForumTopic topic = (ForumTopic) topics.get(0);
@@ -131,7 +133,7 @@ public class ForumServiceGetTests extends BaseForumServiceTest {
 
 
 	@Test
-	public void getForumsTags() {
+	public void testGetForumsTags() {
 		try {
 			TagList entries = forumService.getForumsTags();
 			assertNotNull(entries);
@@ -145,7 +147,7 @@ public class ForumServiceGetTests extends BaseForumServiceTest {
 
 
 	@Test
-	public void getForumTopicsTags() {
+	public void testGetForumTopicsTags() {
 		try {
 			ForumList forums = forumService.getPublicForums();
 			Forum forum = (Forum) forums.get(0);
@@ -158,7 +160,5 @@ public class ForumServiceGetTests extends BaseForumServiceTest {
 			fail("Error calling forumService.getForumTopicsTags() caused by: "+e.getMessage());
 		}
 	}
-
-
 
 }

@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * �� Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -17,7 +17,9 @@
 package com.ibm.sbt.services.client.connections.blogs;
 
 import static org.junit.Assert.fail;
+
 import org.junit.Before;
+
 import com.ibm.sbt.services.BaseUnitTest;
 
 /**
@@ -32,7 +34,9 @@ public class BaseBlogServiceTest extends BaseUnitTest {
 
 	@Before
 	public void initBlogServiceTest() {
-		blogService = new BlogService();
+		if (blogService==null) {
+			blogService = new BlogService();
+		}
 	}
 
 	protected Blog createBlog() {
@@ -85,13 +89,17 @@ public class BaseBlogServiceTest extends BaseUnitTest {
 	protected void deleteBlog(Blog blog) {
 		try {
 			blogService.removeBlog(blog.getBlogUuid());
-		} catch (BlogServiceException e) {}
+		} catch (BlogServiceException e) {
+			fail("Error calling blogService.removeBlog() caused by: "+e.getMessage());
+		}
 	}
 	
 	protected void deleteBlogPost(BlogPost post) {
 		try {
 			blogService.removeBlogPost(post.getPostUuid(), blog.getHandle());
-		} catch (BlogServiceException e) {}
+		} catch (BlogServiceException e) {
+			fail("Error calling blogService.removeBlog() caused by: "+e.getMessage());
+		}
 	}
 
 	protected void deleteBlogComment(Comment comment) {

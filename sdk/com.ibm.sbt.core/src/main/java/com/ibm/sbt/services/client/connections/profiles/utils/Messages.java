@@ -34,6 +34,7 @@ public class Messages {
 	public static String	DeleteProfileException			= "Problem occurred in deleting Profile of user with identifier : {0}";
 	public static String	CreateProfileException			= "Problem occurred while creating Profile. Please check if profile already exists. Please check if logged in user has admin rights.";
 	public static String	CreateProfilePayloadException	= "Error in create Profile Payload";
+    public static String 	MessageCannotReadFile           = "Cannot open the file {0}";
 	public static String  TagsException          = "Problem occurred while getting tags of user with identifier : {0}";
 	
 }

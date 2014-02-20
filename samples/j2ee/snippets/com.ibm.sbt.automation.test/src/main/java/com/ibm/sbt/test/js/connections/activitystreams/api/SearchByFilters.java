@@ -20,6 +20,7 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.ibm.sbt.automation.core.test.BaseTest.AuthType;
 import com.ibm.sbt.automation.core.test.connections.BaseActivityStreamsTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 

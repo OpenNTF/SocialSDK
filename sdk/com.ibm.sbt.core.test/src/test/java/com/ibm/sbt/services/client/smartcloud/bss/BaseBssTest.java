@@ -239,7 +239,7 @@ public class BaseBssTest {
     	return null;
     }
     
-    public JsonEntity getSubscriptionBYid(String subscriptionId) {
+    public JsonEntity getSubscriptionById(String subscriptionId) {
     	try {
     		SubscriptionManagementService subscriptionManagement = getSubscriptionManagementService();
     		return subscriptionManagement.getSubscriptionById(subscriptionId);

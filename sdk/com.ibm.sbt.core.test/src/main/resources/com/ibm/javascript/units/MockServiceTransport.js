@@ -59,7 +59,7 @@ define(
 										.getStatusCode() < 300) {
 									
 									console.log('serializing');
-									var entityString = (options.handleAs == "text") ? this.serializeEntity(resp) : null;
+									var entityString = this.serializeEntity(resp);
 									console.log('converting to object ' + entityString);
 									var data = this.extractEntity(resp);
 									console.log('creating response');

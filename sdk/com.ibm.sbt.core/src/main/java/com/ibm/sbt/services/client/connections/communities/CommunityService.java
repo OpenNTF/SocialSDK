@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -26,40 +26,31 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.http.Header;
 
 import com.ibm.commons.util.StringUtil;
-import com.ibm.commons.util.io.StreamUtil;
+import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
-import com.ibm.sbt.services.client.ClientService.ContentStream;
+import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.base.util.EntityUtil;
 import com.ibm.sbt.services.client.connections.communities.feedhandler.BookmarkFeedHandler;
 import com.ibm.sbt.services.client.connections.communities.feedhandler.CommunityFeedHandler;
-import com.ibm.sbt.services.client.connections.files.AccessType;
-import com.ibm.sbt.services.client.connections.files.File;
-import com.ibm.sbt.services.client.connections.files.FileList;
-import com.ibm.sbt.services.client.connections.files.FileService;
-import com.ibm.sbt.services.client.connections.files.FileServiceException;
-import com.ibm.sbt.services.client.connections.files.FileServiceURIBuilder;
-import com.ibm.sbt.services.client.connections.files.ResultType;
-import com.ibm.sbt.services.client.connections.files.SubFilters;
-import com.ibm.sbt.services.client.connections.files.feedHandler.FileFeedHandler;
-import com.ibm.sbt.services.client.connections.files.model.Headers;
-import com.ibm.sbt.services.client.connections.forums.feedhandler.ForumsFeedHandler;
-import com.ibm.sbt.services.client.connections.forums.feedhandler.TopicsFeedHandler;
 import com.ibm.sbt.services.client.connections.communities.feedhandler.InviteFeedHandler;
 import com.ibm.sbt.services.client.connections.communities.feedhandler.MemberFeedHandler;
 import com.ibm.sbt.services.client.connections.communities.model.CommunityXPath;
 import com.ibm.sbt.services.client.connections.communities.transformers.CommunityMemberTransformer;
 import com.ibm.sbt.services.client.connections.communities.transformers.InviteTransformer;
 import com.ibm.sbt.services.client.connections.communities.util.Messages;
+import com.ibm.sbt.services.client.connections.files.File;
+import com.ibm.sbt.services.client.connections.files.FileList;
+import com.ibm.sbt.services.client.connections.files.FileService;
+import com.ibm.sbt.services.client.connections.files.FileServiceException;
 import com.ibm.sbt.services.client.connections.forums.ForumList;
 import com.ibm.sbt.services.client.connections.forums.ForumService;
 import com.ibm.sbt.services.client.connections.forums.ForumServiceException;
 import com.ibm.sbt.services.client.connections.forums.ForumTopic;
 import com.ibm.sbt.services.client.connections.forums.TopicList;
-import com.ibm.sbt.services.client.Response;
-import com.ibm.sbt.services.client.ClientService;
+import com.ibm.sbt.services.client.connections.forums.feedhandler.TopicsFeedHandler;
 import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.services.util.AuthUtil;
 
@@ -651,13 +642,8 @@ public class CommunityService extends BaseService {
 	}
 	
 	private String extractCommunityIdFromHeaders(Response requestData){
-		Header[] headers = requestData.getResponse().getAllHeaders();
-		String urlLocation = "";
-		for (Header header: headers){
-			if (header.getName().equalsIgnoreCase("Location")) {
-				urlLocation = header.getValue();
-			}
-		}
+		Header header = requestData.getResponse().getFirstHeader("Location");
+		String urlLocation = header!=null?header.getValue():"";
 		return urlLocation.substring(urlLocation.indexOf(COMMUNITY_UNIQUE_IDENTIFIER+"=") + (COMMUNITY_UNIQUE_IDENTIFIER+"=").length());
 	}
 
@@ -684,6 +670,7 @@ public class CommunityService extends BaseService {
 				community.setCommunityType(community.getCommunityType());
 			if(!community.getFieldsMap().toString().contains(CommunityXPath.tags.toString()))
 				community.setTags(community.getTags());
+			community.setAsString(CommunityXPath.communityUuid, community.getCommunityUuid());
 			
 			try {
 				communityPayload = community.constructCreateRequestBody();
@@ -812,9 +799,9 @@ public class CommunityService extends BaseService {
 			throw new CommunityServiceException(e, Messages.CreateCommunityPayloadException);
 		}
 		
-		String communityUpdateMembertUrl = resolveCommunityUrl(CommunityEntity.COMMUNITY.getCommunityEntityType(),CommunityType.MEMBERS.getCommunityType());
+		String communityUpdateMemberUrl = resolveCommunityUrl(CommunityEntity.COMMUNITY.getCommunityEntityType(),CommunityType.MEMBERS.getCommunityType());
 		try {
-			Response response = super.createData(communityUpdateMembertUrl, parameters, communityPayload);
+			Response response = super.createData(communityUpdateMemberUrl, parameters, communityPayload);
 			int statusCode = response.getResponse().getStatusLine().getStatusCode();
 			return statusCode == HttpServletResponse.SC_CREATED;
 		} catch (ClientServicesException e) {

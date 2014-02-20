@@ -19,6 +19,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.ibm.commons.util.io.json.JsonJavaObject;
+import com.ibm.sbt.services.client.base.JsonEntity;
 
 /**
  * @author mwallace
@@ -83,6 +84,10 @@ public class AddSubscriberTest extends BaseBssTest {
         	long subscriberId = response.getAsLong("Long");
         	Assert.assertNotNull("Invalid subscriber id", subscriberId);
         	System.out.println(subscriberId);
+        	
+        	JsonEntity subscriberEntity = getSubscriberManagementService().getSubscriberById(String.valueOf(subscriberId));
+        	System.out.println(subscriberEntity.toJsonString());
+        	
     	} catch (BssException be) {
     		JsonJavaObject jsonObject = be.getResponseJson();
     		System.err.println(jsonObject);

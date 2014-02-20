@@ -76,9 +76,14 @@ public interface Endpoint {
     public JSReference getAuthenticator(String endpointName, String sbtUrl);
     
     /**
-     * Get the client transport using moduleId
+     * Get the client transport moduleId
      */
     public JSReference getTransport(String endpointName, String moduleId);
+
+    /**
+     * Get the client proxy moduleId
+     */
+    public JSReference getProxy(String endpointName, String moduleId);
 
     /**
      * Get the endpoint label, for the login dialog. 

@@ -4,7 +4,7 @@
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Mon, 06 Jan 2014 15:55:25 GMT]]></value>
+        <value><![CDATA[Wed, 19 Feb 2014 11:11:10 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -19,24 +19,20 @@
         <value><![CDATA[IE=EmulateIE7]]></value>
     </header>
     <header>
-        <name><![CDATA[X-Update-Nonce]]></name>
-        <value><![CDATA[7cdcaf51-5884-4fdb-991b-d9420909c6c1]]></value>
+        <name><![CDATA[x-update-nonce]]></name>
+        <value><![CDATA[07180f65-188f-40a5-8e12-817b68476605]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken=PUBjyRNSiMicDeydwCeSe/gUuml0fCDnccXoWVT0q2G+DB9N76HWlKqqf16uAHfzzNbPAEwptZNqH4INVmo/K3xFe7dRYvrNHW6qMsaWqiSnnoONNOeWPNzOVhjHbAXgyNVu+Z7c4oaxpsqHYzYe4Wwtaiu5GX1TlgSbpofbB7B6coN9ik2nPZhmlRvipNQ2y7hL0foIb6UhwN2+/LCf3IUc/YAk1jgjH4C8lPIHUypv6ZF0FmKyy8mxpdGXaA/KStdm/ujfrbSN07lkfddhCtyrtr9ocGeO6hPIeOQYNnx+Aucg4i8u+rcgnrcfaAsZDETkgxXipmMunpY6JIQiyg==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
+        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/q3lS73nqvmvQJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/; Domain=.sdkdemo.com]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=WYc4pshP7WsYYA6hjFIw3rcjNJubHczbq1j3RVfdEPEulIOSUDW+XUkRhk++uCF+jl8gL+Z2pGyYEbi0JKYxMMXAj+B7oLpvaW8sCVo/5z4taGcIa+QZF5DzHWNT2cOZlAlrjJDWBdErsCCyaJ70UMrp5aVMeUmvnDSInmPjlJFEBBze7Spr0flngb0JvmmK4t2A0W59w+9fhpCSpRTRGMSRsVrnSpV0ZomhzXqMlzr+MF44YwOcBQKNr82jFEVT/sx4N2/K7UiXFzxo+yoXW9UxTrkQ8MvsdorkXX11QOq5o2/NyKtj+H3f2uAo7sNHQVWnr83k/9ApGH0XijHi1rzMcx6miYCRZSDtU3hyZINizNCT4SP9QmlYNIbfsl1wuYNjSqgjwNdqF4qOYDywE4MWlwcr9urUAPYeRu80DhjOtRwdAfcgOG2fN4WTZ+87ui9wH3boM+jpZR4wI8PhXLY/a3ECYY6EwqrSWtHOL5VwQX+H4uhucM6JQx4pjWE2Q9NQRAnzySmYM3thYgyHeiAzNlvOCEr4ZNX2fTmHQVMJIo2qsDqmuh4ywwziPIWaEaQ3puA0qoESa4kNnSR8n40uJvB4HBE+/IVIlHQiD3in0Y8QdSAMGLo0mMd7UqUXCjwNMeYvhDZI30F+nI/0Lw==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
+        <value><![CDATA[LtpaToken2=7pdGH6r6EY0RRfeX8aQMqXzmL+Z79Ucdy3NKkVfEHCvptmAz7VjVCNAGgpD9JOi5soCmzccc9SywXwvLeZaJeQUX4eK1t/jm75/iutZeh/jq0xWm5azj+MKgwchpdNhS5ayLgkl3HlRnd65huCTkTTqLhUioFC141/3P7YAtItZ7synJOJiSgr5M4OMhKNbK5Kkcx+lrhLO+T30QCKnreQCnfYIWro4x2sKgiNFshIIzvQ6832dq8dGFLrYN1YlWAFlFkBeFF7uQYP10gGI+hAOHL11U7JYQ441MqW8JSkhfq4coH56/4wQNJJ/fiUuKVEKuD1V7IhYFnugIP4JYiTTHNxa0FVZv2Q8RHnJ5DzwaZ9y4IdE28Fim0l1dvV6/YkCdaVAwujW12qvuT9UgxyCirb2yeJD0qnzw7pJv7h29MghWTXd2lEyCK7Pnu5JuCTfnLBLLG6DolF4tFJTxhb1MVAAFa9PLWhe3BmuGFLZ/35NBJLbNGeU0E2alGmlRTAOBJuWWTvbwlIFppZHY5aNtALhg4ghhqdfLizCMeYFoPTMO4Ziq7dkPeZOTV1YS3bJI27U4s5h3LzylQt52Uy7D+7QbwWc6zbUFqdTK/K/I9iwRjOh8/f3iIXVrVmj7pNWelrLb3Hg0Mz6Aj6A6y/KkAf1zayBk9xDSTunoSJMsiDhQMfuqDqS2xrcGodVVzRwF8vrJdG6jhcMz91TInkNaFKSVFNuDPIRU7c7hPfs=; Path=/; Domain=.sdkdemo.com]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[lcLang=en_us; Path=/]]></value>
-    </header>
-    <header>
-        <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LCSESSIONID=0000-IFWcE2dV66MfBcMnLjBQAF:180t512oj; Path=/; HttpOnly]]></value>
+        <value><![CDATA[LCSESSIONID=0000iWBj1lJzIOhiDAQwegt-hYG:18dna4k6n; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Expires]]></name>
@@ -66,13 +62,13 @@
         <name><![CDATA[Content-Language]]></name>
         <value><![CDATA[en-US]]></value>
     </header></headers>
-<data><![CDATA[7cdcaf51-5884-4fdb-991b-d9420909c6c1]]></data>
+<data><![CDATA[07180f65-188f-40a5-8e12-817b68476605]]></data>
 </response>
 <response statusCode="201" statusReason="Created">
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Mon, 06 Jan 2014 15:55:25 GMT]]></value>
+        <value><![CDATA[Wed, 19 Feb 2014 11:11:11 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -88,31 +84,27 @@
     </header>
     <header>
         <name><![CDATA[Location]]></name>
-        <value><![CDATA[https://vhost0839.dc1.on.ca.compute.ihost.com:444/files/basic/api/library/6d43d7c6-d99a-4dbd-a0b6-a46dd5b043d3/document/84544d2f-4a2d-4649-b416-e42643f93170/entry]]></value>
+        <value><![CDATA[https://dev.sdkdemo.com:444/files/basic/api/library/29227af4-02db-42b2-92cb-df99260bf4f5/document/10776dba-b1c7-4ec9-95f2-23ba3fad8f9d/entry]]></value>
     </header>
     <header>
         <name><![CDATA[Last-Modified]]></name>
-        <value><![CDATA[Mon, 06 Jan 2014 15:55:26 GMT]]></value>
+        <value><![CDATA[Wed, 19 Feb 2014 11:11:11 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[ETag]]></name>
-        <value><![CDATA["84544d2f-4a2d-4649-b416-e42643f93170:modified=1389023725974:updated=1389023726010"]]></value>
+        <value><![CDATA["10776dba-b1c7-4ec9-95f2-23ba3fad8f9d:modified=1392808271413:updated=1392808271455"]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken=PUBjyRNSiMicDeydwCeSe/gUuml0fCDnccXoWVT0q2G+DB9N76HWlKqqf16uAHfzzNbPAEwptZNqH4INVmo/K3xFe7dRYvrNHW6qMsaWqiSnnoONNOeWPNzOVhjHbAXgyNVu+Z7c4oaxpsqHYzYe4Wwtaiu5GX1TlgSbpofbB7B6coN9ik2nPZhmlRvipNQ2y7hL0foIb6UhwN2+/LCf3IUc/YAk1jgjH4C8lPIHUypv6ZF0FmKyy8mxpdGXaA/KStdm/ujfrbSN07lkfddhCtyrtr9ocGeO6hPIeOQYNnx+Aucg4i8u+rcgnrcfaAsZDETkgxXipmMunpY6JIQiyg==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
+        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/q3lS73nqvmvQJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/; Domain=.sdkdemo.com]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=WYc4pshP7WsYYA6hjFIw3rcjNJubHczbq1j3RVfdEPEulIOSUDW+XUkRhk++uCF+jl8gL+Z2pGyYEbi0JKYxMMXAj+B7oLpvaW8sCVo/5z4taGcIa+QZF5DzHWNT2cOZlAlrjJDWBdErsCCyaJ70UMrp5aVMeUmvnDSInmPjlJFEBBze7Spr0flngb0JvmmK4t2A0W59w+9fhpCSpRTRGMSRsVrnSpV0ZomhzXqMlzr+MF44YwOcBQKNr82jFEVT/sx4N2/K7UiXFzxo+yoXW9UxTrkQ8MvsdorkXX11QOq5o2/NyKtj+H3f2uAo7sNHQVWnr83k/9ApGH0XijHi1rzMcx6miYCRZSDtU3hyZINizNCT4SP9QmlYNIbfsl1wuYNjSqgjwNdqF4qOYDywE4MWlwcr9urUAPYeRu80DhjOtRwdAfcgOG2fN4WTZ+87ui9wH3boM+jpZR4wI8PhXLY/a3ECYY6EwqrSWtHOL5VwQX+H4uhucM6JQx4pjWE2Q9NQRAnzySmYM3thYgyHeiAzNlvOCEr4ZNX2fTmHQVMJIo2qsDqmuh4ywwziPIWaEaQ3puA0qoESa4kNnSR8n40uJvB4HBE+/IVIlHQiD3in0Y8QdSAMGLo0mMd7UqUXCjwNMeYvhDZI30F+nI/0Lw==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
+        <value><![CDATA[LtpaToken2=7pdGH6r6EY0RRfeX8aQMqXzmL+Z79Ucdy3NKkVfEHCvptmAz7VjVCNAGgpD9JOi5soCmzccc9SywXwvLeZaJeQUX4eK1t/jm75/iutZeh/jq0xWm5azj+MKgwchpdNhS5ayLgkl3HlRnd65huCTkTTqLhUioFC141/3P7YAtItZ7synJOJiSgr5M4OMhKNbK5Kkcx+lrhLO+T30QCKnreQCnfYIWro4x2sKgiNFshIIzvQ6832dq8dGFLrYN1YlWAFlFkBeFF7uQYP10gGI+hAOHL11U7JYQ441MqW8JSkhfq4coH56/4wQNJJ/fiUuKVEKuD1V7IhYFnugIP4JYiTTHNxa0FVZv2Q8RHnJ5DzwaZ9y4IdE28Fim0l1dvV6/YkCdaVAwujW12qvuT9UgxyCirb2yeJD0qnzw7pJv7h29MghWTXd2lEyCK7Pnu5JuCTfnLBLLG6DolF4tFJTxhb1MVAAFa9PLWhe3BmuGFLZ/35NBJLbNGeU0E2alGmlRTAOBJuWWTvbwlIFppZHY5aNtALhg4ghhqdfLizCMeYFoPTMO4Ziq7dkPeZOTV1YS3bJI27U4s5h3LzylQt52Uy7D+7QbwWc6zbUFqdTK/K/I9iwRjOh8/f3iIXVrVmj7pNWelrLb3Hg0Mz6Aj6A6y/KkAf1zayBk9xDSTunoSJMsiDhQMfuqDqS2xrcGodVVzRwF8vrJdG6jhcMz91TInkNaFKSVFNuDPIRU7c7hPfs=; Path=/; Domain=.sdkdemo.com]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[lcLang=en_us; Path=/]]></value>
-    </header>
-    <header>
-        <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LCSESSIONID=0000hP4ZJ-guEd-JWpuKb_HXVTA:180t512oj; Path=/; HttpOnly]]></value>
+        <value><![CDATA[LCSESSIONID=0000cF8f2IO5cS_3uISHUIPcZy5:18dna4k6n; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Expires]]></name>
@@ -142,13 +134,13 @@
         <name><![CDATA[Content-Language]]></name>
         <value><![CDATA[en-US]]></value>
     </header></headers>
-<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?><entry xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:td="urn:ibm.com/td" xmlns="http://www.w3.org/2005/Atom"><id>urn:lsid:ibm.com:td:84544d2f-4a2d-4649-b416-e42643f93170</id><td:uuid>84544d2f-4a2d-4649-b416-e42643f93170</td:uuid><td:label>FS_TestUploadTest2422049218427657044txt</td:label><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/files/basic/api/library/6d43d7c6-d99a-4dbd-a0b6-a46dd5b043d3/document/84544d2f-4a2d-4649-b416-e42643f93170/entry" rel="self"></link><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/files/app/file/84544d2f-4a2d-4649-b416-e42643f93170" rel="alternate" type="text/html"></link><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/files/basic/api/library/6d43d7c6-d99a-4dbd-a0b6-a46dd5b043d3/document/84544d2f-4a2d-4649-b416-e42643f93170/entry" rel="edit"></link><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/files/basic/api/library/6d43d7c6-d99a-4dbd-a0b6-a46dd5b043d3/document/84544d2f-4a2d-4649-b416-e42643f93170/media" rel="edit-media"></link><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/files/basic/anonymous/api/library/6d43d7c6-d99a-4dbd-a0b6-a46dd5b043d3/document/84544d2f-4a2d-4649-b416-e42643f93170/media/FS_TestUploadTest2422049218427657044txt" rel="enclosure" type="binary/octet-stream" title="FS_TestUploadTest2422049218427657044txt" hreflang="en" length="175"></link><link href="" rel="thumbnail"></link><category term="document" scheme="tag:ibm.com,2006:td/type" label="document"></category><link href="https://vhost0839.dc1.on.ca.compute.ihost.com:444/files/basic/api/library/6d43d7c6-d99a-4dbd-a0b6-a46dd5b043d3/document/84544d2f-4a2d-4649-b416-e42643f93170/feed" rel="replies" type="application/atom+xml" thr:count="0" xmlns:thr="http://purl.org/syndication/thread/1.0"></link><td:notifications><td:media>on</td:media><td:comment>on</td:comment></td:notifications><author><name>Frank Adams</name><snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid><email>***REMOVED***@renovations.com</email><snx:userState>active</snx:userState></author><title type="text">FS_TestUploadTest2422049218427657044txt</title><published>2014-01-06T15:55:25.974Z</published><updated>2014-01-06T15:55:26.010Z</updated><td:created>2014-01-06T15:55:25.974Z</td:created><td:modified>2014-01-06T15:55:25.974Z</td:modified><td:lastAccessed></td:lastAccessed><td:modifier><name>Frank Adams</name><snx:userid>0F19F8AD-37EA-6033-8525-7BBF005634B5</snx:userid><email>***REMOVED***@renovations.com</email><snx:userState>active</snx:userState></td:modifier><td:visibility>private</td:visibility><td:libraryId>6d43d7c6-d99a-4dbd-a0b6-a46dd5b043d3</td:libraryId><td:libraryType>personalFiles</td:libraryType><td:versionUuid>7dfdd0d4-4343-4288-a1e7-3fb0951bf4b1</td:versionUuid><td:versionLabel>1</td:versionLabel><td:propagation>true</td:propagation><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/share">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/collections">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/attachments">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/versions">1</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/references">0</snx:rank><td:totalMediaSize>175</td:totalMediaSize><summary type="text"></summary><content type="binary/octet-stream" src="https://vhost0839.dc1.on.ca.compute.ihost.com:444/files/basic/api/library/6d43d7c6-d99a-4dbd-a0b6-a46dd5b043d3/document/84544d2f-4a2d-4649-b416-e42643f93170/media"></content><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/anonymous_hit">0</snx:rank><td:restrictedVisibility>false</td:restrictedVisibility><td:objectTypeName>snx:file</td:objectTypeName><td:lock type="NONE"></td:lock></entry>]]></data>
+<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?><entry xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:td="urn:ibm.com/td" xmlns="http://www.w3.org/2005/Atom"><id>urn:lsid:ibm.com:td:10776dba-b1c7-4ec9-95f2-23ba3fad8f9d</id><td:uuid>10776dba-b1c7-4ec9-95f2-23ba3fad8f9d</td:uuid><td:label>FS_TestUploadTest6982941021639408805txt</td:label><link href="https://dev.sdkdemo.com:444/files/basic/api/library/29227af4-02db-42b2-92cb-df99260bf4f5/document/10776dba-b1c7-4ec9-95f2-23ba3fad8f9d/entry" rel="self"></link><link href="https://dev.sdkdemo.com:444/files/app/file/10776dba-b1c7-4ec9-95f2-23ba3fad8f9d" rel="alternate" type="text/html"></link><link href="https://dev.sdkdemo.com:444/files/basic/api/library/29227af4-02db-42b2-92cb-df99260bf4f5/document/10776dba-b1c7-4ec9-95f2-23ba3fad8f9d/entry" rel="edit"></link><link href="https://dev.sdkdemo.com:444/files/basic/api/library/29227af4-02db-42b2-92cb-df99260bf4f5/document/10776dba-b1c7-4ec9-95f2-23ba3fad8f9d/media" rel="edit-media"></link><link href="https://dev.sdkdemo.com:444/files/basic/anonymous/api/library/29227af4-02db-42b2-92cb-df99260bf4f5/document/10776dba-b1c7-4ec9-95f2-23ba3fad8f9d/media/FS_TestUploadTest6982941021639408805txt" rel="enclosure" type="binary/octet-stream" title="FS_TestUploadTest6982941021639408805txt" hreflang="en" length="175"></link><link href="" rel="thumbnail"></link><category term="document" scheme="tag:ibm.com,2006:td/type" label="document"></category><link href="https://dev.sdkdemo.com:444/files/basic/api/library/29227af4-02db-42b2-92cb-df99260bf4f5/document/10776dba-b1c7-4ec9-95f2-23ba3fad8f9d/feed" rel="replies" type="application/atom+xml" thr:count="0" xmlns:thr="http://purl.org/syndication/thread/1.0"></link><td:notifications><td:media>on</td:media><td:comment>on</td:comment></td:notifications><author><name>Frank Adams</name><snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid><email>***REMOVED***@renovations.com</email><snx:userState>active</snx:userState></author><title type="text">FS_TestUploadTest6982941021639408805txt</title><published>2014-02-19T11:11:11.413Z</published><updated>2014-02-19T11:11:11.455Z</updated><td:created>2014-02-19T11:11:11.413Z</td:created><td:modified>2014-02-19T11:11:11.413Z</td:modified><td:lastAccessed></td:lastAccessed><td:modifier><name>Frank Adams</name><snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid><email>***REMOVED***@renovations.com</email><snx:userState>active</snx:userState></td:modifier><td:visibility>private</td:visibility><td:libraryId>29227af4-02db-42b2-92cb-df99260bf4f5</td:libraryId><td:libraryType>personalFiles</td:libraryType><td:versionUuid>63537c5a-27fc-457e-9998-aefe98cd8e90</td:versionUuid><td:versionLabel>1</td:versionLabel><td:propagation>true</td:propagation><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/share">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/collections">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/attachments">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/versions">1</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/references">0</snx:rank><td:totalMediaSize>175</td:totalMediaSize><summary type="text"></summary><content type="binary/octet-stream" src="https://dev.sdkdemo.com:444/files/basic/api/library/29227af4-02db-42b2-92cb-df99260bf4f5/document/10776dba-b1c7-4ec9-95f2-23ba3fad8f9d/media"></content><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/anonymous_hit">0</snx:rank><td:restrictedVisibility>false</td:restrictedVisibility><td:objectTypeName>snx:file</td:objectTypeName><td:lock type="NONE"></td:lock></entry>]]></data>
 </response>
 <response statusCode="204" statusReason="No Content">
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Mon, 06 Jan 2014 15:55:26 GMT]]></value>
+        <value><![CDATA[Wed, 19 Feb 2014 11:11:12 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -168,19 +160,15 @@
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken=PUBjyRNSiMicDeydwCeSe/gUuml0fCDnccXoWVT0q2G+DB9N76HWlKqqf16uAHfzzNbPAEwptZNqH4INVmo/K3xFe7dRYvrNHW6qMsaWqiSnnoONNOeWPNzOVhjHbAXgyNVu+Z7c4oaxpsqHYzYe4Wwtaiu5GX1TlgSbpofbB7B6coN9ik2nPZhmlRvipNQ2y7hL0foIb6UhwN2+/LCf3IUc/YAk1jgjH4C8lPIHUypv6ZF0FmKyy8mxpdGXaA/KStdm/ujfrbSN07lkfddhCtyrtr9ocGeO6hPIeOQYNnx+Aucg4i8u+rcgnrcfaAsZDETkgxXipmMunpY6JIQiyg==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
+        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/q3lS73nqvmvQJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/; Domain=.sdkdemo.com]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=WYc4pshP7WsYYA6hjFIw3rcjNJubHczbq1j3RVfdEPEulIOSUDW+XUkRhk++uCF+jl8gL+Z2pGyYEbi0JKYxMMXAj+B7oLpvaW8sCVo/5z4taGcIa+QZF5DzHWNT2cOZlAlrjJDWBdErsCCyaJ70UMrp5aVMeUmvnDSInmPjlJFEBBze7Spr0flngb0JvmmK4t2A0W59w+9fhpCSpRTRGMSRsVrnSpV0ZomhzXqMlzr+MF44YwOcBQKNr82jFEVT/sx4N2/K7UiXFzxo+yoXW9UxTrkQ8MvsdorkXX11QOq5o2/NyKtj+H3f2uAo7sNHQVWnr83k/9ApGH0XijHi1rzMcx6miYCRZSDtU3hyZINizNCT4SP9QmlYNIbfsl1wuYNjSqgjwNdqF4qOYDywE4MWlwcr9urUAPYeRu80DhjOtRwdAfcgOG2fN4WTZ+87ui9wH3boM+jpZR4wI8PhXLY/a3ECYY6EwqrSWtHOL5VwQX+H4uhucM6JQx4pjWE2Q9NQRAnzySmYM3thYgyHeiAzNlvOCEr4ZNX2fTmHQVMJIo2qsDqmuh4ywwziPIWaEaQ3puA0qoESa4kNnSR8n40uJvB4HBE+/IVIlHQiD3in0Y8QdSAMGLo0mMd7UqUXCjwNMeYvhDZI30F+nI/0Lw==; Path=/; Domain=.dc1.on.ca.compute.ihost.com]]></value>
+        <value><![CDATA[LtpaToken2=7pdGH6r6EY0RRfeX8aQMqXzmL+Z79Ucdy3NKkVfEHCvptmAz7VjVCNAGgpD9JOi5soCmzccc9SywXwvLeZaJeQUX4eK1t/jm75/iutZeh/jq0xWm5azj+MKgwchpdNhS5ayLgkl3HlRnd65huCTkTTqLhUioFC141/3P7YAtItZ7synJOJiSgr5M4OMhKNbK5Kkcx+lrhLO+T30QCKnreQCnfYIWro4x2sKgiNFshIIzvQ6832dq8dGFLrYN1YlWAFlFkBeFF7uQYP10gGI+hAOHL11U7JYQ441MqW8JSkhfq4coH56/4wQNJJ/fiUuKVEKuD1V7IhYFnugIP4JYiTTHNxa0FVZv2Q8RHnJ5DzwaZ9y4IdE28Fim0l1dvV6/YkCdaVAwujW12qvuT9UgxyCirb2yeJD0qnzw7pJv7h29MghWTXd2lEyCK7Pnu5JuCTfnLBLLG6DolF4tFJTxhb1MVAAFa9PLWhe3BmuGFLZ/35NBJLbNGeU0E2alGmlRTAOBJuWWTvbwlIFppZHY5aNtALhg4ghhqdfLizCMeYFoPTMO4Ziq7dkPeZOTV1YS3bJI27U4s5h3LzylQt52Uy7D+7QbwWc6zbUFqdTK/K/I9iwRjOh8/f3iIXVrVmj7pNWelrLb3Hg0Mz6Aj6A6y/KkAf1zayBk9xDSTunoSJMsiDhQMfuqDqS2xrcGodVVzRwF8vrJdG6jhcMz91TInkNaFKSVFNuDPIRU7c7hPfs=; Path=/; Domain=.sdkdemo.com]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[lcLang=en_us; Path=/]]></value>
-    </header>
-    <header>
-        <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LCSESSIONID=0000YCpFRKUlKGFu81wI40fLOJF:180t512oj; Path=/; HttpOnly]]></value>
+        <value><![CDATA[LCSESSIONID=0000tey18rcglD3-VGq0Tk6Zp6J:18dna4k6n; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Expires]]></name>

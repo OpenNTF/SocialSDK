@@ -41,21 +41,28 @@ public class AddSubscriptionTest extends BaseBssTest {
     		// Step 3. Create "IBM SmartCloud Connections" Subscription
     		String engageSubscriptionId = createSubscription(customerId, 3, "D0NWLLL", 5);
     		System.out.println(engageSubscriptionId);
-    		System.out.println(getSubscriptionBYid(engageSubscriptionId).toJsonString());
+    		System.out.println("D0NWLLL : " + getSubscriptionById(engageSubscriptionId).toJsonString());
 
     		// Step 4. Create Extra Storage Subscription
     		String storageSubscriptionId = createSubscription(customerId, 3, "D100PLL", 5);
     		System.out.println(storageSubscriptionId);
-    		System.out.println(getSubscriptionBYid(storageSubscriptionId).toJsonString());
+    		System.out.println("D100PLL : " + getSubscriptionById(storageSubscriptionId).toJsonString());
 
-    		// Step 5. Activate the subscriber
+    		// Step 5. Create "IBM SmartCloud Docs" Subscription
+    		//String docsSubscriptionId = createSubscription(customerId, 3, "D0QBKLL", 5);
+    		//System.out.println(docsSubscriptionId);
+    		//System.out.println("D0QBKLL : " + getSubscriptionById(docsSubscriptionId).toJsonString());
+
+    		// Step 6. Activate the subscriber
     		activateSubscriber(subscriberId);
     		
-    		// Step 6. Entitle subscriber
+    		// Step 7. Entitle subscriber
     		JsonEntity engageEntitlement = entitleSubscriber(subscriberId, engageSubscriptionId, true);
     		System.out.println(engageEntitlement.toJsonString());
     		JsonEntity storageEntitlement = entitleSubscriber(subscriberId, storageSubscriptionId, true);
     		System.out.println(storageEntitlement.toJsonString());
+    		//JsonEntity docsEntitlement = entitleSubscriber(subscriberId, docsSubscriptionId, true);
+    		//System.out.println(docsEntitlement.toJsonString());
     		
     		// Optional: Check seats
     		JsonEntity jsonEntity = getSubscriberManagementService().getSubscriberById(subscriberId);

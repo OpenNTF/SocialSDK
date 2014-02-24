@@ -9,6 +9,7 @@ import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.profiles.feedhandler.ProfileFeedHandler;
 import com.ibm.sbt.services.client.connections.profiles.utils.Messages;
+import com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.endpoints.Endpoint;
 
@@ -139,7 +140,8 @@ public class ProfileAdminService extends ProfileService {
 	 * @return a list or a list with matching profiles
 	 * @throws ProfileServiceException 
 	 */
-	public ProfileList searchAsAdmin(Map<String,String> parameters) throws ProfileServiceException {
+	@Override
+	public ProfileList searchProfiles(Map<String,String> parameters) throws ProfileServiceException {
 		
 		String url = resolveProfileUrl(ProfileAPI.ADMIN.getProfileEntityType(),ProfileType.GETPROFILES.getProfileType());
 
@@ -152,5 +154,38 @@ public class ProfileAdminService extends ProfileService {
 		}
 
 	}
+	/**
+	 * Wrapper method to update a User's profile
+	 * 
+	 * @param Profile
+	 * @throws ProfileServiceException
+	 */
+	@Override
+	public void updateProfile(Profile profile) throws ProfileServiceException{
 
+		if (profile == null) {
+			throw new ProfileServiceException(null, Messages.InvalidArgument_3);
+		}
+		try {
+			Map<String, String> parameters = new HashMap<String, String>();
+			parameters.put(ProfilesConstants.OUTPUT, "vcard");
+			parameters.put(ProfilesConstants.FORMAT, "full");
+			setIdParameter(parameters, profile.getUserid());
+			Object updateProfilePayload;
+			try {
+				updateProfilePayload = constructUpdateRequestBody(profile);
+			} catch (TransformerException e) {
+				throw new ProfileServiceException(e);
+			}
+			String updateUrl = resolveProfileUrl(ProfileAPI.ADMIN.getProfileEntityType(),
+					ProfileType.UPDATEPROFILE.getProfileType());
+			super.updateData(updateUrl, parameters,updateProfilePayload, getUniqueIdentifier(profile.getAsString("uid")));
+			profile.clearFieldsMap();
+		} catch (ClientServicesException e) {
+			throw new ProfileServiceException(e, Messages.UpdateProfileException);
+		} catch (IOException e) {
+			throw new ProfileServiceException(e, Messages.UpdateProfileException);
+		}
+
+	}
 }

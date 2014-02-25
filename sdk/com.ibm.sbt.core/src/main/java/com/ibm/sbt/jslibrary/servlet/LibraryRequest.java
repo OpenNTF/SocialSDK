@@ -60,6 +60,7 @@ public class LibraryRequest {
     protected boolean debugTransport;
     protected boolean mockTransport;
     protected boolean layer;
+    protected boolean _js;
 
     protected SBTEnvironment environment;
 
@@ -69,6 +70,7 @@ public class LibraryRequest {
     public static final String DEFAULT_VERSION = "1.4";
     public static final Boolean DEFAULT_DEBUG = false;
     public static final Boolean DEFAULT_LAYER = false;
+    public static final Boolean DEFAULT__JS = false;
     public static final Boolean DEFAULT_DEBUG_TRANSPORT = false;
     public static final Boolean DEFAULT_MOCK_TRANSPORT = false;
 
@@ -120,9 +122,14 @@ public class LibraryRequest {
     public static final String PARAM_MOCK_TRANSPORT = "mockTransport";
     
     /**
-     * Sets debug mode if true
+     * Sets javascript output for layer consumption
      */
     public static final String PARAM_LAYER = "layer";
+
+    /**
+     * Sets javascript output for aggregation with Connections' _js
+     */
+    public static final String PARAM__JS = "_js";
 
     /**
      * Enables/Disables the aggregator (default is false)
@@ -271,6 +278,14 @@ public class LibraryRequest {
      * 
      * @return
      */
+    public boolean is_js() {
+        return _js;
+    }
+
+    /**
+     * 
+     * @return
+     */
     public boolean isDebugTransport() {
         return debugTransport;
     }
@@ -363,6 +378,7 @@ public class LibraryRequest {
         jsVersion = readString(req, PARAM_JSVERSION, DEFAULT_JSLIB.equals(jsLib) ? getDefaultJsVersion() : "");
         debug = Boolean.parseBoolean(readString(req, PARAM_DEBUG, getDefaultDebug()));
         layer = Boolean.parseBoolean(readString(req, PARAM_LAYER, getDefaultLayer()));
+        _js = Boolean.parseBoolean(readString(req, PARAM__JS, getDefault_js()));
         debugTransport = Boolean.parseBoolean(readString(req, PARAM_DEBUG_TRANSPORT, getDefaultDebugTransport()));
         mockTransport = Boolean.parseBoolean(readString(req, PARAM_MOCK_TRANSPORT, getDefaultMockTransport()));
         String environmentName = req.getParameter(PARAM_ENVIRONMENT);
@@ -397,6 +413,10 @@ public class LibraryRequest {
 
     protected String getDefaultLayer() {
     	return DEFAULT_LAYER.toString();
+    }
+
+    protected String getDefault_js() {
+    	return DEFAULT__JS.toString();
     }
 
     protected String getDefaultDebugTransport() {
@@ -444,6 +464,8 @@ public class LibraryRequest {
         sb.append(";toolkitUrl=").append(toolkitUrl);
         sb.append(";toolkitJsUrl=").append(toolkitJsUrl);
         sb.append(";jsLibraryUrl=").append(jsLibraryUrl);
+        sb.append(";layer=").append(layer);
+        sb.append(";_js=").append(_js);
         sb.append("}");
         return sb.toString();
     }

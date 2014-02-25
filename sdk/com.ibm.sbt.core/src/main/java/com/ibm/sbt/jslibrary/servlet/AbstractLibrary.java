@@ -18,7 +18,6 @@ package com.ibm.sbt.jslibrary.servlet;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -460,6 +459,9 @@ abstract public class AbstractLibrary {
 		String[] moduleNames = getModuleNames(dependModules);
 		String dmList = toQuotedString(dependModules, ",");
 		String dmNames = toString(moduleNames, ",");
+		if (request.is_js()) {
+			indent(sb, indentationLevel).append("dojo.provide(\"sbt.config\");\n");
+		}
 		indent(sb, indentationLevel).append("define('").append(request.isLayer()?getDefineModuleLayer():getDefineModule()).append("',[")
 				.append(dmList).append("],function(").append(dmNames).append("){").append(newLine());
 
@@ -611,7 +613,7 @@ abstract public class AbstractLibrary {
 	 */
 	protected void generateRegisterModules(StringBuilder sb, int indentationLevel, LibraryRequest request,
 			String[][] registerModules, ModuleType type) {
-		if (registerModules == null) {
+		if (registerModules == null || request.is_js()) {
 			return;
 		}
 		for (String[] registerModule : registerModules) {

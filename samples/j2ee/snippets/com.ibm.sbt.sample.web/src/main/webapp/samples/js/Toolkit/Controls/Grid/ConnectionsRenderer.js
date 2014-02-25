@@ -41,6 +41,14 @@ require(["sbt/controls/grid/Grid",
 			sortBy: parameter.sortField("sortField",sortVals),
 			sortOrder: parameter.booleanSortOrder("asc")			
 		};
+		
+		var grid = new Grid({
+            storeArgs : {
+                url : "/communities/service/atom/communities/all",
+                attributes : xpath_community,
+                paramSchema : ParamSchema
+            }
+        });
      
 		var gridRenderer = new ConnectionsGridRenderer({
             _nls: { 
@@ -73,16 +81,9 @@ require(["sbt/controls/grid/Grid",
                      return item.getValue(name);
                  }
              }
-        });
-         
-        var grid = new Grid({
-            storeArgs : {
-                url : "/communities/service/atom/communities/all",
-                attributes : xpath_community,
-                paramSchema : ParamSchema
-            },
-            renderer : gridRenderer
-        });
+        },grid);
+		
+        grid.renderer = gridRenderer;
          
         dom.byId("gridDiv").appendChild(grid.domNode);
          

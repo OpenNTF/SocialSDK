@@ -40,17 +40,17 @@ require(["sbt/controls/grid/Grid",
 			sortBy: parameter.sortField("sortField",sortVals),
 			sortOrder: parameter.booleanSortOrder("asc")			
 		};
-	
-        var gridRenderer = new CommunityGridRenderer();
-         
+	  
         var grid = new Grid({
             storeArgs : {
                 url : "/communities/service/atom/communities/all",
                 attributes : xpath_community,
                 paramSchema: ParamSchema
-            },
-            renderer : gridRenderer
+            }
         });
+        
+        var gridRenderer = new CommunityGridRenderer({},grid);
+        grid.renderer = gridRenderer;
          
         dom.byId("gridDiv").appendChild(grid.domNode);
          

@@ -103,7 +103,6 @@ require(["sbt/controls/grid/Grid",
                 renderer : gridRenderer,
                 hidePager:true,
                 hideFooter:true
-                //hideSorter:true
             });
              
             dom.byId("gridDiv").appendChild(grid.domNode);

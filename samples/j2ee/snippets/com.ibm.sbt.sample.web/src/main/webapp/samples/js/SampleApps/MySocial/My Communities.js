@@ -2,7 +2,8 @@ require([ "sbt/dom", "sbt/connections/controls/communities/CommunityGrid" ], fun
 	var communityGrid = new CommunityGrid({
 		type : "my",
 		hidePager : true,
-		hideSorter : true
+		hideSorter : true,
+		hideFooter: true
 	});
 	
 	var domNode = dom.byId("MyCommunitiesTmpl");
@@ -20,9 +21,9 @@ require([ "sbt/dom", "sbt/connections/controls/communities/CommunityGrid" ], fun
 		var h3 = dom.create("h3", {
 			"class" : "h3",
 		}, headingDiv);
-		dom.setText(h3, '<a href="">My Communities</a>');
+		dom.setText(h3, 'My Communities');
 
-		var ul = this._create("ul", {
+		var ul = dom.create("ul", {
 			"class" : "files list"
 		}, div);
 		

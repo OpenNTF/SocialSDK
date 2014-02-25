@@ -100,7 +100,10 @@ require(["sbt/controls/grid/Grid",
                     url : "/communities/service/atom/communities/all",
                     attributes : xpath_community
                 },
-                renderer : gridRenderer
+                renderer : gridRenderer,
+                hidePager:true,
+                hideFooter:true
+                //hideSorter:true
             });
              
             dom.byId("gridDiv").appendChild(grid.domNode);

@@ -156,7 +156,7 @@ public abstract class EntityList<Entity extends BaseEntity> extends AbstractList
 
 	@Override
 	public int size() {
-		return entities.size();
+		return (entities == null) ? 0 : entities.size();
 	}
 	
 	@Override

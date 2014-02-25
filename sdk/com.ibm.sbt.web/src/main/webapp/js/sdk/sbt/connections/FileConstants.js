@@ -65,12 +65,10 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
 			modified: "td:modified",
 			lastAccessed : "td:lastAccessed",
 			
-			
 			modifierName : "td:modifier/td:name",			
 			modifierUserId : "td:modifier/snx:userid",
 			modifierEmail : "td:modifier/td:email",
 			modifierUserState : "td:modifier/snx:userState",
-			
 			
 			visibility : "td:visibility",
 			libraryId : "td:libraryId",
@@ -102,34 +100,34 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * XPath expression for parsing folder informartion from the File ATOM Feed.
          */
         FolderXPath : {
-    		"id" : "id",
-    		"uid" : "td:uuid",
-    		"title" : "a:title",
-    		"label" : "td:label",
-    		"folderUrl" : "a:link[@rel='alternate']/@href",
-    		"logoUrl" : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/logo']/@href",
-    		"tags" : "a:category/@term",
-    		"summary" : "a:summary[@type='text']",
-    		"content" : "a:content[@type='html']",
-    		"visibility" : "td:visibility",
-    		"notification" : "td:notification",
-    		"versionUuid" : "td:versionUuid",
-    		"versionLabel" : "td:versionLabel",
-    		"documentVersionUuid" : "td:documentVersionUuid",
-    		"documentVersionLabel" : "td:documentVersionLabel",
-    		"itemCount" : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/item']",
-    		"shareCount" : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/user']",
-    		"groupShareCount" : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/group']",
-    		"modified" : "td:modified",
-    		"created" : "td:created",
-    		"updated" : "a:updated",
-    		"authorName" : "a:author/a:name",
-    		"authorUserId" : "a:author/snx:userid",
-    		"authorEmail" : "a:author/a:email",
-    		"content" : "a:content[@type='text']",
-    		"modifierName" : "a:modifier/a:name",
-    		"modifierId" : "a:modifier/snx:userid",
-    		"modifierEmail" : "a:modifier/a:email"
+    		id : "id",
+    		uid : "td:uuid",
+    		title : "a:title",
+    		label : "td:label",
+    		folderUrl : "a:link[@rel='alternate']/@href",
+    		logoUrl : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/logo']/@href",
+    		tags : "a:category/@term",
+    		summary : "a:summary[@type='text']",
+    		content : "a:content[@type='html']",
+    		visibility : "td:visibility",
+    		notification : "td:notification",
+    		versionUuid : "td:versionUuid",
+    		versionLabel : "td:versionLabel",
+    		documentVersionUuid : "td:documentVersionUuid",
+    		documentVersionLabel : "td:documentVersionLabel",
+    		itemCount : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/item']",
+    		shareCount : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/user']",
+    		groupShareCount : "snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/group']",
+    		modified : "td:modified",
+    		created : "td:created",
+    		updated : "a:updated",
+    		authorName : "a:author/a:name",
+    		authorUserId : "a:author/snx:userid",
+    		authorEmail : "a:author/a:email",
+    		content : "a:content[@type='text']",
+    		modifierName : "a:modifier/a:name",
+    		modifierId : "a:modifier/snx:userid",
+    		modifierEmail : "a:modifier/a:email"
         },
         
         /**
@@ -162,22 +160,35 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
 		 * XPath expressions used for parsing information on shared files and folders.
 		 */
 		SharesXPath : {
-			"id" : "id",
-			"uuid" : "td:uuid",
-			"title" : "a:title",
-			"summary" : "a:summary[@type='text']",
-			"sharedResourceType" : "td:sharedResourceType", // always set to document, but will add the attribute anyway
-			"sharePermission" : "td:sharePermission",
-			"sharedWhat" : "td:sharedWhat",
-			"sharedWithName" : "a:sharedWith/a:name",
-			"sharedWithId" : "a:sharedWith/snx:userid",
-			"sharedWithEmail" : "a:sharedWith/a:email",
-			"documentOwner" : "td:documentOwner",
-			"updated" : "a:updated",
-			"published" : "a:published",
-			"authorName" : "a:author/a:name",
-			"authorUid" : "a:author/snx:userid",
-			"authorEmail" : "a:author/a:email"
+			id : "id",
+			uuid : "td:uuid",
+			title : "a:title",
+			summary : "a:summary[@type='text']",
+			sharedResourceType : "td:sharedResourceType", // always set to document, but will add the attribute anyway
+			sharePermission : "td:sharePermission",
+			sharedWhat : "td:sharedWhat",
+			sharedWithName : "a:sharedWith/a:name",
+			sharedWithId : "a:sharedWith/snx:userid",
+			sharedWithEmail : "a:sharedWith/a:email",
+			documentOwner : "td:documentOwner",
+			updated : "a:updated",
+			published : "a:published",
+			authorName : "a:author/a:name",
+			authorUid : "a:author/snx:userid",
+			authorEmail : "a:author/a:email"
+		},
+		
+		/**
+		 * XPath expressions used for parsing information on user library.
+		 */
+		LibraryXPath : {
+			entry : "a:feed",
+			id : "a:id",
+			uuid : "td:uuid",
+			librarySize : "td:librarySize",
+			totalRemovedSize : "td:totalRemovedSize",
+			libraryQuota : "td:libraryQuota",
+			totalResults : "opensearch:totalResults"
 		},
 		
 		/**
@@ -303,6 +314,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * Add the document to collections specified by atom entry or feed.
          */
         AtomAddFileToFolders : "/${files}/basic/api/userlibrary/{userId}/document/{documentId}/feed",
+        
         /**
         * Add the document of logged in user to collections specified by atom entry or feed.
         */

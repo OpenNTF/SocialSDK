@@ -20,6 +20,7 @@ import java.util.Set;
 
 import com.ibm.commons.util.AbstractException;
 import com.ibm.commons.util.StringUtil;
+import com.ibm.commons.util.io.json.JsonGenerator;
 import com.ibm.commons.util.io.json.JsonJavaFactory;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.commons.util.io.json.JsonParser;
@@ -105,6 +106,20 @@ public class JsonEntity extends BaseEntity {
 	public String toJsonString() {
 		JsonDataHandler jsonHandler = (JsonDataHandler)getDataHandler();
 		return (jsonHandler == null) ? null : jsonHandler.getData().toString();
+	}
+	
+	/**
+	 * Return JSON string representation of current data.
+	 * @param compact
+	 * @return
+	 */
+	public String toJsonString(boolean compact) {
+		try {
+			JsonDataHandler jsonHandler = (JsonDataHandler)getDataHandler();
+			return (jsonHandler == null) ? null :  JsonGenerator.toJson(JsonJavaFactory.instanceEx, jsonHandler.getData(), false);
+		} catch(Exception ex) {
+			return "";
+		}		
 	}
 	
 	/**

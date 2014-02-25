@@ -28,6 +28,15 @@ require(["sbt/controls/grid/Grid",
 			"contributorName"	:"a:contributor/a:name",
 			"contributorEmail"	:"a:contributor/a:email"				
 		};
+		
+		var grid = new Grid({
+            storeArgs : {
+                url : "/communities/service/atom/communities/all",
+                attributes : xpath_community
+            },
+            hidePager:true,
+            hideFooter:true
+        });
      
         var gridRenderer = new GridRenderer({
              nls: { 
@@ -73,15 +82,9 @@ require(["sbt/controls/grid/Grid",
                      return item.getValue(name);
                  }
              }
-        });
-         
-        var grid = new Grid({
-            storeArgs : {
-                url : "/communities/service/atom/communities/all",
-                attributes : xpath_community
-            },
-            renderer : gridRenderer
-        });
+        },grid);
+        
+        grid.renderer = gridRenderer;
          
         dom.byId("gridDiv").appendChild(grid.domNode);
          

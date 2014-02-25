@@ -47,6 +47,7 @@ public class DojoLibrary extends AbstractLibrary {
     public static final String      PATH_DOJO2              = "dojo2";                  //$NON-NLS-1$
     public static final String      PATH_SBTX_DOJO          = "dojo";                   //$NON-NLS-1$
     public static final String      PATH_SBTX_DOJO2         = "dojo2";                  //$NON-NLS-1$
+    public static final String      _JS				        = "_js";                  //$NON-NLS-1$
 
 	static private final String[][]	REGISTER_MODULES		= { { MODULE_SBT, PATH_SBT },
 			                                                    { MODULE_BRIDGE, PATH_BRIDGE }, 
@@ -199,18 +200,16 @@ public class DojoLibrary extends AbstractLibrary {
 	 */
 	@Override
 	protected String generateRegisterModulePath(LibraryRequest request, String moduleName, String moduleUrl) {
+		StringBuilder sb = new StringBuilder();
 	    if (isExceedsVersion(request.getJsVersion(), minimumAmdVersion)) {
 			// Dojo AMD syntax
-			StringBuilder sb = new StringBuilder();
 			sb.append("require({paths:{'").append(moduleName).append("': '").append(moduleUrl).append("'}});").append(newLine());
-			return sb.toString();
 		} else {
 			// Non AMD dojo syntax
-			StringBuilder sb = new StringBuilder();
 			sb.append("dojo.registerModulePath('").append(moduleName).append("','").append(moduleUrl)
 					.append("')").append(";").append(newLine());
-			return sb.toString();
 		}
+	    return sb.toString();
 	}
 
 	/*

@@ -35,6 +35,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.ibm.commons.runtime.Context;
@@ -564,11 +565,19 @@ public abstract class TestEnvironment extends com.ibm.sbt.test.lib.TestEnvironme
 		if (baseTest.isResultsReady())
 			return;
 		if (loginForm != null) {
+			WebElement continueButton = loginForm.findElement(By.id("continue"));
+
 			WebElement usernameEl = loginForm.findElement(By.name(usernameId));
 			WebElement passwordEl = loginForm.findElement(By.name(passwordId));
 			WebElement submitEl = loginForm.findElements(By.id(submitId))
 					.get(0);
 			usernameEl.sendKeys(username);
+			if (continueButton!=null) {
+				continueButton.click();
+				WebDriverWait wait = new WebDriverWait(webDriver, 10);
+				WebElement element = wait.until(
+				        ExpectedConditions.visibilityOfElementLocated(By.id(submitId)));
+			}
 			passwordEl.sendKeys(password);
 			submitEl.click();
 		} else {
@@ -605,7 +614,7 @@ public abstract class TestEnvironment extends com.ibm.sbt.test.lib.TestEnvironme
 			passwordEl.sendKeys(password);
 			submitEl.click();
 
-			// wait for authorization popop
+			// wait for authorization popup
 			WebElement authPage = waitForPopup(loginTimeout, OAuth20AuthTitle);
 			if (authPage != null) {
 				WebElement grantEl = authPage.findElement(By.xpath(grantXPath));

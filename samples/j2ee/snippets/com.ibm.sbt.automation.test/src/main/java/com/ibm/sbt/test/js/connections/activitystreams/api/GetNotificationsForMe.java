@@ -20,6 +20,7 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.ibm.sbt.automation.core.test.BaseTest.AuthType;
 import com.ibm.sbt.automation.core.test.connections.BaseActivityStreamsTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 
@@ -37,7 +38,8 @@ public class GetNotificationsForMe extends BaseActivityStreamsTest {
     }
     
     @Test
-    public void testGetNotificationsForMe() {
+    public void testGetNotificationsForMe() throws Exception {
+    	createNotification();
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         List jsonList = previewPage.getJsonList();
         Assert.assertFalse("GetNotificationsForMe returned no results", jsonList.isEmpty());

@@ -52,7 +52,7 @@
 		<managed-bean-scope>application</managed-bean-scope>
 		<managed-property>
 			<property-name>endpoints</property-name>
-			<value>connections,connectionsOA2,connectionsSSO,smartcloud,smartcloudOA2,smartcloudBasic,smartcloudForm,domino,acmeAir,conAcmeApp,dropbox,twitter</value>
+			<value>connections,connectionsOA2,connectionsSSO,smartcloud,smartcloudOA2,smartcloudBasic,smartcloudForm,smartcloudC1,domino,acmeAir,conAcmeApp,dropbox,twitter</value>
 		</managed-property>
 		<managed-property>
 			<property-name>properties</property-name>
@@ -435,8 +435,39 @@
 		</managed-property>
 	</managed-bean>	
 	
-	
-		<!-- SmartCloud FormBased endpoint -->
+	<!-- SmartCloud C1 -->
+	<managed-bean>
+		<managed-bean-name>smartcloudC1</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.services.endpoints.SmartCloudBasicEndpoint</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>url</property-name>
+			<value>https://apps.na.collabservtest.lotus.com</value>
+		</managed-property>
+		<managed-property>
+			<property-name>apiVersion</property-name>
+			<value>%{smartcloud.c1.apiVersion}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>credentialStore</property-name>
+			<value>CredStore</value>
+		</managed-property>
+		<managed-property>
+			<property-name>authenticationPage</property-name>
+			<value>/sbt/loginForm.html?endpoint=smartcloudC1</value>
+		</managed-property>
+		<managed-property>
+			<property-name>authenticationService</property-name>
+			<value>api/bss/resource/customer</value>
+		</managed-property>
+		<!-- Trust the connection -->
+		<managed-property>
+			<property-name>forceTrustSSLCertificate</property-name>
+			<value>true</value>
+		</managed-property>
+	</managed-bean>	
+		
+	<!-- SmartCloud FormBased endpoint -->
 	<managed-bean>
 		<managed-bean-name>smartcloudForm</managed-bean-name>
 		<managed-bean-class>com.ibm.sbt.services.endpoints.SmartCloudFormEndpoint</managed-bean-class>

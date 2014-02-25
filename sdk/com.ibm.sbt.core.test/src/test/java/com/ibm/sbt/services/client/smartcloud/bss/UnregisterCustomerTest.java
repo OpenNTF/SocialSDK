@@ -31,6 +31,7 @@ public class UnregisterCustomerTest extends BaseBssTest {
     public void testUnregisterCustomer() {
     	try {
     		String customerId = registerCustomer();
+    		System.out.println(customerId);
 
     		CustomerManagementService customerManagement = getCustomerManagementService();
     		

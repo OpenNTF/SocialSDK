@@ -29,7 +29,7 @@
 	
 <html>
 <head>
-<title>Get Customers</title>
+<title>Get Roles</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
@@ -37,18 +37,23 @@
 	<div id="content">
 	<%
 	try {
-    	CustomerManagementService customerManagement = new CustomerManagementService("smartcloudC1");
-		EntityList<JsonEntity> customerList = customerManagement.getCustomers();
-		out.println("Id's of all customers who are part of the vendor's organization <br/>");
-		out.println("<ul>");
-		for (JsonEntity customer : customerList) {
-			long id = customer.getAsLong("Id");
-			out.println("<li>" + id + "</li>");
+    	SubscriberManagementService subscriberManagement = new SubscriberManagementService("smartcloudC1");
+    	AuthorizationService authorizationService = new AuthorizationService("smartcloudC1");
+		EntityList<JsonEntity> subscriberList = subscriberManagement.getSubscribers();
+		if (!subscriberList.isEmpty()) {
+			JsonEntity subscriber = subscriberList.get(0);
+			String loginName = subscriber.getAsString("Person/EmailAddress");
+			out.println("Retrieving roles for: "+loginName + " <br/>");
+			String[] roles = authorizationService.getRoles(loginName);
+			out.println("<ul>");
+			for (String role : roles) {
+				out.println("<li>" + role + "</li>");
+			}
+			out.println("</ul>");
 		}
-		out.println("</ul>");
 	} catch (Exception e) {
 		e.printStackTrace();
-		out.println("Error retrieving customer list caused by: "+e.getMessage());    		
+		out.println("Error retrieving roles list caused by: "+e.getMessage());    		
 	}
 	%>
 	</div>

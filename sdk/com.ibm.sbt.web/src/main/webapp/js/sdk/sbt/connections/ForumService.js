@@ -384,7 +384,23 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @return {Boolean} 
          */
         isPinned : function() {
-        	return this.getAsBoolean("pinned");
+        	//return this.getAsBoolean("pinned");
+        	var terms = this.getAsArray("categoryTerm");
+        	var pinned = "pinned scheme=\"http://www.ibm.com/xmlns/prod/sn/flags\"";
+        	
+        	if(lang.isArray(terms)){
+        		for(var i=0;i<terms.length;i++){
+            		if(terms[i] == pinned){
+            			return true;
+            		}
+            	}
+        	}else if(lang.isString(terms)){
+        		if(terms == pinned){
+        			return true;
+        		}
+        	}else{
+        		return false;
+        	}
         },
         
         /**
@@ -395,7 +411,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @return {ForumTopic} 
          */
         setPinned : function(pinned) {
-        	return this.setAsBoolean("pinned", pinned);
+        	//return this.setAsBoolean("pinned", pinned);
+        	this.setAsString("categoryTerm","pinned scheme=\"http://www.ibm.com/xmlns/prod/sn/flags\"");
         },
         
         /**
@@ -405,7 +422,23 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @return {Boolean} 
          */
         isLocked : function() {
-        	return this.getAsBoolean("locked");
+        	var terms = this.getAsArray("categoryTerm");
+        	var locked = "Locked scheme=\"http://www.ibm.com/xmlns/prod/sn/flags\"";
+        	
+        	if(lang.isArray(terms)){
+        		for(var i=0;i<terms.length;i++){
+            		if(terms[i] == locked){
+            			return true;
+            		}
+            	}
+        	}else if(lang.isString(terms)){
+        		if(terms == locked){
+        			return true;
+        		}
+        	}else{
+        		return false;
+        	}
+
         },
         
         /**
@@ -416,7 +449,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @return {ForumTopic} 
          */
         setLocked : function(locked) {
-        	return this.setAsBoolean("locked", locked);
+        	return this.setAsString("categoryTerm", "Locked scheme=\"http://www.ibm.com/xmlns/prod/sn/flags\"");
         },
         
         /**
@@ -426,7 +459,23 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @return {Boolean} 
          */
         isQuestion : function() {
-        	return this.getAsBoolean("question");
+        	//return this.getAsBoolean("question");
+        	var terms = this.getAsArray("categoryTerm");
+        	var question = "question scheme=\"http://www.ibm.com/xmlns/prod/sn/flags\"";
+        	
+        	if(lang.isArray(terms)){
+        		for(var i=0;i<terms.length;i++){
+            		if(terms[i] == question){
+            			return true;
+            		}
+            	}
+        	}else if(lang.isString(terms)){
+        		if(terms == question){
+        			return true;
+        		}
+        	}else{
+        		return false;
+        	}
         },
         
         /**
@@ -437,7 +486,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @return {Boolean} 
          */
         setQuestion : function(question) {
-        	return this.setAsBoolean("question", question);
+        	//return this.setAsBoolean("question", question);
+        	this.setAsString("categoryTerm", "question  scheme=\"http://www.ibm.com/xmlns/prod/sn/flags\"");
         },
         
         /**

@@ -19,6 +19,8 @@ define({
     root: {
     	startTopic: "Start a Topic",
     	deleteTopic: "Delete Topic",
+    	lockTopic: "Lock Topic",
+    	lock: "Lock",
     	ok: "Ok",
     	loading: "Loading...",
     	attachAFile: "Attach a File",
@@ -41,7 +43,12 @@ define({
     	deleteMultipleCheck: "Are you sure you want to delete the selected topics?",
     	deleteTopicSuccess: "The topic has been successfully deleted.",
     	deleteTopicsSuccess: "The topics have been successfully deleted.",
-    	deleteTopicError: "Error: The topic could not be deleted."
+    	deleteTopicError: "Error: The topic could not be deleted.",
+    	
+    	LockTopicSuccess: "You have successfully locked this topic.",
+    	LockTopicError:"Operation failed.",
+    	LockMultipleTopicsSuccess:"You have successfully locked the selected topics.",
+    	LockMultipleTopicsError: "Operation failed."
     		
     }
 });

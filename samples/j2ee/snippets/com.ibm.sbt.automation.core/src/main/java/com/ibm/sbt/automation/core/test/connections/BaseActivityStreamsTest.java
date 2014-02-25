@@ -17,27 +17,39 @@ package com.ibm.sbt.automation.core.test.connections;
 
 import java.util.List;
 
-import junit.framework.Assert;
-
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.automation.core.test.BaseApiTest;
+import com.ibm.sbt.automation.core.test.BaseTest.AuthType;
+import com.ibm.sbt.automation.core.test.FlexibleTest;
 import com.ibm.sbt.automation.core.utils.Trace;
 import com.ibm.sbt.security.authentication.AuthenticationException;
 import com.ibm.sbt.services.client.SBTServiceException;
 import com.ibm.sbt.services.client.connections.activitystreams.ActivityStreamEntityList;
 import com.ibm.sbt.services.client.connections.activitystreams.ActivityStreamService;
 import com.ibm.sbt.services.client.connections.activitystreams.ActivityStreamEntity;
+import com.ibm.sbt.services.client.connections.activitystreams.ActivityStreamServiceException;
 import com.ibm.sbt.services.client.connections.communities.Community;
 import com.ibm.sbt.services.client.connections.communities.CommunityService;
 import com.ibm.sbt.services.client.connections.communities.CommunityServiceException;
+import com.ibm.sbt.services.client.connections.follow.FollowService;
+import com.ibm.sbt.services.client.connections.follow.FollowedResource;
+import com.ibm.sbt.services.client.connections.follow.model.Source;
+import com.ibm.sbt.services.client.connections.follow.model.Type;
+import com.ibm.sbt.services.client.connections.profiles.Profile;
+import com.ibm.sbt.services.client.connections.profiles.ProfileService;
+import com.ibm.sbt.services.endpoints.BasicEndpoint;
+import com.ibm.sbt.services.endpoints.Endpoint;
+import com.ibm.sbt.services.endpoints.EndpointFactory;
+import com.ibm.sbt.test.lib.MockEndpoint;
 
+import static org.junit.Assert.*;
 /**
  * @author rajmeetbal
  *  
  * @date 10 May 2013
  */
 
-public class BaseActivityStreamsTest extends BaseApiTest {
+public class BaseActivityStreamsTest extends FlexibleTest {
     
     protected ActivityStreamService activityStreamService;
     protected ActivityStreamEntity asEntry;
@@ -54,31 +66,47 @@ public class BaseActivityStreamsTest extends BaseApiTest {
         return activityStreamService;
     }
     
+    protected void createNotification() throws Exception {
+    	
+    	//TODO move endpoint for secondary user to test environment
+    	Endpoint ep = EndpointFactory.getEndpoint("connections");
+    	assertTrue("Only basic endpoint supported for this test ",ep instanceof BasicEndpoint || ep instanceof MockEndpoint);
+    	
+    	try {
+    	
+    	((BasicEndpoint)ep).setUser(getEnvironment().getSecondaryUsername());
+    	((BasicEndpoint)ep).setPassword(getEnvironment().getSecondaryUserPassword());
+    	
+    	ActivityStreamService svc = new ActivityStreamService(ep);
+    	JsonJavaObject postPayload = new JsonJavaObject();
+    	postPayload.put("content", "Notification message content");
+
+		String entryID = svc.postMicroblogEntry(getEnvironment().getCurrentUserUuid(), null, null, postPayload);
+		System.out.println("Created Notification Entry "+entryID); 
+    	} finally {
+    		((BasicEndpoint)ep).setUser(getEnvironment().getCurrentUsername());
+    		((BasicEndpoint)ep).setPassword(getEnvironment().getCurrentUserPassword());
+    	}
+
+    }
+    
     protected ActivityStreamEntity getLastCreatedEntry() {
         try {
-            loginConnections();
             ActivityStreamService asService = getActivityStreamService();
             ActivityStreamEntityList entries = asService.getAllUpdates();
             asEntry = entries.iterator().next();
             Trace.log("Last created entry: "+asEntry.getId());
-        } catch (AuthenticationException pe) {
-            Assert.fail("Error authenicating: " + pe.getMessage());
-            pe.printStackTrace();
         } catch (SBTServiceException e) {
-        	Assert.fail("SBTServiceException: " + e.getMessage());
+        	fail("SBTServiceException: " + e.getMessage());
             e.printStackTrace();
 		}
         return asEntry;
     }
 
-    
     protected void createEntry(String userType, String groupType, String applicationType) {
-    	createContext();
-    	try {
-			loginConnections();
-		} catch (AuthenticationException e1) {
-			Assert.fail("AuthenticationException: "+e1.getMessage());
-		}
+    	createEntry(userType, groupType, applicationType, false, false);
+    }    
+    protected void createEntry(String userType, String groupType, String applicationType, boolean actionable, boolean saved) {
     	JsonJavaObject postPayload = new JsonJavaObject();
     	
 		JsonJavaObject actor = new JsonJavaObject();
@@ -90,17 +118,24 @@ public class BaseActivityStreamsTest extends BaseApiTest {
 		postPayload.putObject("actor", actor);
 		postPayload.putString("verb", "@invite");
 		postPayload.putObject("object", object);
-
+		if (actionable || saved) {
+			JsonJavaObject connections = new JsonJavaObject();
+			if (actionable) connections.put("actionable", "true");
+			if (saved) connections.put("saved", "true");
+			postPayload.put("connections", connections);
+		}
+		
 		ActivityStreamService service = new ActivityStreamService();
 		try {
-			service.postEntry(userType, groupType, applicationType, postPayload);
+			String entryID = service.postEntry(userType, groupType, applicationType, postPayload);
+			System.out.println("Created Entry "+entryID);
+			
 		} catch (SBTServiceException e) {
-			Assert.fail("SBTServiceException: " + e.getMessage());
+			fail("SBTServiceException: " + e.getMessage());
 		}
     }
     
     protected void createCommunityWithTags(String tags) {
-    	createContext();
     	CommunityService communityService = new CommunityService();
     	Community community = null;
     	try{
@@ -110,7 +145,7 @@ public class BaseActivityStreamsTest extends BaseApiTest {
 			community.setTags(tags);
 			String communityId = communityService.createCommunity(community);
     	}catch(CommunityServiceException cse){
-    		Assert.assertNull("CommunityServiceException in testing SearchByFilters");
+    		assertNull("CommunityServiceException in testing SearchByFilters");
     	}
     }
     
@@ -138,12 +173,6 @@ public class BaseActivityStreamsTest extends BaseApiTest {
     }
     
     protected void postAStatusUpdate() {
-    	createContext();
-    	try {
-			loginConnections();
-		} catch (AuthenticationException e1) {
-			Assert.fail("AuthenticationException: "+e1.getMessage());
-		}
     	JsonJavaObject postPayload = new JsonJavaObject();
     	
 		JsonJavaObject actor = new JsonJavaObject();
@@ -160,7 +189,7 @@ public class BaseActivityStreamsTest extends BaseApiTest {
 		try {
 			service.postEntry("@me", "@status", "@all", postPayload);
 		} catch (SBTServiceException e) {
-			Assert.fail("SBTServiceException: " + e.getMessage());
+			fail("SBTServiceException: " + e.getMessage());
 		}
     }
 

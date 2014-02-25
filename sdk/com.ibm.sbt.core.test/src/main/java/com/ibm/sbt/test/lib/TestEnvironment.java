@@ -10,7 +10,11 @@ public class TestEnvironment {
 	private final static String CURRENT_USER = "user";
 	private final static String OTHER_USER = "otheruser";
 	private final static String CURRENT_USER_MAIL = "mail";
-	private final static String OTHER_USER_MAIL = "othermail";
+	private final static String OTHER_USER_MAIL = "othermail";	
+	private final static String CURRENT_USER_PASSWORD = "password";
+	private final static String OTHER_USER_PASSWORD = "otherpassword";	
+	private final static String CURRENT_USER_LOGIN = "username";
+	private final static String OTHER_USER_LOGIN = "othername";
 
 	private static boolean requiresAuthentication;
 	private static boolean enableSmartcloud = System.getProperty("testEnvironment","connections").equals("smartcloud");
@@ -83,5 +87,18 @@ public class TestEnvironment {
 	public static String getCurrentUserUuid() {
 		return Context.get().getProperty(getPropertyBasePath()+CURRENT_USER);
 	}
+	public static String  getSecondaryUserPassword() {
+		return Context.get().getProperty(getPropertyBasePath()+OTHER_USER_PASSWORD);
+	}
+	public static String  getCurrentUserPassword() {
+		return Context.get().getProperty(getPropertyBasePath()+CURRENT_USER_PASSWORD);
+	}
+	public static String  getSecondaryUsername() {
+		return Context.get().getProperty(getPropertyBasePath()+OTHER_USER_LOGIN);
+	}
+	public static String  getCurrentUsername() {
+		return Context.get().getProperty(getPropertyBasePath()+CURRENT_USER_LOGIN);
+	}
+
 
 }

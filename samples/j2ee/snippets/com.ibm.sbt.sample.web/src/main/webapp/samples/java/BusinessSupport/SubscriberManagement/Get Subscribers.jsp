@@ -29,7 +29,7 @@
 	
 <html>
 <head>
-<title>Register Customer</title>
+<title>Get Subscribers</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
@@ -39,9 +39,12 @@
 	try {
     	SubscriberManagementService subscriberManagement = new SubscriberManagementService("smartcloudC1");
 		EntityList<JsonEntity> subscriberList = subscriberManagement.getSubscribers();
+		out.println("Id's of subscribers who are in the same organization as the API caller <br/>");
+		out.println("<ul>");
 		for (JsonEntity subscriber : subscriberList) {
-			out.println(subscriber.getAsLong("Id")+"<br/>");
+			out.println("<li>" + subscriber.getAsLong("Id")+ "</li>");
 		}
+		out.println("</ul>");
 	} catch (Exception e) {
 		e.printStackTrace();
 		out.println("Error retrieving subscribers caused by: "+e.getMessage());    		

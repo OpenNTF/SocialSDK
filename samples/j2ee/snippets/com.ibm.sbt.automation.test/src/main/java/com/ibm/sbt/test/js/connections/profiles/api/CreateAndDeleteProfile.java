@@ -42,15 +42,32 @@ public class CreateAndDeleteProfile extends BaseProfilesTest {
 	 */
     
     @Test
-    public void testCreateAndDeleteProfile() {        
+    public void testCreateAndDeleteProfile() {
+    	String tst = String.valueOf(System.currentTimeMillis());
+    	String displayName = "user " + tst;
+    	String id = "user" + tst;
+    	String email = "user"+tst+"@renovations.com";
+    	String name = "user";
+    	String surname = tst;
+    	String dname = "CN="+displayName+"renovations";
+    	
+    	
+		addSnippetParam("sample.createProfileEmail", email);
+		addSnippetParam("sample.createProfileUid", id);
+		addSnippetParam("sample.createProfileDistinguishedName", dname);
+		addSnippetParam("sample.createProfileDisplayName", displayName);
+		addSnippetParam("sample.createProfileGivenNames", name);
+		addSnippetParam("sample.createProfileSurName", surname);
+    	
+    	
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID1);
         JsonJavaObject json = previewPage.getJson();
-        Assert.assertEquals(getProperty("sample.id1"), json.getString("getUserid"));
-        Assert.assertEquals(getProperty("sample.email1"), json.getString("getEmail"));
-        Assert.assertEquals(getProperty("sample.displayName1"), json.getString("getName"));
+        Assert.assertEquals(getProperty("sample.createProfileUid"), json.getString(id));
+        Assert.assertEquals(getProperty("sample.createProfileEmail"), json.getString(email));
+        Assert.assertEquals(getProperty("sample.createProfileDisplayName"), json.getString(displayName));
         previewPage = executeSnippet(SNIPPET_ID2);
         json = previewPage.getJson();
-        Assert.assertEquals(getProperty("sample.id1"), json.getString("id"));
+        Assert.assertEquals(getProperty("sample.createProfileUid"), json.getString(id));
         previewPage = executeSnippet(SNIPPET_ID2);
         json = previewPage.getJson();
         Assert.assertEquals(404, json.getInt("code"));

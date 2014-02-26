@@ -1,2 +1,0 @@
-<input type="radio" name="pager_group" value="yes" ***REMOVED*** echo ($viewData['pager_group'] == 'yes' ? 'checked' : '')?>> Yes<br/>
-<input type="radio" name="pager_group" value="no" ***REMOVED*** echo ($viewData['pager_group'] == 'no' ? 'checked' : '')?>> No<br/>

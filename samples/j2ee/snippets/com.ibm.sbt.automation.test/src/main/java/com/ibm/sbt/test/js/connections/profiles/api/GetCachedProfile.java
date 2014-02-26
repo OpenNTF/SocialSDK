@@ -21,6 +21,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.ibm.commons.util.io.json.JsonJavaObject;
+import com.ibm.sbt.automation.core.environment.TestEnvironment;
 import com.ibm.sbt.automation.core.test.BaseApiTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 
@@ -35,6 +36,7 @@ public class GetCachedProfile extends BaseApiTest {
 
     @Test
     public void testCachedProfile() {
+    	addSnippetParam("sample.email1", TestEnvironment.getCurrentUserEmail());
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         List jsonList = previewPage.getJsonList();
         Assert.assertEquals(20, jsonList.size());

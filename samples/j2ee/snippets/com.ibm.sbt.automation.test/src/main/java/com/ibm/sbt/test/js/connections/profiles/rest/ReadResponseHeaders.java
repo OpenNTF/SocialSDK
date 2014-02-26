@@ -19,6 +19,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import com.ibm.sbt.automation.core.environment.TestEnvironment;
 import com.ibm.sbt.automation.core.test.BaseServiceTest;
 
 /**
@@ -30,6 +31,7 @@ public class ReadResponseHeaders extends BaseServiceTest {
 
     @Test
     public void testExpected() {
+    	addSnippetParam("sample.id1", environment.getProperty("sample.id1"));
         boolean result = checkExpected("Social_Profiles_REST_Read_Response_Headers", "Content-Type: application/atom+xml;charset=UTF-8");
         assertTrue(getExpectedErrorMsg(), result);
     }

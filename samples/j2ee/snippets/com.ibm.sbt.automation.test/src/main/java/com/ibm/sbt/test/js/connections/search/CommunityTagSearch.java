@@ -37,7 +37,7 @@ public class CommunityTagSearch extends BaseAuthServiceTest {
     @Test
     public void testCommunityTagSearch() {
     	CommunityTagSearchPage searchPage = launchSnippet();
-        boolean success = searchPage.communitySearch("Test");
+        boolean success = searchPage.communitySearch("tag1");
         Assert.assertTrue("No results when search for community tag search", success);
     }
 

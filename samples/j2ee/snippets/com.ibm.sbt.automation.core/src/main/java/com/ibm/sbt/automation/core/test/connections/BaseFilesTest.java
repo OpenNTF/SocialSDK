@@ -335,8 +335,9 @@ public class BaseFilesTest extends BaseApiTest {
 			char[] chars = new char[size];
 			Arrays.fill(chars, 'X');
 			bw.write(chars);
+			bw.flush();
 			bw.close();
-			
+			fw.close();
 			return tempFile;
 		} catch (IOException ioe) {
 			fail("Unable to create temporary local file: ", ioe);

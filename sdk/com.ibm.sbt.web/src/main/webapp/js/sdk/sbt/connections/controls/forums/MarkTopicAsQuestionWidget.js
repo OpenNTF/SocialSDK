@@ -20,22 +20,22 @@
 define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUtil", 
          "../../../i18n!./nls/ForumView", 
          "../../../controls/view/BaseDialogContent", "../../ForumService", 
-		 "../../../text!./templates/LockTopic.html"],
-		function(declare, lang, dom, stringUtil, nls, BaseDialogContent, ForumService, LockTopic) {
+		 "../../../text!./templates/MarkAsQuestion.html"],
+		function(declare, lang, dom, stringUtil, nls, BaseDialogContent, ForumService, MarkAsQuestion) {
 
 	/**
-	 * Widget which can be used to lock topics from a forum
+	 * Widget which can be used to mark topics from a forum as questions
 	 * 
-	 * @class LockTopicWidget
+	 * @class MarkTopicAsQuestionWidget
 	 * @namespace sbt.connections.controls.forums
-	 * @module sbt.connections.controls.forums.LockTopicWidget
+	 * @module sbt.connections.controls.forums.MarkTopicAsQuestionWidget
 	 */
-	var LockTopicWidget = declare([ BaseDialogContent ], {
+	var MarkTopicAsQuestionWidget = declare([ BaseDialogContent ], {
 		
 		/**
 		 * Template used to display the  content.
 		 */
-		templateString : LockTopic,
+		templateString : MarkAsQuestion,
 		
 
 		
@@ -74,7 +74,7 @@ define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUt
 		 * @method onExecute
 		 */
 		onExecute : function() {
-			this._lockTopics(this.topics);
+			this._markAsQuestion(this.topics);
 		},
 		
 		
@@ -82,38 +82,21 @@ define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUt
 		// Internals
 		//
 		
-		_lockTopics: function(topics){
+		_markAsQuestion: function(topics){
 			this.setExecuteEnabled(false);
-			var forumService = this.getForumService();
-			
-			for(var i=0;i<topics.length;i++){
-				var isLocked = this._isTopicLocked(topics[i]);
-				if(!isLocked){
-					topics[i] = forumService.newForumTopic(topics[i]);
-					topics[i].setLocked();
-					topics[i].update().then(               
-					    function(topic){
-					    	alert("Topic Locked");
-					    },
-					    function(error){
-					    	alert("Error");
-					    }
-					);
-				}
-			}
-			
-
+			var forumService = this.getForumService();			
+			alert("marked as q");
 			this.setExecuteEnabled(true);
 		},
 		
-		_isTopicLocked: function(topic){
+		_isTopicQuestion: function(topic){
 			var forumService = this.getForumService();
-			var isLocked;
+			var isQuestion;
 			
 			topic = forumService.newForumTopic(topic);
-			isLocked = topic.isLocked();
+			isQuestion = topic.isQuestion();
 			
-			return isLocked;
+			return isQuestion;
 		},
 		
 		/*
@@ -129,7 +112,7 @@ define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUt
 		 */
 		_handleError: function(error){
 			this.setExecuteEnabled(true);
-			this.errorTemplate = "<div>"+nls.deleteTopicError+"</div>";	
+			this.errorTemplate = "<div>"+nls.markAsQuestionError+"</div>";	
 			this.onError();
 		},
 		
@@ -138,13 +121,13 @@ define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUt
 		 */
 		_setSuccessMessage : function(topicsLength) {
 			if(topicsLength > 1 ){
-				this.successTemplate = "<div>"+nls.LockMultipleTopicsSuccess+"</div>";
+				this.successTemplate = "<div>"+nls.markAsQuestionSuccess+"</div>";
 			}else{
-				this.successTemplate = "<div>"+nls.LockTopicSuccess+"</div>";
+				this.successTemplate = "<div>"+nls.markAsQuestionSuccess+"</div>";
 			}
 			
 		}
 	});
 
-	return LockTopicWidget;
+	return MarkTopicAsQuestionWidget;
 });

@@ -15,27 +15,27 @@
  */
 
 /**
- * StartTopicWidget
+ * ReplyToTopicWidget
  */
 define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUtil", 
          "../../../i18n!./nls/ForumView", 
          "../../../controls/view/BaseDialogContent", "../../ForumService", 
-		 "../../../text!./templates/StartATopic.html"],
-		function(declare, lang, dom, stringUtil, nls, BaseDialogContent, ForumService, StartATopic) {
+		 "../../../text!./templates/ReplyToTopic.html"],
+		function(declare, lang, dom, stringUtil, nls, BaseDialogContent, ForumService, ReplyToTopic) {
 
 	/**
-	 * Widget which can be used create a forum topic.
+	 * Widget to reply to a forum topic.
 	 * 
-	 * @class StartTopicWidget
+	 * @class ReplyToTopicWidget
 	 * @namespace sbt.connections.controls.forums
-	 * @module sbt.connections.controls.forums.StartTopicWidget
+	 * @module sbt.connections.controls.forums.ReplyToTopicWidget
 	 */
-	var StartTopicWidget = declare([ BaseDialogContent ], {
+	var ReplyToTopicWidget = declare([ BaseDialogContent ], {
 		
 		/**
 		 * Template used to display the  content.
 		 */
-		templateString : StartATopic,
+		templateString : ReplyToTopic,
 		
 		/**
 		 * Constructor method for the StartTopicWidget.
@@ -78,17 +78,7 @@ define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUt
 		 */
 		onExecute : function() {
 			
-			this.setExecuteEnabled(false);
-			var title = this.titleInput.value;
-			if(!title || title.trim()==""){
-				this._setErrorMessage(nls.titleError);
-				this.onError();
-				this.setExecuteEnabled(true);
-				return;
-			}
-			var tags = this.tagsInput.value;
-			var question = this.questionCheckBox.checked;
-			
+			this.setExecuteEnabled(false);	
 			var content ;
 			if(window['CKEDITOR'] != undefined){
 				content = CKEDITOR.instances.editor.getData();
@@ -97,32 +87,13 @@ define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUt
 			}
 			
 			var forumService = this.getForumService();
-			var topic = forumService.newForumTopic(); 
-		    topic.setForumUuid(this.forumUuid);
-		    topic.setTitle(title);
-		    topic.setContent(content);
-		    topic.setTags(tags);
-		    topic.setQuestion(question);
-		    var self = this;
-		    forumService.createForumTopic(topic).then(  
-		        function(success) { 
-		            self._handleRequestComplete(success);
-		        },
-		        function(error) {
-		        	self._handleError(error);
-		        }
-		    );
+			
+		    alert(content);
 			
 		},
 		
 		onCancel : function() {
-			//if this widget is part of a view
-			if(this.view && this.action){
-				this.view.actionBar.showAllActions();
-				this.view.setContent(this.view.grid);
-			}
-			
-			
+		
 		},
 		
 		//
@@ -176,5 +147,5 @@ define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUt
 
 	});
 
-	return StartTopicWidget;
+	return ReplyToTopicWidget;
 });

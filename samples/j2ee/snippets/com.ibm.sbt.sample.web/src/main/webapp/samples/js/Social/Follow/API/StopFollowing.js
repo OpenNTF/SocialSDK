@@ -4,24 +4,42 @@ require(["sbt/connections/FollowService", "sbt/connections/CommunityService", "s
         var communityService = new CommunityService();  
         var community = communityService.newCommunity(); 
         var now = new Date();
-        community.setTitle("CreateCommunity.js " + now.getTime());
+        community.setTitle("StopCommunity.js " + now.getTime());
         community.setContent("Test community created: " + now);
-        communityService.createCommunity(community).then(  // creating a community, so that getFollowedResources() returns atleast 1 result
-    		function() {
-				followService.getFollowedResources(consts.CommunitiesSource, consts.CommunitiesResourceType, { ps:1 }).then(  // getting followed Community resources
-					function(followedResources) {
-						followService.stopFollowing(followedResources[0]).then( // stop following the first community resource
-							function(followedProfileResource) {
-				                dom.setText("json", json.jsonBeanStringify({ stoppedFollowingResource : followedProfileResource }));
-				            },
-				            function(error) {
-				                dom.setText("json", json.jsonBeanStringify(error));
-				            }
-				         );
-					}
-	    		);
-			}
-    	)
+        
+        // Creating a community, owner automatically follows this
+        communityService.createCommunity(community).then(
+    		function(community) {
+    			dom.setText("json", json.jsonBeanStringify(community));
+    			return community;
+    		}
+    	).then(
+    		function(community) {
+    			// Getting followed Community resources
+    			return followService.getFollowedResources(consts.CommunitiesSource, consts.CommunitiesResourceType);
+    		}
+    	).then(  
+    		function(followedResources) {
+    			var followedResource = followedResources[0];
+    			dom.setText("json", json.jsonBeanStringify(followedResource));
+    			return followedResource;
+    		}
+    	).then(
+    		function(followedResource) {
+    			// Stop following the first community resource
+    			return followService.stopFollowing(followedResource);
+    		}
+    	).then( 
+    		function(resourceId) {
+    			dom.setText("json", json.jsonBeanStringify({ stoppedFollowingResource : resourceId }));
+    			
+    			// Cleanup the community we just created
+    			communityService.deleteCommunity(community.getCommunityUuid());
+    		},
+    		function(error) {
+    		    dom.setText("json", json.jsonBeanStringify(error));
+    		}
+    	);
 	}
 
 );

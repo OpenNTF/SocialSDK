@@ -43,6 +43,7 @@ public enum WikiXPath implements FieldEntry {
 	viewCount("./snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/hit']"),
 	anonymousViewsCount("./snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/anonymous_hit']"),
 	attachmentsCount("./snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/attachments']"),
+	enclosureUrl("./a:link[@rel='enclosure']/@href"),
 	versionsCount("./snx:rank[@scheme='http://www.ibm.com/xmlns/prod/sn/versions']"),
 	;
 	

@@ -116,7 +116,7 @@ public class JsonEntity extends BaseEntity {
 	public String toJsonString(boolean compact) {
 		try {
 			JsonDataHandler jsonHandler = (JsonDataHandler)getDataHandler();
-			return (jsonHandler == null) ? null :  JsonGenerator.toJson(JsonJavaFactory.instanceEx, jsonHandler.getData(), false);
+			return (jsonHandler == null) ? null :  JsonGenerator.toJson(JsonJavaFactory.instanceEx, jsonHandler.getData(), compact);
 		} catch(Exception ex) {
 			return "";
 		}		

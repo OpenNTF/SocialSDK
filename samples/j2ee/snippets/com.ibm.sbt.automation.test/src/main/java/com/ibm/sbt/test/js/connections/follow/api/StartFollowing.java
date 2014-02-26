@@ -20,7 +20,6 @@ import org.junit.Test;
 
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.automation.core.test.BaseApiTest;
-import com.ibm.sbt.automation.core.test.BaseTest.AuthType;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 
 /**
@@ -40,7 +39,7 @@ public class StartFollowing extends BaseApiTest {
     public void testStartFollowing() {
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         JsonJavaObject json = previewPage.getJson();
-        Assert.assertNotNull(json.getString("uid"));
+        Assert.assertNotNull(json.getString("getFollowedResourceUuid"));
     }
     
 }

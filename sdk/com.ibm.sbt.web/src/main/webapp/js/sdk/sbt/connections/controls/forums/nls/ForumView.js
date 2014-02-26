@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * Â© Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -20,7 +20,11 @@ define({
     	startTopic: "Start a Topic",
     	deleteTopic: "Delete Topic",
     	lockTopic: "Lock Topic",
+    	pinTopic: "Pin Topic",
+    	replyToTopic: "Reply To Topic",
+    	markTopic: "Mark As Question",
     	lock: "Lock",
+    	pin: "Pin",
     	ok: "Ok",
     	loading: "Loading...",
     	attachAFile: "Attach a File",
@@ -48,7 +52,13 @@ define({
     	LockTopicSuccess: "You have successfully locked this topic.",
     	LockTopicError:"Operation failed.",
     	LockMultipleTopicsSuccess:"You have successfully locked the selected topics.",
-    	LockMultipleTopicsError: "Operation failed."
+    	LockMultipleTopicsError: "Operation failed.",
+    	
+    	pinTopicError: "Operation failed.",
+    	pinTopicSuccess: "This topic has been successfully pinned. It will stay at the top of this forum's topic list.",
+    		
+    	markAsQuestionSuccess: "This topic has been marked as a question.",
+    	markAsQuestionError:"Operation failed."
     		
     }
 });

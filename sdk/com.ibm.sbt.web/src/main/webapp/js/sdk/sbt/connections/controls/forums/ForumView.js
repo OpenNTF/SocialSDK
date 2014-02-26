@@ -18,8 +18,10 @@
  * 
  */
 define([ "../../../declare", "../../../lang", "../../../stringUtil", "../../../log",
-         "./ForumGrid", "../../../controls/view/BaseView" ,"./StartTopicAction", "./DeleteTopicAction", "./LockTopicAction"],
-		function(declare, lang, stringUtil, log, ForumGrid, BaseView, StartTopicAction, DeleteTopicAction, LockTopicAction) {
+         "./ForumGrid", "../../../controls/view/BaseView" ,"./StartTopicAction", "./DeleteTopicAction", "./LockTopicAction",
+         "./PinTopicAction","./MarkTopicAsQuestionAction", "./ReplyToTopicAction"],
+		function(declare, lang, stringUtil, log, ForumGrid, BaseView, StartTopicAction, DeleteTopicAction, LockTopicAction,
+				PinTopicAction,MarkTopicAsQuestionAction,ReplyToTopicAction) {
 
 	/*
 	 * @module sbt.connections.forums.ForumView
@@ -61,6 +63,9 @@ define([ "../../../declare", "../../../lang", "../../../stringUtil", "../../../l
 				this.addAction(new StartTopicAction({grid : this.grid}));
 				this.addAction(new DeleteTopicAction({grid : this.grid}));
 				this.addAction(new LockTopicAction({grid : this.grid}));
+				this.addAction(new PinTopicAction({grid : this.grid}));
+				this.addAction(new MarkTopicAsQuestionAction({grid : this.grid}));
+				this.addAction(new ReplyToTopicAction({grid : this.grid}));
 			}
 		}
 	

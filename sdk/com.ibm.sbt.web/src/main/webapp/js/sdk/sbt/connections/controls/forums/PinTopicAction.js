@@ -15,26 +15,26 @@
  */
 
 /**
- * ReplyToTopicAction
+ * PinTopicAction
  */
 define([ "../../../declare", "../../../dom", "../../../lang",
-         "../../../i18n!./nls/ForumView", "./StartTopicWidget", 
+         "../../../i18n!./nls/ForumView", "./PinTopicWidget", 
          "../../../controls/dialog/Dialog", "../../../controls/view/Action"], 
-	function(declare, dom, lang, nls, StartTopicWidget, Dialog, Action) {
+	function(declare, dom, lang, nls, PinTopicWidget, Dialog, Action) {
 
 	/**
-	 * Action to start a new forum topic
+	 * Action to pin a forum topic
 	 * 
-	 * @class StartTopicAction
+	 * @class PinTopicAction
 	 * @namespace sbt.connections.controls.forums
-	 * @module sbt.connections.controls.forums.StartTopicAction
+	 * @module PinTopicAction
 	 */
-	var StartTopicAction = declare([ Action ], {
+	var PinTopicAction = declare([ Action ], {
 		
-		name : nls.startTopic,
+		name : nls.pinTopic,
 	
 		/**
-		 * Set forums on the associated widget. 
+		 * Set topics on the associated widget. 
 		 */
 		selectionChanged : function(state, selection, context) {
 			this.inherited(arguments);
@@ -44,26 +44,38 @@ define([ "../../../declare", "../../../dom", "../../../lang",
 			}
 		},
 		
+		/**
+		 * Only enabled when at least one topic is selected.
+		 */
+		isEnabled : function(selection, context) {
+			return (selection.length > 0);
+		},
 
 		/**
-		 * Open the forum to create a new topic
+		 * Open dialog to upload a file.
 		 */
 		execute : function(selection, context) {
 			var self = this;
 			var widgetArgs = lang.mixin({
-				hideButtons: false,
-				view:self.view,
-				action: self,
-				forumUuid: this.grid.forumUuid,
+				hideButtons: true,
+    			topics: selection,
+    			view: this.view,
 				displayMessage : function(template, isError) {
 					self.displayMessage(template, isError);
 				}
 			}, this.widgetArgs || {});
-			this.widget = new StartTopicWidget(widgetArgs);
-			this.view.setContent(this.widget);
-			this.view.actionBar.hideAllActions();		
+			var widget = new PinTopicWidget(widgetArgs);
+			
+			//TODO Change this to use the new pattern when the latest code is pulled
+			var dialog = new Dialog({ 
+    			title: this.name,
+    			nls: { OK: nls.pin },
+    			dialogContent: widget,
+    			onExecute: lang.hitch(widget, widget.onExecute)
+    		});
+    		dialog.show();
 		}
 	});
 
-	return StartTopicAction;
+	return PinTopicAction;
 });

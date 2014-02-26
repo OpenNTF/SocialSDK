@@ -18,20 +18,20 @@
  * ReplyToTopicAction
  */
 define([ "../../../declare", "../../../dom", "../../../lang",
-         "../../../i18n!./nls/ForumView", "./StartTopicWidget", 
+         "../../../i18n!./nls/ForumView", "./ReplyToTopicWidget", 
          "../../../controls/dialog/Dialog", "../../../controls/view/Action"], 
-	function(declare, dom, lang, nls, StartTopicWidget, Dialog, Action) {
+	function(declare, dom, lang, nls, ReplyToTopicWidget, Dialog, Action) {
 
 	/**
-	 * Action to start a new forum topic
+	 * Action to reply to a forum topic
 	 * 
-	 * @class StartTopicAction
+	 * @class ReplyToTopicAction
 	 * @namespace sbt.connections.controls.forums
-	 * @module sbt.connections.controls.forums.StartTopicAction
+	 * @module sbt.connections.controls.forums.ReplyToTopicAction
 	 */
-	var StartTopicAction = declare([ Action ], {
+	var ReplyToTopicAction = declare([ Action ], {
 		
-		name : nls.startTopic,
+		name : nls.replyToTopic,
 	
 		/**
 		 * Set forums on the associated widget. 
@@ -44,6 +44,12 @@ define([ "../../../declare", "../../../dom", "../../../lang",
 			}
 		},
 		
+		/**
+		 * Only enabled when at least one topic is selected.
+		 */
+		isEnabled : function(selection, context) {
+			return (selection.length > 0);
+		},
 
 		/**
 		 * Open the forum to create a new topic
@@ -59,11 +65,18 @@ define([ "../../../declare", "../../../dom", "../../../lang",
 					self.displayMessage(template, isError);
 				}
 			}, this.widgetArgs || {});
-			this.widget = new StartTopicWidget(widgetArgs);
-			this.view.setContent(this.widget);
-			this.view.actionBar.hideAllActions();		
+			this.widget = new ReplyToTopicWidget(widgetArgs);
+			
+			//TODO Change this to use the new pattern when the latest code is pulled
+			/*var dialog = new Dialog({ 
+    			title: this.name,
+    			nls: { OK: nls.save },
+    			dialogContent: "<div>hello</div>"
+    			//onExecute: lang.hitch(this.widget, widget.onExecute)
+    		});
+    		dialog.show();	*/
 		}
 	});
 
-	return StartTopicAction;
+	return ReplyToTopicAction;
 });

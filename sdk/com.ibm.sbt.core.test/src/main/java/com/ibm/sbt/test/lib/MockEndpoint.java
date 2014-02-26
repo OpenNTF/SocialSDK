@@ -19,8 +19,10 @@ package com.ibm.sbt.test.lib;
 
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.services.endpoints.AbstractEndpoint;
 import com.ibm.sbt.services.endpoints.BasicEndpoint;
 import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
@@ -47,6 +49,13 @@ public class MockEndpoint extends BasicEndpoint {
 	public ClientService getClientService() throws ClientServicesException {
 		Endpoint ep = endpoint != null ? endpoint : EndpointFactory
 				.getEndpoint(innerEndpoint);
+		if (StringUtil.isNotEmpty(this.getUrl()) && ep instanceof AbstractEndpoint) {
+			((AbstractEndpoint)ep).setUrl(this.getUrl());
+		}
+		if (ep instanceof BasicEndpoint) {
+			if(StringUtil.isNotEmpty(this.getUser()))  ((BasicEndpoint)ep).setUser(this.getUser());
+			if(StringUtil.isNotEmpty(this.getPassword())) ((BasicEndpoint)ep).setPassword(this.getPassword());
+		}
 		return new MockService(ep.getClientService(), mockMode);
 	}
 

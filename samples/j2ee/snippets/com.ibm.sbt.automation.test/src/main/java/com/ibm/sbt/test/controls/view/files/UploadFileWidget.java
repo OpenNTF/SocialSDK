@@ -61,10 +61,12 @@ public class UploadFileWidget extends BaseFilesTest {
 		
 		java.io.File file = createLocalFile();
 		boolean deleted = file.delete();
+		Assert.assertTrue("file not deleted", deleted);
 		System.out.println("deleted:"+deleted);
 		System.out.println(file.getAbsolutePath());
 		java.io.File tempFile1 = new java.io.File(file.getAbsolutePath());
 		System.out.println("exists: "+tempFile1.exists());
+		Assert.assertFalse("deleted file exists", tempFile1.exists());
 		String tags = "tag1,tag2,tag3";
 		String visibility = "public";
 		boolean shareFilePropagate = true;

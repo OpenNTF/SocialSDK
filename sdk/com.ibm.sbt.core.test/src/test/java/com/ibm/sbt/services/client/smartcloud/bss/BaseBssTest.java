@@ -340,19 +340,30 @@ public class BaseBssTest {
     	}
     }
     
-    public JsonEntity entitleSubscriber(String subscriberId, String subscriptionId, boolean acceptTOU) {
+    public void entitleSubscriber(final String subscriberId, final String subscriptionId, final boolean acceptTOU) {
     	try {
-    		SubscriberManagementService subscriberManagement = getSubscriberManagementService();
-			return subscriberManagement.entitleSubscriber(subscriberId, subscriptionId, acceptTOU);
-    	} catch (BssException be) {
-    		JsonJavaObject jsonObject = be.getResponseJson();
-    		System.out.println(jsonObject);
-    		Assert.fail("Error entitling subscriber caused by: "+jsonObject);
+    		final SubscriberManagementService subscriberManagement = getSubscriberManagementService();
+
+    		StateChangeListener listener = new StateChangeListener() {
+				@Override
+				public void stateChanged(JsonEntity jsonEntity) {
+					try {
+						JsonEntity entitlement = subscriberManagement.entitleSubscriber(subscriberId, subscriptionId, acceptTOU);
+						System.out.println(entitlement.toJsonString());
+					} catch (BssException be) {
+			    		JsonJavaObject jsonObject = be.getResponseJson();
+			    		System.out.println(jsonObject);
+			    		Assert.fail("Error entitling subscriber caused by: "+jsonObject);
+			    	} 
+				}
+			};
+    		if (!getSubscriptionManagementService().waitSubscriptionState(subscriptionId, "ACTIVE", 5, 1000, listener)) {
+    			Assert.fail("Timeout waiting for subscription to activate");
+    		}
     	} catch (Exception e) {
     		e.printStackTrace();
     		Assert.fail("Error entitling subscriber caused by: "+e.getMessage());    		
     	}
-    	return null;
     }
 	
     public JsonEntity getSubscriberById(String subscriberId) {

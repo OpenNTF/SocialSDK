@@ -3,20 +3,26 @@ require(["sbt/connections/IdeationBlogService", "sbt/connections/BlogService", "
         var ideationBlogService = new IdeationBlogService();
         var blogService = new BlogService();
         var now = new Date();
-        var post = blogService.newBlogPost(); // assumes that atleast one community has Ideation blog widget added to it. 
+        // Assumes that at least one community has ideation blog widget added to it.
+        var post = blogService.newBlogPost();  
         post.setTitle("Idea at " + now.getTime());
         post.setContent("Idea at " + now.getTime());
         blogService.getAllBlogs({ ps: 1, blogType: "ideationblog" }).then(
-			function(IdeationBlogs) {
-				post.setBlogHandle(IdeationBlogs[0].getHandle());
-				return ideationBlogService.contributeIdea(post);
+			function(ideationBlogs) {
+				if (ideationBlogs && ideationBlogs.length > 0) {
+					post.setBlogHandle(ideationBlogs[0].getHandle());
+					return ideationBlogService.contributeIdea(post);
+				}
 			}
 		).then(
-			function(post){
-				ideationBlogService.voteIdea(post);//making sure there is atleast one voted Idea
+			function(post) {
+				if (post) {
+					// Make sure there is at least one voted Idea
+					ideationBlogService.voteIdea(post);
+				}
 			}
 		).then(
-			function(){
+			function() {
 				return ideationBlogService.getMyVotedIdeas();
 			}
 		).then(

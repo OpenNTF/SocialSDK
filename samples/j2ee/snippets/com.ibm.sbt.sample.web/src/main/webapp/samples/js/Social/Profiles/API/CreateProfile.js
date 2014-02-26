@@ -2,7 +2,7 @@ require(["sbt/connections/ProfileAdminService","sbt/dom", "sbt/json"], function(
 	var id = "%{name=sample.createProfileId}";
 	var profileAdminService = new ProfileAdminService();
 	var profile = profileAdminService.newProfile(id);
-	profile.setAsString("guid", "%{name=sample.createProfileId}");
+	profile.setAsString("guid", "%{name=sample.createProfileUid}");
     profile.setAsString("email", "%{name=sample.createProfileEmail}");
     profile.setAsString("uid", "%{name=sample.createProfileUid}");
     profile.setAsString("distinguishedName", "%{name=sample.createProfileDistinguishedName}");

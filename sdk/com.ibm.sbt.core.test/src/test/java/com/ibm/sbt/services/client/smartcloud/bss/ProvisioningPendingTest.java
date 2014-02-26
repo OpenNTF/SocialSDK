@@ -27,7 +27,7 @@ import com.ibm.sbt.services.client.base.JsonEntity;
  * @author mwallace
  *
  */
-public class AddSubscriptionTest extends BaseBssTest {
+public class ProvisioningPendingTest extends BaseBssTest {
 
 	@Test
     public void testEntitleSubscriber() {
@@ -36,31 +36,35 @@ public class AddSubscriptionTest extends BaseBssTest {
     		String customerId = registerCustomer();
     		
     		// Step 2. Add Subscriber
-    		String subscriberId = addSubscriber(customerId);
+    		final String subscriberId = addSubscriber(customerId);
 
-    		// Step 3. Create "IBM SmartCloud Connections" Subscription
-    		String engageSubscriptionId = createSubscription(customerId, 3, "D0NWLLL", 5);
-    		System.out.println(engageSubscriptionId);
-    		System.out.println("D0NWLLL : " + getSubscriptionById(engageSubscriptionId).toJsonString());
-
-    		// Step 4. Create Extra Storage Subscription
-    		String storageSubscriptionId = createSubscription(customerId, 3, "D100PLL", 5);
-    		System.out.println(storageSubscriptionId);
-    		System.out.println("D100PLL : " + getSubscriptionById(storageSubscriptionId).toJsonString());
-
-    		// Step 5. Create "IBM SmartCloud Docs" Subscription
-    		//String docsSubscriptionId = createSubscription(customerId, 3, "D0QBKLL", 5);
-    		//System.out.println(docsSubscriptionId);
-    		//System.out.println("D0QBKLL : " + getSubscriptionById(docsSubscriptionId).toJsonString());
-
-    		// Step 6. Activate the subscriber
+    		// Step 3. Activate the subscriber
     		activateSubscriber(subscriberId);
     		
-    		// Step 7. Entitle subscriber
-    		entitleSubscriber(subscriberId, engageSubscriptionId, true);
-    		entitleSubscriber(subscriberId, storageSubscriptionId, true);
-    		//JsonEntity docsEntitlement = entitleSubscriber(subscriberId, docsSubscriptionId, true);
-    		//System.out.println(docsEntitlement.toJsonString());
+    		// Step 4. Create "IBM SmartCloud Connections" Subscription
+    		final String subscriptionId = createSubscription(customerId, 3, "D0NWLLL", 5);
+    		System.out.println(subscriptionId);
+    		//System.out.println("D0NWLLL : " + getSubscriptionById(engageSubscriptionId).toJsonString());
+    		
+    		// Step 5. Entitle subscriber
+    		final SubscriberManagementService subscriberManagement = getSubscriberManagementService();
+    		StateChangeListener listener = new StateChangeListener() {
+				@Override
+				public void stateChanged(JsonEntity jsonEntity) {
+					try {
+						JsonEntity engageEntitlement = subscriberManagement.entitleSubscriber(subscriberId, subscriptionId, true);
+						System.out.println(engageEntitlement.toJsonString());
+					} catch (BssException be) {
+			    		JsonJavaObject jsonObject = be.getResponseJson();
+			    		System.out.println(jsonObject);
+			    		Assert.fail("Error entitling subscriber caused by: "+jsonObject);
+			    	} 
+				}
+			};
+    		SubscriptionManagementService subscriptionManagement = getSubscriptionManagementService();
+    		if (!subscriptionManagement.waitSubscriptionState(subscriptionId, "ACTIVE", 5, 1000, listener)) {
+    			Assert.fail("Timeout waiting for subscription to activate");
+    		}
     		
     		// Optional: Check seats
     		JsonEntity jsonEntity = getSubscriberManagementService().getSubscriberById(subscriberId);
@@ -76,5 +80,5 @@ public class AddSubscriptionTest extends BaseBssTest {
     		Assert.fail("Error adding subscription caused by: "+e.getMessage());    		
     	}
     }
-	
+		
 }

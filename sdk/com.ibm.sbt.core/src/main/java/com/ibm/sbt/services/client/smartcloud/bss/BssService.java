@@ -17,6 +17,7 @@ package com.ibm.sbt.services.client.smartcloud.bss;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.services.client.ClientService.Handler;
@@ -142,6 +143,9 @@ public class BssService extends JsonService {
 		RevokeSubscriberHeader.put("x-operation", "revokeSubscriber");
 	}
 
+	static final String	sourceClass	= BssService.class.getName();
+	static final Logger	logger = Logger.getLogger(sourceClass);
+	
 	private static final long serialVersionUID = 1L;
 	
 	/**

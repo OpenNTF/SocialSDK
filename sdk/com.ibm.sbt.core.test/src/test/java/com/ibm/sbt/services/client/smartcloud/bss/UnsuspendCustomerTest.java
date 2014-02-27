@@ -57,6 +57,7 @@ public class UnsuspendCustomerTest extends BaseBssTest {
 			customerObject = rootObject.getAsObject("Customer");
 			System.out.println(customerObject);
 			Assert.assertNull("SuspensionDate", customerObject.get("SuspensionDate"));
+			Assert.assertEquals("ACTIVE", customerObject.get("CustomerState"));
 			
     	} catch (BssException be) {
     		JsonJavaObject jsonObject = be.getResponseJson();

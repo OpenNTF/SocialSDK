@@ -65,7 +65,7 @@
     				  .setTimeZone("America/Central")
     				  .setPhoto("");
     		
-        	JsonJavaObject responseJson = subscriberManagement.addSubsciber(jsonBuilder);
+        	JsonJavaObject responseJson = subscriberManagement.addSubscriber(jsonBuilder);
         	String subscriberId = String.valueOf(responseJson.getAsLong("Long"));
         	out.println("Added new subscriber: "+subscriberId+"<br/>");
         	

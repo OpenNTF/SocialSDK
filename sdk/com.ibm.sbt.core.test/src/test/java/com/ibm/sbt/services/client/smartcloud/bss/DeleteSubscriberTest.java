@@ -39,7 +39,7 @@ public class DeleteSubscriberTest extends BaseBssTest {
 			Assert.assertNotNull("Unable to retrieve subscriber: "+subscriberId, jsonEntity);
 			Assert.assertEquals(subscriberId, subscriberManagement.getSubscriberId(jsonEntity.getJsonObject()));
 
-			subscriberManagement.deleteSubsciber(subscriberId);
+			subscriberManagement.deleteSubscriber(subscriberId);
 			
 			try {
 				jsonEntity = subscriberManagement.getSubscriberById(subscriberId);

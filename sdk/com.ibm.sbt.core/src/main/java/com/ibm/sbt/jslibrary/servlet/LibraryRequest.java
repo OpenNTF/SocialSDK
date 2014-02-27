@@ -154,6 +154,12 @@ public class LibraryRequest {
     static final Logger logger = Logger.getLogger(sourceClass);
 
     /**
+     * Default constructor
+     */
+    public LibraryRequest() {
+    }
+
+    /**
      * 
      * @param req
      * @param resp
@@ -171,23 +177,27 @@ public class LibraryRequest {
      * @throws ServletException
      * @throws IOException
      */
-    public void init(LibraryRequestParams params) throws ServletException, IOException {
-        this.toolkitUrl = StringUtil.replace(params.getToolkitUrl(), "%local_server%", UrlUtil.getServerUrl(httpRequest));
-        this.toolkitJsUrl = StringUtil.replace(params.getToolkitJsUrl(), "%local_server%", UrlUtil.getServerUrl(httpRequest));
-        this.toolkitExtUrl = StringUtil.replace(params.getToolkitExtUrl(), "%local_server%", UrlUtil.getServerUrl(httpRequest));
-        this.toolkitExtJsUrl = StringUtil.replace(params.getToolkitExtJsUrl(), "%local_server%", UrlUtil.getServerUrl(httpRequest));
-        this.serviceUrl = StringUtil.replace(params.getServiceUrl(), "%local_application%", UrlUtil.getContextUrl(httpRequest));
-        this.libraryUrl = params.getLibraryUrl().indexOf("%")>-1?UrlUtil.getRequestUrl(httpRequest):params.getLibraryUrl();
-        this.jsLibraryUrl = StringUtil.replace(params.getJsLibraryUrl(), "%local_server%", UrlUtil.getServerUrl(httpRequest));
-        this.iframeUrl = StringUtil.replace(params.getIframeUrl(), "%local_server%", UrlUtil.getServerUrl(httpRequest));
-
-        readFromRequest(httpRequest, params.getEnvironment());
-
-        inited = true;
-
-        if (logger.isLoggable(Level.FINE)) {
-            logger.fine("Created library request: " + toString());
-        }
+    public void init(LibraryRequestParams params) throws LibraryException {
+    	try {
+	        this.toolkitUrl = StringUtil.replace(params.getToolkitUrl(), "%local_server%", getServerUrl(params));
+	        this.toolkitJsUrl = StringUtil.replace(params.getToolkitJsUrl(), "%local_server%", getServerUrl(params));
+	        this.toolkitExtUrl = StringUtil.replace(params.getToolkitExtUrl(), "%local_server%", getServerUrl(params));
+	        this.toolkitExtJsUrl = StringUtil.replace(params.getToolkitExtJsUrl(), "%local_server%", getServerUrl(params));
+	        this.serviceUrl = StringUtil.replace(params.getServiceUrl(), "%local_application%", getContextUrl(params));
+	        this.libraryUrl = params.getLibraryUrl().indexOf("%")>-1 ? getRequestUrl(params) : params.getLibraryUrl();
+	        this.jsLibraryUrl = StringUtil.replace(params.getJsLibraryUrl(), "%local_server%", getServerUrl(params));
+	        this.iframeUrl = StringUtil.replace(params.getIframeUrl(), "%local_server%", getServerUrl(params));
+	
+	        readFromRequest(params, params.getEnvironment());
+	
+	        inited = true;
+	
+	        if (logger.isLoggable(Level.FINE)) {
+	            logger.fine("Created library request: " + toString());
+	        }
+    	} catch (Exception e) {
+    		throw new LibraryException("Error initialising library request caused by: "+e.getMessage(), e);
+    	}
     }
 
     /**
@@ -209,6 +219,18 @@ public class LibraryRequest {
      */
     public HttpServletResponse getHttpResponse() {
         return httpResponse;
+    }
+    
+    /**
+     * 
+     * @param name
+     * @return
+     */
+    public String getParameter(String name) {
+    	if (httpRequest != null) {
+    		return httpRequest.getParameter(name);
+    	}
+    	return null;
     }
 
     /**
@@ -364,6 +386,39 @@ public class LibraryRequest {
         return httpRequest.getHeader(name);
     }
 
+	/**
+	 * @return
+	 */
+	protected String getServerUrl(LibraryRequestParams params) {
+		if (httpRequest != null) {
+			return UrlUtil.getServerUrl(httpRequest);
+		} else {
+			return params.getServerUrl();
+		}
+	}
+
+	/**
+	 * @return
+	 */
+	protected String getContextUrl(LibraryRequestParams params) {
+		if (httpRequest != null) {
+			return UrlUtil.getContextUrl(httpRequest);
+		} else {
+			return params.getContextUrl();
+		}
+	}
+
+	/**
+	 * @return
+	 */
+	protected String getRequestUrl(LibraryRequestParams params) {
+		if (httpRequest != null) {
+			return UrlUtil.getRequestUrl(httpRequest);
+		} else {
+			return params.getRequestUrl();
+		}
+	}
+
     /**
      * 
      * @param req
@@ -371,17 +426,17 @@ public class LibraryRequest {
      * @throws ServletException
      * @throws IOException
      */
-    protected void readFromRequest(HttpServletRequest req, SBTEnvironment defaultEnvironment) throws ServletException, IOException {
-    	String pathInfo = req.getPathInfo();
+    protected void readFromRequest(LibraryRequestParams params, SBTEnvironment defaultEnvironment) throws ServletException, IOException {
+    	String pathInfo = getPathInfo(params);
     	init_js = INIT_JS.equalsIgnoreCase(pathInfo);
-        jsLib = readString(req, PARAM_JSLIB, getDefaultJsLib());
-        jsVersion = readString(req, PARAM_JSVERSION, DEFAULT_JSLIB.equals(jsLib) ? getDefaultJsVersion() : "");
-        debug = Boolean.parseBoolean(readString(req, PARAM_DEBUG, getDefaultDebug()));
-        layer = Boolean.parseBoolean(readString(req, PARAM_LAYER, getDefaultLayer()));
-        _js = Boolean.parseBoolean(readString(req, PARAM__JS, getDefault_js()));
-        debugTransport = Boolean.parseBoolean(readString(req, PARAM_DEBUG_TRANSPORT, getDefaultDebugTransport()));
-        mockTransport = Boolean.parseBoolean(readString(req, PARAM_MOCK_TRANSPORT, getDefaultMockTransport()));
-        String environmentName = req.getParameter(PARAM_ENVIRONMENT);
+        jsLib = readString(params, PARAM_JSLIB, getDefaultJsLib());
+        jsVersion = readString(params, PARAM_JSVERSION, DEFAULT_JSLIB.equals(jsLib) ? getDefaultJsVersion() : "");
+        debug = Boolean.parseBoolean(readString(params, PARAM_DEBUG, getDefaultDebug()));
+        layer = Boolean.parseBoolean(readString(params, PARAM_LAYER, getDefaultLayer()));
+        _js = Boolean.parseBoolean(readString(params, PARAM__JS, getDefault_js()));
+        debugTransport = Boolean.parseBoolean(readString(params, PARAM_DEBUG_TRANSPORT, getDefaultDebugTransport()));
+        mockTransport = Boolean.parseBoolean(readString(params, PARAM_MOCK_TRANSPORT, getDefaultMockTransport()));
+        String environmentName = readString(params, PARAM_ENVIRONMENT, null);
         if (!StringUtil.isEmpty(environmentName)) {
             SBTEnvironment parentEnvironment = SBTEnvironmentFactory.get(environmentName);
             if (parentEnvironment == null) {
@@ -389,14 +444,22 @@ public class LibraryRequest {
                 throw new ServletException(message);
             }
             parentEnvironment.prepareEndpoints();
-            environment = new RequestEnvironment(parentEnvironment);
+            environment = new RequestEnvironment(params, parentEnvironment);
         }
         if (environment == null) {
-        	if(defaultEnvironment!=null) {
+        	if(defaultEnvironment != null) {
         		defaultEnvironment.prepareEndpoints();
         	}
-            environment = new RequestEnvironment(defaultEnvironment);
+            environment = new RequestEnvironment(params, defaultEnvironment);
         }
+    }
+    
+    protected String getPathInfo(LibraryRequestParams params) {
+    	if (httpRequest != null) {
+    		return httpRequest.getPathInfo();
+    	} else {
+    		return params.getPathInfo();
+    	}
     }
     
     protected String getDefaultJsLib() {
@@ -441,8 +504,13 @@ public class LibraryRequest {
      * @throws ServletException
      * @throws IOException
      */
-    private String readString(HttpServletRequest req, String paramName, String defaultValue) throws ServletException, IOException {
-        String val = req.getParameter(paramName);
+    private String readString(LibraryRequestParams params, String paramName, String defaultValue) {
+        String val = null;
+        if (httpRequest != null) {
+        	val = httpRequest.getParameter(paramName);
+        } else {
+        	val = params.getParameter(paramName);
+        }
         if (val != null && val.length() > 0) {
             return val;
         }
@@ -483,10 +551,10 @@ public class LibraryRequest {
          * 
          * @param parent
          */
-        RequestEnvironment(SBTEnvironment parent) {
+        RequestEnvironment(LibraryRequestParams params, SBTEnvironment parent) {
             this.parent = parent;
 
-            String endpointsStr = httpRequest.getParameter(PARAM_ENDPOINTS);
+            String endpointsStr = readString(params, PARAM_ENDPOINTS, null);
             if (!StringUtil.isEmpty(endpointsStr)) {
                 Endpoint[] requestEndpoints = parseEndpoints(endpointsStr);
                 if (requestEndpoints != null && requestEndpoints.length > 0) {
@@ -502,7 +570,7 @@ public class LibraryRequest {
                 }
             }
 
-            String propertiesStr = httpRequest.getParameter(PARAM_CLIENT_PROPERTIES);
+            String propertiesStr = readString(params, PARAM_CLIENT_PROPERTIES, null);
             if (!StringUtil.isEmpty(propertiesStr)) {
                 try {
                     Property[] requestProperties = parseProperties(propertiesStr);
@@ -522,7 +590,7 @@ public class LibraryRequest {
                 }
             }
             
-            String runtimesStr = httpRequest.getParameter(PARAM_CLIENT_RUNTIMES);
+            String runtimesStr = readString(params, PARAM_CLIENT_RUNTIMES, null);
             if(!StringUtil.isEmpty(runtimesStr)){
                 setRuntimes(runtimesStr);
             }

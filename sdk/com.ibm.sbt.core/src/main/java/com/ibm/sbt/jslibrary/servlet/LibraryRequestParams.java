@@ -15,6 +15,9 @@
  */
 package com.ibm.sbt.jslibrary.servlet;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.ibm.sbt.jslibrary.SBTEnvironment;
 
 /**
@@ -23,21 +26,26 @@ import com.ibm.sbt.jslibrary.SBTEnvironment;
  */
 public class LibraryRequestParams {
 
-    private SBTEnvironment _environment;
-    private String _toolkitUrl;
-    private String _toolkitJsUrl;
-    private String _serviceUrl;
-    private String _iframeUrl;
-    private String _toolkitExtUrl;
-    private String _toolkitExtJsUrl;
-    private String _libraryUrl;
-    private String _jsLibraryUrl;
+    private SBTEnvironment environment;
+    private String toolkitUrl;
+    private String toolkitJsUrl;
+    private String serviceUrl;
+    private String iframeUrl;
+    private String toolkitExtUrl;
+    private String toolkitExtJsUrl;
+    private String libraryUrl;
+    private String jsLibraryUrl;
+    private String serverUrl;
+    private String contextUrl;
+    private String requestUrl;
+    private String pathInfo;
+    private Map<String, String> parameters = new HashMap<String, String>();
 
     /**
      * @return the defaultEnvironment
      */
     public SBTEnvironment getEnvironment() {
-        return _environment;
+        return environment;
     }
 
     /**
@@ -45,14 +53,14 @@ public class LibraryRequestParams {
      *            the defaultEnvironment to set
      */
     public void setEnvironment(SBTEnvironment environment) {
-        _environment = environment;
+        this.environment = environment;
     }
 
     /**
      * @return the toolkitUrl
      */
     public String getToolkitUrl() {
-        return _toolkitUrl;
+        return toolkitUrl;
     }
 
     /**
@@ -60,14 +68,14 @@ public class LibraryRequestParams {
      *            the toolkitUrl to set
      */
     public void setToolkitUrl(String toolkitUrl) {
-        _toolkitUrl = toolkitUrl;
+        this.toolkitUrl = toolkitUrl;
     }
 
     /**
      * @return the toolkitJsUrl
      */
     public String getToolkitJsUrl() {
-        return _toolkitJsUrl;
+        return toolkitJsUrl;
     }
 
     /**
@@ -75,14 +83,14 @@ public class LibraryRequestParams {
      *            the toolkitJsUrl to set
      */
     public void setToolkitJsUrl(String toolkitJsUrl) {
-        _toolkitJsUrl = toolkitJsUrl;
+        this.toolkitJsUrl = toolkitJsUrl;
     }
 
     /**
      * @return the serviceUrl
      */
     public String getServiceUrl() {
-        return _serviceUrl;
+        return serviceUrl;
     }
 
     /**
@@ -90,14 +98,14 @@ public class LibraryRequestParams {
      *            the serviceUrl to set
      */
     public void setServiceUrl(String serviceUrl) {
-        _serviceUrl = serviceUrl;
+        this.serviceUrl = serviceUrl;
     }
 
     /**
      * @return the iframeUrl
      */
     public String getIframeUrl() {
-        return _iframeUrl;
+        return iframeUrl;
     }
 
     /**
@@ -105,14 +113,14 @@ public class LibraryRequestParams {
      *            the iframeUrl to set
      */
     public void setIframeUrl(String iframeUrl) {
-        _iframeUrl = iframeUrl;
+        this.iframeUrl = iframeUrl;
     }
 
     /**
      * @return the toolkitExtUrl
      */
     public String getToolkitExtUrl() {
-        return _toolkitExtUrl;
+        return toolkitExtUrl;
     }
 
     /**
@@ -120,14 +128,14 @@ public class LibraryRequestParams {
      *            the toolkitExtUrl to set
      */
     public void setToolkitExtUrl(String toolkitExtUrl) {
-        _toolkitExtUrl = toolkitExtUrl;
+        this.toolkitExtUrl = toolkitExtUrl;
     }
 
     /**
      * @return the toolkitExtJsUrl
      */
     public String getToolkitExtJsUrl() {
-        return _toolkitExtJsUrl;
+        return toolkitExtJsUrl;
     }
 
     /**
@@ -135,34 +143,109 @@ public class LibraryRequestParams {
      *            the toolkitExtJsUrl to set
      */
     public void setToolkitExtJsUrl(String toolkitExtJsUrl) {
-        _toolkitExtJsUrl = toolkitExtJsUrl;
+        this.toolkitExtJsUrl = toolkitExtJsUrl;
     }
 
 	/**
 	 * @return the libraryUrl
 	 */
 	public String getLibraryUrl() {
-		return _libraryUrl;
+		return libraryUrl;
 	}
 
 	/**
 	 * @return the jsLibraryUrl
 	 */
 	public String getJsLibraryUrl() {
-		return _jsLibraryUrl;
+		return jsLibraryUrl;
 	}
 	
 	/**
-	 * @param _libraryUrl the libraryUrl to set
+	 * @param libraryUrl the libraryUrl to set
 	 */
 	public void setLibraryUrl(String libraryUrl) {
-		this._libraryUrl = libraryUrl;
+		this.libraryUrl = libraryUrl;
 	}
 
 	/**
-	 * @param _jsLibraryUrl the jsLibraryUrl to set
+	 * @param jsLibraryUrl the jsLibraryUrl to set
 	 */
 	public void setJsLibraryUrl(String jsLibraryUrl) {
-		this._jsLibraryUrl = jsLibraryUrl;
+		this.jsLibraryUrl = jsLibraryUrl;
 	}
+
+	/**
+	 * @return the serverUrl
+	 */
+	public String getServerUrl() {
+		return serverUrl;
+	}
+
+	/**
+	 * @param serverUrl the serverUrl to set
+	 */
+	public void setServerUrl(String serverUrl) {
+		this.serverUrl = serverUrl;
+	}
+
+	/**
+	 * @return the contextUrl
+	 */
+	public String getContextUrl() {
+		return contextUrl;
+	}
+
+	/**
+	 * @param contextUrl the contextUrl to set
+	 */
+	public void setContextUrl(String contextUrl) {
+		this.contextUrl = contextUrl;
+	}
+
+	/**
+	 * @return the requestUrl
+	 */
+	public String getRequestUrl() {
+		return requestUrl;
+	}
+
+	/**
+	 * @param requestUrl the requestUrl to set
+	 */
+	public void setRequestUrl(String requestUrl) {
+		this.requestUrl = requestUrl;
+	}
+
+	/**
+	 * @return the pathInfo
+	 */
+	public String getPathInfo() {
+		return pathInfo;
+	}
+
+	/**
+	 * @param pathInfo the pathInfo to set
+	 */
+	public void setPathInfo(String pathInfo) {
+		this.pathInfo = pathInfo;
+	}
+	
+	/**
+	 * 
+	 * @param name
+	 * @return
+	 */
+	public String getParameter(String name) {
+		return parameters.get(name);
+	}
+	
+	/**
+	 * 
+	 * @param name
+	 * @param value
+	 */
+	public void setParameter(String name, String value) {
+		parameters.put(name, value);
+	}
+	
 }

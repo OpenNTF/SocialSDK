@@ -180,6 +180,27 @@ abstract public class AbstractLibrary {
 		}
 		return true;
 	}
+	
+	/**
+	 * 
+	 * @param request
+	 * @return
+	 * @throws LibraryException
+	 */
+	public String generateJavaScript(LibraryRequest request) throws LibraryException {
+		try {
+			// populate list of endpoint/properties
+			Map<String, JsonObject> endpoints = populateEndpoints(request);
+			JsonObject properties = populateProperties(request);
+			minify = !request.isDebug();
+			nl = minify ? "" : NL;
+
+			// concrete library generates the script
+			return generateJavaScript(request, endpoints, properties);
+		} catch (Exception e) {
+			throw new LibraryException(e);
+		}
+	}
 
 	/**
 	 * @param request
@@ -195,7 +216,7 @@ abstract public class AbstractLibrary {
 			Map<String, JsonObject> endpoints = populateEndpoints(request);
 			JsonObject properties = populateProperties(request);
 			minify = !request.isDebug();
-			nl=minify?"":NL;
+			nl = minify ? "" : NL;
 			// write response
 			HttpServletResponse response = request.getHttpResponse();
 			PrintWriter writer = new PrintWriter(new OutputStreamWriter(response.getOutputStream(), UTF8));

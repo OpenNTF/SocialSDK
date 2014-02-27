@@ -33,7 +33,8 @@ public class ReadProfilePhoto extends BaseServiceTest {
 
     @Test
     public void testNoError() {
-    	addSnippetParam("sample.id1", environment.getProperty("sample.id1")); 
+    	createContext();
+    	addSnippetParam("sample.id1", environment.getCurrentUserUuid()); 
         ResultPage resultPage = launchSnippet("Social_Profiles_REST_Read_Profile_Photo", AuthType.NONE);
         WebElement contentEl = resultPage.getWebElement().findElement(By.id("content"));
         WebElement imgEl = contentEl.findElement(By.tagName("img"));

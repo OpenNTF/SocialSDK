@@ -133,7 +133,7 @@ define([ "../../../declare",
          * @returns an instance of a  profile gird renderer.
          */
         createDefaultRenderer : function(args) {
-            return new ProfileTagsGridRenderer(args);
+            return new ProfileTagsGridRenderer(args,this);
         },
         
         /**

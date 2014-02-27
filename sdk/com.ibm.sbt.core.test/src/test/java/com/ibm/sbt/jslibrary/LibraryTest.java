@@ -15,8 +15,6 @@
  */
 package com.ibm.sbt.jslibrary;
 
-import java.util.Map;
-
 import junit.framework.Assert;
 
 import org.junit.Test;
@@ -25,11 +23,7 @@ import com.ibm.commons.runtime.Application;
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.runtime.RuntimeFactory;
 import com.ibm.commons.runtime.impl.app.RuntimeFactoryStandalone;
-import com.ibm.commons.util.io.json.JsonObject;
-import com.ibm.sbt.jslibrary.SBTEnvironment.Endpoint;
-import com.ibm.sbt.jslibrary.SBTEnvironment.Property;
 import com.ibm.sbt.jslibrary.servlet.DojoLibrary;
-import com.ibm.sbt.jslibrary.servlet.LibraryException;
 import com.ibm.sbt.jslibrary.servlet.LibraryRequest;
 import com.ibm.sbt.jslibrary.servlet.LibraryRequestParams;
 
@@ -44,14 +38,6 @@ public class LibraryTest {
 	private Context context;
 	private Application application;
 	
-    static final String DEFAULT_TOOLKIT_URL = "%local_server%/sbt"; //$NON-NLS-1$
-    static final String DEFAULT_TOOLKIT_EXT_URL = null;
-    static final String DEFAULT_JS_LIBRARY_URL = "%local_server%/sbt/js/libs"; //$NON-NLS-1$
-    static final String DEFAULT_JAVASCRIPT_PATH = "/js/sdk"; //$NON-NLS-1$
-    static final String DEFAULT_SERVICE_URL = "%local_application%/service"; //$NON-NLS-1$
-    static final String DEFAULT_LIBRARY_URL = "%local_application%/library";
-    static final String DEFAULT_IFRAME_PATH = "/xhr/IFrameContent.html"; //$NON-NLS-1$
-	
 	@Test
     public void testDojoLibrary() throws Exception {
     	try {
@@ -59,19 +45,11 @@ public class LibraryTest {
     		
 	    	DojoLibrary library = new DojoLibrary();
 	    	
-	    	SBTEnvironment environment = SBTEnvironmentFactory.get("defaultEnvironment");
-	    	
 	        // load initialization parameters
 	    	LibraryRequestParams params = new LibraryRequestParams();
-	    	params.setEnvironment(environment);
+	    	params.initDefaults();
 	    	params.setParameter("debug", "true");
-	    	params.setParameter("_js", "true");
-	        params.setToolkitUrl(DEFAULT_TOOLKIT_URL);
-	        params.setToolkitJsUrl(DEFAULT_JS_LIBRARY_URL);
-	        params.setServiceUrl(DEFAULT_SERVICE_URL);
-	        params.setLibraryUrl(DEFAULT_LIBRARY_URL);
-	        params.setJsLibraryUrl(DEFAULT_JS_LIBRARY_URL);
-	        params.setIframeUrl(DEFAULT_IFRAME_PATH);
+	    	params.setParameter("_js", "false");
 	        params.setRequestUrl("https://localhost:8443/sbt.sample.web/library?lib=dojo&ver=1.4.3&debug=true");
 	        params.setServerUrl("https://localhost:8443");
 	        params.setContextUrl("https://localhost:8443/sbt.sample.web");
@@ -87,7 +65,7 @@ public class LibraryTest {
     		e.printStackTrace(System.err);
     		Assert.fail("Error generating javascript caused by:"+e.getMessage());
     	} finally {
-    		//destroyContext();
+    		destroyContext();
     	}
     }
 	

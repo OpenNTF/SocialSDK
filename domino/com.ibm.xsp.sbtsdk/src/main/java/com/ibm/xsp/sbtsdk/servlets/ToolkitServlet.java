@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -29,6 +29,7 @@ import com.ibm.commons.runtime.RuntimeConstants;
 import com.ibm.commons.runtime.util.UrlUtil;
 import com.ibm.sbt.jslibrary.servlet.DojoLibrary;
 import com.ibm.sbt.jslibrary.servlet.JQueryLibrary;
+import com.ibm.sbt.jslibrary.servlet.LibraryException;
 import com.ibm.sbt.jslibrary.servlet.LibraryRequest;
 import com.ibm.sbt.jslibrary.servlet.LibraryRequestParams;
 import com.ibm.sbt.jslibrary.servlet.LibraryServlet;
@@ -42,7 +43,7 @@ public class ToolkitServlet extends LibraryServlet {
 		public DominoLibraryRequest(HttpServletRequest req, HttpServletResponse resp) {
 			super(req, resp);
 		}
-	    public void init(LibraryRequestParams params) throws ServletException, IOException {
+	    public void init(LibraryRequestParams params) throws LibraryException {
 			//public void init(SBTEnvironment defaultEnvironment, String toolkitUrl, String toolkitJsUrl, String proxyUrl, String iframeUrl) throws ServletException, IOException {
 			// Calculate the toolkit URL
 	    	//http://priand2/xsp/.ibmxspres/.sbtsdk/sbt/Cache.js

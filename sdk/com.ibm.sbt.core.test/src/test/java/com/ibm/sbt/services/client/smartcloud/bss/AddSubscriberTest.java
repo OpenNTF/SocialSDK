@@ -35,7 +35,7 @@ public class AddSubscriberTest extends BaseBssTest {
         	          .setFamilyName("Ninty");
         	System.out.println(subscriber.toJson());
     		
-        	getSubscriberManagementService().addSubsciber(subscriber);
+        	getSubscriberManagementService().addSubscriber(subscriber);
 
     		Assert.fail("Expected bad request response");
     		
@@ -80,7 +80,7 @@ public class AddSubscriberTest extends BaseBssTest {
     				  .setPhoto("");
         	System.out.println(subscriber.toJson());
     		
-        	JsonJavaObject response = getSubscriberManagementService().addSubsciber(subscriber);
+        	JsonJavaObject response = getSubscriberManagementService().addSubscriber(subscriber);
         	long subscriberId = response.getAsLong("Long");
         	Assert.assertNotNull("Invalid subscriber id", subscriberId);
         	System.out.println(subscriberId);

@@ -18,6 +18,7 @@ package com.ibm.sbt.services.client.smartcloud.bss;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
 
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.json.JsonException;
@@ -363,4 +364,37 @@ public class CustomerManagementService extends BssService {
 		}
     }
         
+    
+    /**
+     * Wait for the customer to change to the specified state and then call the state change listener.
+     * 
+     * @param customerId
+     * @param state
+     * @param maxAttempts
+     * @param waitInterval
+     * @param listener
+     * 
+     * @throws BssException 
+     */
+    public boolean waitCustomerState(String customerId, String state, int maxAttempts, long waitInterval, StateChangeListener listener) throws BssException {
+    	for (int i=0; i<maxAttempts; i++) {
+    		JsonEntity subscription = getCustomerById(customerId);
+    		String currentState = subscription.getAsString("Customer/CustomerState");
+    		if (state.equalsIgnoreCase(currentState)) {
+    			try {
+    				listener.stateChanged(subscription);
+    				return true;
+    			} catch (Exception e) {
+    				logger.log(Level.WARNING, "Error invoking customer state listener", e);
+    			}
+    		}
+    		
+    		// wait the specified interval
+			try {
+				Thread.sleep(waitInterval);
+			} catch (InterruptedException ie) {}
+    	}
+    	return false;
+    }
+    
 }

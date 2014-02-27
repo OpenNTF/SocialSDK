@@ -17,6 +17,7 @@ package com.ibm.sbt.test.controls.grid.profiles;
 
 import static org.junit.Assert.assertTrue;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import com.ibm.sbt.automation.core.test.BaseGridTest;
@@ -31,10 +32,17 @@ public class ProfileTagSearch extends BaseGridTest {
 	protected boolean isEnvironmentValid() {
 		return super.isEnvironmentValid() && !environment.isSmartCloud();
 	}
+	
+	@Before
+	public void createTag(){
+		addSnippetParam("sample.email1", getProperty("sample.email1"));
+		addSnippetParam("sample.email2", getProperty("sample.email2"));
+		super.launchSnippet("Social_Profiles_Add_Tags",this.authType.AUTO_DETECT);
+	}
 
     @Test
     public void testSearchGrid() {
-    	addSnippetParam("sample.profileTags", "it");
+    	addSnippetParam("sample.profileTags", "newTestTag1");
         assertTrue("Expected the test to generate a grid", checkGrid("Social_Profiles_Controls_Profile_Tag_Search",true));
     }																
 

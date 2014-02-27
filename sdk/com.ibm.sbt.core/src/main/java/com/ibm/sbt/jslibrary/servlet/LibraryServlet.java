@@ -38,94 +38,17 @@ import com.ibm.sbt.jslibrary.SBTEnvironment;
  */
 public class LibraryServlet extends BaseToolkitServlet {
 
-    private LibraryRequestParams _defaultParams = new LibraryRequestParams();
+    private LibraryRequestParams defaultParams = new LibraryRequestParams();
 
     private final Object createEnvironmentLock = new Object();
 
     private List<Object> libraries;
 
     /**
-     * Servlet parameter which allows the location of the toolkit to be
-     * overridden, the default value is %local_server%/sbt. %local_server% is
-     * dynamically replaced by http://<server>:<port>
-     */
-    static public final String PARAM_TOOLKIT_URL = "toolkitUrl"; //$NON-NLS-1$
-
-    /**
-     * Servlet parameter which allows the location of the toolkit extensions to
-     * be overridden, the default value is %local_server%/sbtx. %local_server%
-     * is dynamically replaced by http://<server>:<port>
-     */
-    static public final String PARAM_TOOLKIT_EXT_URL = "toolkitExtUrl"; //$NON-NLS-1$
-
-    /**
-     * Servlet parameter which allows the location of the javascript libraries to
-     * be overridden, the default value is %local_server%/sbt/js/libs. %local_server%
-     * is dynamically replaced by http://<server>:<port>
-     */
-    static public final String PARAM_JS_LIBRARY_URL = "jsLibraryUrl"; //$NON-NLS-1$
-    
-    /**
-     * Servlet parameter which allows the path to the JavaScript library to be
-     * overridden, the default value is /js/sdk
-     */
-    static public final String PARAM_JAVASCRIPT_PATH = "javaScriptPath"; //$NON-NLS-1$
-
-    /**
-     * Servlet parameter which allows the location of the service servlet to be
-     * overridden, the default value is %local_application%/service
-     */
-    static public final String PARAM_SERVICE_URL = "serviceUrl"; //$NON-NLS-1$
-    
-    /**
-     * Servlet parameter which allows the location of the service servlet to be
-     * overridden, the default value is %local_application%/library
-     */
-    static public final String PARAM_LIBRARY_URL = "libraryUrl"; //$NON-NLS-1$
-
-    /**
-     * Servlet parameter which allows the location of the IFrame content
-     * template to be overridden, the default value is /xhr/IFrameContent.html
-     */
-    static public final String PARAM_IFRAME_PATH = "iframePath"; //$NON-NLS-1$
-
-    /**
-     * Servlet parameter which allows the list of default endpoints to be
-     * overridden, the default value is connections,smartcloud,domino,sametime
-     */
-    static public final String PARAM_ENDPOINTS = "endpoints"; //$NON-NLS-1$
-
-    /**
-     * Servlet parameter which allows the list of default client properties to
-     * be overridden, the default value is a null string
-     */
-    static public final String PARAM_CLIENT_PROPERTIES = "clientProperties"; //$NON-NLS-1$
-
-    /**
-     * Servlet parameter which allows the name of the default environment to be
-     * overridden, the default value is defaultEnvironment
-     */
-    static public final String PARAM_ENVIRONMENT = "environment"; //$NON-NLS-1$
-
-    /**
      * Name of the service creating the libraries.
      */
     static public final String LIBRARY_SERVICE_TYPE = "com.ibm.sbt.jslibrary"; //$NON-NLS-1$
     
-    //
-    // Default values for library servlet parameters
-    //
-    static public final String DEFAULT_TOOLKIT_URL = "%local_server%/sbt"; //$NON-NLS-1$
-    static public final String DEFAULT_TOOLKIT_EXT_URL = null;
-    static public final String DEFAULT_JS_LIBRARY_URL = "%local_server%/sbt/js/libs"; //$NON-NLS-1$
-    static public final String DEFAULT_JAVASCRIPT_PATH = "/js/sdk"; //$NON-NLS-1$
-    static public final String DEFAULT_SERVICE_URL = "%local_application%/service"; //$NON-NLS-1$
-    static public final String DEFAULT_LIBRARY_URL = "%local_application%/library";
-    static public final String DEFAULT_IFRAME_PATH = "/xhr/IFrameContent.html"; //$NON-NLS-1$
-    static public final String DEFAULT_ENDPOINTS = "connections,smartcloud,domino,sametime"; //$NON-NLS-1$
-    static public final String DEFAULT_CLIENT_PROPERTIES = null; //$NON-NLS-1$
-    static public final String DEFAULT_ENVIRONMENT = "defaultEnvironment"; //$NON-NLS-1$
-
     static final String sourceClass = LibraryServlet.class.getName();
     static final Logger logger = Logger.getLogger(sourceClass);
 
@@ -143,27 +66,33 @@ public class LibraryServlet extends BaseToolkitServlet {
 
         // default parameters
         Application application = Application.get();
-        String defaultToolkitUrl = getAppParameter(application, PARAM_TOOLKIT_URL, DEFAULT_TOOLKIT_URL);
-        String defaultToolkitExtUrl = getAppParameter(application, PARAM_TOOLKIT_EXT_URL, DEFAULT_TOOLKIT_EXT_URL);
-        String defaultJsLibraryUrl = getAppParameter(application, PARAM_JS_LIBRARY_URL, DEFAULT_JS_LIBRARY_URL);
-        String defaultJavaScriptPath = getAppParameter(application, PARAM_JAVASCRIPT_PATH, DEFAULT_JAVASCRIPT_PATH);
-        String defaultServiceUrl = getAppParameter(application, PARAM_SERVICE_URL, DEFAULT_SERVICE_URL);
-        String defaultLibraryUrl = getAppParameter(application, PARAM_LIBRARY_URL, DEFAULT_LIBRARY_URL);
-        String defaultIFramePath = getAppParameter(application, PARAM_IFRAME_PATH, DEFAULT_IFRAME_PATH);
+        String defaultToolkitUrl = getAppParameter(application, LibraryRequestParams.PARAM_TOOLKIT_URL, LibraryRequestParams.DEFAULT_TOOLKIT_URL);
+        String defaultToolkitExtUrl = getAppParameter(application, LibraryRequestParams.PARAM_TOOLKIT_EXT_URL, LibraryRequestParams.DEFAULT_TOOLKIT_EXT_URL);
+        String defaultJsLibraryUrl = getAppParameter(application, LibraryRequestParams.PARAM_JS_LIBRARY_URL, LibraryRequestParams.DEFAULT_JS_LIBRARY_URL);
+        String defaultJavaScriptPath = getAppParameter(application, LibraryRequestParams.PARAM_JAVASCRIPT_PATH, LibraryRequestParams.DEFAULT_JAVASCRIPT_PATH);
+        String defaultServiceUrl = getAppParameter(application, LibraryRequestParams.PARAM_SERVICE_URL, LibraryRequestParams.DEFAULT_SERVICE_URL);
+        String defaultLibraryUrl = getAppParameter(application, LibraryRequestParams.PARAM_LIBRARY_URL, LibraryRequestParams.DEFAULT_LIBRARY_URL);
+        String defaultIFramePath = getAppParameter(application, LibraryRequestParams.PARAM_IFRAME_PATH, LibraryRequestParams.DEFAULT_IFRAME_PATH);
 
         // load initialisation parameters
-        _defaultParams.setToolkitUrl(getInitParameter(config, PARAM_TOOLKIT_URL, defaultToolkitUrl));
-        _defaultParams.setToolkitJsUrl(PathUtil.concat(_defaultParams.getToolkitUrl(), getInitParameter(config, PARAM_JAVASCRIPT_PATH, defaultJavaScriptPath), '/'));
-        _defaultParams.setToolkitExtUrl(getInitParameter(config, PARAM_TOOLKIT_EXT_URL, defaultToolkitExtUrl));
-        _defaultParams.setToolkitExtJsUrl(PathUtil.concat(_defaultParams.getToolkitExtUrl(), getInitParameter(config, PARAM_JAVASCRIPT_PATH, defaultJavaScriptPath), '/'));
-        _defaultParams.setServiceUrl(getInitParameter(config, PARAM_SERVICE_URL, defaultServiceUrl));
-        _defaultParams.setLibraryUrl(getInitParameter(config, PARAM_LIBRARY_URL, defaultLibraryUrl));
-        _defaultParams.setJsLibraryUrl(getInitParameter(config, PARAM_JS_LIBRARY_URL, defaultJsLibraryUrl));
-        _defaultParams.setIframeUrl(PathUtil.concat(_defaultParams.getToolkitUrl(), getInitParameter(config, PARAM_IFRAME_PATH, defaultIFramePath), '/'));
+        defaultParams.setToolkitUrl(getInitParameter(config, LibraryRequestParams.PARAM_TOOLKIT_URL, defaultToolkitUrl));
+        defaultParams.setToolkitJsUrl(PathUtil.concat(defaultParams.getToolkitUrl(), getInitParameter(config, LibraryRequestParams.PARAM_JAVASCRIPT_PATH, defaultJavaScriptPath), '/'));
+        defaultParams.setToolkitExtUrl(getInitParameter(config, LibraryRequestParams.PARAM_TOOLKIT_EXT_URL, defaultToolkitExtUrl));
+        defaultParams.setToolkitExtJsUrl(PathUtil.concat(defaultParams.getToolkitExtUrl(), getInitParameter(config, LibraryRequestParams.PARAM_JAVASCRIPT_PATH, defaultJavaScriptPath), '/'));
+        defaultParams.setServiceUrl(getInitParameter(config, LibraryRequestParams.PARAM_SERVICE_URL, defaultServiceUrl));
+        defaultParams.setLibraryUrl(getInitParameter(config, LibraryRequestParams.PARAM_LIBRARY_URL, defaultLibraryUrl));
+        defaultParams.setJsLibraryUrl(getInitParameter(config, LibraryRequestParams.PARAM_JS_LIBRARY_URL, defaultJsLibraryUrl));
+        defaultParams.setIframeUrl(PathUtil.concat(defaultParams.getToolkitUrl(), getInitParameter(config, LibraryRequestParams.PARAM_IFRAME_PATH, defaultIFramePath), '/'));
+
         // create the libraries
         libraries = readLibraries(application);
     }
     
+	/**
+	 * 
+	 * @param application
+	 * @return
+	 */
     protected List<Object> readLibraries(Application application) {
         return application.findServices(LIBRARY_SERVICE_TYPE);
     }
@@ -185,7 +114,7 @@ public class LibraryServlet extends BaseToolkitServlet {
             Context context = Context.get();
             SBTEnvironment environment = getDefaultEnvironment(context);
             LibraryRequest request = createLibraryRequest(req, resp);
-            request.init(_defaultParams);
+            request.init(defaultParams);
 
             AbstractLibrary library = createLibrary(request);
             if (library == null) {
@@ -229,34 +158,34 @@ public class LibraryServlet extends BaseToolkitServlet {
      * @return
      */
     protected SBTEnvironment getDefaultEnvironment(Context context) {
-        if (_defaultParams.getEnvironment() != null) {
-            return _defaultParams.getEnvironment();
+        if (defaultParams.getEnvironment() != null) {
+            return defaultParams.getEnvironment();
         }
 
         synchronized (createEnvironmentLock) {
             // create a default environment if needed
-            if (_defaultParams.getEnvironment() == null) {
+            if (defaultParams.getEnvironment() == null) {
                 Application application = context.getApplication();
-                String environmentName = getAppParameter(application, PARAM_ENVIRONMENT, DEFAULT_ENVIRONMENT);
+                String environmentName = getAppParameter(application, LibraryRequestParams.PARAM_ENVIRONMENT, LibraryRequestParams.DEFAULT_ENVIRONMENT);
                 SBTEnvironment environment = (SBTEnvironment) context.getBean(environmentName);
                 if (environment == null) {
                     ServletConfig config = getServletConfig();
-                    String defaultEndpoints = getAppParameter(application, PARAM_ENDPOINTS, DEFAULT_ENDPOINTS);
-                    String endpoints = getInitParameter(config, PARAM_ENDPOINTS, defaultEndpoints);
-                    String defaultClientProps = getAppParameter(application, PARAM_CLIENT_PROPERTIES, DEFAULT_CLIENT_PROPERTIES);
-                    String clientProps = getInitParameter(config, PARAM_CLIENT_PROPERTIES, defaultClientProps);
+                    String defaultEndpoints = getAppParameter(application, LibraryRequestParams.PARAM_ENDPOINTS, LibraryRequestParams.DEFAULT_ENDPOINTS);
+                    String endpoints = getInitParameter(config, LibraryRequestParams.PARAM_ENDPOINTS, defaultEndpoints);
+                    String defaultClientProps = getAppParameter(application, LibraryRequestParams.PARAM_CLIENT_PROPERTIES, LibraryRequestParams.DEFAULT_CLIENT_PROPERTIES);
+                    String clientProps = getInitParameter(config, LibraryRequestParams.PARAM_CLIENT_PROPERTIES, defaultClientProps);
 
-                    environmentName = getInitParameter(config, PARAM_ENVIRONMENT, DEFAULT_ENVIRONMENT);
+                    environmentName = getInitParameter(config, LibraryRequestParams.PARAM_ENVIRONMENT, LibraryRequestParams.DEFAULT_ENVIRONMENT);
                     environment = new SBTEnvironment();
                     environment.setName(environmentName);
                     environment.setEndpoints(endpoints);
                     environment.setProperties(clientProps);
                 }
-                _defaultParams.setEnvironment(environment);
+                defaultParams.setEnvironment(environment);
             }
         }
 
-        return _defaultParams.getEnvironment();
+        return defaultParams.getEnvironment();
     }
 
     /**

@@ -34,6 +34,7 @@ public class ProfileSearch extends BaseGridTest {
 
     @Test
     public void testSearchGrid() {
+    	addSnippetParam("sample.userId1" , getProperty("sample.id1"));
         assertTrue("Expected the test to generate a grid", checkGrid("Social_Profiles_Controls_Profile_Search",true));
     }																
 

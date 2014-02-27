@@ -47,7 +47,7 @@ define(["../../../declare", "../../../dom","../../../lang",
           * @method constructor
           * @param args
           */
-         constructor: function(args) {
+         constructor: function(args, grid) {
                  if (args.type == "list") {
                  this.template = tagListTmpl;
                  this.listHeaderTemplate = tagListHdrTmpl;

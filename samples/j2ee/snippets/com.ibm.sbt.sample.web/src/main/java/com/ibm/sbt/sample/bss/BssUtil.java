@@ -102,7 +102,7 @@ public class BssUtil {
     	System.out.println(subscriber.toJson());
 		
     	SubscriberManagementService subscriberManagement = new SubscriberManagementService(endpoint);
-    	JsonJavaObject response = subscriberManagement.addSubsciber(subscriber);
+    	JsonJavaObject response = subscriberManagement.addSubscriber(subscriber);
     	return String.valueOf(response.getAsLong("Long"));
     }
     

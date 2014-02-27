@@ -47,6 +47,7 @@ public class SuspendCustomerTest extends BaseBssTest {
 			JsonJavaObject customerObject = rootObject.getAsObject("Customer");
 			System.out.println(customerObject);
 			Assert.assertNotNull("No SuspensionDate", customerObject.get("SuspensionDate"));
+			Assert.assertEquals("SUSPENDED", customerObject.get("CustomerState"));
     	} catch (BssException be) {
     		JsonJavaObject jsonObject = be.getResponseJson();
     		System.err.println(jsonObject);

@@ -104,8 +104,8 @@ public class SubscriberManagementService extends BssService {
      * @throws JsonException
      * @throws IOException 
      */
-    public JsonJavaObject addSubsciber(SubscriberJsonBuilder subscriber) throws BssException, IOException, JsonException {
-    	return addSubsciber(subscriber.toJson());
+    public JsonJavaObject addSubscriber(SubscriberJsonBuilder subscriber) throws BssException, IOException, JsonException {
+    	return addSubscriber(subscriber.toJson());
     }
 
     /**
@@ -117,9 +117,9 @@ public class SubscriberManagementService extends BssService {
      * @throws JsonException
      * @throws IOException 
      */
-    public JsonJavaObject addSubsciber(String customerJson) throws BssException, JsonException, IOException {
+    public JsonJavaObject addSubscriber(String customerJson) throws BssException, JsonException, IOException {
     	JsonJavaObject jsonObject = (JsonJavaObject)JsonParser.fromJson(JsonJavaFactory.instanceEx, customerJson);
-    	return addSubsciber(jsonObject);
+    	return addSubscriber(jsonObject);
     }
 
     /**
@@ -130,7 +130,7 @@ public class SubscriberManagementService extends BssService {
      * @throws BssException
      * @throws IOException 
      */
-    public JsonJavaObject addSubsciber(JsonJavaObject customerJson) throws BssException {
+    public JsonJavaObject addSubscriber(JsonJavaObject customerJson) throws BssException {
 		try {
 			Response serverResponse = createData(API_RESOURCE_SUBSCRIBER, null, JsonHeader, customerJson, ClientService.FORMAT_JSON);
 			return (JsonJavaObject)serverResponse.getData();
@@ -185,7 +185,7 @@ public class SubscriberManagementService extends BssService {
      * @return
      * @throws BssException
      */
-    public void deleteSubsciber(String subscriberId) throws BssException {
+    public void deleteSubscriber(String subscriberId) throws BssException {
     	try {
     		String serviceUrl = API_RESOURCE_SUBSCRIBER + "/" + subscriberId;
     		Response response = deleteData(serviceUrl, null, null);

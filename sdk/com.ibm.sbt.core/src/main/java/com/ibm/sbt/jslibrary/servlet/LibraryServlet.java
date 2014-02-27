@@ -115,16 +115,16 @@ public class LibraryServlet extends BaseToolkitServlet {
     //
     // Default values for library servlet parameters
     //
-    static final String DEFAULT_TOOLKIT_URL = "%local_server%/sbt"; //$NON-NLS-1$
-    static final String DEFAULT_TOOLKIT_EXT_URL = null;
-    static final String DEFAULT_JS_LIBRARY_URL = "%local_server%/sbt/js/libs"; //$NON-NLS-1$
-    static final String DEFAULT_JAVASCRIPT_PATH = "/js/sdk"; //$NON-NLS-1$
-    static final String DEFAULT_SERVICE_URL = "%local_application%/service"; //$NON-NLS-1$
-    static final String DEFAULT_LIBRARY_URL = "%local_application%/library";
-    static final String DEFAULT_IFRAME_PATH = "/xhr/IFrameContent.html"; //$NON-NLS-1$
-    static final String DEFAULT_ENDPOINTS = "connections,smartcloud,domino,sametime"; //$NON-NLS-1$
-    static final String DEFAULT_CLIENT_PROPERTIES = null; //$NON-NLS-1$
-    static final String DEFAULT_ENVIRONMENT = "defaultEnvironment"; //$NON-NLS-1$
+    static public final String DEFAULT_TOOLKIT_URL = "%local_server%/sbt"; //$NON-NLS-1$
+    static public final String DEFAULT_TOOLKIT_EXT_URL = null;
+    static public final String DEFAULT_JS_LIBRARY_URL = "%local_server%/sbt/js/libs"; //$NON-NLS-1$
+    static public final String DEFAULT_JAVASCRIPT_PATH = "/js/sdk"; //$NON-NLS-1$
+    static public final String DEFAULT_SERVICE_URL = "%local_application%/service"; //$NON-NLS-1$
+    static public final String DEFAULT_LIBRARY_URL = "%local_application%/library";
+    static public final String DEFAULT_IFRAME_PATH = "/xhr/IFrameContent.html"; //$NON-NLS-1$
+    static public final String DEFAULT_ENDPOINTS = "connections,smartcloud,domino,sametime"; //$NON-NLS-1$
+    static public final String DEFAULT_CLIENT_PROPERTIES = null; //$NON-NLS-1$
+    static public final String DEFAULT_ENVIRONMENT = "defaultEnvironment"; //$NON-NLS-1$
 
     static final String sourceClass = LibraryServlet.class.getName();
     static final Logger logger = Logger.getLogger(sourceClass);

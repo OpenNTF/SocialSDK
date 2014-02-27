@@ -66,6 +66,9 @@ public class BaseVCardTest extends BaseTest{
 	 * @return the result page
 	 */
 	protected VCardResultPage launchVCard(String snippetId) {
+		createContext();
+		addSnippetParam("sample.id1", environment.getCurrentUserUuid());
+		addSnippetParam("sample.displayName1", environment.getCurrentUserDisplayName()); 
         ResultPage resultPage = super.launchSnippet(snippetId, authType);
         return wrapResultPage(resultPage);
 	}

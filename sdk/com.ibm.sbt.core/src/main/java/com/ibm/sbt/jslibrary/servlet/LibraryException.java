@@ -24,10 +24,21 @@ public class LibraryException extends Exception {
     private static final long serialVersionUID = 1L;
 
     /**
+     * Construct a LibraryException
      * 
      * @param cause
      */
     public LibraryException(Exception cause) {
         super(cause);
+    }
+
+    /**
+     * Construct a LibraryException
+     * 
+     * @param message
+     * @param cause
+     */
+    public LibraryException(String message, Exception cause) {
+        super(message, cause);
     }
 }

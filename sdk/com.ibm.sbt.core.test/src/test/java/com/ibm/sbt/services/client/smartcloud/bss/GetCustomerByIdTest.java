@@ -32,7 +32,7 @@ public class GetCustomerByIdTest extends BaseBssTest {
     		String customerId = registerCustomer();
 
     		JsonEntity jsonEntity = getCustomerManagementService().getCustomerById(customerId);
-			System.out.println(jsonEntity.toJsonString());
+			System.out.println(jsonEntity.toJsonString(false));
 			Assert.assertNotNull("Unable to retrieve customer: "+customerId, jsonEntity);
 				
 			Assert.assertEquals(customerId, getCustomerManagementService().getCustomerId(jsonEntity.getJsonObject()));

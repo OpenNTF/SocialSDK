@@ -199,7 +199,7 @@ public class BaseBssTest {
     				  .setPhoto("");
         	System.out.println(subscriber.toJson());
     		
-        	JsonJavaObject response = getSubscriberManagementService().addSubsciber(subscriber);
+        	JsonJavaObject response = getSubscriberManagementService().addSubscriber(subscriber);
         	String subscriberId = String.valueOf(response.getAsLong("Long"));
         	Assert.assertNotNull("Invalid subscriber id", subscriberId);
         	return subscriberId;
@@ -379,7 +379,7 @@ public class BaseBssTest {
     
     public void deleteSubscriber(String subscriberId) {
     	try {
-    		getSubscriberManagementService().deleteSubsciber(subscriberId);
+    		getSubscriberManagementService().deleteSubscriber(subscriberId);
     	} catch (Exception e) {
     		Assert.fail("Error deleting subscriber caused by: "+e.getMessage());    		
     	}

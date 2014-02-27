@@ -34,7 +34,7 @@ public class ProfileTagSearch extends BaseGridTest {
 
     @Test
     public void testSearchGrid() {
-    	addSnippetParam("sample.profileTags", "it");
+    	addSnippetParam("sample.profileTags", "manager");
         assertTrue("Expected the test to generate a grid", checkGrid("Social_Profiles_Controls_Profile_Tag_Search",true));
     }																
 

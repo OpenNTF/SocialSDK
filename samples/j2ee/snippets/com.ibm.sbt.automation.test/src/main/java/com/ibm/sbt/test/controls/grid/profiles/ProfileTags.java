@@ -42,11 +42,15 @@ public class ProfileTags extends BaseTest {
 
     @Test
     public void testTaggedBy() {
+    	addSnippetParam("sample.email1" , getProperty("sample.email2"));
+    	addSnippetParam("sample.email2" , getProperty("sample.email1"));
+    	addSnippetParam("sample.displayName2" , getProperty("sample.displayName1"));
         assertTrue("Expected the test to generate a list", checkList("Social_Profiles_Controls_Profile_Tagged_By"));
     }																
 
     @Test
     public void testTagsFor() {
+    	addSnippetParam("sample.email1" , getProperty("sample.email2"));
         assertTrue("Expected the test to generate a list", checkList("Social_Profiles_Controls_Profile_Tags_For"));
     }																
 

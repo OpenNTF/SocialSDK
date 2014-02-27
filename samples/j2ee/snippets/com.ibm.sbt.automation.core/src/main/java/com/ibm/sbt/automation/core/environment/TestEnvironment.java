@@ -428,6 +428,7 @@ public abstract class TestEnvironment extends com.ibm.sbt.test.lib.TestEnvironme
 		String windowHandle = webDriver.getWindowHandle();
 
 		webDriver.get(launchUrl);
+		
 		WebElement webElement = authenticate(baseTest, null, windowHandle);
 
 		if (baseTest.getAuthType() != AuthType.NONE
@@ -464,7 +465,7 @@ public abstract class TestEnvironment extends com.ibm.sbt.test.lib.TestEnvironme
 		if (authType == null) {
 			authType = baseTest.getAuthType();
 		}
-
+		logger.info("Auth Type for snippet " + authType);
 		switch (authType) {
 		case NONE:
 			break;
@@ -637,6 +638,7 @@ public abstract class TestEnvironment extends com.ibm.sbt.test.lib.TestEnvironme
 	public AuthType detectAuthType(BaseTest baseTest, WebElement loginForm) {
 		// if results are available then no need to check for authentication
 		if (baseTest.isResultsReady()) {
+			logger.info("results are ready, no auth necessary");
 			return AuthType.NONE;
 		}
 

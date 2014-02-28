@@ -521,18 +521,6 @@
 			<version>1.0.0-SNAPSHOT</version>
 			<type>zip</type>
 		</dependency>
-		<dependency>
-			<groupId>com.ibm.sbt</groupId>
-
-			<version>1.0.0-SNAPSHOT</version>
-			<type>zip</type>
-		</dependency>
-		<dependency>
-			<groupId>com.ibm.sbt</groupId>
-
-			<version>1.0.0-SNAPSHOT</version>
-			<type>zip</type>
-		</dependency>
 
 
 

@@ -25,7 +25,6 @@
 				<module>deps</module>
 				<module>sdk</module>
 				<module>samples</module>
-				<module>php</module>
 				<module>assembly</module>
 			</modules>
 		</profile>
@@ -43,7 +42,6 @@
 				<module>sdk</module>
 				<module>domino</module>
 				<module>samples</module>
-				<module>php</module>
 				<module>assembly</module>
 			</modules>
 			<repositories>

@@ -1,1 +1,0 @@
-<input style="display: none;" size="50" type="text" id="consumer_key" name="consumer_key" value="" />

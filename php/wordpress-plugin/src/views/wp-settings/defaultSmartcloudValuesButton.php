@@ -1,1 +1,0 @@
-<a href="#" style="display: none;" onclick="default_values_smartcloud();" name="btn_default_smartcloud_values" id="btn_default_smartcloud_values">Default Values</a>

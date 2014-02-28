@@ -1,1 +1,0 @@
-<input style="display: none;" size="50" type="text" id="endpoint_url" name="endpoint_url" value="" />

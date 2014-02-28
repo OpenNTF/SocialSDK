@@ -1,1 +1,0 @@
-This directory should not be deleted as it prevents Eclipse hot deployment from failing during development.

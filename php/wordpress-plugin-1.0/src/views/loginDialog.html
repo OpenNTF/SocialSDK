@@ -1,0 +1,24 @@
+<div role="dialog" style="z-index:5000; -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); -webkit-border-radius: 6px; -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); background:#eee; -moz-border-radius: 5px; color: black;" >
+	<div dojoattachpoint="titleBar" style="display: none;">
+		<span dojoattachpoint="titleNode"></span> 
+		<span title="Cancel" dojoattachevent="onclick: onCancel" class="dijitDialogCloseIcon" dojoattachpoint="closeButtonNode"></span>
+	</div>
+	<div dojoattachpoint="containerNode">
+		<div style="text-align:left; padding:10px; margin:13px;color:#666;">
+			<form>
+				<div style="padding-left:0.5em;padding-top:0.1em; padding-bottom:3em;" aria-label="${title}">
+					<span><h1>${title}</h1></span>
+					
+				</div>
+				<div>
+				<div style="color:#666;">
+					<div dojoattachpoint="contentNode"></div>
+				</div>
+				<div style="padding-bottom:0.5em; padding-left: 0.5em;" dojoattachpoint="buttonsNode">
+					<input type="button" class="btn btn-primary" role="button" value="${nls.OK}" dojoattachevent="onclick: onExecute"  dojoattachpoint="executeButton">
+					<input type="button" class="btn " role="button" value="${nls.Cancel}" dojoattachevent="onclick: onCancel" dojoattachpoint="cancelButton">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

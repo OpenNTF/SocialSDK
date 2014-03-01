@@ -60,7 +60,7 @@ public class LibraryRequest {
     protected boolean debugTransport;
     protected boolean mockTransport;
     protected boolean layer;
-    protected boolean _js;
+    protected boolean regPath;
 
     protected SBTEnvironment environment;
 
@@ -70,7 +70,7 @@ public class LibraryRequest {
     public static final String DEFAULT_VERSION = "1.4";
     public static final Boolean DEFAULT_DEBUG = false;
     public static final Boolean DEFAULT_LAYER = false;
-    public static final Boolean DEFAULT__JS = false;
+    public static final Boolean DEFAULT_REGPATH = true;
     public static final Boolean DEFAULT_DEBUG_TRANSPORT = false;
     public static final Boolean DEFAULT_MOCK_TRANSPORT = false;
 
@@ -129,7 +129,7 @@ public class LibraryRequest {
     /**
      * Sets javascript output for aggregation with Connections' _js
      */
-    public static final String PARAM__JS = "_js";
+    public static final String PARAM_REGPATH = "regpath";
 
     /**
      * Enables/Disables the aggregator (default is false)
@@ -272,7 +272,14 @@ public class LibraryRequest {
     public boolean useIFrame() {
         return false;
     }
-    
+
+    /**
+	 * @return the js
+	 */
+	public void setInitJs(boolean initJS) {
+		init_js = initJS;
+	}
+
     /**
 	 * @return the js
 	 */
@@ -292,6 +299,14 @@ public class LibraryRequest {
      * 
      * @return
      */
+    public void setDebug(boolean isDebug) {
+        debug = isDebug;
+    }
+
+    /**
+     * 
+     * @return
+     */
     public boolean isLayer() {
         return layer;
     }
@@ -300,8 +315,17 @@ public class LibraryRequest {
      * 
      * @return
      */
-    public boolean is_js() {
-        return _js;
+    public boolean isRegPath() {
+        return regPath;
+    }
+
+
+    /**
+     * 
+     * @return
+     */
+    public void setRegPath(boolean regpath) {
+        regPath = regpath;
     }
 
     /**
@@ -433,7 +457,7 @@ public class LibraryRequest {
         jsVersion = readString(params, PARAM_JSVERSION, DEFAULT_JSLIB.equals(jsLib) ? getDefaultJsVersion() : "");
         debug = Boolean.parseBoolean(readString(params, PARAM_DEBUG, getDefaultDebug()));
         layer = Boolean.parseBoolean(readString(params, PARAM_LAYER, getDefaultLayer()));
-        _js = Boolean.parseBoolean(readString(params, PARAM__JS, getDefault_js()));
+        regPath = Boolean.parseBoolean(readString(params, PARAM_REGPATH, getDefault_js()));
         debugTransport = Boolean.parseBoolean(readString(params, PARAM_DEBUG_TRANSPORT, getDefaultDebugTransport()));
         mockTransport = Boolean.parseBoolean(readString(params, PARAM_MOCK_TRANSPORT, getDefaultMockTransport()));
         String environmentName = readString(params, PARAM_ENVIRONMENT, null);
@@ -479,7 +503,7 @@ public class LibraryRequest {
     }
 
     protected String getDefault_js() {
-    	return DEFAULT__JS.toString();
+    	return DEFAULT_REGPATH.toString();
     }
 
     protected String getDefaultDebugTransport() {
@@ -533,7 +557,7 @@ public class LibraryRequest {
         sb.append(";toolkitJsUrl=").append(toolkitJsUrl);
         sb.append(";jsLibraryUrl=").append(jsLibraryUrl);
         sb.append(";layer=").append(layer);
-        sb.append(";_js=").append(_js);
+        sb.append(";_js=").append(regPath);
         sb.append("}");
         return sb.toString();
     }

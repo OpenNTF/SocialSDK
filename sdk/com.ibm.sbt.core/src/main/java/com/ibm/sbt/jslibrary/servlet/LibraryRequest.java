@@ -70,7 +70,7 @@ public class LibraryRequest {
     public static final String DEFAULT_VERSION = "1.4";
     public static final Boolean DEFAULT_DEBUG = false;
     public static final Boolean DEFAULT_LAYER = false;
-    public static final Boolean DEFAULT_REGPATH = false;
+    public static final Boolean DEFAULT_REGPATH = true;
     public static final Boolean DEFAULT_INITJS = false;
     public static final Boolean DEFAULT_DEBUG_TRANSPORT = false;
     public static final Boolean DEFAULT_MOCK_TRANSPORT = false;
@@ -131,7 +131,7 @@ public class LibraryRequest {
      * Sets javascript output for aggregation with Connections' _js
      */
     public static final String PARAM_REGPATH = "regPath";
-
+    
     /**
      * Sets 
      */
@@ -278,6 +278,20 @@ public class LibraryRequest {
     public boolean useIFrame() {
         return false;
     }
+
+    /**
+	 * @param initJS the initJs to set
+	 */
+	public void setInitJs(boolean initJs) {
+		this.initJs = initJs;
+	}
+
+    /**
+	 * @return the js
+	 */
+	public boolean isInitJs() {
+		return initJs;
+	}
     
     /**
      * 
@@ -286,7 +300,7 @@ public class LibraryRequest {
     public boolean isDebug() {
         return debug;
     }
-    
+
     /**
 	 * @param debug the debug to set
 	 */
@@ -309,26 +323,13 @@ public class LibraryRequest {
     public boolean isRegPath() {
         return regPath;
     }
-    
+
+
     /**
 	 * @param regPath the regPath to set
 	 */
 	public void setRegPath(boolean regPath) {
 		this.regPath = regPath;
-	}
-	
-	/**
-	 * @return the initJs
-	 */
-	public boolean isInitJs() {
-		return initJs;
-	}
-	
-	/**
-	 * @param initJS the initJs to set
-	 */
-	public void setInitJs(boolean initJs) {
-		this.initJs = initJs;
 	}
 
     /**

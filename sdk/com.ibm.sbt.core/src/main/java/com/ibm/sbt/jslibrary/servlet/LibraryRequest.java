@@ -55,22 +55,23 @@ public class LibraryRequest {
     protected String toolkitExtUrl;
     protected String toolkitExtJsUrl;
     protected String jsLibraryUrl;
-    protected boolean init_js;
     protected boolean debug;
     protected boolean debugTransport;
     protected boolean mockTransport;
     protected boolean layer;
     protected boolean regPath;
+    protected boolean initJs;
 
     protected SBTEnvironment environment;
 
     // List of the default endpoints being added by default.
-    public static final String INIT_JS = "/init.js";
+    //public static final String INIT_JS = "/init.js";
     public static final String DEFAULT_JSLIB = "dojo";
     public static final String DEFAULT_VERSION = "1.4";
     public static final Boolean DEFAULT_DEBUG = false;
     public static final Boolean DEFAULT_LAYER = false;
     public static final Boolean DEFAULT_REGPATH = true;
+    public static final Boolean DEFAULT_INITJS = false;
     public static final Boolean DEFAULT_DEBUG_TRANSPORT = false;
     public static final Boolean DEFAULT_MOCK_TRANSPORT = false;
 
@@ -129,7 +130,12 @@ public class LibraryRequest {
     /**
      * Sets javascript output for aggregation with Connections' _js
      */
-    public static final String PARAM_REGPATH = "regpath";
+    public static final String PARAM_REGPATH = "regPath";
+    
+    /**
+     * Sets 
+     */
+    public static final String PARAM_INITJS = "initJs";
 
     /**
      * Enables/Disables the aggregator (default is false)
@@ -274,17 +280,17 @@ public class LibraryRequest {
     }
 
     /**
-	 * @return the js
+	 * @param initJS the initJs to set
 	 */
-	public void setInitJs(boolean initJS) {
-		init_js = initJS;
+	public void setInitJs(boolean initJs) {
+		this.initJs = initJs;
 	}
 
     /**
 	 * @return the js
 	 */
 	public boolean isInitJs() {
-		return init_js;
+		return initJs;
 	}
     
     /**
@@ -296,12 +302,11 @@ public class LibraryRequest {
     }
 
     /**
-     * 
-     * @return
-     */
-    public void setDebug(boolean isDebug) {
-        debug = isDebug;
-    }
+	 * @param debug the debug to set
+	 */
+	public void setDebug(boolean debug) {
+		this.debug = debug;
+	}
 
     /**
      * 
@@ -321,12 +326,11 @@ public class LibraryRequest {
 
 
     /**
-     * 
-     * @return
-     */
-    public void setRegPath(boolean regpath) {
-        regPath = regpath;
-    }
+	 * @param regPath the regPath to set
+	 */
+	public void setRegPath(boolean regPath) {
+		this.regPath = regPath;
+	}
 
     /**
      * 
@@ -451,13 +455,12 @@ public class LibraryRequest {
      * @throws IOException
      */
     protected void readFromRequest(LibraryRequestParams params, SBTEnvironment defaultEnvironment) throws ServletException, IOException {
-    	String pathInfo = getPathInfo(params);
-    	init_js = INIT_JS.equalsIgnoreCase(pathInfo);
         jsLib = readString(params, PARAM_JSLIB, getDefaultJsLib());
         jsVersion = readString(params, PARAM_JSVERSION, DEFAULT_JSLIB.equals(jsLib) ? getDefaultJsVersion() : "");
         debug = Boolean.parseBoolean(readString(params, PARAM_DEBUG, getDefaultDebug()));
         layer = Boolean.parseBoolean(readString(params, PARAM_LAYER, getDefaultLayer()));
-        regPath = Boolean.parseBoolean(readString(params, PARAM_REGPATH, getDefault_js()));
+        regPath = Boolean.parseBoolean(readString(params, PARAM_REGPATH, getDefaultRegPath()));
+        initJs = Boolean.parseBoolean(readString(params, PARAM_INITJS, getDefaultInitJs()));
         debugTransport = Boolean.parseBoolean(readString(params, PARAM_DEBUG_TRANSPORT, getDefaultDebugTransport()));
         mockTransport = Boolean.parseBoolean(readString(params, PARAM_MOCK_TRANSPORT, getDefaultMockTransport()));
         String environmentName = readString(params, PARAM_ENVIRONMENT, null);
@@ -502,8 +505,12 @@ public class LibraryRequest {
     	return DEFAULT_LAYER.toString();
     }
 
-    protected String getDefault_js() {
+    protected String getDefaultRegPath() {
     	return DEFAULT_REGPATH.toString();
+    }
+
+    protected String getDefaultInitJs() {
+    	return DEFAULT_INITJS.toString();
     }
 
     protected String getDefaultDebugTransport() {
@@ -557,7 +564,7 @@ public class LibraryRequest {
         sb.append(";toolkitJsUrl=").append(toolkitJsUrl);
         sb.append(";jsLibraryUrl=").append(jsLibraryUrl);
         sb.append(";layer=").append(layer);
-        sb.append(";_js=").append(regPath);
+        sb.append(";regPath=").append(regPath);
         sb.append("}");
         return sb.toString();
     }

@@ -480,6 +480,12 @@ abstract public class AbstractLibrary {
 		String[] moduleNames = getModuleNames(dependModules);
 		String dmList = toQuotedString(dependModules, ",");
 		String dmNames = toString(moduleNames, ",");
+<<<<<<< HEAD
+=======
+		if (request.isRegPath()) {
+			indent(sb, indentationLevel).append("dojo.provide(\"sbt.config\");\n");
+		}
+>>>>>>> refs/remotes/origin/master
 		indent(sb, indentationLevel).append("define('").append(request.isLayer()?getDefineModuleLayer():getDefineModule()).append("',[")
 				.append(dmList).append("],function(").append(dmNames).append("){").append(newLine());
 
@@ -635,7 +641,11 @@ abstract public class AbstractLibrary {
 	 */
 	protected void generateRegisterModules(StringBuilder sb, int indentationLevel, LibraryRequest request,
 			String[][] registerModules, ModuleType type) {
+<<<<<<< HEAD
 		if (registerModules == null || !request.isRegPath()) {
+=======
+		if (registerModules == null || request.isRegPath()) {
+>>>>>>> refs/remotes/origin/master
 			return;
 		}
 		for (String[] registerModule : registerModules) {

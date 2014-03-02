@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2012,2013
+ * ��� Copyright IBM Corp. 2012,2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -19,7 +19,7 @@ dojo.provide("sbt.connections.nls.ConnectionsService");
 /**
  * Social Business Toolkit SDK - Default resource bundle for ConnectionsService
  */
-define('sbt/connections/nls/ConnectionsService',{
+define('sbt/connections/nls/ConnectionsService',[],{
   root: ({
 	  invalid_argument : "Invalid Argument"
   })

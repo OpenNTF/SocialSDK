@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * ï¿½ Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -22,7 +22,7 @@ dojo.provide("sbt.nls.validate");
 
 
 define({
-  root: ({	 
+  root: ('sbt/nls/validate',[],{	 
 	  error_callback:"Error running error callback : {0}",
 	  error_console:"Error received. Error Code = {0}. Error Message = {1}",
 	  validate_nullObject:"{0}.{1} : Null argument provided for {2}. Expected type is {3}",

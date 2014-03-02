@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * ï¿½ Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -22,7 +22,7 @@ dojo.provide("sbt.nls.loginForm");
 
 
 define({
-  root: ({	 
+  root: ('sbt/nls/loginForm',[],{	 
 	  username:"User name :",
 	  password:"Password :",
 	  authentication_dialog_title: "Authentication",

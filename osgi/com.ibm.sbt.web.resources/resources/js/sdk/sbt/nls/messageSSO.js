@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -21,7 +21,7 @@ dojo.provide("sbt.nls.messageSSO");
  */
 
 
-define({
+define('sbt/nls/messageSSO',[],{
   root: ({	 
 	  message_title: "ReAuthenticate",
 	  message:"Authentication expired, Please login again.",

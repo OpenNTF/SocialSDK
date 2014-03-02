@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Social Business Toolkit Web Resources
+Bundle-SymbolicName: com.ibm.sbt.web.resources;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: com.ibm.sbt.web.resources.Activator
+Bundle-Vendor: IBM
+Require-Bundle: org.eclipse.core.runtime,
+ com.ibm.commons;bundle-version="9.0.0",
+ com.ibm.commons.runtime;bundle-version="1.0.0",
+ com.ibm.commons.xml;bundle-version="9.0.0",
+ com.ibm.sbt.core;bundle-version="1.0.0",
+ net.jazz.ajax;bundle-version="2.1.2"
+Import-Package: javax.servlet;version="2.6.0",
+ javax.servlet.http;version="2.6.0"

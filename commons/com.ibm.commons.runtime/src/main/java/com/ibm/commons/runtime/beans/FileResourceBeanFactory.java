@@ -20,6 +20,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import com.ibm.commons.util.StringUtil;
 
 
@@ -34,6 +37,8 @@ public class FileResourceBeanFactory extends AbstractXmlConfigBeanFactory {
 
 	public static final String DEFAULT_RESOURCENAME =  EnvironmentConfig.INSTANCE.getEnvironmentConfigFile();
 
+	static final String sourceClass = FileResourceBeanFactory.class.getName();
+	static final Logger logger = Logger.getLogger(sourceClass);
 
 	public FileResourceBeanFactory() {
 		this(DEFAULT_RESOURCENAME);
@@ -52,6 +57,9 @@ public class FileResourceBeanFactory extends AbstractXmlConfigBeanFactory {
 			return null;
 		}
 		File file = new File(userDir, fileName);
+		if (logger.isLoggable(Level.FINE)) {
+			logger.fine("Reading file bean factories from: : " + file + " (" + file.exists() + ")");
+		}
 		if (file.exists()) {
 			try {
 				InputStream is = new FileInputStream(file);
@@ -64,8 +72,14 @@ public class FileResourceBeanFactory extends AbstractXmlConfigBeanFactory {
 
 	private String getDirectory() {
 		String directory = System.getProperty("sbt.dir");
+		if (logger.isLoggable(Level.FINE)) {
+			logger.fine("Property sbt.dir set to: " + directory);
+		}
 		if (StringUtil.isEmpty(directory)) {
 			directory = System.getProperty("user.dir");
+			if (logger.isLoggable(Level.FINE)) {
+				logger.fine("Property user.dir set to: " + directory);
+			}
 		}
 		return directory;
 	}

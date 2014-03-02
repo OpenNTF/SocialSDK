@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%;">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" title="Style" href="${connectionsUrl}/connections/resources/web/_style?include=com.ibm.lconn.core.styles.oneui3/base/package3.css"></link>
+    <link rel="stylesheet" type="text/css" title="Style" href="${connectionsUrl}/connections/resources/web/_style?include=com.ibm.lconn.core.styles.oneui3/sprites.css"></link>
+    <link rel="stylesheet" type="text/css" title="Style" href="${connectionsUrl}/connections/resources/web/_lconntheme/default.css?version=oneui3&rtl=false"></link>
+    <link rel="stylesheet" type="text/css" title="Style" href="${connectionsUrl}/connections/resources/web/_lconnappstyles/default/search.css?version=oneui3&rtl=false"></link>
+    <script type="text/javascript">
+        var djConfig = {
+            parseOnLoad: true,
+            locale: 'en'
+        };
+    </script>
+    <script type="text/javascript" src="/sbt.dojo180/dojo/dojo.js.uncompressed.js"></script>
+    <link rel="stylesheet" type="text/css" title="Style" href="/sbt.dojo180/dojo/resources/dojo.css">
+    <link rel="stylesheet" type="text/css" title="Style" href="/sbt.dojo180/dijit/themes/claro/claro.css">
+    <link rel="stylesheet" type="text/css" title="Style" href="/sbt.dojo180/dojox/grid/enhanced/resources/claro/EnhancedGrid.css">
+    <link rel="stylesheet" type="text/css" title="Style" href="/sbt.dojo180/dojox/grid/enhanced/resources/EnhancedGrid_rtl.css">
+    <script type="text/javascript" src="${libraryUrl}"></script>
+  </head>
+  <body class="lotusui30_body lotusui30_fonts lotusui30" style="width: 90%; height: 100%;">
+    <div id="innerCardDiv"></div>
+    <script>
+        require(["sbt/config", "sbt/dom", "sbt/connections/controls/vcard/ProfileVCard"], function(config, dom, ProfileVCard) {
+            config.Properties = ${sbtProps};
+            var profileCard = new ProfileVCard({ userName : "Frank Adams", userId : "0EE5A7FA-3434-9A59-4825-7A7000278DAA" });
+           
+            dom.byId("innerCardDiv").appendChild(profileCard.domNode);
+        });
+    </script>
+  </body>
+</html>

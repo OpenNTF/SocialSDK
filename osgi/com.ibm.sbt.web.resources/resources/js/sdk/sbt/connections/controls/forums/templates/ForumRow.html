@@ -1,0 +1,15 @@
+<tr uuid="${id}">
+        <td style="width:20px;" class="lotusFirstCell"><div class="lconnSprite lconnSprite-iconForumsItem16"> </div></td>
+        <td>
+            <h4 style="max-width:700px">
+                <a title="${tooltip}" class="lotusBreakWord" href="${forumURL}" data-dojo-attach-event="onclick: handleClick" >
+                    ${title}
+                 </a>
+                <span class="dfName lotusHidden">${title}</span>
+            </h4>
+        </td>
+        <td><span >${threadCount}</span></td>
+        <td></td>
+        <td  >${getDateLabel} <br /><a title="${nls.viewProfile}" href="${getUserProfileHref}" data-dojo-attach-event="onclick: viewUserProfile" >${authorName}</a></td>
+</tr>
+

@@ -155,6 +155,11 @@ public class LibraryRequest {
      * @see GADGET_CONTEXT
      */
     public static final String PARAM_CONTEXT = "context";
+    
+    /**
+     * List of string tokens that can be replaced dynamically
+     */
+    public static final String[] REPLACE_VALUES = { "%local_server%", "%local_application%", "%request_url%" };
 
     static final String sourceClass = LibraryRequest.class.getName();
     static final Logger logger = Logger.getLogger(sourceClass);
@@ -185,14 +190,15 @@ public class LibraryRequest {
      */
     public void init(LibraryRequestParams params) throws LibraryException {
     	try {
-	        this.toolkitUrl = StringUtil.replace(params.getToolkitUrl(), "%local_server%", getServerUrl(params));
-	        this.toolkitJsUrl = StringUtil.replace(params.getToolkitJsUrl(), "%local_server%", getServerUrl(params));
-	        this.toolkitExtUrl = StringUtil.replace(params.getToolkitExtUrl(), "%local_server%", getServerUrl(params));
-	        this.toolkitExtJsUrl = StringUtil.replace(params.getToolkitExtJsUrl(), "%local_server%", getServerUrl(params));
-	        this.serviceUrl = StringUtil.replace(params.getServiceUrl(), "%local_application%", getContextUrl(params));
-	        this.libraryUrl = params.getLibraryUrl().indexOf("%")>-1 ? getRequestUrl(params) : params.getLibraryUrl();
-	        this.jsLibraryUrl = StringUtil.replace(params.getJsLibraryUrl(), "%local_server%", getServerUrl(params));
-	        this.iframeUrl = StringUtil.replace(params.getIframeUrl(), "%local_server%", getServerUrl(params));
+    		String[] replaces = { getServerUrl(params), getContextUrl(params), getRequestUrl(params) };
+	        this.toolkitUrl = replace(params.getToolkitUrl(), REPLACE_VALUES, replaces);
+	        this.toolkitJsUrl = replace(params.getToolkitJsUrl(), REPLACE_VALUES, replaces);
+	        this.toolkitExtUrl = replace(params.getToolkitExtUrl(), REPLACE_VALUES, replaces);
+	        this.toolkitExtJsUrl = replace(params.getToolkitExtJsUrl(), REPLACE_VALUES, replaces);
+	        this.serviceUrl = replace(params.getServiceUrl(), REPLACE_VALUES, replaces);
+	        this.libraryUrl = replace(params.getLibraryUrl(), REPLACE_VALUES, replaces);
+	        this.jsLibraryUrl = replace(params.getJsLibraryUrl(), REPLACE_VALUES, replaces);
+	        this.iframeUrl = replace(params.getIframeUrl(), REPLACE_VALUES, replaces);
 	
 	        readFromRequest(params, params.getEnvironment());
 	
@@ -546,6 +552,26 @@ public class LibraryRequest {
             return val;
         }
         return defaultValue;
+    }
+    
+    /**
+     * Replace any of the listed values with the specified replacement in the source string.
+     * 
+     * @param source
+     * @param values
+     * @param replace
+     * @return
+     */
+    private String replace(String source, String[] values, String[] replaces) {
+        if (StringUtil.isEmpty(source) || values == null || replaces == null) {
+            return ""; //$NON-NLS-1$
+        }
+        
+        for (int i=0; i<values.length; i++) {
+        	source = StringUtil.replace(source, values[i], replaces[i]);
+        }
+        
+    	return source;
     }
 
     /*

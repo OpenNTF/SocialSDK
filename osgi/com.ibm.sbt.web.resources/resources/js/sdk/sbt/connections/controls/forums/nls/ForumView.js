@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * ï¿½ Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -17,7 +17,7 @@
 dojo.provide("sbt.connections.controls.forums.nls.ForumView");
 
 // NLS_CHARSET=UTF-8
-define({
+define('sbt/connections/controls/forums/nls/ForumView',[],{
     root: {
     	startTopic: "Start a Topic",
     	deleteTopic: "Delete Topic",

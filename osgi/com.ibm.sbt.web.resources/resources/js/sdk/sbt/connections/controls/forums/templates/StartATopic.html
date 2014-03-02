@@ -1,0 +1,111 @@
+<div>
+	<form class="lotusForm2">
+		<div class="lotusFormTitle">
+			<h2>${nls.startTopic}</h2>
+		</div>
+		<div class="lotusDialogContent">
+			<div class="lotusHidden forumError">
+				<div class="lotusMessage2">
+					<img class="lotusIcon lotusIconMsgError"
+						>
+					<div class="lotusMessageBody"></div>
+				</div>
+			</div>
+			<div class="lotusFormBody">
+				<div class="forumError lotusFormError lotusHidden">
+					<img class="lconnSprite lconnSprite-iconError16"
+						>
+					<span> </span>
+				</div>
+				<div style="zoom: 1" class="lotusFormField">
+					<label for=""><span
+						class="lotusFormRequired">*</span>${nls.title}</label><input type="text"
+						class="lotusText" dojoattachpoint="titleInput">
+				</div>
+				<div class="lotusFormField lotusHidden">
+					<a class="lotusAction" href="javascript:;">${nls.editTitle}</a>
+				</div>
+				<div class="lotusFormField">
+					<input dojoattachpoint="questionCheckBox" type="checkbox" value="true"
+						title="${nls.markTopicAsQuestion}"><label
+						class="lotusCheckbox"
+						for="">${nls.markTopicAsQuestion}</label>
+				</div>
+				<div class="forumError lotusFormError lotusHidden">
+					<img
+						class="lconnSprite lconnSprite-iconError16"
+						>
+					<span> </span>
+				</div>
+				<div style="zoom: 1" class="lotusFormField">
+					<label for="">${nls.tags}</label><input
+						type="text" dojoattachpoint="tagsInput"
+						class="lotusText dijitTextBox"
+						 value="">
+					<div style="display: none;"></div>
+					<div style="display: none;" role="textbox"></div>
+				</div>
+				<div class="lotusFormField lotusHidden">
+					<label>${nls.tags}</label><span class="lotusTags">
+						<div class="forumError lotusHidden" role="alert">
+							<div class="lotusMessage2">
+								<img
+									
+									class="lotusIcon lotusIconMsgError" >
+								<div class="lotusMessageBody"></div>
+							</div>
+						</div> <span class="lotusHidden"><img
+							></span>
+						<span class=""><span class="tagEmpty">${nls.none}</span></span> <a
+						role="button" style="display: inline;"
+						 class="tagAdd lotusAction"
+						href="javascript:;">${nls.addTags}</a>
+						<form  role="application" style="display: none;">
+							<input type="text"  class="lotusText"
+								size="30"> <input type="submit" class="lotusBtn"
+								value="${nls.ok}"> <a role="button"
+								 href="javascript:;">${nls.cancel}</a>
+						</form>
+					</span>
+				</div>
+				<div role="alert" class="forumError lotusFormError lotusHidden">
+					<img
+						class="lconnSprite lconnSprite-iconError16"
+						>
+					<span> </span>
+				</div>
+
+				<div class="forumError lotusFormError lotusHidden">
+					<img 
+						class="lconnSprite lconnSprite-iconError16"
+						>
+					<span> </span>
+				</div>
+				<div class="lotusFormField lotusHidden">
+					<label><span class="lotusFormRequired">*</span>${nls.forum}</label><select
+						class="lotusHidden"></select>
+					<div class="lotusLoading"></div>
+				</div>
+
+				<div>
+					<textarea style="display:none;" class="ckeditor" name="editor" dojoattachpoint="editor"></textarea>
+				</div>
+
+
+				<div class="lotusFormField ">
+					<label>${nls.attachments}</label>
+					<div></div>
+					<a class="lotusAction" href="javascript:;" >${nls.attachAFile}</a>
+				</div>
+				<div class="lotusMeta lotusIndent10" >*${nls.required}</div>
+			</div>
+		</div>
+		<div class="lotusFormFooter">
+			<span>
+			     <input type="button" value="${nls.save}" dojoattachevent="onclick: onExecute" dojoattachpoint="executeButton" class="lotusFormButton">
+				 <input value="${nls.cancel}" dojoattachevent="onclick: onCancel" dojoattachpoint="cancelButton" type="button" class="lotusFormButton">
+			</span>
+			 <span class="lotusHidden">${nls.loading}</span>
+		</div>
+	</form>
+</div>

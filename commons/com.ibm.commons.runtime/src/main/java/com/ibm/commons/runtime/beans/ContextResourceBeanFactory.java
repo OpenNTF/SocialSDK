@@ -87,10 +87,10 @@ public class ContextResourceBeanFactory extends AbstractXmlConfigBeanFactory {
 	private Factory[] readFactoriesFromUrl(Context envCtx) {
 		try {
 			URL url = (URL)envCtx.lookup(EnvironmentConfig.INSTANCE.getEnvironmentConfigUrl()); //$NON-NLS-1$
+			if (logger.isLoggable(Level.FINE)) {
+				logger.fine("Reading context bean factories from: " + url);
+			}
 			if (url != null) {
-				if (logger.isLoggable(Level.FINER)) {
-					logger.finer("Reading context bean factories from: " + url);
-				}
 				InputStream inStream = null;
 				try {
 					inStream = url.openStream();

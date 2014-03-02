@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * ï¿½ Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -21,7 +21,7 @@ dojo.provide("sbt.nls.ErrorTransport");
  */
 
 
-define({
+define('sbt/nls/ErrorTransport',[],{
   root: ({	 
 	  endpoint_not_available:"Required endpoint is not available: {0}"	 
   })

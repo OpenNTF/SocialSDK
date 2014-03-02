@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * ï¿½ Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -21,7 +21,7 @@ dojo.provide("sbt.nls.Endpoint");
  */
 
 
-define({
+define('sbt/nls/Endpoint',[],{
   root: ({	 
 	  cannot_find_endpoint:"Unable to find endpoint named {0}, creating it now with an error transport."
   })

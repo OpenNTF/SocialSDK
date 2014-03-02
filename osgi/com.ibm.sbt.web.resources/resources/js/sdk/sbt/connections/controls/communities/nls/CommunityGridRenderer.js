@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -17,7 +17,7 @@
 dojo.provide("sbt.connections.controls.communities.nls.CommunityGridRenderer");
 
 // NLS_CHARSET=UTF-8
-define({
+define('sbt/connections/controls/communities/nls/CommunityGridRenderer',[],{
     root: {
         summary : "Public Communities",
         filterByTag : "Click to filter by tag",

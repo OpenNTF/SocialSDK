@@ -181,8 +181,8 @@ class SBTOAuth1Endpoint extends BaseController implements SBTEndpoint
 		} catch(Guzzle\Http\Exception\BadResponseException $e) {
 			$response = $e->getResponse();
 			$store->deleteOAuthCredentials();
-			print "Your tokens expired. Make sure you are logged out of SmartCloud, clear your cache and cookies and try again.";
 			print_r($response->getBody(TRUE));
+			die("Your tokens expired. Make sure you are logged out of SmartCloud, clear your cache and cookies and try again.");
 		}
 		
 		parse_str($response->getBody(TRUE), $info);

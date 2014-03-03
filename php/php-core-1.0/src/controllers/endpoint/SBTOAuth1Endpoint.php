@@ -93,13 +93,14 @@ class SBTOAuth1Endpoint extends BaseController implements SBTEndpoint
 				header('X-PHP-Response-Code: ' . $response->getStatusCode(), true, $response->getStatusCode());
 				
 				parse_str($response->getBody(TRUE), $info);
-	
-				if (!isset($info['oauth_token'])) {
-					die('Missing oauth token. Something went wrong - make sure that your client ID and client secret are correct and try again.');
+				
+				if (isset($info['oauth_token'])) {
+					$store->storeRequestToken($info['oauth_token']);
 				}
 				
-				$store->storeRequestToken($info['oauth_token']);
-				$store->storeRequestTokenSecret($info['oauth_token_secret']);
+				if (isset($info['oauth_token_secret'])) {
+					$store->storeRequestTokenSecret($info['oauth_token_secret']);
+				}
 					
 				if (!headers_sent()) {
 					header("Location: " . $settings->getAuthorizationURL() . "?oauth_token=" . $info['oauth_token']);
@@ -179,17 +180,20 @@ class SBTOAuth1Endpoint extends BaseController implements SBTEndpoint
 			$response = $request->send();
 		} catch(Guzzle\Http\Exception\BadResponseException $e) {
 			$response = $e->getResponse();
+			$store->deleteOAuthCredentials();
+			print "Your tokens expired. Make sure you are logged out of SmartCloud, clear your cache and cookies and try again.";
 			print_r($response->getBody(TRUE));
 		}
 		
 		parse_str($response->getBody(TRUE), $info);
 		
-		if (!isset($info['oauth_token'])) {
-			die('Missing access token. Something went wrong - make sure that your client ID and client secret are correct and try again.');
+		if (isset($info['oauth_token'])) {
+			$store->storeOAuthAccessToken($info['oauth_token']);
 		}
 		
-		$store->storeTokenSecret($info["oauth_token_secret"]);
-		$store->storeOAuthAccessToken($info['oauth_token']);
+		if (isset($info['oauth_token_secret'])) {
+			$store->storeTokenSecret($info["oauth_token_secret"]);
+		}
 		
 	}
 	

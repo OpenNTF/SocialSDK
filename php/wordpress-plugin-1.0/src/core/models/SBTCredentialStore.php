@@ -252,20 +252,32 @@ class SBTCredentialStore {
 		$iv = $data['iv'];
 		$iv = base64_decode($iv);
 		$sessionID = $data['sessionID'];
-		
 		// Get session
 		$session = get_option($sessionID);
 		
 		if ($session === false) {
-			return;
-		} else {
-			// Encrypt data and store key-value pair
-			$value = $this->_encrypt($key, $value, $iv);
-			$session[$skey] = "$value";
+			$timestamp = time();
 		
-			// Update database
-			update_option($sessionID, $session);
-		}
+			$sessions = get_option(USER_SESSIONS);
+		
+			array_push($sessions, array(
+				'id' => $sessionID,
+				'created' => $timestamp)
+			);
+			update_option(USER_SESSIONS, $sessions);
+
+			$sessionData = array();
+			add_option($sessionID, $sessionData);
+			$session = get_option($sessionID);
+		} 
+		
+		// Encrypt data and store key-value pair
+		$value = $this->_encrypt($key, $value, $iv);
+		$session[$skey] = "$value";
+		
+		// Update database
+		update_option($sessionID, $session);
+		
 	}
 	
 	private function _getSessionInfoFromProfile() {

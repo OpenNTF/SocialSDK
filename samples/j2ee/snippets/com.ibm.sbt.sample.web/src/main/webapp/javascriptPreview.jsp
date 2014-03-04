@@ -19,14 +19,12 @@
    <meta charset="utf-8">
     <title>Social Business Toolkit - JavaScript Preview</title>
     <jsp:include page="<%=Util.getLibraryInclude(request)%>" flush="false"/>
-    <% 
-    String snippetName = request.getParameter("snippet");
-    boolean layer = Boolean.parseBoolean(request.getParameter("layer"));
-    if (!layer) {%>
-    	<script type="text/javascript" src="<%=Util.getLibraryUrl(request)%>"></script>
-   <% } 
+    <script type="text/javascript" src="<%=Util.getLibraryUrl(request)%>"></script>
+   <%
    out.flush();
    
+   String snippetName = request.getParameter("snippet");
+   boolean layer = Boolean.parseBoolean(request.getParameter("layer"));
    String html = null;
    String js = null;
    String css = null;

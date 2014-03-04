@@ -159,7 +159,7 @@ public class LibraryRequest {
     /**
      * List of string tokens that can be replaced dynamically
      */
-    public static final String[] REPLACE_VALUES = { "%local_server%", "%local_application%", "%request_url%" };
+    public static final String[] REPLACE_VALUES = { "%local_server%", "%local_application%", "%request_url%", "%context_path%" };
 
     static final String sourceClass = LibraryRequest.class.getName();
     static final Logger logger = Logger.getLogger(sourceClass);
@@ -190,7 +190,7 @@ public class LibraryRequest {
      */
     public void init(LibraryRequestParams params) throws LibraryException {
     	try {
-    		String[] replaces = { getServerUrl(params), getContextUrl(params), getRequestUrl(params) };
+    		String[] replaces = { getServerUrl(params), getContextUrl(params), getRequestUrl(params), getContextPath(params) };
 	        this.toolkitUrl = replace(params.getToolkitUrl(), REPLACE_VALUES, replaces);
 	        this.toolkitJsUrl = replace(params.getToolkitJsUrl(), REPLACE_VALUES, replaces);
 	        this.toolkitExtUrl = replace(params.getToolkitExtUrl(), REPLACE_VALUES, replaces);
@@ -439,6 +439,17 @@ public class LibraryRequest {
 			return UrlUtil.getContextUrl(httpRequest);
 		} else {
 			return params.getContextUrl();
+		}
+	}
+
+	/**
+	 * @return
+	 */
+	protected String getContextPath(LibraryRequestParams params) {
+		if (httpRequest != null) {
+			return httpRequest.getContextPath();
+		} else {
+			return params.getContextPath();
 		}
 	}
 

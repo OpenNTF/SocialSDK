@@ -331,7 +331,15 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.CommunityService
          */
-        AtomUpdateCommunityLogo : "/${files}/{endpointName}/connections/UpdateCommunityLogo/{fileName}" 
+        AtomUpdateCommunityLogo : "/${files}/{endpointName}/connections/UpdateCommunityLogo/{fileName}",
+        
+        /**
+         * File Proxy URL for uploading a community file
+         * @property AtomUploadCommunityFile
+         * @type String
+         * @for sbt.connections.CommunityService
+         */
+        AtomUploadCommunityFile : "/${files}/{endpointName}/connections/UploadCommunityFile/{communityUuid}"
         
     });
 });

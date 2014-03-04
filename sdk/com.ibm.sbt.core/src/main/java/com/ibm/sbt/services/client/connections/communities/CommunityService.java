@@ -618,6 +618,28 @@ public class CommunityService extends BaseService {
 	 * 			communityid of newly created Community
 	 * @throws CommunityServiceException
 	 */
+	public String createCommunity(String title, String content, String type) throws CommunityServiceException {
+		Community community = new Community();
+		community.setTitle(title);
+		community.setContent(content);
+		community.setCommunityType(type);
+		return createCommunity(community);
+	}
+	
+	/**
+	 * Wrapper method to create a community
+	 * <p>
+	 * User should be authenticated to call this method
+	 * 
+	 * In response to successful creation of a community server does not return the id in response payload.
+	 * In headers Location has the id to newly created community, we use this to return the communityid.
+	 * Location: https://server/communities/service/atom/community/instance?communityUuid=c93bfb43-0bf2-4125-a8a4-7acd4
+	 * 
+	 * @param Community
+	 * @return String
+	 * 			communityid of newly created Community
+	 * @throws CommunityServiceException
+	 */
 	public String createCommunity(Community community) throws CommunityServiceException {
 		if (null == community){
 			throw new CommunityServiceException(null, Messages.NullCommunityObjectException);

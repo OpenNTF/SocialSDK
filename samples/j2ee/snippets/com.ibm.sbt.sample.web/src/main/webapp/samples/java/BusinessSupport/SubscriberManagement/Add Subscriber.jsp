@@ -61,7 +61,7 @@
 		
 		SubscriberManagementService subscriberManagement = new SubscriberManagementService("smartcloudC1");
 		JsonJavaObject responseJson = subscriberManagement.addSubscriber(subscriber);
-		Long subscriberId = responseJson.getAsLong("Long");
+		long subscriberId = responseJson.getAsLong("Long");
 		JsonEntity jsonEntity = subscriberManagement.getSubscriberById("" + subscriberId);
 		
 		out.println("Subscriber Id: " + subscriberId );

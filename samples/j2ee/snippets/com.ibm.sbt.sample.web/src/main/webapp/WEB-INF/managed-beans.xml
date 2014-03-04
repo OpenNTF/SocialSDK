@@ -147,6 +147,21 @@
         </managed-property>
 	</managed-bean>
 	
+	<!-- SmartCloud C1 Basic Authentication Environment -->
+	<managed-bean>
+		<managed-bean-name>smartcloudC1Environment</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.jslibrary.SBTEnvironment</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+		<managed-property>
+			<property-name>endpoints</property-name>
+			<value>smartcloudC1:connections</value>
+		</managed-property>
+		<managed-property>
+            <property-name>runtimes</property-name>
+            <value>smartcloud</value>
+        </managed-property>
+	</managed-bean>
+	
     <!--  OpenSocial Environment -->
     <managed-bean>
         <managed-bean-name>openSocial</managed-bean-name>

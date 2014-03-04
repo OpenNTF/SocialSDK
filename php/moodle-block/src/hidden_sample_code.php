@@ -26,8 +26,6 @@ $scripts = array(
 		'social/forums/forum-entries-grid',
 		'social/forums/forums-grid',
 		'social/forums/topics-grid',
-
-		'social/profiles/my-profile-panel',
 		
 		'social/sametime/smartcloud-chat'
 );
@@ -66,13 +64,13 @@ foreach ($scripts as $script) {
 	
 	$pageURL = (@$_SERVER["HTTPS"] == "on") ? "https://" : "http://";
 	$pageURL .= $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] . dirname($_SERVER["REQUEST_URI"]);
-	
-	print '<link href="' . $pageURL . '/../blocks/ibmsbtk/core/system/libs/code-mirror/lib/codemirror.css" type="text/css" rel="stylesheet" />';
-	print '<link href="' . $pageURL . '/../blocks/ibmsbtk/views/css/codeEditor.css" type="text/css" rel="stylesheet" />';
+	$pluginURL = str_replace('/core/', '', BASE_LOCATION);
+	print '<link href="' . $pluginURL . '/core/system/libs/code-mirror/lib/codemirror.css" type="text/css" rel="stylesheet" />';
+	print '<link href="' . $pluginURL . '/views/css/codeEditor.css" type="text/css" rel="stylesheet" />';
 
 	print '<script language="javascript" type="text/javascript" src="' . BASE_LOCATION . '/system/libs/code-mirror/lib/codemirror.js"></script>';
 	print '<script language="javascript" type="text/javascript" src="' . BASE_LOCATION . '/system/libs/code-mirror/mode/javascript/javascript.js"></script>';
-	$pluginURL = str_replace('/core/', '', BASE_LOCATION);
+	
 	print '<script language="javascript" type="text/javascript" src="' . $pluginURL . '/views/js/customPluginEditor.js"></script>';
 	
 	

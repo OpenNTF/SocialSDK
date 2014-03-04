@@ -1,1 +1,0 @@
-<input style="display: none;" size="50" type="text" id="endpoint_name" name="endpoint_name" value="***REMOVED*** echo $viewData['endpointName']; ?>" />

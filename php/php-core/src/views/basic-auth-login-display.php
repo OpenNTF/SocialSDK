@@ -37,6 +37,13 @@
 				var endpoint = config.findEndpoint("connections");
 				config.Properties["loginUi"] = "dialog";
 
+				***REMOVED***
+					if (!isset($_SERVER['HTTPS']) || !$_SERVER['HTTPS']) {
+						echo "alert('The IBM Connect cookie policy requires that you use HTTPS to perform this action. Please try again by accessing this webpage using the HTTPS protocol.');";
+						echo "return;";
+					}
+				?>
+
 				endpoint.authenticate({"forceAuthentication": true, 
 					"actionUrl": "***REMOVED*** echo plugins_url(); ?>/index.php?classpath=services&class=Proxy&method=route&isAuthenticated=true"}).then(
 					function(response) {

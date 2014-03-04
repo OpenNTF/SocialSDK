@@ -1,11 +1,11 @@
-<select onchange="endpoint_change();" id="enpoint_list" name="endpoint_list">
+<select style="width: 350px; height: 150px;" size="***REMOVED*** echo sizeof($viewData['endpoints']); ?>" onchange="endpoint_change();" id="enpoint_list" name="endpoint_list">
     	***REMOVED*** 
-    	if ($viewData['selected_endpoint'] == 'IBM SmartCloud for Social Business') {
-    		print '<option value="IBM SmartCloud for Social Business">IBM SmartCloud for Social Business</option>';
-    		print '<option value="IBM Connections on Premises">IBM Connections on Premises</option>';
-    	} else {
-    		print '<option value="IBM Connections on Premises">IBM Connections on Premises</option>';
-    		print '<option value="IBM SmartCloud for Social Business">IBM SmartCloud for Social Business</option>';
+    	foreach ($viewData['endpoints'] as $endpoint) {
+    		if ($viewData['selected_endpoint'] == $endpoint['name']) {
+    			print '<option selected="selected" value="' . $endpoint['name'] . '">' . $endpoint['name'] . ' (' . $endpoint['url'] . ')</option>';
+    		} else {
+    			print '<option value="' . $endpoint['name'] . '">' . $endpoint['name'] . ' (' . $endpoint['url'] .  ')</option>';
+    		}
     	}
     	?>
-</select>
+</select><br/>

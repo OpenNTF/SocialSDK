@@ -58,21 +58,11 @@ public class BaseApiTest extends BaseTest {
 	
 	@Rule public TestName name = new TestName();
 
-    private Application application;
-    private Context context;
+
     private String snippetId;
     
     @Before
     public void setupTest() throws AuthenticationException {
-    	 RuntimeFactory runtimeFactory = new RuntimeFactoryStandalone() {
-             @Override
-             public Context initContext(Application application, Object request, Object response) {
-                 Context context = super.initContext(application, request, response);
-                 TestEnvironmentFactory.getEnvironment().decorateContext(context);
-                 return context;
-             }
-         };
-         application = runtimeFactory.initApplication(null);
          createContext();
          loginConnections();
     }
@@ -92,30 +82,7 @@ public class BaseApiTest extends BaseTest {
         return "json";
     }
 
-    /**
-     * Create the context (if needed)
-     */
-    protected Context createContext() {
-        if (context == null) {
-            context = Context.init(application, null, null);
-        }
-        return context;
-    }
-    
-    /**
-     * Destroy the context
-     */
-    @After
-    public void destroyContext() {
-        if (context != null) {
-        	try {
-            Context.destroy(context);
-        	} catch (IllegalStateException ise) {
-        		// can ignore this
-        	}
-            context = null;
-        }
-    }
+
     
     /**
      * @throws PasswordException

@@ -19,7 +19,7 @@ require(["sbt/dom", "sbt/json", "sbt/connections/CommunityConstants", "sbt/conne
         promise.then(
             function(community) {
                 results.push(community);
-                dom.setText("json", json.jsonBeanStringify(results));
+
                 community.load().then(
                     function(community) {
                         results.push(community);

@@ -2,17 +2,52 @@
 <?eclipse version="3.4"?>
 <plugin>
    	<extension point="com.ibm.commons.Extension">
-         <service type="com.ibm.sbt.jslibrary" class="com.ibm.sbt.jslibrary.servlet.DojoLibrary" />
+         <service type="com.ibm.sbt.jslibrary" 
+         	class="com.ibm.sbt.jslibrary.servlet.DojoLibrary" />
    	</extension>
-
    	<extension point="com.ibm.commons.Extension">
-         <service type="com.ibm.sbt.jslibrary" class="com.ibm.sbt.jslibrary.servlet.JQueryLibrary" />
+         <service type="com.ibm.sbt.jslibrary" 
+         	class="com.ibm.sbt.jslibrary.servlet.JQueryLibrary" />
    	</extension>
-    <extension
-          point="com.ibm.commons.Extension">
-       <service
-             class="com.ibm.sbt.service.ext.DefaultProxyEndpointServiceProvider"
-             type="com.ibm.sbt.service.proxyendpointservice.provider">
-       </service>
+    <extension point="com.ibm.commons.Extension">
+       <service type="com.ibm.sbt.service.proxyendpointservice.provider" 
+       		class="com.ibm.sbt.service.ext.DefaultProxyEndpointServiceProvider" />
+    </extension>
+    <extension point="com.ibm.commons.Extension">
+       <service type="com.ibm.sbt.service.proxyendpointservice.provider" 
+       		class="com.ibm.sbt.service.ext.DefaultProxyEndpointServiceProvider" />
+    </extension>
+    <extension point="com.ibm.commons.Extension">
+       <service type="com.ibm.commons.runtime.managedbeansfactory" 
+       		class="com.ibm.commons.runtime.beans.MetaResourceBeanFactory" />
+    </extension>
+    <extension point="com.ibm.commons.Extension">
+       <service type="com.ibm.commons.runtime.managedbeansfactory" 
+       		class="com.ibm.commons.runtime.beans.MetaResourceBeanFactory" />
+    </extension>
+    <extension point="com.ibm.commons.Extension">
+       <service type="com.ibm.commons.runtime.managedbeansfactory" 
+       		class="com.ibm.commons.runtime.beans.FileResourceBeanFactory" />
+    </extension>
+    <extension point="com.ibm.commons.Extension">
+       <service type="com.ibm.commons.runtime.managedbeansfactory" 
+       		class="com.ibm.commons.runtime.beans.ContextResourceBeanFactory" />
+    </extension>
+    <extension point="com.ibm.commons.Extension">
+       <service type="com.ibm.commons.runtime.propertiesfactory" 
+       		class="com.ibm.commons.runtime.properties.MetaResourcePropertiesFactory" />
+    </extension>
+    <extension point="com.ibm.commons.Extension">
+       <service type="com.ibm.commons.runtime.propertiesfactory" 
+       		class="com.ibm.commons.runtime.properties.FileResourcePropertiesFactory" />
+    </extension>
+    <extension point="com.ibm.commons.Extension">
+       <service type="com.ibm.commons.runtime.propertiesfactory" 
+       		class="com.ibm.commons.runtime.properties.ContextPropertiesFactory" />
+    </extension>
+    
+    <extension point="com.ibm.commons.Extension">
+       <service type="com.ibm.sbt.core.environmentfactory" 
+       		class="com.ibm.sbt.jslibrary.impl.SBTEnvironmentFactoryFromBean" />
     </extension>
 </plugin>

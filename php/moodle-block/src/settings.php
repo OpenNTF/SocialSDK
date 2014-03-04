@@ -39,6 +39,7 @@ $settings->add(new admin_setting_configtext('access_token_url', 'Access Token UR
 
 
 ob_start();
-require BASE_PATH . '/../views/js/globalPluginSettingsEditor.js'; 
-echo '<script type="text/javascript">' . ob_get_clean() . '</script>';
+//require $pluginPath . 'views/js/globalPluginSettingsEditor.js';
+$pluginURL = str_replace('/core/', '', BASE_LOCATION); 
+echo '<script language="javascript" type="text/javascript" src="' . $pluginURL . '/views/js/globalPluginSettingsEditor.js"></script>';
 ?>

@@ -107,7 +107,7 @@ public class SbtEndpoints extends Endpoints {
 					"https://apps.na.collabservtest.lotus.com/manage/oauth2/token" // Sma_OA2_AccessTokenURL
 			   }),
 			   new PropertyValues("Next - C2", new String[] {
-					"https://apps.na.collabservnext.lotus.com", // Sma_URL
+					"https://apps.collabservnext.com", // Sma_URL
 					"", // SMA_OA_GADGET_SERVICE
 					"", // SMA_OA_COUNSUMERKEY
 					"", // SMA_OA_CONSUMERSECRET

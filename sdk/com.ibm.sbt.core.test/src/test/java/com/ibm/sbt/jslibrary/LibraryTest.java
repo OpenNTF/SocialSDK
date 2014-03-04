@@ -53,6 +53,8 @@ public class LibraryTest {
 	        params.setRequestUrl("https://localhost:8443/sbt.sample.web/library?lib=dojo&ver=1.4.3&debug=true");
 	        params.setServerUrl("https://localhost:8443");
 	        params.setContextUrl("https://localhost:8443/sbt.sample.web");
+	        params.setServiceUrl("%context_path%/service");
+	        params.setContextPath("/sbt.sample.web");
 	        params.setPathInfo("/init.js");
 	    	
 	    	LibraryRequest request = new LibraryRequest();

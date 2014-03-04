@@ -30,7 +30,7 @@
 	
 <html>
 <head>
-<title>Add Subscriber</title>
+<title>Delete Subscriber</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
@@ -43,7 +43,6 @@
 		SubscriberManagementService subscriberManagement = new SubscriberManagementService("smartcloudC1");
 		
 		JsonEntity jsonEntity = subscriberManagement.getSubscriberById(subscriberId);
-		
 		subscriberManagement.deleteSubscriber(subscriberId);
 		
 		try {

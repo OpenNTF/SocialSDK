@@ -55,8 +55,11 @@ public class BaseFilesTest extends BaseApiTest {
 	protected Community community;
 	private boolean failIfAfterDeletionFails = true;
 
-	private final String[] ErrorMessages = { "Error received. Error Code", "Error, unable to load:", "Caused by: com.ibm.sbt.services.client.ClientServicesException", "Exception occurred",
-			"Caused by:", "HTTP Status 500", "HTTP Status 404" };
+	private final String[] ErrorMessages = { "Error received. Error Code",
+			"Error, unable to load:",
+			"Caused by: com.ibm.sbt.services.client.ClientServicesException",
+			"Exception occurred", "Caused by:", "HTTP Status 500",
+			"HTTP Status 404" };
 	private String noErrorMsg = null;
 
 	public BaseFilesTest() {
@@ -95,7 +98,7 @@ public class BaseFilesTest extends BaseApiTest {
 		return fileService;
 	}
 
-	public void createCommunity() {		
+	public void createCommunity() {
 
 		String type = "public";
 		if (environment.isSmartCloud()) {
@@ -108,68 +111,71 @@ public class BaseFilesTest extends BaseApiTest {
 	}
 
 	protected String createCommunityName() {
-		return this.getClass().getName() + "#" + this.hashCode() + " Community - " + System.currentTimeMillis();
+		return this.getClass().getName() + "#" + this.hashCode()
+				+ " Community - " + System.currentTimeMillis();
 	}
 
-	
-	  protected Community createCommunity(String title, String type, String content, String tags) {
-	    	return createCommunity(title, type, content, tags, true);
-	    }
-	    
-	    protected Community createCommunity(String title, String type, String content, String tags, boolean retry) {
-	        Community community = null;
-	        try {
-	            loginConnections();
-	            CommunityService communityService = getCommunityService();
-	            
-	        	long start = System.currentTimeMillis();
-	            community = new Community(communityService, "");
-	            community.setTitle(title);
-	            community.setCommunityType(type);
-	            community.setContent(content);
-	            community.setTags(tags);
-	            String communityUuid = communityService.createCommunity(community);
-	            community = communityService.getCommunity(communityUuid);
-	            
-	            long duration = System.currentTimeMillis() - start;
-	            Trace.log("Created test community: "+communityUuid + " took "+duration+"(ms)");
-	        } catch (AuthenticationException pe) {
-	        	if (pe.getCause() != null) {
-	        		pe.getCause().printStackTrace();
-	        	}
-	            fail("Error authenicating: " , pe);
-	        } catch (CommunityServiceException cse) {
-	        	// TODO remove this when we upgrade the QSI
-	        	Throwable t = cse.getCause();
-	        	if (t instanceof ClientServicesException) {
-	        		ClientServicesException csex = (ClientServicesException)t;
-	        		int statusCode = csex.getResponseStatusCode();
-	        		if (statusCode == 500 && retry) {
-	        			return createCommunity(title + " (retry)", type, content, tags, false);
-	        		}
-	        	}
-	            fail("Error creating test community with title: '"+title+"'", cse);
-	        } 
-	        
-	        return community;
-	    }
-	    
-	    protected void fail(String message, Exception cse) {
-	    	String failure = message;
-	    	
-	    	Throwable cause = cse.getCause();
-	    	if (cause != null) {
-	    		cause.printStackTrace();
-	    		failure += ", " + cause.getMessage();
-	    	} else {
-	    		cse.printStackTrace();
-	    		failure += ", " + cse.getMessage();
-	    	}
-	    	
-	    	Assert.fail(failure);
-	    }
+	protected Community createCommunity(String title, String type,
+			String content, String tags) {
+		return createCommunity(title, type, content, tags, true);
+	}
 
-	   
+	protected Community createCommunity(String title, String type,
+			String content, String tags, boolean retry) {
+		Community community = null;
+		try {
+			loginConnections();
+			CommunityService communityService = getCommunityService();
+
+			long start = System.currentTimeMillis();
+			community = new Community(communityService, "");
+			community.setTitle(title);
+			community.setCommunityType(type);
+			community.setContent(content);
+			community.setTags(tags);
+			String communityUuid = communityService.createCommunity(community);
+			community = communityService.getCommunity(communityUuid);
+
+			long duration = System.currentTimeMillis() - start;
+			Trace.log("Created test community: " + communityUuid + " took "
+					+ duration + "(ms)");
+		} catch (AuthenticationException pe) {
+			if (pe.getCause() != null) {
+				pe.getCause().printStackTrace();
+			}
+			fail("Error authenicating: ", pe);
+		} catch (CommunityServiceException cse) {
+			// TODO remove this when we upgrade the QSI
+			Throwable t = cse.getCause();
+			if (t instanceof ClientServicesException) {
+				ClientServicesException csex = (ClientServicesException) t;
+				int statusCode = csex.getResponseStatusCode();
+				if (statusCode == 500 && retry) {
+					return createCommunity(title + " (retry)", type, content,
+							tags, false);
+				}
+			}
+			fail("Error creating test community with title: '" + title + "'",
+					cse);
+		}
+
+		return community;
+	}
+
+	protected void fail(String message, Exception cse) {
+		String failure = message;
+
+		Throwable cause = cse.getCause();
+		if (cause != null) {
+			cause.printStackTrace();
+			failure += ", " + cause.getMessage();
+		} else {
+			cse.printStackTrace();
+			failure += ", " + cse.getMessage();
+		}
+
+		Assert.fail(failure);
+	}
 
 	public void createFolder() {
 		setFailIfAfterDeletionFails(true);
@@ -204,10 +210,13 @@ public class BaseFilesTest extends BaseApiTest {
 			p.tags.add("text");
 			Map<String, String> params = p.buildParameters();
 
-			fileEntry = fileService.uploadFile(new ByteArrayInputStream(content.getBytes()), id, content.length(), params);
+			fileEntry = fileService.uploadFile(
+					new ByteArrayInputStream(content.getBytes()), id,
+					content.length(), params);
 
 			params = new HashMap<String, String>();
-			fileService.addCommentToFile(fileEntry.getFileId(), "Comment added by BaseFilesTest", params);
+			fileService.addCommentToFile(fileEntry.getFileId(),
+					"Comment added by BaseFilesTest", params);
 
 			Trace.log("Created test file: " + fileEntry.getFileId());
 		} catch (FileServiceException fse) {
@@ -221,9 +230,11 @@ public class BaseFilesTest extends BaseApiTest {
 	}
 
 	public void deleteFileAndQuit() {
-		fileService = getFileService();
-		communityService = getCommunityService();
+
 		if (fileEntry != null) {
+			if (fileService == null)
+				fileService = getFileService();
+
 			try {
 				fileService.deleteFile(fileEntry.getFileId());
 			} catch (FileServiceException fse) {
@@ -235,6 +246,9 @@ public class BaseFilesTest extends BaseApiTest {
 			}
 		}
 		if (folder != null) {
+			if (fileService == null)
+				fileService = getFileService();
+
 			try {
 				fileService.deleteFolder(folder.getFileId());
 			} catch (FileServiceException fse) {
@@ -245,7 +259,9 @@ public class BaseFilesTest extends BaseApiTest {
 				}
 			}
 		}
-		if(community != null) {
+		if (community != null) {
+			if (communityService == null)
+				communityService = getCommunityService();
 			try {
 				communityService.deleteCommunity(community.getCommunityUuid());
 			} catch (CommunityServiceException e) {
@@ -303,7 +319,8 @@ public class BaseFilesTest extends BaseApiTest {
 		} else {
 			for (int i = 0; i < ErrorMessages.length; i++) {
 				if (result.contains(ErrorMessages[i])) {
-					noErrorMsg = "Error message for: " + getSnippetId() + ": " + result;
+					noErrorMsg = "Error message for: " + getSnippetId() + ": "
+							+ result;
 					retVal = false;
 				}
 			}
@@ -320,16 +337,17 @@ public class BaseFilesTest extends BaseApiTest {
 	public String getNoErrorMsg() {
 		return noErrorMsg;
 	}
-	
+
 	protected java.io.File createLocalFile() {
-		String name = this.getClass().getName() + "#" + this.hashCode() + "-" + System.currentTimeMillis();
+		String name = this.getClass().getName() + "#" + this.hashCode() + "-"
+				+ System.currentTimeMillis();
 		return createLocalFile(name, ".tmp", 1024);
 	}
-	
+
 	protected java.io.File createLocalFile(String name, String ext, int size) {
 		try {
 			java.io.File tempFile = java.io.File.createTempFile(name, ext);
-			
+
 			FileWriter fw = new FileWriter(tempFile.getAbsoluteFile());
 			BufferedWriter bw = new BufferedWriter(fw);
 			char[] chars = new char[size];
@@ -344,6 +362,5 @@ public class BaseFilesTest extends BaseApiTest {
 			return null;
 		}
 	}
-	
 
 }

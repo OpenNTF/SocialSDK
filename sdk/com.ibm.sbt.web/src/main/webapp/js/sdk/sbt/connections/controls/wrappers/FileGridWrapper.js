@@ -41,7 +41,7 @@ define(["../../../declare", "../../../config", "../../../util", "../../../lang",
         getTransformObject: function(){
             var connectionsUrl = this._endpoint.baseUrl;
             var libUrl = new Url(config.Properties.libraryUrl);
-            var libQuery = libUrl.getQuery();
+            var libQuery = libUrl.getQuery() || "";
             var libQueryObj = util.splitQuery(libQuery, "&");
             
             lang.mixin(libQueryObj, {

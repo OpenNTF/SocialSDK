@@ -1,47 +1,134 @@
 ***REMOVED***
+/*
+ * © Copyright IBM Corp. 2014
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at:
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+* implied. See the License for the specific language governing
+* permissions and limitations under the License.
+*/
 /**
- * Plugin Name: Social Business Toolkit integration plugin
- * Plugin URI: http://example.com
- * Description: Plugin providing access to the SBTK javascript api and controls.
- * Version: 0.1
- * Author: Lorenzo Boccaccia, Benjamin Jakobus
- * Author URI: https://github.com/LorenzoBoccaccia
- * License: Apache 2.0
+ * @author Benjamin Jakobus
  */
 
+$agnostic_deploy_url = str_replace('http://', '//', $deploy_url);
 ?>
 <script type="text/javascript">
 	var djConfig = {
-	baseUrl: "***REMOVED*** echo $deploy_url; ?>",
+	baseUrl: "***REMOVED*** echo $agnostic_deploy_url; ?>",
 	parseOnLoad: true,
 	locale: "en"
 };
 
 </script>
-<link rel="stylesheet" type="text/css" title="Style" href="http://infolib.lotus.com/resources/oneui/3.0/css/base/core.css"></link>
-<link rel="stylesheet" type="text/css" title="Style" href="http://infolib.lotus.com/resources/oneui/3.0/css/defaultTheme/defaultTheme.css"></link>
-<script src="//ajax.googleapis.com/ajax/libs/dojo/1.8.0/dojo/dojo.js.uncompressed.js"></script>
-<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/dojo/1.8.0/dojo/resources/dojo.css">
-<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/dojo/1.8.0/dijit/themes/claro/claro.css">
-<link rel="stylesheet" type="text/css" title="Style" href="http://ajax.googleapis.com/ajax/libs/dojo/1.8.0/dojox/grid/enhanced/resources/claro/EnhancedGrid.css">
-<link rel="stylesheet" type="text/css" title="Style" href="http://ajax.googleapis.com/ajax/libs/dojo/1.8.0/dojox/grid/enhanced/resources/EnhancedGrid_rtl.css">
+
+
+***REMOVED*** 
+	if ($js_library != 'none') {
+		switch ($js_library) {
+			case 'Dojo Toolkit 1.4.3':
+				echo '<script src="//ajax.googleapis.com/ajax/libs/dojo/1.4.3/dojo/dojo.js"></script>';
+				echo '<link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/dojo/1.4.3/dojo/resources/dojo.css">';
+				break;
+			case 'Dojo Toolkit 1.5.2':
+				echo '<script src="//ajax.googleapis.com/ajax/libs/dojo/1.5.2/dojo/dojo.js"></script>';
+				echo '<link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/dojo/1.5.2/dojo/resources/dojo.css">
+					  <link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/dojo/1.5.2/dijit/themes/claro/claro.css">';
+				break;
+				
+			case 'Dojo Toolkit 1.6.1':
+				echo '<script src="//ajax.googleapis.com/ajax/libs/dojo/1.6.1/dojo/dojo.js"></script>';
+				echo '<link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/dojo/1.6.1/dojo/resources/dojo.css">
+					  <link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/dojo/1.6.1/dijit/themes/claro/claro.css">';
+				break;
+					
+			case 'Dojo Toolkit 1.7.4':
+				echo '<script src="//ajax.googleapis.com/ajax/libs/dojo/1.7.4/dojo/dojo.js"></script>';
+				echo '<link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/dojo/1.7.4/dojo/resources/dojo.css">
+					  <link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/dojo/1.7.4/dijit/themes/claro/claro.css">';
+				break;
+						
+			case 'Dojo Toolkit 1.8.4':
+				echo '<script src="//ajax.googleapis.com/ajax/libs/dojo/1.8.4/dojo/dojo.js"></script>';
+				echo '<link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/dojo/1.8.4/dojo/resources/dojo.css">
+					  <link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/dojo/1.8.4/dijit/themes/claro/claro.css">';
+				break;
+							
+			case 'Dojo Toolkit 1.9.0':
+				echo '<script src="//ajax.googleapis.com/ajax/libs/dojo/1.9.0/dojo/dojo.js"></script>';
+				echo '<link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/dojo/1.9.0/dojo/resources/dojo.css">
+					  <link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/dojo/1.9.0/dijit/themes/claro/claro.css">';
+				break;
+								
+			case 'JQuery 1.8.3':
+				echo '<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>';
+				break;
+				
+				case 'Dojo Toolkit 1.4.3 uncompressed':
+					echo '<script src="//ajax.googleapis.com/ajax/libs/dojo/1.4.3/dojo/dojo.js.uncompressed.js"></script>';
+					echo '<link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/dojo/1.4.3/dojo/resources/dojo.css">';
+					break;
+				case 'Dojo Toolkit 1.5.2 uncompressed':
+					echo '<script src="//ajax.googleapis.com/ajax/libs/dojo/1.5.2/dojo/dojo.js.uncompressed.js"></script>';
+					echo '<link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/dojo/1.5.2/dojo/resources/dojo.css">
+					  <link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/dojo/1.5.2/dijit/themes/claro/claro.css">';
+					break;
+				
+				case 'Dojo Toolkit 1.6.1 uncompressed':
+					echo '<script src="//ajax.googleapis.com/ajax/libs/dojo/1.6.1/dojo/dojo.js.uncompressed.js"></script>';
+					echo '<link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/dojo/1.6.1/dojo/resources/dojo.css">
+					  <link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/dojo/1.6.1/dijit/themes/claro/claro.css">';
+					break;
+						
+				case 'Dojo Toolkit 1.7.4 uncompressed':
+					echo '<script src="//ajax.googleapis.com/ajax/libs/dojo/1.7.4/dojo/dojo.js.uncompressed.js"></script>';
+					echo '<link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/dojo/1.7.4/dojo/resources/dojo.css">
+					  <link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/dojo/1.7.4/dijit/themes/claro/claro.css">';
+					break;
+				
+				case 'Dojo Toolkit 1.8.4 uncompressed':
+					echo '<script src="//ajax.googleapis.com/ajax/libs/dojo/1.8.4/dojo/dojo.js.uncompressed.js"></script>';
+					echo '<link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/dojo/1.8.4/dojo/resources/dojo.css">
+					  <link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/dojo/1.8.4/dijit/themes/claro/claro.css">';
+					break;
+						
+				case 'Dojo Toolkit 1.9.0 uncompressed':
+					echo '<script src="//ajax.googleapis.com/ajax/libs/dojo/1.9.0/dojo/dojo.js.uncompressed.js"></script>';
+					echo '<link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/dojo/1.9.0/dojo/resources/dojo.css">
+					  <link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/dojo/1.9.0/dijit/themes/claro/claro.css">';
+					break;
+				
+				case 'JQuery 1.8.3 uncompressed':
+					echo '<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js.uncompressed.js"></script>';
+					break;
+		}
+	}
+?>
+
 
 <script>
 	if (typeof _sbt == "undefined" || window._sbt_bridge_compat) {
 		_sbt = 0;
 		require({
 			paths: {
-				"sbt": "***REMOVED*** echo $deploy_url; ?>/js/sdk/sbt"
+				"sbt": "***REMOVED*** echo $agnostic_deploy_url; ?>/js/sdk/sbt"
 			}
 		});
 		require({
 			paths: {
-				"sbt/_bridge": "***REMOVED*** echo $deploy_url; ?>/js/sdk/_bridges/dojo-amd"
+				"sbt/_bridge": "***REMOVED*** echo $agnostic_deploy_url; ?>/js/sdk/_bridges/dojo-amd"
 			}
 		});
 		require({
 			paths: {
-				"sbt/widget": "***REMOVED*** echo $deploy_url; ?>/js/sdk/dojo2"
+				"sbt/widget": "***REMOVED*** echo $agnostic_deploy_url; ?>/js/sdk/dojo2"
 			}
 		});
 
@@ -50,11 +137,15 @@
 				var sbt = {};
 				sbt.Properties = {
 					"libraryUrl": "",
-					"serviceUrl": "***REMOVED*** echo plugins_url('sbtk-wp'); ?>/index.php?classpath=services&class=Proxy&method=fileOperations&_redirectUrl=",
-					"sbtUrl": "***REMOVED*** echo $deploy_url; ?>/js/sdk"
+					"serviceUrl": "***REMOVED*** echo plugins_url(PLUGIN_NAME); ?>/core/index.php?classpath=services&class=Proxy&method=fileOperations&_redirectUrl=",
+					"sbtUrl": "***REMOVED*** echo $agnostic_deploy_url; ?>/js/sdk"
 				};
 				sbt.Endpoints = {
-						***REMOVED*** echo generateEndpoint($authentication_method, $url, $deploy_url, $name); ?>
+						***REMOVED*** 
+							if ($allow_client_access) {
+								echo generateEndpoint($type, $authentication_method, $url, $agnostic_deploy_url, $name, $api_version); 
+							}
+						?>
 				};
 				sbt.findEndpoint = function (endpointName) {
 					return this.Endpoints[endpointName];
@@ -73,45 +164,9 @@
  * @return string			The JavaScript representing an endpoint.
  * @author Benjamin Jakobus
 */
-function generateEndpoint($authentication_method, $url, $deploy_url, $name) {
+function generateEndpoint($type,$authentication_method, $url, $deploy_url, $name, $api_version) {
 	//TODO support list of endpoint and aliases
-	return generateConnectionsEndpoint($authentication_method, $url, $deploy_url);
-}
-
-/**
- * Generates the JavaScript for an IBM SmartCloud endpoint.
- *
- * @return string		The JavaScript representing an IBM SmartCloud endpoint.
- * @author Benjamin Jakobus
- */
-function generateSmartcloudEndpoint($authentication_method, $url, $deploy_url) {
-	$endpoint_js = '"smartcloud": new Endpoint({';
-	$endpoint_js .= '"authType":';
-	$endpoint_js .= '"' . $authentication_method . '",';
-	$endpoint_js .= '"isAuthenticated": false,';
-	$endpoint_js .= '"transport": new Transport({}),';
-	$endpoint_js .= '"name": "smartcloud",';
-	$endpoint_js .= '"proxy": new Proxy({
-			proxyUrl: "' . plugins_url() . '/index.php?classpath=services&class=Proxy&method=route&_redirectUrl="}),';
-	$endpoint_js .= '"proxyPath": "smartcloud",';
-
-	if ($authentication_method == 'oauth1') {
-		$endpoint_js .= '"authenticator": new OAuth({"loginUi": null,
-				"url": "' . $deploy_url . '"}),';
-	} else if ($authentication_method == 'basic') {
-		$endpoint_js .= '"authenticator": new Basic({';
-		$endpoint_js .= '"url": "' . $deploy_url . '"}),';
-	}
-
-	$endpoint_js .= '"platform": "smartcloud",';
-	$endpoint_js .= '"isSmartCloud": true,';
-	$endpoint_js .= '"serviceMappings": {},';
-	$endpoint_js .= '"authenticationErrorCode": 403,';
-	$endpoint_js .= '"apiVersion": "3.0",';
-	$endpoint_js .= '"baseUrl": "' . $url . '"';
-	$endpoint_js .= '}),';
-
-	return $endpoint_js;
+	return generateConnectionsEndpoint($type,$authentication_method, $url, $deploy_url, $api_version);
 }
 
 /**
@@ -121,29 +176,47 @@ function generateSmartcloudEndpoint($authentication_method, $url, $deploy_url) {
  * @author Benjamin Jakobus
  */
 
-function generateConnectionsEndpoint($authentication_method, $url, $deploy_url) {
+function generateConnectionsEndpoint($type, $authentication_method, $url, $deploy_url, $api_version) {
 	$endpoint_js = '"connections": new Endpoint({';
-	$endpoint_js .= '"authType": "' . $authentication_method . '",';
-	$endpoint_js .= '"platform": "connections",';
-
+	
+	if ($authentication_method == 'oauth1' || $authentication_method == 'oauth2') {
+		$endpoint_js .= '"authType": "oauth",';
+	} else {
+		$endpoint_js .= '"authType": "basic",';
+	}
+	
+	if ($api_version != "") {
+		$endpoint_js .= '"apiVersion": "' . $api_version . '",';
+	}
+	
+	$endpoint_js .= '"platform": "' . $type . '",';
+	
 	if ($authentication_method == 'oauth1') {
 		$endpoint_js .= '"authenticator": new OAuth({"loginUi": null,
 				"url": "' . $deploy_url . '"}),';
 	} else if ($authentication_method == 'basic') {
 		$endpoint_js .= '"authenticator": new Basic({';
-		$endpoint_js .= '"url": "' . $deploy_url . '", "actionUrl": "' . plugins_url('sbtk-wp') . '/index.php?classpath=services&class=Proxy&method=route&basicAuthRequest=true&_redirectUrl=' . getCurrentPage() . '"}),';
+		$endpoint_js .= '"url": "' . $deploy_url . '", "actionUrl": "' . plugins_url(PLUGIN_NAME) . '/core/index.php?classpath=services&class=Proxy&method=route&basicAuthRequest=true&_redirectUrl=' . getCurrentPage() . '"}),';
 	}
-
 	$endpoint_js .= '"proxyPath": "connections",';
+// 	$endpoint_js .= '"proxyPath": "' . $type . '",';
+	if ($type == 'smartcloud') {
+		$endpoint_js .= '"isSmartCloud": true,';
+	}
 	$endpoint_js .= '"isAuthenticated": "false",';
 	$endpoint_js .= '"transport": new Transport({}),';
 	$endpoint_js .= '"serviceMappings": {},';
-	$endpoint_js .= '"name": "connections",';
-	$endpoint_js .= '"authenticationErrorCode": "401",';
+	$endpoint_js .= '"name": "' . $type . '",';
+	
+	if ($type == 'smartcloud') {
+		$endpoint_js .= '"authenticationErrorCode": "403",';
+	} else {
+		$endpoint_js .= '"authenticationErrorCode": "401",';
+	}
 	$endpoint_js .= '"baseUrl": "' . $url . '",';
-	$endpoint_js .= '"apiVersion": "4.0",';
+
 	$endpoint_js .=	'"proxy": new Proxy({';
-	$endpoint_js .=	'"proxyUrl": "' . plugins_url('sbtk-wp') . '/index.php?classpath=services&class=Proxy&method=route&_redirectUrl="})}),';
+	$endpoint_js .=	'"proxyUrl": "' . plugins_url(PLUGIN_NAME) . '/core/index.php?classpath=services&class=Proxy&method=route&_redirectUrl="})}),';
 
 	return $endpoint_js;
 }

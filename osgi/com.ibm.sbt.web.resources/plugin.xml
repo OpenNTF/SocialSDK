@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+    <extension point="net.jazz.ajax.webBundles">
+    	<alias value="sbt" />
+		<resource base-name="/resources/js/sdk/sbt" />
+    </extension>
+    <extension point="net.jazz.ajax.dojoModules">
+    	<dojoModule id="sbt.config" 
+    		provider="com.ibm.sbt.web.resources.LibraryProvider" />
+    </extension>
+</plugin>

@@ -38,29 +38,27 @@ if (!defined('BASE_PATH')) {
 if (defined('IBM_SBT_MOODLE_BLOCK')) {
 	define('BASE_LOCATION',  $CFG->wwwroot . '/blocks/ibmsbtk/core/');
 } else if (defined('IBM_SBT_WORDPRESS_PLUGIN')) {
-	define('BASE_LOCATION',  get_site_url() . '/wp-content/plugins/sbtk-wp/');
+	define('BASE_LOCATION',  get_site_url() . '/wp-content/plugins/' . PLUGIN_NAME);
 } else {
 	define('BASE_LOCATION',  'http://localhost/core/src');
 }
 
-// define('BASE_LOCATION',  'https://localhost/wp-content/plugins/sbtk-wp/'); // TODO: Remove
-
-spl_autoload_register(function ($class) {
+spl_autoload_register(function ($class) 
+{
 	$coreFile = BASE_PATH . '/system/core/' . $class . '.php';
 	$applicationFile = BASE_PATH . '/controllers/' . $class . '.php';
 	$applicationEndpointFile = BASE_PATH . '/controllers/endpoint/' . $class . '.php';
 	$applicationServicesFile = BASE_PATH . '/controllers/services/' . $class . '.php';
 	$model = BASE_PATH . '/models/' . $class . '.php';
 	if (file_exists($coreFile)) {
-		@include $coreFile;
+		include $coreFile;
 	} else if (file_exists($applicationFile)) {
-		@include $applicationFile;
+		include $applicationFile;
 	} else if (file_exists($model)) {
-		@include $model;
+		include $model;
 	} else if (file_exists($applicationEndpointFile)) {
-		@include $applicationEndpointFile;
+		include $applicationEndpointFile;
 	} else if (file_exists($applicationServicesFile)) {
-		@include $applicationServicesFile;
+		include $applicationServicesFile;
 	}
-	
 });

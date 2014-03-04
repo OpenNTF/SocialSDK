@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/com.ibm.sbt.web.resources.feature_1.0.0.201403010809.jar" id="com.ibm.sbt.web.resources.feature" version="1.0.0.201403010809"/>
+</site>

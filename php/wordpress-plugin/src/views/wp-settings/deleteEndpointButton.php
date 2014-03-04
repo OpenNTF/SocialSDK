@@ -1,1 +1,1 @@
-<input type="button" onclick="delete_selected_endpoint();" name="btn_delete_endpoint" id="btn_delete_endpoint" class="button button-primary" value="Delete Endpoint" />
+<input type="button" onclick="delete_selected_endpoint();" name="btn_delete_endpoint" id="btn_delete_endpoint" class="button button-primary" value="***REMOVED*** echo $GLOBALS[LANG]['delete_endpoint']; ?>" />

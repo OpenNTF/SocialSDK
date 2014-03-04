@@ -17,7 +17,7 @@
 /**
  * @module sbt.util
  */
-define(['./lang','sbt/i18n!sbt/nls/util','./log'],function(lang, nls, log) {
+define(['./lang','sbt/i18n!sbt/nls/util','./log','./stringUtil','./pathUtil'],function(lang, nls, log, stringUtil, pathUtil) {
 	var errorCode = 400;	
 	function _notifyError(error, args){	
 		if (args && (args.error || args.handle)) {
@@ -202,6 +202,20 @@ define(['./lang','sbt/i18n!sbt/nls/util','./log'],function(lang, nls, log) {
 	    		jsLib = "JQuery "+jQuery.fn.jquery;
 	    	} 
 	    	return jsLib;
+	    },
+	    
+	    /**
+	     * Return san absolute version of the specified url
+	     * @param {String} URL to convert
+	     * @returns {String} Absolute version of the url
+	     */
+	    makeAbsoluteUrl : function(url) {
+	    	if (stringUtil.startsWith(url, "http")) {
+	    		return url;
+	    	}
+	    	var loc = window.location;
+	    	var baseUrl = loc.protocol+'//'+loc.hostname+(loc.port ? ':'+loc.port: '');
+	    	return pathUtil.concat(baseUrl, url);
 	    }
 	};
 });

@@ -36,7 +36,8 @@ public class ChangePasswordTest extends BaseBssTest {
     		System.out.println(loginName);
     		
     		UserCredentialJsonBuilder userCredential = new UserCredentialJsonBuilder();
-    		userCredential.setNewPassword("new_***REMOVED***")
+    		userCredential.setLoginName(loginName)
+    					  .setNewPassword("new_***REMOVED***")
     					  .setConfirmPassword("new_***REMOVED***");
     		
     		AuthenticationService authenticationService = getAuthenticationService();

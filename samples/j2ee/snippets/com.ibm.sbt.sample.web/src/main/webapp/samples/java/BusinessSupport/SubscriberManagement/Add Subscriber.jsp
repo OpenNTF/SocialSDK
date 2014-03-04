@@ -61,8 +61,12 @@
 		
 		SubscriberManagementService subscriberManagement = new SubscriberManagementService("smartcloudC1");
 		JsonJavaObject responseJson = subscriberManagement.addSubscriber(subscriber);
-		long subscriberId = responseJson.getAsLong("Long");
-		out.println("Subscriber Id: " + subscriberId );			
+		Long subscriberId = responseJson.getAsLong("Long");
+		JsonEntity jsonEntity = subscriberManagement.getSubscriberById("" + subscriberId);
+		
+		out.println("Subscriber Id: " + subscriberId );
+		out.println("<pre>" + jsonEntity.toJsonString(false) + "<pre/>");
+		
 	} catch (Exception e) {
 			out.println("<pre>");
 			out.println("Error adding subscriber caused by: "+e.getMessage());

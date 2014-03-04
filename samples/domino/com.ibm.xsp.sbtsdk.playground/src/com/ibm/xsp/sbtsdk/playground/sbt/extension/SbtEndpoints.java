@@ -111,13 +111,13 @@ public class SbtEndpoints extends Endpoints {
 					"", // SMA_OA_GADGET_SERVICE
 					"", // SMA_OA_COUNSUMERKEY
 					"", // SMA_OA_CONSUMERSECRET
-					"https://apps.na.collabservnext.lotus.com/manage/oauth/getRequestToken", // Sma_OA_RequestTokenURL
-					"https://apps.na.collabservnext.lotus.com/manage/oauth/authorizeToken", // Sma_OA_AuthorizationURL
-					"https://apps.na.collabservnext.lotus.com/manage/oauth/getAccessToken", // Sma_OA_AccessTokenURL
+					"https://apps.collabservnext.com/manage/oauth/getRequestToken", // Sma_OA_RequestTokenURL
+					"https://apps.collabservnext.com/manage/oauth/authorizeToken", // Sma_OA_AuthorizationURL
+					"https://apps.collabservnext.com/manage/oauth/getAccessToken", // Sma_OA_AccessTokenURL
 					"", // Sma_OA2_ConsumerKey
 					"", // Sma_OA2_ConsumerSecret
-					"https://apps.na.collabservnext.lotus.com/manage/oauth2/authorize", // Sma_OA2_AuthorizationURL
-					"https://apps.na.collabservnext.lotus.com/manage/oauth2/token" // Sma_OA2_AccessTokenURL
+					"https://apps.collabservnext.com/manage/oauth2/authorize", // Sma_OA2_AuthorizationURL
+					"https://apps.collabservnext.com/manage/oauth2/token" // Sma_OA2_AccessTokenURL
 			   })
 		}),
 		new Category("domino","IBM Domino", "IBM Domino", new Property[] {

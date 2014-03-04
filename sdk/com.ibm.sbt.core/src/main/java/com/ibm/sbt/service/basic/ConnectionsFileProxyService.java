@@ -25,6 +25,7 @@ public class ConnectionsFileProxyService extends AbstractFileProxyService {
 	private static final String DOWNLOAD_URL = "/files/basic/api/library/{0}/document/{1}/media";
 	private static final String UPDATE_URL = "/files/basic/api/myuserlibrary/document/{0}/media";
 	private static final String UPDATE_COMMUNITY_LOGO = "/communities/service/html/image";
+	private static final String UPLOAD_COMMUNITY_FILE = "/files/basic/api/communitylibrary/{0}/feed";
 
 	private static final String X_UPDATE_NONCE = "x-update-nonce";
 
@@ -41,7 +42,13 @@ public class ConnectionsFileProxyService extends AbstractFileProxyService {
 
 	@Override
 	protected String getRequestURI(String method, String authType, Map<String, String[]> params) throws ServletException {
-		if ("POST".equalsIgnoreCase(method)) {
+		if ("POST".equalsIgnoreCase(method) && Operations.UPLOAD_COMMUNITY_FILE.toString().equals(operation)) {
+			String communityUuid = parameters.get("CommunityUuid");
+			if (communityUuid == null) {
+				throw new ServletException("Community UUID is required in URL to upload a community file.");
+			}
+			return StringUtil.format(UPLOAD_COMMUNITY_FILE, communityUuid);
+		} else if ("POST".equalsIgnoreCase(method)) {
 			return UPLOAD_URL;
 		} else if ("PUT".equalsIgnoreCase(method) && Operations.UPDATE_PROFILE_PHOTO.toString().equals(operation)) {
 			// return PROFILE_PIC_UPLOAD_URL;
@@ -99,9 +106,14 @@ public class ConnectionsFileProxyService extends AbstractFileProxyService {
 		}
 		if (Operations.UPLOAD_FILE.toString().equals(operation)) {
 			if (tokens.length < 6) {
-				throw new ServletException("Invalid url for File Download");
+				throw new ServletException("Invalid url for File Upload");
 			}
 			parameters.put("FileName", tokens[5]);
+		} else if (Operations.UPLOAD_COMMUNITY_FILE.toString().equals(operation)) {
+			if (tokens.length < 6) {
+				throw new ServletException("Invalid url for Community File Upload");
+			}
+			parameters.put("CommunityUuid", tokens[5]);
 		} else if (Operations.DOWNLOAD_FILE.toString().equals(operation)) {
 			if (tokens.length < 7) {
 				throw new ServletException("Invalid url for File Download");

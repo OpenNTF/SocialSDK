@@ -65,6 +65,7 @@ public class Util {
         { "Default", "defaultEnvironment"},
         { "Connections", "connectionsEnvironment"},
         { "SmartCloud", "smartcloudEnvironment"},
+        { "SmartCloud C1", "smartcloudC1Environment"},
         { "Third Party APIs", "thirdPartyAPIsEnvironment"},
         { "Domino", "dominoEnvironment"},
         { "OpenSocial", "openSocial"}

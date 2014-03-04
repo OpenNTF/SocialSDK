@@ -42,6 +42,7 @@ public class LibraryRequestParams {
     private String serverUrl;
     private String contextUrl;
     private String requestUrl;
+    private String contextPath;
     private String pathInfo;
     private Map<String, String> parameters = new HashMap<String, String>();
 
@@ -324,6 +325,20 @@ public class LibraryRequestParams {
 	 */
 	public void setRequestUrl(String requestUrl) {
 		this.requestUrl = requestUrl;
+	}
+	
+	/**
+	 * @return the contextPath
+	 */
+	public String getContextPath() {
+		return contextPath;
+	}
+	
+	/**
+	 * @param contextPath the contextPath to set
+	 */
+	public void setContextPath(String contextPath) {
+		this.contextPath = contextPath;
 	}
 
 	/**

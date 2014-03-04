@@ -1,1 +1,0 @@
-<input style="display: none;" size="50" type="text" id="basic_auth_username" name="basic_auth_username" value="" />

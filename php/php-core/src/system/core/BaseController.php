@@ -28,7 +28,6 @@ class BaseController {
 	 * Model loader.
 	 * 
 	 * @param string $className		The name of the model to load.
-	 * @author Benjamin Jakobus
 	 */
 	function loadModel($className) {
 		$file = '/models/' . $className . '.php';
@@ -40,7 +39,6 @@ class BaseController {
 	 * Controller loader.
 	 *
 	 * @param string $className		The name of the controller to load.
-	 * @author Benjamin Jakobus
 	 */
 	function loadController($className) {
 		$file = '/controllers/' . $className . '.php';
@@ -53,7 +51,6 @@ class BaseController {
 	 *
 	 * @param string $className		The name of the view to load.
 	 * @param array  $viewData		Associative array containing the data to be displayed by the view.
-	 * @author Benjamin Jakobus
 	 */
 	
 	function loadView($className, $viewData) {
@@ -72,7 +69,6 @@ class BaseController {
 	 * the file from.
 	 *
 	 * @param string $file			The file to load, prefixed with /model, /controller or /view.
-	 * @author Benjamin Jakobus
 	 */
 	private function _include_file($file) {
 		if (file_exists(BASE_PATH . $file)) {
@@ -87,7 +83,6 @@ class BaseController {
 	 * Simple class loader.
 	 * 
 	 * @param string $className		Name of the class to load.
-	 * @author Benjamin Jakobus
 	 */
 	function load($className) {
 		@include_once $className . '.php';

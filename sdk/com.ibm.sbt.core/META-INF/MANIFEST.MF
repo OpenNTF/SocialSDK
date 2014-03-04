@@ -89,7 +89,7 @@ Export-Package: com.ibm.sbt.core.configuration,
  com.ibm.sbt.services.util,
  com.ibm.sbt.services.util.extractor.field,
  com.ibm.sbt.services.util.navigable, com.ibm.sbt.util 
-Import-Package: javax.servlet,
- javax.servlet.http,
- javax.mail,
- javax.mail.internet
+Import-Package: javax.mail;resolution:=optional,
+ javax.mail.internet;resolution:=optional,
+ javax.servlet,
+ javax.servlet.http

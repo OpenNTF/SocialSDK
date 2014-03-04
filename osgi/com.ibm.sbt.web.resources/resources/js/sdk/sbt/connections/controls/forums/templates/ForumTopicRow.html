@@ -1,0 +1,17 @@
+<tr uuid="${uid}" class=" normalTopic ">
+	<td style="width: 20px; height: 30px" class="lotusFirstCell">
+		<input type="checkbox"  data-dojo-attach-point="rowSelectionInput" data-dojo-attach-event="onclick: handleCheckBox"></input>
+		
+   </td>
+	<td>
+		<h4 style="max-width: 450px">
+			<a class="lotusBreakWord" href="" data-dojo-attach-event="onclick: handleClick" >${title}</a>
+		</h4>
+	</td>
+
+	
+	<td class="lotusMeta"><span >${threadCount}</span></td>
+	<td></td>
+	<td class="lotusMeta lotusLastCell lotusNowrap"><span
+		class="formatDate">${getDateLabel}</span></td>
+</tr>

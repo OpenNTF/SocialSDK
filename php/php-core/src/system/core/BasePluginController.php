@@ -23,23 +23,23 @@
  * @author Benjamin Jakobus
  */
 defined('SBT_SDK') OR exit('Access denied.');
+use Guzzle\Http\Client;
 class BasePluginController extends BaseController {
 	
 	/**
 	 * Constructor.
-	 * 
-	 * @author Benjamin Jakobus
 	 */
 	function __construct() {
-		$this->loadModel('SBTKSettings');
-		$settings = new SBTKSettings();
+		$this->loadModel('SBTSettings');
+		$settings = new SBTSettings();
 		$authMethod = $settings->getAuthenticationMethod();
 
 		if ($authMethod == 'oauth1') {	
 			// Check if we have an access token. If not, re-direct user to authentication page
-			$this->loadModel('CredentialStore');
-			$store = new CredentialStore();
+			$this->loadModel('SBTCredentialStore');
+			$store = SBTCredentialStore::getInstance();
 			$token = $store->getRequestToken();
+		
 			if ($token == null) {
 				// Autoloader
 				if (file_exists('../../../autoload.php')) {
@@ -58,10 +58,10 @@ class BasePluginController extends BaseController {
 						'authorize_uri' => $settings->getAuthorizationURL(),
 						'access_token_uri' => $settings->getAccessTokenURL()
 				);
-				
+				include BASE_PATH . '/core/controllers/endpoint/SBTOAuth1Endpoint.php';
 				// Create endpoint
-				$oauth = new OAuth1Endpoint($options);
-				
+				$oauth = new SBTOAuth1Endpoint($options);
+		
 				// Send request to authenticate user (auth token is automatically being stored when callback method = authenticationCallback)
 				// find out the domain:
 				$domain = $_SERVER['HTTP_HOST'];
@@ -75,9 +75,38 @@ class BasePluginController extends BaseController {
 				$url = $protocol . $domain . $path . "?" . $queryString;
 
 				$body = $oauth->request($url,
-						BASE_LOCATION . '/index.php?plugin=guzzle&class=OAuth1Endpoint&method=authenticationCallback', 'POST');
+						BASE_LOCATION . '/core/index.php?plugin=guzzle&class=SBTOAuth1Endpoint&method=authenticationCallback', 'POST');
 				
 				var_dump($body);
+			}
+		} else if ($authMethod == 'oauth2') {
+			// Check if we have an access token. If not, re-direct user to authentication page
+			$this->loadModel('SBTCredentialStore');
+			$store = SBTCredentialStore::getInstance();
+			$token = $store->getOAuthAccessToken();
+			
+			if ($token == null) {
+				// Autoloader
+				if (file_exists('../../../autoload.php')) {
+					include_once '../../../autoload.php';
+				} else if (function_exists('plugin_dir_path')) {
+					$dir = plugin_dir_path( __FILE__ );
+					include_once  $dir . '../../autoload.php';
+				}
+			
+				$parameters = array(
+						'response_type' => 'code',
+						'client_id'     => $settings->getConsumerKey(),
+						'callback_uri'  => $settings->getOAuth2CallbackURL()
+				); 
+			
+				$authURL = $settings->getAuthorizationURL() . '?' . http_build_query($parameters, null, '&');
+				
+				if (!headers_sent()) {
+					header("Location: " . $authURL);
+				} else {
+					echo '<script type="text/javascript" language="javascript">window.location = "' . $authURL . '";</script>';
+				}
 			}
 		}
 		
@@ -85,18 +114,21 @@ class BasePluginController extends BaseController {
 	
 	/**
 	 * Creates the header for the SBTK plugin.
-	 * 
-	 * @author Benjamin Jakobus
 	 */
 	public function createHeader() {
-		$this->loadModel('SBTKSettings');
-		$settings = new SBTKSettings();
-	
+		$this->loadModel('SBTSettings');
+		$settings = new SBTSettings();
+		
 		$viewData['deploy_url'] = $settings->getSDKDeployURL();
 		$viewData['authentication_method'] = $settings->getAuthenticationMethod();
+		$viewData['js_library'] = $settings->getJSLibrary();
+		
 		$viewData['url'] = $settings->getURL();
 		$viewData['name'] = $settings->getName();
-	
+		$viewData['api_version'] = $settings->getAPIVersion();
+		$viewData['type'] = $settings->getServerType();
+		$viewData['allow_client_access'] = $settings->allowClientAccess();
+		
 		// Load the header view
 		return $this->loadView('includes/header', $viewData);	
 	}

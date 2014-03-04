@@ -21,6 +21,7 @@
 window.onload = function() {
 
 	var authType = document.getElementById('id_s__auth_type');
+	var basicAuthMethod = document.getElementById('id_s__basic_auth_method');
 	
 	if (authType != null) {
 		authType.addEventListener(
@@ -29,6 +30,50 @@ window.onload = function() {
 		 	false
 		);
 		authTypeChange();
+	}
+	
+	if (basicAuthMethod != null) {
+		basicAuthMethod.addEventListener(
+			"change",
+			basicAuthMethodChange,
+		 	false
+		);
+		authTypeChange();
+		
+		basicAuthMethodChange();
+	}
+	
+}
+
+function basicAuthMethodChange() {
+	var auth_method_list = document.getElementById("id_s__basic_auth_method");
+	var selected_auth_method = auth_method_list.options[auth_method_list.selectedIndex].value;
+	var labels = document.getElementsByTagName('label');
+	if (selected_auth_method == 'prompt' || selected_auth_method == 'profile') {
+		var el = document.getElementById('id_s__basic_auth_username').parentNode;
+		el.parentNode.style.display = "none";
+
+		el = document.getElementById('id_s__basic_auth_password').parentNode;
+		el.parentNode.style.display = "none";
+		for (var i = 0; i < labels.length; i++) {
+		    if (labels[i].htmlFor == 'id_s__basic_auth_password' ||
+		    		labels[i].htmlFor == 'id_s__basic_auth_username') {
+		    	labels[i].parentNode.style.display = 'none';
+		    }
+		}
+	} else {
+		var el = document.getElementById('id_s__basic_auth_username').parentNode;
+		el.parentNode.style.display = "block";
+
+		el = document.getElementById('id_s__basic_auth_password').parentNode;
+		el.parentNode.style.display = "block";
+		
+		for (var i = 0; i < labels.length; i++) {
+		    if (labels[i].htmlFor == 'id_s__basic_auth_password' ||
+		    		labels[i].htmlFor == 'id_s__basic_auth_username') {
+		    	labels[i].parentNode.style.display = 'block';
+		    }
+		}
 	}
 }
 

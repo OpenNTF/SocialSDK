@@ -23,6 +23,16 @@
 // 	$config['access_token_url']			= '';
 // 	$config['authentication_method'] 	= "basic"; 
 // 	$config['basic_auth_method']		= 'global'; // prompt or global
+
+ //	smartcloudOA2.url=https://apps.na.collabserv.com
+ //	smartcloudOA2.serviceName=LotusLive
+ //	smartcloudOA2.appId=Oauth2Impl
+ //	smartcloudOA2.consumerKey=app_20542369_1354381519099
+ //	smartcloudOA2.consumerSecret=ed31477e78788cb35844686584c8ee994bd961ea0ce2d6fe86a7aebaed43497dc9e10eba6137055af0d4f0304ef40c64700a471b3cd858f99afeb572e2e06b3dcf0e88d17d5a6110f409714f9ebf481f2104dff84b07eab5820ee30b18e39e6b5a7b1ec9d6f1b7229fae7e6abef867037cc9ee6fdff2226666579e49bf949ee7
+ //	smartcloudOA2.authorizationURL=https://apps.lotuslive.com/manage/oauth2/authorize
+ //	smartcloudOA2.accessTokenURL=https://apps.lotuslive.com/manage/oauth2/token
+ //	smartcloudOA2.apiVersion=3.0
+ 	
 	
 	
 	//defaults to integrated sdk
@@ -63,6 +73,7 @@
  	$config['wp_endpoint_1_basic_auth_password']		= "passw0rd";
 //  	wp_endpoint_1
  	
-	//session bridging
-	require_once ('sbridge.php');
+ 	$config['js_library'] = 'Dojo Toolkit 1.4.3';
+ 	
+	
 	

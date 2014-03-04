@@ -57,6 +57,12 @@ public class UploadFileWidget extends BaseFilesTest {
 	
 	@Test
 	public void testUploadFileFail() {
+		if (environment.getProperty("browser") == null ||environment.getProperty("browser").equals("firefox") ) {
+			//There is a bug in firefox where if you put a not existing file in a HTML5 file control
+			//the latest uploaded file is sent instead. 
+			//this survives browser restarts.
+			return;
+		}
 		WidgetResultPage resultPage = launchWidget(SNIPPET_ID);
 		
 		java.io.File file = createLocalFile();

@@ -35,11 +35,7 @@ define('SBT_SDK', 'IBM Social Business Toolkit');
 define('BASE_PATH', dirname( __FILE__));
 
 include 'config.php';
-if (!session_id()) {
-	session_name($config['session_name']);
-	session_start();
-}
-
+include 'autoload.php'; // remove?
 
 // Front controller blacklist - names of folders to containing classes that should be
 // inaccessible through the frontpage controller
@@ -72,12 +68,12 @@ if ($plugin != null) {
 	{
 		case "guzzle":
 			// Load dependencies for Guzzle
-			require_once "controllers/endpoint/OAuth1Endpoint.php";
+			require_once "controllers/endpoint/SBTOAuth1Endpoint.php";
 			
 			// Load properties
-			require_once 'models/SBTKSettings.php';
+			require_once 'models/SBTSettings.php';
 			
-			$settings = new SBTKSettings();
+			$settings = new SBTSettings();
 			
 			//  Init the OAuth options
 			$options = array(
@@ -106,7 +102,7 @@ if ($plugin != null) {
 			break;
 		}
 	}
-	
+
 	if ($blacklisted) {
 		return;
 	}

@@ -4,8 +4,9 @@
 
 	<xp:this.afterPageLoad><![CDATA[#{javascript:view.setPageTitle(optionsBean.getApplicationTitle("Playground"))
 if(compositeData.wholePage)view.setStyle("overflow: hidden");}]]></xp:this.afterPageLoad>
-
+<!-- 
 	<xe:keepSessionAlive id="keepSessionAlive1"></xe:keepSessionAlive>
+ -->	
 	<xc:DevelopmentWarning loaded="false"></xc:DevelopmentWarning>
 	<xc:SSLWarning loaded="${javascript:optionsBean.checkSSLWarning()}"></xc:SSLWarning>
 	<xe:applicationLayout id="appLayout">

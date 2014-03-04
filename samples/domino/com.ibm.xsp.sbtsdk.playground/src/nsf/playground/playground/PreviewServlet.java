@@ -3,6 +3,9 @@ package nsf.playground.playground;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.faces.FactoryFinder;
+import javax.faces.application.Application;
+import javax.faces.application.ApplicationFactory;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
@@ -11,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ibm.commons.util.StringUtil;
-import com.ibm.domino.xsp.module.nsf.NSFComponentModule;
 import com.ibm.domino.xsp.module.nsf.NotesContext;
 import com.ibm.xsp.application.ApplicationEx;
 import com.ibm.xsp.context.FacesContextEx;

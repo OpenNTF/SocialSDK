@@ -95,8 +95,9 @@ public class SbtEndpoints extends Endpoints {
 		new PropertyValues[] {
 			   new PropertyValues("Test - C1", new String[] {
 					"https://apps.na.collabservtest.lotus.com", // Sma_URL
-					"", // Sma_OA_ConsumerKey
-					"", // Sma_OA_ConsumerSecret
+					"", // SMA_OA_GADGET_SERVICE
+					"", // SMA_OA_COUNSUMERKEY
+					"", // SMA_OA_CONSUMERSECRET
 					"https://apps.na.collabservtest.lotus.com/manage/oauth/getRequestToken", // Sma_OA_RequestTokenURL
 					"https://apps.na.collabservtest.lotus.com/manage/oauth/authorizeToken", // Sma_OA_AuthorizationURL
 					"https://apps.na.collabservtest.lotus.com/manage/oauth/getAccessToken", // Sma_OA_AccessTokenURL
@@ -104,6 +105,19 @@ public class SbtEndpoints extends Endpoints {
 					"", // Sma_OA2_ConsumerSecret
 					"https://apps.na.collabservtest.lotus.com/manage/oauth2/authorize", // Sma_OA2_AuthorizationURL
 					"https://apps.na.collabservtest.lotus.com/manage/oauth2/token" // Sma_OA2_AccessTokenURL
+			   }),
+			   new PropertyValues("Next - C2", new String[] {
+					"https://apps.na.collabservnext.lotus.com", // Sma_URL
+					"", // SMA_OA_GADGET_SERVICE
+					"", // SMA_OA_COUNSUMERKEY
+					"", // SMA_OA_CONSUMERSECRET
+					"https://apps.na.collabservnext.lotus.com/manage/oauth/getRequestToken", // Sma_OA_RequestTokenURL
+					"https://apps.na.collabservnext.lotus.com/manage/oauth/authorizeToken", // Sma_OA_AuthorizationURL
+					"https://apps.na.collabservnext.lotus.com/manage/oauth/getAccessToken", // Sma_OA_AccessTokenURL
+					"", // Sma_OA2_ConsumerKey
+					"", // Sma_OA2_ConsumerSecret
+					"https://apps.na.collabservnext.lotus.com/manage/oauth2/authorize", // Sma_OA2_AuthorizationURL
+					"https://apps.na.collabservnext.lotus.com/manage/oauth2/token" // Sma_OA2_AccessTokenURL
 			   })
 		}),
 		new Category("domino","IBM Domino", "IBM Domino", new Property[] {

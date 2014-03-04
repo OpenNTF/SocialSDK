@@ -131,6 +131,19 @@
 		<moduleSet>
 			<useAllReactorProjects>true</useAllReactorProjects>
 			<includes>
+				<include>com.ibm.sbt:com.ibm.sbt.php.core:zip:*</include>
+				<include>com.ibm.sbt:com.ibm.sbt.php.moodle:zip:*</include>
+				<include>com.ibm.sbt:com.ibm.sbt.php.wordpress:zip:*</include>
+			</includes>
+			<binaries>
+				<outputDirectory>sbtsdk/redist/php</outputDirectory>
+
+				<unpack>false</unpack>
+			</binaries>
+		</moduleSet>
+		<moduleSet>
+			<useAllReactorProjects>true</useAllReactorProjects>
+			<includes>
 				<include>com.ibm.sbt:com.ibm.sbt.core.test</include>
 				<include>com.ibm.sbt:com.ibm.sbt.automation.core</include>
 				<include>com.ibm.sbt:com.ibm.sbt.automation.test</include>

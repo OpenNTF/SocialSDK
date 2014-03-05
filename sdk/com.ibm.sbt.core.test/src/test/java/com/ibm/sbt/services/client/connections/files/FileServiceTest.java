@@ -21,6 +21,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -35,7 +36,11 @@ import org.junit.Test;
 
 import com.ibm.sbt.services.BaseUnitTest;
 import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.services.client.connections.communities.Community;
+import com.ibm.sbt.services.client.connections.communities.CommunityList;
+import com.ibm.sbt.services.client.connections.communities.CommunityService;
 import com.ibm.sbt.services.client.connections.files.model.FileRequestParams;
+import com.ibm.sbt.services.endpoints.ConnectionsBasicEndpoint;
 import com.ibm.sbt.test.lib.TestEnvironment;
 
 public class FileServiceTest extends BaseUnitTest {
@@ -459,6 +464,32 @@ public class FileServiceTest extends BaseUnitTest {
 		if(commentObject != null) {
 			String commentId = commentObject.getCommentId();
 			fileService.updateComment(fileId, commentId, commentObject.getComment()+ System.currentTimeMillis()); 
+		}
+	}
+	
+	@Test
+	public void testUploadCommunityFile() throws Exception {
+		try {
+		ConnectionsBasicEndpoint endpoint = new ConnectionsBasicEndpoint();
+		endpoint.setUrl("https://dev.sdkdemo.com:444");
+		endpoint.setUser("fadams");
+		endpoint.setPassword("quickstart01");
+		endpoint.setForceTrustSSLCertificate(true);
+		CommunityService communityService = new CommunityService(endpoint);
+		CommunityList communityList = communityService.getMyCommunities();
+		String communityUuid = null;
+		if (communityList.isEmpty()) {
+			String type = TestEnvironment.isSmartCloudEnvironment() ? "private" : "public";
+			communityUuid = communityService.createCommunity("UploadCommunityFile-"+System.currentTimeMillis(), "", type);
+		} else {
+			communityUuid = communityList.get(0).getCommunityUuid();
+		}
+		byte[] bytes = "HelloWord".getBytes();
+		ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
+		FileService fileService = new FileService(endpoint);
+		fileService.uploadCommunityFile(bais, communityUuid, "HelloWord"+System.currentTimeMillis()+".txt", bytes.length);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }

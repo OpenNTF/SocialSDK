@@ -2021,11 +2021,11 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
 			if(!fileControl){
 				return this.createBadRequestPromise("File Control or ID is required");
 			}
-			filePath = fileControl.value;
-			files = fileControl.files;
+			var filePath = fileControl.value;
+			var files = fileControl.files;
 
 			if (files.length != 1) {
-				return this.createBadRequestPromise("Only one file needs to be provided to this API");
+				return this.createBadRequestPromise("Only one file can be upload as a community logo.");
 			}
 
 			var file = files[0];
@@ -2041,7 +2041,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
 			if (this.endpoint.proxy) {
                 url = config.Properties.serviceUrl + url;
             } else {
-            	return this.createBadRequestPromise("File Proxy is required to run this API");
+            	return this.createBadRequestPromise("File Proxy is required to upload a community logo");
             }
 					
 			var headers = {
@@ -2057,6 +2057,73 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
 			var callbacks = {
 				createEntity : function(service, data, response) {
 					return data; // Since this API does not return any response in case of success, returning empty data
+				}
+			};
+
+			return this.updateEntity(url, options, callbacks);
+		},
+
+        /**
+		 * Updates the Logo picture of a community
+		 * @method updateCommunityLogo
+		 * @param {Object} fileControlOrId The Id of html control or the html control
+		 * @param {String} communityUuid the Uuid of community
+		 */
+		uploadCommunityFile : function(fileControlOrId, communityUuid) {
+			var promise = this.validateField("File Control Or Id", fileControlOrId);
+			if (promise) {
+				return promise;
+			}
+			promise = this.validateHTML5FileSupport();
+			if (promise) {
+				return promise;
+			}
+			promise = this.validateField("CommunityUuid", communityUuid);
+			if (promise) {
+				return promise;
+			}
+
+			var files = null;
+			var fileControl = this.getFileControl(fileControlOrId);
+			if(!fileControl){
+				return this.createBadRequestPromise("File Control or ID is required");
+			}
+			var filePath = fileControl.value;
+			var files = fileControl.files;
+
+			if (files.length != 1) {
+				return this.createBadRequestPromise("Only one file can be uploaded to a community at a time");
+			}
+
+			var file = files[0];
+			var formData = new FormData();
+			formData.append("file", file);
+			var requestArgs = {
+			};
+			var url = this.constructUrl(consts.AtomUploadCommunityFile, null, {
+				endpointName : this.endpoint.proxyPath,
+				communityUuid : communityUuid
+			});
+			if (this.endpoint.proxy) {
+                url = config.Properties.serviceUrl + url;
+            } else {
+            	return this.createBadRequestPromise("File proxy is required to upload a community file");
+            }
+					
+			var headers = {
+				"Content-Type" : false,
+				"Process-Data" : false //processData = false is reaquired by jquery
+			};
+			var options = {
+				method : "POST",
+				headers : headers,
+				query : requestArgs,
+				data : formData
+			};
+
+			var callbacks = {
+				createEntity : function(service, data, response) {
+					return data;
 				}
 			};
 

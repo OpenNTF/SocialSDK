@@ -3,6 +3,8 @@ package nsf.playground.playground;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.faces.FactoryFinder;
+import javax.faces.application.ApplicationFactory;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
@@ -11,9 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ibm.commons.util.StringUtil;
-import com.ibm.domino.xsp.module.nsf.NSFComponentModule;
 import com.ibm.domino.xsp.module.nsf.NotesContext;
 import com.ibm.xsp.application.ApplicationEx;
+import com.ibm.xsp.application.ApplicationFactoryEx;
 import com.ibm.xsp.context.FacesContextEx;
 import com.ibm.xsp.extlib.servlet.FacesContextServlet;
 
@@ -59,7 +61,15 @@ public class PreviewServlet extends FacesContextServlet {
 	}
 
 	public void service(ServletRequest servletRequest, ServletResponse servletResponse) throws ServletException, IOException {
-		// Make sure that the JSF servlet is created an initialized
+		// Maybe this is an Ajax request and the application is not *yet* initialized
+		// In this case, it is not a ApplicationEx
+		ApplicationFactory f = (ApplicationFactoryEx )FactoryFinder.getFactory(FactoryFinder.APPLICATION_FACTORY);
+		if(!(f.getApplication() instanceof ApplicationEx)) {
+			emitError(servletResponse);
+			return;
+		}
+		
+		// Make sure that the JSF servlet is created and initialized
 		NotesContext.getCurrent().getModule().getXspEngineServlet();
 		
 		// Create a temporary FacesContext and make it available
@@ -70,12 +80,7 @@ public class PreviewServlet extends FacesContextServlet {
         	// Just for security
     		ApplicationEx app = ((FacesContextEx)context).getApplicationEx();
     		if(app.getController()==null) {
-    			HttpServletResponse resp = (HttpServletResponse)servletResponse; 
-    			resp.setStatus(HttpServletResponse.SC_SERVICE_UNAVAILABLE);
-    			resp.setContentType("text/html");
-    			PrintWriter w = resp.getWriter();
-    			w.println("The server session has expired. Please reload the main page to start a new session");
-    			w.flush();
+    			emitError(servletResponse);
     			return;
     		}
 
@@ -85,6 +90,14 @@ public class PreviewServlet extends FacesContextServlet {
             releaseContext(context);
         }
     }
+	private void emitError(ServletResponse servletResponse) throws IOException {
+		HttpServletResponse resp = (HttpServletResponse)servletResponse; 
+		resp.setStatus(HttpServletResponse.SC_SERVICE_UNAVAILABLE);
+		resp.setContentType("text/html");
+		PrintWriter w = resp.getWriter();
+		w.println("The server session has expired. Please reload the main page to start a new session");
+		w.flush();
+	}
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

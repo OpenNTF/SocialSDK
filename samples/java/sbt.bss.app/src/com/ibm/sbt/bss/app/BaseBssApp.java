@@ -13,7 +13,7 @@
  * implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
-package com.ibm.sbt.sample.app;
+package com.ibm.sbt.bss.app;
 
 import java.io.IOException;
 
@@ -23,8 +23,8 @@ import com.ibm.sbt.services.client.base.JsonEntity;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.smartcloud.bss.AuthenticationService;
 import com.ibm.sbt.services.client.smartcloud.bss.AuthorizationService;
-import com.ibm.sbt.services.client.smartcloud.bss.BssService.BillingFrequency;
 import com.ibm.sbt.services.client.smartcloud.bss.BssException;
+import com.ibm.sbt.services.client.smartcloud.bss.BssService.BillingFrequency;
 import com.ibm.sbt.services.client.smartcloud.bss.CustomerJsonBuilder;
 import com.ibm.sbt.services.client.smartcloud.bss.CustomerManagementService;
 import com.ibm.sbt.services.client.smartcloud.bss.OrderJsonBuilder;
@@ -33,19 +33,13 @@ import com.ibm.sbt.services.client.smartcloud.bss.SubscriberJsonBuilder;
 import com.ibm.sbt.services.client.smartcloud.bss.SubscriberManagementService;
 import com.ibm.sbt.services.client.smartcloud.bss.SubscriptionManagementService;
 import com.ibm.sbt.services.client.smartcloud.bss.UserCredentialJsonBuilder;
-import com.ibm.sbt.services.endpoints.BasicEndpoint;
 
 /**
  * @author mwallace
  *
  */
-public class BaseBssApp {
+public class BaseBssApp extends BaseApp {
 
-	private String url;
-	private String user;
-	private String password;
-	
-	private BasicEndpoint basicEndpoint;
 	private CustomerManagementService customerManagement;
 	private SubscriberManagementService subscriberManagement;
 	private SubscriptionManagementService subscriptionManagement;
@@ -53,25 +47,9 @@ public class BaseBssApp {
 	private AuthenticationService authenticationService;
 	
 	public BaseBssApp(String url, String user, String password) {
-		this.url = url;
-		this.user = user;
-		this.password = password;
+		super(url, user, password);
 	}
 
-	/**
-	 * @return the basicEndpoint
-	 */
-	public BasicEndpoint getBasicEndpoint() {
-    	if (basicEndpoint == null) {
-			basicEndpoint = new BasicEndpoint();
-			basicEndpoint.setUrl(url);
-			basicEndpoint.setForceTrustSSLCertificate(true);
-			basicEndpoint.setUser(user);
-			basicEndpoint.setPassword(password);
-    	}
-    	return basicEndpoint;
-	}
-    
     public CustomerManagementService getCustomerManagementService() {
     	if (customerManagement == null) {
 			customerManagement = new CustomerManagementService(getBasicEndpoint());
@@ -223,6 +201,7 @@ public class BaseBssApp {
 					  .setNewPassword(newPassword)
 					  .setConfirmPassword(newPassword);
 		
+		AuthenticationService authenticationService = getAuthenticationService();
 		authenticationService.changePassword(userCredential);
     }
     

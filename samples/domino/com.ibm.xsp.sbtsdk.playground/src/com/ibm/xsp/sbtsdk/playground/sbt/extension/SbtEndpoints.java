@@ -25,6 +25,7 @@ import com.ibm.sbt.services.endpoints.DominoBasicEndpoint;
 import com.ibm.sbt.services.endpoints.DropBoxOAuthEndpoint;
 import com.ibm.sbt.services.endpoints.SametimeBasicEndpoint;
 import com.ibm.sbt.services.endpoints.SmartCloudBasicEndpoint;
+import com.ibm.sbt.services.endpoints.SmartCloudFormEndpoint;
 import com.ibm.sbt.services.endpoints.SmartCloudOAuth2Endpoint;
 import com.ibm.sbt.services.endpoints.SmartCloudOAuthEndpoint;
 import com.ibm.sbt.services.endpoints.TwitterOAuthEndpoint;
@@ -206,6 +207,16 @@ public class SbtEndpoints extends Endpoints {
 		}
 		{
 			SmartCloudBasicEndpoint ep = (SmartCloudBasicEndpoint)ManagedBeanUtil.getBean(context, "smartcloudBasic");
+			if(ep!=null) {
+				if(env.hasRuntime("smartcloud")) {
+					ep.setUrl(env.getField("Sma_URL"));
+				} else {
+					ep.setUrl(null);
+				}
+			}
+		}
+		{
+			SmartCloudFormEndpoint ep = (SmartCloudFormEndpoint)ManagedBeanUtil.getBean(context, "smartcloudForm");
 			if(ep!=null) {
 				if(env.hasRuntime("smartcloud")) {
 					ep.setUrl(env.getField("Sma_URL"));

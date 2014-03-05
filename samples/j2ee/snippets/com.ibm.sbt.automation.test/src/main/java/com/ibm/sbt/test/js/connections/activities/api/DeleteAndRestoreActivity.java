@@ -28,6 +28,7 @@ public class DeleteAndRestoreActivity extends BaseActivitiesTest {
 
 	@After
 	public void destroy() {
+		if (activity!=null)
 		deleteActivity(activity.getActivityId());
 	}
 

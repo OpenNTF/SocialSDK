@@ -130,6 +130,7 @@ abstract public class AbstractLibrary {
 	public static final String		MODULE_XSL						= "sbt/xsl";
 	public static final String		MODULE_BASIC					= "sbt/authenticator/Basic";
 	public static final String		MODULE_OAUTH					= "sbt/authenticator/OAuth";
+	public static final String		MODULE_UTIL						= "sbt/util";
 
 	public static final String		PATH_SBT						= "sbt";							//$NON-NLS-1$
 	public static final String		PATH_SBTX						= "sbtx";							//$NON-NLS-1$
@@ -301,6 +302,11 @@ abstract public class AbstractLibrary {
 		}
 		return jsonEndpoints;
 	}
+	
+	private JsonReference addMakeAbsoluteUrl(String url){
+		StringBuilder sb = new StringBuilder("util.makeAbsoluteUrl('").append(url).append("')");
+		return new JsonReference(sb.toString());
+	}
 
 	/**
 	 * @param request
@@ -315,9 +321,9 @@ abstract public class AbstractLibrary {
 
 		JsonObject jsonProperties = new JsonJavaObject();
 		// add the built-in properties
-		jsonProperties.putJsonProperty(PROP_TOOLKIT_URL, request.getToolkitJsUrl());
-		jsonProperties.putJsonProperty(PROP_SERVICE_URL, request.getServiceUrl());
-		jsonProperties.putJsonProperty(PROP_LIBRARY_URL, request.getLibraryUrl());
+		jsonProperties.putJsonProperty(PROP_TOOLKIT_URL, addMakeAbsoluteUrl(request.getToolkitJsUrl()));
+		jsonProperties.putJsonProperty(PROP_SERVICE_URL, addMakeAbsoluteUrl(request.getServiceUrl()));
+		jsonProperties.putJsonProperty(PROP_LIBRARY_URL, addMakeAbsoluteUrl(request.getLibraryUrl()));
 
 		// add the requested properties
 		Property[] properties = request.getEnvironment().getPropertiesArray();
@@ -698,6 +704,7 @@ abstract public class AbstractLibrary {
 				modules.add(MODULE_ENDPOINT);
 			}
 		}
+		modules.add(MODULE_UTIL);
 
 		return modules.toArray(new String[modules.size()]);
 	}
@@ -831,10 +838,21 @@ abstract public class AbstractLibrary {
 		JSReference authenticator = endpoint.getAuthenticator(logicalName, request.getToolkitJsUrl());
 		if (authenticator != null) {
 			try {
-				String paramValues = JsonGenerator.toJson(JsonJavaFactory.instanceEx,
-						authenticator.getProperties());
+				Map<String, Object> params = authenticator.getProperties();
+				Iterator<String> keys = params.keySet().iterator();
+				StringBuilder sb = new StringBuilder();
 				String paramName = getModuleParamName(authenticator.getModuleName());
-				return new JsonReference("new " + paramName + "(" + paramValues + ")");
+				sb.append("new ").append(paramName).append("({");
+				while(keys.hasNext()) {
+					String key = keys.next();
+					String value = (String)params.get(key);
+					sb.append(key).append(":").append(addMakeAbsoluteUrl(value).getRef());
+					if (keys.hasNext()) {
+						sb.append(",");
+					}
+				}
+				sb.append("})");
+				return new JsonReference(sb.toString());
 			} catch (Exception e) {
 				throw new LibraryException(e);
 			}
@@ -981,8 +999,9 @@ abstract public class AbstractLibrary {
 					// Url is relative, append server to it
 					proxyUrl = UrlUtil.makeUrlAbsolute(request.getHttpRequest(),proxyUrl);
 				}
+				proxyUrl = addMakeAbsoluteUrl(proxyUrl).getRef();
 				String proxyClass = proxy.getProxyModule();
-				return new JsonReference("new "+proxyClass+"({proxyUrl:'" + proxyUrl + "'})");
+				return new JsonReference("new "+proxyClass+"({proxyUrl:" + proxyUrl + "})");
 			} catch (ProxyConfigException e) {
 				if (logger.isLoggable(Level.SEVERE)) {
 					logger.entering(sourceClass, "createProxyRef failed", e.getMessage());
@@ -994,7 +1013,8 @@ abstract public class AbstractLibrary {
 		// define the proxy URL
 		if (endpoint.isUseProxy()) {
 			String proxyUrl = PathUtil.concat(request.getServiceUrl(), endpoint.getProxyHandlerPath(), '/');
-			return new JsonReference("new Proxy({proxyUrl:'" + proxyUrl + "'})");
+			proxyUrl = addMakeAbsoluteUrl(proxyUrl).getRef();
+			return new JsonReference("new Proxy({proxyUrl:" + proxyUrl + "})");
 		}
 		return null;
 	}

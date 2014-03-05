@@ -3,11 +3,13 @@ package com.ibm.sbt.services.client.connections.profiles;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.profiles.utils.Messages;
 import com.ibm.sbt.services.client.ClientService;
+import com.ibm.sbt.services.endpoints.Endpoint;
 
 /**
  * ProfileAdminService can be used to perform Admin operations related to Connection Profiles. 
@@ -32,6 +34,16 @@ public class ProfileAdminService extends ProfileService {
 	public ProfileAdminService() {
 		this(DEFAULT_ENDPOINT_NAME, DEFAULT_CACHE_SIZE);
     }
+	
+	/**
+	 * Constructor 
+	 * 
+	 * @param endpoint
+	 *            Creates ProfileAdminService with specified endpoint and a default CacheSize
+	 */
+	public ProfileAdminService(Endpoint endpoint) {
+		super(endpoint);
+	}
 	
 	/**
 	 * Constructor 

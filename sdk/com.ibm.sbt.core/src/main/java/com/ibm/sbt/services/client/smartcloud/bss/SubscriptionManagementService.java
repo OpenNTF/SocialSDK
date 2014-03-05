@@ -174,7 +174,7 @@ public class SubscriptionManagementService extends BssService {
     		HashMap<String, String> params = new HashMap<String, String>();
     		params.put("_namedQuery", "getSubscriptionByCustomer");
     		params.put("customerId", customerId);
-			return (EntityList<JsonEntity>)getEntities(API_RESOURCE_SUBSCRIPTION, null, getJsonFeedHandler());
+			return (EntityList<JsonEntity>)getEntities(API_RESOURCE_SUBSCRIPTION, params, getJsonFeedHandler());
 		} catch (Exception e) {
 			throw new BssException(e, "Error retrieving subscription list by customer id {0}", customerId);
 		}

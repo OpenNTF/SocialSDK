@@ -49,7 +49,27 @@ class SBTBaseWidget extends WP_Widget {
 	 */
 	public function widget($args, $instance) {
 		$settings = new SBTSettings();
-		$store = SBTCredentialStore::getInstance();		
+		$store = SBTCredentialStore::getInstance();
+ 
+ 		// If tokens exist, make sure that they are valid. Otherwise clear the store and force the
+ 		// user to re-log
+ 		
+ 		if (($settings->getAuthenticationMethod() == 'oauth1' || $settings->getAuthenticationMethod() == 'oauth2') && $store->getOAuthAccessToken() != null) {
+ 			$endpoint = null;
+ 			if ($settings->getAuthenticationMethod() == "oauth2") {
+ 				$endpoint = new SBTOAuth2Endpoint();
+ 			} else if ($settings->getAuthenticationMethod() == "oauth1") {
+ 				$endpoint = new SBTOAuth1Endpoint();
+ 			}
+ 			
+ 			$service = '/files/basic/api/myuserlibrary/feed';
+ 			
+ 			$response = $endpoint->makeRequest($settings->getURL(), $service, 'GET', null, null);
+ 			if ($response->getStatusCode() == 401) {
+ 				$store->deleteOAuthCredentials();
+ 				setcookie('IBMSBTKOAuthLogin', "", $timestamp - 86400);
+ 			}
+ 		}		
 		echo '<div name="ibm_sbtk_widget">';
 		if (($settings->getAuthenticationMethod() == 'oauth1' || $settings->getAuthenticationMethod() == 'oauth2') && $store->getOAuthAccessToken() == null &&
 		(!isset($_COOKIE['IBMSBTKOAuthLogin']) || $_COOKIE['IBMSBTKOAuthLogin'] != 'yes')) {

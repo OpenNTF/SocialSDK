@@ -33,9 +33,9 @@ public class SBTProxy extends AbstractProxy {
 
 	@Override
 	public String rewriteUrl(String apiUrl) {
-    	if (logger.isLoggable(Level.INFO)) {
+    	if (logger.isLoggable(Level.FINE)) {
     		String msg = MessageFormat.format("URL computed from SBTProxy is {0}", apiUrl);
-    		logger.log(Level.INFO, msg);
+    		logger.log(Level.FINE, msg);
     	}
 		return apiUrl;
 	}

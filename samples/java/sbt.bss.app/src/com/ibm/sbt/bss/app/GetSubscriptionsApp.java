@@ -13,9 +13,8 @@
  * implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
-package com.ibm.sbt.sample.app;
+package com.ibm.sbt.bss.app;
 
-import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.base.JsonEntity;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 
@@ -24,9 +23,9 @@ import com.ibm.sbt.services.client.base.datahandlers.EntityList;
  * @author mwallace
  *
  */
-public class AddSubscribersApp extends BaseBssApp {
+public class GetSubscriptionsApp extends BaseBssApp {
 	
-	public AddSubscribersApp(String url, String user, String password) {
+	public GetSubscriptionsApp(String url, String user, String password) {
 		super(url, user, password);
 	}
 	
@@ -36,8 +35,8 @@ public class AddSubscribersApp extends BaseBssApp {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		if (args.length < 6) {
-			System.out.println("Usage: java com.ibm.sbt.sample.app.AddSubscribersBlog <url> <user> <password> <customerId> <domain> <subscriptions>");
+		if (args.length < 4) {
+			System.out.println("Usage: java com.ibm.sbt.bss.app.GetSubscriptionsApp <url> <user> <password> <customerId>");
 			return;
 		}
 		
@@ -45,27 +44,14 @@ public class AddSubscribersApp extends BaseBssApp {
 		String user = args[1];
 		String password = args[2];
 		String customerId = args[3];
-		String domain = args[4];
-		String[] subscriptionIds = StringUtil.splitString(args[5], ',');
 		
-		AddSubscribersApp sa = null;
+		GetSubscriptionsApp sa = null;
 		try {
-			sa = new AddSubscribersApp(url, user, password);
+			sa = new GetSubscriptionsApp(url, user, password);
 			
-			for (int i=0; i<1; i++) {
-				String subscriberId = sa.addSubscriber(customerId, sa.getUniqueEmail(domain));
-				
-				sa.activateSubscriber(subscriberId);
-				
-				String loginName = sa.getLoginName(subscriberId);
-				
-				sa.setOneTimePassword(loginName, "one-time-123");
-				
-				sa.changePassword(loginName, "one-time-123", "password1");
-				
-				for (String subscriptionId : subscriptionIds) {
-					sa.entitleSubscriber(subscriberId, subscriptionId, true);
-				}
+			EntityList<JsonEntity> subscriptions = sa.getSubscriptionsById(customerId);
+			for (JsonEntity subscription : subscriptions) {
+				System.out.println(subscription.toJsonString(false));
 			}
 			
 		} catch (Exception e) {

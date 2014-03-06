@@ -530,7 +530,7 @@
 			<artifactId>com.ibm.commons.xml</artifactId>
 			<version>9.0.0</version>
 		</dependency>
-
+	        <!--
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.sbt.php.wordpress</artifactId>
@@ -543,5 +543,6 @@
 			<version>1.0.0-SNAPSHOT</version>
 			<type>zip</type>
 		</dependency>
+		-->
 	</dependencies>
 </project>

@@ -51,9 +51,6 @@ if (!function_exists('sanitize_option')) {
 		require_once '../../../../wp-includes/functions.php';
 		require_once '../../../../wp-includes/pluggable.php';
 		require_once '../../../../wp-includes/formatting.php';
-// 		require_once '../../../../wp-includes/capabilities.php';
-// 		require_once '../../../../wp-includes/pluggable.php';
-		
 	} else if (file_exists('../../../wp-includes/formatting.php')) {
 		
 		require_once '../../../wp-includes/meta.php';
@@ -64,8 +61,6 @@ if (!function_exists('sanitize_option')) {
 		require_once '../../../wp-includes/functions.php';
 		require_once '../../../wp-includes/pluggable.php';
 		require_once '../../../wp-includes/formatting.php';
-// 		require_once '../../../wp-includes/capabilities.php';
-// 		require_once '../../../wp-includes/pluggable.php';
 	}
 }
 if (file_exists(BASE_PATH . '/core/models/SBTPHPCookieAdapter.php')) {

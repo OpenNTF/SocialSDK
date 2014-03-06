@@ -52,9 +52,9 @@ function change_new_authentication_method() {
 		if (document.getElementById("new_endpoint_url").value == '') {
 			document.getElementById("new_endpoint_url").value = 'https://apps.na.collabserv.com';
 		}
-		document.getElementById("new_authorization_url").value = document.getElementById("new_endpoint_url").value + '/manage/oauth/authorizeToken';
-		document.getElementById("new_access_token_url").value = document.getElementById("new_endpoint_url").value + '/manage/oauth/getAccessToken';
-		document.getElementById("new_request_token_url").value = document.getElementById("new_endpoint_url").value + '/manage/oauth/getRequestToken';
+		document.getElementById("new_authorization_url").value = '/manage/oauth/authorizeToken';
+		document.getElementById("new_access_token_url").value = '/manage/oauth/getAccessToken';
+		document.getElementById("new_request_token_url").value = '/manage/oauth/getRequestToken';
 		
 		oauthSmartcloudFieldCheck();
 	} else if (authMethod == "basic") {
@@ -275,10 +275,10 @@ function save_new_endpoint() {
 	document.getElementById("endpoint_url").value = document.getElementById("new_endpoint_url").value;
 	document.getElementById("endpoint_name").value = document.getElementById("new_endpoint_name").value;
 	document.getElementById("consumer_key").value = document.getElementById("new_consumer_key").value;
-	document.getElementById("authorization_url").value = document.getElementById("new_authorization_url").value;
+	document.getElementById("authorization_url").value = document.getElementById("new_endpoint_url").value + document.getElementById("new_authorization_url").value;
 	document.getElementById("endpoint_version").value = document.getElementById("new_endpoint_version").value;
-	document.getElementById("access_token_url").value = document.getElementById("new_access_token_url").value;
-	document.getElementById("request_token_url").value = document.getElementById("new_request_token_url").value;
+	document.getElementById("access_token_url").value = document.getElementById("new_endpoint_url").value + document.getElementById("new_access_token_url").value;
+	document.getElementById("request_token_url").value = document.getElementById("new_endpoint_url").value + document.getElementById("new_request_token_url").value;
 	document.getElementById("basic_auth_username").value = document.getElementById("new_basic_auth_username").value;
 	document.getElementById("basic_auth_password").value = document.getElementById("new_basic_auth_password").value;
 	document.getElementById("basic_auth_method").value = document.getElementById("new_basic_auth_method").value;

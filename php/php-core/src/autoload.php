@@ -36,7 +36,10 @@ if (!defined('BASE_PATH')) {
 }
 // Define the base location
 if (defined('IBM_SBT_MOODLE_BLOCK')) {
-	define('BASE_LOCATION',  $CFG->wwwroot . '/blocks/ibmsbtk/core/');
+	global $CFG;
+	if (isset($CFG)) {
+		define('BASE_LOCATION',  $CFG->wwwroot . '/blocks/ibmsbt/core/');
+	}	
 } else if (defined('IBM_SBT_WORDPRESS_PLUGIN')) {
 	define('BASE_LOCATION',  get_site_url() . '/wp-content/plugins/' . PLUGIN_NAME);
 } else {

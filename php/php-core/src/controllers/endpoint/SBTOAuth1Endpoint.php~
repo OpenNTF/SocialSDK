@@ -237,7 +237,7 @@ class SBTOAuth1Endpoint extends BaseController implements SBTEndpoint
 		try {			
 			$request = $client->createRequest($method, $url , $headers, $body,  $options);
 			$request->addHeader('Authorization', 'OAuth oauth_nonce="' . $nonce . '",oauth_version="1.0", oauth_timestamp="' . time() . '",oauth_signature="' . $settings->getConsumerSecret() . '&' .$store->getTokenSecret() 
-					. '",oauth_signature_method="PLAINTEXT",oauth_consumer_key="'.$settings->getConsumerKey().'",oauth_token="' . $store->getOAuthAccessToken() . '"');
+					. '",oauth_signature_method="PLAINTEXT",oauth_consumer_key="'.$settings->getConsumerKey().'",oauth_token="' . $store->getOAuthAccessToken() . 'xxx"');
 			if ($settings->forceSSLTrust()) {
 				$request->getCurlOptions()->set(CURLOPT_SSL_VERIFYHOST, false);
 				$request->getCurlOptions()->set(CURLOPT_SSL_VERIFYPEER, false);

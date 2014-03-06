@@ -133,18 +133,18 @@ class SBTCredentialStore {
 		global $DB;
 		global $USER;
 		
-		$table->add_field('user_id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null);
-		$table->add_field('iv', XMLDB_TYPE_TEXT, 'big', null, XMLDB_NOTNULL, null, null);
-		$table->add_field(BASIC_AUTH_USERNAME, XMLDB_TYPE_TEXT, 'big', null, XMLDB_NOTNULL, null, null);
-		$table->add_field(BASIC_AUTH_PASSWORD, XMLDB_TYPE_TEXT, 'big', null, XMLDB_NOTNULL, null, null);
-		$table->add_field(TOKEN, XMLDB_TYPE_TEXT, 'big', null, XMLDB_NOTNULL, null, null);
-		$table->add_field(REQUEST_TOKEN, XMLDB_TYPE_TEXT, 'big', null, XMLDB_NOTNULL, null, null);
-		$table->add_field(TOKEN_TYPE, XMLDB_TYPE_TEXT, 'big', null, XMLDB_NOTNULL, null, null);
-		$table->add_field(OAUTH_TOKEN, XMLDB_TYPE_TEXT, 'big', null, XMLDB_NOTNULL, null, null);
-		$table->add_field(OAUTH_TOKEN_SECRET, XMLDB_TYPE_TEXT, 'big', null, XMLDB_NOTNULL, null, null);
-		$table->add_field(OAUTH_VERIFIER_TOKEN, XMLDB_TYPE_TEXT, 'big', null, XMLDB_NOTNULL, null, null);
-		$table->add_field(OAUTH_REQUEST_TOKEN, XMLDB_TYPE_TEXT, 'big', null, XMLDB_NOTNULL, null, null);
-		$table->add_field(OAUTH_REQUEST_TOKEN_SECRET, XMLDB_TYPE_TEXT, 'big', null, XMLDB_NOTNULL, null, null);
+		$table->add_field('user_id', XMLDB_TYPE_INTEGER, '10', null, null, null, null);
+		$table->add_field('iv', XMLDB_TYPE_TEXT, 'big', null, null, null, null);
+		$table->add_field(BASIC_AUTH_USERNAME, XMLDB_TYPE_TEXT, 'big', null, null, null, null);
+		$table->add_field(BASIC_AUTH_PASSWORD, XMLDB_TYPE_TEXT, 'big', null, null, null, null);
+		$table->add_field(TOKEN, XMLDB_TYPE_TEXT, 'big', null, null, null, null);
+		$table->add_field(REQUEST_TOKEN, XMLDB_TYPE_TEXT, 'big', null, null, null, null);
+		$table->add_field(TOKEN_TYPE, XMLDB_TYPE_TEXT, 'big', null, null, null, null);
+		$table->add_field(OAUTH_TOKEN, XMLDB_TYPE_TEXT, 'big', null, null, null, null);
+		$table->add_field(OAUTH_TOKEN_SECRET, XMLDB_TYPE_TEXT, 'big', null, null, null, null);
+		$table->add_field(OAUTH_VERIFIER_TOKEN, XMLDB_TYPE_TEXT, 'big', null, null, null, null);
+		$table->add_field(OAUTH_REQUEST_TOKEN, XMLDB_TYPE_TEXT, 'big', null, null, null, null);
+		$table->add_field(OAUTH_REQUEST_TOKEN_SECRET, XMLDB_TYPE_TEXT, 'big', null, null, null, null);
 
 		$table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
 		$table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
@@ -155,24 +155,22 @@ class SBTCredentialStore {
 		$record->user_id = intval($USER->id);
 
 		// Populate database with default values
-		$record->BASIC_AUTH_USERNAME = json_encode(array('connections' => null));
-		$record->BASIC_AUTH_PASSWORD = json_encode(array('connections' => null));
-		$record->TOKEN = json_encode(array('connections' => null));
-		$record->REQUEST_TOKEN = json_encode(array('connections' => null));
-		$record->TOKEN_TYPE = json_encode(array('connections' => null));
-		$record->OAUTH_TOKEN = json_encode(array('connections' => null));
-		$record->OAUTH_TOKEN_SECRET = json_encode(array('connections' => null));
-		$record->OAUTH_VERIFIER_TOKEN = json_encode(array('connections' => null));
-		$record->OAUTH_REQUEST_TOKEN = json_encode(array('connections' => null));
-		$record->OAUTH_REQUEST_TOKEN_SECRET = json_encode(array('connections' => null));
+		$record->basicauthusername = json_encode(array('connections' => null));
+		$record->basicauthpassword = json_encode(array('connections' => null));
+		$record->token = json_encode(array('connections' => null));
+		$record->requesttoken = json_encode(array('connections' => null));
+		$record->tokentype = json_encode(array('connections' => null));
+		$record->oauthtoken = json_encode(array('connections' => null));
+		$record->oauthtokensecret = json_encode(array('connections' => null));
+		$record->oauthverifiertoken = json_encode(array('connections' => null));
+		$record->oauthrequesttoken = json_encode(array('connections' => null));
+		$record->oauthrequesttokensecret = json_encode(array('connections' => null));
 			
 		$iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC);
 		$this->iv = base64_encode(mcrypt_create_iv($iv_size, MCRYPT_RAND));
 
 		$record->iv = $this->iv;
-		syslog(LOG_INFO, var_dump($record));
 		$ret = $DB->insert_record(SESSION_NAME, $record);
-echo $ret;
 	}
 	
 	/**
@@ -185,12 +183,22 @@ echo $ret;
 		syslog(LOG_INFO, "about to store " . $skey . " " . $endpoint . " " . $value);
 		global $DB;
 		global $USER;
-		$records = $DB->get_records(SESSION_NAME, array('user_id' => intval($USER->id)));
-		$record = $records[0];
-		$endpointMappings = json_decode($record->$skey);
-		syslog(LOG_INFO, var_dump($endpointMappings));
+		
+		if (isset($USER->id)) {
+			$uid = $USER->id;
+		} else {
+			$uid = self::$uid;
+		}
+	
+		syslog(LOG_INFO, ($uid));
+		$record = $DB->get_record(SESSION_NAME, array('user_id' => intval($uid)));
+		syslog(LOG_INFO, ($record));
+		$endpointMappings = (array) json_decode($record->$skey);
+		syslog(LOG_INFO, ($endpointMappings));
 		$value = $this->_encrypt($this->key, $value, base64_decode($this->iv));
+		
 		$endpointMappings[$endpoint] = "$value";
+		syslog(LOG_INFO, ($endpointMappings));
 		$record->$skey = json_encode($endpointMappings);
 		
 		$DB->update_record(SESSION_NAME, $record);
@@ -213,13 +221,14 @@ echo $ret;
 			$uid = self::$uid;
 		}
 
-		$records = $DB->get_records(SESSION_NAME, array('user_id' => intval($uid)));
+		$record = $DB->get_record(SESSION_NAME, array('user_id' => intval($uid)));
 
-		if (empty($records)) {
+		if ($record == null || empty($record)) {
 			return null;
 		}
-		$record = $records[0];
-		$endpointMappings = json_decode($record->$skey);
+		
+
+		$endpointMappings = (array) json_decode($record->$skey);
 
 		if ($endpointMappings == null) {
 			return null;
@@ -227,6 +236,7 @@ echo $ret;
 		
 		// Get value, decrypt and return
 		$value = $endpointMappings[$endpoint];
+	
 		if ($value == "" || $value == null) {
 			return null;
 		}

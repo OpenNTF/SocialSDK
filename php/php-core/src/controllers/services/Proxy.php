@@ -108,9 +108,8 @@ class Proxy extends BaseController
 		}
 			
 		$headers = null;
-		$body = null;
 		$response = null;
-		$body = $_POST;
+		$body = file_get_contents('php://input');
 		$endpoint = null;
 		
 		if ($server == null) {
@@ -119,7 +118,10 @@ class Proxy extends BaseController
 		
 		$method = $_SERVER['REQUEST_METHOD'];
 		$headers = apache_request_headers();
-			
+	
+		$forwardHeader['Content-Length'] = $headers['Content-Length'];
+		$forwardHeader['Content-Type'] = $headers['Content-Type'];
+		
 		if ($settings->getAuthenticationMethod() == "basic") {
 			$endpoint = new SBTBasicAuthEndpoint();
 		} else if ($settings->getAuthenticationMethod() == "oauth2") {
@@ -128,7 +130,7 @@ class Proxy extends BaseController
 			$endpoint = new SBTOAuth1Endpoint();
 		}
 
-		$response = $endpoint->makeRequest($server, $url, $method, $options, $body);
+		$response = $endpoint->makeRequest($server, $url, $method, $options, $body, $forwardHeader);
 
 		if ($response->getStatusCode() == 200) {
 			if (isset($_REQUEST["isAuthenticated"]) && $settings->getAuthenticationMethod() == "basic") {
@@ -158,6 +160,8 @@ class Proxy extends BaseController
 		} else if ($response->getStatusCode() == 302) {
 			$headers = $response->getHeaders();
 			$this->route($headers['location']);
+		} else {
+			print_r($response->getBody(TRUE));
 		}
 	}
 	

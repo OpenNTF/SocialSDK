@@ -539,7 +539,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
-			<artifactId>com.ibm.sbt.php.php-core</artifactId>
+			<artifactId>com.ibm.sbt.php.core</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
 			<type>zip</type>
 		</dependency>

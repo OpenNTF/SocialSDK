@@ -285,10 +285,11 @@
 <script type="text/template" id="viewTemplate">
 <div dojoAttachPoint="domNode">
 	<div dojoAttachPoint="mainNode">
-		<div role="alert" class="alert alert-success" style="margin: 20px 0px 0px 0px; display: none;" dojoattachpoint="messageNode">
+		<div role="alert" class="alert alert-success" style="z-index:5000; -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); -webkit-border-radius: 6px; -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); background:#eee; -moz-border-radius: 5px; color: black; display: none;" dojoattachpoint="messageNode">
 			<span class="alert alert-success" dojoattachpoint="messageBody"></span>
-			<a dojoattachevent="onclick: hideMessage" title="${nls.root.messageClose}" dojoattachpoint="messageClose" role="button"  href="javascript:;">X</a>
+			&nbsp;<a dojoattachevent="onclick: hideMessage" title="${nls.root.messageClose}" dojoattachpoint="messageClose" role="button"  href="javascript:;">Close</a>
 		</div>	
+		<br/><br/>
 		<div dojoAttachPoint="leftColNode" style="display:none;">
 			<div>
 				<div dojoAttachPoint="navMenu" id="navTree"></div>

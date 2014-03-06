@@ -68,6 +68,7 @@ class SBTBaseWidget extends WP_Widget {
  			if ($response->getStatusCode() == 401) {
  				$store->deleteOAuthCredentials();
  				setcookie('IBMSBTKOAuthLogin', "", $timestamp - 86400);
+ 				require BASE_PATH . '/core/views/oauth-login-display.php';
  			}
  		}		
 		echo '<div name="ibm_sbtk_widget">';

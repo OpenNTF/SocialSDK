@@ -34,12 +34,17 @@ class BasePluginController extends BaseController {
 		$settings = new SBTSettings();
 		$authMethod = $settings->getAuthenticationMethod();
 
+		global $USER;
+		if (isset($USER->id)) {
+			setcookie('ibm-sbt-uid', $USER->id, time() + 86400);
+		}
+
 		if ($authMethod == 'oauth1') {	
 			// Check if we have an access token. If not, re-direct user to authentication page
 			$this->loadModel('SBTCredentialStore');
 			$store = SBTCredentialStore::getInstance();
 			$token = $store->getRequestToken();
-		
+			
 			if ($token == null) {
 				// Autoloader
 				if (file_exists('../../../autoload.php')) {
@@ -49,18 +54,12 @@ class BasePluginController extends BaseController {
 					include_once  $dir . '../../autoload.php';
 				}
 				
-				// Init the OAuth options
-				$options = array(
-						'consumer_key' => $settings->getConsumerKey(),
-						'consumer_secret' => $settings->getConsumerSecret(),
-						'server_uri' => $settings->getURL(),
-						'request_token_uri' => $settings->getRequestTokenURL(),
-						'authorize_uri' => $settings->getAuthorizationURL(),
-						'access_token_uri' => $settings->getAccessTokenURL()
-				);
-				include BASE_PATH . '/core/controllers/endpoint/SBTOAuth1Endpoint.php';
+				if (file_exists(BASE_PATH . '/core/controllers/endpoint/SBTOAuth1Endpoint.php')) {
+					include BASE_PATH . '/core/controllers/endpoint/SBTOAuth1Endpoint.php';
+				} 
+				
 				// Create endpoint
-				$oauth = new SBTOAuth1Endpoint($options);
+				$oauth = new SBTOAuth1Endpoint();
 		
 				// Send request to authenticate user (auth token is automatically being stored when callback method = authenticationCallback)
 				// find out the domain:
@@ -74,9 +73,12 @@ class BasePluginController extends BaseController {
 				$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
 				$url = $protocol . $domain . $path . "?" . $queryString;
 
-				$body = $oauth->request($url,
-						BASE_LOCATION . '/core/index.php?plugin=guzzle&class=SBTOAuth1Endpoint&method=authenticationCallback', 'POST');
-				
+				$body = null;
+				if (strpos(BASE_LOCATION, 'core') !== FALSE) {
+					$body = $oauth->request($url, BASE_LOCATION . '/index.php?plugin=guzzle&class=SBTOAuth1Endpoint&method=authenticationCallback', 'POST');
+				} else {
+					$body = $oauth->request($url, BASE_LOCATION . '/core/index.php?plugin=guzzle&class=SBTOAuth1Endpoint&method=authenticationCallback', 'POST');
+				}
 				var_dump($body);
 			}
 		} else if ($authMethod == 'oauth2') {

@@ -1,3 +1,24 @@
+	<style type="text/css">
+	
+		#ibmsbt\.loginActionForm {
+			padding: 10px;
+		}
+  		#ibmsbt\.loginActionForm table {
+    		z-index:5000; 
+    		-webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); 
+    		-webkit-border-radius: 6px; 
+    		-moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); 
+    		background:#CCC4C4; 
+    		-moz-border-radius: 5px; 
+    		color: black;
+    	}
+    	
+    	#ibmsbt\.loginActionForm table td {
+    		padding: 10px;
+    		border-style: none;
+    	}
+  	</style>
+	
 	<div name="grantAccessDiv" style="display: none;">
         	<div class="alert alert-error" id="grantAccessErrorDiv" style="display: none;"></div>
 			<div id="desc">You have not yet granted access for this application to use your IBM Connections account.</div>
@@ -20,7 +41,7 @@
 
 				endpoint.isAuthenticationValid({	
 					"forceAuthentication": true, 
-					"actionUrl": "***REMOVED*** echo plugins_url(); ?>/index.php?classpath=services&class=Proxy&method=route&isAuthenticated=true"}).then(
+					"actionUrl": "***REMOVED*** echo plugins_url(); ?>/index.php?classpath=services&class=Proxy&method=route&uid=***REMOVED*** global $USER; echo $USER->id?>&isAuthenticated=true"}).then(
 						function(response) {
 							if (response.result) {
 								setWidgetsDisplay("block");
@@ -37,7 +58,7 @@
 				var endpoint = config.findEndpoint("connections");
 				config.Properties["loginUi"] = "dialog";
 
-				***REMOVED***
+				***REMOVED*** 
 					if (!isset($_SERVER['HTTPS']) || !$_SERVER['HTTPS']) {
 						echo "alert('The IBM Connect cookie policy requires that you use HTTPS to perform this action. Please try again by accessing this webpage using the HTTPS protocol.');";
 						echo "return;";
@@ -45,7 +66,7 @@
 				?>
 
 				endpoint.authenticate({"forceAuthentication": true, 
-					"actionUrl": "***REMOVED*** echo plugins_url(); ?>/index.php?classpath=services&class=Proxy&method=route&isAuthenticated=true"}).then(
+					"actionUrl": "***REMOVED*** echo plugins_url(); ?>/index.php?classpath=services&class=Proxy&method=route&uid=***REMOVED*** global $USER; echo $USER->id?>&isAuthenticated=true"}).then(
 					function(response) {
 						location.reload();
 					},
@@ -79,7 +100,7 @@
   
         			logoutBtn[i].onclick = function(evt) {	
         				var endpoint = config.findEndpoint("connections");
-        				endpoint.logout({"actionUrl": "***REMOVED*** echo plugins_url(); ?>/index.php?classpath=services&class=Proxy&method=route&basicAuthLogout=true"}).then(
+        				endpoint.logout({"actionUrl": "***REMOVED*** echo plugins_url(); ?>/index.php?classpath=services&class=Proxy&method=route&uid=***REMOVED*** global $USER; echo $USER->id?>&basicAuthLogout=true"}).then(
         						function(response) {
         							displayGrantAccess(dom, config);
         							var logoutBtn = document.getElementsByName("logoutBtn");

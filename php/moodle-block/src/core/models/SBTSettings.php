@@ -94,7 +94,7 @@ class SBTSettings {
 		$this->basicAuthUsername = (isset($configData['basic_auth_username']) ? $configData['basic_auth_username'] : "");
 		$this->basicAuthPassword = (isset($configData['basic_auth_password']) ? $configData['basic_auth_password'] : "");
 		$this->basicAuthMethod = (isset($configData['basic_auth_method']) ? $configData['basic_auth_method'] : "");
-		
+
 		$this->forceSSLTrust = (isset($configData['force_ssl_trust']) ? $configData['force_ssl_trust'] : true);
 		
 		$this->apiVersion = (isset($configData['endpoint_version']) ? $configData['endpoint_version'] : "");
@@ -111,7 +111,7 @@ class SBTSettings {
 	 * 
 	 * @return
 	 */
-	public function getURL() {
+	public function getURL($endpoint = "connections") {
 		return $this->url;
 	}
 	
@@ -120,7 +120,7 @@ class SBTSettings {
 	 *
 	 * @return
 	 */
-	public function getConsumerKey() {
+	public function getConsumerKey($endpoint = "connections") {
 		return $this->consumerKey;
 	}
 	
@@ -129,7 +129,7 @@ class SBTSettings {
 	 *
 	 * @return
 	 */
-	public function getConsumerSecret() {
+	public function getConsumerSecret($endpoint = "connections") {
 		return $this->consumerSecret;
 	}
 	
@@ -138,7 +138,7 @@ class SBTSettings {
 	 *
 	 * @return
 	 */
-	public function getClientSecret() {
+	public function getClientSecret($endpoint = "connections") {
 		return $this->clientSecret;
 	}
 	
@@ -147,7 +147,7 @@ class SBTSettings {
 	 *
 	 * @return
 	 */
-	public function getClientID() {
+	public function getClientID($endpoint = "connections") {
 		return $this->clientID;
 	}
 	
@@ -156,8 +156,8 @@ class SBTSettings {
 	 *
 	 * @return
 	 */
-	public function getRequestTokenURL() {
-		$this->requestTokenURL;
+	public function getRequestTokenURL($endpoint = "connections") {
+		return $this->requestTokenURL;
 	}
 	
 	/**
@@ -165,7 +165,7 @@ class SBTSettings {
 	 *
 	 * @return
 	 */
-	public function forceSSLTrust() {
+	public function forceSSLTrust($endpoint = "connections") {
 		return $this->forceSSLTrust;
 	}
 	
@@ -174,7 +174,7 @@ class SBTSettings {
 	 *
 	 * @return
 	 */
-	public function getAuthorizationURL() {
+	public function getAuthorizationURL($endpoint = "connections") {
 		return $this->authorizationURL;
 	}
 	
@@ -183,7 +183,7 @@ class SBTSettings {
 	 *
 	 * @return
 	 */
-	public function getAPIVersion() {
+	public function getAPIVersion($endpoint = "connections") {
 		return $this->apiVersion;
 	}
 	
@@ -192,7 +192,7 @@ class SBTSettings {
 	 *
 	 * @return
 	 */
-	public function getAccessTokenURL() {
+	public function getAccessTokenURL($endpoint = "connections") {
 		return $this->accessTokenURL;
 	}
 	
@@ -201,7 +201,7 @@ class SBTSettings {
 	 *
 	 * @return
 	 */
-	public function getAuthenticationMethod() {
+	public function getAuthenticationMethod($endpoint = "connections") {
 		return $this->authenticationMethod;
 	}
 	
@@ -210,7 +210,7 @@ class SBTSettings {
 	 *
 	 * @return
 	 */
-	public function getOAuth2CallbackURL() {
+	public function getOAuth2CallbackURL($endpoint = "connections") {
 		return $this->oauth2CallbackURL;
 	}
 	
@@ -219,7 +219,7 @@ class SBTSettings {
 	 *
 	 * @return
 	 */
-	public function getSDKDeployURL() {
+	public function getSDKDeployURL($endpoint = "connections") {
 		return $this->sdkDeployURL;
 	}
 	
@@ -228,7 +228,7 @@ class SBTSettings {
 	 *
 	 * @return
 	 */
-	public function getName() {
+	public function getName($endpoint = "connections") {
 		return $this->name;
 	}
 	
@@ -237,7 +237,7 @@ class SBTSettings {
 	 *
 	 * @return
 	 */
-	public function getBasicAuthUsername() {
+	public function getBasicAuthUsername($endpoint = "connections") {
 		return $this->basicAuthUsername;
 	}
 	
@@ -246,7 +246,7 @@ class SBTSettings {
 	 *
 	 * @return
 	 */
-	public function getServerType() {
+	public function getServerType($endpoint = "connections") {
 		return $this->serverType;
 	}
 	
@@ -255,7 +255,7 @@ class SBTSettings {
 	 *
 	 * @return
 	 */
-	public function allowClientAccess() {
+	public function allowClientAccess($endpoint = "connections") {
 		return $this->allowClientAccess;
 	}
 	
@@ -264,7 +264,7 @@ class SBTSettings {
 	 *
 	 * @return
 	 */
-	public function getBasicAuthPassword() {
+	public function getBasicAuthPassword($endpoint = "connections") {
 		return $this->basicAuthPassword;
 	}
 	
@@ -273,7 +273,7 @@ class SBTSettings {
 	 *
 	 * @return string		global|profile|prompt
 	 */
-	public function getBasicAuthMethod() {
+	public function getBasicAuthMethod($endpoint = "connections") {
 		return $this->basicAuthMethod;
 	}
 	
@@ -282,7 +282,7 @@ class SBTSettings {
 	 *
 	 * @return string		String indicating which library to use.
 	 */
-	public function getJSLibrary() {
+	public function getJSLibrary($endpoint = "connections") {
 		return $this->jsLibrary;
 	}
 }

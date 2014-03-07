@@ -66,7 +66,8 @@ class block_ibmsbt extends block_base {
 			$blockPath = $CFG->dirroot . '/blocks/ibmsbt/';
 
 			echo '<div name="ibm_sbtk_widget">';
-			if (($settings->getAuthenticationMethod() == 'oauth1' || $settings->getAuthenticationMethod() == 'oauth2') && $store->getOAuthAccessToken() == null &&
+			if (($settings->getAuthenticationMethod($this->config->endpoint) == 'oauth1' 
+					|| $settings->getAuthenticationMethod($this->config->endpoint) == 'oauth2') && $store->getOAuthAccessToken($this->config->endpoint) == null &&
 			(!isset($_COOKIE['IBMSBTKOAuthLogin']) || $_COOKIE['IBMSBTKOAuthLogin'] != 'yes')) {
 				require $blockPath . '/core/views/oauth-login-display.php';
 				$this->content->text = ob_get_clean();
@@ -75,19 +76,28 @@ class block_ibmsbt extends block_base {
 			}
 			$plugin = new SBTPlugin();
 			$plugin->createHeader();
-			if (($settings->getAuthenticationMethod() == 'basic' && $store->getBasicAuthUsername() != null 
-				&& $store->getBasicAuthPassword() != null) || ($settings->getAuthenticationMethod() == 'oauth1' && $store->getRequestToken() != null)
-				|| ($settings->getAuthenticationMethod() == 'basic' && $settings->getBasicAuthMethod() == 'global')
-				|| ($settings->getAuthenticationMethod() == 'oauth2' && $store->getOAuthAccessToken() != null)) {
+			if (($settings->getAuthenticationMethod($this->config->endpoint) == 'basic' && $store->getBasicAuthUsername($this->config->endpoint) != null 
+				&& $store->getBasicAuthPassword($this->config->endpoint) != null) || ($settings->getAuthenticationMethod() == 'oauth1' && $store->getRequestToken($this->config->endpoint) != null)
+				|| ($settings->getAuthenticationMethod($this->config->endpoint) == 'basic' && $settings->getBasicAuthMethod($this->config->endpoint) == 'global')
+				|| ($settings->getAuthenticationMethod($this->config->endpoint) == 'oauth2' && $store->getOAuthAccessToken($this->config->endpoint) != null)) {
 				require $this->config->plugin;
 				
 			}
 	
-			if ($settings->getAuthenticationMethod() == 'basic' && $settings->getBasicAuthMethod() == 'prompt' && $store->getBasicAuthUsername() == null ) {
+			if ($settings->getAuthenticationMethod($this->config->endpoint) == 'basic' && $settings->getBasicAuthMethod($this->config->endpoint) == 'prompt' 
+					&& $store->getBasicAuthUsername($this->config->endpoint) == null ) {
 				require_once $blockPath . '/core/views/basic-auth-login-display.php';
-			} else if ($settings->getAuthenticationMethod() == 'oauth1' || $settings->getAuthenticationMethod() == 'oauth2') {
+			} else if ($settings->getAuthenticationMethod($this->config->endpoint) == 'oauth1' 
+					|| $settings->getAuthenticationMethod($this->config->endpoint) == 'oauth2') {
 	// 			require_once BASE_PATH . '/views/oauth-logout-display.php'; TODO: Uncomment when OAuth logout has been fixed
 			}
+			
+
+			if (($settings->getAuthenticationMethod($this->config->endpoint) == 'oauth1'
+					|| $settings->getAuthenticationMethod($this->config->endpoint) == 'oauth2') && $store->getOAuthAccessToken($this->config->endpoint) != null) {
+				echo "<button>Logout from this Endpoint</button>";
+			} 
+			
 			echo '</div>';
 
 			$this->content->text = ob_get_clean();

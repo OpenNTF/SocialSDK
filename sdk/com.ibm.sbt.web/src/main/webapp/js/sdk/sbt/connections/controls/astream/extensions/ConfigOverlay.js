@@ -32,7 +32,7 @@ define(["../../../../declare", "../../../../dom", "../../../../lang", "../../../
                         popUp.removeChild(popUp.firstChild); 
                     }
                     for(var i=0;i<results.length;i++){
-                        var data = document.createElement("li");
+                        var data = document.createElement("tr");
                         var title = results[i].getTitle();
                         var id="";
                         if(searchType=="myCommunities"){

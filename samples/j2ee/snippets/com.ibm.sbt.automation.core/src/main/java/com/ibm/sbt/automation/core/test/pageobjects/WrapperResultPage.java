@@ -58,7 +58,7 @@ public class WrapperResultPage extends BaseResultPage{
 	 * @return the WebElement
 	 */
 	public WebElement getActivityStream() {
-		return getWebElement().findElement(By.cssSelector("#activityStream"));
+		return getWebElement().findElement(By.cssSelector("#activityStreamNode"));
 	}
 	
 	/**

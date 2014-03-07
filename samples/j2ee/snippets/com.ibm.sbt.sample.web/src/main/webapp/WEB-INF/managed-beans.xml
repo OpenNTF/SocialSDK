@@ -165,11 +165,11 @@
 		<managed-bean-scope>session</managed-bean-scope>
 		<managed-property>
 			<property-name>url</property-name>
-			<value>https://dev.sdkdemo.com:444</value>
+			<value>%{connections.url}</value>
 		</managed-property>
 		<managed-property>
 			<property-name>apiVersion</property-name>
-			<value>4.5</value>
+			<value>%{connections.apiVersion}</value>
 		</managed-property>
 		<managed-property>
 			<property-name>credentialStore</property-name>

@@ -98,7 +98,7 @@ function generateConnectionsEndpoint($authentication_method, $url, $deploy_url) 
 				"url": "' . $deploy_url . '"}),';
 	} else if ($authentication_method == 'basic') {
 		$endpoint_js .= '"authenticator": new Basic({';
-		$endpoint_js .= '"url": "' . $deploy_url . '", "actionUrl": "' . plugins_url() . '/index.php?classpath=services&class=Proxy&method=route&basicAuthRequest=true&_redirectUrl=' . getCurrentPage() . '"}),';
+		$endpoint_js .= '"url": "' . $deploy_url . '", "actionUrl": "' . plugins_url() . '/index.php?classpath=services&class=Proxy&method=route&basicAuthRequest=true&uid=' . $USER->id . '&_redirectUrl=' . getCurrentPage() . '"}),';
 	}
 
 	$endpoint_js .= '"proxyPath": "connections",';

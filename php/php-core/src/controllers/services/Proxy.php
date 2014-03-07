@@ -43,7 +43,10 @@ class Proxy extends BaseController
 		$this->loadModel('SBTSettings');
 		$this->loadModel('SBTCredentialStore');
 		
+		$store = null;
+	
 		$store = SBTCredentialStore::getInstance();	
+		
 		$settings = new SBTSettings();
 
 		if (!isset($_REQUEST["_redirectUrl"])) {
@@ -119,9 +122,14 @@ class Proxy extends BaseController
 		$method = $_SERVER['REQUEST_METHOD'];
 		$headers = apache_request_headers();
 	
-		$forwardHeader['Content-Length'] = $headers['Content-Length'];
-		$forwardHeader['Content-Type'] = $headers['Content-Type'];
+		$forwardHeader = null;
+		if (isset($headers['Content-Length'])) {
+			$forwardHeader['Content-Length'] = $headers['Content-Length'];
+		}
 		
+		if (isset($headers['Content-Type'])) {
+			$forwardHeader['Content-Type'] = $headers['Content-Type'];
+		}
 		if ($settings->getAuthenticationMethod() == "basic") {
 			$endpoint = new SBTBasicAuthEndpoint();
 		} else if ($settings->getAuthenticationMethod() == "oauth2") {
@@ -160,6 +168,9 @@ class Proxy extends BaseController
 		} else if ($response->getStatusCode() == 302) {
 			$headers = $response->getHeaders();
 			$this->route($headers['location']);
+		} else if ($response->getStatusCode() == 201) {
+			$result = array('status' => 201, 'result' => true);
+			print_r(json_encode($result));
 		} else {
 			print_r($response->getBody(TRUE));
 		}

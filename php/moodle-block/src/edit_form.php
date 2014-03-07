@@ -33,7 +33,7 @@ class block_ibmsbt_edit_form extends block_edit_form {
 
         // List of available samples. Note: keys must reflect relative path from
         // core/samples and must omit the .php file extension
-        $plugins = array();
+        $plugins = array('choose' => 'Choose one...');
         $path = str_replace('core', '', BASE_PATH) . '/user_widgets/';
         if ($handle = opendir($path)) {
         	while (false !== ($file = readdir($handle))) {
@@ -58,7 +58,11 @@ class block_ibmsbt_edit_form extends block_edit_form {
         
         // Type dropdown
         $mform->addElement('select', 'config_plugin', 'Plugin:', $plugins);
-        $mform->setDefault('config_plugin', 'social/files/files-grid');
+        $mform->setDefault('config_plugin', 'choose');
+        
+        $endpoints = array('connections' => 'connections');
+        $mform->addElement('select', 'config_endpoint', 'Endpoint:', $endpoints);
+        $mform->setDefault('config_endpoint', 'connections');
         
         // Block title
         $mform->addElement('text', 'config_elementID', 'Element ID:');
@@ -67,21 +71,7 @@ class block_ibmsbt_edit_form extends block_edit_form {
         $mform->addElement('text', 'config_title', 'Title:');
         $mform->setDefault('config_title', 'default value');
         $mform->setType('config_title', PARAM_MULTILANG);
-        
-        $status = "Not authenticated";
-        $logoutButton = "";
-        $settings = new SBTSettings();
-        $store = SBTCredentialStore::getInstance();
-        
-        if (($settings->getAuthenticationMethod() == 'oauth1' || $settings->getAuthenticationMethod() == 'oauth2') && $store->getOAuthAccessToken() != null) {
-        	$status = 'Authenticated';
-        	$logoutButton = "<button>Logout from this Endpoint</button>";
-        } else if ($settings->getAuthenticationMethod() == 'basic' && $store->getBasicAuthUsername() != null) {
-        	$status = 'Authenticated';
-        	$logoutButton = "<button>Logout from this Endpoint</button>";
-        }
-        $mform->addElement('html', 'Login status:<strong>' . $status . '</strong> ' . $logoutButton);
-       
+    
  
     }
 }

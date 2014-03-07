@@ -52,11 +52,15 @@ define(["../../../../declare", "../../../../dom", "../../../../lang", "../../../
                         data['data-id-name'] = title;
                         dom.setText(data, title);
                         data.id = id;
-                        
+                        var table = popUp;
                         data.onclick = function (event) {
                             var input = self._searchBox._searchInput;
                             input.value = "";
                             self.addToFilters(this.id,  this['data-id-name'], this['data-id-type']);
+                            var childNodes = table.childNodes; 
+                            while(childNodes.length > 0){
+                                table.removeChild(childNodes[0]);
+                            }
                         };
 
                         popUp.appendChild(data);

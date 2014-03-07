@@ -57,12 +57,15 @@ define(["../../../declare", "../../../lang", "../../../url",
          * @type String
          */
         defaultTemplate: defaultTemplate,
+        standardExtensionsMap: {
+            commenting: "com.ibm.social.as.extension.CommentExtension",
+            saving: "lconn.homepage.as.extension.SavedActionExtension",
+            refreshButton: "com.ibm.social.as.gadget.refresh.RefreshButtonExtension",
+            deleteButton: "com.ibm.social.as.lconn.extension.MicroblogDeletionExtension"
+        },
         
         /**
          * Overriding the method in WidgetWrapper for providing the substitutions for variables in the template.
-         * 
-         * Replacements needed: 
-         * proxyUrl, connectionsContextRoot, 
          * 
          * @method getTemplateReplacements
          * @returns {Object}
@@ -76,6 +79,8 @@ define(["../../../declare", "../../../lang", "../../../url",
             var serviceMappings = this.getEndpoint().serviceMappings;
             var connectionsServiceMapping = serviceMappings ? this.getEndpoint().serviceMappings.connections : null;
             var connectionsContextRoot = connectionsServiceMapping ? connectionsServiceMapping : "connections";
+            var extraIncludes = "~"; // extra classes we need to require in the aggregated call for js, e.g. extensions and side navs.
+            var extraExcludes = "~"; // extra classes we want to exclude, must be a string
             
             if(libQuery){
                 libQueryObj = util.splitQuery(libQuery, "&");
@@ -98,6 +103,27 @@ define(["../../../declare", "../../../lang", "../../../url",
                 libraryUrl: libUrl.getUrl(),
                 loginUi: "popup"
             });
+            if(lang.isObject(this.args.extensions) && !this.args.extensions instanceof Array){
+                var extensions = this.args.extensions;
+                var arrayConversion = [];
+                for (var key in extensions) {
+                    if (extensions.hasOwnProperty(key)) {
+                        arrayConversion.push(this.standardExtensionsMap[key]);
+                        extraIncludes += this.standardExtensionsMap[key] + ".js~";
+                    }
+                }
+                this.args.extensions = arrayConversion;
+            }
+            if(!this.args.feedUrl && this.args.config){
+                var asConfig = this.args.config;
+                var extensionsArray = [];
+                this.getExtensionsToArray(asConfig, extensionsArray);
+
+                var i;
+                for(i = 0; i < extensionsArray.length; i++){
+                    extraIncludes += extensionsArray[i] + ".js~";
+                }
+            }
             
             var templateReplacements = {
                 args: JSON.stringify(this.args),
@@ -106,10 +132,49 @@ define(["../../../declare", "../../../lang", "../../../url",
                 libraryUrl: libUrl.getUrl(),
                 sbtProps: JSON.stringify(sbtProps),
                 cssUrl: cssUrl,
-                connectionsContextRoot: connectionsContextRoot
+                connectionsContextRoot: connectionsContextRoot,
+                extraIncludes: extraIncludes,
+                extraExcludes: extraExcludes
             };
             
             return templateReplacements;
+        },
+        
+        /*
+         * Used to recursively get all of the extension arrays in an activity stream configuration object. 
+         * The result is placed in the second argument.
+         * 
+         * @method getTemplateReplacements
+         * @params asConfig the configuration object
+         * @params resultArray The array to add new extensions to
+         */
+        getExtensionsToArray: function(asConfig, resultArray){
+            for (var key in asConfig) {
+                if (asConfig.hasOwnProperty(key)) {
+                   if(lang.isObject(asConfig[key])){
+                       this.getExtensionsToArray(asConfig[key], resultArray);
+                   }
+                   
+                   if(key == "extensions"){
+                       var extensionsArray = asConfig[key];
+                       if(lang.isArray(extensionsArray)){
+                           var i;
+                           for(i = 0; i < extensionsArray.length; i++){
+                               var j;
+                               var containsExtension = false;
+                               for(j = 0; j < resultArray.length; j++){
+                                   if(resultArray[j] == extensionsArray[i]){
+                                       containsExtension = true;
+                                   }
+                               }
+                               if(!containsExtension){
+                                   resultArray.push(extensionsArray[i]);
+                               }
+                           }
+                       }
+                   }
+                }
+             }
         },
         
         /**

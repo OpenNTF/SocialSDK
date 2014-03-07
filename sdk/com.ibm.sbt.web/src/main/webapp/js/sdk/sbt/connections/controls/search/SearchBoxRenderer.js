@@ -270,23 +270,14 @@ define(["../../../declare",
 		 * @param el The table row element
 		 */
 		changeSelectedApplication: function(selectedApplication, trImgIcon){
-			var elements = document.getElementsByTagName("*");
-			for(var i=0;i<elements.length;i++){
-				if(elements[i].textContent == nls.selectedApplication){
-					
-					//change the text showing the selected application
-					elements[i].textContent = selectedApplication;
-					nls.selectedApplication = selectedApplication;
-					
-					//change the css of the image icon to relate to the selected application
-					var previous = i -1; // index
-					var imgEl = elements[previous];
-					imgEl.classList.remove(imgEl.classList[imgEl.classList.length-1]);
-					var index = trImgIcon.classList.length-1;
-					var newClass = trImgIcon.classList[index];
-					imgEl.classList.add(newClass);
-				}
-			}
+			var element = document.getElementById("searchAppType");
+			if(element.textContent == nls.selectedApplication){
+                
+                //change the text showing the selected application
+                element.textContent = selectedApplication;
+                nls.selectedApplication = selectedApplication;
+                
+            }
 		},
 		
 		/*

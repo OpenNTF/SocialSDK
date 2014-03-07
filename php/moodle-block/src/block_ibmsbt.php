@@ -26,8 +26,6 @@ class block_ibmsbt extends block_base {
 	
 	/**
 	 * Init.
-	 * 
-	 * @author Benjamin Jakobus
 	 */
 	public function init() {
 		$this->title = get_string('ibmsbt', 'block_ibmsbt');
@@ -37,7 +35,6 @@ class block_ibmsbt extends block_base {
 	 * Returns the block contents.
 	 * 
 	 * @return stdClass		Block content.
-	 * @author Benjamin Jakobus
 	 */
 	public function get_content() {
 		if ($this->content !== null) {
@@ -68,19 +65,16 @@ class block_ibmsbt extends block_base {
 			
 			$blockPath = $CFG->dirroot . '/blocks/ibmsbt/';
 
-// 			require_once $blockPath . '/core/views/includes/header.php';
-			
-			$plugin = new SBTPlugin();
-			$plugin->createHeader();
-			
 			echo '<div name="ibm_sbtk_widget">';
 			if (($settings->getAuthenticationMethod() == 'oauth1' || $settings->getAuthenticationMethod() == 'oauth2') && $store->getOAuthAccessToken() == null &&
 			(!isset($_COOKIE['IBMSBTKOAuthLogin']) || $_COOKIE['IBMSBTKOAuthLogin'] != 'yes')) {
 				require $blockPath . '/core/views/oauth-login-display.php';
 				$this->content->text = ob_get_clean();
 				return;
+		
 			}
-	
+			$plugin = new SBTPlugin();
+			$plugin->createHeader();
 			if (($settings->getAuthenticationMethod() == 'basic' && $store->getBasicAuthUsername() != null 
 				&& $store->getBasicAuthPassword() != null) || ($settings->getAuthenticationMethod() == 'oauth1' && $store->getRequestToken() != null)
 				|| ($settings->getAuthenticationMethod() == 'basic' && $settings->getBasicAuthMethod() == 'global')
@@ -89,7 +83,7 @@ class block_ibmsbt extends block_base {
 				
 			}
 	
-			if ($settings->getAuthenticationMethod() == 'basic' && $settings->getBasicAuthMethod() == 'prompt') {
+			if ($settings->getAuthenticationMethod() == 'basic' && $settings->getBasicAuthMethod() == 'prompt' && $store->getBasicAuthUsername() == null ) {
 				require_once $blockPath . '/core/views/basic-auth-login-display.php';
 			} else if ($settings->getAuthenticationMethod() == 'oauth1' || $settings->getAuthenticationMethod() == 'oauth2') {
 	// 			require_once BASE_PATH . '/views/oauth-logout-display.php'; TODO: Uncomment when OAuth logout has been fixed
@@ -103,8 +97,6 @@ class block_ibmsbt extends block_base {
 
 	/**
 	 * Block specilization.
-	 * 
-	 * @author Benjamin Jakobus
 	 */
 	public function specialization() {
 		if (! empty ( $this->config->title )) {
@@ -123,8 +115,6 @@ class block_ibmsbt extends block_base {
 	 * 
 	 * @return boolean		True - we want to allow multiple instances of this
 	 * 						block to be used.
-	 * 
-	 * @author Benjamin Jakobus
 	 */
 	public function instance_allow_multiple() {
 		return true;
@@ -135,8 +125,6 @@ class block_ibmsbt extends block_base {
 	 *
 	 * @return boolean		True - we want to allow multiple instances of this
 	 * 						block to be used.
-	 *
-	 * @author Benjamin Jakobus
 	 */
 	function has_config() {
 		return true;
@@ -146,8 +134,6 @@ class block_ibmsbt extends block_base {
 	 * Loads the specified model.
 	 * 
 	 * @param string $model			The model name.
-	 * 
-	 * @author Benjamin Jakobus
 	 */
 	function loadModel($model) {
 		global $CFG;

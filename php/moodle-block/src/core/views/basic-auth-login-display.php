@@ -8,7 +8,7 @@
     		-webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); 
     		-webkit-border-radius: 6px; 
     		-moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); 
-    		background:#eee; 
+    		background:#CCC4C4; 
     		-moz-border-radius: 5px; 
     		color: black;
     	}

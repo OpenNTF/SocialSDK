@@ -83,10 +83,9 @@ class SBTCredentialStore {
 	
 	private static $instance = null;
 	
-	public static function getInstance($uid = null) {
-		self::$uid = $uid;
+	public static function getInstance() {
 		if (self::$instance == null) {
-			self::$instance = new SBTCredentialStore($uid);
+			self::$instance = new SBTCredentialStore();
 		}
 		return self::$instance;
 	}
@@ -118,7 +117,7 @@ class SBTCredentialStore {
 			if (isset($USER->id)) {
 				$uid = $USER->id;
 			} else {
-				$uid = self::$uid;
+				$uid = $_GET['uid'];
 			}
 			$records = $DB->get_records(SESSION_NAME, array('user_id' => $uid));		
 			foreach ($records as $record) {
@@ -180,28 +179,32 @@ class SBTCredentialStore {
 	 * @param string $value
 	 */
 	private function _store($skey, $endpoint, $value) {
-		syslog(LOG_INFO, "about to store " . $skey . " " . $endpoint . " " . $value);
-		global $DB;
-		global $USER;
+		try {
+			global $DB;
+			global $USER;
+			
+			$uid = null;
+			if (isset($USER->id)) {
+				$uid = $USER->id;
+			} else if (isset($_GET['uid'])) {
+				$uid = $_GET['uid'];
+			} else if (isset($_COOKIE['ibm-sbt-uid'])) {
+				$uid = $_COOKIE['uid'];
+			} else {
+				return;
+			}
 		
-		if (isset($USER->id)) {
-			$uid = $USER->id;
-		} else {
-			$uid = self::$uid;
+			$record = $DB->get_record(SESSION_NAME, array('user_id' => intval($uid)));
+			$endpointMappings = (array) json_decode($record->$skey);
+			$value = $this->_encrypt($this->key, $value, base64_decode($this->iv));
+			
+			$endpointMappings[$endpoint] = "$value";
+			$record->$skey = json_encode($endpointMappings);
+			
+			$DB->update_record(SESSION_NAME, $record);
+		} catch(Exception $e) {
+			syslog(LOG_INFO, $e);
 		}
-	
-		syslog(LOG_INFO, ($uid));
-		$record = $DB->get_record(SESSION_NAME, array('user_id' => intval($uid)));
-		syslog(LOG_INFO, ($record));
-		$endpointMappings = (array) json_decode($record->$skey);
-		syslog(LOG_INFO, ($endpointMappings));
-		$value = $this->_encrypt($this->key, $value, base64_decode($this->iv));
-		
-		$endpointMappings[$endpoint] = "$value";
-		syslog(LOG_INFO, ($endpointMappings));
-		$record->$skey = json_encode($endpointMappings);
-		
-		$DB->update_record(SESSION_NAME, $record);
 	}
 	
 	/**
@@ -215,10 +218,16 @@ class SBTCredentialStore {
 	private function _get($skey, $endpoint) {
 		global $DB;
 		global $USER;
+		
+		$uid = null;
 		if (isset($USER->id)) {
 			$uid = $USER->id;
+		} else if (isset($_GET['uid'])) {
+			$uid = $_GET['uid'];
+		} else if (isset($_COOKIE['ibm-sbt-uid'])) {
+			$uid = $_COOKIE['uid'];
 		} else {
-			$uid = self::$uid;
+			return;
 		}
 
 		$record = $DB->get_record(SESSION_NAME, array('user_id' => intval($uid)));
@@ -251,7 +260,18 @@ class SBTCredentialStore {
 	private function _delete($skey, $endpoint) {
 		global $DB;
 		global $USER;
-		$records = $DB->get_records(SESSION_NAME, array('user_id' => intval($USER->id)));
+		
+		if (isset($USER->id)) {
+			$uid = $USER->id;
+		} else if (isset($_GET['uid'])) {
+			$uid = $_GET['uid'];
+		} else if (isset($_COOKIE['ibm-sbt-uid'])) {
+			$uid = $_COOKIE['uid'];
+		} else {
+			return;
+		}
+		
+		$records = $DB->get_records(SESSION_NAME, array('user_id' => intval($uid)));
 		$record = $records[0];
 		$endpointMappings = json_decode($record->$skey);
 		
@@ -469,7 +489,7 @@ class SBTCredentialStore {
 		if (isset($USER->id)) {
 			$str = sha1($USER->id);
 		} else {
-			$str = sha1(self::$uid);
+			$str = sha1($_GET['uid']);
 		}
 		
 		return substr($str, 0, $length);

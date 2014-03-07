@@ -256,7 +256,7 @@
 </script>
 
 <script type="text/template" id="dialogTemplate">
-<div role="dialog" style="z-index:5000; -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); -webkit-border-radius: 6px; -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); background:#eee; -moz-border-radius: 5px; color: black;" >
+<div role="dialog" style="z-index:5000; -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); -webkit-border-radius: 6px; -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); background:#CCC4C4; -moz-border-radius: 5px; color: black;" >
 	<div dojoattachpoint="titleBar" style="display: none;">
 		<span dojoattachpoint="titleNode"></span> 
 		<span title="Cancel" dojoattachevent="onclick: onCancel" class="dijitDialogCloseIcon" dojoattachpoint="closeButtonNode"></span>
@@ -285,7 +285,7 @@
 <script type="text/template" id="viewTemplate">
 <div dojoAttachPoint="domNode">
 	<div dojoAttachPoint="mainNode">
-		<div role="alert" class="alert alert-success" style="z-index:5000; -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); -webkit-border-radius: 6px; -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); background:#eee; -moz-border-radius: 5px; color: black; display: none;" dojoattachpoint="messageNode">
+		<div role="alert" class="alert alert-success" style="z-index:5000; -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); -webkit-border-radius: 6px; -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); background:#CCC4C4; -moz-border-radius: 5px; color: black; display: none;" dojoattachpoint="messageNode">
 			<span class="alert alert-success" dojoattachpoint="messageBody"></span>
 			&nbsp;<a dojoattachevent="onclick: hideMessage" title="${nls.root.messageClose}" dojoattachpoint="messageClose" role="button"  href="javascript:;">Close</a>
 		</div>	

@@ -49,20 +49,19 @@ class SBTOAuth1Endpoint extends BaseController implements SBTEndpoint
 			{							
 				$store = SBTCredentialStore::getInstance();
 				$settings = new SBTSettings();
-		
+
 				$random = mt_rand(0, 999999);
 				$nonce = sha1($random);
 
 				$parameters = array(
-						'oauth_version' => '1.0',
-						'oauth_callback' => $callbackURL,
-						'oauth_timestamp'  => time(),
-						'oauth_signature' => $settings->getConsumerSecret() . '&' . $settings->getConsumerKey(),
-						'oauth_signature_method' => 'PLAINTEXT',
-						'oauth_nonce' => $nonce,
-						'oauth_consumer_key' => $settings->getConsumerKey()
+					'oauth_version' => '1.0',
+					'oauth_callback' => $callbackURL,
+					'oauth_timestamp'  => time(),
+					'oauth_signature' => $settings->getConsumerSecret() . '&' . $settings->getConsumerKey(),
+					'oauth_signature_method' => 'PLAINTEXT',
+					'oauth_nonce' => $nonce,
+					'oauth_consumer_key' => $settings->getConsumerKey()
 				);
-				
 			
 				$tokenURL = $settings->getRequestTokenURL() . '?' . http_build_query($parameters, null, '&');
 				$client = new Client($tokenURL);
@@ -107,9 +106,7 @@ class SBTOAuth1Endpoint extends BaseController implements SBTEndpoint
 				} else {
 					echo '<script type="text/javascript" language="javascript">window.location = "' . $settings->getAuthorizationURL() . "?oauth_token=" . $info['oauth_token'] . '";</script>';
 				}
-				
 			}
-			
 		}
 		catch(OAuth1Exception2 $e) {
 			echo "OAuth1Exception2:  " . $e->getMessage();
@@ -123,7 +120,6 @@ class SBTOAuth1Endpoint extends BaseController implements SBTEndpoint
 	 * @author Benjamin Jakobus
 	 */
 	public function authenticationCallback() {
-	
 		if (empty($_GET['oauth_token'])) {
 			return;
 		}

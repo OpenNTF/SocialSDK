@@ -168,7 +168,7 @@ define(["../../../declare", "../../../config", "../../../url", "../../../Promise
                 views : {
                     main : {}
                 },
-                extensions : [],
+                extensions : args.extensions || [],
                 eeManager: "com.ibm.social.as.ee.EEManager",
                 boardId: this.getBoardIdFromUrl(args.feedUrl)
             };

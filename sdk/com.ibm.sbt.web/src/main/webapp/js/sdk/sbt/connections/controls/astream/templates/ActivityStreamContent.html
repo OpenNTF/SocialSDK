@@ -163,9 +163,8 @@
             }
           });
         </script>
-        <script type="text/javascript" src="${proxyUrl}/${connectionsContextRoot}/resources/web/_js/?include=com.ibm.social.as.ActivityStream.js~lconn.core.util.LCDeferred.js~com.ibm.social.as.util.hashtag.HashtagUtil.js~lconn.core.util.dojoPatches.js~com.ibm.social.as.ee.EEManager.js~com.ibm.social.as.lconn.extension.GadgetPreloaderExtension.js~com.ibm.social.as.extension.CommentExtension.js&exclude=dojo.dojo.js~lconn.core.config.services.js&lang=en&debug=true"></script>
+        <script type="text/javascript" src="${proxyUrl}/${connectionsContextRoot}/resources/web/_js/?include=com.ibm.social.as.ActivityStream.js~com.ibm.lconn.personcard.legacy.js~com.ibm.social.as.extension.CommentExtension.js~com.ibm.social.as.util.hashtag.HashtagUtil.js~lconn.core.util.dojoPatches.js~com.ibm.social.as.ee.EEManager.js~com.ibm.lconn.gadget.container.iContainer2.js~com.ibm.social.as.gadget.refresh.RefreshButton.js${extraIncludes}&exclude=dojo.dojo.js~lconn.core.config.services.js${extraExcludes}&lang=en"></script>
         <script type="text/javascript" src="${libraryUrl}"></script>
-        <script type="text/javascript" charset="utf-8" data-requirecontext="_" data-requiremodule="${proxyUrl}/${connectionsContextRoot}/opensocial/gadgets/js/cre.iruntime:cre.iwidget.event:cre.wire:cre.iwidget:cre.iwidget.itemset:cre.util.stringify:cre.service.event:cre.osgadget:cre.messages.en:core:container:rpc:pubsub-2:views:embedded-experiences:open-views:selection:actions:viewenhancements:shared-script-frame:cre.service.people:ibm.connections.sharedialog:com.ibm.connections.sharedialog:com.ibm.connections.ee:ibm.connections.ee:container.nongadget:open-views.js?c=1&amp;_ic_versionStamp=20140117.183045" src="https://acmeairlines.com:8443/sbt.sample.web/service/proxy/connections/connections/opensocial/gadgets/js/cre.iruntime:cre.iwidget.event:cre.wire:cre.iwidget:cre.iwidget.itemset:cre.util.stringify:cre.service.event:cre.osgadget:cre.messages.en:core:container:rpc:pubsub-2:views:embedded-experiences:open-views:selection:actions:viewenhancements:shared-script-frame:cre.service.people:ibm.connections.sharedialog:com.ibm.connections.sharedialog:com.ibm.connections.ee:ibm.connections.ee:container.nongadget:open-views.js?c=1&amp;_ic_versionStamp=20140117.183045&amp;debug=true"></script>
     </head>
     <body class="lotusui30_body lotusui30_fonts lotusui30">
         <div id="lotusMain">
@@ -179,9 +178,8 @@
                         config.Properties = ${sbtProps};
                         new _ActivityStream(${args});
                     }
-                )
+                );
             </script>
         </div>
-        
     </body>
 </html>

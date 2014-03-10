@@ -24,6 +24,7 @@ public class Messages {
 
     public static String Invalid_FileEntry                         = "Invalid Input parameter : FileEntry";
     public static String Invalid_FileId                            = "Invalid Input parameter : FileId";
+    public static String Invalid_LibraryId                         = "Invalid Input parameter : LibraryId";
     public static String Invalid_UserId                            = "Input parameter UserId is Empty";
     public static String Invalid_CollectionId                      = "Invalid Input parameter : CollectionId";
     public static String Invalid_File                              = "Invalid Argument : File to be uploaded";

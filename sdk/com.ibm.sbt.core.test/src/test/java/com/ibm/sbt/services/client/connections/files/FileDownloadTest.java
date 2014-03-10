@@ -127,6 +127,20 @@ public class FileDownloadTest {
 		communityService.deleteCommunity(communityUuid);
 	}
 
+	@Test
+	public void testGetSharedWithMeFiles() throws Exception {
+		EntityList<File> fileList = fileService.getFilesSharedWithMe();
+		for (File file : fileList) {
+			//System.out.println(DOMUtil.getXMLString(file.getDataHandler().getData()));
+			
+			String fileId = file.getFileId();
+			String libraryId = file.getLibraryId();
+			File sharedWithMe = fileService.getFile(fileId, libraryId, null);
+			
+			Assert.assertEquals("Error reading file shared with me", file.getTitle(), sharedWithMe.getTitle());
+		}
+	}
+	
 	// Internals
 	
 	private String createCommunity(String baseName, String type) throws CommunityServiceException {

@@ -60,9 +60,15 @@
 			oid = subscription.getAsLong("Oid");
 			String partNumber = subscription.getAsString("PartNumber");
 			// part number for IBM SmartCloud Connections or IBM SmartCloud Engage for Enterprise Deployment - ASL
-			if ("D0NWLLL".equalsIgnoreCase(partNumber) || "D0NWKLL".equalsIgnoreCase(partNumber)) {
+			if ("D0NWLLL".equalsIgnoreCase(partNumber) ||
+				"D0NPULL".equalsIgnoreCase(partNumber) ||
+				"D0NWKLL".equalsIgnoreCase(partNumber)) {
 				break;
 			}
+		}
+		if (oid == 0) {
+			out.println("Unable to find a base subscription.");
+			return;
 		}
 		final String subscriptionId = "" + oid;
 		

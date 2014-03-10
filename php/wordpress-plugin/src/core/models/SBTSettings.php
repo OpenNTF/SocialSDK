@@ -89,7 +89,7 @@ class SBTSettings {
 	 * 
 	 * @return
 	 */
-	public function getURL() {
+	public function getURL($endpointName = "connections") {
 		return $this->selectedEndpoint['url'];	
 	}
 	
@@ -98,7 +98,7 @@ class SBTSettings {
 	 *
 	 * @return
 	 */
-	public function getConsumerKey() {
+	public function getConsumerKey($endpointName = "connections") {
 		return $this->selectedEndpoint['consumer_key'];
 	}
 	
@@ -107,7 +107,7 @@ class SBTSettings {
 	 *
 	 * @return
 	 */
-	public function getConsumerSecret() {
+	public function getConsumerSecret($endpointName = "connections") {
 		return $this->selectedEndpoint['consumer_secret'];
 	}
 	
@@ -116,7 +116,7 @@ class SBTSettings {
 	 *
 	 * @return
 	 */
-	public function getRequestTokenURL() {
+	public function getRequestTokenURL($endpointName = "connections") {
 		return $this->selectedEndpoint['request_token_url'];
 	}
 	
@@ -125,7 +125,7 @@ class SBTSettings {
 	 *
 	 * @return
 	 */
-	public function forceSSLTrust() {
+	public function forceSSLTrust($endpointName = "connections") {
 		return ($this->selectedEndpoint['force_ssl_trust'] == 'force_ssl_trust');
 	}
 	
@@ -134,7 +134,7 @@ class SBTSettings {
 	 *
 	 * @return
 	 */
-	public function getAuthorizationURL() {
+	public function getAuthorizationURL($endpointName = "connections") {
 		return $this->selectedEndpoint['authorization_url'];
 	}
 	
@@ -143,7 +143,7 @@ class SBTSettings {
 	 *
 	 * @return
 	 */
-	public function getAPIVersion() {
+	public function getAPIVersion($endpointName = "connections") {
 		return $this->selectedEndpoint['endpoint_version'];
 	}
 	
@@ -152,7 +152,7 @@ class SBTSettings {
 	 *
 	 * @return
 	 */
-	public function getAccessTokenURL() {
+	public function getAccessTokenURL($endpointName = "connections") {
 		return $this->selectedEndpoint['access_token_url'];
 	}
 	
@@ -161,7 +161,7 @@ class SBTSettings {
 	 *
 	 * @return
 	 */
-	public function getAuthenticationMethod() {
+	public function getAuthenticationMethod($endpointName = "connections") {
 		return $this->selectedEndpoint['authentication_method'];
 	}
 	
@@ -170,7 +170,7 @@ class SBTSettings {
 	 *
 	 * @return
 	 */
-	public function getOAuth2CallbackURL() {
+	public function getOAuth2CallbackURL($endpointName = "connections") {
 		return $this->selectedEndpoint['oauth2_callback_url'];
 	}
 	
@@ -179,7 +179,7 @@ class SBTSettings {
 	 *
 	 * @return
 	 */
-	public function getSDKDeployURL() {
+	public function getSDKDeployURL($endpointName = "connections") {
 		return $this->sdkSettings['sdk_deploy_url'];
 	}
 	
@@ -190,7 +190,7 @@ class SBTSettings {
 	 *
 	 * @return
 	 */
-	public function getName() {
+	public function getName($endpointName = "connections") {
 		return  $this->selectedEndpoint['name'];
 	}
 	
@@ -199,7 +199,7 @@ class SBTSettings {
 	 *
 	 * @return
 	 */
-	public function getBasicAuthUsername() {
+	public function getBasicAuthUsername($endpointName = "connections") {
 		return $this->selectedEndpoint['basic_auth_username'];
 	}
 	
@@ -208,7 +208,7 @@ class SBTSettings {
 	 *
 	 * @return
 	 */
-	public function getServerType() {
+	public function getServerType($endpointName = "connections") {
 		return $this->selectedEndpoint['server_type'];
 	}
 	
@@ -217,7 +217,7 @@ class SBTSettings {
 	 *
 	 * @return
 	 */
-	public function allowClientAccess() {
+	public function allowClientAccess($endpointName = "connections") {
 		return $this->selectedEndpoint['allow_client_access'];
 	}
 	
@@ -226,7 +226,7 @@ class SBTSettings {
 	 *
 	 * @return
 	 */
-	public function getBasicAuthPassword() {
+	public function getBasicAuthPassword($endpointName = "connections") {
 		return $this->selectedEndpoint['basic_auth_password'];
 	}
 	
@@ -235,7 +235,7 @@ class SBTSettings {
 	 *
 	 * @return string		global|profile|prompt
 	 */
-	public function getBasicAuthMethod() {
+	public function getBasicAuthMethod($endpointName = "connections") {
 		return $this->selectedEndpoint['basic_auth_method'];
 	}
 	
@@ -244,7 +244,7 @@ class SBTSettings {
 	 *
 	 * @return string		String indicating which library to use.
 	 */
-	public function getJSLibrary() {
+	public function getJSLibrary($endpointName = "connections") {
 		return $this->jsLibrary;
 	}
 }

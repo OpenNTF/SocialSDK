@@ -154,7 +154,7 @@
 		<managed-bean-scope>application</managed-bean-scope>
 		<managed-property>
 			<property-name>endpoints</property-name>
-			<value>smartcloudC1:connections</value>
+			<value>smartcloudC1:connections,smartcloudC1:smartcloud</value>
 		</managed-property>
 		<managed-property>
             <property-name>runtimes</property-name>
@@ -457,7 +457,7 @@
 		<managed-bean-scope>session</managed-bean-scope>
 		<managed-property>
 			<property-name>url</property-name>
-			<value>https://apps.na.collabservtest.lotus.com</value>
+			<value>%{smartcloud.c1.url}</value>
 		</managed-property>
 		<managed-property>
 			<property-name>apiVersion</property-name>
@@ -473,7 +473,7 @@
 		</managed-property>
 		<managed-property>
 			<property-name>authenticationService</property-name>
-			<value>api/bss/resource/customer</value>
+			<value>communities/service/atom/communities/my</value>
 		</managed-property>
 		<!-- Trust the connection -->
 		<managed-property>

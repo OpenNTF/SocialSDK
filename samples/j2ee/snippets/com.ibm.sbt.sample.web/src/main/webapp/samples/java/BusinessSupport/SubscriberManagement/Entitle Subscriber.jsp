@@ -16,9 +16,9 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%@page import="java.io.IOException"%>
 <%@page import="java.io.PrintWriter"%>
-<%@page import="com.ibm.sbt.sample.bss.BssUtil"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
+<%@page import="com.ibm.commons.util.StringUtil"%>
 <%@page import="com.ibm.commons.util.io.json.*"%>
 <%@page import="com.ibm.sbt.services.client.base.JsonEntity"%>
 <%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
@@ -39,21 +39,35 @@
 	<div id="content">
 	<%
 	try {
-		// Step 1. Create customer
-		String customerId = BssUtil.registerCustomer("smartcloudC1");
+		String customerId = Context.get().getProperty("bss.customerId");
+		out.println("Customer Id: " + customerId + "<br/>");
+		if (StringUtil.isEmpty(customerId)) {
+			out.println("Please provide a valid customer id in the sbt.properties.");
+			return;
+		}
+			
+		final String subscriberId = Context.get().getProperty("bss.subscriberId");
+		out.println("Subscriber Id: " + subscriberId + "<br/>");
+		if (StringUtil.isEmpty(subscriberId)) {
+			out.println("Please provide a valid subscriber id in the sbt.properties.");
+			return;
+		}
+			
+		SubscriptionManagementService subscriptionManagement = new SubscriptionManagementService("smartcloud");
+		EntityList<JsonEntity> subscriptions = subscriptionManagement.getSubscriptionsById(customerId);
+		long oid = 0L;
+		for (JsonEntity subscription : subscriptions) {
+			oid = subscription.getAsLong("Oid");
+			String partNumber = subscription.getAsString("PartNumber");
+			// part number for IBM SmartCloud Connections or IBM SmartCloud Engage for Enterprise Deployment - ASL
+			if ("D0NWLLL".equalsIgnoreCase(partNumber) || "D0NWKLL".equalsIgnoreCase(partNumber)) {
+				break;
+			}
+		}
+		final String subscriptionId = "" + oid;
 		
-		// Step 2. Add Subscriber
-		final String subscriberId = BssUtil.addSubscriber("smartcloudC1", customerId);
-
-		// Step 3. Activate the subscriber
-		BssUtil.activateSubscriber("smartcloudC1", subscriberId);
-		
-		// Step 4. Create "IBM SmartCloud Connections" Subscription
-		final String subscriptionId = BssUtil.createSubscription("smartcloudC1", customerId, 3, "D0NWLLL", 5);
-		
-		// Step 5. Entitle subscriber
 		final JspWriter fout = out;
-		final SubscriberManagementService subscriberManagement = new SubscriberManagementService("smartcloudC1");
+		final SubscriberManagementService subscriberManagement = new SubscriberManagementService("smartcloud");
 		StateChangeListener listener = new StateChangeListener() {
 			@Override
 			public void stateChanged(JsonEntity jsonEntity) {
@@ -73,7 +87,6 @@
 		    	} 
 			}
 		};
-		SubscriptionManagementService subscriptionManagement = new SubscriptionManagementService("smartcloudC1");
 		if (!subscriptionManagement.waitSubscriptionState(subscriptionId, "ACTIVE", 5, 1000, listener)) {
 			out.println("Timeout waiting for subscription to activate");
 		}

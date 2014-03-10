@@ -910,6 +910,7 @@ public class BlogService extends BaseService {
 	public String getDefaultHandle() {
 		return defaultHandle;
 	}
+	
     /**
      * Change the default blog handle, to be used in all subsequent requests for this service instance. 
      * This follows /blogs in the connections url, and is 'homepage' by default. 

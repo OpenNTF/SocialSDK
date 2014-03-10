@@ -85,6 +85,17 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         },
         
         /**
+         * Return the primary component for a particular search 
+         * result with respect to the search query.
+         * 
+         * @method getPrimaryComponent
+         * @return {String} Primary component
+         */
+        getPrimaryComponent : function() {
+            return this.getAsString("primaryComponent");
+        },
+
+        /**
          * Indicates a relative assessment of relevance for a particular search 
          * result with respect to the search query.
          * 
@@ -303,6 +314,59 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 method : "GET",
                 handleAs : "text",
                 query : lang.mixin({ query : queryArg } , requestArgs || {})
+            };
+            
+            return this.getEntities(consts.AtomMySearch, options, ResultFeedCallbacks);
+        },
+        
+        /**
+         * Search Lotus Connection for public information.
+         * 
+         * @method getResultsWithConstraint
+         * @param query Text to search for
+         * @param constraint Constraint(s) to be used while searching
+         * @param requestArgs
+         */
+        getResultsWithConstraint: function(queryArg, constraint, requestArgs) {
+        	requestArgs = this._stringifyRequestArgs(requestArgs);
+        	
+        	var query = {
+        		query : queryArg,
+        		constraint : json.stringify(constraint)
+        	};
+        	
+            var options = {
+                method : "GET",
+                handleAs : "text",
+                query : lang.mixin(query, requestArgs || {})
+            };
+            
+            return this.getEntities(consts.AtomSearch, options, ResultFeedCallbacks);
+        },
+        
+        /**
+         * Search Lotus Connections for both public information and 
+         * private information that you have access to. You must provide 
+         * authentication information in the request to retrieve this 
+         * resource.
+         * 
+         * @method getMyResultsWithConstraint
+         * @param query Text to search for
+         * @param constraint Constraint(s) to be used while searching
+         * @param requestArgs
+         */
+        getMyResultsWithConstraint: function(queryArg, constraint, requestArgs) {
+        	requestArgs = this._stringifyRequestArgs(requestArgs);
+        	
+        	var query = {
+        		query : queryArg,
+        		constraint : json.stringify(constraint)
+        	};
+        	
+            var options = {
+                method : "GET",
+                handleAs : "text",
+                query : lang.mixin(query, requestArgs || {})
             };
             
             return this.getEntities(consts.AtomMySearch, options, ResultFeedCallbacks);

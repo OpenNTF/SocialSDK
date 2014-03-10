@@ -17,6 +17,10 @@ package com.ibm.sbt.sample.bss;
 
 import java.io.IOException;
 
+import javax.servlet.http.HttpServletRequest;
+
+import com.ibm.commons.runtime.Context;
+import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.json.JsonException;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.services.client.base.JsonEntity;
@@ -37,6 +41,47 @@ import com.ibm.sbt.services.client.smartcloud.bss.SubscriptionManagementService;
  *
  */
 public class BssUtil {
+	
+	static private String DOMAIN = "mailinator.com";
+	
+	static public String getEndpoint(HttpServletRequest request) {
+		String endpoint = request.getParameter("endpoint");
+		if (StringUtil.isEmpty(endpoint)) {
+			endpoint = Context.get().getProperty("bss.endpoint");
+		}
+		return StringUtil.isEmpty(endpoint) ? "smartcloudC1" : endpoint;
+	}
+	
+	static public String getCustomerId(HttpServletRequest request) throws BssException, JsonException, IOException {
+		String customerId = request.getParameter("customerId");
+		if (StringUtil.isEmpty(customerId)) {
+			customerId = Context.get().getProperty("bss.customerId");
+		}
+		if (StringUtil.isEmpty(customerId)) {
+			// You must be a vendor for this to work
+			customerId = registerCustomer(getEndpoint(request));
+		}
+		return customerId;
+	}
+	
+	static public String getDomain(HttpServletRequest request) {
+		String domain = request.getParameter("domain");
+		if (StringUtil.isEmpty(domain)) {
+			domain = Context.get().getProperty("bss.domain");
+		}
+		return StringUtil.isEmpty(domain) ? DOMAIN : domain;
+	}
+	
+	static public String getFirstCustomerId(String endpoint) throws BssException {
+    	CustomerManagementService customerManagement = new CustomerManagementService(endpoint);
+    	EntityList<JsonEntity> customerList = customerManagement.getCustomers();
+    	if (!customerList.isEmpty()) {
+    		JsonEntity firstCustomer = customerList.get(0);
+    		long id = firstCustomer.getAsLong("Id");
+    		return "" + id;
+    	}
+    	return null;
+	}
 
 	static public String registerCustomer(String endpoint) throws BssException, JsonException, IOException {
 		CustomerJsonBuilder customer = new CustomerJsonBuilder();
@@ -79,14 +124,18 @@ public class BssUtil {
     	CustomerManagementService customerManagement = new CustomerManagementService(endpoint);
     	customerManagement.unregisterCustomer(customerId);
     }
-    
+
     static public String addSubscriber(String endpoint, String customerId) throws BssException, JsonException, IOException {
+    	return addSubscriber(endpoint, customerId, DOMAIN);
+    }
+    
+    static public String addSubscriber(String endpoint, String customerId, String domain) throws BssException, JsonException, IOException {
 		SubscriberJsonBuilder subscriber = new SubscriberJsonBuilder();
 		subscriber.setCustomerId(customerId)
 				  .setRole(SubscriberManagementService.Role.User)
 				  .setFamilyName("Doe")
 				  .setGivenName("John")
-				  .setEmailAddress(getUniqueEmail())
+				  .setEmailAddress(getUniqueEmail(domain))
 				  .setNamePrefix("Mr")
 				  .setNameSuffix("")
 				  .setEmployeeNumber("6A7777B")
@@ -118,6 +167,11 @@ public class BssUtil {
 		EntityList<JsonEntity> subscriptionList = subscriptionManagement.createSubscription(order);
 		return String.valueOf(subscriptionList.get(0).getAsLong("SubscriptionId"));
     }
+    
+    static public EntityList<JsonEntity> getSubscriptionsById(String endpoint, String customerId) throws BssException {
+		SubscriptionManagementService subscriptionManagement = new SubscriptionManagementService(endpoint);
+   		return subscriptionManagement.getSubscriptionsById(customerId);
+    }
 
     static public void activateSubscriber(String endpoint, String subscriberId) throws BssException {
    		SubscriberManagementService subscriberManagement = new SubscriberManagementService(endpoint);
@@ -125,7 +179,11 @@ public class BssUtil {
     }
         
     static public String getUniqueEmail() {
-    	return "ibmsbt_"+System.currentTimeMillis()+"@mailinator.com";
+    	return getUniqueEmail(DOMAIN);
+    }
+	
+    static public String getUniqueEmail(String domain) {
+    	return "ibmsbt_"+System.currentTimeMillis()+"@" + domain;
     }
 	
 }

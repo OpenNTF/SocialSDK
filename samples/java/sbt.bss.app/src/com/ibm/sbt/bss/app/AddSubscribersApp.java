@@ -37,7 +37,7 @@ public class AddSubscribersApp extends BaseBssApp {
 	 */
 	public static void main(String[] args) {
 		if (args.length < 6) {
-			System.out.println("Usage: java com.ibm.sbt.bss.app.AddSubscribersBlog <url> <user> <password> <customerId> <domain> <subscriptions>");
+			System.out.println("Usage: java com.ibm.sbt.bss.app.AddSubscribersApp <url> <user> <password> <customerId> <domain> <partNumbers>");
 			return;
 		}
 		
@@ -46,15 +46,22 @@ public class AddSubscribersApp extends BaseBssApp {
 		String password = args[2];
 		String customerId = args[3];
 		String domain = args[4];
-		String[] subscriptionIds = StringUtil.splitString(args[5], ',');
+		String[] partNumbers = StringUtil.splitString(args[5], ',');
 		
 		AddSubscribersApp sa = null;
 		try {
 			sa = new AddSubscribersApp(url, user, password);
 			
 			EntityList<JsonEntity> subscriptions = sa.getSubscriptionsById(customerId);
+			String[] subscriptionIds = new String[partNumbers.length];
 			for (JsonEntity subscription : subscriptions) {
-				System.out.println(subscription.toJsonString(false));
+				String subPartNumber = subscription.getAsString("PartNumber");
+				for (int i=0; i<partNumbers.length; i++) {
+					if (subPartNumber.equals(partNumbers[i])) {
+						subscriptionIds[i] = "" + subscription.getAsLong("Oid");
+						break;
+					}
+				}
 			}
 			
 			for (int i=0; i<1; i++) {
@@ -72,6 +79,9 @@ public class AddSubscribersApp extends BaseBssApp {
 				for (String subscriptionId : subscriptionIds) {
 					sa.entitleSubscriber(subscriberId, subscriptionId, true);
 				}
+				
+				JsonEntity subscriberJson = sa.getSubscriberById(subscriberId);
+				System.out.println(subscriberJson.toJsonString(false));
 			}
 			
 		} catch (Exception e) {

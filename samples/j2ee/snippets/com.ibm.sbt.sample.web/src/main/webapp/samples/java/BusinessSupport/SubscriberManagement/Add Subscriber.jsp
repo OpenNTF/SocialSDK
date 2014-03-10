@@ -14,6 +14,7 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@page import="com.ibm.commons.util.StringUtil"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
@@ -35,16 +36,23 @@
 </head>
 
 <body>
+	The API caller must have one of the following roles to run the API:
+	<ul>
+		<li>CustomerAdministrator</li>
+    	<li>VSR</li>
+    </ul>
 	<div id="content">
 	<%
 	try {
-		String customerId = BssUtil.registerCustomer("smartcloudC1");
+		String endpoint = BssUtil.getEndpoint(request);
+		String customerId = BssUtil.getCustomerId(request);
+		out.println("Endpoint: " + endpoint + "<br/>Customer Id: " + customerId + "<br/>");
 			
 		SubscriberJsonBuilder subscriber = new SubscriberJsonBuilder();
 		subscriber.setCustomerId(customerId)
 				  .setRole(SubscriberManagementService.Role.User)
 				  .setFamilyName("Doe")
-				  .setGivenName("John")
+				  .setGivenName("Aaron")
 				  .setEmailAddress("ibmsbt_"+System.currentTimeMillis()+"@mailinator.com")
 				  .setNamePrefix("Mr")
 				  .setNameSuffix("")
@@ -59,7 +67,7 @@
 				  .setTimeZone("America/Central")
 				  .setPhoto("");
 		
-		SubscriberManagementService subscriberManagement = new SubscriberManagementService("smartcloudC1");
+		SubscriberManagementService subscriberManagement = new SubscriberManagementService(endpoint);
 		JsonJavaObject responseJson = subscriberManagement.addSubscriber(subscriber);
 		long subscriberId = responseJson.getAsLong("Long");
 		JsonEntity jsonEntity = subscriberManagement.getSubscriberById("" + subscriberId);

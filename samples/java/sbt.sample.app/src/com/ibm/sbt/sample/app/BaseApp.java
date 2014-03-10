@@ -16,6 +16,7 @@
 package com.ibm.sbt.sample.app;
 
 import com.ibm.sbt.services.endpoints.BasicEndpoint;
+import com.ibm.sbt.services.endpoints.SmartCloudBasicEndpoint;
 
 /**
  * @author mwallace
@@ -40,7 +41,11 @@ public class BaseApp {
 	 */
 	public BasicEndpoint getBasicEndpoint() {
     	if (basicEndpoint == null) {
-			basicEndpoint = new BasicEndpoint();
+    		if ("true".equals(System.getProperty("isSmartCloud"))) {
+    			basicEndpoint = new SmartCloudBasicEndpoint();    			
+    		} else {
+    			basicEndpoint = new BasicEndpoint();
+    		}
 			basicEndpoint.setUrl(url);
 			basicEndpoint.setForceTrustSSLCertificate(true);
 			basicEndpoint.setUser(user);

@@ -15,6 +15,7 @@
  */
 package com.ibm.sbt.sample.app;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -22,6 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.ibm.commons.util.io.StreamUtil;
+import com.ibm.commons.xml.DOMUtil;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
@@ -81,6 +83,14 @@ public class FileServiceApp extends BaseApp {
 		FileServiceApp fsa = null;
 		try {
 			fsa = new FileServiceApp(url, user, password);
+			
+			FileService fileService = fsa.getFileService();
+			File file = fileService.getFile("087ad154-df65-43c2-8c4e-383c68337724", "6097b4ce-39dc-4db1-9d4f-4d89ff125c69", null);
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			long size = fileService.downloadFile(baos, file, null);
+			
+			System.out.println(DOMUtil.getXMLString(file.getDataHandler().getData()));
+			System.out.println("Downloaded: "+size);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

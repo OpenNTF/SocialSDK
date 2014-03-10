@@ -902,5 +902,24 @@ public class BlogService extends BaseService {
 		}
 		return baseUrl.toString();
 	}
+	
+	/**
+	 * 
+	 * @return The blogHandle currently being used in requests to the blog service.
+	 */
+	public String getDefaultHandle() {
+		return defaultHandle;
+	}
+    /**
+     * Change the default blog handle, to be used in all subsequent requests for this service instance. 
+     * This follows /blogs in the connections url, and is 'homepage' by default. 
+     * 
+     * e.g. CONNECTIONS_URL/blogs/homepage
+     * 
+     * @param defaultHandle
+     */
+	public void setDefaultHandle(String defaultHandle) {
+		this.defaultHandle = defaultHandle;
+	}
 
 }

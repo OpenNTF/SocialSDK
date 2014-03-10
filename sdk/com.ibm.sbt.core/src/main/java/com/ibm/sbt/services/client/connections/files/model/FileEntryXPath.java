@@ -17,6 +17,7 @@ public enum FileEntryXPath implements FieldEntry {
 	FileName("/a:feed/a:entry/a:title"),
 	FileUuid("/a:feed/a:entry/td:uuid"),
 	DownloadUrl(".//a:link[@rel=\"edit-media\"]/@href"),
+	EnclosureLength(".//a:link[@rel=\"enclosure\"]/@length"),
 	Comment(".//a:content"),
 	Entry("/a:feed/a:entry"),
 	Uuid(".//td:uuid"),

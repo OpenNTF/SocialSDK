@@ -7,18 +7,29 @@ require([ "sbt/config", "sbt/connections/ProfileService", "sbt/dom" ], function(
 
 	var endpoint = config.findEndpoint("connections");
 	var url = "/connections/opensocial/basic/rest/people/@me/";
-	endpoint.request(url, {
-		handleAs : "json"
-	}).then(function(response) {
-		handleLoggedIn(response.entry);
-	}, function(error) {
-		handleError(error);
-	});
+	endpoint.request(url, { handleAs : "json" }).then(
+		function(response) {
+			var userid = parseUserid(entry);
+			handleLoggedIn(userid, entry.displayName);
+		}, 
+		function(error) {
+			url = "/manage/oauth/getUserIdentity";
+
+			endpoint.request(url, { handleAs : "json" }).then(
+				function(response) {
+					handleLoggedIn(response.subscriberid, response.name);
+				}, 
+				function(error) {
+					handleError(error);
+				}
+			);
+		}
+	);
 	dom.setText("success", "Please wait... Loading your profile entry");
 
-	function handleLoggedIn(entry) {
-		profileId = parseUserid(entry);
-		profileDisplayName = entry.displayName;
+	function handleLoggedIn(userid, displayName) {
+		profileId = userid;
+		profileDisplayName = displayName;
 		dom.setText("success", "Please wait... Loading the profile entry for " + profileDisplayName);
 		profileService = new ProfileService();
 		loadProfile(false);
@@ -41,9 +52,8 @@ require([ "sbt/config", "sbt/connections/ProfileService", "sbt/dom" ], function(
 		}
 	}
 
-	function updateProfile(building, floor, jobTitle) {
-		currentProfile.setBuilding(building);
-		currentProfile.setFloor(floor);
+	function updateProfile(telephoneNumber, jobTitle) {
+		currentProfile.setTelephoneNumber(telephoneNumber);
 		currentProfile.setJobTitle(jobTitle);
 
 		currentProfile.update().then(function(profile) {
@@ -57,16 +67,14 @@ require([ "sbt/config", "sbt/connections/ProfileService", "sbt/dom" ], function(
 	function loadProfileFields(afterUpdate) {
 		if (!currentProfile) {
 			dom.byId("userId").value = "";
-			dom.byId("building").value = "";
-			dom.byId("floor").value = "";
+			dom.byId("telephoneNumber").value = "";
 			dom.byId("jobTitle").value = "";
 			displayMessage("Unable to load profile.");
 			return;
 		}
 
 		dom.byId("userId").value = currentProfile.getUserid();
-		dom.byId("building").value = currentProfile.getBuilding();
-		dom.byId("floor").value = currentProfile.getFloor();
+		dom.byId("telephoneNumber").value = currentProfile.getTelephoneNumber();
 		dom.byId("jobTitle").value = currentProfile.getJobTitle();
 		if(afterUpdate){
 			displayMessage("Successfully updated profile entry for " + profileDisplayName);
@@ -82,10 +90,9 @@ require([ "sbt/config", "sbt/connections/ProfileService", "sbt/dom" ], function(
 		};
 
 		dom.byId("updateBtn").onclick = function(evt) {
-			var building = dom.byId("building");
-			var floor = dom.byId("floor");
+			var telephoneNumber = dom.byId("telephoneNumber");
 			var jobTitle = dom.byId("jobTitle");
-			updateProfile(building.value, floor.value, jobTitle.value);
+			updateProfile(telephoneNumber.value, jobTitle.value);
 		};
 	}
 

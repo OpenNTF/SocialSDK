@@ -16,6 +16,8 @@
 package com.ibm.sbt.bss.app;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.ibm.commons.util.io.json.JsonException;
 import com.ibm.commons.util.io.json.JsonJavaObject;
@@ -121,6 +123,17 @@ public class BaseBssApp extends BaseApp {
     	return String.valueOf(response.getAsLong("Long"));
     }
     
+    public List<String> getCustomerIds() throws BssException {
+    	CustomerManagementService customerManagement = getCustomerManagementService();
+		EntityList<JsonEntity> customerList = customerManagement.getCustomers();
+		List<String> customerIds = new ArrayList<String>();
+		for (JsonEntity customer : customerList) {
+			long id = customer.getAsLong("Id");
+			customerIds.add(""+id);
+		}
+    	return customerIds;
+    }
+    
     public void unregisterCustomer(String customerId) throws BssException {
    		getCustomerManagementService().unregisterCustomer(customerId);
     }
@@ -130,7 +143,7 @@ public class BaseBssApp extends BaseApp {
 		subscriber.setCustomerId(customerId)
 				  .setRole(SubscriberManagementService.Role.User)
 				  .setFamilyName("Doe")
-				  .setGivenName("Sean")
+				  .setGivenName("Aaron")
 				  .setEmailAddress(email)
 				  .setNamePrefix("Mr")
 				  .setNameSuffix("")
@@ -232,7 +245,7 @@ public class BaseBssApp extends BaseApp {
 				try {
 					subscriberManagement.entitleSubscriber(subscriberId, subscriptionId, acceptTOU);
 				} catch (BssException e) {
-					e.printStackTrace();
+					System.err.println("Unable to entitle: "+subscriberId+" to: "+subscriptionId);
 				}
 			}
 		};
@@ -240,6 +253,11 @@ public class BaseBssApp extends BaseApp {
 		return getSubscriptionManagementService().waitSubscriptionState(subscriptionId, "ACTIVE", 5, 1000, listener);
     }
 	
+    public EntityList<JsonEntity> getSubscribersByEmail(String email) throws BssException {
+    	EntityList<JsonEntity> jsonEntities = getSubscriberManagementService().getSubscribersByEmail(email);
+   		return jsonEntities;
+    }
+    
     public JsonEntity getSubscriberById(String subscriberId) throws BssException {
     	JsonEntity jsonEntity = getSubscriberManagementService().getSubscriberById(subscriberId);
    		return jsonEntity;
@@ -251,6 +269,14 @@ public class BaseBssApp extends BaseApp {
     
     public String getUniqueEmail(String domain) {
     	return "testuser_"+System.currentTimeMillis()+"@"+domain;
+    }
+    
+    public void assignRole(String loginName, String role) throws BssException {
+    	getAuthorizationService().assignRole(loginName, role);
+    }
+    
+    public String[] getRoles(String loginName) throws BssException {
+    	return getAuthorizationService().getRoles(loginName);
     }
 		
 }

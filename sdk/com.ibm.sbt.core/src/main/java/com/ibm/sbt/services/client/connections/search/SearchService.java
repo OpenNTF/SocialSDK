@@ -44,9 +44,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.ibm.commons.util.StringUtil;
-import com.ibm.commons.util.io.json.JsonException;
-import com.ibm.commons.util.io.json.JsonJavaFactory;
-import com.ibm.commons.util.io.json.JsonObject;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.ConnectionsConstants;
@@ -551,9 +548,8 @@ public class SearchService extends BaseService {
   				}
   				constraintParameter.append(",").append("\"values\":[").append(values.toString()).append("]");
   				
-  				if(StringUtil.isNotEmpty(constraint.getExactMatch())){
-  					constraintParameter.append(",").append("\"exactMatch\":\"").append(constraint.getExactMatch()).append("\"");
-  				}
+  				constraintParameter.append(",").append("\"exactMatch\":\"").append(constraint.isExactMatch()).append("\"");
+
   				if(constraintsCtr > 0){
   					formattedConstraints.append("&constraint=");
   				}

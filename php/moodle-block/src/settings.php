@@ -57,5 +57,4 @@ $settings->add(new admin_setting_configtext('request_token_url', 'Request Token 
 $settings->add(new admin_setting_configtext('authorization_url', 'Authorization URL:', '', 'https://apps.na.collabserv.com/manage/oauth/authorizeToken', PARAM_RAW));
 $settings->add(new admin_setting_configtext('access_token_url', 'Access Token URL:', '', 'https://apps.na.collabserv.com/manage/oauth/getAccessToken', PARAM_RAW));
 
-
 ?>

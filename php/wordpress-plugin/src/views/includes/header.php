@@ -157,18 +157,6 @@ $agnostic_deploy_url = str_replace('http://', '//', $deploy_url);
 </head>
 ***REMOVED*** 
 
-
-/**
- * Decides on an endpoint to use and generates the JavaScript for it.
- *
- * @return string			The JavaScript representing an endpoint.
- * @author Benjamin Jakobus
-*/
-function generateEndpoint($type,$authentication_method, $url, $deploy_url, $name, $api_version) {
-	//TODO support list of endpoint and aliases
-	return generateConnectionsEndpoint($type,$authentication_method, $url, $deploy_url, $api_version);
-}
-
 /**
  * Generates the JavaScript for an IBM Connections endpoint.
  *
@@ -176,7 +164,7 @@ function generateEndpoint($type,$authentication_method, $url, $deploy_url, $name
  * @author Benjamin Jakobus
  */
 
-function generateConnectionsEndpoint($type, $authentication_method, $url, $deploy_url, $api_version) {
+function generateEndpoint($type, $authentication_method, $url, $deploy_url, $name, $api_version) {
 	$endpoint_js = '"connections": new Endpoint({';
 	
 	if ($authentication_method == 'oauth1' || $authentication_method == 'oauth2') {
@@ -216,7 +204,7 @@ function generateConnectionsEndpoint($type, $authentication_method, $url, $deplo
 	$endpoint_js .= '"baseUrl": "' . $url . '",';
 
 	$endpoint_js .=	'"proxy": new Proxy({';
-	$endpoint_js .=	'"proxyUrl": "' . plugins_url(PLUGIN_NAME) . '/core/index.php?classpath=services&class=Proxy&method=route&_redirectUrl="})}),';
+	$endpoint_js .=	'"proxyUrl": "' . plugins_url(PLUGIN_NAME) . '/core/index.php?classpath=services&endpointName=' . $name . '&class=Proxy&method=route&_redirectUrl="})}),';
 
 	return $endpoint_js;
 }

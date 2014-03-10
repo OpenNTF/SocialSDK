@@ -31,5 +31,5 @@ interface SBTEndpoint
 	 * @param string $body
 	 * @param string $headers
 	 */
-	public function makeRequest($server, $service, $method, $options, $body = null, $headers = null);
+	public function makeRequest($server, $service, $method, $options, $body = null, $headers = null, $endpointName = "connections");
 }

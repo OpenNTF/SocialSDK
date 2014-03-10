@@ -26,17 +26,20 @@ defined('SBT_SDK') OR exit('Access denied.');
 use Guzzle\Http\Client;
 class BasePluginController extends BaseController {
 	
+	protected $endpointName;
+	
 	/**
 	 * Constructor.
 	 */
-	function __construct() {
+	function __construct($endpointName = "connections") {
+		$this->endpointName = $endpointName;
 		$this->loadModel('SBTSettings');
 		$settings = new SBTSettings();
 		$authMethod = $settings->getAuthenticationMethod();
 
 		global $USER;
 		if (isset($USER->id)) {
-			setcookie('ibm-sbt-uid', $USER->id, time() + 86400);
+			setcookie('ibm-sbt-uid', $USER->id, time() + 604800);
 		}
 
 		if ($authMethod == 'oauth1') {	
@@ -75,9 +78,9 @@ class BasePluginController extends BaseController {
 
 				$body = null;
 				if (strpos(BASE_LOCATION, 'core') !== FALSE) {
-					$body = $oauth->request($url, BASE_LOCATION . '/index.php?plugin=guzzle&class=SBTOAuth1Endpoint&method=authenticationCallback', 'POST');
+					$body = $oauth->request($url, BASE_LOCATION . '/index.php?plugin=guzzle&class=SBTOAuth1Endpoint&method=authenticationCallback', 'POST', $endpointName);
 				} else {
-					$body = $oauth->request($url, BASE_LOCATION . '/core/index.php?plugin=guzzle&class=SBTOAuth1Endpoint&method=authenticationCallback', 'POST');
+					$body = $oauth->request($url, BASE_LOCATION . '/core/index.php?plugin=guzzle&class=SBTOAuth1Endpoint&method=authenticationCallback', 'POST', $endpointName);
 				}
 				var_dump($body);
 			}
@@ -121,16 +124,17 @@ class BasePluginController extends BaseController {
 		$this->loadModel('SBTSettings');
 		$settings = new SBTSettings();
 		
-		$viewData['deploy_url'] = $settings->getSDKDeployURL();
-		$viewData['authentication_method'] = $settings->getAuthenticationMethod();
-		$viewData['js_library'] = $settings->getJSLibrary();
+		$viewData['deploy_url'] = $settings->getSDKDeployURL($this->endpointName);
+		$viewData['authentication_method'] = $settings->getAuthenticationMethod($this->endpointName);
+		$viewData['js_library'] = $settings->getJSLibrary($this->endpointName);
 		
-		$viewData['url'] = $settings->getURL();
-		$viewData['name'] = $settings->getName();
-		$viewData['api_version'] = $settings->getAPIVersion();
-		$viewData['type'] = $settings->getServerType();
-		$viewData['allow_client_access'] = $settings->allowClientAccess();
+		$viewData['url'] = $settings->getURL($this->endpointName);
+		$viewData['name'] = $settings->getName($this->endpointName);
+		$viewData['api_version'] = $settings->getAPIVersion($this->endpointName);
+		$viewData['type'] = $settings->getServerType($this->endpointName);
+		$viewData['allow_client_access'] = $settings->allowClientAccess($this->endpointName);
 		
+		$viewData['endpoints'] = $settings->getEndpoints();
 		// Load the header view
 		return $this->loadView('includes/header', $viewData);	
 	}

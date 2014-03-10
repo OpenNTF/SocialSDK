@@ -450,9 +450,72 @@
 		</managed-property>
 	</managed-bean>	
 	
-	<!-- SmartCloud C1 -->
+	<!--  SmartCloud C1 OAuth 1.0 -->	
 	<managed-bean>
 		<managed-bean-name>smartcloudC1</managed-bean-name>
+		<managed-bean-class>com.ibm.sbt.services.endpoints.SmartCloudOAuthEndpoint</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<!-- Endpoint URL -->
+		<managed-property>
+			<property-name>url</property-name>
+			<value>%{smartcloud.c1.url}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>apiVersion</property-name>
+			<value>%{smartcloud.c1.apiVersion}</value>
+		</managed-property>
+		<!-- Trust the connection -->
+		<managed-property>
+			<property-name>forceTrustSSLCertificate</property-name>
+			<value>true</value>
+		</managed-property>
+		<!-- Fixed values for the registered application -->
+		<managed-property>
+			<property-name>consumerKey</property-name>
+			<value>%{smartcloud.c1.consumerKey}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>consumerSecret</property-name>
+			<value>%{smartcloud.c1.consumerSecret}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>requestTokenURL</property-name>
+			<value>%{smartcloud.c1.requestTokenURL}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>authorizationURL</property-name>
+			<value>%{smartcloud.c1.authorizationURL}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>accessTokenURL</property-name>
+			<value>%{smartcloud.c1.accessTokenURL}</value>
+		</managed-property>	
+		<managed-property>
+			<property-name>signatureMethod</property-name>
+			<value>PLAINTEXT</value>
+		</managed-property>
+		<!-- Access to the credential store -->
+		<managed-property>
+			<property-name>credentialStore</property-name>
+			<value>CredStore</value>
+		</managed-property>
+		<managed-property>
+			<property-name>serviceName</property-name>
+			<value>smartcloudC1</value>
+		</managed-property>
+		<managed-property>
+			<property-name>appId</property-name>
+			<value>%{smartcloud.c1.appId}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>authenticationService</property-name>
+			<value>communities/service/atom/communities/my</value>
+		</managed-property>
+	</managed-bean>
+		
+	<!-- SmartCloud C1 -->
+	<managed-bean>
+		<managed-bean-name>smartcloudC1Basic</managed-bean-name>
 		<managed-bean-class>com.ibm.sbt.services.endpoints.SmartCloudBasicEndpoint</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 		<managed-property>

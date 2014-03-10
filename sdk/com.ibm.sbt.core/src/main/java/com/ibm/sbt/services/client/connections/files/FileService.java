@@ -1379,7 +1379,6 @@ public class FileService extends BaseService {
      * @return File
      * @throws FileServiceException
      */
-
     public File getFile(String fileId, Map<String, String> parameters, boolean load)
             throws FileServiceException {
         if (StringUtil.isEmpty(fileId)) {
@@ -1406,6 +1405,39 @@ public class FileService extends BaseService {
     }
     
     /**
+     * getFile
+     * Read the specified file from the specified library
+     * 
+     * @param fileId - ID of the file to be fetched from the Connections Server
+     * @param libraryId - ID of the library to which the public file belongs
+     * @param parameters - Map of Parameters. See {@link FileRequestParams} for possible values.    
+     * @return File
+     * @throws FileServiceException
+     */
+    public File getFile(String fileId, String libraryId, Map<String, String> parameters) throws FileServiceException {
+        if (StringUtil.isEmpty(fileId)) {
+            throw new FileServiceException(null, Messages.Invalid_FileId);
+        }
+        if (StringUtil.isEmpty(libraryId)) {
+            throw new FileServiceException(null, Messages.Invalid_LibraryId);
+        }
+        String requestUri = null;              
+        SubFilters subFilters = new SubFilters();
+        subFilters.setFileId(fileId);
+        subFilters.setLibraryId(libraryId);
+        requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(),
+                    AccessType.AUTHENTICATED.getAccessType(),
+                    null, null, null, subFilters,
+                    ResultType.ENTRY.getResultType());
+
+        try {
+           return (File) super.getEntity(requestUri, parameters, new FileFeedHandler(this));
+        } catch (Exception e) {
+          throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
+        }        
+    }
+
+    /**
      * getPublicFile
      * <p>
      * Rest API for getting files :- /files/basic/api/myuserlibrary/document/{document-id}/entry
@@ -1416,7 +1448,6 @@ public class FileService extends BaseService {
      * @return File
      * @throws FileServiceException
      */
-
     public File getPublicFile(String fileId, String libraryId, Map<String, String> parameters)
             throws FileServiceException {
         if (StringUtil.isEmpty(fileId)) {

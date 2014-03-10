@@ -40,6 +40,10 @@ public class BlogServiceApp {
         this.blogService.setEndpoint(createEndpoint(url, user, password));
     }
     
+    public void setBlogHandle(String blogHandle){
+    	this.blogService.setDefaultHandle(blogHandle);
+    }
+    
     private BasicEndpoint createEndpoint(String url, String user, String password) {
     	BasicEndpoint endpoint = new ConnectionsBasicEndpoint();
     	endpoint.setUrl(url);
@@ -63,13 +67,17 @@ public class BlogServiceApp {
 	 */
 	public static void main(String[] args) {
 		if (args.length < 3) {
-			System.out.println("Usage: java com.ibm.sbt.sample.app.BlogServiceApp url user password");
+			System.out.println("Usage: java com.ibm.sbt.sample.app.BlogServiceApp url user password blogHandle(optional)");
 			return;
 		}
 		String url = args[0];
 		String user = args[1];
 		String password = args[2];
 	    BlogServiceApp app = new BlogServiceApp(url, user, password);
+        
+	    if(args.length > 3){ // if a blog handle has been provided replace the default one.
+			app.setBlogHandle(args[3]);
+		}
 	    try {
 	    	BlogService BlogService = app.getBlogService();
             BlogList blogs = BlogService.getAllBlogs();

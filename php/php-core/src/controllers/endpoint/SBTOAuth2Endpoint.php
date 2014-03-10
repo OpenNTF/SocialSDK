@@ -103,9 +103,9 @@ class SBTOAuth2Endpoint extends BaseController implements SBTEndpoint
 	 * @param string $body
 	 * @param string $headers
 	 */
-	public function makeRequest($server, $service, $method, $options, $body = null, $headers = null) {
+	public function makeRequest($server, $service, $method, $options, $body = null, $headers = null, $endpointName = "connections") {
 		$store = SBTCredentialStore::getInstance();
-		$token = $store->getOAuthAccessToken();
+		$token = $store->getOAuthAccessToken($endpointName);
 		
 		$store = SBTCredentialStore::getInstance();
 		$settings = new SBTSettings();

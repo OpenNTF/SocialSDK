@@ -54,14 +54,32 @@ class block_ibmsbt_edit_form extends block_edit_form {
         		<a href="https://www.ibmdw.net/social/">https://www.ibmdw.net/social/</a> or visit <a href="https://greenhousestage.lotus.com/sbt/sbtplayground.nsf">our playground</a>
         		 directly if you need JavaScript snippets.</p>');
         
+        global $CFG;
+        $blockPath = $CFG->dirroot . '/blocks/ibmsbt/';
+        global $PAGE;
         
+        $mform->addElement('html', '<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>');
+        $mform->addElement('html', '<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>');
+        $PAGE->requires->js(new moodle_url($CFG->wwwroot . '/blocks/ibmsbt/views/js/endpointConfig.js'));
+        
+        ob_start();
+        require $blockPath . 'views/endpointSetupDialog.php';
+        $html = ob_get_clean();
+        $mform->addElement('html', $html);
         
         // Type dropdown
         $mform->addElement('select', 'config_plugin', 'Plugin:', $plugins);
         $mform->setDefault('config_plugin', 'choose');
         
-        $endpoints = array('connections' => 'connections');
-        $mform->addElement('select', 'config_endpoint', 'Endpoint:', $endpoints);
+        $settings = new SBTSettings();
+        $records = $settings->getEndpoints();
+        	
+        $endpoints = array();
+        foreach ($records as $record) {
+        	$endpoints[$record->name] = $record->name;
+        }
+        
+        $mform->addElement('select', 'config_endpoint', 'Endpoint: (<a href="#" onclick="ibm_sbt_manage_endpoints();">Click here to <strong>manage your endpoints</strong></a>)', $endpoints);
         $mform->setDefault('config_endpoint', 'connections');
         
         // Block title

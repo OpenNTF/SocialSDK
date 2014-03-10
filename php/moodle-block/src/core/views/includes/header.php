@@ -56,7 +56,11 @@ function plugins_url() {
 					"sbtUrl": "***REMOVED*** echo $agnostic_deploy_url; ?>/js/sdk"
 				};
 				sbt.Endpoints = {
-						***REMOVED*** echo generateEndpoint($authentication_method, $url, $agnostic_deploy_url, $name); ?>
+						***REMOVED*** 
+							foreach($endpoints as $endpoint) {
+								echo generateEndpoint($endpoint->auth_type, $endpoint->server_url, $agnostic_deploy_url, $endpoint->name, $endpoint->api_version);
+							}
+						?>
 				};
 				sbt.findEndpoint = function (endpointName) {
 					return this.Endpoints[endpointName];
@@ -69,48 +73,40 @@ function plugins_url() {
 ***REMOVED*** 
 
 
-/**
- * Decides on an endpoint to use and generates the JavaScript for it.
- *
- * @return string			The JavaScript representing an endpoint.
- * @author Benjamin Jakobus
-*/
-function generateEndpoint($authentication_method, $url, $deploy_url, $name) {
-	//TODO support list of endpoint and aliases
-	return generateConnectionsEndpoint($authentication_method, $url, $deploy_url);
-}
 
 /**
- * Generates the JavaScript for an IBM Connections endpoint.
- *
- * @return string		The JavaScript representing an IBM Connections endpoint.
- * @author Benjamin Jakobus
+ * Generates the JavaScript endpoint.
  */
 
-function generateConnectionsEndpoint($authentication_method, $url, $deploy_url) {
+function generateEndpoint($authentication_method, $url, $deploy_url, $name, $api_version) {
 	global $USER;
-	$endpoint_js = '"connections": new Endpoint({';
-	$endpoint_js .= '"authType": "' . $authentication_method . '",';
+	if ($api_version == "" || $api_version == null) {
+		$api_version = "2.0";
+	}
+	$authType = str_replace('1', '', $authentication_method);
+	$authType = str_replace('2', '', $authType);
+	$endpoint_js = '"' . $name . '": new Endpoint({';
+	$endpoint_js .= '"authType": "' . $authType . '",';
 	$endpoint_js .= '"platform": "connections",';
 
-	if ($authentication_method == 'oauth1') {
+	if ($authentication_method == 'oauth1' || $authentication_method == 'oauth2') {
 		$endpoint_js .= '"authenticator": new OAuth({"loginUi": null,
 				"url": "' . $deploy_url . '"}),';
 	} else if ($authentication_method == 'basic') {
 		$endpoint_js .= '"authenticator": new Basic({';
-		$endpoint_js .= '"url": "' . $deploy_url . '", "actionUrl": "' . plugins_url() . '/index.php?classpath=services&class=Proxy&method=route&basicAuthRequest=true&uid=' . $USER->id . '&_redirectUrl=' . getCurrentPage() . '"}),';
+		$endpoint_js .= '"url": "' . $deploy_url . '", "actionUrl": "' . plugins_url() . '/index.php?classpath=services&class=Proxy&method=route&endpointName=' . $name . '&basicAuthRequest=true&uid=' . $USER->id . '&_redirectUrl=' . getCurrentPage() . '"}),';
 	}
 
 	$endpoint_js .= '"proxyPath": "connections",';
 	$endpoint_js .= '"isAuthenticated": "false",';
 	$endpoint_js .= '"transport": new Transport({}),';
 	$endpoint_js .= '"serviceMappings": {},';
-	$endpoint_js .= '"name": "connections",';
+	$endpoint_js .= '"name": "' . $name . '",';
 	$endpoint_js .= '"authenticationErrorCode": "401",';
 	$endpoint_js .= '"baseUrl": "' . $url . '",';
-	$endpoint_js .= '"apiVersion": "4.0",';
+	$endpoint_js .= '"apiVersion": "' . $api_version . '",';
 	$endpoint_js .=	'"proxy": new Proxy({';
-	$endpoint_js .=	'"proxyUrl": "' . plugins_url() . '/index.php?classpath=services&class=Proxy&method=route&uid=' . $USER->id . '&_redirectUrl="})}),';
+	$endpoint_js .=	'"proxyUrl": "' . plugins_url() . '/index.php?classpath=services&class=Proxy&method=route&endpointName=' . $name . '&uid=' . $USER->id . '&_redirectUrl="})}),';
 
 	return $endpoint_js;
 }

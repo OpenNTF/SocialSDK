@@ -195,6 +195,9 @@ class SBTCredentialStore {
 			}
 		
 			$record = $DB->get_record(SESSION_NAME, array('user_id' => intval($uid)));
+			if ($record == null) {
+				return;
+			}
 			$endpointMappings = (array) json_decode($record->$skey);
 			$value = $this->_encrypt($this->key, $value, base64_decode($this->iv));
 			
@@ -235,7 +238,6 @@ class SBTCredentialStore {
 		if ($record == null || empty($record)) {
 			return null;
 		}
-		
 
 		$endpointMappings = (array) json_decode($record->$skey);
 
@@ -244,6 +246,9 @@ class SBTCredentialStore {
 		}
 		
 		// Get value, decrypt and return
+		if (!isset($endpointMappings[$endpoint])) {
+			return null;
+		}
 		$value = $endpointMappings[$endpoint];
 	
 		if ($value == "" || $value == null) {
@@ -271,9 +276,8 @@ class SBTCredentialStore {
 			return;
 		}
 		
-		$records = $DB->get_records(SESSION_NAME, array('user_id' => intval($uid)));
-		$record = $records[0];
-		$endpointMappings = json_decode($record->$skey);
+		$record = $DB->get_record(SESSION_NAME, array('user_id' => intval($uid)));
+		$endpointMappings = (array) json_decode($record->$skey);
 		
 		if ($endpointMappings == null) {
 			return;
@@ -466,6 +470,7 @@ class SBTCredentialStore {
 		$this->_delete(TOKEN, $endpoint);
 		$this->_delete(OAUTH_VERIFIER_TOKEN, $endpoint);
 		$this->_delete(OAUTH_REQUEST_TOKEN_SECRET, $endpoint);
+		$this->_delete(REQUEST_TOKEN, $endpoint);
 	}
 	
 	public function storeTokenType($tokenType, $endpoint = "connections") {

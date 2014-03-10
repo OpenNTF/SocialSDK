@@ -18,7 +18,6 @@
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
-<%@page import="com.ibm.sbt.sample.bss.BssUtil"%>
 <%@page import="com.ibm.commons.util.io.json.JsonJavaObject"%>
 <%@page import="com.ibm.sbt.services.client.base.JsonEntity"%>
 <%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
@@ -49,14 +48,21 @@
 	<table class="table table-condensed">
 	<%
 	try {
-		String endpoint = BssUtil.getEndpoint(request);
-		String customerId = BssUtil.getCustomerId(request);
-		String domain = BssUtil.getDomain(request);
+		String customerId = Context.get().getProperty("bss.customerId");
+		if (StringUtil.isEmpty(customerId)) {
+			out.println("Please provide a valid customer id in the sbt.properties.");
+			return;
+		}
 		out.println("<tr><td>Customer Id</td><td>" + customerId + "</td></tr>");
 			
-		SubscriptionManagementService subscriptionManagement = new SubscriptionManagementService(endpoint);
-   		SubscriberManagementService subscriberManagement = new SubscriberManagementService(endpoint);
-   		AuthenticationService authenticationService = new AuthenticationService(endpoint);
+		String domain = Context.get().getProperty("bss.domain");
+		if (StringUtil.isEmpty(domain)) {
+			domain = "mailinator.com";
+		}
+			
+		SubscriptionManagementService subscriptionManagement = new SubscriptionManagementService("smartcloud");
+   		SubscriberManagementService subscriberManagement = new SubscriberManagementService("smartcloud");
+   		AuthenticationService authenticationService = new AuthenticationService("smartcloud");
 		
 		EntityList<JsonEntity> subscriptions = subscriptionManagement.getSubscriptionsById(customerId);
 		String subscriptionId = null;
@@ -64,10 +70,16 @@
 			long oid = subscription.getAsLong("Oid");
 			String partNumber = subscription.getAsString("PartNumber");
 			// part number for IBM SmartCloud Connections or IBM SmartCloud Engage for Enterprise Deployment - ASL
-			if ("D0NWLLL".equalsIgnoreCase(partNumber) || "D0NWKLL".equalsIgnoreCase(partNumber)) {
+			if ("D0NWLLL".equalsIgnoreCase(partNumber) ||
+				"D0NPULL".equalsIgnoreCase(partNumber) ||
+				"D0NWKLL".equalsIgnoreCase(partNumber)) {
 				subscriptionId = "" + oid;
 				break;
 			}
+		}
+		if (StringUtil.isEmpty(subscriptionId)) {
+			out.println("Unable to find a base subscription.");
+			return;
 		}
 		
 		SubscriberJsonBuilder subscriberBuilder = new SubscriberJsonBuilder();
@@ -75,7 +87,7 @@
 				  .setRole(SubscriberManagementService.Role.User)
 				  .setFamilyName("Doe")
 				  .setGivenName("Aaron")
-				  .setEmailAddress(BssUtil.getUniqueEmail(domain))
+				  .setEmailAddress("ibmsbt_"+System.currentTimeMillis()+"@"+domain)
 				  .setNamePrefix("Mr")
 				  .setNameSuffix("")
 				  .setEmployeeNumber("6A7777B")

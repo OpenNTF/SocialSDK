@@ -207,6 +207,10 @@
 			<property-name>forceDisableExpectedContinue</property-name>
 			<value>true</value>
 		</managed-property>
+		<managed-property>
+            <property-name>serviceMaps</property-name>
+            <value>%{connections.serviceMaps}</value>
+        </managed-property>
 	</managed-bean>
 	
 	<!-- Connections SSO -->	

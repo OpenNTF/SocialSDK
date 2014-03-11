@@ -2980,7 +2980,32 @@ public class FileService extends BaseService {
             throw new FileServiceException(e, Messages.MessageExceptionInUpdate);
         }
     }
-
+    
+    /**
+     * Update the specified file.
+     * 
+     * @param inputStream
+     * @param file
+     * @param params
+     * @return
+     * @throws FileServiceException
+     */
+    public File updateFile(java.io.InputStream inputStream, File file, Map<String, String> params) throws FileServiceException {
+		String requestUrl = file.getEditMediaUrl(); 
+    	
+        Content contentFile = getContentObject(file.getTitle(), inputStream);
+        
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("X-Update-Nonce", getNonce()); // It is not clearly documented which Content Type requires Nonce, thus adding nonce in header for all upload requests. 
+        
+        try {
+            Response result = (Response) this.updateData(requestUrl, params, headers, contentFile, null);
+            return (File) new FileFeedHandler(this).createEntity(result);
+        } catch (Exception e) {
+            throw new FileServiceException(e, Messages.MessageExceptionInUpdate);
+        }
+    }
+    
     /**
      * Method to Upload new version of a Community File 
      * <p>

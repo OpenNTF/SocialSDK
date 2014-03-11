@@ -52,6 +52,18 @@ window.onload = function () {
 	document.getElementById("new_basic_auth_password").addEventListener('keyup', function (e) {
 		completeFieldCheck();
 	}, false);
+
+	document.getElementById("new_form_auth_page").addEventListener('keyup', function (e) {
+		completeFieldCheck();
+	}, false);
+
+	document.getElementById("new_form_auth_login_page").addEventListener('keyup', function (e) {
+		completeFieldCheck();
+	}, false);
+
+	document.getElementById("new_form_auth_cookie_cache").addEventListener('keyup', function (e) {
+		completeFieldCheck();
+	}, false);
 }
 
 $(function() {
@@ -110,6 +122,9 @@ function change_new_authentication_method() {
 		document.getElementById("tr_new_basic_auth_method").style.display = 'none';
 		document.getElementById("tr_new_basic_auth_username").style.display = 'none';
 		document.getElementById("tr_new_basic_auth_password").style.display = 'none';
+		document.getElementById("tr_new_form_auth_page").style.display = 'none';
+		document.getElementById("tr_new_form_auth_login_page").style.display = 'none';
+		document.getElementById("tr_new_form_auth_cookie_cache").style.display = 'none';
 		document.getElementById("tr_force_ssl_trust").style.display = 'block';
 		document.getElementById("lb_endpoint_url").value = strSmartcloudEndpointURL;
 		if (document.getElementById("new_endpoint_url").value == '') {
@@ -130,6 +145,9 @@ function change_new_authentication_method() {
 		document.getElementById("tr_new_authorization_url").style.display = 'none';
 		document.getElementById("tr_new_access_token_url").style.display = 'none';
 		document.getElementById("tr_new_request_token_url").style.display = 'none';
+		document.getElementById("tr_new_form_auth_page").style.display = 'none';
+		document.getElementById("tr_new_form_auth_login_page").style.display = 'none';
+		document.getElementById("tr_new_form_auth_cookie_cache").style.display = 'none';
 		if (document.getElementById("new_endpoint_url").value == '') {
 			document.getElementById("new_endpoint_url").value = 'https://[my-server]';
 		}
@@ -142,6 +160,9 @@ function change_new_authentication_method() {
 		document.getElementById("tr_new_basic_auth_method").style.display = 'none';
 		document.getElementById("tr_new_basic_auth_username").style.display = 'none';
 		document.getElementById("tr_new_basic_auth_password").style.display = 'none';
+		document.getElementById("tr_new_form_auth_page").style.display = 'none';
+		document.getElementById("tr_new_form_auth_login_page").style.display = 'none';
+		document.getElementById("tr_new_form_auth_cookie_cache").style.display = 'none';
 		document.getElementById("tr_new_callback_url").style.display = 'block';
 		document.getElementById("tr_force_ssl_trust").style.display = 'block';
 		document.getElementById("lb_endpoint_url").value = strSmartcloudEndpointURL;
@@ -171,9 +192,36 @@ function change_new_authentication_method() {
 		document.getElementById("lb_endpoint_url").value = strConnectionsEndpointURL;
 		document.getElementById("lb_new_consumer_secret").value = 'ConsumerSecret';
 		document.getElementById("lb_new_consumer_key").value = 'ConsumerKey';
+
+		document.getElementById("tr_new_form_auth_page").style.display = 'none';
+		document.getElementById("tr_new_form_auth_login_page").style.display = 'none';
+		document.getElementById("tr_new_form_auth_cookie_cache").style.display = 'none';
 		
 		oauth2ConnectionsFieldCheck();
-	} 
+	} else if (authMethod == "form") {
+		document.getElementById("tr_new_form_auth_page").style.display = 'block';
+		document.getElementById("tr_new_form_auth_login_page").style.display = 'block';
+		document.getElementById("tr_new_form_auth_cookie_cache").style.display = 'block';
+		document.getElementById("tr_new_callback_url").style.display = 'none';
+		document.getElementById("tr_new_consumer_secret").style.display = 'none';
+		document.getElementById("tr_new_consumer_key").style.display = 'none';
+		document.getElementById("tr_new_authorization_url").style.display = 'none';
+		document.getElementById("tr_new_access_token_url").style.display = 'none';
+		document.getElementById("tr_new_request_token_url").style.display = 'none';
+		document.getElementById("tr_new_basic_auth_method").style.display = 'none';
+		document.getElementById("tr_new_basic_auth_username").style.display = 'none';
+		document.getElementById("tr_new_basic_auth_password").style.display = 'none';
+		formFieldCheck();
+	}
+}
+
+function formFieldCheck() {
+	if (!isCorrectDropDownValueSelected() || document.getElementById("new_form_auth_page").value == ''
+		|| document.getElementById("new_form_auth_login_page").value == '' || document.getElementById("new_form_auth_cookie_cache").value == '') {
+		document.getElementById("new_endpoint_save").setAttribute("disabled", "disabled");
+	} else {
+		document.getElementById("new_endpoint_save").removeAttribute("disabled");
+	}
 }
 
 function isCorrectDropDownValueSelected() {
@@ -278,6 +326,8 @@ function completeFieldCheck() {
 		oauth2ConnectionsFieldCheck();
 	} else if ((authMethod == 'oauth1' || authMethod == 'oauth2') && selectedType != "connections") {
 		oauthSmartcloudFieldCheck();
+	} else if (authMethod == 'form') {
+		formFieldCheck();
 	} else {
 		basicAuthFieldCheck();
 	}
@@ -327,10 +377,10 @@ function save_new_endpoint() {
 		consumer_secret: document.getElementById("new_consumer_secret").value,
 		consumer_key: document.getElementById("new_consumer_key").value,
 		api_version: document.getElementById("new_endpoint_version").value,
-		access_token_url: document.getElementById("new_access_token_url").value,
-		authorization_url: document.getElementById("new_authorization_url").value,
-		access_token_url: document.getElementById("new_access_token_url").value,
-		request_token_url: document.getElementById("new_request_token_url").value,
+		access_token_url: document.getElementById("new_endpoint_url").value + document.getElementById("new_access_token_url").value,
+		authorization_url: document.getElementById("new_endpoint_url").value + document.getElementById("new_authorization_url").value,
+		access_token_url: document.getElementById("new_endpoint_url").value + document.getElementById("new_access_token_url").value,
+		request_token_url: document.getElementById("new_endpoint_url").value + document.getElementById("new_request_token_url").value,
 		basic_auth_username: document.getElementById("new_basic_auth_username").value,
 		basic_auth_password: document.getElementById("new_basic_auth_password").value,
 		force_ssl_trust: document.getElementById("new_force_ssl_trust").checked,
@@ -341,6 +391,9 @@ function save_new_endpoint() {
 		oauth2_callback_url: document.getElementById("new_callback_url").value,
 		server_url: document.getElementById("new_endpoint_url").value,
 		auth_type: document.getElementById("new_authentication_method").value,
+		form_auth_page: document.getElementById("new_form_auth_page").value,
+		form_auth_login_page: document.getElementById("new_form_auth_login_page").value,
+		form_auth_cookie_cache: document.getElementById("new_form_auth_cookie_cache").value,
 		type : action_type
 	};
 	
@@ -436,6 +489,9 @@ function ibm_sbt_edit_endpoint() {
 			document.getElementById("new_callback_url").value = ret['oauth2_callback_url'];
 			document.getElementById("new_endpoint_url").value = ret['server_url'];
 			document.getElementById("new_authentication_method").value = ret['auth_type'];
+			document.getElementById("new_form_auth_page").value = ret['form_auth_page'];
+			document.getElementById("new_form_auth_login_page").value = ret['form_auth_login_page'];
+			document.getElementById("new_form_auth_cookie_cache").value = ret['form_auth_cookie_cache'];
 			
 			new_server_type_change();
 			change_new_basic_auth_method();
@@ -487,6 +543,7 @@ function ibm_sbt_edit_endpoint() {
 					<option id="new_oauth1" value="oauth1">OAuth 1.0</option>
 					<option value="oauth2">OAuth 2.0</option>
 					<option value="basic">Basic</option>
+					<option value="form">Form-based</option>
 				</select>
 			</td>
 		</tr>
@@ -593,6 +650,30 @@ function ibm_sbt_edit_endpoint() {
 				<input size="50" type="text" id="new_basic_auth_username" name="new_basic_auth_username" value="" />
 			</td>
 		</tr>
+		<tr style="display: none;" id="tr_new_form_auth_page">
+			<td style="width: 200px;">
+				Authentication page URL
+			</td>
+			<td>
+				<input size="50" type="text" id="new_form_auth_page" name="new_form_auth_page" value="" />
+			</td>
+		</tr> 	
+		<tr style="display: none;" id="tr_new_form_auth_login_page">
+			<td style="width: 200px;">
+				Login page URL
+			</td>
+			<td>
+				<input size="50" type="text" id="new_form_auth_login_page" name="new_form_auth_login_page" value="" />
+			</td>
+		</tr> 	
+		<tr style="display: none;" id="tr_new_form_auth_cookie_cache">
+			<td style="width: 200px;">
+				Cookie cache
+			</td>
+			<td>
+				<input size="50" type="text" id="new_form_auth_cookie_cache" name="new_form_auth_cookie_cache" value="" />
+			</td>
+		</tr> 	
 		<tr style="display: none;" id="tr_new_basic_auth_password">
 			<td style="width: 200px;">
 				Password

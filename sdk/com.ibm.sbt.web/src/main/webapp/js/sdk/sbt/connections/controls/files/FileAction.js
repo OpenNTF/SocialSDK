@@ -57,7 +57,6 @@ define([ "../../../declare", "../../../stringUtil", "../../../controls/grid/Grid
          * @param event the event
          */
         execute: function(item, opts, event) {
-        	
         	var url = item.getValue("downloadUrl");
         	if(this.grid){
         		url = this.grid.encodeImageUrl(url);

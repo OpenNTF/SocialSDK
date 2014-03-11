@@ -431,10 +431,11 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * new bookmark.
          * 
          * @method createBookmark
+         * @param {String} url Url to post to when creating the bookmark.
          * @param {String/Object} bookmarkOrJson Bookmark object which denotes the bookmark to be created.
          * @param {Object} [args] Argument object
          */
-        createBookmark : function(bookmarkOrJson,args) {
+        createBookmark : function(bookmarkOrJson, args) {
             var bookmark = this._toBookmark(bookmarkOrJson);
             var promise = this._validateBookmark(bookmark, false, args);
             if (promise) {
@@ -451,11 +452,22 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                         xpath : consts.BookmarkXPath
                     });
                 	bookmark.setDataHandler(dataHandler);
+                	bookmark.setData(data);
+            	} else {
+                	bookmark.setData(data);
+            		var referenceId = this.getLocationParameter(response, "referenceId");
+            		bookmark.setBookmarkUuid(referenceId);
             	}
-            	bookmark.setData(data);
                 return bookmark;
             };
 
+            var url = consts.AtomBookmarkCreateUpdateDelete;
+
+            if (args && args.url) {
+            	url = args.url;
+            	delete args.url;
+            }
+            
             var options = {
                 method : "POST",
                 query : args || {},
@@ -463,7 +475,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 data : this._constructBookmarkPostData(bookmark)
             };
             
-            return this.updateEntity(consts.AtomBookmarkCreateUpdateDelete, options, callbacks, args);
+            return this.updateEntity(url, options, callbacks, args);
         },
 
         /**
@@ -652,9 +664,9 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
 					value = bookmark.getContent();
 				} else if (key == "isPrivate" && !value) {
 					if(bookmark.isPrivate()){
-						value = true;
+						value = CategoryPrivateFlag;
 					}else{
-						value = false;
+						value = "";
 					}
 				}
                 return value;

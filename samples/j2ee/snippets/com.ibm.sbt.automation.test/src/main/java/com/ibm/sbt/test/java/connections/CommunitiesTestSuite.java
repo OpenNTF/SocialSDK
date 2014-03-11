@@ -42,6 +42,7 @@ import com.ibm.sbt.test.java.connections.communities.RemoveCommunity;
 import com.ibm.sbt.test.java.connections.communities.UpdateCommunity;
 import com.ibm.sbt.test.java.connections.communities.UpdateCommunityLogo;
 import com.ibm.sbt.test.java.connections.communities.UpdateMember;
+import com.ibm.sbt.test.js.connections.communities.api.CreateBookmark;
 
 /**
  * @author mwallace
@@ -51,7 +52,7 @@ import com.ibm.sbt.test.java.connections.communities.UpdateMember;
 @RunWith(Suite.class)
 @SuiteClasses({ AcceptInvite.class, AddMember.class, RemoveMember.class, CreateCommunity.class, CreateForumTopic.class, CreateInvite.class, DeclineInvite.class, GetBookmarks.class,
 	GetCommunity.class, GetForumTopics.class,  GetCommunityDataByEntity.class, GetForums.class, GetMembers.class, GetMyCommunities.class, GetMyInvites.class, GetPublicCommunities.class, 
-	GetSubCommunities.class, RemoveCommunity.class, UpdateCommunity.class , UpdateCommunityLogo.class, UpdateMember.class})
+	GetSubCommunities.class, RemoveCommunity.class, UpdateCommunity.class , UpdateCommunityLogo.class, UpdateMember.class, CreateBookmark.class })
 public class CommunitiesTestSuite {
     @AfterClass
     public static void cleanup() {

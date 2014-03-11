@@ -15,7 +15,7 @@
  */
 
 /**
- * DeleteTopicAction
+ * LockTopicAction
  */
 define([ "../../../declare", "../../../dom", "../../../lang",
          "../../../i18n!./nls/ForumView", "./LockTopicWidget", 
@@ -24,7 +24,7 @@ define([ "../../../declare", "../../../dom", "../../../lang",
 	function(declare, dom, lang, nls, LockTopicWidget, Dialog, Action,ForumService) {
 
 	/**
-	 * Action to delete a forum topic
+	 * Action to Lock a forum topic
 	 * 
 	 * @class DeleteTopicAction
 	 * @namespace sbt.connections.controls.forums
@@ -90,15 +90,8 @@ define([ "../../../declare", "../../../dom", "../../../lang",
 				}
 			}, this.widgetArgs || {});
 			var widget = new LockTopicWidget(widgetArgs);
-			
-			//TODO Change this to use the new pattern when the latest code is pulled
-			var dialog = new Dialog({ 
-    			title: this.name,
-    			nls: { OK: nls.ok },
-    			dialogContent: widget,
-    			onExecute: lang.hitch(widget, widget.onExecute)
-    		});
-    		dialog.show();
+
+    		var dialog = this.showDialog(widget,{ OK: nls.ok },this.dialogArgs);
 		}
 	});
 

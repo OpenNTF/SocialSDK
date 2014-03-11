@@ -15,7 +15,7 @@
  */
 
 /**
- * DeleteTopicWidget
+ * LockTopicWidget
  */
 define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUtil", 
          "../../../i18n!./nls/ForumView", 
@@ -36,9 +36,7 @@ define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUt
 		 * Template used to display the  content.
 		 */
 		templateString : LockTopic,
-		
 
-		
 		/**
 		 * Constructor method for the StartTopicWidget.
 		 * 
@@ -48,13 +46,6 @@ define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUt
 		constructor : function(args) {
 			this.nls = lang.mixin({}, nls, this.nls);
 			lang.mixin(this, args);
-		},
-
-		/**
-		 * Called after properties have been set
-		 */
-		postMixInProperties: function(){
-			
 		},
 				
 		/**
@@ -86,7 +77,6 @@ define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUt
 			this.setExecuteEnabled(false);
 			var forumService = this.getForumService();
 				
-			
 			var isLocked = this._isTopicLocked(topics[0]);
 			topics[0] = forumService.newForumTopic(topics[0]);
 			if(!isLocked){
@@ -103,8 +93,6 @@ define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUt
 				    	self._handleError(error);
 				    }
 				);
-			
-			
 
 			this.setExecuteEnabled(true);
 		},
@@ -112,10 +100,8 @@ define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUt
 		_isTopicLocked: function(topic){
 			var forumService = this.getForumService();
 			var isLocked;
-			
 			topic = forumService.newForumTopic(topic);
 			isLocked = topic.isLocked();
-	
 			return isLocked;
 		},
 		
@@ -123,10 +109,8 @@ define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUt
 		 * Called after a request has completed 
 		 */
 		_handleRequestComplete : function(isLocked) {
-
 			this._setSuccessMessage(isLocked);
 			this.onSuccess();			
-						
 		},
 		
 		/*
@@ -134,7 +118,7 @@ define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUt
 		 */
 		_handleError: function(error){
 			this.setExecuteEnabled(true);
-			this.errorTemplate = "<div>"+nls.deleteTopicError+"</div>";	
+			this.errorTemplate = "<div>"+nls.LockTopicError+"</div>";	
 			this.onError();
 		},
 		

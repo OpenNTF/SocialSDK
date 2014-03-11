@@ -68,15 +68,8 @@ define([ "../../../declare", "../../../dom", "../../../lang",
 			}, this.widgetArgs || {});
 			var widget = new ReplyToTopicWidget(widgetArgs);
 			
-			//TODO Change this to use the new pattern when the latest code is pulled
-			var dialog = new Dialog({ 
-    			title: this.name,
-    			dialogStyle: "width:1000px;",
-    			nls: { OK: nls.save },
-    			dialogContent: widget,
-    			onExecute: lang.hitch(widget, widget.onExecute)
-    		});
-    		dialog.show();	
+			var dialogArgs = lang.mixin({dialogStyle: "width:1000px;"}, this.dialogArgs || {});
+    		var dialog = this.showDialog(widget,{ OK: nls.ok }, dialogArgs);
 		}
 	});
 

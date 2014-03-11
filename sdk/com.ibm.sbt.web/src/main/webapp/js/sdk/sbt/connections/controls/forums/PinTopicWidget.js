@@ -74,7 +74,7 @@ define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUt
 		 * @method onExecute
 		 */
 		onExecute : function() {
-			this._pinTopics(this.topics);
+			this._pinTopics(this.topics[0]);
 		},
 		
 		
@@ -82,10 +82,26 @@ define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUt
 		// Internals
 		//
 		
-		_pinTopics: function(topics){
+		_pinTopics: function(topic){
 			this.setExecuteEnabled(false);
-			var forumService = this.getForumService();			
-			alert("pinned");
+			var forumService = this.getForumService();		
+			topic = forumService.newForumTopic(topic);
+			var isPinned = this._isTopicPinned(topic);
+			if(!isPinned){
+				topic.setPinned(true);
+			}else{
+				topic.setPinned(false);
+			}
+			
+			var self = this;
+			topic.update().then(               
+			    function(topic){
+			    	self._handleRequestComplete(isPinned);
+			    },
+			    function(error){
+			    	self._handleError(error);
+			    }
+			);
 			this.setExecuteEnabled(true);
 		},
 		
@@ -102,9 +118,12 @@ define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUt
 		/*
 		 * Called after a request has completed 
 		 */
-		_handleRequestComplete : function(errorCount, deletedCount, topicsLength) {
-				
-			
+		_handleRequestComplete : function(isPinned) {	
+			this._setSuccessMessage(isPinned);
+
+			 this.onSuccess();
+			//this.view.actionBar.selection.length = 0;
+			//this.view.grid.refreshSelectionListeners();
 		},
 		
 		/*
@@ -119,11 +138,11 @@ define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUt
 		/*
 		 * Set the successMessage for the specified add tags operation
 		 */
-		_setSuccessMessage : function(topicsLength) {
-			if(topicsLength > 1 ){
+		_setSuccessMessage : function(isPinned) {
+			if(!isPinned){
 				this.successTemplate = "<div>"+nls.pinTopicSuccess+"</div>";
 			}else{
-				this.successTemplate = "<div>"+nls.pinTopicSuccess+"</div>";
+				this.successTemplate = "<div>"+nls.unpinTopicSuccess+"</div>";
 			}
 			
 		}

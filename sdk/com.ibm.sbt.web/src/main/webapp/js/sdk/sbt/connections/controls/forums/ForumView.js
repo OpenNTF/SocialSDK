@@ -64,7 +64,6 @@ define([ "../../../declare", "../../../lang", "../../../stringUtil", "../../../l
 				this.addAction(new DeleteTopicAction({grid : this.grid}));
 				this.addAction(new LockTopicAction({grid : this.grid}));
 				this.addAction(new PinTopicAction({grid : this.grid}));
-				this.addAction(new MarkTopicAsQuestionAction({grid : this.grid}));
 				this.addAction(new ReplyToTopicAction({grid : this.grid}));
 			}
 		}

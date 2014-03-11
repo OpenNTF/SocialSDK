@@ -234,6 +234,7 @@ define(["../declare","../config", "../lang", "../base/core", "../xml", "../xpath
             this._endpoint.xhrGet({
                 serviceUrl : serviceUrl,
                 handleAs : "text",
+                preventCache: true,
                 load : function(response) {
                     try {
                         // parse the data
@@ -370,7 +371,7 @@ define(["../declare","../config", "../lang", "../base/core", "../xml", "../xpath
             return items;
         },
         
-        _createItem: function(element){
+        /*_createItem: function(element){
             var self = this;
             return {
                 element : element,
@@ -382,6 +383,53 @@ define(["../declare","../config", "../lang", "../base/core", "../xml", "../xpath
                     }
                 }
             };
+        },*/
+        
+        _createItem: function(element) {
+            var attribs = this.getAttributes();
+            var xpathCountFunction = /^count\(.*\)$/;
+            
+            // TODO add item.index and item.attribs
+            var item = { 
+                element : element,
+                getValue : function(attrib) { 
+                	var result = [];
+                	 if(typeof this[attrib] == "object"){
+                     	for(var i=0;i<this[attrib].length; i++){
+                     		result[i] = entities.encode(this[attrib][i]);
+                     	}
+                     }
+                     else{
+                    	 result = entities.encode(this[attrib]);
+                     }
+                	
+                	return result; 
+                }
+            };
+            for (var i=0; i<attribs.length; i++) {
+                var attrib = attribs[i];
+                var access = this.attributes[attrib];
+                if (lang.isFunction(access)) {
+                    item[attrib] = access(this, item);
+                } else if (access.match(xpathCountFunction)){
+                    item[attrib] = xpath.selectNumber(element, access, this.namespaces)+"";
+                } else {
+                    var nodes = xpath.selectNodes(element, access, this.namespaces);
+                    if (nodes && nodes.length == 1) {
+                        item[attrib] = entities.encode(nodes[0].text) || entities.encode(nodes[0].textContent);
+                    } else if (nodes) {
+                        item[attrib] = [];
+                        for (var j=0; j<nodes.length; j++) {
+                            item[attrib].push(entities.encode(nodes[j].text) || entities.encode(nodes[j].textContent));
+                        }
+                    } else {
+                        item[attrib] = null;
+                    }
+                }
+
+            }
+           
+            return item;
         },
         
         _assertIsItem: function(item) {

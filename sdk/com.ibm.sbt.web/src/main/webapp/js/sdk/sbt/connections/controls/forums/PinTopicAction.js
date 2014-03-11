@@ -19,8 +19,9 @@
  */
 define([ "../../../declare", "../../../dom", "../../../lang",
          "../../../i18n!./nls/ForumView", "./PinTopicWidget", 
-         "../../../controls/dialog/Dialog", "../../../controls/view/Action"], 
-	function(declare, dom, lang, nls, PinTopicWidget, Dialog, Action) {
+         "../../../controls/dialog/Dialog", "../../../controls/view/Action",
+         "../../ForumService"], 
+	function(declare, dom, lang, nls, PinTopicWidget, Dialog, Action, ForumService) {
 
 	/**
 	 * Action to pin a forum topic
@@ -42,13 +43,37 @@ define([ "../../../declare", "../../../dom", "../../../lang",
 			if (this.widget) {
 				this.widget.selectionChanged(selection, context);
 			}
+			
+			if(selection.length > 0){
+				var forumService = this.getForumService();
+				var topic = forumService.newForumTopic(selection[0]);
+				var isPinned = topic.isPinned();
+				if(isPinned){
+					this.actionNameNode.textContent = nls.unpinTopic;
+					this.name = nls.unpinTopic;
+				}else {
+					this.actionNameNode.textContent = nls.pinTopic;
+					this.name = nls.pinTopic;		
+				}
+			}
+		},
+		
+		/**
+		 * Return the ForumService.
+		 */
+		getForumService : function() {
+			if (!this.forumService) {
+				var args = this.endpoint ? { endpoint : this.endpoint } : {};
+				this.forumService = new ForumService(args);
+			}
+			return this.forumService;
 		},
 		
 		/**
 		 * Only enabled when at least one topic is selected.
 		 */
 		isEnabled : function(selection, context) {
-			return (selection.length > 0);
+			return (selection.length > 0 && selection.length < 2);
 		},
 
 		/**
@@ -69,7 +94,7 @@ define([ "../../../declare", "../../../dom", "../../../lang",
 			//TODO Change this to use the new pattern when the latest code is pulled
 			var dialog = new Dialog({ 
     			title: this.name,
-    			nls: { OK: nls.pin },
+    			nls: { OK: nls.ok },
     			dialogContent: widget,
     			onExecute: lang.hitch(widget, widget.onExecute)
     		});

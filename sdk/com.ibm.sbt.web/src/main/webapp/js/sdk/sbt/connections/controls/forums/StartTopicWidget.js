@@ -120,9 +120,8 @@ define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUt
 			if(this.view && this.action){
 				this.view.actionBar.showAllActions();
 				this.view.setContent(this.view.grid);
+				this.view.grid.refreshSelectionListeners();
 			}
-			
-			
 		},
 		
 		//

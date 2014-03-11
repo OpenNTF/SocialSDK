@@ -420,15 +420,23 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         setPinned : function(pinned) {
         	var terms = this.getAsArray("categoryTerm");
         	if(pinned){
-        		terms.push(consts.setPinned);
-        	}else{
-        		var pinned = consts.FlagPinned;
-        		for(var i=0;i<terms.length;i++){
-        			if(terms[i].indexOf(pinned) !=-1){
-        				terms.splice(i,1);
-        			}
+        		if(terms){
+        			terms.push(consts.setPinned);
+        		}else{
+        			this.setAsArray("categoryTerm",consts.setPinned );
         		}
-        		this.setAsArray("categoryTerm",terms);
+        		
+        	}else{
+        		if(terms){
+        			var pinned = consts.FlagPinned;
+	        		for(var i=0;i<terms.length;i++){
+	        			if(terms[i].indexOf(pinned) !=-1){
+	        				terms.splice(i,1);
+	        			}
+	        		}
+	        		this.setAsArray("categoryTerm",terms);
+        		}
+        		
         	}
         	
         },
@@ -469,15 +477,23 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         setLocked : function(locked) {
         	var terms = this.getAsArray("categoryTerm");
         	if(locked){
-        		terms.push(consts.setLocked);
-        	}else{
-        		var locked = consts.FlagLocked;
-        		for(var i=0;i<terms.length;i++){
-        			if(terms[i].indexOf(locked) !=-1){
-        				terms.splice(i,1);
-        			}
+        		if(terms){
+        			terms.push(consts.setLocked);
+        		}else{
+        			this.setAsArray("categoryTerm",consts.setLocked);
         		}
-        		this.setAsArray("categoryTerm",terms);
+        		
+        	}else{
+        		if(terms){
+        			var locked = consts.FlagLocked;
+	        		for(var i=0;i<terms.length;i++){
+	        			if(terms[i].indexOf(locked) !=-1){
+	        				terms.splice(i,1);
+	        			}
+	        		}
+	        		this.setAsArray("categoryTerm",terms);
+        		}
+        		
         	}
         },
         

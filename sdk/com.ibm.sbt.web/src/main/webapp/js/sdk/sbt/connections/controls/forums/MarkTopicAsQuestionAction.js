@@ -15,7 +15,7 @@
  */
 
 /**
- * PinTopicAction
+ * MarkTopicAsQuestionAction
  */
 define([ "../../../declare", "../../../dom", "../../../lang",
          "../../../i18n!./nls/ForumView", "./MarkTopicAsQuestionWidget", 
@@ -91,15 +91,8 @@ define([ "../../../declare", "../../../dom", "../../../lang",
 				}
 			}, this.widgetArgs || {});
 			var widget = new MarkTopicAsQuestionWidget(widgetArgs);
-			
-			//TODO Change this to use the new pattern when the latest code is pulled
-			var dialog = new Dialog({ 
-    			title: this.name,
-    			nls: { OK: nls.ok },
-    			dialogContent: widget,
-    			onExecute: lang.hitch(widget, widget.onExecute)
-    		});
-    		dialog.show();
+
+    		var dialog = this.showDialog(widget,{ OK: nls.ok },this.dialogArgs);
 		}
 	});
 

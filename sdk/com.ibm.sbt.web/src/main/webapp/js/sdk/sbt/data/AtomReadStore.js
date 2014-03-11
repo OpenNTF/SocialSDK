@@ -370,21 +370,7 @@ define(["../declare","../config", "../lang", "../base/core", "../xml", "../xpath
             }
             return items;
         },
-        
-        /*_createItem: function(element){
-            var self = this;
-            return {
-                element : element,
-                store : this,
-                _attribs : {},              
-                getValue : function(attribute) {
-                    if (self.hasAttribute(this, attribute)) {
-                        return self.getValue(this, attribute);
-                    }
-                }
-            };
-        },*/
-        
+                
         _createItem: function(element) {
             var attribs = this.getAttributes();
             var xpathCountFunction = /^count\(.*\)$/;

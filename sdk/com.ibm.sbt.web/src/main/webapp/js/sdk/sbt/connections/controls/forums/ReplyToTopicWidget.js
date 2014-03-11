@@ -84,10 +84,7 @@ define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUt
 				content = CKEDITOR.instances.editor.getData();
 			}			
 		    
-			
 			this._replyToTopic( content);
-			
-			
 		    this.setExecuteEnabled(true);	
 		},
 

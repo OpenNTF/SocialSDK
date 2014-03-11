@@ -918,21 +918,21 @@ public class BlogService extends BaseService {
 	
 	/**
 	 * 
-	 * @return The blogHandle currently being used in requests to the blog service.
+	 * @return The blog homepage currently being used in requests to the blog service.
 	 */
-	public String getDefaultHandle() {
+	public String getHomepageHandle() {
 		return defaultHomepageHandle;
 	}
 	
     /**
-     * Change the default blog handle, to be used in all subsequent requests for this service instance. 
+     * Change the blog homepage, to be used in all subsequent requests for this service instance. 
      * This follows /blogs in the connections url, and is 'homepage' by default. 
      * 
      * e.g. CONNECTIONS_URL/blogs/homepage
      * 
      * @param defaultHandle
      */
-	public void setDefaultHandle(String defaultHandle) {
+	public void setHomepageHandle(String defaultHandle) {
 		this.defaultHomepageHandle = defaultHandle;
 	}
 

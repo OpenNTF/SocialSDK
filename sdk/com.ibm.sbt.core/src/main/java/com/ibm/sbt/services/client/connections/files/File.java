@@ -231,6 +231,14 @@ public class File extends AtomEntity {
 	}
 
 	/**
+	 * Method to get the version
+	 * @return int
+	 */
+	public int getVersion() {
+		return getAsInt(FileEntryXPath.VersionLabel);
+	}
+	
+	/**
 	 * Method to get the propogation
 	 * @return String
 	 */

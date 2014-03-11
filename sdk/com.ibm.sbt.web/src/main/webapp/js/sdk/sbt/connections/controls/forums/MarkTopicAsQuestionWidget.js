@@ -15,7 +15,7 @@
  */
 
 /**
- * DeleteTopicWidget
+ * MarkTopicAsQuestionWidget
  */
 define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUtil", 
          "../../../i18n!./nls/ForumView", 
@@ -36,9 +36,7 @@ define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUt
 		 * Template used to display the  content.
 		 */
 		templateString : MarkAsQuestion,
-		
 
-		
 		/**
 		 * Constructor method for the StartTopicWidget.
 		 * 

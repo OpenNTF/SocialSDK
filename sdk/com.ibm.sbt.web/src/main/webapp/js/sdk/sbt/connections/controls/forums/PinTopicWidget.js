@@ -15,7 +15,7 @@
  */
 
 /**
- * DeleteTopicWidget
+ * PinTopicWidget
  */
 define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUtil", 
          "../../../i18n!./nls/ForumView", 
@@ -36,9 +36,7 @@ define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUt
 		 * Template used to display the  content.
 		 */
 		templateString : PinTopic,
-		
 
-		
 		/**
 		 * Constructor method for the StartTopicWidget.
 		 * 
@@ -48,13 +46,6 @@ define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUt
 		constructor : function(args) {
 			this.nls = lang.mixin({}, nls, this.nls);
 			lang.mixin(this, args);
-		},
-
-		/**
-		 * Called after properties have been set
-		 */
-		postMixInProperties: function(){
-			
 		},
 				
 		/**
@@ -120,10 +111,7 @@ define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUt
 		 */
 		_handleRequestComplete : function(isPinned) {	
 			this._setSuccessMessage(isPinned);
-
-			 this.onSuccess();
-			//this.view.actionBar.selection.length = 0;
-			//this.view.grid.refreshSelectionListeners();
+			this.onSuccess();
 		},
 		
 		/*

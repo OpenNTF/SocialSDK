@@ -108,10 +108,12 @@ class block_ibmsbt extends block_base {
 				} else {
 					require $blockPath . '/core/views/oauth-login-display.php';
 				}
+				echo '</div>';
 				$this->content->text = ob_get_clean();
 				return;
 		
 			}
+		
 			$plugin = new SBTPlugin($this->config->endpoint);
 			$plugin->createHeader();
 			if (($settings->getAuthenticationMethod($this->config->endpoint) == 'basic' && $store->getBasicAuthUsername($this->config->endpoint) != null 
@@ -119,6 +121,11 @@ class block_ibmsbt extends block_base {
 				|| ($settings->getAuthenticationMethod($this->config->endpoint) == 'basic' && $settings->getBasicAuthMethod($this->config->endpoint) == 'global')
 				|| ($settings->getAuthenticationMethod($this->config->endpoint) == 'oauth2' && $store->getOAuthAccessToken($this->config->endpoint) != null)) {
 				require $this->config->plugin;
+				
+				if ($settings->getAuthenticationMethod($this->config->endpoint) == 'basic') {
+					require $blockPath . '/core/views/endpoint-logout.php';
+					echo '<button onclick="ibm_sbt_endpoint_logout()">Logout from this Endpoint</button>';
+				}
 				
 			}
 

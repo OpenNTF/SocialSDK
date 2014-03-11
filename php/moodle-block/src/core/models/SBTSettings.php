@@ -65,6 +65,7 @@ class SBTSettings {
 		}
 		
 		$this->sdkDeployURL = (isset($configData['sdk_deploy_url']) ? $configData['sdk_deploy_url'] : "");
+		$this->jsLibrary = (isset($configData['js_library']) ? $configData['js_library'] : "");
 	}
 	
 	private function _createTable($table, $dbman) {
@@ -91,6 +92,9 @@ class SBTSettings {
 		$table->add_field('api_version', XMLDB_TYPE_TEXT, 'big', null, null, null, null);
 		$table->add_field('server_type', XMLDB_TYPE_TEXT, 'big', null, null, null, null);
 		$table->add_field('allow_client_access', XMLDB_TYPE_TEXT, 'big', null, null, null, null);
+		$table->add_field('form_auth_page', XMLDB_TYPE_TEXT, 'big', null, null, null, null);
+		$table->add_field('form_auth_login_page', XMLDB_TYPE_TEXT, 'big', null, null, null, null);
+		$table->add_field('form_auth_cookie_cache', XMLDB_TYPE_TEXT, 'big', null, null, null, null);
 		
 		$table->add_field('created_by_user_id', XMLDB_TYPE_INTEGER, '10', null, null, null, null);
 		$table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
@@ -122,6 +126,57 @@ class SBTSettings {
 			}
 		}
 		
+		return null;
+	}
+	
+	/**
+	 * Returns the auth page URL used for form-based authentication page.
+	 *
+	 * @return
+	 */
+	public function getFormBasedAuthPage($endpoint = "connections") {
+		global $DB;
+		$endpoints = $DB->get_records(ENDPOINTS);
+		foreach($endpoints as $e) {
+			if ($e->name == $endpoint) {
+				return $e->form_auth_page;
+			}
+		}
+	
+		return null;
+	}
+	
+	/**
+	 * Returns the login page URL used for form-based authentication.
+	 *
+	 * @return
+	 */
+	public function getFormBasedAuthCookieCache($endpoint = "connections") {
+		global $DB;
+		$endpoints = $DB->get_records(ENDPOINTS);
+		foreach($endpoints as $e) {
+			if ($e->name == $endpoint) {
+				return $e->form_auth_cookie_cache;
+			}
+		}
+	
+		return null;
+	}
+	
+	/**
+	 * Returns the auth page used for form-based authentication login page url.
+	 *
+	 * @return
+	 */
+	public function getFormBasedAuthLoginPage($endpoint = "connections") {
+		global $DB;
+		$endpoints = $DB->get_records(ENDPOINTS);
+		foreach($endpoints as $e) {
+			if ($e->name == $endpoint) {
+				return $e->form_auth_login_page;
+			}
+		}
+	
 		return null;
 	}
 	

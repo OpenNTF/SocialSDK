@@ -89,7 +89,5 @@ class block_ibmsbt_edit_form extends block_edit_form {
         $mform->addElement('text', 'config_title', 'Title:');
         $mform->setDefault('config_title', 'default value');
         $mform->setType('config_title', PARAM_MULTILANG);
-    
- 
     }
 }

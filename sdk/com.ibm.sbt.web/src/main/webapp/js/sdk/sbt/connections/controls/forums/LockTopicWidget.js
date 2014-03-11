@@ -85,22 +85,25 @@ define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUt
 		_lockTopics: function(topics){
 			this.setExecuteEnabled(false);
 			var forumService = this.getForumService();
+				
 			
-			for(var i=0;i<topics.length;i++){
-				var isLocked = this._isTopicLocked(topics[i]);
-				if(!isLocked){
-					topics[i] = forumService.newForumTopic(topics[i]);
-					topics[i].setLocked();
-					topics[i].update().then(               
-					    function(topic){
-					    	alert("Topic Locked");
-					    },
-					    function(error){
-					    	alert("Error");
-					    }
-					);
-				}
+			var isLocked = this._isTopicLocked(topics[0]);
+			topics[0] = forumService.newForumTopic(topics[0]);
+			if(!isLocked){
+				topics[0].setLocked(true);
+			}else {
+				topics[0].setLocked(false);
 			}
+				var self = this;
+				topics[0].update().then(               
+				    function(topic){
+				    	self._handleRequestComplete(isLocked);
+				    },
+				    function(error){
+				    	self._handleError(error);
+				    }
+				);
+			
 			
 
 			this.setExecuteEnabled(true);
@@ -112,16 +115,18 @@ define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUt
 			
 			topic = forumService.newForumTopic(topic);
 			isLocked = topic.isLocked();
-			
+	
 			return isLocked;
 		},
 		
 		/*
 		 * Called after a request has completed 
 		 */
-		_handleRequestComplete : function(errorCount, deletedCount, topicsLength) {
-				
-			
+		_handleRequestComplete : function(isLocked) {
+
+			this._setSuccessMessage(isLocked);
+			this.onSuccess();			
+						
 		},
 		
 		/*
@@ -136,9 +141,9 @@ define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUt
 		/*
 		 * Set the successMessage for the specified add tags operation
 		 */
-		_setSuccessMessage : function(topicsLength) {
-			if(topicsLength > 1 ){
-				this.successTemplate = "<div>"+nls.LockMultipleTopicsSuccess+"</div>";
+		_setSuccessMessage : function(isLocked) {
+			if(isLocked){
+				this.successTemplate = "<div>"+nls.unlockTopicSuccess+"</div>";
 			}else{
 				this.successTemplate = "<div>"+nls.LockTopicSuccess+"</div>";
 			}

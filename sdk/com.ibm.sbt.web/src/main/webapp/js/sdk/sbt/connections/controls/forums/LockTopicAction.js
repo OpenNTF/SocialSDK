@@ -19,8 +19,9 @@
  */
 define([ "../../../declare", "../../../dom", "../../../lang",
          "../../../i18n!./nls/ForumView", "./LockTopicWidget", 
-         "../../../controls/dialog/Dialog", "../../../controls/view/Action"], 
-	function(declare, dom, lang, nls, LockTopicWidget, Dialog, Action) {
+         "../../../controls/dialog/Dialog", "../../../controls/view/Action",
+         "../../ForumService"], 
+	function(declare, dom, lang, nls, LockTopicWidget, Dialog, Action,ForumService) {
 
 	/**
 	 * Action to delete a forum topic
@@ -42,13 +43,37 @@ define([ "../../../declare", "../../../dom", "../../../lang",
 			if (this.widget) {
 				this.widget.selectionChanged(selection, context);
 			}
+			
+			if(selection.length > 0){
+				var forumService = this.getForumService();
+				var topic = forumService.newForumTopic(selection[0]);
+				var isLocked = topic.isLocked();
+				if(isLocked){
+					this.actionNameNode.textContent = nls.unlockTopic;
+					this.name = nls.unlockTopic;	
+				}else {
+					this.actionNameNode.textContent = nls.lockTopic;
+					this.name = nls.lockTopic;
+				}
+			}
+			
 		},
-		
+
+		/**
+		 * Return the ForumService.
+		 */
+		getForumService : function() {
+			if (!this.forumService) {
+				var args = this.endpoint ? { endpoint : this.endpoint } : {};
+				this.forumService = new ForumService(args);
+			}
+			return this.forumService;
+		},
 		/**
 		 * Only enabled when at least one topic is selected.
 		 */
 		isEnabled : function(selection, context) {
-			return (selection.length > 0);
+			return (selection.length > 0 && selection.length < 2);
 		},
 
 		/**
@@ -69,7 +94,7 @@ define([ "../../../declare", "../../../dom", "../../../lang",
 			//TODO Change this to use the new pattern when the latest code is pulled
 			var dialog = new Dialog({ 
     			title: this.name,
-    			nls: { OK: nls.lock },
+    			nls: { OK: nls.ok },
     			dialogContent: widget,
     			onExecute: lang.hitch(widget, widget.onExecute)
     		});

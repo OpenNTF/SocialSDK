@@ -140,8 +140,8 @@ define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUt
 			//if this widget is part of a view
 			if(this.view && this.action){
 				this.view.actionBar.showAllActions();
-				this.view.grid.update(null);
 				this.view.setContent(this.view.grid);
+				this.view.grid.update(null);
 			}
 		},
 		

@@ -190,7 +190,7 @@ function(declare, lang, dom, stringUtil, sbt, parameter, Grid,
 				 * FileAction defines the default actions for files,
 				 * which can be overridden
 				 */
-				fileAction : new FileAction(),
+				fileAction : null,
 
 				/**
 				 * Constructor function
@@ -198,7 +198,9 @@ function(declare, lang, dom, stringUtil, sbt, parameter, Grid,
 				 * @method constructor
 				 */
 				constructor : function(args) {
-
+					
+					this.fileAction = new FileAction(this),
+					
 					this.fileService = new FileService(
 							this.endpointName || "connections");
 

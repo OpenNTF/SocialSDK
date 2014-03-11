@@ -20,8 +20,8 @@
  * @module sbt.connections.CommunityService
  */
 define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", "./CommunityConstants", "./ConnectionsService",
-         "../base/AtomEntity", "../base/XmlDataHandler", "./ForumService", "../pathUtil" ], 
-    function(declare,config,lang,stringUtil,Promise,consts,ConnectionsService,AtomEntity,XmlDataHandler,ForumService,pathUtil) {
+         "../base/AtomEntity", "../base/XmlDataHandler", "./ForumService", "./BookmarkService", "../pathUtil" ], 
+    function(declare,config,lang,stringUtil,Promise,consts,ConnectionsService,AtomEntity,XmlDataHandler,ForumService,BookmarkService,pathUtil) {
 
 	var CategoryCommunity = "<category term=\"community\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category>";
 	var CategoryMember = "<category term=\"person\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category>";
@@ -1234,6 +1234,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
     var CommunityService = declare(ConnectionsService, {
     	
     	forumService : null,
+    	bookmarkService : null,
     	
     	contextRootMap: {
             communities: "communities"
@@ -1255,6 +1256,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         
         /**
          * Return a ForumService instance
+         * 
+         * @method getForumService
          * @returns {ForumService}
          */
         getForumService : function() {
@@ -1263,6 +1266,20 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         		this.forumService.endpoint = this.endpoint;
         	}
         	return this.forumService;
+        },
+        
+        /**
+         * Return a BookmarkService instance
+         * 
+         * @method getBookmarkService
+         * @returns {BookmarkService}
+         */
+        getBookmarkService : function() {
+        	if (!this.bookmarkService) {
+        		this.bookmarkService = new BookmarkService();
+        		this.bookmarkService.endpoint = this.endpoint;
+        	}
+        	return this.bookmarkService;
         },
         
         /**
@@ -2130,6 +2147,22 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
 			return this.updateEntity(url, options, callbacks);
 		},
 
+        /**
+         * Create a bookmark by sending an Atom entry document containing the 
+         * new bookmark.
+         * 
+         * @method createBookmark
+         * @param {String/Object} bookmarkOrJson Bookmark object which denotes the bookmark to be created.
+         * @param {Object} [args] Argument object
+         */
+        createBookmark : function(communityUuid, bookmarkOrJson, args) {
+			args = lang.mixin({ 
+				url : consts.AtomCommunityBookmarks, 
+				communityUuid : communityUuid 
+			}, args || {});
+            return this.getBookmarkService().createBookmark(bookmarkOrJson, args);
+        },
+        
 		//
 		// Internals
 		//

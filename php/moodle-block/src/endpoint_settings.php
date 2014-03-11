@@ -1,4 +1,26 @@
 ***REMOVED***
+
+/**
+ * (C) Copyright IBM Corp. 2014
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at:
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+ * implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
+
+/**
+ * Handles AJAX requests for updating the endpoints.
+ * 
+ * @author Benjamin Jakobus
+ */
 global $CFG;
 if (!isset($CFG) || !isset($CFG->wwwroot)) {
 	$path = str_replace('blocks/ibmsbt', '', __DIR__);
@@ -9,7 +31,27 @@ if (!defined('ENDPOINTS')) {
 	define('ENDPOINTS', 'ibm_sbt_endpoints');
 }
 
-// TODO: Client token
+
+
+// Make sure that the user is authorized to perform the action
+if (!isloggedin()) {
+	return;
+}
+
+$admins = get_admins();
+$isadmin = false;
+foreach ($admins as $admin) {
+	if ($USER->id == $admin->id) {
+		$isadmin = true;
+		break;
+	}
+}
+if (!$isadmin) {
+	return;
+} 
+
+
+
 
 if (isset($_POST['type'])) {
 	global $DB;
@@ -32,8 +74,20 @@ if (isset($_POST['type'])) {
 			$record->api_version = mysql_real_escape_string($_POST['api_version']);
 		}
 		
-		if (isset($_POST['api_version'])) {
+		if (isset($_POST['force_ssl_trust'])) {
 			$record->force_ssl_trust = mysql_real_escape_string($_POST['force_ssl_trust']);
+		}
+		
+		if (isset($_POST['form_auth_page'])) {
+			$record->form_auth_page = mysql_real_escape_string($_POST['form_auth_page']);
+		}
+		
+		if (isset($_POST['form_auth_login_page'])) {
+			$record->form_auth_login_page = mysql_real_escape_string($_POST['form_auth_login_page']);
+		}
+		
+		if (isset($_POST['form_auth_cookie_cache'])) {
+			$record->form_auth_cookie_cache = mysql_real_escape_string($_POST['form_auth_cookie_cache']);
 		}
 		
 		if (isset($_POST['basic_auth_method'])) {
@@ -53,7 +107,7 @@ if (isset($_POST['type'])) {
 		}
 		
 		if (isset($_POST['authorization_url'])) {
-			$record->authorization_url = mysql_real_escape_string($_POST['server_url']) . mysql_real_escape_string($_POST['authorization_url']);
+			$record->authorization_url = mysql_real_escape_string($_POST['authorization_url']);
 		}
 		
 		if (isset($_POST['oauth2_callback_url'])) {
@@ -61,7 +115,7 @@ if (isset($_POST['type'])) {
 		}
 		
 		if (isset($_POST['request_token_url'])) {
-			$record->request_token_url = mysql_real_escape_string($_POST['server_url']) . mysql_real_escape_string($_POST['request_token_url']);
+			$record->request_token_url = mysql_real_escape_string($_POST['request_token_url']);
 		}
 		
 		if (isset($_POST['client_secret'])) {
@@ -81,7 +135,7 @@ if (isset($_POST['type'])) {
 		}
 		
 		if (isset($_POST['access_token_url'])) {
-			$record->access_token_url = mysql_real_escape_string($_POST['server_url']) . mysql_real_escape_string($_POST['access_token_url']);
+			$record->access_token_url = mysql_real_escape_string($_POST['access_token_url']);
 		}
 		
 		if (isset($_POST['server_url'])) {
@@ -120,6 +174,18 @@ if (isset($_POST['type'])) {
 			$record->force_ssl_trust = mysql_real_escape_string($_POST['force_ssl_trust']);
 		}
 		
+		if (isset($_POST['form_auth_page'])) {
+			$record->form_auth_page = mysql_real_escape_string($_POST['form_auth_page']);
+		}
+		
+		if (isset($_POST['form_auth_login_page'])) {
+			$record->form_auth_login_page = mysql_real_escape_string($_POST['new_form_auth_login_page']);
+		}
+		
+		if (isset($_POST['form_auth_cookie_cache'])) {
+			$record->form_auth_cookie_cache = mysql_real_escape_string($_POST['form_auth_cookie_cache']);
+		}
+		
 		if (isset($_POST['basic_auth_method'])) {
 			$record->basic_auth_method = mysql_real_escape_string($_POST['basic_auth_method']);
 		}
@@ -137,7 +203,7 @@ if (isset($_POST['type'])) {
 		}
 		
 		if (isset($_POST['authorization_url'])) {
-			$record->authorization_url = mysql_real_escape_string($_POST['server_url']) . mysql_real_escape_string($_POST['authorization_url']);
+			$record->authorization_url = mysql_real_escape_string($_POST['authorization_url']);
 		}
 		
 		if (isset($_POST['oauth2_callback_url'])) {
@@ -145,7 +211,7 @@ if (isset($_POST['type'])) {
 		}
 		
 		if (isset($_POST['request_token_url'])) {
-			$record->request_token_url = mysql_real_escape_string($_POST['server_url']) . mysql_real_escape_string($_POST['request_token_url']);
+			$record->request_token_url = mysql_real_escape_string($_POST['request_token_url']);
 		}
 		
 		if (isset($_POST['client_secret'])) {
@@ -165,7 +231,7 @@ if (isset($_POST['type'])) {
 		}
 		
 		if (isset($_POST['access_token_url'])) {
-			$record->access_token_url = mysql_real_escape_string($_POST['server_url']) . mysql_real_escape_string($_POST['access_token_url']);
+			$record->access_token_url = mysql_real_escape_string($_POST['access_token_url']);
 		}
 		
 		if (isset($_POST['server_url'])) {
@@ -204,6 +270,9 @@ if (isset($_POST['type'])) {
 		$endpoint['access_token_url'] = $record->access_token_url;
 		$endpoint['server_url'] = $record->server_url;
 		$endpoint['name'] = $record->name;
+		$endpoint['form_auth_page'] = $record->form_auth_page;
+		$endpoint['form_auth_login_page'] = $record->form_auth_login_page;
+		$endpoint['form_auth_cookie_cache'] = $record->form_auth_cookie_cache;
 		
 		echo json_encode($endpoint);
 	}

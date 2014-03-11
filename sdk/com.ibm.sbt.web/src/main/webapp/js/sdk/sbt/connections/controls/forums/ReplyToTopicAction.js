@@ -57,6 +57,7 @@ define([ "../../../declare", "../../../dom", "../../../lang",
 		execute : function(selection, context) {
 			var self = this;
 			var widgetArgs = lang.mixin({
+				topics: selection,
 				hideButtons: false,
 				view:self.view,
 				action: self,
@@ -65,16 +66,17 @@ define([ "../../../declare", "../../../dom", "../../../lang",
 					self.displayMessage(template, isError);
 				}
 			}, this.widgetArgs || {});
-			this.widget = new ReplyToTopicWidget(widgetArgs);
+			var widget = new ReplyToTopicWidget(widgetArgs);
 			
 			//TODO Change this to use the new pattern when the latest code is pulled
-			/*var dialog = new Dialog({ 
+			var dialog = new Dialog({ 
     			title: this.name,
+    			dialogStyle: "width:1000px;",
     			nls: { OK: nls.save },
-    			dialogContent: "<div>hello</div>"
-    			//onExecute: lang.hitch(this.widget, widget.onExecute)
+    			dialogContent: widget,
+    			onExecute: lang.hitch(widget, widget.onExecute)
     		});
-    		dialog.show();	*/
+    		dialog.show();	
 		}
 	});
 

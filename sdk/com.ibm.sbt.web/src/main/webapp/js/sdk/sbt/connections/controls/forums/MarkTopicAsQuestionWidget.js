@@ -85,7 +85,22 @@ define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUt
 		_markAsQuestion: function(topics){
 			this.setExecuteEnabled(false);
 			var forumService = this.getForumService();			
-			alert("marked as q");
+			var isQuestion = this._isTopicQuestion(topics[0]);
+			topics[0] = forumService.newForumTopic(topics[0]);
+			if(!isQuestion){
+				topics[0].setQuestion(true);
+			}else {
+				topics[0].setQuestion(false);
+			}
+				var self = this;
+				topics[0].update().then(               
+				    function(topic){
+				    	self._handleRequestComplete();
+				    },
+				    function(error){
+				    	self._handleError(error);
+				    }
+				);
 			this.setExecuteEnabled(true);
 		},
 		
@@ -102,9 +117,9 @@ define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUt
 		/*
 		 * Called after a request has completed 
 		 */
-		_handleRequestComplete : function(errorCount, deletedCount, topicsLength) {
-				
-			
+		_handleRequestComplete : function() {
+			this._setSuccessMessage();
+			this.onSuccess();
 		},
 		
 		/*
@@ -119,13 +134,8 @@ define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUt
 		/*
 		 * Set the successMessage for the specified add tags operation
 		 */
-		_setSuccessMessage : function(topicsLength) {
-			if(topicsLength > 1 ){
-				this.successTemplate = "<div>"+nls.markAsQuestionSuccess+"</div>";
-			}else{
-				this.successTemplate = "<div>"+nls.markAsQuestionSuccess+"</div>";
-			}
-			
+		_setSuccessMessage : function() {
+			this.successTemplate = "<div>"+nls.markAsQuestionSuccess+"</div>";	
 		}
 	});
 

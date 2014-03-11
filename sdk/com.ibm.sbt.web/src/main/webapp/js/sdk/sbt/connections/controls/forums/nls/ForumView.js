@@ -20,9 +20,12 @@ define({
     	startTopic: "Start a Topic",
     	deleteTopic: "Delete Topic",
     	lockTopic: "Lock Topic",
+    	unlockTopic: "Unlock Topic",
     	pinTopic: "Pin Topic",
+    	unpinTopic: "Unpin Topic",
     	replyToTopic: "Reply To Topic",
     	markTopic: "Mark As Question",
+    	unmarkTopic: "Unmark As Question",
     	lock: "Lock",
     	pin: "Pin",
     	ok: "Ok",
@@ -53,12 +56,20 @@ define({
     	LockTopicError:"Operation failed.",
     	LockMultipleTopicsSuccess:"You have successfully locked the selected topics.",
     	LockMultipleTopicsError: "Operation failed.",
+    	unlockTopicSuccess: "You have successfully unlocked this topic.",
     	
     	pinTopicError: "Operation failed.",
     	pinTopicSuccess: "This topic has been successfully pinned. It will stay at the top of this forum's topic list.",
+    	unpinTopicSuccess: "This topic has been successfully unpinned. It will no longer stay at the top of this forum's topic list.",
     		
     	markAsQuestionSuccess: "This topic has been marked as a question.",
-    	markAsQuestionError:"Operation failed."
+    	markAsQuestionError:"Operation failed.",
+    		
+    	replySuccess: "Reply Successful.",
+    	replyMultipleSuccess: "The selected topics have been replied to.",
+    	replyError: "Operation Failed."
+    		
+    		
     		
     }
 });

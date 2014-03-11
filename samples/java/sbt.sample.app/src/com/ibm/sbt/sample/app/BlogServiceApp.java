@@ -40,8 +40,8 @@ public class BlogServiceApp {
         this.blogService.setEndpoint(createEndpoint(url, user, password));
     }
     
-    public void setBlogHandle(String blogHandle){
-    	this.blogService.setDefaultHandle(blogHandle);
+    public void setHomepageHandle(String blogHandle){
+    	this.blogService.setHomepageHandle(blogHandle);
     }
     
     private BasicEndpoint createEndpoint(String url, String user, String password) {
@@ -76,7 +76,7 @@ public class BlogServiceApp {
 	    BlogServiceApp app = new BlogServiceApp(url, user, password);
         
 	    if(args.length > 3){ // if a blog handle has been provided replace the default one.
-			app.setBlogHandle(args[3]);
+			app.setHomepageHandle(args[3]);
 		}
 	    try {
 	    	BlogService BlogService = app.getBlogService();

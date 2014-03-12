@@ -20,6 +20,7 @@ if (isset($this->config->template)) {
 		
 		    var grid = new FileGrid({
 		    	 type : "myFiles",
+		    	 endpoint: "***REMOVED*** echo $this->config->endpoint; ?>",
 		         hidePager: false,
 		         hideSorter: true,
 		         hideFooter: false,

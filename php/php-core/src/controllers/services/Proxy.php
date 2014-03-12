@@ -48,6 +48,11 @@ class Proxy extends BaseController
 		$store = SBTCredentialStore::getInstance();	
 		
 		$settings = new SBTSettings();
+		
+		$endpointName = "connections";
+		if (isset($_GET['endpointName'])) {
+			$endpointName = $_GET['endpointName'];
+		}
 
 		if (!isset($_REQUEST["_redirectUrl"])) {
 			// Request to check if the user is authenticated
@@ -56,25 +61,31 @@ class Proxy extends BaseController
 				$_SERVER['REQUEST_METHOD'] = 'GET';
 			} else if (isset($_REQUEST["basicAuthLogout"])) {
 				// Logout request
-				$store->deleteBasicAuthCredentials();
-				return;
-			} else if (isset($_REQUEST["OAuthLogout"])) {				
-				$store->destroyStore();
+				$store->deleteBasicAuthCredentials($endpointName);
+			} 
+			 if (isset($_REQUEST["OAuthLogout"])) {	
+			 	$store->deleteOAuthCredentials($endpointName);
+
 				$timestamp = time();
 				unset($_COOKIE['IBMSBTKOAuthLogin']);
-				setcookie('IBMSBTKOAuthLogin', "", $timestamp - 86400);
+				setcookie('IBMSBTKOAuthLogin', "", $timestamp - 604800);
 				return;
 			} else {
 				return;
 			}
+			if (isset($_REQUEST["basicAuthLogout"])) {
+				return;
+			}
 		}
+		
+		
 		
 		$url = $_REQUEST["_redirectUrl"];
 		$url = str_replace("/connections/", "", $url);
 
 		if (isset($_REQUEST['basicAuthRequest']) && $_REQUEST['basicAuthRequest'] == 'true') {
-			$store->storeBasicAuthUsername($_POST['username']);
-			$store->storeBasicAuthPassword($_POST['password']);
+			$store->storeBasicAuthUsername($_POST['username'], $endpointName);
+			$store->storeBasicAuthPassword($_POST['password'], $endpointName);
 			$result = array('status' => 200, 'result' => true);
 			print_r(json_encode($result));
 			return;
@@ -109,6 +120,10 @@ class Proxy extends BaseController
 		if (isset($options['actionType'])) {
 			unset($options['actionType']);
 		}
+		
+		if (isset($options['endpointName'])) {
+			unset($options['endpointName']);
+		}
 			
 		$headers = null;
 		$response = null;
@@ -116,7 +131,7 @@ class Proxy extends BaseController
 		$endpoint = null;
 		
 		if ($server == null) {
-			$server = $settings->getURL();
+			$server = $settings->getURL($endpointName);
 		}
 		
 		$method = $_SERVER['REQUEST_METHOD'];
@@ -130,15 +145,15 @@ class Proxy extends BaseController
 		if (isset($headers['Content-Type'])) {
 			$forwardHeader['Content-Type'] = $headers['Content-Type'];
 		}
-		if ($settings->getAuthenticationMethod() == "basic") {
+		if ($settings->getAuthenticationMethod($endpointName) == "basic") {
 			$endpoint = new SBTBasicAuthEndpoint();
-		} else if ($settings->getAuthenticationMethod() == "oauth2") {
+		} else if ($settings->getAuthenticationMethod($endpointName) == "oauth2") {
 			$endpoint = new SBTOAuth2Endpoint();
-		} else if ($settings->getAuthenticationMethod() == "oauth1") {	
+		} else if ($settings->getAuthenticationMethod($endpointName) == "oauth1") {	
 			$endpoint = new SBTOAuth1Endpoint();
 		}
 
-		$response = $endpoint->makeRequest($server, $url, $method, $options, $body, $forwardHeader);
+		$response = $endpoint->makeRequest($server, $url, $method, $options, $body, $forwardHeader, $endpointName);
 
 		if ($response->getStatusCode() == 200) {
 			if (isset($_REQUEST["isAuthenticated"]) && $settings->getAuthenticationMethod() == "basic") {
@@ -171,6 +186,15 @@ class Proxy extends BaseController
 		} else if ($response->getStatusCode() == 201) {
 			$result = array('status' => 201, 'result' => true);
 			print_r(json_encode($result));
+		} else if ($response->getStatusCode() == 401 || $response->getStatusCode() == '401oauth_token_expired') {
+			if (isset($_GET['endpointName'])) {
+				$store->deleteOAuthCredentials($_GET['endpointName']);
+				$store->deleteBasicAuthCredentials($_GET['endpointName']);
+			} else {
+				$store->deleteOAuthCredentials();
+				$store->deleteBasicAuthCredentials();
+			}
+			print_r($response->getStatusCode());
 		} else {
 			print_r($response->getBody(TRUE));
 		}

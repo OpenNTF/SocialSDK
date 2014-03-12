@@ -123,11 +123,11 @@ function ibm_sbtk_user_login_check() {
 	// can determine if the user is logged in even if we are running in non-wordpress mode
 	$timestamp = time();
 	if(is_user_logged_in()) {
-		setcookie(WP_SESSION_INDICATOR, get_current_user_id(), $timestamp + 86400);
-		setcookie('IBMSBTKOAuthLogin', "yes", $timestamp + 86400);
+		setcookie(WP_SESSION_INDICATOR, get_current_user_id(), $timestamp + 604800);
+		setcookie('IBMSBTKOAuthLogin', "yes", $timestamp + 604800);
 	} else {
-		setcookie(WP_SESSION_INDICATOR, "-1", $timestamp - 86400);
-		setcookie('IBMSBTKOAuthLogin', "", $timestamp - 86400);
+		setcookie(WP_SESSION_INDICATOR, "-1", $timestamp - 604800);
+		setcookie('IBMSBTKOAuthLogin', "", $timestamp - 604800);
 	}
 }
 
@@ -135,5 +135,5 @@ function ibm_sbtk_user_login_check() {
  * Logout hook for clearing session data
  */
 function ibm_sbtk_logout() {
-	setcookie(WP_SESSION_INDICATOR, "-1", $timestamp - 86400);
+	setcookie(WP_SESSION_INDICATOR, "-1", $timestamp - 604800);
 }

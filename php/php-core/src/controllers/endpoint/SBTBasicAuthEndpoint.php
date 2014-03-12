@@ -40,7 +40,7 @@ class SBTBasicAuthEndpoint extends BaseController implements SBTEndpoint
 	 * @param string $body
 	 * @param string $headers
 	 */
-	public function makeRequest($server, $service, $method, $options, $body = null, $headers = null) {
+	public function makeRequest($server, $service, $method, $options, $body = null, $headers = null, $endpointName = "connections") {
 		$store = SBTCredentialStore::getInstance();
 		$settings = new SBTSettings();
 		
@@ -52,15 +52,15 @@ class SBTBasicAuthEndpoint extends BaseController implements SBTEndpoint
 		
 		// If global username and password is set, then use it; otherwise use user-specific credentials
 		if ($settings->getBasicAuthMethod() == 'global' || $settings->getBasicAuthMethod() == 'profile') {
-			$user = $settings->getBasicAuthUsername();
-			$password = $settings->getBasicAuthPassword();
+			$user = $settings->getBasicAuthUsername($endpointName);
+			$password = $settings->getBasicAuthPassword($endpointName);
 		} else {
-			$user = $store->getBasicAuthUsername() ;
-			$password = $store->getBasicAuthPassword();
+			$user = $store->getBasicAuthUsername($endpointName) ;
+			$password = $store->getBasicAuthPassword($endpointName);
 		}
 		try {				
 			$request = $client->createRequest($method, $service , $headers, $body,  $options);
-			if ($settings->forceSSLTrust()) {
+			if ($settings->forceSSLTrust($endpointName)) {
 				$request->getCurlOptions()->set(CURLOPT_SSL_VERIFYHOST, false);
 				$request->getCurlOptions()->set(CURLOPT_SSL_VERIFYPEER, false);
 			}

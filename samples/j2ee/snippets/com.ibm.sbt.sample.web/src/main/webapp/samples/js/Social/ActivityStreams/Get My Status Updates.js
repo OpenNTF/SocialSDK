@@ -14,12 +14,8 @@ require(["sbt/connections/ActivityStreamService", "sbt/connections/ActivityStrea
             td.setAttribute("id", "text"+i);
             tr.appendChild(td);
         };
-    	var activityStreamService = new ActivityStreamService();
-    	var promise = activityStreamService.getMyStatusUpdates(
-			{
-				count: 5
-			}
-    	);
+        var activityStreamService = new ActivityStreamService();
+    	var promise = activityStreamService.getMyStatusUpdates({ count: 5 });
     	promise.then(
             function(as){
                 if (as.length == 0) {

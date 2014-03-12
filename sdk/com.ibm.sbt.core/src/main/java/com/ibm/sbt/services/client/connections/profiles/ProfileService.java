@@ -21,9 +21,11 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.http.Header;
+import org.w3c.dom.Node;
 
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.json.JsonJavaObject;
@@ -941,6 +943,32 @@ public class ProfileService extends BaseService {
 		Header header = requestData.getResponse().getFirstHeader("Location");
 		String urlLocation = header!=null?header.getValue():"";
 		return urlLocation.substring(urlLocation.indexOf(CONNECTION_UNIQUE_IDENTIFIER+"=") + (CONNECTION_UNIQUE_IDENTIFIER+"=").length());
+	}
+
+	/**
+	 * Returns a mapping containing the extended attributes for the entry.<bt/>
+	 * This method execute a xhr call to the back end for every attribute.
+	 * 
+	 * @param p the profile to use. has to be a full profile, to obtain all the extended attributes links
+	 * @return a map containing the id of the attribute as key and the attribute value as value
+	 * @throws ProfileServiceException
+	 */
+	public Map<String,Object> getExtendedAttributes(Profile p) throws ProfileServiceException{
+		Map<String, Object> ret = new HashMap<String, Object>();
+ 		List<Node> attributes = (List<Node>) p.getDataHandler().getEntries("//a:link[@rel=\"http://www.ibm.com/xmlns/prod/sn/ext-attr\"]");
+		for (Node link :attributes) {
+	         String extUrl = link.getAttributes().getNamedItem("href").getTextContent();
+	         String extId = link.getAttributes().getNamedItem("snx:extensionId").getTextContent();
+	         Response resp;
+			try {
+				resp = getEndpoint().xhrGet(extUrl);
+			} catch (ClientServicesException e) {
+				throw new ProfileServiceException(e);
+			}
+	         Object extValue= resp.getData();
+	         ret.put(extId, extValue);
+		}
+		return ret;
 	}
 
 }

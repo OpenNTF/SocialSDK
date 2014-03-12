@@ -1562,7 +1562,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         },
 
         /**
-         * Get a list for forum topics for th specified community.
+         * Get a list for forum topics for the specified community.
          * 
          * @method getForumTopics
          * @param communityUuid
@@ -1570,20 +1570,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @returns
          */
         getForumTopics: function(communityUuid, args) {
-            var promise = this._validateCommunityUuid(communityUuid);
-            if (promise) {
-                return promise;
-            }
-
-            var requestArgs = lang.mixin(
-            	{ communityUuid : communityUuid }, args || {});
-            var options = {
-                method : "GET",
-                handleAs : "text",
-                query : requestArgs
-            };
-            
-            return this.getEntities(consts.AtomCommunityForumTopics, options, ForumTopicFeedCallbacks);
+            return this.getForumService().getCommunityForumTopics(communityUuid, args);
         },
         
         /**
@@ -1975,42 +1962,16 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * new forum to the forum replies resource.
          * 
          * @method createForumTopic
-         * @param {String} communityUuid Community UUID of the community for this forum topic
+         * @param {String} communityUuid This argument is deprecated and has no effect if provided.
          * @param {Object} forumTopic Forum topic object which denotes the forum topic to be created.
          * @param {Object} [args] Argument object
          */
         createForumTopic : function(communityUuid, topicOrJson, args) {
-            var promise = this._validateCommunityUuid(communityUuid);
-            if (promise) {
-                return promise;
+            if(!lang.isString(communityUuid)){
+                args = topicOrJson;
+                topicOrJson = communityUuid;
             }
-        	
-        	var forumService = this.getForumService();
-            var forumTopic = forumService.newForumTopic(topicOrJson);
-            var promise = forumService._validateForumTopic(forumTopic, false, args);
-            if (promise) {
-                return promise;
-            }
-
-            var callbacks = {};
-            callbacks.createEntity = function(service, data, response) {
-                var topicUuid = this.getLocationParameter(response, "topicUuid");
-                forumTopic.setTopicUuid(topicUuid);
-                forumTopic.setData(data, response);
-                return forumTopic;
-            };
-
-            var requestArgs = lang.mixin(
-                	{ communityUuid : communityUuid }, args || {});
-            
-            var options = {
-                method : "POST",
-                query : requestArgs,
-                headers : consts.AtomXmlHeaders,
-                data : forumTopic.createPostData()
-            };
-            
-            return this.updateEntity(consts.AtomCommunityForumTopics, options, callbacks, args);
+            return this.getForumService().createForumTopic(topicOrJson, args);
         },
                 
         /**

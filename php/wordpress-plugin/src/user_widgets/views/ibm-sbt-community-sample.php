@@ -35,6 +35,8 @@ function(dom, CommunityGrid, CommunityService, lang) {
    	});
             
    dom.byId("***REMOVED*** echo (isset($instance['ibm-sbtk-element-id']) ? $instance['ibm-sbtk-element-id'] : "myIBMElementID"); ?>").appendChild(grid.domNode);
+   grid.renderer.tableClass = "table";
+   grid.renderer.template = CommunityRow;
    grid.update();
     
     dom.byId("selectedBtn").onclick = function(evt) {

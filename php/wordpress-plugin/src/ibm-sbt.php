@@ -93,8 +93,8 @@ if ($sessions !== false) {
 	$now = time();
 	for ($i = 0; $i < sizeof($sessions); $i++) {
 		$session = $sessions[$i];
-		// Delete sessions that are older than one day 86400
-		if ($now - $session['created'] >= 86400) {
+		// Delete sessions that are older than seven days 604800
+		if ($now - $session['created'] >= 604800) {
 			delete_option($session['id']);
 			unset($sessions[$i]);
 			update_option(USER_SESSIONS, $sessions); 

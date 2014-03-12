@@ -247,4 +247,17 @@ class SBTSettings {
 	public function getJSLibrary($endpointName = "connections") {
 		return $this->jsLibrary;
 	}
+	
+	// TODO: Implement
+	public function getEndpoints() {
+		return array();
+	}
+	
+	public function getClientSecret($endpointName = "connections") {
+		return $this->getConsumerSecret($endpointName);
+	}
+	
+	public function getClientId($endpointName = "connections") {
+		return $this->getConsumerKey($endpointName);
+	}
 }

@@ -92,7 +92,7 @@ public class FileUpdateTest {
 	public void testUpdateSharedWithMeFiles() throws Exception {
 		EntityList<File> fileList = fileService.getFilesSharedWithMe();
 		for (File file : fileList) {
-			//System.out.println(DOMUtil.getXMLString(file.getDataHandler().getData()));
+			System.out.println(DOMUtil.getXMLString(file.getDataHandler().getData()));
 			int version = file.getVersion();
 			String visibility = file.getVisibility();
 			

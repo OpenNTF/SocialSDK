@@ -1,6 +1,7 @@
 package com.ibm.sbt.automation.core.environment;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.IOException;
@@ -20,8 +21,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Capabilities;
-import org.openqa.selenium.Platform;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -225,6 +224,19 @@ public abstract class TestEnvironment extends com.ibm.sbt.test.lib.TestEnvironme
 		smartCloud = true;
 		logger.config("Enabling Smartcloud");
 		addSnippetParam("env", getProperty("smartcloud.env"));
+	}
+
+	/**
+	 * Enable Connections OAuth2.9 environment
+	 */
+	public void enableConnectionsOA2() {
+		smartCloud = true;
+		logger.config("Enabling Smartcloud");
+		String env = getProperty("connectionsOA2.env");
+		if (StringUtil.isEmpty(env)) {
+			env = "connectionsOA2Environment";
+		}
+		addSnippetParam("env", env);
 	}
 
 	/**

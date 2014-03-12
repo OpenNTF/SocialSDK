@@ -2,19 +2,33 @@
     <head>
         <meta charset="utf-8">
         <script type="text/javascript">
-            djConfig={
-                baseUrl: '${proxyUrl}/${connections}/resources/web/dojo/',
-                localizationComplete: true
+            var timeStamp = "";
+            var ibmConfig = {
             };
-            asc = {
+            var asc = {
                 useOAuth : false
             }; 
+            var djConfig = {
+               isDebug: false,
+               baseUrl: '${proxyUrl}/${connectionsContextRoot}/resources/web/dojo/',
+               locale: "en-us",
+               useXDomain: true,
+               dojoBlankHtmlUrl: "${proxyUrl}/${connectionsContextRoot}/homepage/static/20140117.183045/nav/blankIE.html",
+               blankGif: "${proxyUrl}/${connectionsContextRoot}/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140117.183045",
+               useCommentedJson: true,
+               localizationComplete: true
+            };
+            var netJazzAjaxConfig = {
+                base: "${proxyUrl}/${connectionsContextRoot}/connections/resources",
+                skipStyles: true,
+                params: "etag=20140117.183045&lang=en&country=US"
+            };
         </script>
-        <link rel="stylesheet" type="text/css" title="Style" href="${connectionsUrl}/${connections}/resources/web/_style?include=com.ibm.lconn.core.styles.oneui3/base/package3.css~com.ibm.lconn.core.styles.oneui3/sprites.css"></link>
-        <link rel="stylesheet" type="text/css" title="Style" href="${connectionsUrl}/${connections}/resources/web/_lconntheme/default.css?version=oneui3&rtl=false"></link>
+        <link rel="stylesheet" type="text/css" title="Style" href="${connectionsUrl}/${connectionsContextRoot}/resources/web/_style?include=com.ibm.lconn.core.styles.oneui3/base/package3.css~com.ibm.lconn.core.styles.oneui3/sprites.css"></link>
+        <link rel="stylesheet" type="text/css" title="Style" href="${connectionsUrl}/${connectionsContextRoot}/resources/web/_lconntheme/default.css?version=oneui3&rtl=false"></link>
         <link rel="stylesheet" type="text/css" title="Style" href="${cssUrl}"></link>
         
-        <script type="text/javascript" src="${proxyUrl}/${connections}/resources/web/_js/?include=dojo.dojo.js"></script>
+        <script type="text/javascript" src="${proxyUrl}/${connectionsContextRoot}/resources/web/_js/?include=dojo.dojo.js"></script>
         <script>
         dojo.locale = "en";
         dojo.config.locale="en";
@@ -36,8 +50,8 @@
             },
             "bookmarklet": {
               "secureEnabled": secure,
-              "secureUrl": "${proxyUrl}/${connections}/bookmarklet",
-              "url": "${proxyUrl}/${connections}/bookmarklet"
+              "secureUrl": "${proxyUrl}/${connectionsContextRoot}/bookmarklet",
+              "url": "${proxyUrl}/${connectionsContextRoot}/bookmarklet"
             },
             "communities": {
               "secureEnabled": secure,
@@ -46,13 +60,13 @@
             },
             "connectionsmail": {
               "secureEnabled": secure,
-              "secureUrl": "${proxyUrl}/${connections}/resources/socmail-client",
-              "url": "${proxyUrl}/${connections}/resources/socmail-client"
+              "secureUrl": "${proxyUrl}/${connectionsContextRoot}/resources/socmail-client",
+              "url": "${proxyUrl}/${connectionsContextRoot}/resources/socmail-client"
             },
             "deploymentConfig": {
               "secureEnabled": secure,
-              "secureUrl": "${proxyUrl}/${connections}",
-              "url": "${proxyUrl}/${connections}"
+              "secureUrl": "${proxyUrl}/${connectionsContextRoot}",
+              "url": "${proxyUrl}/${connectionsContextRoot}"
             },
             "dogear": {
               "secureEnabled": secure,
@@ -86,8 +100,8 @@
             },
             "microblogging": {
               "secureEnabled": secure,
-              "secureUrl": "${proxyUrl}/${connections}/opensocial",
-              "url": "${proxyUrl}/${connections}/opensocial"
+              "secureUrl": "${proxyUrl}/${connectionsContextRoot}/opensocial",
+              "url": "${proxyUrl}/${connectionsContextRoot}/opensocial"
             },
             "mobile": {
               "secureEnabled": secure,
@@ -106,8 +120,8 @@
             },
             "oauth": {
               "secureEnabled": secure,
-              "secureUrl": "${proxyUrl}/${connections}/oauth",
-              "url": "${proxyUrl}/${connections}/oauth"
+              "secureUrl": "${proxyUrl}/${connectionsContextRoot}/oauth",
+              "url": "${proxyUrl}/${connectionsContextRoot}/oauth"
             },
             "oauthprovider": {
               "secureEnabled": secure,
@@ -116,8 +130,8 @@
             },
             "opensocial": {
               "secureEnabled": secure,
-              "secureUrl": "${proxyUrl}/${connections}/opensocial",
-              "url": "${proxyUrl}/${connections}/opensocial"
+              "secureUrl": "${proxyUrl}/${connectionsContextRoot}/opensocial",
+              "url": "${proxyUrl}/${connectionsContextRoot}/opensocial"
             },
             "personTag": {
               "secureEnabled": secure,
@@ -139,8 +153,8 @@
             },
             "webresources": {
               "secureEnabled": secure,
-              "secureUrl": "${proxyUrl}/${connections}/resources",
-              "url": "${proxyUrl}/${connections}/resources"
+              "secureUrl": "${proxyUrl}/${connectionsContextRoot}/resources",
+              "url": "${proxyUrl}/${connectionsContextRoot}/resources"
             },
             "wikis": {
               "secureEnabled": secure,
@@ -149,21 +163,23 @@
             }
           });
         </script>
-        <script type="text/javascript" src="${proxyUrl}/${connections}/resources/web/_js/?include=com.ibm.social.as.ActivityStream.js~com.ibm.lconn.personcard.legacy.js~com.ibm.social.as.gadget.ActivityStreamConfigUtil.js${connectionsASNav}~com.ibm.social.as.util.hashtag.HashtagUtil.js~com.ibm.social.as.gadget.refresh.RefreshButton.js~lconn.core.util.dojoPatches.js~com.ibm.social.as.ee.EEManager.js~lconn.homepage.as.extension.SavedActionExtension.js~com.ibm.social.as.gadget.refresh.RefreshButtonExtension.js~com.ibm.social.as.lconn.extension.MicroblogDeletionExtension.js~com.ibm.social.as.extension.CommentExtension.js~lconn.core.filesutil.js~lconn.news.microblogging.sharebox.InputForm.js~com.ibm.social.as.extension.DirtyCheckExtension.js~com.ibm.social.as.lconn.extension.ShareboxStatusUpdateExtension.js~com.ibm.social.as.lconn.extension.DisableDynamicLoadExtension.js~lconn.homepage.as.extension.SavedViewExtension.js~lconn.homepage.as.extension.ActivityReplyExtension.js~lconn.homepage.as.extension.NetworkInviteExtension.js~lconn.homepage.as.extension.ActionRequiredViewExtension.js~com.ibm.social.as.lconn.extension.GadgetPreloaderExtension.js&exclude=lconn.core.config.services.js~dojo.dojo.js&lang=en"></script>
+        <script type="text/javascript" src="${proxyUrl}/${connectionsContextRoot}/resources/web/_js/?include=com.ibm.social.as.ActivityStream.js~com.ibm.lconn.personcard.legacy.js~com.ibm.social.as.extension.CommentExtension.js~com.ibm.social.as.util.hashtag.HashtagUtil.js~lconn.core.util.dojoPatches.js~com.ibm.social.as.ee.EEManager.js~com.ibm.lconn.gadget.container.iContainer2.js~com.ibm.social.as.gadget.refresh.RefreshButton.js${extraIncludes}&exclude=dojo.dojo.js~lconn.core.config.services.js${extraExcludes}&lang=en"></script>
         <script type="text/javascript" src="${libraryUrl}"></script>
     </head>
     <body class="lotusui30_body lotusui30_fonts lotusui30">
         <div id="lotusMain">
-            <div id="activityStream"></div>
-            <div id="sideNav"></div>
-            <div id="inputForm"></div>
+            <div class="lotusContent lotusBoard">
+                <div id="activityStreamNode" class="lotusStream"></div>
+            </div>
             <script>
-            require(["sbt/config", "sbt/connections/controls/astream/_ActivityStream"], function(config, _ActivityStream){
-                config.Properties = ${sbtProps};
-                new _ActivityStream(${args});
-            });
+                require(
+                    ["sbt/config", "sbt/connections/controls/astream/_ActivityStream"], 
+                    function(config, _ActivityStream){
+                        config.Properties = ${sbtProps};
+                        new _ActivityStream(${args});
+                    }
+                );
             </script>
         </div>
-        
     </body>
 </html>

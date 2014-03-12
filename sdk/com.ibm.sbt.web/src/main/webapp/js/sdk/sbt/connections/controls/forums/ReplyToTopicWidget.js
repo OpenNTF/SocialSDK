@@ -15,27 +15,27 @@
  */
 
 /**
- * StartTopicWidget
+ * ReplyToTopicWidget
  */
 define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUtil", 
          "../../../i18n!./nls/ForumView", 
          "../../../controls/view/BaseDialogContent", "../../ForumService", 
-		 "../../../text!./templates/StartATopic.html"],
-		function(declare, lang, dom, stringUtil, nls, BaseDialogContent, ForumService, StartATopic) {
+		 "../../../text!./templates/ReplyToTopic.html"],
+		function(declare, lang, dom, stringUtil, nls, BaseDialogContent, ForumService, ReplyToTopic) {
 
 	/**
-	 * Widget which can be used create a forum topic.
+	 * Widget to reply to a forum topic.
 	 * 
-	 * @class StartTopicWidget
+	 * @class ReplyToTopicWidget
 	 * @namespace sbt.connections.controls.forums
-	 * @module sbt.connections.controls.forums.StartTopicWidget
+	 * @module sbt.connections.controls.forums.ReplyToTopicWidget
 	 */
-	var StartTopicWidget = declare([ BaseDialogContent ], {
+	var ReplyToTopicWidget = declare([ BaseDialogContent ], {
 		
 		/**
 		 * Template used to display the  content.
 		 */
-		templateString : StartATopic,
+		templateString : ReplyToTopic,
 		
 		/**
 		 * Constructor method for the StartTopicWidget.
@@ -67,7 +67,7 @@ define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUt
 		postCreate : function() {
 			this.inherited(arguments);
 			if(window['CKEDITOR'] != undefined){
-				CKEDITOR.replace(this.editor);
+				CKEDITOR.replace(this.replyEditor);
 			}
 		},
 		
@@ -77,71 +77,54 @@ define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUt
 		 * @method onExecute
 		 */
 		onExecute : function() {
-			
-			this.setExecuteEnabled(false);
-			var title = this.titleInput.value;
-			if(!title || title.trim()==""){
-				this._setErrorMessage(nls.titleError);
-				this.onError();
-				this.setExecuteEnabled(true);
-				return;
-			}
-			var tags = this.tagsInput.value;
-			var question = this.questionCheckBox.checked;
-			
-			var content ;
+		
+			this.setExecuteEnabled(false);	
+			var content="";
 			if(window['CKEDITOR'] != undefined){
 				content = CKEDITOR.instances.editor.getData();
-			}else{
-				content = "";
-			}
-			
-			var forumService = this.getForumService();
-			var topic = forumService.newForumTopic(); 
-		    topic.setForumUuid(this.forumUuid);
-		    topic.setTitle(title);
-		    topic.setContent(content);
-		    topic.setTags(tags);
-		    topic.setQuestion(question);
-		    var self = this;
-		    forumService.createForumTopic(topic).then(  
-		        function(success) { 
-		            self._handleRequestComplete(success);
-		        },
-		        function(error) {
-		        	self._handleError(error);
-		        }
-		    );
-			
+			}			
+		    
+			this._replyToTopic( content);
+		    this.setExecuteEnabled(true);	
 		},
-		
-		onCancel : function() {
-			//if this widget is part of a view
-			if(this.view && this.action){
-				this.view.actionBar.showAllActions();
-				this.view.setContent(this.view.grid);
-				this.view.grid.refreshSelectionListeners();
-			}
-		},
-		
+
 		//
 		// Internals
 		//
 		
+		_replyToTopic: function(content){
+			var forumService = this.getForumService();
+			
+			var errorCount = 0;			
+			for(var i=0; i<this.topics.length;i++){
+				var reply = forumService.newForumReply(); 
+			    reply.setTopicUuid(this.topics[i].getValue("topicUuid"));
+			    reply.setTitle(this.topics[i].getValue("title"));
+			    reply.setContent(content);
+			    var self = this;
+			    forumService.createForumReply(reply).then(  
+			        function(reply) { 
+			        	self._handleRequestComplete(reply,errorCount,i);
+			        },
+			        function(error) {
+			        	errorCount ++;
+			        	self._handleError(error);
+			        }
+			    );
+			}
+		},
+		
 		/*
 		 * Called after a request has completed 
 		 */
-		_handleRequestComplete : function(success) {
-			
-			this.setExecuteEnabled(true);
-			this._setSuccessMessage(success);
-			this.onSuccess();
-			//if this widget is part of a view
-			if(this.view && this.action){
-				this.view.actionBar.showAllActions();
-				this.view.setContent(this.view.grid);
-				this.view.grid.update(null);
+		_handleRequestComplete : function(success,errorCount,count) {
+			//if for loop is finished and no errors
+			if(count == this.topics.length && errorCount == 0){
+				this.setExecuteEnabled(true);
+				this._setSuccessMessage(success);
+				this.onSuccess();
 			}
+
 		},
 		
 		/*
@@ -150,30 +133,29 @@ define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUt
 		_handleError: function(error){
 			this.setExecuteEnabled(true);
 			this._setErrorMessage(error);
-			this.onError();
-			//if this widget is part of a view
-			if(this.view && this.action){
-				this.view.actionBar.showAction(this.action);
-				this.view.setContent(this.view.grid);
-			}
-			
+			this.onError();			
 		},
 		
 		/*
 		 * Set the successMessage for the specified add tags operation
 		 */
 		_setSuccessMessage : function(success) {
-			this.successTemplate = "<div>"+nls.topicSuccess+"</div>";
+			if(this.topics>1){
+				this.successTemplate = "<div>"+nls.replySuccess+"</div>";
+			}else{
+				this.successTemplate = "<div>"+nls.replyMultipleSuccess+"</div>";
+			}
+			
 		},
 		
 		/*
 		 * Set the errorMessage for the specified add tags operation
 		 */
 		_setErrorMessage : function(error) {
-			this.errorTemplate = "<div>"+nls.topicError+"</div>";	
+			this.errorTemplate = "<div>"+nls.replyError+"</div>";	
 		}
 
 	});
 
-	return StartTopicWidget;
+	return ReplyToTopicWidget;
 });

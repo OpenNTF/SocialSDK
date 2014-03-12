@@ -428,9 +428,11 @@ function save_new_endpoint() {
 		        opt2.value = textStatus;
 		        opt2.innerHTML = document.getElementById("new_endpoint_name").value;
 		        endpoint_list2.appendChild(opt2);
+
+		        
 		    }
-	        
 	    	$("#dialog").dialog('close');
+	    	window.location.reload();
 	    },
 	    error: function (jqXHR, textStatus, errorThrown)
 	    {

@@ -117,8 +117,9 @@ class block_ibmsbt extends block_base {
 		
 			$plugin = new SBTPlugin($this->config->endpoint);
 			$plugin->createHeader();
+	
 			if (($settings->getAuthenticationMethod($this->config->endpoint) == 'basic' && $store->getBasicAuthUsername($this->config->endpoint) != null 
-				&& $store->getBasicAuthPassword($this->config->endpoint) != null) || ($settings->getAuthenticationMethod() == 'oauth1' && $store->getRequestToken($this->config->endpoint) != null)
+				&& $store->getBasicAuthPassword($this->config->endpoint) != null) || ($settings->getAuthenticationMethod($this->config->endpoint) == 'oauth1' && $store->getRequestToken($this->config->endpoint) != null)
 				|| ($settings->getAuthenticationMethod($this->config->endpoint) == 'basic' && $settings->getBasicAuthMethod($this->config->endpoint) == 'global')
 				|| ($settings->getAuthenticationMethod($this->config->endpoint) == 'oauth2' && $store->getOAuthAccessToken($this->config->endpoint) != null)) {
 				require $this->config->plugin;

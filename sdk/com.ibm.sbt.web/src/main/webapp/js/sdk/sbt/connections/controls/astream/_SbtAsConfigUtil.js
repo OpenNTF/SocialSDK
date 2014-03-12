@@ -13,11 +13,11 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-define(["../../../declare", "../../../config", "../../../url"], function(declare, config, Url){
+define(["../../../declare", "../../../config", "../../../url", "../../../Promise"], function(declare, config, Url, Promise){
     /*
      * @class sbt.controls.astream._SbtAsConfigUtil A helper module for building ActivityStream config objects.
      */
-    var _SbtAsConfigUtil = declare([com.ibm.social.as.gadget.ActivityStreamConfigUtil],
+    var _SbtAsConfigUtil = declare(null,
     {
         /*
          * The constructor. 
@@ -29,27 +29,29 @@ define(["../../../declare", "../../../config", "../../../url"], function(declare
             this.xhrHandler = xhrHandler;
         },
         
-        /**
+        /*
+         * Goes to /rest/people/@me/@self and retrieves the user info
+         * 
+         * var ui = {
+         *     id: connId,
+         *     osId: user.id,
+         *     displayName: user.displayName
+         * };
+         *              
          * Retrieves user info from connections. 
          * @method getUserInfo
-         * @returns {lconn.core.util.LCDeferred} A promise. Resolves with a user info object containing a user id, an os id and a displayName.
+         * @returns {Promise} A promise. Resolves with a user info object containing a user id, an os id and a displayName.
          */
         getUserInfo: function() {
-            var promise = new lconn.core.util.LCDeferred();
+            var promise = new Promise();
             var microbloggingUrl = lconn.core.config.services.microblogging.secureUrl;
-            var relativeUrl = "";
-            var fullProxy = this.xhrHandler.endpoint.proxy.proxyUrl + "/" + this.xhrHandler.endpoint.proxyPath;
-            var index = microbloggingUrl.indexOf(fullProxy);
-            if(index !== -1){
-                relativeUrl = microbloggingUrl.slice(index + fullProxy.length);
-            }
-            else{
-                relativeUrl = new Url(microbloggingUrl).getPath();
-            }
+            microbloggingUrl = microbloggingUrl.replace(this.xhrHandler.getEndpoint().getProxyUrl(), "");
+            relativeUrl = microbloggingUrl.indexOf("/") === 0 ? microbloggingUrl : new Url(microbloggingUrl).getPath();
+            
             var serviceUrl = relativeUrl + "/" + this.xhrHandler.endpoint.authType + "/rest/people/@me/@self";
             
             this.xhrHandler.xhrGet({
-                serviceUrl: serviceUrl, //TODO Change these when opensocial oauth and/or endpoints become available
+                serviceUrl: serviceUrl,
                 handleAs: "json",
                 load: function(resp) {
                     var user = resp && resp.entry;
@@ -64,15 +66,15 @@ define(["../../../declare", "../../../config", "../../../url"], function(declare
                         }
 
                         var ui = {
-                                id: connId,
-                                osId: user.id,
-                                displayName: user.displayName
+                            id: connId,
+                            osId: user.id,
+                            displayName: user.displayName
                         };
-                        promise.resolve(ui);
+                        promise.fulfilled(ui);
                     }
                 },
                 error: function() {
-                    promise.reject();
+                    promise.rejected();
                 }
             });
             
@@ -118,28 +120,25 @@ define(["../../../declare", "../../../config", "../../../url"], function(declare
          * 
          * @method buildSbtConfigFull
          * @param {Object} cfg An ActivityStream config object. If this does not contain user info then user info will be added based on the currently authenticated user.
-         * @returns {lconn.core.util.LCDeferred} A promise which, when resolved, will contain a completed ActivityStream config object.
+         * @returns {Promise} A promise which, when fulfilled, will contain a completed ActivityStream config object.
          */
         buildSbtConfigFull: function(cfg){
-            if(cfg.eeManager)
-                delete cfg.eeManager;
-            var cfgPromise = new lconn.core.util.LCDeferred();
+            var cfgPromise = new Promise();
+            
             if (!cfg.userInfo || !cfg.userInfo.id || !cfg.userInfo.displayName) {
                 cfg.boardId = this.getBoardIdFromAppId(cfg.defaultUrlTemplateValues.appId);
                 this.getUserInfo().then(
                     function(ui) {
                         if (ui && ui.id && ui.displayName)
                             cfg.userInfo = ui;
-                        cfgPromise.resolve(cfg);
+                        cfgPromise.fulfilled(cfg);
                     },
                     function(error) {
-                        cfgPromise.reject(error);
+                        cfgPromise.rejected(error);
                     });
             } else {
-                cfgPromise.resolve(cfg);
+                cfgPromise.fulfilled(cfg);
             }
-            if(cfg.extensions)
-                this.requireExtensions(cfg.extensions);
             return cfgPromise;
         },
         
@@ -157,17 +156,11 @@ define(["../../../declare", "../../../config", "../../../url"], function(declare
          * @method buildSbtConfigFromFeed
          * @param {Object} args This should contain a feedUrl, and an optional extensions object.
          *     @param {String} args.feedUrl The url of the ActivityStream feed.
-         *     @params {Object} [args.extensions] A simple list of extensions to load.
-         *         @params {Boolean} [args.extensions.commenting] If true load the commenting extension.
-         *         @params {Boolean} [args.extensions.saving] If true load the saving extension.
-         *         @params {Boolean} [args.extensions.refreshButton] If true load the refresh button extension.
-         *         @params {Boolean} [args.extensions.DeleteButton] If true load the delete button extension.
-         *     
          * 
-         * @returns {lconn.core.util.LCDeferred} A promise which, when resolved, will contain a completed ActivityStream config object.
+         * @returns {Promise} A promise which, when fulfilled, will contain a completed ActivityStream config object.
          */
         buildSbtConfigFromFeed: function(args){
-            var cfgPromise = new lconn.core.util.LCDeferred();
+            var cfgPromise = new Promise();
             
             var cfg = {
                 defaultUrlTemplate : args.feedUrl,
@@ -175,38 +168,26 @@ define(["../../../declare", "../../../config", "../../../url"], function(declare
                 views : {
                     main : {}
                 },
-                eeManager : "com.ibm.social.as.ee.EEManager",
-                extensions : [
-                    "com.ibm.social.as.lconn.extension.GadgetPreloaderExtension"
-                ],
+                extensions : args.extensions || [],
+                eeManager: "com.ibm.social.as.ee.EEManager",
                 boardId: this.getBoardIdFromUrl(args.feedUrl)
             };
-            
-            if(args.extensions){
-                if(args.extensions.commenting)
-                    cfg.extensions.push("com.ibm.social.as.extension.CommentExtension");
-                if(args.extensions.saving)
-                    cfg.extensions.push("lconn.homepage.as.extension.SavedActionExtension");
-                if(args.extensions.refreshButton)
-                    cfg.extensions.push("com.ibm.social.as.gadget.refresh.RefreshButtonExtension");
-                if(args.extensions.deleteButton)
-                    cfg.extensions.push("com.ibm.social.as.lconn.extension.MicroblogDeletionExtension");
-            }
-            if(cfg.eeManager)
-                delete cfg.eeManager;
-            if(args.feedUrl.indexOf("anonymous") === -1){
+            // if public stream
+            if(args.feedUrl.indexOf("anonymous/") === -1){
                 this.getUserInfo().then(
                     function(ui) {
-                        if (ui && ui.id && ui.displayName)
+                        if (ui && ui.id && ui.displayName){
                             cfg.userInfo = ui;
-                        cfgPromise.resolve(cfg);
+                        }
+                        cfgPromise.fulfilled(cfg);
                     },
                     function(error) {
-                        cfgPromise.reject(error);
-                });
+                        cfgPromise.rejected(error);
+                    }
+                );
             } else{
                 this.requireExtensions(cfg.extensions);
-                cfgPromise.resolve(cfg);
+                cfgPromise.fulfilled(cfg);
             }
             this.requireExtensions(cfg.extensions);
             return cfgPromise;        
@@ -218,13 +199,15 @@ define(["../../../declare", "../../../config", "../../../url"], function(declare
          * 
          * @method buildSbtConfig
          * @param args If this contains a feedUrl then builds a config from it. Otherwise it should have an args.config object.
-         * @returns {lconn.core.util.LCDeferred} A promise which, when resolved, will contain a completed ActivityStream config object.
+         * @returns {Promise} A promise which, when fulfilled, will contain a completed ActivityStream config object.
          */
         buildSbtConfig: function(args){
-            if(args.feedUrl)
+            if(args.feedUrl){
                 return this.buildSbtConfigFromFeed(args);
-            else
+            }
+            else{
                 return this.buildSbtConfigFull(args.config);
+            }
         }
     });
     

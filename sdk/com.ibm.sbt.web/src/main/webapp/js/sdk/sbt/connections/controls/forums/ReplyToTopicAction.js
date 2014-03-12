@@ -15,26 +15,26 @@
  */
 
 /**
- * DeleteTopicAction
+ * ReplyToTopicAction
  */
 define([ "../../../declare", "../../../dom", "../../../lang",
-         "../../../i18n!./nls/ForumView", "./DeleteTopicWidget", 
+         "../../../i18n!./nls/ForumView", "./ReplyToTopicWidget", 
          "../../../controls/dialog/Dialog", "../../../controls/view/Action"], 
-	function(declare, dom, lang, nls, DeleteTopicWidget, Dialog, Action) {
+	function(declare, dom, lang, nls, ReplyToTopicWidget, Dialog, Action) {
 
 	/**
-	 * Action to delete a forum topic
+	 * Action to reply to a forum topic
 	 * 
-	 * @class DeleteTopicAction
+	 * @class ReplyToTopicAction
 	 * @namespace sbt.connections.controls.forums
-	 * @module sbt.connections.controls.forums.DeleteTopicAction
+	 * @module sbt.connections.controls.forums.ReplyToTopicAction
 	 */
-	var DeleteTopicAction = declare([ Action ], {
+	var ReplyToTopicAction = declare([ Action ], {
 		
-		name : nls.deleteTopic,
+		name : nls.replyToTopic,
 	
 		/**
-		 * Set topics on the associated widget. 
+		 * Set forums on the associated widget. 
 		 */
 		selectionChanged : function(state, selection, context) {
 			this.inherited(arguments);
@@ -52,23 +52,26 @@ define([ "../../../declare", "../../../dom", "../../../lang",
 		},
 
 		/**
-		 * Open dialog to upload a file.
+		 * Open the forum to create a new topic
 		 */
 		execute : function(selection, context) {
 			var self = this;
 			var widgetArgs = lang.mixin({
-				hideButtons: true,
-    			topics: selection,
-    			view: this.view,
+				topics: selection,
+				hideButtons: false,
+				view:self.view,
+				action: self,
+				forumUuid: this.grid.forumUuid,
 				displayMessage : function(template, isError) {
 					self.displayMessage(template, isError);
 				}
 			}, this.widgetArgs || {});
-			var widget = new DeleteTopicWidget(widgetArgs);
-    		
-    		var dialog = this.showDialog(widget,{ OK: nls.Delete },this.dialogArgs);
+			var widget = new ReplyToTopicWidget(widgetArgs);
+			
+			var dialogArgs = lang.mixin({dialogStyle: "width:1000px;"}, this.dialogArgs || {});
+    		var dialog = this.showDialog(widget,{ OK: nls.ok }, dialogArgs);
 		}
 	});
 
-	return DeleteTopicAction;
+	return ReplyToTopicAction;
 });

@@ -16,26 +16,36 @@
 */
 
 /**
- * Plugin Controller Class
- *
- * This class object handles all logic related to plugin management.
- *
+ * Uninstall hook
+ * 
  * @author Benjamin Jakobus
  */
-defined('SBT_SDK') OR exit('Access denied.');
-class SBTPlugin extends BasePluginController 
-{
-	function __construct($endpointName = "connections") {
-		parent::__construct($endpointName);
-	}
-	/**
-	 * Displays a given sample. 
-	 *
-	 * @param string $sample Path to the sample. e.g. 'social/blogs/all-blogs-grid'
-	 */
-	public function display($sample) 
-	{
-		$this->loadView($sample, array());
-	}
+
+
+if (!defined('ENDPOINTS')) {
+	define('ENDPOINTS', 'ibm_sbt_endpoints');
 }
+
+if (!defined('SESSION_NAME')) {
+	define('SESSION_NAME', 'ibm_sbt_session');
+}
+
+if (!defined('MOODLE_INTERNAL')) {
+	die();
+}
+
+global $DB;
+$DB->delete_records(ENDPOINTS, array());
+$DB->delete_records(SESSION_NAME, array());
+
+$dbman = $DB->get_manager();
+
+$endpoints_table = new xmldb_table(ENDPOINTS);
+$session_table = new xmldb_table(SESSION_NAME);
+
+$dbman->drop_table($endpoints_table);
+$dbman->drop_table($session_table);
+
+
+
 

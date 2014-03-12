@@ -33,7 +33,7 @@ class block_ibmsbt_edit_form extends block_edit_form {
 
         // List of available samples. Note: keys must reflect relative path from
         // core/samples and must omit the .php file extension
-        $plugins = array();
+        $plugins = array('choose' => 'Choose one...');
         $path = str_replace('core', '', BASE_PATH) . '/user_widgets/';
         if ($handle = opendir($path)) {
         	while (false !== ($file = readdir($handle))) {
@@ -54,11 +54,33 @@ class block_ibmsbt_edit_form extends block_edit_form {
         		<a href="https://www.ibmdw.net/social/">https://www.ibmdw.net/social/</a> or visit <a href="https://greenhousestage.lotus.com/sbt/sbtplayground.nsf">our playground</a>
         		 directly if you need JavaScript snippets.</p>');
         
+        global $CFG;
+        $blockPath = $CFG->dirroot . '/blocks/ibmsbt/';
+        global $PAGE;
         
+        $mform->addElement('html', '<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>');
+        $mform->addElement('html', '<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>');
+        $PAGE->requires->js(new moodle_url($CFG->wwwroot . '/blocks/ibmsbt/views/js/endpointConfig.js'));
+        
+        ob_start();
+        require $blockPath . 'views/endpointSetupDialog.php';
+        $html = ob_get_clean();
+        $mform->addElement('html', $html);
         
         // Type dropdown
         $mform->addElement('select', 'config_plugin', 'Plugin:', $plugins);
-        $mform->setDefault('config_plugin', 'social/files/files-grid');
+        $mform->setDefault('config_plugin', 'choose');
+        
+        $settings = new SBTSettings();
+        $records = $settings->getEndpoints();
+        	
+        $endpoints = array();
+        foreach ($records as $record) {
+        	$endpoints[$record->name] = $record->name;
+        }
+        
+        $mform->addElement('select', 'config_endpoint', 'Endpoint: (<a href="#" onclick="ibm_sbt_manage_endpoints();">Click here to <strong>manage your endpoints</strong></a>)', $endpoints);
+        $mform->setDefault('config_endpoint', 'connections');
         
         // Block title
         $mform->addElement('text', 'config_elementID', 'Element ID:');
@@ -67,21 +89,5 @@ class block_ibmsbt_edit_form extends block_edit_form {
         $mform->addElement('text', 'config_title', 'Title:');
         $mform->setDefault('config_title', 'default value');
         $mform->setType('config_title', PARAM_MULTILANG);
-        
-        $status = "Not authenticated";
-        $logoutButton = "";
-        $settings = new SBTSettings();
-        $store = SBTCredentialStore::getInstance();
-        
-        if (($settings->getAuthenticationMethod() == 'oauth1' || $settings->getAuthenticationMethod() == 'oauth2') && $store->getOAuthAccessToken() != null) {
-        	$status = 'Authenticated';
-        	$logoutButton = "<button>Logout from this Endpoint</button>";
-        } else if ($settings->getAuthenticationMethod() == 'basic' && $store->getBasicAuthUsername() != null) {
-        	$status = 'Authenticated';
-        	$logoutButton = "<button>Logout from this Endpoint</button>";
-        }
-        $mform->addElement('html', 'Login status:<strong>' . $status . '</strong> ' . $logoutButton);
-       
- 
     }
 }

@@ -16,205 +16,166 @@
 */
 
 /**
- * Wrapper for the Wordpress options API - encapsulates the notion of an endpoint setting.
+ * Wrapper for the configuration file - encapsulates the notion of an endpoint setting.
  * 
  * @author Benjamin Jakobus
+ *
  */
-class SBTSettings extends BaseModel {
+
+
+class SBTSettings {
 	
-	// Endpoint URL
-	private $url;
-	
-	// Consumer key
-	private $consumerKey;
-	
-	// Consumer secret
-	private $consumerSecret;
-	
-	// Request token URL
-	private $requestTokenURL;
-	
-	// Authorization URL
-	private $authorizationURL;
-	
-	// Access token URL
-	private $accessTokenURL;
-	
-	// Authentication method
-	private $authenticationMethod;
-	
-	// SDK deployment URL
-	private $sdkDeployURL;
-	
-	// Community grid settings
-	private $communityGridSettings;
-	
-	// Files grid settings
-	private $filesGridSettings;
-	
-	// Forums grid settings
-	private $forumsGridSettings;
-	
-	// Endpoint name
-	private $name;
-	
-	// Basic authentication username
-	private $basicAuthUsername;
-	
-	// Basic authentication password
-	private $basicAuthPassword;
-	
-	// Basic authentication method - must be global|prompt|profile
-	private $basicAuthMethod;
-	
-	// The JavaScript library to use
-	private $jsLibrary;
 	
 	/**
 	 * Constructor.
 	 */
 	function __construct() {
-		$this->_init();
 	}
 	
+	// TODO: Implement for standalone samples
+	
 	/**
-	 * Load variables from config.php and make them private members of
-	 * this class.
+	 * Returns a list of available endpoints.
 	 * 
-	 * @return
+	 * @return array:		Array of available endpoints.
 	 */
-	private function _init() {
-		include BASE_PATH . '/config.php';
-		
-		$this->url = $config['url'];
-		$this->consumerKey = isset($config['consumer_key']) ? $config['consumer_key']:'';
-		$this->consumerSecret = isset($config['consumer_secret']) ? $config['consumer_secret']:'';
-		$this->requestTokenURL = isset($config['request_token_url']) ? $config['request_token_url']:'';
-		$this->authorizationURL = isset($config['authorization_url']) ? $config['authorization_url']:'';
-		$this->accessTokenURL = isset($config['access_token_url']) ? $config['access_token_url']:'';
-		$this->authenticationMethod = $config['authentication_method'];
-		$this->sdkDeployURL = $config['sdk_deploy_url'];
-		$this->jsLibrary = $config['js_library'];
-		$this->name = $config['name'];
-		$this->basicAuthUsername = $config['basic_auth_username'];
-		$this->basicAuthPassword = $config['basic_auth_password'];
-		$this->basicAuthMethod = 'global';
-		
-		// Community grid default settings
-		$this->communityGridSettings['hidePager'] = true;
-		$this->communityGridSettings['hideSorter'] = true;
-		$this->communityGridSettings['containerType'] = "ul";
-		
-		// Bookmarks grid default settings
-		$this->bookmarksGridSettings['hidePager'] = true;
-		$this->bookmarksGridSettings['hideSorter'] = true;
-		$this->bookmarksGridSettings['containerType'] = "ul";
-		
-		// Files grid default settings
-		$this->filesGridSettings['hidePager'] = true;
-		$this->filesGridSettings['hideSorter'] = true;
-		$this->filesGridSettings['containerType'] = "ul";
-		
-		// Forums grid default settings
-		$this->forumsGridSettings['hidePager'] = true;
-		$this->forumsGridSettings['hideSorter'] = true;
-		$this->forumsGridSettings['containerType'] = "ul";
-	}
-	
-	/**
-	 * Returns the endpoint name.
-	 * 
-	 * @return
-	 */
-	public function getName() {
-		return $this->name;
-	}
-	
-	/**
-	 * Returns an array containing various community grid settings.
-	 * 
-	 * @return array
-	 */
-	public function getCommunityGridSettings() {
-		return $this->communityGridSettings;
-	}
-	
-	/**
-	 * Returns an array containing various bookmarks grid settings.
-	 *
-	 * @return array
-	 */
-	public function getBookmarksGridSettings() {
-		return $this->bookmarksGridSettings;
-	}
-	
-	/**
-	 * Returns an array containing various files grid settings.
-	 *
-	 * @return array
-	 */
-	public function getFilesGridSettings() {
-		return $this->filesGridSettings;
-	}
-	
-	/**
-	 * Returns an array containing various forums grid settings.
-	 *
-	 * @return array
-	 */
-	public function getForumsGridSettings() {
-		return $this->forumsGridSettings;
+	public function getEndpoints() {
+		return array();
 	}
 	
 	/**
 	 * Returns the endpoint URL.
+	 * 
+	 * @return
 	 */
-	public function getURL() {
-		return $this->url;
+	public function getURL($endpoint = "connections") {
+		return null;
+	}
+	
+	/**
+	 * Returns the auth page URL used for form-based authentication page.
+	 *
+	 * @return
+	 */
+	public function getFormBasedAuthPage($endpoint = "connections") {
+		return null;
+	}
+	
+	/**
+	 * Returns the login page URL used for form-based authentication.
+	 *
+	 * @return
+	 */
+	public function getFormBasedAuthCookieCache($endpoint = "connections") {
+		return null;
+	}
+	
+	/**
+	 * Returns the auth page used for form-based authentication login page url.
+	 *
+	 * @return
+	 */
+	public function getFormBasedAuthLoginPage($endpoint = "connections") {
+		return null;
 	}
 	
 	/**
 	 * Returns the consumer key.
+	 *
+	 * @return
 	 */
-	public function getConsumerKey() {
-		return $this->consumerKey;
+	public function getConsumerKey($endpoint = "connections") {
+		return null;
 	}
 	
 	/**
 	 * Returns the consumer secret.
+	 *
+	 * @return
 	 */
-	public function getConsumerSecret() {
-		return $this->consumerSecret;
+	public function getConsumerSecret($endpoint = "connections") {
+		return null;
+	}
+	
+	/**
+	 * Returns the OAuth 2.0 client secret.
+	 *
+	 * @return
+	 */
+	public function getClientSecret($endpoint = "connections") {
+		return null;
+	}
+	
+	/**
+	 * Returns the OAuth 2.0 client ID.
+	 *
+	 * @return
+	 */
+	public function getClientID($endpoint = "connections") {
+		return null;
 	}
 	
 	/**
 	 * Returns the request token URL.
+	 *
+	 * @return
 	 */
-	public function getRequestTokenURL() {
-		return $this->requestTokenURL;
+	public function getRequestTokenURL($endpoint = "connections") {
+		return null;
+	}
+	
+	/**
+	 * Returns true if force ssl trust on the select endpoint is enabled; false if not.
+	 *
+	 * @return
+	 */
+	public function forceSSLTrust($endpoint = "connections") {
+		return null;
 	}
 	
 	/**
 	 * Returns the authorization URL.
+	 *
+	 * @return
 	 */
-	public function getAuthorizationURL() {
-		return $this->authorizationURL;
+	public function getAuthorizationURL($endpoint = "connections") {
+		return null;
+	}
+	
+	/**
+	 * Returns the API version.
+	 *
+	 * @return
+	 */
+	public function getAPIVersion($endpoint = "connections") {
+		return null;
 	}
 	
 	/**
 	 * Returns the access token URL.
-	 */
-	public function getAccessTokenURL() {
-		return $this->accessTokenURL;
-	}
-	
-	/**
-	 * Returns the authentication method.
 	 *
 	 * @return
 	 */
-	public function getAuthenticationMethod() {
-		return $this->authenticationMethod;
+	public function getAccessTokenURL($endpoint = "connections") {
+		return null;
+	}
+	
+	/**
+	 * Returns the authentication method
+	 *
+	 * @return
+	 */
+	public function getAuthenticationMethod($endpoint = "connections") {
+		return null;
+	}
+	
+	/**
+	 * Returns the OAuth 2.0 callback URL
+	 *
+	 * @return
+	 */
+	public function getOAuth2CallbackURL($endpoint = "connections") {
+		return null;
 	}
 	
 	/**
@@ -222,28 +183,53 @@ class SBTSettings extends BaseModel {
 	 *
 	 * @return
 	 */
-	public function getSDKDeployURL() {
-		return $this->sdkDeployURL;
+	public function getSDKDeployURL($endpoint = "connections") {
+		return null;
+	}
+	
+	/**
+	 * Returns the endpoint name.
+	 *
+	 * @return
+	 */
+	public function getName($endpoint = "connections") {
+		return null;
 	}
 	
 	/**
 	 * Returns the username used for basic authentication.
 	 *
 	 * @return
-	 * @author Benjamin Jakobus
 	 */
-	public function getBasicAuthUsername() {
-		return $this->basicAuthUsername;
+	public function getBasicAuthUsername($endpoint = "connections") {
+		return null;
+	}
+	
+	/**
+	 * Returns the server type.
+	 *
+	 * @return
+	 */
+	public function getServerType($endpoint = "connections") {
+		return null;
+	}
+	
+	/**
+	 * Returns true if client access is allowed; false if not.
+	 *
+	 * @return
+	 */
+	public function allowClientAccess($endpoint = "connections") {
+		return null;
 	}
 	
 	/**
 	 * Returns the password used for basic authentication.
 	 *
 	 * @return
-	 * @author Benjamin Jakobus
 	 */
-	public function getBasicAuthPassword() {
-		return $this->basicAuthPassword;
+	public function getBasicAuthPassword($endpoint = "connections") {
+		return null;
 	}
 	
 	/**
@@ -251,8 +237,8 @@ class SBTSettings extends BaseModel {
 	 *
 	 * @return string		global|profile|prompt
 	 */
-	public function getBasicAuthMethod() {
-		return $this->basicAuthMethod;
+	public function getBasicAuthMethod($endpoint = "connections") {
+		return null;
 	}
 	
 	/**
@@ -260,7 +246,7 @@ class SBTSettings extends BaseModel {
 	 *
 	 * @return string		String indicating which library to use.
 	 */
-	public function getJSLibrary() {
-		return $this->jsLibrary;
+	public function getJSLibrary($endpoint = "connections") {
+		return null;
 	}
 }

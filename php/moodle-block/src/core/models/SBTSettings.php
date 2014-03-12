@@ -27,50 +27,33 @@ if (!isset($CFG) || !isset($CFG->wwwroot)) {
 	include_once $path . '/config.php';
 }
 
+if (!defined('ENDPOINTS')) {
+	define('ENDPOINTS', 'ibm_sbt_endpoints');
+}
+
 class SBTSettings {
 	// Misc SDK settings
-	private $sdkSettings;
+	private $sdkDeployURL;
 	
-	// Community grid settings
-	private $communityGridSettings;
-	
-	// Files grid settings
-	private $filesGridSettings;
-	
-	// Forums grid settings
-	private $forumsGridSettings;
-	
-	// Bookmarks grid settings
-	private $bookmarksGridSettings;
-	
-	// Basic authentication method - must be global|prompt|profile
-	private $basicAuthMethod;
-	
-	// The JavaScript library to use
 	private $jsLibrary;
 	
-	// Force SSL trust (true or false)
-	private $forceSSLTrust;
-	
-	// API version
-	private $apiVersion;
-	
-	// Server type (connections or smartcloud)
-	private $serverType;
-	
-	// Allow client access (true or false)
-	private $allowClientAccess;
-	
-	// OAuth 2.0 client ID
-	private $clientID;
-	
-	// OAuth 2.0 client secret
-	private $clientSecret;
 	
 	/**
 	 * Constructor.
 	 */
 	function __construct() {
+		
+		// Check if endpoints table exists. If not, create it
+		global $DB;
+		global $USER;
+		
+		$dbman = $DB->get_manager();
+		
+		$table = new xmldb_table(ENDPOINTS);
+
+		if (!$dbman->table_exists($table)) {
+			$this->_createTable($table, $dbman);
+		}
 		
 		global $DB;
 		$records = $DB->get_records('config', array());
@@ -81,30 +64,54 @@ class SBTSettings {
 			$configData[$record->name] = $record->value;
 		}
 		
-		$this->url = ($configData['auth_type'] == 'basic' ? $configData['server_url'] : $configData['o_auth_server_url']);
-		$this->consumerKey = $configData['consumer_key'];
-		$this->consumerSecret = (isset($configData['consumer_secret']) ? $configData['consumer_secret'] : "");
-		$this->clientID = (isset($configData['client_id']) ? $configData['client_id'] : "");
-		$this->clientSecret = (isset($configData['client_secret']) ? $configData['client_secret'] : "");
-		$this->requestTokenURL = (isset($configData['request_token_url']) ? $configData['request_token_url'] : "");
-		$this->authorizationURL = (isset($configData['authorization_url']) ? $configData['authorization_url'] : "");
-		$this->accessTokenURL = (isset($configData['access_token_url']) ? $configData['access_token_url'] : "");
-		$this->authenticationMethod = (isset($configData['auth_type']) ? $configData['auth_type'] : "");
 		$this->sdkDeployURL = (isset($configData['sdk_deploy_url']) ? $configData['sdk_deploy_url'] : "");
-		$this->basicAuthUsername = (isset($configData['basic_auth_username']) ? $configData['basic_auth_username'] : "");
-		$this->basicAuthPassword = (isset($configData['basic_auth_password']) ? $configData['basic_auth_password'] : "");
-		$this->basicAuthMethod = (isset($configData['basic_auth_method']) ? $configData['basic_auth_method'] : "");
-
-		$this->forceSSLTrust = (isset($configData['force_ssl_trust']) ? $configData['force_ssl_trust'] : true);
-		
-		$this->apiVersion = (isset($configData['endpoint_version']) ? $configData['endpoint_version'] : "");
-		$this->oauth2CallbackURL = (isset($configData['oauth2_callback_url']) ? $configData['oauth2_callback_url'] : "");
-		$this->serverType = (isset($configData['server_type']) ? $configData['server_type'] : "");
-		
-		$this->allowClientAccess = (isset($configData['allow_client_access']) ? $configData['allow_client_access'] : true);
-		
-		$this->name = (isset($configData['name']) ? $configData['name'] : ""); 
+		$this->jsLibrary = (isset($configData['js_library']) ? $configData['js_library'] : "");
 	}
+	
+	private function _createTable($table, $dbman) {
+		global $DB;
+		global $USER;
+		
+		
+		$table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
+		$table->add_field('name', XMLDB_TYPE_TEXT, 'big', null, null, null, null);
+		$table->add_field('server_url', XMLDB_TYPE_TEXT, 'big', null, null, null, null);
+		$table->add_field('consumer_key', XMLDB_TYPE_TEXT, 'big', null, null, null, null);
+		$table->add_field('consumer_secret', XMLDB_TYPE_TEXT, 'big', null, null, null, null);
+		$table->add_field('client_id', XMLDB_TYPE_TEXT, 'big', null, null, null, null);
+		$table->add_field('client_secret', XMLDB_TYPE_TEXT, 'big', null, null, null, null);
+		$table->add_field('request_token_url', XMLDB_TYPE_TEXT, 'big', null, null, null, null);
+		$table->add_field('oauth2_callback_url', XMLDB_TYPE_TEXT, 'big', null, null, null, null);
+		$table->add_field('authorization_url', XMLDB_TYPE_TEXT, 'big', null, null, null, null);
+		$table->add_field('access_token_url', XMLDB_TYPE_TEXT, 'big', null, null, null, null);
+		$table->add_field('auth_type', XMLDB_TYPE_TEXT, 'big', null, null, null, null);
+		$table->add_field('basic_auth_username', XMLDB_TYPE_TEXT, 'big', null, null, null, null);
+		$table->add_field('basic_auth_password', XMLDB_TYPE_TEXT, 'big', null, null, null, null);
+		$table->add_field('basic_auth_method', XMLDB_TYPE_TEXT, 'big', null, null, null, null);
+		$table->add_field('force_ssl_trust', XMLDB_TYPE_TEXT, 'big', null, null, null, null);
+		$table->add_field('api_version', XMLDB_TYPE_TEXT, 'big', null, null, null, null);
+		$table->add_field('server_type', XMLDB_TYPE_TEXT, 'big', null, null, null, null);
+		$table->add_field('allow_client_access', XMLDB_TYPE_TEXT, 'big', null, null, null, null);
+		$table->add_field('form_auth_page', XMLDB_TYPE_TEXT, 'big', null, null, null, null);
+		$table->add_field('form_auth_login_page', XMLDB_TYPE_TEXT, 'big', null, null, null, null);
+		$table->add_field('form_auth_cookie_cache', XMLDB_TYPE_TEXT, 'big', null, null, null, null);
+		
+		$table->add_field('created_by_user_id', XMLDB_TYPE_INTEGER, '10', null, null, null, null);
+		$table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
+		$dbman->create_table($table);
+	}
+	
+	/**
+	 * Returns a list of available endpoints.
+	 * 
+	 * @return array:		Array of available endpoints.
+	 */
+	public function getEndpoints() {
+		global $DB;
+		$endpoints = $DB->get_records(ENDPOINTS);
+		return $endpoints;
+	}
+	
 	
 	/**
 	 * Returns the endpoint URL.
@@ -112,7 +119,66 @@ class SBTSettings {
 	 * @return
 	 */
 	public function getURL($endpoint = "connections") {
-		return $this->url;
+		global $DB;
+		$endpoints = $DB->get_records(ENDPOINTS);
+		foreach($endpoints as $e) {
+			if ($e->name == $endpoint) {
+				return $e->server_url;
+			}
+		}
+		
+		return null;
+	}
+	
+	/**
+	 * Returns the auth page URL used for form-based authentication page.
+	 *
+	 * @return
+	 */
+	public function getFormBasedAuthPage($endpoint = "connections") {
+		global $DB;
+		$endpoints = $DB->get_records(ENDPOINTS);
+		foreach($endpoints as $e) {
+			if ($e->name == $endpoint) {
+				return $e->form_auth_page;
+			}
+		}
+	
+		return null;
+	}
+	
+	/**
+	 * Returns the login page URL used for form-based authentication.
+	 *
+	 * @return
+	 */
+	public function getFormBasedAuthCookieCache($endpoint = "connections") {
+		global $DB;
+		$endpoints = $DB->get_records(ENDPOINTS);
+		foreach($endpoints as $e) {
+			if ($e->name == $endpoint) {
+				return $e->form_auth_cookie_cache;
+			}
+		}
+	
+		return null;
+	}
+	
+	/**
+	 * Returns the auth page used for form-based authentication login page url.
+	 *
+	 * @return
+	 */
+	public function getFormBasedAuthLoginPage($endpoint = "connections") {
+		global $DB;
+		$endpoints = $DB->get_records(ENDPOINTS);
+		foreach($endpoints as $e) {
+			if ($e->name == $endpoint) {
+				return $e->form_auth_login_page;
+			}
+		}
+	
+		return null;
 	}
 	
 	/**
@@ -121,7 +187,15 @@ class SBTSettings {
 	 * @return
 	 */
 	public function getConsumerKey($endpoint = "connections") {
-		return $this->consumerKey;
+		global $DB;
+		$endpoints = $DB->get_records(ENDPOINTS);
+		foreach($endpoints as $e) {
+			if ($e->name == $endpoint) {
+				return $e->consumer_key;
+			}
+		}
+		
+		return null;
 	}
 	
 	/**
@@ -130,7 +204,15 @@ class SBTSettings {
 	 * @return
 	 */
 	public function getConsumerSecret($endpoint = "connections") {
-		return $this->consumerSecret;
+		global $DB;
+		$endpoints = $DB->get_records(ENDPOINTS);
+		foreach($endpoints as $e) {
+			if ($e->name == $endpoint) {
+				return $e->consumer_secret;
+			}
+		}
+		
+		return null;
 	}
 	
 	/**
@@ -139,7 +221,15 @@ class SBTSettings {
 	 * @return
 	 */
 	public function getClientSecret($endpoint = "connections") {
-		return $this->clientSecret;
+		global $DB;
+		$endpoints = $DB->get_records(ENDPOINTS);
+		foreach($endpoints as $e) {
+			if ($e->name == $endpoint) {
+				return $e->client_secret;
+			}
+		}
+		
+		return null;
 	}
 	
 	/**
@@ -147,8 +237,16 @@ class SBTSettings {
 	 *
 	 * @return
 	 */
-	public function getClientID($endpoint = "connections") {
-		return $this->clientID;
+	public function getClientId($endpoint = "connections") {
+		global $DB;
+		$endpoints = $DB->get_records(ENDPOINTS);
+		foreach($endpoints as $e) {
+			if ($e->name == $endpoint) {
+				return $e->client_id;
+			}
+		}
+		
+		return null;
 	}
 	
 	/**
@@ -157,7 +255,15 @@ class SBTSettings {
 	 * @return
 	 */
 	public function getRequestTokenURL($endpoint = "connections") {
-		return $this->requestTokenURL;
+		global $DB;
+		$endpoints = $DB->get_records(ENDPOINTS);
+		foreach($endpoints as $e) {
+			if ($e->name == $endpoint) {
+				return $e->request_token_url;
+			}
+		}
+		
+		return null;
 	}
 	
 	/**
@@ -166,7 +272,15 @@ class SBTSettings {
 	 * @return
 	 */
 	public function forceSSLTrust($endpoint = "connections") {
-		return $this->forceSSLTrust;
+		global $DB;
+		$endpoints = $DB->get_records(ENDPOINTS);
+		foreach($endpoints as $e) {
+			if ($e->name == $endpoint) {
+				return $e->force_ssl_trust;
+			}
+		}
+		
+		return null;
 	}
 	
 	/**
@@ -175,7 +289,15 @@ class SBTSettings {
 	 * @return
 	 */
 	public function getAuthorizationURL($endpoint = "connections") {
-		return $this->authorizationURL;
+		global $DB;
+		$endpoints = $DB->get_records(ENDPOINTS);
+		foreach($endpoints as $e) {
+			if ($e->name == $endpoint) {
+				return $e->authorization_url;
+			}
+		}
+		
+		return null;
 	}
 	
 	/**
@@ -184,7 +306,15 @@ class SBTSettings {
 	 * @return
 	 */
 	public function getAPIVersion($endpoint = "connections") {
-		return $this->apiVersion;
+		global $DB;
+		$endpoints = $DB->get_records(ENDPOINTS);
+		foreach($endpoints as $e) {
+			if ($e->name == $endpoint) {
+				return $e->api_version;
+			}
+		}
+		
+		return null;
 	}
 	
 	/**
@@ -193,7 +323,15 @@ class SBTSettings {
 	 * @return
 	 */
 	public function getAccessTokenURL($endpoint = "connections") {
-		return $this->accessTokenURL;
+		global $DB;
+		$endpoints = $DB->get_records(ENDPOINTS);
+		foreach($endpoints as $e) {
+			if ($e->name == $endpoint) {
+				return $e->access_token_url;
+			}
+		}
+		
+		return null;
 	}
 	
 	/**
@@ -202,7 +340,15 @@ class SBTSettings {
 	 * @return
 	 */
 	public function getAuthenticationMethod($endpoint = "connections") {
-		return $this->authenticationMethod;
+		global $DB;
+		$endpoints = $DB->get_records(ENDPOINTS);
+		foreach($endpoints as $e) {
+			if ($e->name == $endpoint) {
+				return $e->auth_type;
+			}
+		}
+		
+		return null;
 	}
 	
 	/**
@@ -211,7 +357,15 @@ class SBTSettings {
 	 * @return
 	 */
 	public function getOAuth2CallbackURL($endpoint = "connections") {
-		return $this->oauth2CallbackURL;
+		global $DB;
+		$endpoints = $DB->get_records(ENDPOINTS);
+		foreach($endpoints as $e) {
+			if ($e->name == $endpoint) {
+				return $e->oauth2_callback_url;
+			}
+		}
+		
+		return null;
 	}
 	
 	/**
@@ -229,7 +383,15 @@ class SBTSettings {
 	 * @return
 	 */
 	public function getName($endpoint = "connections") {
-		return $this->name;
+		global $DB;
+		$endpoints = $DB->get_records(ENDPOINTS);
+		foreach($endpoints as $e) {
+			if ($e->name == $endpoint) {
+				return $e->name;
+			}
+		}
+		
+		return null;
 	}
 	
 	/**
@@ -238,7 +400,15 @@ class SBTSettings {
 	 * @return
 	 */
 	public function getBasicAuthUsername($endpoint = "connections") {
-		return $this->basicAuthUsername;
+		global $DB;
+		$endpoints = $DB->get_records(ENDPOINTS);
+		foreach($endpoints as $e) {
+			if ($e->name == $endpoint) {
+				return $e->basic_auth_username;
+			}
+		}
+		
+		return null;
 	}
 	
 	/**
@@ -247,7 +417,15 @@ class SBTSettings {
 	 * @return
 	 */
 	public function getServerType($endpoint = "connections") {
-		return $this->serverType;
+		global $DB;
+		$endpoints = $DB->get_records(ENDPOINTS);
+		foreach($endpoints as $e) {
+			if ($e->name == $endpoint) {
+				return $e->server_type;
+			}
+		}
+		
+		return null;
 	}
 	
 	/**
@@ -256,7 +434,15 @@ class SBTSettings {
 	 * @return
 	 */
 	public function allowClientAccess($endpoint = "connections") {
-		return $this->allowClientAccess;
+		global $DB;
+		$endpoints = $DB->get_records(ENDPOINTS);
+		foreach($endpoints as $e) {
+			if ($e->name == $endpoint) {
+				return $e->allow_client_access;
+			}
+		}
+		
+		return null;
 	}
 	
 	/**
@@ -265,7 +451,15 @@ class SBTSettings {
 	 * @return
 	 */
 	public function getBasicAuthPassword($endpoint = "connections") {
-		return $this->basicAuthPassword;
+		global $DB;
+		$endpoints = $DB->get_records(ENDPOINTS);
+		foreach($endpoints as $e) {
+			if ($e->name == $endpoint) {
+				return $e->basic_auth_password;
+			}
+		}
+
+		return null;
 	}
 	
 	/**
@@ -274,7 +468,15 @@ class SBTSettings {
 	 * @return string		global|profile|prompt
 	 */
 	public function getBasicAuthMethod($endpoint = "connections") {
-		return $this->basicAuthMethod;
+		global $DB;
+		$endpoints = $DB->get_records(ENDPOINTS);
+		foreach($endpoints as $e) {
+			if ($e->name == $endpoint) {
+				return $e->basic_auth_method;
+			}
+		}
+		
+		return null;
 	}
 	
 	/**

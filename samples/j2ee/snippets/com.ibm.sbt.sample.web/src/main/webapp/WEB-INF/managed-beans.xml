@@ -83,6 +83,25 @@
         </managed-property>
     </managed-bean>
 	
+	<!-- Connections OAuth 2.0 Environment -->
+    <managed-bean>
+        <managed-bean-name>connectionsOA2Environment</managed-bean-name>
+        <managed-bean-class>com.ibm.sbt.jslibrary.SBTEnvironment</managed-bean-class>
+        <managed-bean-scope>application</managed-bean-scope>
+        <managed-property>
+            <property-name>endpoints</property-name>
+            <value>connectionsOA2:connections,connectionsOA2</value>
+        </managed-property>
+        <managed-property>
+            <property-name>properties</property-name>
+            <value>sample.email1,sample.email2</value>
+        </managed-property>
+        <managed-property>
+            <property-name>runtimes</property-name>
+            <value>connections</value>
+        </managed-property>
+    </managed-bean>
+	
 	<!-- SmartCloud Environment -->
 	<managed-bean>
 		<managed-bean-name>smartcloudEnvironment</managed-bean-name>

@@ -18,12 +18,15 @@ package com.ibm.sbt.test.js.connections.communities.api;
 import java.util.List;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.automation.core.test.BaseTest.AuthType;
 import com.ibm.sbt.automation.core.test.connections.BaseCommunitiesTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
+import com.ibm.sbt.services.client.connections.communities.CommunityServiceException;
+import com.ibm.sbt.services.client.connections.forums.ForumTopic;
 
 /**
  * @author mwallace
@@ -35,17 +38,30 @@ public class GetForumTopics extends BaseCommunitiesTest {
     static final String SNIPPET_ID = "Social_Communities_API_GetForumTopics";
 
     public GetForumTopics() {
-        setAuthType(AuthType.AUTO_DETECT);
+    	setAuthType(AuthType.AUTO_DETECT);
+    }
+    
+    @Before
+    public void createForumTopic(){
+    	ForumTopic topic = new ForumTopic();
+        topic.setForumUuid(forum.getUid());
+        topic.setTitle("Test topic");
+        topic.setContent("Test content");
+        try {
+			communityService.createForumTopic(topic, community.getCommunityUuid());
+		} catch (CommunityServiceException e) {
+			fail("Failed to create the forum topic. Test aborted.", e);
+		}
     }
 
     @Test
     public void testGetForumTopics() {
         addSnippetParam("CommunityService.communityUuid", community.getCommunityUuid());
-        
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         List jsonList = previewPage.getJsonList();
-        //Assert.assertEquals(community.getTitle(), ((JsonJavaObject)jsonList.get(0)).getString("Community Title"));
-        //Assert.assertEquals(community.getCommunityUuid(), ((JsonJavaObject)((List)jsonList.get(1)).get(0)).getString("getCommunityUuid"));
+        JsonJavaObject firstTopic = (JsonJavaObject) jsonList.get(0);
+        Assert.assertEquals(community.getCommunityUuid(), firstTopic.getString("getCommunityUuid"));
+        System.out.println(firstTopic);
     }
     
 }

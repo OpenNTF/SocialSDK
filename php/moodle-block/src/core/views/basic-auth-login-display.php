@@ -5,9 +5,9 @@
 		}
   		#ibmsbt\.loginActionForm table {
     		z-index:5000; 
-    		-webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); 
+    		-webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6); 
     		-webkit-border-radius: 6px; 
-    		-moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); 
+    		-moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6); 
     		background:#CCC4C4; 
     		-moz-border-radius: 5px; 
     		color: black;

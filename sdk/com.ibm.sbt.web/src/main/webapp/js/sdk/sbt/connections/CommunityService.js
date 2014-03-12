@@ -261,7 +261,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         },
         
         /**
-         * Create a forum topc by sending an Atom entry document containing the 
+         * Create a forum topic by sending an Atom entry document containing the 
          * new forum to the forum replies resource.
          * 
          * @method createForumTopic
@@ -269,7 +269,11 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @param {Object} [args] Argument object
          */
         createForumTopic : function(communityUuid, topicOrJson, args) {
-        	return this.service.createForumTopic(this.getCommunityUuid(), topicOrJson, args);
+            if(!lang.isString(communityUuid)){
+                args = topicOrJson;
+                topicOrJson = communityUuid;
+            }
+        	return this.service.createForumTopic(topicOrJson, args);
         },
         
         /**

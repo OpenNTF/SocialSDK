@@ -372,7 +372,7 @@ class SBTCredentialStore {
 	 *
 	 * @param string $key
 	 */
-	public function destroyStore() {
+	public function destroyStore($endpointName = "connections") {
 		
 		if ($this->_isUserLoggedIn()) {
 			$data = get_user_meta($this->userID, SESSION_NAME, true);
@@ -396,7 +396,7 @@ class SBTCredentialStore {
 		}
 	}
 	
-	public function storeToken($token) {
+	public function storeToken($token, $endpointName = "connections") {
 		$this->_store('__SBTK_TOKEN', $token);
 	}
 	
@@ -405,7 +405,7 @@ class SBTCredentialStore {
 	 *
 	 * @param string $token			The OAuth request token.
 	 */
-	public function storeRequestToken($token) {
+	public function storeRequestToken($token, $endpointName = "connections") {
 		$this->_store('__REQUEST_SBTK_TOKEN', $token);
 	}
 	
@@ -414,7 +414,7 @@ class SBTCredentialStore {
 	 *
 	 * @return string 		A request token.
 	 */
-	public function getRequestToken() {
+	public function getRequestToken($endpointName = "connections") {
 		$token = $this->_get('__REQUEST_SBTK_TOKEN');
 		return $token;
 	}
@@ -424,14 +424,14 @@ class SBTCredentialStore {
 	 *
 	 * @return string 		A token.
 	 */
-	public function getToken() {
+	public function getToken($endpointName = "connections") {
 		return $this->_get('__SBTK_TOKEN');
 	}
 	
 	/**
 	 * Deletes the OAuth tokens.
 	 */
-	public function deleteTokens() {
+	public function deleteTokens($endpointName = "connections") {
 		$this->_delete('__SBTK_TOKEN');
 		$this->_delete('__SBTK_TOKEN_TYPE');
 		$this->_delete('__OAUTH_SBTK_TOKEN');
@@ -446,20 +446,20 @@ class SBTCredentialStore {
 	 * 
 	 * @param string $token			The OAuth access token.
 	 */
-	public function storeOAuthAccessToken($token) {
+	public function storeOAuthAccessToken($token, $endpointName = "connections") {
 		$this->_store('__OAUTH_SBTK_TOKEN', $token);
 	}
 	
 	
-	public function storeTokenSecret($token) {
+	public function storeTokenSecret($token, $endpointName = "connections") {
 		$this->_store('__OAUTH_SBTK_TOKEN_SECRET', $token);
 	}
 	
-	public function storeVerifierToken($token) {
+	public function storeVerifierToken($token, $endpointName = "connections") {
 		$this->_store('__OAUTH_SBTK_VERIFIER_TOKEN', $token);
 	}
 	
-	public function getTokenSecret() {
+	public function getTokenSecret($endpointName = "connections") {
 		return $this->_get('__OAUTH_SBTK_TOKEN_SECRET');
 	}
 	
@@ -468,7 +468,7 @@ class SBTCredentialStore {
 	 *
 	 * @return string 		OAuth access token.
 	 */
-	public function getOAuthAccessToken() {
+	public function getOAuthAccessToken($endpointName = "connections") {
 		return $this->_get('__OAUTH_SBTK_TOKEN');
 	}
 	
@@ -477,7 +477,7 @@ class SBTCredentialStore {
 	 *
 	 * @return string 		OAuth verifier token.
 	 */
-	public function getVerifierToken() {
+	public function getVerifierToken($endpointName = "connections") {
 		return $this->_get('__OAUTH_SBTK_VERIFIER_TOKEN');
 	}
 	
@@ -486,7 +486,7 @@ class SBTCredentialStore {
 	 *
 	 * @param string $username		The username used to perform basic authentication.
 	 */
-	public function storeBasicAuthUsername($username) {
+	public function storeBasicAuthUsername($username, $endpointName = "connections") {
 		$this->_store('__BASIC_AUTH_SBTK_USERNAME', $username);
 	}
 	
@@ -495,7 +495,7 @@ class SBTCredentialStore {
 	 * 
 	 * @return string 		Basic auth username.
 	 */
-	public function getBasicAuthUsername() {
+	public function getBasicAuthUsername($endpointName = "connections") {
 		return $this->_get('__BASIC_AUTH_SBTK_USERNAME');
 	}
 	
@@ -504,7 +504,7 @@ class SBTCredentialStore {
 	 *
 	 * @param string $token		The OAuth 1.0 request token secret
 	 */
-	public function storeRequestTokenSecret($token) {
+	public function storeRequestTokenSecret($token, $endpointName = "connections") {
 		$this->_store('__OAUTH_REQUEST_TOKEN_SECRET', $token);
 	}
 	
@@ -513,7 +513,7 @@ class SBTCredentialStore {
 	 *
 	 * @return string 		Basic auth username.
 	 */
-	public function getRequestTokenSecret() {
+	public function getRequestTokenSecret($endpointName = "connections") {
 		return $this->_get('__OAUTH_REQUEST_TOKEN_SECRET');
 	}
 	
@@ -523,7 +523,7 @@ class SBTCredentialStore {
 	 * 
 	 * @param string $password		The password used to perform basic authentication.
 	 */
-	public function storeBasicAuthPassword($password) {
+	public function storeBasicAuthPassword($password, $endpointName = "connections") {
 		$this->_store('__BASIC_AUTH_SBTK_PASSWORD', $password);
 	}
 	
@@ -532,14 +532,14 @@ class SBTCredentialStore {
 	 *
 	 * @return string 		Basic auth password.
 	 */
-	public function getBasicAuthPassword() {
+	public function getBasicAuthPassword($endpointName = "connections") {
 		return $this->_get('__BASIC_AUTH_SBTK_PASSWORD');
 	}
 	
 	/**
 	 * Deletes stored basic authentication credentials.
 	 */
-	public function deleteBasicAuthCredentials() {
+	public function deleteBasicAuthCredentials($endpointName = "connections") {
 		$this->_delete('__BASIC_AUTH_SBTK_PASSWORD');
 		$this->_delete('__BASIC_AUTH_SBTK_USERNAME');
 		// Destroy cookie
@@ -549,7 +549,7 @@ class SBTCredentialStore {
 	/**
 	 * Deletes stored OAuth credentials.
 	 */
-	public function deleteOAuthCredentials() {
+	public function deleteOAuthCredentials($endpointName = "connections") {
 		$this->_delete('__SBTK_TOKEN_TYPE');
 		$this->_delete('__OAUTH_SBTK_TOKEN');
 		$this->_delete('__OAUTH_SBTK_TOKEN_SECRET');

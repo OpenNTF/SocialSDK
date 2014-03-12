@@ -37,7 +37,7 @@
 		require([ "sbt/dom", "sbt/config" ],
 			
 			function(dom, config) {
-				var endpoint = config.findEndpoint("connections");
+				var endpoint = config.findEndpoint("***REMOVED*** echo $this->config->endpoint; ?>");
 
 				endpoint.isAuthenticationValid({	
 					"forceAuthentication": true, 
@@ -55,7 +55,7 @@
 			});
 		
 			function grantAccess(dom, config) {
-				var endpoint = config.findEndpoint("connections");
+				var endpoint = config.findEndpoint("***REMOVED*** echo $this->config->endpoint; ?>");
 				config.Properties["loginUi"] = "dialog";
 
 				***REMOVED*** 
@@ -99,7 +99,7 @@
         		for (var i = 0; i < logoutBtn.length; i++) {
   
         			logoutBtn[i].onclick = function(evt) {	
-        				var endpoint = config.findEndpoint("connections");
+        				var endpoint = config.findEndpoint("***REMOVED*** echo $this->config->endpoint; ?>");
         				endpoint.logout({"actionUrl": "***REMOVED*** echo plugins_url(); ?>/index.php?classpath=services&class=Proxy&method=route&uid=***REMOVED*** global $USER; echo $USER->id?>&basicAuthLogout=true"}).then(
         						function(response) {
         							displayGrantAccess(dom, config);

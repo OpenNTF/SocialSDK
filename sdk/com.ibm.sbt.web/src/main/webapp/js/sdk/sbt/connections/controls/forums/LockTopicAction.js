@@ -15,23 +15,24 @@
  */
 
 /**
- * DeleteTopicAction
+ * LockTopicAction
  */
 define([ "../../../declare", "../../../dom", "../../../lang",
-         "../../../i18n!./nls/ForumView", "./DeleteTopicWidget", 
-         "../../../controls/dialog/Dialog", "../../../controls/view/Action"], 
-	function(declare, dom, lang, nls, DeleteTopicWidget, Dialog, Action) {
+         "../../../i18n!./nls/ForumView", "./LockTopicWidget", 
+         "../../../controls/dialog/Dialog", "../../../controls/view/Action",
+         "../../ForumService"], 
+	function(declare, dom, lang, nls, LockTopicWidget, Dialog, Action,ForumService) {
 
 	/**
-	 * Action to delete a forum topic
+	 * Action to Lock a forum topic
 	 * 
 	 * @class DeleteTopicAction
 	 * @namespace sbt.connections.controls.forums
-	 * @module sbt.connections.controls.forums.DeleteTopicAction
+	 * @module sbt.connections.controls.forums.LockTopicAction
 	 */
-	var DeleteTopicAction = declare([ Action ], {
+	var LockTopicAction = declare([ Action ], {
 		
-		name : nls.deleteTopic,
+		name : nls.lockTopic,
 	
 		/**
 		 * Set topics on the associated widget. 
@@ -42,13 +43,37 @@ define([ "../../../declare", "../../../dom", "../../../lang",
 			if (this.widget) {
 				this.widget.selectionChanged(selection, context);
 			}
+			
+			if(selection.length > 0){
+				var forumService = this.getForumService();
+				var topic = forumService.newForumTopic(selection[0]);
+				var isLocked = topic.isLocked();
+				if(isLocked){
+					this.actionNameNode.textContent = nls.unlockTopic;
+					this.name = nls.unlockTopic;	
+				}else {
+					this.actionNameNode.textContent = nls.lockTopic;
+					this.name = nls.lockTopic;
+				}
+			}
+			
 		},
-		
+
+		/**
+		 * Return the ForumService.
+		 */
+		getForumService : function() {
+			if (!this.forumService) {
+				var args = this.endpoint ? { endpoint : this.endpoint } : {};
+				this.forumService = new ForumService(args);
+			}
+			return this.forumService;
+		},
 		/**
 		 * Only enabled when at least one topic is selected.
 		 */
 		isEnabled : function(selection, context) {
-			return (selection.length > 0);
+			return (selection.length > 0 && selection.length < 2);
 		},
 
 		/**
@@ -64,11 +89,11 @@ define([ "../../../declare", "../../../dom", "../../../lang",
 					self.displayMessage(template, isError);
 				}
 			}, this.widgetArgs || {});
-			var widget = new DeleteTopicWidget(widgetArgs);
-    		
-    		var dialog = this.showDialog(widget,{ OK: nls.Delete },this.dialogArgs);
+			var widget = new LockTopicWidget(widgetArgs);
+
+    		var dialog = this.showDialog(widget,{ OK: nls.ok },this.dialogArgs);
 		}
 	});
 
-	return DeleteTopicAction;
+	return LockTopicAction;
 });

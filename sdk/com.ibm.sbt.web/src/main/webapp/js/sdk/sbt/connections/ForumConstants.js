@@ -50,6 +50,21 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
     	 * Term value when a forum topic is an answered question 
     	 */
     	FlagAnswered : "answered",
+    	
+    	/**
+    	 * Category term and scheme to lock a topic
+    	 */
+    	setLocked: "locked scheme=\"http://www.ibm.com/xmlns/prod/sn/flags\"",
+    	
+    	/**
+    	 * Category term and scheme to pin a topic
+    	 */
+    	setPinned: "pinned scheme=\"http://www.ibm.com/xmlns/prod/sn/flags\"",
+    	
+    	/**
+    	 * Category term and scheme to mark a topic as a question
+    	 */
+    	markAsQuestion: "question scheme=\"http://www.ibm.com/xmlns/prod/sn/flags\"",
     	    	
         /**
          * XPath expressions used when parsing a Connections Forums ATOM feed
@@ -74,6 +89,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          */
         ForumTopicXPath : lang.mixin({
             topicUuid : "a:id",
+            topicTitle: "a:title",
             forumUuid : "thr:in-reply-to/@ref",	
         	tags : "a:category[not(@scheme)]/@term",
         	permissions : "snx:permissions",

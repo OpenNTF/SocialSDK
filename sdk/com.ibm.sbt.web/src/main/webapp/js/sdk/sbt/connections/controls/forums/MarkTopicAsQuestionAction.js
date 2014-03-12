@@ -15,23 +15,24 @@
  */
 
 /**
- * DeleteTopicAction
+ * MarkTopicAsQuestionAction
  */
 define([ "../../../declare", "../../../dom", "../../../lang",
-         "../../../i18n!./nls/ForumView", "./DeleteTopicWidget", 
-         "../../../controls/dialog/Dialog", "../../../controls/view/Action"], 
-	function(declare, dom, lang, nls, DeleteTopicWidget, Dialog, Action) {
+         "../../../i18n!./nls/ForumView", "./MarkTopicAsQuestionWidget", 
+         "../../../controls/dialog/Dialog", "../../../controls/view/Action",
+         "../../ForumService"], 
+	function(declare, dom, lang, nls, MarkTopicAsQuestionWidget, Dialog, Action,ForumService) {
 
 	/**
-	 * Action to delete a forum topic
+	 * Action to mark a forum topic as a question
 	 * 
-	 * @class DeleteTopicAction
+	 * @class MarkTopicAsQuestionAction
 	 * @namespace sbt.connections.controls.forums
-	 * @module sbt.connections.controls.forums.DeleteTopicAction
+	 * @module MarkTopicAsQuestionAction
 	 */
-	var DeleteTopicAction = declare([ Action ], {
+	var MarkTopicAsQuestionAction = declare([ Action ], {
 		
-		name : nls.deleteTopic,
+		name : nls.markTopic,
 	
 		/**
 		 * Set topics on the associated widget. 
@@ -42,13 +43,38 @@ define([ "../../../declare", "../../../dom", "../../../lang",
 			if (this.widget) {
 				this.widget.selectionChanged(selection, context);
 			}
+			
+			if(selection.length > 0){
+				var forumService = this.getForumService();
+				var topic = forumService.newForumTopic(selection[0]);
+				var isQuestion = topic.isQuestion();
+				if(isQuestion){
+					this.actionNameNode.textContent = nls.unmarkTopic;
+					this.name = nls.unmarkTopic;	
+				}else {
+					this.actionNameNode.textContent = nls.markTopic;
+					this.name = nls.markTopic;
+				}
+			}
+		},
+		
+		
+		/**
+		 * Return the ForumService.
+		 */
+		getForumService : function() {
+			if (!this.forumService) {
+				var args = this.endpoint ? { endpoint : this.endpoint } : {};
+				this.forumService = new ForumService(args);
+			}
+			return this.forumService;
 		},
 		
 		/**
 		 * Only enabled when at least one topic is selected.
 		 */
 		isEnabled : function(selection, context) {
-			return (selection.length > 0);
+			return (selection.length > 0 && selection.length < 2);
 		},
 
 		/**
@@ -64,11 +90,11 @@ define([ "../../../declare", "../../../dom", "../../../lang",
 					self.displayMessage(template, isError);
 				}
 			}, this.widgetArgs || {});
-			var widget = new DeleteTopicWidget(widgetArgs);
-    		
-    		var dialog = this.showDialog(widget,{ OK: nls.Delete },this.dialogArgs);
+			var widget = new MarkTopicAsQuestionWidget(widgetArgs);
+
+    		var dialog = this.showDialog(widget,{ OK: nls.ok },this.dialogArgs);
 		}
 	});
 
-	return DeleteTopicAction;
+	return MarkTopicAsQuestionAction;
 });

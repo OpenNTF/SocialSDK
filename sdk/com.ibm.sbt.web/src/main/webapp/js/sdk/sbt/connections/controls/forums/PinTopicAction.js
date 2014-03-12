@@ -15,23 +15,24 @@
  */
 
 /**
- * DeleteTopicAction
+ * PinTopicAction
  */
 define([ "../../../declare", "../../../dom", "../../../lang",
-         "../../../i18n!./nls/ForumView", "./DeleteTopicWidget", 
-         "../../../controls/dialog/Dialog", "../../../controls/view/Action"], 
-	function(declare, dom, lang, nls, DeleteTopicWidget, Dialog, Action) {
+         "../../../i18n!./nls/ForumView", "./PinTopicWidget", 
+         "../../../controls/dialog/Dialog", "../../../controls/view/Action",
+         "../../ForumService"], 
+	function(declare, dom, lang, nls, PinTopicWidget, Dialog, Action, ForumService) {
 
 	/**
-	 * Action to delete a forum topic
+	 * Action to pin a forum topic
 	 * 
-	 * @class DeleteTopicAction
+	 * @class PinTopicAction
 	 * @namespace sbt.connections.controls.forums
-	 * @module sbt.connections.controls.forums.DeleteTopicAction
+	 * @module PinTopicAction
 	 */
-	var DeleteTopicAction = declare([ Action ], {
+	var PinTopicAction = declare([ Action ], {
 		
-		name : nls.deleteTopic,
+		name : nls.pinTopic,
 	
 		/**
 		 * Set topics on the associated widget. 
@@ -42,13 +43,37 @@ define([ "../../../declare", "../../../dom", "../../../lang",
 			if (this.widget) {
 				this.widget.selectionChanged(selection, context);
 			}
+			
+			if(selection.length > 0){
+				var forumService = this.getForumService();
+				var topic = forumService.newForumTopic(selection[0]);
+				var isPinned = topic.isPinned();
+				if(isPinned){
+					this.actionNameNode.textContent = nls.unpinTopic;
+					this.name = nls.unpinTopic;
+				}else {
+					this.actionNameNode.textContent = nls.pinTopic;
+					this.name = nls.pinTopic;		
+				}
+			}
+		},
+		
+		/**
+		 * Return the ForumService.
+		 */
+		getForumService : function() {
+			if (!this.forumService) {
+				var args = this.endpoint ? { endpoint : this.endpoint } : {};
+				this.forumService = new ForumService(args);
+			}
+			return this.forumService;
 		},
 		
 		/**
 		 * Only enabled when at least one topic is selected.
 		 */
 		isEnabled : function(selection, context) {
-			return (selection.length > 0);
+			return (selection.length > 0 && selection.length < 2);
 		},
 
 		/**
@@ -64,11 +89,11 @@ define([ "../../../declare", "../../../dom", "../../../lang",
 					self.displayMessage(template, isError);
 				}
 			}, this.widgetArgs || {});
-			var widget = new DeleteTopicWidget(widgetArgs);
-    		
-    		var dialog = this.showDialog(widget,{ OK: nls.Delete },this.dialogArgs);
+			var widget = new PinTopicWidget(widgetArgs);
+			
+			var dialog = this.showDialog(widget,{ OK: nls.ok },this.dialogArgs);
 		}
 	});
 
-	return DeleteTopicAction;
+	return PinTopicAction;
 });

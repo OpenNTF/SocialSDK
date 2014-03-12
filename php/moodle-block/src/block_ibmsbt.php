@@ -64,7 +64,7 @@ class block_ibmsbt extends block_base {
 			global $CFG;
 			
 			$blockPath = $CFG->dirroot . '/blocks/ibmsbt/';
-			
+
 			
 			// If the user clicked "login", then trigger the OAuth dance
 			if (isset($_COOKIE['IBMSBTKOAuthLogin']) && $_COOKIE['IBMSBTKOAuthLogin'] == 'yes' && $store->getOAuthAccessToken($this->config->endpoint) == null) {
@@ -88,8 +88,9 @@ class block_ibmsbt extends block_base {
 				}
 			
 				$service = '/files/basic/api/myuserlibrary/feed';
-		
-				$response = $endpoint->makeRequest($settings->getURL($this->config->endpoint), $service, 'GET', null, null);
+
+				$response = $endpoint->makeRequest($settings->getURL($this->config->endpoint), $service, 'GET', array(), null, null, $this->config->endpoint);
+
 				if (is_string($response)) {
 					echo response;
 					$this->content->text = ob_get_clean();
@@ -134,7 +135,7 @@ class block_ibmsbt extends block_base {
 				if (!isloggedin()) {
 					echo "This widget uses single-sign on. Please log into Moodle.";
 				} else {
-					require_once $blockPath . '/core/views/basic-auth-login-display.php';
+					require $blockPath . '/core/views/basic-auth-login-display.php';
 				}
 			} else if ($settings->getAuthenticationMethod($this->config->endpoint) == 'oauth1' 
 					|| $settings->getAuthenticationMethod($this->config->endpoint) == 'oauth2') {
@@ -217,15 +218,15 @@ class block_ibmsbt extends block_base {
 			$this->loadModel('SBTCredentialStore');
 			$store = SBTCredentialStore::getInstance();
 			$token = $store->getOAuthAccessToken($this->config->endpoint);
-				
+
 			if ($token == null) {					
 				$parameters = array(
 						'response_type' => 'code',
-						'client_id'     => $settings->getConsumerKey($this->config->endpoint),
+						'client_id'     => $settings->getClientId($this->config->endpoint),
 						'callback_uri'  => $settings->getOAuth2CallbackURL($this->config->endpoint)
 				);
 					
-				$authURL = $settings->getAuthorizationURL() . '?' . http_build_query($parameters, null, '&');
+				$authURL = $settings->getAuthorizationURL($this->config->endpoint) . '?' . http_build_query($parameters, null, '&');
 		
 				if (!headers_sent()) {
 					header("Location: " . $authURL);

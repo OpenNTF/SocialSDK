@@ -88,7 +88,7 @@ class BasePluginController extends BaseController {
 			// Check if we have an access token. If not, re-direct user to authentication page
 			$this->loadModel('SBTCredentialStore');
 			$store = SBTCredentialStore::getInstance();
-			$token = $store->getOAuthAccessToken();
+			$token = $store->getOAuthAccessToken($endpointName);
 			
 			if ($token == null) {
 				// Autoloader
@@ -101,11 +101,11 @@ class BasePluginController extends BaseController {
 			
 				$parameters = array(
 						'response_type' => 'code',
-						'client_id'     => $settings->getConsumerKey(),
-						'callback_uri'  => $settings->getOAuth2CallbackURL()
+						'client_id'     => $settings->getClientId($endpointName),
+						'callback_uri'  => urlencode($settings->getOAuth2CallbackURL($endpointName))
 				); 
-			
-				$authURL = $settings->getAuthorizationURL() . '?' . http_build_query($parameters, null, '&');
+			die($settings->getClientId($endpointName));
+				$authURL = $settings->getAuthorizationURL($endpointName) . '?' . http_build_query($parameters, null, '&');
 				
 				if (!headers_sent()) {
 					header("Location: " . $authURL);

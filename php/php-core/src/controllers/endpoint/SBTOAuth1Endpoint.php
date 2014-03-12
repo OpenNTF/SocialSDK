@@ -130,7 +130,7 @@ class SBTOAuth1Endpoint extends BaseController implements SBTEndpoint
 		if (isset($_GET['endpointName'])) {
 			$endpointName = $_GET['endpointName'];
 		}
-		
+
 		$settings = new SBTSettings();
 		$store = SBTCredentialStore::getInstance();
 		$store->storeRequestToken($_GET['oauth_token'], $endpointName);

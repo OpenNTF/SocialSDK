@@ -80,6 +80,12 @@ $(function() {
       });
 });
 
+function ibm_sbt_generate_callback_url() {
+	var url = "<?php global $USER; global $CFG; echo $CFG->wwwroot . '/blocks/ibmsbt/core/index.php?classpath=endpoint&class=SBTOAuth2Endpoint&uid=' . $USER->id . '&method=authenticationCallback&endpointName='?>";
+	url += document.getElementById('new_endpoint_name').value;
+	document.getElementById('new_callback_url').value = url;
+}
+
 function new_server_type_change() {
 	var server_type = document.getElementById("new_server_type");
 
@@ -170,8 +176,8 @@ function change_new_authentication_method() {
 			document.getElementById("new_endpoint_url").value = 'https://apps.na.collabserv.com';
 		}
 		
-		document.getElementById("new_authorization_url").value = document.getElementById("new_endpoint_url").value + '/manage/oauth2/authorize';
-		document.getElementById("new_access_token_url").value = document.getElementById("new_endpoint_url").value + '/manage/oauth2/token';
+		document.getElementById("new_authorization_url").value = '/manage/oauth2/authorize';
+		document.getElementById("new_access_token_url").value = '/manage/oauth2/token';
 		document.getElementById("new_request_token_url").value = document.getElementById("new_endpoint_url").value + '';
 		
 		document.getElementById("lb_new_consumer_secret").innerHTML = 'ClientSecret';
@@ -370,6 +376,12 @@ function save_new_endpoint() {
 		var endpoint_list = document.getElementById("endpoint_list");
 		endpoint_id = endpoint_list.options[endpoint_list.selectedIndex].value;
 	}
+
+	var access_url = document.getElementById("new_endpoint_url").value + document.getElementById("new_access_token_url").value;
+	var auth_url = document.getElementById("new_endpoint_url").value + document.getElementById("new_authorization_url").value;
+	var request_url = document.getElementById("new_endpoint_url").value + document.getElementById("new_request_token_url").value;
+	
+
 	
 	var formData = {
 		id: endpoint_id,
@@ -377,10 +389,11 @@ function save_new_endpoint() {
 		consumer_secret: document.getElementById("new_consumer_secret").value,
 		consumer_key: document.getElementById("new_consumer_key").value,
 		api_version: document.getElementById("new_endpoint_version").value,
-		access_token_url: document.getElementById("new_endpoint_url").value + document.getElementById("new_access_token_url").value,
-		authorization_url: document.getElementById("new_endpoint_url").value + document.getElementById("new_authorization_url").value,
-		access_token_url: document.getElementById("new_endpoint_url").value + document.getElementById("new_access_token_url").value,
-		request_token_url: document.getElementById("new_endpoint_url").value + document.getElementById("new_request_token_url").value,
+		client_id: document.getElementById("new_consumer_key").value,
+		client_secret: document.getElementById("new_consumer_secret").value,
+		access_token_url: access_url,
+		authorization_url: auth_url,
+		request_token_url: request_url,
 		basic_auth_username: document.getElementById("new_basic_auth_username").value,
 		basic_auth_password: document.getElementById("new_basic_auth_password").value,
 		force_ssl_trust: document.getElementById("new_force_ssl_trust").checked,
@@ -640,6 +653,7 @@ function ibm_sbt_edit_endpoint() {
 			</td>
 			<td>
 				<input size="50" type="text" id="new_callback_url" name="new_callback_url" value="" />
+				<button onclick="ibm_sbt_generate_callback_url();">Generate</button>
 			</td>
 		</tr>
 		<tr style="display: none;" id="tr_new_basic_auth_username">

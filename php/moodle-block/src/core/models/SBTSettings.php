@@ -112,6 +112,7 @@ class SBTSettings {
 		return $endpoints;
 	}
 	
+	
 	/**
 	 * Returns the endpoint URL.
 	 * 
@@ -236,7 +237,7 @@ class SBTSettings {
 	 *
 	 * @return
 	 */
-	public function getClientID($endpoint = "connections") {
+	public function getClientId($endpoint = "connections") {
 		global $DB;
 		$endpoints = $DB->get_records(ENDPOINTS);
 		foreach($endpoints as $e) {

@@ -113,7 +113,12 @@ public abstract class AssetImporter {
 		String location = document.getItemValueString("Location");
 		String userName = document.getItemValueString("User");
 		String password = document.getItemValueString("Password");
-		ImportSource src = new ImportSource(name,source,location,userName,password);
+		String[] runtimes = null;
+		String sRuntimes = document.getItemValueString("Runtimes");
+		if(StringUtil.isNotEmpty(sRuntimes)) {
+			runtimes = StringUtil.splitString(sRuntimes, ',');
+		}
+		ImportSource src = new ImportSource(name,source,location,userName,password,runtimes);
 		return src;
 	}
 	protected int importAssets(ImportSource source, VFSFile root, Node node, final AsyncAction action) throws Exception {

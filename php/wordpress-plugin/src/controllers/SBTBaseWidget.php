@@ -67,7 +67,7 @@ class SBTBaseWidget extends WP_Widget {
  			$response = $endpoint->makeRequest($settings->getURL(), $service, 'GET', null, null);
  			if ($response->getStatusCode() == 401) {
  				$store->deleteOAuthCredentials();
- 				setcookie('IBMSBTKOAuthLogin', "", $timestamp - 86400);
+ 				setcookie('IBMSBTKOAuthLogin', "", $timestamp - 604800);
  				require BASE_PATH . '/core/views/oauth-login-display.php';
  			}
  		}		
@@ -75,6 +75,7 @@ class SBTBaseWidget extends WP_Widget {
 		if (($settings->getAuthenticationMethod() == 'oauth1' || $settings->getAuthenticationMethod() == 'oauth2') && $store->getOAuthAccessToken() == null &&
 		(!isset($_COOKIE['IBMSBTKOAuthLogin']) || $_COOKIE['IBMSBTKOAuthLogin'] != 'yes')) {
 			require BASE_PATH . '/core/views/oauth-login-display.php';
+			echo '</div>';
 			return;
 		}
 

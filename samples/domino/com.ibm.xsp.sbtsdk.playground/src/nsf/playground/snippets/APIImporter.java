@@ -17,12 +17,14 @@ import nsf.playground.json.JsonJavaObjectI;
 
 import com.ibm.commons.runtime.util.URLEncoding;
 import com.ibm.commons.util.PathUtil;
+import com.ibm.commons.util.QuickSort.StringArray;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.json.JsonException;
 import com.ibm.commons.util.io.json.JsonGenerator;
 import com.ibm.commons.util.io.json.JsonJavaFactory;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.commons.util.io.json.JsonParser;
+import com.ibm.commons.util.io.json.util.JsonDump;
 import com.ibm.sbt.playground.assets.Asset;
 import com.ibm.sbt.playground.assets.AssetNode;
 import com.ibm.sbt.playground.assets.Node;
@@ -76,7 +78,6 @@ public class APIImporter extends AssetImporter {
 			setItemValue(doc,"Id", id);
 			setItemValue(doc,"Category", category);
 			setItemValue(doc,"Name", name);
-//			setItemValue(doc,"FilterRuntimes", snippet.getProperty("runtimes"));
 			setItemValue(doc,"ImportSource", source);
 			setItemValueRichText(doc,"Json", json);
 			setItemValueRichText(doc,"Properties", properties);
@@ -189,7 +190,11 @@ public class APIImporter extends AssetImporter {
 		if(doc!=null) {
 			//JsonDump.dumpObject(JsonJavaFactory.instanceEx2, doc);
 			if(action!=null) {
-				action.updateTask("Importing: {0}", doc.get("Title"));
+				String title = (String)doc.get("vtitle");
+				if(StringUtil.isEmpty(title)) {
+					title = "Documentation...";
+				}
+				action.updateTask("Importing: {0}", title);
 			}
 			String apiExplorerPath = trimSeparator(doc.getString("APIExplorerPath"));
 			int pos = apiExplorerPath.indexOf('#');
@@ -199,6 +204,9 @@ public class APIImporter extends AssetImporter {
 			
 			String[] products = StringUtil.splitString(doc.getString("Products"),',');
 			fixProducts(products);
+			if(!containsRuntime(source, products)) {
+				return;
+			}
 			
 			String s = doc.toString();
 			List mt = (List)doc.get("RequestsDetails");
@@ -230,6 +238,24 @@ public class APIImporter extends AssetImporter {
 			}
 		}
 	}
+	protected boolean containsRuntime(ImportSource source, String[] products) {
+		String[] filters = source.getRuntimes();
+		if(filters==null || filters.length==0) {
+			// No filters...
+			return true;
+		}
+		for(int i=0; i<filters.length; i++) {
+			String filter = filters[i];
+			for(int j=0; j<products.length; j++) {
+				String product = products[j];
+				if(StringUtil.equals(filter,product)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
 	protected JsonJavaObject createAPIEntry(RestClient client, JsonJavaObject e, int method, AsyncAction action) throws Exception {
 		JsonJavaObject je = new JsonJavaObject();
 		//String name = (String)e.get("Title");
@@ -320,6 +346,9 @@ public class APIImporter extends AssetImporter {
 		}
 	}
 	protected List<DocEntry> loadEntries(RestClient client, ImportSource source) throws IOException {
+		// To use when the view will be categorized...
+		String[] runtimes = source.getRuntimes();
+		
 		ArrayList<DocEntry> list = new ArrayList<APIImporter.DocEntry>();
 		try {
 			String path = URLEncoding.encodeURIString("/api/data/collections/name/AllAPIExplorer?ps=99999","utf-8",0,false);
@@ -391,6 +420,5 @@ public class APIImporter extends AssetImporter {
 		protected boolean isForceTrustSSLCertificate() throws ClientServicesException {
 			return true;
 		}
-	}
-	
+	}	
 }

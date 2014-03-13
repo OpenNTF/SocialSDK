@@ -74,7 +74,7 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
     
     protected Map<String, Object> clientParams = new HashMap<String, Object>();
     
-    private static final int authenticationErrorCode = 401;
+    private int authenticationErrorCode = 401;
     
     protected static final String PLATFORM_CONNECTIONS = "connections";
     protected static final String PLATFORM_SMARTCLOUD = "smartcloud";
@@ -133,6 +133,10 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
     	return authenticationErrorCode;
     }
 
+
+	public void setAuthenticationErrorCode(int code){
+    	authenticationErrorCode = code;
+    }
     public void setRequiresAuthentication(boolean requiresAuthentication) throws ClientServicesException {
         this.requiresAuthentication = requiresAuthentication;
     }

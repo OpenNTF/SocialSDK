@@ -18,12 +18,12 @@
  * 
  */
 define([ "../_bridge/declare", "dijit/Dialog", "dijit/_Templated"], 
-    function(declare, Dialog, _Templated) {
+    function(declare) {
 
     /**
      * @module sbt.widget._TemplatedDialog
      */
-    var _TemplatedDialog = declare([ Dialog, _Templated ], {        
+    var _TemplatedDialog = declare([ dijit.Dialog, dijit._Templated ], {        
     	
     	nls : null,
     	

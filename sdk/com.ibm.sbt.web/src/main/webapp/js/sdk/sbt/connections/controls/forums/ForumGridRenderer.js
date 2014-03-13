@@ -19,6 +19,7 @@ define(["../../../declare",
         "../../../i18n",
         "../../../dom",
         "../../../lang",
+        "../../../connections/ForumConstants",
         "../../../text!./templates/ForumRow.html",
         "../../../text!./templates/TableHeader.html",
         "../../../text!./templates/TopicRow.html",
@@ -33,7 +34,7 @@ define(["../../../declare",
         "../../../text!./templates/BootstrapTopicRow.html",
         "../../../i18n!./nls/ForumGridRenderer"], 
 
-    function(declare, ConnectionsGridRenderer, i18n, dom, lang, ForumRow, tableHeader, TopicRow, ForumTopicRow,
+    function(declare, ConnectionsGridRenderer, i18n, dom, lang, consts, ForumRow, tableHeader, TopicRow, ForumTopicRow,
                     TopicHeader, ReplyTemplate, ReplyHeader,ReplyBreadCrumb,TopicBreadCrumb, 
                     MyTopicsBreadCrumb, BootstrapForumRow,BootstrapTopicRow, nls){
                 
@@ -253,6 +254,36 @@ define(["../../../declare",
                     
                  getUserProfileHref: function(grid,item,i,items){
                          return this.getProfileUrl(grid,item.getValue("authorUserid"));
+                 },
+                 
+                 rendererPinnedLogo: function(grid,item,i,items){
+                	 var terms = item.getValue("categoryTerm");
+                	 for(var i=0;i<terms.length;i++){
+                 		if(terms[i].indexOf(consts.FlagPinned) != -1){
+                			return "lconnSprite lconnSprite-iconPin16";
+                		}
+                	}
+                	return "";
+                 },
+                 
+                 isTopicLocked: function(grid,item,i,items){
+                	 var terms = item.getValue("categoryTerm");
+                	 for(var i=0;i<terms.length;i++){
+                 		if(terms[i].indexOf(consts.FlagLocked) != -1){
+                 			return "[Locked]";
+                 		}
+                 	}
+                 	return ""; 
+                 },
+                 
+                 renderPinnedRow: function(grid,item,i,items){
+                	 var terms = item.getValue("categoryTerm");
+                	 for(var i=0;i<terms.length;i++){
+                 		if(terms[i].indexOf(consts.FlagPinned) != -1){
+                 			return "pinnedTopic lotusPinnedRow";
+                 		}
+                 	}
+                 	return "normalTopic";
                  }
             });
         

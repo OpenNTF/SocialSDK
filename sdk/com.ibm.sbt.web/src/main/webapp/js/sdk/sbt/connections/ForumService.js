@@ -310,6 +310,14 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         setTopicUuid : function(topicUuid) {
             return this.setAsString("topicUuid", topicUuid);
         },
+        
+        getTopicTitle: function(){
+        	return this.getAsString("topicTitle");
+        },
+        
+        setTopicTitle: function(title){
+        	return this.setAsString("topicTitle", title);
+        },
 
         /**
          * Return the value of IBM Connections forum ID from forum ATOM
@@ -384,7 +392,22 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @return {Boolean} 
          */
         isPinned : function() {
-        	return this.getAsBoolean("pinned");
+        	var terms = this.getAsArray("categoryTerm");
+        	var pinned = consts.FlagPinned;
+        	
+        	if(lang.isArray(terms)){
+        		for(var i=0;i<terms.length;i++){
+            		if(terms[i].indexOf(pinned) != -1){
+            			return true;
+            		}
+            	}
+        	}else if(lang.isString(terms)){
+        		if(terms.indexOf(pinned) != -1){
+        			return true;
+        		}
+        	}else{
+        		return false;
+        	}
         },
         
         /**
@@ -395,7 +418,27 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @return {ForumTopic} 
          */
         setPinned : function(pinned) {
-        	return this.setAsBoolean("pinned", pinned);
+        	var terms = this.getAsArray("categoryTerm");
+        	if(pinned){
+        		if(terms){
+        			terms.push(consts.setPinned);
+        		}else{
+        			this.setAsArray("categoryTerm",consts.setPinned );
+        		}
+        		
+        	}else{
+        		if(terms){
+        			var pinned = consts.FlagPinned;
+	        		for(var i=0;i<terms.length;i++){
+	        			if(terms[i].indexOf(pinned) !=-1){
+	        				terms.splice(i,1);
+	        			}
+	        		}
+	        		this.setAsArray("categoryTerm",terms);
+        		}
+        		
+        	}
+        	
         },
         
         /**
@@ -405,7 +448,23 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @return {Boolean} 
          */
         isLocked : function() {
-        	return this.getAsBoolean("locked");
+        	var terms = this.getAsArray("categoryTerm");
+        	var locked = consts.FlagLocked;
+        	
+        	if(lang.isArray(terms)){
+        		for(var i=0;i<terms.length;i++){
+            		if(terms[i].indexOf(locked) !=-1){
+            			return true;
+            		}
+            	}
+        	}else if(lang.isString(terms)){
+        		if(terms.indexOf(locked) !=-1){
+        			return true;
+        		}
+        	}else{
+        		return false;
+        	}
+
         },
         
         /**
@@ -416,7 +475,26 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @return {ForumTopic} 
          */
         setLocked : function(locked) {
-        	return this.setAsBoolean("locked", locked);
+        	var terms = this.getAsArray("categoryTerm");
+        	if(locked){
+        		if(terms){
+        			terms.push(consts.setLocked);
+        		}else{
+        			this.setAsArray("categoryTerm",consts.setLocked);
+        		}
+        		
+        	}else{
+        		if(terms){
+        			var locked = consts.FlagLocked;
+	        		for(var i=0;i<terms.length;i++){
+	        			if(terms[i].indexOf(locked) !=-1){
+	        				terms.splice(i,1);
+	        			}
+	        		}
+	        		this.setAsArray("categoryTerm",terms);
+        		}
+        		
+        	}
         },
         
         /**
@@ -426,7 +504,22 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @return {Boolean} 
          */
         isQuestion : function() {
-        	return this.getAsBoolean("question");
+        	var terms = this.getAsArray("categoryTerm");
+        	var question = consts.FlagQuestion;
+        	
+        	if(lang.isArray(terms)){
+        		for(var i=0;i<terms.length;i++){
+            		if(terms[i].indexOf(question) != -1){
+            			return true;
+            		}
+            	}
+        	}else if(lang.isString(terms)){
+        		if(terms.indexOf(question) != -1){
+        			return true;
+        		}
+        	}else{
+        		return false;
+        	}
         },
         
         /**
@@ -437,7 +530,27 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @return {Boolean} 
          */
         setQuestion : function(question) {
-        	return this.setAsBoolean("question", question);
+        	var terms = this.getAsArray("categoryTerm");
+        	if(question){
+        		if(terms){
+        			terms.push(consts.markAsQuestion);
+        		}else{
+        			this.setAsArray("categoryTerm",consts.markAsQuestion);
+        		}
+        		
+        	}else{
+        		var questionFlag = consts.FlagQuestion;
+        		if(terms){
+	        		for(var i=0;i<terms.length;i++){
+	        			if(terms[i].indexOf(questionFlag) !=-1){
+	        				terms.splice(i,1);
+	        			}
+	        		}
+        		
+        			this.setAsArray("categoryTerm",terms);
+        		}
+        		
+        	}
         },
         
         /**

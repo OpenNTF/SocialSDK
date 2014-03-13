@@ -1,13 +1,13 @@
 require([ "sbt/connections/SearchService", "sbt/dom" ], 
 	function(SearchService, dom) {
 	
-		var searchService = new SearchService();
+	var searchService = new SearchService();
 	
-		dom.byId("searchBtn").onclick = function(ev) {
-		dom.byId("error").style.display = "none";
-		dom.byId("peopleTable").style.display = "none";
-		dom.byId("searching").appendChild(dom.createTextNode("Searching..."));
-		
+	dom.byId("searchBtn").onclick = function(ev) {
+		showError();
+    	clearResults();
+		showSearching(true);
+				
 		var topic = dom.byId("topicInput").value;
 		
 		searchService.getPeople(topic).then(
@@ -31,10 +31,32 @@ require([ "sbt/connections/SearchService", "sbt/dom" ],
 		);
 	};
 	
+	var clearResults = function() {
+		var table = dom.byId("tableBody");
+		while (table.childNodes[0]) {
+            dom.destroy(table.childNodes[0]);
+        }
+		table.style.display = "none";
+	}
+	
 	var showError = function(message) {
-		var errorDiv = dom.byId("error");
-		errorDiv.style.display = "";
-		errorDiv.appendChild(dom.createTextNode(message));
+		if (message) {
+		    dom.setText("error", "Error: " + message);
+		    dom.byId("error").style.display = "";
+		} else {
+		    dom.setText("error", "");
+		    dom.byId("error").style.display = "none";
+		}
+	};
+	
+	var showSearching = function(searching) {
+		if (searching) {
+		    dom.setText("searching", "Searching...");
+		    dom.byId("searching").style.display = "";
+		} else {
+		    dom.setText("searching", "");
+		    dom.byId("searching").style.display = "none";
+		}
 	};
 	
 	var createRow = function(facet) {

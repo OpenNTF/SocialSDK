@@ -153,7 +153,27 @@ class Proxy extends BaseController
 			$endpoint = new SBTOAuth1Endpoint();
 		}
 
-		$response = $endpoint->makeRequest($server, $url, $method, $options, $body, $forwardHeader, $endpointName);
+	
+		// ...yes, this is ugly
+		$containsServerURL = false;
+		if (strpos($url, '/https/') == 0) {
+			$url = str_replace('/https/', 'https://', $url);
+			$result = parse_url($url);
+			if (isset($result['scheme'])) {
+				$url = str_replace($server, '', $url);
+				$containsServerURL = true;
+			}
+		} else if (strpos($url, '/http/') == 0) {
+			$url = str_replace('/http/', 'http://', $url);
+			$url = str_replace('/https/', 'https://', $url);
+			$result = parse_url($url);
+			if (isset($result['scheme'])) {
+				$url = str_replace($server, '', $url);
+				$containsServerURL = true;
+			}
+		}
+		
+ 		$response = $endpoint->makeRequest($server, $url, $method, $options, $body, $forwardHeader, $endpointName);
 
 		if ($response->getStatusCode() == 200) {
 			if (isset($_REQUEST["isAuthenticated"]) && $settings->getAuthenticationMethod() == "basic") {
@@ -167,7 +187,8 @@ class Proxy extends BaseController
 				header(':', true, $response->getStatusCode());
 				header('X-PHP-Response-Code: ' . $response->getStatusCode(), true, $response->getStatusCode());
 				
-				if (isset($_REQUEST['actionType']) && $_REQUEST['actionType'] == 'download') {
+				if ( (isset($_REQUEST['actionType']) && $_REQUEST['actionType'] == 'download') || (strpos($url, '/media/') != false && strpos($url, '/document/') != false
+					&& $containsServerURL) ) {
 					$headers = $response->getHeaders();
 					header('Content-Description: File Transfer');
 					header('Content-Type: application/octet-stream');

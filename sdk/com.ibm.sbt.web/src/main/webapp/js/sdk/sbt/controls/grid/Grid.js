@@ -476,6 +476,17 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
     		this._selListeners.pop(listener);
         },
         
+        refreshSelectionListeners: function(){
+        	// notify selection listeners
+        	for (var i=0; i<this._selListeners.length; i++) {
+        		try {
+        			var selection = this.selectedRows.slice();
+        			this._selListeners[i].selectionChanged(selection, this);
+        		} catch (error) {
+        		}
+        	}
+        },
+        
         /**
          * Add an item using the specified Document
          * 

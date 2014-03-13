@@ -15,7 +15,7 @@
  */
 
 /**
- * UploadFileAction
+ * StartTopicAction
  */
 define([ "../../../declare", "../../../dom", "../../../lang",
          "../../../i18n!./nls/ForumView", "./StartTopicWidget", 

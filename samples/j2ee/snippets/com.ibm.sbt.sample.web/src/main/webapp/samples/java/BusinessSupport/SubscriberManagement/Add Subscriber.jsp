@@ -14,10 +14,10 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@page import="com.ibm.commons.util.StringUtil"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
-<%@page import="com.ibm.sbt.sample.bss.BssUtil"%>
 <%@page import="com.ibm.commons.util.io.json.JsonJavaObject"%>
 <%@page import="com.ibm.sbt.services.client.base.JsonEntity"%>
 <%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
@@ -35,16 +35,26 @@
 </head>
 
 <body>
+	The API caller must have one of the following roles to run the API:
+	<ul>
+		<li>CustomerAdministrator</li>
+    	<li>VSR</li>
+    </ul>
 	<div id="content">
 	<%
 	try {
-		String customerId = BssUtil.registerCustomer("smartcloudC1");
+		String customerId = Context.get().getProperty("bss.customerId");
+		out.println("Customer Id: " + customerId + "<br/>");
+		if (StringUtil.isEmpty(customerId)) {
+			out.println("Please provide a valid customer id in the sbt.properties.");
+			return;
+		}
 			
 		SubscriberJsonBuilder subscriber = new SubscriberJsonBuilder();
 		subscriber.setCustomerId(customerId)
 				  .setRole(SubscriberManagementService.Role.User)
 				  .setFamilyName("Doe")
-				  .setGivenName("John")
+				  .setGivenName("Aaron")
 				  .setEmailAddress("ibmsbt_"+System.currentTimeMillis()+"@mailinator.com")
 				  .setNamePrefix("Mr")
 				  .setNameSuffix("")
@@ -59,11 +69,13 @@
 				  .setTimeZone("America/Central")
 				  .setPhoto("");
 		
-		SubscriberManagementService subscriberManagement = new SubscriberManagementService("smartcloudC1");
+		SubscriberManagementService subscriberManagement = new SubscriberManagementService("smartcloud");
 		JsonJavaObject responseJson = subscriberManagement.addSubscriber(subscriber);
 		long subscriberId = responseJson.getAsLong("Long");
 		JsonEntity jsonEntity = subscriberManagement.getSubscriberById("" + subscriberId);
 		
+		subscriberManagement.activateSubscriber("" + subscriberId);
+
 		out.println("Subscriber Id: " + subscriberId );
 		out.println("<pre>" + jsonEntity.toJsonString(false) + "<pre/>");
 		

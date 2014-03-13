@@ -2,44 +2,63 @@ require([ "sbt/connections/ProfileService", "sbt/dom", "sbt/config" ], function(
 
 	var endpoint = config.findEndpoint("connections");
 	var url = "/connections/opensocial/basic/rest/people/@me/";
-	endpoint.request(url, {
-		handleAs : "json"
-	}).then(function(response) {
-		handleLoggedIn(response.entry);
-	}, function(error) {
-		handleError(error);
-	});
+	endpoint.request(url, { handleAs : "json" }).then(
+		function(response) {
+			var userid = parseUserid(entry);
+			handleLoggedIn(userid, entry.displayName);
+		}, 
+		function(error) {
+			url = "/manage/oauth/getUserIdentity";
+
+			endpoint.request(url, { handleAs : "json" }).then(
+				function(response) {
+					handleLoggedIn(response.subscriberid, response.name);
+				}, 
+				function(error) {
+					handleError(error);
+				}
+			);
+		}
+	);
 	dom.setText("success", "Please wait... Loading your profile entry");
 
-	function handleLoggedIn(entry) {
-		var profileId = parseUserid(entry);
-		var profileDisplayName = entry.displayName;
+	function handleLoggedIn(userid, displayName) {
 		var profileService = new ProfileService();
-		profileService.getProfile(profileId).then(function(profile) {
-			dom.setText("userId", getAttributeValue(profile.getUserid()));
-			dom.setText("name", getAttributeValue(profile.getName()));
-			dom.setText("email", getAttributeValue(profile.getEmail()));
-			dom.setText("groupwareMail", getAttributeValue(profile.getGroupwareMail()));
-			dom.setText("thumbnailUrl", getAttributeValue(profile.getThumbnailUrl()));
-			dom.setText("jobTitle", getAttributeValue(profile.getJobTitle()));
-			dom.setText("telephoneNumber", getAttributeValue(profile.getTelephoneNumber()));
-			dom.setText("profileUrl", getAttributeValue(profile.getProfileUrl()));
-			dom.setText("building", getAttributeValue(profile.getBuilding()));
-			dom.setText("floor", getAttributeValue(profile.getFloor()));
-			dom.setText("pronunciationUrl", getAttributeValue(profile.getPronunciationUrl()));
-			dom.setText("summary", getAttributeValue(profile.getSummary()));
-			dom.setText("department", getAttributeValue(profile.getDepartment()));
-			displayMessage("Successfully loaded profile entry for " + profileDisplayName);
-		}, function(error) {
-			handleError(error);
-		});
+		profileService.getProfile(userid).then(
+			function(profile) {
+				showValue("userId", profile.getUserid());
+				showValue("name", profile.getName());
+				showValue("email", profile.getEmail());
+				showValue("groupwareMail", profile.getGroupwareMail());
+				showValue("thumbnailUrl", profile.getThumbnailUrl());
+				showValue("jobTitle", profile.getJobTitle());
+				showValue("telephoneNumber", profile.getTelephoneNumber());
+				showValue("profileUrl", profile.getProfileUrl());
+				showValue("building", profile.getBuilding());
+				showValue("floor", profile.getFloor());
+				showValue("pronunciationUrl", profile.getPronunciationUrl());
+				showValue("summary", profile.getSummary());
+				showValue("department", profile.getDepartment());
+				displayMessage("Successfully loaded profile entry for " + displayName);
+			}, 
+			function(error) {
+				handleError(error);
+			}
+		);
+	}
+	
+	function showValue(id, value) {
+		if (value) {
+			dom.byId(id).parentNode.style.display = "";
+			dom.setText(id, getAttributeValue(value));
+		} 
 	}
 
-	var getAttributeValue = function(value) {
+	function getAttributeValue(value) {
 		if (value) {
 			return value;
 		} else {
-			return "No Result";
+			return "";
 		}
 	};
 

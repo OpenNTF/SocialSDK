@@ -58,7 +58,7 @@ function plugins_url() {
 				sbt.Endpoints = {
 						<?php 
 							foreach($endpoints as $endpoint) {
-								echo generateEndpoint($endpoint->auth_type, $endpoint->server_url, $agnostic_deploy_url, $endpoint->name, $endpoint->api_version, $endpoint->server_type);
+								echo generateEndpoint($endpoint->auth_type, $endpoint->server_url, $agnostic_deploy_url, $endpoint->name, $endpoint->api_version);
 							}
 						?>
 				};
@@ -78,7 +78,7 @@ function plugins_url() {
  * Generates the JavaScript endpoint.
  */
 
-function generateEndpoint($authentication_method, $url, $deploy_url, $name, $api_version, $type) {
+function generateEndpoint($authentication_method, $url, $deploy_url, $name, $api_version) {
 	global $USER;
 	if ($api_version == "" || $api_version == null) {
 		$api_version = "2.0";
@@ -108,12 +108,8 @@ function generateEndpoint($authentication_method, $url, $deploy_url, $name, $api
 	$endpoint_js .= '"serviceMappings": {},';
 	$endpoint_js .= '"name": "' . $name . '",';
 	
-	if ($type == 'smartcloud') {
-		$endpoint_js .= '"authenticationErrorCode": "403",';
-	} else {
-		$endpoint_js .= '"authenticationErrorCode": "401",';
-	}
-	
+
+	$endpoint_js .= '"authenticationErrorCode": "401",';
 	$endpoint_js .= '"baseUrl": "' . $url . '",';
 	$endpoint_js .= '"apiVersion": "' . $api_version . '",';
 	$endpoint_js .=	'"proxy": new Proxy({';

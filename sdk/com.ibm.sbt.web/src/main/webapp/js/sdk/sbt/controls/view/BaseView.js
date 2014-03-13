@@ -248,8 +248,11 @@ define([ "../../declare", "../../config", "../../lang", "../../stringUtil", "../
 			this.messageNode.style.display = "";
 			
 			// refresh the content area to display any update
-			if (this.content && this.content.refresh) {
-				this.content.refresh();
+			if (this.content && this.content.update) {
+				this.content.update(null);
+				if(this.content.refreshSelectionListeners){
+					this.content.refreshSelectionListeners();
+				}
 			}
 		},
 		

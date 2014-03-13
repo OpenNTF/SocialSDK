@@ -133,7 +133,7 @@ public class SubscriberManagementService extends BssService {
     public JsonJavaObject addSubscriber(JsonJavaObject customerJson) throws BssException {
 		try {
 			Response serverResponse = createData(API_RESOURCE_SUBSCRIBER, null, JsonHeader, customerJson, ClientService.FORMAT_JSON);
-			return (JsonJavaObject)serverResponse.getData();
+			return (serverResponse == null) ? null : (JsonJavaObject)serverResponse.getData();
 		} catch (Exception e) {
 			throw new BssException(e);
 		}

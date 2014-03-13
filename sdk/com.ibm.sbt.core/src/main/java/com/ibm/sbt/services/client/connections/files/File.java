@@ -231,6 +231,14 @@ public class File extends AtomEntity {
 	}
 
 	/**
+	 * Method to get the version
+	 * @return int
+	 */
+	public int getVersion() {
+		return getAsInt(FileEntryXPath.VersionLabel);
+	}
+	
+	/**
 	 * Method to get the propogation
 	 * @return String
 	 */
@@ -240,12 +248,30 @@ public class File extends AtomEntity {
 
 	/**
 	 * getSize
-	 * <p>
-	 * return the total size of the file/media in Bytes
-	 * @return Integer size
+	 * @deprecated Use getTotalMediaSize instead
 	 */
 	public Long getSize() {
+		return getTotalMediaSize();
+	}
+
+	/**
+	 * getTotalMediaSize
+	 * <p>
+	 * Return the total size of the file/media in bytes
+	 * @return Integer size
+	 */
+	public Long getTotalMediaSize() {
 		return getAsLong(FileEntryXPath.TotalMediaSize);
+	}
+
+	/**
+	 * getEnclosureLength
+	 * <p>
+	 * Return the size of the enclosure in bytes
+	 * @return Integer size
+	 */
+	public Long getEnclosureLength() {
+		return getAsLong(FileEntryXPath.EnclosureLength);
 	}
 
 	/**
@@ -277,6 +303,14 @@ public class File extends AtomEntity {
 	 * @return String
 	 */
 	public String getEditMediaLink() {
+		return this.getAsString(FileEntryXPath.EditMediaLink);
+	}
+	
+	/**
+	 * Method to get Edit Media Url
+	 * @return String
+	 */
+	public String getEditMediaUrl() {
 		return this.getAsString(FileEntryXPath.EditMediaLink);
 	}
 	

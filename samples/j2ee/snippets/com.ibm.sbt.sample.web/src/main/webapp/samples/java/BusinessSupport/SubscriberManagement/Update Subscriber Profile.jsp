@@ -17,8 +17,8 @@
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
+<%@page import="com.ibm.commons.util.StringUtil"%>
 <%@page import="com.ibm.commons.util.io.json.*"%>
-<%@page import="com.ibm.sbt.sample.bss.BssUtil"%>
 <%@page import="com.ibm.sbt.services.client.base.JsonEntity"%>
 <%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page import="com.ibm.sbt.services.client.smartcloud.bss.*"%>
@@ -38,11 +38,21 @@
 	<div id="content">
 	<%
 	try {
-		String customerId = BssUtil.registerCustomer("smartcloudC1");
-		String subscriberId = BssUtil.addSubscriber("smartcloudC1", customerId);
-		
-		SubscriberManagementService subscriberManagement = new SubscriberManagementService("smartcloudC1");
-		
+		String customerId = Context.get().getProperty("bss.customerId");
+		out.println("Customer Id: " + customerId + "<br/>");
+		if (StringUtil.isEmpty(customerId)) {
+			out.println("Please provide a valid customer id in the sbt.properties.");
+			return;
+		}
+			
+		final String subscriberId = Context.get().getProperty("bss.subscriberId");
+		out.println("Subscriber Id: " + subscriberId + "<br/>");
+		if (StringUtil.isEmpty(subscriberId)) {
+			out.println("Please provide a valid subscriber id in the sbt.properties.");
+			return;
+		}
+					
+		SubscriberManagementService subscriberManagement = new SubscriberManagementService("smartcloud");
 		JsonEntity jsonEntity = subscriberManagement.getSubscriberById(subscriberId);
 		
 		JsonJavaObject rootObject = jsonEntity.getJsonObject();

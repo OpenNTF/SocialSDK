@@ -177,6 +177,7 @@ define(["../declare","../config","../lang", "../base/core", "../xml", "../xpath"
             this._endpoint.xhrGet({
                 serviceUrl : serviceUrl,
                 handleAs : "text",
+                preventCache: true,
                 load : function(response) {
                     try {
                         // parse the data
@@ -186,7 +187,7 @@ define(["../declare","../config","../lang", "../base/core", "../xml", "../xpath"
                         self.startIndex = parseInt(xpath.selectText(self._xmlData, self.atom.startIndex, self.namespaces));
                         self.itemsPerPage = parseInt(xpath.selectText(self._xmlData, self.atom.itemsPerPage, self.namespaces));
                         self.items = self._createItems(self._xmlData);
-                        //self.items = itemFactory.createItems(self._xmlData, self.attributes, self, entities);
+                        
                         
                         if (self._options.onComplete) {
                             self._options.onComplete.call(self._options.scope || self, self.items, self._options);

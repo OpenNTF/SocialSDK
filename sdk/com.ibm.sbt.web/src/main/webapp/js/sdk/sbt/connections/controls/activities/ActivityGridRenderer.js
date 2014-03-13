@@ -75,7 +75,12 @@ define(["../../../declare",
 	          * @returns The date when the community was last updates
 	          */
 	         updatedDate: function(grid, item, i, items) {
-	                 return i18n.getUpdatedLabel((item.getValue("updated")));
+	        	 	var updatedLabel = item.getValue("updated");
+	        	 	if(updatedLabel.length > 0){
+	        	 		 return i18n.getUpdatedLabel(updatedLabel);
+	        	 	}else{
+	        	 		return "";
+	        	 	}  
 	         },
 	         
 	         /**
@@ -87,7 +92,12 @@ define(["../../../declare",
 	          * @returns The date when the community was last updates
 	          */
 	         getDueDate: function(grid, item, i, items) {
-	                 return i18n.getSearchUpdatedLabel((item.getValue("dueDate")));
+	        	 var dueDate = item.getValue("dueDate");
+	        	 	if(dueDate.length > 0){
+	        	 		 return i18n.getUpdatedLabel(dueDate);
+	        	 	}else{
+	        	 		return "";
+	        	 	}
 	         }
 	    	
 	    });

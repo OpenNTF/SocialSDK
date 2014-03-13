@@ -662,11 +662,10 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @param args
          */
         constructor : function(args) {
-        	
             if (!this.endpoint) {
                 this.endpoint = config.findEndpoint(this.getDefaultEndpointName());
-                this.handle = this.endpoint.serviceMappings.blogHomepageHandle?this.endpoint.serviceMappings.blogHomepageHandle:this.handle;
             }
+            this.handle = this.endpoint.serviceMappings.blogHomepageHandle?this.endpoint.serviceMappings.blogHomepageHandle:this.handle;
         },
         
         /**

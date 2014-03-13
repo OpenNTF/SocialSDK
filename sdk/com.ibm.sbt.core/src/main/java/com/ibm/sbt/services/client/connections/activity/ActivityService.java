@@ -243,6 +243,17 @@ public class ActivityService extends BaseService {
      * @throws ActivityServiceException
      */
     public Activity createActivity(Activity activity) throws ActivityServiceException {
+		return createActivity(activity, null);
+	}
+
+    /**
+     * Method to create an Activity
+     * 
+     * @param activity
+     * @return Activity
+     * @throws ActivityServiceException
+     */
+    public Activity createActivity(Activity activity, Map<String, String> params) throws ActivityServiceException {
 		if (null == activity){
 			throw new ActivityServiceException(null, "Null activity");
 		}
@@ -256,7 +267,7 @@ public class ActivityService extends BaseService {
 			}
 			Map<String, String> headers = new HashMap<String, String>();
 			headers.put("Content-Type", "application/atom+xml");
-			Response requestData = createData(requestUri, null, headers, activityPayload);
+			Response requestData = createData(requestUri, params, headers, activityPayload);
 			activity.clearFieldsMap();
 			return (Activity) new ActivityFeedHandler(this).createEntity(requestData);
 		} catch (Exception e) {

@@ -1,6 +1,6 @@
 <div  style="float:left; width:30%;" role="content">
 	<div id="error" style="display:none;" class="alert alert-error"></div>
-	<div id="success" style="width: 150px; z-index:5000; -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); -webkit-border-radius: 6px; -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); background:#CCC4C4; -moz-border-radius: 5px; color: black; display: none;" class="alert alert-success"></div>
+	<div id="success" style="width: 150px; z-index:5000; -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6); -webkit-border-radius: 6px; -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); background:#CCC4C4; -moz-border-radius: 5px; color: black; display: none;" class="alert alert-success"></div>
 	<div class="control-group">
 		<div class="controls">
 			<label class="control-label" for="titleTextField">Title:</label> <input id="titleTextField" type="text" /> 

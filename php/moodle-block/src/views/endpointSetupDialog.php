@@ -432,7 +432,7 @@ function save_new_endpoint() {
 		        
 		    }
 	    	$("#dialog").dialog('close');
-	 
+	 		window.location.reload();
 	    },
 	    error: function (jqXHR, textStatus, errorThrown)
 	    {

@@ -35,6 +35,7 @@ if (!defined('ENDPOINTS')) {
 
 // Make sure that the user is authorized to perform the action
 if (!isloggedin()) {
+	echo "You must be logged in to perform this action.";
 	return;
 }
 
@@ -47,6 +48,7 @@ foreach ($admins as $admin) {
 	}
 }
 if (!$isadmin) {
+	echo "Only admins can perform this action.";
 	return;
 } 
 

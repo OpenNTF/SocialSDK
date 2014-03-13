@@ -32,9 +32,9 @@ public class SmartCloudOAuthEndpoint extends OAuthEndpoint {
 	private static String AUTHENTICATION_SERVICE = "communities/service/atom/communities/my";
 	private static String SIGNATURE_METHOD = "PLAINTEXT";
 
-	private static final int authenticationErrorCode = 403;
 	
     public SmartCloudOAuthEndpoint() {
+    	setAuthenticationErrorCode(403);
     	clientParams.put("isSmartCloud", true);
     	
     	initDefaults();
@@ -71,10 +71,7 @@ public class SmartCloudOAuthEndpoint extends OAuthEndpoint {
 		return true;
 
     }
-    @Override
-	public int getAuthenticationErrorCode(){
-    	return authenticationErrorCode;
-    }
+
 
     @Override
     public void setUrl(String url) {

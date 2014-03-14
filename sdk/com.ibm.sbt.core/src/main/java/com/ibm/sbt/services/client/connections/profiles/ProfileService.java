@@ -38,6 +38,7 @@ import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.profiles.feedhandler.ColleagueConnectionFeedHandler;
 import com.ibm.sbt.services.client.connections.profiles.feedhandler.ProfileFeedHandler;
 import com.ibm.sbt.services.client.connections.profiles.feedhandler.TagFeedHandler;
+import com.ibm.sbt.services.client.connections.profiles.model.ProfileXPath;
 import com.ibm.sbt.services.client.connections.profiles.transformers.ColleagueConnectionTransformer;
 import com.ibm.sbt.services.client.connections.profiles.transformers.ProfileTransformer;
 import com.ibm.sbt.services.client.connections.profiles.utils.Messages;
@@ -955,7 +956,7 @@ public class ProfileService extends BaseService {
 	 */
 	public Map<String,Object> getExtendedAttributes(Profile p) throws ProfileServiceException{
 		Map<String, Object> ret = new HashMap<String, Object>();
- 		List<Node> attributes = (List<Node>) p.getDataHandler().getEntries("//a:link[@rel=\"http://www.ibm.com/xmlns/prod/sn/ext-attr\"]");
+ 		List<Node> attributes = (List<Node>) p.getDataHandler().getEntries(ProfileXPath.extendedAttributes);
 		for (Node link :attributes) {
 	         String extUrl = link.getAttributes().getNamedItem("href").getTextContent();
 	         String extId = link.getAttributes().getNamedItem("snx:extensionId").getTextContent();

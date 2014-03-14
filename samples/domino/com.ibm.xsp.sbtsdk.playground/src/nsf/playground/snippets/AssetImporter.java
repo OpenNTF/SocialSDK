@@ -114,9 +114,9 @@ public abstract class AssetImporter {
 		String userName = document.getItemValueString("User");
 		String password = document.getItemValueString("Password");
 		String[] runtimes = null;
-		String sRuntimes = document.getItemValueString("Runtimes");
-		if(StringUtil.isNotEmpty(sRuntimes)) {
-			runtimes = StringUtil.splitString(sRuntimes, ',');
+		Vector<String> vRuntimes = (Vector<String>)document.getItemValue("Runtimes");
+		if(vRuntimes!=null && !vRuntimes.isEmpty()) {
+			runtimes = vRuntimes.toArray(new String[vRuntimes.size()]);
 		}
 		ImportSource src = new ImportSource(name,source,location,userName,password,runtimes);
 		return src;

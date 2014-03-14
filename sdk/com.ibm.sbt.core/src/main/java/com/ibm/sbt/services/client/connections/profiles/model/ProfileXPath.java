@@ -35,7 +35,8 @@ public enum ProfileXPath implements FieldEntry {
 	visibility("./@snx:visibilityBin"),
 	contributorName("./a:name"),
 	contributorUserid("./a:userid"),
-	contributorEmail("./a:email");
+	contributorEmail("./a:email"),
+	extendedAttributes("//a:link[@rel=\"http://www.ibm.com/xmlns/prod/sn/ext-attr\"]");
 	
 	private final XPathExpression path;
 	

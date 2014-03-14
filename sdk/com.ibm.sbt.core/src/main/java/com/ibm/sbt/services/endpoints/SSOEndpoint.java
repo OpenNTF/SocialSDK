@@ -55,6 +55,8 @@ public class SSOEndpoint extends AbstractEndpoint {
 
     private static final long serialVersionUID = 1L;
     
+    private String domain = null;
+    
     private String authenticationPage = null;
     
 	static final String	sourceClass	= SSOEndpoint.class.getName();
@@ -130,7 +132,7 @@ public class SSOEndpoint extends AbstractEndpoint {
 
     @Override
 	public void initialize(DefaultHttpClient httpClient) {
-        HttpRequestInterceptor ltpaInterceptor = new LtpaInterceptor(getUrl());
+        HttpRequestInterceptor ltpaInterceptor = new LtpaInterceptor(getUrl(), getDomain());
         httpClient.addRequestInterceptor(ltpaInterceptor, 0);
     }
 
@@ -138,7 +140,8 @@ public class SSOEndpoint extends AbstractEndpoint {
 
         String _domain;
 
-        public LtpaInterceptor(String url) {
+        public LtpaInterceptor(String url, String domain) {
+        	if (domain == null) {
         	try {
         		URL u = new URL(url);
         		_domain = u.getHost();
@@ -153,14 +156,16 @@ public class SSOEndpoint extends AbstractEndpoint {
 	            if(_domain.indexOf(":")!=-1) {
 	                _domain = _domain.substring(0, _domain.indexOf(":"));
 	            }
-        	}
         	
+        	}
         	// Fix in calculating the domain correctly
         	// If the host is qs.renovations.com, domain should be renovations.com and not qs.renovations.com
         	if(StringUtil.isNotEmpty(_domain) && countMatch(_domain,'.')>1){
         		_domain = _domain.substring(_domain.indexOf('.')+1,_domain.length());
         	}
-        	
+        	} else {
+        		_domain = domain;
+        	}
         	if (logger.isLoggable(Level.INFO)) {
         		String msg = MessageFormat.format("SSO endpoint domain for {0} is {1}", url, _domain);
         		logger.log(Level.INFO, msg);
@@ -272,6 +277,14 @@ public class SSOEndpoint extends AbstractEndpoint {
 	
 	public void setAuthenticationPage(String authenticationPage) {
 		this.authenticationPage = authenticationPage;
+	}
+
+	public String getDomain() {
+		return domain;
+	}
+
+	public void setDomain(String domain) {
+		this.domain = domain;
 	}
 	
 }

@@ -19,6 +19,7 @@ import java.util.List;
 
 import com.ibm.sbt.services.client.base.JsonEntity;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
+import com.ibm.sbt.services.client.smartcloud.bss.SubscriberManagementService;
 
 
 /**
@@ -55,7 +56,7 @@ public class CreateVendorApp extends BaseBssApp {
 			String customerId = "" + subscribers.get(0).getAsLong("CustomerId");
 			System.out.println(customerId);
 
-			String subscriberId = cva.addSubscriber(customerId, cva.getUniqueEmail(domain));
+			String subscriberId = cva.addSubscriber(customerId, cva.getUniqueEmail(domain), SubscriberManagementService.Role.VSR);
 				
 			cva.activateSubscriber(subscriberId);
 				
@@ -68,7 +69,7 @@ public class CreateVendorApp extends BaseBssApp {
 			
 			cva.assignRole(loginName, "CUSTOMERADMINISTRATOR");
 			//cva.assignRole(loginName, "VENDORADMINISTRATOR");
-			cva.assignRole(loginName, "VSR");
+			//cva.assignRole(loginName, "VSR");
 			
 			String[] roles = cva.getRoles(loginName);
 			for (String role : roles) {
@@ -80,13 +81,17 @@ public class CreateVendorApp extends BaseBssApp {
 			customerId = cva2.registerCustomer(cva2.getUniqueEmail(domain));
 			System.out.println(customerId);
 			
-			
-			List<String> customerIds = cva.getCustomerIds();
+			List<String> customerIds = cva2.getCustomerIds();
+			System.out.println("Sub VSR Customers: "+customerIds.size());
 			for (String customerId1 : customerIds) {
 				System.out.println(customerId1);
 			}
 			
-			System.out.println("Master VSR can see customer: " + customerIds.contains(customerId));
+			customerIds = cva.getCustomerIds();
+			System.out.println("Master VSR Customers: "+customerIds.size());
+			for (String customerId1 : customerIds) {
+				System.out.println(customerId1);
+			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();

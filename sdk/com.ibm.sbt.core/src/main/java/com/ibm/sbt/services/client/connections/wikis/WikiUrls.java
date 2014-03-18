@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -16,65 +16,43 @@
 
 package com.ibm.sbt.services.client.connections.wikis;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import com.ibm.commons.runtime.util.URLEncoding;
-import com.ibm.commons.util.StringUtil;
-import com.ibm.sbt.services.endpoints.Endpoint;
-import com.ibm.sbt.services.util.AuthUtil;
+import com.ibm.sbt.services.client.base.ConnectionsConstants;
+import com.ibm.sbt.services.client.base.URLBuilder;
+import com.ibm.sbt.services.client.base.URLContainer;
+import com.ibm.sbt.services.client.base.Version;
+import com.ibm.sbt.services.client.base.VersionedUrl;
 
 /**
  * @author Mario Duarte
- *
+ * @author Carlos Manias
  */
-public enum WikiUrls {
-	ALL_WIKIS(             "wikis/{0}/api/wikis/feed"),
-	PUBLIC_WIKIS(          "wikis/{0}/api/wikis/public"),
-	MY_WIKIS(              "wikis/{0}/api/mywikis/feed"),
-	MOST_COMMENTED_WIKIS(  "wikis/{0}/anonymous/api/wikis/mostcommented"),
-	MOST_RECOMMENDED_WIKIS("wikis/{0}/anonymous/api/wikis/mostrecommended"),
-	MOST_VISITED_WIKIS(    "wikis/{0}/anonymous/api/wikis/mostvisited"),
-	WIKI_MYPAGES(          "wikis/{0}/api/wiki/{1}/mypages"),
-	WIKI_PAGES_TRASH(      "wikis/{0}/anonymous/api/wiki/{1}/recyclebin/feed"),
-	WIKI_PAGES(            "wikis/{0}/anonymous/api/wiki/{1}/feed"),
-	WIKI_PAGES_AUTH(       "wikis/{0}/api/wiki/{1}/feed"),
-	WIKI(                  "wikis/{0}/anonymous/api/wiki/{1}/entry"),
-	WIKI_AUTH(             "wikis/{0}/api/wiki/{1}/entry"),
-	WIKI_PAGE(             "wikis/{0}/anonymous/api/wiki/{1}/page/{2}/entry"),
-	WIKI_PAGE_AUTH(        "wikis/{0}/api/wiki/{1}/page/{2}/entry");
+public enum WikiUrls implements URLContainer {
+	ALL_WIKIS(             new VersionedUrl(ConnectionsConstants.v4_0, "wikis/{authType}/api/wikis/feed")),
+	PUBLIC_WIKIS(          new VersionedUrl(ConnectionsConstants.v4_0, "wikis/{authType}/api/wikis/public")),
+	MY_WIKIS(              new VersionedUrl(ConnectionsConstants.v4_0, "wikis/{authType}/api/mywikis/feed")),
+	MOST_COMMENTED_WIKIS(  new VersionedUrl(ConnectionsConstants.v4_0, "wikis/{authType}/anonymous/api/wikis/mostcommented")),
+	MOST_RECOMMENDED_WIKIS(new VersionedUrl(ConnectionsConstants.v4_0, "wikis/{authType}/anonymous/api/wikis/mostrecommended")),
+	MOST_VISITED_WIKIS(    new VersionedUrl(ConnectionsConstants.v4_0, "wikis/{authType}/anonymous/api/wikis/mostvisited")),
+	WIKI_MYPAGES(          new VersionedUrl(ConnectionsConstants.v4_0, "wikis/{authType}/api/wiki/{wikiLabel}/mypages")),
+	WIKI_PAGES_TRASH(      new VersionedUrl(ConnectionsConstants.v4_0, "wikis/{authType}/anonymous/api/wiki/{wikiLabel}/recyclebin/feed")),
+	WIKI_PAGES(            new VersionedUrl(ConnectionsConstants.v4_0, "wikis/{authType}/anonymous/api/wiki/{wikiLabel}/feed")),
+	WIKI_PAGES_AUTH(       new VersionedUrl(ConnectionsConstants.v4_0, "wikis/{authType}/api/wiki/{wikiLabel}/feed")),
+	WIKI(                  new VersionedUrl(ConnectionsConstants.v4_0, "wikis/{authType}/anonymous/api/wiki/{wikiLabel}/entry")),
+	WIKI_AUTH(             new VersionedUrl(ConnectionsConstants.v4_0, "wikis/{authType}/api/wiki/{wikiLabel}/entry")),
+	WIKI_PAGE(             new VersionedUrl(ConnectionsConstants.v4_0, "wikis/{authType}/anonymous/api/wiki/{wikiLabel}/page/{wikiPage}/entry")),
+	WIKI_PAGE_AUTH(        new VersionedUrl(ConnectionsConstants.v4_0, "wikis/{authType}/api/wiki/{wikiLabel}/page/{wikiPage}/entry"));
 	
-	private String urlPattern;
+	private URLBuilder builder;
 	
-	private WikiUrls(String urlPattern) {
-		this.urlPattern = urlPattern;
+	private WikiUrls(VersionedUrl... urlVersions) {
+		builder = new URLBuilder(urlVersions);
 	}
 	
-	protected String format(String... args) {
-		return formatPattern(Arrays.asList(args));
+	public String format(Version version, String... args) {
+		return builder.format(version, args);
 	}
-	
-	public String format(Endpoint endpoint, String... args) {
-		List<String> list = new ArrayList<String>(Arrays.asList(args));
-		list.add(0, getAuth(endpoint));
-		return formatPattern(list);
-	}
-	
-	private String formatPattern(List<String> args) {
-		List<String> encoded = new ArrayList<String>();
-		for(String arg : args) {
-			try {
-				encoded.add(URLEncoding.encodeURIString(arg, "UTF-8", 0, false));
-			} catch (IOException e) {
-				throw new RuntimeException(e);
-			}
-		}
-		return StringUtil.format(urlPattern, encoded.toArray());
-	}
-	
-	private String getAuth(Endpoint endpoint) {
-		 return AuthUtil.INSTANCE.getAuthValue(endpoint);
+
+	public String getPattern(Version version){
+		return builder.getPattern(version).getValue();
 	}
 }

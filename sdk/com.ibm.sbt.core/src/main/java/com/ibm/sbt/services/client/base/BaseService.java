@@ -130,8 +130,15 @@ public abstract class BaseService implements Serializable {
 	public String getAuthTypePart(){
 		return AuthType.getAuthTypePart(endpoint);
     }
+	
+	/**
+	 * Returns a Version object with the API version of the Endpoint
+	 * @return
+	 */
+	public Version getApiVersion(){
+		return Version.parse(endpoint.getApiVersion());
+	}
     
-
 	/**
 	 * Return the size of the cache
 	 * 

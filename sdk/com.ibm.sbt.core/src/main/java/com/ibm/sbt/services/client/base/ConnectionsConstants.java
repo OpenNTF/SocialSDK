@@ -27,6 +27,8 @@ public class ConnectionsConstants {
 	public static final char 	EQUALS		= '=';
 	public static final String	OAUTH		= "oauth";
 	public static final String	UTF8		= "UTF-8";
+	public static final Version v4_5 = new Version(4,5);
+	public static final Version v4_0 = new Version(4,0);
 	
 	public static class Namespaces {
 		public static final String ATOM       = "http://www.w3.org/2005/Atom";

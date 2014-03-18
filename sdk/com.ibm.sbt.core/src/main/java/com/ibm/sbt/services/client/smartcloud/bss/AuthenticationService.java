@@ -129,11 +129,9 @@ public class AuthenticationService extends BssService {
     		if (statusCode != 204) {
     			throw new BssException(response, "Error changing password {0}", userCredentialObject);
     		}
-		} catch (IOException e) {
-			throw new BssException(e, "Error changing password {0}", userCredentialObject);			
-		} catch (ClientServicesException e) {
-			throw new BssException(e, "Error changing password {0}", userCredentialObject);
-		}
+		} catch (Exception e) {
+			throw new BssException(e, "Error changing password {0} caused by {1]", userCredentialObject, e.getMessage());			
+		} 
     }
     
     /**
@@ -154,11 +152,9 @@ public class AuthenticationService extends BssService {
     		if (statusCode != 204) {
     			throw new BssException(response, "Error resetting password {0}", loginName);
     		}
-		} catch (IOException e) {
-			throw new BssException(e, "Error resetting password {0}", loginName);			
-		} catch (ClientServicesException e) {
-			throw new BssException(e, "Error resetting password {0}", loginName);
-		}
+		} catch (Exception e) {
+			throw new BssException(e, "Error resetting password {0} caused by {1}", loginName, e.getMessage());			
+		} 
     }
     
     /**
@@ -204,11 +200,9 @@ public class AuthenticationService extends BssService {
     		if (statusCode != 204) {
     			throw new BssException(response, "Error setting one time password {0}", userCredentialObject);
     		}
-		} catch (IOException e) {
-			throw new BssException(e, "Error setting one time password {0}", userCredentialObject);			
-		} catch (ClientServicesException e) {
-			throw new BssException(e, "Error setting one time password {0}", userCredentialObject);
-		}
+		} catch (Exception e) {
+			throw new BssException(e, "Error setting one time password {0} caused by {1}", userCredentialObject, e.getMessage());			
+		} 
     }
 	
 }

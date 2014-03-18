@@ -139,9 +139,13 @@ public class BaseBssApp extends BaseApp {
     }
     
     public String addSubscriber(String customerId, String email) throws BssException, JsonException, IOException {
+    	return addSubscriber(customerId, email, SubscriberManagementService.Role.User);
+    }
+    
+    public String addSubscriber(String customerId, String email, SubscriberManagementService.Role role) throws BssException, JsonException, IOException {
 		SubscriberJsonBuilder subscriber = new SubscriberJsonBuilder();
 		subscriber.setCustomerId(customerId)
-				  .setRole(SubscriberManagementService.Role.User)
+				  .setRole(role)
 				  .setFamilyName("Doe")
 				  .setGivenName("Aaron")
 				  .setEmailAddress(email)

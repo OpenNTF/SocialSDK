@@ -12,5 +12,7 @@
 	<modules>
 		<module>php-core</module>
 		<module>wordpress-plugin</module>
+		<module>moodle-block</module>
+
 	</modules>
 </project>

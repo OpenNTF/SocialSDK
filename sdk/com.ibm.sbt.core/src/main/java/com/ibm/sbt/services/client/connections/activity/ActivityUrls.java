@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2014
+ * ��� Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -25,7 +25,7 @@ import com.ibm.sbt.services.client.base.VersionedUrl;
  * @author Carlos Manias
  */
 public enum ActivityUrls implements URLContainer {
-	ACTIVITY_URL(new VersionedUrl(ConnectionsConstants.v4_0, "/activities/service/atom2/{activityAction}"));
+	ACTIVITY_URL(new VersionedUrl(ConnectionsConstants.v4_0, "activities/service/atom2/{activityAction}"));
 
 	private URLBuilder builder;
 	

@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -22,31 +22,25 @@ package com.ibm.sbt.services.client.connections.activity;
  */
 public enum ActivityAction {
 	
-	SERVICE("service"),
-	ACTIVITIES("activities"), 
-	COMPLETED("completed"),
-	EVERYTHING("everything"),
-	TODOS("todos"),
-	TAGS("tags"),
+	SERVICE,
+	ACTIVITIES, 
+	COMPLETED,
+	EVERYTHING,
+	TODOS,
+	TAGS,
 	//"entrytemplates?activityUuid=<uuid>"
-	TRASH("trash"),
-	ACTIVITY("activity"),
-	ACTIVITYNODE("activitynode"),
-	TRASHNODE("trashednode"),
-	ACL("acl");
-	
-	String actionItem;
-	
-	private ActivityAction(String actionItem) {
-		this.actionItem = actionItem;
-	}
+	TRASH,
+	ACTIVITY,
+	ACTIVITYNODE,
+	TRASHNODE,
+	ACL;
 	
 	/**
 	 * Wrapper method to return action item
 	 * <p>
 	 */
-	public String getActivityAction(){
-		return actionItem;
+	public String getName(){
+		return name().toLowerCase();
 	}
 
 }

@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * ï¿½ Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -27,21 +27,17 @@ public enum CommunityType {
 	 *  Scope for Url Construction for Communities
 	 */
 
-	ALL("all"),
-	MY("my"),
-	INSTANCE("instance"),
-	MEMBERS("members"),
-	BOOKMARKS("bookmarks"),
-	FORUMTOPICS("forum/topics"),
-	SUBCOMMUNITIES("subcommunities"),
-	MYINVITES("invites/my"),
-	INVITES("invites"),
-	REMOTEAPPLICATIONS("remoteApplications");
+	ALL,
+	MY,
+	INSTANCE,
+	MEMBERS,
+	BOOKMARKS,
+	FORUMTOPICS,
+	SUBCOMMUNITIES,
+	MYINVITES,
+	INVITES,
+	REMOTEAPPLICATIONS;
 	
-	private String comType;
-	private CommunityType(String comType) {
-		this.comType = comType;
-	}
-	public String getCommunityType(){return comType;}
+	public String getName(){return name().toLowerCase();}
 
 }

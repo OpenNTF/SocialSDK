@@ -12,14 +12,14 @@
 				<include>**/*</include>
 			</includes>
 			<directory>src</directory>
-			<outputDirectory>/</outputDirectory>
+			<outputDirectory>ibmsbt/</outputDirectory>
 		</fileSet>
 		<fileSet>
 			<includes>
 				<include>**/*</include>
 			</includes>
 			<directory>target/core</directory>
-			<outputDirectory>/</outputDirectory>
+			<outputDirectory>ibmsbt/core</outputDirectory>
 		</fileSet>
 	</fileSets>
 

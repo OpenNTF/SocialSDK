@@ -98,7 +98,7 @@ public class ActivityService extends BaseService {
      * @throws ActivityServiceException
      */
     public ActivityList getMyActivities(Map<String, String> params) throws ActivityServiceException {
-        String requestUri = ActivityServiceUrlBuilder.populateURL(ActivityAction.ACTIVITIES.getActivityAction());
+        String requestUri = ActivityUrls.ACTIVITY_URL.format(getApiVersion(), ActivityAction.ACTIVITIES.getName());
         try {
         	return (ActivityList) getEntities(requestUri, params, new ActivityFeedHandler(this));
         } catch (Exception e) {
@@ -124,7 +124,7 @@ public class ActivityService extends BaseService {
      * @throws ActivityServiceException
      */
     public ActivityList getCompletedActivities(Map<String, String> params) throws ActivityServiceException {
-        String requestUri = ActivityServiceUrlBuilder.populateURL(ActivityAction.COMPLETED.getActivityAction());
+        String requestUri = ActivityUrls.ACTIVITY_URL.format(getApiVersion(), ActivityAction.COMPLETED.getName());
         try {
         	return (ActivityList) getEntities(requestUri, params, new ActivityFeedHandler(this));
         } catch (Exception e) {
@@ -150,7 +150,7 @@ public class ActivityService extends BaseService {
      * @throws ActivityServiceException
      */
     public ActivityList getAllActivities(Map<String, String> params) throws ActivityServiceException {
-        String requestUri = ActivityServiceUrlBuilder.populateURL(ActivityAction.EVERYTHING.getActivityAction());
+        String requestUri = ActivityUrls.ACTIVITY_URL.format(getApiVersion(), ActivityAction.EVERYTHING.getName());
         try {
         	return (ActivityList) getEntities(requestUri, params, new ActivityFeedHandler(this));
         } catch (Exception e) {
@@ -176,7 +176,7 @@ public class ActivityService extends BaseService {
      * @throws ActivityServiceException
      */
     public ActivityList getAllTodos(Map<String, String> params) throws ActivityServiceException {
-        String requestUri = ActivityServiceUrlBuilder.populateURL(ActivityAction.TODOS.getActivityAction());
+        String requestUri = ActivityUrls.ACTIVITY_URL.format(getApiVersion(), ActivityAction.TODOS.getName());
         try {
         	return (ActivityList) getEntities(requestUri, params, new ActivityFeedHandler(this));
         } catch (Exception e) {
@@ -201,7 +201,7 @@ public class ActivityService extends BaseService {
      * @throws ActivityServiceException
      */
     public TagList getAllTags(Map<String, String> params) throws ActivityServiceException {
-        String requestUri = ActivityServiceUrlBuilder.populateURL(ActivityAction.TAGS.getActivityAction());
+        String requestUri = ActivityUrls.ACTIVITY_URL.format(getApiVersion(), ActivityAction.TAGS.getName());
         try {
         	return (TagList) getEntities(requestUri, params, new TagFeedHandler(this));
         } catch (Exception e) {
@@ -227,7 +227,7 @@ public class ActivityService extends BaseService {
      * @throws ActivityServiceException
      */
     public ActivityList getActivitiesInTrash(Map<String, String> params) throws ActivityServiceException {
-        String requestUri = ActivityServiceUrlBuilder.populateURL(ActivityAction.TRASH.getActivityAction());
+        String requestUri = ActivityUrls.ACTIVITY_URL.format(getApiVersion(), ActivityAction.TRASH.getName());
         try {
         	return (ActivityList) getEntities(requestUri, params, new ActivityFeedHandler(this));
         } catch (Exception e) {
@@ -246,7 +246,8 @@ public class ActivityService extends BaseService {
 		if (null == activity){
 			throw new ActivityServiceException(null, "Null activity");
 		}
-		String requestUri = ActivityServiceUrlBuilder.populateURL(ActivityAction.ACTIVITIES.getActivityAction());
+
+        String requestUri = ActivityUrls.ACTIVITY_URL.format(getApiVersion(), ActivityAction.ACTIVITIES.getName());
 		try {
 			Object activityPayload;
 			try {
@@ -275,7 +276,7 @@ public class ActivityService extends BaseService {
 		if (null == activityId){
 			throw new ActivityServiceException(null, "Null activityId");
 		}
-		String requestUri = ActivityServiceUrlBuilder.populateURL(ActivityAction.ACTIVITYNODE.getActivityAction());
+        String requestUri = ActivityUrls.ACTIVITY_URL.format(getApiVersion(), ActivityAction.ACTIVITYNODE.getName());
 		try {
 			Map<String, String> params = new HashMap<String, String>();
 			params.put("activityNodeUuid", activityId);
@@ -298,7 +299,7 @@ public class ActivityService extends BaseService {
 		if (null == activity.getId()){
 			throw new ActivityServiceException(null, "Null activityId");
 		}
-		String requestUri = ActivityServiceUrlBuilder.populateURL(ActivityAction.ACTIVITYNODE.getActivityAction());
+        String requestUri = ActivityUrls.ACTIVITY_URL.format(getApiVersion(), ActivityAction.ACTIVITYNODE.getName());
 		try {
 			Map<String, String> params = new HashMap<String, String>();
 			params.put("activityNodeUuid", activity.getActivityId());
@@ -328,7 +329,7 @@ public class ActivityService extends BaseService {
 		if (null == activityId){
 			throw new ActivityServiceException(null, "Null activityId");
 		}
-		String requestUri = ActivityServiceUrlBuilder.populateURL(ActivityAction.ACTIVITYNODE.getActivityAction());
+        String requestUri = ActivityUrls.ACTIVITY_URL.format(getApiVersion(), ActivityAction.ACTIVITYNODE.getName());
 		try {
 			Map<String, String> params = new HashMap<String, String>();
 			params.put("activityNodeUuid", activityId);
@@ -349,7 +350,7 @@ public class ActivityService extends BaseService {
 		if (null == activityId){
 			throw new ActivityServiceException(null, "Null activityId");
 		}
-		String requestUri = ActivityServiceUrlBuilder.populateURL(ActivityAction.TRASHNODE.getActivityAction());
+        String requestUri = ActivityUrls.ACTIVITY_URL.format(getApiVersion(), ActivityAction.TRASHNODE.getName());
 		try {
 			Map<String, String> params = new HashMap<String, String>();
 			params.put("activityNodeUuid", activityId);
@@ -380,7 +381,7 @@ public class ActivityService extends BaseService {
 				throw new ActivityServiceException(e);
 			}
 		}
-		String requestUri = ActivityServiceUrlBuilder.populateURL(ActivityAction.TRASHNODE.getActivityAction());
+        String requestUri = ActivityUrls.ACTIVITY_URL.format(getApiVersion(), ActivityAction.TRASHNODE.getName());
 		try {
 			Map<String, String> params = new HashMap<String, String>();
 			params.put("activityNodeUuid", activityId);
@@ -424,7 +425,7 @@ public class ActivityService extends BaseService {
 		} catch (Exception e) {	
 			member.setRole("member"); 
 		}
-		String requestUri = ActivityServiceUrlBuilder.populateURL(ActivityAction.ACL.getActivityAction());
+        String requestUri = ActivityUrls.ACTIVITY_URL.format(getApiVersion(), ActivityAction.ACL.getName());
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("activityUuid", activityId);
 		try {
@@ -489,7 +490,7 @@ public class ActivityService extends BaseService {
 				member.setCategory(member.getCategory());
 			}
 		} 
-		String requestUri = ActivityServiceUrlBuilder.populateURL(ActivityAction.ACL.getActivityAction());
+        String requestUri = ActivityUrls.ACTIVITY_URL.format(getApiVersion(), ActivityAction.ACL.getName());
 		try {
 			Map<String, String> params = new HashMap<String, String>();
 			params.put("activityUuid", activityId);
@@ -522,7 +523,7 @@ public class ActivityService extends BaseService {
 		if (StringUtil.isEmpty(activityId)){
 			throw new ActivityServiceException(null, "Null activityId");
 		}
-		String requestUri = ActivityServiceUrlBuilder.populateURL(ActivityAction.ACL.getActivityAction());
+        String requestUri = ActivityUrls.ACTIVITY_URL.format(getApiVersion(), ActivityAction.ACL.getName());
 		try {
 			Map<String, String> params = new HashMap<String, String>();
 			params.put("activityUuid", activityId);
@@ -545,7 +546,7 @@ public class ActivityService extends BaseService {
 		if (StringUtil.isEmpty(activityId)||StringUtil.isEmpty(memberId)){
 			throw new ActivityServiceException(null, "Null activityId / memberId");
 		}
-		String requestUri = ActivityServiceUrlBuilder.populateURL(ActivityAction.ACL.getActivityAction());
+        String requestUri = ActivityUrls.ACTIVITY_URL.format(getApiVersion(), ActivityAction.ACL.getName());
 		try {
 			Map<String, String> params = new HashMap<String, String>();
 			params.put("activityUuid", activityId);
@@ -575,7 +576,7 @@ public class ActivityService extends BaseService {
 		if (null == memberId){
 			throw new ActivityServiceException(null, "Null memberId");
 		}
-		String requestUri = ActivityServiceUrlBuilder.populateURL(ActivityAction.ACL.getActivityAction());
+        String requestUri = ActivityUrls.ACTIVITY_URL.format(getApiVersion(), ActivityAction.ACL.getName());
 		try {
 			Map<String, String> params = new HashMap<String, String>();
 			params.put("activityUuid", activityId);
@@ -602,7 +603,7 @@ public class ActivityService extends BaseService {
 		}
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("activityUuid", activityNode.getActivityId());
-		String requestUri = ActivityServiceUrlBuilder.populateURL(ActivityAction.ACTIVITY.getActivityAction());
+        String requestUri = ActivityUrls.ACTIVITY_URL.format(getApiVersion(), ActivityAction.ACTIVITY.getName());
 		try {
 			Object activityNodePayload = null;
 			try {
@@ -631,7 +632,7 @@ public class ActivityService extends BaseService {
 		if (null == activityNodeId){
 			throw new ActivityServiceException(null, "Null activityNodeId");
 		}
-		String requestUri = ActivityServiceUrlBuilder.populateURL(ActivityAction.ACTIVITYNODE.getActivityAction());
+        String requestUri = ActivityUrls.ACTIVITY_URL.format(getApiVersion(), ActivityAction.ACTIVITYNODE.getName());
 		try {
 			Map<String, String> params = new HashMap<String, String>();
 			params.put("activityNodeUuid", activityNodeId);
@@ -656,7 +657,7 @@ public class ActivityService extends BaseService {
 		}
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("activityNodeUuid", activityNode.getActivityId());
-		String requestUri = ActivityServiceUrlBuilder.populateURL(ActivityAction.ACTIVITYNODE.getActivityAction());
+        String requestUri = ActivityUrls.ACTIVITY_URL.format(getApiVersion(), ActivityAction.ACTIVITYNODE.getName());
 		try {
 			Object updateNodePayload = null;
 			try {
@@ -700,7 +701,7 @@ public class ActivityService extends BaseService {
 				throw new ActivityServiceException(e);
 			}
 		}
-		String requestUri = ActivityServiceUrlBuilder.populateURL(ActivityAction.TRASHNODE.getActivityAction());
+        String requestUri = ActivityUrls.ACTIVITY_URL.format(getApiVersion(), ActivityAction.TRASHNODE.getName());
 		try {
 			Map<String, String> params = new HashMap<String, String>();
 			params.put("activityNodeUuid", activityNodeId);
@@ -724,7 +725,7 @@ public class ActivityService extends BaseService {
 		if (null == activityNodeId){
 			throw new ActivityServiceException(null, "Null activityNodeId");
 		}
-		String requestUri = ActivityServiceUrlBuilder.populateURL(ActivityAction.TRASHNODE.getActivityAction());
+        String requestUri = ActivityUrls.ACTIVITY_URL.format(getApiVersion(), ActivityAction.TRASHNODE.getName());
 		try {
 			Map<String, String> params = new HashMap<String, String>();
 			params.put("activityNodeUuid", activityNodeId);
@@ -745,7 +746,7 @@ public class ActivityService extends BaseService {
 		if (null == activityId){
 			throw new ActivityServiceException(null, "Null activityId");
 		}
-		String requestUri = ActivityServiceUrlBuilder.populateURL(ActivityAction.TRASH.getActivityAction());
+        String requestUri = ActivityUrls.ACTIVITY_URL.format(getApiVersion(), ActivityAction.TRASH.getName());
 		try {
 			Map<String, String> params = new HashMap<String, String>();
 			params.put("activityUuid", activityId);
@@ -765,7 +766,7 @@ public class ActivityService extends BaseService {
 		if (null == activityNodeId){
 			throw new ActivityServiceException(null, "Null activityNodeId");
 		}
-		String requestUri = ActivityServiceUrlBuilder.populateURL(ActivityAction.ACTIVITYNODE.getActivityAction());
+        String requestUri = ActivityUrls.ACTIVITY_URL.format(getApiVersion(), ActivityAction.ACTIVITYNODE.getName());
 		try {
 			Map<String, String> params = new HashMap<String, String>();
 			params.put("activityNodeUuid", activityNodeId);
@@ -786,7 +787,7 @@ public class ActivityService extends BaseService {
 		if (null == activityId){
 			throw new ActivityServiceException(null, "Null activityId");
 		}
-		String requestUri = ActivityServiceUrlBuilder.populateURL(ActivityAction.TAGS.getActivityAction());
+        String requestUri = ActivityUrls.ACTIVITY_URL.format(getApiVersion(), ActivityAction.TAGS.getName());
         try {
         	Map<String, String> params = new HashMap<String, String>();
         	params.put("activityUuid", activityId);
@@ -807,7 +808,7 @@ public class ActivityService extends BaseService {
 		if (null == activityNodeId){
 			throw new ActivityServiceException(null, "Null activityNodeId");
 		}
-		String requestUri = ActivityServiceUrlBuilder.populateURL(ActivityAction.TAGS.getActivityAction());
+        String requestUri = ActivityUrls.ACTIVITY_URL.format(getApiVersion(), ActivityAction.TAGS.getName());
         try {
         	Map<String, String> params = new HashMap<String, String>();
         	params.put("activityNodeUuid", activityNodeId);
@@ -895,7 +896,7 @@ public class ActivityService extends BaseService {
 		if (null == activityId){
 			throw new ActivityServiceException(null, "Null activityId");
 		}
-		String requestUri = ActivityServiceUrlBuilder.populateURL(ActivityAction.ACTIVITY.getActivityAction());
+        String requestUri = ActivityUrls.ACTIVITY_URL.format(getApiVersion(), ActivityAction.ACTIVITY.getName());
 		try {
 			Map<String, String> params = new HashMap<String, String>();
 			params.put("activityUuid", activityId);

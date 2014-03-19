@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * ï¿½ Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -29,20 +29,15 @@ public enum CommunityEntity {
 	 *  communities for referring to multiple community
 	 */
 
-	COMMUNITIES("communities"),
-	COMMUNITY("community");
+	COMMUNITIES,
+	COMMUNITY;
 	
-	String communityEntity;
-	
-	private CommunityEntity(String communityEntity) {
-		this.communityEntity = communityEntity;
-	}
 	/**
 	 * getCommunityEntityType
 	 * 
 	 * @return String
 	 */
-	public String getCommunityEntityType(){
-		return communityEntity;
+	public String getName(){
+		return name().toLowerCase();
 	}
 }

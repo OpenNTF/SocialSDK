@@ -49,11 +49,6 @@ import com.ibm.sbt.services.endpoints.Endpoint;
 public class ActivityService extends BaseService {
 	
 	/**
-	 * Used in constructing REST APIs
-	 */
-	public static final String	baseUrl		= "/activities/service/atom2/";
-	
-	/**
 	 * Constructor Creates ActivityService Object with default endpoint
 	 */
 	public ActivityService() {

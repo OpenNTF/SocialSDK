@@ -12,6 +12,9 @@
 								<xe:iconEntry url="/explorer_get.png"
 									selectedValue="get" alt="GET method">
 								</xe:iconEntry>
+								<xe:iconEntry url="/explorer_head.png"
+									selectedValue="head" alt="HEAD method">
+								</xe:iconEntry>
 								<xe:iconEntry url="/explorer_put.png"
 									selectedValue="put" alt="PUT method">
 								</xe:iconEntry>

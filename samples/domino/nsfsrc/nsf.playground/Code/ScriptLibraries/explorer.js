@@ -87,7 +87,7 @@ function executeService(params,details,results,callback) {
 			updatePanelError(results,"No HTTP method specified in the API description");
 			return;
 		}
-		if(m!="GET"&&m!="POST"&&m!="PUT"&&m!="DELETE") {
+		if(m!="GET"&&m!="POST"&&m!="PUT"&&m!="DELETE"&&m!="HEAD") {
 			updatePanelError(results,"Invalid HTTP method "+m);
 			return;
 		}

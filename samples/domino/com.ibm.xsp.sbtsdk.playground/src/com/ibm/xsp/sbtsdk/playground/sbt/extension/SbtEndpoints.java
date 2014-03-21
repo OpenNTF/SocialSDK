@@ -89,7 +89,8 @@ public class SbtEndpoints extends Endpoints {
 				new Property("Sma_OA2_AuthorizationURL", "OAuth2 - Authorization URL", "https://apps.na.collabserv.com/manage/oauth2/authorize"),
 				new Property("Sma_OA2_AccessTokenURL", "OAuth2 - Access Token URL", "https://apps.na.collabserv.com/manage/oauth2/token"),
 		}, new Group[] {
-				new Group("Basic Authentication", new String[] {"Sma_URL"}, "# Make SmartCloud Basic the default server for Connections\nsbt.endpoint.connections=smartcloudBasic\nsbt.endpoint.smartcloud=smartcloudBasic"),
+				new Group("Basic Authentication", new String[] {SMA_URL}, "# Make SmartCloud Basic the default server for Connections\nsbt.endpoint.connections=smartcloudBasic\nsbt.endpoint.smartcloud=smartcloudBasic"),
+				new Group("Form Based", new String[] {SMA_URL}, "# Make SmartCloud Form the default server for Connections\nsbt.endpoint.connections=smartcloudForm\nsbt.endpoint.smartcloud=smartcloudForm"),
 				new Group("OAuth 1", new String[] {SMA_URL,SMA_OA_GADGET_SERVICE,SMA_OA_COUNSUMERKEY,SMA_OA_CONSUMERSECRET,"Sma_OA_RequestTokenURL","Sma_OA_AuthorizationURL","Sma_OA_AccessTokenURL"}, "# Make SmartCloud OAuth 1 the default server for Connections\nsbt.endpoint.connections=smartcloudOA\nsbt.endpoint.smartcloud=smartcloudOA"),
 				new Group("OAuth 2", new String[] {SMA_URL,"Sma_OA2_ConsumerKey","Sma_OA2_ConsumerSecret","Sma_OA2_AuthorizationURL","Sma_OA2_AccessTokenURL"}, "# Make SmartCloud OAuth 2 the default server for Connections\nsbt.endpoint.connections=smartcloudOA2\nsbt.endpoint.smartcloud=smartcloudOA2",1),
 		}, null,

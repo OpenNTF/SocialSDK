@@ -18,7 +18,9 @@ package com.ibm.commons.runtime.beans;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -45,6 +47,8 @@ public class AbstractXmlConfigBeanFactory extends AbstractBeanFactory {
 	
 	/**
 	 * 
+	 * Based on the JSF 1.1 documentation
+  		
   		<managed-bean>
     		<managed-bean-name>aaaaa</managed-bean-name>
     		<managed-bean-class>bbbbb</managed-bean-class>
@@ -53,7 +57,25 @@ public class AbstractXmlConfigBeanFactory extends AbstractBeanFactory {
 				<property-name>xxxx</property-name>
 				<value>yyyy</value>
 			</managed-property>
-  		</managed-bean>
+			<managed-property>
+        		<property-name>yyyy</property-name>
+        		<map-entries>
+            		<map-entry>
+                		<key>kkkk</key>
+                		<value>vvvv</value>
+            		</map-entry>
+            		...
+        		</map-entries>
+    		</managed-property>  
+    		<managed-property>
+        		<property-name>zzzz</property-name>
+        		<list-entries>
+            		<value>vvvv</value>
+            		...
+        		</list-entries>
+    		</managed-property>
+    	</managed-bean>
+    	
   	 *	
 	 * @param fileName
 	 * @return
@@ -155,40 +177,104 @@ public class AbstractXmlConfigBeanFactory extends AbstractBeanFactory {
 	}
 
 	private static BeanProperty readProperty(Element root) {
-		Element eName=null, eClassName=null, eValue=null;
+		Element eClassName=null;
+		String name=null; Object value=null;
 		NodeList l = root.getChildNodes();
 		if(l!=null) {
 			for(int i=0; i<l.getLength(); i++) {
 				Node n = l.item(i);
 				if(n.getNodeType()==Node.ELEMENT_NODE) {
 					if(n.getNodeName().equals("property-name")) {
-						if(eName!=null) {
+						if(name!=null) {
 							throw new IllegalArgumentException("property-name is specified twice for the same bean property");
 						}
-						eName = (Element)n;
+						name = getText((Element)n);
 					} else if(n.getNodeName().equals("property-class")) {
 						if(eClassName!=null) {
 							throw new IllegalArgumentException("property-class is specified twice for the same bean property");
 						}
 						eClassName = (Element)n;
 					} else if(n.getNodeName().equals("value")) {
-						if(eValue!=null) {
+						if(value!=null) {
 							throw new IllegalArgumentException("value is specified twice for the same bean property");
 						}
-						eValue = (Element)n;
+						value = getText((Element)n);
+					} else if(n.getNodeName().equals("map-entries")) {
+						if(value!=null) {
+							throw new IllegalArgumentException("value is specified twice for the same bean property");
+						}
+						value = readMap((Element)n);
+					} else if(n.getNodeName().equals("list-entries")) {
+						if(value!=null) {
+							throw new IllegalArgumentException("value is specified twice for the same bean property");
+						}
+						value = readList((Element)n);
 					} else {
 						throw new IllegalArgumentException(StringUtil.format("Invalid element {0} in bean definition",n.getNodeName()));
 					}
 				}
 			}
 		}
-		String name = getText(eName);
+
 		if(StringUtil.isEmpty(name)) {
 			throw new IllegalArgumentException("Missing property-name in bean property definition");
 		}
-		//String className = getText(eClassName); // We ignore this property for now..
-		String value = getText(eValue);
+		if(value==null) {
+			throw new IllegalArgumentException("Missing property value in bean property definition");
+		}
+
 		return new BeanProperty(name, value);
+	}
+	private static Map<String,String> readMap(Element elt) {
+		Map<String,String> map = new HashMap<String, String>();
+		NodeList l = elt.getChildNodes();
+		for(int i=0; i<l.getLength(); i++) {
+			Node n = l.item(i);
+			if(n.getNodeType()==Node.ELEMENT_NODE) {
+				if(n.getNodeName().equals("map-entry")) {
+					addMapEntry((Element)n, map);
+				} else {
+					throw new IllegalArgumentException(StringUtil.format("Invalid element {0} in bean definition",n.getNodeName()));
+				}
+			}
+		}
+		return map;
+	}
+	private static void addMapEntry(Element elt, Map<String,String> map) {
+		String key=null, value=null;
+		NodeList l = elt.getChildNodes();
+		for(int i=0; i<l.getLength(); i++) {
+			Node n = l.item(i);
+			if(n.getNodeType()==Node.ELEMENT_NODE) {
+				if(n.getNodeName().equals("key")) {
+					key = getText((Element)n);
+				} else if(n.getNodeName().equals("value")) {
+					value = getText((Element)n);
+				} else {
+					throw new IllegalArgumentException(StringUtil.format("Invalid element {0} in bean definition",n.getNodeName()));
+				}
+			}
+		}
+		if(key==null) {
+			throw new IllegalArgumentException("Missing key in Map in bean property definition");
+		}
+		map.put(key, value);
+	}
+	private static List<String> readList(Element elt) {
+		List<String> list = new ArrayList<String>();
+		NodeList l = elt.getChildNodes();
+		for(int i=0; i<l.getLength(); i++) {
+			Node n = l.item(i);
+			if(n.getNodeType()==Node.ELEMENT_NODE) {
+				if(n.getNodeName().equals("value")) {
+					String value = getText((Element)n);
+					list.add(value);
+				} else {
+					throw new IllegalArgumentException(StringUtil.format("Invalid element {0} in bean definition",n.getNodeName()));
+				}
+			}
+		}
+		return list;
 	}
 	
 	private static String getText(Element e) {

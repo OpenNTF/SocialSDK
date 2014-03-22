@@ -15,7 +15,6 @@
  */
 package com.ibm.sbt.services.client.smartcloud.bss;
 
-import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
@@ -23,7 +22,6 @@ import java.util.Map;
 
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.services.client.ClientService;
-import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.endpoints.Endpoint;
 
@@ -96,9 +94,8 @@ public class AuthorizationService extends BssService {
 			JsonJavaObject rolesObject = (JsonJavaObject)serverResponse.getData();
 			List<Object> roles = rolesObject.getAsList(PROPERTY_LIST);
 			return (String[])roles.toArray(new String[roles.size()]);
-			
-		} catch (Exception e) {
-			throw new BssException(e, "Error retrieving role list");
+		} catch (Exception e) {		
+			throw new BssException(e, "Error retrieving role list for {0} caused by {1}", loginName, e.getMessage());
 		}
     }
     
@@ -121,11 +118,9 @@ public class AuthorizationService extends BssService {
     		if (statusCode != 204) {
     			throw new BssException(response, "Error assigning role {0} to {1}", role, loginName);
     		}
-		} catch (IOException e) {
-			throw new BssException(e, "Error assigning role {0} to {1}", role, loginName);			
-		} catch (ClientServicesException e) {
-			throw new BssException(e, "Error assigning role {0} to {1}", role, loginName);
-		}
+		} catch (Exception e) {		
+			throw new BssException(e, "Error assigning role {0} to {1} caused by {2}", role, loginName, e.getMessage());			
+		} 
     }
 
     /**
@@ -147,11 +142,9 @@ public class AuthorizationService extends BssService {
     		if (statusCode != 204) {
     			throw new BssException(response, "Error unassigning role {0} to {1}", role, loginName);
     		}
-		} catch (IOException e) {
-			throw new BssException(e, "Error unassigning role {0} to {1}", role, loginName);			
-		} catch (ClientServicesException e) {
-			throw new BssException(e, "Error unassigning role {0} to {1}", role, loginName);
-		}
+		} catch (Exception e) {		
+			throw new BssException(e, "Error unassigning role {0} to {1} caused by {2}", role, loginName, e.getMessage());			
+		} 
     }
 
 }

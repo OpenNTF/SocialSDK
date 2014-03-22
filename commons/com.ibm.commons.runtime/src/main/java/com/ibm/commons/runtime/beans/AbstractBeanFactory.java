@@ -20,6 +20,10 @@ import java.beans.BeanInfo;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import com.ibm.commons.runtime.impl.ManagedBeanFactory;
 import com.ibm.commons.runtime.util.ParameterProcessor;
@@ -37,8 +41,8 @@ public class AbstractBeanFactory extends ManagedBeanFactory {
 	
 	public static class BeanProperty {
 		private String name;
-		private String value;
-		public BeanProperty(String name, String value) {
+		private Object value;
+		public BeanProperty(String name, Object value) {
 			this.name = name;
 			this.value = value;
 		}
@@ -76,11 +80,8 @@ public class AbstractBeanFactory extends ManagedBeanFactory {
 				throw ie;
 			}
 		}
-		protected void setProperty(Object o, String name, String value) {
+		protected void setProperty(Object o, String name, Object value) {
 			try {
-				// Handle substitution variables
-				value = replaceVariables(value);
-				
 				// A cache is already managed by the JVM for beaninfo
 				BeanInfo bi = Introspector.getBeanInfo(o.getClass());
 				if(bi!=null) {
@@ -92,52 +93,72 @@ public class AbstractBeanFactory extends ManagedBeanFactory {
 							if(m!=null) {
 								Class<?> pType = d.getPropertyType();
 								if(pType==String.class) {
-									m.invoke(o, value);
+									m.invoke(o, replaceVariables(name,value));
 									return;
 								} else if(pType==Boolean.class || pType==Boolean.TYPE) {
-									boolean v = Boolean.parseBoolean(value);
+									boolean v = Boolean.parseBoolean(replaceVariables(name,value));
 									m.invoke(o, v);
 									return;
 								} else if(pType==Byte.class || pType==Byte.TYPE) {
-									Byte v = Byte.parseByte(value.trim());
+									Byte v = Byte.parseByte(replaceVariables(name,value).trim());
 									m.invoke(o, v);
 									return;
 								} else if(pType==Short.class || pType==Short.TYPE) {
-									Short v = Short.parseShort(value.trim());
+									Short v = Short.parseShort(replaceVariables(name,value).trim());
 									m.invoke(o, v);
 									return;
 								} else if(pType==Integer.class || pType==Integer.TYPE) {
-									Integer v = Integer.parseInt(value.trim());
+									Integer v = Integer.parseInt(replaceVariables(name,value).trim());
 									m.invoke(o, v);
 									return;
 								} else if(pType==Long.class || pType==Long.TYPE) {
-									Long v = Long.parseLong(value.trim());
+									Long v = Long.parseLong(replaceVariables(name,value).trim());
 									m.invoke(o, v);
 									return;
 								} else if(pType==Float.class || pType==Float.TYPE) {
-									Float v = Float.parseFloat(value.trim());
+									Float v = Float.parseFloat(replaceVariables(name,value).trim());
 									m.invoke(o, v);
 									return;
 								} else if(pType==Double.class || pType==Double.TYPE) {
-									Double v = Double.parseDouble(value.trim());
+									Double v = Double.parseDouble(replaceVariables(name,value).trim());
 									m.invoke(o, v);
 									return;
+								} else if(Map.class.isAssignableFrom(pType)) {
+									if(!(value instanceof Map)) {
+										throw new IllegalArgumentException(StringUtil.format("Invalid property type bean {0}, class {1}, property {2}, should be a Map",this.name,className,name));
+									}
+									Map<Object,Object> v = new HashMap<Object,Object>();
+									for(Map.Entry<?,?> e: ((Map<?,?>)value).entrySet()) {
+										v.put(e.getKey(), replaceVariables(name,e.getValue()).trim());
+									}
+									m.invoke(o, v);
+								} else if(List.class.isAssignableFrom(pType)) {
+									if(!(value instanceof List)) {
+										throw new IllegalArgumentException(StringUtil.format("Invalid property type bean {0}, class {1}, property {2}, should be a List",this.name,className,name));
+									}
+									List<Object> v = new ArrayList<Object>();
+									for(Object e: (List<?>)value) {
+										v.add(replaceVariables(name,e).trim());
+									}
+									m.invoke(o, v);
 								} else {
-									throw new IllegalArgumentException(StringUtil.format("Invalid property type bean {0}, class {1}, property {2}, type {3}",name,className,d.getName(),pType));
+									throw new IllegalArgumentException(StringUtil.format("Invalid property type bean {0}, class {1}, property {2}, type {3}",this.name,className,name,pType));
 								}
 							}
 						}
 					}
 				}
 			} catch (Exception e) {
-				IllegalStateException ie = new IllegalStateException(StringUtil.format("Error while setting bean properties, bean {0}, class {1}",name,className));
+				IllegalStateException ie = new IllegalStateException(StringUtil.format("Error while setting bean properties, bean {0}, class {1}",this.name,className));
 				ie.initCause(e);
 				throw ie;
 			}
 		}
-		
-		private String replaceVariables(String value) {
-			return ParameterProcessor.process(value);
+		private String replaceVariables(String name, Object value) {
+			if(!(value instanceof String)) {
+				throw new IllegalArgumentException(StringUtil.format("Invalid property type bean {0}, class {1}, property {2}, should be a String",this.name,className,name));
+			}
+			return ParameterProcessor.process((String)value);
 		}
 	}
 	

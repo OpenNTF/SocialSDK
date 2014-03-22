@@ -227,8 +227,13 @@
 			<value>true</value>
 		</managed-property>
 		<managed-property>
-            <property-name>serviceMaps</property-name>
-            <value>%{connections.serviceMaps}</value>
+            <property-name>serviceMappings</property-name>
+            <map-entries>
+            	<map-entry>
+            		<key>blogHomepageHandle</key>
+            		<value>home</value>
+            	</map-entry>
+            </map-entries>
         </managed-property>
 	</managed-bean>
 	

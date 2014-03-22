@@ -17,6 +17,7 @@
 package com.ibm.commons.runtime.beans;
 
 import java.io.InputStream;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -220,7 +221,8 @@ public class AbstractXmlConfigBeanFactory extends AbstractBeanFactory {
 			throw new IllegalArgumentException("Missing property-name in bean property definition");
 		}
 		if(value==null) {
-			throw new IllegalArgumentException("Missing property value in bean property definition");
+			String msg = MessageFormat.format("Missing property value for {0} in bean property definition", name);
+			throw new IllegalArgumentException(msg);
 		}
 
 		return new BeanProperty(name, value);
@@ -287,6 +289,6 @@ public class AbstractXmlConfigBeanFactory extends AbstractBeanFactory {
 	            }
 			}
 		}
-		return null;
+		return "";
 	}
 }

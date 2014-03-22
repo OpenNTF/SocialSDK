@@ -86,10 +86,14 @@ public class BaseBssApp extends BaseApp {
     	}
     	return authenticationService;
     }
-    
+
     public String registerCustomer(String email) throws BssException, JsonException, IOException {
+    	return registerCustomer("Abe Industrial", email);
+    }
+    
+    public String registerCustomer(String orgName, String email) throws BssException, JsonException, IOException {
 		CustomerJsonBuilder customer = new CustomerJsonBuilder();
-    	customer.setOrgName("Abe Industrial")
+    	customer.setOrgName(orgName)
     	        .setPhone("999-999-9999")
     	        .setOrganizationAddressLine1("5 Technology Park Drive")
     	        .setOrganizationAddressLine2("")

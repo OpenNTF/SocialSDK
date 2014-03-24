@@ -4,8 +4,8 @@ require([ "sbt/connections/ProfileService", "sbt/dom", "sbt/config" ], function(
 	var url = "/connections/opensocial/basic/rest/people/@me/";
 	endpoint.request(url, { handleAs : "json" }).then(
 		function(response) {
-			var userid = parseUserid(entry);
-			handleLoggedIn(userid, entry.displayName);
+			var userid = parseUserid(response.entry);
+			handleLoggedIn(userid, response.entry.displayName);
 		}, 
 		function(error) {
 			url = "/manage/oauth/getUserIdentity";

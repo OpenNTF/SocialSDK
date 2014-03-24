@@ -4,34 +4,39 @@ import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.endpoints.Endpoint;
 
 public enum AuthType {
-	oauth, basic, form;
+	OAUTH, BASIC, FORM, SSO;
+	
+	public String get(){
+		return name().toLowerCase();
+	}
 
     /**
      * Get authentication type for the endpoint. like basicAuth, oauth etc.
      * @return
      */
 	public static String getAuthTypePart(Endpoint endpoint){
-		//TODO: Add support for SSO and Form authentication
+		//TODO: Add support for SSO authentication
     	
 		if (null == endpoint) {
-			return basic.name(); // default should be basic as per defect 48438
+			return BASIC.get(); // default should be basic as per defect 48438
 		}
 
 		String authType = endpoint.getAuthType();
 		if (StringUtil.isEmpty(authType)) {
-			return basic.name();
+			return BASIC.get();
 		}
 
 		String authValue = null;
 		if (authType.equalsIgnoreCase("oauth2.0")) {
-			authValue = oauth.name();
+			authValue = OAUTH.get();
 		} else if (authType.equalsIgnoreCase("oauth1.0a")) {
-			authValue = oauth.name();
+			authValue = OAUTH.get();
 		} else if (authType.equalsIgnoreCase("basic")) {
-			authValue = basic.name();
+			authValue = BASIC.get();
 		} else if (authType.equalsIgnoreCase("form")) {
-			authValue = form.name();
+			authValue = FORM.get();
 		}
 		return authValue;
     }
+
 }

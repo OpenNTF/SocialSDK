@@ -16,9 +16,12 @@
 
 package com.ibm.sbt.services.client.connections.communities;
 
+import com.ibm.sbt.services.client.base.NamedUrlPart;
+
 /**
  * Community Scope
  * @author Manish Kataria
+ * @author Carlos Manias
  */
 
 public enum CommunityType {
@@ -38,6 +41,8 @@ public enum CommunityType {
 	INVITES,
 	REMOTEAPPLICATIONS;
 	
-	public String getName(){return name().toLowerCase();}
+	public NamedUrlPart get(){
+		return new NamedUrlPart("communityType", name().toLowerCase());
+	}
 
 }

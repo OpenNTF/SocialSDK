@@ -16,6 +16,7 @@
 package com.ibm.sbt.services.client.connections.activity;
 
 import com.ibm.sbt.services.client.base.ConnectionsConstants;
+import com.ibm.sbt.services.client.base.NamedUrlPart;
 import com.ibm.sbt.services.client.base.URLBuilder;
 import com.ibm.sbt.services.client.base.URLContainer;
 import com.ibm.sbt.services.client.base.Version;
@@ -33,12 +34,12 @@ public enum ActivityUrls implements URLContainer {
 		builder = new URLBuilder(urlVersions);
 	}
 	
-	public String format(Version version, String... args) {
+	public String format(Version version, NamedUrlPart... args) {
 		return builder.format(version, args);
 	}
 
 	public String getPattern(Version version){
-		return builder.getPattern(version).getValue();
+		return builder.getPattern(version).getUrlPattern();
 	}
 
 }

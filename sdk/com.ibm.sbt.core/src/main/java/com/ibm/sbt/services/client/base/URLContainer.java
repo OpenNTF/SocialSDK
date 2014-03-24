@@ -1,4 +1,4 @@
-/* * © Copyright IBM Corp. 2014 * 
+/* * �� Copyright IBM Corp. 2014 * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
  * You may obtain a copy of the License at:
@@ -19,6 +19,6 @@ package com.ibm.sbt.services.client.base;
  * @author Carlos Manias
  */
 public interface URLContainer {
-	public String format(Version version, String... args);
+	public String format(Version version, NamedUrlPart... args);
 	public String getPattern(Version version);
 }

@@ -16,28 +16,20 @@
 
 package com.ibm.sbt.services.client.connections.communities;
 
+import com.ibm.sbt.services.client.base.NamedUrlPart;
+
 /**
  * Community Entity 
  * 
  * @author Manish Kataria
+ * @author Carlos Manias
  */
 public enum CommunityEntity {
-
-	/*
-	 *  Root for Url Construction
-	 *  Community for referring to single community
-	 *  communities for referring to multiple community
-	 */
 
 	COMMUNITIES,
 	COMMUNITY;
 	
-	/**
-	 * getCommunityEntityType
-	 * 
-	 * @return String
-	 */
-	public String getName(){
-		return name().toLowerCase();
+	public NamedUrlPart get(){
+		return new NamedUrlPart("communityEntity", name().toLowerCase());
 	}
 }

@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * ï¿½ Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -31,6 +31,7 @@ import com.ibm.sbt.service.basic.ConnectionsFileProxyService;
 import com.ibm.sbt.services.client.base.AtomEntity;
 import com.ibm.sbt.services.client.base.AtomXPath;
 import com.ibm.sbt.services.client.base.ConnectionsConstants;
+import com.ibm.sbt.services.client.base.Version;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.files.model.Author;
@@ -140,8 +141,9 @@ public class File extends AtomEntity {
 		String libId = this.getLibraryId();
 		HttpServletRequest req = Context.get().getHttpRequest();
 		String sbtServiceUrl = UrlUtil.getContextUrl(req);
-		String url =  sbtServiceUrl + "/service" +  FileServiceURIBuilder.FILES.getBaseUrl() + 
-						FileConstants.SEPARATOR + proxypath + "/" + ConnectionsFileProxyService.FILEPROXYNAME + "/" + "DownloadFile" + "/" + fileId + "/" + libId;
+		String partUrl = FileUrls.DOWNLOADURL.format(ConnectionsConstants.v4_0, FileUrlParts.proxyPath.get(proxypath), 
+				FileUrlParts.proxyName.get(ConnectionsFileProxyService.FILEPROXYNAME), FileUrlParts.fileId.get(fileId), FileUrlParts.libraryId.get(libId));
+		String url =  sbtServiceUrl + FileConstants.SEPARATOR + partUrl;
 		return url;
 	}
 

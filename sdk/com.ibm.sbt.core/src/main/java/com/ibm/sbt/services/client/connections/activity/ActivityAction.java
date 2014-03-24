@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2013
+ * ��� Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -16,9 +16,13 @@
 
 
 package com.ibm.sbt.services.client.connections.activity;
+
+import com.ibm.sbt.services.client.base.NamedUrlPart;
+
 /**
  * Ativity Action class used in Constructing Url 
  * @author Vimal Dhupar
+ * @author Carlos Manias
  */
 public enum ActivityAction {
 	
@@ -35,12 +39,8 @@ public enum ActivityAction {
 	TRASHNODE,
 	ACL;
 	
-	/**
-	 * Wrapper method to return action item
-	 * <p>
-	 */
-	public String getName(){
-		return name().toLowerCase();
+	public NamedUrlPart get(){
+		return new NamedUrlPart("activityAction", name().toLowerCase());
 	}
 
 }

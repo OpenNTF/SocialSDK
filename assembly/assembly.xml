@@ -133,6 +133,7 @@
 			<includes>
 				<include>com.ibm.sbt:com.ibm.sbt.php.core:zip:*</include>
 				<include>com.ibm.sbt:com.ibm.sbt.php.wordpress:zip:*</include>
+				<include>com.ibm.sbt:com.ibm.sbt.php.moodle:zip:*</include>
 			</includes>
 			<binaries>
 				<outputDirectory>sbtsdk/redist/php</outputDirectory>

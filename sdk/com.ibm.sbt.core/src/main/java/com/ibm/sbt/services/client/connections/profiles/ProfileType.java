@@ -23,6 +23,7 @@ public enum ProfileType {
 	 */
 
 	GETPROFILE("atom/profile.do"),
+	GETPROFILES("atom/profiles.do"),
 	DELETEPROFILE("atom/profileEntry.do")  ,
 	ADDPROFILE("atom/profiles.do")  ,
 	UPDATEPROFILE("atom/profileEntry.do"),

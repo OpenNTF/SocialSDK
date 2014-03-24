@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * ï¿½ Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -23,7 +23,7 @@ package com.ibm.sbt.services.client.connections.files;
  */
 public enum Views {
 
-	FILES("/documents"), FOLDERS("/collections"), RECYCLEBIN("/view/recyclebin"), COMMENTS("/comments");
+	FILES("documents"), FOLDERS("collections"), RECYCLEBIN("view/recyclebin"), COMMENTS("comments");
 
 	String	views;
 
@@ -31,7 +31,7 @@ public enum Views {
 		this.views = views;
 	}
 
-	public String getViews() {
+	public String get() {
 		return views;
 	}
 }

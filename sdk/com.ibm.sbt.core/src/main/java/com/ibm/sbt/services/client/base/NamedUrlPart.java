@@ -1,4 +1,4 @@
-/* * �� Copyright IBM Corp. 2014 * 
+/* * ?? Copyright IBM Corp. 2014 * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
  * You may obtain a copy of the License at:
@@ -13,33 +13,36 @@
  */
 package com.ibm.sbt.services.client.base;
 
-	
+import java.io.IOException;
+
+import com.ibm.commons.runtime.util.URLEncoding;
+
 /**
  * 
- * A url for a particular version of Connections
+ * Named Url Part
  * 
  * @author Carlos Manias
  *
  */
-public class VersionedUrl {
-	private final Version version;
-	private URLPattern urlPattern;
+public class NamedUrlPart {
 
-	public VersionedUrl(Version version, String urlPattern) {
-		this.version = version;
-		this.urlPattern = new URLPattern(urlPattern);
-	}
-	
-	public Version getVersion(){
-		return version;
-	}
+	private final String name;
+	private final String value;
 
-	public URLPattern getUrlPattern(){
-		return urlPattern;
+	public NamedUrlPart(String name, String value) {
+		try {
+			this.name = name;
+			this.value = URLEncoding.encodeURIString((value==null)?"":value, "UTF-8", 0, false);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
-	public String format(NamedUrlPart... args){
-		return urlPattern.format(args);
+	public String getName() {
+		return name;
 	}
 
+	public String getValue() {
+		return value;
+	}
 }

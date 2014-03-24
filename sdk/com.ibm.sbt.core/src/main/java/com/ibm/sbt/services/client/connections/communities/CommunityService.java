@@ -25,14 +25,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.http.Header;
 
-import sun.security.krb5.internal.rcache.AuthTime;
-
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.AuthType;
 import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.base.NamedUrlPart;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.base.util.EntityUtil;
 import com.ibm.sbt.services.client.connections.communities.feedhandler.BookmarkFeedHandler;
@@ -124,10 +123,11 @@ public class CommunityService extends BaseService {
 		super(endpoint, cacheSize);
 	}
 	
-	protected String getAuth(){
-		String auth = getAuthTypePart();
-		auth = AuthType.basic.name().equalsIgnoreCase(auth)?"":auth;
-		return auth;
+	@Override
+	public NamedUrlPart getAuthType(){
+		String auth = super.getAuthType().getValue();
+		auth = AuthType.BASIC.get().equalsIgnoreCase(auth)?"":auth;
+		return new NamedUrlPart("authType", auth);
 	}
 
 	/**
@@ -148,7 +148,7 @@ public class CommunityService extends BaseService {
 	 * @throws CommunityServiceException
 	 */
 	public CommunityList getPublicCommunities(Map<String, String> parameters) throws CommunityServiceException {
-        String requestUrl = CommunityUrls.COMMUNITY_URL.format(getApiVersion(), getAuth(), CommunityEntity.COMMUNITIES.getName(),CommunityType.ALL.getName());
+        String requestUrl = CommunityUrls.COMMUNITY_URL.format(getApiVersion(), getAuthType(), CommunityEntity.COMMUNITIES.get(),CommunityType.ALL.get());
 		
 		CommunityList communities = null;
 		if(null == parameters){
@@ -178,7 +178,7 @@ public class CommunityService extends BaseService {
 	public Community getCommunity(String communityUuid) throws CommunityServiceException {
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
-        String url = CommunityUrls.COMMUNITY_URL.format(getApiVersion(), getAuth(), CommunityEntity.COMMUNITY.getName(),CommunityType.INSTANCE.getName());
+        String url = CommunityUrls.COMMUNITY_URL.format(getApiVersion(), getAuthType(), CommunityEntity.COMMUNITY.get(),CommunityType.INSTANCE.get());
 		Community community;
 		try {
 			community = (Community)getEntity(url, parameters, new CommunityFeedHandler(this));
@@ -218,7 +218,7 @@ public class CommunityService extends BaseService {
 		}
 		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
 		
-        String requestUrl = CommunityUrls.COMMUNITY_URL.format(getApiVersion(), getAuth(), CommunityEntity.COMMUNITY.getName(),CommunityType.MEMBERS.getName());
+        String requestUrl = CommunityUrls.COMMUNITY_URL.format(getApiVersion(), getAuthType(), CommunityEntity.COMMUNITY.get(),CommunityType.MEMBERS.get());
 		
 		MemberList members = null;
 		try {
@@ -248,7 +248,7 @@ public class CommunityService extends BaseService {
 	 * @throws CommunityServiceException
 	 */
 	public CommunityList getMyCommunities(Map<String, String> parameters) throws CommunityServiceException {
-        String requestUrl = CommunityUrls.COMMUNITY_URL.format(getApiVersion(), getAuth(), CommunityEntity.COMMUNITIES.getName(),CommunityType.MY.getName());
+        String requestUrl = CommunityUrls.COMMUNITY_URL.format(getApiVersion(), getAuthType(), CommunityEntity.COMMUNITIES.get(),CommunityType.MY.get());
 			
 		CommunityList communities = null;
 		if(null == parameters){
@@ -287,7 +287,7 @@ public class CommunityService extends BaseService {
 		}
 		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
 	
-        String requestUrl = CommunityUrls.COMMUNITY_URL.format(getApiVersion(), getAuth(), CommunityEntity.COMMUNITY.getName(),CommunityType.SUBCOMMUNITIES.getName());
+        String requestUrl = CommunityUrls.COMMUNITY_URL.format(getApiVersion(), getAuthType(), CommunityEntity.COMMUNITY.get(),CommunityType.SUBCOMMUNITIES.get());
 		
 		CommunityList communities = null;
 		try {
@@ -322,7 +322,7 @@ public class CommunityService extends BaseService {
 			parameters = new HashMap<String, String>();
 		}
 		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
-        String requestUrl = CommunityUrls.COMMUNITY_URL.format(getApiVersion(), getAuth(), CommunityEntity.COMMUNITY.getName(),CommunityType.BOOKMARKS.getName());
+        String requestUrl = CommunityUrls.COMMUNITY_URL.format(getApiVersion(), getAuthType(), CommunityEntity.COMMUNITY.get(),CommunityType.BOOKMARKS.get());
 		
 		BookmarkList bookmarks = null;
 		try {
@@ -397,7 +397,7 @@ public class CommunityService extends BaseService {
 		}		
 		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
 
-        String requestUrl = CommunityUrls.COMMUNITY_URL.format(getApiVersion(), getAuth(), CommunityEntity.COMMUNITY.getName(),CommunityType.FORUMTOPICS.getName());
+        String requestUrl = CommunityUrls.COMMUNITY_URL.format(getApiVersion(), getAuthType(), CommunityEntity.COMMUNITY.get(),CommunityType.FORUMTOPICS.get());
 		
 		TopicList forumTopics;
 		try {
@@ -451,7 +451,7 @@ public class CommunityService extends BaseService {
 		if(null == parameters){
 			parameters = new HashMap<String, String>();
 		}		
-        String requestUrl = CommunityUrls.COMMUNITY_URL.format(getApiVersion(), getAuth(), CommunityEntity.COMMUNITY.getName(),CommunityType.MYINVITES.getName());
+        String requestUrl = CommunityUrls.COMMUNITY_URL.format(getApiVersion(), getAuthType(), CommunityEntity.COMMUNITY.get(),CommunityType.MYINVITES.get());
 		InviteList invites = null;
 		try {
 			invites = (InviteList) getEntities(requestUrl, parameters, new InviteFeedHandler(this));
@@ -478,7 +478,7 @@ public class CommunityService extends BaseService {
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
 		parameters.put(USERID, inviteUuid); // the parameter name should be inviteUuid, this is a bug on connections
-        String url = CommunityUrls.COMMUNITY_URL.format(getApiVersion(), getAuth(), CommunityEntity.COMMUNITY.getName(),CommunityType.INVITES.getName());
+        String url = CommunityUrls.COMMUNITY_URL.format(getApiVersion(), getAuthType(), CommunityEntity.COMMUNITY.get(),CommunityType.INVITES.get());
 		Invite invite;
 		try {
 			invite = (Invite)getEntity(url, parameters, new InviteFeedHandler(this));
@@ -508,7 +508,7 @@ public class CommunityService extends BaseService {
 		}
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, invite.getCommunityUuid());
-        String inviteUrl = CommunityUrls.COMMUNITY_URL.format(getApiVersion(), getAuth(), CommunityEntity.COMMUNITY.getName(),CommunityType.INVITES.getName());
+        String inviteUrl = CommunityUrls.COMMUNITY_URL.format(getApiVersion(), getAuthType(), CommunityEntity.COMMUNITY.get(),CommunityType.INVITES.get());
 		Object communityPayload;
 		try {
 			communityPayload = new InviteTransformer().transform(invite.getFieldsMap());
@@ -544,7 +544,7 @@ public class CommunityService extends BaseService {
 		boolean success = true;
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
-        String inviteUrl = CommunityUrls.COMMUNITY_URL.format(getApiVersion(), getAuth(), CommunityEntity.COMMUNITY.getName(),CommunityType.MEMBERS.getName());
+        String inviteUrl = CommunityUrls.COMMUNITY_URL.format(getApiVersion(), getAuthType(), CommunityEntity.COMMUNITY.get(),CommunityType.MEMBERS.get());
 	
 		Object communityPayload;
 		
@@ -591,7 +591,7 @@ public class CommunityService extends BaseService {
 		else{
 			parameters.put("userid", contributorId);	
 		}
-        String inviteUrl = CommunityUrls.COMMUNITY_URL.format(getApiVersion(), getAuth(), CommunityEntity.COMMUNITY.getName(),CommunityType.INVITES.getName());
+        String inviteUrl = CommunityUrls.COMMUNITY_URL.format(getApiVersion(), getAuthType(), CommunityEntity.COMMUNITY.get(),CommunityType.INVITES.get());
 		
 		try {
 			super.deleteData(inviteUrl, parameters, communityUuid);
@@ -650,7 +650,7 @@ public class CommunityService extends BaseService {
 			} catch (TransformerException e) {
 				throw new CommunityServiceException(e, Messages.CreateCommunityPayloadException);
 			}
-			String communityPostUrl = CommunityUrls.COMMUNITY_URL.format(getApiVersion(), getAuth(), CommunityEntity.COMMUNITIES.getName(),CommunityType.MY.getName());
+			String communityPostUrl = CommunityUrls.COMMUNITY_URL.format(getApiVersion(), getAuthType(), CommunityEntity.COMMUNITIES.get(),CommunityType.MY.get());
 			Response requestData = createData(communityPostUrl, null, communityPayload,ClientService.FORMAT_CONNECTIONS_OUTPUT);
 			community.clearFieldsMap();
 			return extractCommunityIdFromHeaders(requestData);
@@ -680,7 +680,7 @@ public class CommunityService extends BaseService {
 		try {
 			Map<String, String> parameters = new HashMap<String, String>();
 			parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, community.getCommunityUuid());
-			String updateUrl = CommunityUrls.COMMUNITY_URL.format(getApiVersion(), getAuth(), CommunityEntity.COMMUNITY.getName(),CommunityType.INSTANCE.getName());
+			String updateUrl = CommunityUrls.COMMUNITY_URL.format(getApiVersion(), getAuthType(), CommunityEntity.COMMUNITY.get(),CommunityType.INSTANCE.get());
 			Object communityPayload;
 			if(community.getFieldsMap().get(CommunityXPath.title)== null)
 				community.setTitle(community.getTitle());
@@ -766,7 +766,7 @@ public class CommunityService extends BaseService {
 		else{
 			parameters.put("userid", memberId);
 		}
-		String url = CommunityUrls.COMMUNITY_URL.format(getApiVersion(), getAuth(), CommunityEntity.COMMUNITY.getName(),CommunityType.MEMBERS.getName());
+		String url = CommunityUrls.COMMUNITY_URL.format(getApiVersion(), getAuthType(), CommunityEntity.COMMUNITY.get(),CommunityType.MEMBERS.get());
 		Member member;
 		try {
 			member = (Member)getEntity(url, parameters, new MemberFeedHandler(this));
@@ -818,7 +818,7 @@ public class CommunityService extends BaseService {
 			throw new CommunityServiceException(e, Messages.CreateCommunityPayloadException);
 		}
 		
-		String communityUpdateMemberUrl = CommunityUrls.COMMUNITY_URL.format(getApiVersion(), getAuth(), CommunityEntity.COMMUNITY.getName(),CommunityType.MEMBERS.getName());
+		String communityUpdateMemberUrl = CommunityUrls.COMMUNITY_URL.format(getApiVersion(), getAuthType(), CommunityEntity.COMMUNITY.get(),CommunityType.MEMBERS.get());
 		try {
 			Response response = super.createData(communityUpdateMemberUrl, parameters, communityPayload);
 			int statusCode = response.getResponse().getStatusLine().getStatusCode();
@@ -866,7 +866,7 @@ public class CommunityService extends BaseService {
 			throw new CommunityServiceException(e, Messages.UpdateMemberException);
 		}
 		
-		String communityUpdateMemberUrl = CommunityUrls.COMMUNITY_URL.format(getApiVersion(), getAuth(), CommunityEntity.COMMUNITY.getName(),CommunityType.MEMBERS.getName());
+		String communityUpdateMemberUrl = CommunityUrls.COMMUNITY_URL.format(getApiVersion(), getAuthType(), CommunityEntity.COMMUNITY.get(),CommunityType.MEMBERS.get());
 		try {
 			super.createData(communityUpdateMemberUrl, parameters, memberPayload);
 		} catch (ClientServicesException e) {
@@ -901,7 +901,7 @@ public class CommunityService extends BaseService {
 		}
 		
 		try {
-			String deleteCommunityUrl = CommunityUrls.COMMUNITY_URL.format(getApiVersion(), getAuth(), CommunityEntity.COMMUNITY.getName(),CommunityType.MEMBERS.getName());
+			String deleteCommunityUrl = CommunityUrls.COMMUNITY_URL.format(getApiVersion(), getAuthType(), CommunityEntity.COMMUNITY.get(),CommunityType.MEMBERS.get());
 			super.deleteData(deleteCommunityUrl, parameters, COMMUNITY_UNIQUE_IDENTIFIER);
 		} catch (ClientServicesException e) {
 			throw new CommunityServiceException(e, Messages.RemoveMemberException, memberId, communityUuid);
@@ -927,7 +927,7 @@ public class CommunityService extends BaseService {
 		try {
 			Map<String, String> parameters = new HashMap<String, String>();
 			parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
-			String deleteCommunityUrl = CommunityUrls.COMMUNITY_URL.format(getApiVersion(), getAuth(), CommunityEntity.COMMUNITY.getName(),CommunityType.INSTANCE.getName());
+			String deleteCommunityUrl = CommunityUrls.COMMUNITY_URL.format(getApiVersion(), getAuthType(), CommunityEntity.COMMUNITY.get(),CommunityType.INSTANCE.get());
 			super.deleteData(deleteCommunityUrl, parameters, COMMUNITY_UNIQUE_IDENTIFIER);
 		} catch (ClientServicesException e) {
 			throw new CommunityServiceException(e, Messages.DeleteCommunityException, communityUuid);

@@ -58,7 +58,6 @@ public class LibraryRequest {
     protected boolean debug;
     protected boolean debugTransport;
     protected boolean mockTransport;
-    protected boolean layer;
     protected boolean regPath;
     protected boolean initJs;
 
@@ -318,14 +317,6 @@ public class LibraryRequest {
      * 
      * @return
      */
-    public boolean isLayer() {
-        return layer;
-    }
-
-    /**
-     * 
-     * @return
-     */
     public boolean isRegPath() {
         return regPath;
     }
@@ -475,7 +466,6 @@ public class LibraryRequest {
         jsLib = readString(params, PARAM_JSLIB, getDefaultJsLib());
         jsVersion = readString(params, PARAM_JSVERSION, DEFAULT_JSLIB.equals(jsLib) ? getDefaultJsVersion() : "");
         debug = Boolean.parseBoolean(readString(params, PARAM_DEBUG, getDefaultDebug()));
-        layer = Boolean.parseBoolean(readString(params, PARAM_LAYER, getDefaultLayer()));
         regPath = Boolean.parseBoolean(readString(params, PARAM_REGPATH, getDefaultRegPath()));
         initJs = Boolean.parseBoolean(readString(params, PARAM_INITJS, getDefaultInitJs()));
         debugTransport = Boolean.parseBoolean(readString(params, PARAM_DEBUG_TRANSPORT, getDefaultDebugTransport()));
@@ -600,7 +590,6 @@ public class LibraryRequest {
         sb.append(";toolkitUrl=").append(toolkitUrl);
         sb.append(";toolkitJsUrl=").append(toolkitJsUrl);
         sb.append(";jsLibraryUrl=").append(jsLibraryUrl);
-        sb.append(";layer=").append(layer);
         sb.append(";regPath=").append(regPath);
         sb.append("}");
         return sb.toString();

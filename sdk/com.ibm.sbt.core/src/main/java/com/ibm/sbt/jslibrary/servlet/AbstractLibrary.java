@@ -486,7 +486,7 @@ abstract public class AbstractLibrary {
 		String[] moduleNames = getModuleNames(dependModules);
 		String dmList = toQuotedString(dependModules, ",");
 		String dmNames = toString(moduleNames, ",");
-		indent(sb, indentationLevel).append("define('").append(request.isLayer()?getDefineModuleLayer():getDefineModule()).append("',[")
+		indent(sb, indentationLevel).append("define('").append(getDefineModule()).append("',[")
 				.append(dmList).append("],function(").append(dmNames).append("){").append(newLine());
 
 		indentationLevel++;
@@ -575,39 +575,37 @@ abstract public class AbstractLibrary {
 		boolean closeElse = false;
 		boolean isInnerBlock = false;
 
-		if (!request.isLayer()) {
-			if (enableDefineCheck(request.getJsVersion())) {
-				indent(sb).append("if(typeof define=='undefined'){").append(newLine());
-	
-				String[][] registerModules = getRegisterModules(request);
-				String[][] registerExtModules = StringUtil.isNotEmpty(request.getToolkitExtUrl()) ? getRegisterExtModules(request)
-						: null;
-				String[] requireModules = getRequireModules();
-	
-				indentationLevel++;
-				sb.append(generateModuleBlock(request, registerModules, registerExtModules, requireModules, indentationLevel));
-				indentationLevel--;
-	
-				indent(sb).append("} else {").append(newLine());
-				closeElse = true;
-				isInnerBlock = true;
-			}
+		if (enableDefineCheck(request.getJsVersion())) {
+			indent(sb).append("if(typeof define=='undefined'){").append(newLine());
 
-			// register the module paths and required modules
-			String[][] registerModulesAmd = getRegisterModulesAmd(request);
-			String toolkitExtUrl = request.getToolkitExtUrl();
-			String[][] registerExtModulesAmd = StringUtil.isNotEmpty(toolkitExtUrl) ? getRegisterExtModulesAmd(request) : null;
-			String[] requireModulesAmd = getRequireModulesAmd();
-			if (isInnerBlock) {
-				indentationLevel++;
-			}
-			sb.append(generateModuleBlock(request, registerModulesAmd, registerExtModulesAmd, requireModulesAmd, indentationLevel));
-			if (isInnerBlock) {
-				indentationLevel--;
-			}
-			if (closeElse) {
-				indent(sb).append("}").append(newLine());
-			}
+			String[][] registerModules = getRegisterModules(request);
+			String[][] registerExtModules = StringUtil.isNotEmpty(request.getToolkitExtUrl()) ? getRegisterExtModules(request)
+					: null;
+			String[] requireModules = getRequireModules();
+
+			indentationLevel++;
+			sb.append(generateModuleBlock(request, registerModules, registerExtModules, requireModules, indentationLevel));
+			indentationLevel--;
+
+			indent(sb).append("} else {").append(newLine());
+			closeElse = true;
+			isInnerBlock = true;
+		}
+
+		// register the module paths and required modules
+		String[][] registerModulesAmd = getRegisterModulesAmd(request);
+		String toolkitExtUrl = request.getToolkitExtUrl();
+		String[][] registerExtModulesAmd = StringUtil.isNotEmpty(toolkitExtUrl) ? getRegisterExtModulesAmd(request) : null;
+		String[] requireModulesAmd = getRequireModulesAmd();
+		if (isInnerBlock) {
+			indentationLevel++;
+		}
+		sb.append(generateModuleBlock(request, registerModulesAmd, registerExtModulesAmd, requireModulesAmd, indentationLevel));
+		if (isInnerBlock) {
+			indentationLevel--;
+		}
+		if (closeElse) {
+			indent(sb).append("}").append(newLine());
 		}
 		
 		sb.append(generateSbtConfigDefine(request, endpoints, properties, indentationLevel));

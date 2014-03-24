@@ -103,6 +103,16 @@ public class OAuth2Handler extends OAuthHandler {
 	private static final String sourceClass = OAuth1Handler.class.getName();
     private static final Logger logger = Logger.getLogger(sourceClass);
 
+    private boolean usePost = false;
+    
+	public boolean isUsePost() {
+		return usePost;
+	}
+
+	public void setUsePost(boolean usePost) {
+		this.usePost = usePost;
+	}
+
 	public OAuth2Handler() {
 	    this.setExpireThreshold(EXPIRE_THRESHOLD);
 	}
@@ -160,6 +170,17 @@ public class OAuth2Handler extends OAuthHandler {
 		if (logger.isLoggable(Level.FINEST)) {
     		logger.entering(sourceClass, "getAccessTokenForAuthorizedUser", new Object[] { });
         }
+		if (usePost) {
+			getAccessTokenForAuthorizedUsingPOST();
+		} else {
+			getAccesTokenForAutherzedUserGET();
+		}
+	
+	}
+	
+	
+	private void getAccesTokenForAutherzedUserGET() throws OAuthException,
+			IOException, Exception {
 		HttpGet method = null;
 		int responseCode = HttpStatus.SC_OK;
 		String responseBody = null;
@@ -199,23 +220,17 @@ public class OAuth2Handler extends OAuthHandler {
 				content.close(); 
 			}
 		}
+		
 		if (responseCode != HttpStatus.SC_OK) {
+			//this is a leftover of previous code that tried a POST in case of error
+			//can't remove it without changing the behavior of installations that run
+			//with a bad API level but works because of this fall back mechanism.
+			logger.warning("Getting access token failed, retrying with POST. Please configure the right API Level for your installation in sbt.properties or managed-beans.xml");
 			getAccessTokenForAuthorizedUsingPOST();
-			 return;
-//			if (responseCode == HttpStatus.SC_UNAUTHORIZED) {
-//				throw new Exception("getAccessToken failed with Response Code: Unauthorized (401),<br>Msg: " + responseBody);
-//			} else if (responseCode == HttpStatus.SC_BAD_REQUEST) {
-//				throw new Exception("getAccessToken failed with Response Code: Bad Request (400),<br>Msg: " + responseBody);
-//			} else if (responseCode == HttpStatus.SC_INTERNAL_SERVER_ERROR) {
-//				throw new Exception("getAccessToken failed with Response Code: Internal Server error (500),<br>Msg: " + responseBody);
-//			} else {
-//				throw new Exception("getAccessToken failed with Response Code: (" + responseCode + "),<br>Msg: " + responseBody);
-//			}
 		} else {
 			setOAuthData(responseBody); //save the returned data
 		}
-	
-		}
+	}
 	
 	/*
 	 * 

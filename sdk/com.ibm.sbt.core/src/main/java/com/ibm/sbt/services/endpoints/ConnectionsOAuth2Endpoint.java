@@ -28,6 +28,8 @@ public class ConnectionsOAuth2Endpoint extends OAuth2Endpoint {
 
 	private static final int authenticationErrorCode = 403;
 	
+	
+	
     public ConnectionsOAuth2Endpoint() {
     }
     
@@ -65,4 +67,14 @@ public class ConnectionsOAuth2Endpoint extends OAuth2Endpoint {
 	public int getAuthenticationErrorCode(){
     	return authenticationErrorCode;
     }
+    
+    @Override
+    public void setApiVersion(String apiVersion) {
+    	if (apiVersion!=null) {
+    		if (apiVersion.matches("4[.]?5([.]?0)?")){
+    			oAuthHandler.setUsePost(true);
+    		}
+    	}
+    }
+    
 }

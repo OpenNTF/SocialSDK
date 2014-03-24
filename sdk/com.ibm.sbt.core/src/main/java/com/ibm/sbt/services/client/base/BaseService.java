@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2012
+ * ��� Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -127,8 +127,8 @@ public abstract class BaseService implements Serializable {
      * Get authentication type for the endpoint. like basicAuth, oauth etc.
      * @return
      */
-	public String getAuthTypePart(){
-		return AuthType.getAuthTypePart(endpoint);
+	public NamedUrlPart getAuthType(){
+		return new NamedUrlPart("authType",AuthType.getAuthTypePart(endpoint));
     }
 	
 	/**

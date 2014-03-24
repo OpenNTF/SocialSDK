@@ -1,4 +1,4 @@
-/* * © Copyright IBM Corp. 2014 * 
+/* * �� Copyright IBM Corp. 2014 * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
  * You may obtain a copy of the License at:
@@ -13,15 +13,8 @@
  */
 package com.ibm.sbt.services.client.base;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map.Entry;
 import java.util.TreeMap;
-
-import com.ibm.commons.runtime.util.URLEncoding;
-import com.ibm.commons.util.StringUtil;
 
 /**
  * URLBuilder provides a unified way to generate urls
@@ -29,63 +22,39 @@ import com.ibm.commons.util.StringUtil;
  * @author Carlos Manias
  */
 public class URLBuilder {
-	private final TreeMap<Version, VersionedUrl> urlVersions;
+	private final TreeMap<Version, URLPattern> urlVersions;
 	
-	public URLBuilder(VersionedUrl[] args) {
-		urlVersions = new TreeMap<Version, VersionedUrl>();
+	public URLBuilder(VersionedUrl... args) {
+		urlVersions = new TreeMap<Version, URLPattern>();
 		for (int i = 0; i < args.length; i++) {
-			urlVersions.put(args[i].getKey(), args[i]);
+			urlVersions.put(args[i].getVersion(), args[i].getUrlPattern());
 		}
 	}
 
 	/**
 	 * Returns URL pattern for the specified version
+	 * <p>
+	 * Returns an entry for a version of Connections less than or equal the version requested
+	 * </p>
 	 * @param version
 	 * @return
 	 */
-	public VersionedUrl getPattern(Version version){
-		//Returns an entry for a version of Connections less than or equal the version requested
-		Entry<Version, VersionedUrl> entry = urlVersions.floorEntry(version);
+	public URLPattern getPattern(Version version){
+		Entry<Version, URLPattern> entry = urlVersions.floorEntry(version);
 		if (entry == null) {
 			throw new IllegalArgumentException("No support found for Connections version "+version.toString());
 		}
 		return entry.getValue();
 	}
-	
+
 	/**
 	 * Returns the formatted URL for the specified version of Connections
 	 * @param version
 	 * @param args
 	 * @return
 	 */
-	public String format(Version version, String... args) {
-		VersionedUrl urlPattern = getPattern(version);
-		int mutableParts = urlPattern.getMutableParts();
-		if (args.length!=mutableParts) {
-			throw new IllegalArgumentException("Wrong number of arguments, expected "+mutableParts+", got "+args.length);
-		}
-		return formatPattern(urlPattern.getCompiledUrl(), Arrays.asList(args));
-	}
-	
-	/*
-	 * Subtitutes the mutable parts of the url with the values supplied
-	 */
-	protected String formatPattern(String urlPattern, List<String> args) {
-		List<String> encoded = new ArrayList<String>();
-		for(String arg : args) {
-			try {
-				encoded.add(URLEncoding.encodeURIString(arg, "UTF-8", 0, false));
-			} catch (IOException e) {
-				throw new RuntimeException(e);
-			}
-		}
-		return sanitizeUrl(StringUtil.format(urlPattern, encoded.toArray()));
-	}
-	
-	/*
-	 * Removes double slashes in a url
-	 */
-	protected String sanitizeUrl(String url){
-		return url.replaceAll("//", "/");
+	public String format(Version version, NamedUrlPart... args) {
+		URLPattern urlPattern = getPattern(version);
+		return urlPattern.format(args);
 	}
 }

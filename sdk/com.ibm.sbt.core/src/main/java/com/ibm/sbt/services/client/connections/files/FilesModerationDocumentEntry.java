@@ -2,13 +2,15 @@ package com.ibm.sbt.services.client.connections.files;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.w3c.dom.Document;
+
 import com.ibm.commons.xml.DOMUtil;
 import com.ibm.commons.xml.XMLException;
 import com.ibm.sbt.services.client.connections.files.util.Messages;
 
 /*
- * © Copyright IBM Corp. 2012
+ * ï¿½ Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -31,7 +33,7 @@ import com.ibm.sbt.services.client.connections.files.util.Messages;
  */
 public class FilesModerationDocumentEntry {
 
-	public static Document	data;
+	private Document	data;
 	static final String		sourceClass	= FilesModerationDocumentEntry.class.getName();
 	static final Logger		logger		= Logger.getLogger(sourceClass);
 
@@ -40,12 +42,12 @@ public class FilesModerationDocumentEntry {
 		this.data = data;
 	}
 
-	public static Document getData() {
+	public Document getData() {
 		return data;
 	}
 
-	public static void setData(Document data) {
-		FilesModerationDocumentEntry.data = data;
+	public void setData(Document data) {
+		this.data = data;
 	}
 
 	/**

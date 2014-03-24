@@ -33,6 +33,7 @@ public class SmartCloudOAuth2Endpoint extends OAuth2Endpoint {
 	
     public SmartCloudOAuth2Endpoint() {
     	clientParams.put("isSmartCloud", true);
+    	oAuthHandler.setUsePost(true);
     }
     
     @Override

@@ -129,7 +129,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
         	entries : "/app:categories/a:category",
         	// used to access data from the feed
         	targetEmail : "app:categories/snx:targetEmail",
-        	numberOfContributors : "app:categories/@snx:numberOfContributors",
+        	numberOfContributors : "@snx:numberOfContributors",
             // used by getEntityData
             entry : "/app:categories/a:category",
             // used by getEntityId

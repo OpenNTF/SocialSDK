@@ -35,7 +35,6 @@ public enum BookmarkUrls {
 	MYNOTIFICATIONS(new VersionedUrl(ConnectionsConstants.v4_0, "dogear/atom/mynotifications")),
 	MYSENTNOTIFICATIONS(new VersionedUrl(ConnectionsConstants.v4_0, "dogear/atom/mysentnotifications"));
 	
-
 	private URLBuilder builder;
 	
 	private BookmarkUrls(VersionedUrl... urlVersions) {

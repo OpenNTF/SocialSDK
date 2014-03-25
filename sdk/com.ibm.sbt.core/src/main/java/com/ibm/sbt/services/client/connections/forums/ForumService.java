@@ -49,16 +49,12 @@ public class ForumService extends BaseService {
 	/**
 	 * Used in constructing REST APIs
 	 */
-	private static final String	_baseUrl				= "/forums/";
-	private static final String _basicUrl				= "atom/";
-	public static final String _oauthUrl				= "oauth/atom/";
 	private static final String FORUM_UNIQUE_IDENTIFIER = "forumUuid";
 	private static final String TOPIC_UNIQUE_IDENTIFIER = "topicUuid";
 	private static final String REPLY_UNIQUE_IDENTIFIER = "replyUuid";
 	private static final String POST_UNIQUE_IDENTIFIER  = "postUuid"; 
 	private static final String COMM_UNIQUE_IDENTIFIER	= "communityUuid";
 	public static final String CREATE_OP 				= "create";
-	private static final double APIVERSION       		= 4.5; 
 	/**
 	 * Default Constructor
 	 */

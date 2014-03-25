@@ -72,6 +72,7 @@ import com.ibm.sbt.services.endpoints.Endpoint;
  * 
  * @Represents Connections FileService
  * @author Vimal Dhupar
+ * @author Carlos Manias
  * @see http 
  *      ://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation
  *      #action=openDocument&res_title=Files_API_ic40a&content=pdcontent

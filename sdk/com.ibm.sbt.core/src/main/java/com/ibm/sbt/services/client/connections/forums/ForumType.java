@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -15,36 +15,28 @@
  */
 package com.ibm.sbt.services.client.connections.forums;
 
+import com.ibm.sbt.services.client.base.NamedUrlPart;
+
 /**
  * Class used in constructing URL for Forums service
  * @author Manish Kataria
+ * @author Carlos Manias
  */
-
-
 public enum ForumType {
+	FORUMS,
+	FORUM,
+	TOPICS,
+	REPLIES,
+	REPLY,
+	TOPIC,
+	RESOURCES,
+	REPORTS,
+	ACL,
+	TAGS,
+	RECOMMENDATIONS; 
 	
-	FORUMS("forums"),
-	FORUM("forum"),
-	TOPICS("topics"),
-	REPLIES("replies"),
-	REPLY("reply"),
-	TOPIC("topic"),
-	RESOURCES("resources"),
-	REPORTS("reports"),
-	ACL("acl"),
-	TAGS("tags"),
-	RECOMMENDATIONS("recommendation"); 
-	
-	String forumType;
-	
-	private ForumType(String forumType) {
-		this.forumType = forumType;
+	public NamedUrlPart get(){
+		return new NamedUrlPart("forumType", name().toLowerCase());
 	}
-	
-	/**
-	 * Wrapper method to return forumType type
-	 * <p>
-	 */
-	public String getForumType(){return forumType;}
 
 }

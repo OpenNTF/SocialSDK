@@ -39,6 +39,7 @@ import com.ibm.sbt.services.endpoints.Endpoint;
  * Relies on values of User, Group and Application to construct URLs and perform Network operations. Constructs {@link ActivityStreamEntity} objects after parsing the JSON response from Connections server
  * 
  * @author Manish Kataria
+ * @author Carlos Manias
  *         <pre>
  * Sample Usage
  *  {@code

@@ -16,15 +16,14 @@ import com.ibm.sbt.services.client.base.AtomXPath;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.IFeedHandler;
+import com.ibm.sbt.services.client.base.NamedUrlPart;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.follow.transformer.FollowTransformer;
-import com.ibm.sbt.services.client.connections.forums.ForumServiceException;
 import com.ibm.sbt.services.endpoints.Endpoint;
-import com.ibm.sbt.services.util.AuthUtil;
 
 /*
- * Use this Service to keep track of IBM® Connections resources that interest you, such as a person or community, a blog or a particular file.
+ * Use this Service to keep track of IBMï¿½ Connections resources that interest you, such as a person or community, a blog or a particular file.
  * @author Manish Kataria 
  * 
  * http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.5+API+Documentation#action=openDocument&res_title=Getting_a_feed_of_the_followed_resources_ic45&content=pdcontent
@@ -43,6 +42,15 @@ public class FollowService extends BaseService{
 	public FollowService(Endpoint endpoint) {
 		super(endpoint);
 	}
+
+	@Override
+	public NamedUrlPart getAuthType(){
+		NamedUrlPart part = super.getAuthType();
+		if (!part.getValue().equalsIgnoreCase("oauth")) {
+			part = new NamedUrlPart("authType","");
+		}
+		return part;
+    }
 	
 	/*
 	 * This method returns resources that are being followed by the authenticated user.
@@ -65,7 +73,8 @@ public class FollowService extends BaseService{
 	 */
 	public EntityList<FollowedResource> getFollowedResources(String source, String type, Map<String, String> parameters)  throws FollowServiceException{
 		try {
-			return getResources(resolveUrl(source, type),parameters);
+			String url = FollowUrls.FOLLOW_URL.format(getApiVersion(), FollowServiceType.getByName(source), getAuthType());
+			return getResources(url, generateParams(parameters, source, type, null));
 		} catch (ClientServicesException e) {
 			throw new FollowServiceException(e, "Problem occured in getFollowedResources");
 		}
@@ -83,7 +92,8 @@ public class FollowService extends BaseService{
 	 */
 	public FollowedResource getFollowedResource(String source, String type, String resourceId)  throws FollowServiceException{
 		try {
-			return getResource(resolveUrl(source, type, resourceId),null);
+			String url = FollowUrls.FOLLOW_URL.format(getApiVersion(), FollowServiceType.getByName(source), getAuthType(), Resource.get(resourceId));
+			return getResource(url, generateParams(null, source, type, resourceId));
 		} catch (ClientServicesException e) {
 			throw new FollowServiceException(e, "Problem occured in getFollowedResource");
 		}
@@ -110,8 +120,8 @@ public class FollowService extends BaseService{
 			headers.put("Content-Type", "application/atom+xml");
 			
 			String atomPayload = transformer.transform(resource.getFieldsMap());
-			String url = resolveUrl(source, type);
-			result = createData(url, null, headers, atomPayload);
+			String url = FollowUrls.FOLLOW_URL.format(getApiVersion(), FollowServiceType.getByName(source), getAuthType());
+			result = createData(url, generateParams(null, source, type, null), headers, atomPayload);
 			return getFollowFeedHandler().createEntity(result);
 
 		} catch (TransformerException e) {
@@ -131,10 +141,9 @@ public class FollowService extends BaseService{
 	 * @throws FollowServiceException
 	 */
 	public boolean stopFollowing(String source,String type,String resourceId) throws FollowServiceException{
-		String stopResourceUrl = resolveUrl(source, type, resourceId);
 		try {
-			Map parameters = new HashMap<String,String>();
-			deleteData(stopResourceUrl+"&resource="+resourceId, parameters, resourceId);
+			String stopResourceUrl = FollowUrls.FOLLOW_URL.format(getApiVersion(), FollowServiceType.getByName(source), getAuthType(), Resource.get(resourceId));
+			deleteData(stopResourceUrl, generateParams(null, source, type, resourceId), resourceId);
 			return true;
 		} catch (Exception e) {
 			throw new FollowServiceException(e, "Problem occured in stopFollowing");
@@ -151,9 +160,7 @@ public class FollowService extends BaseService{
 
 	}
 		
-		
 	private FollowedResource getResource(String apiUrl,Map<String, String> parameters) throws ClientServicesException {
-
 		try {
 			EntityList resources = (EntityList<FollowedResource>)getEntities(apiUrl, parameters, getFollowFeedHandler());
 			if(resources!=null && resources.size()>0){
@@ -177,59 +184,18 @@ public class FollowService extends BaseService{
 		};
 	}
 	
-	
-	private String resolveUrl(String source, String type){
-		return resolveUrl(source, type, null);
+	private Map<String, String> generateParams(Map<String, String> params, String source, String type, String resourceId){
+		params = params == null? new HashMap<String, String>():params;
+		if (!StringUtil.isNotEmpty(source)){
+			params.put("source", source);
+		}
+		if (!StringUtil.isNotEmpty(type)){
+			params.put("type", type);
+		}
+		if (!StringUtil.isNotEmpty(resourceId)){
+			params.put("resource", resourceId);
+		}
+		return params;
 	}
-	
-	private String resolveUrl(String source, String type, String resourceId){
-		
-		StringBuilder apiUrl = new StringBuilder(getService(source));
-		apiUrl.append("/follow");
-		
-		if (AuthUtil.INSTANCE.getAuthValue(endpoint).equalsIgnoreCase(ConnectionsConstants.OAUTH)) {
-			apiUrl.append("/oauth");
-		}
-		
-		apiUrl.append("/atom/resources");
-		
-		if(StringUtil.isNotEmpty(resourceId)){
-			apiUrl.append("/"+resourceId);
-		}
-		
-		apiUrl.append("?source=").append(source);
-		apiUrl.append("&type=").append(type);
-		
-		if(StringUtil.isNotEmpty(resourceId)){
-			apiUrl.append("&resource="+resourceId);
-		}
-		
-		return apiUrl.toString();
-		
-	}
-	
-	private String getService(String source){
-		String service = "";
-		if(StringUtil.equals(source, "activities")){
-			service = ContextRootMap.ACTIVITIES;
-		}else if (StringUtil.equals(source, "blogs")) {
-			service = ContextRootMap.BLOGS;
-		}else if (StringUtil.equals(source, "communities")) {
-			service = ContextRootMap.COMMUNITIES;
-		}else if (StringUtil.equals(source, "forums")) {
-			service = ContextRootMap.FORUMS;
-		}else if (StringUtil.equals(source, "profiles")) {
-			service = ContextRootMap.PROFILES;
-		}else if (StringUtil.equals(source, "wikis")) {
-			service = ContextRootMap.WIKIS;
-		}else if (StringUtil.equals(source, "tags")) {
-			service = ContextRootMap.TAGS;
-		}
-	
-		return service;
-		
-	}
-
-	
 
 }

@@ -1,7 +1,10 @@
 package com.ibm.sbt.automation.core.test;
 
+import org.junit.Assert;
 import org.openqa.selenium.WebElement;
+
 import com.ibm.sbt.automation.core.test.pageobjects.WrapperResultPage;
+import com.ibm.sbt.services.client.connections.communities.Community;
 /*
  * © Copyright IBM Corp. 2012
  * 
@@ -17,6 +20,8 @@ import com.ibm.sbt.automation.core.test.pageobjects.WrapperResultPage;
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
+import com.ibm.sbt.services.client.connections.communities.CommunityService;
+import com.ibm.sbt.services.client.connections.communities.CommunityServiceException;
 
 /**
  * @author Francis 
@@ -24,6 +29,45 @@ import com.ibm.sbt.automation.core.test.pageobjects.WrapperResultPage;
  */
 public class BaseActivityStreamTest extends BaseWrapperTest{
 
+	private Community community;
+	private CommunityService communityService;
+	
+    /**
+     * creates community, initialising context if needed.
+     * @return
+     * @throws CommunityServiceException
+     */
+	public String createCommunity(){
+		createContext();
+		if(communityService == null){
+			communityService = new CommunityService(this.getTestEnvironment().getEndpointName());
+		}
+		
+		String communityUuid = null;;
+		if(community == null){
+			try {
+				communityUuid = communityService.createCommunity("TestTitle" + System.currentTimeMillis(), "Test content.", "public");
+				community = communityService.getCommunity(communityUuid);
+			} catch (CommunityServiceException e) {
+				e.printStackTrace();
+				Assert.fail("Problem creating test community.");
+			}
+		} else{
+			communityUuid = community.getCommunityUuid();
+		}
+		
+		return communityUuid;
+	}
+	
+	public void destroyCommunity() {
+		try {
+			communityService.deleteCommunity(community.getCommunityUuid());
+		} catch (CommunityServiceException e) {
+			e.printStackTrace();
+		}
+		destroyContext();
+	}
+	
 	/**
      * Default constructor
      */

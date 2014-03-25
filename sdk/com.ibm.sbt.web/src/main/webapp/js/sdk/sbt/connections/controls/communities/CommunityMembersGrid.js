@@ -27,9 +27,10 @@ define([ "../../../declare",
 		 "../../../store/parameter",
 		 "../../../connections/ProfileConstants",
 		 "../../../connections/CommunityConstants",
-		 "sbt/connections/CommunityService"], 
+		 "sbt/connections/CommunityService",
+		 "sbt/base/URLBuilder" ], 
         function(declare, sbt, lang, Grid, ProfileGridRenderer, CommunityMembersAction, SemanticTagService, parameter, consts, communities,
-        		CommunityService) {
+        		CommunityService, URLBuilder) {
 
 	var sortVals = {
 			displayName: "displayName",
@@ -95,6 +96,8 @@ define([ "../../../declare",
          */
         defaultOption: "communityMembers",
         
+        builder : new URLBuilder(),
+        
         /**Constructor function
          * @method constructor
          * */
@@ -150,6 +153,9 @@ define([ "../../../declare",
          * @returns Built url
          */
         buildUrl: function(url, args, endpoint) {
+            url = this.builder.build(url, this.endpoint.apiVersion, {
+            	authentication : this.endpoint.authType === "oauth" ? "oauth":""
+			});
             var params = { 
             	outputType : "profile",
             	format : "full"

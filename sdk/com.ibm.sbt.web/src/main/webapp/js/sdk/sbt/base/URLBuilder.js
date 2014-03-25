@@ -20,80 +20,85 @@
  * @module sbt.connections.CommunityConstants
  */
 define([ "../declare" ], function(declare) {
-	var URLBuilder = declare(null, {
+    var URLBuilder = declare(null, {
 
-		constructor : function() {
+        constructor : function() {
         },
         
         _normalizeVersion : function(version) {
-        	var tokenized = version.split(".");
-        	while (tokenized.lenght<3) {
-        		tokenized.push('0');
-        	} 
-        	if (tokenized.lenght>3) {
-        		tokenized = tokenized.slice(0,3);
-        	}
-        	for (var key in tokenized) {
-      		  if (tokenized.hasOwnProperty(key)) {
-      			tokenized[key]=Number(tokenized[key]);
-      		  }
-        	}
-        	return tokenized;
+            var tokenized = version.split(".");
+            while (tokenized.lenght<3) {
+                tokenized.push('0');
+            } 
+            if (tokenized.lenght>3) {
+                tokenized = tokenized.slice(0,3);
+            }
+            for (var key in tokenized) {
+                if (tokenized.hasOwnProperty(key)) {
+                  tokenized[key]=Number(tokenized[key]);
+                }
+            }
+            return tokenized;
         },
         _compareVersion: function(a,b) {
-        	
+            
 
-        	if(a[0]<b[0]) {
-        		return -1;
-        	}
-        	if(a[0]>b[0]) {
-        		return 1;
-        	}
-        	if(a[1]<b[1]) {
-        		return -1;
-        	}
-        	if(a[1]>b[1]) {
-        		return 1;
-        	}
-        	if(a[2]<b[2]) {
-        		return -1;
-        	}
-        	if(a[2]>b[2]) {
-        		return 1;
-        	}
-        	return 0;
+            if(a[0]<b[0]) {
+                return -1;
+            }
+            if(a[0]>b[0]) {
+                return 1;
+            }
+            if(a[1]<b[1]) {
+                return -1;
+            }
+            if(a[1]>b[1]) {
+                return 1;
+            }
+            if(a[2]<b[2]) {
+                return -1;
+            }
+            if(a[2]>b[2]) {
+                return 1;
+            }
+            return 0;
         },
         
         build: function(versionedUrl, maxVersion, args) {
-        	if (!maxVersion) maxVersion = '0';
-        	var compatible=null;
-        	var key = null;
-        	maxVersion = this._normalizeVersion(maxVersion);
-        	
-        	for (var version in versionedUrl) {
-        		versionN = this._normalizeVersion(version);
-        		if (this._compareVersion(versionN,maxVersion)>0) continue;
-        		if (compatible) {
-        			if (this._compareVersion(compatible,versionN)<0) {
-        				compatible=versionN;
-        				key = version;
-        			}
-        		}else {
-        			compatible = versionN;
-        			key = version;
-        		}
-      		}
-        	
-        	var url = versionedUrl[key];
-        	for (var key in args) {
-        		  if (args.hasOwnProperty(key)) {
-        			  url=url.replace('{'+key+'}',args[key]);
-        		  }
-        	}
-        	url = url.replace("//","/");
-        	return url;
+            var url;
+            if (typeof versionedUrl === "object"){
+            if (!maxVersion) maxVersion = '0';
+            var compatible=null;
+            var key = null;
+            maxVersion = this._normalizeVersion(maxVersion);
+            
+            for (var version in versionedUrl) {
+                versionN = this._normalizeVersion(version);
+                if (this._compareVersion(versionN,maxVersion)>0) continue;
+                if (compatible) {
+                    if (this._compareVersion(compatible,versionN)<0) {
+                        compatible=versionN;
+                        key = version;
+                    }
+                }else {
+                    compatible = versionN;
+                    key = version;
+                }
+              }
+            
+            url = versionedUrl[key];
+            } else {
+                url = versionedUrl;
+            }
+            for (var key in args) {
+                  if (args.hasOwnProperty(key)) {
+                      url=url.replace('{'+key+'}',args[key]);
+                  }
+            }
+            url = url.replace("//","/");
+            return url;
         }
-	});
-	
-	return URLBuilder;
+    });
+    
+    return URLBuilder;
 });

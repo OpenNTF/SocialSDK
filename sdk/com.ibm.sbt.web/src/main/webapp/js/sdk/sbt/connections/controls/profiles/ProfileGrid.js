@@ -26,8 +26,9 @@ define([ "../../../declare",
 		 "../../../connections/controls/vcard/SemanticTagService", 
 		 "../../../store/parameter",
 		 "../../../connections/ProfileConstants",
-		 "../../../connections/CommunityConstants"], 
-        function(declare, sbt, lang, Grid, ProfileGridRenderer, ProfileAction, SemanticTagService, parameter, consts, communities) {
+		 "../../../connections/CommunityConstants",
+		 "sbt/base/URLBuilder"], 
+        function(declare, sbt, lang, Grid, ProfileGridRenderer, ProfileAction, SemanticTagService, parameter, consts, communities, URLBuilder) {
 
 	var sortVals = {
 			displayName: "displayName",
@@ -163,6 +164,8 @@ define([ "../../../declare",
          */
         profileAction: new ProfileAction(),
         
+        builder : new URLBuilder(),
+        
         /**
          * This is the default grid that will be created if no 
          * arguments are given.
@@ -229,6 +232,9 @@ define([ "../../../declare",
          * @returns Built url
          */
         buildUrl: function(url, args, endpoint) {
+            url = this.builder.build(url, this.endpoint.apiVersion, {
+            	authentication : this.endpoint.authType === "oauth" ? "oauth":""
+			});
             var params = { 
             	outputType : "profile",
             	format : "full"

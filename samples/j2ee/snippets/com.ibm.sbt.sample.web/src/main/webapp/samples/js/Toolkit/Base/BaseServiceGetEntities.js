@@ -54,7 +54,9 @@ require([ "sbt/base/XmlDataHandler", "sbt/lang", "sbt/dom", "sbt/json",
             var args = {
                 test : "getEntities"
             };
+            
             var url = baseService.constructUrl(consts.AtomCommunitiesAll, {}, {authType : ""});
+
             var promise = baseService.getEntities(url, options, entitiesCallbacks, args);
             promise.then(
                 function(response) {

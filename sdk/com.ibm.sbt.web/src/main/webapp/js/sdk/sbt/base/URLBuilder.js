@@ -41,7 +41,7 @@ define([ "../declare" ], function(declare) {
             return tokenized;
         },
         _compareVersion: function(a,b) {
-            
+            if (!b) return -1;
 
             if(a[0]<b[0]) {
                 return -1;
@@ -66,34 +66,42 @@ define([ "../declare" ], function(declare) {
         
         build: function(versionedUrl, maxVersion, args) {
             var url;
+            print('versioned url is ' + versionedUrl);
+            print('versioned url is ' + Object.keys(versionedUrl));
+
             if (typeof versionedUrl === "object"){
-            if (!maxVersion) maxVersion = '0';
-            var compatible=null;
-            var key = null;
-            maxVersion = this._normalizeVersion(maxVersion);
-            
-            for (var version in versionedUrl) {
-                versionN = this._normalizeVersion(version);
-                if (this._compareVersion(versionN,maxVersion)>0) continue;
-                if (compatible) {
-                    if (this._compareVersion(compatible,versionN)<0) {
-                        compatible=versionN;
-                        key = version;
-                    }
-                }else {
-                    compatible = versionN;
-                    key = version;
-                }
-              }
-            
-            url = versionedUrl[key];
+            	print('handling object');
+	            
+	            var compatible=null;
+	            var key = null;
+	            if (maxVersion)
+	            maxVersion = this._normalizeVersion(maxVersion);
+	            for (var version in versionedUrl) {
+	                versionN = this._normalizeVersion(version);
+	                if (this._compareVersion(versionN,maxVersion)>0) continue;
+	                if (compatible) {
+	                    if (this._compareVersion(compatible,versionN)<0) {
+	                        compatible=versionN;
+	                        key = version;
+	                    }
+	                }else {
+	                    compatible = versionN;
+	                    key = version;
+	                }
+	              }
+            	print('handling object + key is' + key);
+	            url = versionedUrl[key];
             } else {
                 url = versionedUrl;
             }
-            for (var key in args) {
-                  if (args.hasOwnProperty(key)) {
-                      url=url.replace('{'+key+'}',args[key]);
-                  }
+            print('url is ' + url);
+
+            if (args) {
+	            for (var key in args) {
+	                  if (args.hasOwnProperty(key)) {
+	                      url=url.replace('{'+key+'}',args[key]);
+	                  }
+	            }
             }
             url = url.replace("//","/");
             return url;

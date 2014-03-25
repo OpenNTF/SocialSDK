@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -16,11 +16,13 @@
 
 package com.ibm.sbt.services.client.connections.search;
 
+import com.ibm.sbt.services.client.base.NamedUrlPart;
+
 /**
  * Class used in constructing URL for Search service
  * @author Manish Kataria
+ * @author Carlos Manias
  */
-
 public enum SearchType {
 	
 	PUBLIC("search"),
@@ -33,10 +35,7 @@ public enum SearchType {
 		this.searchType = searchType;
 	}
 	
-	/**
-	 * Wrapper method to return searchType type
-	 * <p>
-	 */
-	public String getSearchType(){return searchType;}
-
+	public NamedUrlPart get(){
+		return new NamedUrlPart("searchType", searchType);
+	}
 }

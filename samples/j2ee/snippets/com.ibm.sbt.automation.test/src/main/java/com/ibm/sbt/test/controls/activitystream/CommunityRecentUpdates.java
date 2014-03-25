@@ -1,7 +1,11 @@
 package com.ibm.sbt.test.controls.activitystream;
 
 import static org.junit.Assert.assertTrue;
+
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+
 import com.ibm.sbt.automation.core.test.BaseActivityStreamTest;
 /*
  * � Copyright IBM Corp. 2012
@@ -24,10 +28,21 @@ import com.ibm.sbt.automation.core.test.BaseActivityStreamTest;
  * @date 26 Mar 2013
  */
 public class CommunityRecentUpdates extends BaseActivityStreamTest {
+	private String communityUuid;
+    
+	@Before
+	public void setup(){
+		communityUuid = createCommunity();
+	}
 	
 	@Test
 	public void testActivityStream() {
+		addSnippetParam("CommunityService.communityUuid", communityUuid);
 		assertTrue("Expected the ActivityStream to generate a news node", checkActivityStream("Social_ActivityStreams_Controls_Community_Recent_Updates"));
 	}
 	
+	@After
+	public void tearDown(){
+		destroyCommunity();
+	}
 }

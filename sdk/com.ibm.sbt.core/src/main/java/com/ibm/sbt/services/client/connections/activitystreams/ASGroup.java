@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -16,9 +16,13 @@
 
 
 package com.ibm.sbt.services.client.connections.activitystreams;
+
+import com.ibm.sbt.services.client.base.NamedUrlPart;
+
 /**
  * Activity streams ASGroup class, allows user to choose Group type
  * @author Manish Kataria
+ * @author Carlos Manias
  */
 public enum ASGroup {
 	
@@ -42,10 +46,16 @@ public enum ASGroup {
 		this.groupType = groupType;
 	}
 	
-	/**
-	 * Wrapper method to return group type
-	 * <p>
-	 */
-	public String getGroupType(){return groupType;}
+	public NamedUrlPart get(){
+		return new NamedUrlPart("group", groupType);
+	}
+
+	public static NamedUrlPart getByName(String name){
+		return valueOf(name).get();
+	}
+
+	public static NamedUrlPart get(String userId){
+		return new NamedUrlPart("user", userId);
+	}
 
 }

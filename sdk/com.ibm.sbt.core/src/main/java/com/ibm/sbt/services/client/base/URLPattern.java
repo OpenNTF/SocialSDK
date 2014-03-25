@@ -61,8 +61,8 @@ public class URLPattern {
 				for (NamedUrlPart namedPart : namedParts) {
 					if (mutablePart.isCurrentPart(namedPart.getName())){
 						sb.append(namedPart.getValue());
+						break;
 					}
-					break;
 				}
 				
 				if (mutablePartIterator.hasNext()){ mutablePart = mutablePartIterator.next(); }

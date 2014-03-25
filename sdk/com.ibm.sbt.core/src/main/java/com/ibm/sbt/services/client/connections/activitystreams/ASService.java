@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2013
+ * � Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -13,41 +13,18 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-
-
 package com.ibm.sbt.services.client.connections.activitystreams;
 
 import com.ibm.sbt.services.client.base.NamedUrlPart;
 
 /**
- * Activity streams ASApplication class, allows user to choose Application type
- * @author Manish Kataria
+ * Activity streams ASService class, allows user to choose Service type
  * @author Carlos Manias
  */
-public enum ASApplication {
-	// Possibile values : @communities,@tags,@people,@status
-	
-	COMMUNITIES("@communities"),
-	TAGS("@tags"),
-	PEOPLE("@people"),
-	STATUS("@status"),
-	ALL("@all"),
-	NOAPP("");
-	
-	String applicationType;
-	ASApplication(String applicationType){
-		this.applicationType = applicationType;
-	}
+public enum ASService {
+	ACTIVITYSTREAM, UBLOG;
 
 	public NamedUrlPart get(){
-		return new NamedUrlPart("application", applicationType);
-	}
-
-	public static NamedUrlPart get(String application){
-		return new NamedUrlPart("application", application);
-	}
-
-	public static NamedUrlPart getByName(String name){
-		return valueOf(name).get();
+		return new NamedUrlPart("service", name().toLowerCase());
 	}
 }

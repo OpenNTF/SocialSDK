@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -16,9 +16,13 @@
 
 
 package com.ibm.sbt.services.client.connections.activitystreams;
+
+import com.ibm.sbt.services.client.base.NamedUrlPart;
+
 /**
  * Activity streams ASUser class, allows user to choose User type
  * @author Manish Kataria
+ * @author Carlos Manias
  */
 public enum ASUser {
 	ME("@me"),
@@ -30,10 +34,19 @@ public enum ASUser {
 		this.userType = userType;
 	}
 	
-	/**
-	 * Wrapper method to return user type
-	 * <p>
-	 */
-	public String getUserType(){return userType;}
+	public static NamedUrlPart getByName(String name){
+		return valueOf(name).get();
+	}
 
+	public NamedUrlPart get(){
+		return new NamedUrlPart("user", userType);
+	}
+
+	public NamedUrlPart getWithValue(String value){
+		return new NamedUrlPart("user", userType+value);
+	}
+
+	public static NamedUrlPart get(String userId){
+		return new NamedUrlPart("user", userId);
+	}
 }

@@ -36,8 +36,13 @@ public abstract class OptionsBean {
 	public static OptionsBean get() {
 		return (OptionsBean)ManagedBeanUtil.getBean(FacesContext.getCurrentInstance(), "optionsBean");
 	}
+	
+	public static final int JS_AGG_NONE		= 1;
+	public static final int JS_AGG_SDK		= 2;
+	public static final int JS_AGG_XPAGES	= 3;
 
 	private boolean javaScriptSnippetsEnabled;
+	private int javaScriptAggregator;
 	private boolean javaSnippetsEnabled;
 	private boolean xpagesSnippetsEnabled;
 	private boolean gadgetSnippetsEnabled;
@@ -74,6 +79,13 @@ public abstract class OptionsBean {
 	}
 	public void setJavaScriptSnippetsEnabled(boolean javaScriptSnippetsEnabled) {
 		this.javaScriptSnippetsEnabled=javaScriptSnippetsEnabled;
+	}
+
+	public int getJavaScriptAggregator() {
+		return javaScriptAggregator;
+	}
+	public void setJavaScriptAggregator(int javaScriptAggregator) {
+		this.javaScriptAggregator=javaScriptAggregator;
 	}
 
 	public boolean isJavaSnippetsEnabled() {
@@ -184,6 +196,14 @@ public abstract class OptionsBean {
 		Document doc = loadOptionsDocument();
 		try {
 			this.javaScriptSnippetsEnabled = getEnvironmentBoolean(doc,"JavaScriptSnippets");
+			String jsAgg = getEnvironmentString(doc,"JavaScriptAggregator");
+			if(StringUtil.equals(jsAgg, "sdk")) {
+				this.javaScriptAggregator = JS_AGG_SDK;
+			} else if(StringUtil.equals(jsAgg, "xpages")) {
+				this.javaScriptAggregator = JS_AGG_XPAGES;
+			} else {
+				this.javaScriptAggregator = JS_AGG_NONE;
+			}
 			this.javaSnippetsEnabled = getEnvironmentBoolean(doc,"JavaSnippets");
 			this.xpagesSnippetsEnabled = getEnvironmentBoolean(doc,"XPagesSnippets");
 			this.gadgetSnippetsEnabled = getEnvironmentBoolean(doc,"GadgetSnippets");

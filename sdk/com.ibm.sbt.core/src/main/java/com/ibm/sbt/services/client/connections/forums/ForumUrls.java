@@ -1,5 +1,5 @@
 /*
- * ��� Copyright IBM Corp. 2014
+ * � Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -13,7 +13,7 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-package com.ibm.sbt.services.client.connections.follow;
+package com.ibm.sbt.services.client.connections.forums;
 
 import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.NamedUrlPart;
@@ -23,16 +23,14 @@ import com.ibm.sbt.services.client.base.Version;
 import com.ibm.sbt.services.client.base.VersionedUrl;
 
 /**
- * 
  * @author Carlos Manias
- *
  */
-public enum FollowUrls implements URLContainer {
-	FOLLOW_URL(new VersionedUrl(ConnectionsConstants.v4_0, "{serviceType}/follow/{authType}/atom/resources/{resourceId}"));
+public enum ForumUrls implements URLContainer {
+	FORUM_URL(new VersionedUrl(ConnectionsConstants.v4_0, "forums/{authType}/atom/{forumType}/{filterType}"));
 
 	private URLBuilder builder;
 	
-	private FollowUrls(VersionedUrl... urlVersions) {
+	private ForumUrls(VersionedUrl... urlVersions) {
 		builder = new URLBuilder(urlVersions);
 	}
 	
@@ -43,4 +41,5 @@ public enum FollowUrls implements URLContainer {
 	public String getPattern(Version version){
 		return builder.getPattern(version).getUrlPattern();
 	}
+
 }

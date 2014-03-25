@@ -1,4 +1,4 @@
-/* * © Copyright IBM Corp. 2014 * 
+/* * �� Copyright IBM Corp. 2014 * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
  * You may obtain a copy of the License at:
@@ -143,6 +143,15 @@ public class Version implements Serializable, Comparable<Version> {
 		} else {
 			return LESSTHAN;
 		}
+	}
+
+	/**
+	 * Returns true if the current version is at least the version in parameter
+	 * @param _major
+	 * @return
+	 */
+	public boolean isAtLeast(Version version) {
+		return isAtLeast(version.getMajor(), version.getMinor(), version.subversion);
 	}
 
 	/**

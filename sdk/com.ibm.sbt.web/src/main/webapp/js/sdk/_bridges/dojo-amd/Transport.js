@@ -19,7 +19,7 @@
  * 
  * Implementation of a transport using the Dojo XHR API.
  */
-define([ 'dojo/_base/declare', 'dojo/_base/xhr', 'dojo/_base/lang', 'dojox/xml/parser', '../util', '../Promise' ], function(declare, xhr, lang, parser, util, Promise) {
+define([ 'dojo/_base/declare', 'dojo/_base/xhr', 'dojo/_base/lang', '../util', '../Promise' ], function(declare, xhr, lang, util, Promise) {
     return declare(null, {
         
         /**

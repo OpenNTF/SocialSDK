@@ -231,7 +231,7 @@
             <map-entries>
             	<map-entry>
             		<key>blogHomepageHandle</key>
-            		<value>home</value>
+            		<value>homepage</value>
             	</map-entry>
             </map-entries>
         </managed-property>

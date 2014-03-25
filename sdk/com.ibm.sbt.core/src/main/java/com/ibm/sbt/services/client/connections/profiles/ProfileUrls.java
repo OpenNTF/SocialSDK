@@ -15,32 +15,33 @@
  */
 package com.ibm.sbt.services.client.connections.profiles;
 
+import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.NamedUrlPart;
+import com.ibm.sbt.services.client.base.URLBuilder;
+import com.ibm.sbt.services.client.base.URLContainer;
+import com.ibm.sbt.services.client.base.Version;
+import com.ibm.sbt.services.client.base.VersionedUrl;
 
 /**
  * 
  * @author Carlos Manias
  *
  */
-public enum ProfileAPI {
-	
-	/*
-	 *  Root for Url Construction
-	 *  ADMIN for referring to admin API's
-	 *  NONADMIN for referring to non-admin API's
-	 */
+public enum ProfileUrls implements URLContainer {
+	PROFILE_URL(new VersionedUrl(ConnectionsConstants.v4_0, "profiles/{authType}/{isAdmin}/{profileType}/"));
 
-	ADMIN("admin"),
-	NONADMIN("");
+	private URLBuilder builder;
 	
-	private String profileApi;
-	
-	private ProfileAPI(String profileApi) {
-		this.profileApi = profileApi;
+	private ProfileUrls(VersionedUrl... urlVersions) {
+		builder = new URLBuilder(urlVersions);
 	}
 	
-	public NamedUrlPart get(){
-		return new NamedUrlPart("isAdmin", profileApi);
+	public String format(Version version, NamedUrlPart... args) {
+		return builder.format(version, args);
+	}
+
+	public String getPattern(Version version){
+		return builder.getPattern(version).getUrlPattern();
 	}
 
 }

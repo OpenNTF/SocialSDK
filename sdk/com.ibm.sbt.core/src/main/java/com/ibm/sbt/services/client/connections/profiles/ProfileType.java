@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * ï¿½ Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -16,6 +16,13 @@
 
 package com.ibm.sbt.services.client.connections.profiles;
 
+import com.ibm.sbt.services.client.base.NamedUrlPart;
+
+/**
+ * 
+ * @author Carlos Manias
+ *
+ */
 public enum ProfileType {
 
 	/*
@@ -39,10 +46,13 @@ public enum ProfileType {
 	TAGS("atom/profileTags.do"),
 	MESSAGES_COLLEAGUES("atom/mv/theboard/entries/related.do");
 	
-	private String proType;
-	private ProfileType(String proType) {
-		this.proType = proType;
-	}
-	public String getProfileType(){return proType;}
+	private String profileType;
 
+	private ProfileType(String profileType) {
+		this.profileType = profileType;
+	}
+
+	public NamedUrlPart get(){
+		return new NamedUrlPart("profileType", profileType);
+	}
 }

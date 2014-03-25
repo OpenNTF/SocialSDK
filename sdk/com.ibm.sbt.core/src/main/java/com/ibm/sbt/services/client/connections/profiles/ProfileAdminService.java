@@ -16,6 +16,7 @@ import com.ibm.sbt.services.endpoints.Endpoint;
  * 
  * @Represents Connections ProfileAdminService
  * @author Swati Singh
+ * @author Carlos Manias
  * <pre>
  * Sample Usage
  * {@code
@@ -77,14 +78,13 @@ public class ProfileAdminService extends ProfileService {
 	 */
 	public void deleteProfile(String id) throws ProfileServiceException
 	{	
-		
 		if (StringUtil.isEmpty(id)) {
 			throw new ProfileServiceException(null, Messages.InvalidArgument_1);
 		}
 		try{
 			Map<String, String> parameters = new HashMap<String, String>();
 			setIdParameter(parameters,id );
-			String deleteUrl = resolveProfileUrl(ProfileAPI.ADMIN.getProfileEntityType(), ProfileType.DELETEPROFILE.getProfileType());
+			String deleteUrl = ProfileUrls.PROFILE_URL.format(getApiVersion(), getAuthType(), ProfileAPI.ADMIN.get(), ProfileType.DELETEPROFILE.get());
 			super.deleteData(deleteUrl, parameters, getUniqueIdentifier(id));
 		}
 		catch(ClientServicesException e){
@@ -105,7 +105,6 @@ public class ProfileAdminService extends ProfileService {
 	 */
 	public void createProfile(Profile profile) throws ProfileServiceException 
 	{
-		
 		if (profile == null) {
 			throw new ProfileServiceException(null, Messages.InvalidArgument_3);
 		}		
@@ -114,7 +113,7 @@ public class ProfileAdminService extends ProfileService {
 			setIdParameter(parameters, profile.getUserid());
 			Object createPayload = constructCreateRequestBody(profile);
 			
-			String createUrl = resolveProfileUrl(ProfileAPI.ADMIN.getProfileEntityType(),ProfileType.ADDPROFILE.getProfileType());
+			String createUrl = ProfileUrls.PROFILE_URL.format(getApiVersion(), getAuthType(), ProfileAPI.ADMIN.get(), ProfileType.ADDPROFILE.get());
 			super.createData(createUrl, parameters, createPayload, ClientService.FORMAT_CONNECTIONS_OUTPUT);
 			
 		}catch(ClientServicesException e) {

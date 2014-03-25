@@ -17,8 +17,8 @@
 /**
  * 
  */
-define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil", "../../widget/grid/_Grid", "../../util"], 
-        function(declare, lang, itemFactory, stringUtil, _Grid, util) {
+define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil", "../../widget/grid/_Grid", "../../util", "../../sbt/URLBuilder"], 
+        function(declare, lang, itemFactory, stringUtil, _Grid, util, URLBuilder) {
 
     /**
      * @class grid
@@ -98,6 +98,8 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
          */
         contextRootMap: {},
         
+        builder : new URLBuilder(),
+        
         /**
          * Constructor method for the grid.
          * Creates a default store and renderer, if none have been already created
@@ -166,8 +168,8 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
          * @returns Built url
          */
         buildUrl: function(url, args, endpoint) {
-            var url = this.builder.build(url, this.endpoint.apiVersion, {
-                authentication : this.endpoint.authType === "oauth" ? "oauth":""
+            var url = this.builder.build(url, endpoint.apiVersion, {
+                authentication : endpoint.authType === "oauth" ? "oauth":""
             });
             var params = {};
             if (this.query) {

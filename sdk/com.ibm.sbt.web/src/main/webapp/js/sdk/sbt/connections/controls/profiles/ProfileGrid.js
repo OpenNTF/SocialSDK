@@ -27,7 +27,7 @@ define([ "../../../declare",
 		 "../../../store/parameter",
 		 "../../../connections/ProfileConstants",
 		 "../../../connections/CommunityConstants",
-		 "sbt/base/URLBuilder"], 
+		 "../../../base/URLBuilder"], 
         function(declare, sbt, lang, Grid, ProfileGridRenderer, ProfileAction, SemanticTagService, parameter, consts, communities, URLBuilder) {
 
 	var sortVals = {
@@ -232,8 +232,8 @@ define([ "../../../declare",
          * @returns Built url
          */
         buildUrl: function(url, args, endpoint) {
-            url = this.builder.build(url, this.endpoint.apiVersion, {
-            	authentication : this.endpoint.authType === "oauth" ? "oauth":""
+            url = this.builder.build(url, endpoint.apiVersion, {
+            	authentication : endpoint.authType === "oauth" ? "oauth":""
 			});
             var params = { 
             	outputType : "profile",

@@ -18,7 +18,7 @@ define(["../../../declare",
         "../../../store/parameter",
         "../../../connections/BookmarkConstants",
         "../../../connections/CommunityConstants",
-        "./BookmarkGridRenderer", "sbt/base/URLBuilder" ], 
+        "./BookmarkGridRenderer", "../../../base/URLBuilder" ], 
     function(declare,Grid,parameter,consts,communityConstants,BookmarkGridRenderer, URLBuilder) {
 	
 	/**
@@ -118,8 +118,8 @@ define(["../../../declare",
 	      */
 	     buildUrl: function(url, args, endpoint) {
 	    	 var urlParams;
-	         url = this.builder.build(url, this.endpoint.apiVersion, {
-	           authentication : this.endpoint.authType === "oauth" ? "oauth":""
+	         url = this.builder.build(url, endpoint.apiVersion, {
+	           authentication : endpoint.authType === "oauth" ? "oauth":""
 		     });
 	    	 if(this.type == "private"){
 	    		 urlParams = { access: "private"};

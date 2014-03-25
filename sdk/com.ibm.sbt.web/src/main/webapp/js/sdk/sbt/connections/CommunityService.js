@@ -20,8 +20,9 @@
  * @module sbt.connections.CommunityService
  */
 define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", "./CommunityConstants", "./ConnectionsService",
-         "../base/AtomEntity", "../base/XmlDataHandler", "./ForumService", "./BookmarkService", "../pathUtil", "sbt/base/URLBuilder" ], 
+         "../base/AtomEntity", "../base/XmlDataHandler", "./ForumService", "./BookmarkService", "../pathUtil", "../base/URLBuilder" ], 
     function(declare,config,lang,stringUtil,Promise,consts,ConnectionsService,AtomEntity,XmlDataHandler,ForumService,BookmarkService,pathUtil, URLBuilder) {
+
 
     var CategoryCommunity = "<category term=\"community\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category>";
     var CategoryMember = "<category term=\"person\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category>";

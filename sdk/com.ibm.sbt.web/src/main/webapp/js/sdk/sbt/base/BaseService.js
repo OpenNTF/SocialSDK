@@ -20,7 +20,7 @@
  * @module sbt.base.BaseService
  * @author Carlos Manias
  */
-define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cache", "../Promise", "../util", "sbt/base/URLBuilder" ], 
+define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cache", "../Promise", "../util", "./URLBuilder" ], 
     function(config, declare,lang,log,stringUtil,Cache,Promise, util, URLBuilder) {
 	// TODO sbt/config is required here to solve module loading
 	// issues with jquery until we remove the global sbt object

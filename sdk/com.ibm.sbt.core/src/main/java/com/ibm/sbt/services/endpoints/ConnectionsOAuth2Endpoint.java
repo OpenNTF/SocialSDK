@@ -70,6 +70,7 @@ public class ConnectionsOAuth2Endpoint extends OAuth2Endpoint {
     
     @Override
     public void setApiVersion(String apiVersion) {
+    	super.setApiVersion(apiVersion);
     	if (apiVersion!=null) {
     		if (apiVersion.matches("4[.]?5([.]?0)?")){
     			oAuthHandler.setUsePost(true);

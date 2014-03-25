@@ -161,6 +161,17 @@
 			<value>/xsp/.ibmxspres/.sbtsdk/loginForm.html?endpoint=connections
 			</value>
 		</managed-property>
+<!-- for w3 has blogs have a different handle	
+		<managed-property>
+			<property-name>serviceMappings</property-name>
+			<map-entries>
+				<map-entry>
+					<key>blogHomepageHandle</key>
+					<value>roller-ui</value>
+				</map-entry>
+			</map-entries>
+		</managed-property>
+ -->		
 		<!-- Trust the connection -->
 		<managed-property>
 			<property-name>forceTrustSSLCertificate

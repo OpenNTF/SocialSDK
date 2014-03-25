@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -18,7 +18,6 @@ package com.ibm.sbt.services.client.connections.activitystreams;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
@@ -28,11 +27,10 @@ import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.BaseService;
-import com.ibm.sbt.services.client.base.ConnectionsConstants;
+import com.ibm.sbt.services.client.base.NamedUrlPart;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.activitystreams.transformers.ActivityStreamTransformer;
 import com.ibm.sbt.services.endpoints.Endpoint;
-import com.ibm.sbt.services.util.AuthUtil;
 
 
 /**
@@ -111,9 +109,9 @@ public class ActivityStreamService extends BaseService {
 	 */
 
 	public ActivityStreamEntityList getStream() throws ActivityStreamServiceException {
-		return getActivityStreamEntities("", "", "", null);
+		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), ASUser.PUBLIC.get(), ASGroup.ALL.get(), ASApplication.STATUS.get());
+		return getActivityStreamEntities(url, null);
 	}
-	
 	
 	/**
 	 * Returns updates from ActivityStream service
@@ -129,12 +127,34 @@ public class ActivityStreamService extends BaseService {
 	 * @return ActivityStreamEntityList
 	 * @throws ActivityStreamServiceException
 	 */
-
 	public ActivityStreamEntityList getStream(String user, String group, String app,
 			Map<String, String> params) throws ActivityStreamServiceException {
 
 		// Set the parameters being passed in by user
-		return getActivityStreamEntities(user, group, app, params); 
+		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), ASUser.getByName(user), ASGroup.getByName(group), ASApplication.getByName(app));
+		return getActivityStreamEntities(url, params); 
+	}
+
+	/**
+	 * Returns updates from ActivityStream service
+	 * 
+	 * @param User
+	 *            see {@link ASUser} for possible values
+	 * @param Group
+	 *            see {@link ASGroup} for possible values
+	 * @param User
+	 *            see {@link ASApplication} for possible values
+	 * @param params
+	 *            Additional parameters used for constructing URL's
+	 * @return ActivityStreamEntityList
+	 * @throws ActivityStreamServiceException
+	 */
+	public ActivityStreamEntityList getStream(NamedUrlPart user, NamedUrlPart group, NamedUrlPart app,
+			Map<String, String> params) throws ActivityStreamServiceException {
+
+		// Set the parameters being passed in by user
+		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), user, group, app);
+		return getActivityStreamEntities(url, params); 
 	}
 	
 
@@ -167,13 +187,10 @@ public class ActivityStreamService extends BaseService {
 			params.put(ActivityStreamRequestParams.lang, getUserLanguage());
 		}
 		params.put(ActivityStreamRequestParams.rollUp, "true");
-		return getActivityStreamEntities(ASUser.PUBLIC.getUserType(), ASGroup.ALL.getGroupType(),
-				ASApplication.ALL.getApplicationType(), params);
+		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), ASUser.PUBLIC.get(), ASGroup.ALL.get(), ASApplication.ALL.get());
+		return getActivityStreamEntities(url, params);
 
 	}
-	
-
-	
 	
 	/**
 	 * Wrapper method to get all updates for user's network from Activity Streams
@@ -206,8 +223,8 @@ public class ActivityStreamService extends BaseService {
 		}
 
 		params.put(ActivityStreamRequestParams.rollUp, "true");
-		return getActivityStreamEntities(ASUser.ME.getUserType(), ASGroup.FRIENDS.getGroupType(),
-				ASApplication.ALL.getApplicationType(), params);
+		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), ASUser.ME.get(), ASGroup.FRIENDS.get(), ASApplication.ALL.get());
+		return getActivityStreamEntities(url, params);
 	}
 	
 	/**
@@ -240,10 +257,9 @@ public class ActivityStreamService extends BaseService {
 		}
 
 		params.put(ActivityStreamRequestParams.rollUp, "true");
-		return getActivityStreamEntities(ASUser.ME.getUserType(), ASGroup.FRIENDS.getGroupType(),
-				ASApplication.STATUS.getApplicationType(), params);
+		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), ASUser.ME.get(), ASGroup.FRIENDS.get(), ASApplication.STATUS.get());
+		return getActivityStreamEntities(url, params);
 	}
-	
 	
 	/**
 	 * Wrapper method to get all status updates for logged in user
@@ -273,8 +289,8 @@ public class ActivityStreamService extends BaseService {
 			params = new HashMap<String, String>();
 			params.put(ActivityStreamRequestParams.lang, getUserLanguage());
 		}
-		return getActivityStreamEntities(ASUser.ME.getUserType(), ASGroup.ALL.getGroupType(),
-				ASApplication.STATUS.getApplicationType(), params);
+		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), ASUser.ME.get(), ASGroup.ALL.get(), ASApplication.STATUS.get());
+		return getActivityStreamEntities(url, params);
 	}
 	
 	
@@ -308,8 +324,8 @@ public class ActivityStreamService extends BaseService {
 		}
 
 		params.put(ActivityStreamRequestParams.rollUp, "true");
-		return getActivityStreamEntities(ASUser.ME.getUserType(), ASGroup.FOLLOWING.getGroupType(),
-				ASApplication.STATUS.getApplicationType(), params);
+		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), ASUser.ME.get(), ASGroup.FOLLOWING.get(), ASApplication.STATUS.get(), ASApplication.STATUS.get());
+		return getActivityStreamEntities(url, params);
 	}
 	
 	
@@ -345,8 +361,8 @@ public class ActivityStreamService extends BaseService {
 
 		params.put(ActivityStreamRequestParams.rollUp, "true");
 		params.put(ActivityStreamRequestParams.broadcast, "true");
-		return getActivityStreamEntities(ASUser.ME.getUserType(), ASGroup.ALL.getGroupType(),
-				ASApplication.COMMUNITIES.getApplicationType(), params);
+		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), ASUser.ME.get(), ASGroup.ALL.get(), ASApplication.COMMUNITIES.get());
+		return getActivityStreamEntities(url, params);
 	}
 	
 	
@@ -389,8 +405,8 @@ public class ActivityStreamService extends BaseService {
 			params.put(ActivityStreamRequestParams.lang, getUserLanguage());
 		}
 
-		return getActivityStreamEntities(userId, ASGroup.INVOLVED.getGroupType(),
-				ASApplication.ALL.getApplicationType(), params);
+		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), ASUser.get(userId), ASGroup.INVOLVED.get(), ASApplication.ALL.get());
+		return getActivityStreamEntities(url, params);
 
 	}
 	
@@ -432,11 +448,10 @@ public class ActivityStreamService extends BaseService {
 			params = new HashMap<String, String>();
 			params.put(ActivityStreamRequestParams.lang, getUserLanguage());
 		}
-		return getActivityStreamEntities(ASUser.COMMUNITY.getUserType() + communityId,
-				ASGroup.ALL.getGroupType(), ASApplication.NOAPP.getApplicationType(), params);
+		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), ASUser.COMMUNITY.getWithValue(communityId), ASGroup.ALL.get(), ASApplication.NOAPP.get());
+		return getActivityStreamEntities(url, params);
 
 	}
-	
 	
 	/**
 	 * Wrapper method to get Filtered view of a user's stream based on notification events
@@ -454,9 +469,9 @@ public class ActivityStreamService extends BaseService {
 			params = new HashMap<String, String>();
 			params.put(ActivityStreamRequestParams.lang, getUserLanguage());
 		}
-		return getActivityStreamEntities(ASUser.ME.getUserType(),ASGroup.RESPONSES.getGroupType(), ASApplication.NOAPP.getApplicationType(), params);
+		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), ASUser.ME.get(),ASGroup.RESPONSES.get(), ASApplication.NOAPP.get());
+		return getActivityStreamEntities(url, params);
 	}
-	
 	
 	/**
 	 * Wrapper method to get Filtered view of a user's stream based on notification events
@@ -474,10 +489,9 @@ public class ActivityStreamService extends BaseService {
 			params = new HashMap<String, String>();
 			params.put(ActivityStreamRequestParams.lang, getUserLanguage());
 		}
-		return getActivityStreamEntities(ASUser.ME.getUserType(),ASGroup.NOTESFROMME.getGroupType(), ASApplication.NOAPP.getApplicationType(), params);
+		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), ASUser.ME.get(),ASGroup.NOTESFROMME.get(), ASApplication.NOAPP.get());
+		return getActivityStreamEntities(url, params);
 	}
-	
-	
 	
 	/**
 	 * Wrapper method to get Filtered view of a user's stream based on notification events
@@ -495,7 +509,8 @@ public class ActivityStreamService extends BaseService {
 			params = new HashMap<String, String>();
 			params.put(ActivityStreamRequestParams.lang, getUserLanguage());
 		}
-		return getActivityStreamEntities(ASUser.ME.getUserType(),ASGroup.RESPONSES.getGroupType(), ASApplication.NOAPP.getApplicationType(), params);
+		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), ASUser.ME.get(),ASGroup.RESPONSES.get(), ASApplication.NOAPP.get());
+		return getActivityStreamEntities(url, params);
 	}
 	
 	
@@ -515,7 +530,8 @@ public class ActivityStreamService extends BaseService {
 			params = new HashMap<String, String>();
 			params.put(ActivityStreamRequestParams.lang, getUserLanguage());
 		}
-		return getActivityStreamEntities(ASUser.ME.getUserType(),ASGroup.ACTION.getGroupType(), ASApplication.NOAPP.getApplicationType(), params);
+		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), ASUser.ME.get(),ASGroup.ACTION.get(), ASApplication.NOAPP.get());
+		return getActivityStreamEntities(url, params);
 	}
 	
 	
@@ -539,7 +555,8 @@ public class ActivityStreamService extends BaseService {
 			params = new HashMap<String, String>();
 			params.put(ActivityStreamRequestParams.lang, getUserLanguage());
 		}
-		return getActivityStreamEntities(ASUser.ME.getUserType(),ASGroup.ACTION.getGroupType(), application, params);
+		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), ASUser.ME.get(), ASGroup.ACTION.get(), ASApplication.get(application));
+		return getActivityStreamEntities(url, params);
 	}
 	
 	
@@ -559,7 +576,8 @@ public class ActivityStreamService extends BaseService {
 			params = new HashMap<String, String>();
 			params.put(ActivityStreamRequestParams.lang, getUserLanguage());
 		}
-		return getActivityStreamEntities(ASUser.ME.getUserType(),ASGroup.SAVED.getGroupType(), ASApplication.NOAPP.getApplicationType(), params);
+		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), ASUser.ME.get(),ASGroup.SAVED.get(), ASApplication.NOAPP.get());
+		return getActivityStreamEntities(url, params);
 	}
 	
 	
@@ -583,7 +601,8 @@ public class ActivityStreamService extends BaseService {
 			params = new HashMap<String, String>();
 			params.put(ActivityStreamRequestParams.lang, getUserLanguage());
 		}
-		return getActivityStreamEntities(ASUser.ME.getUserType(),ASGroup.SAVED.getGroupType(), application, params);
+		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), ASUser.ME.get(), ASGroup.SAVED.get(), ASApplication.get(application));
+		return getActivityStreamEntities(url, params);
 	}
 	
 	
@@ -630,8 +649,8 @@ public class ActivityStreamService extends BaseService {
 			params.put(ActivityStreamRequestParams.lang, getUserLanguage());
 		}
 		params.put(ActivityStreamRequestParams.query, query);
-		return getActivityStreamEntities(ASUser.PUBLIC.getUserType(), ASGroup.ALL.getGroupType(),
-				ASApplication.ALL.getApplicationType(), params);
+		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), ASUser.PUBLIC.get(), ASGroup.ALL.get(), ASApplication.ALL.get());
+		return getActivityStreamEntities(url, params);
 	}
 	
 	
@@ -692,8 +711,8 @@ public class ActivityStreamService extends BaseService {
 			params.put(ActivityStreamRequestParams.filters, "[{'type':'tag','values':[" + modifiedQuery
 					+ "]}]");
 		}
-		return getActivityStreamEntities(ASUser.PUBLIC.getUserType(), ASGroup.ALL.getGroupType(),
-				ASApplication.ALL.getApplicationType(), params);
+		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), ASUser.PUBLIC.get(), ASGroup.ALL.get(), ASApplication.ALL.get());
+		return getActivityStreamEntities(url, params);
 	}
 	
 	
@@ -760,8 +779,8 @@ public class ActivityStreamService extends BaseService {
 			params.put(ActivityStreamRequestParams.filters, "[{'type':'" + filterType + "','values':["
 					+ modifiedQuery + "]}]");
 		}
-		return getActivityStreamEntities(ASUser.PUBLIC.getUserType(), ASGroup.ALL.getGroupType(),
-				ASApplication.ALL.getApplicationType(), params);
+		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), ASUser.PUBLIC.get(), ASGroup.ALL.get(), ASApplication.ALL.get());
+		return getActivityStreamEntities(url, params);
 	}
 	
 	
@@ -809,8 +828,8 @@ public class ActivityStreamService extends BaseService {
 
 		params.put(ActivityStreamRequestParams.rollUp, "true");
 		params.put(ActivityStreamRequestParams.custom, searchpattern);
-		return getActivityStreamEntities(ASUser.PUBLIC.getUserType(), ASGroup.ALL.getGroupType(),
-				ASApplication.ALL.getApplicationType(), params);
+		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), ASUser.PUBLIC.get(), ASGroup.ALL.get(), ASApplication.ALL.get());
+		return getActivityStreamEntities(url, params);
 	}
 	
 	
@@ -825,8 +844,7 @@ public class ActivityStreamService extends BaseService {
 	 * @return JsonJavaObject
 	 * @throws ActivityStreamServiceException
 	 */
-	public String postEntry(String user, String group,
-			String application, JsonJavaObject postPayload)
+	public String postEntry(String user, String group, String application, JsonJavaObject postPayload)
 			throws ActivityStreamServiceException {
 
 		if (null == postPayload) {
@@ -834,9 +852,16 @@ public class ActivityStreamService extends BaseService {
 					"postPayload passed was null");
 		}
 
-		String postUrl = resolveUrlForPostingAS(user, group, "");
+		String postUrl = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), ASUser.get(user), ASGroup.get(group), ASApplication.NOAPP.get());
 		return postEntry(postUrl, postPayload);
 
+	}
+
+
+	public String postEntry(NamedUrlPart user, NamedUrlPart group, NamedUrlPart application, JsonJavaObject postPayload) 
+			throws ActivityStreamServiceException {
+		String postUrl = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), user, group, application);
+		return postEntry(postUrl, postPayload);
 	}
 	
 	/**
@@ -857,9 +882,7 @@ public class ActivityStreamService extends BaseService {
 					"postPayload passed was null");
 		}
 
-		String postUrl = resolveUrlForPostingAS(ASUser.ME.getUserType(),
-				ASGroup.ALL.getGroupType(),
-				ASApplication.ALL.getApplicationType());
+		String postUrl = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), ASUser.ME.get(), ASGroup.ALL.get(), ASApplication.ALL.get());
 
 		return postEntry(postUrl, postPayload);
 	}
@@ -883,9 +906,7 @@ public class ActivityStreamService extends BaseService {
 					"populator passed was null");
 		}
 		
-		return postEntry(ASUser.ME.getUserType(),
-				ASGroup.ALL.getGroupType(),
-				ASApplication.ALL.getApplicationType(),populator);
+		return postEntry(ASUser.ME.get(), ASGroup.ALL.get(), ASApplication.ALL.get(), populator);
 		
 	}
 	
@@ -903,8 +924,7 @@ public class ActivityStreamService extends BaseService {
 	/*
 	 * This method allows user to set ASDataPopulator, Rest of the parameters like user,group and app are assumed to be default
 	 */
-	public String postEntry(String user, String group,
-			String application, ASDataPopulator populator)
+	public String postEntry(NamedUrlPart user, NamedUrlPart group, NamedUrlPart application, ASDataPopulator populator)
 			throws ActivityStreamServiceException, TransformerException {
 
 			if (null == populator) {
@@ -916,12 +936,9 @@ public class ActivityStreamService extends BaseService {
 			Map<String,Object> param = new HashMap<String, Object>();
 			param.put(transformer.DATA_POPULATOR, populator);
 			String jsonPayload = transformer.transform(param);
-			String postUrl = resolveUrlForPostingAS(user, group, application);
+			String postUrl = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), user, group, application);
 			return postEntry(postUrl, jsonPayload);
 	}
-	
-
-
 
 	/*
 	 * Internal service methods
@@ -938,7 +955,6 @@ public class ActivityStreamService extends BaseService {
 			throw new ActivityStreamServiceException(e, "postEntry failed");
 		}
 	}
-	
 	
 	/**
 	 * postMBEntry Creates Microblog entry
@@ -960,15 +976,12 @@ public class ActivityStreamService extends BaseService {
 					"postPayload passed was null");
 		}
 
-		String postUrl = resolveUrlForPostingMB(user, group, application);
+		String postUrl = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.UBLOG.get(), ASUser.get(user), ASGroup.get(group), ASApplication.get(application));
 		return postEntry(postUrl, postPayload);
 
 	}
 	
-	public ActivityStreamEntityList getActivityStreamEntities(String user,
-			String group, String app, Map<String, String> params) throws ActivityStreamServiceException {
-
-		String url = resolveUrlForFetchingAS(user, group, app);
+	public ActivityStreamEntityList getActivityStreamEntities(String url, Map<String, String> params) throws ActivityStreamServiceException {
 		ActivityStreamEntityList activityStreams = null;
 		try {
 			activityStreams = (ActivityStreamEntityList) getEntities(url, params, activityStreamFeedHandler);
@@ -979,93 +992,6 @@ public class ActivityStreamService extends BaseService {
 		}
 		return activityStreams;
 	}
-	
-	
-	/*
-	 * Method responsible for generating appropriate REST URLs
-	 */
-	private String resolveUrlForFetchingAS(String user, String group, String application) {
-		StringBuilder streamUrl = new StringBuilder(baseUrl);
-		streamUrl.append(AuthUtil.INSTANCE.getAuthValue(endpoint)).append(restUrl); // Basic or Oauth supported for now
-		streamUrl.append(activityStreamsUrl); // include a condition here to switch this to board url
-		String AsNetworkUrl =  resolveUrlForFetch(streamUrl,user,group,application);
-		return AsNetworkUrl;
-	}
-	
-	private String resolveUrlForFetch(StringBuilder baseurl, String user, String group, String application){
-		if (StringUtil.isEmpty(group)) {
-			group = ASGroup.ALL.getGroupType();
-		}
-
-		if (StringUtil.isEmpty(user)) {
-			user = ASUser.PUBLIC.getUserType();
-		}
-
-		if (StringUtil.isEmpty(application)) {
-			application = ASApplication.STATUS.getApplicationType();
-		}
-
-		baseurl.append(ConnectionsConstants.SEPARATOR).append(user).append(ConnectionsConstants.SEPARATOR).append(group);
-		if (!(application.equals(ASApplication.NOAPP.getApplicationType()))) {
-			baseurl.append(ConnectionsConstants.SEPARATOR).append(application);
-		}
-		return baseurl.toString();
-	}
-	/*
-	 * Method responsible for generating appropriate REST URLs for POST functionality
-	 */
-	private String resolveUrlForPostingAS(String user, String group, String application) {
-
-		StringBuilder streamUrl = new StringBuilder(baseUrl);
-		streamUrl.append(AuthUtil.INSTANCE.getAuthValue(endpoint)).append(restUrl); // Basic or Oauth
-		
-		streamUrl.append(activityStreamsUrl); // include a condition here to switch this to board url
-
-		if (StringUtil.isEmpty(user)) {
-			user = ASUser.PUBLIC.getUserType();
-		}
-
-		if (StringUtil.isEmpty(group)) {
-			group = ASGroup.ALL.getGroupType();
-		}
-
-		streamUrl.append(ConnectionsConstants.SEPARATOR + user).append(ConnectionsConstants.SEPARATOR + group);
-		if (!(StringUtil.isEmpty(application))) {
-			streamUrl.append(ConnectionsConstants.SEPARATOR + application);
-		}
-
-		return streamUrl.toString();
-	}
-	
-	
-	/*
-	 * Method responsible for generating appropriate REST URLs for POST functionality
-	 */
-	private String resolveUrlForPostingMB(String user, String group, String application) {
-
-		StringBuilder streamUrl = new StringBuilder(baseUrl);
-		streamUrl.append(AuthUtil.INSTANCE.getAuthValue(endpoint)).append(restUrl); // Basic or Oauth
-		
-		streamUrl.append(boardUrl); // include a condition here to switch this to board url
-
-		if (StringUtil.isEmpty(user)) {
-			user = ASUser.PUBLIC.getUserType();
-		}
-
-		if (StringUtil.isEmpty(group)) {
-			group = ASGroup.ALL.getGroupType();
-		}
-
-		streamUrl.append(ConnectionsConstants.SEPARATOR + user).append(ConnectionsConstants.SEPARATOR + group);
-		if (!(StringUtil.isEmpty(application))) {
-			streamUrl.append(ConnectionsConstants.SEPARATOR + application);
-		}
-
-		return streamUrl.toString();
-	}
-	
-
-	
 	
 	private String getUserLanguage() {
 		return "en";

@@ -611,8 +611,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 handleAs : "text", 
                 query : requestArgs
             };
-            var url = this.builder.build(consts.AtomCommunityMembers, this.endpoint.apiVersion, {
-                authentication : this.endpoint.authType === "oauth" ? "oauth":""
+            var url = this.service.builder.build(consts.AtomCommunityMembers, this.service.endpoint.apiVersion, {
+                authentication : this.service.endpoint.authType === "oauth" ? "oauth":""
             });
             return this.service.getEntity(url, options, memberId, callbacks);
         },

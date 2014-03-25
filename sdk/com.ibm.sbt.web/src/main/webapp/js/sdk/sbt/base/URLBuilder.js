@@ -66,11 +66,7 @@ define([ "../declare" ], function(declare) {
         
         build: function(versionedUrl, maxVersion, args) {
             var url;
-            print('versioned url is ' + versionedUrl);
-            print('versioned url is ' + Object.keys(versionedUrl));
-
             if (typeof versionedUrl === "object"){
-            	print('handling object');
 	            
 	            var compatible=null;
 	            var key = null;
@@ -89,12 +85,10 @@ define([ "../declare" ], function(declare) {
 	                    key = version;
 	                }
 	              }
-            	print('handling object + key is' + key);
 	            url = versionedUrl[key];
             } else {
                 url = versionedUrl;
             }
-            print('url is ' + url);
 
             if (args) {
 	            for (var key in args) {

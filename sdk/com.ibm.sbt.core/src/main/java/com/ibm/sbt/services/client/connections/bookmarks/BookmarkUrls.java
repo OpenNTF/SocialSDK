@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -15,31 +15,39 @@
  */
 package com.ibm.sbt.services.client.connections.bookmarks;
 
+import com.ibm.sbt.services.client.base.ConnectionsConstants;
+import com.ibm.sbt.services.client.base.NamedUrlPart;
+import com.ibm.sbt.services.client.base.URLBuilder;
+import com.ibm.sbt.services.client.base.Version;
+import com.ibm.sbt.services.client.base.VersionedUrl;
+
 /**
  * Class used in constructing URL for Blogs service
  * @author Swati Singh
+ * @author Carlos Manias
  */
 
 public enum BookmarkUrls {
 	
-	ALL("dogear/atom"),
-	APP("dogear/api/app"),
-	POPULAR("dogear/atom/popular"),
-	MYNOTIFICATIONS("dogear/atom/mynotifications"),
-	MYSENTNOTIFICATIONS("dogear/atom/mysentnotifications");
+	ALL(new VersionedUrl(ConnectionsConstants.v4_0, "dogear/atom")),
+	APP(new VersionedUrl(ConnectionsConstants.v4_0, "dogear/api/app")),
+	POPULAR(new VersionedUrl(ConnectionsConstants.v4_0, "dogear/atom/popular")),
+	MYNOTIFICATIONS(new VersionedUrl(ConnectionsConstants.v4_0, "dogear/atom/mynotifications")),
+	MYSENTNOTIFICATIONS(new VersionedUrl(ConnectionsConstants.v4_0, "dogear/atom/mysentnotifications"));
 	
 
-	private String format;
+	private URLBuilder builder;
 	
-	private BookmarkUrls(String format) {
-		this.format = format;
+	private BookmarkUrls(VersionedUrl... urlVersions) {
+		builder = new URLBuilder(urlVersions);
 	}
 	
-	/**
-	 * Return the URL for the specified request
-	 */
-	public String getUrl(BookmarkService service) {
-		return format;
+	public String format(Version version, NamedUrlPart... args) {
+		return builder.format(version, args);
+	}
+
+	public String getPattern(Version version){
+		return builder.getPattern(version).getUrlPattern();
 	}
 
 }

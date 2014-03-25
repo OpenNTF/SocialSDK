@@ -40,6 +40,7 @@ import com.ibm.sbt.services.endpoints.Endpoint;
  * BlogService
  * 
  * @author Swati Singh
+ * @author Carlos Manias
  */
 
 public class BlogService extends BaseService {

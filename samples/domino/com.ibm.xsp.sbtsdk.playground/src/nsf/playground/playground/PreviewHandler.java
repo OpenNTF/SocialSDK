@@ -63,6 +63,9 @@ public abstract class PreviewHandler {
         String s = '-'+lib.getVersionTag();
 		return serverUrl+"/xsp/.ibmxspres/dojoroot"+s+"/";
 	}
+	protected String getDefautSbtPath(String serverUrl) {
+		return serverUrl+"/xsp/.ibmxspres/.sbtsdk";
+	}
 	
 	protected String composeServerUrl(HttpServletRequest req) {		
 //		System.out.println("scheme:"+req.getScheme());

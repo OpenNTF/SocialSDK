@@ -21,15 +21,12 @@
  */
 define([ "../declare" ], function(declare) {
 	var URLBuilder = declare(null, {
-		
-		urls : null,
-		
-		constructor : function(namedUrls) {
-          this.urls = namedUrls;
+
+		constructor : function() {
         },
+        
         _normalizeVersion : function(version) {
         	var tokenized = version.split(".");
-        	print(tokenized.lenght);
         	while (tokenized.lenght<3) {
         		tokenized.push('0');
         	} 
@@ -41,42 +38,34 @@ define([ "../declare" ], function(declare) {
       			tokenized[key]=Number(tokenized[key]);
       		  }
         	}
-        	print('url version conversion '+version+' -> '+tokenized);
         	return tokenized;
         },
         _compareVersion: function(a,b) {
         	
 
         	if(a[0]<b[0]) {
-        		print(a+ ' < '+b);
         		return -1;
         	}
         	if(a[0]>b[0]) {
-        		print(a+ ' > '+b);
         		return 1;
         	}
         	if(a[1]<b[1]) {
-        		print(a+ ' < '+b);
         		return -1;
         	}
         	if(a[1]>b[1]) {
-        		print(a+ ' > '+b);
         		return 1;
         	}
         	if(a[2]<b[2]) {
-        		print(a+ ' < '+b);
         		return -1;
         	}
         	if(a[2]>b[2]) {
-        		print(a+ ' > '+b);
         		return 1;
         	}
-    		print(a+ ' = '+b);
         	return 0;
         },
         
-        build: function(urlName, maxVersion, args) {
-        	var versionedUrl = this.urls[urlName];
+        build: function(versionedUrl, maxVersion, args) {
+        	if (!maxVersion) maxVersion = '0';
         	var compatible=null;
         	var key = null;
         	maxVersion = this._normalizeVersion(maxVersion);
@@ -95,10 +84,7 @@ define([ "../declare" ], function(declare) {
         		}
       		}
         	
-        	print(maxVersion);
-        	print('selected API version for max ' +maxVersion + ' is ' + key);
         	var url = versionedUrl[key];
-        	print('converting '+url+ ' using ' +args );
         	for (var key in args) {
         		  if (args.hasOwnProperty(key)) {
         			  url=url.replace('{'+key+'}',args[key]);

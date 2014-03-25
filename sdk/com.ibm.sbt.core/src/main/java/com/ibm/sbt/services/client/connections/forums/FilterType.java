@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -15,30 +15,24 @@
  */
 package com.ibm.sbt.services.client.connections.forums;
 
+import com.ibm.sbt.services.client.base.NamedUrlPart;
+
 /**
  * Class used in constructing URL for Forums service
  * @author Manish Kataria
+ * @author Carlos Manias
  */
 
 public enum FilterType {
+	MY,
+	PUBLIC,
+	RESOURCES,
+	FORUMS,
+	TOPICS,
+	ENTRIES;
 	
-	MY("my"),
-	PUBLIC("public"),
-	RESOURCES("resources"),
-	FORUMS("forums"),
-	TOPICS("topics"),
-	ENTRIES("entries");
-	
-	String filterType;
-	
-	private FilterType(String filterType) {
-		this.filterType = filterType;
+	public NamedUrlPart get(){
+		return new NamedUrlPart("filterType", name().toLowerCase());
 	}
-	
-	/**
-	 * Wrapper method to return filter type
-	 * <p>
-	 */
-	public String getFilterType(){return filterType;}
 
 }

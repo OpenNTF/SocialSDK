@@ -15,34 +15,30 @@
  */
 package com.ibm.sbt.automation.core.test.connections;
 
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.ibm.commons.util.io.json.JsonJavaObject;
-import com.ibm.sbt.automation.core.test.BaseApiTest;
 import com.ibm.sbt.automation.core.test.BaseTest.AuthType;
 import com.ibm.sbt.automation.core.test.FlexibleTest;
 import com.ibm.sbt.automation.core.utils.Trace;
-import com.ibm.sbt.security.authentication.AuthenticationException;
 import com.ibm.sbt.services.client.SBTServiceException;
+import com.ibm.sbt.services.client.connections.activitystreams.ActivityStreamEntity;
 import com.ibm.sbt.services.client.connections.activitystreams.ActivityStreamEntityList;
 import com.ibm.sbt.services.client.connections.activitystreams.ActivityStreamService;
-import com.ibm.sbt.services.client.connections.activitystreams.ActivityStreamEntity;
 import com.ibm.sbt.services.client.connections.activitystreams.ActivityStreamServiceException;
 import com.ibm.sbt.services.client.connections.communities.Community;
 import com.ibm.sbt.services.client.connections.communities.CommunityService;
 import com.ibm.sbt.services.client.connections.communities.CommunityServiceException;
-import com.ibm.sbt.services.client.connections.follow.FollowService;
-import com.ibm.sbt.services.client.connections.follow.FollowedResource;
-import com.ibm.sbt.services.client.connections.follow.model.Source;
-import com.ibm.sbt.services.client.connections.follow.model.Type;
-import com.ibm.sbt.services.client.connections.profiles.Profile;
-import com.ibm.sbt.services.client.connections.profiles.ProfileService;
 import com.ibm.sbt.services.endpoints.BasicEndpoint;
 import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
 import com.ibm.sbt.test.lib.MockEndpoint;
-
-import static org.junit.Assert.*;
 /**
  * @author rajmeetbal
  *  
@@ -101,6 +97,28 @@ public class BaseActivityStreamsTest extends FlexibleTest {
             e.printStackTrace();
 		}
         return asEntry;
+    }
+    
+    /**
+     * Save an AS entry so the list is not empty.
+     * @throws ActivityStreamServiceException 
+     */
+    protected void saveEntry() throws ActivityStreamServiceException{
+    	if(activityStreamService == null){
+    		activityStreamService = new ActivityStreamService();
+    	}
+    	String eventId = null;
+    	Map<String, String> params = new HashMap<String, String>();
+    	params.put("rollup", "true");
+    	ActivityStreamEntityList list = activityStreamService.getStream("@me", "@all", "@all", params);
+		for(int i = 0; i < list.size(); i++){
+			eventId = list.get(i).getEventId();
+			if(eventId != null){
+				break;
+			}
+		}
+		
+		activityStreamService.saveEntry(eventId);
     }
 
     protected void createEntry(String userType, String groupType, String applicationType) {

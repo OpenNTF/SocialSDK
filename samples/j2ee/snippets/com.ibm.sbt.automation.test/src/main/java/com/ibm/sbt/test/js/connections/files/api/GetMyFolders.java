@@ -3,6 +3,7 @@ package com.ibm.sbt.test.js.connections.files.api;
 import java.util.HashMap;
 import java.util.List;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,10 +25,19 @@ public class GetMyFolders extends BaseFilesTest {
 	public void init() {
 		try {
 			fileService = getFileService();
+			if (!environment.isSmartCloud() && folder == null) {
+				createFolder();
+			}
 			folders = fileService.getMyFolders(new HashMap<String, String>());
 		} catch (FileServiceException e) {
 			Assert.fail(e.getMessage());
-			e.printStackTrace();
+		}
+	}
+	
+	@After
+	public void destroy() {
+		if (!environment.isSmartCloud()) {
+			deleteFileAndQuit();
 		}
 	}
 

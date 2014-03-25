@@ -393,8 +393,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 handleAs : "text",
                 query : requestArgs
             };
-            var url = this.builder.build(consts.AtomCommunityInstance, this.endpoint.apiVersion, {
-                authentication : this.endpoint.authType === "oauth" ? "oauth":""
+            var url = this.service.builder.build(consts.AtomCommunityInstance, this.service.endpoint.apiVersion, {
+                authentication : this.service.endpoint.authType === "oauth" ? "oauth":""
             });
             return this.service.getEntity(url, options, communityUuid, callbacks);
         },
@@ -812,8 +812,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 handleAs : "text",
                 query : requestArgs
             };
-            var url = this.builder.build(consts.AtomCommunityInvites, this.endpoint.apiVersion, {
-                authentication : this.endpoint.authType === "oauth" ? "oauth":""
+            var url = this.service.builder.build(consts.AtomCommunityInvites, this.service.endpoint.apiVersion, {
+                authentication : this.service.endpoint.authType === "oauth" ? "oauth":""
             });
             return this.service.getEntity(url, options, communityUuid + "-" + userid, callbacks);
         },

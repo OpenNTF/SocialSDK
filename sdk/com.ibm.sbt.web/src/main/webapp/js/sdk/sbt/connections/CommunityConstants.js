@@ -112,7 +112,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @for sbt.connections.CommunityService
          */
         MemberXPath : lang.mixin({}, conn.AtomEntryXPath, {
-          id : "a:contributor/snx:userid",
+            id : "a:contributor/snx:userid",
             uid : "a:contributor/snx:userid",
             role : "snx:role"
         }),

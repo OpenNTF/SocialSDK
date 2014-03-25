@@ -20,8 +20,8 @@
  * @module sbt.base.BaseService
  * @author Carlos Manias
  */
-define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cache", "../Promise", "../util" ], 
-    function(config, declare,lang,log,stringUtil,Cache,Promise, util) {
+define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cache", "../Promise", "../util", "sbt/base/URLBuilder" ], 
+    function(config, declare,lang,log,stringUtil,Cache,Promise, util, URLBuilder) {
 	// TODO sbt/config is required here to solve module loading
 	// issues with jquery until we remove the global sbt object
 	
@@ -57,6 +57,8 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
          */
         contextRootMap: {},
 
+        builder: new URLBuilder(),
+        
         /**
          * Constructor for BaseService
          * 
@@ -97,10 +99,14 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
             if (!url) {
                 throw new Error("BaseService.constructUrl: Invalid argument, url is undefined or null.");
             }
+           
             
             if(this.endpoint){
                 lang.mixin(this.contextRootMap, this.endpoint.serviceMappings);
-                
+                //back compat with services reusing constants
+                url = this.builder.build(url, this.endpoint.apiVersion,  {
+                    authentication : this.endpoint.authType === "oauth" ? "oauth":""
+                });
                 url = stringUtil.transform(url, this.contextRootMap, function(value, key){
                     if(!value){
                         return key;
@@ -109,6 +115,9 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
                         return value;
                     }
                 }, this);
+            }else {
+            	 //back compat with services reusing constants
+                url = this.builder.build(url);
             }
             
             if (urlParams) {

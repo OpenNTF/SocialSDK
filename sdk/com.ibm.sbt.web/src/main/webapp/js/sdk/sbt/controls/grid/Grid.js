@@ -17,7 +17,7 @@
 /**
  * 
  */
-define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil", "../../widget/grid/_Grid", "../../util", "../../sbt/URLBuilder"], 
+define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil", "../../widget/grid/_Grid", "../../util", "../../base/URLBuilder"], 
         function(declare, lang, itemFactory, stringUtil, _Grid, util, URLBuilder) {
 
     /**

@@ -958,8 +958,6 @@ public class ActivityStreamService extends BaseService {
 		
 		String url = resolveUrlForPostingAS(ASUser.ME.getUserType(), ASGroup.ALL.getGroupType(), ASApplication.ALL.getApplicationType());
 		postEntry(url + "/" + entryId + "?X-HTTP-Method-Override=PUT", payload);
-		
-		//handle this url thing better.
 	}
 	
 	

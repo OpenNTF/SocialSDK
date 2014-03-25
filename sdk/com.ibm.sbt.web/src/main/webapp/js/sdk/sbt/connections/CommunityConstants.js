@@ -112,7 +112,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @for sbt.connections.CommunityService
          */
         MemberXPath : lang.mixin({}, conn.AtomEntryXPath, {
-        	id : "a:contributor/snx:userid",
+          id : "a:contributor/snx:userid",
             uid : "a:contributor/snx:userid",
             role : "snx:role"
         }),
@@ -181,20 +181,10 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.CommunityService
          */
-        AtomCommunitiesAll : "/${communities}/service/atom/communities/all",
-
-        /**
-         * A feed of communities of which the authenticated user is a member.
-         * 
-         * Get the My Communities feed to see a list of the communities to which the authenticated user is a member or pass in parameters to search for a subset of those communities that match a specific criteria.
-         * 
-         * Supports: asc, email, ps, search, since, sortField, tag, userid
-         * 
-         * @property AtomCommunitiesMy
-         * @type String
-         * @for sbt.connections.CommunityService
-         */
-        AtomCommunitiesMy : "/${communities}/service/atom/communities/my",
+        AtomCommunitiesAll : {
+            '3.0.0': "/${communities}/service/atom/communities/all",
+            '4.5.0': "/${communities}/service/atom/{authentication}/communities/all"
+        },
         
         /**
          * A feed of invitations.
@@ -207,17 +197,11 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.CommunityService
          */
-        AtomCommunityInvitesMy : "/${communities}/service/atom/community/invites/my",
-        
-        /**
-         * URL to delete/create Community Invites
-         * 
-         * @property AtomCommunityInvites
-         * @type String
-         * @for sbt.connections.CommunityService
-         */
-        AtomCommunityInvites : "${communities}/service/atom/community/invites",
-        
+        AtomCommunityInvitesMy : {
+            '3.0.0': "/${communities}/service/atom/community/invites/my",
+            '4.5.0': "/${communities}/service/atom/{authentication}/community/invites/my",
+        },
+
         /**
          * A feed of subcommunities.
          * 
@@ -229,7 +213,10 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.CommunityService
          */
-        AtomCommunitySubCommunities : "${communities}/service/atom/community/subcommunities",
+        AtomCommunitySubCommunities : {
+            '3.0.0': "${communities}/service/atom/community/subcommunities",
+            '4.5.0': "${communities}/service/atom/{authentication}/community/subcommunities"
+        },
             
         /**
          * A feed of members.
@@ -242,7 +229,10 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.CommunityService
          */
-        AtomCommunityMembers : "${communities}/service/atom/community/members",
+        AtomCommunityMembers : {
+            '3.0.0': "${communities}/service/atom/community/members",
+            '4.5.0': "${communities}/service/atom/{authentication}/community/members"
+        },
         
         /**
          * A community entry.
@@ -251,7 +241,10 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.CommunityService
          */
-        AtomCommunityInstance : "${communities}/service/atom/community/instance",
+        AtomCommunityInstance : {
+            '3.0.0': "${communities}/service/atom/community/instance",
+            '4.5.0': "${communities}/service/atom/{authentication}/community/instance"
+        },
         
         /**
          * Get a feed that includes the topics in a specific community forum.
@@ -260,16 +253,83 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.CommunityService
          */
-        AtomCommunityForumTopics : "/${communities}/service/atom/community/forum/topics",
+        AtomCommunityForumTopics : {
+            '3.0.0': "/${communities}/service/atom/community/forum/topics",
+            '4.5.0':"/${communities}/service/atom/{authentication}/community/forum/topics"
+        },
         
+
         /**
-         * Get a feed of a Community's bookmarks. Requires a url parameter of the form communityUuid=xxx
-         * @property AtomCommunityBookmarks
+         * File Proxy URL for uploading a community file
+         * @property AtomUploadCommunityFile
          * @type String
          * @for sbt.connections.CommunityService
          */
-        AtomCommunityBookmarks : "/${communities}/service/atom/community/bookmarks",
+        AtomUploadCommunityFile : {
+            '3.0.0': '/${files}/{endpointName}/connections/UploadCommunityFile/{communityUuid}'
+        },
+        /**
+         * File Proxy URL for update community logo
+         * @property AtomUpdateCommunityLogo
+         * @type String
+         * @for sbt.connections.CommunityService
+         */
+		AtomUpdateCommunityLogo : {
+			'3.0.0': '/${files}/{endpointName}/connections/UpdateCommunityLogo/{fileName}'
+		},
+        /**
+         * Obtain a full representation of the invitations as an Atom entry document.
+         * 
+         * @property AtomCommunityInvites
+         * @type String
+         * @for sbt.connections.CommunityService
+         */
+        AtomCommunityInvites : {
+            '3.0.0': '/${communities}/service/atom/community/invites',
+            '4.5.0': '/${communities}/service/atom/{authentication}/communities/invites'
+        },
+        /**
+         * A feed of communities of which the authenticated user is a member.
+         * 
+         * Get the My Communities feed to see a list of the communities to which the authenticated user is a member or pass in parameters to search for a subset of those communities that match a specific criteria.
+         * 
+         * Supports: asc, email, ps, search, since, sortField, tag, userid
+         * 
+         * @property AtomCommunitiesMy
+         * @type String
+         * @for sbt.connections.CommunityService
+         */
+        AtomCommunitiesMy : {
+            '3.0.0': '/${communities}/service/atom/communities/my',
+            '4.5.0': '/${communities}/service/atom/{authentication}/communities/my'
+        },
         
+        /**
+         * Parameters: 
+         *   eventInstUuid - The uuid of the event instance that you want to get the comments of.
+         * 
+         * @property AtomCommunityEventComments
+         * @type String
+         * @for sbt.connections.CommunityService
+         */
+        AtomCommunityEventComments : {
+            '3.0.0' : '/${communities}/calendar/atom/calendar/event/comment',
+            '4.5.0' : '/${communities}/calendar/atom/{authentication}/calendar/event/comment'
+        },
+        /**
+         * Parameters: 
+         *   type - Mandatory parameter, must be 'attend' or 'follow', used to get and update event followers and attendees
+         *   eventUuid - The uuid of the event that you want to follow or attend.
+         *   eventInstUuid - The uuid of the event instance that you want to follow or attend.
+         * 
+         * @property AtomCommunityEventAttend
+         * @type String
+         * @for sbt.connections.CommunityService
+         */
+        AtomCommunityEventAttend : {
+            '3.0.0' : "/${communities}/calendar/atom/calendar/event/attendees",
+            '4.5.0' : '/${communities}/calendar/atom/{authentication}/calendar/event/attendees'
+        },
         /**
          * Get a feed of a Community's Events or EventInsts. 
          * 
@@ -292,60 +352,21 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @type String
          * @for sbt.connections.CommunityService
          */
-        AtomCommunityEvents : "/${communities}/calendar/atom/calendar/event",
+        AtomCommunityEvents : {
+            '3.0.0' : '/${communities}/calendar/atom/calendar/event',
+            '4.5.0' : '/${communities}/calendar/atom/{authentication}/calendar/event'
+        },
         
         /**
-         * Parameters: 
-         *   type - Mandatory parameter, must be 'attend' or 'follow', used to get and update event followers and attendees
-         *   eventUuid - The uuid of the event that you want to follow or attend.
-         *   eventInstUuid - The uuid of the event instance that you want to follow or attend.
-         * 
-         * @property AtomCommunityEventAttend
+         * Get a feed of a Community's bookmarks. Requires a url parameter of the form communityUuid=xxx
+         * @property AtomCommunityBookmarks
          * @type String
          * @for sbt.connections.CommunityService
          */
-        AtomCommunityEventAttend : "/${communities}/calendar/atom/calendar/event/attendees",
-        
-        /**
-         * Get a feed of a Community's Event Comments. 
-         * @property AtomCommunityEventComments
-         * @type String
-         * @for sbt.connections.CommunityService
-         */
-        AtomCommunityEventComments : "/${communities}/calendar/atom/calendar/event/comment",
-        
-        /**
-        * Obtain a full representation of the invitations as an Atom entry document.
-        * 
-        * @property AtomCommunityInvites
-        * @type String
-        * @for sbt.connections.CommunityService
-        */
-        AtomCommunityInvites : "/${communities}/service/atom/community/invites",
-        
-        /**
-         * Get a feed of a Community's Bookmarks. 
-         * @property AtomCommunityInvites
-         * @type String
-         * @for sbt.connections.CommunityService
-         */
-        AtomCommunityBookmarks : "/${communities}/service/atom/community/bookmarks",
-        
-        /**
-         * File Proxy URL for update community logo
-         * @property AtomUpdateCommunityLogo
-         * @type String
-         * @for sbt.connections.CommunityService
-         */
-        AtomUpdateCommunityLogo : "/${files}/{endpointName}/connections/UpdateCommunityLogo/{fileName}",
-        
-        /**
-         * File Proxy URL for uploading a community file
-         * @property AtomUploadCommunityFile
-         * @type String
-         * @for sbt.connections.CommunityService
-         */
-        AtomUploadCommunityFile : "/${files}/{endpointName}/connections/UploadCommunityFile/{communityUuid}"
+        AtomCommunityBookmarks : {
+            '3.0.0' : '/${communities}/service/atom/community/bookmarks',
+            '4.5.0' : '/${communities}/service/atom/{authentication}/community/bookmarks'
+        }
         
     });
 });

@@ -166,6 +166,9 @@ define([ "../../declare", "../../lang", "../../itemFactory", "../../stringUtil",
          * @returns Built url
          */
         buildUrl: function(url, args, endpoint) {
+            var url = this.builder.build(url, this.endpoint.apiVersion, {
+                authentication : this.endpoint.authType === "oauth" ? "oauth":""
+            });
             var params = {};
             if (this.query) {
                 params = lang.mixin(params, this.query);

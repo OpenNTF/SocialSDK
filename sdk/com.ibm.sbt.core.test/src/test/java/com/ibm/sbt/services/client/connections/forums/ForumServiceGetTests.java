@@ -33,131 +33,93 @@ import com.ibm.sbt.services.client.connections.forums.model.BaseForumEntity;
 public class ForumServiceGetTests extends BaseForumServiceTest {
 
 	@Test
-	public void testGetAllForums() {
-		try {
-			ForumList entries = forumService.getAllForums();
-			assertNotNull(entries);
-			for (BaseForumEntity forum : entries) {
-				assertValid((Forum)forum);
-			}
-		} catch (Exception e) {
-			fail("Error calling forumService.getAllForums() caused by: "+e.getMessage());
+	public void testGetAllForums() throws ForumServiceException {
+		ForumList entries = forumService.getAllForums();
+		assertNotNull(entries);
+		for (BaseForumEntity forum : entries) {
+			assertValid((Forum)forum);
 		}
 	}
 
 	@Test
-	public void testGetMyForums() {
-		try {
-			ForumList entries = forumService.getMyForums();
-			assertNotNull(entries);
-			for (BaseForumEntity forum : entries) {
-				assertValid((Forum)forum);
-			}
-		} catch (Exception e) {
-			fail("Error calling  forumService.getMyForums() caused by: "+e.getMessage());
+	public void testGetMyForums() throws ForumServiceException {
+		ForumList entries = forumService.getMyForums();
+		assertNotNull(entries);
+		for (BaseForumEntity forum : entries) {
+			assertValid((Forum)forum);
 		}
 	}
 
 	@Test
-	public void testGetPublicForums() {
-		try {
-			ForumList entries = forumService.getPublicForums();
-			assertNotNull(entries);
-			for (BaseForumEntity forum : entries) {
-				assertValid((Forum)forum);
-			}
-		} catch (Exception e) {
-			fail("Error calling forumService.getPublicForums() caused by: "+e.getMessage());
+	public void testGetPublicForums() throws ForumServiceException {
+		ForumList entries = forumService.getPublicForums();
+		assertNotNull(entries);
+		for (BaseForumEntity forum : entries) {
+			assertValid((Forum)forum);
 		}
 	}
 
 	@Test
-	public void testGetPublicForumTopics() {
-		try {
-			TopicList entries = forumService.getPublicForumTopics();
-			assertNotNull(entries);
-			for (BaseForumEntity topic : entries) {
-				assertValid((ForumTopic)topic);
-			}
-		} catch (Exception e) {
-			fail("Error calling forumService.getPublicForumTopics() caused by: "+e.getMessage());
+	public void testGetPublicForumTopics() throws ForumServiceException {
+		TopicList entries = forumService.getPublicForumTopics();
+		assertNotNull(entries);
+		for (BaseForumEntity topic : entries) {
+			assertValid((ForumTopic)topic);
 		}
 	}
 
 	@Test
-	public void testGetMyForumTopics() {
-		try {
-			TopicList entries = forumService.getMyForumTopics();
-			assertNotNull(entries);
-			for (BaseForumEntity topic : entries) {
-				assertValid((ForumTopic)topic);
-			}
-		} catch (Exception e) {
-			fail("Error calling forumService.getMyForumTopics() caused by: "+e.getMessage());
+	public void testGetMyForumTopics() throws ForumServiceException {
+		TopicList entries = forumService.getMyForumTopics();
+		assertNotNull(entries);
+		for (BaseForumEntity topic : entries) {
+			assertValid((ForumTopic)topic);
 		}
 	}
 
 
 	@Test
-	public void testGetForumReplies() {
-		try {
-			TopicList topics = forumService.getMyForumTopics();
-			ForumTopic topic = (ForumTopic) topics.iterator().next();
-			Map<String, String> parameters = new HashMap<String, String>();
-			parameters.put("topicUuid", topic.getTopicUuid());
-			
-			ReplyList entries = forumService.getForumReplies(parameters);
-			assertNotNull(entries);
-			for (BaseForumEntity reply : entries) {
-				assertValid((ForumReply)reply);
-			}
-		} catch (Exception e) {
-			fail("Error calling forumService.getForumReplies() caused by: "+e.getMessage());
+	public void testGetForumReplies() throws ForumServiceException {
+		TopicList topics = forumService.getMyForumTopics();
+		ForumTopic topic = (ForumTopic) topics.iterator().next();
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put("topicUuid", topic.getTopicUuid());
+		
+		ReplyList entries = forumService.getForumReplies(parameters);
+		assertNotNull(entries);
+		for (BaseForumEntity reply : entries) {
+			assertValid((ForumReply)reply);
 		}
 	}
 
 	@Test
-	public void testGetRecommendations() {
-		try {
-			TopicList topics = forumService.getMyForumTopics();
-			ForumTopic topic = (ForumTopic) topics.get(0);
-			RecommendationList recommendations = forumService.getRecommendations(topic.getTopicUuid());
-			assertNotNull(recommendations);
-			for (Recommendation recommendation : recommendations) {
-				assertValid(recommendation);
-			}
-		} catch (Exception e) {
-			fail("Error calling forumService.getRecommendations() caused by: "+e.getMessage());
+	public void testGetRecommendations() throws ForumServiceException {
+		TopicList topics = forumService.getMyForumTopics();
+		ForumTopic topic = (ForumTopic) topics.get(0);
+		RecommendationList recommendations = forumService.getRecommendations(topic.getTopicUuid());
+		assertNotNull(recommendations);
+		for (Recommendation recommendation : recommendations) {
+			assertValid(recommendation);
 		}
 	}
 
-
 	@Test
-	public void testGetForumsTags() {
-		try {
-			TagList entries = forumService.getForumsTags();
-			assertNotNull(entries);
-			for (Tag tag : entries) {
-				assertValid((Tag)tag);
-			}
-		} catch (Exception e) {
-			fail("Error calling forumService.getForumsTags() caused by: "+e.getMessage());
+	public void testGetForumsTags() throws ForumServiceException {
+		TagList entries = forumService.getForumsTags();
+		assertNotNull(entries);
+		for (Tag tag : entries) {
+			assertValid((Tag)tag);
 		}
 	}
 
-
 	@Test
-	public void testGetForumTopicsTags() {
-		try {
-			ForumList forums = forumService.getPublicForums();
-			Forum forum = (Forum) forums.get(0);
-			TagList entries = forumService.getForumTopicsTags(forum.getForumUuid());
-			assertNotNull(entries);
-			for (Tag tag : entries) {
-				assertValid((Tag)tag);
-			}
-		} catch (Exception e) {
-			fail("Error calling forumService.getForumTopicsTags() caused by: "+e.getMessage());
+	public void testGetForumTopicsTags() throws ForumServiceException {
+		ForumList forums = forumService.getPublicForums();
+		Forum forum = (Forum) forums.get(0);
+		TagList entries = forumService.getForumTopicsTags(forum.getForumUuid());
+		assertNotNull(entries);
+		for (Tag tag : entries) {
+			assertValid((Tag)tag);
 		}
 	}
 

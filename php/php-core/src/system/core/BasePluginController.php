@@ -104,7 +104,7 @@ class BasePluginController extends BaseController {
 						'client_id'     => $settings->getClientId($endpointName),
 						'callback_uri'  => urlencode($settings->getOAuth2CallbackURL($endpointName))
 				); 
-			die($settings->getClientId($endpointName));
+	
 				$authURL = $settings->getAuthorizationURL($endpointName) . '?' . http_build_query($parameters, null, '&');
 				
 				if (!headers_sent()) {

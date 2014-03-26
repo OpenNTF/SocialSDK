@@ -471,6 +471,13 @@ public class PreviewJavaScriptHandler extends PreviewHandler {
         dojoResources.addResource(factory.getDojoResource("dojo.regexp",dojoLibrary));
         dojoResources.addResource(factory.getDojoResource("dojo.i18n",dojoLibrary));
         dojoResources.addResource(factory.getDojoResource("dojo.string",dojoLibrary));
+        dojoResources.addResource(factory.getDojoResource("dojo.cache",dojoLibrary));
+        dojoResources.addResource(factory.getDojoResource("dojo.text",dojoLibrary));
+        
+        // Controls
+        dojoResources.addResource(factory.getDojoResource("dijit._WidgetBase",dojoLibrary));
+        dojoResources.addResource(factory.getDojoResource("dijit._TemplatedMixin",dojoLibrary));
+        dojoResources.addResource(factory.getDojoResource("dojo.touch",dojoLibrary));
         
         if(includeSDKModules) {
         	// The resources bellow are generally needed
@@ -492,6 +499,7 @@ public class PreviewJavaScriptHandler extends PreviewHandler {
             dojoResources.addResource(factory.getDojoResource("sbt.xpath",dojoLibrary));
             dojoResources.addResource(factory.getDojoResource("sbt.util",dojoLibrary));
             dojoResources.addResource(factory.getDojoResource("sbt.dom",dojoLibrary));
+	        dojoResources.addResource(factory.getDojoResource("sbt.text",dojoLibrary));
             
 	        // These ones don't have direct dep in the source code
 	    	// The are loaded by the config
@@ -503,7 +511,6 @@ public class PreviewJavaScriptHandler extends PreviewHandler {
 	        dojoResources.addResource(factory.getDojoResource("sbt._bridge.i18n",dojoLibrary));
 	        dojoResources.addResource(factory.getDojoResource("sbt.authenticator.Basic",dojoLibrary));
 	        dojoResources.addResource(factory.getDojoResource("sbt.util",dojoLibrary));
-	        dojoResources.addResource(factory.getDojoResource("sbt.text",dojoLibrary));
 	        
 	        // Extract the entries from the JS file
 	        // This might be in the SDK layer already, so we don't load them if not fully using the XPages agg but the SDK one

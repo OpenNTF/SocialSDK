@@ -27,25 +27,8 @@ if (!defined('ENDPOINTS')) {
 }
 class SBTSettings {
 	
-	// The endpoint to which the user is currently connecting
-	private $selectedEndpoint; 
 	// Misc SDK settings
 	private $sdkSettings;
-	
-	// Community grid settings
-	private $communityGridSettings;
-	
-	// Files grid settings
-	private $filesGridSettings;
-	
-	// Forums grid settings
-	private $forumsGridSettings;
-	
-	// Bookmarks grid settings
-	private $bookmarksGridSettings;
-	
-	// Basic authentication method - must be global|prompt|profile
-	private $basicAuthMethod;
 	
 	// The JavaScript library to use
 	private $jsLibrary;
@@ -66,22 +49,9 @@ class SBTSettings {
 				require_once '../../../wp-load.php';
 			}
 		}
-		
-		// Fetch all available endpoints
-		$endpoints = get_option(ENDPOINTS);
+
 		$this->sdkSettings = get_option(SDK_DEPLOY_URL);
 		$this->jsLibrary = get_option(JS_LIBRARY);
-
-		// Find selected endpoint
-		if ($endpoints) {
-			foreach ($endpoints as $val) {
-				$endpoint = (array)json_decode($val, true);
-				if ($endpoint['selected']) {
-					$this->selectedEndpoint = $endpoint;
-					break;
-				}
-			}
-		}
 	}
 	
 	/**
@@ -90,7 +60,14 @@ class SBTSettings {
 	 * @return
 	 */
 	public function getURL($endpointName = "connections") {
-		return $this->selectedEndpoint['url'];	
+		$endpoints = get_option(ENDPOINTS);
+		
+		foreach ($endpoints as $endpoint) {
+			$decodedEndpoint = (array)json_decode($endpoint, true);
+			if ($decodedEndpoint['name'] == $endpointName) {
+				return $decodedEndpoint['url'];
+			}
+		}
 	}
 	
 	/**
@@ -98,8 +75,14 @@ class SBTSettings {
 	 *
 	 * @return
 	 */
-	public function getConsumerKey($endpointName = "connections") {
-		return $this->selectedEndpoint['consumer_key'];
+	public function getConsumerKey($endpointName = "connections") {		
+		$endpoints = get_option(ENDPOINTS);
+		foreach ($endpoints as $endpoint) {
+			$decodedEndpoint = (array)json_decode($endpoint, true);
+			if ($decodedEndpoint['name'] == $endpointName) {
+				return $decodedEndpoint['consumer_key'];
+			}
+		}
 	}
 	
 	/**
@@ -108,7 +91,13 @@ class SBTSettings {
 	 * @return
 	 */
 	public function getConsumerSecret($endpointName = "connections") {
-		return $this->selectedEndpoint['consumer_secret'];
+		$endpoints = get_option(ENDPOINTS);
+		foreach ($endpoints as $endpoint) {
+			$decodedEndpoint = (array)json_decode($endpoint, true);
+			if ($decodedEndpoint['name'] == $endpointName) {
+				return $decodedEndpoint['consumer_secret'];
+			}
+		}
 	}
 	
 	/**
@@ -117,7 +106,13 @@ class SBTSettings {
 	 * @return
 	 */
 	public function getRequestTokenURL($endpointName = "connections") {
-		return $this->selectedEndpoint['request_token_url'];
+		$endpoints = get_option(ENDPOINTS);
+		foreach ($endpoints as $endpoint) {
+			$decodedEndpoint = (array)json_decode($endpoint, true);
+			if ($decodedEndpoint['name'] == $endpointName) {
+				return $decodedEndpoint['request_token_url'];
+			}
+		}
 	}
 	
 	/**
@@ -125,8 +120,14 @@ class SBTSettings {
 	 *
 	 * @return
 	 */
-	public function forceSSLTrust($endpointName = "connections") {
-		return ($this->selectedEndpoint['force_ssl_trust'] == 'force_ssl_trust');
+	public function forceSSLTrust($endpointName = "connections") {		
+		$endpoints = get_option(ENDPOINTS);
+		foreach ($endpoints as $endpoint) {
+			$decodedEndpoint = (array)json_decode($endpoint, true);
+			if ($decodedEndpoint['name'] == $endpointName) {
+				return $decodedEndpoint['force_ssl_trust'] == 'force_ssl_trust';
+			}
+		}
 	}
 	
 	/**
@@ -135,7 +136,13 @@ class SBTSettings {
 	 * @return
 	 */
 	public function getAuthorizationURL($endpointName = "connections") {
-		return $this->selectedEndpoint['authorization_url'];
+		$endpoints = get_option(ENDPOINTS);
+		foreach ($endpoints as $endpoint) {
+			$decodedEndpoint = (array)json_decode($endpoint, true);
+			if ($decodedEndpoint['name'] == $endpointName) {
+				return $decodedEndpoint['authorization_url'];
+			}
+		}
 	}
 	
 	/**
@@ -144,7 +151,13 @@ class SBTSettings {
 	 * @return
 	 */
 	public function getAPIVersion($endpointName = "connections") {
-		return $this->selectedEndpoint['endpoint_version'];
+		$endpoints = get_option(ENDPOINTS);
+		foreach ($endpoints as $endpoint) {
+			$decodedEndpoint = (array)json_decode($endpoint, true);
+			if ($decodedEndpoint['name'] == $endpointName) {
+				return $decodedEndpoint['endpoint_version'];
+			}
+		}
 	}
 	
 	/**
@@ -153,7 +166,13 @@ class SBTSettings {
 	 * @return
 	 */
 	public function getAccessTokenURL($endpointName = "connections") {
-		return $this->selectedEndpoint['access_token_url'];
+		$endpoints = get_option(ENDPOINTS);
+		foreach ($endpoints as $endpoint) {
+			$decodedEndpoint = (array)json_decode($endpoint, true);
+			if ($decodedEndpoint['name'] == $endpointName) {
+				return $decodedEndpoint['access_token_url'];
+			}
+		}
 	}
 	
 	/**
@@ -162,7 +181,13 @@ class SBTSettings {
 	 * @return
 	 */
 	public function getAuthenticationMethod($endpointName = "connections") {
-		return $this->selectedEndpoint['authentication_method'];
+		$endpoints = get_option(ENDPOINTS);
+		foreach ($endpoints as $endpoint) {
+			$decodedEndpoint = (array)json_decode($endpoint, true);
+			if ($decodedEndpoint['name'] == $endpointName) {
+				return $decodedEndpoint['authentication_method'];
+			}
+		}
 	}
 	
 	/**
@@ -171,7 +196,13 @@ class SBTSettings {
 	 * @return
 	 */
 	public function getOAuth2CallbackURL($endpointName = "connections") {
-		return $this->selectedEndpoint['oauth2_callback_url'];
+		$endpoints = get_option(ENDPOINTS);
+		foreach ($endpoints as $endpoint) {
+			$decodedEndpoint = (array)json_decode($endpoint, true);
+			if ($decodedEndpoint['name'] == $endpointName) {
+				return $decodedEndpoint['oauth2_callback_url'];
+			}
+		}
 	}
 	
 	/**
@@ -180,10 +211,9 @@ class SBTSettings {
 	 * @return
 	 */
 	public function getSDKDeployURL($endpointName = "connections") {
-		return $this->sdkSettings['sdk_deploy_url'];
+		$deployURL = get_option(SDK_DEPLOY_URL);
+		return $deployURL['sdk_deploy_url'];
 	}
-	
-	
 	
 	/**
 	 * Returns the endpoint name.
@@ -191,7 +221,13 @@ class SBTSettings {
 	 * @return
 	 */
 	public function getName($endpointName = "connections") {
-		return  $this->selectedEndpoint['name'];
+		$endpoints = get_option(ENDPOINTS);
+		foreach ($endpoints as $endpoint) {
+			$decodedEndpoint = (array)json_decode($endpoint, true);
+			if ($decodedEndpoint['name'] == $endpointName) {
+				return $decodedEndpoint['name'];
+			}
+		}
 	}
 	
 	/**
@@ -200,7 +236,13 @@ class SBTSettings {
 	 * @return
 	 */
 	public function getBasicAuthUsername($endpointName = "connections") {
-		return $this->selectedEndpoint['basic_auth_username'];
+		$endpoints = get_option(ENDPOINTS);
+		foreach ($endpoints as $endpoint) {
+			$decodedEndpoint = (array)json_decode($endpoint, true);
+			if ($decodedEndpoint['name'] == $endpointName) {
+				return $decodedEndpoint['basic_auth_username'];
+			}
+		}
 	}
 	
 	/**
@@ -209,7 +251,13 @@ class SBTSettings {
 	 * @return
 	 */
 	public function getServerType($endpointName = "connections") {
-		return $this->selectedEndpoint['server_type'];
+		$endpoints = get_option(ENDPOINTS);
+		foreach ($endpoints as $endpoint) {
+			$decodedEndpoint = (array)json_decode($endpoint, true);
+			if ($decodedEndpoint['name'] == $endpointName) {
+				return $decodedEndpoint['server_type'];
+			}
+		}
 	}
 	
 	/**
@@ -218,7 +266,13 @@ class SBTSettings {
 	 * @return
 	 */
 	public function allowClientAccess($endpointName = "connections") {
-		return $this->selectedEndpoint['allow_client_access'];
+		$endpoints = get_option(ENDPOINTS);
+		foreach ($endpoints as $endpoint) {
+			$decodedEndpoint = (array)json_decode($endpoint, true);
+			if ($decodedEndpoint['name'] == $endpointName) {
+				return $decodedEndpoint['allow_client_access'];
+			}
+		}
 	}
 	
 	/**
@@ -227,7 +281,13 @@ class SBTSettings {
 	 * @return
 	 */
 	public function getBasicAuthPassword($endpointName = "connections") {
-		return $this->selectedEndpoint['basic_auth_password'];
+		$endpoints = get_option(ENDPOINTS);
+		foreach ($endpoints as $endpoint) {
+			$decodedEndpoint = (array)json_decode($endpoint, true);
+			if ($decodedEndpoint['name'] == $endpointName) {
+				return $decodedEndpoint['basic_auth_password'];
+			}
+		}
 	}
 	
 	/**
@@ -236,7 +296,13 @@ class SBTSettings {
 	 * @return string		global|profile|prompt
 	 */
 	public function getBasicAuthMethod($endpointName = "connections") {
-		return $this->selectedEndpoint['basic_auth_method'];
+		$endpoints = get_option(ENDPOINTS);
+		foreach ($endpoints as $endpoint) {
+			$decodedEndpoint = (array)json_decode($endpoint, true);
+			if ($decodedEndpoint['name'] == $endpointName) {
+				return $decodedEndpoint['basic_auth_method'];
+			}
+		}
 	}
 	
 	/**
@@ -248,9 +314,19 @@ class SBTSettings {
 		return $this->jsLibrary;
 	}
 	
-	// TODO: Implement
+	/**
+	 * Returns all available endpoints.
+	 * 
+	 * @return 
+	 */
 	public function getEndpoints() {
-		return array();
+		$endpoints = get_option(ENDPOINTS);
+		$decodedEndpoints = array();
+		foreach ($endpoints as $endpoint) {
+			$decodedEndpoint = (array)json_decode($endpoint, true);
+			array_push($decodedEndpoints, $decodedEndpoint);
+		}
+		return $decodedEndpoints;
 	}
 	
 	public function getClientSecret($endpointName = "connections") {

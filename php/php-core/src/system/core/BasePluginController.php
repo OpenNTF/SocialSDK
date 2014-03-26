@@ -35,13 +35,13 @@ class BasePluginController extends BaseController {
 		$this->endpointName = $endpointName;
 		$this->loadModel('SBTSettings');
 		$settings = new SBTSettings();
-		$authMethod = $settings->getAuthenticationMethod();
+		$authMethod = $settings->getAuthenticationMethod($endpointName);
 
 		global $USER;
 		if (isset($USER->id)) {
 			setcookie('ibm-sbt-uid', $USER->id, time() + 604800);
 		}
-
+	
 		if ($authMethod == 'oauth1') {	
 			// Check if we have an access token. If not, re-direct user to authentication page
 			$this->loadModel('SBTCredentialStore');
@@ -125,6 +125,7 @@ class BasePluginController extends BaseController {
 		$settings = new SBTSettings();
 		
 		$viewData['deploy_url'] = $settings->getSDKDeployURL($this->endpointName);
+
 		$viewData['authentication_method'] = $settings->getAuthenticationMethod($this->endpointName);
 		$viewData['js_library'] = $settings->getJSLibrary($this->endpointName);
 		

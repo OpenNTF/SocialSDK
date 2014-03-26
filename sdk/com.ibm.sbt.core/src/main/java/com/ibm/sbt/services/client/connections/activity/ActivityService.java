@@ -19,6 +19,7 @@ package com.ibm.sbt.services.client.connections.activity;
 import java.io.InputStream;
 import java.net.URI;
 import java.nio.charset.Charset;
+import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -605,13 +606,26 @@ public class ActivityService extends BaseService {
 	 * @throws ActivityServiceException
 	 */
 	public ActivityNode createActivityNode(ActivityNode activityNode) throws ActivityServiceException {
+		return createActivityNode(activityNode, null);
+	}
+	
+	/**
+	 * Method to create Activity node
+	 * 
+	 * @param activityNode
+	 * @return ActivityNode
+	 * @throws ActivityServiceException
+	 */
+	public ActivityNode createActivityNode(ActivityNode activityNode, Map<String, String> params) throws ActivityServiceException {
 		if (null == activityNode){
 			throw new ActivityServiceException(null, "Null activity node");
 		}
 		if (null == activityNode.getId()){
 			throw new ActivityServiceException(null, "Null activity id");
 		}
-		Map<String, String> params = new HashMap<String, String>();
+		if (params == null) {
+			params = new HashMap<String, String>();
+		}
 		params.put("activityUuid", activityNode.getActivityId());
 		String requestUri = ActivityServiceUrlBuilder.populateURL(ActivityAction.ACTIVITY.getActivityAction());
 		try {
@@ -624,8 +638,15 @@ public class ActivityService extends BaseService {
 			Map<String, String> headers = new HashMap<String, String>();
 			headers.put("Content-Type", "application/atom+xml");
 			Response requestData = createData(requestUri, params, headers, activityNodePayload);
-			activityNode.clearFieldsMap();
-			return (ActivityNode) new ActivityNodeFeedHandler(this).createEntity(requestData);
+			
+			int statusCode = requestData.getResponse().getStatusLine().getStatusCode();
+			if (statusCode == 201) {
+				activityNode.clearFieldsMap();
+				return (ActivityNode) new ActivityNodeFeedHandler(this).createEntity(requestData);
+			} else {
+				String message = MessageFormat.format("Unexpected response code {0} when creating activity node {1}", statusCode, activityNode.getTitle());
+				throw new ActivityServiceException(null, message);
+			}
 		} catch (Exception e) {
 			throw new ActivityServiceException(e);
 		}

@@ -37,7 +37,7 @@
 	<div id="content">
 	<%
 	try {
-    	CustomerManagementService customerManagement = new CustomerManagementService("smartcloudC1");
+    	CustomerManagementService customerManagement = new CustomerManagementService("smartcloud");
 		EntityList<JsonEntity> customerList = customerManagement.getCustomers();
 		out.println("Id's of all customers who are part of the vendor's organization <br/>");
 		out.println("<ul>");

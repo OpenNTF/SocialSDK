@@ -349,12 +349,9 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
 		return httpProxy;
 	}
 
-	public void setHttpProxy(
-			String httpProxy) {
+	public void setHttpProxy(String httpProxy) {
 		this.httpProxy = httpProxy;
 	}
-
-
     
     //
     // Client service access

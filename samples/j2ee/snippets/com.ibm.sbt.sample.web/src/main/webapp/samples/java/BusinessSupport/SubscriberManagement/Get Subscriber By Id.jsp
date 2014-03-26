@@ -37,7 +37,7 @@
 	<div id="content">
 	<%
 	try {
-		SubscriberManagementService subscriberManagement = new SubscriberManagementService("smartcloudC1");
+		SubscriberManagementService subscriberManagement = new SubscriberManagementService("smartcloud");
 		EntityList<JsonEntity> subscriberList = subscriberManagement.getSubscribers();
 		if (!subscriberList.isEmpty()) {
 			JsonEntity subscriber = subscriberList.get(0);

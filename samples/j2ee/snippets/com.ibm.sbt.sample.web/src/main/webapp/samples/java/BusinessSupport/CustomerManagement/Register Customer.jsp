@@ -66,7 +66,7 @@
     	        .setCustomerIdentifierType(CustomerManagementService.CustomerIdType.IBM_CUSTOMER_NUMBER)
     	        .setCustomerIdentifierValue("9999999999");
     	
-    	CustomerManagementService customerManagement = new CustomerManagementService("smartcloudC1");
+    	CustomerManagementService customerManagement = new CustomerManagementService("smartcloud");
     	JsonJavaObject responseJson = customerManagement.registerCustomer(customer);
     	long customerId = responseJson.getAsLong("Long");
     	out.println("Customer Id: " + customerId);

@@ -36,7 +36,7 @@ public enum ActivityAction {
 	TRASH,
 	ACTIVITY,
 	ACTIVITYNODE,
-	TRASHNODE,
+	TRASHEDNODE,
 	ACL;
 	
 	public NamedUrlPart get(){

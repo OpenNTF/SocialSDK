@@ -77,7 +77,6 @@ function save_library_selection() {
 
 window.onload = function () {
 	document.getElementById("new_callback_url").value = document.getElementById("callback_url").value;
-	document.getElementById("submit").value = "Activate Endpoint";
 	endpoint_change();
 	
 	document.getElementById("new_consumer_key").addEventListener('keyup', function (e) {

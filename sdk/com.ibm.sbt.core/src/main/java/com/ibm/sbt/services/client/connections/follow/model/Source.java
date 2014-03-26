@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -18,31 +18,23 @@ package com.ibm.sbt.services.client.connections.follow.model;
 /**
  * Class used in specifying source for which updates are required in FollowService
  * @author Manish Kataria
+ * @author Carlos Manias
  */
 
 
 public enum Source {
 	
-	ACTIVITIES("activities"),
-	BLOGS("blogs"),
-	COMMUNITIES("communities"),
-	WIKIS("wikis"),
-	FILES("files"),
-	FORUMS("forums"),
-	TAGS("tag"),
-	PROFILES("profiles");
+	ACTIVITIES,
+	BLOGS,
+	COMMUNITIES,
+	WIKIS,
+	FILES,
+	FORUMS,
+	TAG,
+	PROFILES;
 	
-	String sourceType;
-	private Source(String sourceType) {
-		this.sourceType = sourceType;
-	}
-	
-	/**
-	 * Wrapper method to return source type
-	 * <p>
-	 */
-	public String getSourceType(){
-		return sourceType;
+	public String get(){
+		return name().toLowerCase();
 	}
 
 }

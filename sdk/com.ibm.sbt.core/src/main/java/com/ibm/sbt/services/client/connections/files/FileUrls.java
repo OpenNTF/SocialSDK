@@ -21,10 +21,10 @@ public enum FileUrls implements URLContainer {
 
     DELETE_FILE_SHARE(new VersionedUrl(ConnectionsConstants.v4_0, 					"files/{authType}/{accessType}/shares/feed")),
     GET_PUBLIC_FILES(new VersionedUrl(ConnectionsConstants.v4_0, 					"files/{authType}/{accessType}/documents/feed")),
+
     CREATE_FOLDER(new VersionedUrl(ConnectionsConstants.v4_0, 						"files/{authType}/{accessType}/collections/feed")),
     GET_MY_FOLDERS(new VersionedUrl(ConnectionsConstants.v4_0, 						"files/{authType}/{accessType}/collections/feed")),
     GET_PUBLIC_FOLDERS(new VersionedUrl(ConnectionsConstants.v4_0, 					"files/{authType}/{accessType}/collections/feed")),
-
 
     GET_FILES_SHARED_ME(new VersionedUrl(ConnectionsConstants.v4_0, 				"files/{authType}/{accessType}/documents/shared/feed")),
     GET_FILE_SHARES(new VersionedUrl(ConnectionsConstants.v4_0, 					"files/{authType}/{accessType}/documents/shared/feed")),
@@ -83,11 +83,16 @@ public enum FileUrls implements URLContainer {
 
     GET_FILES_IN_MY_RECYCLE_BIN(new VersionedUrl(ConnectionsConstants.v4_0, 		"files/{authType}/{accessType}/myuserlibrary/view/recyclebin/feed")),
     EMPTY_MY_RECYCLE_BIN(new VersionedUrl(ConnectionsConstants.v4_0, 				"files/{authType}/{accessType}/myuserlibrary/view/recyclebin/feed")),
+
     DELETE_FILE_FROM_MY_RECYCLE_BIN(new VersionedUrl(ConnectionsConstants.v4_0, 	"files/{authType}/{accessType}/myuserlibrary/view/recyclebin/{fileId}/entry")),
     GET_FILE_FROM_MY_RECYCLE_BIN(new VersionedUrl(ConnectionsConstants.v4_0, 		"files/{authType}/{accessType}/myuserlibrary/view/recyclebin/{fileId}/entry")),
     RESTORE_FILE_FROM_MY_RECYCLE_BIN(new VersionedUrl(ConnectionsConstants.v4_0, 	"files/{authType}/{accessType}/myuserlibrary/view/recyclebin/{fileId}/entry")),
-
+    
+    /*****************
+     * 	RECYCLE BIN  *
+     *****************/ 
     EMPTY_RECYCLE_BIN(new VersionedUrl(ConnectionsConstants.v4_0, 					"files/{authType}/{accessType}/userlibrary/{userId}/view/recyclebin/feed")),
+
     DELETE_FILE_FROM_RECYCLE_BIN(new VersionedUrl(ConnectionsConstants.v4_0, 		"files/{authType}/{accessType}/userlibrary/{userid}/view/recyclebin/{fileId}/entry")),
     GET_FILE_FROM_RECYCLE_BIN(new VersionedUrl(ConnectionsConstants.v4_0, 			"files/{authType}/{accessType}/userlibrary/{userId}/view/recyclebin/{fileId}/entry")),
     RESTORE_FILE_FROM_RECYCLE_BIN(new VersionedUrl(ConnectionsConstants.v4_0, 		"files/{authType}/{accessType}/userlibrary/{userid}/view/recyclebin/{fileId}/entry")),

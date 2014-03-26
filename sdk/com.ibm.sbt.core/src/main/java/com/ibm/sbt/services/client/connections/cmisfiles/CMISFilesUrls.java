@@ -15,8 +15,8 @@ public enum CMISFilesUrls implements URLContainer {
     GET_COLLECTIONS_SHARED_WITH_ME(new VersionedUrl(ConnectionsConstants.v4_0, "files/basic/cmis/repository/{repositoryId}/folderc/snx:virtual!.!collectionssharedwith")),
     GET_MY_SHARES(new VersionedUrl(ConnectionsConstants.v4_0, "files/basic/api/myshares/feed")),
     
-    ATOM_GET_USER_ID(new VersionedUrl(ConnectionsConstants.v4_0, "/connections/opensocial/basic/rest/people/@me/")),
-    ATOM_GET_SUBSCRIBER_ID(new VersionedUrl(ConnectionsConstants.v4_0,"/connections/opensocial/basic/rest/people/@me/"));
+    ATOM_GET_USER_ID(new VersionedUrl(ConnectionsConstants.v4_0, "connections/opensocial/basic/rest/people/@me/")),
+    ATOM_GET_SUBSCRIBER_ID(new VersionedUrl(ConnectionsConstants.v4_0,"connections/opensocial/basic/rest/people/@me/"));
 
 	private URLBuilder builder;
 	

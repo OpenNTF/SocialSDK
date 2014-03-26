@@ -1,5 +1,5 @@
 /*
- * �� Copyright IBM Corp. 2013
+ * ������ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -30,38 +30,30 @@ import org.junit.Test;
 public class ForumReplyGetUpdateTest extends BaseForumServiceTest {
 
 	@Before
-	public void initForum() {
+	public void initForum() throws ForumServiceException {
 		reply = createForumReply();
 	}
 
 	@Test
-	public void testGetForumReply() {
-		try {
-			ForumReply replyGot = forumService.getForumReply(reply.getReplyUuid());
-			assertEquals(reply.getTitle(), replyGot.getTitle());
-			assertEquals(reply.getContent(), replyGot.getContent());
-		} catch (Exception e) {
-			fail("Error calling forumService.getForum() caused by: "+e.getMessage());
-		}
+	public void testGetForumReply() throws ForumServiceException {
+		ForumReply replyGot = forumService.getForumReply(reply.getReplyUuid());
+		assertEquals(reply.getTitle(), replyGot.getTitle());
+		assertEquals(reply.getContent(), replyGot.getContent());
 	}
 
 	@Test
-	public void testUpdateReply() {
-		try {
-			reply.setTitle("new Test reply title" + System.currentTimeMillis());
-			reply.setContent("new Test reply content" + System.currentTimeMillis());
-			forumService.updateForumReply(reply);
-			ForumReply updatedReply = forumService.getForumReply(reply.getReplyUuid());
-			assertEquals(unRandomize(reply.getTitle()), unRandomize(updatedReply.getTitle()));
-			assertEquals(reply.getReplyUuid(), updatedReply.getReplyUuid());
-			assertEquals(unRandomize(reply.getContent()), unRandomize(updatedReply.getContent().trim()));
-		} catch (Exception e) {
-			fail("Error calling forumService.updateForumReply() caused by: "+e.getMessage());
-		}
+	public void testUpdateReply() throws ForumServiceException {
+		reply.setTitle("new Test reply title" + System.currentTimeMillis());
+		reply.setContent("new Test reply content" + System.currentTimeMillis());
+		forumService.updateForumReply(reply);
+		ForumReply updatedReply = forumService.getForumReply(reply.getReplyUuid());
+		assertEquals(unRandomize(reply.getTitle()), unRandomize(updatedReply.getTitle()));
+		assertEquals(reply.getReplyUuid(), updatedReply.getReplyUuid());
+		assertEquals(unRandomize(reply.getContent()), unRandomize(updatedReply.getContent().trim()));
 	}
 
 	@After
-	public void deleteReplyOnExit() {
+	public void deleteReplyOnExit() throws ForumServiceException {
 		deleteForumReply(reply);
 	}
 }

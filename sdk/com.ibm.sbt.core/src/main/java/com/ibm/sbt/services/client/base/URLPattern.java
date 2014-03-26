@@ -48,11 +48,12 @@ public class URLPattern {
 	 * @return
 	 */
 	public String format(NamedUrlPart... args){
+		Iterator<MutablePart> mutablePartIterator=mutableParts.iterator();
+		if (!mutablePartIterator.hasNext()) return urlPattern;
 		StringBuilder sb = new StringBuilder();
 		int urlPartIndex=0;
 
 		List<NamedUrlPart> namedParts = Arrays.asList(args);
-		Iterator<MutablePart> mutablePartIterator=mutableParts.iterator();
 		MutablePart mutablePart = mutablePartIterator.next();
 		for (Iterator<String> partIterator=urlParts.iterator(); partIterator.hasNext(); ){
 			String part = partIterator.next();

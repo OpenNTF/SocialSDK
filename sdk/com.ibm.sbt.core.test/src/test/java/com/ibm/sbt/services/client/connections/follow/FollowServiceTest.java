@@ -17,7 +17,6 @@ package com.ibm.sbt.services.client.connections.follow;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
 
 import org.junit.After;
 import org.junit.Before;
@@ -28,6 +27,7 @@ import com.ibm.sbt.services.BaseUnitTest;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.connections.communities.Community;
 import com.ibm.sbt.services.client.connections.communities.CommunityService;
+import com.ibm.sbt.services.client.connections.communities.CommunityServiceException;
 import com.ibm.sbt.services.client.connections.follow.model.Source;
 import com.ibm.sbt.services.client.connections.follow.model.Type;
 
@@ -47,19 +47,14 @@ public class FollowServiceTest extends BaseUnitTest {
 		}
 	}
 
-	public void createCommunity(){
-		try {
-			CommunityService service = new CommunityService();
-			community = new Community(service, "");
-			community.setTitle("Test Followservice Community " + System.currentTimeMillis());
-			community.setContent("Java Community Content");
-			String type = "public";
-			community.setCommunityType(type);
-			community = community.save();
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail("Error calling Communityservice.save() caused by: "+e.getMessage());
-		}
+	public void createCommunity() throws CommunityServiceException{
+		CommunityService service = new CommunityService();
+		community = new Community(service, "");
+		community.setTitle("Test Followservice Community " + System.currentTimeMillis());
+		community.setContent("Java Community Content");
+		String type = "public";
+		community.setCommunityType(type);
+		community = community.save();
 	}
 
 	@After
@@ -71,54 +66,34 @@ public class FollowServiceTest extends BaseUnitTest {
 	}
 	
 	@Test
-	public void getFollowedResource() {
-		try {
-			createCommunity();
-			FollowedResource resource = followService.getFollowedResource(Source.COMMUNITIES.getSourceType(),Type.COMMUNITIES.getType(),community.getCommunityUuid());
-			assertNotNull(resource);
-			assertEquals(community.getCommunityUuid(), resource.getResourceId());
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail("Error calling FollowService.getFollowedResource() caused by: "+e.getMessage());
-		}
+	public void getFollowedResource() throws FollowServiceException, CommunityServiceException {
+		createCommunity();
+		FollowedResource resource = followService.getFollowedResource(Source.COMMUNITIES.get(),Type.COMMUNITY.get(),community.getCommunityUuid());
+		assertNotNull(resource);
+		assertEquals(community.getCommunityUuid(), resource.getResourceId());
 	}
 	
 	@Test
-	public void getFollowedResources() {
-		try {
-			createCommunity();
-			EntityList<FollowedResource> resources = followService.getFollowedResources(Source.COMMUNITIES.getSourceType(),Type.COMMUNITIES.getType());
-			assertNotNull(resources);
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail("Error calling FollowService.getFollowedResources() caused by: "+e.getMessage());
-		}
+	public void getFollowedResources() throws FollowServiceException, CommunityServiceException {
+		createCommunity();
+		EntityList<FollowedResource> resources = followService.getFollowedResources(Source.COMMUNITIES.get(),Type.COMMUNITY.get());
+		assertNotNull(resources);
 	}
 
 	@Test
-	public void startFollowing() {
-		try {
-			createCommunity();
-			followService.stopFollowing(Source.COMMUNITIES.getSourceType(),Type.COMMUNITIES.getType(), community.getCommunityUuid());
-			
-			FollowedResource resource = followService.startFollowing(Source.COMMUNITIES.getSourceType(),Type.COMMUNITIES.getType(), community.getCommunityUuid());
-			assertEquals(community.getCommunityUuid(), resource.getResourceId());
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail("Error calling FollowService.startFollowing() caused by: "+e.getMessage());
-		}
+	public void startFollowing() throws FollowServiceException, CommunityServiceException {
+		createCommunity();
+		followService.stopFollowing(Source.COMMUNITIES.get(),Type.COMMUNITY.get(), community.getCommunityUuid());
+		
+		FollowedResource resource = followService.startFollowing(Source.COMMUNITIES.get(),Type.COMMUNITY.get(), community.getCommunityUuid());
+		assertEquals(community.getCommunityUuid(), resource.getResourceId());
 	}
 	
 	@Test
-	public void stopFollowing() {
-		try {
-			createCommunity();
-			boolean success  = followService.stopFollowing(Source.COMMUNITIES.getSourceType(),Type.COMMUNITIES.getType(), community.getCommunityUuid());
-			assertEquals(success, true);
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail("Error calling FollowService.stopFollowing() caused by: "+e.getMessage());
-		}
+	public void stopFollowing() throws FollowServiceException, CommunityServiceException {
+		createCommunity();
+		boolean success  = followService.stopFollowing(Source.COMMUNITIES.get(),Type.COMMUNITY.get(), community.getCommunityUuid());
+		assertEquals(success, true);
 	}
 
 }

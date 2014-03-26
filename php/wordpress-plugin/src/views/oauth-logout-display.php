@@ -11,7 +11,7 @@
 		<script type="text/javascript">
 		require(["sbt/dom", "sbt/config"],
 				function(dom, config) {
-			var endpoint = config.findEndpoint("connections");
+			var endpoint = config.findEndpoint("<?php echo $this->endpoint; ?>");
 
 			endpoint.isAuthenticationValid({	
 				"forceAuthentication": true, 
@@ -26,7 +26,7 @@
         		var logoutBtn = document.getElementsByName("logoutBtn");
         		for (var i = 0; i < logoutBtn.length; i++) {
         			logoutBtn[i].onclick = function(evt) {	
-        				var endpoint = config.findEndpoint("connections");
+        				var endpoint = config.findEndpoint("<?php echo $this->endpoint; ?>");
         				endpoint.logout({"actionUrl": "<?php echo plugins_url(PLUGIN_NAME); ?>/core/index.php?classpath=services&class=Proxy&method=route&OAuthLogout=true"}).then(
         						function(response) {
         							var widgets = document.getElementsByName("ibm_sbtk_widget");

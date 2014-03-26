@@ -26,6 +26,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Date;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -45,94 +46,77 @@ public class ActivityStreamServiceTest extends BaseUnitTest {
 	}
 
 	@Test
-	public final void testGetUpdatesFromUser() {
-		try {
-			ActivityStreamEntityList updates = service
-					.getUpdatesFromUser("0EE5A7FA-3434-9A59-4825-7A7000278DAA");
+	public final void testGetUpdatesFromUser() throws ActivityStreamServiceException {
+		ActivityStreamEntityList updates = service
+				.getUpdatesFromUser("0EE5A7FA-3434-9A59-4825-7A7000278DAA");
 
-			for (ActivityStreamEntity asentry : updates) {
-				System.err.println("asentry.getActor() " + asentry.getActor().getName());
-				assertEquals(asentry.getActor().getName(), "Frank Adams");
-			}
-		} catch (SBTServiceException e) {
-			e.printStackTrace();
+		for (ActivityStreamEntity asentry : updates) {
+			System.err.println("asentry.getActor() " + asentry.getActor().getName());
+			assertEquals(asentry.getActor().getName(), "Frank Adams");
 		}
 	}
 
 	@Test
-	public final void testGetUpdatesFromCommunity() {
-		try {
-			ActivityStreamEntityList updates = service
-					.getUpdatesFromCommunity("b4f12458-3cc2-49d2-9cf3-08d3fcbd81d5");
+	public final void testGetUpdatesFromCommunity() throws ActivityStreamServiceException {
+		ActivityStreamEntityList updates = service
+				.getUpdatesFromCommunity("b4f12458-3cc2-49d2-9cf3-08d3fcbd81d5");
 
-			System.err.println("number of updates from community : " + updates.size());
+		System.err.println("number of updates from community : " + updates.size());
 
-			for (ActivityStreamEntity asentry : updates) {
-				if (null != asentry.getCommunity()) { // Updates can also come in from news service, ignore
-														// those
-					System.err.println("communityid " + asentry.getCommunity().getCommunityName());
-					assertEquals(asentry.getCommunity().getCommunityId(),
-							"b4f12458-3cc2-49d2-9cf3-08d3fcbd81d5");
-				}
-
+		for (ActivityStreamEntity asentry : updates) {
+			if (null != asentry.getCommunity()) { // Updates can also come in from news service, ignore
+													// those
+				System.err.println("communityid " + asentry.getCommunity().getCommunityName());
+				assertEquals(asentry.getCommunity().getCommunityId(),
+						"b4f12458-3cc2-49d2-9cf3-08d3fcbd81d5");
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	@Test
-	public final void testPostEntry() {
-		try {
-			JsonJavaObject postPayload = new JsonJavaObject();
-			JsonJavaObject actor = new JsonJavaObject();
-			String tobeposted = new Double(Math.random()).toString();
-			actor.put("id", "@me");
-
-			JsonJavaObject object = new JsonJavaObject();
-			object.put("summary", "update from junit");
-			object.put("objectType", "note");
-			object.put("id", tobeposted);
-			object.put("displayName", "random update display");
-			object.put("url", "http://www.ibm.com");
-
-			postPayload.put("actor", actor);
-			postPayload.put("verb", ASVerb.POST.getVerbType());
-			postPayload.put("title", tobeposted);
-			postPayload.put("content", "testpostback");
-			postPayload.put("updated", new Date().getTime());
-			postPayload.put("object", object);
-			System.err.println(postPayload.toString());
-
-			service.postEntry(postPayload);
-
-			ActivityStreamEntityList updates = service.getAllUpdates();
-			System.err.println("updates found " + updates.size());
-			for (ActivityStreamEntity update : updates) {
-				System.err.println("update.getEventTitle()" + update.getEventTitle());
-				System.err.println("tobeposted" + tobeposted);
-
-				assertEquals(update.getEventTitle(), tobeposted); // Just check the 1st update
-				break;
-			}
-
-		} catch (Throwable e) {
 
 		}
 	}
 
 	@Test
-	public final void testSearchForTags() {
-		try {
-			String searchfortag = "test";
-			ActivityStreamEntityList updates = service.searchByTags(searchfortag);
+	public final void testPostEntry() throws ActivityStreamServiceException {
+		JsonJavaObject postPayload = new JsonJavaObject();
+		JsonJavaObject actor = new JsonJavaObject();
+		String tobeposted = new Double(Math.random()).toString();
+		actor.put("id", "@me");
 
-			for (ActivityStreamEntity asentry : updates) {
-				System.err.println("asentry.getEventTitle() " + asentry.getPlainTitle());
-				assertTrue(asentry.getEventTitle().contains("#" + searchfortag));
-			}
-		} catch (SBTServiceException e) {
-			e.printStackTrace();
+		JsonJavaObject object = new JsonJavaObject();
+		object.put("summary", "update from junit");
+		object.put("objectType", "note");
+		object.put("id", tobeposted);
+		object.put("displayName", "random update display");
+		object.put("url", "http://www.ibm.com");
+
+		postPayload.put("actor", actor);
+		postPayload.put("verb", ASVerb.POST.getVerbType());
+		postPayload.put("title", tobeposted);
+		postPayload.put("content", "testpostback");
+		postPayload.put("updated", new Date().getTime());
+		postPayload.put("object", object);
+		System.err.println(postPayload.toString());
+
+		service.postEntry(postPayload);
+
+		ActivityStreamEntityList updates = service.getAllUpdates();
+		System.err.println("updates found " + updates.size());
+		for (ActivityStreamEntity update : updates) {
+			System.err.println("update.getEventTitle()" + update.getEventTitle());
+			System.err.println("tobeposted" + tobeposted);
+
+			assertEquals(update.getEventTitle(), tobeposted); // Just check the 1st update
+			break;
+		}
+	}
+
+	@Test
+	public final void testSearchForTags() throws ActivityStreamServiceException {
+		String searchfortag = "test";
+		ActivityStreamEntityList updates = service.searchByTags(searchfortag);
+
+		for (ActivityStreamEntity asentry : updates) {
+			System.err.println("asentry.getEventTitle() " + asentry.getPlainTitle());
+			assertTrue(asentry.getEventTitle().contains("#" + searchfortag));
 		}
 	}
 }

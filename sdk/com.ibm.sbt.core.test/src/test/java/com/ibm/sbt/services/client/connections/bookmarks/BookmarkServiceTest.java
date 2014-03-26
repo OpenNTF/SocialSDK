@@ -44,90 +44,60 @@ public class BookmarkServiceTest extends BaseUnitTest {
 	}
 
 	@Test
-	public void testGetAllBookmarks() {
-		try {
-			BookmarkList list = service.getAllBookmarks();
-			assertValid(list);
-			for (Bookmark bookmark : list) {
-				assertValid(bookmark);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail("Error calling BookmarkService.getAllBookmarks() caused by: "+e.getMessage());
+	public void testGetAllBookmarks() throws BookmarkServiceException {
+		BookmarkList list = service.getAllBookmarks();
+		assertValid(list);
+		for (Bookmark bookmark : list) {
+			assertValid(bookmark);
 		}
 	}
 
 	@Test
-	public void testGetPrivateBookmarks() {
-		try {
-			Map<String, String> params = new HashMap<String, String>();
-			params.put("access", "private");
-			BookmarkList list = service.getAllBookmarks();
-			assertNotNull("Expected non null BookmarkList", list);
-			for (Bookmark bookmark : list) {
-				assertValid(bookmark);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail("Error calling BookmarkService.getAllBookmarks() caused by: "+e.getMessage());
+	public void testGetPrivateBookmarks() throws BookmarkServiceException {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("access", "private");
+		BookmarkList list = service.getAllBookmarks();
+		assertNotNull("Expected non null BookmarkList", list);
+		for (Bookmark bookmark : list) {
+			assertValid(bookmark);
 		}
 	}
 	
 	@Test
-	public void testGetMyBookmarks() {
-		try {
-			Map<String, String> params = new HashMap<String, String>();
-			params.put("email", "***REMOVED***@renovations.com");
-			BookmarkList list = service.getAllBookmarks();
-			assertNotNull("Expected non null BookmarkList", list);
-			for (Bookmark bookmark : list) {
-				assertValid(bookmark);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail("Error calling BookmarkService.getAllBookmarks() caused by: "+e.getMessage());
+	public void testGetMyBookmarks() throws BookmarkServiceException {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("email", "***REMOVED***@renovations.com");
+		BookmarkList list = service.getAllBookmarks();
+		assertNotNull("Expected non null BookmarkList", list);
+		for (Bookmark bookmark : list) {
+			assertValid(bookmark);
 		}
 	}
 	
 	@Test
-	public void testGetPopularBookmarks() {
-		try {
-			BookmarkList list = service.getPopularBookmarks();
-			assertNotNull("Expected non null BookmarkList", list);
-			for (Bookmark bookmark : list) {
-				assertValid(bookmark);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail("Error calling BookmarkService.getAllBookmarks() caused by: "+e.getMessage());
+	public void testGetPopularBookmarks() throws BookmarkServiceException {
+		BookmarkList list = service.getPopularBookmarks();
+		assertNotNull("Expected non null BookmarkList", list);
+		for (Bookmark bookmark : list) {
+			assertValid(bookmark);
 		}
 	}
 	
 	@Test
-	public void testGetMyNotifications() {
-		try {
-			BookmarkList list = service.getMyNotifications();
-			assertNotNull("Expected non null BookmarkList", list);
-			for (Bookmark bookmark : list) {
-				assertValid(bookmark);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail("Error calling BookmarkService.getAllBookmarks() caused by: "+e.getMessage());
+	public void testGetMyNotifications() throws BookmarkServiceException {
+		BookmarkList list = service.getMyNotifications();
+		assertNotNull("Expected non null BookmarkList", list);
+		for (Bookmark bookmark : list) {
+			assertValid(bookmark);
 		}
 	}
 	
 	@Test
-	public void testGetMySentNotifications() {
-		try {
-			BookmarkList list = service.getMySentNotifications();
-			assertNotNull("Expected non null BookmarkList", list);
-			for (Bookmark bookmark : list) {
-				assertValid(bookmark);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail("Error calling BookmarkService.getAllBookmarks() caused by: "+e.getMessage());
+	public void testGetMySentNotifications() throws BookmarkServiceException {
+		BookmarkList list = service.getMySentNotifications();
+		assertNotNull("Expected non null BookmarkList", list);
+		for (Bookmark bookmark : list) {
+			assertValid(bookmark);
 		}
 	}
 	

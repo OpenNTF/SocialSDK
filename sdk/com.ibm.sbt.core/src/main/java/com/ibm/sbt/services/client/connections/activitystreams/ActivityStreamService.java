@@ -55,23 +55,6 @@ public class ActivityStreamService extends BaseService {
 	// Typical url pattern /activitystream/user/group/application
 
 	/**
-	 * Used in constructing REST APIs
-	 */
-	public static final String	baseUrl		= "/{connections}/opensocial/";
-	/**
-	 * Used in constructing REST APIs
-	 */
-	public static final String	restUrl		= "/rest";
-	/**
-	 * Used in constructing REST APIs for Activity Stream
-	 */
-	public static final String  activityStreamsUrl = "/activitystreams";
-	/**
-	 * Used in constructing REST APIs for Microblogging
-	 */
-	public static final String  boardUrl = "/ublog";
-
-	/**
 	 * Constructor Creates ActivityStreamService Object with default endpoint
 	 */
 	public ActivityStreamService() {

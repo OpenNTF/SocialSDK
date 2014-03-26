@@ -14,32 +14,24 @@ import org.junit.Test;
 public class LikeUnlikePostTest extends BaseForumServiceTest {
 
 	@Before
-	public void initForumTopic() {
+	public void initForumTopic() throws ForumServiceException {
 		topic = createForumTopic();
 	}
 	
     @Test
-    public void testLikeunlikePostTest() {
-        try {
-            forumService.createRecommendation(topic.getTopicUuid());
-            ForumTopic recommendedPost = forumService.getForumTopic(topic.getTopicUuid());
-            assertEquals(recommendedPost.getRecommendationCount(), "1");
-            forumService.deleteRecommendation(topic.getTopicUuid());
-            ForumTopic unrecommendedPost = forumService.getForumTopic(topic.getTopicUuid());
-            assertEquals(unrecommendedPost.getRecommendationCount(), "0");
-        } catch (Exception e) {
-            fail("Error calling forumService.recommendPost() caused by: "+e.getMessage());
-        }
+    public void testLikeunlikePostTest() throws ForumServiceException {
+        forumService.createRecommendation(topic.getTopicUuid());
+        ForumTopic recommendedPost = forumService.getForumTopic(topic.getTopicUuid());
+        assertEquals(recommendedPost.getRecommendationCount(), "1");
+        forumService.deleteRecommendation(topic.getTopicUuid());
+        ForumTopic unrecommendedPost = forumService.getForumTopic(topic.getTopicUuid());
+        assertEquals(unrecommendedPost.getRecommendationCount(), "0");
     }
 
     @After
-    public void deleteForumTopicDataOnExit() {
-        try {
-        	forumService.removeForumTopic(topic.getTopicUuid());
-        	forumService.removeForum(topic.getForumUuid());
-        } catch (ForumServiceException e) {
-                fail("Error calling forumService.removeForumTopic() caused by: "+e.getMessage());
-        }
+    public void deleteForumTopicDataOnExit() throws ForumServiceException {
+    	forumService.removeForumTopic(topic.getTopicUuid());
+    	forumService.removeForum(topic.getForumUuid());
     }
 }
 

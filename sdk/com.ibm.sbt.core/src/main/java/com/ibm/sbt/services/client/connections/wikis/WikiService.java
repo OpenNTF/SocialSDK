@@ -267,7 +267,7 @@ public class WikiService extends BaseService {
 	 */
 	public WikiPage createWikiPage(String wikiLabel, WikiPage wikiPage, Map<String, String> parameters) 
 			throws ClientServicesException {
-		String requestUrl = WikiUrls.WIKI_PAGES_AUTH.format(getApiVersion(), getAuthType(), WikiUrlParts.wikiLabel.get(wikiPage.getLabel()));
+		String requestUrl = WikiUrls.WIKI_PAGES_AUTH.format(getApiVersion(), getAuthType(), WikiUrlParts.wikiLabel.get(wikiLabel));
 		Response response = createWikiPageAux(requestUrl, wikiPage, parameters);
 		return getWikiPageFeedHandler().createEntity(response);
 	}

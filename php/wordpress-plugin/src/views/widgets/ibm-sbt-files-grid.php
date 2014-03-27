@@ -25,7 +25,7 @@ if ((isset($instance['ibm-sbtk-template']) && $instance['ibm-sbtk-template'] != 
 		         hideSorter: <?php echo (isset($instance['ibm-sbtk-grid-sorter']) && $instance['ibm-sbtk-grid-sorter'] == 'sorter' ? "false" : "true"); ?>,
 		         hideFooter: <?php echo (isset($instance['ibm-sbtk-grid-footer']) && $instance['ibm-sbtk-grid-footer'] == 'footer' ? "false" : "true"); ?>,
 		         pinFile: <?php echo (isset($instance['ibm-sbtk-files-pin-file']) && $instance['ibm-sbtk-files-pin-file'] == 'pin' ? "false" : "true"); ?>,
-		    	 ps: "<?php echo $instance['ibm-sbtk-grid-page-size']; ?>",
+		    	 pageSize: <?php echo $instance['ibm-sbtk-grid-page-size']; ?>,
 		    	 rendererArgs : { template : FileRow, pagerTemplate : PagingHeader, footerTemplate : PagingFooter}       	 
 		    });
 

@@ -15,8 +15,8 @@
 * permissions and limitations under the License.
 */
 if (!isset($CFG) || !isset($CFG->wwwroot)) {
-	$path = str_replace('blocks/ibmsbt/core/models', '', __DIR__);
-	include_once $path . '/config.php';
+	$path = str_replace("blocks".DIRECTORY_SEPARATOR."ibmsbt".DIRECTORY_SEPARATOR."core".DIRECTORY_SEPARATOR."models", '', __DIR__);
+	include_once $path . "".DIRECTORY_SEPARATOR."config.php";
 }
 
 if (!defined('SESSION_NAME')) {

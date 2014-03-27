@@ -17,10 +17,10 @@
 
 use Guzzle\Http\Client;
 
-if (file_exists(BASE_PATH . "/core/system/libs/vendor/autoload.php")) {
-	require_once BASE_PATH . "/core/system/libs/vendor/autoload.php";
+if (file_exists(BASE_PATH . DIRECTORY_SEPARATOR . "core".DIRECTORY_SEPARATOR."system".DIRECTORY_SEPARATOR."libs".DIRECTORY_SEPARATOR."vendor".DIRECTORY_SEPARATOR."autoload.php")) {
+	require_once BASE_PATH . "".DIRECTORY_SEPARATOR."core".DIRECTORY_SEPARATOR."system".DIRECTORY_SEPARATOR."libs".DIRECTORY_SEPARATOR."vendor".DIRECTORY_SEPARATOR."autoload.php";
 } else {
-	require_once BASE_PATH . "/system/libs/vendor/autoload.php";
+	require_once BASE_PATH . "".DIRECTORY_SEPARATOR."system".DIRECTORY_SEPARATOR."libs".DIRECTORY_SEPARATOR."vendor".DIRECTORY_SEPARATOR."autoload.php";
 }
 
 /**

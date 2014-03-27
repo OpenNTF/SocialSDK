@@ -29,20 +29,25 @@ public enum CommunityType {
 	/*
 	 *  Scope for Url Construction for Communities
 	 */
+	ALL("all"),
+	MY("my"),
+	INSTANCE("instance"),
+	MEMBERS("members"),
+	BOOKMARKS("bookmarks"),
+	FORUMTOPICS("forum/topics"),
+	SUBCOMMUNITIES("subcommunities"),
+	MYINVITES("invites/my"),
+	INVITES("invites"),
+	REMOTEAPPLICATIONS("remoteApplications");
 
-	ALL,
-	MY,
-	INSTANCE,
-	MEMBERS,
-	BOOKMARKS,
-	FORUMTOPICS,
-	SUBCOMMUNITIES,
-	MYINVITES,
-	INVITES,
-	REMOTEAPPLICATIONS;
+	private String communityType;
+
+	private CommunityType(String communityType) {
+		this.communityType = communityType;
+	}
 	
 	public NamedUrlPart get(){
-		return new NamedUrlPart("communityType", name().toLowerCase());
+		return new NamedUrlPart("communityType", communityType);
 	}
 
 }

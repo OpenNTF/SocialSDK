@@ -142,19 +142,23 @@ $agnostic_deploy_url = str_replace('http://', '//', $deploy_url);
 				};
 				sbt.Endpoints = {
 						***REMOVED*** 
-							if ($allow_client_access) {
-								echo generateEndpoint($type, $authentication_method, $url, $agnostic_deploy_url, $name, $api_version); 
+							foreach($endpoints as $endpoint) {
+								echo generateEndpoint($endpoint, $agnostic_deploy_url) . "\n";
 							}
 						?>
 				};
 				sbt.findEndpoint = function (endpointName) {
+// 					console.log(arguments.callee.caller.toString());
+					console.log(endpointName);
+					console.log(this.Endpoints[endpointName]);
+					console.log("====");
 					return this.Endpoints[endpointName];
 				};
 			return sbt;
 		});
 	};
 </script>
-</head>
+
 ***REMOVED*** 
 
 /**
@@ -164,47 +168,51 @@ $agnostic_deploy_url = str_replace('http://', '//', $deploy_url);
  * @author Benjamin Jakobus
  */
 
-function generateEndpoint($type, $authentication_method, $url, $deploy_url, $name, $api_version) {
-	$endpoint_js = '"connections": new Endpoint({';
-	
-	if ($authentication_method == 'oauth1' || $authentication_method == 'oauth2') {
+function generateEndpoint($endpoint, $agnostic_deploy_url) {
+// $endpoint['auth_type'], $endpoint['server_url'], $agnostic_deploy_url, $endpoint['name'], $endpoint['api_version']
+// $type, $authentication_method, $url, $deploy_url, $name, $api_version
+	$endpoint_js = '"' . $endpoint['name'] . '": new Endpoint({';
+
+	if ($endpoint['authentication_method'] == 'oauth1' || $endpoint['authentication_method'] == 'oauth2') {
 		$endpoint_js .= '"authType": "oauth",';
 	} else {
 		$endpoint_js .= '"authType": "basic",';
 	}
 	
-	if ($api_version != "") {
-		$endpoint_js .= '"apiVersion": "' . $api_version . '",';
+	if ($endpoint['api_version'] != "") {
+		$endpoint_js .= '"apiVersion": "' . $endpoint['api_version'] . '",' . "\n";
 	}
 	
-	$endpoint_js .= '"platform": "' . $type . '",';
+// 	$endpoint_js .= '"platform": "' . $endpoint['server_type'] . '",';
+	$endpoint_js .= '"platform": "connections",' . "\n";
 	
-	if ($authentication_method == 'oauth1') {
+	if ($endpoint['authentication_method'] == 'oauth1') {
 		$endpoint_js .= '"authenticator": new OAuth({"loginUi": null,
-				"url": "' . $deploy_url . '"}),';
-	} else if ($authentication_method == 'basic') {
+				"url": "' . $agnostic_deploy_url . '"}),';
+	} else if ($endpoint['authentication_method'] == 'basic') {
 		$endpoint_js .= '"authenticator": new Basic({';
-		$endpoint_js .= '"url": "' . $deploy_url . '", "actionUrl": "' . plugins_url(PLUGIN_NAME) . '/core/index.php?classpath=services&class=Proxy&method=route&basicAuthRequest=true&_redirectUrl=' . getCurrentPage() . '"}),';
+		$endpoint_js .= '"url": "' . $agnostic_deploy_url . '", "actionUrl": "' . plugins_url(PLUGIN_NAME) . '/core/index.php?classpath=services&class=Proxy&method=route&endpointName=' . $endpoint['name'] . '&basicAuthRequest=true&_redirectUrl=' . getCurrentPage() . '"}),';
 	}
-	$endpoint_js .= '"proxyPath": "connections",';
+// 	$endpoint_js .= '"proxyPath": "connections",';
+	$endpoint_js .= '"proxyPath": "",' . "\n";
 // 	$endpoint_js .= '"proxyPath": "' . $type . '",';
-	if ($type == 'smartcloud') {
-		$endpoint_js .= '"isSmartCloud": true,';
-	}
-	$endpoint_js .= '"isAuthenticated": "false",';
-	$endpoint_js .= '"transport": new Transport({}),';
-	$endpoint_js .= '"serviceMappings": {},';
-	$endpoint_js .= '"name": "' . $type . '",';
+// 	if ($endpoint['server_type'] == 'smartcloud') {
+// 		$endpoint_js .= '"isSmartCloud": true,';
+// 	}
+	$endpoint_js .= '"isAuthenticated": "false",' . "\n";
+	$endpoint_js .= '"transport": new Transport({}),' . "\n";
+	$endpoint_js .= '"serviceMappings": {},' . "\n";
+	$endpoint_js .= '"name": "' . $endpoint['name'] . '",' . "\n";
 	
 	if ($type == 'smartcloud') {
-		$endpoint_js .= '"authenticationErrorCode": "403",';
+		$endpoint_js .= '"authenticationErrorCode": "403",' . "\n";
 	} else {
-		$endpoint_js .= '"authenticationErrorCode": "401",';
+		$endpoint_js .= '"authenticationErrorCode": "401",' . "\n";
 	}
-	$endpoint_js .= '"baseUrl": "' . $url . '",';
+	$endpoint_js .= '"baseUrl": "' . $endpoint['url'] . '",' . "\n";
 
-	$endpoint_js .=	'"proxy": new Proxy({';
-	$endpoint_js .=	'"proxyUrl": "' . plugins_url(PLUGIN_NAME) . '/core/index.php?classpath=services&endpointName=' . $name . '&class=Proxy&method=route&_redirectUrl="})}),';
+	$endpoint_js .=	'"proxy": new Proxy({' . "\n";
+	$endpoint_js .=	'"proxyUrl": "' . plugins_url(PLUGIN_NAME) . '/core/index.php?classpath=services&endpointName=' . $endpoint['name'] . '&class=Proxy&method=route&_redirectUrl="})}),';
 
 	return $endpoint_js;
 }

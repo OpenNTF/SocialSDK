@@ -69,7 +69,7 @@ function plugins_url() {
 		});
 	};
 </script>
-</head>
+
 <?php 
 
 

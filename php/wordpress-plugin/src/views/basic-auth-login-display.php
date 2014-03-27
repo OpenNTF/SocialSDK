@@ -18,7 +18,7 @@
     		border-style: none;
     	}
   	</style>
-	
+
 	<div name="grantAccessDiv" style="display: none;">
         	<div class="alert alert-error" id="grantAccessErrorDiv" style="display: none;"></div>
 			<div id="desc"><?php echo $GLOBALS[LANG]['no_access_granted']; ?></div>
@@ -32,16 +32,17 @@
         <div name="accessGrantedDiv" style="display: none;">
 			<button class="btn btn-primary" name="logoutBtn"><?php echo $GLOBALS[LANG]['logout_from_endpoint']; ?></button>
 		</div>
-		
+
 		<script type="text/javascript">
 		require([ "sbt/dom", "sbt/config" ],
 			
 			function(dom, config) {
-				var endpoint = config.findEndpoint("connections");
+	
+				var endpoint = config.findEndpoint("<?php echo $this->endpoint; ?>");
 
 				endpoint.isAuthenticationValid({	
 					"forceAuthentication": true, 
-					"actionUrl": "<?php echo plugins_url(PLUGIN_NAME); ?>/core/index.php?classpath=services&class=Proxy&method=route&isAuthenticated=true"}).then(
+					"actionUrl": "<?php echo plugins_url(PLUGIN_NAME); ?>/core/index.php?classpath=services&class=Proxy&endpointName=<?php echo $this->endpoint; ?>&method=route&isAuthenticated=true"}).then(
 						function(response) {
 							if (response.result) {
 								setWidgetsDisplay("block");
@@ -55,7 +56,7 @@
 			});
 		
 			function grantAccess(dom, config) {
-				var endpoint = config.findEndpoint("connections");
+				var endpoint = config.findEndpoint("<?php echo $this->endpoint; ?>");
 				config.Properties["loginUi"] = "dialog";
 // 				config.Properties["dialogLoginPage"] = "/views/loginDialog.html";
 				<?php 
@@ -66,7 +67,7 @@
 				?>
 				
 				endpoint.authenticate({"forceAuthentication": true, 
-					"actionUrl": "<?php echo plugins_url(PLUGIN_NAME); ?>/core/index.php?classpath=services&class=Proxy&method=route&isAuthenticated=true"}).then(
+					"actionUrl": "<?php echo plugins_url(PLUGIN_NAME); ?>/core/index.php?classpath=services&class=Proxy&endpointName=<?php echo $this->endpoint; ?>&method=route&isAuthenticated=true"}).then(
 					function(response) {
 						location.reload();
 					},
@@ -98,8 +99,8 @@
      
         		for (var i = 0; i < logoutBtn.length; i++) {
         			logoutBtn[i].onclick = function(evt) {	
-        				var endpoint = config.findEndpoint("connections");
-        				endpoint.logout({"actionUrl": "<?php echo plugins_url(PLUGIN_NAME); ?>/core/index.php?classpath=services&class=Proxy&method=route&basicAuthLogout=true"}).then(
+        				var endpoint = config.findEndpoint("<?php echo $this->endpoint; ?>");
+        				endpoint.logout({"actionUrl": "<?php echo plugins_url(PLUGIN_NAME); ?>/core/index.php?classpath=services&class=Proxy&endpointName=<?php echo $this->endpoint; ?>&method=route&basicAuthLogout=true"}).then(
         						function(response) {
         							displayGrantAccess(dom, config);
         							location.reload();

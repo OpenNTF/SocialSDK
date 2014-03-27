@@ -83,7 +83,8 @@ class SBTCredentialStore {
 	
 	private static $instance = null;
 	
-	public static function getInstance() {
+	public static function getInstance($uid = null) {
+		self::$uid = $uid;
 		if (self::$instance == null) {
 			self::$instance = new SBTCredentialStore();
 		}
@@ -105,7 +106,6 @@ class SBTCredentialStore {
 		
 		global $DB;
 		global $USER;
-		
 		$dbman = $DB->get_manager();
 		
 		$table = new xmldb_table(SESSION_NAME);
@@ -114,17 +114,47 @@ class SBTCredentialStore {
 			$this->_createTable($table, $dbman);
 		} else {
 			$uid = null;
-			if (isset($USER->id)) {
+			if (isset($USER->id) && $USER->id != 0) {
 				$uid = $USER->id;
+			} else if (isset(self::$uid)) {
+				$uid = self::$uid;
 			} else {
 				$uid = $_GET['uid'];
 			}
-			$records = $DB->get_records(SESSION_NAME, array('user_id' => $uid));		
-			foreach ($records as $record) {
-				$this->iv = $record->iv;
+			$records = $DB->get_records(SESSION_NAME, array('user_id' => $uid));	
+
+			if (empty($records) || $records == null) {
+				$record = new stdClass();
+				
+				if (isset($USER->id) && $USER->id != 0) {
+					$record->user_id = intval($USER->id);
+				} else if (self::$uid != null) {
+					$record->user_id = intval(self::$uid);
+				}
+				
+				// Populate database with default values
+				$record->basicauthusername = json_encode(array('connections' => null));
+				$record->basicauthpassword = json_encode(array('connections' => null));
+				$record->token = json_encode(array('connections' => null));
+				$record->requesttoken = json_encode(array('connections' => null));
+				$record->tokentype = json_encode(array('connections' => null));
+				$record->oauthtoken = json_encode(array('connections' => null));
+				$record->oauthtokensecret = json_encode(array('connections' => null));
+				$record->oauthverifiertoken = json_encode(array('connections' => null));
+				$record->oauthrequesttoken = json_encode(array('connections' => null));
+				$record->oauthrequesttokensecret = json_encode(array('connections' => null));
+					
+				$iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC);
+				$this->iv = base64_encode(mcrypt_create_iv($iv_size, MCRYPT_RAND));
+				
+				$record->iv = $this->iv;
+				$ret = $DB->insert_record(SESSION_NAME, $record);
+			} else {
+				foreach ($records as $record) {
+					$this->iv = $record->iv;
+				}
 			}
 		}
-		
 	}
 	
 	private function _createTable($table, $dbman) {
@@ -151,7 +181,12 @@ class SBTCredentialStore {
 		$dbman->create_table($table);
 	
 		$record = new stdClass();
-		$record->user_id = intval($USER->id);
+		
+		if (isset($USER->id) && $USER->id != 0) {
+			$record->user_id = intval($USER->id);
+		} else if (self::$uid != null) {
+			$record->user_id = intval(self::$uid);
+		} 
 
 		// Populate database with default values
 		$record->basicauthusername = json_encode(array('connections' => null));
@@ -184,16 +219,18 @@ class SBTCredentialStore {
 			global $USER;
 			
 			$uid = null;
-			if (isset($USER->id)) {
+			if (isset($USER->id) && $USER->id != 0) {
 				$uid = $USER->id;
 			} else if (isset($_GET['uid'])) {
 				$uid = $_GET['uid'];
-			} else if (isset($_COOKIE['ibm-sbt-uid'])) {
+			} else if (isset($_COOKIE['ibm-sbt-uid']) && $_COOKIE['uid'] != null) {
 				$uid = $_COOKIE['uid'];
+			} else if (self::$uid != null) {
+				$uid = self::$uid;
 			} else {
 				return;
 			}
-		
+
 			$record = $DB->get_record(SESSION_NAME, array('user_id' => intval($uid)));
 			if ($record == null) {
 				return;
@@ -223,12 +260,14 @@ class SBTCredentialStore {
 		global $USER;
 		
 		$uid = null;
-		if (isset($USER->id)) {
+		if (isset($USER->id) && $USER->id != 0) {
 			$uid = $USER->id;
 		} else if (isset($_GET['uid'])) {
 			$uid = $_GET['uid'];
-		} else if (isset($_COOKIE['ibm-sbt-uid'])) {
+		} else if (isset($_COOKIE['ibm-sbt-uid']) && $_COOKIE['uid'] != null) {
 			$uid = $_COOKIE['uid'];
+		} else if (self::$uid != null) {
+			$uid = self::$uid;
 		} else {
 			return;
 		}
@@ -255,6 +294,7 @@ class SBTCredentialStore {
 			return null;
 		}
 		$value = $this->_decrypt($this->key, $value, base64_decode($this->iv));
+		syslog(LOG_INFO, "gotten... " . $value);
 		return $value;
 	}
 	/**
@@ -491,8 +531,10 @@ class SBTCredentialStore {
 	 */
 	private function gen_string($length) {
 		global $USER;
-		if (isset($USER->id)) {
+		if (isset($USER->id) && $USER->id != 0) {
 			$str = sha1($USER->id);
+		} else if (isset(self::$uid) && self::$uid != null) {
+			$str = sha1(self::$uid);
 		} else {
 			$str = sha1($_GET['uid']);
 		}

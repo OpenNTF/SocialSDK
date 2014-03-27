@@ -21,8 +21,8 @@ require(["sbt/dom", "sbt/connections/controls/communities/CommunityGrid"], funct
         hideSorter: ***REMOVED*** echo (isset($instance['ibm-sbtk-grid-sorter']) && $instance['ibm-sbtk-grid-sorter'] == 'sorter' ? "false" : "true"); ?>,
         hideFooter: ***REMOVED*** echo (isset($instance['ibm-sbtk-grid-footer']) && $instance['ibm-sbtk-grid-footer'] == 'footer' ? "false" : "true"); ?>,
         endpoint: "***REMOVED*** echo (isset($instance['ibm-sbtk-endpoint']) ? $instance['ibm-sbtk-endpoint'] : 'connections'); ?>",
-   	 	ps: "***REMOVED*** echo $instance['ibm-sbtk-grid-page-size']; ?>",
-         rendererArgs : { template : CommunityRow, pagerTemplate : PagingHeader, footerTemplate : PagingFooter }
+        pageSize: ***REMOVED*** echo $instance['ibm-sbtk-grid-page-size']; ?>,
+        rendererArgs : { template : CommunityRow, pagerTemplate : PagingHeader, footerTemplate : PagingFooter }
     });
 
     grid.renderer.tableClass = "table";

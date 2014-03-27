@@ -42,8 +42,7 @@ public class WikiPageTest extends BaseWikiServiceTest {
 	@Test
 	public void createWikiPageTest() throws Exception {
 		WikiPage wikiPage = newWikiPage();
-		WikiPage wikiPageCreated = wikiService.createWikiPage(
-				wiki.getLabel(), wikiPage , null);
+		WikiPage wikiPageCreated = wikiService.createWikiPage(wiki.getLabel(), wikiPage , null);
 		
 		assertEquals(unRandomize(wikiPage.getTitle()), unRandomize(wikiPageCreated.getTitle()));
 		assertEquals(unRandomize(wikiPage.getSummary()), unRandomize(wikiPageCreated.getSummary()));
@@ -53,8 +52,7 @@ public class WikiPageTest extends BaseWikiServiceTest {
 	@Test
 	public void updateWikiPageTest() throws Exception {
 		if (TestEnvironment.isSmartCloudEnvironment()) return;
-		WikiPage wikiPage = wikiService.createWikiPage(
-				wiki.getLabel(), newWikiPage() , null);
+		WikiPage wikiPage = wikiService.createWikiPage(wiki.getLabel(), newWikiPage() , null);
 		
 		wikiPage.setTitle("Test wiki page "+ System.currentTimeMillis());
 		wikiPage.setSummary("Very basic summary "+System.currentTimeMillis());
@@ -72,11 +70,9 @@ public class WikiPageTest extends BaseWikiServiceTest {
 	
 	@Test
 	public void getAndDeleteWikiPageTest() throws Exception {
-		WikiPage wikiPageCreated = wikiService.createWikiPage(
-				wiki.getLabel(), newWikiPage() , null);
+		WikiPage wikiPageCreated = wikiService.createWikiPage(wiki.getLabel(), newWikiPage() , null);
 		
-		WikiPage wikiPageGot = wikiService.getWikiPage(
-				wiki.getLabel(), wikiPageCreated.getLabel(), null);
+		WikiPage wikiPageGot = wikiService.getWikiPage(wiki.getLabel(), wikiPageCreated.getLabel(), null);
 		
 		assertEquals(wikiPageCreated.getLabel(), wikiPageGot.getLabel());
 		assertEquals(wikiPageCreated.getTitle(), wikiPageGot.getTitle());

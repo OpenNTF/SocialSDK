@@ -50,16 +50,9 @@ public class ForumCreateDeleteTest extends BaseForumServiceTest {
 
 	@Test
 	public void testDeleteForum() throws Exception {
-		try {
-			Forum createdForum = createForum();
-			Forum forumGot = forumService.getForum(createdForum.getForumUuid());
-			assertEquals(createdForum.getTitle(), forumGot.getTitle());
-			forumService.removeForum(createdForum.getForumUuid());
-			forumService.getForum(createdForum.getForumUuid());
-			fail("Shouldn't be able to get a removed forum");
-		}
-		catch(Exception e) {
-			assertNotNull(e.getMessage());
-		}
+		Forum createdForum = createForum();
+		Forum forumGot = forumService.getForum(createdForum.getForumUuid());
+		assertEquals(createdForum.getTitle(), forumGot.getTitle());
+		forumService.removeForum(createdForum.getForumUuid());
 	}
 }

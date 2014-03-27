@@ -19,6 +19,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.http.StatusLine;
+
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
@@ -265,7 +267,7 @@ public class ForumService extends BaseService {
 	 */
 	public RecommendationList getRecommendations(String postUuid) throws ForumServiceException{
 		checkVersion();
-		String recommendationsUrl = ForumUrls.FORUM_URL.format(getApiVersion(), ForumType.RECOMMENDATIONS.get(), FilterType.ENTRIES.get());
+		String recommendationsUrl = ForumUrls.FORUM_URL.format(getApiVersion(), ForumType.RECOMMENDATION.get(), FilterType.ENTRIES.get());
 		RecommendationList recommendations;
 		Map<String, String> parameters = new HashMap<String, String>();
 
@@ -290,7 +292,7 @@ public class ForumService extends BaseService {
 	 */
 	public Recommendation createRecommendation(String postUuid) throws ForumServiceException{
 		checkVersion();
-		String recommendationsUrl = ForumUrls.FORUM_URL.format(getApiVersion(), ForumType.RECOMMENDATIONS.get(), FilterType.ENTRIES.get());
+		String recommendationsUrl = ForumUrls.FORUM_URL.format(getApiVersion(), ForumType.RECOMMENDATION.get(), FilterType.ENTRIES.get());
 		Map<String, String> parameters = new HashMap<String, String>();
 
 		parameters.put(POST_UNIQUE_IDENTIFIER, postUuid);
@@ -318,7 +320,7 @@ public class ForumService extends BaseService {
 	 */
 	public boolean deleteRecommendation(String postUuid) throws ForumServiceException{
 		checkVersion();
-		String recommendationsUrl = ForumUrls.FORUM_URL.format(getApiVersion(), ForumType.RECOMMENDATIONS.get(), FilterType.ENTRIES.get());
+		String recommendationsUrl = ForumUrls.FORUM_URL.format(getApiVersion(), ForumType.RECOMMENDATION.get(), FilterType.ENTRIES.get());
 		Map<String, String> parameters = new HashMap<String, String>();
 
 		parameters.put(POST_UNIQUE_IDENTIFIER, postUuid);
@@ -463,11 +465,19 @@ public class ForumService extends BaseService {
 			parameters.put(FORUM_UNIQUE_IDENTIFIER, forumUuid);
 			String deleteForumUrl = ForumUrls.FORUM_URL.format(getApiVersion(), ForumType.FORUM.get());
 
-			super.deleteData(deleteForumUrl, parameters, FORUM_UNIQUE_IDENTIFIER);
+			Response response = super.deleteData(deleteForumUrl, parameters, FORUM_UNIQUE_IDENTIFIER);
+			if (!isForumDeleted(response)){
+				throw new ForumServiceException(new Exception(),"error deleting forum, received HTTP Status code "+response.getResponse().getStatusLine().getStatusCode());
+			}
 		} catch (Exception e) {
 			throw new ForumServiceException(e,"error deleting forum");
 		} 	
 
+	}
+	
+	protected boolean isForumDeleted(Response response){
+		StatusLine statusLine = response.getResponse().getStatusLine();
+		return (statusLine.getStatusCode() == 204 && statusLine.getProtocolVersion().toString().equals("HTTP/1.1") && statusLine.getReasonPhrase().equals("No Content"));
 	}
 
 	/**
@@ -652,7 +662,7 @@ public class ForumService extends BaseService {
 			headers.put("Content-Type", "application/atom+xml");
 
 			String url = ForumUrls.FORUM_URL.format(getApiVersion(), ForumType.TOPICS.get());
-			result = createData(url, null, headers,payload);
+			result = createData(url, params, headers,payload);
 			topic = (ForumTopic) new TopicsFeedHandler(this).createEntity(result);
 
 		} catch (Exception e) {

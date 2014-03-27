@@ -1,6 +1,6 @@
 <script type="text/template" id="communityRow">
 <tr>
-	<td style="width:120px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inline-block; padding-left: 25px;">
+	<td style="width:160px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inline-block; padding-left: 10px;">
 			<span dojoAttachPoint="placeLinkNode">
 				<a href="javascript: void(0)" target="_self" title="${title}" dojoAttachPoint="placeTitleLink" data-dojo-attach-event="onclick: handleClick">${title}</a>
 			</span>

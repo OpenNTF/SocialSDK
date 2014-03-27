@@ -30,6 +30,7 @@ require(["sbt/dom",
 	        type : "my",
 	        hideSorter: false,
 	        hidePager: false,
+	        endpoint: "<?php echo (isset($instance['ibm-sbtk-endpoint']) ? $instance['ibm-sbtk-endpoint'] : 'connections'); ?>",
 	        rendererArgs : { template : ForumRow, pagerTemplate : PagingHeader, footerTemplate : PagingFooter}
 	    });
 	    dom.byId("<?php echo (isset($instance['ibm-sbtk-element-id']) ? $instance['ibm-sbtk-element-id'] : "myIBMElementID"); ?>").appendChild(forumGrid.domNode);

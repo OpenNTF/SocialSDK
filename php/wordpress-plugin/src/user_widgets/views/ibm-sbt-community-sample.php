@@ -31,6 +31,7 @@ function(dom, CommunityGrid, CommunityService, lang) {
 	grid = new CommunityGrid({
         type: "my",
         hideSorter: true,
+        endpoint: "<?php echo (isset($instance['ibm-sbtk-endpoint']) ? $instance['ibm-sbtk-endpoint'] : 'connections'); ?>",
         rendererArgs : { template : CommunityRow, pagerTemplate : PagingHeader, footerTemplate : PagingFooter}
    	});
             

@@ -26,7 +26,7 @@ public enum Resource {
 	;
 	
 	public static NamedUrlPart get(String resourceId){
-		return new NamedUrlPart("resource", resourceId);
+		return new NamedUrlPart("resourceId", resourceId);
 	}
 
 }

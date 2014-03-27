@@ -202,13 +202,13 @@ public class FollowService extends BaseService{
 	
 	private Map<String, String> generateParams(Map<String, String> params, String source, String type, String resourceId){
 		params = params == null? new HashMap<String, String>():params;
-		if (!StringUtil.isNotEmpty(source)){
+		if (StringUtil.isNotEmpty(source)){
 			params.put("source", source);
 		}
-		if (!StringUtil.isNotEmpty(type)){
+		if (StringUtil.isNotEmpty(type)){
 			params.put("type", type);
 		}
-		if (!StringUtil.isNotEmpty(resourceId)){
+		if (StringUtil.isNotEmpty(resourceId)){
 			params.put("resource", resourceId);
 		}
 		return params;

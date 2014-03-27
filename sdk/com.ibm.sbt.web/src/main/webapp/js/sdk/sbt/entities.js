@@ -1,3 +1,4 @@
+// The entities class from dojox/html/entities.
 define(["./lang"], function(lang) {
     //      Entity characters for HTML, represented as an array of
     //      character code, entity name (minus & and ; wrapping.

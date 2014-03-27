@@ -33,7 +33,7 @@ public enum ForumType {
 	REPORTS,
 	ACL,
 	TAGS,
-	RECOMMENDATIONS; 
+	RECOMMENDATION; 
 	
 	public NamedUrlPart get(){
 		return new NamedUrlPart("forumType", name().toLowerCase());

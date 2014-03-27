@@ -46,7 +46,7 @@ class BasePluginController extends BaseController {
 			// Check if we have an access token. If not, re-direct user to authentication page
 			$this->loadModel('SBTCredentialStore');
 			$store = SBTCredentialStore::getInstance();
-			$token = $store->getRequestToken();
+			$token = $store->getRequestToken($endpointName);
 			
 			if ($token == null) {
 				// Autoloader

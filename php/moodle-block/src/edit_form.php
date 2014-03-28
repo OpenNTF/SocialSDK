@@ -67,9 +67,7 @@ class block_ibmsbt_edit_form extends block_edit_form {
         $html = ob_get_clean();
         $mform->addElement('html', $html);
         
-        // Type dropdown
-        $mform->addElement('select', 'config_plugin', 'Plugin:', $plugins);
-        $mform->setDefault('config_plugin', 'choose');
+       
         
         $settings = new SBTSettings();
         $records = $settings->getEndpoints();
@@ -81,6 +79,10 @@ class block_ibmsbt_edit_form extends block_edit_form {
         
         $mform->addElement('select', 'config_endpoint', 'Endpoint: (<a href="#" onclick="ibm_sbt_manage_endpoints();">Click here to <strong>manage your endpoints</strong></a>)', $endpoints);
         $mform->setDefault('config_endpoint', 'connections');
+        
+        // Type dropdown
+        $mform->addElement('select', 'config_plugin', 'Plugin:', $plugins);
+        $mform->setDefault('config_plugin', 'choose');
         
         // Block title
         $mform->addElement('text', 'config_elementID', 'Element ID:');

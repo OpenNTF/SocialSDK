@@ -59,11 +59,16 @@ public class URLPattern {
 			String part = partIterator.next();
 			if (mutablePart.isCurrentIndex(urlPartIndex)){
 				//This part is mutable, let's get the value
+				boolean partMatch = false;
 				for (NamedUrlPart namedPart : namedParts) {
 					if (mutablePart.isCurrentPart(namedPart.getName())){
 						sb.append(namedPart.getValue());
+						partMatch = true;
 						break;
 					}
+				}
+				if (!partMatch){
+					throw new IllegalArgumentException("Missing parameter "+mutablePart.getName());
 				}
 				
 				if (mutablePartIterator.hasNext()){ mutablePart = mutablePartIterator.next(); }
@@ -108,6 +113,10 @@ public class URLPattern {
 		
 		protected boolean isCurrentPart(String part){
 			return name.equals(part);
+		}
+		
+		protected String getName(){
+			return name;
 		}
 	}
 }

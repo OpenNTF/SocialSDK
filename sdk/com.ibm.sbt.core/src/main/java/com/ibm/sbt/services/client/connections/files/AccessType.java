@@ -14,6 +14,9 @@
  * permissions and limitations under the License.
  */
 package com.ibm.sbt.services.client.connections.files;
+
+import com.ibm.sbt.services.client.base.NamedUrlPart;
+
 /**
  * Files Access Types
  * @author Vimal Dhupar
@@ -24,10 +27,17 @@ public enum AccessType {
 	
 	PUBLIC("/anonymous/api"),
 	AUTHENTICATED("/api");
+
 	String accessType;
+
 	private AccessType(String accessType) {
 		this.accessType = accessType;
 	}
-	public String get(){return accessType;}
+
+	public String getText(){return accessType;}
+
+	public NamedUrlPart get(){
+		return new NamedUrlPart("accessType", accessType);
+	}
 	
 }

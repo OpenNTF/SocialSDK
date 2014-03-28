@@ -48,6 +48,6 @@ public enum ASApplication {
 	}
 
 	public static NamedUrlPart getByName(String name){
-		return valueOf(name).get();
+		return valueOf(name.toUpperCase()).get();
 	}
 }

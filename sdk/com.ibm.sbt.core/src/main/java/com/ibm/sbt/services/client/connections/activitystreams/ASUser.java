@@ -35,7 +35,7 @@ public enum ASUser {
 	}
 	
 	public static NamedUrlPart getByName(String name){
-		return valueOf(name).get();
+		return valueOf(name.toUpperCase()).get();
 	}
 
 	public NamedUrlPart get(){

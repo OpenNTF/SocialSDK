@@ -32,7 +32,7 @@ public enum FileUrls implements URLContainer {
     UPLOAD_FILE(new VersionedUrl(ConnectionsConstants.v4_0, 						"files/{authType}/{accessType}/myuserlibrary/feed")),
     GET_MY_FILES(new VersionedUrl(ConnectionsConstants.v4_0, 						"files/{authType}/{accessType}/myuserlibrary/feed")),
 
-    GET_ALL_USER_FILES(new VersionedUrl(ConnectionsConstants.v4_0, 					"files/{authType}/{accessType}/userlibrary/{userid}/feed")),
+    GET_ALL_USER_FILES(new VersionedUrl(ConnectionsConstants.v4_0, 					"files/{authType}/{accessType}/userlibrary/{userId}/feed")),
 
     DELETE_ALL_VERSIONS_OF_FILE(new VersionedUrl(ConnectionsConstants.v4_0, 		"files/{authType}/{accessType}/myuserlibrary/document/{fileId}/feed")),
     SHARE_FILE_WITH_COMMUNITIES(new VersionedUrl(ConnectionsConstants.v4_0, 		"files/{authType}/{accessType}/myuserlibrary/document/{fileId}/feed")),
@@ -51,12 +51,12 @@ public enum FileUrls implements URLContainer {
     POST_COMMENT_TO_FILE(new VersionedUrl(ConnectionsConstants.v4_0, 				"files/{authType}/{accessType}/userlibrary/{userId}/document/{fileId}/feed")),
     GET_COMMENTS_FEED_FROM_USER_FILE(new VersionedUrl(ConnectionsConstants.v4_0, 	"files/{authType}/{accessType}/userlibrary/{userId}/document/{fileId}/feed")),
     ADD_FILE_TO_FOLDER(new VersionedUrl(ConnectionsConstants.v4_0, 					"files/{authType}/{accessType}/userlibrary/{userId}/document/{fileId}/feed")),
-    GET_FILE_IN_MY_LIBRARY(new VersionedUrl(ConnectionsConstants.v4_0, 				"files/{authType}/{accessType}/userlibrary/{userId}/document/{fileId}/entry")),
+    GET_FILE_IN_MY_LIBRARY(new VersionedUrl(ConnectionsConstants.v4_0, 				"files/{authType}/{accessType}/myuserlibrary/document/{fileId}/entry")),
     UPLOAD_NEW_VERSION_COMMUNITY_FILE(new VersionedUrl(ConnectionsConstants.v4_0, 	"files/{authType}/{accessType}/library/{communityId}/document/{fileId}/entry")),
 
 
     POST_COMMENT_TO_FILE_ON_MY_LIBRARY(new VersionedUrl(ConnectionsConstants.v4_0, 	"files/{authType}/{accessType}/myuserlibrary/document/{fileId}/feed")),
-    GET_COMMENTS_FEED_FROM_MY_FILE(new VersionedUrl(ConnectionsConstants.v4_0, 		"files}{authType}/{accessType}/myuserlibrary/document/{fileId}/feed")),
+    GET_COMMENTS_FEED_FROM_MY_FILE(new VersionedUrl(ConnectionsConstants.v4_0, 		"files/{authType}/{accessType}/myuserlibrary/document/{fileId}/feed")),
     ADD_FILE_FROM_MY_LIBRARY_TO_FOLDER(new VersionedUrl(ConnectionsConstants.v4_0, 	"files/{authType}/{accessType}/myuserlibrary/document/{fileId}/feed")),
 
     SINGLE_COMMENT_USER_FILE(new VersionedUrl(ConnectionsConstants.v4_0, 			"files/{authType}/{accessType}/userlibrary/{userId}/document/{fileId}/comment/{commentId}/entry")),
@@ -73,11 +73,11 @@ public enum FileUrls implements URLContainer {
     COMMUNITY_FILE_METADATA(new VersionedUrl(ConnectionsConstants.v4_0, 			"files/{authType}/{accessType}/library/{communityLibraryId}/document/{fileId}/entry")),
 
 
-    FILES_FOLDER(new VersionedUrl(ConnectionsConstants.v4_0, 						"files/{authType}/{accessType}/collection/{collectionId}/feed")),
-    REMOVE_FILE_FROM_FOLDER(new VersionedUrl(ConnectionsConstants.v4_0, 			"files/{authType}/{accessType}/collection/{collectionId}/feed")),
-    DELETE_FOLDER(new VersionedUrl(ConnectionsConstants.v4_0, 						"files/{authType}/{accessType}/collection/{collectionId}/entry")),
-    GET_FOLDER(new VersionedUrl(ConnectionsConstants.v4_0, 							"files/{authType}/{accessType}/collection/{collectionId}/entry")),
-    UPDATE_FOLDER(new VersionedUrl(ConnectionsConstants.v4_0, 						"files/{authType}/{accessType}/collection/{collectionId}/entry")),
+    FILES_FOLDER(new VersionedUrl(ConnectionsConstants.v4_0, 						"files/{authType}/{accessType}/collection/{folderId}/feed")),
+    REMOVE_FILE_FROM_FOLDER(new VersionedUrl(ConnectionsConstants.v4_0, 			"files/{authType}/{accessType}/collection/{folderId}/feed")),
+    DELETE_FOLDER(new VersionedUrl(ConnectionsConstants.v4_0, 						"files/{authType}/{accessType}/collection/{folderId}/entry")),
+    GET_FOLDER(new VersionedUrl(ConnectionsConstants.v4_0, 							"files/{authType}/{accessType}/collection/{folderId}/entry")),
+    UPDATE_FOLDER(new VersionedUrl(ConnectionsConstants.v4_0, 						"files/{authType}/{accessType}/collection/{folderId}/entry")),
     GET_FOLDERS_WITH_RECENT_FILES(new VersionedUrl(ConnectionsConstants.v4_0, 		"files/{authType}/{accessType}/collection/addedto/feed")),
 
 

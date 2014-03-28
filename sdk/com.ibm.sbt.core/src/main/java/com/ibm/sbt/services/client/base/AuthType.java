@@ -10,6 +10,10 @@ public enum AuthType {
 		return name().toLowerCase();
 	}
 
+	public NamedUrlPart getPart(){
+		return new NamedUrlPart("authType", get());
+	}
+
     /**
      * Get authentication type for the endpoint. like basicAuth, oauth etc.
      * @return

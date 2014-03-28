@@ -475,6 +475,7 @@ public class FileServiceTest extends BaseUnitTest {
 		endpoint.setUser("***REMOVED***");
 		endpoint.setPassword("quickstart01");
 		endpoint.setForceTrustSSLCertificate(true);
+		endpoint.setApiVersion("4.5");
 		CommunityService communityService = new CommunityService(endpoint);
 		CommunityList communityList = communityService.getMyCommunities();
 		String communityUuid = null;

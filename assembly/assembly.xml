@@ -23,15 +23,6 @@
 				<include>com.ibm.sbt:com.ibm.sbt.playground</include>
 			</includes>
 			<binaries>
-				<dependencySets>
-					<dependencySet>
-						<includes>
-							<include>com.ibm.sbt:com.ibm.commons</include>
-							<include>com.ibm.sbt:com.ibm.commons.runtime</include>
-							<include>com.ibm.sbt:com.ibm.commons.xml</include>
-						</includes>
-					</dependencySet>
-				</dependencySets>
 				<outputDirectory>sbtsdk/redist/jar</outputDirectory>
 				<outputFileNameMapping>${module.artifactId}-${project.version}.${module.extension}</outputFileNameMapping>
 				<unpack>false</unpack>
@@ -115,13 +106,6 @@
 			</includes>
 			<binaries>
 				<dependencySets>
-					<dependencySet>
-						<includes>
-							<include>com.ibm.sbt:com.ibm.commons</include>
-							<include>com.ibm.sbt:com.ibm.commons.runtime</include>
-							<include>com.ibm.sbt:com.ibm.commons.xml</include>
-						</includes>
-					</dependencySet>
 				</dependencySets>
 				<outputDirectory>sbtsdk/samples/jar</outputDirectory>
 				<outputFileNameMapping>${module.artifactId}-${project.version}.${module.extension}</outputFileNameMapping>
@@ -174,7 +158,16 @@
 			</includes>
 			<outputDirectory>sbtsdk/samples/jar</outputDirectory>
 		</dependencySet>
+		<dependencySet>
+			<includes>
+				<include>com.ibm.sbt:com.ibm.sbt.php.core:zip:*</include>
+				<include>com.ibm.sbt:com.ibm.sbt.php.moodle:zip:*</include>
+				<include>com.ibm.sbt:com.ibm.sbt.php.wordpress:zip:*</include>
+			</includes>
+			<outputDirectory>sbtsdk/redist/php</outputDirectory>
 
+
+		</dependencySet>
 		<dependencySet>
 			<includes>
 				<include>com.ibm.sbt:com.ibm.sbt.domino.playground.updatesite</include>

@@ -186,6 +186,7 @@ class SBTOAuth1Endpoint extends BaseController implements SBTEndpoint
 			$response = $e->getResponse();
 			$store->deleteOAuthCredentials($endpointName);
 			print_r($response->getBody(TRUE));
+			header('X-PHP-Response-Code: ' . $response->getStatusCode(), true, $response->getStatusCode());
 			die("Your tokens expired. Make sure you are logged out of SmartCloud, clear your cache and cookies and try again.");
 		}
 		

@@ -23,7 +23,7 @@
  */
 global $CFG;
 if (!isset($CFG) || !isset($CFG->wwwroot)) {
-	$path = str_replace('blocks/ibmsbt', '', __DIR__);
+	$path = str_replace('blocks'.DIRECTORY_SEPARATOR.'ibmsbt', '', __DIR__);
 	include_once $path . '/config.php';
 }
 

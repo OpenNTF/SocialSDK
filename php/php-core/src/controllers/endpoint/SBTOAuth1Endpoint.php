@@ -17,10 +17,10 @@
 
 use Guzzle\Http\Client;
 
-if (file_exists(BASE_PATH . "/core/system/libs/vendor/autoload.php")) {
-	require_once BASE_PATH . "/core/system/libs/vendor/autoload.php";
+if (file_exists(BASE_PATH . DIRECTORY_SEPARATOR . "core".DIRECTORY_SEPARATOR."system".DIRECTORY_SEPARATOR."libs".DIRECTORY_SEPARATOR."vendor".DIRECTORY_SEPARATOR."autoload.php")) {
+	require_once BASE_PATH . "".DIRECTORY_SEPARATOR."core".DIRECTORY_SEPARATOR."system".DIRECTORY_SEPARATOR."libs".DIRECTORY_SEPARATOR."vendor".DIRECTORY_SEPARATOR."autoload.php";
 } else {
-	require_once BASE_PATH . "/system/libs/vendor/autoload.php";
+	require_once BASE_PATH . "".DIRECTORY_SEPARATOR."system".DIRECTORY_SEPARATOR."libs".DIRECTORY_SEPARATOR."vendor".DIRECTORY_SEPARATOR."autoload.php";
 }
 
 /**
@@ -186,6 +186,7 @@ class SBTOAuth1Endpoint extends BaseController implements SBTEndpoint
 			$response = $e->getResponse();
 			$store->deleteOAuthCredentials($endpointName);
 			print_r($response->getBody(TRUE));
+			header('X-PHP-Response-Code: ' . $response->getStatusCode(), true, $response->getStatusCode());
 			die("Your tokens expired. Make sure you are logged out of SmartCloud, clear your cache and cookies and try again.");
 		}
 		

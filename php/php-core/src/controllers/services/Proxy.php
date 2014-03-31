@@ -78,6 +78,10 @@ class Proxy extends BaseController
 			}
 		}
 		
+		// Handle any file operations
+		if ($this->fileOperations()) {
+			return;
+		}
 		
 		
 		$url = $_REQUEST["_redirectUrl"];
@@ -248,6 +252,9 @@ class Proxy extends BaseController
 				$_GET['_redirectUrl'] = $url;
 				$_REQUEST['actionType'] = 'download';
 				
+				// Route
+				$this->route();
+				return true;
 			} else if (strpos($_GET["_redirectUrl"], '/UploadFile/') !== FALSE) {
 				// Create new URL
 				$url = "/files/basic/api/myuserlibrary/feed";
@@ -256,6 +263,10 @@ class Proxy extends BaseController
 				$_REQUEST['_redirectUrl'] = $url;
 				$_GET['_redirectUrl'] = $url;
 				$_POST['visibility'] = $_GET['visibility'];
+				
+				// Route
+				$this->route();
+				return true;
 			} else if (strpos($_GET["_redirectUrl"], '/UploadCommunityFile/') !== FALSE) {
 				$url = $_GET['_redirectUrl']; 
 				
@@ -271,11 +282,14 @@ class Proxy extends BaseController
 				// Update request
 				$_REQUEST['_redirectUrl'] = $url;
 				$_GET['_redirectUrl'] = $url;
-				$_REQUEST['actionType'] = 'download';
+				
+				// Route
+				$this->route();
+				return true;
 			}
-			// Route
-			$this->route();
+			
 		}
+		return false;
 	}
 }
 ?>

@@ -39,7 +39,7 @@ public class CreateVendorApp extends BaseBssApp {
 	 */
 	public static void main(String[] args) {
 		if (args.length < 4) {
-			System.out.println("Usage: java com.ibm.sbt.bss.app.AddSubscribersBlog <url> <user> <password> <domain>");
+			System.out.println("Usage: java com.ibm.sbt.bss.app.CreateVendorApp <url> <user> <password> <domain>");
 			return;
 		}
 		

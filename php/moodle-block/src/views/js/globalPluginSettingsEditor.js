@@ -49,6 +49,7 @@ function basicAuthMethodChange() {
 	var auth_method_list = document.getElementById("id_s__basic_auth_method");
 	var selected_auth_method = auth_method_list.options[auth_method_list.selectedIndex].value;
 	var labels = document.getElementsByTagName('label');
+
 	if (selected_auth_method == 'prompt' || selected_auth_method == 'profile') {
 		var el = document.getElementById('id_s__basic_auth_username').parentNode;
 		el.parentNode.style.display = "none";

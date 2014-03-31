@@ -26,7 +26,6 @@ import com.ibm.commons.util.io.json.JsonJavaFactory;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.commons.util.io.json.JsonParser;
 import com.ibm.sbt.services.client.ClientService;
-import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.JsonEntity;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
@@ -108,7 +107,7 @@ public class CustomerManagementService extends BssService {
     		String serviceUrl = API_RESOURCE_CUSTOMER + "/" + customerId;
 			return getEntity(serviceUrl, null, getJsonFeedHandler());
 		} catch (Exception e) {
-			throw new BssException(e, "Error retrieving customer {0}", customerId);
+			throw new BssException(e, "Error retrieving customer {0} caused by {1}", customerId, e.getMessage());
 		}
     }
     
@@ -138,11 +137,9 @@ public class CustomerManagementService extends BssService {
     		if (statusCode != 204) {
     			throw new BssException(response, "Error updating customer profile {0}", customerObject);
     		}
-		} catch (IOException e) {
-			throw new BssException(e, "Error updating customer profile {0}", customerObject);			
-		} catch (ClientServicesException e) {
-			throw new BssException(e, "Error updating customer profile {0}", customerObject);
-		}
+		} catch (Exception e) {
+			throw new BssException(e, "Error updating customer profile {0} caused by {1}", customerObject, e.getMessage());			
+		} 
     }
     
     /**
@@ -164,10 +161,8 @@ public class CustomerManagementService extends BssService {
     		if (statusCode != 204) {
     			throw new BssException(response, "Error unregistering customer {0}", customerId);
     		}
-		} catch (IOException e) {
-			throw new BssException(e, "Error unregistering customer {0}", customerId);			
-		} catch (ClientServicesException e) {
-			throw new BssException(e, "Error unregistering customer {0}", customerId);
+		} catch (Exception e) {
+			throw new BssException(e, "Error unregistering customer {0} caused by {1}", customerId, e.getMessage());			
 		}
     }
     
@@ -189,10 +184,8 @@ public class CustomerManagementService extends BssService {
     		if (statusCode != 204) {
     			throw new BssException(response, "Error suspending customer {0}", customerId);
     		}
-		} catch (IOException e) {
-			throw new BssException(e, "Error suspending customer {0}", customerId);			
-		} catch (ClientServicesException e) {
-			throw new BssException(e, "Error suspending customer {0}", customerId);
+		} catch (Exception e) {
+			throw new BssException(e, "Error suspending customer {0} caused by {1}", customerId, e.getMessage());			
 		}
     }
     
@@ -214,10 +207,8 @@ public class CustomerManagementService extends BssService {
     		if (statusCode != 204) {
     			throw new BssException(response, "Error suspending customer {0}", customerId);
     		}
-		} catch (IOException e) {
-			throw new BssException(e, "Error unsuspending customer {0}", customerId);			
-		} catch (ClientServicesException e) {
-			throw new BssException(e, "Error unsuspending customer {0}", customerId);
+		} catch (Exception e) {
+			throw new BssException(e, "Error unsuspending customer {0} caused by {1}", customerId, e.getMessage());			
 		}
     }
     
@@ -231,7 +222,7 @@ public class CustomerManagementService extends BssService {
     	try {
 			return (EntityList<JsonEntity>)getEntities(API_RESOURCE_CUSTOMER, null, getJsonFeedHandler());
 		} catch (Exception e) {
-			throw new BssException(e, "Error retrieving customer list");
+			throw new BssException(e, "Error retrieving customer list caused by {0}", e.getMessage());
 		}
     }
     
@@ -250,7 +241,7 @@ public class CustomerManagementService extends BssService {
     		params.put("_pageSize", String.valueOf(pageSize));
 			return (EntityList<JsonEntity>)getEntities(API_RESOURCE_CUSTOMER, params, getJsonFeedHandler());
 		} catch (Exception e) {
-			throw new BssException(e, "Error retrieving customer list");
+			throw new BssException(e, "Error retrieving customer list caused by {0}", e.getMessage());
 		}
     }
     
@@ -272,7 +263,7 @@ public class CustomerManagementService extends BssService {
     		params.put("emailAddress", contactEmail);
 			return (EntityList<JsonEntity>)getEntities(API_RESOURCE_CUSTOMER, null, getJsonFeedHandler());
 		} catch (Exception e) {
-			throw new BssException(e, "Error retrieving customer list by contact email {0}", contactEmail);
+			throw new BssException(e, "Error retrieving customer list by contact email {0} caused by {1}", contactEmail, e.getMessage());
 		}
     }
     
@@ -294,7 +285,7 @@ public class CustomerManagementService extends BssService {
     		params.put("emailAddress", subscriberEmail);
 			return (EntityList<JsonEntity>)getEntities(API_RESOURCE_CUSTOMER, null, getJsonFeedHandler());
 		} catch (Exception e) {
-			throw new BssException(e, "Error retrieving customer list by subscriber email {0}", subscriberEmail);
+			throw new BssException(e, "Error retrieving customer list by subscriber email {0} caused by {1}", subscriberEmail, e.getMessage());
 		}
     }
     
@@ -316,7 +307,7 @@ public class CustomerManagementService extends BssService {
     		params.put("orgName", orgName);
 			return (EntityList<JsonEntity>)getEntities(API_RESOURCE_CUSTOMER, null, getJsonFeedHandler());
 		} catch (Exception e) {
-			throw new BssException(e, "Error retrieving customer list by organization name {0}", orgName);
+			throw new BssException(e, "Error retrieving customer list by organization name {0} caused by {1]", orgName, e.getMessage());
 		}
     }
     
@@ -360,7 +351,7 @@ public class CustomerManagementService extends BssService {
 			Response serverResponse = createData(API_RESOURCE_CUSTOMER, null, JsonHeader, customerObject, ClientService.FORMAT_JSON);
 			return (JsonJavaObject)serverResponse.getData();
 		} catch (Exception e) {
-			throw new BssException(e);
+			throw new BssException(e, "Error registering customer {0} caused by {1}", customerObject, e.getMessage());
 		}
     }
         

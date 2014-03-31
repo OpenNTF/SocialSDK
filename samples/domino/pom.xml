@@ -19,6 +19,7 @@
 	</parent>
 	<modules>
 		<module>com.ibm.xsp.sbtsdk.playground</module>
+		<module>com.ibm.xsp.sbtsdk.playground.sbt</module>
 		<module>com.ibm.sbt.domino.playground.feature</module>
 		<module>com.ibm.sbt.domino.playground.updatesite</module>
 	</modules>

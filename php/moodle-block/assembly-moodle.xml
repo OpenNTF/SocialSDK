@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<assembly>
+	<id>zip</id>
+	<formats>
+		<format>zip</format>
+	</formats>
+	<baseDirectory>src</baseDirectory>
+	<includeBaseDirectory>false</includeBaseDirectory>
+	<fileSets>
+		<fileSet>
+			<includes>
+				<include>**/*</include>
+			</includes>
+			<directory>src</directory>
+			<outputDirectory>ibmsbt/</outputDirectory>
+		</fileSet>
+		<fileSet>
+			<includes>
+				<include>**/*</include>
+			</includes>
+			<excludes>
+			<exclude>models/SBTCredentialStore.php</exclude>
+			<exclude>models/SBTSettings.php</exclude>
+			</excludes>		
+			<directory>target/core</directory>
+			<outputDirectory>ibmsbt/core</outputDirectory>
+		</fileSet>
+	</fileSets>
+
+</assembly>

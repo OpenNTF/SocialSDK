@@ -30,6 +30,7 @@ public class CreateInvite extends BaseAuthJavaServiceTest {
 
     @Test
     public void runTest() {
+    	addSnippetParam("sample.id2", getProperty("sample.userId2"));
         boolean result = checkNoError("Social_Communities_Create_Invite");
         assertTrue(getNoErrorMsg(), result);
     }

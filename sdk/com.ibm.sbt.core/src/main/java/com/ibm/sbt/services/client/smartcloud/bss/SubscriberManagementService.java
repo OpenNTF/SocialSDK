@@ -25,7 +25,6 @@ import com.ibm.commons.util.io.json.JsonJavaFactory;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.commons.util.io.json.JsonParser;
 import com.ibm.sbt.services.client.ClientService;
-import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.JsonEntity;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
@@ -135,7 +134,7 @@ public class SubscriberManagementService extends BssService {
 			Response serverResponse = createData(API_RESOURCE_SUBSCRIBER, null, JsonHeader, customerJson, ClientService.FORMAT_JSON);
 			return (serverResponse == null) ? null : (JsonJavaObject)serverResponse.getData();
 		} catch (Exception e) {
-			throw new BssException(e);
+			throw new BssException(e, "Error adding subscriber {0} caused by {1}", customerJson, e.getMessage());
 		}
     }
       
@@ -151,7 +150,7 @@ public class SubscriberManagementService extends BssService {
     		String serviceUrl = API_RESOURCE_SUBSCRIBER + "/" + subscriberId;
 			return getEntity(serviceUrl, null, getJsonFeedHandler());
 		} catch (Exception e) {
-			throw new BssException(e, "Error retrieving subscriber {0}", subscriberId);
+			throw new BssException(e, "Error retrieving subscriber {0} caused by {1}", subscriberId, e.getMessage());
 		}
     }
     
@@ -169,10 +168,10 @@ public class SubscriberManagementService extends BssService {
     		// expect a 204
     		int statusCode = response.getResponse().getStatusLine().getStatusCode();
     		if (statusCode != 204) {
-    			throw new BssException(response, "Error deleting subscriber {0}", subscriberId);
+    			throw new BssException(response, "Error deleting subscriber {0} caused by {1}", subscriberId, statusCode);
     		}
 		} catch (Exception e) {
-			throw new BssException(e, "Error deleting subscriber {0}", subscriberId);
+			throw new BssException(e, "Error activating subscriber {0} caused by {1}", subscriberId, e.getMessage());
 		}
     }
     
@@ -196,7 +195,7 @@ public class SubscriberManagementService extends BssService {
     			throw new BssException(response, "Error deleting subscriber {0}", subscriberId);
     		}
 		} catch (Exception e) {
-			throw new BssException(e, "Error deleting subscriber {0}", subscriberId);
+			throw new BssException(e, "Error deleting subscriber {0} caused by {1}", subscriberId, e.getMessage());
 		}
     }
     
@@ -217,10 +216,10 @@ public class SubscriberManagementService extends BssService {
     		// expect a 204
     		int statusCode = response.getResponse().getStatusLine().getStatusCode();
     		if (statusCode != 204) {
-    			throw new BssException(response, "Error updating subscriber profile {0}", subscriberObject);
+    			throw new BssException(response, "Error updating subscriber profile {0} caused by {1}", subscriberObject, statusCode);
     		}
 		} catch (Exception e) {
-			throw new BssException(e, "Error updating subscriber profile {0}", subscriberObject);
+			throw new BssException(e, "Error updating subscriber profile {0} caused by {1]", subscriberObject, e.getMessage());
 		}
     }
     
@@ -235,7 +234,7 @@ public class SubscriberManagementService extends BssService {
     	try {
 			return (EntityList<JsonEntity>)getEntities(API_RESOURCE_SUBSCRIBER, null, getJsonFeedHandler());
 		} catch (Exception e) {
-			throw new BssException(e, "Error retrieving subscriber list");
+			throw new BssException(e, "Error retrieving subscriber list caused by {0}", e.getMessage());
 		}
     }
  
@@ -255,7 +254,7 @@ public class SubscriberManagementService extends BssService {
     		params.put("_pageSize", String.valueOf(pageSize));
 			return (EntityList<JsonEntity>)getEntities(API_RESOURCE_SUBSCRIBER, params, getJsonFeedHandler());
 		} catch (Exception e) {
-			throw new BssException(e, "Error retrieving subscriber list");
+			throw new BssException(e, "Error retrieving subscriber list page {0},{1} caused by {2}", pageNumber, pageNumber, e.getMessage());
 		}
     }
  
@@ -277,7 +276,7 @@ public class SubscriberManagementService extends BssService {
     		params.put("emailAddress", email);
 			return (EntityList<JsonEntity>)getEntities(API_RESOURCE_SUBSCRIBER, null, getJsonFeedHandler());
 		} catch (Exception e) {
-			throw new BssException(e, "Error retrieving subscriber list by email {0}", email);
+			throw new BssException(e, "Error retrieving subscriber list by email {0} caused by {1}", email, e.getMessage());
 		}
     }
     
@@ -299,7 +298,7 @@ public class SubscriberManagementService extends BssService {
     		params.put("customer", customerId);
 			return (EntityList<JsonEntity>)getEntities(API_RESOURCE_SUBSCRIBER, null, getJsonFeedHandler());
 		} catch (Exception e) {
-			throw new BssException(e, "Error retrieving subscriber list by customer id {0}", customerId);
+			throw new BssException(e, "Error retrieving subscriber list by customer id {0} caused by {1}", customerId, e.getMessage());
 		}
     }
   
@@ -322,10 +321,10 @@ public class SubscriberManagementService extends BssService {
     		// expect a 204
     		int statusCode = response.getResponse().getStatusLine().getStatusCode();
     		if (statusCode != 204) {
-    			throw new BssException(response, "Error suspending subscriber {0}", subscriberId);
+    			throw new BssException(response, "Error suspending subscriber {0} caused {1}", subscriberId, statusCode);
     		}
 		} catch (Exception e) {
-			throw new BssException(e, "Error suspending subscriber {0}", subscriberId);
+			throw new BssException(e, "Error suspending subscriber {0} with force {1} caused by {2}", subscriberId, force, e.getMessage());
 		}
     }
     
@@ -345,10 +344,10 @@ public class SubscriberManagementService extends BssService {
     		// expect a 204
     		int statusCode = response.getResponse().getStatusLine().getStatusCode();
     		if (statusCode != 204) {
-    			throw new BssException(response, "Error suspending subscriber {0}", subscriberId);
+    			throw new BssException(response, "Error unsuspending subscriber {0} caused by {1}", subscriberId, statusCode);
     		}
 		} catch (Exception e) {
-			throw new BssException(e, "Error suspending subscriber {0}", subscriberId);
+			throw new BssException(e, "Error unsuspending subscriber {0} caused by {1}", subscriberId, e.getMessage());
 		}
     }
     
@@ -370,10 +369,8 @@ public class SubscriberManagementService extends BssService {
     		//HttpEntity entity = response.getResponse().getEntity();
     		//System.out.println(EntityUtils.toString(entity));
     		return getJsonFeedHandler().createEntity(response);
-		} catch (ClientServicesException e) {
-			throw new BssException(e, "Error entitling subscriber {0}", subscriberId);
-		}  catch (IOException e) {
-			throw new BssException(e, "Error entitling subscriber {0}", subscriberId);
+		} catch (Exception e) {
+			throw new BssException(e, "Error entitling subscriber {0} to {1} with {2} caused by {3}", subscriberId, subscriptionId, acceptTOU, e.getMessage());
 		}
     }
     
@@ -397,10 +394,10 @@ public class SubscriberManagementService extends BssService {
     		// expect a 204
     		int statusCode = response.getResponse().getStatusLine().getStatusCode();
     		if (statusCode != 204) {
-    			throw new BssException(response, "Error revoking subscriber {0}", subscriberId);
+    			throw new BssException(response, "Error revoking subscriber {0} to {1} with force {2} caused by {3}", subscriberId, seatId, force, statusCode);
     		}
 		} catch (Exception e) {
-			throw new BssException(e, "Error revoking subscriber {0}", subscriberId);
+			throw new BssException(e, "Error revoking subscriber {0} to {1} with force {2} caused by {3}", subscriberId, seatId, force, e.getMessage());
 		}
     }
     

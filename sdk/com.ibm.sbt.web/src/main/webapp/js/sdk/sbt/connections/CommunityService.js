@@ -2087,7 +2087,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
 				communityUuid : communityUuid
 			});
 			if (this.endpoint.proxy) {
-                url = config.Properties.serviceUrl + url;
+                url = this.endpoint.proxyUrl + url;
             } else {
             	return this.createBadRequestPromise("File proxy is required to upload a community file");
             }

@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -1573,9 +1573,9 @@ define(
 			}
 			if (util.getJavaScriptLibrary().indexOf("Dojo 1.4.3") != -1) {
 				return this.createBadRequestPromise("Dojo 1.4.3 is not supported for File upload");
-			}
+			}      
 			// /files/<<endpointName>>/<<serviceType>>/<<operation>>/fileName eg. /files/smartcloud/connections/UploadFile/fileName?args
-			var url = this.constructUrl(config.Properties.serviceUrl + "/files/" + this.endpoint.proxyPath + "/" + "connections" + "/" + "UploadFile"
+			var url = this.constructUrl(this.endpoint.proxyUrl + "/files/" + this.endpoint.proxyPath + "/" + "connections" + "/" + "UploadFile"
 					+ "/" + encodeURIComponent(fileName), args && args.parameters ? args.parameters : {});
 			var headers = {
 				"Content-Type" : false,

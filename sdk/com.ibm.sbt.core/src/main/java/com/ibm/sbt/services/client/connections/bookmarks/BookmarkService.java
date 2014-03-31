@@ -76,7 +76,7 @@ public class BookmarkService extends BaseService {
 	 */
 	public BookmarkList getAllBookmarks(Map<String, String> parameters) throws BookmarkServiceException {
 		try {
-			String url = BookmarkUrls.ALL.format(getApiVersion());
+			String url = BookmarkUrls.ALL.format(this);
 			return (BookmarkList)getEntities(url, parameters, new BookmarkFeedHandler(this));
 		} catch (Exception e) {
 			throw new BookmarkServiceException(e, "Error retrieving all bookmarks");
@@ -111,7 +111,7 @@ public class BookmarkService extends BaseService {
 			}
 			parameters.put(isEmail(id) ? "email" : "userid", id);
 			
-			String url = BookmarkUrls.APP.format(getApiVersion());
+			String url = BookmarkUrls.APP.format(this);
 			return (BookmarkList)getEntities(url, parameters, new BookmarkFeedHandler(this));
 		} catch (Exception e) {
 			throw new BookmarkServiceException(e, "Error retrieving bookmarks");
@@ -136,7 +136,7 @@ public class BookmarkService extends BaseService {
 	 */
 	public BookmarkList getPopularBookmarks(Map<String, String> parameters) throws BookmarkServiceException {
 		try {
-			String url = BookmarkUrls.POPULAR.format(getApiVersion());
+			String url = BookmarkUrls.POPULAR.format(this);
 			return (BookmarkList)getEntities(url, parameters, new BookmarkFeedHandler(this));
 		} catch (Exception e) {
 			throw new BookmarkServiceException(e, "Error retrieving popular bookmarks");
@@ -161,7 +161,7 @@ public class BookmarkService extends BaseService {
 	 */
 	public BookmarkList getMyNotifications(Map<String, String> parameters) throws BookmarkServiceException {
 		try {
-			String url = BookmarkUrls.MYNOTIFICATIONS.format(getApiVersion());
+			String url = BookmarkUrls.MYNOTIFICATIONS.format(this);
 			return (BookmarkList)getEntities(url, parameters, new BookmarkFeedHandler(this));
 		} catch (Exception e) {
 			throw new BookmarkServiceException(e, "Error retrieving my notifications");
@@ -186,7 +186,7 @@ public class BookmarkService extends BaseService {
 	 */
 	public BookmarkList getMySentNotifications(Map<String, String> parameters) throws BookmarkServiceException {
 		try {
-			String url = BookmarkUrls.MYSENTNOTIFICATIONS.format(getApiVersion());
+			String url = BookmarkUrls.MYSENTNOTIFICATIONS.format(this);
 			return (BookmarkList)getEntities(url, parameters, new BookmarkFeedHandler(this));
 		} catch (Exception e) {
 			throw new BookmarkServiceException(e, "Error retrieving my sent notifications");

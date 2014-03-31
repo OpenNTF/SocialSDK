@@ -84,7 +84,7 @@ public class ProfileAdminService extends ProfileService {
 		try{
 			Map<String, String> parameters = new HashMap<String, String>();
 			setIdParameter(parameters,id );
-			String deleteUrl = ProfileUrls.PROFILE_URL.format(getApiVersion(), getAuthType(), ProfileAPI.ADMIN.get(), ProfileType.DELETEPROFILE.get());
+			String deleteUrl = ProfileUrls.PROFILE_URL.format(this, ProfileAPI.ADMIN.get(), ProfileType.DELETEPROFILE.get());
 			super.deleteData(deleteUrl, parameters, getUniqueIdentifier(id));
 		}
 		catch(ClientServicesException e){
@@ -113,7 +113,7 @@ public class ProfileAdminService extends ProfileService {
 			setIdParameter(parameters, profile.getUserid());
 			Object createPayload = constructCreateRequestBody(profile);
 			
-			String createUrl = ProfileUrls.PROFILE_URL.format(getApiVersion(), getAuthType(), ProfileAPI.ADMIN.get(), ProfileType.ADDPROFILE.get());
+			String createUrl = ProfileUrls.PROFILE_URL.format(this, ProfileAPI.ADMIN.get(), ProfileType.ADDPROFILE.get());
 			super.createData(createUrl, parameters, createPayload, ClientService.FORMAT_CONNECTIONS_OUTPUT);
 			
 		}catch(ClientServicesException e) {

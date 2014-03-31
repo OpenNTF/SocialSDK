@@ -93,7 +93,7 @@ public class ActivityStreamService extends BaseService {
 	 */
 
 	public ActivityStreamEntityList getStream() throws ActivityStreamServiceException {
-		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), ASUser.PUBLIC.get(), ASGroup.ALL.get(), ASApplication.STATUS.get());
+		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(this, ASService.ACTIVITYSTREAM.get(), ASUser.PUBLIC.get(), ASGroup.ALL.get(), ASApplication.STATUS.get());
 		return getActivityStreamEntities(url, null);
 	}
 	
@@ -115,7 +115,7 @@ public class ActivityStreamService extends BaseService {
 			Map<String, String> params) throws ActivityStreamServiceException {
 
 		// Set the parameters being passed in by user
-		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), ASUser.getByName(user), ASGroup.getByName(group), ASApplication.getByName(app));
+		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(this, ASService.ACTIVITYSTREAM.get(), ASUser.getByName(user), ASGroup.getByName(group), ASApplication.getByName(app));
 		return getActivityStreamEntities(url, params); 
 	}
 
@@ -137,7 +137,7 @@ public class ActivityStreamService extends BaseService {
 			Map<String, String> params) throws ActivityStreamServiceException {
 
 		// Set the parameters being passed in by user
-		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), user, group, app);
+		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(this, ASService.ACTIVITYSTREAM.get(), user, group, app);
 		return getActivityStreamEntities(url, params); 
 	}
 	
@@ -171,7 +171,7 @@ public class ActivityStreamService extends BaseService {
 			params.put(ActivityStreamRequestParams.lang, getUserLanguage());
 		}
 		params.put(ActivityStreamRequestParams.rollUp, "true");
-		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), ASUser.PUBLIC.get(), ASGroup.ALL.get(), ASApplication.ALL.get());
+		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(this, ASService.ACTIVITYSTREAM.get(), ASUser.PUBLIC.get(), ASGroup.ALL.get(), ASApplication.ALL.get());
 		return getActivityStreamEntities(url, params);
 
 	}
@@ -207,7 +207,7 @@ public class ActivityStreamService extends BaseService {
 		}
 
 		params.put(ActivityStreamRequestParams.rollUp, "true");
-		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), ASUser.ME.get(), ASGroup.FRIENDS.get(), ASApplication.ALL.get());
+		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(this, ASService.ACTIVITYSTREAM.get(), ASUser.ME.get(), ASGroup.FRIENDS.get(), ASApplication.ALL.get());
 		return getActivityStreamEntities(url, params);
 	}
 	
@@ -241,7 +241,7 @@ public class ActivityStreamService extends BaseService {
 		}
 
 		params.put(ActivityStreamRequestParams.rollUp, "true");
-		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), ASUser.ME.get(), ASGroup.FRIENDS.get(), ASApplication.STATUS.get());
+		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(this, ASService.ACTIVITYSTREAM.get(), ASUser.ME.get(), ASGroup.FRIENDS.get(), ASApplication.STATUS.get());
 		return getActivityStreamEntities(url, params);
 	}
 	
@@ -273,7 +273,7 @@ public class ActivityStreamService extends BaseService {
 			params = new HashMap<String, String>();
 			params.put(ActivityStreamRequestParams.lang, getUserLanguage());
 		}
-		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), ASUser.ME.get(), ASGroup.ALL.get(), ASApplication.STATUS.get());
+		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(this, ASService.ACTIVITYSTREAM.get(), ASUser.ME.get(), ASGroup.ALL.get(), ASApplication.STATUS.get());
 		return getActivityStreamEntities(url, params);
 	}
 	
@@ -308,7 +308,7 @@ public class ActivityStreamService extends BaseService {
 		}
 
 		params.put(ActivityStreamRequestParams.rollUp, "true");
-		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), ASUser.ME.get(), ASGroup.FOLLOWING.get(), ASApplication.STATUS.get(), ASApplication.STATUS.get());
+		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(this, ASService.ACTIVITYSTREAM.get(), ASUser.ME.get(), ASGroup.FOLLOWING.get(), ASApplication.STATUS.get(), ASApplication.STATUS.get());
 		return getActivityStreamEntities(url, params);
 	}
 	
@@ -345,7 +345,7 @@ public class ActivityStreamService extends BaseService {
 
 		params.put(ActivityStreamRequestParams.rollUp, "true");
 		params.put(ActivityStreamRequestParams.broadcast, "true");
-		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), ASUser.ME.get(), ASGroup.ALL.get(), ASApplication.COMMUNITIES.get());
+		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(this, ASService.ACTIVITYSTREAM.get(), ASUser.ME.get(), ASGroup.ALL.get(), ASApplication.COMMUNITIES.get());
 		return getActivityStreamEntities(url, params);
 	}
 	
@@ -389,7 +389,7 @@ public class ActivityStreamService extends BaseService {
 			params.put(ActivityStreamRequestParams.lang, getUserLanguage());
 		}
 
-		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), ASUser.get(userId), ASGroup.INVOLVED.get(), ASApplication.ALL.get());
+		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(this, ASService.ACTIVITYSTREAM.get(), ASUser.get(userId), ASGroup.INVOLVED.get(), ASApplication.ALL.get());
 		return getActivityStreamEntities(url, params);
 
 	}
@@ -432,7 +432,7 @@ public class ActivityStreamService extends BaseService {
 			params = new HashMap<String, String>();
 			params.put(ActivityStreamRequestParams.lang, getUserLanguage());
 		}
-		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), ASUser.COMMUNITY.getWithValue(communityId), ASGroup.ALL.get(), ASApplication.NOAPP.get());
+		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(this, ASService.ACTIVITYSTREAM.get(), ASUser.COMMUNITY.getWithValue(communityId), ASGroup.ALL.get(), ASApplication.NOAPP.get());
 		return getActivityStreamEntities(url, params);
 
 	}
@@ -453,7 +453,7 @@ public class ActivityStreamService extends BaseService {
 			params = new HashMap<String, String>();
 			params.put(ActivityStreamRequestParams.lang, getUserLanguage());
 		}
-		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), ASUser.ME.get(),ASGroup.RESPONSES.get(), ASApplication.NOAPP.get());
+		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(this, ASService.ACTIVITYSTREAM.get(), ASUser.ME.get(),ASGroup.RESPONSES.get(), ASApplication.NOAPP.get());
 		return getActivityStreamEntities(url, params);
 	}
 	
@@ -473,7 +473,7 @@ public class ActivityStreamService extends BaseService {
 			params = new HashMap<String, String>();
 			params.put(ActivityStreamRequestParams.lang, getUserLanguage());
 		}
-		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), ASUser.ME.get(),ASGroup.NOTESFROMME.get(), ASApplication.NOAPP.get());
+		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(this, ASService.ACTIVITYSTREAM.get(), ASUser.ME.get(),ASGroup.NOTESFROMME.get(), ASApplication.NOAPP.get());
 		return getActivityStreamEntities(url, params);
 	}
 	
@@ -493,7 +493,7 @@ public class ActivityStreamService extends BaseService {
 			params = new HashMap<String, String>();
 			params.put(ActivityStreamRequestParams.lang, getUserLanguage());
 		}
-		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), ASUser.ME.get(),ASGroup.RESPONSES.get(), ASApplication.NOAPP.get());
+		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(this, ASService.ACTIVITYSTREAM.get(), ASUser.ME.get(),ASGroup.RESPONSES.get(), ASApplication.NOAPP.get());
 		return getActivityStreamEntities(url, params);
 	}
 	
@@ -514,7 +514,7 @@ public class ActivityStreamService extends BaseService {
 			params = new HashMap<String, String>();
 			params.put(ActivityStreamRequestParams.lang, getUserLanguage());
 		}
-		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), ASUser.ME.get(),ASGroup.ACTION.get(), ASApplication.NOAPP.get());
+		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(this, ASService.ACTIVITYSTREAM.get(), ASUser.ME.get(),ASGroup.ACTION.get(), ASApplication.NOAPP.get());
 		return getActivityStreamEntities(url, params);
 	}
 	
@@ -539,7 +539,7 @@ public class ActivityStreamService extends BaseService {
 			params = new HashMap<String, String>();
 			params.put(ActivityStreamRequestParams.lang, getUserLanguage());
 		}
-		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), ASUser.ME.get(), ASGroup.ACTION.get(), ASApplication.get(application));
+		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(this, ASService.ACTIVITYSTREAM.get(), ASUser.ME.get(), ASGroup.ACTION.get(), ASApplication.get(application));
 		return getActivityStreamEntities(url, params);
 	}
 	
@@ -560,7 +560,7 @@ public class ActivityStreamService extends BaseService {
 			params = new HashMap<String, String>();
 			params.put(ActivityStreamRequestParams.lang, getUserLanguage());
 		}
-		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), ASUser.ME.get(),ASGroup.SAVED.get(), ASApplication.NOAPP.get());
+		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(this, ASService.ACTIVITYSTREAM.get(), ASUser.ME.get(),ASGroup.SAVED.get(), ASApplication.NOAPP.get());
 		return getActivityStreamEntities(url, params);
 	}
 	
@@ -585,7 +585,7 @@ public class ActivityStreamService extends BaseService {
 			params = new HashMap<String, String>();
 			params.put(ActivityStreamRequestParams.lang, getUserLanguage());
 		}
-		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), ASUser.ME.get(), ASGroup.SAVED.get(), ASApplication.get(application));
+		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(this, ASService.ACTIVITYSTREAM.get(), ASUser.ME.get(), ASGroup.SAVED.get(), ASApplication.get(application));
 		return getActivityStreamEntities(url, params);
 	}
 	
@@ -633,7 +633,7 @@ public class ActivityStreamService extends BaseService {
 			params.put(ActivityStreamRequestParams.lang, getUserLanguage());
 		}
 		params.put(ActivityStreamRequestParams.query, query);
-		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), ASUser.PUBLIC.get(), ASGroup.ALL.get(), ASApplication.ALL.get());
+		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(this, ASService.ACTIVITYSTREAM.get(), ASUser.PUBLIC.get(), ASGroup.ALL.get(), ASApplication.ALL.get());
 		return getActivityStreamEntities(url, params);
 	}
 	
@@ -695,7 +695,7 @@ public class ActivityStreamService extends BaseService {
 			params.put(ActivityStreamRequestParams.filters, "[{'type':'tag','values':[" + modifiedQuery
 					+ "]}]");
 		}
-		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), ASUser.PUBLIC.get(), ASGroup.ALL.get(), ASApplication.ALL.get());
+		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(this, ASService.ACTIVITYSTREAM.get(), ASUser.PUBLIC.get(), ASGroup.ALL.get(), ASApplication.ALL.get());
 		return getActivityStreamEntities(url, params);
 	}
 	
@@ -763,7 +763,7 @@ public class ActivityStreamService extends BaseService {
 			params.put(ActivityStreamRequestParams.filters, "[{'type':'" + filterType + "','values':["
 					+ modifiedQuery + "]}]");
 		}
-		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), ASUser.PUBLIC.get(), ASGroup.ALL.get(), ASApplication.ALL.get());
+		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(this, ASService.ACTIVITYSTREAM.get(), ASUser.PUBLIC.get(), ASGroup.ALL.get(), ASApplication.ALL.get());
 		return getActivityStreamEntities(url, params);
 	}
 	
@@ -812,7 +812,7 @@ public class ActivityStreamService extends BaseService {
 
 		params.put(ActivityStreamRequestParams.rollUp, "true");
 		params.put(ActivityStreamRequestParams.custom, searchpattern);
-		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), ASUser.PUBLIC.get(), ASGroup.ALL.get(), ASApplication.ALL.get());
+		String url = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(this, ASService.ACTIVITYSTREAM.get(), ASUser.PUBLIC.get(), ASGroup.ALL.get(), ASApplication.ALL.get());
 		return getActivityStreamEntities(url, params);
 	}
 	
@@ -836,7 +836,7 @@ public class ActivityStreamService extends BaseService {
 					"postPayload passed was null");
 		}
 
-		String postUrl = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), ASUser.get(user), ASGroup.get(group), ASApplication.NOAPP.get());
+		String postUrl = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(this, ASService.ACTIVITYSTREAM.get(), ASUser.get(user), ASGroup.get(group), ASApplication.NOAPP.get());
 		return postEntry(postUrl, postPayload);
 
 	}
@@ -844,7 +844,7 @@ public class ActivityStreamService extends BaseService {
 
 	public String postEntry(NamedUrlPart user, NamedUrlPart group, NamedUrlPart application, JsonJavaObject postPayload) 
 			throws ActivityStreamServiceException {
-		String postUrl = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), user, group, application);
+		String postUrl = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(this, ASService.ACTIVITYSTREAM.get(), user, group, application);
 		return postEntry(postUrl, postPayload);
 	}
 	
@@ -866,7 +866,7 @@ public class ActivityStreamService extends BaseService {
 					"postPayload passed was null");
 		}
 
-		String postUrl = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), ASUser.ME.get(), ASGroup.ALL.get(), ASApplication.ALL.get());
+		String postUrl = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(this, ASService.ACTIVITYSTREAM.get(), ASUser.ME.get(), ASGroup.ALL.get(), ASApplication.ALL.get());
 
 		return postEntry(postUrl, postPayload);
 	}
@@ -920,7 +920,7 @@ public class ActivityStreamService extends BaseService {
 			Map<String,Object> param = new HashMap<String, Object>();
 			param.put(transformer.DATA_POPULATOR, populator);
 			String jsonPayload = transformer.transform(param);
-			String postUrl = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.ACTIVITYSTREAM.get(), user, group, application);
+			String postUrl = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(this, ASService.ACTIVITYSTREAM.get(), user, group, application);
 			return postEntry(postUrl, jsonPayload);
 	}
 
@@ -960,7 +960,7 @@ public class ActivityStreamService extends BaseService {
 					"postPayload passed was null");
 		}
 
-		String postUrl = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(getApiVersion(), getAuthType(), ASService.UBLOG.get(), ASUser.get(user), ASGroup.get(group), ASApplication.get(application));
+		String postUrl = ActivityStreamUrls.ACTIVITYSTREAM_URL.format(this, ASService.UBLOG.get(), ASUser.get(user), ASGroup.get(group), ASApplication.get(application));
 		return postEntry(postUrl, postPayload);
 
 	}

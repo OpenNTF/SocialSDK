@@ -19,6 +19,6 @@ package com.ibm.sbt.services.client.base;
  * @author Carlos Manias
  */
 public interface URLContainer {
-	public String format(Version version, NamedUrlPart... args);
+	public String format(BaseService service, NamedUrlPart... args);
 	public String getPattern(Version version);
 }

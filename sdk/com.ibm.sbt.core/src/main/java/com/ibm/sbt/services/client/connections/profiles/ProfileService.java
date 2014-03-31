@@ -139,7 +139,7 @@ public class ProfileService extends BaseService {
 			parameters = new HashMap<String, String>();
 		}
 		setIdParameter(parameters, id);
-		String url = ProfileUrls.PROFILE_URL.format(getApiVersion(), getAuthType(), ProfileAPI.NONADMIN.get(), ProfileType.GETPROFILE.get());
+		String url = ProfileUrls.PROFILE_URL.format(this, ProfileAPI.NONADMIN.get(), ProfileType.GETPROFILE.get());
 
 		try {
 			profile = (Profile)getEntity(url, parameters, new ProfileFeedHandler(this));
@@ -163,7 +163,7 @@ public class ProfileService extends BaseService {
 		if (null == parameters) {
 			parameters = new HashMap<String, String>();
 		}
-		String url = ProfileUrls.PROFILE_URL.format(getApiVersion(), getAuthType(), ProfileAPI.NONADMIN.get(), ProfileType.SEARCH.get());
+		String url = ProfileUrls.PROFILE_URL.format(this, ProfileAPI.NONADMIN.get(), ProfileType.SEARCH.get());
 
 		ProfileList profiles = null;
 		try {
@@ -206,7 +206,7 @@ public class ProfileService extends BaseService {
 	
 	    if(parameters == null)
 	      parameters = new HashMap<String, String>();
-		String url = ProfileUrls.PROFILE_URL.format(getApiVersion(), getAuthType(), ProfileAPI.NONADMIN.get(), ProfileType.TAGS.get());
+		String url = ProfileUrls.PROFILE_URL.format(this, ProfileAPI.NONADMIN.get(), ProfileType.TAGS.get());
 	    if(id.contains("@"))
 	      parameters.put("targetEmail", id);
 	    else
@@ -254,7 +254,7 @@ public class ProfileService extends BaseService {
 
 		if(parameters == null)
 			parameters = new HashMap<String, String>();
-		String url = ProfileUrls.PROFILE_URL.format(getApiVersion(), getAuthType(), ProfileAPI.NONADMIN.get(), ProfileType.CONNECTIONS.get());
+		String url = ProfileUrls.PROFILE_URL.format(this, ProfileAPI.NONADMIN.get(), ProfileType.CONNECTIONS.get());
 		setIdParameter(parameters, id);
 		parameters.put("connectionType","colleague");
 		parameters.put("outputType","profile");
@@ -301,7 +301,7 @@ public class ProfileService extends BaseService {
 
 		if(parameters == null)
 			parameters = new HashMap<String, String>();
-		String url = ProfileUrls.PROFILE_URL.format(getApiVersion(), getAuthType(), ProfileAPI.NONADMIN.get(), ProfileType.CONNECTIONS.get());
+		String url = ProfileUrls.PROFILE_URL.format(this, ProfileAPI.NONADMIN.get(), ProfileType.CONNECTIONS.get());
 		setIdParameter(parameters, id);
 		parameters.put("connectionType","colleague");
 		parameters.put("outputType","connection");
@@ -354,7 +354,7 @@ public class ProfileService extends BaseService {
 		if(parameters == null){
 			parameters = new HashMap<String, String>();
 		}
-		String url = ProfileUrls.PROFILE_URL.format(getApiVersion(), getAuthType(), ProfileAPI.NONADMIN.get(), ProfileType.CONNECTION.get());
+		String url = ProfileUrls.PROFILE_URL.format(this, ProfileAPI.NONADMIN.get(), ProfileType.CONNECTION.get());
 		if (isEmail(sourceId)) {
 			parameters.put(ProfilesConstants.SOURCEEMAIL, sourceId);
 		} else {
@@ -415,7 +415,7 @@ public class ProfileService extends BaseService {
 		if(parameters == null){
 			parameters = new HashMap<String, String>();
 		}
-		String url = ProfileUrls.PROFILE_URL.format(getApiVersion(), getAuthType(), ProfileAPI.NONADMIN.get(), ProfileType.CONNECTIONS_IN_COMMON.get());
+		String url = ProfileUrls.PROFILE_URL.format(this, ProfileAPI.NONADMIN.get(), ProfileType.CONNECTIONS_IN_COMMON.get());
 		if (isEmail(sourceId)) {
 			StringBuilder value =  new StringBuilder(sourceId);
 			value = value.append(",").append(targetId);
@@ -475,7 +475,7 @@ public class ProfileService extends BaseService {
 		if(parameters == null){
 			parameters = new HashMap<String, String>();
 		}
-		String url = ProfileUrls.PROFILE_URL.format(getApiVersion(), getAuthType(), ProfileAPI.NONADMIN.get(), ProfileType.CONNECTIONS_IN_COMMON.get());
+		String url = ProfileUrls.PROFILE_URL.format(this, ProfileAPI.NONADMIN.get(), ProfileType.CONNECTIONS_IN_COMMON.get());
 		if (isEmail(sourceId)) {
 			StringBuilder value =  new StringBuilder(sourceId);
 			value = value.append(",").append(targetId);
@@ -530,7 +530,7 @@ public class ProfileService extends BaseService {
 		if(parameters == null)
 			parameters = new HashMap<String, String>();
 		setIdParameter(parameters, id);
-		String url = ProfileUrls.PROFILE_URL.format(getApiVersion(), getAuthType(), ProfileAPI.NONADMIN.get(), ProfileType.REPORTINGCHAIN.get());
+		String url = ProfileUrls.PROFILE_URL.format(this, ProfileAPI.NONADMIN.get(), ProfileType.REPORTINGCHAIN.get());
 		ProfileList profiles = null;
 		try {
 			profiles = (ProfileList) getEntities(url, parameters, new ProfileFeedHandler(this));
@@ -574,7 +574,7 @@ public class ProfileService extends BaseService {
 		if(parameters == null)
 			parameters = new HashMap<String, String>();
 		setIdParameter(parameters, id);
-		String url = ProfileUrls.PROFILE_URL.format(getApiVersion(), getAuthType(), ProfileAPI.NONADMIN.get(), ProfileType.DIRECTREPORTS.get());
+		String url = ProfileUrls.PROFILE_URL.format(this, ProfileAPI.NONADMIN.get(), ProfileType.DIRECTREPORTS.get());
 
 		ProfileList profiles = null;
 		try {
@@ -619,7 +619,7 @@ public class ProfileService extends BaseService {
 
 		try {
 			Map<String, String> parameters = new HashMap<String, String>();
-			String url = ProfileUrls.PROFILE_URL.format(getApiVersion(), getAuthType(), ProfileAPI.NONADMIN.get(), ProfileType.CONNECTIONS.get());
+			String url = ProfileUrls.PROFILE_URL.format(this, ProfileAPI.NONADMIN.get(), ProfileType.CONNECTIONS.get());
 			setIdParameter(parameters, id);
 			parameters.put("connectionType","colleague");
 			Object payload = constructSendInviteRequestBody(inviteMsg);
@@ -651,7 +651,7 @@ public class ProfileService extends BaseService {
 		try {
 			Map<String, String> parameters = new HashMap<String, String>();
 			parameters.put(ProfilesConstants.CONNECTIONID, connection.getConnectionId());
-			String url = ProfileUrls.PROFILE_URL.format(getApiVersion(), getAuthType(), ProfileAPI.NONADMIN.get(), ProfileType.CONNECTION.get());
+			String url = ProfileUrls.PROFILE_URL.format(this, ProfileAPI.NONADMIN.get(), ProfileType.CONNECTION.get());
 			Object payload = constructAcceptInviteRequestBody(connection, "accepted");
 
 			super.updateData(url, parameters,payload, connection.getConnectionId());
@@ -680,7 +680,7 @@ public class ProfileService extends BaseService {
 		try {
 			Map<String, String> parameters = new HashMap<String, String>();
 			parameters.put(ProfilesConstants.CONNECTIONID, connectionId);
-			String url = ProfileUrls.PROFILE_URL.format(getApiVersion(), getAuthType(), ProfileAPI.NONADMIN.get(), ProfileType.CONNECTION.get());
+			String url = ProfileUrls.PROFILE_URL.format(this, ProfileAPI.NONADMIN.get(), ProfileType.CONNECTION.get());
 			super.deleteData(url, parameters, connectionId);
 		} catch (ClientServicesException e) {
 			throw new ProfileServiceException(e, Messages.DeleteInviteException, connectionId);
@@ -711,7 +711,7 @@ public class ProfileService extends BaseService {
 			} catch (TransformerException e) {
 				throw new ProfileServiceException(e);
 			}
-			String updateUrl = ProfileUrls.PROFILE_URL.format(getApiVersion(), getAuthType(), ProfileAPI.NONADMIN.get(), ProfileType.UPDATEPROFILE.get());
+			String updateUrl = ProfileUrls.PROFILE_URL.format(this, ProfileAPI.NONADMIN.get(), ProfileType.UPDATEPROFILE.get());
 			super.updateData(updateUrl, parameters,updateProfilePayload, getUniqueIdentifier(profile.getAsString("uid")));
 			profile.clearFieldsMap();
 		} catch (ClientServicesException e) {
@@ -770,7 +770,7 @@ public class ProfileService extends BaseService {
 				} else {
 					headers.put(ProfilesConstants.REQ_HEADER_CONTENT_TYPE_PARAM, "image/" + ext);
 				}
-				String url = ProfileUrls.PROFILE_URL.format(getApiVersion(), getAuthType(), ProfileAPI.NONADMIN.get(), ProfileType.UPDATEPROFILEPHOTO.get());
+				String url = ProfileUrls.PROFILE_URL.format(this, ProfileAPI.NONADMIN.get(), ProfileType.UPDATEPROFILEPHOTO.get());
 				getClientService().put(url, parameters, headers, file, ClientService.FORMAT_NULL);
 				
 			}

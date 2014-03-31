@@ -109,7 +109,7 @@ public class ForumService extends BaseService {
 			parameters = new HashMap<String, String>();
 		}
 		try {
-			String allForumsUrl = ForumUrls.FORUM_URL.format(getApiVersion(), ForumType.FORUMS.get());
+			String allForumsUrl = ForumUrls.FORUMS.format(this);
 			forums = (ForumList)getEntities(allForumsUrl, parameters, new ForumsFeedHandler(this));
 		} catch (ClientServicesException e) {
 			throw new ForumServiceException(e);
@@ -144,7 +144,7 @@ public class ForumService extends BaseService {
 			parameters = new HashMap<String, String>();
 		}
 		try {
-			String publicForumsUrl = ForumUrls.FORUM_URL.format(getApiVersion(), ForumType.FORUMS.get(), FilterType.PUBLIC.get());
+			String publicForumsUrl = ForumUrls.FORUMS_PUBLIC.format(this);
 			forums = (ForumList)getEntities(publicForumsUrl, parameters, new ForumsFeedHandler(this));
 		} catch (ClientServicesException e) {
 			throw new ForumServiceException(e);
@@ -173,7 +173,7 @@ public class ForumService extends BaseService {
 	 * @throws ForumServiceException
 	 */
 	public ForumList getMyForums(Map<String, String> parameters) throws ForumServiceException {
-		String myForumsUrl = ForumUrls.FORUM_URL.format(getApiVersion(), ForumType.FORUMS.get(), FilterType.MY.get());
+		String myForumsUrl = ForumUrls.FORUMS_MY.format(this);
 		ForumList forums = null;
 		if(null == parameters){
 			parameters = new HashMap<String, String>();
@@ -196,7 +196,7 @@ public class ForumService extends BaseService {
 	 * @throws ForumServiceException
 	 */
 	public TagList getForumsTags() throws ForumServiceException {
-		String tagsUrl = ForumUrls.FORUM_URL.format(getApiVersion(), ForumType.TAGS.get(), FilterType.FORUMS.get());
+		String tagsUrl = ForumUrls.TAGS_FORUMS.format(this);
 		TagList tags = null;
 		try {
 			tags = (TagList) getEntities(tagsUrl, null, new TagFeedHandler(this));
@@ -231,7 +231,7 @@ public class ForumService extends BaseService {
 	 * @throws ForumServiceException
 	 */
 	public TagList getForumTopicsTags(String forumUuid, Map<String, String> parameters) throws ForumServiceException {
-		String tagsUrl = ForumUrls.FORUM_URL.format(getApiVersion(), ForumType.TAGS.get(), FilterType.TOPICS.get());
+		String tagsUrl = ForumUrls.TAGS_TOPICS.format(this);
 		if(null == parameters){
 			parameters = new HashMap<String, String>();
 		}
@@ -267,7 +267,7 @@ public class ForumService extends BaseService {
 	 */
 	public RecommendationList getRecommendations(String postUuid) throws ForumServiceException{
 		checkVersion();
-		String recommendationsUrl = ForumUrls.FORUM_URL.format(getApiVersion(), ForumType.RECOMMENDATION.get(), FilterType.ENTRIES.get());
+		String recommendationsUrl = ForumUrls.RECOMMENDATION_ENTRIES.format(this);
 		RecommendationList recommendations;
 		Map<String, String> parameters = new HashMap<String, String>();
 
@@ -292,7 +292,7 @@ public class ForumService extends BaseService {
 	 */
 	public Recommendation createRecommendation(String postUuid) throws ForumServiceException{
 		checkVersion();
-		String recommendationsUrl = ForumUrls.FORUM_URL.format(getApiVersion(), ForumType.RECOMMENDATION.get(), FilterType.ENTRIES.get());
+		String recommendationsUrl = ForumUrls.RECOMMENDATION_ENTRIES.format(this);
 		Map<String, String> parameters = new HashMap<String, String>();
 
 		parameters.put(POST_UNIQUE_IDENTIFIER, postUuid);
@@ -320,7 +320,7 @@ public class ForumService extends BaseService {
 	 */
 	public boolean deleteRecommendation(String postUuid) throws ForumServiceException{
 		checkVersion();
-		String recommendationsUrl = ForumUrls.FORUM_URL.format(getApiVersion(), ForumType.RECOMMENDATION.get(), FilterType.ENTRIES.get());
+		String recommendationsUrl = ForumUrls.RECOMMENDATION_ENTRIES.format(this);
 		Map<String, String> parameters = new HashMap<String, String>();
 
 		parameters.put(POST_UNIQUE_IDENTIFIER, postUuid);
@@ -347,7 +347,7 @@ public class ForumService extends BaseService {
 	public Forum getForum(String forumUuid) throws ForumServiceException {
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put(FORUM_UNIQUE_IDENTIFIER, forumUuid);
-		String url = ForumUrls.FORUM_URL.format(getApiVersion(), ForumType.FORUM.get());
+		String url = ForumUrls.FORUM.format(this);
 		Forum forum;
 		try {
 			forum = (Forum)getEntity(url, parameters, new ForumsFeedHandler(this));
@@ -382,7 +382,7 @@ public class ForumService extends BaseService {
 			Map<String, String> headers = new HashMap<String, String>();
 			headers.put("Content-Type", "application/atom+xml");
 
-			String url = ForumUrls.FORUM_URL.format(getApiVersion(), ForumType.FORUMS.get());
+			String url = ForumUrls.FORUMS.format(this);
 			result = createData(url, null, headers, payload);
 			forum = (Forum) new ForumsFeedHandler(this).createEntity(result);
 
@@ -422,7 +422,7 @@ public class ForumService extends BaseService {
 			BaseForumTransformer transformer = new BaseForumTransformer(forum);
 			Object payload = transformer.transform(forum.getFieldsMap());
 
-			String url = ForumUrls.FORUM_URL.format(getApiVersion(), ForumType.FORUM.get());
+			String url = ForumUrls.FORUM.format(this);
 
 			return updateData(url, parameters, payload, FORUM_UNIQUE_IDENTIFIER);
 		} catch (Exception e) {
@@ -463,7 +463,7 @@ public class ForumService extends BaseService {
 			Map<String, String> parameters = new HashMap<String, String>();
 
 			parameters.put(FORUM_UNIQUE_IDENTIFIER, forumUuid);
-			String deleteForumUrl = ForumUrls.FORUM_URL.format(getApiVersion(), ForumType.FORUM.get());
+			String deleteForumUrl = ForumUrls.FORUM.format(this);
 
 			Response response = super.deleteData(deleteForumUrl, parameters, FORUM_UNIQUE_IDENTIFIER);
 			if (!isForumDeleted(response)){
@@ -498,7 +498,7 @@ public class ForumService extends BaseService {
 	 * @throws ForumServiceException
 	 */
 	public TopicList getPublicForumTopics(Map<String, String> parameters) throws ForumServiceException {
-		String myTopicsUrl = ForumUrls.FORUM_URL.format(getApiVersion(), ForumType.TOPICS.get());
+		String myTopicsUrl = ForumUrls.TOPICS.format(this);
 		TopicList topics = null;
 		if(null == parameters){
 			parameters = new HashMap<String, String>();
@@ -532,7 +532,7 @@ public class ForumService extends BaseService {
 	 * @throws ForumServiceException
 	 */
 	public TopicList getMyForumTopics(Map<String, String> parameters) throws ForumServiceException {
-		String myTopicsUrl = ForumUrls.FORUM_URL.format(getApiVersion(), ForumType.TOPICS.get(), FilterType.MY.get());
+		String myTopicsUrl = ForumUrls.TOPICS_MY.format(this);
 		TopicList topics = null;
 		if(null == parameters){
 			parameters = new HashMap<String, String>();
@@ -568,7 +568,7 @@ public class ForumService extends BaseService {
 	 * @throws ForumServiceException
 	 */
 	public TopicList getForumTopics(String forumUid, Map<String, String> parameters) throws ForumServiceException {
-		String myTopicsUrl = ForumUrls.FORUM_URL.format(getApiVersion(), ForumType.TOPICS.get());
+		String myTopicsUrl = ForumUrls.TOPICS.format(this);
 		TopicList topics = null;
 		if(null == parameters){
 			parameters = new HashMap<String, String>();
@@ -607,7 +607,7 @@ public class ForumService extends BaseService {
 	 * @throws ForumServiceException
 	 */
 	public ForumTopic getForumTopic(String topicId, Map<String, String> parameters) throws ForumServiceException {
-		String myTopicsUrl = ForumUrls.FORUM_URL.format(getApiVersion(), ForumType.TOPIC.get());
+		String myTopicsUrl = ForumUrls.TOPIC.format(this);
 		ForumTopic topic = null;
 		if(null == parameters){
 			parameters = new HashMap<String, String>();
@@ -661,7 +661,7 @@ public class ForumService extends BaseService {
 			Map<String, String> headers = new HashMap<String, String>();
 			headers.put("Content-Type", "application/atom+xml");
 
-			String url = ForumUrls.FORUM_URL.format(getApiVersion(), ForumType.TOPICS.get());
+			String url = ForumUrls.TOPICS.format(this);
 			result = createData(url, params, headers,payload);
 			topic = (ForumTopic) new TopicsFeedHandler(this).createEntity(result);
 
@@ -696,7 +696,7 @@ public class ForumService extends BaseService {
 
 			Map<String, String> headers = new HashMap<String, String>();
 			headers.put("Content-Type", "application/atom+xml");
-			String postUrl = ForumUrls.FORUM_URL.format(getApiVersion(), ForumType.TOPICS.get());
+			String postUrl = ForumUrls.TOPICS.format(this);
 			result = createData(postUrl, params, headers,payload);
 			topic = (ForumTopic) new TopicsFeedHandler(this).createEntity(result);
 
@@ -720,7 +720,7 @@ public class ForumService extends BaseService {
 			throw new ForumServiceException(null,"Topic object passed was null");
 		}
 		try {
-			String url = ForumUrls.FORUM_URL.format(getApiVersion(), ForumType.TOPICS.get());
+			String url = ForumUrls.TOPICS.format(this);
 			if(topic.getFieldsMap().get(ForumsXPath.title)== null)
 				topic.setTitle(topic.getTitle());
 			if(topic.getFieldsMap().get(ForumsXPath.content)== null)
@@ -776,7 +776,7 @@ public class ForumService extends BaseService {
 		try {
 			Map<String, String> parameters = new HashMap<String, String>();
 			parameters.put(TOPIC_UNIQUE_IDENTIFIER, topicUuid);
-			String deleteTopicUrl = ForumUrls.FORUM_URL.format(getApiVersion(), ForumType.TOPIC.get());
+			String deleteTopicUrl = ForumUrls.TOPIC.format(this);
 			super.deleteData(deleteTopicUrl, parameters, TOPIC_UNIQUE_IDENTIFIER);
 		} catch (Exception e) {
 			throw new ForumServiceException(e,"error deleting forum");
@@ -790,7 +790,7 @@ public class ForumService extends BaseService {
 					throw new ForumServiceException(null, "null post Uuid");
 			}
 		}
-		String myRepliesUrl = ForumUrls.FORUM_URL.format(getApiVersion(), ForumType.REPLIES.get());
+		String myRepliesUrl = ForumUrls.REPLIES.format(this);
 		ReplyList replies = null;
 		if(null == parameters){
 			parameters = new HashMap<String, String>();
@@ -887,7 +887,7 @@ public class ForumService extends BaseService {
 	 * @throws ForumServiceException
 	 */
 	public ForumReply getForumReply(String replyId, Map<String, String> parameters) throws ForumServiceException {
-		String myRepliesUrl = ForumUrls.FORUM_URL.format(getApiVersion(), ForumType.REPLY.get());
+		String myRepliesUrl = ForumUrls.REPLY.format(this);
 		ForumReply reply = null;
 		if(null == parameters){
 			parameters = new HashMap<String, String>();
@@ -944,7 +944,7 @@ public class ForumService extends BaseService {
 
 			Map<String, String> headers = new HashMap<String, String>();
 			headers.put("Content-Type", "application/atom+xml");
-			String url = ForumUrls.FORUM_URL.format(getApiVersion(), ForumType.REPLIES.get());
+			String url = ForumUrls.REPLIES.format(this);
 			result = createData(url, params, headers,payload);
 			reply = (ForumReply) new RepliesFeedHandler(this).createEntity(result);
 
@@ -984,7 +984,7 @@ public class ForumService extends BaseService {
 
 			Map<String, String> headers = new HashMap<String, String>();
 			headers.put("Content-Type", "application/atom+xml");
-			String url = ForumUrls.FORUM_URL.format(getApiVersion(), ForumType.REPLY.get());
+			String url = ForumUrls.REPLY.format(this);
 			updateData(url, params, headers,payload, reply.getUid());
 
 		} catch (Exception e) {
@@ -1024,7 +1024,7 @@ public class ForumService extends BaseService {
 			Map<String, String> parameters = new HashMap<String, String>();
 
 			parameters.put(REPLY_UNIQUE_IDENTIFIER, replyUuid);
-			String deleteReplyUrl = ForumUrls.FORUM_URL.format(getApiVersion(), ForumType.REPLY.get());
+			String deleteReplyUrl = ForumUrls.REPLY.format(this);
 
 			super.deleteData(deleteReplyUrl, parameters, REPLY_UNIQUE_IDENTIFIER);
 		} catch (Exception e) {

@@ -308,7 +308,8 @@ public class PreviewJavaScriptHandler extends PreviewHandler {
 						String libVersion = jsLib.getLibVersion();
 						pw.println("        paths: {");
 						pw.println("        	'sbt/_config': '"+composeToolkitUrl(dbUrl)+"?lib=dojo&ver="+libVersion+"&layer=true&noext',");
-						pw.println("        	'sbt/_bridge': '"+sbtPath+"/js/sdk/_bridges/dojo-amd'");
+						pw.println("        	'sbt/_bridge': '"+sbtPath+"/js/sdk/_bridges/dojo-amd',");
+						pw.println("        	'sbt/widget': '"+sbtPath+"/js/sdk/dojo2'");
 						pw.println("        },");
 						//https://dominosbt/xsp/.ibmxspres/.sbtsdk/js/sdk/_layers/sbt-core-dojo-amd.js
 						pw.println("        deps: [");

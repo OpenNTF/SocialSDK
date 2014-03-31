@@ -39,5 +39,12 @@ context.reloadPage(); // Why is this needed?
 				</xp:this.action>
 			</xp:eventHandler>
 		</xp:button>
+		<xp:button value="Export Zip File" id="button2">
+			<xp:eventHandler event="onclick" submit="true"
+				id="eventHandler4" refreshMode="partial">
+				<xp:this.script><![CDATA[var url = "#{javascript:@FullUrl('/xsp/preview/export/'+compositeData.type+'.zip?type='+compositeData.type)}";
+window.location.assign(url);]]></xp:this.script>
+			</xp:eventHandler>
+		</xp:button>
 	</xp:panel>
 </xp:view>

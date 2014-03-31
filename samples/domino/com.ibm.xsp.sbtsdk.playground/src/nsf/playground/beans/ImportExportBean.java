@@ -45,4 +45,8 @@ public abstract class ImportExportBean implements Serializable {
 		AssetImporter imp = AssetImporter.createImporter(type, ExtLibUtil.getCurrentDatabase());
 		imp.deleteAssets(sourceName);
 	}
+	
+	public void exportAssets(String type, String fileName) throws Exception {
+		
+	}
 }

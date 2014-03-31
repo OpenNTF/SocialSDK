@@ -29,7 +29,13 @@ import com.ibm.sbt.services.client.base.VersionedUrl;
  *
  */
 public enum FollowUrls implements URLContainer {
-	FOLLOW_URL(new VersionedUrl(ConnectionsConstants.v4_0, "{serviceType}/follow/{authType}/atom/resources/{resourceId}"));
+	ACTIVITIES(new VersionedUrl(ConnectionsConstants.v4_0, "activities/follow/{authType}/atom/resources/{resourceId}")),
+	BLOGS(new VersionedUrl(ConnectionsConstants.v4_0, "blogs/follow/{authType}/atom/resources/{resourceId}")),
+	COMMUNITIES(new VersionedUrl(ConnectionsConstants.v4_0, "communities/follow/{authType}/atom/resources/{resourceId}")),
+	FORUMS(new VersionedUrl(ConnectionsConstants.v4_0, "forums/follow/{authType}/atom/resources/{resourceId}")),
+	PROFILES(new VersionedUrl(ConnectionsConstants.v4_0, "profiles/follow/{authType}/atom/resources/{resourceId}")),
+	WIKIS(new VersionedUrl(ConnectionsConstants.v4_0, "wikis/follow/{authType}/atom/resources/{resourceId}")),
+	TAGS(new VersionedUrl(ConnectionsConstants.v4_0, "tags/follow/{authType}/atom/resources/{resourceId}"));
 
 	private URLBuilder builder;
 	
@@ -43,5 +49,9 @@ public enum FollowUrls implements URLContainer {
 
 	public String getPattern(Version version){
 		return builder.getPattern(version).getUrlPattern();
+	}
+	
+	public static String format(String serviceName, BaseService service, NamedUrlPart... args) {
+		return valueOf(serviceName).format(service, args);
 	}
 }

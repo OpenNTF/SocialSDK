@@ -19,7 +19,7 @@
  * 
  * Implementation of a transport using the Dojo XHR API.
  */
-define([ './declare', 'dojo/_base/xhr', 'dojox/xml/parser', '../util', '../Promise' ], function(declare, xhr, parser, util, Promise) {
+define([ './declare', 'dojo/_base/xhr', '../util', '../Promise' ], function(declare, xhr, util, Promise) {
     return declare(null, {
         /**
          * Provides an asynchronous request using the associated Transport.

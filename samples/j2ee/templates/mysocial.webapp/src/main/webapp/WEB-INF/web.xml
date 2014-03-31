@@ -22,10 +22,6 @@
 		<servlet-name>LibraryServlet</servlet-name>
 		<servlet-class>com.ibm.sbt.jslibrary.servlet.LibraryServlet</servlet-class>
 		<init-param>
-			<param-name>toolkitExtUrl</param-name>
-			<param-value>%local_server%/sbtx</param-value>
-		</init-param>
-		<init-param>
 			<param-name>jsLibraryUrl</param-name>
 			<param-value>%local_server%/sbt/js/libs</param-value>
 		</init-param>

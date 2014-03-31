@@ -26,7 +26,6 @@ import com.ibm.commons.util.io.json.JsonJavaFactory;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.commons.util.io.json.JsonParser;
 import com.ibm.sbt.services.client.ClientService;
-import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.JsonEntity;
@@ -138,7 +137,7 @@ public class SubscriptionManagementService extends BssService {
 			IFeedHandler<JsonEntity> jsonHandler = getJsonFeedHandler();
 			return jsonHandler.createEntityList(serverResponse);
 		} catch (Exception e) {
-			throw new BssException(e);
+			throw new BssException(e, "Error creating subscription {0} caused by {1}", orderObject, e.getMessage());
 		}
     }
     
@@ -154,7 +153,7 @@ public class SubscriptionManagementService extends BssService {
     		String serviceUrl = API_RESOURCE_SUBSCRIPTION + "/" + subscriptionId;
 			return getEntity(serviceUrl, null, getJsonFeedHandler());
 		} catch (Exception e) {
-			throw new BssException(e, "Error retrieving subscription {0}", subscriptionId);
+			throw new BssException(e, "Error retrieving subscription {0} caused by {1}", subscriptionId, e.getMessage());
 		}
     }
     
@@ -176,7 +175,7 @@ public class SubscriptionManagementService extends BssService {
     		params.put("customerId", customerId);
 			return (EntityList<JsonEntity>)getEntities(API_RESOURCE_SUBSCRIPTION, params, getJsonFeedHandler());
 		} catch (Exception e) {
-			throw new BssException(e, "Error retrieving subscription list by customer id {0}", customerId);
+			throw new BssException(e, "Error retrieving subscription list by customer id {0} caused by {1}", customerId, e.getMessage());
 		}
     }
   
@@ -191,7 +190,7 @@ public class SubscriptionManagementService extends BssService {
     	try {
 			return (EntityList<JsonEntity>)getEntities(API_RESOURCE_SUBSCRIPTION, null, getJsonFeedHandler());
 		} catch (Exception e) {
-			throw new BssException(e, "Error retrieving subscription list");
+			throw new BssException(e, "Error retrieving subscription list caused by {0}", e.getMessage());
 		}
     }
   
@@ -211,7 +210,7 @@ public class SubscriptionManagementService extends BssService {
     		params.put("_pageSize", String.valueOf(pageSize));
 			return (EntityList<JsonEntity>)getEntities(API_RESOURCE_SUBSCRIPTION, params, getJsonFeedHandler());
 		} catch (Exception e) {
-			throw new BssException(e, "Error retrieving subscription list");
+			throw new BssException(e, "Error retrieving subscription list for page {0},{1} caused by {2}", pageNumber, pageSize, e.getMessage());
 		}
     }
   
@@ -232,12 +231,10 @@ public class SubscriptionManagementService extends BssService {
     		// expect a 204
     		int statusCode = response.getResponse().getStatusLine().getStatusCode();
     		if (statusCode != 204) {
-    			throw new BssException(response, "Error suspending subscription {0}", subscriptionId);
+    			throw new BssException(response, "Error suspending subscription {0} caused by {1}", subscriptionId, statusCode);
     		}
-		} catch (IOException e) {
-			throw new BssException(e, "Error suspending subscription {0}", subscriptionId);			
-		} catch (ClientServicesException e) {
-			throw new BssException(e, "Error suspending subscription {0}", subscriptionId);
+		} catch (Exception e) {
+			throw new BssException(e, "Error suspending subscription {0} caused by {1}", subscriptionId, e.getMessage());			
 		}
     }
     
@@ -258,13 +255,11 @@ public class SubscriptionManagementService extends BssService {
     		// expect a 204
     		int statusCode = response.getResponse().getStatusLine().getStatusCode();
     		if (statusCode != 204) {
-    			throw new BssException(response, "Error unsuspending subscription {0}", subscriptionId);
+    			throw new BssException(response, "Error unsuspending subscription {0} caused by {1}", subscriptionId, statusCode);
     		}
-		} catch (IOException e) {
-			throw new BssException(e, "Error unsuspending subscription {0}", subscriptionId);			
-		} catch (ClientServicesException e) {
-			throw new BssException(e, "Error unsuspending subscription {0}", subscriptionId);
-		}
+		} catch (Exception e) {
+			throw new BssException(e, "Error unsuspending subscription {0} caused by {1}", subscriptionId, e.getMessage());			
+		} 
     }
 	
     /**
@@ -284,12 +279,10 @@ public class SubscriptionManagementService extends BssService {
     		// expect a 204
     		int statusCode = response.getResponse().getStatusLine().getStatusCode();
     		if (statusCode != 204) {
-    			throw new BssException(response, "Error cancelling subscription {0}", subscriptionId);
+    			throw new BssException(response, "Error cancelling subscription {0} caused by {1}", subscriptionId, statusCode);
     		}
-		} catch (IOException e) {
-			throw new BssException(e, "Error cancelling subscription {0}", subscriptionId);			
-		} catch (ClientServicesException e) {
-			throw new BssException(e, "Error cancelling subscription {0}", subscriptionId);
+		} catch (Exception e) {
+			throw new BssException(e, "Error cancelling subscription {0} caused by {1]", subscriptionId, e.getMessage());			
 		}
     }
 	
@@ -309,12 +302,10 @@ public class SubscriptionManagementService extends BssService {
     		// expect a 204
     		int statusCode = response.getResponse().getStatusLine().getStatusCode();
     		if (statusCode != 204) {
-    			throw new BssException(response, "Error updating subscription {0}", subscriptionObject);
+    			throw new BssException(response, "Error updating subscription {0} causd by {1}", subscriptionObject, statusCode);
     		}
-		} catch (IOException e) {
-			throw new BssException(e, "Error updating subscription {0}", subscriptionObject);			
-		} catch (ClientServicesException e) {
-			throw new BssException(e, "Error updating subscription {0}", subscriptionObject);
+		} catch (Exception e) {
+			throw new BssException(e, "Error updating subscription {0} caused by {1}", subscriptionObject, e.getMessage());			
 		}
     }
     

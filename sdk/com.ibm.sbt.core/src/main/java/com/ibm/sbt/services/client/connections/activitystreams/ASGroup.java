@@ -55,7 +55,7 @@ public enum ASGroup {
 	}
 
 	public static NamedUrlPart get(String userId){
-		return new NamedUrlPart("user", userId);
+		return new NamedUrlPart("group", userId);
 	}
 
 }

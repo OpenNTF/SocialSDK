@@ -50,17 +50,6 @@ public class BlogService extends BaseService {
 	public static String BLOG_HOMEPAGE_KEY = "blogHomepageHandle";
 	
 	/**
-	 * Used in constructing REST APIs
-	 */
-	/*
-	public static final String	BASE_URL				= "/blogs/"; // need to change for Blog Handle
-	private static final String BASIC_URL				= "atom/";
-	public static final String OAUTH_URL				= "oauth/atom/";
-
-	public static String BLOG_HANDLE 					= "homepage";
-	*/
-	
-	/**
 	 * Constructor Creates BlogService Object with default endpoint
 	 */
 	public BlogService() {

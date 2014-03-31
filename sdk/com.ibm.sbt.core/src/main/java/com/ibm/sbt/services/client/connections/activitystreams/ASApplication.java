@@ -40,11 +40,11 @@ public enum ASApplication {
 	}
 
 	public NamedUrlPart get(){
-		return new NamedUrlPart("application", applicationType);
+		return new NamedUrlPart("app", applicationType);
 	}
 
 	public static NamedUrlPart get(String application){
-		return new NamedUrlPart("application", application);
+		return new NamedUrlPart("app", application);
 	}
 
 	public static NamedUrlPart getByName(String name){

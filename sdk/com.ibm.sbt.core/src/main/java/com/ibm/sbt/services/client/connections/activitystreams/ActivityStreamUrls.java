@@ -9,7 +9,25 @@ import com.ibm.sbt.services.client.base.Version;
 import com.ibm.sbt.services.client.base.VersionedUrl;
 
 public enum ActivityStreamUrls implements URLContainer {
-	ACTIVITYSTREAM_URL( new VersionedUrl(ConnectionsConstants.v4_0, "connections/opensocial/{authType}/rest/{service}/{user}/{group}/{application}"));
+	AS_PUBLIC_ALL_STATUS( new VersionedUrl(ConnectionsConstants.v4_0, 	"{connections}/opensocial/{authType}/rest/activitystream/@public/@all/@status")),
+	AS_PUBLIC_ALL_ALL( new VersionedUrl(ConnectionsConstants.v4_0, 		"{connections}/opensocial/{authType}/rest/activitystream/@public/@all/@all")),
+	AS_ME_FRIENDS_ALL( new VersionedUrl(ConnectionsConstants.v4_0, 		"{connections}/opensocial/{authType}/rest/activitystream/@me/@friends/@all")),
+	AS_ME_FRIENDS_STATUS( new VersionedUrl(ConnectionsConstants.v4_0, 	"{connections}/opensocial/{authType}/rest/activitystream/@me/@friends/@status")),
+	AS_ME_ALL_STATUS( new VersionedUrl(ConnectionsConstants.v4_0, 		"{connections}/opensocial/{authType}/rest/activitystream/@me/@all/@status")),
+	AS_ME_FOLLOWING_STATUS( new VersionedUrl(ConnectionsConstants.v4_0, "{connections}/opensocial/{authType}/rest/activitystream/@me/@following/@status")),
+	AS_ME_ALL_COMMUNITIES( new VersionedUrl(ConnectionsConstants.v4_0, 	"{connections}/opensocial/{authType}/rest/activitystream/@me/@all/@communities")),
+	AS_USER_INVOLVED_ALL( new VersionedUrl(ConnectionsConstants.v4_0, 	"{connections}/opensocial/{authType}/rest/activitystream/{user}/@involved/@all")),
+	AS_COMMUNITY_ALL( new VersionedUrl(ConnectionsConstants.v4_0, 		"{connections}/opensocial/{authType}/rest/activitystream/{user}/@all")),
+	AS_ME_RESPONSES( new VersionedUrl(ConnectionsConstants.v4_0, 		"{connections}/opensocial/{authType}/rest/activitystream/@me/@responses")),
+	AS_ME_NOTESFROMME( new VersionedUrl(ConnectionsConstants.v4_0, 		"{connections}/opensocial/{authType}/rest/activitystream/@me/@notesfromme")),
+	AS_ME_ACTION( new VersionedUrl(ConnectionsConstants.v4_0, 			"{connections}/opensocial/{authType}/rest/activitystream/@me/@action")),
+	AS_ME_ACTION_APP( new VersionedUrl(ConnectionsConstants.v4_0, 		"{connections}/opensocial/{authType}/rest/activitystream/@me/@action/{app}")),
+	AS_ME_SAVED( new VersionedUrl(ConnectionsConstants.v4_0, 			"{connections}/opensocial/{authType}/rest/activitystream/@me/@saved")),
+	AS_ME_SAVED_APP( new VersionedUrl(ConnectionsConstants.v4_0,		"{connections}/opensocial/{authType}/rest/activitystream/@me/@saved/{app}")),
+	AS_ME_ALL_ALL( new VersionedUrl(ConnectionsConstants.v4_0, 			"{connections}/opensocial/{authType}/rest/activitystream/@me/@all/@all")),
+	AS_USER_GROUP_APP( new VersionedUrl(ConnectionsConstants.v4_0, 		"{connections}/opensocial/{authType}/rest/activitystream/{user}/{group}/{app}")),
+	UBLOG_USER_GROUP_APP( new VersionedUrl(ConnectionsConstants.v4_0, 	"{connections}/opensocial/{authType}/rest/ublog/{user}/{group}/{app}"));
+
 
 	private URLBuilder builder;
 	

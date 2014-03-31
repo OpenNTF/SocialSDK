@@ -52,7 +52,7 @@ function plugins_url() {
 				var sbt = {};
 				sbt.Properties = {
 					"libraryUrl": "",
-					"serviceUrl": "***REMOVED*** echo plugins_url(); ?>/index.php?classpath=services&class=Proxy&method=fileOperations&_redirectUrl=",
+					"serviceUrl": "***REMOVED*** echo plugins_url(); ?>/index.php?classpath=services&class=Proxy&&uid=***REMOVED*** global $USER; echo $USER->id; ?>&method=fileOperations&_redirectUrl=",
 					"sbtUrl": "***REMOVED*** echo $agnostic_deploy_url; ?>/js/sdk"
 				};
 				sbt.Endpoints = {

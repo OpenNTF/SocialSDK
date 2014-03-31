@@ -52,7 +52,7 @@ class Proxy extends BaseController
 		$endpointName = "connections";
 		if (isset($_GET['endpointName'])) {
 			$endpointName = $_GET['endpointName'];
-		}
+		} 
 
 		if (!isset($_REQUEST["_redirectUrl"])) {
 			// Request to check if the user is authenticated
@@ -153,7 +153,6 @@ class Proxy extends BaseController
 			$endpoint = new SBTOAuth1Endpoint();
 		}
 
-	
 		// ...yes, this is ugly
 		$containsServerURL = false;
 		if (strpos($url, '/https/') == 0) {
@@ -257,6 +256,22 @@ class Proxy extends BaseController
 				$_REQUEST['_redirectUrl'] = $url;
 				$_GET['_redirectUrl'] = $url;
 				$_POST['visibility'] = $_GET['visibility'];
+			} else if (strpos($_GET["_redirectUrl"], '/UploadCommunityFile/') !== FALSE) {
+				$url = $_GET['_redirectUrl']; 
+				
+				// Extract library ID and file ID
+				$keys = parse_url($url);
+				$path = explode("/", $keys['path']);
+				
+				$communityID = $path[sizeof($path) - 1];
+				$fileID = $path[sizeof($path) - 2];
+				
+				// Create new URL
+				$url = "/files/basic/api/communitylibrary/" . $communityID . "/feed";
+				// Update request
+				$_REQUEST['_redirectUrl'] = $url;
+				$_GET['_redirectUrl'] = $url;
+				$_REQUEST['actionType'] = 'download';
 			}
 			// Route
 			$this->route();

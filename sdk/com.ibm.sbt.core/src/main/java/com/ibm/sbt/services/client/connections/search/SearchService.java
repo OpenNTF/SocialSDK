@@ -117,7 +117,7 @@ public class SearchService extends BaseService {
 		
 		parameters.put("query", query);		
 		try {
-			String searchQry = SearchUrls.SEARCH_URL.format(this, SearchType.PUBLIC.get());
+			String searchQry = SearchUrls.SEARCH.format(this);
 			searchResults = (ResultList) getEntities(searchQry, parameters, new SearchFeedHandler(this));
 		} catch (ClientServicesException e) {
 			throw new SearchServiceException(e);
@@ -249,7 +249,7 @@ public class SearchService extends BaseService {
 		
 		parameters.put("query", query);		
 		try {
-			String searchQry = SearchUrls.SEARCH_URL.format(this, SearchType.MY.get());
+			String searchQry = SearchUrls.MYSEARCH.format(this);
 			searchResults = (ResultList) getEntities(searchQry, parameters, new SearchFeedHandler(this));
 		} catch (ClientServicesException e) {
 			throw new SearchServiceException(e);
@@ -296,7 +296,7 @@ public class SearchService extends BaseService {
 		parameters.put("facet", "{\"id\": \"Person\"}");
 
 		try {
-			String searchQry = SearchUrls.SEARCH_URL.format(this, SearchType.PUBLIC.get());
+			String searchQry = SearchUrls.SEARCH.format(this);
 			searchResults = (FacetValueList) getEntities(searchQry, parameters, new FacetsHandler(this, "Person"));
 		} catch (ClientServicesException e) {
 			throw new SearchServiceException(e);
@@ -345,7 +345,7 @@ public class SearchService extends BaseService {
 		parameters.put("facet", "{\"id\": \"Person\"}");
 		
 		try {
-			String searchQry = SearchUrls.SEARCH_URL.format(this, SearchType.MY.get());
+			String searchQry = SearchUrls.MYSEARCH.format(this);
 			searchResults = (ResultList) getEntities(searchQry, parameters, new FacetsHandler(this, "Person"));
 		} catch (ClientServicesException e) {
 			throw new SearchServiceException(e);
@@ -425,7 +425,7 @@ public class SearchService extends BaseService {
     	ScopeList scopes;
     	Map params = new HashMap<String,String>();
  		try {
-			String searchQry = SearchUrls.SEARCH_URL.format(this, SearchType.SCOPE.get());
+			String searchQry = SearchUrls.SCOPES.format(this);
 			scopes = (ScopeList) getEntities(searchQry, params, new ScopeFeedHandler(this));
 		} catch (ClientServicesException e) {
 			throw new SearchServiceException(e);

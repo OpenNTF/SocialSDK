@@ -29,8 +29,25 @@ import com.ibm.sbt.services.client.base.VersionedUrl;
  *
  */
 public enum ProfileUrls implements URLContainer {
-	PROFILE_URL(new VersionedUrl(ConnectionsConstants.v4_0, "profiles/{authType}/{isAdmin}/{profileType}/"));
+	PROFILE(new VersionedUrl(ConnectionsConstants.v4_0, "profiles/{authType}/atom/profile.do")),
+	PROFILE_ENTRY(new VersionedUrl(ConnectionsConstants.v4_0, "profiles/{authType}/atom/profileEntry.do")),
+	PHOTO(new VersionedUrl(ConnectionsConstants.v4_0, "profiles/{authType}/atom/photo.do")),
+	TAGS(new VersionedUrl(ConnectionsConstants.v4_0, "profiles/{authType}/atom/profileTags.do")),
+	SEARCH(new VersionedUrl(ConnectionsConstants.v4_0, "profiles/{authType}/atom/search.do")),
+	CONNECTIONS(new VersionedUrl(ConnectionsConstants.v4_0, "profiles/{authType}/atom/connections.do")),
+	CONNECTION(new VersionedUrl(ConnectionsConstants.v4_0, "profiles/{authType}/atom/connection.do")),
+	CONNECTIONS_IN_COMMON(new VersionedUrl(ConnectionsConstants.v4_0, "profiles/{authType}/atom/connectionsInCommon.do")),
+	REPORTING_CHAIN(new VersionedUrl(ConnectionsConstants.v4_0, "profiles/{authType}/atom/reportingChain.do")),
+	PEOPLE_MANAGED(new VersionedUrl(ConnectionsConstants.v4_0, "profiles/{authType}/atom/peopleManaged.do")),
+	MESSAGES_ALL(new VersionedUrl(ConnectionsConstants.v4_0, "profiles/{authType}/atom/mv/theboard/entries/all.do")),
+	MESSAGE_BOARD_ENTRIES(new VersionedUrl(ConnectionsConstants.v4_0, "profiles/{authType}/atom/mv/theboard/entries.do")),
+	MESSAGE_BOARD_COMMENTS(new VersionedUrl(ConnectionsConstants.v4_0, "profiles/{authType}/atom/mv/theboard/comments.do")),
+	MESSAGES_COLLEAGUES(new VersionedUrl(ConnectionsConstants.v4_0, "profiles/{authType}/atom/mv/theboard/entries/related.do")),
 
+	//ADMIN urls
+	ADMIN_PROFILE_ENTRY(new VersionedUrl(ConnectionsConstants.v4_0, "profiles/{authType}/admin/atom/profileEntry.do")),
+	ADMIN_PROFILES(new VersionedUrl(ConnectionsConstants.v4_0, "profiles/{authType}/admin/atom/profiles.do"));
+	
 	private URLBuilder builder;
 	
 	private ProfileUrls(VersionedUrl... urlVersions) {

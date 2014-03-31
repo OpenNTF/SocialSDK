@@ -18,6 +18,8 @@ package com.ibm.sbt.services.endpoints;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -26,6 +28,9 @@ import com.ibm.commons.runtime.Application;
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.service.core.handlers.ProxyHandler;
+import com.ibm.sbt.service.proxy.Proxy;
+import com.ibm.sbt.service.proxy.ProxyConfigException;
+import com.ibm.sbt.service.proxy.ProxyFactory;
 import com.ibm.sbt.services.client.AuthenticationService;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientService.Args;
@@ -294,11 +299,36 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
     }
     
     /* (non-Javadoc)
+     * Returns the proxy reference of the endpoint with the name endpointName, if it exists.
+     * 
+     * Returns moduleId if the endpoint has no proxy config.
+     * 
      * @see com.ibm.sbt.services.endpoints.Endpoint#getProxy(java.lang.String, java.lang.String)
      */
     @Override
     public JSReference getProxy(String endpointName, String moduleId) {
-    	return new JSReference(moduleId);
+    	Endpoint e = this;
+    	String proxyModuleId = new String(moduleId);
+    	Proxy proxy = null;
+    	
+    	if(!endpointName.equals(this.getName())){
+    		e = EndpointFactory.getEndpointUnchecked(endpointName);
+    	}
+    	
+		try {
+			proxy = ProxyFactory.getProxyConfig(e.getProxyConfig());
+			if(proxy != null && proxy.getProxyModule() != null){
+				proxyModuleId = proxy.getProxyModule();
+			}
+		} catch (ProxyConfigException ex) {
+			String thisClass = AbstractEndpoint.class.getName();
+			Logger logger = Logger.getLogger(thisClass);
+			if (logger.isLoggable(Level.SEVERE)) {
+				logger.entering(thisClass, "createProxyRef failed", ex.getMessage());
+			}
+		}
+    	
+    	return new JSReference(proxyModuleId);
     }
 
     @Override

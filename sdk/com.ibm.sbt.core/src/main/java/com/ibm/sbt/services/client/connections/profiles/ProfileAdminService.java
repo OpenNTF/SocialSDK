@@ -5,10 +5,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.ibm.commons.util.StringUtil;
+import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.profiles.utils.Messages;
-import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.endpoints.Endpoint;
 
 /**
@@ -84,7 +84,7 @@ public class ProfileAdminService extends ProfileService {
 		try{
 			Map<String, String> parameters = new HashMap<String, String>();
 			setIdParameter(parameters,id );
-			String deleteUrl = ProfileUrls.PROFILE_URL.format(this, ProfileAPI.ADMIN.get(), ProfileType.DELETEPROFILE.get());
+			String deleteUrl = ProfileUrls.ADMIN_PROFILE_ENTRY.format(this);
 			super.deleteData(deleteUrl, parameters, getUniqueIdentifier(id));
 		}
 		catch(ClientServicesException e){
@@ -113,7 +113,7 @@ public class ProfileAdminService extends ProfileService {
 			setIdParameter(parameters, profile.getUserid());
 			Object createPayload = constructCreateRequestBody(profile);
 			
-			String createUrl = ProfileUrls.PROFILE_URL.format(this, ProfileAPI.ADMIN.get(), ProfileType.ADDPROFILE.get());
+			String createUrl = ProfileUrls.ADMIN_PROFILES.format(this);
 			super.createData(createUrl, parameters, createPayload, ClientService.FORMAT_CONNECTIONS_OUTPUT);
 			
 		}catch(ClientServicesException e) {

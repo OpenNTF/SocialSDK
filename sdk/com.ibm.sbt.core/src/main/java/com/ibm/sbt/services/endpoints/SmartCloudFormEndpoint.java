@@ -17,15 +17,24 @@
 package com.ibm.sbt.services.endpoints;
 
 
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.client.methods.RequestBuilder;
+import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.message.BasicNameValuePair;
 
 import com.ibm.commons.util.StringUtil;
+import com.ibm.sbt.security.authentication.AuthenticationException;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.smartcloud.SmartCloudService;
@@ -37,6 +46,7 @@ import com.ibm.sbt.services.client.smartcloud.SmartCloudService;
 public class SmartCloudFormEndpoint extends FormEndpoint {
 	
 	private static final String SC_FORM_PAGE = "pkmslogin.form";
+	
 	public SmartCloudFormEndpoint() {
     	setAuthenticationErrorCode(403);
 	}	
@@ -67,8 +77,74 @@ public class SmartCloudFormEndpoint extends FormEndpoint {
     	return new SmartCloudService(this);
     }
     
+    
+    @Override
+    public boolean login(String user, String password)
+    		throws AuthenticationException {
+		try {
+			BasicCookieStore cookieStore = new BasicCookieStore();
+			HttpClient c = createClient(cookieStore);
+
+			String entryUrl = getUrl();
+
+			HttpPost getDCInfo = new HttpPost(entryUrl
+					+ "/manage/resource/getDCInfo");
+			List<NameValuePair> parameters = new ArrayList<NameValuePair>(2);
+			
+			parameters.add(new BasicNameValuePair("loginName", user));
+			parameters.add(new BasicNameValuePair("special", "true"));
+			
+			UrlEncodedFormEntity entity = new UrlEncodedFormEntity(parameters);
+			getDCInfo.setEntity(entity);
+			
+			String authenticationPage = IOUtils.toString(c.execute(getDCInfo)
+					.getEntity().getContent());
+			authenticationPage = URLDecoder.decode(authenticationPage);
+			
+			if (authenticationPage.contains(",NON_FEDERATED,"))
+	    	return super.login(user, password);
+			
+			authenticationPage = extractFederatedPage(authenticationPage);
+			
+			
+			LoginHandler h = getHandler(authenticationPage);
+			return h.login(user, password, c);
+			
+			
+		} catch (Exception e) {
+			throw new AuthenticationException(e);
+		}
+    }
+    
+
+	Map<String,String> formScriptMap = new HashMap<String, String>();
+    
+    public void setFormScripts(Map<String, String> formScript) {
+		this.formScriptMap = formScript;
+	}
+    
+    public Map<String, String> getFormScripts() {
+		return formScriptMap;
+	}
+
+    public LoginHandler getHandler(String page) throws Exception {
+    	if (page.equals("https://w3-03.sso.ibm.com/FIM/sps/IBM_W3_SAML20_EXTERNAL/saml20/logininitial?PartnerId=https://apps.na.collabserv.com/sps/sp/saml/v2_0&TARGET=https://apps.na.collabserv.com")) {
+    		return new W3LoginHandler();
+    	}
+    	throw new AuthenticationException(new IllegalArgumentException("No handler definition for " + page));
+    }
+    
+	private String extractFederatedPage(String authenticationPage) {
+		String up[] = authenticationPage.split(",");
+		authenticationPage = up[up.length-1];
+		return authenticationPage;
+	}
+    
     @Override
     public String getAuthType() {
      	return "form"; 
     }
+
 }
+
+

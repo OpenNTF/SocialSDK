@@ -89,7 +89,7 @@ public class FollowService extends BaseService{
 	 */
 	public EntityList<FollowedResource> getFollowedResources(String source, String type, Map<String, String> parameters)  throws FollowServiceException{
 		try {
-			String url = FollowUrls.FOLLOW_URL.format(this, FollowServiceType.getByName(source));
+			String url = FollowUrls.format(source, this);
 			return getResources(url, generateParams(parameters, source, type, null));
 		} catch (ClientServicesException e) {
 			throw new FollowServiceException(e, "Problem occured in getFollowedResources");
@@ -108,7 +108,7 @@ public class FollowService extends BaseService{
 	 */
 	public FollowedResource getFollowedResource(String source, String type, String resourceId)  throws FollowServiceException{
 		try {
-			String url = FollowUrls.FOLLOW_URL.format(this, FollowServiceType.getByName(source), Resource.get(resourceId));
+			String url = FollowUrls.format(source, this, Resource.get(resourceId));
 			return getResource(url, generateParams(null, source, type, resourceId));
 		} catch (ClientServicesException e) {
 			throw new FollowServiceException(e, "Problem occured in getFollowedResource");
@@ -136,7 +136,7 @@ public class FollowService extends BaseService{
 			headers.put("Content-Type", "application/atom+xml");
 			
 			String atomPayload = transformer.transform(resource.getFieldsMap());
-			String url = FollowUrls.FOLLOW_URL.format(this, FollowServiceType.getByName(source));
+			String url = FollowUrls.format(source, this);
 			result = createData(url, generateParams(null, source, type, null), headers, atomPayload);
 			return getFollowFeedHandler().createEntity(result);
 
@@ -158,7 +158,7 @@ public class FollowService extends BaseService{
 	 */
 	public boolean stopFollowing(String source,String type,String resourceId) throws FollowServiceException{
 		try {
-			String stopResourceUrl = FollowUrls.FOLLOW_URL.format(this, FollowServiceType.getByName(source), Resource.get(resourceId));
+			String stopResourceUrl = FollowUrls.format(source, this, Resource.get(resourceId));
 			deleteData(stopResourceUrl, generateParams(null, source, type, resourceId), resourceId);
 			return true;
 		} catch (Exception e) {

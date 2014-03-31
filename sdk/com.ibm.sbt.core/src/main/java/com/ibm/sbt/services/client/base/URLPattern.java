@@ -42,18 +42,21 @@ public class URLPattern {
 		return urlPattern;
 	}
 	
+	public String format(NamedUrlPart... args){
+		return format(Arrays.asList(args));
+	}
+
 	/**
 	 * Formats the Url pattern contained on this object with the provided NamedUrlParts
 	 * @param args
 	 * @return
 	 */
-	public String format(NamedUrlPart... args){
+	public String format(List<NamedUrlPart> namedParts){
 		Iterator<MutablePart> mutablePartIterator=mutableParts.iterator();
 		if (!mutablePartIterator.hasNext()) return urlPattern;
 		StringBuilder sb = new StringBuilder();
 		int urlPartIndex=0;
 
-		List<NamedUrlPart> namedParts = Arrays.asList(args);
 		MutablePart mutablePart = mutablePartIterator.next();
 		for (Iterator<String> partIterator=urlParts.iterator(); partIterator.hasNext(); ){
 			String part = partIterator.next();
@@ -84,9 +87,8 @@ public class URLPattern {
 	
 	protected String sanitizeSlashes(String url){
 		return url.replaceAll("//", "/");
-		
 	}
-	
+
 	private void compile(){
 		mutableParts = new ArrayList<MutablePart>();
 		int partIndex = 0;

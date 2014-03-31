@@ -136,7 +136,7 @@ public class BlogService extends BaseService {
 			parameters = new HashMap<String, String>();
 		}
 		try {
-			String blogsUrl = BlogUrls.ALL_BLOGS.format(getApiVersion(), BlogUrlParts.blogHandle.get(defaultHomepageHandle));
+			String blogsUrl = BlogUrls.ALL_BLOGS.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle));
 			blogs = (BlogList)getEntities(blogsUrl, parameters, new BlogsFeedHandler(this));
 		} catch (ClientServicesException e) {
 			throw new BlogServiceException(e);
@@ -172,7 +172,7 @@ public class BlogService extends BaseService {
 			parameters = new HashMap<String, String>();
 		}
 		try {
-			String myBlogsUrl = BlogUrls.MY_BLOGS.format(getApiVersion(), BlogUrlParts.blogHandle.get(defaultHomepageHandle));
+			String myBlogsUrl = BlogUrls.MY_BLOGS.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle));
 			blogs = (BlogList)getEntities(myBlogsUrl, parameters, new BlogsFeedHandler(this));
 		} catch (ClientServicesException e) {
 			throw new BlogServiceException(e);
@@ -207,7 +207,7 @@ public class BlogService extends BaseService {
 			parameters = new HashMap<String, String>();
 		}
 		try {
-			String featuredBlogsUrl = BlogUrls.FEATURED_BLOGS.format(getApiVersion(), BlogUrlParts.blogHandle.get(defaultHomepageHandle));
+			String featuredBlogsUrl = BlogUrls.FEATURED_BLOGS.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle));
 			blogs = (BlogList)getEntities(featuredBlogsUrl, parameters, new BlogsFeedHandler(this));
 		} catch (ClientServicesException e) {
 			throw new BlogServiceException(e);
@@ -241,7 +241,7 @@ public class BlogService extends BaseService {
 			parameters = new HashMap<String, String>();
 		}
 		try {
-			String latestPostsUrl = BlogUrls.ALL_BLOG_POSTS.format(getApiVersion(), BlogUrlParts.blogHandle.get(defaultHomepageHandle));
+			String latestPostsUrl = BlogUrls.ALL_BLOG_POSTS.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle));
 			blogPosts = (BlogPostList)getEntities(latestPostsUrl, parameters, new BlogPostsFeedHandler(this));
 		} catch (ClientServicesException e) {
 			throw new BlogServiceException(e);
@@ -276,7 +276,7 @@ public class BlogService extends BaseService {
 			parameters = new HashMap<String, String>();
 		}
 		try {
-			String featuredPostsUrl = BlogUrls.ALL_FEATURED_BLOG_POSTS.format(getApiVersion(), BlogUrlParts.blogHandle.get(defaultHomepageHandle));
+			String featuredPostsUrl = BlogUrls.ALL_FEATURED_BLOG_POSTS.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle));
 			blogPosts = (BlogPostList)getEntities(featuredPostsUrl, parameters, new BlogPostsFeedHandler(this));
 		} catch (ClientServicesException e) {
 			throw new BlogServiceException(e);
@@ -311,7 +311,7 @@ public class BlogService extends BaseService {
 			parameters = new HashMap<String, String>();
 		}
 		try {
-			String recommendedPostsUrl = BlogUrls.ALL_RECOMMENDED_BLOG_POSTS.format(getApiVersion(), BlogUrlParts.blogHandle.get(defaultHomepageHandle));
+			String recommendedPostsUrl = BlogUrls.ALL_RECOMMENDED_BLOG_POSTS.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle));
 			blogPosts = (BlogPostList)getEntities(recommendedPostsUrl, parameters, new BlogPostsFeedHandler(this));
 		} catch (ClientServicesException e) {
 			throw new BlogServiceException(e);
@@ -346,7 +346,7 @@ public class BlogService extends BaseService {
 			parameters = new HashMap<String, String>();
 		}
 		try {
-			String commentsUrl = BlogUrls.ALL_BLOG_COMMENTS.format(getApiVersion(), BlogUrlParts.blogHandle.get(defaultHomepageHandle));
+			String commentsUrl = BlogUrls.ALL_BLOG_COMMENTS.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle));
 			comments = (CommentList)getEntities(commentsUrl, parameters, new CommentsFeedHandler(this));
 		} catch (ClientServicesException e) {
 			throw new BlogServiceException(e);
@@ -365,7 +365,7 @@ public class BlogService extends BaseService {
 	public TagList getAllTags() throws BlogServiceException {
 		TagList tags;
 		try {
-			String allTagsUrl = BlogUrls.ALL_BLOG_TAGS.format(getApiVersion(), BlogUrlParts.blogHandle.get(defaultHomepageHandle));
+			String allTagsUrl = BlogUrls.ALL_BLOG_TAGS.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle));
 			tags = (TagList)getEntities(allTagsUrl, null, new TagFeedHandler(this));
 		} catch (ClientServicesException e) {
 			throw new BlogServiceException(e);
@@ -401,7 +401,7 @@ public class BlogService extends BaseService {
 			parameters = new HashMap<String, String>();
 		}
 		try {
-			String latestPostsUrl = BlogUrls.BLOG_POSTS.format(getApiVersion(), BlogUrlParts.blogHandle.get(defaultHomepageHandle));
+			String latestPostsUrl = BlogUrls.BLOG_POSTS.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle));
 			posts = (BlogPostList)getEntities(latestPostsUrl, parameters, new BlogPostsFeedHandler(this));
 		} catch (ClientServicesException e) {
 			throw new BlogServiceException(e);
@@ -437,7 +437,7 @@ public class BlogService extends BaseService {
 			parameters = new HashMap<String, String>();
 		}
 		try {
-			String latestCommentsUrl = BlogUrls.BLOG_COMMENTS.format(getApiVersion(), BlogUrlParts.blogHandle.get(defaultHomepageHandle));
+			String latestCommentsUrl = BlogUrls.BLOG_COMMENTS.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle));
 			comments = (CommentList)getEntities(latestCommentsUrl, parameters, new CommentsFeedHandler(this));
 		} catch (ClientServicesException e) {
 			throw new BlogServiceException(e);
@@ -463,7 +463,7 @@ public class BlogService extends BaseService {
 			parameters = new HashMap<String, String>();
 		}
 		try {
-			String url = BlogUrls.BLOG_ENTRYCOMMENTS.format(getApiVersion(), BlogUrlParts.blogHandle.get(defaultHomepageHandle));
+			String url = BlogUrls.BLOG_ENTRYCOMMENTS.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle));
 			comments = (CommentList)getEntities(url, parameters, new CommentsFeedHandler(this));
 		} catch (ClientServicesException e) {
 			throw new BlogServiceException(e);
@@ -483,7 +483,7 @@ public class BlogService extends BaseService {
 	public TagList getBlogTags(String blogHandle) throws BlogServiceException {
 		TagList tags;
 		try {
-			String allTagsUrl = BlogUrls.BLOG_TAGS.format(getApiVersion(), BlogUrlParts.blogHandle.get(defaultHomepageHandle));
+			String allTagsUrl = BlogUrls.BLOG_TAGS.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle));
 			tags = (TagList)getEntities(allTagsUrl, null, new TagFeedHandler(this));
 		} catch (ClientServicesException e) {
 			throw new BlogServiceException(e);
@@ -514,7 +514,7 @@ public class BlogService extends BaseService {
 			Map<String, String> headers = new HashMap<String, String>();
 			headers.put("Content-Type", "application/atom+xml");
 			
-			String createBlogUrl = BlogUrls.MY_BLOGS.format(getApiVersion(), BlogUrlParts.blogHandle.get(defaultHomepageHandle));
+			String createBlogUrl = BlogUrls.MY_BLOGS.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle));
 			result = createData(createBlogUrl, null, headers, payload);
 			blog = (Blog) new BlogsFeedHandler(this).createEntity(result);
 
@@ -535,7 +535,7 @@ public class BlogService extends BaseService {
 		if(StringUtil.isEmpty(blogUuid)){
 			throw new BlogServiceException(null, "null blogUuid");
 		}
-		String getBlogUrl = BlogUrls.GET_UPDATE_REMOVE_BLOG.format(getApiVersion(), BlogUrlParts.blogHandle.get(defaultHomepageHandle), BlogUrlParts.entryAnchor.get(blogUuid));
+		String getBlogUrl = BlogUrls.GET_UPDATE_REMOVE_BLOG.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle), BlogUrlParts.entryAnchor.get(blogUuid));
 		Blog blog;
 		try {
 			blog = (Blog)getEntity(getBlogUrl, null, new BlogsFeedHandler(this));
@@ -569,7 +569,7 @@ public class BlogService extends BaseService {
 			Map<String, String> headers = new HashMap<String, String>();
 			headers.put("Content-Type", "application/atom+xml");
 			
-			String updateBlogUrl = BlogUrls.GET_UPDATE_REMOVE_BLOG.format(getApiVersion(), BlogUrlParts.blogHandle.get(defaultHomepageHandle), BlogUrlParts.entryAnchor.get(blog.getUid()));
+			String updateBlogUrl = BlogUrls.GET_UPDATE_REMOVE_BLOG.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle), BlogUrlParts.entryAnchor.get(blog.getUid()));
 			// not using super.updateData, as unique id needs to be provided, along with passing params, since no params
 			//is passed, it'll throw NPE in BaseService updateData - check with Manish
 			getClientService().put(updateBlogUrl, null,headers, payload,ClientService.FORMAT_NULL);
@@ -594,7 +594,7 @@ public class BlogService extends BaseService {
 			throw new BlogServiceException(null, "null blog Uuid");
 		}
 		try {
-			String deleteBlogUrl = BlogUrls.GET_UPDATE_REMOVE_BLOG.format(getApiVersion(), BlogUrlParts.blogHandle.get(defaultHomepageHandle), BlogUrlParts.entryAnchor.get(blogUuid));
+			String deleteBlogUrl = BlogUrls.GET_UPDATE_REMOVE_BLOG.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle), BlogUrlParts.entryAnchor.get(blogUuid));
 			getClientService().delete(deleteBlogUrl);
 		} catch (Exception e) {
 			throw new BlogServiceException(e,"error deleting blog");
@@ -622,7 +622,7 @@ public class BlogService extends BaseService {
 		try {
 			Map<String, String> params = new HashMap<String, String>();
 			params.put("entryid", postUuid);
-			String getPostUrl = BlogUrls.BLOG_POST.format(getApiVersion(), BlogUrlParts.blogHandle.get(blogHandle));
+			String getPostUrl = BlogUrls.BLOG_POST.format(this, BlogUrlParts.blogHandle.get(blogHandle));
 			blogPost = (BlogPost)getEntity(getPostUrl, params, new BlogPostsFeedHandler(this));
 			
 		} catch (Exception e) {
@@ -648,7 +648,7 @@ public class BlogService extends BaseService {
 			throw new BlogServiceException(null,"postUuid is null");
 		}
 		try {
-			String recommendPostUrl = BlogUrls.RECOMMEND_POST.format(getApiVersion(), BlogUrlParts.blogHandle.get(blogHandle), BlogUrlParts.entryAnchor.get(postUuid));
+			String recommendPostUrl = BlogUrls.RECOMMEND_POST.format(this, BlogUrlParts.blogHandle.get(blogHandle), BlogUrlParts.entryAnchor.get(postUuid));
 			super.createData(recommendPostUrl, null, null);
 		} catch (Exception e) {
 			throw new BlogServiceException(e, "error recommending blog post");
@@ -673,7 +673,7 @@ public class BlogService extends BaseService {
 			throw new BlogServiceException(null,"postUuid is null");
 		}
 		try {
-			String recommendPostUrl = BlogUrls.RECOMMEND_POST.format(getApiVersion(), BlogUrlParts.blogHandle.get(blogHandle), BlogUrlParts.entryAnchor.get(postUuid));
+			String recommendPostUrl = BlogUrls.RECOMMEND_POST.format(this, BlogUrlParts.blogHandle.get(blogHandle), BlogUrlParts.entryAnchor.get(postUuid));
 			super.deleteData(recommendPostUrl, null, null);
 		} catch (Exception e) {
 			throw new BlogServiceException(e, "error unrecommending blog post");
@@ -703,7 +703,7 @@ public class BlogService extends BaseService {
 			
 			Map<String, String> headers = new HashMap<String, String>();
 			headers.put("Content-Type", "application/atom+xml");
-			String createPostUrl = BlogUrls.CREATE_BLOG_POST.format(getApiVersion(), BlogUrlParts.blogHandle.get(blogHandle));
+			String createPostUrl = BlogUrls.CREATE_BLOG_POST.format(this, BlogUrlParts.blogHandle.get(blogHandle));
 			result = createData(createPostUrl, null, headers, payload);
 			post = (BlogPost) new BlogPostsFeedHandler(this).createEntity(result);
 
@@ -739,7 +739,7 @@ public class BlogService extends BaseService {
 			Map<String, String> headers = new HashMap<String, String>();
 			headers.put("Content-Type", "application/atom+xml");
 			
-			String updatePostUrl = BlogUrls.UPDATE_REMOVE_POST.format(getApiVersion(), BlogUrlParts.blogHandle.get(blogHandle), BlogUrlParts.entryAnchor.get(post.getUid()));
+			String updatePostUrl = BlogUrls.UPDATE_REMOVE_POST.format(this, BlogUrlParts.blogHandle.get(blogHandle), BlogUrlParts.entryAnchor.get(post.getUid()));
 			Response result = getClientService().put(updatePostUrl, null,headers, payload,ClientService.FORMAT_NULL);
 			post = (BlogPost) new BlogPostsFeedHandler(this).createEntity(result);
 
@@ -766,7 +766,7 @@ public class BlogService extends BaseService {
 			throw new BlogServiceException(null, "null post id");
 		}
 		try {
-			String deletePostUrl = BlogUrls.UPDATE_REMOVE_POST.format(getApiVersion(), BlogUrlParts.blogHandle.get(blogHandle), BlogUrlParts.entryAnchor.get(postUuid));
+			String deletePostUrl = BlogUrls.UPDATE_REMOVE_POST.format(this, BlogUrlParts.blogHandle.get(blogHandle), BlogUrlParts.entryAnchor.get(postUuid));
 			getClientService().delete(deletePostUrl);
 		} catch (Exception e) {
 			throw new BlogServiceException(e,"error deleting post");
@@ -792,7 +792,7 @@ public class BlogService extends BaseService {
 		}
 		Comment comment;
 		try {
-			String getCommentUrl = BlogUrls.GET_REMOVE_COMMENT.format(getApiVersion(), BlogUrlParts.blogHandle.get(blogHandle), BlogUrlParts.entryAnchor.get(commentUuid));
+			String getCommentUrl = BlogUrls.GET_REMOVE_COMMENT.format(this, BlogUrlParts.blogHandle.get(blogHandle), BlogUrlParts.entryAnchor.get(commentUuid));
 			comment = (Comment)getEntity(getCommentUrl, null, new CommentsFeedHandler(this));
 		} catch (Exception e) {
 			throw new BlogServiceException(e, "error getting blog comment");
@@ -823,7 +823,7 @@ public class BlogService extends BaseService {
 			
 			Map<String, String> headers = new HashMap<String, String>();
 			headers.put("Content-Type", "application/atom+xml");
-			String createCommentUrl = BlogUrls.CREATE_COMMENT.format(getApiVersion(), BlogUrlParts.blogHandle.get(blogHandle));
+			String createCommentUrl = BlogUrls.CREATE_COMMENT.format(this, BlogUrlParts.blogHandle.get(blogHandle));
 			
 			result = createData(createCommentUrl, null, headers, payload);
 			comment = (Comment) new CommentsFeedHandler(this).createEntity(result);
@@ -852,7 +852,7 @@ public class BlogService extends BaseService {
 			throw new BlogServiceException(null,"commentUuid is null");
 		}
 		try {
-			String getCommentUrl = BlogUrls.GET_REMOVE_COMMENT.format(getApiVersion(), BlogUrlParts.blogHandle.get(blogHandle), BlogUrlParts.entryAnchor.get(commentUuid));
+			String getCommentUrl = BlogUrls.GET_REMOVE_COMMENT.format(this, BlogUrlParts.blogHandle.get(blogHandle), BlogUrlParts.entryAnchor.get(commentUuid));
 			getClientService().delete(getCommentUrl);
 		} catch (Exception e) {
 			throw new BlogServiceException(e, "error deleting blog comment");

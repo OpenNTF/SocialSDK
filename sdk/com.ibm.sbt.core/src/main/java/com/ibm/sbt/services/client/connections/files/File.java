@@ -141,7 +141,7 @@ public class File extends AtomEntity {
 		String libId = this.getLibraryId();
 		HttpServletRequest req = Context.get().getHttpRequest();
 		String sbtServiceUrl = UrlUtil.getContextUrl(req);
-		String partUrl = FileUrls.DOWNLOADURL.format(ConnectionsConstants.v4_0, FileUrlParts.proxyPath.get(proxypath), 
+		String partUrl = FileUrls.DOWNLOADURL.format(getService(), FileUrlParts.proxyPath.get(proxypath), 
 				FileUrlParts.proxyName.get(ConnectionsFileProxyService.FILEPROXYNAME), FileUrlParts.fileId.get(fileId), FileUrlParts.libraryId.get(libId));
 		String url =  sbtServiceUrl + FileConstants.SEPARATOR + partUrl;
 		return url;

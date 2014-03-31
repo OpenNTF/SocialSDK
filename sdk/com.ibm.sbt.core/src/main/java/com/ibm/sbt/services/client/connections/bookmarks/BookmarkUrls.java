@@ -15,6 +15,7 @@
  */
 package com.ibm.sbt.services.client.connections.bookmarks;
 
+import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.NamedUrlPart;
 import com.ibm.sbt.services.client.base.URLBuilder;
@@ -41,8 +42,8 @@ public enum BookmarkUrls {
 		builder = new URLBuilder(urlVersions);
 	}
 	
-	public String format(Version version, NamedUrlPart... args) {
-		return builder.format(version, args);
+	public String format(BaseService service, NamedUrlPart... args) {
+		return builder.format(service, args);
 	}
 
 	public String getPattern(Version version){

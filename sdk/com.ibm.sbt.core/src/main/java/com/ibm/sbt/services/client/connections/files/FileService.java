@@ -143,7 +143,7 @@ public class FileService extends BaseService {
         	String accessType = AccessType.AUTHENTICATED.getText();
         	action = Categories.APPROVAL.get();
         	String content = ModerationContentTypes.COMMENT.get();
-            requestUri = FileUrls.MODERATION.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.action.get(action),  FileUrlParts.contentType.get(content));
+            requestUri = FileUrls.MODERATION.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.action.get(action),  FileUrlParts.contentType.get(content));
         }
         Object payload = this.constructPayloadForModeration(commentId, action, actionReason, "comment");
         Map<String, String> headers = new HashMap<String, String>();
@@ -170,7 +170,7 @@ public class FileService extends BaseService {
         	String accessType = AccessType.AUTHENTICATED.getText();
         	action = Categories.APPROVAL.get();
         	String content = ModerationContentTypes.DOCUMENTS.get();
-            requestUri = FileUrls.MODERATION.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.action.get(action),  FileUrlParts.contentType.get(content));
+            requestUri = FileUrls.MODERATION.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.action.get(action),  FileUrlParts.contentType.get(content));
         }
         Object payload = this.constructPayloadForModeration(fileId, action, actionReason, "file");
         Map<String, String> headers = new HashMap<String, String>();
@@ -198,7 +198,7 @@ public class FileService extends BaseService {
         	String accessType = AccessType.AUTHENTICATED.getText();
         	action = Categories.REVIEW.get();
         	String content = ModerationContentTypes.COMMENT.get();
-            requestUri = FileUrls.MODERATION.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.action.get(action),  FileUrlParts.contentType.get(content));
+            requestUri = FileUrls.MODERATION.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.action.get(action),  FileUrlParts.contentType.get(content));
         }
         Object payload = this.constructPayloadForModeration(commentId, action, actionReason, "comment");
         Map<String, String> headers = new HashMap<String, String>();
@@ -225,7 +225,7 @@ public class FileService extends BaseService {
         	String accessType = AccessType.AUTHENTICATED.getText();
         	action = Categories.REVIEW.get();
         	String content = ModerationContentTypes.DOCUMENTS.get();
-            requestUri = FileUrls.MODERATION.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.action.get(action),  FileUrlParts.contentType.get(content));
+            requestUri = FileUrls.MODERATION.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.action.get(action),  FileUrlParts.contentType.get(content));
         }
         Object payload = this.constructPayloadForModeration(fileId, action, actionReason, "file");
         Map<String, String> headers = new HashMap<String, String>();
@@ -275,9 +275,9 @@ public class FileService extends BaseService {
         String accessType = AccessType.AUTHENTICATED.getText();
         String requestUri;
         if (StringUtil.isEmpty(userId)){
-        	requestUri = FileUrls.POST_COMMENT_TO_FILE_ON_MY_LIBRARY.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
+        	requestUri = FileUrls.POST_COMMENT_TO_FILE_ON_MY_LIBRARY.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
         } else {
-        	requestUri = FileUrls.POST_COMMENT_TO_FILE.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(fileId), FileUrlParts.fileId.get(fileId));
+        	requestUri = FileUrls.POST_COMMENT_TO_FILE.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(fileId), FileUrlParts.fileId.get(fileId));
         }
         Document payload = this.constructPayloadForComments(comment);
         try {
@@ -330,7 +330,7 @@ public class FileService extends BaseService {
         }
 
         String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.COMMUNITY_FILE_COMMENT.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.communityId.get(communityId), FileUrlParts.fileId.get(fileId));
+        String requestUri = FileUrls.COMMUNITY_FILE_COMMENT.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.communityId.get(communityId), FileUrlParts.fileId.get(fileId));
         Document payload = this.constructPayloadForComments(comment);
         try {
             Response result = (Response) super.createData(requestUri, null, new ClientService.ContentXml(payload,"application/atom+xml"));
@@ -362,7 +362,7 @@ public class FileService extends BaseService {
         	throw new FileServiceException(null, Messages.Invalid_CommunityId);
         }
 		String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUrl = FileUrls.GET_COMMUNITY_FILES.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.communityId.get(communityId));
+        String requestUrl = FileUrls.GET_COMMUNITY_FILES.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.communityId.get(communityId));
 		params = (null == params)?new HashMap<String, String>():params;
 		try {
 			return (FileList) super.getEntities(requestUrl, params, new FileFeedHandler(this)); 
@@ -400,7 +400,7 @@ public class FileService extends BaseService {
         	throw new FileServiceException(null, Messages.Invalid_CommunityId);
         }
 		String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUrl = FileUrls.GET_COMMUNITY_FILE.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.communityId.get(communityId), FileUrlParts.fileId.get(fileId));
+        String requestUrl = FileUrls.GET_COMMUNITY_FILE.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.communityId.get(communityId), FileUrlParts.fileId.get(fileId));
 		params = (null == params)?new HashMap<String, String>():params;
 		try {
 			return (File) super.getEntity(requestUrl, params, new FileFeedHandler(this)); 
@@ -433,7 +433,7 @@ public class FileService extends BaseService {
         	throw new FileServiceException(null, Messages.Invalid_CommunityId);
         }
 		String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUrl = FileUrls.GET_COMMUNITY_COLLECTION.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.communityId.get(communityId));
+        String requestUrl = FileUrls.GET_COMMUNITY_COLLECTION.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.communityId.get(communityId));
 		params = (null == params)?new HashMap<String, String>():params;
 		try {
 			return (FileList) super.getEntities(requestUrl, params, new FileFeedHandler(this)); 
@@ -522,7 +522,7 @@ public class FileService extends BaseService {
 		String category = !isPublic ? Categories.MYUSERLIBRARY.get() : null;
 		String libraryFilter = (libraryId != null)?"library":"";
 
-        String requestUrl = FileUrls.DOWNLOAD_FILE.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.category.get(category), FileUrlParts.fileId.get(file.getFileId()), 
+        String requestUrl = FileUrls.DOWNLOAD_FILE.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.category.get(category), FileUrlParts.fileId.get(file.getFileId()), 
         		FileUrlParts.libraryFilter.get(libraryFilter), FileUrlParts.libraryId.get(libraryId));
 
 		Map<String, String> headers = new HashMap<String, String>();
@@ -613,7 +613,7 @@ public class FileService extends BaseService {
             throw new FileServiceException(null, Messages.Invalid_CommunityLibraryId);
         }
         String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.COMMUNITY_FILE_METADATA.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.communityId.get(communityLibraryId), FileUrlParts.fileId.get(fileEntry.getFileId()));
+        String requestUri = FileUrls.COMMUNITY_FILE_METADATA.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.communityId.get(communityLibraryId), FileUrlParts.fileId.get(fileEntry.getFileId()));
         Document updateFilePayload = null;
         try {
         	updateFilePayload = this.constructPayload(fileEntry.getFileId(), fileEntry.getFieldsMap());
@@ -648,7 +648,7 @@ public class FileService extends BaseService {
         }
         String accessType = AccessType.AUTHENTICATED.getText();
 		params = (null == params)?new HashMap<String, String>():params;
-        String requestUri = FileUrls.FILES_FOLDER.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.folderId.get(folderId));
+        String requestUri = FileUrls.FILES_FOLDER.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.folderId.get(folderId));
         Map<String, String> headers = new HashMap<String, String>();
         headers.put(Headers.ContentType, Headers.ATOM);
         Object payload = this.constructPayloadForMultipleEntries(listOfFileIds,
@@ -735,9 +735,9 @@ public class FileService extends BaseService {
 
         String requestUri;
         if (StringUtil.isEmpty(userId)) {
-        	requestUri = FileUrls.ADD_FILE_FROM_MY_LIBRARY_TO_FOLDER.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
+        	requestUri = FileUrls.ADD_FILE_FROM_MY_LIBRARY_TO_FOLDER.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
         } else {
-        	requestUri = FileUrls.ADD_FILE_TO_FOLDER.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId), FileUrlParts.fileId.get(fileId));
+        	requestUri = FileUrls.ADD_FILE_TO_FOLDER.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId), FileUrlParts.fileId.get(fileId));
         }
 
         Map<String, String> headers = new HashMap<String, String>();
@@ -799,9 +799,9 @@ public class FileService extends BaseService {
         String accessType = AccessType.AUTHENTICATED.getText();
         String requestUri;
         if (StringUtil.isEmpty(userId)){
-        	requestUri = FileUrls.POST_COMMENT_TO_FILE_ON_MY_LIBRARY.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
+        	requestUri = FileUrls.POST_COMMENT_TO_FILE_ON_MY_LIBRARY.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
         } else {
-        	requestUri = FileUrls.POST_COMMENT_TO_FILE.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId), FileUrlParts.fileId.get(fileId));
+        	requestUri = FileUrls.POST_COMMENT_TO_FILE.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId), FileUrlParts.fileId.get(fileId));
         }
        
         Document payload = this.constructPayloadForComments(comment);
@@ -842,7 +842,7 @@ public class FileService extends BaseService {
             throws FileServiceException, TransformerException {
         String accessType = AccessType.AUTHENTICATED.getText();
 
-        String requestUri = FileUrls.CREATE_FOLDER.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType));
+        String requestUri = FileUrls.CREATE_FOLDER.format(this, FileUrlParts.accessType.get(accessType));
         Document payload = this.constructPayloadFolder(name, description, shareWith, "create");
 
         try {
@@ -869,7 +869,7 @@ public class FileService extends BaseService {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
         String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.DELETE_FILE.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
+        String requestUri = FileUrls.DELETE_FILE.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
 
         try {
             super.deleteData(requestUri, null, null);
@@ -906,9 +906,9 @@ public class FileService extends BaseService {
         String requestUri;
         String accessType = AccessType.AUTHENTICATED.getText();
         if (StringUtil.isEmpty(userId)){
-        	requestUri = FileUrls.EMPTY_MY_RECYCLE_BIN.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType));
+        	requestUri = FileUrls.EMPTY_MY_RECYCLE_BIN.format(this, FileUrlParts.accessType.get(accessType));
         } else {
-        	requestUri = FileUrls.EMPTY_RECYCLE_BIN.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId));
+        	requestUri = FileUrls.EMPTY_RECYCLE_BIN.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId));
         }
         try {
             super.deleteData(requestUri, null, null);
@@ -943,7 +943,7 @@ public class FileService extends BaseService {
             throw new FileServiceException(null, Messages.InvalidArgument_VersionLabel);
         }
         String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.DELETE_ALL_VERSIONS_OF_FILE.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
+        String requestUri = FileUrls.DELETE_ALL_VERSIONS_OF_FILE.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
 		params = (null == params)?new HashMap<String, String>():params;
         params.put(FileRequestParams.CATEGORY.getFileRequestParams(), "version");
         params.put(FileRequestParams.DELETEFROM.getFileRequestParams(), versionLabel);
@@ -989,9 +989,9 @@ public class FileService extends BaseService {
 
         String requestUri;
         if (StringUtil.isEmpty(userId)){
-        	requestUri = FileUrls.DELETE_COMMENT_FROM_MY_LIBRARY.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId), FileUrlParts.commentId.get(commentId));
+        	requestUri = FileUrls.DELETE_COMMENT_FROM_MY_LIBRARY.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId), FileUrlParts.commentId.get(commentId));
         } else {
-        	requestUri = FileUrls.DELETE_COMMENT.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId), FileUrlParts.fileId.get(fileId), FileUrlParts.commentId.get(commentId));
+        	requestUri = FileUrls.DELETE_COMMENT.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId), FileUrlParts.fileId.get(fileId), FileUrlParts.commentId.get(commentId));
         }
 
         try {
@@ -1043,9 +1043,9 @@ public class FileService extends BaseService {
         String accessType = AccessType.AUTHENTICATED.getText();
         String requestUri;
         if (StringUtil.isEmpty(userId)){
-        	requestUri = FileUrls.DELETE_FILE_FROM_MY_RECYCLE_BIN.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
+        	requestUri = FileUrls.DELETE_FILE_FROM_MY_RECYCLE_BIN.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
         } else {
-        	requestUri = FileUrls.DELETE_FILE_FROM_RECYCLE_BIN.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId), FileUrlParts.fileId.get(fileId));
+        	requestUri = FileUrls.DELETE_FILE_FROM_RECYCLE_BIN.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId), FileUrlParts.fileId.get(fileId));
         }
 
         try {
@@ -1090,7 +1090,7 @@ public class FileService extends BaseService {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
         String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.DELETE_FILE_SHARE.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType));
+        String requestUri = FileUrls.DELETE_FILE_SHARE.format(this, FileUrlParts.accessType.get(accessType));
 
         Map<String, String> params = new HashMap<String, String>();
         params.put(FileRequestParams.SHAREDWHAT.getFileRequestParams(), fileId);
@@ -1145,7 +1145,7 @@ public class FileService extends BaseService {
      */
     public void deleteFolder(String folderId) throws FileServiceException {
         String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.DELETE_FOLDER.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.folderId.get(folderId));
+        String requestUri = FileUrls.DELETE_FOLDER.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.folderId.get(folderId));
         try {
             super.deleteData(requestUri, null, null);
         } catch (Exception e) {
@@ -1175,7 +1175,7 @@ public class FileService extends BaseService {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
         String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.DELETE_FOLDER.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType));
+        String requestUri = FileUrls.DELETE_FOLDER.format(this, FileUrlParts.accessType.get(accessType));
         Map<String, String> headers = new HashMap<String, String>();
         headers.put(Headers.ContentType, Headers.ATOM);
 
@@ -1209,7 +1209,7 @@ public class FileService extends BaseService {
             throw new FileServiceException(null, Messages.Invalid_UserId);
         }
         String accessType = AccessType.PUBLIC.getText();
-        String requestUri = FileUrls.GET_ALL_USER_FILES.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId));
+        String requestUri = FileUrls.GET_ALL_USER_FILES.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId));
 
         FileList fileEntries = null;
         try {
@@ -1223,7 +1223,7 @@ public class FileService extends BaseService {
     public CommentList getCommentsAwaitingApproval(Map<String, String> params)
             throws FileServiceException {
         String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.GET_COMMENTS_AWAITING_APPROVAL.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType));
+        String requestUri = FileUrls.GET_COMMENTS_AWAITING_APPROVAL.format(this, FileUrlParts.accessType.get(accessType));
 
         CommentList commentEntries = null;
         try {
@@ -1285,7 +1285,7 @@ public class FileService extends BaseService {
             SubFilters subFilters = new SubFilters();
             subFilters.setFileId(fileId);
             String accessType = AccessType.AUTHENTICATED.getText();
-            String requestUri = FileUrls.GET_FILE_IN_MY_LIBRARY.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
+            String requestUri = FileUrls.GET_FILE_IN_MY_LIBRARY.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
             try {
                 return (File) super.getEntity(requestUri, parameters, new FileFeedHandler(this));
             } catch (Exception e) {
@@ -1314,7 +1314,7 @@ public class FileService extends BaseService {
             throw new FileServiceException(null, Messages.Invalid_LibraryId);
         }
         String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.GET_FILE.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.libraryId.get(libraryId), FileUrlParts.fileId.get(fileId));
+        String requestUri = FileUrls.GET_FILE.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.libraryId.get(libraryId), FileUrlParts.fileId.get(fileId));
         try {
            return (File) super.getEntity(requestUri, parameters, new FileFeedHandler(this));
         } catch (Exception e) {
@@ -1339,7 +1339,7 @@ public class FileService extends BaseService {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
         String accessType = AccessType.PUBLIC.getText();
-        String requestUri = FileUrls.GET_FILE.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.libraryId.get(libraryId), FileUrlParts.fileId.get(fileId));
+        String requestUri = FileUrls.GET_FILE.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.libraryId.get(libraryId), FileUrlParts.fileId.get(fileId));
 
         try {
            return (File) super.getEntity(requestUri, parameters, new FileFeedHandler(this));
@@ -1383,7 +1383,7 @@ public class FileService extends BaseService {
         }
         
         String accessType = anonymousAccess?AccessType.PUBLIC.getText():AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.SINGLE_COMMENT_USER_FILE.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId), FileUrlParts.fileId.get(fileId), FileUrlParts.commentId.get(commentId));
+        String requestUri = FileUrls.SINGLE_COMMENT_USER_FILE.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId), FileUrlParts.fileId.get(fileId), FileUrlParts.commentId.get(commentId));
         return getFileComments(requestUri, parameters, headers);
     }
     
@@ -1404,7 +1404,7 @@ public class FileService extends BaseService {
         }
         
         String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.SINGLE_COMMENT_MY_FILE.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId), FileUrlParts.commentId.get(commentId));
+        String requestUri = FileUrls.SINGLE_COMMENT_MY_FILE.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId), FileUrlParts.commentId.get(commentId));
         return getFileComments(requestUri, parameters, headers);
     }
     /**
@@ -1424,7 +1424,7 @@ public class FileService extends BaseService {
             throw new FileServiceException(null, Messages.Invalid_UserId);
         }
         String accessType = anonymousAccess?AccessType.PUBLIC.getText():AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.GET_COMMENTS_FEED_FROM_MY_FILE.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId), FileUrlParts.fileId.get(fileId));
+        String requestUri = FileUrls.GET_COMMENTS_FEED_FROM_MY_FILE.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId), FileUrlParts.fileId.get(fileId));
         
         return getFileComments(requestUri, parameters,null);
     }
@@ -1440,7 +1440,7 @@ public class FileService extends BaseService {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
         String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.GET_COMMENTS_FEED_FROM_MY_FILE.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
+        String requestUri = FileUrls.GET_COMMENTS_FEED_FROM_MY_FILE.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
         return getFileComments(requestUri, parameters,null);
     }
     
@@ -1494,7 +1494,7 @@ public class FileService extends BaseService {
             throw new FileServiceException(null, Messages.Invalid_CommunityId);
         }
         String accessType =AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.COMMUNITY_FILE_COMMENT.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.communityId.get(communityId), FileUrlParts.fileId.get(fileId));
+        String requestUri = FileUrls.COMMUNITY_FILE_COMMENT.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.communityId.get(communityId), FileUrlParts.fileId.get(fileId));
         try {
         	return (CommentList) getEntities(requestUri, parameters, null, new CommentFeedHandler(this));
         } catch (Exception e) {
@@ -1547,9 +1547,9 @@ public class FileService extends BaseService {
         String accessType = AccessType.AUTHENTICATED.getText();
         String requestUri;
         if (StringUtil.isEmpty(userId)){
-        	requestUri = FileUrls.GET_FILE_FROM_MY_RECYCLE_BIN.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
+        	requestUri = FileUrls.GET_FILE_FROM_MY_RECYCLE_BIN.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
         } else {
-        	requestUri = FileUrls.GET_FILE_FROM_RECYCLE_BIN.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId), FileUrlParts.fileId.get(fileId));
+        	requestUri = FileUrls.GET_FILE_FROM_RECYCLE_BIN.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId), FileUrlParts.fileId.get(fileId));
         }
         try {
             return (File) super.getEntity(requestUri, params, new FileFeedHandler(this));
@@ -1568,7 +1568,7 @@ public class FileService extends BaseService {
      */
     public FileList getFilesAwaitingApproval(Map<String, String> params) throws FileServiceException {
         String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.GET_FILES_AWAITING_APPROVAL.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType));
+        String requestUri = FileUrls.GET_FILES_AWAITING_APPROVAL.format(this, FileUrlParts.accessType.get(accessType));
 
         FileList fileEntries = null;
         try {
@@ -1607,7 +1607,7 @@ public class FileService extends BaseService {
      */
     public FileList getFileShares(Map<String, String> params) throws FileServiceException {
         String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.GET_FILE_SHARES.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType));
+        String requestUri = FileUrls.GET_FILE_SHARES.format(this, FileUrlParts.accessType.get(accessType));
 
         FileList fileEntries = null;
         try {
@@ -1640,7 +1640,7 @@ public class FileService extends BaseService {
             throw new FileServiceException(null, Messages.Invalid_CollectionId);
         }
         String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.FILES_FOLDER.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.folderId.get(folderId));
+        String requestUri = FileUrls.FILES_FOLDER.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.folderId.get(folderId));
         FileList fileEntries = null;
         try {
             fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler(this));
@@ -1676,7 +1676,7 @@ public class FileService extends BaseService {
 
         //String requestUri = FileUrls.GET_FILES_IN_MY_RECYCLE_BIN.format(getApiVersion(), getAuth(), accessType);
 
-        String requestUri = FileUrls.GET_FILES_IN_MY_RECYCLE_BIN.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType));
+        String requestUri = FileUrls.GET_FILES_IN_MY_RECYCLE_BIN.format(this, FileUrlParts.accessType.get(accessType));
         
         FileList fileEntries = null;
         try {
@@ -1698,7 +1698,7 @@ public class FileService extends BaseService {
      */
     protected Document getFilesModerationServiceDocument() throws FileServiceException {
         String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.MODERATION_SERVICE_DOCUMENT.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType));
+        String requestUri = FileUrls.MODERATION_SERVICE_DOCUMENT.format(this, FileUrlParts.accessType.get(accessType));
         Response result = null;
         try {
             result = super.retrieveData(requestUri, null);
@@ -1722,7 +1722,7 @@ public class FileService extends BaseService {
      */
     public Document getFilesServiceDocument() throws FileServiceException {
         String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.SERVICE_DOCUMENT.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType));
+        String requestUri = FileUrls.SERVICE_DOCUMENT.format(this, FileUrlParts.accessType.get(accessType));
         Object result = null;
         try {
             result = this.getClientService().get(requestUri, null, ClientService.FORMAT_XML);
@@ -1756,7 +1756,7 @@ public class FileService extends BaseService {
 
     public FileList getFilesSharedByMe(Map<String, String> params) throws FileServiceException {
         String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.GET_FILES_SHARED_ME.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType));
+        String requestUri = FileUrls.GET_FILES_SHARED_ME.format(this, FileUrlParts.accessType.get(accessType));
 
         FileList fileEntries = null;
         if (null == params) {
@@ -1798,7 +1798,7 @@ public class FileService extends BaseService {
 
     public FileList getFilesSharedWithMe(Map<String, String> params) throws FileServiceException {
         String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.GET_FILES_SHARED_ME.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType));
+        String requestUri = FileUrls.GET_FILES_SHARED_ME.format(this, FileUrlParts.accessType.get(accessType));
         if (null == params) {
             params = new HashMap<String, String>();
         }
@@ -1889,7 +1889,7 @@ public class FileService extends BaseService {
             return this.getFile(fileId, params, true);
         }
         String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.GET_FILE_WITH_GIVEN_VERSION.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId), FileUrlParts.versionId.get(versionId));
+        String requestUri = FileUrls.GET_FILE_WITH_GIVEN_VERSION.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId), FileUrlParts.versionId.get(versionId));
 
         File file;
         try {
@@ -1919,7 +1919,7 @@ public class FileService extends BaseService {
     // /files/basic/api/review/comments
     public CommentList getFlaggedComments(Map<String, String> params) throws FileServiceException {
         String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.GET_FLAGGED_COMMENTS.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType));
+        String requestUri = FileUrls.GET_FLAGGED_COMMENTS.format(this, FileUrlParts.accessType.get(accessType));
 
         CommentList commentEntries = null;
         try {
@@ -1953,7 +1953,7 @@ public class FileService extends BaseService {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
         String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.GET_FLAGGED_FILE_HISTORY.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
+        String requestUri = FileUrls.GET_FLAGGED_FILE_HISTORY.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
         try {
             return (Document) super.retrieveData(requestUri, params).getData();
         } catch (Exception e) {
@@ -1965,7 +1965,7 @@ public class FileService extends BaseService {
     // /files/basic/api/review/documents
     public FileList getFlaggedFiles(Map<String, String> params) throws FileServiceException {
         String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.GET_FLAGGED_FILES.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType));
+        String requestUri = FileUrls.GET_FLAGGED_FILES.format(this, FileUrlParts.accessType.get(accessType));
 
         FileList fileEntries = null;
         try {
@@ -1989,7 +1989,7 @@ public class FileService extends BaseService {
      */
     public File getFolder(String folderId) throws FileServiceException {
         String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.GET_FOLDER.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.folderId.get(folderId));
+        String requestUri = FileUrls.GET_FOLDER.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.folderId.get(folderId));
         File fileEntry;
         try {
             fileEntry = (File) getEntity(requestUri, null, new FileFeedHandler(this));
@@ -2016,7 +2016,7 @@ public class FileService extends BaseService {
     public FileList getFoldersWithRecentlyAddedFiles(Map<String, String> params)
             throws FileServiceException {
         String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.GET_FOLDERS_WITH_RECENT_FILES.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType));
+        String requestUri = FileUrls.GET_FOLDERS_WITH_RECENT_FILES.format(this, FileUrlParts.accessType.get(accessType));
 
         FileList fileEntries = null;
         try {
@@ -2056,7 +2056,7 @@ public class FileService extends BaseService {
 
     public FileList getMyFiles(Map<String, String> params) throws FileServiceException {
         String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.GET_MY_FILES.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType));
+        String requestUri = FileUrls.GET_MY_FILES.format(this, FileUrlParts.accessType.get(accessType));
         FileList fileEntries = null;
         try {
             fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler(this));
@@ -2082,7 +2082,7 @@ public class FileService extends BaseService {
      */
     public FileList getMyFolders(Map<String, String> params) throws FileServiceException {
         String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.GET_MY_FOLDERS.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType));
+        String requestUri = FileUrls.GET_MY_FOLDERS.format(this, FileUrlParts.accessType.get(accessType));
         FileList fileEntries = null;
         try {
             fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler(this));
@@ -2104,7 +2104,7 @@ public class FileService extends BaseService {
      */
     public String getNonce() throws FileServiceException {
         String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.GET_NONCE.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType));
+        String requestUri = FileUrls.GET_NONCE.format(this, FileUrlParts.accessType.get(accessType));
         Object result = null;
         try {
             result = this.getClientService().get(requestUri, null, ClientService.FORMAT_TEXT);
@@ -2132,7 +2132,7 @@ public class FileService extends BaseService {
      */
     public FileList getPinnedFiles(Map<String, String> params) throws FileServiceException {
         String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.GET_PINNED_FILES.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType));
+        String requestUri = FileUrls.GET_PINNED_FILES.format(this, FileUrlParts.accessType.get(accessType));
         FileList fileEntries = null;
         try {
             fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler(this));
@@ -2158,7 +2158,7 @@ public class FileService extends BaseService {
      */
     public FileList getPinnedFolders(Map<String, String> params) throws FileServiceException {
         String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.GET_PINNED_FOLDERS.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType));
+        String requestUri = FileUrls.GET_PINNED_FOLDERS.format(this, FileUrlParts.accessType.get(accessType));
         FileList fileEntries = null;
         try {
             fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler(this));
@@ -2185,7 +2185,7 @@ public class FileService extends BaseService {
      */
     public FileList getPublicFiles(Map<String, String> params) throws FileServiceException {
         String accessType = AccessType.PUBLIC.getText();
-        String requestUri = FileUrls.GET_PINNED_FOLDERS.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType));
+        String requestUri = FileUrls.GET_PINNED_FOLDERS.format(this, FileUrlParts.accessType.get(accessType));
 		params = (null == params)?new HashMap<String, String>():params;
         params.put(FileRequestParams.VISIBILITY.getFileRequestParams(), "public");
 
@@ -2216,7 +2216,7 @@ public class FileService extends BaseService {
 
     public FileList getPublicFolders(Map<String, String> params) throws FileServiceException {
         String accessType = AccessType.PUBLIC.getText();
-        String requestUri = FileUrls.GET_PUBLIC_FOLDERS.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType));
+        String requestUri = FileUrls.GET_PUBLIC_FOLDERS.format(this, FileUrlParts.accessType.get(accessType));
         FileList fileEntries = null;
         try {
             fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler(this));
@@ -2241,7 +2241,7 @@ public class FileService extends BaseService {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
         String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.LOCK_FILE.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
+        String requestUri = FileUrls.LOCK_FILE.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
         Map<String, String> params = new HashMap<String, String>();
         params.put(FileRequestParams.LOCK.getFileRequestParams(), FileConstants.LockType_HARD);
         try {
@@ -2265,7 +2265,7 @@ public class FileService extends BaseService {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
         String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.PIN_FILE.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
+        String requestUri = FileUrls.PIN_FILE.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
         Map<String, String> params = new HashMap<String, String>();
         params.put(FileRequestParams.ITEMID.getFileRequestParams(), fileId);
         try {
@@ -2300,7 +2300,7 @@ public class FileService extends BaseService {
      */
     public void pinFolder(String folderId, Map<String, String> params) throws FileServiceException {
         String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.PIN_FOLDER.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.folderId.get(folderId));
+        String requestUri = FileUrls.PIN_FOLDER.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.folderId.get(folderId));
 		params = (null == params)?new HashMap<String, String>():params;
         params.put(FileRequestParams.ITEMID.getFileRequestParams(), folderId);
         try {
@@ -2329,7 +2329,7 @@ public class FileService extends BaseService {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
         String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.REMOVE_FILE_FROM_FOLDER.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.folderId.get(folderId));
+        String requestUri = FileUrls.REMOVE_FILE_FROM_FOLDER.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.folderId.get(folderId));
         Map<String, String> params = new HashMap<String, String>();
         params.put(FileRequestParams.ITEMID.getFileRequestParams(), fileId);
         try {
@@ -2373,9 +2373,9 @@ public class FileService extends BaseService {
         String accessType = AccessType.AUTHENTICATED.getText();
         String requestUri;
         if (StringUtil.isEmpty(userId)){
-        	requestUri = FileUrls.RESTORE_FILE_FROM_MY_RECYCLE_BIN.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
+        	requestUri = FileUrls.RESTORE_FILE_FROM_MY_RECYCLE_BIN.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
         } else {
-        	requestUri = FileUrls.RESTORE_FILE_FROM_RECYCLE_BIN.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId), FileUrlParts.fileId.get(fileId));
+        	requestUri = FileUrls.RESTORE_FILE_FROM_RECYCLE_BIN.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId), FileUrlParts.fileId.get(fileId));
         }
         Map<String, String> params = new HashMap<String, String>();
         params.put(FileRequestParams.UNDELETE.getFileRequestParams(), "true");
@@ -2413,7 +2413,7 @@ public class FileService extends BaseService {
             }
         }
         String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.RESTORE_FILE_FROM_MY_RECYCLE_BIN.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
+        String requestUri = FileUrls.RESTORE_FILE_FROM_MY_RECYCLE_BIN.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
 		params = (null == params)?new HashMap<String, String>():params;
         Object payload = this.constructPayloadForMultipleEntries(communityIds,
                 FileRequestParams.ITEMID.getFileRequestParams(), "community");
@@ -2441,7 +2441,7 @@ public class FileService extends BaseService {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
         String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.LOCK_FILE.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
+        String requestUri = FileUrls.LOCK_FILE.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
         Map<String, String> params = new HashMap<String, String>();
         params.put(FileRequestParams.LOCK.getFileRequestParams(), "NONE");
         try {
@@ -2465,7 +2465,7 @@ public class FileService extends BaseService {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
         String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.PIN_FILE.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
+        String requestUri = FileUrls.PIN_FILE.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
         Map<String, String> params = new HashMap<String, String>();
         params.put(FileRequestParams.ITEMID.getFileRequestParams(), fileId);
         try {
@@ -2477,7 +2477,7 @@ public class FileService extends BaseService {
 
     public void unPinFolder(String folderId) throws FileServiceException {
         String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.PIN_FOLDER.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.folderId.get(folderId));
+        String requestUri = FileUrls.PIN_FOLDER.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.folderId.get(folderId));
         Map<String, String> params = new HashMap<String, String>();
         params.put(FileRequestParams.ITEMID.getFileRequestParams(), folderId);
         try {
@@ -2563,9 +2563,9 @@ public class FileService extends BaseService {
         String accessType = AccessType.AUTHENTICATED.getText();
         String requestUri;
         if (StringUtil.isEmpty(userId)){
-        	requestUri = FileUrls.SINGLE_COMMENT_MY_FILE.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
+        	requestUri = FileUrls.SINGLE_COMMENT_MY_FILE.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
         } else {
-        	requestUri = FileUrls.SINGLE_COMMENT_USER_FILE.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId), FileUrlParts.fileId.get(fileId));
+        	requestUri = FileUrls.SINGLE_COMMENT_USER_FILE.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId), FileUrlParts.fileId.get(fileId));
         }
         Map<String, String> headers = new HashMap<String, String>();
         headers.put(Headers.ContentType, Headers.ATOM);
@@ -2646,7 +2646,7 @@ public class FileService extends BaseService {
             throw new FileServiceException(null, Messages.Invalid_Name);
         }
         String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.UPLOAD_NEW_VERSION_FILE.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
+        String requestUri = FileUrls.UPLOAD_NEW_VERSION_FILE.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
 
         Content contentFile = getContentObject(title, iStream);
         Map<String, String> headers = new HashMap<String, String>();
@@ -2715,7 +2715,7 @@ public class FileService extends BaseService {
         	throw new FileServiceException(null, Messages.Invalid_CommunityId);
         }
         String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.UPLOAD_NEW_VERSION_COMMUNITY_FILE.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.communityId.get(communityId), FileUrlParts.fileId.get(fileId));
+        String requestUri = FileUrls.UPLOAD_NEW_VERSION_COMMUNITY_FILE.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.communityId.get(communityId), FileUrlParts.fileId.get(fileId));
 		ContentStream contentFile = (ContentStream) getContentObject(title, iStream);
 		Map<String, String> headers = new HashMap<String, String>();
         headers.put("X-Update-Nonce", getNonce()); // It is not clearly documented which Content Type requires Nonce, thus adding nonce in header for all upload requests. 
@@ -2761,7 +2761,7 @@ public class FileService extends BaseService {
         	throw new FileServiceException(null, Messages.Invalid_CommunityId);
         }
 		String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.UPLOAD_COMMUNITY_FILE.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.communityId.get(communityId));
+        String requestUri = FileUrls.UPLOAD_COMMUNITY_FILE.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.communityId.get(communityId));
         Content contentFile = getContentObject(title, iStream, length);
 		Map<String, String> headers = new HashMap<String, String>();
         headers.put("X-Update-Nonce", getNonce()); // It is not clearly documented which Content Type requires Nonce, thus adding nonce in header for all upload requests. 
@@ -2851,7 +2851,7 @@ public class FileService extends BaseService {
         if (StringUtil.isEmpty(fileId)) {
             return new File();
         }
-        String requestUri = FileUrls.UPDATE_FILE_METADATA.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
+        String requestUri = FileUrls.UPDATE_FILE_METADATA.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
         try {
             Response result = (Response) super.updateData(requestUri, params, new ClientService.ContentXml(
                     requestBody, "application/atom+xml"), null);
@@ -2940,7 +2940,7 @@ public class FileService extends BaseService {
     public File updateFolder(String folderId, String name, String description, String shareWith)
             throws FileServiceException, TransformerException {
         String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.UPDATE_FOLDER.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.folderId.get(folderId));
+        String requestUri = FileUrls.UPDATE_FOLDER.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.folderId.get(folderId));
         Document payload = this.constructPayloadFolder(name, description, shareWith, "update");
         Map<String, String> headers = new HashMap<String, String>();
         headers.put(Headers.ContentType, Headers.ATOM);
@@ -3030,7 +3030,7 @@ public class FileService extends BaseService {
         }
         Content contentFile = getContentObject(title, stream, length);
         String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.UPLOAD_FILE.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType));
+        String requestUri = FileUrls.UPLOAD_FILE.format(this, FileUrlParts.accessType.get(accessType));
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("X-Update-Nonce", getNonce()); // It is not clearly documented which Content Type requires Nonce, thus adding nonce in header for all upload requests. 
         try {
@@ -3293,7 +3293,7 @@ public class FileService extends BaseService {
         // URI : /files/basic/api/approval/documents
         if (StringUtil.isEmpty(requestUri)) {
             String accessType = AccessType.AUTHENTICATED.getText();
-            requestUri = FileUrls.MODERATION.format(getApiVersion(), getAuthType(), FileUrlParts.accessType.get(accessType), FileUrlParts.action.get(action), FileUrlParts.contentType.get(content));
+            requestUri = FileUrls.MODERATION.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.action.get(action), FileUrlParts.contentType.get(content));
         }
         FileList resultantEntries;
         try {

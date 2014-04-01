@@ -16,7 +16,6 @@
 
 package nsf.playground.impexp;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
@@ -63,10 +62,6 @@ public class JsonExport extends JsonImportExport {
 		private ZipOutputStream zipOs;
 		private Document document;
 		private JsonJavaObject jsonDocument;
-		public ZipExportTarget(String fileName, boolean compact) throws IOException {
-			this.zipOs = new ZipOutputStream(new FileOutputStream(fileName));
-			this.compact = compact;
-		}
 		public ZipExportTarget(OutputStream os, boolean compact) throws IOException {
 			this.zipOs = new ZipOutputStream(os);
 			this.compact = compact;
@@ -74,7 +69,6 @@ public class JsonExport extends JsonImportExport {
 		public void startExport() throws IOException {
 		}
 		public void endExport() throws IOException {
-			//StreamUtil.close(zipOs);
 			zipOs.finish();
 			zipOs = null;
 		}
@@ -85,7 +79,7 @@ public class JsonExport extends JsonImportExport {
 		public void endDocument() throws IOException {
 			try {
 				String unid = document.getUniversalID();
-				String entryName = encodeFileName(unid);
+				String entryName = encodeFileName(unid+JsonImportExport.DOCUMENT_EXTENSION);
 				ZipEntry e = new ZipEntry(entryName);
 				zipOs.putNextEntry(e);
 				Writer w = new OutputStreamWriter(zipOs,"UTF-8");

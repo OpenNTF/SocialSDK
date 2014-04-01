@@ -100,13 +100,19 @@ window.location.assign(url);]]></xp:this.script>
 				iframe(importUrl, {
     				form: "importForm"
   				}).then(function(data){
-					importDialog.hide();
+  					if(data) {
+    				alert("Upload error:\n"+data);
+  					} else {
+						importDialog.hide();
+						location.reload();
+					}
   				}, function(err){
-    				//alert("Upload error "+err);
+    				alert("Upload error:\n"+err);
   				});
 			});
 			on(dom.byId("importCancelButton"), "click", function() {
 				importDialog.hide();
+				location.reload();
 			});
 		});
 	</script>

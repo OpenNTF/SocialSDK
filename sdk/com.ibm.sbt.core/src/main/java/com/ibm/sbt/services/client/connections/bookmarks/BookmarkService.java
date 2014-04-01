@@ -57,6 +57,14 @@ public class BookmarkService extends BaseService {
 	public BookmarkService(Endpoint endpoint) {
 		super(endpoint);
 	}
+
+	/**
+	 * Return mapping key for this service
+	 */
+	@Override
+	public String getServiceMappingKey() {
+		return ""; //dogear?
+	}
 	
 	/**
 	 * Return a list of bookmarks. 

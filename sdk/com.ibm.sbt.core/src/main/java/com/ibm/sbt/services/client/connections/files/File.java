@@ -134,8 +134,13 @@ public class File extends AtomEntity {
 	/**
 	 * Method to get the download Url of the File. This Url can be used to download the file.
 	 * @return String
+	 * @throws FileServiceException 
 	 */
-	public String getDownloadUrl() {
+	public String getDownloadUrl() throws FileServiceException {
+		FileService service = getService();
+		if (null == service){
+			throw new FileServiceException(new Exception("FileService not defined"));
+		}
 		String proxypath = this.getService().getEndpoint().getProxyPath("connections");
 		String fileId = this.getFileId();
 		String libId = this.getLibraryId();

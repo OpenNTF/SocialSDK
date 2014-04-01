@@ -59,6 +59,14 @@ public class FollowService extends BaseService{
 		super(endpoint);
 	}
 
+	/**
+	 * Return mapping key for this service
+	 */
+	@Override
+	public String getServiceMappingKey() {
+		return "";
+	}
+
 	@Override
 	public NamedUrlPart getAuthType(){
 		NamedUrlPart part = super.getAuthType();

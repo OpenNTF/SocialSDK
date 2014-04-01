@@ -14,14 +14,8 @@
 package com.ibm.sbt.services.client.base;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import com.ibm.sbt.services.endpoints.Endpoint;
 
 /**
  * URLBuilder provides a unified way to generate urls
@@ -30,12 +24,6 @@ import com.ibm.sbt.services.endpoints.Endpoint;
  */
 public class URLBuilder {
 	private final TreeMap<Version, URLPattern> urlVersions;
-    private static Pattern paramsPattern = Pattern.compile("\\{(.*?)\\}");
-	private static final String START_GROUP = "{";
-	private static final String END_GROUP = "}";
-	private static final String ESCAPED_START_GROUP = "\\{";
-	private static final String ESCAPED_END_GROUP = "\\}";
-	private static final String EMPTY_STRING = "";
 	
 	public URLBuilder(VersionedUrl... args) {
 		urlVersions = new TreeMap<Version, URLPattern>();
@@ -68,38 +56,9 @@ public class URLBuilder {
 	 */
 	public String format(BaseService service, NamedUrlPart... args) {
 		URLPattern urlPattern = getPattern(service.getApiVersion());
-		NamedUrlPart authType = service.getAuthType();
-		Map<String, String> serviceMappings = service.getEndpoint().getServiceMappings();
-		List<NamedUrlPart> namedParts = Arrays.asList(args);
-		namedParts.add(authType);
-		String url = urlPattern.format(namedParts);
-		url = substituteServiceMapping(url, serviceMappings);
-		return url;
+		NamedUrlPart[] namedParts = Arrays.copyOf(args, args.length+2);
+		namedParts[args.length] = service.getAuthType();
+		namedParts[args.length+1] = service.getServiceMapping();
+		return urlPattern.format(namedParts);
 	}
-
-	public String format(Endpoint endpoint, NamedUrlPart... args) {
-		URLPattern urlPattern = getPattern(Version.parse(endpoint.getApiVersion()));
-		NamedUrlPart authType = new NamedUrlPart("authType",AuthType.getAuthTypePart(endpoint));
-		Map<String, String> serviceMappings = endpoint.getServiceMappings();
-		List<NamedUrlPart> namedParts = Arrays.asList(args);
-		namedParts.add(authType);
-		String url = urlPattern.format(namedParts);
-		url = substituteServiceMapping(url, serviceMappings);
-		return url;
-	}
-
-	protected String substituteServiceMapping(String url, Map<String, String> serviceMappings){
-        Matcher paramsMatcher = paramsPattern.matcher(url);
-        
-        while(paramsMatcher.find()){
-            String subOut = paramsMatcher.group(1);
-            String subIn = serviceMappings.get(subOut);
-            if(subIn != null){
-                return url.replaceFirst(ESCAPED_START_GROUP + subOut + ESCAPED_END_GROUP, subIn);
-            }
-        }
-        
-        return url.replace(START_GROUP, EMPTY_STRING).replace(END_GROUP, EMPTY_STRING);
-    }
-	
 }

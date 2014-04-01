@@ -107,6 +107,14 @@ public class ProfileService extends BaseService {
 	public ProfileService(Endpoint endpoint, int cacheSize) {
 		super(endpoint, cacheSize);
 	}
+
+	/**
+	 * Return mapping key for this service
+	 */
+	@Override
+	public String getServiceMappingKey() {
+		return "profiles";
+	}
 	
 	/**
 	 * Wrapper method to get profile of a user

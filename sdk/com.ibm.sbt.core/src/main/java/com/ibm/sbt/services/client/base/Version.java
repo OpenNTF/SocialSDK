@@ -83,8 +83,7 @@ public class Version implements Serializable, Comparable<Version> {
 
 	@Override
 	public String toString() {
-		return StringUtil.format("{0}.{1}.{2}", getMajor(), getMinor(),
-				getSubversion());
+		return StringUtil.format("{0}.{1}.{2}", getMajor(), getSubversion(), getMinor());
 	}
 
 	/**

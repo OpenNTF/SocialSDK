@@ -138,6 +138,22 @@ public abstract class BaseService implements Serializable {
 	public Version getApiVersion(){
 		return Version.parse(endpoint.getApiVersion());
 	}
+	
+	abstract public String getServiceMappingKey();
+	
+	/**
+	 * Returns either the configured or the default serviceMapping for the service 
+	 * @return
+	 */
+	public NamedUrlPart getServiceMapping(){
+		String serviceMappingKey = getServiceMappingKey();
+		String serviceMappingValue = serviceMappingKey;
+		Map<String, String> serviceMappings = getEndpoint().getServiceMappings();
+		if (serviceMappings.containsKey(serviceMappingKey)){
+			serviceMappingValue = serviceMappings.get(serviceMappingKey);
+		}
+		return new NamedUrlPart(serviceMappingKey, serviceMappingValue);
+	}
     
 	/**
 	 * Return the size of the cache

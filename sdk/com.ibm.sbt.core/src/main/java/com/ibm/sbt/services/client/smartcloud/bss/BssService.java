@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * ï¿½ Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -192,6 +192,14 @@ public class BssService extends JsonService {
     public BssService(Endpoint endpoint, int cacheSize) {
     	super(endpoint, cacheSize);
     }
+
+	/**
+	 * Return mapping key for this service
+	 */
+	@Override
+	public String getServiceMappingKey() {
+		return "";
+	}
     
     /* (non-Javadoc)
      * @see com.ibm.sbt.services.client.base.BaseService#getDataFormat()

@@ -126,6 +126,9 @@ class SBTOAuth2Endpoint extends BaseController implements SBTEndpoint
 				$request->getCurlOptions()->set(CURLOPT_SSL_VERIFYHOST, false);
 				$request->getCurlOptions()->set(CURLOPT_SSL_VERIFYPEER, false);
 			}
+			if ($method == 'POST' && isset($_FILES['file']['tmp_name'])) {
+				$request->addPostFile('file', $_FILES['file']['tmp_name']);
+			}
 			$response = $request->send();
 		} catch (Guzzle\Http\Exception\BadResponseException $e) {
 			$response = $e->getResponse();

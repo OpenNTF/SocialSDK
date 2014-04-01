@@ -43,16 +43,12 @@ class Proxy extends BaseController
 		$this->loadModel('SBTSettings');
 		$this->loadModel('SBTCredentialStore');
 		
-		$store = null;
-	
+		$proxyHelper = new SBTProxyHelper();
 		$store = SBTCredentialStore::getInstance();	
 		
 		$settings = new SBTSettings();
-		
-		$endpointName = "connections";
-		if (isset($_GET['endpointName'])) {
-			$endpointName = $_GET['endpointName'];
-		}
+
+		$endpointName = $proxyHelper->determineEndpoint();
 
 		if (!isset($_REQUEST["_redirectUrl"])) {
 			// Request to check if the user is authenticated
@@ -78,6 +74,13 @@ class Proxy extends BaseController
 			}
 		}
 		
+		// Handle any file operations
+		// If file operations exist, then control flow
+		// will be interrupted and route() will be called
+		// again 
+		if ($this->fileOperations()) {
+			return;
+		}
 		
 		
 		$url = $_REQUEST["_redirectUrl"];
@@ -93,39 +96,8 @@ class Proxy extends BaseController
 	
 		$method = $_SERVER['REQUEST_METHOD'];
 
-		$options = $_REQUEST;
-			
-		// Remove proxy-specific parameters
-		// TODO: Refactor -> extract method
-		if (isset($options['classpath'])) {
-			unset($options['classpath']);
-		}
-			
-		if (isset($options['class'])) {
-			unset($options['class']);
-		}
-			
-		if (isset($options['method'])) {
-			unset($options['method']);
-		}
-			
-		if (isset($options['_redirectUrl'])) {
-			unset($options['_redirectUrl']);
-		}
-			
-		if (isset($options['isAuthenticated'])) {
-			unset($options['isAuthenticated']);
-		}
-			
-		if (isset($options['actionType'])) {
-			unset($options['actionType']);
-		}
-		
-		if (isset($options['endpointName'])) {
-			unset($options['endpointName']);
-		}
-			
-		$headers = null;
+		$options = $proxyHelper->getOptions();
+	
 		$response = null;
 		$body = file_get_contents('php://input');
 		$endpoint = null;
@@ -135,16 +107,9 @@ class Proxy extends BaseController
 		}
 		
 		$method = $_SERVER['REQUEST_METHOD'];
-		$headers = apache_request_headers();
 	
-		$forwardHeader = null;
-		if (isset($headers['Content-Length'])) {
-			$forwardHeader['Content-Length'] = $headers['Content-Length'];
-		}
-		
-		if (isset($headers['Content-Type'])) {
-			$forwardHeader['Content-Type'] = $headers['Content-Type'];
-		}
+		$forwardHeader = $proxyHelper->getHeader($method);
+
 		if ($settings->getAuthenticationMethod($endpointName) == "basic") {
 			$endpoint = new SBTBasicAuthEndpoint();
 		} else if ($settings->getAuthenticationMethod($endpointName) == "oauth2") {
@@ -153,18 +118,20 @@ class Proxy extends BaseController
 			$endpoint = new SBTOAuth1Endpoint();
 		}
 
-	
 		// ...yes, this is ugly
 		$containsServerURL = false;
-		if (strpos($url, '/https/') == 0) {
+
+		if (strpos($url, '/https/') == 0 || strpos($url, 'https/') == 0) {
 			$url = str_replace('/https/', 'https://', $url);
+			$url = str_replace('https/', 'https://', $url);
 			$result = parse_url($url);
 			if (isset($result['scheme'])) {
 				$url = str_replace($server, '', $url);
 				$containsServerURL = true;
 			}
-		} else if (strpos($url, '/http/') == 0) {
+		} else if (strpos($url, '/http/') == 0 || strpos($url, 'http/') == 0) {
 			$url = str_replace('/http/', 'http://', $url);
+			$url = str_replace('http/', 'http://', $url);
 			$url = str_replace('/https/', 'https://', $url);
 			$result = parse_url($url);
 			if (isset($result['scheme'])) {
@@ -173,52 +140,11 @@ class Proxy extends BaseController
 			}
 		}
 		
+		// Make request
  		$response = $endpoint->makeRequest($server, $url, $method, $options, $body, $forwardHeader, $endpointName);
 
-		if ($response->getStatusCode() == 200) {
-			if (isset($_REQUEST["isAuthenticated"]) && $settings->getAuthenticationMethod() == "basic") {
-				$result = array('status' => $response->getStatusCode(), 'result' => ($response->getStatusCode() == 401 ? false : true));
-				print_r(json_encode($result));
-			} else {
-				foreach ($response->getHeaderLines() as $h) {
-					if (strpos($h, "Content-Type") === 0) header($h, TRUE);
-				}
-				
-				header(':', true, $response->getStatusCode());
-				header('X-PHP-Response-Code: ' . $response->getStatusCode(), true, $response->getStatusCode());
-				
-				if ( (isset($_REQUEST['actionType']) && $_REQUEST['actionType'] == 'download') || (strpos($url, '/media/') != false && strpos($url, '/document/') != false
-					&& $containsServerURL) ) {
-					$headers = $response->getHeaders();
-					header('Content-Description: File Transfer');
-					header('Content-Type: application/octet-stream');
-					header('Content-Disposition: ' . $headers['content-disposition']);
-					header('Content-Transfer-Encoding: binary'); //changed to chunked
-					header('Expires: 0');
-					header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-					header('Pragma: public');
-				}
-					
-				print_r($response->getBody(TRUE));
-			}
-		} else if ($response->getStatusCode() == 302) {
-			$headers = $response->getHeaders();
-			$this->route($headers['location']);
-		} else if ($response->getStatusCode() == 201) {
-			$result = array('status' => 201, 'result' => true);
-			print_r(json_encode($result));
-		} else if ($response->getStatusCode() == 401 || $response->getStatusCode() == '401oauth_token_expired') {
-			if (isset($_GET['endpointName'])) {
-				$store->deleteOAuthCredentials($_GET['endpointName']);
-				$store->deleteBasicAuthCredentials($_GET['endpointName']);
-			} else {
-				$store->deleteOAuthCredentials();
-				$store->deleteBasicAuthCredentials();
-			}
-			print_r($response->getStatusCode());
-		} else {
-			print_r($response->getBody(TRUE));
-		}
+ 		// Print response
+		$proxyHelper->outputResponse($response, $url, $containsServerURL);
 	}
 	
 	/**
@@ -231,7 +157,7 @@ class Proxy extends BaseController
 	{
 	
 		if (isset($_GET["_redirectUrl"])) {
-			if (strpos($_GET["_redirectUrl"], '/DownloadFile/') !== FALSE) {
+			if (strpos($_GET["_redirectUrl"], '/DownloadFile/') !== false) {
 				$url = $_GET['_redirectUrl'];
 				
 				// Extract library ID and file ID
@@ -243,24 +169,132 @@ class Proxy extends BaseController
 				
 				// Create new URL
 				$url = "/files/basic/api/library/" . $libraryID . "/document/" . $fileID . "/media";
-			
+				
 				// Update request
 				$_REQUEST['_redirectUrl'] = $url;
 				$_GET['_redirectUrl'] = $url;
 				$_REQUEST['actionType'] = 'download';
 				
-			} else if (strpos($_GET["_redirectUrl"], '/UploadFile/') !== FALSE) {
-				// Create new URL
-				$url = "/files/basic/api/myuserlibrary/feed";
+				// Route
+				$this->route();
+				return true;
+			} else if (strpos($_GET["_redirectUrl"], '/UploadFile/') !== false) {
+				$path = explode("/", $_GET["_redirectUrl"]);
+				$slug = $path[sizeof($path) - 1];
+				$_GET['slug'] = $slug;
 				
+				// Create new URL
+				$url = "/files/basic/api/myuserlibrary/feed?";
+				
+				if (isset($_GET['visibility'])) {
+					$url .= 'visibility=' . $_GET['visibility'];
+				} else {
+					$url .= 'visibility=private';
+				}
+				
+				if (isset($_GET['tag'])) {
+					$url .= '&tag=' . $_GET['tag'];
+				}
+				
+				if (isset($_GET['commentNotification'])) {
+					$url .= '&commentNotification=' . $_GET['commentNotification'];
+				} else {
+					$_POST['commentNotification'] = 'on';
+					$url .= 'visibility=private';
+				}
+				
+				$milliseconds = round(microtime(true) * 1000);
+				if (isset($_GET['created'])) {
+					$_POST['created'] = $_GET['created'];
+					$url .= '&commentNotification=' . $_GET['commentNotification'];
+				} else {
+					$_POST['created'] = $milliseconds;
+					$url .= 'visibility=private';
+				}
+				
+				
+				if (isset($_GET['includePath'])) {
+					$_POST['includePath'] = $_GET['includePath'];
+					$url .= '&commentNotification=' . $_GET['commentNotification'];
+				} else {
+					$_POST['includePath'] = 'true';
+					$url .= 'visibility=private';
+				}
+				
+				if (isset($_GET['mediaNotification'])) {
+					$_POST['mediaNotification'] = $_GET['mediaNotification'];
+					$url .= '&commentNotification=' . $_GET['commentNotification'];
+				} else {
+					$_POST['mediaNotification'] = 'off';
+					$url .= 'visibility=private';
+				}
+				
+				if (isset($_GET['modified'])) {
+					$_POST['modified'] = $_GET['modified'];
+					$url .= '&commentNotification=' . $_GET['commentNotification'];
+				} else {
+					$_POST['modified'] = $milliseconds;
+					$url .= 'visibility=private';
+				}
+				
+				if (isset($_GET['propagate'])) {
+					$_POST['propagate'] = $_GET['propagate'];
+					$url .= '&commentNotification=' . $_GET['commentNotification'];
+				} else {
+					$_POST['propagate'] = 'false';
+					$url .= 'visibility=private';
+				}
+				
+				if (isset($_GET['sharePermission'])) {
+					$_POST['sharePermission'] = $_GET['sharePermission'];
+					$url .= '&commentNotification=' . $_GET['commentNotification'];
+				} else {
+					$_POST['sharePermission'] = 'Edit';
+					$url .= 'visibility=private';
+				}
+				
+				if (isset($_GET['shareSummary'])) {
+					$_POST['shareSummary'] = $_GET['shareSummary'];
+					$url .= '&commentNotification=' . $_GET['commentNotification'];
+					
+				} else {
+					$_POST['shareSummary'] = 'NA';
+					$url .= 'visibility=private';
+				}
+			
 				// Update request
 				$_REQUEST['_redirectUrl'] = $url;
 				$_GET['_redirectUrl'] = $url;
-				$_POST['visibility'] = $_GET['visibility'];
+				
+				
+				// Route
+				$this->route();
+				return true;
+			} else if (strpos($_GET["_redirectUrl"], '/UploadCommunityFile/') !== false) {
+				$url = $_GET['_redirectUrl']; 
+				
+				// Extract library ID and file ID
+				$keys = parse_url($url);
+				$path = explode("/", $keys['path']);
+				
+				$communityID = $path[sizeof($path) - 1];
+				$fileID = $path[sizeof($path) - 2];
+				
+				// Create new URL
+				$url = "/files/basic/api/communitylibrary/" . $communityID . "/feed";
+				// Update request
+				$_REQUEST['_redirectUrl'] = $url;
+				$_GET['_redirectUrl'] = $url;
+				
+				// Route
+				$this->route();
+				return true;
 			}
-			// Route
-			$this->route();
+			
 		}
+		return false;
 	}
+	
+
 }
 ?>

@@ -25,8 +25,10 @@ import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
+import com.ibm.sbt.services.client.base.AuthType;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.ConnectionsConstants;
+import com.ibm.sbt.services.client.base.NamedUrlPart;
 import com.ibm.sbt.services.client.connections.communities.Community;
 import com.ibm.sbt.services.client.connections.communities.CommunityServiceException;
 import com.ibm.sbt.services.client.connections.forums.feedhandler.ForumsFeedHandler;
@@ -91,6 +93,13 @@ public class ForumService extends BaseService {
 	@Override
 	public String getServiceMappingKey() {
 		return "forums";
+	}
+
+	@Override
+	public NamedUrlPart getAuthType(){
+		String auth = super.getAuthType().getValue();
+		auth = AuthType.BASIC.get().equalsIgnoreCase(auth)?"":auth;
+		return new NamedUrlPart("authType", auth);
 	}
 
 	/** This method returns the all forums

@@ -35,7 +35,6 @@ import org.junit.runners.Suite.SuiteClasses;
 	ForumServiceGetTests.class,
 	ForumTopicCreateDeleteTest.class,
 	ForumTopicGetUpdateTest.class,
-	ForumServiceGetTests.class,
 	LikeUnlikePostTest.class
 })
 public class ForumServiceTestSuite {

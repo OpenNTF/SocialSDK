@@ -29,6 +29,8 @@ import lotus.domino.NotesException;
  */
 public abstract class JsonImportExport {
 	
+	public static final String DOCUMENT_EXTENSION = ".json";
+	
 	public interface DocumentFilter {
 		public boolean accept(Document doc) throws NotesException;
 	}

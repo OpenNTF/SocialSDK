@@ -285,7 +285,7 @@ public class FileService extends BaseService {
         if (StringUtil.isEmpty(userId)){
         	requestUri = FileUrls.MYUSERLIBRARY_DOCUMENT_FEED.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
         } else {
-        	requestUri = FileUrls.USERLIBRARY_DOCUMENT_FEED.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(fileId), FileUrlParts.fileId.get(fileId));
+        	requestUri = FileUrls.USERLIBRARY_DOCUMENT_FEED.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId), FileUrlParts.fileId.get(fileId));
         }
         Document payload = this.constructPayloadForComments(comment);
         try {
@@ -2140,7 +2140,7 @@ public class FileService extends BaseService {
      */
     public FileList getPinnedFiles(Map<String, String> params) throws FileServiceException {
         String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.MYFAVORITES_DOCUMENT_FEED.format(this, FileUrlParts.accessType.get(accessType));
+        String requestUri = FileUrls.MYFAVORITES_DOCUMENTS_FEED.format(this, FileUrlParts.accessType.get(accessType));
         FileList fileEntries = null;
         try {
             fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler(this));
@@ -2273,7 +2273,7 @@ public class FileService extends BaseService {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
         String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.MYFAVORITES_DOCUMENT_FEED.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
+        String requestUri = FileUrls.MYFAVORITES_DOCUMENTS_FEED.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
         Map<String, String> params = new HashMap<String, String>();
         params.put(FileRequestParams.ITEMID.getFileRequestParams(), fileId);
         try {
@@ -2473,7 +2473,7 @@ public class FileService extends BaseService {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
         String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.MYFAVORITES_DOCUMENT_FEED.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
+        String requestUri = FileUrls.MYFAVORITES_DOCUMENTS_FEED.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
         Map<String, String> params = new HashMap<String, String>();
         params.put(FileRequestParams.ITEMID.getFileRequestParams(), fileId);
         try {
@@ -2571,9 +2571,9 @@ public class FileService extends BaseService {
         String accessType = AccessType.AUTHENTICATED.getText();
         String requestUri;
         if (StringUtil.isEmpty(userId)){
-        	requestUri = FileUrls.MYUSERLIBRARY_DOCUMENT_COMMENT_ENTRY.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
+        	requestUri = FileUrls.MYUSERLIBRARY_DOCUMENT_COMMENT_ENTRY.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId), FileUrlParts.commentId.get(commentId));
         } else {
-        	requestUri = FileUrls.USERLIBRARY_DOCUMENT_COMMENT_ENTRY.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId), FileUrlParts.fileId.get(fileId));
+        	requestUri = FileUrls.USERLIBRARY_DOCUMENT_COMMENT_ENTRY.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId), FileUrlParts.fileId.get(fileId), FileUrlParts.commentId.get(commentId));
         }
         Map<String, String> headers = new HashMap<String, String>();
         headers.put(Headers.ContentType, Headers.ATOM);

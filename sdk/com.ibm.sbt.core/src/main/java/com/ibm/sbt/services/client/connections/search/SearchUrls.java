@@ -29,9 +29,9 @@ import com.ibm.sbt.services.client.base.VersionedUrl;
  *
  */
 public enum SearchUrls implements URLContainer {
-	SEARCH(new VersionedUrl(ConnectionsConstants.v4_0, "search/{authType}/atom/search")),
-	MYSEARCH(new VersionedUrl(ConnectionsConstants.v4_0, "search/{authType}/atom/mysearch")),
-	SCOPES(new VersionedUrl(ConnectionsConstants.v4_0, "search/{authType}/atom/scopes"));
+	SEARCH(new VersionedUrl(ConnectionsConstants.v4_0, "{search}/{authType}/atom/search")),
+	MYSEARCH(new VersionedUrl(ConnectionsConstants.v4_0, "{search}/{authType}/atom/mysearch")),
+	SCOPES(new VersionedUrl(ConnectionsConstants.v4_0, "{search}/{authType}/atom/scopes"));
 
 	private URLBuilder builder;
 	

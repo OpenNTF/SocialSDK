@@ -85,6 +85,14 @@ public class ForumService extends BaseService {
 		super(endpoint, DEFAULT_CACHE_SIZE);
 	}
 
+	/**
+	 * Return mapping key for this service
+	 */
+	@Override
+	public String getServiceMappingKey() {
+		return "forums";
+	}
+
 	/** This method returns the all forums
 	 * 
 	 * @return

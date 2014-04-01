@@ -80,6 +80,14 @@ public class ActivityStreamService extends BaseService {
 	public ActivityStreamService(Endpoint endpoint) {
 		super(endpoint, DEFAULT_CACHE_SIZE);
 	}
+
+	/**
+	 * Return mapping key for this service
+	 */
+	@Override
+	public String getServiceMappingKey() {
+		return "connections";
+	}
 	
 	/**
 	 * Returns updates from ActivityStream service

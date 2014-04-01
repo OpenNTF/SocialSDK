@@ -122,6 +122,14 @@ public class CommunityService extends BaseService {
 	public CommunityService(Endpoint endpoint, int cacheSize) {
 		super(endpoint, cacheSize);
 	}
+
+	/**
+	 * Return mapping key for this service
+	 */
+	@Override
+	public String getServiceMappingKey() {
+		return "communities";
+	}
 	
 	@Override
 	public NamedUrlPart getAuthType(){

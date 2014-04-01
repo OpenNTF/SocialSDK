@@ -113,6 +113,14 @@ public class FileService extends BaseService {
         super(endpoint);
         commentParams.put("category", "comment");
     }
+
+	/**
+	 * Return mapping key for this service
+	 */
+	@Override
+	public String getServiceMappingKey() {
+		return "files";
+	}
     
     private static String getDefaultEndpoint() {
 		return "connections";

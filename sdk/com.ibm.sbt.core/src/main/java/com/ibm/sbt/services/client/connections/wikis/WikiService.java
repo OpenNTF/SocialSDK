@@ -55,6 +55,14 @@ public class WikiService extends BaseService {
 	public WikiService(Endpoint endpoint) {
 		super(endpoint);
 	}
+
+	/**
+	 * Return mapping key for this service
+	 */
+	@Override
+	public String getServiceMappingKey() {
+		return "wikis";
+	}
 	
 	/**
 	 * This returns a list of wikis to which the authenticated user has access. 

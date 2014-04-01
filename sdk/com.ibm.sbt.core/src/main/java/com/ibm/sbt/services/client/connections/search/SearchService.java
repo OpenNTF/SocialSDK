@@ -85,6 +85,14 @@ public class SearchService extends BaseService {
 	public SearchService(Endpoint endpoint) {
 		super(endpoint, DEFAULT_CACHE_SIZE);
 	}
+
+	/**
+	 * Return mapping key for this service
+	 */
+	@Override
+	public String getServiceMappingKey() {
+		return "search";
+	}
 	
     /**
      * Search IBM Connection for public information.

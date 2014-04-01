@@ -61,6 +61,14 @@ public class CMISFileService extends BaseService {
     public CMISFileService(Endpoint endpoint) {
         super(endpoint);
     }
+
+	/**
+	 * Return mapping key for this service
+	 */
+	@Override
+	public String getServiceMappingKey() {
+		return "files";
+	}
     
     /**
      * Method to get the Default endpoint to be used with the service

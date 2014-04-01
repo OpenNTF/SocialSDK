@@ -13,10 +13,13 @@
  */
 package com.ibm.sbt.services.client.base;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+
+import com.ibm.commons.runtime.util.URLEncoding;
 
 /**
  * 
@@ -29,6 +32,7 @@ public class URLPattern {
 	private final String urlPattern;
 	private static final char LEFT_BRACE = '{';
 	private static final String SLASH = "/";
+	private static final String DOUBLE_SLASH = "//";
 	private List<String> urlParts;
 	private List<MutablePart> mutableParts;
 
@@ -42,16 +46,13 @@ public class URLPattern {
 		return urlPattern;
 	}
 	
-	public String format(NamedUrlPart... args){
-		return format(Arrays.asList(args));
-	}
-
 	/**
 	 * Formats the Url pattern contained on this object with the provided NamedUrlParts
 	 * @param args
 	 * @return
 	 */
-	public String format(List<NamedUrlPart> namedParts){
+	public String format(NamedUrlPart... args){
+		List<NamedUrlPart> namedParts = Arrays.asList(args);
 		Iterator<MutablePart> mutablePartIterator=mutableParts.iterator();
 		if (!mutablePartIterator.hasNext()) return urlPattern;
 		StringBuilder sb = new StringBuilder();
@@ -73,22 +74,32 @@ public class URLPattern {
 				if (!partMatch){
 					throw new IllegalArgumentException("Missing parameter "+mutablePart.getName());
 				}
-				
 				if (mutablePartIterator.hasNext()){ mutablePart = mutablePartIterator.next(); }
 			} else {
 				//This part is immutable, let's add it to the url
-				sb.append(part);
+				sb.append(encode(part));
 			}
 			if (partIterator.hasNext()) sb.append(SLASH);
 			urlPartIndex++;
 		}
 		return sanitizeSlashes(sb.toString());
 	}
-	
-	protected String sanitizeSlashes(String url){
-		return url.replaceAll("//", "/");
+
+	protected String encode(String part){
+		try {
+			return URLEncoding.encodeURIString((part==null)?"":part, "UTF-8", 0, false);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
+	/*
+	 * Removes double slashes on the url
+	 */
+	protected String sanitizeSlashes(String url){
+		return url.replaceAll(DOUBLE_SLASH, SLASH);
+	}
+	
 	private void compile(){
 		mutableParts = new ArrayList<MutablePart>();
 		int partIndex = 0;

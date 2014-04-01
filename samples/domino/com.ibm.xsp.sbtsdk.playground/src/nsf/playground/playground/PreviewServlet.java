@@ -29,6 +29,7 @@ public class PreviewServlet extends FacesContextServlet {
 	private PreviewXPagesHandler xpagesHandler;
 	private PreviewGadgetHandler gadgetHandler;
 	private PreviewExportHandler exportHandler;
+	private PreviewImportHandler importHandler;
 	
 	public PreviewServlet() {
 	}
@@ -66,6 +67,13 @@ public class PreviewServlet extends FacesContextServlet {
 			exportHandler = new PreviewExportHandler();
 		}
 		return exportHandler;
+	}
+
+	public PreviewHandler getImportHandler() {
+		if(importHandler==null) {
+			importHandler = new PreviewImportHandler();
+		}
+		return importHandler;
 	}
 
 	public void service(ServletRequest servletRequest, ServletResponse servletResponse) throws ServletException, IOException {
@@ -123,6 +131,8 @@ public class PreviewServlet extends FacesContextServlet {
 			getGadgetSnippetHandler().doService(req, resp);
 		} else if(StringUtil.startsWithIgnoreCase(pathInfo, "/export")) {
 			getExportHandler().doService(req, resp);
+		} else if(StringUtil.startsWithIgnoreCase(pathInfo, "/import")) {
+			getImportHandler().doService(req, resp);
 		}
 	}
 }

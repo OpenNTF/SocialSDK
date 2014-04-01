@@ -48,7 +48,7 @@ public class Version implements Serializable, Comparable<Version> {
 				sMinor = s.substring(d1 + 1, d2);
 				sSubversion = s.substring(d2 + 1);
 			} else {
-				sSubversion = s.substring(d1 + 1);
+				sMinor = s.substring(d1 + 1);
 			}
 		} else {
 			sMajor = s;
@@ -83,7 +83,7 @@ public class Version implements Serializable, Comparable<Version> {
 
 	@Override
 	public String toString() {
-		return StringUtil.format("{0}.{1}.{2}", getMajor(), getSubversion(), getMinor());
+		return StringUtil.format("{0}.{1}.{2}", getMajor(), getMinor(), getSubversion());
 	}
 
 	/**
@@ -150,7 +150,7 @@ public class Version implements Serializable, Comparable<Version> {
 	 * @return
 	 */
 	public boolean isAtLeast(Version version) {
-		return isAtLeast(version.getMajor(), version.getMinor(), version.subversion);
+		return isAtLeast(version.getMajor(), version.getMinor(), version.getSubversion());
 	}
 
 	/**
@@ -180,15 +180,15 @@ public class Version implements Serializable, Comparable<Version> {
 	 * @return
 	 */
 	public boolean isAtLeast(int _major, int _minor, int _subversion) {
-		if (this.major > _major) {
+		if (this.major < _major) {
 			return true;
 		}
 		if (this.major == _major) {
-			if (this.minor > _minor) {
+			if (this.minor < _minor) {
 				return true;
 			}
 			if (this.minor == _minor) {
-				if (this.subversion > _subversion) {
+				if (this.subversion <= _subversion) {
 					return true;
 				}
 			}

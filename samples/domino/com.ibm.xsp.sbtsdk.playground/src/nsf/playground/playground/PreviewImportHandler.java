@@ -19,6 +19,8 @@ import lotus.domino.NotesException;
 import lotus.domino.View;
 import nsf.playground.impexp.JsonImport;
 
+import com.ibm.commons.util.StringUtil;
+import com.ibm.commons.util.io.LookAheadInputStream;
 import com.ibm.commons.util.io.StreamUtil;
 import com.ibm.xsp.model.domino.DominoUtils;
 
@@ -30,12 +32,6 @@ public class PreviewImportHandler extends PreviewHandler {
 		System.out.println("GET Upload");
 	}
 	
-//	@Override
-//	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//		String key = req.getParameter("type");
-//		System.out.println("POST Upload key="+key);
-//	}
-
 	@Override
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		boolean isMultipart = ServletFileUpload.isMultipartContent(req);
@@ -50,7 +46,12 @@ public class PreviewImportHandler extends PreviewHandler {
 						String fileName = item.getName();
 						InputStream is = item.getInputStream();
 						try {
-							JsonImport imp = new JsonImport(new JsonImport.ZipImportSource(is));
+							LookAheadInputStream lis = new LookAheadInputStream(is, 16);
+							if(!lis.startsWith("PK")) {
+								result(req, resp, HttpServletResponse.SC_BAD_REQUEST, "The uploaded file is not a zip file");
+								return;
+							}
+							JsonImport imp = new JsonImport(new JsonImport.ZipImportSource(lis));
 							
 							// Delete all the documents
 							View view = DominoUtils.getCurrentDatabase().getView("AllSnippetsById");
@@ -63,12 +64,7 @@ public class PreviewImportHandler extends PreviewHandler {
 							// And import the new ones
 							imp.importDocuments(DominoUtils.getCurrentDatabase());
 							
-							resp.setStatus(HttpServletResponse.SC_OK);
-							resp.setContentType("text/html");
-							String result = "<html><body><textarea>OK</textarea></body></html>";
-							Writer w = resp.getWriter();
-							w.write(result);
-							w.flush();
+							result(req, resp, HttpServletResponse.SC_OK, "");
 						} finally {
 							StreamUtil.close(is);
 						}
@@ -80,6 +76,15 @@ public class PreviewImportHandler extends PreviewHandler {
 				throw new IOException(ex);
 			}
 		}
+	}
+	
+	private void result(HttpServletRequest req, HttpServletResponse resp, int code, String message) throws ServletException, IOException {
+		resp.setStatus(code);
+		resp.setContentType("text/html");
+		String result = StringUtil.format("<html><body><textarea>{0}</textarea></body></html>",message);
+		Writer w = resp.getWriter();
+		w.write(result);
+		w.flush();
 	}
 
 }

@@ -33,6 +33,10 @@ import org.apache.http.client.methods.RequestBuilder;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.message.BasicNameValuePair;
 
+import com.ibm.commons.Platform;
+import com.ibm.commons.extension.ExtensionManager;
+import com.ibm.commons.runtime.Application;
+import com.ibm.commons.runtime.impl.PropertiesFactory;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.security.authentication.AuthenticationException;
 import com.ibm.sbt.services.client.ClientService;
@@ -107,9 +111,13 @@ public class SmartCloudFormEndpoint extends FormEndpoint {
 			authenticationPage = extractFederatedPage(authenticationPage);
 			
 			
-			LoginHandler h = getHandler(authenticationPage);
-			return h.login(user, password, c);
+			FormLoginHandler h = getHandler(authenticationPage);
+			boolean authenticated =  h.login(user, password, c, cookieStore, authenticationPage);
 			
+			if (authenticated) {
+				setCookieCache(cookieStore.getCookies());
+				return true;
+			}else return false;
 			
 		} catch (Exception e) {
 			throw new AuthenticationException(e);
@@ -127,9 +135,11 @@ public class SmartCloudFormEndpoint extends FormEndpoint {
 		return formScriptMap;
 	}
 
-    public LoginHandler getHandler(String page) throws Exception {
-    	if (page.equals("https://w3-03.sso.ibm.com/FIM/sps/IBM_W3_SAML20_EXTERNAL/saml20/logininitial?PartnerId=https://apps.na.collabserv.com/sps/sp/saml/v2_0&TARGET=https://apps.na.collabserv.com")) {
-    		return new W3LoginHandler();
+    public FormLoginHandler getHandler(String page) throws Exception {
+
+    	List<FormLoginHandler> l = (List)ExtensionManager.findApplicationServices(Application.get().getClassLoader(),FormLoginHandler.class.getName().toLowerCase());
+    	for (FormLoginHandler h : l) {
+    		if (h.accept(page)) return h;
     	}
     	throw new AuthenticationException(new IllegalArgumentException("No handler definition for " + page));
     }

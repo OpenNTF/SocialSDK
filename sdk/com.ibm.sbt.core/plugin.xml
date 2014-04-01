@@ -50,4 +50,11 @@
        <service type="com.ibm.sbt.core.environmentfactory" 
        		class="com.ibm.sbt.jslibrary.impl.SBTEnvironmentFactoryFromBean" />
     </extension>
+    <extension
+          point="com.ibm.commons.Extension">
+       <service
+             class="com.ibm.sbt.services.endpoints.W3LoginHandler"
+             type="com.ibm.sbt.services.endpoints.formloginhandler">
+       </service>
+    </extension>
 </plugin>

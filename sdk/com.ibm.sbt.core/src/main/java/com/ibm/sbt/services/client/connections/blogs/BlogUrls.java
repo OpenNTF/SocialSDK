@@ -40,7 +40,7 @@ public enum BlogUrls implements URLContainer {
 	BLOG_COMMENTS(new VersionedUrl(ConnectionsConstants.v4_0, "{blogs}/{blogHandle}/feed/comments/atom")),
 	BLOG_TAGS(new VersionedUrl(ConnectionsConstants.v4_0, "{blogs}/{blogHandle}/feed/tags/atom")),
 	CREATE_BLOG(new VersionedUrl(ConnectionsConstants.v4_0, "{blogs}/{blogHandle}/api/blogs")),
-	GET_UPDATE_REMOVE_BLOG(new VersionedUrl(ConnectionsConstants.v4_0, "{blogs/{blogHandle}/api/blogs/{entryAnchor}")),
+	GET_UPDATE_REMOVE_BLOG(new VersionedUrl(ConnectionsConstants.v4_0, "{blogs}/{blogHandle}/api/blogs/{entryAnchor}")),
 	BLOG_POST(new VersionedUrl(ConnectionsConstants.v4_0, "{blogs}/{blogHandle}/feed/entry/atom")),
 	CREATE_BLOG_POST(new VersionedUrl(ConnectionsConstants.v4_0, "{blogs}/{blogHandle}/api/entries")),
 	UPDATE_REMOVE_POST(new VersionedUrl(ConnectionsConstants.v4_0, "{blogs}/{blogHandle}/api/entries/{entryAnchor}")),

@@ -813,14 +813,14 @@ public class BlogService extends BaseService {
 		}
 		Response result = null;
 		try {
-			BaseBlogTransformer transformer = new BaseBlogTransformer(comment);
 			comment.setPostUuid(postUuid);
+			BaseBlogTransformer transformer = new BaseBlogTransformer(comment);
 			
 			Object 	payload = transformer.transform(comment.getFieldsMap());
 			
 			Map<String, String> headers = new HashMap<String, String>();
 			headers.put("Content-Type", "application/atom+xml");
-			String createCommentUrl = BlogUrls.CREATE_COMMENT.format(this, BlogUrlParts.blogHandle.get(blogHandle));
+			String createCommentUrl = BlogUrls.CREATE_COMMENT.format(this, BlogUrlParts.blogHandle.get(blogHandle), BlogUrlParts.entryAnchor.get(""));
 			
 			result = createData(createCommentUrl, null, headers, payload);
 			comment = (Comment) new CommentsFeedHandler(this).createEntity(result);

@@ -39,76 +39,47 @@ public class BaseBlogServiceTest extends BaseUnitTest {
 		}
 	}
 
-	protected Blog createBlog() {
+	protected Blog createBlog() throws BlogServiceException {
 		Blog blog = new Blog(blogService, "");
 
-		try{
-
-			Long random = System.currentTimeMillis();
-			blog.setTitle("Test Blog" + random);
-			blog.setHandle("TestHandle"+random);
-			blog.setTimeZone("Asia/Calcutta");
-			blog = blog.save(); 
-		} catch (Exception e) {
-			fail("Error calling blog.save() caused by: "+e.getMessage());
-		}
-
+		Long random = System.currentTimeMillis();
+		blog.setTitle("Test Blog" + random);
+		blog.setHandle("TestHandle"+random);
+		blog.setTimeZone("Asia/Calcutta");
+		blog = blog.save(); 
 		return blog;
 	}
 
-	protected BlogPost createBlogPost() {
+	protected BlogPost createBlogPost() throws BlogServiceException {
 		blog = createBlog();
 		BlogPost blogPost = new BlogPost(blogService, "");
 
-		try{
-			blogPost.setTitle("Test Blog Post" + System.currentTimeMillis());
-			blogPost.setContent("Test Blog Post Content"+ System.currentTimeMillis());
-			blogPost = blogService.createBlogPost(blogPost, blog.getHandle());
-		} catch (Exception e) {
-			fail("Error calling blogService.createBlogPost() caused by: "+e.getMessage());
-		}
-
+		blogPost.setTitle("Test Blog Post" + System.currentTimeMillis());
+		blogPost.setContent("Test Blog Post Content"+ System.currentTimeMillis());
+		blogPost = blogService.createBlogPost(blogPost, blog.getHandle());
 		return blogPost;
 	}
 
-	protected Comment createBlogComment() {
+	protected Comment createBlogComment() throws BlogServiceException {
 		blogPost = createBlogPost();
 		Comment comment = new Comment(blogService, "");
 
-		try{
-			comment.setTitle("Test Blog Comment" + System.currentTimeMillis());
-			comment.setContent("Test Blog Post Content12"+System.currentTimeMillis());
-			comment = blogService.createBlogComment(comment, blog.getHandle(), blogPost.getPostUuid());
-		} catch (Exception e) {
-			fail("Error calling blogService.createBlogPost() caused by: "+e.getMessage());
-		}
+		comment.setTitle("Test Blog Comment" + System.currentTimeMillis());
+		comment.setContent("Test Blog Post Content12"+System.currentTimeMillis());
+		comment = blogService.createBlogComment(comment, blog.getHandle(), blogPost.getPostUuid());
 
 		return comment;
 	}
 	
-	protected void deleteBlog(Blog blog) {
-		try {
-			blogService.removeBlog(blog.getBlogUuid());
-		} catch (BlogServiceException e) {
-			fail("Error calling blogService.removeBlog() caused by: "+e.getMessage());
-		}
+	protected void deleteBlog(Blog blog) throws BlogServiceException {
+		blogService.removeBlog(blog.getBlogUuid());
 	}
 	
-	protected void deleteBlogPost(BlogPost post) {
-		try {
-			blogService.removeBlogPost(post.getPostUuid(), blog.getHandle());
-		} catch (BlogServiceException e) {
-			fail("Error calling blogService.removeBlog() caused by: "+e.getMessage());
-		}
+	protected void deleteBlogPost(BlogPost post) throws BlogServiceException {
+		blogService.removeBlogPost(post.getPostUuid(), blog.getHandle());
 	}
 
-	protected void deleteBlogComment(Comment comment) {
-		try {
-			blogService.removeBlogComment(blog.getHandle(), comment.getCommentUuid());
-		} catch (BlogServiceException e) {}
+	protected void deleteBlogComment(Comment comment) throws BlogServiceException {
+		blogService.removeBlogComment(blog.getHandle(), comment.getCommentUuid());
 	}
-
-	
-
-	
 }

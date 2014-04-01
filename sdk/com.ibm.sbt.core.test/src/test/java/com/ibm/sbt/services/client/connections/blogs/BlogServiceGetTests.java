@@ -28,144 +28,102 @@ import com.ibm.sbt.services.client.connections.blogs.model.BaseBlogEntity;
 public class BlogServiceGetTests extends BaseBlogServiceTest {
 	
 	@Test
-	public void getAllBlogs() {
-		try {
-			BlogList entries = blogService.getAllBlogs();
-			assertNotNull(entries);
-			for (BaseBlogEntity blog : entries) {
-				assertValid((Blog)blog);
-			}
-		} catch (Exception e) {
-			fail("Error calling blogService.getBlogs() caused by: "+e.getMessage());
+	public void getAllBlogs() throws BlogServiceException {
+		BlogList entries = blogService.getAllBlogs();
+		assertNotNull(entries);
+		for (BaseBlogEntity blog : entries) {
+			assertValid((Blog)blog);
 		}
 	}
 
 	@Test
-	public void getMyBlogs() {
-		try {
-			BlogList entries = blogService.getMyBlogs();
-			assertNotNull(entries);
-			for (BaseBlogEntity blog : entries) {
-				assertValid((Blog)blog);
-			}
-		} catch (Exception e) {
-			fail("Error calling blogService.getMyBlogs() caused by: "+e.getMessage());
+	public void getMyBlogs() throws BlogServiceException {
+		BlogList entries = blogService.getMyBlogs();
+		assertNotNull(entries);
+		for (BaseBlogEntity blog : entries) {
+			assertValid((Blog)blog);
 		}
 	}
 
 	@Test
-	public void getFeaturedBlogs() {
-		try {
-			BlogList entries = blogService.getFeaturedBlogs();
-			assertNotNull(entries);
-			for (BaseBlogEntity blog : entries) {
-				assertValid((Blog)blog);
-			}
-		} catch (Exception e) {
-			fail("Error calling blogService.getFeaturedBlogs() caused by: "+e.getMessage());
+	public void getFeaturedBlogs() throws BlogServiceException {
+		BlogList entries = blogService.getFeaturedBlogs();
+		assertNotNull(entries);
+		for (BaseBlogEntity blog : entries) {
+			assertValid((Blog)blog);
 		}
 	}
 
 	@Test
-	public void getAllComments() {
-		try {
-			CommentList entries = blogService.getAllComments();
-			assertNotNull(entries);
-			for (BaseBlogEntity comment : entries) {
-				assertValid((Comment)comment);
-			}
-		} catch (Exception e) {
-			fail("Error calling blogService.getAllComments() caused by: "+e.getMessage());
+	public void getAllComments() throws BlogServiceException {
+		CommentList entries = blogService.getAllComments();
+		assertNotNull(entries);
+		for (BaseBlogEntity comment : entries) {
+			assertValid((Comment)comment);
 		}
 	}
 
 
 	@Test
-	public void getAllPosts() {
-		try {
-			BlogPostList entries = blogService.getAllPosts();
-			assertNotNull(entries);
-			for (BaseBlogEntity blogPost : entries) {
-				assertValid((BlogPost)blogPost);
-			}
-		} catch (Exception e) {
-			fail("Error calling blogService.getAllPosts() caused by: "+e.getMessage());
+	public void getAllPosts() throws BlogServiceException {
+		BlogPostList entries = blogService.getAllPosts();
+		assertNotNull(entries);
+		for (BaseBlogEntity blogPost : entries) {
+			assertValid((BlogPost)blogPost);
 		}
 	}
 
 	@Test
-	public void getAllTags() {
-		try {
-			TagList entries = blogService.getAllTags();
-			assertNotNull(entries);
-			for (Tag tag : entries) {
-				assertValid((Tag)tag);
-			}
-		} catch (Exception e) {
-			fail("Error calling blogService.getAllTags() caused by: "+e.getMessage());
+	public void getAllTags() throws BlogServiceException {
+		TagList entries = blogService.getAllTags();
+		assertNotNull(entries);
+		for (Tag tag : entries) {
+			assertValid((Tag)tag);
 		}
 	}
 	
 	@Test
-	public void getRecommendedPosts() {
-		try {
-			BlogPostList entries = blogService.getRecommendedPosts();
-			assertNotNull(entries);
-			for (BaseBlogEntity blogPost : entries) {
-				assertValid((BlogPost)blogPost);
-			}
-		} catch (Exception e) {
-			fail("Error calling blogService.getRecommendedPosts() caused by: "+e.getMessage());
+	public void getRecommendedPosts() throws BlogServiceException {
+		BlogPostList entries = blogService.getRecommendedPosts();
+		assertNotNull(entries);
+		for (BaseBlogEntity blogPost : entries) {
+			assertValid((BlogPost)blogPost);
 		}
 	}
 	
 	@Test
-	public void getFeaturedPosts() {
-		try {
-			BlogPostList entries = blogService.getFeaturedPosts();
-			assertNotNull(entries);
-			for (BaseBlogEntity blogPost : entries) {
-				assertValid((BlogPost)blogPost);
-			}
-
-		} catch (Exception e) {
-			fail("Error calling blogService.getFeaturedPosts() caused by: "+e.getMessage());
+	public void getFeaturedPosts() throws BlogServiceException {
+		BlogPostList entries = blogService.getFeaturedPosts();
+		assertNotNull(entries);
+		for (BaseBlogEntity blogPost : entries) {
+			assertValid((BlogPost)blogPost);
 		}
 	}
 	
 	@Test
-	public void getBlogPosts() {
-		try {
-			Blog blog = createBlog();
-			BlogPostList entries = blogService.getBlogPosts(blog.getHandle());
-			assertNotNull(entries);
-			for (BaseBlogEntity blogPost : entries) {
-				assertValid((BlogPost)blogPost);
-			}
-			deleteBlog(blog);
-		} catch (Exception e) {
-			fail("Error calling blogService.getBlogPosts() caused by: "+e.getMessage());
+	public void getBlogPosts() throws BlogServiceException {
+		Blog blog = createBlog();
+		BlogPostList entries = blogService.getBlogPosts(blog.getHandle());
+		assertNotNull(entries);
+		for (BaseBlogEntity blogPost : entries) {
+			assertValid((BlogPost)blogPost);
 		}
+		deleteBlog(blog);
 	}
 	
 	@Test
-	public void getBlogComments() {
-		try {
-			Blog blog = createBlog();
-			CommentList entries = blogService.getBlogComments(blog.getHandle());
-			assertNotNull(entries);
-			for (BaseBlogEntity commment : entries) {
-				assertValid((Comment)commment);
-			}
-			deleteBlog(blog);
-		} catch (Exception e) {
-			fail("Error calling blogService.getBlogComments() caused by: "+e.getMessage());
+	public void getBlogComments() throws BlogServiceException {
+		Blog blog = createBlog();
+		CommentList entries = blogService.getBlogComments(blog.getHandle());
+		assertNotNull(entries);
+		for (BaseBlogEntity commment : entries) {
+			assertValid((Comment)commment);
 		}
+		deleteBlog(blog);
 	}
 	
 	@Test
-	public void getBlogTags() {
-		try {
+	public void getBlogTags() throws BlogServiceException {
 			Blog blog = createBlog();
 			TagList entries = blogService.getBlogTags(blog.getHandle());
 			assertNotNull(entries);
@@ -173,9 +131,6 @@ public class BlogServiceGetTests extends BaseBlogServiceTest {
 				assertValid((Tag)tag);
 			}
 			deleteBlog(blog);
-		} catch (Exception e) {
-			fail("Error calling blogService.getBlogComments() caused by: "+e.getMessage());
-		}
 	}
 	
 	protected void assertValid(Blog blog) {

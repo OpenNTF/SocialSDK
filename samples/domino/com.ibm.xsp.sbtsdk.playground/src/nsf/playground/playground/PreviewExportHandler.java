@@ -35,9 +35,10 @@ public class PreviewExportHandler extends PreviewHandler {
 					@Override
 					public boolean accept(Item item) throws NotesException {
 						String name = item.getName();
-						if(name.equalsIgnoreCase("$UpdatedBy")) {
-							return false;
-						}
+						// We need this field to keep the history!
+						//if(name.equalsIgnoreCase("$UpdatedBy")) {
+						//	return false;
+						//}
 						return true;
 					}
 				});

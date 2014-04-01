@@ -97,12 +97,11 @@ public class FollowService extends BaseService{
 	 */
 	public EntityList<FollowedResource> getFollowedResources(String source, String type, Map<String, String> parameters)  throws FollowServiceException{
 		try {
-			String url = FollowUrls.format(source, this);
+			String url = FollowUrls.format(source, this, Resource.get(""));
 			return getResources(url, generateParams(parameters, source, type, null));
 		} catch (ClientServicesException e) {
 			throw new FollowServiceException(e, "Problem occured in getFollowedResources");
 		}
-		
 	}
 	
 	
@@ -144,7 +143,7 @@ public class FollowService extends BaseService{
 			headers.put("Content-Type", "application/atom+xml");
 			
 			String atomPayload = transformer.transform(resource.getFieldsMap());
-			String url = FollowUrls.format(source, this);
+			String url = FollowUrls.format(source, this, Resource.get(resourceId));
 			result = createData(url, generateParams(null, source, type, null), headers, atomPayload);
 			return getFollowFeedHandler().createEntity(result);
 

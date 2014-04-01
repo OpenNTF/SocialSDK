@@ -52,6 +52,6 @@ public enum FollowUrls implements URLContainer {
 	}
 	
 	public static String format(String serviceName, BaseService service, NamedUrlPart... args) {
-		return valueOf(serviceName).format(service, args);
+		return valueOf(serviceName.toUpperCase()).format(service, args);
 	}
 }

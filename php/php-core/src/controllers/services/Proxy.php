@@ -128,6 +128,14 @@ class Proxy extends BaseController
 		if (isset($options['endpointName'])) {
 			unset($options['endpointName']);
 		}
+		
+		if (isset($options['uid'])) {
+			unset($options['uid']);
+		}
+		
+		if (isset($options['slug'])) {
+			unset($options['slug']);
+		}
 			
 		$headers = null;
 		$response = null;
@@ -139,16 +147,9 @@ class Proxy extends BaseController
 		}
 		
 		$method = $_SERVER['REQUEST_METHOD'];
-		$headers = apache_request_headers();
 	
-		$forwardHeader = null;
-		if (isset($headers['Content-Length'])) {
-			$forwardHeader['Content-Length'] = $headers['Content-Length'];
-		}
-		
-		if (isset($headers['Content-Type'])) {
-			$forwardHeader['Content-Type'] = $headers['Content-Type'];
-		}
+		$forwardHeader = $this->_getHeader($method);
+
 		if ($settings->getAuthenticationMethod($endpointName) == "basic") {
 			$endpoint = new SBTBasicAuthEndpoint();
 		} else if ($settings->getAuthenticationMethod($endpointName) == "oauth2") {
@@ -175,7 +176,7 @@ class Proxy extends BaseController
 				$containsServerURL = true;
 			}
 		}
-		
+
  		$response = $endpoint->makeRequest($server, $url, $method, $options, $body, $forwardHeader, $endpointName);
 
 		if ($response->getStatusCode() == 200) {
@@ -201,8 +202,9 @@ class Proxy extends BaseController
 					header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
 					header('Pragma: public');
 				}
-					
+
 				print_r($response->getBody(TRUE));
+				
 			}
 		} else if ($response->getStatusCode() == 302) {
 			$headers = $response->getHeaders();
@@ -210,6 +212,9 @@ class Proxy extends BaseController
 		} else if ($response->getStatusCode() == 201) {
 			$result = array('status' => 201, 'result' => true);
 			print_r(json_encode($result));
+		} else if ($response->getStatusCode() == 400) {
+			echo "400 - Bad Request"; 
+			print_r($response->getBody(TRUE));
 		} else if ($response->getStatusCode() == 401 || $response->getStatusCode() == '401oauth_token_expired') {
 			if (isset($_GET['endpointName'])) {
 				$store->deleteOAuthCredentials($_GET['endpointName']);
@@ -234,7 +239,7 @@ class Proxy extends BaseController
 	{
 	
 		if (isset($_GET["_redirectUrl"])) {
-			if (strpos($_GET["_redirectUrl"], '/DownloadFile/') !== FALSE) {
+			if (strpos($_GET["_redirectUrl"], '/DownloadFile/') !== false) {
 				$url = $_GET['_redirectUrl'];
 				
 				// Extract library ID and file ID
@@ -255,19 +260,82 @@ class Proxy extends BaseController
 				// Route
 				$this->route();
 				return true;
-			} else if (strpos($_GET["_redirectUrl"], '/UploadFile/') !== FALSE) {
+			} else if (strpos($_GET["_redirectUrl"], '/UploadFile/') !== false) {
+				$path = explode("/", $_GET["_redirectUrl"]);
+				$slug = $path[sizeof($path) - 1];
+				$_GET['slug'] = $slug;
+				
 				// Create new URL
 				$url = "/files/basic/api/myuserlibrary/feed";
 				
+				if (isset($_GET['visibility'])) {
+					$_POST['visibility'] = $_GET['visibility'];
+				}
+				
+				if (isset($_GET['tag'])) {
+					$_POST['tag'] = $_GET['tag'];
+				}
+				
+// 				if (isset($_GET['commentNotification'])) {
+// 					$_POST['commentNotification'] = $_GET['commentNotification'];
+// 				} else {
+// 					$_POST['commentNotification'] = 'on';
+// 				}
+				
+// 				$milliseconds = round(microtime(true) * 1000);
+// 				if (isset($_GET['created'])) {
+// 					$_POST['created'] = $_GET['created'];
+// 				} else {
+// 					$_POST['created'] = $milliseconds;
+// 				}
+				
+				
+// 				if (isset($_GET['includePath'])) {
+// 					$_POST['includePath'] = $_GET['includePath'];
+// 				} else {
+// 					$_POST['includePath'] = 'true';
+// 				}
+				
+// 				if (isset($_GET['mediaNotification'])) {
+// 					$_POST['mediaNotification'] = $_GET['mediaNotification'];
+// 				} else {
+// 					$_POST['mediaNotification'] = 'off';
+// 				}
+				
+// 				if (isset($_GET['modified'])) {
+// 					$_POST['modified'] = $_GET['modified'];
+// 				} else {
+// 					$_POST['modified'] = $milliseconds;
+// 				}
+				
+// 				if (isset($_GET['propagate'])) {
+// 					$_POST['propagate'] = $_GET['propagate'];
+// 				} else {
+// 					$_POST['propagate'] = 'false';
+// 				}
+				
+// 				if (isset($_GET['sharePermission'])) {
+// 					$_POST['sharePermission'] = $_GET['sharePermission'];
+// 				} else {
+// 					$_POST['sharePermission'] = 'Edit';
+// 				}
+				
+// 				if (isset($_GET['shareSummary'])) {
+// 					$_POST['shareSummary'] = $_GET['shareSummary'];
+					
+// 				} else {
+// 					$_POST['shareSummary'] = 'NA';
+// 				}
+			
 				// Update request
 				$_REQUEST['_redirectUrl'] = $url;
 				$_GET['_redirectUrl'] = $url;
-				$_POST['visibility'] = $_GET['visibility'];
+				
 				
 				// Route
 				$this->route();
 				return true;
-			} else if (strpos($_GET["_redirectUrl"], '/UploadCommunityFile/') !== FALSE) {
+			} else if (strpos($_GET["_redirectUrl"], '/UploadCommunityFile/') !== false) {
 				$url = $_GET['_redirectUrl']; 
 				
 				// Extract library ID and file ID
@@ -290,6 +358,43 @@ class Proxy extends BaseController
 			
 		}
 		return false;
+	}
+	
+	private function _getHeader($method) {
+		$headers = apache_request_headers();
+
+		$forwardHeader = null;
+		if (isset($headers['Content-Length'])) {
+			$forwardHeader['Content-Length'] = $headers['Content-Length'];
+		}
+		
+		if (isset($headers['Slug'])) {
+			$forwardHeader['Slug'] = $headers['Slug'];
+		} else if (isset($_GET['slug'])) {
+			$forwardHeader['Slug'] = $_GET['slug'];
+		}
+		
+		if (isset($headers['X-Update-Nonce'])) {
+			$forwardHeader['X-Update-Nonce'] = $headers['X-Update-Nonce'];
+		}
+		
+		if (isset($headers['Transfer-Encoding'])) {
+			$forwardHeader['Transfer-Encoding'] = $headers['Transfer-Encoding'];
+		}
+		
+		if ($method == 'PUT' || $method == 'POST') {
+			if (!isset($forwardHeader['X-Update-Nonce'])) {
+				$random = mt_rand(0, 999999);
+				$nonce = sha1($random);
+				$forwardHeader['X-Update-Nonce'] = $nonce;
+			}
+		}
+		
+		if (isset($headers['Content-Type'])) {
+			$forwardHeader['Content-Type'] = $headers['Content-Type'];
+		}
+		
+		return $forwardHeader;
 	}
 }
 ?>

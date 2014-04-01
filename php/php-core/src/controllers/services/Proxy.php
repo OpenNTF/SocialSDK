@@ -49,10 +49,14 @@ class Proxy extends BaseController
 		
 		$settings = new SBTSettings();
 		
+		$headers = apache_request_headers();
+		
 		$endpointName = "connections";
 		if (isset($_GET['endpointName'])) {
 			$endpointName = $_GET['endpointName'];
-		} 
+		} else if (isset($headers['X-Endpoint-name'])) {
+			$endpointName = $headers['X-Endpoint-name'];
+		}
 
 		if (!isset($_REQUEST["_redirectUrl"])) {
 			// Request to check if the user is authenticated
@@ -136,6 +140,10 @@ class Proxy extends BaseController
 		if (isset($options['slug'])) {
 			unset($options['slug']);
 		}
+		
+		if (isset($options['X-Endpoint-name'])) {
+			unset($options['X-Endpoint-name']);
+		}
 			
 		$headers = null;
 		$response = null;
@@ -176,7 +184,15 @@ class Proxy extends BaseController
 				$containsServerURL = true;
 			}
 		}
-
+	
+		if (isset($_FILES['file']['tmp_name'])) {
+			if ($body == "" || $body == null) {
+// 				$body = file_get_contents($_FILES['file']['tmp_name']);
+				$options['fileentry'] = '@' . $_FILES['file']['tmp_name'];
+				$body['fileentry'] = '@' . $_FILES['file']['tmp_name'];
+			}
+		}
+// 		$options['fileentry'] = $_FILES['file']['tmp_name'];
  		$response = $endpoint->makeRequest($server, $url, $method, $options, $body, $forwardHeader, $endpointName);
 
 		if ($response->getStatusCode() == 200) {
@@ -266,14 +282,16 @@ class Proxy extends BaseController
 				$_GET['slug'] = $slug;
 				
 				// Create new URL
-				$url = "/files/basic/api/myuserlibrary/feed";
+				$url = "/files/basic/api/myuserlibrary/feed?";
 				
 				if (isset($_GET['visibility'])) {
-					$_POST['visibility'] = $_GET['visibility'];
+					$url .= 'visibility=' . $_GET['visibility'];
+				} else {
+					$url .= 'visibility=private';
 				}
 				
 				if (isset($_GET['tag'])) {
-					$_POST['tag'] = $_GET['tag'];
+					$url .= '&tag=' . $_GET['tag'];
 				}
 				
 // 				if (isset($_GET['commentNotification'])) {
@@ -363,7 +381,7 @@ class Proxy extends BaseController
 	private function _getHeader($method) {
 		$headers = apache_request_headers();
 
-		$forwardHeader = null;
+		$forwardHeader = array();
 		if (isset($headers['Content-Length'])) {
 			$forwardHeader['Content-Length'] = $headers['Content-Length'];
 		}
@@ -375,25 +393,31 @@ class Proxy extends BaseController
 		}
 		
 		if (isset($headers['X-Update-Nonce'])) {
-			$forwardHeader['X-Update-Nonce'] = $headers['X-Update-Nonce'];
+			$forwardHeader['x-update-nonce'] = $headers['X-Update-Nonce'];
 		}
 		
 		if (isset($headers['Transfer-Encoding'])) {
 			$forwardHeader['Transfer-Encoding'] = $headers['Transfer-Encoding'];
 		}
 		
+		if (isset($headers['Content-Type'])) {
+			$forwardHeader['Content-Type'] = $headers['Content-Type'];
+		}
+		
+		
+		
 		if ($method == 'PUT' || $method == 'POST') {
 			if (!isset($forwardHeader['X-Update-Nonce'])) {
 				$random = mt_rand(0, 999999);
 				$nonce = sha1($random);
-				$forwardHeader['X-Update-Nonce'] = $nonce;
+				$forwardHeader['x-update-nonce'] = $nonce;
 			}
 		}
 		
 		if (isset($headers['Content-Type'])) {
 			$forwardHeader['Content-Type'] = $headers['Content-Type'];
 		}
-		
+	
 		return $forwardHeader;
 	}
 }

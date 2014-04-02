@@ -24,6 +24,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.http.Header;
+import org.apache.http.HeaderElement;
 import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
@@ -638,6 +640,19 @@ public class ActivityService extends BaseService {
 			Map<String, String> headers = new HashMap<String, String>();
 			headers.put("Content-Type", "application/atom+xml");
 			Response requestData = createData(requestUri, params, headers, activityNodePayload);
+			
+			Header[] cookies = requestData.getResponse().getHeaders("Cookie");
+			for (Header cookie : cookies) {
+				System.out.println(cookie.getName()+"="+cookie.getValue());
+				HeaderElement[] elements = cookie.getElements();
+				for (HeaderElement element : elements) {
+					System.out.println(element.getName()+"="+element.getValue());
+					NameValuePair[] parameters = element.getParameters();
+					for (NameValuePair parameter : parameters) {
+						System.out.println(parameter.getName()+"="+parameter.getValue());
+					}
+				}
+			}
 			
 			int statusCode = requestData.getResponse().getStatusLine().getStatusCode();
 			if (statusCode == 201) {

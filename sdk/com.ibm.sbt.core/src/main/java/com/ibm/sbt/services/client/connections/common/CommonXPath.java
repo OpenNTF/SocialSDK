@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -13,30 +13,31 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-package com.ibm.sbt.services.client.base;
+
+package com.ibm.sbt.services.client.connections.common;
 
 import com.ibm.commons.xml.DOMUtil;
-
 import com.ibm.commons.xml.XMLException;
 import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.base.datahandlers.FieldEntry;
 
 /**
- * 
- * @author Carlos Manias
+ * @author mwallace
  *
  */
-public enum ConnectionsFeedXpath implements FieldEntry {
-	Entry("/a:feed/a:entry"),
-	Category("/app:categories/a:category"),
-	TotalResults("/a:feed/opensearch:totalResults"),
-	StartIndex("/a:feed/opensearch:startIndex"), 
-	ItemsPerPage("/a:feed/opensearch:itemsPerPage"),
-	CurrentPage("/rel=self");
-
+public enum CommonXPath implements FieldEntry {
+	
+	term("@term"),
+	frequency("@snx:frequency"),
+	visibility("@snx:visibility"),
+	href("@href"),
+	title("@title"),
+	size("@size"),
+	type("@type");
+	
 	private final XPathExpression path;
 	
-	private ConnectionsFeedXpath(String xpath) {
+	private CommonXPath(String xpath) {
 		XPathExpression xpathExpr = null;
 		try {
 			xpathExpr = DOMUtil.createXPath(xpath);
@@ -50,10 +51,9 @@ public enum ConnectionsFeedXpath implements FieldEntry {
 	public XPathExpression getPath() {
 		return path;
 	}
-
+	
 	@Override
 	public String getName() {
 		return this.name();
 	}
-
 }

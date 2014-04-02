@@ -19,7 +19,7 @@
  * @author Benjamin Jakobus
  */
 $string['pluginname'] = 'IBM Connections Toolkit';
-$string['ibmsbt'] = 'IBM Connections Toolki';
+$string['ibmsbt'] = 'IBM Connections Toolkit';
 $string['ibmsbt:addinstance'] = 'Add a new simple HTML block';
 $string['ibmsbt:myaddinstance'] = 'Add a new simple HTML block to the My Moodle page';
 $string['config_title'] = 'Title:';

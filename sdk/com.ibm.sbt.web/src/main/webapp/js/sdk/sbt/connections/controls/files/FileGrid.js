@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -201,9 +201,8 @@ function(declare, lang, dom, stringUtil, sbt, parameter, Grid,
 					
 					this.fileAction = new FileAction(this),
 					
-					this.fileService = new FileService(
-							this.endpointName || "connections");
-
+					this.fileService = new FileService(args);
+					
 					/**
 					 * gridSortType is used to determine what sorting
 					 * anchors should be used, for example folders have

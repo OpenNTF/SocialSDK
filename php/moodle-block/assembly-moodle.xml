@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <assembly>
-	<id>distribution</id>
+	<id>zip</id>
 	<formats>
 		<format>zip</format>
 	</formats>
@@ -18,6 +18,10 @@
 			<includes>
 				<include>**/*</include>
 			</includes>
+			<excludes>
+			<exclude>models/SBTCredentialStore.php</exclude>
+			<exclude>models/SBTSettings.php</exclude>
+			</excludes>		
 			<directory>target/core</directory>
 			<outputDirectory>ibmsbt/core</outputDirectory>
 		</fileSet>

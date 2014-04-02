@@ -18,7 +18,7 @@
  * @module sbt.store.AtomStore
  */
 define(["../declare","../config","../lang", "../base/core", "../xml", "../xpath", "../itemFactory", "../Promise",
-        "dojo/_base/Deferred", "dojo/promise/Promise", "dojo/store/util/QueryResults", "dojox/html/entities"], 
+        "dojo/_base/Deferred", "dojo/promise/Promise", "dojo/store/util/QueryResults", "../entities"], 
         function(declare, config, lang, core, xml, xpath, itemFactory, SbtPromise, Deferred, Promise, QueryResults, entities) {
   
     /**

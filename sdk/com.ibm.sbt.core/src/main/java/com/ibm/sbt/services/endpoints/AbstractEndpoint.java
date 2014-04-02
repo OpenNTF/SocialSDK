@@ -307,26 +307,22 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
      */
     @Override
     public JSReference getProxy(String endpointName, String moduleId) {
-    	Endpoint e = this;
     	String proxyModuleId = moduleId;
     	Proxy proxy = null;
     	
-    	if(!endpointName.equals(this.getName())){
-    		e = EndpointFactory.getEndpointUnchecked(endpointName);
+    	if(this.getProxyConfig() != null){
+    		try {
+    			proxy = ProxyFactory.getProxyConfig(this.getProxyConfig());
+    			if(proxy != null && proxy.getProxyModule() != null){
+    				proxyModuleId = proxy.getProxyModule();
+    			}
+    		} catch (ProxyConfigException ex) {
+    			Logger logger = Logger.getLogger(AbstractEndpoint.class.getName());
+    			if (logger.isLoggable(Level.SEVERE)) {
+    				logger.severe(ex.getMessage());
+    			}
+    		}
     	}
-    	
-		try {
-			proxy = ProxyFactory.getProxyConfig(e.getProxyConfig());
-			if(proxy != null && proxy.getProxyModule() != null){
-				proxyModuleId = proxy.getProxyModule();
-			}
-		} catch (ProxyConfigException ex) {
-			String thisClass = AbstractEndpoint.class.getName();
-			Logger logger = Logger.getLogger(thisClass);
-			if (logger.isLoggable(Level.SEVERE)) {
-				logger.entering(thisClass, "createProxyRef failed", ex.getMessage());
-			}
-		}
     	
     	return new JSReference(proxyModuleId);
     }

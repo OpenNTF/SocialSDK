@@ -24,7 +24,9 @@ import java.util.Set;
 import org.w3c.dom.Node;
 
 import com.ibm.commons.util.StringUtil;
+import com.ibm.commons.xml.DOMUtil;
 import com.ibm.commons.xml.NamespaceContext;
+import com.ibm.commons.xml.XMLException;
 import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.base.datahandlers.FieldEntry;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
@@ -83,6 +85,15 @@ public class AtomEntity extends BaseEntity {
 	 */
 	public AtomEntity() {
 	}
+	
+	/**
+	 * Set the data for the entity from the specified response.
+	 * 
+	 * @param response
+	 */
+	public void setData(Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
+		dataHandler = new XmlDataHandler(node, namespaceCtx, xpathExpression);
+	}		
 	
     /**
      * Return the value of id from ATOM entry document.
@@ -270,6 +281,19 @@ public class AtomEntity extends BaseEntity {
 		setAsList(AtomXPath.tags, tags);
 	}
 	
+	/**
+	 * Return XML string for the Atom entity.
+	 * 
+	 * @return
+	 * @throws XMLException
+	 */
+	public String toXmlString() throws XMLException {
+		XmlDataHandler dataHandler = (XmlDataHandler)getDataHandler();
+		if (dataHandler != null && dataHandler.getData() != null) {
+			return DOMUtil.getXMLString(dataHandler.getData());
+		}
+		return null;
+	}
 	
 	protected void setAsSet(FieldEntry field, Set<String> value) {
 		fields.put(field.getName(), value);
@@ -287,7 +311,7 @@ public class AtomEntity extends BaseEntity {
 		if (dataHandler != null) {
 			return new HashSet<String>(Arrays.asList((dataHandler.getAsArray(field))));
 		}
-		throw new NullPointerException(StringUtil.format("Field {0} was not found or had no value",field.getName()));
+		return null;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -298,6 +322,6 @@ public class AtomEntity extends BaseEntity {
 		if (dataHandler != null) {
 			return Arrays.asList((dataHandler.getAsArray(field)));
 		}
-		throw new NullPointerException(StringUtil.format("Field {0} was not found or had no value",field.getName()));
+		return null;
 	}
 }

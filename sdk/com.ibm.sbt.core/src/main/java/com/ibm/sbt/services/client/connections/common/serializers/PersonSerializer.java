@@ -14,30 +14,35 @@
  * permissions and limitations under the License.
  */
 
-package com.ibm.sbt.services.client.base.serializers;
+package com.ibm.sbt.services.client.connections.common.serializers;
 
-import org.w3c.dom.Node;
-
-import com.ibm.sbt.services.client.base.ConnectionsConstants.Namespaces;
+import com.ibm.sbt.services.client.base.serializers.BaseEntitySerializer;
 import com.ibm.sbt.services.client.connections.common.Person;
 
 /**
- * 
- * @author Mario Duarte
+ * @author mwallace
  *
  */
 public class PersonSerializer extends BaseEntitySerializer<Person> {
-
-	public PersonSerializer(Person entity) {
-		super(entity);
+	
+	public PersonSerializer(Person person) {
+		super(person);
 	}
 	
-	public Node xmlNode(String nodeName) {
-		return appendChildren(rootNode(element(nodeName)),
-				textElement("name", entity.getName()),
-				textElement("email", entity.getEmail()),
-				textElement(Namespaces.SNX, "userid", entity.getId()),
-				textElement(Namespaces.SNX, "userState", entity.getState())
+	public String generateCreate() {
+		/*
+		Node entry = entry();
+		
+		appendChilds(entry
 		);
+		*/
+		return serializeToString();
 	}
+	
+	public String generateUpdate() {
+		//Node entry = genericAtomEntry();
+				
+		return serializeToString();
+	}
+		
 }

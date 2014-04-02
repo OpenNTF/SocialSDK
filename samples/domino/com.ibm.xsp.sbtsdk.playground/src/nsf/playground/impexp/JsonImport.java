@@ -33,8 +33,10 @@ import lotus.domino.Item;
 import lotus.domino.NotesException;
 import lotus.domino.Session;
 
+import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.json.JsonException;
 import com.ibm.commons.util.io.json.JsonGenerator;
+import com.ibm.commons.util.io.json.JsonJavaArray;
 import com.ibm.commons.util.io.json.JsonJavaFactory;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.commons.util.io.json.JsonParser;
@@ -90,6 +92,10 @@ public class JsonImport extends JsonImportExport {
 				String name = e.getName();
 				if(name.endsWith(JsonImportExport.DOCUMENT_EXTENSION)) {
 					String unid = decodeFileName(name.substring(0,name.length()-JsonImportExport.DOCUMENT_EXTENSION.length()));
+					int pos = unid.lastIndexOf('/');
+					if(pos>0) {
+						unid = unid.substring(pos+1);
+					}
 					try {
 						JsonJavaObject o = (JsonJavaObject)JsonParser.fromJson(JsonJavaFactory.instanceEx2, new InputStreamReader(zipIs,"UTF-8"));
 						return new Entry(unid,o);
@@ -132,28 +138,45 @@ public class JsonImport extends JsonImportExport {
 	}
 
 	protected void importDocument(Session session, Document doc, JsonJavaObject jsDoc) throws IOException, NotesException {
+		Map<String,Object> allFlags = (Map<String,Object>)jsDoc.get(FLAGS_FIELD);
 		for(Map.Entry<String, Object> e: jsDoc.entrySet()) {
 			String k = e.getKey();
-			Object v = toNotesObject(session,e.getValue());
+			// Ignore the flag field
+			if(StringUtil.equals(k, FLAGS_FIELD)) {
+				continue;
+			}
+			// Read the flags for this field
+			String[] flags = null;
+			if(allFlags!=null) {
+				String s = (String)allFlags.get(k);
+				if(StringUtil.isNotEmpty(s)) {
+					flags = StringUtil.splitString(s, ',');
+				}
+			}
+			// Then convert the field
+			Object v = toNotesObject(session,e.getValue(),flags);
 			Item item = doc.replaceItemValue(k, v);
 			if(getItemFilter()!=null && !getItemFilter().accept(item)) {
 				item.remove();
+			} else {
+				processItem(session, doc, item, flags);
 			}
 		}
 	}
-	protected Object toNotesObject(Session session, Object jsonObject) throws IOException, NotesException {
+	protected Object toNotesObject(Session session, Object jsonObject, String[] flags) throws IOException, NotesException {
 		if(jsonObject==null) {
 			return null;
 		} else if(jsonObject instanceof List<?>) {
 			List<?> jsonArray = (List<?>)jsonObject;
 			Vector<Object> v = new Vector<Object>();
 			for(int i=0; i<jsonArray.size(); i++) {
-				v.add(toNotesObject(session,jsonArray.get(i)));
+				v.add(toNotesObject(session,jsonArray.get(i),flags));
 			}
 			return v;
 		} else if(jsonObject instanceof String) {
 			String s = (String)jsonObject;
-			if(s.length()==21 && s.charAt(11)=='T') {
+			// 2013-06-17T14:31:44
+			if(s.length()==19 && s.charAt(4)=='-' && s.charAt(7)=='-'&& s.charAt(10)=='T' && s.charAt(13)==':' && s.charAt(16)==':') {
 				try {
 					Date dt = JsonGenerator.stringToDate(s);
 					return session.createDateTime(dt);
@@ -167,5 +190,19 @@ public class JsonImport extends JsonImportExport {
 		} else {
 			throw new IOException("Invalid Json type "+jsonObject.getClass());
 		}
+	}
+	protected Item processItem(Session session, Document document, Item item, String[] flags) throws IOException, NotesException {
+		if(flags!=null) {
+			if(StringUtil.contains(flags, FLAGS_NAMES)) {
+				item.setNames(true);
+			}
+			if(StringUtil.contains(flags, FLAGS_READERS)) {
+				item.setReaders(true);
+			}
+			if(StringUtil.contains(flags, FLAGS_AUTHORS)) {
+				item.setAuthors(true);
+			}
+		}
+		return item;
 	}
 }

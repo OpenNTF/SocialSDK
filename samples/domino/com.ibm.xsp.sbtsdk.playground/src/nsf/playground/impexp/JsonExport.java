@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.util.Date;
 import java.util.Vector;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -34,6 +35,7 @@ import lotus.domino.View;
 import lotus.domino.ViewEntry;
 import lotus.domino.ViewEntryCollection;
 
+import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.json.JsonException;
 import com.ibm.commons.util.io.json.JsonGenerator;
 import com.ibm.commons.util.io.json.JsonJavaArray;
@@ -59,12 +61,14 @@ public class JsonExport extends JsonImportExport {
 	
 	public static class ZipExportTarget implements ExportTarget {
 		private boolean compact;
+		private boolean itemFlags;
 		private ZipOutputStream zipOs;
 		private Document document;
 		private JsonJavaObject jsonDocument;
-		public ZipExportTarget(OutputStream os, boolean compact) throws IOException {
+		public ZipExportTarget(OutputStream os, boolean compact, boolean itemFlags) throws IOException {
 			this.zipOs = new ZipOutputStream(os);
 			this.compact = compact;
+			this.itemFlags = itemFlags; 
 		}
 		public void startExport() throws IOException {
 		}
@@ -75,11 +79,13 @@ public class JsonExport extends JsonImportExport {
 		public void startDocument(Document doc) throws IOException {
 			document = doc;
 			jsonDocument = new JsonJavaObject();
+			if(itemFlags) {
+				jsonDocument.put(FLAGS_FIELD, new JsonJavaObject());
+			}
 		}
 		public void endDocument() throws IOException {
 			try {
-				String unid = document.getUniversalID();
-				String entryName = encodeFileName(unid+JsonImportExport.DOCUMENT_EXTENSION);
+				String entryName = encodeFileName(getFileName());
 				ZipEntry e = new ZipEntry(entryName);
 				zipOs.putNextEntry(e);
 				Writer w = new OutputStreamWriter(zipOs,"UTF-8");
@@ -88,9 +94,19 @@ public class JsonExport extends JsonImportExport {
 				zipOs.closeEntry();
 				document = null;
 				jsonDocument = null;
-			} catch(NotesException e) {
-				throw new IOException(e);
 			} catch(JsonException e) {
+				throw new IOException(e);
+			}
+		}
+		protected String getFileName() throws IOException {
+			try {
+				String fileName = document.getUniversalID();
+				String form = document.getItemValueString("form");
+				if(StringUtil.isNotEmpty(form)) {
+					fileName = form + '/' + fileName;
+				}
+				return fileName+JsonImportExport.DOCUMENT_EXTENSION;
+			} catch(NotesException e) {
 				throw new IOException(e);
 			}
 		}
@@ -109,9 +125,34 @@ public class JsonExport extends JsonImportExport {
 				} else {
 					jsonDocument.put(item.getName(),asJsonValue(values.get(0)));
 				}
+				if(itemFlags) {
+					String flags = getFlags(item);
+					if(StringUtil.isNotEmpty(flags)) {
+						((JsonJavaObject)jsonDocument.get(FLAGS_FIELD)).put(item.getName(),flags);
+					}
+				}
 			} catch(NotesException e) {
 				throw new IOException(e);
 			}
+		}
+		private String getFlags(Item item) throws IOException, NotesException {
+			String flags = null;
+			if(item.isNames()) {
+				flags = addFlag(flags, FLAGS_NAMES);
+			}
+			if(item.isReaders()) {
+				flags = addFlag(flags, FLAGS_READERS);
+			}
+			if(item.isAuthors()) {
+				flags = addFlag(flags, FLAGS_AUTHORS);
+			}
+			return flags;
+		}
+		private String addFlag(String flags, String flag) {
+			if(StringUtil.isNotEmpty(flags)) {
+				return flags + ',' + flag;
+			}
+			return flag;
 		}
 		private Object asJsonValue(Object v) throws IOException, NotesException {
 			if(v==null) {
@@ -119,7 +160,8 @@ public class JsonExport extends JsonImportExport {
 			} else if(v instanceof Number) {
 				return v;
 			} else if(v instanceof DateTime) {
-				return ((DateTime)v).toJavaDate();
+				Date dt = ((DateTime)v).toJavaDate(); 
+				return JsonGenerator.dateToString(dt);
 			} else if(v instanceof String) {
 				return v;
 			} else {
@@ -192,6 +234,5 @@ public class JsonExport extends JsonImportExport {
 			return;
 		}
 		target.addItem(item);
-	}
-	
+	}	
 }

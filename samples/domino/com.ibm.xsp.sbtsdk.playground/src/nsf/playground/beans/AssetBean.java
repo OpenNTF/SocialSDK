@@ -64,6 +64,7 @@ public abstract class AssetBean {
 	public String getSnippetsAsJson() throws NotesException, IOException {
 		RootNode root = readSnippetsNodes();
 		JsonTreeRenderer r = new JsonTreeRenderer();
+		r.setCategoryUrl(true); // So we can bookmark the categories
 		String apisSearch = (String)ExtLibUtil.getViewScope().get("assetSearch");
 		if(StringUtil.isNotEmpty(apisSearch)) {
 			r.setFlat(true);

@@ -19,8 +19,8 @@
  * @module sbt.connections.BlogPost
  * @author Rajmeet Bal
  */
-define(["../declare", "../base/AtomEntity", "./BlogConstants" ], 
-    function(declare, AtomEntity, consts) {
+define(["../declare", "../lang", "../base/AtomEntity", "./BlogConstants", "../base/XmlDataHandler" ], 
+    function(declare, lang, AtomEntity, consts, XmlDataHandler) {
 
     /**
      * BlogPost class represents a post for a Blogs feed returned by the
@@ -272,7 +272,7 @@ define(["../declare", "../base/AtomEntity", "./BlogConstants" ],
             };
             var url = null;
             url = this.service.constructUrl(consts.AtomBlogPostInstance, null, {
-            	blogHomepageHandle : this.handle,
+            	blogHomepageHandle : this.service.handle,
             	postUuid : blogPostUuid
 			});
             return this.service.getEntity(url, options, blogPostUuid, callbacks);

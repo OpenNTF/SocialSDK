@@ -308,7 +308,7 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
     @Override
     public JSReference getProxy(String endpointName, String moduleId) {
     	Endpoint e = this;
-    	String proxyModuleId = new String(moduleId);
+    	String proxyModuleId = moduleId;
     	Proxy proxy = null;
     	
     	if(!endpointName.equals(this.getName())){

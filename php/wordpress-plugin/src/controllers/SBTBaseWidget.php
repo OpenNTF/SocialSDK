@@ -26,6 +26,8 @@ class SBTBaseWidget extends WP_Widget {
 	private $widget_location;
 	
 	private $elID = "";
+	
+	private $endpoint = "connections";
 
 	/**
 	 * Constructor.
@@ -51,44 +53,59 @@ class SBTBaseWidget extends WP_Widget {
 		$settings = new SBTSettings();
 		$store = SBTCredentialStore::getInstance();
  
+		if (isset($instance['ibm-sbtk-endpoint'])) {
+			$this->endpoint = $instance['ibm-sbtk-endpoint'];
+		} else {
+			$this->endpoint = "connections";
+		}
+		
  		// If tokens exist, make sure that they are valid. Otherwise clear the store and force the
  		// user to re-log
- 		
- 		if (($settings->getAuthenticationMethod() == 'oauth1' || $settings->getAuthenticationMethod() == 'oauth2') && $store->getOAuthAccessToken() != null) {
+
+ 		if (($settings->getAuthenticationMethod($this->endpoint) == 'oauth1' || 
+ 				$settings->getAuthenticationMethod($this->endpoint) == 'oauth2') 
+ 				&& $store->getOAuthAccessToken($this->endpoint) != null) {
  			$endpoint = null;
- 			if ($settings->getAuthenticationMethod() == "oauth2") {
+ 			if ($settings->getAuthenticationMethod($this->endpoint) == "oauth2") {
  				$endpoint = new SBTOAuth2Endpoint();
- 			} else if ($settings->getAuthenticationMethod() == "oauth1") {
+ 			} else if ($settings->getAuthenticationMethod($this->endpoint) == "oauth1") {
  				$endpoint = new SBTOAuth1Endpoint();
  			}
  			
  			$service = '/files/basic/api/myuserlibrary/feed';
  			
- 			$response = $endpoint->makeRequest($settings->getURL(), $service, 'GET', null, null);
+ 			$response = $endpoint->makeRequest($settings->getURL($this->endpoint), $service, 'GET', array(), null, null, $this->endpoint);
+ 			
  			if ($response->getStatusCode() == 401) {
- 				$store->deleteOAuthCredentials();
+ 				$store->deleteOAuthCredentials($this->endpoint);
  				setcookie('IBMSBTKOAuthLogin', "", $timestamp - 604800);
  				require BASE_PATH . '/core/views/oauth-login-display.php';
  			}
  		}		
+ 	
 		echo '<div name="ibm_sbtk_widget">';
-		if (($settings->getAuthenticationMethod() == 'oauth1' || $settings->getAuthenticationMethod() == 'oauth2') && $store->getOAuthAccessToken() == null &&
+		if (($settings->getAuthenticationMethod($this->endpoint) == 'oauth1' || $settings->getAuthenticationMethod($this->endpoint) == 'oauth2') 
+			&& $store->getOAuthAccessToken($this->endpoint) == null &&
 		(!isset($_COOKIE['IBMSBTKOAuthLogin']) || $_COOKIE['IBMSBTKOAuthLogin'] != 'yes')) {
 			require BASE_PATH . '/core/views/oauth-login-display.php';
 			echo '</div>';
 			return;
 		}
+		
+		$plugin = new SBTPlugin($this->endpoint);
 
-		if (($settings->getAuthenticationMethod() == 'basic' && $store->getBasicAuthUsername() != null 
-			&& $store->getBasicAuthPassword() != null) || ($settings->getAuthenticationMethod() == 'oauth1' && $store->getRequestToken() != null)
-			|| ($settings->getAuthenticationMethod() == 'basic' && $settings->getBasicAuthMethod() == 'global')
-			|| ($settings->getAuthenticationMethod() == 'oauth2' && $store->getOAuthAccessToken() != null)) {
+		if (($settings->getAuthenticationMethod($this->endpoint) == 'basic' && $store->getBasicAuthUsername($this->endpoint) != null 
+			&& $store->getBasicAuthPassword($this->endpoint) != null) || ($settings->getAuthenticationMethod($this->endpoint) == 'oauth1' && $store->getRequestToken($this->endpoint) != null)
+			|| ($settings->getAuthenticationMethod($this->endpoint) == 'basic' && $settings->getBasicAuthMethod($this->endpoint) == 'global')
+			|| ($settings->getAuthenticationMethod($this->endpoint) == 'oauth2' && $store->getOAuthAccessToken($this->endpoint) != null)) {
+
 			require $this->widget_location;
 		}
 
-		if ($settings->getAuthenticationMethod() == 'basic' && $settings->getBasicAuthMethod() == 'prompt') {
+		if ($settings->getAuthenticationMethod($this->endpoint) == 'basic' && $settings->getBasicAuthMethod($this->endpoint) == 'prompt'
+			&& $store->getBasicAuthPassword($this->endpoint) == null) {
 			require_once BASE_PATH . '/views/basic-auth-login-display.php';
-		} else if ($settings->getAuthenticationMethod() == 'oauth1' || $settings->getAuthenticationMethod() == 'oauth2') {
+		} else if ($settings->getAuthenticationMethod($this->endpoint) == 'oauth1' || $settings->getAuthenticationMethod($this->endpoint) == 'oauth2') {
 // 			require_once BASE_PATH . '/views/oauth-logout-display.php'; TODO: Uncomment when OAuth logout has been fixed
 		}
 		echo '</div>';
@@ -111,6 +128,12 @@ class SBTBaseWidget extends WP_Widget {
 		} else {
 			$template = "";
 		}
+		
+		if (isset($instance['ibm-sbtk-endpoint'])) {
+			$this->endpoint = $instance['ibm-sbtk-endpoint'];
+		} else {
+			$this->endpoint = "connections";
+		}
 	
 		?>
 				<p>
@@ -121,6 +144,19 @@ class SBTBaseWidget extends WP_Widget {
 					<label for="<?php echo $this->get_field_id('ibm-sbtk-template'); ?>">Template<br/><span style="font-size: 10px;">(path must be relative to <?php echo BASE_PATH; ?>)</span>:</label> 
 					<input class="widefat" id="<?php echo $this->get_field_id('ibm-sbtk-template'); ?>" name="<?php echo $this->get_field_name('ibm-sbtk-template'); ?>" type="text" value="<?php echo esc_attr($template); ?>"/>
 				</p>
+				
+				<p>
+				<label for="<?php echo $this->get_field_id('ibm-sbtk-endpoint'); ?>"><?php echo $GLOBALS[LANG]['endpoint']?>:</label> 
+				<select id="<?php echo $this->get_field_id('ibm-sbtk-endpoint'); ?>" name="<?php echo $this->get_field_name('ibm-sbtk-endpoint'); ?>">
+					<?php 
+						$settings = new SBTSettings();
+						$endpoints = $settings->getEndpoints();
+						foreach ($endpoints as $ep) {
+							echo '<option ' . ($ep['name'] == $this->endpoint ? 'selected="selected"' : '') . ' value="' . $ep['name'] . '">' . $ep['name'] . '</option>';
+						}
+					?>
+				</select>
+			</p>
 			<?php 
 		}
 			
@@ -134,6 +170,7 @@ class SBTBaseWidget extends WP_Widget {
 			$instance = array();
 			$instance['ibm-sbtk-element-id'] = (!empty($new_instance['ibm-sbtk-element-id'])) ? strip_tags($new_instance['ibm-sbtk-element-id'] ) : '';
 			$instance['ibm-sbtk-template'] = (!empty($new_instance['ibm-sbtk-template'])) ? strip_tags($new_instance['ibm-sbtk-template'] ) : '';
+			$instance['ibm-sbtk-endpoint'] = (!empty($new_instance['ibm-sbtk-endpoint'])) ? strip_tags($new_instance['ibm-sbtk-endpoint'] ) : '';
 			return $instance;
 		}
 

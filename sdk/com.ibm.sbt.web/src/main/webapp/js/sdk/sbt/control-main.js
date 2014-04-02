@@ -18,6 +18,7 @@
 * @module sbt.main
 */
 define([
+    'sbt/main',
     'sbt/connections/controls/ConnectionsGridRenderer',
     'sbt/connections/controls/ViewAllAction',
     'sbt/connections/controls/WidgetWrapper',

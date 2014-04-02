@@ -35,7 +35,13 @@ function ibm_sbtk_header($args = array()) {
 	(!isset($_COOKIE['IBMSBTKOAuthLogin']) || $_COOKIE['IBMSBTKOAuthLogin'] != 'yes')) {
 		return;
 	}
+	
+	$endpoints = $settings->getEndpoints();
 
-	$plugin = new SBTPlugin();		
+	if ($endpoints == null || empty($endpoints)) {
+		return;
+	}
+
+	$plugin = new SBTPlugin($endpoints[0]['name']);		
 	$plugin->createHeader();
 }

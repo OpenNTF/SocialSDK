@@ -35,16 +35,19 @@ if (!defined('MOODLE_INTERNAL')) {
 }
 
 global $DB;
-$DB->delete_records(ENDPOINTS, array());
-$DB->delete_records(SESSION_NAME, array());
-
 $dbman = $DB->get_manager();
-
 $endpoints_table = new xmldb_table(ENDPOINTS);
 $session_table = new xmldb_table(SESSION_NAME);
 
-$dbman->drop_table($endpoints_table);
-$dbman->drop_table($session_table);
+if ($dbman->table_exists($endpoints_table)) {
+	$DB->delete_records(ENDPOINTS, array());
+	$dbman->drop_table($endpoints_table);
+}
+
+if ($dbman->table_exists($session_table)) {
+	$DB->delete_records(SESSION_NAME, array());
+	$dbman->drop_table($session_table);
+}
 
 
 

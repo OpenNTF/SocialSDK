@@ -276,7 +276,7 @@ function change_new_basic_auth_method() {
 	if (authMethodSelect.options[authMethodSelect.selectedIndex]) {
 		var selectedAuthMethod = authMethodSelect.options[authMethodSelect.selectedIndex].value;
 		
-		if (selectedAuthMethod == "prompt") {
+		if (selectedAuthMethod == "prompt" || selectedAuthMethod == "profile") {
 			document.getElementById('tr_new_basic_auth_password').style.display = "none";
 			document.getElementById('tr_new_basic_auth_username').style.display = "none";
 			if (document.getElementById('new_endpoint_url').value == '' || document.getElementById('new_endpoint_name').value == '') {
@@ -318,7 +318,7 @@ function basicAuthFieldCheck() {
 		}
 	} else if (selectedAuthMethod == 'choose') {
 		document.getElementById("new_endpoint_save").setAttribute("disabled", "disabled");
-	} else if (selectedAuthMethod == "prompt") {
+	} else if (selectedAuthMethod == "prompt" || selectedAuthMethod == "profile") {
 		document.getElementById("new_endpoint_save").removeAttribute("disabled");
 	}
 }
@@ -646,6 +646,7 @@ function ibm_sbt_edit_endpoint() {
 					<option value="choose">Choose one...</option>
 					<option value="global">Global user credentials</option>
 		    		<option value="prompt">Prompt for user credentials</option>
+		    		<option value="profile">Use Moodle account credentials</option>
 				</select>
 			</td>
 		</tr>

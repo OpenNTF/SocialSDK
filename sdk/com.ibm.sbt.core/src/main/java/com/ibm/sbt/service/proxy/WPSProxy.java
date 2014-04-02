@@ -33,7 +33,7 @@ public class WPSProxy extends AbstractProxy {
 	
 	static final String	sourceClass	= SBTProxy.class.getName();
 	static final Logger	logger = Logger.getLogger(sourceClass);
-	private final String module = "WPSProxy";
+	private final String module = "sbt/WPSProxy";
 
 
 	@Override

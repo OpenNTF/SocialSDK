@@ -13,6 +13,9 @@ require(["sbt/connections/FileService", "sbt/dom"],
 	        td = document.createElement("td");
 	        tr.appendChild(td);
 	        td.appendChild(document.createTextNode(file.getFileId()));	       
+	        td = document.createElement("td");
+	        tr.appendChild(td);
+	        td.appendChild(document.createTextNode(file.getLibraryId()));	       
 	    };
 
         var fileService = new FileService();        

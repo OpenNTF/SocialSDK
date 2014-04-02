@@ -10,12 +10,11 @@
      * Adds a CodeMirror Instance to the specified object.
      */
     $.fn.addCodeMirror = function(mode){
-        var $code = this.html(),
-        $unescaped = $code.indexOf("&lt") != -1 ? $('<div/>').html($code).text().trim() : $code.trim();
+        var $code = this.text().trim();
         
         this.empty();
         CodeMirror(this.get(0), {
-            value: $unescaped,
+            value: $code,
             matchBrackets: true,
             mode: mode,
             lineNumbers: true
@@ -31,7 +30,7 @@
         if(el && el.firstChild && el.firstChild.CodeMirror){
             var html = el.firstChild.CodeMirror.getValue();
             this.empty();
-            this.html(html);
+            this.text(html);
         }
     },
     

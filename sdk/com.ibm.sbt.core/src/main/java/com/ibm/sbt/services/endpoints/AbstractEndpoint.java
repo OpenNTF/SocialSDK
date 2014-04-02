@@ -299,9 +299,9 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
     }
     
     /* (non-Javadoc)
-     * Returns the proxy reference of the endpoint with the name endpointName, if it exists.
+     * Returns the proxy's module id from the proxyconfig of this endpoint, if it exists.
      * 
-     * Returns moduleId if the endpoint has no proxy config.
+     * Returns moduleId if the endpoint has no proxyconfig.
      * 
      * @see com.ibm.sbt.services.endpoints.Endpoint#getProxy(java.lang.String, java.lang.String)
      */

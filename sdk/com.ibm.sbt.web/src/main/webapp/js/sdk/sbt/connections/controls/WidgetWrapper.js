@@ -91,11 +91,26 @@ define(["../../declare", "../../config", "../../lang", "../../widget/_TemplatedW
         /**
          * Get an object with the transformations to be performed on the template. Subclasses should override this to provide values for any substitution variables in their templates.
          * 
-         * @method getTransformObject
+         * @method getTemplateReplacements
          * @returns {Object}
          */
-        getTransformObject: function(){
+        getTemplateReplacements: function(){
             return {};
+        },
+        
+        /**
+         * @method getEndpoint
+         * @returns {Object}
+         */
+        getEndpoint: function(){
+            return this._endpoint;
+        },
+        
+        /**
+         * @method setEndpoint
+         */
+        setEndpoint: function(endpoint){
+            this._endpoint = endpoint;
         },
         
         /**
@@ -114,7 +129,7 @@ define(["../../declare", "../../config", "../../lang", "../../widget/_TemplatedW
                 }
                 if(this.defaultTemplate){
                     
-                    this.defaultTemplate = stringUtil.transform(this.defaultTemplate, this.getTransformObject(), function(value, key){
+                    this.defaultTemplate = stringUtil.transform(this.defaultTemplate, this.getTemplateReplacements(), function(value, key){
                         if(!value){
                             return "${" + key + "}";
                         }

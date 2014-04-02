@@ -16,12 +16,17 @@
 
 package com.ibm.sbt.services.client.connections.profiles;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.http.Header;
+import org.apache.http.conn.EofSensorInputStream;
+import org.w3c.dom.Node;
 
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.json.JsonJavaObject;
@@ -36,6 +41,7 @@ import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.profiles.feedhandler.ColleagueConnectionFeedHandler;
 import com.ibm.sbt.services.client.connections.profiles.feedhandler.ProfileFeedHandler;
 import com.ibm.sbt.services.client.connections.profiles.feedhandler.TagFeedHandler;
+import com.ibm.sbt.services.client.connections.profiles.model.ProfileXPath;
 import com.ibm.sbt.services.client.connections.profiles.transformers.ColleagueConnectionTransformer;
 import com.ibm.sbt.services.client.connections.profiles.transformers.ProfileTransformer;
 import com.ibm.sbt.services.client.connections.profiles.utils.Messages;
@@ -866,5 +872,43 @@ public class ProfileService extends BaseService {
 		String urlLocation = header!=null?header.getValue():"";
 		return urlLocation.substring(urlLocation.indexOf(CONNECTION_UNIQUE_IDENTIFIER+"=") + (CONNECTION_UNIQUE_IDENTIFIER+"=").length());
 	}
+	
+	/**
+	 * Returns a mapping containing the extended attributes for the entry.<bt/>
+	 * This method execute a xhr call to the back end for every attribute.
+	 * 
+	 * @param p the profile to use. has to be a full profile, to obtain all the extended attributes links
+	 * @return a map containing the id of the attribute as key and the attribute value as value<br/>
+	 * the map can contain object of type InputStream, Node, String, according to the return content type
+	 * @throws ProfileServiceException
+	 */
+	public Map<String,Object> getExtendedAttributes(Profile p) throws ProfileServiceException{
+		Map<String, Object> ret = new HashMap<String, Object>();
+ 		List<Node> attributes = (List<Node>) p.getDataHandler().getEntries(ProfileXPath.extendedAttributes);
+		for (Node link :attributes) {
+	         String extUrl = link.getAttributes().getNamedItem("href").getTextContent();
+	         String extId = link.getAttributes().getNamedItem("snx:extensionId").getTextContent();
+	         Response resp;
+			try {
+				resp = getEndpoint().xhrGet(extUrl);
+			} catch (ClientServicesException e) {
+				throw new ProfileServiceException(e);
+			}
+
+			Object extValue= resp.getData();
+			if (resp.getData() instanceof EofSensorInputStream) {
+				//a EofSensorInputStream leaves the connection open until it is read fully
+				//so we read it before serving it to the client terminating the connection
+				try {
+					extValue = new ByteArrayInputStream(IOUtils.toByteArray((EofSensorInputStream)resp.getData()));
+				} catch (Exception e) {
+					throw new ProfileServiceException(e,"Exception reading " + extUrl);
+				}
+			}
+			ret.put(extId, extValue);
+		}
+		return ret;
+	}
+
 
 }

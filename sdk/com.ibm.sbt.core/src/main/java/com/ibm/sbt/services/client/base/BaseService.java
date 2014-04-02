@@ -38,8 +38,13 @@ import com.ibm.sbt.services.endpoints.EndpointFactory;
  */
 public abstract class BaseService implements Serializable {
 
+	private static final long 					serialVersionUID = 1L;
+
 	public static final int						DEFAULT_CACHE_SIZE		= 0;
 	public static final String					DEFAULT_ENDPOINT_NAME	= "connections";
+	public static final String					CONTENT_TYPE			= "Content-Type";
+	public static final String					APPLICATION_ATOM_XML	= "application/atom+xml";
+	
 	protected transient static HashMap<String, Object>	cache					= new HashMap<String, Object>();
 	protected transient int						cacheSize;
 	protected Handler							dataFormat;
@@ -206,7 +211,7 @@ public abstract class BaseService implements Serializable {
 	 * @param parameters
 	 * @param headers
 	 * @param content
-	 * @param format
+	 * @param DateFormat
 	 * @return
 	 * @throws ClientServicesException
 	 * @throws IOException
@@ -303,13 +308,14 @@ public abstract class BaseService implements Serializable {
     public Response deleteData(String serviceUrl, Map<String, String> parameters, Map<String, String> headers, String nameParameterId)
             throws ClientServicesException, IOException {
         //TODO : remove the data format after review with Phil
-        String uniqueId = "";
+        String uniqueId = null;
         if (nameParameterId != null) {
-            uniqueId = parameters.get(nameParameterId);
+            uniqueId = (parameters == null) ? nameParameterId : parameters.get(nameParameterId);
         }
 
         Response r = getClientService().delete(serviceUrl, parameters, headers, getDataFormat());
-        if (cacheSize > 0 && nameParameterId != null) {
+        
+        if (cacheSize > 0 && uniqueId != null) {
             removeFromCache(uniqueId);
         }
 
@@ -409,8 +415,7 @@ public abstract class BaseService implements Serializable {
 	 * @throws ClientServicesException
 	 * @throws IOException
 	 */
-   public Response updateData(String serviceUrl, Map<String, String> parameters, Map<String, String> headers, Object content,
-	            String nameParameterId) throws ClientServicesException, IOException {
+   public Response updateData(String serviceUrl, Map<String, String> parameters, Map<String, String> headers, Object content, String nameParameterId) throws ClientServicesException, IOException {
         String uniqueId = "";
         if (nameParameterId != null) {
             uniqueId = parameters.get(nameParameterId);
@@ -426,8 +431,17 @@ public abstract class BaseService implements Serializable {
         }
 
         return result;
-    }
+   }
 
+   public Response putData(String serviceUrl, Map<String, String> parameters, Map<String, String> headers, Object content, String uniqueId) throws ClientServicesException, IOException {
+       Response result = getClientService().put(serviceUrl, parameters, headers, content, getDataFormat());
+       
+       if (cacheSize > 0 && uniqueId != null) {
+           addDataToCache(uniqueId, content);
+       }
+
+       return result;
+   }
 	
 	/**
 	 * findInCache()

@@ -9,7 +9,7 @@ function SCLogin() {
 	var left = 99;
 	var top = 99;
 
-	URL= "https://apps.na.collabserv.com/manage/account/dashboardHandler/input";
+	URL= "***REMOVED*** echo $settings->getURL($this->config->endpoint); ?>/manage/account/dashboardHandler/input";
        
 	window.open(URL,'SCLogin', 'width='+width+', height='+height+', top='+top+', left='+left+', scrollbars=yes, status=no, toolbar=no, location=no, directories=no, menubar=no, resizable=no, fullscreen=no');
 }
@@ -22,7 +22,7 @@ function SCLogout() {
 	var left = 99;
 	var top = 99;
 
-	URL= "https://apps.na.collabserv.com/manage/account/logoutSSO";
+	URL= "***REMOVED*** echo $settings->getURL($this->config->endpoint); ?>/manage/account/logoutSSO";
        
 	window.open(URL,'SCLogout', 'width='+width+', height='+height+', top='+top+', left='+left+', scrollbars=yes, status=no, toolbar=no, location=no, directories=no, menubar=no, resizable=no, fullscreen=no');
 }
@@ -54,7 +54,8 @@ function JoinMeeting() {
 	//
 	// If using SmartCloud - use this one
 	//
-	var URL='https://apps.na.collabserv.com/meetings/join?id=' + MeetingID.value;
+	
+	var URL='***REMOVED*** echo $settings->getURL($this->config->endpoint); ?>/meetings/join?id=' + MeetingID.value;
 	//
 	// If using Greenhouse or on premises ST Meetings - use this one
 	//

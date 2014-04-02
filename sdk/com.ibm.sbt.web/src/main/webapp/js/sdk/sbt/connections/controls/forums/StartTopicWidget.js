@@ -24,7 +24,7 @@ define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUt
 		function(declare, lang, dom, stringUtil, nls, BaseDialogContent, ForumService, StartATopic) {
 
 	/**
-	 * Widget which can be used to add tags to a collection of files.
+	 * Widget which can be used create a forum topic.
 	 * 
 	 * @class StartTopicWidget
 	 * @namespace sbt.connections.controls.forums
@@ -120,9 +120,8 @@ define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUt
 			if(this.view && this.action){
 				this.view.actionBar.showAllActions();
 				this.view.setContent(this.view.grid);
+				this.view.grid.refreshSelectionListeners();
 			}
-			
-			
 		},
 		
 		//
@@ -140,8 +139,8 @@ define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUt
 			//if this widget is part of a view
 			if(this.view && this.action){
 				this.view.actionBar.showAllActions();
-				this.view.grid.update(null);
 				this.view.setContent(this.view.grid);
+				this.view.grid.update(null);
 			}
 		},
 		

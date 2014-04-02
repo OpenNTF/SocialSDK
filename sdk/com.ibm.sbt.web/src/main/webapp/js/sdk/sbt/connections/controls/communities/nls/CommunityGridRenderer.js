@@ -28,6 +28,7 @@ define({
         name: "Name",
         ariaVcard: "Press Control And Enter For Business Card",
         feed : "Feed for these Communities",
-        restricted : "Restricted"
+        restricted : "Restricted",
+        moderated: "Moderated"
     }
 });

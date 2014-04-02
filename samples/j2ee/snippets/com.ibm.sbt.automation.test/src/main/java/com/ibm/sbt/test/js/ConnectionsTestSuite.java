@@ -28,6 +28,7 @@ import com.ibm.sbt.test.js.connections.BlogsTestSuite;
 import com.ibm.sbt.test.js.connections.BookmarksRestTestSuite;
 import com.ibm.sbt.test.js.connections.BookmarksTestSuite;
 import com.ibm.sbt.test.js.connections.CommonServicesTestSuite;
+import com.ibm.sbt.test.js.connections.CommunitiesOA2TestSuite;
 import com.ibm.sbt.test.js.connections.CommunitiesRestTestSuite;
 import com.ibm.sbt.test.js.connections.CommunitiesTestSuite;
 import com.ibm.sbt.test.js.connections.FilesTestSuite;
@@ -58,6 +59,7 @@ import com.ibm.sbt.test.sample.SampleFrameworkTestSuite;
 	BookmarksRestTestSuite.class,
 	CommunitiesRestTestSuite.class, 
 	CommunitiesTestSuite.class, 
+	CommunitiesOA2TestSuite.class,
 	FilesTestSuite.class, 
 	ForumsTestSuite.class,
 	ForumsRestTestSuite.class,

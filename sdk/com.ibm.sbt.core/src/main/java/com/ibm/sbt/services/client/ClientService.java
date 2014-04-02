@@ -1284,7 +1284,7 @@ public abstract class ClientService {
 	 * 
 	 * @param request
 	 * @param response
-	 * @param format
+	 * @param DateFormat
 	 * @return
 	 * @throws ClientServicesException
 	 */

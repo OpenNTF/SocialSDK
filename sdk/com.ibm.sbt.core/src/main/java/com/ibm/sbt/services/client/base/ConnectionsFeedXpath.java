@@ -28,6 +28,7 @@ import com.ibm.sbt.services.client.base.datahandlers.FieldEntry;
  */
 public enum ConnectionsFeedXpath implements FieldEntry {
 	Entry("/a:feed/a:entry"),
+	Category("/app:categories/a:category"),
 	TotalResults("/a:feed/opensearch:totalResults"),
 	StartIndex("/a:feed/opensearch:startIndex"), 
 	ItemsPerPage("/a:feed/opensearch:itemsPerPage"),

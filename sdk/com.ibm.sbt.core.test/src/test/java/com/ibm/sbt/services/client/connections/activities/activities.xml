@@ -1,0 +1,628 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app"
+	xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:os="http://a9.com/-/spec/opensearch/1.1/"
+	xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:thr="http://purl.org/syndication/thread/1.0">
+	<generator uri="http://www.ibm.com/xmlns/prod/sn" version="4.5.0.0">IBM
+		Connections - Activities</generator>
+	<icon>https://greenhouse.lotus.com/activities/styles/images/favicon.ico
+	</icon>
+	<logo>https://greenhouse.lotus.com/activities/nav/common/images/iconActivities128.png
+	</logo>
+	<id>https://greenhouse.lotus.com/activities/service/atom2/activities?email=asmith%40renovations.com
+	</id>
+	<title type="text">Activity Dashboard for Mark Wallace</title>
+	<updated>2014-03-14T13:12:47Z</updated>
+	<author>
+		<name>Mark Wallace</name>
+		<snx:userid>411f5bc0-9c02-102b-9422-aac68c46f6a3</snx:userid>
+		<snx:userState>active</snx:userState>
+	</author>
+	<link rel="self"
+		href="https://greenhouse.lotus.com/activities/service/atom2/activities?email=asmith%40renovations.com" />
+	<link rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml"
+		href="https://greenhouse.lotus.com/activities/service/atom2/service" />
+	<link rel="http://www.ibm.com/xmlns/prod/sn/tag-cloud" type="application/atomcat+xml"
+		href="https://greenhouse.lotus.com/activities/service/atom2/tags?email=asmith%40renovations.com" />
+	<link rel="alternate"
+		href="https://greenhouse.lotus.com/activities/service/html/activities?email=asmith%40renovations.com" />
+	<link rel="current"
+		href="https://greenhouse.lotus.com/activities/service/atom2/activities?email=asmith%40renovations.com" />
+	<link rel="first"
+		href="https://greenhouse.lotus.com/activities/service/atom2/activities?email=asmith%40renovations.com" />
+	<link rel="last"
+		href="https://greenhouse.lotus.com/activities/service/atom2/activities?email=asmith%40renovations.com&amp;page=2" />
+	<link rel="next"
+		href="https://greenhouse.lotus.com/activities/service/atom2/activities?email=asmith%40renovations.com&amp;page=2" />
+	<os:totalResults>20</os:totalResults>
+	<os:startIndex>1</os:startIndex>
+	<entry>
+		<id>urn:lsid:ibm.com:oa:95e0a124-6596-41f0-99e0-e237f3454f92</id>
+		<title type="text">Updates to Activities</title>
+		<updated>2014-03-14T13:12:47Z</updated>
+		<published>2014-03-14T12:54:22Z</published>
+		<author>
+			<name>Baan Slavens</name>
+			<snx:userid>f9206f40-5c8f-102c-816c-edffeafd6e65</snx:userid>
+			<snx:ldapid>D21G0920070F6C39858B4E7BA58036000056</snx:ldapid>
+			<snx:userState>active</snx:userState>
+		</author>
+		<contributor>
+			<name>Baan Slavens</name>
+			<snx:userid>f9206f40-5c8f-102c-816c-edffeafd6e65</snx:userid>
+			<snx:ldapid>D21G0920070F6C39858B4E7BA58036000056</snx:ldapid>
+			<snx:userState>active</snx:userState>
+		</contributor>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/type"
+			term="community_activity" label="Community Activity" />
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/priority"
+			term="1" label="Normal" />
+		<link rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml"
+			href="https://greenhouse.lotus.com/activities/service/atom2/acl?activityUuid=95e0a124-6596-41f0-99e0-e237f3454f92" />
+		<link rel="http://www.ibm.com/xmlns/prod/sn/history" type="application/atom+xml"
+			href="https://greenhouse.lotus.com/activities/service/atom2/activity/history?activityUuid=95e0a124-6596-41f0-99e0-e237f3454f92" />
+		<link rel="http://www.ibm.com/xmlns/prod/sn/templates" type="application/atom+xml"
+			href="https://greenhouse.lotus.com/activities/service/atom2/entrytemplates?activityUuid=95e0a124-6596-41f0-99e0-e237f3454f92" />
+		<app:collection
+			href="https://greenhouse.lotus.com/activities/service/atom2/activity?activityUuid=95e0a124-6596-41f0-99e0-e237f3454f92&amp;email=asmith%40renovations.com">
+			<title type="text">Updates to Activities</title>
+			<app:categories
+				href="https://greenhouse.lotus.com/activities/service/atom2/categories?activityUuid=95e0a124-6596-41f0-99e0-e237f3454f92" />
+		</app:collection>
+		<snx:activity>95e0a124-6596-41f0-99e0-e237f3454f92</snx:activity>
+		<link rel="self" type="application/atom+xml"
+			href="https://greenhouse.lotus.com/activities/service/atom2/activity?activityUuid=95e0a124-6596-41f0-99e0-e237f3454f92&amp;email=asmith%40renovations.com" />
+		<link rel="alternate" type="application/xhtml+xml"
+			href="https://greenhouse.lotus.com/activities/service/html/activity/recent?activityUuid=95e0a124-6596-41f0-99e0-e237f3454f92" />
+		<link rel="alternate" type="text/html"
+			href="https://greenhouse.lotus.com/activities/service/html/activity/recent?activityUuid=95e0a124-6596-41f0-99e0-e237f3454f92" />
+		<snx:position>-2147483648</snx:position>
+		<snx:depth>0</snx:depth>
+		<snx:permissions>none, view_activity, edit_activity_tags,
+			edit_statements, delete_statements, add_members, delete_members,
+			create_entries, edit_personal_entries, delete_personal_entries,
+			edit_personal_entry_tags, edit_all_entry_tags, view_members
+		</snx:permissions>
+		<snx:icon>https://greenhouse.lotus.com/activities/nav/common/images/iconActivities16.png
+		</snx:icon>
+		<content type="text">
+		</content>
+		<snx:commUuid>eef9db57-37da-4b69-917e-fc4faa7692d4</snx:commUuid>
+		<snx:communityUuid>eef9db57-37da-4b69-917e-fc4faa7692d4
+		</snx:communityUuid>
+		<link rel="http://www.ibm.com/xmlns/prod/sn/container" type="application/atom+xml"
+			href="https://greenhouse.lotus.com/communities/service/atom/community/instance?communityUuid=eef9db57-37da-4b69-917e-fc4faa7692d4" />
+		<snx:themeId>blue</snx:themeId>
+	</entry>
+	<entry>
+		<id>urn:lsid:ibm.com:oa:FFFGa5ac9b6a17e64df39020197ed32c1a79</id>
+		<title type="text">activity test</title>
+		<updated>2014-03-07T04:59:05Z</updated>
+		<published>2012-05-08T10:48:17Z</published>
+		<author>
+			<name>Concetta DArcangelo</name>
+			<snx:userid>95217bc0-9af7-102f-98b8-b3568c3b75d5</snx:userid>
+			<snx:ldapid>FFFG5435004d13ae42a6827fd593e5237aff</snx:ldapid>
+			<snx:userState>active</snx:userState>
+		</author>
+		<contributor>
+			<name>Kevin Chang</name>
+			<snx:userid>ee7d0ec0-ef43-102d-8cef-ce2074e773b7</snx:userid>
+			<snx:ldapid>FFFG342fe78d340e4d6aab5117723cac1371</snx:ldapid>
+			<snx:userState>active</snx:userState>
+		</contributor>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/type"
+			term="community_activity" label="Community Activity" />
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/priority"
+			term="1" label="Normal" />
+		<link rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml"
+			href="https://greenhouse.lotus.com/activities/service/atom2/acl?activityUuid=FFFGa5ac9b6a17e64df39020197ed32c1a79" />
+		<link rel="http://www.ibm.com/xmlns/prod/sn/history" type="application/atom+xml"
+			href="https://greenhouse.lotus.com/activities/service/atom2/activity/history?activityUuid=FFFGa5ac9b6a17e64df39020197ed32c1a79" />
+		<link rel="http://www.ibm.com/xmlns/prod/sn/templates" type="application/atom+xml"
+			href="https://greenhouse.lotus.com/activities/service/atom2/entrytemplates?activityUuid=FFFGa5ac9b6a17e64df39020197ed32c1a79" />
+		<app:collection
+			href="https://greenhouse.lotus.com/activities/service/atom2/activity?activityUuid=FFFGa5ac9b6a17e64df39020197ed32c1a79&amp;email=asmith%40renovations.com">
+			<title type="text">activity test</title>
+			<app:categories
+				href="https://greenhouse.lotus.com/activities/service/atom2/categories?activityUuid=FFFGa5ac9b6a17e64df39020197ed32c1a79" />
+		</app:collection>
+		<snx:activity>FFFGa5ac9b6a17e64df39020197ed32c1a79</snx:activity>
+		<link rel="self" type="application/atom+xml"
+			href="https://greenhouse.lotus.com/activities/service/atom2/activity?activityUuid=FFFGa5ac9b6a17e64df39020197ed32c1a79&amp;email=asmith%40renovations.com" />
+		<link rel="alternate" type="application/xhtml+xml"
+			href="https://greenhouse.lotus.com/activities/service/html/activity/recent?activityUuid=FFFGa5ac9b6a17e64df39020197ed32c1a79" />
+		<link rel="alternate" type="text/html"
+			href="https://greenhouse.lotus.com/activities/service/html/activity/recent?activityUuid=FFFGa5ac9b6a17e64df39020197ed32c1a79" />
+		<snx:position>-2147483648</snx:position>
+		<snx:depth>0</snx:depth>
+		<snx:permissions>none, view_activity, edit_activity_tags,
+			edit_statements, delete_statements, add_members, delete_members,
+			create_entries, edit_personal_entries, delete_personal_entries,
+			edit_personal_entry_tags, edit_all_entry_tags, view_members
+		</snx:permissions>
+		<snx:icon>https://greenhouse.lotus.com/activities/nav/common/images/iconActivities16.png
+		</snx:icon>
+		<content type="text">
+		</content>
+		<snx:commUuid>586f4bb8-2edf-48cd-892f-17e59d246240</snx:commUuid>
+		<snx:communityUuid>586f4bb8-2edf-48cd-892f-17e59d246240
+		</snx:communityUuid>
+		<link rel="http://www.ibm.com/xmlns/prod/sn/container" type="application/atom+xml"
+			href="https://greenhouse.lotus.com/communities/service/atom/community/instance?communityUuid=586f4bb8-2edf-48cd-892f-17e59d246240" />
+		<snx:themeId>default</snx:themeId>
+	</entry>
+	<entry>
+		<id>urn:lsid:ibm.com:oa:10928c60-4a56-4d2a-bbd2-49a226ad9712</id>
+		<title type="text">Spell Check within Connections</title>
+		<updated>2014-03-03T10:29:26Z</updated>
+		<published>2014-02-11T17:00:34Z</published>
+		<author>
+			<name>Simon Vaughan</name>
+			<snx:userid>8cea4c40-607a-102b-9af9-f318d0929dc3</snx:userid>
+			<snx:ldapid>790G092106A078C9EDD80A70B753DE0002A1</snx:ldapid>
+			<snx:userState>active</snx:userState>
+		</author>
+		<contributor>
+			<name>Vincent Burckhardt</name>
+			<snx:userid>a570dc40-a8ba-102d-91f9-d481305c2841</snx:userid>
+			<snx:ldapid>B25G092106D21EF8FE3DF83FDD2B92001103</snx:ldapid>
+			<snx:userState>active</snx:userState>
+		</contributor>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/type"
+			term="community_activity" label="Community Activity" />
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/priority"
+			term="1" label="Normal" />
+		<link rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml"
+			href="https://greenhouse.lotus.com/activities/service/atom2/acl?activityUuid=10928c60-4a56-4d2a-bbd2-49a226ad9712" />
+		<link rel="http://www.ibm.com/xmlns/prod/sn/history" type="application/atom+xml"
+			href="https://greenhouse.lotus.com/activities/service/atom2/activity/history?activityUuid=10928c60-4a56-4d2a-bbd2-49a226ad9712" />
+		<link rel="http://www.ibm.com/xmlns/prod/sn/templates" type="application/atom+xml"
+			href="https://greenhouse.lotus.com/activities/service/atom2/entrytemplates?activityUuid=10928c60-4a56-4d2a-bbd2-49a226ad9712" />
+		<app:collection
+			href="https://greenhouse.lotus.com/activities/service/atom2/activity?activityUuid=10928c60-4a56-4d2a-bbd2-49a226ad9712&amp;email=asmith%40renovations.com">
+			<title type="text">Spell Check within Connections</title>
+			<app:categories
+				href="https://greenhouse.lotus.com/activities/service/atom2/categories?activityUuid=10928c60-4a56-4d2a-bbd2-49a226ad9712" />
+		</app:collection>
+		<snx:activity>10928c60-4a56-4d2a-bbd2-49a226ad9712</snx:activity>
+		<link rel="self" type="application/atom+xml"
+			href="https://greenhouse.lotus.com/activities/service/atom2/activity?activityUuid=10928c60-4a56-4d2a-bbd2-49a226ad9712&amp;email=asmith%40renovations.com" />
+		<link rel="alternate" type="application/xhtml+xml"
+			href="https://greenhouse.lotus.com/activities/service/html/activity/recent?activityUuid=10928c60-4a56-4d2a-bbd2-49a226ad9712" />
+		<link rel="alternate" type="text/html"
+			href="https://greenhouse.lotus.com/activities/service/html/activity/recent?activityUuid=10928c60-4a56-4d2a-bbd2-49a226ad9712" />
+		<snx:position>-2147483648</snx:position>
+		<snx:depth>0</snx:depth>
+		<snx:permissions>none, view_activity, edit_activity_tags,
+			edit_statements, delete_statements, add_members, delete_members,
+			create_entries, edit_personal_entries, delete_personal_entries,
+			edit_personal_entry_tags, edit_all_entry_tags, view_members
+		</snx:permissions>
+		<snx:icon>https://greenhouse.lotus.com/activities/nav/common/images/iconActivities16.png
+		</snx:icon>
+		<content type="text">
+		</content>
+		<snx:commUuid>507e9688-69f3-4053-9416-4a54e5f57a64</snx:commUuid>
+		<snx:communityUuid>507e9688-69f3-4053-9416-4a54e5f57a64
+		</snx:communityUuid>
+		<link rel="http://www.ibm.com/xmlns/prod/sn/container" type="application/atom+xml"
+			href="https://greenhouse.lotus.com/communities/service/atom/community/instance?communityUuid=507e9688-69f3-4053-9416-4a54e5f57a64" />
+		<snx:themeId>default</snx:themeId>
+	</entry>
+	<entry>
+		<id>urn:lsid:ibm.com:oa:e7eb8bc1-6fd9-4bd2-998f-abf301571a5f</id>
+		<title type="text">Files should appear directly in the activity stream
+			w/o downloading</title>
+		<updated>2014-02-11T20:29:38Z</updated>
+		<published>2014-02-04T10:48:35Z</published>
+		<author>
+			<name>Simon Vaughan</name>
+			<snx:userid>8cea4c40-607a-102b-9af9-f318d0929dc3</snx:userid>
+			<snx:ldapid>790G092106A078C9EDD80A70B753DE0002A1</snx:ldapid>
+			<snx:userState>active</snx:userState>
+		</author>
+		<contributor>
+			<name>Nestor Fernando Calixto Hernandez</name>
+			<snx:userid>7349c5c0-22d0-1033-998b-8a585e44efb7</snx:userid>
+			<snx:ldapid>c34a6566-e8d5-44e4-9c88-a9222af80511</snx:ldapid>
+			<snx:userState>active</snx:userState>
+		</contributor>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/type"
+			term="community_activity" label="Community Activity" />
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/priority"
+			term="1" label="Normal" />
+		<link rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml"
+			href="https://greenhouse.lotus.com/activities/service/atom2/acl?activityUuid=e7eb8bc1-6fd9-4bd2-998f-abf301571a5f" />
+		<link rel="http://www.ibm.com/xmlns/prod/sn/history" type="application/atom+xml"
+			href="https://greenhouse.lotus.com/activities/service/atom2/activity/history?activityUuid=e7eb8bc1-6fd9-4bd2-998f-abf301571a5f" />
+		<link rel="http://www.ibm.com/xmlns/prod/sn/templates" type="application/atom+xml"
+			href="https://greenhouse.lotus.com/activities/service/atom2/entrytemplates?activityUuid=e7eb8bc1-6fd9-4bd2-998f-abf301571a5f" />
+		<app:collection
+			href="https://greenhouse.lotus.com/activities/service/atom2/activity?activityUuid=e7eb8bc1-6fd9-4bd2-998f-abf301571a5f&amp;email=asmith%40renovations.com">
+			<title type="text">Files should appear directly in the activity stream
+				w/o downloading</title>
+			<app:categories
+				href="https://greenhouse.lotus.com/activities/service/atom2/categories?activityUuid=e7eb8bc1-6fd9-4bd2-998f-abf301571a5f" />
+		</app:collection>
+		<snx:activity>e7eb8bc1-6fd9-4bd2-998f-abf301571a5f</snx:activity>
+		<link rel="self" type="application/atom+xml"
+			href="https://greenhouse.lotus.com/activities/service/atom2/activity?activityUuid=e7eb8bc1-6fd9-4bd2-998f-abf301571a5f&amp;email=asmith%40renovations.com" />
+		<link rel="alternate" type="application/xhtml+xml"
+			href="https://greenhouse.lotus.com/activities/service/html/activity/recent?activityUuid=e7eb8bc1-6fd9-4bd2-998f-abf301571a5f" />
+		<link rel="alternate" type="text/html"
+			href="https://greenhouse.lotus.com/activities/service/html/activity/recent?activityUuid=e7eb8bc1-6fd9-4bd2-998f-abf301571a5f" />
+		<snx:position>-2147483648</snx:position>
+		<snx:depth>0</snx:depth>
+		<snx:permissions>none, view_activity, edit_activity_tags,
+			edit_statements, delete_statements, add_members, delete_members,
+			create_entries, edit_personal_entries, delete_personal_entries,
+			edit_personal_entry_tags, edit_all_entry_tags, view_members
+		</snx:permissions>
+		<snx:icon>https://greenhouse.lotus.com/activities/nav/common/images/iconActivities16.png
+		</snx:icon>
+		<content type="text">
+		</content>
+		<snx:commUuid>507e9688-69f3-4053-9416-4a54e5f57a64</snx:commUuid>
+		<snx:communityUuid>507e9688-69f3-4053-9416-4a54e5f57a64
+		</snx:communityUuid>
+		<link rel="http://www.ibm.com/xmlns/prod/sn/container" type="application/atom+xml"
+			href="https://greenhouse.lotus.com/communities/service/atom/community/instance?communityUuid=507e9688-69f3-4053-9416-4a54e5f57a64" />
+		<snx:themeId>default</snx:themeId>
+	</entry>
+	<entry>
+		<id>urn:lsid:ibm.com:oa:5b8425bd-9912-40da-8969-448217ac04de</id>
+		<title type="text">Homepage views should support infinite scroll
+		</title>
+		<updated>2014-02-04T10:40:55Z</updated>
+		<published>2014-02-04T10:40:55Z</published>
+		<author>
+			<name>Simon Vaughan</name>
+			<snx:userid>8cea4c40-607a-102b-9af9-f318d0929dc3</snx:userid>
+			<snx:ldapid>790G092106A078C9EDD80A70B753DE0002A1</snx:ldapid>
+			<snx:userState>active</snx:userState>
+		</author>
+		<contributor>
+			<name>Simon Vaughan</name>
+			<snx:userid>8cea4c40-607a-102b-9af9-f318d0929dc3</snx:userid>
+			<snx:ldapid>790G092106A078C9EDD80A70B753DE0002A1</snx:ldapid>
+			<snx:userState>active</snx:userState>
+		</contributor>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/type"
+			term="community_activity" label="Community Activity" />
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/priority"
+			term="1" label="Normal" />
+		<link rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml"
+			href="https://greenhouse.lotus.com/activities/service/atom2/acl?activityUuid=5b8425bd-9912-40da-8969-448217ac04de" />
+		<link rel="http://www.ibm.com/xmlns/prod/sn/history" type="application/atom+xml"
+			href="https://greenhouse.lotus.com/activities/service/atom2/activity/history?activityUuid=5b8425bd-9912-40da-8969-448217ac04de" />
+		<link rel="http://www.ibm.com/xmlns/prod/sn/templates" type="application/atom+xml"
+			href="https://greenhouse.lotus.com/activities/service/atom2/entrytemplates?activityUuid=5b8425bd-9912-40da-8969-448217ac04de" />
+		<app:collection
+			href="https://greenhouse.lotus.com/activities/service/atom2/activity?activityUuid=5b8425bd-9912-40da-8969-448217ac04de&amp;email=asmith%40renovations.com">
+			<title type="text">Homepage views should support infinite scroll
+			</title>
+			<app:categories
+				href="https://greenhouse.lotus.com/activities/service/atom2/categories?activityUuid=5b8425bd-9912-40da-8969-448217ac04de" />
+		</app:collection>
+		<snx:activity>5b8425bd-9912-40da-8969-448217ac04de</snx:activity>
+		<link rel="self" type="application/atom+xml"
+			href="https://greenhouse.lotus.com/activities/service/atom2/activity?activityUuid=5b8425bd-9912-40da-8969-448217ac04de&amp;email=asmith%40renovations.com" />
+		<link rel="alternate" type="application/xhtml+xml"
+			href="https://greenhouse.lotus.com/activities/service/html/activity/recent?activityUuid=5b8425bd-9912-40da-8969-448217ac04de" />
+		<link rel="alternate" type="text/html"
+			href="https://greenhouse.lotus.com/activities/service/html/activity/recent?activityUuid=5b8425bd-9912-40da-8969-448217ac04de" />
+		<snx:position>-2147483648</snx:position>
+		<snx:depth>0</snx:depth>
+		<snx:permissions>none, view_activity, edit_activity_tags,
+			edit_statements, delete_statements, add_members, delete_members,
+			create_entries, edit_personal_entries, delete_personal_entries,
+			edit_personal_entry_tags, edit_all_entry_tags, view_members
+		</snx:permissions>
+		<snx:icon>https://greenhouse.lotus.com/activities/nav/common/images/iconActivities16.png
+		</snx:icon>
+		<content type="text">
+		</content>
+		<snx:commUuid>507e9688-69f3-4053-9416-4a54e5f57a64</snx:commUuid>
+		<snx:communityUuid>507e9688-69f3-4053-9416-4a54e5f57a64
+		</snx:communityUuid>
+		<link rel="http://www.ibm.com/xmlns/prod/sn/container" type="application/atom+xml"
+			href="https://greenhouse.lotus.com/communities/service/atom/community/instance?communityUuid=507e9688-69f3-4053-9416-4a54e5f57a64" />
+		<snx:themeId>default</snx:themeId>
+	</entry>
+	<entry>
+		<id>urn:lsid:ibm.com:oa:3e0db7a3-3337-479c-b380-765d096b81eb</id>
+		<title type="text">Link to media in the Media Gallery from a Blog /
+			Discussion forum etc</title>
+		<updated>2014-02-04T10:30:45Z</updated>
+		<published>2014-02-04T10:30:45Z</published>
+		<author>
+			<name>Simon Vaughan</name>
+			<snx:userid>8cea4c40-607a-102b-9af9-f318d0929dc3</snx:userid>
+			<snx:ldapid>790G092106A078C9EDD80A70B753DE0002A1</snx:ldapid>
+			<snx:userState>active</snx:userState>
+		</author>
+		<contributor>
+			<name>Simon Vaughan</name>
+			<snx:userid>8cea4c40-607a-102b-9af9-f318d0929dc3</snx:userid>
+			<snx:ldapid>790G092106A078C9EDD80A70B753DE0002A1</snx:ldapid>
+			<snx:userState>active</snx:userState>
+		</contributor>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/type"
+			term="community_activity" label="Community Activity" />
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/priority"
+			term="1" label="Normal" />
+		<link rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml"
+			href="https://greenhouse.lotus.com/activities/service/atom2/acl?activityUuid=3e0db7a3-3337-479c-b380-765d096b81eb" />
+		<link rel="http://www.ibm.com/xmlns/prod/sn/history" type="application/atom+xml"
+			href="https://greenhouse.lotus.com/activities/service/atom2/activity/history?activityUuid=3e0db7a3-3337-479c-b380-765d096b81eb" />
+		<link rel="http://www.ibm.com/xmlns/prod/sn/templates" type="application/atom+xml"
+			href="https://greenhouse.lotus.com/activities/service/atom2/entrytemplates?activityUuid=3e0db7a3-3337-479c-b380-765d096b81eb" />
+		<app:collection
+			href="https://greenhouse.lotus.com/activities/service/atom2/activity?activityUuid=3e0db7a3-3337-479c-b380-765d096b81eb&amp;email=asmith%40renovations.com">
+			<title type="text">Link to media in the Media Gallery from a Blog /
+				Discussion forum etc</title>
+			<app:categories
+				href="https://greenhouse.lotus.com/activities/service/atom2/categories?activityUuid=3e0db7a3-3337-479c-b380-765d096b81eb" />
+		</app:collection>
+		<snx:activity>3e0db7a3-3337-479c-b380-765d096b81eb</snx:activity>
+		<link rel="self" type="application/atom+xml"
+			href="https://greenhouse.lotus.com/activities/service/atom2/activity?activityUuid=3e0db7a3-3337-479c-b380-765d096b81eb&amp;email=asmith%40renovations.com" />
+		<link rel="alternate" type="application/xhtml+xml"
+			href="https://greenhouse.lotus.com/activities/service/html/activity/recent?activityUuid=3e0db7a3-3337-479c-b380-765d096b81eb" />
+		<link rel="alternate" type="text/html"
+			href="https://greenhouse.lotus.com/activities/service/html/activity/recent?activityUuid=3e0db7a3-3337-479c-b380-765d096b81eb" />
+		<snx:position>-2147483648</snx:position>
+		<snx:depth>0</snx:depth>
+		<snx:permissions>none, view_activity, edit_activity_tags,
+			edit_statements, delete_statements, add_members, delete_members,
+			create_entries, edit_personal_entries, delete_personal_entries,
+			edit_personal_entry_tags, edit_all_entry_tags, view_members
+		</snx:permissions>
+		<snx:icon>https://greenhouse.lotus.com/activities/nav/common/images/iconActivities16.png
+		</snx:icon>
+		<content type="text">
+		</content>
+		<snx:commUuid>507e9688-69f3-4053-9416-4a54e5f57a64</snx:commUuid>
+		<snx:communityUuid>507e9688-69f3-4053-9416-4a54e5f57a64
+		</snx:communityUuid>
+		<link rel="http://www.ibm.com/xmlns/prod/sn/container" type="application/atom+xml"
+			href="https://greenhouse.lotus.com/communities/service/atom/community/instance?communityUuid=507e9688-69f3-4053-9416-4a54e5f57a64" />
+		<snx:themeId>default</snx:themeId>
+	</entry>
+	<entry>
+		<id>urn:lsid:ibm.com:oa:6e9c028c-7c57-4d23-a577-327f4215dd3b</id>
+		<title type="text">Multiple File Upload in Media Gallery</title>
+		<updated>2014-02-04T10:29:24Z</updated>
+		<published>2014-02-04T10:29:24Z</published>
+		<author>
+			<name>Simon Vaughan</name>
+			<snx:userid>8cea4c40-607a-102b-9af9-f318d0929dc3</snx:userid>
+			<snx:ldapid>790G092106A078C9EDD80A70B753DE0002A1</snx:ldapid>
+			<snx:userState>active</snx:userState>
+		</author>
+		<contributor>
+			<name>Simon Vaughan</name>
+			<snx:userid>8cea4c40-607a-102b-9af9-f318d0929dc3</snx:userid>
+			<snx:ldapid>790G092106A078C9EDD80A70B753DE0002A1</snx:ldapid>
+			<snx:userState>active</snx:userState>
+		</contributor>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/type"
+			term="community_activity" label="Community Activity" />
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/priority"
+			term="1" label="Normal" />
+		<link rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml"
+			href="https://greenhouse.lotus.com/activities/service/atom2/acl?activityUuid=6e9c028c-7c57-4d23-a577-327f4215dd3b" />
+		<link rel="http://www.ibm.com/xmlns/prod/sn/history" type="application/atom+xml"
+			href="https://greenhouse.lotus.com/activities/service/atom2/activity/history?activityUuid=6e9c028c-7c57-4d23-a577-327f4215dd3b" />
+		<link rel="http://www.ibm.com/xmlns/prod/sn/templates" type="application/atom+xml"
+			href="https://greenhouse.lotus.com/activities/service/atom2/entrytemplates?activityUuid=6e9c028c-7c57-4d23-a577-327f4215dd3b" />
+		<app:collection
+			href="https://greenhouse.lotus.com/activities/service/atom2/activity?activityUuid=6e9c028c-7c57-4d23-a577-327f4215dd3b&amp;email=asmith%40renovations.com">
+			<title type="text">Multiple File Upload in Media Gallery</title>
+			<app:categories
+				href="https://greenhouse.lotus.com/activities/service/atom2/categories?activityUuid=6e9c028c-7c57-4d23-a577-327f4215dd3b" />
+		</app:collection>
+		<snx:activity>6e9c028c-7c57-4d23-a577-327f4215dd3b</snx:activity>
+		<link rel="self" type="application/atom+xml"
+			href="https://greenhouse.lotus.com/activities/service/atom2/activity?activityUuid=6e9c028c-7c57-4d23-a577-327f4215dd3b&amp;email=asmith%40renovations.com" />
+		<link rel="alternate" type="application/xhtml+xml"
+			href="https://greenhouse.lotus.com/activities/service/html/activity/recent?activityUuid=6e9c028c-7c57-4d23-a577-327f4215dd3b" />
+		<link rel="alternate" type="text/html"
+			href="https://greenhouse.lotus.com/activities/service/html/activity/recent?activityUuid=6e9c028c-7c57-4d23-a577-327f4215dd3b" />
+		<snx:position>-2147483648</snx:position>
+		<snx:depth>0</snx:depth>
+		<snx:permissions>none, view_activity, edit_activity_tags,
+			edit_statements, delete_statements, add_members, delete_members,
+			create_entries, edit_personal_entries, delete_personal_entries,
+			edit_personal_entry_tags, edit_all_entry_tags, view_members
+		</snx:permissions>
+		<snx:icon>https://greenhouse.lotus.com/activities/nav/common/images/iconActivities16.png
+		</snx:icon>
+		<content type="text">
+		</content>
+		<snx:commUuid>507e9688-69f3-4053-9416-4a54e5f57a64</snx:commUuid>
+		<snx:communityUuid>507e9688-69f3-4053-9416-4a54e5f57a64
+		</snx:communityUuid>
+		<link rel="http://www.ibm.com/xmlns/prod/sn/container" type="application/atom+xml"
+			href="https://greenhouse.lotus.com/communities/service/atom/community/instance?communityUuid=507e9688-69f3-4053-9416-4a54e5f57a64" />
+		<snx:themeId>default</snx:themeId>
+	</entry>
+	<entry>
+		<id>urn:lsid:ibm.com:oa:4dc2195d-3a1a-44c1-a6f3-846c2cfa9ce0</id>
+		<title type="text">Sharing a community externally with consultants and
+			customers</title>
+		<updated>2014-02-04T10:27:08Z</updated>
+		<published>2014-02-04T10:27:08Z</published>
+		<author>
+			<name>Simon Vaughan</name>
+			<snx:userid>8cea4c40-607a-102b-9af9-f318d0929dc3</snx:userid>
+			<snx:ldapid>790G092106A078C9EDD80A70B753DE0002A1</snx:ldapid>
+			<snx:userState>active</snx:userState>
+		</author>
+		<contributor>
+			<name>Simon Vaughan</name>
+			<snx:userid>8cea4c40-607a-102b-9af9-f318d0929dc3</snx:userid>
+			<snx:ldapid>790G092106A078C9EDD80A70B753DE0002A1</snx:ldapid>
+			<snx:userState>active</snx:userState>
+		</contributor>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/type"
+			term="community_activity" label="Community Activity" />
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/priority"
+			term="1" label="Normal" />
+		<link rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml"
+			href="https://greenhouse.lotus.com/activities/service/atom2/acl?activityUuid=4dc2195d-3a1a-44c1-a6f3-846c2cfa9ce0" />
+		<link rel="http://www.ibm.com/xmlns/prod/sn/history" type="application/atom+xml"
+			href="https://greenhouse.lotus.com/activities/service/atom2/activity/history?activityUuid=4dc2195d-3a1a-44c1-a6f3-846c2cfa9ce0" />
+		<link rel="http://www.ibm.com/xmlns/prod/sn/templates" type="application/atom+xml"
+			href="https://greenhouse.lotus.com/activities/service/atom2/entrytemplates?activityUuid=4dc2195d-3a1a-44c1-a6f3-846c2cfa9ce0" />
+		<app:collection
+			href="https://greenhouse.lotus.com/activities/service/atom2/activity?activityUuid=4dc2195d-3a1a-44c1-a6f3-846c2cfa9ce0&amp;email=asmith%40renovations.com">
+			<title type="text">Sharing a community externally with consultants and
+				customers</title>
+			<app:categories
+				href="https://greenhouse.lotus.com/activities/service/atom2/categories?activityUuid=4dc2195d-3a1a-44c1-a6f3-846c2cfa9ce0" />
+		</app:collection>
+		<snx:activity>4dc2195d-3a1a-44c1-a6f3-846c2cfa9ce0</snx:activity>
+		<link rel="self" type="application/atom+xml"
+			href="https://greenhouse.lotus.com/activities/service/atom2/activity?activityUuid=4dc2195d-3a1a-44c1-a6f3-846c2cfa9ce0&amp;email=asmith%40renovations.com" />
+		<link rel="alternate" type="application/xhtml+xml"
+			href="https://greenhouse.lotus.com/activities/service/html/activity/recent?activityUuid=4dc2195d-3a1a-44c1-a6f3-846c2cfa9ce0" />
+		<link rel="alternate" type="text/html"
+			href="https://greenhouse.lotus.com/activities/service/html/activity/recent?activityUuid=4dc2195d-3a1a-44c1-a6f3-846c2cfa9ce0" />
+		<snx:position>-2147483648</snx:position>
+		<snx:depth>0</snx:depth>
+		<snx:permissions>none, view_activity, edit_activity_tags,
+			edit_statements, delete_statements, add_members, delete_members,
+			create_entries, edit_personal_entries, delete_personal_entries,
+			edit_personal_entry_tags, edit_all_entry_tags, view_members
+		</snx:permissions>
+		<snx:icon>https://greenhouse.lotus.com/activities/nav/common/images/iconActivities16.png
+		</snx:icon>
+		<content type="text">
+		</content>
+		<snx:commUuid>507e9688-69f3-4053-9416-4a54e5f57a64</snx:commUuid>
+		<snx:communityUuid>507e9688-69f3-4053-9416-4a54e5f57a64
+		</snx:communityUuid>
+		<link rel="http://www.ibm.com/xmlns/prod/sn/container" type="application/atom+xml"
+			href="https://greenhouse.lotus.com/communities/service/atom/community/instance?communityUuid=507e9688-69f3-4053-9416-4a54e5f57a64" />
+		<snx:themeId>default</snx:themeId>
+	</entry>
+	<entry>
+		<id>urn:lsid:ibm.com:oa:015120cb-43f3-4e02-8678-71c6fcd8bbd4</id>
+		<title type="text">Ability to comment / start a discussion on a
+			Bookmarks (Within Bookmarks)</title>
+		<updated>2014-01-16T17:00:47Z</updated>
+		<published>2013-01-18T23:31:51Z</published>
+		<author>
+			<name>Simon Vaughan</name>
+			<snx:userid>8cea4c40-607a-102b-9af9-f318d0929dc3</snx:userid>
+			<snx:ldapid>790G092106A078C9EDD80A70B753DE0002A1</snx:ldapid>
+			<snx:userState>active</snx:userState>
+		</author>
+		<contributor>
+			<name>Luis Benitez</name>
+			<snx:userid>95be43c0-56b2-102b-9741-e0df1c147122</snx:userid>
+			<snx:ldapid>A97G092106A078C9EDD80A70B753DE00020B</snx:ldapid>
+			<snx:userState>active</snx:userState>
+		</contributor>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/type"
+			term="community_activity" label="Community Activity" />
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/priority"
+			term="1" label="Normal" />
+		<link rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml"
+			href="https://greenhouse.lotus.com/activities/service/atom2/acl?activityUuid=015120cb-43f3-4e02-8678-71c6fcd8bbd4" />
+		<link rel="http://www.ibm.com/xmlns/prod/sn/history" type="application/atom+xml"
+			href="https://greenhouse.lotus.com/activities/service/atom2/activity/history?activityUuid=015120cb-43f3-4e02-8678-71c6fcd8bbd4" />
+		<link rel="http://www.ibm.com/xmlns/prod/sn/templates" type="application/atom+xml"
+			href="https://greenhouse.lotus.com/activities/service/atom2/entrytemplates?activityUuid=015120cb-43f3-4e02-8678-71c6fcd8bbd4" />
+		<app:collection
+			href="https://greenhouse.lotus.com/activities/service/atom2/activity?activityUuid=015120cb-43f3-4e02-8678-71c6fcd8bbd4&amp;email=asmith%40renovations.com">
+			<title type="text">Ability to comment / start a discussion on a
+				Bookmarks (Within Bookmarks)</title>
+			<app:categories
+				href="https://greenhouse.lotus.com/activities/service/atom2/categories?activityUuid=015120cb-43f3-4e02-8678-71c6fcd8bbd4" />
+		</app:collection>
+		<snx:activity>015120cb-43f3-4e02-8678-71c6fcd8bbd4</snx:activity>
+		<link rel="self" type="application/atom+xml"
+			href="https://greenhouse.lotus.com/activities/service/atom2/activity?activityUuid=015120cb-43f3-4e02-8678-71c6fcd8bbd4&amp;email=asmith%40renovations.com" />
+		<link rel="alternate" type="application/xhtml+xml"
+			href="https://greenhouse.lotus.com/activities/service/html/activity/recent?activityUuid=015120cb-43f3-4e02-8678-71c6fcd8bbd4" />
+		<link rel="alternate" type="text/html"
+			href="https://greenhouse.lotus.com/activities/service/html/activity/recent?activityUuid=015120cb-43f3-4e02-8678-71c6fcd8bbd4" />
+		<snx:position>-2147483648</snx:position>
+		<snx:depth>0</snx:depth>
+		<snx:permissions>none, view_activity, edit_activity_tags,
+			edit_statements, delete_statements, add_members, delete_members,
+			create_entries, edit_personal_entries, delete_personal_entries,
+			edit_personal_entry_tags, edit_all_entry_tags, view_members
+		</snx:permissions>
+		<snx:icon>https://greenhouse.lotus.com/activities/nav/common/images/iconActivities16.png
+		</snx:icon>
+		<content type="text">
+		</content>
+		<snx:commUuid>507e9688-69f3-4053-9416-4a54e5f57a64</snx:commUuid>
+		<snx:communityUuid>507e9688-69f3-4053-9416-4a54e5f57a64
+		</snx:communityUuid>
+		<link rel="http://www.ibm.com/xmlns/prod/sn/container" type="application/atom+xml"
+			href="https://greenhouse.lotus.com/communities/service/atom/community/instance?communityUuid=507e9688-69f3-4053-9416-4a54e5f57a64" />
+		<snx:themeId>default</snx:themeId>
+	</entry>
+	<entry>
+		<id>urn:lsid:ibm.com:oa:7cc12838-7e42-437a-a1bb-e71795405852</id>
+		<title type="text">Re-post a comment into a post</title>
+		<updated>2014-01-16T17:00:47Z</updated>
+		<published>2013-01-19T10:34:47Z</published>
+		<author>
+			<name>Simon Vaughan</name>
+			<snx:userid>8cea4c40-607a-102b-9af9-f318d0929dc3</snx:userid>
+			<snx:ldapid>790G092106A078C9EDD80A70B753DE0002A1</snx:ldapid>
+			<snx:userState>active</snx:userState>
+		</author>
+		<contributor>
+			<name>Luis Benitez</name>
+			<snx:userid>95be43c0-56b2-102b-9741-e0df1c147122</snx:userid>
+			<snx:ldapid>A97G092106A078C9EDD80A70B753DE00020B</snx:ldapid>
+			<snx:userState>active</snx:userState>
+		</contributor>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/type"
+			term="community_activity" label="Community Activity" />
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/priority"
+			term="1" label="Normal" />
+		<link rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml"
+			href="https://greenhouse.lotus.com/activities/service/atom2/acl?activityUuid=7cc12838-7e42-437a-a1bb-e71795405852" />
+		<link rel="http://www.ibm.com/xmlns/prod/sn/history" type="application/atom+xml"
+			href="https://greenhouse.lotus.com/activities/service/atom2/activity/history?activityUuid=7cc12838-7e42-437a-a1bb-e71795405852" />
+		<link rel="http://www.ibm.com/xmlns/prod/sn/templates" type="application/atom+xml"
+			href="https://greenhouse.lotus.com/activities/service/atom2/entrytemplates?activityUuid=7cc12838-7e42-437a-a1bb-e71795405852" />
+		<app:collection
+			href="https://greenhouse.lotus.com/activities/service/atom2/activity?activityUuid=7cc12838-7e42-437a-a1bb-e71795405852&amp;email=asmith%40renovations.com">
+			<title type="text">Re-post a comment into a post</title>
+			<app:categories
+				href="https://greenhouse.lotus.com/activities/service/atom2/categories?activityUuid=7cc12838-7e42-437a-a1bb-e71795405852" />
+		</app:collection>
+		<snx:activity>7cc12838-7e42-437a-a1bb-e71795405852</snx:activity>
+		<link rel="self" type="application/atom+xml"
+			href="https://greenhouse.lotus.com/activities/service/atom2/activity?activityUuid=7cc12838-7e42-437a-a1bb-e71795405852&amp;email=asmith%40renovations.com" />
+		<link rel="alternate" type="application/xhtml+xml"
+			href="https://greenhouse.lotus.com/activities/service/html/activity/recent?activityUuid=7cc12838-7e42-437a-a1bb-e71795405852" />
+		<link rel="alternate" type="text/html"
+			href="https://greenhouse.lotus.com/activities/service/html/activity/recent?activityUuid=7cc12838-7e42-437a-a1bb-e71795405852" />
+		<snx:position>-2147483648</snx:position>
+		<snx:depth>0</snx:depth>
+		<snx:permissions>none, view_activity, edit_activity_tags,
+			edit_statements, delete_statements, add_members, delete_members,
+			create_entries, edit_personal_entries, delete_personal_entries,
+			edit_personal_entry_tags, edit_all_entry_tags, view_members
+		</snx:permissions>
+		<snx:icon>https://greenhouse.lotus.com/activities/nav/common/images/iconActivities16.png
+		</snx:icon>
+		<content type="text">
+		</content>
+		<snx:commUuid>507e9688-69f3-4053-9416-4a54e5f57a64</snx:commUuid>
+		<snx:communityUuid>507e9688-69f3-4053-9416-4a54e5f57a64
+		</snx:communityUuid>
+		<link rel="http://www.ibm.com/xmlns/prod/sn/container" type="application/atom+xml"
+			href="https://greenhouse.lotus.com/communities/service/atom/community/instance?communityUuid=507e9688-69f3-4053-9416-4a54e5f57a64" />
+		<snx:themeId>default</snx:themeId>
+	</entry>
+</feed>

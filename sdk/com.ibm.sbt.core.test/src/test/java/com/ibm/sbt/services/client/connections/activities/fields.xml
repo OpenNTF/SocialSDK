@@ -1,0 +1,32 @@
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app"
+	xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:thr="http://purl.org/syndication/thread/1.0"
+	xmlns:xhtml="http://www.w3.org/1999/xhtml">
+	<content type="html">Don Quixote begins his adventure to save Dulcinea del Toboso from the evil windmills.</content>
+	<snx:field name="Link Field" fid="B2CG09219C73BB73162A79E0A9951B000007"
+		position="1000" type="link">
+		<link href="http://www.ibm.com" title="IBM" />
+	</snx:field>
+	<snx:field name="Text Field" fid="D7AG09219C73BB73162A79E0A9951B000009"
+		position="2000" type="text">
+		<summary type="text/plain">Don Quixote&#039;s Adventure</summary>
+	</snx:field>
+	<snx:field name="Date Field" fid="DC5G09219C73BB73162A79E0A9951B00000B"
+		position="4000" type="date">
+		2008-06-12T04:00:00Z
+	</snx:field>
+	<snx:field name="File Field" fid="6B1G09219C73FC893188AEDCA47086000002"
+		position="5000" type="file">
+		<link rel="enclosure" type="image/jpeg"
+			href="http://localhost:8080/oa.web.coreui/service/download/57EG09219C73DFD08F30C15F32D032000006/Winter.jpg"
+			size="105542" />
+		<link rel="edit-media" type="image/jpeg"
+			href="http://localhost:8080/oa.web.coreui/service/download/57EG09219C73DFD08F30C15F32D032000006/Winter.jpg"
+			size="105542" />
+	</snx:field>
+	<snx:field name="Person Field" fid="FE7G09219C73DFD08F30C15F32D032000002"
+		position="8000" type="person">
+		<name>carl_smith@example.com</name>
+		<snx:userid>937965j0-4f0c-1028-5a06-db07163b51b2</snx:userid>
+		<email>carl_smith@example.com</email>
+	</snx:field>
+</entry>

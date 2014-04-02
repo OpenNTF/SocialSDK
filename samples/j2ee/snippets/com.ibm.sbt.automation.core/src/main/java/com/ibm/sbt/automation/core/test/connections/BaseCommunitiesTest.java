@@ -43,9 +43,11 @@ import com.ibm.sbt.services.client.connections.communities.CommunityServiceExcep
 import com.ibm.sbt.services.client.connections.communities.Invite;
 import com.ibm.sbt.services.client.connections.communities.Member;
 import com.ibm.sbt.services.client.connections.communities.MemberList;
+import com.ibm.sbt.services.client.connections.forums.Forum;
 import com.ibm.sbt.services.client.connections.forums.ForumServiceException;
 import com.ibm.sbt.services.client.connections.forums.ForumTopic;
 import com.ibm.sbt.services.client.connections.forums.TopicList;
+import com.ibm.sbt.services.client.connections.forums.model.BaseForumEntity;
 import com.ibm.sbt.services.client.connections.forums.transformers.BaseForumTransformer;
 
 
@@ -60,6 +62,7 @@ public class BaseCommunitiesTest extends FlexibleTest {
     protected boolean createCommunity = true;
     protected CommunityService communityService;
     protected Community community;
+    protected BaseForumEntity forum;
     
     protected String CommunityEventEntry =
     		"<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
@@ -82,6 +85,11 @@ public class BaseCommunitiesTest extends FlexibleTest {
         	String name = createCommunityName();
         	//System.out.println(name);
             community = createCommunity(name, type, name, "tag1,tag2,tag3");
+            try {
+				forum = community.getForums().get(0);
+			} catch (CommunityServiceException e) {
+				e.printStackTrace();
+			}
     }
     
 	public String getProperty(String name) {

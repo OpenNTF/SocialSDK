@@ -13,9 +13,9 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-
 package com.ibm.sbt.services.client.connections.common;
 
+import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.base.AtomXPath;
 import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.base.BaseService;
@@ -34,8 +34,16 @@ public class Person extends BaseEntity {
 		super(svc, dataHandler);
 	}
 	
-	public void setUserId(String userId) {
-		setAsString(AtomXPath.personUserid, userId);
+	public String getId() {
+		String id = getUserid();
+		if (StringUtil.isEmpty(id)) {
+			id = getEmail();
+		}
+		return id;
+	}
+	
+	public void setUserid(String userid) {
+		setAsString(AtomXPath.personUserid, userid);
 	}
 	
 	public void setName(String name) {
@@ -62,7 +70,7 @@ public class Person extends BaseEntity {
 		return getAsString(AtomXPath.personUserState);
 	}
 
-	public String getId() {
+	public String getUserid() {
 		return getAsString(AtomXPath.personUserid);
 	}
 }

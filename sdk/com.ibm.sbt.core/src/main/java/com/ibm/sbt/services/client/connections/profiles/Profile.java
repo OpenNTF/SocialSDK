@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.logging.Logger;
+
 import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
@@ -65,6 +66,18 @@ public class Profile extends BaseEntity{
     	return getService().getColleagues(getUserid());
     }
     
+	/**
+	 * Returns a mapping containing the extended attributes for the entry.<bt/>
+	 * This method execute a xhr call to the back end for every attribute.
+	 * 
+	 * @param p the profile to use. has to be a full profile, to obtain all the extended attributes links
+	 * @return a map containing the id of the attribute as key and the attribute value as value
+	 * @throws ProfileServiceException
+	 */
+	public Map<String,Object> getExtendedAttributes() throws ProfileServiceException {
+		return getService().getExtendedAttributes(this);
+	}
+ 
     public String getUserid() {
     	return getAsString(ProfileXPath.uid);
     }
@@ -210,5 +223,5 @@ public class Profile extends BaseEntity{
 	public ProfileService getService(){
 		return (ProfileService)super.getService();
 	}
- 
+
 }

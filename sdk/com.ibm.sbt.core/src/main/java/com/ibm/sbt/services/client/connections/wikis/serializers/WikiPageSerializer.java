@@ -36,7 +36,7 @@ public class WikiPageSerializer extends AtomEntitySerializer<WikiPage> {
 	public void generateCreate() {
 		Node entry = entry();
 		
-		appendChilds(entry,
+		appendChildren(entry,
 				title(),
 				label(),
 				wikiPageCategory(),
@@ -48,7 +48,7 @@ public class WikiPageSerializer extends AtomEntitySerializer<WikiPage> {
 	public void generateUpdate() {
 		Node entry = genericAtomEntry();
 		
-		appendChilds(entry,
+		appendChildren(entry,
 				label(),
 				wikiPageCategory()
 		);

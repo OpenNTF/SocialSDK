@@ -35,10 +35,10 @@ require(["sbt/declare", "sbt/dom", "sbt/connections/controls/files/FilesView", "
 	 		hideActionBar : ***REMOVED*** echo (isset($instance['ibm-sbtk-files-action-bar']) && $instance['ibm-sbtk-files-action-bar'] == 'actionBar' ? "false" : "true"); ?>,
 			templateString: viewTemplate,
 			
-			moveToTrashArgs: {templateString:moveToTrashTemplate},
-			shareFileArgs: {templateString:shareFilesTemplate},
-			uploadFileArgs: {templateString:uploadFileTemplate},
-			addTagsArgs: {templateString:addTagsTemplate},
+			moveToTrashArgs: {templateString:moveToTrashTemplate, endpoint: "***REMOVED*** echo (isset($instance['ibm-sbtk-endpoint']) ? $instance['ibm-sbtk-endpoint'] : 'connections'); ?>"},
+			shareFileArgs: {templateString:shareFilesTemplate, endpoint: "***REMOVED*** echo (isset($instance['ibm-sbtk-endpoint']) ? $instance['ibm-sbtk-endpoint'] : 'connections'); ?>"},
+			uploadFileArgs: {templateString:uploadFileTemplate, endpoint: "***REMOVED*** echo (isset($instance['ibm-sbtk-endpoint']) ? $instance['ibm-sbtk-endpoint'] : 'connections'); ?>"},
+			addTagsArgs: {templateString:addTagsTemplate, endpoint: "***REMOVED*** echo (isset($instance['ibm-sbtk-endpoint']) ? $instance['ibm-sbtk-endpoint'] : 'connections'); ?>"},
 			dialogArgs:{templateString:dialogTemplate},
 			actionBarArgs: {actionTemplate:actionTemplate, disabledClass: "btn-disabled"}
 		});

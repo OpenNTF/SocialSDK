@@ -35,7 +35,7 @@ public enum ProfileUrls implements URLContainer {
 	TAGS(new VersionedUrl(ConnectionsConstants.v4_0, "{profiles}/{authType}/atom/profileTags.do")),
 	SEARCH(new VersionedUrl(ConnectionsConstants.v4_0, "{profiles}/{authType}/atom/search.do")),
 	CONNECTIONS(new VersionedUrl(ConnectionsConstants.v4_0, "{profiles}/{authType}/atom/connections.do")),
-	CONNECTION(new VersionedUrl(ConnectionsConstants.v4_0, "{profiles/}{authType}/atom/connection.do")),
+	CONNECTION(new VersionedUrl(ConnectionsConstants.v4_0, "{profiles}/{authType}/atom/connection.do")),
 	CONNECTIONS_IN_COMMON(new VersionedUrl(ConnectionsConstants.v4_0, "{profiles}/{authType}/atom/connectionsInCommon.do")),
 	REPORTING_CHAIN(new VersionedUrl(ConnectionsConstants.v4_0, "{profiles}/{authType}/atom/reportingChain.do")),
 	PEOPLE_MANAGED(new VersionedUrl(ConnectionsConstants.v4_0, "{profiles}/{authType}/atom/peopleManaged.do")),

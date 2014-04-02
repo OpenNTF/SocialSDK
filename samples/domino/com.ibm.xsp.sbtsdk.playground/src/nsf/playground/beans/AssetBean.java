@@ -74,8 +74,10 @@ public abstract class AssetBean {
 	protected RootNode readSnippetsNodes() throws NotesException {
 		this.assetLoaderEnvironment = PlaygroundEnvironment.getCurrentEnvironment();
 		try {
-			// Make sure that the endpoints are updated for the filtering
-			this.assetLoaderEnvironment.prepareEndpoints();
+			if(this.assetLoaderEnvironment!=null) {
+				// Make sure that the endpoints are updated for the filtering
+				this.assetLoaderEnvironment.prepareEndpoints();
+			}
 			
 			//PlaygroundEnvironment env = DataAccessBean.get().findCurrentEnvironment();
 			Database db = ExtLibUtil.getCurrentDatabase();

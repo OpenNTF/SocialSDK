@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<fragment>
+
+    <extension point="com.ibm.commons.Extension">
+         <service
+         	type="com.ibm.sbt.playground.extension"
+         	class="com.ibm.xsp.sbtsdk.playground.sbt.SbtPlaygroundExtensionFactory" />
+    </extension>
+
+</fragment>

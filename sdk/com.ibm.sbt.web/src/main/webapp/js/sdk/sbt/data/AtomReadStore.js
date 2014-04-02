@@ -17,7 +17,7 @@
 /**
  * @module sbt.data.AtomReadStore
  */
-define(["../declare","../config", "../lang", "../base/core", "../xml", "../xpath","dojox/html/entities"], function(declare, config, lang, core, xml, xpath, entities) {
+define(["../declare","../config", "../lang", "../base/core", "../xml", "../xpath", "../entities"], function(declare, config, lang, core, xml, xpath, entities) {
     
     /**
      * A data store for Atom XML based services or documents.   This store is still under development

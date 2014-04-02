@@ -29,7 +29,7 @@ public class SBTProxy extends AbstractProxy {
 	
 	static final String	sourceClass	= SBTProxy.class.getName();
 	static final Logger	logger = Logger.getLogger(sourceClass);
-	private final String module = "Proxy";
+	private final String module = "sbt/Proxy";
 
 	@Override
 	public String rewriteUrl(String apiUrl) {

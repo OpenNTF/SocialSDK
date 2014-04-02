@@ -92,3 +92,13 @@ function shouldAutoExec(params) {
 	}
 	return true;
 }
+
+/**
+ * Update the selection for view.
+ */
+function updateNavSelection(id) {
+	// When a tree is created
+	if(dojo.byId(pageGlobal.snippetsTree)) {
+		treeSelectId(pageGlobal.snippetsTree,id||pageGlobal.id);
+	}
+}

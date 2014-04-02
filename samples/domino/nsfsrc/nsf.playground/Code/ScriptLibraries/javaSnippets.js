@@ -90,6 +90,10 @@ function createSnippet() {
  * Load a snippet from the server using a JSON RPC call. 
  */
 function loadSnippet(id) {
+	if(XSP.startsWith(id,"/")) {
+		setTimeout(function() {updateNavSelection(id)}, 500); // Make sure the tree is loaded
+		return;
+	}
 	var deferred = server.loadSnippet(id)
 	deferred.addCallback(function(r) {
 		if(r.status=="ok") {
@@ -167,14 +171,4 @@ function runCode(debug) {
 	form["fm_id"].value = pageGlobal.unid;
 	form["fm_options"].value = dojo.toJson(options);
 	form.submit();
-}
-
-/**
- * Update the selection for view.
- */
-function updateNavSelection() {
-	// When a tree is created
-	if(dojo.byId(pageGlobal.snippetsTree)) {
-		treeSelectId(pageGlobal.snippetsTree,pageGlobal.id);
-	}
 }

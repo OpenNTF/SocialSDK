@@ -40,7 +40,7 @@ public class CategoryNode extends Node {
 	public CategoryNode(CategoryNode parent, String name) {
 		super(parent,name);
 	}
-
+	
 	public List<Node> getChildren() {
 		return children;
 	}

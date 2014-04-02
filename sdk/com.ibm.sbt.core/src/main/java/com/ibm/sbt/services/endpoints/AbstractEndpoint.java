@@ -367,24 +367,25 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
     	String cls = getClientServiceClass();
     	if(StringUtil.isNotEmpty(cls)) {
     		try {
-    			// If there is a context, use its class loader
+    			ClientService clientService = null;
+    			// order of precedence for the classloader to use 
     			Context ctx = Context.getUnchecked();
-    			if(ctx!=null) {
-    				return (ClientService)ctx.getClassLoader().loadClass(cls).newInstance();
-    			}
-    			// If there is an application, use its class loader
     			Application app = Application.getUnchecked();
-    			if(app!=null) {
-    				return (ClientService)app.getClassLoader().loadClass(cls).newInstance();
-    			}
-    			// If there is a thread context class loader, use it
     			ClassLoader cl = Thread.currentThread().getContextClassLoader();
-    			if(cl!=null) {
-    				return (ClientService)cl.loadClass(cls).newInstance();
+    			if (ctx!=null) {
+    				clientService = (ClientService)ctx.getClassLoader().loadClass(cls).newInstance();
+    			} else if(app!=null) {
+    				clientService = (ClientService)app.getClassLoader().loadClass(cls).newInstance();
+    			} else if(cl!=null) {
+    				clientService = (ClientService)cl.loadClass(cls).newInstance();
+    			} else {
+    				clientService = (ClientService)Class.forName(cls).newInstance();
     			}
-    			// else, default to the basic JVM class loading
-    			return (ClientService)Class.forName(cls).newInstance();
-    		} catch(Exception ex) {
+    			// set endpoint
+    			clientService.setEndpoint(this);
+
+    			return clientService;
+   		} catch(Exception ex) {
     			throw new ClientServicesException(ex,"Cannot create ClientService class {0}",cls);
     		}
     	}

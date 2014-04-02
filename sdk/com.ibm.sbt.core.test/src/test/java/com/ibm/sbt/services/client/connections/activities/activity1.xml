@@ -1,0 +1,70 @@
+<entry xmlns="http://www.w3.org/2005/Atom"
+  xmlns:app="http://www.w3.org/2007/app"
+  xmlns:snx="http://www.ibm.com/xmlns/prod/sn"
+  xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <id>urn:lsid:ibm.com:oa:5f89a416-68e5-4666-af8e-72150bf50e22</id>
+  <title type="text">com.ibm.sbt.services.client.connections.activities.ActivityServiceCrudrTest#1615749198 Community - 1396026691896</title>
+  <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="community_activity" label="Community Activity"/>
+  <snx:communityUuid>commuid-5f89a416-68e5-4666-af8e-72150bf50e22</snx:communityUuid>
+  <updated>2014-03-28T17:11:31Z</updated>
+  <published>2014-03-28T17:11:31Z</published>
+  <author>
+    <snx:org>
+      <uri>https://apps.na.collabservtest.lotus.com/activities/service/atom2/memberprofile?memberid=</uri>
+    </snx:org>
+    <name>Mark Wallace</name>
+    <snx:userid>20089094</snx:userid>
+    <snx:ldapid>0f908c3a-a9df-493e-8802-94bbf5ddbf1d</snx:ldapid>
+    <snx:userState>active</snx:userState>
+  </author>
+  <contributor>
+    <snx:org>
+      <uri>https://apps.na.collabservtest.lotus.com/activities/service/atom2/memberprofile?memberid=</uri>
+    </snx:org>
+    <name>Mark Wallace</name>
+    <snx:userid>20089094</snx:userid>
+    <snx:ldapid>0f908c3a-a9df-493e-8802-94bbf5ddbf1d</snx:ldapid>
+    <snx:userState>active</snx:userState>
+  </contributor>
+  <category label="Activity"
+    scheme="http://www.ibm.com/xmlns/prod/sn/type" term="activity"/>
+  <category label="Normal"
+    scheme="http://www.ibm.com/xmlns/prod/sn/priority" term="1"/>
+  <category label="External"
+    scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="external"/>
+  <category label="Completed"
+    scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="completed"/>
+  <category label="Template"
+    scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="template"/>
+  <link
+    href="https://apps.na.collabservtest.lotus.com/activities/service/atom2/acl?activityUuid=5f89a416-68e5-4666-af8e-72150bf50e22"
+    rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml"/>
+  <link
+    href="https://apps.na.collabservtest.lotus.com/activities/service/atom2/activity/history?activityUuid=5f89a416-68e5-4666-af8e-72150bf50e22"
+    rel="http://www.ibm.com/xmlns/prod/sn/history" type="application/atom+xml"/>
+  <link
+    href="https://apps.na.collabservtest.lotus.com/activities/service/atom2/entrytemplates?activityUuid=5f89a416-68e5-4666-af8e-72150bf50e22"
+    rel="http://www.ibm.com/xmlns/prod/sn/templates" type="application/atom+xml"/>
+  <app:collection href="https://apps.na.collabservtest.lotus.com/activities/service/atom2/activity?activityUuid=5f89a416-68e5-4666-af8e-72150bf50e22">
+    <title type="text">com.ibm.sbt.services.client.connections.activities.ActivityServiceCrudrTest#1615749198 Community - 1396026691896</title>
+    <app:categories href="https://apps.na.collabservtest.lotus.com/activities/service/atom2/categories?activityUuid=5f89a416-68e5-4666-af8e-72150bf50e22"/>
+  </app:collection>
+  <snx:activity>5f89a416-68e5-4666-af8e-72150bf50e22</snx:activity>
+  <link
+    href="https://apps.na.collabservtest.lotus.com/activities/service/atom2/activitynode?activityNodeUuid=5f89a416-68e5-4666-af8e-72150bf50e22"
+    rel="edit" type="application/atom+xml"/>
+  <link
+    href="https://apps.na.collabservtest.lotus.com/activities/service/atom2/activity?activityUuid=5f89a416-68e5-4666-af8e-72150bf50e22"
+    rel="self" type="application/atom+xml"/>
+  <link
+    href="https://apps.na.collabservtest.lotus.com/activities/service/html/activity/recent?activityUuid=5f89a416-68e5-4666-af8e-72150bf50e22"
+    rel="alternate" type="application/xhtml+xml"/>
+  <link
+    href="https://apps.na.collabservtest.lotus.com/activities/service/html/activity/recent?activityUuid=5f89a416-68e5-4666-af8e-72150bf50e22"
+    rel="alternate" type="text/html"/>
+  <snx:position>-2147483648</snx:position>
+  <snx:depth>0</snx:depth>
+  <snx:permissions>none, create_activity, view_activity, edit_activity, delete_activity, activity_owner, edit_activity_tags, design_activity, edit_statements, delete_statements, add_members, delete_members, create_entries, edit_personal_entries, edit_all_entries, delete_personal_entries, delete_all_entries, edit_personal_entry_tags, edit_all_entry_tags, view_members</snx:permissions>
+  <snx:icon>https://apps.na.collabservtest.lotus.com/activities/nav/common/images/iconActivities16.png</snx:icon>
+  <summary type="text"/>
+</entry>

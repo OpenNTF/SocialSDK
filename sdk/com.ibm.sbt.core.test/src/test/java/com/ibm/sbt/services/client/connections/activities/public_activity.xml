@@ -1,0 +1,64 @@
+<entry>
+  <id>urn:lsid:ibm.com:oa:c3cd8633-c73d-4fda-a74b-8421c0529c0a</id>
+  <title type="text">Public Activity</title>
+  <updated>2014-03-31T12:59:54Z</updated>
+  <published>2014-03-31T12:59:54Z</published>
+  <author>
+    <snx:org>
+      <uri>https://apps.na.collabservtest.lotus.com/activities/service/atom2/memberprofile?memberid=</uri>
+    </snx:org>
+    <name>Mark Wallace</name>
+    <snx:userid>20089094</snx:userid>
+    <snx:ldapid>0f908c3a-a9df-493e-8802-94bbf5ddbf1d</snx:ldapid>
+    <snx:userState>active</snx:userState>
+  </author>
+  <contributor>
+    <snx:org>
+      <uri>https://apps.na.collabservtest.lotus.com/activities/service/atom2/memberprofile?memberid=</uri>
+    </snx:org>
+    <name>Mark Wallace</name>
+    <snx:userid>20089094</snx:userid>
+    <snx:ldapid>0f908c3a-a9df-493e-8802-94bbf5ddbf1d</snx:ldapid>
+    <snx:userState>active</snx:userState>
+  </contributor>
+  <category label="Activity"
+    scheme="http://www.ibm.com/xmlns/prod/sn/type" term="activity"/>
+  <category label="Normal"
+    scheme="http://www.ibm.com/xmlns/prod/sn/priority" term="1"/>
+  <category label="External"
+    scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="external"/>
+  <category term="public"/>
+  <link
+    href="https://apps.na.collabservtest.lotus.com/activities/service/atom2/acl?activityUuid=c3cd8633-c73d-4fda-a74b-8421c0529c0a"
+    rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml"/>
+  <link
+    href="https://apps.na.collabservtest.lotus.com/activities/service/atom2/activity/history?activityUuid=c3cd8633-c73d-4fda-a74b-8421c0529c0a"
+    rel="http://www.ibm.com/xmlns/prod/sn/history" type="application/atom+xml"/>
+  <link
+    href="https://apps.na.collabservtest.lotus.com/activities/service/atom2/entrytemplates?activityUuid=c3cd8633-c73d-4fda-a74b-8421c0529c0a"
+    rel="http://www.ibm.com/xmlns/prod/sn/templates" type="application/atom+xml"/>
+  <app:collection href="https://apps.na.collabservtest.lotus.com/activities/service/atom2/activity?activityUuid=c3cd8633-c73d-4fda-a74b-8421c0529c0a">
+    <title type="text">Public Activity</title>
+    <app:categories href="https://apps.na.collabservtest.lotus.com/activities/service/atom2/categories?activityUuid=c3cd8633-c73d-4fda-a74b-8421c0529c0a"/>
+  </app:collection>
+  <snx:activity>c3cd8633-c73d-4fda-a74b-8421c0529c0a</snx:activity>
+  <link
+    href="https://apps.na.collabservtest.lotus.com/activities/service/atom2/activitynode?activityNodeUuid=c3cd8633-c73d-4fda-a74b-8421c0529c0a"
+    rel="edit" type="application/atom+xml"/>
+  <link
+    href="https://apps.na.collabservtest.lotus.com/activities/service/atom2/activity?activityUuid=c3cd8633-c73d-4fda-a74b-8421c0529c0a"
+    rel="self" type="application/atom+xml"/>
+  <link
+    href="https://apps.na.collabservtest.lotus.com/activities/service/html/activity/recent?activityUuid=c3cd8633-c73d-4fda-a74b-8421c0529c0a"
+    rel="alternate" type="application/xhtml+xml"/>
+  <link
+    href="https://apps.na.collabservtest.lotus.com/activities/service/html/activity/recent?activityUuid=c3cd8633-c73d-4fda-a74b-8421c0529c0a"
+    rel="alternate" type="text/html"/>
+  <snx:position>-2147483648</snx:position>
+  <snx:depth>0</snx:depth>
+  <snx:permissions>none, create_activity, view_activity, edit_activity, delete_activity, activity_owner, edit_activity_tags, design_activity, edit_statements, delete_statements, add_members, delete_members, create_entries, edit_personal_entries, edit_all_entries, delete_personal_entries, delete_all_entries, edit_personal_entry_tags, edit_all_entry_tags, view_members</snx:permissions>
+  <snx:icon>https://apps.na.collabservtest.lotus.com/activities/nav/common/images/iconActivities16.png</snx:icon>
+  <content type="text">
+          	Test Public Activities
+      	  </content>
+</entry>

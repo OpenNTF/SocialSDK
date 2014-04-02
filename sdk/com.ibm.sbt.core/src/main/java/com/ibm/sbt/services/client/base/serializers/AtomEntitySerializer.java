@@ -29,7 +29,7 @@ import com.ibm.sbt.services.client.base.ConnectionsConstants.Namespaces;
  * @author Mario Duarte
  *
  */
-public abstract class AtomEntitySerializer<T extends AtomEntity> extends BaseEntitySerializer<T> {
+public class AtomEntitySerializer<T extends AtomEntity> extends BaseEntitySerializer<T> {
 
 	public AtomEntitySerializer(T entity) {
 		super(entity);
@@ -38,18 +38,15 @@ public abstract class AtomEntitySerializer<T extends AtomEntity> extends BaseEnt
 	public Node genericAtomEntry() {
 		Node entry = entry();
 		
-		appendChilds(entry, 
+		appendChildren(entry, 
 			title(),
 			id(),
-			published(),
-			updated(),
 			summary(),
 			content()
 		);
 		
-		appendChilds(entry, author());
-		appendChilds(entry, contributor());
-		appendChilds(entry, tags());
+		appendChildren(entry, tags());
+
 		return entry;
 	}
 

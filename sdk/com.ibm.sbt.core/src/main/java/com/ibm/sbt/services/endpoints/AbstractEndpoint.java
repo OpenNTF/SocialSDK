@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * ï¿½ Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -61,6 +61,7 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
     private String authenticationService;
     private String clientServiceClass;
     private String apiVersion;
+    private String defaultApiVersion = "4.0";
     private String credentialStore;
     private boolean requiresAuthentication;
     private boolean forceTrustSSLCertificate;
@@ -190,7 +191,7 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
      */
     @Override
     public String getApiVersion() {
-        return this.apiVersion;
+        return StringUtil.isNotEmpty(apiVersion)?this.apiVersion:this.defaultApiVersion;
     }
     
     /**

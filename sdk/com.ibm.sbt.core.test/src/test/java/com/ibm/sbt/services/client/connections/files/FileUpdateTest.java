@@ -23,6 +23,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import com.ibm.commons.util.StringUtil;
+import com.ibm.commons.xml.DOMUtil;
 import com.ibm.commons.xml.XMLException;
 import com.ibm.sbt.services.BaseUnitTest;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;

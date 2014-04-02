@@ -117,34 +117,14 @@ class Proxy extends BaseController
 		} else if ($settings->getAuthenticationMethod($endpointName) == "oauth1") {	
 			$endpoint = new SBTOAuth1Endpoint();
 		}
-
-		// ...yes, this is ugly
-		$containsServerURL = false;
-
-		if (strpos($url, '/https/') == 0 || strpos($url, 'https/') == 0) {
-			$url = str_replace('/https/', 'https://', $url);
-			$url = str_replace('https/', 'https://', $url);
-			$result = parse_url($url);
-			if (isset($result['scheme'])) {
-				$url = str_replace($server, '', $url);
-				$containsServerURL = true;
-			}
-		} else if (strpos($url, '/http/') == 0 || strpos($url, 'http/') == 0) {
-			$url = str_replace('/http/', 'http://', $url);
-			$url = str_replace('http/', 'http://', $url);
-			$url = str_replace('/https/', 'https://', $url);
-			$result = parse_url($url);
-			if (isset($result['scheme'])) {
-				$url = str_replace($server, '', $url);
-				$containsServerURL = true;
-			}
-		}
 		
+		$url = $proxyHelper->cleanURL($url, $server);
+
 		// Make request
  		$response = $endpoint->makeRequest($server, $url, $method, $options, $body, $forwardHeader, $endpointName);
 
  		// Print response
-		$proxyHelper->outputResponse($response, $url, $containsServerURL);
+		$proxyHelper->outputResponse($response, $url);
 	}
 	
 	/**
@@ -196,71 +176,57 @@ class Proxy extends BaseController
 					$url .= '&tag=' . $_GET['tag'];
 				}
 				
-				if (isset($_GET['commentNotification'])) {
-					$url .= '&commentNotification=' . $_GET['commentNotification'];
-				} else {
-					$_POST['commentNotification'] = 'on';
-					$url .= 'visibility=private';
-				}
+// 				if (isset($_GET['commentNotification'])) {
+// 					$url .= '&commentNotification=' . $_GET['commentNotification'];
+// 				} else {
+// 					$_POST['commentNotification'] = 'on';
+// 					$url .= 'visibility=private';
+// 				}
 				
-				$milliseconds = round(microtime(true) * 1000);
-				if (isset($_GET['created'])) {
-					$_POST['created'] = $_GET['created'];
-					$url .= '&commentNotification=' . $_GET['commentNotification'];
-				} else {
-					$_POST['created'] = $milliseconds;
-					$url .= 'visibility=private';
-				}
+// 				$milliseconds = round(microtime(true) * 1000);
+// 				if (isset($_GET['created'])) {
+// 					$url .= '&commentNotification=' . $_GET['commentNotification'];
+// 				} else {
+// 					$_POST['created'] = $milliseconds;
+// 					$url .= 'visibility=private';
+// 				}
 				
 				
-				if (isset($_GET['includePath'])) {
-					$_POST['includePath'] = $_GET['includePath'];
-					$url .= '&commentNotification=' . $_GET['commentNotification'];
-				} else {
-					$_POST['includePath'] = 'true';
-					$url .= 'visibility=private';
-				}
+// 				if (isset($_GET['commentNotification'])) {
+// 					$url .= '&includePath=' . $_GET['includePath'];
+// 				} else {
+// 					$url .= 'includePath=true';
+// 				}
 				
-				if (isset($_GET['mediaNotification'])) {
-					$_POST['mediaNotification'] = $_GET['mediaNotification'];
-					$url .= '&commentNotification=' . $_GET['commentNotification'];
-				} else {
-					$_POST['mediaNotification'] = 'off';
-					$url .= 'visibility=private';
-				}
+// 				if (isset($_GET['mediaNotification'])) {
+// 					$url .= '&mediaNotification=' . $_GET['mediaNotification'];
+// 				} else {
+// 					$url .= 'mediaNotification=off';
+// 				}
 				
-				if (isset($_GET['modified'])) {
-					$_POST['modified'] = $_GET['modified'];
-					$url .= '&commentNotification=' . $_GET['commentNotification'];
-				} else {
-					$_POST['modified'] = $milliseconds;
-					$url .= 'visibility=private';
-				}
+// 				if (isset($_GET['modified'])) {
+// 					$url .= '&modified=' . $_GET['modified'];
+// 				} else {
+// 					$url .= 'modified=' . $milliseconds;
+// 				}
 				
-				if (isset($_GET['propagate'])) {
-					$_POST['propagate'] = $_GET['propagate'];
-					$url .= '&commentNotification=' . $_GET['commentNotification'];
-				} else {
-					$_POST['propagate'] = 'false';
-					$url .= 'visibility=private';
-				}
+// 				if (isset($_GET['propagate'])) {
+// 					$url .= '&propagate=' . $_GET['propagate'];
+// 				} else {
+// 					$url .= 'propagate=false';
+// 				}
 				
-				if (isset($_GET['sharePermission'])) {
-					$_POST['sharePermission'] = $_GET['sharePermission'];
-					$url .= '&commentNotification=' . $_GET['commentNotification'];
-				} else {
-					$_POST['sharePermission'] = 'Edit';
-					$url .= 'visibility=private';
-				}
+// 				if (isset($_GET['sharePermission'])) {
+// 					$url .= '&sharePermission=' . $_GET['sharePermission'];
+// 				} else {
+// 					$url .= 'sharePermission=Edit';
+// 				}
 				
-				if (isset($_GET['shareSummary'])) {
-					$_POST['shareSummary'] = $_GET['shareSummary'];
-					$url .= '&commentNotification=' . $_GET['commentNotification'];
-					
-				} else {
-					$_POST['shareSummary'] = 'NA';
-					$url .= 'visibility=private';
-				}
+// 				if (isset($_GET['shareSummary'])) {
+// 					$url .= '&shareSummary=' . $_GET['shareSummary'];
+// 				} else {
+// 					$url .= 'shareSummary=NA';
+// 				}
 			
 				// Update request
 				$_REQUEST['_redirectUrl'] = $url;
@@ -272,6 +238,8 @@ class Proxy extends BaseController
 				return true;
 			} else if (strpos($_GET["_redirectUrl"], '/UploadCommunityFile/') !== false) {
 				$url = $_GET['_redirectUrl']; 
+				
+				$_GET['slug'] = $_FILES['file']['name'];
 				
 				// Extract library ID and file ID
 				$keys = parse_url($url);

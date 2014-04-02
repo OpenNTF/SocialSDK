@@ -1,4 +1,4 @@
-<script type="text/template" id="fileRow">
+<script type="text/template" id="fileRow-<?php echo $timestamp; ?>">
 <tr style="padding-bottom: 0.3em;">
 	<td style="width:160px;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inline-block; padding-left: 10px;">
 			<span dojoAttachPoint="placeLinkNode">
@@ -7,7 +7,7 @@
 	</td>
 </tr>
 </script>
-<script type="text/template" id="pagingHeader">
+<script type="text/template" id="pagingHeader-<?php echo $timestamp; ?>">
 <div dojoAttachPoint="pagingHeader">
 	<div>
 		<hr style="width:90%; left: -30px; border: 0; height: 1px;"/>
@@ -25,7 +25,7 @@
 		</div>
 </div>
 </script>
-<script type="text/template" id="pagingFooter">
+<script type="text/template" id="pagingFooter-<?php echo $timestamp; ?>">
 <div dojoattachpoint="pagingFooter" class="lotusPaging" style="font-size: 12px;">
 	<div>
 		<hr style="width:90%; background: black;  margin: 0.1em 0; left: -30px; border: 0; height: 1px;"/>

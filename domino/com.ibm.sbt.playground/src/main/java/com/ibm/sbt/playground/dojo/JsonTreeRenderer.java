@@ -32,7 +32,8 @@ import com.ibm.sbt.playground.assets.RootNode;
  */
 public class JsonTreeRenderer {
 	
-	private boolean flat;	// Flat generation, for FT search results
+	private boolean flat;			// Flat generation, for FT search results
+	private boolean categoryUrl;	// Generate a URL for the categories
 
 	public JsonTreeRenderer() {
 	}
@@ -43,6 +44,14 @@ public class JsonTreeRenderer {
 
 	public void setFlat(boolean flat) {
 		this.flat = flat;
+	}
+	
+	public boolean isCategoryUrl() {
+		return categoryUrl;
+	}
+
+	public void setCategoryUrl(boolean categoryUrl) {
+		this.categoryUrl = categoryUrl;
 	}
 
 	//
@@ -89,7 +98,7 @@ public class JsonTreeRenderer {
 				String name = (node instanceof RootNode) ? "_root" : node.getName();
 				jw.outStringLiteral(name);
 			jw.endProperty();
-			if(node instanceof AssetNode) {
+			if((node instanceof AssetNode) || isCategoryUrl()) {
 				jw.startProperty("url");
 					jw.outStringLiteral(((AssetNode)node).getName());
 				jw.endProperty();
@@ -142,20 +151,18 @@ public class JsonTreeRenderer {
 					String name = (node instanceof RootNode) ? "_root" : node.getName();
 					jw.outStringLiteral(name);
 				jw.endProperty();
-				if(node instanceof AssetNode) {
-					jw.startProperty("url");
-						jw.outStringLiteral(((AssetNode)node).getUnid());
-					jw.endProperty();
-				}
 				if(StringUtil.isNotEmpty(node.getTooltip())) {
 					jw.startProperty("tooltip");
 						jw.outStringLiteral(node.getTooltip());
 					jw.endProperty();
 				}
 				if(StringUtil.isNotEmpty(node.getJspUrl())) {
-					if(node instanceof AssetNode) {
+					if((node instanceof AssetNode) || isCategoryUrl()) {
+						jw.startProperty("url");
+							jw.outStringLiteral(node.getUnid());
+						jw.endProperty();
 						jw.startProperty("jspUrl");
-							jw.outStringLiteral((node).getJspUrl());
+							jw.outStringLiteral(node.getJspUrl());
 						jw.endProperty();
 					}
 				}

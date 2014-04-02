@@ -65,10 +65,14 @@ define(['dojo/_base/declare', 'explorer/widgets/gadgetarea/GadgetArea', 'dojo/on
         	  if(hash()) {
         		  var obj = ioQuery.queryToObject(hash());
         		  if(obj.snippet) {
-        			  var self = this;
-        			  setTimeout(function() {
-        				  self.loadSnippet(obj.snippet);
-  						});
+        			  if(XSP.startsWith(obj.snippet,"/")) {
+       					  setTimeout(function() {updateNavSelection(obj.snippet)}, 500); // Make sure the tree is loaded
+        			  } else {
+        				  var self = this;
+        				  setTimeout(function() {
+        					  self.loadSnippet(obj.snippet);
+  							});
+        			  }
         		  } 
         	  } else {
         		  util.clearEditors();

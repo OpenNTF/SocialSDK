@@ -18,12 +18,12 @@
  * 
  */
 define([ "../declare", "../lang", "../Promise", "../data/AtomReadStore", "dijit/form/ComboBox" ],
-		function(declare, lang, Promise, AtomReadStore, ComboBox) {
+		function(declare, lang, Promise, AtomReadStore) {
 
 	/*
 	 * @module sbt.widget._TypeAhead
 	 */
-	var _TypeAhead = declare([ ComboBox ], {
+	var _TypeAhead = declare([ dijit.form.ComboBox ], {
 		
 		/**
 		 * Constructor method for the TypeAhead.

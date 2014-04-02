@@ -138,11 +138,22 @@ public class Wiki extends WikiBaseEntity {
 		throw new UnsupportedOperationException(); // FIXME
 	}
 
+	/**
+	 * Returns the tags on the wiki page.
+	 * 
+	 * @return
+	 */
 	public List<String> getTags() {
 		return super.getBaseTags();
 	}
 
+	/**
+	 * Set the tags on the wiki page.
+	 * 
+	 * @param tags
+	 */
 	public void setTags(List<String> tags) {
 		super.setBaseTags(tags);
 	}
+
 }

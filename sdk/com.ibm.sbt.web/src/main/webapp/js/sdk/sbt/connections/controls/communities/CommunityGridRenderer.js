@@ -148,13 +148,23 @@ define(["../../../declare", "../../../stringUtil", "../../../i18n", "../../../la
           * @returns {String}
           */
          displayRestricted: function(grid, item, i, items) {
-                 var communityType = item.getValue("communityType");
-             if (communityType == undefined || communityType != "publicInviteOnly") {
-                 return "display: none;";
-             } else {
-                 return "display: inline-block;";
+             var communityType = item.getValue("communityType");
+             if(communityType == "private"){
+            	 return "display: inline-block;";
+             }else{
+                 return "display: none";
              }
          },
+         
+         displayModerated: function(grid, item, i, items){
+        	   var communityType = item.getValue("communityType");
+               if(communityType == "publicInviteOnly"){
+              	 return "display: inline-block;";
+               }else{
+                   return "display: none";
+               }
+         },
+         
          
          /**
           * Get the tag label, if a community has no tags and empty string is returned

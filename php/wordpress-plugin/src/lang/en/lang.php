@@ -95,3 +95,4 @@ $lang['test_connection']		= 'Test connection';
 $lang['no_access_granted']		= 'You have not yet granted access for this application to use your IBM account.';
 $lang['checking_if_access_granted'] = 'Checking if you have granted access for this application to use your IBM account.';
 $lang['logout_from_endpoint']	= 'Logout from Endpoint';
+$lang['endpoint']				= 'Endpoint';

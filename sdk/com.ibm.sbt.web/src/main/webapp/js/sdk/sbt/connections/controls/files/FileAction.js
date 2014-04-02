@@ -31,11 +31,12 @@ define([ "../../../declare", "../../../stringUtil", "../../../controls/grid/Grid
         nls: {
             tooltip: "Click to download ${title}"
         },
-       
+        grid: null,
         /**Constructor function
          * @method constructor
          *  */
-        constructor: function() {
+        constructor: function(grid) {
+        	this.grid = grid;
         },
         
         /**function to get the string to be displayed in an elements tooltip
@@ -56,7 +57,11 @@ define([ "../../../declare", "../../../stringUtil", "../../../controls/grid/Grid
          * @param event the event
          */
         execute: function(item, opts, event) {
-        	window.open(item.getValue("downloadUrl"));
+        	var url = item.getValue("downloadUrl");
+        	if(this.grid){
+        		url = this.grid.encodeImageUrl(url);
+        	}
+        	window.open(url);
         }
 
     });

@@ -65,10 +65,7 @@ require(["sbt/dom", "sbt/connections/controls/astream/ActivityStreamWrapper"], f
     };
     
     var activityStreamWrapper = new ActivityStreamWrapper({
-        config : config,
-        activityStreamNode: "activityStream",
-        shareBoxNode : "inputForm",
-        sideNavNode : "sideNav"
+        config : config
     });
     
     dom.byId("activityStreamDiv").appendChild(activityStreamWrapper.domNode);

@@ -123,7 +123,9 @@ viewScope.password = true}]]></xp:this.postNewDocument>
 						<xp:selectItem itemLabel="API Documentation Wiki"
 							itemValue="apidoc">
 						</xp:selectItem>
-					</xp:comboBox>
+						<xp:eventHandler event="onchange" submit="true"
+							refreshMode="partial" refreshId="formTable2">
+						</xp:eventHandler></xp:comboBox>
 				</xe:formRow>
 				<xe:formRow id="formRow1" label="Location:">
 					<xp:inputText id="inputText1"
@@ -150,6 +152,25 @@ viewScope.password = true}]]></xp:this.postNewDocument>
 						disableClientSideValidation="true" size="40"
 						value="#{document1.Password}" password="true">
 					</xp:inputText>
+				</xe:formRow>
+				<xe:formRow id="formRow7" label="Runtime Filter:"
+					rendered="#{javascript:getComponent('comboBox2').getValue()=='apidoc'}">
+					<xe:djextListTextBox id="djRuntimePlatforms"
+						multipleSeparator="," multipleTrim="true"
+						value="#{document1.Runtimes}" title="Runtime platforms">
+						<xp:eventHandler event="onChange" submit="true"
+							refreshMode="partial" refreshId="formTable2">
+						</xp:eventHandler>
+					</xe:djextListTextBox>
+					<xe:valuePicker id="valuePicker1"
+						for="djRuntimePlatforms" pickerText="Add"
+						dojoType="extlib.dijit.PickerCheckbox">
+						<xe:this.dataProvider>
+							<xe:simpleValuePicker
+								valueList="#{javascript:optionsBean.getRuntimePlatforms()}">
+							</xe:simpleValuePicker>
+						</xe:this.dataProvider>
+					</xe:valuePicker>
 				</xe:formRow>
 			</xe:formTable>
 			<xe:dumpObject loaded="false" id="dumpObject1" title="document"

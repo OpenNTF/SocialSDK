@@ -24,6 +24,7 @@ public enum AuthUtil {
 	
 	public final String OAUTH 		= "oauth";
 	public final String BASIC 		= "basic";
+	public final String SSO 		= "sso";
 	public final String FORM 		= "form"; 
 
 	/*
@@ -51,6 +52,8 @@ public enum AuthUtil {
 			authValue = BASIC;
 		} else if (authType.equalsIgnoreCase("form")) {
 			authValue = FORM;
+		} else if(authType.equalsIgnoreCase("sso")){
+			authValue = SSO;
 		}
 		return authValue;
 

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
 	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:this.resources>
+		<xp:dojoModule name="dijit.Dialog"></xp:dojoModule>
+	</xp:this.resources>
 	<xc:ccNoAccessUser></xc:ccNoAccessUser>
 	<xp:panel style="padding: 0px 5px 0px 5px;" loaded="${javascript:userBean.canCreateDocs}">
 		<xp:button value="New Entry" id="button3">
@@ -39,5 +42,79 @@ context.reloadPage(); // Why is this needed?
 				</xp:this.action>
 			</xp:eventHandler>
 		</xp:button>
+		<xp:button value="Export to Zip File" id="button2">
+			<xp:eventHandler event="onclick" submit="true"
+				id="eventHandler4" refreshMode="partial">
+				<xp:this.script><![CDATA[var url = "#{javascript:@FullUrl('/xsp/preview/export/'+compositeData.type+'.zip?type='+compositeData.type)}";
+window.location.assign(url);]]></xp:this.script>
+			</xp:eventHandler>
+		</xp:button>
+		<xp:button value="Import from Zip File..." id="button5">
+			<xp:eventHandler event="onclick" submit="false"
+				id="eventHandler5">
+				<xp:this.script><![CDATA[importDialog.show()]]></xp:this.script>
+			</xp:eventHandler>
+		</xp:button>
 	</xp:panel>
+
+	<script type="dojo/template" id="upload-dialog-template">
+		<form method="post" id='importForm' name="importForm" enctype="multipart/form-data">
+			<div class="dijitDialogPaneContentArea">
+				<div>
+					<table class="form">
+						<tr>
+							<td>File to upload</td>
+							<td>
+								<input type="file" name="snippets" />
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="dijitDialogPaneActionBar">
+				<button id='importOkButton' type="button">Submit</button>
+				<button id='importCancelButton' type="button">Cancel</button>
+			</div>
+ 		</form>
+	</script>
+
+	<xp:scriptBlock>
+		<xp:this.value><![CDATA[var importUrl = "#{javascript:@FullUrl('/xsp/preview/import/'+compositeData.type+'.zip?type='+compositeData.type)}";
+]]></xp:this.value>
+	</xp:scriptBlock>
+	<script>
+		var importDialog = null;
+		require([
+			"dijit/Dialog",
+			"dojo/dom",
+			"dojo/on",
+			"dojo/request/iframe",
+			"dojo/domReady!"
+		], function(Dialog, dom, on, iframe) {
+			importDialog = new Dialog({
+				content: dom.byId("upload-dialog-template").innerHTML,
+				method: "post",
+				title: "Select a File to Upload"
+			});
+			on(dom.byId("importOkButton"), "click", function() {
+				iframe(importUrl, {
+    				form: "importForm"
+  				}).then(function(data){
+  					if(data) {
+    				alert("Upload error:\n"+data);
+  					} else {
+						importDialog.hide();
+						location.reload();
+					}
+  				}, function(err){
+    				alert("Upload error:\n"+err);
+  				});
+			});
+			on(dom.byId("importCancelButton"), "click", function() {
+				importDialog.hide();
+				location.reload();
+			});
+		});
+	</script>
+
 </xp:view>

@@ -13,7 +13,7 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-define(["../../../declare", "../../../lang", "../../../dom", "../../../connections/controls/_ConnectionsWidget", "../../../connections/controls/astream/_SbtAsConfigUtil", "../../../connections/controls/sharebox/_InputForm"], function(declare, lang, dom, _ConnectionsWidget, _SbtAsConfigUtil, _InputForm){
+define(["../../../declare", "../../../lang", "../../../dom", "../../../connections/controls/_ConnectionsWidget", "../../../connections/controls/astream/_SbtAsConfigUtil"], function(declare, lang, dom, _ConnectionsWidget, _SbtAsConfigUtil){
     /**
      * Wrapper for the connections ActivityStream Dijit.
      * 
@@ -21,43 +21,16 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../connectio
      */
     var _ActivityStream = declare([_ConnectionsWidget],
     {    
-        /**
+        /*
          * The ConfigUtil will be held here.
          * 
          * @property configUtil 
          * @type Object
          * @default null
          */
-        configUtil: null,
+        _configUtil: null,
 
-        /**
-         * The InputForm will be held here.
-         * 
-         * @property inputForm 
-         * @type Object
-         * @default null
-         */
-        inputForm: null,
-
-        /**
-         * This wraps the given node in a div with class="lotusContent lotusBoard" since the ActivityStream css rules expect such a layout.
-         * Used to wrap the ActivityStream's dom node.
-         * 
-         * @method wrapDomNode
-         * 
-         * @param {String} domNodeId The id of the dom node to wrap.
-         */
-        wrapDomNode: function(domNodeId){
-            var asNode = document.getElementById(domNodeId);
-            var parent = asNode.parentNode;
-            var wrapperDiv = document.createElement('div');
-            wrapperDiv.className= "lotusContent lotusBoard";
-            
-            parent.appendChild(wrapperDiv);
-            wrapperDiv.appendChild(asNode);
-        },
-        
-        /**
+        /*
          * The constructor. This will set up the connections ActivityStream dijit with a config object, and create the ShareBox and SideNav.
          * Takes EITHER a feedUrl and an optional extensions object, OR an ActivityStream config object. 
          * If a feedUrl is specified any config object supplied will be ignored.
@@ -77,50 +50,33 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../connectio
          *         
          *     @params {Object} args.config An ActivityStream config object. Only specify this without a feedUrl argument.
          * @param {String} activityStreamNode: The node to attach the ActivityStream to. This should have its div created in the defaultTemplate.
-         * @param {String} shareBoxNode: The node to attach the ShareBox to. This should have its div created in the defaultTemplate.
-         * @param {String} sideNavNode: The node to attach the views SideNav to. This should have its div created in the defaultTemplate.
          */
         constructor: function(args){
-            this.mixinXhrHandler();
-            var configUtil = new _SbtAsConfigUtil(this.xhrHandler);
-            
-            args.xhrHandler = this.xhrHandler;
-            if(args.activityStreamNode){
-                this.wrapDomNode(args.activityStreamNode);
+            if(args.feedUrl && args.feedUrl.indexOf("anonymous") !== -1){
+                this.xhrHandler.isPublic = true;
             }
-            var self = this;
             
-            configUtil.buildSbtConfig(args).then(function(cfg){
-                if(args.sideNavNode && Object.keys(cfg.views).length > 1){
-                    if(com.ibm.social.as.nav){
-                        new com.ibm.social.as.nav.ASSideNav({
-                            configObject : cfg
-                        }, dom.byId(args.sideNavNode));
-                    }else{
-                        new com.ibm.social.as.gadget.viewnav.ASGadgetViewSideNav({
-                            configObject : cfg
-                        }, dom.byId(args.sideNavNode));
-                    }
-                }
-                if(args.activityStreamNode){
-                    window.activityStreamConfig = cfg;
-                    new com.ibm.social.as.ActivityStream({
-                        configObject: cfg,
-                        domNode: args.activityStreamNode,
-                        isGadget: false,
-                        selectedState: true
-                    });
-                }
+            this._mixinXhrHandler();
+            
+            var _configUtil = new _SbtAsConfigUtil(this.xhrHandler);
+            
+            _configUtil.buildSbtConfig(args).then(function(cfg){
+                window.activityStreamConfig = cfg;
+                new com.ibm.social.as.ActivityStream({
+                    configObject: cfg,
+                    domNode: args.activityStreamNode || "activityStreamNode",
+                    isGadget: false,
+                    selectedState: true
+                });
             });
-            
         },
         
-        /**
+        /*
          * Overwrite the ActivityStream's XhrHandler with our own.
          * 
          * @method mixinXhrHandler
          */
-        mixinXhrHandler: function(){
+        _mixinXhrHandler: function(){
             if(com.ibm.social.as.util.xhr.XhrHandler.init !== undefined){
                 com.ibm.social.as.util.xhr.XhrHandler.init(this.xhrHandler);
             }

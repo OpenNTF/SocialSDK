@@ -1,0 +1,203 @@
+
+<!-- Copyright IBM Corp. 2011, 2012  All Rights Reserved.              -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html dir="ltr" lang="en">
+<head>
+<meta content="text/html;charset=UTF-8"></meta>
+<!--[if IE 6]><script type="text/javascript">document.getElementsByTagName("html")[0].className+=" lotusui_ie lotusui_ie6";</script><![endif]-->
+<!--[if IE 7]><script type="text/javascript">document.getElementsByTagName("html")[0].className+=" lotusui_ie lotusui_ie7";</script><![endif]-->
+<!--[if IE 8]><script type="text/javascript">document.getElementsByTagName("html")[0].className+=" lotusui_ie lotusui_ie8";</script><![endif]-->
+<!--[if IE 9]><script type="text/javascript">document.getElementsByTagName("html")[0].className+=" lotusui_ie lotusui_ie9";</script><![endif]-->
+<link id="lotusBaseStylesheet" rel="stylesheet" type="text/css" href="https://acmeairlines.com:8443/sbt.sample.web/service/proxy/connections/connections/resources/web/_style?include=com.ibm.lconn.core.styles.oneui2/base/package2.css">
+<link id="lotusThemeStylesheet" rel="stylesheet" type="text/css" href="https://acmeairlines.com:8443/sbt.sample.web/service/proxy/connections/connections/resources/web/_lconntheme/default.css?version=oneui2&rtl=false">
+<link id="lotusAppStylesheet" rel="stylesheet" type="text/css" href="https://acmeairlines.com:8443/sbt.sample.web/service/proxy/connections/connections/resources/web/_lconnappstyles/default/unknown.css?version=oneui2&rtl=false">
+<script>var netJazzAjaxConfig = {base: "https://acmeairlines.com:8443/sbt.sample.web/service/proxy/connections/connections/resources"}; var djConfig = {proxy: "https://acmeairlines.com:8443/sbt.sample.web/service/proxy/connections/connections/resources/ajaxProxy", isDebug: true, baseUrl: "https://acmeairlines.com:8443/sbt.sample.web/service/proxy/connections/connections/resources/web/dojo/", locale: "en", localizationComplete: true}</script>
+<script>var CKEDITOR_BASEPATH="https://acmeairlines.com:8443/sbt.sample.web/service/proxy/connections/connections/resources/web/com.ibm.oneui.ckeditor/editor/";</script>
+<script src="https://acmeairlines.com:8443/sbt.sample.web/service/proxy/connections/connections/resources/web/_js?include=dojo.dojo.js&debug=true&lang=en"></script>
+
+<script src="https://acmeairlines.com:8443/sbt.sample.web/service/proxy/connections/connections/resources/web/_js?include=com.ibm.lconn.gadget.resources.iRuntimeModule.js~&debug=true&lang=en&exclude=dojo.dojo.js~"></script>
+
+<script src="https://acmeairlines.com:8443/sbt.sample.web/service/proxy/connections/connections/resources/web/_js?include=com.ibm.lconn.gadget.container._Accessor.js~&debug=true&lang=en&exclude=dojo.dojo.js~com.ibm.lconn.gadget.resources.iRuntimeModule.js~"></script>
+
+<script src="https://acmeairlines.com:8443/sbt.sample.web/service/proxy/connections/connections/resources/web/_js?include=com.ibm.lconn.gadget.container._Handle.js~&debug=true&lang=en&exclude=dojo.dojo.js~com.ibm.lconn.gadget.resources.iRuntimeModule.js~com.ibm.lconn.gadget.container._Accessor.js~"></script>
+
+<script src="https://acmeairlines.com:8443/sbt.sample.web/service/proxy/connections/connections/resources/web/_js?include=com.ibm.lconn.gadget.container._Container.js~&debug=true&lang=en&exclude=dojo.dojo.js~com.ibm.lconn.gadget.resources.iRuntimeModule.js~com.ibm.lconn.gadget.container._Accessor.js~com.ibm.lconn.gadget.container._Handle.js~"></script>
+
+<script src="https://acmeairlines.com:8443/sbt.sample.web/service/proxy/connections/connections/resources/web/_js?include=com.ibm.lconn.gadget.container.iContainer2.js~&debug=true&lang=en&exclude=dojo.dojo.js~com.ibm.lconn.gadget.resources.iRuntimeModule.js~com.ibm.lconn.gadget.container._Accessor.js~com.ibm.lconn.gadget.container._Handle.js~com.ibm.lconn.gadget.container._Container.js~"></script>
+
+
+<!-- Redirect to &render=test -->
+<script type="text/javascript"> 
+    var loc = location + '';
+    if (loc.indexOf('render=test') < 0) {
+        if (loc.indexOf('?') > 0) {
+            location = loc + "&render=test";
+        }
+        else {
+            location = loc + "?render=test";
+        }
+    }
+</script>
+
+<script type="text/javascript"> 
+    dojo.require('lconn.core.config.services');
+    dojo.require("com.ibm.oneui.util.proxy");
+    dojo.require("lconn.core.url");
+    
+    var web_resources_url = lconn.core.config.services['webresources'].url;
+    var page_url_dotdot_dotdot = lconn.core.url.parse(window.location.toString(), '../..').toString();
+    page_url_dotdot_dotdot = page_url_dotdot_dotdot.substring(0, page_url_dotdot_dotdot.length - 1);
+</script>
+
+<script type="text/javascript">
+    var mContainer = null;
+    var mHandle = null;
+    var mEEHandle = null;
+    var iWidgetHandle = null;
+    
+    dojo.registerModulePath("com.ibm.lconn.gadget", page_url_dotdot_dotdot);
+</script>
+
+
+<style>
+#attach_point {
+  width: 850px;
+  height: 600px;
+  max-height: 600px;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+#ee_attach_point {
+  width: 300px;
+  height: 600px;
+  overflow-y: auto;
+  overflow-x: auto; 
+}
+</style>
+
+
+<script type="text/javascript">
+    var eeDivId = 0;
+    
+    function load_widget() {
+        //try {
+            var def = {
+                definitionUrl: dojo.formToObject('gadgetBootstrapper').gadget,
+                placement: 'attach_point',
+                componentType : 'gadget',
+                instanceData : {
+                    renderParams: {height: "500px", width: "650px", view: "canvas"},
+                    viewParams: { debug: true, debugFF: false, debugObj: false }
+                }
+            };
+
+            if (mHandle) {
+                mHandle.close();
+                mHandle = null;
+            }
+                            
+            mHandle = mContainer.loadWidget(def);
+        //} catch ( e ) {
+        //  console.debug("Caught exception: " + e);
+        //}
+        
+        return false;
+    }
+    
+    function refresh_widget() {
+        if (mHandle) {
+            mHandle.refresh();
+        }
+    }
+    
+    function close_widget() {
+        if (mHandle) {
+            mHandle.close();
+        }
+    }
+    
+    function parse_action() {
+        return false;
+    }
+    
+    function onViewChange() {
+        var sel = dojo.byId("viewSelect");
+        var view = sel.options[sel.selectedIndex].value;
+        var width = ( view == "profile" ) ? 300 : 800;
+        dojo.byId("width").value = width;
+    }
+</script>
+</head>
+<body class="lotusui">
+
+<body>
+<h3>Container Testpage for ActivityStream gadget</h3>
+<!-- BODY -->
+<table width="100%"><tr><td>
+    <div id="bootstrapForm">
+        <form name="gadgetBootstrapper" id="gadgetBootstrapper">
+            <span style="display: inline-block; width: 100px;">Gadget Url:</span>
+            <input type="text" id="gadget" name="gadget" style="width: 60%"
+                   value="../../../com.ibm.social.as/gadget/ActivityStreamNotes.xml" />
+            <br/>
+            <span style="display: inline-block; width: 100px;">AS Feed [Opt]:</span>
+            <input type="text" id="asfeed" name="asfeed" style="width: 60%" />
+            <br/>
+            <span style="display: inline-block; width: 100px;">AS Config [Opt]:</span>
+            <input type="text" id="asconfig" name="asconfig" style="width: 60%"/>
+            <br/>
+            View:
+            <select id="viewSelect" onchange="onViewChange()">
+                <option value="canvas">canvas</option>
+                <option value="profile">profile</option>
+            </select> 
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Width:
+            <input type="text" id="width" style="width: 100px"/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="checkbox" id="debugFF" checked="true">Debug FF</input>         
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="checkbox" id="debug">Debug</input>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="checkbox" id="debugObj">DebugObj</input>           
+            <br/><br/>
+        </form>
+    
+        <button onClick="load_widget();" 
+                name="submitButton" value="submit">Load Gadget</button>
+        <button onClick="refresh_widget();">Refresh</button>
+        <button onClick="close_widget();">Close</button>
+        <br/><br/>
+    </div>   
+<table style="border-width: 2px; border-spacing: 0px; border-style: outset; border-color: gray; border-collapse: collapse; background-color: white;"><tr>
+<td valign="top" style="border-width: 1px; padding: 3px; border-style: inset; border-color: gray;">
+    <h3>AS Attach Point</h3>
+    <div id="attach_point">AS Goes Here...</div>
+</td>
+<td valign="top" style="border-width: 1px; padding: 3px; border-style: inset; border-color: gray;">
+    <h3>EE Attach Point</h3>
+    <div id="ee_attach_point" style="">EE Goes Here...</div>
+</td>
+</tr>
+</table>
+    
+    <script type="text/javascript">
+        var eeDivId = 0;
+        dojo.addOnLoad(function() {
+            onViewChange();
+            mContainer = com.ibm.lconn.gadget.container.iContainer2;            
+            mContainer.init();
+            mContainer.getCommonContainer().then(function(cont) {
+                cont.views.createElementForEmbeddedExperience = function() {
+                    eeDivId += 1;
+                    return dojo.create("div", { id: "eeDivId" + eeDivId }, dojo.byId("ee_attach_point"));
+                }
+            });
+            if ( window.location.search.indexOf("noauto") == -1 ) {
+                load_widget();
+            }
+        });
+    </script>
+</body>
+</html>
+

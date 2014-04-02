@@ -37,7 +37,7 @@
 	<div id="content">
 	<%
 	try {
-    	SubscriberManagementService subscriberManagement = new SubscriberManagementService("smartcloudC1");
+    	SubscriberManagementService subscriberManagement = new SubscriberManagementService("smartcloud");
 		EntityList<JsonEntity> subscriberList = subscriberManagement.getSubscribers();
 		out.println("Id's of subscribers who are in the same organization as the API caller <br/>");
 		out.println("<ul>");

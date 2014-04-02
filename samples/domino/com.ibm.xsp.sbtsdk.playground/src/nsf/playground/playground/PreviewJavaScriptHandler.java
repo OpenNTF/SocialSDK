@@ -7,12 +7,15 @@ import java.io.StringReader;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import nsf.playground.beans.DataAccessBean;
+import nsf.playground.beans.OptionsBean;
 import nsf.playground.environments.PlaygroundEnvironment;
 
 import com.ibm.commons.runtime.util.ParameterProcessor;
@@ -26,12 +29,18 @@ import com.ibm.commons.util.io.json.JsonObject;
 import com.ibm.commons.util.io.json.JsonParser;
 import com.ibm.sbt.playground.extension.JavaScriptPreviewExtension;
 import com.ibm.sbt.playground.extension.PlaygroundExtensionFactory;
+import com.ibm.xsp.context.DojoLibrary;
+import com.ibm.xsp.context.DojoLibraryFactory;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
+import com.ibm.xsp.minifier.DojoDependencyList;
+import com.ibm.xsp.minifier.DojoResource;
+import com.ibm.xsp.minifier.MinifierResourceProvider;
+import com.ibm.xsp.minifier.ResourceFactory;
 import com.ibm.xsp.sbtsdk.servlets.JavaScriptLibraries;
 
 
 public class PreviewJavaScriptHandler extends PreviewHandler {
-	
+
 	protected static class DominoPlaygroundContext extends JavaScriptPreviewExtension.Context {
 		
 		private PlaygroundEnvironment environment;
@@ -243,22 +252,80 @@ public class PreviewJavaScriptHandler extends PreviewHandler {
 			pw.println("  </style>");
 			bodyTheme = "soria";
 		}
-
+		
+		int jsAggregator = OptionsBean.JS_AGG_NONE;
 		switch(jsLib.getLibType()) {
 			case DOJO: {
-				jsLibraryPath = PathUtil.concat(jsLibraryPath,"/dojo/dojo.js",'/');
-				pw.println("  <script type=\"text/javascript\">");
-				pw.println("  	dojoConfig = {");
-				if(jsLib.isAsync()) {
-					pw.println("  	    async: true,");
+				// Only for the default library, 1.8.1
+				if(libIdx==0) {
+					jsAggregator = OptionsBean.get().getJavaScriptAggregator();
 				}
-				if(debug) {
-					pw.println("        isDebug: true,");
+		        				
+				switch(jsAggregator) {
+					case OptionsBean.JS_AGG_NONE:
+					case OptionsBean.JS_AGG_XPAGES: {
+						pw.println("  <script type=\"text/javascript\">");
+						pw.println("  	dojoConfig = {");
+						pw.println("  	    parseOnLoad: true,");
+						if(jsLib.isAsync()) {
+							pw.println("  	    async: true,");
+						}
+						if(debug) {
+							pw.println("        isDebug: true,");
+						}
+						pw.println("  	};");
+						pw.println("  </script>");
+						String dojoPath = PathUtil.concat(jsLibraryPath,"/dojo/dojo.js",'/');
+						pw.println("  <script type=\"text/javascript\" src=\""+dojoPath+"\"></script>");
+						if(jsAggregator==OptionsBean.JS_AGG_XPAGES) {
+							String xpagesLayer = getXPagesLayer(serverUrl,requestParams.js,true);
+							pw.println("  <script type=\"text/javascript\" src=\""+xpagesLayer+"\"></script>");
+						}
+					} break;
+					case OptionsBean.JS_AGG_SDK: {
+						// Using the dojo layers
+						//jsLibraryPath = PathUtil.concat(jsLibraryPath,"/dojo/dojo.js",'/');
+						pw.println("  <script type=\"text/javascript\">");
+						pw.println("  	dojoConfig = {");
+						pw.println("  	    parseOnLoad: true,");
+						if(jsLib.isAsync()) {
+							pw.println("  	    async: true,");
+						}
+						if(debug) {
+							pw.println("        isDebug: true,");
+						}
+						pw.println("        packages: [");
+						// https://dominosbt/xsp/.ibmxspres/dojoroot-1.8.1/dojo/dojo.js
+						pw.println("          {name:'dojo',   location:'"+jsLibraryPath+"/dojo'},");
+						pw.println("          {name:'dijit',  location:'"+jsLibraryPath+"/dijit'},");
+						pw.println("          {name:'dojox',  location:'"+jsLibraryPath+"/dojox'},");
+						// https://dominosbt/xsp/.ibmxspres/.sbtsdk/js/sdk/sbt
+						String sbtPath = getDefautSbtPath(serverUrl);
+						//pw.println("          {name:'sbt/_bridge', location:'"+sbtPath+"/js/sdk/_bridges/dojo-amd'},");
+						pw.println("          {name:'sbt',    location:'"+sbtPath+"/js/sdk/sbt'}");
+						pw.println("        ],");
+						//https://dominosbt/xsp/.ibmxspres/.sbtsdk/js/sdk/_bridges/dojo-amd/Transport.js
+						String libVersion = jsLib.getLibVersion();
+						pw.println("        paths: {");
+						pw.println("        	'sbt/_config': '"+composeToolkitUrl(dbUrl)+"?lib=dojo&ver="+libVersion+"&layer=true&noext',");
+						pw.println("        	'sbt/_bridge': '"+sbtPath+"/js/sdk/_bridges/dojo-amd',");
+						pw.println("        	'sbt/widget': '"+sbtPath+"/js/sdk/dojo2'");
+						pw.println("        },");
+						//https://dominosbt/xsp/.ibmxspres/.sbtsdk/js/sdk/_layers/sbt-core-dojo-amd.js
+						pw.println("        deps: [");
+						String xpagesLayer = getXPagesLayer(serverUrl,requestParams.js,false);
+						pw.println("        	'"+xpagesLayer+"',");
+						//pw.println("        	'"+sbtPath+"/js/sdk/_layers/sbt-core-dojo-amd.js',");
+						pw.println("        	'"+sbtPath+"/js/sdk/_layers/sbt-extra-controls-dojo-amd.js'");
+						pw.println("        ]");
+						//pw.println("        paths: { 'sbt/_config' : '"+composeToolkitUrl(dbUrl)+"?lib=dojo&ver="+libVersion+"&debug=true&layer=true&noext'},");
+						//pw.println("        deps: ['/sbt.sample.web/js/sbt-core.js.uncompressed.js']");
+						pw.println("  	};");
+						pw.println("  </script>");
+						String dojoPath = PathUtil.concat(jsLibraryPath,"/dojo/dojo.js",'/');
+						pw.println("  <script type=\"text/javascript\" src=\""+dojoPath+"\"></script>");
+					} break;
 				}
-				pw.println("  	    parseOnLoad: true");
-				pw.println("  	};");
-				pw.println("  </script>");
-				pw.println("  <script type=\"text/javascript\" src=\""+jsLibraryPath+"\"></script>");
 			} break;
 			case JQUERY: {
 				if(true) {
@@ -283,20 +350,23 @@ public class PreviewJavaScriptHandler extends PreviewHandler {
 					pw.println("  </script>");
 					pw.println("  <link rel=\"stylesheet\" type=\"text/css\" title=\"Style\" href=\""+jqueryUiCssPath+"\">");
 				} else {
-					jsLibraryPath = PathUtil.concat(jsLibraryPath,"/jquery.min.js",'/');
+					String jqueryPath = PathUtil.concat(jsLibraryPath,"/jquery.min.js",'/');
 					pw.println("  <script type=\"text/javascript\" src=\"/xsp/.ibmxspres/.sbtsdk/js/libs/require.js\"></script>");
-					pw.println("  <script type=\"text/javascript\" src=\""+jsLibraryPath+"\"></script>");
+					pw.println("  <script type=\"text/javascript\" src=\""+jqueryPath+"\"></script>");
 				}
 			} break;
 		}
 		
-		String libType = jsLib.getLibType().toString();
-		String libVersion = jsLib.getLibVersion();
-		pw.print("  <script type=\"text/javascript\" src=\""+composeToolkitUrl(dbUrl)+"?lib="+libType+"&ver="+libVersion);
-		pw.print("&env=");
-		pw.print(envName);
-		pw.println("\"></script>");
-		//pw.println("  <script type=\"text/javascript\" src=\""+PathUtil.concat(env.getSbt(),"toolkit",'/')+"?ver=1.6.1&\"+(Stringendpoints?endpoints)+"></script>");
+		// Add the library servlet, if no dojo layer is being used
+		if(jsAggregator!=OptionsBean.JS_AGG_SDK) {
+			String libType = jsLib.getLibType().toString();
+			String libVersion = jsLib.getLibVersion();
+			pw.print("  <script type=\"text/javascript\" src=\""+composeToolkitUrl(dbUrl)+"?lib="+libType+"&ver="+libVersion);
+			pw.print("&env=");
+			pw.print(envName);
+			pw.println("\"></script>");
+			//pw.println("  <script type=\"text/javascript\" src=\""+PathUtil.concat(env.getSbt(),"toolkit",'/')+"?ver=1.6.1&\"+(Stringendpoints?endpoints)+"></script>");
+		}
 		
 		EnvParameterProvider prov = new EnvParameterProvider(env);
 
@@ -383,5 +453,96 @@ public class PreviewJavaScriptHandler extends PreviewHandler {
 	    		
 		pw.flush();
 		pw.close();
-	}	
+	}
+	
+	private static Pattern amdRequireRegEx = Pattern.compile("require\\s*\\(\\s*\\[(.*)\\]");
+	private static Pattern amdRequireRegEx2 = Pattern.compile("[\'\"]([^\'\"]*)[\'\"]");
+	
+	private String getXPagesLayer(String serverUrl, String js, boolean includeSDKModules) throws IOException {
+		// XPages aggregator
+        ResourceFactory factory = ResourceFactory.get();
+        DojoLibrary dojoLibrary = DojoLibraryFactory.getDefaultLibrary(false);
+        String dojoLocale = "en-us";
+        DojoDependencyList dojoResources = new DojoDependencyList(factory,dojoLibrary,dojoLocale);
+
+    	// Common dojo resources
+        dojoResources.addResource(factory.getDojoResource("dojo.parser",dojoLibrary));
+        dojoResources.addResource(factory.getDojoResource("dojo.date",dojoLibrary));
+        dojoResources.addResource(factory.getDojoResource("dojo.date.locale",dojoLibrary));
+        dojoResources.addResource(factory.getDojoResource("dojo.regexp",dojoLibrary));
+        dojoResources.addResource(factory.getDojoResource("dojo.i18n",dojoLibrary));
+        dojoResources.addResource(factory.getDojoResource("dojo.string",dojoLibrary));
+        dojoResources.addResource(factory.getDojoResource("dojo.cache",dojoLibrary));
+        dojoResources.addResource(factory.getDojoResource("dojo.text",dojoLibrary));
+        
+        // Controls
+        dojoResources.addResource(factory.getDojoResource("dijit._WidgetBase",dojoLibrary));
+        dojoResources.addResource(factory.getDojoResource("dijit._TemplatedMixin",dojoLibrary));
+        dojoResources.addResource(factory.getDojoResource("dojo.touch",dojoLibrary));
+        
+        if(includeSDKModules) {
+        	// The resources bellow are generally needed
+        	// They should not be included if the SDK layer is already loaded 
+            dojoResources.addResource(factory.getDojoResource("sbt.config",dojoLibrary));
+            dojoResources.addResource(factory.getDojoResource("sbt.declare",dojoLibrary));
+            dojoResources.addResource(factory.getDojoResource("sbt.defer",dojoLibrary));
+            dojoResources.addResource(factory.getDojoResource("sbt.lang",dojoLibrary));
+            dojoResources.addResource(factory.getDojoResource("sbt.Promise",dojoLibrary));
+            dojoResources.addResource(factory.getDojoResource("sbt.log",dojoLibrary));
+            dojoResources.addResource(factory.getDojoResource("sbt.stringUtil",dojoLibrary));
+            dojoResources.addResource(factory.getDojoResource("sbt.xml",dojoLibrary));
+            dojoResources.addResource(factory.getDojoResource("sbt.i18n",dojoLibrary));
+            dojoResources.addResource(factory.getDojoResource("sbt.ErrorTransport",dojoLibrary));
+            dojoResources.addResource(factory.getDojoResource("sbt.Endpoint",dojoLibrary));
+            dojoResources.addResource(factory.getDojoResource("sbt.pathUtil",dojoLibrary));
+            dojoResources.addResource(factory.getDojoResource("sbt.Proxy",dojoLibrary));
+            dojoResources.addResource(factory.getDojoResource("sbt.Cache",dojoLibrary));
+            dojoResources.addResource(factory.getDojoResource("sbt.xpath",dojoLibrary));
+            dojoResources.addResource(factory.getDojoResource("sbt.util",dojoLibrary));
+            dojoResources.addResource(factory.getDojoResource("sbt.dom",dojoLibrary));
+	        dojoResources.addResource(factory.getDojoResource("sbt.text",dojoLibrary));
+            
+	        // These ones don't have direct dep in the source code
+	    	// The are loaded by the config
+	    	//sbt/ErrorTransport', 'sbt/Endpoint', 'sbt/Proxy', 'sbt/_bridge/Transport', 'sbt/authenticator/Basic', 'sbt/util
+	        dojoResources.addResource(factory.getDojoResource("sbt.ErrorTransport",dojoLibrary));
+	        dojoResources.addResource(factory.getDojoResource("sbt.Endpoint",dojoLibrary));
+	        dojoResources.addResource(factory.getDojoResource("sbt.Proxy",dojoLibrary));
+	        dojoResources.addResource(factory.getDojoResource("sbt._bridge.Transport",dojoLibrary));
+	        dojoResources.addResource(factory.getDojoResource("sbt._bridge.i18n",dojoLibrary));
+	        dojoResources.addResource(factory.getDojoResource("sbt.authenticator.Basic",dojoLibrary));
+	        dojoResources.addResource(factory.getDojoResource("sbt.util",dojoLibrary));
+	        
+	        // Extract the entries from the JS file
+	        // This might be in the SDK layer already, so we don't load them if not fully using the XPages agg but the SDK one
+	        if(StringUtil.isNotEmpty(js)) {
+	        	Matcher matcher = amdRequireRegEx.matcher(js);
+	        	while(matcher.find()) {
+	        		String s = matcher.group(1);
+		        	Matcher matcher2 = amdRequireRegEx2.matcher(s);
+		        	while(matcher2.find()) {
+		        		String mod = StringUtil.replace(matcher2.group(1),'/','.');
+		        		DojoResource res = factory.getDojoResource(mod,dojoLibrary);
+		        		if(res!=null) {
+		        			dojoResources.addResource(res);
+		        		}
+		        	}
+	        	}
+	        }
+        }
+        
+        
+        StringBuilder b = new StringBuilder();
+        b.append(MinifierResourceProvider.URL_DOJO);
+        if(dojoLibrary.isUncompressed() || dojoLibrary!=DojoLibraryFactory.getDefaultLibrary(false)) {
+            b.append('-');
+            b.append(dojoLibrary.getVersionTag());
+        }
+        b.append('/');
+        b.append(dojoResources.getUrlParameter());
+        b.append(".js"); // $NON-NLS-1$
+        String fullUrl = b.toString();
+        String dojoAgg = PathUtil.concat(serverUrl, fullUrl, '/');
+        return dojoAgg;
+	}
 }

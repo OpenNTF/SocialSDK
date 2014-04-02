@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -190,7 +190,7 @@ function(declare, lang, dom, stringUtil, sbt, parameter, Grid,
 				 * FileAction defines the default actions for files,
 				 * which can be overridden
 				 */
-				fileAction : new FileAction(),
+				fileAction : null,
 
 				/**
 				 * Constructor function
@@ -198,10 +198,11 @@ function(declare, lang, dom, stringUtil, sbt, parameter, Grid,
 				 * @method constructor
 				 */
 				constructor : function(args) {
-
-					this.fileService = new FileService(
-							this.endpointName || "connections");
-
+					
+					this.fileAction = new FileAction(this),
+					
+					this.fileService = new FileService(args);
+					
 					/**
 					 * gridSortType is used to determine what sorting
 					 * anchors should be used, for example folders have

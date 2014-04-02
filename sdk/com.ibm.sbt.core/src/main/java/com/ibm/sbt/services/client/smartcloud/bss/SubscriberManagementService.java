@@ -17,7 +17,9 @@ package com.ibm.sbt.services.client.smartcloud.bss;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
 
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.json.JsonException;
@@ -399,6 +401,89 @@ public class SubscriberManagementService extends BssService {
 		} catch (Exception e) {
 			throw new BssException(e, "Error revoking subscriber {0} to {1} with force {2} caused by {3}", subscriberId, seatId, force, e.getMessage());
 		}
+    }
+    
+    /**
+     * Wait for the subscriber to change to the specified state and then call the state change listener.
+     * 
+     * @param customerId
+     * @param state
+     * @param maxAttempts
+     * @param waitInterval
+     * @param listener
+     * 
+     * @throws BssException 
+     */
+    public boolean waitSubscriberState(String subscriberId, String state, int maxAttempts, long waitInterval, StateChangeListener listener) throws BssException {
+    	for (int i=0; i<maxAttempts; i++) {
+    		JsonEntity subscriber = getSubscriberById(subscriberId);
+    		String currentState = subscriber.getAsString("Subscriber/SubscriberState");
+    		if (state.equalsIgnoreCase(currentState)) {
+    			try {
+    				if (listener != null) {
+    					listener.stateChanged(subscriber);
+    				}
+    				return true;
+    			} catch (Exception e) {
+    				logger.log(Level.WARNING, "Error invoking subscriber state listener", e);
+    			}
+    		}
+    		
+    		// wait the specified interval
+			try {
+				Thread.sleep(waitInterval);
+			} catch (InterruptedException ie) {}
+    	}
+    	return false;
+    }
+    
+    /**
+     * Wait for the subscriber seat to change to the specified state and then call the state change listener.
+     * 
+     * @param customerId
+     * @param state
+     * @param maxAttempts
+     * @param waitInterval
+     * @param listener
+     * 
+     * @throws BssException 
+     */
+    public boolean waitSeatState(String subscriberId, String subscriptionId, String state, int maxAttempts, long waitInterval, StateChangeListener listener) throws BssException {
+    	for (int i=0; i<maxAttempts; i++) {
+    		JsonEntity subscriber = getSubscriberById(subscriberId);
+    		JsonJavaObject subscriberJson = subscriber.getJsonObject().getAsObject("Subscriber");
+    		List<Object> seatSet = subscriberJson.getAsList("SeatSet");
+    		JsonJavaObject seatJson = findSeat(seatSet, subscriptionId);
+    		if (seatJson != null) {
+        		String currentState = seatJson.getAsString("SeatState");
+        		if (state.equalsIgnoreCase(currentState)) {
+        			try {
+        				if (listener != null) {
+        					listener.stateChanged(subscriber);
+        				}
+        				return true;
+        			} catch (Exception e) {
+        				logger.log(Level.WARNING, "Error invoking subscriber state listener", e);
+        			}
+        		}
+    		}
+    		
+    		// wait the specified interval
+			try {
+				Thread.sleep(waitInterval);
+			} catch (InterruptedException ie) {}
+    	}
+    	return false;
+    }
+    
+    private JsonJavaObject findSeat(List<Object> seatSet, String subscriptionId) {
+    	for (Object seat : seatSet) {
+    		String nextSubscriptionId = "" + ((JsonJavaObject)seat).getAsLong("SubscriptionId");
+    		if (subscriptionId.equals(nextSubscriptionId)) {
+    			return (JsonJavaObject)seat;
+    		}
+    	}
+    	return null;
     }
     
 }

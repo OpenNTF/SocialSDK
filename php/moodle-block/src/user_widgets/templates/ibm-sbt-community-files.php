@@ -1,6 +1,6 @@
 
 Select your community:
-<select id="ibm-sbt-communities-<?php echo $timestamp; ?>" onchange="onCommunityChange();"></select>
+<select id="ibm-sbt-communities-<?php echo $timestamp; ?>" onchange="onCommunityChange<?php echo $timestamp; ?>();"></select>
 <br />
 <div id="ibm-sbt-community-files-list-<?php echo $timestamp; ?>"></div>
 <input type="file" id="ibm-sbt-community-files-<?php echo $timestamp; ?>" accept="image/*"></input>

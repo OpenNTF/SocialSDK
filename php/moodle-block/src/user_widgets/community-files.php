@@ -11,7 +11,7 @@ require_once $CFG->dirroot . '/blocks/ibmsbt/user_widgets/templates/ibm-sbt-comm
 <script type="text/javascript">
 var grid<?php echo $timestamp; ?>;
 
-function onCommunityChange() {
+function onCommunityChange<?php echo $timestamp; ?>() {
 	require(["sbt/dom", "sbt/connections/controls/files/FileGrid"], function(dom, FileGrid) {
 		var communityList = dom.byId("ibm-sbt-communities-<?php echo $timestamp; ?>");
 		var currentCommunity = communityList.options[communityList.selectedIndex].value;
@@ -40,58 +40,58 @@ function onCommunityChange() {
 	});
 }
 
-function addOnClickHandlers(communityService, dom) {
+function addOnClickHandlers<?php echo $timestamp; ?>(communityService, dom) {
 
 	dom.byId("uploadBtn").onclick = function(evt) {
 		var communityList = dom.byId("ibm-sbt-communities-<?php echo $timestamp; ?>");
 		var currentCommunity = communityList.options[communityList.selectedIndex].value;
 		var communityName = communityList.options[communityList.selectedIndex].innerHTML;
 		if (currentCommunity) {
-			uploadCommunityFile(communityService, currentCommunity, communityName, dom);
+			uploadCommunityFile<?php echo $timestamp; ?>(communityService, currentCommunity, communityName, dom);
 		}
 	};
 }
 
-function handleLoggedIn(communityService, dom) {
-	loadCommunity(communityService, dom);
-	addOnClickHandlers(communityService, dom);
+function handleLoggedIn<?php echo $timestamp; ?>(communityService, dom) {
+	loadCommunity<?php echo $timestamp; ?>(communityService, dom);
+	addOnClickHandlers<?php echo $timestamp; ?>(communityService, dom);
 }
 
-function uploadCommunityFile(communityService, communityId, communityName, dom) {
-	displayMessage(dom, "Uploading...Please wait.");
+function uploadCommunityFile<?php echo $timestamp; ?>(communityService, communityId, communityName, dom) {
+	displayMessage<?php echo $timestamp; ?>(dom, "Uploading...Please wait.");
 	var img = dom.byId("ibm-sbt-loading-<?php echo $timestamp; ?>");
 	img.style.display = "block";
 	communityService.uploadCommunityFile("ibm-sbt-community-files-<?php echo $timestamp; ?>", communityId).then(
 		function(community) {
-			displayMessage(dom, "Community file uploaded successfuly to community : " + communityName);
+			displayMessage<?php echo $timestamp; ?>(dom, "Community file uploaded successfuly to community : " + communityName);
 			img.style.display = "none";
 			grid<?php echo $timestamp; ?>.update(null);
 		}, 
 		function(error) {
-			handleError(dom, error);
+			handleError<?php echo $timestamp; ?>(dom, error);
 		}
 	);
 }
 
-function displayMessage(dom, msg) {
+function displayMessage<?php echo $timestamp; ?>(dom, msg) {
 	dom.setText("ibm-sbt-community-files-success-<?php echo $timestamp; ?>", msg);
 	dom.byId("ibm-sbt-community-files-success-<?php echo $timestamp; ?>").style.display = "";
 	dom.byId("ibm-sbt-community-files-error-<?php echo $timestamp; ?>").style.display = "none";
 }
 
-function handleError(dom, error) {
+function handleError<?php echo $timestamp; ?>(dom, error) {
 	dom.setText("ibm-sbt-community-files-error-<?php echo $timestamp; ?>", "Error: " + error.message);
 
 	dom.byId("ibm-sbt-community-files-success-<?php echo $timestamp; ?>").style.display = "none";
 	dom.byId("ibm-sbt-community-files-error-<?php echo $timestamp; ?>").style.display = "";
 }
 
-function clearError(dom) {
+function clearError<?php echo $timestamp; ?>(dom) {
 	dom.setText("ibm-sbt-community-files-error-<?php echo $timestamp; ?>", "");
 	dom.byId("ibm-sbt-community-files-error-<?php echo $timestamp; ?>").style.display = "none";
 }
 
-function loadCommunity(communityService, dom) {
+function loadCommunity<?php echo $timestamp; ?>(communityService, dom) {
 	communityService.getMyCommunities({
 		ps : 1
 	}).then(function(communities) {
@@ -106,10 +106,9 @@ function loadCommunity(communityService, dom) {
 		    opt.innerHTML = title;
 		    communityList.appendChild(opt);
 		}
-		onCommunityChange();
+		onCommunityChange<?php echo $timestamp; ?>();
 	}, function(error) {
-		console.log(error);
-		handleError(dom, error);
+		handleError<?php echo $timestamp; ?>(dom, error);
 	});
 
 }
@@ -118,7 +117,7 @@ require([ "sbt/connections/CommunityService", "sbt/dom", "sbt/config", ], functi
 	var communityService = new CommunityService({endpoint: "<?php echo $this->config->endpoint; ?>"});
 	// To make sure authentication happens before upload
 	communityService.endpoint.authenticate().then(function() {
-		handleLoggedIn(communityService, dom);
+		handleLoggedIn<?php echo $timestamp; ?>(communityService, dom);
 	});
 });
 </script>

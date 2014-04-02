@@ -494,7 +494,7 @@ public class ForumService extends BaseService {
 	
 	protected boolean isForumDeleted(Response response){
 		StatusLine statusLine = response.getResponse().getStatusLine();
-		return (statusLine.getStatusCode() == 204 && statusLine.getProtocolVersion().toString().equals("HTTP/1.1") && statusLine.getReasonPhrase().equals("No Content"));
+		return statusLine.getStatusCode() == 204;
 	}
 
 	/**

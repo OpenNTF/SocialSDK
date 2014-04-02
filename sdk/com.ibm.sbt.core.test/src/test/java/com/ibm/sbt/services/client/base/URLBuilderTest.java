@@ -134,7 +134,7 @@ public class URLBuilderTest extends BaseUnitTest {
 		String group = "%40all";
 		String app = "%40status";
 
-		String urlAssert = "connections/opensocial/basic/rest/activitystream/"+user+"/"+group+"/"+app;
+		String urlAssert = "connections/opensocial/basic/rest/activitystreams/"+user+"/"+group+"/"+app;
 		String url = ActivityStreamUrls.AS_USER_GROUP_APP.format(service, ASUser.getByName("me"), ASGroup.getByName("all"), ASApplication.getByName("status"));
 		assertEquals(urlAssert, url);
 
@@ -142,7 +142,7 @@ public class URLBuilderTest extends BaseUnitTest {
 		assertEquals(urlAssert, url2);
 
 		String community = "urn:lsid:lconn.ibm.com:communities.community:a1b2c3d4c5g6";
-		String urlAssert2 = "connections/opensocial/basic/rest/activitystream/"+community+"/"+group;
+		String urlAssert2 = "connections/opensocial/basic/rest/activitystreams/"+community+"/"+group;
 		String url3 = ActivityStreamUrls.AS_COMMUNITY_ALL.format(service, ASUser.COMMUNITY.getWithValue("a1b2c3d4c5g6"));
 		assertEquals(urlAssert2, url3);
 	}

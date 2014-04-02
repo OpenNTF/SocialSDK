@@ -164,6 +164,10 @@
 			<value>replay</value>
 		</managed-property>
 		<managed-property>
+			<property-name>apiVersion</property-name>
+			<value>%{connections.apiVersion}</value>
+		</managed-property>
+		<managed-property>
 			<property-name>innerEndpoint</property-name>
 			<value>connectionsBasic</value>
 		</managed-property>
@@ -175,7 +179,11 @@
 		<managed-bean-scope>session</managed-bean-scope>
 		<managed-property>
 			<property-name>mockMode</property-name>
-			<value>record</value>
+			<value>record</value>			
+		</managed-property>
+		<managed-property>
+			<property-name>apiVersion</property-name>
+			<value>%{connections.apiVersion}</value>
 		</managed-property>
 		<managed-property>
 			<property-name>innerEndpoint</property-name>

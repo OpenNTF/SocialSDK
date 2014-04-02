@@ -125,8 +125,8 @@ class block_ibmsbt extends block_base {
 				require $this->config->plugin;
 				
 				if ($settings->getAuthenticationMethod($this->config->endpoint) == 'basic') {
-					require $blockPath . '/core/views/endpoint-logout.php';
-					echo '<button onclick="ibm_sbt_endpoint_logout()">Logout from this Endpoint</button>';
+// 					require $blockPath . '/core/views/endpoint-logout.php'; // Uncomment to show logout button
+// 					echo '<button onclick="ibm_sbt_endpoint_logout()">Logout from this Endpoint</button>'; // Uncomment to show logout button
 				}
 				
 			}

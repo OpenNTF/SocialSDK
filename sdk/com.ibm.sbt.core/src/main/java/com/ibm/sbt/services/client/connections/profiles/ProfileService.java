@@ -28,7 +28,9 @@ import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
+import com.ibm.sbt.services.client.base.AuthType;
 import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.base.NamedUrlPart;
 import com.ibm.sbt.services.client.base.datahandlers.JsonDataHandler;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.profiles.feedhandler.ColleagueConnectionFeedHandler;
@@ -106,6 +108,13 @@ public class ProfileService extends BaseService {
 
 	public ProfileService(Endpoint endpoint, int cacheSize) {
 		super(endpoint, cacheSize);
+	}
+	
+	@Override
+	public NamedUrlPart getAuthType(){
+		String auth = super.getAuthType().getValue();
+		auth = AuthType.BASIC.get().equalsIgnoreCase(auth)?"":auth;
+		return new NamedUrlPart("authType", auth);
 	}
 
 	/**
@@ -835,6 +844,7 @@ public class ProfileService extends BaseService {
 	}
 
 	protected void setIdParameter(Map<String, String>parameters, String id){
+		//FIX: We should try to avoid side effects like this, and return the key to be set instead of modifying the HashMap
 		if (isEmail(id)) {
 			parameters.put(ProfilesConstants.EMAIL, id);
 		} else {

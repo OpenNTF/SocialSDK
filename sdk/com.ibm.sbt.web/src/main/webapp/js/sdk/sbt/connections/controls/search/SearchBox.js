@@ -632,7 +632,6 @@ define(["../../../declare", "../../../lang", "../../../dom", "../../../widget/_T
 						
 						promise = communityService.getMyCommunities(args);
 					}	else {
-					
 						promise = searchService.getResults(query, requestArgs);
 					}
 			        promise.then(

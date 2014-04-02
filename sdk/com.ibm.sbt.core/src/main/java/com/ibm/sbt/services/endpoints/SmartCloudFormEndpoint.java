@@ -37,6 +37,9 @@ import com.ibm.sbt.services.client.smartcloud.SmartCloudService;
 public class SmartCloudFormEndpoint extends FormEndpoint {
 	
 	private static final String SC_FORM_PAGE = "pkmslogin.form";
+	public SmartCloudFormEndpoint() {
+    	setAuthenticationErrorCode(403);
+	}	
 	
 	@Override
 	public List<NameValuePair> getLoginFormParameters() {

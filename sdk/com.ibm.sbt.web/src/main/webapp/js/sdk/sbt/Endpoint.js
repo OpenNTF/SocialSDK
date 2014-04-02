@@ -633,6 +633,38 @@ var Endpoint = declare(null, {
     
     getProxyUrl: function(){
         return this.proxy.proxyUrl + "/" + this.proxyPath;
+    },
+    
+    /**
+     * Takes a url with a context root to replace, and returns a url with the context root replaced.
+     * 
+     * e.g. url: 'http://example.com/${replaceMe}'
+     * If this endpoint has serviceMappings like:
+     * {
+     *  replaceMe: 'replacement'
+     * }
+     * 
+     * returns 'http://example.com/replacement'
+     * 
+     * If there is no replacement available, the replacement will be the string inside the braces. e.g. 'http://example.com/replaceMe' will be returned.
+     * 
+     * @method modifyUrlContextRoot
+     * 
+     * @param {String} url 
+     * @param {Object} [defaultContextRootMap] If specified, this object will be used for replacements in the event there is no equivalent serviceMapping object.
+     */
+    modifyUrlContextRoot: function(url, defaultContextRootMap){
+        var defaultMap = defaultContextRootMap ? {} : lang.mixin({}, defaultContextRootMap);
+        var map = lang.mixin(defaultMap, this.serviceMapping);
+        
+        return stringUtil.transform(url, map, function(value, key){
+            if(!value){
+                return key;
+            }
+            else{
+                return value;
+            }
+        }, this);
     }
 	
 });

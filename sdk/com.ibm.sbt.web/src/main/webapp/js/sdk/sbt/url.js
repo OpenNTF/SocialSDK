@@ -163,6 +163,22 @@ define(['./declare'], function(declare){
         },
         
         /**
+        @method getPath
+        @return {String} Returns the path in its current state.
+        **/
+        getPath: function(){
+            return this._resultStore[URL_RE_GROUPS.PATH];
+        },
+        
+        /**
+        @method setPath
+        @param path {String}
+        **/
+        setPath: function(path){
+            this._resultStore[URL_RE_GROUPS.PATH] = path;
+        },
+        
+        /**
         @method getQuery
         @return {String} Returns the query in its current state.
         **/

@@ -1,14 +1,12 @@
 require([ "sbt/dom", "sbt/json", "sbt/connections/CommunityService" ], function(dom,json,CommunityService) {
     var communityService = new CommunityService();
-    var communityId = "%{name=CommunityService.communityUuid|helpSnippetId=Social_Communities_Get_My_Communities}";
-    var forumUuid = "%{name=CommunityService.forumUuid}";
-    var now = new Date();
+    var forumUuid = "%{name=CommunityService.forumUuid|helpSnippetId=Social_Communities_API_GetForums}";
     var forumTopic = {
     	forumUuid : forumUuid,
     	title : "%{name=CommunityService.topicTitle}",
     	content : "%{name=CommunityService.topicContent}"
     };
-    var promise = communityService.createForumTopic(communityId, forumTopic);
+    var promise = communityService.createForumTopic(forumTopic);
     promise.then(
         function(forumTopic) {
            dom.setText("json", json.jsonBeanStringify(forumTopic.toJson()));

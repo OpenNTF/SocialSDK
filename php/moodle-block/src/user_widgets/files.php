@@ -1,11 +1,8 @@
 <div id="***REMOVED*** echo $this->config->elementID;?>"></div>
 
 ***REMOVED*** 
-if (isset($this->config->template)) {
-	require_once BASE_PATH . $this->config->template;
-} else {
-	require_once 'templates/ibm-sbt-files-grid-row.php';
-}
+global $CFG;
+require_once $CFG->dirroot . '/blocks/ibmsbt/user_widgets/templates/ibm-sbt-files-grid-row.php';
 ?>
 
 <script type="text/javascript">
@@ -23,8 +20,9 @@ if (isset($this->config->template)) {
 		    	 endpoint: "***REMOVED*** echo $this->config->endpoint; ?>",
 		         hidePager: false,
 		         hideSorter: true,
+		         
 		         hideFooter: false,
-		    	 rendererArgs : { template : FileRow, pagerTemplate : PagingHeader, footerTemplate : PagingFooter}       	 
+		    	 rendererArgs : { template : FileRow, pagerTemplate : PagingHeader, footerTemplate : PagingFooter, pageSize: 2,}       	 
 		    });
 
 		    grid.renderer.tableClass = "table";

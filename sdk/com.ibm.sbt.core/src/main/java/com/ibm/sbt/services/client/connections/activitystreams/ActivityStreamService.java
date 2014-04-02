@@ -948,6 +948,27 @@ public class ActivityStreamService extends BaseService {
 		}
 	}
 	
+	public void saveEntry(String entryId) throws ActivityStreamServiceException{
+		JsonJavaObject payload = new JsonJavaObject();
+		payload.putString("id", "");
+		payload.putString("verb", "");
+		
+		JsonJavaObject actor = new JsonJavaObject();
+		actor.putString("id", "");
+		payload.putObject("actor", actor);
+		
+		JsonJavaObject connections = new JsonJavaObject();
+		connections.putString("saved", "true");
+		payload.putObject("connections", connections);
+		
+		JsonJavaObject object = new JsonJavaObject();
+		object.putString("id", "");
+		payload.putObject("object", object);
+		
+		String url = ActivityStreamUrls.AS_ME_ALL_ALL.format(this);
+		postEntry(url + "/" + entryId + "?X-HTTP-Method-Override=PUT", payload);
+	}
+	
 	/**
 	 * postMBEntry Creates Microblog entry
 	 * 

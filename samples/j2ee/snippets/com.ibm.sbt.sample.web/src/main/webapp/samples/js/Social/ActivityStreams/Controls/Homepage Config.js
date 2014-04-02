@@ -1,5 +1,4 @@
 require(["sbt/dom", "sbt/config", "sbt/connections/controls/astream/ActivityStreamWrapper"], function(dom, config, ActivityStreamWrapper) {
-    config.Properties["loginUi"] = "popup";
     var asConfig = {
         defaultUrlTemplateValues : {
             userId : "@me",
@@ -642,10 +641,7 @@ require(["sbt/dom", "sbt/config", "sbt/connections/controls/astream/ActivityStre
     };
 
     var activityStreamWrapper = new ActivityStreamWrapper({
-        config : asConfig,
-        activityStreamNode : "activityStream",
-        shareBoxNode : "inputForm",
-        sideNavNode : "sideNav"
+        config : asConfig
     });
 
     dom.byId("activityStreamDiv").appendChild(activityStreamWrapper.domNode);

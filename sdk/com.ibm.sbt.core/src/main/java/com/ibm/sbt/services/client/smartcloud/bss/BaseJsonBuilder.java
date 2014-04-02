@@ -40,6 +40,14 @@ abstract public class BaseJsonBuilder {
 	}
 	
 	/**
+	 * 
+	 * @return
+	 */
+	public String getTemplate() {
+		return template;
+	}
+	
+	/**
 	 * @param template the template to set
 	 */
 	public BaseJsonBuilder setTemplate(String template) {
@@ -53,7 +61,7 @@ abstract public class BaseJsonBuilder {
 	 */
 	public String toJson() {
 		
-		String json = ParameterProcessor.process(template, new ParameterProcessor.ParameterProvider() {
+		String json = ParameterProcessor.process(getTemplate(), new ParameterProcessor.ParameterProvider() {
 			@Override
 			public String getParameter(String name) {
 				try {

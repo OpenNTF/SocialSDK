@@ -18,11 +18,13 @@ package com.ibm.sbt.test.js.connections.activitystreams.api;
 import java.util.List;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import com.ibm.sbt.automation.core.test.BaseTest.AuthType;
 import com.ibm.sbt.automation.core.test.connections.BaseActivityStreamsTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
+import com.ibm.sbt.services.client.connections.activitystreams.ActivityStreamServiceException;
 
 /**
  * @author rajmeetbal
@@ -37,9 +39,18 @@ public class GetMySavedView extends BaseActivityStreamsTest {
         setAuthType(AuthType.AUTO_DETECT);
     }
     
+    @Before
+    public void setup(){
+    	try {
+			saveEntry();
+		} catch (ActivityStreamServiceException e) {
+			e.printStackTrace();
+			Assert.fail("Problem saving event.");
+		}
+    }
+    
     @Test
     public void testGetMySavedView() {
-    	createEntry("@me","@actions","@all", false,true);
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         List jsonList = previewPage.getJsonList();
         Assert.assertFalse("GetMySavedView returned no results", jsonList.isEmpty());

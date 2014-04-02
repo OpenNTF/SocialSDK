@@ -27,7 +27,7 @@ define([ "../declare", "../lang", "../stringUtil", "../widget/_TypeAhead", "./St
 		
 		className: "",
 		
-		templateString: "<input class="+this.className+"type=\"text\" size=\"${size}\" dojoAttachPoint=\"domNode,textbox,focusNode,comboNode\"/>",
+		templateString: "<input class=\"${className}\" type=\"text\" size=\"${size}\" dojoAttachPoint=\"domNode,textbox,focusNode,comboNode\"/>",
 		
 		size: "",
 		

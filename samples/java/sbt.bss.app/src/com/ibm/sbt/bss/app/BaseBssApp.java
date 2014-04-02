@@ -86,10 +86,14 @@ public class BaseBssApp extends BaseApp {
     	}
     	return authenticationService;
     }
-    
+
     public String registerCustomer(String email) throws BssException, JsonException, IOException {
+    	return registerCustomer("Abe Industrial", email);
+    }
+    
+    public String registerCustomer(String orgName, String email) throws BssException, JsonException, IOException {
 		CustomerJsonBuilder customer = new CustomerJsonBuilder();
-    	customer.setOrgName("Abe Industrial")
+    	customer.setOrgName(orgName)
     	        .setPhone("999-999-9999")
     	        .setOrganizationAddressLine1("5 Technology Park Drive")
     	        .setOrganizationAddressLine2("")
@@ -139,9 +143,13 @@ public class BaseBssApp extends BaseApp {
     }
     
     public String addSubscriber(String customerId, String email) throws BssException, JsonException, IOException {
+    	return addSubscriber(customerId, email, SubscriberManagementService.Role.User);
+    }
+    
+    public String addSubscriber(String customerId, String email, SubscriberManagementService.Role role) throws BssException, JsonException, IOException {
 		SubscriberJsonBuilder subscriber = new SubscriberJsonBuilder();
 		subscriber.setCustomerId(customerId)
-				  .setRole(SubscriberManagementService.Role.User)
+				  .setRole(role)
 				  .setFamilyName("Doe")
 				  .setGivenName("Aaron")
 				  .setEmailAddress(email)

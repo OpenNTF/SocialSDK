@@ -9,14 +9,14 @@ require(["sbt/dom",
 function(dom, stringUtil, CommunityService, ProfilePanel, ProfileTagsGrid, CommunityGrid, SearchGrid, ActivityStreamWrapper) {
 	// Profile Panel
 	var profilePanel = new ProfilePanel({
-        userid : '%{name=sample.userId1}'
+        email : '%{name=sample.email1}'
     }, document.createElement('div'));
     dom.byId("profilePanelDiv").appendChild(profilePanel.domNode);
 
     // Profile Tags Grid
     var profileTagsGrid = new ProfileTagsGrid({
         type : "list",
-        targetKey : "%{name=sample.userId1}"
+        targetEmail : "%{name=sample.email1}"
     });
     profileTagsGrid.profileTagAction = {
         getTooltip : function(item) {

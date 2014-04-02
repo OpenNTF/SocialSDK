@@ -77,6 +77,15 @@ context.reloadPage()}]]></xp:this.action>
 						<xp:selectItem itemLabel="false"></xp:selectItem>
 					</xp:comboBox>
 				</xe:formRow>
+				<xe:formRow id="formRow13" label="JavaScript Code Aggregator:">
+					<xp:comboBox id="comboBox8"
+						value="#{document1.JavaScriptAggregator}">
+						<xp:selectItem itemLabel=""></xp:selectItem>
+						<xp:selectItem itemLabel="none"></xp:selectItem>
+						<xp:selectItem itemLabel="sdk"></xp:selectItem>
+						<xp:selectItem itemLabel="xpages"></xp:selectItem>
+					</xp:comboBox>
+				</xe:formRow>
 				<xe:formRow id="formRow2" label="Java Snippets:">
 					<xp:comboBox id="comboBox2"
 						value="#{document1.JavaSnippets}">

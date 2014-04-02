@@ -3,7 +3,8 @@ require(["sbt/dom", "sbt/connections/controls/files/FileGrid"], function(dom, Fi
 		type : "library",
 		pinFile : true,
 		hideSorter : true,
-		hidePager : true
+		hidePager : true,
+		hideFooter: true
 	});
 	
 	var domNode = dom.byId("fileRow");
@@ -21,7 +22,7 @@ require(["sbt/dom", "sbt/connections/controls/files/FileGrid"], function(dom, Fi
 		var h3 = dom.create("h3", {
 			"class" : "h3",
 		}, headingDiv);
-		dom.setText(h3, '<a href="">My Files</a>');
+		dom.setText(h3, 'My Files');
 
 		var ul = dom.create("ul", {
 			style : "list-style:none outside none;margin: 0;"

@@ -64,6 +64,7 @@ public class Util {
         // title, id
         { "Default", "defaultEnvironment"},
         { "Connections", "connectionsEnvironment"},
+        { "Connections OAuth2.0", "connectionsOA2Environment"},
         { "SmartCloud", "smartcloudEnvironment"},
         { "SmartCloud C1", "smartcloudC1Environment"},
         { "Third Party APIs", "thirdPartyAPIsEnvironment"},

@@ -52,7 +52,7 @@ function plugins_url() {
 				var sbt = {};
 				sbt.Properties = {
 					"libraryUrl": "",
-					"serviceUrl": "***REMOVED*** echo plugins_url(); ?>/index.php?classpath=services&class=Proxy&method=fileOperations&_redirectUrl=",
+					"serviceUrl": "***REMOVED*** echo plugins_url(); ?>/index.php?classpath=services&class=Proxy&&uid=***REMOVED*** global $USER; echo $USER->id; ?>&method=fileOperations&_redirectUrl=",
 					"sbtUrl": "***REMOVED*** echo $agnostic_deploy_url; ?>/js/sdk"
 				};
 				sbt.Endpoints = {
@@ -69,7 +69,7 @@ function plugins_url() {
 		});
 	};
 </script>
-</head>
+
 ***REMOVED*** 
 
 
@@ -97,11 +97,17 @@ function generateEndpoint($authentication_method, $url, $deploy_url, $name, $api
 		$endpoint_js .= '"url": "' . $deploy_url . '", "actionUrl": "' . plugins_url() . '/index.php?classpath=services&class=Proxy&method=route&endpointName=' . $name . '&basicAuthRequest=true&uid=' . $USER->id . '&_redirectUrl=' . getCurrentPage() . '"}),';
 	}
 
+	if ($type == 'smartcloud') {
+		$endpoint_js .= '"isSmartCloud": true,';
+	}
+	
 	$endpoint_js .= '"proxyPath": "connections",';
 	$endpoint_js .= '"isAuthenticated": "false",';
 	$endpoint_js .= '"transport": new Transport({}),';
 	$endpoint_js .= '"serviceMappings": {},';
 	$endpoint_js .= '"name": "' . $name . '",';
+	
+
 	$endpoint_js .= '"authenticationErrorCode": "401",';
 	$endpoint_js .= '"baseUrl": "' . $url . '",';
 	$endpoint_js .= '"apiVersion": "' . $api_version . '",';

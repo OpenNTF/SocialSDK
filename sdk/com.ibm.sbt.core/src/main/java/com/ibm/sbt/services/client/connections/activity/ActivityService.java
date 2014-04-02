@@ -19,10 +19,13 @@ package com.ibm.sbt.services.client.connections.activity;
 import java.io.InputStream;
 import java.net.URI;
 import java.nio.charset.Charset;
+import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.http.Header;
+import org.apache.http.HeaderElement;
 import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
@@ -248,6 +251,17 @@ public class ActivityService extends BaseService {
      * @throws ActivityServiceException
      */
     public Activity createActivity(Activity activity) throws ActivityServiceException {
+		return createActivity(activity, null);
+	}
+
+    /**
+     * Method to create an Activity
+     * 
+     * @param activity
+     * @return Activity
+     * @throws ActivityServiceException
+     */
+    public Activity createActivity(Activity activity, Map<String, String> params) throws ActivityServiceException {
 		if (null == activity){
 			throw new ActivityServiceException(null, "Null activity");
 		}
@@ -262,7 +276,7 @@ public class ActivityService extends BaseService {
 			}
 			Map<String, String> headers = new HashMap<String, String>();
 			headers.put("Content-Type", "application/atom+xml");
-			Response requestData = createData(requestUri, null, headers, activityPayload);
+			Response requestData = createData(requestUri, params, headers, activityPayload);
 			activity.clearFieldsMap();
 			return (Activity) new ActivityFeedHandler(this).createEntity(requestData);
 		} catch (Exception e) {
@@ -600,13 +614,26 @@ public class ActivityService extends BaseService {
 	 * @throws ActivityServiceException
 	 */
 	public ActivityNode createActivityNode(ActivityNode activityNode) throws ActivityServiceException {
+		return createActivityNode(activityNode, null);
+	}
+	
+	/**
+	 * Method to create Activity node
+	 * 
+	 * @param activityNode
+	 * @return ActivityNode
+	 * @throws ActivityServiceException
+	 */
+	public ActivityNode createActivityNode(ActivityNode activityNode, Map<String, String> params) throws ActivityServiceException {
 		if (null == activityNode){
 			throw new ActivityServiceException(null, "Null activity node");
 		}
 		if (null == activityNode.getId()){
 			throw new ActivityServiceException(null, "Null activity id");
 		}
-		Map<String, String> params = new HashMap<String, String>();
+		if (params == null) {
+			params = new HashMap<String, String>();
+		}
 		params.put("activityUuid", activityNode.getActivityId());
         String requestUri = ActivityUrls.ACTIVITY.format(this);
 		try {
@@ -619,8 +646,28 @@ public class ActivityService extends BaseService {
 			Map<String, String> headers = new HashMap<String, String>();
 			headers.put("Content-Type", "application/atom+xml");
 			Response requestData = createData(requestUri, params, headers, activityNodePayload);
-			activityNode.clearFieldsMap();
-			return (ActivityNode) new ActivityNodeFeedHandler(this).createEntity(requestData);
+			
+			Header[] cookies = requestData.getResponse().getHeaders("Cookie");
+			for (Header cookie : cookies) {
+				System.out.println(cookie.getName()+"="+cookie.getValue());
+				HeaderElement[] elements = cookie.getElements();
+				for (HeaderElement element : elements) {
+					System.out.println(element.getName()+"="+element.getValue());
+					NameValuePair[] parameters = element.getParameters();
+					for (NameValuePair parameter : parameters) {
+						System.out.println(parameter.getName()+"="+parameter.getValue());
+					}
+				}
+			}
+			
+			int statusCode = requestData.getResponse().getStatusLine().getStatusCode();
+			if (statusCode == 201) {
+				activityNode.clearFieldsMap();
+				return (ActivityNode) new ActivityNodeFeedHandler(this).createEntity(requestData);
+			} else {
+				String message = MessageFormat.format("Unexpected response code {0} when creating activity node {1}", statusCode, activityNode.getTitle());
+				throw new ActivityServiceException(null, message);
+			}
 		} catch (Exception e) {
 			throw new ActivityServiceException(e);
 		}

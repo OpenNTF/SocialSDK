@@ -15,6 +15,8 @@
  */
 package com.ibm.sbt.services.client.smartcloud.bss;
 
+import com.ibm.commons.util.StringUtil;
+
 
 /**
  * @author mwallace
@@ -27,7 +29,7 @@ public class UserCredentialJsonBuilder extends BaseJsonBuilder {
 	private JsonField NewPassword = new JsonField("NewPassword", true, -1);
 	private JsonField ConfirmPassword = new JsonField("ConfirmPassword", false, -1);
 	
-	public static final String USER_CREDENTIAL = 
+	public static final String CHANGE_PASSWORD = 
 				"{" +
 				    "\"UserCredential\": {" +
 				        "\"LoginName\": \"%{getLoginName}\"," +
@@ -37,11 +39,26 @@ public class UserCredentialJsonBuilder extends BaseJsonBuilder {
 				    "}" +
 				"}"; 
 
+	public static final String SET_ONE_TIME_PASSWORD = 
+			"{" +
+			    "\"UserCredential\": {" +
+			        "\"LoginName\": \"%{getLoginName}\"," +
+			        "\"NewPassword\": \"%{getNewPassword}\"" +
+			    "}" +
+			"}"; 
+
 	/**
 	 * Default constructor
 	 */
 	public UserCredentialJsonBuilder() {
-		template = USER_CREDENTIAL;
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.ibm.sbt.services.client.smartcloud.bss.BaseJsonBuilder#getTemplate()
+	 */
+	@Override
+	public String getTemplate() {
+		return StringUtil.isEmpty(getOldPassword()) ? SET_ONE_TIME_PASSWORD : CHANGE_PASSWORD;
 	}
 
 	/**

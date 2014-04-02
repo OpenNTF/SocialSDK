@@ -33,7 +33,7 @@ public class PersonSerializer extends BaseEntitySerializer<Person> {
 	}
 	
 	public Node xmlNode(String nodeName) {
-		return appendChilds(rootNode(element(nodeName)),
+		return appendChildren(rootNode(element(nodeName)),
 				textElement("name", entity.getName()),
 				textElement("email", entity.getEmail()),
 				textElement(Namespaces.SNX, "userid", entity.getId()),

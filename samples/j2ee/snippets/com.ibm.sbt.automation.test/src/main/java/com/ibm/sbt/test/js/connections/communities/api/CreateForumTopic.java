@@ -40,13 +40,16 @@ public class CreateForumTopic extends BaseCommunitiesTest {
 
     @Test
     public void testCreateForumTopic() {
-        addSnippetParam("CommunityService.communityUuid", community.getCommunityUuid());
+        addSnippetParam("CommunityService.forumUuid", forum.getUid());
     	addSnippetParam("CommunityService.topicTitle", "ForumTopic"+community.getTitle());
     	addSnippetParam("CommunityService.topicContent", "ForumTopic"+community.getTitle());
         
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
 
         JsonJavaObject json = previewPage.getJson();
+        Assert.assertNull("Unexpected error detected on page", json.getString("code"));
+        String topicUuid = json.getString("topicUuid");
+        Assert.assertNotNull("Expected a valid topic uuid", topicUuid);
     }
     
 }

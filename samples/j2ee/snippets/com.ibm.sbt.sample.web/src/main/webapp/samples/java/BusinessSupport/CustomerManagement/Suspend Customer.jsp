@@ -37,7 +37,7 @@
 	<div id="content">
 	<%
 	try {
-    	final CustomerManagementService customerManagement = new CustomerManagementService("smartcloudC1");
+    	final CustomerManagementService customerManagement = new CustomerManagementService("smartcloud");
 		EntityList<JsonEntity> customerList = customerManagement.getCustomers();
 		
 		if (!customerList.isEmpty()) {

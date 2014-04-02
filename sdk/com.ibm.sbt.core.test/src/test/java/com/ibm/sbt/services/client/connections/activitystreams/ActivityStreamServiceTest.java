@@ -23,20 +23,25 @@ package com.ibm.sbt.services.client.connections.activitystreams;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.Date;
 
-import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.services.BaseUnitTest;
-import com.ibm.sbt.services.client.SBTServiceException;
+import com.ibm.sbt.services.client.connections.communities.Community;
+import com.ibm.sbt.services.client.connections.communities.CommunityService;
+import com.ibm.sbt.services.client.connections.communities.CommunityServiceException;
+import com.ibm.sbt.test.lib.TestEnvironment;
 
 public class ActivityStreamServiceTest extends BaseUnitTest {
 	
 	protected ActivityStreamService service;
+	protected CommunityService communityService;
 	
 	@Before
 	public void initBlogServiceTest() {
@@ -47,8 +52,8 @@ public class ActivityStreamServiceTest extends BaseUnitTest {
 
 	@Test
 	public final void testGetUpdatesFromUser() throws ActivityStreamServiceException {
-		ActivityStreamEntityList updates = service
-				.getUpdatesFromUser("0EE5A7FA-3434-9A59-4825-7A7000278DAA");
+		String userId = TestEnvironment.getCurrentUserUuid();
+		ActivityStreamEntityList updates = service.getUpdatesFromUser(userId);
 
 		for (ActivityStreamEntity asentry : updates) {
 			System.err.println("asentry.getActor() " + asentry.getActor().getName());
@@ -56,10 +61,31 @@ public class ActivityStreamServiceTest extends BaseUnitTest {
 		}
 	}
 
+	public Community createTestCommunity() throws CommunityServiceException {
+		if (communityService==null){
+			communityService = new CommunityService();
+		}
+
+		Community community = new Community(communityService, "");
+		community.setTitle("JavaTestCommunity " + System.currentTimeMillis());
+		community.setContent("Java Community Content");
+		String type = "public";
+		if (TestEnvironment.isSmartCloudEnvironment()) {
+			type = "private";
+		}
+		community.setCommunityType(type);
+		community = community.save();
+		community = community.load();
+		return community;
+	}
+
+	@Ignore
 	@Test
-	public final void testGetUpdatesFromCommunity() throws ActivityStreamServiceException {
+	public final void testGetUpdatesFromCommunity() throws ActivityStreamServiceException, CommunityServiceException {
+		//Ignored because a method in ActivityStreamService to post to a Community is unimplemented
+		Community community = createTestCommunity();
 		ActivityStreamEntityList updates = service
-				.getUpdatesFromCommunity("b4f12458-3cc2-49d2-9cf3-08d3fcbd81d5");
+				.getUpdatesFromCommunity(community.getCommunityUuid());
 
 		System.err.println("number of updates from community : " + updates.size());
 
@@ -74,6 +100,15 @@ public class ActivityStreamServiceTest extends BaseUnitTest {
 		}
 	}
 
+	public void deleteTestCommunity(Community community) throws Exception {
+		TestEnvironment.setRequiresAuthentication(true);
+
+		if (community != null) {
+			communityService.deleteCommunity(community.getCommunityUuid());
+		}
+	}
+
+	@Ignore
 	@Test
 	public final void testPostEntry() throws ActivityStreamServiceException {
 		JsonJavaObject postPayload = new JsonJavaObject();
@@ -96,17 +131,21 @@ public class ActivityStreamServiceTest extends BaseUnitTest {
 		postPayload.put("object", object);
 		System.err.println(postPayload.toString());
 
-		service.postEntry(postPayload);
+		String postId = service.postEntry(postPayload);
 
 		ActivityStreamEntityList updates = service.getAllUpdates();
 		System.err.println("updates found " + updates.size());
+		System.out.println("Expected Id "+postId);
 		for (ActivityStreamEntity update : updates) {
-			System.err.println("update.getEventTitle()" + update.getEventTitle());
-			System.err.println("tobeposted" + tobeposted);
-
-			assertEquals(update.getEventTitle(), tobeposted); // Just check the 1st update
-			break;
+			//System.err.println("update.getEventTitle()" + update.getEventTitle());
+			//System.err.println("tobeposted" + tobeposted);
+			System.out.println("Id "+update.getId());
+			if (postId.equals(update.getId())){
+				assertEquals(postId, update.getId());
+				return;
+			}
 		}
+		fail("Posted entry was not found");
 	}
 
 	@Test

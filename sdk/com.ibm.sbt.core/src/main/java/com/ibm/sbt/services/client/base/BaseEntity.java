@@ -22,10 +22,8 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
-import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandlerException;
 import com.ibm.sbt.services.client.base.datahandlers.FieldEntry;
@@ -102,6 +100,7 @@ public class BaseEntity implements Externalizable {
 	public void setAsString(FieldEntry field, String value) {
 		fields.put(field.getName(), value);
 	}
+
 	/**
 	 * This method updates the value of a field. Used to create or update an entity.
 	 * 
@@ -288,7 +287,7 @@ public class BaseEntity implements Externalizable {
 		if (dataHandler != null) {
 			return dataHandler.getAsArray(field);
 		}
-		throw new NullPointerException(StringUtil.format("Field {0} was not found or had no value",field.getName()));
+		return null;
 	}
 	
 	/**
@@ -304,9 +303,25 @@ public class BaseEntity implements Externalizable {
 		if (dataHandler != null) {
 			return dataHandler.getAsArray(fieldName);
 		}
-		throw new NullPointerException(StringUtil.format("Field {0} was not found or had no value",fieldName));
+		return null;
 	}
 	
+	/**
+	 * Returns true if a field exists
+	 * 
+	 * @param field
+	 * @return
+	 */
+	public boolean exists(FieldEntry field){
+		if (fields.containsKey(field.getName())){
+			return true;
+		}
+		if (dataHandler != null) {
+			return (dataHandler.getEntry(field) != null);
+		}
+		return false;
+	}
+		
 	/**
 	 * Receives an int as the value of a field and stores it as an Integer on the internal map 
 	 * 
@@ -333,8 +348,48 @@ public class BaseEntity implements Externalizable {
 	 * @param fieldName
 	 * @param value
 	 */
+	public void setAsBoolean(FieldEntry field, boolean value){
+		fields.put(field.getName(), new Boolean(value));
+	}
+		
+	/**
+	 * Receives a boolean as the value of a field and stores it as a Boolean on the internal map 
+	 * 
+	 * @param fieldName
+	 * @param value
+	 */
 	public void setAsBoolean(String fieldName, boolean value){
 		fields.put(fieldName, new Boolean(value));
+	}
+		
+	/**
+	 * Receives a long as the value of a field and stores it as a Boolean on the internal map 
+	 * 
+	 * @param fieldName
+	 * @param value
+	 */
+	public void setAsLong(FieldEntry field, long value){
+		fields.put(field.getName(), new Long(value));
+	}
+		
+	/**
+	 * Receives a long as the value of a field and stores it as a Boolean on the internal map 
+	 * 
+	 * @param fieldName
+	 * @param value
+	 */
+	public void setAsLong(String fieldName, long value){
+		fields.put(fieldName, new Long(value));
+	}
+		
+	/**
+	 * Receives a Date as the value of a field and stores it as a Date on the internal map 
+	 * 
+	 * @param field
+	 * @param value
+	 */
+	public void setAsDate(FieldEntry field, Date value){
+		setAsDate(field.getName(), value);
 	}
 	
 	/**
@@ -426,6 +481,7 @@ public class BaseEntity implements Externalizable {
 	public Map<String, Object> getFieldsMap(){
 		return fields;
 	}
+	
 	@Override
 	public void readExternal(ObjectInput inputStream) throws IOException, ClassNotFoundException {
 		// Retrieve the entity data(handler), service and endpoint name
@@ -434,7 +490,6 @@ public class BaseEntity implements Externalizable {
 		String endpointName = inputStream.readUTF();
 		BaseService service = (BaseService) inputStream.readObject();
 		Endpoint endPoint = EndpointFactory.getEndpoint(endpointName);
-		
 
 		fields = changedfields;
 		setDataHandler(dataHandler);
@@ -454,6 +509,6 @@ public class BaseEntity implements Externalizable {
 
 		// persist the service name
 		outputStream.writeObject(getService());
-
 	}
+
 }

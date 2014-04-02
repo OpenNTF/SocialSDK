@@ -11,6 +11,10 @@ function emptyAPI() {
 }
 
 function loadAPI(id,unid) {
+	if(XSP.startsWith(id,"/")) {
+		setTimeout(function() {updateNavSelection(id)}, 500); // Make sure the tree is loaded
+		return;
+	}
 	XSP.showContent(pageGlobal.dynPanel,"api",{api:id,unid:unid});
 	updateLabel(id);
 	//updateNavSelection();
@@ -279,3 +283,13 @@ function prettify(s,ioArgs) {
 	} catch(e) {} // Return the initial string
 	return s;
 } 
+
+/**
+ * Update the selection for view.
+ */
+function updateNavSelection(id) {
+	// When a tree is created
+	if(dojo.byId(pageGlobal.snippetsTree)) {
+		treeSelectId(pageGlobal.snippetsTree,id||pageGlobal.id);
+	}
+}

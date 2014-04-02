@@ -46,8 +46,12 @@ public abstract class Node {
 		this.name = name;
 		// Create the category and the unid
 		this.category = createName(new StringBuilder(),parent,'/').toString();
-		this.unid = encodeUnid(createName(new StringBuilder(),this,SEPARATOR).toString());
+		this.unid = createUnid();
 		this.jspUrl = SEPARATOR_SLASH+createJspUrl(new StringBuilder(),this,SEPARATOR_SLASH).toString();
+	}
+	
+	protected String createUnid() {
+		return encodeUnid(createName(new StringBuilder(),this,SEPARATOR).toString());
 	}
 
 	public String getPath() {

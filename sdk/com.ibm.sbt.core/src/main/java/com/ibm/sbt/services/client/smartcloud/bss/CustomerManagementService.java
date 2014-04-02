@@ -354,8 +354,7 @@ public class CustomerManagementService extends BssService {
 			throw new BssException(e, "Error registering customer {0} caused by {1}", customerObject, e.getMessage());
 		}
     }
-        
-    
+          
     /**
      * Wait for the customer to change to the specified state and then call the state change listener.
      * 
@@ -373,7 +372,9 @@ public class CustomerManagementService extends BssService {
     		String currentState = subscription.getAsString("Customer/CustomerState");
     		if (state.equalsIgnoreCase(currentState)) {
     			try {
-    				listener.stateChanged(subscription);
+    				if (listener != null) {
+    					listener.stateChanged(subscription);
+    				}
     				return true;
     			} catch (Exception e) {
     				logger.log(Level.WARNING, "Error invoking customer state listener", e);

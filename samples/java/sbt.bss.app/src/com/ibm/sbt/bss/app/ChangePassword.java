@@ -18,8 +18,11 @@ package com.ibm.sbt.bss.app;
 import java.io.IOException;
 
 import com.ibm.commons.util.io.json.JsonException;
+import com.ibm.sbt.services.client.base.JsonEntity;
+import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.smartcloud.bss.AuthenticationService;
 import com.ibm.sbt.services.client.smartcloud.bss.BssException;
+import com.ibm.sbt.services.client.smartcloud.bss.SubscriberManagementService;
 import com.ibm.sbt.services.client.smartcloud.bss.UserCredentialJsonBuilder;
 import com.ibm.sbt.services.endpoints.BasicEndpoint;
 
@@ -36,6 +39,7 @@ public class ChangePassword {
 	private BasicEndpoint basicEndpoint;
 
 	private AuthenticationService authenticationService;
+	private SubscriberManagementService subscriberManagementService;
 	
 	public ChangePassword(String url, String user, String password) {
 		this.url = url;
@@ -62,6 +66,13 @@ public class ChangePassword {
     		authenticationService = new AuthenticationService(getBasicEndpoint());
     	}
     	return authenticationService;
+    }
+    
+    public SubscriberManagementService getSubscriberManagementService() {
+    	if (subscriberManagementService == null) {
+    		subscriberManagementService = new SubscriberManagementService(getBasicEndpoint());
+    	}
+    	return subscriberManagementService;
     }
     
 	public void setOneTimePassword(String loginName, String password) throws BssException, JsonException, IOException {
@@ -109,6 +120,9 @@ public class ChangePassword {
 		ChangePassword cp = null;
 		try {
 			cp = new ChangePassword(url, user, password);
+			
+			EntityList<JsonEntity> subscribers = cp.getSubscriberManagementService().getSubscribersByEmail(user);
+			System.out.println(subscribers.size());
 			
 			cp.setOneTimePassword(loginName, oneTimePassword);
 				

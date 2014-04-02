@@ -117,14 +117,14 @@ public class XmlSerializer {
 	
 	protected <T extends Node> Node appendChilds(String rootElementName, List<T> childs) {
 		Node element = element(rootElementName);
-		return appendChilds(element, childs);
+		return appendChildren(element, childs);
 	}
 	
-	protected <T extends Node> Node appendChilds(String rootElementName, T... childs) {
-		return appendChilds(rootElementName, childs);
+	protected <T extends Node> Node appendChildren(String rootElementName, T... childs) {
+		return appendChildren(rootElementName, childs);
 	}
 	
-	protected <T extends Node> Node appendChilds(Node root, List<T> childs) {
+	protected <T extends Node> Node appendChildren(Node root, List<T> childs) {
 		if(childs != null) {
 			for(Node child : childs) {
 				if(child != null) {
@@ -140,8 +140,8 @@ public class XmlSerializer {
 		return root;
 	}
 	
-	protected Node appendChilds(Node root, Node... childs) {
-		return appendChilds(root, list(childs));
+	protected Node appendChildren(Node root, Node... childs) {
+		return appendChildren(root, list(childs));
 	}
 	
 	protected Node rootNode(Node root) {

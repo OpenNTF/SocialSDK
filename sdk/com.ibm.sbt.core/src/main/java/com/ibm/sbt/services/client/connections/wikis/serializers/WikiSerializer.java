@@ -40,7 +40,7 @@ public class WikiSerializer extends AtomEntitySerializer<Wiki> {
 	public void generateCreate() {
 		Node entry = entry();
 		
-		appendChilds(entry,
+		appendChildren(entry,
 				title(),
 				label(),
 				wikiCategory(),
@@ -53,7 +53,7 @@ public class WikiSerializer extends AtomEntitySerializer<Wiki> {
 	public void generateUpdate() {
 		Node entry = genericAtomEntry();
 		
-		appendChilds(entry,
+		appendChildren(entry,
 				label(),
 				wikiCategory(),
 				communityId(),

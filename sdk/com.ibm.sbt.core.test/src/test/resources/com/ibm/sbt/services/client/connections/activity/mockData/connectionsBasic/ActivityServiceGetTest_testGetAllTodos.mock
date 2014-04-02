@@ -4,7 +4,7 @@
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Wed, 19 Feb 2014 11:06:31 GMT]]></value>
+        <value><![CDATA[Wed, 02 Apr 2014 14:57:14 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -24,7 +24,7 @@
     </header>
     <header>
         <name><![CDATA[Last-Modified]]></name>
-        <value><![CDATA[Wed, 19 Feb 2014 11:06:31 GMT]]></value>
+        <value><![CDATA[Wed, 02 Apr 2014 14:57:16 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Pragma]]></name>
@@ -32,19 +32,19 @@
     </header>
     <header>
         <name><![CDATA[ETag]]></name>
-        <value><![CDATA[W/"1392807991890-ac1cc9e6-c8f9-4e72-93b2-e4b4633616a3"]]></value>
+        <value><![CDATA[W/"1396450636815-ac1cc9e6-c8f9-4e72-93b2-e4b4633616a3"]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/q3lS73nqvmvQJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/; Domain=.sdkdemo.com]]></value>
+        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/oJFnIqru42UQJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=7pdGH6r6EY0RRfeX8aQMqXzmL+Z79Ucdy3NKkVfEHCvptmAz7VjVCNAGgpD9JOi5soCmzccc9SywXwvLeZaJeQUX4eK1t/jm75/iutZeh/jq0xWm5azj+MKgwchpdNhS5ayLgkl3HlRnd65huCTkTTqLhUioFC141/3P7YAtItZ7synJOJiSgr5M4OMhKNbK5Kkcx+lrhLO+T30QCKnreQCnfYIWro4x2sKgiNFshIIzvQ6832dq8dGFLrYN1YlWAFlFkBeFF7uQYP10gGI+hAOHL11U7JYQ441MqW8JSkhfq4coH56/4wQNJJ/fiUuKVEKuD1V7IhYFnugIP4JYiTTHNxa0FVZv2Q8RHnJ5DzwaZ9y4IdE28Fim0l1dvV6/YkCdaVAwujW12qvuT9UgxyCirb2yeJD0qnzw7pJv7h29MghWTXd2lEyCK7Pnu5JuCTfnLBLLG6DolF4tFJTxhb1MVAAFa9PLWhe3BmuGFLZ/35NBJLbNGeU0E2alGmlRTAOBJuWWTvbwlIFppZHY5aNtALhg4ghhqdfLizCMeYFoPTMO4Ziq7dkPeZOTV1YS3bJI27U4s5h3LzylQt52Uy7D+7QbwWc6zbUFqdTK/K/I9iwRjOh8/f3iIXVrVmj7pNWelrLb3Hg0Mz6Aj6A6y/KkAf1zayBk9xDSTunoSJMsiDhQMfuqDqS2xrcGodVVzRwF8vrJdG6jhcMz91TInkNaFKSVFNuDPIRU7c7hPfs=; Path=/; Domain=.sdkdemo.com]]></value>
+        <value><![CDATA[LtpaToken2=69ttM7rfDYVREvvKzI9tZjhN09bxLS8M4uNib2842mJKWigeEV79DHlvR/yvtBdgtJQVebfu1PANKx873qGSbSY7/Rxc6LSqEB9EByhymsoMQ/nXapiDXcVmm3jG5kBWBOKKuwNI2j1wMzcNwX1Gky1RoSb7t2o9CcWEwhCEZFkoywUgAiX+jPVUSwqvtFbuknBCDXeXwJmBcbZaK0jCo16rBjmvTvQUzfj5SYwUBvzoycXuMQHZWpXvjwJUwmOeO3v6nVjHBhnB7bIKL2LrZfjpay2OllzwAI0/bsJR6otTax7ou6vuMdzYsCZNjQ+ywsnsvdwJ3NfhvisZ0LG3maXjojiYmcRXzHOmxYW/Jh42EPmdz3/A/xOttmScvDPO0nYthRTiPKHiy62JOgSmNvAjgRfNEPII1FgmVMTyL9eJ0DwBtz58iDep97fYNm1oH8dTg0vA2hP1RyirJGptsMEI9G14w4Qvrq8aYniU5GC3A13I9GQI9+Yil1iwE0YUXhZfk7H1lfSpF/fQpLUzrHtJ7hq7m/VIDLgiJ4O0nIglOAwfJlrq0giJn9DTDsxOQxT6zWiZ5HbdCws66EqwJHuKI78likGN1dqkinlBx+gLa+jI0QX2vhwMXP+pvSzAi6ZMufE2arZqqBnU2W13iUYH7gHQtAuJs/5aJXobX3FPjhu46wcx7kcuA7+QsgD+czRY84S3v8pO4JbSBEtOdDDVwNluDk1cIF4XXYfcVXU=; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LCSESSIONID=0000NI3im32nxLktZ23A55V3m58:18dna4k6n; Path=/; HttpOnly]]></value>
+        <value><![CDATA[LCSESSIONID=0000Wtd2UfGBy9EHHOPoNm5SQVB:18dna4k6n; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Cache-Control]]></name>
@@ -99,7 +99,7 @@
   <logo>https://dev.sdkdemo.com:444/activities/nav/common/images/iconActivities128.png</logo>
   <id>https://dev.sdkdemo.com:444/activities/service/atom2/todos</id>
   <title type="text">To Do List for Frank Adams</title>
-  <updated>2014-02-19T09:20:27Z</updated> 
+  <updated>2014-04-02T13:14:52Z</updated> 
   <author>
     
 
@@ -141,14 +141,14 @@
 	
   <link rel="current" href="https://dev.sdkdemo.com:444/activities/service/atom2/todos"/>
   <link rel="first" href="https://dev.sdkdemo.com:444/activities/service/atom2/todos" />
-  <link rel="last" href="https://dev.sdkdemo.com:444/activities/service/atom2/todos?page=7" />
+  <link rel="last" href="https://dev.sdkdemo.com:444/activities/service/atom2/todos?page=29" />
   
   <link rel="next" href="https://dev.sdkdemo.com:444/activities/service/atom2/todos?page=2" />
   
   
 
  
-  <os:totalResults>66</os:totalResults>
+  <os:totalResults>285</os:totalResults>
   <os:startIndex>1</os:startIndex>
   
   
@@ -175,10 +175,10 @@
 
 
 
-  <id>urn:lsid:ibm.com:oa:74b747d1-09fa-4c39-af76-f2fd10ab907e</id>
-  <title type="text">todoNode from JSP 1392801623202</title>
-  <updated>2014-02-19T09:20:27Z</updated>
-  <published>2014-02-19T09:20:27Z</published>
+  <id>urn:lsid:ibm.com:oa:f449a77b-f7cb-473d-9cbe-47507be13df9</id>
+  <title type="text">todoNode from JSP 1396444455740</title>
+  <updated>2014-04-02T13:14:52Z</updated>
+  <published>2014-04-02T13:14:52Z</published>
   <author>
     
 
@@ -260,28 +260,28 @@
   
    
   
-    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:6977a441-a7cc-4ea9-b610-fe105c24ecd2" 
+    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:6d3133c5-2dc4-4e95-935e-83f40fcb7c39" 
        type="application/atom+xml" 
-       href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=6977a441-a7cc-4ea9-b610-fe105c24ecd2"
-       source="urn:lsid:ibm.com:oa:6977a441-a7cc-4ea9-b610-fe105c24ecd2"
+       href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=6d3133c5-2dc4-4e95-935e-83f40fcb7c39"
+       source="urn:lsid:ibm.com:oa:6d3133c5-2dc4-4e95-935e-83f40fcb7c39"
     />
   
   
 
   
-  <snx:activity>6977a441-a7cc-4ea9-b610-fe105c24ecd2</snx:activity>
+  <snx:activity>6d3133c5-2dc4-4e95-935e-83f40fcb7c39</snx:activity>
   
   
   
-    <link rel="edit" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=74b747d1-09fa-4c39-af76-f2fd10ab907e" />
+    <link rel="edit" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=f449a77b-f7cb-473d-9cbe-47507be13df9" />
   
    
   
     
     
-      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=74b747d1-09fa-4c39-af76-f2fd10ab907e"/>
- 	  <link rel="alternate" type="application/xhtml+xml" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=74b747d1-09fa-4c39-af76-f2fd10ab907e"/>
-      <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=74b747d1-09fa-4c39-af76-f2fd10ab907e"/>
+      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=f449a77b-f7cb-473d-9cbe-47507be13df9"/>
+ 	  <link rel="alternate" type="application/xhtml+xml" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=f449a77b-f7cb-473d-9cbe-47507be13df9"/>
+      <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=f449a77b-f7cb-473d-9cbe-47507be13df9"/>
           
     
   
@@ -301,7 +301,7 @@
       
         
           <content type="text">
-          	Todo Node Content 1392801623202
+          	Todo Node Content 1396444455740
       	  </content>
         
         
@@ -340,10 +340,10 @@
 
 
 
-  <id>urn:lsid:ibm.com:oa:79d86832-5dd7-4f5d-b21a-9dce65d18de1</id>
-  <title type="text">todoNode from JSP 1392787902068</title>
-  <updated>2014-02-19T05:31:46Z</updated>
-  <published>2014-02-19T05:31:46Z</published>
+  <id>urn:lsid:ibm.com:oa:360379a3-ded2-4a0c-90cb-1047290702a0</id>
+  <title type="text">todoNode from JSP 1396424541299</title>
+  <updated>2014-04-02T07:42:57Z</updated>
+  <published>2014-04-02T07:42:57Z</published>
   <author>
     
 
@@ -425,28 +425,28 @@
   
    
   
-    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:eacef6ad-f682-4fa3-a7bd-831a5ef0944e" 
+    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:a6a19ac4-e187-4aaf-8cba-5ea0b4fc1f6a" 
        type="application/atom+xml" 
-       href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=eacef6ad-f682-4fa3-a7bd-831a5ef0944e"
-       source="urn:lsid:ibm.com:oa:eacef6ad-f682-4fa3-a7bd-831a5ef0944e"
+       href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=a6a19ac4-e187-4aaf-8cba-5ea0b4fc1f6a"
+       source="urn:lsid:ibm.com:oa:a6a19ac4-e187-4aaf-8cba-5ea0b4fc1f6a"
     />
   
   
 
   
-  <snx:activity>eacef6ad-f682-4fa3-a7bd-831a5ef0944e</snx:activity>
+  <snx:activity>a6a19ac4-e187-4aaf-8cba-5ea0b4fc1f6a</snx:activity>
   
   
   
-    <link rel="edit" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=79d86832-5dd7-4f5d-b21a-9dce65d18de1" />
+    <link rel="edit" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=360379a3-ded2-4a0c-90cb-1047290702a0" />
   
    
   
     
     
-      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=79d86832-5dd7-4f5d-b21a-9dce65d18de1"/>
- 	  <link rel="alternate" type="application/xhtml+xml" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=79d86832-5dd7-4f5d-b21a-9dce65d18de1"/>
-      <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=79d86832-5dd7-4f5d-b21a-9dce65d18de1"/>
+      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=360379a3-ded2-4a0c-90cb-1047290702a0"/>
+ 	  <link rel="alternate" type="application/xhtml+xml" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=360379a3-ded2-4a0c-90cb-1047290702a0"/>
+      <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=360379a3-ded2-4a0c-90cb-1047290702a0"/>
           
     
   
@@ -466,7 +466,7 @@
       
         
           <content type="text">
-          	Todo Node Content 1392787902068
+          	Todo Node Content 1396424541299
       	  </content>
         
         
@@ -505,10 +505,10 @@
 
 
 
-  <id>urn:lsid:ibm.com:oa:9d064213-1200-4c32-bf96-d03cfbf35408</id>
-  <title type="text">todoNode from JSP 1392775828917</title>
-  <updated>2014-02-19T02:10:33Z</updated>
-  <published>2014-02-19T02:10:33Z</published>
+  <id>urn:lsid:ibm.com:oa:c4341b9f-af3d-4ccf-a61d-63aea4deef20</id>
+  <title type="text">todoNode from JSP 1396403917127</title>
+  <updated>2014-04-02T01:59:13Z</updated>
+  <published>2014-04-02T01:59:13Z</published>
   <author>
     
 
@@ -590,28 +590,28 @@
   
    
   
-    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:8f7f51c0-e819-4c07-9025-9b2178977d97" 
+    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:2ca2c623-5b64-450f-890e-f21efad4047a" 
        type="application/atom+xml" 
-       href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=8f7f51c0-e819-4c07-9025-9b2178977d97"
-       source="urn:lsid:ibm.com:oa:8f7f51c0-e819-4c07-9025-9b2178977d97"
+       href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=2ca2c623-5b64-450f-890e-f21efad4047a"
+       source="urn:lsid:ibm.com:oa:2ca2c623-5b64-450f-890e-f21efad4047a"
     />
   
   
 
   
-  <snx:activity>8f7f51c0-e819-4c07-9025-9b2178977d97</snx:activity>
+  <snx:activity>2ca2c623-5b64-450f-890e-f21efad4047a</snx:activity>
   
   
   
-    <link rel="edit" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=9d064213-1200-4c32-bf96-d03cfbf35408" />
+    <link rel="edit" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=c4341b9f-af3d-4ccf-a61d-63aea4deef20" />
   
    
   
     
     
-      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=9d064213-1200-4c32-bf96-d03cfbf35408"/>
- 	  <link rel="alternate" type="application/xhtml+xml" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=9d064213-1200-4c32-bf96-d03cfbf35408"/>
-      <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=9d064213-1200-4c32-bf96-d03cfbf35408"/>
+      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=c4341b9f-af3d-4ccf-a61d-63aea4deef20"/>
+ 	  <link rel="alternate" type="application/xhtml+xml" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=c4341b9f-af3d-4ccf-a61d-63aea4deef20"/>
+      <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=c4341b9f-af3d-4ccf-a61d-63aea4deef20"/>
           
     
   
@@ -631,7 +631,7 @@
       
         
           <content type="text">
-          	Todo Node Content 1392775828917
+          	Todo Node Content 1396403917127
       	  </content>
         
         
@@ -670,10 +670,10 @@
 
 
 
-  <id>urn:lsid:ibm.com:oa:cf227b06-4e57-4f8b-ab26-307cebc5955a</id>
-  <title type="text">todoNode from JSP 1392763608324</title>
-  <updated>2014-02-18T22:46:52Z</updated>
-  <published>2014-02-18T22:46:52Z</published>
+  <id>urn:lsid:ibm.com:oa:e25e6b66-cc94-485d-add6-1ee65c41b762</id>
+  <title type="text">todoNode from JSP 1396383669528</title>
+  <updated>2014-04-01T20:21:45Z</updated>
+  <published>2014-04-01T20:21:45Z</published>
   <author>
     
 
@@ -755,28 +755,28 @@
   
    
   
-    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:7c1caacb-3819-4dd5-8dc7-a6a38d5fea72" 
+    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:21bb3376-bec7-4a63-b35f-0f671b6f51fe" 
        type="application/atom+xml" 
-       href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=7c1caacb-3819-4dd5-8dc7-a6a38d5fea72"
-       source="urn:lsid:ibm.com:oa:7c1caacb-3819-4dd5-8dc7-a6a38d5fea72"
+       href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=21bb3376-bec7-4a63-b35f-0f671b6f51fe"
+       source="urn:lsid:ibm.com:oa:21bb3376-bec7-4a63-b35f-0f671b6f51fe"
     />
   
   
 
   
-  <snx:activity>7c1caacb-3819-4dd5-8dc7-a6a38d5fea72</snx:activity>
+  <snx:activity>21bb3376-bec7-4a63-b35f-0f671b6f51fe</snx:activity>
   
   
   
-    <link rel="edit" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=cf227b06-4e57-4f8b-ab26-307cebc5955a" />
+    <link rel="edit" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=e25e6b66-cc94-485d-add6-1ee65c41b762" />
   
    
   
     
     
-      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=cf227b06-4e57-4f8b-ab26-307cebc5955a"/>
- 	  <link rel="alternate" type="application/xhtml+xml" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=cf227b06-4e57-4f8b-ab26-307cebc5955a"/>
-      <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=cf227b06-4e57-4f8b-ab26-307cebc5955a"/>
+      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=e25e6b66-cc94-485d-add6-1ee65c41b762"/>
+ 	  <link rel="alternate" type="application/xhtml+xml" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=e25e6b66-cc94-485d-add6-1ee65c41b762"/>
+      <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=e25e6b66-cc94-485d-add6-1ee65c41b762"/>
           
     
   
@@ -796,7 +796,7 @@
       
         
           <content type="text">
-          	Todo Node Content 1392763608324
+          	Todo Node Content 1396383669528
       	  </content>
         
         
@@ -835,10 +835,10 @@
 
 
 
-  <id>urn:lsid:ibm.com:oa:b8479d98-45ca-429f-8108-8f697362a536</id>
-  <title type="text">todoNode from JSP 1392751557273</title>
-  <updated>2014-02-18T19:26:01Z</updated>
-  <published>2014-02-18T19:26:01Z</published>
+  <id>urn:lsid:ibm.com:oa:b0cac32d-ddc8-4b2f-b782-be21aca3c1d3</id>
+  <title type="text">todoNode from JSP 1396363219140</title>
+  <updated>2014-04-01T14:40:55Z</updated>
+  <published>2014-04-01T14:40:55Z</published>
   <author>
     
 
@@ -920,28 +920,28 @@
   
    
   
-    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:0030fa69-a45e-483f-828e-e7ad50151bc6" 
+    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:5d19c7f6-c885-4854-809a-e5393a02e713" 
        type="application/atom+xml" 
-       href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=0030fa69-a45e-483f-828e-e7ad50151bc6"
-       source="urn:lsid:ibm.com:oa:0030fa69-a45e-483f-828e-e7ad50151bc6"
+       href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=5d19c7f6-c885-4854-809a-e5393a02e713"
+       source="urn:lsid:ibm.com:oa:5d19c7f6-c885-4854-809a-e5393a02e713"
     />
   
   
 
   
-  <snx:activity>0030fa69-a45e-483f-828e-e7ad50151bc6</snx:activity>
+  <snx:activity>5d19c7f6-c885-4854-809a-e5393a02e713</snx:activity>
   
   
   
-    <link rel="edit" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=b8479d98-45ca-429f-8108-8f697362a536" />
+    <link rel="edit" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=b0cac32d-ddc8-4b2f-b782-be21aca3c1d3" />
   
    
   
     
     
-      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=b8479d98-45ca-429f-8108-8f697362a536"/>
- 	  <link rel="alternate" type="application/xhtml+xml" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=b8479d98-45ca-429f-8108-8f697362a536"/>
-      <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=b8479d98-45ca-429f-8108-8f697362a536"/>
+      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=b0cac32d-ddc8-4b2f-b782-be21aca3c1d3"/>
+ 	  <link rel="alternate" type="application/xhtml+xml" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=b0cac32d-ddc8-4b2f-b782-be21aca3c1d3"/>
+      <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=b0cac32d-ddc8-4b2f-b782-be21aca3c1d3"/>
           
     
   
@@ -961,7 +961,7 @@
       
         
           <content type="text">
-          	Todo Node Content 1392751557273
+          	Todo Node Content 1396363219140
       	  </content>
         
         
@@ -1000,10 +1000,10 @@
 
 
 
-  <id>urn:lsid:ibm.com:oa:92f82b1e-8413-4816-9d7a-be738b53b125</id>
-  <title type="text">todoNode from JSP 1392738488596</title>
-  <updated>2014-02-18T15:48:14Z</updated>
-  <published>2014-02-18T15:48:14Z</published>
+  <id>urn:lsid:ibm.com:oa:f15d905d-c74d-4034-a5c5-33a790cbcb45</id>
+  <title type="text">todoNode from JSP 1396335619129</title>
+  <updated>2014-04-01T07:00:54Z</updated>
+  <published>2014-04-01T07:00:54Z</published>
   <author>
     
 
@@ -1085,28 +1085,28 @@
   
    
   
-    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:0c4b9c62-d463-4cb2-ba6a-9d530f6cc585" 
+    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:147d070c-97d1-4c33-baff-ce9acb92c24b" 
        type="application/atom+xml" 
-       href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=0c4b9c62-d463-4cb2-ba6a-9d530f6cc585"
-       source="urn:lsid:ibm.com:oa:0c4b9c62-d463-4cb2-ba6a-9d530f6cc585"
+       href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=147d070c-97d1-4c33-baff-ce9acb92c24b"
+       source="urn:lsid:ibm.com:oa:147d070c-97d1-4c33-baff-ce9acb92c24b"
     />
   
   
 
   
-  <snx:activity>0c4b9c62-d463-4cb2-ba6a-9d530f6cc585</snx:activity>
+  <snx:activity>147d070c-97d1-4c33-baff-ce9acb92c24b</snx:activity>
   
   
   
-    <link rel="edit" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=92f82b1e-8413-4816-9d7a-be738b53b125" />
+    <link rel="edit" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=f15d905d-c74d-4034-a5c5-33a790cbcb45" />
   
    
   
     
     
-      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=92f82b1e-8413-4816-9d7a-be738b53b125"/>
- 	  <link rel="alternate" type="application/xhtml+xml" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=92f82b1e-8413-4816-9d7a-be738b53b125"/>
-      <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=92f82b1e-8413-4816-9d7a-be738b53b125"/>
+      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=f15d905d-c74d-4034-a5c5-33a790cbcb45"/>
+ 	  <link rel="alternate" type="application/xhtml+xml" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=f15d905d-c74d-4034-a5c5-33a790cbcb45"/>
+      <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=f15d905d-c74d-4034-a5c5-33a790cbcb45"/>
           
     
   
@@ -1126,7 +1126,7 @@
       
         
           <content type="text">
-          	Todo Node Content 1392738488596
+          	Todo Node Content 1396335619129
       	  </content>
         
         
@@ -1165,10 +1165,10 @@
 
 
 
-  <id>urn:lsid:ibm.com:oa:9e682904-1b03-47eb-8349-bf3ae48425a5</id>
-  <title type="text">todoNode from JSP 1392725561817</title>
-  <updated>2014-02-18T12:12:45Z</updated>
-  <published>2014-02-18T12:12:45Z</published>
+  <id>urn:lsid:ibm.com:oa:82bca899-2fea-4e30-ab75-568ebd75382f</id>
+  <title type="text">todoNode from JSP 1396319753109</title>
+  <updated>2014-04-01T02:36:28Z</updated>
+  <published>2014-04-01T02:36:28Z</published>
   <author>
     
 
@@ -1250,28 +1250,28 @@
   
    
   
-    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:f9a7986e-76ac-461e-8d91-2900fcca4cfe" 
+    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:9487ffa9-ad5a-4b17-a9bd-0cc31e6293a7" 
        type="application/atom+xml" 
-       href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=f9a7986e-76ac-461e-8d91-2900fcca4cfe"
-       source="urn:lsid:ibm.com:oa:f9a7986e-76ac-461e-8d91-2900fcca4cfe"
+       href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=9487ffa9-ad5a-4b17-a9bd-0cc31e6293a7"
+       source="urn:lsid:ibm.com:oa:9487ffa9-ad5a-4b17-a9bd-0cc31e6293a7"
     />
   
   
 
   
-  <snx:activity>f9a7986e-76ac-461e-8d91-2900fcca4cfe</snx:activity>
+  <snx:activity>9487ffa9-ad5a-4b17-a9bd-0cc31e6293a7</snx:activity>
   
   
   
-    <link rel="edit" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=9e682904-1b03-47eb-8349-bf3ae48425a5" />
+    <link rel="edit" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=82bca899-2fea-4e30-ab75-568ebd75382f" />
   
    
   
     
     
-      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=9e682904-1b03-47eb-8349-bf3ae48425a5"/>
- 	  <link rel="alternate" type="application/xhtml+xml" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=9e682904-1b03-47eb-8349-bf3ae48425a5"/>
-      <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=9e682904-1b03-47eb-8349-bf3ae48425a5"/>
+      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=82bca899-2fea-4e30-ab75-568ebd75382f"/>
+ 	  <link rel="alternate" type="application/xhtml+xml" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=82bca899-2fea-4e30-ab75-568ebd75382f"/>
+      <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=82bca899-2fea-4e30-ab75-568ebd75382f"/>
           
     
   
@@ -1291,7 +1291,7 @@
       
         
           <content type="text">
-          	Todo Node Content 1392725561817
+          	Todo Node Content 1396319753109
       	  </content>
         
         
@@ -1330,177 +1330,10 @@
 
 
 
-  <id>urn:lsid:ibm.com:oa:5dd1a4d0-e6d6-4251-8dca-3515b9b21420</id>
-  <title type="text">ToDoNode from JS Test 1392699905749</title>
-  <updated>2014-02-18T05:05:31Z</updated>
-  <published>2014-02-18T05:05:17Z</published>
-  <author>
-    
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <name>Frank Adams</name>
-  <email>***REMOVED***@renovations.com</email>
-  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
-  <snx:ldapid>ac1cc9e6-c8f9-4e72-93b2-e4b4633616a3</snx:ldapid>
-  
-  
-  
-  <snx:userState>active</snx:userState>
-  
-  
-
-  </author>
-  <contributor>
-    
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <name>Frank Adams</name>
-  <email>***REMOVED***@renovations.com</email>
-  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
-  <snx:ldapid>ac1cc9e6-c8f9-4e72-93b2-e4b4633616a3</snx:ldapid>
-  
-  
-  
-  <snx:userState>active</snx:userState>
-  
-  
-
-  </contributor>
-  	
-    
-    
-  	     
-  	  
-  	    
-  	  
- 	      <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="todo" label="To Do"/>
-  	  
-  	
-    
-  
-
-  
-  
-    
-  
-  
-  
-  
-  
-  
-  
-  
-  
-    <category term="tag1" />
-  
-    <category term="tag2" />
-  
-   
-  
-    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:309de6d7-11c7-4324-a880-54261061f4ed" 
-       type="application/atom+xml" 
-       href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=309de6d7-11c7-4324-a880-54261061f4ed"
-       source="urn:lsid:ibm.com:oa:309de6d7-11c7-4324-a880-54261061f4ed"
-    />
-  
-  
-
-  
-  <snx:activity>309de6d7-11c7-4324-a880-54261061f4ed</snx:activity>
-  
-  
-  
-    <link rel="edit" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=5dd1a4d0-e6d6-4251-8dca-3515b9b21420" />
-  
-   
-  
-    
-    
-      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=5dd1a4d0-e6d6-4251-8dca-3515b9b21420"/>
- 	  <link rel="alternate" type="application/xhtml+xml" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=5dd1a4d0-e6d6-4251-8dca-3515b9b21420"/>
-      <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=5dd1a4d0-e6d6-4251-8dca-3515b9b21420"/>
-          
-    
-  
- 
-  <snx:position>1000</snx:position>
-  <snx:depth>1</snx:depth>  
-  
-  <snx:permissions>none, create_activity, view_activity, edit_activity, delete_activity, activity_owner, edit_activity_tags, design_activity, edit_statements, delete_statements, add_members, delete_members, create_entries, edit_personal_entries, edit_all_entries, delete_personal_entries, delete_all_entries, edit_personal_entry_tags, edit_all_entry_tags, view_members</snx:permissions>
-  <snx:icon>https://dev.sdkdemo.com:444/activities/nav/common/styles/images/activities/icon_taskIncomplete.gif</snx:icon>
-
-  
-    
-    
-    
-    
-      
-      
-        
-          <content type="text">
-          	ToDoNode Content 1392699905749
-      	  </content>
-        
-        
-      
-    
-  
-  
-  
-
-    
-  
-  
-  
-  
-
-    </entry>
-  
-    
-    <entry>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <id>urn:lsid:ibm.com:oa:be1937de-663d-4b28-a942-54f5ee6ee9cd</id>
-  <title type="text">todoNode from JSP 1392694313215</title>
-  <updated>2014-02-18T03:31:56Z</updated>
-  <published>2014-02-18T03:31:56Z</published>
+  <id>urn:lsid:ibm.com:oa:c75b35c2-342f-4c1a-94d1-4a04505bda2d</id>
+  <title type="text">todoNode from JSP 1396304316771</title>
+  <updated>2014-03-31T22:19:12Z</updated>
+  <published>2014-03-31T22:19:12Z</published>
   <author>
     
 
@@ -1582,28 +1415,28 @@
   
    
   
-    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:b25f071a-b4e3-4bdd-b1d8-ddac26ee6b89" 
+    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:08cf4b46-edd5-4e9f-a66e-e426b5e30ee1" 
        type="application/atom+xml" 
-       href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=b25f071a-b4e3-4bdd-b1d8-ddac26ee6b89"
-       source="urn:lsid:ibm.com:oa:b25f071a-b4e3-4bdd-b1d8-ddac26ee6b89"
+       href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=08cf4b46-edd5-4e9f-a66e-e426b5e30ee1"
+       source="urn:lsid:ibm.com:oa:08cf4b46-edd5-4e9f-a66e-e426b5e30ee1"
     />
   
   
 
   
-  <snx:activity>b25f071a-b4e3-4bdd-b1d8-ddac26ee6b89</snx:activity>
+  <snx:activity>08cf4b46-edd5-4e9f-a66e-e426b5e30ee1</snx:activity>
   
   
   
-    <link rel="edit" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=be1937de-663d-4b28-a942-54f5ee6ee9cd" />
+    <link rel="edit" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=c75b35c2-342f-4c1a-94d1-4a04505bda2d" />
   
    
   
     
     
-      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=be1937de-663d-4b28-a942-54f5ee6ee9cd"/>
- 	  <link rel="alternate" type="application/xhtml+xml" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=be1937de-663d-4b28-a942-54f5ee6ee9cd"/>
-      <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=be1937de-663d-4b28-a942-54f5ee6ee9cd"/>
+      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=c75b35c2-342f-4c1a-94d1-4a04505bda2d"/>
+ 	  <link rel="alternate" type="application/xhtml+xml" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=c75b35c2-342f-4c1a-94d1-4a04505bda2d"/>
+      <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=c75b35c2-342f-4c1a-94d1-4a04505bda2d"/>
           
     
   
@@ -1623,7 +1456,7 @@
       
         
           <content type="text">
-          	Todo Node Content 1392694313215
+          	Todo Node Content 1396304316771
       	  </content>
         
         
@@ -1662,10 +1495,10 @@
 
 
 
-  <id>urn:lsid:ibm.com:oa:4a129b7f-d129-4485-9281-1869eed9169c</id>
-  <title type="text">todoNode from JSP 1392677030022</title>
-  <updated>2014-02-17T22:43:53Z</updated>
-  <published>2014-02-17T22:43:53Z</published>
+  <id>urn:lsid:ibm.com:oa:f9f20b8f-581f-4b00-a203-1a12783df9c0</id>
+  <title type="text">todoNode from JSP 1396288531834</title>
+  <updated>2014-03-31T17:56:07Z</updated>
+  <published>2014-03-31T17:56:07Z</published>
   <author>
     
 
@@ -1747,28 +1580,28 @@
   
    
   
-    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:abb5aceb-245f-4617-8ebf-1c9c860493e6" 
+    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:be26f2a6-9503-471d-a8ca-bd79cf097cfc" 
        type="application/atom+xml" 
-       href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=abb5aceb-245f-4617-8ebf-1c9c860493e6"
-       source="urn:lsid:ibm.com:oa:abb5aceb-245f-4617-8ebf-1c9c860493e6"
+       href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=be26f2a6-9503-471d-a8ca-bd79cf097cfc"
+       source="urn:lsid:ibm.com:oa:be26f2a6-9503-471d-a8ca-bd79cf097cfc"
     />
   
   
 
   
-  <snx:activity>abb5aceb-245f-4617-8ebf-1c9c860493e6</snx:activity>
+  <snx:activity>be26f2a6-9503-471d-a8ca-bd79cf097cfc</snx:activity>
   
   
   
-    <link rel="edit" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=4a129b7f-d129-4485-9281-1869eed9169c" />
+    <link rel="edit" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=f9f20b8f-581f-4b00-a203-1a12783df9c0" />
   
    
   
     
     
-      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=4a129b7f-d129-4485-9281-1869eed9169c"/>
- 	  <link rel="alternate" type="application/xhtml+xml" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=4a129b7f-d129-4485-9281-1869eed9169c"/>
-      <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=4a129b7f-d129-4485-9281-1869eed9169c"/>
+      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=f9f20b8f-581f-4b00-a203-1a12783df9c0"/>
+ 	  <link rel="alternate" type="application/xhtml+xml" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=f9f20b8f-581f-4b00-a203-1a12783df9c0"/>
+      <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=f9f20b8f-581f-4b00-a203-1a12783df9c0"/>
           
     
   
@@ -1788,7 +1621,172 @@
       
         
           <content type="text">
-          	Todo Node Content 1392677030022
+          	Todo Node Content 1396288531834
+      	  </content>
+        
+        
+      
+    
+  
+  
+  
+
+    
+  
+  
+  
+  
+
+    </entry>
+  
+    
+    <entry>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <id>urn:lsid:ibm.com:oa:d289d9f8-3c92-44ca-943f-ffab3cbb4662</id>
+  <title type="text">todoNode from JSP 1396272728488</title>
+  <updated>2014-03-31T13:32:43Z</updated>
+  <published>2014-03-31T13:32:43Z</published>
+  <author>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <name>Frank Adams</name>
+  <email>***REMOVED***@renovations.com</email>
+  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+  <snx:ldapid>ac1cc9e6-c8f9-4e72-93b2-e4b4633616a3</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </author>
+  <contributor>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <name>Frank Adams</name>
+  <email>***REMOVED***@renovations.com</email>
+  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+  <snx:ldapid>ac1cc9e6-c8f9-4e72-93b2-e4b4633616a3</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </contributor>
+  	
+    
+    
+  	     
+  	  
+  	    
+  	  
+ 	      <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="todo" label="To Do"/>
+  	  
+  	
+    
+  
+
+  
+  
+    
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    <category term="todonodetag" />
+  
+   
+  
+    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:d239b068-1553-4e35-a237-b449cd016b15" 
+       type="application/atom+xml" 
+       href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=d239b068-1553-4e35-a237-b449cd016b15"
+       source="urn:lsid:ibm.com:oa:d239b068-1553-4e35-a237-b449cd016b15"
+    />
+  
+  
+
+  
+  <snx:activity>d239b068-1553-4e35-a237-b449cd016b15</snx:activity>
+  
+  
+  
+    <link rel="edit" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=d289d9f8-3c92-44ca-943f-ffab3cbb4662" />
+  
+   
+  
+    
+    
+      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=d289d9f8-3c92-44ca-943f-ffab3cbb4662"/>
+ 	  <link rel="alternate" type="application/xhtml+xml" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=d289d9f8-3c92-44ca-943f-ffab3cbb4662"/>
+      <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=d289d9f8-3c92-44ca-943f-ffab3cbb4662"/>
+          
+    
+  
+ 
+  <snx:position>1000</snx:position>
+  <snx:depth>1</snx:depth>  
+  
+  <snx:permissions>none, create_activity, view_activity, edit_activity, delete_activity, activity_owner, edit_activity_tags, design_activity, edit_statements, delete_statements, add_members, delete_members, create_entries, edit_personal_entries, edit_all_entries, delete_personal_entries, delete_all_entries, edit_personal_entry_tags, edit_all_entry_tags, view_members</snx:permissions>
+  <snx:icon>https://dev.sdkdemo.com:444/activities/nav/common/styles/images/activities/icon_taskIncomplete.gif</snx:icon>
+
+  
+    
+    
+    
+    
+      
+      
+        
+          <content type="text">
+          	Todo Node Content 1396272728488
       	  </content>
         
         

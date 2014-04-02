@@ -119,6 +119,10 @@
 		</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 		<managed-property>
+			<property-name>apiVersion</property-name>
+			<value>%{connections.apiVersion}</value>
+		</managed-property>
+		<managed-property>
 			<property-name>url</property-name>
 			<value>%{connections.url}</value>
 		</managed-property>

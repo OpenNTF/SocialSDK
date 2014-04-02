@@ -120,10 +120,15 @@
         var jsDiv = document.getElementById("jsContents"); 
         var cssDiv = document.getElementById("cssContents");
 
-        var html = htmlDiv.firstChild && htmlDiv.firstChild.CodeMirror ? htmlDiv.firstChild.CodeMirror.getValue() : htmlDiv.innerHTML;
-        var js = jsDiv.firstChild && jsDiv.firstChild.CodeMirror ? jsDiv.firstChild.CodeMirror.getValue() : jsDiv.textContent;
-        var css = cssDiv.firstChild && cssDiv.firstChild.CodeMirror ? cssDiv.firstChild.CodeMirror.getValue() : cssDiv.textContent;
+        var html = htmlDiv.firstChild && htmlDiv.firstChild.CodeMirror ? htmlDiv.firstChild.CodeMirror.getValue() : htmlDiv.innerText;
+        
+        var js = jsDiv.firstChild && jsDiv.firstChild.CodeMirror ? jsDiv.firstChild.CodeMirror.getValue() : jsDiv.innerText;
+        var css = cssDiv.firstChild && cssDiv.firstChild.CodeMirror ? cssDiv.firstChild.CodeMirror.getValue() : cssDiv.innerText;
 
+        $.trim(html);
+        $.trim(js);
+        $.trim(css);
+        
         var postData = {
             snippet: getSnippet(),
             debug: debug,

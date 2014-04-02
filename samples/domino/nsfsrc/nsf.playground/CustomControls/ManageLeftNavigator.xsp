@@ -60,6 +60,10 @@
 			<xe:pageTreeNode page="ManageOptions" label="Customization"
 				selection="/Manage/Options">
 			</xe:pageTreeNode>
+			<xe:separatorTreeNode></xe:separatorTreeNode>
+			<xe:pageTreeNode page="ManageAllDocuments" label="All Documents"
+				selection="/Manage/AllDocuments">
+			</xe:pageTreeNode>
 		</xe:this.treeNodes>
 	</xe:navigator>
 </xp:view>

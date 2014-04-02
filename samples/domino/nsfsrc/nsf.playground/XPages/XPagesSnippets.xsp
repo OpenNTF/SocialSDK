@@ -233,7 +233,7 @@ return o;]]></xe:this.script>
 			dojo.byId(pageGlobal.cbEnv).value = obj.env;
 		}
 		if(obj.snippet) {
-			setTimeout(function() {loadSnippet(obj.snippet)});
+			setTimeout(function() {loadSnippet(obj.snippet)}); // Make sure the tree is loaded
 		} 
 	} else {
 		createSnippet();

@@ -11,6 +11,7 @@ import lotus.domino.Item;
 import lotus.domino.NotesException;
 import lotus.domino.View;
 
+import com.ibm.commons.util.StringUtil;
 import com.ibm.xsp.model.domino.DominoUtils;
 
 import nsf.playground.impexp.JsonExport;
@@ -29,7 +30,7 @@ public class PreviewExportHandler extends PreviewHandler {
 			resp.setContentType("application/zip");
 			OutputStream os = resp.getOutputStream();
 			try {
-				ExportTarget tgt = new JsonExport.ZipExportTarget(os,false);
+				ExportTarget tgt = new JsonExport.ZipExportTarget(os,false,true);
 				JsonExport exp = new JsonExport(tgt);
 				exp.setItemFilter(new JsonImportExport.ItemFilter() {
 					@Override
@@ -42,7 +43,12 @@ public class PreviewExportHandler extends PreviewHandler {
 						return true;
 					}
 				});
-				View view = DominoUtils.getCurrentDatabase().getView("AllSnippetsById");
+				String viewName = "AllSnippetsById";
+				if(StringUtil.equals(key,"alldocs")) {
+					viewName = "AllDocs";
+					key = null;
+				}
+				View view = DominoUtils.getCurrentDatabase().getView(viewName);
 				try {
 					exp.exportDocuments(view,key);
 				} finally {

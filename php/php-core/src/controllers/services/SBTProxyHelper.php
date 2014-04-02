@@ -73,6 +73,19 @@ class SBTProxyHelper extends BaseController
 		return $forwardHeader;
 	}
 	
+	public function cleanURL($url, $server) {
+		$url = str_replace('https', '', $url);
+		$url = str_replace('http', '', $url);
+		$url = str_replace($server, '', $url);
+		
+		$server = str_replace('https://', '', $server);
+		$server = str_replace('http://', '', $server);
+		$url = str_replace($server, '', $url);
+		$url = str_replace('//', '', $url);
+		
+		return $url;
+	}
+	
 	/**
 	 * Get $_REQUEST options to forward.
 	 * 
@@ -147,7 +160,7 @@ class SBTProxyHelper extends BaseController
 	 *
 	 * @param unknown $response
 	 */
-	public function outputResponse($response, $url, $containsServerURL) {
+	public function outputResponse($response, $url) {
 		$store = SBTCredentialStore::getInstance();
 	
 		if ($response->getStatusCode() == 200) {
@@ -162,8 +175,7 @@ class SBTProxyHelper extends BaseController
 				header(':', true, $response->getStatusCode());
 				header('X-PHP-Response-Code: ' . $response->getStatusCode(), true, $response->getStatusCode());
 	
-				if ( (isset($_REQUEST['actionType']) && $_REQUEST['actionType'] == 'download') || (strpos($url, '/media/') != false && strpos($url, '/document/') != false
-						&& $containsServerURL) ) {
+				if ( (isset($_REQUEST['actionType']) && $_REQUEST['actionType'] == 'download') || (strpos($url, '/media/') != false && strpos($url, '/document/') != false) ) {
 					$headers = $response->getHeaders();
 					header('Content-Description: File Transfer');
 					header('Content-Type: application/octet-stream');

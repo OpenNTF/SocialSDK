@@ -3,7 +3,7 @@ require(["sbt/connections/BlogService", "sbt/dom", "sbt/json"],
         var blogService = new BlogService(); 
         console.log("blogService blogService "+blogService);
         try{
-    	blogService.getAllBlogs({ ps: 1 }).then(   //getting first blog by setting page size to 1
+    	blogService.getMyBlogs({ ps: 1 }).then(   //getting first blog by setting page size to 1
             function(blogs){
             	return blogService.getBlog(blogs[0].getBlogUuid());
             }

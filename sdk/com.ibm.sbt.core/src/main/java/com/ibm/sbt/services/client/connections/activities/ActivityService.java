@@ -174,7 +174,6 @@ public class ActivityService extends BaseService {
 	/**
 	 * Get a category document that lists the tags that have been assigned to all of the activities hosted by the Activities application. 
 	 * 
-	 * @param parameters
 	 * @return
 	 */
 	public EntityList<Tag> getActivityTags() throws ClientServicesException {
@@ -190,6 +189,42 @@ public class ActivityService extends BaseService {
 	public EntityList<Tag> getActivityTags(Map<String, String> parameters) throws ClientServicesException {
 		String requestUrl = ActivityUrls.ACTIVITY_TAGS.format(endpoint);
 		return getTagEntityList(requestUrl, parameters);
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public EntityList<Category> getActivityCategories() throws ClientServicesException {
+		return getActivityCategories(null);
+	}
+
+	/**
+	 * 
+	 * @param parameters
+	 * @return
+	 */
+	public EntityList<Category> getActivityCategories(Map<String, String> parameters) throws ClientServicesException {
+		String requestUrl = ActivityUrls.ACTIVITY_CATEGORIES.format(endpoint);
+		return getCategoryEntityList(requestUrl, parameters);
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public EntityList<ActivityNode> getActivityNodeDescendants(String activityNodeUuid) throws ClientServicesException {
+		return getActivityNodeDescendants(activityNodeUuid, null);
+	}
+
+	/**
+	 * 
+	 * @param parameters
+	 * @return
+	 */
+	public EntityList<ActivityNode> getActivityNodeDescendants(String activityNodeUuid, Map<String, String> parameters) throws ClientServicesException {
+		String requestUrl = ActivityUrls.ACTIVITY_DESCENDANTS.format(endpoint, activityNodeUuid);
+		return getActivityNodeEntityList(requestUrl, parameters);
 	}
 	
 	//------------------------------------------------------------------------------------------------------------------
@@ -880,9 +915,25 @@ public class ActivityService extends BaseService {
 		}
 	}
 	
+	protected EntityList<ActivityNode> getActivityNodeEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
+		try {
+			return (EntityList<ActivityNode>)getEntities(requestUrl, getParameters(parameters), getActivityNodeFeedHandler());
+		} catch (IOException e) {
+			throw new ClientServicesException(e);
+		}
+	}
+	
 	protected EntityList<Tag> getTagEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
 		try {
 			return (EntityList<Tag>)getEntities(requestUrl, getParameters(parameters), getTagFeedHandler());
+		} catch (IOException e) {
+			throw new ClientServicesException(e);
+		}
+	}
+	
+	protected EntityList<Category> getCategoryEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
+		try {
+			return (EntityList<Category>)getEntities(requestUrl, getParameters(parameters), getCategoryFeedHandler());
 		} catch (IOException e) {
 			throw new ClientServicesException(e);
 		}
@@ -924,6 +975,16 @@ public class ActivityService extends BaseService {
 			protected Tag newEntity(BaseService service, Node node) {
 				XPathExpression xpath = (node instanceof Document) ? (XPathExpression)AtomXPath.singleCategory.getPath() : null;
 				return new Tag(service, node, ConnectionsConstants.nameSpaceCtx, xpath);
+			}
+		};
+	}
+		
+	protected IFeedHandler<Category> getCategoryFeedHandler() {
+		return new CategoryFeedHandler<Category>(this) {
+			@Override
+			protected Category newEntity(BaseService service, Node node) {
+				XPathExpression xpath = (node instanceof Document) ? (XPathExpression)AtomXPath.singleCategory.getPath() : null;
+				return new Category(service, node, ConnectionsConstants.nameSpaceCtx, xpath);
 			}
 		};
 	}

@@ -60,6 +60,7 @@ public enum ActivityXPath implements FieldEntry {
 	assignedto("./snx:assignedto"),
 	attr_label("./@label"),
 	attr_term("./@term"),	
+	attr_scheme("./@scheme"),	
 	;
 	
 	private final XPathExpression path;

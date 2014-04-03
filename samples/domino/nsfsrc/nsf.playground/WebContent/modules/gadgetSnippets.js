@@ -6,10 +6,10 @@ require(['dojo/on', 'dojo/ready', 'playground/widgets/gadgetarea/PlaygroundGadge
         		 event, query, securityToken, hash) {
 	
 	//TODO this is duplicated :(
-	function updateNavSelection() {
+	function updateNavSelection(id) {
 		// When a tree is created
 		if(dojo.byId(pageGlobal.snippetsTree)) {
-			treeSelectId(pageGlobal.snippetsTree,pageGlobal.id);
+			treeSelectId(pageGlobal.snippetsTree,id||pageGlobal.id);
 		}
     }
 	

@@ -283,7 +283,9 @@ define(
 		 * @returns {String} download URL
 		 */
 		getDownloadUrl : function() {
-			return this.getAsString("downloadUrl");
+			var url = this.getAsString("downloadUrl");
+			var endpoint = this.service.endpoint;
+			return endpoint.proxy.rewriteUrl(endpoint.baseUrl, url, endpoint.proxyPath);
 		},
 		/**
 		 * Returns the type

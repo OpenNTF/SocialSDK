@@ -30,6 +30,11 @@ import lotus.domino.NotesException;
 public abstract class JsonImportExport {
 	
 	public static final String DOCUMENT_EXTENSION = ".json";
+	public static final String FLAGS_FIELD = "__field_flags__";
+
+	public static final String FLAGS_NAMES 		= "Names";
+	public static final String FLAGS_READERS 	= "Readers";
+	public static final String FLAGS_AUTHORS 	= "Authros";
 	
 	public interface DocumentFilter {
 		public boolean accept(Document doc) throws NotesException;

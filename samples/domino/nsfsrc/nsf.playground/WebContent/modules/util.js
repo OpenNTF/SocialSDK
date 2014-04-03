@@ -25,10 +25,10 @@ define(['dojo/dom', 'dijit/registry'], function(dom, registry) {
 		 * 
 		 * @memberof module:playground/util#
 		 */
-		updateNavSelection : function() {
+		updateNavSelection : function(id) {
 			// When a tree is created
 			if(dom.byId(pageGlobal.snippetsTree)) {
-				treeSelectId(pageGlobal.snippetsTree,pageGlobal.id);
+				treeSelectId(pageGlobal.snippetsTree,id||pageGlobal.id);
 			}
 		},
 		

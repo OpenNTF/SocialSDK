@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:this.data>
+		<xp:dominoDocument var="document1" formName="JavaScriptSnippet">
+			<xp:this.postNewDocument><![CDATA[#{javascript:document1.replaceItemValue("Author",userBean.commonName)}]]></xp:this.postNewDocument>
+			<xp:this.querySaveDocument><![CDATA[#{javascript:return snippetBean.querySave(document1)}]]></xp:this.querySaveDocument>
+		</xp:dominoDocument>
+	</xp:this.data>
+	<xe:formTable id="formTable2" formTitle="JavaScript Snippet"
+		formDescription="Enter here the data for your code snippet">
+		<xp:this.facets>
+			<xp:panel xp:key="footer" id="panel3">
+				<xp:button value="Back" id="button2">
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="complete" immediate="true" save="false">
+						<xp:this.action>
+							<xe:changeDynamicContentAction
+								facetName="view">
+							</xe:changeDynamicContentAction>
+						</xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
+			</xp:panel>
+		</xp:this.facets>
+		<xe:formRow id="formRow1" labelPosition="none">
+			<xe:dumpObject id="dumpObject1" title="document"
+				value="#{document1}" />
+		</xe:formRow>
+	</xe:formTable>
+</xp:view>

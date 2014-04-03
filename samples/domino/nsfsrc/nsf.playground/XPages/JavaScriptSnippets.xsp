@@ -325,7 +325,7 @@ if(doc) {
 			dojo.byId(pageGlobal.cbLibrary).value = obj.jsLib;
 		}
 		if(obj.snippet) {
-			setTimeout(function() {loadSnippet(obj.snippet)});
+			setTimeout(function() {loadSnippet(obj.snippet)}); // Make sure the tree is loaded
 		} 
 	} else {
 		createSnippet();

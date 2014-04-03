@@ -26,6 +26,7 @@
 
 	<xp:scriptBlock>
 		<xp:this.value><![CDATA[var pageGlobal = {
+	snippetsTree:	'assetsTree',
 	dynPanel:		'#{id:dynp}',
 	cbEnv:			'#{id:cbEnv}',
 	borderContainer:'#{id:djTabContainer1}'
@@ -130,7 +131,7 @@ return apiBean.loadAPI(e);
 	if(dojo.hash()) {
 		var obj = dojo.queryToObject(dojo.hash());
 		if(obj.api) {
-			loadAPI(obj.api);
+			setTimeout(function() {loadAPI(obj.api)});
 		} 
 	} else {
 		emptyAPI();

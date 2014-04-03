@@ -30,7 +30,7 @@ import com.ibm.sbt.services.client.base.JsonEntity;
 public class ProvisioningPendingTest extends BaseBssTest {
 
 	@Test
-    public void testEntitleSubscriber() {
+    public void testProvisioningPending() {
     	try {
     		// Step 1. Create customer
     		String customerId = registerCustomer();

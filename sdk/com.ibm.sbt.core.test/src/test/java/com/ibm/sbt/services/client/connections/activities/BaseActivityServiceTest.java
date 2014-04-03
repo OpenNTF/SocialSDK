@@ -97,25 +97,50 @@ public class BaseActivityServiceTest extends BaseUnitTest {
     }
     
     protected Activity createActivity() throws ClientServicesException {
+		return createActivity(createActivityTitle());
+    }
+        	
+    protected Activity createActivity(String title) throws ClientServicesException {
     	List<String> tags = new ArrayList<String>();
     	tags.add("personal");
     	tags.add("unit_test");
     	tags.add("ibmsbt");
     	
 		activity = new Activity();
-		activity.setTitle(createActivityTitle());
+		activity.setTitle(title);
 		activity.setTags(tags);
 		return activityService.createActivity(activity);
     }
         	
     protected ActivityNode createActivityNode() throws ClientServicesException {
+		return createActivityNode(createActivityNodeTitle());
+    }
+        	
+    protected ActivityNode createActivityNode(String title) throws ClientServicesException {
 		activity = new Activity();
 		activity.setTitle(createActivityTitle());
 		activity = activityService.createActivity(activity);
 		
 		ActivityNode activityNode = new ActivityNode();
 		activityNode.setActivityUuid(activity.getActivityUuid());
-		activityNode.setTitle(createActivityNodeTitle());
+		activityNode.setTitle(title);
+		return activityService.createActivityNode(activityNode);
+    }
+        	
+    protected ActivityNode createActivityNode(String activityUuid, String title) throws ClientServicesException {
+    	List<String> tags = new ArrayList<String>();
+    	tags.add("personal");
+    	tags.add("unit_test");
+    	tags.add("ibmsbt");
+    	
+		return createActivityNode(activityUuid, title, tags);
+    }
+        	
+    protected ActivityNode createActivityNode(String activityUuid, String title, List<String> tags) throws ClientServicesException {
+		ActivityNode activityNode = new ActivityNode();
+		activityNode.setActivityUuid(activityUuid);
+		activityNode.setTitle(title);
+		activityNode.setTags(tags);
 		return activityService.createActivityNode(activityNode);
     }
         	

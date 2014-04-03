@@ -70,6 +70,10 @@ public class BaseBssTest {
 	    	String user = System.getProperty("UserName");
 	    	String password = System.getProperty("Password");
 	    	
+	    	if (url == null || user == null || password == null) {
+	    		throw new IllegalStateException("Please set VM arguments for: -DServerUrl=https://apps.na.collabservtest.lotus.com -DUserName=<VSR account user> -DPassword=<VSR account password>");
+	    	}
+	    	
 			basicEndpoint = new BasicEndpoint();
 			basicEndpoint.setUrl(url);
 			basicEndpoint.setForceTrustSSLCertificate(true);

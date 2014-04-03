@@ -36,6 +36,7 @@ public enum ActivityUrls {
 	ALL_ACTIVITIES("{0}/service/atom2/everything"), //	Getting a feed of all activities
 	TODO_ACTIVITIES("{0}/service/atom2/todos"), //	Getting a feed of entries in the to-do list
 	ACTIVITY_TAGS("{0}/service/atom2/tags"), //	Getting a list of the tags assigned to all activities
+	ACTIVITY_CATEGORIES("{0}/service/atom2/categories"), //	Getting a list of the categories assigned to this activity
 	ACTIVITY_TEMPLATES("{0}/service/atom2/entrytemplates?activityUuid={1}"), //	Retrieves a feed of entry templates
 	THRASHED_ACTIVITIES("{0}/service/atom2/trash"), //	Retrieves a feed of the activities and entries in the trash
 	ACTIVITY("{0}/service/atom2/activity?activityUuid={1}"), // Retrieving an Activity entry and creating an activity node
@@ -43,6 +44,7 @@ public enum ActivityUrls {
 	THRASHED_ACTIVITY_NODE("{0}/service/atom2/trashednode?activityNodeUuid={1}"), // Restoring activity nodes programmatically
 	ACTIVITY_ACL("{0}/service/atom2/acl?activityUuid={1}"), // Adding an activity member programmatically
 	ACTIVITY_MEMBER("{0}/service/atom2/acl?activityUuid={1}&memberid={2}"), //	Retrieve, update and delete an activity member programmatically
+	ACTIVITY_DESCENDANTS("{0}/service/atom2/descendants?nodeUuid={1}"), // Getting a feed of the Activity descendants
 	;
 	
 	private String urlPattern;

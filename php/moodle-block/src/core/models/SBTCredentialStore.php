@@ -230,8 +230,6 @@ class SBTCredentialStore {
 			} else {
 				return;
 			}
-			
-			syslog(LOG_INFO, "store >>>>>>>>>> " . $uid);
 
 			$record = $DB->get_record(SESSION_NAME, array('user_id' => intval($uid)));
 			if ($record == null) {
@@ -273,8 +271,6 @@ class SBTCredentialStore {
 		} else {
 			return;
 		}
-		
-		syslog(LOG_INFO, ">>>>>>>>>> " . $uid);
 
 		$record = $DB->get_record(SESSION_NAME, array('user_id' => intval($uid)));
 

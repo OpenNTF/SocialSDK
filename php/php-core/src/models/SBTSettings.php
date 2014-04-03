@@ -24,32 +24,51 @@
 
 
 class SBTSettings {
+	// Misc SDK settings
+	private $sdkDeployURL;
+	
+	private $jsLibrary;
+	
+	// The settings - keyed by endpoint name
+	private $_settings = array();
 	
 	
 	/**
 	 * Constructor.
 	 */
 	function __construct() {
+		$this->_settings['SmartCloud']['name'] 					= "SmartCloud";
+		$this->_settings['SmartCloud']['url'] 					= 'https://apps.na.collabserv.com';
+		$this->_settings['SmartCloud']['consumer_key'] 			= '***REMOVED***';
+		$this->_settings['SmartCloud']['consumer_secret']		= '***REMOVED***';
+		$this->_settings['SmartCloud']['request_token_url']		= 'https://apps.na.collabserv.com/manage/oauth/getRequestToken';
+		$this->_settings['SmartCloud']['authorization_url']		= 'https://apps.na.collabserv.com/manage/oauth/authorizeToken';
+		$this->_settings['SmartCloud']['access_token_url']		= 'https://apps.na.collabserv.com/manage/oauth/getAccessToken';
+		$this->_settings['SmartCloud']['authentication_method'] = "basic"; //basic or oauth1
+		$this->_settings['SmartCloud']['force_ssl_trust']		= true;
+		$this->_settings['SmartCloud']['basic_auth_method']		= 'global';
+		$this->_settings['SmartCloud']['basic_auth_password']	= 'Password65';
+		$this->_settings['SmartCloud']['basic_auth_username']	= 'frankadams@try.lotuslive.com';
 	}
 	
-	// TODO: Implement for standalone samples
 	
 	/**
 	 * Returns a list of available endpoints.
-	 * 
+	 *
 	 * @return array:		Array of available endpoints.
 	 */
 	public function getEndpoints() {
-		return array();
+		return $this->_settings;
 	}
+	
 	
 	/**
 	 * Returns the endpoint URL.
-	 * 
+	 *
 	 * @return
 	 */
 	public function getURL($endpoint = "connections") {
-		return null;
+		return $this->_settings[$endpoint]['url'];
 	}
 	
 	/**
@@ -58,7 +77,7 @@ class SBTSettings {
 	 * @return
 	 */
 	public function getFormBasedAuthPage($endpoint = "connections") {
-		return null;
+		return $this->_settings[$endpoint]['form_auth_page'];
 	}
 	
 	/**
@@ -67,186 +86,186 @@ class SBTSettings {
 	 * @return
 	 */
 	public function getFormBasedAuthCookieCache($endpoint = "connections") {
-		return null;
-	}
+			return $this->_settings[$endpoint]['form_auth_cookie_cache'];
+		}
 	
-	/**
-	 * Returns the auth page used for form-based authentication login page url.
-	 *
-	 * @return
-	 */
-	public function getFormBasedAuthLoginPage($endpoint = "connections") {
-		return null;
-	}
+		/**
+		 * Returns the auth page used for form-based authentication login page url.
+		 *
+		 * @return
+		 */
+		public function getFormBasedAuthLoginPage($endpoint = "connections") {
+			return $this->_settings[$endpoint]['form_auth_login_page'];
+		}
 	
-	/**
-	 * Returns the consumer key.
-	 *
-	 * @return
-	 */
-	public function getConsumerKey($endpoint = "connections") {
-		return null;
-	}
+		/**
+		 * Returns the consumer key.
+		 *
+		 * @return
+		 */
+		public function getConsumerKey($endpoint = "connections") {
+			return $this->_settings[$endpoint]['consumer_key'];
+		}
 	
-	/**
-	 * Returns the consumer secret.
-	 *
-	 * @return
-	 */
-	public function getConsumerSecret($endpoint = "connections") {
-		return null;
-	}
+		/**
+		 * Returns the consumer secret.
+		 *
+		 * @return
+		 */
+		public function getConsumerSecret($endpoint = "connections") {
+			return $this->_settings[$endpoint]['consumer_secret'];
+		}
 	
-	/**
-	 * Returns the OAuth 2.0 client secret.
-	 *
-	 * @return
-	 */
-	public function getClientSecret($endpoint = "connections") {
-		return null;
-	}
+		/**
+		 * Returns the OAuth 2.0 client secret.
+		 *
+		 * @return
+		 */
+		public function getClientSecret($endpoint = "connections") {
+			return $this->_settings[$endpoint]['client_secret'];
+		}
 	
-	/**
-	 * Returns the OAuth 2.0 client ID.
-	 *
-	 * @return
-	 */
-	public function getClientID($endpoint = "connections") {
-		return null;
-	}
+		/**
+		 * Returns the OAuth 2.0 client ID.
+		 *
+		 * @return
+		 */
+		public function getClientId($endpoint = "connections") {
+			return $this->_settings[$endpoint]['client_id'];
+		}
 	
-	/**
-	 * Returns the request token URL.
-	 *
-	 * @return
-	 */
-	public function getRequestTokenURL($endpoint = "connections") {
-		return null;
-	}
+		/**
+		 * Returns the request token URL.
+		 *
+		 * @return
+		 */
+		public function getRequestTokenURL($endpoint = "connections") {
+			return $this->_settings[$endpoint]['request_token_url'];
+		}
 	
-	/**
-	 * Returns true if force ssl trust on the select endpoint is enabled; false if not.
-	 *
-	 * @return
-	 */
-	public function forceSSLTrust($endpoint = "connections") {
-		return null;
-	}
+		/**
+		 * Returns true if force ssl trust on the select endpoint is enabled; false if not.
+		 *
+		 * @return
+		 */
+		public function forceSSLTrust($endpoint = "connections") {
+			return $this->_settings[$endpoint]['force_ssl_trust'];
+		}
 	
-	/**
-	 * Returns the authorization URL.
-	 *
-	 * @return
-	 */
-	public function getAuthorizationURL($endpoint = "connections") {
-		return null;
-	}
+		/**
+		 * Returns the authorization URL.
+		 *
+		 * @return
+		 */
+		public function getAuthorizationURL($endpoint = "connections") {
+			return $this->_settings[$endpoint]['authorization_url'];
+		}
 	
-	/**
-	 * Returns the API version.
-	 *
-	 * @return
-	 */
-	public function getAPIVersion($endpoint = "connections") {
-		return null;
-	}
+		/**
+		 * Returns the API version.
+		 *
+		 * @return
+		 */
+		public function getAPIVersion($endpoint = "connections") {
+			return $this->_settings[$endpoint]['api_version'];
+		}
 	
-	/**
-	 * Returns the access token URL.
-	 *
-	 * @return
-	 */
-	public function getAccessTokenURL($endpoint = "connections") {
-		return null;
-	}
+		/**
+		 * Returns the access token URL.
+		 *
+		 * @return
+		 */
+		public function getAccessTokenURL($endpoint = "connections") {
+			return $this->_settings[$endpoint]['access_token_url'];
+		}
 	
-	/**
-	 * Returns the authentication method
-	 *
-	 * @return
-	 */
-	public function getAuthenticationMethod($endpoint = "connections") {
-		return null;
-	}
+		/**
+		 * Returns the authentication method
+		 *
+		 * @return
+		 */
+		public function getAuthenticationMethod($endpoint = "connections") {
+			return $this->_settings[$endpoint]['authentication_method'];
+		}
 	
-	/**
-	 * Returns the OAuth 2.0 callback URL
-	 *
-	 * @return
-	 */
-	public function getOAuth2CallbackURL($endpoint = "connections") {
-		return null;
-	}
+		/**
+		 * Returns the OAuth 2.0 callback URL
+		 *
+		 * @return
+		 */
+		public function getOAuth2CallbackURL($endpoint = "connections") {
+			return $this->_settings[$endpoint]['oauth2_callback_url'];
+		}
 	
-	/**
-	 * Returns the URL that points to where the SDK is deployed.
-	 *
-	 * @return
-	 */
-	public function getSDKDeployURL($endpoint = "connections") {
-		return null;
-	}
+		/**
+		 * Returns the URL that points to where the SDK is deployed.
+		 *
+		 * @return
+		 */
+		public function getSDKDeployURL($endpoint = "connections") {
+			return $this->sdkDeployURL;
+		}
 	
-	/**
-	 * Returns the endpoint name.
-	 *
-	 * @return
-	 */
-	public function getName($endpoint = "connections") {
-		return null;
-	}
+		/**
+		 * Returns the endpoint name.
+		 *
+		 * @return
+		 */
+		public function getName($endpoint = "connections") {
+			return $this->_settings[$endpoint]['name'];
+		}
 	
-	/**
-	 * Returns the username used for basic authentication.
-	 *
-	 * @return
-	 */
-	public function getBasicAuthUsername($endpoint = "connections") {
-		return null;
-	}
+		/**
+		 * Returns the username used for basic authentication.
+		 *
+		 * @return
+		 */
+		public function getBasicAuthUsername($endpoint = "connections") {
+			return $this->_settings[$endpoint]['basic_auth_username'];
+		}
 	
-	/**
-	 * Returns the server type.
-	 *
-	 * @return
-	 */
-	public function getServerType($endpoint = "connections") {
-		return null;
-	}
+		/**
+		 * Returns the server type.
+		 *
+		 * @return
+		 */
+		public function getServerType($endpoint = "connections") {
+			return $this->_settings[$endpoint]['server_type'];
+		}
 	
-	/**
-	 * Returns true if client access is allowed; false if not.
-	 *
-	 * @return
-	 */
-	public function allowClientAccess($endpoint = "connections") {
-		return null;
-	}
+		/**
+		 * Returns true if client access is allowed; false if not.
+		 *
+		 * @return
+		 */
+		public function allowClientAccess($endpoint = "connections") {
+			return $this->_settings[$endpoint]['allow_client_access'];
+		}
 	
-	/**
-	 * Returns the password used for basic authentication.
-	 *
-	 * @return
-	 */
-	public function getBasicAuthPassword($endpoint = "connections") {
-		return null;
-	}
+		/**
+		 * Returns the password used for basic authentication.
+		 *
+		 * @return
+		 */
+		public function getBasicAuthPassword($endpoint = "connections") {
+			return $this->_settings[$endpoint]['basic_auth_password'];
+		}
 	
-	/**
-	 * Returns the authentication method used for basic authentication.
-	 *
-	 * @return string		global|profile|prompt
-	 */
-	public function getBasicAuthMethod($endpoint = "connections") {
-		return null;
-	}
+		/**
+		 * Returns the authentication method used for basic authentication.
+		 *
+		 * @return string		global|profile|prompt
+		 */
+		public function getBasicAuthMethod($endpoint = "connections") {
+			return $this->_settings[$endpoint]['basic_auth_method'];
+		}
 	
-	/**
-	 * Returns the JavaScript library to use
-	 *
-	 * @return string		String indicating which library to use.
-	 */
-	public function getJSLibrary($endpoint = "connections") {
-		return null;
+		/**
+		 * Returns the JavaScript library to use
+		 *
+		 * @return string		String indicating which library to use.
+		 */
+		public function getJSLibrary($endpoint = "connections") {
+			return $this->jsLibrary;
+		}
 	}
-}

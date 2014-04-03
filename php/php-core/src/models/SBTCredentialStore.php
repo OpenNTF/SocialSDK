@@ -65,19 +65,13 @@ if (!defined('OAUTH_REQUEST_TOKEN_SECRET')) {
  * @author Benjamin Jakobus
  */
 class SBTCredentialStore {
-	
+
 	// Session name
 	private $sessionName;
 	
-	// Encryption key
-	private $key;
-	
-	// Initialization vector
-	private $iv;
-	
-	private static $uid;
-	
 	private static $instance = null;
+	
+	private $store = array();
 	
 	public static function getInstance() {
 		if (self::$instance == null) {
@@ -86,34 +80,34 @@ class SBTCredentialStore {
 		return self::$instance;
 	}
 	
-	// TODO: Implement this class for standalone samples
-	
 	/**
 	 * Constructor.
 	 */
 	private function __construct() {
+
 	}
+
 	
 	/**
 	 * Stores a value in the credential store.
-	 * 
+	 *
 	 * @param string $skey
 	 * @param string $value
 	 */
 	private function _store($skey, $endpoint, $value) {
-		// TODO
+		$this->store[$endpoint][$skey] = $value;
 	}
 	
 	/**
 	 * Returns a value from the credentials store
-	 * 
+	 *
 	 * @param string $skey
 	 * @param string $endpoint
-	 * 
-	 * @return 
+	 *
+	 * @return
 	 */
 	private function _get($skey, $endpoint) {
-		// TODO
+		return (isset($this->store[$endpoint][$skey]) ? $this->store[$endpoint][$skey] : null);
 	}
 	/**
 	 * Deletes an entry from the credentials store.
@@ -121,7 +115,7 @@ class SBTCredentialStore {
 	 * @param string $key
 	 */
 	private function _delete($skey, $endpoint) {
-		// TODO
+		unset($this->store[$endpoint][$skey]);
 	}
 	
 	/**
@@ -155,7 +149,7 @@ class SBTCredentialStore {
 		$token = $this->_get(REQUEST_TOKEN, $endpoint);
 		return $token;
 	}
-
+	
 	/**
 	 * Returns a token.
 	 *
@@ -168,7 +162,7 @@ class SBTCredentialStore {
 	
 	/**
 	 * Deletes the OAuth tokens.
-	 * 
+	 *
 	 * @param string $endpoint The endpoint associated with the tokens.
 	 */
 	public function deleteTokens($endpoint = "connections") {
@@ -183,7 +177,7 @@ class SBTCredentialStore {
 	
 	/**
 	 * Stores the OAuth access token in the database.
-	 * 
+	 *
 	 * @param string $token			The OAuth access token.
 	 * @param string $endpoint The endpoint associated with this token.
 	 */
@@ -228,7 +222,7 @@ class SBTCredentialStore {
 	 * Stores the basic authentication username in the database.
 	 *
 	 * @param string $username		The username used to perform basic authentication.
-	 * @param string $endpoint 
+	 * @param string $endpoint
 	 */
 	public function storeBasicAuthUsername($username, $endpoint = "connections") {
 		$this->_store(BASIC_AUTH_USERNAME, $endpoint, $username);
@@ -236,8 +230,8 @@ class SBTCredentialStore {
 	
 	/**
 	 * Returns basic auth username.
-	 * 
-	 * @param string $endpoint 
+	 *
+	 * @param string $endpoint
 	 * @return string 		Basic auth username.
 	 */
 	public function getBasicAuthUsername($endpoint = "connections") {
@@ -255,9 +249,9 @@ class SBTCredentialStore {
 	
 	/**
 	 * Returns basic auth username.
-	 * 
+	 *
 	 * @param string $endpoint The endpoint associated with this token.
-	 * @return string 		
+	 * @return string
 	 */
 	public function getRequestTokenSecret($endpoint = "connections") {
 		return $this->_get(OAUTH_REQUEST_TOKEN_SECRET, $endpoint);
@@ -265,9 +259,9 @@ class SBTCredentialStore {
 	
 	/**
 	 * Stores the basic authentication password in the database.
-	 * 
+	 *
 	 * @param string $password		The password used to perform basic authentication.
-	 * @param string $endpoint 
+	 * @param string $endpoint
 	 */
 	public function storeBasicAuthPassword($password, $endpoint = "connections") {
 		$this->_store(BASIC_AUTH_PASSWORD, $endpoint, $password);
@@ -285,7 +279,7 @@ class SBTCredentialStore {
 	
 	/**
 	 * Deletes stored basic authentication credentials.
-	 * 
+	 *
 	 * @param string $endpoint The endpoint associated with the credentials to delete.
 	 */
 	public function deleteBasicAuthCredentials($endpoint = "connections") {
@@ -315,26 +309,4 @@ class SBTCredentialStore {
 	public function getTokenType($endpoint = "connections") {
 		return $this->_get(TOKEN_TYPE, $endpoint);
 	}
-	
-	
-	/**
-	 * Generates a random string of given length.
-	 *
-	 * @param int $length		Desired length of the string.
-	 *
-	 * @return string			Random string.
-	 */
-	private function gen_string($length) {
-		return null;
-	}
-	
-	private function _encrypt($key, $data, $iv){
-		return null;
-	}
-	
-	private function _decrypt($key, $encryptedData, $iv) {
-		return null;
-	}
-	
-
 }

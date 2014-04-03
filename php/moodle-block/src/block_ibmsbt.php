@@ -121,6 +121,7 @@ class block_ibmsbt extends block_base {
 			if (($settings->getAuthenticationMethod($this->config->endpoint) == 'basic' && $store->getBasicAuthUsername($this->config->endpoint) != null 
 				&& $store->getBasicAuthPassword($this->config->endpoint) != null) || ($settings->getAuthenticationMethod($this->config->endpoint) == 'oauth1' && $store->getRequestToken($this->config->endpoint) != null)
 				|| ($settings->getAuthenticationMethod($this->config->endpoint) == 'basic' && $settings->getBasicAuthMethod($this->config->endpoint) == 'global')
+				|| ($settings->getAuthenticationMethod($this->config->endpoint) == 'basic' && $settings->getBasicAuthMethod($this->config->endpoint) == 'profile' && $store->getBasicAuthPassword($this->config->endpoint) != null)
 				|| ($settings->getAuthenticationMethod($this->config->endpoint) == 'oauth2' && $store->getOAuthAccessToken($this->config->endpoint) != null)) {
 				require $this->config->plugin;
 				
@@ -131,7 +132,8 @@ class block_ibmsbt extends block_base {
 				
 			}
 
-			if ($settings->getAuthenticationMethod($this->config->endpoint) == 'basic' && $settings->getBasicAuthMethod($this->config->endpoint) == 'prompt' 
+			if ($settings->getAuthenticationMethod($this->config->endpoint) == 'basic' && ($settings->getBasicAuthMethod($this->config->endpoint) == 'prompt' 
+					|| $settings->getBasicAuthMethod($this->config->endpoint) == 'profile' )
 					&& $store->getBasicAuthUsername($this->config->endpoint) == null ) {
 				if (!isloggedin()) {
 					echo "This widget uses single-sign on. Please log into Moodle.";

@@ -18,9 +18,9 @@ package nsf.playground.library;
 
 import java.util.List;
 
+import nsf.playground.extension.PlaygroundExtensionFactory;
 import nsf.playground.extension.PlaygroundFragment;
 
-import com.ibm.sbt.playground.extension.PlaygroundExtensionFactory;
 import com.ibm.xsp.library.AbstractXspLibrary;
 
 

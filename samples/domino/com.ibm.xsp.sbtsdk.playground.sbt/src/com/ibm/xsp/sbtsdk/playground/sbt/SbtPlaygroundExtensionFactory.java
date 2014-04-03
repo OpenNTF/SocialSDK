@@ -17,9 +17,9 @@ package com.ibm.xsp.sbtsdk.playground.sbt;
 
 import nsf.playground.extension.Endpoints;
 import nsf.playground.extension.ImportOptions;
+import nsf.playground.extension.PlaygroundExtensionFactory;
 import nsf.playground.extension.PlaygroundFragment;
 
-import com.ibm.sbt.playground.extension.PlaygroundExtensionFactory;
 import com.ibm.xsp.sbtsdk.playground.sbt.extension.SbtEndpoints;
 import com.ibm.xsp.sbtsdk.playground.sbt.extension.SbtFragment;
 import com.ibm.xsp.sbtsdk.playground.sbt.extension.SbtImportOptions;

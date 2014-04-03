@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 import nsf.playground.beans.DataAccessBean;
 import nsf.playground.beans.OptionsBean;
 import nsf.playground.environments.PlaygroundEnvironment;
+import nsf.playground.extension.JavaScriptPreviewExtension;
+import nsf.playground.extension.PlaygroundExtensionFactory;
 
 import com.ibm.commons.runtime.util.ParameterProcessor;
 import com.ibm.commons.runtime.util.UrlUtil;
@@ -27,8 +29,6 @@ import com.ibm.commons.util.io.json.JsonJavaFactory;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.commons.util.io.json.JsonObject;
 import com.ibm.commons.util.io.json.JsonParser;
-import com.ibm.sbt.playground.extension.JavaScriptPreviewExtension;
-import com.ibm.sbt.playground.extension.PlaygroundExtensionFactory;
 import com.ibm.xsp.context.DojoLibrary;
 import com.ibm.xsp.context.DojoLibraryFactory;
 import com.ibm.xsp.extlib.util.ExtLibUtil;

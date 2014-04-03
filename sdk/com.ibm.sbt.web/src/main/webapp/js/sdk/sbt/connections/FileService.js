@@ -283,9 +283,7 @@ define(
 		 * @returns {String} download URL
 		 */
 		getDownloadUrl : function() {
-			return config.Properties.serviceUrl + "/files/" + this.service.endpoint.proxyPath + "/" + "connections" + "/" + "DownloadFile" + "/"
-					+ this.getFileId() + "/" + this.getLibraryId();
-			;
+			return this.getAsString("downloadUrl");
 		},
 		/**
 		 * Returns the type

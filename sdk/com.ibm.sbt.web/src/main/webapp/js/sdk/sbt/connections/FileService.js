@@ -1739,9 +1739,11 @@ define(
 		 * @param {String} libraryId The library ID of the file
 		 */
 		downloadFile : function(fileId, libraryId) {
-			var url = config.Properties.serviceUrl + "/files/" + this.endpoint.proxyPath + "/" + "connections" + "/" + "DownloadFile" + "/" + fileId
-					+ "/" + libraryId;
-			window.open(url);
+//			var url = config.Properties.serviceUrl + "/files/" + this.endpoint.proxyPath + "/" + "connections" + "/" + "DownloadFile" + "/" + fileId
+//					+ "/" + libraryId;
+			var url = this.getAsString("downloadUrl");
+			var endpoint = this.service.endpoint;
+			window.open(endpoint.proxy.rewriteUrl(endpoint.baseUrl, url, endpoint.proxyPath));
 		},
 
 		actOnCommentAwaitingApproval : function(commentId, action, actionReason) {

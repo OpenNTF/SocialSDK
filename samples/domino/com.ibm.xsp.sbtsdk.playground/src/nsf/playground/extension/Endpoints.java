@@ -27,7 +27,6 @@ import nsf.playground.environments.PlaygroundEnvironment;
 import com.ibm.commons.runtime.util.UrlUtil;
 import com.ibm.commons.util.PathUtil;
 import com.ibm.commons.util.StringUtil;
-import com.ibm.sbt.playground.extension.PlaygroundExtensionFactory;
 import com.ibm.xsp.context.FacesContextEx;
 
 

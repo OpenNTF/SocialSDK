@@ -13,6 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import nsf.playground.beans.DataAccessBean;
 import nsf.playground.extension.Endpoints;
+import nsf.playground.extension.PlaygroundExtensionFactory;
 
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.jslibrary.SBTEnvironment;
@@ -22,7 +23,6 @@ import com.ibm.sbt.opensocial.domino.container.ContainerExtPoint;
 import com.ibm.sbt.opensocial.domino.container.ContainerExtPointException;
 import com.ibm.sbt.opensocial.domino.oauth.DominoOAuth2Store;
 import com.ibm.sbt.opensocial.domino.oauth.DominoOAuthStore;
-import com.ibm.sbt.playground.extension.PlaygroundExtensionFactory;
 
 /**
  * This is an extended environment class holding extra playground specific information

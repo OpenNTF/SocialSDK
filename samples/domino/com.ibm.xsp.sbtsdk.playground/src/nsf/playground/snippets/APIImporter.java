@@ -12,6 +12,7 @@ import lotus.domino.Database;
 import lotus.domino.Document;
 import nsf.playground.beans.APIBean;
 import nsf.playground.extension.ImportOptions;
+import nsf.playground.extension.PlaygroundExtensionFactory;
 import nsf.playground.jobs.AsyncAction;
 import nsf.playground.json.JsonJavaObjectI;
 
@@ -31,7 +32,6 @@ import com.ibm.sbt.playground.assets.Node;
 import com.ibm.sbt.playground.assets.NodeFactory;
 import com.ibm.sbt.playground.assets.apis.APIDescription;
 import com.ibm.sbt.playground.assets.apis.APINodeFactory;
-import com.ibm.sbt.playground.extension.PlaygroundExtensionFactory;
 import com.ibm.sbt.playground.vfs.VFSFile;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.RestClient;

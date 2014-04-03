@@ -44,20 +44,21 @@ class SBTBasicAuthEndpoint extends BaseController implements SBTEndpoint
 		$store = SBTCredentialStore::getInstance();
 		$settings = new SBTSettings();
 		
-		$token = $store->getToken();
+		$token = $store->getToken($endpointName);
 		$response = null;
 		
 		$client = new Client($server);
 		$client->setDefaultOption('verify', false);
 		
 		// If global username and password is set, then use it; otherwise use user-specific credentials
-		if ($settings->getBasicAuthMethod() == 'global' || $settings->getBasicAuthMethod() == 'profile') {
+		if ($settings->getBasicAuthMethod($endpointName) == 'global') {
 			$user = $settings->getBasicAuthUsername($endpointName);
 			$password = $settings->getBasicAuthPassword($endpointName);
 		} else {
 			$user = $store->getBasicAuthUsername($endpointName) ;
 			$password = $store->getBasicAuthPassword($endpointName);
 		}
+
 		try {				
 			$request = $client->createRequest($method, $service , $headers, $body,  $options);
 			if ($settings->forceSSLTrust($endpointName)) {

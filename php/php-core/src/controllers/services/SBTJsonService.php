@@ -24,15 +24,37 @@ use Guzzle\Service\Exception\DescriptionBuilderException;
  * The proxy handles authentication with IBM services.
  * 
  * @author Benjamin Jakobus
- *
  */
 // Load settings object and default configuration
 require_once BASE_PATH . '/config.php';
 include_once BASE_PATH . '/autoload.php';
 
-class JsonService extends BaseController 
+class SBTJsonService
 {
+	protected $endpointName;
+	protected $settings;
 	
+	function __construct($endpointName) {
+		$this->endpointName = $endpointName;
+	}
 	
+	public function makeRequest($method, $service, $header = array(), $body = null, $options = array()) {
+		$settings = new SBTSettings();
+		$store = SBTCredentialStore::getInstance();
+
+		$server = $settings->getURL($this->endpointName);
+
+		if ($settings->getAuthenticationMethod($this->endpointName) == "basic") {
+			$endpoint = new SBTBasicAuthEndpoint();
+		} else if ($settings->getAuthenticationMethod($this->endpointName) == "oauth2") {
+			$endpoint = new SBTOAuth2Endpoint();
+		} else if ($settings->getAuthenticationMethod($this->endpointName) == "oauth1") {
+			$endpoint = new SBTOAuth1Endpoint();
+		}		
+		// Make request
+		$response = $endpoint->makeRequest($settings->getURL($this->endpointName), $service, $method, $options, $body, $header, $this->endpointName);
+		
+		print_r($response->getBody(TRUE));
+	}	
 }
 ?>

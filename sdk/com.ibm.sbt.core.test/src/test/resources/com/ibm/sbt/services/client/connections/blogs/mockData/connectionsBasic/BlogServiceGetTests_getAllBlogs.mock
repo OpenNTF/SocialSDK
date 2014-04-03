@@ -4,7 +4,7 @@
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Wed, 02 Apr 2014 15:00:29 GMT]]></value>
+        <value><![CDATA[Thu, 03 Apr 2014 09:19:17 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -20,23 +20,23 @@
     </header>
     <header>
         <name><![CDATA[Expires]]></name>
-        <value><![CDATA[Wed, 02 Apr 2014 15:10:29 GMT]]></value>
+        <value><![CDATA[Thu, 03 Apr 2014 09:29:17 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Last-Modified]]></name>
-        <value><![CDATA[Wed, 02 Apr 2014 15:00:25 GMT]]></value>
+        <value><![CDATA[Thu, 03 Apr 2014 09:19:14 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/oJFnIqru42UQJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
+        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/vDrKbs34A+MQJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=69ttM7rfDYVREvvKzI9tZjhN09bxLS8M4uNib2842mJKWigeEV79DHlvR/yvtBdgtJQVebfu1PANKx873qGSbSY7/Rxc6LSqEB9EByhymsoMQ/nXapiDXcVmm3jG5kBWBOKKuwNI2j1wMzcNwX1Gky1RoSb7t2o9CcWEwhCEZFkoywUgAiX+jPVUSwqvtFbuknBCDXeXwJmBcbZaK0jCo16rBjmvTvQUzfj5SYwUBvzoycXuMQHZWpXvjwJUwmOeO3v6nVjHBhnB7bIKL2LrZfjpay2OllzwAI0/bsJR6otTax7ou6vuMdzYsCZNjQ+ywsnsvdwJ3NfhvisZ0LG3maXjojiYmcRXzHOmxYW/Jh42EPmdz3/A/xOttmScvDPO0nYthRTiPKHiy62JOgSmNvAjgRfNEPII1FgmVMTyL9eJ0DwBtz58iDep97fYNm1oH8dTg0vA2hP1RyirJGptsMEI9G14w4Qvrq8aYniU5GC3A13I9GQI9+Yil1iwE0YUXhZfk7H1lfSpF/fQpLUzrHtJ7hq7m/VIDLgiJ4O0nIglOAwfJlrq0giJn9DTDsxOQxT6zWiZ5HbdCws66EqwJHuKI78likGN1dqkinlBx+gLa+jI0QX2vhwMXP+pvSzAi6ZMufE2arZqqBnU2W13iUYH7gHQtAuJs/5aJXobX3FPjhu46wcx7kcuA7+QsgD+czRY84S3v8pO4JbSBEtOdDDVwNluDk1cIF4XXYfcVXU=; Path=/]]></value>
+        <value><![CDATA[LtpaToken2=A7gDx48XrzVY+LnckGsPNKEByJCi3bmFVbtaSCFmdy5ejB6YX6JqponToQvHeJL/qhGjmdRST7U+B4/pVnkps91O4/pO2cfQjMpFZuvloI4C0YMeCdOlN0cxz2fVB2s6NrTtwQgKgPfbvpi23gM+XEBVt8ufBU4Ylif5IE852sgQhhq1GXb9yJeITvReMADNsIOVx1DbIy4YL2hTkGO6xwqnioh22GWBiGsnxrhyDAQ0U3Z869MoZe2B0L3qXygq9IppMfuFrcCHAfq4julGYw7UQxvcCcxy49rJcJUDe+YVyWHi4Mb+KCvYY35gwrjOpIR3LpnkcHNqk73TD8Pt9/l8arzKQkEMHhaJRBtj1iKqC2Wd9MjNy8mbaesfVglQnOIUP/AuZB+5WO61HUEzjbyVe9DvEfsd1O2TjMPk0EFqyqTkneUfOetOjrRwNUfq5Bf2IZORGMuafnH+QTZhryt3mXKEOSn2PzArX96eZ9KR2zlbcObuq1a3r6cgv/Nbp/bzMcB/IqcJl+mnJZSCoe5s1/SfuqmncpBjpzB7IgypxDcAvKt3A+xywvTAx9k1Hrq17YrZiE6/SZcmmmJUzAm3IO/TYx/KuwQiy6wyVE6Bi0TdLwQEDm+LVVMhlzTcElbGqclOJoWmtUwbGwVSQsZPwZbRHDqigQWLcAAuJ3AxeMpaWRodvKs8CLRcM7VgtZSYdMmzte8Jypqb3mZZt3miIr5+aBCEA5pFltUoGWU=; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LCSESSIONID=0000MNFy5z3vSi77njsKSQ6fJr3:18dna4k6n; Path=/; HttpOnly]]></value>
+        <value><![CDATA[LCSESSIONID=0000JD2P7_OB8jCO4w-SpZjF9BZ:18dna4k6n; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Cache-Control]]></name>
@@ -75,11 +75,325 @@
     <link rel="self" type="application/atom+xml" href="https://qs.renovations.com:444/blogs/homepage/feed/blogs/atom?lang=en_us" />
     <link rel="first" type="application/atom+xml" href="https://dev.sdkdemo.com:444/blogs/homepage/feed/blogs/atom?lang=en_us" />
     <link rel="next" type="application/atom+xml" href="https://dev.sdkdemo.com:444/blogs/homepage/feed/blogs/atom?ps=50&amp;sortby=0&amp;page=1&amp;lang=en_us" />
-    <opensearch:totalResults>2858</opensearch:totalResults>
+    <opensearch:totalResults>2876</opensearch:totalResults>
     <app:categories href="https://dev.sdkdemo.com:444/blogs/homepage/feed/blogtags/atom?lang=en_us"/>  
-    <updated>2014-04-02T10:00:29-05:00</updated>
+    <updated>2014-04-03T04:19:17-05:00</updated>
     <generator uri="http://www.ibm.com/xmlns/prod/sn" version="4.5.0.0">IBM Connections - Blogs</generator>
 	    <entry>
+        <id>urn:lsid:ibm.com:blogs:blog-ce292574-cda8-4cb1-b594-a181230b0692</id>
+        <title type="text">Test Blog1396516666238</title>
+        <snx:handle>TestHandle1396516666238</snx:handle>
+        <snx:timezone>America/Chicago</snx:timezone>
+        <author>
+          <name>Frank Adams</name>
+                   <email>***REMOVED***@renovations.com</email>
+                  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+                 <snx:userState>active</snx:userState>
+                </author>
+                <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/blogs/TestHandle1396516666238/?lang=en_us"/>
+        <published>2014-04-03T04:18:24-05:00</published>
+        <updated>2014-04-03T04:18:25-05:00</updated>
+        			<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+						<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+		            </entry>
+    <entry>
+        <id>urn:lsid:ibm.com:blogs:blog-4bcaecbe-7ca7-4054-9579-56cd511cac70</id>
+        <title type="text">Test Blog1396516663847</title>
+        <snx:handle>TestHandle1396516663847</snx:handle>
+        <snx:timezone>America/Chicago</snx:timezone>
+        <author>
+          <name>Frank Adams</name>
+                   <email>***REMOVED***@renovations.com</email>
+                  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+                 <snx:userState>active</snx:userState>
+                </author>
+                <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/blogs/TestHandle1396516663847/?lang=en_us"/>
+        <published>2014-04-03T04:18:21-05:00</published>
+        <updated>2014-04-03T04:18:22-05:00</updated>
+        			<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+						<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+		            </entry>
+    <entry>
+        <id>urn:lsid:ibm.com:blogs:blog-6fc31238-2bd8-4119-b256-55626ab1a36b</id>
+        <title type="text">Test Blog1396516661829</title>
+        <snx:handle>TestHandle1396516661829</snx:handle>
+        <snx:timezone>America/Chicago</snx:timezone>
+        <author>
+          <name>Frank Adams</name>
+                   <email>***REMOVED***@renovations.com</email>
+                  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+                 <snx:userState>active</snx:userState>
+                </author>
+                <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/blogs/TestHandle1396516661829/?lang=en_us"/>
+        <published>2014-04-03T04:18:19-05:00</published>
+        <updated>2014-04-03T04:18:19-05:00</updated>
+        			<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+						<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+		            </entry>
+    <entry>
+        <id>urn:lsid:ibm.com:blogs:blog-bf702178-8277-4204-ba98-152302fe8df4</id>
+        <title type="text">Blog at 1396514637185</title>
+        <snx:handle>BlogHandle1396514637185</snx:handle>
+        <snx:timezone>America/Chicago</snx:timezone>
+        <author>
+          <name>Frank Adams</name>
+                   <email>***REMOVED***@renovations.com</email>
+                  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+                 <snx:userState>active</snx:userState>
+                </author>
+                <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/blogs/BlogHandle1396514637185/?lang=en_us"/>
+        <published>2014-04-03T03:44:34-05:00</published>
+        <updated>2014-04-03T03:50:03-05:00</updated>
+        			<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+						<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+		                <category term="testtag2" />
+        <category term="testtag1" />
+    </entry>
+    <entry>
+        <id>urn:lsid:ibm.com:blogs:blog-d068dc4f-8206-4131-b62b-8129aae888bb</id>
+        <title type="text">Blog at 1396514501239</title>
+        <snx:handle>BlogHandle1396514501239</snx:handle>
+        <snx:timezone>America/Chicago</snx:timezone>
+        <author>
+          <name>Frank Adams</name>
+                   <email>***REMOVED***@renovations.com</email>
+                  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+                 <snx:userState>active</snx:userState>
+                </author>
+                <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/blogs/BlogHandle1396514501239/?lang=en_us"/>
+        <published>2014-04-03T03:42:18-05:00</published>
+        <updated>2014-04-03T03:43:22-05:00</updated>
+        			<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+						<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+		            </entry>
+    <entry>
+        <id>urn:lsid:ibm.com:blogs:blog-0c3f4a65-d1cc-4e84-ac57-8a193efd06b2</id>
+        <title type="text">Blog at 1396514294592</title>
+        <snx:handle>BlogHandle1396514294592</snx:handle>
+        <snx:timezone>America/Chicago</snx:timezone>
+        <author>
+          <name>Frank Adams</name>
+                   <email>***REMOVED***@renovations.com</email>
+                  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+                 <snx:userState>active</snx:userState>
+                </author>
+                <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/blogs/BlogHandle1396514294592/?lang=en_us"/>
+        <published>2014-04-03T03:39:21-05:00</published>
+        <updated>2014-04-03T03:42:01-05:00</updated>
+        			<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+						<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+		            </entry>
+    <entry>
+        <id>urn:lsid:ibm.com:blogs:blog-84f0d2a0-6966-4355-beb0-c3e8e4b8146d</id>
+        <title type="text">Test Blog1396502474627</title>
+        <snx:handle>TestHandle1396502474627</snx:handle>
+        <snx:timezone>America/Chicago</snx:timezone>
+        <author>
+          <name>Frank Adams</name>
+                   <email>***REMOVED***@renovations.com</email>
+                  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+                 <snx:userState>active</snx:userState>
+                </author>
+                <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/blogs/TestHandle1396502474627/?lang=en_us"/>
+        <published>2014-04-03T00:22:23-05:00</published>
+        <updated>2014-04-03T00:22:23-05:00</updated>
+        			<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+						<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+		            </entry>
+    <entry>
+        <id>urn:lsid:ibm.com:blogs:blog-bfb0cf64-9c6f-48da-a8b5-2e12a414e399</id>
+        <title type="text">Blog at 1396494789897</title>
+        <snx:handle>BlogHandle1396494789897</snx:handle>
+        <snx:timezone>America/Chicago</snx:timezone>
+        <author>
+          <name>Frank Adams</name>
+                   <email>***REMOVED***@renovations.com</email>
+                  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+                 <snx:userState>active</snx:userState>
+                </author>
+                <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/blogs/BlogHandle1396494789897/?lang=en_us"/>
+        <published>2014-04-02T22:13:47-05:00</published>
+        <updated>2014-04-02T22:19:12-05:00</updated>
+        			<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+						<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+		                <category term="testtag1" />
+        <category term="testtag2" />
+    </entry>
+    <entry>
+        <id>urn:lsid:ibm.com:blogs:blog-44a0aac0-3901-40b9-b058-e7fe1fe2ce2e</id>
+        <title type="text">Blog at 1396494652515</title>
+        <snx:handle>BlogHandle1396494652515</snx:handle>
+        <snx:timezone>America/Chicago</snx:timezone>
+        <author>
+          <name>Frank Adams</name>
+                   <email>***REMOVED***@renovations.com</email>
+                  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+                 <snx:userState>active</snx:userState>
+                </author>
+                <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/blogs/BlogHandle1396494652515/?lang=en_us"/>
+        <published>2014-04-02T22:11:29-05:00</published>
+        <updated>2014-04-02T22:12:32-05:00</updated>
+        			<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+						<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+		            </entry>
+    <entry>
+        <id>urn:lsid:ibm.com:blogs:blog-d3a47ccb-c4c0-4650-8636-c819a85a8744</id>
+        <title type="text">Blog at 1396494447745</title>
+        <snx:handle>BlogHandle1396494447745</snx:handle>
+        <snx:timezone>America/Chicago</snx:timezone>
+        <author>
+          <name>Frank Adams</name>
+                   <email>***REMOVED***@renovations.com</email>
+                  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+                 <snx:userState>active</snx:userState>
+                </author>
+                <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/blogs/BlogHandle1396494447745/?lang=en_us"/>
+        <published>2014-04-02T22:08:34-05:00</published>
+        <updated>2014-04-02T22:11:13-05:00</updated>
+        			<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+						<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+		            </entry>
+    <entry>
+        <id>urn:lsid:ibm.com:blogs:blog-86e7a316-12df-4539-bc1a-2cd7e0771d18</id>
+        <title type="text">Test Blog1396482410878</title>
+        <snx:handle>TestHandle1396482410878</snx:handle>
+        <snx:timezone>America/Chicago</snx:timezone>
+        <author>
+          <name>Frank Adams</name>
+                   <email>***REMOVED***@renovations.com</email>
+                  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+                 <snx:userState>active</snx:userState>
+                </author>
+                <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/blogs/TestHandle1396482410878/?lang=en_us"/>
+        <published>2014-04-02T18:47:59-05:00</published>
+        <updated>2014-04-02T18:47:59-05:00</updated>
+        			<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+						<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+		            </entry>
+    <entry>
+        <id>urn:lsid:ibm.com:blogs:blog-2a0598f7-185c-4395-9049-2e84c7c34ab6</id>
+        <title type="text">Blog at 1396474810153</title>
+        <snx:handle>BlogHandle1396474810153</snx:handle>
+        <snx:timezone>America/Chicago</snx:timezone>
+        <author>
+          <name>Frank Adams</name>
+                   <email>***REMOVED***@renovations.com</email>
+                  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+                 <snx:userState>active</snx:userState>
+                </author>
+                <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/blogs/BlogHandle1396474810153/?lang=en_us"/>
+        <published>2014-04-02T16:40:47-05:00</published>
+        <updated>2014-04-02T16:46:09-05:00</updated>
+        			<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+						<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+		                <category term="testtag2" />
+        <category term="testtag1" />
+    </entry>
+    <entry>
+        <id>urn:lsid:ibm.com:blogs:blog-9caa8d00-83e6-47f4-9ded-29b6a51e3ca1</id>
+        <title type="text">Blog at 1396474667021</title>
+        <snx:handle>BlogHandle1396474667021</snx:handle>
+        <snx:timezone>America/Chicago</snx:timezone>
+        <author>
+          <name>Frank Adams</name>
+                   <email>***REMOVED***@renovations.com</email>
+                  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+                 <snx:userState>active</snx:userState>
+                </author>
+                <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/blogs/BlogHandle1396474667021/?lang=en_us"/>
+        <published>2014-04-02T16:38:24-05:00</published>
+        <updated>2014-04-02T16:39:26-05:00</updated>
+        			<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+						<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+		            </entry>
+    <entry>
+        <id>urn:lsid:ibm.com:blogs:blog-5743bf01-0f12-4ff2-b1d9-b0c89ee26392</id>
+        <title type="text">Blog at 1396474464342</title>
+        <snx:handle>BlogHandle1396474464342</snx:handle>
+        <snx:timezone>America/Chicago</snx:timezone>
+        <author>
+          <name>Frank Adams</name>
+                   <email>***REMOVED***@renovations.com</email>
+                  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+                 <snx:userState>active</snx:userState>
+                </author>
+                <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/blogs/BlogHandle1396474464342/?lang=en_us"/>
+        <published>2014-04-02T16:35:30-05:00</published>
+        <updated>2014-04-02T16:38:08-05:00</updated>
+        			<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+						<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+		            </entry>
+    <entry>
+        <id>urn:lsid:ibm.com:blogs:blog-11a71891-0a77-4332-b3fb-0a9e1291ba05</id>
+        <title type="text">Test Blog1396462255452</title>
+        <snx:handle>TestHandle1396462255452</snx:handle>
+        <snx:timezone>America/Chicago</snx:timezone>
+        <author>
+          <name>Frank Adams</name>
+                   <email>***REMOVED***@renovations.com</email>
+                  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+                 <snx:userState>active</snx:userState>
+                </author>
+                <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/blogs/TestHandle1396462255452/?lang=en_us"/>
+        <published>2014-04-02T13:12:02-05:00</published>
+        <updated>2014-04-02T13:12:02-05:00</updated>
+        			<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+						<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+		            </entry>
+    <entry>
+        <id>urn:lsid:ibm.com:blogs:blog-a080974c-78e7-4625-bcd5-77e82ec5fdfc</id>
+        <title type="text">Blog at 1396454583697</title>
+        <snx:handle>BlogHandle1396454583697</snx:handle>
+        <snx:timezone>America/Chicago</snx:timezone>
+        <author>
+          <name>Frank Adams</name>
+                   <email>***REMOVED***@renovations.com</email>
+                  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+                 <snx:userState>active</snx:userState>
+                </author>
+                <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/blogs/BlogHandle1396454583697/?lang=en_us"/>
+        <published>2014-04-02T11:03:40-05:00</published>
+        <updated>2014-04-02T11:09:02-05:00</updated>
+        			<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+						<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+		                <category term="testtag2" />
+        <category term="testtag1" />
+    </entry>
+    <entry>
+        <id>urn:lsid:ibm.com:blogs:blog-e1c3d900-679f-4ac7-b608-771ce899e4ed</id>
+        <title type="text">Blog at 1396454444719</title>
+        <snx:handle>BlogHandle1396454444719</snx:handle>
+        <snx:timezone>America/Chicago</snx:timezone>
+        <author>
+          <name>Frank Adams</name>
+                   <email>***REMOVED***@renovations.com</email>
+                  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+                 <snx:userState>active</snx:userState>
+                </author>
+                <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/blogs/BlogHandle1396454444719/?lang=en_us"/>
+        <published>2014-04-02T11:01:21-05:00</published>
+        <updated>2014-04-02T11:02:26-05:00</updated>
+        			<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+						<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+		            </entry>
+    <entry>
+        <id>urn:lsid:ibm.com:blogs:blog-9a8a4080-8823-436f-89db-11b5816d0eac</id>
+        <title type="text">Blog at 1396454271922</title>
+        <snx:handle>BlogHandle1396454271922</snx:handle>
+        <snx:timezone>America/Chicago</snx:timezone>
+        <author>
+          <name>Frank Adams</name>
+                   <email>***REMOVED***@renovations.com</email>
+                  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+                 <snx:userState>active</snx:userState>
+                </author>
+                <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/blogs/BlogHandle1396454271922/?lang=en_us"/>
+        <published>2014-04-02T10:58:58-05:00</published>
+        <updated>2014-04-02T11:00:18-05:00</updated>
+        			<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+						<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+		            </entry>
+    <entry>
         <id>urn:lsid:ibm.com:blogs:blog-53c79b07-3821-4aeb-b701-9248ac2078a1</id>
         <title type="text">Test Blog1396450741013</title>
         <snx:handle>TestHandle1396450741013</snx:handle>
@@ -383,8 +697,8 @@
                 </author>
                 <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/blogs/BlogHandle1396414478682/?lang=en_us"/>
         <published>2014-04-01T23:55:15-05:00</published>
-        <updated>2014-04-01T23:59:56-05:00</updated>
-        			<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">1</snx:rank>
+        <updated>2014-04-02T22:19:14-05:00</updated>
+        			<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
 						<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
 		            </entry>
     <entry>
@@ -626,312 +940,6 @@
                 <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/blogs/TestHandle1396364039896/?lang=en_us"/>
         <published>2014-04-01T09:54:37-05:00</published>
         <updated>2014-04-01T09:54:42-05:00</updated>
-        			<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
-						<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
-		            </entry>
-    <entry>
-        <id>urn:lsid:ibm.com:blogs:blog-46f83d31-756b-4bd6-b342-86f18309805c</id>
-        <title type="text">Test Blog1396363739314</title>
-        <snx:handle>TestHandle1396363739314</snx:handle>
-        <snx:timezone>America/Chicago</snx:timezone>
-        <author>
-          <name>Frank Adams</name>
-                   <email>***REMOVED***@renovations.com</email>
-                  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
-                 <snx:userState>active</snx:userState>
-                </author>
-                <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/blogs/TestHandle1396363739314/?lang=en_us"/>
-        <published>2014-04-01T09:49:38-05:00</published>
-        <updated>2014-04-01T09:49:41-05:00</updated>
-        			<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
-						<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
-		            </entry>
-    <entry>
-        <id>urn:lsid:ibm.com:blogs:blog-66109e6a-3c49-4dbb-b885-a0c820e4bbb3</id>
-        <title type="text">Test Blog1396363574257</title>
-        <snx:handle>TestHandle1396363574257</snx:handle>
-        <snx:timezone>America/Chicago</snx:timezone>
-        <author>
-          <name>Frank Adams</name>
-                   <email>***REMOVED***@renovations.com</email>
-                  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
-                 <snx:userState>active</snx:userState>
-                </author>
-                <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/blogs/TestHandle1396363574257/?lang=en_us"/>
-        <published>2014-04-01T09:47:21-05:00</published>
-        <updated>2014-04-01T09:47:24-05:00</updated>
-        			<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
-						<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
-		            </entry>
-    <entry>
-        <id>urn:lsid:ibm.com:blogs:blog-60b81eee-cd59-46b1-83f1-fb6ea49fcccd</id>
-        <title type="text">Test Blog1396363598470</title>
-        <snx:handle>TestHandle1396363598470</snx:handle>
-        <snx:timezone>America/Chicago</snx:timezone>
-        <author>
-          <name>Frank Adams</name>
-                   <email>***REMOVED***@renovations.com</email>
-                  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
-                 <snx:userState>active</snx:userState>
-                </author>
-                <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/blogs/TestHandle1396363598470/?lang=en_us"/>
-        <published>2014-04-01T09:47:17-05:00</published>
-        <updated>2014-04-01T09:47:22-05:00</updated>
-        			<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
-						<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
-		            </entry>
-    <entry>
-        <id>urn:lsid:ibm.com:blogs:blog-5b1c1dd8-0070-4fef-96a0-f1064e981603</id>
-        <title type="text">Test Blog1396363114633</title>
-        <snx:handle>TestHandle1396363114633</snx:handle>
-        <snx:timezone>America/Chicago</snx:timezone>
-        <author>
-          <name>Frank Adams</name>
-                   <email>***REMOVED***@renovations.com</email>
-                  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
-                 <snx:userState>active</snx:userState>
-                </author>
-                <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/blogs/TestHandle1396363114633/?lang=en_us"/>
-        <published>2014-04-01T09:39:14-05:00</published>
-        <updated>2014-04-01T09:39:27-05:00</updated>
-        			<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
-						<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
-		            </entry>
-    <entry>
-        <id>urn:lsid:ibm.com:blogs:blog-b4ce55d9-fb04-45d5-8228-814ecc29e846</id>
-        <title type="text">Test Blog1396363087581</title>
-        <snx:handle>TestHandle1396363087581</snx:handle>
-        <snx:timezone>America/Chicago</snx:timezone>
-        <author>
-          <name>Frank Adams</name>
-                   <email>***REMOVED***@renovations.com</email>
-                  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
-                 <snx:userState>active</snx:userState>
-                </author>
-                <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/blogs/TestHandle1396363087581/?lang=en_us"/>
-        <published>2014-04-01T09:38:47-05:00</published>
-        <updated>2014-04-01T09:38:54-05:00</updated>
-        			<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
-						<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
-		            </entry>
-    <entry>
-        <id>urn:lsid:ibm.com:blogs:blog-745aa1dc-a371-4d34-9048-55dd9273981c</id>
-        <title type="text">Test Blog1396363013017</title>
-        <snx:handle>TestHandle1396363013017</snx:handle>
-        <snx:timezone>America/Chicago</snx:timezone>
-        <author>
-          <name>Frank Adams</name>
-                   <email>***REMOVED***@renovations.com</email>
-                  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
-                 <snx:userState>active</snx:userState>
-                </author>
-                <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/blogs/TestHandle1396363013017/?lang=en_us"/>
-        <published>2014-04-01T09:37:31-05:00</published>
-        <updated>2014-04-01T09:37:33-05:00</updated>
-        			<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
-						<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
-		            </entry>
-    <entry>
-        <id>urn:lsid:ibm.com:blogs:blog-a385da59-5ec5-413b-a0da-1a935ca9e842</id>
-        <title type="text">Test Blog1396362089869</title>
-        <snx:handle>TestHandle1396362089869</snx:handle>
-        <snx:timezone>America/Chicago</snx:timezone>
-        <author>
-          <name>Frank Adams</name>
-                   <email>***REMOVED***@renovations.com</email>
-                  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
-                 <snx:userState>active</snx:userState>
-                </author>
-                <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/blogs/TestHandle1396362089869/?lang=en_us"/>
-        <published>2014-04-01T09:22:07-05:00</published>
-        <updated>2014-04-01T09:22:07-05:00</updated>
-        			<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
-						<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
-		            </entry>
-    <entry>
-        <id>urn:lsid:ibm.com:blogs:blog-b04e3894-4ccc-4274-8ab2-38f97e44a867</id>
-        <title type="text">Test Blog1396362083189</title>
-        <snx:handle>TestHandle1396362083189</snx:handle>
-        <snx:timezone>America/Chicago</snx:timezone>
-        <author>
-          <name>Frank Adams</name>
-                   <email>***REMOVED***@renovations.com</email>
-                  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
-                 <snx:userState>active</snx:userState>
-                </author>
-                <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/blogs/TestHandle1396362083189/?lang=en_us"/>
-        <published>2014-04-01T09:22:02-05:00</published>
-        <updated>2014-04-01T09:22:02-05:00</updated>
-        			<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
-						<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
-		            </entry>
-    <entry>
-        <id>urn:lsid:ibm.com:blogs:blog-53d4ac11-dc97-484a-982c-bce74785b6c4</id>
-        <title type="text">Test Blog1396362049065</title>
-        <snx:handle>TestHandle1396362049065</snx:handle>
-        <snx:timezone>America/Chicago</snx:timezone>
-        <author>
-          <name>Frank Adams</name>
-                   <email>***REMOVED***@renovations.com</email>
-                  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
-                 <snx:userState>active</snx:userState>
-                </author>
-                <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/blogs/TestHandle1396362049065/?lang=en_us"/>
-        <published>2014-04-01T09:21:26-05:00</published>
-        <updated>2014-04-01T09:21:26-05:00</updated>
-        			<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
-						<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
-		            </entry>
-    <entry>
-        <id>urn:lsid:ibm.com:blogs:blog-b5992042-dd9a-445c-b1fb-580a073ef339</id>
-        <title type="text">Test Blog1396361997286</title>
-        <snx:handle>TestHandle1396361997286</snx:handle>
-        <snx:timezone>America/Chicago</snx:timezone>
-        <author>
-          <name>Frank Adams</name>
-                   <email>***REMOVED***@renovations.com</email>
-                  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
-                 <snx:userState>active</snx:userState>
-                </author>
-                <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/blogs/TestHandle1396361997286/?lang=en_us"/>
-        <published>2014-04-01T09:20:34-05:00</published>
-        <updated>2014-04-01T09:20:35-05:00</updated>
-        			<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
-						<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
-		            </entry>
-    <entry>
-        <id>urn:lsid:ibm.com:blogs:blog-30207c55-bccc-4063-8c87-c7d70b534b67</id>
-        <title type="text">Test Blog1396361994338</title>
-        <snx:handle>TestHandle1396361994338</snx:handle>
-        <snx:timezone>America/Chicago</snx:timezone>
-        <author>
-          <name>Frank Adams</name>
-                   <email>***REMOVED***@renovations.com</email>
-                  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
-                 <snx:userState>active</snx:userState>
-                </author>
-                <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/blogs/TestHandle1396361994338/?lang=en_us"/>
-        <published>2014-04-01T09:20:31-05:00</published>
-        <updated>2014-04-01T09:20:32-05:00</updated>
-        			<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
-						<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
-		            </entry>
-    <entry>
-        <id>urn:lsid:ibm.com:blogs:blog-8ea44fe1-b1df-429f-9609-7e09f18dca43</id>
-        <title type="text">Test Blog1396361992861</title>
-        <snx:handle>TestHandle1396361992861</snx:handle>
-        <snx:timezone>America/Chicago</snx:timezone>
-        <author>
-          <name>Frank Adams</name>
-                   <email>***REMOVED***@renovations.com</email>
-                  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
-                 <snx:userState>active</snx:userState>
-                </author>
-                <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/blogs/TestHandle1396361992861/?lang=en_us"/>
-        <published>2014-04-01T09:20:30-05:00</published>
-        <updated>2014-04-01T09:20:30-05:00</updated>
-        			<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
-						<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
-		            </entry>
-    <entry>
-        <id>urn:lsid:ibm.com:blogs:blog-d60e9441-9f93-4fe2-ab1b-4e0c3ece87c7</id>
-        <title type="text">Test Blog1396361986604</title>
-        <snx:handle>TestHandle1396361986604</snx:handle>
-        <snx:timezone>America/Chicago</snx:timezone>
-        <author>
-          <name>Frank Adams</name>
-                   <email>***REMOVED***@renovations.com</email>
-                  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
-                 <snx:userState>active</snx:userState>
-                </author>
-                <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/blogs/TestHandle1396361986604/?lang=en_us"/>
-        <published>2014-04-01T09:20:23-05:00</published>
-        <updated>2014-04-01T09:20:29-05:00</updated>
-        			<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
-						<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
-		            </entry>
-    <entry>
-        <id>urn:lsid:ibm.com:blogs:blog-98688b0f-e5ed-40a5-9d91-1a0542306c3b</id>
-        <title type="text">Test Blog1396361979138</title>
-        <snx:handle>TestHandle1396361979138</snx:handle>
-        <snx:timezone>America/Chicago</snx:timezone>
-        <author>
-          <name>Frank Adams</name>
-                   <email>***REMOVED***@renovations.com</email>
-                  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
-                 <snx:userState>active</snx:userState>
-                </author>
-                <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/blogs/TestHandle1396361979138/?lang=en_us"/>
-        <published>2014-04-01T09:20:16-05:00</published>
-        <updated>2014-04-01T09:20:23-05:00</updated>
-        			<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
-						<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
-		            </entry>
-    <entry>
-        <id>urn:lsid:ibm.com:blogs:blog-e30279d5-9047-4497-9bf9-f8c8b730436b</id>
-        <title type="text">Test Blog1396361974659</title>
-        <snx:handle>TestHandle1396361974659</snx:handle>
-        <snx:timezone>America/Chicago</snx:timezone>
-        <author>
-          <name>Frank Adams</name>
-                   <email>***REMOVED***@renovations.com</email>
-                  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
-                 <snx:userState>active</snx:userState>
-                </author>
-                <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/blogs/TestHandle1396361974659/?lang=en_us"/>
-        <published>2014-04-01T09:20:11-05:00</published>
-        <updated>2014-04-01T09:20:15-05:00</updated>
-        			<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
-						<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
-		            </entry>
-    <entry>
-        <id>urn:lsid:ibm.com:blogs:blog-f6bd4511-3236-4668-922e-51f448a634ed</id>
-        <title type="text">Test Blog1396361973637</title>
-        <snx:handle>TestHandle1396361973637</snx:handle>
-        <snx:timezone>America/Chicago</snx:timezone>
-        <author>
-          <name>Frank Adams</name>
-                   <email>***REMOVED***@renovations.com</email>
-                  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
-                 <snx:userState>active</snx:userState>
-                </author>
-                <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/blogs/TestHandle1396361973637/?lang=en_us"/>
-        <published>2014-04-01T09:20:10-05:00</published>
-        <updated>2014-04-01T09:20:10-05:00</updated>
-        			<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
-						<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
-		            </entry>
-    <entry>
-        <id>urn:lsid:ibm.com:blogs:blog-91c6addc-de8b-4ade-81c9-1b2f2d8f9e82</id>
-        <title type="text">Test Blog1396361969094</title>
-        <snx:handle>TestHandle1396361969094</snx:handle>
-        <snx:timezone>America/Chicago</snx:timezone>
-        <author>
-          <name>Frank Adams</name>
-                   <email>***REMOVED***@renovations.com</email>
-                  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
-                 <snx:userState>active</snx:userState>
-                </author>
-                <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/blogs/TestHandle1396361969094/?lang=en_us"/>
-        <published>2014-04-01T09:20:06-05:00</published>
-        <updated>2014-04-01T09:20:09-05:00</updated>
-        			<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
-						<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
-		            </entry>
-    <entry>
-        <id>urn:lsid:ibm.com:blogs:blog-2954862a-0c44-4202-8aa9-0e98637b00e5</id>
-        <title type="text">Test Blog1396361967592</title>
-        <snx:handle>TestHandle1396361967592</snx:handle>
-        <snx:timezone>America/Chicago</snx:timezone>
-        <author>
-          <name>Frank Adams</name>
-                   <email>***REMOVED***@renovations.com</email>
-                  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
-                 <snx:userState>active</snx:userState>
-                </author>
-                <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/blogs/TestHandle1396361967592/?lang=en_us"/>
-        <published>2014-04-01T09:20:05-05:00</published>
-        <updated>2014-04-01T09:20:05-05:00</updated>
         			<snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
 						<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
 		            </entry>

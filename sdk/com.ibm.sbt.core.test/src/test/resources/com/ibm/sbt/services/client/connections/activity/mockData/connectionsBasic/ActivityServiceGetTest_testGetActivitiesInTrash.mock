@@ -4,7 +4,7 @@
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Wed, 02 Apr 2014 14:57:20 GMT]]></value>
+        <value><![CDATA[Thu, 03 Apr 2014 09:15:41 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -24,7 +24,7 @@
     </header>
     <header>
         <name><![CDATA[Last-Modified]]></name>
-        <value><![CDATA[Wed, 02 Apr 2014 14:35:17 GMT]]></value>
+        <value><![CDATA[Thu, 03 Apr 2014 08:34:53 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Pragma]]></name>
@@ -32,19 +32,19 @@
     </header>
     <header>
         <name><![CDATA[ETag]]></name>
-        <value><![CDATA[W/"1396450640716-ac1cc9e6-c8f9-4e72-93b2-e4b4633616a3"]]></value>
+        <value><![CDATA[W/"1396516541519-ac1cc9e6-c8f9-4e72-93b2-e4b4633616a3"]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/oJFnIqru42UQJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
+        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/vDrKbs34A+MQJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=69ttM7rfDYVREvvKzI9tZjhN09bxLS8M4uNib2842mJKWigeEV79DHlvR/yvtBdgtJQVebfu1PANKx873qGSbSY7/Rxc6LSqEB9EByhymsoMQ/nXapiDXcVmm3jG5kBWBOKKuwNI2j1wMzcNwX1Gky1RoSb7t2o9CcWEwhCEZFkoywUgAiX+jPVUSwqvtFbuknBCDXeXwJmBcbZaK0jCo16rBjmvTvQUzfj5SYwUBvzoycXuMQHZWpXvjwJUwmOeO3v6nVjHBhnB7bIKL2LrZfjpay2OllzwAI0/bsJR6otTax7ou6vuMdzYsCZNjQ+ywsnsvdwJ3NfhvisZ0LG3maXjojiYmcRXzHOmxYW/Jh42EPmdz3/A/xOttmScvDPO0nYthRTiPKHiy62JOgSmNvAjgRfNEPII1FgmVMTyL9eJ0DwBtz58iDep97fYNm1oH8dTg0vA2hP1RyirJGptsMEI9G14w4Qvrq8aYniU5GC3A13I9GQI9+Yil1iwE0YUXhZfk7H1lfSpF/fQpLUzrHtJ7hq7m/VIDLgiJ4O0nIglOAwfJlrq0giJn9DTDsxOQxT6zWiZ5HbdCws66EqwJHuKI78likGN1dqkinlBx+gLa+jI0QX2vhwMXP+pvSzAi6ZMufE2arZqqBnU2W13iUYH7gHQtAuJs/5aJXobX3FPjhu46wcx7kcuA7+QsgD+czRY84S3v8pO4JbSBEtOdDDVwNluDk1cIF4XXYfcVXU=; Path=/]]></value>
+        <value><![CDATA[LtpaToken2=A7gDx48XrzVY+LnckGsPNKEByJCi3bmFVbtaSCFmdy5ejB6YX6JqponToQvHeJL/qhGjmdRST7U+B4/pVnkps91O4/pO2cfQjMpFZuvloI4C0YMeCdOlN0cxz2fVB2s6NrTtwQgKgPfbvpi23gM+XEBVt8ufBU4Ylif5IE852sgQhhq1GXb9yJeITvReMADNsIOVx1DbIy4YL2hTkGO6xwqnioh22GWBiGsnxrhyDAQ0U3Z869MoZe2B0L3qXygq9IppMfuFrcCHAfq4julGYw7UQxvcCcxy49rJcJUDe+YVyWHi4Mb+KCvYY35gwrjOpIR3LpnkcHNqk73TD8Pt9/l8arzKQkEMHhaJRBtj1iKqC2Wd9MjNy8mbaesfVglQnOIUP/AuZB+5WO61HUEzjbyVe9DvEfsd1O2TjMPk0EFqyqTkneUfOetOjrRwNUfq5Bf2IZORGMuafnH+QTZhryt3mXKEOSn2PzArX96eZ9KR2zlbcObuq1a3r6cgv/Nbp/bzMcB/IqcJl+mnJZSCoe5s1/SfuqmncpBjpzB7IgypxDcAvKt3A+xywvTAx9k1Hrq17YrZiE6/SZcmmmJUzAm3IO/TYx/KuwQiy6wyVE6Bi0TdLwQEDm+LVVMhlzTcElbGqclOJoWmtUwbGwVSQsZPwZbRHDqigQWLcAAuJ3AxeMpaWRodvKs8CLRcM7VgtZSYdMmzte8Jypqb3mZZt3miIr5+aBCEA5pFltUoGWU=; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LCSESSIONID=0000ry3zsaGQnrHkn6K-S7DkKdW:18dna4k6n; Path=/; HttpOnly]]></value>
+        <value><![CDATA[LCSESSIONID=0000oG5yQ6_0IbpuNpbMv6o94GC:18dna4k6n; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Cache-Control]]></name>
@@ -99,7 +99,7 @@
   <logo>https://dev.sdkdemo.com:444/activities/nav/common/images/iconActivities128.png</logo>
   <id>https://dev.sdkdemo.com:444/activities/service/atom2/trash</id>
   <title type="text">Trash for Frank Adams</title>
-  <updated>2014-04-02T14:35:17Z</updated> 
+  <updated>2014-04-03T08:34:53Z</updated> 
   <author>
     
 
@@ -141,14 +141,14 @@
 	
   <link rel="current" href="https://dev.sdkdemo.com:444/activities/service/atom2/trash"/>
   <link rel="first" href="https://dev.sdkdemo.com:444/activities/service/atom2/trash" />
-  <link rel="last" href="https://dev.sdkdemo.com:444/activities/service/atom2/trash?page=1605" />
+  <link rel="last" href="https://dev.sdkdemo.com:444/activities/service/atom2/trash?page=1621" />
   
   <link rel="next" href="https://dev.sdkdemo.com:444/activities/service/atom2/trash?page=2" />
   
   
 
  
-  <os:totalResults>16048</os:totalResults>
+  <os:totalResults>16201</os:totalResults>
   <os:startIndex>1</os:startIndex>
   
   
@@ -175,10 +175,10 @@
 
 
 
-  <id>urn:lsid:ibm.com:oa:7dcd9353-d33b-49fb-a4af-3c063e8ce24a</id>
-  <title type="text">Java Test Activity1396449279315</title>
-  <updated>2014-04-02T14:35:17Z</updated>
-  <published>2014-04-02T14:35:16Z</published>
+  <id>urn:lsid:ibm.com:oa:6d46a1d1-e1d3-4dd6-a7a2-fcad417d9c7c</id>
+  <title type="text">JS Test Activity1396514043572</title>
+  <updated>2014-04-03T08:34:53Z</updated>
+  <published>2014-04-03T08:34:40Z</published>
   <author>
     
 
@@ -263,32 +263,32 @@
     <category term="tag2" />
   
   
-    <link rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/acl?activityUuid=7dcd9353-d33b-49fb-a4af-3c063e8ce24a" />
-    <link rel="http://www.ibm.com/xmlns/prod/sn/history" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activity/history?activityUuid=7dcd9353-d33b-49fb-a4af-3c063e8ce24a" />
-    <link rel="http://www.ibm.com/xmlns/prod/sn/templates" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/entrytemplates?activityUuid=7dcd9353-d33b-49fb-a4af-3c063e8ce24a" />
+    <link rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/acl?activityUuid=6d46a1d1-e1d3-4dd6-a7a2-fcad417d9c7c" />
+    <link rel="http://www.ibm.com/xmlns/prod/sn/history" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activity/history?activityUuid=6d46a1d1-e1d3-4dd6-a7a2-fcad417d9c7c" />
+    <link rel="http://www.ibm.com/xmlns/prod/sn/templates" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/entrytemplates?activityUuid=6d46a1d1-e1d3-4dd6-a7a2-fcad417d9c7c" />
    
   
   
 
   
-    <app:collection href="https://dev.sdkdemo.com:444/activities/service/atom2/activity?activityUuid=7dcd9353-d33b-49fb-a4af-3c063e8ce24a">
-      <title type="text">Java Test Activity1396449279315</title>
-      <app:categories href="https://dev.sdkdemo.com:444/activities/service/atom2/categories?activityUuid=7dcd9353-d33b-49fb-a4af-3c063e8ce24a"/>
+    <app:collection href="https://dev.sdkdemo.com:444/activities/service/atom2/activity?activityUuid=6d46a1d1-e1d3-4dd6-a7a2-fcad417d9c7c">
+      <title type="text">JS Test Activity1396514043572</title>
+      <app:categories href="https://dev.sdkdemo.com:444/activities/service/atom2/categories?activityUuid=6d46a1d1-e1d3-4dd6-a7a2-fcad417d9c7c"/>
     </app:collection> 
   
-  <snx:activity>7dcd9353-d33b-49fb-a4af-3c063e8ce24a</snx:activity>
+  <snx:activity>6d46a1d1-e1d3-4dd6-a7a2-fcad417d9c7c</snx:activity>
   
   
   
-    <link rel="edit" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/trashednode?activityNodeUuid=7dcd9353-d33b-49fb-a4af-3c063e8ce24a" />
+    <link rel="edit" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/trashednode?activityNodeUuid=6d46a1d1-e1d3-4dd6-a7a2-fcad417d9c7c" />
   
    
   
     
-      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activity?activityUuid=7dcd9353-d33b-49fb-a4af-3c063e8ce24a"/>
+      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activity?activityUuid=6d46a1d1-e1d3-4dd6-a7a2-fcad417d9c7c"/>
       
-        <link rel="alternate" type="application/xhtml+xml" href="https://dev.sdkdemo.com:444/activities/service/html/activity/recent?activityUuid=7dcd9353-d33b-49fb-a4af-3c063e8ce24a"/>
-      	<link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/activities/service/html/activity/recent?activityUuid=7dcd9353-d33b-49fb-a4af-3c063e8ce24a"/>
+        <link rel="alternate" type="application/xhtml+xml" href="https://dev.sdkdemo.com:444/activities/service/html/activity/recent?activityUuid=6d46a1d1-e1d3-4dd6-a7a2-fcad417d9c7c"/>
+      	<link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/activities/service/html/activity/recent?activityUuid=6d46a1d1-e1d3-4dd6-a7a2-fcad417d9c7c"/>
       
      
     
@@ -309,7 +309,7 @@
       
         
           <content type="text">
-          	GoalOfActivity - 1396449279315
+          	GoalOfActivity - 1396514043572
       	  </content>
         
         
@@ -348,10 +348,10 @@
 
 
 
-  <id>urn:lsid:ibm.com:oa:5adb427e-9e79-4aa3-bd10-5c985fbdcf5c</id>
-  <title type="text">Java Test Activity1396449276123</title>
-  <updated>2014-04-02T14:35:16Z</updated>
-  <published>2014-04-02T14:35:13Z</published>
+  <id>urn:lsid:ibm.com:oa:893c4317-18ea-4981-b01c-3ec88168a9b6</id>
+  <title type="text">ToDoNode from JS Test 1396514044508</title>
+  <updated>2014-04-03T08:34:53Z</updated>
+  <published>2014-04-03T08:34:41Z</published>
   <author>
     
 
@@ -411,13 +411,13 @@
   	  
   	    
   	  
- 	      <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="activity" label="Activity"/>
+ 	      <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="todo" label="To Do"/>
   	  
   	
     
   
 
-  <category scheme="http://www.ibm.com/xmlns/prod/sn/priority" term="1" label="Normal"/>
+  
   
     
   
@@ -435,43 +435,39 @@
   
     <category term="tag2" />
   
-  
-    <link rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/acl?activityUuid=5adb427e-9e79-4aa3-bd10-5c985fbdcf5c" />
-    <link rel="http://www.ibm.com/xmlns/prod/sn/history" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activity/history?activityUuid=5adb427e-9e79-4aa3-bd10-5c985fbdcf5c" />
-    <link rel="http://www.ibm.com/xmlns/prod/sn/templates" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/entrytemplates?activityUuid=5adb427e-9e79-4aa3-bd10-5c985fbdcf5c" />
    
+  
+    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:6d46a1d1-e1d3-4dd6-a7a2-fcad417d9c7c" 
+       type="application/atom+xml" 
+       href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=6d46a1d1-e1d3-4dd6-a7a2-fcad417d9c7c"
+       source="urn:lsid:ibm.com:oa:6d46a1d1-e1d3-4dd6-a7a2-fcad417d9c7c"
+    />
   
   
 
   
-    <app:collection href="https://dev.sdkdemo.com:444/activities/service/atom2/activity?activityUuid=5adb427e-9e79-4aa3-bd10-5c985fbdcf5c">
-      <title type="text">Java Test Activity1396449276123</title>
-      <app:categories href="https://dev.sdkdemo.com:444/activities/service/atom2/categories?activityUuid=5adb427e-9e79-4aa3-bd10-5c985fbdcf5c"/>
-    </app:collection> 
-  
-  <snx:activity>5adb427e-9e79-4aa3-bd10-5c985fbdcf5c</snx:activity>
+  <snx:activity>6d46a1d1-e1d3-4dd6-a7a2-fcad417d9c7c</snx:activity>
   
   
   
-    <link rel="edit" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/trashednode?activityNodeUuid=5adb427e-9e79-4aa3-bd10-5c985fbdcf5c" />
+    <link rel="edit" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/trashednode?activityNodeUuid=893c4317-18ea-4981-b01c-3ec88168a9b6" />
   
    
   
     
-      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activity?activityUuid=5adb427e-9e79-4aa3-bd10-5c985fbdcf5c"/>
-      
-        <link rel="alternate" type="application/xhtml+xml" href="https://dev.sdkdemo.com:444/activities/service/html/activity/recent?activityUuid=5adb427e-9e79-4aa3-bd10-5c985fbdcf5c"/>
-      	<link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/activities/service/html/activity/recent?activityUuid=5adb427e-9e79-4aa3-bd10-5c985fbdcf5c"/>
-      
-     
+    
+      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/trashednode?activityNodeUuid=893c4317-18ea-4981-b01c-3ec88168a9b6"/>
+ 	  <link rel="alternate" type="application/xhtml+xml" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=893c4317-18ea-4981-b01c-3ec88168a9b6"/>
+      <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=893c4317-18ea-4981-b01c-3ec88168a9b6"/>
+          
     
   
  
-  <snx:position>-2147483648</snx:position>
-  <snx:depth>0</snx:depth>  
+  <snx:position>2000</snx:position>
+  <snx:depth>1</snx:depth>  
   
   <snx:permissions>none, create_activity, view_activity, edit_activity, delete_activity, activity_owner, edit_activity_tags, design_activity, edit_statements, delete_statements, add_members, delete_members, create_entries, edit_personal_entries, edit_all_entries, delete_personal_entries, delete_all_entries, edit_personal_entry_tags, edit_all_entry_tags, view_members</snx:permissions>
-  <snx:icon>https://dev.sdkdemo.com:444/activities/nav/common/images/iconActivities16.png</snx:icon>
+  <snx:icon>https://dev.sdkdemo.com:444/activities/nav/common/styles/images/activities/icon_taskIncomplete.gif</snx:icon>
 
   
     
@@ -482,7 +478,7 @@
       
         
           <content type="text">
-          	GoalOfActivity - 1396449276123
+          	ToDoNode Content 1396514044508
       	  </content>
         
         
@@ -496,6 +492,8 @@
   
   
   
+  
+  <snx:communityUuid></snx:communityUuid>
   
 
     </entry>
@@ -521,10 +519,10 @@
 
 
 
-  <id>urn:lsid:ibm.com:oa:2b909e56-ba9e-4635-acf2-3ed8f12aaa05</id>
-  <title type="text">entryNode from Java Test 1396449276821</title>
-  <updated>2014-04-02T14:35:14Z</updated>
-  <published>2014-04-02T14:35:14Z</published>
+  <id>urn:lsid:ibm.com:oa:0d732d19-9aed-4870-aafb-ff523f6678e7</id>
+  <title type="text">EntryNode from JS Test 1396514044056</title>
+  <updated>2014-04-03T08:34:53Z</updated>
+  <published>2014-04-03T08:34:41Z</published>
   <author>
     
 
@@ -608,28 +606,28 @@
   
    
   
-    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:5adb427e-9e79-4aa3-bd10-5c985fbdcf5c" 
+    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:6d46a1d1-e1d3-4dd6-a7a2-fcad417d9c7c" 
        type="application/atom+xml" 
-       href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=5adb427e-9e79-4aa3-bd10-5c985fbdcf5c"
-       source="urn:lsid:ibm.com:oa:5adb427e-9e79-4aa3-bd10-5c985fbdcf5c"
+       href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=6d46a1d1-e1d3-4dd6-a7a2-fcad417d9c7c"
+       source="urn:lsid:ibm.com:oa:6d46a1d1-e1d3-4dd6-a7a2-fcad417d9c7c"
     />
   
   
 
   
-  <snx:activity>5adb427e-9e79-4aa3-bd10-5c985fbdcf5c</snx:activity>
+  <snx:activity>6d46a1d1-e1d3-4dd6-a7a2-fcad417d9c7c</snx:activity>
   
   
   
-    <link rel="edit" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/trashednode?activityNodeUuid=2b909e56-ba9e-4635-acf2-3ed8f12aaa05" />
+    <link rel="edit" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/trashednode?activityNodeUuid=0d732d19-9aed-4870-aafb-ff523f6678e7" />
   
    
   
     
     
-      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/trashednode?activityNodeUuid=2b909e56-ba9e-4635-acf2-3ed8f12aaa05"/>
- 	  <link rel="alternate" type="application/xhtml+xml" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=2b909e56-ba9e-4635-acf2-3ed8f12aaa05"/>
-      <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=2b909e56-ba9e-4635-acf2-3ed8f12aaa05"/>
+      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/trashednode?activityNodeUuid=0d732d19-9aed-4870-aafb-ff523f6678e7"/>
+ 	  <link rel="alternate" type="application/xhtml+xml" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=0d732d19-9aed-4870-aafb-ff523f6678e7"/>
+      <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=0d732d19-9aed-4870-aafb-ff523f6678e7"/>
           
     
   
@@ -649,7 +647,7 @@
       
         
           <content type="text">
-          	entryNode Content 1396449276821
+          	EntryNode Content 1396514044056
       	  </content>
         
         
@@ -688,10 +686,10 @@
 
 
 
-  <id>urn:lsid:ibm.com:oa:ad94c0f9-afff-44ec-a797-b978f8a665be</id>
-  <title type="text">Java Test Activity1396449272831</title>
-  <updated>2014-04-02T14:35:12Z</updated>
-  <published>2014-04-02T14:35:10Z</published>
+  <id>urn:lsid:ibm.com:oa:d4ac2845-e5a7-4780-8217-e04877e96c03</id>
+  <title type="text">JS Test Activity1396514027221</title>
+  <updated>2014-04-03T08:34:38Z</updated>
+  <published>2014-04-03T08:34:24Z</published>
   <author>
     
 
@@ -776,32 +774,32 @@
     <category term="tag2" />
   
   
-    <link rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/acl?activityUuid=ad94c0f9-afff-44ec-a797-b978f8a665be" />
-    <link rel="http://www.ibm.com/xmlns/prod/sn/history" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activity/history?activityUuid=ad94c0f9-afff-44ec-a797-b978f8a665be" />
-    <link rel="http://www.ibm.com/xmlns/prod/sn/templates" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/entrytemplates?activityUuid=ad94c0f9-afff-44ec-a797-b978f8a665be" />
+    <link rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/acl?activityUuid=d4ac2845-e5a7-4780-8217-e04877e96c03" />
+    <link rel="http://www.ibm.com/xmlns/prod/sn/history" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activity/history?activityUuid=d4ac2845-e5a7-4780-8217-e04877e96c03" />
+    <link rel="http://www.ibm.com/xmlns/prod/sn/templates" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/entrytemplates?activityUuid=d4ac2845-e5a7-4780-8217-e04877e96c03" />
    
   
   
 
   
-    <app:collection href="https://dev.sdkdemo.com:444/activities/service/atom2/activity?activityUuid=ad94c0f9-afff-44ec-a797-b978f8a665be">
-      <title type="text">Java Test Activity1396449272831</title>
-      <app:categories href="https://dev.sdkdemo.com:444/activities/service/atom2/categories?activityUuid=ad94c0f9-afff-44ec-a797-b978f8a665be"/>
+    <app:collection href="https://dev.sdkdemo.com:444/activities/service/atom2/activity?activityUuid=d4ac2845-e5a7-4780-8217-e04877e96c03">
+      <title type="text">JS Test Activity1396514027221</title>
+      <app:categories href="https://dev.sdkdemo.com:444/activities/service/atom2/categories?activityUuid=d4ac2845-e5a7-4780-8217-e04877e96c03"/>
     </app:collection> 
   
-  <snx:activity>ad94c0f9-afff-44ec-a797-b978f8a665be</snx:activity>
+  <snx:activity>d4ac2845-e5a7-4780-8217-e04877e96c03</snx:activity>
   
   
   
-    <link rel="edit" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/trashednode?activityNodeUuid=ad94c0f9-afff-44ec-a797-b978f8a665be" />
+    <link rel="edit" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/trashednode?activityNodeUuid=d4ac2845-e5a7-4780-8217-e04877e96c03" />
   
    
   
     
-      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activity?activityUuid=ad94c0f9-afff-44ec-a797-b978f8a665be"/>
+      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activity?activityUuid=d4ac2845-e5a7-4780-8217-e04877e96c03"/>
       
-        <link rel="alternate" type="application/xhtml+xml" href="https://dev.sdkdemo.com:444/activities/service/html/activity/recent?activityUuid=ad94c0f9-afff-44ec-a797-b978f8a665be"/>
-      	<link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/activities/service/html/activity/recent?activityUuid=ad94c0f9-afff-44ec-a797-b978f8a665be"/>
+        <link rel="alternate" type="application/xhtml+xml" href="https://dev.sdkdemo.com:444/activities/service/html/activity/recent?activityUuid=d4ac2845-e5a7-4780-8217-e04877e96c03"/>
+      	<link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/activities/service/html/activity/recent?activityUuid=d4ac2845-e5a7-4780-8217-e04877e96c03"/>
       
      
     
@@ -822,7 +820,7 @@
       
         
           <content type="text">
-          	GoalOfActivity - 1396449272831
+          	GoalOfActivity - 1396514027221
       	  </content>
         
         
@@ -861,10 +859,10 @@
 
 
 
-  <id>urn:lsid:ibm.com:oa:735addf3-df7e-4d79-86f4-62fffa1a8795</id>
-  <title type="text">entryNode from Java Test 1396449273479</title>
-  <updated>2014-04-02T14:35:11Z</updated>
-  <published>2014-04-02T14:35:10Z</published>
+  <id>urn:lsid:ibm.com:oa:0ff94954-802d-49e6-ae87-86af46f6f8ee</id>
+  <title type="text">EntryNode from JS Test 1396514027782</title>
+  <updated>2014-04-03T08:34:38Z</updated>
+  <published>2014-04-03T08:34:25Z</published>
   <author>
     
 
@@ -948,28 +946,28 @@
   
    
   
-    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:ad94c0f9-afff-44ec-a797-b978f8a665be" 
+    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:d4ac2845-e5a7-4780-8217-e04877e96c03" 
        type="application/atom+xml" 
-       href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=ad94c0f9-afff-44ec-a797-b978f8a665be"
-       source="urn:lsid:ibm.com:oa:ad94c0f9-afff-44ec-a797-b978f8a665be"
+       href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=d4ac2845-e5a7-4780-8217-e04877e96c03"
+       source="urn:lsid:ibm.com:oa:d4ac2845-e5a7-4780-8217-e04877e96c03"
     />
   
   
 
   
-  <snx:activity>ad94c0f9-afff-44ec-a797-b978f8a665be</snx:activity>
+  <snx:activity>d4ac2845-e5a7-4780-8217-e04877e96c03</snx:activity>
   
   
   
-    <link rel="edit" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/trashednode?activityNodeUuid=735addf3-df7e-4d79-86f4-62fffa1a8795" />
+    <link rel="edit" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/trashednode?activityNodeUuid=0ff94954-802d-49e6-ae87-86af46f6f8ee" />
   
    
   
     
     
-      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/trashednode?activityNodeUuid=735addf3-df7e-4d79-86f4-62fffa1a8795"/>
- 	  <link rel="alternate" type="application/xhtml+xml" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=735addf3-df7e-4d79-86f4-62fffa1a8795"/>
-      <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=735addf3-df7e-4d79-86f4-62fffa1a8795"/>
+      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/trashednode?activityNodeUuid=0ff94954-802d-49e6-ae87-86af46f6f8ee"/>
+ 	  <link rel="alternate" type="application/xhtml+xml" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=0ff94954-802d-49e6-ae87-86af46f6f8ee"/>
+      <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=0ff94954-802d-49e6-ae87-86af46f6f8ee"/>
           
     
   
@@ -989,7 +987,7 @@
       
         
           <content type="text">
-          	entryNode Content 1396449273479
+          	EntryNode Content 1396514027782
       	  </content>
         
         
@@ -1028,10 +1026,10 @@
 
 
 
-  <id>urn:lsid:ibm.com:oa:66bc6f78-8c73-4cb4-b35c-b4b8797bbbc6</id>
-  <title type="text">Java Test Activity1396449269974</title>
-  <updated>2014-04-02T14:35:09Z</updated>
-  <published>2014-04-02T14:35:07Z</published>
+  <id>urn:lsid:ibm.com:oa:138c07c8-0ae8-41ec-b273-f0fac6ec792a</id>
+  <title type="text">JS Test Activity1396514006407</title>
+  <updated>2014-04-03T08:34:22Z</updated>
+  <published>2014-04-03T08:34:03Z</published>
   <author>
     
 
@@ -1116,32 +1114,32 @@
     <category term="tag2" />
   
   
-    <link rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/acl?activityUuid=66bc6f78-8c73-4cb4-b35c-b4b8797bbbc6" />
-    <link rel="http://www.ibm.com/xmlns/prod/sn/history" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activity/history?activityUuid=66bc6f78-8c73-4cb4-b35c-b4b8797bbbc6" />
-    <link rel="http://www.ibm.com/xmlns/prod/sn/templates" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/entrytemplates?activityUuid=66bc6f78-8c73-4cb4-b35c-b4b8797bbbc6" />
+    <link rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/acl?activityUuid=138c07c8-0ae8-41ec-b273-f0fac6ec792a" />
+    <link rel="http://www.ibm.com/xmlns/prod/sn/history" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activity/history?activityUuid=138c07c8-0ae8-41ec-b273-f0fac6ec792a" />
+    <link rel="http://www.ibm.com/xmlns/prod/sn/templates" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/entrytemplates?activityUuid=138c07c8-0ae8-41ec-b273-f0fac6ec792a" />
    
   
   
 
   
-    <app:collection href="https://dev.sdkdemo.com:444/activities/service/atom2/activity?activityUuid=66bc6f78-8c73-4cb4-b35c-b4b8797bbbc6">
-      <title type="text">Java Test Activity1396449269974</title>
-      <app:categories href="https://dev.sdkdemo.com:444/activities/service/atom2/categories?activityUuid=66bc6f78-8c73-4cb4-b35c-b4b8797bbbc6"/>
+    <app:collection href="https://dev.sdkdemo.com:444/activities/service/atom2/activity?activityUuid=138c07c8-0ae8-41ec-b273-f0fac6ec792a">
+      <title type="text">JS Test Activity1396514006407</title>
+      <app:categories href="https://dev.sdkdemo.com:444/activities/service/atom2/categories?activityUuid=138c07c8-0ae8-41ec-b273-f0fac6ec792a"/>
     </app:collection> 
   
-  <snx:activity>66bc6f78-8c73-4cb4-b35c-b4b8797bbbc6</snx:activity>
+  <snx:activity>138c07c8-0ae8-41ec-b273-f0fac6ec792a</snx:activity>
   
   
   
-    <link rel="edit" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/trashednode?activityNodeUuid=66bc6f78-8c73-4cb4-b35c-b4b8797bbbc6" />
+    <link rel="edit" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/trashednode?activityNodeUuid=138c07c8-0ae8-41ec-b273-f0fac6ec792a" />
   
    
   
     
-      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activity?activityUuid=66bc6f78-8c73-4cb4-b35c-b4b8797bbbc6"/>
+      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activity?activityUuid=138c07c8-0ae8-41ec-b273-f0fac6ec792a"/>
       
-        <link rel="alternate" type="application/xhtml+xml" href="https://dev.sdkdemo.com:444/activities/service/html/activity/recent?activityUuid=66bc6f78-8c73-4cb4-b35c-b4b8797bbbc6"/>
-      	<link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/activities/service/html/activity/recent?activityUuid=66bc6f78-8c73-4cb4-b35c-b4b8797bbbc6"/>
+        <link rel="alternate" type="application/xhtml+xml" href="https://dev.sdkdemo.com:444/activities/service/html/activity/recent?activityUuid=138c07c8-0ae8-41ec-b273-f0fac6ec792a"/>
+      	<link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/activities/service/html/activity/recent?activityUuid=138c07c8-0ae8-41ec-b273-f0fac6ec792a"/>
       
      
     
@@ -1162,7 +1160,7 @@
       
         
           <content type="text">
-          	GoalOfActivity - 1396449269974
+          	GoalOfActivity - 1396514006407
       	  </content>
         
         
@@ -1201,10 +1199,10 @@
 
 
 
-  <id>urn:lsid:ibm.com:oa:f4844ea3-0743-42f7-9432-bf89192a3ee7</id>
-  <title type="text">Java Test Activity1396449267193</title>
-  <updated>2014-04-02T14:35:06Z</updated>
-  <published>2014-04-02T14:35:04Z</published>
+  <id>urn:lsid:ibm.com:oa:2fbe0fdf-6b26-4f1d-a1a4-0251d4888547</id>
+  <title type="text">New Title Updated by JS Snippet on Thu Apr 03 2014 04:33:07 GMT-0400 (Eastern Standard Time)</title>
+  <updated>2014-04-03T08:33:46Z</updated>
+  <published>2014-04-03T08:33:33Z</published>
   <author>
     
 
@@ -1289,32 +1287,32 @@
     <category term="tag2" />
   
   
-    <link rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/acl?activityUuid=f4844ea3-0743-42f7-9432-bf89192a3ee7" />
-    <link rel="http://www.ibm.com/xmlns/prod/sn/history" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activity/history?activityUuid=f4844ea3-0743-42f7-9432-bf89192a3ee7" />
-    <link rel="http://www.ibm.com/xmlns/prod/sn/templates" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/entrytemplates?activityUuid=f4844ea3-0743-42f7-9432-bf89192a3ee7" />
+    <link rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/acl?activityUuid=2fbe0fdf-6b26-4f1d-a1a4-0251d4888547" />
+    <link rel="http://www.ibm.com/xmlns/prod/sn/history" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activity/history?activityUuid=2fbe0fdf-6b26-4f1d-a1a4-0251d4888547" />
+    <link rel="http://www.ibm.com/xmlns/prod/sn/templates" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/entrytemplates?activityUuid=2fbe0fdf-6b26-4f1d-a1a4-0251d4888547" />
    
   
   
 
   
-    <app:collection href="https://dev.sdkdemo.com:444/activities/service/atom2/activity?activityUuid=f4844ea3-0743-42f7-9432-bf89192a3ee7">
-      <title type="text">Java Test Activity1396449267193</title>
-      <app:categories href="https://dev.sdkdemo.com:444/activities/service/atom2/categories?activityUuid=f4844ea3-0743-42f7-9432-bf89192a3ee7"/>
+    <app:collection href="https://dev.sdkdemo.com:444/activities/service/atom2/activity?activityUuid=2fbe0fdf-6b26-4f1d-a1a4-0251d4888547">
+      <title type="text">New Title Updated by JS Snippet on Thu Apr 03 2014 04:33:07 GMT-0400 (Eastern Standard Time)</title>
+      <app:categories href="https://dev.sdkdemo.com:444/activities/service/atom2/categories?activityUuid=2fbe0fdf-6b26-4f1d-a1a4-0251d4888547"/>
     </app:collection> 
   
-  <snx:activity>f4844ea3-0743-42f7-9432-bf89192a3ee7</snx:activity>
+  <snx:activity>2fbe0fdf-6b26-4f1d-a1a4-0251d4888547</snx:activity>
   
   
   
-    <link rel="edit" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/trashednode?activityNodeUuid=f4844ea3-0743-42f7-9432-bf89192a3ee7" />
+    <link rel="edit" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/trashednode?activityNodeUuid=2fbe0fdf-6b26-4f1d-a1a4-0251d4888547" />
   
    
   
     
-      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activity?activityUuid=f4844ea3-0743-42f7-9432-bf89192a3ee7"/>
+      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activity?activityUuid=2fbe0fdf-6b26-4f1d-a1a4-0251d4888547"/>
       
-        <link rel="alternate" type="application/xhtml+xml" href="https://dev.sdkdemo.com:444/activities/service/html/activity/recent?activityUuid=f4844ea3-0743-42f7-9432-bf89192a3ee7"/>
-      	<link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/activities/service/html/activity/recent?activityUuid=f4844ea3-0743-42f7-9432-bf89192a3ee7"/>
+        <link rel="alternate" type="application/xhtml+xml" href="https://dev.sdkdemo.com:444/activities/service/html/activity/recent?activityUuid=2fbe0fdf-6b26-4f1d-a1a4-0251d4888547"/>
+      	<link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/activities/service/html/activity/recent?activityUuid=2fbe0fdf-6b26-4f1d-a1a4-0251d4888547"/>
       
      
     
@@ -1335,7 +1333,7 @@
       
         
           <content type="text">
-          	GoalOfActivity - 1396449267193
+          	GoalOfActivity - 1396513975765
       	  </content>
         
         
@@ -1374,10 +1372,10 @@
 
 
 
-  <id>urn:lsid:ibm.com:oa:acb5006e-9fae-4ac4-a095-9e22d302f3ba</id>
-  <title type="text">Java Test Activity1396449264487</title>
-  <updated>2014-04-02T14:35:03Z</updated>
-  <published>2014-04-02T14:35:01Z</published>
+  <id>urn:lsid:ibm.com:oa:b54624ba-7b56-4174-a35b-7d85914ad51c</id>
+  <title type="text">JS Test Activity1396513955623</title>
+  <updated>2014-04-03T08:33:30Z</updated>
+  <published>2014-04-03T08:33:12Z</published>
   <author>
     
 
@@ -1462,32 +1460,32 @@
     <category term="tag2" />
   
   
-    <link rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/acl?activityUuid=acb5006e-9fae-4ac4-a095-9e22d302f3ba" />
-    <link rel="http://www.ibm.com/xmlns/prod/sn/history" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activity/history?activityUuid=acb5006e-9fae-4ac4-a095-9e22d302f3ba" />
-    <link rel="http://www.ibm.com/xmlns/prod/sn/templates" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/entrytemplates?activityUuid=acb5006e-9fae-4ac4-a095-9e22d302f3ba" />
+    <link rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/acl?activityUuid=b54624ba-7b56-4174-a35b-7d85914ad51c" />
+    <link rel="http://www.ibm.com/xmlns/prod/sn/history" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activity/history?activityUuid=b54624ba-7b56-4174-a35b-7d85914ad51c" />
+    <link rel="http://www.ibm.com/xmlns/prod/sn/templates" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/entrytemplates?activityUuid=b54624ba-7b56-4174-a35b-7d85914ad51c" />
    
   
   
 
   
-    <app:collection href="https://dev.sdkdemo.com:444/activities/service/atom2/activity?activityUuid=acb5006e-9fae-4ac4-a095-9e22d302f3ba">
-      <title type="text">Java Test Activity1396449264487</title>
-      <app:categories href="https://dev.sdkdemo.com:444/activities/service/atom2/categories?activityUuid=acb5006e-9fae-4ac4-a095-9e22d302f3ba"/>
+    <app:collection href="https://dev.sdkdemo.com:444/activities/service/atom2/activity?activityUuid=b54624ba-7b56-4174-a35b-7d85914ad51c">
+      <title type="text">JS Test Activity1396513955623</title>
+      <app:categories href="https://dev.sdkdemo.com:444/activities/service/atom2/categories?activityUuid=b54624ba-7b56-4174-a35b-7d85914ad51c"/>
     </app:collection> 
   
-  <snx:activity>acb5006e-9fae-4ac4-a095-9e22d302f3ba</snx:activity>
+  <snx:activity>b54624ba-7b56-4174-a35b-7d85914ad51c</snx:activity>
   
   
   
-    <link rel="edit" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/trashednode?activityNodeUuid=acb5006e-9fae-4ac4-a095-9e22d302f3ba" />
+    <link rel="edit" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/trashednode?activityNodeUuid=b54624ba-7b56-4174-a35b-7d85914ad51c" />
   
    
   
     
-      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activity?activityUuid=acb5006e-9fae-4ac4-a095-9e22d302f3ba"/>
+      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activity?activityUuid=b54624ba-7b56-4174-a35b-7d85914ad51c"/>
       
-        <link rel="alternate" type="application/xhtml+xml" href="https://dev.sdkdemo.com:444/activities/service/html/activity/recent?activityUuid=acb5006e-9fae-4ac4-a095-9e22d302f3ba"/>
-      	<link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/activities/service/html/activity/recent?activityUuid=acb5006e-9fae-4ac4-a095-9e22d302f3ba"/>
+        <link rel="alternate" type="application/xhtml+xml" href="https://dev.sdkdemo.com:444/activities/service/html/activity/recent?activityUuid=b54624ba-7b56-4174-a35b-7d85914ad51c"/>
+      	<link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/activities/service/html/activity/recent?activityUuid=b54624ba-7b56-4174-a35b-7d85914ad51c"/>
       
      
     
@@ -1508,7 +1506,7 @@
       
         
           <content type="text">
-          	GoalOfActivity - 1396449264487
+          	GoalOfActivity - 1396513955623
       	  </content>
         
         
@@ -1547,10 +1545,10 @@
 
 
 
-  <id>urn:lsid:ibm.com:oa:3a087c60-560d-4754-8cc5-167bebef48f3</id>
-  <title type="text">Java Test Activity1396449258790</title>
-  <updated>2014-04-02T14:35:01Z</updated>
-  <published>2014-04-02T14:34:56Z</published>
+  <id>urn:lsid:ibm.com:oa:3088678c-4c5a-4b34-a7c1-8b2184fb0048</id>
+  <title type="text">SectionNode from JS Test 1396513956028</title>
+  <updated>2014-04-03T08:33:30Z</updated>
+  <published>2014-04-03T08:33:13Z</published>
   <author>
     
 
@@ -1610,15 +1608,13 @@
   	  
   	    
   	  
- 	      <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="activity" label="Activity"/>
+ 	      <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="section" label="Section"/>
   	  
   	
     
   
 
-  <category scheme="http://www.ibm.com/xmlns/prod/sn/priority" term="1" label="Normal"/>
   
-    
   
   
   
@@ -1634,43 +1630,39 @@
   
     <category term="tag2" />
   
-  
-    <link rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/acl?activityUuid=3a087c60-560d-4754-8cc5-167bebef48f3" />
-    <link rel="http://www.ibm.com/xmlns/prod/sn/history" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activity/history?activityUuid=3a087c60-560d-4754-8cc5-167bebef48f3" />
-    <link rel="http://www.ibm.com/xmlns/prod/sn/templates" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/entrytemplates?activityUuid=3a087c60-560d-4754-8cc5-167bebef48f3" />
    
+  
+    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:b54624ba-7b56-4174-a35b-7d85914ad51c" 
+       type="application/atom+xml" 
+       href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=b54624ba-7b56-4174-a35b-7d85914ad51c"
+       source="urn:lsid:ibm.com:oa:b54624ba-7b56-4174-a35b-7d85914ad51c"
+    />
   
   
 
   
-    <app:collection href="https://dev.sdkdemo.com:444/activities/service/atom2/activity?activityUuid=3a087c60-560d-4754-8cc5-167bebef48f3">
-      <title type="text">Java Test Activity1396449258790</title>
-      <app:categories href="https://dev.sdkdemo.com:444/activities/service/atom2/categories?activityUuid=3a087c60-560d-4754-8cc5-167bebef48f3"/>
-    </app:collection> 
-  
-  <snx:activity>3a087c60-560d-4754-8cc5-167bebef48f3</snx:activity>
+  <snx:activity>b54624ba-7b56-4174-a35b-7d85914ad51c</snx:activity>
   
   
   
-    <link rel="edit" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/trashednode?activityNodeUuid=3a087c60-560d-4754-8cc5-167bebef48f3" />
+    <link rel="edit" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/trashednode?activityNodeUuid=3088678c-4c5a-4b34-a7c1-8b2184fb0048" />
   
    
   
     
-      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activity?activityUuid=3a087c60-560d-4754-8cc5-167bebef48f3"/>
-      
-        <link rel="alternate" type="application/xhtml+xml" href="https://dev.sdkdemo.com:444/activities/service/html/activity/recent?activityUuid=3a087c60-560d-4754-8cc5-167bebef48f3"/>
-      	<link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/activities/service/html/activity/recent?activityUuid=3a087c60-560d-4754-8cc5-167bebef48f3"/>
-      
-     
+    
+      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/trashednode?activityNodeUuid=3088678c-4c5a-4b34-a7c1-8b2184fb0048"/>
+ 	  <link rel="alternate" type="application/xhtml+xml" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=3088678c-4c5a-4b34-a7c1-8b2184fb0048"/>
+      <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=3088678c-4c5a-4b34-a7c1-8b2184fb0048"/>
+          
     
   
  
-  <snx:position>-2147483648</snx:position>
-  <snx:depth>0</snx:depth>  
+  <snx:position>1000</snx:position>
+  <snx:depth>1</snx:depth>  
   
   <snx:permissions>none, create_activity, view_activity, edit_activity, delete_activity, activity_owner, edit_activity_tags, design_activity, edit_statements, delete_statements, add_members, delete_members, create_entries, edit_personal_entries, edit_all_entries, delete_personal_entries, delete_all_entries, edit_personal_entry_tags, edit_all_entry_tags, view_members</snx:permissions>
-  <snx:icon>https://dev.sdkdemo.com:444/activities/nav/common/images/iconActivities16.png</snx:icon>
+  
 
   
     
@@ -1681,7 +1673,7 @@
       
         
           <content type="text">
-          	GoalOfActivity - 1396449258790
+          	SectionNode Content 1396513956028
       	  </content>
         
         
@@ -1720,10 +1712,10 @@
 
 
 
-  <id>urn:lsid:ibm.com:oa:ae68ffc1-3859-4565-b015-d344e23a2eb4</id>
-  <title type="text">Java Test Activity1396449256829</title>
-  <updated>2014-04-02T14:34:55Z</updated>
-  <published>2014-04-02T14:34:54Z</published>
+  <id>urn:lsid:ibm.com:oa:16954baa-5126-478a-843f-3a24d057fc52</id>
+  <title type="text">Entry Moved to Section by JS Snippet Thu Apr 03 2014 04:32:50 GMT-0400 (Eastern Standard Time)</title>
+  <updated>2014-04-03T08:33:30Z</updated>
+  <published>2014-04-03T08:33:13Z</published>
   <author>
     
 
@@ -1783,15 +1775,13 @@
   	  
   	    
   	  
- 	      <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="activity" label="Activity"/>
+ 	      <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="entry" label="Entry"/>
   	  
   	
     
   
 
-  <category scheme="http://www.ibm.com/xmlns/prod/sn/priority" term="1" label="Normal"/>
   
-    
   
   
   
@@ -1807,43 +1797,39 @@
   
     <category term="tag2" />
   
-  
-    <link rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/acl?activityUuid=ae68ffc1-3859-4565-b015-d344e23a2eb4" />
-    <link rel="http://www.ibm.com/xmlns/prod/sn/history" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activity/history?activityUuid=ae68ffc1-3859-4565-b015-d344e23a2eb4" />
-    <link rel="http://www.ibm.com/xmlns/prod/sn/templates" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/entrytemplates?activityUuid=ae68ffc1-3859-4565-b015-d344e23a2eb4" />
    
+  
+    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:3088678c-4c5a-4b34-a7c1-8b2184fb0048" 
+       type="application/atom+xml" 
+       href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=3088678c-4c5a-4b34-a7c1-8b2184fb0048"
+       source="urn:lsid:ibm.com:oa:b54624ba-7b56-4174-a35b-7d85914ad51c"
+    />
   
   
 
   
-    <app:collection href="https://dev.sdkdemo.com:444/activities/service/atom2/activity?activityUuid=ae68ffc1-3859-4565-b015-d344e23a2eb4">
-      <title type="text">Java Test Activity1396449256829</title>
-      <app:categories href="https://dev.sdkdemo.com:444/activities/service/atom2/categories?activityUuid=ae68ffc1-3859-4565-b015-d344e23a2eb4"/>
-    </app:collection> 
-  
-  <snx:activity>ae68ffc1-3859-4565-b015-d344e23a2eb4</snx:activity>
+  <snx:activity>b54624ba-7b56-4174-a35b-7d85914ad51c</snx:activity>
   
   
   
-    <link rel="edit" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/trashednode?activityNodeUuid=ae68ffc1-3859-4565-b015-d344e23a2eb4" />
+    <link rel="edit" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/trashednode?activityNodeUuid=16954baa-5126-478a-843f-3a24d057fc52" />
   
    
   
     
-      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activity?activityUuid=ae68ffc1-3859-4565-b015-d344e23a2eb4"/>
-      
-        <link rel="alternate" type="application/xhtml+xml" href="https://dev.sdkdemo.com:444/activities/service/html/activity/recent?activityUuid=ae68ffc1-3859-4565-b015-d344e23a2eb4"/>
-      	<link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/activities/service/html/activity/recent?activityUuid=ae68ffc1-3859-4565-b015-d344e23a2eb4"/>
-      
-     
+    
+      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/trashednode?activityNodeUuid=16954baa-5126-478a-843f-3a24d057fc52"/>
+ 	  <link rel="alternate" type="application/xhtml+xml" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=16954baa-5126-478a-843f-3a24d057fc52"/>
+      <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=16954baa-5126-478a-843f-3a24d057fc52"/>
+          
     
   
  
-  <snx:position>-2147483648</snx:position>
-  <snx:depth>0</snx:depth>  
+  <snx:position>2000</snx:position>
+  <snx:depth>2</snx:depth>  
   
   <snx:permissions>none, create_activity, view_activity, edit_activity, delete_activity, activity_owner, edit_activity_tags, design_activity, edit_statements, delete_statements, add_members, delete_members, create_entries, edit_personal_entries, edit_all_entries, delete_personal_entries, delete_all_entries, edit_personal_entry_tags, edit_all_entry_tags, view_members</snx:permissions>
-  <snx:icon>https://dev.sdkdemo.com:444/activities/nav/common/images/iconActivities16.png</snx:icon>
+  
 
   
     
@@ -1854,7 +1840,7 @@
       
         
           <content type="text">
-          	GoalOfActivity - 1396449256829
+          	EntryNode Content 1396513956450
       	  </content>
         
         

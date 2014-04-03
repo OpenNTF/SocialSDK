@@ -4,7 +4,7 @@
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Wed, 02 Apr 2014 14:57:14 GMT]]></value>
+        <value><![CDATA[Thu, 03 Apr 2014 09:15:31 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -24,7 +24,7 @@
     </header>
     <header>
         <name><![CDATA[Last-Modified]]></name>
-        <value><![CDATA[Wed, 02 Apr 2014 14:57:16 GMT]]></value>
+        <value><![CDATA[Thu, 03 Apr 2014 09:15:34 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Pragma]]></name>
@@ -32,19 +32,19 @@
     </header>
     <header>
         <name><![CDATA[ETag]]></name>
-        <value><![CDATA[W/"1396450636815-ac1cc9e6-c8f9-4e72-93b2-e4b4633616a3"]]></value>
+        <value><![CDATA[W/"1396516534367-ac1cc9e6-c8f9-4e72-93b2-e4b4633616a3"]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/oJFnIqru42UQJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
+        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/vDrKbs34A+MQJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=69ttM7rfDYVREvvKzI9tZjhN09bxLS8M4uNib2842mJKWigeEV79DHlvR/yvtBdgtJQVebfu1PANKx873qGSbSY7/Rxc6LSqEB9EByhymsoMQ/nXapiDXcVmm3jG5kBWBOKKuwNI2j1wMzcNwX1Gky1RoSb7t2o9CcWEwhCEZFkoywUgAiX+jPVUSwqvtFbuknBCDXeXwJmBcbZaK0jCo16rBjmvTvQUzfj5SYwUBvzoycXuMQHZWpXvjwJUwmOeO3v6nVjHBhnB7bIKL2LrZfjpay2OllzwAI0/bsJR6otTax7ou6vuMdzYsCZNjQ+ywsnsvdwJ3NfhvisZ0LG3maXjojiYmcRXzHOmxYW/Jh42EPmdz3/A/xOttmScvDPO0nYthRTiPKHiy62JOgSmNvAjgRfNEPII1FgmVMTyL9eJ0DwBtz58iDep97fYNm1oH8dTg0vA2hP1RyirJGptsMEI9G14w4Qvrq8aYniU5GC3A13I9GQI9+Yil1iwE0YUXhZfk7H1lfSpF/fQpLUzrHtJ7hq7m/VIDLgiJ4O0nIglOAwfJlrq0giJn9DTDsxOQxT6zWiZ5HbdCws66EqwJHuKI78likGN1dqkinlBx+gLa+jI0QX2vhwMXP+pvSzAi6ZMufE2arZqqBnU2W13iUYH7gHQtAuJs/5aJXobX3FPjhu46wcx7kcuA7+QsgD+czRY84S3v8pO4JbSBEtOdDDVwNluDk1cIF4XXYfcVXU=; Path=/]]></value>
+        <value><![CDATA[LtpaToken2=A7gDx48XrzVY+LnckGsPNKEByJCi3bmFVbtaSCFmdy5ejB6YX6JqponToQvHeJL/qhGjmdRST7U+B4/pVnkps91O4/pO2cfQjMpFZuvloI4C0YMeCdOlN0cxz2fVB2s6NrTtwQgKgPfbvpi23gM+XEBVt8ufBU4Ylif5IE852sgQhhq1GXb9yJeITvReMADNsIOVx1DbIy4YL2hTkGO6xwqnioh22GWBiGsnxrhyDAQ0U3Z869MoZe2B0L3qXygq9IppMfuFrcCHAfq4julGYw7UQxvcCcxy49rJcJUDe+YVyWHi4Mb+KCvYY35gwrjOpIR3LpnkcHNqk73TD8Pt9/l8arzKQkEMHhaJRBtj1iKqC2Wd9MjNy8mbaesfVglQnOIUP/AuZB+5WO61HUEzjbyVe9DvEfsd1O2TjMPk0EFqyqTkneUfOetOjrRwNUfq5Bf2IZORGMuafnH+QTZhryt3mXKEOSn2PzArX96eZ9KR2zlbcObuq1a3r6cgv/Nbp/bzMcB/IqcJl+mnJZSCoe5s1/SfuqmncpBjpzB7IgypxDcAvKt3A+xywvTAx9k1Hrq17YrZiE6/SZcmmmJUzAm3IO/TYx/KuwQiy6wyVE6Bi0TdLwQEDm+LVVMhlzTcElbGqclOJoWmtUwbGwVSQsZPwZbRHDqigQWLcAAuJ3AxeMpaWRodvKs8CLRcM7VgtZSYdMmzte8Jypqb3mZZt3miIr5+aBCEA5pFltUoGWU=; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LCSESSIONID=0000Wtd2UfGBy9EHHOPoNm5SQVB:18dna4k6n; Path=/; HttpOnly]]></value>
+        <value><![CDATA[LCSESSIONID=0000JBf7LrSIP8_LTLo5KCSLGqn:18dna4k6n; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Cache-Control]]></name>
@@ -99,7 +99,7 @@
   <logo>https://dev.sdkdemo.com:444/activities/nav/common/images/iconActivities128.png</logo>
   <id>https://dev.sdkdemo.com:444/activities/service/atom2/todos</id>
   <title type="text">To Do List for Frank Adams</title>
-  <updated>2014-04-02T13:14:52Z</updated> 
+  <updated>2014-04-03T05:58:50Z</updated> 
   <author>
     
 
@@ -148,11 +148,506 @@
   
 
  
-  <os:totalResults>285</os:totalResults>
+  <os:totalResults>288</os:totalResults>
   <os:startIndex>1</os:startIndex>
   
   
   
+  
+    
+    <entry>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <id>urn:lsid:ibm.com:oa:5f862447-9ddd-489c-944a-813596642c92</id>
+  <title type="text">todoNode from JSP 1396504693589</title>
+  <updated>2014-04-03T05:58:50Z</updated>
+  <published>2014-04-03T05:58:50Z</published>
+  <author>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <name>Frank Adams</name>
+  <email>***REMOVED***@renovations.com</email>
+  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+  <snx:ldapid>ac1cc9e6-c8f9-4e72-93b2-e4b4633616a3</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </author>
+  <contributor>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <name>Frank Adams</name>
+  <email>***REMOVED***@renovations.com</email>
+  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+  <snx:ldapid>ac1cc9e6-c8f9-4e72-93b2-e4b4633616a3</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </contributor>
+  	
+    
+    
+  	     
+  	  
+  	    
+  	  
+ 	      <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="todo" label="To Do"/>
+  	  
+  	
+    
+  
+
+  
+  
+    
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    <category term="todonodetag" />
+  
+   
+  
+    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:27e0da24-622e-403d-bb0c-303f91a7c2a8" 
+       type="application/atom+xml" 
+       href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=27e0da24-622e-403d-bb0c-303f91a7c2a8"
+       source="urn:lsid:ibm.com:oa:27e0da24-622e-403d-bb0c-303f91a7c2a8"
+    />
+  
+  
+
+  
+  <snx:activity>27e0da24-622e-403d-bb0c-303f91a7c2a8</snx:activity>
+  
+  
+  
+    <link rel="edit" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=5f862447-9ddd-489c-944a-813596642c92" />
+  
+   
+  
+    
+    
+      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=5f862447-9ddd-489c-944a-813596642c92"/>
+ 	  <link rel="alternate" type="application/xhtml+xml" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=5f862447-9ddd-489c-944a-813596642c92"/>
+      <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=5f862447-9ddd-489c-944a-813596642c92"/>
+          
+    
+  
+ 
+  <snx:position>1000</snx:position>
+  <snx:depth>1</snx:depth>  
+  
+  <snx:permissions>none, create_activity, view_activity, edit_activity, delete_activity, activity_owner, edit_activity_tags, design_activity, edit_statements, delete_statements, add_members, delete_members, create_entries, edit_personal_entries, edit_all_entries, delete_personal_entries, delete_all_entries, edit_personal_entry_tags, edit_all_entry_tags, view_members</snx:permissions>
+  <snx:icon>https://dev.sdkdemo.com:444/activities/nav/common/styles/images/activities/icon_taskIncomplete.gif</snx:icon>
+
+  
+    
+    
+    
+    
+      
+      
+        
+          <content type="text">
+          	Todo Node Content 1396504693589
+      	  </content>
+        
+        
+      
+    
+  
+  
+  
+
+    
+  
+  
+  
+  
+
+    </entry>
+  
+    
+    <entry>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <id>urn:lsid:ibm.com:oa:108cc6cd-2732-4407-8932-888eb1656f42</id>
+  <title type="text">todoNode from JSP 1396484616972</title>
+  <updated>2014-04-03T00:24:14Z</updated>
+  <published>2014-04-03T00:24:14Z</published>
+  <author>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <name>Frank Adams</name>
+  <email>***REMOVED***@renovations.com</email>
+  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+  <snx:ldapid>ac1cc9e6-c8f9-4e72-93b2-e4b4633616a3</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </author>
+  <contributor>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <name>Frank Adams</name>
+  <email>***REMOVED***@renovations.com</email>
+  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+  <snx:ldapid>ac1cc9e6-c8f9-4e72-93b2-e4b4633616a3</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </contributor>
+  	
+    
+    
+  	     
+  	  
+  	    
+  	  
+ 	      <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="todo" label="To Do"/>
+  	  
+  	
+    
+  
+
+  
+  
+    
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    <category term="todonodetag" />
+  
+   
+  
+    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:b90df8b2-2f08-420c-8829-a0e213198719" 
+       type="application/atom+xml" 
+       href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=b90df8b2-2f08-420c-8829-a0e213198719"
+       source="urn:lsid:ibm.com:oa:b90df8b2-2f08-420c-8829-a0e213198719"
+    />
+  
+  
+
+  
+  <snx:activity>b90df8b2-2f08-420c-8829-a0e213198719</snx:activity>
+  
+  
+  
+    <link rel="edit" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=108cc6cd-2732-4407-8932-888eb1656f42" />
+  
+   
+  
+    
+    
+      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=108cc6cd-2732-4407-8932-888eb1656f42"/>
+ 	  <link rel="alternate" type="application/xhtml+xml" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=108cc6cd-2732-4407-8932-888eb1656f42"/>
+      <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=108cc6cd-2732-4407-8932-888eb1656f42"/>
+          
+    
+  
+ 
+  <snx:position>1000</snx:position>
+  <snx:depth>1</snx:depth>  
+  
+  <snx:permissions>none, create_activity, view_activity, edit_activity, delete_activity, activity_owner, edit_activity_tags, design_activity, edit_statements, delete_statements, add_members, delete_members, create_entries, edit_personal_entries, edit_all_entries, delete_personal_entries, delete_all_entries, edit_personal_entry_tags, edit_all_entry_tags, view_members</snx:permissions>
+  <snx:icon>https://dev.sdkdemo.com:444/activities/nav/common/styles/images/activities/icon_taskIncomplete.gif</snx:icon>
+
+  
+    
+    
+    
+    
+      
+      
+        
+          <content type="text">
+          	Todo Node Content 1396484616972
+      	  </content>
+        
+        
+      
+    
+  
+  
+  
+
+    
+  
+  
+  
+  
+
+    </entry>
+  
+    
+    <entry>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <id>urn:lsid:ibm.com:oa:c99d9257-0ef4-4683-94c0-b5b443019101</id>
+  <title type="text">todoNode from JSP 1396464496900</title>
+  <updated>2014-04-02T18:48:53Z</updated>
+  <published>2014-04-02T18:48:53Z</published>
+  <author>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <name>Frank Adams</name>
+  <email>***REMOVED***@renovations.com</email>
+  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+  <snx:ldapid>ac1cc9e6-c8f9-4e72-93b2-e4b4633616a3</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </author>
+  <contributor>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <name>Frank Adams</name>
+  <email>***REMOVED***@renovations.com</email>
+  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+  <snx:ldapid>ac1cc9e6-c8f9-4e72-93b2-e4b4633616a3</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </contributor>
+  	
+    
+    
+  	     
+  	  
+  	    
+  	  
+ 	      <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="todo" label="To Do"/>
+  	  
+  	
+    
+  
+
+  
+  
+    
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    <category term="todonodetag" />
+  
+   
+  
+    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:4cfbb390-67e3-42f9-9164-73112763a5e5" 
+       type="application/atom+xml" 
+       href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=4cfbb390-67e3-42f9-9164-73112763a5e5"
+       source="urn:lsid:ibm.com:oa:4cfbb390-67e3-42f9-9164-73112763a5e5"
+    />
+  
+  
+
+  
+  <snx:activity>4cfbb390-67e3-42f9-9164-73112763a5e5</snx:activity>
+  
+  
+  
+    <link rel="edit" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=c99d9257-0ef4-4683-94c0-b5b443019101" />
+  
+   
+  
+    
+    
+      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=c99d9257-0ef4-4683-94c0-b5b443019101"/>
+ 	  <link rel="alternate" type="application/xhtml+xml" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=c99d9257-0ef4-4683-94c0-b5b443019101"/>
+      <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=c99d9257-0ef4-4683-94c0-b5b443019101"/>
+          
+    
+  
+ 
+  <snx:position>1000</snx:position>
+  <snx:depth>1</snx:depth>  
+  
+  <snx:permissions>none, create_activity, view_activity, edit_activity, delete_activity, activity_owner, edit_activity_tags, design_activity, edit_statements, delete_statements, add_members, delete_members, create_entries, edit_personal_entries, edit_all_entries, delete_personal_entries, delete_all_entries, edit_personal_entry_tags, edit_all_entry_tags, view_members</snx:permissions>
+  <snx:icon>https://dev.sdkdemo.com:444/activities/nav/common/styles/images/activities/icon_taskIncomplete.gif</snx:icon>
+
+  
+    
+    
+    
+    
+      
+      
+        
+          <content type="text">
+          	Todo Node Content 1396464496900
+      	  </content>
+        
+        
+      
+    
+  
+  
+  
+
+    
+  
+  
+  
+  
+
+    </entry>
   
     
     <entry>
@@ -1292,501 +1787,6 @@
         
           <content type="text">
           	Todo Node Content 1396319753109
-      	  </content>
-        
-        
-      
-    
-  
-  
-  
-
-    
-  
-  
-  
-  
-
-    </entry>
-  
-    
-    <entry>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <id>urn:lsid:ibm.com:oa:c75b35c2-342f-4c1a-94d1-4a04505bda2d</id>
-  <title type="text">todoNode from JSP 1396304316771</title>
-  <updated>2014-03-31T22:19:12Z</updated>
-  <published>2014-03-31T22:19:12Z</published>
-  <author>
-    
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <name>Frank Adams</name>
-  <email>***REMOVED***@renovations.com</email>
-  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
-  <snx:ldapid>ac1cc9e6-c8f9-4e72-93b2-e4b4633616a3</snx:ldapid>
-  
-  
-  
-  <snx:userState>active</snx:userState>
-  
-  
-
-  </author>
-  <contributor>
-    
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <name>Frank Adams</name>
-  <email>***REMOVED***@renovations.com</email>
-  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
-  <snx:ldapid>ac1cc9e6-c8f9-4e72-93b2-e4b4633616a3</snx:ldapid>
-  
-  
-  
-  <snx:userState>active</snx:userState>
-  
-  
-
-  </contributor>
-  	
-    
-    
-  	     
-  	  
-  	    
-  	  
- 	      <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="todo" label="To Do"/>
-  	  
-  	
-    
-  
-
-  
-  
-    
-  
-  
-  
-  
-  
-  
-  
-  
-  
-    <category term="todonodetag" />
-  
-   
-  
-    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:08cf4b46-edd5-4e9f-a66e-e426b5e30ee1" 
-       type="application/atom+xml" 
-       href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=08cf4b46-edd5-4e9f-a66e-e426b5e30ee1"
-       source="urn:lsid:ibm.com:oa:08cf4b46-edd5-4e9f-a66e-e426b5e30ee1"
-    />
-  
-  
-
-  
-  <snx:activity>08cf4b46-edd5-4e9f-a66e-e426b5e30ee1</snx:activity>
-  
-  
-  
-    <link rel="edit" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=c75b35c2-342f-4c1a-94d1-4a04505bda2d" />
-  
-   
-  
-    
-    
-      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=c75b35c2-342f-4c1a-94d1-4a04505bda2d"/>
- 	  <link rel="alternate" type="application/xhtml+xml" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=c75b35c2-342f-4c1a-94d1-4a04505bda2d"/>
-      <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=c75b35c2-342f-4c1a-94d1-4a04505bda2d"/>
-          
-    
-  
- 
-  <snx:position>1000</snx:position>
-  <snx:depth>1</snx:depth>  
-  
-  <snx:permissions>none, create_activity, view_activity, edit_activity, delete_activity, activity_owner, edit_activity_tags, design_activity, edit_statements, delete_statements, add_members, delete_members, create_entries, edit_personal_entries, edit_all_entries, delete_personal_entries, delete_all_entries, edit_personal_entry_tags, edit_all_entry_tags, view_members</snx:permissions>
-  <snx:icon>https://dev.sdkdemo.com:444/activities/nav/common/styles/images/activities/icon_taskIncomplete.gif</snx:icon>
-
-  
-    
-    
-    
-    
-      
-      
-        
-          <content type="text">
-          	Todo Node Content 1396304316771
-      	  </content>
-        
-        
-      
-    
-  
-  
-  
-
-    
-  
-  
-  
-  
-
-    </entry>
-  
-    
-    <entry>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <id>urn:lsid:ibm.com:oa:f9f20b8f-581f-4b00-a203-1a12783df9c0</id>
-  <title type="text">todoNode from JSP 1396288531834</title>
-  <updated>2014-03-31T17:56:07Z</updated>
-  <published>2014-03-31T17:56:07Z</published>
-  <author>
-    
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <name>Frank Adams</name>
-  <email>***REMOVED***@renovations.com</email>
-  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
-  <snx:ldapid>ac1cc9e6-c8f9-4e72-93b2-e4b4633616a3</snx:ldapid>
-  
-  
-  
-  <snx:userState>active</snx:userState>
-  
-  
-
-  </author>
-  <contributor>
-    
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <name>Frank Adams</name>
-  <email>***REMOVED***@renovations.com</email>
-  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
-  <snx:ldapid>ac1cc9e6-c8f9-4e72-93b2-e4b4633616a3</snx:ldapid>
-  
-  
-  
-  <snx:userState>active</snx:userState>
-  
-  
-
-  </contributor>
-  	
-    
-    
-  	     
-  	  
-  	    
-  	  
- 	      <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="todo" label="To Do"/>
-  	  
-  	
-    
-  
-
-  
-  
-    
-  
-  
-  
-  
-  
-  
-  
-  
-  
-    <category term="todonodetag" />
-  
-   
-  
-    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:be26f2a6-9503-471d-a8ca-bd79cf097cfc" 
-       type="application/atom+xml" 
-       href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=be26f2a6-9503-471d-a8ca-bd79cf097cfc"
-       source="urn:lsid:ibm.com:oa:be26f2a6-9503-471d-a8ca-bd79cf097cfc"
-    />
-  
-  
-
-  
-  <snx:activity>be26f2a6-9503-471d-a8ca-bd79cf097cfc</snx:activity>
-  
-  
-  
-    <link rel="edit" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=f9f20b8f-581f-4b00-a203-1a12783df9c0" />
-  
-   
-  
-    
-    
-      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=f9f20b8f-581f-4b00-a203-1a12783df9c0"/>
- 	  <link rel="alternate" type="application/xhtml+xml" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=f9f20b8f-581f-4b00-a203-1a12783df9c0"/>
-      <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=f9f20b8f-581f-4b00-a203-1a12783df9c0"/>
-          
-    
-  
- 
-  <snx:position>1000</snx:position>
-  <snx:depth>1</snx:depth>  
-  
-  <snx:permissions>none, create_activity, view_activity, edit_activity, delete_activity, activity_owner, edit_activity_tags, design_activity, edit_statements, delete_statements, add_members, delete_members, create_entries, edit_personal_entries, edit_all_entries, delete_personal_entries, delete_all_entries, edit_personal_entry_tags, edit_all_entry_tags, view_members</snx:permissions>
-  <snx:icon>https://dev.sdkdemo.com:444/activities/nav/common/styles/images/activities/icon_taskIncomplete.gif</snx:icon>
-
-  
-    
-    
-    
-    
-      
-      
-        
-          <content type="text">
-          	Todo Node Content 1396288531834
-      	  </content>
-        
-        
-      
-    
-  
-  
-  
-
-    
-  
-  
-  
-  
-
-    </entry>
-  
-    
-    <entry>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <id>urn:lsid:ibm.com:oa:d289d9f8-3c92-44ca-943f-ffab3cbb4662</id>
-  <title type="text">todoNode from JSP 1396272728488</title>
-  <updated>2014-03-31T13:32:43Z</updated>
-  <published>2014-03-31T13:32:43Z</published>
-  <author>
-    
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <name>Frank Adams</name>
-  <email>***REMOVED***@renovations.com</email>
-  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
-  <snx:ldapid>ac1cc9e6-c8f9-4e72-93b2-e4b4633616a3</snx:ldapid>
-  
-  
-  
-  <snx:userState>active</snx:userState>
-  
-  
-
-  </author>
-  <contributor>
-    
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <name>Frank Adams</name>
-  <email>***REMOVED***@renovations.com</email>
-  <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
-  <snx:ldapid>ac1cc9e6-c8f9-4e72-93b2-e4b4633616a3</snx:ldapid>
-  
-  
-  
-  <snx:userState>active</snx:userState>
-  
-  
-
-  </contributor>
-  	
-    
-    
-  	     
-  	  
-  	    
-  	  
- 	      <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="todo" label="To Do"/>
-  	  
-  	
-    
-  
-
-  
-  
-    
-  
-  
-  
-  
-  
-  
-  
-  
-  
-    <category term="todonodetag" />
-  
-   
-  
-    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:d239b068-1553-4e35-a237-b449cd016b15" 
-       type="application/atom+xml" 
-       href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=d239b068-1553-4e35-a237-b449cd016b15"
-       source="urn:lsid:ibm.com:oa:d239b068-1553-4e35-a237-b449cd016b15"
-    />
-  
-  
-
-  
-  <snx:activity>d239b068-1553-4e35-a237-b449cd016b15</snx:activity>
-  
-  
-  
-    <link rel="edit" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=d289d9f8-3c92-44ca-943f-ffab3cbb4662" />
-  
-   
-  
-    
-    
-      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/activities/service/atom2/activitynode?activityNodeUuid=d289d9f8-3c92-44ca-943f-ffab3cbb4662"/>
- 	  <link rel="alternate" type="application/xhtml+xml" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=d289d9f8-3c92-44ca-943f-ffab3cbb4662"/>
-      <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/activities/service/html/activityentry?uuid=d289d9f8-3c92-44ca-943f-ffab3cbb4662"/>
-          
-    
-  
- 
-  <snx:position>1000</snx:position>
-  <snx:depth>1</snx:depth>  
-  
-  <snx:permissions>none, create_activity, view_activity, edit_activity, delete_activity, activity_owner, edit_activity_tags, design_activity, edit_statements, delete_statements, add_members, delete_members, create_entries, edit_personal_entries, edit_all_entries, delete_personal_entries, delete_all_entries, edit_personal_entry_tags, edit_all_entry_tags, view_members</snx:permissions>
-  <snx:icon>https://dev.sdkdemo.com:444/activities/nav/common/styles/images/activities/icon_taskIncomplete.gif</snx:icon>
-
-  
-    
-    
-    
-    
-      
-      
-        
-          <content type="text">
-          	Todo Node Content 1396272728488
       	  </content>
         
         

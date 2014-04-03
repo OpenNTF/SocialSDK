@@ -4,7 +4,7 @@
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Wed, 02 Apr 2014 15:00:34 GMT]]></value>
+        <value><![CDATA[Thu, 03 Apr 2014 09:19:22 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -32,15 +32,15 @@
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/oJFnIqru42UQJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
+        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/vDrKbs34A+MQJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=69ttM7rfDYVREvvKzI9tZjhN09bxLS8M4uNib2842mJKWigeEV79DHlvR/yvtBdgtJQVebfu1PANKx873qGSbSY7/Rxc6LSqEB9EByhymsoMQ/nXapiDXcVmm3jG5kBWBOKKuwNI2j1wMzcNwX1Gky1RoSb7t2o9CcWEwhCEZFkoywUgAiX+jPVUSwqvtFbuknBCDXeXwJmBcbZaK0jCo16rBjmvTvQUzfj5SYwUBvzoycXuMQHZWpXvjwJUwmOeO3v6nVjHBhnB7bIKL2LrZfjpay2OllzwAI0/bsJR6otTax7ou6vuMdzYsCZNjQ+ywsnsvdwJ3NfhvisZ0LG3maXjojiYmcRXzHOmxYW/Jh42EPmdz3/A/xOttmScvDPO0nYthRTiPKHiy62JOgSmNvAjgRfNEPII1FgmVMTyL9eJ0DwBtz58iDep97fYNm1oH8dTg0vA2hP1RyirJGptsMEI9G14w4Qvrq8aYniU5GC3A13I9GQI9+Yil1iwE0YUXhZfk7H1lfSpF/fQpLUzrHtJ7hq7m/VIDLgiJ4O0nIglOAwfJlrq0giJn9DTDsxOQxT6zWiZ5HbdCws66EqwJHuKI78likGN1dqkinlBx+gLa+jI0QX2vhwMXP+pvSzAi6ZMufE2arZqqBnU2W13iUYH7gHQtAuJs/5aJXobX3FPjhu46wcx7kcuA7+QsgD+czRY84S3v8pO4JbSBEtOdDDVwNluDk1cIF4XXYfcVXU=; Path=/]]></value>
+        <value><![CDATA[LtpaToken2=A7gDx48XrzVY+LnckGsPNKEByJCi3bmFVbtaSCFmdy5ejB6YX6JqponToQvHeJL/qhGjmdRST7U+B4/pVnkps91O4/pO2cfQjMpFZuvloI4C0YMeCdOlN0cxz2fVB2s6NrTtwQgKgPfbvpi23gM+XEBVt8ufBU4Ylif5IE852sgQhhq1GXb9yJeITvReMADNsIOVx1DbIy4YL2hTkGO6xwqnioh22GWBiGsnxrhyDAQ0U3Z869MoZe2B0L3qXygq9IppMfuFrcCHAfq4julGYw7UQxvcCcxy49rJcJUDe+YVyWHi4Mb+KCvYY35gwrjOpIR3LpnkcHNqk73TD8Pt9/l8arzKQkEMHhaJRBtj1iKqC2Wd9MjNy8mbaesfVglQnOIUP/AuZB+5WO61HUEzjbyVe9DvEfsd1O2TjMPk0EFqyqTkneUfOetOjrRwNUfq5Bf2IZORGMuafnH+QTZhryt3mXKEOSn2PzArX96eZ9KR2zlbcObuq1a3r6cgv/Nbp/bzMcB/IqcJl+mnJZSCoe5s1/SfuqmncpBjpzB7IgypxDcAvKt3A+xywvTAx9k1Hrq17YrZiE6/SZcmmmJUzAm3IO/TYx/KuwQiy6wyVE6Bi0TdLwQEDm+LVVMhlzTcElbGqclOJoWmtUwbGwVSQsZPwZbRHDqigQWLcAAuJ3AxeMpaWRodvKs8CLRcM7VgtZSYdMmzte8Jypqb3mZZt3miIr5+aBCEA5pFltUoGWU=; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LCSESSIONID=0000swNXwrt1aH-mUD-S-2iBv0a:18dna4k6n; Path=/; HttpOnly]]></value>
+        <value><![CDATA[LCSESSIONID=0000bua7mV_Y-NzpbtOdKv6uuSS:18dna4k6n; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Keep-Alive]]></name>
@@ -74,150 +74,10 @@
     <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/blogs/roller-ui/favorites?lang=en_us" />
     <link rel="self" type="application/atom+xml" href="https://qs.renovations.com:444/blogs/homepage/feed/recommended/atom?lang=en_us" />
     <link rel="first" type="application/atom+xml" href="https://dev.sdkdemo.com:444/blogs/homepage/feed/recommended/atom?ps=50&amp;f=all&amp;lang=en_us" />
-    <opensearch:totalResults>49</opensearch:totalResults>
-    <updated>2014-04-02T10:00:34-05:00</updated>
+    <opensearch:totalResults>46</opensearch:totalResults>
+    <updated>2014-04-03T04:19:22-05:00</updated>
 	  <generator uri="http://www.ibm.com/xmlns/prod/sn" version="4.5.0.0">IBM Connections - Blogs</generator>
-        <entry xml:base="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/entry/blogpost_at_1396414826319" xml:lang="en-US" >
-      <id>urn:lsid:ibm.com:blogs:entry-fdd1da69-2044-40a5-b2f3-b3b10297f880</id>
-      <title type="text">BlogPost at 1396414826319</title>
-      <author>
-        <name>Frank Adams</name>
-                <email>***REMOVED***@renovations.com</email>
-                <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
-                <snx:userState>active</snx:userState>
-              </author>
-            <snx:communityUuid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">aee965f9-1ae1-4bfd-b052-201c2369ecd7</snx:communityUuid>
-	  <link rel="http://www.ibm.com/xmlns/prod/sn/container" type="application/atom+xml" href="http://dev.sdkdemo.com:81/communities/service/atom/community/instance?communityUuid=aee965f9-1ae1-4bfd-b052-201c2369ecd7" />
-            <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/entry/blogpost_at_1396414826319?lang=en_us"/>
-      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entry/atom?entryid=fdd1da69-2044-40a5-b2f3-b3b10297f880&amp;lang=en_us"/>
-            <link rel="replies" type="application/atom+xml" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entrycomments/blogpost_at_1396414826319/atom?lang=en_us" thr:count="0"/>
-      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entryrecommendations/fdd1da69-2044-40a5-b2f3-b3b10297f880/atom?lang=en_us"/>
-      <app:collection href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/api/entrycomments/fdd1da69-2044-40a5-b2f3-b3b10297f880?lang=en_us">
-		<title type="text">Comment Entries</title>
-		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
-		<app:categories fixed="yes"/>
-		<app:accept>application/atom+xml;type=entry</app:accept>
-	  </app:collection>
-	  <app:collection href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/api/recommend/entries/fdd1da69-2044-40a5-b2f3-b3b10297f880?lang=en_us">
-		<title type="text">Likes</title>
-		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
-		<app:categories fixed="yes"/>
-		<app:accept />
-		<snx:enabled>true</snx:enabled>
-		<snx:voted />
-	  </app:collection>
-      <published>2014-04-02T00:01:33-05:00</published>
-      <updated>2014-04-02T00:01:33-05:00</updated>
-         <content type="html">BlogPost Content at 1396414826319</content>
-         <summary type="html">BlogPost Content at 1396414826319</summary>
-      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">1</snx:rank>
-      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">0</snx:rank>
-      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
-      <source>
-        <id>urn:lsid:ibm.com:blogs:entries-27143def-cc24-43a6-801d-a02bc5a88190</id>
-        <title type="text">Test Community1395229643191</title>
-        <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entries/atom?lang=en_us" />
-        <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb?lang=en_us"/>
-        <updated>2014-04-02T05:36:00-05:00</updated>
-		<category term="ideationblog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
-		<voteLimit>0</voteLimit>
-		<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="open" label="Users can contribute new ideas or comment on or vote for existing ideas in this Ideation Blog." />
-		      </source>
-    </entry>
-
-    <entry xml:base="https://dev.sdkdemo.com:444/blogs/BlogHandle1396414478682/entry/blogpost_at_1396414759265" xml:lang="en-US" >
-      <id>urn:lsid:ibm.com:blogs:entry-b350ab0d-7893-4a38-991e-eb6a16a97098</id>
-      <title type="text">BlogPost at 1396414759265</title>
-      <author>
-        <name>Frank Adams</name>
-                <email>***REMOVED***@renovations.com</email>
-                <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
-                <snx:userState>active</snx:userState>
-              </author>
-            <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/blogs/BlogHandle1396414478682/entry/blogpost_at_1396414759265?lang=en_us"/>
-      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/blogs/BlogHandle1396414478682/feed/entry/atom?entryid=b350ab0d-7893-4a38-991e-eb6a16a97098&amp;lang=en_us"/>
-            <link rel="replies" type="application/atom+xml" href="https://dev.sdkdemo.com:444/blogs/BlogHandle1396414478682/feed/entrycomments/blogpost_at_1396414759265/atom?lang=en_us" thr:count="0"/>
-      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://dev.sdkdemo.com:444/blogs/BlogHandle1396414478682/feed/entryrecommendations/b350ab0d-7893-4a38-991e-eb6a16a97098/atom?lang=en_us"/>
-      <app:collection href="https://dev.sdkdemo.com:444/blogs/BlogHandle1396414478682/api/entrycomments/b350ab0d-7893-4a38-991e-eb6a16a97098?lang=en_us">
-		<title type="text">Comment Entries</title>
-		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
-		<app:categories fixed="yes"/>
-		<app:accept>application/atom+xml;type=entry</app:accept>
-	  </app:collection>
-	  <app:collection href="https://dev.sdkdemo.com:444/blogs/BlogHandle1396414478682/api/recommend/entries/b350ab0d-7893-4a38-991e-eb6a16a97098?lang=en_us">
-		<title type="text">Likes</title>
-		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
-		<app:categories fixed="yes"/>
-		<app:accept />
-		<snx:enabled>true</snx:enabled>
-		<snx:voted />
-	  </app:collection>
-      <published>2014-04-01T23:59:56-05:00</published>
-      <updated>2014-04-01T23:59:56-05:00</updated>
-         <content type="html">BlogPost Content at 1396414759265</content>
-         <summary type="html">BlogPost Content at 1396414759265</summary>
-      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">1</snx:rank>
-      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">0</snx:rank>
-      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
-      <source>
-        <id>urn:lsid:ibm.com:blogs:entries-7cdeb8cf-9a55-4c2d-b169-a9d7dbb59ae0</id>
-        <title type="text">Blog Updated at 1396414564437</title>
-        <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/BlogHandle1396414478682/feed/entries/atom?lang=en_us" />
-        <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/BlogHandle1396414478682?lang=en_us"/>
-        <updated>2014-04-01T23:59:56-05:00</updated>
-		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
-      </source>
-    </entry>
-
-    <entry xml:base="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/entry/blogpost_at_1396312421793" xml:lang="en-US" >
-      <id>urn:lsid:ibm.com:blogs:entry-3533c87b-8f1e-432f-b7ad-ad08ac9f6b94</id>
-      <title type="text">BlogPost at 1396312421793</title>
-      <author>
-        <name>Frank Adams</name>
-                <email>***REMOVED***@renovations.com</email>
-                <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
-                <snx:userState>active</snx:userState>
-              </author>
-            <snx:communityUuid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">aee965f9-1ae1-4bfd-b052-201c2369ecd7</snx:communityUuid>
-	  <link rel="http://www.ibm.com/xmlns/prod/sn/container" type="application/atom+xml" href="http://dev.sdkdemo.com:81/communities/service/atom/community/instance?communityUuid=aee965f9-1ae1-4bfd-b052-201c2369ecd7" />
-            <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/entry/blogpost_at_1396312421793?lang=en_us"/>
-      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entry/atom?entryid=3533c87b-8f1e-432f-b7ad-ad08ac9f6b94&amp;lang=en_us"/>
-            <link rel="replies" type="application/atom+xml" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entrycomments/blogpost_at_1396312421793/atom?lang=en_us" thr:count="0"/>
-      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entryrecommendations/3533c87b-8f1e-432f-b7ad-ad08ac9f6b94/atom?lang=en_us"/>
-      <app:collection href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/api/entrycomments/3533c87b-8f1e-432f-b7ad-ad08ac9f6b94?lang=en_us">
-		<title type="text">Comment Entries</title>
-		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
-		<app:categories fixed="yes"/>
-		<app:accept>application/atom+xml;type=entry</app:accept>
-	  </app:collection>
-	  <app:collection href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/api/recommend/entries/3533c87b-8f1e-432f-b7ad-ad08ac9f6b94?lang=en_us">
-		<title type="text">Likes</title>
-		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
-		<app:categories fixed="yes"/>
-		<app:accept />
-		<snx:enabled>true</snx:enabled>
-		<snx:voted />
-	  </app:collection>
-      <published>2014-03-31T19:34:17-05:00</published>
-      <updated>2014-03-31T19:34:17-05:00</updated>
-         <content type="html">BlogPost Content at 1396312421793</content>
-         <summary type="html">BlogPost Content at 1396312421793</summary>
-      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">1</snx:rank>
-      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">0</snx:rank>
-      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
-      <source>
-        <id>urn:lsid:ibm.com:blogs:entries-27143def-cc24-43a6-801d-a02bc5a88190</id>
-        <title type="text">Test Community1395229643191</title>
-        <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entries/atom?lang=en_us" />
-        <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb?lang=en_us"/>
-        <updated>2014-04-02T05:36:00-05:00</updated>
-		<category term="ideationblog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
-		<voteLimit>0</voteLimit>
-		<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="open" label="Users can contribute new ideas or comment on or vote for existing ideas in this Ideation Blog." />
-		      </source>
-    </entry>
-
-    <entry xml:base="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/entry/blogpost_at_1396296823536" xml:lang="en-US" >
+        <entry xml:base="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/entry/blogpost_at_1396296823536" xml:lang="en-US" >
       <id>urn:lsid:ibm.com:blogs:entry-4b4260bf-eec1-4ac6-86b4-dd2610392f6a</id>
       <title type="text">BlogPost at 1396296823536</title>
       <author>
@@ -258,7 +118,7 @@
         <title type="text">Test Community1395229643191</title>
         <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entries/atom?lang=en_us" />
         <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb?lang=en_us"/>
-        <updated>2014-04-02T05:36:00-05:00</updated>
+        <updated>2014-04-03T03:51:19-05:00</updated>
 		<category term="ideationblog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
 		<voteLimit>0</voteLimit>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="open" label="Users can contribute new ideas or comment on or vote for existing ideas in this Ideation Blog." />
@@ -306,7 +166,7 @@
         <title type="text">Test Community1395229643191</title>
         <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entries/atom?lang=en_us" />
         <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb?lang=en_us"/>
-        <updated>2014-04-02T05:36:00-05:00</updated>
+        <updated>2014-04-03T03:51:19-05:00</updated>
 		<category term="ideationblog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
 		<voteLimit>0</voteLimit>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="open" label="Users can contribute new ideas or comment on or vote for existing ideas in this Ideation Blog." />
@@ -354,7 +214,7 @@
         <title type="text">Test Community1395229643191</title>
         <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entries/atom?lang=en_us" />
         <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb?lang=en_us"/>
-        <updated>2014-04-02T05:36:00-05:00</updated>
+        <updated>2014-04-03T03:51:19-05:00</updated>
 		<category term="ideationblog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
 		<voteLimit>0</voteLimit>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="open" label="Users can contribute new ideas or comment on or vote for existing ideas in this Ideation Blog." />
@@ -402,7 +262,7 @@
         <title type="text">Test Community1395229643191</title>
         <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entries/atom?lang=en_us" />
         <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb?lang=en_us"/>
-        <updated>2014-04-02T05:36:00-05:00</updated>
+        <updated>2014-04-03T03:51:19-05:00</updated>
 		<category term="ideationblog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
 		<voteLimit>0</voteLimit>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="open" label="Users can contribute new ideas or comment on or vote for existing ideas in this Ideation Blog." />
@@ -450,7 +310,7 @@
         <title type="text">Test Community1395229643191</title>
         <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entries/atom?lang=en_us" />
         <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb?lang=en_us"/>
-        <updated>2014-04-02T05:36:00-05:00</updated>
+        <updated>2014-04-03T03:51:19-05:00</updated>
 		<category term="ideationblog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
 		<voteLimit>0</voteLimit>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="open" label="Users can contribute new ideas or comment on or vote for existing ideas in this Ideation Blog." />
@@ -498,7 +358,7 @@
         <title type="text">Test Community1395229643191</title>
         <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entries/atom?lang=en_us" />
         <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb?lang=en_us"/>
-        <updated>2014-04-02T05:36:00-05:00</updated>
+        <updated>2014-04-03T03:51:19-05:00</updated>
 		<category term="ideationblog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
 		<voteLimit>0</voteLimit>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="open" label="Users can contribute new ideas or comment on or vote for existing ideas in this Ideation Blog." />
@@ -546,7 +406,7 @@
         <title type="text">Test Community1395229643191</title>
         <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entries/atom?lang=en_us" />
         <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb?lang=en_us"/>
-        <updated>2014-04-02T05:36:00-05:00</updated>
+        <updated>2014-04-03T03:51:19-05:00</updated>
 		<category term="ideationblog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
 		<voteLimit>0</voteLimit>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="open" label="Users can contribute new ideas or comment on or vote for existing ideas in this Ideation Blog." />
@@ -594,7 +454,7 @@
         <title type="text">Test Community1395229643191</title>
         <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entries/atom?lang=en_us" />
         <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb?lang=en_us"/>
-        <updated>2014-04-02T05:36:00-05:00</updated>
+        <updated>2014-04-03T03:51:19-05:00</updated>
 		<category term="ideationblog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
 		<voteLimit>0</voteLimit>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="open" label="Users can contribute new ideas or comment on or vote for existing ideas in this Ideation Blog." />
@@ -642,7 +502,7 @@
         <title type="text">Test Community1395229643191</title>
         <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entries/atom?lang=en_us" />
         <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb?lang=en_us"/>
-        <updated>2014-04-02T05:36:00-05:00</updated>
+        <updated>2014-04-03T03:51:19-05:00</updated>
 		<category term="ideationblog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
 		<voteLimit>0</voteLimit>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="open" label="Users can contribute new ideas or comment on or vote for existing ideas in this Ideation Blog." />
@@ -690,7 +550,7 @@
         <title type="text">Test Community1395229643191</title>
         <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entries/atom?lang=en_us" />
         <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb?lang=en_us"/>
-        <updated>2014-04-02T05:36:00-05:00</updated>
+        <updated>2014-04-03T03:51:19-05:00</updated>
 		<category term="ideationblog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
 		<voteLimit>0</voteLimit>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="open" label="Users can contribute new ideas or comment on or vote for existing ideas in this Ideation Blog." />
@@ -738,7 +598,7 @@
         <title type="text">Test Community1395229643191</title>
         <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entries/atom?lang=en_us" />
         <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb?lang=en_us"/>
-        <updated>2014-04-02T05:36:00-05:00</updated>
+        <updated>2014-04-03T03:51:19-05:00</updated>
 		<category term="ideationblog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
 		<voteLimit>0</voteLimit>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="open" label="Users can contribute new ideas or comment on or vote for existing ideas in this Ideation Blog." />
@@ -786,7 +646,7 @@
         <title type="text">Test Community1395229643191</title>
         <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entries/atom?lang=en_us" />
         <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb?lang=en_us"/>
-        <updated>2014-04-02T05:36:00-05:00</updated>
+        <updated>2014-04-03T03:51:19-05:00</updated>
 		<category term="ideationblog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
 		<voteLimit>0</voteLimit>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="open" label="Users can contribute new ideas or comment on or vote for existing ideas in this Ideation Blog." />
@@ -834,7 +694,7 @@
         <title type="text">Test Community1395229643191</title>
         <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entries/atom?lang=en_us" />
         <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb?lang=en_us"/>
-        <updated>2014-04-02T05:36:00-05:00</updated>
+        <updated>2014-04-03T03:51:19-05:00</updated>
 		<category term="ideationblog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
 		<voteLimit>0</voteLimit>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="open" label="Users can contribute new ideas or comment on or vote for existing ideas in this Ideation Blog." />
@@ -882,7 +742,7 @@
         <title type="text">Test Community1395229643191</title>
         <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entries/atom?lang=en_us" />
         <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb?lang=en_us"/>
-        <updated>2014-04-02T05:36:00-05:00</updated>
+        <updated>2014-04-03T03:51:19-05:00</updated>
 		<category term="ideationblog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
 		<voteLimit>0</voteLimit>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="open" label="Users can contribute new ideas or comment on or vote for existing ideas in this Ideation Blog." />
@@ -930,7 +790,7 @@
         <title type="text">Test Community1395229643191</title>
         <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entries/atom?lang=en_us" />
         <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb?lang=en_us"/>
-        <updated>2014-04-02T05:36:00-05:00</updated>
+        <updated>2014-04-03T03:51:19-05:00</updated>
 		<category term="ideationblog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
 		<voteLimit>0</voteLimit>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="open" label="Users can contribute new ideas or comment on or vote for existing ideas in this Ideation Blog." />
@@ -978,7 +838,7 @@
         <title type="text">Test Community1395229643191</title>
         <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entries/atom?lang=en_us" />
         <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb?lang=en_us"/>
-        <updated>2014-04-02T05:36:00-05:00</updated>
+        <updated>2014-04-03T03:51:19-05:00</updated>
 		<category term="ideationblog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
 		<voteLimit>0</voteLimit>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="open" label="Users can contribute new ideas or comment on or vote for existing ideas in this Ideation Blog." />
@@ -1026,7 +886,7 @@
         <title type="text">Test Community1395229643191</title>
         <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entries/atom?lang=en_us" />
         <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb?lang=en_us"/>
-        <updated>2014-04-02T05:36:00-05:00</updated>
+        <updated>2014-04-03T03:51:19-05:00</updated>
 		<category term="ideationblog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
 		<voteLimit>0</voteLimit>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="open" label="Users can contribute new ideas or comment on or vote for existing ideas in this Ideation Blog." />
@@ -1074,7 +934,7 @@
         <title type="text">Test Community1395229643191</title>
         <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entries/atom?lang=en_us" />
         <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb?lang=en_us"/>
-        <updated>2014-04-02T05:36:00-05:00</updated>
+        <updated>2014-04-03T03:51:19-05:00</updated>
 		<category term="ideationblog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
 		<voteLimit>0</voteLimit>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="open" label="Users can contribute new ideas or comment on or vote for existing ideas in this Ideation Blog." />
@@ -1122,7 +982,7 @@
         <title type="text">Test Community1395229643191</title>
         <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entries/atom?lang=en_us" />
         <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb?lang=en_us"/>
-        <updated>2014-04-02T05:36:00-05:00</updated>
+        <updated>2014-04-03T03:51:19-05:00</updated>
 		<category term="ideationblog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
 		<voteLimit>0</voteLimit>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="open" label="Users can contribute new ideas or comment on or vote for existing ideas in this Ideation Blog." />
@@ -1170,7 +1030,7 @@
         <title type="text">Test Community1395229643191</title>
         <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entries/atom?lang=en_us" />
         <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb?lang=en_us"/>
-        <updated>2014-04-02T05:36:00-05:00</updated>
+        <updated>2014-04-03T03:51:19-05:00</updated>
 		<category term="ideationblog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
 		<voteLimit>0</voteLimit>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="open" label="Users can contribute new ideas or comment on or vote for existing ideas in this Ideation Blog." />
@@ -1218,7 +1078,7 @@
         <title type="text">Test Community1395229643191</title>
         <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entries/atom?lang=en_us" />
         <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb?lang=en_us"/>
-        <updated>2014-04-02T05:36:00-05:00</updated>
+        <updated>2014-04-03T03:51:19-05:00</updated>
 		<category term="ideationblog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
 		<voteLimit>0</voteLimit>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="open" label="Users can contribute new ideas or comment on or vote for existing ideas in this Ideation Blog." />
@@ -1266,7 +1126,7 @@
         <title type="text">Test Community1395229643191</title>
         <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entries/atom?lang=en_us" />
         <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb?lang=en_us"/>
-        <updated>2014-04-02T05:36:00-05:00</updated>
+        <updated>2014-04-03T03:51:19-05:00</updated>
 		<category term="ideationblog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
 		<voteLimit>0</voteLimit>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="open" label="Users can contribute new ideas or comment on or vote for existing ideas in this Ideation Blog." />
@@ -1314,7 +1174,7 @@
         <title type="text">Test Community1395229643191</title>
         <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entries/atom?lang=en_us" />
         <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb?lang=en_us"/>
-        <updated>2014-04-02T05:36:00-05:00</updated>
+        <updated>2014-04-03T03:51:19-05:00</updated>
 		<category term="ideationblog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
 		<voteLimit>0</voteLimit>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="open" label="Users can contribute new ideas or comment on or vote for existing ideas in this Ideation Blog." />
@@ -1362,7 +1222,7 @@
         <title type="text">Test Community1395229643191</title>
         <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entries/atom?lang=en_us" />
         <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb?lang=en_us"/>
-        <updated>2014-04-02T05:36:00-05:00</updated>
+        <updated>2014-04-03T03:51:19-05:00</updated>
 		<category term="ideationblog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
 		<voteLimit>0</voteLimit>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="open" label="Users can contribute new ideas or comment on or vote for existing ideas in this Ideation Blog." />
@@ -1410,7 +1270,7 @@
         <title type="text">Test Community1395229643191</title>
         <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entries/atom?lang=en_us" />
         <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb?lang=en_us"/>
-        <updated>2014-04-02T05:36:00-05:00</updated>
+        <updated>2014-04-03T03:51:19-05:00</updated>
 		<category term="ideationblog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
 		<voteLimit>0</voteLimit>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="open" label="Users can contribute new ideas or comment on or vote for existing ideas in this Ideation Blog." />
@@ -1458,7 +1318,7 @@
         <title type="text">Test Community1395229643191</title>
         <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entries/atom?lang=en_us" />
         <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb?lang=en_us"/>
-        <updated>2014-04-02T05:36:00-05:00</updated>
+        <updated>2014-04-03T03:51:19-05:00</updated>
 		<category term="ideationblog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
 		<voteLimit>0</voteLimit>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="open" label="Users can contribute new ideas or comment on or vote for existing ideas in this Ideation Blog." />
@@ -1506,7 +1366,7 @@
         <title type="text">Test Community1395229643191</title>
         <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entries/atom?lang=en_us" />
         <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb?lang=en_us"/>
-        <updated>2014-04-02T05:36:00-05:00</updated>
+        <updated>2014-04-03T03:51:19-05:00</updated>
 		<category term="ideationblog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
 		<voteLimit>0</voteLimit>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="open" label="Users can contribute new ideas or comment on or vote for existing ideas in this Ideation Blog." />
@@ -1554,7 +1414,7 @@
         <title type="text">Test Community1395229643191</title>
         <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entries/atom?lang=en_us" />
         <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb?lang=en_us"/>
-        <updated>2014-04-02T05:36:00-05:00</updated>
+        <updated>2014-04-03T03:51:19-05:00</updated>
 		<category term="ideationblog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
 		<voteLimit>0</voteLimit>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="open" label="Users can contribute new ideas or comment on or vote for existing ideas in this Ideation Blog." />
@@ -1602,7 +1462,7 @@
         <title type="text">Test Community1395229643191</title>
         <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entries/atom?lang=en_us" />
         <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb?lang=en_us"/>
-        <updated>2014-04-02T05:36:00-05:00</updated>
+        <updated>2014-04-03T03:51:19-05:00</updated>
 		<category term="ideationblog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
 		<voteLimit>0</voteLimit>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="open" label="Users can contribute new ideas or comment on or vote for existing ideas in this Ideation Blog." />
@@ -1650,7 +1510,7 @@
         <title type="text">Test Community1395229643191</title>
         <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entries/atom?lang=en_us" />
         <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb?lang=en_us"/>
-        <updated>2014-04-02T05:36:00-05:00</updated>
+        <updated>2014-04-03T03:51:19-05:00</updated>
 		<category term="ideationblog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
 		<voteLimit>0</voteLimit>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="open" label="Users can contribute new ideas or comment on or vote for existing ideas in this Ideation Blog." />
@@ -1698,7 +1558,7 @@
         <title type="text">Test Community1395229643191</title>
         <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entries/atom?lang=en_us" />
         <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb?lang=en_us"/>
-        <updated>2014-04-02T05:36:00-05:00</updated>
+        <updated>2014-04-03T03:51:19-05:00</updated>
 		<category term="ideationblog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
 		<voteLimit>0</voteLimit>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="open" label="Users can contribute new ideas or comment on or vote for existing ideas in this Ideation Blog." />
@@ -1746,7 +1606,7 @@
         <title type="text">Test Community1395229643191</title>
         <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entries/atom?lang=en_us" />
         <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb?lang=en_us"/>
-        <updated>2014-04-02T05:36:00-05:00</updated>
+        <updated>2014-04-03T03:51:19-05:00</updated>
 		<category term="ideationblog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
 		<voteLimit>0</voteLimit>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="open" label="Users can contribute new ideas or comment on or vote for existing ideas in this Ideation Blog." />
@@ -1794,7 +1654,7 @@
         <title type="text">Test Community1395229643191</title>
         <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entries/atom?lang=en_us" />
         <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb?lang=en_us"/>
-        <updated>2014-04-02T05:36:00-05:00</updated>
+        <updated>2014-04-03T03:51:19-05:00</updated>
 		<category term="ideationblog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
 		<voteLimit>0</voteLimit>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="open" label="Users can contribute new ideas or comment on or vote for existing ideas in this Ideation Blog." />
@@ -1842,7 +1702,7 @@
         <title type="text">Test Community1395229643191</title>
         <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entries/atom?lang=en_us" />
         <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb?lang=en_us"/>
-        <updated>2014-04-02T05:36:00-05:00</updated>
+        <updated>2014-04-03T03:51:19-05:00</updated>
 		<category term="ideationblog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
 		<voteLimit>0</voteLimit>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="open" label="Users can contribute new ideas or comment on or vote for existing ideas in this Ideation Blog." />
@@ -1890,7 +1750,7 @@
         <title type="text">Test Community1395229643191</title>
         <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entries/atom?lang=en_us" />
         <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb?lang=en_us"/>
-        <updated>2014-04-02T05:36:00-05:00</updated>
+        <updated>2014-04-03T03:51:19-05:00</updated>
 		<category term="ideationblog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
 		<voteLimit>0</voteLimit>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="open" label="Users can contribute new ideas or comment on or vote for existing ideas in this Ideation Blog." />
@@ -1938,7 +1798,7 @@
         <title type="text">Test Community1395229643191</title>
         <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entries/atom?lang=en_us" />
         <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb?lang=en_us"/>
-        <updated>2014-04-02T05:36:00-05:00</updated>
+        <updated>2014-04-03T03:51:19-05:00</updated>
 		<category term="ideationblog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
 		<voteLimit>0</voteLimit>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="open" label="Users can contribute new ideas or comment on or vote for existing ideas in this Ideation Blog." />
@@ -1986,7 +1846,7 @@
         <title type="text">Test Community1395229643191</title>
         <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entries/atom?lang=en_us" />
         <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb?lang=en_us"/>
-        <updated>2014-04-02T05:36:00-05:00</updated>
+        <updated>2014-04-03T03:51:19-05:00</updated>
 		<category term="ideationblog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
 		<voteLimit>0</voteLimit>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="open" label="Users can contribute new ideas or comment on or vote for existing ideas in this Ideation Blog." />
@@ -2034,7 +1894,7 @@
         <title type="text">Test Community1395229643191</title>
         <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entries/atom?lang=en_us" />
         <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb?lang=en_us"/>
-        <updated>2014-04-02T05:36:00-05:00</updated>
+        <updated>2014-04-03T03:51:19-05:00</updated>
 		<category term="ideationblog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
 		<voteLimit>0</voteLimit>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="open" label="Users can contribute new ideas or comment on or vote for existing ideas in this Ideation Blog." />
@@ -2082,7 +1942,7 @@
         <title type="text">Test Community1395229643191</title>
         <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entries/atom?lang=en_us" />
         <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb?lang=en_us"/>
-        <updated>2014-04-02T05:36:00-05:00</updated>
+        <updated>2014-04-03T03:51:19-05:00</updated>
 		<category term="ideationblog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
 		<voteLimit>0</voteLimit>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="open" label="Users can contribute new ideas or comment on or vote for existing ideas in this Ideation Blog." />
@@ -2130,7 +1990,7 @@
         <title type="text">Test Community1395229643191</title>
         <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entries/atom?lang=en_us" />
         <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb?lang=en_us"/>
-        <updated>2014-04-02T05:36:00-05:00</updated>
+        <updated>2014-04-03T03:51:19-05:00</updated>
 		<category term="ideationblog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
 		<voteLimit>0</voteLimit>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="open" label="Users can contribute new ideas or comment on or vote for existing ideas in this Ideation Blog." />
@@ -2178,7 +2038,7 @@
         <title type="text">Test Community1395229643191</title>
         <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entries/atom?lang=en_us" />
         <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb?lang=en_us"/>
-        <updated>2014-04-02T05:36:00-05:00</updated>
+        <updated>2014-04-03T03:51:19-05:00</updated>
 		<category term="ideationblog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
 		<voteLimit>0</voteLimit>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="open" label="Users can contribute new ideas or comment on or vote for existing ideas in this Ideation Blog." />
@@ -2226,7 +2086,7 @@
         <title type="text">Test Community1395229643191</title>
         <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entries/atom?lang=en_us" />
         <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb?lang=en_us"/>
-        <updated>2014-04-02T05:36:00-05:00</updated>
+        <updated>2014-04-03T03:51:19-05:00</updated>
 		<category term="ideationblog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
 		<voteLimit>0</voteLimit>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="open" label="Users can contribute new ideas or comment on or vote for existing ideas in this Ideation Blog." />
@@ -2274,7 +2134,7 @@
         <title type="text">Test Community1395229643191</title>
         <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entries/atom?lang=en_us" />
         <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb?lang=en_us"/>
-        <updated>2014-04-02T05:36:00-05:00</updated>
+        <updated>2014-04-03T03:51:19-05:00</updated>
 		<category term="ideationblog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
 		<voteLimit>0</voteLimit>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="open" label="Users can contribute new ideas or comment on or vote for existing ideas in this Ideation Blog." />
@@ -2322,7 +2182,7 @@
         <title type="text">Test Community1395229643191</title>
         <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entries/atom?lang=en_us" />
         <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb?lang=en_us"/>
-        <updated>2014-04-02T05:36:00-05:00</updated>
+        <updated>2014-04-03T03:51:19-05:00</updated>
 		<category term="ideationblog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
 		<voteLimit>0</voteLimit>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="open" label="Users can contribute new ideas or comment on or vote for existing ideas in this Ideation Blog." />
@@ -2370,7 +2230,7 @@
         <title type="text">Test Community1395229643191</title>
         <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb/feed/entries/atom?lang=en_us" />
         <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/We08b74069f95_4ed6_81a2_54f15bf42acb?lang=en_us"/>
-        <updated>2014-04-02T05:36:00-05:00</updated>
+        <updated>2014-04-03T03:51:19-05:00</updated>
 		<category term="ideationblog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
 		<voteLimit>0</voteLimit>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="open" label="Users can contribute new ideas or comment on or vote for existing ideas in this Ideation Blog." />

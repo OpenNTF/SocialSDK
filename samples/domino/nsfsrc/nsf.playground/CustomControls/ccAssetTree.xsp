@@ -111,7 +111,7 @@ dojo.connect(inpSearch,"onclick",function(e) {
 		}
 	});
 	navTree.onClick = function(item){
-		if(item.url) {
+		if(item.jspUrl) {
 			var h = "#{javascript:compositeData.pname||'snippet'}="+item.jspUrl;
 			if(h==dojo.hash()) {
 				dojo.hash("");

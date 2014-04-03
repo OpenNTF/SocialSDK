@@ -64,6 +64,7 @@ public abstract class AssetBean {
 	public String getSnippetsAsJson() throws NotesException, IOException {
 		RootNode root = readSnippetsNodes();
 		JsonTreeRenderer r = new JsonTreeRenderer();
+		r.setCategoryUrl(true); // So we can bookmark the categories
 		String apisSearch = (String)ExtLibUtil.getViewScope().get("assetSearch");
 		if(StringUtil.isNotEmpty(apisSearch)) {
 			r.setFlat(true);
@@ -73,8 +74,10 @@ public abstract class AssetBean {
 	protected RootNode readSnippetsNodes() throws NotesException {
 		this.assetLoaderEnvironment = PlaygroundEnvironment.getCurrentEnvironment();
 		try {
-			// Make sure that the endpoints are updated for the filtering
-			this.assetLoaderEnvironment.prepareEndpoints();
+			if(this.assetLoaderEnvironment!=null) {
+				// Make sure that the endpoints are updated for the filtering
+				this.assetLoaderEnvironment.prepareEndpoints();
+			}
 			
 			//PlaygroundEnvironment env = DataAccessBean.get().findCurrentEnvironment();
 			Database db = ExtLibUtil.getCurrentDatabase();

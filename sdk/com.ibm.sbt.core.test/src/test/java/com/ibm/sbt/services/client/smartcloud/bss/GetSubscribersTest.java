@@ -28,7 +28,7 @@ import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 public class GetSubscribersTest extends BaseBssTest {
 
     @Test
-    public void testGetCustomerList() {
+    public void testGetSubscribersList() {
     	try {
 			EntityList<JsonEntity> subscriberList = getSubscriberManagementService().getSubscribers();
 			for (JsonEntity subscriber : subscriberList) {

@@ -15,8 +15,11 @@
  */
 package com.ibm.sbt.services.client.connections.activities;
 
+import java.util.List;
+
 import org.w3c.dom.Node;
 
+import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.base.AtomEntity;
@@ -28,6 +31,8 @@ import com.ibm.sbt.services.client.base.BaseService;
  */
 public class ActivityNode extends AtomEntity {
 
+	static final String UUID_PREFIX = "urn:lsid:ibm.com:oa:"; ////$NON-NLS-1$
+	
 	/**
 	 * Default constructor
 	 */
@@ -47,12 +52,25 @@ public class ActivityNode extends AtomEntity {
 	}
 
 	/**
+	 * Return the associated ActivityService.
+	 * 
+	 * @return
+	 */
+	public ActivityService getActivityService() {
+		return (ActivityService)getService();
+	}
+	
+	/**
 	 * Returns the activity node ID.
 	 * 
 	 * @return activityNodeUuid
 	 */
 	public String getActivityNodeUuid() {
-		return getAsString(ActivityXPath.activityNode);
+		String id = getId();
+		if (StringUtil.isNotEmpty(id) && id.startsWith(UUID_PREFIX)) {
+			id = id.substring(UUID_PREFIX.length());
+		}
+		return id;
 	}
 	
 	/**
@@ -73,5 +91,49 @@ public class ActivityNode extends AtomEntity {
 		setAsString(ActivityXPath.activity, activityUuid);
 	}
 	
+	/**
+	 * Returns permissions.
+	 * 
+	 * @return permissions
+	 */
+	public String getPermissions() {
+		return getAsString(ActivityXPath.permissions);
+	}
+	
+	/**
+	 * Returns the depth of the activity.
+	 * 
+	 * @return depth
+	 */
+	public int getDepth() {
+		return getAsInt(ActivityXPath.depth);
+	}
+	
+	/**
+	 * Returns the position of the activity.
+	 * 
+	 * @return position
+	 */
+	public long getPosition() {
+		return getAsLong(ActivityXPath.position);
+	}
+	
+	/**
+	 * Returns the tags on the wiki page.
+	 * 
+	 * @return
+	 */
+	public List<String> getTags() {
+		return super.getBaseTags();
+	}
+
+	/**
+	 * Set the tags on the wiki page.
+	 * 
+	 * @param tags
+	 */
+	public void setTags(List<String> tags) {
+		super.setBaseTags(tags);
+	}
 	
 }

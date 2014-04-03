@@ -167,7 +167,7 @@ public class SbtEndpoints extends Endpoints {
 
 	@Override
 	public String getEndpointNames() {
-		return "connections,connectionsOA2,smartcloud,smartcloudOA2,sametime,domino,watson,twitter,dropbox";
+		return "connections,connectionsOA2,smartcloud,smartcloudOA2,sametime,domino,twitter,dropbox";
 	}
     
     @Override

@@ -112,31 +112,31 @@ public class SubscriberManagementService extends BssService {
     /**
      * Add a subscriber either to the vendor's organization or to the organization of one of the vendor's customers.
      * 
-     * @param customerJson
+     * @param subscriberJson
      * @return
      * @throws BssException
      * @throws JsonException
      * @throws IOException 
      */
-    public JsonJavaObject addSubscriber(String customerJson) throws BssException, JsonException, IOException {
-    	JsonJavaObject jsonObject = (JsonJavaObject)JsonParser.fromJson(JsonJavaFactory.instanceEx, customerJson);
+    public JsonJavaObject addSubscriber(String subscriberJson) throws BssException, JsonException, IOException {
+    	JsonJavaObject jsonObject = (JsonJavaObject)JsonParser.fromJson(JsonJavaFactory.instanceEx, subscriberJson);
     	return addSubscriber(jsonObject);
     }
 
     /**
      * Add a subscriber either to the vendor's organization or to the organization of one of the vendor's customers.
      * 
-     * @param customerJson
+     * @param subscriberJson
      * @return JSON object containing 
      * @throws BssException
      * @throws IOException 
      */
-    public JsonJavaObject addSubscriber(JsonJavaObject customerJson) throws BssException {
+    public JsonJavaObject addSubscriber(JsonJavaObject subscriberJson) throws BssException {
 		try {
-			Response serverResponse = createData(API_RESOURCE_SUBSCRIBER, null, JsonHeader, customerJson, ClientService.FORMAT_JSON);
+			Response serverResponse = createData(API_RESOURCE_SUBSCRIBER, null, JsonHeader, subscriberJson, ClientService.FORMAT_JSON);
 			return (serverResponse == null) ? null : (JsonJavaObject)serverResponse.getData();
 		} catch (Exception e) {
-			throw new BssException(e, "Error adding subscriber {0} caused by {1}", customerJson, e.getMessage());
+			throw new BssException(e, "Error adding subscriber {0} caused by {1}", subscriberJson, e.getMessage());
 		}
     }
       

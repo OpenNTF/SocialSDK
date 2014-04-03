@@ -27,6 +27,7 @@ import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.AtomEntity;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.ConnectionsConstants;
+import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.connections.activities.serializers.ActivitySerializer;
 import com.ibm.sbt.services.client.connections.common.Member;
 import com.ibm.sbt.services.client.connections.common.Person;
@@ -35,10 +36,8 @@ import com.ibm.sbt.services.client.connections.common.Person;
  * @author mwallace
  *
  */
-public class Activity extends AtomEntity {
+public class Activity extends ActivityNode {
 
-	static final String UUID_PREFIX = "urn:lsid:ibm.com:oa:"; ////$NON-NLS-1$
-	
 	/*
 	 * Specifies the starting page of a template. The term attribute identifies the default view to use. 
 	 */
@@ -65,15 +64,6 @@ public class Activity extends AtomEntity {
 	}
 	
 	/**
-	 * Return the associated ActivityService.
-	 * 
-	 * @return
-	 */
-	public ActivityService getActivityService() {
-		return (ActivityService)getService();
-	}
-	
-	/**
 	 * 
 	 */
 	@Override
@@ -82,15 +72,6 @@ public class Activity extends AtomEntity {
 		return serializer.generateCreate();
 	}
 
-	/**
-	 * Returns the activity ID.
-	 * 
-	 * @return activityUuid
-	 */
-	public String getActivityUuid() {
-		return getAsString(ActivityXPath.activity);
-	}
-	
 	/**
 	 * Returns the activity collection title.
 	 * 
@@ -130,15 +111,6 @@ public class Activity extends AtomEntity {
 	}
 	
 	/**
-	 * Returns permissions.
-	 * 
-	 * @return permissions
-	 */
-	public String getPermissions() {
-		return getAsString(ActivityXPath.permissions);
-	}
-	
-	/**
 	 * Returns link to an icon that depicts the status of an activity.
 	 * 
 	 * @return icon
@@ -172,24 +144,6 @@ public class Activity extends AtomEntity {
 	 */
 	public void setDuedate(Date duedate) {
 		setAsDate(ActivityXPath.duedate, duedate);
-	}
-	
-	/**
-	 * Returns the depth of the activity.
-	 * 
-	 * @return depth
-	 */
-	public int getDepth() {
-		return getAsInt(ActivityXPath.depth);
-	}
-	
-	/**
-	 * Returns the position of the activity.
-	 * 
-	 * @return position
-	 */
-	public long getPosition() {
-		return getAsLong(ActivityXPath.position);
 	}
 	
 	/**
@@ -374,23 +328,27 @@ public class Activity extends AtomEntity {
 	}
 	
 	/**
-	 * Returns the tags on the wiki page.
+	 * 
 	 * 
 	 * @return
+	 * @throws ClientServicesException 
 	 */
-	public List<String> getTags() {
-		return super.getBaseTags();
-	}
-
-	/**
-	 * Set the tags on the wiki page.
-	 * 
-	 * @param tags
-	 */
-	public void setTags(List<String> tags) {
-		super.setBaseTags(tags);
+	public EntityList<Category> getCategories() throws ClientServicesException {
+		ActivityService service = (ActivityService)getService();
+		return service.getActivityCategories();
 	}
 	
+	/**
+	 * 
+	 * 
+	 * @return
+	 * @throws ClientServicesException 
+	 */
+	public EntityList<ActivityNode> getDescendants() throws ClientServicesException {
+		ActivityService service = (ActivityService)getService();
+		return service.getActivityNodeDescendants(this.getActivityUuid());
+	}
+
 	//------------------------------------------------------------------------------------------------------------------
 	// Working with activities programmatically.
 	//------------------------------------------------------------------------------------------------------------------

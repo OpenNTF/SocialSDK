@@ -27,7 +27,7 @@ import com.ibm.sbt.services.client.base.JsonEntity;
 public class GetCustomerByIdTest extends BaseBssTest {
 
     @Test
-    public void testGetCustomer() {
+    public void testGetCustomerById() {
     	try {
     		String customerId = registerCustomer();
 

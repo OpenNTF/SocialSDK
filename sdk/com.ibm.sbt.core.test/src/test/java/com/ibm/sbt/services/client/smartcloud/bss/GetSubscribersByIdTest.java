@@ -28,7 +28,7 @@ import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 public class GetSubscribersByIdTest extends BaseBssTest {
 
 	@Test
-	public void testGetCustomer() {
+	public void testGetSubscribersById() {
 		try {
 			String customerId = registerCustomer();
 			for (int i = 0; i < 5; i++) {

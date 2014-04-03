@@ -101,11 +101,15 @@ function treeFindPath(tree,id) {
 	return itemPath(tree.model,[],tree.model.root);
 }
 
+
 function treeSelectId(tree,id) {
 	tree = dijit.byId(tree);
     var path = treeFindPath(tree,id);
     if(path){
-        tree.set('paths',[path])
+        tree.set('paths',[path]).then( function() {
+        	var node = tree.getNodesByItem(tree.attr('selectedItem'))[0];
+        	if(node && node.isExpandable && !node.isExpanded ) tree._expandNode(node);
+        });
     }
 }
 

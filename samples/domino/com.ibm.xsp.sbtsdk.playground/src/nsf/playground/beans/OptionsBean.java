@@ -12,13 +12,13 @@ import lotus.domino.Document;
 import lotus.domino.NotesException;
 import lotus.domino.View;
 import nsf.playground.extension.Endpoints;
+import nsf.playground.extension.PlaygroundExtensionFactory;
 import nsf.playground.extension.Endpoints.Categories;
 import nsf.playground.extension.Endpoints.Category;
 
 import com.ibm.commons.Platform;
 import com.ibm.commons.util.QuickSort;
 import com.ibm.commons.util.StringUtil;
-import com.ibm.sbt.playground.extension.PlaygroundExtensionFactory;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
 import com.ibm.xsp.model.domino.DominoUtils;
 import com.ibm.xsp.util.ManagedBeanUtil;

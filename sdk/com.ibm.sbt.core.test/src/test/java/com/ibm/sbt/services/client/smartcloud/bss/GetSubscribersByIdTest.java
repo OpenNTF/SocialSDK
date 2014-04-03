@@ -19,28 +19,28 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.ibm.sbt.services.client.base.JsonEntity;
+import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 
 /**
  * @author mwallace
- *
+ * 
  */
-public class GetSubscriberByIdTest extends BaseBssTest {
+public class GetSubscribersByIdTest extends BaseBssTest {
 
 	@Test
-    public void testGetCustomer() {
-    	try {
-    		registerCustomer();
-    		String subscriberId = addSubscriber();
-    		
-    		JsonEntity jsonEntity = getSubscriberManagementService().getSubscriberById(subscriberId);
-			System.out.println(jsonEntity.toJsonString());
-			Assert.assertNotNull("Unable to retrieve subscriber: "+subscriberId, jsonEntity);
-				
-			Assert.assertEquals(subscriberId, getSubscriberManagementService().getSubscriberId(jsonEntity.getJsonObject()));
-    	} catch (Exception e) {
-    		e.printStackTrace();
-    		Assert.fail("Error retrieving subscriber caused by: "+e.getMessage());    		
-    	}
-    }
-		
+	public void testGetCustomer() {
+		try {
+			String customerId = registerCustomer();
+			for (int i = 0; i < 5; i++) {
+				addSubscriber();
+			}
+
+			EntityList<JsonEntity> subscribers = getSubscriberManagementService().getSubscribersById(customerId);
+			Assert.assertEquals("Unable to retrieve subscribers", 6, subscribers.size());
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail("Error retrieving subscribers caused by: " + e.getMessage());
+		}
+	}
+
 }

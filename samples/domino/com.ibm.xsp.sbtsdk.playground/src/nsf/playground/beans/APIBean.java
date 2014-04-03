@@ -113,7 +113,7 @@ public abstract class APIBean extends AssetBean {
 						o.put("endpoint", FBSString.get(endpoint));
 					}
 					String baseDocUrl = doc.getItemValueString("basedocurl");
-					if(StringUtil.isNotEmpty(endpoint)) {
+					if(StringUtil.isNotEmpty(baseDocUrl)) {
 						o.put("doc_url", FBSString.get(baseDocUrl));
 					}
 					String json = doc.getItemValueString("Json");

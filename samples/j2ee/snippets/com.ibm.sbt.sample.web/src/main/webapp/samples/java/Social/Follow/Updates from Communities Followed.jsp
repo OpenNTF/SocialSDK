@@ -41,7 +41,7 @@
 	<%
 		try {
 			FollowService svc = new FollowService();
-			List<FollowedResource> resources = svc.getFollowedResources(Source.COMMUNITIES.getSourceType(), Type.COMMUNITIES.getType());
+			List<FollowedResource> resources = svc.getFollowedResources(Source.COMMUNITIES.get(), Type.COMMUNITY.get());
 			for(FollowedResource resource:resources){
 				out.print("Title "+resource.getTitle()+"<br>");
 				out.print("ID : "+resource.getId()+"<br>");

@@ -48,9 +48,9 @@
 			ActivityStreamService svc = new ActivityStreamService();
 	      
 		ActivityStreamEntityList _entries = svc.getStream(
-              ASUser.ME.getUserType(), 
-              ASGroup.ALL.getGroupType(),
-              ASApplication.ALL.getApplicationType(), 
+              ASUser.ME.get(), 
+              ASGroup.ALL.get(),
+              ASApplication.ALL.get(), 
               headers);
 
 			if (_entries.size() <= 0)

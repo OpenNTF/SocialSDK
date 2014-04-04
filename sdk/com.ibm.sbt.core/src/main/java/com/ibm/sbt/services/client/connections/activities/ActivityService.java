@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * ï¿½ Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,7 +40,7 @@ import com.ibm.sbt.services.client.connections.common.serializers.MemberSerializ
 import com.ibm.sbt.services.endpoints.Endpoint;
 
 /**
- * The Activities application of IBM® Connections enables a team to collect, organize, share, and reuse work related to a project goal. 
+ * The Activities application of IBMï¿½ Connections enables a team to collect, organize, share, and reuse work related to a project goal. 
  * The Activities API allows application programs to create new activities, and to read and modify existing activities.
  * 
  * Use the Atom subscription API to retrieve resources from the activities hosted by the Activities application.
@@ -83,6 +83,11 @@ public class ActivityService extends BaseService {
 	 */
 	public ActivityService(Endpoint endpoint) {
 		super(endpoint);
+	}
+
+	@Override
+	public String getServiceMappingKey() {
+		return "activities";	
 	}
 	
 	//------------------------------------------------------------------------------------------------------------------
@@ -997,5 +1002,4 @@ public class ActivityService extends BaseService {
 	protected Map<String,String> getHeaders() {
 		return ATOM_HEADERS;
 	}
-	
 }

@@ -49,7 +49,7 @@
 				out.print("No Communities found");
 			}else{
 				FollowService svc = new FollowService();
-				FollowedResource resource = svc.getFollowedResource(Source.COMMUNITIES.getSourceType(), Type.COMMUNITIES.getType(), community.getCommunityUuid());
+				FollowedResource resource = svc.getFollowedResource(Source.COMMUNITIES.get(), Type.COMMUNITY.get(), community.getCommunityUuid());
 				if(resource!=null){
 				out.print("Title "+resource.getTitle()+"<br>");
 				out.print("ID : "+resource.getId()+"<br>");

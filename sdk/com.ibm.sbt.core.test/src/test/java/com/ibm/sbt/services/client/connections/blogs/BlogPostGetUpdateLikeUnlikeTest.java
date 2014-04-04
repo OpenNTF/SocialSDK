@@ -1,5 +1,5 @@
 /*
- * �� Copyright IBM Corp. 2013
+ * ������ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -30,52 +30,40 @@ import org.junit.Test;
 public class BlogPostGetUpdateLikeUnlikeTest extends BaseBlogServiceTest {
 
 	@Before
-	public void initBlogPostTestData() {
+	public void initBlogPostTestData() throws BlogServiceException {
 		blogPost = createBlogPost();
 	}
 
 	@Test
-	public void recommendBlogPostTest() {
-		try {
-			blogService.recommendPost(blogPost.getBlogHandle(), blogPost.getPostUuid());
-			BlogPost recommendedPost = blogService.getBlogPost(blogPost.getBlogHandle(), blogPost.getPostUuid());
-			assertEquals(recommendedPost.getRecommendationsCount(), "1");
-			blogService.unrecommendPost(blogPost.getBlogHandle(), blogPost.getPostUuid());
-			BlogPost unrecommendedPost = blogService.getBlogPost(blogPost.getBlogHandle(), blogPost.getPostUuid());
-			assertEquals(unrecommendedPost.getRecommendationsCount(), "0");
-		} catch (Exception e) {
-			fail("Error calling blogService.recommendPost() caused by: "+e.getMessage());
-		}
+	public void recommendBlogPostTest() throws BlogServiceException {
+		blogService.recommendPost(blogPost.getBlogHandle(), blogPost.getPostUuid());
+		BlogPost recommendedPost = blogService.getBlogPost(blogPost.getBlogHandle(), blogPost.getPostUuid());
+		assertEquals(recommendedPost.getRecommendationsCount(), "1");
+		blogService.unrecommendPost(blogPost.getBlogHandle(), blogPost.getPostUuid());
+		BlogPost unrecommendedPost = blogService.getBlogPost(blogPost.getBlogHandle(), blogPost.getPostUuid());
+		assertEquals(unrecommendedPost.getRecommendationsCount(), "0");
 
 	}
 
 	@Test
-	public void getBlogPost() {
-		try {
-			BlogPost blogPostGot = blogService.getBlogPost(blog.getHandle(), blogPost.getPostUuid());
-			assertEquals(unRandomize(blogPost.getTitle()), unRandomize(blogPostGot.getTitle()));
-			assertEquals(unRandomize(blogPost.getContent()), unRandomize(blogPostGot.getContent()));
-		} catch (Exception e) {
-			fail("Error calling blogService.getBlog() caused by: "+e.getMessage());
-		}
+	public void getBlogPost() throws BlogServiceException {
+		BlogPost blogPostGot = blogService.getBlogPost(blog.getHandle(), blogPost.getPostUuid());
+		assertEquals(unRandomize(blogPost.getTitle()), unRandomize(blogPostGot.getTitle()));
+		assertEquals(unRandomize(blogPost.getContent()), unRandomize(blogPostGot.getContent()));
 	}
 
 	@Test
-	public void updateBlogPost() {
-		try {
-			blogPost.setTitle("New title " + System.currentTimeMillis());
-			blogPost.setContent("New content " + System.currentTimeMillis());
-			blogService.updateBlogPost(blogPost, blogPost.getBlogHandle());
-			BlogPost postUpdated = blogService.getBlogPost(blogPost.getBlogHandle(), blogPost.getPostUuid());
-			assertEquals(unRandomize(blogPost.getTitle()), unRandomize(postUpdated.getTitle()));
-			assertEquals(unRandomize(blogPost.getContent()), unRandomize(postUpdated.getContent()));
-		} catch (Exception e) {
-			fail("Error calling blogService.updateBlog() caused by: "+e.getMessage());
-		}
+	public void updateBlogPost() throws BlogServiceException {
+		blogPost.setTitle("New title " + System.currentTimeMillis());
+		blogPost.setContent("New content " + System.currentTimeMillis());
+		blogService.updateBlogPost(blogPost, blogPost.getBlogHandle());
+		BlogPost postUpdated = blogService.getBlogPost(blogPost.getBlogHandle(), blogPost.getPostUuid());
+		assertEquals(unRandomize(blogPost.getTitle()), unRandomize(postUpdated.getTitle()));
+		assertEquals(unRandomize(blogPost.getContent()), unRandomize(postUpdated.getContent()));
 	}
 
 	@After
-	public void deleteBlogPostTestDataOnExit() {
+	public void deleteBlogPostTestDataOnExit() throws BlogServiceException {
 		deleteBlogPost(blogPost);
 		deleteBlog(blog);
 	}

@@ -1,5 +1,5 @@
 /*
- * �� Copyright IBM Corp. 2013
+ * ������ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -30,38 +30,30 @@ import org.junit.Test;
 public class ForumGetUpdateTest extends BaseForumServiceTest {
 
 	@Before
-	public void initForum() {
+	public void initForum() throws ForumServiceException {
 		forum = createForum();
 	}
 
 	@Test
-	public void testGetForum() {
-		try {
-			Forum forumGot = forumService.getForum(forum.getForumUuid());
+	public void testGetForum() throws ForumServiceException {
+		Forum forumGot = forumService.getForum(forum.getForumUuid());
 
-			assertEquals(forum.getTitle(), forumGot.getTitle());
-			assertEquals(forum.getContent(), forumGot.getContent());
-		} catch (Exception e) {
-			fail("Error calling forumService.getForum() caused by: "+e.getMessage());
-		}
+		assertEquals(forum.getTitle(), forumGot.getTitle());
+		assertEquals(forum.getContent(), forumGot.getContent());
 	}
 
 	@Test
-	public void testUpdateForum() {
-		try {
-			forum.setTitle("new Test forum title" + System.currentTimeMillis());
-			forum.setContent("new Test forum content");
-			forumService.updateForum(forum);
-			Forum updatedForum = forumService.getForum(forum.getForumUuid());
-			assertEquals(unRandomize(forum.getTitle()), unRandomize(updatedForum.getTitle()));
-			assertEquals(forum.getContent(), updatedForum.getContent());
-		} catch (Exception e) {
-			fail("Error calling forumService.updateForum() caused by: "+e.getMessage());
-		}
+	public void testUpdateForum() throws ForumServiceException {
+		forum.setTitle("new Test forum title" + System.currentTimeMillis());
+		forum.setContent("new Test forum content");
+		forumService.updateForum(forum);
+		Forum updatedForum = forumService.getForum(forum.getForumUuid());
+		assertEquals(unRandomize(forum.getTitle()), unRandomize(updatedForum.getTitle()));
+		assertEquals(forum.getContent(), updatedForum.getContent());
 	}
 
 	@After
-	public void deleteForumOnExit() {
+	public void deleteForumOnExit() throws ForumServiceException {
 		deleteForum(forum);
 	}
 }

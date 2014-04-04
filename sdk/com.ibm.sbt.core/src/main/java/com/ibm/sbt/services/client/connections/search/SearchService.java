@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -46,24 +46,17 @@ import java.util.Map;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.BaseService;
-import com.ibm.sbt.services.client.base.ConnectionsConstants;
-import com.ibm.sbt.services.client.base.util.EntityUtil;
 import com.ibm.sbt.services.client.connections.search.feedhandler.FacetsHandler;
 import com.ibm.sbt.services.client.connections.search.feedhandler.ScopeFeedHandler;
 import com.ibm.sbt.services.client.connections.search.feedhandler.SearchFeedHandler;
 import com.ibm.sbt.services.endpoints.Endpoint;
-import com.ibm.sbt.services.util.AuthUtil;
 
 public class SearchService extends BaseService {
 	
 	/**
 	 * Used in constructing REST APIs
 	 */
-	private static final String	_baseUrl				= "/search/";
-	private static final String _basicUrl				= "atom/";
-	public static final String _oauthUrl				= "oauth/atom/";
-	
-	private static final String seperator				= ",";
+	private static final String separator				= ",";
 	
 	/**
 	 * Default Constructor
@@ -91,6 +84,14 @@ public class SearchService extends BaseService {
 	 */
 	public SearchService(Endpoint endpoint) {
 		super(endpoint, DEFAULT_CACHE_SIZE);
+	}
+
+	/**
+	 * Return mapping key for this service
+	 */
+	@Override
+	public String getServiceMappingKey() {
+		return "search";
 	}
 	
     /**
@@ -124,7 +125,7 @@ public class SearchService extends BaseService {
 		
 		parameters.put("query", query);		
 		try {
-			String searchQry = resolveUrl(SearchType.PUBLIC);
+			String searchQry = SearchUrls.SEARCH.format(this);
 			searchResults = (ResultList) getEntities(searchQry, parameters, new SearchFeedHandler(this));
 		} catch (ClientServicesException e) {
 			throw new SearchServiceException(e);
@@ -256,7 +257,7 @@ public class SearchService extends BaseService {
 		
 		parameters.put("query", query);		
 		try {
-			String searchQry = resolveUrl(SearchType.MY);
+			String searchQry = SearchUrls.MYSEARCH.format(this);
 			searchResults = (ResultList) getEntities(searchQry, parameters, new SearchFeedHandler(this));
 		} catch (ClientServicesException e) {
 			throw new SearchServiceException(e);
@@ -303,7 +304,7 @@ public class SearchService extends BaseService {
 		parameters.put("facet", "{\"id\": \"Person\"}");
 
 		try {
-			String searchQry = resolveUrl(SearchType.PUBLIC);
+			String searchQry = SearchUrls.SEARCH.format(this);
 			searchResults = (FacetValueList) getEntities(searchQry, parameters, new FacetsHandler(this, "Person"));
 		} catch (ClientServicesException e) {
 			throw new SearchServiceException(e);
@@ -352,7 +353,7 @@ public class SearchService extends BaseService {
 		parameters.put("facet", "{\"id\": \"Person\"}");
 		
 		try {
-			String searchQry = resolveUrl(SearchType.MY);
+			String searchQry = SearchUrls.MYSEARCH.format(this);
 			searchResults = (ResultList) getEntities(searchQry, parameters, new FacetsHandler(this, "Person"));
 		} catch (ClientServicesException e) {
 			throw new SearchServiceException(e);
@@ -432,7 +433,7 @@ public class SearchService extends BaseService {
     	ScopeList scopes;
     	Map params = new HashMap<String,String>();
  		try {
-			String searchQry = resolveUrl(SearchType.SCOPE);
+			String searchQry = SearchUrls.SCOPES.format(this);
 			scopes = (ScopeList) getEntities(searchQry, params, new ScopeFeedHandler(this));
 		} catch (ClientServicesException e) {
 			throw new SearchServiceException(e);
@@ -470,54 +471,6 @@ public class SearchService extends BaseService {
 	
 	
 	/*
-	 * Method to generate appropriate REST URLs
-	 * 
-	 */
-	protected String resolveUrl(SearchType searchType) {
-		return resolveUrl(searchType,null);
-	}
-	
-	/*
-	 * Method to generate appropriate REST URLs
-	 * 
-	 */
-	protected String resolveUrl(SearchType searchType,Map<String, String> params) {
-		StringBuilder baseUrl = new StringBuilder(_baseUrl);
-		
-		if (AuthUtil.INSTANCE.getAuthValue(endpoint).equalsIgnoreCase(ConnectionsConstants.OAUTH)) {
-			baseUrl.append(_oauthUrl);
-		}else{
-			baseUrl.append(_basicUrl);
-		}
-		
-		if(searchType != null){
-			baseUrl.append(searchType.getSearchType());
-		}else{
-			baseUrl.append(SearchType.PUBLIC.getSearchType()); // Use public search by default
-		} 
-		
-		// Add required parameters
-		if (null != params && params.size() > 0) {
-			baseUrl.append(ConnectionsConstants.INIT_URL_PARAM);
-			boolean setSeparator = false;
-			for (Map.Entry<String, String> param : params.entrySet()) {
-				String key = param.getKey();
-				if (StringUtil.isEmpty(key)) continue;
-				String value = EntityUtil.encodeURLParam(param.getValue());
-				if (StringUtil.isEmpty(value)) continue;
-				if (setSeparator) {
-					baseUrl.append(ConnectionsConstants.URL_PARAM);
-				} else {
-					setSeparator = true;
-				}
-				baseUrl.append(key).append(ConnectionsConstants.EQUALS).append(value);
-			}
-		}
-		return baseUrl.toString();
-	}
-	
-	
-	/*
 	 * Method formats the list of constraint into String as required by Search api.
 	 * 
 	 */
@@ -542,7 +495,7 @@ public class SearchService extends BaseService {
   					if(valueCtr == 0){
   						values.append("\"").append(value).append("\"");
   					}else{
-  						values.append(seperator).append("\"").append(value).append("\"");
+  						values.append(separator).append("\"").append(value).append("\"");
   					}
   					
   				}

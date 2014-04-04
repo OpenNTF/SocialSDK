@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * ï¿½ Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -25,15 +25,15 @@ package com.ibm.sbt.services.client.connections.files;
  */
 public enum Categories {
 
-	PINNED("/myfavorites"), MYLIBRARY("/myuserlibrary"), MODERATION("/moderation"), APPROVAL("/approval"), REVIEW(
-			"/review"), SHARES("/shares");
-	String	category;
+	MYFAVORITES, 
+	USERLIBRARY, 
+	MYUSERLIBRARY, 
+	MODERATION, 
+	APPROVAL, 
+	REVIEW, 
+	SHARES;
 
-	private Categories(String category) {
-		this.category = category;
-	}
-
-	public String getCategory() {
-		return category;
+	public String get() {
+		return name().toLowerCase();
 	}
 }

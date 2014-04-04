@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * ï¿½ï¿½ï¿½ Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -128,6 +128,38 @@ public abstract class BaseService implements Serializable {
 		return endpoint;
 	}
 
+    /**
+     * Get authentication type for the endpoint. like basicAuth, oauth etc.
+     * @return
+     */
+	public NamedUrlPart getAuthType(){
+		return new NamedUrlPart("authType",AuthType.getAuthTypePart(endpoint));
+    }
+	
+	/**
+	 * Returns a Version object with the API version of the Endpoint
+	 * @return
+	 */
+	public Version getApiVersion(){
+		return Version.parse(endpoint.getApiVersion());
+	}
+	
+	abstract public String getServiceMappingKey();
+	
+	/**
+	 * Returns either the configured or the default serviceMapping for the service 
+	 * @return
+	 */
+	public NamedUrlPart getServiceMapping(){
+		String serviceMappingKey = getServiceMappingKey();
+		String serviceMappingValue = serviceMappingKey;
+		Map<String, String> serviceMappings = getEndpoint().getServiceMappings();
+		if (serviceMappings.containsKey(serviceMappingKey)){
+			serviceMappingValue = serviceMappings.get(serviceMappingKey);
+		}
+		return new NamedUrlPart(serviceMappingKey, serviceMappingValue);
+	}
+    
 	/**
 	 * Return the size of the cache
 	 * 

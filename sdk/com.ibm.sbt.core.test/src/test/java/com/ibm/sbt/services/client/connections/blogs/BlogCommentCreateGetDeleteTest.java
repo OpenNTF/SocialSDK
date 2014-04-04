@@ -31,33 +31,25 @@ import org.junit.Test;
 public class BlogCommentCreateGetDeleteTest extends BaseBlogServiceTest {
 
 	@Before
-	public void createCommentInit() {
+	public void createCommentInit() throws BlogServiceException {
 		comment = createBlogComment();
 	}
 
 	@Test
-	public void CreateComment() {
-		try {
-			Comment commentReturned = blogService.createBlogComment(comment, blog.getHandle(), blogPost.getPostUuid());
-			assertNotNull(commentReturned.getTitle());
-			assertEquals(comment.getTitle(), commentReturned.getTitle());
-			deleteBlogComment(commentReturned);
-		} catch (Exception e) {
-			fail("Error calling blogService.createBlogComment() caused by: "+e.getMessage());
-		}
+	public void CreateComment() throws BlogServiceException {
+		Comment commentReturned = blogService.createBlogComment(comment, blog.getHandle(), blogPost.getPostUuid());
+		assertNotNull(commentReturned.getTitle());
+		assertEquals(comment.getTitle(), commentReturned.getTitle());
+		deleteBlogComment(commentReturned);
 	}
 	
 	@Test
-	public void GetComment() {
-		try {
-			Comment commentGot = blogService.getBlogComment(blog.getHandle(), comment.getCommentUuid());
-			
-			assertEquals(comment.getTitle(), commentGot.getTitle());
-			assertEquals(comment.getContent(), commentGot.getContent());
-			deleteBlogComment(comment);
-		} catch (Exception e) {
-			fail("Error calling blogService.getBlogComment() caused by: "+e.getMessage());
-		}
+	public void GetComment() throws BlogServiceException {
+		Comment commentGot = blogService.getBlogComment(blog.getHandle(), comment.getCommentUuid());
+		
+		assertEquals(comment.getTitle(), commentGot.getTitle());
+		assertEquals(comment.getContent(), commentGot.getContent());
+		deleteBlogComment(comment);
 	}
 
 	@Test
@@ -72,7 +64,7 @@ public class BlogCommentCreateGetDeleteTest extends BaseBlogServiceTest {
 	}
 
 	@After
-	public void cleanUp() {
+	public void cleanUp() throws BlogServiceException {
 		deleteBlogPost(blogPost);
 		deleteBlog(blog);
 	}

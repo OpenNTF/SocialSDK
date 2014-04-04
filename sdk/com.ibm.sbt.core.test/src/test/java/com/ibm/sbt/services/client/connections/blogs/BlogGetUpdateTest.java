@@ -1,5 +1,5 @@
 /*
- * �� Copyright IBM Corp. 2013
+ * ������ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -30,39 +30,30 @@ import org.junit.Test;
 public class BlogGetUpdateTest extends BaseBlogServiceTest {
 
 	@Before
-	public void initBlog() {
+	public void initBlog() throws BlogServiceException {
 		blog = createBlog();
 	}
 
 	@Test
-	public void GetBlog() {
-		try {
-			Blog blogGot = blogService.getBlog(blog.getBlogUuid());
+	public void GetBlog() throws BlogServiceException {
+		Blog blogGot = blogService.getBlog(blog.getBlogUuid());
 
-			assertEquals(blog.getTitle(), blogGot.getTitle());
-			assertEquals(blog.getContent(), blogGot.getContent());
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail("Error calling blogService.getBlog() caused by: "+e.getMessage());
-		}
+		assertEquals(blog.getTitle(), blogGot.getTitle());
+		assertEquals(blog.getContent(), blogGot.getContent());
 	}
 
 	@Test
-	public void UpdateBlog() {
-		try {
-			blog.setTitle("New title " + System.currentTimeMillis());
-			blog.setSummary("New Summary " + System.currentTimeMillis());
-			blogService.updateBlog(blog);
-			Blog blogReturned = blogService.getBlog(blog.getBlogUuid());
-			assertEquals(unRandomize(blogReturned.getTitle()), unRandomize(blog.getTitle()));
-			assertEquals(unRandomize(blogReturned.getSummary()), unRandomize(blog.getSummary()));
-		} catch (Exception e) {
-			fail("Error calling blogService.updateBlog() caused by: "+e.getMessage());
-		}
+	public void UpdateBlog() throws BlogServiceException {
+		blog.setTitle("New title " + System.currentTimeMillis());
+		blog.setSummary("New Summary " + System.currentTimeMillis());
+		blogService.updateBlog(blog);
+		Blog blogReturned = blogService.getBlog(blog.getBlogUuid());
+		assertEquals(unRandomize(blogReturned.getTitle()), unRandomize(blog.getTitle()));
+		assertEquals(unRandomize(blogReturned.getSummary()), unRandomize(blog.getSummary()));
 	}
 
 	@After
-	public void deleteBlogOnExit() {
+	public void deleteBlogOnExit() throws BlogServiceException {
 		deleteBlog(blog);
 	}
 }

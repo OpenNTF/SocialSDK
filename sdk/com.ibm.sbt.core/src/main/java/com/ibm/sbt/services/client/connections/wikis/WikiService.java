@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2013
+ * ��� Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -39,6 +39,7 @@ import com.ibm.sbt.services.endpoints.Endpoint;
 
 /**
  * @author Mario Duarte
+ * @author Carlos Manias
  *
  */
 public class WikiService extends BaseService {
@@ -54,6 +55,14 @@ public class WikiService extends BaseService {
 	public WikiService(Endpoint endpoint) {
 		super(endpoint);
 	}
+
+	/**
+	 * Return mapping key for this service
+	 */
+	@Override
+	public String getServiceMappingKey() {
+		return "wikis";
+	}
 	
 	/**
 	 * This returns a list of wikis to which the authenticated user has access. 
@@ -63,7 +72,7 @@ public class WikiService extends BaseService {
 	 */
 	public EntityList<Wiki> getAllWikis(Map<String, String> parameters) 
 			throws ClientServicesException {
-		String requestUrl = WikiUrls.ALL_WIKIS.format(endpoint);
+		String requestUrl = WikiUrls.ALL_WIKIS.format(this);
 		return getWikiEntityList(requestUrl, parameters);
 	}
 	
@@ -76,7 +85,7 @@ public class WikiService extends BaseService {
 	 */
 	public EntityList<Wiki> getPublicWikis(Map<String, String> parameters) 
 			throws ClientServicesException {
-		String requestUrl = WikiUrls.PUBLIC_WIKIS.format(endpoint);
+		String requestUrl = WikiUrls.PUBLIC_WIKIS.format(this);
 		return getWikiEntityList(requestUrl, parameters);
 	}
 	
@@ -88,7 +97,7 @@ public class WikiService extends BaseService {
 	 */
 	public EntityList<Wiki> getMyWikis(Map<String, String> parameters) 
 			throws ClientServicesException {
-		String requestUrl = WikiUrls.MY_WIKIS.format(endpoint);
+		String requestUrl = WikiUrls.MY_WIKIS.format(this);
 		return getWikiEntityList(requestUrl, parameters);
 	}
 	
@@ -101,7 +110,7 @@ public class WikiService extends BaseService {
 	 */
 	public EntityList<Wiki> getWikisWithMostComments(Map<String, String> parameters) 
 			throws ClientServicesException {
-		String requestUrl = WikiUrls.MOST_COMMENTED_WIKIS.format(endpoint);
+		String requestUrl = WikiUrls.MOST_COMMENTED_WIKIS.format(this);
 		return getWikiEntityList(requestUrl, parameters);
 	}
 	
@@ -114,7 +123,7 @@ public class WikiService extends BaseService {
 	 */
 	public EntityList<Wiki> getWikisWithMostRecommendations(Map<String, String> parameters) 
 			throws ClientServicesException {
-		String requestUrl = WikiUrls.MOST_RECOMMENDED_WIKIS.format(endpoint);
+		String requestUrl = WikiUrls.MOST_RECOMMENDED_WIKIS.format(this);
 		return getWikiEntityList(requestUrl, parameters);
 	}
 	
@@ -127,7 +136,7 @@ public class WikiService extends BaseService {
 	 */
 	public EntityList<Wiki> getMostVisitedWikis(Map<String, String> parameters)  
 			throws ClientServicesException {
-		String requestUrl = WikiUrls.MOST_VISITED_WIKIS.format(endpoint);
+		String requestUrl = WikiUrls.MOST_VISITED_WIKIS.format(this);
 		return getWikiEntityList(requestUrl, parameters);
 	}
 
@@ -151,7 +160,7 @@ public class WikiService extends BaseService {
 	 */
 	public EntityList<WikiPage> getWikiPages(String wikiLabel, Map<String, String> parameters) 
 			throws ClientServicesException {
-		String requestUrl = WikiUrls.WIKI_PAGES.format(endpoint, wikiLabel);
+		String requestUrl = WikiUrls.WIKI_PAGES.format(this, WikiUrlParts.wikiLabel.get(wikiLabel));
 		return getWikiPagesEntityList(requestUrl, parameters);
 	}
 	
@@ -165,7 +174,7 @@ public class WikiService extends BaseService {
 	 */
 	public EntityList<WikiPage> getMyWikiPages(String wikiLabel, Map<String, String> parameters) 
 			throws ClientServicesException {
-		String requestUrl = WikiUrls.WIKI_MYPAGES.format(endpoint, wikiLabel);
+		String requestUrl = WikiUrls.WIKI_MYPAGES.format(this, WikiUrlParts.wikiLabel.get(wikiLabel));
 		return getWikiPagesEntityList(requestUrl, parameters);
 	}
 	
@@ -179,7 +188,7 @@ public class WikiService extends BaseService {
 	 */
 	public EntityList<WikiPage> getWikiPagesInTrash(String wikiLabelOrId, 
 			Map<String, String> parameters) throws ClientServicesException {
-		String requestUrl = WikiUrls.WIKI_PAGES_TRASH.format(endpoint, wikiLabelOrId);
+		String requestUrl = WikiUrls.WIKI_PAGES_TRASH.format(this, WikiUrlParts.wikiLabel.get(wikiLabelOrId));
 		return getWikiPagesEntityList(requestUrl, parameters);
 	}
 	
@@ -197,7 +206,7 @@ public class WikiService extends BaseService {
 	 */
 	public Wiki getWiki(String wikiLabel, Map<String, String> parameters) 
 			throws ClientServicesException {
-		String requestUrl = WikiUrls.WIKI_AUTH.format(endpoint, wikiLabel); 
+		String requestUrl = WikiUrls.WIKI_AUTH.format(this, WikiUrlParts.wikiLabel.get(wikiLabel)); 
 		return getWikiEntity(requestUrl, parameters);
 	}
 	
@@ -210,7 +219,7 @@ public class WikiService extends BaseService {
 	 */
 	public Wiki createWiki(Wiki wiki, Map<String, String> parameters) 
 			throws ClientServicesException {
-		String requestUrl = WikiUrls.ALL_WIKIS.format(endpoint);
+		String requestUrl = WikiUrls.ALL_WIKIS.format(this);
 		Response response = createWiki(requestUrl, wiki, parameters);
 		return getWikiFeedHandler().createEntity(response);
 	}
@@ -224,7 +233,7 @@ public class WikiService extends BaseService {
 	 */
 	public void updateWiki(Wiki wiki, Map<String, String> parameters) 
 			throws ClientServicesException {
-		String requestUrl = WikiUrls.WIKI_AUTH.format(endpoint, wiki.getLabel());
+		String requestUrl = WikiUrls.WIKI_AUTH.format(this, WikiUrlParts.wikiLabel.get(wiki.getLabel()));
 		updateWikiAux(requestUrl, wiki, parameters);
 	}
 	
@@ -234,7 +243,7 @@ public class WikiService extends BaseService {
 	 * @throws ClientServicesException
 	 */
 	public void deleteWiki(String wikiLabel) throws ClientServicesException {
-		String requestUrl = WikiUrls.WIKI_AUTH.format(endpoint, wikiLabel);
+		String requestUrl = WikiUrls.WIKI_AUTH.format(this, WikiUrlParts.wikiLabel.get(wikiLabel));
 		deleteData(requestUrl);
 	}
 	
@@ -252,7 +261,7 @@ public class WikiService extends BaseService {
 	 */
 	public WikiPage getWikiPage(String wikiLabel, String pageLabel, 
 			Map<String, String> parameters) throws ClientServicesException {
-		String requestUrl = WikiUrls.WIKI_PAGE_AUTH.format(endpoint, wikiLabel, pageLabel);
+		String requestUrl = WikiUrls.WIKI_PAGE_AUTH.format(this, WikiUrlParts.wikiLabel.get(wikiLabel), WikiUrlParts.wikiPage.get(pageLabel));
 		return getWikiPageEntity(requestUrl, parameters);
 	}
 	
@@ -265,7 +274,7 @@ public class WikiService extends BaseService {
 	 */
 	public WikiPage createWikiPage(String wikiLabel, WikiPage wikiPage, Map<String, String> parameters) 
 			throws ClientServicesException {
-		String requestUrl = WikiUrls.WIKI_PAGES_AUTH.format(endpoint, wikiLabel);
+		String requestUrl = WikiUrls.WIKI_PAGES_AUTH.format(this, WikiUrlParts.wikiLabel.get(wikiLabel));
 		Response response = createWikiPageAux(requestUrl, wikiPage, parameters);
 		return getWikiPageFeedHandler().createEntity(response);
 	}
@@ -279,7 +288,7 @@ public class WikiService extends BaseService {
 	 */
 	public void updateWikiPage(String wikiLabel, WikiPage wikiPage, 
 			Map<String, String> parameters) throws ClientServicesException {
-		String requestUrl = WikiUrls.WIKI_PAGE_AUTH.format(endpoint, wikiLabel, wikiPage.getLabel());
+		String requestUrl = WikiUrls.WIKI_PAGE_AUTH.format(this, WikiUrlParts.wikiLabel.get(wikiLabel), WikiUrlParts.wikiPage.get(wikiPage.getLabel()));
 		updateWikiPageAux(requestUrl, wikiPage, parameters);
 	}
 	
@@ -289,13 +298,11 @@ public class WikiService extends BaseService {
 	 * @param wikiPageLable
 	 * @throws ClientServicesException
 	 */
-	public void deleteWikiPage(String wikiLabel, String wikiPageLable) 
+	public void deleteWikiPage(String wikiLabel, String wikiPageLabel) 
 			 throws ClientServicesException {
-		String requestUrl = WikiUrls.WIKI_PAGE_AUTH.format(endpoint, wikiLabel, wikiPageLable);
+		String requestUrl = WikiUrls.WIKI_PAGE_AUTH.format(this, WikiUrlParts.wikiLabel.get(wikiLabel), WikiUrlParts.wikiPage.get(wikiPageLabel));
 		deleteData(requestUrl);
 	}
-	
-
 
 	/***************************************************************
 	 * Utility methods

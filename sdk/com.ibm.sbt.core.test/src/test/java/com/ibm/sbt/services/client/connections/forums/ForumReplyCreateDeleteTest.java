@@ -1,5 +1,5 @@
 /*
- * �� Copyright IBM Corp. 2013
+ * ������ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -29,8 +29,7 @@ import org.junit.Test;
 public class ForumReplyCreateDeleteTest extends BaseForumServiceTest {
 
 	@Test
-	public void testCreateForumReply() {
-		try {
+	public void testCreateForumReply() throws ForumServiceException {
 			topic = createForumTopic();
 			ForumReply reply = new ForumReply(forumService);
 			reply.setTitle("Test reply title" + System.currentTimeMillis());
@@ -41,9 +40,6 @@ public class ForumReplyCreateDeleteTest extends BaseForumServiceTest {
 			assertEquals(unRandomize(reply.getTitle()), unRandomize(replyReturned.getTitle().trim()));
 			assertEquals(unRandomize(reply.getContent()), unRandomize(replyReturned.getContent().trim()));
 			deleteForumReply(replyReturned);
-		} catch (Exception e) {
-			fail("Error calling forumService.createForumReply() caused by: "+e.getMessage());
-		}
 	}
 
 	@Test

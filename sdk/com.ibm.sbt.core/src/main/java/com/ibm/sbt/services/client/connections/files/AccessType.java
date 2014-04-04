@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * ï¿½ Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -14,6 +14,9 @@
  * permissions and limitations under the License.
  */
 package com.ibm.sbt.services.client.connections.files;
+
+import com.ibm.sbt.services.client.base.NamedUrlPart;
+
 /**
  * Files Access Types
  * @author Vimal Dhupar
@@ -24,10 +27,17 @@ public enum AccessType {
 	
 	PUBLIC("/anonymous/api"),
 	AUTHENTICATED("/api");
+
 	String accessType;
+
 	private AccessType(String accessType) {
 		this.accessType = accessType;
 	}
-	public String getAccessType(){return accessType;}
+
+	public String getText(){return accessType;}
+
+	public NamedUrlPart get(){
+		return new NamedUrlPart("accessType", accessType);
+	}
 	
 }

@@ -1,5 +1,5 @@
 /*
- * �� Copyright IBM Corp. 2013
+ * ������ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -30,43 +30,33 @@ import org.junit.Test;
 public class ForumTopicGetUpdateTest extends BaseForumServiceTest {
 
 	@Before
-	public void initForum() {
+	public void initForum() throws ForumServiceException {
 		topic = createForumTopic();
 	}
 
 	@Test
-	public void testGetForumTopic() {
-		try {
-			ForumTopic topicGot = forumService.getForumTopic(topic.getTopicUuid());
+	public void testGetForumTopic() throws ForumServiceException {
+		ForumTopic topicGot = forumService.getForumTopic(topic.getTopicUuid());
 
-			assertEquals(topic.getTitle(), topicGot.getTitle());
-			assertEquals(topic.getContent(), topicGot.getContent());
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail("Error calling forumService.getForumTopic() caused by: "+e.getMessage());
-		}
+		assertEquals(topic.getTitle(), topicGot.getTitle());
+		assertEquals(topic.getContent(), topicGot.getContent());
 	}
 
 	@Test
-	public void testUpdateTopic() {
-		try {
-			topic.setTitle("new Test topic title" + System.currentTimeMillis());
-			topic.setContent("new Test topic content" + System.currentTimeMillis());
-			forumService.updateForumTopic(topic);
-			
-			ForumTopic updatedTopic = forumService.getForumTopic(topic.getTopicUuid());
-			
-			assertEquals(unRandomize(topic.getTitle()), unRandomize(updatedTopic.getTitle()));
-			assertEquals(topic.getTopicUuid(), updatedTopic.getTopicUuid());
-			assertEquals(unRandomize(topic.getContent()), unRandomize(updatedTopic.getContent().trim()));
-
-		} catch (Exception e) {
-			fail("Error calling forumService.updateForumTopic() caused by: "+e.getMessage());
-		}
+	public void testUpdateTopic() throws ForumServiceException {
+		topic.setTitle("new Test topic title" + System.currentTimeMillis());
+		topic.setContent("new Test topic content" + System.currentTimeMillis());
+		forumService.updateForumTopic(topic);
+		
+		ForumTopic updatedTopic = forumService.getForumTopic(topic.getTopicUuid());
+		
+		assertEquals(unRandomize(topic.getTitle()), unRandomize(updatedTopic.getTitle()));
+		assertEquals(topic.getTopicUuid(), updatedTopic.getTopicUuid());
+		assertEquals(unRandomize(topic.getContent()), unRandomize(updatedTopic.getContent().trim()));
 	}
 
 	@After
-	public void deleteTopicOnExit() {
+	public void deleteTopicOnExit() throws ForumServiceException {
 		deleteForumTopic(topic);
 	}
 }

@@ -52,6 +52,7 @@ public class JavaScriptLibraries {
 
 	
 	public enum LibType {
+		NONE("<none>"),
 		DOJO(DominoDojoLibrary.NAME),
 		JQUERY(DominoJQueryLibrary.NAME);
 		
@@ -100,16 +101,19 @@ public class JavaScriptLibraries {
 	// See: https://developers.google.com/speed/libraries/devguide
 	public static JSLibrary[] LIBRARIES = {
 		new JSLibrary("<default>","dojo181",LibType.DOJO,"1.8.1","",false),
-		//new JSLibrary("Dojo Toolkit 1.4.3","dojo","1.4.3","//ajax.googleapis.com/ajax/libs/dojo/1.4.3/dojo/dojo.js"),
+		new JSLibrary("<no library>","none",LibType.NONE,"0.0.0","",false),
+		
 		new JSLibrary("Dojo Toolkit 1.4.3","dojo143",LibType.DOJO,"1.4.3","//ajax.googleapis.com/ajax/libs/dojo/1.4.3/",false),
 		new JSLibrary("Dojo Toolkit 1.5.2","dojo152",LibType.DOJO,"1.5.2","//ajax.googleapis.com/ajax/libs/dojo/1.5.2",false),
 		new JSLibrary("Dojo Toolkit 1.6.1","dojo161",LibType.DOJO,"1.6.1","//ajax.googleapis.com/ajax/libs/dojo/1.6.1",false),
 		new JSLibrary("Dojo Toolkit 1.7.4","dojo174",LibType.DOJO,"1.7.4","//ajax.googleapis.com/ajax/libs/dojo/1.7.4",false),
-		new JSLibrary("Dojo Toolkit 1.8.4","dojo184",LibType.DOJO,"1.8.4","//ajax.googleapis.com/ajax/libs/dojo/1.8.4",false),
-		new JSLibrary("Dojo Toolkit 1.8.4 - Async","dojo184",LibType.DOJO,"1.8.4","//ajax.googleapis.com/ajax/libs/dojo/1.8.4",true),
-		new JSLibrary("Dojo Toolkit 1.9.0","dojo190",LibType.DOJO,"1.9.0","//ajax.googleapis.com/ajax/libs/dojo/1.9.0",false),
-		new JSLibrary("Dojo Toolkit 1.9.0 - Async","dojo190",LibType.DOJO,"1.9.0","//ajax.googleapis.com/ajax/libs/dojo/1.9.0",true),
-//		//new JSLibrary("JQuery 1.8.3","jquery","1.8.3","//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"),
+		new JSLibrary("Dojo Toolkit 1.8.6","dojo186",LibType.DOJO,"1.8.6","//ajax.googleapis.com/ajax/libs/dojo/1.8.6",false),
+		new JSLibrary("Dojo Toolkit 1.8.6 - Async","dojo186",LibType.DOJO,"1.8.6","//ajax.googleapis.com/ajax/libs/dojo/1.8.6",true),
+		new JSLibrary("Dojo Toolkit 1.9.3","dojo193",LibType.DOJO,"1.9.3","//ajax.googleapis.com/ajax/libs/dojo/1.9.3",false),
+		new JSLibrary("Dojo Toolkit 1.9.3 - Async","dojo193",LibType.DOJO,"1.9.3","//ajax.googleapis.com/ajax/libs/dojo/1.9.3",true),
+
 		new JSLibrary("JQuery 1.8.3","jquery183",LibType.JQUERY,"1.8.3","//ajax.googleapis.com/ajax/libs/jquery/1.8.3",false),
+		new JSLibrary("JQuery 2.0.3","jquery203",LibType.JQUERY,"2.0.3","//ajax.googleapis.com/ajax/libs/jquery/2.0.3",false),
+		new JSLibrary("JQuery 2.1.0","jquery210",LibType.JQUERY,"2.1.0","//ajax.googleapis.com/ajax/libs/jquery/2.1.0",false),
 	};
 }

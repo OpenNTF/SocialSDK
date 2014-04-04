@@ -50,5 +50,5 @@ function onTypeChange***REMOVED*** echo $timestamp; ?>() {
 }
 
 
-onTypeChangeChange***REMOVED*** echo $timestamp; ?>();
+onTypeChange***REMOVED*** echo $timestamp; ?>();
 </script>

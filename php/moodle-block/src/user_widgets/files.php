@@ -50,5 +50,5 @@ function onTypeChange<?php echo $timestamp; ?>() {
 }
 
 
-onTypeChangeChange<?php echo $timestamp; ?>();
+onTypeChange<?php echo $timestamp; ?>();
 </script>

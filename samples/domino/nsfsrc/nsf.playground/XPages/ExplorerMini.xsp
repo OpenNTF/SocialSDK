@@ -82,6 +82,9 @@ return apiBean.loadAPI(e,param["unid"]);
 		<xp:this.value><![CDATA[function loadFromHash() {
 	if(dojo.hash()) {
 		var obj = dojo.queryToObject(dojo.hash());
+		if(obj.env) {
+			dojo.byId(pageGlobal.cbEnv).value = obj.env;
+		}
 		if(obj.api) {
 			loadAPI(obj.api,obj.unid);
 		} 

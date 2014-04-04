@@ -65,188 +65,188 @@ if (isset($_POST['type'])) {
 		$record->created_by_user_id = intval($USER->id);
 		
 		if (isset($_POST['allow_client_access'])) {
-			$record->allow_client_access = mysql_real_escape_string($_POST['allow_client_access']);
+			$record->allow_client_access = $DB->sql_like_escape($_POST['allow_client_access']);
 		}
 		
 		if (isset($_POST['server_type'])) {
-			$record->server_type = mysql_real_escape_string($_POST['server_type']);
+			$record->server_type = $DB->sql_like_escape($_POST['server_type']);
 		}
 		
 		if (isset($_POST['api_version'])) {
-			$record->api_version = mysql_real_escape_string($_POST['api_version']);
+			$record->api_version = $DB->sql_like_escape($_POST['api_version']);
 		}
 		
 		if (isset($_POST['force_ssl_trust'])) {
-			$record->force_ssl_trust = mysql_real_escape_string($_POST['force_ssl_trust']);
+			$record->force_ssl_trust = $DB->sql_like_escape($_POST['force_ssl_trust']);
 		}
 		
 		if (isset($_POST['form_auth_page'])) {
-			$record->form_auth_page = mysql_real_escape_string($_POST['form_auth_page']);
+			$record->form_auth_page = $DB->sql_like_escape($_POST['form_auth_page']);
 		}
 		
 		if (isset($_POST['form_auth_login_page'])) {
-			$record->form_auth_login_page = mysql_real_escape_string($_POST['form_auth_login_page']);
+			$record->form_auth_login_page = $DB->sql_like_escape($_POST['form_auth_login_page']);
 		}
 		
 		if (isset($_POST['form_auth_cookie_cache'])) {
-			$record->form_auth_cookie_cache = mysql_real_escape_string($_POST['form_auth_cookie_cache']);
+			$record->form_auth_cookie_cache = $DB->sql_like_escape($_POST['form_auth_cookie_cache']);
 		}
 		
 		if (isset($_POST['basic_auth_method'])) {
-			$record->basic_auth_method = mysql_real_escape_string($_POST['basic_auth_method']);
+			$record->basic_auth_method = $DB->sql_like_escape($_POST['basic_auth_method']);
 		}
 		
 		if (isset($_POST['basic_auth_password'])) {
-			$record->basic_auth_password = mysql_real_escape_string($_POST['basic_auth_password']);
+			$record->basic_auth_password = $DB->sql_like_escape($_POST['basic_auth_password']);
 		}
 		
 		if (isset($_POST['basic_auth_username'])) {
-			$record->basic_auth_username = mysql_real_escape_string($_POST['basic_auth_username']);
+			$record->basic_auth_username = $DB->sql_like_escape($_POST['basic_auth_username']);
 		}
 		
 		if (isset($_POST['auth_type'])) {
-			$record->auth_type = mysql_real_escape_string($_POST['auth_type']);
+			$record->auth_type = $DB->sql_like_escape($_POST['auth_type']);
 		}
 		
 		if (isset($_POST['authorization_url'])) {
-			$record->authorization_url = mysql_real_escape_string($_POST['authorization_url']);
+			$record->authorization_url = $DB->sql_like_escape($_POST['authorization_url']);
 		}
 		
 		if (isset($_POST['oauth2_callback_url'])) {
-			$record->oauth2_callback_url = mysql_real_escape_string($_POST['oauth2_callback_url']);
+			$record->oauth2_callback_url = $DB->sql_like_escape($_POST['oauth2_callback_url']);
 		}
 		
 		if (isset($_POST['request_token_url'])) {
-			$record->request_token_url = mysql_real_escape_string($_POST['request_token_url']);
+			$record->request_token_url = $DB->sql_like_escape($_POST['request_token_url']);
 		}
 		
 		if (isset($_POST['client_secret'])) {
-			$record->client_secret = mysql_real_escape_string($_POST['client_secret']);
+			$record->client_secret = $DB->sql_like_escape($_POST['client_secret']);
 		}
 		
 		if (isset($_POST['client_id'])) {
-			$record->client_id = mysql_real_escape_string($_POST['client_id']);
+			$record->client_id = $DB->sql_like_escape($_POST['client_id']);
 		}
 		
 		if (isset($_POST['consumer_secret'])) {
-			$record->consumer_secret = mysql_real_escape_string($_POST['consumer_secret']);
+			$record->consumer_secret = $DB->sql_like_escape($_POST['consumer_secret']);
 		}
 		
 		if (isset($_POST['consumer_key'])) {
-			$record->consumer_key = mysql_real_escape_string($_POST['consumer_key']);
+			$record->consumer_key = $DB->sql_like_escape($_POST['consumer_key']);
 		}
 		
 		if (isset($_POST['access_token_url'])) {
-			$record->access_token_url = mysql_real_escape_string($_POST['access_token_url']);
+			$record->access_token_url = $DB->sql_like_escape($_POST['access_token_url']);
 		}
 		
 		if (isset($_POST['server_url'])) {
-			$record->server_url = mysql_real_escape_string($_POST['server_url']);
+			$record->server_url = $DB->sql_like_escape($_POST['server_url']);
 		}
 		
 		if (isset($_POST['name'])) {
-			$record->name = mysql_real_escape_string($_POST['name']);
+			$record->name = $DB->sql_like_escape($_POST['name']);
 		}
 		
 		$ret = $DB->insert_record(ENDPOINTS, $record);
 		var_dump($ret);
 		return $ret;
 	} else if ($_POST['type'] == 'delete') {
-		$DB->delete_records(ENDPOINTS, array('id' => mysql_real_escape_string(intval($_POST['id']))));
+		$DB->delete_records(ENDPOINTS, array('id' => $DB->sql_like_escape(intval($_POST['id']))));
 	} else if ($_POST['type'] == 'update') {
-		$record = $DB->get_record(ENDPOINTS, array('id' => mysql_real_escape_string(intval($_POST['id']))));
+		$record = $DB->get_record(ENDPOINTS, array('id' => $DB->sql_like_escape(intval($_POST['id']))));
 		
 		if ($record == null) {
 			return;
 		}
 		
 		if (isset($_POST['allow_client_access'])) {
-			$record->allow_client_access = mysql_real_escape_string($_POST['allow_client_access']);
+			$record->allow_client_access = $DB->sql_like_escape($_POST['allow_client_access']);
 		}
 		
 		if (isset($_POST['server_type'])) {
-			$record->server_type = mysql_real_escape_string($_POST['server_type']);
+			$record->server_type = $DB->sql_like_escape($_POST['server_type']);
 		}
 		
 		if (isset($_POST['api_version'])) {
-			$record->api_version = mysql_real_escape_string($_POST['api_version']);
+			$record->api_version = $DB->sql_like_escape($_POST['api_version']);
 		}
 		
 		if (isset($_POST['force_ssl_trust'])) {
-			$record->force_ssl_trust = mysql_real_escape_string($_POST['force_ssl_trust']);
+			$record->force_ssl_trust = $DB->sql_like_escape($_POST['force_ssl_trust']);
 		}
 		
 		if (isset($_POST['form_auth_page'])) {
-			$record->form_auth_page = mysql_real_escape_string($_POST['form_auth_page']);
+			$record->form_auth_page = $DB->sql_like_escape($_POST['form_auth_page']);
 		}
 		
 		if (isset($_POST['form_auth_login_page'])) {
-			$record->form_auth_login_page = mysql_real_escape_string($_POST['new_form_auth_login_page']);
+			$record->form_auth_login_page = $DB->sql_like_escape($_POST['new_form_auth_login_page']);
 		}
 		
 		if (isset($_POST['form_auth_cookie_cache'])) {
-			$record->form_auth_cookie_cache = mysql_real_escape_string($_POST['form_auth_cookie_cache']);
+			$record->form_auth_cookie_cache = $DB->sql_like_escape($_POST['form_auth_cookie_cache']);
 		}
 		
 		if (isset($_POST['basic_auth_method'])) {
-			$record->basic_auth_method = mysql_real_escape_string($_POST['basic_auth_method']);
+			$record->basic_auth_method = $DB->sql_like_escape($_POST['basic_auth_method']);
 		}
 		
 		if (isset($_POST['basic_auth_password'])) {
-			$record->basic_auth_password = mysql_real_escape_string($_POST['basic_auth_password']);
+			$record->basic_auth_password = $DB->sql_like_escape($_POST['basic_auth_password']);
 		}
 		
 		if (isset($_POST['basic_auth_username'])) {
-			$record->basic_auth_username = mysql_real_escape_string($_POST['basic_auth_username']);
+			$record->basic_auth_username = $DB->sql_like_escape($_POST['basic_auth_username']);
 		}
 		
 		if (isset($_POST['auth_type'])) {
-			$record->auth_type = mysql_real_escape_string($_POST['auth_type']);
+			$record->auth_type = $DB->sql_like_escape($_POST['auth_type']);
 		}
 		
 		if (isset($_POST['authorization_url'])) {
-			$record->authorization_url = mysql_real_escape_string($_POST['authorization_url']);
+			$record->authorization_url = $DB->sql_like_escape($_POST['authorization_url']);
 		}
 		
 		if (isset($_POST['oauth2_callback_url'])) {
-			$record->oauth2_callback_url = mysql_real_escape_string($_POST['oauth2_callback_url']);
+			$record->oauth2_callback_url = $DB->sql_like_escape($_POST['oauth2_callback_url']);
 		}
 		
 		if (isset($_POST['request_token_url'])) {
-			$record->request_token_url = mysql_real_escape_string($_POST['request_token_url']);
+			$record->request_token_url = $DB->sql_like_escape($_POST['request_token_url']);
 		}
 		
 		if (isset($_POST['client_secret'])) {
-			$record->client_secret = mysql_real_escape_string($_POST['client_secret']);
+			$record->client_secret = $DB->sql_like_escape($_POST['client_secret']);
 		}
 		
 		if (isset($_POST['client_id'])) {
-			$record->client_id = mysql_real_escape_string($_POST['client_id']);
+			$record->client_id = $DB->sql_like_escape($_POST['client_id']);
 		}
 		
 		if (isset($_POST['consumer_secret'])) {
-			$record->consumer_secret = mysql_real_escape_string($_POST['consumer_secret']);
+			$record->consumer_secret = $DB->sql_like_escape($_POST['consumer_secret']);
 		}
 		
 		if (isset($_POST['consumer_key'])) {
-			$record->consumer_key = mysql_real_escape_string($_POST['consumer_key']);
+			$record->consumer_key = $DB->sql_like_escape($_POST['consumer_key']);
 		}
 		
 		if (isset($_POST['access_token_url'])) {
-			$record->access_token_url = mysql_real_escape_string($_POST['access_token_url']);
+			$record->access_token_url = $DB->sql_like_escape($_POST['access_token_url']);
 		}
 		
 		if (isset($_POST['server_url'])) {
-			$record->server_url = mysql_real_escape_string($_POST['server_url']);
+			$record->server_url = $DB->sql_like_escape($_POST['server_url']);
 		}
 		
 		if (isset($_POST['name'])) {
-			$record->name = mysql_real_escape_string($_POST['name']);
+			$record->name = $DB->sql_like_escape($_POST['name']);
 		}
 			
 		$DB->update_record(ENDPOINTS, $record);
 	} else if ($_POST['type'] == 'get') {
-		$record = $DB->get_record(ENDPOINTS, array('id' => mysql_real_escape_string(intval($_POST['id']))));
+		$record = $DB->get_record(ENDPOINTS, array('id' => $DB->sql_like_escape(intval($_POST['id']))));
 		
 		if ($record == null) {
 			return;

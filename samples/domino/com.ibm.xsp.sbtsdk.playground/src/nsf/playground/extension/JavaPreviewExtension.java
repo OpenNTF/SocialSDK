@@ -20,19 +20,18 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import nsf.playground.playground.PreviewJavaScriptHandler.Renderer;
-import nsf.playground.playground.PreviewJavaScriptHandler.RequestParams;
-
+import nsf.playground.playground.PreviewJavaHandler.Renderer;
+import nsf.playground.playground.PreviewJavaHandler.RequestParams;
 
 
 /**
- * JavaScript preview extension for the Playground.
+ * Java preview extension for the Playground.
  * 
  * @author priand
  */
-public abstract class JavaScriptPreviewExtension {
+public abstract class JavaPreviewExtension {
 	
-	protected JavaScriptPreviewExtension() {
+	protected JavaPreviewExtension() {
 	}
 
 	public Renderer findRenderer(HttpServletRequest req, HttpServletResponse resp, RequestParams requestParams, boolean createDefault) throws IOException {

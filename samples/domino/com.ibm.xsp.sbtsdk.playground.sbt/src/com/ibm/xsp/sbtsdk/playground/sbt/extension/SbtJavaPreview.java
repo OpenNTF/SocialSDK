@@ -13,29 +13,36 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-package nsf.playground.extension;
+package com.ibm.xsp.sbtsdk.playground.sbt.extension;
 
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import nsf.playground.playground.PreviewJavaScriptHandler.Renderer;
-import nsf.playground.playground.PreviewJavaScriptHandler.RequestParams;
+import nsf.playground.extension.JavaPreviewExtension;
+import nsf.playground.playground.PreviewJavaHandler.Renderer;
+import nsf.playground.playground.PreviewJavaHandler.RequestParams;
 
 
 
 /**
- * JavaScript preview extension for the Playground.
+ * Java preview extension for the Playground.
  * 
  * @author priand
  */
-public abstract class JavaScriptPreviewExtension {
+public class SbtJavaPreview extends JavaPreviewExtension {
 	
-	protected JavaScriptPreviewExtension() {
+	public SbtJavaPreview() {
 	}
 
+	@Override
 	public Renderer findRenderer(HttpServletRequest req, HttpServletResponse resp, RequestParams requestParams, boolean createDefault) throws IOException {
-		return null;
+		boolean create = createDefault;
+		if(!create) {
+			return null;
+		}
+		return new Renderer(req,resp,requestParams) {
+		};
 	}
 }

@@ -1,13 +1,10 @@
 package nsf.playground.playground;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.ibm.commons.runtime.RuntimeConstants;
 import com.ibm.commons.util.PathUtil;
@@ -58,46 +55,48 @@ public abstract class PreviewHandler {
 	//
 	// Helpers
 	//
-	protected String getDefautLibraryPath(String serverUrl) {
-		DojoLibrary lib = DojoLibraryFactory.getDefaultLibrary();
-        String s = '-'+lib.getVersionTag();
-		return serverUrl+"/xsp/.ibmxspres/dojoroot"+s+"/";
-	}
-	protected String getDefautSbtPath(String serverUrl) {
-		return serverUrl+"/xsp/.ibmxspres/.sbtsdk";
-	}
-	
-	protected String composeServerUrl(HttpServletRequest req) {		
-//		System.out.println("scheme:"+req.getScheme());
-//		System.out.println("server:"+req.getServerName());
-//		System.out.println("serverPath:"+req.getServletPath());
-//		System.out.println("contextPath:"+req.getContextPath());
-//		System.out.println("pathInfo:"+req.getPathInfo());
-//		System.out.println("BaseURL:"+b.toString());
-		
-		StringBuilder b = new StringBuilder();
-		String scheme = req.getScheme();
-		String server = req.getServerName();
-		int port = req.getServerPort();
-		
-		b.append(scheme);
-		b.append("://");
-		b.append(server);
-		if( !(((port==80)&&scheme.equals("http")) || ((port==443)&&scheme.equals("https"))) ) {
-			b.append(':');
-			b.append(Integer.toString(port));
+	public static class BaseRenderer { 
+		protected static String getDefautLibraryPath(String serverUrl) {
+			DojoLibrary lib = DojoLibraryFactory.getDefaultLibrary();
+	        String s = '-'+lib.getVersionTag();
+			return serverUrl+"/xsp/.ibmxspres/dojoroot"+s+"/";
+		}
+		protected static String getDefautSbtPath(String serverUrl) {
+			return serverUrl+"/xsp/.ibmxspres/.sbtsdk";
 		}
 		
-		return b.toString();
-	}
-	
-	protected String composeDatabaseUrl(HttpServletRequest req, String serverUrl) {
-		String contextPath = req.getContextPath();
-		return serverUrl+contextPath;
-	}
-	
-	protected String composeToolkitUrl(String databaseUrl) {
-		return PathUtil.concat(databaseUrl,RuntimeConstants.get().getConstant(RuntimeConstants.LIBRARY_BASEURL),'/');
-		//return PathUtil.concat(databaseUrl,"xsp"+PlaygroundToolkitServletFactory.LIBRARY_PATHINFO,'/');
+		protected static String composeServerUrl(HttpServletRequest req) {		
+	//		System.out.println("scheme:"+req.getScheme());
+	//		System.out.println("server:"+req.getServerName());
+	//		System.out.println("serverPath:"+req.getServletPath());
+	//		System.out.println("contextPath:"+req.getContextPath());
+	//		System.out.println("pathInfo:"+req.getPathInfo());
+	//		System.out.println("BaseURL:"+b.toString());
+			
+			StringBuilder b = new StringBuilder();
+			String scheme = req.getScheme();
+			String server = req.getServerName();
+			int port = req.getServerPort();
+			
+			b.append(scheme);
+			b.append("://");
+			b.append(server);
+			if( !(((port==80)&&scheme.equals("http")) || ((port==443)&&scheme.equals("https"))) ) {
+				b.append(':');
+				b.append(Integer.toString(port));
+			}
+			
+			return b.toString();
+		}
+		
+		protected static String composeDatabaseUrl(HttpServletRequest req, String serverUrl) {
+			String contextPath = req.getContextPath();
+			return serverUrl+contextPath;
+		}
+		
+		protected static String composeToolkitUrl(String databaseUrl) {
+			return PathUtil.concat(databaseUrl,RuntimeConstants.get().getConstant(RuntimeConstants.LIBRARY_BASEURL),'/');
+			//return PathUtil.concat(databaseUrl,"xsp"+PlaygroundToolkitServletFactory.LIBRARY_PATHINFO,'/');
+		}
 	}
 }

@@ -17,12 +17,16 @@ package com.ibm.xsp.sbtsdk.playground.sbt;
 
 import nsf.playground.extension.Endpoints;
 import nsf.playground.extension.ImportOptions;
+import nsf.playground.extension.JavaPreviewExtension;
+import nsf.playground.extension.JavaScriptPreviewExtension;
 import nsf.playground.extension.PlaygroundExtensionFactory;
 import nsf.playground.extension.PlaygroundFragment;
 
 import com.ibm.xsp.sbtsdk.playground.sbt.extension.SbtEndpoints;
 import com.ibm.xsp.sbtsdk.playground.sbt.extension.SbtFragment;
 import com.ibm.xsp.sbtsdk.playground.sbt.extension.SbtImportOptions;
+import com.ibm.xsp.sbtsdk.playground.sbt.extension.SbtJavaPreview;
+import com.ibm.xsp.sbtsdk.playground.sbt.extension.SbtJavaScriptPreview;
 
 
 /**
@@ -35,6 +39,8 @@ public class SbtPlaygroundExtensionFactory extends PlaygroundExtensionFactory {
 	public PlaygroundFragment fragment;
 	public ImportOptions importOptions;
 	public SbtEndpoints endpoints;
+	public SbtJavaScriptPreview jsPreview;
+	public SbtJavaPreview javaPreview;
 
 	public SbtPlaygroundExtensionFactory() {
 	}
@@ -57,6 +63,18 @@ public class SbtPlaygroundExtensionFactory extends PlaygroundExtensionFactory {
 				endpoints = new SbtEndpoints();
 			}
 			return endpoints;
+		}
+		if(clazz==JavaScriptPreviewExtension.class) {
+			if(jsPreview==null) {
+				jsPreview = new SbtJavaScriptPreview();
+			}
+			return jsPreview;
+		}
+		if(clazz==JavaPreviewExtension.class) {
+			if(javaPreview==null) {
+				javaPreview = new SbtJavaPreview();
+			}
+			return javaPreview;
 		}
 		return null;
 	}

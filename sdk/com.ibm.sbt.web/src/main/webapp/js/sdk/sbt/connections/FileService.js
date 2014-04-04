@@ -284,8 +284,7 @@ define(
 		 */
 		getDownloadUrl : function() {
 			var url = this.getAsString("downloadUrl");
-			var endpoint = this.service.endpoint;
-			return endpoint.proxy.rewriteUrl(endpoint.baseUrl, url, endpoint.proxyPath);
+			return this.service.endpoint.rewriteUrl(url);
 		},
 		/**
 		 * Returns the type
@@ -1739,11 +1738,7 @@ define(
 		 * @param {String} libraryId The library ID of the file
 		 */
 		downloadFile : function(fileId, libraryId) {
-//			var url = config.Properties.serviceUrl + "/files/" + this.endpoint.proxyPath + "/" + "connections" + "/" + "DownloadFile" + "/" + fileId
-//					+ "/" + libraryId;
-			var url = this.getAsString("downloadUrl");
-			var endpoint = this.service.endpoint;
-			window.open(endpoint.proxy.rewriteUrl(endpoint.baseUrl, url, endpoint.proxyPath));
+			window.open(this.getDownloadUrl());
 		},
 
 		actOnCommentAwaitingApproval : function(commentId, action, actionReason) {

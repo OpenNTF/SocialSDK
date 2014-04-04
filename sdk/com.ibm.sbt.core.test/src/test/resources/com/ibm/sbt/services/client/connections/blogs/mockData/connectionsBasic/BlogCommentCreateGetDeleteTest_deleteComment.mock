@@ -4,7 +4,7 @@
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Wed, 19 Feb 2014 11:07:58 GMT]]></value>
+        <value><![CDATA[Thu, 03 Apr 2014 09:17:42 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -36,7 +36,7 @@
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LCSESSIONID=0000an-llDfED33ft13mMKoazZw:18dna4k6n; Path=/; HttpOnly]]></value>
+        <value><![CDATA[LCSESSIONID=0000uX0FkpnqY_PG8BvJXwSEWf7:18dna4k6n; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Content-Length]]></name>
@@ -153,7 +153,7 @@
                   text.push("---");
                   
                   // Do not remove this line unless you wish to completely hide all reporting info from the user. 
-                  text.push("Identifier: LCF187A908EB614822843BECA906A14411\njava.io.FileNotFoundException: SRVE0190E: File not found: \/e780286f-34fa-4f0b-99ae-3cc4800c830f\/api\/comments\/15cef12e-6d8c-4ea8-a0ba-134f42d89177");
+                  text.push("Identifier: LC5B403A20D420438EB7D4CE467243F67E\njava.io.FileNotFoundException: SRVE0190E: File not found: \/7e291548-5ed8-4925-823e-17c365643d41\/api\/comments\/ad5c8185-86ba-4579-823d-0a77c2010158");
                   input.value = text.join("\n");
               
                   self.parentNode.style.display='none';

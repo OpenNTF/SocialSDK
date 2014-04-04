@@ -5,12 +5,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.ibm.commons.util.StringUtil;
+import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.profiles.feedhandler.ProfileFeedHandler;
 import com.ibm.sbt.services.client.connections.profiles.utils.Messages;
 import com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants;
-import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.endpoints.Endpoint;
 
 /**
@@ -18,6 +18,7 @@ import com.ibm.sbt.services.endpoints.Endpoint;
  * 
  * @Represents Connections ProfileAdminService
  * @author Swati Singh
+ * @author Carlos Manias
  * <pre>
  * Sample Usage
  * {@code
@@ -79,14 +80,13 @@ public class ProfileAdminService extends ProfileService {
 	 */
 	public void deleteProfile(String id) throws ProfileServiceException
 	{	
-		
 		if (StringUtil.isEmpty(id)) {
 			throw new ProfileServiceException(null, Messages.InvalidArgument_1);
 		}
 		try{
 			Map<String, String> parameters = new HashMap<String, String>();
 			setIdParameter(parameters,id );
-			String deleteUrl = resolveProfileUrl(ProfileAPI.ADMIN.getProfileEntityType(), ProfileType.DELETEPROFILE.getProfileType());
+			String deleteUrl = ProfileUrls.ADMIN_PROFILE_ENTRY.format(this);
 			super.deleteData(deleteUrl, parameters, getUniqueIdentifier(id));
 		}
 		catch(ClientServicesException e){
@@ -107,7 +107,6 @@ public class ProfileAdminService extends ProfileService {
 	 */
 	public void createProfile(Profile profile) throws ProfileServiceException 
 	{
-		
 		if (profile == null) {
 			throw new ProfileServiceException(null, Messages.InvalidArgument_3);
 		}		
@@ -116,7 +115,7 @@ public class ProfileAdminService extends ProfileService {
 			setIdParameter(parameters, profile.getUserid());
 			Object createPayload = constructCreateRequestBody(profile);
 			
-			String createUrl = resolveProfileUrl(ProfileAPI.ADMIN.getProfileEntityType(),ProfileType.ADDPROFILE.getProfileType());
+			String createUrl = ProfileUrls.ADMIN_PROFILES.format(this);
 			super.createData(createUrl, parameters, createPayload, ClientService.FORMAT_CONNECTIONS_OUTPUT);
 			
 		}catch(ClientServicesException e) {
@@ -128,7 +127,7 @@ public class ProfileAdminService extends ProfileService {
 		}
 
 	}
-	
+
 	/**
 	 * 
 	 * @param <b>parameters</b> a map of search keys<br/>
@@ -143,7 +142,7 @@ public class ProfileAdminService extends ProfileService {
 	@Override
 	public ProfileList searchProfiles(Map<String,String> parameters) throws ProfileServiceException {
 		
-		String url = resolveProfileUrl(ProfileAPI.ADMIN.getProfileEntityType(),ProfileType.GETPROFILES.getProfileType());
+		String url = ProfileUrls.ADMIN_PROFILES.format(this);
 
 		try {
 			return (ProfileList) getEntities(url, parameters, new ProfileFeedHandler(this));
@@ -177,8 +176,7 @@ public class ProfileAdminService extends ProfileService {
 			} catch (TransformerException e) {
 				throw new ProfileServiceException(e);
 			}
-			String updateUrl = resolveProfileUrl(ProfileAPI.ADMIN.getProfileEntityType(),
-					ProfileType.UPDATEPROFILE.getProfileType());
+			String updateUrl = ProfileUrls.ADMIN_PROFILE_ENTRY.format(this);
 			super.updateData(updateUrl, parameters,updateProfilePayload, getUniqueIdentifier(profile.getAsString("uid")));
 			profile.clearFieldsMap();
 		} catch (ClientServicesException e) {

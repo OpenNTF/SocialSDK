@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * ï¿½ Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -22,16 +22,17 @@ package com.ibm.sbt.services.client.connections.files;
  * @author Vimal Dhupar
  */
 public enum ResultType {
-	FEED("/feed"), MEDIA("/media"), ENTRY("/entry"), REPORTS("/reports"), NONCE("/nonce"), LOCK("/lock"), NULL(
-			""), INTROSPECTION("/introspection"), ATOMSVC("/atomsvc");
+	FEED,
+	MEDIA,
+	ENTRY,
+	REPORTS,
+	NONCE,
+	LOCK,
+	NULL,
+	INTROSPECTION,
+	ATOMSVC;
 
-	String	resultType;
-
-	private ResultType(String resultType) {
-		this.resultType = resultType;
-	}
-
-	public String getResultType() {
-		return resultType;
+	public String get() {
+		return name().toLowerCase();
 	}
 }

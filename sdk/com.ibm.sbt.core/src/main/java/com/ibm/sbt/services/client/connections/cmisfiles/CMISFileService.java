@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -26,9 +26,7 @@ import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.connections.cmisfiles.feedHandler.CMISFileFeedHandler;
-import com.ibm.sbt.services.endpoints.ConnectionsBasicEndpoint;
 import com.ibm.sbt.services.endpoints.Endpoint;
-import com.ibm.sbt.services.endpoints.SmartCloudBasicEndpoint;
 
 /**
  * CMISFileService can be used to expose file application data using the Content Management Interoperability Services (CMIS)
@@ -39,7 +37,7 @@ import com.ibm.sbt.services.endpoints.SmartCloudBasicEndpoint;
  */
 public class CMISFileService extends BaseService {
 	
-	String repositoryId; 
+	private String repositoryId;
 
     /**
      * Constructs CMISFileService Object
@@ -63,6 +61,14 @@ public class CMISFileService extends BaseService {
     public CMISFileService(Endpoint endpoint) {
         super(endpoint);
     }
+
+	/**
+	 * Return mapping key for this service
+	 */
+	@Override
+	public String getServiceMappingKey() {
+		return "files";
+	}
     
     /**
      * Method to get the Default endpoint to be used with the service
@@ -72,18 +78,22 @@ public class CMISFileService extends BaseService {
 		return "connections";
 	}
     
-    private String getRepositoryId() throws ClientServicesException {
+    private String getRepositoryId() throws CMISFileServiceException {
     	if(StringUtil.isNotEmpty(repositoryId)){
     		return repositoryId;
-		} else {
-	    	if(!this.endpoint.getClientParams().containsKey("isSmartCloud")) { 
-	    		// fetch the connections userid here 
-	    		repositoryId = getRepositoryId(CMISFilesUrlBuilder.ATOM_GET_USER_ID.getUrl());
-	    	} else if(this.endpoint.getClientParams().get("isSmartCloud").equals(Boolean.TRUE)) {  
-	    		// fetch the smartcloud subscriber id here 
-	    		repositoryId = getRepositoryId(CMISFilesUrlBuilder.ATOM_GET_SUBSCRIBER_ID.getUrl());
-	    	}
-		}
+    	} else {
+    		try {
+		    	if(!this.endpoint.getClientParams().containsKey("isSmartCloud")) { 
+		    		// fetch the connections userid here 
+		    		repositoryId = getRepositoryId(CMISFilesUrls.ATOM_GET_USER_ID.format(this));
+		    	} else if(this.endpoint.getClientParams().get("isSmartCloud").equals(Boolean.TRUE)) {  
+		    		// fetch the smartcloud subscriber id here 
+		    		repositoryId = getRepositoryId(CMISFilesUrls.ATOM_GET_SUBSCRIBER_ID.format(this));
+		    	}
+    		} catch(ClientServicesException e) {
+				throw new CMISFileServiceException(e,"Error : Failed to fetch Repository ID");
+    		}
+    	}
     	return repositoryId;
     }
     
@@ -117,12 +127,8 @@ public class CMISFileService extends BaseService {
 	 * @throws CMISFileServiceException
 	 */
 	public CMISFileList getMyFiles(Map<String, String> parameters) throws CMISFileServiceException {
-		try {
-			getRepositoryId();
-		} catch(ClientServicesException cse) {
-			throw new CMISFileServiceException(cse, "Error : Failed to fetch Repository ID");
-		}
-		String requestUrl = CMISFilesUrlBuilder.populateURL(CMISFilesUrlBuilder.GET_MY_FILES.getUrl(), repositoryId);
+		getRepositoryId();
+	    String requestUrl = CMISFilesUrls.GET_MY_FILES.format(this, CMISFilesUrlParts.repositoryId.get(repositoryId));
 		try {
 			return (CMISFileList) this.getEntities(requestUrl, parameters, new CMISFileFeedHandler(this));
 		} catch (ClientServicesException cse) {
@@ -148,12 +154,8 @@ public class CMISFileService extends BaseService {
 	 * @throws CMISFileServiceException
 	 */
 	public CMISFileList getFilesSharedWithMe(Map<String, String> parameters) throws CMISFileServiceException {
-		try {
-			getRepositoryId();
-		} catch(ClientServicesException cse) {
-			throw new CMISFileServiceException(cse, "Error : Failed to fetch Repository ID");
-		}
-		String requestUrl = CMISFilesUrlBuilder.populateURL(CMISFilesUrlBuilder.GET_FILES_SHARED_WITH_ME.getUrl(), repositoryId);
+		getRepositoryId();
+	    String requestUrl = CMISFilesUrls.GET_FILES_SHARED_WITH_ME.format(this, CMISFilesUrlParts.repositoryId.get(repositoryId));
 		try {
 			return (CMISFileList) this.getEntities(requestUrl, parameters, new CMISFileFeedHandler(this));
 		} catch (ClientServicesException cse) {
@@ -179,12 +181,8 @@ public class CMISFileService extends BaseService {
 	 * @throws CMISFileServiceException
 	 */
 	public CMISFileList getMyCollections(Map<String, String> parameters) throws CMISFileServiceException {
-		try {
-			getRepositoryId();
-		} catch(ClientServicesException cse) {
-			throw new CMISFileServiceException(cse, "Error : Failed to fetch Repository ID");
-		}
-		String requestUrl = CMISFilesUrlBuilder.populateURL(CMISFilesUrlBuilder.GET_MY_COLLECTIONS.getUrl(), repositoryId);
+		getRepositoryId();
+	    String requestUrl = CMISFilesUrls.GET_MY_COLLECTIONS.format(this, CMISFilesUrlParts.repositoryId.get(repositoryId));
 		try {
 			return (CMISFileList) this.getEntities(requestUrl, parameters, new CMISFileFeedHandler(this));
 		} catch (ClientServicesException cse) {
@@ -210,12 +208,8 @@ public class CMISFileService extends BaseService {
 	 * @throws CMISFileServiceException
 	 */
 	public CMISFileList getCollectionsSharedWithMe(Map<String, String> parameters) throws CMISFileServiceException {
-		try {
-			getRepositoryId();
-		} catch(ClientServicesException cse) {
-			throw new CMISFileServiceException(cse, "Error : Failed to fetch Repository ID");
-		}
-		String requestUrl = CMISFilesUrlBuilder.populateURL(CMISFilesUrlBuilder.GET_COLLECTIONS_SHARED_WITH_ME.getUrl(), repositoryId);
+		getRepositoryId();
+	    String requestUrl = CMISFilesUrls.GET_COLLECTIONS_SHARED_WITH_ME.format(this, CMISFilesUrlParts.repositoryId.get(repositoryId));
 		try {
 			return (CMISFileList) this.getEntities(requestUrl, parameters, new CMISFileFeedHandler(this));
 		} catch (ClientServicesException cse) {
@@ -241,12 +235,8 @@ public class CMISFileService extends BaseService {
 	 * @throws CMISFileServiceException
 	 */
 	public CMISFileList getMyShares(Map<String, String> parameters) throws CMISFileServiceException {
-		try {
-			getRepositoryId();
-		} catch(ClientServicesException cse) {
-			throw new CMISFileServiceException(cse, "Error : Failed to fetch Repository ID");
-		}
-		String requestUrl = CMISFilesUrlBuilder.populateURL(CMISFilesUrlBuilder.GET_MY_SHARES.getUrl(), repositoryId);
+		getRepositoryId();
+	    String requestUrl = CMISFilesUrls.GET_MY_SHARES.format(this, CMISFilesUrlParts.repositoryId.get(repositoryId));
 		try {
 			return (CMISFileList) this.getEntities(requestUrl, parameters, new CMISFileFeedHandler(this));
 		} catch (ClientServicesException cse) {

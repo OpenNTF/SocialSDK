@@ -106,8 +106,7 @@ public class CommunityServiceNoCommonCommunityTest extends BaseUnitTest {
 		CommunityList communities = communityService.getPublicCommunities();
 		Community community = communities.iterator().next();
 
-		TopicList forumTopics = communityService.getForumTopics(community
-				.getCommunityUuid());
+		TopicList forumTopics = communityService.getForumTopics(community.getCommunityUuid());
 
 		for (BaseForumEntity forumTopic : forumTopics) {
 			assertNotNull(forumTopic.getTitle());

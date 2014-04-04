@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -89,6 +89,14 @@ public class ProfileService extends BaseService {
 	 */
 	public ProfileService(Endpoint endpoint, int cacheSize) {
 		super(endpoint, cacheSize);
+	}
+
+	/**
+	 * Return mapping key for this service
+	 */
+	@Override
+	public String getServiceMappingKey() {
+		return "";
 	}
 		
 	/**

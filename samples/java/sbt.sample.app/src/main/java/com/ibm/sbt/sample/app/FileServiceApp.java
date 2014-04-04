@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * Â© Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,7 +34,6 @@ import com.ibm.sbt.services.client.connections.files.Comment;
 import com.ibm.sbt.services.client.connections.files.File;
 import com.ibm.sbt.services.client.connections.files.FileService;
 import com.ibm.sbt.services.client.connections.files.FileServiceException;
-import com.ibm.sbt.services.client.connections.files.FileServiceURIBuilder;
 import com.ibm.sbt.services.client.connections.files.ResultType;
 import com.ibm.sbt.services.client.connections.files.SubFilters;
 import com.ibm.sbt.services.client.connections.files.model.Headers;

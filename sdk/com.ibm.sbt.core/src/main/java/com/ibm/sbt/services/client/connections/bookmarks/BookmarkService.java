@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -24,10 +24,11 @@ import com.ibm.sbt.services.client.connections.bookmarks.feedhandler.BookmarkFee
 import com.ibm.sbt.services.endpoints.Endpoint;
 
 /**
- * The Bookmarks application of IBM® Connections is a social bookmarking tool that you can use to save, organize, and share Internet and intranet bookmarks. 
+ * The Bookmarks application of IBMï¿½ Connections is a social bookmarking tool that you can use to save, organize, and share Internet and intranet bookmarks. 
  * The Bookmarks API allows application programs to read and write to the collections of bookmarks stored in the Bookmarks application.
  * 
  * @author mwallace
+ * @author Carlos Manias
  *
  */
 public class BookmarkService extends BaseService {
@@ -56,6 +57,14 @@ public class BookmarkService extends BaseService {
 	public BookmarkService(Endpoint endpoint) {
 		super(endpoint);
 	}
+
+	/**
+	 * Return mapping key for this service
+	 */
+	@Override
+	public String getServiceMappingKey() {
+		return ""; //dogear?
+	}
 	
 	/**
 	 * Return a list of bookmarks. 
@@ -75,7 +84,7 @@ public class BookmarkService extends BaseService {
 	 */
 	public BookmarkList getAllBookmarks(Map<String, String> parameters) throws BookmarkServiceException {
 		try {
-			String url = BookmarkUrls.ALL.getUrl(this);
+			String url = BookmarkUrls.ALL.format(this);
 			return (BookmarkList)getEntities(url, parameters, new BookmarkFeedHandler(this));
 		} catch (Exception e) {
 			throw new BookmarkServiceException(e, "Error retrieving all bookmarks");
@@ -110,7 +119,7 @@ public class BookmarkService extends BaseService {
 			}
 			parameters.put(isEmail(id) ? "email" : "userid", id);
 			
-			String url = BookmarkUrls.APP.getUrl(this);
+			String url = BookmarkUrls.APP.format(this);
 			return (BookmarkList)getEntities(url, parameters, new BookmarkFeedHandler(this));
 		} catch (Exception e) {
 			throw new BookmarkServiceException(e, "Error retrieving bookmarks");
@@ -135,7 +144,7 @@ public class BookmarkService extends BaseService {
 	 */
 	public BookmarkList getPopularBookmarks(Map<String, String> parameters) throws BookmarkServiceException {
 		try {
-			String url = BookmarkUrls.POPULAR.getUrl(this);
+			String url = BookmarkUrls.POPULAR.format(this);
 			return (BookmarkList)getEntities(url, parameters, new BookmarkFeedHandler(this));
 		} catch (Exception e) {
 			throw new BookmarkServiceException(e, "Error retrieving popular bookmarks");
@@ -160,7 +169,7 @@ public class BookmarkService extends BaseService {
 	 */
 	public BookmarkList getMyNotifications(Map<String, String> parameters) throws BookmarkServiceException {
 		try {
-			String url = BookmarkUrls.MYNOTIFICATIONS.getUrl(this);
+			String url = BookmarkUrls.MYNOTIFICATIONS.format(this);
 			return (BookmarkList)getEntities(url, parameters, new BookmarkFeedHandler(this));
 		} catch (Exception e) {
 			throw new BookmarkServiceException(e, "Error retrieving my notifications");
@@ -185,7 +194,7 @@ public class BookmarkService extends BaseService {
 	 */
 	public BookmarkList getMySentNotifications(Map<String, String> parameters) throws BookmarkServiceException {
 		try {
-			String url = BookmarkUrls.MYSENTNOTIFICATIONS.getUrl(this);
+			String url = BookmarkUrls.MYSENTNOTIFICATIONS.format(this);
 			return (BookmarkList)getEntities(url, parameters, new BookmarkFeedHandler(this));
 		} catch (Exception e) {
 			throw new BookmarkServiceException(e, "Error retrieving my sent notifications");

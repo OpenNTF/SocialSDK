@@ -1,5 +1,5 @@
 /*
- * �� Copyright IBM Corp. 2013
+ * ������ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -29,39 +29,30 @@ import org.junit.Test;
 public class BlogPostCreateTest extends BaseBlogServiceTest {
 
 	@Test
-	public void createBlogTest() {
-		try {
-			Blog blog = new Blog(blogService, "");
-			blog.setTitle("Test Blog" +  System.currentTimeMillis());
-			blog.setHandle("TestHandle"+ System.currentTimeMillis());
-			blog.setTimeZone("Asia/Calcutta");
+	public void createBlogTest() throws BlogServiceException {
+		Blog blog = new Blog(blogService, "");
+		blog.setTitle("Test Blog" +  System.currentTimeMillis());
+		blog.setHandle("TestHandle"+ System.currentTimeMillis());
+		blog.setTimeZone("Asia/Calcutta");
 
-			Blog blogReturned = blogService.createBlog(blog);
-			assertNotNull(blogReturned.getTitle());
-			assertEquals(unRandomize(blog.getTitle()), unRandomize(blogReturned.getTitle()));
-			assertEquals(unRandomize(blog.getHandle()), unRandomize(blogReturned.getHandle()));
-			deleteBlog(blogReturned);
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail("Error calling blogService.createBlog() caused by: "+e.getMessage());
-		}
+		Blog blogReturned = blogService.createBlog(blog);
+		assertNotNull(blogReturned.getTitle());
+		assertEquals(unRandomize(blog.getTitle()), unRandomize(blogReturned.getTitle()));
+		assertEquals(unRandomize(blog.getHandle()), unRandomize(blogReturned.getHandle()));
+		deleteBlog(blogReturned);
 	}
 
 	@Test
-	public void createBlogPostTest() {
-		try {
-			blog = createBlog();
-			BlogPost blogPost = new BlogPost(blogService, "");
-			blogPost.setTitle("Test Blog Post" + System.currentTimeMillis());
-			blogPost.setContent("Test Blog Post Content"+ System.currentTimeMillis());
-			BlogPost blogPostReturned = blogService.createBlogPost(blogPost, blog.getHandle());
-			assertNotNull(blogPostReturned.getTitle());
-			assertEquals(unRandomize(blogPost.getTitle()), unRandomize(blogPostReturned.getTitle()));
-			assertEquals(unRandomize(blogPost.getContent()), unRandomize(blogPostReturned.getContent()));
-			deleteBlogPost(blogPostReturned);
-			deleteBlog(blog);
-		} catch (Exception e) {
-			fail("Error calling blogService.createBlogPost() caused by: "+e.getMessage());
-		}
+	public void createBlogPostTest() throws BlogServiceException {
+		blog = createBlog();
+		BlogPost blogPost = new BlogPost(blogService, "");
+		blogPost.setTitle("Test Blog Post" + System.currentTimeMillis());
+		blogPost.setContent("Test Blog Post Content"+ System.currentTimeMillis());
+		BlogPost blogPostReturned = blogService.createBlogPost(blogPost, blog.getHandle());
+		assertNotNull(blogPostReturned.getTitle());
+		assertEquals(unRandomize(blogPost.getTitle()), unRandomize(blogPostReturned.getTitle()));
+		assertEquals(unRandomize(blogPost.getContent()), unRandomize(blogPostReturned.getContent()));
+		deleteBlogPost(blogPostReturned);
+		deleteBlog(blog);
 	}
 }

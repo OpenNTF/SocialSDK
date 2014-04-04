@@ -43,97 +43,69 @@ public class BaseForumServiceTest extends BaseUnitTest {
 		}
 	}
 
-	protected Forum newForum() {
+	protected Forum newForum() throws ForumServiceException {
 		Forum forum = new Forum(forumService);
 
-		try{
-			forum.setTitle("Test forum 1ab" + System.currentTimeMillis());
-			forum.setContent("Test forum created by Create Forum Java snippet");
-			List<String> tags = new ArrayList<String>();
-			tags.add("tag1"); 
-			tags.add("tag2"); 
-			forum.setTags(tags);
-			forum = forum.save(); 
-		} catch (Exception e) {
-			fail("Error calling forum.save() caused by: "+e.getMessage());
-		}
+		forum.setTitle("Test forum 1ab" + System.currentTimeMillis());
+		forum.setContent("Test forum created by Create Forum Java snippet");
+		List<String> tags = new ArrayList<String>();
+		tags.add("tag1"); 
+		tags.add("tag2"); 
+		forum.setTags(tags);
+		forum = forum.save(); 
 
 		return forum;
 	}
 
-	protected Forum createForum() {
+	protected Forum createForum() throws ForumServiceException {
 		return createForum(newForum());
 	}
 
-	protected Forum createForum(Forum forum) {
-		try {
-			forum.setTitle("Test forum 1ab" + System.currentTimeMillis());
-			forum.setContent("Test forum created by Create Forum Java snippet");
-			List<String> tags = new ArrayList<String>();
-			tags.add("tag1"); 
-			tags.add("tag2"); 
-			forum.setTags(tags);
-			forum = forumService.createForum(forum);
-			return forum;
-		} catch (ForumServiceException e) {
-			throw new RuntimeException("Failed to create a forum.", e);
-		}
+	protected Forum createForum(Forum forum) throws ForumServiceException {
+		forum.setTitle("Test forum 1ab" + System.currentTimeMillis());
+		forum.setContent("Test forum created by Create Forum Java snippet");
+		List<String> tags = new ArrayList<String>();
+		tags.add("tag1"); 
+		tags.add("tag2"); 
+		forum.setTags(tags);
+		forum = forumService.createForum(forum);
+		return forum;
 	}
 
-	protected ForumTopic createForumTopic() {
+	protected ForumTopic createForumTopic() throws ForumServiceException {
 		forum = createForum();
 		ForumTopic topic = new ForumTopic(forumService);
 
-		try{
-			topic.setTitle("Test topic title" + System.currentTimeMillis());
-			topic.setContent("Test topic Content"+ System.currentTimeMillis());
-			topic.setForumUuid(forum.getForumUuid());
-			topic = forumService.createForumTopic(topic);
+		topic.setTitle("Test topic title" + System.currentTimeMillis());
+		topic.setContent("Test topic Content"+ System.currentTimeMillis());
+		topic.setForumUuid(forum.getForumUuid());
+		topic = forumService.createForumTopic(topic);
 			
-		} catch (Exception e) {
-			fail("Error calling forumService.createForumTopic() caused by: "+e.getMessage());
-		}
 		return topic;
 	}
 	
-	protected ForumReply createForumReply() {
+	protected ForumReply createForumReply() throws ForumServiceException {
 		topic = createForumTopic();
 		ForumReply reply = new ForumReply(forumService);
 
-		try{
-			reply.setTitle("Test topic title" + System.currentTimeMillis());
-			reply.setContent("Test topic Content"+ System.currentTimeMillis());
-			reply.setTopicUuid(topic.getTopicUuid());
-			reply = forumService.createForumReply(reply);
-		} catch (Exception e) {
-			fail("Error calling forumService.createForumReply() caused by: "+e.getMessage());
-		}
+		reply.setTitle("Test topic title" + System.currentTimeMillis());
+		reply.setContent("Test topic Content"+ System.currentTimeMillis());
+		reply.setTopicUuid(topic.getTopicUuid());
+		reply = forumService.createForumReply(reply);
 		return reply;
 
 	}
 	
-	protected void deleteForum(Forum forum) {
-		try {
-			forumService.removeForum(forum.getForumUuid());
-		} catch (ForumServiceException e) {
-			fail("Error calling forumService.removeForum() caused by: "+e.getMessage());
-		}
+	protected void deleteForum(Forum forum) throws ForumServiceException {
+		forumService.removeForum(forum.getForumUuid());
 	}
 	
-	protected void deleteForumTopic(ForumTopic topic) {
-		try {
-			forumService.removeForumTopic(topic.getTopicUuid());
-		} catch (ForumServiceException e) {
-			fail("Error calling forumService.removeForumTopic() caused by: "+e.getMessage());
-		}
+	protected void deleteForumTopic(ForumTopic topic) throws ForumServiceException {
+		forumService.removeForumTopic(topic.getTopicUuid());
 	}
 	
-	protected void deleteForumReply(ForumReply reply) {
-		try {
-			forumService.removeForumReply(reply.getReplyUuid());
-		} catch (ForumServiceException e) {
-			fail("Error calling forumService.removeForum() caused by: "+e.getMessage());
-		}
+	protected void deleteForumReply(ForumReply reply) throws ForumServiceException {
+		forumService.removeForumReply(reply.getReplyUuid());
 	}
 	
 	protected void assertValid(Forum forum) {

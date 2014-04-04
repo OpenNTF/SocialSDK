@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -151,7 +151,7 @@ public abstract class EntityList<Entity extends BaseEntity> extends AbstractList
 
 	@Override
 	public Entity get(int index) {
-		return entities.get(index);
+		return (entities != null && entities.size()>0)?entities.get(index):null;
 	}
 
 	@Override

@@ -1,5 +1,5 @@
 /*
- * �� Copyright IBM Corp. 2013
+ * ������ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -32,38 +32,27 @@ import org.junit.Test;
 public class ForumCreateDeleteTest extends BaseForumServiceTest {
 
 	@Test
-	public void testCreateForum() {
-		try {
-			Forum forum = new Forum(forumService);
-			forum.setTitle("Test forum title" + System.currentTimeMillis());
-			forum.setContent("Test forum content");
-			List<String> tags = new ArrayList<String>();
-			tags.add("tag1"); 
-			tags.add("tag2"); 
-			forum.setTags(tags);
+	public void testCreateForum() throws ForumServiceException {
+		Forum forum = new Forum(forumService);
+		forum.setTitle("Test forum title" + System.currentTimeMillis());
+		forum.setContent("Test forum content");
+		List<String> tags = new ArrayList<String>();
+		tags.add("tag1"); 
+		tags.add("tag2"); 
+		forum.setTags(tags);
 
-			Forum forumReturned = forumService.createForum(forum);
-			assertNotNull(forumReturned.getTitle());
-			assertEquals(unRandomize(forum.getTitle()), unRandomize(forumReturned.getTitle()));
-			assertEquals(forum.getContent(), forumReturned.getContent());
-			deleteForum(forumReturned);
-		} catch (Exception e) {
-			fail("Error calling forumService.createForum() caused by: "+e.getMessage());
-		}
-
+		Forum forumReturned = forumService.createForum(forum);
+		assertNotNull(forumReturned.getTitle());
+		assertEquals(unRandomize(forum.getTitle()), unRandomize(forumReturned.getTitle()));
+		assertEquals(forum.getContent(), forumReturned.getContent());
+		deleteForum(forumReturned);
 	}
 
 	@Test
 	public void testDeleteForum() throws Exception {
-		try {
-			Forum createdForum = createForum();
-			Forum forumGot = forumService.getForum(createdForum.getForumUuid());
-			assertEquals(createdForum.getTitle(), forumGot.getTitle());
-			forumService.removeForum(createdForum.getForumUuid());
-			forumService.getForum(createdForum.getForumUuid());
-		}
-		catch(Exception e) {
-			assertNotNull(e.getMessage());
-		}
+		Forum createdForum = createForum();
+		Forum forumGot = forumService.getForum(createdForum.getForumUuid());
+		assertEquals(createdForum.getTitle(), forumGot.getTitle());
+		forumService.removeForum(createdForum.getForumUuid());
 	}
 }

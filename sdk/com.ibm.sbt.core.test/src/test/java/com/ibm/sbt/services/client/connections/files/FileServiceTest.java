@@ -36,7 +36,6 @@ import org.junit.Test;
 
 import com.ibm.sbt.services.BaseUnitTest;
 import com.ibm.sbt.services.client.ClientServicesException;
-import com.ibm.sbt.services.client.connections.communities.Community;
 import com.ibm.sbt.services.client.connections.communities.CommunityList;
 import com.ibm.sbt.services.client.connections.communities.CommunityService;
 import com.ibm.sbt.services.client.connections.files.model.FileRequestParams;
@@ -228,7 +227,12 @@ public class FileServiceTest extends BaseUnitTest {
 		if (TestEnvironment.isSmartCloudEnvironment()) return;
 		
 		FileList files = fileService.getPublicFiles();
-		String fileId = files.get(0).getFileId();
+		File file = files.get(0);
+		if (null == file) {
+			System.err.println("There are no public files on the test server, please populate some");
+			return;
+		}
+		String fileId = file.getFileId();
 		CommentList commentEntries = fileService.getAllUserFileComments(fileId, TestEnvironment.getCurrentUserUuid(), true, null);
 		if (!commentEntries.isEmpty()) {
 			if (commentEntries != null && !commentEntries.isEmpty()) {
@@ -475,6 +479,7 @@ public class FileServiceTest extends BaseUnitTest {
 		endpoint.setUser("***REMOVED***");
 		endpoint.setPassword("quickstart01");
 		endpoint.setForceTrustSSLCertificate(true);
+		endpoint.setApiVersion("4.5");
 		CommunityService communityService = new CommunityService(endpoint);
 		CommunityList communityList = communityService.getMyCommunities();
 		String communityUuid = null;

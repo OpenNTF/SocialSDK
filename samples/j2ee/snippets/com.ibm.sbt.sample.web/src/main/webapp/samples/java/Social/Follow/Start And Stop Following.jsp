@@ -49,12 +49,12 @@
 				out.print("No Communities found");
 			}else{
 				FollowService svc = new FollowService();
-				FollowedResource commResource = svc.getFollowedResource(Source.COMMUNITIES.getSourceType(), Type.COMMUNITIES.getType(), community.getCommunityUuid());
+				FollowedResource commResource = svc.getFollowedResource(Source.COMMUNITIES.get(), Type.COMMUNITY.get(), community.getCommunityUuid());
 				if(null != commResource){
-					svc.stopFollowing(Source.COMMUNITIES.getSourceType(), Type.COMMUNITIES.getType(), community.getCommunityUuid());
+					svc.stopFollowing(Source.COMMUNITIES.get(), Type.COMMUNITY.get(), community.getCommunityUuid());
 					out.print("You have stopped following Community with ID : "+community.getCommunityUuid());
 				}else{
-					FollowedResource resource = svc.startFollowing(Source.COMMUNITIES.getSourceType(), Type.COMMUNITIES.getType(), community.getCommunityUuid());
+					FollowedResource resource = svc.startFollowing(Source.COMMUNITIES.get(), Type.COMMUNITY.get(), community.getCommunityUuid());
 					out.print("You have started following Community with ID :"+resource.getResourceId());
 				}
 			}

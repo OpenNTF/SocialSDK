@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * ï¿½ Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,11 +19,13 @@ import java.io.ByteArrayInputStream;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.DOMUtil;
 import com.ibm.commons.xml.XMLException;
+import com.ibm.sbt.services.BaseUnitTest;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.connections.communities.CommunityService;
 import com.ibm.sbt.services.client.connections.communities.CommunityServiceException;
@@ -34,7 +36,7 @@ import com.ibm.sbt.services.endpoints.ConnectionsBasicEndpoint;
  * @author mwallace
  *
  */
-public class FileUpdateTest {
+public class FileUpdateTest extends BaseUnitTest {
 	
 	protected FileService fileService;
 	protected CommunityService communityService;
@@ -50,6 +52,7 @@ public class FileUpdateTest {
 			endpoint.setUser(user);
 			endpoint.setPassword(password);
 			endpoint.setForceTrustSSLCertificate(true);
+			endpoint.setApiVersion("4.5");
 			
 			fileService = new FileService(endpoint);
 			communityService = new CommunityService(endpoint);
@@ -130,6 +133,7 @@ public class FileUpdateTest {
 		communityService.deleteCommunity(communityUuid);
 	}
 
+	@Ignore
 	@Test
 	public void testGetSharedWithMeFiles() throws Exception {
 		EntityList<File> fileList = fileService.getFilesSharedWithMe();

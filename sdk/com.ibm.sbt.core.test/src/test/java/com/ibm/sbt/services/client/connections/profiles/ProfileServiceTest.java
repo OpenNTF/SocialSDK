@@ -131,22 +131,6 @@ public class ProfileServiceTest extends BaseUnitTest {
 	}
 
 	@Test
-	public void testCheckColleague() throws Exception {
-		String connectionId = profileService.sendInvite(properties.getProperty("email2"));
-		ColleagueConnection connection = profileService.checkColleague(
-				properties.getProperty("email1"),
-				properties.getProperty("email2"));
-		assertNotNull(connection.getTitle());
-		assertNotNull(connection.getConnectionId());
-		//assertEquals(connection.getConnectionId(), connectionId);
-		//profileService.deleteInvite(connectionId);
-		profileService.deleteInvite(connection.getConnectionId());
-		//Interestingly, the connectionId retrieved when the invite is sent and the one on the ColleagueConnection are different
-		//but both work to delete the invite
-		//Also, if there is an invite it is like an actual connection, so we must probably check the "status" of the connection
-	}
-
-	@Test
 	public void testGetCommonColleaguesProfiles() throws Exception {
 		ProfileList profileEntries = profileService.getCommonColleagues(
 				properties.getProperty("email1"),
@@ -181,8 +165,18 @@ public class ProfileServiceTest extends BaseUnitTest {
 	}
 
 	@Test
-	public void testSendInvite() throws Exception {
+	public void testSendInviteAndCheckColleagues() throws Exception {
+		String user1 = properties.getProperty("email1");
+		String user2 = properties.getProperty("email2");
 		String connectionId = profileService.sendInvite(properties.getProperty("email2"));
+		ColleagueConnection connection = profileService.checkColleague(user1, user2);
+		assertNotNull(connection.getTitle());
+		assertNotNull(connection.getConnectionId());
+		assertEquals(user1, connection.getAuthor().getEmail());
+		assertEquals(user2, connection.getContributorEmail());
+
+		//Fix the Person abstraction is no performing xpath lookups correctly
+		//assertEquals(user2, connection.getContributor().getEmail());
 		profileService.deleteInvite(connectionId);
 	}
 

@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * ï¿½ Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -40,16 +40,22 @@ import org.xml.sax.InputSource;
 import com.ibm.commons.runtime.mime.MIME;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.StreamUtil;
+import com.ibm.sbt.services.client.ClientService;
+import com.ibm.sbt.services.client.ClientService.Content;
+import com.ibm.sbt.services.client.ClientService.ContentStream;
+import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.base.NamedUrlPart;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.communities.CommunityServiceException;
-import com.ibm.sbt.services.client.connections.files.model.FileEntryXPath;
-import com.ibm.sbt.services.client.connections.files.FileServiceException;
+import com.ibm.sbt.services.client.connections.files.feedHandler.CommentFeedHandler;
+import com.ibm.sbt.services.client.connections.files.feedHandler.FileFeedHandler;
 import com.ibm.sbt.services.client.connections.files.model.FileCommentParameterBuilder;
 import com.ibm.sbt.services.client.connections.files.model.FileCommentsFeedParameterBuilder;
+import com.ibm.sbt.services.client.connections.files.model.FileEntryXPath;
 import com.ibm.sbt.services.client.connections.files.model.FileRequestParams;
 import com.ibm.sbt.services.client.connections.files.model.FileRequestPayload;
-import com.ibm.sbt.services.client.connections.files.feedHandler.*;
 import com.ibm.sbt.services.client.connections.files.model.Headers;
 import com.ibm.sbt.services.client.connections.files.transformers.CommentTransformer;
 import com.ibm.sbt.services.client.connections.files.transformers.FileTransformer;
@@ -57,11 +63,6 @@ import com.ibm.sbt.services.client.connections.files.transformers.FolderTransfor
 import com.ibm.sbt.services.client.connections.files.transformers.ModerationTransformer;
 import com.ibm.sbt.services.client.connections.files.transformers.MultipleFileTransformer;
 import com.ibm.sbt.services.client.connections.files.util.Messages;
-import com.ibm.sbt.services.client.ClientService.Content;
-import com.ibm.sbt.services.client.ClientService.ContentStream;
-import com.ibm.sbt.services.client.ClientServicesException;
-import com.ibm.sbt.services.client.Response;
-import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.endpoints.Endpoint;
 
 /**
@@ -71,6 +72,7 @@ import com.ibm.sbt.services.endpoints.Endpoint;
  * 
  * @Represents Connections FileService
  * @author Vimal Dhupar
+ * @author Carlos Manias
  * @see http 
  *      ://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation
  *      #action=openDocument&res_title=Files_API_ic40a&content=pdcontent
@@ -79,6 +81,7 @@ public class FileService extends BaseService {
 	
 	static final String sourceClass = FileService.class.getName();
 	static final Logger logger = Logger.getLogger(sourceClass);
+	private final HashMap<String, String> commentParams = new HashMap<String, String>();
 
     /**
      * Default Constructor - 0 argument constructor Calls the Constructor of BaseService Class.
@@ -97,6 +100,7 @@ public class FileService extends BaseService {
      */
     public FileService(String endpoint) {
         super(endpoint);
+        commentParams.put("category", "comment");
     }
     
 	/**
@@ -107,11 +111,29 @@ public class FileService extends BaseService {
      */
     public FileService(Endpoint endpoint) {
         super(endpoint);
+        commentParams.put("category", "comment");
     }
+
+	/**
+	 * Return mapping key for this service
+	 */
+	@Override
+	public String getServiceMappingKey() {
+		return "files";
+	}
     
     private static String getDefaultEndpoint() {
 		return "connections";
 	}
+    
+    @Override
+    public NamedUrlPart getAuthType(){
+    	return new NamedUrlPart("authType", "basic");
+    }
+    
+    protected HashMap<String, String> getCommentParams(){
+    	return commentParams;
+    }
     
     public void actOnCommentAwaitingApproval(String commentId, String action, String actionReason)
             throws FileServiceException, TransformerException {
@@ -120,20 +142,16 @@ public class FileService extends BaseService {
         // child element, and then find the collection with the <atom:category term="approval-action" .../>
         // child element, and make a note of the web address in its href attribute.
 
-        FilesModerationDocumentEntry fileModDocEntry = new FilesModerationDocumentEntry(null);
-        if (FilesModerationDocumentEntry.data == null) {
-            FilesModerationDocumentEntry.setData(this.getFilesModerationServiceDocument());
-        }
+        FilesModerationDocumentEntry fileModDocEntry = getFilesModerationDocumentEntry();
         // get the request URI from the servide document.
         String requestUri = fileModDocEntry.get(ContentMapFiles.moderationMap.get("commentApprovalUrl")); // TODO
         // If not obtained due to some reason, then construct the url in regular fashion.
         // URI : /files/basic/api/approval/actions/comments
         if (StringUtil.isEmpty(requestUri)) {
-            SubFilters subFilters = new SubFilters();
-            subFilters.setCommentId("");
-            requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(),
-                    AccessType.AUTHENTICATED.getAccessType(),
-                    Categories.APPROVAL.getCategory(), null, Filters.ACTIONS.getFilters(), subFilters, null);
+        	String accessType = AccessType.AUTHENTICATED.getText();
+        	action = Categories.APPROVAL.get();
+        	String content = ModerationContentTypes.COMMENT.get();
+            requestUri = FileUrls.MODERATION.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.action.get(action),  FileUrlParts.contentType.get(content));
         }
         Object payload = this.constructPayloadForModeration(commentId, action, actionReason, "comment");
         Map<String, String> headers = new HashMap<String, String>();
@@ -151,20 +169,16 @@ public class FileService extends BaseService {
         // In the service document, locate the workspace with the <category term="documents-moderation" .../>
         // child element, and then find the collection with the <atom:category term="approval-action" .../>
         // child element, and make a note of the web address in its href attribute.
-        FilesModerationDocumentEntry fileModDocEntry = new FilesModerationDocumentEntry(null);
-        if (FilesModerationDocumentEntry.data == null) {
-            FilesModerationDocumentEntry.setData(this.getFilesModerationServiceDocument());
-        }
+        FilesModerationDocumentEntry fileModDocEntry = getFilesModerationDocumentEntry();
         // get the request URI from the servide document.
         String requestUri = fileModDocEntry.get(ContentMapFiles.moderationMap.get("fileApprovalUrl")); // TODO
         // If not obtained due to some reason, then construct the url in regular fashion.
         // URI : /files/basic/api/approval/actions/documents
         if (StringUtil.isEmpty(requestUri)) {
-            SubFilters subFilters = new SubFilters();
-            subFilters.setDocumentsId("");
-            requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(),
-                    AccessType.AUTHENTICATED.getAccessType(),
-                    Categories.APPROVAL.getCategory(), null, Filters.ACTIONS.getFilters(), subFilters, null);
+        	String accessType = AccessType.AUTHENTICATED.getText();
+        	action = Categories.APPROVAL.get();
+        	String content = ModerationContentTypes.DOCUMENTS.get();
+            requestUri = FileUrls.MODERATION.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.action.get(action),  FileUrlParts.contentType.get(content));
         }
         Object payload = this.constructPayloadForModeration(fileId, action, actionReason, "file");
         Map<String, String> headers = new HashMap<String, String>();
@@ -183,20 +197,16 @@ public class FileService extends BaseService {
         // child element, and then find the collection with the <atom:category term="approval-action" .../>
         // child element, and make a note of the web address in its href attribute.
 
-        FilesModerationDocumentEntry fileModDocEntry = new FilesModerationDocumentEntry(null);
-        if (FilesModerationDocumentEntry.data == null) {
-            FilesModerationDocumentEntry.setData(this.getFilesModerationServiceDocument());
-        }
+        FilesModerationDocumentEntry fileModDocEntry = getFilesModerationDocumentEntry();
         // get the request URI from the servide document.
         String requestUri = fileModDocEntry.get(ContentMapFiles.moderationMap.get("commentReviewUrl")); // TODO
         // If not obtained due to some reason, then construct the url in regular fashion.
         // URI : /files/basic/api/review/actions/comments
         if (StringUtil.isEmpty(requestUri)) {
-            SubFilters subFilters = new SubFilters();
-            subFilters.setCommentId("");
-            requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(),
-                    AccessType.AUTHENTICATED.getAccessType(),
-                    Categories.REVIEW.getCategory(), null, Filters.ACTIONS.getFilters(), subFilters, null);
+        	String accessType = AccessType.AUTHENTICATED.getText();
+        	action = Categories.REVIEW.get();
+        	String content = ModerationContentTypes.COMMENT.get();
+            requestUri = FileUrls.MODERATION.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.action.get(action),  FileUrlParts.contentType.get(content));
         }
         Object payload = this.constructPayloadForModeration(commentId, action, actionReason, "comment");
         Map<String, String> headers = new HashMap<String, String>();
@@ -214,20 +224,16 @@ public class FileService extends BaseService {
         // In the service document, locate the workspace with the <category term="documents-moderation" .../>
         // child element, and then find the collection with the <atom:category term="approval-action" .../>
         // child element, and make a note of the web address in its href attribute.
-        FilesModerationDocumentEntry fileModDocEntry = new FilesModerationDocumentEntry(null);
-        if (FilesModerationDocumentEntry.data == null) {
-            FilesModerationDocumentEntry.setData(this.getFilesModerationServiceDocument());
-        }
+        FilesModerationDocumentEntry fileModDocEntry = getFilesModerationDocumentEntry();
         // get the request URI from the servide document.
         String requestUri = fileModDocEntry.get(ContentMapFiles.moderationMap.get("fileReviewUrl")); // TODO
         // If not obtained due to some reason, then construct the url in regular fashion.
         // URI : /files/basic/api/review/actions/documents
         if (StringUtil.isEmpty(requestUri)) {
-            SubFilters subFilters = new SubFilters();
-            subFilters.setDocumentsId("");
-            requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(),
-                    AccessType.AUTHENTICATED.getAccessType(),
-                    Categories.REVIEW.getCategory(), null, Filters.ACTIONS.getFilters(), subFilters, null);
+        	String accessType = AccessType.AUTHENTICATED.getText();
+        	action = Categories.REVIEW.get();
+        	String content = ModerationContentTypes.DOCUMENTS.get();
+            requestUri = FileUrls.MODERATION.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.action.get(action),  FileUrlParts.contentType.get(content));
         }
         Object payload = this.constructPayloadForModeration(fileId, action, actionReason, "file");
         Map<String, String> headers = new HashMap<String, String>();
@@ -238,6 +244,7 @@ public class FileService extends BaseService {
             throw new FileServiceException(e, Messages.MesssageExceptionInFlaggingFile);
         }
     }
+
     /**
      * addCommentToFile
      * <p>
@@ -253,6 +260,7 @@ public class FileService extends BaseService {
     public Comment addCommentToFile(String fileId, String comment, Map<String, String> params) throws FileServiceException, TransformerException {
     	return this.addCommentToFile(fileId, comment, null, params);
     }
+
     /**
      * addCommentToFile
      * <p>
@@ -266,23 +274,19 @@ public class FileService extends BaseService {
      * @throws FileServiceException
      * @throws TransformerException 
      */
-    public Comment addCommentToFile(String fileId, String comment, String libraryId,
+    public Comment addCommentToFile(String fileId, String comment, String userId,
             Map<String, String> params) throws FileServiceException, TransformerException {
-        String accessType = AccessType.AUTHENTICATED.getAccessType();
-        SubFilters subFilters = new SubFilters();
-        String category = null;
+    	//FIX: DUPLICATE METHOD see createComment()
         if (StringUtil.isEmpty(fileId)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
-        if (StringUtil.isEmpty(libraryId)) {
-        	category = Categories.MYLIBRARY.getCategory();
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri;
+        if (StringUtil.isEmpty(userId)){
+        	requestUri = FileUrls.MYUSERLIBRARY_DOCUMENT_FEED.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
         } else {
-            subFilters.setUserId(libraryId);
+        	requestUri = FileUrls.USERLIBRARY_DOCUMENT_FEED.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId), FileUrlParts.fileId.get(fileId));
         }
-        subFilters.setFileId(fileId);
-        String resultType = ResultType.FEED.getResultType();
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null, 
-        		null, subFilters, resultType);
         Document payload = this.constructPayloadForComments(comment);
         try {
             Response result = (Response) super.createData(requestUri, null, new ClientService.ContentXml(payload,"application/atom+xml"));
@@ -325,20 +329,16 @@ public class FileService extends BaseService {
      */
     public Comment addCommentToCommunityFile(String fileId, String comment, String communityId,
             Map<String, String> params) throws FileServiceException, TransformerException {
-        String accessType = AccessType.AUTHENTICATED.getAccessType();
-        SubFilters subFilters = new SubFilters();
-        String category = null;
+
         if (StringUtil.isEmpty(fileId)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
         if (StringUtil.isEmpty(communityId) || StringUtil.equalsIgnoreCase(communityId, null)) {
         	throw new FileServiceException(null, Messages.Invalid_CommunityId);
         }
-        subFilters.setFileId(fileId);
-        subFilters.setCommunityLibraryId(communityId);
-        String resultType = ResultType.FEED.getResultType();
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null, 
-        		null, subFilters, resultType);
+
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.COMMUNITY_FILE_COMMENT.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.communityId.get(communityId), FileUrlParts.fileId.get(fileId));
         Document payload = this.constructPayloadForComments(comment);
         try {
             Response result = (Response) super.createData(requestUri, null, new ClientService.ContentXml(payload,"application/atom+xml"));
@@ -366,18 +366,12 @@ public class FileService extends BaseService {
 	 * @throws CommunityServiceException
 	 */
 	public FileList getCommunityFiles(String communityId, HashMap<String, String> params) throws FileServiceException {
-		String accessType = AccessType.AUTHENTICATED.getAccessType();
-		SubFilters subFilters = new SubFilters();
         if (StringUtil.isEmpty(communityId)) {
         	throw new FileServiceException(null, Messages.Invalid_CommunityId);
         }
-        if(null == params){
-			 params = new HashMap<String, String>();
-		}
-        subFilters.setCommunityLibraryId(communityId);
-        String resultType = ResultType.FEED.getResultType();
-		String requestUrl = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
-                null, subFilters, resultType); 
+		String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUrl = FileUrls.COMMUNITYLIBRARY_FEED.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.communityId.get(communityId));
+		params = (null == params)?new HashMap<String, String>():params;
 		try {
 			return (FileList) super.getEntities(requestUrl, params, new FileFeedHandler(this)); 
 		} catch (ClientServicesException e) {
@@ -407,22 +401,15 @@ public class FileService extends BaseService {
 	 * @throws FileServiceException
 	 */
 	public File getCommunityFile(String communityId, String fileId, HashMap<String, String> params) throws FileServiceException {
-		String accessType = AccessType.AUTHENTICATED.getAccessType();
-		SubFilters subFilters = new SubFilters();
 		if (StringUtil.isEmpty(fileId)) {
         	throw new FileServiceException(null, Messages.Invalid_FileId);
         }
 		if (StringUtil.isEmpty(communityId)) {
         	throw new FileServiceException(null, Messages.Invalid_CommunityId);
         }
-        if(null == params){
-			 params = new HashMap<String, String>();
-		}
-        subFilters.setCommunityLibraryId(communityId);
-        subFilters.setFileId(fileId);
-        String resultType = ResultType.ENTRY.getResultType();
-		String requestUrl = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
-                null, subFilters, resultType); 
+		String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUrl = FileUrls.GET_COMMUNITY_FILE.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.communityId.get(communityId), FileUrlParts.fileId.get(fileId));
+		params = (null == params)?new HashMap<String, String>():params;
 		try {
 			return (File) super.getEntity(requestUrl, params, new FileFeedHandler(this)); 
 		} catch (ClientServicesException e) {
@@ -450,18 +437,12 @@ public class FileService extends BaseService {
 	 * @throws FileServiceException
 	 */
 	public FileList getCommunitySharedFiles(String communityId, HashMap<String, String> params) throws FileServiceException {
-		String accessType = AccessType.AUTHENTICATED.getAccessType();
-		SubFilters subFilters = new SubFilters();
         if (StringUtil.isEmpty(communityId)) {
         	throw new FileServiceException(null, Messages.Invalid_CommunityId);
         }
-        if(null == params){
-			 params = new HashMap<String, String>();
-		}
-        subFilters.setCommunityCollectionId(communityId);
-        String resultType = ResultType.FEED.getResultType();
-		String requestUrl = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
-                null, subFilters, resultType); 
+		String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUrl = FileUrls.GET_COMMUNITY_COLLECTION.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.communityId.get(communityId));
+		params = (null == params)?new HashMap<String, String>():params;
 		try {
 			return (FileList) super.getEntities(requestUrl, params, new FileFeedHandler(this)); 
 		} catch (ClientServicesException e) {
@@ -545,16 +526,13 @@ public class FileService extends BaseService {
 	public long downloadFile(OutputStream ostream, final String fileId, final String libraryId, Map<String, String> params, boolean isPublic) throws FileServiceException {
 		File file = !isPublic ? getFile(fileId) : getPublicFile(fileId, libraryId, null);
 		// now we have the file.. we need to download it.. 
-		String accessType = !isPublic ? AccessType.AUTHENTICATED.getAccessType() : AccessType.PUBLIC.getAccessType();
-		String category = !isPublic ? Categories.MYLIBRARY.getCategory() : null;
-		SubFilters downloadFilters = new SubFilters();
-		downloadFilters.setFileId(file.getFileId());
-		if(libraryId != null){
-			downloadFilters.setLibraryId(libraryId);
-		}
-		String resultType = ResultType.MEDIA.getResultType();
-		String requestUrl = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null,
-                null, downloadFilters, resultType); 
+		String accessType = !isPublic ? AccessType.AUTHENTICATED.getText() : AccessType.PUBLIC.getText();
+		String category = !isPublic ? Categories.MYUSERLIBRARY.get() : null;
+		String libraryFilter = (libraryId != null)?"library":"";
+
+        String requestUrl = FileUrls.DOWNLOAD_FILE.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.category.get(category), FileUrlParts.fileId.get(file.getFileId()), 
+        		FileUrlParts.libraryFilter.get(libraryFilter), FileUrlParts.libraryId.get(libraryId));
+
 		Map<String, String> headers = new HashMap<String, String>();
 		headers.put(Headers.ContentType, Headers.BINARY);
 		Response response = null;
@@ -642,13 +620,8 @@ public class FileService extends BaseService {
         if (StringUtil.isEmpty(communityLibraryId)) {
             throw new FileServiceException(null, Messages.Invalid_CommunityLibraryId);
         }
-        String accessType = AccessType.AUTHENTICATED.getAccessType();
-        SubFilters subFilters = new SubFilters();
-        subFilters.setFileId(fileEntry.getFileId());
-        subFilters.setLibraryId(communityLibraryId);
-        String resultType = ResultType.ENTRY.getResultType();
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
-                null, subFilters, resultType); // we pass null value for non applicable types.
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.COMMUNITY_FILE_METADATA.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.communityId.get(communityLibraryId), FileUrlParts.fileId.get(fileEntry.getFileId()));
         Document updateFilePayload = null;
         try {
         	updateFilePayload = this.constructPayload(fileEntry.getFileId(), fileEntry.getFieldsMap());
@@ -673,7 +646,6 @@ public class FileService extends BaseService {
      */
     public FileList addFilesToFolder(String folderId, List<String> listOfFileIds,
             Map<String, String> params) throws FileServiceException, TransformerException {
-        String accessType = AccessType.AUTHENTICATED.getAccessType();
         if (StringUtil.isEmpty(folderId)) {
             throw new FileServiceException(null, Messages.Invalid_CollectionId);
         }
@@ -682,15 +654,9 @@ public class FileService extends BaseService {
                 throw new FileServiceException(null, Messages.Invalid_FileId);
             }
         }
-        SubFilters subFilters = new SubFilters();
-        subFilters.setCollectionId(folderId);
-        String resultType = ResultType.FEED.getResultType();
-        if (null == params) {
-            params = new HashMap<String, String>();
-        }
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
-                null,
-                subFilters, resultType);
+        String accessType = AccessType.AUTHENTICATED.getText();
+		params = (null == params)?new HashMap<String, String>():params;
+        String requestUri = FileUrls.COLLECTION_FEED.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.folderId.get(folderId));
         Map<String, String> headers = new HashMap<String, String>();
         headers.put(Headers.ContentType, Headers.ATOM);
         Object payload = this.constructPayloadForMultipleEntries(listOfFileIds,
@@ -773,27 +739,20 @@ public class FileService extends BaseService {
         if (fileId == null) {
             throw new FileServiceException(null, Messages.Invalid_File);
         }
-        String accessType = AccessType.AUTHENTICATED.getAccessType();
-        String category = null;
-        SubFilters subFilters = new SubFilters();
-        subFilters.setFileId(fileId);
+        String accessType = AccessType.AUTHENTICATED.getText();
 
-        if (StringUtil.isEmpty(userId) || StringUtil.equalsIgnoreCase(userId, null)) {
-            category = Categories.MYLIBRARY.getCategory();
+        String requestUri;
+        if (StringUtil.isEmpty(userId)) {
+        	requestUri = FileUrls.MYUSERLIBRARY_DOCUMENT_FEED.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
         } else {
-            subFilters.setUserId(userId);
+        	requestUri = FileUrls.USERLIBRARY_DOCUMENT_FEED.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId), FileUrlParts.fileId.get(fileId));
         }
-        String resultType = ResultType.FEED.getResultType();
-        if (null == params) {
-            params = new HashMap<String, String>();
-        }
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null,
-                null,
-                subFilters, resultType);
+
         Map<String, String> headers = new HashMap<String, String>();
         headers.put(Headers.ContentType, Headers.ATOM);
         headers.put(Headers.ContentLanguage, Headers.UTF);
 
+		params = (null == params)?new HashMap<String, String>():params;
         Object payload = this.constructPayloadForMultipleEntries(folderIds,
                 FileRequestParams.ITEMID.getFileRequestParams(), "collection");
         try {
@@ -841,22 +800,17 @@ public class FileService extends BaseService {
      */
     public Comment createComment(String fileId, String comment, String userId, Map<String, String> params)
             throws FileServiceException, TransformerException {
-        String accessType = AccessType.AUTHENTICATED.getAccessType();
-        String category = null;
-        SubFilters subFilters = new SubFilters();
+    	//FIX: DUPLICATE METHOD see addCommentToFile()
         if (StringUtil.isEmpty(fileId)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
-        if (StringUtil.isEmpty(userId)) {
-            category = Categories.MYLIBRARY.getCategory();
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri;
+        if (StringUtil.isEmpty(userId)){
+        	requestUri = FileUrls.MYUSERLIBRARY_DOCUMENT_FEED.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
         } else {
-            subFilters.setUserId(userId);
+        	requestUri = FileUrls.USERLIBRARY_DOCUMENT_FEED.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId), FileUrlParts.fileId.get(fileId));
         }
-        subFilters.setFileId(fileId);
-        String resultType = ResultType.FEED.getResultType();
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null,
-                null,
-                subFilters, resultType);
        
         Document payload = this.constructPayloadForComments(comment);
         Map<String, String> headers = new HashMap<String, String>();
@@ -894,12 +848,9 @@ public class FileService extends BaseService {
 
     public File createFolder(String name, String description, String shareWith)
             throws FileServiceException, TransformerException {
-        String accessType = AccessType.AUTHENTICATED.getAccessType();
-        String view = Views.FOLDERS.getViews();
-        String resultType = ResultType.FEED.getResultType();
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, view,
-                null, null,
-                resultType);
+        String accessType = AccessType.AUTHENTICATED.getText();
+
+        String requestUri = FileUrls.COLLECTIONS_FEED.format(this, FileUrlParts.accessType.get(accessType));
         Document payload = this.constructPayloadFolder(name, description, shareWith, "create");
 
         try {
@@ -922,17 +873,11 @@ public class FileService extends BaseService {
      * @throws FileServiceException
      */
     public void deleteFile(String fileId) throws FileServiceException {
-        String accessType = AccessType.AUTHENTICATED.getAccessType();
-        String category = Categories.MYLIBRARY.getCategory();
-        SubFilters subFilters = new SubFilters();
         if (StringUtil.isEmpty(fileId)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
-        subFilters.setFileId(fileId);
-        String resultType = ResultType.ENTRY.getResultType();
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null,
-                null,
-                subFilters, resultType);
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.MYUSERLIBRARY_DOCUMENT_ENTRY.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
 
         try {
             super.deleteData(requestUri, null, null);
@@ -966,19 +911,18 @@ public class FileService extends BaseService {
      * @throws FileServiceException
      */
     public void deleteAllFilesFromRecycleBin(String userId) throws FileServiceException {
-        String requestUri = "/files/basic/api/";
-        if (StringUtil.isEmpty(userId) || StringUtil.equalsIgnoreCase(userId, null)) {
-            requestUri += "myuserlibrary/view/recyclebin/feed";
+        String requestUri;
+        String accessType = AccessType.AUTHENTICATED.getText();
+        if (StringUtil.isEmpty(userId)){
+        	requestUri = FileUrls.MYUSERLIBRARY_RECYCLEBIN_FEED.format(this, FileUrlParts.accessType.get(accessType));
         } else {
-            requestUri += "userlibrary/" + userId + "/view/recyclebin/feed";
+        	requestUri = FileUrls.EMPTY_RECYCLE_BIN.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId));
         }
-
         try {
             super.deleteData(requestUri, null, null);
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInDeletingFile);
         }
-
     }
 
     /**
@@ -1006,17 +950,9 @@ public class FileService extends BaseService {
         if (StringUtil.isEmpty(versionLabel)) {
             throw new FileServiceException(null, Messages.InvalidArgument_VersionLabel);
         }
-        String accessType = AccessType.AUTHENTICATED.getAccessType();
-        String category = Categories.MYLIBRARY.getCategory();
-        SubFilters subFilters = new SubFilters();
-        subFilters.setFileId(fileId);
-        String resultType = ResultType.FEED.getResultType();
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null,
-                null,
-                subFilters, resultType);
-        if (null == params) {
-            params = new HashMap<String, String>();
-        }
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.MYUSERLIBRARY_DOCUMENT_FEED.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
+		params = (null == params)?new HashMap<String, String>():params;
         params.put(FileRequestParams.CATEGORY.getFileRequestParams(), "version");
         params.put(FileRequestParams.DELETEFROM.getFileRequestParams(), versionLabel);
 
@@ -1051,25 +987,20 @@ public class FileService extends BaseService {
      * @throws FileServiceException
      */
     public void deleteComment(String fileId, String commentId, String userId) throws FileServiceException {
-        String accessType = AccessType.AUTHENTICATED.getAccessType();
-        SubFilters subFilters = new SubFilters();
         if (StringUtil.isEmpty(fileId)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
-        }
-        if (StringUtil.isEmpty(userId) || StringUtil.equalsIgnoreCase(userId, "null")) {
-            Categories.MYLIBRARY.getCategory();
-        } else {
-            subFilters.setUserId(userId);
         }
         if (StringUtil.isEmpty(commentId)) {
             throw new FileServiceException(null, Messages.Invalid_CommentId);
         }
-        subFilters.setFileId(fileId);
-        subFilters.setCommentId(commentId);
-        String resultType = ResultType.ENTRY.getResultType();
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
-                null,
-                subFilters, resultType);
+        String accessType = AccessType.AUTHENTICATED.getText();
+
+        String requestUri;
+        if (StringUtil.isEmpty(userId)){
+        	requestUri = FileUrls.MYUSERLIBRARY_DOCUMENT_COMMENT_ENTRY.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId), FileUrlParts.commentId.get(commentId));
+        } else {
+        	requestUri = FileUrls.USERLIBRARY_DOCUMENT_COMMENT_ENTRY.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId), FileUrlParts.fileId.get(fileId), FileUrlParts.commentId.get(commentId));
+        }
 
         try {
             super.deleteData(requestUri, null, null);
@@ -1082,7 +1013,7 @@ public class FileService extends BaseService {
         if (StringUtil.isEmpty(fileId)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
-        String requestUri = this.getModerationUri(fileId, "approval", "file");
+        String requestUri = this.getModerationUri(fileId, Categories.APPROVAL.get(), ModerationContentTypes.DOCUMENTS.get());
         try {
             super.deleteData(requestUri, null, null);
         } catch (Exception e) {
@@ -1117,19 +1048,14 @@ public class FileService extends BaseService {
         if (StringUtil.isEmpty(fileId)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
-        String accessType = AccessType.AUTHENTICATED.getAccessType();
-        String category = null;
-        SubFilters subFilters = new SubFilters();
-        if (StringUtil.isEmpty(userId) || StringUtil.equalsIgnoreCase(userId, null)) {
-            category = Categories.MYLIBRARY.getCategory();
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri;
+        if (StringUtil.isEmpty(userId)){
+        	requestUri = FileUrls.MYUSERLIBRARY_RECYCLEBIN_ENTRY.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
         } else {
-            subFilters.setUserId(userId);
+        	requestUri = FileUrls.USERLIBRARY_RECYCLEBIN_ENTRY.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId), FileUrlParts.fileId.get(fileId));
         }
-        subFilters.setRecycleBinDocumentId(fileId);
-        String resultType = ResultType.ENTRY.getResultType();
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null,
-                null,
-                subFilters, resultType);
+
         try {
             super.deleteData(requestUri, null, null);
         } catch (Exception e) {
@@ -1171,13 +1097,9 @@ public class FileService extends BaseService {
         if (StringUtil.isEmpty(fileId)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
-        String accessType = AccessType.AUTHENTICATED.getAccessType();
-        String category = Categories.SHARES.getCategory();
-        String resultType = ResultType.FEED.getResultType();
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null,
-                null,
-                null,
-                resultType);
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.DELETE_FILE_SHARE.format(this, FileUrlParts.accessType.get(accessType));
+
         Map<String, String> params = new HashMap<String, String>();
         params.put(FileRequestParams.SHAREDWHAT.getFileRequestParams(), fileId);
         if (!StringUtil.isEmpty(userId)) {
@@ -1194,7 +1116,7 @@ public class FileService extends BaseService {
         if (StringUtil.isEmpty(commentId)) {
             throw new FileServiceException(null, Messages.Invalid_CommentId);
         }
-        String requestUri = this.getModerationUri(commentId, "review", "comment");
+        String requestUri = this.getModerationUri(commentId, Categories.REVIEW.get(), ModerationContentTypes.COMMENT.get());
         if (StringUtil.isEmpty(requestUri)) {
             return;
         }
@@ -1209,7 +1131,7 @@ public class FileService extends BaseService {
         if (StringUtil.isEmpty(fileId)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
-        String requestUri = this.getModerationUri(fileId, "review", "file");
+        String requestUri = this.getModerationUri(fileId, Categories.REVIEW.get(), ModerationContentTypes.DOCUMENTS.get());
         if (StringUtil.isEmpty(requestUri)) {
             return;
         }
@@ -1230,13 +1152,8 @@ public class FileService extends BaseService {
      * @throws FileServiceException
      */
     public void deleteFolder(String folderId) throws FileServiceException {
-        String accessType = AccessType.AUTHENTICATED.getAccessType();
-        SubFilters subFilters = new SubFilters();
-        subFilters.setCollectionId(folderId);
-        String resultType = ResultType.ENTRY.getResultType();
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
-                null,
-                subFilters, resultType);
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.COLLECTION_ENTRY.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.folderId.get(folderId));
         try {
             super.deleteData(requestUri, null, null);
         } catch (Exception e) {
@@ -1265,11 +1182,8 @@ public class FileService extends BaseService {
         if (StringUtil.isEmpty(flagWhat)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
-        String accessType = AccessType.AUTHENTICATED.getAccessType();
-        String resultType = ResultType.REPORTS.getResultType();
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
-                null, null,
-                resultType);
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.COLLECTION_ENTRY.format(this, FileUrlParts.accessType.get(accessType));
         Map<String, String> headers = new HashMap<String, String>();
         headers.put(Headers.ContentType, Headers.ATOM);
 
@@ -1299,16 +1213,11 @@ public class FileService extends BaseService {
 
     public FileList getAllUserFiles(String userId, Map<String, String> params)
             throws FileServiceException {
-        String accessType = AccessType.PUBLIC.getAccessType();
-        SubFilters subFilters = new SubFilters();
         if (StringUtil.isEmpty(userId)) {
             throw new FileServiceException(null, Messages.Invalid_UserId);
         }
-        subFilters.setUserId(userId);
-        String resultType = ResultType.FEED.getResultType();
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
-                null,
-                subFilters, resultType);
+        String accessType = AccessType.PUBLIC.getText();
+        String requestUri = FileUrls.GET_ALL_USER_FILES.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId));
 
         FileList fileEntries = null;
         try {
@@ -1321,13 +1230,8 @@ public class FileService extends BaseService {
 
     public CommentList getCommentsAwaitingApproval(Map<String, String> params)
             throws FileServiceException {
-        String accessType = AccessType.AUTHENTICATED.getAccessType();
-        String category = Categories.APPROVAL.getCategory();
-        String view = Views.COMMENTS.getViews();
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, view,
-                null,
-                null,
-                null);
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.GET_COMMENTS_AWAITING_APPROVAL.format(this, FileUrlParts.accessType.get(accessType));
 
         CommentList commentEntries = null;
         try {
@@ -1384,16 +1288,12 @@ public class FileService extends BaseService {
         if (StringUtil.isEmpty(fileId)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
-        String requestUri = null;
         File file = new File(fileId);
         if (load) {
             SubFilters subFilters = new SubFilters();
             subFilters.setFileId(fileId);
-            requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(),
-                    AccessType.AUTHENTICATED.getAccessType(),
-                    Categories.MYLIBRARY.getCategory(), null, null, subFilters,
-                    ResultType.ENTRY.getResultType());
-
+            String accessType = AccessType.AUTHENTICATED.getText();
+            String requestUri = FileUrls.MYUSERLIBRARY_DOCUMENT_ENTRY.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
             try {
                 return (File) super.getEntity(requestUri, parameters, new FileFeedHandler(this));
             } catch (Exception e) {
@@ -1421,15 +1321,8 @@ public class FileService extends BaseService {
         if (StringUtil.isEmpty(libraryId)) {
             throw new FileServiceException(null, Messages.Invalid_LibraryId);
         }
-        String requestUri = null;              
-        SubFilters subFilters = new SubFilters();
-        subFilters.setFileId(fileId);
-        subFilters.setLibraryId(libraryId);
-        requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(),
-                    AccessType.AUTHENTICATED.getAccessType(),
-                    null, null, null, subFilters,
-                    ResultType.ENTRY.getResultType());
-
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.MYUSERLIBRARY_DOCUMENT_ENTRY.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.libraryId.get(libraryId), FileUrlParts.fileId.get(fileId));
         try {
            return (File) super.getEntity(requestUri, parameters, new FileFeedHandler(this));
         } catch (Exception e) {
@@ -1453,14 +1346,8 @@ public class FileService extends BaseService {
         if (StringUtil.isEmpty(fileId)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
-        String requestUri = null;              
-        SubFilters subFilters = new SubFilters();
-        subFilters.setFileId(fileId);
-        subFilters.setLibraryId(libraryId);
-        requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(),
-                    AccessType.PUBLIC.getAccessType(),
-                    null, null, null, subFilters,
-                    ResultType.ENTRY.getResultType());
+        String accessType = AccessType.PUBLIC.getText();
+        String requestUri = FileUrls.MYUSERLIBRARY_DOCUMENT_ENTRY.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.libraryId.get(libraryId), FileUrlParts.fileId.get(fileId));
 
         try {
            return (File) super.getEntity(requestUri, parameters, new FileFeedHandler(this));
@@ -1473,7 +1360,7 @@ public class FileService extends BaseService {
         if (StringUtil.isEmpty(fileId)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
-        String requestUri = this.getModerationUri(fileId, "approval", "file");
+        String requestUri = this.getModerationUri(fileId, Categories.APPROVAL.get(), ModerationContentTypes.DOCUMENTS.get());
         try {
             return (File) super.getEntity(requestUri, null, new FileFeedHandler(this));
         } catch (Exception e) {
@@ -1503,7 +1390,9 @@ public class FileService extends BaseService {
             throw new FileServiceException(null, Messages.Invalid_CommentId);
         }
         
-        return getFileComments(fileId, anonymousAccess, userId, commentId, parameters,headers);
+        String accessType = anonymousAccess?AccessType.PUBLIC.getText():AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.USERLIBRARY_DOCUMENT_COMMENT_ENTRY.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId), FileUrlParts.fileId.get(fileId), FileUrlParts.commentId.get(commentId));
+        return getFileComments(requestUri, parameters, headers);
     }
     
     /**
@@ -1522,7 +1411,9 @@ public class FileService extends BaseService {
             throw new FileServiceException(null, Messages.Invalid_CommentId);
         }
         
-        return getFileComments(fileId, false, null, commentId, parameters, headers);
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.MYUSERLIBRARY_DOCUMENT_COMMENT_ENTRY.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId), FileUrlParts.commentId.get(commentId));
+        return getFileComments(requestUri, parameters, headers);
     }
     /**
      * retrieve all comments from a file of any user
@@ -1540,8 +1431,10 @@ public class FileService extends BaseService {
         if (StringUtil.isEmpty(userId)) {
             throw new FileServiceException(null, Messages.Invalid_UserId);
         }
+        String accessType = anonymousAccess?AccessType.PUBLIC.getText():AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.MYUSERLIBRARY_DOCUMENT_FEED.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId), FileUrlParts.fileId.get(fileId));
         
-        return getFileComments(fileId, anonymousAccess, userId, null, parameters,null);
+        return getFileComments(requestUri, parameters,null);
     }
     /**
      * retrieve all comments from a file of the authenticated user
@@ -1554,47 +1447,20 @@ public class FileService extends BaseService {
         if (StringUtil.isEmpty(fileId)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
-        return getFileComments(fileId, false, null, null, parameters,null);
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.MYUSERLIBRARY_DOCUMENT_FEED.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
+        return getFileComments(requestUri, parameters,null);
     }
     
-    private CommentList getFileComments(String fileId, boolean anonymousAccess, String userId, String commentId, Map<String, String> parameters, Map<String,String> headers) throws FileServiceException {
-        
-        String accessType = null;
-        if (anonymousAccess) {
-            accessType = AccessType.PUBLIC.getAccessType();
-        } else {
-            accessType = AccessType.AUTHENTICATED.getAccessType();
-        }
-        
-        SubFilters subFilters = new SubFilters();
-
-        subFilters.setFileId(fileId);
-        
-        subFilters.setUserId(userId);
-        FileServiceURIBuilder uriBuilder = null;
-        
-        if (StringUtil.isEmpty(commentId)) {
-            if (StringUtil.isEmpty(userId)) {
-                uriBuilder = FileServiceURIBuilder.GET_COMMENTS_FEED_FROM_MY_FILE;
-            } else {
-                uriBuilder = FileServiceURIBuilder.GET_COMMENTS_FEED_FROM_USER_FILE;
-            }
-        } else {
-            if (StringUtil.isEmpty(userId)) {
-                uriBuilder = FileServiceURIBuilder.GET_SINGLE_COMMENT_FROM_MY_FILE;
-            } else {
-                uriBuilder = FileServiceURIBuilder.GET_SINGLE_COMMENT_FROM_USER_FILE;
-            }
-        }
-        
+    private CommentList getFileComments(String url, Map<String, String> parameters, Map<String,String> headers) throws FileServiceException {
         CommentList commentEntries = null;
         try {
             if (parameters == null)
-                parameters = uriBuilder.getParameters();
+                parameters = getCommentParams();
             else
-                parameters.putAll(uriBuilder.getParameters());
+                parameters.putAll(getCommentParams());
             //TODO: pass in headers
-            commentEntries = (CommentList) getEntities(uriBuilder.populateURL(accessType,   null, null, null, subFilters, null), parameters, headers, new CommentFeedHandler(this));
+            commentEntries = (CommentList) getEntities(url, parameters, headers, new CommentFeedHandler(this));
             return commentEntries;
         } catch (Exception e) {
             throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
@@ -1629,18 +1495,14 @@ public class FileService extends BaseService {
      * @throws FileServiceException
      */
     public CommentList getAllCommunityFileComments(String fileId, String communityId, Map<String, String> parameters) throws FileServiceException {
-        String accessType =AccessType.AUTHENTICATED.getAccessType();
         if (StringUtil.isEmpty(fileId)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
         if (StringUtil.isEmpty(communityId)) {
             throw new FileServiceException(null, Messages.Invalid_CommunityId);
         }
-        SubFilters subFilters = new SubFilters();
-        subFilters.setFileId(fileId);
-        subFilters.setCommunityLibraryId(communityId);
-        String resultType = ResultType.FEED.getResultType();
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null, null, subFilters, resultType);
+        String accessType =AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.COMMUNITY_FILE_COMMENT.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.communityId.get(communityId), FileUrlParts.fileId.get(fileId));
         try {
         	return (CommentList) getEntities(requestUri, parameters, null, new CommentFeedHandler(this));
         } catch (Exception e) {
@@ -1690,19 +1552,13 @@ public class FileService extends BaseService {
         if (StringUtil.isEmpty(fileId)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
-        String accessType = AccessType.AUTHENTICATED.getAccessType();
-        String category = null;
-        SubFilters subFilters = new SubFilters();
-        if (StringUtil.isEmpty(userId) || StringUtil.equalsIgnoreCase(userId, null)) {
-            category = Categories.MYLIBRARY.getCategory();
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri;
+        if (StringUtil.isEmpty(userId)){
+        	requestUri = FileUrls.MYUSERLIBRARY_RECYCLEBIN_ENTRY.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
         } else {
-            subFilters.setUserId(userId);
+        	requestUri = FileUrls.USERLIBRARY_RECYCLEBIN_ENTRY.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId), FileUrlParts.fileId.get(fileId));
         }
-        subFilters.setRecycleBinDocumentId(fileId);
-        String resultType = ResultType.ENTRY.getResultType();
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null,
-                null,
-                subFilters, resultType);
         try {
             return (File) super.getEntity(requestUri, params, new FileFeedHandler(this));
         } catch (Exception e) {
@@ -1719,13 +1575,8 @@ public class FileService extends BaseService {
      * @throws FileServiceException
      */
     public FileList getFilesAwaitingApproval(Map<String, String> params) throws FileServiceException {
-        String accessType = AccessType.AUTHENTICATED.getAccessType();
-        String category = Categories.APPROVAL.getCategory();
-        String view = Views.FILES.getViews();
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, view,
-                null,
-                null,
-                null);
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.GET_FILES_AWAITING_APPROVAL.format(this, FileUrlParts.accessType.get(accessType));
 
         FileList fileEntries = null;
         try {
@@ -1763,14 +1614,8 @@ public class FileService extends BaseService {
      * @throws FileServiceException
      */
     public FileList getFileShares(Map<String, String> params) throws FileServiceException {
-        String accessType = AccessType.AUTHENTICATED.getAccessType();
-        String view = Views.FILES.getViews();
-        String filter = Filters.SHARED.getFilters();
-        String resultType = ResultType.FEED.getResultType();
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, view,
-                filter,
-                null,
-                resultType);
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.DOCUMENTS_SHARED_FEED.format(this, FileUrlParts.accessType.get(accessType));
 
         FileList fileEntries = null;
         try {
@@ -1799,17 +1644,11 @@ public class FileService extends BaseService {
 
     public FileList getFilesInFolder(String folderId, Map<String, String> params)
             throws FileServiceException {
-        String accessType = AccessType.AUTHENTICATED.getAccessType();
-        SubFilters subFilters = new SubFilters();
         if (StringUtil.isEmpty(folderId)) {
             throw new FileServiceException(null, Messages.Invalid_CollectionId);
         }
-        subFilters.setCollectionId(folderId);
-        String resultType = ResultType.FEED.getResultType();
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
-                null,
-                subFilters, resultType);
-
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.COLLECTION_FEED.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.folderId.get(folderId));
         FileList fileEntries = null;
         try {
             fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler(this));
@@ -1841,15 +1680,12 @@ public class FileService extends BaseService {
      */
 
     public FileList getFilesInMyRecycleBin(Map<String, String> params) throws FileServiceException {
-        String accessType = AccessType.AUTHENTICATED.getAccessType();
-        String category = Categories.MYLIBRARY.getCategory();
-        String view = Views.RECYCLEBIN.getViews();
-        String resultType = ResultType.FEED.getResultType();
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, view,
-                null,
-                null,
-                resultType);
+        String accessType = AccessType.AUTHENTICATED.getText();
 
+        //String requestUri = FileUrls.GET_FILES_IN_MY_RECYCLE_BIN.format(getApiVersion(), getAuth(), accessType);
+
+        String requestUri = FileUrls.MYUSERLIBRARY_RECYCLEBIN_FEED.format(this, FileUrlParts.accessType.get(accessType));
+        
         FileList fileEntries = null;
         try {
             fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler(this));
@@ -1869,8 +1705,8 @@ public class FileService extends BaseService {
      * @throws FileServiceException 
      */
     protected Document getFilesModerationServiceDocument() throws FileServiceException {
-
-        String requestUri = FileServiceURIBuilder.GET_SERVICE_DOCUMENT.populateURL(AccessType.AUTHENTICATED.toString(), null, null, null, null, null);
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.MODERATION_SERVICE_DOCUMENT.format(this, FileUrlParts.accessType.get(accessType));
         Response result = null;
         try {
             result = super.retrieveData(requestUri, null);
@@ -1878,6 +1714,10 @@ public class FileService extends BaseService {
         	throw new FileServiceException(e, Messages.MessageExceptionInFetchingServiceDocument);
         }
         return (Document) result.getData();
+    }
+
+    protected FilesModerationDocumentEntry getFilesModerationDocumentEntry() throws FileServiceException {
+    	return new FilesModerationDocumentEntry(getFilesModerationServiceDocument());
     }
 
     /**
@@ -1889,11 +1729,8 @@ public class FileService extends BaseService {
      * @throws FileServiceException 
      */
     public Document getFilesServiceDocument() throws FileServiceException {
-        String accessType = AccessType.AUTHENTICATED.getAccessType();
-        String resultType = ResultType.INTROSPECTION.getResultType();
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
-                null, null,
-                resultType);
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.SERVICE_DOCUMENT.format(this, FileUrlParts.accessType.get(accessType));
         Object result = null;
         try {
             result = this.getClientService().get(requestUri, null, ClientService.FORMAT_XML);
@@ -1910,8 +1747,7 @@ public class FileService extends BaseService {
      * 
      * @return FileList
      * @throws FileServiceException
-     */
-    public FileList getFilesSharedByMe() throws FileServiceException {
+     */ public FileList getFilesSharedByMe() throws FileServiceException {
         return this.getFilesSharedByMe(null);
     }
 
@@ -1927,20 +1763,14 @@ public class FileService extends BaseService {
      */
 
     public FileList getFilesSharedByMe(Map<String, String> params) throws FileServiceException {
-        String accessType = AccessType.AUTHENTICATED.getAccessType();
-        String view = Views.FILES.getViews();
-        String filter = Filters.SHARED.getFilters();
-        String resultType = ResultType.FEED.getResultType();
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.DOCUMENTS_SHARED_FEED.format(this, FileUrlParts.accessType.get(accessType));
+
+        FileList fileEntries = null;
         if (null == params) {
             params = new HashMap<String, String>();
         }
         params.put(FileRequestParams.DIRECTION.getFileRequestParams(), "outbound");
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, view,
-                filter,
-                null,
-                resultType);
-
-        FileList fileEntries = null;
         try {
             fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler(this));
         } catch (Exception e) {
@@ -1975,19 +1805,12 @@ public class FileService extends BaseService {
      */
 
     public FileList getFilesSharedWithMe(Map<String, String> params) throws FileServiceException {
-        String accessType = AccessType.AUTHENTICATED.getAccessType();
-        String view = Views.FILES.getViews();
-        String filter = Filters.SHARED.getFilters();
-        String resultType = ResultType.FEED.getResultType();
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.DOCUMENTS_SHARED_FEED.format(this, FileUrlParts.accessType.get(accessType));
         if (null == params) {
             params = new HashMap<String, String>();
         }
         params.put(FileRequestParams.DIRECTION.getFileRequestParams(), "inbound");
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, view,
-                filter,
-                null,
-                resultType);
-
         FileList fileEntries = null;
         try {
             fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler(this));
@@ -2073,15 +1896,8 @@ public class FileService extends BaseService {
         if (StringUtil.isEmpty(versionId)) {
             return this.getFile(fileId, params, true);
         }
-        String accessType = AccessType.AUTHENTICATED.getAccessType();
-        String category = Categories.MYLIBRARY.getCategory();
-        SubFilters subFilters = new SubFilters();
-        subFilters.setFileId(fileId);
-        subFilters.setVersionId(versionId);
-        String resultType = ResultType.ENTRY.getResultType();
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null,
-                null,
-                subFilters, resultType);
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.GET_FILE_WITH_GIVEN_VERSION.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId), FileUrlParts.versionId.get(versionId));
 
         File file;
         try {
@@ -2097,7 +1913,7 @@ public class FileService extends BaseService {
         if (StringUtil.isEmpty(commentId)) {
             throw new FileServiceException(null, Messages.Invalid_CommentId);
         }
-        String requestUri = this.getModerationUri(commentId, "review", "comment");
+        String requestUri = this.getModerationUri(commentId, Categories.REVIEW.get(), ModerationContentTypes.COMMENT.get());
         Comment Comment;
         try {
             Comment = (Comment) getEntity(requestUri, null, new CommentFeedHandler(this));
@@ -2110,13 +1926,8 @@ public class FileService extends BaseService {
 
     // /files/basic/api/review/comments
     public CommentList getFlaggedComments(Map<String, String> params) throws FileServiceException {
-        String accessType = AccessType.AUTHENTICATED.getAccessType();
-        String category = Categories.REVIEW.getCategory();
-        String view = Views.COMMENTS.getViews();
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, view,
-                null,
-                null,
-                null);
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.GET_FLAGGED_COMMENTS.format(this, FileUrlParts.accessType.get(accessType));
 
         CommentList commentEntries = null;
         try {
@@ -2132,7 +1943,7 @@ public class FileService extends BaseService {
         if (StringUtil.isEmpty(fileId)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
-        String requestUri = this.getModerationUri(fileId, "review", "file");
+        String requestUri = this.getModerationUri(fileId, Categories.REVIEW.get(), ModerationContentTypes.DOCUMENTS.get());
         File fileEntry;
         try {
             fileEntry = (File) getEntity(requestUri, null, new FileFeedHandler(this));
@@ -2149,14 +1960,8 @@ public class FileService extends BaseService {
         if (StringUtil.isEmpty(fileId)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
-        String accessType = AccessType.AUTHENTICATED.getAccessType();
-        String category = Categories.REVIEW.getCategory();
-        String filter = Filters.ACTIONS.getFilters();
-        SubFilters subFilters = new SubFilters();
-        subFilters.setDocumentsId(fileId);
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null,
-                filter,
-                subFilters, null);
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.GET_FLAGGED_FILE_HISTORY.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
         try {
             return (Document) super.retrieveData(requestUri, params).getData();
         } catch (Exception e) {
@@ -2167,13 +1972,8 @@ public class FileService extends BaseService {
 
     // /files/basic/api/review/documents
     public FileList getFlaggedFiles(Map<String, String> params) throws FileServiceException {
-        String accessType = AccessType.AUTHENTICATED.getAccessType();
-        String category = Categories.REVIEW.getCategory();
-        String view = Views.FILES.getViews();
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, view,
-                null,
-                null,
-                null);
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.GET_FLAGGED_FILES.format(this, FileUrlParts.accessType.get(accessType));
 
         FileList fileEntries = null;
         try {
@@ -2196,13 +1996,8 @@ public class FileService extends BaseService {
      * @throws FileServiceException
      */
     public File getFolder(String folderId) throws FileServiceException {
-        String accessType = AccessType.AUTHENTICATED.getAccessType();
-        SubFilters subFilters = new SubFilters();
-        subFilters.setCollectionId(folderId);
-        String resultType = ResultType.ENTRY.getResultType();
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
-                null,
-                subFilters, resultType);
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.COLLECTION_ENTRY.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.folderId.get(folderId));
         File fileEntry;
         try {
             fileEntry = (File) getEntity(requestUri, null, new FileFeedHandler(this));
@@ -2228,14 +2023,8 @@ public class FileService extends BaseService {
      */
     public FileList getFoldersWithRecentlyAddedFiles(Map<String, String> params)
             throws FileServiceException {
-        String accessType = AccessType.AUTHENTICATED.getAccessType();
-        String view = Views.FOLDERS.getViews();
-        String filter = Filters.ADDEDTO.getFilters();
-        String resultType = ResultType.FEED.getResultType();
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, view,
-                filter,
-                null,
-                resultType);
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.GET_FOLDERS_WITH_RECENT_FILES.format(this, FileUrlParts.accessType.get(accessType));
 
         FileList fileEntries = null;
         try {
@@ -2274,14 +2063,8 @@ public class FileService extends BaseService {
      */
 
     public FileList getMyFiles(Map<String, String> params) throws FileServiceException {
-        String accessType = AccessType.AUTHENTICATED.getAccessType();
-        String category = Categories.MYLIBRARY.getCategory();
-        String resultType = ResultType.FEED.getResultType();
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null,
-                null,
-                null,
-                resultType);
-
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.MYUSERLIBRARY_FEED.format(this, FileUrlParts.accessType.get(accessType));
         FileList fileEntries = null;
         try {
             fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler(this));
@@ -2306,12 +2089,8 @@ public class FileService extends BaseService {
      * @throws FileServiceException
      */
     public FileList getMyFolders(Map<String, String> params) throws FileServiceException {
-        String accessType = AccessType.AUTHENTICATED.getAccessType();
-        String view = Views.FOLDERS.getViews();
-        String resultType = ResultType.FEED.getResultType();
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, view,
-                null, null,
-                resultType);
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.COLLECTIONS_FEED.format(this, FileUrlParts.accessType.get(accessType));
         FileList fileEntries = null;
         try {
             fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler(this));
@@ -2332,11 +2111,8 @@ public class FileService extends BaseService {
      * @throws FileServiceException 
      */
     public String getNonce() throws FileServiceException {
-        String accessType = AccessType.AUTHENTICATED.getAccessType();
-        String resultType = ResultType.NONCE.getResultType();
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
-                null, null,
-                resultType);
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.GET_NONCE.format(this, FileUrlParts.accessType.get(accessType));
         Object result = null;
         try {
             result = this.getClientService().get(requestUri, null, ClientService.FORMAT_TEXT);
@@ -2363,15 +2139,8 @@ public class FileService extends BaseService {
      * @throws FileServiceException
      */
     public FileList getPinnedFiles(Map<String, String> params) throws FileServiceException {
-        String accessType = AccessType.AUTHENTICATED.getAccessType();
-        String category = Categories.PINNED.getCategory();
-        String view = Views.FILES.getViews();
-        String resultType = ResultType.FEED.getResultType();
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, view,
-                null,
-                null,
-                resultType);
-
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.MYFAVORITES_DOCUMENTS_FEED.format(this, FileUrlParts.accessType.get(accessType));
         FileList fileEntries = null;
         try {
             fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler(this));
@@ -2396,14 +2165,8 @@ public class FileService extends BaseService {
      * @throws FileServiceException
      */
     public FileList getPinnedFolders(Map<String, String> params) throws FileServiceException {
-        String accessType = AccessType.AUTHENTICATED.getAccessType();
-        String category = Categories.PINNED.getCategory();
-        String view = Views.FOLDERS.getViews();
-        String resultType = ResultType.FEED.getResultType();
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, view,
-                null,
-                null,
-                resultType);
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.MYFAVORITES_COLLECTIONS_FEED.format(this, FileUrlParts.accessType.get(accessType));
         FileList fileEntries = null;
         try {
             fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler(this));
@@ -2429,15 +2192,9 @@ public class FileService extends BaseService {
      * @throws FileServiceException
      */
     public FileList getPublicFiles(Map<String, String> params) throws FileServiceException {
-        String accessType = AccessType.PUBLIC.getAccessType();
-        String view = Views.FILES.getViews();
-        String resultType = ResultType.FEED.getResultType();
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, view,
-                null, null,
-                resultType);
-        if (params == null) {
-            params = new HashMap<String, String>();
-        }
+        String accessType = AccessType.PUBLIC.getText();
+        String requestUri = FileUrls.MYFAVORITES_COLLECTIONS_FEED.format(this, FileUrlParts.accessType.get(accessType));
+		params = (null == params)?new HashMap<String, String>():params;
         params.put(FileRequestParams.VISIBILITY.getFileRequestParams(), "public");
 
         FileList fileEntries = null;
@@ -2466,12 +2223,8 @@ public class FileService extends BaseService {
      */
 
     public FileList getPublicFolders(Map<String, String> params) throws FileServiceException {
-        String accessType = AccessType.PUBLIC.getAccessType();
-        String view = Views.FOLDERS.getViews();
-        String resultType = ResultType.FEED.getResultType();
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, view,
-                null, null,
-                resultType);
+        String accessType = AccessType.PUBLIC.getText();
+        String requestUri = FileUrls.COLLECTIONS_FEED.format(this, FileUrlParts.accessType.get(accessType));
         FileList fileEntries = null;
         try {
             fileEntries = (FileList) getEntities(requestUri, params, new FileFeedHandler(this));
@@ -2492,19 +2245,13 @@ public class FileService extends BaseService {
      * @throws FileServiceException
      */
     public void lock(String fileId) throws FileServiceException {
-        String accessType = AccessType.AUTHENTICATED.getAccessType();
-        SubFilters subFilters = new SubFilters();
         if (StringUtil.isEmpty(fileId)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
-        subFilters.setFileId(fileId);
-        String resultType = ResultType.LOCK.getResultType();
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.LOCK_FILE.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
         Map<String, String> params = new HashMap<String, String>();
-        params.put(FileRequestParams.LOCK.getFileRequestParams(), "HARD");
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
-                null,
-                subFilters, resultType);
-
+        params.put(FileRequestParams.LOCK.getFileRequestParams(), FileConstants.LockType_HARD);
         try {
             super.createData(requestUri, params, null);
         } catch (Exception e) {
@@ -2525,14 +2272,8 @@ public class FileService extends BaseService {
         if (StringUtil.isEmpty(fileId)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
-        String accessType = AccessType.AUTHENTICATED.getAccessType();
-        String category = Categories.PINNED.getCategory();
-        String view = Views.FILES.getViews();
-        String resultType = ResultType.FEED.getResultType();
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, view,
-                null,
-                null,
-                resultType);
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.MYFAVORITES_DOCUMENTS_FEED.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
         Map<String, String> params = new HashMap<String, String>();
         params.put(FileRequestParams.ITEMID.getFileRequestParams(), fileId);
         try {
@@ -2566,17 +2307,9 @@ public class FileService extends BaseService {
      * @throws FileServiceException
      */
     public void pinFolder(String folderId, Map<String, String> params) throws FileServiceException {
-        String accessType = AccessType.AUTHENTICATED.getAccessType();
-        String category = Categories.PINNED.getCategory();
-        String view = Views.FOLDERS.getViews();
-        String resultType = ResultType.FEED.getResultType();
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, view,
-                null,
-                null,
-                resultType);
-        if (null == params) {
-            params = new HashMap<String, String>();
-        }
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.MYFAVORITES_COLLECTIONS_FEED.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.folderId.get(folderId));
+		params = (null == params)?new HashMap<String, String>():params;
         params.put(FileRequestParams.ITEMID.getFileRequestParams(), folderId);
         try {
             super.createData(requestUri, params,  null);
@@ -2597,19 +2330,14 @@ public class FileService extends BaseService {
      * @throws FileServiceException
      */
     public void removeFileFromFolder(String folderId, String fileId) throws FileServiceException {
-        String accessType = AccessType.AUTHENTICATED.getAccessType();
         if (StringUtil.isEmpty(folderId)) {
             throw new FileServiceException(null, Messages.Invalid_CollectionId);
         }
         if (StringUtil.isEmpty(fileId)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
-        SubFilters subFilters = new SubFilters();
-        subFilters.setCollectionId(folderId);
-        String resultType = ResultType.FEED.getResultType();
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
-                null,
-                subFilters, resultType);
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.COLLECTION_FEED.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.folderId.get(folderId));
         Map<String, String> params = new HashMap<String, String>();
         params.put(FileRequestParams.ITEMID.getFileRequestParams(), fileId);
         try {
@@ -2650,19 +2378,13 @@ public class FileService extends BaseService {
         if (StringUtil.isEmpty(fileId)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
-        String accessType = AccessType.AUTHENTICATED.getAccessType();
-        String category = null;
-        SubFilters subFilters = new SubFilters();
-        if (StringUtil.isEmpty(userId) || StringUtil.equalsIgnoreCase(userId, null)) {
-            category = Categories.MYLIBRARY.getCategory();
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri;
+        if (StringUtil.isEmpty(userId)){
+        	requestUri = FileUrls.MYUSERLIBRARY_RECYCLEBIN_ENTRY.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
         } else {
-            subFilters.setUserId(userId);
+        	requestUri = FileUrls.USERLIBRARY_RECYCLEBIN_ENTRY.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId), FileUrlParts.fileId.get(fileId));
         }
-        subFilters.setRecycleBinDocumentId(fileId);
-        String resultType = ResultType.ENTRY.getResultType();
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null,
-                null,
-                subFilters, resultType);
         Map<String, String> params = new HashMap<String, String>();
         params.put(FileRequestParams.UNDELETE.getFileRequestParams(), "true");
         Map<String, String> headers = new HashMap<String, String>();
@@ -2690,7 +2412,6 @@ public class FileService extends BaseService {
      */
     public void shareFileWithCommunities(String fileId, List<String> communityIds, Map<String, String> params)
             throws FileServiceException, TransformerException {
-        String accessType = AccessType.AUTHENTICATED.getAccessType();
         if (StringUtil.isEmpty(fileId)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
@@ -2699,16 +2420,9 @@ public class FileService extends BaseService {
                 throw new FileServiceException(null, Messages.Invalid_CommunityId);
             }
         }
-        String category = Categories.MYLIBRARY.getCategory();
-        SubFilters subFilters = new SubFilters();
-        subFilters.setFileId(fileId);
-        String resultType = ResultType.FEED.getResultType();
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null,
-                null,
-                subFilters, resultType);
-        if (null == params) {
-            params = new HashMap<String, String>();
-        }
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.MYUSERLIBRARY_RECYCLEBIN_ENTRY.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
+		params = (null == params)?new HashMap<String, String>():params;
         Object payload = this.constructPayloadForMultipleEntries(communityIds,
                 FileRequestParams.ITEMID.getFileRequestParams(), "community");
         Map<String, String> headers = new HashMap<String, String>();
@@ -2731,18 +2445,13 @@ public class FileService extends BaseService {
      * @throws FileServiceException
      */
     public void unlock(String fileId) throws FileServiceException {
-        String accessType = AccessType.AUTHENTICATED.getAccessType();
-        SubFilters subFilters = new SubFilters();
         if (StringUtil.isEmpty(fileId)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
-        subFilters.setFileId(fileId);
-        String resultType = ResultType.LOCK.getResultType();
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.LOCK_FILE.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
         Map<String, String> params = new HashMap<String, String>();
         params.put(FileRequestParams.LOCK.getFileRequestParams(), "NONE");
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
-                null,
-                subFilters, resultType);
         try {
             super.createData(requestUri, params, null);
         } catch (Exception e) {
@@ -2763,14 +2472,8 @@ public class FileService extends BaseService {
         if (StringUtil.isEmpty(fileId)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
-        String accessType = AccessType.AUTHENTICATED.getAccessType();
-        String category = Categories.PINNED.getCategory();
-        String view = Views.FILES.getViews();
-        String resultType = ResultType.FEED.getResultType();
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, view,
-                null,
-                null,
-                resultType);
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.MYFAVORITES_DOCUMENTS_FEED.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
         Map<String, String> params = new HashMap<String, String>();
         params.put(FileRequestParams.ITEMID.getFileRequestParams(), fileId);
         try {
@@ -2781,14 +2484,8 @@ public class FileService extends BaseService {
     } 
 
     public void unPinFolder(String folderId) throws FileServiceException {
-        String accessType = AccessType.AUTHENTICATED.getAccessType();
-        String category = Categories.PINNED.getCategory();
-        String view = Views.FOLDERS.getViews();
-        String resultType = ResultType.FEED.getResultType();
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, view,
-                null,
-                null,
-                resultType);
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.MYFAVORITES_COLLECTIONS_FEED.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.folderId.get(folderId));
         Map<String, String> params = new HashMap<String, String>();
         params.put(FileRequestParams.ITEMID.getFileRequestParams(), folderId);
         try {
@@ -2865,25 +2562,19 @@ public class FileService extends BaseService {
      */
     public Comment updateComment(String fileId, String commentId, String comment, String userId,
             Map<String, String> params) throws FileServiceException, TransformerException {
-        String accessType = AccessType.AUTHENTICATED.getAccessType();
-        SubFilters subFilters = new SubFilters();
         if (StringUtil.isEmpty(fileId)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
-        }
-        if (StringUtil.isEmpty(userId)) {
-            Categories.MYLIBRARY.getCategory();
-        } else {
-            subFilters.setUserId(userId);
         }
         if (StringUtil.isEmpty(commentId)) {
             throw new FileServiceException(null, Messages.Invalid_CommentId);
         }
-        subFilters.setFileId(fileId);
-        subFilters.setCommentId(commentId);
-        String resultType = ResultType.ENTRY.getResultType();
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
-                null,
-                subFilters, resultType);
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri;
+        if (StringUtil.isEmpty(userId)){
+        	requestUri = FileUrls.MYUSERLIBRARY_DOCUMENT_COMMENT_ENTRY.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId), FileUrlParts.commentId.get(commentId));
+        } else {
+        	requestUri = FileUrls.USERLIBRARY_DOCUMENT_COMMENT_ENTRY.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId), FileUrlParts.fileId.get(fileId), FileUrlParts.commentId.get(commentId));
+        }
         Map<String, String> headers = new HashMap<String, String>();
         headers.put(Headers.ContentType, Headers.ATOM);
         Object payload = this.constructPayloadForComments(comment);
@@ -2962,13 +2653,9 @@ public class FileService extends BaseService {
         if (StringUtil.isEmpty(title)) {
             throw new FileServiceException(null, Messages.Invalid_Name);
         }
-        String accessType = AccessType.AUTHENTICATED.getAccessType();
-        String category = Categories.MYLIBRARY.getCategory();
-        SubFilters subFilters = new SubFilters();
-        subFilters.setFileId(fileId);
-        String resultType = ResultType.ENTRY.getResultType();
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null,
-                null, subFilters, resultType); // we pass null value for non applicable types.
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.MYUSERLIBRARY_DOCUMENT_ENTRY.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
+
         Content contentFile = getContentObject(title, iStream);
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("X-Update-Nonce", getNonce()); // It is not clearly documented which Content Type requires Nonce, thus adding nonce in header for all upload requests. 
@@ -3035,13 +2722,8 @@ public class FileService extends BaseService {
         if (StringUtil.isEmpty(communityId)) {
         	throw new FileServiceException(null, Messages.Invalid_CommunityId);
         }
-        String accessType = AccessType.AUTHENTICATED.getAccessType();
-		SubFilters subFilters = new SubFilters();
-        subFilters.setLibraryId(communityId);
-        subFilters.setFileId(fileId);
-        String resultType = ResultType.ENTRY.getResultType();
-		String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
-                null, subFilters, resultType); 
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.UPLOAD_NEW_VERSION_COMMUNITY_FILE.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.communityId.get(communityId), FileUrlParts.fileId.get(fileId));
 		ContentStream contentFile = (ContentStream) getContentObject(title, iStream);
 		Map<String, String> headers = new HashMap<String, String>();
         headers.put("X-Update-Nonce", getNonce()); // It is not clearly documented which Content Type requires Nonce, thus adding nonce in header for all upload requests. 
@@ -3083,16 +2765,12 @@ public class FileService extends BaseService {
         if (title == null) {
             throw new FileServiceException(null, "null name");
         }
-        Content contentFile = getContentObject(title, iStream, length);
-		String accessType = AccessType.AUTHENTICATED.getAccessType();
-		SubFilters subFilters = new SubFilters();
         if (StringUtil.isEmpty(communityId)) {
         	throw new FileServiceException(null, Messages.Invalid_CommunityId);
         }
-        subFilters.setCommunityLibraryId(communityId);
-        String resultType = ResultType.FEED.getResultType();
-		String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
-                null, subFilters, resultType); 
+		String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.COMMUNITYLIBRARY_FEED.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.communityId.get(communityId));
+        Content contentFile = getContentObject(title, iStream, length);
 		Map<String, String> headers = new HashMap<String, String>();
         headers.put("X-Update-Nonce", getNonce()); // It is not clearly documented which Content Type requires Nonce, thus adding nonce in header for all upload requests. 
 	    try {
@@ -3177,17 +2855,11 @@ public class FileService extends BaseService {
      */
     public File updateFileMetadata(String fileId, Map<String, String> params, Document requestBody)
             throws FileServiceException {
-        String accessType = AccessType.AUTHENTICATED.getAccessType();
-        String category = Categories.MYLIBRARY.getCategory();
-        SubFilters subFilters = new SubFilters();
+        String accessType = AccessType.AUTHENTICATED.getText();
         if (StringUtil.isEmpty(fileId)) {
             return new File();
         }
-        subFilters.setFileId(fileId);
-        String resultType = ResultType.ENTRY.getResultType();
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null,
-                null,
-                subFilters, resultType); // we pass null value for non applicable types.
+        String requestUri = FileUrls.MYUSERLIBRARY_DOCUMENT_ENTRY.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
         try {
             Response result = (Response) super.updateData(requestUri, params, new ClientService.ContentXml(
                     requestBody, "application/atom+xml"), null);
@@ -3229,7 +2901,7 @@ public class FileService extends BaseService {
         if (StringUtil.isEmpty(commentId)) {
             throw new FileServiceException(null, Messages.Invalid_CommentId);
         }
-        String requestUri = this.getModerationUri(commentId, "review", "comment");
+        String requestUri = this.getModerationUri(commentId, Categories.REVIEW.get(), ModerationContentTypes.COMMENT.get());
         // File File = (File) executeGet(requestUri, null, ClientService.FORMAT_XML,
         // null).get(0);
 
@@ -3253,7 +2925,7 @@ public class FileService extends BaseService {
         if (StringUtil.isEmpty(fileId)) {
             throw new FileServiceException(null, Messages.Invalid_FileId);
         }
-        String requestUri = this.getModerationUri(fileId, "review", "file");
+        String requestUri = this.getModerationUri(fileId, Categories.REVIEW.get(), ModerationContentTypes.DOCUMENTS.get());
         // File File = (File) executeGet(requestUri, null, ClientService.FORMAT_XML,
         // null).get(0);
 
@@ -3275,13 +2947,8 @@ public class FileService extends BaseService {
 
     public File updateFolder(String folderId, String name, String description, String shareWith)
             throws FileServiceException, TransformerException {
-        String accessType = AccessType.AUTHENTICATED.getAccessType();
-        SubFilters subFilters = new SubFilters();
-        subFilters.setCollectionId(folderId);
-        String resultType = ResultType.ENTRY.getResultType();
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, null, null,
-                null,
-                subFilters, resultType);
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.COLLECTION_ENTRY.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.folderId.get(folderId));
         Document payload = this.constructPayloadFolder(name, description, shareWith, "update");
         Map<String, String> headers = new HashMap<String, String>();
         headers.put(Headers.ContentType, Headers.ATOM);
@@ -3363,9 +3030,6 @@ public class FileService extends BaseService {
      */
     public File uploadFile(java.io.InputStream stream, final String title, long length,
             Map<String, String> p) throws FileServiceException {
-    	if (logger.isLoggable(Level.FINEST)) {
-			logger.entering(sourceClass, "uploadFile", new Object[] {stream, title, length, p});
-		}
         if (stream == null) {
             throw new FileServiceException(null, Messages.Invalid_Stream);
         }
@@ -3373,12 +3037,8 @@ public class FileService extends BaseService {
             throw new FileServiceException(null, Messages.Invalid_Name);
         }
         Content contentFile = getContentObject(title, stream, length);
-        String accessType = AccessType.AUTHENTICATED.getAccessType();
-        String category = Categories.MYLIBRARY.getCategory();
-        String resultType = ResultType.FEED.getResultType();
-        String requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(), accessType, category, null,
-                null,
-                null, resultType);
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.MYUSERLIBRARY_FEED.format(this, FileUrlParts.accessType.get(accessType));
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("X-Update-Nonce", getNonce()); // It is not clearly documented which Content Type requires Nonce, thus adding nonce in header for all upload requests. 
         try {
@@ -3634,35 +3294,18 @@ public class FileService extends BaseService {
   
     private String getModerationUri(String contentId, String action, String content)
             throws FileServiceException {
-        FilesModerationDocumentEntry fileModDocEntry = new FilesModerationDocumentEntry(null);
-        if (FilesModerationDocumentEntry.data == null) {
-            FilesModerationDocumentEntry.setData(this.getFilesModerationServiceDocument());
-        }
-        // get the request URI from the servide document.
+        FilesModerationDocumentEntry fileModDocEntry = getFilesModerationDocumentEntry();
+        // get the request URI from the service document.
         String requestUri = fileModDocEntry.get(ContentMapFiles.moderationMap.get("getFileUrl")); // TODO
         // If not obtained due to some reason, then construct the url in regular fashion.
         // URI : /files/basic/api/approval/documents
         if (StringUtil.isEmpty(requestUri)) {
-            SubFilters subFilters = new SubFilters();
-            String category = null;
-            if (content.equalsIgnoreCase("file")) {
-                subFilters.setDocumentsId("");
-            } else if (content.equalsIgnoreCase("comment")) {
-                subFilters.setCommentId("");
-            }
-            if (action.equalsIgnoreCase("review")) {
-                category = Categories.REVIEW.getCategory();
-            } else if (action.equalsIgnoreCase("approval")) {
-                category = Categories.APPROVAL.getCategory();
-            }
-            requestUri = FileServiceURIBuilder.constructUrl(FileServiceURIBuilder.FILES.getBaseUrl(),
-                    AccessType.AUTHENTICATED.getAccessType(),
-                    category, null, null, subFilters, null);
+            String accessType = AccessType.AUTHENTICATED.getText();
+            requestUri = FileUrls.MODERATION.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.action.get(action), FileUrlParts.contentType.get(content));
         }
         FileList resultantEntries;
         try {
-            resultantEntries = (FileList) this.getEntities(requestUri, null,
-                    new FileFeedHandler(this));
+            resultantEntries = (FileList) this.getEntities(requestUri, null, new FileFeedHandler(this));
         } catch (Exception e) {
            throw new FileServiceException(e, Messages.MessageExceptionInReadingObject);
         } 

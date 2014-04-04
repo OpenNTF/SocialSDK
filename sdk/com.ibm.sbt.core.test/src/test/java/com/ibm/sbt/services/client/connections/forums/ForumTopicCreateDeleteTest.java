@@ -1,5 +1,5 @@
 /*
- * �� Copyright IBM Corp. 2013
+ * ������ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -29,22 +29,17 @@ import org.junit.Test;
 public class ForumTopicCreateDeleteTest extends BaseForumServiceTest {
 
 	@Test
-	public void testCreateForumTopic() {
-		try {
-			forum = createForum();
-			ForumTopic topic = new ForumTopic(forumService);
-			topic.setTitle("Test topic titile" + System.currentTimeMillis());
-			topic.setContent("Test topic content");
-			topic.setForumUuid(forum.getForumUuid());
-			ForumTopic topicReturned = forumService.createForumTopic(topic);
-			assertNotNull(topicReturned.getTitle());
-			assertEquals(unRandomize(topic.getTitle()), unRandomize(topicReturned.getTitle()));
-			assertEquals(topic.getContent(), topicReturned.getContent().trim());
-			deleteForumTopic(topicReturned);
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail("Error calling forumService.createForumTopic() caused by: "+e.getMessage());
-		}
+	public void testCreateForumTopic() throws ForumServiceException {
+		forum = createForum();
+		ForumTopic topic = new ForumTopic(forumService);
+		topic.setTitle("Test topic titile" + System.currentTimeMillis());
+		topic.setContent("Test topic content");
+		topic.setForumUuid(forum.getForumUuid());
+		ForumTopic topicReturned = forumService.createForumTopic(topic);
+		assertNotNull(topicReturned.getTitle());
+		assertEquals(unRandomize(topic.getTitle()), unRandomize(topicReturned.getTitle()));
+		assertEquals(topic.getContent(), topicReturned.getContent().trim());
+		deleteForumTopic(topicReturned);
 	}
 
 	@Test

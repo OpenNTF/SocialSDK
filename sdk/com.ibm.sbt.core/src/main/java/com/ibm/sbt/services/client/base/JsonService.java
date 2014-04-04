@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * ï¿½ Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ import com.ibm.sbt.services.endpoints.Endpoint;
  * @author mwallace
  *
  */
-public class JsonService extends BaseService {
+abstract public class JsonService extends BaseService {
 
 	/**
 	 * 

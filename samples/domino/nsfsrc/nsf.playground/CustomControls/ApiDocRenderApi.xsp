@@ -79,7 +79,8 @@
 					</xp:text>
 				</xp:column>
 				<xp:column id="column14" style="width:6em"
-					loaded="${javascript:@Trim(document1.getItemValueString('APIExplorerPath'))}">
+					loaded="false">
+<!--				loaded="${javascript:@Trim(document1.getItemValueString('APIExplorerPath'))}">  -->
 					<xp:link id="link3" text="Try Me!">
 						<xp:eventHandler event="onclick" submit="false">
 							<xp:this.script><![CDATA[tryMe("#{id:tryme}","#{javascript:docOptionsBean.getAPIExplorerMiniUrl(document1.getItemValueString('Products'),document1.getItemValueString('APIExplorerPath'),document1.getItemValueString('Title'),idx)}")]]></xp:this.script>

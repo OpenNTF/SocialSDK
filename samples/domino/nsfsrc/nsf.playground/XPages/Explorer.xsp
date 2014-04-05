@@ -38,18 +38,6 @@ dojo.addOnLoad(function() {
 function refreshFrameHeight() {
 	// Nothing - only for the mini explorer
 }
-
-function prepend(h,f) {
-	return function() {
-		if(f) {
-			f.apply(this,arguments);
-		}
-		if(h) {
-			h.apply(this,arguments);
-		}
-	};
-}
-//XSP._partialRefresh = prepend(XSP._partialRefresh,updateNavSelection);
 ]]></xp:this.value>
 	</xp:scriptBlock>
 

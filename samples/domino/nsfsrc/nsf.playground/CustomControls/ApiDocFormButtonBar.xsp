@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:panel id="panel16">
+		<xp:button value="Save" id="button15">
+			<xp:eventHandler event="onclick" submit="true"
+				refreshMode="partial" refreshId="dynp">
+				<xp:this.action>
+					<xp:actionGroup>
+						<xp:saveDocument var="document1"></xp:saveDocument>
+						<xe:changeDynamicContentAction
+							facetName="empty">
+						</xe:changeDynamicContentAction>
+					</xp:actionGroup>
+				</xp:this.action>
+			</xp:eventHandler>
+		</xp:button>
+		<xp:button value="Cancel" id="button16">
+			<xp:eventHandler event="onclick" submit="true"
+				refreshMode="partial" refreshId="dynp">
+				<xp:this.action>
+					<xe:changeDynamicContentAction
+						facetName="empty">
+					</xe:changeDynamicContentAction>
+				</xp:this.action>
+			</xp:eventHandler>
+		</xp:button>
+	</xp:panel>
+</xp:view>

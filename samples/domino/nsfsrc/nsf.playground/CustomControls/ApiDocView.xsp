@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
 	<xp:div>
-		<xp:button value="Add Category" id="button1">
+		<xp:link escape="true" text="New Category " id="link4">
 			<xp:eventHandler event="onclick" submit="false"
 				id="eventHandler1">
 				<xp:this.script><![CDATA[var id = "#{javascript:compositeData.parentId}";
 XSP.showContent("#{id:dynp}","Category",{action:'editDocument',parentId:id})
 ]]></xp:this.script>
 			</xp:eventHandler>
-		</xp:button>
-		<xp:button value="Add API Entry" id="button3">
+		</xp:link>
+		<xp:link escape="true" text="New API " id="link5">
 			<xp:eventHandler event="onclick" submit="false"
 				id="eventHandler2">
 				<xp:this.script><![CDATA[var id = "#{javascript:compositeData.parentId}";
 XSP.showContent("#{id:dynp}","API",{action:'editDocument',parentId:id})
 ]]></xp:this.script>
 			</xp:eventHandler>
-		</xp:button>
-		<xp:button value="Delete Selected Entries" id="button2">
+		</xp:link>
+		<xp:link escape="true" text="Delete " id="link6">
 			<xp:eventHandler event="onclick" submit="true"
 				refreshMode="complete">
 				<xp:this.action>
@@ -26,7 +26,7 @@ XSP.showContent("#{id:dynp}","API",{action:'editDocument',parentId:id})
 					</xp:deleteSelectedDocuments>
 				</xp:this.action>
 			</xp:eventHandler>
-		</xp:button>
+		</xp:link>
 	</xp:div>
 	<xe:dataView id="dataView1" var="viewEntry"
 		collapsibleCategory="true" collapsibleRows="true" rows="10000"
@@ -54,6 +54,11 @@ XSP.showContent("#{id:dynp}","API",{action:'editDocument',parentId:id})
 						<xp:this.action><![CDATA[#{javascript:docBean.moveDown(viewEntry.getNoteID())}]]></xp:this.action>
 					</xp:eventHandler>
 				</xp:link>
+				<xp:link escape="true" id="link7">
+					<xp:image id="image1" url="/setcategory.png"></xp:image>
+					<xp:eventHandler event="onclick" submit="false">
+						<xp:this.script><![CDATA[XSP.openDialog('#{id:ChangeCategoryDialog}',null,{noteId:'#{javascript:viewEntry.getNoteID()}'});]]></xp:this.script>
+					</xp:eventHandler></xp:link>
 				<xp:link escape="true" id="link1" style="margin-left: 13px">
 					<xp:text escape="true" id="computedField1" value="#{viewEntry.Title}"
 						style="font-weight:bold">
@@ -68,5 +73,55 @@ XSP.showContent("#{id:dynp}",type,{action:'editDocument',documentId:id})
 			</xp:panel>
 		</xp:this.facets>
 	</xe:dataView>
+
+	<xe:dialog id="ChangeCategoryDialog" title="Select a Parent Category" style="width: 300px; height: 400px">
+		<xp:panel id="panel1" style="padding: 5px; width=100%; height: 100%; overflow-y: auto">
+			<xp:this.data>
+				<xe:objectData var="ctx">
+					<xe:this.createObject><![CDATA[#{javascript:var noteId = param['noteid']; 
+return {noteId:noteId}}]]></xe:this.createObject>
+				</xe:objectData>
+			</xp:this.data>
+			<xp:messages id="messages1"></xp:messages>
+			<xp:viewPanel rows="1000" id="viewPanel2" showColumnHeader="false">
+				<xp:this.data>
+					<xp:dominoView var="view3" expandLevel="64"
+						viewName="AllCategories">
+					</xp:dominoView>
+				</xp:this.data>
+				<xp:viewColumn columnName="Title" id="viewColumn1"
+					showCheckbox="true">
+				</xp:viewColumn>
+			</xp:viewPanel>
+			<xe:dialogButtonBar>
+				<xp:button value="Ok" id="button15" styleClass="lotusFormButton">
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="complete">
+						<xp:this.action><![CDATA[#{javascript:var viewPanel=getComponent("viewPanel2");
+var ids=viewPanel.getSelectedIds();
+if(ids.length==0) {
+	@ErrorMessage("An id must be selected");
+	return;
+}
+if(ids.length>1) {
+	@ErrorMessage("Only one id must be selected");
+	return;
+}
+var r = docBean.changeParent(ctx['noteId'],ids[0])
+if(r) {
+	@ErrorMessage(r);
+	return;
+}
+getComponent("ChangeCategoryDialog").hide("ID")}]]></xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
+				<xp:link id="button17" text="Cancel" styleClass="lotusAction">
+					<xp:eventHandler event="onclick" submit="false">
+						<xp:this.script><![CDATA[XSP.closeDialog('#{id:dialog1}')]]></xp:this.script>
+					</xp:eventHandler>
+				</xp:link>
+			</xe:dialogButtonBar>
+		</xp:panel>
+	</xe:dialog>
 
 </xp:view>

@@ -2,7 +2,7 @@
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
 	xmlns:xe="http://www.ibm.com/xsp/coreex">
 	<xp:panel id="panel16">
-		<xp:button value="Save" id="button15">
+		<xp:button value="Save" id="button15" loaded="${javascript:userBean.canCreateDocs}">
 			<xp:eventHandler event="onclick" submit="true"
 				refreshMode="partial" refreshId="dynp">
 				<xp:this.action>
@@ -23,6 +23,16 @@
 						facetName="empty">
 					</xe:changeDynamicContentAction>
 				</xp:this.action>
+			</xp:eventHandler>
+		</xp:button>
+		<xp:button value="Duplicate" id="button1" style="margin-left: 2em" loaded="${javascript:userBean.canCreateDocs}">
+			<xp:eventHandler event="onclick" submit="true"
+				refreshMode="partial" refreshId="djTabContainer1">
+				<xp:this.action><![CDATA[#{javascript:var doc = database.createDocument();
+document1.getDocument().copyAllItems(doc,true);
+doc.replaceItemValue("Title","Copy Of "+doc.getItemValueString("Title"));
+doc.save();
+}]]></xp:this.action>
 			</xp:eventHandler>
 		</xp:button>
 	</xp:panel>

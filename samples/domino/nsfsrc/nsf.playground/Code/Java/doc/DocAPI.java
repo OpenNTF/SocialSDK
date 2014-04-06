@@ -104,6 +104,7 @@ public class DocAPI {
 		Document doc = db.getDocumentByID(noteID);
 		Document newParent = db.getDocumentByID(newParentID);
 		doc.makeResponse(newParent);
+		doc.save();
 		return null;
 	}
 	

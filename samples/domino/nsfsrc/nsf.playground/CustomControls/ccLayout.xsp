@@ -60,7 +60,11 @@ if(compositeData.wholePage)view.setStyle("overflow: hidden");}]]></xp:this.after
 						loaded="${javascript:optionsBean.explorerEnabled}" page="/Explorer.xsp"
 						selection="/Explorer">
 					</xe:pageTreeNode>
-					<xe:basicContainerNode label="Documentation">
+					<xe:pageTreeNode label="API Documentation"
+						loaded="${javascript:optionsBean.apiDocumentationEnabled}" page="/ApiDocumentation.xsp"
+						selection="/ApiDocumentation">
+					</xe:pageTreeNode>
+					<xe:basicContainerNode label="References">
 						<xe:this.children>
 							<xe:basicLeafNode label="IBM developerWorks"
 								href="https://developer.ibm.com/social/">

@@ -1,11 +1,9 @@
-package doc;
+package nsf.playground.beans;
 
 import java.io.StringReader;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
-
-import nsf.playground.extension.ImportOptions;
 
 import lotus.domino.Database;
 import lotus.domino.Document;
@@ -15,6 +13,9 @@ import lotus.domino.NotesException;
 import lotus.domino.View;
 import lotus.domino.ViewEntry;
 import lotus.domino.ViewNavigator;
+import nsf.playground.extension.ImportOptions;
+import nsf.playground.extension.PlaygroundExtensionFactory;
+import nsf.playground.util.JsonTreeFromDominoView;
 
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.TextUtil;
@@ -22,17 +23,20 @@ import com.ibm.commons.util.io.json.JsonGenerator;
 import com.ibm.commons.util.io.json.JsonJavaFactory;
 import com.ibm.commons.util.io.json.JsonParser;
 import com.ibm.commons.xml.DOMUtil;
-import com.ibm.sbt.playground.extension.PlaygroundExtensionFactory;
 import com.ibm.xsp.component.UIInputEx;
 import com.ibm.xsp.context.FacesContextEx;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
 import com.ibm.xsp.model.domino.wrapped.DominoDocument;
 
-import doc.JsonTree.TreeModel;
 
-public class DocAPI {
-
-	public static class DocTreeModel implements TreeModel {
+/**
+ * Classes that encapsulates the business logic for the API documentation editor.
+ * 
+ * @author priand
+ */
+public abstract class DocBean {
+	
+	public static class DocTreeModel implements nsf.playground.util.JsonTreeFromDominoView.TreeModel {
 		public boolean isLeaf(ViewEntry ve) throws NotesException {
 			String form = (String)ve.getColumnValues().get(1);
 			return StringUtil.endsWithIgnoreCase(form, "API");
@@ -40,7 +44,7 @@ public class DocAPI {
 	}
 	
 	public String getEntriesAsJson() throws Exception {
-		JsonTree tree = new JsonTree();
+		JsonTreeFromDominoView tree = new JsonTreeFromDominoView();
 		return tree.generateAsStringHier(new DocTreeModel(), "AllDocumentation", true);
 	}
 

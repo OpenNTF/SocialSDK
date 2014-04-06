@@ -9,36 +9,11 @@
 	<xe:formTable id="formTable1" formTitle="API Category"
 		formDescription="" labelWidth="12em">
 		<xp:this.facets>
-			<xp:panel xp:key="footer" id="panel3">
-				<xp:panel id="panel2">
-					<xp:button value="Save" id="button1">
-						<xp:eventHandler event="onclick" submit="true"
-							refreshMode="complete">
-							<xp:this.action>
-								<xp:actionGroup>
-									<xp:saveDocument var="document1"></xp:saveDocument>
-									<xe:changeDynamicContentAction
-										facetName="view">
-									</xe:changeDynamicContentAction>
-								</xp:actionGroup>
-							</xp:this.action>
-						</xp:eventHandler>
-					</xp:button>
-					<!--
-						<xp:button value="Cancel" id="button2"
-						onclick="window.history.back()"> </xp:button>
-					-->
-					<xp:button value="Cancel" id="button3" onclick="window.history.back()">
-						<xp:eventHandler event="onclick" submit="true"
-							refreshMode="partial" refreshId="dynp">
-							<xp:this.action>
-								<xe:changeDynamicContentAction
-									facetName="view">
-								</xe:changeDynamicContentAction>
-							</xp:this.action>
-						</xp:eventHandler>
-					</xp:button>
-				</xp:panel>
+			<xp:panel xp:key="header" id="panel3">
+				<xc:ApiDocFormButtonBar></xc:ApiDocFormButtonBar>
+			</xp:panel>
+			<xp:panel xp:key="footer" id="panel1">
+				<xc:ApiDocFormButtonBar></xc:ApiDocFormButtonBar>
 			</xp:panel>
 		</xp:this.facets>
 		<xe:formRow id="formRow8" label="Title:">

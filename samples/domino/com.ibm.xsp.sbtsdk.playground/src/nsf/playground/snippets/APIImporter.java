@@ -18,14 +18,12 @@ import nsf.playground.json.JsonJavaObjectI;
 
 import com.ibm.commons.runtime.util.URLEncoding;
 import com.ibm.commons.util.PathUtil;
-import com.ibm.commons.util.QuickSort.StringArray;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.json.JsonException;
 import com.ibm.commons.util.io.json.JsonGenerator;
 import com.ibm.commons.util.io.json.JsonJavaFactory;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.commons.util.io.json.JsonParser;
-import com.ibm.commons.util.io.json.util.JsonDump;
 import com.ibm.sbt.playground.assets.Asset;
 import com.ibm.sbt.playground.assets.AssetNode;
 import com.ibm.sbt.playground.assets.Node;
@@ -217,7 +215,7 @@ public class APIImporter extends AssetImporter {
 						apiDoc = new APIDocument(products,apiExplorerPath);
 						apiDocs.put(apiExplorerPath, apiDoc);
 					}
-					JsonJavaObject je = createAPIEntry(client, doc, i, action);
+					JsonJavaObject je = createAPIEntry(client, doc, i, entry.unid, action);
 					apiDoc.content.add(je);
 				}
 			}
@@ -256,17 +254,25 @@ public class APIImporter extends AssetImporter {
 		return false;
 	}
 	
-	protected JsonJavaObject createAPIEntry(RestClient client, JsonJavaObject e, int method, AsyncAction action) throws Exception {
+	protected JsonJavaObject createAPIEntry(RestClient client, JsonJavaObject e, int method, String notesId, AsyncAction action) throws Exception {
 		JsonJavaObject je = new JsonJavaObject();
-		//String name = (String)e.get("Title");
+		
+		// IBM Doc Wiki
 		String name = (String)e.get("displaysubject");
+		if(StringUtil.isEmpty(name)) {
+			// Regular Playground Wiki
+			name = (String)e.get("Title");
+		}
 		put(je,"name", name);
 		put(je,"description", e.get("Abstract"));
+		
+		// UNID for the documentation entry
 		String unid=Node.encodeUnid(name);
 		if(method>1) {
 			unid = unid + "_" + Integer.toString(method);
 		}
 		put(je,"unid", unid);
+		
 		JsonJavaObject rd = (JsonJavaObject)((List)e.get("RequestsDetails")).get(method);
 		if(rd!=null) {
 			put(je,"http_method", rd.get("method") );
@@ -293,21 +299,29 @@ public class APIImporter extends AssetImporter {
 			put(je,"queryParameters", e.get("QueryParameters") );
 			put(je,"headers", e.get("Headers") );
 			
+			// res_title is from the IBM documentation wiki only
 			String resId = e.getString("res_title");
-			if(StringUtil.isEmpty(resId)) {
-				resId = unid;
+			if(StringUtil.isNotEmpty(resId)) {
+				String docUrl = PathUtil.concat(client.getBaseUrl(), "/dx/"+resId, '/');
+				// Fix when it comes from the staging server
+				// ex: http://dwlhub.swg.usma.ibm.com/ldd/apiwiki.nsf/dx/Getting_the_All_Communities_feed_ic45
+				//     http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.5+API+Documentation#action=openDocument&res_title=Getting_the_All_Communities_feed_ic45&content=pdcontent
+				//     http://www-10.lotus.com/ldd/ddwiki.nsf/dx/Database_collection_GET_dds10
+				if(docUrl.startsWith("http://dwlhub.swg.usma.ibm.com/ldd/apiwiki.nsf/")) {
+					docUrl = "http://www-10.lotus.com/ldd/appdevwiki.nsf/"+docUrl.substring("http://dwlhub.swg.usma.ibm.com/ldd/apiwiki.nsf/".length());
+//				} else if(docUrl.startsWith("http://dwlhub.swg.usma.ibm.com/ldd/apiwiki.nsf/")) {
+//					docUrl = "http://www-10.lotus.com/ldd/ddwiki.nsf/"+docUrl.substring("http://dwlhub.swg.usma.ibm.com/ldd/apiwiki.nsf/".length());
+				}
+				put(je,"doc_url",docUrl);
+			} else {
+				// Regular documentation path
+				// The Playground should be accessed as HTTPS so we force it here
+				String docUrl = PathUtil.concat(client.getBaseUrl(), "/ApiDocumentation.xsp#content=API&action=editDocument&documentId="+notesId, '/');
+				if(docUrl.startsWith("http://")) {
+					docUrl = "https://"+docUrl.substring(7);
+				}
+				put(je,"doc_url",docUrl);
 			}
-			String docUrl = PathUtil.concat(client.getBaseUrl(), "/dx/"+resId, '/');
-			// Fix when it comes from the staging server
-			// ex: http://dwlhub.swg.usma.ibm.com/ldd/apiwiki.nsf/dx/Getting_the_All_Communities_feed_ic45
-			//     http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.5+API+Documentation#action=openDocument&res_title=Getting_the_All_Communities_feed_ic45&content=pdcontent
-			//     http://www-10.lotus.com/ldd/ddwiki.nsf/dx/Database_collection_GET_dds10
-			if(docUrl.startsWith("http://dwlhub.swg.usma.ibm.com/ldd/apiwiki.nsf/")) {
-				docUrl = "http://www-10.lotus.com/ldd/appdevwiki.nsf/"+docUrl.substring("http://dwlhub.swg.usma.ibm.com/ldd/apiwiki.nsf/".length());
-//			} else if(docUrl.startsWith("http://dwlhub.swg.usma.ibm.com/ldd/apiwiki.nsf/")) {
-//				docUrl = "http://www-10.lotus.com/ldd/ddwiki.nsf/"+docUrl.substring("http://dwlhub.swg.usma.ibm.com/ldd/apiwiki.nsf/".length());
-			}
-			put(je,"doc_url",docUrl);
 		}
 		return je;
 	}

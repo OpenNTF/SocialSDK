@@ -1,20 +1,15 @@
 <?xml version='1.0' encoding='utf-8'?>
-<note class='form' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='85257AA80077A28B'>
-<noteinfo noteid='5c6' unid='E3FC74269DF8315285257B73005E8203' sequence='9'>
+<note class='form' xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.0'
+ replicaid='85257CAE007B4851'>
+<noteinfo noteid='39a' unid='E3FC74269DF8315285257B73005E8203' sequence='109'>
 <created><datetime dst='true'>20130522T131216,67-04</datetime></created>
-<modified><datetime dst='true'>20130730T084306,12-04</datetime></modified>
-<revised><datetime dst='true'>20130730T084306,11-04</datetime></revised>
-<lastaccessed><datetime dst='true'>20130730T084306,12-04</datetime></lastaccessed>
-<addedtofile><datetime dst='true'>20130522T131216,80-04</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></updatedby>
-<wassignedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></wassignedby>
+<modified><datetime dst='true'>20140405T121837,31-04</datetime></modified>
+<revised><datetime dst='true'>20140405T121837,30-04</datetime></revised>
+<lastaccessed><datetime dst='true'>20140405T121837,30-04</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20140402T182637,96-04</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Philippe Riand/O=priand</name></updatedby>
+<wassignedby><name>CN=Philippe Riand/O=priand</name></wassignedby>
 <item name='$Comment' sign='true'><text/></item>
-<item name='RequestParameters' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='ResponseParameters' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
 <item name='$HTMLCode' sign='true'>
 <rawitemdata type='1'>
 X/8QAAIADwAHAAAAAAAAAA==
@@ -25,6 +20,7 @@ X/8QAAIADwAHAAAAAAAAAA==
 hhgBAIAAAAAAgAAAAQABAP///wAQAAAA
 </rawitemdata></item>
 <item name='$Flags'><text/></item>
+<item name='$XPageAltClient'><text>ApiDocumentation.xsp</text></item>
 <item name='$DesignerVersion'><text>8.5.3</text></item>
 <item name='$Fonts'>
 <rawitemdata type='1'>
@@ -74,6 +70,9 @@ AAAAAAAAAAA=
 <item name='RequestContentType' placeholder='true'>
 <rawitemdata type='0'>
 </rawitemdata></item>
+<item name='RequestFields' placeholder='true'>
+<rawitemdata type='0'>
+</rawitemdata></item>
 <item name='RequestFormat' placeholder='true'>
 <rawitemdata type='0'>
 </rawitemdata></item>
@@ -84,6 +83,9 @@ AAAAAAAAAAA=
 <rawitemdata type='0'>
 </rawitemdata></item>
 <item name='ResponseContentType' placeholder='true'>
+<rawitemdata type='0'>
+</rawitemdata></item>
+<item name='ResponseFields' placeholder='true'>
 <rawitemdata type='0'>
 </rawitemdata></item>
 <item name='ResponseFormat' placeholder='true'>
@@ -104,20 +106,15 @@ AAAAAAAAAAA=
 <item name='Examples' placeholder='true'>
 <rawitemdata type='0'>
 </rawitemdata></item>
-<item name='RequestFields' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='ResponseFields' placeholder='true'>
-<rawitemdata type='0'>
-</rawitemdata></item>
-<item name='$Fields'><textlist><text>ResponseFields</text><text>RequestFields</text><text
->Examples</text><text>References</text><text>Playground</text><text>APIExplorerEndpoint</text><text
->ResponseStatus</text><text>ResponseFormat</text><text>ResponseContentType</text><text
+<item name='$Fields'><textlist><text>Examples</text><text>References</text><text
+>Playground</text><text>APIExplorerEndpoint</text><text>ResponseStatus</text><text
+>ResponseFormat</text><text>ResponseFields</text><text>ResponseContentType</text><text
 >ResponseHeaders</text><text>RequestSample</text><text>RequestFormat</text><text
->RequestContentType</text><text>QueryParameters</text><text>URLParameters</text><text
->Headers</text><text>RequestsDetails</text><text>Requests</text><text>Description</text><text
->Deprecated</text><text>Since</text><text>Products</text><text>Abstract</text><text
->Title</text><text>OrderTS</text><text>Form</text></textlist></item>
+>RequestFields</text><text>RequestContentType</text><text>QueryParameters</text><text
+>URLParameters</text><text>Headers</text><text>RequestsDetails</text><text
+>Requests</text><text>Description</text><text>Deprecated</text><text>Since</text><text
+>Products</text><text>Abstract</text><text>Title</text><text>OrderTS</text><text
+>Form</text></textlist></item>
 <item name='$Body' sign='true'>
 <rawitemdata type='1'>
 gQKC/1oAAQAAAAAAAAAAAKAFAACgBQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA

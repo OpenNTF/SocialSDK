@@ -36,7 +36,7 @@ dojo.addOnLoad(function() {
 				<xp:div
 					style="overflow-y: auto; height:100%; padding-right: 1em;">
 					<xe:dynamicContent id="dynp" defaultFacet="empty"
-						partialEvents="true">
+						partialEvents="true" useHash="true">
 						<xp:this.facets>
 							<xp:panel xp:key="empty" id="panel2">
 								Please, select a documentation entry on

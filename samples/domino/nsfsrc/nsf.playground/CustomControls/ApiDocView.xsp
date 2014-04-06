@@ -1,89 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
 	<xp:div>
-		<xp:link escape="true" text="New Category " id="link4">
-			<xp:eventHandler event="onclick" submit="false"
-				id="eventHandler1">
-				<xp:this.script><![CDATA[var id = "#{javascript:compositeData.parentId}";
-XSP.showContent("#{id:dynp}","Category",{action:'editDocument',parentId:id})
-]]></xp:this.script>
-			</xp:eventHandler>
-		</xp:link>
-		<xp:link escape="true" text="New API " id="link5">
-			<xp:eventHandler event="onclick" submit="false"
-				id="eventHandler2">
-				<xp:this.script><![CDATA[var id = "#{javascript:compositeData.parentId}";
-XSP.showContent("#{id:dynp}","API",{action:'editDocument',parentId:id})
-]]></xp:this.script>
-			</xp:eventHandler>
-		</xp:link>
-		<xp:link escape="true" text="Delete " id="link6">
-			<xp:eventHandler event="onclick" submit="true"
-				refreshMode="complete">
-				<xp:this.action>
-					<xp:deleteSelectedDocuments view="dataView1"
-						message="Are you sure that you want to delete these entries?">
-					</xp:deleteSelectedDocuments>
-				</xp:this.action>
-			</xp:eventHandler>
-		</xp:link>
+		<xe:listInline loaded="${javascript:userBean.canCreateDocs}">
+			<xp:link escape="true" text="New Category " id="link4">
+				<xp:eventHandler event="onclick" submit="false"
+					id="eventHandler1">
+					<xp:this.script><![CDATA[var id = "#{javascript:compositeData.parentId}";
+	XSP.showContent("#{id:dynp}","Category",{action:'editDocument',parentId:id})
+	]]></xp:this.script>
+				</xp:eventHandler>
+			</xp:link>
+			<xp:link escape="true" text="New API " id="link5">
+				<xp:eventHandler event="onclick" submit="false"
+					id="eventHandler2">
+					<xp:this.script><![CDATA[var id = "#{javascript:compositeData.parentId}";
+	XSP.showContent("#{id:dynp}","API",{action:'editDocument',parentId:id})
+	]]></xp:this.script>
+				</xp:eventHandler>
+			</xp:link>
+			<xp:link escape="true" text="Delete " id="link6">
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="complete">
+					<xp:this.action>
+						<xp:deleteSelectedDocuments view="dataView1"
+							message="Are you sure that you want to delete these entries?">
+						</xp:deleteSelectedDocuments>
+					</xp:this.action>
+				</xp:eventHandler>
+			</xp:link>
+		</xe:listInline>
 	</xp:div>
-	<xe:dataView id="dataView1" var="viewEntry"
-		collapsibleCategory="true" collapsibleRows="true" rows="10000"
-		showCheckbox="${javascript:userBean.canCreateDocs}" style="margin-left: 25px">
-		<xe:this.data>
-			<xp:dominoView var="view1" viewName="AllDocumentation"
-				parentId="#{javascript:compositeData.parentId}" expandLevel="64">
-			</xp:dominoView>
-		</xe:this.data>
-		<xp:this.facets>
-			<xe:pagerExpand id="pagerExpand1" xp:key="pagerTopLeft">
-			</xe:pagerExpand>
-			<xp:panel xp:key="summary" style="">
-				<xp:link escape="true" id="link2">
-					<xp:image id="image2" url="/arrowup.png"></xp:image>
-					<xp:eventHandler event="onclick" submit="true"
-						refreshMode="partial" refreshId="dataView1">
-						<xp:this.action><![CDATA[#{javascript:docBean.moveUp(viewEntry.getNoteID())}]]></xp:this.action>
-					</xp:eventHandler>
-				</xp:link>
-				<xp:link escape="true" id="link3">
-					<xp:image id="image3" url="/arrowdn.png"></xp:image>
-					<xp:eventHandler event="onclick" submit="true"
-						refreshMode="partial" refreshId="dataView1">
-						<xp:this.action><![CDATA[#{javascript:docBean.moveDown(viewEntry.getNoteID())}]]></xp:this.action>
-					</xp:eventHandler>
-				</xp:link>
-				<xp:link escape="true" id="link7">
-					<xp:image id="image1" url="/setcategory.png"></xp:image>
-					<xp:eventHandler event="onclick" submit="false">
-						<xp:this.script><![CDATA[XSP.openDialog('#{id:ChangeCategoryDialog}',null,{noteId:'#{javascript:viewEntry.getNoteID()}'});]]></xp:this.script>
-					</xp:eventHandler></xp:link>
-				<xp:link escape="true" id="link1" style="margin-left: 13px">
-					<xp:text escape="true" id="computedField1" value="#{viewEntry.Title}"
-						style="font-weight:bold">
-					</xp:text>
-					<xp:eventHandler event="onclick" submit="false">
-						<xp:this.script><![CDATA[var type = "#{javascript:viewEntry.getColumnValue('type')}";
-var id = "#{javascript:viewEntry.getNoteID()}";
-XSP.showContent("#{id:dynp}",type,{action:'editDocument',documentId:id})
-]]></xp:this.script>
-					</xp:eventHandler>
-				</xp:link>
-			</xp:panel>
-		</xp:this.facets>
-	</xe:dataView>
-
+	<xp:div style="margin-left: -25px">
+		<xe:dataView id="dataView1" var="viewEntry"
+			collapsibleCategory="true" collapsibleRows="true" rows="10000"
+			showCheckbox="${javascript:userBean.canCreateDocs}" style="margin-left: 25px">
+			<xe:this.data>
+				<xp:dominoView var="view1" viewName="AllDocumentation"
+					parentId="#{javascript:compositeData.parentId}"
+					expandLevel="#{javascript:return compositeData.parentId ? 1 : 64}">
+				</xp:dominoView>
+			</xe:this.data>
+			<xp:this.facets>
+				<xp:panel xp:key="summary" style="">
+					<xp:link escape="true" id="link2">
+						<xp:image id="image2" url="/arrowup.png"></xp:image>
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="partial" refreshId="dataView1">
+							<xp:this.action><![CDATA[#{javascript:docBean.moveUp(viewEntry.getNoteID())}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:link>
+					<xp:link escape="true" id="link3">
+						<xp:image id="image3" url="/arrowdn.png"></xp:image>
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="partial" refreshId="dataView1">
+							<xp:this.action><![CDATA[#{javascript:docBean.moveDown(viewEntry.getNoteID())}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:link>
+					<xp:link escape="true" id="link7">
+						<xp:image id="image1" url="/setcategory.png"></xp:image>
+						<xp:eventHandler event="onclick" submit="false">
+							<xp:this.script><![CDATA[XSP.openDialog('#{id:ChangeCategoryDialog}',null,{noteId:'#{javascript:viewEntry.getNoteID()}'});]]></xp:this.script>
+						</xp:eventHandler></xp:link>
+					<xp:link escape="true" id="link1" style="margin-left: 13px">
+						<xp:text escape="true" id="computedField1" value="#{viewEntry.Title}"
+							style="font-weight:bold">
+						</xp:text>
+						<xp:eventHandler event="onclick" submit="false">
+							<xp:this.script><![CDATA[var type = "#{javascript:viewEntry.getColumnValue('type')}";
+	var id = "#{javascript:viewEntry.getNoteID()}";
+	XSP.showContent("#{id:dynp}",type,{action:'editDocument',documentId:id})
+	]]></xp:this.script>
+						</xp:eventHandler>
+					</xp:link>
+				</xp:panel>
+			</xp:this.facets>
+		</xe:dataView>
+	</xp:div>
 	<xe:dialog id="ChangeCategoryDialog" title="Select a Parent Category" style="width: 300px; height: 400px">
 		<xp:panel id="panel1" style="padding: 5px; width=100%; height: 100%; overflow-y: auto">
 			<xp:this.data>
 				<xe:objectData var="ctx">
-					<xe:this.createObject><![CDATA[#{javascript:var noteId = param['noteid']; 
+					<xe:this.createObject><![CDATA[#{javascript:var noteId = param['noteId']; 
 return {noteId:noteId}}]]></xe:this.createObject>
 				</xe:objectData>
 			</xp:this.data>
 			<xp:messages id="messages1"></xp:messages>
-			<xp:viewPanel rows="1000" id="viewPanel2" showColumnHeader="false">
+			<xp:viewPanel rows="1000" id="viewPanel2"
+				showColumnHeader="false" viewStyle="margin-left: 0">
 				<xp:this.data>
 					<xp:dominoView var="view3" expandLevel="64"
 						viewName="AllCategories">
@@ -112,7 +115,7 @@ if(r) {
 	@ErrorMessage(r);
 	return;
 }
-getComponent("ChangeCategoryDialog").hide("ID")}]]></xp:this.action>
+getComponent("ChangeCategoryDialog").hide("djTabContainer1")}]]></xp:this.action>
 					</xp:eventHandler>
 				</xp:button>
 				<xp:link id="button17" text="Cancel" styleClass="lotusAction">

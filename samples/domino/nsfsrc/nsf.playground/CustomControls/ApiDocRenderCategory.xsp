@@ -2,7 +2,7 @@
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
 	xmlns:xe="http://www.ibm.com/xsp/coreex">
 	<xp:this.data>
-		<xp:dominoDocument var="document1" formName="Category"
+		<xp:dominoDocument var="document1" formName="Category" loaded="${javascript:!compositeData.print}"
 			computeWithForm="onload">
 		</xp:dominoDocument>
 	</xp:this.data>

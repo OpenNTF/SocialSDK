@@ -2,7 +2,7 @@
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
 	<xp:div>
 		<xe:listInline loaded="${javascript:userBean.canCreateDocs}">
-			<xp:link escape="true" text="New Category " id="link4">
+			<xp:link escape="true" text="New Category" id="link4">
 				<xp:eventHandler event="onclick" submit="false"
 					id="eventHandler1">
 					<xp:this.script><![CDATA[var id = "#{javascript:compositeData.parentId}";
@@ -10,7 +10,7 @@
 	]]></xp:this.script>
 				</xp:eventHandler>
 			</xp:link>
-			<xp:link escape="true" text="New API " id="link5">
+			<xp:link escape="true" text="New API" id="link5">
 				<xp:eventHandler event="onclick" submit="false"
 					id="eventHandler2">
 					<xp:this.script><![CDATA[var id = "#{javascript:compositeData.parentId}";
@@ -18,7 +18,7 @@
 	]]></xp:this.script>
 				</xp:eventHandler>
 			</xp:link>
-			<xp:link escape="true" text="Delete " id="link6">
+			<xp:link escape="true" text="Delete" id="link6">
 				<xp:eventHandler event="onclick" submit="true"
 					refreshMode="complete">
 					<xp:this.action>
@@ -26,6 +26,11 @@
 							message="Are you sure that you want to delete these entries?">
 						</xp:deleteSelectedDocuments>
 					</xp:this.action>
+				</xp:eventHandler>
+			</xp:link>
+			<xp:link escape="true" text="Refresh" id="link8" loaded="${javascript:!compositeData.parentId}">
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script><![CDATA[location.reload()]]></xp:this.script>
 				</xp:eventHandler>
 			</xp:link>
 		</xe:listInline>

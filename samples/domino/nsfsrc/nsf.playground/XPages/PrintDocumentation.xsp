@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex" dojoParseOnLoad="true">
+
+	<xp:this.resources>
+		<xp:styleSheet href="/apirender.css"></xp:styleSheet>
+	</xp:this.resources>
+
+	<xp:this.data>
+		<xp:dominoView var="view1" viewName="AllDocumentation"></xp:dominoView>
+	</xp:this.data>
+
+	<h1>Documentation</h1>
+	<xp:repeat id="repeat1" rows="10000" value="#{view1}" var="viewEntry">
+		<xp:panel>
+			<xp:this.data>
+				<xp:dominoDocument var="document1" action="openDocument"
+					documentId="#{javascript:viewEntry.getNoteID()}" scope="request">
+				</xp:dominoDocument>
+			</xp:this.data>
+			<xe:switchFacet
+				selectedFacet="#{javascript:return document1.getForm().toLowerCase()}" defaultFacet="other">
+				<xe:this.facets>
+					<xp:div xp:key="category" >
+						<hr/>
+						<xc:ApiDocRenderCategory print="true"></xc:ApiDocRenderCategory>
+					</xp:div>
+					<xp:div xp:key="api">
+						<hr/>
+						<xc:ApiDocRenderApi print="true"></xc:ApiDocRenderApi>
+					</xp:div>
+					<xp:div xp:key="other">
+						<xp:text escape="true" id="computedField4"
+							value="#{javascript:'ERROR='+document1.getNoteID()+', FORM='+document1.getForm()}">
+						</xp:text>
+					</xp:div>
+				</xe:this.facets>
+			</xe:switchFacet>
+		</xp:panel>
+	</xp:repeat>
+</xp:view>

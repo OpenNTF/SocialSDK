@@ -230,6 +230,7 @@ function clearResultsPanel(id,code,headers,body) {
 }
 
 function updateResponse(id,content) {
+	var endTs = Date.now();
 	// TEMP for Dojo 1.6
 	require(['dojo/query','sbt/dom'], function(query,dom) {
 	//require(['dojo','sbt/dom'], function(query,dom) {
@@ -255,7 +256,6 @@ function updateResponse(id,content) {
 		update(".respBody",content.body);
 		dojo.style(dojo.query(".respProgress",id)[0],"display","none");
 		if(content.startTs) {
-			var endTs = Date.now();
 			var sec = (endTs-content.startTs)/1000;
 			update(".respTime",sec);
 		} else {

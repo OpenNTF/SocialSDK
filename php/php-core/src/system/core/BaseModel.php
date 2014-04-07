@@ -22,7 +22,8 @@
  *
  * @author Benjamin Jakobus
  */
-class BaseModel {
+class BaseModel 
+{
 	
 	// TODO: Add input validation methods here
 	

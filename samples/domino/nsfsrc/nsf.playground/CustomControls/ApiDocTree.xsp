@@ -9,8 +9,9 @@
 
 	<xe:djBorderContainer style="height: 100%">
 		<xe:djBorderPane region="top">
-			<xp:div loaded="${javascript:userBean.canCreateDocs}">
-				<xp:link escape="true" text="Edit Documentation" id="link3" value="/ApiEditor.xsp"></xp:link>
+			<xp:div>
+				<xp:link escape="true" text="Edit Documentation" id="link3" value="/ApiEditor.xsp"  loaded="${javascript:userBean.canCreateDocs}"></xp:link>
+				<xp:link escape="true" text="Print Documentation" id="link4" value="/PrintDocumentation.xsp"></xp:link>
 			</xp:div>
 			<span title="Expand All" style="margin-left:3px;margin-right:3px">
 				<xp:link escape="true" id="link1">

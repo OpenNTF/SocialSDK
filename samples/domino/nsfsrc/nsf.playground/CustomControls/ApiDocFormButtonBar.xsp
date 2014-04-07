@@ -2,15 +2,21 @@
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
 	xmlns:xe="http://www.ibm.com/xsp/coreex">
 	<xp:panel id="panel16">
+		<xp:messages id="messages1"></xp:messages>
 		<xp:button value="Save" id="button15" loaded="${javascript:userBean.canCreateDocs}">
 			<xp:eventHandler event="onclick" submit="true"
 				refreshMode="partial" refreshId="dynp">
 				<xp:this.action>
 					<xp:actionGroup>
 						<xp:saveDocument var="document1"></xp:saveDocument>
-						<xe:changeDynamicContentAction
+						<!-- 						
+							<xe:changeDynamicContentAction
 							facetName="empty">
-						</xe:changeDynamicContentAction>
+							</xe:changeDynamicContentAction>
+						-->
+						<xp:executeScript>
+							<xp:this.script><![CDATA[#{javascript:@InfoMessage("Document is saved")}]]></xp:this.script>
+						</xp:executeScript>
 					</xp:actionGroup>
 				</xp:this.action>
 			</xp:eventHandler>

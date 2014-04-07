@@ -1,4 +1,4 @@
-<script type="text/template" id="filesViewRow">
+<script type="text/template" id="filesViewRow-***REMOVED*** echo $timestamp; ?>">
 <tr>
 	<td style="width:120px; display: inline-block; word-wrap:break-word; padding-left: 25px;">
 			<span dojoAttachPoint="placeLinkNode">
@@ -11,7 +11,7 @@
 	</td>
 </tr>
 </script>
-<script type="text/template" id="pagingHeader">
+<script type="text/template" id="filesViewPagingHeader-***REMOVED*** echo $timestamp; ?>">
 <div dojoAttachPoint="pagingHeader">
 	<div>
 		<hr style="width:90%; margin: 0.7em 0; left: -30px; border: 0; height: 1px;"/>
@@ -29,7 +29,7 @@
 		</div>
 </div>
 </script>
-<script type="text/template" id="pagingFooter">
+<script type="text/template" id="pagingFooter-***REMOVED*** echo $timestamp; ?>">
 <div dojoattachpoint="pagingFooter" class="lotusPaging" style="">
 	<div>
 		<hr style="width:90%; margin: 0.7em 0; left: -30px; border: 0; height: 1px;"/>
@@ -55,13 +55,13 @@
 </div>
 </script>
 
-<script type="text/template" id="actionTemplate">
+<script type="text/template" id="actionTemplate-***REMOVED*** echo $timestamp; ?>">
 <span id="${id}">
 <input type="button" value="${name}" class="btn" role="button" data-dojo-attach-point="actionNameNode"></input>
 </span>
 </script>
 
-<script type="text/template" id="moveToTrashTemplate">
+<script type="text/template" id="moveToTrashTemplate-***REMOVED*** echo $timestamp; ?>">
 <div>
 	<div dojoattachpoint="messageDiv">
 		${moveToTrashMessage} 
@@ -72,7 +72,7 @@
 </div>
 </script>
 
-<script type="text/template" id="uploadFileTemplate">
+<script type="text/template" id="uploadFileTemplate-***REMOVED*** echo $timestamp; ?>">
 <div>
 	<form >
 	<table style="font-weight:700; margin:5px;">
@@ -130,7 +130,7 @@
 </div>
 </script>
 
-<script type="text/template" id="addTagsTemplate">
+<script type="text/template" id="addTagsTemplate-***REMOVED*** echo $timestamp; ?>">
 <div>	
 	<form class="form-inline">
 	<table cellpadding="0" class="table" role="presentation">
@@ -158,7 +158,7 @@
 </div>
 </script>
 
-<script type="text/template" id="shareFilesTemplate">
+<script type="text/template" id="shareFilesTemplate-***REMOVED*** echo $timestamp; ?>">
 <div>
 	<table role="presentation" class="table">
 		<tbody>
@@ -255,7 +255,7 @@
 </div>
 </script>
 
-<script type="text/template" id="dialogTemplate">
+<script type="text/template" id="dialogTemplate-***REMOVED*** echo $timestamp; ?>">
 <div role="dialog" style="z-index:5000; -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6); -webkit-border-radius: 6px; -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6); background:#CCC4C4; -moz-border-radius: 5px; color: black;" >
 	<div dojoattachpoint="titleBar" style="display: none;">
 		<span dojoattachpoint="titleNode"></span> 
@@ -282,7 +282,7 @@
 </div>
 </script>
 
-<script type="text/template" id="viewTemplate">
+<script type="text/template" id="viewTemplate-***REMOVED*** echo $timestamp; ?>">
 <div dojoAttachPoint="domNode">
 	<div dojoAttachPoint="mainNode">
 		<div role="alert" class="alert alert-success" style="z-index:5000; -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6); -webkit-border-radius: 6px; -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6); background:#CCC4C4; -moz-border-radius: 5px; color: black; display: none;" dojoattachpoint="messageNode">

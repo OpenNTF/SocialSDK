@@ -1,4 +1,4 @@
-<script type="text/template" id="communityRow">
+<script type="text/template" id="communityRow-***REMOVED*** echo $timestamp; ?>">
 <tr>
 	<td style="width:120px; display: inline-block; word-wrap:break-word; padding-left: 25px;">
 			<span dojoAttachPoint="placeLinkNode">
@@ -19,7 +19,7 @@
 	</td>
 </tr>
 </script>
-<script type="text/template" id="pagingHeader">
+<script type="text/template" id="communityPagingHeader-***REMOVED*** echo $timestamp; ?>">
 <div dojoAttachPoint="pagingHeader">
 	<div>
 		<hr style="width:90%; margin: 0.7em 0; left: -30px; border: 0; height: 1px;"/>
@@ -37,7 +37,7 @@
 		</div>
 </div>
 </script>
-<script type="text/template" id="pagingFooter">
+<script type="text/template" id="communityPagingFooter-***REMOVED*** echo $timestamp; ?>">
 <div dojoattachpoint="pagingFooter" class="lotusPaging" style="">
 	<div>
 		<hr style="width:90%; margin: 0.7em 0; left: -30px; border: 0; height: 1px;"/>

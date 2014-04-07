@@ -39,7 +39,8 @@ import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.connections.communities.CommunityList;
 import com.ibm.sbt.services.client.connections.communities.CommunityService;
 import com.ibm.sbt.services.client.connections.files.model.FileRequestParams;
-import com.ibm.sbt.services.endpoints.ConnectionsBasicEndpoint;
+import com.ibm.sbt.services.endpoints.Endpoint;
+import com.ibm.sbt.services.endpoints.EndpointFactory;
 import com.ibm.sbt.test.lib.TestEnvironment;
 
 public class FileServiceTest extends BaseUnitTest {
@@ -474,13 +475,7 @@ public class FileServiceTest extends BaseUnitTest {
 	@Test
 	public void testUploadCommunityFile() throws Exception {
 		try {
-		ConnectionsBasicEndpoint endpoint = new ConnectionsBasicEndpoint();
-		endpoint.setUrl("https://dev.sdkdemo.com:444");
-		endpoint.setUser("fadams");
-		endpoint.setPassword("quickstart01");
-		endpoint.setForceTrustSSLCertificate(true);
-		endpoint.setApiVersion("4.5");
-		CommunityService communityService = new CommunityService(endpoint);
+		CommunityService communityService = new CommunityService();
 		CommunityList communityList = communityService.getMyCommunities();
 		String communityUuid = null;
 		if (communityList.isEmpty()) {
@@ -491,7 +486,7 @@ public class FileServiceTest extends BaseUnitTest {
 		}
 		byte[] bytes = "HelloWord".getBytes();
 		ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
-		FileService fileService = new FileService(endpoint);
+		FileService fileService = new FileService();
 		fileService.uploadCommunityFile(bais, communityUuid, "HelloWord"+System.currentTimeMillis()+".txt", bytes.length);
 		} catch (Exception e) {
 			e.printStackTrace();

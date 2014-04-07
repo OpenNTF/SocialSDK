@@ -1,6 +1,9 @@
 <div id="***REMOVED*** echo (isset($instance['ibm-sbtk-element-id']) ? $instance['ibm-sbtk-element-id'] : $this->elID); ?>"></div>
 
 ***REMOVED*** 
+// Ensure that element IDs are unique
+$timestamp = time();
+
 if ((isset($instance['ibm-sbtk-template']) && $instance['ibm-sbtk-template'] != "")) {
 	require_once BASE_PATH . "{$instance['ibm-sbtk-template']}";
 } else {
@@ -11,14 +14,14 @@ if ((isset($instance['ibm-sbtk-template']) && $instance['ibm-sbtk-template'] != 
 <script type="text/javascript">
 	require(["sbt/dom", "sbt/connections/controls/files/FileGrid"], 
 		function(dom, FileGrid) {
-			var domNode = dom.byId("fileRow");
+			var domNode = dom.byId("fileRow-***REMOVED*** echo $timestamp; ?>");
 			var FileRow = domNode.text || domNode.textContent;
-		    domNode = dom.byId("pagingHeader");
+		    domNode = dom.byId("pagingHeader-***REMOVED*** echo $timestamp; ?>");
 		    var PagingHeader = domNode.text || domNode.textContent;
-		    domNode = dom.byId("pagingFooter");
+		    domNode = dom.byId("pagingFooter-***REMOVED*** echo $timestamp; ?>");
 		    var PagingFooter = domNode.text || domNode.textContent;
 		
-		    var grid = new FileGrid({
+		    var grid***REMOVED*** echo $timestamp; ?> = new FileGrid({
 		    	 type : "***REMOVED*** echo (isset($instance['ibm-sbtk-files-type']) ? $instance['ibm-sbtk-files-type'] : 'publicFiles');?>",
 		    	 endpoint: "***REMOVED*** echo (isset($instance['ibm-sbtk-endpoint']) ? $instance['ibm-sbtk-endpoint'] : 'connections'); ?>",
 		         hidePager: ***REMOVED*** echo (isset($instance['ibm-sbtk-grid-pager']) && $instance['ibm-sbtk-grid-pager'] == 'pager' ? "false" : "true"); ?>,
@@ -29,10 +32,10 @@ if ((isset($instance['ibm-sbtk-template']) && $instance['ibm-sbtk-template'] != 
 		    	 rendererArgs : { template : FileRow, pagerTemplate : PagingHeader, footerTemplate : PagingFooter}       	 
 		    });
 
-		    grid.renderer.tableClass = "table";
-		    grid.renderer.template = FileRow;
+		    grid***REMOVED*** echo $timestamp; ?>.renderer.tableClass = "table";
+		    grid***REMOVED*** echo $timestamp; ?>.renderer.template = FileRow;
 		    
-		    dom.byId("***REMOVED*** echo (isset($instance['ibm-sbtk-element-id']) ? $instance['ibm-sbtk-element-id'] : $this->elID); ?>").appendChild(grid.domNode);    
-		    grid.update();
+		    dom.byId("***REMOVED*** echo (isset($instance['ibm-sbtk-element-id']) ? $instance['ibm-sbtk-element-id'] : $this->elID); ?>").appendChild(grid***REMOVED*** echo $timestamp; ?>.domNode);    
+		    grid***REMOVED*** echo $timestamp; ?>.update();
 	});
 </script>

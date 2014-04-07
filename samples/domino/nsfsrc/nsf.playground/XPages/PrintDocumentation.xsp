@@ -10,7 +10,7 @@
 		<xp:dominoView var="view1" viewName="AllDocumentation"></xp:dominoView>
 	</xp:this.data>
 
-	<h1>Documentation</h1>
+	<h1>API Documentation</h1>
 	<xp:repeat id="repeat1" rows="10000" value="#{view1}" var="viewEntry">
 		<xp:panel style="page-break-before: always">
 			<xp:this.data>

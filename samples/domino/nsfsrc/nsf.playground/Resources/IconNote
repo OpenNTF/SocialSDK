@@ -1,14 +1,13 @@
 <?xml version='1.0' encoding='utf-8'?>
 <note default='true' class='icon' xmlns='http://www.lotus.com/dxl' version='9.0'
  replicaid='85257AA80077A28B'>
-<noteinfo noteid='122' unid='AE15BD165446EE0B852579F0005C6590' sequence='136'>
+<noteinfo noteid='122' unid='AE15BD165446EE0B852579F0005C6590' sequence='138'>
 <created><datetime dst='true'>20120430T124913,12-04</datetime></created>
-<modified><datetime>20131114T114748,22-05</datetime></modified>
-<revised><datetime>20131114T114748,21-05</datetime></revised>
-<lastaccessed><datetime>20131114T114748,22-05</datetime></lastaccessed>
+<modified><datetime dst='true'>20140407T084847,15-04</datetime></modified>
+<revised><datetime dst='true'>20140407T084847,14-04</datetime></revised>
+<lastaccessed><datetime dst='true'>20140407T084847,15-04</datetime></lastaccessed>
 <addedtofile><datetime>20121104T143444,82-05</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></updatedby>
-<wassignedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></wassignedby>
 <item name='IconBitmap' summary='true'>
 <rawitemdata type='6'>
 AiAgAQAA///////wD///gAH//gAAf/wAAD/4AAAf8AAAD+AAAAfgAAAHwAAAA8AAAAPAAAADgAAA
@@ -29,12 +28,12 @@ AAAAUEECICABAAD/////+A4DgA==
 <item name='$ImageExpires'><text>1</text></item>
 <item name='$JSExpires'><text>1</text></item>
 <item name='$DBTheme'><text>oneuiv2.1</text></item>
-<item name='$TITLE'><text>Social Business Toolkit - Playground</text></item>
-<item name='$DefaultXPage'><text>Home.xsp</text></item>
-<item name='$DefaultClientXPage'><text>Home.xsp</text></item>
 <item name='$Daos'><text>0</text></item>
-<item name='$Flags'><text>J?!</text></item>
 <item name='$LaunchXPageRunOnServer'><text>0</text></item>
-<item name='$FlagsNoRefresh'><text/></item>
-<item name='$AllowRESTDbAPI'><number>2</number></item></note>
+<item name='$AllowRESTDbAPI'><number>2</number></item>
+<item name='$DefaultClientXPage'><text>Home.xsp</text></item>
+<item name='$DefaultXPage'><text>Home.xsp</text></item>
+<item name='$TITLE'><text>Social Business Toolkit - Playground</text></item>
+<item name='$Flags'><text>J7?!</text></item>
+<item name='$FlagsNoRefresh'><text>rv</text></item></note>
 

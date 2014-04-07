@@ -391,7 +391,7 @@ public class SubscriberManagementService extends BssService {
     		Map<String, String> params = new HashMap<String, String>();
     		params.put("_force", force ? "true" : "false");
     		String serviceUrl = API_RESOURCE_SUBSCRIBER + "/" + subscriberId + "/seat/" + seatId;
-    		Response response = createData(serviceUrl, params, EntitleSubscriberHeader, (Object)null);
+    		Response response = createData(serviceUrl, params, RevokeSubscriberHeader, (Object)null);
     		
     		// expect a 204
     		int statusCode = response.getResponse().getStatusLine().getStatusCode();

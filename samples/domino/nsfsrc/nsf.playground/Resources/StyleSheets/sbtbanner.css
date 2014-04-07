@@ -1,0 +1,76 @@
+/* General */
+
+.lotusui30 .lotusBanner:before {
+    content: '.';
+    color: #000
+    height: 25px;
+    width: 100%;
+    background: #000;
+    display:block;
+}
+
+/* Banner */
+
+.lotusui30 .lotusBanner {
+    background: none repeat scroll 0 0 #008ABF;
+    border-bottom: none;
+    padding: 0;
+    position: relative;
+    font: 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* Background gradient */
+
+.lotusui30 .lotusBanner .lotusRightCorner {
+    background: linear-gradient(to bottom, #004E87 0%, #003053 100%) repeat scroll 0 0 transparent;
+    border-bottom: 1px solid #004E87;
+    border-top: 1px solid #999999;
+    overflow: hidden;
+    padding: 0.40em 0;
+}
+
+/* Links */
+
+.lotusui30 .lotusBanner ul.lotusUtility li a {
+    padding: none;
+}
+
+.lotusui30 .lotusBanner ul.lotusLinks li a, .lotusui30 .lotusBanner ul.lotusLinks li a:hover, .lotusui30 .lotusBanner ul.lotusLinks li a:focus, .lotusui30 .lotusBanner ul.lotusLinks li a:active {
+    color: #DEDEDE;
+}
+
+.lotusui30 .lotusBanner ul.lotusInlinelist li a {
+    display: block;
+    margin-right: none;
+    font-weight: 200;
+    text-shadow: none;
+}
+
+.lotusui30 .lotusBanner ul.lotusUtility li a, .lotusui30 .lotusBanner ul.lotusUtility li a:hover, .lotusui30 .lotusBanner ul.lotusUtility li a:focus, .lotusui30 .lotusBanner ul.lotusUtility li a:active {
+    color: #DEDEDE;
+    font-weight: 200;
+}
+
+.lotusui30 .lotusBanner ul.lotusUtility li {
+    font-size: 100%;
+    line-height: 1.67;
+}
+
+/* Link hover */
+
+.lotusui30 .lotusBanner ul.lotusInlinelist li.lotusSelected a {
+    background: linear-gradient(#585858, #161616) repeat scroll 0 0 transparent;
+    border-left-color: #747474;
+    border-right-color: #747474;
+    color: #FFFFFF;
+    /*display: none;*/
+    outline: 1px solid #111111;
+}
+
+.lotusui30 .lotusBanner ul.lotusInlinelist li a:hover, .lotusui30 .lotusBanner ul.lotusInlinelist li a:focus, .lotusui30 .lotusBanner ul.lotusInlinelist li a:active, .lotusui30 .lotusBanner ul.lotusInlinelist li.lotusHover a {
+    background: transparent;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    color: #DEDEDE;
+    outline: medium none;
+}

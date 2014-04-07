@@ -19,7 +19,7 @@
  * @author Benjamin Jakobus
  */
 
-interface SBTEndpoint 
+interface SBTEndpoint
 {
 	/**
 	 * Makes the request to the server.

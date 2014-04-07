@@ -205,9 +205,10 @@ function logInOut(endpoint,login) {
 }
 
 function updatePanel(id,url,code,headers,body,ioargs,startTs) {
-	var hd = "";
+	var hd = ""; var ct="";
     var headers = ioargs && ioargs.headers;
 	if(headers) {
+		ct = headers['Content-Type'];
         for(var h in headers) {
             if(headers.hasOwnProperty(h)) {
             	if(hd) hd += "\n";
@@ -215,7 +216,7 @@ function updatePanel(id,url,code,headers,body,ioargs,startTs) {
             }
         }				
 	}
-	updateResponse(id,{url:url,status:code,headers:prettify(hd,ioargs),body:prettify(body,ioargs),startTs:startTs});
+	updateResponse(id,{url:url,status:code,headers:prettify(hd,ioargs),body:prettify(body,ioargs,ct),startTs:startTs});
 	// Should we just pretty print one div instead of the whole document?
 	prettyPrint();
 }
@@ -263,21 +264,21 @@ function updateResponse(id,content) {
 	});
 }
 
-function prettify(s,ioArgs) {
+function prettify(s,ioArgs,ct) {
 	try {
 		if(!s) {
 			return s;
 		}
 		s = s.trim();
 		// Check for XML result
-		if(s.indexOf("<?xml")==0) {
+		if((ct && ct.indexOf("text/xml")>=0) || s.indexOf("<?xml")==0) {
 			return vkbeautify.xml(s);
 		}
-		if(s.indexOf("<html")==0) {
+		if((ct && ct.indexOf("text/html")>=0) || s.indexOf("<html")==0) {
 			return vkbeautify.xml(s);
 		}
 		// Check for Json result
-		if(s.indexOf("{")==0) {
+		if((ct && ct.indexOf("application/json")>=0) || (s.indexOf("{")==0 || s.indexOf("[")==0)) {
 			return vkbeautify.json(s);
 		}
 	} catch(e) {} // Return the initial string

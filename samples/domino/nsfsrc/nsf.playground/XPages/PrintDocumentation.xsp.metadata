@@ -1,20 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="1.0" replicaid="85257CAE007B4851" version="9.0" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="50a" sequence="17" unid="01135897DA5484B985257CB300092EBF">
-<created><datetime dst="true">20140406T214017,91-04</datetime></created>
-<modified><datetime dst="true">20140406T214441,03-04</datetime></modified>
-<revised><datetime dst="true">20140406T214441,02-04</datetime></revised>
-<lastaccessed><datetime dst="true">20140406T214441,02-04</datetime></lastaccessed>
-<addedtofile><datetime dst="true">20140406T214017,91-04</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Philippe Riand/O=priand</name></updatedby>
-<wassignedby><name>CN=Philippe Riand/O=priand</name></wassignedby>
+<?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="85257AA80077A28B" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="802" sequence="8" unid="DB34038A058ED99185257CB300466238">
+<created><datetime dst="true">20140407T084846,64-04</datetime></created>
+<modified><datetime dst="true">20140407T150554,93-04</datetime></modified>
+<revised><datetime dst="true">20140407T150554,92-04</datetime></revised>
+<lastaccessed><datetime dst="true">20140407T150554,93-04</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20140407T084846,70-04</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></updatedby>
+<wassignedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></wassignedby>
 <item name="$Flags"><text>gC~4K</text></item>
 <item name="$TITLE" sign="true"><text>PrintDocumentation.xsp</text></item>
-
-
-
-<item name="$FileNames" sign="true"><text>PrintDocumentation.xsp</text></item>
 <item name="$DesignerVersion"><text>8.5</text></item>
 
 
 
-</note>
+
+
+
+
+<item name="$FileNames" sign="true"><text>PrintDocumentation.xsp</text></item></note>

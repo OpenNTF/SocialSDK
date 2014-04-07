@@ -12,7 +12,7 @@
 
 	<h1>Documentation</h1>
 	<xp:repeat id="repeat1" rows="10000" value="#{view1}" var="viewEntry">
-		<xp:panel>
+		<xp:panel style="page-break-before: always">
 			<xp:this.data>
 				<xp:dominoDocument var="document1" action="openDocument"
 					documentId="#{javascript:viewEntry.getNoteID()}" scope="request">

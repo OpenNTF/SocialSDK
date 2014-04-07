@@ -24,14 +24,16 @@
  */
 defined('SBT_SDK') OR exit('Access denied.');
 use Guzzle\Http\Client;
-class BasePluginController extends BaseController {
+class BasePluginController extends BaseController 
+{
 	
 	protected $endpointName;
 	
 	/**
 	 * Constructor.
 	 */
-	function __construct($endpointName = "connections") {
+	function __construct($endpointName = "connections") 
+	{
 		$this->endpointName = $endpointName;
 		$this->loadModel('SBTSettings');
 		$settings = new SBTSettings();
@@ -120,7 +122,8 @@ class BasePluginController extends BaseController {
 	/**
 	 * Creates the header for the SBTK plugin.
 	 */
-	public function createHeader() {
+	public function createHeader() 
+	{
 		$this->loadModel('SBTSettings');
 		$settings = new SBTSettings();
 		

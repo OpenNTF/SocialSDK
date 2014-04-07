@@ -39,15 +39,15 @@ class SBTOAuth1Endpoint extends BaseController implements SBTEndpoint
 	 * @param string $callbackURL		The callback URL (e.g. http://127.0.0.1:8443/demo/application/OAuthSample.php)
 	 * @param string $method			GET, PUT or POST. POST by default
 	 */
-	public function request($requestURL, $callbackURL, $method = 'POST', $endpointName = 'connections'){
+	public function request($requestURL, $callbackURL, $method = 'POST', $endpointName = 'connections')
+	{
 		$callbackURL = $callbackURL . "&requestMethod=" . $method . "&requestURL=" . urlencode($requestURL) . "&endpointName=" . $endpointName;
 		$store = SBTCredentialStore::getInstance();
 
 		try
 		{	
 			//  STEP 1:  If we do not have an OAuth token yet, go get one
-			if (empty($_GET["oauth_token"]))
-			{							
+			if (empty($_GET["oauth_token"])) {							
 				$store = SBTCredentialStore::getInstance();
 				$settings = new SBTSettings();
 
@@ -75,7 +75,7 @@ class SBTOAuth1Endpoint extends BaseController implements SBTEndpoint
 				$response = null;
 				
 				try {
-					$request = $client->createRequest($method, $tokenURL , $headers, $body,  $options);
+					$request = $client->createRequest($method, $tokenURL, $headers, $body, $options);
 					if ($settings->forceSSLTrust($endpointName)) {
 						$request->getCurlOptions()->set(CURLOPT_SSL_VERIFYHOST, false);
 						$request->getCurlOptions()->set(CURLOPT_SSL_VERIFYPEER, false);
@@ -121,7 +121,8 @@ class SBTOAuth1Endpoint extends BaseController implements SBTEndpoint
 	 *
 	 * @author Benjamin Jakobus
 	 */
-	public function authenticationCallback() {
+	public function authenticationCallback()
+	{
 		if (empty($_GET['oauth_token'])) {
 			return;
 		}
@@ -146,7 +147,8 @@ class SBTOAuth1Endpoint extends BaseController implements SBTEndpoint
 	/**
 	 * Gets the access token.
 	 */
-	private function _getAccessToken($endpointName = "connections") {
+	private function _getAccessToken($endpointName = "connections") 
+	{
 		$settings = new SBTSettings();
 		$store = SBTCredentialStore::getInstance();
 		
@@ -164,9 +166,9 @@ class SBTOAuth1Endpoint extends BaseController implements SBTEndpoint
 			'oauth_consumer_key' => $settings->getConsumerKey($endpointName)
 		);
 		
-		$tokenURL = $settings->getAccessTokenURL($endpointName) . '?' . http_build_query($parameters, null, '&');
+		$serviceURL = $settings->getAccessTokenURL($endpointName) . '?' . http_build_query($parameters, null, '&');
 		
-		$client = new Client($tokenURL);
+		$client = new Client($serviceURL);
 		
 		$client->setDefaultOption('verify', false);
 		
@@ -176,7 +178,7 @@ class SBTOAuth1Endpoint extends BaseController implements SBTEndpoint
 		$response = null;
 		
 		try {
-			$request = $client->createRequest('GET', $tokenURL , $headers, $body,  $options);
+			$request = $client->createRequest('GET', $serviceURL, $headers, $body, $options);
 			if ($settings->forceSSLTrust($endpointName)) {
 				$request->getCurlOptions()->set(CURLOPT_SSL_VERIFYHOST, false);
 				$request->getCurlOptions()->set(CURLOPT_SSL_VERIFYPEER, false);
@@ -211,7 +213,8 @@ class SBTOAuth1Endpoint extends BaseController implements SBTEndpoint
 	 * @param string $body
 	 * @param string $headers
 	 */
-	public function makeRequest($server, $service, $method, $options, $body = null, $headers = null, $endpointName = "connections") {
+	public function makeRequest($server, $service, $method, $options, $body = null, $headers = null, $endpointName = "connections") 
+	{
 		$store = SBTCredentialStore::getInstance();
 		$settings = new SBTSettings();
 		
@@ -230,7 +233,7 @@ class SBTOAuth1Endpoint extends BaseController implements SBTEndpoint
 		$options = array();
 		$response = null;
 		try {			
-			$request = $client->createRequest($method, $url , $headers, $body,  $options);
+			$request = $client->createRequest($method, $url, $headers, $body, $options);
 			$request->addHeader('Authorization', 'OAuth oauth_nonce="' . $nonce . '",oauth_version="1.0", oauth_timestamp="' . time() . '",oauth_signature="' . $settings->getConsumerSecret($endpointName) . '&' .$store->getTokenSecret($endpointName) 
 					. '",oauth_signature_method="PLAINTEXT",oauth_consumer_key="'.$settings->getConsumerKey($endpointName).'",oauth_token="' . $store->getOAuthAccessToken($endpointName) . '"');
 			if ($settings->forceSSLTrust($endpointName)) {

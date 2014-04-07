@@ -65,8 +65,9 @@ define(["../../../declare", "../../../config", "../../../stringUtil", "../../../
         
         /*
          * This method modifies the activitystream request urls so that they
-         * 1. Go through our proxy, and has the correct service mapping.
-         * 
+         * 1. Go through our proxy, and have the correct service mapping.
+         * 2. Have the correct auth signature
+         * 3. Are using the right application protocol
          * 
          * Most urls will be using sso by default.
          * 
@@ -82,6 +83,7 @@ define(["../../../declare", "../../../config", "../../../stringUtil", "../../../
             }
             if (args.url.indexOf("/") === 0){
                 args.serviceUrl = args.url;
+                args.serviceUrl = this.correctUrlAuth(args.serviceUrl);
                 delete args.url;
             } else if (args.url.indexOf("proxy") === -1){
                 if(args.url.indexOf("https") !== -1){
@@ -90,14 +92,27 @@ define(["../../../declare", "../../../config", "../../../stringUtil", "../../../
                 else if(args.url.indexOf("http") !== -1){
                     args.url = this.endpoint.proxy.proxyUrl + "/" + this.endpoint.proxyPath + "/" + args.url.replace(/http:\/\/.[^\/]+\//, "");
                 }
+                args.url = this.correctUrlAuth(args.url);
             }
+        },
+        
+        /*
+         * @param {String} url An ActivityStream url. 
+         * 
+         * @return {String} A url with the correct authentication pattern for our current endpoint.
+         */
+        correctUrlAuth: function (url){
+            // replace the piece from 'opensocial/' to 'rest/' with the correct auth.
             var authType = this.isPublic ? "anonymous/" : this._authStrings[this.endpoint.authType];
             var correctASAuthSig = "opensocial/" + authType + "rest/";
-            var opensocialIndex = args.url.indexOf("opensocial/");
-            var restEndIndex = args.url.indexOf("rest/") + 5;
-            if(opensocialIndex !== -1 && restEndIndex !== -1 && args.url.indexOf(correctASAuthSig) === -1){
-                args.url = args.url.slice(0, opensocialIndex) + correctASAuthSig + args.url.slice(restEndIndex);
+            var opensocialIndex = url.indexOf("opensocial/");
+            var restEndIndex = url.indexOf("rest/") + 5;
+            
+            if(opensocialIndex !== -1 && restEndIndex !== -1 && url.indexOf(correctASAuthSig) === -1){
+                url = url.slice(0, opensocialIndex) + correctASAuthSig + url.slice(restEndIndex);
             }
+            
+            return url;
         },
         
         getEndpoint: function(){

@@ -40,7 +40,8 @@ class SBTBasicAuthEndpoint extends BaseController implements SBTEndpoint
 	 * @param string $body
 	 * @param string $headers
 	 */
-	public function makeRequest($server, $service, $method, $options, $body = null, $headers = null, $endpointName = "connections") {
+	public function makeRequest($server, $service, $method, $options, $body = null, $headers = null, $endpointName = "connections")
+	{
 		$store = SBTCredentialStore::getInstance();
 		$settings = new SBTSettings();
 		
@@ -55,12 +56,12 @@ class SBTBasicAuthEndpoint extends BaseController implements SBTEndpoint
 			$user = $settings->getBasicAuthUsername($endpointName);
 			$password = $settings->getBasicAuthPassword($endpointName);
 		} else {
-			$user = $store->getBasicAuthUsername($endpointName) ;
+			$user = $store->getBasicAuthUsername($endpointName);
 			$password = $store->getBasicAuthPassword($endpointName);
 		}
 
 		try {				
-			$request = $client->createRequest($method, $service , $headers, $body,  $options);
+			$request = $client->createRequest($method, $service, $headers, $body, $options);
 			if ($settings->forceSSLTrust($endpointName)) {
 				$request->getCurlOptions()->set(CURLOPT_SSL_VERIFYHOST, false);
 				$request->getCurlOptions()->set(CURLOPT_SSL_VERIFYPEER, false);

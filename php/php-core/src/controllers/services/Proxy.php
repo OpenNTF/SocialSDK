@@ -30,7 +30,7 @@ use Guzzle\Service\Exception\DescriptionBuilderException;
 require_once BASE_PATH . '/config.php';
 include_once BASE_PATH . '/autoload.php';
 
-class Proxy extends BaseController 
+class Proxy extends BaseController
 {
 	
 	/**
@@ -59,7 +59,7 @@ class Proxy extends BaseController
 				// Logout request
 				$store->deleteBasicAuthCredentials($endpointName);
 			} 
-			 if (isset($_REQUEST["OAuthLogout"])) {	
+			if (isset($_REQUEST["OAuthLogout"])) {	
 			 	$store->deleteOAuthCredentials($endpointName);
 
 				$timestamp = time();

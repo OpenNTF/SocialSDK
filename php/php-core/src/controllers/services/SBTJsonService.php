@@ -34,7 +34,8 @@ class SBTJsonService
 	protected $endpointName;
 	protected $settings;
 	
-	function __construct($endpointName) {
+	function __construct($endpointName) 
+	{
 		$this->endpointName = $endpointName;
 	}
 	

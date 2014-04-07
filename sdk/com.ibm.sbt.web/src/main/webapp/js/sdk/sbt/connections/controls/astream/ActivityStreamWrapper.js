@@ -103,7 +103,7 @@ define(["../../../declare", "../../../lang", "../../../url",
                 libraryUrl: libUrl.getUrl(),
                 loginUi: "popup"
             });
-            if(lang.isObject(this.args.extensions) && !this.args.extensions instanceof Array){
+            if(lang.isObject(this.args.extensions) && !(this.args.extensions instanceof Array)){
                 var extensions = this.args.extensions;
                 var arrayConversion = [];
                 for (var key in extensions) {

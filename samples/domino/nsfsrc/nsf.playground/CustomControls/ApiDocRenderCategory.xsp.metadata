@@ -1,22 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="85257AA80077A28B" version="9.0" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="622" sequence="8" unid="7CC70B186562FF1585257B7300718236">
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="1.0" replicaid="85257CAE007B4851" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="38e" sequence="422" unid="7CC70B186562FF1585257B7300718236">
 <created><datetime dst="true">20130522T163949,02-04</datetime></created>
-<modified><datetime dst="true">20130522T163951,80-04</datetime></modified>
-<revised><datetime dst="true">20130522T163951,79-04</datetime></revised>
-<lastaccessed><datetime dst="true">20130522T163951,80-04</datetime></lastaccessed>
-<addedtofile><datetime dst="true">20130522T163949,03-04</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></updatedby>
-<wassignedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></wassignedby>
+<modified><datetime dst="true">20140406T215558,84-04</datetime></modified>
+<revised><datetime dst="true">20140406T215558,83-04</datetime></revised>
+<lastaccessed><datetime dst="true">20140406T215558,83-04</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20140402T182637,90-04</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Philippe Riand/O=priand</name></updatedby>
+<wassignedby><name>CN=Philippe Riand/O=priand</name></wassignedby>
 <item name="$TITLE"><text>ApiDocRenderCategory.xsp</text></item>
 <item name="$Flags"><text>gC~4;</text></item>
-
-
-<item name="$FileNames" sign="true"><text>ApiDocRenderCategory.xsp</text></item>
-
-
 <item name="$DesignerVersion"><text>8.5</text></item>
 
 
 
 
-</note>
+
+
+
+
+
+<item name="$FileNames" sign="true"><text>ApiDocRenderCategory.xsp</text></item></note>

@@ -166,9 +166,9 @@ class SBTOAuth1Endpoint extends BaseController implements SBTEndpoint
 			'oauth_consumer_key' => $settings->getConsumerKey($endpointName)
 		);
 		
-		$tokenURL = $settings->getAccessTokenURL($endpointName) . '?' . http_build_query($parameters, null, '&');
+		$serviceURL = $settings->getAccessTokenURL($endpointName) . '?' . http_build_query($parameters, null, '&');
 		
-		$client = new Client($tokenURL);
+		$client = new Client($serviceURL);
 		
 		$client->setDefaultOption('verify', false);
 		
@@ -178,7 +178,7 @@ class SBTOAuth1Endpoint extends BaseController implements SBTEndpoint
 		$response = null;
 		
 		try {
-			$request = $client->createRequest('GET', $tokenURL, $headers, $body, $options);
+			$request = $client->createRequest('GET', $serviceURL, $headers, $body, $options);
 			if ($settings->forceSSLTrust($endpointName)) {
 				$request->getCurlOptions()->set(CURLOPT_SSL_VERIFYHOST, false);
 				$request->getCurlOptions()->set(CURLOPT_SSL_VERIFYPEER, false);

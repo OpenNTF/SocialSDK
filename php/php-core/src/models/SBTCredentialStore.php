@@ -64,7 +64,8 @@ if (!defined('OAUTH_REQUEST_TOKEN_SECRET')) {
  *
  * @author Benjamin Jakobus
  */
-class SBTCredentialStore {
+class SBTCredentialStore
+{
 
 	// Session name
 	private $sessionName;
@@ -73,7 +74,12 @@ class SBTCredentialStore {
 	
 	private $store = array();
 	
-	public static function getInstance() {
+	/**
+	 * Returns an instance of the CredentialStore. Only
+	 * one instance is allowed to exist at runtime.
+	 */
+	public static function getInstance() 
+	{
 		if (self::$instance == null) {
 			self::$instance = new SBTCredentialStore();
 		}
@@ -83,7 +89,8 @@ class SBTCredentialStore {
 	/**
 	 * Constructor.
 	 */
-	private function __construct() {
+	private function __construct() 
+	{
 
 	}
 
@@ -94,7 +101,8 @@ class SBTCredentialStore {
 	 * @param string $skey
 	 * @param string $value
 	 */
-	private function _store($skey, $endpoint, $value) {
+	private function _store($skey, $endpoint, $value) 
+	{
 		$this->store[$endpoint][$skey] = $value;
 	}
 	
@@ -106,7 +114,8 @@ class SBTCredentialStore {
 	 *
 	 * @return
 	 */
-	private function _get($skey, $endpoint) {
+	private function _get($skey, $endpoint) 
+	{
 		return (isset($this->store[$endpoint][$skey]) ? $this->store[$endpoint][$skey] : null);
 	}
 	/**
@@ -114,7 +123,8 @@ class SBTCredentialStore {
 	 *
 	 * @param string $key
 	 */
-	private function _delete($skey, $endpoint) {
+	private function _delete($skey, $endpoint) 
+	{
 		unset($this->store[$endpoint][$skey]);
 	}
 	
@@ -123,11 +133,13 @@ class SBTCredentialStore {
 	 *
 	 * @param string $key
 	 */
-	public function destroyStore($endpoint = "connections") {
+	public function destroyStore($endpoint = "connections") 
+	{
 		// TODO
 	}
 	
-	public function storeToken($token, $endpoint = "connections") {
+	public function storeToken($token, $endpoint = "connections") 
+	{
 		$this->_store(TOKEN, $endpoint, $token);
 	}
 	
@@ -136,7 +148,8 @@ class SBTCredentialStore {
 	 *
 	 * @param string $token			The OAuth request token.
 	 */
-	public function storeRequestToken($token, $endpoint = "connections") {
+	public function storeRequestToken($token, $endpoint = "connections") 
+	{
 		$this->_store(REQUEST_TOKEN, $endpoint, $token);
 	}
 	
@@ -145,7 +158,8 @@ class SBTCredentialStore {
 	 *
 	 * @return string 		A request token.
 	 */
-	public function getRequestToken($endpoint = "connections") {
+	public function getRequestToken($endpoint = "connections") 
+	{
 		$token = $this->_get(REQUEST_TOKEN, $endpoint);
 		return $token;
 	}
@@ -156,7 +170,8 @@ class SBTCredentialStore {
 	 * @param string $endpoint The endpoint associated with this token.
 	 * @return string 		A token.
 	 */
-	public function getToken($endpoint = "connections") {
+	public function getToken($endpoint = "connections") 
+	{
 		return $this->_get(TOKEN, $endpoint);
 	}
 	
@@ -165,7 +180,8 @@ class SBTCredentialStore {
 	 *
 	 * @param string $endpoint The endpoint associated with the tokens.
 	 */
-	public function deleteTokens($endpoint = "connections") {
+	public function deleteTokens($endpoint = "connections") 
+	{
 		$this->_delete(TOKEN, $endpoint);
 		$this->_delete(TOKEN_TYPE, $endpoint);
 		$this->_delete(OAUTH_TOKEN, $endpoint);
@@ -181,20 +197,24 @@ class SBTCredentialStore {
 	 * @param string $token			The OAuth access token.
 	 * @param string $endpoint The endpoint associated with this token.
 	 */
-	public function storeOAuthAccessToken($token, $endpoint = "connections") {
+	public function storeOAuthAccessToken($token, $endpoint = "connections") 
+	{
 		$this->_store(OAUTH_TOKEN, $endpoint, $token);
 	}
 	
 	
-	public function storeTokenSecret($token, $endpoint = "connections") {
+	public function storeTokenSecret($token, $endpoint = "connections") 
+	{
 		$this->_store(OAUTH_TOKEN_SECRET, $endpoint, $token);
 	}
 	
-	public function storeVerifierToken($token, $endpoint = "connections") {
+	public function storeVerifierToken($token, $endpoint = "connections") 
+	{
 		$this->_store(OAUTH_VERIFIER_TOKEN, $endpoint, $token);
 	}
 	
-	public function getTokenSecret($endpoint = "connections") {
+	public function getTokenSecret($endpoint = "connections") 
+	{
 		return $this->_get(OAUTH_TOKEN_SECRET, $endpoint);
 	}
 	
@@ -204,7 +224,8 @@ class SBTCredentialStore {
 	 * @param string $endpoint The endpoint associated with this token.
 	 * @return string 		OAuth access token.
 	 */
-	public function getOAuthAccessToken($endpoint = "connections") {
+	public function getOAuthAccessToken($endpoint = "connections") 
+	{
 		return $this->_get(OAUTH_TOKEN, $endpoint);
 	}
 	
@@ -214,7 +235,8 @@ class SBTCredentialStore {
 	 * @return string 		OAuth verifier token.
 	 * @param string $endpoint The endpoint associated with this token.
 	 */
-	public function getVerifierToken($endpoint = "connections") {
+	public function getVerifierToken($endpoint = "connections") 
+	{
 		return $this->_get(OAUTH_VERIFIER_TOKEN, $endpoint);
 	}
 	
@@ -224,7 +246,8 @@ class SBTCredentialStore {
 	 * @param string $username		The username used to perform basic authentication.
 	 * @param string $endpoint
 	 */
-	public function storeBasicAuthUsername($username, $endpoint = "connections") {
+	public function storeBasicAuthUsername($username, $endpoint = "connections") 
+	{
 		$this->_store(BASIC_AUTH_USERNAME, $endpoint, $username);
 	}
 	
@@ -234,7 +257,8 @@ class SBTCredentialStore {
 	 * @param string $endpoint
 	 * @return string 		Basic auth username.
 	 */
-	public function getBasicAuthUsername($endpoint = "connections") {
+	public function getBasicAuthUsername($endpoint = "connections") 
+	{
 		return $this->_get(BASIC_AUTH_USERNAME, $endpoint);
 	}
 	
@@ -243,7 +267,8 @@ class SBTCredentialStore {
 	 *
 	 * @param string $token		The OAuth 1.0 request token secret
 	 */
-	public function storeRequestTokenSecret($token, $endpoint = "connections") {
+	public function storeRequestTokenSecret($token, $endpoint = "connections") 
+	{
 		$this->_store(OAUTH_REQUEST_TOKEN_SECRET, $endpoint, $token);
 	}
 	
@@ -253,7 +278,8 @@ class SBTCredentialStore {
 	 * @param string $endpoint The endpoint associated with this token.
 	 * @return string
 	 */
-	public function getRequestTokenSecret($endpoint = "connections") {
+	public function getRequestTokenSecret($endpoint = "connections") 
+	{
 		return $this->_get(OAUTH_REQUEST_TOKEN_SECRET, $endpoint);
 	}
 	
@@ -263,7 +289,8 @@ class SBTCredentialStore {
 	 * @param string $password		The password used to perform basic authentication.
 	 * @param string $endpoint
 	 */
-	public function storeBasicAuthPassword($password, $endpoint = "connections") {
+	public function storeBasicAuthPassword($password, $endpoint = "connections") 
+	{
 		$this->_store(BASIC_AUTH_PASSWORD, $endpoint, $password);
 	}
 	
@@ -273,7 +300,8 @@ class SBTCredentialStore {
 	 * @param string $endpoint The endpoint associated with this token.
 	 * @return string 		Basic auth password.
 	 */
-	public function getBasicAuthPassword($endpoint = "connections") {
+	public function getBasicAuthPassword($endpoint = "connections") 
+	{
 		return $this->_get(BASIC_AUTH_PASSWORD, $endpoint);
 	}
 	
@@ -282,7 +310,8 @@ class SBTCredentialStore {
 	 *
 	 * @param string $endpoint The endpoint associated with the credentials to delete.
 	 */
-	public function deleteBasicAuthCredentials($endpoint = "connections") {
+	public function deleteBasicAuthCredentials($endpoint = "connections") 
+	{
 		$this->_delete(BASIC_AUTH_PASSWORD, $endpoint);
 		$this->_delete(BASIC_AUTH_USERNAME, $endpoint);
 	}
@@ -291,7 +320,8 @@ class SBTCredentialStore {
 	 * Deletes stored OAuth credentials.
 	 * @param string $endpoint The endpoint associated with the credentials to delete.
 	 */
-	public function deleteOAuthCredentials($endpoint = "connections") {
+	public function deleteOAuthCredentials($endpoint = "connections") 
+	{
 		$this->_delete(TOKEN_TYPE, $endpoint);
 		$this->_delete(OAUTH_TOKEN, $endpoint);
 		$this->_delete(OAUTH_TOKEN_SECRET, $endpoint);
@@ -302,11 +332,13 @@ class SBTCredentialStore {
 		$this->_delete(REQUEST_TOKEN, $endpoint);
 	}
 	
-	public function storeTokenType($tokenType, $endpoint = "connections") {
+	public function storeTokenType($tokenType, $endpoint = "connections") 
+	{
 		$this->_store(TOKEN_TYPE, $endpoint, $tokenType);
 	}
 	
-	public function getTokenType($endpoint = "connections") {
+	public function getTokenType($endpoint = "connections") 
+	{
 		return $this->_get(TOKEN_TYPE, $endpoint);
 	}
 }

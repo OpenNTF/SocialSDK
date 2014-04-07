@@ -25,7 +25,8 @@
 defined('SBT_SDK') OR exit('Access denied.');
 class SBTPlugin extends BasePluginController 
 {
-	function __construct($endpointName = "connections") {
+	function __construct($endpointName = "connections") 
+	{
 		parent::__construct($endpointName);
 	}
 	/**

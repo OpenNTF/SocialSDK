@@ -24,7 +24,7 @@ defined('SBT_SDK') OR exit('Access denied.');
  *
  */
 
-class SBTProxyHelper extends BaseController 
+class SBTProxyHelper extends BaseController
 {
 	/**
 	 * Construct header for forwarding request.
@@ -32,7 +32,8 @@ class SBTProxyHelper extends BaseController
 	 * @param unknown $method
 	 * @return multitype:unknown
 	 */
-	public function getHeader($method) {
+	public function getHeader($method) 
+	{
 		$headers = apache_request_headers();
 	
 		$forwardHeader = array();
@@ -73,7 +74,8 @@ class SBTProxyHelper extends BaseController
 		return $forwardHeader;
 	}
 	
-	public function cleanURL($url, $server) {
+	public function cleanURL($url, $server) 
+	{
 		$url = str_replace('https', '', $url);
 		$url = str_replace('http', '', $url);
 		$url = str_replace($server, '', $url);
@@ -91,7 +93,8 @@ class SBTProxyHelper extends BaseController
 	 * 
 	 * @return unknown
 	 */
-	public function getOptions() {
+	public function getOptions() 
+	{
 		$options = $_REQUEST;
 			
 		// Remove proxy-specific parameters
@@ -143,7 +146,8 @@ class SBTProxyHelper extends BaseController
 	 * 
 	 * @return Ambigous <string, unknown>
 	 */
-	public function determineEndpoint() {
+	public function determineEndpoint() 
+	{
 		$headers = apache_request_headers();
 		
 		$endpointName = "connections";
@@ -160,7 +164,8 @@ class SBTProxyHelper extends BaseController
 	 *
 	 * @param unknown $response
 	 */
-	public function outputResponse($response, $url) {
+	public function outputResponse($response, $url) 
+	{
 		$store = SBTCredentialStore::getInstance();
 	
 		if ($response->getStatusCode() == 200) {

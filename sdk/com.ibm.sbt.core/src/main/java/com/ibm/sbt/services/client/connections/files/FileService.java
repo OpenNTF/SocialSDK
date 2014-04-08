@@ -2193,7 +2193,7 @@ public class FileService extends BaseService {
      */
     public FileList getPublicFiles(Map<String, String> params) throws FileServiceException {
         String accessType = AccessType.PUBLIC.getText();
-        String requestUri = FileUrls.MYFAVORITES_COLLECTIONS_FEED.format(this, FileUrlParts.accessType.get(accessType));
+        String requestUri = FileUrls.GET_PUBLIC_FILES.format(this, FileUrlParts.accessType.get(accessType));
 		params = (null == params)?new HashMap<String, String>():params;
         params.put(FileRequestParams.VISIBILITY.getFileRequestParams(), "public");
 

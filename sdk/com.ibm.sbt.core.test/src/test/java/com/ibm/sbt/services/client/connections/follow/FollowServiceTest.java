@@ -71,7 +71,7 @@ public class FollowServiceTest extends BaseUnitTest {
 	public void getFollowedResource() throws FollowServiceException, CommunityServiceException {
 		FollowedResource resource = followService.getFollowedResource(Source.COMMUNITIES.get(),Type.COMMUNITY.get(),community.getCommunityUuid());
 		assertNotNull(resource);
-		assertEquals(community.getCommunityUuid(), resource.getResourceId());
+		assertEquals(unRandomize(community.getCommunityUuid()), unRandomize(resource.getResourceId()));
 	}
 	
 	@Test

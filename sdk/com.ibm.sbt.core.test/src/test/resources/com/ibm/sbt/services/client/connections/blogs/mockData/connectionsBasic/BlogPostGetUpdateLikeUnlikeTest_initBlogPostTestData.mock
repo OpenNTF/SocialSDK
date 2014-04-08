@@ -4,7 +4,7 @@
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Thu, 03 Apr 2014 09:18:04 GMT]]></value>
+        <value><![CDATA[Mon, 07 Apr 2014 10:14:25 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -28,27 +28,27 @@
     </header>
     <header>
         <name><![CDATA[Last-Modified]]></name>
-        <value><![CDATA[Thu, 03 Apr 2014 09:18:04 GMT]]></value>
+        <value><![CDATA[Mon, 07 Apr 2014 10:14:25 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Location]]></name>
-        <value><![CDATA[https://qs.renovations.com:444/blogs/homepage/api/blogs/ecbbd0f2-47ba-4ed0-842a-a304b21f9a41]]></value>
+        <value><![CDATA[https://qs.renovations.com:444/blogs/homepage/api/blogs/afdcd752-68db-4a79-bbb6-025bb56b2624]]></value>
     </header>
     <header>
         <name><![CDATA[Content-Location]]></name>
-        <value><![CDATA[https://qs.renovations.com:444/blogs/homepage/api/blogs/ecbbd0f2-47ba-4ed0-842a-a304b21f9a41]]></value>
+        <value><![CDATA[https://qs.renovations.com:444/blogs/homepage/api/blogs/afdcd752-68db-4a79-bbb6-025bb56b2624]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/vDrKbs34A+MQJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
+        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/i4Rda/ywZ22QJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=A7gDx48XrzVY+LnckGsPNKEByJCi3bmFVbtaSCFmdy5ejB6YX6JqponToQvHeJL/qhGjmdRST7U+B4/pVnkps91O4/pO2cfQjMpFZuvloI4C0YMeCdOlN0cxz2fVB2s6NrTtwQgKgPfbvpi23gM+XEBVt8ufBU4Ylif5IE852sgQhhq1GXb9yJeITvReMADNsIOVx1DbIy4YL2hTkGO6xwqnioh22GWBiGsnxrhyDAQ0U3Z869MoZe2B0L3qXygq9IppMfuFrcCHAfq4julGYw7UQxvcCcxy49rJcJUDe+YVyWHi4Mb+KCvYY35gwrjOpIR3LpnkcHNqk73TD8Pt9/l8arzKQkEMHhaJRBtj1iKqC2Wd9MjNy8mbaesfVglQnOIUP/AuZB+5WO61HUEzjbyVe9DvEfsd1O2TjMPk0EFqyqTkneUfOetOjrRwNUfq5Bf2IZORGMuafnH+QTZhryt3mXKEOSn2PzArX96eZ9KR2zlbcObuq1a3r6cgv/Nbp/bzMcB/IqcJl+mnJZSCoe5s1/SfuqmncpBjpzB7IgypxDcAvKt3A+xywvTAx9k1Hrq17YrZiE6/SZcmmmJUzAm3IO/TYx/KuwQiy6wyVE6Bi0TdLwQEDm+LVVMhlzTcElbGqclOJoWmtUwbGwVSQsZPwZbRHDqigQWLcAAuJ3AxeMpaWRodvKs8CLRcM7VgtZSYdMmzte8Jypqb3mZZt3miIr5+aBCEA5pFltUoGWU=; Path=/]]></value>
+        <value><![CDATA[LtpaToken2=4UiTs2AFL4Z92tLCg1evzaUYA05IN4qo2kGiYRm7xuD6WPSEpKm+Yewf7MpPgGlMBlEk0vJowWdeTV46GvUmgPi680YlzibruF3+1uS1x2mqFvkS5N/gDqH72A/h1LlP3LkUtfcNXwxYuR+Riawkw0bY83g79QDTEN+qmP+wLsF/LBIwDP3L33ZPQ1MHdG2Yl11LJ+KD6WaFNDL54UltAo8ZY4p9KO/+Wn/64vBD+zGDqHKtw0u2fJ0qz+DmIUSCGB+xjEGcX0+bSbGu+ofY7C0mHk90yVYSQfLU4AZ9/29kcm5BFfZ00kgQNSo2iI3OdlbG2HhxhuLIbhA4Q+aPUs5Ud3l1422eiNnQxOmPWZtp+UacIqX1A84W95Ags18O33t1ZJx9fCqqp6CDxxGAezAJ/8BEJpdDt+KFOrg5QvpLyKfK+hw+R5ZMpCIz3mJmme6OptZO79hC658M7kQtnnQSOCkApc3VklE1x9JT+vze1mwSk+QxoFllVsPOy1u2YX/RUU+xpfJzh42XW/wHLQA0ukyxgWq/IhNobZLY8+J1WiPn7KUohFzAbisH94HsrPfAyDSQ9btSgyE6s2hHiY8uXLR/E4tKW6E37UfjuaBxX3Y3iklQ/RrbadDAyXNjFQTZqwe8G9dClcjwMYeEMgxUBkpiXXXEK5Y/NxXycJjJ3GHpt2nxc0Iw1wpqCBkbVads+heiG78oXWZOqqxtvw65VFEZpVJpc5NFmaJ/0iU=; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LCSESSIONID=0000BBQZ7MLF6gCDZQNumMP9-_I:18dna4k6n; Path=/; HttpOnly]]></value>
+        <value><![CDATA[LCSESSIONID=0000Uttym6t7J4g0L1Ucd6yLHpb:18dna4k6n; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Keep-Alive]]></name>
@@ -70,13 +70,13 @@
         <name><![CDATA[Content-Language]]></name>
         <value><![CDATA[en-US]]></value>
     </header></headers>
-<data><![CDATA[<?xml version="1.0"?><entry xmlns="http://www.w3.org/2005/Atom"><id>urn:lsid:ibm.com:blogs:blog-ecbbd0f2-47ba-4ed0-842a-a304b21f9a41</id><link href="https://dev.sdkdemo.com:444/blogs/TestHandle1396516646870" rel="alternate" type="text/html"></link><link href="https://qs.renovations.com:444/blogs/homepage/api/blogs/ecbbd0f2-47ba-4ed0-842a-a304b21f9a41" rel="edit" type="application/atom+xml"></link><snx:AllowCoedit enabled="no" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:AllowCoedit><title type="text">Test Blog1396516646870</title><summary type="text"> </summary><updated>2014-04-03T09:18:04.789Z</updated><app:edited xmlns:app="http://www.w3.org/2007/app">2014-04-03T09:18:04.789Z</app:edited><published>2014-04-03T09:18:04.789Z</published><snx:timezone xmlns:snx="http://www.ibm.com/xmlns/prod/sn">America/Chicago</snx:timezone><snx:locale xmlns:snx="http://www.ibm.com/xmlns/prod/sn">en_US</snx:locale><snx:handle xmlns:snx="http://www.ibm.com/xmlns/prod/sn">TestHandle1396516646870</snx:handle><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations" xmlns:snx="http://www.ibm.com/xmlns/prod/sn">0</snx:rank><app:control xmlns:app="http://www.w3.org/2007/app"><snx:comments enabled="yes" days="0" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:comments><snx:emailcomments enabled="disabled" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:emailcomments><snx:commentmoderated enabled="no" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:commentmoderated><snx:AllowCoedit enabled="no" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:AllowCoedit></app:control><author><name>Frank Adams</name><email>fadams@renovations.com</email><snx:userid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">EFD413BC-E572-760A-8625-7C6E00506453</snx:userid><snx:userState xmlns:snx="http://www.ibm.com/xmlns/prod/sn">active</snx:userState></author><category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type"></category></entry>]]></data>
+<data><![CDATA[<?xml version="1.0"?><entry xmlns="http://www.w3.org/2005/Atom"><id>urn:lsid:ibm.com:blogs:blog-afdcd752-68db-4a79-bbb6-025bb56b2624</id><link href="https://dev.sdkdemo.com:444/blogs/TestHandle1396865620919" rel="alternate" type="text/html"></link><link href="https://qs.renovations.com:444/blogs/homepage/api/blogs/afdcd752-68db-4a79-bbb6-025bb56b2624" rel="edit" type="application/atom+xml"></link><snx:AllowCoedit enabled="no" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:AllowCoedit><title type="text">Test Blog1396865620919</title><summary type="text"> </summary><updated>2014-04-07T10:14:25.262Z</updated><app:edited xmlns:app="http://www.w3.org/2007/app">2014-04-07T10:14:25.262Z</app:edited><published>2014-04-07T10:14:25.262Z</published><snx:timezone xmlns:snx="http://www.ibm.com/xmlns/prod/sn">America/Chicago</snx:timezone><snx:locale xmlns:snx="http://www.ibm.com/xmlns/prod/sn">en_US</snx:locale><snx:handle xmlns:snx="http://www.ibm.com/xmlns/prod/sn">TestHandle1396865620919</snx:handle><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations" xmlns:snx="http://www.ibm.com/xmlns/prod/sn">0</snx:rank><app:control xmlns:app="http://www.w3.org/2007/app"><snx:comments enabled="yes" days="0" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:comments><snx:emailcomments enabled="disabled" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:emailcomments><snx:commentmoderated enabled="no" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:commentmoderated><snx:AllowCoedit enabled="no" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:AllowCoedit></app:control><author><name>Frank Adams</name><email>fadams@renovations.com</email><snx:userid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">EFD413BC-E572-760A-8625-7C6E00506453</snx:userid><snx:userState xmlns:snx="http://www.ibm.com/xmlns/prod/sn">active</snx:userState></author><category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type"></category></entry>]]></data>
 </response>
 <response statusCode="201" statusReason="Created">
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Thu, 03 Apr 2014 09:18:05 GMT]]></value>
+        <value><![CDATA[Mon, 07 Apr 2014 10:14:25 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -100,27 +100,27 @@
     </header>
     <header>
         <name><![CDATA[Last-Modified]]></name>
-        <value><![CDATA[Thu, 03 Apr 2014 09:18:05 GMT]]></value>
+        <value><![CDATA[Mon, 07 Apr 2014 10:14:25 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Location]]></name>
-        <value><![CDATA[https://qs.renovations.com:444/blogs/TestHandle1396516646870/api/entries/db0eb346-273f-4c34-b48b-37217fd8faf7]]></value>
+        <value><![CDATA[https://qs.renovations.com:444/blogs/TestHandle1396865620919/api/entries/816d6d72-ccf9-4749-960a-b24432a272e4]]></value>
     </header>
     <header>
         <name><![CDATA[Content-Location]]></name>
-        <value><![CDATA[https://qs.renovations.com:444/blogs/TestHandle1396516646870/api/entries/db0eb346-273f-4c34-b48b-37217fd8faf7]]></value>
+        <value><![CDATA[https://qs.renovations.com:444/blogs/TestHandle1396865620919/api/entries/816d6d72-ccf9-4749-960a-b24432a272e4]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/vDrKbs34A+MQJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
+        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/i4Rda/ywZ22QJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=A7gDx48XrzVY+LnckGsPNKEByJCi3bmFVbtaSCFmdy5ejB6YX6JqponToQvHeJL/qhGjmdRST7U+B4/pVnkps91O4/pO2cfQjMpFZuvloI4C0YMeCdOlN0cxz2fVB2s6NrTtwQgKgPfbvpi23gM+XEBVt8ufBU4Ylif5IE852sgQhhq1GXb9yJeITvReMADNsIOVx1DbIy4YL2hTkGO6xwqnioh22GWBiGsnxrhyDAQ0U3Z869MoZe2B0L3qXygq9IppMfuFrcCHAfq4julGYw7UQxvcCcxy49rJcJUDe+YVyWHi4Mb+KCvYY35gwrjOpIR3LpnkcHNqk73TD8Pt9/l8arzKQkEMHhaJRBtj1iKqC2Wd9MjNy8mbaesfVglQnOIUP/AuZB+5WO61HUEzjbyVe9DvEfsd1O2TjMPk0EFqyqTkneUfOetOjrRwNUfq5Bf2IZORGMuafnH+QTZhryt3mXKEOSn2PzArX96eZ9KR2zlbcObuq1a3r6cgv/Nbp/bzMcB/IqcJl+mnJZSCoe5s1/SfuqmncpBjpzB7IgypxDcAvKt3A+xywvTAx9k1Hrq17YrZiE6/SZcmmmJUzAm3IO/TYx/KuwQiy6wyVE6Bi0TdLwQEDm+LVVMhlzTcElbGqclOJoWmtUwbGwVSQsZPwZbRHDqigQWLcAAuJ3AxeMpaWRodvKs8CLRcM7VgtZSYdMmzte8Jypqb3mZZt3miIr5+aBCEA5pFltUoGWU=; Path=/]]></value>
+        <value><![CDATA[LtpaToken2=4UiTs2AFL4Z92tLCg1evzaUYA05IN4qo2kGiYRm7xuD6WPSEpKm+Yewf7MpPgGlMBlEk0vJowWdeTV46GvUmgPi680YlzibruF3+1uS1x2mqFvkS5N/gDqH72A/h1LlP3LkUtfcNXwxYuR+Riawkw0bY83g79QDTEN+qmP+wLsF/LBIwDP3L33ZPQ1MHdG2Yl11LJ+KD6WaFNDL54UltAo8ZY4p9KO/+Wn/64vBD+zGDqHKtw0u2fJ0qz+DmIUSCGB+xjEGcX0+bSbGu+ofY7C0mHk90yVYSQfLU4AZ9/29kcm5BFfZ00kgQNSo2iI3OdlbG2HhxhuLIbhA4Q+aPUs5Ud3l1422eiNnQxOmPWZtp+UacIqX1A84W95Ags18O33t1ZJx9fCqqp6CDxxGAezAJ/8BEJpdDt+KFOrg5QvpLyKfK+hw+R5ZMpCIz3mJmme6OptZO79hC658M7kQtnnQSOCkApc3VklE1x9JT+vze1mwSk+QxoFllVsPOy1u2YX/RUU+xpfJzh42XW/wHLQA0ukyxgWq/IhNobZLY8+J1WiPn7KUohFzAbisH94HsrPfAyDSQ9btSgyE6s2hHiY8uXLR/E4tKW6E37UfjuaBxX3Y3iklQ/RrbadDAyXNjFQTZqwe8G9dClcjwMYeEMgxUBkpiXXXEK5Y/NxXycJjJ3GHpt2nxc0Iw1wpqCBkbVads+heiG78oXWZOqqxtvw65VFEZpVJpc5NFmaJ/0iU=; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LCSESSIONID=0000rX96lRsVdMltv8W8-4BPWse:18dna4k6n; Path=/; HttpOnly]]></value>
+        <value><![CDATA[LCSESSIONID=0000I7JE2wP-4ikmkWr8XRtcA2X:18dna4k6n; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Keep-Alive]]></name>
@@ -142,13 +142,13 @@
         <name><![CDATA[Content-Language]]></name>
         <value><![CDATA[en-US]]></value>
     </header></headers>
-<data><![CDATA[<?xml version="1.0"?><entry xml:lang="en-US" dir="ltr" xmlns="http://www.w3.org/2005/Atom"><id>urn:lsid:ibm.com:blogs:entry-db0eb346-273f-4c34-b48b-37217fd8faf7</id><link href="https://qs.renovations.com:444/blogs/TestHandle1396516646870/api/entries/db0eb346-273f-4c34-b48b-37217fd8faf7" rel="edit" type="application/atom+xml"></link><link href="https://dev.sdkdemo.com:444/blogs/TestHandle1396516646870/entry/test_blog_post1396516647684" rel="alternate" type="text/html"></link><link href="https://qs.renovations.com:444/blogs/TestHandle1396516646870/feed/entrycomments/test_blog_post1396516647684/atom" rel="replies" type="application/atom+xml" thr:count="0" xmlns:thr="http://purl.org/syndication/thread/1.0"></link><app:collection href="https://qs.renovations.com:444/blogs/TestHandle1396516646870/api/recommend/entries/db0eb346-273f-4c34-b48b-37217fd8faf7" xmlns:app="http://www.w3.org/2007/app"><atom:title xmlns:atom="http://www.w3.org/2005/Atom">Likes</atom:title><atom:category term="recommend" scheme="http://www.ibm.com/xmlns/prod/sn/collection" xmlns:atom="http://www.w3.org/2005/Atom"></atom:category><app:categories fixed="yes"></app:categories></app:collection><app:collection href="https://qs.renovations.com:444/blogs/TestHandle1396516646870/api/entrycomments/db0eb346-273f-4c34-b48b-37217fd8faf7" xmlns:app="http://www.w3.org/2007/app"><atom:title xmlns:atom="http://www.w3.org/2005/Atom">Comment Entries</atom:title><app:accept>application/atom+xml;type=entry</app:accept><atom:category term="comments" scheme="http://www.ibm.com/xmlns/prod/sn/collection" xmlns:atom="http://www.w3.org/2005/Atom"></atom:category><app:categories fixed="yes"></app:categories></app:collection><snx:moderation status="approved" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:moderation><title type="text">Test Blog Post1396516647684</title><updated>2014-04-03T09:18:05.000Z</updated><app:edited xmlns:app="http://www.w3.org/2007/app">2014-04-03T09:18:05.000Z</app:edited><published>2014-04-03T09:18:05.000Z</published><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations" xmlns:snx="http://www.ibm.com/xmlns/prod/sn">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment" xmlns:snx="http://www.ibm.com/xmlns/prod/sn">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit" xmlns:snx="http://www.ibm.com/xmlns/prod/sn">0</snx:rank><author><name>Frank Adams</name><email>fadams@renovations.com</email><snx:userid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">EFD413BC-E572-760A-8625-7C6E00506453</snx:userid><snx:userState xmlns:snx="http://www.ibm.com/xmlns/prod/sn">active</snx:userState></author><app:control xmlns:app="http://www.w3.org/2007/app"><app:draft>no</app:draft><snx:comments enabled="yes" days="0" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:comments></app:control><summary type="html">Test Blog Post Content1396516647684</summary><content type="html">Test Blog Post Content1396516647684</content></entry>]]></data>
+<data><![CDATA[<?xml version="1.0"?><entry xml:lang="en-US" dir="ltr" xmlns="http://www.w3.org/2005/Atom"><id>urn:lsid:ibm.com:blogs:entry-816d6d72-ccf9-4749-960a-b24432a272e4</id><link href="https://qs.renovations.com:444/blogs/TestHandle1396865620919/api/entries/816d6d72-ccf9-4749-960a-b24432a272e4" rel="edit" type="application/atom+xml"></link><link href="https://dev.sdkdemo.com:444/blogs/TestHandle1396865620919/entry/test_blog_post1396865621662" rel="alternate" type="text/html"></link><link href="https://qs.renovations.com:444/blogs/TestHandle1396865620919/feed/entrycomments/test_blog_post1396865621662/atom" rel="replies" type="application/atom+xml" thr:count="0" xmlns:thr="http://purl.org/syndication/thread/1.0"></link><app:collection href="https://qs.renovations.com:444/blogs/TestHandle1396865620919/api/recommend/entries/816d6d72-ccf9-4749-960a-b24432a272e4" xmlns:app="http://www.w3.org/2007/app"><atom:title xmlns:atom="http://www.w3.org/2005/Atom">Likes</atom:title><atom:category term="recommend" scheme="http://www.ibm.com/xmlns/prod/sn/collection" xmlns:atom="http://www.w3.org/2005/Atom"></atom:category><app:categories fixed="yes"></app:categories></app:collection><app:collection href="https://qs.renovations.com:444/blogs/TestHandle1396865620919/api/entrycomments/816d6d72-ccf9-4749-960a-b24432a272e4" xmlns:app="http://www.w3.org/2007/app"><atom:title xmlns:atom="http://www.w3.org/2005/Atom">Comment Entries</atom:title><app:accept>application/atom+xml;type=entry</app:accept><atom:category term="comments" scheme="http://www.ibm.com/xmlns/prod/sn/collection" xmlns:atom="http://www.w3.org/2005/Atom"></atom:category><app:categories fixed="yes"></app:categories></app:collection><snx:moderation status="approved" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:moderation><title type="text">Test Blog Post1396865621662</title><updated>2014-04-07T10:14:25.000Z</updated><app:edited xmlns:app="http://www.w3.org/2007/app">2014-04-07T10:14:25.000Z</app:edited><published>2014-04-07T10:14:25.000Z</published><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations" xmlns:snx="http://www.ibm.com/xmlns/prod/sn">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment" xmlns:snx="http://www.ibm.com/xmlns/prod/sn">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit" xmlns:snx="http://www.ibm.com/xmlns/prod/sn">0</snx:rank><author><name>Frank Adams</name><email>fadams@renovations.com</email><snx:userid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">EFD413BC-E572-760A-8625-7C6E00506453</snx:userid><snx:userState xmlns:snx="http://www.ibm.com/xmlns/prod/sn">active</snx:userState></author><app:control xmlns:app="http://www.w3.org/2007/app"><app:draft>no</app:draft><snx:comments enabled="yes" days="0" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:comments></app:control><summary type="html">Test Blog Post Content1396865621662</summary><content type="html">Test Blog Post Content1396865621662</content></entry>]]></data>
 </response>
 <response statusCode="201" statusReason="Created">
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Thu, 03 Apr 2014 09:18:09 GMT]]></value>
+        <value><![CDATA[Mon, 07 Apr 2014 10:14:30 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -172,27 +172,27 @@
     </header>
     <header>
         <name><![CDATA[Last-Modified]]></name>
-        <value><![CDATA[Thu, 03 Apr 2014 09:18:09 GMT]]></value>
+        <value><![CDATA[Mon, 07 Apr 2014 10:14:30 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Location]]></name>
-        <value><![CDATA[https://qs.renovations.com:444/blogs/homepage/api/blogs/1ab40e60-0437-4a21-85d3-09da6f6b0a74]]></value>
+        <value><![CDATA[https://qs.renovations.com:444/blogs/homepage/api/blogs/d19ce257-96d5-4411-9d0d-e1b7e6412b37]]></value>
     </header>
     <header>
         <name><![CDATA[Content-Location]]></name>
-        <value><![CDATA[https://qs.renovations.com:444/blogs/homepage/api/blogs/1ab40e60-0437-4a21-85d3-09da6f6b0a74]]></value>
+        <value><![CDATA[https://qs.renovations.com:444/blogs/homepage/api/blogs/d19ce257-96d5-4411-9d0d-e1b7e6412b37]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/vDrKbs34A+MQJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
+        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/i4Rda/ywZ22QJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=A7gDx48XrzVY+LnckGsPNKEByJCi3bmFVbtaSCFmdy5ejB6YX6JqponToQvHeJL/qhGjmdRST7U+B4/pVnkps91O4/pO2cfQjMpFZuvloI4C0YMeCdOlN0cxz2fVB2s6NrTtwQgKgPfbvpi23gM+XEBVt8ufBU4Ylif5IE852sgQhhq1GXb9yJeITvReMADNsIOVx1DbIy4YL2hTkGO6xwqnioh22GWBiGsnxrhyDAQ0U3Z869MoZe2B0L3qXygq9IppMfuFrcCHAfq4julGYw7UQxvcCcxy49rJcJUDe+YVyWHi4Mb+KCvYY35gwrjOpIR3LpnkcHNqk73TD8Pt9/l8arzKQkEMHhaJRBtj1iKqC2Wd9MjNy8mbaesfVglQnOIUP/AuZB+5WO61HUEzjbyVe9DvEfsd1O2TjMPk0EFqyqTkneUfOetOjrRwNUfq5Bf2IZORGMuafnH+QTZhryt3mXKEOSn2PzArX96eZ9KR2zlbcObuq1a3r6cgv/Nbp/bzMcB/IqcJl+mnJZSCoe5s1/SfuqmncpBjpzB7IgypxDcAvKt3A+xywvTAx9k1Hrq17YrZiE6/SZcmmmJUzAm3IO/TYx/KuwQiy6wyVE6Bi0TdLwQEDm+LVVMhlzTcElbGqclOJoWmtUwbGwVSQsZPwZbRHDqigQWLcAAuJ3AxeMpaWRodvKs8CLRcM7VgtZSYdMmzte8Jypqb3mZZt3miIr5+aBCEA5pFltUoGWU=; Path=/]]></value>
+        <value><![CDATA[LtpaToken2=4UiTs2AFL4Z92tLCg1evzaUYA05IN4qo2kGiYRm7xuD6WPSEpKm+Yewf7MpPgGlMBlEk0vJowWdeTV46GvUmgPi680YlzibruF3+1uS1x2mqFvkS5N/gDqH72A/h1LlP3LkUtfcNXwxYuR+Riawkw0bY83g79QDTEN+qmP+wLsF/LBIwDP3L33ZPQ1MHdG2Yl11LJ+KD6WaFNDL54UltAo8ZY4p9KO/+Wn/64vBD+zGDqHKtw0u2fJ0qz+DmIUSCGB+xjEGcX0+bSbGu+ofY7C0mHk90yVYSQfLU4AZ9/29kcm5BFfZ00kgQNSo2iI3OdlbG2HhxhuLIbhA4Q+aPUs5Ud3l1422eiNnQxOmPWZtp+UacIqX1A84W95Ags18O33t1ZJx9fCqqp6CDxxGAezAJ/8BEJpdDt+KFOrg5QvpLyKfK+hw+R5ZMpCIz3mJmme6OptZO79hC658M7kQtnnQSOCkApc3VklE1x9JT+vze1mwSk+QxoFllVsPOy1u2YX/RUU+xpfJzh42XW/wHLQA0ukyxgWq/IhNobZLY8+J1WiPn7KUohFzAbisH94HsrPfAyDSQ9btSgyE6s2hHiY8uXLR/E4tKW6E37UfjuaBxX3Y3iklQ/RrbadDAyXNjFQTZqwe8G9dClcjwMYeEMgxUBkpiXXXEK5Y/NxXycJjJ3GHpt2nxc0Iw1wpqCBkbVads+heiG78oXWZOqqxtvw65VFEZpVJpc5NFmaJ/0iU=; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LCSESSIONID=0000N3ym2PcpUS8dWodv6VG1kqN:18dna4k6n; Path=/; HttpOnly]]></value>
+        <value><![CDATA[LCSESSIONID=0000nwOsgf028PqA00ZC9G7e_GT:18dna4k6n; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Keep-Alive]]></name>
@@ -214,13 +214,13 @@
         <name><![CDATA[Content-Language]]></name>
         <value><![CDATA[en-US]]></value>
     </header></headers>
-<data><![CDATA[<?xml version="1.0"?><entry xmlns="http://www.w3.org/2005/Atom"><id>urn:lsid:ibm.com:blogs:blog-1ab40e60-0437-4a21-85d3-09da6f6b0a74</id><link href="https://dev.sdkdemo.com:444/blogs/TestHandle1396516651690" rel="alternate" type="text/html"></link><link href="https://qs.renovations.com:444/blogs/homepage/api/blogs/1ab40e60-0437-4a21-85d3-09da6f6b0a74" rel="edit" type="application/atom+xml"></link><snx:AllowCoedit enabled="no" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:AllowCoedit><title type="text">Test Blog1396516651690</title><summary type="text"> </summary><updated>2014-04-03T09:18:09.615Z</updated><app:edited xmlns:app="http://www.w3.org/2007/app">2014-04-03T09:18:09.615Z</app:edited><published>2014-04-03T09:18:09.615Z</published><snx:timezone xmlns:snx="http://www.ibm.com/xmlns/prod/sn">America/Chicago</snx:timezone><snx:locale xmlns:snx="http://www.ibm.com/xmlns/prod/sn">en_US</snx:locale><snx:handle xmlns:snx="http://www.ibm.com/xmlns/prod/sn">TestHandle1396516651690</snx:handle><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations" xmlns:snx="http://www.ibm.com/xmlns/prod/sn">0</snx:rank><app:control xmlns:app="http://www.w3.org/2007/app"><snx:comments enabled="yes" days="0" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:comments><snx:emailcomments enabled="disabled" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:emailcomments><snx:commentmoderated enabled="no" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:commentmoderated><snx:AllowCoedit enabled="no" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:AllowCoedit></app:control><author><name>Frank Adams</name><email>fadams@renovations.com</email><snx:userid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">EFD413BC-E572-760A-8625-7C6E00506453</snx:userid><snx:userState xmlns:snx="http://www.ibm.com/xmlns/prod/sn">active</snx:userState></author><category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type"></category></entry>]]></data>
+<data><![CDATA[<?xml version="1.0"?><entry xmlns="http://www.w3.org/2005/Atom"><id>urn:lsid:ibm.com:blogs:blog-d19ce257-96d5-4411-9d0d-e1b7e6412b37</id><link href="https://dev.sdkdemo.com:444/blogs/TestHandle1396865626617" rel="alternate" type="text/html"></link><link href="https://qs.renovations.com:444/blogs/homepage/api/blogs/d19ce257-96d5-4411-9d0d-e1b7e6412b37" rel="edit" type="application/atom+xml"></link><snx:AllowCoedit enabled="no" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:AllowCoedit><title type="text">Test Blog1396865626617</title><summary type="text"> </summary><updated>2014-04-07T10:14:30.928Z</updated><app:edited xmlns:app="http://www.w3.org/2007/app">2014-04-07T10:14:30.928Z</app:edited><published>2014-04-07T10:14:30.928Z</published><snx:timezone xmlns:snx="http://www.ibm.com/xmlns/prod/sn">America/Chicago</snx:timezone><snx:locale xmlns:snx="http://www.ibm.com/xmlns/prod/sn">en_US</snx:locale><snx:handle xmlns:snx="http://www.ibm.com/xmlns/prod/sn">TestHandle1396865626617</snx:handle><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations" xmlns:snx="http://www.ibm.com/xmlns/prod/sn">0</snx:rank><app:control xmlns:app="http://www.w3.org/2007/app"><snx:comments enabled="yes" days="0" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:comments><snx:emailcomments enabled="disabled" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:emailcomments><snx:commentmoderated enabled="no" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:commentmoderated><snx:AllowCoedit enabled="no" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:AllowCoedit></app:control><author><name>Frank Adams</name><email>fadams@renovations.com</email><snx:userid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">EFD413BC-E572-760A-8625-7C6E00506453</snx:userid><snx:userState xmlns:snx="http://www.ibm.com/xmlns/prod/sn">active</snx:userState></author><category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type"></category></entry>]]></data>
 </response>
 <response statusCode="201" statusReason="Created">
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Thu, 03 Apr 2014 09:18:10 GMT]]></value>
+        <value><![CDATA[Mon, 07 Apr 2014 10:14:31 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -244,27 +244,27 @@
     </header>
     <header>
         <name><![CDATA[Last-Modified]]></name>
-        <value><![CDATA[Thu, 03 Apr 2014 09:18:10 GMT]]></value>
+        <value><![CDATA[Mon, 07 Apr 2014 10:14:31 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Location]]></name>
-        <value><![CDATA[https://qs.renovations.com:444/blogs/TestHandle1396516651690/api/entries/01c96eb9-2508-42f2-abc2-8951bfbd2fde]]></value>
+        <value><![CDATA[https://qs.renovations.com:444/blogs/TestHandle1396865626617/api/entries/c35550da-6a3f-4a56-ac8e-42147fcfb609]]></value>
     </header>
     <header>
         <name><![CDATA[Content-Location]]></name>
-        <value><![CDATA[https://qs.renovations.com:444/blogs/TestHandle1396516651690/api/entries/01c96eb9-2508-42f2-abc2-8951bfbd2fde]]></value>
+        <value><![CDATA[https://qs.renovations.com:444/blogs/TestHandle1396865626617/api/entries/c35550da-6a3f-4a56-ac8e-42147fcfb609]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/vDrKbs34A+MQJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
+        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/i4Rda/ywZ22QJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=A7gDx48XrzVY+LnckGsPNKEByJCi3bmFVbtaSCFmdy5ejB6YX6JqponToQvHeJL/qhGjmdRST7U+B4/pVnkps91O4/pO2cfQjMpFZuvloI4C0YMeCdOlN0cxz2fVB2s6NrTtwQgKgPfbvpi23gM+XEBVt8ufBU4Ylif5IE852sgQhhq1GXb9yJeITvReMADNsIOVx1DbIy4YL2hTkGO6xwqnioh22GWBiGsnxrhyDAQ0U3Z869MoZe2B0L3qXygq9IppMfuFrcCHAfq4julGYw7UQxvcCcxy49rJcJUDe+YVyWHi4Mb+KCvYY35gwrjOpIR3LpnkcHNqk73TD8Pt9/l8arzKQkEMHhaJRBtj1iKqC2Wd9MjNy8mbaesfVglQnOIUP/AuZB+5WO61HUEzjbyVe9DvEfsd1O2TjMPk0EFqyqTkneUfOetOjrRwNUfq5Bf2IZORGMuafnH+QTZhryt3mXKEOSn2PzArX96eZ9KR2zlbcObuq1a3r6cgv/Nbp/bzMcB/IqcJl+mnJZSCoe5s1/SfuqmncpBjpzB7IgypxDcAvKt3A+xywvTAx9k1Hrq17YrZiE6/SZcmmmJUzAm3IO/TYx/KuwQiy6wyVE6Bi0TdLwQEDm+LVVMhlzTcElbGqclOJoWmtUwbGwVSQsZPwZbRHDqigQWLcAAuJ3AxeMpaWRodvKs8CLRcM7VgtZSYdMmzte8Jypqb3mZZt3miIr5+aBCEA5pFltUoGWU=; Path=/]]></value>
+        <value><![CDATA[LtpaToken2=4UiTs2AFL4Z92tLCg1evzaUYA05IN4qo2kGiYRm7xuD6WPSEpKm+Yewf7MpPgGlMBlEk0vJowWdeTV46GvUmgPi680YlzibruF3+1uS1x2mqFvkS5N/gDqH72A/h1LlP3LkUtfcNXwxYuR+Riawkw0bY83g79QDTEN+qmP+wLsF/LBIwDP3L33ZPQ1MHdG2Yl11LJ+KD6WaFNDL54UltAo8ZY4p9KO/+Wn/64vBD+zGDqHKtw0u2fJ0qz+DmIUSCGB+xjEGcX0+bSbGu+ofY7C0mHk90yVYSQfLU4AZ9/29kcm5BFfZ00kgQNSo2iI3OdlbG2HhxhuLIbhA4Q+aPUs5Ud3l1422eiNnQxOmPWZtp+UacIqX1A84W95Ags18O33t1ZJx9fCqqp6CDxxGAezAJ/8BEJpdDt+KFOrg5QvpLyKfK+hw+R5ZMpCIz3mJmme6OptZO79hC658M7kQtnnQSOCkApc3VklE1x9JT+vze1mwSk+QxoFllVsPOy1u2YX/RUU+xpfJzh42XW/wHLQA0ukyxgWq/IhNobZLY8+J1WiPn7KUohFzAbisH94HsrPfAyDSQ9btSgyE6s2hHiY8uXLR/E4tKW6E37UfjuaBxX3Y3iklQ/RrbadDAyXNjFQTZqwe8G9dClcjwMYeEMgxUBkpiXXXEK5Y/NxXycJjJ3GHpt2nxc0Iw1wpqCBkbVads+heiG78oXWZOqqxtvw65VFEZpVJpc5NFmaJ/0iU=; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LCSESSIONID=0000zzWXJeplN2Zpuyzbk8DEst-:18dna4k6n; Path=/; HttpOnly]]></value>
+        <value><![CDATA[LCSESSIONID=00005NvlGC-i0mJ2Ju1Fb0_58gj:18dna4k6n; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Keep-Alive]]></name>
@@ -286,13 +286,13 @@
         <name><![CDATA[Content-Language]]></name>
         <value><![CDATA[en-US]]></value>
     </header></headers>
-<data><![CDATA[<?xml version="1.0"?><entry xml:lang="en-US" dir="ltr" xmlns="http://www.w3.org/2005/Atom"><id>urn:lsid:ibm.com:blogs:entry-01c96eb9-2508-42f2-abc2-8951bfbd2fde</id><link href="https://qs.renovations.com:444/blogs/TestHandle1396516651690/api/entries/01c96eb9-2508-42f2-abc2-8951bfbd2fde" rel="edit" type="application/atom+xml"></link><link href="https://dev.sdkdemo.com:444/blogs/TestHandle1396516651690/entry/test_blog_post1396516652438" rel="alternate" type="text/html"></link><link href="https://qs.renovations.com:444/blogs/TestHandle1396516651690/feed/entrycomments/test_blog_post1396516652438/atom" rel="replies" type="application/atom+xml" thr:count="0" xmlns:thr="http://purl.org/syndication/thread/1.0"></link><app:collection href="https://qs.renovations.com:444/blogs/TestHandle1396516651690/api/recommend/entries/01c96eb9-2508-42f2-abc2-8951bfbd2fde" xmlns:app="http://www.w3.org/2007/app"><atom:title xmlns:atom="http://www.w3.org/2005/Atom">Likes</atom:title><atom:category term="recommend" scheme="http://www.ibm.com/xmlns/prod/sn/collection" xmlns:atom="http://www.w3.org/2005/Atom"></atom:category><app:categories fixed="yes"></app:categories></app:collection><app:collection href="https://qs.renovations.com:444/blogs/TestHandle1396516651690/api/entrycomments/01c96eb9-2508-42f2-abc2-8951bfbd2fde" xmlns:app="http://www.w3.org/2007/app"><atom:title xmlns:atom="http://www.w3.org/2005/Atom">Comment Entries</atom:title><app:accept>application/atom+xml;type=entry</app:accept><atom:category term="comments" scheme="http://www.ibm.com/xmlns/prod/sn/collection" xmlns:atom="http://www.w3.org/2005/Atom"></atom:category><app:categories fixed="yes"></app:categories></app:collection><snx:moderation status="approved" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:moderation><title type="text">Test Blog Post1396516652438</title><updated>2014-04-03T09:18:10.000Z</updated><app:edited xmlns:app="http://www.w3.org/2007/app">2014-04-03T09:18:10.000Z</app:edited><published>2014-04-03T09:18:10.000Z</published><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations" xmlns:snx="http://www.ibm.com/xmlns/prod/sn">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment" xmlns:snx="http://www.ibm.com/xmlns/prod/sn">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit" xmlns:snx="http://www.ibm.com/xmlns/prod/sn">0</snx:rank><author><name>Frank Adams</name><email>fadams@renovations.com</email><snx:userid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">EFD413BC-E572-760A-8625-7C6E00506453</snx:userid><snx:userState xmlns:snx="http://www.ibm.com/xmlns/prod/sn">active</snx:userState></author><app:control xmlns:app="http://www.w3.org/2007/app"><app:draft>no</app:draft><snx:comments enabled="yes" days="0" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:comments></app:control><summary type="html">Test Blog Post Content1396516652438</summary><content type="html">Test Blog Post Content1396516652438</content></entry>]]></data>
+<data><![CDATA[<?xml version="1.0"?><entry xml:lang="en-US" dir="ltr" xmlns="http://www.w3.org/2005/Atom"><id>urn:lsid:ibm.com:blogs:entry-c35550da-6a3f-4a56-ac8e-42147fcfb609</id><link href="https://qs.renovations.com:444/blogs/TestHandle1396865626617/api/entries/c35550da-6a3f-4a56-ac8e-42147fcfb609" rel="edit" type="application/atom+xml"></link><link href="https://dev.sdkdemo.com:444/blogs/TestHandle1396865626617/entry/test_blog_post1396865627410" rel="alternate" type="text/html"></link><link href="https://qs.renovations.com:444/blogs/TestHandle1396865626617/feed/entrycomments/test_blog_post1396865627410/atom" rel="replies" type="application/atom+xml" thr:count="0" xmlns:thr="http://purl.org/syndication/thread/1.0"></link><app:collection href="https://qs.renovations.com:444/blogs/TestHandle1396865626617/api/recommend/entries/c35550da-6a3f-4a56-ac8e-42147fcfb609" xmlns:app="http://www.w3.org/2007/app"><atom:title xmlns:atom="http://www.w3.org/2005/Atom">Likes</atom:title><atom:category term="recommend" scheme="http://www.ibm.com/xmlns/prod/sn/collection" xmlns:atom="http://www.w3.org/2005/Atom"></atom:category><app:categories fixed="yes"></app:categories></app:collection><app:collection href="https://qs.renovations.com:444/blogs/TestHandle1396865626617/api/entrycomments/c35550da-6a3f-4a56-ac8e-42147fcfb609" xmlns:app="http://www.w3.org/2007/app"><atom:title xmlns:atom="http://www.w3.org/2005/Atom">Comment Entries</atom:title><app:accept>application/atom+xml;type=entry</app:accept><atom:category term="comments" scheme="http://www.ibm.com/xmlns/prod/sn/collection" xmlns:atom="http://www.w3.org/2005/Atom"></atom:category><app:categories fixed="yes"></app:categories></app:collection><snx:moderation status="approved" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:moderation><title type="text">Test Blog Post1396865627410</title><updated>2014-04-07T10:14:31.000Z</updated><app:edited xmlns:app="http://www.w3.org/2007/app">2014-04-07T10:14:31.000Z</app:edited><published>2014-04-07T10:14:31.000Z</published><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations" xmlns:snx="http://www.ibm.com/xmlns/prod/sn">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment" xmlns:snx="http://www.ibm.com/xmlns/prod/sn">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit" xmlns:snx="http://www.ibm.com/xmlns/prod/sn">0</snx:rank><author><name>Frank Adams</name><email>fadams@renovations.com</email><snx:userid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">EFD413BC-E572-760A-8625-7C6E00506453</snx:userid><snx:userState xmlns:snx="http://www.ibm.com/xmlns/prod/sn">active</snx:userState></author><app:control xmlns:app="http://www.w3.org/2007/app"><app:draft>no</app:draft><snx:comments enabled="yes" days="0" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:comments></app:control><summary type="html">Test Blog Post Content1396865627410</summary><content type="html">Test Blog Post Content1396865627410</content></entry>]]></data>
 </response>
 <response statusCode="201" statusReason="Created">
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Thu, 03 Apr 2014 09:18:13 GMT]]></value>
+        <value><![CDATA[Mon, 07 Apr 2014 10:14:34 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -316,27 +316,27 @@
     </header>
     <header>
         <name><![CDATA[Last-Modified]]></name>
-        <value><![CDATA[Thu, 03 Apr 2014 09:18:13 GMT]]></value>
+        <value><![CDATA[Mon, 07 Apr 2014 10:14:34 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Location]]></name>
-        <value><![CDATA[https://qs.renovations.com:444/blogs/homepage/api/blogs/89280fe9-bb68-4c5d-8cce-1f2089e9e51e]]></value>
+        <value><![CDATA[https://qs.renovations.com:444/blogs/homepage/api/blogs/50b9a650-2f2d-4b91-b588-097291edfed8]]></value>
     </header>
     <header>
         <name><![CDATA[Content-Location]]></name>
-        <value><![CDATA[https://qs.renovations.com:444/blogs/homepage/api/blogs/89280fe9-bb68-4c5d-8cce-1f2089e9e51e]]></value>
+        <value><![CDATA[https://qs.renovations.com:444/blogs/homepage/api/blogs/50b9a650-2f2d-4b91-b588-097291edfed8]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/vDrKbs34A+MQJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
+        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/i4Rda/ywZ22QJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=A7gDx48XrzVY+LnckGsPNKEByJCi3bmFVbtaSCFmdy5ejB6YX6JqponToQvHeJL/qhGjmdRST7U+B4/pVnkps91O4/pO2cfQjMpFZuvloI4C0YMeCdOlN0cxz2fVB2s6NrTtwQgKgPfbvpi23gM+XEBVt8ufBU4Ylif5IE852sgQhhq1GXb9yJeITvReMADNsIOVx1DbIy4YL2hTkGO6xwqnioh22GWBiGsnxrhyDAQ0U3Z869MoZe2B0L3qXygq9IppMfuFrcCHAfq4julGYw7UQxvcCcxy49rJcJUDe+YVyWHi4Mb+KCvYY35gwrjOpIR3LpnkcHNqk73TD8Pt9/l8arzKQkEMHhaJRBtj1iKqC2Wd9MjNy8mbaesfVglQnOIUP/AuZB+5WO61HUEzjbyVe9DvEfsd1O2TjMPk0EFqyqTkneUfOetOjrRwNUfq5Bf2IZORGMuafnH+QTZhryt3mXKEOSn2PzArX96eZ9KR2zlbcObuq1a3r6cgv/Nbp/bzMcB/IqcJl+mnJZSCoe5s1/SfuqmncpBjpzB7IgypxDcAvKt3A+xywvTAx9k1Hrq17YrZiE6/SZcmmmJUzAm3IO/TYx/KuwQiy6wyVE6Bi0TdLwQEDm+LVVMhlzTcElbGqclOJoWmtUwbGwVSQsZPwZbRHDqigQWLcAAuJ3AxeMpaWRodvKs8CLRcM7VgtZSYdMmzte8Jypqb3mZZt3miIr5+aBCEA5pFltUoGWU=; Path=/]]></value>
+        <value><![CDATA[LtpaToken2=4UiTs2AFL4Z92tLCg1evzaUYA05IN4qo2kGiYRm7xuD6WPSEpKm+Yewf7MpPgGlMBlEk0vJowWdeTV46GvUmgPi680YlzibruF3+1uS1x2mqFvkS5N/gDqH72A/h1LlP3LkUtfcNXwxYuR+Riawkw0bY83g79QDTEN+qmP+wLsF/LBIwDP3L33ZPQ1MHdG2Yl11LJ+KD6WaFNDL54UltAo8ZY4p9KO/+Wn/64vBD+zGDqHKtw0u2fJ0qz+DmIUSCGB+xjEGcX0+bSbGu+ofY7C0mHk90yVYSQfLU4AZ9/29kcm5BFfZ00kgQNSo2iI3OdlbG2HhxhuLIbhA4Q+aPUs5Ud3l1422eiNnQxOmPWZtp+UacIqX1A84W95Ags18O33t1ZJx9fCqqp6CDxxGAezAJ/8BEJpdDt+KFOrg5QvpLyKfK+hw+R5ZMpCIz3mJmme6OptZO79hC658M7kQtnnQSOCkApc3VklE1x9JT+vze1mwSk+QxoFllVsPOy1u2YX/RUU+xpfJzh42XW/wHLQA0ukyxgWq/IhNobZLY8+J1WiPn7KUohFzAbisH94HsrPfAyDSQ9btSgyE6s2hHiY8uXLR/E4tKW6E37UfjuaBxX3Y3iklQ/RrbadDAyXNjFQTZqwe8G9dClcjwMYeEMgxUBkpiXXXEK5Y/NxXycJjJ3GHpt2nxc0Iw1wpqCBkbVads+heiG78oXWZOqqxtvw65VFEZpVJpc5NFmaJ/0iU=; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LCSESSIONID=00005LVaVvZEFHXBSwkgeXWh94v:18dna4k6n; Path=/; HttpOnly]]></value>
+        <value><![CDATA[LCSESSIONID=0000dHQf9K2ZoI6RFbUUHjde4oi:18dna4k6n; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Keep-Alive]]></name>
@@ -358,13 +358,13 @@
         <name><![CDATA[Content-Language]]></name>
         <value><![CDATA[en-US]]></value>
     </header></headers>
-<data><![CDATA[<?xml version="1.0"?><entry xmlns="http://www.w3.org/2005/Atom"><id>urn:lsid:ibm.com:blogs:blog-89280fe9-bb68-4c5d-8cce-1f2089e9e51e</id><link href="https://dev.sdkdemo.com:444/blogs/TestHandle1396516655571" rel="alternate" type="text/html"></link><link href="https://qs.renovations.com:444/blogs/homepage/api/blogs/89280fe9-bb68-4c5d-8cce-1f2089e9e51e" rel="edit" type="application/atom+xml"></link><snx:AllowCoedit enabled="no" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:AllowCoedit><title type="text">Test Blog1396516655571</title><summary type="text"> </summary><updated>2014-04-03T09:18:13.506Z</updated><app:edited xmlns:app="http://www.w3.org/2007/app">2014-04-03T09:18:13.506Z</app:edited><published>2014-04-03T09:18:13.506Z</published><snx:timezone xmlns:snx="http://www.ibm.com/xmlns/prod/sn">America/Chicago</snx:timezone><snx:locale xmlns:snx="http://www.ibm.com/xmlns/prod/sn">en_US</snx:locale><snx:handle xmlns:snx="http://www.ibm.com/xmlns/prod/sn">TestHandle1396516655571</snx:handle><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations" xmlns:snx="http://www.ibm.com/xmlns/prod/sn">0</snx:rank><app:control xmlns:app="http://www.w3.org/2007/app"><snx:comments enabled="yes" days="0" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:comments><snx:emailcomments enabled="disabled" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:emailcomments><snx:commentmoderated enabled="no" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:commentmoderated><snx:AllowCoedit enabled="no" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:AllowCoedit></app:control><author><name>Frank Adams</name><email>fadams@renovations.com</email><snx:userid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">EFD413BC-E572-760A-8625-7C6E00506453</snx:userid><snx:userState xmlns:snx="http://www.ibm.com/xmlns/prod/sn">active</snx:userState></author><category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type"></category></entry>]]></data>
+<data><![CDATA[<?xml version="1.0"?><entry xmlns="http://www.w3.org/2005/Atom"><id>urn:lsid:ibm.com:blogs:blog-50b9a650-2f2d-4b91-b588-097291edfed8</id><link href="https://dev.sdkdemo.com:444/blogs/TestHandle1396865630287" rel="alternate" type="text/html"></link><link href="https://qs.renovations.com:444/blogs/homepage/api/blogs/50b9a650-2f2d-4b91-b588-097291edfed8" rel="edit" type="application/atom+xml"></link><snx:AllowCoedit enabled="no" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:AllowCoedit><title type="text">Test Blog1396865630287</title><summary type="text"> </summary><updated>2014-04-07T10:14:34.603Z</updated><app:edited xmlns:app="http://www.w3.org/2007/app">2014-04-07T10:14:34.603Z</app:edited><published>2014-04-07T10:14:34.603Z</published><snx:timezone xmlns:snx="http://www.ibm.com/xmlns/prod/sn">America/Chicago</snx:timezone><snx:locale xmlns:snx="http://www.ibm.com/xmlns/prod/sn">en_US</snx:locale><snx:handle xmlns:snx="http://www.ibm.com/xmlns/prod/sn">TestHandle1396865630287</snx:handle><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations" xmlns:snx="http://www.ibm.com/xmlns/prod/sn">0</snx:rank><app:control xmlns:app="http://www.w3.org/2007/app"><snx:comments enabled="yes" days="0" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:comments><snx:emailcomments enabled="disabled" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:emailcomments><snx:commentmoderated enabled="no" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:commentmoderated><snx:AllowCoedit enabled="no" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:AllowCoedit></app:control><author><name>Frank Adams</name><email>fadams@renovations.com</email><snx:userid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">EFD413BC-E572-760A-8625-7C6E00506453</snx:userid><snx:userState xmlns:snx="http://www.ibm.com/xmlns/prod/sn">active</snx:userState></author><category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type"></category></entry>]]></data>
 </response>
 <response statusCode="201" statusReason="Created">
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Thu, 03 Apr 2014 09:18:14 GMT]]></value>
+        <value><![CDATA[Mon, 07 Apr 2014 10:14:35 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -388,27 +388,27 @@
     </header>
     <header>
         <name><![CDATA[Last-Modified]]></name>
-        <value><![CDATA[Thu, 03 Apr 2014 09:18:14 GMT]]></value>
+        <value><![CDATA[Mon, 07 Apr 2014 10:14:35 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Location]]></name>
-        <value><![CDATA[https://qs.renovations.com:444/blogs/TestHandle1396516655571/api/entries/8fbeeeb8-301e-41b7-b700-510800fb80b5]]></value>
+        <value><![CDATA[https://qs.renovations.com:444/blogs/TestHandle1396865630287/api/entries/34aa8099-a568-4501-979e-df7ead228ccc]]></value>
     </header>
     <header>
         <name><![CDATA[Content-Location]]></name>
-        <value><![CDATA[https://qs.renovations.com:444/blogs/TestHandle1396516655571/api/entries/8fbeeeb8-301e-41b7-b700-510800fb80b5]]></value>
+        <value><![CDATA[https://qs.renovations.com:444/blogs/TestHandle1396865630287/api/entries/34aa8099-a568-4501-979e-df7ead228ccc]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/vDrKbs34A+MQJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
+        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/i4Rda/ywZ22QJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=A7gDx48XrzVY+LnckGsPNKEByJCi3bmFVbtaSCFmdy5ejB6YX6JqponToQvHeJL/qhGjmdRST7U+B4/pVnkps91O4/pO2cfQjMpFZuvloI4C0YMeCdOlN0cxz2fVB2s6NrTtwQgKgPfbvpi23gM+XEBVt8ufBU4Ylif5IE852sgQhhq1GXb9yJeITvReMADNsIOVx1DbIy4YL2hTkGO6xwqnioh22GWBiGsnxrhyDAQ0U3Z869MoZe2B0L3qXygq9IppMfuFrcCHAfq4julGYw7UQxvcCcxy49rJcJUDe+YVyWHi4Mb+KCvYY35gwrjOpIR3LpnkcHNqk73TD8Pt9/l8arzKQkEMHhaJRBtj1iKqC2Wd9MjNy8mbaesfVglQnOIUP/AuZB+5WO61HUEzjbyVe9DvEfsd1O2TjMPk0EFqyqTkneUfOetOjrRwNUfq5Bf2IZORGMuafnH+QTZhryt3mXKEOSn2PzArX96eZ9KR2zlbcObuq1a3r6cgv/Nbp/bzMcB/IqcJl+mnJZSCoe5s1/SfuqmncpBjpzB7IgypxDcAvKt3A+xywvTAx9k1Hrq17YrZiE6/SZcmmmJUzAm3IO/TYx/KuwQiy6wyVE6Bi0TdLwQEDm+LVVMhlzTcElbGqclOJoWmtUwbGwVSQsZPwZbRHDqigQWLcAAuJ3AxeMpaWRodvKs8CLRcM7VgtZSYdMmzte8Jypqb3mZZt3miIr5+aBCEA5pFltUoGWU=; Path=/]]></value>
+        <value><![CDATA[LtpaToken2=4UiTs2AFL4Z92tLCg1evzaUYA05IN4qo2kGiYRm7xuD6WPSEpKm+Yewf7MpPgGlMBlEk0vJowWdeTV46GvUmgPi680YlzibruF3+1uS1x2mqFvkS5N/gDqH72A/h1LlP3LkUtfcNXwxYuR+Riawkw0bY83g79QDTEN+qmP+wLsF/LBIwDP3L33ZPQ1MHdG2Yl11LJ+KD6WaFNDL54UltAo8ZY4p9KO/+Wn/64vBD+zGDqHKtw0u2fJ0qz+DmIUSCGB+xjEGcX0+bSbGu+ofY7C0mHk90yVYSQfLU4AZ9/29kcm5BFfZ00kgQNSo2iI3OdlbG2HhxhuLIbhA4Q+aPUs5Ud3l1422eiNnQxOmPWZtp+UacIqX1A84W95Ags18O33t1ZJx9fCqqp6CDxxGAezAJ/8BEJpdDt+KFOrg5QvpLyKfK+hw+R5ZMpCIz3mJmme6OptZO79hC658M7kQtnnQSOCkApc3VklE1x9JT+vze1mwSk+QxoFllVsPOy1u2YX/RUU+xpfJzh42XW/wHLQA0ukyxgWq/IhNobZLY8+J1WiPn7KUohFzAbisH94HsrPfAyDSQ9btSgyE6s2hHiY8uXLR/E4tKW6E37UfjuaBxX3Y3iklQ/RrbadDAyXNjFQTZqwe8G9dClcjwMYeEMgxUBkpiXXXEK5Y/NxXycJjJ3GHpt2nxc0Iw1wpqCBkbVads+heiG78oXWZOqqxtvw65VFEZpVJpc5NFmaJ/0iU=; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LCSESSIONID=0000qEr-59WXgxoy8fFczS0P4lA:18dna4k6n; Path=/; HttpOnly]]></value>
+        <value><![CDATA[LCSESSIONID=0000pvYOyh-vH6NMnNju3ASR80d:18dna4k6n; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Keep-Alive]]></name>
@@ -430,6 +430,6 @@
         <name><![CDATA[Content-Language]]></name>
         <value><![CDATA[en-US]]></value>
     </header></headers>
-<data><![CDATA[<?xml version="1.0"?><entry xml:lang="en-US" dir="ltr" xmlns="http://www.w3.org/2005/Atom"><id>urn:lsid:ibm.com:blogs:entry-8fbeeeb8-301e-41b7-b700-510800fb80b5</id><link href="https://qs.renovations.com:444/blogs/TestHandle1396516655571/api/entries/8fbeeeb8-301e-41b7-b700-510800fb80b5" rel="edit" type="application/atom+xml"></link><link href="https://dev.sdkdemo.com:444/blogs/TestHandle1396516655571/entry/test_blog_post1396516656414" rel="alternate" type="text/html"></link><link href="https://qs.renovations.com:444/blogs/TestHandle1396516655571/feed/entrycomments/test_blog_post1396516656414/atom" rel="replies" type="application/atom+xml" thr:count="0" xmlns:thr="http://purl.org/syndication/thread/1.0"></link><app:collection href="https://qs.renovations.com:444/blogs/TestHandle1396516655571/api/recommend/entries/8fbeeeb8-301e-41b7-b700-510800fb80b5" xmlns:app="http://www.w3.org/2007/app"><atom:title xmlns:atom="http://www.w3.org/2005/Atom">Likes</atom:title><atom:category term="recommend" scheme="http://www.ibm.com/xmlns/prod/sn/collection" xmlns:atom="http://www.w3.org/2005/Atom"></atom:category><app:categories fixed="yes"></app:categories></app:collection><app:collection href="https://qs.renovations.com:444/blogs/TestHandle1396516655571/api/entrycomments/8fbeeeb8-301e-41b7-b700-510800fb80b5" xmlns:app="http://www.w3.org/2007/app"><atom:title xmlns:atom="http://www.w3.org/2005/Atom">Comment Entries</atom:title><app:accept>application/atom+xml;type=entry</app:accept><atom:category term="comments" scheme="http://www.ibm.com/xmlns/prod/sn/collection" xmlns:atom="http://www.w3.org/2005/Atom"></atom:category><app:categories fixed="yes"></app:categories></app:collection><snx:moderation status="approved" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:moderation><title type="text">Test Blog Post1396516656414</title><updated>2014-04-03T09:18:14.000Z</updated><app:edited xmlns:app="http://www.w3.org/2007/app">2014-04-03T09:18:14.000Z</app:edited><published>2014-04-03T09:18:14.000Z</published><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations" xmlns:snx="http://www.ibm.com/xmlns/prod/sn">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment" xmlns:snx="http://www.ibm.com/xmlns/prod/sn">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit" xmlns:snx="http://www.ibm.com/xmlns/prod/sn">0</snx:rank><author><name>Frank Adams</name><email>fadams@renovations.com</email><snx:userid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">EFD413BC-E572-760A-8625-7C6E00506453</snx:userid><snx:userState xmlns:snx="http://www.ibm.com/xmlns/prod/sn">active</snx:userState></author><app:control xmlns:app="http://www.w3.org/2007/app"><app:draft>no</app:draft><snx:comments enabled="yes" days="0" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:comments></app:control><summary type="html">Test Blog Post Content1396516656414</summary><content type="html">Test Blog Post Content1396516656414</content></entry>]]></data>
+<data><![CDATA[<?xml version="1.0"?><entry xml:lang="en-US" dir="ltr" xmlns="http://www.w3.org/2005/Atom"><id>urn:lsid:ibm.com:blogs:entry-34aa8099-a568-4501-979e-df7ead228ccc</id><link href="https://qs.renovations.com:444/blogs/TestHandle1396865630287/api/entries/34aa8099-a568-4501-979e-df7ead228ccc" rel="edit" type="application/atom+xml"></link><link href="https://dev.sdkdemo.com:444/blogs/TestHandle1396865630287/entry/test_blog_post1396865631042" rel="alternate" type="text/html"></link><link href="https://qs.renovations.com:444/blogs/TestHandle1396865630287/feed/entrycomments/test_blog_post1396865631042/atom" rel="replies" type="application/atom+xml" thr:count="0" xmlns:thr="http://purl.org/syndication/thread/1.0"></link><app:collection href="https://qs.renovations.com:444/blogs/TestHandle1396865630287/api/recommend/entries/34aa8099-a568-4501-979e-df7ead228ccc" xmlns:app="http://www.w3.org/2007/app"><atom:title xmlns:atom="http://www.w3.org/2005/Atom">Likes</atom:title><atom:category term="recommend" scheme="http://www.ibm.com/xmlns/prod/sn/collection" xmlns:atom="http://www.w3.org/2005/Atom"></atom:category><app:categories fixed="yes"></app:categories></app:collection><app:collection href="https://qs.renovations.com:444/blogs/TestHandle1396865630287/api/entrycomments/34aa8099-a568-4501-979e-df7ead228ccc" xmlns:app="http://www.w3.org/2007/app"><atom:title xmlns:atom="http://www.w3.org/2005/Atom">Comment Entries</atom:title><app:accept>application/atom+xml;type=entry</app:accept><atom:category term="comments" scheme="http://www.ibm.com/xmlns/prod/sn/collection" xmlns:atom="http://www.w3.org/2005/Atom"></atom:category><app:categories fixed="yes"></app:categories></app:collection><snx:moderation status="approved" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:moderation><title type="text">Test Blog Post1396865631042</title><updated>2014-04-07T10:14:35.000Z</updated><app:edited xmlns:app="http://www.w3.org/2007/app">2014-04-07T10:14:35.000Z</app:edited><published>2014-04-07T10:14:35.000Z</published><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations" xmlns:snx="http://www.ibm.com/xmlns/prod/sn">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment" xmlns:snx="http://www.ibm.com/xmlns/prod/sn">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit" xmlns:snx="http://www.ibm.com/xmlns/prod/sn">0</snx:rank><author><name>Frank Adams</name><email>fadams@renovations.com</email><snx:userid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">EFD413BC-E572-760A-8625-7C6E00506453</snx:userid><snx:userState xmlns:snx="http://www.ibm.com/xmlns/prod/sn">active</snx:userState></author><app:control xmlns:app="http://www.w3.org/2007/app"><app:draft>no</app:draft><snx:comments enabled="yes" days="0" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:comments></app:control><summary type="html">Test Blog Post Content1396865631042</summary><content type="html">Test Blog Post Content1396865631042</content></entry>]]></data>
 </response>
 </responses>

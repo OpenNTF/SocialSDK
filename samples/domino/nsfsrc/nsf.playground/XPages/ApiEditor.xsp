@@ -6,7 +6,7 @@
 		<xp:dojoModule name="extlib.dijit.OneUIDialog"></xp:dojoModule>
 	</xp:this.resources>
 
-	<xc:ccDocumentationPageResources></xc:ccDocumentationPageResources>
+	<xc:ccMainPageResources></xc:ccMainPageResources>
 
 	<xp:scriptBlock>
 		<xp:this.value><![CDATA[var pageGlobal = {

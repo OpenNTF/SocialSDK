@@ -49,18 +49,26 @@ context.reloadPage()}]]></xp:this.action>
 				<br/>
 				</xe:formRow>
 				<xe:formRow id="formRow6" label="Application Title:">
-				<xp:inputText id="inputText1"
-					value="#{document1.AppTitle}" size="60">
-				</xp:inputText>
+					<xp:inputText id="inputText1"
+						value="#{document1.AppTitle}" size="60">
+					</xp:inputText>
 				</xe:formRow>
 				<xe:formRow id="formRow8" label="Environments:">
-				<xp:inputText id="inputText2"
-					value="#{document1.Environments}" size="60">
-				</xp:inputText>
+					<xp:inputText id="inputText2"
+						value="#{document1.Environments}" size="60">
+					</xp:inputText>
 				</xe:formRow>
 				<xe:formRow id="formRow1" label="Apache Legal Text:">
 					<xp:comboBox id="comboBox1"
 						value="#{document1.ApacheLicense}">
+						<xp:selectItem itemLabel=""></xp:selectItem>
+						<xp:selectItem itemLabel="true"></xp:selectItem>
+						<xp:selectItem itemLabel="false"></xp:selectItem>
+					</xp:comboBox>
+				</xe:formRow>
+				<xe:formRow id="formRow16" label="developerWorks L&amp;F:">
+					<xp:comboBox id="comboBox9"
+						value="#{document1.DwLookFeel}">
 						<xp:selectItem itemLabel=""></xp:selectItem>
 						<xp:selectItem itemLabel="true"></xp:selectItem>
 						<xp:selectItem itemLabel="false"></xp:selectItem>
@@ -127,7 +135,17 @@ context.reloadPage()}]]></xp:this.action>
 					</xp:comboBox>
 				</xe:formRow>
 				<xe:formRow id="formRow10">
-				<br/>
+				<hr/>
+				</xe:formRow>
+				<xe:formRow id="formRow14" label="Google Analytics Tracking ID:">
+					<xp:inputText id="inputText3"
+						value="#{document1.GATrackingId}" size="60">
+					</xp:inputText>
+				</xe:formRow>
+				<xe:formRow id="formRow15" label="Google Analytics Domain:">
+					<xp:inputText id="inputText4"
+						value="#{document1.GADomain}" size="60">
+					</xp:inputText>
 				</xe:formRow>
 			</xe:formTable>
 			<xe:dumpObject loaded="false" id="dumpObject1" title="document"

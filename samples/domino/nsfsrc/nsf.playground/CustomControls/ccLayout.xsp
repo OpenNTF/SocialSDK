@@ -7,7 +7,7 @@
 if(compositeData.wholePage)view.setStyle("overflow: hidden");}]]></xp:this.afterPageLoad>
 
 	<xp:this.resources>
-		<xp:styleSheet href="/sbtbanner.css"></xp:styleSheet>
+		<xp:styleSheet href="/sbtbanner.css" loaded="${javascript:optionsBean.isDwLookFeel()}"></xp:styleSheet>
 	</xp:this.resources>
 	<xe:keepSessionAlive id="keepSessionAlive1"></xe:keepSessionAlive>
 	<xc:DevelopmentWarning loaded="false"></xc:DevelopmentWarning>
@@ -45,6 +45,9 @@ if(compositeData.wholePage)view.setStyle("overflow: hidden");}]]></xp:this.after
 				productLogoStyle="margin-left:-15px" footer="false" placeBar="false"
 				titleBar="false" legal="false">
 				<xe:this.bannerApplicationLinks>
+					<xe:basicLeafNode label="#{javascript:optionsBean.getApplicationTitle(null)}"
+						href="https://developer.ibm.com/social/" styleClass="apptitle" loaded="${javascript:optionsBean.isDwLookFeel()}">
+					</xe:basicLeafNode>
 					<xe:pageTreeNode selection="/Home" label="Home"
 						page="/Home.xsp">
 					</xe:pageTreeNode>
@@ -56,10 +59,6 @@ if(compositeData.wholePage)view.setStyle("overflow: hidden");}]]></xp:this.after
 						loaded="${javascript:optionsBean.javaSnippetsEnabled}"
 						page="/JavaSnippets.xsp" selection="/JavaSnippets">
 					</xe:pageTreeNode>
-					<xe:pageTreeNode label="OpenSocial Gadgets"
-						loaded="${javascript:optionsBean.gadgetSnippetsEnabled}"
-						page="/GadgetSnippets.xsp" selection="/GadgetSnippets">
-					</xe:pageTreeNode>
 					<xe:pageTreeNode label="XPages Snippets"
 						loaded="${javascript:optionsBean.xpagesSnippetsEnabled}"
 						page="/XPagesSnippets.xsp" selection="/XPagesSnippets">
@@ -67,6 +66,10 @@ if(compositeData.wholePage)view.setStyle("overflow: hidden");}]]></xp:this.after
 					<xe:pageTreeNode label="API Explorer"
 						loaded="${javascript:optionsBean.explorerEnabled}"
 						page="/Explorer.xsp" selection="/Explorer">
+					</xe:pageTreeNode>
+					<xe:pageTreeNode label="OpenSocial Gadgets"
+						loaded="${javascript:optionsBean.gadgetSnippetsEnabled}"
+						page="/GadgetSnippets.xsp" selection="/GadgetSnippets">
 					</xe:pageTreeNode>
 					<xe:pageTreeNode label="API Documentation"
 						loaded="${javascript:optionsBean.apiDocumentationEnabled}"
@@ -120,4 +123,5 @@ if(compositeData.wholePage)view.setStyle("overflow: hidden");}]]></xp:this.after
 		</xe:this.configuration>
 		<xp:callback></xp:callback>
 	</xe:applicationLayout>
+	<xc:GoogleAnalytics loaded="${javascript:optionsBean.isGoogleAnalytics()}"></xc:GoogleAnalytics>
 </xp:view>

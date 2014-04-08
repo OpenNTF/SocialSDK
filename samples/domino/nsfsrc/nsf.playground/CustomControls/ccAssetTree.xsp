@@ -128,7 +128,7 @@ dojo.connect(inpSearch,"onclick",function(e) {
 });
 ]]></xp:this.value>
 				</xp:scriptBlock>
-				<div id="assetsTree" style="overflow: none;"></div>
+				<div id="assetsTree"></div>
 				<div id="emptyTree" style='display:none'>
 					The current filtering options don't match any snippets.<br/>Please select a different environment.
 				</div>

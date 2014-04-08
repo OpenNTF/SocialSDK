@@ -37,5 +37,6 @@ Export-Package: nsf.playground.beans,
  nsf.playground.library,
  nsf.playground.playground,
  nsf.playground.servlets,
- nsf.playground.snippets
+ nsf.playground.snippets,
+ nsf.playground.util
 Bundle-ActivationPolicy: lazy

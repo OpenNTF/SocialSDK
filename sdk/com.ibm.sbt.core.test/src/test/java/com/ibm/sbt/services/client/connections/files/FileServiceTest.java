@@ -31,7 +31,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import org.junit.Before;
+
 import org.junit.Test;
 
 import com.ibm.sbt.services.BaseUnitTest;
@@ -39,8 +39,6 @@ import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.connections.communities.CommunityList;
 import com.ibm.sbt.services.client.connections.communities.CommunityService;
 import com.ibm.sbt.services.client.connections.files.model.FileRequestParams;
-import com.ibm.sbt.services.endpoints.Endpoint;
-import com.ibm.sbt.services.endpoints.EndpointFactory;
 import com.ibm.sbt.test.lib.TestEnvironment;
 
 public class FileServiceTest extends BaseUnitTest {
@@ -49,18 +47,10 @@ public class FileServiceTest extends BaseUnitTest {
 																+ "Used mainly for Testing the Upload functionality of the FileService Connections API."
 																+ "Test Input : ddsfafw4t547���%*���^U���^JUL&><\03242";
 	public final static String	TEST_NAME				= "FS_TestUploadTest";
-
-	protected FileService fileService;
 	
-	@Before
-	public void createFileService(){
-		if (fileService==null){
-			fileService = new FileService();
-		}
-	}
-
 	@Test
 	public void testReadFile() throws Exception {
+		FileService fileService = new FileService();
 		FileList listOfFiles = fileService.getMyFiles();
 		String testFileId = listOfFiles.get(0).getFileId();
 		File entry = fileService.getFile(testFileId, true);
@@ -70,6 +60,7 @@ public class FileServiceTest extends BaseUnitTest {
 
 	@Test
 	public void testReadFileWithLoadFalse() throws Exception {
+		FileService fileService = new FileService();
 		FileList listOfFiles = fileService.getMyFiles();
 		String testFileId = listOfFiles.get(0).getFileId();
 		File entry = fileService.getFile(testFileId, false);
@@ -79,6 +70,7 @@ public class FileServiceTest extends BaseUnitTest {
 
 	@Test
 	public void testGetMyFiles() throws Exception {
+		FileService fileService = new FileService();
 		List<File> fileEntries = fileService.getMyFiles();
 		if (fileEntries != null && !fileEntries.isEmpty()) {
 			for (File fEntry : fileEntries) {
@@ -90,6 +82,7 @@ public class FileServiceTest extends BaseUnitTest {
 
 	@Test
 	public void testGetFilesSharedWithMe() throws Exception {
+		FileService fileService = new FileService();
 		List<File> fileEntries = fileService.getFilesSharedWithMe();
 		if (fileEntries != null && !fileEntries.isEmpty()) {
 			for (File fEntry : fileEntries) {				
@@ -100,6 +93,7 @@ public class FileServiceTest extends BaseUnitTest {
 
 	@Test
 	public void testGetFilesSharedByMe() throws Exception {
+		FileService fileService = new FileService();
 		List<File> fileEntries = fileService.getFilesSharedByMe();
 		if (fileEntries != null && !fileEntries.isEmpty()) {
 			for (File fEntry : fileEntries) {
@@ -112,17 +106,21 @@ public class FileServiceTest extends BaseUnitTest {
 	@Test
 	public void testGetPublicFiles() throws Exception {
 		//TODO: fix for smartcloud
+		FileService fileService = new FileService();
 		if (TestEnvironment.isSmartCloudEnvironment()) return;
 		List<File> fileEntries = fileService.getPublicFiles(null);
+		assertNotNull(fileEntries);
 		if (fileEntries != null && !fileEntries.isEmpty()) {
 			for (File fEntry : fileEntries) {
 				assertEquals(fEntry.getCategory(), "document");
 			}
 		}
+		
 	}
 
 	@Test
 	public void testGetPinnedFiles() throws Exception {
+		FileService fileService = new FileService();
 		List<File> fileEntries = fileService.getPinnedFiles(null);
 		if (fileEntries != null && !fileEntries.isEmpty()) {
 			for (File fEntry : fileEntries) {
@@ -133,6 +131,7 @@ public class FileServiceTest extends BaseUnitTest {
 
 	@Test
 	public void testGetMyFolders() throws Exception {
+		FileService fileService = new FileService();
 		List<File> fileEntries = fileService.getMyFolders(null);
 		if (fileEntries != null && !fileEntries.isEmpty()) {
 			for (File fEntry : fileEntries) {
@@ -144,6 +143,7 @@ public class FileServiceTest extends BaseUnitTest {
 	@Test
 	public void pinAndUnpinFolder() throws Exception{
 		//TODO: fix for smartcloud
+		FileService fileService = new FileService();
 		if (TestEnvironment.isSmartCloudEnvironment()) return;
 
 		//Pin the first folder in My Folders
@@ -164,6 +164,7 @@ public class FileServiceTest extends BaseUnitTest {
 	
 	@Test
 	public void testGetPinnedFolders() throws Exception {
+		FileService fileService = new FileService();
 		List<File> fileEntries = fileService.getPinnedFolders();
 		if (fileEntries != null && !fileEntries.isEmpty()) {
 			for (File fEntry : fileEntries) {
@@ -174,6 +175,7 @@ public class FileServiceTest extends BaseUnitTest {
 
 	@Test
 	public void testGetFoldersWithRecentlyAddedFiles() throws Exception {
+		FileService fileService = new FileService();
 		List<File> fileEntries = fileService.getFoldersWithRecentlyAddedFiles(null);
 		if (fileEntries != null && !fileEntries.isEmpty()) {
 			for (File fEntry : fileEntries) {
@@ -186,7 +188,7 @@ public class FileServiceTest extends BaseUnitTest {
 	public void testGetFilesInFolder() throws Exception {
 		//TODO: fix for smartcloud
 		if (TestEnvironment.isSmartCloudEnvironment()) return;
-
+		FileService fileService = new FileService();
 		FileList listOfFolders = fileService.getMyFolders();
 		String testFolderId = listOfFolders.get(0).getFileId();
 		List<File> fileEntries = fileService.getFilesInFolder(testFolderId, null);
@@ -201,7 +203,7 @@ public class FileServiceTest extends BaseUnitTest {
 	public void testGetAllUserFiles() throws Exception {
 		//TODO: fix for smartcloud
 		if (TestEnvironment.isSmartCloudEnvironment()) return;
-
+		FileService fileService = new FileService();
 		List<File> fileEntries = fileService.getAllUserFiles(TestEnvironment.getCurrentUserUuid());
 		if (fileEntries != null && !fileEntries.isEmpty()) {
 			for (File fEntry : fileEntries) {
@@ -212,6 +214,7 @@ public class FileServiceTest extends BaseUnitTest {
 
 	@Test
 	public void testGetAllFileComments() throws Exception {
+		FileService fileService = new FileService();
 		FileList files = fileService.getMyFiles();
 		String fileId = files.get(0).getFileId();
 		CommentList commentEntries = fileService.getAllFileComments(fileId, null);
@@ -226,8 +229,9 @@ public class FileServiceTest extends BaseUnitTest {
 	public void testGetFilesComments() throws Exception {
 		//TODO: fix for smartcloud
 		if (TestEnvironment.isSmartCloudEnvironment()) return;
-		
+		FileService fileService = new FileService();
 		FileList files = fileService.getPublicFiles();
+		assertNotNull(files);
 		File file = files.get(0);
 		if (null == file) {
 			System.err.println("There are no public files on the test server, please populate some");
@@ -246,6 +250,7 @@ public class FileServiceTest extends BaseUnitTest {
 
 	@Test
 	public void testGetFilesInMyRecycleBin() throws Exception {
+		FileService fileService = new FileService();
 		List<File> fileEntries = fileService.getFilesInMyRecycleBin(null);
 		if (fileEntries != null && !fileEntries.isEmpty()) {
 			for (File fEntry : fileEntries) {
@@ -256,6 +261,7 @@ public class FileServiceTest extends BaseUnitTest {
 
 	@Test 
 	public void testUpdateFileMetadata() throws Exception {
+		FileService fileService = new FileService();
 		FileList listOfFiles = fileService.getMyFiles();
 		String testFileId = listOfFiles.get(0).getFileId();
 		File fileEntry = fileService.getFile(testFileId, false);
@@ -272,7 +278,7 @@ public class FileServiceTest extends BaseUnitTest {
 	public void testLock() throws Exception {
 		//TODO: fix for smartcloud
 		if (TestEnvironment.isSmartCloudEnvironment()) return;
-
+		FileService fileService = new FileService();
 		FileList listOfFiles = fileService.getMyFiles();
 		File file = listOfFiles.get(0);
 		if (file.isLocked()) {
@@ -289,7 +295,7 @@ public class FileServiceTest extends BaseUnitTest {
 	public void testUnlock() throws Exception {
 		//TODO: fix for smartcloud
 		if (TestEnvironment.isSmartCloudEnvironment()) return;
-
+		FileService fileService = new FileService();
 		FileList listOfFiles = fileService.getMyFiles();
 		File file = listOfFiles.get(0);
 		if (!file.isLocked()) {
@@ -306,7 +312,7 @@ public class FileServiceTest extends BaseUnitTest {
 	public void testPinAndUnPin() throws Exception {
 		//TODO: fix for smartcloud
 		if (TestEnvironment.isSmartCloudEnvironment()) return;
-
+		FileService fileService = new FileService();
 		FileList listOfFiles = fileService.getMyFiles();
 		String testFileId = listOfFiles.get(0).getFileId();
 		
@@ -325,6 +331,7 @@ public class FileServiceTest extends BaseUnitTest {
 
 	@Test
 	public void testDelete() throws Exception {
+		FileService fileService = new FileService();
 		FileList listOfFiles = fileService.getMyFiles();
 		String testDeleteFileId = listOfFiles.get(0).getFileId();
 		fileService.deleteFile(testDeleteFileId);
@@ -332,6 +339,7 @@ public class FileServiceTest extends BaseUnitTest {
 
 	@Test
 	public void testAddCommentToFile() throws Exception {
+		FileService fileService = new FileService();
 		FileList listOfFiles = fileService.getMyFiles();
 		String testFileId = listOfFiles.get(0).getFileId();
 		File fileEntry = fileService.getFile(testFileId, true);
@@ -344,6 +352,7 @@ public class FileServiceTest extends BaseUnitTest {
 
 	@Test
 	public void testAddCommentToMyFile() throws Exception {
+		FileService fileService = new FileService();
 		FileList listOfFiles = fileService.getMyFiles();
 		String testFileId = listOfFiles.get(0).getFileId();
 		File fileEntry = fileService.getFile(testFileId, true);
@@ -370,6 +379,7 @@ public class FileServiceTest extends BaseUnitTest {
 
 	@Test
 	public void testGetNonce() {
+		FileService fileService = new FileService();
 		String nonce = null;
 		try {
 			nonce = fileService.getNonce();
@@ -383,6 +393,7 @@ public class FileServiceTest extends BaseUnitTest {
 	public void testAddRemoveFileToFolders() throws Exception {
 		//TODO: fix for smartcloud
 		if (TestEnvironment.isSmartCloudEnvironment()) return;
+		FileService fileService = new FileService();
 		FileList folders = fileService.getMyFolders();
 		List<String> listOfFolderIds = new ArrayList<String>();
 		for(File folder : folders) {
@@ -400,6 +411,7 @@ public class FileServiceTest extends BaseUnitTest {
 	
 	@Test
 	public void testCreateComment() throws Exception {
+		FileService fileService = new FileService();
 		FileList listOfFiles = fileService.getMyFiles();
 		String fileId = listOfFiles.get(0).getFileId();
 		String comment = "TestCreateComment From FileServiceTest";
@@ -409,6 +421,7 @@ public class FileServiceTest extends BaseUnitTest {
 	
 	@Test
 	public void testCreateDeleteFolder() throws Exception {
+		FileService fileService = new FileService();
 		String name = "testCreateFolder";
 		String description = "testCreateFolder";
 		File folder = fileService.createFolder(name, description, "");
@@ -420,6 +433,7 @@ public class FileServiceTest extends BaseUnitTest {
 	
 	@Test
 	public void testDeleteComment() throws Exception {
+		FileService fileService = new FileService();
 		FileList listOfFiles = fileService.getMyFiles();
 		String fileId = listOfFiles.get(0).getFileId();
 		CommentList commentObject = fileService.getAllFileComments(fileId, null);
@@ -431,6 +445,7 @@ public class FileServiceTest extends BaseUnitTest {
 	
 	@Test
 	public void testDeleteFileFromRecycleBin() throws Exception {
+		FileService fileService = new FileService();
 		FileList listOfFiles = fileService.getFilesInMyRecycleBin();
 		String fileId = listOfFiles.get(0).getFileId();
 		fileService.deleteFileFromRecycleBin(fileId);
@@ -438,6 +453,7 @@ public class FileServiceTest extends BaseUnitTest {
 	
 	@Test
 	public void testGetFileShares() throws Exception {
+		FileService fileService = new FileService();
 		FileList listOfFiles = fileService.getFileShares();
 	}
 
@@ -445,7 +461,7 @@ public class FileServiceTest extends BaseUnitTest {
 	public void testGetFolder() throws Exception {
 		//TODO: fix for smartcloud
 		if (TestEnvironment.isSmartCloudEnvironment()) return;
-
+		FileService fileService = new FileService();
 		FileList folders = fileService.getMyFolders();
 		if(folders != null) {
 			File folder = fileService.getFolder(folders.get(0).getFileId()); 
@@ -455,6 +471,7 @@ public class FileServiceTest extends BaseUnitTest {
 		
 	@Test
 	public void testRestoreFileFromRecycleBin() throws Exception {
+		FileService fileService = new FileService();
 		FileList files = fileService.getFilesInMyRecycleBin();
 		if(files != null) {
 			fileService.restoreFileFromRecycleBin(files.get(0).getFileId());
@@ -463,6 +480,7 @@ public class FileServiceTest extends BaseUnitTest {
 	
 	@Test
 	public void testUpdateComment() throws Exception {
+		FileService fileService = new FileService();
 		FileList listOfFiles = fileService.getMyFiles();
 		String fileId = listOfFiles.get(0).getFileId();
 		Comment commentObject = fileService.createComment(fileId, "CommentCreated" + System.currentTimeMillis());
@@ -474,7 +492,7 @@ public class FileServiceTest extends BaseUnitTest {
 	
 	@Test
 	public void testUploadCommunityFile() throws Exception {
-		try {
+
 		CommunityService communityService = new CommunityService();
 		CommunityList communityList = communityService.getMyCommunities();
 		String communityUuid = null;
@@ -488,8 +506,6 @@ public class FileServiceTest extends BaseUnitTest {
 		ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
 		FileService fileService = new FileService();
 		fileService.uploadCommunityFile(bais, communityUuid, "HelloWord"+System.currentTimeMillis()+".txt", bytes.length);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		
 	}
 }

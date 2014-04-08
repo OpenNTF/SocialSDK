@@ -1432,7 +1432,7 @@ public class FileService extends BaseService {
             throw new FileServiceException(null, Messages.Invalid_UserId);
         }
         String accessType = anonymousAccess?AccessType.PUBLIC.getText():AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.MYUSERLIBRARY_DOCUMENT_FEED.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId), FileUrlParts.fileId.get(fileId));
+        String requestUri = FileUrls.USERLIBRARY_DOCUMENT_FEED.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId), FileUrlParts.fileId.get(fileId));
         
         return getFileComments(requestUri, parameters,null);
     }
@@ -2193,7 +2193,7 @@ public class FileService extends BaseService {
      */
     public FileList getPublicFiles(Map<String, String> params) throws FileServiceException {
         String accessType = AccessType.PUBLIC.getText();
-        String requestUri = FileUrls.MYFAVORITES_COLLECTIONS_FEED.format(this, FileUrlParts.accessType.get(accessType));
+        String requestUri = FileUrls.GET_PUBLIC_FILES.format(this, FileUrlParts.accessType.get(accessType));
 		params = (null == params)?new HashMap<String, String>():params;
         params.put(FileRequestParams.VISIBILITY.getFileRequestParams(), "public");
 

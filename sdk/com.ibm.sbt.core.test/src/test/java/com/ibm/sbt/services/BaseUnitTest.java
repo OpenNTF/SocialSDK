@@ -54,7 +54,7 @@ public abstract class BaseUnitTest {
 	 * @return
 	 */
 	protected String unRandomize(String inputString){
-		return TestEnvironment.isMockMode()?inputString.replaceAll("-?\\d*$", ""):inputString;
+		return TestEnvironment.isMockMode()?inputString.trim().replaceAll("([0-9a-f]{8,12}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{8,12}|-?[0-9])*$", ""):inputString;
 	}
 
 

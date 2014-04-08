@@ -39,7 +39,7 @@ public class BlogCommentCreateGetDeleteTest extends BaseBlogServiceTest {
 	public void CreateComment() throws BlogServiceException {
 		Comment commentReturned = blogService.createBlogComment(comment, blog.getHandle(), blogPost.getPostUuid());
 		assertNotNull(commentReturned.getTitle());
-		assertEquals(comment.getTitle(), commentReturned.getTitle());
+		assertEquals(unRandomize(comment.getTitle()), unRandomize(commentReturned.getTitle()));
 		deleteBlogComment(commentReturned);
 	}
 	
@@ -47,8 +47,8 @@ public class BlogCommentCreateGetDeleteTest extends BaseBlogServiceTest {
 	public void GetComment() throws BlogServiceException {
 		Comment commentGot = blogService.getBlogComment(blog.getHandle(), comment.getCommentUuid());
 		
-		assertEquals(comment.getTitle(), commentGot.getTitle());
-		assertEquals(comment.getContent(), commentGot.getContent());
+		assertEquals(unRandomize(comment.getTitle()), unRandomize(commentGot.getTitle()));
+		assertEquals(unRandomize(comment.getContent()), unRandomize(commentGot.getContent()));
 		deleteBlogComment(comment);
 	}
 

@@ -4,7 +4,7 @@
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Thu, 03 Apr 2014 09:24:19 GMT]]></value>
+        <value><![CDATA[Mon, 07 Apr 2014 10:20:45 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -28,23 +28,23 @@
     </header>
     <header>
         <name><![CDATA[Last-Modified]]></name>
-        <value><![CDATA[Thu, 03 Apr 2014 09:24:19 GMT]]></value>
+        <value><![CDATA[Mon, 07 Apr 2014 10:20:45 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Location]]></name>
-        <value><![CDATA[https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=90a9a5f3-59b2-4a56-8ba5-76defc3dfff7]]></value>
+        <value><![CDATA[https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=1bd4e29e-710d-4f1d-8d1d-800eb6684a93]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/vDrKbs34A+MQJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
+        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/i4Rda/ywZ22QJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=A7gDx48XrzVY+LnckGsPNKEByJCi3bmFVbtaSCFmdy5ejB6YX6JqponToQvHeJL/qhGjmdRST7U+B4/pVnkps91O4/pO2cfQjMpFZuvloI4C0YMeCdOlN0cxz2fVB2s6NrTtwQgKgPfbvpi23gM+XEBVt8ufBU4Ylif5IE852sgQhhq1GXb9yJeITvReMADNsIOVx1DbIy4YL2hTkGO6xwqnioh22GWBiGsnxrhyDAQ0U3Z869MoZe2B0L3qXygq9IppMfuFrcCHAfq4julGYw7UQxvcCcxy49rJcJUDe+YVyWHi4Mb+KCvYY35gwrjOpIR3LpnkcHNqk73TD8Pt9/l8arzKQkEMHhaJRBtj1iKqC2Wd9MjNy8mbaesfVglQnOIUP/AuZB+5WO61HUEzjbyVe9DvEfsd1O2TjMPk0EFqyqTkneUfOetOjrRwNUfq5Bf2IZORGMuafnH+QTZhryt3mXKEOSn2PzArX96eZ9KR2zlbcObuq1a3r6cgv/Nbp/bzMcB/IqcJl+mnJZSCoe5s1/SfuqmncpBjpzB7IgypxDcAvKt3A+xywvTAx9k1Hrq17YrZiE6/SZcmmmJUzAm3IO/TYx/KuwQiy6wyVE6Bi0TdLwQEDm+LVVMhlzTcElbGqclOJoWmtUwbGwVSQsZPwZbRHDqigQWLcAAuJ3AxeMpaWRodvKs8CLRcM7VgtZSYdMmzte8Jypqb3mZZt3miIr5+aBCEA5pFltUoGWU=; Path=/]]></value>
+        <value><![CDATA[LtpaToken2=4UiTs2AFL4Z92tLCg1evzaUYA05IN4qo2kGiYRm7xuD6WPSEpKm+Yewf7MpPgGlMBlEk0vJowWdeTV46GvUmgPi680YlzibruF3+1uS1x2mqFvkS5N/gDqH72A/h1LlP3LkUtfcNXwxYuR+Riawkw0bY83g79QDTEN+qmP+wLsF/LBIwDP3L33ZPQ1MHdG2Yl11LJ+KD6WaFNDL54UltAo8ZY4p9KO/+Wn/64vBD+zGDqHKtw0u2fJ0qz+DmIUSCGB+xjEGcX0+bSbGu+ofY7C0mHk90yVYSQfLU4AZ9/29kcm5BFfZ00kgQNSo2iI3OdlbG2HhxhuLIbhA4Q+aPUs5Ud3l1422eiNnQxOmPWZtp+UacIqX1A84W95Ags18O33t1ZJx9fCqqp6CDxxGAezAJ/8BEJpdDt+KFOrg5QvpLyKfK+hw+R5ZMpCIz3mJmme6OptZO79hC658M7kQtnnQSOCkApc3VklE1x9JT+vze1mwSk+QxoFllVsPOy1u2YX/RUU+xpfJzh42XW/wHLQA0ukyxgWq/IhNobZLY8+J1WiPn7KUohFzAbisH94HsrPfAyDSQ9btSgyE6s2hHiY8uXLR/E4tKW6E37UfjuaBxX3Y3iklQ/RrbadDAyXNjFQTZqwe8G9dClcjwMYeEMgxUBkpiXXXEK5Y/NxXycJjJ3GHpt2nxc0Iw1wpqCBkbVads+heiG78oXWZOqqxtvw65VFEZpVJpc5NFmaJ/0iU=; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LCSESSIONID=0000eON9rfeVp_fAY4Q4xCpL8RR:18dna4k6n; Path=/; HttpOnly]]></value>
+        <value><![CDATA[LCSESSIONID=0000FkuURqKqE6dkdTNszMjLe6i:18dna4k6n; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Content-Length]]></name>
@@ -72,7 +72,7 @@
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Thu, 03 Apr 2014 09:24:29 GMT]]></value>
+        <value><![CDATA[Mon, 07 Apr 2014 10:20:55 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -96,7 +96,7 @@
     </header>
     <header>
         <name><![CDATA[Last-Modified]]></name>
-        <value><![CDATA[Thu, 03 Apr 2014 09:24:29 GMT]]></value>
+        <value><![CDATA[Mon, 07 Apr 2014 10:20:55 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Pragma]]></name>
@@ -104,15 +104,15 @@
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/vDrKbs34A+MQJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
+        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/i4Rda/ywZ22QJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=A7gDx48XrzVY+LnckGsPNKEByJCi3bmFVbtaSCFmdy5ejB6YX6JqponToQvHeJL/qhGjmdRST7U+B4/pVnkps91O4/pO2cfQjMpFZuvloI4C0YMeCdOlN0cxz2fVB2s6NrTtwQgKgPfbvpi23gM+XEBVt8ufBU4Ylif5IE852sgQhhq1GXb9yJeITvReMADNsIOVx1DbIy4YL2hTkGO6xwqnioh22GWBiGsnxrhyDAQ0U3Z869MoZe2B0L3qXygq9IppMfuFrcCHAfq4julGYw7UQxvcCcxy49rJcJUDe+YVyWHi4Mb+KCvYY35gwrjOpIR3LpnkcHNqk73TD8Pt9/l8arzKQkEMHhaJRBtj1iKqC2Wd9MjNy8mbaesfVglQnOIUP/AuZB+5WO61HUEzjbyVe9DvEfsd1O2TjMPk0EFqyqTkneUfOetOjrRwNUfq5Bf2IZORGMuafnH+QTZhryt3mXKEOSn2PzArX96eZ9KR2zlbcObuq1a3r6cgv/Nbp/bzMcB/IqcJl+mnJZSCoe5s1/SfuqmncpBjpzB7IgypxDcAvKt3A+xywvTAx9k1Hrq17YrZiE6/SZcmmmJUzAm3IO/TYx/KuwQiy6wyVE6Bi0TdLwQEDm+LVVMhlzTcElbGqclOJoWmtUwbGwVSQsZPwZbRHDqigQWLcAAuJ3AxeMpaWRodvKs8CLRcM7VgtZSYdMmzte8Jypqb3mZZt3miIr5+aBCEA5pFltUoGWU=; Path=/]]></value>
+        <value><![CDATA[LtpaToken2=4UiTs2AFL4Z92tLCg1evzaUYA05IN4qo2kGiYRm7xuD6WPSEpKm+Yewf7MpPgGlMBlEk0vJowWdeTV46GvUmgPi680YlzibruF3+1uS1x2mqFvkS5N/gDqH72A/h1LlP3LkUtfcNXwxYuR+Riawkw0bY83g79QDTEN+qmP+wLsF/LBIwDP3L33ZPQ1MHdG2Yl11LJ+KD6WaFNDL54UltAo8ZY4p9KO/+Wn/64vBD+zGDqHKtw0u2fJ0qz+DmIUSCGB+xjEGcX0+bSbGu+ofY7C0mHk90yVYSQfLU4AZ9/29kcm5BFfZ00kgQNSo2iI3OdlbG2HhxhuLIbhA4Q+aPUs5Ud3l1422eiNnQxOmPWZtp+UacIqX1A84W95Ags18O33t1ZJx9fCqqp6CDxxGAezAJ/8BEJpdDt+KFOrg5QvpLyKfK+hw+R5ZMpCIz3mJmme6OptZO79hC658M7kQtnnQSOCkApc3VklE1x9JT+vze1mwSk+QxoFllVsPOy1u2YX/RUU+xpfJzh42XW/wHLQA0ukyxgWq/IhNobZLY8+J1WiPn7KUohFzAbisH94HsrPfAyDSQ9btSgyE6s2hHiY8uXLR/E4tKW6E37UfjuaBxX3Y3iklQ/RrbadDAyXNjFQTZqwe8G9dClcjwMYeEMgxUBkpiXXXEK5Y/NxXycJjJ3GHpt2nxc0Iw1wpqCBkbVads+heiG78oXWZOqqxtvw65VFEZpVJpc5NFmaJ/0iU=; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LCSESSIONID=00005Lloe02qrcVjZKKrh3Siz66:18dna4k6n; Path=/; HttpOnly]]></value>
+        <value><![CDATA[LCSESSIONID=0000XFv5pt_5bntFpUJXl0915C0:18dna4k6n; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Keep-Alive]]></name>
@@ -136,44 +136,44 @@
     </header></headers>
 <data><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <entry xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns="http://www.w3.org/2005/Atom">
-  <snx:communityUuid>90a9a5f3-59b2-4a56-8ba5-76defc3dfff7</snx:communityUuid>
-  <id>http://communities.ibm.com:2006/service/atom/community/instance?communityUuid=90a9a5f3-59b2-4a56-8ba5-76defc3dfff7</id>
-  <title type="text">Test Followservice Community 1396517021218</title>
+  <snx:communityUuid>1bd4e29e-710d-4f1d-8d1d-800eb6684a93</snx:communityUuid>
+  <id>http://communities.ibm.com:2006/service/atom/community/instance?communityUuid=1bd4e29e-710d-4f1d-8d1d-800eb6684a93</id>
+  <title type="text">Test Followservice Community 1396866001167</title>
   <category term="community" scheme="http://www.ibm.com/xmlns/prod/sn/type">
   </category>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=90a9a5f3-59b2-4a56-8ba5-76defc3dfff7" rel="self">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=1bd4e29e-710d-4f1d-8d1d-800eb6684a93" rel="self">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=90a9a5f3-59b2-4a56-8ba5-76defc3dfff7" rel="edit">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=1bd4e29e-710d-4f1d-8d1d-800eb6684a93" rel="edit">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/html/communityview?communityUuid=90a9a5f3-59b2-4a56-8ba5-76defc3dfff7" rel="alternate" type="text/html">
+  <link href="https://dev.sdkdemo.com:444/communities/service/html/communityview?communityUuid=1bd4e29e-710d-4f1d-8d1d-800eb6684a93" rel="alternate" type="text/html">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/html/image?communityUuid=90a9a5f3-59b2-4a56-8ba5-76defc3dfff7&amp;lastMod=1396517059137" rel="http://www.ibm.com/xmlns/prod/sn/logo">
+  <link href="https://dev.sdkdemo.com:444/communities/service/html/image?communityUuid=1bd4e29e-710d-4f1d-8d1d-800eb6684a93&amp;lastMod=1396866045487" rel="http://www.ibm.com/xmlns/prod/sn/logo">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/service?communityUuid=90a9a5f3-59b2-4a56-8ba5-76defc3dfff7" rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/service?communityUuid=1bd4e29e-710d-4f1d-8d1d-800eb6684a93" rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/members?communityUuid=90a9a5f3-59b2-4a56-8ba5-76defc3dfff7" rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/members?communityUuid=1bd4e29e-710d-4f1d-8d1d-800eb6684a93" rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/bookmarks?communityUuid=90a9a5f3-59b2-4a56-8ba5-76defc3dfff7" rel="http://www.ibm.com/xmlns/prod/sn/bookmarks" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/bookmarks?communityUuid=1bd4e29e-710d-4f1d-8d1d-800eb6684a93" rel="http://www.ibm.com/xmlns/prod/sn/bookmarks" type="application/atom+xml">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/feeds?communityUuid=90a9a5f3-59b2-4a56-8ba5-76defc3dfff7" rel="http://www.ibm.com/xmlns/prod/sn/feeds" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/feeds?communityUuid=1bd4e29e-710d-4f1d-8d1d-800eb6684a93" rel="http://www.ibm.com/xmlns/prod/sn/feeds" type="application/atom+xml">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/remoteApplications?communityUuid=90a9a5f3-59b2-4a56-8ba5-76defc3dfff7" rel="http://www.ibm.com/xmlns/prod/sn/remote-applications" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/remoteApplications?communityUuid=1bd4e29e-710d-4f1d-8d1d-800eb6684a93" rel="http://www.ibm.com/xmlns/prod/sn/remote-applications" type="application/atom+xml">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/forum/topics?communityUuid=90a9a5f3-59b2-4a56-8ba5-76defc3dfff7" rel="http://www.ibm.com/xmlns/prod/sn/forum-topics" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/forum/topics?communityUuid=1bd4e29e-710d-4f1d-8d1d-800eb6684a93" rel="http://www.ibm.com/xmlns/prod/sn/forum-topics" type="application/atom+xml">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/invites?communityUuid=90a9a5f3-59b2-4a56-8ba5-76defc3dfff7" rel="http://www.ibm.com/xmlns/prod/sn/invitations-list" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/invites?communityUuid=1bd4e29e-710d-4f1d-8d1d-800eb6684a93" rel="http://www.ibm.com/xmlns/prod/sn/invitations-list" type="application/atom+xml">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/widgets?communityUuid=90a9a5f3-59b2-4a56-8ba5-76defc3dfff7" rel="http://www.ibm.com/xmlns/prod/sn/widgets" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/widgets?communityUuid=1bd4e29e-710d-4f1d-8d1d-800eb6684a93" rel="http://www.ibm.com/xmlns/prod/sn/widgets" type="application/atom+xml">
   </link>
   <snx:membercount>1</snx:membercount>
   <snx:communityType>public</snx:communityType>
   <snx:handle></snx:handle>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/subcommunities?communityUuid=90a9a5f3-59b2-4a56-8ba5-76defc3dfff7" rel="http://www.ibm.com/xmlns/prod/sn/subcommunities" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/subcommunities?communityUuid=1bd4e29e-710d-4f1d-8d1d-800eb6684a93" rel="http://www.ibm.com/xmlns/prod/sn/subcommunities" type="application/atom+xml">
   </link>
   <snx:preModeration>true</snx:preModeration>
   <snx:postModeration>true</snx:postModeration>
-  <published>2014-04-03T09:24:19.137Z</published>
-  <updated>2014-04-03T09:24:29.129Z</updated>
+  <published>2014-04-07T10:20:45.487Z</published>
+  <updated>2014-04-07T10:20:54.807Z</updated>
   <content type="html">Java Community Content</content>
   <summary type="text">Java Community Content</summary>
   <author>
@@ -188,13 +188,13 @@
     <snx:userState>active</snx:userState>
     <email>fadams@renovations.com</email>
   </contributor>
-  <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/activitystreams/urn:lsid:lconn.ibm.com:communities.community:90a9a5f3-59b2-4a56-8ba5-76defc3dfff7/@all/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/activitystream" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/activitystreams/urn:lsid:lconn.ibm.com:communities.community:1bd4e29e-710d-4f1d-8d1d-800eb6684a93/@all/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/activitystream" type="application/atom+xml">
   </link>
-  <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/ublog/urn:lsid:lconn.ibm.com:communities.community:90a9a5f3-59b2-4a56-8ba5-76defc3dfff7/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/microblog" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/ublog/urn:lsid:lconn.ibm.com:communities.community:1bd4e29e-710d-4f1d-8d1d-800eb6684a93/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/microblog" type="application/atom+xml">
   </link>
   <snx:communityTheme snx:uuid="default">
   </snx:communityTheme>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/broadcasts?communityUuid=90a9a5f3-59b2-4a56-8ba5-76defc3dfff7" rel="http://www.ibm.com/xmlns/prod/sn/community-broadcasts" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/broadcasts?communityUuid=1bd4e29e-710d-4f1d-8d1d-800eb6684a93" rel="http://www.ibm.com/xmlns/prod/sn/community-broadcasts" type="application/atom+xml">
   </link>
 </entry>]]></data>
 </response>
@@ -202,7 +202,7 @@
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Thu, 03 Apr 2014 09:24:37 GMT]]></value>
+        <value><![CDATA[Mon, 07 Apr 2014 10:20:59 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -226,23 +226,23 @@
     </header>
     <header>
         <name><![CDATA[Last-Modified]]></name>
-        <value><![CDATA[Thu, 03 Apr 2014 09:24:37 GMT]]></value>
+        <value><![CDATA[Mon, 07 Apr 2014 10:21:00 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Location]]></name>
-        <value><![CDATA[https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=0e9184f4-fa58-42b9-bb2c-d4741b91901e]]></value>
+        <value><![CDATA[https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=7254737f-ca98-4f43-869b-7025d1addfcf]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/vDrKbs34A+MQJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
+        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/i4Rda/ywZ22QJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=A7gDx48XrzVY+LnckGsPNKEByJCi3bmFVbtaSCFmdy5ejB6YX6JqponToQvHeJL/qhGjmdRST7U+B4/pVnkps91O4/pO2cfQjMpFZuvloI4C0YMeCdOlN0cxz2fVB2s6NrTtwQgKgPfbvpi23gM+XEBVt8ufBU4Ylif5IE852sgQhhq1GXb9yJeITvReMADNsIOVx1DbIy4YL2hTkGO6xwqnioh22GWBiGsnxrhyDAQ0U3Z869MoZe2B0L3qXygq9IppMfuFrcCHAfq4julGYw7UQxvcCcxy49rJcJUDe+YVyWHi4Mb+KCvYY35gwrjOpIR3LpnkcHNqk73TD8Pt9/l8arzKQkEMHhaJRBtj1iKqC2Wd9MjNy8mbaesfVglQnOIUP/AuZB+5WO61HUEzjbyVe9DvEfsd1O2TjMPk0EFqyqTkneUfOetOjrRwNUfq5Bf2IZORGMuafnH+QTZhryt3mXKEOSn2PzArX96eZ9KR2zlbcObuq1a3r6cgv/Nbp/bzMcB/IqcJl+mnJZSCoe5s1/SfuqmncpBjpzB7IgypxDcAvKt3A+xywvTAx9k1Hrq17YrZiE6/SZcmmmJUzAm3IO/TYx/KuwQiy6wyVE6Bi0TdLwQEDm+LVVMhlzTcElbGqclOJoWmtUwbGwVSQsZPwZbRHDqigQWLcAAuJ3AxeMpaWRodvKs8CLRcM7VgtZSYdMmzte8Jypqb3mZZt3miIr5+aBCEA5pFltUoGWU=; Path=/]]></value>
+        <value><![CDATA[LtpaToken2=4UiTs2AFL4Z92tLCg1evzaUYA05IN4qo2kGiYRm7xuD6WPSEpKm+Yewf7MpPgGlMBlEk0vJowWdeTV46GvUmgPi680YlzibruF3+1uS1x2mqFvkS5N/gDqH72A/h1LlP3LkUtfcNXwxYuR+Riawkw0bY83g79QDTEN+qmP+wLsF/LBIwDP3L33ZPQ1MHdG2Yl11LJ+KD6WaFNDL54UltAo8ZY4p9KO/+Wn/64vBD+zGDqHKtw0u2fJ0qz+DmIUSCGB+xjEGcX0+bSbGu+ofY7C0mHk90yVYSQfLU4AZ9/29kcm5BFfZ00kgQNSo2iI3OdlbG2HhxhuLIbhA4Q+aPUs5Ud3l1422eiNnQxOmPWZtp+UacIqX1A84W95Ags18O33t1ZJx9fCqqp6CDxxGAezAJ/8BEJpdDt+KFOrg5QvpLyKfK+hw+R5ZMpCIz3mJmme6OptZO79hC658M7kQtnnQSOCkApc3VklE1x9JT+vze1mwSk+QxoFllVsPOy1u2YX/RUU+xpfJzh42XW/wHLQA0ukyxgWq/IhNobZLY8+J1WiPn7KUohFzAbisH94HsrPfAyDSQ9btSgyE6s2hHiY8uXLR/E4tKW6E37UfjuaBxX3Y3iklQ/RrbadDAyXNjFQTZqwe8G9dClcjwMYeEMgxUBkpiXXXEK5Y/NxXycJjJ3GHpt2nxc0Iw1wpqCBkbVads+heiG78oXWZOqqxtvw65VFEZpVJpc5NFmaJ/0iU=; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LCSESSIONID=0000yvEDY4nKW5B4JJam9W8rMhw:18dna4k6n; Path=/; HttpOnly]]></value>
+        <value><![CDATA[LCSESSIONID=0000MSMoQ89WtbEJKmj1Ekpn5ai:18dna4k6n; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Content-Length]]></name>
@@ -270,7 +270,7 @@
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Thu, 03 Apr 2014 09:24:47 GMT]]></value>
+        <value><![CDATA[Mon, 07 Apr 2014 10:21:10 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -294,7 +294,7 @@
     </header>
     <header>
         <name><![CDATA[Last-Modified]]></name>
-        <value><![CDATA[Thu, 03 Apr 2014 09:24:47 GMT]]></value>
+        <value><![CDATA[Mon, 07 Apr 2014 10:21:10 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Pragma]]></name>
@@ -302,15 +302,15 @@
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/vDrKbs34A+MQJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
+        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/i4Rda/ywZ22QJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=A7gDx48XrzVY+LnckGsPNKEByJCi3bmFVbtaSCFmdy5ejB6YX6JqponToQvHeJL/qhGjmdRST7U+B4/pVnkps91O4/pO2cfQjMpFZuvloI4C0YMeCdOlN0cxz2fVB2s6NrTtwQgKgPfbvpi23gM+XEBVt8ufBU4Ylif5IE852sgQhhq1GXb9yJeITvReMADNsIOVx1DbIy4YL2hTkGO6xwqnioh22GWBiGsnxrhyDAQ0U3Z869MoZe2B0L3qXygq9IppMfuFrcCHAfq4julGYw7UQxvcCcxy49rJcJUDe+YVyWHi4Mb+KCvYY35gwrjOpIR3LpnkcHNqk73TD8Pt9/l8arzKQkEMHhaJRBtj1iKqC2Wd9MjNy8mbaesfVglQnOIUP/AuZB+5WO61HUEzjbyVe9DvEfsd1O2TjMPk0EFqyqTkneUfOetOjrRwNUfq5Bf2IZORGMuafnH+QTZhryt3mXKEOSn2PzArX96eZ9KR2zlbcObuq1a3r6cgv/Nbp/bzMcB/IqcJl+mnJZSCoe5s1/SfuqmncpBjpzB7IgypxDcAvKt3A+xywvTAx9k1Hrq17YrZiE6/SZcmmmJUzAm3IO/TYx/KuwQiy6wyVE6Bi0TdLwQEDm+LVVMhlzTcElbGqclOJoWmtUwbGwVSQsZPwZbRHDqigQWLcAAuJ3AxeMpaWRodvKs8CLRcM7VgtZSYdMmzte8Jypqb3mZZt3miIr5+aBCEA5pFltUoGWU=; Path=/]]></value>
+        <value><![CDATA[LtpaToken2=4UiTs2AFL4Z92tLCg1evzaUYA05IN4qo2kGiYRm7xuD6WPSEpKm+Yewf7MpPgGlMBlEk0vJowWdeTV46GvUmgPi680YlzibruF3+1uS1x2mqFvkS5N/gDqH72A/h1LlP3LkUtfcNXwxYuR+Riawkw0bY83g79QDTEN+qmP+wLsF/LBIwDP3L33ZPQ1MHdG2Yl11LJ+KD6WaFNDL54UltAo8ZY4p9KO/+Wn/64vBD+zGDqHKtw0u2fJ0qz+DmIUSCGB+xjEGcX0+bSbGu+ofY7C0mHk90yVYSQfLU4AZ9/29kcm5BFfZ00kgQNSo2iI3OdlbG2HhxhuLIbhA4Q+aPUs5Ud3l1422eiNnQxOmPWZtp+UacIqX1A84W95Ags18O33t1ZJx9fCqqp6CDxxGAezAJ/8BEJpdDt+KFOrg5QvpLyKfK+hw+R5ZMpCIz3mJmme6OptZO79hC658M7kQtnnQSOCkApc3VklE1x9JT+vze1mwSk+QxoFllVsPOy1u2YX/RUU+xpfJzh42XW/wHLQA0ukyxgWq/IhNobZLY8+J1WiPn7KUohFzAbisH94HsrPfAyDSQ9btSgyE6s2hHiY8uXLR/E4tKW6E37UfjuaBxX3Y3iklQ/RrbadDAyXNjFQTZqwe8G9dClcjwMYeEMgxUBkpiXXXEK5Y/NxXycJjJ3GHpt2nxc0Iw1wpqCBkbVads+heiG78oXWZOqqxtvw65VFEZpVJpc5NFmaJ/0iU=; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LCSESSIONID=00003r1YpYywuvVdVLUpMQypQOH:18dna4k6n; Path=/; HttpOnly]]></value>
+        <value><![CDATA[LCSESSIONID=0000mRyXrQV5ehagJQSSk4PXuuz:18dna4k6n; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Keep-Alive]]></name>
@@ -334,44 +334,44 @@
     </header></headers>
 <data><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <entry xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns="http://www.w3.org/2005/Atom">
-  <snx:communityUuid>0e9184f4-fa58-42b9-bb2c-d4741b91901e</snx:communityUuid>
-  <id>http://communities.ibm.com:2006/service/atom/community/instance?communityUuid=0e9184f4-fa58-42b9-bb2c-d4741b91901e</id>
-  <title type="text">Test Followservice Community 1396517039583</title>
+  <snx:communityUuid>7254737f-ca98-4f43-869b-7025d1addfcf</snx:communityUuid>
+  <id>http://communities.ibm.com:2006/service/atom/community/instance?communityUuid=7254737f-ca98-4f43-869b-7025d1addfcf</id>
+  <title type="text">Test Followservice Community 1396866015701</title>
   <category term="community" scheme="http://www.ibm.com/xmlns/prod/sn/type">
   </category>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=0e9184f4-fa58-42b9-bb2c-d4741b91901e" rel="self">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=7254737f-ca98-4f43-869b-7025d1addfcf" rel="self">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=0e9184f4-fa58-42b9-bb2c-d4741b91901e" rel="edit">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=7254737f-ca98-4f43-869b-7025d1addfcf" rel="edit">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/html/communityview?communityUuid=0e9184f4-fa58-42b9-bb2c-d4741b91901e" rel="alternate" type="text/html">
+  <link href="https://dev.sdkdemo.com:444/communities/service/html/communityview?communityUuid=7254737f-ca98-4f43-869b-7025d1addfcf" rel="alternate" type="text/html">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/html/image?communityUuid=0e9184f4-fa58-42b9-bb2c-d4741b91901e&amp;lastMod=1396517077501" rel="http://www.ibm.com/xmlns/prod/sn/logo">
+  <link href="https://dev.sdkdemo.com:444/communities/service/html/image?communityUuid=7254737f-ca98-4f43-869b-7025d1addfcf&amp;lastMod=1396866060016" rel="http://www.ibm.com/xmlns/prod/sn/logo">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/service?communityUuid=0e9184f4-fa58-42b9-bb2c-d4741b91901e" rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/service?communityUuid=7254737f-ca98-4f43-869b-7025d1addfcf" rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/members?communityUuid=0e9184f4-fa58-42b9-bb2c-d4741b91901e" rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/members?communityUuid=7254737f-ca98-4f43-869b-7025d1addfcf" rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/bookmarks?communityUuid=0e9184f4-fa58-42b9-bb2c-d4741b91901e" rel="http://www.ibm.com/xmlns/prod/sn/bookmarks" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/bookmarks?communityUuid=7254737f-ca98-4f43-869b-7025d1addfcf" rel="http://www.ibm.com/xmlns/prod/sn/bookmarks" type="application/atom+xml">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/feeds?communityUuid=0e9184f4-fa58-42b9-bb2c-d4741b91901e" rel="http://www.ibm.com/xmlns/prod/sn/feeds" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/feeds?communityUuid=7254737f-ca98-4f43-869b-7025d1addfcf" rel="http://www.ibm.com/xmlns/prod/sn/feeds" type="application/atom+xml">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/remoteApplications?communityUuid=0e9184f4-fa58-42b9-bb2c-d4741b91901e" rel="http://www.ibm.com/xmlns/prod/sn/remote-applications" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/remoteApplications?communityUuid=7254737f-ca98-4f43-869b-7025d1addfcf" rel="http://www.ibm.com/xmlns/prod/sn/remote-applications" type="application/atom+xml">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/forum/topics?communityUuid=0e9184f4-fa58-42b9-bb2c-d4741b91901e" rel="http://www.ibm.com/xmlns/prod/sn/forum-topics" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/forum/topics?communityUuid=7254737f-ca98-4f43-869b-7025d1addfcf" rel="http://www.ibm.com/xmlns/prod/sn/forum-topics" type="application/atom+xml">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/invites?communityUuid=0e9184f4-fa58-42b9-bb2c-d4741b91901e" rel="http://www.ibm.com/xmlns/prod/sn/invitations-list" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/invites?communityUuid=7254737f-ca98-4f43-869b-7025d1addfcf" rel="http://www.ibm.com/xmlns/prod/sn/invitations-list" type="application/atom+xml">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/widgets?communityUuid=0e9184f4-fa58-42b9-bb2c-d4741b91901e" rel="http://www.ibm.com/xmlns/prod/sn/widgets" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/widgets?communityUuid=7254737f-ca98-4f43-869b-7025d1addfcf" rel="http://www.ibm.com/xmlns/prod/sn/widgets" type="application/atom+xml">
   </link>
   <snx:membercount>1</snx:membercount>
   <snx:communityType>public</snx:communityType>
   <snx:handle></snx:handle>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/subcommunities?communityUuid=0e9184f4-fa58-42b9-bb2c-d4741b91901e" rel="http://www.ibm.com/xmlns/prod/sn/subcommunities" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/subcommunities?communityUuid=7254737f-ca98-4f43-869b-7025d1addfcf" rel="http://www.ibm.com/xmlns/prod/sn/subcommunities" type="application/atom+xml">
   </link>
   <snx:preModeration>true</snx:preModeration>
   <snx:postModeration>true</snx:postModeration>
-  <published>2014-04-03T09:24:37.501Z</published>
-  <updated>2014-04-03T09:24:46.878Z</updated>
+  <published>2014-04-07T10:21:00.016Z</published>
+  <updated>2014-04-07T10:21:09.946Z</updated>
   <content type="html">Java Community Content</content>
   <summary type="text">Java Community Content</summary>
   <author>
@@ -386,13 +386,13 @@
     <snx:userState>active</snx:userState>
     <email>fadams@renovations.com</email>
   </contributor>
-  <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/activitystreams/urn:lsid:lconn.ibm.com:communities.community:0e9184f4-fa58-42b9-bb2c-d4741b91901e/@all/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/activitystream" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/activitystreams/urn:lsid:lconn.ibm.com:communities.community:7254737f-ca98-4f43-869b-7025d1addfcf/@all/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/activitystream" type="application/atom+xml">
   </link>
-  <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/ublog/urn:lsid:lconn.ibm.com:communities.community:0e9184f4-fa58-42b9-bb2c-d4741b91901e/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/microblog" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/ublog/urn:lsid:lconn.ibm.com:communities.community:7254737f-ca98-4f43-869b-7025d1addfcf/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/microblog" type="application/atom+xml">
   </link>
   <snx:communityTheme snx:uuid="default">
   </snx:communityTheme>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/broadcasts?communityUuid=0e9184f4-fa58-42b9-bb2c-d4741b91901e" rel="http://www.ibm.com/xmlns/prod/sn/community-broadcasts" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/broadcasts?communityUuid=7254737f-ca98-4f43-869b-7025d1addfcf" rel="http://www.ibm.com/xmlns/prod/sn/community-broadcasts" type="application/atom+xml">
   </link>
 </entry>]]></data>
 </response>
@@ -400,7 +400,7 @@
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Thu, 03 Apr 2014 09:24:53 GMT]]></value>
+        <value><![CDATA[Mon, 07 Apr 2014 10:21:17 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -424,23 +424,23 @@
     </header>
     <header>
         <name><![CDATA[Last-Modified]]></name>
-        <value><![CDATA[Thu, 03 Apr 2014 09:24:53 GMT]]></value>
+        <value><![CDATA[Mon, 07 Apr 2014 10:21:17 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Location]]></name>
-        <value><![CDATA[https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=9d95b229-c6ae-4978-b04f-aa87e9dd4ce0]]></value>
+        <value><![CDATA[https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=3650a5ad-54fb-4693-8b58-0537b92e7f71]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/vDrKbs34A+MQJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
+        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/i4Rda/ywZ22QJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=A7gDx48XrzVY+LnckGsPNKEByJCi3bmFVbtaSCFmdy5ejB6YX6JqponToQvHeJL/qhGjmdRST7U+B4/pVnkps91O4/pO2cfQjMpFZuvloI4C0YMeCdOlN0cxz2fVB2s6NrTtwQgKgPfbvpi23gM+XEBVt8ufBU4Ylif5IE852sgQhhq1GXb9yJeITvReMADNsIOVx1DbIy4YL2hTkGO6xwqnioh22GWBiGsnxrhyDAQ0U3Z869MoZe2B0L3qXygq9IppMfuFrcCHAfq4julGYw7UQxvcCcxy49rJcJUDe+YVyWHi4Mb+KCvYY35gwrjOpIR3LpnkcHNqk73TD8Pt9/l8arzKQkEMHhaJRBtj1iKqC2Wd9MjNy8mbaesfVglQnOIUP/AuZB+5WO61HUEzjbyVe9DvEfsd1O2TjMPk0EFqyqTkneUfOetOjrRwNUfq5Bf2IZORGMuafnH+QTZhryt3mXKEOSn2PzArX96eZ9KR2zlbcObuq1a3r6cgv/Nbp/bzMcB/IqcJl+mnJZSCoe5s1/SfuqmncpBjpzB7IgypxDcAvKt3A+xywvTAx9k1Hrq17YrZiE6/SZcmmmJUzAm3IO/TYx/KuwQiy6wyVE6Bi0TdLwQEDm+LVVMhlzTcElbGqclOJoWmtUwbGwVSQsZPwZbRHDqigQWLcAAuJ3AxeMpaWRodvKs8CLRcM7VgtZSYdMmzte8Jypqb3mZZt3miIr5+aBCEA5pFltUoGWU=; Path=/]]></value>
+        <value><![CDATA[LtpaToken2=4UiTs2AFL4Z92tLCg1evzaUYA05IN4qo2kGiYRm7xuD6WPSEpKm+Yewf7MpPgGlMBlEk0vJowWdeTV46GvUmgPi680YlzibruF3+1uS1x2mqFvkS5N/gDqH72A/h1LlP3LkUtfcNXwxYuR+Riawkw0bY83g79QDTEN+qmP+wLsF/LBIwDP3L33ZPQ1MHdG2Yl11LJ+KD6WaFNDL54UltAo8ZY4p9KO/+Wn/64vBD+zGDqHKtw0u2fJ0qz+DmIUSCGB+xjEGcX0+bSbGu+ofY7C0mHk90yVYSQfLU4AZ9/29kcm5BFfZ00kgQNSo2iI3OdlbG2HhxhuLIbhA4Q+aPUs5Ud3l1422eiNnQxOmPWZtp+UacIqX1A84W95Ags18O33t1ZJx9fCqqp6CDxxGAezAJ/8BEJpdDt+KFOrg5QvpLyKfK+hw+R5ZMpCIz3mJmme6OptZO79hC658M7kQtnnQSOCkApc3VklE1x9JT+vze1mwSk+QxoFllVsPOy1u2YX/RUU+xpfJzh42XW/wHLQA0ukyxgWq/IhNobZLY8+J1WiPn7KUohFzAbisH94HsrPfAyDSQ9btSgyE6s2hHiY8uXLR/E4tKW6E37UfjuaBxX3Y3iklQ/RrbadDAyXNjFQTZqwe8G9dClcjwMYeEMgxUBkpiXXXEK5Y/NxXycJjJ3GHpt2nxc0Iw1wpqCBkbVads+heiG78oXWZOqqxtvw65VFEZpVJpc5NFmaJ/0iU=; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LCSESSIONID=0000lS9rQYdjF-Ht0bc09wvExAn:18dna4k6n; Path=/; HttpOnly]]></value>
+        <value><![CDATA[LCSESSIONID=0000rH6UkneDZjk0F6HAjl8Ub4U:18dna4k6n; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Content-Length]]></name>
@@ -468,7 +468,7 @@
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Thu, 03 Apr 2014 09:25:03 GMT]]></value>
+        <value><![CDATA[Mon, 07 Apr 2014 10:21:28 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -492,7 +492,7 @@
     </header>
     <header>
         <name><![CDATA[Last-Modified]]></name>
-        <value><![CDATA[Thu, 03 Apr 2014 09:25:03 GMT]]></value>
+        <value><![CDATA[Mon, 07 Apr 2014 10:21:28 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Pragma]]></name>
@@ -500,15 +500,15 @@
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/vDrKbs34A+MQJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
+        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/i4Rda/ywZ22QJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=A7gDx48XrzVY+LnckGsPNKEByJCi3bmFVbtaSCFmdy5ejB6YX6JqponToQvHeJL/qhGjmdRST7U+B4/pVnkps91O4/pO2cfQjMpFZuvloI4C0YMeCdOlN0cxz2fVB2s6NrTtwQgKgPfbvpi23gM+XEBVt8ufBU4Ylif5IE852sgQhhq1GXb9yJeITvReMADNsIOVx1DbIy4YL2hTkGO6xwqnioh22GWBiGsnxrhyDAQ0U3Z869MoZe2B0L3qXygq9IppMfuFrcCHAfq4julGYw7UQxvcCcxy49rJcJUDe+YVyWHi4Mb+KCvYY35gwrjOpIR3LpnkcHNqk73TD8Pt9/l8arzKQkEMHhaJRBtj1iKqC2Wd9MjNy8mbaesfVglQnOIUP/AuZB+5WO61HUEzjbyVe9DvEfsd1O2TjMPk0EFqyqTkneUfOetOjrRwNUfq5Bf2IZORGMuafnH+QTZhryt3mXKEOSn2PzArX96eZ9KR2zlbcObuq1a3r6cgv/Nbp/bzMcB/IqcJl+mnJZSCoe5s1/SfuqmncpBjpzB7IgypxDcAvKt3A+xywvTAx9k1Hrq17YrZiE6/SZcmmmJUzAm3IO/TYx/KuwQiy6wyVE6Bi0TdLwQEDm+LVVMhlzTcElbGqclOJoWmtUwbGwVSQsZPwZbRHDqigQWLcAAuJ3AxeMpaWRodvKs8CLRcM7VgtZSYdMmzte8Jypqb3mZZt3miIr5+aBCEA5pFltUoGWU=; Path=/]]></value>
+        <value><![CDATA[LtpaToken2=4UiTs2AFL4Z92tLCg1evzaUYA05IN4qo2kGiYRm7xuD6WPSEpKm+Yewf7MpPgGlMBlEk0vJowWdeTV46GvUmgPi680YlzibruF3+1uS1x2mqFvkS5N/gDqH72A/h1LlP3LkUtfcNXwxYuR+Riawkw0bY83g79QDTEN+qmP+wLsF/LBIwDP3L33ZPQ1MHdG2Yl11LJ+KD6WaFNDL54UltAo8ZY4p9KO/+Wn/64vBD+zGDqHKtw0u2fJ0qz+DmIUSCGB+xjEGcX0+bSbGu+ofY7C0mHk90yVYSQfLU4AZ9/29kcm5BFfZ00kgQNSo2iI3OdlbG2HhxhuLIbhA4Q+aPUs5Ud3l1422eiNnQxOmPWZtp+UacIqX1A84W95Ags18O33t1ZJx9fCqqp6CDxxGAezAJ/8BEJpdDt+KFOrg5QvpLyKfK+hw+R5ZMpCIz3mJmme6OptZO79hC658M7kQtnnQSOCkApc3VklE1x9JT+vze1mwSk+QxoFllVsPOy1u2YX/RUU+xpfJzh42XW/wHLQA0ukyxgWq/IhNobZLY8+J1WiPn7KUohFzAbisH94HsrPfAyDSQ9btSgyE6s2hHiY8uXLR/E4tKW6E37UfjuaBxX3Y3iklQ/RrbadDAyXNjFQTZqwe8G9dClcjwMYeEMgxUBkpiXXXEK5Y/NxXycJjJ3GHpt2nxc0Iw1wpqCBkbVads+heiG78oXWZOqqxtvw65VFEZpVJpc5NFmaJ/0iU=; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LCSESSIONID=0000_LZrlDYkx7b4asopWspgF2i:18dna4k6n; Path=/; HttpOnly]]></value>
+        <value><![CDATA[LCSESSIONID=0000rh4mTbm04ohV5bmEB060D8O:18dna4k6n; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Keep-Alive]]></name>
@@ -532,44 +532,44 @@
     </header></headers>
 <data><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <entry xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns="http://www.w3.org/2005/Atom">
-  <snx:communityUuid>9d95b229-c6ae-4978-b04f-aa87e9dd4ce0</snx:communityUuid>
-  <id>http://communities.ibm.com:2006/service/atom/community/instance?communityUuid=9d95b229-c6ae-4978-b04f-aa87e9dd4ce0</id>
-  <title type="text">Test Followservice Community 1396517055203</title>
+  <snx:communityUuid>3650a5ad-54fb-4693-8b58-0537b92e7f71</snx:communityUuid>
+  <id>http://communities.ibm.com:2006/service/atom/community/instance?communityUuid=3650a5ad-54fb-4693-8b58-0537b92e7f71</id>
+  <title type="text">Test Followservice Community 1396866033610</title>
   <category term="community" scheme="http://www.ibm.com/xmlns/prod/sn/type">
   </category>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=9d95b229-c6ae-4978-b04f-aa87e9dd4ce0" rel="self">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=3650a5ad-54fb-4693-8b58-0537b92e7f71" rel="self">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=9d95b229-c6ae-4978-b04f-aa87e9dd4ce0" rel="edit">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=3650a5ad-54fb-4693-8b58-0537b92e7f71" rel="edit">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/html/communityview?communityUuid=9d95b229-c6ae-4978-b04f-aa87e9dd4ce0" rel="alternate" type="text/html">
+  <link href="https://dev.sdkdemo.com:444/communities/service/html/communityview?communityUuid=3650a5ad-54fb-4693-8b58-0537b92e7f71" rel="alternate" type="text/html">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/html/image?communityUuid=9d95b229-c6ae-4978-b04f-aa87e9dd4ce0&amp;lastMod=1396517093129" rel="http://www.ibm.com/xmlns/prod/sn/logo">
+  <link href="https://dev.sdkdemo.com:444/communities/service/html/image?communityUuid=3650a5ad-54fb-4693-8b58-0537b92e7f71&amp;lastMod=1396866077924" rel="http://www.ibm.com/xmlns/prod/sn/logo">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/service?communityUuid=9d95b229-c6ae-4978-b04f-aa87e9dd4ce0" rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/service?communityUuid=3650a5ad-54fb-4693-8b58-0537b92e7f71" rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/members?communityUuid=9d95b229-c6ae-4978-b04f-aa87e9dd4ce0" rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/members?communityUuid=3650a5ad-54fb-4693-8b58-0537b92e7f71" rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/bookmarks?communityUuid=9d95b229-c6ae-4978-b04f-aa87e9dd4ce0" rel="http://www.ibm.com/xmlns/prod/sn/bookmarks" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/bookmarks?communityUuid=3650a5ad-54fb-4693-8b58-0537b92e7f71" rel="http://www.ibm.com/xmlns/prod/sn/bookmarks" type="application/atom+xml">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/feeds?communityUuid=9d95b229-c6ae-4978-b04f-aa87e9dd4ce0" rel="http://www.ibm.com/xmlns/prod/sn/feeds" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/feeds?communityUuid=3650a5ad-54fb-4693-8b58-0537b92e7f71" rel="http://www.ibm.com/xmlns/prod/sn/feeds" type="application/atom+xml">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/remoteApplications?communityUuid=9d95b229-c6ae-4978-b04f-aa87e9dd4ce0" rel="http://www.ibm.com/xmlns/prod/sn/remote-applications" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/remoteApplications?communityUuid=3650a5ad-54fb-4693-8b58-0537b92e7f71" rel="http://www.ibm.com/xmlns/prod/sn/remote-applications" type="application/atom+xml">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/forum/topics?communityUuid=9d95b229-c6ae-4978-b04f-aa87e9dd4ce0" rel="http://www.ibm.com/xmlns/prod/sn/forum-topics" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/forum/topics?communityUuid=3650a5ad-54fb-4693-8b58-0537b92e7f71" rel="http://www.ibm.com/xmlns/prod/sn/forum-topics" type="application/atom+xml">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/invites?communityUuid=9d95b229-c6ae-4978-b04f-aa87e9dd4ce0" rel="http://www.ibm.com/xmlns/prod/sn/invitations-list" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/invites?communityUuid=3650a5ad-54fb-4693-8b58-0537b92e7f71" rel="http://www.ibm.com/xmlns/prod/sn/invitations-list" type="application/atom+xml">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/widgets?communityUuid=9d95b229-c6ae-4978-b04f-aa87e9dd4ce0" rel="http://www.ibm.com/xmlns/prod/sn/widgets" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/widgets?communityUuid=3650a5ad-54fb-4693-8b58-0537b92e7f71" rel="http://www.ibm.com/xmlns/prod/sn/widgets" type="application/atom+xml">
   </link>
   <snx:membercount>1</snx:membercount>
   <snx:communityType>public</snx:communityType>
   <snx:handle></snx:handle>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/subcommunities?communityUuid=9d95b229-c6ae-4978-b04f-aa87e9dd4ce0" rel="http://www.ibm.com/xmlns/prod/sn/subcommunities" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/subcommunities?communityUuid=3650a5ad-54fb-4693-8b58-0537b92e7f71" rel="http://www.ibm.com/xmlns/prod/sn/subcommunities" type="application/atom+xml">
   </link>
   <snx:preModeration>true</snx:preModeration>
   <snx:postModeration>true</snx:postModeration>
-  <published>2014-04-03T09:24:53.129Z</published>
-  <updated>2014-04-03T09:25:02.558Z</updated>
+  <published>2014-04-07T10:21:17.924Z</published>
+  <updated>2014-04-07T10:21:27.517Z</updated>
   <content type="html">Java Community Content</content>
   <summary type="text">Java Community Content</summary>
   <author>
@@ -584,13 +584,13 @@
     <snx:userState>active</snx:userState>
     <email>fadams@renovations.com</email>
   </contributor>
-  <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/activitystreams/urn:lsid:lconn.ibm.com:communities.community:9d95b229-c6ae-4978-b04f-aa87e9dd4ce0/@all/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/activitystream" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/activitystreams/urn:lsid:lconn.ibm.com:communities.community:3650a5ad-54fb-4693-8b58-0537b92e7f71/@all/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/activitystream" type="application/atom+xml">
   </link>
-  <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/ublog/urn:lsid:lconn.ibm.com:communities.community:9d95b229-c6ae-4978-b04f-aa87e9dd4ce0/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/microblog" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/ublog/urn:lsid:lconn.ibm.com:communities.community:3650a5ad-54fb-4693-8b58-0537b92e7f71/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/microblog" type="application/atom+xml">
   </link>
   <snx:communityTheme snx:uuid="default">
   </snx:communityTheme>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/broadcasts?communityUuid=9d95b229-c6ae-4978-b04f-aa87e9dd4ce0" rel="http://www.ibm.com/xmlns/prod/sn/community-broadcasts" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/broadcasts?communityUuid=3650a5ad-54fb-4693-8b58-0537b92e7f71" rel="http://www.ibm.com/xmlns/prod/sn/community-broadcasts" type="application/atom+xml">
   </link>
 </entry>]]></data>
 </response>
@@ -598,7 +598,7 @@
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Thu, 03 Apr 2014 09:25:08 GMT]]></value>
+        <value><![CDATA[Mon, 07 Apr 2014 10:21:33 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -622,23 +622,23 @@
     </header>
     <header>
         <name><![CDATA[Last-Modified]]></name>
-        <value><![CDATA[Thu, 03 Apr 2014 09:25:08 GMT]]></value>
+        <value><![CDATA[Mon, 07 Apr 2014 10:21:33 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Location]]></name>
-        <value><![CDATA[https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=282cc9e6-a793-4018-8189-486d0ee5208a]]></value>
+        <value><![CDATA[https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=4755f749-5dd9-497f-8c41-f43898a596d9]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/vDrKbs34A+MQJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
+        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/i4Rda/ywZ22QJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=A7gDx48XrzVY+LnckGsPNKEByJCi3bmFVbtaSCFmdy5ejB6YX6JqponToQvHeJL/qhGjmdRST7U+B4/pVnkps91O4/pO2cfQjMpFZuvloI4C0YMeCdOlN0cxz2fVB2s6NrTtwQgKgPfbvpi23gM+XEBVt8ufBU4Ylif5IE852sgQhhq1GXb9yJeITvReMADNsIOVx1DbIy4YL2hTkGO6xwqnioh22GWBiGsnxrhyDAQ0U3Z869MoZe2B0L3qXygq9IppMfuFrcCHAfq4julGYw7UQxvcCcxy49rJcJUDe+YVyWHi4Mb+KCvYY35gwrjOpIR3LpnkcHNqk73TD8Pt9/l8arzKQkEMHhaJRBtj1iKqC2Wd9MjNy8mbaesfVglQnOIUP/AuZB+5WO61HUEzjbyVe9DvEfsd1O2TjMPk0EFqyqTkneUfOetOjrRwNUfq5Bf2IZORGMuafnH+QTZhryt3mXKEOSn2PzArX96eZ9KR2zlbcObuq1a3r6cgv/Nbp/bzMcB/IqcJl+mnJZSCoe5s1/SfuqmncpBjpzB7IgypxDcAvKt3A+xywvTAx9k1Hrq17YrZiE6/SZcmmmJUzAm3IO/TYx/KuwQiy6wyVE6Bi0TdLwQEDm+LVVMhlzTcElbGqclOJoWmtUwbGwVSQsZPwZbRHDqigQWLcAAuJ3AxeMpaWRodvKs8CLRcM7VgtZSYdMmzte8Jypqb3mZZt3miIr5+aBCEA5pFltUoGWU=; Path=/]]></value>
+        <value><![CDATA[LtpaToken2=4UiTs2AFL4Z92tLCg1evzaUYA05IN4qo2kGiYRm7xuD6WPSEpKm+Yewf7MpPgGlMBlEk0vJowWdeTV46GvUmgPi680YlzibruF3+1uS1x2mqFvkS5N/gDqH72A/h1LlP3LkUtfcNXwxYuR+Riawkw0bY83g79QDTEN+qmP+wLsF/LBIwDP3L33ZPQ1MHdG2Yl11LJ+KD6WaFNDL54UltAo8ZY4p9KO/+Wn/64vBD+zGDqHKtw0u2fJ0qz+DmIUSCGB+xjEGcX0+bSbGu+ofY7C0mHk90yVYSQfLU4AZ9/29kcm5BFfZ00kgQNSo2iI3OdlbG2HhxhuLIbhA4Q+aPUs5Ud3l1422eiNnQxOmPWZtp+UacIqX1A84W95Ags18O33t1ZJx9fCqqp6CDxxGAezAJ/8BEJpdDt+KFOrg5QvpLyKfK+hw+R5ZMpCIz3mJmme6OptZO79hC658M7kQtnnQSOCkApc3VklE1x9JT+vze1mwSk+QxoFllVsPOy1u2YX/RUU+xpfJzh42XW/wHLQA0ukyxgWq/IhNobZLY8+J1WiPn7KUohFzAbisH94HsrPfAyDSQ9btSgyE6s2hHiY8uXLR/E4tKW6E37UfjuaBxX3Y3iklQ/RrbadDAyXNjFQTZqwe8G9dClcjwMYeEMgxUBkpiXXXEK5Y/NxXycJjJ3GHpt2nxc0Iw1wpqCBkbVads+heiG78oXWZOqqxtvw65VFEZpVJpc5NFmaJ/0iU=; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LCSESSIONID=0000xLX2a87Z9fGdA5CnmZG6jLU:18dna4k6n; Path=/; HttpOnly]]></value>
+        <value><![CDATA[LCSESSIONID=00009B_WcULSmPA27aa5WbETG8s:18dna4k6n; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Content-Length]]></name>
@@ -666,7 +666,7 @@
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Thu, 03 Apr 2014 09:25:18 GMT]]></value>
+        <value><![CDATA[Mon, 07 Apr 2014 10:21:43 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -690,7 +690,7 @@
     </header>
     <header>
         <name><![CDATA[Last-Modified]]></name>
-        <value><![CDATA[Thu, 03 Apr 2014 09:25:19 GMT]]></value>
+        <value><![CDATA[Mon, 07 Apr 2014 10:21:43 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Pragma]]></name>
@@ -698,15 +698,15 @@
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/vDrKbs34A+MQJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
+        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/i4Rda/ywZ22QJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=A7gDx48XrzVY+LnckGsPNKEByJCi3bmFVbtaSCFmdy5ejB6YX6JqponToQvHeJL/qhGjmdRST7U+B4/pVnkps91O4/pO2cfQjMpFZuvloI4C0YMeCdOlN0cxz2fVB2s6NrTtwQgKgPfbvpi23gM+XEBVt8ufBU4Ylif5IE852sgQhhq1GXb9yJeITvReMADNsIOVx1DbIy4YL2hTkGO6xwqnioh22GWBiGsnxrhyDAQ0U3Z869MoZe2B0L3qXygq9IppMfuFrcCHAfq4julGYw7UQxvcCcxy49rJcJUDe+YVyWHi4Mb+KCvYY35gwrjOpIR3LpnkcHNqk73TD8Pt9/l8arzKQkEMHhaJRBtj1iKqC2Wd9MjNy8mbaesfVglQnOIUP/AuZB+5WO61HUEzjbyVe9DvEfsd1O2TjMPk0EFqyqTkneUfOetOjrRwNUfq5Bf2IZORGMuafnH+QTZhryt3mXKEOSn2PzArX96eZ9KR2zlbcObuq1a3r6cgv/Nbp/bzMcB/IqcJl+mnJZSCoe5s1/SfuqmncpBjpzB7IgypxDcAvKt3A+xywvTAx9k1Hrq17YrZiE6/SZcmmmJUzAm3IO/TYx/KuwQiy6wyVE6Bi0TdLwQEDm+LVVMhlzTcElbGqclOJoWmtUwbGwVSQsZPwZbRHDqigQWLcAAuJ3AxeMpaWRodvKs8CLRcM7VgtZSYdMmzte8Jypqb3mZZt3miIr5+aBCEA5pFltUoGWU=; Path=/]]></value>
+        <value><![CDATA[LtpaToken2=4UiTs2AFL4Z92tLCg1evzaUYA05IN4qo2kGiYRm7xuD6WPSEpKm+Yewf7MpPgGlMBlEk0vJowWdeTV46GvUmgPi680YlzibruF3+1uS1x2mqFvkS5N/gDqH72A/h1LlP3LkUtfcNXwxYuR+Riawkw0bY83g79QDTEN+qmP+wLsF/LBIwDP3L33ZPQ1MHdG2Yl11LJ+KD6WaFNDL54UltAo8ZY4p9KO/+Wn/64vBD+zGDqHKtw0u2fJ0qz+DmIUSCGB+xjEGcX0+bSbGu+ofY7C0mHk90yVYSQfLU4AZ9/29kcm5BFfZ00kgQNSo2iI3OdlbG2HhxhuLIbhA4Q+aPUs5Ud3l1422eiNnQxOmPWZtp+UacIqX1A84W95Ags18O33t1ZJx9fCqqp6CDxxGAezAJ/8BEJpdDt+KFOrg5QvpLyKfK+hw+R5ZMpCIz3mJmme6OptZO79hC658M7kQtnnQSOCkApc3VklE1x9JT+vze1mwSk+QxoFllVsPOy1u2YX/RUU+xpfJzh42XW/wHLQA0ukyxgWq/IhNobZLY8+J1WiPn7KUohFzAbisH94HsrPfAyDSQ9btSgyE6s2hHiY8uXLR/E4tKW6E37UfjuaBxX3Y3iklQ/RrbadDAyXNjFQTZqwe8G9dClcjwMYeEMgxUBkpiXXXEK5Y/NxXycJjJ3GHpt2nxc0Iw1wpqCBkbVads+heiG78oXWZOqqxtvw65VFEZpVJpc5NFmaJ/0iU=; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LCSESSIONID=0000sHrkKcnivG_LvbcDPSOzOM8:18dna4k6n; Path=/; HttpOnly]]></value>
+        <value><![CDATA[LCSESSIONID=0000QalBTRhlxD4jBF4lJvzhbRX:18dna4k6n; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Keep-Alive]]></name>
@@ -730,44 +730,44 @@
     </header></headers>
 <data><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <entry xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns="http://www.w3.org/2005/Atom">
-  <snx:communityUuid>282cc9e6-a793-4018-8189-486d0ee5208a</snx:communityUuid>
-  <id>http://communities.ibm.com:2006/service/atom/community/instance?communityUuid=282cc9e6-a793-4018-8189-486d0ee5208a</id>
-  <title type="text">Test Followservice Community 1396517070301</title>
+  <snx:communityUuid>4755f749-5dd9-497f-8c41-f43898a596d9</snx:communityUuid>
+  <id>http://communities.ibm.com:2006/service/atom/community/instance?communityUuid=4755f749-5dd9-497f-8c41-f43898a596d9</id>
+  <title type="text">Test Followservice Community 1396866048737</title>
   <category term="community" scheme="http://www.ibm.com/xmlns/prod/sn/type">
   </category>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=282cc9e6-a793-4018-8189-486d0ee5208a" rel="self">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=4755f749-5dd9-497f-8c41-f43898a596d9" rel="self">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=282cc9e6-a793-4018-8189-486d0ee5208a" rel="edit">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/instance?communityUuid=4755f749-5dd9-497f-8c41-f43898a596d9" rel="edit">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/html/communityview?communityUuid=282cc9e6-a793-4018-8189-486d0ee5208a" rel="alternate" type="text/html">
+  <link href="https://dev.sdkdemo.com:444/communities/service/html/communityview?communityUuid=4755f749-5dd9-497f-8c41-f43898a596d9" rel="alternate" type="text/html">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/html/image?communityUuid=282cc9e6-a793-4018-8189-486d0ee5208a&amp;lastMod=1396517108244" rel="http://www.ibm.com/xmlns/prod/sn/logo">
+  <link href="https://dev.sdkdemo.com:444/communities/service/html/image?communityUuid=4755f749-5dd9-497f-8c41-f43898a596d9&amp;lastMod=1396866093046" rel="http://www.ibm.com/xmlns/prod/sn/logo">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/service?communityUuid=282cc9e6-a793-4018-8189-486d0ee5208a" rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/service?communityUuid=4755f749-5dd9-497f-8c41-f43898a596d9" rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/members?communityUuid=282cc9e6-a793-4018-8189-486d0ee5208a" rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/members?communityUuid=4755f749-5dd9-497f-8c41-f43898a596d9" rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/bookmarks?communityUuid=282cc9e6-a793-4018-8189-486d0ee5208a" rel="http://www.ibm.com/xmlns/prod/sn/bookmarks" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/bookmarks?communityUuid=4755f749-5dd9-497f-8c41-f43898a596d9" rel="http://www.ibm.com/xmlns/prod/sn/bookmarks" type="application/atom+xml">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/feeds?communityUuid=282cc9e6-a793-4018-8189-486d0ee5208a" rel="http://www.ibm.com/xmlns/prod/sn/feeds" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/feeds?communityUuid=4755f749-5dd9-497f-8c41-f43898a596d9" rel="http://www.ibm.com/xmlns/prod/sn/feeds" type="application/atom+xml">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/remoteApplications?communityUuid=282cc9e6-a793-4018-8189-486d0ee5208a" rel="http://www.ibm.com/xmlns/prod/sn/remote-applications" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/remoteApplications?communityUuid=4755f749-5dd9-497f-8c41-f43898a596d9" rel="http://www.ibm.com/xmlns/prod/sn/remote-applications" type="application/atom+xml">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/forum/topics?communityUuid=282cc9e6-a793-4018-8189-486d0ee5208a" rel="http://www.ibm.com/xmlns/prod/sn/forum-topics" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/forum/topics?communityUuid=4755f749-5dd9-497f-8c41-f43898a596d9" rel="http://www.ibm.com/xmlns/prod/sn/forum-topics" type="application/atom+xml">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/invites?communityUuid=282cc9e6-a793-4018-8189-486d0ee5208a" rel="http://www.ibm.com/xmlns/prod/sn/invitations-list" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/invites?communityUuid=4755f749-5dd9-497f-8c41-f43898a596d9" rel="http://www.ibm.com/xmlns/prod/sn/invitations-list" type="application/atom+xml">
   </link>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/widgets?communityUuid=282cc9e6-a793-4018-8189-486d0ee5208a" rel="http://www.ibm.com/xmlns/prod/sn/widgets" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/widgets?communityUuid=4755f749-5dd9-497f-8c41-f43898a596d9" rel="http://www.ibm.com/xmlns/prod/sn/widgets" type="application/atom+xml">
   </link>
   <snx:membercount>1</snx:membercount>
   <snx:communityType>public</snx:communityType>
   <snx:handle></snx:handle>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/subcommunities?communityUuid=282cc9e6-a793-4018-8189-486d0ee5208a" rel="http://www.ibm.com/xmlns/prod/sn/subcommunities" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/subcommunities?communityUuid=4755f749-5dd9-497f-8c41-f43898a596d9" rel="http://www.ibm.com/xmlns/prod/sn/subcommunities" type="application/atom+xml">
   </link>
   <snx:preModeration>true</snx:preModeration>
   <snx:postModeration>true</snx:postModeration>
-  <published>2014-04-03T09:25:08.244Z</published>
-  <updated>2014-04-03T09:25:18.329Z</updated>
+  <published>2014-04-07T10:21:33.046Z</published>
+  <updated>2014-04-07T10:21:43.259Z</updated>
   <content type="html">Java Community Content</content>
   <summary type="text">Java Community Content</summary>
   <author>
@@ -782,13 +782,13 @@
     <snx:userState>active</snx:userState>
     <email>fadams@renovations.com</email>
   </contributor>
-  <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/activitystreams/urn:lsid:lconn.ibm.com:communities.community:282cc9e6-a793-4018-8189-486d0ee5208a/@all/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/activitystream" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/activitystreams/urn:lsid:lconn.ibm.com:communities.community:4755f749-5dd9-497f-8c41-f43898a596d9/@all/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/activitystream" type="application/atom+xml">
   </link>
-  <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/ublog/urn:lsid:lconn.ibm.com:communities.community:282cc9e6-a793-4018-8189-486d0ee5208a/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/microblog" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/ublog/urn:lsid:lconn.ibm.com:communities.community:4755f749-5dd9-497f-8c41-f43898a596d9/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/microblog" type="application/atom+xml">
   </link>
   <snx:communityTheme snx:uuid="default">
   </snx:communityTheme>
-  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/broadcasts?communityUuid=282cc9e6-a793-4018-8189-486d0ee5208a" rel="http://www.ibm.com/xmlns/prod/sn/community-broadcasts" type="application/atom+xml">
+  <link href="https://dev.sdkdemo.com:444/communities/service/atom/community/broadcasts?communityUuid=4755f749-5dd9-497f-8c41-f43898a596d9" rel="http://www.ibm.com/xmlns/prod/sn/community-broadcasts" type="application/atom+xml">
   </link>
 </entry>]]></data>
 </response>

@@ -37,8 +37,8 @@ public class ForumReplyGetUpdateTest extends BaseForumServiceTest {
 	@Test
 	public void testGetForumReply() throws ForumServiceException {
 		ForumReply replyGot = forumService.getForumReply(reply.getReplyUuid());
-		assertEquals(reply.getTitle(), replyGot.getTitle());
-		assertEquals(reply.getContent(), replyGot.getContent());
+		assertEquals(unRandomize(reply.getTitle()), unRandomize(replyGot.getTitle()));
+		assertEquals(unRandomize(reply.getContent()), unRandomize(replyGot.getContent()));
 	}
 
 	@Test
@@ -48,7 +48,7 @@ public class ForumReplyGetUpdateTest extends BaseForumServiceTest {
 		forumService.updateForumReply(reply);
 		ForumReply updatedReply = forumService.getForumReply(reply.getReplyUuid());
 		assertEquals(unRandomize(reply.getTitle()), unRandomize(updatedReply.getTitle()));
-		assertEquals(reply.getReplyUuid(), updatedReply.getReplyUuid());
+		assertEquals(unRandomize(reply.getReplyUuid()), unRandomize(updatedReply.getReplyUuid()));
 		assertEquals(unRandomize(reply.getContent()), unRandomize(updatedReply.getContent().trim()));
 	}
 

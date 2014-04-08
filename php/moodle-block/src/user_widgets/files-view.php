@@ -25,20 +25,20 @@ function onFilesViewTypeChange***REMOVED*** echo $timestamp; ?>() {
 				var typeList = dom.byId("ibm-sbt-files-view-list-***REMOVED*** echo $timestamp; ?>");
 				var currentType = typeList.options[typeList.selectedIndex].value;
 		
-				var actionTemplate = dom.byId("actionTemplate-***REMOVED*** echo $timestamp; ?>").textContent;
-				var viewTemplate = dom.byId("viewTemplate-***REMOVED*** echo $timestamp; ?>").textContent;
-				var moveToTrashTemplate = dom.byId("moveToTrashTemplate-***REMOVED*** echo $timestamp; ?>").textContent;
-				var uploadFileTemplate = dom.byId("uploadFileTemplate-***REMOVED*** echo $timestamp; ?>").textContent;
-				var addTagsTemplate = dom.byId("addTagsTemplate-***REMOVED*** echo $timestamp; ?>").textContent;
-				var shareFilesTemplate = dom.byId("shareFilesTemplate-***REMOVED*** echo $timestamp; ?>").textContent;
-				var dialogTemplate = dom.byId("dialogTemplate-***REMOVED*** echo $timestamp; ?>").textContent;
+				var actionTemplate = dom.byId("filesViewActionTemplate***REMOVED*** echo $timestamp; ?>").textContent;
+				var viewTemplate = dom.byId("filesViewViewTemplate***REMOVED*** echo $timestamp; ?>").textContent;
+				var moveToTrashTemplate = dom.byId("filesViewMoveToTrashTemplate***REMOVED*** echo $timestamp; ?>").textContent;
+				var uploadFileTemplate = dom.byId("filesViewUploadFileTemplate***REMOVED*** echo $timestamp; ?>").textContent;
+				var addTagsTemplate = dom.byId("filesViewAddTagsTemplate***REMOVED*** echo $timestamp; ?>").textContent;
+				var shareFilesTemplate = dom.byId("filesViewShareFilesTemplate***REMOVED*** echo $timestamp; ?>").textContent;
+				var dialogTemplate = dom.byId("filesViewDialogTemplate***REMOVED*** echo $timestamp; ?>").textContent;
 				
 
-			    domNode = dom.byId("pagingHeader-***REMOVED*** echo $timestamp; ?>");
+			    domNode = dom.byId("filesViewPagingHeader***REMOVED*** echo $timestamp; ?>");
 			    var PagingHeader = domNode.text || domNode.textContent;
-			    domNode = dom.byId("pagingFooter-***REMOVED*** echo $timestamp; ?>");
+			    domNode = dom.byId("filesViewPagingFooter***REMOVED*** echo $timestamp; ?>");
 			    var PagingFooter = domNode.text || domNode.textContent;
-			    domNode = dom.byId("filesViewRow-***REMOVED*** echo $timestamp; ?>");
+			    domNode = dom.byId("filesViewRow***REMOVED*** echo $timestamp; ?>");
 			    var FileRow = domNode.text || domNode.textContent;
 			
 				var filesView = new FilesView({
@@ -62,7 +62,7 @@ function onFilesViewTypeChange***REMOVED*** echo $timestamp; ?>() {
 				});
 
 			    filesView.grid.renderer.tableClass = "table";
-			    var gridTemplate = dom.byId("filesViewRow-***REMOVED*** echo $timestamp; ?>").textContent;
+			    var gridTemplate = dom.byId("filesViewRow***REMOVED*** echo $timestamp; ?>").textContent;
 			    filesView.grid.renderer.template = gridTemplate;
 
 			    filesView.grid.renderer.pagerTemplate = PagingHeader;

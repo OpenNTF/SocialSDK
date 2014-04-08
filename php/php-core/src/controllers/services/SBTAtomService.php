@@ -21,7 +21,7 @@ use Guzzle\Http\Message\Response;
 use Guzzle\Service\Exception\DescriptionBuilderException;
 
 /**
- * The proxy handles authentication with IBM services.
+ * 
  * 
  * @author Benjamin Jakobus
  */
@@ -29,17 +29,26 @@ use Guzzle\Service\Exception\DescriptionBuilderException;
 require_once BASE_PATH . '/config.php';
 include_once BASE_PATH . '/autoload.php';
 
-class SBTJsonService
+class SBTAtomService
 {
 	protected $endpointName;
 	protected $settings;
+	protected $document;
+	protected $values;
+	protected $tags;
 	
+	/**
+	 * Constructor.
+	 * 
+	 * @param string $endpointName
+	 */
 	function __construct($endpointName) 
 	{
 		$this->endpointName = $endpointName;
 	}
 	
-	public function makeRequest($method, $service, $header = array(), $body = null, $options = array()) {
+	public function makeRequest($method, $service, $header = array(), $body = null, $options = array()) 
+	{
 		$settings = new SBTSettings();
 		$store = SBTCredentialStore::getInstance();
 
@@ -54,8 +63,58 @@ class SBTJsonService
 		}		
 		// Make request
 		$response = $endpoint->makeRequest($settings->getURL($this->endpointName), $service, $method, $options, $body, $header, $this->endpointName);
+		$this->document = $response->getBody(TRUE);
 		
-		print_r($response->getBody(TRUE));
+		$this->_parseXML();
+		
+		return $this->document;
 	}	
+	
+	public function getAtomFeed() 
+	{
+		return $this->document;
+	}
+	
+	private function _parseXML() 
+	{
+		$parser = xml_parser_create();
+		xml_parser_set_option($parser, XML_OPTION_CASE_FOLDING, 0);
+		xml_parser_set_option($parser, XML_OPTION_SKIP_WHITE, 1);
+		xml_parse_into_struct($parser, $this->document, $this->values, $this->tags);
+		xml_parser_free($parser);
+	}
+	
+	
+	public function getAllTags($tagName) 
+	{
+		$offset = null;
+		$returnData = array();
+		$entry = array();
+		foreach ($this->values as $key => $val) {
+			
+			if ($val['tag'] == $tagName && $val['type'] == 'open') {
+				$offset = $key;
+				$entry = array();
+			}
+			
+			if ($offset != null) {
+				array_push($entry, $val);
+			}
+			
+			if ($val['tag'] == $tagName && $val['type'] == 'close') {
+				$offset = null;
+				array_push($returnData, $entry);
+			}
+		}
+		return $returnData;
+	}	
+	
+	public function printTags($tags)
+	{
+		foreach ($tags as $tag) {
+			var_dump($tag);
+			echo '<br/><br/>';
+		}
+	}
 }
 ?>

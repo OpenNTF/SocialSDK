@@ -50,7 +50,25 @@ import com.ibm.sbt.services.client.smartcloud.SmartCloudService;
 public class SmartCloudFormEndpoint extends FormEndpoint {
 	
 	private static final String SC_FORM_PAGE = "pkmslogin.form";
+	String federationInfoUrl = "/manage/resource/getDCInfo";
 	
+	
+	/**
+	 * this API returns the URL for authenticating the user in case
+	 * the user is part of a federated SmartCloud setup
+	 * 
+	 * default is /manage/resource/getDCInfo
+	 * 
+	 * @return the url where to POST the username to get the actual authentication page
+	 */
+	public String getFederationInfoUrl() {
+		return federationInfoUrl;
+	}
+
+	public void setFederationUrlInfo(String federationUrlInfo) {
+		this.federationInfoUrl = federationUrlInfo;
+	}
+
 	public SmartCloudFormEndpoint() {
     	setAuthenticationErrorCode(403);
 	}	
@@ -91,8 +109,9 @@ public class SmartCloudFormEndpoint extends FormEndpoint {
 
 			String entryUrl = getUrl();
 
+			
 			HttpPost getDCInfo = new HttpPost(entryUrl
-					+ "/manage/resource/getDCInfo");
+					+ getFederationInfoUrl());
 			List<NameValuePair> parameters = new ArrayList<NameValuePair>(2);
 			
 			parameters.add(new BasicNameValuePair("loginName", user));

@@ -269,13 +269,13 @@ class SBTCredentialStore {
 		} else if (self::$uid != null) {
 			$uid = self::$uid;
 		} else {
-			return;
+			return null;
 		}
 
 		$record = $DB->get_record(SESSION_NAME, array('user_id' => intval($uid)));
 
 		if ($record == null || empty($record)) {
-			return null;
+			return $uid;
 		}
 
 		$endpointMappings = (array) json_decode($record->$skey);
@@ -306,27 +306,31 @@ class SBTCredentialStore {
 		global $DB;
 		global $USER;
 		
-		if (isset($USER->id)) {
+	$uid = null;
+		if (isset($USER->id) && $USER->id != 0) {
 			$uid = $USER->id;
 		} else if (isset($_GET['uid'])) {
 			$uid = $_GET['uid'];
-		} else if (isset($_COOKIE['ibm-sbt-uid'])) {
+		} else if (isset($_COOKIE['ibm-sbt-uid']) && $_COOKIE['uid'] != null) {
 			$uid = $_COOKIE['uid'];
+		} else if (self::$uid != null) {
+			$uid = self::$uid;
 		} else {
-			return;
+			return false;
 		}
 		
 		$record = $DB->get_record(SESSION_NAME, array('user_id' => intval($uid)));
 		$endpointMappings = (array) json_decode($record->$skey);
 		
-		if ($endpointMappings == null) {
-			return;
+		if ($endpointMappings == null) {			
+			return false;
 		}
 		// Delete entry and update
 		unset($endpointMappings[$endpoint]);
 		
 		$record->$skey = json_encode($endpointMappings);
 		$DB->update_record(SESSION_NAME, $record);
+		return true;
 	}
 	
 	/**
@@ -377,13 +381,14 @@ class SBTCredentialStore {
 	 * @param string $endpoint The endpoint associated with the tokens.
 	 */
 	public function deleteTokens($endpoint = "connections") {
-		$this->_delete(TOKEN, $endpoint);
-		$this->_delete(TOKEN_TYPE, $endpoint);
-		$this->_delete(OAUTH_TOKEN, $endpoint);
-		$this->_delete(OAUTH_TOKEN_SECRET, $endpoint);
-		$this->_delete(REQUEST_TOKEN, $endpoint);
-		$this->_delete(OAUTH_VERIFIER_TOKEN, $endpoint);
-		$this->_delete(OAUTH_REQUEST_TOKEN_SECRET, $endpoint);
+		$ret1 = $this->_delete(TOKEN, $endpoint);
+		$ret2 = $this->_delete(TOKEN_TYPE, $endpoint);
+		$ret3 = $this->_delete(OAUTH_TOKEN, $endpoint);
+		$ret4 = $this->_delete(OAUTH_TOKEN_SECRET, $endpoint);
+		$ret5 = $this->_delete(REQUEST_TOKEN, $endpoint);
+		$ret6 = $this->_delete(OAUTH_VERIFIER_TOKEN, $endpoint);
+		$ret7 = $this->_delete(OAUTH_REQUEST_TOKEN_SECRET, $endpoint);
+		return ($ret1 && $ret2 && $ret3 && $ret4 && $ret5 && $ret6 && $ret7);
 	}
 	
 	/**
@@ -494,8 +499,9 @@ class SBTCredentialStore {
 	 * @param string $endpoint The endpoint associated with the credentials to delete.
 	 */
 	public function deleteBasicAuthCredentials($endpoint = "connections") {
-		$this->_delete(BASIC_AUTH_PASSWORD, $endpoint);
-		$this->_delete(BASIC_AUTH_USERNAME, $endpoint);
+		$ret1 = $this->_delete(BASIC_AUTH_PASSWORD, $endpoint);
+		$ret2 = $this->_delete(BASIC_AUTH_USERNAME, $endpoint);
+		return ($ret1 && $ret2);
 	}
 	
 	/**
@@ -503,14 +509,15 @@ class SBTCredentialStore {
 	 * @param string $endpoint The endpoint associated with the credentials to delete.
 	 */
 	public function deleteOAuthCredentials($endpoint = "connections") {
-		$this->_delete(TOKEN_TYPE, $endpoint);
-		$this->_delete(OAUTH_TOKEN, $endpoint);
-		$this->_delete(OAUTH_TOKEN_SECRET, $endpoint);
-		$this->_delete(OAUTH_REQUEST_TOKEN, $endpoint);
-		$this->_delete(TOKEN, $endpoint);
-		$this->_delete(OAUTH_VERIFIER_TOKEN, $endpoint);
-		$this->_delete(OAUTH_REQUEST_TOKEN_SECRET, $endpoint);
-		$this->_delete(REQUEST_TOKEN, $endpoint);
+		$ret1 = $this->_delete(TOKEN_TYPE, $endpoint);
+		$ret2 = $this->_delete(OAUTH_TOKEN, $endpoint);
+		$ret3 = $this->_delete(OAUTH_TOKEN_SECRET, $endpoint);
+		$ret4 = $this->_delete(OAUTH_REQUEST_TOKEN, $endpoint);
+		$ret5 = $this->_delete(TOKEN, $endpoint);
+		$ret6 = $this->_delete(OAUTH_VERIFIER_TOKEN, $endpoint);
+		$ret7 = $this->_delete(OAUTH_REQUEST_TOKEN_SECRET, $endpoint);
+		$ret8 = $this->_delete(REQUEST_TOKEN, $endpoint);
+		return ($ret1 && $ret2 && $ret3 && $ret4 && $ret5 && $ret6 && $ret7 && $ret8);
 	}
 	
 	public function storeTokenType($tokenType, $endpoint = "connections") {

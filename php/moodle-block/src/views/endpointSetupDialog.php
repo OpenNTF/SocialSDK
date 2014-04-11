@@ -558,7 +558,6 @@ function ibm_sbt_edit_endpoint() {
 					<option id="new_oauth1" value="oauth1">OAuth 1.0</option>
 					<option value="oauth2">OAuth 2.0</option>
 					<option value="basic">Basic</option>
-					<option value="form">Form-based</option>
 				</select>
 			</td>
 		</tr>

@@ -20,7 +20,7 @@
  * 
  * @author Benjamin Jakobus
  */
-require 'SBTBaseTestCase.php';
+require_once 'SBTBaseTestCase.php';
 class SBTCredentialStore_test extends SBTBaseTestCase 
 {
 	

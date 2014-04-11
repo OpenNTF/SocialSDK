@@ -63,6 +63,11 @@ if (!defined('OAUTH_REQUEST_TOKEN_SECRET')) {
 	define('OAUTH_REQUEST_TOKEN_SECRET', 'oauthrequesttokensecret');
 }
 
+if (!defined('CRYPTO_ENABLED')) {
+	global $CFG;
+	require_once $CFG->dirroot . DIRECTORY_SEPARATOR . 'blocks' . DIRECTORY_SEPARATOR . 'ibmsbt' . DIRECTORY_SEPARATOR . 'security-config.php';
+}
+
 /**
  * Credential Store for authorization tokens.
  *
@@ -144,10 +149,14 @@ class SBTCredentialStore {
 				$record->oauthrequesttoken = json_encode(array('connections' => null));
 				$record->oauthrequesttokensecret = json_encode(array('connections' => null));
 					
-				$iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC);
-				$this->iv = base64_encode(mcrypt_create_iv($iv_size, MCRYPT_RAND));
-				
-				$record->iv = $this->iv;
+				if (defined('CRYPTO_ENABLED') && CRYPTO_ENABLED) {
+					$iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC);
+					$this->iv = base64_encode(mcrypt_create_iv($iv_size, MCRYPT_RAND));
+					
+					$record->iv = $this->iv;
+				} else {
+					$record->iv = '';
+				}
 				$ret = $DB->insert_record(SESSION_NAME, $record);
 			} else {
 				foreach ($records as $record) {
@@ -200,10 +209,14 @@ class SBTCredentialStore {
 		$record->oauthrequesttoken = json_encode(array('connections' => null));
 		$record->oauthrequesttokensecret = json_encode(array('connections' => null));
 			
-		$iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC);
-		$this->iv = base64_encode(mcrypt_create_iv($iv_size, MCRYPT_RAND));
-
-		$record->iv = $this->iv;
+		if (defined('CRYPTO_ENABLED') && CRYPTO_ENABLED) {
+			$iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC);
+			$this->iv = base64_encode(mcrypt_create_iv($iv_size, MCRYPT_RAND));
+	
+			$record->iv = $this->iv;
+		} else {
+			$record->iv = '';
+		}
 		$ret = $DB->insert_record(SESSION_NAME, $record);
 	}
 	
@@ -236,7 +249,8 @@ class SBTCredentialStore {
 				return;
 			}
 			$endpointMappings = (array) json_decode($record->$skey);
-			$value = $this->_encrypt($this->key, $value, base64_decode($this->iv));
+			
+			$value = ibm_sbt_encrypt($this->key, $value, base64_decode($this->iv));
 			
 			$endpointMappings[$endpoint] = "$value";
 			$record->$skey = json_encode($endpointMappings);
@@ -293,7 +307,8 @@ class SBTCredentialStore {
 		if ($value == "" || $value == null) {
 			return null;
 		}
-		$value = $this->_decrypt($this->key, $value, base64_decode($this->iv));
+		
+		$value = ibm_sbt_decrypt($this->key, $value, base64_decode($this->iv));
 
 		return $value;
 	}
@@ -306,7 +321,7 @@ class SBTCredentialStore {
 		global $DB;
 		global $USER;
 		
-	$uid = null;
+		$uid = null;
 		if (isset($USER->id) && $USER->id != 0) {
 			$uid = $USER->id;
 		} else if (isset($_GET['uid'])) {
@@ -548,39 +563,4 @@ class SBTCredentialStore {
 		
 		return substr($str, 0, $length);
 	}
-	
-	private function _encrypt($key, $data, $iv){
-		$b = mcrypt_get_block_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC);
-		$enc = mcrypt_module_open(MCRYPT_RIJNDAEL_256, '', MCRYPT_MODE_CBC, '');
-		mcrypt_generic_init($enc, $key, $iv);
-	
-		$dataPad = $b - (strlen($data) % $b);
-		$data .= str_repeat(chr($dataPad), $dataPad);
-	
-		$encrypted_data = mcrypt_generic($enc, $data);
-	
-		mcrypt_generic_deinit($enc);
-		mcrypt_module_close($enc);
-	
-		return addslashes(base64_encode($encrypted_data));
-	}
-	
-	private function _decrypt($key, $encryptedData, $iv) {
-		$encryptedData = stripslashes($encryptedData);
-
-		$enc = mcrypt_module_open(MCRYPT_RIJNDAEL_256, '', MCRYPT_MODE_CBC, '');
-		mcrypt_generic_init($enc, $key, $iv);
-	
-		$encryptedData = base64_decode($encryptedData);
-		$data = mdecrypt_generic($enc, $encryptedData);
-		mcrypt_generic_deinit($enc);
-		mcrypt_module_close($enc);
-	
-		***REMOVED***
-		***REMOVED***
-	
-		return substr($data, 0, -$dataPad);
-	}
-	
-
 }

@@ -23,6 +23,7 @@
 
 define('IBM_SBT_MOODLE_TEST_BASE_PATH', '/home/benjamin/PHPWorkspace/moodle-unit-testing');
 define('CLI_SCRIPT', true);
+define('IBM_SBT_TEST', true);
 
 if (!defined('SESSION_NAME')) {
 	define('SESSION_NAME', 'ibm_sbt_session');

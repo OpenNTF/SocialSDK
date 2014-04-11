@@ -31,6 +31,11 @@ if (!defined('ENDPOINTS')) {
 	define('ENDPOINTS', 'ibm_sbt_endpoints');
 }
 
+if (!defined('CRYPTO_ENABLED')) {
+	global $CFG;
+	require_once $CFG->dirroot . DIRECTORY_SEPARATOR . 'blocks' . DIRECTORY_SEPARATOR . 'ibmsbt' . DIRECTORY_SEPARATOR . 'security-config.php';
+}
+
 class SBTSettings {
 	// Misc SDK settings
 	private $sdkDeployURL;
@@ -92,9 +97,7 @@ class SBTSettings {
 		$table->add_field('api_version', XMLDB_TYPE_TEXT, 'big', null, null, null, null);
 		$table->add_field('server_type', XMLDB_TYPE_TEXT, 'big', null, null, null, null);
 		$table->add_field('allow_client_access', XMLDB_TYPE_TEXT, 'big', null, null, null, null);
-		$table->add_field('form_auth_page', XMLDB_TYPE_TEXT, 'big', null, null, null, null);
-		$table->add_field('form_auth_login_page', XMLDB_TYPE_TEXT, 'big', null, null, null, null);
-		$table->add_field('form_auth_cookie_cache', XMLDB_TYPE_TEXT, 'big', null, null, null, null);
+		$table->add_field('iv', XMLDB_TYPE_TEXT, 'big', null, null, null, null);
 		
 		$table->add_field('created_by_user_id', XMLDB_TYPE_INTEGER, '10', null, null, null, null);
 		$table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
@@ -109,7 +112,33 @@ class SBTSettings {
 	public function getEndpoints() {
 		global $DB;
 		$endpoints = $DB->get_records(ENDPOINTS);
-		return $endpoints;
+		
+		$decryptedEndpoints = array();
+		
+		foreach ($endpoints as $endpoint) {
+			$endpoint->name = stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $endpoint->name, base64_decode($endpoint->iv)));
+			$endpoint->server_url = stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $endpoint->server_url, base64_decode($endpoint->iv)));
+			$endpoint->consumer_key = stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $endpoint->consumer_key, base64_decode($endpoint->iv)));
+			$endpoint->consumer_secret = stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $endpoint->consumer_secret, base64_decode($endpoint->iv)));
+			$endpoint->client_id = stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $endpoint->client_id, base64_decode($endpoint->iv)));
+			$endpoint->client_secret = stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $endpoint->client_secret, base64_decode($endpoint->iv)));
+			$endpoint->request_token_url = stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $endpoint->request_token_url, base64_decode($endpoint->iv)));
+			$endpoint->oauth2_callback_url = stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $endpoint->oauth2_callback_url, base64_decode($endpoint->iv)));
+			$endpoint->authorization_url = stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $endpoint->authorization_url, base64_decode($endpoint->iv)));
+			$endpoint->access_token_url = stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $endpoint->access_token_url, base64_decode($endpoint->iv)));
+			$endpoint->auth_type = stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $endpoint->auth_type, base64_decode($endpoint->iv)));
+			$endpoint->basic_auth_username = stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $endpoint->basic_auth_username, base64_decode($endpoint->iv)));
+			$endpoint->basic_auth_password = stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $endpoint->basic_auth_password, base64_decode($endpoint->iv)));
+			$endpoint->basic_auth_method = stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $endpoint->basic_auth_method, base64_decode($endpoint->iv)));
+			$endpoint->force_ssl_trust = stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $endpoint->force_ssl_trust, base64_decode($endpoint->iv)));
+			$endpoint->api_version = stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $endpoint->api_version, base64_decode($endpoint->iv)));
+			$endpoint->server_type = stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $endpoint->server_type, base64_decode($endpoint->iv)));
+			$endpoint->allow_client_access = stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $endpoint->allow_client_access, base64_decode($endpoint->iv)));
+			
+			array_push($decryptedEndpoints, $endpoint);
+		}
+		
+		return $decryptedEndpoints;
 	}
 	
 	
@@ -122,62 +151,12 @@ class SBTSettings {
 		global $DB;
 		$endpoints = $DB->get_records(ENDPOINTS);
 		foreach($endpoints as $e) {
+			$e->name = stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $e->name, base64_decode($e->iv)));
 			if ($e->name == $endpoint) {
-				return $e->server_url;
+				return stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $e->server_url, base64_decode($e->iv)));
 			}
 		}
 		
-		return null;
-	}
-	
-	/**
-	 * Returns the auth page URL used for form-based authentication page.
-	 *
-	 * @return
-	 */
-	public function getFormBasedAuthPage($endpoint = "connections") {
-		global $DB;
-		$endpoints = $DB->get_records(ENDPOINTS);
-		foreach($endpoints as $e) {
-			if ($e->name == $endpoint) {
-				return $e->form_auth_page;
-			}
-		}
-	
-		return null;
-	}
-	
-	/**
-	 * Returns the login page URL used for form-based authentication.
-	 *
-	 * @return
-	 */
-	public function getFormBasedAuthCookieCache($endpoint = "connections") {
-		global $DB;
-		$endpoints = $DB->get_records(ENDPOINTS);
-		foreach($endpoints as $e) {
-			if ($e->name == $endpoint) {
-				return $e->form_auth_cookie_cache;
-			}
-		}
-	
-		return null;
-	}
-	
-	/**
-	 * Returns the auth page used for form-based authentication login page url.
-	 *
-	 * @return
-	 */
-	public function getFormBasedAuthLoginPage($endpoint = "connections") {
-		global $DB;
-		$endpoints = $DB->get_records(ENDPOINTS);
-		foreach($endpoints as $e) {
-			if ($e->name == $endpoint) {
-				return $e->form_auth_login_page;
-			}
-		}
-	
 		return null;
 	}
 	
@@ -190,8 +169,9 @@ class SBTSettings {
 		global $DB;
 		$endpoints = $DB->get_records(ENDPOINTS);
 		foreach($endpoints as $e) {
+			$e->name = stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $e->name, base64_decode($e->iv)));
 			if ($e->name == $endpoint) {
-				return $e->consumer_key;
+				return stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $e->consumer_key, base64_decode($e->iv)));
 			}
 		}
 		
@@ -207,8 +187,9 @@ class SBTSettings {
 		global $DB;
 		$endpoints = $DB->get_records(ENDPOINTS);
 		foreach($endpoints as $e) {
+			$e->name = stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $e->name, base64_decode($e->iv)));
 			if ($e->name == $endpoint) {
-				return $e->consumer_secret;
+				return stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $e->consumer_secret, base64_decode($e->iv)));
 			}
 		}
 		
@@ -224,8 +205,9 @@ class SBTSettings {
 		global $DB;
 		$endpoints = $DB->get_records(ENDPOINTS);
 		foreach($endpoints as $e) {
+			$e->name = stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $e->name, base64_decode($e->iv)));
 			if ($e->name == $endpoint) {
-				return $e->client_secret;
+				return stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $e->client_secret, base64_decode($e->iv)));
 			}
 		}
 		
@@ -241,8 +223,9 @@ class SBTSettings {
 		global $DB;
 		$endpoints = $DB->get_records(ENDPOINTS);
 		foreach($endpoints as $e) {
+			$e->name = stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $e->name, base64_decode($e->iv)));
 			if ($e->name == $endpoint) {
-				return $e->client_id;
+				return stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $e->client_id, base64_decode($e->iv)));
 			}
 		}
 		
@@ -258,8 +241,9 @@ class SBTSettings {
 		global $DB;
 		$endpoints = $DB->get_records(ENDPOINTS);
 		foreach($endpoints as $e) {
+			$e->name = stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $e->name, base64_decode($e->iv)));
 			if ($e->name == $endpoint) {
-				return $e->request_token_url;
+				return stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $e->request_token_url, base64_decode($e->iv)));
 			}
 		}
 		
@@ -275,8 +259,9 @@ class SBTSettings {
 		global $DB;
 		$endpoints = $DB->get_records(ENDPOINTS);
 		foreach($endpoints as $e) {
+			$e->name = stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $e->name, base64_decode($e->iv)));
 			if ($e->name == $endpoint) {
-				return $e->force_ssl_trust;
+				return stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $e->force_ssl_trust, base64_decode($e->iv)));
 			}
 		}
 		
@@ -292,8 +277,9 @@ class SBTSettings {
 		global $DB;
 		$endpoints = $DB->get_records(ENDPOINTS);
 		foreach($endpoints as $e) {
+			$e->name = stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $e->name, base64_decode($e->iv)));
 			if ($e->name == $endpoint) {
-				return $e->authorization_url;
+				return stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $e->authorization_url, base64_decode($e->iv)));
 			}
 		}
 		
@@ -309,8 +295,9 @@ class SBTSettings {
 		global $DB;
 		$endpoints = $DB->get_records(ENDPOINTS);
 		foreach($endpoints as $e) {
+			$e->name = stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $e->name, base64_decode($e->iv)));
 			if ($e->name == $endpoint) {
-				return $e->api_version;
+				return stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $e->api_version, base64_decode($e->iv)));
 			}
 		}
 		
@@ -326,8 +313,9 @@ class SBTSettings {
 		global $DB;
 		$endpoints = $DB->get_records(ENDPOINTS);
 		foreach($endpoints as $e) {
+			$e->name = stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $e->name, base64_decode($e->iv)));
 			if ($e->name == $endpoint) {
-				return $e->access_token_url;
+				return stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $e->access_token_url, base64_decode($e->iv)));
 			}
 		}
 		
@@ -343,8 +331,9 @@ class SBTSettings {
 		global $DB;
 		$endpoints = $DB->get_records(ENDPOINTS);
 		foreach($endpoints as $e) {
+			$e->name = stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $e->name, base64_decode($e->iv)));
 			if ($e->name == $endpoint) {
-				return $e->auth_type;
+				return stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $e->auth_type, base64_decode($e->iv)));
 			}
 		}
 		
@@ -360,8 +349,9 @@ class SBTSettings {
 		global $DB;
 		$endpoints = $DB->get_records(ENDPOINTS);
 		foreach($endpoints as $e) {
+			$e->name = stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $e->name, base64_decode($e->iv)));
 			if ($e->name == $endpoint) {
-				return $e->oauth2_callback_url;
+				return stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $e->oauth2_callback_url, base64_decode($e->iv)));
 			}
 		}
 		
@@ -386,8 +376,9 @@ class SBTSettings {
 		global $DB;
 		$endpoints = $DB->get_records(ENDPOINTS);
 		foreach($endpoints as $e) {
+			$e->name = stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $e->name, base64_decode($e->iv)));
 			if ($e->name == $endpoint) {
-				return $e->name;
+				return stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $e->name, base64_decode($e->iv)));
 			}
 		}
 		
@@ -403,13 +394,16 @@ class SBTSettings {
 		global $DB;
 		$endpoints = $DB->get_records(ENDPOINTS);
 		foreach($endpoints as $e) {
+			$e->name = stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $e->name, base64_decode($e->iv)));
 			if ($e->name == $endpoint) {
-				return $e->basic_auth_username;
+				return stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $e->basic_auth_username, base64_decode($e->iv)));
 			}
 		}
 		
 		return null;
 	}
+	
+
 	
 	/**
 	 * Returns the server type.
@@ -420,8 +414,9 @@ class SBTSettings {
 		global $DB;
 		$endpoints = $DB->get_records(ENDPOINTS);
 		foreach($endpoints as $e) {
+			$e->name = stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $e->name, base64_decode($e->iv)));
 			if ($e->name == $endpoint) {
-				return $e->server_type;
+				return stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $e->server_type, base64_decode($e->iv)));
 			}
 		}
 		
@@ -437,8 +432,9 @@ class SBTSettings {
 		global $DB;
 		$endpoints = $DB->get_records(ENDPOINTS);
 		foreach($endpoints as $e) {
+			$e->name = stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $e->name, base64_decode($e->iv)));
 			if ($e->name == $endpoint) {
-				return $e->allow_client_access;
+				return stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $e->allow_client_access, base64_decode($e->iv)));
 			}
 		}
 		
@@ -454,8 +450,9 @@ class SBTSettings {
 		global $DB;
 		$endpoints = $DB->get_records(ENDPOINTS);
 		foreach($endpoints as $e) {
+			$e->name = stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $e->name, base64_decode($e->iv)));
 			if ($e->name == $endpoint) {
-				return $e->basic_auth_password;
+				return stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $e->basic_auth_password, base64_decode($e->iv)));
 			}
 		}
 
@@ -471,8 +468,9 @@ class SBTSettings {
 		global $DB;
 		$endpoints = $DB->get_records(ENDPOINTS);
 		foreach($endpoints as $e) {
+			$e->name = stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $e->name, base64_decode($e->iv)));
 			if ($e->name == $endpoint) {
-				return $e->basic_auth_method;
+				return stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $e->basic_auth_method, base64_decode($e->iv)));
 			}
 		}
 		
@@ -487,4 +485,6 @@ class SBTSettings {
 	public function getJSLibrary($endpoint = "connections") {
 		return $this->jsLibrary;
 	}
+	
+
 }

@@ -178,6 +178,16 @@ class SBTSettings {
 		return $this->_get($endpointName, 'basic_auth_username');
 	}
 	
+	
+	/**
+	 * Returns the OAuth origin.
+	 *
+	 * @return
+	 */
+	public function getOAuthOrigin($endpoint = "connections") {
+		return $this->_get($endpointName, 'oauth_origin');
+	}
+	
 	/**
 	 * Returns the server type.
 	 *

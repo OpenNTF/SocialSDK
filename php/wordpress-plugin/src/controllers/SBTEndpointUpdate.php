@@ -99,7 +99,8 @@ class SBTEndpointUpdate {
 			$endpoint['oauth2_callback_url'] = (isset($_POST['callback_url']) ? $_POST['callback_url'] : "");
 			$endpoint['endpoint_version'] = (isset($_POST['endpoint_version']) ? $_POST['endpoint_version'] : "");
 			$endpoint['allow_client_access'] = (isset($_POST['allow_client_access']) ? $_POST['allow_client_access'] : "");
-
+			$endpoint['oauth_origin'] = get_site_url();
+			
 			// If deletion_point is set to "yes", then the endpoint will be deleted.
 			// Note: The deletion UI controls will need to be uncommented in
 			// sbtk-options.php for this to work

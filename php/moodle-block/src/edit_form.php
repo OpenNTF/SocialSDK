@@ -24,6 +24,7 @@ if (!defined('BASE_LOCATION')) {
 	$autoload = __DIR__ . '/core/autoload.php';
 	include $autoload;
 }
+
 class block_ibmsbt_edit_form extends block_edit_form {
  
     protected function specific_definition($mform) {

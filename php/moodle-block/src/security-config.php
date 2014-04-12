@@ -35,7 +35,6 @@ function ibm_sbt_encrypt($key, $data, $iv){
 		$b = mcrypt_get_block_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC);
 		$enc = mcrypt_module_open(MCRYPT_RIJNDAEL_256, '', MCRYPT_MODE_CBC, '');
 		mcrypt_generic_init($enc, $key, $iv);
-		syslog(LOG_INFO, "plaintext " . $data);
 		$dataPad = $b - (strlen($data) % $b);
 		$data .= str_repeat(chr($dataPad), $dataPad);
 	
@@ -43,7 +42,6 @@ function ibm_sbt_encrypt($key, $data, $iv){
 	
 		mcrypt_generic_deinit($enc);
 		mcrypt_module_close($enc);
-syslog(LOG_INFO, "encrypted " . base64_encode($encrypted_data));
 		return addslashes(base64_encode($encrypted_data));
 	} else {
 		return $data;

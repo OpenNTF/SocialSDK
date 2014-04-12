@@ -56,11 +56,6 @@ if (!$isadmin && !defined('IBM_SBT_TEST')) {
 	return;
 } 
 
-
-
-
-
-
 if (isset($_POST['type'])) {
 	global $DB;
 	global $USER;
@@ -71,7 +66,7 @@ if (isset($_POST['type'])) {
 		$record->created_by_user_id = intval($USER->id);
 		
 		$record = populateRecord($record);
-		
+		syslog(LOG_INFO, ">>> " . $record->oauth_origin);
 		$ret = $DB->insert_record(ENDPOINTS, $record);
 		var_dump($ret);
 		return $ret;
@@ -116,6 +111,7 @@ if (isset($_POST['type'])) {
 		$endpoint['form_auth_page'] = ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $record->form_auth_page, base64_decode($record->iv));
 		$endpoint['form_auth_login_page'] = ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $record->form_auth_login_page, base64_decode($record->iv));
 		$endpoint['form_auth_cookie_cache'] = ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $record->form_auth_cookie_cache, base64_decode($record->iv));
+		$endpoint['oauth_origin'] = ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $record->oauth_origin, base64_decode($record->iv));
 		
 		echo json_encode($endpoint);
 	}
@@ -212,6 +208,9 @@ function populateRecord($record)
 	if (isset($_POST['name'])) {
 		$record->name = ibm_sbt_encrypt(IBM_SBT_SETTINGS_KEY, mysql_escape_string($_POST['name']), base64_decode($iv));
 	}
+	
+	global $CFG;
+	$record->oauth_origin = ibm_sbt_encrypt(IBM_SBT_SETTINGS_KEY, mysql_escape_string($CFG->wwwroot), base64_decode($iv));
 
 	return $record;
 }

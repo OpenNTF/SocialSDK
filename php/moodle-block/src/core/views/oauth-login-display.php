@@ -17,7 +17,6 @@
 						time += 60000;
 						now.setTime(time);
 						document.cookie = 'IBMSBTKOAuthLogin=yes;expires=' + now.toGMTString();
-					document.cookie = 'IBMSBTKOAuthOrigin=' + window.location + ';expires=' + now.toGMTString();
 						location.reload();";
 			}
 		?>

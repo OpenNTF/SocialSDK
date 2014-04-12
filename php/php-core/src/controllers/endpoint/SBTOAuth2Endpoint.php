@@ -90,9 +90,12 @@ class SBTOAuth2Endpoint extends BaseController implements SBTEndpoint
 			}
 			
 			$store->storeOAuthAccessToken($info['access_token'], $endpointName);
+			syslog(LOG_INFO, ">>>> endpoint: " . $endpointName);
+			syslog(LOG_INFO, ">>>> " . $settings->getOAuthOrigin($endpointName));
 			
-			$requestURL = $_COOKIE['IBMSBTKOAuthOrigin'];
-			header("Location: " . $requestURL);
+			
+			
+			header("Location: " . $settings->getOAuthOrigin($endpointName));
 			
 		} catch(Guzzle\Http\Exception\BadResponseException $e) {
 			$response = $e->getResponse();

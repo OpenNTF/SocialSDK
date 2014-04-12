@@ -77,7 +77,6 @@ class SBTSettings {
 		global $DB;
 		global $USER;
 		
-		
 		$table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
 		$table->add_field('name', XMLDB_TYPE_TEXT, 'big', null, null, null, null);
 		$table->add_field('server_url', XMLDB_TYPE_TEXT, 'big', null, null, null, null);
@@ -98,6 +97,7 @@ class SBTSettings {
 		$table->add_field('server_type', XMLDB_TYPE_TEXT, 'big', null, null, null, null);
 		$table->add_field('allow_client_access', XMLDB_TYPE_TEXT, 'big', null, null, null, null);
 		$table->add_field('iv', XMLDB_TYPE_TEXT, 'big', null, null, null, null);
+		$table->add_field('oauth_origin', XMLDB_TYPE_TEXT, 'big', null, null, null, null);
 		
 		$table->add_field('created_by_user_id', XMLDB_TYPE_INTEGER, '10', null, null, null, null);
 		$table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
@@ -134,7 +134,8 @@ class SBTSettings {
 			$endpoint->api_version = stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $endpoint->api_version, base64_decode($endpoint->iv)));
 			$endpoint->server_type = stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $endpoint->server_type, base64_decode($endpoint->iv)));
 			$endpoint->allow_client_access = stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $endpoint->allow_client_access, base64_decode($endpoint->iv)));
-			
+			$endpoint->oauth_origin = stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $endpoint->oauth_origin, base64_decode($endpoint->iv)));
+
 			array_push($decryptedEndpoints, $endpoint);
 		}
 		
@@ -211,6 +212,24 @@ class SBTSettings {
 			}
 		}
 		
+		return null;
+	}
+	
+	/**
+	 * Returns the OAuth origin.
+	 *
+	 * @return
+	 */
+	public function getOAuthOrigin($endpoint = "connections") {
+		global $DB;
+		$endpoints = $DB->get_records(ENDPOINTS);
+		foreach($endpoints as $e) {
+			$e->name = stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $e->name, base64_decode($e->iv)));
+			if ($e->name == $endpoint) {
+				return stripslashes(ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $e->oauth_origin, base64_decode($e->iv)));
+			}
+		}
+	
 		return null;
 	}
 	

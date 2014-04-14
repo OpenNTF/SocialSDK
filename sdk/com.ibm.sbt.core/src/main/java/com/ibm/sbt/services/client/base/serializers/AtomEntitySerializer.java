@@ -45,6 +45,7 @@ public class AtomEntitySerializer<T extends AtomEntity> extends BaseEntitySerial
 	protected static final String TYPE = "type";
 	protected static final String APPLICATION_XML = "application/xml";
 	protected static final String TEXT = "text";
+	protected static final String HTML = "html";
 	protected static final String KEY = "key";
 	protected static final String VALUE = "value";
 	protected static final String DATA = "data";
@@ -109,6 +110,12 @@ public class AtomEntitySerializer<T extends AtomEntity> extends BaseEntitySerial
 	
 	protected Node contributor() {
 		return (new PersonSerializer(entity.getContributor())).xmlNode(CONTRIBUTOR);
+	}
+
+	protected Element category(String scheme, String term) {
+		return element(CATEGORY, 
+				attribute(SCHEME, scheme), 
+				attribute(TERM, term));
 	}
 
 	protected Element categoryType(String type) {

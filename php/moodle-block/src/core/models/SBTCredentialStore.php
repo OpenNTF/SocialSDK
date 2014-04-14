@@ -236,8 +236,8 @@ class SBTCredentialStore {
 				$uid = $USER->id;
 			} else if (isset($_GET['uid'])) {
 				$uid = $_GET['uid'];
-			} else if (isset($_COOKIE['ibm-sbt-uid']) && $_COOKIE['uid'] != null) {
-				$uid = $_COOKIE['uid'];
+			} else if (isset($_COOKIE['ibm-sbt-uid']) && $_COOKIE['ibm-sbt-uid'] != null) {
+				$uid = $_COOKIE['ibm-sbt-uid'];
 			} else if (self::$uid != null) {
 				$uid = self::$uid;
 			} else {
@@ -278,8 +278,8 @@ class SBTCredentialStore {
 			$uid = $USER->id;
 		} else if (isset($_GET['uid'])) {
 			$uid = $_GET['uid'];
-		} else if (isset($_COOKIE['ibm-sbt-uid']) && $_COOKIE['uid'] != null) {
-			$uid = $_COOKIE['uid'];
+		} else if (isset($_COOKIE['ibm-sbt-uid']) && $_COOKIE['ibm-sbt-uid'] != null) {
+			$uid = $_COOKIE['ibm-sbt-uid'];
 		} else if (self::$uid != null) {
 			$uid = self::$uid;
 		} else {
@@ -289,7 +289,7 @@ class SBTCredentialStore {
 		$record = $DB->get_record(SESSION_NAME, array('user_id' => intval($uid)));
 
 		if ($record == null || empty($record)) {
-			return $uid;
+			return null;
 		}
 
 		$endpointMappings = (array) json_decode($record->$skey);

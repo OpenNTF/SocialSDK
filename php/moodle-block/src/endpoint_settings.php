@@ -66,7 +66,6 @@ if (isset($_POST['type'])) {
 		$record->created_by_user_id = intval($USER->id);
 		
 		$record = populateRecord($record);
-		syslog(LOG_INFO, ">>> " . $record->oauth_origin);
 		$ret = $DB->insert_record(ENDPOINTS, $record);
 		var_dump($ret);
 		return $ret;

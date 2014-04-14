@@ -85,7 +85,7 @@ public class ProfileAdminService extends ProfileService {
 		}
 		try{
 			Map<String, String> parameters = new HashMap<String, String>();
-			setIdParameter(parameters,id );
+			parameters.put(getIdParameter(id), id);
 			String deleteUrl = ProfileUrls.ADMIN_PROFILE_ENTRY.format(this);
 			super.deleteData(deleteUrl, parameters, getUniqueIdentifier(id));
 		}
@@ -112,7 +112,8 @@ public class ProfileAdminService extends ProfileService {
 		}		
 		try {
 			Map<String, String> parameters = new HashMap<String,String>();
-			setIdParameter(parameters, profile.getUserid());
+			String id = profile.getUserid();
+			parameters.put(getIdParameter(id), id);
 			Object createPayload = constructCreateRequestBody(profile);
 			
 			String createUrl = ProfileUrls.ADMIN_PROFILES.format(this);
@@ -169,7 +170,8 @@ public class ProfileAdminService extends ProfileService {
 			Map<String, String> parameters = new HashMap<String, String>();
 			parameters.put(ProfilesConstants.OUTPUT, "vcard");
 			parameters.put(ProfilesConstants.FORMAT, "full");
-			setIdParameter(parameters, profile.getUserid());
+			String id = profile.getUserid();
+			parameters.put(getIdParameter(id), id);
 			Object updateProfilePayload;
 			try {
 				updateProfilePayload = constructUpdateRequestBody(profile);

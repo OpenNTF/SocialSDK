@@ -1,3 +1,16 @@
+<style>
+	.ibmsbtDialog {
+  		background:white;
+    	z-index:5000; 
+    	-moz-box-shadow: 1px 0px 10px rgba(0, 0, 0, 0.7); 
+    	-moz-border-radius: 6px; 
+    	-webkit-border-radius: 6px; 
+    	-webkit-box-shadow: 1px 0px 10px rgba(0, 0, 0, 0.7); 
+    	color: black;
+    	border-style: none;
+    }
+</style>
+
 <script type="text/template" id="filesViewRow<?php echo $timestamp; ?>">
 <tr>
 	<td style="width:160px;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inline-block; padding-left: 10px;">
@@ -5,9 +18,6 @@
 				<input type="checkbox" data-dojo-attach-point="rowSelectionInput" data-dojo-attach-event="onclick: handleCheckBox" />
 				<a href="javascript: void(0)" target="_self" title="${tooltip}" dojoAttachPoint="placeTitleLink" data-dojo-attach-event="onclick: handleClick">${title}</a>
 			</span>
-		<div>
-			<hr style="width:85%; margin: 0.7em 0; left: -30px; border: 0; height: 1px;"/>
-		</div>
 	</td>
 </tr>
 </script>
@@ -17,7 +27,7 @@
 		<hr style="width:90%; margin: 0.7em 0; left: -30px; border: 0; height: 1px;"/>
 	</div>
 	<span dojoAttachPoint="showingResultsMessage">${pagingResults}</span>
-			<span style="padding-left: 70px;">
+			<span style="padding-left: 40px;">
 				<a style="${hidePreviousLink};" title="${nls.previousPage}" href="javascript: void(0)" data-dojo-attach-event="onclick: prevPage">${nls.previous}</a>
 				<span style="${hidePreviousLabel}">${nls.previous}</span>
 			</span>
@@ -256,7 +266,7 @@
 </script>
 
 <script type="text/template" id="filesViewDialogTemplate<?php echo $timestamp; ?>">
-<div role="dialog" style="z-index:5000; -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6); -webkit-border-radius: 6px; -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6); background:#CCC4C4; -moz-border-radius: 5px; color: black;" >
+<div role="dialog" class="ibmsbtDialog">
 	<div dojoattachpoint="titleBar" style="display: none;">
 		<span dojoattachpoint="titleNode"></span> 
 		<span title="Cancel" dojoattachevent="onclick: onCancel" class="dijitDialogCloseIcon" dojoattachpoint="closeButtonNode"></span>
@@ -285,7 +295,7 @@
 <script type="text/template" id="filesViewViewTemplate<?php echo $timestamp; ?>">
 <div dojoAttachPoint="domNode">
 	<div dojoAttachPoint="mainNode">
-		<div role="alert" class="alert alert-success" style="z-index:5000; -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6); -webkit-border-radius: 6px; -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6); background:#CCC4C4; -moz-border-radius: 5px; color: black; display: none;" dojoattachpoint="messageNode">
+		<div role="alert" style="display: none;" class="alert alert-success ibmsbtDialog" dojoattachpoint="messageNode">
 			<span class="alert alert-success" dojoattachpoint="messageBody"></span>
 			&nbsp;<a dojoattachevent="onclick: hideMessage" title="${nls.root.messageClose}" dojoattachpoint="messageClose" role="button"  href="javascript:;">Close</a>
 		</div>	

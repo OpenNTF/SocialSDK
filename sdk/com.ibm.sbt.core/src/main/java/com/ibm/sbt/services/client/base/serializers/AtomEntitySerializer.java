@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -23,13 +23,39 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 import com.ibm.sbt.services.client.base.AtomEntity;
+import com.ibm.sbt.services.client.base.ConnectionsConstants.Namespace;
 import com.ibm.sbt.services.client.base.ConnectionsConstants.Namespaces;
 
 /**
  * @author Mario Duarte
+ * @author Carlos Manias
  *
  */
 public class AtomEntitySerializer<T extends AtomEntity> extends BaseEntitySerializer<T> {
+
+	protected static final String COMMA = ",";
+	protected static final String SEMICOLON = ";";
+	protected static final String COLON = ":";
+	protected static final String ENTRY = "entry";
+	protected static final String TAGS = "tags";
+	protected static final String CATEGORY = "category";
+	protected static final String SCHEME = "scheme";
+	protected static final String TERM = "term";
+	protected static final String CONTENT = "content";
+	protected static final String TYPE = "type";
+	protected static final String APPLICATION_XML = "application/xml";
+	protected static final String TEXT = "text";
+	protected static final String KEY = "key";
+	protected static final String VALUE = "value";
+	protected static final String DATA = "data";
+	protected static final String TITLE = "title";
+	protected static final String ID = "id";
+	protected static final String PUBLISHED = "published";
+	protected static final String UPDATED = "updated";
+	protected static final String SUMMARY = "summary";
+	protected static final String AUTHOR = "author";
+	protected static final String CONTRIBUTOR = "contributor";
+	protected static final String LABEL = "label";
 
 	public AtomEntitySerializer(T entity) {
 		super(entity);
@@ -51,46 +77,45 @@ public class AtomEntitySerializer<T extends AtomEntity> extends BaseEntitySerial
 	}
 
 	protected Node entry() {
-		return rootNode(element(Namespaces.ATOM, "entry"));
+		return rootNode(element(Namespaces.ATOM, ENTRY));
 	}
 	
 	protected Element title() {
-		return textElement("title", entity.getTitle(), attribute("type", "text"));
+		return textElement(TITLE, entity.getTitle(), attribute(TYPE, TEXT));
 	}
 	
 	protected Element id() {
-		return textElement("id", entity.getId());
+		return textElement(ID, entity.getId());
 	}
 	
 	protected Element published() {
-		return textElement("published", DateSerializer.toString(entity.getPublished()));
+		return textElement(PUBLISHED, DateSerializer.toString(entity.getPublished()));
 	}
 	
 	protected Element updated() {
-		return textElement("updated", DateSerializer.toString(entity.getUpdated()));
+		return textElement(UPDATED, DateSerializer.toString(entity.getUpdated()));
 	}
 	
 	protected Element summary() {
-		return textElement("summary", entity.getSummary(), attribute("type", "text"));
-	}
+		return textElement(SUMMARY, entity.getSummary(), attribute(TYPE, TEXT)); }
 	
 	protected Element content() {
-		return textElement("content", entity.getContent(), attribute("type", "text"));
+		return textElement(CONTENT, entity.getContent(), attribute(TYPE, TEXT));
 	}
 	
 	protected Node author() {
-		return (new PersonSerializer(entity.getAuthor())).xmlNode("author");
+		return (new PersonSerializer(entity.getAuthor())).xmlNode(AUTHOR);
 	}
 	
 	protected Node contributor() {
-		return (new PersonSerializer(entity.getContributor())).xmlNode("contributor");
+		return (new PersonSerializer(entity.getContributor())).xmlNode(CONTRIBUTOR);
 	}
 
 	protected Element categoryType(String type) {
-		return element("category", 
-				attribute("scheme", "tag:ibm.com,2006:td/type"), 
-				attribute("term", type), 
-				attribute("label", type));
+		return element(CATEGORY, 
+				attribute(SCHEME, Namespace.TAG.getUrl()), 
+				attribute(TERM, type), 
+				attribute(LABEL, type));
 	}
 	
 	protected List<Element> tags() {
@@ -98,9 +123,9 @@ public class AtomEntitySerializer<T extends AtomEntity> extends BaseEntitySerial
 		if(entity.getBaseTags() != null) {
 			List<String> list = entity.getBaseTags();
 			for(String tag : list) {
-				elements.add(element("category", 
-						attribute("term", tag),
-						attribute("label", tag)));
+				elements.add(element(CATEGORY, 
+						attribute(TERM, tag),
+						attribute(LABEL, tag)));
 			}
 		}
 		return elements;

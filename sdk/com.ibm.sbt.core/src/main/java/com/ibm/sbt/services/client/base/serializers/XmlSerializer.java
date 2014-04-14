@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -61,17 +61,14 @@ public class XmlSerializer {
 		}
 	}
 	
-	protected void resetDocument() throws Exception {
-		this.doc = newDocument();
+	public Document getDocument() {
+		return doc;
 	}
 	
-	protected Document newDocument() throws Exception {
-		DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
-		docFactory.setNamespaceAware(true);
-		DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-		return docBuilder.newDocument();
+	public Node getRootNode() {
+		return doc.getDocumentElement();
 	}
-	
+
 	public String serializeToString() {
 		DOMImplementation impl = doc.getImplementation();
 		DOMImplementationLS implLS = (DOMImplementationLS) impl.getFeature("LS", "3.0");
@@ -85,6 +82,12 @@ public class XmlSerializer {
 		lsSerializer.write(doc, lsOutput);
 		
 		return stringWriter.toString();
+	}
+
+	public String serializeToString2() {
+		StringWriter writer = new StringWriter();
+		serialize2(writer);
+		return writer.toString();
 	}
 	
 	public void serialize(Writer writer) {
@@ -101,12 +104,6 @@ public class XmlSerializer {
 		}
 	}
 	
-	public String serializeToString2() {
-		StringWriter writer = new StringWriter();
-		serialize2(writer);
-		return writer.toString();
-	}
-	
 	public void serialize2(Writer writer) {
 		try {
 			DOMUtil.serialize(writer, doc, false, true);
@@ -114,8 +111,19 @@ public class XmlSerializer {
 			throw new RuntimeException(e); 
 		}
 	}
+
+	protected void resetDocument() throws Exception {
+		this.doc = newDocument();
+	}
 	
-	protected <T extends Node> Node appendChilds(String rootElementName, List<T> childs) {
+	protected Document newDocument() throws Exception {
+		DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+		docFactory.setNamespaceAware(true);
+		DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+		return docBuilder.newDocument();
+	}
+	
+	protected <T extends Node> Node appendChildren(String rootElementName, List<T> childs) {
 		Node element = element(rootElementName);
 		return appendChildren(element, childs);
 	}
@@ -237,13 +245,5 @@ public class XmlSerializer {
 			element.setAttributeNode(attr);
 		}
 		return element;
-	}
-	
-	public Document getDocument() {
-		return doc;
-	}
-	
-	public Node getRootNode() {
-		return doc.getDocumentElement();
 	}
 }

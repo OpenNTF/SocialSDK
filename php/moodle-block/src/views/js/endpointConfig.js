@@ -63,5 +63,5 @@ function ibm_sbt_reset() {
 function ibm_sbt_new_endpoint() {
 	action_type = 'create';
 	ibm_sbt_reset();
-	$("#ibmsbtDialog").dialog("open");
+	$("#dialog").dialog("open");
 }

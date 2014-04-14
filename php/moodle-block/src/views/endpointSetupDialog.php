@@ -86,7 +86,7 @@ function ibm_sbt_generate_callback_url() {
 		alert('You must specify an endpoint name before the callback URL can be generated');
 		return;
 	}
-	var url = "<?php global $USER; global $CFG; echo $CFG->wwwroot . '/blocks/ibmsbt/core/index.php?classpath=endpoint&class=SBTOAuth2Endpoint&uid=' . $USER->id . '&method=authenticationCallback&endpointName='?>";
+	var url = "<?php global $CFG; echo $CFG->wwwroot . '/blocks/ibmsbt/core/index.php?classpath=endpoint&class=SBTOAuth2Endpoint&method=authenticationCallback&endpointName='?>";
 	url += endpointName;
 	document.getElementById('new_callback_url').value = url;
 }

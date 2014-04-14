@@ -1,5 +1,5 @@
 /*
-o * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -21,16 +21,16 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import com.ibm.sbt.services.client.base.BaseEntity;
+import com.ibm.sbt.services.client.base.AtomEntity;
 import com.ibm.sbt.services.client.base.BaseService;
-import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
+import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.connections.profiles.model.ProfileXPath;
 
 /**
  * @Represents Connections Profile
  *
  */
-public class Profile extends BaseEntity{
+public class Profile extends AtomEntity {
 
 	static final String 			sourceClass 	= Profile.class.getName();
 	static final Logger 			logger			= Logger.getLogger(sourceClass);
@@ -45,9 +45,10 @@ public class Profile extends BaseEntity{
 		setService(profileService);
 		setAsString(ProfileXPath.uid, id);
 	}
+
 	public Profile(){}
 
-	public Profile(BaseService svc, DataHandler<?> handler) {
+	public Profile(BaseService svc, XmlDataHandler handler) {
 		super(svc,handler);
 	}
 	

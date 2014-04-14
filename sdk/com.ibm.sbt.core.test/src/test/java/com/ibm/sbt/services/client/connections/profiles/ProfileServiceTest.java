@@ -60,10 +60,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 		assertNotNull(profile);
 		assertEquals("testUser", profile.getName());
 		assertEquals("testUser@renovations.com", profile.getEmail());
-		assertNotNull(profile.getUserid());
-		assertNotNull(profile.getProfileUrl());
-		assertNotNull(profile.getPronunciationUrl());
-		assertNotNull(profile.getThumbnailUrl());
+		assertEquals("testUserD9A04-F2E1-1222-4825-7A700026E92C", profile.getUserid());
 
 		profileAdminService.deleteProfile(profile.getUserid());
 	}

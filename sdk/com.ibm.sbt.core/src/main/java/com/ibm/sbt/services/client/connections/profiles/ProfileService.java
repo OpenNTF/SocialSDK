@@ -162,7 +162,7 @@ public class ProfileService extends BaseService {
 		if(parameters == null){
 			parameters = new HashMap<String, String>();
 		}
-		setIdParameter(parameters, id);
+		parameters.put(getIdParameter(id), id);
 		String url = ProfileUrls.PROFILE.format(this);
 
 		try {
@@ -320,7 +320,7 @@ public class ProfileService extends BaseService {
 		if(parameters == null)
 			parameters = new HashMap<String, String>();
 		String url = ProfileUrls.CONNECTIONS.format(this);
-		setIdParameter(parameters, id);
+		parameters.put(getIdParameter(id), id);
 		parameters.put("connectionType","colleague");
 		parameters.put("outputType","profile");
 
@@ -367,7 +367,7 @@ public class ProfileService extends BaseService {
 		if(parameters == null)
 			parameters = new HashMap<String, String>();
 		String url = ProfileUrls.CONNECTIONS.format(this);
-		setIdParameter(parameters, id);
+		parameters.put(getIdParameter(id), id);
 		parameters.put("connectionType","colleague");
 		parameters.put("outputType","connection");
 
@@ -594,7 +594,7 @@ public class ProfileService extends BaseService {
 		}
 		if(parameters == null)
 			parameters = new HashMap<String, String>();
-		setIdParameter(parameters, id);
+		parameters.put(getIdParameter(id), id);
 		String url = ProfileUrls.REPORTING_CHAIN.format(this);
 		ProfileList profiles = null;
 		try {
@@ -638,7 +638,7 @@ public class ProfileService extends BaseService {
 		}
 		if(parameters == null)
 			parameters = new HashMap<String, String>();
-		setIdParameter(parameters, id);
+		parameters.put(getIdParameter(id), id);
 		String url = ProfileUrls.PEOPLE_MANAGED.format(this);
 
 		ProfileList profiles = null;
@@ -685,7 +685,7 @@ public class ProfileService extends BaseService {
 		try {
 			Map<String, String> parameters = new HashMap<String, String>();
 			String url = ProfileUrls.CONNECTIONS.format(this);
-			setIdParameter(parameters, id);
+			parameters.put(getIdParameter(id), id);
 			parameters.put("connectionType","colleague");
 			Object payload = constructSendInviteRequestBody(inviteMsg);
 			Response response = super.createData(url, parameters, payload);
@@ -769,7 +769,8 @@ public class ProfileService extends BaseService {
 			Map<String, String> parameters = new HashMap<String, String>();
 			parameters.put(ProfilesConstants.OUTPUT, "vcard");
 			parameters.put(ProfilesConstants.FORMAT, "full");
-			setIdParameter(parameters, profile.getUserid());
+			String id = profile.getUserid();
+			parameters.put(getIdParameter(id), id);
 			Object updateProfilePayload;
 			try {
 				updateProfilePayload = constructUpdateRequestBody(profile);
@@ -821,7 +822,7 @@ public class ProfileService extends BaseService {
         }
 		try {
 			Map<String, String> parameters = new HashMap<String, String>();
-			setIdParameter(parameters, userId);
+			parameters.put(getIdParameter(userId), userId);
 			String name = file.getName();
 			int dot = StringUtil.lastIndexOfIgnoreCase(name, ".");
 			String ext = "";
@@ -898,13 +899,8 @@ public class ProfileService extends BaseService {
 		return xml;	
 	}
 
-	protected void setIdParameter(Map<String, String>parameters, String id){
-		//FIX: We should try to avoid side effects like this, and return the key to be set instead of modifying the HashMap
-		if (isEmail(id)) {
-			parameters.put(ProfilesConstants.EMAIL, id);
-		} else {
-			parameters.put(ProfilesConstants.USERID, id);
-		}
+	protected String getIdParameter(String id){
+		return isEmail(id)?ProfilesConstants.EMAIL:ProfilesConstants.USERID;
 	}
 
 	protected String getUniqueIdentifier(String id){

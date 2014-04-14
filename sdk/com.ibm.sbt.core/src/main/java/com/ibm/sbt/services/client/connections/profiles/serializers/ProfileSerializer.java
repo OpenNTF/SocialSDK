@@ -53,7 +53,7 @@ public class ProfileSerializer extends AtomEntitySerializer<Profile> {
 		Node entry = entry();
 		
 		appendChildren(entry,
-				category(),
+				profile(),
 				contentCreate()
 		);
 	}
@@ -62,7 +62,7 @@ public class ProfileSerializer extends AtomEntitySerializer<Profile> {
 		Node entry = entry();
 		
 		appendChildren(entry,
-				category(),
+				profile(),
 				contentUpdate()
 		);
 	}
@@ -99,10 +99,8 @@ public class ProfileSerializer extends AtomEntitySerializer<Profile> {
 		return root;
 	}
 	
-	protected Element category() {
-		return element(CATEGORY, 
-				attribute(SCHEME, Namespace.TYPE.getUrl()), 
-				attribute(TERM, PROFILE));
+	protected Element profile() {
+		return category(Namespace.TYPE.getUrl(), PROFILE);
 	}
 
 	protected Element contentCreate() {

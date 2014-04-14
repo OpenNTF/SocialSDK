@@ -36,6 +36,8 @@ public class ConnectionsConstants {
 		CA("ca", "http://www.ibm.com/xmlns/prod/composite-applications/v1.0"),
 		SNX("snx", "http://www.ibm.com/xmlns/prod/sn"),
 		TYPE("type", "http://www.ibm.com/xmlns/prod/sn/type"), 
+		CONNECTION("connection", "http://www.ibm.com/xmlns/prod/sn/connection/type"),
+		STATUS("status", "http://www.ibm.com/xmlns/prod/sn/status"),
 		THR("thr", "http://purl.org/syndication/thread/1.0"),
 		FH("fh", "http://purl.org/syndication/history/1.0"),
 		OPENSEARCH("opensearch", "http://a9.com/-/spec/opensearch/1.1/"),
@@ -50,6 +52,7 @@ public class ConnectionsConstants {
 		CMIS("cmis", "http://docs.oasis-open.org/ns/cmis/core/200908/"), 
 		OPENSOCIAL("opensocial", "http://ns.opensocial.org/2008/opensocial"), 
 		TAG("tag", "tag:ibm.com,2006:td/type"),
+		TAGENTRY("tag","tag:profiles.ibm.com,2006:entry"),
 		XMLNS("xmlns", "http://www.w3.org/2000/xmlns/");
 		
 		Namespace(String prefix, String url){

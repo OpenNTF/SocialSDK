@@ -42,6 +42,7 @@ import com.ibm.sbt.services.client.connections.profiles.feedhandler.ColleagueCon
 import com.ibm.sbt.services.client.connections.profiles.feedhandler.ProfileFeedHandler;
 import com.ibm.sbt.services.client.connections.profiles.feedhandler.TagFeedHandler;
 import com.ibm.sbt.services.client.connections.profiles.model.ProfileXPath;
+import com.ibm.sbt.services.client.connections.profiles.serializers.ProfileSerializer;
 import com.ibm.sbt.services.client.connections.profiles.transformers.ColleagueConnectionTransformer;
 import com.ibm.sbt.services.client.connections.profiles.transformers.ProfileTransformer;
 import com.ibm.sbt.services.client.connections.profiles.utils.Messages;
@@ -245,7 +246,48 @@ public class ProfileService extends BaseService {
 	
 	    return tags;
 	  }
+	  
 	  /**
+	   * 
+	   * @param id
+	   * @param tags Comma-separated list of tags to add to the profile
+	 * @throws ProfileServiceException 
+	   */
+	  public void addTags(String sourceId, String targetId, Profile profile) throws ProfileServiceException{
+	    if (StringUtil.isEmpty(sourceId)){
+	      throw new ProfileServiceException(null, Messages.InvalidArgument_4);
+	    }
+
+	    if (StringUtil.isEmpty(targetId)){
+	      throw new ProfileServiceException(null, Messages.InvalidArgument_5);
+	    }
+	    HashMap<String, String> parameters = new HashMap<String, String>();
+
+	    if(sourceId.contains("@"))
+	      parameters.put("sourceEmail", sourceId);
+	    else
+	      parameters.put("sourceKey", sourceId);
+
+	    if(targetId.contains("@"))
+	      parameters.put("targetEmail", targetId);
+	    else
+	      parameters.put("targetKey", targetId);
+	    
+	    String serviceUrl = ProfileUrls.TAGS.format(this);
+	    
+	    ProfileSerializer serializer = new ProfileSerializer(profile);
+	    try {
+			Response response = createData(serviceUrl, parameters, serializer.tagsPayload());
+		} catch (ClientServicesException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	  }
+	  
 	/**
 	 * Wrapper method to get user's colleagues
 	 * 
@@ -808,9 +850,12 @@ public class ProfileService extends BaseService {
 	 * @return Object
 	 */
 	protected Object constructCreateRequestBody(Profile profile) throws TransformerException {
+		/*
 		ProfileTransformer transformer = new ProfileTransformer(profile);
-		String xml = transformer.createTransform(profile.getFieldsMap());
-		return xml;	
+		String xml2 = transformer.createTransform(profile.getFieldsMap());
+		 */
+		ProfileSerializer serializer = new ProfileSerializer(profile);
+		return serializer.createPayload();
 	}
 
 	/*
@@ -818,9 +863,13 @@ public class ProfileService extends BaseService {
 	 * @return Object
 	 */
 	protected Object constructUpdateRequestBody(Profile profile) throws TransformerException {
+		/*
 		ProfileTransformer transformer = new ProfileTransformer(profile);
 		String xml = transformer.updateTransform(profile.getFieldsMap());
 		return xml;	
+		*/
+		ProfileSerializer serializer = new ProfileSerializer(profile);
+		return serializer.updatePayload();
 	}
 
 	/*

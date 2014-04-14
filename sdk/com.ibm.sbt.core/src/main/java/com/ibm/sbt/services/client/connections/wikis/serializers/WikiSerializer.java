@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -37,7 +37,7 @@ public class WikiSerializer extends AtomEntitySerializer<Wiki> {
 		super(wiki);
 	}
 	
-	public void generateCreate() {
+	public void generateCreatePayload() {
 		Node entry = entry();
 		
 		appendChildren(entry,
@@ -50,7 +50,7 @@ public class WikiSerializer extends AtomEntitySerializer<Wiki> {
 		);
 	}
 	
-	public void generateUpdate() {
+	public void generateUpdatePayload() {
 		Node entry = genericAtomEntry();
 		
 		appendChildren(entry,
@@ -60,6 +60,16 @@ public class WikiSerializer extends AtomEntitySerializer<Wiki> {
 				sharedWith(),
 				permissions()
 		);
+	}
+	
+	public String createPayload(){
+		generateCreatePayload();
+		return serializeToString();
+	}
+
+	public String updatePayload(){
+		generateUpdatePayload();
+		return serializeToString();
 	}
 	
 	private Element wikiCategory() {

@@ -314,8 +314,7 @@ public class WikiService extends BaseService {
 			Map<String,String> headers = new HashMap<String, String>();
 			headers.put("Content-Type", "application/atom+xml");
 			WikiSerializer serializer = new WikiSerializer(wiki);
-			serializer.generateCreate();
-			return createData(requestUrl, parameters, headers, serializer.serializeToString());
+			return createData(requestUrl, parameters, headers, serializer.createPayload());
 		}
 		catch(ClientServicesException e) {
 			throw e;
@@ -331,8 +330,7 @@ public class WikiService extends BaseService {
 			Map<String,String> headers = new HashMap<String, String>();
 			headers.put("Content-Type", "application/atom+xml");
 			WikiSerializer serializer = new WikiSerializer(wiki);
-			serializer.generateUpdate();
-			return updateData(requestUrl, parameters, headers, serializer.serializeToString(), null);
+			return updateData(requestUrl, parameters, headers, serializer.updatePayload(), null);
 		}
 		catch(ClientServicesException e) {
 			throw e;

@@ -81,8 +81,13 @@ $(function() {
 });
 
 function ibm_sbt_generate_callback_url() {
+	var endpointName = document.getElementById('new_endpoint_name').value;
+	if (endpointName == false) {
+		alert('You must specify an endpoint name before the callback URL can be generated');
+		return;
+	}
 	var url = "***REMOVED*** global $USER; global $CFG; echo $CFG->wwwroot . '/blocks/ibmsbt/core/index.php?classpath=endpoint&class=SBTOAuth2Endpoint&uid=' . $USER->id . '&method=authenticationCallback&endpointName='?>";
-	url += document.getElementById('new_endpoint_name').value;
+	url += endpointName;
 	document.getElementById('new_callback_url').value = url;
 }
 
@@ -139,6 +144,11 @@ function change_new_authentication_method() {
 		document.getElementById("new_authorization_url").value = '/manage/oauth/authorizeToken';
 		document.getElementById("new_access_token_url").value = '/manage/oauth/getAccessToken';
 		document.getElementById("new_request_token_url").value = '/manage/oauth/getRequestToken';
+
+		if (selected_type == "smartcloud") {
+			document.getElementById("lb_new_consumer_secret").innerHTML = 'OAuthSecret';
+			document.getElementById("lb_new_consumer_key").innerHTML = 'OAuthKey';
+		} 
 		
 		oauthSmartcloudFieldCheck();
 	} else if (authMethod == "basic") {
@@ -196,39 +206,17 @@ function change_new_authentication_method() {
 		document.getElementById("tr_new_basic_auth_password").style.display = 'none';
 		document.getElementById("tr_force_ssl_trust").style.display = 'block';
 		document.getElementById("lb_endpoint_url").value = strConnectionsEndpointURL;
-		document.getElementById("lb_new_consumer_secret").value = 'ConsumerSecret';
-		document.getElementById("lb_new_consumer_key").value = 'ConsumerKey';
+		document.getElementById("lb_new_consumer_secret").innerHTML = 'ConsumerSecret';
+		document.getElementById("lb_new_consumer_key").innerHTML = 'ConsumerKey';
 
 		document.getElementById("tr_new_form_auth_page").style.display = 'none';
 		document.getElementById("tr_new_form_auth_login_page").style.display = 'none';
 		document.getElementById("tr_new_form_auth_cookie_cache").style.display = 'none';
 		
 		oauth2ConnectionsFieldCheck();
-	} else if (authMethod == "form") {
-		document.getElementById("tr_new_form_auth_page").style.display = 'block';
-		document.getElementById("tr_new_form_auth_login_page").style.display = 'block';
-		document.getElementById("tr_new_form_auth_cookie_cache").style.display = 'block';
-		document.getElementById("tr_new_callback_url").style.display = 'none';
-		document.getElementById("tr_new_consumer_secret").style.display = 'none';
-		document.getElementById("tr_new_consumer_key").style.display = 'none';
-		document.getElementById("tr_new_authorization_url").style.display = 'none';
-		document.getElementById("tr_new_access_token_url").style.display = 'none';
-		document.getElementById("tr_new_request_token_url").style.display = 'none';
-		document.getElementById("tr_new_basic_auth_method").style.display = 'none';
-		document.getElementById("tr_new_basic_auth_username").style.display = 'none';
-		document.getElementById("tr_new_basic_auth_password").style.display = 'none';
-		formFieldCheck();
-	}
+	} 
 }
 
-function formFieldCheck() {
-	if (!isCorrectDropDownValueSelected() || document.getElementById("new_form_auth_page").value == ''
-		|| document.getElementById("new_form_auth_login_page").value == '' || document.getElementById("new_form_auth_cookie_cache").value == '') {
-		document.getElementById("new_endpoint_save").setAttribute("disabled", "disabled");
-	} else {
-		document.getElementById("new_endpoint_save").removeAttribute("disabled");
-	}
-}
 
 function isCorrectDropDownValueSelected() {
 	var myselect = document.getElementById("new_authentication_method");

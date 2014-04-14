@@ -67,7 +67,7 @@ window.onload = function () {
 }
 
 $(function() {
-    $( "#dialog" ).dialog({
+    $("#ibmsbtDialog").dialog({
       autoOpen: false,
       modal: true,
       width: 660
@@ -86,7 +86,7 @@ function ibm_sbt_generate_callback_url() {
 		alert('You must specify an endpoint name before the callback URL can be generated');
 		return;
 	}
-	var url = "***REMOVED*** global $USER; global $CFG; echo $CFG->wwwroot . '/blocks/ibmsbt/core/index.php?classpath=endpoint&class=SBTOAuth2Endpoint&uid=' . $USER->id . '&method=authenticationCallback&endpointName='?>";
+	var url = "***REMOVED*** global $CFG; echo $CFG->wwwroot . '/blocks/ibmsbt/core/index.php?classpath=endpoint&class=SBTOAuth2Endpoint&method=authenticationCallback&endpointName='?>";
 	url += endpointName;
 	document.getElementById('new_callback_url').value = url;
 }
@@ -330,7 +330,7 @@ function completeFieldCheck() {
 function cancel_new_endpoint() {
 	document.getElementById("new_endpoint_url").setAttribute("style", "");
 	document.getElementById("new_endpoint_name").setAttribute("style", "");
-	$( "#dialog" ).dialog('close');
+	$( "#ibmsbtDialog" ).dialog('close');
 }
 
 function save_new_endpoint() {
@@ -419,7 +419,7 @@ function save_new_endpoint() {
 
 		        
 		    }
-	    	$("#dialog").dialog('close');
+	    	$("#ibmsbtDialog").dialog('close');
 	 		window.location.reload();
 	    },
 	    error: function (jqXHR, textStatus, errorThrown)
@@ -449,7 +449,7 @@ function ibm_sbt_remove_endpoint() {
 	    	var endpoint = endpoint_list.options[endpoint_list.selectedIndex];
 	    	endpoint_list.removeChild(endpoint);	
 	    	
-	    	$("#dialog").dialog('close');
+	    	$("#ibmsbtDialog").dialog('close');
 	    },
 	    error: function (jqXHR, textStatus, errorThrown)
 	    {
@@ -498,7 +498,7 @@ function ibm_sbt_edit_endpoint() {
 			
 			new_server_type_change();
 			change_new_basic_auth_method();
-			$("#dialog").dialog("open");
+			$("#ibmsbtDialog").dialog("open");
 	    },
 	    error: function (jqXHR, textStatus, errorThrown)
 	    {
@@ -522,7 +522,7 @@ function ibm_sbt_edit_endpoint() {
 	</select><button onclick="ibm_sbt_new_endpoint();">Add</button> <button onclick="ibm_sbt_edit_endpoint()">Edit</button> <button onclick="ibm_sbt_remove_endpoint();">Remove</button>
 </div>
 
-<div id="dialog" title="Create a new endpoint" style="column-width:300px; display: none;">
+<div id="ibmsbtDialog" title="Create a new endpoint" style="display: none;">
 	<table>
 		<tr>
 			<td style="width: 200px;">

@@ -42,7 +42,7 @@ function onCommunityChange<?php echo $timestamp; ?>() {
 
 function addOnClickHandlers<?php echo $timestamp; ?>(communityService, dom) {
 
-	dom.byId("uploadBtn").onclick = function(evt) {
+	dom.byId("ibm-sbt-communities-file-upload-dialog-button-<?php echo $timestamp; ?>").onclick = function(evt) {
 		var communityList = dom.byId("ibm-sbt-communities-<?php echo $timestamp; ?>");
 		var currentCommunity = communityList.options[communityList.selectedIndex].value;
 		var communityName = communityList.options[communityList.selectedIndex].innerHTML;
@@ -64,6 +64,7 @@ function uploadCommunityFile<?php echo $timestamp; ?>(communityService, communit
 	communityService.uploadCommunityFile("ibm-sbt-community-files-<?php echo $timestamp; ?>", communityId).then(
 		function(community) {
 			displayMessage<?php echo $timestamp; ?>(dom, "Community file uploaded successfuly to community : " + communityName);
+			document.getElementById('ibm-sbt-communities-upload-dialog-<?php echo $timestamp; ?>').style.display='none';
 			img.style.display = "none";
 			grid<?php echo $timestamp; ?>.update(null);
 		}, 

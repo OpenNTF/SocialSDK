@@ -86,6 +86,6 @@ function HostMeeting(URL) {
 	}
 ?>
 <a href="javascript:Chat('https://<?php echo $host; ?>/stwebclient/popup.jsp?lang=en-us');">Start a Chat</a><br/>
-Join Meeting:
+<span style="font-size: 12px;">Join Meeting</span>:
 <input id='mtgid' type='text'  value='' size='18' />
-<input type='button' onclick='JoinMeeting()' value = 'OK'/>
+<input style="font-size: 12px;" type='button' onclick='JoinMeeting()' value = 'OK'/>

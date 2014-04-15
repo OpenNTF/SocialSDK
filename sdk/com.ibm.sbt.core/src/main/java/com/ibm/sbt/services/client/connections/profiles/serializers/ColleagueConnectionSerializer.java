@@ -1,20 +1,44 @@
+/*
+ * © Copyright IBM Corp. 2014
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); 
+ * you may not use this file except in compliance with the License. 
+ * You may obtain a copy of the License at:
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0 
+ * 
+ * Unless required by applicable law or agreed to in writing, software 
+ * distributed under the License is distributed on an "AS IS" BASIS, 
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or 
+ * implied. See the License for the specific language governing 
+ * permissions and limitations under the License.
+ */
 package com.ibm.sbt.services.client.connections.profiles.serializers;
+
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.CONTENT;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.ENTRY;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.HTML;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.ID;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.TYPE;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.ACCEPTED;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.COLLEAGUE;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.CONNECTION;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.PENDING;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 import com.ibm.sbt.services.client.base.ConnectionsConstants.Namespace;
-import com.ibm.sbt.services.client.base.ConnectionsConstants.Namespaces;
 import com.ibm.sbt.services.client.base.serializers.AtomEntitySerializer;
 import com.ibm.sbt.services.client.connections.profiles.ColleagueConnection;
 
+/**
+ * 
+ * @author Carlos Manias
+ *
+ */
 public class ColleagueConnectionSerializer extends AtomEntitySerializer<ColleagueConnection> {
 	
-	protected static final String CONNECTION = "connection";
-	protected static final String COLLEAGUE = "colleague";
-	protected static final String PENDING = "pending";
-	protected static final String ACCEPTED = "accepted";
-
 	public ColleagueConnectionSerializer(ColleagueConnection entity) {
 		super(entity);
 	}
@@ -53,7 +77,7 @@ public class ColleagueConnectionSerializer extends AtomEntitySerializer<Colleagu
 
 	@Override
 	protected Node entry() {
-		Element element = element(Namespaces.ATOM, ENTRY);
+		Element element = element(Namespace.ATOM.getUrl(), ENTRY);
 		element.setAttributeNS(Namespace.XMLNS.getUrl(), Namespace.SNX.getNSPrefix(), Namespace.SNX.getUrl());
 		return rootNode(element);
 	}

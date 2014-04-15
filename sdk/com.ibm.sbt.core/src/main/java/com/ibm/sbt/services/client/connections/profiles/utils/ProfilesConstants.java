@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -21,21 +21,28 @@ import java.util.HashMap;
 
 public class ProfilesConstants {
 
-	// Headers
-	public static final String REQ_HEADER_CONTENT_TYPE_ATOM = "application/atom+xml";
-	public static final String REQ_HEADER_CONTENT_TYPE_PARAM = "Content-Type";
-
 	// Request Parameters
-	public static final String	EMAIL					= "email";
-	public static final String	USERID					= "userid";
-	public static final String	CONNECTIONID			= "connectionId";
-	public static final String	CONNECTIONTYPE			= "connectionType";	
-	public static final String	OUTPUT					= "output";
-	public static final String	FORMAT					= "format";
-	public static final String  SOURCEUSERID			= "sourceUserid";
-	public static final String  SOURCEEMAIL				= "sourceEmail";
-	public static final String  TARGETUSERID			= "targetUserid";
-	public static final String  TARGETEMAIL				= "targetEmail";
+	public static final String EMAIL				= "email";
+	public static final String CONNECTIONID			= "connectionId";
+	public static final String CONNECTIONTYPE		= "connectionType";	
+	public static final String OUTPUT				= "output";
+	public static final String FORMAT				= "format";
+	public static final String SOURCEUSERID			= "sourceUserid";
+	public static final String SOURCEEMAIL			= "sourceEmail";
+	public static final String SOURCEKEY			= "sourceKey";
+	public static final String TARGETUSERID			= "targetUserid";
+	public static final String TARGETKEY			= "targetKey";
+	public static final String TARGETEMAIL			= "targetEmail";
+	public static final String PROFILES				= "profiles";
+	public static final String CONNECTION_UNIQUE_IDENTIFIER = "connectionId";
+	public static final String VCARD = "vcard";
+	public static final String FULL = "full";
+	public static final String CONNECTION_TYPE = "connectionType";
+	public static final String OUTPUT_TYPE = "outputType";
+	public static final String CONNECTION = "connection";
+	public static final String COLLEAGUE = "colleague";
+	public static final String PENDING = "pending";
+	public static final String ACCEPTED = "accepted";
 	
 	// field maps for add/update profile
 	public static final HashMap<String, String> createFieldsIdentifierMap;

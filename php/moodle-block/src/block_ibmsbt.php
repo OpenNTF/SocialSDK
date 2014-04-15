@@ -148,8 +148,8 @@ class block_ibmsbt extends block_base {
 
 			if (($settings->getAuthenticationMethod($this->config->endpoint) == 'oauth1'
 					|| $settings->getAuthenticationMethod($this->config->endpoint) == 'oauth2') && $store->getOAuthAccessToken($this->config->endpoint) != null) {
-				require $blockPath . '/core/views/endpoint-logout.php';
-				echo '<button onclick="ibm_sbt_endpoint_logout()">Logout from this Endpoint</button>';
+				// require $blockPath . '/core/views/endpoint-logout.php'; Uncomment to show logout button
+				// echo '<button onclick="ibm_sbt_endpoint_logout()">Logout from this Endpoint</button>'; Uncomment to show logout button
 			} 
 			
 			echo '</div>';

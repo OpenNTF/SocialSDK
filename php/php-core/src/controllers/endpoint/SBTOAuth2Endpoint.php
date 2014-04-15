@@ -89,10 +89,12 @@ class SBTOAuth2Endpoint extends BaseController implements SBTEndpoint
 				die('Missing access token. Something went wrong - make sure that your client ID and client secret are correct and try again.');
 			}
 			
-			$store->storeOAuthAccessToken($info['access_token'], $endpointName);
+			$accessToken = $store->getOAuthAccessToken($endpointName);
+			if ($accessToken == null || $accessToken == "") {
+				$store->storeOAuthAccessToken($info['access_token'], $endpointName);
+			}
 			
-			$requestURL = $_COOKIE['IBMSBTKOAuthOrigin'];
-			header("Location: " . $requestURL);
+			header("Location: " . $settings->getOAuthOrigin($endpointName));
 			
 		} catch(Guzzle\Http\Exception\BadResponseException $e) {
 			$response = $e->getResponse();

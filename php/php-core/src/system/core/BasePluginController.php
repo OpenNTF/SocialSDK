@@ -91,7 +91,6 @@ class BasePluginController extends BaseController
 			$this->loadModel('SBTCredentialStore');
 			$store = SBTCredentialStore::getInstance();
 			$token = $store->getOAuthAccessToken($endpointName);
-			
 			if ($token == null) {
 				// Autoloader
 				if (file_exists('../../../autoload.php')) {

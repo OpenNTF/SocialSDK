@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2014
+ * © Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,8 @@
  */
 package com.ibm.sbt.services.client.connections.activities;
 
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -29,7 +31,6 @@ import com.ibm.sbt.services.client.base.AtomFeedHandler;
 import com.ibm.sbt.services.client.base.AtomXPath;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.CategoryFeedHandler;
-import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.connections.activities.serializers.ActivityNodeSerializer;
@@ -40,7 +41,7 @@ import com.ibm.sbt.services.client.connections.common.serializers.MemberSerializ
 import com.ibm.sbt.services.endpoints.Endpoint;
 
 /**
- * The Activities application of IBM� Connections enables a team to collect, organize, share, and reuse work related to a project goal. 
+ * The Activities application of IBM��� Connections enables a team to collect, organize, share, and reuse work related to a project goal. 
  * The Activities API allows application programs to create new activities, and to read and modify existing activities.
  * 
  * Use the Atom subscription API to retrieve resources from the activities hosted by the Activities application.
@@ -764,7 +765,7 @@ public class ActivityService extends BaseService {
 	protected Activity updateActivityEntityData(Activity activity, Response response) {
 		Node node = (Node)response.getData();
 		XPathExpression xpath = (node instanceof Document) ? (XPathExpression)AtomXPath.singleEntry.getPath() : null;
-		activity.setData(node, ConnectionsConstants.nameSpaceCtx, xpath);
+		activity.setData(node, nameSpaceCtx, xpath);
 		return activity;
 	}
 		
@@ -836,7 +837,7 @@ public class ActivityService extends BaseService {
 	protected ActivityNode updateActivityNodeEntityData(ActivityNode activityNode, Response response) {
 		Node node = (Node)response.getData();
 		XPathExpression xpath = (node instanceof Document) ? (XPathExpression)AtomXPath.singleEntry.getPath() : null;
-		activityNode.setData(node, ConnectionsConstants.nameSpaceCtx, xpath);
+		activityNode.setData(node, nameSpaceCtx, xpath);
 		return activityNode;
 	}
 		
@@ -908,7 +909,7 @@ public class ActivityService extends BaseService {
 	protected Member updateMemberEntityData(Member member, Response response) {
 		Node node = (Node)response.getData();
 		XPathExpression xpath = (node instanceof Document) ? (XPathExpression)AtomXPath.singleEntry.getPath() : null;
-		member.setData(node, ConnectionsConstants.nameSpaceCtx, xpath);
+		member.setData(node, nameSpaceCtx, xpath);
 		return member;
 	}
 		
@@ -949,7 +950,7 @@ public class ActivityService extends BaseService {
 			@Override
 			protected Activity newEntity(BaseService service, Node node) {
 				XPathExpression xpath = (node instanceof Document) ? (XPathExpression)AtomXPath.singleEntry.getPath() : null;
-				return new Activity(service, node, ConnectionsConstants.nameSpaceCtx, xpath);
+				return new Activity(service, node, nameSpaceCtx, xpath);
 			}
 		};
 	}
@@ -959,7 +960,7 @@ public class ActivityService extends BaseService {
 			@Override
 			protected ActivityNode newEntity(BaseService service, Node node) {
 				XPathExpression xpath = (node instanceof Document) ? (XPathExpression)AtomXPath.singleEntry.getPath() : null;
-				return new ActivityNode(service, node, ConnectionsConstants.nameSpaceCtx, xpath);
+				return new ActivityNode(service, node, nameSpaceCtx, xpath);
 			}
 		};
 	}
@@ -969,7 +970,7 @@ public class ActivityService extends BaseService {
 			@Override
 			protected Member newEntity(BaseService service, Node node) {
 				XPathExpression xpath = (node instanceof Document) ? (XPathExpression)AtomXPath.singleEntry.getPath() : null;
-				return new Member(service, node, ConnectionsConstants.nameSpaceCtx, xpath);
+				return new Member(service, node, nameSpaceCtx, xpath);
 			}
 		};
 	}
@@ -979,7 +980,7 @@ public class ActivityService extends BaseService {
 			@Override
 			protected Tag newEntity(BaseService service, Node node) {
 				XPathExpression xpath = (node instanceof Document) ? (XPathExpression)AtomXPath.singleCategory.getPath() : null;
-				return new Tag(service, node, ConnectionsConstants.nameSpaceCtx, xpath);
+				return new Tag(service, node, nameSpaceCtx, xpath);
 			}
 		};
 	}
@@ -989,7 +990,7 @@ public class ActivityService extends BaseService {
 			@Override
 			protected Category newEntity(BaseService service, Node node) {
 				XPathExpression xpath = (node instanceof Document) ? (XPathExpression)AtomXPath.singleCategory.getPath() : null;
-				return new Category(service, node, ConnectionsConstants.nameSpaceCtx, xpath);
+				return new Category(service, node, nameSpaceCtx, xpath);
 			}
 		};
 	}

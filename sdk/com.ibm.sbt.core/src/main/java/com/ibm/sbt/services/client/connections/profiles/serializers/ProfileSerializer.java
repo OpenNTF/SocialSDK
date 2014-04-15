@@ -1,4 +1,69 @@
+/*
+ * © Copyright IBM Corp. 2014
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); 
+ * you may not use this file except in compliance with the License. 
+ * You may obtain a copy of the License at:
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0 
+ * 
+ * Unless required by applicable law or agreed to in writing, software 
+ * distributed under the License is distributed on an "AS IS" BASIS, 
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or 
+ * implied. See the License for the specific language governing 
+ * permissions and limitations under the License.
+ */
+
 package com.ibm.sbt.services.client.connections.profiles.serializers;
+
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.APPLICATION_XML;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.BEGIN_VCARD;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.BUILDING;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.CATEGORIES;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.CATEGORY;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.COLON;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.COMMA;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.CONTENT;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.COUNTRYNAME;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.DATA;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.DISPLAYNAME;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.DISTINGUISHEDNAME;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.EMPTY;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.END_VCARD;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.ENTRY;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.EXTENDEDADDRESS;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.FLOOR;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.GIVENNAMES;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.GUID;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.JOBTITLE;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.KEY;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.LOCALITY;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.NL;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.PERSON;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.POSTALCODE;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.PROFILE;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.REGION;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.SEMICOLON;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.SNX_ATTRIB;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.SNX_DISPLAYNAME;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.SNX_DISTINGUISHEDNAME;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.SNX_EMAIL;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.SNX_GIVENNAMES;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.SNX_GUID;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.SNX_SURNAME;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.SNX_UID;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.SNX_USERSTATE;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.STREETADRESS;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.SURNAME;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.TAGS;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.TELEPHONENUMBER;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.TERM;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.TEXT;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.TYPE;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.USERSTATE;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.VALUE;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.VCARD_ADDR;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.VCARD_V21;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -8,42 +73,12 @@ import com.ibm.sbt.services.client.base.ConnectionsConstants.Namespace;
 import com.ibm.sbt.services.client.base.serializers.AtomEntitySerializer;
 import com.ibm.sbt.services.client.connections.profiles.Profile;
 
+/**
+ * 
+ * @author carlos
+ *
+ */
 public class ProfileSerializer extends AtomEntitySerializer<Profile> {
-
-	protected static final String PROFILE = "profile";
-	protected static final String PERSON = "person";
-	protected static final String CATEGORIES = "categories";
-	protected static final String SNX_ATTRIB = "com.ibm.snx_profiles.attrib";
-	protected static final String SNX_GUID = "com.ibm.snx_profiles.base.guid";
-	protected static final String SNX_EMAIL = "com.ibm.snx_profiles.base.email";
-	protected static final String SNX_UID = "com.ibm.snx_profiles.base.uid";
-	protected static final String SNX_DISTINGUISHEDNAME = "com.ibm.snx_profiles.base.distinguishedName";
-	protected static final String SNX_DISPLAYNAME = "com.ibm.snx_profiles.base.displayName";
-	protected static final String SNX_GIVENNAMES = "com.ibm.snx_profiles.base.givenNames";
-	protected static final String SNX_SURNAME = "com.ibm.snx_profiles.base.surname";
-	protected static final String SNX_USERSTATE = "com.ibm.snx_profiles.base.userState";
-	protected static final String GUID = "guid";
-	protected static final String DISTINGUISHEDNAME = "distinguishedName";
-	protected static final String DISPLAYNAME = "displayName";
-	protected static final String GIVENNAMES = "givenNames";
-	protected static final String SURNAME = "surname";
-	protected static final String USERSTATE = "userState";
-	protected static final String BEGIN_VCARD = "BEGIN:VCARD";
-	protected static final String END_VCARD = "END:VCARD";
-	protected static final String VCARD_V21 = "VERSION:2.1";
-	protected static final String JOBTITLE = "jobTitle";
-	protected static final String ADDRESS = "address";
-	protected static final String TELEPHONENUMBER = "telephoneNumber";
-	protected static final String BUILDING = "building";
-	protected static final String FLOOR = "floor";
-	protected static final String STREETADRESS = "streetAddress";
-	protected static final String EXTENDEDADDRESS = "extendedAddress";
-	protected static final String LOCALITY = "locality";
-	protected static final String REGION = "region";
-	protected static final String POSTALCODE = "postalCode";
-	protected static final String COUNTRYNAME = "countryName";
-	protected static final String VCARD_ADDR = "ADR;WORK:;;";
-	protected static final String NL = "\n";
 
 	public ProfileSerializer(Profile entity) {
 		super(entity);
@@ -141,7 +176,7 @@ public class ProfileSerializer extends AtomEntitySerializer<Profile> {
 	
 	private String vcardAttribute(String name){
 		String value = entity.getAsString(name);
-		return StringUtil.isEmpty(value)?"":new StringBuilder(name).append(COLON).append(value).toString();
+		return StringUtil.isEmpty(value)?EMPTY:new StringBuilder(name).append(COLON).append(value).toString();
 	}
 
 	private String vcardAddressAttribute(){
@@ -168,7 +203,7 @@ public class ProfileSerializer extends AtomEntitySerializer<Profile> {
 			}
 			sb.append(SEMICOLON);
 		}
-		return hasAddress?sb.toString():"";
+		return hasAddress?sb.toString():EMPTY;
 	}
 	
 	protected Element person(){

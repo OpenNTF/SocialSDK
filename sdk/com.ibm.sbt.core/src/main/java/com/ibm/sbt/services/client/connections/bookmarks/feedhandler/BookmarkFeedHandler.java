@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -15,6 +15,8 @@
  */
 package com.ibm.sbt.services.client.connections.bookmarks.feedhandler;
 
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
@@ -23,14 +25,8 @@ import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.AtomXPath;
 import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.base.BaseService;
-import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
-import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
-import com.ibm.sbt.services.client.connections.blogs.Blog;
-import com.ibm.sbt.services.client.connections.blogs.BlogList;
-import com.ibm.sbt.services.client.connections.blogs.model.BaseBlogEntity;
-import com.ibm.sbt.services.client.connections.blogs.model.BlogXPath;
 import com.ibm.sbt.services.client.connections.bookmarks.Bookmark;
 import com.ibm.sbt.services.client.connections.bookmarks.BookmarkList;
 import com.ibm.sbt.services.client.connections.bookmarks.BookmarkService;
@@ -62,7 +58,7 @@ public class BookmarkFeedHandler implements IFeedHandler {
 	@Override
 	public BaseEntity createEntityFromData(Object data) {
 		XPathExpression xpath = (data instanceof Document) ? (XPathExpression)AtomXPath.singleEntry.getPath() : null;
-		Bookmark bookmark = new Bookmark(service, (Node)data, ConnectionsConstants.nameSpaceCtx, xpath);
+		Bookmark bookmark = new Bookmark(service, (Node)data, nameSpaceCtx, xpath);
 		return bookmark;
 	}
 

@@ -15,6 +15,8 @@
  */
 package com.ibm.sbt.services.client.base;
 
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
+
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
@@ -23,7 +25,6 @@ import java.util.Set;
 
 import org.w3c.dom.Node;
 
-import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.DOMUtil;
 import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.XMLException;
@@ -183,7 +184,7 @@ public class AtomEntity extends BaseEntity {
      */
     public Person getAuthor() {
     	return new Person(getService(), new XmlDataHandler((Node)this.getDataHandler().getData(), 
-    			ConnectionsConstants.nameSpaceCtx, (XPathExpression)AtomXPath.author.getPath()));
+    			nameSpaceCtx, (XPathExpression)AtomXPath.author.getPath()));
     }
 
     /**
@@ -194,7 +195,7 @@ public class AtomEntity extends BaseEntity {
      */
     public Person getContributor() {
     	return new Person(getService(), new XmlDataHandler((Node)this.getDataHandler().getData(), 
-    			ConnectionsConstants.nameSpaceCtx, (XPathExpression)AtomXPath.contributor.getPath()));
+    			nameSpaceCtx, (XPathExpression)AtomXPath.contributor.getPath()));
     }
     
     /**

@@ -16,6 +16,8 @@
 
 package com.ibm.sbt.services.client.connections.wikis;
 
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,7 +32,6 @@ import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.AtomFeedHandler;
 import com.ibm.sbt.services.client.base.AtomXPath;
 import com.ibm.sbt.services.client.base.BaseService;
-import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.connections.wikis.serializers.WikiPageSerializer;
@@ -421,7 +422,7 @@ public class WikiService extends BaseService {
 			@Override
 			protected Wiki newEntity(BaseService service, Node node) {
 				XPathExpression xpath = (node instanceof Document) ? (XPathExpression)AtomXPath.singleEntry.getPath() : null;
-				return new Wiki(service, node, ConnectionsConstants.nameSpaceCtx, xpath);
+				return new Wiki(service, node, nameSpaceCtx, xpath);
 			}
 		};
 	}
@@ -431,7 +432,7 @@ public class WikiService extends BaseService {
 			@Override
 			protected WikiPage newEntity(BaseService service, Node node) {
 				XPathExpression xpath = (node instanceof Document) ? (XPathExpression)AtomXPath.singleEntry.getPath() : null;
-				return new WikiPage(service, node, ConnectionsConstants.nameSpaceCtx, xpath);
+				return new WikiPage(service, node, nameSpaceCtx, xpath);
 			}
 		};
 	}

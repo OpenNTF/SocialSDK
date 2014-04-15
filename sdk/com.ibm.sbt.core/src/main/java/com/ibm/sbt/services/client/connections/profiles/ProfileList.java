@@ -1,15 +1,18 @@
 package com.ibm.sbt.services.client.connections.profiles;
 
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
-import com.ibm.sbt.services.client.base.ConnectionsConstants;
-import com.ibm.sbt.services.client.base.ConnectionsFeedXpath;
-import com.ibm.sbt.services.client.connections.profiles.feedhandler.ProfileFeedHandler;
+
 import com.ibm.sbt.services.client.Response;
+import com.ibm.sbt.services.client.base.ConnectionsFeedXpath;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
+import com.ibm.sbt.services.client.connections.profiles.feedhandler.ProfileFeedHandler;
 
 public class ProfileList extends EntityList<Profile> {
 	
@@ -42,7 +45,7 @@ public class ProfileList extends EntityList<Profile> {
 	
 	@Override
 	protected ArrayList<Profile> createEntities() {
-		XmlDataHandler dataHandler = new XmlDataHandler(getData(), ConnectionsConstants.nameSpaceCtx);
+		XmlDataHandler dataHandler = new XmlDataHandler(getData(), nameSpaceCtx);
 		ArrayList<Profile> profiles = new ArrayList<Profile>();
 		List<Node> entries = dataHandler.getEntries(ConnectionsFeedXpath.Entry);
 		for (Node node: entries) {
@@ -53,7 +56,7 @@ public class ProfileList extends EntityList<Profile> {
 	}
 	
 	private XmlDataHandler getMetaDataHandler(){
-		return new XmlDataHandler(getData(), ConnectionsConstants.nameSpaceCtx);
+		return new XmlDataHandler(getData(), nameSpaceCtx);
 	}
 
 	@Override

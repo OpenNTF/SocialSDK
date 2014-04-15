@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -16,6 +16,8 @@
 
 package com.ibm.sbt.services.client.base.datahandlers;
 
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +26,6 @@ import org.w3c.dom.Node;
 
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.BaseEntity;
-import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.ConnectionsFeedXpath;
 import com.ibm.sbt.services.client.base.IFeedHandler;
 
@@ -54,7 +55,7 @@ public class CategoryEntityList<T extends BaseEntity> extends EntityList<T> {
 	}
 
 	protected XmlDataHandler getDataHandler() {
-		return new XmlDataHandler(getData(), ConnectionsConstants.nameSpaceCtx);
+		return new XmlDataHandler(getData(), nameSpaceCtx);
 	}
 	
 	@Override

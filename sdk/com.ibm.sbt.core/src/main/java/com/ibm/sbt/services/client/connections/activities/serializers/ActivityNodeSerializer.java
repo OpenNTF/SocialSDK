@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -16,10 +16,21 @@
 
 package com.ibm.sbt.services.client.connections.activities.serializers;
 
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.ACTIVITY;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.ACTIVITY_NODE;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.APPLICATION_XML;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.CATEGORY;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.CONTENT;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.LABEL;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.LABEL_ACTIVITYNODE;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.SCHEME;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.TERM;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.TYPE;
+
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
-import com.ibm.sbt.services.client.base.ConnectionsConstants.Namespaces;
+import com.ibm.sbt.services.client.base.ConnectionsConstants.Namespace;
 import com.ibm.sbt.services.client.base.serializers.AtomEntitySerializer;
 import com.ibm.sbt.services.client.connections.activities.ActivityNode;
 
@@ -28,7 +39,7 @@ import com.ibm.sbt.services.client.connections.activities.ActivityNode;
  *
  */
 public class ActivityNodeSerializer extends AtomEntitySerializer<ActivityNode> {
-	
+
 	public ActivityNodeSerializer(ActivityNode activityNode) {
 		super(activityNode);
 	}
@@ -58,20 +69,20 @@ public class ActivityNodeSerializer extends AtomEntitySerializer<ActivityNode> {
 	}
 	
 	protected Element activityNodeCategory() {
-		return element("category", 
-				attribute("scheme", "http://www.ibm.com/xmlns/prod/sn/type"), 
-				attribute("term", "activity_node"), 
-				attribute("label", "Activity Node"));
+		return element(CATEGORY, 
+				attribute(SCHEME, Namespace.TYPE.getUrl()), 
+				attribute(TERM, ACTIVITY_NODE), 
+				attribute(LABEL, LABEL_ACTIVITYNODE));
 	}
 	
 	protected Element activityUuid() {
-		return textElement(Namespaces.SNX, "activity", entity.getActivityUuid());
+		return textElement(Namespace.SNX.getUrl(), ACTIVITY, entity.getActivityUuid());
 	}
 		
 	@Override
 	protected Element content() {
-		return textElement("content", entity.getContent(), 
-				attribute("type", "application/atom+xml"));
+		return textElement(CONTENT, entity.getContent(), 
+				attribute(TYPE, APPLICATION_XML));
 	}
 	
 }

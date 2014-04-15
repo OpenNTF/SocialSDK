@@ -22,7 +22,14 @@
  */
 
 // If you don't have php-mcrypt installed, set this to false (NOTE: It is strongly recommended that you install php-mcrypt)
-define('CRYPTO_ENABLED', extension_loaded('mcrypt'));
+if (!defined('IBM_SBT_CRYPTO_ENABLED')) {
+	define('IBM_SBT_CRYPTO_ENABLED', extension_loaded('mcrypt'));
+}
+
+// When in demo mode, security warnings will not be displayed
+if (!defined('IBM_SBT_DEMO_MODE')) {
+	define('IBM_SBT_DEMO_MODE', false);
+}
 
 // Change this phrase
 $your_secret_phrase = 'something secret 123';
@@ -31,7 +38,7 @@ $hash = substr($hash, 0, 32);
 define('IBM_SBT_SETTINGS_KEY', $hash);
 
 function ibm_sbt_encrypt($key, $data, $iv){
-	if (defined('CRYPTO_ENABLED') && CRYPTO_ENABLED) {
+	if (defined('IBM_SBT_CRYPTO_ENABLED') && IBM_SBT_CRYPTO_ENABLED) {
 		$b = mcrypt_get_block_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC);
 		$enc = mcrypt_module_open(MCRYPT_RIJNDAEL_256, '', MCRYPT_MODE_CBC, '');
 		mcrypt_generic_init($enc, $key, $iv);
@@ -49,7 +56,7 @@ function ibm_sbt_encrypt($key, $data, $iv){
 }
 
 function ibm_sbt_decrypt($key, $encryptedData, $iv) {
-	if (defined('CRYPTO_ENABLED') && CRYPTO_ENABLED) {
+	if (defined('IBM_SBT_CRYPTO_ENABLED') && IBM_SBT_CRYPTO_ENABLED) {
 		$encryptedData = stripslashes($encryptedData);
 	
 		$enc = mcrypt_module_open(MCRYPT_RIJNDAEL_256, '', MCRYPT_MODE_CBC, '');

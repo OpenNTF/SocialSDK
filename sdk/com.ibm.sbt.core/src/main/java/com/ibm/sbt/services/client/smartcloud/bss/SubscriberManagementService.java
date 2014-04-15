@@ -276,7 +276,7 @@ public class SubscriberManagementService extends BssService {
     		HashMap<String, String> params = new HashMap<String, String>();
     		params.put("_namedQuery", "getSubscriberByEmailAddress");
     		params.put("emailAddress", email);
-			return (EntityList<JsonEntity>)getEntities(API_RESOURCE_SUBSCRIBER, null, getJsonFeedHandler());
+			return (EntityList<JsonEntity>)getEntities(API_RESOURCE_SUBSCRIBER, params, getJsonFeedHandler());
 		} catch (Exception e) {
 			throw new BssException(e, "Error retrieving subscriber list by email {0} caused by {1}", email, e.getMessage());
 		}

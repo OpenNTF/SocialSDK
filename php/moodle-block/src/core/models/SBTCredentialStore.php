@@ -63,7 +63,7 @@ if (!defined('OAUTH_REQUEST_TOKEN_SECRET')) {
 	define('OAUTH_REQUEST_TOKEN_SECRET', 'oauthrequesttokensecret');
 }
 
-if (!defined('CRYPTO_ENABLED')) {
+if (!defined('IBM_SBT_CRYPTO_ENABLED')) {
 	global $CFG;
 	require_once $CFG->dirroot . DIRECTORY_SEPARATOR . 'blocks' . DIRECTORY_SEPARATOR . 'ibmsbt' . DIRECTORY_SEPARATOR . 'security-config.php';
 }
@@ -149,7 +149,7 @@ class SBTCredentialStore {
 				$record->oauthrequesttoken = json_encode(array('connections' => null));
 				$record->oauthrequesttokensecret = json_encode(array('connections' => null));
 					
-				if (defined('CRYPTO_ENABLED') && CRYPTO_ENABLED) {
+				if (defined('IBM_SBT_CRYPTO_ENABLED') && IBM_SBT_CRYPTO_ENABLED) {
 					$iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC);
 					$this->iv = base64_encode(mcrypt_create_iv($iv_size, MCRYPT_RAND));
 					
@@ -209,7 +209,7 @@ class SBTCredentialStore {
 		$record->oauthrequesttoken = json_encode(array('connections' => null));
 		$record->oauthrequesttokensecret = json_encode(array('connections' => null));
 			
-		if (defined('CRYPTO_ENABLED') && CRYPTO_ENABLED) {
+		if (defined('IBM_SBT_CRYPTO_ENABLED') && IBM_SBT_CRYPTO_ENABLED) {
 			$iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC);
 			$this->iv = base64_encode(mcrypt_create_iv($iv_size, MCRYPT_RAND));
 	

@@ -12,13 +12,13 @@
 	<div>
 		<hr style="width:90%; left: -30px; border: 0; height: 1px;"/>
 	</div>
-	<span dojoAttachPoint="showingResultsMessage" style="font-size: 12px;">${pagingResults}</span>
-			<span style="padding-left: 10px; font-size: 12px;">
+	<span dojoAttachPoint="showingResultsMessage">${pagingResults}</span>
+			<span style="padding-left: 20px;">
 				<a style="${hidePreviousLink};" title="${nls.previousPage}" href="javascript: void(0)" data-dojo-attach-event="onclick: prevPage">${nls.previous}</a>
 				<span style="${hidePreviousLabel}">${nls.previous}</span>
 			</span>
 
-			<a style="${hideNextLink} align: right; font-size: 12px;" title="${nls.nextPage}" href="javascript: void(0)" data-dojo-attach-event="onclick: nextPage">${nls.next}</a>
+			<a style="${hideNextLink} align: right;" title="${nls.nextPage}" href="javascript: void(0)" data-dojo-attach-event="onclick: nextPage">${nls.next}</a>
 			<span style="${hideNextLabel}">${nls.next}</span>
 		<div>
 			<hr style="width:90%; background: black; margin: 0.1em 0; left: -30px; border: 0; height: 1px;"/>

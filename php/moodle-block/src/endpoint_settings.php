@@ -31,7 +31,7 @@ if (!defined('ENDPOINTS')) {
 	define('ENDPOINTS', 'ibm_sbt_endpoints');
 }
 
-if (!defined('CRYPTO_ENABLED')) {
+if (!defined('IBM_SBT_CRYPTO_ENABLED')) {
 	require_once $CFG->dirroot . DIRECTORY_SEPARATOR . 'blocks' . DIRECTORY_SEPARATOR . 'ibmsbt' . DIRECTORY_SEPARATOR . 'security-config.php';
 }
 
@@ -127,7 +127,7 @@ function populateRecord($record)
 	$iv = null;
 	
 	if (!isset($record->iv) || $record->iv == null) {
-		if (defined('CRYPTO_ENABLED') && CRYPTO_ENABLED) {
+		if (defined('IBM_SBT_CRYPTO_ENABLED') && IBM_SBT_CRYPTO_ENABLED) {
 			$iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC);
 			$iv = base64_encode(mcrypt_create_iv($iv_size, MCRYPT_RAND));
 		}

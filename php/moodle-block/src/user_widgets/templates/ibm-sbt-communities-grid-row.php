@@ -1,10 +1,25 @@
-<div  style="float:left; role="content">
-	<div>
-		<hr style="width:90%; border: 0; height: 1px; background-color: black;"/>
-	</div>
-	<button onclick="document.getElementById('ibm-sbt-create-community').show();">Create a community</button>
+<style>
+	.ibmsbtCommunityDialog {
+		display: none;
+  		background:white;
+    	z-index:6000; 
+    	-moz-box-shadow: 1px 0px 10px rgba(0, 0, 0, 0.7); 
+    	-moz-border-radius: 6px; 
+    	-webkit-border-radius: 6px; 
+    	-webkit-box-shadow: 1px 0px 10px rgba(0, 0, 0, 0.7); 
+    	color: black;
+    	border-style: none;
+    	
+    	position:fixed;
+  		left:50%;
+  		top:50%;
+    }
+</style>
+
+<div>
+	<button onclick="document.getElementById('ibm-sbt-create-community').style.display = 'block';">Create a community</button>
 	
-	<dialog id="ibm-sbt-create-community">
+	<div class="ibmsbtCommunityDialog" id="ibm-sbt-create-community">
 		<div id="ibm-sbt-success" display: none; font-weight: bold; color: green;"></div>
 		<div id="ibm-sbt-error" style="display:none;" class="alert alert-error"></div>
 		<table>
@@ -22,8 +37,8 @@
 			</tr>
 		</table>
 		<button class="btn" id="selectedBtn">Create Community</button>
-		<button onclick="document.getElementById('ibm-sbt-create-community').close();">Cancel</button>
-	</dialog>
+		<button onclick="document.getElementById('ibm-sbt-create-community').style.display = 'none';">Cancel</button>
+	</div>
 </div>
 <br/><br/>
 <script type="text/template" id="communityRow">
@@ -51,7 +66,7 @@
 		<hr style="width:90%; margin: 0.7em 0; left: -30px; border: 0; height: 1px;"/>
 	</div>
 	<span dojoAttachPoint="showingResultsMessage">${pagingResults}</span>
-			<span style="padding-left: 70px;">
+			<span style="padding-left: 40px;">
 				<a style="${hidePreviousLink};" title="${nls.previousPage}" href="javascript: void(0)" data-dojo-attach-event="onclick: prevPage">${nls.previous}</a>
 				<span style="${hidePreviousLabel}">${nls.previous}</span>
 			</span>

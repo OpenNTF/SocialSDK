@@ -70,14 +70,14 @@ require_once $CFG->dirroot . '/blocks/ibmsbt/user_widgets/templates/ibm-sbt-comm
 	                        	dom.byId("ibm-sbt-success").style.display = "block";
 	            	            dom.byId("ibm-sbt-error").style.display = "none";
 	            	            dom.setText("ibm-sbt-success", "Successfully created Community");
-	            	            document.getElementById('ibm-sbt-create-community').close();
+	            	            document.getElementById('ibm-sbt-create-community').style.display = 'none';
 	            	            grid.update(null);
 	                        },
 	                        function(success) {
 	                        	dom.byId("ibm-sbt-success").style.display = "block";
 	            	            dom.byId("ibm-sbt-error").style.display = "none";
 	            	            dom.setText("ibm-sbt-success", "Successfully created Community");
-	            	            document.getElementById('ibm-sbt-create-community').close();
+	            	            document.getElementById('ibm-sbt-create-community').style.display = 'none';
 	            	            grid.update(null);
 	                        }
 	                    );

@@ -19,10 +19,13 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.Arrays;
 
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.Response;
+import com.ibm.sbt.services.client.base.JsonEntity;
 import com.ibm.sbt.services.endpoints.Endpoint;
 
 /**
@@ -145,6 +148,40 @@ public class AuthorizationService extends BssService {
 		} catch (Exception e) {		
 			throw new BssException(e, "Error unassigning role {0} to {1} caused by {2}", role, loginName, e.getMessage());			
 		} 
+    }
+    
+    /**
+     * Wait for the Role Set to change and then call the state change listener.
+     * 
+     * @param loginName
+     * @param roles
+     * @param maxAttempts
+     * @param waitInterval
+     * @param listener
+     * 
+     * @throws BssException 
+     */
+    public boolean waitRoleSetState(String loginName, String[] roles, int maxAttempts, long waitInterval, StateChangeListener listener) throws BssException {
+    	for (int i=0; i<maxAttempts; i++) {
+    		String[] currentRoles = getRoles(loginName);
+    		if (!Arrays.equals(roles, currentRoles)) {
+    			try {
+    				if (listener != null) {
+    					JsonEntity jsonEntity = null;
+    					listener.stateChanged(jsonEntity);
+    				}
+    				return true;
+    			} catch (Exception e) {
+    				logger.log(Level.WARNING, "Error invoking state change listener", e);
+    			}
+    		}
+    		
+    		// wait the specified interval
+			try {
+				Thread.sleep(waitInterval);
+			} catch (InterruptedException ie) {}
+    	}
+    	return false;
     }
 
 }

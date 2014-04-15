@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -15,15 +15,17 @@
  */
 package com.ibm.sbt.services.client.connections.cmisfiles;
 
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
-import com.ibm.sbt.services.client.base.AtomXPath;
-import com.ibm.sbt.services.client.base.ConnectionsConstants;
-import com.ibm.sbt.services.client.base.ConnectionsFeedXpath;
 import com.ibm.sbt.services.client.Response;
+import com.ibm.sbt.services.client.base.AtomXPath;
+import com.ibm.sbt.services.client.base.ConnectionsFeedXpath;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.connections.cmisfiles.feedHandler.CMISFileFeedHandler;
@@ -59,7 +61,7 @@ public class CMISFileList extends EntityList<CMISFile> {
 	
 	@Override
 	protected ArrayList<CMISFile> createEntities() {
-		XmlDataHandler dataHandler = new XmlDataHandler(getData(), ConnectionsConstants.nameSpaceCtx);
+		XmlDataHandler dataHandler = new XmlDataHandler(getData(), nameSpaceCtx);
 		ArrayList<CMISFile> fileEntries = new ArrayList<CMISFile>();
 		List<Node> entries = dataHandler.getEntries(AtomXPath.entry);
 		for (Node node: entries) {
@@ -70,7 +72,7 @@ public class CMISFileList extends EntityList<CMISFile> {
 	}
 	
 	private XmlDataHandler getMetaDataHandler(){
-		return new XmlDataHandler(getData(), ConnectionsConstants.nameSpaceCtx);
+		return new XmlDataHandler(getData(), nameSpaceCtx);
 	}
 
 	@Override

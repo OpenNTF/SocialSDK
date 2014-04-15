@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,13 +15,14 @@
  */
 package com.ibm.sbt.services.client.connections.forums.feedhandler;
 
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
+
 import com.ibm.commons.xml.xpath.XPathExpression;
-import com.ibm.sbt.services.client.base.ConnectionsConstants;
-import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.Response;
-import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
+import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.connections.forums.ForumService;
 import com.ibm.sbt.services.client.connections.forums.ForumsXPath;
 import com.ibm.sbt.services.client.connections.forums.Recommendation;
@@ -66,7 +67,7 @@ public class RecommendationsFeedHandler implements IFeedHandler {
 
 		XPathExpression expr = (data instanceof Document) ? (XPathExpression)ForumsXPath.entry.getPath() : null;
 //		XmlDataHandler handler = new XmlDataHandler(node, ConnectionsConstants.nameSpaceCtx, expr);
-		Recommendation recommendation = new Recommendation(service, (Node)data, ConnectionsConstants.nameSpaceCtx, expr);
+		Recommendation recommendation = new Recommendation(service, (Node)data, nameSpaceCtx, expr);
 		return recommendation;
 	}
 

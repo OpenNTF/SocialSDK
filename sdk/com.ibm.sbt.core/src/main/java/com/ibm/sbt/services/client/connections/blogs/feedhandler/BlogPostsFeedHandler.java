@@ -1,6 +1,5 @@
-
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -17,6 +16,8 @@
 
 package com.ibm.sbt.services.client.connections.blogs.feedhandler;
 
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
@@ -24,15 +25,12 @@ import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.base.BaseService;
-import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.connections.blogs.BlogPost;
 import com.ibm.sbt.services.client.connections.blogs.BlogPostList;
 import com.ibm.sbt.services.client.connections.blogs.BlogService;
 import com.ibm.sbt.services.client.connections.blogs.model.BaseBlogEntity;
 import com.ibm.sbt.services.client.connections.blogs.model.BlogXPath;
-
-
 
 /**
  * Feed handler for Blogs Service
@@ -57,7 +55,7 @@ public class BlogPostsFeedHandler extends BlogsFeedHandler  {
 	@Override
 	public BaseEntity createEntityFromData(Object data) {
 		XPathExpression expr = (data instanceof Document) ? (XPathExpression)BlogXPath.singleEntry.getPath() : null;
-		BaseBlogEntity post = new BlogPost(getService(), (Node)data, ConnectionsConstants.nameSpaceCtx, expr);
+		BaseBlogEntity post = new BlogPost(getService(), (Node)data, nameSpaceCtx, expr);
 		return post;
 	}
 

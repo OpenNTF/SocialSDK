@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -16,10 +16,16 @@
 
 package com.ibm.sbt.services.client.connections.wikis.serializers;
 
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.CONTENT;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.HTML;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.LABEL;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.PAGE;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.TYPE;
+
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
-import com.ibm.sbt.services.client.base.ConnectionsConstants.Namespaces;
+import com.ibm.sbt.services.client.base.ConnectionsConstants.Namespace;
 import com.ibm.sbt.services.client.base.serializers.AtomEntitySerializer;
 import com.ibm.sbt.services.client.connections.wikis.WikiPage;
 
@@ -55,15 +61,15 @@ public class WikiPageSerializer extends AtomEntitySerializer<WikiPage> {
 	}
 
 	private Element label() {
-		return textElement(Namespaces.TD, "label", entity.getLabel());
+		return textElement(Namespace.TD.getUrl(), LABEL, entity.getLabel());
 	}
 	
 	private Element wikiPageCategory() {
-		return categoryType("page");
+		return categoryType(PAGE);
 	}
 	
 	@Override
 	protected Element content() {
-		return textElement("content", entity.getContent(), attribute("type", "html"));
+		return textElement(CONTENT, entity.getContent(), attribute(TYPE, HTML));
 	}
 }

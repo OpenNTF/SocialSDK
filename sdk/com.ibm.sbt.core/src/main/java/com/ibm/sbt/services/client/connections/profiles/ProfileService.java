@@ -1,5 +1,5 @@
 /*
- * ��� Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -15,6 +15,40 @@
  */
 
 package com.ibm.sbt.services.client.connections.profiles;
+
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.AT;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.AUTH_TYPE;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.CH_COLON;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.COMMA;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.DOT;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.EMPTY;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.EQUALS;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.HREF;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.IMAGE_;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.IMAGE_JPG;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.JPG;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.LOCATION_HEADER;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.PROFILE;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.USERID;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.ACCEPTED;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.COLLEAGUE;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.CONNECTION;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.CONNECTIONID;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.CONNECTION_TYPE;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.CONNECTION_UNIQUE_IDENTIFIER;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.EMAIL;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.FORMAT;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.FULL;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.OUTPUT;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.OUTPUT_TYPE;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.PROFILES;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.SOURCEEMAIL;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.SOURCEKEY;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.SOURCEUSERID;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.TARGETEMAIL;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.TARGETKEY;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.TARGETUSERID;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.VCARD;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -44,10 +78,9 @@ import com.ibm.sbt.services.client.connections.profiles.feedhandler.TagFeedHandl
 import com.ibm.sbt.services.client.connections.profiles.model.ProfileXPath;
 import com.ibm.sbt.services.client.connections.profiles.serializers.ProfileSerializer;
 import com.ibm.sbt.services.client.connections.profiles.transformers.ColleagueConnectionTransformer;
-import com.ibm.sbt.services.client.connections.profiles.transformers.ProfileTransformer;
 import com.ibm.sbt.services.client.connections.profiles.utils.Messages;
-import com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants;
 import com.ibm.sbt.services.endpoints.Endpoint;
+
 /**
  * ProfileService can be used to perform operations related to Profiles. 
  * 
@@ -121,7 +154,7 @@ public class ProfileService extends BaseService {
 	public NamedUrlPart getAuthType(){
 		String auth = super.getAuthType().getValue();
 		auth = AuthType.BASIC.get().equalsIgnoreCase(auth)?"":auth;
-		return new NamedUrlPart("authType", auth);
+		return new NamedUrlPart(AUTH_TYPE, auth);
 	}
 
 	/**
@@ -129,7 +162,7 @@ public class ProfileService extends BaseService {
 	 */
 	@Override
 	public String getServiceMappingKey() {
-		return "profiles";
+		return PROFILES;
 	}
 	
 	/**
@@ -231,10 +264,10 @@ public class ProfileService extends BaseService {
 	    if(parameters == null)
 	      parameters = new HashMap<String, String>();
 		String url = ProfileUrls.TAGS.format(this);
-	    if(id.contains("@"))
-	      parameters.put("targetEmail", id);
+	    if(id.contains(AT))
+	      parameters.put(TARGETEMAIL, id);
 	    else
-	      parameters.put("targetKey", id);
+	      parameters.put(TARGETKEY, id);
 	    TagList tags = null;
 	    try {
 	      tags = (TagList) getEntities(url, parameters, new TagFeedHandler(this));
@@ -263,15 +296,15 @@ public class ProfileService extends BaseService {
 	    }
 	    HashMap<String, String> parameters = new HashMap<String, String>();
 
-	    if(sourceId.contains("@"))
-	      parameters.put("sourceEmail", sourceId);
+	    if(sourceId.contains(AT))
+	      parameters.put(SOURCEEMAIL, sourceId);
 	    else
-	      parameters.put("sourceKey", sourceId);
+	      parameters.put(SOURCEKEY, sourceId);
 
-	    if(targetId.contains("@"))
-	      parameters.put("targetEmail", targetId);
+	    if(targetId.contains(AT))
+	      parameters.put(TARGETEMAIL, targetId);
 	    else
-	      parameters.put("targetKey", targetId);
+	      parameters.put(TARGETKEY, targetId);
 	    
 	    String serviceUrl = ProfileUrls.TAGS.format(this);
 	    
@@ -321,8 +354,8 @@ public class ProfileService extends BaseService {
 			parameters = new HashMap<String, String>();
 		String url = ProfileUrls.CONNECTIONS.format(this);
 		parameters.put(getIdParameter(id), id);
-		parameters.put("connectionType","colleague");
-		parameters.put("outputType","profile");
+		parameters.put(CONNECTION_TYPE, COLLEAGUE);
+		parameters.put(OUTPUT_TYPE, PROFILE);
 
 		ProfileList profiles = null;
 		try {
@@ -368,8 +401,8 @@ public class ProfileService extends BaseService {
 			parameters = new HashMap<String, String>();
 		String url = ProfileUrls.CONNECTIONS.format(this);
 		parameters.put(getIdParameter(id), id);
-		parameters.put("connectionType","colleague");
-		parameters.put("outputType","connection");
+		parameters.put(CONNECTION_TYPE, COLLEAGUE);
+		parameters.put(OUTPUT_TYPE, CONNECTION);
 
 		ColleagueConnectionList colleagueConnections = null;
 		try {
@@ -421,16 +454,16 @@ public class ProfileService extends BaseService {
 		}
 		String url = ProfileUrls.CONNECTION.format(this);
 		if (isEmail(sourceId)) {
-			parameters.put(ProfilesConstants.SOURCEEMAIL, sourceId);
+			parameters.put(SOURCEEMAIL, sourceId);
 		} else {
-			parameters.put(ProfilesConstants.SOURCEUSERID, sourceId);
+			parameters.put(SOURCEUSERID, sourceId);
 		}
 		if (isEmail(targetId)) {
-			parameters.put(ProfilesConstants.TARGETEMAIL, targetId);
+			parameters.put(TARGETEMAIL, targetId);
 		} else {
-			parameters.put(ProfilesConstants.TARGETUSERID, targetId);
+			parameters.put(TARGETUSERID, targetId);
 		}
-		parameters.put("connectionType","colleague");
+		parameters.put(CONNECTION_TYPE, COLLEAGUE);
 
 		ColleagueConnection colleagueConnection;
 		try {
@@ -483,16 +516,16 @@ public class ProfileService extends BaseService {
 		String url = ProfileUrls.CONNECTIONS_IN_COMMON.format(this);
 		if (isEmail(sourceId)) {
 			StringBuilder value =  new StringBuilder(sourceId);
-			value = value.append(",").append(targetId);
-			parameters.put(ProfilesConstants.EMAIL, value.toString());
+			value = value.append(COMMA).append(targetId);
+			parameters.put(EMAIL, value.toString());
 		} else {
 
 			StringBuilder value =  new StringBuilder(sourceId);
-			value = value.append(",").append(targetId);
-			parameters.put(ProfilesConstants.USERID, value.toString());
+			value = value.append(COMMA).append(targetId);
+			parameters.put(USERID, value.toString());
 		}
-		parameters.put("connectionType","colleague");
-		parameters.put("outputType","profile");
+		parameters.put(CONNECTION_TYPE, COLLEAGUE);
+		parameters.put(OUTPUT_TYPE, PROFILE);
 
 		ProfileList profiles = null;
 		try {
@@ -544,15 +577,15 @@ public class ProfileService extends BaseService {
 		if (isEmail(sourceId)) {
 			StringBuilder value =  new StringBuilder(sourceId);
 			value = value.append(",").append(targetId);
-			parameters.put(ProfilesConstants.EMAIL, value.toString());
+			parameters.put(EMAIL, value.toString());
 		} else {
 
 			StringBuilder value =  new StringBuilder(sourceId);
-			value = value.append(",").append(targetId);
-			parameters.put(ProfilesConstants.USERID, value.toString());
+			value = value.append(COMMA).append(targetId);
+			parameters.put(USERID, value.toString());
 		}
-		parameters.put("connectionType","colleague");
-		parameters.put("outputType","connection");
+		parameters.put(CONNECTION_TYPE, COLLEAGUE);
+		parameters.put(OUTPUT_TYPE, CONNECTION);
 
 		ColleagueConnectionList colleagueConnections = null;
 		try {
@@ -686,7 +719,7 @@ public class ProfileService extends BaseService {
 			Map<String, String> parameters = new HashMap<String, String>();
 			String url = ProfileUrls.CONNECTIONS.format(this);
 			parameters.put(getIdParameter(id), id);
-			parameters.put("connectionType","colleague");
+			parameters.put(CONNECTION_TYPE, COLLEAGUE);
 			Object payload = constructSendInviteRequestBody(inviteMsg);
 			Response response = super.createData(url, parameters, payload);
 			return extractConnectionIdFromHeaders(response);
@@ -700,7 +733,6 @@ public class ProfileService extends BaseService {
 
 	}
 
-	
 	/**
 	 * Wrapper method to accept a Invite 
 	 * 
@@ -715,9 +747,9 @@ public class ProfileService extends BaseService {
 		}
 		try {
 			Map<String, String> parameters = new HashMap<String, String>();
-			parameters.put(ProfilesConstants.CONNECTIONID, connection.getConnectionId());
+			parameters.put(CONNECTIONID, connection.getConnectionId());
 			String url = ProfileUrls.CONNECTION.format(this);
-			Object payload = constructAcceptInviteRequestBody(connection, "accepted");
+			Object payload = constructAcceptInviteRequestBody(connection, ACCEPTED);
 
 			super.updateData(url, parameters,payload, connection.getConnectionId());
 		} catch (ClientServicesException e) {
@@ -744,7 +776,7 @@ public class ProfileService extends BaseService {
 
 		try {
 			Map<String, String> parameters = new HashMap<String, String>();
-			parameters.put(ProfilesConstants.CONNECTIONID, connectionId);
+			parameters.put(CONNECTIONID, connectionId);
 			String url = ProfileUrls.CONNECTION.format(this);
 			super.deleteData(url, parameters, connectionId);
 		} catch (ClientServicesException e) {
@@ -767,8 +799,8 @@ public class ProfileService extends BaseService {
 		}
 		try {
 			Map<String, String> parameters = new HashMap<String, String>();
-			parameters.put(ProfilesConstants.OUTPUT, "vcard");
-			parameters.put(ProfilesConstants.FORMAT, "full");
+			parameters.put(OUTPUT, VCARD);
+			parameters.put(FORMAT, FULL);
 			String id = profile.getUserid();
 			parameters.put(getIdParameter(id), id);
 			Object updateProfilePayload;
@@ -790,12 +822,12 @@ public class ProfileService extends BaseService {
 	
 	public String getMyUserId()throws ProfileServiceException{
 		String id = "";
-		String peopleApiUrl ="/{connections}/opensocial/basic/rest/people/@me/";
+		String peopleApiUrl = ProfileUrls.MY_USER_ID.format(this);
 		try {
 			Response feed = getClientService().get(peopleApiUrl);
 			JsonDataHandler dataHandler = new JsonDataHandler((JsonJavaObject)feed.getData());
 			id = dataHandler.getAsString("entry/id");
-			id = id.substring(id.lastIndexOf(':')+1, id.length());
+			id = id.substring(id.lastIndexOf(CH_COLON)+1, id.length());
 		} catch (ClientServicesException e) {
 			throw new ProfileServiceException(e, Messages.ProfileException, id);
 		}
@@ -824,17 +856,17 @@ public class ProfileService extends BaseService {
 			Map<String, String> parameters = new HashMap<String, String>();
 			parameters.put(getIdParameter(userId), userId);
 			String name = file.getName();
-			int dot = StringUtil.lastIndexOfIgnoreCase(name, ".");
+			int dot = StringUtil.lastIndexOfIgnoreCase(name, DOT);
 			String ext = "";
 			if (dot > -1) {
 				ext = name.substring(dot + 1); // add one for the dot!
 			}
 			if (!StringUtil.isEmpty(ext)) {
 				Map<String, String> headers = new HashMap<String, String>();
-				if (StringUtil.equalsIgnoreCase(ext,"jpg")) {
-					headers.put(ProfilesConstants.REQ_HEADER_CONTENT_TYPE_PARAM, "image/jpeg");	// content-type should be image/jpeg for file extension - jpeg/jpg
+				if (StringUtil.equalsIgnoreCase(ext, JPG)) {
+					headers.put(CONTENT_TYPE, IMAGE_JPG);	// content-type should be image/jpeg for file extension - jpeg/jpg
 				} else {
-					headers.put(ProfilesConstants.REQ_HEADER_CONTENT_TYPE_PARAM, "image/" + ext);
+					headers.put(CONTENT_TYPE, IMAGE_ + ext);
 				}
 				String url = ProfileUrls.PHOTO.format(this);
 				getClientService().put(url, parameters, headers, file, ClientService.FORMAT_NULL);
@@ -900,22 +932,21 @@ public class ProfileService extends BaseService {
 	}
 
 	protected String getIdParameter(String id){
-		return isEmail(id)?ProfilesConstants.EMAIL:ProfilesConstants.USERID;
+		return isEmail(id)?EMAIL:USERID;
 	}
 
 	protected String getUniqueIdentifier(String id){
 		if (isEmail(id)) {
-			return ProfilesConstants.EMAIL;
+			return EMAIL;
 		} else {
-			return ProfilesConstants.USERID;
+			return USERID;
 		}
 	}
 
 	private String extractConnectionIdFromHeaders(Response requestData){
-		String CONNECTION_UNIQUE_IDENTIFIER = "connectionId";
-		Header header = requestData.getResponse().getFirstHeader("Location");
-		String urlLocation = header!=null?header.getValue():"";
-		return urlLocation.substring(urlLocation.indexOf(CONNECTION_UNIQUE_IDENTIFIER+"=") + (CONNECTION_UNIQUE_IDENTIFIER+"=").length());
+		Header header = requestData.getResponse().getFirstHeader(LOCATION_HEADER);
+		String urlLocation = header!=null?header.getValue():EMPTY;
+		return urlLocation.substring(urlLocation.indexOf(CONNECTION_UNIQUE_IDENTIFIER+EQUALS) + (CONNECTION_UNIQUE_IDENTIFIER+EQUALS).length());
 	}
 	
 	/**
@@ -931,7 +962,7 @@ public class ProfileService extends BaseService {
 		Map<String, Object> ret = new HashMap<String, Object>();
  		List<Node> attributes = (List<Node>) p.getDataHandler().getEntries(ProfileXPath.extendedAttributes);
 		for (Node link :attributes) {
-	         String extUrl = link.getAttributes().getNamedItem("href").getTextContent();
+	         String extUrl = link.getAttributes().getNamedItem(HREF).getTextContent();
 	         String extId = link.getAttributes().getNamedItem("snx:extensionId").getTextContent();
 	         Response resp;
 			try {

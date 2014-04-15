@@ -23,8 +23,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 import com.ibm.sbt.services.client.base.AtomEntity;
-import com.ibm.sbt.services.client.base.ConnectionsConstants.Namespace;
-import com.ibm.sbt.services.client.base.ConnectionsConstants.Namespaces;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.*;
 
 /**
  * @author Mario Duarte
@@ -33,30 +32,6 @@ import com.ibm.sbt.services.client.base.ConnectionsConstants.Namespaces;
  */
 public class AtomEntitySerializer<T extends AtomEntity> extends BaseEntitySerializer<T> {
 
-	protected static final String COMMA = ",";
-	protected static final String SEMICOLON = ";";
-	protected static final String COLON = ":";
-	protected static final String ENTRY = "entry";
-	protected static final String TAGS = "tags";
-	protected static final String CATEGORY = "category";
-	protected static final String SCHEME = "scheme";
-	protected static final String TERM = "term";
-	protected static final String CONTENT = "content";
-	protected static final String TYPE = "type";
-	protected static final String APPLICATION_XML = "application/xml";
-	protected static final String TEXT = "text";
-	protected static final String HTML = "html";
-	protected static final String KEY = "key";
-	protected static final String VALUE = "value";
-	protected static final String DATA = "data";
-	protected static final String TITLE = "title";
-	protected static final String ID = "id";
-	protected static final String PUBLISHED = "published";
-	protected static final String UPDATED = "updated";
-	protected static final String SUMMARY = "summary";
-	protected static final String AUTHOR = "author";
-	protected static final String CONTRIBUTOR = "contributor";
-	protected static final String LABEL = "label";
 
 	public AtomEntitySerializer(T entity) {
 		super(entity);
@@ -78,7 +53,7 @@ public class AtomEntitySerializer<T extends AtomEntity> extends BaseEntitySerial
 	}
 
 	protected Node entry() {
-		return rootNode(element(Namespaces.ATOM, ENTRY));
+		return rootNode(element(Namespace.ATOM.getUrl(), ENTRY));
 	}
 	
 	protected Element title() {

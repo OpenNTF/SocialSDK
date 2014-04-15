@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -16,11 +16,14 @@
 
 package com.ibm.sbt.services.client.connections.activity;
 
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
-import com.ibm.sbt.services.client.base.ConnectionsConstants;
+
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.base.datahandlers.FieldEntry;
@@ -64,7 +67,7 @@ public class FieldList extends EntityList<Field> {
 
 	@Override
 	protected ArrayList<Field> createEntities() {
-		XmlDataHandler dataHandler = new XmlDataHandler(getData(), ConnectionsConstants.nameSpaceCtx);
+		XmlDataHandler dataHandler = new XmlDataHandler(getData(), nameSpaceCtx);
 		ArrayList<Field> fields = new ArrayList<Field>();
 		FieldEntry path = ActivityXPath.field;
 		if(getFeedHandler() instanceof TextFieldFeedHandler) { 

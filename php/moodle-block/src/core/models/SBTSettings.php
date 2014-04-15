@@ -31,7 +31,7 @@ if (!defined('ENDPOINTS')) {
 	define('ENDPOINTS', 'ibm_sbt_endpoints');
 }
 
-if (!defined('CRYPTO_ENABLED')) {
+if (!defined('IBM_SBT_CRYPTO_ENABLED')) {
 	global $CFG;
 	require_once $CFG->dirroot . DIRECTORY_SEPARATOR . 'blocks' . DIRECTORY_SEPARATOR . 'ibmsbt' . DIRECTORY_SEPARATOR . 'security-config.php';
 }

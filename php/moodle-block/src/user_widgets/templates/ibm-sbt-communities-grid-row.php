@@ -13,37 +13,39 @@
     	position:fixed;
   		left:50%;
   		top:50%;
+  		padding: 2em 5em 5em 5em;
     }
 </style>
 
 <div>
-	<button onclick="document.getElementById('ibm-sbt-create-community').style.display = 'block';">Create a community</button>
+	<button style="font-size: 12px;" class="btn btn-primary" onclick="document.getElementById('ibm-sbt-create-community-***REMOVED*** echo $timestamp; ?>').style.display = 'block';">Create</button>
+	<button style="font-size: 12px;" class="btn btn-primary" onclick="window.open('***REMOVED*** echo $settings->getURL($this->config->endpoint);?>/communities', '_blank');">Open Communities</button>
 	
-	<div class="ibmsbtCommunityDialog" id="ibm-sbt-create-community">
-		<div id="ibm-sbt-success" display: none; font-weight: bold; color: green;"></div>
-		<div id="ibm-sbt-error" style="display:none;" class="alert alert-error"></div>
+	<div class="ibmsbtCommunityDialog" id="ibm-sbt-create-community-***REMOVED*** echo $timestamp; ?>" style="font-size: 12px;">
+		<div id="ibm-sbt-success-***REMOVED*** echo $timestamp; ?>" display: none; font-weight: bold; color: green;"></div>
+		<div id="ibm-sbt-error-***REMOVED*** echo $timestamp; ?>" style="display:none;" class="alert alert-error"></div>
 		<table>
 			<tr>
-				<td><label class="control-label" for="ibm-sbt-community-title">Title:</label></td>
-				<td><input id="ibm-sbt-community-title" type="text" /></td>
+				<td><label class="control-label" for="ibm-sbt-community-title-***REMOVED*** echo $timestamp; ?>">Title:</label></td>
+				<td><input id="ibm-sbt-community-title-***REMOVED*** echo $timestamp; ?>" type="text" /></td>
 			</tr>
 			<tr>
-				<td><label class="control-label" for="ibm-sbt-community-content">Content:</label></td>
-				<td><input id="ibm-sbt-community-content" type="text" /></td>
+				<td><label class="control-label" for="ibm-sbt-community-content-***REMOVED*** echo $timestamp; ?>">Content:</label></td>
+				<td><input id="ibm-sbt-community-content-***REMOVED*** echo $timestamp; ?>" type="text-***REMOVED*** echo $timestamp; ?>" /></td>
 			</tr>
 			<tr>
-				<td><label class="control-label" for="ibm-sbt-community-tags">Tags:</label></td>
-				<td><input id="ibm-sbt-community-tags" type="text" /></td>
+				<td><label class="control-label" for="ibm-sbt-community-tags-***REMOVED*** echo $timestamp; ?>">Tags:</label></td>
+				<td><input id="ibm-sbt-community-tags-***REMOVED*** echo $timestamp; ?>" type="text" /></td>
 			</tr>
 		</table>
-		<button class="btn" id="selectedBtn">Create Community</button>
-		<button onclick="document.getElementById('ibm-sbt-create-community').style.display = 'none';">Cancel</button>
+		<br/><br/>
+		<button class="btn btn-primary" id="ibm-sbt-create-community-button-***REMOVED*** echo $timestamp; ?>">Create Community</button>
+		<button class="btn btn-primary" onclick="document.getElementById('ibm-sbt-create-community-***REMOVED*** echo $timestamp; ?>').style.display = 'none';">Cancel</button>
 	</div>
 </div>
-<br/><br/>
-<script type="text/template" id="communityRow">
-<tr class="${rowClass}" >
-	<td style="width:140px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inline-block; padding-left: 10px;">
+<script type="text/template" id="communityRow-***REMOVED*** echo $timestamp; ?>">
+<tr class="${rowClass}" style="font-size: 12px;">
+	<td style="width:100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inline-block; padding-left: 10px;">
 			<span dojoAttachPoint="placeLinkNode">
 				<a href="javascript: void(0)" target="_self" title="${title}<br/>Tags: ${tags}" dojoAttachPoint="placeTitleLink" data-dojo-attach-event="onclick: handleClick">${title}</a>
 			</span>
@@ -60,8 +62,8 @@
 	</td>
 </tr>
 </script>
-<script type="text/template" id="pagingHeader">
-<div dojoAttachPoint="pagingHeader">
+<script type="text/template" id="pagingHeader-***REMOVED*** echo $timestamp; ?>">
+<div dojoAttachPoint="pagingHeader" style="font-size: 12px;">
 	<div>
 		<hr style="width:90%; margin: 0.7em 0; left: -30px; border: 0; height: 1px;"/>
 	</div>
@@ -78,8 +80,8 @@
 		</div>
 </div>
 </script>
-<script type="text/template" id="pagingFooter">
-<div dojoattachpoint="pagingFooter" class="lotusPaging" style="">
+<script type="text/template" id="pagingFooter-***REMOVED*** echo $timestamp; ?>">
+<div dojoattachpoint="pagingFooter" class="lotusPaging" style="font-size: 12px;">
 	<div>
 		<hr style="width:90%; margin: 0.7em 0; left: -30px; border: 0; height: 1px;"/>
 	</div>

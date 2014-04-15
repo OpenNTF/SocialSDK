@@ -295,7 +295,7 @@
 <script type="text/template" id="filesViewViewTemplate<?php echo $timestamp; ?>">
 <div dojoAttachPoint="domNode">
 	<div dojoAttachPoint="mainNode">
-		<div role="alert" style="display: none;" class="alert alert-success ibmsbtDialog" dojoattachpoint="messageNode">
+		<div role="alert" style="display: none; padding-top: 3em;" class="alert alert-success ibmsbtDialog" dojoattachpoint="messageNode">
 			<span class="alert alert-success" dojoattachpoint="messageBody"></span>
 			&nbsp;<a dojoattachevent="onclick: hideMessage" title="${nls.root.messageClose}" dojoattachpoint="messageClose" role="button"  href="javascript:;">Close</a>
 		</div>	

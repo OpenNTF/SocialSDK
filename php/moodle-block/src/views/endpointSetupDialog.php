@@ -70,13 +70,13 @@ $(function() {
     $("#ibmsbtDialog").dialog({
       autoOpen: false,
       modal: true,
-      width: 660
+      width: '50%;'
     });
 
     $( "#ibm-sbt-endpoint-manager" ).dialog({
         autoOpen: false,
         modal: true,
-        width: 660
+        width: '50%;'
       });
 });
 

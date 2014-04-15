@@ -1,15 +1,14 @@
 	<style type="text/css">
-	
 		#ibmsbt\.loginActionForm {
 			padding: 10px;
 		}
   		#ibmsbt\.loginActionForm table {
-    		z-index:5000; 
-    		-webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6); 
+  			background:white;
+    		z-index:6001; 
+    		-moz-box-shadow: 1px 0px 10px rgba(0, 0, 0, 0.7); 
+    		-moz-border-radius: 6px; 
     		-webkit-border-radius: 6px; 
-    		-moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6); 
-    		background:#CCC4C4; 
-    		-moz-border-radius: 5px; 
+    		-webkit-box-shadow: 1px 0px 10px rgba(0, 0, 0, 0.7); 
     		color: black;
     	}
     	

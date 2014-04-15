@@ -509,7 +509,7 @@ function ibm_sbt_edit_endpoint() {
 }
 </script>
 
-<div id="ibm-sbt-endpoint-manager" title="Manage your endpoints" style="column-width:300px; display: none;">
+<div id="ibm-sbt-endpoint-manager" title="Manage your endpoints" style="display: none;">
 	<select id="endpoint_list" multiple="multiple" style="width: 100%;">
 		***REMOVED*** 
 			$settings = new SBTSettings();

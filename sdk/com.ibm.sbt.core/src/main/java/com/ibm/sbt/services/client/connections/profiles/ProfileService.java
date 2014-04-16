@@ -79,6 +79,7 @@ import com.ibm.sbt.services.client.connections.profiles.feedhandler.TagFeedHandl
 import com.ibm.sbt.services.client.connections.profiles.model.ProfileXPath;
 import com.ibm.sbt.services.client.connections.profiles.serializers.ProfileSerializer;
 import com.ibm.sbt.services.client.connections.profiles.transformers.ColleagueConnectionTransformer;
+import com.ibm.sbt.services.client.connections.profiles.transformers.ProfileTransformer;
 import com.ibm.sbt.services.client.connections.profiles.utils.Messages;
 import com.ibm.sbt.services.endpoints.Endpoint;
 
@@ -238,7 +239,7 @@ public class ProfileService extends BaseService {
 	/** Wrapper method to get user's tags
 	   * 
 	   * @param id 
-	   *        unique identifier of the user whose colleagues are required, it can be email or userKey
+	   *        unique identifier of the user whose tags are required, it can be email or userKey
 	   * @return TagList
 	   * @throws ProfileServiceException
 	   */
@@ -249,7 +250,7 @@ public class ProfileService extends BaseService {
 	   * Wrapper method to get user's tags
 	   * 
 	   * @param id 
-	   *        unique identifier of the user whose colleagues are required, it can be email or userKey
+	   *        unique identifier of the user whose tags are required, it can be email or userKey
 	   * @param parameters 
 	   *         list of query string parameters to pass to API
 	   * @return TagList 
@@ -311,7 +312,7 @@ public class ProfileService extends BaseService {
 	    
 	    ProfileSerializer serializer = new ProfileSerializer(profile);
 	    try {
-			Response response = createData(serviceUrl, parameters, serializer.tagsPayload());
+			Response response = updateData(serviceUrl, parameters, serializer.tagsPayload(), null);
 		} catch (ClientServicesException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -897,13 +898,13 @@ public class ProfileService extends BaseService {
 	 * @return Object
 	 */
 	protected Object constructUpdateRequestBody(Profile profile) throws TransformerException {
-		/*
 		ProfileTransformer transformer = new ProfileTransformer(profile);
 		String xml = transformer.updateTransform(profile.getFieldsMap());
 		return xml;	
-		*/
+		/*
 		ProfileSerializer serializer = new ProfileSerializer(profile);
 		return serializer.updatePayload();
+		*/
 	}
 
 	/*

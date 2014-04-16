@@ -45,7 +45,7 @@ public class WikiSerializer extends AtomEntitySerializer<Wiki> {
 		super(wiki);
 	}
 	
-	public void generateCreatePayload() {
+	protected void generateCreatePayload() {
 		Node entry = entry();
 		
 		appendChildren(entry,
@@ -58,7 +58,7 @@ public class WikiSerializer extends AtomEntitySerializer<Wiki> {
 		);
 	}
 	
-	public void generateUpdatePayload() {
+	protected void generateUpdatePayload() {
 		Node entry = genericAtomEntry();
 		
 		appendChildren(entry,

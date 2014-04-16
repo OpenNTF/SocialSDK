@@ -39,7 +39,7 @@ public class WikiPageSerializer extends AtomEntitySerializer<WikiPage> {
 		super(entity);
 	}
 
-	public void generateCreate() {
+	protected void generateCreatePayload() {
 		Node entry = entry();
 		
 		appendChildren(entry,
@@ -51,13 +51,23 @@ public class WikiPageSerializer extends AtomEntitySerializer<WikiPage> {
 		);
 	}
 
-	public void generateUpdate() {
+	protected void generateUpdatePayload() {
 		Node entry = genericAtomEntry();
 		
 		appendChildren(entry,
 				label(),
 				wikiPageCategory()
 		);
+	}
+
+	public String createPayload(){
+		generateCreatePayload();
+		return serializeToString();
+	}
+
+	public String updatePayload(){
+		generateUpdatePayload();
+		return serializeToString();
 	}
 
 	private Element label() {

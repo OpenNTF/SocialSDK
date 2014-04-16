@@ -43,10 +43,69 @@ public class ProfilesConstants {
 	public static final String COLLEAGUE = "colleague";
 	public static final String PENDING = "pending";
 	public static final String ACCEPTED = "accepted";
+
+	/**
+	 * Profile ATOM
+	 */
+	public static final String PROFILE = "profile";
+	public static final String CATEGORIES = "categories";
+	public static final String SNX_ATTRIB = "com.ibm.snx_profiles.attrib";
+	public static final String SNX_GUID = "com.ibm.snx_profiles.base.guid";
+	public static final String SNX_EMAIL = "com.ibm.snx_profiles.base.email";
+	public static final String SNX_UID = "com.ibm.snx_profiles.base.uid";
+	public static final String SNX_DISTINGUISHEDNAME = "com.ibm.snx_profiles.base.distinguishedName";
+	public static final String SNX_DISPLAYNAME = "com.ibm.snx_profiles.base.displayName";
+	public static final String SNX_GIVENNAMES = "com.ibm.snx_profiles.base.givenNames";
+	public static final String SNX_SURNAME = "com.ibm.snx_profiles.base.surname";
+	public static final String SNX_USERSTATE = "com.ibm.snx_profiles.base.userState";
+	public static final String GUID = "guid";
+	public static final String DISTINGUISHEDNAME = "distinguishedName";
+	public static final String DISPLAYNAME = "displayName";
+	public static final String GIVENNAMES = "givenNames";
+	public static final String SURNAME = "surname";
+	public static final String USERSTATE = "userState";
+	public static final String BEGIN_VCARD = "BEGIN:VCARD";
+	public static final String END_VCARD = "END:VCARD";
+	public static final String VCARD_V21 = "VERSION:2.1";
+	public static final String JOBTITLE = "jobTitle";
+	public static final String ADDRESS = "address";
+	public static final String STREETADRESS = "streetAddress";
+	public static final String EXTENDEDADDRESS = "extendedAddress";
+	public static final String LOCALITY = "locality";
+	public static final String REGION = "region";
+	public static final String POSTALCODE = "postalCode";
+	public static final String COUNTRYNAME = "countryName";
+	public static final String VCARD_ADDR = "ADR;WORK:;;";
+
 	
 	// field maps for add/update profile
 	public static final HashMap<String, String> createFieldsIdentifierMap;
 	public static final HashMap<String, String> updateFieldsIdentifierMap;
+	
+	public enum VCardFields {
+		BUILDING("building", "X_BUILDING"),
+		FLOOR("floor", "X_FLOOR"),
+		OFFICENAME("officeName", "X_FLOOR"),
+		JOBRESP("jobResp", "TITLE"),
+		TELEPHONE_NUMBER("telephoneNumber", "TEL;WORK"),
+		WORK_LOCATION("workLocation", "ADR;WORK");
+
+		private final String vCardValue;
+		private final String entityValue;
+		
+		VCardFields(String entityValue, String vCardValue){
+			this.entityValue = entityValue;
+			this.vCardValue = vCardValue;
+		}
+
+		public String getVCardValue(){
+			return vCardValue;
+		}
+
+		public String getEntityValue(){
+			return entityValue;
+		}
+	}
 
 	static 
 	{

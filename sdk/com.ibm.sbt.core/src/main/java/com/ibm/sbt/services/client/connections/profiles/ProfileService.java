@@ -29,7 +29,6 @@ import static com.ibm.sbt.services.client.base.CommonConstants.IMAGE_JPG;
 import static com.ibm.sbt.services.client.base.CommonConstants.JPG;
 import static com.ibm.sbt.services.client.base.CommonConstants.LOCATION_HEADER;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.HREF;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.PROFILE;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.USERID;
 import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.ACCEPTED;
 import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.COLLEAGUE;
@@ -42,6 +41,7 @@ import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesCon
 import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.FULL;
 import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.OUTPUT;
 import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.OUTPUT_TYPE;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.PROFILE;
 import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.PROFILES;
 import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.SOURCEEMAIL;
 import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.SOURCEKEY;

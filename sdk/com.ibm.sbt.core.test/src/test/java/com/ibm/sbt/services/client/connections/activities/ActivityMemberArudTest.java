@@ -25,10 +25,10 @@ import com.ibm.sbt.services.client.ClientServicesException;
  * @author mwallace
  *
  */
-public class ActivityNodeCrudrTest extends BaseActivityServiceTest {
+public class ActivityMemberArudTest extends BaseActivityServiceTest {
 
 	@Test
-	public void testCreateActivityNode() throws ClientServicesException, XMLException {
+	public void testAddActivityMember() throws ClientServicesException, XMLException {
 		Activity activity = createActivity();
 		
 		ActivityNode activityNode = new ActivityNode();
@@ -49,7 +49,7 @@ public class ActivityNodeCrudrTest extends BaseActivityServiceTest {
 	}
 	
 	@Test
-	public void testReadActivityNode() throws ClientServicesException, XMLException {
+	public void testRetrieveActivityMember() throws ClientServicesException, XMLException {
 		ActivityNode created = createActivityNode();
 		
 		ActivityNode read = activityService.getActivityNode(created.getActivityNodeUuid());
@@ -57,14 +57,14 @@ public class ActivityNodeCrudrTest extends BaseActivityServiceTest {
 		String createdXml = created.toXmlString();
 		String readXml = read.toXmlString();
 		
-		System.out.println("CREATED: " + createdXml);
-		System.out.println("READ: " + readXml);
+		//System.out.println("CREATED: " + createdXml);
+		//System.out.println("READ: " + readXml);
 		
 		Assert.assertEquals("Invalid activity node", createdXml, readXml);
 	}
 	
 	@Test
-	public void testUpdateActivityNode() throws ClientServicesException, XMLException {
+	public void testUpdateActivityMember() throws ClientServicesException, XMLException {
 		ActivityNode created = createActivityNode();
 		
 		ActivityNode read = activityService.getActivityNode(created.getActivityNodeUuid());
@@ -81,14 +81,14 @@ public class ActivityNodeCrudrTest extends BaseActivityServiceTest {
 		String updatedXml = updated.toXmlString();
 		String readXml = read.toXmlString();
 		
-		System.out.println("UPDATED: " + updatedXml);
-		System.out.println("READ: " + readXml);
+		//System.out.println("UPDATED: " + updatedXml);
+		//System.out.println("READ: " + readXml);
 		
 		Assert.assertEquals("Invalid activity node", updatedXml, readXml);
 	}
 	
 	@Test
-	public void testDeleteActivityNode() throws ClientServicesException, XMLException {
+	public void testDeleteActivityMember() throws ClientServicesException, XMLException {
 		ActivityNode created = createActivityNode();
 		String createdNodeUuid = created.getActivityNodeUuid();
 		
@@ -98,24 +98,6 @@ public class ActivityNodeCrudrTest extends BaseActivityServiceTest {
 		
 		ActivityNode read = activityService.getActivityNode(activityNodeUuid);
 		Assert.assertNull(read);
-	}
-	
-	@Test
-	public void testRestoreActivityNode() throws ClientServicesException, XMLException {
-		ActivityNode created = createActivityNode();
-		
-		String activityNodeUuid = activityService.deleteActivityNode(created);
-		Assert.assertEquals(created.getActivityNodeUuid(), activityNodeUuid);
-		
-		activityService.restoreActivityNode(created);
-		
-		ActivityNode read = activityService.getActivityNode(created.getActivityNodeUuid());
-
-		Assert.assertEquals(created.getActivityNodeUuid(), read.getActivityNodeUuid());
-		Assert.assertEquals(created.getTitle(), read.getTitle());
-
-		//System.out.println("RESTORED: " + restored.toXmlString());
-		//System.out.println("READ: " + read.toXmlString());
 	}
 	
 }

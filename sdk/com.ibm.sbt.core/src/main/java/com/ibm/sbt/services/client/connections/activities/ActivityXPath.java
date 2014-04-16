@@ -26,7 +26,6 @@ import com.ibm.sbt.services.client.base.datahandlers.FieldEntry;
  *
  */
 public enum ActivityXPath implements FieldEntry {
-	self("."),
 	activity("./snx:activity"),
 	position("./snx:position"),
 	depth("./snx:depth"),
@@ -52,6 +51,8 @@ public enum ActivityXPath implements FieldEntry {
 	field_type("./@type"),
 	field_position("./@position"),
 	field_hidden("./@hidden"),
+	field_date("."),
+	field_person("."),
 	field_link("./a:link"),
 	field_summary("./a:summary"),
 	field_link_editmedia("./a:link[@rel='edit-media']"),

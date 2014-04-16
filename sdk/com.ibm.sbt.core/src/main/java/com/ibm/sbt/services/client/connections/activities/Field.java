@@ -21,7 +21,11 @@ import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.base.ConnectionsConstants;
+import com.ibm.sbt.services.client.base.datahandlers.FieldEntry;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
+import com.ibm.sbt.services.client.connections.common.Link;
+import com.ibm.sbt.services.client.connections.common.Person;
 
 /**
  * @author mwallace
@@ -75,7 +79,19 @@ public class Field extends BaseEntity {
 	 * @return hidden
 	 */
 	public boolean isHidden() {
+		if (fields.containsKey(ActivityXPath.field_hidden.getName())){
+			return (Boolean)fields.get(ActivityXPath.field_hidden.getName());
+		}
 		return exists(ActivityXPath.field_hidden);
+	}
+	
+	/**
+	 * Set the hidden state for this field.
+	 * 
+	 * @param hidden
+	 */
+	public void setHidden(boolean hidden) {
+		setAsBoolean(ActivityXPath.field_hidden, hidden);
 	}
 	
 	/**
@@ -89,6 +105,15 @@ public class Field extends BaseEntity {
 	}
 	
 	/**
+	 * Set the name for this field.
+	 * 
+	 * @param name
+	 */
+	public void setName(String name) {
+		setAsString(ActivityXPath.field_name, name);
+	}
+	
+	/**
 	 * Position of the field in the containing Activity entry's array of fields. 
 	 * Use numbers separated by large increments to allow for repositioning. 
 	 * For example, use 1000, 2000, 3000, and so on.
@@ -97,6 +122,15 @@ public class Field extends BaseEntity {
 	 */
 	public long getPosition() {
 		return getAsLong(ActivityXPath.field_position);
+	}
+	
+	/**
+	 * Set the position for this field.
+	 * 
+	 * @param position
+	 */
+	public void setPosition(long position) {
+		setAsLong(ActivityXPath.field_position, position);
 	}
 	
 	/**
@@ -113,4 +147,18 @@ public class Field extends BaseEntity {
 		return getAsString(ActivityXPath.field_type);
 	}
 
+	/**
+	 * Create a person from the specified node
+	 */
+	public Person createPerson(Node node, FieldEntry fieldEntry) {
+		return new Person(getService(), new XmlDataHandler(node, ConnectionsConstants.nameSpaceCtx, (XPathExpression)fieldEntry.getPath()));
+	}
+		
+	/**
+	 * @return
+	 */
+	protected Link createLink(Node node, FieldEntry fieldEntry) {
+		return new Link(getService(), new XmlDataHandler(node, ConnectionsConstants.nameSpaceCtx, (XPathExpression)fieldEntry.getPath()));
+	}
+	
 }

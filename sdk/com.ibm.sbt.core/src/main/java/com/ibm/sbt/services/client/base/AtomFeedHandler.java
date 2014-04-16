@@ -35,9 +35,13 @@ public abstract class AtomFeedHandler<T extends AtomEntity> implements IFeedHand
 	}
 	
 	@Override
-	public T createEntity(Response dataHolder) {
-		Node data = (Node)dataHolder.getData();
-		return createEntityFromData(data);
+	public T createEntity(Response response) {
+		Object data = response.getData();
+		if (data instanceof Node) {
+			return createEntityFromData((Node)data);
+		} else {
+			return null;
+		}
 	}
 
 	@Override

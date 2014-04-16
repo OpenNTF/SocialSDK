@@ -15,28 +15,32 @@
  */
 package com.ibm.sbt.services.client.connections.activities;
 
-import java.util.List;
-
 import org.w3c.dom.Node;
 
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.xpath.XPathExpression;
-import com.ibm.sbt.services.client.base.AtomEntity;
 import com.ibm.sbt.services.client.base.BaseService;
 
 /**
  * @author mwallace
  *
  */
-public class ActivityNode extends AtomEntity {
+public class ActivityNode extends NodeEntity {
 
-	static final String UUID_PREFIX = "urn:lsid:ibm.com:oa:"; ////$NON-NLS-1$
-	
 	/**
 	 * Default constructor
 	 */
 	public ActivityNode() {
+	}
+
+	/**
+	 * Construct ActivityNode associated with the specified service
+	 * 
+	 * @param service
+	 */
+	public ActivityNode(ActivityService service) {
+		setService(service);
 	}
 
 	/**
@@ -51,15 +55,6 @@ public class ActivityNode extends AtomEntity {
 		super(service, node, namespaceCtx, xpathExpression);
 	}
 
-	/**
-	 * Return the associated ActivityService.
-	 * 
-	 * @return
-	 */
-	public ActivityService getActivityService() {
-		return (ActivityService)getService();
-	}
-	
 	/**
 	 * Returns the activity node ID.
 	 * 
@@ -80,60 +75,6 @@ public class ActivityNode extends AtomEntity {
 	 */
 	public String getActivityUuid() {
 		return getAsString(ActivityXPath.activity);
-	}
-	
-	/**
-	 * Returns the activity ID.
-	 * 
-	 * @param activityUuid
-	 */
-	public void setActivityUuid(String activityUuid) {
-		setAsString(ActivityXPath.activity, activityUuid);
-	}
-	
-	/**
-	 * Returns permissions.
-	 * 
-	 * @return permissions
-	 */
-	public String getPermissions() {
-		return getAsString(ActivityXPath.permissions);
-	}
-	
-	/**
-	 * Returns the depth of the activity.
-	 * 
-	 * @return depth
-	 */
-	public int getDepth() {
-		return getAsInt(ActivityXPath.depth);
-	}
-	
-	/**
-	 * Returns the position of the activity.
-	 * 
-	 * @return position
-	 */
-	public long getPosition() {
-		return getAsLong(ActivityXPath.position);
-	}
-	
-	/**
-	 * Returns the tags on the wiki page.
-	 * 
-	 * @return
-	 */
-	public List<String> getTags() {
-		return super.getBaseTags();
-	}
-
-	/**
-	 * Set the tags on the wiki page.
-	 * 
-	 * @param tags
-	 */
-	public void setTags(List<String> tags) {
-		super.setBaseTags(tags);
 	}
 	
 }

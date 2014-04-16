@@ -28,6 +28,11 @@ public class Link extends BaseEntity {
 	public Link() {
 	}
 	
+	public Link(String title, String href) {
+		setTitle(title);
+		setHref(href);
+	}
+	
 	public Link(BaseService svc, DataHandler<?> dataHandler) {
 		super(svc, dataHandler);
 	}
@@ -36,15 +41,31 @@ public class Link extends BaseEntity {
 		return getAsString(CommonXPath.href);
 	}
 	
+	public void setHref(String href) {
+		setAsString(CommonXPath.href, href);
+	}
+	
 	public String getTitle() {
 		return getAsString(CommonXPath.title);
+	}
+	
+	public void setTitle(String title) {
+		setAsString(CommonXPath.title, title);
 	}
 	
 	public long getSize() {
 		return getAsLong(CommonXPath.size);
 	}
 	
+	public void setSize(long size) {
+		setAsLong(CommonXPath.size, size);
+	}
+	
 	public String getType() {
 		return getAsString(CommonXPath.type);
+	}
+
+	public void setType(String type) {
+		setAsString(CommonXPath.type, type);
 	}
 }

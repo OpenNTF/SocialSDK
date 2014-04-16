@@ -423,6 +423,16 @@ public class BaseEntity implements Externalizable {
 	}
 	
 	/**
+	 * Receives an object as the value of a field and stores it as an object on the internal map 
+	 * 
+	 * @param fieldName
+	 * @param value
+	 */
+	public void setAsObject(FieldEntry field, Object value){
+		fields.put(field.getName(), value);
+	}
+	
+	/**
 	 * Removes a field from the internal map
 	 * 
 	 * @param fieldName

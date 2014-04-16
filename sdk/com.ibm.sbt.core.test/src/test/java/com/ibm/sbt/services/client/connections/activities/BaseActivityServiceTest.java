@@ -24,11 +24,13 @@ import org.junit.After;
 import org.junit.Before;
 import org.w3c.dom.Node;
 
+import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.DOMUtil;
 import com.ibm.commons.xml.XMLException;
 import com.ibm.sbt.services.BaseUnitTest;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.endpoints.BasicEndpoint;
+import com.ibm.sbt.test.lib.TestEnvironment;
 
 /**
  * @author mwallace
@@ -77,6 +79,14 @@ public class BaseActivityServiceTest extends BaseUnitTest {
 			//basicEndpoint.setUseProxy(true);			
     	}
     	return basicEndpoint;
+	}
+	
+	protected String getMemberId() {
+		String memberId = System.getProperty("MemberId");
+		if (StringUtil.isEmpty(memberId)) {
+			memberId = TestEnvironment.getSecondaryUserUuid();
+		}
+		return memberId;
 	}
 	
 	protected Node readXml(String fileName) throws IOException, XMLException {

@@ -30,6 +30,12 @@ public class Person extends BaseEntity {
 	public Person() {
 	}
 	
+	public Person(String name, String email, String userid) {
+		setName(name);
+		setEmail(email);
+		setUserid(userid);
+	}
+	
 	public Person(BaseService svc, DataHandler<?> dataHandler) {
 		super(svc, dataHandler);
 	}
@@ -65,8 +71,15 @@ public class Person extends BaseEntity {
 	public String getName() {
 		return getAsString(AtomXPath.personName);
 	}
-
+	
+	/**
+	 * @deprecated Use getUserState instead
+	 */
 	public String getState() {
+		return getUserState();
+	}
+
+	public String getUserState() {
 		return getAsString(AtomXPath.personUserState);
 	}
 

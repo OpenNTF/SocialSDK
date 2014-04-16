@@ -23,7 +23,6 @@ import java.util.Set;
 
 import org.w3c.dom.Node;
 
-import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.DOMUtil;
 import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.XMLException;
@@ -179,22 +178,44 @@ public class AtomEntity extends BaseEntity {
      * Gets a author from ATOM entry document.
      * 
      * @method getAuthor
-     * @return {Member} author of the ATOM entry document
+     * @return {Person} author of the ATOM entry document
      */
     public Person getAuthor() {
-    	return new Person(getService(), new XmlDataHandler((Node)this.getDataHandler().getData(), 
-    			ConnectionsConstants.nameSpaceCtx, (XPathExpression)AtomXPath.author.getPath()));
+		if (fields.containsKey(AtomXPath.author.getName())) {
+			return (Person)fields.get(AtomXPath.author.getName());
+		}
+		if (dataHandler != null){
+	    	return new Person(getService(), new XmlDataHandler((Node)this.getDataHandler().getData(), 
+	    			ConnectionsConstants.nameSpaceCtx, (XPathExpression)AtomXPath.author.getPath()));
+		}
+		return null;
     }
 
     /**
      * Gets a contributor from ATOM entry document.
      * 
      * @method getContributor
-     * @return {Member} contributor of the ATOM entry document
+     * @return {Person} contributor of the ATOM entry document
      */
     public Person getContributor() {
-    	return new Person(getService(), new XmlDataHandler((Node)this.getDataHandler().getData(), 
-    			ConnectionsConstants.nameSpaceCtx, (XPathExpression)AtomXPath.contributor.getPath()));
+		if (fields.containsKey(AtomXPath.contributor.getName())) {
+			return (Person)fields.get(AtomXPath.contributor.getName());
+		}
+		if (dataHandler != null){
+	    	return new Person(getService(), new XmlDataHandler((Node)this.getDataHandler().getData(), 
+	    			ConnectionsConstants.nameSpaceCtx, (XPathExpression)AtomXPath.contributor.getPath()));
+		}
+		return null;
+    }
+    
+    /**
+     * Sets the contributor from ATOM entry document.
+     * 
+     * @method setContributor
+     * @param {Person} contributor of the ATOM entry document
+     */
+    public void setContributor(Person person) {
+    	this.setAsObject(AtomXPath.contributor, person);
     }
     
     /**

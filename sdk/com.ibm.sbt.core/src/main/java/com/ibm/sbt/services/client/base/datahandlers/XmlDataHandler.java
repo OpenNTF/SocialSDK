@@ -146,12 +146,12 @@ public class XmlDataHandler implements DataHandler<Node> {
 	private String[] getAsArray(XPathExpression xpathExpression) {
 		String[] results = null;
 		if (data instanceof Node) {
-			XResult xResult = null;
+			XResult xresult = null;
 			try {
-				xResult = getEntryResults(data, xpathExpression);
+				xresult = getEntryResults(data, xpathExpression);
 			} catch (XPathException e) {
 			}
-			results = xResult.getValues();
+			results = xresult.getValues();
 		}
 		return results;
 	}
@@ -163,12 +163,12 @@ public class XmlDataHandler implements DataHandler<Node> {
 		List<Node> entries = new ArrayList<Node>();
 		List<Object> results = null;
 		if (data instanceof Node) {
-			XResult xResult = null;
+			XResult xresult = null;
 			try {
-				xResult = getEntryResults(data, xpathExpression);
+				xresult = getEntryResults(data, xpathExpression);
 			} catch (XPathException e) {
 			}
-			results = Arrays.asList(xResult.getNodes());
+			results = Arrays.asList(xresult.getNodes());
 			for (Object result : results) {
 				entries.add((Node) result);
 			}
@@ -199,11 +199,11 @@ public class XmlDataHandler implements DataHandler<Node> {
 	 * 
 	 * @return xresult
 	 */
-	private XResult getEntryResults(Node data, XPathExpression xpathExpression)
+	protected XResult getEntryResults(Node data, XPathExpression xpathExpression)
 			throws XPathException {
-		XResult xResult = null;
-		xResult = xpathExpression.eval(data, nameSpaceCtx);
-		return xResult;
+		XResult xresult = null;
+		xresult = xpathExpression.eval(data, nameSpaceCtx);
+		return xresult;
 	}
 
 	/*
@@ -212,13 +212,13 @@ public class XmlDataHandler implements DataHandler<Node> {
 	 * 
 	 * @throws XMLException
 	 */
-	private XPathExpression getXPathQuery(String path) {
-		XPathExpression xPath = null;
+	protected XPathExpression getXPathQuery(String path) {
+		XPathExpression xpath = null;
 		try {
-			xPath = DOMUtil.createXPath(path);
+			xpath = DOMUtil.createXPath(path);
 		} catch (XMLException e) {
 		}
-		return xPath;
+		return xpath;
 	}
 
 	/**
@@ -253,8 +253,8 @@ public class XmlDataHandler implements DataHandler<Node> {
 	 */
 	public String getStringValue(XPathExpression xpathQuery) {
 		try {
-			XResult xResult = xpathQuery.eval(data, nameSpaceCtx);
-			return xResult.getStringValue();
+			XResult xresult = xpathQuery.eval(data, nameSpaceCtx);
+			return xresult.getStringValue();
 		} catch (XPathException e) {
 		} catch (XMLException e) {
 		}
@@ -268,8 +268,8 @@ public class XmlDataHandler implements DataHandler<Node> {
 	 */
 	public Date getDateValue(XPathExpression xpathQuery) {
 		try {
-			XResult xResult = xpathQuery.eval(data, nameSpaceCtx);
-			return xResult.getDateValue();
+			XResult xresult = xpathQuery.eval(data, nameSpaceCtx);
+			return xresult.getDateValue();
 		} catch (XPathException e) {
 		} catch (XMLException e) {
 		}
@@ -283,8 +283,8 @@ public class XmlDataHandler implements DataHandler<Node> {
 	 */
 	public boolean getBooleanValue(XPathExpression xpathQuery) {
 		try {
-			XResult xResult = xpathQuery.eval(data, nameSpaceCtx);
-			return xResult.getBooleanValue();
+			XResult xresult = xpathQuery.eval(data, nameSpaceCtx);
+			return xresult.getBooleanValue();
 		} catch (XPathException e) {
 		} catch (XMLException e) {
 		}
@@ -298,8 +298,8 @@ public class XmlDataHandler implements DataHandler<Node> {
 	 */
 	public double getNumberValue(XPathExpression xpathQuery) {
 		try {
-			XResult xResult = xpathQuery.eval(data, nameSpaceCtx);
-			return xResult.getNumberValue();
+			XResult xresult = xpathQuery.eval(data, nameSpaceCtx);
+			return xresult.getNumberValue();
 		} catch (XPathException e) {
 		} catch (XMLException e) {
 		}
@@ -313,8 +313,8 @@ public class XmlDataHandler implements DataHandler<Node> {
 	 */
 	public String getFieldUsingXPath(XPathExpression xpathQuery) {
 		try {
-			XResult xResult = xpathQuery.eval(data, nameSpaceCtx);
-			return xResult.getStringValue();
+			XResult xresult = xpathQuery.eval(data, nameSpaceCtx);
+			return xresult.getStringValue();
 		} catch (XPathException e) {
 			// TODO Add Logging
 		} catch (XMLException e) {
@@ -491,8 +491,9 @@ public class XmlDataHandler implements DataHandler<Node> {
 	 */
 	@Override
 	public Long getAsLong(String fieldName) {
+		String value = getAsString(fieldName);
 		try {
-			return Long.parseLong(getAsString(fieldName));
+			return Long.parseLong(value);
 		} catch (NumberFormatException e) {
 			return (long) 0;
 		}

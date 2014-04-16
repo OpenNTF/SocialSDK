@@ -16,8 +16,7 @@
 
 package com.ibm.sbt.services.client.connections.activities.serializers;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.text.SimpleDateFormat;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -26,13 +25,7 @@ import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.base.ConnectionsConstants.Namespaces;
 import com.ibm.sbt.services.client.base.serializers.AtomEntitySerializer;
 import com.ibm.sbt.services.client.connections.activities.Activity;
-import com.ibm.sbt.services.client.connections.activities.DateField;
-import com.ibm.sbt.services.client.connections.activities.Field;
-import com.ibm.sbt.services.client.connections.activities.FileField;
-import com.ibm.sbt.services.client.connections.activities.LinkField;
-import com.ibm.sbt.services.client.connections.activities.PersonField;
 import com.ibm.sbt.services.client.connections.activities.Priority;
-import com.ibm.sbt.services.client.connections.activities.TextField;
 import com.ibm.sbt.services.client.connections.common.Person;
 
 /**
@@ -41,8 +34,15 @@ import com.ibm.sbt.services.client.connections.common.Person;
  */
 public class ActivitySerializer extends AtomEntitySerializer<Activity> {
 	
+	NodeSerializer nodeSerializer;
+	
+	private static SimpleDateFormat dateFormat = 
+			new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");	
+
 	public ActivitySerializer(Activity activity) {
 		super(activity);
+		
+		nodeSerializer = new NodeSerializer(activity);
 	}
 	
 	public String generateCreate() {
@@ -51,8 +51,6 @@ public class ActivitySerializer extends AtomEntitySerializer<Activity> {
 	
 	public String generateUpdate() {
 		Node entry = genericAtomEntry();
-		
-		appendChildren(entry, tags());
 
 		appendChildren(entry,
 				activityCategory(),
@@ -68,42 +66,11 @@ public class ActivitySerializer extends AtomEntitySerializer<Activity> {
 				inReplyTo(),
 				assignedTo()
 		);
-
-		appendChildren(entry, fields());
+		
+		appendChildren(entry, tags());
+		appendChildren(entry, nodeSerializer.fields());
 		
 		return serializeToString();
-	}
-	
-	protected List<Element> fields() {
-		Field[] fields = entity.getFields();
-		if (fields == null) {
-			return null;
-		}
-		ArrayList<Element> elements = new ArrayList<Element>();
-		for (Field field : fields) {
-			Element element = element("field", 
-				attribute("scheme", "http://www.ibm.com/xmlns/prod/sn"),
-				attribute("fid", field.getFid()),
-				attribute("name", field.getName()),
-				attribute("type", field.getType()),
-				attribute("position", ""+field.getPosition()));
-			
-			String type = field.getType();
-			if ("date".equals(type)) {
-				DateField dateField = (DateField)field;
-				addText(element, DateSerializer.toString(dateField.getDate()));
-			} else if ("file".equals(type)) {
-				FileField fileField = (FileField)field;
-			} else if ("link".equals(type)) {
-				LinkField linkField = (LinkField)field;
-			} else if ("person".equals(type)) {
-				PersonField personField = (PersonField)field;
-			} else if ("text".equals(type)) {
-				TextField textField = (TextField)field;
-			}
-		}
-		
-		return elements;
 	}
 	
 	protected Element activityCategory() {
@@ -160,7 +127,7 @@ public class ActivitySerializer extends AtomEntitySerializer<Activity> {
 	}
 		
 	protected Element duedate() {
-		return textElement("snx:duedate", DateSerializer.toString(entity.getDuedate()));
+		return textElement("snx:duedate", DateSerializer.toString(dateFormat, entity.getDuedate()));
 	}
 	
 	protected Element inReplyTo() {

@@ -59,7 +59,7 @@ public class ActivityService extends BaseService {
 	static {
 		ATOM_HEADERS.put(CONTENT_TYPE, APPLICATION_ATOM_XML);
 	}
-	
+		
 	/**
 	 * Create ActivityService instance with default endpoint.
 	 */
@@ -315,7 +315,7 @@ public class ActivityService extends BaseService {
 	 */
 	public void updateActivity(Activity activity, Map<String, String> parameters) throws ClientServicesException {
 		String requestUrl = ActivityUrls.ACTIVITY_NODE.format(endpoint, activity.getActivityUuid());
-		updateActivityEntity(requestUrl, activity, parameters);
+		updateActivityEntity(requestUrl, activity, parameters, 200);
 	}
 
 	/**
@@ -367,7 +367,7 @@ public class ActivityService extends BaseService {
 	public void restoreActivity(Activity activity, Map<String, String> parameters) throws ClientServicesException {
 		activity.setDeleted(false);
 		String requestUrl = ActivityUrls.THRASHED_ACTIVITY_NODE.format(endpoint, activity.getActivityUuid());
-		updateActivityEntity(requestUrl, activity, parameters);
+		updateActivityEntity(requestUrl, activity, parameters, 204);
 	}
 
 	//------------------------------------------------------------------------------------------------------------------
@@ -424,8 +424,8 @@ public class ActivityService extends BaseService {
 	 * @return
 	 * @throws ClientServicesException 
 	 */
-	public ActivityNode updateActivityNode(ActivityNode activityNode) throws ClientServicesException {
-		return updateActivityNode(activityNode, null);
+	public void updateActivityNode(ActivityNode activityNode) throws ClientServicesException {
+		updateActivityNode(activityNode, null);
 	}
 
 	/**
@@ -435,9 +435,9 @@ public class ActivityService extends BaseService {
 	 * @return
 	 * @throws ClientServicesException 
 	 */
-	public ActivityNode updateActivityNode(ActivityNode activityNode, Map<String, String> parameters) throws ClientServicesException {
+	public void updateActivityNode(ActivityNode activityNode, Map<String, String> parameters) throws ClientServicesException {
 		String requestUrl = ActivityUrls.ACTIVITY_NODE.format(endpoint, activityNode.getActivityNodeUuid());
-		return updateActivityNodeEntity(requestUrl, activityNode, parameters);
+		updateActivityNodeEntity(requestUrl, activityNode, parameters, 200);
 	}
 
 	/**
@@ -469,8 +469,8 @@ public class ActivityService extends BaseService {
 	 * @return
 	 * @throws ClientServicesException 
 	 */
-	public ActivityNode restoreActivityNode(ActivityNode activityNode) throws ClientServicesException {
-		return restoreActivityNode(activityNode, null);
+	public void restoreActivityNode(ActivityNode activityNode) throws ClientServicesException {
+		restoreActivityNode(activityNode, null);
 	}
 
 	/**
@@ -480,10 +480,10 @@ public class ActivityService extends BaseService {
 	 * @return
 	 * @throws ClientServicesException 
 	 */
-	public ActivityNode restoreActivityNode(ActivityNode activityNode, Map<String, String> parameters) throws ClientServicesException {
+	public void restoreActivityNode(ActivityNode activityNode, Map<String, String> parameters) throws ClientServicesException {
 		// TODO Remove the <category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="deleted"/> flag element from the entry before restoring it.
 		String requestUrl = ActivityUrls.THRASHED_ACTIVITY_NODE.format(endpoint, activityNode.getActivityNodeUuid());
-		return updateActivityNodeEntity(requestUrl, activityNode, parameters);
+		updateActivityNodeEntity(requestUrl, activityNode, parameters, 204);
 	}
 
 	//------------------------------------------------------------------------------------------------------------------
@@ -726,11 +726,11 @@ public class ActivityService extends BaseService {
 		}
 	}
 
-	protected void updateActivityEntity(String requestUrl, Activity activity, Map<String, String> parameters) throws ClientServicesException {
+	protected void updateActivityEntity(String requestUrl, Activity activity, Map<String, String> parameters, int expectedCode) throws ClientServicesException {
 		try {
 			ActivitySerializer serializer = new ActivitySerializer(activity);
 			Response response = putData(requestUrl, parameters, getHeaders(), serializer.generateUpdate(), activity.getActivityUuid());
-			if (isValidResponse(response, 204)) {
+			if (isValidResponse(response, expectedCode)) {
 				return;
 			} else {
 				throw new ClientServicesException(response.getResponse(), response.getRequest());
@@ -765,6 +765,7 @@ public class ActivityService extends BaseService {
 		Node node = (Node)response.getData();
 		XPathExpression xpath = (node instanceof Document) ? (XPathExpression)AtomXPath.singleEntry.getPath() : null;
 		activity.setData(node, ConnectionsConstants.nameSpaceCtx, xpath);
+		activity.setService(this);
 		return activity;
 	}
 		
@@ -798,12 +799,12 @@ public class ActivityService extends BaseService {
 		}
 	}
 
-	protected ActivityNode updateActivityNodeEntity(String requestUrl, ActivityNode activityNode, Map<String, String> parameters) throws ClientServicesException {
+	protected void updateActivityNodeEntity(String requestUrl, ActivityNode activityNode, Map<String, String> parameters, int expectedCode) throws ClientServicesException {
 		try {
 			ActivityNodeSerializer serializer = new ActivityNodeSerializer(activityNode);
 			Response response = putData(requestUrl, parameters, getHeaders(), serializer.generateUpdate(), activityNode.getActivityNodeUuid());
-			if (isValidResponse(response, 200)) {
-				return updateActivityNodeEntityData(activityNode, response);
+			if (isValidResponse(response, expectedCode)) {
+				return;
 			} else {
 				throw new ClientServicesException(response.getResponse(), response.getRequest());
 			}
@@ -837,6 +838,7 @@ public class ActivityService extends BaseService {
 		Node node = (Node)response.getData();
 		XPathExpression xpath = (node instanceof Document) ? (XPathExpression)AtomXPath.singleEntry.getPath() : null;
 		activityNode.setData(node, ConnectionsConstants.nameSpaceCtx, xpath);
+		activityNode.setService(this);
 		return activityNode;
 	}
 		
@@ -906,9 +908,11 @@ public class ActivityService extends BaseService {
 	}
 	
 	protected Member updateMemberEntityData(Member member, Response response) {
+		// Response does not contain a valid member entry
 		Node node = (Node)response.getData();
 		XPathExpression xpath = (node instanceof Document) ? (XPathExpression)AtomXPath.singleEntry.getPath() : null;
 		member.setData(node, ConnectionsConstants.nameSpaceCtx, xpath);
+		member.setService(this);
 		return member;
 	}
 		

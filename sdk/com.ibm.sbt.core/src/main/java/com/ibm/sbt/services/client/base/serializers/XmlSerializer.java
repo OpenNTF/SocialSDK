@@ -206,6 +206,12 @@ public class XmlSerializer {
 		return attr;
 	}
 	
+	protected Attr attribute(String name, long value) {
+		Attr attr = doc.createAttribute(name);
+		attr.setValue("" + value);
+		return attr;
+	}
+	
 	protected Attr attribute(String namespaceURI, String name, String value) {
 		Attr attr = doc.createAttributeNS(namespaceURI, name);
 		attr.setValue(value);
@@ -222,7 +228,7 @@ public class XmlSerializer {
 	
 	protected Element addText(Element element, String data) {
 		if(element == null) return null;
-		if(data == null) throw new NullPointerException("The data of a text element may not be null.");
+		if(data == null) return element;
 		
 		Text textNode = doc.createTextNode(data);
 		element.appendChild(textNode);

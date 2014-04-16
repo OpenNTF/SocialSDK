@@ -37,7 +37,7 @@ public class PersonSerializer extends BaseEntitySerializer<Person> {
 				textElement("name", entity.getName()),
 				textElement("email", entity.getEmail()),
 				textElement(Namespaces.SNX, "userid", entity.getId()),
-				textElement(Namespaces.SNX, "userState", entity.getState())
+				textElement(Namespaces.SNX, "userState", entity.getUserState())
 		);
 	}
 }

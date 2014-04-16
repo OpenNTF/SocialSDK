@@ -197,7 +197,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 	public final void testUpdateProfile() throws Exception {
 		Profile profile = profileService.getProfile(properties
 				.getProperty("email1"));
-		profile.setTelephoneNumber("88888888");
+		profile.setTelephoneNumber("9999999999");
 		profileService.updateProfile(profile);
 		profile = profileService.getProfile(properties.getProperty("email1"));
 		assertEquals("9999999999", profile.getTelephoneNumber());

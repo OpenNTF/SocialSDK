@@ -16,6 +16,7 @@
 
 package com.ibm.sbt.services.client.base.serializers;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +31,9 @@ import com.ibm.sbt.services.client.base.ConnectionsConstants.Namespaces;
  *
  */
 public class AtomEntitySerializer<T extends AtomEntity> extends BaseEntitySerializer<T> {
+	
+	private static SimpleDateFormat dateFormat = 
+			new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");	
 
 	public AtomEntitySerializer(T entity) {
 		super(entity);
@@ -63,11 +67,11 @@ public class AtomEntitySerializer<T extends AtomEntity> extends BaseEntitySerial
 	}
 	
 	protected Element published() {
-		return textElement("published", DateSerializer.toString(entity.getPublished()));
+		return textElement("published", DateSerializer.toString(dateFormat, entity.getPublished()));
 	}
 	
 	protected Element updated() {
-		return textElement("updated", DateSerializer.toString(entity.getUpdated()));
+		return textElement("updated", DateSerializer.toString(dateFormat, entity.getUpdated()));
 	}
 	
 	protected Element summary() {

@@ -16,8 +16,10 @@
 
 package com.ibm.sbt.services.client.connections.common.serializers;
 
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
+import com.ibm.sbt.services.client.base.ConnectionsConstants.Namespaces;
 import com.ibm.sbt.services.client.base.serializers.AtomEntitySerializer;
 import com.ibm.sbt.services.client.connections.common.Member;
 
@@ -35,20 +37,26 @@ public class MemberSerializer extends AtomEntitySerializer<Member> {
 		Node entry = entry();
 		
 		appendChildren(entry,
-				title()
+				contributor(),
+				memberCategory(),
+				role()
 		);
 		
 		return serializeToString();
 	}
 	
 	public String generateUpdate() {
-		Node entry = genericAtomEntry();
-		
-		appendChildren(entry,
-				title()
-		);
-		
-		return serializeToString();
+		return generateCreate();
 	}
+	
+	private Element memberCategory() {
+		return element("category", 
+				attribute("scheme", "http://www.ibm.com/xmlns/prod/sn/type"), 
+				attribute("term", "person"));
+	}
+	
+	protected Element role() {
+		return textElement(Namespaces.SNX, "role", entity.getRole());
+	}	
 		
 }

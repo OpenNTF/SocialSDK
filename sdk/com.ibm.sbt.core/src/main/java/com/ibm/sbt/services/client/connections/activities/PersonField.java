@@ -20,8 +20,6 @@ import org.w3c.dom.Node;
 import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.base.BaseService;
-import com.ibm.sbt.services.client.base.ConnectionsConstants;
-import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.connections.common.Person;
 
 /**
@@ -29,6 +27,8 @@ import com.ibm.sbt.services.client.connections.common.Person;
  *
  */
 public class PersonField extends Field {
+	
+	private Person person;
 
 	/**
 	 * Default constructor
@@ -48,14 +48,33 @@ public class PersonField extends Field {
 		super(service, node, namespaceCtx, xpathExpression);
 	}
 		
+	/* (non-Javadoc)
+	 * @see com.ibm.sbt.services.client.connections.activities.Field#getType()
+	 */
+	@Override
+	public String getType() {
+		return PERSON;
+	}
+	
 	/**
 	 * Return the person value for this field.
 	 * 
 	 * @return person
 	 */
 	public Person getPerson() {
-		return new Person(getService(), new XmlDataHandler((Node)this.getDataHandler().getData(), 
-    			ConnectionsConstants.nameSpaceCtx, (XPathExpression)ActivityXPath.self.getPath()));
+		if (person == null && getDataHandler() != null) {
+			person = createPerson((Node)getDataHandler().getData(), ActivityXPath.field_person);
+		}
+		return person;
 	}
 	
+	/**
+	 * Set the person value for this field.
+	 * 
+	 * @param person
+	 */
+	public void setPerson(Person person) {
+		this.person = person;
+	}
+
 }

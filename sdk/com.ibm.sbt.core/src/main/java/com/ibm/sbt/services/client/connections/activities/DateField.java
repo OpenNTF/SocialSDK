@@ -47,14 +47,30 @@ public class DateField extends Field {
 		super(service, node, namespaceCtx, xpathExpression);
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.ibm.sbt.services.client.connections.activities.Field#getType()
+	 */
+	@Override
+	public String getType() {
+		return DATE;
+	}
+	
 	/**
 	 * Return the date value.
 	 * 
 	 * @return date
 	 */
 	public Date getDate() {
-		return getAsDate(ActivityXPath.self);
+		return getAsDate(ActivityXPath.field_date);
 	}
 	
+	/**
+	 * Set the date value.
+	 * 
+	 * @param date
+	 */
+	public void setDate(Date date) {
+		setAsDate(ActivityXPath.field_date, date);
+	}
 	
 }

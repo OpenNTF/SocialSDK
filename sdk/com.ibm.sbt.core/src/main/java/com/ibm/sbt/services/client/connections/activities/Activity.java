@@ -16,7 +16,6 @@
 package com.ibm.sbt.services.client.connections.activities;
 
 import java.util.Date;
-import java.util.List;
 
 import org.w3c.dom.Node;
 
@@ -24,7 +23,6 @@ import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.ClientServicesException;
-import com.ibm.sbt.services.client.base.AtomEntity;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
@@ -36,7 +34,7 @@ import com.ibm.sbt.services.client.connections.common.Person;
  * @author mwallace
  *
  */
-public class Activity extends ActivityNode {
+public class Activity extends NodeEntity {
 
 	/*
 	 * Specifies the starting page of a template. The term attribute identifies the default view to use. 
@@ -49,6 +47,15 @@ public class Activity extends ActivityNode {
 	 * Default constructor
 	 */
 	public Activity() {
+	}
+
+	/**
+	 * Construct Activity associated with the specified service
+	 * 
+	 * @param service
+	 */
+	public Activity(ActivityService service) {
+		setService(service);
 	}
 
 	/**
@@ -345,7 +352,7 @@ public class Activity extends ActivityNode {
 	 * @throws ClientServicesException 
 	 */
 	public EntityList<ActivityNode> getDescendants() throws ClientServicesException {
-		ActivityService service = (ActivityService)getService();
+		ActivityService service = getActivityService();
 		return service.getActivityNodeDescendants(this.getActivityUuid());
 	}
 
@@ -354,49 +361,49 @@ public class Activity extends ActivityNode {
 	//------------------------------------------------------------------------------------------------------------------
 	
 	/**
-	 * To delete an existing activity, use the HTTP DELETE method.
-	 * Deleted activities are moved to the trash collection and can be restored.  
+	 * @see ActivityService.deleteActivity  
 	 * 
 	 * @return
 	 * @throws ClientServicesException 
 	 * @throws {@link NullPointerException} If there is no service associated with this Activity
 	 */
 	public void delete() throws ClientServicesException {
-		ActivityService service = (ActivityService)getService();
+		ActivityService service = getActivityService();
 		service.deleteActivity(this);
 	}
 	
-	//------------------------------------------------------------------------------------------------------------------
-	// Working with activity fields programmatically.
-	//------------------------------------------------------------------------------------------------------------------
-	
-	public Field[] getFields() {
-		return null;
-	}
-	
-	public Field getField(String fid) {
-		return null;
-	}
-	
-	public Field addField(Field field) {
-		return field;
-	}
-	
-	public Field updateField(Field field) {
-		return field;
-	}
-	
-	public String deleteField(Field field) {
-		return deleteField(field.getFid());
-	}
-	
-	public String deleteField(String fid) {
-		return fid;
+	/**
+	 * @see ActivityService.updateActivity  
+	 * 
+	 * @return
+	 * @throws ClientServicesException 
+	 * @throws {@link NullPointerException} If there is no service associated with this Activity
+	 */
+	public void update() throws ClientServicesException {
+		ActivityService service = getActivityService();
+		service.updateActivity(this);
 	}
 	
 	//------------------------------------------------------------------------------------------------------------------
 	// Working with activity members programmatically.
 	//------------------------------------------------------------------------------------------------------------------
+	
+	/**
+	 * Add an activity member.
+	 * 
+	 * @param member
+	 * @param role
+	 * @param type
+	 * @return
+	 */
+	public Member addMember(String type, String memberId, String role) throws ClientServicesException {
+		Member member = new Member();
+		member.setComponent(Member.COMPONENT_ACTIVITIES);
+		member.setContributor(memberId);
+		member.setRole(role);
+		member.setType(type);
+		return addMember(member);
+	}
 	
 	/**
 	 * Add an activity member.

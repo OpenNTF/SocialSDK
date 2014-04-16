@@ -16,9 +16,9 @@
 
 package com.ibm.sbt.services.client.connections.activities.serializers;
 
+import static com.ibm.sbt.services.client.base.CommonConstants.APPLICATION_XML;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.ACTIVITY;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.ACTIVITY_NODE;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.APPLICATION_XML;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.CATEGORY;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.CONTENT;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.LABEL;

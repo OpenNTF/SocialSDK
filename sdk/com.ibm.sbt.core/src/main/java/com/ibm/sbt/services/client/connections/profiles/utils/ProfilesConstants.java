@@ -50,20 +50,6 @@ public class ProfilesConstants {
 	public static final String PROFILE = "profile";
 	public static final String CATEGORIES = "categories";
 	public static final String SNX_ATTRIB = "com.ibm.snx_profiles.attrib";
-	public static final String SNX_GUID = "com.ibm.snx_profiles.base.guid";
-	public static final String SNX_EMAIL = "com.ibm.snx_profiles.base.email";
-	public static final String SNX_UID = "com.ibm.snx_profiles.base.uid";
-	public static final String SNX_DISTINGUISHEDNAME = "com.ibm.snx_profiles.base.distinguishedName";
-	public static final String SNX_DISPLAYNAME = "com.ibm.snx_profiles.base.displayName";
-	public static final String SNX_GIVENNAMES = "com.ibm.snx_profiles.base.givenNames";
-	public static final String SNX_SURNAME = "com.ibm.snx_profiles.base.surname";
-	public static final String SNX_USERSTATE = "com.ibm.snx_profiles.base.userState";
-	public static final String GUID = "guid";
-	public static final String DISTINGUISHEDNAME = "distinguishedName";
-	public static final String DISPLAYNAME = "displayName";
-	public static final String GIVENNAMES = "givenNames";
-	public static final String SURNAME = "surname";
-	public static final String USERSTATE = "userState";
 	public static final String BEGIN_VCARD = "BEGIN:VCARD";
 	public static final String END_VCARD = "END:VCARD";
 	public static final String VCARD_V21 = "VERSION:2.1";
@@ -82,18 +68,51 @@ public class ProfilesConstants {
 	public static final HashMap<String, String> createFieldsIdentifierMap;
 	public static final HashMap<String, String> updateFieldsIdentifierMap;
 	
-	public enum VCardFields {
-		BUILDING("building", "X_BUILDING"),
+	public enum VCardField {
+		ALTERNATE_LAST_NAME("alternateLastname", "X_ALTERNATE_LAST_NAME"),
+		BUILDING("bldgId", "X_BUILDING"),
+		BLOG_URL("blogUrl", "X_BLOG_URL;VALUE"),
+		COUNTRY_CODE("countryCode", "X_COUNTRY_CODE"),
+		COURTESY_TITLE("courtesyTitle", "HONORIFIC_PREFIX"),
+		DEPT_NUMBER("deptNumber", "X_DEPARTMENT_NUMBER"),
+		DESCRIPTION("description", "X_DESCRIPTION"),
+		DISPLAY_NAME("displayName", "FN"),
+		EMAIL("email", "EMAIL;INTERNET"),
+		EMPLOYEE_NUMBER("employeeNumber", "X_EMPLOYEE_NUMBER"),
+		EMPLOYEE_TYPE_CODE("employeeTypeCode", "X_EMPTYPE"),
+		EMPLOYEE_TYPE_DESC("employeeTypeDesc", "ROLE"),
+		EXPERIENCE("experience", "X_EXPERIENCE"),
+		FAX_NUMBER("faxNumber", "TEL;FAX"),
 		FLOOR("floor", "X_FLOOR"),
-		OFFICENAME("officeName", "X_FLOOR"),
+		GROUPWARE_EMAIL("groupwareEmail", "EMAIL;X_GROUPWARE_MAIL"),
+		GUID("guid", "UID"),
+		IP_TELEPHONE_NUMBER("ipTelephoneNumber", "TEL;X_IP"),
+		IS_MANAGER("isManager", "X_IS_MANAGER"),
 		JOBRESP("jobResp", "TITLE"),
+		LAST_UPDATE("lastUpdate", "REV"),
+		MANAGER_UID("managerUid", "X_MANAGER_UID"),
+		MOBILE_NUMBER("mobileNumber", "TEL;CELL"),
+		NATIVE_FIRST_NAME("nativeFirstName", "X_NATIVE_FIRST_NAME"),
+		NATIVE_LAST_NAME("nativeLastName", "X_NATIVE_LATS_NAME"),
+		OFFICENAME("officeName", "X_OFFICE_NUMBER"),
+		ORGANIZATION_TITLE("organizationTitle", "ORG"),
+		ORG_ID("orgId", "X_ORGANIZATION_CODE"),
+		PAGER_ID("pagerId", "X_PAGER_ID"),
+		PAGER_SERVICE_PROVIDER("pagerServiceProvider", "X_PAGER_PROVIDER"),
+		PAGER_TYPE("pagerType", "X_PAGER_TYPE"),
+		PREFERRED_FIRST_NAME("preferredFirstName", "NICKNAME"),
+		PREFERRED_LANGUAGE("preferredLanguage", "X_PREFERRED_LANGUAGE"),
+		PREFERRED_LAST_NAME("preferredLastName", "X_PREFERRED_LAST_NAME"),
 		TELEPHONE_NUMBER("telephoneNumber", "TEL;WORK"),
-		WORK_LOCATION("workLocation", "ADR;WORK");
+		TIMEZONE("timezone", "TZ"),
+		UID("uid", "X_PROFILE_UID"),
+		WORK_LOCATION("workLocation", "ADR;WORK"),
+		WORK_LOCATION_CODE("workLocationCode", "X_WORKLOCATION_CODE");
 
 		private final String vCardValue;
 		private final String entityValue;
 		
-		VCardFields(String entityValue, String vCardValue){
+		VCardField(String entityValue, String vCardValue){
 			this.entityValue = entityValue;
 			this.vCardValue = vCardValue;
 		}
@@ -104,6 +123,34 @@ public class ProfilesConstants {
 
 		public String getEntityValue(){
 			return entityValue;
+		}
+	}
+	
+	public enum ProfileAttribute {
+			GUID("guid", "com.ibm.snx_profiles.base.guid"),
+			EMAIL("email", "com.ibm.snx_profiles.base.email"),
+			UID("uid", "com.ibm.snx_profiles.base.uid"),
+			DISTINGUISHED_NAME("distinguishedName", "com.ibm.snx_profiles.base.distinguishedName"),
+			DISPLAY_NAME("displayName", "com.ibm.snx_profiles.base.displayName"),
+			GIVEN_NAMES("givenNames", "com.ibm.snx_profiles.base.givenNames"),
+			SURNAME("surname", "com.ibm.snx_profiles.base.surname"),
+			USER_STATE("userState",	"com.ibm.snx_profiles.base.userState"),
+		;
+		
+		private final String entityName;
+		private final String atomName;
+		
+		ProfileAttribute(String entityName, String atomName){
+			this.entityName = entityName;
+			this.atomName = atomName;
+		}
+		
+		public String getEntityName(){
+			return entityName;
+		}
+		
+		public String getAtomName(){
+			return atomName;
 		}
 	}
 

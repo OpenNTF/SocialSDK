@@ -16,18 +16,19 @@
 
 package com.ibm.sbt.services.client.connections.profiles;
 
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.AT;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.AUTH_TYPE;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.CH_COLON;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.COMMA;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.DOT;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.EMPTY;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.EQUALS;
+import static com.ibm.sbt.services.client.base.CommonConstants.AT;
+import static com.ibm.sbt.services.client.base.CommonConstants.AUTH_TYPE;
+import static com.ibm.sbt.services.client.base.CommonConstants.CH_COLON;
+import static com.ibm.sbt.services.client.base.CommonConstants.COMMA;
+import static com.ibm.sbt.services.client.base.CommonConstants.CONTENT_TYPE;
+import static com.ibm.sbt.services.client.base.CommonConstants.DOT;
+import static com.ibm.sbt.services.client.base.CommonConstants.EMPTY;
+import static com.ibm.sbt.services.client.base.CommonConstants.EQUALS;
+import static com.ibm.sbt.services.client.base.CommonConstants.IMAGE_;
+import static com.ibm.sbt.services.client.base.CommonConstants.IMAGE_JPG;
+import static com.ibm.sbt.services.client.base.CommonConstants.JPG;
+import static com.ibm.sbt.services.client.base.CommonConstants.LOCATION_HEADER;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.HREF;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.IMAGE_;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.IMAGE_JPG;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.JPG;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.LOCATION_HEADER;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.PROFILE;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.USERID;
 import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.ACCEPTED;

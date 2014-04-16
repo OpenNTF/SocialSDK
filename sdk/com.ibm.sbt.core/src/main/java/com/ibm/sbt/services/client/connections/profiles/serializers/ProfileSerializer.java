@@ -16,19 +16,21 @@
 
 package com.ibm.sbt.services.client.connections.profiles.serializers;
 
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.APPLICATION_XML;
+import static com.ibm.sbt.services.client.base.CommonConstants.APPLICATION_XML;
+import static com.ibm.sbt.services.client.base.CommonConstants.COLON;
+import static com.ibm.sbt.services.client.base.CommonConstants.COMMA;
+import static com.ibm.sbt.services.client.base.CommonConstants.EMPTY;
+import static com.ibm.sbt.services.client.base.CommonConstants.NL;
+import static com.ibm.sbt.services.client.base.CommonConstants.SEMICOLON;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.BEGIN_VCARD;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.BUILDING;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.CATEGORIES;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.CATEGORY;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.COLON;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.COMMA;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.CONTENT;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.COUNTRYNAME;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.DATA;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.DISPLAYNAME;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.DISTINGUISHEDNAME;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.EMPTY;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.END_VCARD;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.ENTRY;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.EXTENDEDADDRESS;
@@ -38,12 +40,10 @@ import static com.ibm.sbt.services.client.base.ConnectionsConstants.GUID;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.JOBTITLE;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.KEY;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.LOCALITY;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.NL;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.PERSON;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.POSTALCODE;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.PROFILE;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.REGION;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.SEMICOLON;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.SNX_ATTRIB;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.SNX_DISPLAYNAME;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.SNX_DISTINGUISHEDNAME;

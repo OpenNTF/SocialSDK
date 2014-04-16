@@ -27,6 +27,25 @@ import com.ibm.sbt.services.client.base.BaseService;
  *
  */
 public class Member extends AtomEntity {
+	
+	private String component;
+	
+	static public final String COMPONENT_ACTIVITIES = "http://www.ibm.com/xmlns/prod/sn/activities"; //$NON-NLS-1$
+	static public final String COMPONENT_COMMUNITIES = "http://www.ibm.com/xmlns/prod/sn/communities"; //$NON-NLS-1$
+	
+	/**
+	 * Specifies the member's role in the activity.
+	 */
+	static public final String ROLE_OWNER = "owner"; //$NON-NLS-1$
+	static public final String ROLE_MEMBER = "member"; //$NON-NLS-1$
+	static public final String ROLE_READER = "reader"; //$NON-NLS-1$
+
+	/**
+	 * Specifies the member type.
+	 */
+	static public final String TYPE_PERSON = "person"; //$NON-NLS-1$
+	static public final String TYPE_GROUP = "group"; //$NON-NLS-1$
+	static public final String TYPE_COMMUNITY = "community"; //$NON-NLS-1$
 
 	/**
 	 * Default constructor
@@ -44,6 +63,75 @@ public class Member extends AtomEntity {
 	 */
 	public Member(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
 		super(service, node, namespaceCtx, xpathExpression);
+	}
+
+	/**
+	 * Sets the contributor from ATOM entry document.
+	 * 
+	 * @param id
+	 */
+	public void setContributor(String id) {
+		Person person = new Person();
+		if (isEmail(id)) {
+			person.setEmail(id);
+		} else {
+			person.setUserid(id);
+		}
+		setContributor(person);
+	}
+	
+	/**
+	 * @param component the component to set
+	 */
+	public void setComponent(String component) {
+		this.component = component;
+	}
+	
+	/**
+	 * @return the component
+	 */
+	public String getComponent() {
+		return component;
+	}
+	
+	/**
+	 * Specifies the member's role in the component.
+	 * 
+	 * @return
+	 */
+	public String getRole() {
+		return getAsString(CommonXPath.role);
+	}
+	
+	/**
+	 * Specifies the member's role in the component.
+	 * 
+	 * @param role
+	 */
+	public void setRole(String role) {
+		setAsString(CommonXPath.role, role);
+	}
+	
+	/**
+	 * Specifies the member type.
+	 * 
+	 * @return
+	 */
+	public String setType() {
+		return getAsString(CommonXPath.type);
+	}
+	
+	/**
+	 * Specifies the member type.
+	 * 
+	 * @param role
+	 */
+	public void setType(String type) {
+		setAsString(CommonXPath.type, type);
+	}
+	
+	private boolean isEmail(String id) {
+		return (id.indexOf('@') != -1);
 	}
 	 
 }

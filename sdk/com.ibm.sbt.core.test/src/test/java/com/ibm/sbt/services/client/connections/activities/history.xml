@@ -1,0 +1,756 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:os="http://a9.com/-/spec/opensearch/1.1/"
+	xmlns:snx="http://www.ibm.com/xmlns/prod/sn">
+	<generator uri="http://www.ibm.com/xmlns/prod/sn" version="">IBM
+		Connections - Activities
+	</generator>
+	<icon>https://apps.na.collabservtest.lotus.com/activities/styles/images/favicon.ico
+	</icon>
+	<logo>https://apps.na.collabservtest.lotus.com/activities/nav/common/images/iconActivities128.png
+	</logo>
+	<id>urn:lsid:ibm.com:oa:1449aed1-75b0-4066-a92e-901f6f303c53:history
+	</id>
+	<title type="text">History: Test Activity</title>
+	<updated>2014-04-14T15:59:49Z</updated>
+	<link rel="self" type="application/atom+xml"
+		href="https://apps.na.collabservtest.lotus.com/activities/service/atom2/activity/history?activityUuid=1449aed1-75b0-4066-a92e-901f6f303c53" />
+	<link rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml"
+		href="https://apps.na.collabservtest.lotus.com/activities/service/atom2/service" />
+	<link rel="related" type="application/atom+xml"
+		href="https://apps.na.collabservtest.lotus.com/activities/service/atom2/activity?activityUuid=1449aed1-75b0-4066-a92e-901f6f303c53" />
+	<link rel="alternate" type="text/html"
+		href="https://apps.na.collabservtest.lotus.com/activities/service/html/activity/recent?activityUuid=1449aed1-75b0-4066-a92e-901f6f303c53" />
+	<os:totalResults>5</os:totalResults>
+	<entry>
+		<id>urn:lsid:ibm.com:oa:abe94bac-fd23-4616-a434-21bbd228f06b</id>
+		<title type="text">Mark Wallace created entry &#034;Test ToDo&#034;
+		</title>
+		<summary type="html">&lt;span&gt;&lt;span class=&#034;vcard&#034;&gt;
+
+
+
+			&lt;a class=&#034;fn person lotusPerson actevent.person&#034;
+			href=&#034;https://apps.na.collabservtest.lotus.com/activities/service/html/activities/overview?userid=20089094#userid=20089094&#034;&gt;Mark
+			Wallace&lt;/a&gt;
+
+			&lt;span class=&#034;x-lconn-userid&#034;
+			style=&#034;display:
+			none;&#034;&gt;20089094&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;
+			created entry &#034;&lt;a class=&#034;actevent.entry&#034;
+			id=&#034;2.actevent.1449aed1-75b0-4066-a92e-901f6f303c53.6c05e27a-10ed-46a4-bf16-c42d3249d48d&#034;
+			href=&#034;https://apps.na.collabservtest.lotus.com/activities/service/html/entry?uuid=6c05e27a-10ed-46a4-bf16-c42d3249d48d&#034;&gt;Test
+			ToDo&lt;/a&gt;&#034;</summary>
+		<link
+			href="https://apps.na.collabservtest.lotus.com/activities/service/html/activity/history?activityUuid=1449aed1-75b0-4066-a92e-901f6f303c53" />
+		<updated>2014-04-14T15:59:49Z</updated>
+		<author>
+			<snx:org>
+				<uri>https://apps.na.collabservtest.lotus.com/activities/service/atom2/memberprofile?memberid=
+				</uri>
+			</snx:org>
+			<name>Mark Wallace</name>
+			<snx:userid>20089094</snx:userid>
+			<snx:userState>active</snx:userState>
+		</author>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/type"
+			term="activity.entry.created" />
+	</entry>
+	<entry>
+		<id>urn:lsid:ibm.com:oa:97e3bb0f-60be-4f50-9f2b-fb6d163de07c</id>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<title type="text">Mark Wallace added David Ryan as a member</title>
+
+
+		<summary type="html">&lt;span&gt;&lt;span class=&#034;vcard&#034;&gt;
+
+
+
+			&lt;a class=&#034;fn person lotusPerson actevent.person&#034;
+			href=&#034;https://apps.na.collabservtest.lotus.com/activities/service/html/activities/overview?userid=20089094#userid=20089094&#034;&gt;Mark
+			Wallace&lt;/a&gt;
+
+			&lt;span class=&#034;x-lconn-userid&#034;
+			style=&#034;display:
+			none;&#034;&gt;20089094&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; added
+			David Ryan as a member
+		</summary>
+
+
+
+
+		<link
+			href="https://apps.na.collabservtest.lotus.com/activities/service/html/activity/history?activityUuid=1449aed1-75b0-4066-a92e-901f6f303c53" />
+		<updated>2014-04-14T15:59:37Z</updated>
+		<author>
+
+
+
+
+
+
+
+
+
+
+
+
+
+			<snx:org>
+				<uri>https://apps.na.collabservtest.lotus.com/activities/service/atom2/memberprofile?memberid=
+				</uri>
+			</snx:org>
+			<name>Mark Wallace</name>
+
+			<snx:userid>20089094</snx:userid>
+
+
+
+
+			<snx:userState>active</snx:userState>
+
+
+
+		</author>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/type"
+			term="activity.membership.updated" />
+	</entry>
+
+	<entry>
+		<id>urn:lsid:ibm.com:oa:7da2d86f-62a2-49d7-8be6-15178d7a208c</id>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<title type="text">Mark Wallace created entry &#034;Test Entry&#034;
+		</title>
+
+
+		<summary type="html">&lt;span&gt;&lt;span class=&#034;vcard&#034;&gt;
+
+
+
+			&lt;a class=&#034;fn person lotusPerson actevent.person&#034;
+			href=&#034;https://apps.na.collabservtest.lotus.com/activities/service/html/activities/overview?userid=20089094#userid=20089094&#034;&gt;Mark
+			Wallace&lt;/a&gt;
+
+			&lt;span class=&#034;x-lconn-userid&#034;
+			style=&#034;display:
+			none;&#034;&gt;20089094&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;
+			created entry &#034;&lt;a class=&#034;actevent.entry&#034;
+			id=&#034;6.actevent.1449aed1-75b0-4066-a92e-901f6f303c53.2a972f9b-b3aa-4039-8570-70fd28dd6c05&#034;
+			href=&#034;https://apps.na.collabservtest.lotus.com/activities/service/html/entry?uuid=2a972f9b-b3aa-4039-8570-70fd28dd6c05&#034;&gt;Test
+			Entry&lt;/a&gt;&#034;</summary>
+
+
+
+
+		<link
+			href="https://apps.na.collabservtest.lotus.com/activities/service/html/activity/history?activityUuid=1449aed1-75b0-4066-a92e-901f6f303c53" />
+		<updated>2014-04-14T15:59:14Z</updated>
+		<author>
+
+
+
+
+
+
+
+
+
+
+
+
+
+			<snx:org>
+				<uri>https://apps.na.collabservtest.lotus.com/activities/service/atom2/memberprofile?memberid=
+				</uri>
+			</snx:org>
+			<name>Mark Wallace</name>
+
+			<snx:userid>20089094</snx:userid>
+
+
+
+
+			<snx:userState>active</snx:userState>
+
+
+
+		</author>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/type"
+			term="activity.entry.created" />
+	</entry>
+
+	<entry>
+		<id>urn:lsid:ibm.com:oa:5b2bdfdf-acb1-4870-a159-dcc6195c67e0</id>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<title type="text">Mark Wallace created activity</title>
+
+
+		<summary type="html">&lt;span&gt;&lt;span class=&#034;vcard&#034;&gt;
+
+
+
+			&lt;a class=&#034;fn person lotusPerson actevent.person&#034;
+			href=&#034;https://apps.na.collabservtest.lotus.com/activities/service/html/activities/overview?userid=20089094#userid=20089094&#034;&gt;Mark
+			Wallace&lt;/a&gt;
+
+			&lt;span class=&#034;x-lconn-userid&#034;
+			style=&#034;display:
+			none;&#034;&gt;20089094&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;
+			created activity
+		</summary>
+
+
+
+
+		<link
+			href="https://apps.na.collabservtest.lotus.com/activities/service/html/activity/history?activityUuid=1449aed1-75b0-4066-a92e-901f6f303c53" />
+		<updated>2014-04-14T15:58:54Z</updated>
+		<author>
+
+
+
+
+
+
+
+
+
+
+
+
+
+			<snx:org>
+				<uri>https://apps.na.collabservtest.lotus.com/activities/service/atom2/memberprofile?memberid=
+				</uri>
+			</snx:org>
+			<name>Mark Wallace</name>
+
+			<snx:userid>20089094</snx:userid>
+
+
+
+
+			<snx:userState>active</snx:userState>
+
+
+
+		</author>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/type"
+			term="activity.created" />
+	</entry>
+
+	<entry>
+		<id>urn:lsid:ibm.com:oa:3185ba31-2756-4df8-aa45-586223936e2b</id>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<title type="text">Mark Wallace added Mark Wallace as a member</title>
+
+
+		<summary type="html">&lt;span&gt;&lt;span class=&#034;vcard&#034;&gt;
+
+
+
+			&lt;a class=&#034;fn person lotusPerson actevent.person&#034;
+			href=&#034;https://apps.na.collabservtest.lotus.com/activities/service/html/activities/overview?userid=20089094#userid=20089094&#034;&gt;Mark
+			Wallace&lt;/a&gt;
+
+			&lt;span class=&#034;x-lconn-userid&#034;
+			style=&#034;display:
+			none;&#034;&gt;20089094&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; added
+			Mark Wallace as a member
+		</summary>
+
+
+
+
+		<link
+			href="https://apps.na.collabservtest.lotus.com/activities/service/html/activity/history?activityUuid=1449aed1-75b0-4066-a92e-901f6f303c53" />
+		<updated>2014-04-14T15:58:54Z</updated>
+		<author>
+
+
+
+
+
+
+
+
+
+
+
+
+
+			<snx:org>
+				<uri>https://apps.na.collabservtest.lotus.com/activities/service/atom2/memberprofile?memberid=
+				</uri>
+			</snx:org>
+			<name>Mark Wallace</name>
+
+			<snx:userid>20089094</snx:userid>
+
+
+
+
+			<snx:userState>active</snx:userState>
+
+
+
+		</author>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/type"
+			term="activity.membership.updated" />
+	</entry>
+
+</feed>

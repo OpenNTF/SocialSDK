@@ -16,6 +16,8 @@
 
 package com.ibm.sbt.services.client.connections.wikis;
 
+import static com.ibm.sbt.services.client.base.CommonConstants.APPLICATION_ATOM_XML;
+import static com.ibm.sbt.services.client.base.CommonConstants.CONTENT_TYPE;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
 
 import java.io.IOException;
@@ -313,7 +315,7 @@ public class WikiService extends BaseService {
 			Map<String, String> parameters) throws ClientServicesException {
 		try {
 			Map<String,String> headers = new HashMap<String, String>();
-			headers.put("Content-Type", "application/atom+xml");
+			headers.put(CONTENT_TYPE, APPLICATION_ATOM_XML);
 			WikiSerializer serializer = new WikiSerializer(wiki);
 			return createData(requestUrl, parameters, headers, serializer.createPayload());
 		}
@@ -329,7 +331,7 @@ public class WikiService extends BaseService {
 			Map<String, String> parameters) throws ClientServicesException {
 		try {
 			Map<String,String> headers = new HashMap<String, String>();
-			headers.put("Content-Type", "application/atom+xml");
+			headers.put(CONTENT_TYPE, APPLICATION_ATOM_XML);
 			WikiSerializer serializer = new WikiSerializer(wiki);
 			return updateData(requestUrl, parameters, headers, serializer.updatePayload(), null);
 		}
@@ -345,10 +347,9 @@ public class WikiService extends BaseService {
 			Map<String, String> parameters) throws ClientServicesException {
 		try {
 			Map<String,String> headers = new HashMap<String, String>();
-			headers.put("Content-Type", "application/atom+xml");
+			headers.put(CONTENT_TYPE, APPLICATION_ATOM_XML);
 			WikiPageSerializer serializer = new WikiPageSerializer(wikiPage);
-			serializer.generateCreate();
-			return createData(requestUrl, parameters, headers, serializer.serializeToString());
+			return createData(requestUrl, parameters, headers, serializer.createPayload());
 		}
 		catch(ClientServicesException e) {
 			throw e;
@@ -362,10 +363,9 @@ public class WikiService extends BaseService {
 			Map<String, String> parameters) throws ClientServicesException {
 		try {
 			Map<String,String> headers = new HashMap<String, String>();
-			headers.put("Content-Type", "application/atom+xml");
+			headers.put(CONTENT_TYPE, APPLICATION_ATOM_XML);
 			WikiPageSerializer serializer = new WikiPageSerializer(wikiPage);
-			serializer.generateUpdate();
-			return updateData(requestUrl, parameters, headers, serializer.serializeToString(), null);
+			return updateData(requestUrl, parameters, headers, serializer.updatePayload(), null);
 		}
 		catch(ClientServicesException e) {
 			throw e;

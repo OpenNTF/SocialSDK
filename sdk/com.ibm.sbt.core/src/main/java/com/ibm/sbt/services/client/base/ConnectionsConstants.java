@@ -67,6 +67,7 @@ public final class ConnectionsConstants {
 	public static final String CONTRIBUTOR = "contributor";
 	public static final String LABEL = "label";
 	public static final String COMPLETED = "completed";
+	public static final String PERSON = "person";
 
 	/**
 	 * Activity ATOM
@@ -107,43 +108,6 @@ public final class ConnectionsConstants {
 	public static final String COMMUNITYUUID = "communityUuid";
 	public static final String PERMISSIONS = "permissions";
 	public static final String PAGE = "page";
-
-	/**
-	 * Profile ATOM
-	 */
-	public static final String PROFILE = "profile";
-	public static final String PERSON = "person";
-	public static final String CATEGORIES = "categories";
-	public static final String SNX_ATTRIB = "com.ibm.snx_profiles.attrib";
-	public static final String SNX_GUID = "com.ibm.snx_profiles.base.guid";
-	public static final String SNX_EMAIL = "com.ibm.snx_profiles.base.email";
-	public static final String SNX_UID = "com.ibm.snx_profiles.base.uid";
-	public static final String SNX_DISTINGUISHEDNAME = "com.ibm.snx_profiles.base.distinguishedName";
-	public static final String SNX_DISPLAYNAME = "com.ibm.snx_profiles.base.displayName";
-	public static final String SNX_GIVENNAMES = "com.ibm.snx_profiles.base.givenNames";
-	public static final String SNX_SURNAME = "com.ibm.snx_profiles.base.surname";
-	public static final String SNX_USERSTATE = "com.ibm.snx_profiles.base.userState";
-	public static final String GUID = "guid";
-	public static final String DISTINGUISHEDNAME = "distinguishedName";
-	public static final String DISPLAYNAME = "displayName";
-	public static final String GIVENNAMES = "givenNames";
-	public static final String SURNAME = "surname";
-	public static final String USERSTATE = "userState";
-	public static final String BEGIN_VCARD = "BEGIN:VCARD";
-	public static final String END_VCARD = "END:VCARD";
-	public static final String VCARD_V21 = "VERSION:2.1";
-	public static final String JOBTITLE = "jobTitle";
-	public static final String ADDRESS = "address";
-	public static final String TELEPHONENUMBER = "telephoneNumber";
-	public static final String BUILDING = "building";
-	public static final String FLOOR = "floor";
-	public static final String STREETADRESS = "streetAddress";
-	public static final String EXTENDEDADDRESS = "extendedAddress";
-	public static final String LOCALITY = "locality";
-	public static final String REGION = "region";
-	public static final String POSTALCODE = "postalCode";
-	public static final String COUNTRYNAME = "countryName";
-	public static final String VCARD_ADDR = "ADR;WORK:;;";
 
 	/**
 	 * Enum containing the namespaces and prefixes used in ATOM construction (payloads) and parsing (xpath)

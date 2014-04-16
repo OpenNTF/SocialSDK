@@ -22,48 +22,44 @@ import static com.ibm.sbt.services.client.base.CommonConstants.COMMA;
 import static com.ibm.sbt.services.client.base.CommonConstants.EMPTY;
 import static com.ibm.sbt.services.client.base.CommonConstants.NL;
 import static com.ibm.sbt.services.client.base.CommonConstants.SEMICOLON;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.BEGIN_VCARD;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.BUILDING;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.CATEGORIES;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.CATEGORY;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.CONTENT;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.COUNTRYNAME;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.DATA;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.DISPLAYNAME;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.DISTINGUISHEDNAME;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.END_VCARD;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.ENTRY;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.EXTENDEDADDRESS;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.FLOOR;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.GIVENNAMES;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.GUID;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.JOBTITLE;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.KEY;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.LOCALITY;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.PERSON;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.POSTALCODE;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.PROFILE;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.REGION;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.SNX_ATTRIB;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.SNX_DISPLAYNAME;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.SNX_DISTINGUISHEDNAME;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.SNX_EMAIL;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.SNX_GIVENNAMES;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.SNX_GUID;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.SNX_SURNAME;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.SNX_UID;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.SNX_USERSTATE;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.STREETADRESS;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.SURNAME;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.TAGS;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.TELEPHONENUMBER;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.TERM;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.TEXT;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.TYPE;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.USERSTATE;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.VALUE;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.VCARD_ADDR;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.VCARD_V21;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.BEGIN_VCARD;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.CATEGORIES;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.COUNTRYNAME;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.DISPLAYNAME;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.DISTINGUISHEDNAME;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.END_VCARD;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.EXTENDEDADDRESS;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.GIVENNAMES;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.GUID;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.LOCALITY;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.POSTALCODE;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.PROFILE;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.REGION;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.SNX_ATTRIB;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.SNX_DISPLAYNAME;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.SNX_DISTINGUISHEDNAME;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.SNX_EMAIL;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.SNX_GIVENNAMES;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.SNX_GUID;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.SNX_SURNAME;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.SNX_UID;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.SNX_USERSTATE;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.STREETADRESS;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.SURNAME;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.USERSTATE;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.VCARD_ADDR;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.VCARD_V21;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -72,10 +68,11 @@ import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.base.ConnectionsConstants.Namespace;
 import com.ibm.sbt.services.client.base.serializers.AtomEntitySerializer;
 import com.ibm.sbt.services.client.connections.profiles.Profile;
+import com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.VCardFields;
 
 /**
  * 
- * @author carlos
+ * @author Carlos Manias
  *
  */
 public class ProfileSerializer extends AtomEntitySerializer<Profile> {
@@ -84,7 +81,7 @@ public class ProfileSerializer extends AtomEntitySerializer<Profile> {
 		super(entity);
 	}
 
-	public void generateCreatePayload() {
+	protected void generateCreatePayload() {
 		Node entry = entry();
 		
 		appendChildren(entry,
@@ -93,7 +90,7 @@ public class ProfileSerializer extends AtomEntitySerializer<Profile> {
 		);
 	}
 
-	public void generateUpdatePayload() {
+	protected void generateUpdatePayload() {
 		Node entry = entry();
 		
 		appendChildren(entry,
@@ -102,7 +99,7 @@ public class ProfileSerializer extends AtomEntitySerializer<Profile> {
 		);
 	}
 
-	public void generateTagsPayload() {
+	protected void generateTagsPayload() {
 		String[] tags = entity.getAsString(TAGS).split(COMMA);
 		categories(tags);
 	}
@@ -155,11 +152,11 @@ public class ProfileSerializer extends AtomEntitySerializer<Profile> {
 	private String vcard(){
 		return vcardParts(	BEGIN_VCARD,
 							VCARD_V21,
-							vcardAttribute(JOBTITLE),
+							vcardAttribute(VCardFields.JOBRESP),
 							vcardAddressAttribute(),
-							vcardAttribute(TELEPHONENUMBER),
-							vcardAttribute(BUILDING),
-							vcardAttribute(FLOOR),
+							vcardAttribute(VCardFields.TELEPHONE_NUMBER),
+							vcardAttribute(VCardFields.BUILDING),
+							vcardAttribute(VCardFields.FLOOR),
 							END_VCARD);
 	}
 
@@ -174,9 +171,9 @@ public class ProfileSerializer extends AtomEntitySerializer<Profile> {
 		return sb.toString();
 	}
 	
-	private String vcardAttribute(String name){
-		String value = entity.getAsString(name);
-		return StringUtil.isEmpty(value)?EMPTY:new StringBuilder(name).append(COLON).append(value).toString();
+	private String vcardAttribute(VCardFields vcardField){
+		String value = entity.getAsString(vcardField.getEntityValue());
+		return StringUtil.isEmpty(value)?EMPTY:new StringBuilder(vcardField.getVCardValue()).append(COLON).append(value).toString();
 	}
 
 	private String vcardAddressAttribute(){

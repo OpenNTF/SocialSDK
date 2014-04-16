@@ -92,11 +92,11 @@ public class ActivityTest extends BaseActivityServiceTest {
 			Person author = activity.getAuthor();
 			Assert.assertNotNull(author.getName());
 			Assert.assertNotNull(author.getUserid());
-			Assert.assertNotNull(author.getState());
+			Assert.assertNotNull(author.getUserState());
 			Person contributor = activity.getContributor();
 			Assert.assertNotNull(contributor.getName());
 			Assert.assertNotNull(contributor.getUserid());
-			Assert.assertNotNull(contributor.getState());
+			Assert.assertNotNull(contributor.getUserState());
 		}
 	}
 

@@ -72,6 +72,6 @@ public class Recommendation extends AtomEntity{
 	}
 
 	public String getUserState() {
-		return this.getAuthor().getState();
+		return this.getAuthor().getUserState();
 	}
 }

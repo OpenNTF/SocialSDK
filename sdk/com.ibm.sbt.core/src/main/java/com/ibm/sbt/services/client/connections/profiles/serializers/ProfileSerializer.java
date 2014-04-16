@@ -36,28 +36,14 @@ import static com.ibm.sbt.services.client.base.ConnectionsConstants.VALUE;
 import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.BEGIN_VCARD;
 import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.CATEGORIES;
 import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.COUNTRYNAME;
-import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.DISPLAYNAME;
-import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.DISTINGUISHEDNAME;
 import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.END_VCARD;
 import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.EXTENDEDADDRESS;
-import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.GIVENNAMES;
-import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.GUID;
 import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.LOCALITY;
 import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.POSTALCODE;
 import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.PROFILE;
 import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.REGION;
 import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.SNX_ATTRIB;
-import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.SNX_DISPLAYNAME;
-import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.SNX_DISTINGUISHEDNAME;
-import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.SNX_EMAIL;
-import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.SNX_GIVENNAMES;
-import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.SNX_GUID;
-import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.SNX_SURNAME;
-import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.SNX_UID;
-import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.SNX_USERSTATE;
 import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.STREETADRESS;
-import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.SURNAME;
-import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.USERSTATE;
 import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.VCARD_ADDR;
 import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.VCARD_V21;
 
@@ -68,7 +54,8 @@ import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.base.ConnectionsConstants.Namespace;
 import com.ibm.sbt.services.client.base.serializers.AtomEntitySerializer;
 import com.ibm.sbt.services.client.connections.profiles.Profile;
-import com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.VCardFields;
+import com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.ProfileAttribute;
+import com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.VCardField;
 
 /**
  * 
@@ -101,7 +88,7 @@ public class ProfileSerializer extends AtomEntitySerializer<Profile> {
 
 	protected void generateTagsPayload() {
 		String[] tags = entity.getAsString(TAGS).split(COMMA);
-		categories(tags);
+		rootNode(categories(tags));
 	}
 	
 	public String updatePayload(){
@@ -150,30 +137,24 @@ public class ProfileSerializer extends AtomEntitySerializer<Profile> {
 	}
 
 	private String vcard(){
-		return vcardParts(	BEGIN_VCARD,
-							VCARD_V21,
-							vcardAttribute(VCardFields.JOBRESP),
-							vcardAddressAttribute(),
-							vcardAttribute(VCardFields.TELEPHONE_NUMBER),
-							vcardAttribute(VCardFields.BUILDING),
-							vcardAttribute(VCardFields.FLOOR),
-							END_VCARD);
-	}
-
-	private String vcardParts(String... parts){
 		StringBuilder sb = new StringBuilder();
+		sb.append(BEGIN_VCARD).append(NL)
+		  .append(VCARD_V21).append(NL);
 		
-		for (String part : parts) {
-			if (StringUtil.isNotEmpty(part)){
-				sb.append(part).append(NL);
+		for(VCardField field : VCardField.values()){
+			if (field.name().equalsIgnoreCase(VCardField.WORK_LOCATION.name())){
+				String value = vcardAddressAttribute();
+				if (StringUtil.isNotEmpty(value)){
+					sb.append(value);
+				}
+			}
+			String value = entity.getAsString(field.getEntityValue());
+			if (StringUtil.isNotEmpty(value)){
+				sb.append(field.getVCardValue()).append(COLON).append(value).append(NL);
 			}
 		}
+		sb.append(END_VCARD).append(NL);
 		return sb.toString();
-	}
-	
-	private String vcardAttribute(VCardFields vcardField){
-		String value = entity.getAsString(vcardField.getEntityValue());
-		return StringUtil.isEmpty(value)?EMPTY:new StringBuilder(vcardField.getVCardValue()).append(COLON).append(value).toString();
 	}
 
 	private String vcardAddressAttribute(){
@@ -211,48 +192,10 @@ public class ProfileSerializer extends AtomEntitySerializer<Profile> {
 
 	protected Element attrib(){
 		Element element = element(SNX_ATTRIB);
-		appendChildren(element,
-							guid(),
-							email(),
-							uid(),
-							distinguishedName(),
-							displayName(),
-							givenNames(),
-							surname(),
-							userState());
+		for (ProfileAttribute attr : ProfileAttribute.values()){
+			appendChildren(element, attributeEntry(attr.getAtomName(), entity.getAsString(attr.getEntityName())));
+		}
 		return element;
-	}
-	
-	protected Node guid(){
-		return attributeEntry(SNX_GUID, entity.getAsString(GUID));
-	}
-
-	protected Node email(){
-		return attributeEntry(SNX_EMAIL, entity.getEmail());
-	}
-
-	protected Node uid(){
-		return attributeEntry(SNX_UID, entity.getUserid());
-	}
-
-	protected Node distinguishedName(){
-		return attributeEntry(SNX_DISTINGUISHEDNAME, entity.getAsString(DISTINGUISHEDNAME));
-	}
-
-	protected Node displayName(){
-		return attributeEntry(SNX_DISPLAYNAME, entity.getAsString(DISPLAYNAME));
-	}
-
-	protected Node givenNames(){
-		return attributeEntry(SNX_GIVENNAMES, entity.getAsString(GIVENNAMES));
-	}
-
-	protected Node surname(){
-		return attributeEntry(SNX_SURNAME, entity.getAsString(SURNAME));
-	}
-
-	protected Node userState(){
-		return attributeEntry(SNX_USERSTATE, entity.getAsString(USERSTATE));
 	}
 
 	protected Element categoryTag(String tagTerm) {

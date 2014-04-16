@@ -16,7 +16,7 @@
 
 package com.ibm.sbt.services.client.connections.wikis.serializers;
 
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.APPLICATION_ATOM_XML;
+import static com.ibm.sbt.services.client.base.CommonConstants.APPLICATION_ATOM_XML;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.COMMUNITYUUID;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.CONTENT;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.LABEL;

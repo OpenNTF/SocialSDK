@@ -15,7 +15,7 @@
  */
 package com.ibm.sbt.services.client.base.util;
 
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.UTF8;
+import static com.ibm.sbt.services.client.base.CommonConstants.UTF8;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;

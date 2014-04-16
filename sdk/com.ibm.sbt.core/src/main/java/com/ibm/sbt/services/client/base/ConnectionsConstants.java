@@ -32,55 +32,6 @@ public final class ConnectionsConstants {
 	 */
 	public static final Version v4_5 = new Version(4,5);
 	public static final Version v4_0 = new Version(4,0);
-	
-	/**
-	 * Common String characters
-	 */
-	public static final String NL = "\n";
-	public static final String EMPTY = "";
-	public static final String COMMA = ",";
-	public static final String SEMICOLON = ";";
-	public static final String COLON = ":";
-	public static final String DOT = ".";
-	public static final String AT = "@";
-	public static final char 	SEPARATOR	= '/';
-	public static final char 	CH_COLON	= ':';
-	
-	/**
-	 * URL parameter construction
-	 */
-	public static final char 	INIT_URL_PARAM	= '?';
-	public static final char 	URL_PARAM	= '&';
-	public static final char 	EQUALS		= '=';
-
-	/**
-	 * Headers parameters
-	 */
-	public static final String	IMAGE_		= "image/";
-	public static final String 	IMAGE_JPG	= "image/jpg";
-
-	/**
-	 * File extensions
-	 */
-	public static final String 	JPG	= "jpg";
-
-	/**
-	 * Authentication
-	 */
-	public static final String	OAUTH		= "oauth";
-	public static final String	AUTH_TYPE	= "authType";
-	
-	/**
-	 * Encoding
-	 */
-	public static final String	UTF8		= "UTF-8";
-
-	/**
-	 * Content Type
-	 */
-	public static final String APPLICATION_XML = "application/xml";
-	public static final String APPLICATION_ATOM_XML = "application/atom+xml";
-	public static final String CONTENT_TYPE = "Content-Type";
 
 	/**
 	 * Data type
@@ -93,11 +44,6 @@ public final class ConnectionsConstants {
 	 */
 	public static final String REL = "rel";
 	public static final String HREF = "href";
-	
-	/**
-	 * General Services
-	 */
-	public static final String LOCATION_HEADER = "Location";
 	
 	/**
 	 * General ATOM

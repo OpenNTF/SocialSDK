@@ -16,8 +16,9 @@
 
 package com.ibm.sbt.services.client.connections.activities.serializers;
 
+import static com.ibm.sbt.services.client.base.CommonConstants.APPLICATION_ATOM_XML;
+import static com.ibm.sbt.services.client.base.CommonConstants.EMPTY;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.ACTIVITY;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.APPLICATION_ATOM_XML;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.ASSIGNEDTO;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.CATEGORY;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.COMMUNITYUUID;
@@ -25,7 +26,6 @@ import static com.ibm.sbt.services.client.base.ConnectionsConstants.COMMUNITY_AC
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.COMPLETED;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.CONTENT;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.DATE;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.EMPTY;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.EXTERNAL;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.FID;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.FIELD;

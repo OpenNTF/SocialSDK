@@ -16,6 +16,10 @@
 
 package com.ibm.sbt.services.client.base;
 
+import static com.ibm.sbt.services.client.base.CommonConstants.APPLICATION_ATOM_XML;
+import static com.ibm.sbt.services.client.base.CommonConstants.AT;
+import static com.ibm.sbt.services.client.base.CommonConstants.CONTENT_TYPE;
+
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashMap;
@@ -41,8 +45,6 @@ public abstract class BaseService implements Serializable {
 
 	public static final int						DEFAULT_CACHE_SIZE		= 0;
 	public static final String					DEFAULT_ENDPOINT_NAME	= "connections";
-	public static final String					CONTENT_TYPE			= "Content-Type";
-	public static final String					APPLICATION_ATOM_XML	= "application/atom+xml";
 	
 	protected transient static HashMap<String, Object>	cache					= new HashMap<String, Object>();
 	protected transient int						cacheSize;
@@ -420,9 +422,9 @@ public abstract class BaseService implements Serializable {
             uniqueId = parameters.get(nameParameterId);
         }
 
-        if (!headers.containsKey("Content-Type")) {
+        if (!headers.containsKey(CONTENT_TYPE)) {
             // TODO shouldn't assume this
-        	headers.put("Content-Type", "application/atom+xml");
+        	headers.put(CONTENT_TYPE, APPLICATION_ATOM_XML);
         }
         Response result = getClientService().put(serviceUrl, parameters, headers, content, getDataFormat());
         if (cacheSize > 0 && nameParameterId != null) {
@@ -489,7 +491,7 @@ public abstract class BaseService implements Serializable {
 	 * @return
 	 */
 	protected boolean isEmail(String id) {
-		return (id == null) ? false : id.contains("@");
+		return (id == null) ? false : id.contains(AT);
 	}
 	
 }

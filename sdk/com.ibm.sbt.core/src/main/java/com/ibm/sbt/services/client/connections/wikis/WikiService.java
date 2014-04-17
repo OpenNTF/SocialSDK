@@ -1,5 +1,5 @@
 /*
- * ��� Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -24,7 +24,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
 import com.ibm.commons.xml.xpath.XPathExpression;
@@ -32,7 +31,6 @@ import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.AtomFeedHandler;
-import com.ibm.sbt.services.client.base.AtomXPath;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
@@ -418,27 +416,20 @@ public class WikiService extends BaseService {
 	}
 	
 	public IFeedHandler<Wiki> getWikiFeedHandler() {
-		return new AtomFeedHandler<Wiki>(this) {
+		return new AtomFeedHandler<Wiki>(this, false) {
 			@Override
-			protected Wiki newEntity(BaseService service, Node node) {
-				XPathExpression xpath = (node instanceof Document) ? (XPathExpression)AtomXPath.singleEntry.getPath() : null;
+			protected Wiki entityInstance(BaseService service, Node node, XPathExpression xpath) {
 				return new Wiki(service, node, nameSpaceCtx, xpath);
 			}
 		};
 	}
 	
 	public IFeedHandler<WikiPage> getWikiPageFeedHandler() {
-		return new AtomFeedHandler<WikiPage>(this) {
+		return new AtomFeedHandler<WikiPage>(this, false) {
 			@Override
-			protected WikiPage newEntity(BaseService service, Node node) {
-				XPathExpression xpath = (node instanceof Document) ? (XPathExpression)AtomXPath.singleEntry.getPath() : null;
+			protected WikiPage entityInstance(BaseService service, Node node, XPathExpression xpath) {
 				return new WikiPage(service, node, nameSpaceCtx, xpath);
 			}
 		};
-	}
-	
-	private Map<String, String> getParameters(Map<String, String> parameters) {
-		if(parameters == null) return new HashMap<String, String>();
-		else return parameters;
 	}
 }

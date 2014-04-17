@@ -950,8 +950,7 @@ public class ActivityService extends BaseService {
 	protected IFeedHandler<Activity> getActivityFeedHandler() {
 		return new AtomFeedHandler<Activity>(this) {
 			@Override
-			protected Activity newEntity(BaseService service, Node node) {
-				XPathExpression xpath = (node instanceof Document) ? (XPathExpression)AtomXPath.singleEntry.getPath() : null;
+			protected Activity entityInstance(BaseService service, Node node, XPathExpression xpath) {
 				return new Activity(service, node, nameSpaceCtx, xpath);
 			}
 		};
@@ -960,8 +959,7 @@ public class ActivityService extends BaseService {
 	protected IFeedHandler<ActivityNode> getActivityNodeFeedHandler() {
 		return new AtomFeedHandler<ActivityNode>(this) {
 			@Override
-			protected ActivityNode newEntity(BaseService service, Node node) {
-				XPathExpression xpath = (node instanceof Document) ? (XPathExpression)AtomXPath.singleEntry.getPath() : null;
+			protected ActivityNode entityInstance(BaseService service, Node node, XPathExpression xpath) {
 				return new ActivityNode(service, node, nameSpaceCtx, xpath);
 			}
 		};
@@ -970,8 +968,7 @@ public class ActivityService extends BaseService {
 	protected IFeedHandler<Member> getMemberFeedHandler() {
 		return new AtomFeedHandler<Member>(this) {
 			@Override
-			protected Member newEntity(BaseService service, Node node) {
-				XPathExpression xpath = (node instanceof Document) ? (XPathExpression)AtomXPath.singleEntry.getPath() : null;
+			protected Member entityInstance(BaseService service, Node node, XPathExpression xpath) {
 				return new Member(service, node, nameSpaceCtx, xpath);
 			}
 		};

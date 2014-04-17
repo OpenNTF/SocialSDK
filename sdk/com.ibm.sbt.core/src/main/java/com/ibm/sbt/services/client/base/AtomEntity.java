@@ -281,6 +281,15 @@ public class AtomEntity extends BaseEntity {
 	public void setBaseTags(List<String> tags) {
 		setAsList(AtomXPath.tags, tags);
 	}
+
+	/**
+	 * 
+	 * @return dataHandler
+	 */
+	@Override
+	public XmlDataHandler getDataHandler(){
+		return (XmlDataHandler)dataHandler;
+	}
 	
 	/**
 	 * Return XML string for the Atom entity.

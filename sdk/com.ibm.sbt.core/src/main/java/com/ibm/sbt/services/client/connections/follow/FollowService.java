@@ -21,7 +21,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
 import com.ibm.commons.util.StringUtil;
@@ -29,7 +28,6 @@ import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.AtomFeedHandler;
-import com.ibm.sbt.services.client.base.AtomXPath;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.NamedUrlPart;
@@ -201,8 +199,7 @@ public class FollowService extends BaseService{
 	private IFeedHandler<FollowedResource> getFollowFeedHandler() {
 		return new AtomFeedHandler<FollowedResource>(this) {
 			@Override
-			protected FollowedResource newEntity(BaseService service, Node node) {
-				XPathExpression xpath = (node instanceof Document) ? (XPathExpression)AtomXPath.singleEntry.getPath() : null;
+			protected FollowedResource entityInstance(BaseService service, Node node, XPathExpression xpath) {
 				return new FollowedResource(service, node, nameSpaceCtx, xpath);
 			}
 		};

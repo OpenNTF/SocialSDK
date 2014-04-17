@@ -134,6 +134,7 @@ public final class ConnectionsConstants {
 		IBMSC("ibmsc", "http://www.ibm.com/search/content/2010"),
 		XS("xs", "http://www.w3.org/2001/XMLSchema"),
 		XHTML("xhtml", "http://www.w3.org/1999/xhtml"),
+		H("h", "http://www.w3.org/1999/xhtml"),
 		CMISRA("cmisra", "http://docs.oasis-open.org/ns/cmis/restatom/200908/"),
 		CMISM("cmism", "http://docs.oasis-open.org/ns/cmis/messaging/200908/"), 
 		LCMIS("lcmis", "http://www.ibm.com/xmlns/prod/sn/cmis"),

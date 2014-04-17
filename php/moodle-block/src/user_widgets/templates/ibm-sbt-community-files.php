@@ -34,7 +34,7 @@
 <span style="display: none; font-size: 12px;" id="ibm-sbt-community-files-success-<?php echo $timestamp; ?>"></span><br/><br/>
 <script type="text/template" id="fileRow-<?php echo $timestamp; ?>">
 <tr style="padding-bottom: 0.3em; font-size: 12px;">
-	<td style="width:100%;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inline-block; padding-left: 10px;">
+	<td style="width:100%;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inline-block; padding-left: 5%;">
 			<span dojoAttachPoint="placeLinkNode">
 				<a href="javascript: void(0)" target="_self" title="${title}" dojoAttachPoint="placeTitleLink" data-dojo-attach-event="onclick: handleClick">${title}</a>
 			</span>
@@ -54,16 +54,10 @@
 
 			<a style="${hideNextLink} align: right;" title="${nls.nextPage}" href="javascript: void(0)" data-dojo-attach-event="onclick: nextPage">${nls.next}</a>
 			<span style="${hideNextLabel}">${nls.next}</span>
-		<div>
-			<hr style="width:90%; background: black; margin: 0.1em 0; left: -30px; border: 0; height: 1px;"/>
-		</div>
 </div>
 </script>
 <script type="text/template" id="pagingFooter-<?php echo $timestamp; ?>" style="font-size: 12px;">
 <div dojoattachpoint="pagingFooter" class="lotusPaging">
-	<div>
-		<hr style="width:90%; background: black;  margin: 0.1em 0; left: -30px; border: 0; height: 1px;"/>
-	</div>
 		Show:
 			<a href="javascript: void(0)" title="${nls.show10Items}" aria-pressed="false"
 				role="button" data-dojo-attach-event="onclick: show10ItemsPerPage">10</a> |

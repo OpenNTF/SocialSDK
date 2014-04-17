@@ -85,10 +85,9 @@ function change_new_authentication_method() {
 		if (document.getElementById("new_endpoint_url").value == '') {
 			document.getElementById("new_endpoint_url").value = 'https://apps.na.collabserv.com';
 		}
-		
-		document.getElementById("new_authorization_url").value = document.getElementById("new_endpoint_url").value + '/manage/oauth2/authorize';
-		document.getElementById("new_access_token_url").value = document.getElementById("new_endpoint_url").value + '/manage/oauth2/token';
-		document.getElementById("new_request_token_url").value = document.getElementById("new_endpoint_url").value + '';
+		document.getElementById("new_authorization_url").value = '/manage/oauth2/authorize';
+		document.getElementById("new_access_token_url").value = '/manage/oauth2/token';
+		document.getElementById("new_request_token_url").value = '';
 		
 		document.getElementById("lb_new_consumer_secret").innerHTML = 'ClientSecret';
 		document.getElementById("lb_new_consumer_key").innerHTML = 'ClientID';
@@ -272,6 +271,7 @@ function save_new_endpoint() {
 	document.getElementById("new_endpoint_name").setAttribute("style", "");
 	document.getElementById("consumer_key").value = document.getElementById("new_consumer_key").value;
 	document.getElementById("consumer_secret").value = document.getElementById("new_consumer_secret").value;
+	document.getElementById("callback_url").value = document.getElementById("new_callback_url").value;
 	document.getElementById("endpoint_url").value = document.getElementById("new_endpoint_url").value;
 	document.getElementById("endpoint_name").value = document.getElementById("new_endpoint_name").value;
 	document.getElementById("consumer_key").value = document.getElementById("new_consumer_key").value;

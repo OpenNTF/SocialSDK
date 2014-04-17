@@ -18,6 +18,7 @@ require_once $CFG->dirroot . '/blocks/ibmsbt/user_widgets/templates/ibm-sbt-file
 
 <div id="<?php echo $this->config->elementID;?>"></div>
 <script type="text/javascript">
+
 function addOnClickHandlers(fileService,grid, dom) {
 
 	dom.byId("ibm-sbt-upload-button-<?php echo $timestamp; ?>").onclick = function(evt) {
@@ -33,10 +34,16 @@ function uploadFile(fileService, grid, dom) {
 
 	dom.byId("ibm-sbt-loading-<?php echo $timestamp; ?>").style.display = "block";
 
+	var publicFile = dom.byId("ibm-sbt-file-privacy-public-<?php echo $timestamp; ?>");
+	var privacy = 'private';
+	if (publicFile.selected) {
+		privacy = 'public';
+	}
+	
 	// "your-files" is the ID of the HTML5 File Control. Refer to Upload File.html
 	fileService.uploadFile("ibm-sbt-file-<?php echo $timestamp; ?>", {
 		// additional paramertes to add file metadata			
-		visibility : "public"
+		visibility : privacy
 	}).then(function(file) {
 		displayMessage(dom, "File uploaded successfuly");
 		grid.update(null);

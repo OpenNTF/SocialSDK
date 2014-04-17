@@ -35,7 +35,7 @@ public enum ProfileXPath implements FieldEntry {
 	jobTitle("./a:content/h:div/h:span/h:div[@class='title']"),
 	organizationUnit("./a:content/h:div/h:span/h:div[@class='org']/h:span[@class='organization-unit']"),
 	fnUrl("./a:content/h:div/h:span/h:div/h:a[@class='fn url']/@href"),			
-	telephoneNumber("./a:content/h:div/h:span/h:div[@class='tel']/h:span[@class='value']"),			
+	telephoneNumber("./a:content/h:div/h:span/h:div[@class='tel']/h:span[@class='value']"),
 	building("./a:content/h:div/h:span/h:div/h:span[@class='x-building']"),			
 	floor("./a:content/h:div/h:span/h:div/h:span[@class='x-floor']"),
 	streetAddress("./a:content/h:div/h:span/h:div/h:div[@class='street-address']"),

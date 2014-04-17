@@ -12,13 +12,16 @@
     	position:fixed;
   		left:50%;
   		top:50%;
-  		padding: 2em 5em 5em 5em;
+  		padding: 2em 2em 2em 2em;
     }
 </style>
 
 <div class="ibmsbtFileUploadDialog" id="ibm-sbt-upload-dialog-***REMOVED*** echo $timestamp; ?>" style="font-size: 12px;">
 	<h1>Upload a file</h1><br/><br/>
-	<input type="file" id="ibm-sbt-file-***REMOVED*** echo $timestamp; ?>"></input><br/><br/>
+	<input type="file" id="ibm-sbt-file-***REMOVED*** echo $timestamp; ?>"/>
+	<input checked="checked" type="radio" id="ibm-sbt-file-privacy-public-***REMOVED*** echo $timestamp; ?>" name="ibm-sbt-file-privacy-***REMOVED*** echo $timestamp; ?>" value="public"/>Public
+	<input type="radio" id="ibm-sbt-file-privacy-private-***REMOVED*** echo $timestamp; ?>" name="ibm-sbt-file-privacy-***REMOVED*** echo $timestamp; ?>" value="private"/>Private
+	<br/><br/>
 	<button style="font-size: 12px;" class="btn btn-primary" id="ibm-sbt-upload-button-***REMOVED*** echo $timestamp; ?>">Upload File</button>
 	<button style="font-size: 12px;" class="btn btn-primary" onclick="document.getElementById('ibm-sbt-upload-dialog-***REMOVED*** echo $timestamp; ?>').style.display='none';">Close</button>
 </div>
@@ -30,7 +33,7 @@
 <img id="ibm-sbt-loading-***REMOVED*** echo $timestamp; ?>" style="display: none;" src="***REMOVED*** echo $CFG->wwwroot; ?>/blocks/ibmsbt/user_widgets/templates/assets/loading_small.gif" />
 <script type="text/template" id="fileRow-***REMOVED*** echo $timestamp; ?>">
 <tr style="padding-bottom: 0.3em; font-size: 12px;">
-	<td style="width:100%;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inline-block; padding-left: 10px;">
+	<td style="width:100%;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inline-block; padding-left: 5%;">
 			<span dojoAttachPoint="placeLinkNode">
 				<a href="javascript: void(0)" target="_self" title="${title}" dojoAttachPoint="placeTitleLink" data-dojo-attach-event="onclick: handleClick">${title}</a>
 			</span>
@@ -38,7 +41,7 @@
 </tr>
 </script>
 <script type="text/template" id="pagingHeader-***REMOVED*** echo $timestamp; ?>">
-<div dojoAttachPoint="pagingHeader" style="font-size: 12px;">
+<div dojoAttachPoint="pagingHeader" style="font-size: 12px; padding-bottom: 1%;">
 	<div>
 		<hr style="width:90%; left: -30px; border: 0; height: 1px;"/>
 	</div>
@@ -50,16 +53,10 @@
 
 			<a style="${hideNextLink} align: right;" title="${nls.nextPage}" href="javascript: void(0)" data-dojo-attach-event="onclick: nextPage">${nls.next}</a>
 			<span style="${hideNextLabel}">${nls.next}</span>
-		<div>
-			<hr style="width:90%; background: black; margin: 0.1em 0; left: -30px; border: 0; height: 1px;"/>
-		</div>
 </div>
 </script>
 <script type="text/template" id="pagingFooter-***REMOVED*** echo $timestamp; ?>">
 <div dojoattachpoint="pagingFooter" class="lotusPaging" style="font-size: 12px;">
-	<div>
-		<hr style="width:90%; background: black;  margin: 0.1em 0; left: -30px; border: 0; height: 1px;"/>
-	</div>
 		Show:
 			<a href="javascript: void(0)" title="${nls.show10Items}" aria-pressed="false"
 				role="button" data-dojo-attach-event="onclick: show10ItemsPerPage">10</a> |

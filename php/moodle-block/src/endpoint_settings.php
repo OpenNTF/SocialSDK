@@ -24,7 +24,7 @@
 global $CFG;
 if (!isset($CFG) || !isset($CFG->wwwroot)) {
 	$path = str_replace('blocks'.DIRECTORY_SEPARATOR.'ibmsbt', '', __DIR__);
-	include_once $path . '/config.php';
+	include_once $path . DIRECTORY_SEPARATOR . 'config.php';
 }
 
 if (!defined('ENDPOINTS')) {
@@ -35,6 +35,9 @@ if (!defined('IBM_SBT_CRYPTO_ENABLED')) {
 	require_once $CFG->dirroot . DIRECTORY_SEPARATOR . 'blocks' . DIRECTORY_SEPARATOR . 'ibmsbt' . DIRECTORY_SEPARATOR . 'security-config.php';
 }
 
+if (!defined('BASE_LOCATION')) {
+	require_once $CFG->dirroot . DIRECTORY_SEPARATOR . 'blocks' . DIRECTORY_SEPARATOR . 'ibmsbt' . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'autoload.php';
+}
 
 
 // Make sure that the user is authorized to perform the action
@@ -79,6 +82,13 @@ if (isset($_POST['type'])) {
 		}
 		
 		$record = populateRecord($record);
+		
+		$store = SBTCredentialStore::getInstance();
+		$store->deleteOAuthCredentials(mysql_escape_string($_POST['name']));
+		$store->deleteBasicAuthCredentials(mysql_escape_string($_POST['name']));
+		
+		// Clear the session table
+		$DB->delete_records(SESSION_NAME, array());
 			
 		$DB->update_record(ENDPOINTS, $record);
 	} else if ($_POST['type'] == 'get') {
@@ -107,9 +117,6 @@ if (isset($_POST['type'])) {
 		$endpoint['access_token_url'] = ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $record->access_token_url, base64_decode($record->iv));
 		$endpoint['server_url'] = ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $record->server_url, base64_decode($record->iv));
 		$endpoint['name'] = ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $record->name, base64_decode($record->iv));
-		$endpoint['form_auth_page'] = ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $record->form_auth_page, base64_decode($record->iv));
-		$endpoint['form_auth_login_page'] = ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $record->form_auth_login_page, base64_decode($record->iv));
-		$endpoint['form_auth_cookie_cache'] = ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $record->form_auth_cookie_cache, base64_decode($record->iv));
 		$endpoint['oauth_origin'] = ibm_sbt_decrypt(IBM_SBT_SETTINGS_KEY, $record->oauth_origin, base64_decode($record->iv));
 		
 		echo json_encode($endpoint);

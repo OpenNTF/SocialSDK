@@ -248,6 +248,11 @@ class SBTCredentialStore {
 			if ($record == null) {
 				return;
 			}
+			
+			if (!isset($record->$skey)) {
+				$this->_initProfileSession();
+			}
+			
 			$endpointMappings = (array) json_decode($record->$skey);
 			
 			$value = ibm_sbt_encrypt($this->key, $value, base64_decode($this->iv));
@@ -292,6 +297,10 @@ class SBTCredentialStore {
 			return null;
 		}
 
+		if (!isset($record->$skey)) {
+			$this->_initProfileSession();
+		}
+		
 		$endpointMappings = (array) json_decode($record->$skey);
 
 		if ($endpointMappings == null) {
@@ -335,6 +344,16 @@ class SBTCredentialStore {
 		}
 		
 		$record = $DB->get_record(SESSION_NAME, array('user_id' => intval($uid)));
+		
+		// Make sure that item exists. If not, create session
+		if (!isset($record->$skey)) {
+			$this->_initProfileSession();
+		}
+		
+		if (!isset($record->$skey)) {
+			return;
+		}
+		
 		$endpointMappings = (array) json_decode($record->$skey);
 		
 		if ($endpointMappings == null) {			

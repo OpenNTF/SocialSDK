@@ -103,7 +103,7 @@ class BasePluginController extends BaseController
 				$parameters = array(
 						'response_type' => 'code',
 						'client_id'     => $settings->getClientId($endpointName),
-						'callback_uri'  => urlencode($settings->getOAuth2CallbackURL($endpointName))
+						'callback_uri'  => ($settings->getOAuth2CallbackURL($endpointName))
 				); 
 	
 				$authURL = $settings->getAuthorizationURL($endpointName) . '?' . http_build_query($parameters, null, '&');

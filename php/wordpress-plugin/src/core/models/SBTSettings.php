@@ -185,7 +185,7 @@ class SBTSettings {
 	 * @return
 	 */
 	public function getOAuthOrigin($endpoint = "connections") {
-		return $this->_get($endpointName, 'oauth_origin');
+		return $this->_get($endpoint, 'oauth_origin');
 	}
 	
 	/**

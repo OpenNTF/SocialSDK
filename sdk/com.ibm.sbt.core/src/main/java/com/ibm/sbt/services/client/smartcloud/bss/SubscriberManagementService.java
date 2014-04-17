@@ -478,7 +478,7 @@ public class SubscriberManagementService extends BssService {
     
     private JsonJavaObject findSeat(List<Object> seatSet, String subscriptionId) {
     	for (Object seat : seatSet) {
-    		String nextSubscriptionId = "" + ((JsonJavaObject)seat).getAsLong("SubscriptionId");
+    		String nextSubscriptionId = "" + (long)((JsonJavaObject)seat).getAsDouble("SubscriptionId");
     		if (subscriptionId.equals(nextSubscriptionId)) {
     			return (JsonJavaObject)seat;
     		}

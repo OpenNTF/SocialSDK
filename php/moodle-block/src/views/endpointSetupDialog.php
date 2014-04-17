@@ -67,22 +67,27 @@ window.onload = function () {
 }
 
 $(function() {
-    $( "#dialog" ).dialog({
+    $("#ibmsbtDialog").dialog({
       autoOpen: false,
       modal: true,
-      width: 660
+      width: '50%;'
     });
 
     $( "#ibm-sbt-endpoint-manager" ).dialog({
         autoOpen: false,
         modal: true,
-        width: 660
+        width: '50%;'
       });
 });
 
 function ibm_sbt_generate_callback_url() {
-	var url = "<?php global $USER; global $CFG; echo $CFG->wwwroot . '/blocks/ibmsbt/core/index.php?classpath=endpoint&class=SBTOAuth2Endpoint&uid=' . $USER->id . '&method=authenticationCallback&endpointName='?>";
-	url += document.getElementById('new_endpoint_name').value;
+	var endpointName = document.getElementById('new_endpoint_name').value;
+	if (endpointName == false) {
+		alert('You must specify an endpoint name before the callback URL can be generated');
+		return;
+	}
+	var url = "<?php global $CFG; echo $CFG->wwwroot . '/blocks/ibmsbt/core/index.php?classpath=endpoint&class=SBTOAuth2Endpoint&method=authenticationCallback&endpointName='?>";
+	url += endpointName;
 	document.getElementById('new_callback_url').value = url;
 }
 
@@ -139,6 +144,11 @@ function change_new_authentication_method() {
 		document.getElementById("new_authorization_url").value = '/manage/oauth/authorizeToken';
 		document.getElementById("new_access_token_url").value = '/manage/oauth/getAccessToken';
 		document.getElementById("new_request_token_url").value = '/manage/oauth/getRequestToken';
+
+		if (selected_type == "smartcloud") {
+			document.getElementById("lb_new_consumer_secret").innerHTML = 'OAuthSecret';
+			document.getElementById("lb_new_consumer_key").innerHTML = 'OAuthKey';
+		} 
 		
 		oauthSmartcloudFieldCheck();
 	} else if (authMethod == "basic") {
@@ -196,39 +206,17 @@ function change_new_authentication_method() {
 		document.getElementById("tr_new_basic_auth_password").style.display = 'none';
 		document.getElementById("tr_force_ssl_trust").style.display = 'block';
 		document.getElementById("lb_endpoint_url").value = strConnectionsEndpointURL;
-		document.getElementById("lb_new_consumer_secret").value = 'ConsumerSecret';
-		document.getElementById("lb_new_consumer_key").value = 'ConsumerKey';
+		document.getElementById("lb_new_consumer_secret").innerHTML = 'ConsumerSecret';
+		document.getElementById("lb_new_consumer_key").innerHTML = 'ConsumerKey';
 
 		document.getElementById("tr_new_form_auth_page").style.display = 'none';
 		document.getElementById("tr_new_form_auth_login_page").style.display = 'none';
 		document.getElementById("tr_new_form_auth_cookie_cache").style.display = 'none';
 		
 		oauth2ConnectionsFieldCheck();
-	} else if (authMethod == "form") {
-		document.getElementById("tr_new_form_auth_page").style.display = 'block';
-		document.getElementById("tr_new_form_auth_login_page").style.display = 'block';
-		document.getElementById("tr_new_form_auth_cookie_cache").style.display = 'block';
-		document.getElementById("tr_new_callback_url").style.display = 'none';
-		document.getElementById("tr_new_consumer_secret").style.display = 'none';
-		document.getElementById("tr_new_consumer_key").style.display = 'none';
-		document.getElementById("tr_new_authorization_url").style.display = 'none';
-		document.getElementById("tr_new_access_token_url").style.display = 'none';
-		document.getElementById("tr_new_request_token_url").style.display = 'none';
-		document.getElementById("tr_new_basic_auth_method").style.display = 'none';
-		document.getElementById("tr_new_basic_auth_username").style.display = 'none';
-		document.getElementById("tr_new_basic_auth_password").style.display = 'none';
-		formFieldCheck();
-	}
+	} 
 }
 
-function formFieldCheck() {
-	if (!isCorrectDropDownValueSelected() || document.getElementById("new_form_auth_page").value == ''
-		|| document.getElementById("new_form_auth_login_page").value == '' || document.getElementById("new_form_auth_cookie_cache").value == '') {
-		document.getElementById("new_endpoint_save").setAttribute("disabled", "disabled");
-	} else {
-		document.getElementById("new_endpoint_save").removeAttribute("disabled");
-	}
-}
 
 function isCorrectDropDownValueSelected() {
 	var myselect = document.getElementById("new_authentication_method");
@@ -342,7 +330,7 @@ function completeFieldCheck() {
 function cancel_new_endpoint() {
 	document.getElementById("new_endpoint_url").setAttribute("style", "");
 	document.getElementById("new_endpoint_name").setAttribute("style", "");
-	$( "#dialog" ).dialog('close');
+	$( "#ibmsbtDialog" ).dialog('close');
 }
 
 function save_new_endpoint() {
@@ -431,7 +419,7 @@ function save_new_endpoint() {
 
 		        
 		    }
-	    	$("#dialog").dialog('close');
+	    	$("#ibmsbtDialog").dialog('close');
 	 		window.location.reload();
 	    },
 	    error: function (jqXHR, textStatus, errorThrown)
@@ -461,7 +449,7 @@ function ibm_sbt_remove_endpoint() {
 	    	var endpoint = endpoint_list.options[endpoint_list.selectedIndex];
 	    	endpoint_list.removeChild(endpoint);	
 	    	
-	    	$("#dialog").dialog('close');
+	    	$("#ibmsbtDialog").dialog('close');
 	    },
 	    error: function (jqXHR, textStatus, errorThrown)
 	    {
@@ -510,7 +498,7 @@ function ibm_sbt_edit_endpoint() {
 			
 			new_server_type_change();
 			change_new_basic_auth_method();
-			$("#dialog").dialog("open");
+			$("#ibmsbtDialog").dialog("open");
 	    },
 	    error: function (jqXHR, textStatus, errorThrown)
 	    {
@@ -521,7 +509,7 @@ function ibm_sbt_edit_endpoint() {
 }
 </script>
 
-<div id="ibm-sbt-endpoint-manager" title="Manage your endpoints" style="column-width:300px; display: none;">
+<div id="ibm-sbt-endpoint-manager" title="Manage your endpoints" style="display: none;">
 	<select id="endpoint_list" multiple="multiple" style="width: 100%;">
 		<?php 
 			$settings = new SBTSettings();
@@ -534,7 +522,7 @@ function ibm_sbt_edit_endpoint() {
 	</select><button onclick="ibm_sbt_new_endpoint();">Add</button> <button onclick="ibm_sbt_edit_endpoint()">Edit</button> <button onclick="ibm_sbt_remove_endpoint();">Remove</button>
 </div>
 
-<div id="dialog" title="Create a new endpoint" style="column-width:300px; display: none;">
+<div id="ibmsbtDialog" title="Create a new endpoint" style="display: none;">
 	<table>
 		<tr>
 			<td style="width: 200px;">
@@ -558,7 +546,6 @@ function ibm_sbt_edit_endpoint() {
 					<option id="new_oauth1" value="oauth1">OAuth 1.0</option>
 					<option value="oauth2">OAuth 2.0</option>
 					<option value="basic">Basic</option>
-					<option value="form">Form-based</option>
 				</select>
 			</td>
 		</tr>

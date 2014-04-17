@@ -2,6 +2,9 @@
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
 	xmlns:xe="http://www.ibm.com/xsp/coreex">
 
+	<xp:this.beforePageLoad><![CDATA[#{javascript:var env = param['env'];
+if(env) sessionScope.environment = env;
+}]]></xp:this.beforePageLoad>
 	<xp:div id="mainenv" style="width:100%">
 		<xp:comboBox id="cbEnv"
 			value="#{sessionScope.environment}" defaultValue="#{javascript:return dataAccess.getPreferredEnvironment()}" style="width: 85%;">

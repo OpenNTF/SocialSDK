@@ -47,8 +47,8 @@ define(["../../../declare", "../../../config", "../../../url", "../../../Promise
             var microbloggingUrl = lconn.core.config.services.microblogging.secureUrl;
             microbloggingUrl = microbloggingUrl.replace(this.xhrHandler.getEndpoint().getProxyUrl(), "");
             relativeUrl = microbloggingUrl.indexOf("/") === 0 ? microbloggingUrl : new Url(microbloggingUrl).getPath();
-            
             var serviceUrl = relativeUrl + "/" + this.xhrHandler.endpoint.authType + "/rest/people/@me/@self";
+            serviceUrl = this.xhrHandler.correctUrlAuth(serviceUrl); // ensure correct url for given auth type.
             
             this.xhrHandler.xhrGet({
                 serviceUrl: serviceUrl,

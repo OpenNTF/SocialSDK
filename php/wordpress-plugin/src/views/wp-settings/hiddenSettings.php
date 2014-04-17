@@ -6,6 +6,17 @@
 	var strSmartcloudEndpointURL = '<?php echo $GLOBALS[LANG]['smartcloud_server_url']?>';
 	var strSSLTrustError = '<?php echo $GLOBALS[LANG]['ssl_trust_error']?>';
 	var strEndpointNameError = '<?php echo $GLOBALS[LANG]['endpoint_name_error']?>';
+
+	function ibm_sbt_generate_callback_url() {
+		var endpointName = document.getElementById('new_endpoint_name').value;
+		if (endpointName == false) {
+			alert('You must specify an endpoint name before the callback URL can be generated');
+			return;
+		}
+		var url = "<?php echo BASE_LOCATION . '/core/index.php?classpath=endpoint&class=SBTOAuth2Endpoint&method=authenticationCallback&endpointName='?>";
+		url += endpointName;
+		document.getElementById('new_callback_url').value = url;
+	}
 </script>
 <?php 
 if (isset($viewData['options'])) {
@@ -158,6 +169,7 @@ print '<script type="text/javascript" src="' . plugins_url(PLUGIN_NAME) . '/view
 			</td>
 			<td>
 				<input disabled="disabled" size="50" type="text" id="new_callback_url" name="new_callback_url" value="" />
+				<button onclick="ibm_sbt_generate_callback_url();">Generate</button>
 			</td>
 		</tr>
 		<tr style="display: none;" id="tr_new_basic_auth_username">
@@ -178,6 +190,5 @@ print '<script type="text/javascript" src="' . plugins_url(PLUGIN_NAME) . '/view
 		</tr>
 	</table>
 	<button disabled="disabled" onclick="save_new_endpoint();" id="new_endpoint_save"><?php echo $GLOBALS[LANG]['save'];?></button> 
-	<button onclick="test_endpoint_connection();" id="test_endpoint_connection"><?php echo $GLOBALS[LANG]['test_connection'];?></button>
 	<button onclick="cancel_new_endpoint();" id="new_endpoint_cancel"><?php echo $GLOBALS[LANG]['cancel'];?></button>
 </div>

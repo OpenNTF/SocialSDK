@@ -75,8 +75,17 @@ function HostMeeting(URL) {
 }
 </script>
 
-
-<a href="javascript:Chat('https://webchat.na.collabserv.com/stwebclient/popup.jsp?lang=en-us');">Start a Chat</a><br/>
-Join Meeting:
+<?php 
+	$url = $settings->getURL($this->config->endpoint);
+	$parse = parse_url($url);
+	$host = $parse['host']; 
+	if (strpos($host, 'next') != false) {
+		$host = str_replace('apps.', 'webchat.', $host);
+	} else {
+		$host = str_replace('apps.', 'webchat.na.', $host);
+	}
+?>
+<a href="javascript:Chat('https://<?php echo $host; ?>/stwebclient/popup.jsp?lang=en-us');">Start a Chat</a><br/>
+<span style="font-size: 12px;">Join Meeting</span>:
 <input id='mtgid' type='text'  value='' size='18' />
-<input type='button' onclick='JoinMeeting()' value = 'OK'/>
+<input style="font-size: 12px;" type='button' onclick='JoinMeeting()' value = 'OK'/>

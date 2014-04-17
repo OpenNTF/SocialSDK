@@ -24,14 +24,16 @@
  */
 defined('SBT_SDK') OR exit('Access denied.');
 use Guzzle\Http\Client;
-class BasePluginController extends BaseController {
+class BasePluginController extends BaseController 
+{
 	
 	protected $endpointName;
 	
 	/**
 	 * Constructor.
 	 */
-	function __construct($endpointName = "connections") {
+	function __construct($endpointName = "connections") 
+	{
 		$this->endpointName = $endpointName;
 		$this->loadModel('SBTSettings');
 		$settings = new SBTSettings();
@@ -89,7 +91,6 @@ class BasePluginController extends BaseController {
 			$this->loadModel('SBTCredentialStore');
 			$store = SBTCredentialStore::getInstance();
 			$token = $store->getOAuthAccessToken($endpointName);
-			
 			if ($token == null) {
 				// Autoloader
 				if (file_exists('../../../autoload.php')) {
@@ -102,7 +103,7 @@ class BasePluginController extends BaseController {
 				$parameters = array(
 						'response_type' => 'code',
 						'client_id'     => $settings->getClientId($endpointName),
-						'callback_uri'  => urlencode($settings->getOAuth2CallbackURL($endpointName))
+						'callback_uri'  => ($settings->getOAuth2CallbackURL($endpointName))
 				); 
 	
 				$authURL = $settings->getAuthorizationURL($endpointName) . '?' . http_build_query($parameters, null, '&');
@@ -120,7 +121,8 @@ class BasePluginController extends BaseController {
 	/**
 	 * Creates the header for the SBTK plugin.
 	 */
-	public function createHeader() {
+	public function createHeader() 
+	{
 		$this->loadModel('SBTSettings');
 		$settings = new SBTSettings();
 		

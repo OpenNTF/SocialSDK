@@ -1,5 +1,8 @@
 <div id="<?php echo (isset($instance['ibm-sbtk-element-id']) ? $instance['ibm-sbtk-element-id'] : $this->elID); ?>"></div>
 <?php 
+// Ensure that element IDs are unique
+$timestamp = time();
+
 	if ((isset($instance['ibm-sbtk-template']) && $instance['ibm-sbtk-template'] != "")) {
 		require_once BASE_PATH . "{$instance['ibm-sbtk-template']}";
 	} else {
@@ -9,17 +12,17 @@
 <script type="text/javascript">
 require(["sbt/declare", "sbt/dom", "sbt/connections/controls/files/FilesView", "sbt/connections/controls/files/FileGrid"], 
 	function(declare, dom, FilesView, FileGrid) {
-		var actionTemplate = dom.byId("actionTemplate").textContent;
-		var viewTemplate = dom.byId("viewTemplate").textContent;
-		var moveToTrashTemplate = dom.byId("moveToTrashTemplate").textContent;
-		var uploadFileTemplate = dom.byId("uploadFileTemplate").textContent;
-		var addTagsTemplate = dom.byId("addTagsTemplate").textContent;
-		var shareFilesTemplate = dom.byId("shareFilesTemplate").textContent;
-		var dialogTemplate = dom.byId("dialogTemplate").textContent;
+		var actionTemplate = dom.byId("actionTemplate-<?php echo $timestamp; ?>").textContent;
+		var viewTemplate = dom.byId("viewTemplate-<?php echo $timestamp; ?>").textContent;
+		var moveToTrashTemplate = dom.byId("moveToTrashTemplate-<?php echo $timestamp; ?>").textContent;
+		var uploadFileTemplate = dom.byId("uploadFileTemplate-<?php echo $timestamp; ?>").textContent;
+		var addTagsTemplate = dom.byId("addTagsTemplate-<?php echo $timestamp; ?>").textContent;
+		var shareFilesTemplate = dom.byId("shareFilesTemplate-<?php echo $timestamp; ?>").textContent;
+		var dialogTemplate = dom.byId("dialogTemplate-<?php echo $timestamp; ?>").textContent;
 
-	    domNode = dom.byId("pagingHeader");
+	    domNode = dom.byId("filesViewPagingHeader-<?php echo $timestamp; ?>");
 	    var PagingHeader = domNode.text || domNode.textContent;
-	    domNode = dom.byId("pagingFooter");
+	    domNode = dom.byId("pagingFooter-<?php echo $timestamp; ?>");
 	    var PagingFooter = domNode.text || domNode.textContent;
 	
 		var filesView = new FilesView({
@@ -34,7 +37,7 @@ require(["sbt/declare", "sbt/dom", "sbt/connections/controls/files/FilesView", "
 			}, 
 	 		hideActionBar : <?php echo (isset($instance['ibm-sbtk-files-action-bar']) && $instance['ibm-sbtk-files-action-bar'] == 'actionBar' ? "false" : "true"); ?>,
 			templateString: viewTemplate,
-			
+			endpoint: "<?php echo (isset($instance['ibm-sbtk-endpoint']) ? $instance['ibm-sbtk-endpoint'] : 'connections'); ?>",
 			moveToTrashArgs: {templateString:moveToTrashTemplate, endpoint: "<?php echo (isset($instance['ibm-sbtk-endpoint']) ? $instance['ibm-sbtk-endpoint'] : 'connections'); ?>"},
 			shareFileArgs: {templateString:shareFilesTemplate, endpoint: "<?php echo (isset($instance['ibm-sbtk-endpoint']) ? $instance['ibm-sbtk-endpoint'] : 'connections'); ?>"},
 			uploadFileArgs: {templateString:uploadFileTemplate, endpoint: "<?php echo (isset($instance['ibm-sbtk-endpoint']) ? $instance['ibm-sbtk-endpoint'] : 'connections'); ?>"},
@@ -44,7 +47,7 @@ require(["sbt/declare", "sbt/dom", "sbt/connections/controls/files/FilesView", "
 		});
 
 	    filesView.grid.renderer.tableClass = "table";
-	    var gridTemplate = dom.byId("filesViewRow").textContent;
+	    var gridTemplate = dom.byId("filesViewRow-<?php echo $timestamp; ?>").textContent;
 	    filesView.grid.renderer.template = gridTemplate;
 
 	    filesView.grid.renderer.pagerTemplate = PagingHeader;

@@ -4,7 +4,7 @@
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Thu, 03 Apr 2014 09:26:53 GMT]]></value>
+        <value><![CDATA[Mon, 07 Apr 2014 10:23:01 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -20,23 +20,23 @@
     </header>
     <header>
         <name><![CDATA[Expires]]></name>
-        <value><![CDATA[Thu, 03 Apr 2014 09:27:24 GMT]]></value>
+        <value><![CDATA[Mon, 07 Apr 2014 10:23:31 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Location]]></name>
-        <value><![CDATA[https://dev.sdkdemo.com:444/forums/atom/forum?forumUuid=9c3899bc-e288-4a5a-b702-49f084d14aed]]></value>
+        <value><![CDATA[https://dev.sdkdemo.com:444/forums/atom/forum?forumUuid=0e923f75-e0b4-41c5-b861-d660277951fd]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/vDrKbs34A+MQJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
+        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/i4Rda/ywZ22QJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=A7gDx48XrzVY+LnckGsPNKEByJCi3bmFVbtaSCFmdy5ejB6YX6JqponToQvHeJL/qhGjmdRST7U+B4/pVnkps91O4/pO2cfQjMpFZuvloI4C0YMeCdOlN0cxz2fVB2s6NrTtwQgKgPfbvpi23gM+XEBVt8ufBU4Ylif5IE852sgQhhq1GXb9yJeITvReMADNsIOVx1DbIy4YL2hTkGO6xwqnioh22GWBiGsnxrhyDAQ0U3Z869MoZe2B0L3qXygq9IppMfuFrcCHAfq4julGYw7UQxvcCcxy49rJcJUDe+YVyWHi4Mb+KCvYY35gwrjOpIR3LpnkcHNqk73TD8Pt9/l8arzKQkEMHhaJRBtj1iKqC2Wd9MjNy8mbaesfVglQnOIUP/AuZB+5WO61HUEzjbyVe9DvEfsd1O2TjMPk0EFqyqTkneUfOetOjrRwNUfq5Bf2IZORGMuafnH+QTZhryt3mXKEOSn2PzArX96eZ9KR2zlbcObuq1a3r6cgv/Nbp/bzMcB/IqcJl+mnJZSCoe5s1/SfuqmncpBjpzB7IgypxDcAvKt3A+xywvTAx9k1Hrq17YrZiE6/SZcmmmJUzAm3IO/TYx/KuwQiy6wyVE6Bi0TdLwQEDm+LVVMhlzTcElbGqclOJoWmtUwbGwVSQsZPwZbRHDqigQWLcAAuJ3AxeMpaWRodvKs8CLRcM7VgtZSYdMmzte8Jypqb3mZZt3miIr5+aBCEA5pFltUoGWU=; Path=/]]></value>
+        <value><![CDATA[LtpaToken2=4UiTs2AFL4Z92tLCg1evzaUYA05IN4qo2kGiYRm7xuD6WPSEpKm+Yewf7MpPgGlMBlEk0vJowWdeTV46GvUmgPi680YlzibruF3+1uS1x2mqFvkS5N/gDqH72A/h1LlP3LkUtfcNXwxYuR+Riawkw0bY83g79QDTEN+qmP+wLsF/LBIwDP3L33ZPQ1MHdG2Yl11LJ+KD6WaFNDL54UltAo8ZY4p9KO/+Wn/64vBD+zGDqHKtw0u2fJ0qz+DmIUSCGB+xjEGcX0+bSbGu+ofY7C0mHk90yVYSQfLU4AZ9/29kcm5BFfZ00kgQNSo2iI3OdlbG2HhxhuLIbhA4Q+aPUs5Ud3l1422eiNnQxOmPWZtp+UacIqX1A84W95Ags18O33t1ZJx9fCqqp6CDxxGAezAJ/8BEJpdDt+KFOrg5QvpLyKfK+hw+R5ZMpCIz3mJmme6OptZO79hC658M7kQtnnQSOCkApc3VklE1x9JT+vze1mwSk+QxoFllVsPOy1u2YX/RUU+xpfJzh42XW/wHLQA0ukyxgWq/IhNobZLY8+J1WiPn7KUohFzAbisH94HsrPfAyDSQ9btSgyE6s2hHiY8uXLR/E4tKW6E37UfjuaBxX3Y3iklQ/RrbadDAyXNjFQTZqwe8G9dClcjwMYeEMgxUBkpiXXXEK5Y/NxXycJjJ3GHpt2nxc0Iw1wpqCBkbVads+heiG78oXWZOqqxtvw65VFEZpVJpc5NFmaJ/0iU=; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LCSESSIONID=0000WdmCV6bw5dienm10-z8WDa_:18dna4k6n; Path=/; HttpOnly]]></value>
+        <value><![CDATA[LCSESSIONID=0000IZUqfmUv8dLdSaNq9rAzDK7:18dna4k6n; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
@@ -70,13 +70,13 @@
         <name><![CDATA[Content-Language]]></name>
         <value><![CDATA[en-US]]></value>
     </header></headers>
-<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?><entry xmlns="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:thr="http://purl.org/syndication/thread/1.0"><id>urn:lsid:ibm.com:forum:9c3899bc-e288-4a5a-b702-49f084d14aed</id><title type="text">Test forum 1ab1396517176081</title><snx:moderation xmlns:snx="http://www.ibm.com/xmlns/prod/sn" status="active"></snx:moderation><published>2014-04-03T09:26:54.029Z</published><author><email>fadams@renovations.com</email><name>Frank Adams</name><snx:userid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">EFD413BC-E572-760A-8625-7C6E00506453</snx:userid><snx:userState xmlns:snx="http://www.ibm.com/xmlns/prod/sn">active</snx:userState></author><updated>2014-04-03T09:26:54.029Z</updated><link href="https://dev.sdkdemo.com:444/forums/atom/forum?forumUuid=9c3899bc-e288-4a5a-b702-49f084d14aed" rel="self" type="application/atom+xml"></link><link href="https://dev.sdkdemo.com:444/forums/atom/forum?forumUuid=9c3899bc-e288-4a5a-b702-49f084d14aed" rel="edit" type="application/atom+xml"></link><category term="forum-forum" scheme="http://www.ibm.com/xmlns/prod/sn/type"></category><category term="tag1"></category><category term="tag2"></category><link href="https://dev.sdkdemo.com:444/forums/html/forum?id=9c3899bc-e288-4a5a-b702-49f084d14aed" rel="alternate" type="text/html"></link><link xmlns:thr="http://purl.org/syndication/thread/1.0" href="https://dev.sdkdemo.com:444/forums/atom/topics?forumUuid=9c3899bc-e288-4a5a-b702-49f084d14aed" rel="replies" type="application/atom+xml" thr:count="0"></link><link href="https://dev.sdkdemo.com:444/forums/atom/acl?forumUuid=9c3899bc-e288-4a5a-b702-49f084d14aed" rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml"></link><link href="https://dev.sdkdemo.com:444/forums/atom/service?forumUuid=9c3899bc-e288-4a5a-b702-49f084d14aed" rel="service" type="application/atomsvc+xml" title="Atom Publishing Protocol"></link><thr:in-reply-to xmlns:thr="http://purl.org/syndication/thread/1.0" href="https://dev.sdkdemo.com:444/forums/atom/forums" ref="https://dev.sdkdemo.com:444/forums/atom/forums" type="application/atom+xml"></thr:in-reply-to><content type="html">Test forum created by Create Forum Java snippet</content></entry>]]></data>
+<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?><entry xmlns="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:thr="http://purl.org/syndication/thread/1.0"><id>urn:lsid:ibm.com:forum:0e923f75-e0b4-41c5-b861-d660277951fd</id><title type="text">Test forum 1ab1396866136852</title><snx:moderation xmlns:snx="http://www.ibm.com/xmlns/prod/sn" status="active"></snx:moderation><published>2014-04-07T10:23:01.169Z</published><author><email>fadams@renovations.com</email><name>Frank Adams</name><snx:userid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">EFD413BC-E572-760A-8625-7C6E00506453</snx:userid><snx:userState xmlns:snx="http://www.ibm.com/xmlns/prod/sn">active</snx:userState></author><updated>2014-04-07T10:23:01.169Z</updated><link href="https://dev.sdkdemo.com:444/forums/atom/forum?forumUuid=0e923f75-e0b4-41c5-b861-d660277951fd" rel="self" type="application/atom+xml"></link><link href="https://dev.sdkdemo.com:444/forums/atom/forum?forumUuid=0e923f75-e0b4-41c5-b861-d660277951fd" rel="edit" type="application/atom+xml"></link><category term="forum-forum" scheme="http://www.ibm.com/xmlns/prod/sn/type"></category><category term="tag1"></category><category term="tag2"></category><link href="https://dev.sdkdemo.com:444/forums/html/forum?id=0e923f75-e0b4-41c5-b861-d660277951fd" rel="alternate" type="text/html"></link><link xmlns:thr="http://purl.org/syndication/thread/1.0" href="https://dev.sdkdemo.com:444/forums/atom/topics?forumUuid=0e923f75-e0b4-41c5-b861-d660277951fd" rel="replies" type="application/atom+xml" thr:count="0"></link><link href="https://dev.sdkdemo.com:444/forums/atom/acl?forumUuid=0e923f75-e0b4-41c5-b861-d660277951fd" rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml"></link><link href="https://dev.sdkdemo.com:444/forums/atom/service?forumUuid=0e923f75-e0b4-41c5-b861-d660277951fd" rel="service" type="application/atomsvc+xml" title="Atom Publishing Protocol"></link><thr:in-reply-to xmlns:thr="http://purl.org/syndication/thread/1.0" href="https://dev.sdkdemo.com:444/forums/atom/forums" ref="https://dev.sdkdemo.com:444/forums/atom/forums" type="application/atom+xml"></thr:in-reply-to><content type="html">Test forum created by Create Forum Java snippet</content></entry>]]></data>
 </response>
 <response statusCode="201" statusReason="Created">
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Thu, 03 Apr 2014 09:26:55 GMT]]></value>
+        <value><![CDATA[Mon, 07 Apr 2014 10:23:02 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -92,23 +92,23 @@
     </header>
     <header>
         <name><![CDATA[Expires]]></name>
-        <value><![CDATA[Thu, 03 Apr 2014 09:27:25 GMT]]></value>
+        <value><![CDATA[Mon, 07 Apr 2014 10:23:32 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Location]]></name>
-        <value><![CDATA[https://dev.sdkdemo.com:444/forums/atom/forum?forumUuid=d73813ff-67f3-4050-a6fa-2f937a891d1b]]></value>
+        <value><![CDATA[https://dev.sdkdemo.com:444/forums/atom/forum?forumUuid=9c0bdc38-c1ca-4d2e-b829-d0c461f053b1]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/vDrKbs34A+MQJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
+        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/i4Rda/ywZ22QJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=A7gDx48XrzVY+LnckGsPNKEByJCi3bmFVbtaSCFmdy5ejB6YX6JqponToQvHeJL/qhGjmdRST7U+B4/pVnkps91O4/pO2cfQjMpFZuvloI4C0YMeCdOlN0cxz2fVB2s6NrTtwQgKgPfbvpi23gM+XEBVt8ufBU4Ylif5IE852sgQhhq1GXb9yJeITvReMADNsIOVx1DbIy4YL2hTkGO6xwqnioh22GWBiGsnxrhyDAQ0U3Z869MoZe2B0L3qXygq9IppMfuFrcCHAfq4julGYw7UQxvcCcxy49rJcJUDe+YVyWHi4Mb+KCvYY35gwrjOpIR3LpnkcHNqk73TD8Pt9/l8arzKQkEMHhaJRBtj1iKqC2Wd9MjNy8mbaesfVglQnOIUP/AuZB+5WO61HUEzjbyVe9DvEfsd1O2TjMPk0EFqyqTkneUfOetOjrRwNUfq5Bf2IZORGMuafnH+QTZhryt3mXKEOSn2PzArX96eZ9KR2zlbcObuq1a3r6cgv/Nbp/bzMcB/IqcJl+mnJZSCoe5s1/SfuqmncpBjpzB7IgypxDcAvKt3A+xywvTAx9k1Hrq17YrZiE6/SZcmmmJUzAm3IO/TYx/KuwQiy6wyVE6Bi0TdLwQEDm+LVVMhlzTcElbGqclOJoWmtUwbGwVSQsZPwZbRHDqigQWLcAAuJ3AxeMpaWRodvKs8CLRcM7VgtZSYdMmzte8Jypqb3mZZt3miIr5+aBCEA5pFltUoGWU=; Path=/]]></value>
+        <value><![CDATA[LtpaToken2=4UiTs2AFL4Z92tLCg1evzaUYA05IN4qo2kGiYRm7xuD6WPSEpKm+Yewf7MpPgGlMBlEk0vJowWdeTV46GvUmgPi680YlzibruF3+1uS1x2mqFvkS5N/gDqH72A/h1LlP3LkUtfcNXwxYuR+Riawkw0bY83g79QDTEN+qmP+wLsF/LBIwDP3L33ZPQ1MHdG2Yl11LJ+KD6WaFNDL54UltAo8ZY4p9KO/+Wn/64vBD+zGDqHKtw0u2fJ0qz+DmIUSCGB+xjEGcX0+bSbGu+ofY7C0mHk90yVYSQfLU4AZ9/29kcm5BFfZ00kgQNSo2iI3OdlbG2HhxhuLIbhA4Q+aPUs5Ud3l1422eiNnQxOmPWZtp+UacIqX1A84W95Ags18O33t1ZJx9fCqqp6CDxxGAezAJ/8BEJpdDt+KFOrg5QvpLyKfK+hw+R5ZMpCIz3mJmme6OptZO79hC658M7kQtnnQSOCkApc3VklE1x9JT+vze1mwSk+QxoFllVsPOy1u2YX/RUU+xpfJzh42XW/wHLQA0ukyxgWq/IhNobZLY8+J1WiPn7KUohFzAbisH94HsrPfAyDSQ9btSgyE6s2hHiY8uXLR/E4tKW6E37UfjuaBxX3Y3iklQ/RrbadDAyXNjFQTZqwe8G9dClcjwMYeEMgxUBkpiXXXEK5Y/NxXycJjJ3GHpt2nxc0Iw1wpqCBkbVads+heiG78oXWZOqqxtvw65VFEZpVJpc5NFmaJ/0iU=; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LCSESSIONID=0000fayaIyOkpkc5A5oH6xlBpYl:18dna4k6n; Path=/; HttpOnly]]></value>
+        <value><![CDATA[LCSESSIONID=0000nPDLn7kyIqsLyMc_Ok4iy7U:18dna4k6n; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
@@ -142,13 +142,13 @@
         <name><![CDATA[Content-Language]]></name>
         <value><![CDATA[en-US]]></value>
     </header></headers>
-<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?><entry xmlns="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:thr="http://purl.org/syndication/thread/1.0"><id>urn:lsid:ibm.com:forum:d73813ff-67f3-4050-a6fa-2f937a891d1b</id><title type="text">Test forum 1ab1396517177209</title><snx:moderation xmlns:snx="http://www.ibm.com/xmlns/prod/sn" status="active"></snx:moderation><published>2014-04-03T09:26:55.168Z</published><author><email>fadams@renovations.com</email><name>Frank Adams</name><snx:userid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">EFD413BC-E572-760A-8625-7C6E00506453</snx:userid><snx:userState xmlns:snx="http://www.ibm.com/xmlns/prod/sn">active</snx:userState></author><updated>2014-04-03T09:26:55.168Z</updated><link href="https://dev.sdkdemo.com:444/forums/atom/forum?forumUuid=d73813ff-67f3-4050-a6fa-2f937a891d1b" rel="self" type="application/atom+xml"></link><link href="https://dev.sdkdemo.com:444/forums/atom/forum?forumUuid=d73813ff-67f3-4050-a6fa-2f937a891d1b" rel="edit" type="application/atom+xml"></link><category term="forum-forum" scheme="http://www.ibm.com/xmlns/prod/sn/type"></category><category term="tag1"></category><category term="tag2"></category><link href="https://dev.sdkdemo.com:444/forums/html/forum?id=d73813ff-67f3-4050-a6fa-2f937a891d1b" rel="alternate" type="text/html"></link><link xmlns:thr="http://purl.org/syndication/thread/1.0" href="https://dev.sdkdemo.com:444/forums/atom/topics?forumUuid=d73813ff-67f3-4050-a6fa-2f937a891d1b" rel="replies" type="application/atom+xml" thr:count="0"></link><link href="https://dev.sdkdemo.com:444/forums/atom/acl?forumUuid=d73813ff-67f3-4050-a6fa-2f937a891d1b" rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml"></link><link href="https://dev.sdkdemo.com:444/forums/atom/service?forumUuid=d73813ff-67f3-4050-a6fa-2f937a891d1b" rel="service" type="application/atomsvc+xml" title="Atom Publishing Protocol"></link><thr:in-reply-to xmlns:thr="http://purl.org/syndication/thread/1.0" href="https://dev.sdkdemo.com:444/forums/atom/forums" ref="https://dev.sdkdemo.com:444/forums/atom/forums" type="application/atom+xml"></thr:in-reply-to><content type="html">Test forum created by Create Forum Java snippet</content></entry>]]></data>
+<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?><entry xmlns="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:thr="http://purl.org/syndication/thread/1.0"><id>urn:lsid:ibm.com:forum:9c0bdc38-c1ca-4d2e-b829-d0c461f053b1</id><title type="text">Test forum 1ab1396866137935</title><snx:moderation xmlns:snx="http://www.ibm.com/xmlns/prod/sn" status="active"></snx:moderation><published>2014-04-07T10:23:02.261Z</published><author><email>fadams@renovations.com</email><name>Frank Adams</name><snx:userid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">EFD413BC-E572-760A-8625-7C6E00506453</snx:userid><snx:userState xmlns:snx="http://www.ibm.com/xmlns/prod/sn">active</snx:userState></author><updated>2014-04-07T10:23:02.261Z</updated><link href="https://dev.sdkdemo.com:444/forums/atom/forum?forumUuid=9c0bdc38-c1ca-4d2e-b829-d0c461f053b1" rel="self" type="application/atom+xml"></link><link href="https://dev.sdkdemo.com:444/forums/atom/forum?forumUuid=9c0bdc38-c1ca-4d2e-b829-d0c461f053b1" rel="edit" type="application/atom+xml"></link><category term="forum-forum" scheme="http://www.ibm.com/xmlns/prod/sn/type"></category><category term="tag1"></category><category term="tag2"></category><link href="https://dev.sdkdemo.com:444/forums/html/forum?id=9c0bdc38-c1ca-4d2e-b829-d0c461f053b1" rel="alternate" type="text/html"></link><link xmlns:thr="http://purl.org/syndication/thread/1.0" href="https://dev.sdkdemo.com:444/forums/atom/topics?forumUuid=9c0bdc38-c1ca-4d2e-b829-d0c461f053b1" rel="replies" type="application/atom+xml" thr:count="0"></link><link href="https://dev.sdkdemo.com:444/forums/atom/acl?forumUuid=9c0bdc38-c1ca-4d2e-b829-d0c461f053b1" rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml"></link><link href="https://dev.sdkdemo.com:444/forums/atom/service?forumUuid=9c0bdc38-c1ca-4d2e-b829-d0c461f053b1" rel="service" type="application/atomsvc+xml" title="Atom Publishing Protocol"></link><thr:in-reply-to xmlns:thr="http://purl.org/syndication/thread/1.0" href="https://dev.sdkdemo.com:444/forums/atom/forums" ref="https://dev.sdkdemo.com:444/forums/atom/forums" type="application/atom+xml"></thr:in-reply-to><content type="html">Test forum created by Create Forum Java snippet</content></entry>]]></data>
 </response>
 <response statusCode="201" statusReason="Created">
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Thu, 03 Apr 2014 09:26:56 GMT]]></value>
+        <value><![CDATA[Mon, 07 Apr 2014 10:23:02 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -164,23 +164,23 @@
     </header>
     <header>
         <name><![CDATA[Expires]]></name>
-        <value><![CDATA[Thu, 03 Apr 2014 09:27:26 GMT]]></value>
+        <value><![CDATA[Mon, 07 Apr 2014 10:23:32 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Location]]></name>
-        <value><![CDATA[https://dev.sdkdemo.com:444/forums/atom/topic?topicUuid=51fd0684-6291-4506-b940-e769714d9b3d]]></value>
+        <value><![CDATA[https://dev.sdkdemo.com:444/forums/atom/topic?topicUuid=12826bb5-5220-419e-95f2-bbc9d6db6bad]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/vDrKbs34A+MQJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
+        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/i4Rda/ywZ22QJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=A7gDx48XrzVY+LnckGsPNKEByJCi3bmFVbtaSCFmdy5ejB6YX6JqponToQvHeJL/qhGjmdRST7U+B4/pVnkps91O4/pO2cfQjMpFZuvloI4C0YMeCdOlN0cxz2fVB2s6NrTtwQgKgPfbvpi23gM+XEBVt8ufBU4Ylif5IE852sgQhhq1GXb9yJeITvReMADNsIOVx1DbIy4YL2hTkGO6xwqnioh22GWBiGsnxrhyDAQ0U3Z869MoZe2B0L3qXygq9IppMfuFrcCHAfq4julGYw7UQxvcCcxy49rJcJUDe+YVyWHi4Mb+KCvYY35gwrjOpIR3LpnkcHNqk73TD8Pt9/l8arzKQkEMHhaJRBtj1iKqC2Wd9MjNy8mbaesfVglQnOIUP/AuZB+5WO61HUEzjbyVe9DvEfsd1O2TjMPk0EFqyqTkneUfOetOjrRwNUfq5Bf2IZORGMuafnH+QTZhryt3mXKEOSn2PzArX96eZ9KR2zlbcObuq1a3r6cgv/Nbp/bzMcB/IqcJl+mnJZSCoe5s1/SfuqmncpBjpzB7IgypxDcAvKt3A+xywvTAx9k1Hrq17YrZiE6/SZcmmmJUzAm3IO/TYx/KuwQiy6wyVE6Bi0TdLwQEDm+LVVMhlzTcElbGqclOJoWmtUwbGwVSQsZPwZbRHDqigQWLcAAuJ3AxeMpaWRodvKs8CLRcM7VgtZSYdMmzte8Jypqb3mZZt3miIr5+aBCEA5pFltUoGWU=; Path=/]]></value>
+        <value><![CDATA[LtpaToken2=4UiTs2AFL4Z92tLCg1evzaUYA05IN4qo2kGiYRm7xuD6WPSEpKm+Yewf7MpPgGlMBlEk0vJowWdeTV46GvUmgPi680YlzibruF3+1uS1x2mqFvkS5N/gDqH72A/h1LlP3LkUtfcNXwxYuR+Riawkw0bY83g79QDTEN+qmP+wLsF/LBIwDP3L33ZPQ1MHdG2Yl11LJ+KD6WaFNDL54UltAo8ZY4p9KO/+Wn/64vBD+zGDqHKtw0u2fJ0qz+DmIUSCGB+xjEGcX0+bSbGu+ofY7C0mHk90yVYSQfLU4AZ9/29kcm5BFfZ00kgQNSo2iI3OdlbG2HhxhuLIbhA4Q+aPUs5Ud3l1422eiNnQxOmPWZtp+UacIqX1A84W95Ags18O33t1ZJx9fCqqp6CDxxGAezAJ/8BEJpdDt+KFOrg5QvpLyKfK+hw+R5ZMpCIz3mJmme6OptZO79hC658M7kQtnnQSOCkApc3VklE1x9JT+vze1mwSk+QxoFllVsPOy1u2YX/RUU+xpfJzh42XW/wHLQA0ukyxgWq/IhNobZLY8+J1WiPn7KUohFzAbisH94HsrPfAyDSQ9btSgyE6s2hHiY8uXLR/E4tKW6E37UfjuaBxX3Y3iklQ/RrbadDAyXNjFQTZqwe8G9dClcjwMYeEMgxUBkpiXXXEK5Y/NxXycJjJ3GHpt2nxc0Iw1wpqCBkbVads+heiG78oXWZOqqxtvw65VFEZpVJpc5NFmaJ/0iU=; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LCSESSIONID=0000vBMjlQihqSTQD8DywyyT-6q:18dna4k6n; Path=/; HttpOnly]]></value>
+        <value><![CDATA[LCSESSIONID=00004h09TA85NzOQTx89awg5xaC:18dna4k6n; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
@@ -214,7 +214,7 @@
         <name><![CDATA[Content-Language]]></name>
         <value><![CDATA[en-US]]></value>
     </header></headers>
-<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?><entry xmlns="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:thr="http://purl.org/syndication/thread/1.0"><id>urn:lsid:ibm.com:forum:51fd0684-6291-4506-b940-e769714d9b3d</id><title type="text">Test topic titile1396517178127</title><category term="NotRecommendedByCurrentUser" scheme="http://www.ibm.com/xmlns/prod/sn/flags"></category><link xmlns:snx="http://www.ibm.com/xmlns/prod/sn" href="https://dev.sdkdemo.com:444/forums/atom/recommendation/entries?postUuid=51fd0684-6291-4506-b940-e769714d9b3d" rel="recommendations" type="application/atom+xml" snx:recommendation="0"></link><category term="ThreadRecommendationCount" scheme="http://www.ibm.com/xmlns/prod/sn/flags" label="0"></category><published>2014-04-03T09:26:56.141Z</published><author><email>fadams@renovations.com</email><name>Frank Adams</name><snx:userid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">EFD413BC-E572-760A-8625-7C6E00506453</snx:userid><snx:userState xmlns:snx="http://www.ibm.com/xmlns/prod/sn">active</snx:userState></author><updated>2014-04-03T09:26:56.141Z</updated><link href="https://dev.sdkdemo.com:444/forums/atom/topic?topicUuid=51fd0684-6291-4506-b940-e769714d9b3d" rel="self" type="application/atom+xml"></link><link href="https://dev.sdkdemo.com:444/forums/atom/topic?topicUuid=51fd0684-6291-4506-b940-e769714d9b3d" rel="edit" type="application/atom+xml"></link><category term="forum-topic" scheme="http://www.ibm.com/xmlns/prod/sn/type"></category><link href="https://dev.sdkdemo.com:444/forums/html/topic?id=51fd0684-6291-4506-b940-e769714d9b3d" rel="alternate" type="text/html"></link><link xmlns:thr="http://purl.org/syndication/thread/1.0" href="https://dev.sdkdemo.com:444/forums/atom/replies?topicUuid=51fd0684-6291-4506-b940-e769714d9b3d" rel="replies" type="application/atom+xml" thr:count="0"></link><thr:in-reply-to xmlns:thr="http://purl.org/syndication/thread/1.0" href="https://dev.sdkdemo.com:444/forums/atom/topics?forumUuid=d73813ff-67f3-4050-a6fa-2f937a891d1b" ref="urn:lsid:ibm.com:forum:d73813ff-67f3-4050-a6fa-2f937a891d1b" type="application/atom+xml"></thr:in-reply-to><content type="html">
+<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?><entry xmlns="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:thr="http://purl.org/syndication/thread/1.0"><id>urn:lsid:ibm.com:forum:12826bb5-5220-419e-95f2-bbc9d6db6bad</id><title type="text">Test topic titile1396866138689</title><category term="NotRecommendedByCurrentUser" scheme="http://www.ibm.com/xmlns/prod/sn/flags"></category><link xmlns:snx="http://www.ibm.com/xmlns/prod/sn" href="https://dev.sdkdemo.com:444/forums/atom/recommendation/entries?postUuid=12826bb5-5220-419e-95f2-bbc9d6db6bad" rel="recommendations" type="application/atom+xml" snx:recommendation="0"></link><category term="ThreadRecommendationCount" scheme="http://www.ibm.com/xmlns/prod/sn/flags" label="0"></category><published>2014-04-07T10:23:03.040Z</published><author><email>fadams@renovations.com</email><name>Frank Adams</name><snx:userid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">EFD413BC-E572-760A-8625-7C6E00506453</snx:userid><snx:userState xmlns:snx="http://www.ibm.com/xmlns/prod/sn">active</snx:userState></author><updated>2014-04-07T10:23:03.040Z</updated><link href="https://dev.sdkdemo.com:444/forums/atom/topic?topicUuid=12826bb5-5220-419e-95f2-bbc9d6db6bad" rel="self" type="application/atom+xml"></link><link href="https://dev.sdkdemo.com:444/forums/atom/topic?topicUuid=12826bb5-5220-419e-95f2-bbc9d6db6bad" rel="edit" type="application/atom+xml"></link><category term="forum-topic" scheme="http://www.ibm.com/xmlns/prod/sn/type"></category><link href="https://dev.sdkdemo.com:444/forums/html/topic?id=12826bb5-5220-419e-95f2-bbc9d6db6bad" rel="alternate" type="text/html"></link><link xmlns:thr="http://purl.org/syndication/thread/1.0" href="https://dev.sdkdemo.com:444/forums/atom/replies?topicUuid=12826bb5-5220-419e-95f2-bbc9d6db6bad" rel="replies" type="application/atom+xml" thr:count="0"></link><thr:in-reply-to xmlns:thr="http://purl.org/syndication/thread/1.0" href="https://dev.sdkdemo.com:444/forums/atom/topics?forumUuid=9c0bdc38-c1ca-4d2e-b829-d0c461f053b1" ref="urn:lsid:ibm.com:forum:9c0bdc38-c1ca-4d2e-b829-d0c461f053b1" type="application/atom+xml"></thr:in-reply-to><content type="html">
     Test topic content
   </content><snx:permissions xmlns:snx="http://www.ibm.com/xmlns/prod/sn">none, create_forum, view_forum, edit_forum, del_forum, create_post, edit_personal_post, edit_all_post, del_personal_post, del_all_post, pin_topic, subscribe, lock_node, add_member, delete_member, create_topictag, del_all_topictag, del_personal_topictag, create_forumtag, del_all_forumtag, del_personal_forumtag, view_category, edit_personal_question, edit_all_question, add_owner, add_moderator</snx:permissions></entry>]]></data>
 </response>
@@ -222,7 +222,7 @@
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Thu, 03 Apr 2014 09:26:57 GMT]]></value>
+        <value><![CDATA[Mon, 07 Apr 2014 10:23:03 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -238,7 +238,7 @@
     </header>
     <header>
         <name><![CDATA[Expires]]></name>
-        <value><![CDATA[Thu, 03 Apr 2014 09:27:27 GMT]]></value>
+        <value><![CDATA[Mon, 07 Apr 2014 10:23:33 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Content-Length]]></name>
@@ -246,15 +246,15 @@
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/vDrKbs34A+MQJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
+        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/i4Rda/ywZ22QJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=A7gDx48XrzVY+LnckGsPNKEByJCi3bmFVbtaSCFmdy5ejB6YX6JqponToQvHeJL/qhGjmdRST7U+B4/pVnkps91O4/pO2cfQjMpFZuvloI4C0YMeCdOlN0cxz2fVB2s6NrTtwQgKgPfbvpi23gM+XEBVt8ufBU4Ylif5IE852sgQhhq1GXb9yJeITvReMADNsIOVx1DbIy4YL2hTkGO6xwqnioh22GWBiGsnxrhyDAQ0U3Z869MoZe2B0L3qXygq9IppMfuFrcCHAfq4julGYw7UQxvcCcxy49rJcJUDe+YVyWHi4Mb+KCvYY35gwrjOpIR3LpnkcHNqk73TD8Pt9/l8arzKQkEMHhaJRBtj1iKqC2Wd9MjNy8mbaesfVglQnOIUP/AuZB+5WO61HUEzjbyVe9DvEfsd1O2TjMPk0EFqyqTkneUfOetOjrRwNUfq5Bf2IZORGMuafnH+QTZhryt3mXKEOSn2PzArX96eZ9KR2zlbcObuq1a3r6cgv/Nbp/bzMcB/IqcJl+mnJZSCoe5s1/SfuqmncpBjpzB7IgypxDcAvKt3A+xywvTAx9k1Hrq17YrZiE6/SZcmmmJUzAm3IO/TYx/KuwQiy6wyVE6Bi0TdLwQEDm+LVVMhlzTcElbGqclOJoWmtUwbGwVSQsZPwZbRHDqigQWLcAAuJ3AxeMpaWRodvKs8CLRcM7VgtZSYdMmzte8Jypqb3mZZt3miIr5+aBCEA5pFltUoGWU=; Path=/]]></value>
+        <value><![CDATA[LtpaToken2=4UiTs2AFL4Z92tLCg1evzaUYA05IN4qo2kGiYRm7xuD6WPSEpKm+Yewf7MpPgGlMBlEk0vJowWdeTV46GvUmgPi680YlzibruF3+1uS1x2mqFvkS5N/gDqH72A/h1LlP3LkUtfcNXwxYuR+Riawkw0bY83g79QDTEN+qmP+wLsF/LBIwDP3L33ZPQ1MHdG2Yl11LJ+KD6WaFNDL54UltAo8ZY4p9KO/+Wn/64vBD+zGDqHKtw0u2fJ0qz+DmIUSCGB+xjEGcX0+bSbGu+ofY7C0mHk90yVYSQfLU4AZ9/29kcm5BFfZ00kgQNSo2iI3OdlbG2HhxhuLIbhA4Q+aPUs5Ud3l1422eiNnQxOmPWZtp+UacIqX1A84W95Ags18O33t1ZJx9fCqqp6CDxxGAezAJ/8BEJpdDt+KFOrg5QvpLyKfK+hw+R5ZMpCIz3mJmme6OptZO79hC658M7kQtnnQSOCkApc3VklE1x9JT+vze1mwSk+QxoFllVsPOy1u2YX/RUU+xpfJzh42XW/wHLQA0ukyxgWq/IhNobZLY8+J1WiPn7KUohFzAbisH94HsrPfAyDSQ9btSgyE6s2hHiY8uXLR/E4tKW6E37UfjuaBxX3Y3iklQ/RrbadDAyXNjFQTZqwe8G9dClcjwMYeEMgxUBkpiXXXEK5Y/NxXycJjJ3GHpt2nxc0Iw1wpqCBkbVads+heiG78oXWZOqqxtvw65VFEZpVJpc5NFmaJ/0iU=; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LCSESSIONID=0000prn77mBcel4mCajf1vovG56:18dna4k6n; Path=/; HttpOnly]]></value>
+        <value><![CDATA[LCSESSIONID=0000YFXp897fbX2dRZkutr6mxpJ:18dna4k6n; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>

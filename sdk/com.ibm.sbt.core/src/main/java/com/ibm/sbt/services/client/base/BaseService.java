@@ -184,9 +184,8 @@ public abstract class BaseService implements Serializable {
 	 * This method makes a network call and returns an entity
 	 */
 	protected <T extends BaseEntity> T getEntity(String url, Map<String, String> parameters, IFeedHandler<T> feedHandler) throws IOException, ClientServicesException {
-		Response dataHolder = null;
-		dataHolder = retrieveData(url, parameters);
-		return feedHandler.createEntity(dataHolder);
+		Response response = retrieveData(url, parameters);
+		return feedHandler.createEntity(response);
 	}
 	
 	/*

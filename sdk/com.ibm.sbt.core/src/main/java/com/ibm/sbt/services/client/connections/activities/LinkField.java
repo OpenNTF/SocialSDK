@@ -15,14 +15,11 @@
  */
 package com.ibm.sbt.services.client.connections.activities;
 
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
-
 import org.w3c.dom.Node;
 
 import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.base.BaseService;
-import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.connections.common.Link;
 
 /**
@@ -30,6 +27,8 @@ import com.ibm.sbt.services.client.connections.common.Link;
  *
  */
 public class LinkField extends Field {
+
+	private Link link;
 
 	/**
 	 * Default constructor
@@ -49,14 +48,31 @@ public class LinkField extends Field {
 		super(service, node, namespaceCtx, xpathExpression);
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.ibm.sbt.services.client.connections.activities.Field#getType()
+	 */
+	@Override
+	public String getType() {
+		return LINK;
+	}
+	
 	/**
 	 * Return the link.
 	 * 
 	 * @return link
 	 */
 	public Link getLink() {
-		return new Link(getService(), new XmlDataHandler((Node)this.getDataHandler().getData(), 
-    			nameSpaceCtx, (XPathExpression)ActivityXPath.field_link.getPath()));
+		if (link == null && getDataHandler() != null) {
+			link = createLink((Node)getDataHandler().getData(), ActivityXPath.field_link);
+		}
+		return link;
 	}
 	
+	/**
+	 * Set the link value for this field.
+	 * @param link
+	 */
+	public void setLink(Link link) {
+		this.link = link;
+	}
 }

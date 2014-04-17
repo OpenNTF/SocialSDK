@@ -1,5 +1,8 @@
 <div id="<?php echo (isset($instance['ibm-sbtk-element-id']) ? $instance['ibm-sbtk-element-id'] : $this->elID); ?>"></div>
 <?php 
+// Ensure that element IDs are unique
+$timestamp = time();
+
 if ((isset($instance['ibm-sbtk-template']) && $instance['ibm-sbtk-template'] != "")) {
 	require_once BASE_PATH . "{$instance['ibm-sbtk-template']}";
 } else {
@@ -8,11 +11,11 @@ if ((isset($instance['ibm-sbtk-template']) && $instance['ibm-sbtk-template'] != 
 ?>
 <script type="text/javascript">
 require(["sbt/dom", "sbt/connections/controls/communities/CommunityGrid"], function(dom, CommunityGrid) {
-	var domNode = dom.byId("communityRow");
+	var domNode = dom.byId("communityRow-<?php echo $timestamp; ?>");
     var CommunityRow = domNode.text || domNode.textContent;
-    domNode = dom.byId("pagingHeader");
+    domNode = dom.byId("communityPagingHeader-<?php echo $timestamp; ?>");
     var PagingHeader = domNode.text || domNode.textContent;
-    domNode = dom.byId("pagingFooter");
+    domNode = dom.byId("communityPagingFooter-<?php echo $timestamp; ?>");
     var PagingFooter = domNode.text || domNode.textContent;
     
     var grid = new CommunityGrid({

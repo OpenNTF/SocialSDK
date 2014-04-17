@@ -22,14 +22,16 @@
  *
  * @author Benjamin Jakobus
  */
-class BaseController {
+class BaseController 
+{
 	
 	/**
 	 * Model loader.
 	 * 
 	 * @param string $className		The name of the model to load.
 	 */
-	function loadModel($className) {
+	function loadModel($className)
+	{
 		$file = '/models/' . $className . '.php';
 		$location = $this->_include_file($file);
 		@include_once $location;
@@ -40,7 +42,8 @@ class BaseController {
 	 *
 	 * @param string $className		The name of the controller to load.
 	 */
-	function loadController($className) {
+	function loadController($className) 
+	{
 		$file = '/controllers/' . $className . '.php';
 		$location = $this->_include_file($file);
 		@include_once $location;
@@ -53,7 +56,8 @@ class BaseController {
 	 * @param array  $viewData		Associative array containing the data to be displayed by the view.
 	 */
 	
-	function loadView($className, $viewData) {
+	function loadView($className, $viewData) 
+	{
 		$file = '/views/' . $className . '.php';
 		$location = $this->_include_file($file);
 		if ($viewData != null) {
@@ -70,7 +74,8 @@ class BaseController {
 	 *
 	 * @param string $file			The file to load, prefixed with /model, /controller or /view.
 	 */
-	private function _include_file($file) {
+	private function _include_file($file) 
+	{
 		if (file_exists(BASE_PATH . $file)) {
 			return BASE_PATH . $file;
 		} else if (file_exists(BASE_PATH . '/application' . $file)) {
@@ -84,7 +89,8 @@ class BaseController {
 	 * 
 	 * @param string $className		Name of the class to load.
 	 */
-	function load($className) {
+	function load($className) 
+	{
 		@include_once $className . '.php';
 	}
 }

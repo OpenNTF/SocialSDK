@@ -37,6 +37,7 @@ class block_ibmsbt extends block_base {
 	 * @return stdClass		Block content.
 	 */
 	public function get_content() {
+
 		if ($this->content !== null) {
 			return $this->content;
 		}	
@@ -62,6 +63,7 @@ class block_ibmsbt extends block_base {
 			$store = SBTCredentialStore::getInstance();	
 			
 			global $CFG;
+			global $USER;
 			
 			$blockPath = $CFG->dirroot . '/blocks/ibmsbt/';
 
@@ -76,7 +78,7 @@ class block_ibmsbt extends block_base {
 					return;
 				}
 			}
-			
+
 			// Check if token expired. If yes, clear the credential store and load login display
 			if (($settings->getAuthenticationMethod($this->config->endpoint) == 'oauth1' 
 					|| $settings->getAuthenticationMethod($this->config->endpoint) == 'oauth2') && $store->getOAuthAccessToken($this->config->endpoint) != null) {
@@ -104,7 +106,7 @@ class block_ibmsbt extends block_base {
 			if (($settings->getAuthenticationMethod($this->config->endpoint) == 'oauth1' 
 					|| $settings->getAuthenticationMethod($this->config->endpoint) == 'oauth2') && $store->getOAuthAccessToken($this->config->endpoint) == null &&
 			(!isset($_COOKIE['IBMSBTKOAuthLogin']) || $_COOKIE['IBMSBTKOAuthLogin'] != 'yes')) {
-				if (!isloggedin()) {
+				if (isloggedin() === false || !isset($USER->id) || $USER->id === null) {
 					echo "This widget uses single-sign on. Please log into Moodle.";
 				} else {
 					require $blockPath . '/core/views/oauth-login-display.php';
@@ -117,13 +119,19 @@ class block_ibmsbt extends block_base {
 		
 			$plugin = new SBTPlugin($this->config->endpoint);
 			$plugin->createHeader();
-	
+			
 			if (($settings->getAuthenticationMethod($this->config->endpoint) == 'basic' && $store->getBasicAuthUsername($this->config->endpoint) != null 
 				&& $store->getBasicAuthPassword($this->config->endpoint) != null) || ($settings->getAuthenticationMethod($this->config->endpoint) == 'oauth1' && $store->getRequestToken($this->config->endpoint) != null)
 				|| ($settings->getAuthenticationMethod($this->config->endpoint) == 'basic' && $settings->getBasicAuthMethod($this->config->endpoint) == 'global')
 				|| ($settings->getAuthenticationMethod($this->config->endpoint) == 'basic' && $settings->getBasicAuthMethod($this->config->endpoint) == 'profile' && $store->getBasicAuthPassword($this->config->endpoint) != null)
 				|| ($settings->getAuthenticationMethod($this->config->endpoint) == 'oauth2' && $store->getOAuthAccessToken($this->config->endpoint) != null)) {
-				require $this->config->plugin;
+				
+				if (isloggedin()) {
+					if (IBM_SBT_CRYPTO_ENABLED === false && IBM_SBT_DEMO_MODE === false) {
+						echo '<strong style="color: red;">WARNING: Your data is not encrypted. Please install php-mcrypt to secure your data.</strong><br/>';
+					}
+					require $this->config->plugin;
+				}
 				
 				if ($settings->getAuthenticationMethod($this->config->endpoint) == 'basic') {
 // 					require $blockPath . '/core/views/endpoint-logout.php'; // Uncomment to show logout button
@@ -136,7 +144,10 @@ class block_ibmsbt extends block_base {
 					|| $settings->getBasicAuthMethod($this->config->endpoint) == 'profile' )
 					&& $store->getBasicAuthUsername($this->config->endpoint) == null ) {
 				if (!isloggedin()) {
-					echo "This widget uses single-sign on. Please log into Moodle.";
+					echo 'This widget uses single-sign on. Please log into Moodle.';
+					echo '</div>';
+					$this->content->text = ob_get_clean();
+					return $this->content;
 				} else {
 					require $blockPath . '/core/views/basic-auth-login-display.php';
 				}
@@ -148,13 +159,17 @@ class block_ibmsbt extends block_base {
 
 			if (($settings->getAuthenticationMethod($this->config->endpoint) == 'oauth1'
 					|| $settings->getAuthenticationMethod($this->config->endpoint) == 'oauth2') && $store->getOAuthAccessToken($this->config->endpoint) != null) {
-				require $blockPath . '/core/views/endpoint-logout.php';
-				echo '<button onclick="ibm_sbt_endpoint_logout()">Logout from this Endpoint</button>';
+				// require $blockPath . '/core/views/endpoint-logout.php'; Uncomment to show logout button
+				// echo '<button onclick="ibm_sbt_endpoint_logout()">Logout from this Endpoint</button>'; Uncomment to show logout button
 			} 
 			
 			echo '</div>';
-
+			if (!isloggedin()) {
+				echo 'This widget uses single-sign on. Please log into Moodle.';
+			}
 			$this->content->text = ob_get_clean();
+		} else {
+			$this->content->text = 'This widget uses single-sign on. Please log into Moodle.';
 		}
 		return $this->content;
 	}
@@ -175,7 +190,7 @@ class block_ibmsbt extends block_base {
 	}
 	private function _startOAuthDance($settings) {
 		global $USER;
-		if (isset($USER->id)) {
+		if (isset($USER->id) && $USER->id !== null) {
 			setcookie('ibm-sbt-uid', $USER->id, time() + 604800);
 		}
 		

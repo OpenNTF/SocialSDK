@@ -45,6 +45,14 @@ public class TextField extends Field {
 		super(service, node, namespaceCtx, xpathExpression);
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.ibm.sbt.services.client.connections.activities.Field#getType()
+	 */
+	@Override
+	public String getType() {
+		return TEXT;
+	}
+	
 	/**
 	 * Return the summary value for this field.
 	 * 
@@ -52,6 +60,15 @@ public class TextField extends Field {
 	 */
 	public String getSummary() {
 		return getAsString(ActivityXPath.field_summary);
+	}
+	
+	/**
+	 * Set the summary value for this field.
+	 * 
+	 * @param summary
+	 */
+	public void setSummary(String summary) {
+		setAsString(ActivityXPath.field_summary, summary);
 	}
 	
 }

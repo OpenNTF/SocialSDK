@@ -9,10 +9,10 @@
 
 	<xe:djBorderContainer style="height: 100%">
 		<xe:djBorderPane region="top">
-			<xp:div>
+			<xe:listInline>
 				<xp:link escape="true" text="Edit Documentation" id="link3" value="/ApiEditor.xsp"  loaded="${javascript:userBean.canCreateDocs}"></xp:link>
 				<xp:link escape="true" text="Print Documentation" id="link4" value="/PrintDocumentation.xsp"></xp:link>
-			</xp:div>
+			</xe:listInline>
 			<span title="Expand All" style="margin-left:3px;margin-right:3px">
 				<xp:link escape="true" id="link1">
 					<xp:image id="image2" alt="Submit search" url="/expandall.png">
@@ -50,9 +50,9 @@ return true;]]></xp:this.onkeypress>
 				</span>
 			</xp:span>
 		</xe:djBorderPane>
-		<xe:djBorderPane style="overflow:auto; height: 100%"
-			region="center">
-			<xp:div id="widgetContainer1" style="overflow:auto; height: 100%">
+		<xe:djBorderPane
+			region="center" style="overflow: hidden;">
+			<xp:div id="widgetContainer1" styleClass="assetTreeContainer" style="width: 100%; height: 100%; overflow-x: hidden; overflow-y: auto">
 				<xp:scriptBlock id="scriptBlock1">
 					<xp:this.value><![CDATA[dojo.addOnLoad(function() {
 	var assetsData = #{javascript:return docBean.getEntriesAsJson();};
@@ -75,7 +75,7 @@ return true;]]></xp:this.onkeypress>
 });
 ]]></xp:this.value>
 				</xp:scriptBlock>
-				<div id="assetsTree" style="height: 100%"></div>
+				<div id="assetsTree"></div>
 			</xp:div>
 		</xe:djBorderPane>
 	</xe:djBorderContainer>

@@ -65,7 +65,8 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
             communityUuid : "snx:communityUuid",
             containerUrl : "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/container']/@href",
             containerType : "snx:containertype",
-            categoryFlags : "a:link[@scheme='http://www.ibm.com/xmlns/prod/sn/flags']/@term"
+            categoryFlags : "a:link[@scheme='http://www.ibm.com/xmlns/prod/sn/flags']/@term",
+            summary : "a:summary[@type='html']"
         }),
         
         /**
@@ -89,7 +90,8 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
             sourceLinkAlternate : "a:source/a:link[@rel='alternate']/@href",
             sourceUpdated : "a:source/a:updated",
             sourceCategory : "a:source/a:link[@scheme='http://www.ibm.com/xmlns/prod/sn/type']/@term",
-            blogHandle : "blogHandle"
+            blogHandle : "blogHandle",
+            summary : "a:summary[@type='html']"
         }),
         
         /**

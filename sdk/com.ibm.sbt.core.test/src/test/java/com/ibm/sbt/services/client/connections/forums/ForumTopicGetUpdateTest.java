@@ -38,8 +38,8 @@ public class ForumTopicGetUpdateTest extends BaseForumServiceTest {
 	public void testGetForumTopic() throws ForumServiceException {
 		ForumTopic topicGot = forumService.getForumTopic(topic.getTopicUuid());
 
-		assertEquals(topic.getTitle(), topicGot.getTitle());
-		assertEquals(topic.getContent(), topicGot.getContent());
+		assertEquals(unRandomize(topic.getTitle()), unRandomize(topicGot.getTitle()));
+		assertEquals(unRandomize(topic.getContent()), unRandomize(topicGot.getContent()));
 	}
 
 	@Test
@@ -51,7 +51,7 @@ public class ForumTopicGetUpdateTest extends BaseForumServiceTest {
 		ForumTopic updatedTopic = forumService.getForumTopic(topic.getTopicUuid());
 		
 		assertEquals(unRandomize(topic.getTitle()), unRandomize(updatedTopic.getTitle()));
-		assertEquals(topic.getTopicUuid(), updatedTopic.getTopicUuid());
+		assertEquals(unRandomize(topic.getTopicUuid()), unRandomize(updatedTopic.getTopicUuid()));
 		assertEquals(unRandomize(topic.getContent()), unRandomize(updatedTopic.getContent().trim()));
 	}
 

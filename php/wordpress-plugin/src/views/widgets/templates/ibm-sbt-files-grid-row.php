@@ -1,16 +1,16 @@
-<script type="text/template" id="fileRow">
+<script type="text/template" id="fileRow-***REMOVED*** echo $timestamp; ?>">
 <tr>
-	<td style="width:120px; word-wrap:break-word; display: inline-block; padding-left: 25px;">
+	<td style="width:160px;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inline-block; padding-left: 10px;">
 			<span dojoAttachPoint="placeLinkNode">
 				<a href="javascript: void(0)" target="_self" title="${tooltip}" dojoAttachPoint="placeTitleLink" data-dojo-attach-event="onclick: handleClick">${title}</a>
 			</span>
 		<div>
-			<hr style="width:85%; margin: 0.7em 0; left: -30px; border: 0; height: 1px;"/>
+			<hr style="width:100%; margin: 0.7em 0; left: -30px; border: 0; height: 1px;"/>
 		</div>
 	</td>
 </tr>
 </script>
-<script type="text/template" id="pagingHeader">
+<script type="text/template" id="pagingHeader-***REMOVED*** echo $timestamp; ?>">
 <div dojoAttachPoint="pagingHeader">
 	<div>
 		<hr style="width:90%; margin: 0.7em 0; left: -30px; border: 0; height: 1px;"/>
@@ -28,7 +28,7 @@
 		</div>
 </div>
 </script>
-<script type="text/template" id="pagingFooter">
+<script type="text/template" id="pagingFooter-***REMOVED*** echo $timestamp; ?>">
 <div dojoattachpoint="pagingFooter" class="lotusPaging" style="">
 	<div>
 		<hr style="width:90%; margin: 0.7em 0; left: -30px; border: 0; height: 1px;"/>

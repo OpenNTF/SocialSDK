@@ -31,6 +31,9 @@ import com.ibm.sbt.services.client.connections.common.Link;
  */
 public class FileField extends Field {
 
+	private Link editMediaLink;
+	private Link enclosureLink;
+	
 	/**
 	 * Default constructor
 	 */
@@ -49,14 +52,24 @@ public class FileField extends Field {
 		super(service, node, namespaceCtx, xpathExpression);
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.ibm.sbt.services.client.connections.activities.Field#getType()
+	 */
+	@Override
+	public String getType() {
+		return FILE;
+	}
+	
 	/**
 	 * Return the edit-media link.
 	 * 
 	 * @return link
 	 */
 	public Link getEditMediaLink() {
-		return new Link(getService(), new XmlDataHandler((Node)this.getDataHandler().getData(), 
-    			nameSpaceCtx, (XPathExpression)ActivityXPath.field_link_editmedia.getPath()));
+		if (editMediaLink == null && getDataHandler() != null) {
+			editMediaLink = createLink((Node)getDataHandler().getData(), ActivityXPath.field_link_editmedia);
+		}
+		return editMediaLink;
 	}
 
 	/**
@@ -65,8 +78,23 @@ public class FileField extends Field {
 	 * @return link
 	 */
 	public Link getEnclosureLink() {
-		return new Link(getService(), new XmlDataHandler((Node)this.getDataHandler().getData(), 
-    			nameSpaceCtx, (XPathExpression)ActivityXPath.field_link_enclosure.getPath()));
+		if (enclosureLink == null && getDataHandler() != null) {
+			enclosureLink = createLink((Node)getDataHandler().getData(), ActivityXPath.field_link_enclosure);
+		}
+		return enclosureLink;
 	}
 	
+	/**
+	 * @param editMediaLink the editMediaLink to set
+	 */
+	public void setEditMediaLink(Link editMediaLink) {
+		this.editMediaLink = editMediaLink;
+	}
+	
+	/**
+	 * @param enclosureLink the enclosureLink to set
+	 */
+	public void setEnclosureLink(Link enclosureLink) {
+		this.enclosureLink = enclosureLink;
+	}
 }

@@ -32,21 +32,21 @@ if (!defined('SBT_SDK')) {
 }
 
 if (!defined('BASE_PATH')) {
-	define('BASE_PATH', dirname(__FILE__) );
+	define('BASE_PATH', dirname(__FILE__));
 }
 // Define the base location
 if (defined('IBM_SBT_MOODLE_BLOCK')) {
 	global $CFG;
 	if (isset($CFG)) {
-		define('BASE_LOCATION',  $CFG->wwwroot . '/blocks/ibmsbt/core/');
+		define('BASE_LOCATION', $CFG->wwwroot . '/blocks/ibmsbt/core/');
 	}	
 } else if (defined('IBM_SBT_WORDPRESS_PLUGIN')) {
-	define('BASE_LOCATION',  get_site_url() . '/wp-content/plugins/' . PLUGIN_NAME);
+	define('BASE_LOCATION', get_site_url() . '/wp-content/plugins/' . PLUGIN_NAME);
 } else {
-	define('BASE_LOCATION',  'http://localhost/core/src');
+	define('BASE_LOCATION', 'http://localhost/core/src');
 }
 
-spl_autoload_register(function ($class) 
+spl_autoload_register(function ($class)
 {
 	$coreFile = BASE_PATH . '/system/core/' . $class . '.php';
 	$applicationFile = BASE_PATH . '/controllers/' . $class . '.php';

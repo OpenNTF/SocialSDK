@@ -73,6 +73,10 @@ public class ClientServicesException extends AbstractException {
 		super(nextException, msg, params);
 	}
 
+	public ClientServicesException(Response response) {
+		this(response.getResponse(), response.getRequest());
+	}
+	
 	public ClientServicesException(HttpResponse response, HttpRequestBase request) {
 		this(null, createMessage(request, response));
 		

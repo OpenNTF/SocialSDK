@@ -302,9 +302,10 @@ class SBTPluginSettings extends BasePluginController
     	
     	$ssl_trust = false;
     	$clientAccess = true;
-    	$server_type = "";
-    	$basic_auth_method = "";
-    	$endpointVersion = "";
+    	$server_type = '';
+    	$basic_auth_method = '';
+    	$endpointVersion = '';
+    	$callbackURL = '';
     	if ($this->endpoints) {
     		foreach ($this->endpoints as $val) {
     			$endpoint = (array)json_decode($val, true);
@@ -323,12 +324,14 @@ class SBTPluginSettings extends BasePluginController
     				if (isset($endpoint['basic_auth_method'])) {
     					$basic_auth_method = $endpoint['basic_auth_method'];
     				}
+    				if (isset($endpoint['oauth2_callback_url'])) {
+    					$callbackURL = $endpoint['oauth2_callback_url'];
+    				}
+    				
     				$endpointVersion = (isset($endpoint['endpoint_version']) ? $endpoint['endpoint_version'] : "");
     			}
     		}
     	}
-    	$callbackURL = BASE_LOCATION . '/core/index.php?classpath=endpoint&class=SBTOAuth2Endpoint&method=authenticationCallback';
-    	$callbackURL = str_replace('http://', 'https://', $callbackURL);
     	$viewData['callback_url'] = $callbackURL;
     	$viewData['basic_auth_method'] = $basic_auth_method;
     	$viewData['server_type'] = $server_type;

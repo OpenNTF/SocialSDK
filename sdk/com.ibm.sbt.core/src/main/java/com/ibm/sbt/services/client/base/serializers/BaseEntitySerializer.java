@@ -16,6 +16,7 @@
 
 package com.ibm.sbt.services.client.base.serializers;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -36,15 +37,24 @@ public class BaseEntitySerializer<T extends BaseEntity> extends XmlSerializer {
 	}
 	
 	public static class DateSerializer {
-		private static SimpleDateFormat dateFormat = 
-				new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 		
+		private static SimpleDateFormat dateFormat = 
+				new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");	
+
 		public static String toString(Date date) {
+			return toString(dateFormat, date);
+		}
+		
+		public static String toString(DateFormat dateFormat, Date date) {
 			if(date == null) return null;
 			else return dateFormat.format(date);
 		}
-
+		
 		public static Date valueOf(String date) {
+			return valueOf(dateFormat, date);
+		}
+
+		public static Date valueOf(DateFormat dateFormat, String date) {
 			try {
 				return dateFormat.parse(date);
 			} catch (ParseException e) {

@@ -36,7 +36,8 @@ class SBTOAuth2Endpoint extends BaseController implements SBTEndpoint
 	 * The callback function for authenticating the user and then storing the token in the CredentialStore (no content
 	 * is being requested).
 	 */
-	public function authenticationCallback() {
+	public function authenticationCallback() 
+	{
 	
 		if (!isset($_GET['code'])) {
 			return;
@@ -68,7 +69,7 @@ class SBTOAuth2Endpoint extends BaseController implements SBTEndpoint
 		$response = null;
 		
 		try {
-			$request = $client->createRequest('GET', $tokenURL , $headers, $body,  $options);
+			$request = $client->createRequest('GET', $tokenURL, $headers, $body, $options);
 			if ($settings->forceSSLTrust($endpointName)) {
 				$request->getCurlOptions()->set(CURLOPT_SSL_VERIFYHOST, false);
 				$request->getCurlOptions()->set(CURLOPT_SSL_VERIFYPEER, false);
@@ -88,10 +89,12 @@ class SBTOAuth2Endpoint extends BaseController implements SBTEndpoint
 				die('Missing access token. Something went wrong - make sure that your client ID and client secret are correct and try again.');
 			}
 			
-			$store->storeOAuthAccessToken($info['access_token'], $endpointName);
+			$accessToken = $store->getOAuthAccessToken($endpointName);
+			if ($accessToken == null || $accessToken == "") {
+				$store->storeOAuthAccessToken($info['access_token'], $endpointName);
+			}
 			
-			$requestURL = $_COOKIE['IBMSBTKOAuthOrigin'];
-			header("Location: " . $requestURL);
+			header("Location: " . $settings->getOAuthOrigin($endpointName));
 			
 		} catch(Guzzle\Http\Exception\BadResponseException $e) {
 			$response = $e->getResponse();
@@ -108,7 +111,8 @@ class SBTOAuth2Endpoint extends BaseController implements SBTEndpoint
 	 * @param string $body
 	 * @param string $headers
 	 */
-	public function makeRequest($server, $service, $method, $options, $body = null, $headers = null, $endpointName = "connections") {
+	public function makeRequest($server, $service, $method, $options, $body = null, $headers = null, $endpointName = "connections") 
+	{
 		$store = SBTCredentialStore::getInstance();
 		$token = $store->getOAuthAccessToken($endpointName);
 
@@ -120,7 +124,7 @@ class SBTOAuth2Endpoint extends BaseController implements SBTEndpoint
 		}
 		try {
 			$client = new Client($server);
-			$request = $client->createRequest($method, $service , $headers, $body,  $options);
+			$request = $client->createRequest($method, $service, $headers, $body, $options);
 			$request->addHeader('authorization', 'Bearer ' . $token);
 			if ($settings->forceSSLTrust($endpointName)) {
 				$request->getCurlOptions()->set(CURLOPT_SSL_VERIFYHOST, false);

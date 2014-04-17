@@ -38,8 +38,8 @@ public class ActivityNodeCrudrTest extends BaseActivityServiceTest {
 		ActivityNode created = activityService.createActivityNode(activityNode);
 		
 		
-		String createdXml = created.toXmlString();
-		System.out.println("CREATED: " + createdXml);
+		//String createdXml = created.toXmlString();
+		//System.out.println("CREATED: " + createdXml);
 		
 		Assert.assertTrue("Invalid activity node instance", activityNode == created);
 		Assert.assertEquals("Invalid activity node id", activity.getActivityUuid(), activityNode.getActivityUuid());
@@ -90,12 +90,13 @@ public class ActivityNodeCrudrTest extends BaseActivityServiceTest {
 	@Test
 	public void testDeleteActivityNode() throws ClientServicesException, XMLException {
 		ActivityNode created = createActivityNode();
+		String createdNodeUuid = created.getActivityNodeUuid();
 		
-		String acctivityNodeUuid = activityService.deleteActivityNode(created);
+		String activityNodeUuid = activityService.deleteActivityNode(created);
 		
-		Assert.assertEquals(created.getActivityUuid(), acctivityNodeUuid);
+		Assert.assertEquals(createdNodeUuid, activityNodeUuid);
 		
-		ActivityNode read = activityService.getActivityNode(created.getActivityUuid());
+		ActivityNode read = activityService.getActivityNode(activityNodeUuid);
 		Assert.assertNull(read);
 	}
 	
@@ -106,17 +107,15 @@ public class ActivityNodeCrudrTest extends BaseActivityServiceTest {
 		String activityNodeUuid = activityService.deleteActivityNode(created);
 		Assert.assertEquals(created.getActivityNodeUuid(), activityNodeUuid);
 		
-		ActivityNode restored = activityService.restoreActivityNode(created);
+		activityService.restoreActivityNode(created);
 		
 		ActivityNode read = activityService.getActivityNode(created.getActivityNodeUuid());
 
-		String restoredXml = restored.toXmlString();
-		String readXml = read.toXmlString();
-		
-		System.out.println("RESTORED: " + restoredXml);
-		System.out.println("READ: " + readXml);
-		
-		Assert.assertEquals("Invalid activity", restoredXml, readXml);
+		Assert.assertEquals(created.getActivityNodeUuid(), read.getActivityNodeUuid());
+		Assert.assertEquals(created.getTitle(), read.getTitle());
+
+		//System.out.println("RESTORED: " + restored.toXmlString());
+		//System.out.println("READ: " + read.toXmlString());
 	}
 	
 }

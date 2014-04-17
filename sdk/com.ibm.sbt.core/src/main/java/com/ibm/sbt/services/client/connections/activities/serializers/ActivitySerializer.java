@@ -49,6 +49,7 @@ import static com.ibm.sbt.services.client.base.ConnectionsConstants.TERM;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.TEXT;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.TYPE;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.USERID;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.dateFormat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,9 +76,12 @@ import com.ibm.sbt.services.client.connections.common.Person;
  *
  */
 public class ActivitySerializer extends AtomEntitySerializer<Activity> {
+
+	NodeSerializer nodeSerializer;
 	
 	public ActivitySerializer(Activity activity) {
 		super(activity);
+		nodeSerializer = new NodeSerializer(activity);
 	}
 	
 	public String generateCreate() {
@@ -86,8 +90,6 @@ public class ActivitySerializer extends AtomEntitySerializer<Activity> {
 	
 	public String generateUpdate() {
 		Node entry = genericAtomEntry();
-		
-		appendChildren(entry, tags());
 
 		appendChildren(entry,
 				activityCategory(),
@@ -104,7 +106,8 @@ public class ActivitySerializer extends AtomEntitySerializer<Activity> {
 				assignedTo()
 		);
 
-		appendChildren(entry, fields());
+		appendChildren(entry, tags());
+		appendChildren(entry, nodeSerializer.fields());
 		
 		return serializeToString();
 	}
@@ -195,7 +198,7 @@ public class ActivitySerializer extends AtomEntitySerializer<Activity> {
 	}
 		
 	protected Element duedate() {
-		return textElement(SNX_DUEDATE, DateSerializer.toString(entity.getDuedate()));
+		return textElement(SNX_DUEDATE, DateSerializer.toString(dateFormat, entity.getDuedate()));
 	}
 	
 	protected Element inReplyTo() {

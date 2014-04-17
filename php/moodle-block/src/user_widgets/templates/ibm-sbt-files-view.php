@@ -1,23 +1,33 @@
-<script type="text/template" id="filesViewRow-***REMOVED*** echo $timestamp; ?>">
+<style>
+	.ibmsbtDialog {
+  		background:white;
+    	z-index:5000; 
+    	-moz-box-shadow: 1px 0px 10px rgba(0, 0, 0, 0.7); 
+    	-moz-border-radius: 6px; 
+    	-webkit-border-radius: 6px; 
+    	-webkit-box-shadow: 1px 0px 10px rgba(0, 0, 0, 0.7); 
+    	color: black;
+    	border-style: none;
+    }
+</style>
+
+<script type="text/template" id="filesViewRow***REMOVED*** echo $timestamp; ?>">
 <tr>
-	<td style="width:160px;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inline-block; padding-left: 10px;">
+	<td style="width:160px;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inline-block; padding-left: 5%;">
 			<span dojoAttachPoint="placeLinkNode">
 				<input type="checkbox" data-dojo-attach-point="rowSelectionInput" data-dojo-attach-event="onclick: handleCheckBox" />
 				<a href="javascript: void(0)" target="_self" title="${tooltip}" dojoAttachPoint="placeTitleLink" data-dojo-attach-event="onclick: handleClick">${title}</a>
 			</span>
-		<div>
-			<hr style="width:85%; margin: 0.7em 0; left: -30px; border: 0; height: 1px;"/>
-		</div>
 	</td>
 </tr>
 </script>
-<script type="text/template" id="pagingHeader-***REMOVED*** echo $timestamp; ?>">
+<script type="text/template" id="filesViewPagingHeader***REMOVED*** echo $timestamp; ?>">
 <div dojoAttachPoint="pagingHeader">
 	<div>
 		<hr style="width:90%; margin: 0.7em 0; left: -30px; border: 0; height: 1px;"/>
 	</div>
 	<span dojoAttachPoint="showingResultsMessage">${pagingResults}</span>
-			<span style="padding-left: 70px;">
+			<span style="padding-left: 40px;">
 				<a style="${hidePreviousLink};" title="${nls.previousPage}" href="javascript: void(0)" data-dojo-attach-event="onclick: prevPage">${nls.previous}</a>
 				<span style="${hidePreviousLabel}">${nls.previous}</span>
 			</span>
@@ -29,7 +39,7 @@
 		</div>
 </div>
 </script>
-<script type="text/template" id="pagingFooter-***REMOVED*** echo $timestamp; ?>">
+<script type="text/template" id="filesViewPagingFooter***REMOVED*** echo $timestamp; ?>">
 <div dojoattachpoint="pagingFooter" class="lotusPaging" style="">
 	<div>
 		<hr style="width:90%; margin: 0.7em 0; left: -30px; border: 0; height: 1px;"/>
@@ -55,13 +65,13 @@
 </div>
 </script>
 
-<script type="text/template" id="actionTemplate-***REMOVED*** echo $timestamp; ?>">
+<script type="text/template" id="filesViewActionTemplate***REMOVED*** echo $timestamp; ?>">
 <span id="${id}">
 <input type="button" value="${name}" class="btn" role="button" data-dojo-attach-point="actionNameNode"></input>
 </span>
 </script>
 
-<script type="text/template" id="moveToTrashTemplate-***REMOVED*** echo $timestamp; ?>">
+<script type="text/template" id="filesViewMoveToTrashTemplate***REMOVED*** echo $timestamp; ?>">
 <div>
 	<div dojoattachpoint="messageDiv">
 		${moveToTrashMessage} 
@@ -72,7 +82,7 @@
 </div>
 </script>
 
-<script type="text/template" id="uploadFileTemplate-***REMOVED*** echo $timestamp; ?>">
+<script type="text/template" id="filesViewUploadFileTemplate***REMOVED*** echo $timestamp; ?>">
 <div>
 	<form >
 	<table style="font-weight:700; margin:5px;">
@@ -130,7 +140,7 @@
 </div>
 </script>
 
-<script type="text/template" id="addTagsTemplate-***REMOVED*** echo $timestamp; ?>">
+<script type="text/template" id="filesViewAddTagsTemplate***REMOVED*** echo $timestamp; ?>">
 <div>	
 	<form class="form-inline">
 	<table cellpadding="0" class="table" role="presentation">
@@ -158,7 +168,7 @@
 </div>
 </script>
 
-<script type="text/template" id="shareFilesTemplate-***REMOVED*** echo $timestamp; ?>">
+<script type="text/template" id="filesViewShareFilesTemplate***REMOVED*** echo $timestamp; ?>">
 <div>
 	<table role="presentation" class="table">
 		<tbody>
@@ -255,8 +265,8 @@
 </div>
 </script>
 
-<script type="text/template" id="dialogTemplate-***REMOVED*** echo $timestamp; ?>">
-<div role="dialog" style="z-index:5000; -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6); -webkit-border-radius: 6px; -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6); background:#CCC4C4; -moz-border-radius: 5px; color: black;" >
+<script type="text/template" id="filesViewDialogTemplate***REMOVED*** echo $timestamp; ?>">
+<div role="dialog" class="ibmsbtDialog">
 	<div dojoattachpoint="titleBar" style="display: none;">
 		<span dojoattachpoint="titleNode"></span> 
 		<span title="Cancel" dojoattachevent="onclick: onCancel" class="dijitDialogCloseIcon" dojoattachpoint="closeButtonNode"></span>
@@ -282,10 +292,10 @@
 </div>
 </script>
 
-<script type="text/template" id="viewTemplate-***REMOVED*** echo $timestamp; ?>">
+<script type="text/template" id="filesViewViewTemplate***REMOVED*** echo $timestamp; ?>">
 <div dojoAttachPoint="domNode">
 	<div dojoAttachPoint="mainNode">
-		<div role="alert" class="alert alert-success" style="z-index:5000; -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6); -webkit-border-radius: 6px; -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6); background:#CCC4C4; -moz-border-radius: 5px; color: black; display: none;" dojoattachpoint="messageNode">
+		<div role="alert" style="display: none; padding-top: 3em;" class="alert alert-success ibmsbtDialog" dojoattachpoint="messageNode">
 			<span class="alert alert-success" dojoattachpoint="messageBody"></span>
 			&nbsp;<a dojoattachevent="onclick: hideMessage" title="${nls.root.messageClose}" dojoattachpoint="messageClose" role="button"  href="javascript:;">Close</a>
 		</div>	

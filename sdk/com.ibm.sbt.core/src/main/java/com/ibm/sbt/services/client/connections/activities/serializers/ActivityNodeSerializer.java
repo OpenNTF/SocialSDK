@@ -40,20 +40,15 @@ import com.ibm.sbt.services.client.connections.activities.ActivityNode;
  */
 public class ActivityNodeSerializer extends AtomEntitySerializer<ActivityNode> {
 
+	private NodeSerializer nodeSerializer;
+
 	public ActivityNodeSerializer(ActivityNode activityNode) {
 		super(activityNode);
+		nodeSerializer = new NodeSerializer(activityNode);
 	}
 	
 	public String generateCreate() {
-		Node entry = entry();
-		
-		appendChildren(entry,
-				title(),
-				activityNodeCategory(),
-				activityUuid()
-		);
-		
-		return serializeToString();
+		return generateUpdate();
 	}
 	
 	public String generateUpdate() {
@@ -64,6 +59,9 @@ public class ActivityNodeSerializer extends AtomEntitySerializer<ActivityNode> {
 				activityNodeCategory(),
 				activityUuid()
 		);
+		
+		appendChildren(entry, tags());
+		appendChildren(entry, nodeSerializer.fields());
 		
 		return serializeToString();
 	}

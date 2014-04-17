@@ -16,6 +16,8 @@
 
 package com.ibm.sbt.services.client.base;
 
+import java.text.SimpleDateFormat;
+
 import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.NamespaceContextImpl;
 
@@ -108,6 +110,8 @@ public final class ConnectionsConstants {
 	public static final String COMMUNITYUUID = "communityUuid";
 	public static final String PERMISSIONS = "permissions";
 	public static final String PAGE = "page";
+
+	public static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 
 	/**
 	 * Enum containing the namespaces and prefixes used in ATOM construction (payloads) and parsing (xpath)

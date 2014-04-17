@@ -49,12 +49,15 @@ public abstract class OptionsBean {
 	private boolean explorerEnabled;
 	private boolean apiDocumentationEnabled;
 	private boolean apacheLicense;
+	private boolean dwLookFeel;
 	private String environments;
 	
 	private String banner;
 	private String applicationTitle;
 	private String applicationLogo;
 	
+	private String gaTrackingId;
+	private String gaDomain;
 	
 	public OptionsBean() {
 		loadOptions();
@@ -123,6 +126,13 @@ public abstract class OptionsBean {
 		this.apacheLicense=apacheLicense;
 	}
 
+	public boolean isDwLookFeel() {
+		return dwLookFeel;
+	}
+	public void setDwLookFeel(boolean dwLookFeel) {
+		this.dwLookFeel=dwLookFeel;
+	}
+
 	public String getEnvironments() {
 		return environments;
 	}
@@ -164,6 +174,24 @@ public abstract class OptionsBean {
 		this.apiDocumentationEnabled=apiDocumentationEnabled;
 	}
 
+
+	public String getGaTrackingId() {
+		return gaTrackingId;
+	}
+	public void setGaTrackingId(String gaTrackingId) {
+		this.gaTrackingId=gaTrackingId;
+	}
+	public String getGaDomain() {
+		return gaDomain;
+	}
+	public void setGaDomain(String gaDomain) {
+		this.gaDomain=gaDomain;
+	}
+	
+	public boolean isGoogleAnalytics() {
+		return StringUtil.isNotEmpty(gaTrackingId) && StringUtil.isNotEmpty(gaDomain);
+	}
+		
 	
 	//
 	//
@@ -209,13 +237,17 @@ public abstract class OptionsBean {
 			this.gadgetSnippetsEnabled = getEnvironmentBoolean(doc,"GadgetSnippets");
 			this.explorerEnabled = getEnvironmentBoolean(doc,"APIExplorer");
 			this.apacheLicense = getEnvironmentBoolean(doc,"ApacheLicense");
+			this.dwLookFeel = getEnvironmentBoolean(doc,"DwLookFeel");
 			this.environments = getEnvironmentString(doc,"Environments");
 			
 			this.apiDocumentationEnabled = getEnvironmentBoolean(doc,"APIDocumentation");
 	
 			this.banner = getEnvironmentString(doc,"Banner");
-			this.applicationTitle = getEnvironmentString(doc,"AppTitle","IBM Social Business Toolkit");
+			this.applicationTitle = getEnvironmentString(doc,"AppTitle","Social Business Toolkit");
 			this.applicationLogo = getEnvironmentString(doc,"AppLogo");
+
+			this.gaTrackingId = getEnvironmentString(doc,"GATrackingId");
+			this.gaDomain = getEnvironmentString(doc,"GADomain");
 		} finally {
 			try {
 				if(doc!=null) {

@@ -16,6 +16,23 @@
 
 package com.ibm.sbt.services.client.base.serializers;
 
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.AUTHOR;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.CATEGORY;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.CONTENT;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.CONTRIBUTOR;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.ENTRY;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.ID;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.LABEL;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.PUBLISHED;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.SCHEME;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.SUMMARY;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.TERM;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.TEXT;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.TITLE;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.TYPE;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.UPDATED;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.dateFormat;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +40,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 import com.ibm.sbt.services.client.base.AtomEntity;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.*;
+import com.ibm.sbt.services.client.base.ConnectionsConstants.Namespace;
 
 /**
  * @author Mario Duarte
@@ -31,7 +48,6 @@ import static com.ibm.sbt.services.client.base.ConnectionsConstants.*;
  *
  */
 public class AtomEntitySerializer<T extends AtomEntity> extends BaseEntitySerializer<T> {
-
 
 	public AtomEntitySerializer(T entity) {
 		super(entity);
@@ -65,11 +81,11 @@ public class AtomEntitySerializer<T extends AtomEntity> extends BaseEntitySerial
 	}
 	
 	protected Element published() {
-		return textElement(PUBLISHED, DateSerializer.toString(entity.getPublished()));
+		return textElement(PUBLISHED, DateSerializer.toString(dateFormat, entity.getPublished()));
 	}
 	
 	protected Element updated() {
-		return textElement(UPDATED, DateSerializer.toString(entity.getUpdated()));
+		return textElement(UPDATED, DateSerializer.toString(dateFormat, entity.getUpdated()));
 	}
 	
 	protected Element summary() {

@@ -44,6 +44,15 @@ public class Activity extends ActivityNode {
 	}
 
 	/**
+	 * Construct Activity associated with the specified service
+	 * 
+	 * @param service
+	 */
+	public Activity(ActivityService service) {
+		setService(service);
+	}
+
+	/**
 	 * Construct Activity based on the specified node
 	 * 
 	 * @param service
@@ -337,7 +346,7 @@ public class Activity extends ActivityNode {
 	 * @throws ClientServicesException 
 	 */
 	public EntityList<ActivityNode> getDescendants() throws ClientServicesException {
-		ActivityService service = (ActivityService)getService();
+		ActivityService service = getActivityService();
 		return service.getActivityNodeDescendants(this.getActivityUuid());
 	}
 
@@ -354,41 +363,46 @@ public class Activity extends ActivityNode {
 	 * @throws {@link NullPointerException} If there is no service associated with this Activity
 	 */
 	public void delete() throws ClientServicesException {
-		ActivityService service = (ActivityService)getService();
+		ActivityService service = getActivityService();
 		service.deleteActivity(this);
 	}
 	
-	//------------------------------------------------------------------------------------------------------------------
-	// Working with activity fields programmatically.
-	//------------------------------------------------------------------------------------------------------------------
-	
-	public Field[] getFields() {
-		return null;
+	/**
+	 * @see ActivityService.updateActivity  
+	 * 
+	 * @return
+	 * @throws ClientServicesException 
+	 * @throws {@link NullPointerException} If there is no service associated with this Activity
+	 */
+	public void update() throws ClientServicesException {
+		ActivityService service = getActivityService();
+		service.updateActivity(this);
 	}
 	
 	public Field getField(String fid) {
 		return null;
 	}
 	
-	public Field addField(Field field) {
-		return field;
-	}
-	
-	public Field updateField(Field field) {
-		return field;
-	}
-	
-	public String deleteField(Field field) {
-		return deleteField(field.getFid());
-	}
-	
-	public String deleteField(String fid) {
-		return fid;
-	}
-	
 	//------------------------------------------------------------------------------------------------------------------
 	// Working with activity members programmatically.
 	//------------------------------------------------------------------------------------------------------------------
+	
+	/**
+	 * Add an activity member.
+	 * 
+	 * @param member
+	 * @param role
+	 * @param type
+	 * @return
+	 */
+	public Member addMember(String type, String memberId, String role) throws ClientServicesException {
+		Member member = new Member();
+		member.setComponent(Member.COMPONENT_ACTIVITIES);
+		member.setContributor(memberId);
+		member.setRole(role);
+		member.setType(type);
+		return addMember(member);
+	}
 	
 	/**
 	 * Add an activity member.

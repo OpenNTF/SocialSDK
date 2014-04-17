@@ -42,6 +42,11 @@ add_action('widgets_init', function() {
 add_action('widgets_init', function() {
 	register_widget('SBTFilesViewWidget');
 });
+
+// Register communities files widget
+add_action('widgets_init', function() {
+	register_widget('SBTCommunityFilesWidget');
+});
 	
 
 add_action('widgets_init', function() {

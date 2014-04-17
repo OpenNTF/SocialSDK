@@ -21,8 +21,14 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.logging.Logger;
 
+import org.w3c.dom.Node;
+
+import com.ibm.commons.xml.NamespaceContext;
+import com.ibm.commons.xml.xpath.XPathExpression;
+import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.AtomEntity;
 import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.connections.profiles.model.ProfileXPath;
 
@@ -48,22 +54,52 @@ public class Profile extends AtomEntity {
 
 	public Profile(){}
 
+	/**
+	 * 
+	 * @param svc
+	 * @param handler
+	 */
 	public Profile(BaseService svc, XmlDataHandler handler) {
 		super(svc,handler);
 	}
 	
-    public Profile load() throws ProfileServiceException
-    {
+	/**
+	 * 
+	 * @return
+	 * @throws ProfileServiceException
+	 * @throws ClientServicesException 
+	 */
+    public Profile load() throws ProfileServiceException, ClientServicesException {
     	return getService().getProfile(getUserid());
     }
     
-    public void update() throws ProfileServiceException
-    {
+    /**
+     * 
+     * @param service
+     * @param node
+     * @param namespaceCtx
+     * @param xpathExpression
+     */
+	public Profile(BaseService service, Node node, NamespaceContext namespaceCtx, 
+			XPathExpression xpathExpression) {
+		super(service, node, namespaceCtx, xpathExpression);
+	}
+
+	/**
+	 * 
+	 * @throws ProfileServiceException
+	 */
+    public void update() throws ProfileServiceException {
     	getService().updateProfile(this);
     }
     
-    public ProfileList getColleagues() throws ProfileServiceException
-    {
+    /**
+     * 
+     * @return
+     * @throws ProfileServiceException
+     * @throws ClientServicesException 
+     */
+    public EntityList<Profile> getColleagues() throws ProfileServiceException, ClientServicesException {
     	return getService().getColleagues(getUserid());
     }
     
@@ -79,6 +115,10 @@ public class Profile extends AtomEntity {
 		return getService().getExtendedAttributes(this);
 	}
  
+	/**
+	 * 
+	 * @return
+	 */
     public String getUserid() {
     	return getAsString(ProfileXPath.uid);
     }

@@ -30,6 +30,7 @@ import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientService.Handler;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
+import com.ibm.sbt.services.client.base.CommonConstants.HTTPCode;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
@@ -443,6 +444,10 @@ public abstract class BaseService implements Serializable {
 
        return result;
    }
+   
+   protected boolean checkResponseCode(Response response, HTTPCode code){
+	   return code.checkCode(response.getResponse().getStatusLine().getStatusCode());
+   }
 	
 	/**
 	 * findInCache()
@@ -482,6 +487,18 @@ public abstract class BaseService implements Serializable {
 		// Limit the cache size as per options
 		// to check if cache is full , remove if full using LRU algorithm
 		cache.put(key, content);
+	}
+
+	
+	/**
+	 * Returns a valid parameters HashMap even if null is passed
+	 * 
+	 * @param parameters
+	 * @return
+	 */
+	protected Map<String, String> getParameters(Map<String, String> parameters) {
+		if(parameters == null) return new HashMap<String, String>();
+		else return parameters;
 	}
 	
 	/**

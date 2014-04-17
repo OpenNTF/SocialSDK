@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * Â© Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,8 @@
  */
 package com.ibm.sbt.services.client.connections.activities;
 
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +29,6 @@ import org.w3c.dom.Node;
 import com.ibm.commons.xml.XMLException;
 import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.base.AtomXPath;
-import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.ConnectionsFeedXpath;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.connections.common.Person;
@@ -42,7 +43,7 @@ public class ActivityTest extends BaseActivityServiceTest {
 	public void testActivity() throws XMLException, IOException {
 		Node node = readXml("activity1.xml");
 		XPathExpression xpath = (XPathExpression)AtomXPath.singleEntry.getPath();
-		Activity activity = new Activity(activityService, node, ConnectionsConstants.nameSpaceCtx, xpath);
+		Activity activity = new Activity(activityService, node, nameSpaceCtx, xpath);
 		
 		Assert.assertEquals("5f89a416-68e5-4666-af8e-72150bf50e22", activity.getActivityUuid());
 		Assert.assertEquals("com.ibm.sbt.services.client.connections.activities.ActivityServiceCrudrTest#1615749198 Community - 1396026691896", activity.getTitle());
@@ -60,7 +61,7 @@ public class ActivityTest extends BaseActivityServiceTest {
 	public void testActivityEntry() throws XMLException, IOException {
 		Node node = readXml("activity1.xml");
 		XPathExpression xpath = (XPathExpression)AtomXPath.singleEntry.getPath();
-		Activity activity = new Activity(activityService, node, ConnectionsConstants.nameSpaceCtx, xpath);
+		Activity activity = new Activity(activityService, node, nameSpaceCtx, xpath);
 	
 		String entryData = activity.createEntryData();
 		Assert.assertNotNull(entryData);
@@ -70,12 +71,12 @@ public class ActivityTest extends BaseActivityServiceTest {
 	public void testActivityFeed() throws XMLException, IOException {
 		Node doc = readXml("activities.xml");
 		
-		XmlDataHandler dataHandler = new XmlDataHandler(doc, ConnectionsConstants.nameSpaceCtx);
+		XmlDataHandler dataHandler = new XmlDataHandler(doc, nameSpaceCtx);
 		List<Node> nodeEntries = dataHandler.getEntries(ConnectionsFeedXpath.Entry);
 		List<Activity> activities = new ArrayList<Activity>();
 		for (Node node : nodeEntries) {
 			XPathExpression xpath = (node instanceof Document) ? (XPathExpression)AtomXPath.singleEntry.getPath() : null;
-			activities.add(new Activity(activityService, node, ConnectionsConstants.nameSpaceCtx, xpath));
+			activities.add(new Activity(activityService, node, nameSpaceCtx, xpath));
 		}
 
 		for (Activity activity : activities) {

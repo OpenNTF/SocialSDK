@@ -61,7 +61,7 @@ class SBTBaseWidget extends WP_Widget {
 		
 		if (!$this->_isUserLoggedIn()) {
 			
-			echo '<div class="widget-area"><aside class="widget widget_recent_entries"><h3 class="widget-title">' . $this->widget_name . '</h3>';
+			echo '<div class="widget-area" style="width: 100%;"><aside class="widget widget_recent_entries"><h3 class="widget-title">' . $this->widget_name . '</h3>';
 			echo '' . $GLOBALS[LANG]['must_login'] . '</aside></div>';
 			return;
 		}

@@ -197,7 +197,7 @@ public class FollowService extends BaseService{
 	}
 	
 	private IFeedHandler<FollowedResource> getFollowFeedHandler() {
-		return new AtomFeedHandler<FollowedResource>(this) {
+		return new AtomFeedHandler<FollowedResource>(this, false) {
 			@Override
 			protected FollowedResource entityInstance(BaseService service, Node node, XPathExpression xpath) {
 				return new FollowedResource(service, node, nameSpaceCtx, xpath);

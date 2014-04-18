@@ -31,17 +31,19 @@ function ibm_sbtk_header($args = array()) {
 	$settings = new SBTSettings();
 	$store = SBTCredentialStore::getInstance();
 
-	if (($settings->getAuthenticationMethod() == 'oauth1' || $settings->getAuthenticationMethod() == 'oauth2') && $store->getOAuthAccessToken() == null &&
-	(!isset($_COOKIE['IBMSBTKOAuthLogin']) || $_COOKIE['IBMSBTKOAuthLogin'] != 'yes')) {
-		return;
-	}
-	
 	$endpoints = $settings->getEndpoints();
-
+	
 	if ($endpoints == null || empty($endpoints)) {
 		return;
 	}
-
+	
+	foreach($endpoints as $endpoint) {
+		if (($settings->getAuthenticationMethod($endpoint['name']) == 'oauth1' 
+				|| $settings->getAuthenticationMethod($endpoint['name']) == 'oauth2') 
+				&& $store->getOAuthAccessToken($endpoint['name']) == null && (!isset($_COOKIE['IBMSBTKOAuthLogin']) || $_COOKIE['IBMSBTKOAuthLogin'] != 'yes')) {
+			return;
+		}
+	}
 	$plugin = new SBTPlugin($endpoints[0]['name']);		
 	$plugin->createHeader();
 }

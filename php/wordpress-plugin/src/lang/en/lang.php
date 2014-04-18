@@ -96,3 +96,4 @@ $lang['no_access_granted']		= 'You have not yet granted access for this applicat
 $lang['checking_if_access_granted'] = 'Checking if you have granted access for this application to use your IBM account.';
 $lang['logout_from_endpoint']	= 'Logout from Endpoint';
 $lang['endpoint']				= 'Endpoint';
+$lang['must_login']				= 'This widget uses single-sign on. Please log into Wordpress.';

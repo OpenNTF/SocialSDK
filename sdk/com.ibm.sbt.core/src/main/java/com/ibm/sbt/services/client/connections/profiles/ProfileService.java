@@ -76,9 +76,7 @@ import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.CommonConstants.HTTPCode;
 import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.NamedUrlPart;
-import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.base.datahandlers.JsonDataHandler;
-import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.profiles.model.ProfileXPath;
 import com.ibm.sbt.services.client.connections.profiles.serializers.ColleagueConnectionSerializer;
 import com.ibm.sbt.services.client.connections.profiles.serializers.ProfileSerializer;
@@ -180,6 +178,11 @@ public class ProfileService extends BaseService {
 			protected Profile entityInstance(BaseService service, Node node, XPathExpression xpath) {
 				return new Profile(service, node, nameSpaceCtx, xpath);
 			}
+
+			@Override
+			public ProfileList createEntityList(Response requestData) {
+				return new ProfileList((Response)requestData, this);
+			}
 		};
 	}
 
@@ -192,6 +195,11 @@ public class ProfileService extends BaseService {
 			@Override
 			protected ColleagueConnection entityInstance(BaseService service, Node node, XPathExpression xpath) {
 				return new ColleagueConnection(service, node, nameSpaceCtx, xpath);
+			}
+
+			@Override
+			public ColleagueConnectionList createEntityList(Response requestData) {
+				return new ColleagueConnectionList((Response)requestData, this);
 			}
 		};
 	}
@@ -206,6 +214,11 @@ public class ProfileService extends BaseService {
 			protected Tag entityInstance(BaseService service, Node node, XPathExpression xpath) {
 				return new Tag(service, node, nameSpaceCtx, xpath);
 			}
+
+			@Override
+			public TagList createEntityList(Response requestData) {
+				return new TagList((Response)requestData, this);
+			}
 		};
 	}
 	
@@ -218,7 +231,7 @@ public class ProfileService extends BaseService {
 	 * @throws ProfileServiceException
 	 * @throws ClientServicesException 
 	 */
-	public Profile getProfile(String id) throws ProfileServiceException, ClientServicesException{
+	public Profile getProfile(String id) throws ProfileServiceException {
 		return getProfile(id, null);
 	}
 
@@ -232,7 +245,7 @@ public class ProfileService extends BaseService {
 	 * @throws ProfileServiceException
 	 * @throws ClientServicesException 
 	 */
-	public Profile getProfile(String id, Map<String, String> parameters) throws ProfileServiceException, ClientServicesException{
+	public Profile getProfile(String id, Map<String, String> parameters) throws ProfileServiceException {
 		// TODO: Do a cache lookup first. If cache miss, make a network call to get profile
 
 		if (StringUtil.isEmpty(id)){
@@ -255,7 +268,7 @@ public class ProfileService extends BaseService {
 	 * @return list of searched Profiles
 	 * @throws ClientServicesException 
 	 */
-	public EntityList<Profile> searchProfiles( Map<String, String> parameters) throws ClientServicesException {
+	public ProfileList searchProfiles( Map<String, String> parameters) throws ProfileServiceException {
 		if (null == parameters) {
 			parameters = new HashMap<String, String>();
 		}
@@ -272,7 +285,7 @@ public class ProfileService extends BaseService {
 	 * @throws ProfileServiceException
 	 * @throws ClientServicesException 
 	 */
-	public EntityList<Tag> getTags(String id) throws ProfileServiceException, ClientServicesException{
+	public TagList getTags(String id) throws ProfileServiceException {
 		return getTags(id,null);
 	}
 
@@ -287,8 +300,7 @@ public class ProfileService extends BaseService {
 	 * @throws ProfileServiceException
 	 * @throws ClientServicesException 
 	 */
-	public EntityList<Tag> getTags(String id, Map<String, String> parameters)
-	throws ProfileServiceException, ClientServicesException{
+	public TagList getTags(String id, Map<String, String> parameters) throws ProfileServiceException {
 	
 	  if (StringUtil.isEmpty(id)){
 	    throw new ProfileServiceException(null, Messages.InvalidArgument_1);
@@ -355,7 +367,7 @@ public class ProfileService extends BaseService {
 	 * @throws ProfileServiceException
 	 * @throws ClientServicesException 
 	 */
-	public EntityList<Profile> getColleagues(String id) throws ProfileServiceException, ClientServicesException{
+	public ProfileList getColleagues(String id) throws ProfileServiceException {
 		return getColleagues(id,null);
 	}
 
@@ -370,7 +382,7 @@ public class ProfileService extends BaseService {
 	 * @throws ClientServicesException 
 	 * @throws ProfileServiceException
 	 */
-	public EntityList<Profile> getColleagues(String id, Map<String, String> parameters) throws ClientServicesException, ProfileServiceException {
+	public ProfileList getColleagues(String id, Map<String, String> parameters) throws ProfileServiceException {
 		if (StringUtil.isEmpty(id)){
 			throw new ProfileServiceException(null, Messages.InvalidArgument_1);
 		}
@@ -394,7 +406,7 @@ public class ProfileService extends BaseService {
 	 * @throws ProfileServiceException
 	 * @throws ClientServicesException 
 	 */
-	public EntityList<ColleagueConnection> getColleagueConnections(String id) throws ProfileServiceException, ClientServicesException{
+	public ColleagueConnectionList getColleagueConnections(String id) throws ProfileServiceException {
 		return getColleagueConnections(id,null);
 	}
 
@@ -409,8 +421,7 @@ public class ProfileService extends BaseService {
 	 * @throws ProfileServiceException
 	 * @throws ClientServicesException 
 	 */
-	public EntityList<ColleagueConnection> getColleagueConnections(String id, Map<String, String> parameters)
-	throws ProfileServiceException, ClientServicesException{
+	public ColleagueConnectionList getColleagueConnections(String id, Map<String, String> parameters) throws ProfileServiceException {
 		if (StringUtil.isEmpty(id)){
 			throw new ProfileServiceException(null, Messages.InvalidArgument_1);
 		}
@@ -436,7 +447,7 @@ public class ProfileService extends BaseService {
 	 * @throws ProfileServiceException
 	 * @throws ClientServicesException 
 	 */
-	public ColleagueConnection checkColleague(String sourceId, String targetId) throws ProfileServiceException, ClientServicesException{
+	public ColleagueConnection checkColleague(String sourceId, String targetId) throws ProfileServiceException {
 		return checkColleague(sourceId, targetId, null);
 	}
 	/**
@@ -452,7 +463,7 @@ public class ProfileService extends BaseService {
 	 * @throws ProfileServiceException
 	 * @throws ClientServicesException 
 	 */
-	public ColleagueConnection checkColleague(String sourceId, String targetId, Map<String, String> parameters) throws ProfileServiceException, ClientServicesException{
+	public ColleagueConnection checkColleague(String sourceId, String targetId, Map<String, String> parameters) throws ProfileServiceException {
 
 		if (StringUtil.isEmpty(sourceId)) {
 			throw new ProfileServiceException(null, Messages.InvalidArgument_4);
@@ -490,7 +501,7 @@ public class ProfileService extends BaseService {
 	 * @throws ProfileServiceException
 	 * @throws ClientServicesException 
 	 */
-	public EntityList<Profile> getCommonColleagues(String sourceId, String targetId) throws ProfileServiceException, ClientServicesException{
+	public ProfileList getCommonColleagues(String sourceId, String targetId) throws ProfileServiceException {
 		return getCommonColleagues(sourceId, targetId, null);
 	}
 
@@ -505,7 +516,7 @@ public class ProfileService extends BaseService {
 	 * @throws ProfileServiceException
 	 * @throws ClientServicesException 
 	 */
-	public EntityList<Profile> getCommonColleagues(String sourceId, String targetId,  Map<String, String> parameters) throws ProfileServiceException, ClientServicesException{
+	public ProfileList getCommonColleagues(String sourceId, String targetId,  Map<String, String> parameters) throws ProfileServiceException {
 
 		if (StringUtil.isEmpty(sourceId)) {
 			throw new ProfileServiceException(null, Messages.InvalidArgument_4);
@@ -544,7 +555,7 @@ public class ProfileService extends BaseService {
 	 * @throws ProfileServiceException
 	 * @throws ClientServicesException 
 	 */
-	public EntityList<ColleagueConnection> getCommonColleagueConnections(String sourceId, String targetId) throws ProfileServiceException, ClientServicesException{
+	public ColleagueConnectionList getCommonColleagueConnections(String sourceId, String targetId) throws ProfileServiceException {
 		return getCommonColleagueConnections(sourceId, targetId, null);
 	}
 
@@ -559,7 +570,7 @@ public class ProfileService extends BaseService {
 	 * @throws ProfileServiceException
 	 * @throws ClientServicesException 
 	 */
-	public EntityList<ColleagueConnection> getCommonColleagueConnections(String sourceId, String targetId,  Map<String, String> parameters) throws ProfileServiceException, ClientServicesException{
+	public ColleagueConnectionList getCommonColleagueConnections(String sourceId, String targetId,  Map<String, String> parameters) throws ProfileServiceException {
 
 		if (StringUtil.isEmpty(sourceId)) {
 			throw new ProfileServiceException(null, Messages.InvalidArgument_4);
@@ -596,7 +607,7 @@ public class ProfileService extends BaseService {
 	 * @throws ProfileServiceException
 	 * @throws ClientServicesException 
 	 */
-	public EntityList<Profile> getReportingChain(String id) throws ProfileServiceException, ClientServicesException{
+	public ProfileList getReportingChain(String id) throws ProfileServiceException {
 		return getReportingChain(id,null);
 	}
 
@@ -611,7 +622,7 @@ public class ProfileService extends BaseService {
 	 * @throws ProfileServiceException	
 	 * @throws ClientServicesException 
 	 */
-	public EntityList<Profile> getReportingChain (String id, Map<String, String> parameters)throws ProfileServiceException, ClientServicesException{
+	public ProfileList getReportingChain (String id, Map<String, String> parameters)throws ProfileServiceException {
 
 		if (StringUtil.isEmpty(id)) {
 			throw new ProfileServiceException(null, Messages.InvalidArgument_1);
@@ -632,7 +643,7 @@ public class ProfileService extends BaseService {
 	 * @throws ProfileServiceException
 	 * @throws ClientServicesException 
 	 */
-	public EntityList<Profile> getPeopleManaged(String id) throws ProfileServiceException, ClientServicesException{
+	public ProfileList getPeopleManaged(String id) throws ProfileServiceException {
 		return getPeopleManaged(id,null);
 	}
 
@@ -648,7 +659,7 @@ public class ProfileService extends BaseService {
 	 * @throws ClientServicesException 
 	 * 
 	 */
-	public EntityList<Profile> getPeopleManaged(String id, Map<String, String> parameters)throws ProfileServiceException, ClientServicesException{
+	public ProfileList getPeopleManaged(String id, Map<String, String> parameters)throws ProfileServiceException {
 
 		if (StringUtil.isEmpty(id)) {
 			throw new ProfileServiceException(null, Messages.InvalidArgument_1);
@@ -686,7 +697,7 @@ public class ProfileService extends BaseService {
 	 * @return Id of the Connection
 	 * @throws ProfileServiceException
 	 */
-	public String sendInvite(String id, String inviteMsg)throws ProfileServiceException{
+	public String sendInvite(String id, String inviteMsg)throws ProfileServiceException {
 		if (StringUtil.isEmpty(id)) {
 			throw new ProfileServiceException(null, Messages.InvalidArgument_1);
 		}
@@ -701,8 +712,6 @@ public class ProfileService extends BaseService {
 			return extractConnectionIdFromHeaders(response);
 		} catch (ClientServicesException e) {
 			throw new ProfileServiceException(e, Messages.SendInviteException, id);
-		} catch (TransformerException e) {
-			throw new ProfileServiceException(e, Messages.SendInvitePayloadException);
 		} catch (IOException e) {
 			throw new ProfileServiceException(e, Messages.SendInviteException, id);
 		}
@@ -730,8 +739,6 @@ public class ProfileService extends BaseService {
 			super.updateData(url, parameters,payload, connection.getConnectionId());
 		} catch (ClientServicesException e) {
 			throw new ProfileServiceException(e, Messages.AcceptInviteException, connection.getConnectionId());
-		} catch (TransformerException e) {
-			throw new ProfileServiceException(e, Messages.AcceptInvitePayloadException);
 		} catch (IOException e) {
 			throw new ProfileServiceException(e, Messages.AcceptInviteException, connection.getConnectionId());
 		}
@@ -769,7 +776,6 @@ public class ProfileService extends BaseService {
 	 * @throws ProfileServiceException
 	 */
 	public void updateProfile(Profile profile) throws ProfileServiceException{
-
 		if (profile == null) {
 			throw new ProfileServiceException(null, Messages.InvalidArgument_3);
 		}
@@ -779,12 +785,7 @@ public class ProfileService extends BaseService {
 			parameters.put(FORMAT, FULL);
 			String id = profile.getUserid();
 			parameters.put(getIdParameter(id), id);
-			Object updateProfilePayload;
-			try {
-				updateProfilePayload = constructUpdateRequestBody(profile);
-			} catch (TransformerException e) {
-				throw new ProfileServiceException(e);
-			}
+			Object updateProfilePayload = constructUpdateRequestBody(profile);
 			String updateUrl = ProfileUrls.PROFILE_ENTRY.format(this);
 			super.updateData(updateUrl, parameters,updateProfilePayload, getIdParameter(profile.getAsString("uid")));
 			profile.clearFieldsMap();
@@ -824,7 +825,7 @@ public class ProfileService extends BaseService {
 	 * @throws ProfileServiceException
 	 * @throws ClientServicesException
 	 */
-	public Profile getMyProfile() throws ProfileServiceException, ClientServicesException{
+	public Profile getMyProfile() throws ProfileServiceException {
 		return getProfile(getMyUserId(), null);
 	}
 	
@@ -836,7 +837,7 @@ public class ProfileService extends BaseService {
 	 * @param userid
 	 * @throws ProfileServiceException
 	 */
-	public void updateProfilePhoto(File file, String userId) throws ProfileServiceException{
+	public void updateProfilePhoto(File file, String userId) throws ProfileServiceException {
         if (file == null || !file.canRead()) {
             throw new ProfileServiceException(null, Messages.MessageCannotReadFile,
                     file.getAbsolutePath());
@@ -876,7 +877,7 @@ public class ProfileService extends BaseService {
 	 * the map can contain object of type InputStream, Node, String, according to the return content type
 	 * @throws ProfileServiceException
 	 */
-	public Map<String,Object> getExtendedAttributes(Profile p) throws ProfileServiceException{
+	public Map<String,Object> getExtendedAttributes(Profile p) throws ProfileServiceException {
 		Map<String, Object> ret = new HashMap<String, Object>();
  		List<Node> attributes = (List<Node>) p.getDataHandler().getEntries(ProfileXPath.extendedAttributes);
 		for (Node link :attributes) {
@@ -908,11 +909,7 @@ public class ProfileService extends BaseService {
 	 * This method is used by ProfileService wrapper methods to construct request body for Add operations
 	 * @return Object
 	 */
-	protected Object constructCreateRequestBody(Profile profile) throws TransformerException {
-		/*
-		ProfileTransformer transformer = new ProfileTransformer(profile);
-		String xml2 = transformer.createTransform(profile.getFieldsMap());
-		 */
+	protected Object constructCreateRequestBody(Profile profile) {
 		ProfileSerializer serializer = new ProfileSerializer(profile);
 		return serializer.createPayload();
 	}
@@ -921,12 +918,7 @@ public class ProfileService extends BaseService {
 	 * This method is used by ProfileService wrapper methods to construct request body for Update operations
 	 * @return Object
 	 */
-	protected Object constructUpdateRequestBody(Profile profile) throws TransformerException {
-		/*
-		ProfileTransformer transformer = new ProfileTransformer(profile);
-		String xml = transformer.updateTransform(profile.getFieldsMap());
-		return xml;	
-		*/
+	protected Object constructUpdateRequestBody(Profile profile) {
 		ProfileSerializer serializer = new ProfileSerializer(profile);
 		return serializer.updatePayload();
 	}
@@ -935,15 +927,7 @@ public class ProfileService extends BaseService {
 	 * This method is used by ProfileService wrapper methods to construct request body for Add operations
 	 * @return Object
 	 */
-	protected Object constructAcceptInviteRequestBody(ColleagueConnection connectionEntry, String action) throws TransformerException {
-		/*
-		ColleagueConnectionTransformer transformer = new ColleagueConnectionTransformer(connectionEntry);
-		String xml = "";
-		if(!StringUtil.isEmpty(action)){
-			xml = transformer.updateTransform(action, connectionEntry.getFieldsMap());
-		}
-		return xml;	
-		*/
+	protected Object constructAcceptInviteRequestBody(ColleagueConnection connectionEntry, String action) {
 		ColleagueConnectionSerializer serializer = new ColleagueConnectionSerializer(connectionEntry);
 		return serializer.acceptInvitePayload();
 	}
@@ -953,14 +937,7 @@ public class ProfileService extends BaseService {
 	 * @return Object
 	 * @throws ProfileServiceException 
 	 */
-	protected Object constructSendInviteRequestBody(String inviteMsg) throws TransformerException, ProfileServiceException {
-		/*
-		ColleagueConnection colleagueConnection = new ColleagueConnection(this, null);
-		colleagueConnection.setContent(inviteMsg);
-		ColleagueConnectionTransformer transformer = new ColleagueConnectionTransformer(colleagueConnection);
-		String xml = transformer.createTransform(colleagueConnection.getFieldsMap());
-		return xml;	
-		*/
+	protected Object constructSendInviteRequestBody(String inviteMsg) throws ProfileServiceException {
 		ColleagueConnection colleagueConnection = new ColleagueConnection(this, null);
 		colleagueConnection.setContent(inviteMsg);
 		ColleagueConnectionSerializer serializer = new ColleagueConnectionSerializer(colleagueConnection);
@@ -977,43 +954,53 @@ public class ProfileService extends BaseService {
 		return urlLocation.substring(urlLocation.indexOf(CONNECTION_UNIQUE_IDENTIFIER+EQUALS) + (CONNECTION_UNIQUE_IDENTIFIER+EQUALS).length());
 	}
 	
-	protected Profile getProfileEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
+	protected Profile getProfileEntity(String requestUrl, Map<String, String> parameters) throws ProfileServiceException {
 		try {
 			return (Profile)getEntity(requestUrl, parameters, getProfileFeedHandler());
 		} catch (IOException e) {
-			throw new ClientServicesException(e);
+			throw new ProfileServiceException(e);
+		} catch(ClientServicesException e){
+			throw new ProfileServiceException(e);
 		}
 	}
 
-	protected ColleagueConnection getColleagueConnectionEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
+	protected ColleagueConnection getColleagueConnectionEntity(String requestUrl, Map<String, String> parameters) throws ProfileServiceException {
 		try {
 			return (ColleagueConnection)getEntity(requestUrl, parameters, getColleagueFeedHandler());
 		} catch (IOException e) {
-			throw new ClientServicesException(e);
+			throw new ProfileServiceException(e);
+		} catch(ClientServicesException e){
+			throw new ProfileServiceException(e);
 		}
 	}
 
-	protected EntityList<Profile> getProfileEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
+	protected ProfileList getProfileEntityList(String requestUrl, Map<String, String> parameters) throws ProfileServiceException {
 		try {
-			return (EntityList<Profile>)getEntities(requestUrl, getParameters(parameters), getProfileFeedHandler());
+			return (ProfileList)getEntities(requestUrl, getParameters(parameters), getProfileFeedHandler());
 		} catch (IOException e) {
-			throw new ClientServicesException(e);
+			throw new ProfileServiceException(e);
+		} catch(ClientServicesException e){
+			throw new ProfileServiceException(e);
 		}
 	}
 
-	protected EntityList<ColleagueConnection> getColleagueConnectionEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
+	protected ColleagueConnectionList getColleagueConnectionEntityList(String requestUrl, Map<String, String> parameters) throws ProfileServiceException {
 		try {
-			return (EntityList<ColleagueConnection>)getEntities(requestUrl, getParameters(parameters), getColleagueFeedHandler());
+			return (ColleagueConnectionList)getEntities(requestUrl, getParameters(parameters), getColleagueFeedHandler());
 		} catch (IOException e) {
-			throw new ClientServicesException(e);
+			throw new ProfileServiceException(e);
+		} catch(ClientServicesException e){
+			throw new ProfileServiceException(e);
 		}
 	}
 
-	protected EntityList<Tag> getTagEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
+	protected TagList getTagEntityList(String requestUrl, Map<String, String> parameters) throws ProfileServiceException {
 		try {
-			return (EntityList<Tag>)getEntities(requestUrl, getParameters(parameters), getTagFeedHandler());
+			return (TagList)getEntities(requestUrl, getParameters(parameters), getTagFeedHandler());
 		} catch (IOException e) {
-			throw new ClientServicesException(e);
+			throw new ProfileServiceException(e);
+		} catch(ClientServicesException e){
+			throw new ProfileServiceException(e);
 		}
 	}
 

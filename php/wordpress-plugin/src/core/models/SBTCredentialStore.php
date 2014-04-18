@@ -135,18 +135,20 @@ class SBTCredentialStore {
 		} else {
 			if (SBTCookie::get(SESSION_NAME) != null) {
 				$encrypted = SBTCookie::get(SESSION_NAME);
-				$crypt = get_option(CRYPT);
-				$key = $crypt['key'];
-				$iv = $crypt['iv'];
-				$iv = base64_decode($iv);
+				
 				if (IBM_SBT_CRYPTO_ENABLED) {
+					$crypt = get_option(CRYPT);
+					$key = $crypt['key'];
+					$iv = $crypt['iv'];
+					$iv = base64_decode($iv);
 					$data = ibm_sbt_decrypt($key, $encrypted, $iv);
 					$data = unserialize($data);
 					$this->key = $data['key'];
 					$this->iv = $data['iv'];
+				} else {
+					$this->key = 0;
+					$this->iv = 0;
 				}
-				
-				
 			} else {
 				$this->_initCookie();
 			}
@@ -191,11 +193,14 @@ class SBTCredentialStore {
 			
 		$data = serialize($data);
 			
-		$crypt = get_option(CRYPT);
-		
-		$key = $crypt['key'];
-		$iv = $crypt['iv'];
-		$iv = base64_decode($iv);
+		$key = $iv = 0;
+		if (IBM_SBT_CRYPTO_ENABLED) {
+			$crypt = get_option(CRYPT);
+			
+			$key = $crypt['key'];
+			$iv = $crypt['iv'];
+			$iv = base64_decode($iv);
+		}
 			
 		$encrypted = ibm_sbt_encrypt($key, $data, $iv);
 			
@@ -303,11 +308,13 @@ class SBTCredentialStore {
 		
 		if (SBTCookie::get(SESSION_NAME) != null) {
 			$encrypted = SBTCookie::get(SESSION_NAME);
-			$crypt = get_option(CRYPT);
-			$key = $crypt['key'];
-			$iv = $crypt['iv'];
-			$iv = base64_decode($iv);
 			
+			if (IBM_SBT_CRYPTO_ENABLED) {
+				$crypt = get_option(CRYPT);
+				$key = $crypt['key'];
+				$iv = $crypt['iv'];
+				$iv = base64_decode($iv);
+			}
 			$data = ibm_sbt_decrypt($key, $encrypted, $iv);
 			$data = unserialize($data);
 			return $data;
@@ -332,7 +339,7 @@ class SBTCredentialStore {
 		$iv = $data['iv'];
 		$iv = base64_decode($iv);
 		$sessionID = $data['sessionID'];
-		
+
 		// Get session
 		$session = get_option($sessionID);
 		
@@ -591,7 +598,7 @@ class SBTCredentialStore {
 		$data = SBTCookie::get(WP_SESSION_INDICATOR);
 		$this->userID  = $data;
 
-		return $this->userID > 0;
+		return $this->userID > 0 || is_user_logged_in();
 	}
 	
 	

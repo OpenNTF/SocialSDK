@@ -22,10 +22,10 @@
  */
 class SBTCommunityFilesWidget extends SBTBaseGridWidget {
 	
-	private $widget_id = 'ibm_sbtk_community_files_widget';
-	private $widget_name = 'IBM Community Files';
-	private $widget_description = 'Use this widget to display community files from IBM SmartCloud for Social Business or IBM Connections on Premise.';
-	private $widget_location =  '/views/widgets/ibm-sbt-community-files.php';
+	protected $widget_id = 'ibm_sbtk_community_files_widget';
+	protected $widget_name = 'IBM Community Files';
+	protected $widget_description = 'Use this widget to display community files from IBM SmartCloud for Social Business or IBM Connections on Premise.';
+	protected $widget_location =  '/views/widgets/ibm-sbt-community-files.php';
 
 	/**
 	 * Constructor.

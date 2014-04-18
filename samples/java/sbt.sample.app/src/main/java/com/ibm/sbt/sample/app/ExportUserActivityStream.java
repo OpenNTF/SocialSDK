@@ -213,7 +213,6 @@ public class ExportUserActivityStream {
 			Profile profile = connProfSvc.getProfile(this.USER_ID, params);
 			
 			//some strings contain commas index will be used to find and remove them
-			//so as not to interfere with the csv file
 			int index = -1;
 			
 			String id = profile.getUserid();

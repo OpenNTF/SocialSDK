@@ -70,7 +70,7 @@ function ibm_sbtk_activate_plugin() {
 		add_option(SDK_DEPLOY_URL,  $settings);
 	}
 	
-	if (get_option(CRYPT) === false) {
+	if (get_option(CRYPT) === false && IBM_SBT_CRYPTO_ENABLED) {
 		$pivKey = ibm_sbtk_gen_string(32);
 		$iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC);
     	$iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);

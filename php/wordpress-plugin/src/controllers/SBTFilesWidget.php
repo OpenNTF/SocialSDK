@@ -22,10 +22,10 @@
  */
 class SBTFilesWidget extends SBTBaseGridWidget {
 	
-	private $widget_id = 'ibm_sbtk_files_widget';
-	private $widget_name = 'IBM Files';
-	private $widget_description = 'Use this widget to display files from IBM SmartCloud for Social Business or IBM Connections on Premise.';
-	private $widget_location =  '/views/widgets/ibm-sbt-files-grid.php';
+	protected $widget_id = 'ibm_sbtk_files_widget';
+	protected $widget_name = 'IBM Files';
+	protected $widget_description = 'Use this widget to display files from IBM SmartCloud for Social Business or IBM Connections on Premise.';
+	protected $widget_location =  '/views/widgets/ibm-sbt-files-grid.php';
 
 	/**
 	 * Constructor.

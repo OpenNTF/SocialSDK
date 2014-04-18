@@ -4,7 +4,7 @@
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Mon, 07 Apr 2014 10:14:32 GMT]]></value>
+        <value><![CDATA[Fri, 18 Apr 2014 10:48:10 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -32,15 +32,15 @@
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/i4Rda/ywZ22QJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
+        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/rP2I7oko4g5QJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=4UiTs2AFL4Z92tLCg1evzaUYA05IN4qo2kGiYRm7xuD6WPSEpKm+Yewf7MpPgGlMBlEk0vJowWdeTV46GvUmgPi680YlzibruF3+1uS1x2mqFvkS5N/gDqH72A/h1LlP3LkUtfcNXwxYuR+Riawkw0bY83g79QDTEN+qmP+wLsF/LBIwDP3L33ZPQ1MHdG2Yl11LJ+KD6WaFNDL54UltAo8ZY4p9KO/+Wn/64vBD+zGDqHKtw0u2fJ0qz+DmIUSCGB+xjEGcX0+bSbGu+ofY7C0mHk90yVYSQfLU4AZ9/29kcm5BFfZ00kgQNSo2iI3OdlbG2HhxhuLIbhA4Q+aPUs5Ud3l1422eiNnQxOmPWZtp+UacIqX1A84W95Ags18O33t1ZJx9fCqqp6CDxxGAezAJ/8BEJpdDt+KFOrg5QvpLyKfK+hw+R5ZMpCIz3mJmme6OptZO79hC658M7kQtnnQSOCkApc3VklE1x9JT+vze1mwSk+QxoFllVsPOy1u2YX/RUU+xpfJzh42XW/wHLQA0ukyxgWq/IhNobZLY8+J1WiPn7KUohFzAbisH94HsrPfAyDSQ9btSgyE6s2hHiY8uXLR/E4tKW6E37UfjuaBxX3Y3iklQ/RrbadDAyXNjFQTZqwe8G9dClcjwMYeEMgxUBkpiXXXEK5Y/NxXycJjJ3GHpt2nxc0Iw1wpqCBkbVads+heiG78oXWZOqqxtvw65VFEZpVJpc5NFmaJ/0iU=; Path=/]]></value>
+        <value><![CDATA[LtpaToken2=FmGDaIpr/a19HBjbuJkI5VVAjSaJJkL6LSNqAl2z35XH0ma/GLu+MVGQnFnkWLsn2b7XpNqT5/Ci/wbfOinrV+TxGFsHt7954nnah7UE5U2ml6W0n9+sb8XTxJsh6D3ZEXugnA51B5X2bClRu894aV+KdvemaK3tFZuyvipjbJeukZgrJnl1xAgWbCq69ffKnuyfdzv8qmQZ4MfIDm0mSJ35UyTVLOo/dUAzpsD7s/Kx00n685tybHpk34p3ksNxCxn1QrZ8Y0Q0cLPA8nCsYdC9lIOAmOMbzkXLgszYSnCczascVzXqqXv3QGWGl8EBNhnT1YCW20ym4NsR3jOmnoidWkPnzVTd8b1t5C+G4z3nPMg+MSS5afpullubqWu/8STUmJA3Phyl1nRFGLbO5EGR+Tvv9bYjXUAUN8m110EEXyswa1MJEYkE03/gwjnj5oFLQrCAK0R+w0HLz81Yp9aeQORM0dCXtgm8br9SUDVQmN9aFBZudwMbrzB3uSVIIDGRP2ZB+WQxRQVM8U81laTphAFzMzhUG/XOe6NiaWKOA9GN/+byyYZLJZhSJjnSCNVFOEFtjOAi9ohcpRMdmN3GtAEai60pMAGEuRm0wWg258qsvaW2nJ7JLBxCHxSR713uigu5jnIODAI9oVJShc0HjjAyKhq67sbYRpxDmpiTnFICwIEwMXEQsK20yPMOlDnvXkFyNQtfESsWySs8hp0hrzVVEkd0vTIVsR8zNF4=; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LCSESSIONID=0000h7hevP-jTzrArxHGTlpP94p:18dna4k6n; Path=/; HttpOnly]]></value>
+        <value><![CDATA[LCSESSIONID=0000oD3Z53g9DyMjFrigoVbKi7S:18dna4k6n; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Keep-Alive]]></name>
@@ -63,50 +63,50 @@
         <value><![CDATA[en-US]]></value>
     </header></headers>
 <data><![CDATA[<?xml version="1.0" encoding='utf-8'?>
-    <entry xml:base="https://dev.sdkdemo.com:444/blogs/TestHandle1396865626617/entry/test_blog_post1396865627410"
+    <entry xml:base="https://dev.sdkdemo.com:444/blogs/TestHandle1397818040249/entry/test_blog_post1397818041163"
            xmlns="http://www.w3.org/2005/Atom"
            xmlns:app="http://www.w3.org/2007/app"
            xmlns:thr="http://purl.org/syndication/thread/1.0"
            xmlns:snx="http://www.ibm.com/xmlns/prod/sn"
            xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/"
            xml:lang="en-US" >
-      <id>urn:lsid:ibm.com:blogs:entry-c35550da-6a3f-4a56-ac8e-42147fcfb609</id>
-      <title type="text">Test Blog Post1396865627410</title>
+      <id>urn:lsid:ibm.com:blogs:entry-27bd8bb0-b653-4cf7-ba8b-ff839334ff62</id>
+      <title type="text">Test Blog Post1397818041163</title>
       <author>
         <name>Frank Adams</name>
                 <email>fadams@renovations.com</email>
                 <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                 <snx:userState>active</snx:userState>
               </author>
-            <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/blogs/TestHandle1396865626617/entry/test_blog_post1396865627410?lang=en_us"/>
-      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/blogs/TestHandle1396865626617/feed/entry/atom?entryid=c35550da-6a3f-4a56-ac8e-42147fcfb609&amp;lang=en_us"/>
-            <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://dev.sdkdemo.com:444/blogs/TestHandle1396865626617/feed/entryrecommendations/c35550da-6a3f-4a56-ac8e-42147fcfb609/atom?lang=en_us" />
-	  <app:collection href="https://dev.sdkdemo.com:444/blogs/TestHandle1396865626617/api/recommend/entries/c35550da-6a3f-4a56-ac8e-42147fcfb609?lang=en_us">
+            <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/blogs/TestHandle1397818040249/entry/test_blog_post1397818041163?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/blogs/TestHandle1397818040249/feed/entry/atom?entryid=27bd8bb0-b653-4cf7-ba8b-ff839334ff62&amp;lang=en_us"/>
+            <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://dev.sdkdemo.com:444/blogs/TestHandle1397818040249/feed/entryrecommendations/27bd8bb0-b653-4cf7-ba8b-ff839334ff62/atom?lang=en_us" />
+	  <app:collection href="https://dev.sdkdemo.com:444/blogs/TestHandle1397818040249/api/recommend/entries/27bd8bb0-b653-4cf7-ba8b-ff839334ff62?lang=en_us">
 		<title type="text">Likes</title>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
 		<app:categories fixed="yes"/>
 		<snx:enabled>true</snx:enabled>
 	  </app:collection>
-	  <link rel="replies" type="application/atom+xml" href="https://dev.sdkdemo.com:444/blogs/TestHandle1396865626617/feed/entrycomments/test_blog_post1396865627410/atom?lang=en_us" thr:count="0"/>
-      <app:collection href="https://dev.sdkdemo.com:444/blogs/TestHandle1396865626617/api/entrycomments/c35550da-6a3f-4a56-ac8e-42147fcfb609?lang=en_us">
+	  <link rel="replies" type="application/atom+xml" href="https://dev.sdkdemo.com:444/blogs/TestHandle1397818040249/feed/entrycomments/test_blog_post1397818041163/atom?lang=en_us" thr:count="0"/>
+      <app:collection href="https://dev.sdkdemo.com:444/blogs/TestHandle1397818040249/api/entrycomments/27bd8bb0-b653-4cf7-ba8b-ff839334ff62?lang=en_us">
 		<title type="text">Comment Entries</title>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
 		<app:categories fixed="yes"/>
 		<app:accept>application/atom+xml;type=entry</app:accept>
 	  </app:collection>
-      <published>2014-04-07T05:14:31-05:00</published>
-      <updated>2014-04-07T05:14:31-05:00</updated>
-         <content type="html">Test Blog Post Content1396865627410</content>
-         <summary type="html">Test Blog Post Content1396865627410</summary>
+      <published>2014-04-18T05:48:09-05:00</published>
+      <updated>2014-04-18T05:48:09-05:00</updated>
+         <content type="html">Test Blog Post Content1397818041163</content>
+         <summary type="html">Test Blog Post Content1397818041163</summary>
       <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
       <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">0</snx:rank>
       <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
       <source>
-        <id>urn:lsid:ibm.com:blogs:entries-d19ce257-96d5-4411-9d0d-e1b7e6412b37</id>
-        <title type="text">Test Blog1396865626617</title>
-        <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/TestHandle1396865626617/feed/entries/atom?lang=en_us" />
-        <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/TestHandle1396865626617?lang=en_us"/>
-        <updated>2014-04-07T05:14:31-05:00</updated>
+        <id>urn:lsid:ibm.com:blogs:entries-7d1fcd44-f9e6-47dd-a483-8d0e1978193e</id>
+        <title type="text">Test Blog1397818040249</title>
+        <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/TestHandle1397818040249/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/TestHandle1397818040249?lang=en_us"/>
+        <updated>2014-04-18T05:48:09-05:00</updated>
         			<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
 		      </source>
     </entry>

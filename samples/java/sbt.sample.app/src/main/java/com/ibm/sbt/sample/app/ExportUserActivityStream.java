@@ -54,6 +54,11 @@ public class ExportUserActivityStream {
 	public String filePath = "";
 	
 	/**
+	 * Service maps for the where the open socail application is installed
+	 */
+	public String serviceMap = "";
+	
+	/**
 	 * The url to the connections server
 	 */
 	public String connectionsUrl = "";
@@ -94,8 +99,9 @@ public class ExportUserActivityStream {
 	    String userid = mainProperties.getProperty("userid");
 	    String count = mainProperties.getProperty("count");
 	    String filePath = mainProperties.getProperty("filePath");
+	    String serviceMap = mainProperties.getProperty("serviceMap");
 	    
-	    String[] params = {url,username,password,userid,count,filePath};
+	    String[] params = {url,username,password,userid,count,filePath,serviceMap};
 	    for(int i=0;i<params.length;i++){
 		   if(params[i] == null || params[i] == "" ){
 			   System.out.println("Not all properties are set, please check the sbt.properties file.");
@@ -108,34 +114,31 @@ public class ExportUserActivityStream {
 	}
 	
 	public ExportUserActivityStream(String[] args){
-		this.USERNAME = args[0];
-		this.PASSWORD = args[1];
-		this.USER_ID = args[2];
-		this.filePath = args[3];
+		this.connectionsUrl = args[0];
+		this.USERNAME = args[1];
+		this.PASSWORD = args[2];
+		this.USER_ID = args[3];
 		this.resultCount = args[4];
-			
-		if(args.length == 6 ){
-			if(args[5] != null && args[5] != ""){
-				String[] parts = args[5].split(":");
-				Map<String,String> map = new HashMap<String,String>();
-				map.put(parts[0], parts[1]);
-				
-				System.out.println(map.size());
-				System.out.println(parts[0]+parts[1]);
-				this.setServiceMaps(map);
-			}
-		}
-		
-		
+		this.filePath = args[5];
+		this.serviceMap = args[6];		
+
 		System.out.println("Initialising environment and authenticating with connections...");
 		
 		this.initEnvironment();
 		
-		BasicEndpoint basicEndpoint = (BasicEndpoint) EndpointFactory.getEndpoint(this.endpointName);
+		endpoint = (BasicEndpoint) EndpointFactory.getEndpoint(this.endpointName);
+		System.out.println("endpoint created"+endpoint.toString());
+		//set the connections url
+		this.setBaseUrl(this.connectionsUrl);
+		
+		//set service maps
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("connections", this.serviceMap);
+		this.setServiceMaps(map);
 		
 		if (StringUtil.isNotEmpty(this.USERNAME)) {
 			try {
-				basicEndpoint.login(this.USERNAME, this.PASSWORD);
+				endpoint.login(this.USERNAME, this.PASSWORD);
 				System.out.println("Login Successful");
 			} catch (AuthenticationException e) {
 				System.out.println("Error authenticating with connections");
@@ -176,10 +179,14 @@ public class ExportUserActivityStream {
 				String actionDate = entries.get(i).getAsString("published");
 				String updateDate = entries.get(i).getAsString("updated");
 				//tagValueList not available
-				String mentionId = entries.get(i).getAsString("object/author/id");
-				if(mentionId.contains("urn")){
-					mentionId = this.removeUrnPrefix(mentionId);
+				String mentionId="";
+				if(verb == "mention" || verb.contains("mention")){
+					mentionId = entries.get(i).getAsString("object/author/id");
+					if(mentionId.contains("urn")){
+						mentionId = this.removeUrnPrefix(mentionId);
+					}
 				}
+				
 				//view count not available
 				String likeCount = entries.get(i).getAsString("object/likes/totalItems");
 				
@@ -213,24 +220,36 @@ public class ExportUserActivityStream {
 			String name = profile.getName();
 			
 			System.out.println(name);
-			index = name.indexOf(",");
-			if(index != -1){
-				name = name.substring(0,index)+name.substring(index+1,name.length());
+			if(name !=null){
+				index = name.indexOf(",");
+				if(index != -1){
+					name = name.substring(0,index)+name.substring(index+1,name.length());
+				}
 			}
+			
 			String email = profile.getEmail();
+			
 			String org = profile.getAsString(ProfileXPath.organizationUnit);
-			index = org.indexOf(",");
-			if(index != -1){
-				org = org.substring(0,index)+org.substring(index+1,org.length());
+			if(org !=null){
+				index=-1;
+				index = org.indexOf(",");
+				if(index != -1){
+					org = org.substring(0,index)+org.substring(index+1,org.length());
+				}
 			}
+			
 			String country = profile.getAsString(ProfileXPath.countryName);
 			String isManager = profile.getAsString(ProfileXPath.isManager);
 			String userState = profile.getAsString(ProfileXPath.userState);
 			String role = profile.getAsString(ProfileXPath.role);
-			index = role.indexOf(",");
-			if(index != -1){
-				role = role.substring(0,index)+role.substring(index+1,role.length());
+			if(role != null){
+				index=-1;
+				index = role.indexOf(",");
+				if(index != -1){
+					role = role.substring(0,index)+role.substring(index+1,role.length());
+				}
 			}
+			
 			content = id+","+name+","+email+","+org+","+country+","+isManager+","+userState+","+role;				
 			String headings = "PersonID,PersonDisplayName,PersonEmail,PersonOrganization,PersonCountry,PersonIsManager,PersonStatus,EmployeeType\n";
 			String path = this.filePath+"personProperties.csv";

@@ -100,6 +100,7 @@ class SBTEndpointUpdate {
 			$endpoint['endpoint_version'] = (isset($_POST['endpoint_version']) ? $_POST['endpoint_version'] : "");
 			$endpoint['allow_client_access'] = (isset($_POST['allow_client_access']) ? $_POST['allow_client_access'] : "");
 			$endpoint['oauth_origin'] = get_site_url();
+			syslog(LOG_INFO, "ORIGIN: " . $endpoint['oauth_origin']);
 			
 			// If deletion_point is set to "yes", then the endpoint will be deleted.
 			// Note: The deletion UI controls will need to be uncommented in

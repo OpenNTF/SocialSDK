@@ -956,7 +956,7 @@ public class ProfileService extends BaseService {
 	
 	protected Profile getProfileEntity(String requestUrl, Map<String, String> parameters) throws ProfileServiceException {
 		try {
-			return (Profile)getEntity(requestUrl, parameters, getProfileFeedHandler());
+			return (Profile)getEntity(requestUrl, getParameters(parameters), getProfileFeedHandler());
 		} catch (IOException e) {
 			throw new ProfileServiceException(e);
 		} catch(ClientServicesException e){
@@ -966,7 +966,7 @@ public class ProfileService extends BaseService {
 
 	protected ColleagueConnection getColleagueConnectionEntity(String requestUrl, Map<String, String> parameters) throws ProfileServiceException {
 		try {
-			return (ColleagueConnection)getEntity(requestUrl, parameters, getColleagueFeedHandler());
+			return (ColleagueConnection)getEntity(requestUrl, getParameters(parameters), getColleagueFeedHandler());
 		} catch (IOException e) {
 			throw new ProfileServiceException(e);
 		} catch(ClientServicesException e){

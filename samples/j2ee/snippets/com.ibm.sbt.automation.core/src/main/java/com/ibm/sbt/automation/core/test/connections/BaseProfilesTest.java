@@ -20,7 +20,6 @@ import junit.framework.Assert;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.automation.core.test.BaseApiTest;
-import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.connections.profiles.Profile;
 import com.ibm.sbt.services.client.connections.profiles.ProfileService;
 import com.ibm.sbt.services.client.connections.profiles.ProfileServiceException;
@@ -49,9 +48,6 @@ public class BaseProfilesTest extends BaseApiTest {
         } catch (ProfileServiceException pse) {
             Assert.fail("Error get profile: " + pse.getMessage());
             pse.printStackTrace();
-        } catch (ClientServicesException e) {
-            Assert.fail("Error get profile: " + e.getMessage());
-			e.printStackTrace();
 		} 
         return profile;
     }

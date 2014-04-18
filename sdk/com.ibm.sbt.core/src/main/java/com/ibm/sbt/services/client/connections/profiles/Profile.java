@@ -28,7 +28,6 @@ import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.AtomEntity;
 import com.ibm.sbt.services.client.base.BaseService;
-import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.connections.profiles.model.ProfileXPath;
 
@@ -99,7 +98,7 @@ public class Profile extends AtomEntity {
      * @throws ProfileServiceException
      * @throws ClientServicesException 
      */
-    public EntityList<Profile> getColleagues() throws ProfileServiceException, ClientServicesException {
+    public ProfileList getColleagues() throws ProfileServiceException, ClientServicesException {
     	return getService().getColleagues(getUserid());
     }
     

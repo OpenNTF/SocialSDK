@@ -24,10 +24,7 @@ if (!defined('SESSION_PREFIX')) {
 	define('SESSION_PREFIX', 'ibm_sbtk_');
 }
 
-if (!defined('CRYPT')) {
-	$path = str_replace('core', '', BASE_PATH);
-	require_once $path . '/ibm-sbt-constants.php';
-}
+
 
 // If the CredentialStore file is called outside the wordpress context, then
 // we need to load the Wordpress API and associated dependencies manually
@@ -73,6 +70,16 @@ if (file_exists(BASE_PATH . '/core/models/SBTPHPCookieAdapter.php')) {
 	require BASE_PATH . '/models/SBTCookieAdapter.php';
 	require BASE_PATH . '/models/SBTMemoryCookieAdapter.php';
 	require BASE_PATH . '/models/SBTPHPCookieAdapter.php';
+}
+
+if (!defined('CRYPT')) {
+	$path = str_replace('core', '', BASE_PATH);
+	require_once $path . DIRECTORY_SEPARATOR . 'ibm-sbt-constants.php';
+}
+
+if (!defined('IBM_SBT_CRYPTO_ENABLED')) {
+	$path = str_replace('core', '', BASE_PATH);
+	require_once $path . DIRECTORY_SEPARATOR . 'ibm-sbt-security-config.php';
 }
 
 /**
@@ -128,15 +135,20 @@ class SBTCredentialStore {
 		} else {
 			if (SBTCookie::get(SESSION_NAME) != null) {
 				$encrypted = SBTCookie::get(SESSION_NAME);
-				$crypt = get_option(CRYPT);
-				$key = $crypt['key'];
-				$iv = $crypt['iv'];
-				$iv = base64_decode($iv);
-				$data = rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, $key , base64_decode($encrypted), MCRYPT_MODE_CBC, $iv), "\0");
-				$data = unserialize($data);
-				$this->key = $data['key'];
-				$this->iv = $data['iv'];
 				
+				if (IBM_SBT_CRYPTO_ENABLED) {
+					$crypt = get_option(CRYPT);
+					$key = $crypt['key'];
+					$iv = $crypt['iv'];
+					$iv = base64_decode($iv);
+					$data = ibm_sbt_decrypt($key, $encrypted, $iv);
+					$data = unserialize($data);
+					$this->key = $data['key'];
+					$this->iv = $data['iv'];
+				} else {
+					$this->key = 0;
+					$this->iv = 0;
+				}
 			} else {
 				$this->_initCookie();
 			}
@@ -148,9 +160,12 @@ class SBTCredentialStore {
 	 */
 	private function _initCookie() {
 		$pivKey = $this->gen_string(32);
-		$iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC);
-		$pivIv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
-			
+		$pivIv = 0;
+		$iv_size = 0;
+		if (IBM_SBT_CRYPTO_ENABLED) {
+			$iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC);
+			$pivIv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
+		} 
 		$sessionID = SESSION_PREFIX . uniqid();
 		$timestamp = time();
 		while (get_option($sessionID) !== false) {
@@ -165,7 +180,7 @@ class SBTCredentialStore {
 		);
 		update_option(USER_SESSIONS, $sessions);
 		
-		$etimestamp = $this->_encrypt($pivKey, $timestamp, $pivIv);
+		$etimestamp = ibm_sbt_encrypt($pivKey, $timestamp, $pivIv);
 		$sessionData = array('created' => $etimestamp);
 		add_option($sessionID, $sessionData);
 		
@@ -178,13 +193,16 @@ class SBTCredentialStore {
 			
 		$data = serialize($data);
 			
-		$crypt = get_option(CRYPT);
-		
-		$key = $crypt['key'];
-		$iv = $crypt['iv'];
-		$iv = base64_decode($iv);
+		$key = $iv = 0;
+		if (IBM_SBT_CRYPTO_ENABLED) {
+			$crypt = get_option(CRYPT);
 			
-		$encrypted = base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $key, $data, MCRYPT_MODE_CBC, $iv));
+			$key = $crypt['key'];
+			$iv = $crypt['iv'];
+			$iv = base64_decode($iv);
+		}
+			
+		$encrypted = ibm_sbt_encrypt($key, $data, $iv);
 			
 		// Expire in one day
 		SBTCookie::set(SESSION_NAME, $encrypted, $timestamp + 86400);
@@ -195,8 +213,11 @@ class SBTCredentialStore {
 	
 	private function _initProfileSession() {
 		$pivKey = $this->gen_string(32);
-		$iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC);
-		$pivIv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
+		
+		if (IBM_SBT_CRYPTO_ENABLED) {
+			$iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC);
+			$pivIv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
+		}
 			
 		$sessionID = SESSION_PREFIX . uniqid();
 		$timestamp = time();
@@ -212,7 +233,7 @@ class SBTCredentialStore {
 		);
 		update_option(USER_SESSIONS, $sessions);
 	
-		$etimestamp = $this->_encrypt($pivKey, $timestamp, $pivIv);
+		$etimestamp = ibm_sbt_encrypt($pivKey, $timestamp, $pivIv);
 		$sessionData = array('created' => $etimestamp);
 		add_option($sessionID, $sessionData);
 	
@@ -267,7 +288,7 @@ class SBTCredentialStore {
 		} 
 		
 		// Encrypt data and store key-value pair
-		$value = $this->_encrypt($key, $value, $iv);
+		$value = ibm_sbt_encrypt($key, $value, $iv);
 		$session[$skey] = "$value";
 		
 		// Update database
@@ -287,11 +308,14 @@ class SBTCredentialStore {
 		
 		if (SBTCookie::get(SESSION_NAME) != null) {
 			$encrypted = SBTCookie::get(SESSION_NAME);
-			$crypt = get_option(CRYPT);
-			$key = $crypt['key'];
-			$iv = $crypt['iv'];
-			$iv = base64_decode($iv);
-			$data = rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, $key , base64_decode($encrypted), MCRYPT_MODE_CBC, $iv), "\0");
+			
+			if (IBM_SBT_CRYPTO_ENABLED) {
+				$crypt = get_option(CRYPT);
+				$key = $crypt['key'];
+				$iv = $crypt['iv'];
+				$iv = base64_decode($iv);
+			}
+			$data = ibm_sbt_decrypt($key, $encrypted, $iv);
 			$data = unserialize($data);
 			return $data;
 		}
@@ -315,7 +339,7 @@ class SBTCredentialStore {
 		$iv = $data['iv'];
 		$iv = base64_decode($iv);
 		$sessionID = $data['sessionID'];
-		
+
 		// Get session
 		$session = get_option($sessionID);
 		
@@ -330,7 +354,7 @@ class SBTCredentialStore {
 			if ($value == "" || $value == null) {
 				return null;
 			}
-			$value = $this->_decrypt($key, $value, $iv);
+			$value = ibm_sbt_decrypt($key, $value, $iv);
 			return $value;
 		}
 		
@@ -574,7 +598,7 @@ class SBTCredentialStore {
 		$data = SBTCookie::get(WP_SESSION_INDICATOR);
 		$this->userID  = $data;
 
-		return $this->userID > 0;
+		return $this->userID > 0 || is_user_logged_in();
 	}
 	
 	
@@ -591,38 +615,5 @@ class SBTCredentialStore {
 			$str .= chr(mt_rand(33, 126));
 		}
 		return $str;
-	}
-	
-	private function _encrypt($key, $data, $iv){
-		$b = mcrypt_get_block_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC);
-		$enc = mcrypt_module_open(MCRYPT_RIJNDAEL_256, '', MCRYPT_MODE_CBC, '');
-		mcrypt_generic_init($enc, $key, $iv);
-	
-		$dataPad = $b - (strlen($data) % $b);
-		$data .= str_repeat(chr($dataPad), $dataPad);
-	
-		$encrypted_data = mcrypt_generic($enc, $data);
-	
-		mcrypt_generic_deinit($enc);
-		mcrypt_module_close($enc);
-	
-		return addslashes(base64_encode($encrypted_data));
-	}
-	
-	private function _decrypt($key, $encryptedData, $iv) {
-		$encryptedData = stripslashes($encryptedData);
-
-		$enc = mcrypt_module_open(MCRYPT_RIJNDAEL_256, '', MCRYPT_MODE_CBC, '');
-		mcrypt_generic_init($enc, $key, $iv);
-	
-		$encryptedData = base64_decode($encryptedData);
-		$data = mdecrypt_generic($enc, $encryptedData);
-		mcrypt_generic_deinit($enc);
-		mcrypt_module_close($enc);
-	
-		***REMOVED***
-		***REMOVED***
-	
-		return substr($data, 0, -$dataPad);
 	}
 }

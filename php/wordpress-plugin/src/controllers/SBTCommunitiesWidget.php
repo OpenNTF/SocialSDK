@@ -22,10 +22,10 @@
  */
 class SBTCommunitiesWidget extends SBTBaseGridWidget {
 	
-	private $widget_id = 'ibm_sbtk_communities_widget';
-	private $widget_name = 'IBM Communities';
-	private $widget_description = 'Use this widget to display communities from IBM SmartCloud for Social Business or IBM Connections on Premise.';
-	private $widget_location =  '/views/widgets/ibm-sbt-my-communities-grid.php';
+	protected $widget_id = 'ibm_sbtk_communities_widget';
+	protected $widget_name = 'IBM Communities';
+	protected $widget_description = 'Use this widget to display communities from IBM SmartCloud for Social Business or IBM Connections on Premise.';
+	protected $widget_location =  '/views/widgets/ibm-sbt-my-communities-grid.php';
 
 	/**
 	 * Constructor.

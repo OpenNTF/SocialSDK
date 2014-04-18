@@ -114,4 +114,52 @@ window.onload = function () {
 	document.getElementById("new_basic_auth_password").addEventListener('keyup', function (e) {
 		completeFieldCheck();
 	}, false);
+	
+	document.getElementById("new_consumer_key").addEventListener('mouseout', function (e) {
+		completeFieldCheck();
+	}, false);
+	
+	document.getElementById("new_consumer_secret").addEventListener('mouseout', function (e) {
+		completeFieldCheck();
+	}, false);
+	
+	document.getElementById("new_endpoint_name").addEventListener('mouseout', function (e) {
+		completeFieldCheck();
+	}, false);
+	
+	document.getElementById("new_endpoint_url").addEventListener('mouseout', function (e) {
+		completeFieldCheck();
+	}, false);
+	
+	document.getElementById("new_authorization_url").addEventListener('mouseout', function (e) {
+		completeFieldCheck();
+	}, false);
+	
+	document.getElementById("new_access_token_url").addEventListener('mouseout', function (e) {
+		completeFieldCheck();
+	}, false);
+	
+	document.getElementById("new_request_token_url").addEventListener('mouseout', function (e) {
+		completeFieldCheck();
+	}, false);
+	
+	document.getElementById("new_basic_auth_username").addEventListener('mouseout', function (e) {
+		completeFieldCheck();
+	}, false);
+
+	document.getElementById("new_basic_auth_password").addEventListener('mouseout', function (e) {
+		completeFieldCheck();
+	}, false);
+
+	document.getElementById("new_form_auth_page").addEventListener('mouseout', function (e) {
+		completeFieldCheck();
+	}, false);
+
+	document.getElementById("new_form_auth_login_page").addEventListener('mouseout', function (e) {
+		completeFieldCheck();
+	}, false);
+
+	document.getElementById("new_form_auth_cookie_cache").addEventListener('mouseout', function (e) {
+		completeFieldCheck();
+	}, false);
 }

@@ -13,7 +13,8 @@ require_once $CFG->dirroot . '/blocks/ibmsbt/user_widgets/templates/ibm-sbt-file
 	<option value="publicFolders">Public folders</option>
 	<option value="myPinnedFolders">My pinned folders</option>
 	<option value="activeFolders">Active folders</option>
-	<option value="fileShares">File shares</option>
+	<option value="sharedWithMe">Files shared with me</option>
+	<option value="sharedByMe">Files shared by me</option>
 </select>
 
 <div id="<?php echo $this->config->elementID;?>"></div>
@@ -92,16 +93,40 @@ function onTypeChange<?php echo $timestamp; ?>() {
 			    var PagingHeader = domNode.text || domNode.textContent;
 			    domNode = dom.byId("pagingFooter-<?php echo $timestamp; ?>");
 			    var PagingFooter = domNode.text || domNode.textContent;
-			
-			    var grid = new FileGrid({
-			    	 type : currentType,
-			    	 endpoint: "<?php echo $this->config->endpoint; ?>",
-			         hidePager: false,
-			         hideSorter: true,
-			         
-			         hideFooter: false,
-			    	 rendererArgs : { template : FileRow, pagerTemplate : PagingHeader, footerTemplate : PagingFooter}       	 
-			    });
+
+				
+			    var grid = null;
+
+			    if (currentType == 'sharedWithMe') {
+				    grid = new FileGrid({
+				    	 type : 'fileShares',
+				    	 direction: 'inbound',
+				    	 endpoint: "<?php echo $this->config->endpoint; ?>",
+				         hidePager: false,
+				         hideSorter: true,
+				         hideFooter: false,
+				    	 rendererArgs : { template : FileRow, pagerTemplate : PagingHeader, footerTemplate : PagingFooter}       	 
+				    });
+			    } else if (currentType == 'sharedByMe') {
+			    	grid = new FileGrid({
+				    	 type : 'fileShares',
+				    	 direction: 'outbound',
+				    	 endpoint: "<?php echo $this->config->endpoint; ?>",
+				         hidePager: false,
+				         hideSorter: true,
+				         hideFooter: false,
+				    	 rendererArgs : { template : FileRow, pagerTemplate : PagingHeader, footerTemplate : PagingFooter}       	 
+				    });
+			    } else {
+			    	grid = new FileGrid({
+				    	 type : currentType,
+				    	 endpoint: "<?php echo $this->config->endpoint; ?>",
+				         hidePager: false,
+				         hideSorter: true,
+				         hideFooter: false,
+				    	 rendererArgs : { template : FileRow, pagerTemplate : PagingHeader, footerTemplate : PagingFooter}       	 
+				    });
+			    }
 
 			    grid.renderer.tableClass = "table";
 			    grid.renderer.template = FileRow;

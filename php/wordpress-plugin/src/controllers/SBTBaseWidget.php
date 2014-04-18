@@ -59,6 +59,13 @@ class SBTBaseWidget extends WP_Widget {
 			$this->endpoint = "connections";
 		}
 		
+		if (!$this->_isUserLoggedIn()) {
+			
+			echo '<div class="widget-area"><aside class="widget widget_recent_entries"><h3 class="widget-title">' . $this->widget_name . '</h3>';
+			echo '' . $GLOBALS[LANG]['must_login'] . '</aside></div>';
+			return;
+		}
+		
  		// If tokens exist, make sure that they are valid. Otherwise clear the store and force the
  		// user to re-log
 
@@ -83,12 +90,14 @@ class SBTBaseWidget extends WP_Widget {
  			}
  		}		
  	
-		echo '<div name="ibm_sbtk_widget">';
+		echo '<div name="ibm_sbtk_widget" class="widget-area" style="width:100%"><aside class="widget widget_recent_entries">';
+		echo '<h3 class="widget-title">' . $this->widget_name . '</h3>';
+		
 		if (($settings->getAuthenticationMethod($this->endpoint) == 'oauth1' || $settings->getAuthenticationMethod($this->endpoint) == 'oauth2') 
 			&& $store->getOAuthAccessToken($this->endpoint) == null &&
-		(!isset($_COOKIE['IBMSBTKOAuthLogin']) || $_COOKIE['IBMSBTKOAuthLogin'] != 'yes')) {
+		(!isset($_COOKIE['IBMSBTKOAuthLogin']) || $_COOKIE['IBMSBTKOAuthLogin'] != 'yes') && !$this->_isUserLoggedIn()) {
 			require BASE_PATH . '/core/views/oauth-login-display.php';
-			echo '</div>';
+			echo '</aside></div>';
 			return;
 		}
 		
@@ -98,7 +107,6 @@ class SBTBaseWidget extends WP_Widget {
 			&& $store->getBasicAuthPassword($this->endpoint) != null) || ($settings->getAuthenticationMethod($this->endpoint) == 'oauth1' && $store->getRequestToken($this->endpoint) != null)
 			|| ($settings->getAuthenticationMethod($this->endpoint) == 'basic' && $settings->getBasicAuthMethod($this->endpoint) == 'global')
 			|| ($settings->getAuthenticationMethod($this->endpoint) == 'oauth2' && $store->getOAuthAccessToken($this->endpoint) != null)) {
-
 			require $this->widget_location;
 		}
 
@@ -108,7 +116,7 @@ class SBTBaseWidget extends WP_Widget {
 		} else if ($settings->getAuthenticationMethod($this->endpoint) == 'oauth1' || $settings->getAuthenticationMethod($this->endpoint) == 'oauth2') {
 // 			require_once BASE_PATH . '/views/oauth-logout-display.php'; TODO: Uncomment when OAuth logout has been fixed
 		}
-		echo '</div>';
+		echo '</aside></div>';
 	}
 	
 	/**
@@ -172,6 +180,13 @@ class SBTBaseWidget extends WP_Widget {
 			$instance['ibm-sbtk-template'] = (!empty($new_instance['ibm-sbtk-template'])) ? strip_tags($new_instance['ibm-sbtk-template'] ) : '';
 			$instance['ibm-sbtk-endpoint'] = (!empty($new_instance['ibm-sbtk-endpoint'])) ? strip_tags($new_instance['ibm-sbtk-endpoint'] ) : '';
 			return $instance;
+		}
+		
+		private function _isUserLoggedIn() {
+			$data = SBTCookie::get(WP_SESSION_INDICATOR);
+			$this->userID  = $data;
+		
+			return $this->userID > 0 || is_user_logged_in();
 		}
 
 }

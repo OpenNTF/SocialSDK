@@ -98,6 +98,7 @@ define([ "../declare" ], function(declare) {
 	            }
             }
             url = url.replace("//","/");
+            url = url.replace(/[$]?{([^{}]*)}/,"$1");
             return url;
         }
     });

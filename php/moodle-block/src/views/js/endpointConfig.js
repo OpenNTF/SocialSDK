@@ -17,12 +17,69 @@
 /**
  * @author Benjamin Jakobus 
  */
+var strConnectionsEndpointURL = 'URL to the Connections server';
+var strSmartcloudEndpointURL = 'URL to the Smartcloud server';
+var strSSLTrustError = 'You are forcing SSL trust, but your server URL does not use HTTPS. Please correct this.';
+var strEndpointNameError = 'The name of your endpoint should not contain any spaces';
+var action_type = 'create';
+window.onload = function () {
+
+	ibm_sbt_endpoint_change();
+	
+	document.getElementById("new_consumer_key").addEventListener('keyup', function (e) {
+		ibm_sbt_complete_field_check();
+	}, false);
+	
+	document.getElementById("new_consumer_secret").addEventListener('keyup', function (e) {
+		ibm_sbt_complete_field_check();
+	}, false);
+	
+	document.getElementById("new_endpoint_name").addEventListener('keyup', function (e) {
+		ibm_sbt_complete_field_check();
+	}, false);
+	
+	document.getElementById("new_endpoint_url").addEventListener('keyup', function (e) {
+		ibm_sbt_complete_field_check();
+	}, false);
+	
+	document.getElementById("new_authorization_url").addEventListener('keyup', function (e) {
+		ibm_sbt_complete_field_check();
+	}, false);
+	
+	document.getElementById("new_access_token_url").addEventListener('keyup', function (e) {
+		ibm_sbt_complete_field_check();
+	}, false);
+	
+	document.getElementById("new_request_token_url").addEventListener('keyup', function (e) {
+		ibm_sbt_complete_field_check();
+	}, false);
+	
+	document.getElementById("new_basic_auth_username").addEventListener('keyup', function (e) {
+		ibm_sbt_complete_field_check();
+	}, false);
+
+	document.getElementById("new_basic_auth_password").addEventListener('keyup', function (e) {
+		ibm_sbt_complete_field_check();
+	}, false);
+
+	document.getElementById("new_form_auth_page").addEventListener('keyup', function (e) {
+		ibm_sbt_complete_field_check();
+	}, false);
+
+	document.getElementById("new_form_auth_login_page").addEventListener('keyup', function (e) {
+		ibm_sbt_complete_field_check();
+	}, false);
+
+	document.getElementById("new_form_auth_cookie_cache").addEventListener('keyup', function (e) {
+		ibm_sbt_complete_field_check();
+	}, false);
+}
 
 function ibm_sbt_manage_endpoints() {
 	$('#ibm-sbt-endpoint-manager').dialog('open');
 }
 
-function endpoint_change() {
+function ibm_sbt_endpoint_change() {
 	var myselect = document.getElementById("enpoint_list");
 	if (myselect != null && myselect.options[myselect.selectedIndex] != null) {
 		var selected_endpoint = myselect.options[myselect.selectedIndex].value;
@@ -51,6 +108,7 @@ function ibm_sbt_reset() {
 	document.getElementById("new_endpoint_version").value = '';
 	document.getElementById("new_consumer_secret").value = '';
 	document.getElementById("new_consumer_key").value = '';
+	document.getElementById("new_callback_url").value = '';
 	document.getElementById("new_basic_auth_username").value = '';
 	document.getElementById("new_basic_auth_password").value = '';
 	document.getElementById("new_basic_auth_method").value = 'choose';

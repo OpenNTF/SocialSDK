@@ -99,24 +99,19 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
             if (!url) {
                 throw new Error("BaseService.constructUrl: Invalid argument, url is undefined or null.");
             }
-           
             
-            if(this.endpoint){
-            	var substitutes = {};
-                
-            	lang.mixin(substitutes, this.contextRootMap);
-            	lang.mixin(substitutes, this.endpoint.serviceMappings);
+            var substitutes = {};
+            
+            lang.mixin(substitutes, this.contextRootMap);
+            if (this.endpoint){
+                lang.mixin(substitutes, this.endpoint.serviceMappings);
                 lang.mixin(substitutes, {authentication : this.endpoint.authType === "oauth" ? "oauth":""});
-                lang.mixin(substitutes,urlParams);
-                //back compat with services reusing constants
-                url = this.builder.build(url, this.endpoint.apiVersion, substitutes);
-                
-            }else {
-            	 //back compat with services reusing constants
-                url = this.builder.build(url);
             }
+            lang.mixin(substitutes,urlParams);
+            //back compat with services reusing constants
+            url = this.builder.build(url, this.endpoint?this.endpoint.apiVersion:undefined, substitutes);
             
-
+            
             if (params) {
                 for (param in params) {
                     if (url.indexOf("?") == -1) {

@@ -182,8 +182,8 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @for sbt.connections.CommunityService
          */
         AtomCommunitiesAll : {
-            '3.0.0': "/${communities}/service/atom/communities/all",
-            '4.5.0': "/${communities}/service/atom/{authentication}/communities/all"
+            '3.0.0': "{communities}/service/atom/communities/all",
+            '4.5.0': "{communities}/service/atom/{authentication}/communities/all"
         },
         
         /**
@@ -198,8 +198,8 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @for sbt.connections.CommunityService
          */
         AtomCommunityInvitesMy : {
-            '3.0.0': "/${communities}/service/atom/community/invites/my",
-            '4.5.0': "/${communities}/service/atom/{authentication}/community/invites/my",
+            '3.0.0': "{communities}/service/atom/community/invites/my",
+            '4.5.0': "{communities}/service/atom/{authentication}/community/invites/my",
         },
 
         /**
@@ -214,8 +214,8 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @for sbt.connections.CommunityService
          */
         AtomCommunitySubCommunities : {
-            '3.0.0': "${communities}/service/atom/community/subcommunities",
-            '4.5.0': "${communities}/service/atom/{authentication}/community/subcommunities"
+            '3.0.0': "{communities}/service/atom/community/subcommunities",
+            '4.5.0': "{communities}/service/atom/{authentication}/community/subcommunities"
         },
             
         /**
@@ -230,8 +230,8 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @for sbt.connections.CommunityService
          */
         AtomCommunityMembers : {
-            '3.0.0': "${communities}/service/atom/community/members",
-            '4.5.0': "${communities}/service/atom/{authentication}/community/members"
+            '3.0.0': "{communities}/service/atom/community/members",
+            '4.5.0': "{communities}/service/atom/{authentication}/community/members"
         },
         
         /**
@@ -242,8 +242,8 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @for sbt.connections.CommunityService
          */
         AtomCommunityInstance : {
-            '3.0.0': "${communities}/service/atom/community/instance",
-            '4.5.0': "${communities}/service/atom/{authentication}/community/instance"
+            '3.0.0': "{communities}/service/atom/community/instance",
+            '4.5.0': "{communities}/service/atom/{authentication}/community/instance"
         },
         
         /**
@@ -254,8 +254,8 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @for sbt.connections.CommunityService
          */
         AtomCommunityForumTopics : {
-            '3.0.0': "/${communities}/service/atom/community/forum/topics",
-            '4.5.0':"/${communities}/service/atom/{authentication}/community/forum/topics"
+            '3.0.0': "{communities}/service/atom/community/forum/topics",
+            '4.5.0': "{communities}/service/atom/{authentication}/community/forum/topics"
         },
         
 
@@ -266,7 +266,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @for sbt.connections.CommunityService
          */
         AtomUploadCommunityFile : {
-            '3.0.0': '/${files}/{endpointName}/connections/UploadCommunityFile/{communityUuid}'
+            '3.0.0': '{files}/{endpointName}/connections/UploadCommunityFile/{communityUuid}'
         },
         /**
          * File Proxy URL for update community logo
@@ -275,7 +275,7 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @for sbt.connections.CommunityService
          */
 		AtomUpdateCommunityLogo : {
-			'3.0.0': '/${files}/{endpointName}/connections/UpdateCommunityLogo/{fileName}'
+			'3.0.0': '{files}/{endpointName}/connections/UpdateCommunityLogo/{fileName}'
 		},
         /**
          * Obtain a full representation of the invitations as an Atom entry document.
@@ -285,8 +285,8 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @for sbt.connections.CommunityService
          */
         AtomCommunityInvites : {
-            '3.0.0': '/${communities}/service/atom/community/invites',
-            '4.5.0': '/${communities}/service/atom/{authentication}/communities/invites'
+            '3.0.0': '{communities}/service/atom/community/invites',
+            '4.5.0': '{communities}/service/atom/{authentication}/communities/invites'
         },
         /**
          * A feed of communities of which the authenticated user is a member.
@@ -300,8 +300,8 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @for sbt.connections.CommunityService
          */
         AtomCommunitiesMy : {
-            '3.0.0': '/${communities}/service/atom/communities/my',
-            '4.5.0': '/${communities}/service/atom/{authentication}/communities/my'
+            '3.0.0': '{communities}/service/atom/communities/my',
+            '4.5.0': '{communities}/service/atom/{authentication}/communities/my'
         },
         
         /**
@@ -313,8 +313,8 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @for sbt.connections.CommunityService
          */
         AtomCommunityEventComments : {
-            '3.0.0' : '/${communities}/calendar/atom/calendar/event/comment',
-            '4.5.0' : '/${communities}/calendar/atom/{authentication}/calendar/event/comment'
+            '3.0.0' : '{communities}/calendar/atom/calendar/event/comment',
+            '4.5.0' : '{communities}/calendar/atom/{authentication}/calendar/event/comment'
         },
         /**
          * Parameters: 
@@ -327,8 +327,8 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @for sbt.connections.CommunityService
          */
         AtomCommunityEventAttend : {
-            '3.0.0' : "/${communities}/calendar/atom/calendar/event/attendees",
-            '4.5.0' : '/${communities}/calendar/atom/{authentication}/calendar/event/attendees'
+            '3.0.0' : "{communities}/calendar/atom/calendar/event/attendees",
+            '4.5.0' : '{communities}/calendar/atom/{authentication}/calendar/event/attendees'
         },
         /**
          * Get a feed of a Community's Events or EventInsts. 
@@ -353,8 +353,8 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @for sbt.connections.CommunityService
          */
         AtomCommunityEvents : {
-            '3.0.0' : '/${communities}/calendar/atom/calendar/event',
-            '4.5.0' : '/${communities}/calendar/atom/{authentication}/calendar/event'
+            '3.0.0' : '{communities}/calendar/atom/calendar/event',
+            '4.5.0' : '{communities}/calendar/atom/{authentication}/calendar/event'
         },
         
         /**
@@ -364,8 +364,8 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
          * @for sbt.connections.CommunityService
          */
         AtomCommunityBookmarks : {
-            '3.0.0' : '/${communities}/service/atom/community/bookmarks',
-            '4.5.0' : '/${communities}/service/atom/{authentication}/community/bookmarks'
+            '3.0.0' : '{communities}/service/atom/community/bookmarks',
+            '4.5.0' : '{communities}/service/atom/{authentication}/community/bookmarks'
         }
         
     });

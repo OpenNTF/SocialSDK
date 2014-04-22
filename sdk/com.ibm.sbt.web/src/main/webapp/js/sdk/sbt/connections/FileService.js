@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -283,9 +283,8 @@ define(
 		 * @returns {String} download URL
 		 */
 		getDownloadUrl : function() {
-			return config.Properties.serviceUrl + "/files/" + this.service.endpoint.proxyPath + "/" + "connections" + "/" + "DownloadFile" + "/"
-					+ this.getFileId() + "/" + this.getLibraryId();
-			;
+			var url = this.getAsString("downloadUrl");
+			return this.service.endpoint.rewriteUrl(url);
 		},
 		/**
 		 * Returns the type
@@ -1579,7 +1578,8 @@ define(
 					+ "/" + encodeURIComponent(fileName), args && args.parameters ? args.parameters : {});
 			var headers = {
 				"Content-Type" : false,
-				"Process-Data" : false // processData = false is reaquired by jquery
+				"Process-Data" : false, // processData = false is reaquired by jquery
+				"X-Endpoint-name" : this.endpoint.name
 			};
 			var options = {
 				method : "POST",
@@ -1738,9 +1738,7 @@ define(
 		 * @param {String} libraryId The library ID of the file
 		 */
 		downloadFile : function(fileId, libraryId) {
-			var url = config.Properties.serviceUrl + "/files/" + this.endpoint.proxyPath + "/" + "connections" + "/" + "DownloadFile" + "/" + fileId
-					+ "/" + libraryId;
-			window.open(url);
+			window.open(this.getDownloadUrl());
 		},
 
 		actOnCommentAwaitingApproval : function(commentId, action, actionReason) {

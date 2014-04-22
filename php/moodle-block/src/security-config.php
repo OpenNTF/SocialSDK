@@ -59,17 +59,19 @@ function ibm_sbt_decrypt($key, $encryptedData, $iv) {
 	if (defined('IBM_SBT_CRYPTO_ENABLED') && IBM_SBT_CRYPTO_ENABLED) {
 		$encryptedData = stripslashes($encryptedData);
 	
-		$enc = mcrypt_module_open(MCRYPT_RIJNDAEL_256, '', MCRYPT_MODE_CBC, '');
-		mcrypt_generic_init($enc, $key, $iv);
+		$e = mcrypt_module_open(MCRYPT_RIJNDAEL_256, '', MCRYPT_MODE_CBC, '');
+		mcrypt_generic_init($e, $key, $iv);
 	
 		$encryptedData = base64_decode($encryptedData);
-		$data = mdecrypt_generic($enc, $encryptedData);
-		mcrypt_generic_deinit($enc);
-		mcrypt_module_close($enc);
+		$data = mdecrypt_generic($e, $encryptedData);
+		mcrypt_generic_deinit($e);
+		mcrypt_module_close($e);
 	
-		$***REMOVED*** ord($data[strlen($data) - 1]);
+		$dataLength = strlen($data);
+		$item = $data[$dataLength - 1];
+		$padding = ord($item);
 	
-		return substr($data, 0, -$dataPad);
+		return substr($data, 0, -$padding);
 	} else {
 		return $encryptedData;
 	}

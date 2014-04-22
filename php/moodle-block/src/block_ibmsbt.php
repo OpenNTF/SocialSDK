@@ -51,6 +51,7 @@ class block_ibmsbt extends block_base {
 		if (isset($this->config->plugin)) {
 			ob_start();
 			
+			// Load dependencies
 			if (!defined('BASE_LOCATION')) {
 				$autoload = __DIR__ . '/core/autoload.php';
 				include $autoload;
@@ -98,6 +99,7 @@ class block_ibmsbt extends block_base {
 					$this->content->text = ob_get_clean();
 					return;
 				} else if ($response->getStatusCode() == 401) {
+					// Delete old credentials. 
 					$store->deleteOAuthCredentials($this->config->endpoint);
 				}
 			}
@@ -123,7 +125,6 @@ class block_ibmsbt extends block_base {
 			if (($settings->getAuthenticationMethod($this->config->endpoint) == 'basic' && $store->getBasicAuthUsername($this->config->endpoint) != null 
 				&& $store->getBasicAuthPassword($this->config->endpoint) != null) || ($settings->getAuthenticationMethod($this->config->endpoint) == 'oauth1' && $store->getRequestToken($this->config->endpoint) != null)
 				|| ($settings->getAuthenticationMethod($this->config->endpoint) == 'basic' && $settings->getBasicAuthMethod($this->config->endpoint) == 'global')
-				|| ($settings->getAuthenticationMethod($this->config->endpoint) == 'basic' && $settings->getBasicAuthMethod($this->config->endpoint) == 'profile' && $store->getBasicAuthPassword($this->config->endpoint) != null)
 				|| ($settings->getAuthenticationMethod($this->config->endpoint) == 'oauth2' && $store->getOAuthAccessToken($this->config->endpoint) != null)) {
 				
 				if (isloggedin()) {
@@ -188,13 +189,20 @@ class block_ibmsbt extends block_base {
 			$this->config->text = 'Default text ...';
 		}
 	}
+	
+	/**
+	 * Initiates the OAuth dance.
+	 * 
+	 * @param SBTSettings $settings
+	 */
 	private function _startOAuthDance($settings) {
 		global $USER;
 		if (isset($USER->id) && $USER->id !== null) {
 			setcookie('ibm-sbt-uid', $USER->id, time() + 604800);
 		}
 		
-		
+		// Check the authentication method (different dance depending on whether we are 
+		// using OAuth 1.0 or OAuth 2.0)
 		$authMethod = $settings->getAuthenticationMethod($this->config->endpoint);
 		if ($authMethod == 'oauth1') {
 			// Check if we have an access token. If not, re-direct user to authentication page
@@ -245,7 +253,8 @@ class block_ibmsbt extends block_base {
 				);
 					
 				$authURL = $settings->getAuthorizationURL($this->config->endpoint) . '?' . http_build_query($parameters, null, '&');
-		
+				
+				// If headers have already been sent, then we need to use a JavaScript re-direct
 				if (!headers_sent()) {
 					header("Location: " . $authURL);
 				} else {

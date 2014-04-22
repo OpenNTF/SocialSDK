@@ -16,7 +16,7 @@ function show_selected_endpoint(selected_endpoint) {
 	document.getElementById("basic_auth_password").value = document.getElementById(id_str + "_basic_auth_password").value;
 }
 
-function endpoint_change() {
+function ibm_sbt_endpoint_change() {
 	document.getElementById("delete_endpoint").value = "no";
 	var myselect = document.getElementById("enpoint_list");
 	if (myselect != null && myselect.options[myselect.selectedIndex] != null) {
@@ -30,7 +30,7 @@ function sdk_deploy_default_values() {
 }
 
 
-function delete_selected_endpoint() {
+function ibm_sbt_delete_selected_endpoint() {
 	var response = confirm("Do you really want to delete this endpoint?");
 	if (response) {
 		document.getElementById("delete_endpoint").value = "yes";
@@ -39,13 +39,13 @@ function delete_selected_endpoint() {
 }
 
 function create_new_endpoint() {
-	reset();
+	ibm_sbt_reset();
 	$( "#dialog" ).dialog("open");
 	document.getElementById("delete_endpoint").value = "no";
 	document.getElementById("new_endpoint").value = "yes";
 }
 
-function edit_selected_endpoint() {
+function ibm_sbt_edit_selected_endpoint() {
 	document.getElementById("new_consumer_key").value = document.getElementById("consumer_key").value;
 	document.getElementById("new_consumer_secret").value = document.getElementById("consumer_secret").value;
 	document.getElementById("new_endpoint_url").value = document.getElementById("endpoint_url").value;
@@ -63,8 +63,8 @@ function edit_selected_endpoint() {
 	document.getElementById("new_endpoint_version").value = document.getElementById("endpoint_version").value;
 	document.getElementById("new_allow_client_access").checked = document.getElementById("allow_client_access").checked;
 	
-	new_server_type_change();
-	change_new_basic_auth_method();
+	ibm_sbt_new_server_type_change();
+	ibm_sbt_change_new_basic_auth_method();
 	$("#dialog").dialog("open");
 	document.getElementById("delete_endpoint").value = "no";
 	document.getElementById("new_endpoint").value = "no";
@@ -77,89 +77,89 @@ function save_library_selection() {
 
 window.onload = function () {
 	document.getElementById("new_callback_url").value = document.getElementById("callback_url").value;
-	endpoint_change();
+	ibm_sbt_endpoint_change();
 	
 	document.getElementById("new_consumer_key").addEventListener('keyup', function (e) {
-		completeFieldCheck();
+		ibm_sbt_complete_field_check();
 	}, false);
 	
 	document.getElementById("new_consumer_secret").addEventListener('keyup', function (e) {
-		completeFieldCheck();
+		ibm_sbt_complete_field_check();
 	}, false);
 	
 	document.getElementById("new_endpoint_name").addEventListener('keyup', function (e) {
-		completeFieldCheck();
+		ibm_sbt_complete_field_check();
 	}, false);
 	
 	document.getElementById("new_endpoint_url").addEventListener('keyup', function (e) {
-		completeFieldCheck();
+		ibm_sbt_complete_field_check();
 	}, false);
 	
 	document.getElementById("new_authorization_url").addEventListener('keyup', function (e) {
-		completeFieldCheck();
+		ibm_sbt_complete_field_check();
 	}, false);
 	
 	document.getElementById("new_access_token_url").addEventListener('keyup', function (e) {
-		completeFieldCheck();
+		ibm_sbt_complete_field_check();
 	}, false);
 	
 	document.getElementById("new_request_token_url").addEventListener('keyup', function (e) {
-		completeFieldCheck();
+		ibm_sbt_complete_field_check();
 	}, false);
 	
 	document.getElementById("new_basic_auth_username").addEventListener('keyup', function (e) {
-		completeFieldCheck();
+		ibm_sbt_complete_field_check();
 	}, false);
 
 	document.getElementById("new_basic_auth_password").addEventListener('keyup', function (e) {
-		completeFieldCheck();
+		ibm_sbt_complete_field_check();
 	}, false);
 	
 	document.getElementById("new_consumer_key").addEventListener('mouseout', function (e) {
-		completeFieldCheck();
+		ibm_sbt_complete_field_check();
 	}, false);
 	
 	document.getElementById("new_consumer_secret").addEventListener('mouseout', function (e) {
-		completeFieldCheck();
+		ibm_sbt_complete_field_check();
 	}, false);
 	
 	document.getElementById("new_endpoint_name").addEventListener('mouseout', function (e) {
-		completeFieldCheck();
+		ibm_sbt_complete_field_check();
 	}, false);
 	
 	document.getElementById("new_endpoint_url").addEventListener('mouseout', function (e) {
-		completeFieldCheck();
+		ibm_sbt_complete_field_check();
 	}, false);
 	
 	document.getElementById("new_authorization_url").addEventListener('mouseout', function (e) {
-		completeFieldCheck();
+		ibm_sbt_complete_field_check();
 	}, false);
 	
 	document.getElementById("new_access_token_url").addEventListener('mouseout', function (e) {
-		completeFieldCheck();
+		ibm_sbt_complete_field_check();
 	}, false);
 	
 	document.getElementById("new_request_token_url").addEventListener('mouseout', function (e) {
-		completeFieldCheck();
+		ibm_sbt_complete_field_check();
 	}, false);
 	
 	document.getElementById("new_basic_auth_username").addEventListener('mouseout', function (e) {
-		completeFieldCheck();
+		ibm_sbt_complete_field_check();
 	}, false);
 
 	document.getElementById("new_basic_auth_password").addEventListener('mouseout', function (e) {
-		completeFieldCheck();
+		ibm_sbt_complete_field_check();
 	}, false);
 
 	document.getElementById("new_form_auth_page").addEventListener('mouseout', function (e) {
-		completeFieldCheck();
+		ibm_sbt_complete_field_check();
 	}, false);
 
 	document.getElementById("new_form_auth_login_page").addEventListener('mouseout', function (e) {
-		completeFieldCheck();
+		ibm_sbt_complete_field_check();
 	}, false);
 
 	document.getElementById("new_form_auth_cookie_cache").addEventListener('mouseout', function (e) {
-		completeFieldCheck();
+		ibm_sbt_complete_field_check();
 	}, false);
 }

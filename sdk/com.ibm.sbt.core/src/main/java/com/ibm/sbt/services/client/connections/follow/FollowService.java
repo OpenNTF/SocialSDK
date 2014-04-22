@@ -46,6 +46,8 @@ import com.ibm.sbt.services.endpoints.Endpoint;
 
 public class FollowService extends BaseService{
 	
+	private static final long serialVersionUID = 8450637561663717438L;
+
 	public FollowService() {
 		super();
 	}
@@ -184,7 +186,7 @@ public class FollowService extends BaseService{
 		
 	private FollowedResource getResource(String apiUrl,Map<String, String> parameters) throws ClientServicesException {
 		try {
-			EntityList resources = (EntityList<FollowedResource>)getEntities(apiUrl, parameters, getFollowFeedHandler());
+			EntityList<FollowedResource> resources = (EntityList<FollowedResource>)getEntities(apiUrl, parameters, getFollowFeedHandler());
 			if(resources!=null && resources.size()>0){
 				return (FollowedResource) resources.get(0);
 			}else{

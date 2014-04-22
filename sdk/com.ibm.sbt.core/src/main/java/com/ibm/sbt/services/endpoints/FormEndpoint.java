@@ -142,20 +142,7 @@ public abstract class FormEndpoint extends AbstractEndpoint {
 			}
 			requestUrl = requestUrl.concat(getLoginFormUrl());
 			BasicCookieStore cookieStore = new BasicCookieStore();
-			DefaultHttpClient defaultHttpClient = new DefaultHttpClient();
-			
-			if(isForceTrustSSLCertificate()){
-				defaultHttpClient = SSLUtil.wrapHttpClient(defaultHttpClient); // Configure httpclient to accept all SSL certificates
-			}
-			if (isForceDisableExpectedContinue()) {
-				defaultHttpClient.getParams().setParameter(
-						CoreProtocolPNames.USE_EXPECT_CONTINUE, false);
-			}
-			if (StringUtil.isNotEmpty(getHttpProxy())) {
-				defaultHttpClient = ProxyDebugUtil.wrapHttpClient(defaultHttpClient, getHttpProxy()); // Configure httpclient to direct all traffic through proxy clients
-			}
-
-			defaultHttpClient.setCookieStore(cookieStore);
+			HttpClient defaultHttpClient = createClient(cookieStore);
 			HttpPost httpost = new HttpPost(requestUrl);
 			List<NameValuePair> formParams = getLoginFormParameters(); // retrieve platform specific login parameters
 			httpost.setEntity(new UrlEncodedFormEntity(formParams, "UTF-8"));
@@ -178,6 +165,23 @@ public abstract class FormEndpoint extends AbstractEndpoint {
 		}
 		return validAuthentication;
 
+	}
+	protected DefaultHttpClient createClient(BasicCookieStore cookieStore) {
+		DefaultHttpClient defaultHttpClient = new DefaultHttpClient();
+		
+		if(isForceTrustSSLCertificate()){
+			defaultHttpClient = SSLUtil.wrapHttpClient(defaultHttpClient); // Configure httpclient to accept all SSL certificates
+		}
+		if (isForceDisableExpectedContinue()) {
+			defaultHttpClient.getParams().setParameter(
+					CoreProtocolPNames.USE_EXPECT_CONTINUE, false);
+		}
+		if (StringUtil.isNotEmpty(getHttpProxy())) {
+			defaultHttpClient = ProxyDebugUtil.wrapHttpClient(defaultHttpClient, getHttpProxy()); // Configure httpclient to direct all traffic through proxy clients
+		}
+
+		defaultHttpClient.setCookieStore(cookieStore);
+		return defaultHttpClient;
 	}
 
 

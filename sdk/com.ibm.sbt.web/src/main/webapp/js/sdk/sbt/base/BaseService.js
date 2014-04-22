@@ -99,6 +99,7 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
             if (!url) {
                 throw new Error("BaseService.constructUrl: Invalid argument, url is undefined or null.");
             }
+           
             
             if(this.endpoint){
             	var substitutes = {};

@@ -3,7 +3,6 @@
  */
 package com.ibm.sbt.automation.core.test.connections;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -16,7 +15,6 @@ import org.junit.Before;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.automation.core.test.BaseApiTest;
-import com.ibm.sbt.automation.core.test.BaseTest.AuthType;
 import com.ibm.sbt.automation.core.utils.Trace;
 import com.ibm.sbt.security.authentication.AuthenticationException;
 import com.ibm.sbt.services.client.ClientServicesException;
@@ -305,7 +303,7 @@ public class BaseForumsTest extends BaseApiTest {
             forum = (Forum)forums.iterator().next();
             Trace.log("Last created forum: "+forum.getForumUuid());
             Trace.log("Last created forum: "+forum.getPublished());
-            Iterator<BaseForumEntity> i = forums.iterator();
+            Iterator<Forum> i = forums.iterator();
             while (i.hasNext()) {
             	BaseForumEntity c= i.next();
             	Trace.log("Last created forum: "+((Forum)c).getForumUuid());

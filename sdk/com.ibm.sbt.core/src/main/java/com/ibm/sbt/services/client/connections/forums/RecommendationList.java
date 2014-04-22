@@ -16,86 +16,18 @@
 
 package com.ibm.sbt.services.client.connections.forums;
 
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-
 import com.ibm.sbt.services.client.Response;
-import com.ibm.sbt.services.client.base.ConnectionsFeedXpath;
-import com.ibm.sbt.services.client.base.datahandlers.EntityList;
-import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
-import com.ibm.sbt.services.client.connections.forums.feedhandler.RecommendationsFeedHandler;
+import com.ibm.sbt.services.client.base.IFeedHandler;
+import com.ibm.sbt.services.client.base.datahandlers.AtomEntityList;
 
 /**
  * @Represents list of forum Recommendation Atom entry.
  * @author Swati Singh
+ * @author Carlos Manias
  */
-public class RecommendationList extends EntityList<Recommendation> {
+public class RecommendationList extends AtomEntityList<Recommendation> {
 
-	public RecommendationList(Response requestData, RecommendationsFeedHandler feedHandler) {
+	public RecommendationList(Response requestData, IFeedHandler<Recommendation> feedHandler) {
 		super(requestData, feedHandler);
 	}
-	
-	public RecommendationList(){}
-
-	@Override
-	public Document getData(){
-		return (Document)super.getData();
-	}
-
-	@Override
-	public ForumService getService() {
-		return (ForumService)super.getService();
-	}
-
-	@Override
-	public RecommendationsFeedHandler getFeedHandler() {
-		return (RecommendationsFeedHandler)super.getFeedHandler();
-	}
-
-	@Override
-	protected Recommendation getEntity(Object data){
-		return (Recommendation)super.getEntity(data);
-	}
-
-	@Override
-	protected ArrayList<Recommendation> createEntities() {
-		XmlDataHandler dataHandler = new XmlDataHandler(getData(), nameSpaceCtx);
-		ArrayList<Recommendation> recommendations = new ArrayList<Recommendation>();
-		List<Node> entries = dataHandler.getEntries(ForumsXPath.entry);
-		for (Node node: entries) {
-			Recommendation recommendation = getEntity(node);
-			recommendations.add(recommendation);
-		}
-		return recommendations;
-	}
-
-	private XmlDataHandler getMetaDataHandler(){
-		return new XmlDataHandler(getData(), nameSpaceCtx);
-	}
-
-	@Override
-	public int getTotalResults() {
-		return getMetaDataHandler().getAsInt(ConnectionsFeedXpath.TotalResults);
-	}
-
-	@Override
-	public int getStartIndex() {
-		return getMetaDataHandler().getAsInt(ConnectionsFeedXpath.StartIndex);
-	}
-
-	@Override
-	public int getItemsPerPage() {
-		return getMetaDataHandler().getAsInt(ConnectionsFeedXpath.ItemsPerPage);
-	}
-
-	@Override
-	public int getCurrentPage() {
-		return getMetaDataHandler().getAsInt(ConnectionsFeedXpath.CurrentPage);
-	}
-
 }

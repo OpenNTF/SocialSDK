@@ -51,7 +51,6 @@ import com.ibm.sbt.services.client.connections.forums.ForumService;
 import com.ibm.sbt.services.client.connections.forums.ForumServiceException;
 import com.ibm.sbt.services.client.connections.forums.ForumTopic;
 import com.ibm.sbt.services.client.connections.forums.TopicList;
-import com.ibm.sbt.services.client.connections.forums.feedhandler.TopicsFeedHandler;
 import com.ibm.sbt.services.endpoints.Endpoint;
 
 /**
@@ -409,7 +408,7 @@ public class CommunityService extends BaseService {
 		
 		TopicList forumTopics;
 		try {
-			forumTopics = (TopicList) getEntities(requestUrl, parameters, new TopicsFeedHandler(new ForumService()));
+			forumTopics = (TopicList) getEntities(requestUrl, parameters, new ForumService().getForumTopicFeedHandler());
 		}catch (ClientServicesException e) {
 			throw new CommunityServiceException(e, Messages.CommunityForumTopicsException, communityUuid);
 		} catch (IOException e) {

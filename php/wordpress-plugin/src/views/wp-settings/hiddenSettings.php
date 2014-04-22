@@ -68,7 +68,7 @@ print '<script type="text/javascript" src="' . plugins_url(PLUGIN_NAME) . '/view
 				***REMOVED*** echo $GLOBALS[LANG]['auth_method'];?>
 			</td>
 			<td>
-				<select id="new_authentication_method" name="new_authentication_method" onchange="change_new_authentication_method();">
+				<select id="new_authentication_method" name="new_authentication_method" onchange="ibm_sbt_change_new_authentication_method();">
 					<option value="choose">***REMOVED*** echo $GLOBALS[LANG]['choose']; ?></option>
 					<option id="new_oauth1" value="oauth1">OAuth 1.0</option>
 					<option value="oauth2">OAuth 2.0</option>
@@ -100,7 +100,6 @@ print '<script type="text/javascript" src="' . plugins_url(PLUGIN_NAME) . '/view
 				<input type="checkbox" checked="checked" id="new_allow_client_access" name="new_allow_client_access" value="allow_client_access" />&nbsp;***REMOVED*** echo $GLOBALS[LANG]['allow_client_access'];?>
 			</td>
 		</tr>
-
 		<tr>
 			<td style="width: 200px;" id="lb_endpoint_url">
 				***REMOVED*** echo $GLOBALS[LANG]['endpoint_url'];?>
@@ -156,7 +155,7 @@ print '<script type="text/javascript" src="' . plugins_url(PLUGIN_NAME) . '/view
 				***REMOVED*** echo $GLOBALS[LANG]['basic_auth_method'];?>
 			</td>
 			<td>
-				<select id="new_basic_auth_method" name="new_basic_auth_method" onchange="change_new_basic_auth_method();">
+				<select id="new_basic_auth_method" name="new_basic_auth_method" onchange="ibm_sbt_change_new_basic_auth_method();">
 					<option value="choose">***REMOVED*** echo $GLOBALS[LANG]['choose']; ?></option>
 					<option value="global">***REMOVED*** echo $GLOBALS[LANG]['global_user_creds']; ?></option>
 		    		<option value="prompt">***REMOVED*** echo $GLOBALS[LANG]['prompt_user_creds']; ?></option>
@@ -189,6 +188,6 @@ print '<script type="text/javascript" src="' . plugins_url(PLUGIN_NAME) . '/view
 			</td>
 		</tr>
 	</table>
-	<button disabled="disabled" onclick="save_new_endpoint();" id="new_endpoint_save">***REMOVED*** echo $GLOBALS[LANG]['save'];?></button> 
-	<button onclick="cancel_new_endpoint();" id="new_endpoint_cancel">***REMOVED*** echo $GLOBALS[LANG]['cancel'];?></button>
+	<button disabled="disabled" onclick="ibm_sbt_save_new_endpoint();" id="new_endpoint_save">***REMOVED*** echo $GLOBALS[LANG]['save'];?></button> 
+	<button onclick="ibm_sbt_cancel_new_endpoint();" id="new_endpoint_cancel">***REMOVED*** echo $GLOBALS[LANG]['cancel'];?></button>
 </div>

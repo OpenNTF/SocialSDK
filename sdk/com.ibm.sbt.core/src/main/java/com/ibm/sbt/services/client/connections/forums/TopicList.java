@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -17,25 +17,18 @@
 package com.ibm.sbt.services.client.connections.forums;
 
 import com.ibm.sbt.services.client.Response;
-import com.ibm.sbt.services.client.base.BaseService;
-import com.ibm.sbt.services.client.connections.forums.feedhandler.ForumsFeedHandler;
+import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.connections.forums.model.BaseForumEntityList;
 
 /**
  * Class used in representing List of Topic objects
  * @author Manish Kataria
+ * @author Carlos Manias
  */
 
-public class TopicList extends BaseForumEntityList {
+public class TopicList extends BaseForumEntityList<ForumTopic> {
 
-	public TopicList(Response requestData, BaseService service) {
-		super(requestData, service);
-	}
-	
-	public TopicList(){}
-	
-	public TopicList(Response requestData, ForumsFeedHandler feedHandler) {
+	public TopicList(Response requestData, IFeedHandler<ForumTopic> feedHandler) {
 		super(requestData, feedHandler);
 	}
-
 }

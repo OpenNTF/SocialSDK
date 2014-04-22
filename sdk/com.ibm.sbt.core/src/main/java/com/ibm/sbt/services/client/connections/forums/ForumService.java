@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -15,6 +15,7 @@
  */
 package com.ibm.sbt.services.client.connections.forums;
 
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.v4_5;
 
 import java.io.IOException;
@@ -22,21 +23,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.http.StatusLine;
+import org.w3c.dom.Node;
 
 import com.ibm.commons.util.StringUtil;
+import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
+import com.ibm.sbt.services.client.base.AtomFeedHandler;
 import com.ibm.sbt.services.client.base.AuthType;
 import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.NamedUrlPart;
 import com.ibm.sbt.services.client.connections.communities.Community;
 import com.ibm.sbt.services.client.connections.communities.CommunityServiceException;
-import com.ibm.sbt.services.client.connections.forums.feedhandler.ForumsFeedHandler;
-import com.ibm.sbt.services.client.connections.forums.feedhandler.RecommendationsFeedHandler;
-import com.ibm.sbt.services.client.connections.forums.feedhandler.RepliesFeedHandler;
-import com.ibm.sbt.services.client.connections.forums.feedhandler.TagFeedHandler;
-import com.ibm.sbt.services.client.connections.forums.feedhandler.TopicsFeedHandler;
 import com.ibm.sbt.services.client.connections.forums.transformers.BaseForumTransformer;
 import com.ibm.sbt.services.endpoints.Endpoint;
 
@@ -50,6 +50,8 @@ import com.ibm.sbt.services.endpoints.Endpoint;
  */
 
 public class ForumService extends BaseService {
+
+	private static final long serialVersionUID = -4926901916081556236L;
 
 	/**
 	 * Used in constructing REST APIs
@@ -103,6 +105,96 @@ public class ForumService extends BaseService {
 		return new NamedUrlPart("authType", auth);
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
+	public IFeedHandler<Forum> getForumFeedHandler() {
+		return new AtomFeedHandler<Forum>(this) {
+			@Override
+			protected Forum entityInstance(BaseService service, Node node, XPathExpression xpath) {
+				return new Forum(service, node, nameSpaceCtx, xpath);
+			}
+
+			@Override
+			public ForumList createEntityList(Response requestData) {
+				return new ForumList((Response)requestData, this);
+			}
+		};
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public IFeedHandler<ForumTopic> getForumTopicFeedHandler() {
+		return new AtomFeedHandler<ForumTopic>(this) {
+			@Override
+			protected ForumTopic entityInstance(BaseService service, Node node, XPathExpression xpath) {
+				return new ForumTopic(service, node, nameSpaceCtx, xpath);
+			}
+
+			@Override
+			public TopicList createEntityList(Response requestData) {
+				return new TopicList((Response)requestData, this);
+			}
+		};
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public IFeedHandler<ForumReply> getForumReplyFeedHandler() {
+		return new AtomFeedHandler<ForumReply>(this) {
+			@Override
+			protected ForumReply entityInstance(BaseService service, Node node, XPathExpression xpath) {
+				return new ForumReply(service, node, nameSpaceCtx, xpath);
+			}
+
+			@Override
+			public ReplyList createEntityList(Response requestData) {
+				return new ReplyList((Response)requestData, this);
+			}
+		};
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public IFeedHandler<Recommendation> getRecommendationFeedHandler() {
+		return new AtomFeedHandler<Recommendation>(this) {
+			@Override
+			protected Recommendation entityInstance(BaseService service, Node node, XPathExpression xpath) {
+				return new Recommendation(service, node, nameSpaceCtx, xpath);
+			}
+
+			@Override
+			public RecommendationList createEntityList(Response requestData) {
+				return new RecommendationList((Response)requestData, this);
+			}
+		};
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public IFeedHandler<Tag> getTagFeedHandler() {
+		return new AtomFeedHandler<Tag>(this) {
+			@Override
+			protected Tag entityInstance(BaseService service, Node node, XPathExpression xpath) {
+				return new Tag(service, node, nameSpaceCtx, xpath);
+			}
+
+			@Override
+			public TagList createEntityList(Response requestData) {
+				return new TagList((Response)requestData, this);
+			}
+		};
+	}
+
 	/** This method returns the all forums
 	 * 
 	 * @return
@@ -121,20 +213,11 @@ public class ForumService extends BaseService {
 	 * @throws ForumServiceException
 	 */
 	public ForumList getAllForums(Map<String, String> parameters) throws ForumServiceException {
-		ForumList forums;
-
 		if(null == parameters){
 			parameters = new HashMap<String, String>();
 		}
-		try {
-			String allForumsUrl = ForumUrls.FORUMS.format(this);
-			forums = (ForumList)getEntities(allForumsUrl, parameters, new ForumsFeedHandler(this));
-		} catch (ClientServicesException e) {
-			throw new ForumServiceException(e);
-		} catch (IOException e) {
-			throw new ForumServiceException(e);
-		}
-		return forums;
+		String allForumsUrl = ForumUrls.FORUMS.format(this);
+		return getForumEntityList(allForumsUrl, parameters);
 	}
 
 	/**
@@ -156,20 +239,11 @@ public class ForumService extends BaseService {
 	 * @throws ForumServiceException
 	 */
 	public ForumList getPublicForums(Map<String, String> parameters) throws ForumServiceException {
-		ForumList forums;
-
 		if(null == parameters){
 			parameters = new HashMap<String, String>();
 		}
-		try {
-			String publicForumsUrl = ForumUrls.FORUMS_PUBLIC.format(this);
-			forums = (ForumList)getEntities(publicForumsUrl, parameters, new ForumsFeedHandler(this));
-		} catch (ClientServicesException e) {
-			throw new ForumServiceException(e);
-		} catch (IOException e) {
-			throw new ForumServiceException(e);
-		}
-		return forums;
+		String publicForumsUrl = ForumUrls.FORUMS_PUBLIC.format(this);
+		return getForumEntityList(publicForumsUrl, parameters);
 	}
 
 
@@ -191,20 +265,11 @@ public class ForumService extends BaseService {
 	 * @throws ForumServiceException
 	 */
 	public ForumList getMyForums(Map<String, String> parameters) throws ForumServiceException {
-		String myForumsUrl = ForumUrls.FORUMS_MY.format(this);
-		ForumList forums = null;
 		if(null == parameters){
 			parameters = new HashMap<String, String>();
 		}
-		try {
-			forums = (ForumList) getEntities(myForumsUrl, parameters, new ForumsFeedHandler(this));
-		} catch (ClientServicesException e) {
-			throw new ForumServiceException(e);
-		} catch (IOException e) {
-			throw new ForumServiceException(e);
-		}
-
-		return forums;
+		String myForumsUrl = ForumUrls.FORUMS_MY.format(this);
+		return getForumEntityList(myForumsUrl, parameters);
 	}
 
 	/**
@@ -215,17 +280,9 @@ public class ForumService extends BaseService {
 	 */
 	public TagList getForumsTags() throws ForumServiceException {
 		String tagsUrl = ForumUrls.TAGS_FORUMS.format(this);
-		TagList tags = null;
-		try {
-			tags = (TagList) getEntities(tagsUrl, null, new TagFeedHandler(this));
-		} catch (ClientServicesException e) {
-			throw new ForumServiceException(e);
-		} catch (IOException e) {
-			throw new ForumServiceException(e);
-		}
-
-		return tags;
+		return getTagEntityList(tagsUrl, null);
 	}
+
 	/**
 	 * This method returns the tags that have been assigned to forum topics
 	 * 
@@ -238,6 +295,7 @@ public class ForumService extends BaseService {
 	public TagList getForumTopicsTags(String forumUuid) throws ForumServiceException {
 		return getForumTopicsTags(forumUuid, null);
 	}
+
 	/**
 	 * This method returns the tags that have been assigned to forum topics
 	 * 
@@ -249,22 +307,12 @@ public class ForumService extends BaseService {
 	 * @throws ForumServiceException
 	 */
 	public TagList getForumTopicsTags(String forumUuid, Map<String, String> parameters) throws ForumServiceException {
-		String tagsUrl = ForumUrls.TAGS_TOPICS.format(this);
 		if(null == parameters){
 			parameters = new HashMap<String, String>();
 		}
 		parameters.put(FORUM_UNIQUE_IDENTIFIER, forumUuid);
-
-		TagList tags = null;
-		try {
-			tags = (TagList) getEntities(tagsUrl, parameters, new TagFeedHandler(this));
-		} catch (ClientServicesException e) {
-			throw new ForumServiceException(e);
-		} catch (IOException e) {
-			throw new ForumServiceException(e);
-		}
-
-		return tags;
+		String tagsUrl = ForumUrls.TAGS_TOPICS.format(this);
+		return getTagEntityList(tagsUrl, null);
 	}
 	
 	protected void checkVersion() throws ForumServiceException{
@@ -285,19 +333,10 @@ public class ForumService extends BaseService {
 	 */
 	public RecommendationList getRecommendations(String postUuid) throws ForumServiceException{
 		checkVersion();
-		String recommendationsUrl = ForumUrls.RECOMMENDATION_ENTRIES.format(this);
-		RecommendationList recommendations;
 		Map<String, String> parameters = new HashMap<String, String>();
-
 		parameters.put(POST_UNIQUE_IDENTIFIER, postUuid);
-		try {
-			recommendations = (RecommendationList) getEntities(recommendationsUrl, parameters, new RecommendationsFeedHandler(this));
-		} catch (Exception e) {
-			throw new ForumServiceException(e);
-		}
-
-		return recommendations;
-
+		String recommendationsUrl = ForumUrls.RECOMMENDATION_ENTRIES.format(this);
+		return getRecommendationEntityList(recommendationsUrl, parameters);
 	}
 
 	/**
@@ -320,7 +359,7 @@ public class ForumService extends BaseService {
 		String payload = "<entry xmlns='http://www.w3.org/2005/Atom'><category scheme='http://www.ibm.com/xmlns/prod/sn/type' term='recommendation'></category></entry>";
 		try {
 			result = createData(recommendationsUrl, parameters, null,payload);
-			recommendation = (Recommendation) new RecommendationsFeedHandler(this).createEntity(result);
+			recommendation = getRecommendationFeedHandler().createEntity(result);
 
 		} catch (Exception e) {
 			throw new ForumServiceException(e);
@@ -366,16 +405,7 @@ public class ForumService extends BaseService {
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put(FORUM_UNIQUE_IDENTIFIER, forumUuid);
 		String url = ForumUrls.FORUM.format(this);
-		Forum forum;
-		try {
-			forum = (Forum)getEntity(url, parameters, new ForumsFeedHandler(this));
-		} catch (ClientServicesException e) {
-			throw new ForumServiceException(e, forumUuid);
-		} catch (Exception e) {
-			throw new ForumServiceException(e, forumUuid);
-		}
-
-		return forum;
+		return getForumEntity(url, parameters);
 	}
 
 	/**
@@ -402,7 +432,7 @@ public class ForumService extends BaseService {
 
 			String url = ForumUrls.FORUMS.format(this);
 			result = createData(url, null, headers, payload);
-			forum = (Forum) new ForumsFeedHandler(this).createEntity(result);
+			forum = getForumFeedHandler().createEntity(result);
 
 		} catch (Exception e) {
 			throw new ForumServiceException(e, "error creating forum");
@@ -410,7 +440,6 @@ public class ForumService extends BaseService {
 
 		return forum;
 	}
-
 
 	/**
 	 * Wrapper method to update a forum
@@ -448,7 +477,6 @@ public class ForumService extends BaseService {
 		}
 
 	}
-
 
 	/**
 	 * Wrapper method to delete a forum
@@ -516,20 +544,11 @@ public class ForumService extends BaseService {
 	 * @throws ForumServiceException
 	 */
 	public TopicList getPublicForumTopics(Map<String, String> parameters) throws ForumServiceException {
-		String myTopicsUrl = ForumUrls.TOPICS.format(this);
-		TopicList topics = null;
 		if(null == parameters){
 			parameters = new HashMap<String, String>();
 		}
-		try {
-			topics = (TopicList) getEntities(myTopicsUrl, parameters, new TopicsFeedHandler(this));
-		} catch (ClientServicesException e) {
-			throw new ForumServiceException(e);
-		} catch (IOException e) {
-			throw new ForumServiceException(e);
-		}
-
-		return topics;
+		String myTopicsUrl = ForumUrls.TOPICS.format(this);
+		return getForumTopicEntityList(myTopicsUrl, parameters);
 	}
 
 	/**
@@ -550,20 +569,11 @@ public class ForumService extends BaseService {
 	 * @throws ForumServiceException
 	 */
 	public TopicList getMyForumTopics(Map<String, String> parameters) throws ForumServiceException {
-		String myTopicsUrl = ForumUrls.TOPICS_MY.format(this);
-		TopicList topics = null;
 		if(null == parameters){
 			parameters = new HashMap<String, String>();
 		}
-		try {
-			topics = (TopicList) getEntities(myTopicsUrl, parameters, new TopicsFeedHandler(this));
-		} catch (ClientServicesException e) {
-			throw new ForumServiceException(e);
-		} catch (IOException e) {
-			throw new ForumServiceException(e);
-		}
-
-		return topics;
+		String myTopicsUrl = ForumUrls.TOPICS_MY.format(this);
+		return getForumTopicEntityList(myTopicsUrl, parameters);
 	}
 
 	/**
@@ -586,22 +596,12 @@ public class ForumService extends BaseService {
 	 * @throws ForumServiceException
 	 */
 	public TopicList getForumTopics(String forumUid, Map<String, String> parameters) throws ForumServiceException {
-		String myTopicsUrl = ForumUrls.TOPICS.format(this);
-		TopicList topics = null;
 		if(null == parameters){
 			parameters = new HashMap<String, String>();
 		}
-
 		parameters.put(FORUM_UNIQUE_IDENTIFIER, forumUid);
-		try {
-			topics = (TopicList) getEntities(myTopicsUrl, parameters, new TopicsFeedHandler(this));
-		} catch (ClientServicesException e) {
-			throw new ForumServiceException(e);
-		} catch (IOException e) {
-			throw new ForumServiceException(e);
-		}
-
-		return topics;
+		String myTopicsUrl = ForumUrls.TOPICS.format(this);
+		return getForumTopicEntityList(myTopicsUrl, parameters);
 	}
 
 	/**
@@ -615,8 +615,6 @@ public class ForumService extends BaseService {
 		return getForumTopic(topicId, null);
 	}
 
-
-
 	/**
 	 * This method returns topic
 	 * 
@@ -625,23 +623,13 @@ public class ForumService extends BaseService {
 	 * @throws ForumServiceException
 	 */
 	public ForumTopic getForumTopic(String topicId, Map<String, String> parameters) throws ForumServiceException {
-		String myTopicsUrl = ForumUrls.TOPIC.format(this);
-		ForumTopic topic = null;
 		if(null == parameters){
 			parameters = new HashMap<String, String>();
 		}
 		parameters.put(TOPIC_UNIQUE_IDENTIFIER, topicId);
-		try {
-			topic = (ForumTopic)getEntity(myTopicsUrl, parameters, new TopicsFeedHandler(this));
-		} catch (ClientServicesException e) {
-			throw new ForumServiceException(e);
-		} catch (IOException e) {
-			throw new ForumServiceException(e);
-		}
-
-		return topic;
+		String myTopicsUrl = ForumUrls.TOPIC.format(this);
+		return getForumTopicEntity(myTopicsUrl, parameters);
 	}
-
 
 	/**
 	 * Wrapper method to create a Topic
@@ -654,7 +642,6 @@ public class ForumService extends BaseService {
 	public ForumTopic createForumTopic(ForumTopic topic) throws ForumServiceException {
 		return createForumTopic(topic,topic.getForumUuid());
 	}
-
 
 	/**
 	 * Wrapper method to create a Topic
@@ -681,7 +668,7 @@ public class ForumService extends BaseService {
 
 			String url = ForumUrls.TOPICS.format(this);
 			result = createData(url, params, headers,payload);
-			topic = (ForumTopic) new TopicsFeedHandler(this).createEntity(result);
+			topic = getForumTopicFeedHandler().createEntity(result);
 
 		} catch (Exception e) {
 			throw new ForumServiceException(e, "error creating forum");
@@ -689,8 +676,6 @@ public class ForumService extends BaseService {
 
 		return topic;
 	}
-
-
 
 	/**
 	 * Wrapper method to create a Topic for default Forum of a Community
@@ -716,7 +701,7 @@ public class ForumService extends BaseService {
 			headers.put("Content-Type", "application/atom+xml");
 			String postUrl = ForumUrls.TOPICS.format(this);
 			result = createData(postUrl, params, headers,payload);
-			topic = (ForumTopic) new TopicsFeedHandler(this).createEntity(result);
+			topic = getForumTopicFeedHandler().createEntity(result);
 
 		} catch (Exception e) {
 			throw new ForumServiceException(e, "error creating forum");
@@ -807,19 +792,11 @@ public class ForumService extends BaseService {
 					StringUtil.isEmpty(parameters.get(REPLY_UNIQUE_IDENTIFIER))){
 					throw new ForumServiceException(null, "null post Uuid");
 			}
-		}
-		String myRepliesUrl = ForumUrls.REPLIES.format(this);
-		ReplyList replies = null;
-		if(null == parameters){
+		} else {
 			parameters = new HashMap<String, String>();
 		}
-		try {
-			replies = (ReplyList) getEntities(myRepliesUrl, parameters, new RepliesFeedHandler(this));
-		} catch (Exception e) {
-			throw new ForumServiceException(e,"error getting forum replies");
-		} 
-
-		return replies;
+		String myRepliesUrl = ForumUrls.REPLIES.format(this);
+		return getForumReplyEntityList(myRepliesUrl, parameters);
 	}
 
 	 /**
@@ -858,8 +835,8 @@ public class ForumService extends BaseService {
 		}
 		parameters.put(TOPIC_UNIQUE_IDENTIFIER, topicUuid);
 		return getReplies(parameters);
-		
 	}
+
 	/**
      * Get a list for forum replies that includes the replies of a Forum Reply.
      * 
@@ -905,23 +882,13 @@ public class ForumService extends BaseService {
 	 * @throws ForumServiceException
 	 */
 	public ForumReply getForumReply(String replyId, Map<String, String> parameters) throws ForumServiceException {
-		String myRepliesUrl = ForumUrls.REPLY.format(this);
-		ForumReply reply = null;
 		if(null == parameters){
 			parameters = new HashMap<String, String>();
 		}
+		String myRepliesUrl = ForumUrls.REPLY.format(this);
 		parameters.put(REPLY_UNIQUE_IDENTIFIER, replyId);
-		try {
-			reply = (ForumReply)getEntity(myRepliesUrl, parameters, new RepliesFeedHandler(this));
-		} catch (ClientServicesException e) {
-			throw new ForumServiceException(e);
-		} catch (IOException e) {
-			throw new ForumServiceException(e);
-		}
-
-		return reply;
+		return getForumReplyEntity(myRepliesUrl, parameters);
 	}
-
 
 	/**
 	 * Wrapper method to create a Reply
@@ -934,7 +901,6 @@ public class ForumService extends BaseService {
 	public ForumReply createForumReply(ForumReply reply) throws ForumServiceException {
 		return createForumReply(reply, reply.getTopicUuid());
 	}
-
 
 	/**
 	 * Wrapper method to create a Reply
@@ -964,7 +930,7 @@ public class ForumService extends BaseService {
 			headers.put("Content-Type", "application/atom+xml");
 			String url = ForumUrls.REPLIES.format(this);
 			result = createData(url, params, headers,payload);
-			reply = (ForumReply) new RepliesFeedHandler(this).createEntity(result);
+			reply = getForumReplyFeedHandler().createEntity(result);
 
 		} catch (Exception e) {
 			throw new ForumServiceException(e, "error creating forum reply");
@@ -972,7 +938,6 @@ public class ForumService extends BaseService {
 
 		return reply;
 	}
-
 
 	/**
 	 * Wrapper method to update a Reply
@@ -1049,5 +1014,95 @@ public class ForumService extends BaseService {
 			throw new ForumServiceException(e,"error deleting forum reply");
 		} 	
 
+	}
+
+	protected Forum getForumEntity(String requestUrl, Map<String, String> parameters) throws ForumServiceException {
+		try {
+			return (Forum)getEntity(requestUrl, getParameters(parameters), getForumFeedHandler());
+		} catch (IOException e) {
+			throw new ForumServiceException(e);
+		} catch(ClientServicesException e){
+			throw new ForumServiceException(e);
+		}
+	}
+
+	protected ForumTopic getForumTopicEntity(String requestUrl, Map<String, String> parameters) throws ForumServiceException {
+		try {
+			return (ForumTopic)getEntity(requestUrl, getParameters(parameters), getForumTopicFeedHandler());
+		} catch (IOException e) {
+			throw new ForumServiceException(e);
+		} catch(ClientServicesException e){
+			throw new ForumServiceException(e);
+		}
+	}
+
+	protected ForumReply getForumReplyEntity(String requestUrl, Map<String, String> parameters) throws ForumServiceException {
+		try {
+			return (ForumReply)getEntity(requestUrl, getParameters(parameters), getForumReplyFeedHandler());
+		} catch (IOException e) {
+			throw new ForumServiceException(e);
+		} catch(ClientServicesException e){
+			throw new ForumServiceException(e);
+		}
+	}
+
+	protected Recommendation getRecommendationEntity(String requestUrl, Map<String, String> parameters) throws ForumServiceException {
+		try {
+			return (Recommendation)getEntity(requestUrl, getParameters(parameters), getRecommendationFeedHandler());
+		} catch (IOException e) {
+			throw new ForumServiceException(e);
+		} catch(ClientServicesException e){
+			throw new ForumServiceException(e);
+		}
+	}
+
+	protected ForumList getForumEntityList(String requestUrl, Map<String, String> parameters) throws ForumServiceException {
+		try {
+			return (ForumList)getEntities(requestUrl, getParameters(parameters), getForumFeedHandler());
+		} catch (IOException e) {
+			throw new ForumServiceException(e);
+		} catch(ClientServicesException e){
+			throw new ForumServiceException(e);
+		}
+	}
+
+	protected TopicList getForumTopicEntityList(String requestUrl, Map<String, String> parameters) throws ForumServiceException {
+		try {
+			return (TopicList)getEntities(requestUrl, getParameters(parameters), getForumTopicFeedHandler());
+		} catch (IOException e) {
+			throw new ForumServiceException(e);
+		} catch(ClientServicesException e){
+			throw new ForumServiceException(e);
+		}
+	}
+
+	protected ReplyList getForumReplyEntityList(String requestUrl, Map<String, String> parameters) throws ForumServiceException {
+		try {
+			return (ReplyList)getEntities(requestUrl, getParameters(parameters), getForumReplyFeedHandler());
+		} catch (IOException e) {
+			throw new ForumServiceException(e);
+		} catch(ClientServicesException e){
+			throw new ForumServiceException(e);
+		}
+	}
+
+	protected RecommendationList getRecommendationEntityList(String requestUrl, Map<String, String> parameters) throws ForumServiceException {
+		try {
+			return (RecommendationList)getEntities(requestUrl, getParameters(parameters), getRecommendationFeedHandler());
+		} catch (IOException e) {
+			throw new ForumServiceException(e);
+		} catch(ClientServicesException e){
+			throw new ForumServiceException(e);
+		}
+	}
+
+	protected TagList getTagEntityList(String requestUrl, Map<String, String> parameters) throws ForumServiceException {
+		try {
+			return (TagList)getEntities(requestUrl, getParameters(parameters), getTagFeedHandler());
+		} catch (IOException e) {
+			throw new ForumServiceException(e);
+		} catch(ClientServicesException e){
+			throw new ForumServiceException(e);
+		}
 	}
 }

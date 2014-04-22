@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -16,20 +16,23 @@
 
 package com.ibm.sbt.services.client.connections.forums;
 
-import com.ibm.sbt.services.client.base.BaseEntity;
+import org.w3c.dom.Node;
+
+import com.ibm.commons.xml.NamespaceContext;
+import com.ibm.commons.xml.xpath.XPathExpression;
+import com.ibm.sbt.services.client.base.AtomEntity;
 import com.ibm.sbt.services.client.base.BaseService;
-import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
 
 /**
  * tag Entry Class - representing a tag associated with a Forum.
  *
  * @author Swati Singh
+ * @author Carlos Manias
  */
-public class Tag extends BaseEntity{
+public class Tag extends AtomEntity{
 
-
-	public Tag(BaseService svc, DataHandler<?> handler) {
-		super(svc,handler);
+	public Tag(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
+		super(service, node, namespaceCtx, xpathExpression);
 	}
 
 	public String getTerm() {
@@ -50,7 +53,4 @@ public class Tag extends BaseEntity{
 	public int getVisibility() {
 		return getAsInt(ForumsXPath.visibility);
 	}
-	
-	public Tag(){}
-
 }

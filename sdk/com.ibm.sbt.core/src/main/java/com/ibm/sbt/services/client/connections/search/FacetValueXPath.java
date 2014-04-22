@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -28,23 +28,32 @@ public enum FacetValueXPath implements FieldEntry{
 	uid("@id"),
 	id("@id"),
 	label("@label"),
-	weight("@weight");
+	weight("@weight"),
+	facetId("/a:feed/ibmsc:facets/ibmsc:facet[@id='{facet.id}']/ibmsc:facetValue");
 
 	private final XPathExpression path;
 	
 	private FacetValueXPath(String xpath) {
+		this.path = compile(xpath);
+	}
+	
+	private XPathExpression compile(String xpath){
 		XPathExpression xpathExpr = null;
 		try {
 			xpathExpr = DOMUtil.createXPath(xpath);
 		} catch (XMLException e) {
 			e.printStackTrace();
 		}
-		this.path = xpathExpr;
+		return xpathExpr;
 	}
 	
 	@Override
 	public Object getPath() {
 		return path;
+	}
+
+	public XPathExpression getFacetPath(String value) {
+		return compile(StringUtil.replace(path.getExpression(), "{facet.id}", value));
 	}
 
 	@Override

@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -55,7 +55,7 @@ public class Result extends AtomEntity{
 	}
 	
 	/**
-	 * Identifies the IBM� Connections application in which the result was found
+	 * Identifies the IBM��� Connections application in which the result was found
 	 * @return String
 	 */
 	public String getApplication(){

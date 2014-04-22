@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -16,9 +16,13 @@
 
 package com.ibm.sbt.services.client.connections.search;
 
-import com.ibm.sbt.services.client.base.BaseEntity;
+import org.w3c.dom.Node;
+
+import com.ibm.commons.xml.NamespaceContext;
+import com.ibm.commons.xml.xpath.XPathExpression;
+import com.ibm.sbt.services.client.base.AtomEntity;
 import com.ibm.sbt.services.client.base.BaseService;
-import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
+import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 
 /**
  * Facet model object
@@ -27,7 +31,7 @@ import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
  */
 
 
-public class FacetValue extends BaseEntity{
+public class FacetValue extends AtomEntity{
 	
 	/**
 	 * Constructor
@@ -39,10 +43,14 @@ public class FacetValue extends BaseEntity{
 		setService(searchService);
 		setAsString(FacetValueXPath.uid, id);
 	}
+
+	public FacetValue(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
+		super(service, node, namespaceCtx, xpathExpression);
+	}
 	
 	public FacetValue(){}
 
-	public FacetValue(BaseService svc, DataHandler<?> handler) {
+	public FacetValue(BaseService svc, XmlDataHandler handler) {
 		super(svc,handler);
 	}
 	

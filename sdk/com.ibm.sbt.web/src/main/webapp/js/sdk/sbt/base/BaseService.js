@@ -138,7 +138,7 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
          * @returns {sbt/Promise}
          */
         getEntities : function(url,options,callbacks) {
-            url = this.constructUrl(url);
+            url = this.constructUrl(url,{},options.urlParams);
             var self = this;
             var promise = new Promise();
             this.request(url,options,null,promise).response.then(
@@ -177,7 +177,7 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
          * @returns {sbt/Promise}
          */
         getEntity : function(url,options,entityId,callbacks) {
-            url = this.constructUrl(url);
+            url = this.constructUrl(url,{},options.urlParams);
             var promise = this._validateEntityId(entityId);
             if (promise) {
                 return promise;
@@ -233,7 +233,7 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
          * @param sbt/Promise
          */
         updateEntity : function(url, options, callbacks) {
-            url = this.constructUrl(url);
+            url = this.constructUrl(url,{},options.urlParams);
             var self = this;
             var promise = new Promise();
             this.endpoint.request(url,options,null,promise).response.then(
@@ -279,7 +279,7 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
          * @param sbt/Promise
          */
         deleteEntity : function(url,options,entityId) {
-            url = this.constructUrl(url);
+            url = this.constructUrl(url,{},options.urlParams);
             var promise = this._validateEntityId(entityId);
             if (promise) {
                 return promise;
@@ -311,7 +311,7 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
          * @param sbt/Promise
          */
         request : function(url,options,entityId,promise) {
-            url = this.constructUrl(url);
+            url = this.constructUrl(url,{},options.urlParams);
             if (this._cache && entityId) {
                 this.pushPromise(entityId, promise);
             }

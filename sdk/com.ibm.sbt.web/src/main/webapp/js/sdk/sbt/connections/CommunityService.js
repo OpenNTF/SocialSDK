@@ -20,8 +20,8 @@
  * @module sbt.connections.CommunityService
  */
 define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", "./CommunityConstants", "./ConnectionsService",
-         "../base/AtomEntity", "../base/XmlDataHandler", "./ForumService", "./BookmarkService", "../pathUtil", "../base/URLBuilder" ], 
-    function(declare,config,lang,stringUtil,Promise,consts,ConnectionsService,AtomEntity,XmlDataHandler,ForumService,BookmarkService,pathUtil, URLBuilder) {
+         "../base/AtomEntity", "../base/XmlDataHandler", "./ForumService", "./BookmarkService", "../pathUtil"], 
+    function(declare,config,lang,stringUtil,Promise,consts,ConnectionsService,AtomEntity,XmlDataHandler,ForumService,BookmarkService,pathUtil) {
 
 
     var CategoryCommunity = "<category term=\"community\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category>";
@@ -394,10 +394,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 handleAs : "text",
                 query : requestArgs
             };
-            var url = this.service.builder.build(consts.AtomCommunityInstance, this.service.endpoint.apiVersion, {
-                authentication : this.service.endpoint.authType === "oauth" ? "oauth":""
-            });
-            return this.service.getEntity(url, options, communityUuid, callbacks);
+
+            return this.service.getEntity(consts.AtomCommunityInstance, options, communityUuid, callbacks);
         },
 
         /**
@@ -612,10 +610,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 handleAs : "text", 
                 query : requestArgs
             };
-            var url = this.service.builder.build(consts.AtomCommunityMembers, this.service.endpoint.apiVersion, {
-                authentication : this.service.endpoint.authType === "oauth" ? "oauth":""
-            });
-            return this.service.getEntity(url, options, memberId, callbacks);
+
+            return this.service.getEntity(consts.AtomCommunityMembers, options, memberId, callbacks);
         },
         
         /**
@@ -813,10 +809,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 handleAs : "text",
                 query : requestArgs
             };
-            var url = this.service.builder.build(consts.AtomCommunityInvites, this.service.endpoint.apiVersion, {
-                authentication : this.service.endpoint.authType === "oauth" ? "oauth":""
-            });
-            return this.service.getEntity(url, options, communityUuid + "-" + userid, callbacks);
+
+            return this.service.getEntity(consts.AtomCommunityInvites, options, communityUuid + "-" + userid, callbacks);
         },
 
         /**
@@ -1253,8 +1247,6 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         
         serviceName : "communities",
         
-        builder : new URLBuilder(),
-
         /**
          * Constructor for CommunityService
          * 
@@ -1313,10 +1305,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 handleAs : "text",
                 query : args || {}
             };
-            var url = this.builder.build(consts.AtomCommunitiesAll, this.endpoint.apiVersion, {
-                authentication : this.endpoint.authType === "oauth" ? "oauth":""
-            });
-            return this.getEntities(url, options, CommunityFeedCallbacks);
+            
+            return this.getEntities(consts.AtomCommunitiesAll, options, CommunityFeedCallbacks);
         },
 
         /**
@@ -1336,10 +1326,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 handleAs : "text",
                 query : args || {}
             };
-            var url = this.builder.build(consts.AtomCommunitiesMy, this.endpoint.apiVersion, {
-                authentication : this.endpoint.authType === "oauth" ? "oauth":""
-            });
-            return this.getEntities(url, options, CommunityFeedCallbacks);
+            
+            return this.getEntities(consts.AtomCommunitiesMy, options, CommunityFeedCallbacks);
         },
 
         /**
@@ -1377,10 +1365,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                     });
                 }
             }, MemberFeedCallbacks);
-            var url = this.builder.build(consts.AtomCommunityMembers, this.endpoint.apiVersion, {
-                authentication : this.endpoint.authType === "oauth" ? "oauth":""
-            });
-            return this.getEntities(url, options, callbacks);
+            
+            return this.getEntities(consts.AtomCommunityMembers, options, callbacks);
         },
 
         /**
@@ -1427,10 +1413,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                     mode : "list"
                 }
             };
-            var url = this.builder.build(consts.AtomCommunityEvents, this.endpoint.apiVersion, {
-                authentication : this.endpoint.authType === "oauth" ? "oauth":""
-            });
-            return this.getEntities(url, options, ConnectionsEventInstFeedCallbacks);
+
+            return this.getEntities(consts.AtomCommunityEvents, options, ConnectionsEventInstFeedCallbacks);
         },
         
         /*
@@ -1462,10 +1446,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 handleAs : "text",
                 query : args || {}
             };
-            var url = this.builder.build(consts.AtomCommunityEvents, this.endpoint.apiVersion, {
-                authentication : this.endpoint.authType === "oauth" ? "oauth":""
-            });
-            return this.getEntities(url, options, callbacks);
+            
+            return this.getEntities(consts.AtomCommunityEvents, options, callbacks);
         },
         
         /**
@@ -1510,10 +1492,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                     eventInstUuid: eventInstUuid
                 }
             };
-            var url = this.builder.build(consts.AtomCommunityEvents, this.endpoint.apiVersion, {
-                authentication : this.endpoint.authType === "oauth" ? "oauth":""
-            });
-            return this.getEntity(url, options, eventInstUuid, ConnectionsEventInstCallbacks);
+            return this.getEntity(consts.AtomCommunityEvents, options, eventInstUuid, ConnectionsEventInstCallbacks);
         },
         
         /**
@@ -1529,10 +1508,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 handleAs : "text",
                 query : args || {}
             };
-            var url = this.builder.build(consts.AtomCommunityInvitesMy, this.endpoint.apiVersion, {
-                authentication : this.endpoint.authType === "oauth" ? "oauth":""
-            });
-            return this.getEntities(url, options, InviteFeedCallbacks);
+
+            return this.getEntities(consts.AtomCommunityInvitesMy, options, InviteFeedCallbacks);
         },      
 
         /**
@@ -1557,10 +1534,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 handleAs : "text",
                 query : requestArgs
             };
-            var url = this.builder.build(consts.AtomCommunityInvites, this.endpoint.apiVersion, {
-                authentication : this.endpoint.authType === "oauth" ? "oauth":""
-            });
-            return this.getEntities(url, options, InviteFeedCallbacks);
+            
+            return this.getEntities(consts.AtomCommunityInvites, options, InviteFeedCallbacks);
         },      
 
         /**
@@ -1586,10 +1561,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 handleAs : "text",
                 query : requestArgs
             };
-            var url = this.builder.build(consts.AtomCommunitySubCommunities, this.endpoint.apiVersion, {
-                authentication : this.endpoint.authType === "oauth" ? "oauth":""
-            });
-            return this.getEntities(url, options, CommunityFeedCallbacks);
+            
+            return this.getEntities(consts.AtomCommunitySubCommunities, options, CommunityFeedCallbacks);
         },
 
         /**
@@ -1683,10 +1656,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 headers : consts.AtomXmlHeaders,
                 data : community.createPostData()
             };
-            var url = this.builder.build(consts.AtomCommunitiesMy, this.endpoint.apiVersion, {
-                authentication : this.endpoint.authType === "oauth" ? "oauth":""
-            });
-            return this.updateEntity(url, options, callbacks, args);
+            
+            return this.updateEntity(consts.AtomCommunitiesMy, options, callbacks, args);
         },
 
         /**
@@ -1729,10 +1700,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 headers : consts.AtomXmlHeaders,
                 data : community.createPostData()
             };
-            var url = this.builder.build(consts.AtomCommunityInstance, this.endpoint.apiVersion, {
-                authentication : this.endpoint.authType === "oauth" ? "oauth":""
-            });
-            return this.updateEntity(url, options, callbacks, args);
+            
+            return this.updateEntity(consts.AtomCommunityInstance, options, callbacks, args);
         },
 
         /**
@@ -1758,10 +1727,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 query : requestArgs,
                 handleAs : "text"
             };
-            var url = this.builder.build(consts.AtomCommunityInstance, this.endpoint.apiVersion, {
-                authentication : this.endpoint.authType === "oauth" ? "oauth":""
-            });
-            return this.deleteEntity(url, options, communityUuid);
+            
+            return this.deleteEntity(consts.AtomCommunityInstance, options, communityUuid);
         },
 
         /**
@@ -1800,10 +1767,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 headers : consts.AtomXmlHeaders,
                 data : member.createPostData()
             };
-            var url = this.builder.build(consts.AtomCommunityMembers, this.endpoint.apiVersion, {
-                authentication : this.endpoint.authType === "oauth" ? "oauth":""
-            });
-            return this.updateEntity(url, options, callbacks, args);
+            
+            return this.updateEntity(consts.AtomCommunityMembers, options, callbacks, args);
         },
         
         /**
@@ -1844,10 +1809,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                     return response;
                 }
             };
-            var url = this.builder.build(consts.AtomCommunityMembers, this.endpoint.apiVersion, {
-                authentication : this.endpoint.authType === "oauth" ? "oauth":""
-            });
-            return this.updateEntity(url, options, callbacks);
+            
+            return this.updateEntity(consts.AtomCommunityMembers, options, callbacks);
 
         },
 
@@ -1882,10 +1845,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 query : requestArgs,
                 handleAs : "text"
             };
-            var url = this.builder.build(consts.AtomCommunityMembers, this.endpoint.apiVersion, {
-                authentication : this.endpoint.authType === "oauth" ? "oauth":""
-            });
-            return this.deleteEntity(url, options, value);
+            
+            return this.deleteEntity(consts.AtomCommunityMembers, options, value);
         },
         
         /**
@@ -1933,10 +1894,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 headers : consts.AtomXmlHeaders,
                 data : invite.createPostData()
             };
-            var url = this.builder.build(consts.AtomCommunityInvites, this.endpoint.apiVersion, {
-                authentication : this.endpoint.authType === "oauth" ? "oauth":""
-            });
-            return this.updateEntity(url, options, callbacks, args);
+            
+            return this.updateEntity(consts.AtomCommunityInvites, options, callbacks, args);
         },
            
         /**
@@ -1964,10 +1923,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 handleAs : "text"
             };
             var entityId = invite.getCommunityUuid() + "-" + invite.getInviteeUuid();
-            var url = this.builder.build(consts.AtomCommunityInvites, this.endpoint.apiVersion, {
-                authentication : this.endpoint.authType === "oauth" ? "oauth":""
-            });
-            return this.deleteEntity(url, options, entityId);
+            
+            return this.deleteEntity(consts.AtomCommunityInvites, options, entityId);
         },
         
         /**
@@ -2001,10 +1958,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 invite.setData(data, response);
                 return invite;
             };
-            var url = this.builder.build(consts.AtomCommunityMembers, this.endpoint.apiVersion, {
-                authentication : this.endpoint.authType === "oauth" ? "oauth":""
-            });
-            return this.updateEntity(url, options, callbacks, args);
+            
+            return this.updateEntity(consts.AtomCommunityMembers, options, callbacks, args);
         },
         
         /**
@@ -2062,12 +2017,9 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             var requestArgs = {
                 "communityUuid" : communityUuid
             };
-            var url = this.builder.build(consts.AtomUpdateCommunityLogo, this.endpoint.apiVersion, {
-                endpointName : this.endpoint.proxyPath,
-                fileName : encodeURIComponent(file.name)
-            });
+
             if (this.endpoint.proxy) {
-                url = config.Properties.serviceUrl + url;
+                url = config.Properties.serviceUrl +'/'+ url;
             } else {
                 return this.createBadRequestPromise("File Proxy is required to upload a community logo");
             }
@@ -2080,7 +2032,11 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 method : "PUT",
                 headers : headers,
                 query : requestArgs,
-                data : formData
+                data : formData,
+                urlParams: { 
+                    endpointName : this.endpoint.proxyPath,
+                    fileName : encodeURIComponent(file.name)
+                }
             };
             var callbacks = {
                 createEntity : function(service, data, response) {
@@ -2088,7 +2044,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 }
             };
 
-            return this.updateEntity(url, options, callbacks);
+            return this.updateEntity(consts.AtomUpdateCommunityLogo, options, callbacks);
         },
 
         /**
@@ -2128,12 +2084,9 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             formData.append("file", file);
             var requestArgs = {
             };
-            var url = this.builder.build(consts.AtomUploadCommunityFile, this.endpoint.apiVersion, {
-                endpointName : this.endpoint.proxyPath,
-                communityUuid : communityUuid
-            });
+            
             if (this.endpoint.proxy) {
-                url = config.Properties.serviceUrl + url;
+                url = config.Properties.serviceUrl + '/' +  url;
             } else {
                 return this.createBadRequestPromise("File proxy is required to upload a community file");
             }
@@ -2146,7 +2099,11 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 method : "POST",
                 headers : headers,
                 query : requestArgs,
-                data : formData
+                data : formData,
+                urlParams: {
+                    endpointName : this.endpoint.proxyPath,
+                    communityUuid : communityUuid
+                }
             };
 
             var callbacks = {
@@ -2155,7 +2112,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 }
             };
 
-            return this.updateEntity(url, options, callbacks);
+            return this.updateEntity(consts.AtomUploadCommunityFile, options, callbacks);
         },
 
 

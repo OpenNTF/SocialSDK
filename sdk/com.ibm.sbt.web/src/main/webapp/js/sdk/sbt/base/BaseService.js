@@ -100,26 +100,6 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
                 throw new Error("BaseService.constructUrl: Invalid argument, url is undefined or null.");
             }
            
-            
-            if(this.endpoint){
-                lang.mixin(this.contextRootMap, this.endpoint.serviceMappings);
-                //back compat with services reusing constants
-                url = this.builder.build(url, this.endpoint.apiVersion,  {
-                    authentication : this.endpoint.authType === "oauth" ? "oauth":""
-                });
-                url = stringUtil.transform(url, this.contextRootMap, function(value, key){
-                    if(!value){
-                        return key;
-                    }
-                    else{
-                        return value;
-                    }
-                }, this);
-            }else {
-            	 //back compat with services reusing constants
-                url = this.builder.build(url);
-            }
-            
             if (urlParams) {
                 url = stringUtil.replace(url, urlParams);
                 
@@ -128,6 +108,19 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
                 	url = url.replace(this._regExp, "/");
                 }
             }
+            if(this.endpoint){
+                lang.mixin(this.contextRootMap, this.endpoint.serviceMappings);
+                //back compat with services reusing constants
+                url = this.builder.build(url, this.endpoint.apiVersion, lang.mixin ({
+                    authentication : this.endpoint.authType === "oauth" ? "oauth":""
+                }, this.contextRootMap));
+                
+            }else {
+            	 //back compat with services reusing constants
+                url = this.builder.build(url);
+            }
+            
+
             if (params) {
                 for (param in params) {
                     if (url.indexOf("?") == -1) {

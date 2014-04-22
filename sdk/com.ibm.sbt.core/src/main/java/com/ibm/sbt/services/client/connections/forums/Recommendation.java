@@ -32,23 +32,15 @@ import com.ibm.sbt.services.client.connections.forums.model.Author;
  * Recommendation Entry Class - represents forum Recommendation Atom entry.
  *
  * @author Swati Singh
+ * @author Carlos Manias
  */
 public class Recommendation extends AtomEntity{
-
 
 	public Recommendation(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
 		super(service, node, namespaceCtx, xpathExpression);
 	}
 	
 	public Recommendation(){}
-
-/*	public String getId() {
-		return getAsString(ForumsXPath.uid);
-	}
-
-	public String getTitle() {
-		return getAsString(ForumsXPath.title);
-	}*/
 
 	@Override
 	public Author getAuthor(){

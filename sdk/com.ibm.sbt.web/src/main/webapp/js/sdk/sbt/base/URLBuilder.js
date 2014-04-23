@@ -89,17 +89,22 @@ define([ "../declare" ], function(declare) {
             } else {
                 url = versionedUrl;
             }
-
-            if (args) {
-	            for (var key in args) {
-	                  if (args.hasOwnProperty(key)) {
-	                      url=url.replace('{'+key+'}',args[key]);
-	                  }
-	            }
-            }
-            url = url.replace("//","/");
-            url = url.replace(/[$]?{([^{}]*)}/g,"$1");
             
+           
+            url = url.replace(/[$]?{([^{}]*)}/g,   
+            function(match, key, format){
+	            var value = args[key];
+                if (typeof value == 'function') {
+                   // invoke function to return the value
+                   value = value.apply(thisObject, [ map ]);
+                }
+
+                if (typeof value == "undefined" || value == null) {
+                   return match;
+                }
+	            return value.toString();
+	        });
+            url = url.replace("//","/");
             return url;
         }
     });

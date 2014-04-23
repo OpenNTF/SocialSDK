@@ -53,9 +53,19 @@ define(["../config", "../declare", "../lang", "../log", "../stringUtil", "../Cac
         _regExp : new RegExp("/{2}"),
         
         /**
-         * A map of default context roots to custom, if any. This will be implemented in subClasses of BaseService.
+         * A map of default context roots to custom, if any. This will be specialized in subClasses of BaseService.
          */
-        contextRootMap: {},
+        contextRootMap: {
+        	'communities':'communities',
+        	'files':'files',
+        	'forums':'forums',
+        	'blogs':'blogs',
+        	'activities':'activities',
+        	'dogear':'dogear',
+        	'service':'service',
+        	'profiles':'profiles',
+        	'wikis':'wikis'
+        },
 
         builder: new URLBuilder(),
         

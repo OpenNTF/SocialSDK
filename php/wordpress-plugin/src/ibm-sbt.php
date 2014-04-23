@@ -54,7 +54,7 @@ spl_autoload_register(function ($class)
 });
 
 // IBM SBTK Wordpress plugin security settings
-require_once 'ibm-sbt-security-config.php';
+require_once 'core/security.php';
 
 // IBM SBTK Wordpress plugin specific constants
 require_once 'ibm-sbt-constants.php';

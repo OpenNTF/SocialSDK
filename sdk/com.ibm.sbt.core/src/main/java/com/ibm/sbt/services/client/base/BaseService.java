@@ -1,5 +1,5 @@
 /*
- * ��� Copyright IBM Corp. 2012
+ * © Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,10 @@
 
 package com.ibm.sbt.services.client.base;
 
+import static com.ibm.sbt.services.client.base.CommonConstants.APPLICATION_ATOM_XML;
+import static com.ibm.sbt.services.client.base.CommonConstants.AT;
+import static com.ibm.sbt.services.client.base.CommonConstants.CONTENT_TYPE;
+
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashMap;
@@ -26,10 +30,10 @@ import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientService.Handler;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
+import com.ibm.sbt.services.client.base.CommonConstants.HTTPCode;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
-
 
 /**
  * This class defines common behaviour for all the services 
@@ -42,8 +46,6 @@ public abstract class BaseService implements Serializable {
 
 	public static final int						DEFAULT_CACHE_SIZE		= 0;
 	public static final String					DEFAULT_ENDPOINT_NAME	= "connections";
-	public static final String					CONTENT_TYPE			= "Content-Type";
-	public static final String					APPLICATION_ATOM_XML	= "application/atom+xml";
 	
 	protected transient static HashMap<String, Object>	cache					= new HashMap<String, Object>();
 	protected transient int						cacheSize;
@@ -420,9 +422,9 @@ public abstract class BaseService implements Serializable {
             uniqueId = parameters.get(nameParameterId);
         }
 
-        if (!headers.containsKey("Content-Type")) {
+        if (!headers.containsKey(CONTENT_TYPE)) {
             // TODO shouldn't assume this
-        	headers.put("Content-Type", "application/atom+xml");
+        	headers.put(CONTENT_TYPE, APPLICATION_ATOM_XML);
         }
         Response result = getClientService().put(serviceUrl, parameters, headers, content, getDataFormat());
         if (cacheSize > 0 && nameParameterId != null) {
@@ -440,6 +442,10 @@ public abstract class BaseService implements Serializable {
        }
 
        return result;
+   }
+   
+   protected boolean checkResponseCode(Response response, HTTPCode code){
+	   return code.checkCode(response.getResponse().getStatusLine().getStatusCode());
    }
 	
 	/**
@@ -481,6 +487,18 @@ public abstract class BaseService implements Serializable {
 		// to check if cache is full , remove if full using LRU algorithm
 		cache.put(key, content);
 	}
+
+	
+	/**
+	 * Returns a valid parameters HashMap even if null is passed
+	 * 
+	 * @param parameters
+	 * @return
+	 */
+	protected Map<String, String> getParameters(Map<String, String> parameters) {
+		if(parameters == null) return new HashMap<String, String>();
+		else return parameters;
+	}
 	
 	/**
 	 * Return true if the id as email address
@@ -489,7 +507,7 @@ public abstract class BaseService implements Serializable {
 	 * @return
 	 */
 	protected boolean isEmail(String id) {
-		return (id == null) ? false : id.contains("@");
+		return (id == null) ? false : id.contains(AT);
 	}
 	
 }

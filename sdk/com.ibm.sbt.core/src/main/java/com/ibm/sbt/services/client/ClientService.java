@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2012
+ * © Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -14,6 +14,24 @@
  * permissions and limitations under the License.
  */
 package com.ibm.sbt.services.client;
+
+import static com.ibm.sbt.services.client.base.CommonConstants.APPLICATION_JSON;
+import static com.ibm.sbt.services.client.base.CommonConstants.APPLICATION_OCTET_STREAM;
+import static com.ibm.sbt.services.client.base.CommonConstants.APPLICATION_XML;
+import static com.ibm.sbt.services.client.base.CommonConstants.BINARY;
+import static com.ibm.sbt.services.client.base.CommonConstants.BINARY_OCTET_STREAM;
+import static com.ibm.sbt.services.client.base.CommonConstants.CH_SLASH;
+import static com.ibm.sbt.services.client.base.CommonConstants.CONTENT_ENCODING;
+import static com.ibm.sbt.services.client.base.CommonConstants.CONTENT_TYPE;
+import static com.ibm.sbt.services.client.base.CommonConstants.GZIP;
+import static com.ibm.sbt.services.client.base.CommonConstants.INIT_URL_PARAM;
+import static com.ibm.sbt.services.client.base.CommonConstants.JSON;
+import static com.ibm.sbt.services.client.base.CommonConstants.LOCATION_HEADER;
+import static com.ibm.sbt.services.client.base.CommonConstants.SLUG;
+import static com.ibm.sbt.services.client.base.CommonConstants.TEXT_PLAIN;
+import static com.ibm.sbt.services.client.base.CommonConstants.URL_PARAM;
+import static com.ibm.sbt.services.client.base.CommonConstants.UTF8;
+import static com.ibm.sbt.services.client.base.CommonConstants.XML;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -396,7 +414,7 @@ public abstract class ClientService {
 				HttpEntity entity) throws ClientServicesException {
 			String contentType = getContentType();
 			if (StringUtil.isNotEmpty(contentType)) {
-				httpRequestBase.setHeader("Content-Type", contentType);
+				httpRequestBase.setHeader(CONTENT_TYPE, contentType);
 			}
 			((HttpEntityEnclosingRequestBase) httpRequestBase).setEntity(entity);
 		}
@@ -416,7 +434,7 @@ public abstract class ClientService {
 		}
 
 		public ContentString(String content) {
-			this(content, "text/plain");
+			this(content, TEXT_PLAIN);
 		}
 
 		@Override
@@ -445,11 +463,11 @@ public abstract class ClientService {
 		}
 
 		public ContentJson(Object content) {
-			this(content, "application/json", JsonJavaFactory.instanceEx);
+			this(content, APPLICATION_JSON, JsonJavaFactory.instanceEx);
 		}
 
 		public ContentJson(Object content, JsonFactory factory) {
-			this(content, "application/json", factory);
+			this(content, APPLICATION_JSON, factory);
 		}
 
 		@Override
@@ -472,7 +490,7 @@ public abstract class ClientService {
 		}
 
 		public ContentXml(Node content) {
-			this(content, "application/xml");
+			this(content, APPLICATION_XML);
 			this.content = content;
 		}
 
@@ -502,25 +520,25 @@ public abstract class ClientService {
 		}
 
 		public ContentFile(File content) {
-			this(content, "application/octet-stream");
+			this(content, APPLICATION_OCTET_STREAM);
 		}
 
 		public ContentFile(String name, File content) {
-			this(name, content, "application/octet-stream");
+			this(name, content, APPLICATION_OCTET_STREAM);
 		}
 
 		@Override
 		public HttpEntity createEntity() throws ClientServicesException {
 			FileEntity fileEnt = new FileEntity(content, getContentType());
-			fileEnt.setContentEncoding("binary"); // Is that OK?
+			fileEnt.setContentEncoding(BINARY); // Is that OK?
 			return fileEnt;
 		}
 
 		@Override
 		protected void setEntity(HttpClient httpClient, HttpRequestBase httpRequestBase, Args args,
 				HttpEntity entity) throws ClientServicesException {
-			httpRequestBase.setHeader("slug", name);
-			httpRequestBase.setHeader("Content-Type", getContentType());
+			httpRequestBase.setHeader(SLUG, name);
+			httpRequestBase.setHeader(CONTENT_TYPE, getContentType());
 			super.setEntity(httpClient, httpRequestBase, args, entity);
 		}
 	}
@@ -549,21 +567,21 @@ public abstract class ClientService {
 		}
 
 		public ContentStream(InputStream stream) {
-			this(null, stream, -1, "binary/octet-stream");
+			this(null, stream, -1, BINARY_OCTET_STREAM);
 		}
 
 		public ContentStream(java.io.InputStream stream, String name) {
-			this(name, stream, -1, "binary/octet-stream");
+			this(name, stream, -1, BINARY_OCTET_STREAM);
 		}
 
 		public ContentStream(java.io.InputStream stream, long length, String name) {
-			this(name, stream, length, "binary/octet-stream");
+			this(name, stream, length, BINARY_OCTET_STREAM);
 		}
 
 		@Override
 		protected HttpEntity createEntity() throws ClientServicesException {
 			InputStreamEntity inputStreamEntity = new InputStreamEntity(stream, length);
-			inputStreamEntity.setContentEncoding("binary");
+			inputStreamEntity.setContentEncoding(BINARY);
 			if (length == -1) {
 				inputStreamEntity.setChunked(true);
 			}
@@ -582,17 +600,17 @@ public abstract class ClientService {
 		protected void setEntity(HttpClient httpClient, HttpRequestBase httpRequestBase, Args args,
 				HttpEntity entity) throws ClientServicesException {
 			if (name != null) {
-				httpRequestBase.setHeader("slug", name);
+				httpRequestBase.setHeader(SLUG, name);
 			}
-			httpRequestBase.setHeader("Content-Type", getContentType());
+			httpRequestBase.setHeader(CONTENT_TYPE, getContentType());
 			super.setEntity(httpClient, httpRequestBase, args, entity);
 		}
 
 	}
 
 	protected Content createRequestContent(Args args, Object content) throws ClientServicesException {
-		if (args.getHeaders() != null && args.getHeaders().get("Content-Type") != null) {
-			String contentType = args.getHeaders().get("Content-Type");
+		if (args.getHeaders() != null && args.getHeaders().get(CONTENT_TYPE) != null) {
+			String contentType = args.getHeaders().get(CONTENT_TYPE);
 			if (content instanceof String) {
 				return new ContentString((String) content, contentType);
 			}
@@ -606,7 +624,7 @@ public abstract class ClientService {
 				return new ContentFile((File) content, contentType);
 			}
 			if (content instanceof InputStream) {
-				return new ContentStream(args.getHeaders().get("Slug"), (InputStream) content, -1,
+				return new ContentStream(args.getHeaders().get(SLUG), (InputStream) content, -1,
 						contentType);
 			}
 		} else {
@@ -663,7 +681,7 @@ public abstract class ClientService {
 			if (entity != null) {
 				String encoding = EntityUtils.getContentCharSet(entity);
 				if (encoding == null) {
-					encoding = "UTF-8";
+					encoding = UTF8;
 				}
 				Reader reader = new InputStreamReader(getEntityContent(request, response, entity), encoding);
 				try {
@@ -695,7 +713,7 @@ public abstract class ClientService {
 			if (entity != null) {
 				String encoding = EntityUtils.getContentCharSet(entity);
 				if (encoding == null) {
-					encoding = "UTF-8";
+					encoding = UTF8;
 				}
 				Reader reader = createReader(request, response, entity, encoding);
 				try {
@@ -750,7 +768,7 @@ public abstract class ClientService {
 		@Override
 		public Object parseContent(HttpRequestBase request, HttpResponse response, HttpEntity entity)
 				throws ClientServicesException, IOException {
-			Header[] headers = response.getHeaders("Location");
+			Header[] headers = response.getHeaders(LOCATION_HEADER);
 			if (headers != null) {
 				if (headers.length > 0) {
 					return headers[0].getValue();
@@ -793,10 +811,10 @@ public abstract class ClientService {
 			Header hd = entity.getContentType();
 			if (hd != null) {
 				String ct = hd.getValue();
-				if (ct.indexOf("json") >= 0) {
+				if (ct.indexOf(JSON) >= 0) {
 					return FORMAT_JSON;
 				}
-				if (ct.indexOf("xml") >= 0) {
+				if (ct.indexOf(XML) >= 0) {
 					return FORMAT_XML;
 				}
 			}
@@ -1163,7 +1181,7 @@ public abstract class ClientService {
 		
 		if(!(UrlUtil.isAbsoluteUrl(args.getServiceUrl()))){ // check if url supplied is absolute
 			String url = getUrlPath(args);
-			if (url.charAt(url.length() - 1) == '/') {
+			if (url.charAt(url.length() - 1) == CH_SLASH) {
 				url = url.substring(0, url.length() - 1);
 			}
 			b.append(url);
@@ -1194,7 +1212,7 @@ public abstract class ClientService {
 		String baseUrl = getBaseUrl();
 		String serviceUrl = args.getServiceUrl();
 		serviceUrl = substituteServiceMapping(serviceUrl);
-		return PathUtil.concat(baseUrl, serviceUrl, '/');
+		return PathUtil.concat(baseUrl, serviceUrl, CH_SLASH);
 	}
 	
 	protected String substituteServiceMapping(String url){
@@ -1259,10 +1277,10 @@ public abstract class ClientService {
 			throws ClientServicesException {
 		try {
 			if (value != null) {
-				b.append(first ? '?' : '&');
+				b.append(first ? INIT_URL_PARAM : URL_PARAM);
 				b.append(name);
 				b.append('=');
-				b.append(URLEncoder.encode(value, "UTF-8"));
+				b.append(URLEncoder.encode(value, UTF8));
 				return false;
 			}
 			return first;
@@ -1352,8 +1370,8 @@ public abstract class ClientService {
 			HttpEntity entity) throws IOException {
 		InputStream is = entity.getContent();
 		if (is != null) {
-			Header contentEncodingHeader = response.getFirstHeader("Content-Encoding");
-			if (contentEncodingHeader != null && contentEncodingHeader.getValue().equalsIgnoreCase("gzip")) {
+			Header contentEncodingHeader = response.getFirstHeader(CONTENT_ENCODING);
+			if (contentEncodingHeader != null && contentEncodingHeader.getValue().equalsIgnoreCase(GZIP)) {
 				is = new GZIPInputStream(is);
 			}
 		}

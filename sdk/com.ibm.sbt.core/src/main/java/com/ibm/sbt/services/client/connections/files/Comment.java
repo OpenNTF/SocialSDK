@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * Â© Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -15,6 +15,8 @@
  */
 package com.ibm.sbt.services.client.connections.files;
 
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
+
 import java.util.Date;
 
 import org.w3c.dom.Node;
@@ -23,7 +25,6 @@ import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.base.AtomXPath;
 import com.ibm.sbt.services.client.base.BaseEntity;
-import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.connections.files.model.Author;
@@ -51,9 +52,9 @@ public class Comment extends BaseEntity {
 	public Comment(FileService svc, DataHandler<?> dh) {
         super(svc, dh);
         authorEntry = new Author(getService(), new XmlDataHandler((Node)this.getDataHandler().getData(), 
-        		ConnectionsConstants.nameSpaceCtx, (XPathExpression)AtomXPath.author.getPath()));
+        		nameSpaceCtx, (XPathExpression)AtomXPath.author.getPath()));
         modifierEntry = new Modifier(getService(), new XmlDataHandler((Node)this.getDataHandler().getData(), 
-        		ConnectionsConstants.nameSpaceCtx, (XPathExpression)AtomXPath.modifier.getPath()));
+        		nameSpaceCtx, (XPathExpression)AtomXPath.modifier.getPath()));
     }
 	
 	public String getCommentId() {

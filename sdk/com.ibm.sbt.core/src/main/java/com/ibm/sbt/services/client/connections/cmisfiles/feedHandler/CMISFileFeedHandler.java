@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -15,13 +15,14 @@
  */
 package com.ibm.sbt.services.client.connections.cmisfiles.feedHandler;
 
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
 import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.AtomXPath;
-import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.connections.cmisfiles.CMISFile;
@@ -56,7 +57,7 @@ public class CMISFileFeedHandler implements IFeedHandler{
     @Override
     public CMISFile createEntityFromData(Object data) {
     	XPathExpression xpath = (data instanceof Document) ? (XPathExpression)AtomXPath.singleEntry.getPath() : null;
-    	XmlDataHandler handler = new XmlDataHandler((Node)data, ConnectionsConstants.nameSpaceCtx, xpath);
+    	XmlDataHandler handler = new XmlDataHandler((Node)data, nameSpaceCtx, xpath);
     	CMISFile file = new CMISFile(service, handler);
         return file;
     }

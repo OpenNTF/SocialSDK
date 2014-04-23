@@ -1,5 +1,5 @@
 /*
- * ��� Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -15,11 +15,12 @@
  */
 package com.ibm.sbt.services.client.connections.follow;
 
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
 import com.ibm.commons.util.StringUtil;
@@ -27,9 +28,7 @@ import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.AtomFeedHandler;
-import com.ibm.sbt.services.client.base.AtomXPath;
 import com.ibm.sbt.services.client.base.BaseService;
-import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.NamedUrlPart;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
@@ -198,11 +197,10 @@ public class FollowService extends BaseService{
 	}
 	
 	private IFeedHandler<FollowedResource> getFollowFeedHandler() {
-		return new AtomFeedHandler<FollowedResource>(this) {
+		return new AtomFeedHandler<FollowedResource>(this, false) {
 			@Override
-			protected FollowedResource newEntity(BaseService service, Node node) {
-				XPathExpression xpath = (node instanceof Document) ? (XPathExpression)AtomXPath.singleEntry.getPath() : null;
-				return new FollowedResource(service, node, ConnectionsConstants.nameSpaceCtx, xpath);
+			protected FollowedResource entityInstance(BaseService service, Node node, XPathExpression xpath) {
+				return new FollowedResource(service, node, nameSpaceCtx, xpath);
 			}
 		};
 	}

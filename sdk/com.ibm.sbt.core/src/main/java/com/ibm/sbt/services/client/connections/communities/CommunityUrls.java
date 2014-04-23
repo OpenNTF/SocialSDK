@@ -1,5 +1,5 @@
 /*
- * ��� Copyright IBM Corp. 2014
+ * © Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -15,8 +15,9 @@
  */
 package com.ibm.sbt.services.client.connections.communities;
 
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.v4_0;
+
 import com.ibm.sbt.services.client.base.BaseService;
-import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.NamedUrlPart;
 import com.ibm.sbt.services.client.base.URLBuilder;
 import com.ibm.sbt.services.client.base.URLContainer;
@@ -27,15 +28,15 @@ import com.ibm.sbt.services.client.base.VersionedUrl;
  * @author Carlos Manias
  */
 public enum CommunityUrls implements URLContainer {
-	COMMUNITIES_ALL(new VersionedUrl(ConnectionsConstants.v4_0, "{communities}/service/atom/{authType}/communities/all")),
-	COMMUNITIES_MY(new VersionedUrl(ConnectionsConstants.v4_0, "{communities}/service/atom/{authType}/communities/my")),
-	COMMUNITY_INSTANCE(new VersionedUrl(ConnectionsConstants.v4_0, "{communities}/service/atom/{authType}/community/instance")),
-	COMMUNITY_MEMBERS(new VersionedUrl(ConnectionsConstants.v4_0, "{communities}/service/atom/{authType}/community/members")),
-	COMMUNITY_SUBCOMMUNITIES(new VersionedUrl(ConnectionsConstants.v4_0, "{communities}/service/atom/{authType}/community/subcommunities")),
-	COMMUNITY_BOOKMARKS(new VersionedUrl(ConnectionsConstants.v4_0, "{communities}/service/atom/{authType}/community/bookmarks")),
-	COMMUNITY_FORUMTOPICS(new VersionedUrl(ConnectionsConstants.v4_0, "{communities}/service/atom/{authType}/community/forum/topics")),
-	COMMUNITY_MYINVITES(new VersionedUrl(ConnectionsConstants.v4_0, "{communities}/service/atom/{authType}/community/invites/my")),
-	COMMUNITY_INVITES(new VersionedUrl(ConnectionsConstants.v4_0, "{communities}/service/atom/{authType}/community/invites"));
+	COMMUNITIES_ALL(new VersionedUrl(v4_0, 			"{communities}/service/atom/{authType}/communities/all")),
+	COMMUNITIES_MY(new VersionedUrl(v4_0, 			"{communities}/service/atom/{authType}/communities/my")),
+	COMMUNITY_INSTANCE(new VersionedUrl(v4_0, 		"{communities}/service/atom/{authType}/community/instance")),
+	COMMUNITY_MEMBERS(new VersionedUrl(v4_0, 		"{communities}/service/atom/{authType}/community/members")),
+	COMMUNITY_SUBCOMMUNITIES(new VersionedUrl(v4_0, "{communities}/service/atom/{authType}/community/subcommunities")),
+	COMMUNITY_BOOKMARKS(new VersionedUrl(v4_0, 		"{communities}/service/atom/{authType}/community/bookmarks")),
+	COMMUNITY_FORUMTOPICS(new VersionedUrl(v4_0, 	"{communities}/service/atom/{authType}/community/forum/topics")),
+	COMMUNITY_MYINVITES(new VersionedUrl(v4_0, 		"{communities}/service/atom/{authType}/community/invites/my")),
+	COMMUNITY_INVITES(new VersionedUrl(v4_0, 		"{communities}/service/atom/{authType}/community/invites"));
 	// CommunityType remoteApplications???
 
 	private URLBuilder builder;

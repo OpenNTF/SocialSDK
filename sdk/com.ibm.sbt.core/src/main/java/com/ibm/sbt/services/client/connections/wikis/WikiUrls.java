@@ -16,8 +16,9 @@
 
 package com.ibm.sbt.services.client.connections.wikis;
 
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.v4_0;
+
 import com.ibm.sbt.services.client.base.BaseService;
-import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.NamedUrlPart;
 import com.ibm.sbt.services.client.base.URLBuilder;
 import com.ibm.sbt.services.client.base.URLContainer;
@@ -29,20 +30,20 @@ import com.ibm.sbt.services.client.base.VersionedUrl;
  * @author Carlos Manias
  */
 public enum WikiUrls implements URLContainer {
-	ALL_WIKIS(             new VersionedUrl(ConnectionsConstants.v4_0, "{wikis}/{authType}/api/wikis/feed")),
-	PUBLIC_WIKIS(          new VersionedUrl(ConnectionsConstants.v4_0, "{wikis}/{authType}/api/wikis/public")),
-	MY_WIKIS(              new VersionedUrl(ConnectionsConstants.v4_0, "{wikis}/{authType}/api/mywikis/feed")),
-	MOST_COMMENTED_WIKIS(  new VersionedUrl(ConnectionsConstants.v4_0, "{wikis}/{authType}/anonymous/api/wikis/mostcommented")),
-	MOST_RECOMMENDED_WIKIS(new VersionedUrl(ConnectionsConstants.v4_0, "{wikis}/{authType}/anonymous/api/wikis/mostrecommended")),
-	MOST_VISITED_WIKIS(    new VersionedUrl(ConnectionsConstants.v4_0, "{wikis}/{authType}/anonymous/api/wikis/mostvisited")),
-	WIKI_MYPAGES(          new VersionedUrl(ConnectionsConstants.v4_0, "{wikis}/{authType}/api/wiki/{wikiLabel}/mypages")),
-	WIKI_PAGES_TRASH(      new VersionedUrl(ConnectionsConstants.v4_0, "{wikis}/{authType}/anonymous/api/wiki/{wikiLabel}/recyclebin/feed")),
-	WIKI_PAGES(            new VersionedUrl(ConnectionsConstants.v4_0, "{wikis}/{authType}/anonymous/api/wiki/{wikiLabel}/feed")),
-	WIKI_PAGES_AUTH(       new VersionedUrl(ConnectionsConstants.v4_0, "{wikis}/{authType}/api/wiki/{wikiLabel}/feed")),
-	WIKI(                  new VersionedUrl(ConnectionsConstants.v4_0, "{wikis}/{authType}/anonymous/api/wiki/{wikiLabel}/entry")),
-	WIKI_AUTH(             new VersionedUrl(ConnectionsConstants.v4_0, "{wikis}/{authType}/api/wiki/{wikiLabel}/entry")),
-	WIKI_PAGE(             new VersionedUrl(ConnectionsConstants.v4_0, "{wikis}/{authType}/anonymous/api/wiki/{wikiLabel}/page/{wikiPage}/entry")),
-	WIKI_PAGE_AUTH(        new VersionedUrl(ConnectionsConstants.v4_0, "{wikis}/{authType}/api/wiki/{wikiLabel}/page/{wikiPage}/entry"));
+	ALL_WIKIS(             new VersionedUrl(v4_0, "{wikis}/{authType}/api/wikis/feed")),
+	PUBLIC_WIKIS(          new VersionedUrl(v4_0, "{wikis}/{authType}/api/wikis/public")),
+	MY_WIKIS(              new VersionedUrl(v4_0, "{wikis}/{authType}/api/mywikis/feed")),
+	MOST_COMMENTED_WIKIS(  new VersionedUrl(v4_0, "{wikis}/{authType}/anonymous/api/wikis/mostcommented")),
+	MOST_RECOMMENDED_WIKIS(new VersionedUrl(v4_0, "{wikis}/{authType}/anonymous/api/wikis/mostrecommended")),
+	MOST_VISITED_WIKIS(    new VersionedUrl(v4_0, "{wikis}/{authType}/anonymous/api/wikis/mostvisited")),
+	WIKI_MYPAGES(          new VersionedUrl(v4_0, "{wikis}/{authType}/api/wiki/{wikiLabel}/mypages")),
+	WIKI_PAGES_TRASH(      new VersionedUrl(v4_0, "{wikis}/{authType}/anonymous/api/wiki/{wikiLabel}/recyclebin/feed")),
+	WIKI_PAGES(            new VersionedUrl(v4_0, "{wikis}/{authType}/anonymous/api/wiki/{wikiLabel}/feed")),
+	WIKI_PAGES_AUTH(       new VersionedUrl(v4_0, "{wikis}/{authType}/api/wiki/{wikiLabel}/feed")),
+	WIKI(                  new VersionedUrl(v4_0, "{wikis}/{authType}/anonymous/api/wiki/{wikiLabel}/entry")),
+	WIKI_AUTH(             new VersionedUrl(v4_0, "{wikis}/{authType}/api/wiki/{wikiLabel}/entry")),
+	WIKI_PAGE(             new VersionedUrl(v4_0, "{wikis}/{authType}/anonymous/api/wiki/{wikiLabel}/page/{wikiPage}/entry")),
+	WIKI_PAGE_AUTH(        new VersionedUrl(v4_0, "{wikis}/{authType}/api/wiki/{wikiLabel}/page/{wikiPage}/entry"));
 	
 	private URLBuilder builder;
 	

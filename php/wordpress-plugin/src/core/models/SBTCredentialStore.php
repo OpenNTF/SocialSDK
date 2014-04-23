@@ -79,7 +79,7 @@ if (!defined('CRYPT')) {
 
 if (!defined('IBM_SBT_CRYPTO_ENABLED')) {
 	$path = str_replace('core', '', BASE_PATH);
-	require_once $path . DIRECTORY_SEPARATOR . 'ibm-sbt-security-config.php';
+	require_once BASE_PATH . DIRECTORY_SEPARATOR . 'security.php';
 }
 
 /**

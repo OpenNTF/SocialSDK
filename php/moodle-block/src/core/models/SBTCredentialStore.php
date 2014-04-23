@@ -65,7 +65,7 @@ if (!defined('OAUTH_REQUEST_TOKEN_SECRET')) {
 
 if (!defined('IBM_SBT_CRYPTO_ENABLED')) {
 	global $CFG;
-	require_once $CFG->dirroot . DIRECTORY_SEPARATOR . 'blocks' . DIRECTORY_SEPARATOR . 'ibmsbt' . DIRECTORY_SEPARATOR . 'security-config.php';
+	require_once $CFG->dirroot . DIRECTORY_SEPARATOR . 'blocks' . DIRECTORY_SEPARATOR . 'ibmsbt' . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'security.php';
 }
 
 /**
@@ -123,9 +123,11 @@ class SBTCredentialStore {
 				$uid = $USER->id;
 			} else if (isset(self::$uid)) {
 				$uid = self::$uid;
-			} else {
+			} else if (isset($_COOKIE['ibm-sbt-uid'])) {
+				$uid = intval($_COOKIE['ibm-sbt-uid']);
+			}  else {
 				$uid = $_GET['uid'];
-			}
+			} 
 			$records = $DB->get_records(SESSION_NAME, array('user_id' => $uid));	
 
 			if (empty($records) || $records == null) {
@@ -135,7 +137,9 @@ class SBTCredentialStore {
 					$record->user_id = intval($USER->id);
 				} else if (self::$uid != null) {
 					$record->user_id = intval(self::$uid);
-				}
+				} else if (isset($_COOKIE['ibm-sbt-uid'])) {
+					$record->user_id = intval($_COOKIE['ibm-sbt-uid']);
+				} 
 				
 				// Populate database with default values
 				$record->basicauthusername = json_encode(array('connections' => null));
@@ -195,6 +199,8 @@ class SBTCredentialStore {
 			$record->user_id = intval($USER->id);
 		} else if (self::$uid != null) {
 			$record->user_id = intval(self::$uid);
+		} else if (isset($_COOKIE['ibm-sbt-uid'])) {
+			$record->user_id = intval($_COOKIE['ibm-sbt-uid']);
 		} 
 
 		// Populate database with default values
@@ -254,7 +260,6 @@ class SBTCredentialStore {
 			}
 			
 			$endpointMappings = (array) json_decode($record->$skey);
-			
 			$value = ibm_sbt_encrypt($this->key, $value, base64_decode($this->iv));
 			
 			$endpointMappings[$endpoint] = "$value";
@@ -290,17 +295,17 @@ class SBTCredentialStore {
 		} else {
 			return null;
 		}
-
+	
 		$record = $DB->get_record(SESSION_NAME, array('user_id' => intval($uid)));
 
 		if ($record == null || empty($record)) {
 			return null;
 		}
-
+		
 		if (!isset($record->$skey)) {
 			$this->_initProfileSession();
 		}
-		
+
 		$endpointMappings = (array) json_decode($record->$skey);
 
 		if ($endpointMappings == null) {
@@ -316,7 +321,7 @@ class SBTCredentialStore {
 		if ($value == "" || $value == null) {
 			return null;
 		}
-		
+
 		$value = ibm_sbt_decrypt($this->key, $value, base64_decode($this->iv));
 
 		return $value;
@@ -335,8 +340,8 @@ class SBTCredentialStore {
 			$uid = $USER->id;
 		} else if (isset($_GET['uid'])) {
 			$uid = $_GET['uid'];
-		} else if (isset($_COOKIE['ibm-sbt-uid']) && $_COOKIE['uid'] != null) {
-			$uid = $_COOKIE['uid'];
+		} else if (isset($_COOKIE['ibm-sbt-uid']) && $_COOKIE['ibm-sbt-uid'] != null) {
+			$uid = $_COOKIE['ibm-sbt-uid'];
 		} else if (self::$uid != null) {
 			$uid = self::$uid;
 		} else {
@@ -576,6 +581,8 @@ class SBTCredentialStore {
 			$str = sha1($USER->id);
 		} else if (isset(self::$uid) && self::$uid != null) {
 			$str = sha1(self::$uid);
+		} else if (isset($_COOKIE['ibm-sbt-uid'])) {
+			$str = sha1($_COOKIE['ibm-sbt-uid']);
 		} else {
 			$str = sha1($_GET['uid']);
 		}

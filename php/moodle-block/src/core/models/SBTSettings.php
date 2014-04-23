@@ -33,7 +33,7 @@ if (!defined('ENDPOINTS')) {
 
 if (!defined('IBM_SBT_CRYPTO_ENABLED')) {
 	global $CFG;
-	require_once $CFG->dirroot . DIRECTORY_SEPARATOR . 'blocks' . DIRECTORY_SEPARATOR . 'ibmsbt' . DIRECTORY_SEPARATOR . 'security-config.php';
+	require_once $CFG->dirroot . DIRECTORY_SEPARATOR . 'blocks' . DIRECTORY_SEPARATOR . 'ibmsbt' . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR .  'security.php';
 }
 
 class SBTSettings {

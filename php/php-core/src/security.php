@@ -23,7 +23,7 @@
 
 // If you don't have php-mcrypt installed, set this to false (NOTE: It is strongly recommended that you install php-mcrypt)
 if (!defined('IBM_SBT_CRYPTO_ENABLED')) {
-	define('IBM_SBT_CRYPTO_ENABLED', false); //extension_loaded('mcrypt')
+	define('IBM_SBT_CRYPTO_ENABLED', extension_loaded('mcrypt'));
 }
 
 // When in demo mode, security warnings will not be displayed

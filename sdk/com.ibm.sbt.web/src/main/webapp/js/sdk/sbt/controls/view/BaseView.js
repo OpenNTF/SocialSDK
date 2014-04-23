@@ -155,6 +155,33 @@ define([ "../../declare", "../../config", "../../lang", "../../stringUtil", "../
 			action.view = this;
 			this.actionBar.addAction(action, addToBeginning);
 		},
+		/**
+		 * @method removeAction
+		 * @param actionName, the name of the action as a String value 
+		 */
+		hideAction: function(actionName){
+			var action;
+			actionName = actionName.toLowerCase();
+			for(var i=0;i<this.actionBar._actionElements.length;i++){
+				if(this.actionBar._actionElements[i].action.name.toLowerCase() == actionName){
+					action = this.actionBar._actionElements[i].action;
+					this.actionBar.hideAction(action);
+				}
+			}
+			
+		},
+		
+		showAction: function(actionName){
+			var action;
+			actionName = actionName.toLowerCase();
+			for(var i=0;i<this.actionBar._actionElements.length;i++){
+				if(this.actionBar._actionElements[i].action.name.toLowerCase() == actionName){
+					action = this.actionBar._actionElements[i].action;
+					this.actionBar.showAction(action);
+				}
+			}
+			
+		},
 		
 		/**
 		 * @method addNode

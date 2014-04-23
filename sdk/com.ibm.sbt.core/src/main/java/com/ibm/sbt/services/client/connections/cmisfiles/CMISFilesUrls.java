@@ -1,5 +1,5 @@
 /*
- * ��� Copyright IBM Corp. 2014
+ * © Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -15,8 +15,9 @@
  */
 package com.ibm.sbt.services.client.connections.cmisfiles;
 
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.v4_0;
+
 import com.ibm.sbt.services.client.base.BaseService;
-import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.NamedUrlPart;
 import com.ibm.sbt.services.client.base.URLBuilder;
 import com.ibm.sbt.services.client.base.URLContainer;
@@ -27,15 +28,15 @@ import com.ibm.sbt.services.client.base.VersionedUrl;
  * @author Carlos Manias
  */
 public enum CMISFilesUrls implements URLContainer {
-    GET_SERVICE_DOCUMENT(new VersionedUrl(ConnectionsConstants.v4_0, "{files}/basic/cmis/my/servicedoc")),
-    GET_MY_FILES(new VersionedUrl(ConnectionsConstants.v4_0, "{files}/basic/cmis/repository/{repositoryId}/folderc/snx:files")),
-    GET_FILES_SHARED_WITH_ME(new VersionedUrl(ConnectionsConstants.v4_0, "{files}/basic/cmis/repository/{repositoryId}/folderc/snx:virtual!.!filessharedwith")),
-    GET_MY_COLLECTIONS(new VersionedUrl(ConnectionsConstants.v4_0, "{files}/basic/cmis/repository/{repositoryId}/folderc/snx:collections")),
-    GET_COLLECTIONS_SHARED_WITH_ME(new VersionedUrl(ConnectionsConstants.v4_0, "{files}/basic/cmis/repository/{repositoryId}/folderc/snx:virtual!.!collectionssharedwith")),
-    GET_MY_SHARES(new VersionedUrl(ConnectionsConstants.v4_0, "{files}/basic/api/myshares/feed")),
+    GET_SERVICE_DOCUMENT(new VersionedUrl(v4_0, "{files}/basic/cmis/my/servicedoc")),
+    GET_MY_FILES(new VersionedUrl(v4_0, "{files}/basic/cmis/repository/{repositoryId}/folderc/snx:files")),
+    GET_FILES_SHARED_WITH_ME(new VersionedUrl(v4_0, "{files}/basic/cmis/repository/{repositoryId}/folderc/snx:virtual!.!filessharedwith")),
+    GET_MY_COLLECTIONS(new VersionedUrl(v4_0, "{files}/basic/cmis/repository/{repositoryId}/folderc/snx:collections")),
+    GET_COLLECTIONS_SHARED_WITH_ME(new VersionedUrl(v4_0, "{files}/basic/cmis/repository/{repositoryId}/folderc/snx:virtual!.!collectionssharedwith")),
+    GET_MY_SHARES(new VersionedUrl(v4_0, "{files}/basic/api/myshares/feed")),
     
-    ATOM_GET_USER_ID(new VersionedUrl(ConnectionsConstants.v4_0, "connections/opensocial/basic/rest/people/@me/")),
-    ATOM_GET_SUBSCRIBER_ID(new VersionedUrl(ConnectionsConstants.v4_0,"connections/opensocial/basic/rest/people/@me/"));
+    ATOM_GET_USER_ID(new VersionedUrl(v4_0, "connections/opensocial/basic/rest/people/@me/")),
+    ATOM_GET_SUBSCRIBER_ID(new VersionedUrl(v4_0,"connections/opensocial/basic/rest/people/@me/"));
 
 	private URLBuilder builder;
 	

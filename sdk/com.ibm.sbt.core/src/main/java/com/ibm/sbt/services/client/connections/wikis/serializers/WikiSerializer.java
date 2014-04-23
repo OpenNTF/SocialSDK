@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -16,6 +16,14 @@
 
 package com.ibm.sbt.services.client.connections.wikis.serializers;
 
+import static com.ibm.sbt.services.client.base.CommonConstants.APPLICATION_ATOM_XML;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.COMMUNITYUUID;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.CONTENT;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.LABEL;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.PERMISSIONS;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.TYPE;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.WIKI;
+
 import java.util.Collection;
 import java.util.Set;
 
@@ -23,7 +31,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 import com.ibm.commons.util.StringUtil;
-import com.ibm.sbt.services.client.base.ConnectionsConstants.Namespaces;
+import com.ibm.sbt.services.client.base.ConnectionsConstants.Namespace;
 import com.ibm.sbt.services.client.base.serializers.AtomEntitySerializer;
 import com.ibm.sbt.services.client.connections.wikis.Wiki;
 
@@ -32,12 +40,12 @@ import com.ibm.sbt.services.client.connections.wikis.Wiki;
  *
  */
 public class WikiSerializer extends AtomEntitySerializer<Wiki> {
-	
+
 	public WikiSerializer(Wiki wiki) throws Exception {
 		super(wiki);
 	}
 	
-	public void generateCreate() {
+	protected void generateCreatePayload() {
 		Node entry = entry();
 		
 		appendChildren(entry,
@@ -50,7 +58,7 @@ public class WikiSerializer extends AtomEntitySerializer<Wiki> {
 		);
 	}
 	
-	public void generateUpdate() {
+	protected void generateUpdatePayload() {
 		Node entry = genericAtomEntry();
 		
 		appendChildren(entry,
@@ -62,16 +70,26 @@ public class WikiSerializer extends AtomEntitySerializer<Wiki> {
 		);
 	}
 	
+	public String createPayload(){
+		generateCreatePayload();
+		return serializeToString();
+	}
+
+	public String updatePayload(){
+		generateUpdatePayload();
+		return serializeToString();
+	}
+	
 	private Element wikiCategory() {
-		return categoryType("wiki");
+		return categoryType(WIKI);
 	}
 	
 	private Element label() {
-		return textElement(Namespaces.TD, "label", entity.getLabel());
+		return textElement(Namespace.TD.getUrl(), LABEL, entity.getLabel());
 	}
 	
 	private Element communityId() {
-		return textElement(Namespaces.SNX, "communityUuid", entity.getCommunityUuid());
+		return textElement(Namespace.SNX.getUrl(), COMMUNITYUUID, entity.getCommunityUuid());
 	}
 	
 	private Element sharedWith() {
@@ -79,13 +97,13 @@ public class WikiSerializer extends AtomEntitySerializer<Wiki> {
 	}
 	
 	private Element permissions() {
-		return textElement(Namespaces.TD, "permissions", serializePermissions());
+		return textElement(Namespace.TD.getUrl(), PERMISSIONS, serializePermissions());
 	}
 	
 	@Override
 	protected Element content() {
-		return textElement("content", entity.getContent(), 
-				attribute("type", "application/atom+xml"));
+		return textElement(CONTENT, entity.getContent(), 
+				attribute(TYPE, APPLICATION_ATOM_XML));
 	}
 	
 	private String serializePermissions() {

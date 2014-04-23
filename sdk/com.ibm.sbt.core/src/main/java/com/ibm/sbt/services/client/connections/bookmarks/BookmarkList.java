@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -15,6 +15,8 @@
  */
 package com.ibm.sbt.services.client.connections.bookmarks;
 
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +25,6 @@ import org.w3c.dom.Node;
 
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.BaseService;
-import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.ConnectionsFeedXpath;
 import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
@@ -46,7 +47,7 @@ public class BookmarkList extends EntityList<Bookmark> {
 	public BookmarkList(Response response, IFeedHandler feedHandler) {
 		super(response, feedHandler);
 		
-		metaHandler = new XmlDataHandler((Document)response.getData(), ConnectionsConstants.nameSpaceCtx);
+		metaHandler = new XmlDataHandler((Document)response.getData(), nameSpaceCtx);
     }
 	
 	public BookmarkList(){}
@@ -60,7 +61,7 @@ public class BookmarkList extends EntityList<Bookmark> {
 	public BookmarkList(Response response, BaseService service) {
 		super(response, service);
 		
-		metaHandler = new XmlDataHandler((Document)response.getData(), ConnectionsConstants.nameSpaceCtx);
+		metaHandler = new XmlDataHandler((Document)response.getData(), nameSpaceCtx);
     }
 	
 	/* (non-Javadoc)
@@ -68,7 +69,7 @@ public class BookmarkList extends EntityList<Bookmark> {
 	 */
 	@Override
 	protected ArrayList<Bookmark> createEntities() {
-		XmlDataHandler dataHandler = new XmlDataHandler((Document)getData(), ConnectionsConstants.nameSpaceCtx);
+		XmlDataHandler dataHandler = new XmlDataHandler((Document)getData(), nameSpaceCtx);
 		ArrayList<Bookmark> bookmarks = new ArrayList<Bookmark>();
 		List<Node> nodes = dataHandler.getEntries(ConnectionsFeedXpath.Entry);
 		for (Node node: nodes) {

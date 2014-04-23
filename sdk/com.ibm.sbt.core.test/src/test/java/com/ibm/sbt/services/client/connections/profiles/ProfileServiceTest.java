@@ -1,3 +1,19 @@
+/*
+ * © Copyright IBM Corp. 2014
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); 
+ * you may not use this file except in compliance with the License. 
+ * You may obtain a copy of the License at:
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0 
+ * 
+ * Unless required by applicable law or agreed to in writing, software 
+ * distributed under the License is distributed on an "AS IS" BASIS, 
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or 
+ * implied. See the License for the specific language governing 
+ * permissions and limitations under the License.
+ */
+
 package com.ibm.sbt.services.client.connections.profiles;
 
 import static org.junit.Assert.assertEquals;
@@ -17,6 +33,7 @@ import org.junit.rules.ExpectedException;
 
 import com.ibm.sbt.services.BaseUnitTest;
 import com.ibm.sbt.services.client.SerializationUtil;
+import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 
 /**
  * Tests for the java connections Profile API by calling Connections server
@@ -42,28 +59,29 @@ public class ProfileServiceTest extends BaseUnitTest {
 
 		ProfileAdminService profileAdminService = new ProfileAdminService();
 		profileAdminService.getEndpoint().logout();
+		String userId = "testUserD9A04-F2E1-1222-4825-7A700026E92C";
+		String userEmail = "testUser@renovations.com";
+		String userName = "testUser";
 
 		Profile profile = new Profile(profileAdminService, "testUser");
-		profile.setAsString("guid", "testUserD9A04-F2E1-1222-4825-7A700026E92C");
-		profile.setAsString("email", "testUser@renovations.com");
-		profile.setAsString("uid", "testUser");
+		profile.setAsString("guid", userId);
+		profile.setAsString("email", userEmail);
+		profile.setAsString("uid", userName);
 		profile.setAsString("distinguishedName",
 				"CN=testUser def,o=renovations");
-		profile.setAsString("displayName", "testUser");
-		profile.setAsString("givenNames", "testUser");
-		profile.setAsString("surname", "testUser");
+		profile.setAsString("displayName", userName);
+		profile.setAsString("givenNames", userName);
+		profile.setAsString("surname", userName);
+		
 		profile.setAsString("userState", "active");
 
 		profileAdminService.createProfile(profile);
 
 		profile = profileService.getProfile("testUser@renovations.com");
 		assertNotNull(profile);
-		assertEquals("testUser", profile.getName());
-		assertEquals("testUser@renovations.com", profile.getEmail());
-		assertNotNull(profile.getUserid());
-		assertNotNull(profile.getProfileUrl());
-		assertNotNull(profile.getPronunciationUrl());
-		assertNotNull(profile.getThumbnailUrl());
+		assertEquals(userName, profile.getName());
+		assertEquals(userEmail, profile.getEmail());
+		assertEquals(userId, profile.getUserid());
 
 		profileAdminService.deleteProfile(profile.getUserid());
 	}
@@ -78,7 +96,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("email", properties.getProperty("email1"));
 		parameters.put("ps", "5");
-		ProfileList profileEntries = profileService.searchProfiles(parameters);
+		EntityList<Profile> profileEntries = profileService.searchProfiles(parameters);
 		if (profileEntries != null && !profileEntries.isEmpty()) {
 			for (Profile profile : profileEntries) {
 				assertNotNull(profile.getName());
@@ -90,13 +108,13 @@ public class ProfileServiceTest extends BaseUnitTest {
 	public void testSearchProfilesWithInvalidParams() throws Exception {
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("email", "abc@xyz.c");
-		ProfileList profileEntries = profileService.searchProfiles(parameters);
+		EntityList<Profile> profileEntries = profileService.searchProfiles(parameters);
 		assertEquals(0, profileEntries.size());
 	}
 
 	@Test
 	public void testGetColleagues() throws Exception {
-		ProfileList profileEntries = profileService.getColleagues(properties
+		EntityList<Profile> profileEntries = profileService.getColleagues(properties
 				.getProperty("user1"));
 		if (profileEntries != null && !profileEntries.isEmpty()) {
 			for (Profile profile : profileEntries) {
@@ -107,13 +125,13 @@ public class ProfileServiceTest extends BaseUnitTest {
 
 	@Test
 	public void testGetColleaguesForInvalidUser() throws Exception {
-		ProfileList profileEntries = profileService.getColleagues("abc@xyz.c");
+		EntityList<Profile> profileEntries = profileService.getColleagues("abc@xyz.c");
 		assertEquals(0, profileEntries.size());
 	}
 
 	@Test
 	public void testGetColleaguesConnectionEntries() throws Exception {
-		ColleagueConnectionList connectionEntries = profileService
+		EntityList<ColleagueConnection> connectionEntries = profileService
 				.getColleagueConnections(properties.getProperty("user1"));
 		if (connectionEntries != null && !connectionEntries.isEmpty()) {
 			for (ColleagueConnection Connection : connectionEntries) {
@@ -125,14 +143,14 @@ public class ProfileServiceTest extends BaseUnitTest {
 	@Test
 	public void testGetColleaguesConnectionEntriesForInvalidUser()
 			throws Exception {
-		ColleagueConnectionList connectionEntries = profileService
+		EntityList<ColleagueConnection> connectionEntries = profileService
 				.getColleagueConnections("abc@xyz.c");
 		assertEquals(0, connectionEntries.size());
 	}
 
 	@Test
 	public void testGetCommonColleaguesProfiles() throws Exception {
-		ProfileList profileEntries = profileService.getCommonColleagues(
+		EntityList<Profile> profileEntries = profileService.getCommonColleagues(
 				properties.getProperty("email1"),
 				properties.getProperty("email2"));
 		if (profileEntries != null && !profileEntries.isEmpty()) {
@@ -144,7 +162,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 
 	@Test
 	public void testGetReportToChain() throws Exception {
-		ProfileList profileEntries = profileService
+		EntityList<Profile> profileEntries = profileService
 				.getReportingChain(properties.getProperty("user1"));
 		if (profileEntries != null && !profileEntries.isEmpty()) {
 			for (Profile profile : profileEntries) {
@@ -155,7 +173,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 
 	@Test
 	public void testGetDirectReports() throws Exception {
-		ProfileList profileEntries = profileService.getPeopleManaged(properties
+		EntityList<Profile> profileEntries = profileService.getPeopleManaged(properties
 				.getProperty("user1"));
 		if (profileEntries != null && !profileEntries.isEmpty()) {
 			for (Profile profile : profileEntries) {
@@ -184,12 +202,28 @@ public class ProfileServiceTest extends BaseUnitTest {
 	public final void testUpdateProfile() throws Exception {
 		Profile profile = profileService.getProfile(properties
 				.getProperty("email1"));
-		profile.setTelephoneNumber("9999999999");
+		String phoneNumber = "9999999999";
+		profile.setTelephoneNumber(phoneNumber);
 		profileService.updateProfile(profile);
 		profile = profileService.getProfile(properties.getProperty("email1"));
-		assertEquals("9999999999", profile.getTelephoneNumber());
+		assertEquals(phoneNumber, profile.getTelephoneNumber());
 
 		profileService.getEndpoint().logout();
+	}
+	
+	@Test
+	public final void testAddTags() throws Exception {
+		Profile profile = profileService.getProfile(properties.getProperty("email2"));
+		profile.setAsString("tags", "tag1, tag2, tag3");
+		profileService.addTags(properties.getProperty("email1"), properties.getProperty("email2"), profile);
+
+		EntityList<Tag> tags = profileService.getTags(properties.getProperty("email2"));
+		for(Tag tag : tags){
+			assertNotNull(tag.getTerm());
+		}
+
+		profileService.getEndpoint().logout();
+	
 	}
 
 	/**
@@ -252,22 +286,22 @@ public class ProfileServiceTest extends BaseUnitTest {
 					ObjectInputStream ois = new ObjectInputStream(new FileInputStream(serFile));
 					profileObject = (Profile) ois.readObject();
 				} catch (Exception e) {}
-				assertEquals(profileObject.getEmail(), properties.getProperty("email1"));
+				assertEquals(properties.getProperty("email1"), profileObject.getEmail());
 			}
 		}.isSerializable(profile);
 	}
 		
 	@Test
 	public final void testProfileListSerialization() throws Exception {
-		ProfileList profiles = profileService.getReportingChain(properties.getProperty("email1"));
+		EntityList<Profile> profiles = profileService.getReportingChain(properties.getProperty("email1"));
 		new SerializationUtil() {
 			
 			@Override
 			public void validateSerializable() { 
-				ProfileList allprofiles = null;
+				EntityList<Profile> allprofiles = null;
 				try {
 					ObjectInputStream ois = new ObjectInputStream(new FileInputStream(serFile));
-					allprofiles = (ProfileList) ois.readObject();
+					allprofiles = (EntityList<Profile>) ois.readObject();
 					for (Iterator<Profile> iterator = allprofiles.iterator(); iterator.hasNext();) {
 						Profile localprofile = iterator.next();
 					}

@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -15,16 +15,19 @@
  */
 package com.ibm.sbt.services.client.connections.communities;
 
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
-import com.ibm.sbt.services.client.base.ConnectionsConstants;
-import com.ibm.sbt.services.client.base.ConnectionsFeedXpath;
-import com.ibm.sbt.services.client.connections.communities.feedhandler.CommunityFeedHandler;
+
 import com.ibm.sbt.services.client.Response;
+import com.ibm.sbt.services.client.base.ConnectionsFeedXpath;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
+import com.ibm.sbt.services.client.connections.communities.feedhandler.CommunityFeedHandler;
 
 /**
  * @author Swati Singh
@@ -65,7 +68,7 @@ public class CommunityList extends EntityList<Community> {
 	@Override
 	protected ArrayList<Community> createEntities() {
 		
-		XmlDataHandler dataHandler = new XmlDataHandler(getData(), ConnectionsConstants.nameSpaceCtx);
+		XmlDataHandler dataHandler = new XmlDataHandler(getData(), nameSpaceCtx);
 		ArrayList<Community> communities = new ArrayList<Community>();
 		List<Node> entries = dataHandler.getEntries(ConnectionsFeedXpath.Entry);
 		for (Node node: entries) {
@@ -76,7 +79,7 @@ public class CommunityList extends EntityList<Community> {
 	}
 	
 	private XmlDataHandler getMetaDataHandler(){
-		return new XmlDataHandler(getData(), ConnectionsConstants.nameSpaceCtx);
+		return new XmlDataHandler(getData(), nameSpaceCtx);
 	}
 	
 	@Override

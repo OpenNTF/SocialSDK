@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -16,6 +16,8 @@
 
 package com.ibm.sbt.services.client.connections.search;
 
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +26,6 @@ import org.w3c.dom.Node;
 
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.BaseService;
-import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.ConnectionsFeedXpath;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
@@ -49,7 +50,7 @@ public class ResultList extends EntityList<Result>{
 	public ResultList(){}
 	
 	private XmlDataHandler getMetaDataHandler(){
-		return new XmlDataHandler(getData(), ConnectionsConstants.nameSpaceCtx);
+		return new XmlDataHandler(getData(), nameSpaceCtx);
 	}
 
 	@Override
@@ -84,7 +85,7 @@ public class ResultList extends EntityList<Result>{
 
 	@Override
 	protected ArrayList<Result> createEntities() {
-		XmlDataHandler dataHandler = new XmlDataHandler(getData(), ConnectionsConstants.nameSpaceCtx);
+		XmlDataHandler dataHandler = new XmlDataHandler(getData(), nameSpaceCtx);
 		ArrayList<Result> results = new ArrayList<Result>();
 		List<Node> entries = dataHandler.getEntries(ConnectionsFeedXpath.Entry);
 		for (Node node: entries) {

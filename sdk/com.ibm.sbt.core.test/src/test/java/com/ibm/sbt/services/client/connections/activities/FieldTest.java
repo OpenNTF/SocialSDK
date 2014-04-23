@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * Â© Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,8 @@
  */
 package com.ibm.sbt.services.client.connections.activities;
 
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +29,6 @@ import org.w3c.dom.Node;
 import com.ibm.commons.xml.XMLException;
 import com.ibm.commons.xml.XResult;
 import com.ibm.commons.xml.xpath.XPathExpression;
-import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 
 /**
@@ -40,25 +41,25 @@ public class FieldTest extends BaseActivityServiceTest {
 	public void testFields() throws XMLException, IOException {
 		Node doc = readXml("fields.xml");
 				
-		XmlDataHandler dataHandler = new XmlDataHandler(doc, ConnectionsConstants.nameSpaceCtx);
+		XmlDataHandler dataHandler = new XmlDataHandler(doc, nameSpaceCtx);
 		List<Node> nodeFields = dataHandler.getEntries(ActivityXPath.entry_field);
 		List<Field> fields = new ArrayList<Field>();
 		for (Node node : nodeFields) {
 			XPathExpression xpath = (node instanceof Document) ? (XPathExpression)ActivityXPath.field.getPath() : null;
 			
 			XPathExpression fieldType = ActivityXPath.field_type.getPath();
-			XResult result = fieldType.eval(node, ConnectionsConstants.nameSpaceCtx);
+			XResult result = fieldType.eval(node, nameSpaceCtx);
 			String type = result.getStringValue();
 			if ("date".equals(type)) {
-				fields.add(new DateField(activityService, node, ConnectionsConstants.nameSpaceCtx, xpath));
+				fields.add(new DateField(activityService, node, nameSpaceCtx, xpath));
 			} else if ("file".equals(type)) {
-				fields.add(new FileField(activityService, node, ConnectionsConstants.nameSpaceCtx, xpath));
+				fields.add(new FileField(activityService, node, nameSpaceCtx, xpath));
 			} else if ("link".equals(type)) {
-				fields.add(new LinkField(activityService, node, ConnectionsConstants.nameSpaceCtx, xpath));
+				fields.add(new LinkField(activityService, node, nameSpaceCtx, xpath));
 			} else if ("person".equals(type)) {
-				fields.add(new PersonField(activityService, node, ConnectionsConstants.nameSpaceCtx, xpath));
+				fields.add(new PersonField(activityService, node, nameSpaceCtx, xpath));
 			} else if ("text".equals(type)) {
-				fields.add(new TextField(activityService, node, ConnectionsConstants.nameSpaceCtx, xpath));
+				fields.add(new TextField(activityService, node, nameSpaceCtx, xpath));
 			}
 		}
 		Assert.assertEquals(5, fields.size());

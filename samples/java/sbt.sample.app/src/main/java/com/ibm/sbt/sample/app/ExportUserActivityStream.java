@@ -126,30 +126,21 @@ public class ExportUserActivityStream {
 		
 		this.initEnvironment();
 		
-		endpoint = (BasicEndpoint) EndpointFactory.getEndpoint(this.endpointName);
-		System.out.println("endpoint created"+endpoint.toString());
-		//set the connections url
-		this.setBaseUrl(this.connectionsUrl);
+		endpoint = new BasicEndpoint();
+		endpoint.setUrl(this.connectionsUrl);
+        endpoint.setForceTrustSSLCertificate(true);
+        endpoint.setUser(this.USERNAME);
+        endpoint.setPassword(this.PASSWORD);
 		
 		//set service maps
 		Map<String,String> map = new HashMap<String,String>();
 		map.put("connections", this.serviceMap);
-		this.setServiceMaps(map);
+		endpoint.setServiceMappings(map);
 		
-		if (StringUtil.isNotEmpty(this.USERNAME)) {
-			try {
-				endpoint.login(this.USERNAME, this.PASSWORD);
-				System.out.println("Login Successful");
-			} catch (AuthenticationException e) {
-				System.out.println("Error authenticating with connections");
-				e.printStackTrace();
-			}
-		}
 		this.getUserActivityStream();
 		this.getProfileProperties();
-		
-		System.out.println("Done");
-		
+
+		System.out.println("Done");		
 	}
 	
 	public void getUserActivityStream(){
@@ -158,7 +149,8 @@ public class ExportUserActivityStream {
 		String content = "";
 		try {
 			activityStreamService = new ActivityStreamService();
-			System.out.println("HERE");
+			activityStreamService.setEndpoint(this.endpoint);
+			
 			Map<String,String> map = new HashMap<String,String>();
 			map.put("count", this.resultCount);
 			ActivityStreamEntityList entries = activityStreamService.getUpdatesFromUser(this.USER_ID,map);
@@ -206,6 +198,7 @@ public class ExportUserActivityStream {
 		
 		System.out.println("\nGetting Profile Properties...");
 		ProfileService connProfSvc = new ProfileService();
+		connProfSvc.setEndpoint(this.endpoint);
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("userid", this.USER_ID);
 		String content = "";
@@ -267,15 +260,7 @@ public class ExportUserActivityStream {
 	public BasicEndpoint getEndpoint() {
 		return this.endpoint;
 	}
-	
-	public void setServiceMaps(Map<String,String> serviceMap){
-		this.endpoint.setServiceMappings(serviceMap);
-	}
-	
-	public void setBaseUrl(String url){
-		this.endpoint.setUrl(url);
-	}
-	
+		
 	/**
 	 * Initialise the Context, needed for Services and Endpoints.
 	 */

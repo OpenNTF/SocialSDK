@@ -1,4 +1,4 @@
-/* * �� Copyright IBM Corp. 2014 * 
+/* * © Copyright IBM Corp. 2014 * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
  * You may obtain a copy of the License at:
@@ -26,7 +26,11 @@ import com.ibm.commons.util.StringUtil;
 public class Version implements Serializable, Comparable<Version> {
 
 	public static final Version EMPTY = new Version(0, 0, 0);
+	private final int major;
+	private final int minor;
+	private final int subversion;
 	private static final char POINT = '.';
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Parses a string containing a dot separated version of Connections with the format Major.Minor.Subversion and returns a Version object
@@ -64,12 +68,6 @@ public class Version implements Serializable, Comparable<Version> {
 					"Invalid version format {0}", s), ex);
 		}
 	}
-
-	private static final long serialVersionUID = 1L;
-
-	private int major;
-	private int minor;
-	private int subversion;
 
 	public Version(int major, int minor, int subversion) {
 		this.major = major;

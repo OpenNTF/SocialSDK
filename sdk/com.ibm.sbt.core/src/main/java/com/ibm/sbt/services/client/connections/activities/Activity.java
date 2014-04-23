@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * Â© Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,8 @@
  */
 package com.ibm.sbt.services.client.connections.activities;
 
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
+
 import java.util.Date;
 
 import org.w3c.dom.Node;
@@ -24,7 +26,6 @@ import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.BaseService;
-import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.connections.activities.serializers.ActivitySerializer;
 import com.ibm.sbt.services.client.connections.common.Member;
@@ -34,14 +35,7 @@ import com.ibm.sbt.services.client.connections.common.Person;
  * @author mwallace
  *
  */
-public class Activity extends NodeEntity {
-
-	/*
-	 * Specifies the starting page of a template. The term attribute identifies the default view to use. 
-	 */
-	static final public String RECENT = "recent"; //$NON-NLS-1$
-	static final public String OUTLINE = "outline"; //$NON-NLS-1$
-	static final public String TODO = "todo"; //$NON-NLS-1$
+public class Activity extends ActivityNode {
 	
 	/**
 	 * Default constructor
@@ -224,7 +218,7 @@ public class Activity extends NodeEntity {
 			return null;
 		}
 		return new Priority(getService(), (Node)getDataHandler().getData(), 
-				ConnectionsConstants.nameSpaceCtx, ActivityXPath.priority.getPath());
+				nameSpaceCtx, ActivityXPath.priority.getPath());
 	}
 	
 	/**
@@ -361,7 +355,8 @@ public class Activity extends NodeEntity {
 	//------------------------------------------------------------------------------------------------------------------
 	
 	/**
-	 * @see ActivityService.deleteActivity  
+	 * To delete an existing activity, use the HTTP DELETE method.
+	 * Deleted activities are moved to the trash collection and can be restored.  
 	 * 
 	 * @return
 	 * @throws ClientServicesException 
@@ -382,6 +377,10 @@ public class Activity extends NodeEntity {
 	public void update() throws ClientServicesException {
 		ActivityService service = getActivityService();
 		service.updateActivity(this);
+	}
+	
+	public Field getField(String fid) {
+		return null;
 	}
 	
 	//------------------------------------------------------------------------------------------------------------------

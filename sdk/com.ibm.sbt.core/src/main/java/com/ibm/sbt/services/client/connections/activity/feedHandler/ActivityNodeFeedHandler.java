@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -16,15 +16,13 @@
 
 package com.ibm.sbt.services.client.connections.activity.feedHandler;
 
-import org.w3c.dom.Document;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
+
 import org.w3c.dom.Node;
 
-import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.Response;
-import com.ibm.sbt.services.client.base.AtomXPath;
 import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.base.BaseService;
-import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.connections.activity.ActivityNode;
@@ -59,7 +57,7 @@ public class ActivityNodeFeedHandler implements IFeedHandler  {
 
 	@Override
 	public ActivityNode createEntityFromData(Object data) {
-		XmlDataHandler handler = new XmlDataHandler((Node)data, ConnectionsConstants.nameSpaceCtx);
+		XmlDataHandler handler = new XmlDataHandler((Node)data, nameSpaceCtx);
 		ActivityNode activity = new ActivityNode(service, handler);
 //		XPathExpression xpath = (data instanceof Document) ? (XPathExpression)AtomXPath.singleEntry.getPath() : null;
 //      ActivityNode activity = new ActivityNode(service, (Node)data, ConnectionsConstants.nameSpaceCtx, xpath);

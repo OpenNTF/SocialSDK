@@ -16,6 +16,8 @@
 
 package com.ibm.sbt.services.client.base.datahandlers;
 
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
+
 import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
@@ -33,6 +35,7 @@ import com.ibm.sbt.services.client.ClientService.Args;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.base.ConnectionsFeedXpath;
 import com.ibm.sbt.services.client.base.IFeedHandler;
 
 
@@ -180,5 +183,4 @@ public abstract class EntityList<Entity extends BaseEntity> extends AbstractList
 		outputStream.writeObject(entities);
 		outputStream.writeObject(getService());
 	}
-
 }

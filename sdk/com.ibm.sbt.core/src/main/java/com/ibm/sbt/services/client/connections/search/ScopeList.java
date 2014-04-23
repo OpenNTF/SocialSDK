@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -24,7 +24,7 @@ import org.w3c.dom.Node;
 
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.BaseService;
-import com.ibm.sbt.services.client.base.ConnectionsConstants;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.*;
 import com.ibm.sbt.services.client.base.ConnectionsFeedXpath;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
@@ -48,7 +48,7 @@ public class ScopeList extends EntityList<Scope>{
 	public ScopeList(){}
 	
 	private XmlDataHandler getMetaDataHandler(){
-		return new XmlDataHandler(getData(), ConnectionsConstants.nameSpaceCtx);
+		return new XmlDataHandler(getData(), nameSpaceCtx);
 	}
 
 	@Override
@@ -83,7 +83,7 @@ public class ScopeList extends EntityList<Scope>{
 
 	@Override
 	protected ArrayList<Scope> createEntities() {
-		XmlDataHandler dataHandler = new XmlDataHandler(getData(), ConnectionsConstants.nameSpaceCtx);
+		XmlDataHandler dataHandler = new XmlDataHandler(getData(), nameSpaceCtx);
 		ArrayList<Scope> results = new ArrayList<Scope>();
 		List<Node> entries = dataHandler.getEntries(ConnectionsFeedXpath.Entry);
 		for (Node node: entries) {

@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * Â© Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ import com.ibm.sbt.services.client.connections.common.Person;
  *
  */
 public class PersonField extends Field {
-	
+
 	private Person person;
 
 	/**

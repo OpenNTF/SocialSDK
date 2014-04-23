@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2012
+ * © Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -14,6 +14,8 @@
  * permissions and limitations under the License.
  */
 package com.ibm.sbt.services.client.connections.files;
+
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
 
 import java.util.Date;
 import java.util.List;
@@ -30,8 +32,6 @@ import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.service.basic.ConnectionsFileProxyService;
 import com.ibm.sbt.services.client.base.AtomEntity;
 import com.ibm.sbt.services.client.base.AtomXPath;
-import com.ibm.sbt.services.client.base.ConnectionsConstants;
-import com.ibm.sbt.services.client.base.Version;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.files.model.Author;
@@ -160,7 +160,7 @@ public class File extends AtomEntity {
 	public Author getAuthor() {
 		if(null == authorEntry) {
 			 authorEntry = new Author(getService(), new XmlDataHandler((Node)this.getDataHandler().getData(), 
-		        		ConnectionsConstants.nameSpaceCtx, (XPathExpression)AtomXPath.author.getPath()));
+		        		nameSpaceCtx, (XPathExpression)AtomXPath.author.getPath()));
 		}
 		return authorEntry;
 	}
@@ -205,7 +205,7 @@ public class File extends AtomEntity {
 	public Person getModifier() {
 		if(null == modifierEntry) {
 			modifierEntry = new Modifier(getService(), new XmlDataHandler((Node)this.getDataHandler().getData(), 
-	        		ConnectionsConstants.nameSpaceCtx, (XPathExpression)AtomXPath.modifier.getPath()));
+	        		nameSpaceCtx, (XPathExpression)AtomXPath.modifier.getPath()));
 		}
 		return modifierEntry;
 	}

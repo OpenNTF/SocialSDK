@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -15,15 +15,16 @@
  */
 package com.ibm.sbt.services.client.connections.files.feedHandler;
 
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
+
 import org.w3c.dom.Node;
 
 import com.ibm.sbt.services.client.Response;
-import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
+import com.ibm.sbt.services.client.connections.files.Comment;
 import com.ibm.sbt.services.client.connections.files.CommentList;
 import com.ibm.sbt.services.client.connections.files.FileService;
-import com.ibm.sbt.services.client.connections.files.Comment;
 
 public class CommentFeedHandler implements IFeedHandler {
 	
@@ -52,7 +53,7 @@ public class CommentFeedHandler implements IFeedHandler {
 	 */
     @Override
     public Comment createEntityFromData(Object data) {
-        XmlDataHandler handler = new XmlDataHandler((Node)data, ConnectionsConstants.nameSpaceCtx);
+        XmlDataHandler handler = new XmlDataHandler((Node)data, nameSpaceCtx);
         Comment comment = new Comment(service , handler);
         return comment;
     }

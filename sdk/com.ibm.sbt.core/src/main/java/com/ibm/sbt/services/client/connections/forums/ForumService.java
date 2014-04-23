@@ -15,6 +15,8 @@
  */
 package com.ibm.sbt.services.client.connections.forums;
 
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.v4_5;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,7 +29,6 @@ import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.AuthType;
 import com.ibm.sbt.services.client.base.BaseService;
-import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.NamedUrlPart;
 import com.ibm.sbt.services.client.connections.communities.Community;
 import com.ibm.sbt.services.client.connections.communities.CommunityServiceException;
@@ -267,7 +268,7 @@ public class ForumService extends BaseService {
 	}
 	
 	protected void checkVersion() throws ForumServiceException{
-		if (!getApiVersion().isAtLeast(ConnectionsConstants.v4_5)){
+		if (!getApiVersion().isAtLeast(v4_5)){
 			UnsupportedOperationException ex = new UnsupportedOperationException("This API is only supported on connections 4.5 or above");
 			throw new ForumServiceException(ex);
 		}

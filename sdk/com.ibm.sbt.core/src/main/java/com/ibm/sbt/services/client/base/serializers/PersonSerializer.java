@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -18,7 +18,7 @@ package com.ibm.sbt.services.client.base.serializers;
 
 import org.w3c.dom.Node;
 
-import com.ibm.sbt.services.client.base.ConnectionsConstants.Namespaces;
+import com.ibm.sbt.services.client.base.ConnectionsConstants.Namespace;
 import com.ibm.sbt.services.client.connections.common.Person;
 
 /**
@@ -27,6 +27,10 @@ import com.ibm.sbt.services.client.connections.common.Person;
  *
  */
 public class PersonSerializer extends BaseEntitySerializer<Person> {
+	private static final String NAME = "name";
+	private static final String EMAIL = "email";
+	private static final String USER_ID = "userid";
+	private static final String USER_STATE = "userState";
 
 	public PersonSerializer(Person entity) {
 		super(entity);
@@ -34,10 +38,10 @@ public class PersonSerializer extends BaseEntitySerializer<Person> {
 	
 	public Node xmlNode(String nodeName) {
 		return appendChildren(rootNode(element(nodeName)),
-				textElement("name", entity.getName()),
-				textElement("email", entity.getEmail()),
-				textElement(Namespaces.SNX, "userid", entity.getId()),
-				textElement(Namespaces.SNX, "userState", entity.getUserState())
+				textElement(NAME, entity.getName()),
+				textElement(EMAIL, entity.getEmail()),
+				textElement(Namespace.SNX.getUrl(), USER_ID, entity.getId()),
+				textElement(Namespace.SNX.getUrl(), USER_STATE, entity.getUserState())
 		);
 	}
 }

@@ -32,7 +32,6 @@ import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx
 import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.ACCEPTED;
 import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.COLLEAGUE;
 import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.CONNECTION;
-import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.CONNECTIONID;
 import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.CONNECTION_TYPE;
 import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.CONNECTION_UNIQUE_IDENTIFIER;
 import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.FORMAT;

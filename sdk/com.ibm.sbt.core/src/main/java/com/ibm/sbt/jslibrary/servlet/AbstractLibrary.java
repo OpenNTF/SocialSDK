@@ -997,7 +997,7 @@ abstract public class AbstractLibrary {
 				String proxyUrl = proxy.getProxyUrl();
 				if(!(UrlUtil.isAbsoluteUrl(proxyUrl))){ // if proxy url specified in proxy config is relative, assume server same as of SBT
 					// Url is relative, append server to it
-					proxyUrl = UrlUtil.makeUrlAbsolute(request.getHttpRequest(),proxyUrl);
+					proxyUrl = UrlUtil.makeUrlAbsolute(request.getHttpRequest(),proxyUrl, endpoint.isUseRequestUrl());
 				}
 				proxyUrl = addMakeAbsoluteUrl(proxyUrl).getRef();
 				String proxyClass = proxy.getProxyModule();

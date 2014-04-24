@@ -1,70 +1,10 @@
-
 <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
 <script type="text/javascript">
-	var strConnectionsEndpointURL = 'URL to the Connections server';
-	var strSmartcloudEndpointURL = 'URL to the Smartcloud server';
-	var strSSLTrustError = 'You are forcing SSL trust, but your server URL does not use HTTPS. Please correct this.';
-	var strEndpointNameError = 'The name of your endpoint should not contain any spaces';
+
 </script>
 
 <script type="text/javascript">
-var action_type = 'create';
-window.onload = function () {
 
-
-	
-// 	document.getElementById("new_callback_url").value = document.getElementById("callback_url").value;
-// 	document.getElementById("submit").value = "Activate Endpoint";
-	endpoint_change();
-	
-	document.getElementById("new_consumer_key").addEventListener('keyup', function (e) {
-		completeFieldCheck();
-	}, false);
-	
-	document.getElementById("new_consumer_secret").addEventListener('keyup', function (e) {
-		completeFieldCheck();
-	}, false);
-	
-	document.getElementById("new_endpoint_name").addEventListener('keyup', function (e) {
-		completeFieldCheck();
-	}, false);
-	
-	document.getElementById("new_endpoint_url").addEventListener('keyup', function (e) {
-		completeFieldCheck();
-	}, false);
-	
-	document.getElementById("new_authorization_url").addEventListener('keyup', function (e) {
-		completeFieldCheck();
-	}, false);
-	
-	document.getElementById("new_access_token_url").addEventListener('keyup', function (e) {
-		completeFieldCheck();
-	}, false);
-	
-	document.getElementById("new_request_token_url").addEventListener('keyup', function (e) {
-		completeFieldCheck();
-	}, false);
-	
-	document.getElementById("new_basic_auth_username").addEventListener('keyup', function (e) {
-		completeFieldCheck();
-	}, false);
-
-	document.getElementById("new_basic_auth_password").addEventListener('keyup', function (e) {
-		completeFieldCheck();
-	}, false);
-
-	document.getElementById("new_form_auth_page").addEventListener('keyup', function (e) {
-		completeFieldCheck();
-	}, false);
-
-	document.getElementById("new_form_auth_login_page").addEventListener('keyup', function (e) {
-		completeFieldCheck();
-	}, false);
-
-	document.getElementById("new_form_auth_cookie_cache").addEventListener('keyup', function (e) {
-		completeFieldCheck();
-	}, false);
-}
 
 $(function() {
     $("#ibmsbtDialog").dialog({
@@ -91,7 +31,7 @@ function ibm_sbt_generate_callback_url() {
 	document.getElementById('new_callback_url').value = url;
 }
 
-function new_server_type_change() {
+function ibm_sbt_new_server_type_change() {
 	var server_type = document.getElementById("new_server_type");
 
 	var selected_type = server_type.options[server_type.selectedIndex].value;
@@ -109,10 +49,10 @@ function new_server_type_change() {
 	
 	auth_methods.style.display = 'block';
 	
-	change_new_authentication_method();
+	ibm_sbt_change_new_authentication_method();
 }
 
-function change_new_authentication_method() {
+function ibm_sbt_change_new_authentication_method() {
 	var myselect = document.getElementById("new_authentication_method");
 	var authMethod = myselect.options[myselect.selectedIndex].value;
 	
@@ -150,7 +90,7 @@ function change_new_authentication_method() {
 			document.getElementById("lb_new_consumer_key").innerHTML = 'OAuthKey';
 		} 
 		
-		oauthSmartcloudFieldCheck();
+		ibm_sbt_oauth_smartcloud_field_check();
 	} else if (authMethod == "basic") {
 		document.getElementById("tr_new_callback_url").style.display = 'none';
 		document.getElementById("lb_endpoint_url").value = 'URL to the Connections server';
@@ -192,7 +132,7 @@ function change_new_authentication_method() {
 		
 		document.getElementById("lb_new_consumer_secret").innerHTML = 'ClientSecret';
 		document.getElementById("lb_new_consumer_key").innerHTML = 'ClientID';
-		oauthSmartcloudFieldCheck();
+		ibm_sbt_oauth_smartcloud_field_check();
 		
 	} else if (authMethod == "oauth2" && selected_type == "connections") {
 		document.getElementById("tr_new_callback_url").style.display = 'block';
@@ -213,12 +153,12 @@ function change_new_authentication_method() {
 		document.getElementById("tr_new_form_auth_login_page").style.display = 'none';
 		document.getElementById("tr_new_form_auth_cookie_cache").style.display = 'none';
 		
-		oauth2ConnectionsFieldCheck();
+		ibm_sbt_oauth2_connections_field_check();
 	} 
 }
 
 
-function isCorrectDropDownValueSelected() {
+function ibm_sbt_is_correct_drop_down_value_selected() {
 	var myselect = document.getElementById("new_authentication_method");
 	var authMethod = myselect.options[myselect.selectedIndex].value;
 	var serverType = document.getElementById("new_server_type");
@@ -227,8 +167,8 @@ function isCorrectDropDownValueSelected() {
 	return (authMethod != 'choose' && selectedType != 'choose');
 }
 
-function oauth2ConnectionsFieldCheck() {
-	if (!isCorrectDropDownValueSelected() || document.getElementById('new_callback_url').value == '' || document.getElementById('new_consumer_secret').value == ''
+function ibm_sbt_oauth2_connections_field_check() {
+	if (!ibm_sbt_is_correct_drop_down_value_selected() || document.getElementById('new_consumer_secret').value == ''
 		|| document.getElementById('new_consumer_key').value == '' || document.getElementById('new_endpoint_name').value == '' 
 		|| document.getElementById('new_endpoint_url').value == '' || document.getElementById('new_authorization_url').value == ''
 		|| document.getElementById('new_access_token_url').value == '' || document.getElementById('new_request_token_url').value == '') {
@@ -238,8 +178,8 @@ function oauth2ConnectionsFieldCheck() {
 	}
 }
 
-function oauthSmartcloudFieldCheck() {
-	if (!isCorrectDropDownValueSelected() || document.getElementById('new_consumer_secret').value == ''
+function ibm_sbt_oauth_smartcloud_field_check() {
+	if (!ibm_sbt_is_correct_drop_down_value_selected() || document.getElementById('new_consumer_secret').value == ''
 		|| document.getElementById('new_consumer_key').value == '' || document.getElementById('new_endpoint_name').value == '' 
 		|| document.getElementById('new_endpoint_url').value == '' ) {
 		document.getElementById("new_endpoint_save").setAttribute("disabled", "disabled");
@@ -248,7 +188,7 @@ function oauthSmartcloudFieldCheck() {
 	}
 }
 
-function change_new_basic_auth_method() {
+function ibm_sbt_change_new_basic_auth_method() {
 	var myselect = document.getElementById("new_authentication_method");
 	var authMethod = myselect.options[myselect.selectedIndex].value;
 	
@@ -289,7 +229,7 @@ function change_new_basic_auth_method() {
 	}
 }
 
-function basicAuthFieldCheck() {
+function ibm_sbt_basic_auth_field_check() {
 	var authMethodSelect = document.getElementById("new_basic_auth_method");
 	var selectedAuthMethod = authMethodSelect.options[authMethodSelect.selectedIndex].value;
 
@@ -311,29 +251,27 @@ function basicAuthFieldCheck() {
 	}
 }
 
-function completeFieldCheck() {
+function ibm_sbt_complete_field_check() {
 	var serverType = document.getElementById("new_server_type");
 	var selectedType = serverType.options[serverType.selectedIndex].value;
 	var myselect = document.getElementById("new_authentication_method");
 	var authMethod = myselect.options[myselect.selectedIndex].value;
 	if (authMethod == 'oauth2'  && selectedType == "connections") {
-		oauth2ConnectionsFieldCheck();
+		ibm_sbt_oauth2_connections_field_check();
 	} else if ((authMethod == 'oauth1' || authMethod == 'oauth2') && selectedType != "connections") {
-		oauthSmartcloudFieldCheck();
-	} else if (authMethod == 'form') {
-		formFieldCheck();
+		ibm_sbt_oauth_smartcloud_field_check();
 	} else {
-		basicAuthFieldCheck();
+		ibm_sbt_basic_auth_field_check();
 	}
 }
 
-function cancel_new_endpoint() {
+function ibm_sbt_cancel_new_endpoint() {
 	document.getElementById("new_endpoint_url").setAttribute("style", "");
 	document.getElementById("new_endpoint_name").setAttribute("style", "");
 	$( "#ibmsbtDialog" ).dialog('close');
 }
 
-function save_new_endpoint() {
+function ibm_sbt_save_new_endpoint() {
 	// Disallow spaces
 	if (document.getElementById("new_endpoint_name").value.indexOf(' ') >= 0) {
 		alert(strEndpointNameError);
@@ -447,9 +385,10 @@ function ibm_sbt_remove_endpoint() {
 	    {
 	    	var endpoint_list = document.getElementById("endpoint_list");
 	    	var endpoint = endpoint_list.options[endpoint_list.selectedIndex];
-	    	endpoint_list.removeChild(endpoint);	
 	    	
+	    	endpoint_list.removeChild(endpoint);		    	
 	    	$("#ibmsbtDialog").dialog('close');
+	    	window.location.reload();
 	    },
 	    error: function (jqXHR, textStatus, errorThrown)
 	    {
@@ -496,8 +435,8 @@ function ibm_sbt_edit_endpoint() {
 			document.getElementById("new_form_auth_login_page").value = ret['form_auth_login_page'];
 			document.getElementById("new_form_auth_cookie_cache").value = ret['form_auth_cookie_cache'];
 			
-			new_server_type_change();
-			change_new_basic_auth_method();
+			ibm_sbt_new_server_type_change();
+			ibm_sbt_change_new_basic_auth_method();
 			$("#ibmsbtDialog").dialog("open");
 	    },
 	    error: function (jqXHR, textStatus, errorThrown)
@@ -529,7 +468,7 @@ function ibm_sbt_edit_endpoint() {
 				What server do you want to connect to?
 			</td>
 			<td>
-				<select onchange="new_server_type_change();" id="new_server_type" name="new_server_type">
+				<select onchange="ibm_sbt_new_server_type_change();" id="new_server_type" name="new_server_type">
 					<option value="choose">Choose one...</option>
 					<option value="connections">IBM Connections (On Premises)</option>
 					<option value="smartcloud">IBM SmartCloud for Social Business</option>
@@ -541,7 +480,7 @@ function ibm_sbt_edit_endpoint() {
 				What authentication method do you want to use?
 			</td>
 			<td>
-				<select id="new_authentication_method" name="new_authentication_method" onchange="change_new_authentication_method();">
+				<select id="new_authentication_method" name="new_authentication_method" onchange="ibm_sbt_change_new_authentication_method();">
 					<option value="choose">Choose one...</option>
 					<option id="new_oauth1" value="oauth1">OAuth 1.0</option>
 					<option value="oauth2">OAuth 2.0</option>
@@ -629,11 +568,10 @@ function ibm_sbt_edit_endpoint() {
 				Specify user name and password
 			</td>
 			<td>
-				<select id="new_basic_auth_method" name="new_basic_auth_method" onchange="change_new_basic_auth_method();">
+				<select id="new_basic_auth_method" name="new_basic_auth_method" onchange="ibm_sbt_change_new_basic_auth_method();">
 					<option value="choose">Choose one...</option>
 					<option value="global">Global user credentials</option>
 		    		<option value="prompt">Prompt for user credentials</option>
-		    		<option value="profile">Use Moodle account credentials</option>
 				</select>
 			</td>
 		</tr>
@@ -687,6 +625,6 @@ function ibm_sbt_edit_endpoint() {
 			</td>
 		</tr>
 	</table>
-	<button disabled="disabled" onclick="save_new_endpoint();" id="new_endpoint_save">Save</button> 
-	<button onclick="cancel_new_endpoint();" id="new_endpoint_cancel">Cancel</button>
+	<button disabled="disabled" onclick="ibm_sbt_save_new_endpoint();" id="new_endpoint_save">Save</button> 
+	<button onclick="ibm_sbt_cancel_new_endpoint();" id="new_endpoint_cancel">Cancel</button>
 </div>

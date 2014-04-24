@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -22,8 +22,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -33,13 +31,12 @@ import javax.sql.DataSource;
 import com.ibm.commons.runtime.Application;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.jslibrary.SBTEnvironment;
-import com.ibm.sbt.security.authentication.oauth.consumer.OAuth1Handler;
-import com.ibm.sbt.security.credential.store.CredentialStore;
 import com.ibm.sbt.security.credential.store.CredentialStoreException;
 import com.ibm.sbt.security.credential.store.CredentialStoreFactory;
 import com.ibm.sbt.security.credential.store.DBCredentialStore;
 import com.ibm.sbt.services.client.ClientServicesException;
-import com.ibm.sbt.services.client.connections.communities.CommunityList;
+import com.ibm.sbt.services.client.base.datahandlers.EntityList;
+import com.ibm.sbt.services.client.connections.communities.Community;
 import com.ibm.sbt.services.client.connections.communities.CommunityService;
 import com.ibm.sbt.services.endpoints.ConnectionsOAuth2Endpoint;
 import com.ibm.sbt.services.endpoints.Endpoint;
@@ -100,7 +97,7 @@ public class Users {
 			if (endpoint != null) {
 				CommunityService service = new CommunityService(endpoint);
 			
-				CommunityList list = service.getMyCommunities();
+				EntityList<Community> list = service.getMyCommunities();
 				return list.getTotalResults();
 			}
 		} catch (Exception e) {

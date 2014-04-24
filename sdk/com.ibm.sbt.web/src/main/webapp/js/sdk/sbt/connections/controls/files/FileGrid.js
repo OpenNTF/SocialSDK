@@ -173,6 +173,26 @@ function(declare, lang, dom, stringUtil, sbt, parameter, Grid,
 						rendererArgs : {
 							type : "file"
 						}
+					},
+					"filesSharedByMe" : {
+						storeArgs : {
+							url : FileConstants.AtomFilesShared,
+							attributes : FileConstants.FileXPath,
+							paramSchema : ParamSchema
+						},
+						rendererArgs : {
+							type : "file"
+						}
+					},
+					"filesSharedWithMe" : {
+						storeArgs : {
+							url : FileConstants.AtomFilesShared,
+							attributes : FileConstants.FileXPath,
+							paramSchema : ParamSchema
+						},
+						rendererArgs : {
+							type : "file"
+						}
 					}
 
 				},
@@ -303,7 +323,16 @@ function(declare, lang, dom, stringUtil, sbt, parameter, Grid,
 						params = lang.mixin(params, {
 							direction : this.direction
 						});
-					}					
+					}
+					if(this.type == "filesSharedWithMe"){
+						params = lang.mixin(params, {
+							direction : "inbound"
+						});
+					}else if (this.type == "filesSharedByMe"){
+						params = lang.mixin(params, {
+							direction : "outbound"
+						});
+					}
 
 					return this.constructUrl(url, params, this
 							.getUrlParams(), endpoint);

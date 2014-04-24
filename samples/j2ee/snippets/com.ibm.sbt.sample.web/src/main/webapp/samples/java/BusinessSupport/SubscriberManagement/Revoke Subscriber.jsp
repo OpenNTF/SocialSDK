@@ -31,7 +31,7 @@
 	
 <html>
 <head>
-<title>Entitle Subscriber</title>
+<title>Revoke Subscriber</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
@@ -51,9 +51,9 @@
 		if (StringUtil.isEmpty(subscriberId)) {
 			out.println("Please provide a valid subscriber id in the sbt.properties.");
 			return;
-		}
-			
-		SubscriptionManagementService subscriptionManagement = new SubscriptionManagementService("smartcloud");
+		}		
+		
+		SubscriptionManagementService subscriptionManagement = new SubscriptionManagementService("smartcloud");		
 		EntityList<JsonEntity> subscriptions = subscriptionManagement.getSubscriptionsById(customerId);
 		long oid = 0L;
 		for (JsonEntity subscription : subscriptions) {
@@ -71,47 +71,43 @@
 			return;
 		}
 		final String subscriptionId = "" + oid;
-		
-		final JspWriter fout = out;
 		final SubscriberManagementService subscriberManagement = new SubscriberManagementService("smartcloud");
-		StateChangeListener listener = new StateChangeListener() {
-			@Override
-			public void stateChanged(JsonEntity jsonEntity) {
-				try {
-					JsonEntity entitlement = subscriberManagement.entitleSubscriber(subscriberId, subscriptionId, true);
-					
-					try {
-						fout.println("Entitlement: <br/>");
-						fout.println("<pre>" + entitlement.toJsonString(false) + "</pre>");
-					} catch (IOException ioe) {}
-				} catch (BssException be) {
-		    		JsonJavaObject jsonObject = be.getResponseJson();
-		    		
-		    		try {
-		    			fout.println("Error entitling subscriber caused by: <pre>" + JsonGenerator.toJson(JsonJavaFactory.instanceEx, jsonObject, false) + "</pre>");
-		    		} catch (Exception e) {}
-		    	} 
-			}
-		};
-		if (!subscriptionManagement.waitSubscriptionState(subscriptionId, "ACTIVE", 5, 1000, listener)) {
-			out.println("Timeout waiting for subscription to activate");
-		}
-		
-		// Optional: Check seats
 		JsonEntity jsonEntity = subscriberManagement.getSubscriberById(subscriberId);
 		JsonJavaObject rootObject = jsonEntity.getJsonObject();
 		JsonJavaObject subscriberObject = rootObject.getAsObject("Subscriber");
 		List<Object> seatSet = subscriberObject.getAsList("SeatSet");
-		out.println("Subscriber Seat Set: <br/>");
-		out.println("<ul>");
-		for (Object seat : seatSet) {
-			out.println("<li><pre>" + seat + "</pre></li>");
-		}		
-		out.println("</ul>");
 		
+		JsonJavaObject seat = null;
+		String seatId = "";
+		if(!seatSet.isEmpty()){
+			for (Object seatObj : seatSet) {
+    			String nextSubscriptionId = "" + ((JsonJavaObject)seatObj).getAsLong("SubscriptionId");
+    			if (subscriptionId.equals(nextSubscriptionId)) {
+    				seat = (JsonJavaObject)seatObj;
+    			}
+    		}
+		
+			long seatIdLong = 0L;
+			seatIdLong = seat.getAsLong("Oid");
+			out.println("Subscription ID: " + subscriptionId + "<br/>");
+			seatId = "" + seatIdLong;
+		
+			try{
+				subscriberManagement.revokeSubscriber(subscriberId, seatId, false);
+				out.println("Revoked Seat: <br/>");
+				out.println("<pre>" + seatId + "</pre>");
+			
+			} catch (BssException be){
+				JsonJavaObject jsonObject = be.getResponseJson();
+    			out.println("Error revoking subscriber caused by: <pre>" + JsonGenerator.toJson(JsonJavaFactory.instanceEx, jsonObject, false) + "</pre>");
+			}
+		} else{
+			out.println("No seat assigned to subscriber.");
+		}
+
 	} catch (Exception e) {
 		e.printStackTrace();
-		out.println("Error entitling subscriber list caused by: "+e.getMessage());    		
+		out.println("Error revoking subscriber list caused by: "+e.getMessage());    		
 	}
 	%>
 	</div>

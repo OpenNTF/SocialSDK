@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,11 +19,12 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.w3c.dom.Node;
+
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.base.BaseService;
-import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
+import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.connections.forums.model.BaseForumEntity;
 import com.ibm.sbt.services.client.connections.forums.model.FlagType;
 
@@ -118,7 +119,7 @@ public class ForumReply extends BaseForumEntity{
 	 * @return RecommendationList
 	 * @throws ForumServiceException
 	 */
-	public RecommendationList getRecommendations() throws ForumServiceException
+	public EntityList<Recommendation> getRecommendations() throws ForumServiceException
 	{
 		return getService().getRecommendations(getUid());
 	}

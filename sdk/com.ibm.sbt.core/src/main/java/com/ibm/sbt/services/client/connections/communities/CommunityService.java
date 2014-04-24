@@ -38,6 +38,7 @@ import com.ibm.sbt.services.client.base.AuthType;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.NamedUrlPart;
+import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.base.util.EntityUtil;
 import com.ibm.sbt.services.client.connections.communities.feedhandler.BookmarkFeedHandler;
@@ -52,11 +53,10 @@ import com.ibm.sbt.services.client.connections.files.File;
 import com.ibm.sbt.services.client.connections.files.FileList;
 import com.ibm.sbt.services.client.connections.files.FileService;
 import com.ibm.sbt.services.client.connections.files.FileServiceException;
-import com.ibm.sbt.services.client.connections.forums.ForumList;
+import com.ibm.sbt.services.client.connections.forums.Forum;
 import com.ibm.sbt.services.client.connections.forums.ForumService;
 import com.ibm.sbt.services.client.connections.forums.ForumServiceException;
 import com.ibm.sbt.services.client.connections.forums.ForumTopic;
-import com.ibm.sbt.services.client.connections.forums.TopicList;
 import com.ibm.sbt.services.endpoints.Endpoint;
 
 /**
@@ -393,7 +393,7 @@ public class CommunityService extends BaseService {
 
 	}
 
-	public TopicList getForumTopics(String communityUuid) throws CommunityServiceException {
+	public EntityList<ForumTopic> getForumTopics(String communityUuid) throws CommunityServiceException {
 		return getForumTopics(communityUuid, null);
 	}
 	/**
@@ -404,7 +404,7 @@ public class CommunityService extends BaseService {
 	 * @return ForumList 
 	 * @throws CommunityServiceException
 	 */
-	public ForumList getForums(String communityUuid) throws CommunityServiceException {
+	public EntityList<Forum> getForums(String communityUuid) throws CommunityServiceException {
 		return getForums(communityUuid, null);
 	}
 	/**
@@ -416,7 +416,7 @@ public class CommunityService extends BaseService {
 	 * @return ForumList 
 	 * @throws CommunityServiceException
 	 */
-	public ForumList getForums(String communityUuid, Map<String, String> parameters) throws CommunityServiceException {
+	public EntityList<Forum> getForums(String communityUuid, Map<String, String> parameters) throws CommunityServiceException {
 		
 		if (StringUtil.isEmpty(communityUuid)){
 			throw new CommunityServiceException(null, Messages.NullCommunityIdException);
@@ -425,7 +425,7 @@ public class CommunityService extends BaseService {
 			parameters = new HashMap<String, String>();
 		}		
 		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
-		ForumList forums;
+		EntityList<Forum> forums;
 		try {
 			ForumService svc = new ForumService(this.endpoint);
 			forums = svc.getAllForums(parameters);
@@ -443,7 +443,7 @@ public class CommunityService extends BaseService {
 	 * @return Forum topics of the given Community 
 	 * @throws CommunityServiceException
 	 */
-	public TopicList getForumTopics(String communityUuid, Map<String, String> parameters) throws CommunityServiceException {
+	public EntityList<ForumTopic> getForumTopics(String communityUuid, Map<String, String> parameters) throws CommunityServiceException {
 		
 		if (StringUtil.isEmpty(communityUuid)){
 			throw new CommunityServiceException(null, Messages.NullCommunityIdException);
@@ -455,9 +455,9 @@ public class CommunityService extends BaseService {
 
         String requestUrl = CommunityUrls.COMMUNITY_FORUMTOPICS.format(this);
 		
-		TopicList forumTopics;
+		EntityList<ForumTopic> forumTopics;
 		try {
-			forumTopics = (TopicList) getEntities(requestUrl, parameters, new ForumService().getForumTopicFeedHandler());
+			forumTopics = getEntities(requestUrl, parameters, new ForumService().getForumTopicFeedHandler());
 		}catch (ClientServicesException e) {
 			throw new CommunityServiceException(e, Messages.CommunityForumTopicsException, communityUuid);
 		} catch (IOException e) {

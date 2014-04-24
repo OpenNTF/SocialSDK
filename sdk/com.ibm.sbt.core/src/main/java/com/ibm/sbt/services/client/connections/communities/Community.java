@@ -28,12 +28,13 @@ import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.base.AtomEntity;
 import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.communities.model.CommunityXPath;
 import com.ibm.sbt.services.client.connections.communities.transformers.CommunityTransformer;
-import com.ibm.sbt.services.client.connections.forums.ForumList;
-import com.ibm.sbt.services.client.connections.forums.TopicList;
+import com.ibm.sbt.services.client.connections.forums.Forum;
+import com.ibm.sbt.services.client.connections.forums.ForumTopic;
 
 /**
  * This class represents a Connections Community entity
@@ -371,7 +372,7 @@ public class Community extends AtomEntity {
 	 * @return Forums  of the given Community 
 	 * @throws CommunityServiceException
 	 */
-	public ForumList getForums() throws CommunityServiceException {
+	public EntityList<Forum> getForums() throws CommunityServiceException {
 	   	return getService().getForums(getCommunityUuid());
 	}
 	/**
@@ -380,7 +381,7 @@ public class Community extends AtomEntity {
 	 * @return Forum topics of the given Community 
 	 * @throws CommunityServiceException
 	 */
-	public TopicList getForumTopics() throws CommunityServiceException {
+	public EntityList<ForumTopic> getForumTopics() throws CommunityServiceException {
 	   	return getService().getForumTopics(getCommunityUuid());
 	}
 	/**
@@ -392,7 +393,7 @@ public class Community extends AtomEntity {
    	 * @return list of sub-communities
 	 * @throws CommunityServiceException
 	 */
-	public CommunityList getSubCommunities(Map<String, String> parameters) throws CommunityServiceException {
+	public EntityList<Community> getSubCommunities(Map<String, String> parameters) throws CommunityServiceException {
 	   	return getService().getSubCommunities(getCommunityUuid(), parameters );
 	}
 

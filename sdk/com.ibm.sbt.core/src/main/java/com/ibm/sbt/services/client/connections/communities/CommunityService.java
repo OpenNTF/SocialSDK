@@ -1,5 +1,5 @@
 /*
- * ��� Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -15,6 +15,8 @@
  */
 package com.ibm.sbt.services.client.connections.communities;
 
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -24,13 +26,17 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.http.Header;
+import org.w3c.dom.Node;
 
 import com.ibm.commons.util.StringUtil;
+import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
+import com.ibm.sbt.services.client.base.AtomFeedHandler;
 import com.ibm.sbt.services.client.base.AuthType;
 import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.NamedUrlPart;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.base.util.EntityUtil;
@@ -70,6 +76,7 @@ import com.ibm.sbt.services.endpoints.Endpoint;
  */
 
 public class CommunityService extends BaseService {
+	private static final long serialVersionUID = 4832918694422006289L;
 	private static final String COMMUNITY_UNIQUE_IDENTIFIER = "communityUuid";
 	private static final String USERID 						= "userid";
 	
@@ -136,6 +143,48 @@ public class CommunityService extends BaseService {
 		auth = AuthType.BASIC.get().equalsIgnoreCase(auth)?"":auth;
 		return new NamedUrlPart("authType", auth);
 	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public IFeedHandler<Community> getCommunityFeedHandler() {
+		return new AtomFeedHandler<Community>(this) {
+			@Override
+			protected Community entityInstance(BaseService service, Node node, XPathExpression xpath) {
+				return new Community(service, node, nameSpaceCtx, xpath);
+			}
+		};
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public IFeedHandler<Member> getMemberFeedHandler() {
+		return new AtomFeedHandler<Member>(this) {
+			@Override
+			protected Member entityInstance(BaseService service, Node node, XPathExpression xpath) {
+				return new Member(service, node, nameSpaceCtx, xpath);
+			}
+		};
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public IFeedHandler<Bookmark> getBookmarkFeedHandler() {
+		return new AtomFeedHandler<Bookmark>(this) {
+			@Override
+			protected Bookmark entityInstance(BaseService service, Node node, XPathExpression xpath) {
+				return new Bookmark(service, node, nameSpaceCtx, xpath);
+			}
+
+		};
+	}
+	
+	//Bookmark, Topic, Forum, InviteggG
 
 	/**
 	 * This method returns the public communities

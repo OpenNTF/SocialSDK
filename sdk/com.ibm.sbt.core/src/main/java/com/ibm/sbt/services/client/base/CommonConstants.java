@@ -26,22 +26,30 @@ public final class CommonConstants {
 	/**
 	 * Common String characters
 	 */
-	public static final String NL = "\n";
-	public static final String EMPTY = "";
-	public static final String COMMA = ",";
-	public static final String SEMICOLON = ";";
-	public static final String COLON = ":";
-	public static final String DOT = ".";
-	public static final String AT = "@";
+	public static final String 	NL = "\n";
+	public static final String 	EMPTY = "";
+	public static final String 	COMMA = ",";
+	public static final String 	SEMICOLON = ";";
+	public static final String 	COLON = ":";
+	public static final String 	DOT = ".";
+	public static final String 	AT = "@";
 	public static final char 	CH_SLASH	= '/';
 	public static final char 	CH_COLON	= ':';
+
+	public static final char 	CH_LEFT_BRACE = '{';
+	public static final char 	CH_RIGHT_BRACE = '}';
+	public static final String 	SLASH = "/";
+	public static final String 	RE_QUESTION_MARK = "\\?";
+	public static final String 	AMPERSAND = "&";
+	public static final String 	DOUBLE_SLASH = "//";
+	public static final String 	EQUALS	= "=";
 	
 	/**
 	 * URL parameter construction
 	 */
 	public static final char 	INIT_URL_PARAM	= '?';
 	public static final char 	URL_PARAM	= '&';
-	public static final char 	EQUALS		= '=';
+	public static final char 	CH_EQUALS		= '=';
 
 	/**
 	 * Headers parameters

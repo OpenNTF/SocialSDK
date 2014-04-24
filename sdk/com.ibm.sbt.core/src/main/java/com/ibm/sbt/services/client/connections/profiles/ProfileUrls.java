@@ -33,16 +33,17 @@ public enum ProfileUrls implements URLContainer {
 	/**
 	 * NON-ADMIN URLS
 	 */
-	PROFILE(new VersionedUrl(v4_0, 					"{profiles}/{authType}/atom/profile.do")),
+	PROFILE(new VersionedUrl(v4_0, 					"{profiles}/{authType}/atom/profile.do?{userId}")),
 	PROFILE_ENTRY(new VersionedUrl(v4_0, 			"{profiles}/{authType}/atom/profileEntry.do")),
-	PHOTO(new VersionedUrl(v4_0, 					"{profiles}/{authType}/atom/photo.do")),
-	TAGS(new VersionedUrl(v4_0, 					"{profiles}/{authType}/atom/profileTags.do")),
+	PHOTO(new VersionedUrl(v4_0, 					"{profiles}/{authType}/atom/photo.do?{userId}")),
+	TAGS(new VersionedUrl(v4_0, 					"{profiles}/{authType}/atom/profileTags.do?{sourceId}&{targetId}")),
 	SEARCH(new VersionedUrl(v4_0, 					"{profiles}/{authType}/atom/search.do")),
-	CONNECTIONS(new VersionedUrl(v4_0, 				"{profiles}/{authType}/atom/connections.do")),
+	CONNECTIONS(new VersionedUrl(v4_0, 				"{profiles}/{authType}/atom/connections.do?{userId}")),
 	CONNECTION(new VersionedUrl(v4_0, 				"{profiles}/{authType}/atom/connection.do")),
-	CONNECTIONS_IN_COMMON(new VersionedUrl(v4_0, 	"{profiles}/{authType}/atom/connectionsInCommon.do")),
-	REPORTING_CHAIN(new VersionedUrl(v4_0, 			"{profiles}/{authType}/atom/reportingChain.do")),
-	PEOPLE_MANAGED(new VersionedUrl(v4_0, 			"{profiles}/{authType}/atom/peopleManaged.do")),
+	CHECK_COLLEAGUE(new VersionedUrl(v4_0, 			"{profiles}/{authType}/atom/connection.do?{sourceId}&{targetId}&connectionType=colleague")),
+	CONNECTIONS_IN_COMMON(new VersionedUrl(v4_0, 	"{profiles}/{authType}/atom/connectionsInCommon.do?{userId}")),
+	REPORTING_CHAIN(new VersionedUrl(v4_0, 			"{profiles}/{authType}/atom/reportingChain.do?{userId}")),
+	PEOPLE_MANAGED(new VersionedUrl(v4_0, 			"{profiles}/{authType}/atom/peopleManaged.do?{userId}")),
 	MESSAGES_ALL(new VersionedUrl(v4_0, 			"{profiles}/{authType}/atom/mv/theboard/entries/all.do")),
 	MESSAGE_BOARD_ENTRIES(new VersionedUrl(v4_0, 	"{profiles}/{authType}/atom/mv/theboard/entries.do")),
 	MESSAGE_BOARD_COMMENTS(new VersionedUrl(v4_0, 	"{profiles}/{authType}/atom/mv/theboard/comments.do")),
@@ -52,7 +53,7 @@ public enum ProfileUrls implements URLContainer {
 	/**
 	 * ADMIN URLS
 	 */
-	ADMIN_PROFILE_ENTRY(new VersionedUrl(v4_0, 		"{profiles}/{authType}/admin/atom/profileEntry.do")),
+	ADMIN_PROFILE_ENTRY(new VersionedUrl(v4_0, 		"{profiles}/{authType}/admin/atom/profileEntry.do?{userId}")),
 	ADMIN_PROFILES(new VersionedUrl(v4_0, 			"{profiles}/{authType}/admin/atom/profiles.do"));
 	
 	private URLBuilder builder;

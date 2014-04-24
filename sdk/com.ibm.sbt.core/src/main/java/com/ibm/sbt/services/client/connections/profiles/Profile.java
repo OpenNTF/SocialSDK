@@ -28,6 +28,7 @@ import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.AtomEntity;
 import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.connections.profiles.model.ProfileXPath;
 
@@ -68,7 +69,7 @@ public class Profile extends AtomEntity {
 	 * @throws ProfileServiceException
 	 * @throws ClientServicesException 
 	 */
-    public Profile load() throws ProfileServiceException, ClientServicesException {
+    public Profile load() throws ClientServicesException {
     	return getService().getProfile(getUserid());
     }
     
@@ -88,7 +89,7 @@ public class Profile extends AtomEntity {
 	 * 
 	 * @throws ProfileServiceException
 	 */
-    public void update() throws ProfileServiceException {
+    public void update() throws ClientServicesException {
     	getService().updateProfile(this);
     }
     
@@ -98,7 +99,7 @@ public class Profile extends AtomEntity {
      * @throws ProfileServiceException
      * @throws ClientServicesException 
      */
-    public ProfileList getColleagues() throws ProfileServiceException, ClientServicesException {
+    public EntityList<Profile> getColleagues() throws ClientServicesException {
     	return getService().getColleagues(getUserid());
     }
     
@@ -110,7 +111,7 @@ public class Profile extends AtomEntity {
 	 * @return a map containing the id of the attribute as key and the attribute value as value
 	 * @throws ProfileServiceException
 	 */
-	public Map<String,Object> getExtendedAttributes() throws ProfileServiceException {
+	public Map<String,Object> getExtendedAttributes() throws ClientServicesException {
 		return getService().getExtendedAttributes(this);
 	}
  

@@ -9,9 +9,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.connections.profiles.utils.Messages;
 import com.ibm.sbt.services.endpoints.Endpoint;
 
@@ -82,21 +82,13 @@ public class ProfileAdminService extends ProfileService {
 	 * 			unique identifier of user whose profile is to be deleted, it can either be a email or userid
 	 * @throws ProfileServiceException 
 	 */
-	public void deleteProfile(String id) throws ProfileServiceException
+	public void deleteProfile(String id) throws ClientServicesException
 	{	
-		if (StringUtil.isEmpty(id)) {
-			throw new ProfileServiceException(null, Messages.InvalidArgument_1);
-		}
 		try{
-			Map<String, String> parameters = new HashMap<String, String>();
-			parameters.put(getIdParameter(id), id);
-			String deleteUrl = ProfileUrls.ADMIN_PROFILE_ENTRY.format(this);
-			super.deleteData(deleteUrl, parameters, getIdParameter(id));
-		}
-		catch(ClientServicesException e){
-			throw new ProfileServiceException(e, Messages.DeleteProfileException, id);
+			String deleteUrl = ProfileUrls.ADMIN_PROFILE_ENTRY.format(this, ProfileParams.userId.get(id));
+			deleteData(deleteUrl, null, ProfileParams.userId.getParamName(id));
 		} catch (IOException e) {
-			throw new ProfileServiceException(e, Messages.DeleteProfileException, id);
+			throw new ClientServicesException(e, Messages.DeleteProfileException, id);
 		}
 	}
 
@@ -108,23 +100,20 @@ public class ProfileAdminService extends ProfileService {
 	 * @param Profile
 	 * @throws ProfileServiceException 
 	 */
-	public void createProfile(Profile profile) throws ProfileServiceException {
+	public void createProfile(Profile profile) throws ClientServicesException {
 		if (profile == null) {
-			throw new ProfileServiceException(null, Messages.InvalidArgument_3);
+			throw new ClientServicesException(null, Messages.InvalidArgument_3);
 		}		
 		try {
 			Map<String, String> parameters = new HashMap<String,String>();
 			String id = profile.getUserid();
-			parameters.put(getIdParameter(id), id);
+			parameters.put(ProfileParams.userId.getParamName(id), id);
 			Object createPayload = constructCreateRequestBody(profile);
 			
 			String createUrl = ProfileUrls.ADMIN_PROFILES.format(this);
-			super.createData(createUrl, parameters, createPayload, ClientService.FORMAT_CONNECTIONS_OUTPUT);
-			
-		}catch(ClientServicesException e) {
-			throw new ProfileServiceException(e, Messages.CreateProfileException, profile.getUserid());
+			createData(createUrl, parameters, createPayload, ClientService.FORMAT_CONNECTIONS_OUTPUT);
 		} catch (IOException e) {
-			throw new ProfileServiceException(e, Messages.CreateProfileException, profile.getUserid());
+			throw new ClientServicesException(e, Messages.CreateProfileException, profile.getUserid());
 		}
 
 	}
@@ -141,10 +130,8 @@ public class ProfileAdminService extends ProfileService {
 	 * @throws ClientServicesException 
 	 */
 	@Override
-	public ProfileList searchProfiles(Map<String,String> parameters) throws ProfileServiceException {
-		
+	public EntityList<Profile> searchProfiles(Map<String,String> parameters) throws ClientServicesException {
 		String url = ProfileUrls.ADMIN_PROFILES.format(this);
-		
 		return getProfileEntityList(url, parameters);
 	}
 
@@ -155,25 +142,21 @@ public class ProfileAdminService extends ProfileService {
 	 * @throws ProfileServiceException
 	 */
 	@Override
-	public void updateProfile(Profile profile) throws ProfileServiceException {
-
+	public void updateProfile(Profile profile) throws ClientServicesException {
 		if (profile == null) {
-			throw new ProfileServiceException(null, Messages.InvalidArgument_3);
+			throw new ClientServicesException(null, Messages.InvalidArgument_3);
 		}
 		try {
 			Map<String, String> parameters = new HashMap<String, String>();
 			parameters.put(OUTPUT, VCARD);
 			parameters.put(FORMAT, FULL);
 			String id = profile.getUserid();
-			parameters.put(getIdParameter(id), id);
 			Object updateProfilePayload = constructUpdateRequestBody(profile);
-			String updateUrl = ProfileUrls.ADMIN_PROFILE_ENTRY.format(this);
-			super.updateData(updateUrl, parameters,updateProfilePayload, getIdParameter(profile.getAsString("uid")));
+			String updateUrl = ProfileUrls.ADMIN_PROFILE_ENTRY.format(this, ProfileParams.userId.get(id));
+			super.updateData(updateUrl, parameters,updateProfilePayload, ProfileParams.userId.getParamName(profile.getAsString("uid")));
 			profile.clearFieldsMap();
-		} catch (ClientServicesException e) {
-			throw new ProfileServiceException(e, Messages.UpdateProfileException);
 		} catch (IOException e) {
-			throw new ProfileServiceException(e, Messages.UpdateProfileException);
+			throw new ClientServicesException(e, Messages.UpdateProfileException);
 		}
 	}
 }

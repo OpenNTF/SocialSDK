@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -17,7 +17,7 @@
 package com.ibm.sbt.services.client.connections.blogs.model;
 
 import com.ibm.sbt.services.client.base.BaseService;
-import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
+import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.connections.common.Person;
 
 
@@ -29,7 +29,7 @@ import com.ibm.sbt.services.client.connections.common.Person;
 @Deprecated
 public class Author extends Person {
 
-	public Author(BaseService svc, DataHandler<?> dataHandler) {
+	public Author(BaseService svc, XmlDataHandler dataHandler) {
 		super(svc, dataHandler);
 	}
 	

@@ -15,90 +15,19 @@
  */
 package com.ibm.sbt.services.client.connections.communities;
 
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-
 import com.ibm.sbt.services.client.Response;
-import com.ibm.sbt.services.client.base.ConnectionsFeedXpath;
-import com.ibm.sbt.services.client.base.datahandlers.EntityList;
-import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
-import com.ibm.sbt.services.client.connections.communities.feedhandler.CommunityFeedHandler;
+import com.ibm.sbt.services.client.base.IFeedHandler;
+import com.ibm.sbt.services.client.base.datahandlers.AtomEntityList;
 
 /**
  * @author Swati Singh
  * @author Carlos Manias
  *
  */
-public class CommunityList extends EntityList<Community> {
+public class CommunityList extends AtomEntityList<Community> {
 
-//	private final XmlDataHandler dataHandler;
-	
-	public CommunityList(Response requestData, CommunityFeedHandler feedHandler) {
+	public CommunityList(Response requestData, IFeedHandler<Community> feedHandler) {
 		super(requestData, feedHandler);
-	//	dataHandler = new XmlDataHandler(getData(), ConnectionsConstants.nameSpaceCtx);
-	}
-	
-	public CommunityList(){}
-	
-	@Override
-	public Document getData(){
-		return (Document)super.getData();
-	}
-	
-	@Override
-	public CommunityService getService() {
-		return (CommunityService)super.getService();
 	}
 
-	@Override
-	public CommunityFeedHandler getFeedHandler() {
-		return (CommunityFeedHandler)super.getFeedHandler();
-	}
-	
-	@Override
-	protected Community getEntity(Object data){
-		return (Community)super.getEntity(data);
-	}
-	
-	@Override
-	protected ArrayList<Community> createEntities() {
-		
-		XmlDataHandler dataHandler = new XmlDataHandler(getData(), nameSpaceCtx);
-		ArrayList<Community> communities = new ArrayList<Community>();
-		List<Node> entries = dataHandler.getEntries(ConnectionsFeedXpath.Entry);
-		for (Node node: entries) {
-			Community community = getEntity(node);
-			communities.add(community);
-		}
-		return communities;
-	}
-	
-	private XmlDataHandler getMetaDataHandler(){
-		return new XmlDataHandler(getData(), nameSpaceCtx);
-	}
-	
-	@Override
-	public int getTotalResults() {
-		return getMetaDataHandler().getAsInt(ConnectionsFeedXpath.TotalResults);
-	}
-
-	@Override
-	public int getStartIndex() {
-		return getMetaDataHandler().getAsInt(ConnectionsFeedXpath.StartIndex);
-	}
-
-	@Override
-	public int getItemsPerPage() {
-		return getMetaDataHandler().getAsInt(ConnectionsFeedXpath.ItemsPerPage);
-	}
-
-	@Override
-	public int getCurrentPage() {
-		return getMetaDataHandler().getAsInt(ConnectionsFeedXpath.CurrentPage);
-	}
 }

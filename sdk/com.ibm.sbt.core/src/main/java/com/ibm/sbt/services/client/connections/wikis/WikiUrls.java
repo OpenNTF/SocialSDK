@@ -1,5 +1,5 @@
 /*
- * ��� Copyright IBM Corp. 2014
+ * © Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -57,5 +57,17 @@ public enum WikiUrls implements URLContainer {
 
 	public String getPattern(Version version){
 		return builder.getPattern(version).getUrlPattern();
+	}
+	
+	public static NamedUrlPart getWikiPage(String value){
+		return get("wikiPage", value);
+	}
+
+	public static NamedUrlPart getWikiLabel(String value){
+		return get("wikiLabel", value);
+	}
+
+	private static NamedUrlPart get(String name, String value){
+		return new NamedUrlPart(name, value);
 	}
 }

@@ -13,6 +13,9 @@
  */
 package com.ibm.sbt.services.client.base;
 
+import static com.ibm.sbt.services.client.base.CommonConstants.EMPTY;
+import static com.ibm.sbt.services.client.base.CommonConstants.UTF8;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,14 +35,29 @@ public class URLPattern {
 	private final String urlPattern;
 	private static final char LEFT_BRACE = '{';
 	private static final String SLASH = "/";
+	private static final String QUESTION_MARK = "?";
+	private static final String RE_QUESTION_MARK = "\\?";
+	private static final String AMPERSAND = "&";
 	private static final String DOUBLE_SLASH = "//";
 	private List<String> urlParts;
+	private List<String> paramParts;
 	private List<MutablePart> mutableParts;
+	private List<MutablePart> mutableParamParts;
 
 	public URLPattern(String urlPattern){
 		this.urlPattern = urlPattern;
-		urlParts = Arrays.asList(urlPattern.split(SLASH));
-		compile();
+		mutableParts = new ArrayList<MutablePart>();
+		mutableParamParts = new ArrayList<MutablePart>();
+		if (urlPattern.lastIndexOf(QUESTION_MARK) > -1){
+			String[] urlSplit = urlPattern.split(RE_QUESTION_MARK);
+			urlParts = Arrays.asList(urlSplit[0].split(SLASH)); //parts before the ? (i.e. fus/roh/dah?ka=me&ha=me would be fus/roh/dah)
+			paramParts = Arrays.asList(urlSplit[1].split(AMPERSAND)); //parts after the ? (i.e. fus/roh/dah?ka=me&ha=me would be ka=me&ha=me)
+			int lastIndex = compile(urlParts, mutableParts, 0);
+			compile(paramParts, mutableParamParts, lastIndex);
+		} else {
+			urlParts = Arrays.asList(urlPattern.split(SLASH)); //parts before the ? (i.e. fus/roh/dah?ka=me&ha=me would be fus/roh/dah)
+			compile(urlParts, mutableParts, 0);
+		}
 	}
 
 	public String getUrlPattern(){
@@ -57,9 +75,27 @@ public class URLPattern {
 		if (!mutablePartIterator.hasNext()) return urlPattern;
 		StringBuilder sb = new StringBuilder();
 		int urlPartIndex=0;
+		String url = "";
+		String baseUrl = computeUrl(urlParts.iterator(), namedParts, mutablePartIterator, urlPartIndex, SLASH);
+		String paramUrl = "";
+		if (paramParts != null && paramParts.size()>0){
+			mutablePartIterator = mutableParamParts.iterator();
+			paramUrl = computeUrl(paramParts.iterator(), namedParts, mutablePartIterator, urlParts.size(), AMPERSAND);
+			url = sb.append(baseUrl).append(QUESTION_MARK).append(paramUrl).toString();
+		} else {
+			url = baseUrl;
+		}
 
+		return sanitizeSlashes(url);
+	}
+	
+	protected String computeUrl(Iterator<String> partIterator, 
+								List<NamedUrlPart> namedParts, 
+								Iterator<MutablePart> mutablePartIterator,
+								int urlPartIndex, String joiner){
+		StringBuilder sb = new StringBuilder();
 		MutablePart mutablePart = mutablePartIterator.next();
-		for (Iterator<String> partIterator=urlParts.iterator(); partIterator.hasNext(); ){
+		while (partIterator.hasNext()){
 			String part = partIterator.next();
 			if (mutablePart.isCurrentIndex(urlPartIndex)){
 				//This part is mutable, let's get the value
@@ -79,15 +115,18 @@ public class URLPattern {
 				//This part is immutable, let's add it to the url
 				sb.append(encode(part));
 			}
-			if (partIterator.hasNext()) sb.append(SLASH);
+			if (partIterator.hasNext()) sb.append(joiner);
 			urlPartIndex++;
 		}
-		return sanitizeSlashes(sb.toString());
+		return sb.toString();
 	}
 
+	/*
+	 * URLencodes the url parts
+	 */
 	protected String encode(String part){
 		try {
-			return URLEncoding.encodeURIString((part==null)?"":part, "UTF-8", 0, false);
+			return URLEncoding.encodeURIString((part==null)?EMPTY:part, UTF8, 0, false);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
@@ -100,16 +139,27 @@ public class URLPattern {
 		return url.replaceAll(DOUBLE_SLASH, SLASH);
 	}
 	
-	private void compile(){
-		mutableParts = new ArrayList<MutablePart>();
-		int partIndex = 0;
-		for (String part: urlParts){
+	private int compile(List<String> parts, List<MutablePart> mutables, int partIndex){
+		for (String part: parts){
 			if (part.charAt(0) == LEFT_BRACE){
 				String partName = part.substring(1, part.length()-1);
-				mutableParts.add(new MutablePart(partName, partIndex));
+				mutables.add(new MutablePart(partName, partIndex));
 			}
 			partIndex++;
 		}
+		return partIndex;
+	}
+	
+	private class UrlParam {
+		private final String paramName;
+		private final String paramValue;
+		
+		protected UrlParam (String param){
+			String[] split = param.split("=");
+			this.paramName = split[0];
+			this.paramValue = split[1];
+		}
+		
 	}
 	
 	private class MutablePart {

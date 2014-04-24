@@ -45,6 +45,8 @@ import com.ibm.sbt.services.endpoints.Endpoint;
  */
 public class WikiService extends BaseService {
 	
+	private static final long serialVersionUID = -1677227570229926652L;
+
 	public WikiService() {
 		super();
 	}
@@ -161,7 +163,7 @@ public class WikiService extends BaseService {
 	 */
 	public EntityList<WikiPage> getWikiPages(String wikiLabel, Map<String, String> parameters) 
 			throws ClientServicesException {
-		String requestUrl = WikiUrls.WIKI_PAGES.format(this, WikiUrlParts.wikiLabel.get(wikiLabel));
+		String requestUrl = WikiUrls.WIKI_PAGES.format(this, WikiUrls.getWikiLabel(wikiLabel));
 		return getWikiPagesEntityList(requestUrl, parameters);
 	}
 	
@@ -175,7 +177,7 @@ public class WikiService extends BaseService {
 	 */
 	public EntityList<WikiPage> getMyWikiPages(String wikiLabel, Map<String, String> parameters) 
 			throws ClientServicesException {
-		String requestUrl = WikiUrls.WIKI_MYPAGES.format(this, WikiUrlParts.wikiLabel.get(wikiLabel));
+		String requestUrl = WikiUrls.WIKI_MYPAGES.format(this, WikiUrls.getWikiLabel(wikiLabel));
 		return getWikiPagesEntityList(requestUrl, parameters);
 	}
 	
@@ -189,7 +191,7 @@ public class WikiService extends BaseService {
 	 */
 	public EntityList<WikiPage> getWikiPagesInTrash(String wikiLabelOrId, 
 			Map<String, String> parameters) throws ClientServicesException {
-		String requestUrl = WikiUrls.WIKI_PAGES_TRASH.format(this, WikiUrlParts.wikiLabel.get(wikiLabelOrId));
+		String requestUrl = WikiUrls.WIKI_PAGES_TRASH.format(this, WikiUrls.getWikiLabel(wikiLabelOrId));
 		return getWikiPagesEntityList(requestUrl, parameters);
 	}
 	
@@ -207,7 +209,7 @@ public class WikiService extends BaseService {
 	 */
 	public Wiki getWiki(String wikiLabel, Map<String, String> parameters) 
 			throws ClientServicesException {
-		String requestUrl = WikiUrls.WIKI_AUTH.format(this, WikiUrlParts.wikiLabel.get(wikiLabel)); 
+		String requestUrl = WikiUrls.WIKI_AUTH.format(this, WikiUrls.getWikiLabel(wikiLabel)); 
 		return getWikiEntity(requestUrl, parameters);
 	}
 	
@@ -234,7 +236,7 @@ public class WikiService extends BaseService {
 	 */
 	public void updateWiki(Wiki wiki, Map<String, String> parameters) 
 			throws ClientServicesException {
-		String requestUrl = WikiUrls.WIKI_AUTH.format(this, WikiUrlParts.wikiLabel.get(wiki.getLabel()));
+		String requestUrl = WikiUrls.WIKI_AUTH.format(this, WikiUrls.getWikiLabel(wiki.getLabel()));
 		updateWikiAux(requestUrl, wiki, parameters);
 	}
 	
@@ -244,7 +246,7 @@ public class WikiService extends BaseService {
 	 * @throws ClientServicesException
 	 */
 	public void deleteWiki(String wikiLabel) throws ClientServicesException {
-		String requestUrl = WikiUrls.WIKI_AUTH.format(this, WikiUrlParts.wikiLabel.get(wikiLabel));
+		String requestUrl = WikiUrls.WIKI_AUTH.format(this, WikiUrls.getWikiLabel(wikiLabel));
 		deleteData(requestUrl);
 	}
 	
@@ -262,7 +264,7 @@ public class WikiService extends BaseService {
 	 */
 	public WikiPage getWikiPage(String wikiLabel, String pageLabel, 
 			Map<String, String> parameters) throws ClientServicesException {
-		String requestUrl = WikiUrls.WIKI_PAGE_AUTH.format(this, WikiUrlParts.wikiLabel.get(wikiLabel), WikiUrlParts.wikiPage.get(pageLabel));
+		String requestUrl = WikiUrls.WIKI_PAGE_AUTH.format(this, WikiUrls.getWikiLabel(wikiLabel), WikiUrls.getWikiPage(pageLabel));
 		return getWikiPageEntity(requestUrl, parameters);
 	}
 	
@@ -275,7 +277,7 @@ public class WikiService extends BaseService {
 	 */
 	public WikiPage createWikiPage(String wikiLabel, WikiPage wikiPage, Map<String, String> parameters) 
 			throws ClientServicesException {
-		String requestUrl = WikiUrls.WIKI_PAGES_AUTH.format(this, WikiUrlParts.wikiLabel.get(wikiLabel));
+		String requestUrl = WikiUrls.WIKI_PAGES_AUTH.format(this, WikiUrls.getWikiLabel(wikiLabel));
 		Response response = createWikiPageAux(requestUrl, wikiPage, parameters);
 		return getWikiPageFeedHandler().createEntity(response);
 	}
@@ -289,7 +291,7 @@ public class WikiService extends BaseService {
 	 */
 	public void updateWikiPage(String wikiLabel, WikiPage wikiPage, 
 			Map<String, String> parameters) throws ClientServicesException {
-		String requestUrl = WikiUrls.WIKI_PAGE_AUTH.format(this, WikiUrlParts.wikiLabel.get(wikiLabel), WikiUrlParts.wikiPage.get(wikiPage.getLabel()));
+		String requestUrl = WikiUrls.WIKI_PAGE_AUTH.format(this, WikiUrls.getWikiLabel(wikiLabel), WikiUrls.getWikiPage(wikiPage.getLabel()));
 		updateWikiPageAux(requestUrl, wikiPage, parameters);
 	}
 	
@@ -301,7 +303,7 @@ public class WikiService extends BaseService {
 	 */
 	public void deleteWikiPage(String wikiLabel, String wikiPageLabel) 
 			 throws ClientServicesException {
-		String requestUrl = WikiUrls.WIKI_PAGE_AUTH.format(this, WikiUrlParts.wikiLabel.get(wikiLabel), WikiUrlParts.wikiPage.get(wikiPageLabel));
+		String requestUrl = WikiUrls.WIKI_PAGE_AUTH.format(this, WikiUrls.getWikiLabel(wikiLabel), WikiUrls.getWikiPage(wikiPageLabel));
 		deleteData(requestUrl);
 	}
 

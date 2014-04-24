@@ -627,11 +627,9 @@ public class ProfileService extends BaseService {
 			throw new ClientServicesException(null, Messages.InvalidArgument_6);
 		}
 		try {
-			Map<String, String> parameters = new HashMap<String, String>();
-			parameters.put(CONNECTIONID, connection.getConnectionId());
 			Object payload = constructAcceptInviteRequestBody(connection, ACCEPTED);
-			String url = ProfileUrls.CONNECTION.format(this);
-			updateData(url, parameters,payload, connection.getConnectionId());
+			String url = ProfileUrls.CONNECTION.format(this, ProfileUrls.getConnectionId(connection.getConnectionId()));
+			updateData(url, null, payload, connection.getConnectionId());
 		} catch (IOException e) {
 			throw new ClientServicesException(e, Messages.AcceptInviteException, connection.getConnectionId());
 		}
@@ -648,12 +646,9 @@ public class ProfileService extends BaseService {
 		if (StringUtil.isEmpty(connectionId)) {
 			throw new ClientServicesException(null, Messages.InvalidArgument_2);
 		}
-
 		try {
-			Map<String, String> parameters = new HashMap<String, String>();
-			parameters.put(CONNECTIONID, connectionId);
-			String url = ProfileUrls.CONNECTION.format(this);
-			deleteData(url, parameters, connectionId);
+			String url = ProfileUrls.CONNECTION.format(this, ProfileUrls.getConnectionId(connectionId));
+			deleteData(url, null, connectionId);
 		} catch (IOException e) {
 			throw new ClientServicesException(e, Messages.DeleteInviteException, connectionId);
 		}

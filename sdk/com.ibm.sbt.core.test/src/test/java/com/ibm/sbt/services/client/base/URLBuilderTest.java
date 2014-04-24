@@ -35,7 +35,6 @@ import com.ibm.sbt.services.client.connections.profiles.ProfileParams;
 import com.ibm.sbt.services.client.connections.profiles.ProfileService;
 import com.ibm.sbt.services.client.connections.profiles.ProfileUrls;
 import com.ibm.sbt.services.client.connections.wikis.WikiService;
-import com.ibm.sbt.services.client.connections.wikis.WikiUrlParts;
 import com.ibm.sbt.services.client.connections.wikis.WikiUrls;
 
 /**
@@ -61,7 +60,7 @@ public class URLBuilderTest extends BaseUnitTest {
 		//URL pattern is "wikis/{authType}/api/wiki/{wikiLabel}/page/{wikiPage}/entry"
 		String wikiLabel = "myWikiLabel";
 		String pageLabel = "myPageLabel";
-		String url = WikiUrls.WIKI_PAGE_AUTH.format(service, WikiUrlParts.wikiLabel.get(wikiLabel), WikiUrlParts.wikiPage.get(pageLabel));
+		String url = WikiUrls.WIKI_PAGE_AUTH.format(service, WikiUrls.getWikiLabel(wikiLabel), WikiUrls.getWikiPage(pageLabel));
 		assertEquals("wikis/basic/api/wiki/"+wikiLabel+"/page/"+pageLabel+"/entry", url);
 	}
 
@@ -72,7 +71,7 @@ public class URLBuilderTest extends BaseUnitTest {
 		String wikiLabel = "myWikiLabel";
 		String pageLabel = "myPageLabel";
 		//This url has the correct parameters but in a different order. It works regardless. The first parameter needs to be the Version, though
-		String url = WikiUrls.WIKI_PAGE_AUTH.format(service, WikiUrlParts.wikiPage.get(pageLabel), WikiUrlParts.wikiLabel.get(wikiLabel));
+		String url = WikiUrls.WIKI_PAGE_AUTH.format(service, WikiUrls.getWikiPage(pageLabel), WikiUrls.getWikiLabel(wikiLabel));
 		assertEquals("wikis/basic/api/wiki/"+wikiLabel+"/page/"+pageLabel+"/entry", url);
 	}
 
@@ -85,7 +84,7 @@ public class URLBuilderTest extends BaseUnitTest {
 		//This url has the correct number of parameters but one of the parameters is not correct
 		thrown.expect(IllegalArgumentException.class);
 		thrown.expectMessage("Missing parameter");
-		String url = WikiUrls.WIKI_PAGE_AUTH.format(service, WikiUrlParts.wikiLabel.get(wikiLabel), FileUrlParts.fileId.get("dummy"));
+		String url = WikiUrls.WIKI_PAGE_AUTH.format(service, WikiUrls.getWikiLabel(wikiLabel), FileUrlParts.fileId.get("dummy"));
 		assertEquals("wikis/basic/api/wiki/"+wikiLabel+"/page/"+pageLabel+"/entry", url);
 	}
 
@@ -94,7 +93,7 @@ public class URLBuilderTest extends BaseUnitTest {
 		WikiService service = new WikiService();
 		//URL pattern is "wikis/{authType}/api/wiki/{wikiLabel}/page/{wikiPage}/entry
 		//When a parameter is empty, it is simply removed from the url
-		String url2 = WikiUrls.WIKI_PAGE_AUTH.format(service, WikiUrlParts.wikiLabel.get(""), WikiUrlParts.wikiPage.get("myPageLabel"));
+		String url2 = WikiUrls.WIKI_PAGE_AUTH.format(service, WikiUrls.getWikiLabel(""), WikiUrls.getWikiPage("myPageLabel"));
 		assertEquals("wikis/basic/api/wiki/page/myPageLabel/entry", url2);
 	}
 
@@ -122,7 +121,7 @@ public class URLBuilderTest extends BaseUnitTest {
 		//String url = FileUrls.SINGLE_COMMENT_USER_FILE.format(getApiVersion(), getAuthTypeBasic(), AccessType.PUBLIC.get(), FileUrlParts.userId.get(userId), FileUrlParts.fileId.get(fileId), FileUrlParts.commentId.get(commentId));
 
 		String url = FileUrls.USERLIBRARY_DOCUMENT_COMMENT_ENTRY.format(service, AccessType.PUBLIC.get(), FileUrlParts.userId.get(userId), FileUrlParts.fileId.get(fileId), FileUrlParts.commentId.get(commentId), 
-				ASUser.ME.get(), WikiUrlParts.wikiLabel.get("value")); //The last 2 parameters are not needed, they are simply ignored
+				ASUser.ME.get(), WikiUrls.getWikiLabel("value")); //The last 2 parameters are not needed, they are simply ignored
 		String assertUrl = "files/basic/anonymous/api/userlibrary/"+userId+"/document/"+fileId+"/comment/"+commentId+"/entry";
 		assertEquals(assertUrl, url);
 	}
@@ -170,5 +169,13 @@ public class URLBuilderTest extends BaseUnitTest {
 		thrown.expect(IllegalArgumentException.class);
 		thrown.expectMessage("Missing parameter");
 		ProfileUrls.CHECK_COLLEAGUE.format(service, ProfileParams.sourceId.get(sourceId));
+	}
+
+	@Test
+	public void testGenerateUrlWithUrlParametersNameAndValue(){
+		ProfileService service = new ProfileService();
+		String urlAssert = "profiles/atom/connection.do?connectionId=12345678";
+		String url = ProfileUrls.CONNECTION.format(service, ProfileUrls.getConnectionId("12345678"));
+		assertEquals(urlAssert, url);
 	}
 }

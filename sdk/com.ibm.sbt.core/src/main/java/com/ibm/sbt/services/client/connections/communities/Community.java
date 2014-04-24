@@ -363,7 +363,7 @@ public class Community extends AtomEntity {
 	 * @return list of sub-communities
 	 * @throws CommunityServiceException
 	 */
-	public CommunityList getSubCommunities() throws CommunityServiceException {
+	public EntityList<Community> getSubCommunities() throws CommunityServiceException {
 	   	return getService().getSubCommunities(getCommunityUuid());
 	}
 	/**
@@ -403,7 +403,7 @@ public class Community extends AtomEntity {
 	 * @return list of members
 	 * @throws CommunityServiceException
 	 */
-	public MemberList getMembers() throws CommunityServiceException {
+	public EntityList<Member> getMembers() throws CommunityServiceException {
 	   	return getService().getMembers(getCommunityUuid());
 	}
 
@@ -417,7 +417,7 @@ public class Community extends AtomEntity {
 	 * @return list of members
 	 * @throws CommunityServiceException
 	 */
-	public MemberList getMembers(Map<String, String> parameters) throws CommunityServiceException {
+	public EntityList<Member> getMembers(Map<String, String> parameters) throws CommunityServiceException {
 	   	return getService().getMembers(getCommunityUuid(), parameters);
 	}
 	

@@ -1,5 +1,5 @@
 /*
-o * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -23,7 +23,6 @@ import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.base.AtomEntity;
-import com.ibm.sbt.services.client.base.AtomXPath;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.connections.profiles.model.ColleagueConnectionXPath;
@@ -31,6 +30,7 @@ import com.ibm.sbt.services.client.connections.profiles.model.ColleagueConnectio
 public class ColleagueConnection extends AtomEntity{
 	
 	private final String CONNECTIONID = "tag:profiles.ibm.com,2006:entry";
+
 	/**
 	 * Constructor
 	 * @param BaseService
@@ -39,6 +39,7 @@ public class ColleagueConnection extends AtomEntity{
 	public ColleagueConnection(BaseService svc, XmlDataHandler handler) {
 		super(svc, handler);
 	}
+
 	/**
 	 * Constructor
 	 * @param BaseService
@@ -62,6 +63,7 @@ public class ColleagueConnection extends AtomEntity{
 	        }
 	        return id;
 	}
+
 	/**
 	 * sets the Connection Id
 	 */
@@ -117,6 +119,7 @@ public class ColleagueConnection extends AtomEntity{
 	public String getAuthorEmail() {
 		return getAsString(ColleagueConnectionXPath.authorEmail);
 	}
+
 	/**
 	 * @return self Url of colleague connection entry
 	 */
@@ -124,6 +127,7 @@ public class ColleagueConnection extends AtomEntity{
 	public String getSelfLink(){
 		return getAsString(ColleagueConnectionXPath.selfLinkFromEntry);
 	}
+
 	/**
 	 * @return edit Url of colleague connection entry
 	 */
@@ -131,7 +135,4 @@ public class ColleagueConnection extends AtomEntity{
 	public String getEditLink(){
 		return getAsString(ColleagueConnectionXPath.editLinkFromEntry);
 	}
-
-
-
 }

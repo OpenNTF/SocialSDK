@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * Â© Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -21,24 +21,12 @@ package com.ibm.sbt.services.client.connections.files.model;
  * @author Vimal Dhupar
  */
 import com.ibm.sbt.services.client.base.BaseService;
-import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
+import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 
 @Deprecated
 public class Person extends com.ibm.sbt.services.client.connections.common.Person {
 
-	public Person(BaseService svc, DataHandler<?> dataHandler) {
+	 public Person(BaseService svc, XmlDataHandler dataHandler) {
 		super(svc, dataHandler);
 	}
-	
-//	public Person(BaseService svc, DataHandler<?> dataHandler) {
-//		super(svc, dataHandler);
-//	}
-//	
-//	public Node getData() {
-//		return (Node)dataHandler.getData();
-//	}
-//
-//	public void setData(Node data) {
-//		dataHandler.setData(data);
-//	}
 }

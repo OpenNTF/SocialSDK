@@ -20,15 +20,16 @@
  * @module sbt.connections.CommunityService
  */
 define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", "./CommunityConstants", "./ConnectionsService",
-         "../base/AtomEntity", "../base/XmlDataHandler", "./ForumService", "./BookmarkService", "../pathUtil" ], 
+         "../base/AtomEntity", "../base/XmlDataHandler", "./ForumService", "./BookmarkService", "../pathUtil"], 
     function(declare,config,lang,stringUtil,Promise,consts,ConnectionsService,AtomEntity,XmlDataHandler,ForumService,BookmarkService,pathUtil) {
 
-	var CategoryCommunity = "<category term=\"community\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category>";
-	var CategoryMember = "<category term=\"person\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category>";
-	var CategoryInvite = "<category term=\"invite\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category>";
-	var CategoryEvent = "<category term=\"event\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category>";
+
+    var CategoryCommunity = "<category term=\"community\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category>";
+    var CategoryMember = "<category term=\"person\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category>";
+    var CategoryInvite = "<category term=\"invite\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category>";
+    var CategoryEvent = "<category term=\"event\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category>";
     
-	var IsExternalTmpl = "<snx:isExternal>${isExternal}</snx:isExternal>";
+    var IsExternalTmpl = "<snx:isExternal>${isExternal}</snx:isExternal>";
     var CommunityTypeTmpl = "<snx:communityType>${getCommunityType}</snx:communityType>";
     var CommunityUuidTmpl = "<snx:communityUuid xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\">${getCommunityUuid}</snx:communityUuid><id>instance?communityUuid=${getCommunityUuid}</id> ";
     var CommunityThemeTmpl = "<snx:communityTheme xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\" snx:uuid=\"default\">${getCommunityTheme}</snx:communityTheme>";
@@ -57,10 +58,10 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
      */
     var Community = declare(AtomEntity, {
 
-    	xpath : consts.CommunityXPath,
-    	namespaces : consts.CommunityNamespaces,
-    	categoryScheme : CategoryCommunity,
-    	    	
+        xpath : consts.CommunityXPath,
+        namespaces : consts.CommunityNamespaces,
+        categoryScheme : CategoryCommunity,
+                
         /**
          * Construct a Community entity.
          * 
@@ -76,7 +77,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @method createDataHandler
          */
         createDataHandler : function(service, data, response, namespaces, xpath) {
-        	return new CommunityDataHandler({
+            return new CommunityDataHandler({
                 service : service,
                 data : data,
                 namespaces : namespaces,
@@ -90,18 +91,18 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @returns {String}
          */
         createEntryData : function() {
-        	var postData = "";
+            var postData = "";
             var transformer = function(value,key) {
                 return value;
             };
             postData += stringUtil.transform(CommunityTypeTmpl, this, transformer, this);
             postData += stringUtil.transform(IsExternalTmpl, this, transformer, this);
-        	if (this.getCommunityUuid()) {
+            if (this.getCommunityUuid()) {
                 postData += stringUtil.transform(CommunityUuidTmpl, this, transformer, this);
-        	}
-        	if (this.getCommunityTheme()) {
+            }
+            if (this.getCommunityTheme()) {
                 postData += stringUtil.transform(CommunityThemeTmpl, this, transformer, this);
-        	}
+            }
             return stringUtil.trim(postData);
         },
         
@@ -137,7 +138,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         getCommunityType : function() {
             var type = this.getAsString("communityType");
             if (!type) {
-            	type = consts.Restricted;
+                type = consts.Restricted;
             }
             return type;
         },
@@ -257,7 +258,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @param {Object} args
          */
         getForumTopics : function(args) {
-        	return this.service.getForumTopics(this.getCommunityUuid(), args);
+            return this.service.getForumTopics(this.getCommunityUuid(), args);
         },
         
         /**
@@ -273,7 +274,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 args = topicOrJson;
                 topicOrJson = communityUuid;
             }
-        	return this.service.createForumTopic(topicOrJson, args);
+            return this.service.createForumTopic(topicOrJson, args);
         },
         
         /**
@@ -336,7 +337,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @param {Object} [args] Argument object
          */
         getMember : function(memberId, args) {
-        	return this.service.getMember(this.getCommunityUuid(), memberId, args);
+            return this.service.getMember(this.getCommunityUuid(), memberId, args);
         },
         
         /**
@@ -347,7 +348,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @param {Object} [args]
          */
         getAllInvites : function(args) {
-        	return this.service.getAllInvites(this.getCommunityUuid(), args);
+            return this.service.getAllInvites(this.getCommunityUuid(), args);
         },
 
         /**
@@ -357,9 +358,9 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @param {Object} [args] Argument object
          */
         getForums : function(args) {
-        	var forumService = this.service.getForumService();
-        	var requestArgs = lang.mixin(args || {}, { communityUuid : this.getCommunityUuid() });
-        	return forumService.getForums(requestArgs);
+            var forumService = this.service.getForumService();
+            var requestArgs = lang.mixin(args || {}, { communityUuid : this.getCommunityUuid() });
+            return forumService.getForums(requestArgs);
         },
         
         /**
@@ -381,19 +382,19 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             var self = this;
             var callbacks = {
                 createEntity : function(service, data, response) {
-                	self.setData(data, response);
+                    self.setData(data, response);
                     return self;
                 }
             };
 
             var requestArgs = lang.mixin(
-            	{ communityUuid : communityUuid }, 
-            	args || {});
+                { communityUuid : communityUuid }, 
+                args || {});
             var options = {
                 handleAs : "text",
                 query : requestArgs
             };
-            
+
             return this.service.getEntity(consts.AtomCommunityInstance, options, communityUuid, callbacks);
         },
 
@@ -442,10 +443,10 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
      */
     var Member = declare(AtomEntity, {
 
-    	xpath : consts.MemberXPath,
-    	namespaces : consts.CommunityNamespaces,
-    	categoryScheme : CategoryMember,
-    	    	
+        xpath : consts.MemberXPath,
+        namespaces : consts.CommunityNamespaces,
+        categoryScheme : CategoryMember,
+                
         /**
          * The UUID of the community associated with this Member
          */
@@ -469,7 +470,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @returns {String}
          */
         createEntryData : function() {
-        	var postData = "";
+            var postData = "";
             var transformer = function(value,key) {
                 return value;
             };
@@ -620,7 +621,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @param {Object} [args] Argument object
          */
         remove : function(args) {
-        	var memberId = this.getUserid() || this.getEmail();
+            var memberId = this.getUserid() || this.getEmail();
             return this.service.removeMember(this.getCommunityUuid(), memberId, args);
         }
 
@@ -635,10 +636,10 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
      */
     var Invite = declare(AtomEntity, {
 
-    	xpath : consts.InviteXPath,
-    	namespaces : consts.CommunityNamespaces,
-    	categoryScheme : CategoryInvite,
-    	    	
+        xpath : consts.InviteXPath,
+        namespaces : consts.CommunityNamespaces,
+        categoryScheme : CategoryInvite,
+                
         /**
          * The UUID of the community associated with this Invite
          */
@@ -688,8 +689,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @return {String} communityUuid
          */
         setCommunityUuid : function(communityUuid) {
-			this.communityUuid = communityUuid;
-			return this;
+            this.communityUuid = communityUuid;
+            return this;
         },
         
         /**
@@ -699,10 +700,10 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @return {String} communityUuid
          */
         getCommunityUuid : function() {
-        	if (!this.communityUuid) {
-				this.communityUuid = this.service.getUrlParameter(this.getAsString("communityUrl"), "communityUuid");
-			} 
-			return this.communityUuid;
+            if (!this.communityUuid) {
+                this.communityUuid = this.service.getUrlParameter(this.getAsString("communityUrl"), "communityUuid");
+            } 
+            return this.communityUuid;
         },
         
         /**
@@ -712,8 +713,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @return {String} inviteeUuid
          */
         setInviteeUuid : function(inviteeUuid) {
-			this.inviteeUuid = inviteeUuid;
-			return this;
+            this.inviteeUuid = inviteeUuid;
+            return this;
         },
         
         /**
@@ -724,11 +725,11 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @return {String} Invitee ID of the invite
          */
         getInviteeUuid : function() {
-        	if (!this.inviteeUuid) {
-            	var inviteUuid = this.getInviteUuid();
-            	this.inviteeUuid = extractInviteeUuid(inviteUuid, this.getCommunityUuid());
-        	}
-        	return this.inviteeUuid;
+            if (!this.inviteeUuid) {
+                var inviteUuid = this.getInviteUuid();
+                this.inviteeUuid = extractInviteeUuid(inviteUuid, this.getCommunityUuid());
+            }
+            return this.inviteeUuid;
         },
 
         /**
@@ -738,7 +739,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @return {String} userid
          */
         setUserid : function(userid) {
-        	return this.setAsString("contributorUserid", userid);
+            return this.setAsString("contributorUserid", userid);
         },
         
         /**
@@ -748,7 +749,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @return {String} userid
          */
         getUserid : function() {
-        	return this.getAsString("contributorUserid");
+            return this.getAsString("contributorUserid");
         },
         
         /**
@@ -758,7 +759,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @return {String} email
          */
         setEmail : function(email) {
-        	return this.setAsString("contributorEmail", email);
+            return this.setAsString("contributorEmail", email);
         },
         
         /**
@@ -768,7 +769,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @return {String} email
          */
         getEmail : function() {
-        	return this.getAsString("contributorEmail");
+            return this.getAsString("contributorEmail");
         },
         
         /**
@@ -808,7 +809,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 handleAs : "text",
                 query : requestArgs
             };
-            
+
             return this.service.getEntity(consts.AtomCommunityInvites, options, communityUuid + "-" + userid, callbacks);
         },
 
@@ -1041,7 +1042,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
      * Method used to extract the community uuid for an id url.
      */
     var extractCommunityUuid = function(service, uid) {
-        if (uid && uid.indexOf("http") == 0) {
+        if (uid && uid.indexOf("http") === 0) {
             return service.getUrlParameter(uid, "communityUuid");
         } else {
             return uid;
@@ -1052,7 +1053,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
      * Method used to extract the invite uuid for an id url.
      */
     var extractInviteUuid = function(uid) {
-    	if (uid && uid.indexOf("urn:lsid:ibm.com:communities:invite-") == 0) {
+        if (uid && uid.indexOf("urn:lsid:ibm.com:communities:invite-") === 0) {
             return uid.substring("urn:lsid:ibm.com:communities:invite-".length);
         } else {
             return uid;
@@ -1063,7 +1064,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
      * Method used to extract the invitee uuid for an id url.
      */
     var extractInviteeUuid = function(uid, communityUuid) {
-    	if (uid && uid.indexOf(communityUuid) == 0) {
+        if (uid && uid.indexOf(communityUuid) === 0) {
             return uid.substring(communityUuid.length + 1);
         } else {
             return uid;
@@ -1222,9 +1223,9 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             });
         },
         createEntity : function(service, data, response) {
-        	var forumService = service.getForumService();
-        	var forumTopic = forumService.newForumTopic({});
-        	forumTopic.setData(data, response);
+            var forumService = service.getForumService();
+            var forumTopic = forumService.newForumTopic({});
+            forumTopic.setData(data, response);
             return forumTopic;
         }
     };
@@ -1236,16 +1237,16 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
      * @namespace sbt.connections
      */
     var CommunityService = declare(ConnectionsService, {
-    	
-    	forumService : null,
-    	bookmarkService : null,
-    	
-    	contextRootMap: {
+        
+        forumService : null,
+        bookmarkService : null,
+        
+        contextRootMap: {
             communities: "communities"
         },
         
         serviceName : "communities",
-
+        
         /**
          * Constructor for CommunityService
          * 
@@ -1253,7 +1254,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @param args
          */
         constructor : function(args) {
-        	if (!this.endpoint) {
+            if (!this.endpoint) {
                 this.endpoint = config.findEndpoint(this.getDefaultEndpointName());
             }
         },
@@ -1265,11 +1266,11 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @returns {ForumService}
          */
         getForumService : function() {
-        	if (!this.forumService) {
-        		this.forumService = new ForumService();
-        		this.forumService.endpoint = this.endpoint;
-        	}
-        	return this.forumService;
+            if (!this.forumService) {
+                this.forumService = new ForumService();
+                this.forumService.endpoint = this.endpoint;
+            }
+            return this.forumService;
         },
         
         /**
@@ -1279,11 +1280,11 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @returns {BookmarkService}
          */
         getBookmarkService : function() {
-        	if (!this.bookmarkService) {
-        		this.bookmarkService = new BookmarkService();
-        		this.bookmarkService.endpoint = this.endpoint;
-        	}
-        	return this.bookmarkService;
+            if (!this.bookmarkService) {
+                this.bookmarkService = new BookmarkService();
+                this.bookmarkService.endpoint = this.endpoint;
+            }
+            return this.bookmarkService;
         },
         
         /**
@@ -1412,7 +1413,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                     mode : "list"
                 }
             };
-                
+
             return this.getEntities(consts.AtomCommunityEvents, options, ConnectionsEventInstFeedCallbacks);
         },
         
@@ -1491,7 +1492,6 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                     eventInstUuid: eventInstUuid
                 }
             };
-                
             return this.getEntity(consts.AtomCommunityEvents, options, eventInstUuid, ConnectionsEventInstCallbacks);
         },
         
@@ -1508,7 +1508,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 handleAs : "text",
                 query : args || {}
             };
-            
+
             return this.getEntities(consts.AtomCommunityInvitesMy, options, InviteFeedCallbacks);
         },      
 
@@ -1681,12 +1681,12 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             
             var callbacks = {};
             callbacks.createEntity = function(service, data, response) {
-            	// preserve the communityUuid
-            	var communityUuid = community.getCommunityUuid();
-            	if (data) {
-                	community.setData(data, response);
-            	}
-            	community.setCommunityUuid(communityUuid);
+                // preserve the communityUuid
+                var communityUuid = community.getCommunityUuid();
+                if (data) {
+                    community.setData(data, response);
+                }
+                community.setCommunityUuid(communityUuid);
                 return community;
             };
 
@@ -1771,48 +1771,48 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             return this.updateEntity(consts.AtomCommunityMembers, options, callbacks, args);
         },
         
-		/**
-		 * Updates a member in the access control list for an application, sends a replacement member entry document in Atom format to the existing ACL
-		 * node's edit web address.
-		 * @method updateMember
-		 * @param {String} activityUuid
-		 * @param {Object} memberOrJson
-		 */
-		updateMember : function(communityUuid, memberOrJson, args) {
-			var promise = this.validateField("communityUuid", communityUuid);
-			if (promise) {
-				return promise;
-			}
-			var member = this._toMember(memberOrJson);
-			promise = this._validateMember(member, true, true);
-			if (promise) {
-				return promise;
-			}
+        /**
+         * Updates a member in the access control list for an application, sends a replacement member entry document in Atom format to the existing ACL
+         * node's edit web address.
+         * @method updateMember
+         * @param {String} activityUuid
+         * @param {Object} memberOrJson
+         */
+        updateMember : function(communityUuid, memberOrJson, args) {
+            var promise = this.validateField("communityUuid", communityUuid);
+            if (promise) {
+                return promise;
+            }
+            var member = this._toMember(memberOrJson);
+            promise = this._validateMember(member, true, true);
+            if (promise) {
+                return promise;
+            }
 
-			var requestArgs = {
-	                communityUuid : communityUuid
-	        };
-	        var key = member.getEmail() ? "email" : "userid";
-	        var value = member.getEmail() ? member.getEmail() : member.getUserid();
-	        requestArgs[key] = value;
-	        requestArgs = lang.mixin(requestArgs, args || {});
+            var requestArgs = {
+                communityUuid : communityUuid
+            };
+            var key = member.getEmail() ? "email" : "userid";
+            var value = member.getEmail() ? member.getEmail() : member.getUserid();
+            requestArgs[key] = value;
+            requestArgs = lang.mixin(requestArgs, args || {});
 
-			var options = {
-				method : "PUT",
-				headers : consts.AtomXmlHeaders,
-				query : requestArgs,
-				data : member.createPostData()
-			};
+            var options = {
+                method : "PUT",
+                headers : consts.AtomXmlHeaders,
+                query : requestArgs,
+                data : member.createPostData()
+            };
 
-			var callbacks = {
-				createEntity : function(service, data, response) {
-					return response;
-				}
-			};
+            var callbacks = {
+                createEntity : function(service, data, response) {
+                    return response;
+                }
+            };
+            
+            return this.updateEntity(consts.AtomCommunityMembers, options, callbacks);
 
-			return this.updateEntity(consts.AtomCommunityMembers, options, callbacks);
-
-		},
+        },
 
         /**
          * Remove member of a community
@@ -1923,6 +1923,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 handleAs : "text"
             };
             var entityId = invite.getCommunityUuid() + "-" + invite.getInviteeUuid();
+            
             return this.deleteEntity(consts.AtomCommunityInvites, options, entityId);
         },
         
@@ -1945,8 +1946,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             }, args || {});
             
             var options = {
-            	method : "POST",
-        		query : requestArgs,
+                method : "POST",
+                query : requestArgs,
                 headers : consts.AtomXmlHeaders,
                 data : invite.createPostData()
             };
@@ -1954,7 +1955,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             // return the community id for the community whose invite is accepted in the argument of the success promise.
             var callbacks = {}; 
             callbacks.createEntity = function(service, data, response) { 
-            	invite.setData(data, response);
+                invite.setData(data, response);
                 return invite;
             };
             
@@ -1979,138 +1980,141 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         },
                 
         /**
-		 * Updates the Logo picture of a community
-		 * @method updateCommunityLogo
-		 * @param {Object} fileControlOrId The Id of html control or the html control
-		 * @param {String} communityUuid the Uuid of community
-		 */
-		updateCommunityLogo : function(fileControlOrId, communityUuid) {
-			var promise = this.validateField("File Control Or Id", fileControlOrId);
-			if (promise) {
-				return promise;
-			}
-			promise = this.validateHTML5FileSupport();
-			if (promise) {
-				return promise;
-			}
-			promise = this.validateField("CommunityUuid", communityUuid);
-			if (promise) {
-				return promise;
-			}
-
-			var files = null;
-			var fileControl = this.getFileControl(fileControlOrId);
-			if(!fileControl){
-				return this.createBadRequestPromise("File Control or ID is required");
-			}
-			var filePath = fileControl.value;
-			var files = fileControl.files;
-
-			if (files.length != 1) {
-				return this.createBadRequestPromise("Only one file can be upload as a community logo.");
-			}
-
-			var file = files[0];
-			var formData = new FormData();
-			formData.append("file", file);
-			var requestArgs = {
-				"communityUuid" : communityUuid
-			};
-			var url = this.constructUrl(consts.AtomUpdateCommunityLogo, null, {
-				endpointName : this.endpoint.proxyPath,
-				fileName : encodeURIComponent(file.name)
-			});
-			if (this.endpoint.proxy) {
-                url = config.Properties.serviceUrl + url;
-            } else {
-            	return this.createBadRequestPromise("File Proxy is required to upload a community logo");
+         * Updates the Logo picture of a community
+         * @method updateCommunityLogo
+         * @param {Object} fileControlOrId The Id of html control or the html control
+         * @param {String} communityUuid the Uuid of community
+         */
+        updateCommunityLogo : function(fileControlOrId, communityUuid) {
+            var promise = this.validateField("File Control Or Id", fileControlOrId);
+            if (promise) {
+                return promise;
             }
-					
-			var headers = {
-				"Content-Type" : false,
-				"Process-Data" : false //processData = false is reaquired by jquery
-			};
-			var options = {
-				method : "PUT",
-				headers : headers,
-				query : requestArgs,
-				data : formData
-			};
-			var callbacks = {
-				createEntity : function(service, data, response) {
-					return data; // Since this API does not return any response in case of success, returning empty data
-				}
-			};
+            promise = this.validateHTML5FileSupport();
+            if (promise) {
+                return promise;
+            }
+            promise = this.validateField("CommunityUuid", communityUuid);
+            if (promise) {
+                return promise;
+            }
 
-			return this.updateEntity(url, options, callbacks);
-		},
+            var files = null;
+            var fileControl = this.getFileControl(fileControlOrId);
+            if(!fileControl){
+                return this.createBadRequestPromise("File Control or ID is required");
+            }
+            var filePath = fileControl.value;
+            var files = fileControl.files;
+
+            if (files.length != 1) {
+                return this.createBadRequestPromise("Only one file can be upload as a community logo.");
+            }
+
+            var file = files[0];
+            var formData = new FormData();
+            formData.append("file", file);
+            var requestArgs = {
+                "communityUuid" : communityUuid
+            };
+
+            if (this.endpoint.proxy) {
+                url = config.Properties.serviceUrl +'/'+ url;
+            } else {
+                return this.createBadRequestPromise("File Proxy is required to upload a community logo");
+            }
+                    
+            var headers = {
+                "Content-Type" : false,
+                "Process-Data" : false //processData = false is reaquired by jquery
+            };
+            var options = {
+                method : "PUT",
+                headers : headers,
+                query : requestArgs,
+                data : formData,
+                urlParams: { 
+                    endpointName : this.endpoint.proxyPath,
+                    fileName : encodeURIComponent(file.name)
+                }
+            };
+            var callbacks = {
+                createEntity : function(service, data, response) {
+                    return data; // Since this API does not return any response in case of success, returning empty data
+                }
+            };
+
+            return this.updateEntity(consts.AtomUpdateCommunityLogo, options, callbacks);
+        },
 
         /**
-		 * Updates the Logo picture of a community
-		 * @method updateCommunityLogo
-		 * @param {Object} fileControlOrId The Id of html control or the html control
-		 * @param {String} communityUuid the Uuid of community
-		 */
-		uploadCommunityFile : function(fileControlOrId, communityUuid) {
-			var promise = this.validateField("File Control Or Id", fileControlOrId);
-			if (promise) {
-				return promise;
-			}
-			promise = this.validateHTML5FileSupport();
-			if (promise) {
-				return promise;
-			}
-			promise = this.validateField("CommunityUuid", communityUuid);
-			if (promise) {
-				return promise;
-			}
-
-			var files = null;
-			var fileControl = this.getFileControl(fileControlOrId);
-			if(!fileControl){
-				return this.createBadRequestPromise("File Control or ID is required");
-			}
-			var filePath = fileControl.value;
-			var files = fileControl.files;
-
-			if (files.length != 1) {
-				return this.createBadRequestPromise("Only one file can be uploaded to a community at a time");
-			}
-
-			var file = files[0];
-			var formData = new FormData();
-			formData.append("file", file);
-			var requestArgs = {
-			};
-			var url = this.constructUrl(consts.AtomUploadCommunityFile, null, {
-				endpointName : this.endpoint.proxyPath,
-				communityUuid : communityUuid
-			});
-			if (this.endpoint.proxy) {
-                url = config.Properties.serviceUrl + url;
-            } else {
-            	return this.createBadRequestPromise("File proxy is required to upload a community file");
+         * Updates the Logo picture of a community
+         * @method updateCommunityLogo
+         * @param {Object} fileControlOrId The Id of html control or the html control
+         * @param {String} communityUuid the Uuid of community
+         */
+        uploadCommunityFile : function(fileControlOrId, communityUuid) {
+            var promise = this.validateField("File Control Or Id", fileControlOrId);
+            if (promise) {
+                return promise;
             }
-					
-			var headers = {
-				"Content-Type" : false,
-				"Process-Data" : false //processData = false is reaquired by jquery
-			};
-			var options = {
-				method : "POST",
-				headers : headers,
-				query : requestArgs,
-				data : formData
-			};
+            promise = this.validateHTML5FileSupport();
+            if (promise) {
+                return promise;
+            }
+            promise = this.validateField("CommunityUuid", communityUuid);
+            if (promise) {
+                return promise;
+            }
 
-			var callbacks = {
-				createEntity : function(service, data, response) {
-					return data;
-				}
-			};
+            var files = null;
+            var fileControl = this.getFileControl(fileControlOrId);
+            if(!fileControl){
+                return this.createBadRequestPromise("File Control or ID is required");
+            }
+            var filePath = fileControl.value;
+            var files = fileControl.files;
 
-			return this.updateEntity(url, options, callbacks);
-		},
+            if (files.length != 1) {
+                return this.createBadRequestPromise("Only one file can be uploaded to a community at a time");
+            }
+
+            var file = files[0];
+            var formData = new FormData();
+            formData.append("file", file);
+            var requestArgs = {
+            };
+            
+            if (this.endpoint.proxy) {
+                url = config.Properties.serviceUrl + '/' +  url;
+            } else {
+                return this.createBadRequestPromise("File proxy is required to upload a community file");
+            }
+                    
+            var headers = {
+                "Content-Type" : false,
+                "Process-Data" : false //processData = false is reaquired by jquery
+            };
+            var options = {
+                method : "POST",
+                headers : headers,
+                query : requestArgs,
+                data : formData,
+                urlParams: {
+                    endpointName : this.endpoint.proxyPath,
+                    communityUuid : communityUuid
+                }
+            };
+
+            var callbacks = {
+                createEntity : function(service, data, response) {
+                    return data;
+                }
+            };
+
+            return this.updateEntity(consts.AtomUploadCommunityFile, options, callbacks);
+        },
+
 
         /**
          * Create a bookmark by sending an Atom entry document containing the 
@@ -2121,16 +2125,16 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * @param {Object} [args] Argument object
          */
         createBookmark : function(communityUuid, bookmarkOrJson, args) {
-			args = lang.mixin({ 
-				url : consts.AtomCommunityBookmarks, 
-				communityUuid : communityUuid 
-			}, args || {});
+            args = lang.mixin({ 
+                url : consts.AtomCommunityBookmarks, 
+                communityUuid : communityUuid 
+            }, args || {});
             return this.getBookmarkService().createBookmark(bookmarkOrJson, args);
         },
         
-		//
-		// Internals
-		//
+        //
+        // Internals
+        //
        
         /*
          * Return a Community instance from Community or JSON or String. Throws
@@ -2161,7 +2165,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 return inviteOrJsonOrString;
             } else {
                 if (lang.isString(inviteOrJsonOrString)) {
-                	inviteOrJsonOrString = {
+                    inviteOrJsonOrString = {
                         communityUuid : inviteOrJsonOrString
                     };
                 }
@@ -2208,10 +2212,10 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                         member.setUserid(idOrJson);
                     }
                 } else {
-                	if(idOrJson.id && !idOrJson.userid && !idOrJson.email){
-                		this.isEmail(idOrJson.id) ? idOrJson.email = idOrJson.id : idOrJson.userid = idOrJson.id;
-                		delete idOrJson.id;
-                	}
+                    if(idOrJson.id && !idOrJson.userid && !idOrJson.email){
+                        this.isEmail(idOrJson.id) ? idOrJson.email = idOrJson.id : idOrJson.userid = idOrJson.id;
+                        delete idOrJson.id;
+                    }
                     member._fields = lang.mixin({}, idOrJson);
                 }
                 return member;
@@ -2222,7 +2226,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * Validate a community UUID, and return a Promise if invalid.
          */
         _validateCommunityUuid : function(communityUuid) {
-            if (!communityUuid || communityUuid.length == 0) {
+            if (!communityUuid || communityUuid.length === 0) {
                 return this.createBadRequestPromise("Invalid argument, expected communityUuid.");
             }
         },
@@ -2231,7 +2235,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * Validate a userid, and return a Promise if invalid.
          */
         _validateUserid : function(userid) {
-            if (!userid || userid.length == 0) {
+            if (!userid || userid.length === 0) {
                 return this.createBadRequestPromise("Invalid argument, expected userid.");
             }
         },
@@ -2249,7 +2253,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * Validate contributor id
          */
         _validateContributorId : function(contributorId) {
-        	if (!contributorId || contributorId.length == 0) {
+            if (!contributorId || contributorId.length === 0) {
                 return this.createBadRequestPromise("Invalid argument, expected contributorId.");
             }
         },
@@ -2291,7 +2295,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * Validate an event inst uuid, and return a Promise if invalid.
          */
         _validateEventInstUuid : function(eventInstUuid) {
-            if (!eventInstUuid || eventInstUuid.length == 0) {
+            if (!eventInstUuid || eventInstUuid.length === 0) {
                 return this.createBadRequestPromise("Invalid argument, expected event inst uuid.");
             }
         },
@@ -2300,7 +2304,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          * Validate an event UUID, and return a Promise if invalid.
          */
         _validateEventUuid : function(eventUuid) {
-            if (!eventUuid || eventUuid.length == 0) {
+            if (!eventUuid || eventUuid.length === 0) {
                 return this.createBadRequestPromise("Invalid argument, expected eventUuid.");
             }
         }

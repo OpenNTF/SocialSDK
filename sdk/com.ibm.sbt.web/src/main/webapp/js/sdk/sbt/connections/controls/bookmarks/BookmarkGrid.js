@@ -18,8 +18,8 @@ define(["../../../declare",
         "../../../store/parameter",
         "../../../connections/BookmarkConstants",
         "../../../connections/CommunityConstants",
-        "./BookmarkGridRenderer"], 
-    function(declare,Grid,parameter,consts,communityConstants,BookmarkGridRenderer){
+        "./BookmarkGridRenderer", "../../../base/URLBuilder" ], 
+    function(declare,Grid,parameter,consts,communityConstants,BookmarkGridRenderer, URLBuilder) {
 	
 	/**
 	 * Sorting values
@@ -56,7 +56,8 @@ define(["../../../declare",
 		 */
 		targetName: "_blank",
 		
-		
+        builder : new URLBuilder(),
+        
 		 options : {
 	            "any" : {
 	                storeArgs : {
@@ -117,7 +118,9 @@ define(["../../../declare",
 	      */
 	     buildUrl: function(url, args, endpoint) {
 	    	 var urlParams;
-	    	 
+	         url = this.builder.build(url, endpoint.apiVersion, {
+	           authentication : endpoint.authType === "oauth" ? "oauth":""
+		     });
 	    	 if(this.type == "private"){
 	    		 urlParams = { access: "private"};
 	    	 }else if(this.type == "public") {

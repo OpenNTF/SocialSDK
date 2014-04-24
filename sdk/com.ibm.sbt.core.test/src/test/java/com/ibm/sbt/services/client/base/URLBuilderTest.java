@@ -1,4 +1,4 @@
-/* * �� Copyright IBM Corp. 2014 * 
+/* © Copyright IBM Corp. 2014 * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
  * You may obtain a copy of the License at:
@@ -31,6 +31,9 @@ import com.ibm.sbt.services.client.connections.files.AccessType;
 import com.ibm.sbt.services.client.connections.files.FileService;
 import com.ibm.sbt.services.client.connections.files.FileUrlParts;
 import com.ibm.sbt.services.client.connections.files.FileUrls;
+import com.ibm.sbt.services.client.connections.profiles.ProfileParams;
+import com.ibm.sbt.services.client.connections.profiles.ProfileService;
+import com.ibm.sbt.services.client.connections.profiles.ProfileUrls;
 import com.ibm.sbt.services.client.connections.wikis.WikiService;
 import com.ibm.sbt.services.client.connections.wikis.WikiUrlParts;
 import com.ibm.sbt.services.client.connections.wikis.WikiUrls;
@@ -100,14 +103,13 @@ public class URLBuilderTest extends BaseUnitTest {
 		WikiService service = new WikiService();
 		String userId = "abcde";
 		String fileId = "1234";
-		String commentId = "a1b2c3"; //unsed on this test
 		//This would be the url with all the needed parameters
 		//String url = FileUrls.SINGLE_COMMENT_USER_FILE.format(getApiVersion(), getAuthTypeBasic(), AccessType.PUBLIC.get(), FileUrlParts.userId.get(userId), FileUrlParts.fileId.get(fileId), FileUrlParts.commentId.get(commentId));
 
 		//This url misses the last parameter, commentId
 		thrown.expect(IllegalArgumentException.class);
 		thrown.expectMessage("Missing parameter");
-		String url = FileUrls.USERLIBRARY_DOCUMENT_FEED.format(service, FileUrlParts.userId.get(userId), FileUrlParts.fileId.get(fileId));
+		FileUrls.USERLIBRARY_DOCUMENT_FEED.format(service, FileUrlParts.userId.get(userId), FileUrlParts.fileId.get(fileId));
 	}
 
 	@Test
@@ -145,5 +147,28 @@ public class URLBuilderTest extends BaseUnitTest {
 		String urlAssert2 = "connections/opensocial/basic/rest/activitystreams/"+community+"/"+group;
 		String url3 = ActivityStreamUrls.AS_COMMUNITY_ALL.format(service, ASUser.COMMUNITY.getWithValue("a1b2c3d4c5g6"));
 		assertEquals(urlAssert2, url3);
+	}
+	
+	/**
+	 * This test uses urls with ?param1=value&param2=value parameters
+	 */
+	@Test
+	public void testGenerateUrlWithUrlParameters(){
+		ProfileService service = new ProfileService();
+		String urlAssertEmail = "profiles/atom/connection.do?sourceEmail=bjordan%40renovations.com&targetEmail=***REMOVED***%40renovations.com&connectionType=colleague";
+		String sourceId = "bjordan@renovations.com";
+		String targetId = "***REMOVED***@renovations.com";
+		String url = ProfileUrls.CHECK_COLLEAGUE.format(service, ProfileParams.sourceId.get(sourceId), ProfileParams.targetId.get(targetId));
+		assertEquals(urlAssertEmail, url);
+	}
+
+	@Test
+	public void testGenerateUrlWithMissingUrlParameters(){
+		ProfileService service = new ProfileService();
+		String sourceId = "bjordan@renovations.com";
+
+		thrown.expect(IllegalArgumentException.class);
+		thrown.expectMessage("Missing parameter");
+		ProfileUrls.CHECK_COLLEAGUE.format(service, ProfileParams.sourceId.get(sourceId));
 	}
 }

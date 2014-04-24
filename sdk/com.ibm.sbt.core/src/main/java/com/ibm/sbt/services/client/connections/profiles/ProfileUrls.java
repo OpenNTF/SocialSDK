@@ -39,7 +39,7 @@ public enum ProfileUrls implements URLContainer {
 	TAGS(new VersionedUrl(v4_0, 					"{profiles}/{authType}/atom/profileTags.do?{sourceId}&{targetId}")),
 	SEARCH(new VersionedUrl(v4_0, 					"{profiles}/{authType}/atom/search.do")),
 	CONNECTIONS(new VersionedUrl(v4_0, 				"{profiles}/{authType}/atom/connections.do?{userId}")),
-	CONNECTION(new VersionedUrl(v4_0, 				"{profiles}/{authType}/atom/connection.do")),
+	CONNECTION(new VersionedUrl(v4_0, 				"{profiles}/{authType}/atom/connection.do?connectionId={connectionId}")),
 	CHECK_COLLEAGUE(new VersionedUrl(v4_0, 			"{profiles}/{authType}/atom/connection.do?{sourceId}&{targetId}&connectionType=colleague")),
 	CONNECTIONS_IN_COMMON(new VersionedUrl(v4_0, 	"{profiles}/{authType}/atom/connectionsInCommon.do?{userId}")),
 	REPORTING_CHAIN(new VersionedUrl(v4_0, 			"{profiles}/{authType}/atom/reportingChain.do?{userId}")),
@@ -68,6 +68,10 @@ public enum ProfileUrls implements URLContainer {
 
 	public String getPattern(Version version){
 		return builder.getPattern(version).getUrlPattern();
+	}
+	
+	public static NamedUrlPart getConnectionId(String value){
+		return new NamedUrlPart("connectionId", value);
 	}
 
 }

@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -34,19 +34,16 @@ import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.automation.core.test.BaseApiTest;
 import com.ibm.sbt.automation.core.test.FlexibleTest;
 import com.ibm.sbt.automation.core.utils.Trace;
-import com.ibm.sbt.security.authentication.AuthenticationException;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
+import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.connections.communities.Community;
 import com.ibm.sbt.services.client.connections.communities.CommunityService;
 import com.ibm.sbt.services.client.connections.communities.CommunityServiceException;
 import com.ibm.sbt.services.client.connections.communities.Invite;
 import com.ibm.sbt.services.client.connections.communities.Member;
-import com.ibm.sbt.services.client.connections.communities.MemberList;
-import com.ibm.sbt.services.client.connections.forums.Forum;
 import com.ibm.sbt.services.client.connections.forums.ForumServiceException;
 import com.ibm.sbt.services.client.connections.forums.ForumTopic;
-import com.ibm.sbt.services.client.connections.forums.TopicList;
 import com.ibm.sbt.services.client.connections.forums.model.BaseForumEntity;
 import com.ibm.sbt.services.client.connections.forums.transformers.BaseForumTransformer;
 
@@ -328,7 +325,7 @@ public class BaseCommunitiesTest extends FlexibleTest {
     protected boolean hasMember(Community community, String id) {
         try {
             CommunityService communityService = getCommunityService();
-            MemberList memberList = communityService.getMembers(community.getCommunityUuid());
+            EntityList<Member> memberList = communityService.getMembers(community.getCommunityUuid());
             for (int i=0; i<memberList.size(); i++) {
             	Member member = (Member)memberList.get(i);
                 if (id.equals(member.getEmail()) || id.equals(member.getUserid())) {
@@ -348,7 +345,7 @@ public class BaseCommunitiesTest extends FlexibleTest {
 		Response result = null;
 		try {
 			CommunityService communityService = getCommunityService();
-			TopicList topicList = communityService.getForumTopics(community.getCommunityUuid());
+			EntityList<ForumTopic> topicList = communityService.getForumTopics(community.getCommunityUuid());
 						
 			String forumUuid = "";
 			

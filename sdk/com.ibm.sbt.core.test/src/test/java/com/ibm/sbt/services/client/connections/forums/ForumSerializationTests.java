@@ -9,6 +9,7 @@ import java.util.Iterator;
 import org.junit.Test;
 
 import com.ibm.sbt.services.client.SerializationUtil;
+import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 
 /**
  * @author Swati Singh
@@ -37,15 +38,15 @@ public class ForumSerializationTests extends BaseForumServiceTest {
 	
 	@Test
 	public final void testForumListSerialization() throws Exception {
-		ForumList forums = forumService.getAllForums();
+		EntityList<Forum> forums = forumService.getAllForums();
 		new SerializationUtil() {
 			
 			@Override
 			public void validateSerializable() { 
-				ForumList allforums = null;
+				EntityList<Forum> allforums = null;
 				try {
 					ObjectInputStream ois = new ObjectInputStream(new FileInputStream(serFile));
-					allforums = (ForumList) ois.readObject();
+					allforums = (EntityList<Forum>) ois.readObject();
 					for (Iterator iterator = allforums.iterator(); iterator.hasNext();) {
 						Forum localForum = (Forum) iterator.next();
 					}
@@ -76,15 +77,15 @@ public class ForumSerializationTests extends BaseForumServiceTest {
 		
 	@Test
 	public final void testTopicListSerialization() throws Exception {
-		TopicList topics = forumService.getPublicForumTopics();
+		EntityList<ForumTopic> topics = forumService.getPublicForumTopics();
 		new SerializationUtil() {
 			
 			@Override
 			public void validateSerializable() { 
-				TopicList allTopics = null;
+				EntityList<ForumTopic> allTopics = null;
 				try {
 					ObjectInputStream ois = new ObjectInputStream(new FileInputStream(serFile));
-					allTopics = (TopicList) ois.readObject();
+					allTopics = (EntityList<ForumTopic>) ois.readObject();
 					for (Iterator iterator = allTopics.iterator(); iterator.hasNext();) {
 						ForumTopic localTopic = (ForumTopic) iterator.next();
 					}
@@ -116,15 +117,15 @@ public class ForumSerializationTests extends BaseForumServiceTest {
 	@Test
 	public final void testReplyListSerialization() throws Exception {
 		ForumReply reply = createForumReply();
-		ReplyList replies = forumService.getForumTopicReplies(reply.getTopicUuid());
+		EntityList<ForumReply> replies = forumService.getForumTopicReplies(reply.getTopicUuid());
 		new SerializationUtil() {
 			
 			@Override
 			public void validateSerializable() { 
-				ReplyList allreplies = null;
+				EntityList<ForumReply> allreplies = null;
 				try {
 					ObjectInputStream ois = new ObjectInputStream(new FileInputStream(serFile));
-					allreplies = (ReplyList) ois.readObject();
+					allreplies = (EntityList<ForumReply>) ois.readObject();
 					for (Iterator iterator = allreplies.iterator(); iterator.hasNext();) {
 						ForumReply localreply = (ForumReply) iterator.next();
 					}

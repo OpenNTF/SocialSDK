@@ -18,13 +18,12 @@ import com.ibm.sbt.automation.core.utils.Trace;
 import com.ibm.sbt.security.authentication.AuthenticationException;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
+import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.connections.forums.Forum;
-import com.ibm.sbt.services.client.connections.forums.ForumList;
 import com.ibm.sbt.services.client.connections.forums.ForumReply;
 import com.ibm.sbt.services.client.connections.forums.ForumService;
 import com.ibm.sbt.services.client.connections.forums.ForumServiceException;
 import com.ibm.sbt.services.client.connections.forums.ForumTopic;
-import com.ibm.sbt.services.client.connections.forums.TopicList;
 import com.ibm.sbt.services.client.connections.forums.model.BaseForumEntity;
 import com.ibm.sbt.services.client.connections.forums.transformers.BaseForumTransformer;
 
@@ -298,7 +297,7 @@ public class BaseForumsTest extends BaseApiTest {
             loginConnections();
             
             ForumService forumService = getForumService();
-            ForumList forums = forumService.getMyForums();
+            EntityList<Forum> forums = forumService.getMyForums();
             forum = (Forum)forums.iterator().next();
             Trace.log("Last created forum: "+forum.getForumUuid());
             Trace.log("Last created forum: "+forum.getPublished());
@@ -441,7 +440,7 @@ public class BaseForumsTest extends BaseApiTest {
 		Response result = null;
 		try {
 			ForumService forumService = getForumService();
-			TopicList topicList = forumService.getForumTopics(forum.getForumUuid());
+			EntityList<ForumTopic> topicList = forumService.getForumTopics(forum.getForumUuid());
 						
 			String forumUuid = "";
 			

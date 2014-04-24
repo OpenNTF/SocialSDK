@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import com.ibm.sbt.services.BaseUnitTest;
 import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.test.lib.TestEnvironment;
 
 /**
@@ -71,7 +72,7 @@ public class CommunityServiceTest extends BaseUnitTest {
 		Member newMember = new Member(communityService,
 				id);
 		communityService.addMember(community.getCommunityUuid(), newMember);
-		MemberList members = communityService.getMembers(community
+		EntityList<Member> members = communityService.getMembers(community
 				.getCommunityUuid());
 		for (Member member : members) {
 			assertNotNull(member.getUserid());

@@ -31,12 +31,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-
 import org.junit.Test;
 
 import com.ibm.sbt.services.BaseUnitTest;
 import com.ibm.sbt.services.client.ClientServicesException;
-import com.ibm.sbt.services.client.connections.communities.CommunityList;
+import com.ibm.sbt.services.client.base.datahandlers.EntityList;
+import com.ibm.sbt.services.client.connections.communities.Community;
 import com.ibm.sbt.services.client.connections.communities.CommunityService;
 import com.ibm.sbt.services.client.connections.files.model.FileRequestParams;
 import com.ibm.sbt.test.lib.TestEnvironment;
@@ -494,7 +494,7 @@ public class FileServiceTest extends BaseUnitTest {
 	public void testUploadCommunityFile() throws Exception {
 
 		CommunityService communityService = new CommunityService();
-		CommunityList communityList = communityService.getMyCommunities();
+		EntityList<Community> communityList = communityService.getMyCommunities();
 		String communityUuid = null;
 		if (communityList.isEmpty()) {
 			String type = TestEnvironment.isSmartCloudEnvironment() ? "private" : "public";

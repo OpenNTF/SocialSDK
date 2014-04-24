@@ -1,5 +1,5 @@
 /*
- * �� Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -17,13 +17,13 @@
 package com.ibm.sbt.services.client.connections.forums;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.Test;
 
+import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.connections.forums.model.BaseForumEntity;
 
 /**
@@ -34,7 +34,7 @@ public class ForumServiceGetTests extends BaseForumServiceTest {
 
 	@Test
 	public void testGetAllForums() throws ForumServiceException {
-		ForumList entries = forumService.getAllForums();
+		EntityList<Forum> entries = forumService.getAllForums();
 		assertNotNull(entries);
 		for (BaseForumEntity forum : entries) {
 			assertValid((Forum)forum);
@@ -43,7 +43,7 @@ public class ForumServiceGetTests extends BaseForumServiceTest {
 
 	@Test
 	public void testGetMyForums() throws ForumServiceException {
-		ForumList entries = forumService.getMyForums();
+		EntityList<Forum> entries = forumService.getMyForums();
 		assertNotNull(entries);
 		for (BaseForumEntity forum : entries) {
 			assertValid((Forum)forum);
@@ -52,7 +52,7 @@ public class ForumServiceGetTests extends BaseForumServiceTest {
 
 	@Test
 	public void testGetPublicForums() throws ForumServiceException {
-		ForumList entries = forumService.getPublicForums();
+		EntityList<Forum> entries = forumService.getPublicForums();
 		assertNotNull(entries);
 		for (BaseForumEntity forum : entries) {
 			assertValid((Forum)forum);
@@ -61,7 +61,7 @@ public class ForumServiceGetTests extends BaseForumServiceTest {
 
 	@Test
 	public void testGetPublicForumTopics() throws ForumServiceException {
-		TopicList entries = forumService.getPublicForumTopics();
+		EntityList<ForumTopic> entries = forumService.getPublicForumTopics();
 		assertNotNull(entries);
 		for (BaseForumEntity topic : entries) {
 			assertValid((ForumTopic)topic);
@@ -70,7 +70,7 @@ public class ForumServiceGetTests extends BaseForumServiceTest {
 
 	@Test
 	public void testGetMyForumTopics() throws ForumServiceException {
-		TopicList entries = forumService.getMyForumTopics();
+		EntityList<ForumTopic> entries = forumService.getMyForumTopics();
 		assertNotNull(entries);
 		for (BaseForumEntity topic : entries) {
 			assertValid((ForumTopic)topic);
@@ -80,12 +80,12 @@ public class ForumServiceGetTests extends BaseForumServiceTest {
 
 	@Test
 	public void testGetForumReplies() throws ForumServiceException {
-		TopicList topics = forumService.getMyForumTopics();
+		EntityList<ForumTopic> topics = forumService.getMyForumTopics();
 		ForumTopic topic = (ForumTopic) topics.iterator().next();
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("topicUuid", topic.getTopicUuid());
 		
-		ReplyList entries = forumService.getForumReplies(parameters);
+		EntityList<ForumReply> entries = forumService.getForumReplies(parameters);
 		assertNotNull(entries);
 		for (BaseForumEntity reply : entries) {
 			assertValid((ForumReply)reply);
@@ -94,9 +94,9 @@ public class ForumServiceGetTests extends BaseForumServiceTest {
 
 	@Test
 	public void testGetRecommendations() throws ForumServiceException {
-		TopicList topics = forumService.getMyForumTopics();
+		EntityList<ForumTopic> topics = forumService.getMyForumTopics();
 		ForumTopic topic = (ForumTopic) topics.get(0);
-		RecommendationList recommendations = forumService.getRecommendations(topic.getTopicUuid());
+		EntityList<Recommendation> recommendations = forumService.getRecommendations(topic.getTopicUuid());
 		assertNotNull(recommendations);
 		for (Recommendation recommendation : recommendations) {
 			assertValid(recommendation);
@@ -105,7 +105,7 @@ public class ForumServiceGetTests extends BaseForumServiceTest {
 
 	@Test
 	public void testGetForumsTags() throws ForumServiceException {
-		TagList entries = forumService.getForumsTags();
+		EntityList<Tag> entries = forumService.getForumsTags();
 		assertNotNull(entries);
 		for (Tag tag : entries) {
 			assertValid((Tag)tag);
@@ -114,9 +114,9 @@ public class ForumServiceGetTests extends BaseForumServiceTest {
 
 	@Test
 	public void testGetForumTopicsTags() throws ForumServiceException {
-		ForumList forums = forumService.getPublicForums();
+		EntityList<Forum> forums = forumService.getPublicForums();
 		Forum forum = (Forum) forums.get(0);
-		TagList entries = forumService.getForumTopicsTags(forum.getForumUuid());
+		EntityList<Tag> entries = forumService.getForumTopicsTags(forum.getForumUuid());
 		assertNotNull(entries);
 		for (Tag tag : entries) {
 			assertValid((Tag)tag);

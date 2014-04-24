@@ -13,7 +13,8 @@ import org.junit.Test;
 
 import com.ibm.sbt.services.BaseUnitTest;
 import com.ibm.sbt.services.client.ClientServicesException;
-import com.ibm.sbt.services.client.connections.forums.TopicList;
+import com.ibm.sbt.services.client.base.datahandlers.EntityList;
+import com.ibm.sbt.services.client.connections.forums.ForumTopic;
 import com.ibm.sbt.services.client.connections.forums.model.BaseForumEntity;
 import com.ibm.sbt.test.lib.TestEnvironment;
 
@@ -43,7 +44,7 @@ public class CommunityServiceNoCommonCommunityTest extends BaseUnitTest {
 
 	@Test
 	public final void testGetPublicCommunities() throws Exception {
-		CommunityList communities = communityService.getPublicCommunities();
+		EntityList<Community> communities = communityService.getPublicCommunities();
 		for (Community community : communities) {
 			assertNotNull(community.getTitle());
 			assertNotNull(community.getCommunityUrl());
@@ -57,7 +58,7 @@ public class CommunityServiceNoCommonCommunityTest extends BaseUnitTest {
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("tag", "test");
 		parameters.put("ps", "5");
-		CommunityList communities = communityService
+		EntityList<Community> communities = communityService
 				.getPublicCommunities(parameters);
 		for (Community community : communities) {
 			assertNotNull(community.getTitle());
@@ -70,7 +71,7 @@ public class CommunityServiceNoCommonCommunityTest extends BaseUnitTest {
 
 	@Test
 	public final void testGetMyCommunities() throws Exception {
-		CommunityList communities = communityService.getMyCommunities();
+		EntityList<Community> communities = communityService.getMyCommunities();
 		for (Community community : communities) {
 			assertNotNull(community.getTitle());
 			assertNotNull(community.getCommunityUrl());
@@ -82,17 +83,17 @@ public class CommunityServiceNoCommonCommunityTest extends BaseUnitTest {
 
 	public final void testGetMyCommunitiesNotAuthenticated() throws Exception {
 		TestEnvironment.setRequiresAuthentication(false);
-		CommunityList communities = communityService.getMyCommunities();
+		EntityList<Community> communities = communityService.getMyCommunities();
 		
 		Assert.assertTrue(communities == null);
 	}
 
 	@Test
 	public final void testGetCommunityBookmarks() throws Exception {
-		CommunityList communities = communityService.getPublicCommunities();
+		EntityList<Community> communities = communityService.getPublicCommunities();
 		Community community = communities.iterator().next();
 
-		BookmarkList bookmarks = communityService.getBookmarks(community
+		EntityList<Bookmark> bookmarks = communityService.getBookmarks(community
 				.getCommunityUuid());
 
 		for (Bookmark bookmark : bookmarks) {
@@ -103,10 +104,10 @@ public class CommunityServiceNoCommonCommunityTest extends BaseUnitTest {
 
 	@Test
 	public final void testGetCommunityForumTopics() throws Exception {
-		CommunityList communities = communityService.getPublicCommunities();
+		EntityList<Community> communities = communityService.getPublicCommunities();
 		Community community = communities.iterator().next();
 
-		TopicList forumTopics = communityService.getForumTopics(community.getCommunityUuid());
+		EntityList<ForumTopic> forumTopics = communityService.getForumTopics(community.getCommunityUuid());
 
 		for (BaseForumEntity forumTopic : forumTopics) {
 			assertNotNull(forumTopic.getTitle());
@@ -115,7 +116,7 @@ public class CommunityServiceNoCommonCommunityTest extends BaseUnitTest {
 
 	@Test
 	public final void testGetMyInvites() throws Exception {
-		InviteList invites = communityService.getMyInvites();
+		EntityList<Invite> invites = communityService.getMyInvites();
 		if (invites.getTotalResults() > 0) {
 			for (Invite invite : invites) {
 				assertNotNull(invite.getTitle());
@@ -125,10 +126,10 @@ public class CommunityServiceNoCommonCommunityTest extends BaseUnitTest {
 
 	@Test
 	public final void testGetMembers() throws Exception {
-		CommunityList communities = communityService.getPublicCommunities();
+		EntityList<Community> communities = communityService.getPublicCommunities();
 		Community community = communities.iterator().next();
 
-		MemberList members = communityService.getMembers(community
+		EntityList<Member> members = communityService.getMembers(community
 				.getCommunityUuid());
 
 		for (Member member : members) {

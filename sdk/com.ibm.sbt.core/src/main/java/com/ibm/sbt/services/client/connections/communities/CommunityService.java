@@ -50,7 +50,6 @@ import com.ibm.sbt.services.client.connections.communities.transformers.Communit
 import com.ibm.sbt.services.client.connections.communities.transformers.InviteTransformer;
 import com.ibm.sbt.services.client.connections.communities.util.Messages;
 import com.ibm.sbt.services.client.connections.files.File;
-import com.ibm.sbt.services.client.connections.files.FileList;
 import com.ibm.sbt.services.client.connections.files.FileService;
 import com.ibm.sbt.services.client.connections.files.FileServiceException;
 import com.ibm.sbt.services.client.connections.forums.Forum;
@@ -192,7 +191,7 @@ public class CommunityService extends BaseService {
 	 * @return
 	 * @throws CommunityServiceException
 	 */
-	public CommunityList getPublicCommunities() throws CommunityServiceException {
+	public EntityList<Community> getPublicCommunities() throws CommunityServiceException {
 		return getPublicCommunities(null);
 	}
 	
@@ -203,7 +202,7 @@ public class CommunityService extends BaseService {
 	 * @return
 	 * @throws CommunityServiceException
 	 */
-	public CommunityList getPublicCommunities(Map<String, String> parameters) throws CommunityServiceException {
+	public EntityList<Community> getPublicCommunities(Map<String, String> parameters) throws CommunityServiceException {
         String requestUrl = CommunityUrls.COMMUNITIES_ALL.format(this);
 		
 		CommunityList communities = null;
@@ -254,7 +253,7 @@ public class CommunityService extends BaseService {
 	 * @return MemberList
 	 * @throws CommunityServiceException
 	 */
-	public MemberList getMembers(String communityUuid) throws CommunityServiceException {
+	public EntityList<Member> getMembers(String communityUuid) throws CommunityServiceException {
 		return getMembers(communityUuid, null);
 	}
 	
@@ -265,7 +264,7 @@ public class CommunityService extends BaseService {
 	 * @return MemberList
 	 * @throws CommunityServiceException
 	 */
-	public MemberList getMembers(String communityUuid, Map<String, String> parameters) throws CommunityServiceException {
+	public EntityList<Member> getMembers(String communityUuid, Map<String, String> parameters) throws CommunityServiceException {
 		if (StringUtil.isEmpty(communityUuid)){
 			throw new CommunityServiceException(null, Messages.NullCommunityIdException);
 		}
@@ -294,7 +293,7 @@ public class CommunityService extends BaseService {
 	 * @return
 	 * @throws CommunityServiceException
 	 */
-	public CommunityList getMyCommunities() throws CommunityServiceException {
+	public EntityList<Community> getMyCommunities() throws CommunityServiceException {
 		return getMyCommunities(null);
 	}
 	/**
@@ -303,7 +302,7 @@ public class CommunityService extends BaseService {
 	 * @return A list of communities of which the user is a member or owner
 	 * @throws CommunityServiceException
 	 */
-	public CommunityList getMyCommunities(Map<String, String> parameters) throws CommunityServiceException {
+	public EntityList<Community> getMyCommunities(Map<String, String> parameters) throws CommunityServiceException {
         String requestUrl = CommunityUrls.COMMUNITIES_MY.format(this);
 			
 		CommunityList communities = null;
@@ -321,7 +320,7 @@ public class CommunityService extends BaseService {
 		return communities;
 	}
 	
-	public CommunityList getSubCommunities(String communityUuid) throws CommunityServiceException {
+	public EntityList<Community> getSubCommunities(String communityUuid) throws CommunityServiceException {
 		return getSubCommunities(communityUuid,	null);
 	}
 	
@@ -333,7 +332,7 @@ public class CommunityService extends BaseService {
 	 * @return A list of communities
 	 * @throws CommunityServiceException
 	 */
-	public CommunityList getSubCommunities(String communityUuid, Map<String, String> parameters) throws CommunityServiceException {
+	public EntityList<Community> getSubCommunities(String communityUuid, Map<String, String> parameters) throws CommunityServiceException {
 		
 		if (StringUtil.isEmpty(communityUuid)){
 			throw new CommunityServiceException(null, Messages.NullCommunityIdException);
@@ -345,9 +344,9 @@ public class CommunityService extends BaseService {
 	
         String requestUrl = CommunityUrls.COMMUNITY_SUBCOMMUNITIES.format(this);
 		
-		CommunityList communities = null;
+		EntityList<Community> communities = null;
 		try {
-			communities = (CommunityList) getEntities(requestUrl, parameters, new CommunityFeedHandler(this));
+			communities = getEntities(requestUrl, parameters, new CommunityFeedHandler(this));
 		} catch (ClientServicesException e) {
 			throw new CommunityServiceException(e, Messages.SubCommunitiesException, communityUuid);
 		} catch (IOException e) {
@@ -357,10 +356,10 @@ public class CommunityService extends BaseService {
 		return communities;
 	}
 
-
-	public BookmarkList getBookmarks(String communityUuid) throws CommunityServiceException {
+	public EntityList<Bookmark> getBookmarks(String communityUuid) throws CommunityServiceException {
 		return getBookmarks(communityUuid,	null);
 	}
+
 	/**
 	 * Wrapper method to get bookmarks for a community.
 	 *
@@ -369,7 +368,7 @@ public class CommunityService extends BaseService {
 	 * @return Bookmarks of the given Community
 	 * @throws CommunityServiceException
 	 */
-	public BookmarkList getBookmarks(String communityUuid, Map<String, String> parameters) throws CommunityServiceException {
+	public EntityList<Bookmark> getBookmarks(String communityUuid, Map<String, String> parameters) throws CommunityServiceException {
 	
 		if (StringUtil.isEmpty(communityUuid)){
 			throw new CommunityServiceException(null, Messages.NullCommunityIdException);
@@ -380,9 +379,9 @@ public class CommunityService extends BaseService {
 		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
         String requestUrl = CommunityUrls.COMMUNITY_BOOKMARKS.format(this);
 		
-		BookmarkList bookmarks = null;
+		EntityList<Bookmark> bookmarks = null;
 		try {
-			bookmarks = (BookmarkList) getEntities(requestUrl, parameters, new BookmarkFeedHandler(this));
+			bookmarks = getEntities(requestUrl, parameters, new BookmarkFeedHandler(this));
 		} catch (ClientServicesException e) {
 			throw new CommunityServiceException(e, Messages.CommunityBookmarksException, communityUuid);
 		} catch (IOException e) {
@@ -466,6 +465,7 @@ public class CommunityService extends BaseService {
 		
 		return forumTopics;
 	}
+
 	/**
 	 * Wrapper method to create a Topic for default Forum of a Community
 	 * <p>
@@ -489,7 +489,7 @@ public class CommunityService extends BaseService {
      * @method getMyInvites
      * @return pending invites for the authenticated user
      */
-	public InviteList getMyInvites() throws CommunityServiceException {
+	public EntityList<Invite> getMyInvites() throws CommunityServiceException {
 		return getMyInvites(null);
 	}
 	 /**
@@ -502,7 +502,7 @@ public class CommunityService extends BaseService {
      * 				 The parameters must be exactly as they are supported by IBM Connections like ps, sortBy etc.
      * @return pending invites for the authenticated user
      */
-	public InviteList getMyInvites(Map<String, String> parameters) throws CommunityServiceException {
+	public EntityList<Invite> getMyInvites(Map<String, String> parameters) throws CommunityServiceException {
 		
 		if(null == parameters){
 			parameters = new HashMap<String, String>();
@@ -1000,7 +1000,7 @@ public class CommunityService extends BaseService {
 	 * @return FileList
 	 * @throws CommunityServiceException
 	 */
-	public FileList getCommunityFiles(String communityId, HashMap<String, String> params) throws CommunityServiceException {
+	public EntityList<File> getCommunityFiles(String communityId, HashMap<String, String> params) throws CommunityServiceException {
 		FileService fileService = new FileService(this.endpoint);
 		try {
 			return fileService.getCommunityFiles(communityId, params);

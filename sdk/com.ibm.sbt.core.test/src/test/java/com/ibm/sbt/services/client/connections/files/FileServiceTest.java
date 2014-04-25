@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2012
+ * © Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -288,7 +288,7 @@ public class FileServiceTest extends BaseUnitTest {
 		String testFileId = file.getFileId();
 		fileService.lock(testFileId);
 		File fileEntry = fileService.getFile(testFileId, true);
-		assertEquals(fileEntry.getLockType(), "HARD");
+		assertEquals("HARD", fileEntry.getLockType());
 	}
 
 	@Test 
@@ -305,7 +305,7 @@ public class FileServiceTest extends BaseUnitTest {
 		String testFileId = file.getFileId();
 		fileService.unlock(testFileId);
 		File fileEntry = fileService.getFile(testFileId, true);
-		assertEquals(fileEntry.getLockType(), "NONE");
+		assertEquals("NONE", fileEntry.getLockType());
 	}
 	
 	@Test
@@ -346,8 +346,7 @@ public class FileServiceTest extends BaseUnitTest {
 		String comment = "Junit Comment - Added from FileServiceTest, testAddCommentToFile";
 		Comment commentEntry;
 		commentEntry = fileService.addCommentToFile(fileEntry.getFileId(), comment, fileEntry.getAuthor().getId() , null);
-		assertEquals(commentEntry.getComment(),
-				"Junit Comment - Added from FileServiceTest, testAddCommentToFile");
+		assertEquals(comment, commentEntry.getComment());
 	}
 
 	@Test
@@ -358,8 +357,7 @@ public class FileServiceTest extends BaseUnitTest {
 		File fileEntry = fileService.getFile(testFileId, true);
 		String comment = "Junit Comment - Added from FileServiceTest, testAddCommentToMyFile";
 		Comment commentEntry = fileService.addCommentToFile(fileEntry.getFileId(), comment, null);
-		assertEquals(commentEntry.getComment(),
-				"Junit Comment - Added from FileServiceTest, testAddCommentToMyFile");
+		assertEquals(comment, commentEntry.getComment());
 	}
 	
 	@Test
@@ -416,7 +414,7 @@ public class FileServiceTest extends BaseUnitTest {
 		String fileId = listOfFiles.get(0).getFileId();
 		String comment = "TestCreateComment From FileServiceTest";
 		Comment commentObject = fileService.createComment(fileId, comment);
-		assertEquals(commentObject.getComment(), comment);
+		assertEquals(comment, commentObject.getComment());
 	}
 	
 	@Test

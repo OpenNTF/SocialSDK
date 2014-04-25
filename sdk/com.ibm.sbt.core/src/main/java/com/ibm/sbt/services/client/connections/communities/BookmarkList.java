@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -15,16 +15,19 @@
  */
 package com.ibm.sbt.services.client.connections.communities;
 
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
-import com.ibm.sbt.services.client.base.ConnectionsConstants;
-import com.ibm.sbt.services.client.base.ConnectionsFeedXpath;
-import com.ibm.sbt.services.client.connections.communities.feedhandler.BookmarkFeedHandler;
+
 import com.ibm.sbt.services.client.Response;
+import com.ibm.sbt.services.client.base.ConnectionsFeedXpath;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
+import com.ibm.sbt.services.client.connections.communities.feedhandler.BookmarkFeedHandler;
 
 /**
  * 
@@ -59,7 +62,7 @@ public class BookmarkList extends EntityList<Bookmark> {
 	
 	@Override
 	protected ArrayList<Bookmark> createEntities() {
-		XmlDataHandler dataHandler = new XmlDataHandler(getData(), ConnectionsConstants.nameSpaceCtx);
+		XmlDataHandler dataHandler = new XmlDataHandler(getData(), nameSpaceCtx);
 		ArrayList<Bookmark> bookmarks = new ArrayList<Bookmark>();
 		List<Node> entries = dataHandler.getEntries(ConnectionsFeedXpath.Entry);
 		for (Node node: entries) {
@@ -70,7 +73,7 @@ public class BookmarkList extends EntityList<Bookmark> {
 	}
 	
 	private XmlDataHandler getMetaDataHandler(){
-		return new XmlDataHandler(getData(), ConnectionsConstants.nameSpaceCtx);
+		return new XmlDataHandler(getData(), nameSpaceCtx);
 	}
 
 	@Override

@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -15,8 +15,9 @@
  */
 package com.ibm.sbt.services.client.connections.bookmarks;
 
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.v4_0;
+
 import com.ibm.sbt.services.client.base.BaseService;
-import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.NamedUrlPart;
 import com.ibm.sbt.services.client.base.URLBuilder;
 import com.ibm.sbt.services.client.base.Version;
@@ -30,11 +31,11 @@ import com.ibm.sbt.services.client.base.VersionedUrl;
 
 public enum BookmarkUrls {
 	
-	ALL(new VersionedUrl(ConnectionsConstants.v4_0, "dogear/atom")),
-	APP(new VersionedUrl(ConnectionsConstants.v4_0, "dogear/api/app")),
-	POPULAR(new VersionedUrl(ConnectionsConstants.v4_0, "dogear/atom/popular")),
-	MYNOTIFICATIONS(new VersionedUrl(ConnectionsConstants.v4_0, "dogear/atom/mynotifications")),
-	MYSENTNOTIFICATIONS(new VersionedUrl(ConnectionsConstants.v4_0, "dogear/atom/mysentnotifications"));
+	ALL(new VersionedUrl(v4_0, 					"dogear/atom")),
+	APP(new VersionedUrl(v4_0, 					"dogear/api/app")),
+	POPULAR(new VersionedUrl(v4_0, 				"dogear/atom/popular")),
+	MYNOTIFICATIONS(new VersionedUrl(v4_0, 		"dogear/atom/mynotifications")),
+	MYSENTNOTIFICATIONS(new VersionedUrl(v4_0, 	"dogear/atom/mysentnotifications"));
 	
 	private URLBuilder builder;
 	

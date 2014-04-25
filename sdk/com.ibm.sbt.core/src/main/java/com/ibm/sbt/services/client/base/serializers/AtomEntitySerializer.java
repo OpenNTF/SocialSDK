@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -16,7 +16,23 @@
 
 package com.ibm.sbt.services.client.base.serializers;
 
-import java.text.SimpleDateFormat;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.AUTHOR;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.CATEGORY;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.CONTENT;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.CONTRIBUTOR;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.ENTRY;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.ID;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.LABEL;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.PUBLISHED;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.SCHEME;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.SUMMARY;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.TERM;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.TEXT;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.TITLE;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.TYPE;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.UPDATED;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.dateFormat;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,16 +40,14 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 import com.ibm.sbt.services.client.base.AtomEntity;
-import com.ibm.sbt.services.client.base.ConnectionsConstants.Namespaces;
+import com.ibm.sbt.services.client.base.ConnectionsConstants.Namespace;
 
 /**
  * @author Mario Duarte
+ * @author Carlos Manias
  *
  */
 public class AtomEntitySerializer<T extends AtomEntity> extends BaseEntitySerializer<T> {
-	
-	private static SimpleDateFormat dateFormat = 
-			new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");	
 
 	public AtomEntitySerializer(T entity) {
 		super(entity);
@@ -55,46 +69,51 @@ public class AtomEntitySerializer<T extends AtomEntity> extends BaseEntitySerial
 	}
 
 	protected Node entry() {
-		return rootNode(element(Namespaces.ATOM, "entry"));
+		return rootNode(element(Namespace.ATOM.getUrl(), ENTRY));
 	}
 	
 	protected Element title() {
-		return textElement("title", entity.getTitle(), attribute("type", "text"));
+		return textElement(TITLE, entity.getTitle(), attribute(TYPE, TEXT));
 	}
 	
 	protected Element id() {
-		return textElement("id", entity.getId());
+		return textElement(ID, entity.getId());
 	}
 	
 	protected Element published() {
-		return textElement("published", DateSerializer.toString(dateFormat, entity.getPublished()));
+		return textElement(PUBLISHED, DateSerializer.toString(dateFormat, entity.getPublished()));
 	}
 	
 	protected Element updated() {
-		return textElement("updated", DateSerializer.toString(dateFormat, entity.getUpdated()));
+		return textElement(UPDATED, DateSerializer.toString(dateFormat, entity.getUpdated()));
 	}
 	
 	protected Element summary() {
-		return textElement("summary", entity.getSummary(), attribute("type", "text"));
-	}
+		return textElement(SUMMARY, entity.getSummary(), attribute(TYPE, TEXT)); }
 	
 	protected Element content() {
-		return textElement("content", entity.getContent(), attribute("type", "text"));
+		return textElement(CONTENT, entity.getContent(), attribute(TYPE, TEXT));
 	}
 	
 	protected Node author() {
-		return (new PersonSerializer(entity.getAuthor())).xmlNode("author");
+		return (new PersonSerializer(entity.getAuthor())).xmlNode(AUTHOR);
 	}
 	
 	protected Node contributor() {
-		return (new PersonSerializer(entity.getContributor())).xmlNode("contributor");
+		return (new PersonSerializer(entity.getContributor())).xmlNode(CONTRIBUTOR);
+	}
+
+	protected Element category(String scheme, String term) {
+		return element(CATEGORY, 
+				attribute(SCHEME, scheme), 
+				attribute(TERM, term));
 	}
 
 	protected Element categoryType(String type) {
-		return element("category", 
-				attribute("scheme", "tag:ibm.com,2006:td/type"), 
-				attribute("term", type), 
-				attribute("label", type));
+		return element(CATEGORY, 
+				attribute(SCHEME, Namespace.TAG.getUrl()), 
+				attribute(TERM, type), 
+				attribute(LABEL, type));
 	}
 	
 	protected List<Element> tags() {
@@ -102,9 +121,9 @@ public class AtomEntitySerializer<T extends AtomEntity> extends BaseEntitySerial
 		if(entity.getBaseTags() != null) {
 			List<String> list = entity.getBaseTags();
 			for(String tag : list) {
-				elements.add(element("category", 
-						attribute("term", tag),
-						attribute("label", tag)));
+				elements.add(element(CATEGORY, 
+						attribute(TERM, tag),
+						attribute(LABEL, tag)));
 			}
 		}
 		return elements;

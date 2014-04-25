@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -15,17 +15,21 @@
  */
 package com.ibm.sbt.services.client.connections.common;
 
+import org.w3c.dom.Node;
+
 import com.ibm.commons.util.StringUtil;
+import com.ibm.commons.xml.NamespaceContext;
+import com.ibm.commons.xml.xpath.XPathExpression;
+import com.ibm.sbt.services.client.base.AtomEntity;
 import com.ibm.sbt.services.client.base.AtomXPath;
-import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.base.BaseService;
-import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
+import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 
 /**
  * @author Mario Duarte
  *
  */
-public class Person extends BaseEntity {
+public class Person extends AtomEntity {
 	
 	public Person() {
 	}
@@ -36,8 +40,20 @@ public class Person extends BaseEntity {
 		setUserid(userid);
 	}
 	
-	public Person(BaseService svc, DataHandler<?> dataHandler) {
+	public Person(BaseService svc, XmlDataHandler dataHandler) {
 		super(svc, dataHandler);
+	}
+
+    /**
+     * 
+     * @param service
+     * @param node
+     * @param namespaceCtx
+     * @param xpathExpression
+     */
+	public Person(BaseService service, Node node, NamespaceContext namespaceCtx, 
+			XPathExpression xpathExpression) {
+		super(service, node, namespaceCtx, xpathExpression);
 	}
 	
 	public String getId() {

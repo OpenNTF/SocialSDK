@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2014
+ * © Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -15,8 +15,9 @@
  */
 package com.ibm.sbt.services.client.connections.profiles;
 
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.v4_0;
+
 import com.ibm.sbt.services.client.base.BaseService;
-import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.NamedUrlPart;
 import com.ibm.sbt.services.client.base.URLBuilder;
 import com.ibm.sbt.services.client.base.URLContainer;
@@ -29,24 +30,31 @@ import com.ibm.sbt.services.client.base.VersionedUrl;
  *
  */
 public enum ProfileUrls implements URLContainer {
-	PROFILE(new VersionedUrl(ConnectionsConstants.v4_0, "{profiles}/{authType}/atom/profile.do")),
-	PROFILE_ENTRY(new VersionedUrl(ConnectionsConstants.v4_0, "{profiles}/{authType}/atom/profileEntry.do")),
-	PHOTO(new VersionedUrl(ConnectionsConstants.v4_0, "{profiles}/{authType}/atom/photo.do")),
-	TAGS(new VersionedUrl(ConnectionsConstants.v4_0, "{profiles}/{authType}/atom/profileTags.do")),
-	SEARCH(new VersionedUrl(ConnectionsConstants.v4_0, "{profiles}/{authType}/atom/search.do")),
-	CONNECTIONS(new VersionedUrl(ConnectionsConstants.v4_0, "{profiles}/{authType}/atom/connections.do")),
-	CONNECTION(new VersionedUrl(ConnectionsConstants.v4_0, "{profiles}/{authType}/atom/connection.do")),
-	CONNECTIONS_IN_COMMON(new VersionedUrl(ConnectionsConstants.v4_0, "{profiles}/{authType}/atom/connectionsInCommon.do")),
-	REPORTING_CHAIN(new VersionedUrl(ConnectionsConstants.v4_0, "{profiles}/{authType}/atom/reportingChain.do")),
-	PEOPLE_MANAGED(new VersionedUrl(ConnectionsConstants.v4_0, "{profiles}/{authType}/atom/peopleManaged.do")),
-	MESSAGES_ALL(new VersionedUrl(ConnectionsConstants.v4_0, "{profiles}/{authType}/atom/mv/theboard/entries/all.do")),
-	MESSAGE_BOARD_ENTRIES(new VersionedUrl(ConnectionsConstants.v4_0, "{profiles}/{authType}/atom/mv/theboard/entries.do")),
-	MESSAGE_BOARD_COMMENTS(new VersionedUrl(ConnectionsConstants.v4_0, "{profiles}/{authType}/atom/mv/theboard/comments.do")),
-	MESSAGES_COLLEAGUES(new VersionedUrl(ConnectionsConstants.v4_0, "{profiles}/{authType}/atom/mv/theboard/entries/related.do")),
+	/**
+	 * NON-ADMIN URLS
+	 */
+	PROFILE(new VersionedUrl(v4_0, 					"{profiles}/{authType}/atom/profile.do?{userId}")),
+	PROFILE_ENTRY(new VersionedUrl(v4_0, 			"{profiles}/{authType}/atom/profileEntry.do")),
+	PHOTO(new VersionedUrl(v4_0, 					"{profiles}/{authType}/atom/photo.do?{userId}")),
+	TAGS(new VersionedUrl(v4_0, 					"{profiles}/{authType}/atom/profileTags.do?{sourceId}&{targetId}")),
+	SEARCH(new VersionedUrl(v4_0, 					"{profiles}/{authType}/atom/search.do")),
+	CONNECTIONS(new VersionedUrl(v4_0, 				"{profiles}/{authType}/atom/connections.do?{userId}")),
+	CONNECTION(new VersionedUrl(v4_0, 				"{profiles}/{authType}/atom/connection.do?connectionId={connectionId}")),
+	CHECK_COLLEAGUE(new VersionedUrl(v4_0, 			"{profiles}/{authType}/atom/connection.do?{sourceId}&{targetId}&connectionType=colleague")),
+	CONNECTIONS_IN_COMMON(new VersionedUrl(v4_0, 	"{profiles}/{authType}/atom/connectionsInCommon.do?{userId}")),
+	REPORTING_CHAIN(new VersionedUrl(v4_0, 			"{profiles}/{authType}/atom/reportingChain.do?{userId}")),
+	PEOPLE_MANAGED(new VersionedUrl(v4_0, 			"{profiles}/{authType}/atom/peopleManaged.do?{userId}")),
+	MESSAGES_ALL(new VersionedUrl(v4_0, 			"{profiles}/{authType}/atom/mv/theboard/entries/all.do")),
+	MESSAGE_BOARD_ENTRIES(new VersionedUrl(v4_0, 	"{profiles}/{authType}/atom/mv/theboard/entries.do")),
+	MESSAGE_BOARD_COMMENTS(new VersionedUrl(v4_0, 	"{profiles}/{authType}/atom/mv/theboard/comments.do")),
+	MESSAGES_COLLEAGUES(new VersionedUrl(v4_0, 		"{profiles}/{authType}/atom/mv/theboard/entries/related.do")),
+	MY_USER_ID(new VersionedUrl(v4_0, 				"{connections}/opensocial/basic/rest/people/@me/")),
 
-	//ADMIN urls
-	ADMIN_PROFILE_ENTRY(new VersionedUrl(ConnectionsConstants.v4_0, "{profiles}/{authType}/admin/atom/profileEntry.do")),
-	ADMIN_PROFILES(new VersionedUrl(ConnectionsConstants.v4_0, "{profiles}/{authType}/admin/atom/profiles.do"));
+	/**
+	 * ADMIN URLS
+	 */
+	ADMIN_PROFILE_ENTRY(new VersionedUrl(v4_0, 		"{profiles}/{authType}/admin/atom/profileEntry.do?{userId}")),
+	ADMIN_PROFILES(new VersionedUrl(v4_0, 			"{profiles}/{authType}/admin/atom/profiles.do"));
 	
 	private URLBuilder builder;
 	
@@ -60,6 +68,10 @@ public enum ProfileUrls implements URLContainer {
 
 	public String getPattern(Version version){
 		return builder.getPattern(version).getUrlPattern();
+	}
+	
+	public static NamedUrlPart getConnectionId(String value){
+		return new NamedUrlPart("connectionId", value);
 	}
 
 }

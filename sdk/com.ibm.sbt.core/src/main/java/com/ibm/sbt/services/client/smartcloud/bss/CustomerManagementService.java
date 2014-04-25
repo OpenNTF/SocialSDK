@@ -261,7 +261,7 @@ public class CustomerManagementService extends BssService {
     		HashMap<String, String> params = new HashMap<String, String>();
     		params.put("_namedQuery", "getCustomersByContactEmail");
     		params.put("emailAddress", contactEmail);
-			return (EntityList<JsonEntity>)getEntities(API_RESOURCE_CUSTOMER, null, getJsonFeedHandler());
+			return (EntityList<JsonEntity>)getEntities(API_RESOURCE_CUSTOMER, params, getJsonFeedHandler());
 		} catch (Exception e) {
 			throw new BssException(e, "Error retrieving customer list by contact email {0} caused by {1}", contactEmail, e.getMessage());
 		}
@@ -283,7 +283,7 @@ public class CustomerManagementService extends BssService {
     		HashMap<String, String> params = new HashMap<String, String>();
     		params.put("_namedQuery", "getCustomersByContactEmail");
     		params.put("emailAddress", subscriberEmail);
-			return (EntityList<JsonEntity>)getEntities(API_RESOURCE_CUSTOMER, null, getJsonFeedHandler());
+			return (EntityList<JsonEntity>)getEntities(API_RESOURCE_CUSTOMER, params, getJsonFeedHandler());
 		} catch (Exception e) {
 			throw new BssException(e, "Error retrieving customer list by subscriber email {0} caused by {1}", subscriberEmail, e.getMessage());
 		}
@@ -303,9 +303,9 @@ public class CustomerManagementService extends BssService {
     	}
     	try {
     		HashMap<String, String> params = new HashMap<String, String>();
-    		params.put("_namedQuery", "getCustomersByContactEmail");
+    		params.put("_namedQuery", "getCustomerByOrgName");
     		params.put("orgName", orgName);
-			return (EntityList<JsonEntity>)getEntities(API_RESOURCE_CUSTOMER, null, getJsonFeedHandler());
+			return (EntityList<JsonEntity>)getEntities(API_RESOURCE_CUSTOMER, params, getJsonFeedHandler());
 		} catch (Exception e) {
 			throw new BssException(e, "Error retrieving customer list by organization name {0} caused by {1]", orgName, e.getMessage());
 		}

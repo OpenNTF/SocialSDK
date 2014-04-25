@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -59,14 +59,6 @@ public class FollowServiceTest extends BaseUnitTest {
 		community = community.save();
 	}
 
-	@After
-	public void deleteCommunity() throws Exception {
-		if (!StringUtil.isEmpty(community.getCommunityUuid())) {
-			CommunityService communityService = new CommunityService();
-			communityService.deleteCommunity(community.getCommunityUuid());
-		}
-	}
-	
 	@Test
 	public void getFollowedResource() throws FollowServiceException, CommunityServiceException {
 		FollowedResource resource = followService.getFollowedResource(Source.COMMUNITIES.get(),Type.COMMUNITY.get(),community.getCommunityUuid());
@@ -93,4 +85,12 @@ public class FollowServiceTest extends BaseUnitTest {
 		assertEquals(success, true);
 	}
 
+	@After
+	public void deleteCommunity() throws Exception {
+		if (!StringUtil.isEmpty(community.getCommunityUuid())) {
+			CommunityService communityService = new CommunityService();
+			communityService.deleteCommunity(community.getCommunityUuid());
+		}
+	}
+	
 }

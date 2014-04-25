@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2012
+ * © Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -31,12 +31,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-
 import org.junit.Test;
 
 import com.ibm.sbt.services.BaseUnitTest;
 import com.ibm.sbt.services.client.ClientServicesException;
-import com.ibm.sbt.services.client.connections.communities.CommunityList;
+import com.ibm.sbt.services.client.base.datahandlers.EntityList;
+import com.ibm.sbt.services.client.connections.communities.Community;
 import com.ibm.sbt.services.client.connections.communities.CommunityService;
 import com.ibm.sbt.services.client.connections.files.model.FileRequestParams;
 import com.ibm.sbt.test.lib.TestEnvironment;
@@ -288,7 +288,7 @@ public class FileServiceTest extends BaseUnitTest {
 		String testFileId = file.getFileId();
 		fileService.lock(testFileId);
 		File fileEntry = fileService.getFile(testFileId, true);
-		assertEquals(fileEntry.getLockType(), "HARD");
+		assertEquals("HARD", fileEntry.getLockType());
 	}
 
 	@Test 
@@ -305,7 +305,7 @@ public class FileServiceTest extends BaseUnitTest {
 		String testFileId = file.getFileId();
 		fileService.unlock(testFileId);
 		File fileEntry = fileService.getFile(testFileId, true);
-		assertEquals(fileEntry.getLockType(), "NONE");
+		assertEquals("NONE", fileEntry.getLockType());
 	}
 	
 	@Test
@@ -346,8 +346,7 @@ public class FileServiceTest extends BaseUnitTest {
 		String comment = "Junit Comment - Added from FileServiceTest, testAddCommentToFile";
 		Comment commentEntry;
 		commentEntry = fileService.addCommentToFile(fileEntry.getFileId(), comment, fileEntry.getAuthor().getId() , null);
-		assertEquals(commentEntry.getComment(),
-				"Junit Comment - Added from FileServiceTest, testAddCommentToFile");
+		assertEquals(comment, commentEntry.getComment());
 	}
 
 	@Test
@@ -358,8 +357,7 @@ public class FileServiceTest extends BaseUnitTest {
 		File fileEntry = fileService.getFile(testFileId, true);
 		String comment = "Junit Comment - Added from FileServiceTest, testAddCommentToMyFile";
 		Comment commentEntry = fileService.addCommentToFile(fileEntry.getFileId(), comment, null);
-		assertEquals(commentEntry.getComment(),
-				"Junit Comment - Added from FileServiceTest, testAddCommentToMyFile");
+		assertEquals(comment, commentEntry.getComment());
 	}
 	
 	@Test
@@ -416,7 +414,7 @@ public class FileServiceTest extends BaseUnitTest {
 		String fileId = listOfFiles.get(0).getFileId();
 		String comment = "TestCreateComment From FileServiceTest";
 		Comment commentObject = fileService.createComment(fileId, comment);
-		assertEquals(commentObject.getComment(), comment);
+		assertEquals(comment, commentObject.getComment());
 	}
 	
 	@Test
@@ -494,7 +492,7 @@ public class FileServiceTest extends BaseUnitTest {
 	public void testUploadCommunityFile() throws Exception {
 
 		CommunityService communityService = new CommunityService();
-		CommunityList communityList = communityService.getMyCommunities();
+		EntityList<Community> communityList = communityService.getMyCommunities();
 		String communityUuid = null;
 		if (communityList.isEmpty()) {
 			String type = TestEnvironment.isSmartCloudEnvironment() ? "private" : "public";

@@ -845,7 +845,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
                 }
             });
             
-            var url = this.constructUrl(consts.WikiRecycleBin, null, { "wikiLabel" : encodeURIComponent(wikiLabel) });
+            var url = this.constructUrl(consts.WikiPages, null, { "wikiLabel" : encodeURIComponent(wikiLabel) });
             
             return this.getEntities(url, options, callbacks);
         },

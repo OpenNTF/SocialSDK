@@ -181,7 +181,7 @@ public class AtomEntity extends BaseEntity {
      * @return {Person} author of the ATOM entry document
      */
     public Person getAuthor() {
-		if (fields.containsKey(AtomXPath.author.getName())) {
+    	if (fields.containsKey(AtomXPath.author.getName())) {
 			return (Person)fields.get(AtomXPath.author.getName());
 		}
 		if (dataHandler != null){
@@ -198,7 +198,7 @@ public class AtomEntity extends BaseEntity {
      * @return {Person} contributor of the ATOM entry document
      */
     public Person getContributor() {
-		if (fields.containsKey(AtomXPath.contributor.getName())) {
+    	if (fields.containsKey(AtomXPath.contributor.getName())) {
 			return (Person)fields.get(AtomXPath.contributor.getName());
 		}
 		if (dataHandler != null){
@@ -207,16 +207,16 @@ public class AtomEntity extends BaseEntity {
 		}
 		return null;
     }
-    
-    /**
-     * Sets the contributor from ATOM entry document.
-     * 
-     * @method setContributor
-     * @param {Person} contributor of the ATOM entry document
-     */
-    public void setContributor(Person person) {
-    	this.setAsObject(AtomXPath.contributor, person);
-    }
+
+	/**
+	 * Sets the contributor from ATOM entry document.
+	 * 
+	 * @method setContributor
+	 * @param {Person} contributor of the ATOM entry document
+	 */
+	public void setContributor(Person person) {
+		this.setAsObject(AtomXPath.contributor, person);
+	}
     
     /**
      * Return the published date from ATOM entry document.
@@ -300,6 +300,15 @@ public class AtomEntity extends BaseEntity {
 	 */
 	public void setBaseTags(List<String> tags) {
 		setAsList(AtomXPath.tags, tags);
+	}
+
+	/**
+	 * 
+	 * @return dataHandler
+	 */
+	@Override
+	public XmlDataHandler getDataHandler(){
+		return (XmlDataHandler)dataHandler;
 	}
 	
 	/**

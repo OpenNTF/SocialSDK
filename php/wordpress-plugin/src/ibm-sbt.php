@@ -4,7 +4,7 @@
  * Plugin Name: Social Business Toolkit integration plugin
  * Plugin URI: https://github.com/OpenNTF/SocialSDK/
  * Description: This plugin provides access to the IBM Social Business Toolkit.
- * Version: 1.0
+ * Version: 1.1
  * Text Domain: ibm-sbt
  * Author: Benjamin Jakobus
  * Author URI: https://github.com/OpenNTF/SocialSDK/
@@ -54,7 +54,7 @@ spl_autoload_register(function ($class)
 });
 
 // IBM SBTK Wordpress plugin security settings
-require_once 'ibm-sbt-security-config.php';
+require_once 'core/security.php';
 
 // IBM SBTK Wordpress plugin specific constants
 require_once 'ibm-sbt-constants.php';
@@ -108,7 +108,8 @@ if ($sessions !== false) {
 // If we are posting date to this page, then create an options update.
 // Otherwise display the settings page as normal
 if (isset($_POST['endpoint_name'])) {
-	$optionsUpdate = new SBTEndpointUpdate();
+	$settings = new SBTSettings();
+	$settings->update();
 } else {
 	if(is_admin()) {
 		$mySettingsPage = new SBTPluginSettings();

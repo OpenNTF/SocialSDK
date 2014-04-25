@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 package com.ibm.sbt.services.client.connections.forums.model;
 
 import com.ibm.sbt.services.client.base.BaseService;
-import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
+import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.connections.common.Person;
 
 
@@ -29,36 +29,7 @@ import com.ibm.sbt.services.client.connections.common.Person;
 @Deprecated
 public class Contributor extends Person {
 
-	public Contributor(BaseService svc, DataHandler<?> dataHandler) {
+	public Contributor(BaseService svc, XmlDataHandler dataHandler) {
 		super(svc, dataHandler);
 	}
-	
-//	private String name;
-//	private String uid;
-//	private String email;
-//	private String state;
-//	DataHandler<?> dataHandler;
-//	public Contributor(DataHandler<?> dataHandler) {
-//		this.dataHandler = dataHandler;
-//	}
-//
-//	public String getUid() {
-//		return dataHandler.getAsString(ForumsXPath.contributorUserid);
-//	}
-//
-//
-//	public String getName() {
-//		return dataHandler.getAsString(ForumsXPath.contributorName);
-//	}
-//
-//	public String getEmail() {
-//		return dataHandler.getAsString(ForumsXPath.contributorEmail);
-//	}
-//
-//
-//	public String getState() {
-//		return dataHandler.getAsString(ForumsXPath.contributorUserState);
-//	}
-//
-
 }

@@ -3,31 +3,27 @@
  */
 package com.ibm.sbt.automation.core.test.connections;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import junit.framework.Assert;
-
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.automation.core.test.BaseApiTest;
-import com.ibm.sbt.automation.core.test.BaseTest.AuthType;
 import com.ibm.sbt.automation.core.utils.Trace;
 import com.ibm.sbt.security.authentication.AuthenticationException;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
+import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.connections.forums.Forum;
-import com.ibm.sbt.services.client.connections.forums.ForumList;
 import com.ibm.sbt.services.client.connections.forums.ForumReply;
 import com.ibm.sbt.services.client.connections.forums.ForumService;
 import com.ibm.sbt.services.client.connections.forums.ForumServiceException;
 import com.ibm.sbt.services.client.connections.forums.ForumTopic;
-import com.ibm.sbt.services.client.connections.forums.TopicList;
 import com.ibm.sbt.services.client.connections.forums.model.BaseForumEntity;
 import com.ibm.sbt.services.client.connections.forums.transformers.BaseForumTransformer;
 
@@ -301,11 +297,11 @@ public class BaseForumsTest extends BaseApiTest {
             loginConnections();
             
             ForumService forumService = getForumService();
-            ForumList forums = forumService.getMyForums();
+            EntityList<Forum> forums = forumService.getMyForums();
             forum = (Forum)forums.iterator().next();
             Trace.log("Last created forum: "+forum.getForumUuid());
             Trace.log("Last created forum: "+forum.getPublished());
-            Iterator<BaseForumEntity> i = forums.iterator();
+            Iterator<Forum> i = forums.iterator();
             while (i.hasNext()) {
             	BaseForumEntity c= i.next();
             	Trace.log("Last created forum: "+((Forum)c).getForumUuid());
@@ -444,7 +440,7 @@ public class BaseForumsTest extends BaseApiTest {
 		Response result = null;
 		try {
 			ForumService forumService = getForumService();
-			TopicList topicList = forumService.getForumTopics(forum.getForumUuid());
+			EntityList<ForumTopic> topicList = forumService.getForumTopics(forum.getForumUuid());
 						
 			String forumUuid = "";
 			

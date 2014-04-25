@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2014
+ * © Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -16,7 +16,7 @@
 package com.ibm.sbt.services.client.connections.search;
 
 import com.ibm.sbt.services.client.base.BaseService;
-import com.ibm.sbt.services.client.base.ConnectionsConstants;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.*;
 import com.ibm.sbt.services.client.base.NamedUrlPart;
 import com.ibm.sbt.services.client.base.URLBuilder;
 import com.ibm.sbt.services.client.base.URLContainer;
@@ -29,9 +29,9 @@ import com.ibm.sbt.services.client.base.VersionedUrl;
  *
  */
 public enum SearchUrls implements URLContainer {
-	SEARCH(new VersionedUrl(ConnectionsConstants.v4_0, "{search}/{authType}/atom/search")),
-	MYSEARCH(new VersionedUrl(ConnectionsConstants.v4_0, "{search}/{authType}/atom/mysearch")),
-	SCOPES(new VersionedUrl(ConnectionsConstants.v4_0, "{search}/{authType}/atom/scopes"));
+	SEARCH(new VersionedUrl(v4_0, "{search}/{authType}/atom/search")),
+	MYSEARCH(new VersionedUrl(v4_0, "{search}/{authType}/atom/mysearch")),
+	SCOPES(new VersionedUrl(v4_0, "{search}/{authType}/atom/scopes"));
 
 	private URLBuilder builder;
 	

@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -15,6 +15,8 @@
  */
 package com.ibm.sbt.services.client.connections.cmisfiles;
 
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
+
 import java.util.Date;
 
 import org.w3c.dom.Node;
@@ -23,11 +25,10 @@ import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.base.AtomEntity;
 import com.ibm.sbt.services.client.base.AtomXPath;
-import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
+import com.ibm.sbt.services.client.connections.cmisfiles.model.CMISAuthor;
 import com.ibm.sbt.services.client.connections.cmisfiles.model.CMISFileXPath;
 import com.ibm.sbt.services.client.connections.cmisfiles.model.CMISModifier;
-import com.ibm.sbt.services.client.connections.cmisfiles.model.CMISAuthor;
 
 /**
  * @Represents Connections CMIS File
@@ -164,7 +165,7 @@ public class CMISFile extends AtomEntity {
 	public CMISModifier getModifier() {
 		if(null == modifierEntry) {
 			modifierEntry = new CMISModifier(getService(), new XmlDataHandler((Node)this.getDataHandler().getData(), 
-		        		ConnectionsConstants.nameSpaceCtx, (XPathExpression)CMISFileXPath.modifier.getPath()));
+		        		nameSpaceCtx, (XPathExpression)CMISFileXPath.modifier.getPath()));
 		}
 		return modifierEntry;
     }
@@ -172,7 +173,7 @@ public class CMISFile extends AtomEntity {
 	public CMISAuthor getAuthor() {
 		if(null == authorEntry) {
 			authorEntry = new CMISAuthor(getService(), new XmlDataHandler((Node)this.getDataHandler().getData(), 
-		        		ConnectionsConstants.nameSpaceCtx, (XPathExpression)AtomXPath.author.getPath()));
+		        		nameSpaceCtx, (XPathExpression)AtomXPath.author.getPath()));
 		}
 		return authorEntry;
     }

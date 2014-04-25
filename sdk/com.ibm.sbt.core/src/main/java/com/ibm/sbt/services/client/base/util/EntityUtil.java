@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -15,10 +15,12 @@
  */
 package com.ibm.sbt.services.client.base.util;
 
+import static com.ibm.sbt.services.client.base.CommonConstants.UTF8;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+
 import com.ibm.commons.util.StringUtil;
-import com.ibm.sbt.services.client.base.ConnectionsConstants;
 
 /**
  * EntityUtil provides utility methods meant for consumption by any Service implementation
@@ -34,7 +36,7 @@ public class EntityUtil {
 	public static String encodeURLParam(String param){
 		String paramValue = "";
 		try {
-			paramValue = URLEncoder.encode(param, ConnectionsConstants.UTF8);
+			paramValue = URLEncoder.encode(param, UTF8);
 		} catch (UnsupportedEncodingException e) {
 			
 		}

@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * Â© Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ import com.ibm.sbt.services.client.connections.common.Link;
  *
  */
 public class LinkField extends Field {
-	
+
 	private Link link;
 
 	/**
@@ -67,7 +67,7 @@ public class LinkField extends Field {
 		}
 		return link;
 	}
-
+	
 	/**
 	 * Set the link value for this field.
 	 * @param link
@@ -75,5 +75,4 @@ public class LinkField extends Field {
 	public void setLink(Link link) {
 		this.link = link;
 	}
-	
 }

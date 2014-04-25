@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -16,6 +16,7 @@
 package com.ibm.sbt.services.client.connections.activity;
 
 import java.io.StringReader;
+import java.util.Date;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -23,7 +24,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
-import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.activity.model.ActivityXPath;
@@ -84,7 +84,7 @@ public class Member extends Person {
 	 * @param svc
 	 * @param handler
 	 */
-	public Member(ActivityService svc, DataHandler<?> handler){
+	public Member(ActivityService svc, XmlDataHandler handler){
 		super(svc,handler);
 	}
 
@@ -146,8 +146,8 @@ public class Member extends Person {
 		return getAsString(ActivityXPath.Title);
 	}
 	
-	public String getUpdated() {
-		return getAsString(ActivityXPath.Updated);
+	public Date getUpdated() {
+		return getAsDate(ActivityXPath.Updated);
 	}
 	
 	public String getSummary() {

@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -16,81 +16,21 @@
 
 package com.ibm.sbt.services.client.connections.search;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-
 import com.ibm.sbt.services.client.Response;
-import com.ibm.sbt.services.client.base.BaseService;
-import com.ibm.sbt.services.client.base.ConnectionsConstants;
-import com.ibm.sbt.services.client.base.ConnectionsFeedXpath;
-import com.ibm.sbt.services.client.base.datahandlers.EntityList;
-import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
-import com.ibm.sbt.services.client.connections.search.feedhandler.SearchFeedHandler;
+import com.ibm.sbt.services.client.base.IFeedHandler;
+import com.ibm.sbt.services.client.base.datahandlers.AtomEntityList;
 
 
 /**
  * Class used in representing List of Result objects of Search service
  * @author Manish Kataria
+ * @author Carlos Manias
  */
 
-public class ResultList extends EntityList<Result>{
+public class ResultList extends AtomEntityList<Result>{
 
-	public ResultList(Response requestData, BaseService service) {
-		super(requestData, service);
-	}
-	
-	public ResultList(Response requestData, SearchFeedHandler feedHandler) {
+	public ResultList(Response requestData, IFeedHandler<Result> feedHandler) {
 		super(requestData, feedHandler);
 	}
-	
-	public ResultList(){}
-	
-	private XmlDataHandler getMetaDataHandler(){
-		return new XmlDataHandler(getData(), ConnectionsConstants.nameSpaceCtx);
-	}
 
-	@Override
-	public int getTotalResults() {
-		return getMetaDataHandler().getAsInt(ConnectionsFeedXpath.TotalResults);
-	}
-
-	@Override
-	public int getStartIndex() {
-		return getMetaDataHandler().getAsInt(ConnectionsFeedXpath.StartIndex);
-	}
-
-	@Override
-	public int getItemsPerPage() {
-		return getMetaDataHandler().getAsInt(ConnectionsFeedXpath.ItemsPerPage);
-	}
-
-	@Override
-	public int getCurrentPage() {
-		return getMetaDataHandler().getAsInt(ConnectionsFeedXpath.CurrentPage);
-	}
-	
-	@Override
-	public Document getData(){
-		return (Document)super.getData();
-	}
-	
-	@Override
-	protected Result getEntity(Object data){
-		return (Result)super.getEntity(data);
-	}
-
-	@Override
-	protected ArrayList<Result> createEntities() {
-		XmlDataHandler dataHandler = new XmlDataHandler(getData(), ConnectionsConstants.nameSpaceCtx);
-		ArrayList<Result> results = new ArrayList<Result>();
-		List<Node> entries = dataHandler.getEntries(ConnectionsFeedXpath.Entry);
-		for (Node node: entries) {
-			Result searchResult =  getEntity(node);
-			results.add(searchResult);
-		}
-		return results;
-	}
 }

@@ -1,5 +1,5 @@
 /*
- * ��� Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -16,11 +16,14 @@
 
 package com.ibm.sbt.services.client.connections.wikis;
 
+import static com.ibm.sbt.services.client.base.CommonConstants.APPLICATION_ATOM_XML;
+import static com.ibm.sbt.services.client.base.CommonConstants.CONTENT_TYPE;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
 import com.ibm.commons.xml.xpath.XPathExpression;
@@ -28,9 +31,7 @@ import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.AtomFeedHandler;
-import com.ibm.sbt.services.client.base.AtomXPath;
 import com.ibm.sbt.services.client.base.BaseService;
-import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.connections.wikis.serializers.WikiPageSerializer;
@@ -44,6 +45,8 @@ import com.ibm.sbt.services.endpoints.Endpoint;
  */
 public class WikiService extends BaseService {
 	
+	private static final long serialVersionUID = -1677227570229926652L;
+
 	public WikiService() {
 		super();
 	}
@@ -160,7 +163,7 @@ public class WikiService extends BaseService {
 	 */
 	public EntityList<WikiPage> getWikiPages(String wikiLabel, Map<String, String> parameters) 
 			throws ClientServicesException {
-		String requestUrl = WikiUrls.WIKI_PAGES.format(this, WikiUrlParts.wikiLabel.get(wikiLabel));
+		String requestUrl = WikiUrls.WIKI_PAGES.format(this, WikiUrls.getWikiLabel(wikiLabel));
 		return getWikiPagesEntityList(requestUrl, parameters);
 	}
 	
@@ -174,7 +177,7 @@ public class WikiService extends BaseService {
 	 */
 	public EntityList<WikiPage> getMyWikiPages(String wikiLabel, Map<String, String> parameters) 
 			throws ClientServicesException {
-		String requestUrl = WikiUrls.WIKI_MYPAGES.format(this, WikiUrlParts.wikiLabel.get(wikiLabel));
+		String requestUrl = WikiUrls.WIKI_MYPAGES.format(this, WikiUrls.getWikiLabel(wikiLabel));
 		return getWikiPagesEntityList(requestUrl, parameters);
 	}
 	
@@ -188,7 +191,7 @@ public class WikiService extends BaseService {
 	 */
 	public EntityList<WikiPage> getWikiPagesInTrash(String wikiLabelOrId, 
 			Map<String, String> parameters) throws ClientServicesException {
-		String requestUrl = WikiUrls.WIKI_PAGES_TRASH.format(this, WikiUrlParts.wikiLabel.get(wikiLabelOrId));
+		String requestUrl = WikiUrls.WIKI_PAGES_TRASH.format(this, WikiUrls.getWikiLabel(wikiLabelOrId));
 		return getWikiPagesEntityList(requestUrl, parameters);
 	}
 	
@@ -206,7 +209,7 @@ public class WikiService extends BaseService {
 	 */
 	public Wiki getWiki(String wikiLabel, Map<String, String> parameters) 
 			throws ClientServicesException {
-		String requestUrl = WikiUrls.WIKI_AUTH.format(this, WikiUrlParts.wikiLabel.get(wikiLabel)); 
+		String requestUrl = WikiUrls.WIKI_AUTH.format(this, WikiUrls.getWikiLabel(wikiLabel)); 
 		return getWikiEntity(requestUrl, parameters);
 	}
 	
@@ -233,7 +236,7 @@ public class WikiService extends BaseService {
 	 */
 	public void updateWiki(Wiki wiki, Map<String, String> parameters) 
 			throws ClientServicesException {
-		String requestUrl = WikiUrls.WIKI_AUTH.format(this, WikiUrlParts.wikiLabel.get(wiki.getLabel()));
+		String requestUrl = WikiUrls.WIKI_AUTH.format(this, WikiUrls.getWikiLabel(wiki.getLabel()));
 		updateWikiAux(requestUrl, wiki, parameters);
 	}
 	
@@ -243,7 +246,7 @@ public class WikiService extends BaseService {
 	 * @throws ClientServicesException
 	 */
 	public void deleteWiki(String wikiLabel) throws ClientServicesException {
-		String requestUrl = WikiUrls.WIKI_AUTH.format(this, WikiUrlParts.wikiLabel.get(wikiLabel));
+		String requestUrl = WikiUrls.WIKI_AUTH.format(this, WikiUrls.getWikiLabel(wikiLabel));
 		deleteData(requestUrl);
 	}
 	
@@ -261,7 +264,7 @@ public class WikiService extends BaseService {
 	 */
 	public WikiPage getWikiPage(String wikiLabel, String pageLabel, 
 			Map<String, String> parameters) throws ClientServicesException {
-		String requestUrl = WikiUrls.WIKI_PAGE_AUTH.format(this, WikiUrlParts.wikiLabel.get(wikiLabel), WikiUrlParts.wikiPage.get(pageLabel));
+		String requestUrl = WikiUrls.WIKI_PAGE_AUTH.format(this, WikiUrls.getWikiLabel(wikiLabel), WikiUrls.getWikiPage(pageLabel));
 		return getWikiPageEntity(requestUrl, parameters);
 	}
 	
@@ -274,7 +277,7 @@ public class WikiService extends BaseService {
 	 */
 	public WikiPage createWikiPage(String wikiLabel, WikiPage wikiPage, Map<String, String> parameters) 
 			throws ClientServicesException {
-		String requestUrl = WikiUrls.WIKI_PAGES_AUTH.format(this, WikiUrlParts.wikiLabel.get(wikiLabel));
+		String requestUrl = WikiUrls.WIKI_PAGES_AUTH.format(this, WikiUrls.getWikiLabel(wikiLabel));
 		Response response = createWikiPageAux(requestUrl, wikiPage, parameters);
 		return getWikiPageFeedHandler().createEntity(response);
 	}
@@ -288,7 +291,7 @@ public class WikiService extends BaseService {
 	 */
 	public void updateWikiPage(String wikiLabel, WikiPage wikiPage, 
 			Map<String, String> parameters) throws ClientServicesException {
-		String requestUrl = WikiUrls.WIKI_PAGE_AUTH.format(this, WikiUrlParts.wikiLabel.get(wikiLabel), WikiUrlParts.wikiPage.get(wikiPage.getLabel()));
+		String requestUrl = WikiUrls.WIKI_PAGE_AUTH.format(this, WikiUrls.getWikiLabel(wikiLabel), WikiUrls.getWikiPage(wikiPage.getLabel()));
 		updateWikiPageAux(requestUrl, wikiPage, parameters);
 	}
 	
@@ -300,7 +303,7 @@ public class WikiService extends BaseService {
 	 */
 	public void deleteWikiPage(String wikiLabel, String wikiPageLabel) 
 			 throws ClientServicesException {
-		String requestUrl = WikiUrls.WIKI_PAGE_AUTH.format(this, WikiUrlParts.wikiLabel.get(wikiLabel), WikiUrlParts.wikiPage.get(wikiPageLabel));
+		String requestUrl = WikiUrls.WIKI_PAGE_AUTH.format(this, WikiUrls.getWikiLabel(wikiLabel), WikiUrls.getWikiPage(wikiPageLabel));
 		deleteData(requestUrl);
 	}
 
@@ -312,10 +315,9 @@ public class WikiService extends BaseService {
 			Map<String, String> parameters) throws ClientServicesException {
 		try {
 			Map<String,String> headers = new HashMap<String, String>();
-			headers.put("Content-Type", "application/atom+xml");
+			headers.put(CONTENT_TYPE, APPLICATION_ATOM_XML);
 			WikiSerializer serializer = new WikiSerializer(wiki);
-			serializer.generateCreate();
-			return createData(requestUrl, parameters, headers, serializer.serializeToString());
+			return createData(requestUrl, parameters, headers, serializer.createPayload());
 		}
 		catch(ClientServicesException e) {
 			throw e;
@@ -329,10 +331,9 @@ public class WikiService extends BaseService {
 			Map<String, String> parameters) throws ClientServicesException {
 		try {
 			Map<String,String> headers = new HashMap<String, String>();
-			headers.put("Content-Type", "application/atom+xml");
+			headers.put(CONTENT_TYPE, APPLICATION_ATOM_XML);
 			WikiSerializer serializer = new WikiSerializer(wiki);
-			serializer.generateUpdate();
-			return updateData(requestUrl, parameters, headers, serializer.serializeToString(), null);
+			return updateData(requestUrl, parameters, headers, serializer.updatePayload(), null);
 		}
 		catch(ClientServicesException e) {
 			throw e;
@@ -346,10 +347,9 @@ public class WikiService extends BaseService {
 			Map<String, String> parameters) throws ClientServicesException {
 		try {
 			Map<String,String> headers = new HashMap<String, String>();
-			headers.put("Content-Type", "application/atom+xml");
+			headers.put(CONTENT_TYPE, APPLICATION_ATOM_XML);
 			WikiPageSerializer serializer = new WikiPageSerializer(wikiPage);
-			serializer.generateCreate();
-			return createData(requestUrl, parameters, headers, serializer.serializeToString());
+			return createData(requestUrl, parameters, headers, serializer.createPayload());
 		}
 		catch(ClientServicesException e) {
 			throw e;
@@ -363,10 +363,9 @@ public class WikiService extends BaseService {
 			Map<String, String> parameters) throws ClientServicesException {
 		try {
 			Map<String,String> headers = new HashMap<String, String>();
-			headers.put("Content-Type", "application/atom+xml");
+			headers.put(CONTENT_TYPE, APPLICATION_ATOM_XML);
 			WikiPageSerializer serializer = new WikiPageSerializer(wikiPage);
-			serializer.generateUpdate();
-			return updateData(requestUrl, parameters, headers, serializer.serializeToString(), null);
+			return updateData(requestUrl, parameters, headers, serializer.updatePayload(), null);
 		}
 		catch(ClientServicesException e) {
 			throw e;
@@ -419,27 +418,20 @@ public class WikiService extends BaseService {
 	}
 	
 	public IFeedHandler<Wiki> getWikiFeedHandler() {
-		return new AtomFeedHandler<Wiki>(this) {
+		return new AtomFeedHandler<Wiki>(this, false) {
 			@Override
-			protected Wiki newEntity(BaseService service, Node node) {
-				XPathExpression xpath = (node instanceof Document) ? (XPathExpression)AtomXPath.singleEntry.getPath() : null;
-				return new Wiki(service, node, ConnectionsConstants.nameSpaceCtx, xpath);
+			protected Wiki entityInstance(BaseService service, Node node, XPathExpression xpath) {
+				return new Wiki(service, node, nameSpaceCtx, xpath);
 			}
 		};
 	}
 	
 	public IFeedHandler<WikiPage> getWikiPageFeedHandler() {
-		return new AtomFeedHandler<WikiPage>(this) {
+		return new AtomFeedHandler<WikiPage>(this, false) {
 			@Override
-			protected WikiPage newEntity(BaseService service, Node node) {
-				XPathExpression xpath = (node instanceof Document) ? (XPathExpression)AtomXPath.singleEntry.getPath() : null;
-				return new WikiPage(service, node, ConnectionsConstants.nameSpaceCtx, xpath);
+			protected WikiPage entityInstance(BaseService service, Node node, XPathExpression xpath) {
+				return new WikiPage(service, node, nameSpaceCtx, xpath);
 			}
 		};
-	}
-	
-	private Map<String, String> getParameters(Map<String, String> parameters) {
-		if(parameters == null) return new HashMap<String, String>();
-		else return parameters;
 	}
 }

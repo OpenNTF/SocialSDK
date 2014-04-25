@@ -32,7 +32,7 @@ if (!defined('ENDPOINTS')) {
 }
 
 if (!defined('IBM_SBT_CRYPTO_ENABLED')) {
-	require_once $CFG->dirroot . DIRECTORY_SEPARATOR . 'blocks' . DIRECTORY_SEPARATOR . 'ibmsbt' . DIRECTORY_SEPARATOR . 'security-config.php';
+	require_once $CFG->dirroot . DIRECTORY_SEPARATOR . 'blocks' . DIRECTORY_SEPARATOR . 'ibmsbt' . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'security.php';
 }
 
 if (!defined('BASE_LOCATION')) {

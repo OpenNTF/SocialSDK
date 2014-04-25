@@ -6,7 +6,7 @@ require([ "sbt/dom", "sbt/json", "sbt/connections/WikiService" ], function(dom,j
     var promise = wikiService.getWikiPage(wikiLabel, pageLabel, { includeTags:true, acls:true });
     promise.then(
         function(wikiPage) {
-            dom.setText("json", json.jsonBeanStringify(wiki));
+            dom.setText("json", json.jsonBeanStringify(wikiPage));
         },
         function(error) {
             dom.setText("json", json.jsonBeanStringify(error));

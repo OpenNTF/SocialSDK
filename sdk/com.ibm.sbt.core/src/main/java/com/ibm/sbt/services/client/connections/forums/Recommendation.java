@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,16 +16,15 @@
 
 package com.ibm.sbt.services.client.connections.forums;
 
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
+
 import org.w3c.dom.Node;
 
 import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.base.AtomEntity;
 import com.ibm.sbt.services.client.base.AtomXPath;
-import com.ibm.sbt.services.client.base.BaseEntity;
 import com.ibm.sbt.services.client.base.BaseService;
-import com.ibm.sbt.services.client.base.ConnectionsConstants;
-import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.connections.forums.model.Author;
 
@@ -33,9 +32,9 @@ import com.ibm.sbt.services.client.connections.forums.model.Author;
  * Recommendation Entry Class - represents forum Recommendation Atom entry.
  *
  * @author Swati Singh
+ * @author Carlos Manias
  */
 public class Recommendation extends AtomEntity{
-
 
 	public Recommendation(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
 		super(service, node, namespaceCtx, xpathExpression);
@@ -43,18 +42,10 @@ public class Recommendation extends AtomEntity{
 	
 	public Recommendation(){}
 
-/*	public String getId() {
-		return getAsString(ForumsXPath.uid);
-	}
-
-	public String getTitle() {
-		return getAsString(ForumsXPath.title);
-	}*/
-
 	@Override
 	public Author getAuthor(){
 		return new Author(getService(), new XmlDataHandler((Node)this.getDataHandler().getData(), 
-    		ConnectionsConstants.nameSpaceCtx, (XPathExpression)AtomXPath.author.getPath()));
+    		nameSpaceCtx, (XPathExpression)AtomXPath.author.getPath()));
 	}
 	
 

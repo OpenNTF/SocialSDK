@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -16,13 +16,14 @@
 
 package com.ibm.sbt.services.client.connections.activities.serializers;
 
-import java.text.SimpleDateFormat;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.dateFormat;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import org.w3c.dom.Element;
 
-import com.ibm.sbt.services.client.base.ConnectionsConstants.Namespaces;
+import com.ibm.sbt.services.client.base.ConnectionsConstants.Namespace;
 import com.ibm.sbt.services.client.base.serializers.AtomEntitySerializer;
 import com.ibm.sbt.services.client.connections.activities.DateField;
 import com.ibm.sbt.services.client.connections.activities.Field;
@@ -38,9 +39,6 @@ import com.ibm.sbt.services.client.connections.activities.TextField;
  */
 class NodeSerializer extends AtomEntitySerializer<NodeEntity> {
 	
-	private static SimpleDateFormat dateFormat = 
-			new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");	
-	
 	public NodeSerializer(NodeEntity nodeEntity) {
 		super(nodeEntity);
 	}
@@ -52,7 +50,7 @@ class NodeSerializer extends AtomEntitySerializer<NodeEntity> {
 		}
 		ArrayList<Element> elements = new ArrayList<Element>();
 		for (Field field : fields) {
-			Element element = element(Namespaces.SNX, "field", 
+			Element element = element(Namespace.SNX.getUrl(), "field", 
 				attribute("fid", field.getFid()),
 				attribute("name", field.getName()),
 				attribute("type", field.getType()),
@@ -63,7 +61,7 @@ class NodeSerializer extends AtomEntitySerializer<NodeEntity> {
 			} else if (field instanceof FileField) {
 				FileField fileField = (FileField)field;
 				if (fileField.getEditMediaLink() != null) {
-					Element link = element(Namespaces.ATOM, "link",
+					Element link = element(Namespace.ATOM.getUrl(), "link",
 							attribute("href", fileField.getEditMediaLink().getHref()),
 							attribute("type", fileField.getEditMediaLink().getType()),
 							attribute("size", fileField.getEditMediaLink().getSize()));
@@ -71,19 +69,19 @@ class NodeSerializer extends AtomEntitySerializer<NodeEntity> {
 				}
 			} else if (field instanceof LinkField) {
 				LinkField linkField = (LinkField)field;
-				Element link = element(Namespaces.ATOM, "link",
+				Element link = element(Namespace.ATOM.getUrl(), "link",
 						attribute("href", linkField.getLink().getHref()),
 						attribute("title", linkField.getLink().getTitle()));
 				appendChildren(element, link);
 			} else if (field instanceof PersonField) {
 				PersonField personField = (PersonField)field;
-				Element name = addText(element(Namespaces.ATOM, "name"), personField.getPerson().getName());
-				Element email = addText(element(Namespaces.ATOM, "email"), personField.getPerson().getEmail());
-				Element userid = addText(element(Namespaces.SNX, "userid"), personField.getPerson().getUserid());
+				Element name = addText(element(Namespace.ATOM.getUrl(), "name"), personField.getPerson().getName());
+				Element email = addText(element(Namespace.ATOM.getUrl(), "email"), personField.getPerson().getEmail());
+				Element userid = addText(element(Namespace.SNX.getUrl(), "userid"), personField.getPerson().getUserid());
 				appendChildren(element, name, email, userid);
 			} else if (field instanceof TextField) {
 				TextField textField = (TextField)field;
-				Element summary = element(Namespaces.ATOM, "summary", 
+				Element summary = element(Namespace.ATOM.getUrl(), "summary", 
 						attribute("type", "text"));
 				addText(summary, textField.getSummary());
 				appendChildren(element, summary);
@@ -103,7 +101,7 @@ class NodeSerializer extends AtomEntitySerializer<NodeEntity> {
 	}
 	
 	protected Element activityUuid() {
-		return textElement(Namespaces.SNX, "activity", entity.getActivityUuid());
+		return textElement(Namespace.SNX.getUrl(), "activity", entity.getActivityUuid());
 	}
 		
 	@Override

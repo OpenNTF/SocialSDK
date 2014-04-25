@@ -276,7 +276,7 @@ public class SubscriberManagementService extends BssService {
     		HashMap<String, String> params = new HashMap<String, String>();
     		params.put("_namedQuery", "getSubscriberByEmailAddress");
     		params.put("emailAddress", email);
-			return (EntityList<JsonEntity>)getEntities(API_RESOURCE_SUBSCRIBER, null, getJsonFeedHandler());
+			return (EntityList<JsonEntity>)getEntities(API_RESOURCE_SUBSCRIBER, params, getJsonFeedHandler());
 		} catch (Exception e) {
 			throw new BssException(e, "Error retrieving subscriber list by email {0} caused by {1}", email, e.getMessage());
 		}
@@ -391,7 +391,7 @@ public class SubscriberManagementService extends BssService {
     		Map<String, String> params = new HashMap<String, String>();
     		params.put("_force", force ? "true" : "false");
     		String serviceUrl = API_RESOURCE_SUBSCRIBER + "/" + subscriberId + "/seat/" + seatId;
-    		Response response = createData(serviceUrl, params, EntitleSubscriberHeader, (Object)null);
+    		Response response = createData(serviceUrl, params, RevokeSubscriberHeader, (Object)null);
     		
     		// expect a 204
     		int statusCode = response.getResponse().getStatusLine().getStatusCode();

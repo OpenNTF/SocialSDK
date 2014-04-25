@@ -1,5 +1,5 @@
 /*
-o * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -21,16 +21,22 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import com.ibm.sbt.services.client.base.BaseEntity;
+import org.w3c.dom.Node;
+
+import com.ibm.commons.xml.NamespaceContext;
+import com.ibm.commons.xml.xpath.XPathExpression;
+import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.services.client.base.AtomEntity;
 import com.ibm.sbt.services.client.base.BaseService;
-import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
+import com.ibm.sbt.services.client.base.datahandlers.EntityList;
+import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.connections.profiles.model.ProfileXPath;
 
 /**
  * @Represents Connections Profile
  *
  */
-public class Profile extends BaseEntity{
+public class Profile extends AtomEntity {
 
 	static final String 			sourceClass 	= Profile.class.getName();
 	static final Logger 			logger			= Logger.getLogger(sourceClass);
@@ -45,24 +51,55 @@ public class Profile extends BaseEntity{
 		setService(profileService);
 		setAsString(ProfileXPath.uid, id);
 	}
+
 	public Profile(){}
 
-	public Profile(BaseService svc, DataHandler<?> handler) {
+	/**
+	 * 
+	 * @param svc
+	 * @param handler
+	 */
+	public Profile(BaseService svc, XmlDataHandler handler) {
 		super(svc,handler);
 	}
 	
-    public Profile load() throws ProfileServiceException
-    {
+	/**
+	 * 
+	 * @return
+	 * @throws ProfileServiceException
+	 * @throws ClientServicesException 
+	 */
+    public Profile load() throws ClientServicesException {
     	return getService().getProfile(getUserid());
     }
     
-    public void update() throws ProfileServiceException
-    {
+    /**
+     * 
+     * @param service
+     * @param node
+     * @param namespaceCtx
+     * @param xpathExpression
+     */
+	public Profile(BaseService service, Node node, NamespaceContext namespaceCtx, 
+			XPathExpression xpathExpression) {
+		super(service, node, namespaceCtx, xpathExpression);
+	}
+
+	/**
+	 * 
+	 * @throws ProfileServiceException
+	 */
+    public void update() throws ClientServicesException {
     	getService().updateProfile(this);
     }
     
-    public ProfileList getColleagues() throws ProfileServiceException
-    {
+    /**
+     * 
+     * @return
+     * @throws ProfileServiceException
+     * @throws ClientServicesException 
+     */
+    public EntityList<Profile> getColleagues() throws ClientServicesException {
     	return getService().getColleagues(getUserid());
     }
     
@@ -74,10 +111,14 @@ public class Profile extends BaseEntity{
 	 * @return a map containing the id of the attribute as key and the attribute value as value
 	 * @throws ProfileServiceException
 	 */
-	public Map<String,Object> getExtendedAttributes() throws ProfileServiceException {
+	public Map<String,Object> getExtendedAttributes() throws ClientServicesException {
 		return getService().getExtendedAttributes(this);
 	}
  
+	/**
+	 * 
+	 * @return
+	 */
     public String getUserid() {
     	return getAsString(ProfileXPath.uid);
     }

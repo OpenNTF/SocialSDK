@@ -31,7 +31,7 @@
 	
 <html>
 <head>
-<title>Get Customers</title>
+<title>Entitle Subscriber</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 

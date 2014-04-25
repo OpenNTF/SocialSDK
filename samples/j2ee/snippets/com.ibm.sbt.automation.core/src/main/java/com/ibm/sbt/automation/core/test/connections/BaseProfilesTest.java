@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -15,14 +15,14 @@
  */
 package com.ibm.sbt.automation.core.test.connections;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.automation.core.test.BaseApiTest;
+import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.connections.profiles.Profile;
 import com.ibm.sbt.services.client.connections.profiles.ProfileService;
-import com.ibm.sbt.services.client.connections.profiles.ProfileServiceException;
 
 /**
  * @author mwallace
@@ -45,10 +45,10 @@ public class BaseProfilesTest extends BaseApiTest {
         Profile profile = null;
         try {
             profile = profileService.getProfile(userId);
-        } catch (ProfileServiceException pse) {
-            Assert.fail("Error get profile: " + pse.getMessage());
-            pse.printStackTrace();
-        } 
+        } catch (ClientServicesException cse) {
+            Assert.fail("Error get profile: " + cse.getMessage());
+            cse.printStackTrace();
+		} 
         return profile;
     }
     

@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2013
+ * (C) Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -75,7 +75,7 @@ public class Blog extends BaseBlogEntity {
 	* @method getBlogUuid
 	* @return blogUuid of the blog
 	*/
-	public String getBlogUuid() throws BlogServiceException{
+	public String getBlogUuid() throws ClientServicesException{
 		return super.getUid();
 	}
 	/**
@@ -84,7 +84,7 @@ public class Blog extends BaseBlogEntity {
 	* @method getHandle
 	* @return Blog handle
 	*/
-	public String getHandle() throws BlogServiceException{
+	public String getHandle() throws ClientServicesException{
 		return getAsString(BlogXPath.handle);
 	}
 	/**
@@ -102,7 +102,7 @@ public class Blog extends BaseBlogEntity {
 	* @method getTimeZone
 	* @return {String} Blog TimeZone
 	*/
-	public String getTimeZone() throws BlogServiceException{
+	public String getTimeZone() throws ClientServicesException{
 		return getAsString(BlogXPath.timeZone);
 	}
 	/**

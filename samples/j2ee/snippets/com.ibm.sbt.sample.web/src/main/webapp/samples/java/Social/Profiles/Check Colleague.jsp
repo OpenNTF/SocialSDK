@@ -22,7 +22,7 @@
 <%@page import="com.ibm.sbt.services.client.connections.profiles.ProfileService"%>
 <%@page import="com.ibm.sbt.services.client.connections.profiles.Profile"%>
 <%@page import="com.ibm.sbt.services.client.connections.profiles.ColleagueConnection"%>
-<%@page import="com.ibm.sbt.services.client.connections.profiles.ColleagueConnectionList"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"	pageEncoding="ISO-8859-1"%>
 <html>
 <head>
@@ -36,7 +36,7 @@
 		String sourceUserId = Context.get().getProperty("sample.id1");
 		String targetUserId;
 		ProfileService connProfSvc = new ProfileService();
-		ColleagueConnectionList colleagues = connProfSvc.getColleagueConnections(sourceUserId);
+		EntityList<ColleagueConnection> colleagues = connProfSvc.getColleagueConnections(sourceUserId);
 		if(colleagues != null && ! colleagues.isEmpty()) {
 			ColleagueConnection colleague = colleagues.iterator().next();
 			targetUserId = colleague.getContributorUserId();

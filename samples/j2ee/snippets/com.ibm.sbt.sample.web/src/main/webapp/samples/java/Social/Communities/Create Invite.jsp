@@ -21,9 +21,7 @@
 <%@page	import="com.ibm.sbt.services.client.connections.communities.Community"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.Invite"%>
-<%@page	import="com.ibm.sbt.services.client.connections.communities.InviteList"%>
-
-<%@page import="com.ibm.sbt.services.client.connections.communities.CommunityList"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <html>
@@ -38,7 +36,7 @@
 	<%
 		try {
 			CommunityService svc = new CommunityService();
-			CommunityList communities = svc.getMyCommunities();
+			EntityList<Community> communities = svc.getMyCommunities();
 			if(communities.size()>0){
 				String communityId = communities.get(0).getCommunityUuid();
 				String userId = Context.get().getProperty("sample.id2");

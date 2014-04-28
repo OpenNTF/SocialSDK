@@ -20,7 +20,7 @@
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
 <%@page import="com.ibm.sbt.services.client.connections.forums.Forum"%>
-<%@page import="com.ibm.sbt.services.client.connections.forums.ForumList"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page import="java.util.HashMap"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -36,7 +36,7 @@
 	<%
 		try {
 			ForumService service = new ForumService();
-			ForumList forums = service.getMyForums();
+			EntityList<Forum> forums = service.getMyForums();
 			if(forums != null && !forums.isEmpty()){
 				Forum forum = (Forum)forums.iterator().next();
 				out.println("<b> Forum Title : </b>"+forum.getTitle());

@@ -14,9 +14,9 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page import="com.ibm.sbt.services.client.connections.search.Constraint"%>
 <%@page import="com.ibm.sbt.services.client.connections.search.Result"%>
-<%@page import="com.ibm.sbt.services.client.connections.search.ResultList"%>
 <%@page import="com.ibm.sbt.services.client.connections.search.SearchService"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
@@ -47,7 +47,7 @@
 			constraint.setValues(values);
 			List<Constraint> constraints = new ArrayList<Constraint>();
 			constraints.add(constraint);
-			ResultList results = svc.getResultsWithConstraint("test",constraints);
+			EntityList<Result> results = svc.getResultsWithConstraint("test",constraints);
 			if(results.size()<=0){
 				out.println("No results found");
 			}			

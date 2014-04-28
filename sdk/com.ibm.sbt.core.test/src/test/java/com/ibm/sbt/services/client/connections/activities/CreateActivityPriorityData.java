@@ -15,33 +15,32 @@
  */
 package com.ibm.sbt.services.client.connections.activities;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.junit.Test;
 
 import com.ibm.commons.xml.XMLException;
 import com.ibm.sbt.services.client.ClientServicesException;
-import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 
 /**
  * @author mwallace
  *
  */
-public class DeleteAllActivitiesTest extends BaseActivityServiceTest {
+public class CreateActivityPriorityData extends BaseActivityServiceTest {
 
 	@Test
-	public void deleteAllActivities() throws ClientServicesException, XMLException {
-		Map<String, String> params = new HashMap<String, String>();
-		params.put("ps", "200");
-		EntityList<Activity> activities = activityService.getMyActivities(params);
-		System.out.println("Deleting "+activities.getTotalResults()+" activities.");
-		for (Activity activity : activities) {
-			if (!activity.isDeleted()) {
-				System.out.println("Deleting: "+activity.getActivityUuid());
-				activity.delete();
-			}
+	public void createActivityPriorityData() throws ClientServicesException, XMLException {
+		int[] priorities = new int[] { -1, 1, 500, 999, 1000, 1001, 1500, 1999, 2000, 2001, 2500, 2999, 3000 };
+		for (int i=0; i<priorities.length; i++) {
+			Activity created = createActivity(createTitle(priorities[i]));
+			
+			created.changePriority(priorities[i]);
+			
+			Activity read = activityService.getActivity(created.getActivityUuid());
+			System.out.println(priorities[i]+"="+read.getPriority());
 		}
+		activity = null;
 	}
 	
+    protected String createTitle(int priority) {
+    	return "ActivityPriority" + priority + " - " + System.currentTimeMillis();
+    }	
 }

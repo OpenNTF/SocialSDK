@@ -25,7 +25,7 @@
 <%@page import="java.util.HashMap"%>
 <%@page import="com.ibm.sbt.services.client.connections.profiles.ProfileService"%>
 <%@page import="com.ibm.sbt.services.client.connections.profiles.Profile"%>
-<%@page import="com.ibm.sbt.services.client.connections.profiles.ProfileList"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"	pageEncoding="ISO-8859-1"%>
 <html>
 <head>
@@ -38,9 +38,9 @@
 		ProfileService connProfSvc = new ProfileService();
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("name","Frank");
-		ProfileList profiles = connProfSvc.searchProfiles(params);
+		EntityList<Profile> profiles = connProfSvc.searchProfiles(params);
 		if(profiles != null && ! profiles.isEmpty()) {
-			for (Iterator iterator = profiles.iterator(); iterator.hasNext();) {
+			for (Iterator<Profile> iterator = profiles.iterator(); iterator.hasNext();) {
 				Profile profile = (Profile)iterator.next();
 				out.println("<b>Name : </b> " + profile.getName());
 				out.println("<br>");

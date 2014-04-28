@@ -11,8 +11,8 @@ import org.openqa.selenium.WebElement;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.automation.core.test.connections.BaseFilesTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
+import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.connections.files.File;
-import com.ibm.sbt.services.client.connections.files.FileServiceException;
 
 public class GetFilesSharedWithMe extends BaseFilesTest {
 
@@ -25,7 +25,7 @@ public class GetFilesSharedWithMe extends BaseFilesTest {
 		try {
 			fileService = getFileService();
 			files = fileService.getFilesSharedWithMe(new HashMap<String, String>());
-		} catch (FileServiceException e) {
+		} catch (ClientServicesException e) {
 			Assert.fail(e.getMessage());
 			e.printStackTrace();
 		}

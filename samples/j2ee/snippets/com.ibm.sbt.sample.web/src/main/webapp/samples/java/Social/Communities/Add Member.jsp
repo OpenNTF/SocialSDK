@@ -18,9 +18,9 @@
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.Community"%>
-<%@page import="com.ibm.sbt.services.client.connections.communities.CommunityList"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.Member"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Collection"%>
 <%@page 
@@ -38,7 +38,7 @@
 	<%
 	try {
 		CommunityService communityService = new CommunityService();
-		CommunityList communities = communityService.getMyCommunities();
+		EntityList<Community> communities = communityService.getMyCommunities();
 		Community community = communities.iterator().next();
 		String id = Context.get().getProperty("sample.id2");
 		Member newMember = new Member(communityService,id);

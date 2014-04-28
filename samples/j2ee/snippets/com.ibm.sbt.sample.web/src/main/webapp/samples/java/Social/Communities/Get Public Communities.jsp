@@ -19,7 +19,7 @@
 <%@page import="com.ibm.commons.runtime.Context"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.Community"%>
-<%@page import="com.ibm.sbt.services.client.connections.communities.CommunityList"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page import="java.util.*"%>
 
 				
@@ -37,7 +37,7 @@
 		try {
 			
 			CommunityService svc = new CommunityService();
-			CommunityList communities = svc.getPublicCommunities();
+			EntityList<Community> communities = svc.getPublicCommunities();
 			
 			out.println("<br>Listing public communities , Total communities found : "+communities.getTotalResults());
 			out.println("<br>");

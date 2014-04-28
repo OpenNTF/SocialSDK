@@ -17,7 +17,7 @@
 <%@page import="com.ibm.sbt.services.client.connections.files.FileService"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.Comment"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.File"%>
-<%@page import="com.ibm.sbt.services.client.connections.files.FileList"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page import="java.util.List"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
@@ -35,7 +35,7 @@
 	<%
 	try {
 			FileService fileService = new FileService();
-       		FileList fileEntries = fileService.getMyFiles();
+       		EntityList<File> fileEntries = fileService.getMyFiles();
        		File fileEntry = fileEntries.get(0);
 			String fileId = fileEntry.getFileId();
 			out.println("<b> UnLocking File</b>" + fileId); 	

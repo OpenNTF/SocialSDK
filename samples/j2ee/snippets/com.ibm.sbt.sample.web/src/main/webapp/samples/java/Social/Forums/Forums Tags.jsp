@@ -23,7 +23,7 @@
 <%@page import="java.util.HashMap"%>
 <%@page import="com.ibm.sbt.services.client.connections.forums.ForumService"%>
 <%@page import="com.ibm.sbt.services.client.connections.forums.Tag"%>
-<%@page	import="com.ibm.sbt.services.client.connections.forums.TagList"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <html>
@@ -36,7 +36,7 @@
 		try {
 			ForumService svc = new ForumService();
 			Map<String, String> params = new HashMap<String, String>();
-			TagList tags = svc.getForumsTags();
+			EntityList<Tag> tags = svc.getForumsTags();
 			if (tags.size() <= 0) {
 				out.println("No tags to be displayed");
 			}

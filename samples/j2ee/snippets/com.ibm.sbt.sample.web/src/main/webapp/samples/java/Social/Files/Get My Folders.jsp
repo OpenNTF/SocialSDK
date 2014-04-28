@@ -17,7 +17,7 @@
 <%@page import="com.ibm.sbt.services.client.connections.files.FileService"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.Comment"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.File"%>
-<%@page import="com.ibm.sbt.services.client.connections.files.FileList"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%> 
 <%@page import="java.io.PrintWriter"%>
@@ -39,7 +39,7 @@
 	<%
 		try {		
 			FileService fileService = new FileService();
-			FileList fileEntries = fileService.getMyFolders(null); 
+			EntityList<File> fileEntries = fileService.getMyFolders(null); 
 			if(fileEntries != null && ! fileEntries.isEmpty()) {
 		for (File fileEntry : fileEntries) {
 			out.println("Name :  " + fileEntry.getLabel() );

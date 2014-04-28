@@ -22,9 +22,7 @@
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
 <%@page import="com.ibm.sbt.services.client.connections.forums.Forum"%>
-<%@page import="com.ibm.sbt.services.client.connections.forums.ForumList"%>
-<%@page import="com.ibm.sbt.services.client.connections.forums.TopicList"%>
-<%@page import="com.ibm.sbt.services.client.connections.forums.ReplyList"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page import="java.util.HashMap"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -41,10 +39,10 @@
 		try {
 		
 		ForumService svc = new ForumService();
-		TopicList topics = svc.getMyForumTopics();
+		EntityList<ForumTopic> topics = svc.getMyForumTopics();
 		if(topics.size()>0){
 			ForumTopic topic = (ForumTopic)topics.iterator().next();
-			ReplyList replies = svc.getForumTopicReplies(topic.getTopicUuid());
+			EntityList<ForumReply> replies = svc.getForumTopicReplies(topic.getTopicUuid());
 			if(replies.size()>0){
 				ForumReply reply = (ForumReply)replies.iterator().next();
 				ForumReply retrievedReply = svc.getForumReply(reply.getReplyUuid());

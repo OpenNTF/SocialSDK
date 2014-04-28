@@ -15,15 +15,14 @@
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%@page import="com.ibm.commons.util.StringUtil"%>
-<%@page import="com.ibm.sbt.services.client.connections.files.CommentList"%>
-<%@page import="com.ibm.sbt.services.client.connections.communities.CommunityList"%>
 <%@page import="java.io.ByteArrayOutputStream"%>
 <%@page import="java.io.InputStream"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.FileService"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.Comment"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.File"%>
-<%@page import="com.ibm.sbt.services.client.connections.files.FileList"%>
+<%@page import="com.ibm.sbt.services.client.connections.communities.Community"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page import="java.nio.charset.Charset"%>
 <%@page import="java.io.ByteArrayInputStream"%>
 <%@page import="java.io.PrintWriter"%>
@@ -45,7 +44,7 @@
     <%
       try {
         CommunityService commService = new CommunityService();
-		CommunityList communities = commService.getMyCommunities();
+		EntityList<Community> communities = commService.getMyCommunities();
 
 	    if(communities != null && ! communities.isEmpty())  {
 	    	String communityId = communities.get(0).getCommunityUuid();
@@ -59,7 +58,7 @@
           	fileService.addCommentToCommunityFile(fileUploaded.getFileId(), "JSP Added community file comment"+System.currentTimeMillis(), communityId, null);
 			
             // Get All community File Comments
-           CommentList comments = fileService.getAllCommunityFileComments(fileUploaded.getFileId(), communityId, null);
+           EntityList<Comment> comments = fileService.getAllCommunityFileComments(fileUploaded.getFileId(), communityId, null);
             if(comments != null && ! comments.isEmpty())  { 
 				for(Comment comment : comments) {
 					out.println(comment.getComment());

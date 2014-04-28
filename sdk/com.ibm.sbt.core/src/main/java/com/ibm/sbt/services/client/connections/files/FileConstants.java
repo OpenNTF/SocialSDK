@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -19,7 +19,7 @@ package com.ibm.sbt.services.client.connections.files;
  * 
  * @author Vimal Dhupar
  */
-public class FileConstants {
+public final class FileConstants {
 
 	public static char SEPARATOR   = '/';
 	
@@ -29,6 +29,10 @@ public class FileConstants {
 	public static String Category_DOCUMENT	= "document";
 	public static String Category_COMMENT	= "comment";
 	public static String Category_COLLECTION	= "collection";
+	public static String Category_COMMUNITY	= "community";
+	public static String DIRECTION_INBOUND	= "inbound";
+	public static String DIRECTION_OUTBOUND	= "outbound";
+	public static String X_UPDATE_NONCE	= "X-Update-Nonce";
     
 	
 }

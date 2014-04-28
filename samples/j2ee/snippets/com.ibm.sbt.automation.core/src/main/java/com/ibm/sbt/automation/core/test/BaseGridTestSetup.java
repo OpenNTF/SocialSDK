@@ -7,10 +7,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 
 import com.ibm.sbt.automation.core.utils.Trace;
 import com.ibm.sbt.security.authentication.AuthenticationException;
+import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.activity.Activity;
 import com.ibm.sbt.services.client.connections.activity.ActivityService;
@@ -20,7 +21,6 @@ import com.ibm.sbt.services.client.connections.communities.CommunityService;
 import com.ibm.sbt.services.client.connections.communities.CommunityServiceException;
 import com.ibm.sbt.services.client.connections.files.File;
 import com.ibm.sbt.services.client.connections.files.FileService;
-import com.ibm.sbt.services.client.connections.files.FileServiceException;
 import com.ibm.sbt.services.client.connections.files.model.FileCreationParameters;
 import com.ibm.sbt.services.client.connections.forums.Forum;
 import com.ibm.sbt.services.client.connections.forums.ForumService;
@@ -100,7 +100,7 @@ public class BaseGridTestSetup extends BaseApiTest{
 		} catch (AuthenticationException e) {
 			e.printStackTrace();
 		}
-		super.launchSnippet("Social_Bookmarks_API_CreateBookmark",this.authType.AUTO_DETECT);
+		super.launchSnippet("Social_Bookmarks_API_CreateBookmark",AuthType.AUTO_DETECT);
 		
 	}
 	
@@ -229,7 +229,7 @@ public class BaseGridTestSetup extends BaseApiTest{
 			folder = fileService.createFolder("TestFolder");		
 			fileService.pinFolder(folder.getFileId());
 			Trace.log("Created test folder: " + folder.getFileId());			
-		} catch (FileServiceException e) {
+		} catch (ClientServicesException e) {
 			e.printStackTrace();
 			Assert.fail("Error creating test folder: " + e.getMessage());
 		} catch (TransformerException te) {
@@ -274,10 +274,10 @@ public class BaseGridTestSetup extends BaseApiTest{
 			
 			
 			Trace.log("Created test file: " + fileEntry.getFileId());
-		} catch (FileServiceException fse) {
+		} catch (ClientServicesException cse) {
 			fileEntry = null;
-	        fse.printStackTrace();
-			Assert.fail("Error creating test file: " + fse.getMessage());
+	        cse.printStackTrace();
+			Assert.fail("Error creating test file: " + cse.getMessage());
 		} catch (TransformerException te) {
 			te.printStackTrace();
 			Assert.fail("Error creating test file: " + te.getMessage());
@@ -288,22 +288,22 @@ public class BaseGridTestSetup extends BaseApiTest{
 		if (fileEntry != null) {
 			try {
 				fileService.deleteFile(fileEntry.getFileId());
-			} catch (FileServiceException fse) {
+			} catch (ClientServicesException cse) {
 				fileEntry = null;
 				if (failIfAfterDeletionFails()) {
-					Assert.fail("Error deleting test file: " + fse.getMessage());
-					fse.printStackTrace();
+					Assert.fail("Error deleting test file: " + cse.getMessage());
+					cse.printStackTrace();
 				}
 			}
 		}
 		if (folder != null) {
 			try {
 				fileService.deleteFolder(folder.getFileId());
-			} catch (FileServiceException fse) {
+			} catch (ClientServicesException cse) {
 				folder = null;
 				if (failIfAfterDeletionFails()) {
-					Assert.fail("Error deleting test folder: " + fse.getMessage());
-					fse.printStackTrace();
+					Assert.fail("Error deleting test folder: " + cse.getMessage());
+					cse.printStackTrace();
 				}
 			}
 		}
@@ -313,7 +313,7 @@ public class BaseGridTestSetup extends BaseApiTest{
 	public void emptyTrash(){
 		try {
 			fileService.deleteAllFilesFromRecycleBin();
-		} catch (FileServiceException e) {
+		} catch (ClientServicesException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

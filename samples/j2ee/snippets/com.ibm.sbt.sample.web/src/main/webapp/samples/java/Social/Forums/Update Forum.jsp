@@ -19,7 +19,7 @@
 <%@page import="java.util.Collection"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
-<%@page import="com.ibm.sbt.services.client.connections.forums.ForumList"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
@@ -38,7 +38,7 @@
 	<%
 	try {
 		ForumService service = new ForumService();
-		ForumList forums = service.getMyForums();
+		EntityList<Forum> forums = service.getMyForums();
 		if(forums.size() > 0){
 			Forum forum = (Forum)forums.get(0);
 			long randomNumber = System.currentTimeMillis();

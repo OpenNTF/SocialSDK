@@ -18,9 +18,8 @@
 <%@page import="com.ibm.commons.runtime.Context"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.Community"%>
-<%@page import="com.ibm.sbt.services.client.connections.communities.CommunityList"%>
-<%@page import="com.ibm.sbt.services.client.connections.communities.MemberList"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.Member"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 
 <%@page import="java.util.*"%>
 
@@ -39,10 +38,10 @@
 	<%
 		try {
 			CommunityService communityService = new CommunityService();
-			CommunityList communities = communityService.getPublicCommunities();
+			EntityList<Community> communities = communityService.getPublicCommunities();
 			Community community = communities.iterator().next();
 		
-			MemberList members = communityService.getMembers(community.getCommunityUuid());
+			EntityList<Member> members = communityService.getMembers(community.getCommunityUuid());
 			
 			out.println("<br>Listing Members of a Community <br>");
 			for (Member member : members) {

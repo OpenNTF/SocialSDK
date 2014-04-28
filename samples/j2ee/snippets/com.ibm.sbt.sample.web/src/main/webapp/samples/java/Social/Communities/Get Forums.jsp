@@ -19,9 +19,9 @@
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
 <%@page	import="com.ibm.sbt.services.client.connections.communities.Community"%>
+<%@page	import="com.ibm.sbt.services.client.connections.forums.Forum"%>
 <%@page	import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
-<%@page import="com.ibm.sbt.services.client.connections.forums.model.BaseForumEntity"%>
-<%@page import="com.ibm.sbt.services.client.connections.forums.ForumList"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <html>
@@ -38,10 +38,10 @@
 			Collection<Community> communities = communityService.getPublicCommunities();
 			Community community = communities.iterator().next();
 			
-			ForumList forums = communityService.getForums(community.getCommunityUuid());
+			EntityList<Forum> forums = communityService.getForums(community.getCommunityUuid());
 			if(forums.getTotalResults() > 0 ){
 				out.println("<br>Listing forums of a Community <br>");
-				for (BaseForumEntity forum : forums) {
+				for (Forum forum : forums) {
 					out.println("<b>Forum Title : </b> " + forum.getTitle()+"<br>");
 					out.println("<b>Forum Uuid : </b> " + forum.getUid()+"<br>");
 					out.println("<b>Forum updated : </b> " + forum.getUpdated()+"<br>");

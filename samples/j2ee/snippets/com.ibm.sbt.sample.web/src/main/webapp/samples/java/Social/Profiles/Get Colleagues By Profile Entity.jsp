@@ -21,7 +21,7 @@
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.sbt.services.client.connections.profiles.ProfileService"%>
 <%@page import="com.ibm.sbt.services.client.connections.profiles.Profile"%>
-<%@page import="com.ibm.sbt.services.client.connections.profiles.ProfileList"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.List"%>
@@ -42,7 +42,7 @@
 				Profile profile = connProfSvc.getProfile(userId);
 				
 				if (profile != null) {
-					ProfileList colleagues = profile.getColleagues();
+					EntityList<Profile> colleagues = profile.getColleagues();
 					if(colleagues != null && ! colleagues.isEmpty()) {
 						for (Profile colleague : colleagues)
 						{

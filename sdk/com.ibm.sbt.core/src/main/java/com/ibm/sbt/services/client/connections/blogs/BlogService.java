@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2013
+ * (C) Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -16,6 +16,8 @@
 
 package com.ibm.sbt.services.client.connections.blogs;
 
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -26,16 +28,19 @@ import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.AtomXPath;
 import com.ibm.sbt.services.client.base.BaseService;
-import com.ibm.sbt.services.client.connections.blogs.feedhandler.BlogPostsFeedHandler;
-import com.ibm.sbt.services.client.connections.blogs.feedhandler.BlogsFeedHandler;
-import com.ibm.sbt.services.client.connections.blogs.feedhandler.CommentsFeedHandler;
-import com.ibm.sbt.services.client.connections.blogs.feedhandler.TagFeedHandler;
 import com.ibm.sbt.services.client.connections.blogs.model.BlogXPath;
 import com.ibm.sbt.services.client.connections.blogs.transformers.BaseBlogTransformer;
-import com.ibm.sbt.services.client.connections.forums.ForumServiceException;
+import com.ibm.sbt.services.client.connections.profiles.Profile;
+import com.ibm.sbt.services.client.connections.profiles.ProfileParams;
+import com.ibm.sbt.services.client.connections.profiles.ProfileUrls;
 import com.ibm.sbt.services.endpoints.Endpoint;
+import com.ibm.commons.xml.xpath.XPathExpression;
+import com.ibm.sbt.services.client.base.AtomFeedHandler;
+import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 
+import org.w3c.dom.Node;
 
+import com.ibm.sbt.services.client.base.IFeedHandler;
 /**
  * BlogService
  * 
@@ -44,6 +49,8 @@ import com.ibm.sbt.services.endpoints.Endpoint;
  */
 
 public class BlogService extends BaseService {
+	
+	private static final long serialVersionUID = 2838345461937687654L;
 	
 	public String contextRoot = "blogs";
 	public String defaultHomepageHandle = "homepage";
@@ -100,10 +107,10 @@ public class BlogService extends BaseService {
 	 * This method returns the all blogs
 	 * 
 	 * @deprecated use getAllBlogs instead
-	 * @return
-	 * @throws ForumServiceException
+	 * @return EntityList<Blog>
+	 * @throws ClientServicesException
 	 */
-	public BlogList getBlogs() throws BlogServiceException{
+	public EntityList<Blog> getBlogs() throws ClientServicesException{
 		return getAllBlogs();
 		
 	}
@@ -112,9 +119,9 @@ public class BlogService extends BaseService {
 	 * This method returns the all blogs
 	 * 
 	 * @return
-	 * @throws ForumServiceException
+	 * @throws ClientServicesException
 	 */
-	public BlogList getAllBlogs() throws BlogServiceException{
+	public EntityList<Blog> getAllBlogs() throws ClientServicesException{
 		return getAllBlogs(null);
 		
 	}
@@ -123,264 +130,165 @@ public class BlogService extends BaseService {
 	 * This method returns the all blogs
 	 * 
 	 * @param parameters
-	 * @return BlogList
-	 * @throws BlogServiceException
+	 * @return EntityList<Blog>
+	 * @throws ClientServicesException
 	 */
-	public BlogList getAllBlogs(Map<String, String> parameters) throws BlogServiceException {
-		BlogList blogs;
-		
-		if(null == parameters){
-			parameters = new HashMap<String, String>();
-		}
-		try {
-			String blogsUrl = BlogUrls.ALL_BLOGS.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle));
-			blogs = (BlogList)getEntities(blogsUrl, parameters, new BlogsFeedHandler(this));
-		} catch (ClientServicesException e) {
-			throw new BlogServiceException(e);
-		} catch (IOException e) {
-			throw new BlogServiceException(e);
-		}
-		return blogs;
+	public EntityList<Blog> getAllBlogs(Map<String, String> parameters) throws ClientServicesException {
+		String url = BlogUrls.ALL_BLOGS.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle));
+		return getBlogEntityList(url, parameters);
 	}
 	
 	
 	/**
 	 * This method returns My blogs
 	 * 
-	 * @return BlogList
-	 * @throws ForumServiceException
+	 * @return EntityList<Blog>
+	 * @throws ClientServicesException
 	 */
-	public BlogList getMyBlogs() throws BlogServiceException{
+	public EntityList<Blog> getMyBlogs() throws ClientServicesException{
 		return getMyBlogs(null);
-		
 	}
 	
 	/**
 	 * This method returns My blogs
 	 * 
 	 * @param parameters
-	 * @return BlogList
-	 * @throws BlogServiceException
+	 * @return EntityList<Blog>
+	 * @throws ClientServicesException
 	 */
-	public BlogList getMyBlogs(Map<String, String> parameters) throws BlogServiceException {
-		BlogList blogs;
-		
-		if(null == parameters){
-			parameters = new HashMap<String, String>();
-		}
-		try {
-			String myBlogsUrl = BlogUrls.MY_BLOGS.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle));
-			blogs = (BlogList)getEntities(myBlogsUrl, parameters, new BlogsFeedHandler(this));
-		} catch (ClientServicesException e) {
-			throw new BlogServiceException(e);
-		} catch (IOException e) {
-			throw new BlogServiceException(e);
-		}
-		return blogs;
+	public EntityList<Blog> getMyBlogs(Map<String, String> parameters) throws ClientServicesException {
+		String url = BlogUrls.MY_BLOGS.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle));
+		return getBlogEntityList(url, parameters);
 	}
 
 	/**
 	 * This method returns the featured blogs
 	 * 
-	 * @return BlogList
-	 * @throws BlogServiceException
+	 * @return EntityList<Blog>
+	 * @throws ClientServicesException
 	 */
-	public BlogList getFeaturedBlogs() throws BlogServiceException{
+	public EntityList<Blog> getFeaturedBlogs() throws ClientServicesException {
 		return getFeaturedBlogs(null);
-		
 	}
 	
 	/**
 	 * This method returns the featured blogs
 	 * 
 	 * @param parameters
-	 * @return BlogList
-	 * @throws BlogServiceException
+	 * @return EntityList<Blog>
+	 * @throws ClientServicesException
 	 */
-	public BlogList getFeaturedBlogs(Map<String, String> parameters) throws BlogServiceException {
-		BlogList blogs;
-		
-		if(null == parameters){
-			parameters = new HashMap<String, String>();
-		}
-		try {
-			String featuredBlogsUrl = BlogUrls.FEATURED_BLOGS.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle));
-			blogs = (BlogList)getEntities(featuredBlogsUrl, parameters, new BlogsFeedHandler(this));
-		} catch (ClientServicesException e) {
-			throw new BlogServiceException(e);
-		} catch (IOException e) {
-			throw new BlogServiceException(e);
-		}
-		return blogs;
+	public EntityList<Blog> getFeaturedBlogs(Map<String, String> parameters) throws ClientServicesException {
+		String url = BlogUrls.FEATURED_BLOGS.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle));
+		return getBlogEntityList(url, parameters);
 	}
 	/**
 	 * This method returns the most recent Blog posts
 	 * 
-	 * @return BlogPostList
-	 * @throws BlogServiceException
+	 * @return EntityList<BlogPost>
+	 * @throws ClientServicesException
 	 */
-	public BlogPostList getAllPosts() throws BlogServiceException{
+	public EntityList<BlogPost> getAllPosts() throws ClientServicesException {
 		return getAllPosts(null);
-		
 	}
 	
 	/**
 	 * This method returns the most recent posts
 	 * 
 	 * @param parameters
-	 * @return BlogPostList
-	 * @throws BlogServiceException
+	 * @return EntityList<BlogPost>
+	 * @throws ClientServicesException
 	 */
-	public BlogPostList getAllPosts(Map<String, String> parameters) throws BlogServiceException {
-		BlogPostList blogPosts;
-		
-		if(null == parameters){
-			parameters = new HashMap<String, String>();
-		}
-		try {
-			String latestPostsUrl = BlogUrls.ALL_BLOG_POSTS.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle));
-			blogPosts = (BlogPostList)getEntities(latestPostsUrl, parameters, new BlogPostsFeedHandler(this));
-		} catch (ClientServicesException e) {
-			throw new BlogServiceException(e);
-		} catch (IOException e) {
-			throw new BlogServiceException(e);
-		}
-		return blogPosts;
+	public EntityList<BlogPost> getAllPosts(Map<String, String> parameters) throws ClientServicesException {
+		String url = BlogUrls.ALL_BLOG_POSTS.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle));
+		return getBlogPostEntityList(url, parameters);
 	}
 	
 	/**
 	 * This method returns the featured posts
 	 * 
-	 * @return BlogPostList
-	 * @throws BlogServiceException
+	 * @return EntityList<BlogPost>
+	 * @throws ClientServicesException
 	 */
-	public BlogPostList getFeaturedPosts() throws BlogServiceException{
+	public EntityList<BlogPost> getFeaturedPosts() throws ClientServicesException {
 		return getFeaturedPosts(null);
-		
 	}
 	
 	/**
 	 * This method returns the featured posts
 	 * 
 	 * @param parameters
-	 * @return BlogPostList
-	 * @throws BlogServiceException
+	 * @return EntityList<BlogPost>
+	 * @throws ClientServicesException
 	 */
-	public BlogPostList getFeaturedPosts(Map<String, String> parameters) throws BlogServiceException {
-		BlogPostList blogPosts;
-		
-		if(null == parameters){
-			parameters = new HashMap<String, String>();
-		}
-		try {
-			String featuredPostsUrl = BlogUrls.ALL_FEATURED_BLOG_POSTS.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle));
-			blogPosts = (BlogPostList)getEntities(featuredPostsUrl, parameters, new BlogPostsFeedHandler(this));
-		} catch (ClientServicesException e) {
-			throw new BlogServiceException(e);
-		} catch (IOException e) {
-			throw new BlogServiceException(e);
-		}
-		return blogPosts;
+	public EntityList<BlogPost> getFeaturedPosts(Map<String, String> parameters) throws ClientServicesException {
+		String url = BlogUrls.ALL_FEATURED_BLOG_POSTS.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle));
+		return getBlogPostEntityList(url, parameters);
 	}
 	
 	/**
 	 * This method returns the recommended posts
 	 * 
-	 * @return BlogPostList
-	 * @throws BlogServiceException
+	 * @return EntityList<BlogPost>
+	 * @throws ClientServicesException
 	 */
-	public BlogPostList getRecommendedPosts() throws BlogServiceException{
+	public EntityList<BlogPost> getRecommendedPosts() throws ClientServicesException {
 		return getRecommendedPosts(null);
-		
 	}
 	
 	/**
 	 * This method returns the recommended posts
 	 * 
 	 * @param parameters
-	 * @return BlogPostList
-	 * @throws BlogServiceException
+	 * @return EntityList<BlogPost>
+	 * @throws ClientServicesException
 	 */
-	public BlogPostList getRecommendedPosts(Map<String, String> parameters) throws BlogServiceException {
-		BlogPostList blogPosts;
-		
-		if(null == parameters){
-			parameters = new HashMap<String, String>();
-		}
-		try {
-			String recommendedPostsUrl = BlogUrls.ALL_RECOMMENDED_BLOG_POSTS.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle));
-			blogPosts = (BlogPostList)getEntities(recommendedPostsUrl, parameters, new BlogPostsFeedHandler(this));
-		} catch (ClientServicesException e) {
-			throw new BlogServiceException(e);
-		} catch (IOException e) {
-			throw new BlogServiceException(e);
-		}
-		return blogPosts;
+	public EntityList<BlogPost> getRecommendedPosts(Map<String, String> parameters) throws ClientServicesException {
+		String url = BlogUrls.ALL_RECOMMENDED_BLOG_POSTS.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle));
+		return getBlogPostEntityList(url, parameters);
 	}
 	
 	/**
 	 * This method returns the latest comments on blogs
 	 * 
-	 * @return CommentList
-	 * @throws BlogServiceException
+	 * @return EntityList<Comment>
+	 * @throws ClientServicesException
 	 */
-	public CommentList getAllComments() throws BlogServiceException{
+	public EntityList<Comment> getAllComments() throws ClientServicesException{
 		return getAllComments(null);
-		
 	}
 	
 	/**
 	 * This method returns the latest comments on blogs
 	 * 
 	 * @param parameters
-	 * @return CommentList
-	 * @throws BlogServiceException
+	 * @return EntityList<Comment>
+	 * @throws ClientServicesException
 	 */
-	public CommentList getAllComments(Map<String, String> parameters) throws BlogServiceException {
-		CommentList comments;
-		
-		if(null == parameters){
-			parameters = new HashMap<String, String>();
-		}
-		try {
-			String commentsUrl = BlogUrls.ALL_BLOG_COMMENTS.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle));
-			comments = (CommentList)getEntities(commentsUrl, parameters, new CommentsFeedHandler(this));
-		} catch (ClientServicesException e) {
-			throw new BlogServiceException(e);
-		} catch (IOException e) {
-			throw new BlogServiceException(e);
-		}
-		return comments;
+	public EntityList<Comment> getAllComments(Map<String, String> parameters) throws ClientServicesException {
+		String url = BlogUrls.ALL_BLOG_COMMENTS.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle));
+		return getCommentEntityList(url, parameters);
 	}
 	
 	/**
 	 * This method returns the tags on all blogs
 	 * 
-	 * @return TagList
-	 * @throws BlogServiceException
+	 * @return EntityList<Tag>
+	 * @throws ClientServicesException
 	 */
-	public TagList getAllTags() throws BlogServiceException {
-		TagList tags;
-		try {
-			String allTagsUrl = BlogUrls.ALL_BLOG_TAGS.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle));
-			tags = (TagList)getEntities(allTagsUrl, null, new TagFeedHandler(this));
-		} catch (ClientServicesException e) {
-			throw new BlogServiceException(e);
-		} catch (IOException e) {
-			throw new BlogServiceException(e);
-		}
-		return tags;
+	public EntityList<Tag> getAllTags() throws ClientServicesException {
+		String url = BlogUrls.ALL_BLOG_TAGS.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle));
+		return getTagEntityList(url, null);
 	}
 	
 	/**
 	 * This method returns the most recent posts for a particular Blog
 	 * 
-	 * @return BlogPostList
-	 * @throws BlogServiceException
+	 * @return EntityList<BlogPost>
+	 * @throws ClientServicesException
 	 */
-	public BlogPostList getBlogPosts(String blogHandle) throws BlogServiceException{
+	public EntityList<BlogPost> getBlogPosts(String blogHandle) throws ClientServicesException {
 		return getBlogPosts(blogHandle, null);
-		
 	}
 	
 	/**
@@ -388,34 +296,22 @@ public class BlogService extends BaseService {
 	 * 
 	 * @param blogHandle
 	 * @param parameters
-	 * @return BlogPostList
-	 * @throws BlogServiceException
+	 * @return EntityList<BlogPost>
+	 * @throws ClientServicesException
 	 */
-	public BlogPostList getBlogPosts(String blogHandle, Map<String, String> parameters) throws BlogServiceException {
-		BlogPostList posts;
-		
-		if(null == parameters){
-			parameters = new HashMap<String, String>();
-		}
-		try {
-			String latestPostsUrl = BlogUrls.BLOG_POSTS.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle));
-			posts = (BlogPostList)getEntities(latestPostsUrl, parameters, new BlogPostsFeedHandler(this));
-		} catch (ClientServicesException e) {
-			throw new BlogServiceException(e);
-		} catch (IOException e) {
-			throw new BlogServiceException(e);
-		}
-		return posts;
+	public EntityList<BlogPost> getBlogPosts(String blogHandle, Map<String, String> parameters) throws ClientServicesException {
+		String url = BlogUrls.BLOG_POSTS.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle));
+		return getBlogPostEntityList(url, parameters);
 	}
 	
 	/**
 	 * This method returns the latest comments for a particular Blog
 	 * 
 	 * @param blogHandle
-	 * @return CommentList
-	 * @throws BlogServiceException
+	 * @return EntityList<Comment>
+	 * @throws ClientServicesException
 	 */
-	public CommentList getBlogComments(String blogHandle) throws BlogServiceException{
+	public EntityList<Comment> getBlogComments(String blogHandle) throws ClientServicesException {
 		return getBlogComments(blogHandle, null);
 	}
 	
@@ -424,24 +320,12 @@ public class BlogService extends BaseService {
 	 * 
 	 * @param blogHandle
 	 * @param parameters
-	 * @return CommentList
-	 * @throws BlogServiceException
+	 * @return EntityList<Comment>
+	 * @throws ClientServicesException
 	 */
-	public CommentList getBlogComments(String blogHandle, Map<String, String> parameters) throws BlogServiceException {
-		CommentList comments;
-		
-		if(null == parameters){
-			parameters = new HashMap<String, String>();
-		}
-		try {
-			String latestCommentsUrl = BlogUrls.BLOG_COMMENTS.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle));
-			comments = (CommentList)getEntities(latestCommentsUrl, parameters, new CommentsFeedHandler(this));
-		} catch (ClientServicesException e) {
-			throw new BlogServiceException(e);
-		} catch (IOException e) {
-			throw new BlogServiceException(e);
-		}
-		return comments;
+	public EntityList<Comment> getBlogComments(String blogHandle, Map<String, String> parameters) throws ClientServicesException {
+		String url = BlogUrls.BLOG_COMMENTS.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle));
+		return getCommentEntityList(url, parameters);
 	}
 	
 	/**
@@ -450,58 +334,38 @@ public class BlogService extends BaseService {
 	 * @param blogHandle
 	 * @param entryAnchor
 	 * @param parameters
-	 * @return CommentList
-	 * @throws BlogServiceException
+	 * @return EntityList<Comment>
+	 * @throws ClientServicesException
 	 */
-	public CommentList getEntryComments(String blogHandle, String entryAnchor, Map<String, String> parameters) throws BlogServiceException {
-		CommentList comments;
-		
-		if(null == parameters){
-			parameters = new HashMap<String, String>();
-		}
-		try {
-			String url = BlogUrls.BLOG_ENTRYCOMMENTS.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle));
-			comments = (CommentList)getEntities(url, parameters, new CommentsFeedHandler(this));
-		} catch (ClientServicesException e) {
-			throw new BlogServiceException(e);
-		} catch (IOException e) {
-			throw new BlogServiceException(e);
-		}
-		return comments;
+	public EntityList<Comment> getEntryComments(String blogHandle, String entryAnchor, Map<String, String> parameters) throws ClientServicesException {
+		String url = BlogUrls.BLOG_ENTRYCOMMENTS.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle));
+		return getCommentEntityList(url, parameters);
 	}
 	
 	/**
 	 * This method returns the tags for a particular blog
 	 * 
 	 * @param blogHandle
-	 * @return TagList
-	 * @throws BlogServiceException
+	 * @return EntityList<Tag>
+	 * @throws ClientServicesException
 	 */
-	public TagList getBlogTags(String blogHandle) throws BlogServiceException {
-		TagList tags;
-		try {
-			String allTagsUrl = BlogUrls.BLOG_TAGS.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle));
-			tags = (TagList)getEntities(allTagsUrl, null, new TagFeedHandler(this));
-		} catch (ClientServicesException e) {
-			throw new BlogServiceException(e);
-		} catch (IOException e) {
-			throw new BlogServiceException(e);
-		}
-		return tags;
+	public EntityList<Tag> getBlogTags(String blogHandle) throws ClientServicesException {
+		String url = BlogUrls.BLOG_TAGS.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle));
+		return getTagEntityList(url, null);
 	}
 	
 	/**
 	 * Wrapper method to create a Blog
-	 * <p>
+	 *
 	 * User should be authenticated to call this method
 	 * 
 	 * @param Blog
 	 * @return Blog
-	 * @throws BlogServiceException
+	 * @throws ClientServicesException
 	 */
-	public Blog createBlog(Blog blog) throws BlogServiceException {
+	public Blog createBlog(Blog blog) throws ClientServicesException {
 		if (null == blog){
-			throw new BlogServiceException(null,"null blog");
+			throw new ClientServicesException(null,"null blog");
 		}
 		Response result = null;
 		try {
@@ -513,10 +377,9 @@ public class BlogService extends BaseService {
 			
 			String createBlogUrl = BlogUrls.MY_BLOGS.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle));
 			result = createData(createBlogUrl, null, headers, payload);
-			blog = (Blog) new BlogsFeedHandler(this).createEntity(result);
-
+			blog = getBlogFeedHandler().createEntity(result);
 		} catch (Exception e) {
-			throw new BlogServiceException(e, "error creating blog");
+			throw new ClientServicesException(e, "error creating blog post");
 		}
 
         return blog;
@@ -525,32 +388,25 @@ public class BlogService extends BaseService {
 	 * Wrapper method to get a Blog 
 	 * 
 	 * @param Blog
-	 * @throws BlogServiceException
+	 * @throws ClientServicesException
 	 */
-	public Blog getBlog(String blogUuid) throws BlogServiceException {
+	public Blog getBlog(String blogUuid) throws ClientServicesException {
 	
 		if(StringUtil.isEmpty(blogUuid)){
-			throw new BlogServiceException(null, "null blogUuid");
+			throw new ClientServicesException(null, "null blogUuid");
 		}
-		String getBlogUrl = BlogUrls.GET_UPDATE_REMOVE_BLOG.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle), BlogUrlParts.entryAnchor.get(blogUuid));
-		Blog blog;
-		try {
-			blog = (Blog)getEntity(getBlogUrl, null, new BlogsFeedHandler(this));
-		} catch (Exception e) {
-			throw new BlogServiceException(e, "error getting blog");
-		} 
-		return blog;
-		
+		String url = BlogUrls.GET_UPDATE_REMOVE_BLOG.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle), BlogUrlParts.entryAnchor.get(blogUuid));		
+		return getBlogEntity(url, null);
 	}
 	/**
 	 * Wrapper method to update a Blog 
 	 * 
 	 * @param Blog
-	 * @throws BlogServiceException
+	 * @throws ClientServicesException
 	 */
-	public void updateBlog(Blog blog) throws BlogServiceException {
+	public void updateBlog(Blog blog) throws ClientServicesException {
 		if (null == blog){
-			throw new BlogServiceException(null,"null blog");
+			throw new ClientServicesException(null,"null blog");
 		}
 		try {
 			if(blog.getFieldsMap().get(AtomXPath.title)== null)
@@ -572,108 +428,97 @@ public class BlogService extends BaseService {
 			getClientService().put(updateBlogUrl, null,headers, payload,ClientService.FORMAT_NULL);
 
 		} catch (Exception e) {
-			throw new BlogServiceException(e, "error updating blog");
+			throw new ClientServicesException(e, "error updating blog");
 		}
 
 	}
 	
 	/**
 	 * Wrapper method to delete a post
-	 * <p>
 	 * User should be logged in as a owner of the Blog to call this method.
 	 * 
 	 * @param String
 	 * 				blogUuid which is to be deleted
-	 * @throws BlogServiceException
+	 * @throws ClientServicesException
 	 */
-	public void removeBlog(String blogUuid) throws BlogServiceException {
+	public void removeBlog(String blogUuid) throws ClientServicesException {
 		if (StringUtil.isEmpty(blogUuid)){
-			throw new BlogServiceException(null, "null blog Uuid");
+			throw new ClientServicesException(null, "null blog Uuid");
 		}
 		try {
 			String deleteBlogUrl = BlogUrls.GET_UPDATE_REMOVE_BLOG.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle), BlogUrlParts.entryAnchor.get(blogUuid));
 			getClientService().delete(deleteBlogUrl);
 		} catch (Exception e) {
-			throw new BlogServiceException(e,"error deleting blog");
+			throw new ClientServicesException(e,"error deleting blog");
 		} 	
-		
 	}
 	
 	/**
 	 * Wrapper method to get a particular Blog Post
-	 * <p>
 	 * 
 	 * @param blogHandle
 	 * @param postUuid
 	 * @return BlogPost
-	 * @throws BlogServiceException
+	 * @throws ClientServicesException
 	 */
-	public BlogPost getBlogPost(String blogHandle, String postUuid) throws BlogServiceException {
+	public BlogPost getBlogPost(String blogHandle, String postUuid) throws ClientServicesException {
 		if (StringUtil.isEmpty(blogHandle)){
-			throw new BlogServiceException(null,"blog handle is null");
+			throw new ClientServicesException(null,"blog handle is null");
 		}
 		if (StringUtil.isEmpty(postUuid)){
-			throw new BlogServiceException(null,"postUuid is null");
+			throw new ClientServicesException(null,"postUuid is null");
 		}
-		BlogPost blogPost;
-		try {
-			Map<String, String> params = new HashMap<String, String>();
-			params.put("entryid", postUuid);
-			String getPostUrl = BlogUrls.BLOG_POST.format(this, BlogUrlParts.blogHandle.get(blogHandle));
-			blogPost = (BlogPost)getEntity(getPostUrl, params, new BlogPostsFeedHandler(this));
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("entryid", postUuid);
 			
-		} catch (Exception e) {
-			throw new BlogServiceException(e, "error getting blog post");
-		}
-        return blogPost;
+		String url = BlogUrls.BLOG_POST.format(this, BlogUrlParts.blogHandle.get(blogHandle));
+		return getBlogPostEntity(url, params);
 	}
 	/**
 	 * Wrapper method to recommend/like a Blog Post
-	 * <p>
 	 * User should be authenticated to call this method
 	 * 
 	 * @param blogHandle
 	 * @param postUuid
 	 * @return BlogPost
-	 * @throws BlogServiceException
+	 * @throws ClientServicesException
 	 */
-	public void recommendPost(String blogHandle, String postUuid) throws BlogServiceException {
+	public void recommendPost(String blogHandle, String postUuid) throws ClientServicesException {
 		if (StringUtil.isEmpty(blogHandle)){
-			throw new BlogServiceException(null,"blog handle is null");
+			throw new ClientServicesException(null,"blog handle is null");
 		}
 		if (StringUtil.isEmpty(postUuid)){
-			throw new BlogServiceException(null,"postUuid is null");
+			throw new ClientServicesException(null,"postUuid is null");
 		}
 		try {
 			String recommendPostUrl = BlogUrls.RECOMMEND_POST.format(this, BlogUrlParts.blogHandle.get(blogHandle), BlogUrlParts.entryAnchor.get(postUuid));
 			super.createData(recommendPostUrl, null, null);
 		} catch (Exception e) {
-			throw new BlogServiceException(e, "error recommending blog post");
+			throw new ClientServicesException(e, "error recommending blog post");
 		}
-		
 	}
+	
 	/**
 	 * Wrapper method to unrecommend/unlike a Blog Post
-	 * <p>
 	 * User should be authenticated to call this method
 	 * 
 	 * @param blogHandle
 	 * @param postUuid
 	 * @return BlogPost
-	 * @throws BlogServiceException
+	 * @throws ClientServicesException
 	 */
-	public void unrecommendPost(String blogHandle, String postUuid) throws BlogServiceException {
+	public void unrecommendPost(String blogHandle, String postUuid) throws ClientServicesException {
 		if (StringUtil.isEmpty(blogHandle)){
-			throw new BlogServiceException(null,"blog handle is null");
+			throw new ClientServicesException(null,"blog handle is null");
 		}
 		if (StringUtil.isEmpty(postUuid)){
-			throw new BlogServiceException(null,"postUuid is null");
+			throw new ClientServicesException(null,"postUuid is null");
 		}
 		try {
 			String recommendPostUrl = BlogUrls.RECOMMEND_POST.format(this, BlogUrlParts.blogHandle.get(blogHandle), BlogUrlParts.entryAnchor.get(postUuid));
 			super.deleteData(recommendPostUrl, null, null);
 		} catch (Exception e) {
-			throw new BlogServiceException(e, "error unrecommending blog post");
+			throw new ClientServicesException(e, "error unrecommending blog post");
 		}
 	}
 	/**
@@ -684,14 +529,14 @@ public class BlogService extends BaseService {
 	 * @param BlogPost
 	 * @param blogHandle
 	 * @return BlogPost
-	 * @throws BlogServiceException
+	 * @throws ClientServicesException
 	 */
-	public BlogPost createBlogPost(BlogPost post, String blogHandle) throws BlogServiceException {
+	public BlogPost createBlogPost(BlogPost post, String blogHandle) throws ClientServicesException {
 		if (null == post){
-			throw new BlogServiceException(null,"null post");
+			throw new ClientServicesException(null,"null post");
 		}
 		if (StringUtil.isEmpty(blogHandle)){
-			throw new BlogServiceException(null,"blog handle is not passed");
+			throw new ClientServicesException(null,"blog handle is not passed");
 		}
 		Response result = null;
 		try {
@@ -702,10 +547,10 @@ public class BlogService extends BaseService {
 			headers.put("Content-Type", "application/atom+xml");
 			String createPostUrl = BlogUrls.CREATE_BLOG_POST.format(this, BlogUrlParts.blogHandle.get(blogHandle));
 			result = createData(createPostUrl, null, headers, payload);
-			post = (BlogPost) new BlogPostsFeedHandler(this).createEntity(result);
+			post = getBlogPostFeedHandler().createEntity(result);
 
 		} catch (Exception e) {
-			throw new BlogServiceException(e, "error creating blog post");
+			throw new ClientServicesException(e, "error creating blog post");
 		}
 		
         return post;
@@ -716,11 +561,11 @@ public class BlogService extends BaseService {
 	 * 
 	 * @param BlogPost
 	 * @param blogHandle
-	 * @throws BlogServiceException
+	 * @throws ClientServicesException
 	 */
-	public BlogPost updateBlogPost(BlogPost post, String blogHandle) throws BlogServiceException {
+	public BlogPost updateBlogPost(BlogPost post, String blogHandle) throws ClientServicesException {
 		if (null == post){
-			throw new BlogServiceException(null,"null post");
+			throw new ClientServicesException(null,"null post");
 		}
 		try {
 			if(post.getFieldsMap().get(AtomXPath.title)== null)
@@ -738,11 +583,9 @@ public class BlogService extends BaseService {
 			
 			String updatePostUrl = BlogUrls.UPDATE_REMOVE_POST.format(this, BlogUrlParts.blogHandle.get(blogHandle), BlogUrlParts.entryAnchor.get(post.getUid()));
 			Response result = getClientService().put(updatePostUrl, null,headers, payload,ClientService.FORMAT_NULL);
-			post = (BlogPost) new BlogPostsFeedHandler(this).createEntity(result);
-
-
+			post = getBlogPostFeedHandler().createEntity(result);
 		} catch (Exception e) {
-			throw new BlogServiceException(e, "error updating blog post");
+			throw new ClientServicesException(e, "error updating blog post");
 		}
 
 		return post;
@@ -750,66 +593,57 @@ public class BlogService extends BaseService {
 	
 	/**
 	 * Wrapper method to delete a post
-	 * <p>
 	 * User should be logged in as a owner of the Blog to call this method.
 	 * 
 	 * @param String
 	 * 				postUuid which is to be deleted
 	 * @param blogHandle
-	 * @throws BlogServiceException
+	 * @throws ClientServicesException
 	 */
-	public void removeBlogPost(String postUuid, String blogHandle) throws BlogServiceException {
+	public void removeBlogPost(String postUuid, String blogHandle) throws ClientServicesException {
 		if (StringUtil.isEmpty(postUuid)){
-			throw new BlogServiceException(null, "null post id");
+			throw new ClientServicesException(null, "null post id");
 		}
 		try {
 			String deletePostUrl = BlogUrls.UPDATE_REMOVE_POST.format(this, BlogUrlParts.blogHandle.get(blogHandle), BlogUrlParts.entryAnchor.get(postUuid));
 			getClientService().delete(deletePostUrl);
 		} catch (Exception e) {
-			throw new BlogServiceException(e,"error deleting post");
+			throw new ClientServicesException(e,"error deleting post");
 		} 	
 	}
 	
 
 	/**
 	 * Wrapper method to get a particular Blog Comment
-	 * <p>
 	 * 
 	 * @param blogHandle
 	 * @param commentUuid
 	 * @return Comment
-	 * @throws BlogServiceException
+	 * @throws ClientServicesException
 	 */
-	public Comment getBlogComment(String blogHandle, String commentUuid) throws BlogServiceException {
+	public Comment getBlogComment(String blogHandle, String commentUuid) throws ClientServicesException {
 		if (StringUtil.isEmpty(blogHandle)){
-			throw new BlogServiceException(null,"blog handle is null");
+			throw new ClientServicesException(null,"blog handle is null");
 		}
 		if (StringUtil.isEmpty(commentUuid)){
-			throw new BlogServiceException(null,"commentUuid is null");
+			throw new ClientServicesException(null,"commentUuid is null");
 		}
-		Comment comment;
-		try {
-			String getCommentUrl = BlogUrls.GET_REMOVE_COMMENT.format(this, BlogUrlParts.blogHandle.get(blogHandle), BlogUrlParts.entryAnchor.get(commentUuid));
-			comment = (Comment)getEntity(getCommentUrl, null, new CommentsFeedHandler(this));
-		} catch (Exception e) {
-			throw new BlogServiceException(e, "error getting blog comment");
-		}
-        return comment;
+		String url = BlogUrls.GET_REMOVE_COMMENT.format(this, BlogUrlParts.blogHandle.get(blogHandle), BlogUrlParts.entryAnchor.get(commentUuid));
+		return getCommentEntity(url, null);
 	}
 	
 	/**
 	 * Wrapper method to create a Blog Comment
-	 * <p>
 	 * User should be authenticated to call this method
 	 * 
 	 * 
 	 * @param Comment
 	 * @return Comment
-	 * @throws BlogServiceException
+	 * @throws ClientServicesException
 	 */
-	public Comment createBlogComment(Comment comment, String blogHandle, String postUuid) throws BlogServiceException {
+	public Comment createBlogComment(Comment comment, String blogHandle, String postUuid) throws ClientServicesException {
 		if (null == comment){
-			throw new BlogServiceException(null,"null comment");
+			throw new ClientServicesException(null,"null comment");
 		}
 		Response result = null;
 		try {
@@ -823,10 +657,10 @@ public class BlogService extends BaseService {
 			String createCommentUrl = BlogUrls.CREATE_COMMENT.format(this, BlogUrlParts.blogHandle.get(blogHandle), BlogUrlParts.entryAnchor.get(""));
 			
 			result = createData(createCommentUrl, null, headers, payload);
-			comment = (Comment) new CommentsFeedHandler(this).createEntity(result);
+			comment = getCommentFeedHandler().createEntity(result);
 
 		} catch (Exception e) {
-			throw new BlogServiceException(e, "error creating blog comment");
+			throw new ClientServicesException(e, "error creating blog comment");
 		}
 
         return comment;
@@ -834,25 +668,24 @@ public class BlogService extends BaseService {
 	
 	/**
 	 * Wrapper method to remove a particular Blog Comment
-	 * <p>
 	 * 
 	 * @param blogHandle
 	 * @param commentUuid
 	 * @return Comment
-	 * @throws BlogServiceException
+	 * @throws ClientServicesException
 	 */
-	public void removeBlogComment(String blogHandle, String commentUuid) throws BlogServiceException {
+	public void removeBlogComment(String blogHandle, String commentUuid) throws ClientServicesException {
 		if (StringUtil.isEmpty(blogHandle)){
-			throw new BlogServiceException(null,"blog handle is null");
+			throw new ClientServicesException(null,"blog handle is null");
 		}
 		if (StringUtil.isEmpty(commentUuid)){
-			throw new BlogServiceException(null,"commentUuid is null");
+			throw new ClientServicesException(null,"commentUuid is null");
 		}
 		try {
 			String getCommentUrl = BlogUrls.GET_REMOVE_COMMENT.format(this, BlogUrlParts.blogHandle.get(blogHandle), BlogUrlParts.entryAnchor.get(commentUuid));
 			getClientService().delete(getCommentUrl);
 		} catch (Exception e) {
-			throw new BlogServiceException(e, "error deleting blog comment");
+			throw new ClientServicesException(e, "error deleting blog comment");
 		}
 	}
 	/*
@@ -878,5 +711,105 @@ public class BlogService extends BaseService {
 	public void setHomepageHandle(String defaultHandle) {
 		this.defaultHomepageHandle = defaultHandle;
 	}
-
+	
+	/***************************************************************
+	 * FeedHandlers for each entity type
+	 ****************************************************************/
+	public IFeedHandler<Blog> getBlogFeedHandler() {
+        return new AtomFeedHandler<Blog>(this) {
+            @Override
+            protected Blog entityInstance(BaseService service, Node node, XPathExpression xpath) {
+                return new Blog(service, node, nameSpaceCtx, xpath);
+            }
+        };
+    }
+	
+	public IFeedHandler<BlogPost> getBlogPostFeedHandler() {
+        return new AtomFeedHandler<BlogPost>(this) {
+            @Override
+            protected BlogPost entityInstance(BaseService service, Node node, XPathExpression xpath) {
+                return new BlogPost(service, node, nameSpaceCtx, xpath);
+            }
+        };
+    }
+	
+	public IFeedHandler<Comment> getCommentFeedHandler() {
+        return new AtomFeedHandler<Comment>(this) {
+            @Override
+            protected Comment entityInstance(BaseService service, Node node, XPathExpression xpath) {
+                return new Comment(service, node, nameSpaceCtx, xpath);
+            }
+        };
+    }
+	
+	/**
+	 * Factory method to instantiate a FeedHandler for Tags
+	 * @return IFeedHandler<Tag>
+	 */
+	public IFeedHandler<Tag> getTagFeedHandler() {
+		return new AtomFeedHandler<Tag>(this) {
+			@Override
+			protected Tag entityInstance(BaseService service, Node node, XPathExpression xpath) {
+				return new Tag(service, node, nameSpaceCtx, xpath);
+			}
+		};
+	}
+	/***************************************************************
+	 * Factory methods
+	 ****************************************************************/
+	protected Blog getBlogEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
+		try {
+			return getEntity(requestUrl, getParameters(parameters), getBlogFeedHandler());
+		} catch (IOException e) {
+			throw new ClientServicesException(e);
+		}
+	}
+	
+	protected Comment getCommentEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
+		try {
+			return getEntity(requestUrl, getParameters(parameters), getCommentFeedHandler());
+		} catch (IOException e) {
+			throw new ClientServicesException(e);
+		}
+	}
+	
+	protected BlogPost getBlogPostEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
+		try {
+			return getEntity(requestUrl, getParameters(parameters), getBlogPostFeedHandler());
+		} catch (IOException e) {
+			throw new ClientServicesException(e);
+		}
+	}
+	
+	protected EntityList<Blog> getBlogEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
+		try {
+			return getEntities(requestUrl, getParameters(parameters), getBlogFeedHandler());
+		} catch (IOException e) {
+			throw new ClientServicesException(e);
+		}
+	}
+	
+	protected EntityList<BlogPost> getBlogPostEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
+		try {
+			return getEntities(requestUrl, getParameters(parameters), getBlogPostFeedHandler());
+		} catch (IOException e) {
+			throw new ClientServicesException(e);
+		}
+	}
+	
+	protected EntityList<Comment> getCommentEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
+		try {
+			return getEntities(requestUrl, getParameters(parameters), getCommentFeedHandler());
+		} catch (IOException e) {
+			throw new ClientServicesException(e);
+		}
+	}
+	
+	protected EntityList<Tag> getTagEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
+		try {
+			return getEntities(requestUrl, getParameters(parameters), getTagFeedHandler());
+		} catch (IOException e) {
+			throw new ClientServicesException(e);
+		}
+	}
 }

@@ -21,7 +21,7 @@ import com.ibm.sbt.services.client.base.NamedUrlPart;
  * @author Carlos Manias
  */
 public enum BlogUrlParts {
-	blogHandle, entryAnchor;
+	blogHandle, entryAnchor, entryid;
 	
 	public NamedUrlPart get(String value){
 		return new NamedUrlPart(name(), value);

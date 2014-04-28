@@ -37,6 +37,7 @@ import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.base.AtomFeedHandler;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
+import com.ibm.sbt.services.client.base.transformers.TransformerException;
 
 import org.w3c.dom.Node;
 
@@ -378,7 +379,9 @@ public class BlogService extends BaseService {
 			String createBlogUrl = BlogUrls.MY_BLOGS.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle));
 			result = createData(createBlogUrl, null, headers, payload);
 			blog = getBlogFeedHandler().createEntity(result);
-		} catch (Exception e) {
+		} catch (IOException e) {
+			throw new ClientServicesException(e, "error creating blog post");
+		} catch (TransformerException e) {
 			throw new ClientServicesException(e, "error creating blog post");
 		}
 

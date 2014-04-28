@@ -14,10 +14,9 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page import="com.ibm.sbt.services.client.connections.search.Scope"%>
-<%@page import="com.ibm.sbt.services.client.connections.search.ScopeList"%>
 <%@page import="com.ibm.sbt.services.client.connections.search.Result"%>
-<%@page import="com.ibm.sbt.services.client.connections.search.ResultList"%>
 <%@page import="com.ibm.sbt.services.client.connections.search.SearchService"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
@@ -40,7 +39,7 @@
 	<%
 		try {
 			SearchService svc = new SearchService();
-			ScopeList scopes = svc.getScopes();
+			EntityList<Scope> scopes = svc.getScopes();
 			if(scopes.size()<=0){
 				out.println("No results found");
 			}

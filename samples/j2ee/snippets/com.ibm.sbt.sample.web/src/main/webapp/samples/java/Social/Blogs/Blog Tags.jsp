@@ -16,17 +16,15 @@
 */ -->
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="com.ibm.sbt.services.client.connections.blogs.BlogService"%>
-<%@page import="com.ibm.sbt.services.client.connections.blogs.BlogList"%>
 <%@page import="com.ibm.sbt.services.client.connections.blogs.Blog"%>
 <%@page import="com.ibm.sbt.services.client.connections.blogs.Tag"%>
-<%@page
-	import="com.ibm.sbt.services.client.connections.blogs.TagList"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <html>
@@ -40,7 +38,7 @@
 			BlogService svc = new BlogService();
 			Blog blog = (Blog)svc.getBlogs().get(0);
 			String blogHandle = blog.getHandle();
-			TagList tags = svc.getBlogTags(blogHandle);
+			EntityList<Tag> tags = svc.getBlogTags(blogHandle);
 			if (tags.size() <= 0) {
 				out.println("No tags to be displayed");
 			}

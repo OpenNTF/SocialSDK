@@ -20,6 +20,7 @@ import org.junit.Test;
 
 import com.ibm.commons.xml.XMLException;
 import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.services.client.connections.common.Member;
 
 /**
  * @author mwallace
@@ -31,73 +32,20 @@ public class ActivityMemberArudTest extends BaseActivityServiceTest {
 	public void testAddActivityMember() throws ClientServicesException, XMLException {
 		Activity activity = createActivity();
 		
-		ActivityNode activityNode = new ActivityNode();
-		activityNode.setActivityUuid(activity.getActivityUuid());
-		activityNode.setTitle(createActivityTitle());
-		
-		ActivityNode created = activityService.createActivityNode(activityNode);
-		
-		
-		//String createdXml = created.toXmlString();
-		//System.out.println("CREATED: " + createdXml);
-		
-		Assert.assertTrue("Invalid activity node instance", activityNode == created);
-		Assert.assertEquals("Invalid activity node id", activity.getActivityUuid(), activityNode.getActivityUuid());
-		Assert.assertNotNull("Invalid activity node id", activityNode.getId());
-		Assert.assertNotNull("Invalid activity node id", activityNode.getActivityNodeUuid());
-		Assert.assertNotNull("Invalid activity node edit url", activityNode.getEditUrl());		
+		Member member = activity.addMember(Member.TYPE_PERSON, "daviryan@ie.ibm.com", Member.ROLE_OWNER);
+		System.out.println(member.toXmlString());
 	}
 	
 	@Test
 	public void testRetrieveActivityMember() throws ClientServicesException, XMLException {
-		ActivityNode created = createActivityNode();
-		
-		ActivityNode read = activityService.getActivityNode(created.getActivityNodeUuid());
-		
-		String createdXml = created.toXmlString();
-		String readXml = read.toXmlString();
-		
-		//System.out.println("CREATED: " + createdXml);
-		//System.out.println("READ: " + readXml);
-		
-		Assert.assertEquals("Invalid activity node", createdXml, readXml);
 	}
 	
 	@Test
 	public void testUpdateActivityMember() throws ClientServicesException, XMLException {
-		ActivityNode created = createActivityNode();
-		
-		ActivityNode read = activityService.getActivityNode(created.getActivityNodeUuid());
-		
-		read.setTitle(createActivityNodeTitle());
-		activityService.updateActivityNode(read);
-		
-		ActivityNode updated = activityService.getActivityNode(created.getActivityNodeUuid());
-		
-		Assert.assertEquals(read.getTitle(), updated.getTitle());
-		
-		read = activityService.getActivityNode(created.getActivityNodeUuid());
-		
-		String updatedXml = updated.toXmlString();
-		String readXml = read.toXmlString();
-		
-		//System.out.println("UPDATED: " + updatedXml);
-		//System.out.println("READ: " + readXml);
-		
-		Assert.assertEquals("Invalid activity node", updatedXml, readXml);
 	}
 	
 	@Test
 	public void testDeleteActivityMember() throws ClientServicesException, XMLException {
-		ActivityNode created = createActivityNode();
-		String createdNodeUuid = created.getActivityNodeUuid();
-		
-		String activityNodeUuid = activityService.deleteActivityNode(created);
-		
-		Assert.assertEquals(createdNodeUuid, activityNodeUuid);
-		
-		ActivityNode read = activityService.getActivityNode(activityNodeUuid);
-		Assert.assertNull(read);
 	}
 	
 }

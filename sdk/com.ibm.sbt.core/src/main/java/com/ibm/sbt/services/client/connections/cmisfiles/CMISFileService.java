@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2013
+ * (C) Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -16,16 +16,25 @@
 
 package com.ibm.sbt.services.client.connections.cmisfiles;
 
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
+
 import java.io.IOException;
 import java.util.Map;
 
+import org.w3c.dom.Node;
+
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.json.JsonObject;
+import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
+import com.ibm.sbt.services.client.base.AtomFeedHandler;
 import com.ibm.sbt.services.client.base.BaseService;
-import com.ibm.sbt.services.client.connections.cmisfiles.feedHandler.CMISFileFeedHandler;
+import com.ibm.sbt.services.client.base.IFeedHandler;
+import com.ibm.sbt.services.client.base.datahandlers.EntityList;
+import com.ibm.sbt.services.client.connections.profiles.ColleagueConnection;
+import com.ibm.sbt.services.client.connections.profiles.Profile;
 import com.ibm.sbt.services.endpoints.Endpoint;
 
 /**
@@ -37,6 +46,10 @@ import com.ibm.sbt.services.endpoints.Endpoint;
  */
 public class CMISFileService extends BaseService {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -337041873140937439L;
 	private String repositoryId;
 
     /**
@@ -78,21 +91,17 @@ public class CMISFileService extends BaseService {
 		return "connections";
 	}
     
-    private String getRepositoryId() throws CMISFileServiceException {
+    private String getRepositoryId() throws ClientServicesException {
     	if(StringUtil.isNotEmpty(repositoryId)){
     		return repositoryId;
     	} else {
-    		try {
-		    	if(!this.endpoint.getClientParams().containsKey("isSmartCloud")) { 
-		    		// fetch the connections userid here 
-		    		repositoryId = getRepositoryId(CMISFilesUrls.ATOM_GET_USER_ID.format(this));
-		    	} else if(this.endpoint.getClientParams().get("isSmartCloud").equals(Boolean.TRUE)) {  
-		    		// fetch the smartcloud subscriber id here 
-		    		repositoryId = getRepositoryId(CMISFilesUrls.ATOM_GET_SUBSCRIBER_ID.format(this));
-		    	}
-    		} catch(ClientServicesException e) {
-				throw new CMISFileServiceException(e,"Error : Failed to fetch Repository ID");
-    		}
+		    if(!this.endpoint.getClientParams().containsKey("isSmartCloud")) { 
+		    	// fetch the connections userid here 
+		    	repositoryId = getRepositoryId(CMISFilesUrls.ATOM_GET_USER_ID.format(this));
+		    } else if(this.endpoint.getClientParams().get("isSmartCloud").equals(Boolean.TRUE)) {  
+		    	// fetch the smartcloud subscriber id here 
+		    	repositoryId = getRepositoryId(CMISFilesUrls.ATOM_GET_SUBSCRIBER_ID.format(this));
+		    }
     	}
     	return repositoryId;
     }
@@ -113,136 +122,134 @@ public class CMISFileService extends BaseService {
 	
 	/**
 	 * Method to fetch the list of files.
-	 * @return CMISFileList
-	 * @throws CMISFileServiceException
+	 * @return EntityList<CMISFile>
+	 * @throws ClientServicesException
 	 */
-	public CMISFileList getMyFiles() throws CMISFileServiceException {
+	public EntityList<CMISFile> getMyFiles() throws ClientServicesException {
 		return getMyFiles(null);
 	}
 	
 	/**
 	 * Method to fetch the list of files.
 	 * @param parameters
-	 * @return CMISFileList
-	 * @throws CMISFileServiceException
+	 * @return EntityList<CMISFile>
+	 * @throws ClientServicesException
 	 */
-	public CMISFileList getMyFiles(Map<String, String> parameters) throws CMISFileServiceException {
+	public EntityList<CMISFile> getMyFiles(Map<String, String> parameters) throws ClientServicesException {
 		getRepositoryId();
-	    String requestUrl = CMISFilesUrls.GET_MY_FILES.format(this, CMISFilesUrlParts.repositoryId.get(repositoryId));
-		try {
-			return (CMISFileList) this.getEntities(requestUrl, parameters, new CMISFileFeedHandler(this));
-		} catch (ClientServicesException cse) {
-			throw new CMISFileServiceException(cse, "Error : Failed to fetch My Files List");
-		} catch (IOException ioe) {
-			throw new CMISFileServiceException(ioe, "Error : Failed to fetch My Files List");
-		}
+	    String url = CMISFilesUrls.GET_MY_FILES.format(this, CMISFilesUrlParts.repositoryId.get(repositoryId));
+	    return getFileEntityList(url, parameters);
 	}
 	
 	/**
 	 * Method to fetch the list of files shared with the User.
-	 * @return CMISFileList
-	 * @throws CMISFileServiceException
+	 * @return EntityList<CMISFile>
+	 * @throws ClientServicesException
 	 */
-	public CMISFileList getFilesSharedWithMe() throws CMISFileServiceException {
+	public EntityList<CMISFile> getFilesSharedWithMe() throws ClientServicesException {
 		return getFilesSharedWithMe(null);
 	}
 	
 	/**
 	 * Method to fetch the list of files shared with the User.
 	 * @param parameters
-	 * @return CMISFileList
-	 * @throws CMISFileServiceException
+	 * @return EntityList<CMISFile>
+	 * @throws ClientServicesException
 	 */
-	public CMISFileList getFilesSharedWithMe(Map<String, String> parameters) throws CMISFileServiceException {
+	public EntityList<CMISFile> getFilesSharedWithMe(Map<String, String> parameters) throws ClientServicesException {
 		getRepositoryId();
-	    String requestUrl = CMISFilesUrls.GET_FILES_SHARED_WITH_ME.format(this, CMISFilesUrlParts.repositoryId.get(repositoryId));
-		try {
-			return (CMISFileList) this.getEntities(requestUrl, parameters, new CMISFileFeedHandler(this));
-		} catch (ClientServicesException cse) {
-			throw new CMISFileServiceException(cse, "Error : Failed to fetch list of Files shared with the user.");
-		} catch (IOException ioe) {
-			throw new CMISFileServiceException(ioe, "Error : Failed to fetch list of Files shared with the user.");
-		}
+	    String url = CMISFilesUrls.GET_FILES_SHARED_WITH_ME.format(this, CMISFilesUrlParts.repositoryId.get(repositoryId));
+	    return getFileEntityList(url, parameters);
 	}
 	
 	/**
 	 * Method to fetch the list of Collections.
-	 * @return CMISFileList
-	 * @throws CMISFileServiceException
+	 * @return EntityList<CMISFile>
+	 * @throws ClientServicesException
 	 */
-	public CMISFileList getMyCollections() throws CMISFileServiceException {
+	public EntityList<CMISFile> getMyCollections() throws ClientServicesException {
 		return getMyCollections(null);
 	}
 	
 	/**
 	 * Method to fetch the list of Collections.
 	 * @param parameters
-	 * @return CMISFileList
-	 * @throws CMISFileServiceException
+	 * @return EntityList<CMISFile>
+	 * @throws ClientServicesException
 	 */
-	public CMISFileList getMyCollections(Map<String, String> parameters) throws CMISFileServiceException {
+	public EntityList<CMISFile> getMyCollections(Map<String, String> parameters) throws ClientServicesException {
 		getRepositoryId();
-	    String requestUrl = CMISFilesUrls.GET_MY_COLLECTIONS.format(this, CMISFilesUrlParts.repositoryId.get(repositoryId));
-		try {
-			return (CMISFileList) this.getEntities(requestUrl, parameters, new CMISFileFeedHandler(this));
-		} catch (ClientServicesException cse) {
-			throw new CMISFileServiceException(cse, "Error : Failed to fetch list of Collections.");
-		} catch (IOException ioe) {
-			throw new CMISFileServiceException(ioe, "Error : Failed to fetch list of Collections.");
-		}
+	    String url = CMISFilesUrls.GET_MY_COLLECTIONS.format(this, CMISFilesUrlParts.repositoryId.get(repositoryId));
+	    return getFileEntityList(url, parameters);
 	}
 	
 	/**
 	 * Method to fetch the list of Collections shared with the User.
-	 * @return CMISFileList
+	 * @return EntityList<CMISFile>
 	 * @throws CMISFileServiceException
 	 */
-	public CMISFileList getCollectionsSharedWithMe() throws CMISFileServiceException {
+	public EntityList<CMISFile> getCollectionsSharedWithMe() throws ClientServicesException {
 		return getCollectionsSharedWithMe(null);
 	}
 	
 	/**
 	 * Method to fetch the list of Collections shared with the User.
 	 * @param parameters
-	 * @return CMISFileList
-	 * @throws CMISFileServiceException
+	 * @return EntityList<CMISFile>
+	 * @throws ClientServicesException
 	 */
-	public CMISFileList getCollectionsSharedWithMe(Map<String, String> parameters) throws CMISFileServiceException {
+	public EntityList<CMISFile> getCollectionsSharedWithMe(Map<String, String> parameters) throws ClientServicesException {
 		getRepositoryId();
-	    String requestUrl = CMISFilesUrls.GET_COLLECTIONS_SHARED_WITH_ME.format(this, CMISFilesUrlParts.repositoryId.get(repositoryId));
-		try {
-			return (CMISFileList) this.getEntities(requestUrl, parameters, new CMISFileFeedHandler(this));
-		} catch (ClientServicesException cse) {
-			throw new CMISFileServiceException(cse, "Error : Failed to fetch list of Collections shared with the User.");
-		} catch (IOException ioe) {
-			throw new CMISFileServiceException(ioe, "Error : Failed to fetch list of Collections shared with the User.");
-		}
+	    String url = CMISFilesUrls.GET_COLLECTIONS_SHARED_WITH_ME.format(this, CMISFilesUrlParts.repositoryId.get(repositoryId));
+	    return getFileEntityList(url, parameters);
 	}
 	
 	/**
 	 * Method to fetch the list of User's shares.
-	 * @return CMISFileList
+	 * @return EntityList<CMISFile>
 	 * @throws CMISFileServiceException
 	 */
-	public CMISFileList getMyShares() throws CMISFileServiceException {
+	public EntityList<CMISFile> getMyShares() throws ClientServicesException {
 		return getMyShares(null);
 	}
 	
 	/**
 	 * Method to fetch the list of User's shares.
 	 * @param parameters
-	 * @return CMISFileList
-	 * @throws CMISFileServiceException
+	 * @return EntityList<CMISFile>
+	 * @throws ClientServicesException
 	 */
-	public CMISFileList getMyShares(Map<String, String> parameters) throws CMISFileServiceException {
+	public EntityList<CMISFile> getMyShares(Map<String, String> parameters) throws ClientServicesException {
 		getRepositoryId();
-	    String requestUrl = CMISFilesUrls.GET_MY_SHARES.format(this, CMISFilesUrlParts.repositoryId.get(repositoryId));
+		String url = CMISFilesUrls.GET_MY_SHARES.format(this, CMISFilesUrlParts.repositoryId.get(repositoryId));
+		return getFileEntityList(url, parameters);
+	}
+	
+	/***************************************************************
+	 * FeedHandlers for each entity type
+	 ****************************************************************/
+
+	/**
+	 * Factory method to instantiate a FeedHandler for Profiles
+	 * @return IFeedHandler<Profile>
+	 */
+	public IFeedHandler<CMISFile> getFileFeedHandler() {
+		return new AtomFeedHandler<CMISFile>(this) {
+			@Override
+			protected CMISFile entityInstance(BaseService service, Node node, XPathExpression xpath) {
+				return new CMISFile(service, node, nameSpaceCtx, xpath);
+			}
+		};
+	}
+	
+	/***************************************************************
+	 * Factory methods
+	 ****************************************************************/
+	protected EntityList<CMISFile> getFileEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
 		try {
-			return (CMISFileList) this.getEntities(requestUrl, parameters, new CMISFileFeedHandler(this));
-		} catch (ClientServicesException cse) {
-			throw new CMISFileServiceException(cse, "Error : Failed to fetch list of User's Shares.");
-		} catch (IOException ioe) {
-			throw new CMISFileServiceException(ioe, "Error : Failed to fetch list of User's Shares.");
+			return getEntities(requestUrl, getParameters(parameters), getFileFeedHandler());
+		} catch (IOException e) {
+			throw new ClientServicesException(e);
 		}
 	}
 }

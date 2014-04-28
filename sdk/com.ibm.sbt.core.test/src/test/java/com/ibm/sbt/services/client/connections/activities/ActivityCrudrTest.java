@@ -56,8 +56,8 @@ public class ActivityCrudrTest extends BaseActivityServiceTest {
 		
 		Activity read = activityService.getActivity(created.getActivityUuid());
 		
-		//System.out.println("CREATED: " + created.toXmlString());
-		//System.out.println("READ: " + read.toXmlString());
+		System.out.println("CREATED: " + created.toXmlString());
+		System.out.println("READ: " + read.toXmlString());
 		
 		Assert.assertEquals(created.getActivityUuid(), read.getActivityUuid());
 		Assert.assertEquals(created.getTitle(), read.getTitle());

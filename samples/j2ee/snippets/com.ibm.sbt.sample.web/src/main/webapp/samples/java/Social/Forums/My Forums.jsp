@@ -15,13 +15,12 @@
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%@page import="com.ibm.sbt.services.client.connections.forums.ForumService"%>
-<%@page import="com.ibm.sbt.services.client.connections.forums.model.BaseForumEntity"%>
 <%@page import="com.ibm.sbt.services.client.base.BaseEntity"%>
 <%@page import="com.ibm.sbt.services.client.connections.forums.Forum"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
-<%@page import="com.ibm.sbt.services.client.connections.forums.ForumList"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page import="java.util.*"%>
 
 				
@@ -41,11 +40,11 @@
 		try {
 			
 			ForumService svc = new ForumService();
-			ForumList forums = svc.getMyForums();
+			EntityList<Forum> forums = svc.getMyForums();
 			
 			out.println("<br>Listing My forums , Total forums found : "+forums.getTotalResults());
 			out.println("<br>");
-			for (BaseForumEntity forum : forums) {
+			for (Forum forum : forums) {
 					out.println("<b>Name : </b> " + forum.getTitle());
 					out.println("<br>");
 			}

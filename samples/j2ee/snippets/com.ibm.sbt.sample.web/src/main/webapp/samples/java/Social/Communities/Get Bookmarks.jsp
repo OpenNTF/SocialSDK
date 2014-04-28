@@ -21,7 +21,7 @@
 <%@page	import="com.ibm.sbt.services.client.connections.communities.Community"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.Bookmark"%>
-<%@page	import="com.ibm.sbt.services.client.connections.communities.BookmarkList"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <html>
@@ -37,7 +37,7 @@
 			Collection<Community> communities = communityService.getPublicCommunities();
 			Community community = communities.iterator().next();
 			
-			BookmarkList bookmarks = communityService.getBookmarks(community.getCommunityUuid());
+			EntityList<Bookmark> bookmarks = communityService.getBookmarks(community.getCommunityUuid());
 			if(bookmarks.getTotalResults() > 0 ){
 				out.println("<br>Listing Bookmarks of a Community <br>");
 				for (Bookmark bookmark : bookmarks) {

@@ -24,6 +24,7 @@ import java.util.Iterator;
 import org.junit.Test;
 
 import com.ibm.sbt.services.client.SerializationUtil;
+import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 
 /**
  * @author Swati Singh
@@ -53,15 +54,15 @@ public class BlogSerializationTests extends BaseBlogServiceTest {
 		
 	@Test
 	public final void testBlogListSerialization() throws Exception {
-		BlogList blogs = blogService.getAllBlogs();
+		EntityList<Blog> blogs = blogService.getAllBlogs();
 		new SerializationUtil() {
 			
 			@Override
 			public void validateSerializable() { 
-				BlogList allblogs = null;
+				EntityList<Blog> allblogs = null;
 				try {
 					ObjectInputStream ois = new ObjectInputStream(new FileInputStream(serFile));
-					allblogs = (BlogList) ois.readObject();
+					allblogs = (EntityList<Blog>)ois.readObject();
 					for (Iterator iterator = allblogs.iterator(); iterator.hasNext();) {
 						Blog localBlog = (Blog) iterator.next();
 					}
@@ -93,15 +94,15 @@ public class BlogSerializationTests extends BaseBlogServiceTest {
 		
 	@Test
 	public final void testBlogPostListSerialization() throws Exception {
-		BlogPostList posts = blogService.getAllPosts();
+		EntityList<BlogPost> posts = blogService.getAllPosts();
 		new SerializationUtil() {
 			
 			@Override
 			public void validateSerializable() { 
-				BlogPostList allposts = null;
+				EntityList<BlogPost> allposts = null;
 				try {
 					ObjectInputStream ois = new ObjectInputStream(new FileInputStream(serFile));
-					allposts = (BlogPostList) ois.readObject();
+					allposts = (EntityList) ois.readObject();
 					for (Iterator iterator = allposts.iterator(); iterator.hasNext();) {
 						BlogPost localBlogPost = (BlogPost) iterator.next();
 					}
@@ -133,15 +134,15 @@ public class BlogSerializationTests extends BaseBlogServiceTest {
 		
 	@Test
 	public final void testBlogCommentListSerialization() throws Exception {
-		CommentList comments = blogService.getAllComments();
+		EntityList<Comment> comments = blogService.getAllComments();
 		new SerializationUtil() {
 			
 			@Override
 			public void validateSerializable() { 
-				CommentList allcomments = null;
+				EntityList<Comment> allcomments = null;
 				try {
 					ObjectInputStream ois = new ObjectInputStream(new FileInputStream(serFile));
-					allcomments = (CommentList) ois.readObject();
+					allcomments = (EntityList<Comment>) ois.readObject();
 					for (Iterator iterator = allcomments.iterator(); iterator.hasNext();) {
 						Comment localcoment = (Comment) iterator.next();
 					}

@@ -23,6 +23,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.ibm.sbt.services.client.ClientServicesException;
+
 /**
  * @author Swati Singh
  *
@@ -30,12 +32,12 @@ import org.junit.Test;
 public class BlogPostGetUpdateLikeUnlikeTest extends BaseBlogServiceTest {
 
 	@Before
-	public void initBlogPostTestData() throws BlogServiceException {
+	public void initBlogPostTestData() throws ClientServicesException {
 		blogPost = createBlogPost();
 	}
 
 	@Test
-	public void recommendBlogPostTest() throws BlogServiceException {
+	public void recommendBlogPostTest() throws ClientServicesException {
 		blogService.recommendPost(blogPost.getBlogHandle(), blogPost.getPostUuid());
 		BlogPost recommendedPost = blogService.getBlogPost(blogPost.getBlogHandle(), blogPost.getPostUuid());
 		assertEquals(recommendedPost.getRecommendationsCount(), "1");
@@ -46,14 +48,14 @@ public class BlogPostGetUpdateLikeUnlikeTest extends BaseBlogServiceTest {
 	}
 
 	@Test
-	public void getBlogPost() throws BlogServiceException {
+	public void getBlogPost() throws ClientServicesException {
 		BlogPost blogPostGot = blogService.getBlogPost(blog.getHandle(), blogPost.getPostUuid());
 		assertEquals(unRandomize(blogPost.getTitle()), unRandomize(blogPostGot.getTitle()));
 		assertEquals(unRandomize(blogPost.getContent()), unRandomize(blogPostGot.getContent()));
 	}
 
 	@Test
-	public void updateBlogPost() throws BlogServiceException {
+	public void updateBlogPost() throws ClientServicesException {
 		blogPost.setTitle("New title " + System.currentTimeMillis());
 		blogPost.setContent("New content " + System.currentTimeMillis());
 		blogService.updateBlogPost(blogPost, blogPost.getBlogHandle());
@@ -63,7 +65,7 @@ public class BlogPostGetUpdateLikeUnlikeTest extends BaseBlogServiceTest {
 	}
 
 	@After
-	public void deleteBlogPostTestDataOnExit() throws BlogServiceException {
+	public void deleteBlogPostTestDataOnExit() throws ClientServicesException {
 		deleteBlogPost(blogPost);
 		deleteBlog(blog);
 	}

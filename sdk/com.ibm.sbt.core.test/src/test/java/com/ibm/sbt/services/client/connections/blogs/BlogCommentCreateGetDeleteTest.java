@@ -1,5 +1,5 @@
 /*
- * ?? Copyright IBM Corp. 2013
+ * (C) Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -24,6 +24,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.ibm.sbt.services.client.ClientServicesException;
+
 /**
  * @author Swati Singh
  *
@@ -31,12 +33,12 @@ import org.junit.Test;
 public class BlogCommentCreateGetDeleteTest extends BaseBlogServiceTest {
 
 	@Before
-	public void createCommentInit() throws BlogServiceException {
+	public void createCommentInit() throws ClientServicesException {
 		comment = createBlogComment();
 	}
 
 	@Test
-	public void CreateComment() throws BlogServiceException {
+	public void CreateComment() throws ClientServicesException {
 		Comment commentReturned = blogService.createBlogComment(comment, blog.getHandle(), blogPost.getPostUuid());
 		assertNotNull(commentReturned.getTitle());
 		assertEquals(unRandomize(comment.getTitle()), unRandomize(commentReturned.getTitle()));
@@ -44,7 +46,7 @@ public class BlogCommentCreateGetDeleteTest extends BaseBlogServiceTest {
 	}
 	
 	@Test
-	public void GetComment() throws BlogServiceException {
+	public void GetComment() throws ClientServicesException {
 		Comment commentGot = blogService.getBlogComment(blog.getHandle(), comment.getCommentUuid());
 		
 		assertEquals(unRandomize(comment.getTitle()), unRandomize(commentGot.getTitle()));
@@ -64,7 +66,7 @@ public class BlogCommentCreateGetDeleteTest extends BaseBlogServiceTest {
 	}
 
 	@After
-	public void cleanUp() throws BlogServiceException {
+	public void cleanUp() throws ClientServicesException {
 		deleteBlogPost(blogPost);
 		deleteBlog(blog);
 	}

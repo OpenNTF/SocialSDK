@@ -31,11 +31,11 @@ import com.ibm.sbt.services.client.base.VersionedUrl;
 
 public enum BookmarkUrls {
 	
-	ALL(new VersionedUrl(v4_0, 					"dogear/atom")),
-	APP(new VersionedUrl(v4_0, 					"dogear/api/app")),
-	POPULAR(new VersionedUrl(v4_0, 				"dogear/atom/popular")),
-	MYNOTIFICATIONS(new VersionedUrl(v4_0, 		"dogear/atom/mynotifications")),
-	MYSENTNOTIFICATIONS(new VersionedUrl(v4_0, 	"dogear/atom/mysentnotifications"));
+	ALL(new VersionedUrl(v4_0, 					"{dogear}/atom")),
+	APP(new VersionedUrl(v4_0, 					"{dogear}/api/app?{userId}")),
+	POPULAR(new VersionedUrl(v4_0, 				"{dogear}/atom/popular")),
+	MYNOTIFICATIONS(new VersionedUrl(v4_0, 		"{dogear}/atom/mynotifications")),
+	MYSENTNOTIFICATIONS(new VersionedUrl(v4_0, 	"{dogear}/atom/mysentnotifications"));
 	
 	private URLBuilder builder;
 	

@@ -17,7 +17,7 @@
 <%@page import="com.ibm.sbt.services.client.connections.files.FileService"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.Comment"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.File"%>
-<%@page import="com.ibm.sbt.services.client.connections.files.FileList"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Map"%>
@@ -41,7 +41,7 @@
 	<%
 		try {		
 			FileService fileService = new FileService();
-			FileList files = fileService.getMyFiles(); 
+			EntityList<File> files = fileService.getMyFiles(); 
 			if(files != null && ! files.isEmpty()) {
 		for (File file : files) {
 			out.println("<a href=\"" + file.getDownloadUrl() + "\"> " + file.getLabel() + "</a><br/>" );

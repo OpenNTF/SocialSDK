@@ -9,8 +9,8 @@
 org.apache.commons.fileupload.disk.DiskFileItemFactory,org.apache.commons.fileupload.servlet.ServletFileUpload"%>
 <%@page	import="org.apache.commons.fileupload.FileUploadBase.InvalidContentTypeException"%>
 <%@page	import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
-<%@page	import="com.ibm.sbt.services.client.connections.communities.CommunityList"%>
 <%@page	import="com.ibm.sbt.services.client.connections.communities.Community"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"	pageEncoding="ISO-8859-1"%>
 
 <html>
@@ -33,7 +33,7 @@ org.apache.commons.fileupload.disk.DiskFileItemFactory,org.apache.commons.fileup
 			File file = convertToFile(fileItem);
 			//Create CommunityService instance and call updateCommunityLogo wrapper function to update Community Logo
 			CommunityService communityService = new CommunityService();
-			CommunityList communities = communityService.getMyCommunities();
+			EntityList<Community> communities = communityService.getMyCommunities();
 			String communityId = communities.get(0).getCommunityUuid();
 			communityService.updateCommunityLogo(file, communityId);
 			request.setAttribute("message", "Logo updated successfully");
@@ -77,7 +77,7 @@ org.apache.commons.fileupload.disk.DiskFileItemFactory,org.apache.commons.fileup
 <%	if (request.getAttribute("success") != null) {
 		if (request.getAttribute("success").equals("true")) {
 			CommunityService communityService = new CommunityService();
-			CommunityList communities = communityService.getMyCommunities();
+			EntityList<Community> communities = communityService.getMyCommunities();
 			Community myCommunity = communities.get(0);
 			out.println("Logo for Community with title: " +  myCommunity.getTitle()+ " and CommunityUuid: "+myCommunity.getCommunityUuid()+"<br>");
 			out.println("<img src=\"" +  myCommunity.getLogoUrl()+ "\">");

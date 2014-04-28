@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -38,7 +38,6 @@ import com.ibm.sbt.services.client.connections.communities.CommunityService;
 import com.ibm.sbt.services.client.connections.communities.CommunityServiceException;
 import com.ibm.sbt.services.client.connections.files.File;
 import com.ibm.sbt.services.client.connections.files.FileService;
-import com.ibm.sbt.services.client.connections.files.FileServiceException;
 import com.ibm.sbt.services.client.connections.files.model.FileCreationParameters;
 
 /**
@@ -183,7 +182,7 @@ public class BaseFilesTest extends BaseApiTest {
 		try {
 			folder = fileService.createFolder("TestFolder");
 			Trace.log("Created test folder: " + folder.getFileId());
-		} catch (FileServiceException e) {
+		} catch (ClientServicesException e) {
 			e.printStackTrace();
 			fail("Error creating test folder: ", e);
 		} catch (TransformerException te) {
@@ -219,7 +218,7 @@ public class BaseFilesTest extends BaseApiTest {
 					"Comment added by BaseFilesTest", params);
 
 			Trace.log("Created test file: " + fileEntry.getFileId());
-		} catch (FileServiceException fse) {
+		} catch (ClientServicesException fse) {
 			fileEntry = null;
 			fse.printStackTrace();
 			fail("Error creating test file: ", fse);
@@ -237,7 +236,7 @@ public class BaseFilesTest extends BaseApiTest {
 
 			try {
 				fileService.deleteFile(fileEntry.getFileId());
-			} catch (FileServiceException fse) {
+			} catch (ClientServicesException fse) {
 				fileEntry = null;
 				if (failIfAfterDeletionFails()) {
 					fail("Error deleting test file: ", fse);
@@ -251,7 +250,7 @@ public class BaseFilesTest extends BaseApiTest {
 
 			try {
 				fileService.deleteFolder(folder.getFileId());
-			} catch (FileServiceException fse) {
+			} catch (ClientServicesException fse) {
 				folder = null;
 				if (failIfAfterDeletionFails()) {
 					fail("Error deleting test folder: ", fse);
@@ -277,7 +276,7 @@ public class BaseFilesTest extends BaseApiTest {
 		if (file != null) {
 			try {
 				fileService.deleteFile(file.getFileId());
-			} catch (FileServiceException fse) {
+			} catch (ClientServicesException fse) {
 				if (failIfAfterDeletionFails()) {
 					fail("Error deleting test file: ", fse);
 					fse.printStackTrace();

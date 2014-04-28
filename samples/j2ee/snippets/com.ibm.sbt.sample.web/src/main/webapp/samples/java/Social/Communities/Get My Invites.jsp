@@ -21,7 +21,7 @@
 <%@page	import="com.ibm.sbt.services.client.connections.communities.Community"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.Invite"%>
-<%@page	import="com.ibm.sbt.services.client.connections.communities.InviteList"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <html>
@@ -35,7 +35,7 @@
 	<%
 		try {
 			CommunityService svc = new CommunityService();
-			InviteList invites = svc.getMyInvites();
+			EntityList<Invite> invites = svc.getMyInvites();
 			
 			out.println("<br>Listing Invites <br>");
 			for (Invite invite : invites) {

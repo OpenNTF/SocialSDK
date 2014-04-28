@@ -14,11 +14,11 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<%@page import="com.ibm.sbt.services.client.connections.communities.CommunityList"%>
+<%@page import="com.ibm.sbt.services.client.connections.communities.Community"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
 <%@page import="com.ibm.sbt.services.client.connections.forums.ForumTopic"%>
 <%@page import="com.ibm.sbt.services.client.connections.forums.ForumService"%>
-<%@page import="com.ibm.sbt.services.client.connections.forums.ForumList"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page import="com.ibm.sbt.services.client.connections.forums.Forum"%>
 <%@page import="java.util.Collection"%>
 <%@page import="java.io.PrintWriter"%>
@@ -39,7 +39,7 @@
 	try {
 		
 		CommunityService comService = new CommunityService();
-		CommunityList comList = comService.getMyCommunities();
+		EntityList<Community> comList = comService.getMyCommunities();
 		if(comList.size() > 0 ){
 		String communityId = comList.get(0).getCommunityUuid();
 		ForumTopic topic = new ForumTopic(new ForumService(), "");

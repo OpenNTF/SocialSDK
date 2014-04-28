@@ -26,6 +26,7 @@ import org.junit.Test;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.XMLException;
 import com.ibm.sbt.services.BaseUnitTest;
+import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.connections.communities.CommunityService;
 import com.ibm.sbt.services.client.connections.communities.CommunityServiceException;
@@ -155,7 +156,7 @@ public class FileDownloadTest extends BaseUnitTest {
 		return communityService.createCommunity(title, content, type);
 	}
 	
-	private File uploadCommunityFile(String baseName, String communityUuid) throws FileServiceException, XMLException {
+	private File uploadCommunityFile(String baseName, String communityUuid) throws ClientServicesException, XMLException {
 		String name = baseName + System.currentTimeMillis();
 
 		byte[] bytes = name.getBytes();
@@ -168,7 +169,7 @@ public class FileDownloadTest extends BaseUnitTest {
 		return file;
 	}
 	
-	private File uploadFile(String baseName) throws FileServiceException, XMLException {
+	private File uploadFile(String baseName) throws ClientServicesException, XMLException {
 		String name = baseName + System.currentTimeMillis();
 
 		byte[] bytes = name.getBytes();

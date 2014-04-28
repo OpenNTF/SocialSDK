@@ -16,7 +16,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%@page import="com.ibm.sbt.services.client.connections.forums.ForumTopic"%>
 <%@page import="com.ibm.sbt.services.client.connections.forums.ForumService"%>
-<%@page import="com.ibm.sbt.services.client.connections.forums.ForumList"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page import="com.ibm.sbt.services.client.connections.forums.Forum"%>
 <%@page import="java.util.Collection"%>
 <%@page import="java.io.PrintWriter"%>
@@ -40,7 +40,7 @@
 	try {
 		ForumService service = new ForumService();
 		
-		ForumList forums = service.getMyForums();
+		EntityList<Forum> forums = service.getMyForums();
 		String forumId = ((Forum)forums.get(0)).getForumUuid();
 		
 		ForumTopic topic = new ForumTopic(service);

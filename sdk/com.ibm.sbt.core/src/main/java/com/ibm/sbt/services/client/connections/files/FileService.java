@@ -146,7 +146,7 @@ public class FileService extends BaseService {
 	 * @return
 	 */
 	public IFeedHandler<File> getFileFeedHandler() {
-		return new AtomFeedHandler<File>(this) {
+		return new AtomFeedHandler<File>(this, false) {
 			@Override
 			protected File entityInstance(BaseService service, Node node, XPathExpression xpath) {
 				return new File(service, node, nameSpaceCtx, xpath);
@@ -159,7 +159,7 @@ public class FileService extends BaseService {
 	 * @return
 	 */
 	public IFeedHandler<Comment> getCommentFeedHandler() {
-		return new AtomFeedHandler<Comment>(this) {
+		return new AtomFeedHandler<Comment>(this, false) {
 			@Override
 			protected Comment entityInstance(BaseService service, Node node, XPathExpression xpath) {
 				return new Comment(service, node, nameSpaceCtx, xpath);

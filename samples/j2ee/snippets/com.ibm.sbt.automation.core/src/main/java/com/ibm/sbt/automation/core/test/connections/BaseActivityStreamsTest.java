@@ -27,6 +27,7 @@ import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.automation.core.test.BaseTest.AuthType;
 import com.ibm.sbt.automation.core.test.FlexibleTest;
 import com.ibm.sbt.automation.core.utils.Trace;
+import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.SBTServiceException;
 import com.ibm.sbt.services.client.connections.activitystreams.ActivityStreamEntity;
 import com.ibm.sbt.services.client.connections.activitystreams.ActivityStreamEntityList;
@@ -34,7 +35,6 @@ import com.ibm.sbt.services.client.connections.activitystreams.ActivityStreamSer
 import com.ibm.sbt.services.client.connections.activitystreams.ActivityStreamServiceException;
 import com.ibm.sbt.services.client.connections.communities.Community;
 import com.ibm.sbt.services.client.connections.communities.CommunityService;
-import com.ibm.sbt.services.client.connections.communities.CommunityServiceException;
 import com.ibm.sbt.services.endpoints.BasicEndpoint;
 import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
@@ -162,7 +162,7 @@ public class BaseActivityStreamsTest extends FlexibleTest {
 			community.setContent("Test Community created to test Activity Streams");
 			community.setTags(tags);
 			String communityId = communityService.createCommunity(community);
-    	}catch(CommunityServiceException cse){
+    	}catch(ClientServicesException cse){
     		assertNull("CommunityServiceException in testing SearchByFilters");
     	}
     }

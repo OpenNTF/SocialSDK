@@ -105,7 +105,7 @@ public class CommunityServiceTest extends BaseUnitTest {
 
 			community = communityService.getCommunity(properties
 					.getProperty("communityUuid"));
-		} catch (CommunityServiceException e) {
+		} catch (ClientServicesException e) {
 			if (e.getCause() instanceof ClientServicesException) {
 				assertEquals(404,
 						((ClientServicesException) e.getCause())

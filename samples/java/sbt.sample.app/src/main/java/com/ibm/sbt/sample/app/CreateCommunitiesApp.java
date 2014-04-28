@@ -15,19 +15,15 @@
  */
 package com.ibm.sbt.sample.app;
 
-import java.util.Collection;
-import java.util.Iterator;
-
 import com.ibm.commons.runtime.Application;
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.runtime.RuntimeFactory;
 import com.ibm.commons.runtime.impl.app.RuntimeFactoryStandalone;
 import com.ibm.sbt.security.authentication.AuthenticationException;
+import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.connections.communities.Community;
 import com.ibm.sbt.services.client.connections.communities.CommunityService;
-import com.ibm.sbt.services.client.connections.communities.CommunityServiceException;
-import com.ibm.sbt.services.client.connections.communities.Member;
 import com.ibm.sbt.services.endpoints.BasicEndpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
 
@@ -111,9 +107,9 @@ public class CreateCommunitiesApp {
     /**
      * Create a community.
      * @return id of the community
-     * @throws CommunityServiceException
+     * @throws ClientServicesException
      */
-    public String createCommunity(Community community) throws CommunityServiceException{
+    public String createCommunity(Community community) throws ClientServicesException{
     	return communityService.createCommunity(community);
     }
     
@@ -136,7 +132,7 @@ public class CreateCommunitiesApp {
             	long duration = System.currentTimeMillis() - start;
             	System.out.println("Create community took "+duration+"(ms)");
             }
-        } catch (CommunityServiceException e) {
+        } catch (ClientServicesException e) {
             e.printStackTrace();
         } finally {
             app.destroy();

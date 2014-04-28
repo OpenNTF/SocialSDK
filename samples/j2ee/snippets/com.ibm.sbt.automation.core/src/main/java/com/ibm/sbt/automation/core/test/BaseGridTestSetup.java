@@ -11,6 +11,7 @@ import junit.framework.Assert;
 
 import com.ibm.sbt.automation.core.utils.Trace;
 import com.ibm.sbt.security.authentication.AuthenticationException;
+import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.activity.Activity;
 import com.ibm.sbt.services.client.connections.activity.ActivityService;
@@ -166,7 +167,7 @@ public class BaseGridTestSetup extends BaseApiTest{
      		community = community.save(); 
      		long duration = System.currentTimeMillis() - start;
      		Trace.log("Created test community: "+community.getCommunityUuid() + " took "+duration+"(ms)");
-	     	} catch (CommunityServiceException e) {
+	     	} catch (ClientServicesException e) {
 	     		System.out.println("Grid Setup Error: cannot create community");
 
 	     		fail("Error creating test community", e);
@@ -189,7 +190,7 @@ public class BaseGridTestSetup extends BaseApiTest{
             		pe.getCause().printStackTrace();
             	}
                 Assert.fail("Error authenicating: " + pe.getMessage());
-            } catch (CommunityServiceException cse) {
+            } catch (ClientServicesException cse) {
                 fail("Error deleting community "+testCommunityID, cse);
             }
         }
@@ -319,7 +320,7 @@ public class BaseGridTestSetup extends BaseApiTest{
 		}
 	}
 	
-	 protected void fail(String message, CommunityServiceException cse) {
+	 protected void fail(String message, ClientServicesException cse) {
 	    	String failure = message;
 	    	
 	    	Throwable cause = cse.getCause();

@@ -24,6 +24,7 @@ import org.junit.Test;
 
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.BaseUnitTest;
+import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.connections.communities.Community;
 import com.ibm.sbt.services.client.connections.communities.CommunityService;
@@ -42,14 +43,14 @@ public class FollowServiceTest extends BaseUnitTest {
 	protected FollowService followService;
 	
 	@Before
-	public void initfollowServiceTest() throws CommunityServiceException {
+	public void initfollowServiceTest() throws ClientServicesException {
 		if (followService==null) {
 			followService = new FollowService();
 		}
 		createCommunity();
 	}
 
-	public void createCommunity() throws CommunityServiceException{
+	public void createCommunity() throws ClientServicesException{
 		CommunityService service = new CommunityService();
 		community = new Community(service, "");
 		community.setTitle("Test Followservice Community " + System.currentTimeMillis());

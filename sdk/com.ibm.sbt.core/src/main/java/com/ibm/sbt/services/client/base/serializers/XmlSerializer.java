@@ -1,5 +1,5 @@
 /*
- * Â© Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -217,6 +217,12 @@ public class XmlSerializer {
 	protected Attr attribute(String name, long value) {
 		Attr attr = doc.createAttribute(name);
 		attr.setValue("" + value);
+		return attr;
+	}
+	
+	protected Attr attribute(String name, boolean value) {
+		Attr attr = doc.createAttribute(name);
+		attr.setValue(value ? "true" : "false");
 		return attr;
 	}
 	

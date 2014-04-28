@@ -25,7 +25,7 @@
 <%@page import="java.util.Iterator"%>
 <%@page import="com.ibm.sbt.services.client.connections.profiles.ProfileService"%>
 <%@page import="com.ibm.sbt.services.client.connections.profiles.Profile"%>
-<%@page import="com.ibm.sbt.services.client.connections.profiles.ProfileList"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"	pageEncoding="ISO-8859-1"%>
 <html>
 <head>
@@ -38,10 +38,10 @@
 	try {
 		String userId = Context.get().getProperty("sample.userId1");
 		ProfileService connProfSvc = new ProfileService();
-		ProfileList profiles = connProfSvc.getColleagues(userId);
+		EntityList<Profile> profiles = connProfSvc.getColleagues(userId);
 		if(profiles != null && ! profiles.isEmpty()) {
-			for (Iterator iterator = profiles.iterator(); iterator.hasNext();) {
-					Profile profile = (Profile)iterator.next();
+			for (Iterator<Profile> iterator = profiles.iterator(); iterator.hasNext();) {
+					Profile profile = iterator.next();
 					out.println("<b>Name : </b> " + profile.getName());
 					out.println("<br>");
 				}

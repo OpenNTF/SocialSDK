@@ -16,7 +16,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%@page import="com.ibm.sbt.services.client.connections.forums.ForumTopic"%>
 <%@page import="com.ibm.sbt.services.client.connections.forums.ForumService"%>
-<%@page import="com.ibm.sbt.services.client.connections.forums.TopicList"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="java.util.Collection"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
@@ -36,7 +36,7 @@
 	<%
 		try {
 			ForumService service = new ForumService();
-			TopicList topics = service.getMyForumTopics();
+			EntityList<ForumTopic> topics = service.getMyForumTopics();
 			if(topics != null && !topics.isEmpty()){
 		ForumTopic topic = (ForumTopic)topics.iterator().next();
 		out.println("<b> Topic Title : "+topic.getTitle());

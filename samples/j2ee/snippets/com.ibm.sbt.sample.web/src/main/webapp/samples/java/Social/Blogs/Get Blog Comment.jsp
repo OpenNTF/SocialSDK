@@ -17,11 +17,10 @@
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page import="com.ibm.sbt.services.client.connections.blogs.BlogService"%>
 <%@page import="com.ibm.sbt.services.client.connections.blogs.model.BaseBlogEntity"%>
-<%@page import="com.ibm.sbt.services.client.connections.blogs.BlogList"%>
 <%@page import="com.ibm.sbt.services.client.connections.blogs.Blog"%>
-<%@page import="com.ibm.sbt.services.client.connections.blogs.CommentList"%>
 <%@page import="com.ibm.sbt.services.client.connections.blogs.Comment"%>
 <%@page import="com.ibm.sbt.services.client.connections.common.Person"%>
 <%@page import="java.io.PrintWriter"%>
@@ -42,10 +41,10 @@
 	<%
 		try {
 			BlogService service = new BlogService();
-			BlogList blogs = service.getAllBlogs();
+			EntityList<Blog> blogs = service.getAllBlogs();
 			Blog blog = (Blog)blogs.get(0);
 			
-			CommentList comments = service.getAllComments();
+			EntityList<Comment> comments = service.getAllComments();
 			if(comments.size()>0){
 				String commentId = comments.get(0).getUid();
 				Comment comment = service.getBlogComment(blog.getHandle(),commentId);

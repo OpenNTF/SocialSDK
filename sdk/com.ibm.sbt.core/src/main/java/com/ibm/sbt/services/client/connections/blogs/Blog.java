@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -21,6 +21,7 @@ import org.w3c.dom.Node;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.xpath.XPathExpression;
+import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
 import com.ibm.sbt.services.client.connections.blogs.model.BaseBlogEntity;
@@ -117,9 +118,9 @@ public class Blog extends BaseBlogEntity {
 	 * This method creates the blog on the server
 	 * 
 	 * @return Blog
-	 * @throws BlogServiceException
+	 * @throws ClientServicesException
 	 */
-	public Blog save() throws BlogServiceException{
+	public Blog save() throws ClientServicesException {
 		return getService().createBlog(this);
 	}
 	/**
@@ -127,7 +128,7 @@ public class Blog extends BaseBlogEntity {
      *
      * @throws BlogServiceException
      */
-    public void remove() throws BlogServiceException{
+    public void remove() throws ClientServicesException {
 		getService().removeBlog(getUid());
 	}
 	

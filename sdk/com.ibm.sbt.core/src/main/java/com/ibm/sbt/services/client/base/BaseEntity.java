@@ -328,10 +328,20 @@ public class BaseEntity implements Externalizable {
 	 * @param fieldName
 	 * @param value
 	 */
+	public void setAsInt(FieldEntry field, int value){
+		fields.put(field.getName(), new Integer(value));
+	}
+	
+	/**
+	 * Receives an int as the value of a field and stores it as an Integer on the internal map 
+	 * 
+	 * @param fieldName
+	 * @param value
+	 */
 	public void setAsInt(String fieldName, int value){
 		fields.put(fieldName, new Integer(value));
 	}
-	
+		
 	/**
 	 * Receives a float as the value of a field and stores it as a Float on the internal map 
 	 * 

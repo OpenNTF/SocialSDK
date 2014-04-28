@@ -15,8 +15,6 @@
  */
 package com.ibm.sbt.services.client.connections.activities;
 
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
-
 import java.util.Date;
 
 import org.w3c.dom.Node;
@@ -35,8 +33,23 @@ import com.ibm.sbt.services.client.connections.common.Person;
  * @author mwallace
  *
  */
-public class Activity extends ActivityNode {
+public class Activity extends NodeEntity {
+
+	/**
+	 * Specifies the starting page of a template. The term attribute identifies the default view to use. 
+	 */
+	static final public String RECENT = "recent"; //$NON-NLS-1$
+	static final public String OUTLINE = "outline"; //$NON-NLS-1$
+	static final public String TODO = "todo"; //$NON-NLS-1$
 	
+	/**
+	 * Standard priority values for an activity. 
+	 */
+    public static final int TUNED_OUT = 0;
+    public static final int NORMAL = 1;
+    public static final int MEDIUM = 2000;
+    public static final int HIGH = 3000;
+		
 	/**
 	 * Default constructor
 	 */
@@ -208,17 +221,13 @@ public class Activity extends ActivityNode {
 	/**
 	 * Returns the priority of the activity.
 	 * 
-	 * Identifies the priority of the activity. Options are High, Medium, or Normal. 
+	 * Identifies the priority of the activity. Options are High=3000, Medium=2000, or Normal=1. 
 	 * Prioritization settings are not global, but are unique to each user; no other members can see these collections.
 	 *  
 	 * @return priority
 	 */
-	public Priority getPriority() {
-		if (getDataHandler() == null) {
-			return null;
-		}
-		return new Priority(getService(), (Node)getDataHandler().getData(), 
-				nameSpaceCtx, ActivityXPath.priority.getPath());
+	public int getPriority() {
+		return getAsInt(ActivityXPath.priority);
 	}
 	
 	/**
@@ -229,8 +238,8 @@ public class Activity extends ActivityNode {
 	 *  
 	 * @param priority
 	 */
-	public void setPriority(String priority) {
-		setAsString(ActivityXPath.priority, priority);
+	public void setPriority(int priority) {
+		setAsInt(ActivityXPath.priority, priority);
 	}
 	
 	/**
@@ -457,6 +466,19 @@ public class Activity extends ActivityNode {
 			throw new ClientServicesException(null, "No activity service associated with this activity.");
 		}
 		return activityService.deleteMember(this, member);
+	}
+
+	/**
+	 * Set the priority for this activity.
+	 * 
+	 * @throws ClientServicesException
+	 */
+	public void changePriority(int priority) throws ClientServicesException {
+		ActivityService activityService = getActivityService();
+		if (activityService == null) {
+			throw new ClientServicesException(null, "No activity service associated with this activity.");
+		}
+		activityService.changePriority(this, priority);
 	}
 	
 }

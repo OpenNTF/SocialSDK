@@ -28,10 +28,12 @@ import org.w3c.dom.Node;
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.runtime.util.UrlUtil;
 import com.ibm.commons.util.StringUtil;
+import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.service.basic.ConnectionsFileProxyService;
 import com.ibm.sbt.services.client.base.AtomEntity;
 import com.ibm.sbt.services.client.base.AtomXPath;
+import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.files.model.Author;
@@ -67,6 +69,18 @@ public class File extends AtomEntity {
     public File(FileService svc, XmlDataHandler dh) {
         super(svc, dh);
     }
+
+    /**
+     * 
+     * @param service
+     * @param node
+     * @param namespaceCtx
+     * @param xpathExpression
+     */
+	public File(BaseService service, Node node, NamespaceContext namespaceCtx, 
+			XPathExpression xpathExpression) {
+		super(service, node, namespaceCtx, xpathExpression);
+	}
     
 	/**
 	 * Method to get the FileId of the File

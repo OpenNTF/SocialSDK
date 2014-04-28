@@ -1,5 +1,3 @@
-package com.ibm.sbt.services.client.connections.forums.model;
-
 /*
  * © Copyright IBM Corp. 2013
  * 
@@ -15,6 +13,8 @@ package com.ibm.sbt.services.client.connections.forums.model;
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
+
+package com.ibm.sbt.services.client.connections.forums.model;
 
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
 

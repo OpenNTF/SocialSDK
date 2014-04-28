@@ -26,6 +26,7 @@ import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 
 /**
  * @author Mario Duarte
+ * @author Carlos Manias
  *
  */
 public abstract class AtomFeedHandler<T extends AtomEntity> implements IFeedHandler<T> {
@@ -34,10 +35,19 @@ public abstract class AtomFeedHandler<T extends AtomEntity> implements IFeedHand
 	private boolean isFeed;
 	
 
+	/**
+	 * 
+	 * @param service
+	 */
 	public AtomFeedHandler(BaseService service) {
 		this(service, true);
 	}
 
+	/**
+	 *
+	 * @param service
+	 * @param isFeed True by default. If false, it uses an xPath for a single entry. If true, it uses an xPath for a feed
+	 */
 	public AtomFeedHandler(BaseService service, boolean isFeed) {
 		this.service = service;
 		this.isFeed = isFeed;

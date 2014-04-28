@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2012
+ * © Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -33,9 +33,9 @@ import org.junit.Test;
 
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.services.BaseUnitTest;
+import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.connections.communities.Community;
 import com.ibm.sbt.services.client.connections.communities.CommunityService;
-import com.ibm.sbt.services.client.connections.communities.CommunityServiceException;
 import com.ibm.sbt.test.lib.TestEnvironment;
 
 public class ActivityStreamServiceTest extends BaseUnitTest {
@@ -61,7 +61,7 @@ public class ActivityStreamServiceTest extends BaseUnitTest {
 		}
 	}
 
-	public Community createTestCommunity() throws CommunityServiceException {
+	public Community createTestCommunity() throws ClientServicesException {
 		if (communityService==null){
 			communityService = new CommunityService();
 		}
@@ -81,7 +81,7 @@ public class ActivityStreamServiceTest extends BaseUnitTest {
 
 	@Ignore
 	@Test
-	public final void testGetUpdatesFromCommunity() throws ActivityStreamServiceException, CommunityServiceException {
+	public final void testGetUpdatesFromCommunity() throws ActivityStreamServiceException, ClientServicesException{
 		//Ignored because a method in ActivityStreamService to post to a Community is unimplemented
 		Community community = createTestCommunity();
 		ActivityStreamEntityList updates = service

@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -20,16 +20,20 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import org.w3c.dom.Node;
+
 import com.ibm.commons.util.StringUtil;
-import com.ibm.sbt.services.client.base.BaseEntity;
-import com.ibm.sbt.services.client.connections.communities.CommunityList;
+import com.ibm.commons.xml.NamespaceContext;
+import com.ibm.commons.xml.xpath.XPathExpression;
+import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.services.client.base.AtomEntity;
+import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.base.datahandlers.EntityList;
+import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.communities.model.CommunityXPath;
 import com.ibm.sbt.services.client.connections.communities.transformers.CommunityTransformer;
-import com.ibm.sbt.services.client.connections.forums.ForumList;
-import com.ibm.sbt.services.client.connections.forums.TopicList;
-import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
-import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 
 /**
  * This class represents a Connections Community entity
@@ -39,7 +43,7 @@ import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
  * @author Manish Kataria
  * @author Carlos Manias
  */
-public class Community extends BaseEntity {
+public class Community extends AtomEntity {
 
 	/**
 	 * Constructor
@@ -62,13 +66,25 @@ public class Community extends BaseEntity {
 	public Community(String communityUuid) {
 		setAsString(CommunityXPath.communityUuid, communityUuid);
 	}
+
+    /**
+     * 
+     * @param service
+     * @param node
+     * @param namespaceCtx
+     * @param xpathExpression
+     */
+	public Community(BaseService service, Node node, NamespaceContext namespaceCtx, 
+			XPathExpression xpathExpression) {
+		super(service, node, namespaceCtx, xpathExpression);
+	}
 	
 	/**
 	 * Constructor
 	 * @param svc
 	 * @param handler
 	 */
-	public Community(CommunityService svc, DataHandler<?> handler) {
+	public Community(CommunityService svc, XmlDataHandler handler) {
 		super(svc,handler);
 	}
 
@@ -263,10 +279,10 @@ public class Community extends BaseEntity {
 	 * This method loads the community 
 	 * 
 	 * @return
-	 * @throws CommunityServiceException
+	 * @throws ClientServicesException
 	 */
 	
-	public Community load() throws CommunityServiceException
+	public Community load() throws ClientServicesException
     {
 		return getService().getCommunity(getCommunityUuid());
     }
@@ -275,10 +291,10 @@ public class Community extends BaseEntity {
 	 * This method updates the community 
 	 * 
 	 * @return
-	 * @throws CommunityServiceException
+	 * @throws ClientServicesException
 	 */
 	
-	public void update() throws CommunityServiceException
+	public void update() throws ClientServicesException
     {
 		getService().updateCommunity(this);
     }
@@ -287,19 +303,19 @@ public class Community extends BaseEntity {
 	 * This method deletes the community on the server
 	 * 
 	 * @return
-	 * @throws CommunityServiceException
+	 * @throws ClientServicesException
 	 */
 
-	public void remove() throws CommunityServiceException {
+	public void remove() throws ClientServicesException {
 	   	getService().deleteCommunity(getCommunityUuid());
 	}
 	/**
 	 * This method updates the community on the server
 	 * 
 	 * @return
-	 * @throws CommunityServiceException
+	 * @throws ClientServicesException
 	 */
-	public Community save() throws CommunityServiceException{
+	public Community save() throws ClientServicesException{
 		if(StringUtil.isEmpty(getCommunityUuid())){
 			String id = getService().createCommunity(this);
 			return getService().getCommunity(id);
@@ -312,9 +328,9 @@ public class Community extends BaseEntity {
 	 * This method gets Community member
 	 * 
 	 * @return
-	 * @throws CommunityServiceException
+	 * @throws ClientServicesException
 	 */
-	public Member getMember(String memberID) throws CommunityServiceException
+	public Member getMember(String memberID) throws ClientServicesException
     {
 		return getService().getMember(getCommunityUuid(), memberID );
     }
@@ -323,9 +339,9 @@ public class Community extends BaseEntity {
 	 * This method adds Community member
 	 * 
 	 * @return
-	 * @throws CommunityServiceException
+	 * @throws ClientServicesException
 	 */
-	public boolean addMember(Member member) throws CommunityServiceException
+	public boolean addMember(Member member) throws ClientServicesException
     {
 		return getService().addMember(getCommunityUuid(), member);
     }
@@ -334,9 +350,9 @@ public class Community extends BaseEntity {
 	 * This method removes Community member
 	 * 
 	 * @return
-	 * @throws CommunityServiceException
+	 * @throws ClientServicesException
 	 */
-	public void removeMember(String memberID) throws CommunityServiceException
+	public void removeMember(String memberID) throws ClientServicesException
     {
 		getService().removeMember(getCommunityUuid(), memberID );
     }
@@ -344,29 +360,12 @@ public class Community extends BaseEntity {
 	 * This method gets the subcommunities of a community
 	 * 
 	 * @return list of sub-communities
-	 * @throws CommunityServiceException
+	 * @throws ClientServicesException
 	 */
-	public CommunityList getSubCommunities() throws CommunityServiceException {
+	public EntityList<Community> getSubCommunities() throws ClientServicesException {
 	   	return getService().getSubCommunities(getCommunityUuid());
 	}
-	/**
-	 * This method gets the forums of a community
-	 * 
-	 * @return Forums  of the given Community 
-	 * @throws CommunityServiceException
-	 */
-	public ForumList getForums() throws CommunityServiceException {
-	   	return getService().getForums(getCommunityUuid());
-	}
-	/**
-	 * This method gets the forum topics of a community
-	 * 
-	 * @return Forum topics of the given Community 
-	 * @throws CommunityServiceException
-	 */
-	public TopicList getForumTopics() throws CommunityServiceException {
-	   	return getService().getForumTopics(getCommunityUuid());
-	}
+	
 	/**
 	 * This method gets the subcommunities of a community
 	 * 
@@ -374,9 +373,9 @@ public class Community extends BaseEntity {
      * 				 Various parameters that can be passed to get a feed of members of a community. 
      * 				 The parameters must be exactly as they are supported by IBM Connections like ps, sortBy etc.
    	 * @return list of sub-communities
-	 * @throws CommunityServiceException
+	 * @throws ClientServicesException
 	 */
-	public CommunityList getSubCommunities(Map<String, String> parameters) throws CommunityServiceException {
+	public EntityList<Community> getSubCommunities(Map<String, String> parameters) throws ClientServicesException {
 	   	return getService().getSubCommunities(getCommunityUuid(), parameters );
 	}
 
@@ -384,9 +383,9 @@ public class Community extends BaseEntity {
 	 * This method gets the members of a community
 	 * 
 	 * @return list of members
-	 * @throws CommunityServiceException
+	 * @throws ClientServicesException
 	 */
-	public MemberList getMembers() throws CommunityServiceException {
+	public EntityList<Member> getMembers() throws ClientServicesException {
 	   	return getService().getMembers(getCommunityUuid());
 	}
 
@@ -398,9 +397,9 @@ public class Community extends BaseEntity {
      * 				 The parameters must be exactly as they are supported by IBM Connections like ps, sortBy etc.
  
 	 * @return list of members
-	 * @throws CommunityServiceException
+	 * @throws ClientServicesException
 	 */
-	public MemberList getMembers(Map<String, String> parameters) throws CommunityServiceException {
+	public EntityList<Member> getMembers(Map<String, String> parameters) throws ClientServicesException {
 	   	return getService().getMembers(getCommunityUuid(), parameters);
 	}
 	

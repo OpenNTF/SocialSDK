@@ -66,6 +66,6 @@ public enum WikiXPath implements FieldEntry {
 	
 	@Override
 	public String getName() {
-		return this.name();
+		return name();
 	}
 }

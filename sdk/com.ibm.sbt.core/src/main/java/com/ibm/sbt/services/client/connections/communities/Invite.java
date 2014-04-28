@@ -1,8 +1,14 @@
 package com.ibm.sbt.services.client.connections.communities;
 
+import org.w3c.dom.Node;
+
 import com.ibm.commons.util.StringUtil;
-import com.ibm.sbt.services.client.base.BaseEntity;
-import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
+import com.ibm.commons.xml.NamespaceContext;
+import com.ibm.commons.xml.xpath.XPathExpression;
+import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.services.client.base.AtomEntity;
+import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.connections.communities.model.CommunityXPath;
 
 /**
@@ -11,7 +17,7 @@ import com.ibm.sbt.services.client.connections.communities.model.CommunityXPath;
  * @author Swati Singh
  */
 
-public class Invite extends BaseEntity{
+public class Invite extends AtomEntity{
 	 /**
      * The UUID of the community associated with this Invite
      */
@@ -21,19 +27,48 @@ public class Invite extends BaseEntity{
      */
 	private String inviteeUuid;
 	
+	/**
+	 * Constructor
+	 * 
+	 * @param communityService
+	 */
 	public Invite(CommunityService communityService) {
 		setService(communityService);
 	}
-
+	
+	/**
+	 * Constructor
+	 * 
+	 * @param communityService
+	 * @param id
+	 */
 	public Invite(CommunityService communityService, String id) {
 		setService(communityService);
 		setAsString(CommunityXPath.id, id);
 	}
 	
-	public Invite(CommunityService svc, DataHandler<?> handler)
+	/**
+     * 
+     * @param service
+     * @param node
+     * @param namespaceCtx
+     * @param xpathExpression
+     */
+	public Invite(BaseService service, Node node, NamespaceContext namespaceCtx, 
+			XPathExpression xpathExpression) {
+		super(service, node, namespaceCtx, xpathExpression);
+	}
+	
+	/**
+	 * Constructor
+	 * @param svc
+	 * @param handler
+	 */
+	public Invite(CommunityService svc, XmlDataHandler handler)
 	{
 		super(svc,handler);
 	}
+	
 	/**
      * Return the value of IBM Connections invite ID from invite ATOM
      * entry document.
@@ -202,18 +237,19 @@ public class Invite extends BaseEntity{
      * 
      * @method remove
      * @param {Object} [args] Argument object
+     * @throws ClientServicesException
      */
-    public Invite save() throws CommunityServiceException{
+    public Invite save() throws ClientServicesException{
 		return getService().createInvite(this);
     }        
 	/**
 	 * This method removes or revokes the invite on the server
 	 * 
 	 * @return
-	 * @throws CommunityServiceException
+	 * @throws ClientServicesException
 	 */
 
-	public void remove() throws CommunityServiceException {
+	public void remove() throws ClientServicesException {
 	   	getService().declineInvite(communityUuid, inviteeUuid);
 	}
 	/**

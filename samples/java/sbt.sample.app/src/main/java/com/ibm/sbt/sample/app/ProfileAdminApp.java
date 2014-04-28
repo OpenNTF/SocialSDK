@@ -15,11 +15,9 @@
  */
 package com.ibm.sbt.sample.app;
 
-import com.ibm.commons.util.StringUtil;
+import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.connections.profiles.Profile;
 import com.ibm.sbt.services.client.connections.profiles.ProfileAdminService;
-import com.ibm.sbt.services.client.connections.profiles.ProfileServiceException;
-import com.ibm.sbt.services.client.smartcloud.bss.CustomerManagementService;
 
 
 /**
@@ -41,7 +39,7 @@ public class ProfileAdminApp extends BaseApp {
     	return profileAdminService;
     }
     
-    public Profile getProfile(String id) throws ProfileServiceException{
+    public Profile getProfile(String id) throws ClientServicesException{
     	return getProfileAdminService().getProfile(id);
     }
 	

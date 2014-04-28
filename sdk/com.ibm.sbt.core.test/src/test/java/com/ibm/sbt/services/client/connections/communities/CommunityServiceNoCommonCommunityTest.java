@@ -30,8 +30,6 @@ import org.junit.Test;
 import com.ibm.sbt.services.BaseUnitTest;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
-import com.ibm.sbt.services.client.connections.forums.ForumTopic;
-import com.ibm.sbt.services.client.connections.forums.model.BaseForumEntity;
 import com.ibm.sbt.test.lib.TestEnvironment;
 
 /**
@@ -105,32 +103,6 @@ public class CommunityServiceNoCommonCommunityTest extends BaseUnitTest {
 	}
 
 	@Test
-	public final void testGetCommunityBookmarks() throws Exception {
-		EntityList<Community> communities = communityService.getPublicCommunities();
-		Community community = communities.iterator().next();
-
-		EntityList<Bookmark> bookmarks = communityService.getBookmarks(community
-				.getCommunityUuid());
-
-		for (Bookmark bookmark : bookmarks) {
-			assertNotNull(bookmark.getTitle());
-			assertNotNull(bookmark.getSummary());
-		}
-	}
-
-	@Test
-	public final void testGetCommunityForumTopics() throws Exception {
-		EntityList<Community> communities = communityService.getPublicCommunities();
-		Community community = communities.iterator().next();
-
-		EntityList<ForumTopic> forumTopics = communityService.getForumTopics(community.getCommunityUuid());
-
-		for (BaseForumEntity forumTopic : forumTopics) {
-			assertNotNull(forumTopic.getTitle());
-		}
-	}
-
-	@Test
 	public final void testGetMyInvites() throws Exception {
 		EntityList<Invite> invites = communityService.getMyInvites();
 		if (invites.getTotalResults() > 0) {
@@ -199,7 +171,7 @@ public class CommunityServiceNoCommonCommunityTest extends BaseUnitTest {
 			c.setTitle(NEW_COMMUNITY);
 			c.setContent(TEST_COMMUNITY_DESCRIPTION);
 			uuid2 = communityService.createCommunity(c);
-		} catch (CommunityServiceException e) {
+		} catch (ClientServicesException e) {
 			if (e.getCause() instanceof ClientServicesException
 					&& (((ClientServicesException) e.getCause())
 							.getResponseStatusCode() == 409)) {

@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -17,7 +17,6 @@ package com.ibm.sbt.automation.core.test.connections;
 
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.util.HashMap;
 import java.util.List;
@@ -93,7 +92,7 @@ public class BaseActivityStreamsTest extends FlexibleTest {
             asEntry = entries.iterator().next();
             Trace.log("Last created entry: "+asEntry.getId());
         } catch (SBTServiceException e) {
-        	fail("SBTServiceException: " + e.getMessage());
+        	fail("SBTServiceException", e);
             e.printStackTrace();
 		}
         return asEntry;
@@ -149,7 +148,7 @@ public class BaseActivityStreamsTest extends FlexibleTest {
 			System.out.println("Created Entry "+entryID);
 			
 		} catch (SBTServiceException e) {
-			fail("SBTServiceException: " + e.getMessage());
+			fail("SBTServiceException", e);
 		}
     }
     
@@ -207,7 +206,7 @@ public class BaseActivityStreamsTest extends FlexibleTest {
 		try {
 			service.postEntry("@me", "@status", "@all", postPayload);
 		} catch (SBTServiceException e) {
-			fail("SBTServiceException: " + e.getMessage());
+			fail("SBTServiceException", e);
 		}
     }
 

@@ -82,43 +82,10 @@ public class CMISFileService extends BaseService {
 	public String getServiceMappingKey() {
 		return "files";
 	}
-    
-    /**
-     * Method to get the Default endpoint to be used with the service
-     * @return
-     */
-    private static String getDefaultEndpoint() {
-		return "connections";
-	}
-    
-    private String getRepositoryId() throws ClientServicesException {
-    	if(StringUtil.isNotEmpty(repositoryId)){
-    		return repositoryId;
-    	} else {
-		    if(!this.endpoint.getClientParams().containsKey("isSmartCloud")) { 
-		    	// fetch the connections userid here 
-		    	repositoryId = getRepositoryId(CMISFilesUrls.ATOM_GET_USER_ID.format(this));
-		    } else if(this.endpoint.getClientParams().get("isSmartCloud").equals(Boolean.TRUE)) {  
-		    	// fetch the smartcloud subscriber id here 
-		    	repositoryId = getRepositoryId(CMISFilesUrls.ATOM_GET_SUBSCRIBER_ID.format(this));
-		    }
-    	}
-    	return repositoryId;
-    }
-    
-	private String getRepositoryId(String repositoryUrl) throws ClientServicesException {
-		Response response = endpoint.getClientService().get(repositoryUrl, ClientService.FORMAT_JSON);
-		JsonObject result = (JsonObject) response.getData() ;
-		JsonObject entry = (JsonObject) result.getJsonProperty("entry");
-		if(entry != null) {
-			String repId = (String) ((JsonObject)result.getJsonProperty("entry")).getJsonProperty("id");
-			if(StringUtil.isNotEmpty(repId)) {
-				repId = "p!" + repId.substring("urn:lsid:lconn.ibm.com:profiles.person:".length());
-			}
-			return repId;
-		}
-		return null;
-	}
+	
+	//------------------------------------------------------------------------------------------------------------------
+	// Getting CMIS File feeds
+	//------------------------------------------------------------------------------------------------------------------
 	
 	/**
 	 * Method to fetch the list of files.
@@ -251,5 +218,42 @@ public class CMISFileService extends BaseService {
 		} catch (IOException e) {
 			throw new ClientServicesException(e);
 		}
+	}
+	
+    /**
+     * Method to get the Default endpoint to be used with the service
+     * @return
+     */
+    private static String getDefaultEndpoint() {
+		return "connections";
+	}
+    
+    private String getRepositoryId() throws ClientServicesException {
+    	if(StringUtil.isNotEmpty(repositoryId)){
+    		return repositoryId;
+    	} else {
+		    if(!this.endpoint.getClientParams().containsKey("isSmartCloud")) { 
+		    	// fetch the connections userid here 
+		    	repositoryId = getRepositoryId(CMISFilesUrls.ATOM_GET_USER_ID.format(this));
+		    } else if(this.endpoint.getClientParams().get("isSmartCloud").equals(Boolean.TRUE)) {  
+		    	// fetch the smartcloud subscriber id here 
+		    	repositoryId = getRepositoryId(CMISFilesUrls.ATOM_GET_SUBSCRIBER_ID.format(this));
+		    }
+    	}
+    	return repositoryId;
+    }
+    
+	private String getRepositoryId(String repositoryUrl) throws ClientServicesException {
+		Response response = endpoint.getClientService().get(repositoryUrl, ClientService.FORMAT_JSON);
+		JsonObject result = (JsonObject) response.getData() ;
+		JsonObject entry = (JsonObject) result.getJsonProperty("entry");
+		if(entry != null) {
+			String repId = (String) ((JsonObject)result.getJsonProperty("entry")).getJsonProperty("id");
+			if(StringUtil.isNotEmpty(repId)) {
+				repId = "p!" + repId.substring("urn:lsid:lconn.ibm.com:profiles.person:".length());
+			}
+			return repId;
+		}
+		return null;
 	}
 }

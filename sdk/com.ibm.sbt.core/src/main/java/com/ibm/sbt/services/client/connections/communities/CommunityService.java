@@ -1,5 +1,5 @@
 /*
- * Â© Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -144,7 +144,7 @@ public class CommunityService extends BaseService {
 	 * @return IFeedHandler<Community>
 	 */
 	public IFeedHandler<Community> getCommunityFeedHandler() {
-		return new AtomFeedHandler<Community>(this) {
+		return new AtomFeedHandler<Community>(this, false) {
 			@Override
 			protected Community entityInstance(BaseService service, Node node, XPathExpression xpath) {
 				return new Community(service, node, nameSpaceCtx, xpath);

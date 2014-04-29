@@ -16,21 +16,28 @@
 
 package com.ibm.sbt.services.client.connections.communities;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
+import org.junit.Test;
+
+import com.ibm.sbt.services.client.ClientServicesException;
 
 /**
+ * Tests for the java connections Communities API a test class provides its own
+ * tests extending the test endpoint abstract class
  * 
  * @author Swati Singh
- *
+ * @date Dec 12, 2012
  */
-@RunWith(Suite.class)
-@SuiteClasses({ 
-	CommunityServiceTest.class,
-	DeleteCommunityServiceTest.class,
-	CommunityServiceNoCommonCommunityTest.class
-})
-public class CommunityServiceTestSuite {
 
+public class DeleteCommunityServiceTest extends BaseCommunityServiceTest {
+
+	@Test
+	public final void testDeleteCommunity() throws Exception {
+		String communityUuid = community.getCommunityUuid();
+		communityService.deleteCommunity(communityUuid);
+		thrown.expect(ClientServicesException.class);
+		thrown.expectMessage("404:Not Found");
+		thrown.expectMessage("Request to url");
+		community = communityService.getCommunity(communityUuid);
+		
+	}
 }

@@ -18,9 +18,8 @@
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.Community"%>
-<%@page import="com.ibm.sbt.services.client.connections.communities.CommunityList"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
-<%@page import="com.ibm.sbt.services.client.connections.communities.MemberList"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.Member"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Collection"%>
@@ -38,10 +37,10 @@
 	<%
 	try {
 		CommunityService communityService = new CommunityService();
-		CommunityList communities = communityService.getMyCommunities();
+		EntityList<Community> communities = communityService.getMyCommunities();
 		String communityId = communities.get(0).getCommunityUuid();
 		
-		MemberList members = communityService.getMembers(communityId);
+		EntityList<Member> members = communityService.getMembers(communityId);
 		if(members !=null && members.size()>1){ // size>1 so as to ensure we do not change onwnership of already a owner
 		Boolean roleMemberFound = false;
 			for (Member member :members){

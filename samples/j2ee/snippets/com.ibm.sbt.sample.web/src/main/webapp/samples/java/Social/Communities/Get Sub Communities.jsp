@@ -20,7 +20,7 @@
 <%@page import="com.ibm.commons.runtime.Context"%>
 <%@page	import="com.ibm.sbt.services.client.connections.communities.Community"%>
 <%@page	import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
-<%@page	import="com.ibm.sbt.services.client.connections.communities.CommunityList"%>
+<%@page	import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <html>
@@ -36,7 +36,7 @@
 			CommunityService communityService = new CommunityService();
 			Collection<Community> communities = communityService.getPublicCommunities();
 			Community community = communities.iterator().next();
-			CommunityList subCommunities = communityService.getSubCommunities(community.getCommunityUuid());
+			EntityList<Community> subCommunities = communityService.getSubCommunities(community.getCommunityUuid());
 			if(subCommunities.getTotalResults() > 0 ){
 				out.println("<br>Listing sub communities of a Community <br>");
 				for (Community subCommunity : subCommunities) {

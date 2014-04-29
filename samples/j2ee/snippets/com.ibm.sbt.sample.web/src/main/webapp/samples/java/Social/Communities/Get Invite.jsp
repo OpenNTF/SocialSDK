@@ -17,7 +17,7 @@
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.Invite"%>
-<%@page import="com.ibm.sbt.services.client.connections.communities.InviteList"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page import="java.util.*"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"	pageEncoding="ISO-8859-1"%>
 <html>
@@ -30,7 +30,7 @@
 	<%
 		try {
 			CommunityService svc = new CommunityService();
-			InviteList invites = svc.getMyInvites();
+			EntityList<Invite> invites = svc.getMyInvites();
 			if(invites.size() > 0){
 				String communityUuid = invites.get(0).getCommunityUuid();
 				String inviteUuid = invites.get(0).getInviteUuid();

@@ -54,7 +54,8 @@ class NodeSerializer extends AtomEntitySerializer<NodeEntity> {
 				attribute("fid", field.getFid()),
 				attribute("name", field.getName()),
 				attribute("type", field.getType()),
-				attribute("position", field.getPosition()));
+				attribute("position", field.getPosition()),
+				attribute("hidden", field.isHidden()));
 			if (field instanceof DateField) {
 				DateField dateField = (DateField)field;
 				addText(element, DateSerializer.toString(dateFormat, dateField.getDate()));

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app"
+	xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:xhtml="http://www.w3.org/1999/xhtml"
+	xmlns:thr="http://purl.org/syndication/thread/1.0">
+	<id>urn:lsid:ibm.com:oa:72d13f02-8530-4972-b60b-a13aff84c609</id>
+	<title type="text">ActivityHiddenField_1-1397745097295</title>
+	<updated>2014-04-17T14:31:35Z</updated>
+	<published>2014-04-17T14:31:35Z</published>
+	<author>
+		<snx:org>
+			<uri>https://apps.na.collabservtest.lotus.com/activities/service/atom2/memberprofile?memberid=
+			</uri>
+		</snx:org>
+		<name>Mark Wallace</name>
+		<snx:userid>20089094</snx:userid>
+		<snx:ldapid>0f908c3a-a9df-493e-8802-94bbf5ddbf1d</snx:ldapid>
+		<snx:userState>active</snx:userState>
+	</author>
+	<contributor>
+		<snx:org>
+			<uri>https://apps.na.collabservtest.lotus.com/activities/service/atom2/memberprofile?memberid=
+			</uri>
+		</snx:org>
+		<name>Mark Wallace</name>
+		<snx:userid>20089094</snx:userid>
+		<snx:ldapid>0f908c3a-a9df-493e-8802-94bbf5ddbf1d</snx:ldapid>
+		<snx:userState>active</snx:userState>
+	</contributor>
+	<category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="activity"
+		label="Activity" />
+	<category scheme="http://www.ibm.com/xmlns/prod/sn/priority"
+		term="1" label="Normal" />
+	<category scheme="http://www.ibm.com/xmlns/prod/sn/flags"
+		term="external" label="External" />
+	<category term="ibmsbt" />
+	<category term="personal" />
+	<category term="unit_test" />
+	<link rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml"
+		href="https://apps.na.collabservtest.lotus.com/activities/service/atom2/acl?activityUuid=72d13f02-8530-4972-b60b-a13aff84c609" />
+	<link rel="http://www.ibm.com/xmlns/prod/sn/history" type="application/atom+xml"
+		href="https://apps.na.collabservtest.lotus.com/activities/service/atom2/activity/history?activityUuid=72d13f02-8530-4972-b60b-a13aff84c609" />
+	<link rel="http://www.ibm.com/xmlns/prod/sn/templates" type="application/atom+xml"
+		href="https://apps.na.collabservtest.lotus.com/activities/service/atom2/entrytemplates?activityUuid=72d13f02-8530-4972-b60b-a13aff84c609" />
+	<app:collection
+		href="https://apps.na.collabservtest.lotus.com/activities/service/atom2/activity?activityUuid=72d13f02-8530-4972-b60b-a13aff84c609">
+		<title type="text">ActivityHiddenField_1-1397745097295</title>
+		<app:categories
+			href="https://apps.na.collabservtest.lotus.com/activities/service/atom2/categories?activityUuid=72d13f02-8530-4972-b60b-a13aff84c609" />
+	</app:collection>
+	<snx:activity>72d13f02-8530-4972-b60b-a13aff84c609</snx:activity>
+	<link rel="edit" type="application/atom+xml"
+		href="https://apps.na.collabservtest.lotus.com/activities/service/atom2/activitynode?activityNodeUuid=72d13f02-8530-4972-b60b-a13aff84c609" />
+	<link rel="self" type="application/atom+xml"
+		href="https://apps.na.collabservtest.lotus.com/activities/service/atom2/activity?activityUuid=72d13f02-8530-4972-b60b-a13aff84c609" />
+	<link rel="alternate" type="application/xhtml+xml"
+		href="https://apps.na.collabservtest.lotus.com/activities/service/html/activity/recent?activityUuid=72d13f02-8530-4972-b60b-a13aff84c609" />
+	<link rel="alternate" type="text/html"
+		href="https://apps.na.collabservtest.lotus.com/activities/service/html/activity/recent?activityUuid=72d13f02-8530-4972-b60b-a13aff84c609" />
+	<snx:position>-2147483648</snx:position>
+	<snx:depth>0</snx:depth>
+	<snx:permissions>none, create_activity, view_activity, edit_activity,
+		delete_activity, activity_owner, edit_activity_tags, design_activity,
+		edit_statements, delete_statements, add_members, delete_members,
+		create_entries, edit_personal_entries, edit_all_entries,
+		delete_personal_entries, delete_all_entries, edit_personal_entry_tags,
+		edit_all_entry_tags, view_members</snx:permissions>
+	<snx:icon>https://apps.na.collabservtest.lotus.com/activities/nav/common/images/iconActivities16.png
+	</snx:icon>
+	<content type="text">
+		Goal for ActivityHiddenField_1-1397745097295
+	</content>
+	<snx:field name="Field1" fid="7773b1f0-7240-41ed-a4af-c3d1e3893cd6"
+		position="1000" type="text" hidden="true">
+		<summary type="text">Content1</summary>
+	</snx:field>
+	<snx:field name="Field4" fid="1cb8741b-6883-4f06-826e-1092e5a8ce81"
+		position="1000" type="text" hidden="true">
+		<summary type="text">Content4</summary>
+	</snx:field>
+	<snx:field name="Field3" fid="3fc722c9-5941-4bf3-b6ef-de558ef08541"
+		position="1000" type="text" hidden="true">
+		<summary type="text">Content3</summary>
+	</snx:field>
+	<snx:field name="Field0" fid="df79335c-4e58-4b72-abd4-e54041a25c08"
+		position="1000" type="text" hidden="true">
+		<summary type="text">Content0</summary>
+	</snx:field>
+	<snx:field name="Field2" fid="f8155172-dde8-49e3-897c-178ef3e3f76a"
+		position="1000" type="text" hidden="true">
+		<summary type="text">Content2</summary>
+	</snx:field>
+</entry>

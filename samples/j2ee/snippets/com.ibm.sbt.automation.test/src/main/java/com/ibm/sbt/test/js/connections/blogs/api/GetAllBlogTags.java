@@ -15,13 +15,11 @@
  */
 package com.ibm.sbt.test.js.connections.blogs.api;
 
-import java.util.List;
-
 import org.junit.Assert;
 import org.junit.Test;
 
 import com.ibm.commons.util.io.json.JsonJavaObject;
-import com.ibm.sbt.automation.core.test.BaseApiTest;
+import com.ibm.sbt.automation.core.test.connections.BaseBlogsTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 
 /**
@@ -29,14 +27,10 @@ import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
  *  
  * @date 08 May 2013
  */
-public class GetAllBlogTags extends BaseApiTest {
+public class GetAllBlogTags extends BaseBlogsTest {
     
     static final String SNIPPET_ID = "Social_Blogs_API_GetAllBlogTags";
 
-    public GetAllBlogTags() {
-        setAuthType(AuthType.AUTO_DETECT);
-    }
-    
     @Test
     public void testGetAllBlogTags() {
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);

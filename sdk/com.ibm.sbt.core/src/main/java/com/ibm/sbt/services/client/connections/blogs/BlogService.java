@@ -380,9 +380,9 @@ public class BlogService extends BaseService {
 			result = createData(createBlogUrl, null, headers, payload);
 			blog = getBlogFeedHandler().createEntity(result);
 		} catch (IOException e) {
-			throw new ClientServicesException(e, "error creating blog post");
+			throw new ClientServicesException(e, "error creating blog");
 		} catch (TransformerException e) {
-			throw new ClientServicesException(e, "error creating blog post");
+			throw new ClientServicesException(e, "error creating blog");
 		}
 
         return blog;
@@ -719,7 +719,7 @@ public class BlogService extends BaseService {
 	 * FeedHandlers for each entity type
 	 ****************************************************************/
 	public IFeedHandler<Blog> getBlogFeedHandler() {
-        return new AtomFeedHandler<Blog>(this) {
+        return new AtomFeedHandler<Blog>(this, false) {
             @Override
             protected Blog entityInstance(BaseService service, Node node, XPathExpression xpath) {
                 return new Blog(service, node, nameSpaceCtx, xpath);
@@ -728,7 +728,7 @@ public class BlogService extends BaseService {
     }
 	
 	public IFeedHandler<BlogPost> getBlogPostFeedHandler() {
-        return new AtomFeedHandler<BlogPost>(this) {
+        return new AtomFeedHandler<BlogPost>(this, false) {
             @Override
             protected BlogPost entityInstance(BaseService service, Node node, XPathExpression xpath) {
                 return new BlogPost(service, node, nameSpaceCtx, xpath);
@@ -737,7 +737,7 @@ public class BlogService extends BaseService {
     }
 	
 	public IFeedHandler<Comment> getCommentFeedHandler() {
-        return new AtomFeedHandler<Comment>(this) {
+        return new AtomFeedHandler<Comment>(this, false) {
             @Override
             protected Comment entityInstance(BaseService service, Node node, XPathExpression xpath) {
                 return new Comment(service, node, nameSpaceCtx, xpath);
@@ -750,7 +750,7 @@ public class BlogService extends BaseService {
 	 * @return IFeedHandler<Tag>
 	 */
 	public IFeedHandler<Tag> getTagFeedHandler() {
-		return new AtomFeedHandler<Tag>(this) {
+		return new AtomFeedHandler<Tag>(this, false) {
 			@Override
 			protected Tag entityInstance(BaseService service, Node node, XPathExpression xpath) {
 				return new Tag(service, node, nameSpaceCtx, xpath);

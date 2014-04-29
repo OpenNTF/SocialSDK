@@ -61,7 +61,6 @@ public class GetForumTopics extends BaseCommunitiesTest {
         List jsonList = previewPage.getJsonList();
         JsonJavaObject firstTopic = (JsonJavaObject) jsonList.get(0);
         Assert.assertEquals(community.getCommunityUuid(), firstTopic.getString("getCommunityUuid"));
-        System.out.println(firstTopic);
     }
     
 }

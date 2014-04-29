@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+
+
+
+
+
+
+
+
+
+
+<entry xmlns="http://www.w3.org/2005/Atom"
+  xmlns:app="http://www.w3.org/2007/app"   
+  xmlns:snx="http://www.ibm.com/xmlns/prod/sn"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+  xmlns:thr="http://purl.org/syndication/thread/1.0"
+  >
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <id>urn:lsid:ibm.com:oa:c551f9a2-8e2e-4f11-a91d-193732629dde</id>
+  <title type="text">ActivityHiddenField_9 - 1397742820402</title>
+  <updated>2014-04-17T13:53:38Z</updated>
+  <published>2014-04-17T13:53:38Z</published>
+  <author>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <snx:org><uri>https://apps.na.collabservtest.lotus.com/activities/service/atom2/memberprofile?memberid=</uri>
+  </snx:org>
+  <name>Mark Wallace</name>
+  
+  <snx:userid>20089094</snx:userid>
+  <snx:ldapid>0f908c3a-a9df-493e-8802-94bbf5ddbf1d</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </author>
+  <contributor>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <snx:org><uri>https://apps.na.collabservtest.lotus.com/activities/service/atom2/memberprofile?memberid=</uri>
+  </snx:org>
+  <name>Mark Wallace</name>
+  
+  <snx:userid>20089094</snx:userid>
+  <snx:ldapid>0f908c3a-a9df-493e-8802-94bbf5ddbf1d</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </contributor>
+  	
+    
+    
+  	     
+  	  
+  	    
+  	  
+ 	      <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="activity" label="Activity"/>
+  	  
+  	
+    
+  
+
+  <category scheme="http://www.ibm.com/xmlns/prod/sn/priority" term="1" label="Normal"/>
+  
+    
+    
+  
+  
+  
+  
+  
+  
+  
+  <category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="external" label="External"/>
+  
+  
+  
+  
+  
+    <category term="ibmsbt" />
+  
+    <category term="personal" />
+  
+    <category term="unit_test" />
+  
+  
+    <link rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml" href="https://apps.na.collabservtest.lotus.com/activities/service/atom2/acl?activityUuid=c551f9a2-8e2e-4f11-a91d-193732629dde" />
+    <link rel="http://www.ibm.com/xmlns/prod/sn/history" type="application/atom+xml" href="https://apps.na.collabservtest.lotus.com/activities/service/atom2/activity/history?activityUuid=c551f9a2-8e2e-4f11-a91d-193732629dde" />
+    <link rel="http://www.ibm.com/xmlns/prod/sn/templates" type="application/atom+xml" href="https://apps.na.collabservtest.lotus.com/activities/service/atom2/entrytemplates?activityUuid=c551f9a2-8e2e-4f11-a91d-193732629dde" />
+   
+  
+  
+
+  
+    <app:collection href="https://apps.na.collabservtest.lotus.com/activities/service/atom2/activity?activityUuid=c551f9a2-8e2e-4f11-a91d-193732629dde">
+      <title type="text">ActivityHiddenField_9 - 1397742820402</title>
+      <app:categories href="https://apps.na.collabservtest.lotus.com/activities/service/atom2/categories?activityUuid=c551f9a2-8e2e-4f11-a91d-193732629dde"/>
+    </app:collection> 
+  
+  <snx:activity>c551f9a2-8e2e-4f11-a91d-193732629dde</snx:activity>
+  
+  
+  
+    <link rel="edit" type="application/atom+xml" href="https://apps.na.collabservtest.lotus.com/activities/service/atom2/activitynode?activityNodeUuid=c551f9a2-8e2e-4f11-a91d-193732629dde" />
+  
+   
+  
+    
+      <link rel="self" type="application/atom+xml" href="https://apps.na.collabservtest.lotus.com/activities/service/atom2/activity?activityUuid=c551f9a2-8e2e-4f11-a91d-193732629dde"/>
+      
+        <link rel="alternate" type="application/xhtml+xml" href="https://apps.na.collabservtest.lotus.com/activities/service/html/activity/recent?activityUuid=c551f9a2-8e2e-4f11-a91d-193732629dde"/>
+      	<link rel="alternate" type="text/html" href="https://apps.na.collabservtest.lotus.com/activities/service/html/activity/recent?activityUuid=c551f9a2-8e2e-4f11-a91d-193732629dde"/>
+      
+     
+    
+  
+ 
+  <snx:position>-2147483648</snx:position>
+  <snx:depth>0</snx:depth>  
+  
+  <snx:permissions>none, create_activity, view_activity, edit_activity, delete_activity, activity_owner, edit_activity_tags, design_activity, edit_statements, delete_statements, add_members, delete_members, create_entries, edit_personal_entries, edit_all_entries, delete_personal_entries, delete_all_entries, edit_personal_entry_tags, edit_all_entry_tags, view_members</snx:permissions>
+  <snx:icon>https://apps.na.collabservtest.lotus.com/activities/nav/common/images/iconActivities16.png</snx:icon>
+
+  
+    
+    
+    
+    
+      
+      
+        
+        
+          <summary type="text">
+          	
+          </summary>
+        
+      
+    
+  
+  
+  
+
+  
+    
+    
+        
+    
+    
+    
+    <snx:field name="Field4"  fid="e459bfad-cfaf-4d6d-9f01-3def6860ce4d" position="1000" type="text" hidden="true">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<summary type="text">Content4</summary>
+
+
+
+
+    </snx:field>
+  
+    
+    
+        
+    
+    
+    
+    <snx:field name="Field0"  fid="0df7e9d4-f346-46b6-b1e3-a1ab660f7dba" position="1000" type="text" hidden="true">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<summary type="text">Content0</summary>
+
+
+
+
+    </snx:field>
+  
+    
+    
+        
+    
+    
+    
+    <snx:field name="Field3"  fid="46f9d8bf-8d42-4bcf-b9e4-bf86111e1c0a" position="1000" type="text" hidden="true">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<summary type="text">Content3</summary>
+
+
+
+
+    </snx:field>
+  
+    
+    
+        
+    
+    
+    
+    <snx:field name="Field1"  fid="19769d83-9f65-4f1b-859c-b05ee6a7d371" position="1000" type="text" hidden="true">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<summary type="text">Content1</summary>
+
+
+
+
+    </snx:field>
+  
+    
+    
+        
+    
+    
+    
+    <snx:field name="Field2"  fid="3083f931-ec75-4b57-9697-e398247c0abb" position="1000" type="text" hidden="true">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<summary type="text">Content2</summary>
+
+
+
+
+    </snx:field>
+    
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</entry>

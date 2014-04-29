@@ -124,7 +124,7 @@ public class File extends AtomEntity {
 	 * 
 	 */
 	public boolean isLocked() {
-		if(FileConstants.LockType_HARD.equalsIgnoreCase(getLockType()))
+		if(FileConstants.LOCKTYPE_HARD.equalsIgnoreCase(getLockType()))
 			return true;
 		else 
 			return false;

@@ -119,7 +119,7 @@ public class BookmarkService extends BaseService {
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Bookmark> getBookmarks(String id, Map<String, String> parameters) throws ClientServicesException {
-		String url = BookmarkUrls.APP.format(this,BookmarkParams.userId.get(id));
+		String url = BookmarkUrls.APP.format(this,BookmarkUrls.userId.get(id));
 		return getBookmarkEntityList(url, parameters);
 		
 	}

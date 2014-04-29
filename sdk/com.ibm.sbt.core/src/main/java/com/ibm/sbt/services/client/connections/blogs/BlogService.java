@@ -94,15 +94,10 @@ public class BlogService extends BaseService {
 		return "blogs";
 	}
 	
-	private void setHomepageFromEndpoint(Endpoint endpoint){
-		Map<String, String> serviceMap = endpoint.getServiceMappings();
-		if(serviceMap != null){
-			String homepage = serviceMap.get(BLOG_HOMEPAGE_KEY);
-			if(StringUtil.isNotEmpty(homepage)){
-				this.defaultHomepageHandle = homepage;				
-			}
-		}
-	}
+	//------------------------------------------------------------------------------------------------------------------
+	// Getting Blog feeds
+	//------------------------------------------------------------------------------------------------------------------
+
 	
 	/**
 	 * This method returns the all blogs
@@ -524,6 +519,26 @@ public class BlogService extends BaseService {
 			throw new ClientServicesException(e, "error unrecommending blog post");
 		}
 	}
+	
+	/**
+	 * Wrapper method to get a particular Blog Comment
+	 * 
+	 * @param blogHandle
+	 * @param commentUuid
+	 * @return Comment
+	 * @throws ClientServicesException
+	 */
+	public Comment getBlogComment(String blogHandle, String commentUuid) throws ClientServicesException {
+		if (StringUtil.isEmpty(blogHandle)){
+			throw new ClientServicesException(null,"blog handle is null");
+		}
+		if (StringUtil.isEmpty(commentUuid)){
+			throw new ClientServicesException(null,"commentUuid is null");
+		}
+		String url = BlogUrls.GET_REMOVE_COMMENT.format(this, BlogUrlParts.blogHandle.get(blogHandle), BlogUrlParts.entryAnchor.get(commentUuid));
+		return getCommentEntity(url, null);
+	}
+	
 	/**
 	 * Wrapper method to create a Blog Post
 	 * <p>
@@ -616,24 +631,7 @@ public class BlogService extends BaseService {
 	}
 	
 
-	/**
-	 * Wrapper method to get a particular Blog Comment
-	 * 
-	 * @param blogHandle
-	 * @param commentUuid
-	 * @return Comment
-	 * @throws ClientServicesException
-	 */
-	public Comment getBlogComment(String blogHandle, String commentUuid) throws ClientServicesException {
-		if (StringUtil.isEmpty(blogHandle)){
-			throw new ClientServicesException(null,"blog handle is null");
-		}
-		if (StringUtil.isEmpty(commentUuid)){
-			throw new ClientServicesException(null,"commentUuid is null");
-		}
-		String url = BlogUrls.GET_REMOVE_COMMENT.format(this, BlogUrlParts.blogHandle.get(blogHandle), BlogUrlParts.entryAnchor.get(commentUuid));
-		return getCommentEntity(url, null);
-	}
+
 	
 	/**
 	 * Wrapper method to create a Blog Comment
@@ -813,6 +811,16 @@ public class BlogService extends BaseService {
 			return getEntities(requestUrl, getParameters(parameters), getTagFeedHandler());
 		} catch (IOException e) {
 			throw new ClientServicesException(e);
+		}
+	}
+	
+	private void setHomepageFromEndpoint(Endpoint endpoint){
+		Map<String, String> serviceMap = endpoint.getServiceMappings();
+		if(serviceMap != null){
+			String homepage = serviceMap.get(BLOG_HOMEPAGE_KEY);
+			if(StringUtil.isNotEmpty(homepage)){
+				this.defaultHomepageHandle = homepage;				
+			}
 		}
 	}
 }

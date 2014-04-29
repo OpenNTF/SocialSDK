@@ -19,7 +19,7 @@
 <%@page import="com.ibm.commons.runtime.Context"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.Community"%>
-<%@page import="com.ibm.sbt.services.client.connections.communities.CommunityList"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page import="java.util.*"%>
 
 				
@@ -39,7 +39,7 @@
 			CommunityService svc = new CommunityService();
 			Map<String, String> parameters = new HashMap<String, String>();
 			parameters.put("ps", "5");
-			CommunityList communities = svc.getMyCommunities(parameters);
+			EntityList<Community> communities = svc.getMyCommunities(parameters);
 			out.println("<br>Listing my communities , Total communities found : "+communities.getTotalResults());
 			out.println("<br>");
 			for (Community community : communities) {

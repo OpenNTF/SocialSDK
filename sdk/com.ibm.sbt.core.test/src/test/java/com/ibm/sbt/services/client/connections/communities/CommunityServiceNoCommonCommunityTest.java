@@ -51,7 +51,7 @@ public class CommunityServiceNoCommonCommunityTest extends BaseUnitTest {
 		}
 	}
 
-	@Test(expected = CommunityServiceException.class)
+	@Test(expected = ClientServicesException.class)
 	public final void testGetCommunityByInvalidId() throws Exception {
 		communityService.getCommunity("2344invalid");
 	}

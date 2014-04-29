@@ -15,16 +15,23 @@
  */
 package com.ibm.sbt.services.client.connections.bookmarks;
 
-import java.util.HashMap;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
+
+import java.io.IOException;
 import java.util.Map;
 
-import com.ibm.commons.util.StringUtil;
+import org.w3c.dom.Node;
+
+import com.ibm.commons.xml.xpath.XPathExpression;
+import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.services.client.base.AtomFeedHandler;
 import com.ibm.sbt.services.client.base.BaseService;
-import com.ibm.sbt.services.client.connections.bookmarks.feedhandler.BookmarkFeedHandler;
+import com.ibm.sbt.services.client.base.IFeedHandler;
+import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.endpoints.Endpoint;
 
 /**
- * The Bookmarks application of IBM� Connections is a social bookmarking tool that you can use to save, organize, and share Internet and intranet bookmarks. 
+ * The Bookmarks application of IBM Connections is a social bookmarking tool that you can use to save, organize, and share Internet and intranet bookmarks. 
  * The Bookmarks API allows application programs to read and write to the collections of bookmarks stored in the Bookmarks application.
  * 
  * @author mwallace
@@ -32,7 +39,9 @@ import com.ibm.sbt.services.endpoints.Endpoint;
  *
  */
 public class BookmarkService extends BaseService {
-	
+
+	private static final long serialVersionUID = -363260957215796869L;
+
 	/**
 	 * Construct an instance of the BookmarkService using the default "connections" endpoint.
 	 */
@@ -63,32 +72,33 @@ public class BookmarkService extends BaseService {
 	 */
 	@Override
 	public String getServiceMappingKey() {
-		return ""; //dogear?
+		return "dogear"; 
 	}
 	
+	
+	/***************************************************************
+	 * Working with Bookmarks
+	 ****************************************************************/
+	
 	/**
-	 * Return a list of bookmarks. 
+	 * Return a list of all bookmarks.
 	 * 
-	 * @return List of bookmarks.
-	 * @throws BookmarkServiceException
+	 * @return A List Of Bookmarks
+	 * @throws ClientServicesException
 	 */
-	public BookmarkList getAllBookmarks() throws BookmarkServiceException {
+	public EntityList<Bookmark> getAllBookmarks() throws ClientServicesException {
 		return getAllBookmarks(null);
 	}
-
+	
 	/**
 	 * Return a list of bookmarks. You can search for a set of bookmarks that match a specific criteria by providing input parameters on the request.
 	 * 
 	 * @return List of bookmarks.
 	 * @throws BookmarkServiceException
 	 */
-	public BookmarkList getAllBookmarks(Map<String, String> parameters) throws BookmarkServiceException {
-		try {
-			String url = BookmarkUrls.ALL.format(this);
-			return (BookmarkList)getEntities(url, parameters, new BookmarkFeedHandler(this));
-		} catch (Exception e) {
-			throw new BookmarkServiceException(e, "Error retrieving all bookmarks");
-		} 
+	public EntityList<Bookmark> getAllBookmarks(Map<String, String> parameters) throws ClientServicesException {
+		String url = BookmarkUrls.ALL.format(this);
+		return getBookmarkEntityList(url, parameters);
 	}
 
 	/**
@@ -98,7 +108,7 @@ public class BookmarkService extends BaseService {
 	 * @return List of specified users bookmarks.
 	 * @throws BookmarkServiceException
 	 */
-	public BookmarkList getBookmarks(String id) throws BookmarkServiceException {
+	public EntityList<Bookmark> getBookmarks(String id) throws ClientServicesException {
 		return getBookmarks(id, null);
 	}
 
@@ -106,33 +116,21 @@ public class BookmarkService extends BaseService {
 	 * Return a list of specified users bookmarks. You can search for a set of bookmarks that match a specific criteria by providing input parameters on the request.
 	 * 
 	 * @return List of specified users bookmarks.
-	 * @throws BookmarkServiceException
+	 * @throws ClientServicesException
 	 */
-	public BookmarkList getBookmarks(String id, Map<String, String> parameters) throws BookmarkServiceException {
-		if (StringUtil.isEmpty(id)) {
-			throw new BookmarkServiceException(null, "Error retrieving bookmarks because invalid id was specified");
-		}
+	public EntityList<Bookmark> getBookmarks(String id, Map<String, String> parameters) throws ClientServicesException {
+		String url = BookmarkUrls.APP.format(this,BookmarkParams.userId.get(id));
+		return getBookmarkEntityList(url, parameters);
 		
-		try {
-			if (parameters == null) {
-				parameters = new HashMap<String, String>();
-			}
-			parameters.put(isEmail(id) ? "email" : "userid", id);
-			
-			String url = BookmarkUrls.APP.format(this);
-			return (BookmarkList)getEntities(url, parameters, new BookmarkFeedHandler(this));
-		} catch (Exception e) {
-			throw new BookmarkServiceException(e, "Error retrieving bookmarks");
-		} 
 	}
 
 	/**
 	 * Retrieve a list of bookmarks ordered from the most popular to least popular. 
 	 * 
 	 * @return List of bookmarks.
-	 * @throws BookmarkServiceException
+	 * @throws ClientServicesException
 	 */
-	public BookmarkList getPopularBookmarks() throws BookmarkServiceException {
+	public EntityList<Bookmark> getPopularBookmarks() throws ClientServicesException {
 		return getPopularBookmarks(null);
 	}
 
@@ -140,114 +138,85 @@ public class BookmarkService extends BaseService {
 	 * Retrieve a list of bookmarks ordered from the most popular to least popular. 
 	 * 
 	 * @return List of bookmarks.
-	 * @throws BookmarkServiceException
+	 * @throws ClientServicesException
 	 */
-	public BookmarkList getPopularBookmarks(Map<String, String> parameters) throws BookmarkServiceException {
-		try {
-			String url = BookmarkUrls.POPULAR.format(this);
-			return (BookmarkList)getEntities(url, parameters, new BookmarkFeedHandler(this));
-		} catch (Exception e) {
-			throw new BookmarkServiceException(e, "Error retrieving popular bookmarks");
-		} 
+	public EntityList<Bookmark> getPopularBookmarks(Map<String, String> parameters) throws ClientServicesException {		
+		String url = BookmarkUrls.POPULAR.format(this);
+		return getBookmarkEntityList(url, parameters);
+		
 	}
 	
 	/**
 	 * Retrieve a list of the bookmarks that other people have notified you about. 
 	 * 
 	 * @return List of bookmarks.
-	 * @throws BookmarkServiceException
+	 * @throws ClientServicesException
 	 */
-	public BookmarkList getMyNotifications() throws BookmarkServiceException {
-		return getPopularBookmarks(null);
+	public EntityList<Bookmark> getMyNotifications() throws ClientServicesException {
+		return getMyNotifications(null);
 	}
 
 	/**
 	 * Retrieve a list of the bookmarks that other people have notified you about. 
 	 * 
 	 * @return List of bookmarks.
-	 * @throws BookmarkServiceException
+	 * @throws ClientServicesException
 	 */
-	public BookmarkList getMyNotifications(Map<String, String> parameters) throws BookmarkServiceException {
-		try {
-			String url = BookmarkUrls.MYNOTIFICATIONS.format(this);
-			return (BookmarkList)getEntities(url, parameters, new BookmarkFeedHandler(this));
-		} catch (Exception e) {
-			throw new BookmarkServiceException(e, "Error retrieving my notifications");
-		} 
+	public EntityList<Bookmark> getMyNotifications(Map<String, String> parameters) throws ClientServicesException {
+		String url = BookmarkUrls.MYNOTIFICATIONS.format(this);
+		return getBookmarkEntityList(url, parameters);
+ 
 	}
 	
 	/**
 	 * Retrieve a list of the bookmarks that you have notified other people about.
 	 * 
 	 * @return List of bookmarks.
-	 * @throws BookmarkServiceException
+	 * @throws ClientServicesException
 	 */
-	public BookmarkList getMySentNotifications() throws BookmarkServiceException {
-		return getPopularBookmarks(null);
+	public EntityList<Bookmark> getMySentNotifications() throws ClientServicesException {
+		return getMySentNotifications(null);
 	}
 
 	/**
 	 * Retrieve a list of the bookmarks that you have notified other people about. 
 	 * 
 	 * @return List of bookmarks.
-	 * @throws BookmarkServiceException
+	 * @throws ClientServicesException
 	 */
-	public BookmarkList getMySentNotifications(Map<String, String> parameters) throws BookmarkServiceException {
-		try {
-			String url = BookmarkUrls.MYSENTNOTIFICATIONS.format(this);
-			return (BookmarkList)getEntities(url, parameters, new BookmarkFeedHandler(this));
-		} catch (Exception e) {
-			throw new BookmarkServiceException(e, "Error retrieving my sent notifications");
-		} 
+	public EntityList<Bookmark> getMySentNotifications(Map<String, String> parameters) throws ClientServicesException {
+		String url = BookmarkUrls.MYSENTNOTIFICATIONS.format(this);
+		return getBookmarkEntityList(url, parameters);
+
 	}
 	
-//	/**
-//	 * Create a bookmark.
-//	 * 
-//	 * @param bookmark
-//	 * @return
-//	 * @throws BookmarkServiceException
-//	 */
-//	public Bookmark createBookmark(Bookmark bookmark) throws BookmarkServiceException {
-//		return null;
-//	}
-//	
-//	/**
-//	 * Get a bookmark.
-//	 * 
-//	 * @param bookmark
-//	 * @return
-//	 * @throws BookmarkServiceException
-//	 */
-//	public Bookmark getBookmark(String bookmarkUuid) throws BookmarkServiceException {
-//		try {
-//			String url = BookmarkUrls.???.getUrl(this);
-//			return (Bookmark)getEntity(url, null, new BookmarkFeedHandler(this));
-//		} catch (Exception e) {
-//			throw new BookmarkServiceException(e, "Error retrieving bookmark: "+bookmarkUuid);
-//		} 
-//	}
-//	
-//	/**
-//	 * Update a bookmark.
-//	 * 
-//	 * @param bookmark
-//	 * @return
-//	 * @throws BookmarkServiceException
-//	 */
-//	public Bookmark updateBookmark(Bookmark bookmark) throws BookmarkServiceException {
-//		return null;
-//	}
-//	
-//	/**
-//	 * Delete a bookmark.
-//	 * 
-//	 * @param bookmark
-//	 * @return
-//	 * @throws BookmarkServiceException
-//	 */
-//	public Bookmark deleteBookmark(Bookmark bookmark) throws BookmarkServiceException {
-//		return null;
-//	}
+	/***************************************************************
+	 * FeedHandlers for each entity type
+	 ****************************************************************/
+	
+	/**
+	 * Factory method to instantiate a FeedHandler for Bookmarks
+	 * @return IFeedHandler<Bookmark>
+	 */
+	protected IFeedHandler<Bookmark> getBookmarkFeedHandler(){
+		return new AtomFeedHandler<Bookmark>(this) {
+			@Override
+			protected Bookmark entityInstance(BaseService service, Node node, XPathExpression xpath) {
+				return new Bookmark(service, node, nameSpaceCtx, xpath);
+			}
+		};
+	};
+	
+	/***************************************************************
+	 * Factory methods
+	 ****************************************************************/
+	
+	protected EntityList<Bookmark> getBookmarkEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
+		try {
+			return getEntities(requestUrl, getParameters(parameters), getBookmarkFeedHandler());
+		} catch (IOException e) {
+			throw new ClientServicesException(e);
+		}
+	}
 
 }

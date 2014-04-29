@@ -75,23 +75,6 @@ public class BookmarkService extends BaseService {
 		return "dogear"; 
 	}
 	
-	/***************************************************************
-	 * FeedHandlers for each entity type
-	 ****************************************************************/
-	
-	/**
-	 * Factory method to instantiate a FeedHandler for Bookmarks
-	 * @return IFeedHandler<Bookmark>
-	 */
-	public IFeedHandler<Bookmark> getBookmarkFeedHandler(){
-		return new AtomFeedHandler<Bookmark>(this) {
-			@Override
-			protected Bookmark entityInstance(BaseService service, Node node, XPathExpression xpath) {
-				return new Bookmark(service, node, nameSpaceCtx, xpath);
-			}
-		};
-	};
-	
 	
 	/***************************************************************
 	 * Working with Bookmarks
@@ -206,6 +189,23 @@ public class BookmarkService extends BaseService {
 		return getBookmarkEntityList(url, parameters);
 
 	}
+	
+	/***************************************************************
+	 * FeedHandlers for each entity type
+	 ****************************************************************/
+	
+	/**
+	 * Factory method to instantiate a FeedHandler for Bookmarks
+	 * @return IFeedHandler<Bookmark>
+	 */
+	protected IFeedHandler<Bookmark> getBookmarkFeedHandler(){
+		return new AtomFeedHandler<Bookmark>(this) {
+			@Override
+			protected Bookmark entityInstance(BaseService service, Node node, XPathExpression xpath) {
+				return new Bookmark(service, node, nameSpaceCtx, xpath);
+			}
+		};
+	};
 	
 	/***************************************************************
 	 * Factory methods

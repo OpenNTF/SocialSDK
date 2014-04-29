@@ -70,7 +70,7 @@ public class CommunityService extends BaseService {
 	private static final long serialVersionUID = 4832918694422006289L;
 	private static final String COMMUNITY_UNIQUE_IDENTIFIER = "communityUuid";
 	private static final String USERID 						= "userid";
-	
+
 	/**
 	 * Constructor Creates CommunityService Object with default endpoint and default cache size
 	 */
@@ -127,7 +127,7 @@ public class CommunityService extends BaseService {
 	public String getServiceMappingKey() {
 		return "communities";
 	}
-	
+
 	@Override
 	public NamedUrlPart getAuthType(){
 		String auth = super.getAuthType().getValue();
@@ -135,52 +135,12 @@ public class CommunityService extends BaseService {
 		return new NamedUrlPart("authType", auth);
 	}
 
-	/***************************************************************
-	 * FeedHandlers for each entity type
-	 ****************************************************************/
+	//------------------------------------------------------------------------------------------------------------------
+	// Getting Communities feeds
+	//------------------------------------------------------------------------------------------------------------------
 
 	/**
-	 * Factory method to instantiate a FeedHandler for Communities
-	 * @return IFeedHandler<Community>
-	 */
-	public IFeedHandler<Community> getCommunityFeedHandler() {
-		return new AtomFeedHandler<Community>(this, false) {
-			@Override
-			protected Community entityInstance(BaseService service, Node node, XPathExpression xpath) {
-				return new Community(service, node, nameSpaceCtx, xpath);
-			}
-		};
-	}
-
-	/**
-	 * Factory method to instantiate a FeedHandler for Members
-	 * @return IFeedHandler<Member>
-	 */
-	public IFeedHandler<Member> getMemberFeedHandler() {
-		return new AtomFeedHandler<Member>(this) {
-			@Override
-			protected Member entityInstance(BaseService service, Node node, XPathExpression xpath) {
-				return new Member(service, node, nameSpaceCtx, xpath);
-			}
-		};
-	}
-	
-	/**
-	 * Factory method to instantiate a FeedHandler for Invites
-	 * @return IFeedHandler<Invite>
-	 */
-	public IFeedHandler<Invite> getInviteFeedHandler() {
-		return new AtomFeedHandler<Invite>(this) {
-			@Override
-			protected Invite entityInstance(BaseService service, Node node, XPathExpression xpath) {
-				return new Invite(service, node, nameSpaceCtx, xpath);
-			}
-
-		};
-	}
-	
-	/**
-	 * This method returns the public communities
+	 * Gets all public communities to which the authenticated user has access
 	 * 
 	 * @return
 	 * @throws ClientServicesException
@@ -188,39 +148,21 @@ public class CommunityService extends BaseService {
 	public EntityList<Community> getPublicCommunities() throws ClientServicesException {
 		return getPublicCommunities(null);
 	}
-	
+
 	/**
-	 * This method returns the public communities
+	 * Gets all public communities to which the authenticated user has access
 	 * 
 	 * @param parameters
 	 * @return
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Community> getPublicCommunities(Map<String, String> parameters) throws ClientServicesException {
-        String url = CommunityUrls.COMMUNITIES_ALL.format(this);
+		String url = CommunityUrls.COMMUNITIES_ALL.format(this);
 		return getCommunityEntityList(url, parameters);
 	}
-	
+
 	/**
-	 * Wrapper method to get a Community
-	 * <p>
-	 * fetches community content from server and populates the data member of {@link Community} with the fetched content 
-	 *
-	 * @param communityUuid
-	 *			   id of community
-	 * @return A Community
-	 * @throws ClientServicesException
-	 */
-	public Community getCommunity(String communityUuid) throws ClientServicesException {
-		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
-        String url = CommunityUrls.COMMUNITY_INSTANCE.format(this);
-		
-		return getCommunityEntity(url, parameters);
-	}
-	
-	/**
-	 * This method returns the Communities of which the user is a member or owner.
+	 * Gets list of the members of a community
 	 * 
 	 * @param communityUuid
 	 * @return MemberList
@@ -229,8 +171,8 @@ public class CommunityService extends BaseService {
 	public EntityList<Member> getMembers(String communityUuid) throws ClientServicesException {
 		return getMembers(communityUuid, null);
 	}
-	
-	/** Wrapper method to get list of the members of a community
+
+	/** Gets list of the members of a community
 	 * 
 	 * @param communityUuid
 	 * @param query parameters
@@ -245,13 +187,13 @@ public class CommunityService extends BaseService {
 			parameters = new HashMap<String, String>();
 		}
 		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
-        String url = CommunityUrls.COMMUNITY_MEMBERS.format(this);
-		
+		String url = CommunityUrls.COMMUNITY_MEMBERS.format(this);
+
 		return getMemberEntityList(url, parameters);
 	}
 
 	/**
-	 * This method returns the Communities of which the user is a member or owner.
+	 * Gets the Communities of which the user is a member or owner.
 	 * 
 	 * @return
 	 * @throws ClientServicesException
@@ -260,22 +202,22 @@ public class CommunityService extends BaseService {
 		return getMyCommunities(null);
 	}
 	/**
-	 * Wrapper method to get Communities of which the user is a member or owner.
+	 * Gets Communities of which the user is a member or owner.
 	 * 
 	 * @return A list of communities of which the user is a member or owner
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Community> getMyCommunities(Map<String, String> parameters) throws ClientServicesException {
-        String url = CommunityUrls.COMMUNITIES_MY.format(this);		
+		String url = CommunityUrls.COMMUNITIES_MY.format(this);		
 		return getCommunityEntityList(url, parameters);
 	}
-	
+
 	public EntityList<Community> getSubCommunities(String communityUuid) throws ClientServicesException {
 		return getSubCommunities(communityUuid,	null);
 	}
-	
+
 	/**
-	 * Wrapper method to get SubCommunities of a community
+	 * Gets SubCommunities of a community
 	 * 
 	 * @param communityUuid 
 	 * 				 community Id of which SubCommunities are to be fetched
@@ -283,7 +225,7 @@ public class CommunityService extends BaseService {
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Community> getSubCommunities(String communityUuid, Map<String, String> parameters) throws ClientServicesException {
-		
+
 		if (StringUtil.isEmpty(communityUuid)){
 			throw new ClientServicesException(null, Messages.NullCommunityIdException);
 		}
@@ -291,45 +233,45 @@ public class CommunityService extends BaseService {
 			parameters = new HashMap<String, String>();
 		}
 		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
-        String url = CommunityUrls.COMMUNITY_SUBCOMMUNITIES.format(this);
+		String url = CommunityUrls.COMMUNITY_SUBCOMMUNITIES.format(this);
 		return getCommunityEntityList(url, parameters);
 	}
 
 	/**
-     * Get a list of the outstanding community invitations of the currently authenticated 
-     * user or provide parameters to search for a subset of those invitations.
-     * 
-     * @method getMyInvites
-     * @return pending invites for the authenticated user
-     * @throws ClientServicesException
-     */
+	 * Get a list of the outstanding community invitations of the currently authenticated 
+	 * user or provide parameters to search for a subset of those invitations.
+	 * 
+	 * @method getMyInvites
+	 * @return pending invites for the authenticated user
+	 * @throws ClientServicesException
+	 */
 	public EntityList<Invite> getMyInvites() throws ClientServicesException {
 		return getMyInvites(null);
 	}
-	 /**
-     * Get a list of the outstanding community invitations of the currently authenticated 
-     * user or provide parameters to search for a subset of those invitations.
-     * 
-     * @method getMyInvites
-     * @param parameters
-     * 				 Various parameters that can be passed to get a feed of members of a community. 
-     * 				 The parameters must be exactly as they are supported by IBM Connections like ps, sortBy etc.
-     * @return pending invites for the authenticated user
-     * @throws ClientServicesException
-     */
+	/**
+	 * Get a list of the outstanding community invitations of the currently authenticated 
+	 * user or provide parameters to search for a subset of those invitations.
+	 * 
+	 * @method getMyInvites
+	 * @param parameters
+	 * 				 Various parameters that can be passed to get a feed of members of a community. 
+	 * 				 The parameters must be exactly as they are supported by IBM Connections like ps, sortBy etc.
+	 * @return pending invites for the authenticated user
+	 * @throws ClientServicesException
+	 */
 	public EntityList<Invite> getMyInvites(Map<String, String> parameters) throws ClientServicesException {
-		
+
 		String url = CommunityUrls.COMMUNITY_MYINVITES.format(this);
 		return getInviteEntityList(url, parameters);
 	}
 	/**
-     * Retrieve a community invite.
-     * 
-     * @method getInvite
-     * @param {String} communityUuid
-     * @param (String} inviteUuid
-     * @throws ClientServicesException
-     */
+	 * Retrieve a community invite.
+	 * 
+	 * @method getInvite
+	 * @param {String} communityUuid
+	 * @param (String} inviteUuid
+	 * @throws ClientServicesException
+	 */
 	public Invite getInvite(String communityUuid, String inviteUuid) throws ClientServicesException{
 		if (StringUtil.isEmpty(communityUuid) || StringUtil.isEmpty(inviteUuid)){
 			throw new ClientServicesException(null, Messages.getInviteException);
@@ -337,127 +279,17 @@ public class CommunityService extends BaseService {
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
 		parameters.put(USERID, inviteUuid); // the parameter name should be inviteUuid, this is a bug on connections
-        String url = CommunityUrls.COMMUNITY_INVITES.format(this);
+		String url = CommunityUrls.COMMUNITY_INVITES.format(this);
 		return getInviteEntity(url, parameters);
-		
-	}
-	
-	/**
-     * Method to create a community invitation, user should be authenticated to perform this operation
-	 * 
-     * @method createInvite
-     * @param communityUuid 
-	 * 				 community Id for which invite is to be sent
-	 * @param contributorId
-	 *				 user id of contributor
-     * @return pending invites for the authenticated user
-     * @throws ClientServicesException
-     */
-	
-	public Invite createInvite(Invite invite) throws ClientServicesException {
-		
-		if (StringUtil.isEmpty(invite.getCommunityUuid())){
-			throw new ClientServicesException(null, Messages.NullCommunityIdException);
-		}
-		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, invite.getCommunityUuid());
-        String url = CommunityUrls.COMMUNITY_INVITES.format(this);
-		Object communityPayload;
-		try {
-			communityPayload = new InviteTransformer().transform(invite.getFieldsMap());
-		} catch (TransformerException e) {
-			throw new ClientServicesException(e, Messages.CreateCommunityPayloadException);
-		}
-		try {
-			Response result = super.createData(url, parameters, communityPayload);
-			invite = getInviteFeedHandler().createEntity(result);
-		} catch (Exception e) {
-			throw new ClientServicesException(e, Messages.CreateInvitationException);
-		}
-		return invite;
-	}
-	
-	/**
-     * Method to accept a outstanding community invitation, user should be authenticated to perform this operation
-	 * 
-     * @method acceptInvite
-     * @param communityUuid 
-	 * 				 community Id for which invite is sent
-	 * @param contributorId
-	 *				 user id of contributor
-     * @return boolean
-     * @throws ClientServicesException
-     */
-	
-	public boolean acceptInvite(String communityUuid, String contributorId) throws ClientServicesException {
-		
-		if (StringUtil.isEmpty(communityUuid)){
-			throw new ClientServicesException(null, Messages.NullCommunityIdException);
-		}
-		boolean success = true;
-		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
-        String url = CommunityUrls.COMMUNITY_MEMBERS.format(this);
-	
-		Object communityPayload;
-		
-		Member member = new Member(this, contributorId);
-		try {
-			communityPayload = new CommunityMemberTransformer().transform(member.getFieldsMap());
-		} catch (TransformerException e) {
-			success = false;
-			throw new ClientServicesException(e, Messages.CreateCommunityPayloadException);
-		}
-		
-		try {
-			super.createData(url, parameters, communityPayload);
-		} catch (Exception e) {
-			success = false;
-			throw new ClientServicesException(e, Messages.AcceptInvitationException);
-		} 
-		return success;
-		
-	}
-	
-	/**
-     * Method to decline a outstanding community invitation, user should be authenticated to perform this operation
-	 * 
-     * @method declineInvite
-     * @param communityUuid 
-	 * 				 community Id for which invite is sent
-	 * @param contributorId
-	 *				 user id of contributor
-     * @return boolean
-     * @throws ClientServicesException
-     */
-	
-	public boolean declineInvite(String communityUuid, String contributorId) throws ClientServicesException {
-		
-		if (StringUtil.isEmpty(communityUuid)){
-			throw new ClientServicesException(null, Messages.NullCommunityIdException);
-		}
-		boolean success = true;
-		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
-		if(EntityUtil.isEmail(contributorId)){
-			parameters.put("email", contributorId);
-		}
-		else{
-			parameters.put("userid", contributorId);	
-		}
-        String url = CommunityUrls.COMMUNITY_INVITES.format(this);
-		
-		try {
-			super.deleteData(url, parameters, communityUuid);
-		} catch (Exception e) {
-			success = false;
-			throw new ClientServicesException(e, Messages.DeclineInvitationException);
-		}
-		return success;
+
 	}
 
+	//------------------------------------------------------------------------------------------------------------------
+	// Working with communities programmatically
+	//------------------------------------------------------------------------------------------------------------------
+
 	/**
-	 * Wrapper method to create a community
+	 * Creates a community
 	 * <p>
 	 * User should be authenticated to call this method
 	 * 
@@ -477,9 +309,9 @@ public class CommunityService extends BaseService {
 		community.setCommunityType(type);
 		return createCommunity(community);
 	}
-	
+
 	/**
-	 * Wrapper method to create a community
+	 * Creates a community
 	 * <p>
 	 * User should be authenticated to call this method
 	 * 
@@ -514,7 +346,7 @@ public class CommunityService extends BaseService {
 			throw new ClientServicesException(e, Messages.CreateCommunityException);
 		}
 	}
-	
+
 	private String extractCommunityIdFromHeaders(Response requestData){
 		Header header = requestData.getResponse().getFirstHeader("Location");
 		String urlLocation = header!=null?header.getValue():"";
@@ -522,7 +354,25 @@ public class CommunityService extends BaseService {
 	}
 
 	/**
-	 * Wrapper method to update a community
+	 * Get a Community
+	 * <p>
+	 * fetches community content from server and populates the data member of {@link Community} with the fetched content 
+	 *
+	 * @param communityUuid
+	 *			   id of community
+	 * @return A Community
+	 * @throws ClientServicesException
+	 */
+	public Community getCommunity(String communityUuid) throws ClientServicesException {
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
+		String url = CommunityUrls.COMMUNITY_INSTANCE.format(this);
+
+		return getCommunityEntity(url, parameters);
+	}
+
+	/**
+	 * Update a community
 	 * <p>
 	 * User should be logged in as a owner of the community to call this method.
 	 * 
@@ -545,7 +395,7 @@ public class CommunityService extends BaseService {
 			if(!community.getFieldsMap().toString().contains(CommunityXPath.tags.toString()))
 				community.setTags(community.getTags());
 			community.setAsString(CommunityXPath.communityUuid, community.getCommunityUuid());
-			
+
 			try {
 				communityPayload = community.constructCreateRequestBody();
 			} catch (TransformerException e) {
@@ -560,7 +410,7 @@ public class CommunityService extends BaseService {
 		}
 	}
 	/**
-	 * Wrapper method to update Community Logo, supported for connections
+	 * Update Community Logo, supported for connections
 	 * 
 	 * @param File
 	 * 			image to be uploaded as Community Logo
@@ -588,7 +438,7 @@ public class CommunityService extends BaseService {
 				// the url doesn't have atom in base 
 				String url = "/communities/service/html/image";
 				getClientService().put(url, parameters, headers, file, ClientService.FORMAT_NULL);
-				
+
 			}
 		} catch (ClientServicesException e) {
 			throw new ClientServicesException(e, Messages.UpdateCommunityLogoException);
@@ -596,7 +446,157 @@ public class CommunityService extends BaseService {
 	}
 
 	/**
-	 * Wrapper method to get member of a community.
+	 * Delete a community
+	 * <p>
+	 * User should be logged in as a owner of the community to call this method.
+	 * 
+	 * @param String
+	 * 				communityUuid which is to be deleted
+	 * @throws ClientServicesException
+	 */
+	public void deleteCommunity(String communityUuid) throws ClientServicesException {
+		if (StringUtil.isEmpty(communityUuid)){
+			throw new ClientServicesException(null, Messages.NullCommunityIdException);
+		}
+
+		try {
+			Map<String, String> parameters = new HashMap<String, String>();
+			parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
+			String url = CommunityUrls.COMMUNITY_INSTANCE.format(this);
+			super.deleteData(url, parameters, COMMUNITY_UNIQUE_IDENTIFIER);
+		} catch (ClientServicesException e) {
+			throw new ClientServicesException(e, Messages.DeleteCommunityException, communityUuid);
+		} catch (IOException e) {
+			throw new ClientServicesException(e, Messages.DeleteCommunityException, communityUuid);
+		}		
+
+	}
+
+	//------------------------------------------------------------------------------------------------------------------
+	// Working with community invitations
+	//------------------------------------------------------------------------------------------------------------------
+
+	/**
+	 * Creates a community invitation, user should be authenticated to perform this operation
+	 * 
+	 * @method createInvite
+	 * @param communityUuid 
+	 * 				 community Id for which invite is to be sent
+	 * @param contributorId
+	 *				 user id of contributor
+	 * @return pending invites for the authenticated user
+	 * @throws ClientServicesException
+	 */
+
+	public Invite createInvite(Invite invite) throws ClientServicesException {
+
+		if (StringUtil.isEmpty(invite.getCommunityUuid())){
+			throw new ClientServicesException(null, Messages.NullCommunityIdException);
+		}
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, invite.getCommunityUuid());
+		String url = CommunityUrls.COMMUNITY_INVITES.format(this);
+		Object communityPayload;
+		try {
+			communityPayload = new InviteTransformer().transform(invite.getFieldsMap());
+		} catch (TransformerException e) {
+			throw new ClientServicesException(e, Messages.CreateCommunityPayloadException);
+		}
+		try {
+			Response result = super.createData(url, parameters, communityPayload);
+			invite = getInviteFeedHandler().createEntity(result);
+		} catch (Exception e) {
+			throw new ClientServicesException(e, Messages.CreateInvitationException);
+		}
+		return invite;
+	}
+
+	/**
+	 * Accept an outstanding community invitation, user should be authenticated to perform this operation
+	 * 
+	 * @method acceptInvite
+	 * @param communityUuid 
+	 * 				 community Id for which invite is sent
+	 * @param contributorId
+	 *				 user id of contributor
+	 * @return boolean
+	 * @throws ClientServicesException
+	 */
+
+	public boolean acceptInvite(String communityUuid, String contributorId) throws ClientServicesException {
+
+		if (StringUtil.isEmpty(communityUuid)){
+			throw new ClientServicesException(null, Messages.NullCommunityIdException);
+		}
+		boolean success = true;
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
+		String url = CommunityUrls.COMMUNITY_MEMBERS.format(this);
+
+		Object communityPayload;
+
+		Member member = new Member(this, contributorId);
+		try {
+			communityPayload = new CommunityMemberTransformer().transform(member.getFieldsMap());
+		} catch (TransformerException e) {
+			success = false;
+			throw new ClientServicesException(e, Messages.CreateCommunityPayloadException);
+		}
+
+		try {
+			super.createData(url, parameters, communityPayload);
+		} catch (Exception e) {
+			success = false;
+			throw new ClientServicesException(e, Messages.AcceptInvitationException);
+		} 
+		return success;
+
+	}
+
+	/**
+	 * Decline an outstanding community invitation, user should be authenticated to perform this operation
+	 * 
+	 * @method declineInvite
+	 * @param communityUuid 
+	 * 				 community Id for which invite is sent
+	 * @param contributorId
+	 *				 user id of contributor
+	 * @return boolean
+	 * @throws ClientServicesException
+	 */
+
+	public boolean declineInvite(String communityUuid, String contributorId) throws ClientServicesException {
+
+		if (StringUtil.isEmpty(communityUuid)){
+			throw new ClientServicesException(null, Messages.NullCommunityIdException);
+		}
+		boolean success = true;
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
+		if(EntityUtil.isEmail(contributorId)){
+			parameters.put("email", contributorId);
+		}
+		else{
+			parameters.put("userid", contributorId);	
+		}
+		String url = CommunityUrls.COMMUNITY_INVITES.format(this);
+
+		try {
+			super.deleteData(url, parameters, communityUuid);
+		} catch (Exception e) {
+			success = false;
+			throw new ClientServicesException(e, Messages.DeclineInvitationException);
+		}
+		return success;
+	}
+
+
+	//------------------------------------------------------------------------------------------------------------------
+	// Working with community members
+	//------------------------------------------------------------------------------------------------------------------
+
+	/**
+	 * Get member of a community.
 	 * <p> 
 	 * 
 	 * @param communityUuid 
@@ -606,12 +606,12 @@ public class CommunityService extends BaseService {
 	 * @return Member
 	 * @throws ClientServicesException
 	 */
-	
+
 	public Member getMember(String communityUuid, String memberId) throws ClientServicesException {
 		if (StringUtil.isEmpty(communityUuid)||StringUtil.isEmpty(memberId)){
 			throw new ClientServicesException(null, Messages.NullCommunityIdOrUserIdException);
 		}
-		
+
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
 		if(memberId.contains("@")){
@@ -621,11 +621,11 @@ public class CommunityService extends BaseService {
 			parameters.put("userid", memberId);
 		}
 		String url = CommunityUrls.COMMUNITY_MEMBERS.format(this);		
-		
+
 		return getMemberEntity(url, parameters);
 	}
 	/**
-	 * Wrapper method to add member to a community.
+	 * Add member to a community.
 	 * <p> 
 	 * User should be logged in as a owner of the community to call this method
 	 * 
@@ -636,7 +636,7 @@ public class CommunityService extends BaseService {
 	 * @throws ClientServicesException
 	 */
 	public boolean addMember(String communityUuid, Member member) throws ClientServicesException {
-		
+
 		if (StringUtil.isEmpty(communityUuid)){
 			throw new ClientServicesException(null, Messages.NullCommunityIdUserIdOrRoleException);
 		}
@@ -656,14 +656,14 @@ public class CommunityService extends BaseService {
 		}
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
-		
+
 		Object communityPayload;
 		try {
 			communityPayload = new CommunityMemberTransformer().transform(member.getFieldsMap());
 		} catch (TransformerException e) {
 			throw new ClientServicesException(e, Messages.CreateCommunityPayloadException);
 		}
-		
+
 		String url = CommunityUrls.COMMUNITY_MEMBERS.format(this);
 		try {
 			Response response = super.createData(url, parameters, communityPayload);
@@ -676,7 +676,7 @@ public class CommunityService extends BaseService {
 		}
 	}
 	/**
-	 * Wrapper method to update member of a community.
+	 * Update member of a community.
 	 * <p> 
 	 * User should be logged in as a owner of the community to call this method
 	 * 
@@ -700,18 +700,18 @@ public class CommunityService extends BaseService {
 		}
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityId);
-	
+
 		parameters.put("userid", member.getUserid());
-	
+
 		Object memberPayload;
 		try {
-			
+
 			member.setUserid(member.getUserid()); // to add this in fields map for update
 			memberPayload = new CommunityMemberTransformer().transform(member.getFieldsMap());
 		} catch (TransformerException e) {
 			throw new ClientServicesException(e, Messages.UpdateMemberException);
 		}
-		
+
 		String url = CommunityUrls.COMMUNITY_MEMBERS.format(this);
 		try {
 			super.createData(url, parameters, memberPayload);
@@ -720,10 +720,10 @@ public class CommunityService extends BaseService {
 		} catch (IOException e) {
 			throw new ClientServicesException(e, Messages.UpdateMemberException, memberId, member.getRole(), communityId);
 		}
-		
+
 	}
 	/**
-	 * Wrapper method to remove member from a community.
+	 * Remove member from a community.
 	 * <p> 
 	 * User should be logged in as a owner of the community to call this method
 	 * 
@@ -737,7 +737,7 @@ public class CommunityService extends BaseService {
 		if (StringUtil.isEmpty(communityUuid)||StringUtil.isEmpty(memberId)){
 			throw new ClientServicesException(null, Messages.NullCommunityIdOrUserIdException);
 		}
-		
+
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
 		if(EntityUtil.isEmail(memberId)){
@@ -745,7 +745,7 @@ public class CommunityService extends BaseService {
 		}else{
 			parameters.put("userid", memberId);
 		}
-		
+
 		try {
 			String url = CommunityUrls.COMMUNITY_MEMBERS.format(this);
 			super.deleteData(url, parameters, COMMUNITY_UNIQUE_IDENTIFIER);
@@ -756,35 +756,12 @@ public class CommunityService extends BaseService {
 		}
 	}
 
-	/**
-	 * Wrapper method to delete a community
-	 * <p>
-	 * User should be logged in as a owner of the community to call this method.
-	 * 
-	 * @param String
-	 * 				communityUuid which is to be deleted
-	 * @throws ClientServicesException
-	 */
-	public void deleteCommunity(String communityUuid) throws ClientServicesException {
-		if (StringUtil.isEmpty(communityUuid)){
-			throw new ClientServicesException(null, Messages.NullCommunityIdException);
-		}
+	//------------------------------------------------------------------------------------------------------------------
+	// Working with community files
+	//------------------------------------------------------------------------------------------------------------------
 
-		try {
-			Map<String, String> parameters = new HashMap<String, String>();
-			parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
-			String url = CommunityUrls.COMMUNITY_INSTANCE.format(this);
-			super.deleteData(url, parameters, COMMUNITY_UNIQUE_IDENTIFIER);
-		} catch (ClientServicesException e) {
-			throw new ClientServicesException(e, Messages.DeleteCommunityException, communityUuid);
-		} catch (IOException e) {
-			throw new ClientServicesException(e, Messages.DeleteCommunityException, communityUuid);
-		}		
-		
-	}
-	
 	/**
-	 * Method to get a list of Community Files
+	 * Get a list of Community Files
 	 * @param communityId
 	 * @param params
 	 * @return FileList
@@ -798,9 +775,9 @@ public class CommunityService extends BaseService {
 			throw new ClientServicesException(e);
 		}
 	}
-	
+
 	/**
-	 * Method to download a community file
+	 * Download a community file
 	 * @param ostream
 	 * @param fileId
 	 * @param libraryId - Library Id of which the file is a part. This value can be obtained by using File's getLibraryId method.
@@ -816,9 +793,9 @@ public class CommunityService extends BaseService {
 			throw new ClientServicesException(e, Messages.DownloadCommunitiesException);
 		} 
 	}
-	
+
 	/**
-	 * Method to upload a File to Community
+	 * Upload a File to Community
 	 * @param iStream
 	 * @param communityId
 	 * @param title
@@ -833,11 +810,15 @@ public class CommunityService extends BaseService {
 			throw new ClientServicesException(e, Messages.UploadCommunitiesException);
 		}
 	}
-	
+
+	//------------------------------------------------------------------------------------------------------------------
+	// Internal implementations
+	//------------------------------------------------------------------------------------------------------------------
+
 	/***************************************************************
 	 * Factory methods
 	 ****************************************************************/
-	
+
 	protected Community getCommunityEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
 		try {
 			return getEntity(requestUrl, getParameters(parameters), getCommunityFeedHandler());
@@ -845,7 +826,7 @@ public class CommunityService extends BaseService {
 			throw new ClientServicesException(e);
 		}
 	}
-	
+
 	protected Member getMemberEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
 		try {
 			return getEntity(requestUrl, getParameters(parameters), getMemberFeedHandler());
@@ -853,8 +834,7 @@ public class CommunityService extends BaseService {
 			throw new ClientServicesException(e);
 		}
 	}
-	
-	
+
 	protected Invite getInviteEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
 		try {
 			return getEntity(requestUrl, getParameters(parameters), getInviteFeedHandler());
@@ -862,7 +842,7 @@ public class CommunityService extends BaseService {
 			throw new ClientServicesException(e);
 		}
 	}
-	
+
 	protected EntityList<Community> getCommunityEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
 		try {
 			return getEntities(requestUrl, getParameters(parameters), getCommunityFeedHandler());
@@ -870,7 +850,7 @@ public class CommunityService extends BaseService {
 			throw new ClientServicesException(e);
 		}
 	}
-	
+
 	protected EntityList<Member> getMemberEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
 		try {
 			return getEntities(requestUrl, getParameters(parameters), getMemberFeedHandler());
@@ -878,12 +858,56 @@ public class CommunityService extends BaseService {
 			throw new ClientServicesException(e);
 		}
 	}
-	
+
 	protected EntityList<Invite> getInviteEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
 		try {
 			return getEntities(requestUrl, getParameters(parameters), getInviteFeedHandler());
 		} catch (IOException e) {
 			throw new ClientServicesException(e);
 		}
+	}
+
+	/***************************************************************
+	 * FeedHandlers for each entity type
+	 ****************************************************************/
+
+	/**
+	 * Factory method to instantiate a FeedHandler for Communities
+	 * @return IFeedHandler<Community>
+	 */
+	protected IFeedHandler<Community> getCommunityFeedHandler() {
+		return new AtomFeedHandler<Community>(this, false) {
+			@Override
+			protected Community entityInstance(BaseService service, Node node, XPathExpression xpath) {
+				return new Community(service, node, nameSpaceCtx, xpath);
+			}
+		};
+	}
+
+	/**
+	 * Factory method to instantiate a FeedHandler for Members
+	 * @return IFeedHandler<Member>
+	 */
+	protected IFeedHandler<Member> getMemberFeedHandler() {
+		return new AtomFeedHandler<Member>(this) {
+			@Override
+			protected Member entityInstance(BaseService service, Node node, XPathExpression xpath) {
+				return new Member(service, node, nameSpaceCtx, xpath);
+			}
+		};
+	}
+
+	/**
+	 * Factory method to instantiate a FeedHandler for Invites
+	 * @return IFeedHandler<Invite>
+	 */
+	protected IFeedHandler<Invite> getInviteFeedHandler() {
+		return new AtomFeedHandler<Invite>(this) {
+			@Override
+			protected Invite entityInstance(BaseService service, Node node, XPathExpression xpath) {
+				return new Invite(service, node, nameSpaceCtx, xpath);
+			}
+
+		};
 	}
 }

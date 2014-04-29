@@ -19,10 +19,11 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.connections.communities.Community;
 import com.ibm.sbt.services.client.connections.communities.CommunityService;
 import com.ibm.sbt.services.client.connections.communities.CommunityServiceException;
-import com.ibm.sbt.services.client.connections.communities.MemberList;
+import com.ibm.sbt.services.client.connections.communities.Member;
 import com.ibm.sbt.services.endpoints.BasicEndpoint;
 import com.ibm.sbt.services.endpoints.ConnectionsBasicEndpoint;
 
@@ -85,7 +86,7 @@ public class CommunityServiceApp {
                 System.out.println(community.getTitle());
                 do{
                     parameters.put("page", Integer.toString(page));
-                    MemberList members = communityService.getMembers(community.getCommunityUuid(), parameters);
+                    EntityList<Member> members = communityService.getMembers(community.getCommunityUuid(), parameters);
                     for (int i=0; i<members.size(); i++) {
                         System.out.println("    " + members.get(i).getEmail());
                     }

@@ -36,11 +36,8 @@ public enum BookmarkUrls {
 	APP(new VersionedUrl(v4_0, 					"{dogear}/api/app?{userId}")),
 	POPULAR(new VersionedUrl(v4_0, 				"{dogear}/atom/popular")),
 	MYNOTIFICATIONS(new VersionedUrl(v4_0, 		"{dogear}/atom/mynotifications")),
-	MYSENTNOTIFICATIONS(new VersionedUrl(v4_0, 	"{dogear}/atom/mysentnotifications")),
-	userId("userid", "email");
+	MYSENTNOTIFICATIONS(new VersionedUrl(v4_0, 	"{dogear}/atom/mysentnotifications"));
 	
-	private String keyParam ;
-	private String emailParam ;
 	private URLBuilder builder;
 	
 	public String format(BaseService service, NamedUrlPart... args) {
@@ -51,17 +48,13 @@ public enum BookmarkUrls {
 		return builder.getPattern(version).getUrlPattern();
 	}
 	
-	public NamedUrlPart get(String id){
-		String paramName = isEmail(id)?emailParam:keyParam;
-		return new NamedUrlPart(name(), paramName+"="+id);
+	public static NamedUrlPart getUserId(String id){
+		String paramName = isEmail(id)?"email":"userId";
+		return new NamedUrlPart("userId", paramName+"="+id);
 	}
 	
 	private BookmarkUrls(VersionedUrl... urlVersions) {
 		builder = new URLBuilder(urlVersions);
-	}
-	private BookmarkUrls(String userid, String email){
-		this.keyParam = userid;
-		this.emailParam = email;
 	}
 	
 	private static boolean isEmail(String id) {

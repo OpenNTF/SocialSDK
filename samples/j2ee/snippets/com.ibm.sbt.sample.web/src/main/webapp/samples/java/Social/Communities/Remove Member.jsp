@@ -20,7 +20,7 @@
 <%@page import="com.ibm.sbt.services.client.connections.communities.Community"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
 
-<%@page import="com.ibm.sbt.services.client.connections.communities.MemberList"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.Member"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Collection"%>
@@ -40,7 +40,7 @@
 		CommunityService communityService = new CommunityService();
 		Collection<Community> communities = communityService.getMyCommunities();
 		Community community = communities.iterator().next();
-		MemberList members = communityService.getMembers(community.getCommunityUuid());
+		EntityList<Member> members = communityService.getMembers(community.getCommunityUuid());
 		if(members != null && !members.isEmpty()){
 			if(members.getTotalResults() > 1){
 				Member member = members.iterator().next();	

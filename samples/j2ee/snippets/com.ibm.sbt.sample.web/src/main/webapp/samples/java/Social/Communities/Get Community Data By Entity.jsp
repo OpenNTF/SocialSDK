@@ -19,9 +19,8 @@
 <%@page import="com.ibm.commons.runtime.Context"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.Community"%>
-<%@page	import="com.ibm.sbt.services.client.connections.communities.CommunityList"%>
+<%@page	import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.Member"%>
-<%@page	import="com.ibm.sbt.services.client.connections.communities.MemberList"%>
 <%@page import="java.util.*"%>
 
 				
@@ -41,7 +40,7 @@
 			CommunityService communityService = new CommunityService();
 			Collection<Community> communities = communityService.getPublicCommunities();
 			Community community = communities.iterator().next();
-			CommunityList subCommunities = community.getSubCommunities(); 
+			EntityList<Community> subCommunities = community.getSubCommunities(); 
 			if(subCommunities.getTotalResults() > 0 ){
 				out.println("<br>Listing sub communities of a Community <br>");
 				for (Community subCommunity : subCommunities) {
@@ -49,7 +48,7 @@
 					out.println("<br>");
 				}
 			}
-			MemberList members = community.getMembers(); 
+			EntityList<Member> members = community.getMembers(); 
 			out.println("<br>Listing members of a Community <br>");
 			for (Member member : members) {
 				out.println("<b>Member name : </b> " + member.getName());

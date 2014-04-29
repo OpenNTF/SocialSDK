@@ -18,7 +18,7 @@
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.Community"%>
-<%@page import="com.ibm.sbt.services.client.connections.communities.CommunityList"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.ArrayList"%>
@@ -37,7 +37,7 @@
 	<%
 	try {
 		CommunityService communityService = new CommunityService();
-		CommunityList communities = communityService.getMyCommunities();
+		EntityList<Community> communities = communityService.getMyCommunities();
 		if(communities!=null && !communities.isEmpty()){
 			Community community = communities.iterator().next();
 			community.setTitle("Test Community" + System.currentTimeMillis());

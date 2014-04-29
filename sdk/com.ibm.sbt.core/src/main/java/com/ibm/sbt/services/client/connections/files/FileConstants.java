@@ -14,6 +14,7 @@
  * permissions and limitations under the License.
  */
 package com.ibm.sbt.services.client.connections.files;
+
 /**
  * Class used to maintain the constants used by Files API and related classes. 
  * 
@@ -21,18 +22,21 @@ package com.ibm.sbt.services.client.connections.files;
  */
 public final class FileConstants {
 
-	public static char SEPARATOR   = '/';
+	public final static char SEPARATOR   = '/';
 	
-	public static String LockType_HARD	= "HARD";
-	public static String LockType_NONE	= "NONE";
-	public static String Category	= "category";
-	public static String Category_DOCUMENT	= "document";
-	public static String Category_COMMENT	= "comment";
-	public static String Category_COLLECTION	= "collection";
-	public static String Category_COMMUNITY	= "community";
-	public static String DIRECTION_INBOUND	= "inbound";
-	public static String DIRECTION_OUTBOUND	= "outbound";
-	public static String X_UPDATE_NONCE	= "X-Update-Nonce";
+	public static final String LOCKTYPE_HARD	= "HARD";
+	public static final String LOCKTYPE_NONE	= "NONE";
+	public static final String CATEGORY	= "category";
+	public static final String CATEGORY_DOCUMENT	= "document";
+	public static final String CATEGORY_COMMENT	= "comment";
+	public static final String CATEGORY_COLLECTION	= "collection";
+	public static final String CATEGORY_COMMUNITY	= "community";
+	public static final String DIRECTION_INBOUND	= "inbound";
+	public static final String DIRECTION_OUTBOUND	= "outbound";
+	public static final String VISIBILITY	= "visibility";
+	public static final String VISIBILITY_PUBLIC	= "public";
+	public static final String VISIBILITY_PRIVATE	= "private";
+	public static final String X_UPDATE_NONCE	= "X-Update-Nonce";
     
 	
 }

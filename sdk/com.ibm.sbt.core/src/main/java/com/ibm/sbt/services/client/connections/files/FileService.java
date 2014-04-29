@@ -16,8 +16,22 @@
 
 package com.ibm.sbt.services.client.connections.files;
 
+import static com.ibm.sbt.services.client.base.CommonConstants.APPLICATION_ATOM_XML;
+import static com.ibm.sbt.services.client.base.CommonConstants.AUTH_TYPE;
+import static com.ibm.sbt.services.client.base.CommonConstants.TRUE;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
-import static com.ibm.sbt.services.client.connections.files.FileConstants.*;
+import static com.ibm.sbt.services.client.connections.files.FileConstants.CATEGORY;
+import static com.ibm.sbt.services.client.connections.files.FileConstants.CATEGORY_COLLECTION;
+import static com.ibm.sbt.services.client.connections.files.FileConstants.CATEGORY_COMMENT;
+import static com.ibm.sbt.services.client.connections.files.FileConstants.CATEGORY_COMMUNITY;
+import static com.ibm.sbt.services.client.connections.files.FileConstants.DIRECTION_INBOUND;
+import static com.ibm.sbt.services.client.connections.files.FileConstants.DIRECTION_OUTBOUND;
+import static com.ibm.sbt.services.client.connections.files.FileConstants.LOCKTYPE_HARD;
+import static com.ibm.sbt.services.client.connections.files.FileConstants.LOCKTYPE_NONE;
+import static com.ibm.sbt.services.client.connections.files.FileConstants.VISIBILITY;
+import static com.ibm.sbt.services.client.connections.files.FileConstants.VISIBILITY_PRIVATE;
+import static com.ibm.sbt.services.client.connections.files.FileConstants.VISIBILITY_PUBLIC;
+import static com.ibm.sbt.services.client.connections.files.FileConstants.X_UPDATE_NONCE;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -51,6 +65,7 @@ import com.ibm.sbt.services.client.ClientService.ContentStream;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.AtomFeedHandler;
+import com.ibm.sbt.services.client.base.AuthType;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.NamedUrlPart;
@@ -107,7 +122,7 @@ public class FileService extends BaseService {
      */
     public FileService(String endpoint) {
         super(endpoint);
-        commentParams.put("category", "comment");
+        commentParams.put(CATEGORY, CATEGORY_COMMENT);
     }
     
 	/**
@@ -118,7 +133,7 @@ public class FileService extends BaseService {
      */
     public FileService(Endpoint endpoint) {
         super(endpoint);
-        commentParams.put("category", "comment");
+        commentParams.put(CATEGORY, CATEGORY_COMMENT);
     }
 
 	/**
@@ -135,7 +150,7 @@ public class FileService extends BaseService {
     
     @Override
     public NamedUrlPart getAuthType(){
-    	return new NamedUrlPart("authType", "basic");
+    	return new NamedUrlPart(AUTH_TYPE, AuthType.BASIC.get());
     }
     
     protected HashMap<String, String> getCommentParams(){
@@ -326,7 +341,7 @@ public class FileService extends BaseService {
         }
         Document payload = constructPayloadForComments(comment);
         try {
-            Response result = (Response) createData(requestUri, null, new ClientService.ContentXml(payload,"application/atom+xml"));
+            Response result = (Response) createData(requestUri, null, new ClientService.ContentXml(payload, APPLICATION_ATOM_XML));
             return getCommentFeedHandler().createEntity(result);
         } catch (IOException e) {
             throw new ClientServicesException(e, Messages.MessageExceptionInCreatingComment);
@@ -378,7 +393,7 @@ public class FileService extends BaseService {
         String requestUri = FileUrls.COMMUNITY_FILE_COMMENT.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.communityId.get(communityId), FileUrlParts.fileId.get(fileId));
         Document payload = constructPayloadForComments(comment);
         try {
-            Response result = (Response) createData(requestUri, null, new ClientService.ContentXml(payload,"application/atom+xml"));
+            Response result = (Response) createData(requestUri, null, new ClientService.ContentXml(payload, APPLICATION_ATOM_XML));
             return getCommentFeedHandler().createEntity(result);
         } catch (IOException e) {
             throw new ClientServicesException(e, Messages.MessageExceptionInCreatingComment);
@@ -810,7 +825,7 @@ public class FileService extends BaseService {
       
         try {
             Response result = (Response) createData(requestUri, params, headers, new ClientService.ContentXml(
-                    payload, "application/atom+xml"));
+                    payload, APPLICATION_ATOM_XML));
             return getCommentFeedHandler().createEntity(result);
         } catch (IOException e) {
             throw new ClientServicesException(e, Messages.MessageExceptionInCreatingComment);
@@ -849,7 +864,7 @@ public class FileService extends BaseService {
         try {
             Response result = (Response) createData(requestUri, null,
                     new ClientService.ContentXml(
-                            payload, "application/atom+xml"));
+                            payload, APPLICATION_ATOM_XML));
             return getFileFeedHandler().createEntity(result);
         } catch (Exception e) {
             throw new ClientServicesException(e, Messages.MessageExceptionInCreatingFolder);
@@ -1918,7 +1933,7 @@ public class FileService extends BaseService {
         String accessType = AccessType.PUBLIC.getText();
         String requestUri = FileUrls.GET_PUBLIC_FILES.format(this, FileUrlParts.accessType.get(accessType));
 		params = (null == params)?new HashMap<String, String>():params;
-        params.put(FileRequestParams.VISIBILITY.getFileRequestParams(), "public");
+        params.put(FileRequestParams.VISIBILITY.getFileRequestParams(), VISIBILITY_PUBLIC);
         return getFileEntityList(requestUri, params);
     }
 
@@ -1959,7 +1974,7 @@ public class FileService extends BaseService {
         String accessType = AccessType.AUTHENTICATED.getText();
         String requestUri = FileUrls.LOCK_FILE.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
         Map<String, String> params = new HashMap<String, String>();
-        params.put(FileRequestParams.LOCK.getFileRequestParams(), FileConstants.LockType_HARD);
+        params.put(FileRequestParams.LOCK.getFileRequestParams(), LOCKTYPE_HARD);
         try {
             createData(requestUri, params, null);
         } catch (IOException e) {
@@ -2085,7 +2100,7 @@ public class FileService extends BaseService {
         	requestUri = FileUrls.USERLIBRARY_RECYCLEBIN_ENTRY.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId), FileUrlParts.fileId.get(fileId));
         }
         Map<String, String> params = new HashMap<String, String>();
-        params.put(FileRequestParams.UNDELETE.getFileRequestParams(), "true");
+        params.put(FileRequestParams.UNDELETE.getFileRequestParams(), TRUE);
         Map<String, String> headers = new HashMap<String, String>();
         try {
             Response data = (Response) updateData(requestUri, params, headers, null, null);
@@ -2123,7 +2138,7 @@ public class FileService extends BaseService {
         String requestUri = FileUrls.MYUSERLIBRARY_RECYCLEBIN_ENTRY.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
 		params = (null == params)?new HashMap<String, String>():params;
         Object payload = constructPayloadForMultipleEntries(communityIds,
-                FileRequestParams.ITEMID.getFileRequestParams(), Category_COMMUNITY);
+                FileRequestParams.ITEMID.getFileRequestParams(), CATEGORY_COMMUNITY);
         Map<String, String> headers = new HashMap<String, String>();
         headers.put(Headers.ContentType, Headers.ATOM);
         headers.put(Headers.ContentLanguage, Headers.UTF);
@@ -2147,7 +2162,7 @@ public class FileService extends BaseService {
         String accessType = AccessType.AUTHENTICATED.getText();
         String requestUri = FileUrls.LOCK_FILE.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
         Map<String, String> params = new HashMap<String, String>();
-        params.put(FileRequestParams.LOCK.getFileRequestParams(), LockType_NONE);
+        params.put(FileRequestParams.LOCK.getFileRequestParams(), LOCKTYPE_NONE);
         try {
             createData(requestUri, params, null);
         } catch (IOException e) {
@@ -2407,7 +2422,7 @@ public class FileService extends BaseService {
         String requestUri = FileUrls.UPLOAD_NEW_VERSION_COMMUNITY_FILE.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.communityId.get(communityId), FileUrlParts.fileId.get(fileId));
 		ContentStream contentFile = (ContentStream) getContentObject(title, iStream);
 		Map<String, String> headers = new HashMap<String, String>();
-        headers.put("X-Update-Nonce", getNonce()); // It is not clearly documented which Content Type requires Nonce, thus adding nonce in header for all upload requests. 
+        headers.put(X_UPDATE_NONCE, getNonce()); // It is not clearly documented which Content Type requires Nonce, thus adding nonce in header for all upload requests. 
         try {
             return uploadNewVersion(requestUri, contentFile, params, headers);
         } catch (IOException e) {
@@ -2450,7 +2465,7 @@ public class FileService extends BaseService {
         String requestUri = FileUrls.COMMUNITYLIBRARY_FEED.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.communityId.get(communityId));
         Content contentFile = getContentObject(title, iStream, length);
 		Map<String, String> headers = new HashMap<String, String>();
-        headers.put("X-Update-Nonce", getNonce()); // It is not clearly documented which Content Type requires Nonce, thus adding nonce in header for all upload requests. 
+        headers.put(X_UPDATE_NONCE, getNonce()); // It is not clearly documented which Content Type requires Nonce, thus adding nonce in header for all upload requests. 
 	    try {
 	    	Response data = (Response) createData(requestUri, null, headers, contentFile);
 	    	return getFileFeedHandler().createEntity(data);
@@ -2538,7 +2553,7 @@ public class FileService extends BaseService {
         String requestUri = FileUrls.MYUSERLIBRARY_DOCUMENT_ENTRY.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
         try {
             Response result = (Response) updateData(requestUri, params, new ClientService.ContentXml(
-                    requestBody, "application/atom+xml"), null);
+                    requestBody, APPLICATION_ATOM_XML), null);
             return getFileFeedHandler().createEntity(result);
         } catch (IOException e) {
             throw new ClientServicesException(e, Messages.MessageExceptionInRestoreFile);
@@ -2716,7 +2731,7 @@ public class FileService extends BaseService {
         String accessType = AccessType.AUTHENTICATED.getText();
         String requestUri = FileUrls.MYUSERLIBRARY_FEED.format(this, FileUrlParts.accessType.get(accessType));
         Map<String, String> headers = new HashMap<String, String>();
-        headers.put("X-Update-Nonce", getNonce()); // It is not clearly documented which Content Type requires Nonce, thus adding nonce in header for all upload requests. 
+        headers.put(X_UPDATE_NONCE, getNonce()); // It is not clearly documented which Content Type requires Nonce, thus adding nonce in header for all upload requests. 
         try {
             Response data = (Response) createData(requestUri, p, headers, contentFile);
             if (logger.isLoggable(Level.FINEST)) {
@@ -2813,7 +2828,7 @@ public class FileService extends BaseService {
             String operation, String entityId) throws TransformerException {
     	
     	Map<String, Object> fieldsMap = new HashMap<String, Object>();
-    	fieldsMap.put("category", FileConstants.Category_COLLECTION);
+    	fieldsMap.put(CATEGORY, CATEGORY_COLLECTION);
     	if (!StringUtil.isEmpty(operation)) {
     		if (operation.equals("update")) { 
     			fieldsMap.put("id", entityId);
@@ -2823,9 +2838,9 @@ public class FileService extends BaseService {
     	fieldsMap.put("title", name);
     	fieldsMap.put("summary", description);
     	if (StringUtil.isEmpty(shareWith) || StringUtil.equalsIgnoreCase(shareWith, "null")) {
-          fieldsMap.put("visibility", "private");
+          fieldsMap.put(VISIBILITY, VISIBILITY_PRIVATE);
       } else {
-    	  fieldsMap.put("visibility", "private");
+    	  fieldsMap.put(VISIBILITY, VISIBILITY_PRIVATE);
           String parts[] = shareWith.split(",");
           if ((parts.length) != 3) {
               return null;
@@ -2864,7 +2879,7 @@ public class FileService extends BaseService {
 
     private Document constructPayloadForComments(String operation, String commentToBeAdded) throws TransformerException {
     	Map<String, Object> fieldsMap = new HashMap<String, Object>();
-    	fieldsMap.put("category", FileConstants.Category_COMMENT);
+    	fieldsMap.put("category", CATEGORY_COMMENT);
     	if (!StringUtil.isEmpty(operation) && !operation.equals("delete")) {
           fieldsMap.put("deleteWithRecord", "false");
     	} else {

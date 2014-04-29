@@ -234,7 +234,7 @@ public class CMISFileService extends BaseService {
 	 * @return IFeedHandler<Profile>
 	 */
 	public IFeedHandler<CMISFile> getFileFeedHandler() {
-		return new AtomFeedHandler<CMISFile>(this) {
+		return new AtomFeedHandler<CMISFile>(this, false) {
 			@Override
 			protected CMISFile entityInstance(BaseService service, Node node, XPathExpression xpath) {
 				return new CMISFile(service, node, nameSpaceCtx, xpath);

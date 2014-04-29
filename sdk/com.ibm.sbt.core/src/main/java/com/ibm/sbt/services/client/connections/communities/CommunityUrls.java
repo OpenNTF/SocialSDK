@@ -1,5 +1,5 @@
 /*
- * Â© Copyright IBM Corp. 2014
+ * © Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -53,3 +53,5 @@ public enum CommunityUrls implements URLContainer {
 		return builder.getPattern(version).getUrlPattern();
 	}
 }
+
+

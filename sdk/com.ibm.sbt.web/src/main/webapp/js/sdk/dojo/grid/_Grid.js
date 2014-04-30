@@ -17,14 +17,14 @@
 /**
  * 
  */
-define([ "../../declare", "../../data/AtomReadStore", "../../widget/_TemplatedWidget","../../lang"], 
-        function(declare, AtomReadStore, _TemplatedWidget,lang){
+define([ "../../declare", "../../data/AtomReadStore", "../../widget/_TemplatedWidget","../../lang", "../../text!../../controls/grid/templates/Grid.html"], 
+        function(declare, AtomReadStore, _TemplatedWidget,lang, GridTemplate){
     /**
      * @module sbt.widget.grid._Grid
      */
     var _Grid = declare([ _TemplatedWidget ], {
 
-        templatePath: dojo.moduleUrl("sbt", "controls/grid/templates/Grid.html"),
+        templateString: GridTemplate,
      
         /*
          * Creates an instance of an atom store.

@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * Â© Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -31,7 +31,7 @@ public enum CommunityUrls implements URLContainer {
 	COMMUNITIES_ALL(new VersionedUrl(v4_0, 			"{communities}/service/atom/{authType}/communities/all")),
 	COMMUNITIES_MY(new VersionedUrl(v4_0, 			"{communities}/service/atom/{authType}/communities/my")),
 	COMMUNITY_INSTANCE(new VersionedUrl(v4_0, 		"{communities}/service/atom/{authType}/community/instance")),
-	COMMUNITY_MEMBERS(new VersionedUrl(v4_0, 		"{communities}/service/atom/{authType}/community/members")),
+	COMMUNITY_MEMBERS(new VersionedUrl(v4_0, 		"{communities}/service/atom/{authType}/community/members?{communityUuid}")),
 	COMMUNITY_SUBCOMMUNITIES(new VersionedUrl(v4_0, "{communities}/service/atom/{authType}/community/subcommunities")),
 	COMMUNITY_BOOKMARKS(new VersionedUrl(v4_0, 		"{communities}/service/atom/{authType}/community/bookmarks")),
 	COMMUNITY_FORUMTOPICS(new VersionedUrl(v4_0, 	"{communities}/service/atom/{authType}/community/forum/topics")),
@@ -41,8 +41,8 @@ public enum CommunityUrls implements URLContainer {
 
 	private URLBuilder builder;
 	
-	private CommunityUrls(VersionedUrl... urlVersions) {
-		builder = new URLBuilder(urlVersions);
+	public static NamedUrlPart getCommunityUuid(String id){
+		return new NamedUrlPart("communityUuid", "communityUuid"+"="+id);		
 	}
 	
 	public String format(BaseService service, NamedUrlPart... args) {
@@ -51,6 +51,10 @@ public enum CommunityUrls implements URLContainer {
 
 	public String getPattern(Version version){
 		return builder.getPattern(version).getUrlPattern();
+	}
+	
+	private CommunityUrls(VersionedUrl... urlVersions) {
+		builder = new URLBuilder(urlVersions);
 	}
 }
 

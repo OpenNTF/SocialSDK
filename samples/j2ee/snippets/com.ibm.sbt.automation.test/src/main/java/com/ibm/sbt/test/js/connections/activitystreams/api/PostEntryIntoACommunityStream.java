@@ -21,6 +21,7 @@ import org.junit.Test;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.automation.core.test.connections.BaseActivityStreamsTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
+import com.ibm.sbt.test.lib.TestEnvironment;
 
 /**
  * @author rajmeetbal
@@ -37,6 +38,7 @@ public class PostEntryIntoACommunityStream extends BaseActivityStreamsTest {
 
     @Test
     public void testPostEntryIntoACommunityStream() {
+    	addSnippetParam("sample.id1", TestEnvironment.getCurrentUserUuid());
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         JsonJavaObject json = previewPage.getJson();
         Assert.assertNotNull(json.getJsonObject("entry").getString("id"));

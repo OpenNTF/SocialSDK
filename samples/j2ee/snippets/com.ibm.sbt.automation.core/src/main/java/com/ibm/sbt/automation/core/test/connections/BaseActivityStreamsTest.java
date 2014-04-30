@@ -109,7 +109,7 @@ public class BaseActivityStreamsTest extends FlexibleTest {
     	String eventId = null;
     	Map<String, String> params = new HashMap<String, String>();
     	params.put("rollup", "true");
-    	ActivityStreamEntityList list = activityStreamService.getStream("@me", "@all", "@all", params);
+    	ActivityStreamEntityList list = activityStreamService.getStream("me", "all", "all", params);
 		for(int i = 0; i < list.size(); i++){
 			eventId = list.get(i).getEventId();
 			if(eventId != null){

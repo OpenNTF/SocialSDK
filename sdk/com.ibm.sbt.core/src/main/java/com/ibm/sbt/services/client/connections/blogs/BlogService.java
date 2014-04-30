@@ -455,22 +455,19 @@ public class BlogService extends BaseService {
 	 * Wrapper method to get a particular Blog Post
 	 * 
 	 * @param blogHandle
-	 * @param postUuid
+	 * @param entryid
 	 * @return BlogPost
 	 * @throws ClientServicesException
 	 */
-	public BlogPost getBlogPost(String blogHandle, String postUuid) throws ClientServicesException {
+	public BlogPost getBlogPost(String blogHandle, String entryid) throws ClientServicesException {
 		if (StringUtil.isEmpty(blogHandle)){
 			throw new ClientServicesException(null,"blog handle is null");
 		}
-		if (StringUtil.isEmpty(postUuid)){
-			throw new ClientServicesException(null,"postUuid is null");
+		if (StringUtil.isEmpty(entryid)){
+			throw new ClientServicesException(null,"entry id is null");
 		}
-		Map<String, String> params = new HashMap<String, String>();
-		params.put("entryid", postUuid);
-			
-		String url = BlogUrls.BLOG_POST.format(this, BlogUrlParts.blogHandle.get(blogHandle));
-		return getBlogPostEntity(url, params);
+		String url = BlogUrls.BLOG_POST.format(this, BlogUrlParts.blogHandle.get(blogHandle), BlogUrlParts.getEntryId(entryid));
+		return getBlogPostEntity(url, null);
 	}
 	/**
 	 * Wrapper method to recommend/like a Blog Post

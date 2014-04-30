@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -186,8 +186,7 @@ public class CommunityService extends BaseService {
 		if(null == parameters){
 			parameters = new HashMap<String, String>();
 		}
-		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
-		String url = CommunityUrls.COMMUNITY_MEMBERS.format(this);
+		String url = CommunityUrls.COMMUNITY_MEMBERS.format(this,CommunityUrls.getCommunityUuid(communityUuid));
 
 		return getMemberEntityList(url, parameters);
 	}
@@ -211,7 +210,15 @@ public class CommunityService extends BaseService {
 		String url = CommunityUrls.COMMUNITIES_MY.format(this);		
 		return getCommunityEntityList(url, parameters);
 	}
-
+	
+	/**
+	 * Gets SubCommunities of a community
+	 * 
+	 * @param communityUuid 
+	 * 				 community Id of which SubCommunities are to be fetched
+	 * @return A list of communities
+	 * @throws ClientServicesException
+	 */
 	public EntityList<Community> getSubCommunities(String communityUuid) throws ClientServicesException {
 		return getSubCommunities(communityUuid,	null);
 	}
@@ -232,8 +239,7 @@ public class CommunityService extends BaseService {
 		if(null == parameters){
 			parameters = new HashMap<String, String>();
 		}
-		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
-		String url = CommunityUrls.COMMUNITY_SUBCOMMUNITIES.format(this);
+		String url = CommunityUrls.COMMUNITY_SUBCOMMUNITIES.format(this,CommunityUrls.getCommunityUuid(communityUuid));
 		return getCommunityEntityList(url, parameters);
 	}
 
@@ -263,25 +269,6 @@ public class CommunityService extends BaseService {
 
 		String url = CommunityUrls.COMMUNITY_MYINVITES.format(this);
 		return getInviteEntityList(url, parameters);
-	}
-	/**
-	 * Retrieve a community invite.
-	 * 
-	 * @method getInvite
-	 * @param {String} communityUuid
-	 * @param (String} inviteUuid
-	 * @throws ClientServicesException
-	 */
-	public Invite getInvite(String communityUuid, String inviteUuid) throws ClientServicesException{
-		if (StringUtil.isEmpty(communityUuid) || StringUtil.isEmpty(inviteUuid)){
-			throw new ClientServicesException(null, Messages.getInviteException);
-		}
-		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
-		parameters.put(USERID, inviteUuid); // the parameter name should be inviteUuid, this is a bug on connections
-		String url = CommunityUrls.COMMUNITY_INVITES.format(this);
-		return getInviteEntity(url, parameters);
-
 	}
 
 	//------------------------------------------------------------------------------------------------------------------
@@ -530,8 +517,7 @@ public class CommunityService extends BaseService {
 		}
 		boolean success = true;
 		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
-		String url = CommunityUrls.COMMUNITY_MEMBERS.format(this);
+		String url = CommunityUrls.COMMUNITY_MEMBERS.format(this,CommunityUrls.getCommunityUuid(communityUuid));
 
 		Object communityPayload;
 
@@ -589,6 +575,26 @@ public class CommunityService extends BaseService {
 		}
 		return success;
 	}
+	
+	/**
+	 * Retrieve a community invite.
+	 * 
+	 * @method getInvite
+	 * @param {String} communityUuid
+	 * @param (String} inviteUuid
+	 * @throws ClientServicesException
+	 */
+	public Invite getInvite(String communityUuid, String inviteUuid) throws ClientServicesException{
+		if (StringUtil.isEmpty(communityUuid) || StringUtil.isEmpty(inviteUuid)){
+			throw new ClientServicesException(null, Messages.getInviteException);
+		}
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
+		parameters.put(USERID, inviteUuid); // the parameter name should be inviteUuid, this is a bug on connections
+		String url = CommunityUrls.COMMUNITY_INVITES.format(this);
+		return getInviteEntity(url, parameters);
+
+	}
 
 
 	//------------------------------------------------------------------------------------------------------------------
@@ -613,14 +619,13 @@ public class CommunityService extends BaseService {
 		}
 
 		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
 		if(memberId.contains("@")){
 			parameters.put("email", memberId);
 		}
 		else{
 			parameters.put("userid", memberId);
 		}
-		String url = CommunityUrls.COMMUNITY_MEMBERS.format(this);		
+		String url = CommunityUrls.COMMUNITY_MEMBERS.format(this,CommunityUrls.getCommunityUuid(communityUuid));		
 
 		return getMemberEntity(url, parameters);
 	}
@@ -655,7 +660,7 @@ public class CommunityService extends BaseService {
 			member.setRole("member"); 
 		}
 		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
+		//parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
 
 		Object communityPayload;
 		try {
@@ -664,7 +669,7 @@ public class CommunityService extends BaseService {
 			throw new ClientServicesException(e, Messages.CreateCommunityPayloadException);
 		}
 
-		String url = CommunityUrls.COMMUNITY_MEMBERS.format(this);
+		String url = CommunityUrls.COMMUNITY_MEMBERS.format(this,CommunityUrls.getCommunityUuid(communityUuid));
 		try {
 			Response response = super.createData(url, parameters, communityPayload);
 			int statusCode = response.getResponse().getStatusLine().getStatusCode();
@@ -686,8 +691,8 @@ public class CommunityService extends BaseService {
 	 * 				 Id of Member 
 	 * @throws ClientServicesException
 	 */
-	public void updateMember(String communityId, Member member)throws ClientServicesException {
-		if (StringUtil.isEmpty(communityId)){
+	public void updateMember(String communityUuid, Member member)throws ClientServicesException {
+		if (StringUtil.isEmpty(communityUuid)){
 			throw new ClientServicesException(null, Messages.NullCommunityIdUserIdOrRoleException);
 		}
 		String memberId = member.getUserid();
@@ -699,7 +704,6 @@ public class CommunityService extends BaseService {
 			throw new ClientServicesException(null, Messages.NullCommunityIdUserIdOrRoleException);
 		}
 		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityId);
 
 		parameters.put("userid", member.getUserid());
 
@@ -712,13 +716,13 @@ public class CommunityService extends BaseService {
 			throw new ClientServicesException(e, Messages.UpdateMemberException);
 		}
 
-		String url = CommunityUrls.COMMUNITY_MEMBERS.format(this);
+		String url = CommunityUrls.COMMUNITY_MEMBERS.format(this, CommunityUrls.getCommunityUuid(communityUuid));
 		try {
 			super.createData(url, parameters, memberPayload);
 		} catch (ClientServicesException e) {
-			throw new ClientServicesException(e, Messages.UpdateMemberException, memberId, member.getRole(), communityId);
+			throw new ClientServicesException(e, Messages.UpdateMemberException, memberId, member.getRole(), communityUuid);
 		} catch (IOException e) {
-			throw new ClientServicesException(e, Messages.UpdateMemberException, memberId, member.getRole(), communityId);
+			throw new ClientServicesException(e, Messages.UpdateMemberException, memberId, member.getRole(), communityUuid);
 		}
 
 	}
@@ -739,7 +743,6 @@ public class CommunityService extends BaseService {
 		}
 
 		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
 		if(EntityUtil.isEmail(memberId)){
 			parameters.put("email", memberId);
 		}else{
@@ -747,7 +750,7 @@ public class CommunityService extends BaseService {
 		}
 
 		try {
-			String url = CommunityUrls.COMMUNITY_MEMBERS.format(this);
+			String url = CommunityUrls.COMMUNITY_MEMBERS.format(this,CommunityUrls.getCommunityUuid(communityUuid));
 			super.deleteData(url, parameters, COMMUNITY_UNIQUE_IDENTIFIER);
 		} catch (ClientServicesException e) {
 			throw new ClientServicesException(e, Messages.RemoveMemberException, memberId, communityUuid);

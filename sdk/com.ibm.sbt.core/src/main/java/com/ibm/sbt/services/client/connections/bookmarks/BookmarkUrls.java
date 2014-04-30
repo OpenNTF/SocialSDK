@@ -15,6 +15,7 @@
  */
 package com.ibm.sbt.services.client.connections.bookmarks;
 
+import static com.ibm.sbt.services.client.base.CommonConstants.AT;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.v4_0;
 
 import com.ibm.sbt.services.client.base.BaseService;
@@ -31,17 +32,13 @@ import com.ibm.sbt.services.client.base.VersionedUrl;
 
 public enum BookmarkUrls {
 	
-	ALL(new VersionedUrl(v4_0, 					"dogear/atom")),
-	APP(new VersionedUrl(v4_0, 					"dogear/api/app")),
-	POPULAR(new VersionedUrl(v4_0, 				"dogear/atom/popular")),
-	MYNOTIFICATIONS(new VersionedUrl(v4_0, 		"dogear/atom/mynotifications")),
-	MYSENTNOTIFICATIONS(new VersionedUrl(v4_0, 	"dogear/atom/mysentnotifications"));
+	ALL(new VersionedUrl(v4_0, 					"{dogear}/atom")),
+	APP(new VersionedUrl(v4_0, 					"{dogear}/api/app?{userId}")),
+	POPULAR(new VersionedUrl(v4_0, 				"{dogear}/atom/popular")),
+	MYNOTIFICATIONS(new VersionedUrl(v4_0, 		"{dogear}/atom/mynotifications")),
+	MYSENTNOTIFICATIONS(new VersionedUrl(v4_0, 	"{dogear}/atom/mysentnotifications"));
 	
 	private URLBuilder builder;
-	
-	private BookmarkUrls(VersionedUrl... urlVersions) {
-		builder = new URLBuilder(urlVersions);
-	}
 	
 	public String format(BaseService service, NamedUrlPart... args) {
 		return builder.format(service, args);
@@ -50,5 +47,19 @@ public enum BookmarkUrls {
 	public String getPattern(Version version){
 		return builder.getPattern(version).getUrlPattern();
 	}
+	
+	public static NamedUrlPart getUserId(String id){
+		String paramName = isEmail(id)?"email":"userId";
+		return new NamedUrlPart("userId", paramName+"="+id);
+	}
+	
+	private BookmarkUrls(VersionedUrl... urlVersions) {
+		builder = new URLBuilder(urlVersions);
+	}
+	
+	private static boolean isEmail(String id) {
+		return (id == null) ? false : id.contains(AT);
+	}
+	
 
 }

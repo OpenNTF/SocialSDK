@@ -18,15 +18,17 @@ package com.ibm.sbt.services.client.connections.bookmarks;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.ibm.sbt.services.BaseUnitTest;
+import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 
 /**
  * @author mwallace
@@ -44,8 +46,8 @@ public class BookmarkServiceTest extends BaseUnitTest {
 	}
 
 	@Test
-	public void testGetAllBookmarks() throws BookmarkServiceException {
-		BookmarkList list = service.getAllBookmarks();
+	public void testGetAllBookmarks() throws ClientServicesException {
+		EntityList<Bookmark> list = service.getAllBookmarks();
 		assertValid(list);
 		for (Bookmark bookmark : list) {
 			assertValid(bookmark);
@@ -53,10 +55,10 @@ public class BookmarkServiceTest extends BaseUnitTest {
 	}
 
 	@Test
-	public void testGetPrivateBookmarks() throws BookmarkServiceException {
+	public void testGetPrivateBookmarks() throws ClientServicesException {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("access", "private");
-		BookmarkList list = service.getAllBookmarks();
+		EntityList<Bookmark> list = service.getAllBookmarks(params);
 		assertNotNull("Expected non null BookmarkList", list);
 		for (Bookmark bookmark : list) {
 			assertValid(bookmark);
@@ -64,10 +66,8 @@ public class BookmarkServiceTest extends BaseUnitTest {
 	}
 	
 	@Test
-	public void testGetMyBookmarks() throws BookmarkServiceException {
-		Map<String, String> params = new HashMap<String, String>();
-		params.put("email", "***REMOVED***@renovations.com");
-		BookmarkList list = service.getAllBookmarks();
+	public void testGetMyBookmarks() throws ClientServicesException {
+		EntityList<Bookmark> list = service.getBookmarks(properties.getProperty("userId1"));
 		assertNotNull("Expected non null BookmarkList", list);
 		for (Bookmark bookmark : list) {
 			assertValid(bookmark);
@@ -75,8 +75,8 @@ public class BookmarkServiceTest extends BaseUnitTest {
 	}
 	
 	@Test
-	public void testGetPopularBookmarks() throws BookmarkServiceException {
-		BookmarkList list = service.getPopularBookmarks();
+	public void testGetPopularBookmarks() throws ClientServicesException {
+		EntityList<Bookmark> list = service.getPopularBookmarks();
 		assertNotNull("Expected non null BookmarkList", list);
 		for (Bookmark bookmark : list) {
 			assertValid(bookmark);
@@ -84,8 +84,8 @@ public class BookmarkServiceTest extends BaseUnitTest {
 	}
 	
 	@Test
-	public void testGetMyNotifications() throws BookmarkServiceException {
-		BookmarkList list = service.getMyNotifications();
+	public void testGetMyNotifications() throws ClientServicesException {
+		EntityList<Bookmark> list = service.getMyNotifications();
 		assertNotNull("Expected non null BookmarkList", list);
 		for (Bookmark bookmark : list) {
 			assertValid(bookmark);
@@ -93,15 +93,15 @@ public class BookmarkServiceTest extends BaseUnitTest {
 	}
 	
 	@Test
-	public void testGetMySentNotifications() throws BookmarkServiceException {
-		BookmarkList list = service.getMySentNotifications();
+	public void testGetMySentNotifications() throws ClientServicesException {
+		EntityList<Bookmark> list = service.getMySentNotifications();
 		assertNotNull("Expected non null BookmarkList", list);
 		for (Bookmark bookmark : list) {
 			assertValid(bookmark);
 		}
 	}
 	
-	protected void assertValid(BookmarkList list) {
+	protected void assertValid(EntityList<Bookmark> list) {
 		assertNotNull("Expected non null BookmarkList", list);
 		assertTrue("Invalid bookmark list total results", list.getTotalResults() != -1);
 		assertTrue("Invalid bookmark list start index", list.getStartIndex() != -1);
@@ -109,7 +109,7 @@ public class BookmarkServiceTest extends BaseUnitTest {
 		assertTrue("Invalid bookmark list current page", list.getCurrentPage() != -1);
 	}
 	
-	protected void assertValid(BookmarkList list, long total, long start, long page, long current) {
+	protected void assertValid(EntityList<Bookmark> list, long total, long start, long page, long current) {
 		assertNotNull("Expected non null BookmarkList", list);
 		assertEquals("Invalid bookmark list total results", total, list.getTotalResults());
 		assertEquals("Invalid bookmark list start index", start, list.getStartIndex());

@@ -31,6 +31,7 @@ import com.ibm.sbt.services.client.connections.communities.MemberList;
 import com.ibm.sbt.services.endpoints.BasicEndpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
 import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 
 /**
  * @author mwallace, Francis
@@ -121,7 +122,7 @@ public class GetAllCommunitiesApp {
      * @return The members of the community.
      * @throws CommunityServiceException
      */
-    public MemberList getCommunityMembers(Community community) throws CommunityServiceException{
+    public EntityList<Member> getCommunityMembers(Community community) throws CommunityServiceException{
         return communityService.getMembers(community.getCommunityUuid());
     }
     
@@ -146,7 +147,7 @@ public class GetAllCommunitiesApp {
                 System.out.println(community.getTitle());
                 do{
                     parameters.put("page", Integer.toString(page));
-                    MemberList members = communityService.getMembers(community.getCommunityUuid(), parameters);
+                    EntityList<Member> members = communityService.getMembers(community.getCommunityUuid(), parameters);
                     for (int i=0; i<members.size(); i++) {
                         System.out.println("    " + members.get(i).getEmail());
                     }

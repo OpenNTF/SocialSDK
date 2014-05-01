@@ -14,8 +14,8 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page import="com.ibm.sbt.services.client.connections.search.Result"%>
-<%@page import="com.ibm.sbt.services.client.connections.search.ResultList"%>
 <%@page import="com.ibm.sbt.services.client.connections.search.SearchService"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
@@ -47,7 +47,7 @@
 			SearchService svc = new SearchService();
 			Map<String, String> requestMap = new HashMap<String, String>();
 			requestMap.put("scope", "communities");
-			ResultList results = svc.getResultsByTag("dubh");
+			EntityList<Result> results = svc.getResultsByTag("dubh");
 			if(results.size()<=0){
 				out.println("<tr><td colspan='2'>No tagged communities found</td><tr>");
 			}			

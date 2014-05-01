@@ -56,7 +56,7 @@ print '<script type="text/javascript" src="' . plugins_url(PLUGIN_NAME) . '/view
 				***REMOVED*** echo $GLOBALS[LANG]['server_type'];?>
 			</td>
 			<td>
-				<select onchange="new_server_type_change();" id="new_server_type" name="new_server_type">
+				<select onchange="ibm_sbt_new_server_type_change();" id="new_server_type" name="new_server_type">
 					<option value="choose">***REMOVED*** echo $GLOBALS[LANG]['choose']; ?></option>
 					<option value="connections">***REMOVED*** echo $GLOBALS[LANG]['ibm_connections']; ?></option>
 					<option value="smartcloud">***REMOVED*** echo $GLOBALS[LANG]['ibm_smartcloud']; ?></option>

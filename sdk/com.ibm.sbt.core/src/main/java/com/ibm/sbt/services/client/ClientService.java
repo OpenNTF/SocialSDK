@@ -65,9 +65,9 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.entity.FileEntity;
 import org.apache.http.entity.InputStreamEntity;
-import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.util.EntityUtils;
@@ -440,7 +440,11 @@ public abstract class ClientService {
 		@Override
 		protected HttpEntity createEntity() throws ClientServicesException {
 			try {
-				return new StringEntity(content);
+				String encoding= "UTF-8";
+				ByteArrayEntity bae= new ByteArrayEntity(content.getBytes(encoding));
+				bae.setContentType(getContentType());
+				bae.setContentEncoding(encoding);
+				return bae;
 			} catch (Exception ex) {
 				throw new ClientServicesException(ex);
 			}
@@ -473,7 +477,12 @@ public abstract class ClientService {
 		@Override
 		protected HttpEntity createEntity() throws ClientServicesException {
 			try {
-				return new StringEntity(JsonGenerator.toJson(factory, content, true));
+				
+				String encoding= "UTF-8";
+				ByteArrayEntity bae= new ByteArrayEntity(JsonGenerator.toJson(factory, content, true).getBytes(encoding));
+				bae.setContentType(getContentType());
+				bae.setContentEncoding(encoding);
+				return bae;
 			} catch (Exception ex) {
 				throw new ClientServicesException(ex);
 			}
@@ -497,7 +506,14 @@ public abstract class ClientService {
 		@Override
 		protected HttpEntity createEntity() throws ClientServicesException {
 			try {
-				return new StringEntity(DOMUtil.getXMLString(content, true));
+				String encoding= "UTF-8";
+				if (content != null && content.getOwnerDocument()!=null && content.getOwnerDocument().getXmlEncoding()!=null){
+					encoding = content.getOwnerDocument().getXmlEncoding();
+				}
+				ByteArrayEntity bae= new ByteArrayEntity(DOMUtil.getXMLString(content, true).getBytes(encoding));
+				bae.setContentType(getContentType());
+				bae.setContentEncoding(encoding);
+				return bae;
 			} catch (Exception ex) {
 				throw new ClientServicesException(ex);
 			}

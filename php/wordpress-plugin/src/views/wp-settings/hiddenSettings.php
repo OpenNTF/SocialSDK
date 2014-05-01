@@ -86,6 +86,14 @@ print '<script type="text/javascript" src="' . plugins_url(PLUGIN_NAME) . '/view
 		</tr>
 		<tr>
 			<td style="width: 200px;">
+				***REMOVED*** echo $GLOBALS[LANG]['require_sign_on'];?>
+			</td>
+			<td>
+				<input type="checkbox" id="new_require_sign_on" name="new_require_sign_on" value="require_sign_on" />
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 200px;">
 				***REMOVED*** echo $GLOBALS[LANG]['endpoint_version'];?>
 			</td>
 			<td>

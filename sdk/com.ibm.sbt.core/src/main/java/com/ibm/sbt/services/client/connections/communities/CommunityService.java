@@ -36,6 +36,7 @@ import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.AtomFeedHandler;
 import com.ibm.sbt.services.client.base.AuthType;
 import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.base.ConnectionsService;
 import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.NamedUrlPart;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
@@ -65,7 +66,7 @@ import com.ibm.sbt.services.endpoints.Endpoint;
  * </pre>	
  */
 
-public class CommunityService extends BaseService {
+public class CommunityService extends ConnectionsService {
 	private static final long serialVersionUID = 4832918694422006289L;
 	private static final String COMMUNITY_UNIQUE_IDENTIFIER = "communityUuid";
 	private static final String USERID 						= "userid";

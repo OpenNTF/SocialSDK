@@ -22,26 +22,23 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.w3c.dom.Node;
+
 import com.ibm.commons.util.StringUtil;
+import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
+import com.ibm.sbt.services.client.base.AtomFeedHandler;
 import com.ibm.sbt.services.client.base.AtomXPath;
 import com.ibm.sbt.services.client.base.BaseService;
-import com.ibm.sbt.services.client.connections.blogs.model.BlogXPath;
-import com.ibm.sbt.services.client.connections.blogs.transformers.BaseBlogTransformer;
-import com.ibm.sbt.services.client.connections.profiles.Profile;
-import com.ibm.sbt.services.client.connections.profiles.ProfileParams;
-import com.ibm.sbt.services.client.connections.profiles.ProfileUrls;
-import com.ibm.sbt.services.endpoints.Endpoint;
-import com.ibm.commons.xml.xpath.XPathExpression;
-import com.ibm.sbt.services.client.base.AtomFeedHandler;
+import com.ibm.sbt.services.client.base.ConnectionsService;
+import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
-
-import org.w3c.dom.Node;
-
-import com.ibm.sbt.services.client.base.IFeedHandler;
+import com.ibm.sbt.services.client.connections.blogs.model.BlogXPath;
+import com.ibm.sbt.services.client.connections.blogs.transformers.BaseBlogTransformer;
+import com.ibm.sbt.services.endpoints.Endpoint;
 /**
  * BlogService
  * 
@@ -49,7 +46,7 @@ import com.ibm.sbt.services.client.base.IFeedHandler;
  * @author Carlos Manias
  */
 
-public class BlogService extends BaseService {
+public class BlogService extends ConnectionsService {
 	
 	private static final long serialVersionUID = 2838345461937687654L;
 	

@@ -32,7 +32,7 @@ import org.apache.http.client.utils.URLEncodedUtils;
 
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.Response;
-import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.base.ConnectionsService;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.base.util.EntityUtil;
 import com.ibm.sbt.services.client.connections.activity.feedHandler.ActivityFeedHandler;
@@ -50,7 +50,7 @@ import com.ibm.sbt.services.endpoints.Endpoint;
  * @see http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Activities_API_ic40a&content=pdcontent
  */
 
-public class ActivityService extends BaseService {
+public class ActivityService extends ConnectionsService {
 	
 	private static final long serialVersionUID = 8417747837396382209L;
 

@@ -17,11 +17,10 @@
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page import="com.ibm.sbt.services.client.connections.blogs.BlogService"%>
 <%@page import="com.ibm.sbt.services.client.connections.blogs.model.BaseBlogEntity"%>
-<%@page import="com.ibm.sbt.services.client.connections.blogs.BlogList"%>
 <%@page import="com.ibm.sbt.services.client.connections.blogs.Blog"%>
-<%@page import="com.ibm.sbt.services.client.connections.blogs.BlogPostList"%>
 <%@page import="com.ibm.sbt.services.client.connections.blogs.BlogPost"%>
 <%@page import="com.ibm.sbt.services.client.connections.blogs.model.Author"%>
 <%@page import="java.io.PrintWriter"%>
@@ -39,10 +38,10 @@
 	<%
 		try {
 			BlogService service = new BlogService();
-			BlogList blogs = service.getMyBlogs();
+			EntityList<Blog> blogs = service.getMyBlogs();
 			Blog blog = (Blog)blogs.get(0);
 			
-			BlogPostList posts = service.getBlogPosts(blog.getHandle());
+			EntityList<BlogPost> posts = service.getBlogPosts(blog.getHandle());
 			if(posts.size()>0){
 				BlogPost post = (BlogPost)posts.get(0);
 				out.println("title of Post to be remove:"+post.getTitle()+"<br>");

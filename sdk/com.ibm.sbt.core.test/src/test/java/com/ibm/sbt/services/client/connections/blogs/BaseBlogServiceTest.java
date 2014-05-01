@@ -21,6 +21,7 @@ import static org.junit.Assert.fail;
 import org.junit.Before;
 
 import com.ibm.sbt.services.BaseUnitTest;
+import com.ibm.sbt.services.client.ClientServicesException;
 
 /**
  * @author Swati Singh
@@ -39,7 +40,7 @@ public class BaseBlogServiceTest extends BaseUnitTest {
 		}
 	}
 
-	protected Blog createBlog() throws BlogServiceException {
+	protected Blog createBlog() throws ClientServicesException {
 		Blog blog = new Blog(blogService, "");
 
 		Long random = System.currentTimeMillis();
@@ -50,7 +51,7 @@ public class BaseBlogServiceTest extends BaseUnitTest {
 		return blog;
 	}
 
-	protected BlogPost createBlogPost() throws BlogServiceException {
+	protected BlogPost createBlogPost() throws ClientServicesException {
 		blog = createBlog();
 		BlogPost blogPost = new BlogPost(blogService, "");
 
@@ -60,7 +61,7 @@ public class BaseBlogServiceTest extends BaseUnitTest {
 		return blogPost;
 	}
 
-	protected Comment createBlogComment() throws BlogServiceException {
+	protected Comment createBlogComment() throws ClientServicesException {
 		blogPost = createBlogPost();
 		Comment comment = new Comment(blogService, "");
 
@@ -71,15 +72,15 @@ public class BaseBlogServiceTest extends BaseUnitTest {
 		return comment;
 	}
 	
-	protected void deleteBlog(Blog blog) throws BlogServiceException {
+	protected void deleteBlog(Blog blog) throws ClientServicesException {
 		blogService.removeBlog(blog.getBlogUuid());
 	}
 	
-	protected void deleteBlogPost(BlogPost post) throws BlogServiceException {
+	protected void deleteBlogPost(BlogPost post) throws ClientServicesException {
 		blogService.removeBlogPost(post.getPostUuid(), blog.getHandle());
 	}
 
-	protected void deleteBlogComment(Comment comment) throws BlogServiceException {
+	protected void deleteBlogComment(Comment comment) throws ClientServicesException {
 		blogService.removeBlogComment(blog.getHandle(), comment.getCommentUuid());
 	}
 }

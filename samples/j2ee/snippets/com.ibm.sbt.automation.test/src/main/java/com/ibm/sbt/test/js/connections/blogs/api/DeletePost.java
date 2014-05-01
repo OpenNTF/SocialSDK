@@ -19,8 +19,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.ibm.commons.util.io.json.JsonJavaObject;
-import com.ibm.sbt.automation.core.test.BaseApiTest;
-import com.ibm.sbt.automation.core.test.BaseTest.AuthType;
+import com.ibm.sbt.automation.core.test.connections.BaseBlogsTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 
 /**
@@ -28,14 +27,10 @@ import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
  *  
  * @date 30 Sep 2013
  */
-public class DeletePost extends BaseApiTest {
+public class DeletePost extends BaseBlogsTest {
     
     static final String SNIPPET_ID = "Social_Blogs_API_DeletePost";
 
-    public DeletePost() {
-        setAuthType(AuthType.AUTO_DETECT);
-    }
-    
     @Test
     public void testDeletePost() {
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);

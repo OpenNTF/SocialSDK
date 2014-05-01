@@ -20,7 +20,7 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.ibm.sbt.automation.core.test.BaseApiTest;
+import com.ibm.sbt.automation.core.test.connections.BaseBlogsTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 
 /**
@@ -28,14 +28,10 @@ import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
  *  
  * @date 08 May 2013
  */
-public class GetBlogTags extends BaseApiTest {
+public class GetBlogTags extends BaseBlogsTest {
     
     static final String SNIPPET_ID = "Social_Blogs_API_GetBlogTags";
 
-    public GetBlogTags() {
-        setAuthType(AuthType.AUTO_DETECT);
-    }
-    
     @Test
     public void testGetBlogTags() {
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);

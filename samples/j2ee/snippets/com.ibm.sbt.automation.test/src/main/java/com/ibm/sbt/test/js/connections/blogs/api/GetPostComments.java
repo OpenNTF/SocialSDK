@@ -18,25 +18,42 @@ package com.ibm.sbt.test.js.connections.blogs.api;
 import java.util.List;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
+import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.automation.core.test.connections.BaseBlogsTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
+import com.ibm.sbt.services.client.connections.blogs.BlogServiceException;
 
 /**
- * @author rajmeetbal
- *  
- * @date 08 May 2013
+ * @author fmoloney
+ * 
+ * @date 29 April 2014
  */
-public class GetAllBlogPosts extends BaseBlogsTest {
-    
-    static final String SNIPPET_ID = "Social_Blogs_API_GetAllBlogPosts";
+public class GetPostComments extends BaseBlogsTest {
 
+	private final String snippetId = "Social_Blogs_API_GetPostComments";
+	
+	@Before
+	public void createComment(){
+    	try {
+			createBlogComment();
+		} catch (BlogServiceException e) {
+			fail("Problem initialising blogs test data", e);
+		}
+    }
+	
     @Test
-    public void testGetAllBlogPosts() {
-        JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
+    public void test() {
+        JavaScriptPreviewPage previewPage = executeSnippet(snippetId);
         List jsonList = previewPage.getJsonList();
-        Assert.assertFalse("GetAllBlogPosts returned no results", jsonList.isEmpty());
+        JsonJavaObject firstComment = (JsonJavaObject) jsonList.get(0);
+        try {
+			Assert.assertEquals(this.blog.getHandle(), firstComment.getString("getBlogHandle"));
+		} catch (BlogServiceException e) {
+			fail("Could not get blog uuid.", e);
+		}
     }
 
 }

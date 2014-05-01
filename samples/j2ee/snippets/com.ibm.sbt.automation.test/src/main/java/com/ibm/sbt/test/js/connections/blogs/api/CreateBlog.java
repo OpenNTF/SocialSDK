@@ -15,32 +15,43 @@
  */
 package com.ibm.sbt.test.js.connections.blogs.api;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 
 import com.ibm.commons.util.io.json.JsonJavaObject;
-import com.ibm.sbt.automation.core.test.BaseApiTest;
-import com.ibm.sbt.automation.core.test.BaseTest.AuthType;
+import com.ibm.sbt.automation.core.test.connections.BaseBlogsTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
+import com.ibm.sbt.services.client.connections.blogs.BlogServiceException;
 
 /**
- * @author rajmeetbal
- *  
- * @date 30 Sep 2013
+ * 
+ * @author Francis
+ * @date 29 Apr 2014
  */
-public class CreateBlog extends BaseApiTest {
+public class CreateBlog extends BaseBlogsTest {
     
     static final String SNIPPET_ID = "Social_Blogs_API_CreateBlog";
 
-    public CreateBlog() {
-        setAuthType(AuthType.AUTO_DETECT);
-    }
-    
+    private String createdBlogUuid = "";
     @Test
     public void testCreateBlog() {
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         JsonJavaObject json = previewPage.getJson();
-        Assert.assertNotNull(json.getString("uid"));
+        createdBlogUuid = json.getString("uid");
+        Assert.assertNotNull(createdBlogUuid);
+    }
+    
+    @After
+    public void deleteCreatedBlog(){
+    	try {
+    		if(createdBlogUuid.length() > 28){
+    			String uuid = createdBlogUuid.substring(createdBlogUuid.indexOf("urn:lsid:ibm.com:blogs:") + 28);
+    			deleteBlog(uuid);
+    		}
+		} catch (BlogServiceException e) {
+			e.printStackTrace();
+		}
     }
     
 }

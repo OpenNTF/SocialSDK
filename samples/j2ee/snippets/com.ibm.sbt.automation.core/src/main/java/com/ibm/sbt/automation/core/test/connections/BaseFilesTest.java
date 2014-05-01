@@ -143,7 +143,7 @@ public class BaseFilesTest extends BaseApiTest {
 				pe.getCause().printStackTrace();
 			}
 			fail("Error authenicating: ", pe);
-		} catch (CommunityServiceException cse) {
+		} catch (ClientServicesException cse) {
 			// TODO remove this when we upgrade the QSI
 			Throwable t = cse.getCause();
 			if (t instanceof ClientServicesException) {
@@ -263,7 +263,7 @@ public class BaseFilesTest extends BaseApiTest {
 				communityService = getCommunityService();
 			try {
 				communityService.deleteCommunity(community.getCommunityUuid());
-			} catch (CommunityServiceException e) {
+			} catch (ClientServicesException e) {
 				fail("Error deleting test community: ", e);
 				e.printStackTrace();
 			}

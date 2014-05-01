@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -23,7 +23,6 @@ import org.junit.runners.Suite.SuiteClasses;
 import com.ibm.sbt.automation.core.environment.TestEnvironment;
 import com.ibm.sbt.test.java.connections.communities.AcceptInvite;
 import com.ibm.sbt.test.java.connections.communities.AddMember;
-import com.ibm.sbt.test.java.connections.communities.RemoveMember;
 import com.ibm.sbt.test.java.connections.communities.CreateCommunity;
 import com.ibm.sbt.test.java.connections.communities.CreateForumTopic;
 import com.ibm.sbt.test.java.connections.communities.CreateInvite;
@@ -31,18 +30,18 @@ import com.ibm.sbt.test.java.connections.communities.DeclineInvite;
 import com.ibm.sbt.test.java.connections.communities.GetBookmarks;
 import com.ibm.sbt.test.java.connections.communities.GetCommunity;
 import com.ibm.sbt.test.java.connections.communities.GetCommunityDataByEntity;
-import com.ibm.sbt.test.java.connections.communities.GetForums;
 import com.ibm.sbt.test.java.connections.communities.GetForumTopics;
+import com.ibm.sbt.test.java.connections.communities.GetForums;
 import com.ibm.sbt.test.java.connections.communities.GetMembers;
 import com.ibm.sbt.test.java.connections.communities.GetMyCommunities;
 import com.ibm.sbt.test.java.connections.communities.GetMyInvites;
 import com.ibm.sbt.test.java.connections.communities.GetPublicCommunities;
 import com.ibm.sbt.test.java.connections.communities.GetSubCommunities;
 import com.ibm.sbt.test.java.connections.communities.RemoveCommunity;
+import com.ibm.sbt.test.java.connections.communities.RemoveMember;
 import com.ibm.sbt.test.java.connections.communities.UpdateCommunity;
 import com.ibm.sbt.test.java.connections.communities.UpdateCommunityLogo;
 import com.ibm.sbt.test.java.connections.communities.UpdateMember;
-import com.ibm.sbt.test.js.connections.communities.api.CreateBookmark;
 
 /**
  * @author mwallace
@@ -52,7 +51,7 @@ import com.ibm.sbt.test.js.connections.communities.api.CreateBookmark;
 @RunWith(Suite.class)
 @SuiteClasses({ AcceptInvite.class, AddMember.class, RemoveMember.class, CreateCommunity.class, CreateForumTopic.class, CreateInvite.class, DeclineInvite.class, GetBookmarks.class,
 	GetCommunity.class, GetForumTopics.class,  GetCommunityDataByEntity.class, GetForums.class, GetMembers.class, GetMyCommunities.class, GetMyInvites.class, GetPublicCommunities.class, 
-	GetSubCommunities.class, RemoveCommunity.class, UpdateCommunity.class , UpdateCommunityLogo.class, UpdateMember.class, CreateBookmark.class })
+	GetSubCommunities.class, RemoveCommunity.class, UpdateCommunity.class , UpdateCommunityLogo.class, UpdateMember.class })
 public class CommunitiesTestSuite {
     @AfterClass
     public static void cleanup() {

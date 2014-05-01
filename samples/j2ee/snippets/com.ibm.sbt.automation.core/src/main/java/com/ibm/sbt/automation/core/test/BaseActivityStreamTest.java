@@ -4,7 +4,10 @@ import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 
 import com.ibm.sbt.automation.core.test.pageobjects.WrapperResultPage;
+import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.connections.communities.Community;
+import com.ibm.sbt.services.client.connections.communities.CommunityService;
+import com.ibm.sbt.services.client.connections.communities.CommunityServiceException;
 /*
  * © Copyright IBM Corp. 2012
  * 
@@ -20,8 +23,6 @@ import com.ibm.sbt.services.client.connections.communities.Community;
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-import com.ibm.sbt.services.client.connections.communities.CommunityService;
-import com.ibm.sbt.services.client.connections.communities.CommunityServiceException;
 
 /**
  * @author Francis 
@@ -48,7 +49,7 @@ public class BaseActivityStreamTest extends BaseWrapperTest{
 			try {
 				communityUuid = communityService.createCommunity("TestTitle" + System.currentTimeMillis(), "Test content.", "public");
 				community = communityService.getCommunity(communityUuid);
-			} catch (CommunityServiceException e) {
+			} catch (ClientServicesException e) {
 				e.printStackTrace();
 				Assert.fail("Problem creating test community.");
 			}
@@ -62,7 +63,7 @@ public class BaseActivityStreamTest extends BaseWrapperTest{
 	public void destroyCommunity() {
 		try {
 			communityService.deleteCommunity(community.getCommunityUuid());
-		} catch (CommunityServiceException e) {
+		} catch (ClientServicesException e) {
 			e.printStackTrace();
 		}
 		destroyContext();

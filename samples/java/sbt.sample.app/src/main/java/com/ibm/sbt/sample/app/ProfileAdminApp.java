@@ -15,12 +15,9 @@
  */
 package com.ibm.sbt.sample.app;
 
-import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.connections.profiles.Profile;
 import com.ibm.sbt.services.client.connections.profiles.ProfileAdminService;
-import com.ibm.sbt.services.client.connections.profiles.ProfileServiceException;
-import com.ibm.sbt.services.client.smartcloud.bss.CustomerManagementService;
 
 
 /**

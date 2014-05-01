@@ -1,5 +1,5 @@
 <!-- /*
- * © Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -15,19 +15,21 @@
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%@page import="java.io.PrintWriter"%>
-<%@page import="java.util.Collection"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
-<%@page import="com.ibm.sbt.services.client.connections.communities.Community"%>
+<%@page import="com.ibm.commons.util.io.json.JsonJavaObject"%>
+<%@page import="com.ibm.sbt.services.client.base.JsonEntity"%>
 <%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
-<%@page import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
-<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
-<%@page import="java.util.HashMap"%>
+<%@page import="com.ibm.sbt.services.client.smartcloud.bss.*"%>
+<%@page import="java.util.*"%>
+
+				
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	
 <html>
 <head>
-<title>SBT JAVA Sample - Remove Community</title>
+<title>Get Subscriptions</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
@@ -35,23 +37,27 @@
 	<div id="content">
 	<%
 	try {
-		CommunityService communityService = new CommunityService();
-		EntityList<Community> communities = communityService.getMyCommunities();
-		if(communities != null && !communities.isEmpty()){
-			Community community = communities.iterator().next();
-			out.println("Community Title : "+community.getTitle());
-			community.remove();	
-			out.println("Community Removed : "+community.getCommunityUuid());
-			out.println("<br>");
+		SubscriptionManagementService subscriptionManagement = new SubscriptionManagementService("smartcloud");
+		EntityList<JsonEntity> subscriptionList = subscriptionManagement.getSubscriptions();
+		out.println("Id's of subscriptions for all the vendor's customers <br/>");
+		out.println("<ul>");
+		for (JsonEntity subscription : subscriptionList) {
+			long id = subscription.getAsLong("Id");
+			out.println("<li>" + id + "</li>");
 		}
-		else
-		 	out.println("<b> No Communities exist for removal ");
-	} catch (Throwable e) {
+		out.println("</ul>");
+	} 
+	catch (BssException be) {
 		out.println("<pre>");
-		out.println(e.getMessage());
-		out.println("</pre>");
+		out.println("Error retrieving subscription list caused by: "+ be.getResponseJson());
+		out.println("</pre>");	
+	}
+	catch (Exception e) {
+		e.printStackTrace();
+		out.println("Error retrieving subscription list caused by: "+e.getMessage());    		
 	}
 	%>
 	</div>
 </body>
+
 </html>

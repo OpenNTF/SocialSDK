@@ -470,6 +470,16 @@ var Endpoint = declare(null, {
 		return promise;
 	},
 	
+	/**
+	 * Creates a download URL for the given file URL so that the download
+	 * request will go through the proxy.
+	 * 
+	 * @param string url	The actual URL to the file.
+	 */
+	rewriteUrl : function(url) {
+		return this.proxy.rewriteUrl(this.baseUrl, url, this.proxyPath);
+	},
+	
 	// Internal stuff goes here and should not be documented
 	
     /*

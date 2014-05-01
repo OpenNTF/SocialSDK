@@ -1,5 +1,5 @@
 /*
- * ï¿½ Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -20,6 +20,7 @@ import org.w3c.dom.Node;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.xpath.XPathExpression;
+import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.connections.common.Person;
@@ -153,12 +154,12 @@ public class Member extends Person {
 		setAsString(CommunityXPath.role, role);
 	}
 		
-	public Member load() throws CommunityServiceException
+	public Member load() throws ClientServicesException
 	{
 	  	return getService().getMember(getCommunityUuid(), getUserid());
 	}
 	 
-	public void remove() throws CommunityServiceException
+	public void remove() throws ClientServicesException
 	{
 	  	getService().removeMember(getCommunityUuid(), getUserid());
 	}

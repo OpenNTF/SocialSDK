@@ -23,14 +23,13 @@ import com.ibm.commons.runtime.Application;
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.runtime.RuntimeFactory;
 import com.ibm.commons.runtime.impl.app.RuntimeFactoryStandalone;
+import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.connections.communities.Community;
 import com.ibm.sbt.services.client.connections.communities.CommunityService;
-import com.ibm.sbt.services.client.connections.communities.CommunityServiceException;
 import com.ibm.sbt.services.client.connections.communities.Member;
-import com.ibm.sbt.services.client.connections.communities.MemberList;
 import com.ibm.sbt.services.endpoints.BasicEndpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
-import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 
 /**
@@ -110,9 +109,9 @@ public class GetAllCommunitiesApp {
     /**
      * Get a list of public communities.
      * @return Collection of public communities
-     * @throws CommunityServiceException
+     * @throws ClientServicesException
      */
-    public Collection<Community> getPublicCommunities() throws CommunityServiceException{
+    public Collection<Community> getPublicCommunities() throws ClientServicesException{
         return communityService.getPublicCommunities();
     }
     
@@ -120,9 +119,9 @@ public class GetAllCommunitiesApp {
      * Get the members of a specified Community.
      * @param community
      * @return The members of the community.
-     * @throws CommunityServiceException
+     * @throws ClientServicesException
      */
-    public EntityList<Member> getCommunityMembers(Community community) throws CommunityServiceException{
+    public EntityList<Member> getCommunityMembers(Community community) throws ClientServicesException{
         return communityService.getMembers(community.getCommunityUuid());
     }
     
@@ -159,7 +158,7 @@ public class GetAllCommunitiesApp {
                     }
                 }while(moreMembers);
             }
-        } catch (CommunityServiceException e) {
+        } catch (ClientServicesException e) {
             e.printStackTrace();
         } finally {
             app.destroy();

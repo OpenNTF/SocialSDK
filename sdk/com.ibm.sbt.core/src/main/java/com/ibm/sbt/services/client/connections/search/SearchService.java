@@ -447,7 +447,7 @@ public class SearchService extends ConnectionsService {
 
 	protected Result getResultEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
 		try {
-			return (Result)getEntity(requestUrl, getParameters(parameters), getResultFeedHandler());
+			return (Result)getEntity(requestUrl, parameters, getResultFeedHandler());
 		} catch (IOException e) {
 			throw new ClientServicesException(e);
 		} 
@@ -455,7 +455,7 @@ public class SearchService extends ConnectionsService {
 
 	protected EntityList<Result> getResultEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
 		try {
-			return getEntities(requestUrl, getParameters(parameters), getResultFeedHandler());
+			return getEntities(requestUrl, parameters, getResultFeedHandler());
 		} catch (IOException e) {
 			throw new ClientServicesException(e);
 		} 
@@ -463,7 +463,7 @@ public class SearchService extends ConnectionsService {
 
 	protected FacetValue getFacetValueEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
 		try {
-			return (FacetValue)getEntity(requestUrl, getParameters(parameters), getFacetValueFeedHandler("Person"));
+			return (FacetValue)getEntity(requestUrl, parameters, getFacetValueFeedHandler("Person"));
 		} catch (IOException e) {
 			throw new ClientServicesException(e);
 		} 
@@ -471,7 +471,7 @@ public class SearchService extends ConnectionsService {
 
 	protected EntityList<FacetValue> getFacetValueEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
 		try {
-			return getEntities(requestUrl, getParameters(parameters), getFacetValueFeedHandler("Person"));
+			return getEntities(requestUrl, parameters, getFacetValueFeedHandler("Person"));
 		} catch (IOException e) {
 			throw new ClientServicesException(e);
 		} 
@@ -479,7 +479,7 @@ public class SearchService extends ConnectionsService {
      
 	protected Scope getScopeEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
 		try {
-			return (Scope)getEntity(requestUrl, getParameters(parameters), getScopeFeedHandler());
+			return (Scope)getEntity(requestUrl, parameters, getScopeFeedHandler());
 		} catch (IOException e) {
 			throw new ClientServicesException(e);
 		} 
@@ -487,7 +487,7 @@ public class SearchService extends ConnectionsService {
 
 	protected EntityList<Scope> getScopeEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
 		try {
-			return getEntities(requestUrl, getParameters(parameters), getScopeFeedHandler());
+			return getEntities(requestUrl, parameters, getScopeFeedHandler());
 		} catch (IOException e) {
 			throw new ClientServicesException(e);
 		} 

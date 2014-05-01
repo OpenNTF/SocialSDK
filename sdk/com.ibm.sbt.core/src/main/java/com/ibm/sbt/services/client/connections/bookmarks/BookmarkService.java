@@ -214,7 +214,7 @@ public class BookmarkService extends ConnectionsService {
 	
 	protected EntityList<Bookmark> getBookmarkEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
 		try {
-			return getEntities(requestUrl, getParameters(parameters), getBookmarkFeedHandler());
+			return getEntities(requestUrl, parameters, getBookmarkFeedHandler());
 		} catch (IOException e) {
 			throw new ClientServicesException(e);
 		}

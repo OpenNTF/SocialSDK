@@ -1062,6 +1062,25 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
 			});
             return this.getEntities(url, options, this.getBlogPostCommentsCallbacks());
         },
+        
+        /**
+         * Get the comments on a blog post. The post must be loaded from Connections for this method to work.
+         * If not try BlogService.getEntryComments();
+         * @param {Object} blogPost The BlogPost.
+         * @param {Object} args The url parameters map.
+         */
+        getPostComments : function(blogPost, args){
+            var options = {
+                method : "GET",
+                handleAs : "text",
+                query : args || {}
+            };
+            
+            var url = blogPost.getRepliesUrl();
+            var ep = this.endpoint;
+            url = ep.proxy.rewriteUrl(ep.baseUrl, url, ep.proxyPath);
+            return this.getEntities(url, options, this.getBlogPostCommentsCallbacks());
+        },
 
         /**
          * Create a blog post by sending an Atom entry document containing the 

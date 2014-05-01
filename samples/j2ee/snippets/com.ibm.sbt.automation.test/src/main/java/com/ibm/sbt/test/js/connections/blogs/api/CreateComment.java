@@ -19,22 +19,17 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.ibm.commons.util.io.json.JsonJavaObject;
-import com.ibm.sbt.automation.core.test.BaseApiTest;
-import com.ibm.sbt.automation.core.test.BaseTest.AuthType;
+import com.ibm.sbt.automation.core.test.connections.BaseBlogsTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 
 /**
- * @author rajmeetbal
- *  
- * @date 30 Sep 2013
+ * 
+ * @author Francis
+ * @date 29 Apr 2014
  */
-public class CreateComment extends BaseApiTest {
+public class CreateComment extends BaseBlogsTest {
     
     static final String SNIPPET_ID = "Social_Blogs_API_CreateComment";
-
-    public CreateComment() {
-        setAuthType(AuthType.AUTO_DETECT);
-    }
 
     @Test
     public void testCreateComment() {

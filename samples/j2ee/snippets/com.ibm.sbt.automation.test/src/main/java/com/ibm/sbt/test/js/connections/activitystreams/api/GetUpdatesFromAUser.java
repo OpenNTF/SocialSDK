@@ -16,13 +16,16 @@
 package com.ibm.sbt.test.js.connections.activitystreams.api;
 
 import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
+
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.automation.core.test.BaseTest.AuthType;
 import com.ibm.sbt.automation.core.test.connections.BaseActivityStreamsTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
+import com.ibm.sbt.test.lib.TestEnvironment;
 
 /**
  * @author rajmeetbal
@@ -40,6 +43,7 @@ public class GetUpdatesFromAUser extends BaseActivityStreamsTest {
     
     @Test @Ignore
     public void testGetUpdatesFromAUser() {
+    	addSnippetParam("sample.id1", TestEnvironment.getCurrentUserUuid());
     	JavaScriptPreviewPage postPreviewPage = executeSnippet(SNIPPET_POST_ID);
         JsonJavaObject json = postPreviewPage.getJson();
         String newUpdateId = json.getJsonObject("entry").getString("id");

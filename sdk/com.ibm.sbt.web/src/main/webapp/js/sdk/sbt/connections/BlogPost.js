@@ -103,14 +103,9 @@ define(["../declare", "../lang", "../base/AtomEntity", "./BlogConstants", "../ba
          * @return {String} Entry anchor for this blog post
          */
         getEntryAnchor : function() {
-        	var entry = this.dataHandler.getData();
-        	if (entry) {
-            	var base = entry.getAttribute("xml:base");
-            	if (base) {
-            		var n = base.lastIndexOf("/"); 
-            		return base.substring(n+1);
-            	}
-        	}
+            if(this.getTitle()){
+                return this.getTitle().toLowerCase().replace(/\s/g,"_");
+            }
         },
         
         /**
@@ -319,8 +314,13 @@ define(["../declare", "../lang", "../base/AtomEntity", "./BlogConstants", "../ba
          * @param {Object} [args] Argument object
          */
         getComments : function(args) {
-        	var blogHandle = this.getBlogHandle();
+        	if(this.getRepliesUrl()){
+        	    return this.service.getPostComments(this, args);
+        	}
+        	
+            var blogHandle = this.getBlogHandle();
         	var entryAnchor = this.getEntryAnchor();
+        	
         	return this.service.getEntryComments(blogHandle, entryAnchor, args);
         }
     });

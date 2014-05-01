@@ -19,8 +19,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.ibm.commons.util.io.json.JsonJavaObject;
-import com.ibm.sbt.automation.core.test.BaseApiTest;
-import com.ibm.sbt.automation.core.test.BaseTest.AuthType;
+import com.ibm.sbt.automation.core.test.connections.BaseBlogsTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 
 /**
@@ -28,13 +27,9 @@ import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
  *  
  * @date 30 Sep 2013
  */
-public class UpdateBlog extends BaseApiTest {
+public class UpdateBlog extends BaseBlogsTest {
     
     static final String SNIPPET_ID = "Social_Blogs_API_UpdateBlog";
-
-    public UpdateBlog() {
-        setAuthType(AuthType.AUTO_DETECT);
-    }
 
     @Test
     public void testUpdateBlog() {

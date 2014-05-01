@@ -7,6 +7,7 @@
 <input type="hidden" id="consumer_secret" name="consumer_secret" value="" />
 <input type="hidden" id="endpoint_name" name="endpoint_name" value="***REMOVED*** echo $viewData['endpointName']; ?>" />
 <input type="hidden" id="endpoint_url" name="endpoint_url" value="" />
+<input style="display: none;" type="checkbox" id="require_sign_on" name="require_sign_on" value="require_sign_on" ***REMOVED*** echo (isset($viewData['require_sign_on']) && $viewData['require_sign_on'] == true ? 'checked="checked"' : "")?>/>
 <input type="hidden" id="request_token_url" name="request_token_url" value="" />
 <input type="hidden" id="server_type" name="server_type" value="***REMOVED*** echo $viewData['server_type'];?>" />
 <input type="hidden" id="callback_url" name="callback_url" value="***REMOVED*** echo $viewData['callback_url'];?>" />

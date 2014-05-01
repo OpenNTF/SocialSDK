@@ -25,12 +25,12 @@ import com.ibm.commons.runtime.RuntimeFactory;
 import com.ibm.commons.runtime.impl.app.RuntimeFactoryStandalone;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.BaseService;
-import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.connections.communities.Community;
 import com.ibm.sbt.services.client.connections.communities.CommunityService;
 import com.ibm.sbt.services.client.connections.communities.Member;
 import com.ibm.sbt.services.endpoints.BasicEndpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
+import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 
 /**
  * @author mwallace, Francis

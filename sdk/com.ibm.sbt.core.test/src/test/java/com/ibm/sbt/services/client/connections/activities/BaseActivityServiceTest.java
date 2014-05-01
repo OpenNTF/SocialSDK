@@ -103,7 +103,7 @@ public class BaseActivityServiceTest extends BaseUnitTest {
     }
     
     protected String createTitle(String type) {
-    	return this.getClass().getName() + "#" + this.hashCode() + " " + type + " - " + System.currentTimeMillis();
+    	return this.getClass().getName() + "#" + this.hashCode() + "_" + type + "-" + System.currentTimeMillis();
     }
     
     protected Activity createActivity() throws ClientServicesException {
@@ -111,6 +111,14 @@ public class BaseActivityServiceTest extends BaseUnitTest {
     }
         	
     protected Activity createActivity(String title) throws ClientServicesException {
+		return createActivity(title, Activity.NORMAL);
+    }
+        	
+    protected Activity createActivity(String title, int priority) throws ClientServicesException {
+		return createActivity(title, priority, null);
+    }
+        	
+    protected Activity createActivity(String title, int priority, Field[] fields) throws ClientServicesException {
     	List<String> tags = new ArrayList<String>();
     	tags.add("personal");
     	tags.add("unit_test");
@@ -119,6 +127,15 @@ public class BaseActivityServiceTest extends BaseUnitTest {
 		activity = new Activity();
 		activity.setTitle(title);
 		activity.setTags(tags);
+		activity.setPriority(priority);
+		activity.setSummary("Goal for " + title);
+		
+		if (fields != null) {
+			for (Field field : fields) {
+				activity.addField(field);
+			}
+		}
+		
 		return activityService.createActivity(activity);
     }
         	

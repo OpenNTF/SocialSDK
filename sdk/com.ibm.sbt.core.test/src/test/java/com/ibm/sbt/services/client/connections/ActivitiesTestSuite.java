@@ -1,5 +1,5 @@
 /*
- * Â© Copyright IBM Corp. 2014
+ * © Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import com.ibm.sbt.services.client.connections.activities.ActivityCrudrTest;
 import com.ibm.sbt.services.client.connections.activities.ActivityFeedTest;
 import com.ibm.sbt.services.client.connections.activities.ActivityMemberArudTest;
 import com.ibm.sbt.services.client.connections.activities.ActivityNodeCrudrTest;
+import com.ibm.sbt.services.client.connections.activities.ActivityUrlsTest;
 
 /**
  * @author mwallace
@@ -30,11 +31,11 @@ import com.ibm.sbt.services.client.connections.activities.ActivityNodeCrudrTest;
  */
 @RunWith(Suite.class)
 @SuiteClasses({ 
+	ActivityUrlsTest.class,
 	ActivityFeedTest.class,
 	ActivityCrudrTest.class,
 	ActivityNodeCrudrTest.class,
 	ActivityMemberArudTest.class
 })
 public class ActivitiesTestSuite {
-
 }

@@ -63,11 +63,6 @@ import com.ibm.sbt.services.client.base.serializers.AtomEntitySerializer;
 import com.ibm.sbt.services.client.connections.activities.Activity;
 import com.ibm.sbt.services.client.connections.activities.DateField;
 import com.ibm.sbt.services.client.connections.activities.Field;
-import com.ibm.sbt.services.client.connections.activities.FileField;
-import com.ibm.sbt.services.client.connections.activities.LinkField;
-import com.ibm.sbt.services.client.connections.activities.PersonField;
-import com.ibm.sbt.services.client.connections.activities.Priority;
-import com.ibm.sbt.services.client.connections.activities.TextField;
 import com.ibm.sbt.services.client.connections.common.Person;
 
 
@@ -131,13 +126,13 @@ public class ActivitySerializer extends AtomEntitySerializer<Activity> {
 				DateField dateField = (DateField)field;
 				addText(element, DateSerializer.toString(dateField.getDate()));
 			} else if (FILE.equals(type)) {
-				FileField fileField = (FileField)field;
+				//FileField fileField = (FileField)field;
 			} else if (LINK.equals(type)) {
-				LinkField linkField = (LinkField)field;
+				//LinkField linkField = (LinkField)field;
 			} else if (PERSON.equals(type)) {
-				PersonField personField = (PersonField)field;
+				//PersonField personField = (PersonField)field;
 			} else if (TEXT.equals(type)) {
-				TextField textField = (TextField)field;
+				//TextField textField = (TextField)field;
 			}
 		}
 		
@@ -171,11 +166,10 @@ public class ActivitySerializer extends AtomEntitySerializer<Activity> {
 	}
 	
 	protected Element priorityCategory() {
-		Priority priority = entity.getPriority();
-		return (priority != null) ? element(CATEGORY, 
+		long priority = entity.getPriority();
+		return element(CATEGORY, 
 				attribute(SCHEME, Namespace.PRIORITY.getUrl()),
-				attribute(TERM, EMPTY + priority.getTerm()),
-				attribute(LABEL, priority.getLabel())) : null;
+				attribute(TERM, "" + priority));
 	}
 	
 	protected Element externalCategory() {

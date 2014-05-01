@@ -22,6 +22,8 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
+import com.ibm.sbt.services.client.ClientServicesException;
+
 /**
  * @author Swati Singh
  *
@@ -29,7 +31,7 @@ import org.junit.Test;
 public class BlogPostCreateTest extends BaseBlogServiceTest {
 
 	@Test
-	public void createBlogTest() throws BlogServiceException {
+	public void createBlogTest() throws ClientServicesException {
 		Blog blog = new Blog(blogService, "");
 		blog.setTitle("Test Blog" +  System.currentTimeMillis());
 		blog.setHandle("TestHandle"+ System.currentTimeMillis());
@@ -43,7 +45,7 @@ public class BlogPostCreateTest extends BaseBlogServiceTest {
 	}
 
 	@Test
-	public void createBlogPostTest() throws BlogServiceException {
+	public void createBlogPostTest() throws ClientServicesException {
 		blog = createBlog();
 		BlogPost blogPost = new BlogPost(blogService, "");
 		blogPost.setTitle("Test Blog Post" + System.currentTimeMillis());

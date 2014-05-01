@@ -31,6 +31,7 @@ import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.service.basic.ConnectionsFileProxyService;
+import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.AtomEntity;
 import com.ibm.sbt.services.client.base.AtomXPath;
 import com.ibm.sbt.services.client.base.BaseService;
@@ -123,7 +124,7 @@ public class File extends AtomEntity {
 	 * 
 	 */
 	public boolean isLocked() {
-		if(FileConstants.LockType_HARD.equalsIgnoreCase(getLockType()))
+		if(FileConstants.LOCKTYPE_HARD.equalsIgnoreCase(getLockType()))
 			return true;
 		else 
 			return false;
@@ -155,9 +156,9 @@ public class File extends AtomEntity {
 		if (null == service){
 			throw new FileServiceException(new Exception("FileService not defined"));
 		}
-		String proxypath = this.getService().getEndpoint().getProxyPath("connections");
-		String fileId = this.getFileId();
-		String libId = this.getLibraryId();
+		String proxypath = getService().getEndpoint().getProxyPath("connections");
+		String fileId = getFileId();
+		String libId = getLibraryId();
 		HttpServletRequest req = Context.get().getHttpRequest();
 		String sbtServiceUrl = UrlUtil.getContextUrl(req);
 		String partUrl = FileUrls.DOWNLOADURL.format(getService(), FileUrlParts.proxyPath.get(proxypath), 
@@ -173,7 +174,7 @@ public class File extends AtomEntity {
 	 */
 	public Author getAuthor() {
 		if(null == authorEntry) {
-			 authorEntry = new Author(getService(), new XmlDataHandler((Node)this.getDataHandler().getData(), 
+			 authorEntry = new Author(getService(), new XmlDataHandler((Node)getDataHandler().getData(), 
 		        		nameSpaceCtx, (XPathExpression)AtomXPath.author.getPath()));
 		}
 		return authorEntry;
@@ -218,7 +219,7 @@ public class File extends AtomEntity {
 	 */
 	public Person getModifier() {
 		if(null == modifierEntry) {
-			modifierEntry = new Modifier(getService(), new XmlDataHandler((Node)this.getDataHandler().getData(), 
+			modifierEntry = new Modifier(getService(), new XmlDataHandler((Node)getDataHandler().getData(), 
 	        		nameSpaceCtx, (XPathExpression)AtomXPath.modifier.getPath()));
 		}
 		return modifierEntry;
@@ -308,7 +309,7 @@ public class File extends AtomEntity {
 	 * @return String
 	 */
 	public String getType() {
-		return this.getAsString(FileEntryXPath.Type);
+		return getAsString(FileEntryXPath.Type);
 	}
 	
 	/**
@@ -316,7 +317,7 @@ public class File extends AtomEntity {
 	 * @return String
 	 */
 	public String getEditLink() {
-		return this.getAsString(FileEntryXPath.EditLink);
+		return getAsString(FileEntryXPath.EditLink);
 	}
 	
 	/**
@@ -324,7 +325,7 @@ public class File extends AtomEntity {
 	 * @return String
 	 */
 	public String getEditMediaLink() {
-		return this.getAsString(FileEntryXPath.EditMediaLink);
+		return getAsString(FileEntryXPath.EditMediaLink);
 	}
 	
 	/**
@@ -332,7 +333,7 @@ public class File extends AtomEntity {
 	 * @return String
 	 */
 	public String getEditMediaUrl() {
-		return this.getAsString(FileEntryXPath.EditMediaLink);
+		return getAsString(FileEntryXPath.EditMediaLink);
 	}
 	
 	/**
@@ -340,7 +341,7 @@ public class File extends AtomEntity {
 	 * @return String
 	 */
 	public String getThumbnailUrl() {
-		return this.getAsString(FileEntryXPath.ThumbnailUrl);
+		return getAsString(FileEntryXPath.ThumbnailUrl);
 	}
 	
 	/**
@@ -348,7 +349,7 @@ public class File extends AtomEntity {
 	 * @return String
 	 */
 	public String getCommentsUrl() {
-		return this.getAsString(FileEntryXPath.CommentsUrl);
+		return getAsString(FileEntryXPath.CommentsUrl);
 	}
 	
 	/**
@@ -356,7 +357,7 @@ public class File extends AtomEntity {
 	 * @return String
 	 */
 	public String getVersionUuid() {
-		return this.getAsString(FileEntryXPath.VersionUuid);
+		return getAsString(FileEntryXPath.VersionUuid);
 	}
 	
 	/**
@@ -364,7 +365,7 @@ public class File extends AtomEntity {
 	 * @return int
 	 */
 	public int getRecommendationsCount() {
-		return this.getAsInt(FileEntryXPath.RecommendationsCount);
+		return getAsInt(FileEntryXPath.RecommendationsCount);
 	}
 	
 	/**
@@ -372,7 +373,7 @@ public class File extends AtomEntity {
 	 * @return int
 	 */
 	public int getCommentsCount() {
-		return this.getAsInt(FileEntryXPath.CommentsCount);
+		return getAsInt(FileEntryXPath.CommentsCount);
 	}
 
 	/**
@@ -380,7 +381,7 @@ public class File extends AtomEntity {
 	 * @return int
 	 */
 	public int getSharesCount() {
-		return this.getAsInt(FileEntryXPath.SharesCount);
+		return getAsInt(FileEntryXPath.SharesCount);
 	}
 
 	/**
@@ -388,7 +389,7 @@ public class File extends AtomEntity {
 	 * @return int
 	 */
 	public int getFoldersCount() {
-		return this.getAsInt(FileEntryXPath.FoldersCount);
+		return getAsInt(FileEntryXPath.FoldersCount);
 	}
 
 	/**
@@ -396,7 +397,7 @@ public class File extends AtomEntity {
 	 * @return int
 	 */
 	public int getAttachmentsCount() {
-		return this.getAsInt(FileEntryXPath.AttachmentsCount);
+		return getAsInt(FileEntryXPath.AttachmentsCount);
 	}
 
 	/**
@@ -404,7 +405,7 @@ public class File extends AtomEntity {
 	 * @return int
 	 */
 	public int getVersionsCount() {
-		return this.getAsInt(FileEntryXPath.VersionsCount);
+		return getAsInt(FileEntryXPath.VersionsCount);
 	}
 
 	/**
@@ -412,7 +413,7 @@ public class File extends AtomEntity {
 	 * @return int
 	 */
 	public int getReferencesCount() {
-		return this.getAsInt(FileEntryXPath.ReferencesCount);
+		return getAsInt(FileEntryXPath.ReferencesCount);
 	}
 	
 	/**
@@ -420,7 +421,7 @@ public class File extends AtomEntity {
 	 * @return String
 	 */
 	public String getContentUrl() {
-		return this.getAsString(FileEntryXPath.ContentUrl);
+		return getAsString(FileEntryXPath.ContentUrl);
 	}
 	
 	/**
@@ -428,7 +429,7 @@ public class File extends AtomEntity {
 	 * @return String
 	 */
 	public String getContentType() {
-		return this.getAsString(FileEntryXPath.ContentType);
+		return getAsString(FileEntryXPath.ContentType);
 	}
 	
 	/**
@@ -436,7 +437,7 @@ public class File extends AtomEntity {
 	 * @return String
 	 */
 	public String getAcls() {
-		return this.getAsString(FileEntryXPath.Acls);
+		return getAsString(FileEntryXPath.Acls);
 	}
 	
 	/**
@@ -444,7 +445,7 @@ public class File extends AtomEntity {
 	 * @return int
 	 */
 	public int getHitCount() {
-		return this.getAsInt(FileEntryXPath.HitCount);
+		return getAsInt(FileEntryXPath.HitCount);
 	}
 	
 	/**
@@ -452,7 +453,7 @@ public class File extends AtomEntity {
 	 * @return int
 	 */
 	public int  getAnonymousHitCount() {
-		return this.getAsInt(FileEntryXPath.AnonymousHitCount);
+		return getAsInt(FileEntryXPath.AnonymousHitCount);
 	}
 	
 	/**
@@ -460,7 +461,7 @@ public class File extends AtomEntity {
 	 * @return String
 	 */
 	public List<String> getTags() {
-		return this.getAsList(FileEntryXPath.Tags);
+		return getAsList(FileEntryXPath.Tags);
 	}
 	
 	/**
@@ -468,7 +469,7 @@ public class File extends AtomEntity {
 	 * @return File
 	 * @throws FileServiceException
 	 */
-	public File load() throws FileServiceException {
+	public File load() throws ClientServicesException {
 		return getService().getFile(getFileId());
     }
 	
@@ -480,48 +481,48 @@ public class File extends AtomEntity {
 	 * @throws FileServiceException
 	 * @throws TransformerException
 	 */
-	public Comment addComment(String comment, Map<String, String> params) throws FileServiceException, TransformerException {
-		return this.getService().addCommentToFile(this.getFileId(), comment, this.getAuthor().getId(), params);
+	public Comment addComment(String comment, Map<String, String> params) throws ClientServicesException, TransformerException {
+		return getService().addCommentToFile(getFileId(), comment, getAuthor().getId(), params);
     }
 	
 	/**
 	 * Method to Pin a File
 	 * @throws FileServiceException
 	 */
-	public void pin() throws FileServiceException {
-		this.getService().pinFile(this.getFileId());
+	public void pin() throws ClientServicesException {
+		getService().pinFile(getFileId());
     }
 	
 	/**
 	 * Method to Un Pin a File
 	 * @throws FileServiceException
 	 */
-	public void unpin() throws FileServiceException {
-		this.getService().unPinFile(this.getFileId());
+	public void unpin() throws ClientServicesException {
+		getService().unPinFile(getFileId());
     }
 	
 	/**
 	 * Method to Lock a File
 	 * @throws FileServiceException
 	 */
-	public void lock() throws FileServiceException {
-		this.getService().lock(this.getFileId());
+	public void lock() throws ClientServicesException {
+		getService().lock(getFileId());
     }
 	
 	/**
 	 * Method to un Lock a File
 	 * @throws FileServiceException
 	 */
-	public void unlock() throws FileServiceException {
-		this.getService().unlock(this.getFileId());
+	public void unlock() throws ClientServicesException {
+		getService().unlock(getFileId());
     }
 	
 	/**
 	 * Method to remove/delete a File
 	 * @throws FileServiceException
 	 */
-	public void remove() throws FileServiceException {
-		this.getService().deleteFile(this.getFileId());
+	public void remove() throws ClientServicesException {
+		getService().deleteFile(getFileId());
     }
 	
 	/**
@@ -530,8 +531,8 @@ public class File extends AtomEntity {
 	 * @throws FileServiceException
 	 * @throws TransformerException
 	 */
-	public void update(Map<String, String> params) throws FileServiceException, TransformerException {
-		this.getService().updateFileMetadata(this, params);
+	public void update(Map<String, String> params) throws ClientServicesException, TransformerException {
+		getService().updateFileMetadata(this, params);
     }
 	
 	/**
@@ -540,9 +541,9 @@ public class File extends AtomEntity {
 	 * @throws FileServiceException
 	 * @throws TransformerException
 	 */
-	public void save(Map<String, String> params) throws FileServiceException, TransformerException {
+	public void save(Map<String, String> params) throws ClientServicesException, TransformerException {
 		//TODO
-		this.getService().updateFileMetadata(this, params);
+		getService().updateFileMetadata(this, params);
     }
 	
 	@Override

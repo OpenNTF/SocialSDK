@@ -17,9 +17,10 @@
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 
+<%@page import="com.ibm.sbt.services.client.connections.blogs.BlogPost"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page import="com.ibm.sbt.services.client.connections.blogs.BlogService"%>
 <%@page import="com.ibm.sbt.services.client.connections.blogs.model.BaseBlogEntity"%>
-<%@page import="com.ibm.sbt.services.client.connections.blogs.BlogPostList"%>
 <%@page import="com.ibm.sbt.services.client.connections.common.Person"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.sbt.services.client.connections.activitystreams.model.Reply"%>
@@ -35,7 +36,7 @@
 	<%
 		try {
 			BlogService service = new BlogService();
-			BlogPostList entries = service.getFeaturedPosts();
+			EntityList<BlogPost> entries = service.getFeaturedPosts();
 
 			if (entries.size() <= 0)
 				out.println("No updates to be displayed");

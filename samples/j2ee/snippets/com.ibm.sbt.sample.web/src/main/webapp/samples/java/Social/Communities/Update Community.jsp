@@ -18,8 +18,8 @@
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.Community"%>
-<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>

@@ -70,7 +70,7 @@ public class ActivityFieldCrudrTest extends BaseActivityServiceTest {
 		TextField textField = new TextField();
 		textField.setName("test_text");
 		textField.setPosition(1000);
-		textField.setSummary("Test Text Field");
+		textField.setSummary("Test_Text_Field");
 		
 		activity.addField(textField);
 		activity.update();
@@ -88,7 +88,37 @@ public class ActivityFieldCrudrTest extends BaseActivityServiceTest {
 		Assert.assertTrue(fields[0] instanceof TextField);
 		Assert.assertEquals("test_text", ((TextField)fields[0]).getName());
 		Assert.assertEquals(1000, ((TextField)fields[0]).getPosition());
-		Assert.assertEquals("Test Text Field", ((TextField)fields[0]).getSummary());
+		Assert.assertEquals("Test_Text_Field", ((TextField)fields[0]).getSummary());
+	}
+	
+	@Test
+	public void createHiddenTextField() throws ClientServicesException, XMLException {
+		Activity activity = createActivity();
+		
+		TextField textField = new TextField();
+		textField.setName("test_hidden_text");
+		textField.setPosition(1000);
+		textField.setSummary("Hidden_Text_Field");
+		textField.setHidden(true);
+		
+		activity.addField(textField);
+		activity.update();
+		
+		ActivitySerializer serializer = new ActivitySerializer(activity);
+		System.out.println(serializer.generateUpdate());
+		
+		Activity read = activity.getActivityService().getActivity(activity.getActivityUuid());
+		System.out.println(read.toXmlString());
+		
+		Field[] fields = read.getFields();
+		
+		Assert.assertNotNull(fields);
+		Assert.assertEquals(1, fields.length);
+		Assert.assertTrue(fields[0] instanceof TextField);
+		Assert.assertTrue(((TextField)fields[0]).isHidden());
+		Assert.assertEquals("test_hidden_text", ((TextField)fields[0]).getName());
+		Assert.assertEquals(1000, ((TextField)fields[0]).getPosition());
+		Assert.assertEquals("Hidden_Text_Field", ((TextField)fields[0]).getSummary());
 	}
 	
 	@Test

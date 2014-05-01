@@ -21,11 +21,9 @@
 <%@page import="java.io.PrintWriter"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.HashMap"%>
-<%@page
-	import="com.ibm.sbt.services.client.connections.profiles.ProfileService"%>
+<%@page import="com.ibm.sbt.services.client.connections.profiles.ProfileService"%>
 <%@page import="com.ibm.sbt.services.client.connections.profiles.Tag"%>
-<%@page
-	import="com.ibm.sbt.services.client.connections.profiles.TagList"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <html>
@@ -39,7 +37,7 @@
 			String userEmail = Context.get().getProperty("sample.email1");
 			ProfileService connProfSvc = new ProfileService();
 			Map<String, String> params = new HashMap<String, String>();
-			TagList tags = connProfSvc.getTags(userEmail, params);
+			EntityList<Tag> tags = connProfSvc.getTags(userEmail, params);
 			if (tags.size() <= 0) {
 				out.println("No tags to be displayed");
 			}

@@ -39,7 +39,7 @@ public class ProfileAdminApp extends BaseApp {
     	return profileAdminService;
     }
     
-    public Profile getProfile(String id) throws ClientServicesException{
+    public Profile getProfile(String id) throws  ClientServicesException{
     	return getProfileAdminService().getProfile(id);
     }
 	

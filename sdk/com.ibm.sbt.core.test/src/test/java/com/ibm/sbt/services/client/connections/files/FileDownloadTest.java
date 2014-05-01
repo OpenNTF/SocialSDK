@@ -155,7 +155,7 @@ public class FileDownloadTest extends BaseUnitTest {
 		return communityService.createCommunity(title, content, type);
 	}
 	
-	private File uploadCommunityFile(String baseName, String communityUuid) throws FileServiceException, XMLException {
+	private File uploadCommunityFile(String baseName, String communityUuid) throws ClientServicesException, XMLException {
 		String name = baseName + System.currentTimeMillis();
 
 		byte[] bytes = name.getBytes();
@@ -168,7 +168,7 @@ public class FileDownloadTest extends BaseUnitTest {
 		return file;
 	}
 	
-	private File uploadFile(String baseName) throws FileServiceException, XMLException {
+	private File uploadFile(String baseName) throws ClientServicesException, XMLException {
 		String name = baseName + System.currentTimeMillis();
 
 		byte[] bytes = name.getBytes();

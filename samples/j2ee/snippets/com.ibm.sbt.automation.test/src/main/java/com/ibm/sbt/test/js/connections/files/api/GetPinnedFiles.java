@@ -13,8 +13,8 @@ import org.openqa.selenium.WebElement;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.automation.core.test.connections.BaseFilesTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
+import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.connections.files.File;
-import com.ibm.sbt.services.client.connections.files.FileServiceException;
 
 public class GetPinnedFiles extends BaseFilesTest {
 
@@ -30,7 +30,7 @@ public class GetPinnedFiles extends BaseFilesTest {
 			fileService = getFileService();
 			files = fileService.getPinnedFiles(new HashMap<String, String>());
 			assertNotNull(files);
-		} catch (FileServiceException e) {
+		} catch (ClientServicesException e) {
 			e.printStackTrace();
 			Assert.fail(e.getMessage());
 		}

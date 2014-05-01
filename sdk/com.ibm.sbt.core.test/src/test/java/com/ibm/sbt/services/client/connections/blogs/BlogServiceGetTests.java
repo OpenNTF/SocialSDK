@@ -18,7 +18,11 @@ package com.ibm.sbt.services.client.connections.blogs;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
+
 import org.junit.Test;
+
+import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.connections.blogs.model.BaseBlogEntity;
 
 /**
@@ -28,8 +32,8 @@ import com.ibm.sbt.services.client.connections.blogs.model.BaseBlogEntity;
 public class BlogServiceGetTests extends BaseBlogServiceTest {
 	
 	@Test
-	public void getAllBlogs() throws BlogServiceException {
-		BlogList entries = blogService.getAllBlogs();
+	public void getAllBlogs() throws ClientServicesException {
+		EntityList<Blog> entries = blogService.getAllBlogs();
 		assertNotNull(entries);
 		for (BaseBlogEntity blog : entries) {
 			assertValid((Blog)blog);
@@ -37,8 +41,8 @@ public class BlogServiceGetTests extends BaseBlogServiceTest {
 	}
 
 	@Test
-	public void getMyBlogs() throws BlogServiceException {
-		BlogList entries = blogService.getMyBlogs();
+	public void getMyBlogs() throws ClientServicesException {
+		EntityList<Blog> entries = blogService.getMyBlogs();
 		assertNotNull(entries);
 		for (BaseBlogEntity blog : entries) {
 			assertValid((Blog)blog);
@@ -46,8 +50,8 @@ public class BlogServiceGetTests extends BaseBlogServiceTest {
 	}
 
 	@Test
-	public void getFeaturedBlogs() throws BlogServiceException {
-		BlogList entries = blogService.getFeaturedBlogs();
+	public void getFeaturedBlogs() throws ClientServicesException {
+		EntityList<Blog> entries = blogService.getFeaturedBlogs();
 		assertNotNull(entries);
 		for (BaseBlogEntity blog : entries) {
 			assertValid((Blog)blog);
@@ -55,8 +59,8 @@ public class BlogServiceGetTests extends BaseBlogServiceTest {
 	}
 
 	@Test
-	public void getAllComments() throws BlogServiceException {
-		CommentList entries = blogService.getAllComments();
+	public void getAllComments() throws ClientServicesException {
+		EntityList<Comment> entries = blogService.getAllComments();
 		assertNotNull(entries);
 		for (BaseBlogEntity comment : entries) {
 			assertValid((Comment)comment);
@@ -65,8 +69,8 @@ public class BlogServiceGetTests extends BaseBlogServiceTest {
 
 
 	@Test
-	public void getAllPosts() throws BlogServiceException {
-		BlogPostList entries = blogService.getAllPosts();
+	public void getAllPosts() throws ClientServicesException {
+		EntityList<BlogPost> entries = blogService.getAllPosts();
 		assertNotNull(entries);
 		for (BaseBlogEntity blogPost : entries) {
 			assertValid((BlogPost)blogPost);
@@ -74,8 +78,8 @@ public class BlogServiceGetTests extends BaseBlogServiceTest {
 	}
 
 	@Test
-	public void getAllTags() throws BlogServiceException {
-		TagList entries = blogService.getAllTags();
+	public void getAllTags() throws ClientServicesException {
+		EntityList<Tag> entries = blogService.getAllTags();
 		assertNotNull(entries);
 		for (Tag tag : entries) {
 			assertValid((Tag)tag);
@@ -83,8 +87,8 @@ public class BlogServiceGetTests extends BaseBlogServiceTest {
 	}
 	
 	@Test
-	public void getRecommendedPosts() throws BlogServiceException {
-		BlogPostList entries = blogService.getRecommendedPosts();
+	public void getRecommendedPosts() throws ClientServicesException {
+		EntityList<BlogPost> entries = blogService.getRecommendedPosts();
 		assertNotNull(entries);
 		for (BaseBlogEntity blogPost : entries) {
 			assertValid((BlogPost)blogPost);
@@ -92,8 +96,8 @@ public class BlogServiceGetTests extends BaseBlogServiceTest {
 	}
 	
 	@Test
-	public void getFeaturedPosts() throws BlogServiceException {
-		BlogPostList entries = blogService.getFeaturedPosts();
+	public void getFeaturedPosts() throws ClientServicesException {
+		EntityList<BlogPost> entries = blogService.getFeaturedPosts();
 		assertNotNull(entries);
 		for (BaseBlogEntity blogPost : entries) {
 			assertValid((BlogPost)blogPost);
@@ -101,9 +105,9 @@ public class BlogServiceGetTests extends BaseBlogServiceTest {
 	}
 	
 	@Test
-	public void getBlogPosts() throws BlogServiceException {
+	public void getBlogPosts() throws ClientServicesException {
 		Blog blog = createBlog();
-		BlogPostList entries = blogService.getBlogPosts(blog.getHandle());
+		EntityList<BlogPost> entries = blogService.getBlogPosts(blog.getHandle());
 		assertNotNull(entries);
 		for (BaseBlogEntity blogPost : entries) {
 			assertValid((BlogPost)blogPost);
@@ -112,9 +116,9 @@ public class BlogServiceGetTests extends BaseBlogServiceTest {
 	}
 	
 	@Test
-	public void getBlogComments() throws BlogServiceException {
+	public void getBlogComments() throws ClientServicesException {
 		Blog blog = createBlog();
-		CommentList entries = blogService.getBlogComments(blog.getHandle());
+		EntityList<Comment> entries = blogService.getBlogComments(blog.getHandle());
 		assertNotNull(entries);
 		for (BaseBlogEntity commment : entries) {
 			assertValid((Comment)commment);
@@ -123,9 +127,9 @@ public class BlogServiceGetTests extends BaseBlogServiceTest {
 	}
 	
 	@Test
-	public void getBlogTags() throws BlogServiceException {
+	public void getBlogTags() throws ClientServicesException {
 			Blog blog = createBlog();
-			TagList entries = blogService.getBlogTags(blog.getHandle());
+			EntityList<Tag> entries = blogService.getBlogTags(blog.getHandle());
 			assertNotNull(entries);
 			for (Tag tag : entries) {
 				assertValid((Tag)tag);

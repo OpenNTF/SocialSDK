@@ -17,17 +17,13 @@
 <%@page import="com.ibm.sbt.services.client.connections.forums.ForumTopic"%>
 <%@page import="com.ibm.sbt.services.client.connections.forums.ForumReply"%>
 <%@page import="com.ibm.sbt.services.client.connections.forums.ForumService"%>
-<%@page import="com.ibm.sbt.services.client.connections.forums.ForumList"%>
 <%@page import="com.ibm.sbt.services.client.connections.forums.Forum"%>
 <%@page import="java.util.Collection"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
-<%@page import="com.ibm.sbt.services.client.connections.forums.TopicList"%>
-<%@page import="com.ibm.sbt.services.client.connections.forums.ReplyList"%>
-
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.Community"%>
-<%@page import="com.ibm.sbt.services.client.connections.communities.CommunityList"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
@@ -47,14 +43,14 @@
 	<%
 		try {
 			CommunityService svc = new CommunityService();
-			CommunityList communities = svc.getMyCommunities();
+			EntityList<Community> communities = svc.getMyCommunities();
 			Community community = communities.get(0);
 			ForumService service = new ForumService();
 			
 			Map<String, String> parameters = new HashMap<String, String>();
 			parameters.put("communityUuid", community.getCommunityUuid());
 			
-			TopicList topics = service.getPublicForumTopics(parameters);
+			EntityList<ForumTopic> topics = service.getPublicForumTopics(parameters);
 			if (topics.size() > 0) {
 				String topicId = ((ForumTopic) topics.get(0)).getTopicUuid();
 				ForumReply reply = new ForumReply(service, "");

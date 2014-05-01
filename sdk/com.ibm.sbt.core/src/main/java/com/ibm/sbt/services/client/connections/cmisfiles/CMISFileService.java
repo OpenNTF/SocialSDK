@@ -213,7 +213,7 @@ public class CMISFileService extends ConnectionsService {
 	 ****************************************************************/
 	protected EntityList<CMISFile> getFileEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
 		try {
-			return getEntities(requestUrl, getParameters(parameters), getFileFeedHandler());
+			return getEntities(requestUrl, parameters, getFileFeedHandler());
 		} catch (IOException e) {
 			throw new ClientServicesException(e);
 		}

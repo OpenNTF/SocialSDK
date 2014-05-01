@@ -971,7 +971,7 @@ public class ForumService extends ConnectionsService {
 
 	protected Forum getForumEntity(String requestUrl, Map<String, String> parameters) throws ForumServiceException {
 		try {
-			return (Forum)getEntity(requestUrl, getParameters(parameters), getForumFeedHandler());
+			return (Forum)getEntity(requestUrl, parameters, getForumFeedHandler());
 		} catch (IOException e) {
 			throw new ForumServiceException(e);
 		} catch(ClientServicesException e){
@@ -981,7 +981,7 @@ public class ForumService extends ConnectionsService {
 
 	protected ForumTopic getForumTopicEntity(String requestUrl, Map<String, String> parameters) throws ForumServiceException {
 		try {
-			return (ForumTopic)getEntity(requestUrl, getParameters(parameters), getForumTopicFeedHandler());
+			return (ForumTopic)getEntity(requestUrl, parameters, getForumTopicFeedHandler());
 		} catch (IOException e) {
 			throw new ForumServiceException(e);
 		} catch(ClientServicesException e){
@@ -991,7 +991,7 @@ public class ForumService extends ConnectionsService {
 
 	protected ForumReply getForumReplyEntity(String requestUrl, Map<String, String> parameters) throws ForumServiceException {
 		try {
-			return (ForumReply)getEntity(requestUrl, getParameters(parameters), getForumReplyFeedHandler());
+			return (ForumReply)getEntity(requestUrl, parameters, getForumReplyFeedHandler());
 		} catch (IOException e) {
 			throw new ForumServiceException(e);
 		} catch(ClientServicesException e){
@@ -1001,7 +1001,7 @@ public class ForumService extends ConnectionsService {
 
 	protected Recommendation getRecommendationEntity(String requestUrl, Map<String, String> parameters) throws ForumServiceException {
 		try {
-			return (Recommendation)getEntity(requestUrl, getParameters(parameters), getRecommendationFeedHandler());
+			return (Recommendation)getEntity(requestUrl, parameters, getRecommendationFeedHandler());
 		} catch (IOException e) {
 			throw new ForumServiceException(e);
 		} catch(ClientServicesException e){
@@ -1011,7 +1011,7 @@ public class ForumService extends ConnectionsService {
 
 	protected EntityList<Forum> getForumEntityList(String requestUrl, Map<String, String> parameters) throws ForumServiceException {
 		try {
-			return getEntities(requestUrl, getParameters(parameters), getForumFeedHandler());
+			return getEntities(requestUrl, parameters, getForumFeedHandler());
 		} catch (IOException e) {
 			throw new ForumServiceException(e);
 		} catch(ClientServicesException e){
@@ -1021,7 +1021,7 @@ public class ForumService extends ConnectionsService {
 
 	protected EntityList<ForumTopic> getForumTopicEntityList(String requestUrl, Map<String, String> parameters) throws ForumServiceException {
 		try {
-			return getEntities(requestUrl, getParameters(parameters), getForumTopicFeedHandler());
+			return getEntities(requestUrl, parameters, getForumTopicFeedHandler());
 		} catch (IOException e) {
 			throw new ForumServiceException(e);
 		} catch(ClientServicesException e){
@@ -1031,7 +1031,7 @@ public class ForumService extends ConnectionsService {
 
 	protected EntityList<ForumReply> getForumReplyEntityList(String requestUrl, Map<String, String> parameters) throws ForumServiceException {
 		try {
-			return getEntities(requestUrl, getParameters(parameters), getForumReplyFeedHandler());
+			return getEntities(requestUrl, parameters, getForumReplyFeedHandler());
 		} catch (IOException e) {
 			throw new ForumServiceException(e);
 		} catch(ClientServicesException e){
@@ -1041,7 +1041,7 @@ public class ForumService extends ConnectionsService {
 
 	protected EntityList<Recommendation> getRecommendationEntityList(String requestUrl, Map<String, String> parameters) throws ForumServiceException {
 		try {
-			return getEntities(requestUrl, getParameters(parameters), getRecommendationFeedHandler());
+			return getEntities(requestUrl, parameters, getRecommendationFeedHandler());
 		} catch (IOException e) {
 			throw new ForumServiceException(e);
 		} catch(ClientServicesException e){
@@ -1051,7 +1051,7 @@ public class ForumService extends ConnectionsService {
 
 	protected EntityList<Tag> getTagEntityList(String requestUrl, Map<String, String> parameters) throws ForumServiceException {
 		try {
-			return getEntities(requestUrl, getParameters(parameters), getTagFeedHandler());
+			return getEntities(requestUrl, parameters, getTagFeedHandler());
 		} catch (IOException e) {
 			throw new ForumServiceException(e);
 		} catch(ClientServicesException e){

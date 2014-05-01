@@ -754,7 +754,7 @@ public class BlogService extends ConnectionsService {
 	 ****************************************************************/
 	protected Blog getBlogEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
 		try {
-			return getEntity(requestUrl, getParameters(parameters), getBlogFeedHandler());
+			return getEntity(requestUrl, parameters, getBlogFeedHandler());
 		} catch (IOException e) {
 			throw new ClientServicesException(e);
 		}
@@ -762,7 +762,7 @@ public class BlogService extends ConnectionsService {
 	
 	protected Comment getCommentEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
 		try {
-			return getEntity(requestUrl, getParameters(parameters), getCommentFeedHandler());
+			return getEntity(requestUrl, parameters, getCommentFeedHandler());
 		} catch (IOException e) {
 			throw new ClientServicesException(e);
 		}
@@ -770,7 +770,7 @@ public class BlogService extends ConnectionsService {
 	
 	protected BlogPost getBlogPostEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
 		try {
-			return getEntity(requestUrl, getParameters(parameters), getBlogPostFeedHandler());
+			return getEntity(requestUrl, parameters, getBlogPostFeedHandler());
 		} catch (IOException e) {
 			throw new ClientServicesException(e);
 		}
@@ -778,7 +778,7 @@ public class BlogService extends ConnectionsService {
 	
 	protected EntityList<Blog> getBlogEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
 		try {
-			return getEntities(requestUrl, getParameters(parameters), getBlogFeedHandler());
+			return getEntities(requestUrl, parameters, getBlogFeedHandler());
 		} catch (IOException e) {
 			throw new ClientServicesException(e);
 		}
@@ -786,7 +786,7 @@ public class BlogService extends ConnectionsService {
 	
 	protected EntityList<BlogPost> getBlogPostEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
 		try {
-			return getEntities(requestUrl, getParameters(parameters), getBlogPostFeedHandler());
+			return getEntities(requestUrl, parameters, getBlogPostFeedHandler());
 		} catch (IOException e) {
 			throw new ClientServicesException(e);
 		}
@@ -794,7 +794,7 @@ public class BlogService extends ConnectionsService {
 	
 	protected EntityList<Comment> getCommentEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
 		try {
-			return getEntities(requestUrl, getParameters(parameters), getCommentFeedHandler());
+			return getEntities(requestUrl, parameters, getCommentFeedHandler());
 		} catch (IOException e) {
 			throw new ClientServicesException(e);
 		}
@@ -802,7 +802,7 @@ public class BlogService extends ConnectionsService {
 	
 	protected EntityList<Tag> getTagEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
 		try {
-			return getEntities(requestUrl, getParameters(parameters), getTagFeedHandler());
+			return getEntities(requestUrl, parameters, getTagFeedHandler());
 		} catch (IOException e) {
 			throw new ClientServicesException(e);
 		}

@@ -3038,7 +3038,7 @@ public class FileService extends ConnectionsService {
 
 	protected File getFileEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
 		try {
-			return getEntity(requestUrl, getParameters(parameters), getFileFeedHandler());
+			return getEntity(requestUrl, parameters, getFileFeedHandler());
 		} catch (IOException e) {
 			throw new ClientServicesException(e);
 		}
@@ -3046,7 +3046,7 @@ public class FileService extends ConnectionsService {
 
 	protected EntityList<File> getFileEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
 		try {
-			return getEntities(requestUrl, getParameters(parameters), getFileFeedHandler());
+			return getEntities(requestUrl, parameters, getFileFeedHandler());
 		} catch (IOException e) {
 			throw new ClientServicesException(e);
 		}
@@ -3058,7 +3058,7 @@ public class FileService extends ConnectionsService {
                 parameters = getCommentParams();
             else
                 parameters.putAll(getCommentParams());
-			return getEntity(requestUrl, getParameters(parameters), getCommentFeedHandler());
+			return getEntity(requestUrl, parameters, getCommentFeedHandler());
 		} catch (IOException e) {
 			throw new ClientServicesException(e);
 		}
@@ -3066,7 +3066,7 @@ public class FileService extends ConnectionsService {
 
 	protected EntityList<Comment> getCommentEntityList(String requestUrl, Map<String, String> parameters, Map<String,String> headers) throws ClientServicesException {
 		try {
-			return getEntities(requestUrl, getParameters(parameters), headers, getCommentFeedHandler());
+			return getEntities(requestUrl, parameters, headers, getCommentFeedHandler());
 		} catch (IOException e) {
 			throw new ClientServicesException(e);
 		}

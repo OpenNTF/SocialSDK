@@ -712,7 +712,7 @@ public class ProfileService extends ConnectionsService {
 				headers.put(CONTENT_TYPE, IMAGE_ + ext);
 			}
 			String url = ProfileUrls.PHOTO.format(this, ProfileParams.userId.get(userId));
-			getClientService().put(url, getParameters(null), headers, file, ClientService.FORMAT_NULL);
+			getClientService().put(url, null, headers, file, ClientService.FORMAT_NULL);
 		}
 	}
 
@@ -755,7 +755,7 @@ public class ProfileService extends ConnectionsService {
 	
 	protected Profile getProfileEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
 		try {
-			return getEntity(requestUrl, getParameters(parameters), getProfileFeedHandler());
+			return getEntity(requestUrl, parameters, getProfileFeedHandler());
 		} catch (IOException e) {
 			throw new ClientServicesException(e);
 		}
@@ -763,7 +763,7 @@ public class ProfileService extends ConnectionsService {
 
 	protected ColleagueConnection getColleagueConnectionEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
 		try {
-			return getEntity(requestUrl, getParameters(parameters), getColleagueFeedHandler());
+			return getEntity(requestUrl, parameters, getColleagueFeedHandler());
 		} catch (IOException e) {
 			throw new ClientServicesException(e);
 		}
@@ -771,7 +771,7 @@ public class ProfileService extends ConnectionsService {
 
 	protected EntityList<Profile> getProfileEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
 		try {
-			return getEntities(requestUrl, getParameters(parameters), getProfileFeedHandler());
+			return getEntities(requestUrl, parameters, getProfileFeedHandler());
 		} catch (IOException e) {
 			throw new ClientServicesException(e);
 		}
@@ -779,7 +779,7 @@ public class ProfileService extends ConnectionsService {
 
 	protected EntityList<ColleagueConnection> getColleagueConnectionEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
 		try {
-			return getEntities(requestUrl, getParameters(parameters), getColleagueFeedHandler());
+			return getEntities(requestUrl, parameters, getColleagueFeedHandler());
 		} catch (IOException e) {
 			throw new ClientServicesException(e);
 		}
@@ -787,7 +787,7 @@ public class ProfileService extends ConnectionsService {
 
 	protected EntityList<Tag> getTagEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
 		try {
-			return getEntities(requestUrl, getParameters(parameters), getTagFeedHandler());
+			return getEntities(requestUrl, parameters, getTagFeedHandler());
 		} catch (IOException e) {
 			throw new ClientServicesException(e);
 		}

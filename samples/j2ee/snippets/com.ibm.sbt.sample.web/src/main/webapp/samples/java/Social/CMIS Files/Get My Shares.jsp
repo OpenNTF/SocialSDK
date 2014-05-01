@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<%@page import="com.ibm.sbt.services.client.connections.cmisfiles.CMISFileList"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page import="com.ibm.sbt.services.client.connections.cmisfiles.CMISFileService"%>
 <%@page import="com.ibm.sbt.services.client.connections.cmisfiles.CMISFile"%>
 <%@page import="java.util.HashMap"%>
@@ -40,7 +40,7 @@
 	<%
 		try {
 			CMISFileService fileService = new CMISFileService();
-			CMISFileList files = fileService.getMyShares(); 
+			EntityList<CMISFile> files = fileService.getMyShares(); 
 			if(files != null && ! files.isEmpty()) {
 				out.println("My Shares<br>");
 				for (CMISFile file : files) {

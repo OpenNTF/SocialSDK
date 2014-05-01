@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -26,4 +26,8 @@ public enum BlogUrlParts {
 	public NamedUrlPart get(String value){
 		return new NamedUrlPart(name(), value);
 	}
+	
+	public static NamedUrlPart getEntryId(String id){
+		return new NamedUrlPart("entryid", "entryid"+"="+id);		
+	} 
 }

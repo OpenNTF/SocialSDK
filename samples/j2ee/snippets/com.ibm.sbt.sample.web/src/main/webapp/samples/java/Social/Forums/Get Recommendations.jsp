@@ -16,9 +16,8 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%@page	import="com.ibm.sbt.services.client.connections.forums.ForumTopic"%>
 <%@page	import="com.ibm.sbt.services.client.connections.forums.ForumService"%>
-<%@page	import="com.ibm.sbt.services.client.connections.forums.TopicList"%>
 <%@page	import="com.ibm.sbt.services.client.connections.forums.Recommendation"%>
-<%@page	import="com.ibm.sbt.services.client.connections.forums.RecommendationList"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
@@ -36,9 +35,9 @@
 			try {
 
 				ForumService svc = new ForumService();
-				TopicList forums = svc.getMyForumTopics();
+				EntityList<ForumTopic> forums = svc.getMyForumTopics();
 				ForumTopic topic = (ForumTopic) forums.iterator().next();
-				RecommendationList recommendations = svc.getRecommendations(topic.getTopicUuid());
+				EntityList<Recommendation> recommendations = svc.getRecommendations(topic.getTopicUuid());
 
 				if (recommendations.size() > 0) {
 					out.println("<b>List of users who recommended this thread</b>"+ topic.getRecommendationCount());

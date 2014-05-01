@@ -15,64 +15,62 @@
  */
 package com.ibm.sbt.services.client.connections.activities;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import com.ibm.commons.runtime.util.URLEncoding;
-import com.ibm.commons.util.StringUtil;
-import com.ibm.sbt.services.endpoints.Endpoint;
+import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.base.ConnectionsConstants;
+import com.ibm.sbt.services.client.base.NamedUrlPart;
+import com.ibm.sbt.services.client.base.URLBuilder;
+import com.ibm.sbt.services.client.base.URLContainer;
+import com.ibm.sbt.services.client.base.Version;
+import com.ibm.sbt.services.client.base.VersionedUrl;
 
 /**
  * @author mwallace
  *
  */
-public enum ActivityUrls {
+public enum ActivityUrls implements URLContainer {
 
-	ACTIVITIES_SERVICE("{0}/service/atom2/service"), // Retrieving the Activities service document
-	MY_ACTIVITIES("{0}/service/atom2/activities"), //	Getting the My Activities feed and creating activities
-	COMPLETED_ACTIVITIES("{0}/service/atom2/completed"), // Getting a feed of completed activities
-	ALL_ACTIVITIES("{0}/service/atom2/everything"), //	Getting a feed of all activities
-	TODO_ACTIVITIES("{0}/service/atom2/todos"), //	Getting a feed of entries in the to-do list
-	ACTIVITY_TAGS("{0}/service/atom2/tags"), //	Getting a list of the tags assigned to all activities
-	ACTIVITY_CATEGORIES("{0}/service/atom2/categories"), //	Getting a list of the categories assigned to this activity
-	ACTIVITY_TEMPLATES("{0}/service/atom2/entrytemplates?activityUuid={1}"), //	Retrieves a feed of entry templates
-	THRASHED_ACTIVITIES("{0}/service/atom2/trash"), //	Retrieves a feed of the activities and entries in the trash
-	ACTIVITY("{0}/service/atom2/activity?activityUuid={1}"), // Retrieving an Activity entry and creating an activity node
-	ACTIVITY_NODE("{0}/service/atom2/activitynode?activityNodeUuid={1}"), // Retrieve, update, deleting activity nodes programmatically
-	THRASHED_ACTIVITY_NODE("{0}/service/atom2/trashednode?activityNodeUuid={1}"), // Restoring activity nodes programmatically
-	ACTIVITY_ACL("{0}/service/atom2/acl?activityUuid={1}"), // Adding an activity member programmatically
-	ACTIVITY_MEMBER("{0}/service/atom2/acl?activityUuid={1}&memberid={2}"), //	Retrieve, update and delete an activity member programmatically
-	ACTIVITY_DESCENDANTS("{0}/service/atom2/descendants?nodeUuid={1}"), // Getting a feed of the Activity descendants
+	ACTIVITIES_SERVICE(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/service")), // Retrieving the Activities service document
+	MY_ACTIVITIES(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/activities")), //	Getting the My Activities feed and creating activities
+	COMPLETED_ACTIVITIES(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/completed")), // Getting a feed of completed activities
+	ALL_ACTIVITIES(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/everything")), //	Getting a feed of all activities
+	TODO_ACTIVITIES(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/todos")), //	Getting a feed of entries in the to-do list
+	ACTIVITY_TAGS(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/tags")), //	Getting a list of the tags assigned to all activities
+	ACTIVITY_CATEGORIES(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/categories")), //	Getting a list of the categories assigned to this activity
+	TUNED_OUT_ACTIVITIES(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/tunedout")), // Getting a feed of the tuned out activities
+	ACTIVITY_TEMPLATES(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/entrytemplates?activityUuid={activityUuid}")), //	Retrieves a feed of entry templates
+	THRASHED_ACTIVITIES(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/trash")), //	Retrieves a feed of the activities and entries in the trash
+	ACTIVITY(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/activity?activityUuid={activityUuid}")), // Retrieving an Activity entry and creating an activity node
+	ACTIVITY_NODE(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/activitynode?activityNodeUuid={activityNodeUuid}")), // Retrieve, update, deleting activity nodes programmatically
+	THRASHED_ACTIVITY_NODE(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/trashednode?activityNodeUuid={activityNodeUuid}")), // Restoring activity nodes programmatically
+	ACTIVITY_ACL(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/acl?activityUuid={activityUuid}")), // Adding an activity member programmatically
+	ACTIVITY_MEMBER(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/acl?activityUuid={activityUuid}&memberid={memberId}")), //	Retrieve, update and delete an activity member programmatically
+	ACTIVITY_DESCENDANTS(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/descendants?activityUuid={activityUuid}")), // Getting a feed of the Activity descendants
 	;
 	
-	private String urlPattern;
+	private URLBuilder builder;
 	
-	private ActivityUrls(String urlPattern) {
-		this.urlPattern = urlPattern;
+	static final public NamedUrlPart activityNodePart(String activityNodeUuid) {
+		return new NamedUrlPart("activityNodeUuid", activityNodeUuid);
 	}
 	
-	protected String format(String... args) {
-		return formatPattern(Arrays.asList(args));
+	static final public NamedUrlPart activityPart(String activityUuid) {
+		return new NamedUrlPart("activityUuid", activityUuid);
 	}
 	
-	public String format(Endpoint endpoint, String... args) {
-		List<String> list = new ArrayList<String>(Arrays.asList(args));
-		list.add(0, "activities"); // TODO lookup this value
-		return formatPattern(list);
+	static final public NamedUrlPart memberPart(String memberId) {
+		return new NamedUrlPart("memberId", memberId);
 	}
 	
-	private String formatPattern(List<String> args) {
-		List<String> encoded = new ArrayList<String>();
-		for(String arg : args) {
-			try {
-				encoded.add(URLEncoding.encodeURIString(arg, "UTF-8", 0, false));
-			} catch (IOException e) {
-				throw new RuntimeException(e);
-			}
-		}
-		return StringUtil.format(urlPattern, encoded.toArray());
+	private ActivityUrls(VersionedUrl... urlVersions) {
+		builder = new URLBuilder(urlVersions);
 	}
 	
+	public String format(BaseService service, NamedUrlPart... args) {
+		return builder.format(service, args);
+	}
+
+	public String getPattern(Version version){
+		return builder.getPattern(version).getUrlPattern();
+	}
+
 }

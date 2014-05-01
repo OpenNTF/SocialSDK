@@ -9,8 +9,8 @@
 org.apache.commons.fileupload.disk.DiskFileItemFactory,org.apache.commons.fileupload.servlet.ServletFileUpload"%>
 <%@page	import="org.apache.commons.fileupload.FileUploadBase.InvalidContentTypeException"%>
 <%@page	import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
-<%@page	import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page	import="com.ibm.sbt.services.client.connections.communities.Community"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"	pageEncoding="ISO-8859-1"%>
 
 <html>

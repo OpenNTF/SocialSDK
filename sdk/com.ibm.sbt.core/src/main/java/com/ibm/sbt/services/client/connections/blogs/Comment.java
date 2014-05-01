@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -21,6 +21,7 @@ import org.w3c.dom.Node;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.xpath.XPathExpression;
+import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.connections.blogs.model.BaseBlogEntity;
 import com.ibm.sbt.services.client.connections.blogs.model.BlogXPath;
@@ -62,8 +63,9 @@ public class Comment extends BaseBlogEntity {
 	*
 	* @method getCommentUuid
 	* @return {String} id of the blog post comment
+	* @throws ClientServicesException
 	*/
-	public String getCommentUuid() throws BlogServiceException{
+	public String getCommentUuid() throws ClientServicesException {
 		return super.getUid();
 	}
 	/**
@@ -98,8 +100,9 @@ public class Comment extends BaseBlogEntity {
 	*
 	* @method getTrackbackTitle
 	* @return {String} TrackbackTitle of the Blog post comment
+	* @throws ClientServicesException
 	*/
-	public String getTrackbacktitle() throws BlogServiceException{
+	public String getTrackbacktitle() throws ClientServicesException{
 		return getAsString(BlogXPath.trackbacktitle);
 	}
 	/**
@@ -108,8 +111,9 @@ public class Comment extends BaseBlogEntity {
 	*
 	* @method getInReplyTo
 	* @return {String} Entity Id of the entity in reply to which comment was created
+	* @throws ClientServicesException
 	*/
-	public String getInReplyTo() throws BlogServiceException{
+	public String getInReplyTo() throws ClientServicesException{
 		return getAsString(BlogXPath.inReplyToUrl);
 	}
 

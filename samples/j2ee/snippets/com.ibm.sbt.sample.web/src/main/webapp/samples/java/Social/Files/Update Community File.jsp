@@ -18,15 +18,14 @@
 <%@page import="java.util.Map"%>
 <%@page import="com.ibm.commons.util.StringUtil"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.model.CommunityXPath"%>
-<%@page import="com.ibm.sbt.services.client.connections.files.CommentList"%>
-<%@page import="com.ibm.sbt.services.client.connections.communities.CommunityList"%>
 <%@page import="java.io.ByteArrayOutputStream"%>
 <%@page import="java.io.InputStream"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
+<%@page import="com.ibm.sbt.services.client.connections.communities.Community"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.FileService"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.Comment"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.File"%>
-<%@page import="com.ibm.sbt.services.client.connections.files.FileList"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page import="java.nio.charset.Charset"%>
 <%@page import="java.io.ByteArrayInputStream"%>
 <%@page import="java.io.PrintWriter"%>
@@ -48,7 +47,7 @@
     <%
       try {
         CommunityService commService = new CommunityService();
-		CommunityList communities = commService.getMyCommunities();
+		EntityList<Community> communities = commService.getMyCommunities();
 
 	    if(communities != null && ! communities.isEmpty())  {
 	    	String communityId = communities.get(0).getCommunityUuid();
@@ -59,7 +58,7 @@
             
 	        //update Community File's metadata 
             FileService fileService = new FileService();
-            FileList files = fileService.getCommunityFiles(communityId, null);
+            EntityList<File> files = fileService.getCommunityFiles(communityId, null);
             if(files != null && ! files.isEmpty())  {
             	File fileEntry = files.get(0);
             	String communityLibraryId = fileEntry.getLibraryId(); 

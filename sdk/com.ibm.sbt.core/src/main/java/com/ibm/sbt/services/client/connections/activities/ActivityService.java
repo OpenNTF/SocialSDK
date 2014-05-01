@@ -116,7 +116,7 @@ public class ActivityService extends BaseService {
 	 * @throws ClientServicesException 
 	 */
 	public EntityList<Activity> getMyActivities(Map<String, String> parameters) throws ClientServicesException {
-		String requestUrl = ActivityUrls.MY_ACTIVITIES.format(endpoint);
+		String requestUrl = ActivityUrls.MY_ACTIVITIES.format(this);
 		return getActivityEntityList(requestUrl, parameters);
 	}
 
@@ -136,7 +136,7 @@ public class ActivityService extends BaseService {
 	 * @return
 	 */
 	public EntityList<Activity> getCompletedActivities(Map<String, String> parameters) throws ClientServicesException {
-		String requestUrl = ActivityUrls.COMPLETED_ACTIVITIES.format(endpoint);
+		String requestUrl = ActivityUrls.COMPLETED_ACTIVITIES.format(this);
 		return getActivityEntityList(requestUrl, parameters);
 	}
 
@@ -156,7 +156,7 @@ public class ActivityService extends BaseService {
 	 * @return
 	 */
 	public EntityList<Activity> getAllActivities(Map<String, String> parameters) throws ClientServicesException {
-		String requestUrl = ActivityUrls.ALL_ACTIVITIES.format(endpoint);
+		String requestUrl = ActivityUrls.ALL_ACTIVITIES.format(this);
 		return getActivityEntityList(requestUrl, parameters);
 	}
 
@@ -176,7 +176,7 @@ public class ActivityService extends BaseService {
 	 * @return
 	 */
 	public EntityList<Activity> getToDoActivities(Map<String, String> parameters) throws ClientServicesException {
-		String requestUrl = ActivityUrls.TODO_ACTIVITIES.format(endpoint);
+		String requestUrl = ActivityUrls.TODO_ACTIVITIES.format(this);
 		return getActivityEntityList(requestUrl, parameters);
 	}
 
@@ -196,7 +196,7 @@ public class ActivityService extends BaseService {
 	 * @return
 	 */
 	public EntityList<Tag> getActivityTags(Map<String, String> parameters) throws ClientServicesException {
-		String requestUrl = ActivityUrls.ACTIVITY_TAGS.format(endpoint);
+		String requestUrl = ActivityUrls.ACTIVITY_TAGS.format(this);
 		return getTagEntityList(requestUrl, parameters);
 	}
 	
@@ -214,7 +214,7 @@ public class ActivityService extends BaseService {
 	 * @return
 	 */
 	public EntityList<Category> getActivityCategories(Map<String, String> parameters) throws ClientServicesException {
-		String requestUrl = ActivityUrls.ACTIVITY_CATEGORIES.format(endpoint);
+		String requestUrl = ActivityUrls.ACTIVITY_CATEGORIES.format(this);
 		return getCategoryEntityList(requestUrl, parameters);
 	}
 	
@@ -232,10 +232,32 @@ public class ActivityService extends BaseService {
 	 * @return
 	 */
 	public EntityList<ActivityNode> getActivityNodeDescendants(String activityNodeUuid, Map<String, String> parameters) throws ClientServicesException {
-		String requestUrl = ActivityUrls.ACTIVITY_DESCENDANTS.format(endpoint, activityNodeUuid);
+		String requestUrl = ActivityUrls.ACTIVITY_DESCENDANTS.format(this, ActivityUrls.activityNodePart(activityNodeUuid));
 		return getActivityNodeEntityList(requestUrl, parameters);
 	}
 	
+	/**
+	 * Get a feed of all active activities that the currently authenticated user has tuned out. 
+	 * 
+	 * @return
+	 * @throws ClientServicesException 
+	 */
+	public EntityList<Activity> getTunedOutActivities() throws ClientServicesException {
+		return getTunedOutActivities(null);
+	}
+
+	/**
+	 * Get a feed of all active activities that the currently authenticated user has tuned out. 
+	 * 
+	 * @param parameters
+	 * @return
+	 * @throws ClientServicesException 
+	 */
+	public EntityList<Activity> getTunedOutActivities(Map<String, String> parameters) throws ClientServicesException {
+		String requestUrl = ActivityUrls.TUNED_OUT_ACTIVITIES.format(this);
+		return getActivityEntityList(requestUrl, parameters);
+	}
+
 	//------------------------------------------------------------------------------------------------------------------
 	// Working with activities programmatically.
 	//------------------------------------------------------------------------------------------------------------------
@@ -260,7 +282,7 @@ public class ActivityService extends BaseService {
 	 * @throws ClientServicesException 
 	 */
 	public Activity createActivity(Activity activity, Map<String, String> parameters) throws ClientServicesException {
-		String requestUrl = ActivityUrls.MY_ACTIVITIES.format(endpoint);
+		String requestUrl = ActivityUrls.MY_ACTIVITIES.format(this);
 		return createActivityEntity(requestUrl, activity, parameters);
 	}
 
@@ -288,7 +310,7 @@ public class ActivityService extends BaseService {
 	 * @throws ClientServicesException 
 	 */
 	public Activity getActivity(String activityUuid, Map<String, String> parameters) throws ClientServicesException {
-		String requestUrl = ActivityUrls.ACTIVITY_NODE.format(endpoint, activityUuid);
+		String requestUrl = ActivityUrls.ACTIVITY_NODE.format(this, ActivityUrls.activityNodePart(activityUuid));
 		return getActivityEntity(requestUrl, parameters);
 	}
 	
@@ -318,7 +340,7 @@ public class ActivityService extends BaseService {
 	 * @throws ClientServicesException 
 	 */
 	public void updateActivity(Activity activity, Map<String, String> parameters) throws ClientServicesException {
-		String requestUrl = ActivityUrls.ACTIVITY_NODE.format(endpoint, activity.getActivityUuid());
+		String requestUrl = ActivityUrls.ACTIVITY_NODE.format(this, ActivityUrls.activityNodePart(activity.getActivityUuid()));
 		updateActivityEntity(requestUrl, activity, parameters, HTTPCode.OK);
 	}
 
@@ -344,7 +366,7 @@ public class ActivityService extends BaseService {
 	 * @throws ClientServicesException 
 	 */
 	public String deleteActivity(String activityUuid, Map<String, String> parameters) throws ClientServicesException {
-		String requestUrl = ActivityUrls.ACTIVITY_NODE.format(endpoint, activityUuid);
+		String requestUrl = ActivityUrls.ACTIVITY_NODE.format(this, ActivityUrls.activityNodePart(activityUuid));
 		deleteActivityEntity(requestUrl, activityUuid, parameters);
 		return activityUuid;
 	}
@@ -370,7 +392,7 @@ public class ActivityService extends BaseService {
 	 */
 	public void restoreActivity(Activity activity, Map<String, String> parameters) throws ClientServicesException {
 		activity.setDeleted(false);
-		String requestUrl = ActivityUrls.THRASHED_ACTIVITY_NODE.format(endpoint, activity.getActivityUuid());
+		String requestUrl = ActivityUrls.THRASHED_ACTIVITY_NODE.format(this, ActivityUrls.activityNodePart(activity.getActivityUuid()));
 		updateActivityEntity(requestUrl, activity, parameters, HTTPCode.NO_CONTENT);
 	}
 
@@ -396,7 +418,7 @@ public class ActivityService extends BaseService {
 	 * @throws ClientServicesException 
 	 */
 	public ActivityNode createActivityNode(ActivityNode activityNode, Map<String, String> parameters) throws ClientServicesException {
-		String requestUrl = ActivityUrls.ACTIVITY.format(endpoint, activityNode.getActivityUuid());
+		String requestUrl = ActivityUrls.ACTIVITY.format(this, ActivityUrls.activityPart(activityNode.getActivityUuid()));
 		return createActivityNodeEntity(requestUrl, activityNode, parameters);
 	}
 
@@ -418,7 +440,7 @@ public class ActivityService extends BaseService {
 	 * @throws ClientServicesException 
 	 */
 	public ActivityNode getActivityNode(String activityNodeUuid, Map<String, String> parameters) throws ClientServicesException {
-		String requestUrl = ActivityUrls.ACTIVITY_NODE.format(endpoint, activityNodeUuid);
+		String requestUrl = ActivityUrls.ACTIVITY_NODE.format(this, ActivityUrls.activityNodePart(activityNodeUuid));
 		return getActivityNodeEntity(requestUrl, parameters);
 	}
 	
@@ -440,7 +462,7 @@ public class ActivityService extends BaseService {
 	 * @throws ClientServicesException 
 	 */
 	public void updateActivityNode(ActivityNode activityNode, Map<String, String> parameters) throws ClientServicesException {
-		String requestUrl = ActivityUrls.ACTIVITY_NODE.format(endpoint, activityNode.getActivityNodeUuid());
+		String requestUrl = ActivityUrls.ACTIVITY_NODE.format(this, ActivityUrls.activityNodePart(activityNode.getActivityNodeUuid()));
 		updateActivityNodeEntity(requestUrl, activityNode, parameters, HTTPCode.OK);
 	}
 
@@ -462,7 +484,7 @@ public class ActivityService extends BaseService {
 	 * @throws ClientServicesException 
 	 */
 	public String deleteActivityNode(String activityNodeUuid, Map<String, String> parameters) throws ClientServicesException {
-		String requestUrl = ActivityUrls.ACTIVITY_NODE.format(endpoint, activityNodeUuid);
+		String requestUrl = ActivityUrls.ACTIVITY_NODE.format(this, ActivityUrls.activityNodePart(activityNodeUuid));
 		deleteActivityNodeEntity(requestUrl, activityNodeUuid, parameters);
 		return activityNodeUuid;
 	}
@@ -486,7 +508,7 @@ public class ActivityService extends BaseService {
 	 */
 	public void restoreActivityNode(ActivityNode activityNode, Map<String, String> parameters) throws ClientServicesException {
 		// TODO Remove the <category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="deleted"/> flag element from the entry before restoring it.
-		String requestUrl = ActivityUrls.THRASHED_ACTIVITY_NODE.format(endpoint, activityNode.getActivityNodeUuid());
+		String requestUrl = ActivityUrls.THRASHED_ACTIVITY_NODE.format(this,ActivityUrls.activityNodePart( activityNode.getActivityNodeUuid()));
 		updateActivityNodeEntity(requestUrl, activityNode, parameters, HTTPCode.NO_CONTENT);
 	}
 
@@ -537,7 +559,7 @@ public class ActivityService extends BaseService {
 	 * @return
 	 */
 	public Member addMember(String activityUuid, Member member, Map<String, String> parameters) throws ClientServicesException {
-		String requestUrl = ActivityUrls.ACTIVITY.format(endpoint, activityUuid);
+		String requestUrl = ActivityUrls.ACTIVITY.format(this, ActivityUrls.activityPart(activityUuid));
 		return createMemberEntity(requestUrl, member, parameters);
 	}
 	
@@ -580,7 +602,7 @@ public class ActivityService extends BaseService {
 	 * @return
 	 */
 	public Member getMember(String activityUuid, String memberId, Map<String, String> parameters) throws ClientServicesException {
-		String requestUrl = ActivityUrls.ACTIVITY_MEMBER.format(endpoint, activityUuid, memberId);
+		String requestUrl = ActivityUrls.ACTIVITY_MEMBER.format(this, ActivityUrls.activityPart(activityUuid), ActivityUrls.memberPart(memberId));
 		return getMemberEntity(requestUrl, parameters);
 	}
 	
@@ -627,7 +649,7 @@ public class ActivityService extends BaseService {
 	 * @return
 	 */
 	public Member updateMember(String activityUuid, Member member, Map<String, String> parameters) throws ClientServicesException {
-		String requestUrl = ActivityUrls.ACTIVITY_MEMBER.format(endpoint, activityUuid, member.getId());
+		String requestUrl = ActivityUrls.ACTIVITY_MEMBER.format(this, ActivityUrls.activityPart(activityUuid), ActivityUrls.memberPart(member.getId()));
 		return updateMemberEntity(requestUrl, member, parameters);
 	}
 	
@@ -686,9 +708,32 @@ public class ActivityService extends BaseService {
 	 * @return
 	 */
 	public String deleteMember(String activityUuid, String memberId, Map<String, String> parameters) throws ClientServicesException {
-		String requestUrl = ActivityUrls.ACTIVITY_MEMBER.format(endpoint, activityUuid, memberId);
+		String requestUrl = ActivityUrls.ACTIVITY_MEMBER.format(this, ActivityUrls.activityPart(activityUuid), ActivityUrls.memberPart(memberId));
 		deleteMemberEntity(requestUrl, memberId, parameters);
 		return memberId;
+	}
+	
+	/**
+	 * Change the priority for the specified activity for the currently authenticated user.
+	 * 
+	 * @param activity
+	 * @throws ClientServicesException
+	 */	
+	public void changePriority(Activity activity, int priority) throws ClientServicesException {
+		changePriority(activity.getActivityUuid(), priority);
+	}
+		
+	/**
+	 * Change the priority for the specified activity for the currently authenticated user.
+	 * 
+	 * @param activityUuid
+	 * @throws ClientServicesException
+	 */	
+	public void changePriority(String activityUuid, int priority) throws ClientServicesException {
+		String requestUrl = ActivityUrls.ACTIVITY_NODE.format(this, ActivityUrls.activityPart(activityUuid));
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put("priority", ""+priority);
+		updateActivityEntity(requestUrl, null, parameters, HTTPCode.NO_CONTENT);		
 	}
 		
 	//------------------------------------------------------------------------------------------------------------------
@@ -702,7 +747,7 @@ public class ActivityService extends BaseService {
 	
 	protected Activity getActivityEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
 		try {
-			return getEntity(requestUrl, parameters, getActivityFeedHandler());
+			return getEntity(requestUrl, parameters, getActivityFeedHandler(false));
 		}
 		catch(ClientServicesException e) {
 			throw e;
@@ -732,8 +777,13 @@ public class ActivityService extends BaseService {
 
 	protected void updateActivityEntity(String requestUrl, Activity activity, Map<String, String> parameters, HTTPCode expectedCode) throws ClientServicesException {
 		try {
-			ActivitySerializer serializer = new ActivitySerializer(activity);
-			Response response = putData(requestUrl, parameters, getHeaders(), serializer.generateUpdate(), activity.getActivityUuid());
+			String payload = null;
+			if (activity != null) {
+				ActivitySerializer serializer = new ActivitySerializer(activity);
+				payload = serializer.generateUpdate();
+			}
+			String uniqueId = (activity == null) ? null : activity.getActivityUuid();
+			Response response = putData(requestUrl, parameters, getHeaders(), payload, uniqueId);
 			if (isValidResponse(response, expectedCode)) {
 				return;
 			} else {
@@ -775,7 +825,7 @@ public class ActivityService extends BaseService {
 		
 	protected ActivityNode getActivityNodeEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
 		try {
-			return getEntity(requestUrl, parameters, getActivityNodeFeedHandler());
+			return getEntity(requestUrl, parameters, getActivityNodeFeedHandler(false));
 		}
 		catch(ClientServicesException e) {
 			throw e;
@@ -848,7 +898,7 @@ public class ActivityService extends BaseService {
 		
 	protected Member getMemberEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
 		try {
-			return getEntity(requestUrl, parameters, getMemberFeedHandler());
+			return getEntity(requestUrl, parameters, getMemberFeedHandler(false));
 		}
 		catch(ClientServicesException e) {
 			throw e;
@@ -922,7 +972,7 @@ public class ActivityService extends BaseService {
 		
 	protected EntityList<Activity> getActivityEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
 		try {
-			return (EntityList<Activity>)getEntities(requestUrl, getParameters(parameters), getActivityFeedHandler());
+			return (EntityList<Activity>)getEntities(requestUrl, getParameters(parameters), getActivityFeedHandler(true));
 		} catch (IOException e) {
 			throw new ClientServicesException(e);
 		}
@@ -930,7 +980,7 @@ public class ActivityService extends BaseService {
 	
 	protected EntityList<ActivityNode> getActivityNodeEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
 		try {
-			return (EntityList<ActivityNode>)getEntities(requestUrl, getParameters(parameters), getActivityNodeFeedHandler());
+			return (EntityList<ActivityNode>)getEntities(requestUrl, getParameters(parameters), getActivityNodeFeedHandler(true));
 		} catch (IOException e) {
 			throw new ClientServicesException(e);
 		}
@@ -952,8 +1002,8 @@ public class ActivityService extends BaseService {
 		}
 	}
 	
-	protected IFeedHandler<Activity> getActivityFeedHandler() {
-		return new AtomFeedHandler<Activity>(this) {
+	protected IFeedHandler<Activity> getActivityFeedHandler(boolean isFeed) {
+		return new AtomFeedHandler<Activity>(this, isFeed) {
 			@Override
 			protected Activity entityInstance(BaseService service, Node node, XPathExpression xpath) {
 				return new Activity(service, node, nameSpaceCtx, xpath);
@@ -961,8 +1011,8 @@ public class ActivityService extends BaseService {
 		};
 	}
 		
-	protected IFeedHandler<ActivityNode> getActivityNodeFeedHandler() {
-		return new AtomFeedHandler<ActivityNode>(this) {
+	protected IFeedHandler<ActivityNode> getActivityNodeFeedHandler(boolean isFeed) {
+		return new AtomFeedHandler<ActivityNode>(this, isFeed) {
 			@Override
 			protected ActivityNode entityInstance(BaseService service, Node node, XPathExpression xpath) {
 				return new ActivityNode(service, node, nameSpaceCtx, xpath);
@@ -970,8 +1020,8 @@ public class ActivityService extends BaseService {
 		};
 	}
 		
-	protected IFeedHandler<Member> getMemberFeedHandler() {
-		return new AtomFeedHandler<Member>(this) {
+	protected IFeedHandler<Member> getMemberFeedHandler(boolean isFeed) {
+		return new AtomFeedHandler<Member>(this, isFeed) {
 			@Override
 			protected Member entityInstance(BaseService service, Node node, XPathExpression xpath) {
 				return new Member(service, node, nameSpaceCtx, xpath);

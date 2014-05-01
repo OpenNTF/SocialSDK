@@ -19,7 +19,7 @@
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
-<%@page import="com.ibm.sbt.services.client.connections.forums.ForumList"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page import="java.util.*"%>
 
 				
@@ -37,7 +37,7 @@
 		try {
 			
 			ForumService svc = new ForumService();
-			ForumList forums = svc.getPublicForums();
+			EntityList<Forum> forums = svc.getPublicForums();
 			Forum forum = (Forum)forums.iterator().next();
 			forum = svc.getForum(forum.getForumUuid());
 			String title = forum.getTitle();

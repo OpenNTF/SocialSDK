@@ -20,12 +20,9 @@
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
-<%@page import="com.ibm.sbt.services.client.connections.forums.model.BaseForumEntity"%>
 <%@page import="com.ibm.sbt.services.client.connections.forums.Forum"%>
-<%@page import="com.ibm.sbt.services.client.connections.forums.ForumList"%>
-<%@page import="com.ibm.sbt.services.client.connections.forums.TopicList"%>
-<%@page import="com.ibm.sbt.services.client.connections.forums.ReplyList"%>
 <%@page import="com.ibm.sbt.services.client.connections.forums.ForumReply"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page import="java.util.*"%>
 
 				
@@ -45,12 +42,12 @@
 		try {
 			
 		 	ForumService svc = new ForumService();
-			TopicList topics = svc.getMyForumTopics();
+			EntityList<ForumTopic> topics = svc.getMyForumTopics();
 			if(topics.size()>0){
 				ForumTopic topic = (ForumTopic)topics.iterator().next();
-				ReplyList replies = svc.getForumTopicReplies(topic.getTopicUuid());
+				EntityList<ForumReply> replies = svc.getForumTopicReplies(topic.getTopicUuid());
 				if(replies.size()>0){
-					for (BaseForumEntity reply : replies) {
+					for (ForumReply reply : replies) {
 						out.println("reply title : "+reply.getTitle()+"<br>");
 						out.println("replied on Post with Id : "+((ForumReply)reply).getReplyToPostUuid()+"<br>");
 						out.println("<br><br>");

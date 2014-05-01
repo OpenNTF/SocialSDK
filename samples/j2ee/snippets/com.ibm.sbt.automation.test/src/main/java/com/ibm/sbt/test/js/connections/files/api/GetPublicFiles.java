@@ -1,7 +1,5 @@
 package com.ibm.sbt.test.js.connections.files.api;
 
-import static org.junit.Assert.fail;
-
 import java.util.HashMap;
 import java.util.List;
 
@@ -14,8 +12,8 @@ import org.openqa.selenium.WebElement;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.automation.core.test.connections.BaseFilesTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
+import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.connections.files.File;
-import com.ibm.sbt.services.client.connections.files.FileServiceException;
 
 public class GetPublicFiles extends BaseFilesTest {
 
@@ -33,7 +31,7 @@ public class GetPublicFiles extends BaseFilesTest {
 		addSnippetParam("sample.fileId", fileEntry.getFileId());
 		try {
 			files = fileService.getPublicFiles(new HashMap<String, String>());
-		} catch (FileServiceException e) {
+		} catch (ClientServicesException e) {
 			Assert.fail(e.getMessage());
 			e.printStackTrace();
 		}

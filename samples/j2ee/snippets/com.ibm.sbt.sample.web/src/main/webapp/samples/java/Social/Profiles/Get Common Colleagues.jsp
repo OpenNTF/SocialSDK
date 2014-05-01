@@ -25,7 +25,7 @@
 <%@page import="java.util.Iterator"%>
 <%@page import="com.ibm.sbt.services.client.connections.profiles.ProfileService"%>
 <%@page import="com.ibm.sbt.services.client.connections.profiles.Profile"%>
-<%@page import="com.ibm.sbt.services.client.connections.profiles.ProfileList"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"	pageEncoding="ISO-8859-1"%>
 <html>
 <head>
@@ -43,13 +43,13 @@
 			Map<String, String> params = new HashMap<String, String>();
 			params.put("inclMessage", "true");
 	
-			ProfileList entries = connProfSvc.getCommonColleagues(userId1, userId2);
+			EntityList<Profile> entries = connProfSvc.getCommonColleagues(userId1, userId2);
 		
 			if (entries != null && !entries.isEmpty()) {
 				out.println("<b> User's colleagues </b>");
 				out.println("<br>");
-				for (Iterator iterator = entries.iterator(); iterator.hasNext();) {
-					Profile entry = (Profile) iterator.next();
+				for (Iterator<Profile> iterator = entries.iterator(); iterator.hasNext();) {
+					Profile entry = iterator.next();
 					out.println(entry.getName());
 					out.println("<br>");
 				}

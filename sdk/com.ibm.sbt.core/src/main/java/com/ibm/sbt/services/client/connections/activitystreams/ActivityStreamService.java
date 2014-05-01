@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -26,7 +26,7 @@ import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
-import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.base.ConnectionsService;
 import com.ibm.sbt.services.client.base.NamedUrlPart;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.activitystreams.transformers.ActivityStreamTransformer;
@@ -50,7 +50,8 @@ import com.ibm.sbt.services.endpoints.Endpoint;
  * @see http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=IBM_Connections_Activity_Stream_API&content=pdcontent
  */
 
-public class ActivityStreamService extends BaseService {
+public class ActivityStreamService extends ConnectionsService {
+	private static final long serialVersionUID = -1169787598206507188L;
 	private final ActivityStreamFeedHandler activityStreamFeedHandler = new ActivityStreamFeedHandler(this);
 	// Typical url pattern /activitystream/user/group/application
 

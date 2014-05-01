@@ -67,6 +67,7 @@ import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.AtomFeedHandler;
 import com.ibm.sbt.services.client.base.AuthType;
 import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.base.ConnectionsService;
 import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.NamedUrlPart;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
@@ -98,7 +99,7 @@ import com.ibm.sbt.services.endpoints.Endpoint;
  *      ://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation
  *      #action=openDocument&res_title=Files_API_ic40a&content=pdcontent
  */
-public class FileService extends BaseService {
+public class FileService extends ConnectionsService {
 	
 	private static final long serialVersionUID = 6858863659072208180L;
 	static final String sourceClass = FileService.class.getName();

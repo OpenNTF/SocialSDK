@@ -31,10 +31,9 @@ import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.AtomFeedHandler;
 import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.base.ConnectionsService;
 import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
-import com.ibm.sbt.services.client.connections.profiles.ColleagueConnection;
-import com.ibm.sbt.services.client.connections.profiles.Profile;
 import com.ibm.sbt.services.endpoints.Endpoint;
 
 /**
@@ -44,7 +43,7 @@ import com.ibm.sbt.services.endpoints.Endpoint;
  * @author Vimal Dhupar
  * @see http://www-10.lotus.com/ldd/appdevwiki.nsf/xpAPIViewer.xsp?lookupName=API+Reference#action=openDocument&res_title=Files_CMIS_API_sbar&content=apicontent
  */
-public class CMISFileService extends BaseService {
+public class CMISFileService extends ConnectionsService {
 	
 	/**
 	 * 

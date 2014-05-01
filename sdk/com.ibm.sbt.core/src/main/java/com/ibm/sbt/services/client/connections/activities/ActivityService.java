@@ -1,5 +1,5 @@
 /*
- * Â© Copyright IBM Corp. 2014
+ * © Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,6 +34,7 @@ import com.ibm.sbt.services.client.base.AtomXPath;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.CategoryFeedHandler;
 import com.ibm.sbt.services.client.base.CommonConstants.HTTPCode;
+import com.ibm.sbt.services.client.base.ConnectionsService;
 import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.connections.activities.serializers.ActivityNodeSerializer;
@@ -53,7 +54,7 @@ import com.ibm.sbt.services.endpoints.Endpoint;
  * @author mwallace
  *
  */
-public class ActivityService extends BaseService {
+public class ActivityService extends ConnectionsService {
 	
 	
 	private static final long serialVersionUID = 1L;

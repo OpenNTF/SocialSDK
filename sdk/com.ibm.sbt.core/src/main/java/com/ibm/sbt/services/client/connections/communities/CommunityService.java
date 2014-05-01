@@ -824,7 +824,7 @@ public class CommunityService extends ConnectionsService {
 
 	protected Community getCommunityEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
 		try {
-			return getEntity(requestUrl, getParameters(parameters), getCommunityFeedHandler());
+			return getEntity(requestUrl, parameters, getCommunityFeedHandler());
 		} catch (IOException e) {
 			throw new ClientServicesException(e);
 		}
@@ -832,7 +832,7 @@ public class CommunityService extends ConnectionsService {
 
 	protected Member getMemberEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
 		try {
-			return getEntity(requestUrl, getParameters(parameters), getMemberFeedHandler());
+			return getEntity(requestUrl, parameters, getMemberFeedHandler());
 		} catch (IOException e) {
 			throw new ClientServicesException(e);
 		}
@@ -840,7 +840,7 @@ public class CommunityService extends ConnectionsService {
 
 	protected Invite getInviteEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
 		try {
-			return getEntity(requestUrl, getParameters(parameters), getInviteFeedHandler());
+			return getEntity(requestUrl, parameters, getInviteFeedHandler());
 		} catch (IOException e) {
 			throw new ClientServicesException(e);
 		}
@@ -848,7 +848,7 @@ public class CommunityService extends ConnectionsService {
 
 	protected EntityList<Community> getCommunityEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
 		try {
-			return getEntities(requestUrl, getParameters(parameters), getCommunityFeedHandler());
+			return getEntities(requestUrl, parameters, getCommunityFeedHandler());
 		} catch (IOException e) {
 			throw new ClientServicesException(e);
 		}
@@ -856,7 +856,7 @@ public class CommunityService extends ConnectionsService {
 
 	protected EntityList<Member> getMemberEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
 		try {
-			return getEntities(requestUrl, getParameters(parameters), getMemberFeedHandler());
+			return getEntities(requestUrl, parameters, getMemberFeedHandler());
 		} catch (IOException e) {
 			throw new ClientServicesException(e);
 		}
@@ -864,7 +864,7 @@ public class CommunityService extends ConnectionsService {
 
 	protected EntityList<Invite> getInviteEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
 		try {
-			return getEntities(requestUrl, getParameters(parameters), getInviteFeedHandler());
+			return getEntities(requestUrl, parameters, getInviteFeedHandler());
 		} catch (IOException e) {
 			throw new ClientServicesException(e);
 		}

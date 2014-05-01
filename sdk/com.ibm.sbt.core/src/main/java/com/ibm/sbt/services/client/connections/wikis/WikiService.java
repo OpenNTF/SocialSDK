@@ -383,7 +383,7 @@ public class WikiService extends ConnectionsService {
 	private EntityList<Wiki> getWikiEntityList(String requestUrl, 
 			Map<String, String> parameters) throws ClientServicesException {
 		try {
-			return (EntityList<Wiki>)getEntities(requestUrl, getParameters(parameters), 
+			return (EntityList<Wiki>)getEntities(requestUrl, parameters, 
 					getWikiFeedHandler());
 		} catch (IOException e) {
 			throw new ClientServicesException(e);
@@ -403,7 +403,7 @@ public class WikiService extends ConnectionsService {
 			Map<String, String> parameters) throws ClientServicesException {
 		try {
 			return (EntityList<WikiPage>)getEntities(requestUrl, 
-					getParameters(parameters), getWikiPageFeedHandler());
+					parameters, getWikiPageFeedHandler());
 		} catch (IOException e) {
 			throw new ClientServicesException(e);
 		}

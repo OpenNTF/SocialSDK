@@ -22,9 +22,11 @@ import java.util.Date;
 import org.w3c.dom.Node;
 
 import com.ibm.commons.util.StringUtil;
+import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.base.AtomEntity;
 import com.ibm.sbt.services.client.base.AtomXPath;
+import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.connections.cmisfiles.model.CMISAuthor;
 import com.ibm.sbt.services.client.connections.cmisfiles.model.CMISFileXPath;
@@ -61,6 +63,18 @@ public class CMISFile extends AtomEntity {
         super(svc, dh);
     }
     
+    
+    /**
+     * 
+     * @param service
+     * @param node
+     * @param namespaceCtx
+     * @param xpathExpression
+     */
+	public CMISFile(BaseService service, Node node, NamespaceContext namespaceCtx, 
+			XPathExpression xpathExpression) {
+		super(service, node, namespaceCtx, xpathExpression);
+	}
 	/**
 	 * Method to get the FileId of the File
 	 * @return String 

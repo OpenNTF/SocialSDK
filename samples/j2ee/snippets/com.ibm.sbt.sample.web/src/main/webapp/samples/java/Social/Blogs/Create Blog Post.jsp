@@ -14,9 +14,9 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page
 	import="com.ibm.sbt.services.client.connections.blogs.BlogService"%>
-<%@page import="com.ibm.sbt.services.client.connections.blogs.BlogList"%>
 <%@page import="com.ibm.sbt.services.client.connections.blogs.Blog"%>
 <%@page import="com.ibm.sbt.services.client.connections.blogs.BlogPost"%>
 <%@page import="java.util.Collection"%>
@@ -39,7 +39,7 @@
 		<%
 	try {
 			BlogService service = new BlogService();
-			BlogList blogs = service.getMyBlogs();
+			EntityList<Blog> blogs = service.getMyBlogs();
 			if(blogs.size()>0){
 				String blogHandle = ((Blog)blogs.get(0)).getHandle();
 				BlogPost post = new BlogPost(service, "");

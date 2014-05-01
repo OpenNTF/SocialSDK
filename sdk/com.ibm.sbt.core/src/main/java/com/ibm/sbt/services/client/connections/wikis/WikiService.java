@@ -32,6 +32,7 @@ import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.AtomFeedHandler;
 import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.base.ConnectionsService;
 import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.connections.wikis.serializers.WikiPageSerializer;
@@ -43,7 +44,7 @@ import com.ibm.sbt.services.endpoints.Endpoint;
  * @author Carlos Manias
  *
  */
-public class WikiService extends BaseService {
+public class WikiService extends ConnectionsService {
 	
 	private static final long serialVersionUID = -1677227570229926652L;
 

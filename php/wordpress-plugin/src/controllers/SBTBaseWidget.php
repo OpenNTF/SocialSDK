@@ -59,7 +59,7 @@ class SBTBaseWidget extends WP_Widget {
 			$this->endpoint = "connections";
 		}
 		
-		if (!$this->_isUserLoggedIn()) {
+		if (!$this->_isUserLoggedIn() && $settings->requireSignOn($this->endpoint)) {
 			
 			echo '<div class="widget-area" style="width: 100%;"><aside class="widget widget_recent_entries"><h3 class="widget-title">' . $this->widget_name . '</h3>';
 			echo '' . $GLOBALS[LANG]['must_login'] . '</aside></div>';

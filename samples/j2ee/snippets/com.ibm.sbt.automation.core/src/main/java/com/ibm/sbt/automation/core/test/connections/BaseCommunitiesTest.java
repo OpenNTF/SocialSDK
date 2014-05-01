@@ -39,13 +39,8 @@ import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.connections.communities.Community;
 import com.ibm.sbt.services.client.connections.communities.CommunityService;
-import com.ibm.sbt.services.client.connections.communities.CommunityServiceException;
 import com.ibm.sbt.services.client.connections.communities.Invite;
 import com.ibm.sbt.services.client.connections.communities.Member;
-import com.ibm.sbt.services.client.connections.forums.ForumServiceException;
-import com.ibm.sbt.services.client.connections.forums.ForumTopic;
-import com.ibm.sbt.services.client.connections.forums.model.BaseForumEntity;
-import com.ibm.sbt.services.client.connections.forums.transformers.BaseForumTransformer;
 
 
 
@@ -59,7 +54,7 @@ public class BaseCommunitiesTest extends FlexibleTest {
     protected boolean createCommunity = true;
     protected CommunityService communityService;
     protected Community community;
-    protected BaseForumEntity forum;
+    protected Member member;
     
     protected String CommunityEventEntry =
     		"<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
@@ -83,8 +78,8 @@ public class BaseCommunitiesTest extends FlexibleTest {
         	//System.out.println(name);
             community = createCommunity(name, type, name, "tag1,tag2,tag3");
             try {
-				forum = community.getForums().get(0);
-			} catch (CommunityServiceException e) {
+				member = community.getMembers().get(0);
+			} catch (ClientServicesException e) {
 				e.printStackTrace();
 			}
     }
@@ -138,7 +133,7 @@ public class BaseCommunitiesTest extends FlexibleTest {
     		invite.setCommunityUuid(community.getCommunityUuid());
     		invite.setUserid(userid);
     		return communityService.createInvite(invite);
-    	} catch (CommunityServiceException cse) {
+    	} catch (ClientServicesException cse) {
     		fail("Error creating invite",cse);
     	}
     	return null;
@@ -207,7 +202,7 @@ public class BaseCommunitiesTest extends FlexibleTest {
             	Trace.log("Last created community: "+c.getTitle());
             	Trace.log("Last created community: "+c.getPublished());
             }
-        } catch (CommunityServiceException cse) {
+        } catch (ClientServicesException cse) {
             fail("Error getting last created community", cse);
         } 
         
@@ -226,7 +221,7 @@ public class BaseCommunitiesTest extends FlexibleTest {
             CommunityService communityService = getCommunityService();
             community = communityService.getCommunity(communityUuid);
             Trace.log("Got community: "+community.getCommunityUuid());
-        } catch (CommunityServiceException cse) {
+        } catch (ClientServicesException cse) {
         	if (failOnCse) {
         		fail("Error retrieving community", cse);
         	}
@@ -255,7 +250,7 @@ public class BaseCommunitiesTest extends FlexibleTest {
             long duration = System.currentTimeMillis() - start;
             Trace.log("Created test community: "+communityUuid + " took "+duration+"(ms)");
         }
-        catch (CommunityServiceException cse) {
+        catch (ClientServicesException cse) {
         	// TODO remove this when we upgrade the QSI
         	Throwable t = cse.getCause();
         	if (t instanceof ClientServicesException) {
@@ -277,7 +272,7 @@ public class BaseCommunitiesTest extends FlexibleTest {
             
                 CommunityService communityService = getCommunityService();
                 communityService.deleteCommunity(community.getCommunityUuid());
-            } catch (CommunityServiceException cse) {
+            } catch (ClientServicesException cse) {
                 community = null;
             	// check if community delete failed because
             	// community was already deleted
@@ -301,7 +296,7 @@ public class BaseCommunitiesTest extends FlexibleTest {
             	
                 CommunityService communityService = getCommunityService();
                 communityService.deleteCommunity(communityId);
-            } catch (CommunityServiceException cse) {
+            } catch (ClientServicesException cse) {
                 fail("Error deleting community "+communityId, cse);
             }
         }
@@ -316,7 +311,7 @@ public class BaseCommunitiesTest extends FlexibleTest {
             Assert.assertTrue("Unable to add member: "+id, added);
             Trace.log("Added member: "+id);
             return added;
-        } catch (CommunityServiceException cse) {
+        } catch (ClientServicesException cse) {
             fail("Error adding member", cse);
         } 
         return false;
@@ -332,45 +327,13 @@ public class BaseCommunitiesTest extends FlexibleTest {
                     return true;
                 }
             }
-        } catch (CommunityServiceException cse) {
+        } catch (ClientServicesException cse) {
             fail("Error getting members", cse);
         } 
         return false;
-    }
+    }   
     
-	protected ForumTopic createForumTopic(Community community, ForumTopic topic) throws ForumServiceException {
-		if (null == topic){
-			throw new ForumServiceException(null,"Topic object passed was null");
-		}
-		Response result = null;
-		try {
-			CommunityService communityService = getCommunityService();
-			EntityList<ForumTopic> topicList = communityService.getForumTopics(community.getCommunityUuid());
-						
-			String forumUuid = "";
-			
-			BaseForumTransformer transformer = new BaseForumTransformer(topic);
-			Object 	payload = transformer.transform(topic.getFieldsMap());
-			
-			Map<String, String> params = new HashMap<String, String>();
-			params.put("communityUuid", community.getCommunityUuid());
-			
-			Map<String, String> headers = new HashMap<String, String>();
-			headers.put("Content-Type", "application/atom+xml");
-			
-			//String url = resolveUrl(ForumType.TOPICS,null,params);
-			//result = createData(url, null, headers,payload);
-			//topic = (ForumTopic) new TopicsFeedHandler(this).createEntity(result);
-
-		} catch (Exception e) {
-			throw new ForumServiceException(e, "error creating forum");
-		}
-
-        return topic;
-	}
-    
-    
-    protected void fail(String message, CommunityServiceException cse) {
+    protected void fail(String message, ClientServicesException cse) {
     	String failure = message;
     	
     	Throwable cause = cse.getCause();

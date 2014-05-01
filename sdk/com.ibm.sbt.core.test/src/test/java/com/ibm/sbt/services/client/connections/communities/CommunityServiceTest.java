@@ -1,5 +1,5 @@
 /*
- * Â© Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -18,15 +18,11 @@ package com.ibm.sbt.services.client.connections.communities;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
 
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
-import com.ibm.sbt.services.BaseUnitTest;
-import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.test.lib.TestEnvironment;
 
@@ -38,27 +34,7 @@ import com.ibm.sbt.test.lib.TestEnvironment;
  * @date Dec 12, 2012
  */
 
-public class CommunityServiceTest extends BaseUnitTest {
-
-	private Community community;
-	private CommunityService communityService;
-
-	@Before
-	public void createTestData() throws Exception {
-		if (communityService==null){
-			communityService = new CommunityService();
-		}
-		community = new Community(communityService, "");
-		community.setTitle("JavaTestCommunity " + System.currentTimeMillis());
-		community.setContent("Java Community Content");
-		String type = "public";
-		if (TestEnvironment.isSmartCloudEnvironment()) {
-			type = "private";
-		}
-		community.setCommunityType(type);
-		community = community.save();
-		community = community.load();
-	}
+public class CommunityServiceTest extends BaseCommunityServiceTest {
 
 	@Test
 	public final void testGetCommunityById() throws Exception {
@@ -96,27 +72,6 @@ public class CommunityServiceTest extends BaseUnitTest {
 		}
 		communityService.removeMember(community.getCommunityUuid(),
 				id);
-	}
-
-	@Test
-	public final void testDeleteCommunity() throws Exception {
-		try {
-			communityService.deleteCommunity(community.getCommunityUuid());
-
-			community = communityService.getCommunity(properties
-					.getProperty("communityUuid"));
-		} catch (CommunityServiceException e) {
-			if (e.getCause() instanceof ClientServicesException) {
-				assertEquals(404,
-						((ClientServicesException) e.getCause())
-								.getResponseStatusCode());
-				this.community = null;
-				return;
-			} else {
-				throw e;
-			}
-		}
-		fail("Community found");
 	}
 
 	@After

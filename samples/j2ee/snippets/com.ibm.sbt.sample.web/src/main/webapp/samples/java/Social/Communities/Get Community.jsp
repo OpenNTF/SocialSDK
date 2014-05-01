@@ -38,7 +38,7 @@
 			CommunityService svc = new CommunityService();
 			EntityList<Community> communities = svc.getPublicCommunities();
 			Community community = communities.iterator().next();
-		
+			
 			community = svc.getCommunity(community.getCommunityUuid());
 			String title = community.getTitle();
 			out.println("<b>Title is: </b>" + title);

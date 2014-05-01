@@ -29,7 +29,6 @@ import com.ibm.sbt.services.BaseUnitTest;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.connections.communities.CommunityService;
-import com.ibm.sbt.services.client.connections.communities.CommunityServiceException;
 import com.ibm.sbt.services.endpoints.BasicEndpoint;
 import com.ibm.sbt.services.endpoints.ConnectionsBasicEndpoint;
 
@@ -151,7 +150,7 @@ public class FileUpdateTest extends BaseUnitTest {
 	
 	// Internals
 	
-	private String createCommunity(String baseName, String type) throws CommunityServiceException {
+	private String createCommunity(String baseName, String type) throws ClientServicesException {
 		String title = baseName + System.currentTimeMillis();
 		String content = baseName + " content";
 

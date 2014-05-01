@@ -34,7 +34,7 @@ public enum ActivityXPath implements FieldEntry {
 	themeId("./snx:themeId"),
 	duedate("./snx:duedate"),
 	communityUuid("./snx:communityUuid"),
-	priority("./a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/priority']"),
+	priority("./a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/priority']/@term"),
 	defaultView("./a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/default-view']/@term"),
 	deleted("./a:category[@term='deleted']"),
 	external("./a:category[@term='external']"),

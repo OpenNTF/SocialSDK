@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -25,7 +25,9 @@ import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.DOMUtil;
 import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.xpath.XPathExpression;
+import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.connections.blogs.model.BaseBlogEntity;
 import com.ibm.sbt.services.client.connections.blogs.model.BlogXPath;
 
@@ -151,15 +153,15 @@ public class BlogPost extends BaseBlogEntity {
 	 * 
 	 * @method save
 	 * @param blogHandle
+	 * @throws ClientServicesException
 	 */
-	public BlogPost save() throws BlogServiceException {
+	public BlogPost save() throws ClientServicesException {
 		if (StringUtil.isEmpty(getPostUuid())) {
 			return getService().createBlogPost(this,
 					getAsString(BlogXPath.handle));
 		} else {
 			return getService().updateBlogPost(this, getBlogHandle());
 		}
-
 	}
 
 	/**
@@ -170,8 +172,9 @@ public class BlogPost extends BaseBlogEntity {
 	 * @method load
 	 * @param blogHandle
 	 * @param postUuid
+	 * @throws ClientServicesException
 	 */
-	public BlogPost load() throws BlogServiceException {
+	public BlogPost load() throws ClientServicesException {
 		return getService().getBlogPost(getBlogHandle(), getPostUuid());
 	}
 
@@ -180,16 +183,17 @@ public class BlogPost extends BaseBlogEntity {
 	 * 
 	 * @throws BlogServiceException
 	 */
-	public void remove() throws BlogServiceException {
+	public void remove() throws ClientServicesException {
 		getService().removeBlogPost(getPostUuid(), getBlogHandle());
 	}
 	
 	/**
 	 * This method returns a list of the comments associated with this blog post.
 	 * 
-	 * @return
+	 * @return EntityList<Comment>
+	 * @throws ClientServicesException
 	 */
-	public CommentList getComments() throws BlogServiceException {
+	public EntityList<Comment> getComments() throws ClientServicesException {
 		return getComments(null);
 	}
 	
@@ -197,9 +201,10 @@ public class BlogPost extends BaseBlogEntity {
 	 * This method returns a list of the comments associated with this blog post.
 	 * 
 	 * @param parameters
-	 * @return
+	 * @return EntityList<Comment>
+	 * @throws ClientServicesException
 	 */
-	public CommentList getComments(Map<String, String> parameters) throws BlogServiceException {
+	public EntityList<Comment> getComments(Map<String, String> parameters) throws ClientServicesException {
 		String blogHandle = getBlogHandle();
 		String entryAnchor = getEntryAnchor();
 		return getService().getEntryComments(blogHandle, entryAnchor, parameters);

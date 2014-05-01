@@ -16,18 +16,14 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%@page
 	import="com.ibm.sbt.services.client.connections.forums.ForumService"%>
-<%@page
-	import="com.ibm.sbt.services.client.connections.forums.model.BaseForumEntity"%>
-<%@page
-	import="com.ibm.sbt.services.client.connections.forums.TopicList"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page import="com.ibm.sbt.services.client.connections.forums.Forum"%>
+<%@page import="com.ibm.sbt.services.client.connections.forums.ForumTopic"%>
 <%@page
 	import="com.ibm.sbt.services.client.connections.common.Person"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
-<%@page
-	import="com.ibm.sbt.services.client.connections.forums.ForumList"%>
 <%@page import="java.util.*"%>
 
 
@@ -47,11 +43,11 @@
 			try {
 
 				ForumService svc = new ForumService();
-				ForumList forums = svc.getPublicForums();
+				EntityList<Forum> forums = svc.getPublicForums();
 				Forum forum = (Forum) forums.iterator().next();
-				TopicList topics = svc.getForumTopics(forum.getForumUuid());
+				EntityList<ForumTopic> topics = svc.getForumTopics(forum.getForumUuid());
 				if (topics.size() > 0) {
-					for (BaseForumEntity entry : topics) {
+					for (ForumTopic entry : topics) {
 						Person author = entry.getAuthor();
 						out.println("uid of forum :" + entry.getUid() + "<br>");
 						out.println("date published :" + entry.getPublished() + "<br>");

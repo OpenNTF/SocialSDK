@@ -20,10 +20,10 @@
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.sbt.services.client.connections.activitystreams.model.Reply"%>
 <%@page import="com.ibm.sbt.services.client.connections.activitystreams.ActivityStreamEntity"%>
-<%@page import="com.ibm.sbt.services.client.connections.activitystreams.ActivityStreamEntityList"%>
 <%@page import="com.ibm.sbt.services.client.connections.activitystreams.ActivityStreamService"%>
-<%@page import="com.ibm.sbt.services.client.connections.communities.CommunityList"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
+<%@page import="com.ibm.sbt.services.client.connections.communities.Community"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Iterator"%>
 <html>
@@ -41,13 +41,13 @@
 
 		// Fetch list of my communities, we need to community uuid for making call in ActivityStreamService.
 		CommunityService comService = new CommunityService();
-		CommunityList listOfCommunities = comService.getMyCommunities();
+		EntityList<Community> listOfCommunities = comService.getMyCommunities();
 		if(listOfCommunities.size()<=0){
 			out.println("You are not owner of any community");
 		}else{
 		
 			ActivityStreamService _service = new ActivityStreamService();
-			ActivityStreamEntityList _entries = _service.getUpdatesFromCommunity(listOfCommunities.get(0).getCommunityUuid());
+			EntityList<ActivityStreamEntity> _entries = _service.getUpdatesFromCommunity(listOfCommunities.get(0).getCommunityUuid());
 
 			if (_entries.size() <= 0){
 				out.println("No updates to be displayed");

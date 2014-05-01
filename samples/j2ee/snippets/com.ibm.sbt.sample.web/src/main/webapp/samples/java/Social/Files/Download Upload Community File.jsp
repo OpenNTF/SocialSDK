@@ -16,15 +16,15 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%@page import="com.ibm.sbt.services.client.connections.files.FileService"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.File"%>
+<%@page import="com.ibm.sbt.services.client.connections.communities.Community"%>
 <%@page import="com.ibm.commons.util.io.StreamUtil"%>
 <%@page import="java.io.ByteArrayInputStream"%>
 <%@page import="java.io.InputStream"%>
 <%@page import="java.io.ByteArrayOutputStream"%>
 <%@page import="java.io.FileOutputStream"%>
 <%@page import="java.io.OutputStream"%>
-<%@page import="com.ibm.sbt.services.client.connections.files.FileList"%>
-<%@page import="com.ibm.sbt.services.client.connections.communities.CommunityList"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page import="com.ibm.commons.util.StringUtil"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
@@ -43,11 +43,11 @@
     try {
 	    CommunityService service = new CommunityService();
 	    FileService serviceFS = new FileService();
-	    CommunityList communities = service.getMyCommunities();
+	    EntityList<Community> communities = service.getMyCommunities();
 	    String communityId = "";
 	    if(communities != null && ! communities.isEmpty())  {
 	    	communityId = communities.get(0).getCommunityUuid();
-		    FileList list = serviceFS.getCommunityFiles(communityId, null);
+		    EntityList<File> list = serviceFS.getCommunityFiles(communityId, null);
 		    String fileId = "";
 		    if(list != null && ! list.isEmpty()) {
 		    	fileId = list.get(0).getFileId();

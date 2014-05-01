@@ -14,11 +14,10 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<%@page import="com.ibm.sbt.services.client.connections.files.CommentList"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.FileService"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.Comment"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.File"%>
-<%@page import="com.ibm.sbt.services.client.connections.files.FileList"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Map"%>
@@ -40,9 +39,9 @@
 	<%
 		try {
 			        FileService fileService = new FileService();
-			        FileList fileEntries = fileService.getMyFiles();
+			        EntityList<File> fileEntries = fileService.getMyFiles();
 			        File fileEntry = fileEntries.get(0);
-			        CommentList commentEntries = fileService.getAllFileComments(fileEntry.getFileId(), null);
+			        EntityList<Comment> commentEntries = fileService.getAllFileComments(fileEntry.getFileId(), null);
 			        if (commentEntries != null && !commentEntries.isEmpty()) {
 			            for (Comment commentEntry : commentEntries) {
 			                out.println("Comment Id	: " + commentEntry.getCommentId() + " , ");

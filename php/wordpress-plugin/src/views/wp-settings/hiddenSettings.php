@@ -56,7 +56,7 @@ print '<script type="text/javascript" src="' . plugins_url(PLUGIN_NAME) . '/view
 				<?php echo $GLOBALS[LANG]['server_type'];?>
 			</td>
 			<td>
-				<select onchange="new_server_type_change();" id="new_server_type" name="new_server_type">
+				<select onchange="ibm_sbt_new_server_type_change();" id="new_server_type" name="new_server_type">
 					<option value="choose"><?php echo $GLOBALS[LANG]['choose']; ?></option>
 					<option value="connections"><?php echo $GLOBALS[LANG]['ibm_connections']; ?></option>
 					<option value="smartcloud"><?php echo $GLOBALS[LANG]['ibm_smartcloud']; ?></option>
@@ -82,6 +82,14 @@ print '<script type="text/javascript" src="' . plugins_url(PLUGIN_NAME) . '/view
 			</td>
 			<td>
 				<input size="50" type="text" id="new_endpoint_name" name="new_endpoint_name" value="" />
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 200px;">
+				<?php echo $GLOBALS[LANG]['require_sign_on'];?>
+			</td>
+			<td>
+				<input type="checkbox" id="new_require_sign_on" name="new_require_sign_on" value="require_sign_on" />
 			</td>
 		</tr>
 		<tr>

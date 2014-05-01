@@ -18,8 +18,8 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 
 <%@page import="com.ibm.sbt.services.client.connections.forums.ForumService"%>
-<%@page import="com.ibm.sbt.services.client.connections.forums.model.BaseForumEntity"%>
-<%@page import="com.ibm.sbt.services.client.connections.forums.TopicList"%>
+<%@page import="com.ibm.sbt.services.client.connections.forums.ForumTopic"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page import="com.ibm.sbt.services.client.connections.common.Person"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.sbt.services.client.connections.activitystreams.model.Reply"%>
@@ -37,12 +37,12 @@
 	<%
 		try {
 			ForumService _service = new ForumService();
-			TopicList _entries = (TopicList)_service.getMyForumTopics();
+			EntityList<ForumTopic> _entries = _service.getMyForumTopics();
 
 			if (_entries.size() <= 0)
 				out.println("No updates to be displayed");
 
-			for (BaseForumEntity entry : _entries) {
+			for (ForumTopic entry : _entries) {
 				Person author = entry.getAuthor();
 				out.println("uid of forum :"+entry.getUid()+"<br>");
 				out.println("date published :"+entry.getPublished()+"<br>");

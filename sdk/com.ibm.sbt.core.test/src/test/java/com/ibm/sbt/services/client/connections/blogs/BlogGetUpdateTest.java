@@ -23,6 +23,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.ibm.sbt.services.client.ClientServicesException;
+
 /**
  * @author Swati Singh
  *
@@ -30,12 +32,12 @@ import org.junit.Test;
 public class BlogGetUpdateTest extends BaseBlogServiceTest {
 
 	@Before
-	public void initBlog() throws BlogServiceException {
+	public void initBlog() throws ClientServicesException {
 		blog = createBlog();
 	}
 
 	@Test
-	public void GetBlog() throws BlogServiceException {
+	public void GetBlog() throws ClientServicesException {
 		Blog blogGot = blogService.getBlog(blog.getBlogUuid());
 
 		assertEquals(blog.getTitle(), blogGot.getTitle());
@@ -43,7 +45,7 @@ public class BlogGetUpdateTest extends BaseBlogServiceTest {
 	}
 
 	@Test
-	public void UpdateBlog() throws BlogServiceException {
+	public void UpdateBlog() throws ClientServicesException {
 		blog.setTitle("New title " + System.currentTimeMillis());
 		blog.setSummary("New Summary " + System.currentTimeMillis());
 		blogService.updateBlog(blog);
@@ -53,7 +55,7 @@ public class BlogGetUpdateTest extends BaseBlogServiceTest {
 	}
 
 	@After
-	public void deleteBlogOnExit() throws BlogServiceException {
+	public void deleteBlogOnExit() throws ClientServicesException {
 		deleteBlog(blog);
 	}
 }

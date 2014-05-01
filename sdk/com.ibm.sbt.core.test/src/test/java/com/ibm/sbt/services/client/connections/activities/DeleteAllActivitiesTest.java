@@ -31,7 +31,7 @@ import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 public class DeleteAllActivitiesTest extends BaseActivityServiceTest {
 
 	@Test
-	public void testPublicActivity() throws ClientServicesException, XMLException {
+	public void deleteAllActivities() throws ClientServicesException, XMLException {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("ps", "200");
 		EntityList<Activity> activities = activityService.getMyActivities(params);

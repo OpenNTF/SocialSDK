@@ -47,7 +47,6 @@ import com.ibm.sbt.services.client.connections.communities.transformers.InviteTr
 import com.ibm.sbt.services.client.connections.communities.util.Messages;
 import com.ibm.sbt.services.client.connections.files.File;
 import com.ibm.sbt.services.client.connections.files.FileService;
-import com.ibm.sbt.services.client.connections.files.FileServiceException;
 import com.ibm.sbt.services.endpoints.Endpoint;
 
 /**
@@ -774,7 +773,7 @@ public class CommunityService extends BaseService {
 		FileService fileService = new FileService(this.endpoint);
 		try {
 			return fileService.getCommunityFiles(communityId, params);
-		} catch (FileServiceException e) {
+		} catch (ClientServicesException e) {
 			throw new ClientServicesException(e);
 		}
 	}
@@ -792,7 +791,7 @@ public class CommunityService extends BaseService {
 		FileService svc = new FileService(this.endpoint);
 		try {
 			return svc.downloadCommunityFile(ostream, fileId, libraryId, params);
-		} catch (FileServiceException e) {
+		} catch (ClientServicesException e) {
 			throw new ClientServicesException(e, Messages.DownloadCommunitiesException);
 		} 
 	}
@@ -809,7 +808,7 @@ public class CommunityService extends BaseService {
 		FileService svc = new FileService(this.endpoint);
 		try {
 			return svc.uploadCommunityFile(iStream, communityId, title, length);
-		} catch (FileServiceException e) {
+		} catch (ClientServicesException e) {
 			throw new ClientServicesException(e, Messages.UploadCommunitiesException);
 		}
 	}

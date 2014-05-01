@@ -16,14 +16,12 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%@page import="com.ibm.sbt.services.client.connections.forums.ForumReply"%>
 <%@page import="com.ibm.sbt.services.client.connections.forums.ForumService"%>
-<%@page import="com.ibm.sbt.services.client.connections.forums.ForumList"%>
 <%@page import="com.ibm.sbt.services.client.connections.forums.Forum"%>
 <%@page import="java.util.Collection"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
 <%@page import="com.ibm.sbt.services.client.connections.forums.ForumTopic"%>
-<%@page import="com.ibm.sbt.services.client.connections.forums.TopicList"%>
-<%@page import="com.ibm.sbt.services.client.connections.forums.ReplyList"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
@@ -43,10 +41,10 @@
 	try {
 		ForumService service = new ForumService();
 		
-		TopicList topics = service.getMyForumTopics();
+		EntityList<ForumTopic> topics = service.getMyForumTopics();
 		if(topics.size()>0){
 			String topicId = topics.get(0).getUid();
-			ReplyList replies = service.getForumTopicReplies(topicId);
+			EntityList<ForumReply> replies = service.getForumTopicReplies(topicId);
 			if(replies.size()>0){
 				ForumReply reply = (ForumReply)replies.iterator().next();
 				reply.setTopicUuid(topicId);

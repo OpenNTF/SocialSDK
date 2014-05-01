@@ -19,7 +19,7 @@
 <%@page import="com.ibm.commons.runtime.Context"%>
 <%@page import="com.ibm.sbt.services.client.connections.bookmarks.BookmarkService"%>
 <%@page import="com.ibm.sbt.services.client.connections.bookmarks.Bookmark"%>
-<%@page import="com.ibm.sbt.services.client.connections.bookmarks.BookmarkList"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList" %>
 <%@page import="java.util.*"%>
 
 				
@@ -40,7 +40,7 @@
 			BookmarkService svc = new BookmarkService();
 			Map<String, String> parameters = new HashMap<String, String>();
 			parameters.put("ps", "5");
-			BookmarkList bookmarks = svc.getPopularBookmarks(parameters);
+			EntityList<Bookmark> bookmarks = svc.getPopularBookmarks(parameters);
 			out.println("<br>Listing my bookmarks , Total bookmarks found : "+bookmarks.getTotalResults());
 			out.println("<br>");
 			for (Bookmark bookmark : bookmarks) {

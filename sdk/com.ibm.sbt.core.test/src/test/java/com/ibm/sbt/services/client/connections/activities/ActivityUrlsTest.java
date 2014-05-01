@@ -21,7 +21,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.ibm.commons.xml.XMLException;
-import com.ibm.sbt.services.endpoints.Endpoint;
+import com.ibm.sbt.services.client.base.NamedUrlPart;
 
 /**
  * @author mwallace
@@ -31,21 +31,23 @@ public class ActivityUrlsTest extends BaseActivityServiceTest {
 
 	@Test
 	public void testActivityUrls() throws XMLException, IOException {
-		Endpoint endpoint = activityService.getEndpoint();
+		NamedUrlPart activityUuid = ActivityUrls.activityPart("11111-22222-33333-44444");
+		NamedUrlPart activityNodeUuid = ActivityUrls.activityNodePart("11111-22222-33333-44444");
+		NamedUrlPart memberId = ActivityUrls.memberPart("66666-77777-88888");
 		
-		Assert.assertEquals("activities/service/atom2/service", ActivityUrls.ACTIVITIES_SERVICE.format(endpoint));
-		Assert.assertEquals("activities/service/atom2/activity?activityUuid=11111-22222-33333-44444", ActivityUrls.ACTIVITY.format(endpoint, "11111-22222-33333-44444"));
-		Assert.assertEquals("activities/service/atom2/tags", ActivityUrls.ACTIVITY_TAGS.format(endpoint));
-		Assert.assertEquals("activities/service/atom2/entrytemplates?activityUuid=11111-22222-33333-44444", ActivityUrls.ACTIVITY_TEMPLATES.format(endpoint, "11111-22222-33333-44444"));
-		Assert.assertEquals("activities/service/atom2/everything", ActivityUrls.ALL_ACTIVITIES.format(endpoint));
-		Assert.assertEquals("activities/service/atom2/completed", ActivityUrls.COMPLETED_ACTIVITIES.format(endpoint));
-		Assert.assertEquals("activities/service/atom2/activities", ActivityUrls.MY_ACTIVITIES.format(endpoint));
-		Assert.assertEquals("activities/service/atom2/trash", ActivityUrls.THRASHED_ACTIVITIES.format(endpoint));
-		Assert.assertEquals("activities/service/atom2/todos", ActivityUrls.TODO_ACTIVITIES.format(endpoint));
-		Assert.assertEquals("activities/service/atom2/activitynode?activityNodeUuid=11111-22222-33333-44444", ActivityUrls.ACTIVITY_NODE.format(endpoint, "11111-22222-33333-44444"));
-		Assert.assertEquals("activities/service/atom2/trashednode?activityNodeUuid=11111-22222-33333-44444", ActivityUrls.THRASHED_ACTIVITY_NODE.format(endpoint, "11111-22222-33333-44444"));
-		Assert.assertEquals("activities/service/atom2/acl?activityUuid=11111-22222-33333-44444", ActivityUrls.ACTIVITY_ACL.format(endpoint, "11111-22222-33333-44444"));
-		Assert.assertEquals("activities/service/atom2/acl?activityUuid=11111-22222-33333-44444&memberid=66666-77777-88888", ActivityUrls.ACTIVITY_MEMBER.format(endpoint, "11111-22222-33333-44444", "66666-77777-88888"));
+		Assert.assertEquals("activities/service/atom2/service", ActivityUrls.ACTIVITIES_SERVICE.format(activityService));
+		Assert.assertEquals("activities/service/atom2/activity?activityUuid=11111-22222-33333-44444", ActivityUrls.ACTIVITY.format(activityService, activityUuid));
+		Assert.assertEquals("activities/service/atom2/tags", ActivityUrls.ACTIVITY_TAGS.format(activityService));
+		Assert.assertEquals("activities/service/atom2/entrytemplates?activityUuid=11111-22222-33333-44444", ActivityUrls.ACTIVITY_TEMPLATES.format(activityService, activityUuid));
+		Assert.assertEquals("activities/service/atom2/everything", ActivityUrls.ALL_ACTIVITIES.format(activityService));
+		Assert.assertEquals("activities/service/atom2/completed", ActivityUrls.COMPLETED_ACTIVITIES.format(activityService));
+		Assert.assertEquals("activities/service/atom2/activities", ActivityUrls.MY_ACTIVITIES.format(activityService));
+		Assert.assertEquals("activities/service/atom2/trash", ActivityUrls.THRASHED_ACTIVITIES.format(activityService));
+		Assert.assertEquals("activities/service/atom2/todos", ActivityUrls.TODO_ACTIVITIES.format(activityService));
+		Assert.assertEquals("activities/service/atom2/activitynode?activityNodeUuid=11111-22222-33333-44444", ActivityUrls.ACTIVITY_NODE.format(activityService, activityNodeUuid));
+		Assert.assertEquals("activities/service/atom2/trashednode?activityNodeUuid=11111-22222-33333-44444", ActivityUrls.THRASHED_ACTIVITY_NODE.format(activityService, activityNodeUuid));
+		Assert.assertEquals("activities/service/atom2/acl?activityUuid=11111-22222-33333-44444", ActivityUrls.ACTIVITY_ACL.format(activityService, activityUuid));
+		Assert.assertEquals("activities/service/atom2/acl?activityUuid=11111-22222-33333-44444&memberid=66666-77777-88888", ActivityUrls.ACTIVITY_MEMBER.format(activityService, activityUuid, memberId));
 	}
 	
 }

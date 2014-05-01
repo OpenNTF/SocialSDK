@@ -23,15 +23,8 @@
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
-<%@page
-	import="com.ibm.sbt.services.client.connections.forums.model.BaseForumEntity"%>
 <%@page import="com.ibm.sbt.services.client.connections.forums.Forum"%>
-<%@page
-	import="com.ibm.sbt.services.client.connections.forums.ForumList"%>
-<%@page
-	import="com.ibm.sbt.services.client.connections.forums.TopicList"%>
-<%@page
-	import="com.ibm.sbt.services.client.connections.forums.ReplyList"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page
 	import="com.ibm.sbt.services.client.connections.forums.ForumReply"%>
 <%@page import="com.ibm.commons.util.StringUtil"%>
@@ -50,11 +43,11 @@
 	<div id="content">
 	<%!
 		String addForumReply(ForumService svc, String postUuid) throws Exception {
-			ReplyList replyReplies = svc.getForumReplyReplies(postUuid);
+			EntityList<ForumReply> replyReplies = svc.getForumReplyReplies(postUuid);
 			StringBuilder tree = new StringBuilder();
 			tree.append("<ul>");
 			if (replyReplies.size() > 0) {
-				for (BaseForumEntity replyOnAReply : replyReplies) {
+				for (ForumReply replyOnAReply : replyReplies) {
 					if (StringUtil.equalsIgnoreCase(((ForumReply) replyOnAReply).getReplyToPostUuid(),postUuid)) {
 						tree.append("<ul><li style='list-style-type: circle'>"+ replyOnAReply.getTitle());
 						if (!(((ForumReply) replyOnAReply).isDeleted())) {
@@ -69,11 +62,11 @@
 		}
 
 		String addTopicReply(ForumService svc, String postUuid) throws Exception {
-			ReplyList topicReplies = svc.getForumTopicReplies(postUuid);
+			EntityList<ForumReply> topicReplies = svc.getForumTopicReplies(postUuid);
 			StringBuilder tree = new StringBuilder();
 			tree.append("<ul>");
 			if (topicReplies.size() > 0) {
-				for (BaseForumEntity replyOnATopic : topicReplies) {
+				for (ForumReply replyOnATopic : topicReplies) {
 					if (StringUtil.equalsIgnoreCase(((ForumReply) replyOnATopic).getReplyToPostUuid(),postUuid)) {
 							tree.append("<ul><li style='list-style-type: square'>"+ replyOnATopic.getTitle());
 							if (!(((ForumReply) replyOnATopic).isDeleted())) {
@@ -91,11 +84,11 @@
 
 		ForumService svc = new ForumService();
 		String myForumId = svc.getMyForums().get(0).getUid();
-		TopicList topics = svc.getForumTopics(myForumId);
+		EntityList<ForumTopic> topics = svc.getForumTopics(myForumId);
 		if (topics.size() > 0) {
 			out.println("Total No. of Topics in Forum :"+topics.size()+"<br><br>");
-			for (Iterator iterator = topics.iterator(); iterator.hasNext();) {
-				ForumTopic topic = (ForumTopic)iterator.next();
+			for (Iterator<ForumTopic> iterator = topics.iterator(); iterator.hasNext();) {
+				ForumTopic topic = iterator.next();
 				out.println("<b>Topic Title:"+topic.getTitle()+"</b><br>");
 				StringBuilder heiararchy = new StringBuilder();
 				heiararchy.append(addTopicReply(svc,topic.getUid()));

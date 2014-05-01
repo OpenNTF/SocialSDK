@@ -97,3 +97,4 @@ $lang['checking_if_access_granted'] = 'Checking if you have granted access for t
 $lang['logout_from_endpoint']	= 'Logout from Endpoint';
 $lang['endpoint']				= 'Endpoint';
 $lang['must_login']				= 'This widget uses single-sign on. Please log into Wordpress.';
+$lang['require_sign_on']		= 'Users must be logged into Wordpress to use this entpoint';

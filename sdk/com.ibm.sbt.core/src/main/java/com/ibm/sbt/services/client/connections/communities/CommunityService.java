@@ -140,7 +140,8 @@ public class CommunityService extends ConnectionsService {
 	//------------------------------------------------------------------------------------------------------------------
 
 	/**
-	 * Gets all public communities to which the authenticated user has access
+	 * Get the All Communities feed to see a list of all public communities to which the authenticated user 
+	 * has access or pass in parameters to search for communities that match a specific criteria.
 	 * 
 	 * @return
 	 * @throws ClientServicesException
@@ -150,7 +151,8 @@ public class CommunityService extends ConnectionsService {
 	}
 
 	/**
-	 * Gets all public communities to which the authenticated user has access
+	 * Get the All Communities feed to see a list of all public communities to which the authenticated user 
+	 * has access or pass in parameters to search for communities that match a specific criteria. 
 	 * 
 	 * @param parameters
 	 * @return
@@ -162,7 +164,7 @@ public class CommunityService extends ConnectionsService {
 	}
 
 	/**
-	 * Gets list of the members of a community
+	 * Retrieve the members feed to view a list of the members who belong to a given community.
 	 * 
 	 * @param communityUuid
 	 * @return MemberList
@@ -172,7 +174,8 @@ public class CommunityService extends ConnectionsService {
 		return getMembers(communityUuid, null);
 	}
 
-	/** Gets list of the members of a community
+	/** 
+	 * Retrieve the members feed to view a list of the members who belong to a given community.
 	 * 
 	 * @param communityUuid
 	 * @param query parameters
@@ -180,19 +183,13 @@ public class CommunityService extends ConnectionsService {
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Member> getMembers(String communityUuid, Map<String, String> parameters) throws ClientServicesException {
-		if (StringUtil.isEmpty(communityUuid)){
-			throw new ClientServicesException(null, Messages.NullCommunityIdException);
-		}
-		if(null == parameters){
-			parameters = new HashMap<String, String>();
-		}
 		String url = CommunityUrls.COMMUNITY_MEMBERS.format(this,CommunityUrls.getCommunityUuid(communityUuid));
-
 		return getMemberEntityList(url, parameters);
 	}
 
 	/**
-	 * Gets the Communities of which the user is a member or owner.
+	 * Get the My Communities feed to see a list of the communities to which the authenticated user is a member 
+	 * or pass in parameters to search for a subset of those communities that match a specific criteria.
 	 * 
 	 * @return
 	 * @throws ClientServicesException
@@ -200,8 +197,10 @@ public class CommunityService extends ConnectionsService {
 	public EntityList<Community> getMyCommunities() throws ClientServicesException {
 		return getMyCommunities(null);
 	}
+	
 	/**
-	 * Gets Communities of which the user is a member or owner.
+	 * Get the My Communities feed to see a list of the communities to which the authenticated user is a member 
+	 * or pass in parameters to search for a subset of those communities that match a specific criteria.
 	 * 
 	 * @return A list of communities of which the user is a member or owner
 	 * @throws ClientServicesException
@@ -212,7 +211,7 @@ public class CommunityService extends ConnectionsService {
 	}
 	
 	/**
-	 * Gets SubCommunities of a community
+	 * Get a list of subcommunities associated with a community.
 	 * 
 	 * @param communityUuid 
 	 * 				 community Id of which SubCommunities are to be fetched
@@ -224,7 +223,7 @@ public class CommunityService extends ConnectionsService {
 	}
 
 	/**
-	 * Gets SubCommunities of a community
+	 * Get a list of subcommunities associated with a community.
 	 * 
 	 * @param communityUuid 
 	 * 				 community Id of which SubCommunities are to be fetched
@@ -232,13 +231,6 @@ public class CommunityService extends ConnectionsService {
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Community> getSubCommunities(String communityUuid, Map<String, String> parameters) throws ClientServicesException {
-
-		if (StringUtil.isEmpty(communityUuid)){
-			throw new ClientServicesException(null, Messages.NullCommunityIdException);
-		}
-		if(null == parameters){
-			parameters = new HashMap<String, String>();
-		}
 		String url = CommunityUrls.COMMUNITY_SUBCOMMUNITIES.format(this,CommunityUrls.getCommunityUuid(communityUuid));
 		return getCommunityEntityList(url, parameters);
 	}
@@ -266,7 +258,6 @@ public class CommunityService extends ConnectionsService {
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Invite> getMyInvites(Map<String, String> parameters) throws ClientServicesException {
-
 		String url = CommunityUrls.COMMUNITY_MYINVITES.format(this);
 		return getInviteEntityList(url, parameters);
 	}

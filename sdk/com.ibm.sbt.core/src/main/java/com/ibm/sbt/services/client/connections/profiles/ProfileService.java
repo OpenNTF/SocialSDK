@@ -76,7 +76,13 @@ import com.ibm.sbt.services.client.smartcloud.profiles.ProfileServiceException;
 import com.ibm.sbt.services.endpoints.Endpoint;
 
 /**
- * ProfileService can be used to perform operations related to Profiles. 
+ * The Profiles application of IBM® Connections is a directory of the people in your organization.
+ * You can use it to find the information you need to form and encourage effective networks.
+ * In addition to basic information, Profiles catalogs skills such as technical expertise, familiarity with foreign languages, and areas of interest.
+ * 
+ * @see
+ *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.5+API+Documentation#action=openDocument&res_title=Profiles_API_ic45&content=pdcontent">
+ *			Profiles API</a>
  * 
  * @Represents Connections ProfileService
  * @author Swati Singh
@@ -158,27 +164,6 @@ public class ProfileService extends ConnectionsService {
 	/***************************************************************
 	 * Getting Profile Feeds
 	 ****************************************************************/
-
-	/**
-	 * Search for a set of profiles that match a specific criteria and return them in a feed.<br>
-	 * You can use this resource to discover someone's user ID. <br>
-	 * When you search by name, the returned feed identifies each person's user ID, 
-	 * which you can subsequently use in other types of searches to retrieve more detailed information about a person.<br>
-	 * This method returns a feed of profiles instead of the Atom entry of a single profile.
-	 * If you want to retrieve an Atom entry document, see Retrieving a profile entry. The content element of each returned entry includes the vCard information for the person being represented by the entry.
-	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Searching_Profiles_programmatically_ic40a&content=pdcontent">
-	 *			Searching Profiles programmatically</a>
-	 *
-	 * @param parameters 
-	 * 				  list of query string parameters to pass to API
-	 * @return EntityList&lt;Profile&gt;
-	 * @throws ClientServicesException 
-	 */
-	public EntityList<Profile> searchProfiles() throws ClientServicesException {
-		return searchProfiles(null);
-	}
 
 	/**
 	 * Search for a set of profiles that match a specific criteria and return them in a feed.<br>
@@ -550,10 +535,18 @@ public class ProfileService extends ConnectionsService {
 	/***************************************************************
 	 * Working with pronunciation files
 	 ****************************************************************/
+
+	////////////////////////////////////////////////////////////////////////////////
+	//TODO: ALL WORKING PRONUNCIATION FILES
+	////////////////////////////////////////////////////////////////////////////////
 	
 	/***************************************************************
 	 * Working with profile extensions
 	 ****************************************************************/
+
+	////////////////////////////////////////////////////////////////////////////////
+	//TODO: MOST WORKING PROFILE EXTENSIONS
+	////////////////////////////////////////////////////////////////////////////////
 
 	/**
 	 * Returns a mapping containing the extended attributes for the entry.<bt/>
@@ -811,9 +804,17 @@ public class ProfileService extends ConnectionsService {
 	 * Working with update messages and comments
 	 ****************************************************************/
 
+	////////////////////////////////////////////////////////////////////////////////
+	//TODO: ALL WORKING UPDATE MESSAGES AND COMMENTS
+	////////////////////////////////////////////////////////////////////////////////
+
 	/***************************************************************
 	 * Working with status messages
 	 ****************************************************************/
+
+	////////////////////////////////////////////////////////////////////////////////
+	//TODO: ALL WORKING STATUS MESSAGES
+	////////////////////////////////////////////////////////////////////////////////
 
 	/***************************************************************
 	 * Working with profiles
@@ -966,12 +967,9 @@ public class ProfileService extends ConnectionsService {
 	 ****************************************************************/
 
 	////////////////////////////////////////////////////////////////////////////////
-	//TODO: Working with profile types
+	//TODO: ALL WORKING WITH PROFILE TYPES
 	////////////////////////////////////////////////////////////////////////////////
 
-	/***************************************************************
-	 * Working Atom entry types
-	 ****************************************************************/
 	
 	/***************************************************************
 	 * Miscellaneous methods

@@ -26,6 +26,8 @@ import com.ibm.sbt.services.client.base.Version;
 import com.ibm.sbt.services.client.base.VersionedUrl;
 
 /**
+ * This class handles and formats the URLS for the WikiService
+ * 
  * @author Mario Duarte
  * @author Carlos Manias
  */

@@ -39,6 +39,13 @@ import com.ibm.sbt.services.client.connections.wikis.serializers.WikiSerializer;
 import com.ibm.sbt.services.endpoints.Endpoint;
 
 /**
+ * The Wikis application of IBM® Connections enables teams to create a shared repository of information.
+ * The Wikis API allows application programs to create new wikis, and to read and modify existing wikis. 
+ * 
+ * @see
+ *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.5+API+Documentation#action=openDocument&res_title=Wikis_API_ic45&content=pdcontent">
+ *			Wikis API</a>
+ * 
  * @author Mario Duarte
  * @author Carlos Manias
  *

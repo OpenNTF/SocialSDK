@@ -1092,7 +1092,7 @@ public abstract class ClientService {
 			return httpClient.execute(httpRequestBase);
 		} catch (Exception ex) {
 			if (logger.isLoggable(Level.FINE)) {
-				String msg = "Exception ocurred while execuring request {0} {1}";
+				String msg = "Exception ocurred while executing request {0} {1}";
 				msg = StringUtil.format(msg, httpRequestBase.getMethod(), args);
 				logger.log(Level.FINE, msg, ex);
 			}

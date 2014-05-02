@@ -40,7 +40,6 @@ package com.ibm.sbt.services.client.connections.search;
 import static com.ibm.sbt.services.client.base.CommonConstants.COMMA;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -52,14 +51,14 @@ import org.w3c.dom.Node;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.ClientServicesException;
-import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.AtomFeedHandler;
 import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.base.ConnectionsService;
 import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.endpoints.Endpoint;
 
-public class SearchService extends BaseService {
+public class SearchService extends ConnectionsService {
 	
 	private static final long serialVersionUID = -8445895408209299706L;
 
@@ -446,51 +445,27 @@ public class SearchService extends BaseService {
      }
 
 	protected Result getResultEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
-		try {
-			return (Result)getEntity(requestUrl, getParameters(parameters), getResultFeedHandler());
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		} 
+		return (Result)getEntity(requestUrl, parameters, getResultFeedHandler());
 	}
 
 	protected EntityList<Result> getResultEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
-		try {
-			return getEntities(requestUrl, getParameters(parameters), getResultFeedHandler());
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		} 
+		return getEntities(requestUrl, parameters, getResultFeedHandler());
 	}
 
 	protected FacetValue getFacetValueEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
-		try {
-			return (FacetValue)getEntity(requestUrl, getParameters(parameters), getFacetValueFeedHandler("Person"));
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		} 
+		return (FacetValue)getEntity(requestUrl, parameters, getFacetValueFeedHandler("Person"));
 	}
 
 	protected EntityList<FacetValue> getFacetValueEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
-		try {
-			return getEntities(requestUrl, getParameters(parameters), getFacetValueFeedHandler("Person"));
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		} 
+		return getEntities(requestUrl, parameters, getFacetValueFeedHandler("Person"));
 	}
      
 	protected Scope getScopeEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
-		try {
-			return (Scope)getEntity(requestUrl, getParameters(parameters), getScopeFeedHandler());
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		} 
+		return (Scope)getEntity(requestUrl, parameters, getScopeFeedHandler());
 	}
 
 	protected EntityList<Scope> getScopeEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
-		try {
-			return getEntities(requestUrl, getParameters(parameters), getScopeFeedHandler());
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		} 
+		return getEntities(requestUrl, parameters, getScopeFeedHandler());
 	}
 
 	/*

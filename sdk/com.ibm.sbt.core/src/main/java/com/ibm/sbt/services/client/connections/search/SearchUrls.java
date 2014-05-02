@@ -16,7 +16,9 @@
 package com.ibm.sbt.services.client.connections.search;
 
 import com.ibm.sbt.services.client.base.BaseService;
+
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.*;
+
 import com.ibm.sbt.services.client.base.NamedUrlPart;
 import com.ibm.sbt.services.client.base.URLBuilder;
 import com.ibm.sbt.services.client.base.URLContainer;
@@ -30,7 +32,7 @@ import com.ibm.sbt.services.client.base.VersionedUrl;
  */
 public enum SearchUrls implements URLContainer {
 	SEARCH(new VersionedUrl(v4_0, "{search}/atom/search")),
-	MYSEARCH(new VersionedUrl(v4_0, "{search}/atom/mysearch")),
+	MYSEARCH(new VersionedUrl(v4_0, "{search}/atom/mysearch?{query}/")),
 	SCOPES(new VersionedUrl(v4_0, "{search}/atom/scopes"));
 
 	private URLBuilder builder;
@@ -46,4 +48,8 @@ public enum SearchUrls implements URLContainer {
 	public String getPattern(Version version){
 		return builder.getPattern(version).getUrlPattern();
 	}
+	
+	public static NamedUrlPart getQuery(String query){
+		return new NamedUrlPart("query", "query"+"="+query);		
+	} 
 }

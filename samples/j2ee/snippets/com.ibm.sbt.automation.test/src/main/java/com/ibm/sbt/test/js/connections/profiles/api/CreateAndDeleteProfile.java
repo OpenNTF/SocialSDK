@@ -1,5 +1,5 @@
 /*
- * ï¿½ Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -15,16 +15,12 @@
  */
 package com.ibm.sbt.test.js.connections.profiles.api;
 
-import junit.framework.Assert;
-
+import org.junit.Assert;
 import org.junit.Test;
 
 import com.ibm.commons.util.io.json.JsonJavaObject;
-import com.ibm.sbt.automation.core.environment.TestEnvironment;
 import com.ibm.sbt.automation.core.test.connections.BaseProfilesTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
-import com.ibm.sbt.services.client.connections.communities.Community;
-import com.ibm.sbt.services.client.connections.communities.CommunityServiceException;
 
 
 /**

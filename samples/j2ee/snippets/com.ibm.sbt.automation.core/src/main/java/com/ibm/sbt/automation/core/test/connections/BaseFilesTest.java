@@ -1,5 +1,5 @@
 /*
- * Â© Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -35,7 +35,6 @@ import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.communities.Community;
 import com.ibm.sbt.services.client.connections.communities.CommunityService;
-import com.ibm.sbt.services.client.connections.communities.CommunityServiceException;
 import com.ibm.sbt.services.client.connections.files.File;
 import com.ibm.sbt.services.client.connections.files.FileService;
 import com.ibm.sbt.services.client.connections.files.model.FileCreationParameters;

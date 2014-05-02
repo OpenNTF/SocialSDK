@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -20,8 +20,6 @@ package com.ibm.sbt.services.client.connections.follow.model;
  * @author Manish Kataria
  * @author Carlos Manias
  */
-
-
 public enum Type {
 	
 	ACTIVITY,

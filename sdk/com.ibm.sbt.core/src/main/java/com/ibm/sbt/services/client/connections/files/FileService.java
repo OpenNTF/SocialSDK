@@ -67,6 +67,7 @@ import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.AtomFeedHandler;
 import com.ibm.sbt.services.client.base.AuthType;
 import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.base.ConnectionsService;
 import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.NamedUrlPart;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
@@ -98,7 +99,7 @@ import com.ibm.sbt.services.endpoints.Endpoint;
  *      ://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation
  *      #action=openDocument&res_title=Files_API_ic40a&content=pdcontent
  */
-public class FileService extends BaseService {
+public class FileService extends ConnectionsService {
 	
 	private static final long serialVersionUID = 6858863659072208180L;
 	static final String sourceClass = FileService.class.getName();
@@ -1564,11 +1565,7 @@ public class FileService extends BaseService {
         String accessType = AccessType.AUTHENTICATED.getText();
         String requestUri = FileUrls.MODERATION_SERVICE_DOCUMENT.format(this, FileUrlParts.accessType.get(accessType));
         Response result = null;
-        try {
-            result = retrieveData(requestUri, null);
-        } catch (IOException e) {
-        	throw new ClientServicesException(e, Messages.MessageExceptionInFetchingServiceDocument);
-        }
+        result = retrieveData(requestUri, null);
         return (Document) result.getData();
     }
 
@@ -1755,12 +1752,7 @@ public class FileService extends BaseService {
             throws ClientServicesException {
         String accessType = AccessType.AUTHENTICATED.getText();
         String requestUri = FileUrls.GET_FLAGGED_FILE_HISTORY.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
-        try {
-            return (Document) retrieveData(requestUri, params).getData();
-        } catch (IOException e) {
-           throw new ClientServicesException(e, Messages.MessageExceptionInReadingObject);
-        }
-
+        return (Document) retrieveData(requestUri, params).getData();
     }
 
     // /files/basic/api/review/documents
@@ -2991,11 +2983,7 @@ public class FileService extends BaseService {
             requestUri = FileUrls.MODERATION.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.action.get(action), FileUrlParts.contentType.get(content));
         }
         FileList resultantEntries;
-        try {
-            resultantEntries = (FileList) getEntities(requestUri, null, getFileFeedHandler());
-        } catch (IOException e) {
-           throw new ClientServicesException(e, Messages.MessageExceptionInReadingObject);
-        } 
+        resultantEntries = (FileList) getEntities(requestUri, null, getFileFeedHandler());
        
         String uri = null;
         for (File entry : resultantEntries) {
@@ -3036,38 +3024,22 @@ public class FileService extends BaseService {
 	 ****************************************************************/
 
 	protected File getFileEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
-		try {
-			return getEntity(requestUrl, getParameters(parameters), getFileFeedHandler());
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		}
+		return getEntity(requestUrl, parameters, getFileFeedHandler());
 	}
 
 	protected EntityList<File> getFileEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
-		try {
-			return getEntities(requestUrl, getParameters(parameters), getFileFeedHandler());
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		}
+		return getEntities(requestUrl, parameters, getFileFeedHandler());
 	}
 
 	protected Comment getCommentEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
-		try {
-            if (parameters == null)
-                parameters = getCommentParams();
-            else
-                parameters.putAll(getCommentParams());
-			return getEntity(requestUrl, getParameters(parameters), getCommentFeedHandler());
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		}
+        if (parameters == null)
+            parameters = getCommentParams();
+        else
+            parameters.putAll(getCommentParams());
+		return getEntity(requestUrl, parameters, getCommentFeedHandler());
 	}
 
 	protected EntityList<Comment> getCommentEntityList(String requestUrl, Map<String, String> parameters, Map<String,String> headers) throws ClientServicesException {
-		try {
-			return getEntities(requestUrl, getParameters(parameters), headers, getCommentFeedHandler());
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		}
+		return getEntities(requestUrl, parameters, headers, getCommentFeedHandler());
 	}
 }

@@ -15,7 +15,6 @@
  */
 package com.ibm.sbt.services.client.base;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -82,11 +81,7 @@ abstract public class JsonService extends BaseService {
     }
     
 	protected EntityList<JsonEntity> getJsonEntityList(String requestUrl, Map<String, String> parameters, String entitiesPath) throws ClientServicesException {
-		try {
-			return (EntityList<JsonEntity>)getEntities(requestUrl, getParameters(parameters), getJsonFeedHandler(entitiesPath));
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		}
+		return (EntityList<JsonEntity>)getEntities(requestUrl, getParameters(parameters), getJsonFeedHandler(entitiesPath));
 	}
 	
 	protected IFeedHandler<JsonEntity> getJsonFeedHandler(String entitiesPath) {

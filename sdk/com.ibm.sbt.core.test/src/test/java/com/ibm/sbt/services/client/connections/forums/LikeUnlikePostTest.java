@@ -29,12 +29,12 @@ import org.junit.Test;
 public class LikeUnlikePostTest extends BaseForumServiceTest {
 
 	@Before
-	public void initForumTopic() throws ForumServiceException {
+	public void initForumTopic() throws Exception {
 		topic = createForumTopic();
 	}
 	
     @Test
-    public void testLikeunlikePostTest() throws ForumServiceException {
+    public void testLikeunlikePostTest() throws Exception {
         forumService.createRecommendation(topic.getTopicUuid());
         ForumTopic recommendedPost = forumService.getForumTopic(topic.getTopicUuid());
         assertEquals(recommendedPost.getRecommendationCount(), "1");
@@ -44,7 +44,7 @@ public class LikeUnlikePostTest extends BaseForumServiceTest {
     }
 
     @After
-    public void deleteForumTopicDataOnExit() throws ForumServiceException {
+    public void deleteForumTopicDataOnExit() throws Exception {
     	forumService.removeForumTopic(topic.getTopicUuid());
     	forumService.removeForum(topic.getForumUuid());
     }

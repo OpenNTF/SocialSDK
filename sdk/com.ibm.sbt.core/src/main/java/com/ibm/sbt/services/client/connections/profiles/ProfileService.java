@@ -64,6 +64,7 @@ import com.ibm.sbt.services.client.base.AtomFeedHandler;
 import com.ibm.sbt.services.client.base.AuthType;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.CommonConstants.HTTPCode;
+import com.ibm.sbt.services.client.base.ConnectionsService;
 import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.NamedUrlPart;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
@@ -88,7 +89,7 @@ import com.ibm.sbt.services.endpoints.Endpoint;
  * }
  * </pre>
  */
-public class ProfileService extends BaseService {
+public class ProfileService extends ConnectionsService {
 
 	private static final long serialVersionUID = -598413531035038479L;
 
@@ -711,7 +712,7 @@ public class ProfileService extends BaseService {
 				headers.put(CONTENT_TYPE, IMAGE_ + ext);
 			}
 			String url = ProfileUrls.PHOTO.format(this, ProfileParams.userId.get(userId));
-			getClientService().put(url, getParameters(null), headers, file, ClientService.FORMAT_NULL);
+			getClientService().put(url, null, headers, file, ClientService.FORMAT_NULL);
 		}
 	}
 
@@ -753,43 +754,23 @@ public class ProfileService extends BaseService {
 	 ****************************************************************/
 	
 	protected Profile getProfileEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
-		try {
-			return getEntity(requestUrl, getParameters(parameters), getProfileFeedHandler());
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		}
+		return getEntity(requestUrl, parameters, getProfileFeedHandler());
 	}
 
 	protected ColleagueConnection getColleagueConnectionEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
-		try {
-			return getEntity(requestUrl, getParameters(parameters), getColleagueFeedHandler());
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		}
+		return getEntity(requestUrl, parameters, getColleagueFeedHandler());
 	}
 
 	protected EntityList<Profile> getProfileEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
-		try {
-			return getEntities(requestUrl, getParameters(parameters), getProfileFeedHandler());
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		}
+		return getEntities(requestUrl, parameters, getProfileFeedHandler());
 	}
 
 	protected EntityList<ColleagueConnection> getColleagueConnectionEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
-		try {
-			return getEntities(requestUrl, getParameters(parameters), getColleagueFeedHandler());
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		}
+		return getEntities(requestUrl, parameters, getColleagueFeedHandler());
 	}
 
 	protected EntityList<Tag> getTagEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
-		try {
-			return getEntities(requestUrl, getParameters(parameters), getTagFeedHandler());
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		}
+		return getEntities(requestUrl, parameters, getTagFeedHandler());
 	}
 
 	/***************************************************************

@@ -20,7 +20,6 @@ import static com.ibm.sbt.services.client.base.CommonConstants.APPLICATION_ATOM_
 import static com.ibm.sbt.services.client.base.CommonConstants.AT;
 import static com.ibm.sbt.services.client.base.CommonConstants.CONTENT_TYPE;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -227,9 +226,8 @@ public abstract class BaseService implements Serializable {
 	 * @param DateFormat
 	 * @return
 	 * @throws ClientServicesException
-	 * @throws IOException
 	 */
-    public Response createData(String serviceUrl, Map<String, String> parameters, Map<String,String> headers, Object content) throws ClientServicesException, IOException {
+    public Response createData(String serviceUrl, Map<String, String> parameters, Map<String,String> headers, Object content) throws ClientServicesException {
         return createData(serviceUrl, parameters, headers, content, getDataFormat());
     }
 	
@@ -243,9 +241,8 @@ public abstract class BaseService implements Serializable {
      * @param format
      * @return
      * @throws ClientServicesException
-     * @throws IOException
      */
-    public Response createData(String serviceUrl, Map<String, String> parameters, Map<String,String> headers, Object content, Handler format) throws ClientServicesException, IOException {
+    public Response createData(String serviceUrl, Map<String, String> parameters, Map<String,String> headers, Object content, Handler format) throws ClientServicesException {
         Response result = getClientService().post(serviceUrl, parameters, headers, content, format);
         return result;
     }
@@ -260,10 +257,9 @@ public abstract class BaseService implements Serializable {
 	 * @return the result of the creation operations
 	 * @throws ClientServicesException
 	 *             when the creation fails, as null/false return may have other meaning here
-	 * @throws IOException 
 	 */
-	public Response createData(String serviceUrl, Map<String, String> parameters, Object content, Handler format) throws ClientServicesException, IOException {
-	    return createData(serviceUrl, parameters, new HashMap<String, String>(), content);	    
+	public Response createData(String serviceUrl, Map<String, String> parameters, Object content, Handler format) throws ClientServicesException {
+    	return createData(serviceUrl, parameters, new HashMap<String, String>(), content);	    
 	}
 	
 	
@@ -274,10 +270,8 @@ public abstract class BaseService implements Serializable {
 	 * @param content
 	 * @return
 	 * @throws ClientServicesException
-	 * @throws IOException
 	 */
-	public Response createData(String serviceUrl, Map<String, String> parameters, Object content)
-			throws ClientServicesException, IOException {
+	public Response createData(String serviceUrl, Map<String, String> parameters, Object content) throws ClientServicesException {
 		return createData(serviceUrl, parameters, content, getDataFormat());
 	}
 
@@ -301,10 +295,9 @@ public abstract class BaseService implements Serializable {
 	 * @param nameParameterId
 	 * @return
 	 * @throws ClientServicesException
-	 * @throws IOException 
 	 */
 	public Response deleteData(String serviceUrl, Map<String, String> parameters, String nameParameterId)
-			throws ClientServicesException, IOException {
+			throws ClientServicesException {
 	    return deleteData(serviceUrl, parameters, new HashMap<String, String>(), nameParameterId);
 	}
 	
@@ -316,10 +309,9 @@ public abstract class BaseService implements Serializable {
 	 * @param nameParameterId
 	 * @return
 	 * @throws ClientServicesException
-	 * @throws IOException
 	 */
     public Response deleteData(String serviceUrl, Map<String, String> parameters, Map<String, String> headers, String nameParameterId)
-            throws ClientServicesException, IOException {
+            throws ClientServicesException {
         //TODO : remove the data format after review with Phil
         String uniqueId = null;
         if (nameParameterId != null) {
@@ -342,7 +334,6 @@ public abstract class BaseService implements Serializable {
 	 * @param parameters
 	 * @return Convenience method for retrieving multiple JsonObjects from the server
 	 * @throws ClientServicesException
-	 * @throws IOException 
 	 */
 	public Response retrieveData(String url, Map<String, String> parameters) throws ClientServicesException {
 		return retrieveData(url, parameters, null);
@@ -357,7 +348,6 @@ public abstract class BaseService implements Serializable {
 	 * @param nameParameterId
 	 * @return
 	 * @throws ClientServicesException
-	 * @throws IOException
 	 */
 	public Response retrieveData(String url, Map<String, String> parameters, Map<String, String> headers, String nameParameterId)
 	            throws ClientServicesException {
@@ -390,7 +380,6 @@ public abstract class BaseService implements Serializable {
 	 * @param nameParameterId
 	 * @return Method to retrieve a single Object from the server
 	 * @throws ClientServicesException
-	 * @throws IOException 
 	 */
 	//TODO Fix cache with DataHolder object
 	public Response retrieveData(String url, Map<String, String> parameters, String nameParameterId) throws ClientServicesException {
@@ -408,11 +397,10 @@ public abstract class BaseService implements Serializable {
 	 *     must be a valid key of the parameters map
 	 * @return
 	 * @throws ClientServicesException
-	 * @throws IOException 
 	 */
 	//TODO: Use Args pattern to pass the headers and avoid hard-coding the content-type
 	public Response updateData(String serviceUrl, Map<String, String> parameters, Object content,
-			String nameParameterId) throws ClientServicesException, IOException {
+			String nameParameterId) throws ClientServicesException {
 	    return updateData(serviceUrl, parameters, new HashMap<String, String>(), content, nameParameterId);
 	}
 
@@ -426,9 +414,8 @@ public abstract class BaseService implements Serializable {
 	 * @param nameParameterId
 	 * @return
 	 * @throws ClientServicesException
-	 * @throws IOException
 	 */
-   public Response updateData(String serviceUrl, Map<String, String> parameters, Map<String, String> headers, Object content, String nameParameterId) throws ClientServicesException, IOException {
+   public Response updateData(String serviceUrl, Map<String, String> parameters, Map<String, String> headers, Object content, String nameParameterId) throws ClientServicesException {
         String uniqueId = "";
         if (nameParameterId != null) {
             uniqueId = parameters.get(nameParameterId);
@@ -446,7 +433,7 @@ public abstract class BaseService implements Serializable {
         return result;
    }
 
-   public Response putData(String serviceUrl, Map<String, String> parameters, Map<String, String> headers, Object content, String uniqueId) throws ClientServicesException, IOException {
+   public Response putData(String serviceUrl, Map<String, String> parameters, Map<String, String> headers, Object content, String uniqueId) throws ClientServicesException {
        Response result = getClientService().put(serviceUrl, parameters, headers, content, getDataFormat());
        
        if (cacheSize > 0 && uniqueId != null) {

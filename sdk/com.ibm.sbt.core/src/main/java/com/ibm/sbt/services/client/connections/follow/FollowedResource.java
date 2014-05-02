@@ -9,6 +9,7 @@ import org.w3c.dom.Node;
 
 import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.xpath.XPathExpression;
+import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.AtomEntity;
 import com.ibm.sbt.services.client.base.AtomXPath;
 import com.ibm.sbt.services.client.base.BaseService;
@@ -135,7 +136,7 @@ public class FollowedResource extends AtomEntity {
 	 * @throws FollowServiceException
 	 */
 	
-	public FollowedResource startFollowing() throws FollowServiceException{
+	public FollowedResource startFollowing() throws ClientServicesException {
 		FollowService service = (FollowService)getService();
 		return service.startFollowing(getSource(), getType(), getResourceId());
 	}
@@ -145,7 +146,7 @@ public class FollowedResource extends AtomEntity {
 	 * @return boolean
 	 * @throws FollowServiceException
 	 */
-	public boolean stopFollowing() throws FollowServiceException{
+	public boolean stopFollowing() throws ClientServicesException {
 		FollowService service = (FollowService)getService();
 		return service.stopFollowing(getSource(), getType(), getResourceId());
 	}

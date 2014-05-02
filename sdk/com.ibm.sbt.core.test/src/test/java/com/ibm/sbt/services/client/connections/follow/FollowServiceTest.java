@@ -28,7 +28,6 @@ import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.connections.communities.Community;
 import com.ibm.sbt.services.client.connections.communities.CommunityService;
-import com.ibm.sbt.services.client.connections.communities.CommunityServiceException;
 import com.ibm.sbt.services.client.connections.follow.model.Source;
 import com.ibm.sbt.services.client.connections.follow.model.Type;
 
@@ -61,26 +60,26 @@ public class FollowServiceTest extends BaseUnitTest {
 	}
 
 	@Test
-	public void getFollowedResource() throws FollowServiceException, CommunityServiceException {
+	public void getFollowedResource() throws ClientServicesException {
 		FollowedResource resource = followService.getFollowedResource(Source.COMMUNITIES.get(),Type.COMMUNITY.get(),community.getCommunityUuid());
 		assertNotNull(resource);
 		assertEquals(unRandomize(community.getCommunityUuid()), unRandomize(resource.getResourceId()));
 	}
 	
 	@Test
-	public void getFollowedResources() throws FollowServiceException, CommunityServiceException {
+	public void getFollowedResources() throws ClientServicesException {
 		EntityList<FollowedResource> resources = followService.getFollowedResources(Source.COMMUNITIES.get(),Type.COMMUNITY.get());
 		assertNotNull(resources);
 	}
 
 	@Test
-	public void startFollowing() throws FollowServiceException, CommunityServiceException {
+	public void startFollowing() throws ClientServicesException {
 		FollowedResource resource = followService.startFollowing(Source.COMMUNITIES.get(),Type.COMMUNITY.get(), community.getCommunityUuid());
 		assertEquals(community.getCommunityUuid(), resource.getResourceId());
 	}
 	
 	@Test
-	public void stopFollowing() throws FollowServiceException, CommunityServiceException {
+	public void stopFollowing() throws ClientServicesException {
 		followService.startFollowing(Source.COMMUNITIES.get(),Type.COMMUNITY.get(), community.getCommunityUuid());
 		boolean success  = followService.stopFollowing(Source.COMMUNITIES.get(),Type.COMMUNITY.get(), community.getCommunityUuid());
 		assertEquals(success, true);

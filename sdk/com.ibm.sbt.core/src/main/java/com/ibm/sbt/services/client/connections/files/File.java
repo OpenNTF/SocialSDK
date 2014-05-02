@@ -151,10 +151,10 @@ public class File extends AtomEntity {
 	 * @return String
 	 * @throws FileServiceException 
 	 */
-	public String getDownloadUrl() throws FileServiceException {
+	public String getDownloadUrl() throws ClientServicesException {
 		FileService service = getService();
 		if (null == service){
-			throw new FileServiceException(new Exception("FileService not defined"));
+			throw new ClientServicesException(new Exception("FileService not defined"));
 		}
 		String proxypath = getService().getEndpoint().getProxyPath("connections");
 		String fileId = getFileId();

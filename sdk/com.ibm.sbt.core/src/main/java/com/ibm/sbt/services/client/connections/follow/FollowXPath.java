@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -16,17 +16,15 @@
 
 package com.ibm.sbt.services.client.connections.follow;
 
-/**
- * Class used in resolving XPaths from Follow service
- * @author Manish Kataria
- */
-
-
 import com.ibm.commons.xml.DOMUtil;
 import com.ibm.commons.xml.XMLException;
 import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.base.datahandlers.FieldEntry;
 
+/**
+ * Class used in resolving XPaths from Follow service
+ * @author Manish Kataria
+ */
 public enum FollowXPath implements FieldEntry{
 	
     Type("a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/type']/@term"),

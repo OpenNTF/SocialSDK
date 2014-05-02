@@ -39,7 +39,6 @@ import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.NamedUrlPart;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.connections.communities.Community;
-import com.ibm.sbt.services.client.connections.communities.CommunityServiceException;
 import com.ibm.sbt.services.client.connections.forums.transformers.BaseForumTransformer;
 import com.ibm.sbt.services.endpoints.Endpoint;
 

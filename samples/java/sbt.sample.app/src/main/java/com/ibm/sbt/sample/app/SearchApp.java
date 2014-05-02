@@ -17,12 +17,11 @@ package com.ibm.sbt.sample.app;
 
 import java.util.Map;
 
+import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.connections.search.Constraint;
 import com.ibm.sbt.services.client.connections.search.Result;
-import com.ibm.sbt.services.client.connections.search.ResultList;
 import com.ibm.sbt.services.client.connections.search.SearchService;
-import com.ibm.sbt.services.client.connections.search.SearchServiceException;
 
 /**
  * @author mwallace
@@ -43,15 +42,15 @@ public class SearchApp extends BaseApp {
     	return searchService;
     }
     
-    ResultList getResults(String query) throws SearchServiceException {
+    EntityList<Result> getResults(String query) throws ClientServicesException {
     	return getSearchService().getResults(query);
     }
     
-    ResultList getResults(String query, Map<String, String> parameters) throws SearchServiceException {
+    EntityList<Result> getResults(String query, Map<String, String> parameters) throws ClientServicesException {
     	return getSearchService().getResults(query, parameters);
     }
     
-    ResultList getResultsWithConstraint(String query, Constraint constraint) throws SearchServiceException {
+    EntityList<Result> getResultsWithConstraint(String query, Constraint constraint) throws ClientServicesException {
     	return getSearchService().getResultsWithConstraint(query, constraint);
     }
     

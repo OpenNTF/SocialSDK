@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * ï¿½ Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,6 @@ import static com.ibm.sbt.services.client.base.CommonConstants.APPLICATION_ATOM_
 import static com.ibm.sbt.services.client.base.CommonConstants.CONTENT_TYPE;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -972,35 +971,19 @@ public class ActivityService extends ConnectionsService {
 	}
 		
 	protected EntityList<Activity> getActivityEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
-		try {
-			return (EntityList<Activity>)getEntities(requestUrl, getParameters(parameters), getActivityFeedHandler(true));
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		}
+		return (EntityList<Activity>)getEntities(requestUrl, getParameters(parameters), getActivityFeedHandler(true));
 	}
 	
 	protected EntityList<ActivityNode> getActivityNodeEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
-		try {
-			return (EntityList<ActivityNode>)getEntities(requestUrl, getParameters(parameters), getActivityNodeFeedHandler(true));
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		}
+		return (EntityList<ActivityNode>)getEntities(requestUrl, getParameters(parameters), getActivityNodeFeedHandler(true));
 	}
 	
 	protected EntityList<Tag> getTagEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
-		try {
-			return (EntityList<Tag>)getEntities(requestUrl, getParameters(parameters), getTagFeedHandler());
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		}
+		return (EntityList<Tag>)getEntities(requestUrl, getParameters(parameters), getTagFeedHandler());
 	}
 	
 	protected EntityList<Category> getCategoryEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
-		try {
-			return (EntityList<Category>)getEntities(requestUrl, getParameters(parameters), getCategoryFeedHandler());
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		}
+		return (EntityList<Category>)getEntities(requestUrl, getParameters(parameters), getCategoryFeedHandler());
 	}
 	
 	protected IFeedHandler<Activity> getActivityFeedHandler(boolean isFeed) {

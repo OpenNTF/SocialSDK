@@ -177,25 +177,15 @@ public class FollowService extends ConnectionsService {
 	}
 	
 	private EntityList<FollowedResource> getResources(String apiUrl, Map<String, String> parameters) throws ClientServicesException {
-		try {
-			return (EntityList<FollowedResource>)getEntities(apiUrl, parameters, getFollowFeedHandler());
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		}
-
+		return (EntityList<FollowedResource>)getEntities(apiUrl, parameters, getFollowFeedHandler());
 	}
 		
 	private FollowedResource getResource(String apiUrl,Map<String, String> parameters) throws ClientServicesException {
-		try {
-			EntityList<FollowedResource> resources = (EntityList<FollowedResource>)getEntities(apiUrl, parameters, getFollowFeedHandler());
-			if(resources!=null && resources.size()>0){
-				return (FollowedResource) resources.get(0);
-			}else{
-				return null;
-			}
-			
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
+		EntityList<FollowedResource> resources = (EntityList<FollowedResource>)getEntities(apiUrl, parameters, getFollowFeedHandler());
+		if(resources!=null && resources.size()>0){
+			return (FollowedResource) resources.get(0);
+		}else{
+			return null;
 		}
 	}
 	

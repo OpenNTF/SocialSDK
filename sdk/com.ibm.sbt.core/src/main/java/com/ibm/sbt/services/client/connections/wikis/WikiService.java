@@ -81,7 +81,7 @@ public class WikiService extends ConnectionsService {
 	}
 
 	/***************************************************************
-	 * Working with feeds of wikis 
+	 * Getting Wiki feeds
 	 ****************************************************************/
 
 	/**
@@ -149,6 +149,20 @@ public class WikiService extends ConnectionsService {
 		String requestUrl = WikiUrls.PUBLIC_WIKIS.format(this);
 		return getWikiEntityList(requestUrl, parameters);
 	}
+
+	/**
+	 * Get a feed that lists all of the wikis of which the authenticated user is a member. 
+	 * This returns a list of wikis of which the authenticated user is a member. 
+	 * @see
+	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Getting_a_feed_of_a_persons_wikis_ic40a&content=pdcontent">
+	 *			Getting a feed of a person's wikis</a>
+	 * 
+	 * @return EntityList&lt;Wiki&gt;
+	 * @throws ClientServicesException
+	 */
+	public EntityList<Wiki> getMyWikis() throws ClientServicesException {
+		return getMyWikis(null);
+	}
 	
 	/**
 	 * Get a feed that lists all of the wikis of which the authenticated user is a member. 
@@ -173,7 +187,6 @@ public class WikiService extends ConnectionsService {
 	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Getting_a_feed_of_the_wikis_with_the_most_comments_ic40a&content=pdcontent">
 	 *			Getting a feed of the wikis with the most comments</a>
 	 *
-	 * @param parameters
 	 * @return EntityList&lt;Wiki&gt;
 	 * @throws ClientServicesException
 	 */
@@ -204,7 +217,6 @@ public class WikiService extends ConnectionsService {
 	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Getting_a_feed_of_the_wikis_with_the_most_comments_ic40a&content=pdcontent">
 	 *			Getting a feed of the wikis with the most recommendations</a>
 	 *
-	 * @param parameters
 	 * @return EntityList&lt;Wiki&gt;
 	 * @throws ClientServicesException
 	 */
@@ -235,7 +247,6 @@ public class WikiService extends ConnectionsService {
 	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Getting_a_feed_of_the_wikis_with_the_most_comments_ic40a&content=pdcontent">
 	 *			Getting a feed of the most visited wikis</a>
 	 *
-	 * @param parameters
 	 * @return EntityList&lt;Wiki&gt;
 	 * @throws ClientServicesException
 	 */
@@ -300,7 +311,6 @@ public class WikiService extends ConnectionsService {
 	 *			Getting a feed of the wiki pages edited by someone</a>
 	 *
 	 * @param wikiLabel
-	 * @param parameters
 	 * @return EntityList&lt;WikiPage&gt;
 	 * @throws ClientServicesException
 	 */
@@ -334,8 +344,7 @@ public class WikiService extends ConnectionsService {
 	 *			Getting a feed of the wiki pages in the trash</a>
 	 *
 	 * @param wikiLabelOrId
-	 * @param parameters
-	 * @return
+	 * @return EntityList&lt;WikiPage&gt;
 	 * @throws ClientServicesException
 	 */
 	public EntityList<WikiPage> getWikiPagesInTrash(String wikiLabelOrId) throws ClientServicesException {
@@ -352,7 +361,7 @@ public class WikiService extends ConnectionsService {
 	 *
 	 * @param wikiLabelOrId
 	 * @param parameters
-	 * @return
+	 * @return EntityList&lt;WikiPage&gt;
 	 * @throws ClientServicesException
 	 */
 	public EntityList<WikiPage> getWikiPagesInTrash(String wikiLabelOrId, Map<String, String> parameters) throws ClientServicesException {
@@ -365,10 +374,10 @@ public class WikiService extends ConnectionsService {
 	 ****************************************************************/
 
 	/**
-	 * Retrieve an Atom document of a wiki.
+	 * Retrieve an Atom document of a wiki.<br>
 	 * This method returns the Atom entry of a wiki as opposed to a feed of the wiki. 
-	 * If you want to retrieve a feed, see Getting Wikis feeds.
-	 * You do not need to authenticate with the server to send a request to retrieve public resources. 
+	 * If you want to retrieve a feed, see Getting Wikis feeds.<br>
+	 * You do not need to authenticate with the server to send a request to retrieve public resources.<br>
 	 * If authentication is provided, the user must have permission to view the specified resource.
 	 * 
 	 * @see
@@ -376,7 +385,6 @@ public class WikiService extends ConnectionsService {
 	 *			Retrieving a wiki</a>
 	 *
 	 * @param wikiLabel
-	 * @param parameters
 	 * @return Wiki
 	 * @throws ClientServicesException
 	 */
@@ -386,10 +394,10 @@ public class WikiService extends ConnectionsService {
 	}
 	
 	/**
-	 * Retrieve an Atom document of a wiki.
+	 * Retrieve an Atom document of a wiki.<br>
 	 * This method returns the Atom entry of a wiki as opposed to a feed of the wiki. 
-	 * If you want to retrieve a feed, see Getting Wikis feeds.
-	 * You do not need to authenticate with the server to send a request to retrieve public resources. 
+	 * If you want to retrieve a feed, see Getting Wikis feeds.<br>
+	 * You do not need to authenticate with the server to send a request to retrieve public resources.<br>
 	 * If authentication is provided, the user must have permission to view the specified resource.
 	 * 
 	 * @see
@@ -414,7 +422,6 @@ public class WikiService extends ConnectionsService {
 	 *			Creating a wiki</a>
 	 *
 	 * @param wiki
-	 * @param parameters
 	 * @return Wiki
 	 * @throws ClientServicesException
 	 */
@@ -441,9 +448,9 @@ public class WikiService extends ConnectionsService {
 	}
 
 	/**
-	 * To update a wiki, send a replacement wiki definition entry document in Atom format to the existing wiki's edit web address.
+	 * To update a wiki, send a replacement wiki definition entry document in Atom format to the existing wiki's edit web address.<br>
 	 * All existing wiki information will be replaced with the new data. 
-	 * To avoid deleting all existing data, retrieve any data you want to retain first, and send it back with this request. 
+	 * To avoid deleting all existing data, retrieve any data you want to retain first, and send it back with this request.<br>
 	 * For example, if you want to add a new tag to a wiki definition entry, retrieve the existing tags, 
 	 * and send them all back with the new tag in the update request. 
 	 * 
@@ -453,7 +460,6 @@ public class WikiService extends ConnectionsService {
 	 *
 	 * @param wikiLabel
 	 * @param wiki
-	 * @param parameters
 	 * @throws ClientServicesException
 	 */
 	public void updateWiki(Wiki wiki) throws ClientServicesException {
@@ -461,9 +467,9 @@ public class WikiService extends ConnectionsService {
 	}
 	
 	/**
-	 * To update a wiki, send a replacement wiki definition entry document in Atom format to the existing wiki's edit web address.
+	 * To update a wiki, send a replacement wiki definition entry document in Atom format to the existing wiki's edit web address.<br>
 	 * All existing wiki information will be replaced with the new data. 
-	 * To avoid deleting all existing data, retrieve any data you want to retain first, and send it back with this request. 
+	 * To avoid deleting all existing data, retrieve any data you want to retain first, and send it back with this request.<br>
 	 * For example, if you want to add a new tag to a wiki definition entry, retrieve the existing tags, 
 	 * and send them all back with the new tag in the update request. 
 	 * 
@@ -504,9 +510,9 @@ public class WikiService extends ConnectionsService {
 
 	/**
 	 * Retrieve an Atom document of a wiki page. 
-	 * This method returns the Atom entry of a wiki as opposed to a feed of the wiki. 
+	 * This method returns the Atom entry of a wiki as opposed to a feed of the wiki. <br>
 	 * If you want to retrieve a feed, see Getting Wikis feeds.
-	 * You do not need to authenticate with the server to send a request to retrieve public resources. 
+	 * You do not need to authenticate with the server to send a request to retrieve public resources. <br>
 	 * If authentication is provided, the user must have permission to view the specified resource.
 	 * 
 	 * @see
@@ -515,7 +521,6 @@ public class WikiService extends ConnectionsService {
 	 *
 	 * @param wikiLabel
 	 * @param pageLabel
-	 * @param parameters
 	 * @return WikiPage
 	 * @throws ClientServicesException
 	 */
@@ -525,9 +530,9 @@ public class WikiService extends ConnectionsService {
 
 	/**
 	 * Retrieve an Atom document of a wiki page. 
-	 * This method returns the Atom entry of a wiki as opposed to a feed of the wiki. 
+	 * This method returns the Atom entry of a wiki as opposed to a feed of the wiki. <br>
 	 * If you want to retrieve a feed, see Getting Wikis feeds.
-	 * You do not need to authenticate with the server to send a request to retrieve public resources. 
+	 * You do not need to authenticate with the server to send a request to retrieve public resources. <br>
 	 * If authentication is provided, the user must have permission to view the specified resource.
 	 * 
 	 * @see
@@ -553,7 +558,6 @@ public class WikiService extends ConnectionsService {
 	 *			Creating a wiki page</a>
 	 *
 	 * @param wikiPage
-	 * @param parameters
 	 * @return WikiPage
 	 * @throws ClientServicesException
 	 */
@@ -588,7 +592,6 @@ public class WikiService extends ConnectionsService {
 	 *
 	 * @param wikiLabel
 	 * @param wikiPage
-	 * @param parameters
 	 * @throws ClientServicesException
 	 */
 	public void updateWikiPage(String wikiLabel, WikiPage wikiPage) throws ClientServicesException {
@@ -661,6 +664,32 @@ public class WikiService extends ConnectionsService {
 	}
 	
 	/***************************************************************
+	 * Factory methods
+	 ****************************************************************/
+	
+	protected EntityList<Wiki> getWikiEntityList(String requestUrl, 
+			Map<String, String> parameters) throws ClientServicesException {
+		return (EntityList<Wiki>)getEntities(requestUrl, parameters, 
+				getWikiFeedHandler());
+	}
+	
+	protected Wiki getWikiEntity(String requestUrl, Map<String, String> parameters) 
+			throws ClientServicesException {
+		return (Wiki)getEntity(requestUrl, parameters, getWikiFeedHandler());
+	}
+	
+	protected EntityList<WikiPage> getWikiPagesEntityList(String requestUrl, 
+			Map<String, String> parameters) throws ClientServicesException {
+		return (EntityList<WikiPage>)getEntities(requestUrl, 
+				parameters, getWikiPageFeedHandler());
+	}
+	
+	protected WikiPage getWikiPageEntity(String requestUrl, Map<String, String> parameters) 
+			throws ClientServicesException {
+		return (WikiPage)getEntity(requestUrl, parameters, getWikiPageFeedHandler());
+	}
+	
+	/***************************************************************
 	 * Utility methods
 	 ****************************************************************/
 
@@ -730,27 +759,5 @@ public class WikiService extends ConnectionsService {
 	
 	private void deleteData(String requestUrl) throws ClientServicesException {
 		getClientService().delete(requestUrl, null, null, new ClientService.HandlerRaw());
-	}
-	
-	private EntityList<Wiki> getWikiEntityList(String requestUrl, 
-			Map<String, String> parameters) throws ClientServicesException {
-		return (EntityList<Wiki>)getEntities(requestUrl, parameters, 
-				getWikiFeedHandler());
-	}
-	
-	private Wiki getWikiEntity(String requestUrl, Map<String, String> parameters) 
-			throws ClientServicesException {
-		return (Wiki)getEntity(requestUrl, parameters, getWikiFeedHandler());
-	}
-	
-	private EntityList<WikiPage> getWikiPagesEntityList(String requestUrl, 
-			Map<String, String> parameters) throws ClientServicesException {
-		return (EntityList<WikiPage>)getEntities(requestUrl, 
-				parameters, getWikiPageFeedHandler());
-	}
-	
-	private WikiPage getWikiPageEntity(String requestUrl, Map<String, String> parameters) 
-			throws ClientServicesException {
-		return (WikiPage)getEntity(requestUrl, parameters, getWikiPageFeedHandler());
 	}
 }

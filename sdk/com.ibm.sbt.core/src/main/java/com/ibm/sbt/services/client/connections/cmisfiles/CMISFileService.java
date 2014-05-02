@@ -86,7 +86,8 @@ public class CMISFileService extends ConnectionsService {
 	//------------------------------------------------------------------------------------------------------------------
 	
 	/**
-	 * Method to fetch the list of files.
+	 * Gets a feed that lists the files in your library.
+	 * 
 	 * @return EntityList<CMISFile>
 	 * @throws ClientServicesException
 	 */
@@ -95,7 +96,8 @@ public class CMISFileService extends ConnectionsService {
 	}
 	
 	/**
-	 * Method to fetch the list of files.
+	 * Gets a feed that lists the files in your library.
+	 * 
 	 * @param parameters
 	 * @return EntityList<CMISFile>
 	 * @throws ClientServicesException
@@ -107,7 +109,8 @@ public class CMISFileService extends ConnectionsService {
 	}
 	
 	/**
-	 * Method to fetch the list of files shared with the User.
+	 * Retrieves an Atom document representation of a file shared with the user.
+	 * 
 	 * @return EntityList<CMISFile>
 	 * @throws ClientServicesException
 	 */
@@ -116,7 +119,8 @@ public class CMISFileService extends ConnectionsService {
 	}
 	
 	/**
-	 * Method to fetch the list of files shared with the User.
+	 * Retrieves an Atom document representation of a file shared with the user.
+	 * 
 	 * @param parameters
 	 * @return EntityList<CMISFile>
 	 * @throws ClientServicesException
@@ -128,7 +132,8 @@ public class CMISFileService extends ConnectionsService {
 	}
 	
 	/**
-	 * Method to fetch the list of Collections.
+	 * Retrieves an Atom document representation of the user's file collection.
+	 * 
 	 * @return EntityList<CMISFile>
 	 * @throws ClientServicesException
 	 */
@@ -137,7 +142,8 @@ public class CMISFileService extends ConnectionsService {
 	}
 	
 	/**
-	 * Method to fetch the list of Collections.
+	 * Retrieves an Atom document representation of the user's file collection.
+	 * 
 	 * @param parameters
 	 * @return EntityList<CMISFile>
 	 * @throws ClientServicesException
@@ -149,7 +155,8 @@ public class CMISFileService extends ConnectionsService {
 	}
 	
 	/**
-	 * Method to fetch the list of Collections shared with the User.
+	 * Retrieves an Atom document representation of a file collection shared with the user.
+	 * 
 	 * @return EntityList<CMISFile>
 	 * @throws CMISFileServiceException
 	 */
@@ -158,7 +165,8 @@ public class CMISFileService extends ConnectionsService {
 	}
 	
 	/**
-	 * Method to fetch the list of Collections shared with the User.
+	 * Retrieves an Atom document representation of a file collection shared with the user.
+	 * 
 	 * @param parameters
 	 * @return EntityList<CMISFile>
 	 * @throws ClientServicesException
@@ -170,7 +178,8 @@ public class CMISFileService extends ConnectionsService {
 	}
 	
 	/**
-	 * Method to fetch the list of User's shares.
+	 * Retrieves an Atom document representation of a file shared by the user.
+	 * 
 	 * @return EntityList<CMISFile>
 	 * @throws CMISFileServiceException
 	 */
@@ -179,7 +188,8 @@ public class CMISFileService extends ConnectionsService {
 	}
 	
 	/**
-	 * Method to fetch the list of User's shares.
+	 * Retrieves an Atom document representation of a file shared by the user.
+	 * 
 	 * @param parameters
 	 * @return EntityList<CMISFile>
 	 * @throws ClientServicesException
@@ -218,7 +228,7 @@ public class CMISFileService extends ConnectionsService {
      * Method to get the Default endpoint to be used with the service
      * @return
      */
-    private static String getDefaultEndpoint() {
+    protected static String getDefaultEndpoint() {
 		return "connections";
 	}
     

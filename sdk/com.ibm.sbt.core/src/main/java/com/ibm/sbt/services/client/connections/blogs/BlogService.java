@@ -18,7 +18,6 @@ package com.ibm.sbt.services.client.connections.blogs;
 
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -97,7 +96,10 @@ public class BlogService extends ConnectionsService {
 
 	
 	/**
-	 * This method returns the all blogs
+	 * Get a feed that includes all of the blogs hosted by the Blogs application. You can narrow down 
+	 * the blogs that are returned by passing parameters to the request that you use to retrieve the feed. 
+	 * If you do not specify any input parameters, the server returns all of the blogs that are displayed 
+	 * in the Public Blogs>Blogs Listing view from the product user interface.
 	 * 
 	 * @deprecated use getAllBlogs instead
 	 * @return EntityList<Blog>
@@ -105,22 +107,26 @@ public class BlogService extends ConnectionsService {
 	 */
 	public EntityList<Blog> getBlogs() throws ClientServicesException{
 		return getAllBlogs();
-		
 	}
 	
 	/**
-	 * This method returns the all blogs
+	 * Get a feed that includes all of the blogs hosted by the Blogs application. You can narrow down 
+	 * the blogs that are returned by passing parameters to the request that you use to retrieve the feed. 
+	 * If you do not specify any input parameters, the server returns all of the blogs that are displayed 
+	 * in the Public Blogs>Blogs Listing view from the product user interface.
 	 * 
 	 * @return
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Blog> getAllBlogs() throws ClientServicesException{
 		return getAllBlogs(null);
-		
 	}
 	
 	/**
-	 * This method returns the all blogs
+	 * Get a feed that includes all of the blogs hosted by the Blogs application. You can narrow down 
+	 * the blogs that are returned by passing parameters to the request that you use to retrieve the feed. 
+	 * If you do not specify any input parameters, the server returns all of the blogs that are displayed 
+	 * in the Public Blogs>Blogs Listing view from the product user interface.
 	 * 
 	 * @param parameters
 	 * @return EntityList<Blog>
@@ -131,9 +137,11 @@ public class BlogService extends ConnectionsService {
 		return getBlogEntityList(url, parameters);
 	}
 	
-	
 	/**
-	 * This method returns My blogs
+	 * Get a feed that includes my blogs hosted by the Blogs application. You can narrow down 
+	 * the blogs that are returned by passing parameters to the request that you use to retrieve the feed. 
+	 * If you do not specify any input parameters, the server returns all of the blogs that are displayed 
+	 * in the Public Blogs>Blogs Listing view from the product user interface.
 	 * 
 	 * @return EntityList<Blog>
 	 * @throws ClientServicesException
@@ -143,7 +151,10 @@ public class BlogService extends ConnectionsService {
 	}
 	
 	/**
-	 * This method returns My blogs
+	 *  Get a feed that includes my blogs hosted by the Blogs application. You can narrow down 
+	 * the blogs that are returned by passing parameters to the request that you use to retrieve the feed. 
+	 * If you do not specify any input parameters, the server returns all of the blogs that are displayed 
+	 * in the Public Blogs>Blogs Listing view from the product user interface.
 	 * 
 	 * @param parameters
 	 * @return EntityList<Blog>
@@ -155,7 +166,8 @@ public class BlogService extends ConnectionsService {
 	}
 
 	/**
-	 * This method returns the featured blogs
+	 * Get the featured blogs feed to find the blogs that have had the most activity across all of the blogs 
+	 * hosted by the Blogs application in the past two weeks.
 	 * 
 	 * @return EntityList<Blog>
 	 * @throws ClientServicesException
@@ -165,7 +177,8 @@ public class BlogService extends ConnectionsService {
 	}
 	
 	/**
-	 * This method returns the featured blogs
+	 * Get the featured blogs feed to find the blogs that have had the most activity across all of the blogs 
+	 * hosted by the Blogs application in the past two weeks.
 	 * 
 	 * @param parameters
 	 * @return EntityList<Blog>
@@ -175,8 +188,9 @@ public class BlogService extends ConnectionsService {
 		String url = BlogUrls.FEATURED_BLOGS.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle));
 		return getBlogEntityList(url, parameters);
 	}
+	
 	/**
-	 * This method returns the most recent Blog posts
+	 * Get a feed that lists all of the posts in a specific blog from most recent to oldest.
 	 * 
 	 * @return EntityList<BlogPost>
 	 * @throws ClientServicesException
@@ -186,7 +200,7 @@ public class BlogService extends ConnectionsService {
 	}
 	
 	/**
-	 * This method returns the most recent posts
+	 * Get a feed that lists all of the posts in a specific blog from most recent to oldest.
 	 * 
 	 * @param parameters
 	 * @return EntityList<BlogPost>
@@ -198,7 +212,8 @@ public class BlogService extends ConnectionsService {
 	}
 	
 	/**
-	 * This method returns the featured posts
+	 * Get the featured posts feed to find the blog posts that have had the most activity 
+	 * across all of the blogs hosted by the Blogs application within the past two weeks.
 	 * 
 	 * @return EntityList<BlogPost>
 	 * @throws ClientServicesException
@@ -208,7 +223,8 @@ public class BlogService extends ConnectionsService {
 	}
 	
 	/**
-	 * This method returns the featured posts
+	 * Get the featured posts feed to find the blog posts that have had the most activity 
+	 * across all of the blogs hosted by the Blogs application within the past two weeks.
 	 * 
 	 * @param parameters
 	 * @return EntityList<BlogPost>
@@ -220,7 +236,7 @@ public class BlogService extends ConnectionsService {
 	}
 	
 	/**
-	 * This method returns the recommended posts
+	 * Get a feed that includes all of the recommended blog posts in all of the blogs hosted by the Blogs application.
 	 * 
 	 * @return EntityList<BlogPost>
 	 * @throws ClientServicesException
@@ -230,7 +246,7 @@ public class BlogService extends ConnectionsService {
 	}
 	
 	/**
-	 * This method returns the recommended posts
+	 * Get a feed that includes all of the recommended blog posts in all of the blogs hosted by the Blogs application.
 	 * 
 	 * @param parameters
 	 * @return EntityList<BlogPost>
@@ -242,7 +258,8 @@ public class BlogService extends ConnectionsService {
 	}
 	
 	/**
-	 * This method returns the latest comments on blogs
+	 * Get a feed that includes all of the comments added to the postings in all of the blogs hosted by the 
+	 * Blogs application from most recent to oldest.
 	 * 
 	 * @return EntityList<Comment>
 	 * @throws ClientServicesException
@@ -252,7 +269,8 @@ public class BlogService extends ConnectionsService {
 	}
 	
 	/**
-	 * This method returns the latest comments on blogs
+	 * Get a feed that includes all of the comments added to the postings in all of the blogs hosted by the 
+	 * Blogs application from most recent to oldest.
 	 * 
 	 * @param parameters
 	 * @return EntityList<Comment>
@@ -264,7 +282,8 @@ public class BlogService extends ConnectionsService {
 	}
 	
 	/**
-	 * This method returns the tags on all blogs
+	 * Get a category document that lists the tags that have been assigned to all of 
+	 * the blogs hosted by the Blogs application.
 	 * 
 	 * @return EntityList<Tag>
 	 * @throws ClientServicesException
@@ -275,7 +294,8 @@ public class BlogService extends ConnectionsService {
 	}
 	
 	/**
-	 * This method returns the most recent posts for a particular Blog
+	 * Get a category document that lists the tags that have been assigned to all of 
+	 * the blogs hosted by the Blogs application.
 	 * 
 	 * @return EntityList<BlogPost>
 	 * @throws ClientServicesException
@@ -285,7 +305,7 @@ public class BlogService extends ConnectionsService {
 	}
 	
 	/**
-	 * This method returns the most recent posts for a particular Blog
+	 * Get a feed that lists all of the posts in a specific blog from most recent to oldest.
 	 * 
 	 * @param blogHandle
 	 * @param parameters
@@ -298,7 +318,7 @@ public class BlogService extends ConnectionsService {
 	}
 	
 	/**
-	 * This method returns the latest comments for a particular Blog
+	 * Get a feed that lists the comments added to the posts in a single blog.
 	 * 
 	 * @param blogHandle
 	 * @return EntityList<Comment>
@@ -309,7 +329,7 @@ public class BlogService extends ConnectionsService {
 	}
 	
 	/**
-	 * This method returns the latest comments for a particular Blog
+	 * Get a feed that lists the comments added to the posts in a single blog.
 	 * 
 	 * @param blogHandle
 	 * @param parameters
@@ -322,7 +342,7 @@ public class BlogService extends ConnectionsService {
 	}
 	
 	/**
-	 * This method returns the comments for a particular Blog entry
+	 * Get a feed that lists the comments added to the posts in a single blog.
 	 * 
 	 * @param blogHandle
 	 * @param entryAnchor
@@ -336,7 +356,8 @@ public class BlogService extends ConnectionsService {
 	}
 	
 	/**
-	 * This method returns the tags for a particular blog
+	 * Get a category document that lists the tags that have been assigned to all of the posts 
+	 * in an individual blog.
 	 * 
 	 * @param blogHandle
 	 * @return EntityList<Tag>
@@ -371,16 +392,15 @@ public class BlogService extends ConnectionsService {
 			String createBlogUrl = BlogUrls.MY_BLOGS.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle));
 			result = createData(createBlogUrl, null, headers, payload);
 			blog = getBlogFeedHandler().createEntity(result);
-		} catch (IOException e) {
-			throw new ClientServicesException(e, "error creating blog");
 		} catch (TransformerException e) {
 			throw new ClientServicesException(e, "error creating blog");
 		}
 
         return blog;
 	}
+	
 	/**
-	 * Wrapper method to get a Blog 
+	 * Gets a single blog identified by the blog Uuid
 	 * 
 	 * @param Blog
 	 * @throws ClientServicesException
@@ -393,6 +413,7 @@ public class BlogService extends ConnectionsService {
 		String url = BlogUrls.GET_UPDATE_REMOVE_BLOG.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle), BlogUrlParts.entryAnchor.get(blogUuid));		
 		return getBlogEntity(url, null);
 	}
+	
 	/**
 	 * Wrapper method to update a Blog 
 	 * 
@@ -466,6 +487,7 @@ public class BlogService extends ConnectionsService {
 		String url = BlogUrls.BLOG_POST.format(this, BlogUrlParts.blogHandle.get(blogHandle), BlogUrlParts.getEntryId(entryid));
 		return getBlogPostEntity(url, null);
 	}
+	
 	/**
 	 * Wrapper method to recommend/like a Blog Post
 	 * User should be authenticated to call this method
@@ -535,7 +557,6 @@ public class BlogService extends ConnectionsService {
 	
 	/**
 	 * Wrapper method to create a Blog Post
-	 * <p>
 	 * User should be authenticated to call this method
 	 * 
 	 * @param BlogPost
@@ -623,9 +644,6 @@ public class BlogService extends ConnectionsService {
 			throw new ClientServicesException(e,"error deleting post");
 		} 	
 	}
-	
-
-
 	
 	/**
 	 * Wrapper method to create a Blog Comment

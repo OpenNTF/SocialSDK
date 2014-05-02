@@ -257,7 +257,6 @@ public class ProfileService extends ConnectionsService {
 		if (profile == null) {
 			throw new ClientServicesException(null, Messages.InvalidArgument_3);
 		}
-		try {
 			Map<String, String> parameters = new HashMap<String, String>();
 			parameters.put(OUTPUT, VCARD);
 			parameters.put(FORMAT, FULL);
@@ -266,10 +265,6 @@ public class ProfileService extends ConnectionsService {
 			String updateUrl = ProfileUrls.PROFILE_ENTRY.format(this, ProfileParams.userId.get(id));
 			updateData(updateUrl, parameters,updateProfilePayload, ProfileParams.userId.getParamName(profile.getAsString("uid")));
 			profile.clearFieldsMap();
-		} catch (IOException e) {
-			throw new ClientServicesException(e, Messages.UpdateProfileException);
-		}
-
 	}
 
 	/***************************************************************
@@ -321,12 +316,8 @@ public class ProfileService extends ConnectionsService {
 	    			ProfileParams.targetId.get(targetId));
 	    
 	    ProfileSerializer serializer = new ProfileSerializer(profile);
-	    try {
-			Response response = updateData(serviceUrl, null, serializer.tagsPayload(), null);
-			checkResponseCode(response, HTTPCode.OK);
-		} catch (IOException e) {
-			throw new ClientServicesException(e, Messages.AddTagsException, targetId);
-		}
+		Response response = updateData(serviceUrl, null, serializer.tagsPayload(), null);
+		checkResponseCode(response, HTTPCode.OK);
 	}
 
 	/***************************************************************
@@ -602,17 +593,12 @@ public class ProfileService extends ConnectionsService {
 	 * @throws ClientServicesException 
 	 */
 	public String sendInvite(String id, String inviteMsg)throws ClientServicesException {
-		try {
-			Map<String, String> parameters = new HashMap<String, String>();
-			parameters.put(CONNECTION_TYPE, COLLEAGUE);
-			Object payload = constructSendInviteRequestBody(inviteMsg);
-			String url = ProfileUrls.CONNECTIONS.format(this, ProfileParams.userId.get(id));
-			Response response = createData(url, parameters, payload);
-			return extractConnectionIdFromHeaders(response);
-		} catch (IOException e) {
-			throw new ClientServicesException(e, Messages.SendInviteException, id);
-		}
-
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put(CONNECTION_TYPE, COLLEAGUE);
+		Object payload = constructSendInviteRequestBody(inviteMsg);
+		String url = ProfileUrls.CONNECTIONS.format(this, ProfileParams.userId.get(id));
+		Response response = createData(url, parameters, payload);
+		return extractConnectionIdFromHeaders(response);
 	}
 
 	/**
@@ -626,13 +612,9 @@ public class ProfileService extends ConnectionsService {
 		if (connection == null) {
 			throw new ClientServicesException(null, Messages.InvalidArgument_6);
 		}
-		try {
-			Object payload = constructAcceptInviteRequestBody(connection, ACCEPTED);
-			String url = ProfileUrls.CONNECTION.format(this, ProfileUrls.getConnectionId(connection.getConnectionId()));
-			updateData(url, null, payload, connection.getConnectionId());
-		} catch (IOException e) {
-			throw new ClientServicesException(e, Messages.AcceptInviteException, connection.getConnectionId());
-		}
+		Object payload = constructAcceptInviteRequestBody(connection, ACCEPTED);
+		String url = ProfileUrls.CONNECTION.format(this, ProfileUrls.getConnectionId(connection.getConnectionId()));
+		updateData(url, null, payload, connection.getConnectionId());
 	}
 
 	/**
@@ -646,12 +628,8 @@ public class ProfileService extends ConnectionsService {
 		if (StringUtil.isEmpty(connectionId)) {
 			throw new ClientServicesException(null, Messages.InvalidArgument_2);
 		}
-		try {
-			String url = ProfileUrls.CONNECTION.format(this, ProfileUrls.getConnectionId(connectionId));
-			deleteData(url, null, connectionId);
-		} catch (IOException e) {
-			throw new ClientServicesException(e, Messages.DeleteInviteException, connectionId);
-		}
+		String url = ProfileUrls.CONNECTION.format(this, ProfileUrls.getConnectionId(connectionId));
+		deleteData(url, null, connectionId);
 	}
 	
 	/**

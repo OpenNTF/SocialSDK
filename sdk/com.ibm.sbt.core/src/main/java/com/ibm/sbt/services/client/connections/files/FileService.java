@@ -39,7 +39,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.StringReader;
-import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -50,10 +49,12 @@ import java.util.logging.Logger;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 import com.ibm.commons.runtime.mime.MIME;
 import com.ibm.commons.util.StringUtil;
@@ -209,11 +210,7 @@ public class FileService extends ConnectionsService {
         Object payload = constructPayloadForModeration(commentId, action, actionReason, "comment");
         Map<String, String> headers = new HashMap<String, String>();
         headers.put(Headers.ContentType, Headers.ATOM);
-        try {
-            updateData(requestUri, null, headers, payload, commentId);
-        } catch (IOException e) {
-            throw new ClientServicesException(e, Messages.MessageExceptionInStatusChange);
-        }
+        updateData(requestUri, null, headers, payload, commentId);
     }
 
     public void actOnFileAwaitingApproval(String fileId, String action, String actionReason)
@@ -236,11 +233,7 @@ public class FileService extends ConnectionsService {
         Object payload = constructPayloadForModeration(fileId, action, actionReason, "file");
         Map<String, String> headers = new HashMap<String, String>();
         headers.put(Headers.ContentType, Headers.ATOM);
-        try {
-            updateData(requestUri, null,  headers, payload, fileId);
-        } catch (IOException e) {
-            throw new ClientServicesException(e, Messages.MessageExceptionInStatusChange);
-        }
+        updateData(requestUri, null,  headers, payload, fileId);
     }
 
     public void actOnFlaggedComment(String commentId, String action, String actionReason)
@@ -264,11 +257,7 @@ public class FileService extends ConnectionsService {
         Object payload = constructPayloadForModeration(commentId, action, actionReason, "comment");
         Map<String, String> headers = new HashMap<String, String>();
         headers.put(Headers.ContentType, Headers.ATOM);
-        try {
-            updateData(requestUri, null, headers, payload, commentId);
-        } catch (IOException e) {
-            throw new ClientServicesException(e, Messages.MessageExceptionInFlaggingComment);
-        }
+        updateData(requestUri, null, headers, payload, commentId);
     }
 
     public void actOnFlaggedFile(String fileId, String action, String actionReason)
@@ -291,11 +280,7 @@ public class FileService extends ConnectionsService {
         Object payload = constructPayloadForModeration(fileId, action, actionReason, "file");
         Map<String, String> headers = new HashMap<String, String>();
         headers.put(Headers.ContentType, Headers.ATOM);
-        try {
-            updateData(requestUri, null, headers, payload, fileId);
-       } catch (IOException e) {
-            throw new ClientServicesException(e, Messages.MesssageExceptionInFlaggingFile);
-        }
+        updateData(requestUri, null, headers, payload, fileId);
     }
 
     /**
@@ -341,12 +326,8 @@ public class FileService extends ConnectionsService {
         	requestUri = FileUrls.USERLIBRARY_DOCUMENT_FEED.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId), FileUrlParts.fileId.get(fileId));
         }
         Document payload = constructPayloadForComments(comment);
-        try {
-            Response result = (Response) createData(requestUri, null, new ClientService.ContentXml(payload, APPLICATION_ATOM_XML));
-            return getCommentFeedHandler().createEntity(result);
-        } catch (IOException e) {
-            throw new ClientServicesException(e, Messages.MessageExceptionInCreatingComment);
-        }
+        Response result = (Response) createData(requestUri, null, new ClientService.ContentXml(payload, APPLICATION_ATOM_XML));
+        return getCommentFeedHandler().createEntity(result);
     }
 
     /**
@@ -393,12 +374,8 @@ public class FileService extends ConnectionsService {
         String accessType = AccessType.AUTHENTICATED.getText();
         String requestUri = FileUrls.COMMUNITY_FILE_COMMENT.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.communityId.get(communityId), FileUrlParts.fileId.get(fileId));
         Document payload = constructPayloadForComments(comment);
-        try {
-            Response result = (Response) createData(requestUri, null, new ClientService.ContentXml(payload, APPLICATION_ATOM_XML));
-            return getCommentFeedHandler().createEntity(result);
-        } catch (IOException e) {
-            throw new ClientServicesException(e, Messages.MessageExceptionInCreatingComment);
-        }
+        Response result = (Response) createData(requestUri, null, new ClientService.ContentXml(payload, APPLICATION_ATOM_XML));
+        return getCommentFeedHandler().createEntity(result);
     }
     
     /**
@@ -635,16 +612,14 @@ public class FileService extends ConnectionsService {
         String accessType = AccessType.AUTHENTICATED.getText();
         String requestUri = FileUrls.COMMUNITY_FILE_METADATA.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.communityId.get(communityLibraryId), FileUrlParts.fileId.get(fileEntry.getFileId()));
         Document updateFilePayload = null;
-        try {
-        	updateFilePayload = constructPayload(fileEntry.getFileId(), fileEntry.getFieldsMap());
-            Response result = (Response) updateData(requestUri, params, new ClientService.ContentXml(
-            		updateFilePayload, "application/atom+xml"), null);
-            return getFileFeedHandler().createEntity(result);
-        } catch (IOException e) {
-            throw new ClientServicesException(e, Messages.MessageExceptionInUpdate);
-        } catch (TransformerException e) {
-            throw new ClientServicesException(e, Messages.MessageExceptionInUpdate);
-        }
+    	try {
+			updateFilePayload = constructPayload(fileEntry.getFileId(), fileEntry.getFieldsMap());
+		} catch (TransformerException e) {
+			throw new ClientServicesException(e);
+		}
+        Response result = (Response) updateData(requestUri, params, new ClientService.ContentXml(
+        		updateFilePayload, "application/atom+xml"), null);
+        return getFileFeedHandler().createEntity(result);
 	}
 
     /**
@@ -674,17 +649,10 @@ public class FileService extends ConnectionsService {
         String requestUri = FileUrls.COLLECTION_FEED.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.folderId.get(folderId));
         Map<String, String> headers = new HashMap<String, String>();
         headers.put(Headers.ContentType, Headers.ATOM);
-        Object payload = constructPayloadForMultipleEntries(listOfFileIds,
-                FileRequestParams.ITEMID.getFileRequestParams());
-
-        try {
-            Response result;
-            result = (Response) createData(requestUri, params, headers, payload);
-            return (FileList) getFileFeedHandler().createEntityList(result);
-            
-        } catch (IOException e) {
-            throw new ClientServicesException(e, Messages.MessageGenericException);
-        }
+        Object payload = constructPayloadForMultipleEntries(listOfFileIds, FileRequestParams.ITEMID.getFileRequestParams());
+        Response result;
+        result = (Response) createData(requestUri, params, headers, payload);
+        return (FileList) getFileFeedHandler().createEntityList(result);
     }
 
     /**
@@ -767,11 +735,7 @@ public class FileService extends ConnectionsService {
 		params = (null == params)?new HashMap<String, String>():params;
         Object payload = constructPayloadForMultipleEntries(folderIds,
                 FileRequestParams.ITEMID.getFileRequestParams(), "collection");
-        try {
-            createData(requestUri, params, headers, payload);
-        } catch (IOException e) {
-            throw new ClientServicesException(e, Messages.MessageGenericException);
-        }
+        createData(requestUri, params, headers, payload);
     }
 
     public Comment createComment(String fileId, String comment) throws ClientServicesException, TransformerException {
@@ -823,14 +787,9 @@ public class FileService extends ConnectionsService {
        
         Document payload = constructPayloadForComments(comment);
         Map<String, String> headers = new HashMap<String, String>();
-      
-        try {
-            Response result = (Response) createData(requestUri, params, headers, new ClientService.ContentXml(
-                    payload, APPLICATION_ATOM_XML));
-            return getCommentFeedHandler().createEntity(result);
-        } catch (IOException e) {
-            throw new ClientServicesException(e, Messages.MessageExceptionInCreatingComment);
-        }
+        Response result = (Response) createData(requestUri, params, headers, new ClientService.ContentXml(
+                payload, APPLICATION_ATOM_XML));
+        return getCommentFeedHandler().createEntity(result);
     }
 
     public File createFolder(String name) throws ClientServicesException, TransformerException {
@@ -862,15 +821,8 @@ public class FileService extends ConnectionsService {
         String requestUri = FileUrls.COLLECTIONS_FEED.format(this, FileUrlParts.accessType.get(accessType));
         Document payload = constructPayloadFolder(name, description, shareWith, "create");
 
-        try {
-            Response result = (Response) createData(requestUri, null,
-                    new ClientService.ContentXml(
-                            payload, APPLICATION_ATOM_XML));
-            return getFileFeedHandler().createEntity(result);
-        } catch (Exception e) {
-            throw new ClientServicesException(e, Messages.MessageExceptionInCreatingFolder);
-        }
-
+        Response result = (Response) createData(requestUri, null, new ClientService.ContentXml(payload, APPLICATION_ATOM_XML));
+        return getFileFeedHandler().createEntity(result);
     }
 
     /**
@@ -884,13 +836,7 @@ public class FileService extends ConnectionsService {
     public void deleteFile(String fileId) throws ClientServicesException {
         String accessType = AccessType.AUTHENTICATED.getText();
         String requestUri = FileUrls.MYUSERLIBRARY_DOCUMENT_ENTRY.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
-
-        try {
-            deleteData(requestUri, null, null);
-        } catch (Exception e) {
-            throw new ClientServicesException(e, Messages.MessageExceptionInDeletingFile);
-        }
-
+        deleteData(requestUri, null, null);
     }
 
     /**
@@ -924,11 +870,7 @@ public class FileService extends ConnectionsService {
         } else {
         	requestUri = FileUrls.EMPTY_RECYCLE_BIN.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId));
         }
-        try {
-            deleteData(requestUri, null, null);
-        } catch (IOException e) {
-            throw new ClientServicesException(e, Messages.MessageExceptionInDeletingFile);
-        }
+        deleteData(requestUri, null, null);
     }
 
     /**
@@ -958,13 +900,7 @@ public class FileService extends ConnectionsService {
 		params = (null == params)?new HashMap<String, String>():params;
         params.put(FileRequestParams.CATEGORY.getFileRequestParams(), "version");
         params.put(FileRequestParams.DELETEFROM.getFileRequestParams(), versionLabel);
-
-        try {
-            deleteData(requestUri, params, null);
-        } catch (IOException e) {
-            throw new ClientServicesException(e, Messages.MessageExceptionInDeletingFile);
-        }
-
+        deleteData(requestUri, params, null);
     }
 
     /**
@@ -999,11 +935,7 @@ public class FileService extends ConnectionsService {
         	requestUri = FileUrls.USERLIBRARY_DOCUMENT_COMMENT_ENTRY.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId), FileUrlParts.fileId.get(fileId), FileUrlParts.commentId.get(commentId));
         }
 
-        try {
-            deleteData(requestUri, null, null);
-        } catch (Exception e) {
-            throw new ClientServicesException(e, Messages.MessageExceptionInDeletingComment);
-        }
+        deleteData(requestUri, null, null);
     }
 
     public void deleteFileAwaitingApproval(String fileId) throws ClientServicesException {
@@ -1011,11 +943,7 @@ public class FileService extends ConnectionsService {
             throw new ClientServicesException(null, Messages.Invalid_FileId);
         }
         String requestUri = getModerationUri(fileId, Categories.APPROVAL.get(), ModerationContentTypes.DOCUMENTS.get());
-        try {
-            deleteData(requestUri, null, null);
-        } catch (IOException e) {
-            throw new ClientServicesException(e, Messages.MessageExceptionInDeletingFile);
-        }
+        deleteData(requestUri, null, null);
     }
 
     /**
@@ -1050,11 +978,7 @@ public class FileService extends ConnectionsService {
         	requestUri = FileUrls.USERLIBRARY_RECYCLEBIN_ENTRY.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId), FileUrlParts.fileId.get(fileId));
         }
 
-        try {
-            deleteData(requestUri, null, null);
-        } catch (IOException e) {
-            throw new ClientServicesException(e, Messages.MessageExceptionInDeletingFile);
-        }
+        deleteData(requestUri, null, null);
     }
 
     /**
@@ -1099,11 +1023,7 @@ public class FileService extends ConnectionsService {
         if (!StringUtil.isEmpty(userId)) {
             params.put(FileRequestParams.SHAREDWITH.getFileRequestParams(), userId);
         }
-        try {
-            deleteData(requestUri, params, null);
-        } catch (IOException e) {
-            throw new ClientServicesException(e, Messages.MessageExceptionInDeletingFileShare);
-        }
+        deleteData(requestUri, params, null);
     }
 
     public void deleteFlaggedComment(String commentId) throws ClientServicesException {
@@ -1114,11 +1034,7 @@ public class FileService extends ConnectionsService {
         if (StringUtil.isEmpty(requestUri)) {
             return;
         }
-        try {
-            deleteData(requestUri, null, null);
-        } catch (IOException e) {
-            throw new ClientServicesException(e, Messages.MessageExceptionInDeletingComment);
-        }
+        deleteData(requestUri, null, null);
     }
 
     public void deleteFlaggedFiles(String fileId) throws ClientServicesException {
@@ -1129,11 +1045,7 @@ public class FileService extends ConnectionsService {
         if (StringUtil.isEmpty(requestUri)) {
             return;
         }
-        try {
-            deleteData(requestUri, null, null);
-        } catch (IOException e) {
-            throw new ClientServicesException(e, Messages.MessageExceptionInDeletingFile);
-        }
+        deleteData(requestUri, null, null);
     }
 
     /**
@@ -1148,11 +1060,7 @@ public class FileService extends ConnectionsService {
     public void deleteFolder(String folderId) throws ClientServicesException {
         String accessType = AccessType.AUTHENTICATED.getText();
         String requestUri = FileUrls.COLLECTION_ENTRY.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.folderId.get(folderId));
-        try {
-            deleteData(requestUri, null, null);
-        } catch (IOException e) {
-            throw new ClientServicesException(e, Messages.MessageExceptionInDeleteFolder);
-        }
+        deleteData(requestUri, null, null);
     }
 
     /**
@@ -1182,11 +1090,7 @@ public class FileService extends ConnectionsService {
         headers.put(Headers.ContentType, Headers.ATOM);
 
         Object payload = constructPayloadForFlagging(id, flagReason, flagWhat);
-        try {
-            updateData(requestUri, null, headers, payload, id);
-        } catch (Exception e) {
-            throw new ClientServicesException(e, Messages.MessageExceptionInFlaggingInappropriate);
-        }
+        updateData(requestUri, null, headers, payload, id);
     }
 
     public EntityList<File> getAllUserFiles(String userId) throws ClientServicesException {
@@ -1967,11 +1871,7 @@ public class FileService extends ConnectionsService {
         String requestUri = FileUrls.LOCK_FILE.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
         Map<String, String> params = new HashMap<String, String>();
         params.put(FileRequestParams.LOCK.getFileRequestParams(), LOCKTYPE_HARD);
-        try {
-            createData(requestUri, params, null);
-        } catch (IOException e) {
-            throw new ClientServicesException(e, Messages.MessageExceptionInLockingFile);
-        }
+        createData(requestUri, params, null);
     }
 
     /**
@@ -1991,11 +1891,7 @@ public class FileService extends ConnectionsService {
         String requestUri = FileUrls.MYFAVORITES_DOCUMENTS_FEED.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
         Map<String, String> params = new HashMap<String, String>();
         params.put(FileRequestParams.ITEMID.getFileRequestParams(), fileId);
-        try {
-            createData(requestUri, params, null);
-        } catch (IOException e) {
-            throw new ClientServicesException(e, Messages.MessageExceptionInPinningFile);
-        }
+        createData(requestUri, params, null);
     }
     /**
      * * pinFolder
@@ -2026,11 +1922,7 @@ public class FileService extends ConnectionsService {
         String requestUri = FileUrls.MYFAVORITES_COLLECTIONS_FEED.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.folderId.get(folderId));
 		params = (null == params)?new HashMap<String, String>():params;
         params.put(FileRequestParams.ITEMID.getFileRequestParams(), folderId);
-        try {
-            createData(requestUri, params,  null);
-        } catch (IOException e) {
-            throw new ClientServicesException(e, Messages.MessageExceptionInPinningFolder);
-        }
+        createData(requestUri, params,  null);
     }
 
     /**
@@ -2049,11 +1941,7 @@ public class FileService extends ConnectionsService {
         String requestUri = FileUrls.COLLECTION_FEED.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.folderId.get(folderId));
         Map<String, String> params = new HashMap<String, String>();
         params.put(FileRequestParams.ITEMID.getFileRequestParams(), fileId);
-        try {
-            deleteData(requestUri, params, null);
-        } catch (IOException e) {
-            throw new ClientServicesException(e, Messages.MessageExceptionInDeletingFile);
-        }
+        deleteData(requestUri, params, null);
     }
 
     /**
@@ -2094,13 +1982,8 @@ public class FileService extends ConnectionsService {
         Map<String, String> params = new HashMap<String, String>();
         params.put(FileRequestParams.UNDELETE.getFileRequestParams(), TRUE);
         Map<String, String> headers = new HashMap<String, String>();
-        try {
-            Response data = (Response) updateData(requestUri, params, headers, null, null);
-            return getFileFeedHandler().createEntity(data);
-        } catch (IOException e) {
-            throw new ClientServicesException(e, Messages.MessageExceptionInRestoreFile);
-        }
-       
+        Response data = (Response) updateData(requestUri, params, headers, null, null);
+        return getFileFeedHandler().createEntity(data);
     }
 
     /**
@@ -2134,11 +2017,7 @@ public class FileService extends ConnectionsService {
         Map<String, String> headers = new HashMap<String, String>();
         headers.put(Headers.ContentType, Headers.ATOM);
         headers.put(Headers.ContentLanguage, Headers.UTF);
-        try {
-            createData(requestUri, params, headers, payload);
-        } catch (IOException e) {
-            throw new ClientServicesException(e, "Error sharing the file");
-        }
+        createData(requestUri, params, headers, payload);
     }
 
     /**
@@ -2155,11 +2034,7 @@ public class FileService extends ConnectionsService {
         String requestUri = FileUrls.LOCK_FILE.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
         Map<String, String> params = new HashMap<String, String>();
         params.put(FileRequestParams.LOCK.getFileRequestParams(), LOCKTYPE_NONE);
-        try {
-            createData(requestUri, params, null);
-        } catch (IOException e) {
-            throw new ClientServicesException(e, "Error unlocking the file");
-        }
+        createData(requestUri, params, null);
     }
 
     /**
@@ -2176,11 +2051,7 @@ public class FileService extends ConnectionsService {
         String requestUri = FileUrls.MYFAVORITES_DOCUMENTS_FEED.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
         Map<String, String> params = new HashMap<String, String>();
         params.put(FileRequestParams.ITEMID.getFileRequestParams(), fileId);
-        try {
-            deleteData(requestUri, params ,null);
-        } catch (IOException e) {
-            throw new ClientServicesException(e, "Error unpinning the file");
-        }
+        deleteData(requestUri, params ,null);
     } 
 
     public void unPinFolder(String folderId) throws ClientServicesException {
@@ -2188,11 +2059,7 @@ public class FileService extends ConnectionsService {
         String requestUri = FileUrls.MYFAVORITES_COLLECTIONS_FEED.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.folderId.get(folderId));
         Map<String, String> params = new HashMap<String, String>();
         params.put(FileRequestParams.ITEMID.getFileRequestParams(), folderId);
-        try {
-            deleteData(requestUri, params, null);
-        } catch (IOException e) {
-            throw new ClientServicesException(e, "Error unpinning the folder");
-        }
+        deleteData(requestUri, params, null);
     }
 
     /**
@@ -2272,15 +2139,8 @@ public class FileService extends ConnectionsService {
         Map<String, String> headers = new HashMap<String, String>();
         headers.put(Headers.ContentType, Headers.ATOM);
         Object payload = constructPayloadForComments(comment);
-
-
-        try {
-            Response result = (Response) updateData(requestUri, params, headers, payload, null);
-            return getCommentFeedHandler().createEntity(result);
-        } catch (Exception e) {
-            throw new ClientServicesException(e, Messages.MessageExceptionInUpdatingComment);
-        }
-       
+        Response result = (Response) updateData(requestUri, params, headers, payload, null);
+        return getCommentFeedHandler().createEntity(result);
     }
 
     /**
@@ -2350,13 +2210,9 @@ public class FileService extends ConnectionsService {
         Content contentFile = getContentObject(title, iStream);
         Map<String, String> headers = new HashMap<String, String>();
         headers.put(X_UPDATE_NONCE, getNonce()); // It is not clearly documented which Content Type requires Nonce, thus adding nonce in header for all upload requests. 
-        try {
-            //TODO: check get data wrapping
-            Response result = (Response) updateData(requestUri, params, headers, contentFile, null);
-            return getFileFeedHandler().createEntity(result);
-        } catch (IOException e) {
-            throw new ClientServicesException(e, Messages.MessageExceptionInUpdate);
-        }
+        //TODO: check get data wrapping
+        Response result = (Response) updateData(requestUri, params, headers, contentFile, null);
+        return getFileFeedHandler().createEntity(result);
     }
     
     /**
@@ -2376,12 +2232,8 @@ public class FileService extends ConnectionsService {
         Map<String, String> headers = new HashMap<String, String>();
         headers.put(X_UPDATE_NONCE, getNonce()); // It is not clearly documented which Content Type requires Nonce, thus adding nonce in header for all upload requests. 
         
-        try {
-            Response result = (Response) updateData(requestUrl, params, headers, contentFile, null);
-            return getFileFeedHandler().createEntity(result);
-        } catch (IOException e) {
-            throw new ClientServicesException(e, Messages.MessageExceptionInUpdate);
-        }
+        Response result = (Response) updateData(requestUrl, params, headers, contentFile, null);
+        return getFileFeedHandler().createEntity(result);
     }
     
     /**
@@ -2415,11 +2267,7 @@ public class FileService extends ConnectionsService {
 		ContentStream contentFile = (ContentStream) getContentObject(title, iStream);
 		Map<String, String> headers = new HashMap<String, String>();
         headers.put(X_UPDATE_NONCE, getNonce()); // It is not clearly documented which Content Type requires Nonce, thus adding nonce in header for all upload requests. 
-        try {
-            return uploadNewVersion(requestUri, contentFile, params, headers);
-        } catch (IOException e) {
-            throw new ClientServicesException(e, Messages.MessageExceptionInUpload);
-        }
+		return uploadNewVersion(requestUri, contentFile, params, headers);
     }
     
     /**
@@ -2431,7 +2279,7 @@ public class FileService extends ConnectionsService {
      * @throws ClientServicesException
      * @throws IOException
      */
-    private File uploadNewVersion(String requestUri, ContentStream stream, Map<String, String> params, Map<String, String> headers) throws ClientServicesException, IOException {
+    private File uploadNewVersion(String requestUri, ContentStream stream, Map<String, String> params, Map<String, String> headers) throws ClientServicesException {
     	//TODO: check get data wrapping
         Response result = (Response) updateData(requestUri, params, headers, stream, null);
         return getFileFeedHandler().createEntity(result);
@@ -2458,12 +2306,8 @@ public class FileService extends ConnectionsService {
         Content contentFile = getContentObject(title, iStream, length);
 		Map<String, String> headers = new HashMap<String, String>();
         headers.put(X_UPDATE_NONCE, getNonce()); // It is not clearly documented which Content Type requires Nonce, thus adding nonce in header for all upload requests. 
-	    try {
-	    	Response data = (Response) createData(requestUri, null, headers, contentFile);
-	    	return getFileFeedHandler().createEntity(data);
-		} catch (IOException e) {
-			throw new ClientServicesException(e, Messages.MessageExceptionInUpload);
-		}
+    	Response data = (Response) createData(requestUri, null, headers, contentFile);
+    	return getFileFeedHandler().createEntity(data);
 	}
     
     /**
@@ -2543,13 +2387,9 @@ public class FileService extends ConnectionsService {
             return new File();
         }
         String requestUri = FileUrls.MYUSERLIBRARY_DOCUMENT_ENTRY.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
-        try {
-            Response result = (Response) updateData(requestUri, params, new ClientService.ContentXml(
-                    requestBody, APPLICATION_ATOM_XML), null);
-            return getFileFeedHandler().createEntity(result);
-        } catch (IOException e) {
-            throw new ClientServicesException(e, Messages.MessageExceptionInRestoreFile);
-        }
+        Response result = (Response) updateData(requestUri, params, new ClientService.ContentXml(
+                requestBody, APPLICATION_ATOM_XML), null);
+        return getFileFeedHandler().createEntity(result);
     }
 
     /**
@@ -2596,11 +2436,7 @@ public class FileService extends ConnectionsService {
         headers.put(Headers.ContentType, Headers.ATOM);
         // }
         Document payload = constructPayloadForComments(updatedComment); // TODO
-        try {
-            updateData(requestUri, null, headers, payload, null);
-        } catch (IOException e) {
-            throw new ClientServicesException(e, Messages.MessageExceptionInRestoreFile);
-        }
+        updateData(requestUri, null, headers, payload, null);
     }
 
     public void updateFlaggedFile(String fileId, Map<String, String> updationsMap/* to title, tag and content */)
@@ -2621,11 +2457,7 @@ public class FileService extends ConnectionsService {
         }
         Document payload = constructPayload(fileId, payloadMap);
 
-        try {
-            updateData(requestUri, null, headers, payload, null);
-        } catch (IOException e) {
-            throw new ClientServicesException(e, Messages.MessageExceptionInRestoreFile);
-        }
+        updateData(requestUri, null, headers, payload, null);
     }
 
     public File updateFolder(String folderId, String name, String description, String shareWith)
@@ -2636,13 +2468,8 @@ public class FileService extends ConnectionsService {
         Map<String, String> headers = new HashMap<String, String>();
         headers.put(Headers.ContentType, Headers.ATOM);
         
-        try {
-            Response result = (Response) updateData(requestUri, null, headers, payload, null);
-            return getFileFeedHandler().createEntity(result);
-        } catch (IOException e) {
-            throw new ClientServicesException(e, Messages.MessageExceptionInRestoreFile);
-        }
-        
+        Response result = (Response) updateData(requestUri, null, headers, payload, null);
+        return getFileFeedHandler().createEntity(result);
     }
 
     /**
@@ -2724,20 +2551,12 @@ public class FileService extends ConnectionsService {
         String requestUri = FileUrls.MYUSERLIBRARY_FEED.format(this, FileUrlParts.accessType.get(accessType));
         Map<String, String> headers = new HashMap<String, String>();
         headers.put(X_UPDATE_NONCE, getNonce()); // It is not clearly documented which Content Type requires Nonce, thus adding nonce in header for all upload requests. 
-        try {
-            Response data = (Response) createData(requestUri, p, headers, contentFile);
-            if (logger.isLoggable(Level.FINEST)) {
-    			logger.exiting(sourceClass, "uploadFile", data);
-    		}
-           
-            return getFileFeedHandler().createEntity(data);
-        } catch (IOException e) {
-        	if (logger.isLoggable(Level.FINE)) {
-        		String msg = MessageFormat.format("Error uploading file {0} length {1}", title, length);
-        		logger.log(Level.FINE, msg, e);
-        	}
-            throw new ClientServicesException(e, Messages.MessageExceptionInUpload);
-        }
+        Response data = (Response) createData(requestUri, p, headers, contentFile);
+        if (logger.isLoggable(Level.FINEST)) {
+			logger.exiting(sourceClass, "uploadFile", data);
+		}
+       
+        return getFileFeedHandler().createEntity(data);
     }
 
     /**
@@ -2940,17 +2759,21 @@ public class FileService extends ConnectionsService {
      * @param requestBody
      * @return Document
      */
-    private Document convertToXML(String requestBody) {
+    private Document convertToXML(String requestBody) throws TransformerException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware(true);
         DocumentBuilder builder;
         Document document = null;
         try {
-            builder = factory.newDocumentBuilder();
+			builder = factory.newDocumentBuilder();
             document = builder.parse(new InputSource(new StringReader(requestBody.toString())));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+		} catch (ParserConfigurationException e) {
+			throw new TransformerException(e, e.getMessage());
+		} catch (SAXException e) {
+			throw new TransformerException(e, e.getMessage());
+		} catch (IOException e) {
+			throw new TransformerException(e, e.getMessage());
+		}
         return document;
     }
 

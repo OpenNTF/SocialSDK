@@ -73,7 +73,6 @@ import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.NamedUrlPart;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
-import com.ibm.sbt.services.client.connections.communities.CommunityServiceException;
 import com.ibm.sbt.services.client.connections.files.model.FileCommentParameterBuilder;
 import com.ibm.sbt.services.client.connections.files.model.FileCommentsFeedParameterBuilder;
 import com.ibm.sbt.services.client.connections.files.model.FileEntryXPath;

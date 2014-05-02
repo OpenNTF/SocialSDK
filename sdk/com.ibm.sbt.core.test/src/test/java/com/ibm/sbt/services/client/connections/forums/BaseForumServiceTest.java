@@ -43,7 +43,7 @@ public class BaseForumServiceTest extends BaseUnitTest {
 		}
 	}
 
-	protected Forum newForum() throws ForumServiceException {
+	protected Forum newForum() throws Exception {
 		Forum forum = new Forum(forumService);
 
 		forum.setTitle("Test forum 1ab" + System.currentTimeMillis());
@@ -57,11 +57,11 @@ public class BaseForumServiceTest extends BaseUnitTest {
 		return forum;
 	}
 
-	protected Forum createForum() throws ForumServiceException {
+	protected Forum createForum() throws Exception {
 		return createForum(newForum());
 	}
 
-	protected Forum createForum(Forum forum) throws ForumServiceException {
+	protected Forum createForum(Forum forum) throws Exception {
 		forum.setTitle("Test forum 1ab" + System.currentTimeMillis());
 		forum.setContent("Test forum created by Create Forum Java snippet");
 		List<String> tags = new ArrayList<String>();
@@ -72,7 +72,7 @@ public class BaseForumServiceTest extends BaseUnitTest {
 		return forum;
 	}
 
-	protected ForumTopic createForumTopic() throws ForumServiceException {
+	protected ForumTopic createForumTopic() throws Exception {
 		forum = createForum();
 		ForumTopic topic = new ForumTopic(forumService);
 
@@ -84,7 +84,7 @@ public class BaseForumServiceTest extends BaseUnitTest {
 		return topic;
 	}
 	
-	protected ForumReply createForumReply() throws ForumServiceException {
+	protected ForumReply createForumReply() throws Exception {
 		topic = createForumTopic();
 		ForumReply reply = new ForumReply(forumService);
 
@@ -96,15 +96,15 @@ public class BaseForumServiceTest extends BaseUnitTest {
 
 	}
 	
-	protected void deleteForum(Forum forum) throws ForumServiceException {
+	protected void deleteForum(Forum forum) throws Exception {
 		forumService.removeForum(forum.getForumUuid());
 	}
 	
-	protected void deleteForumTopic(ForumTopic topic) throws ForumServiceException {
+	protected void deleteForumTopic(ForumTopic topic) throws Exception {
 		forumService.removeForumTopic(topic.getTopicUuid());
 	}
 	
-	protected void deleteForumReply(ForumReply reply) throws ForumServiceException {
+	protected void deleteForumReply(ForumReply reply) throws Exception {
 		forumService.removeForumReply(reply.getReplyUuid());
 	}
 	

@@ -20,7 +20,6 @@ import static com.ibm.sbt.services.client.base.CommonConstants.APPLICATION_ATOM_
 import static com.ibm.sbt.services.client.base.CommonConstants.CONTENT_TYPE;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -382,40 +381,24 @@ public class WikiService extends ConnectionsService {
 	
 	private EntityList<Wiki> getWikiEntityList(String requestUrl, 
 			Map<String, String> parameters) throws ClientServicesException {
-		try {
-			return (EntityList<Wiki>)getEntities(requestUrl, parameters, 
-					getWikiFeedHandler());
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		}
+		return (EntityList<Wiki>)getEntities(requestUrl, parameters, 
+				getWikiFeedHandler());
 	}
 	
 	private Wiki getWikiEntity(String requestUrl, Map<String, String> parameters) 
 			throws ClientServicesException {
-		try {
-			return (Wiki)getEntity(requestUrl, parameters, getWikiFeedHandler());
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		}
+		return (Wiki)getEntity(requestUrl, parameters, getWikiFeedHandler());
 	}
 	
 	private EntityList<WikiPage> getWikiPagesEntityList(String requestUrl, 
 			Map<String, String> parameters) throws ClientServicesException {
-		try {
-			return (EntityList<WikiPage>)getEntities(requestUrl, 
-					parameters, getWikiPageFeedHandler());
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		}
+		return (EntityList<WikiPage>)getEntities(requestUrl, 
+				parameters, getWikiPageFeedHandler());
 	}
 	
 	private WikiPage getWikiPageEntity(String requestUrl, Map<String, String> parameters) 
 			throws ClientServicesException {
-		try {
-			return (WikiPage)getEntity(requestUrl, parameters, getWikiPageFeedHandler());
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		}
+		return (WikiPage)getEntity(requestUrl, parameters, getWikiPageFeedHandler());
 	}
 	
 	public IFeedHandler<Wiki> getWikiFeedHandler() {

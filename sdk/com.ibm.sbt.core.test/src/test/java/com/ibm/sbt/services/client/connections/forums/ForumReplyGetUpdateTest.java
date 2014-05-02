@@ -30,19 +30,19 @@ import org.junit.Test;
 public class ForumReplyGetUpdateTest extends BaseForumServiceTest {
 
 	@Before
-	public void initForum() throws ForumServiceException {
+	public void initForum() throws Exception {
 		reply = createForumReply();
 	}
 
 	@Test
-	public void testGetForumReply() throws ForumServiceException {
+	public void testGetForumReply() throws Exception {
 		ForumReply replyGot = forumService.getForumReply(reply.getReplyUuid());
 		assertEquals(unRandomize(reply.getTitle()), unRandomize(replyGot.getTitle()));
 		assertEquals(unRandomize(reply.getContent()), unRandomize(replyGot.getContent()));
 	}
 
 	@Test
-	public void testUpdateReply() throws ForumServiceException {
+	public void testUpdateReply() throws Exception {
 		reply.setTitle("new Test reply title" + System.currentTimeMillis());
 		reply.setContent("new Test reply content" + System.currentTimeMillis());
 		forumService.updateForumReply(reply);
@@ -53,7 +53,7 @@ public class ForumReplyGetUpdateTest extends BaseForumServiceTest {
 	}
 
 	@After
-	public void deleteReplyOnExit() throws ForumServiceException {
+	public void deleteReplyOnExit() throws Exception {
 		deleteForumReply(reply);
 	}
 }

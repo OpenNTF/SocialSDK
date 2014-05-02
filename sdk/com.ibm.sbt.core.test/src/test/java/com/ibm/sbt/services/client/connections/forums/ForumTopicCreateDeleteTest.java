@@ -29,7 +29,7 @@ import org.junit.Test;
 public class ForumTopicCreateDeleteTest extends BaseForumServiceTest {
 
 	@Test
-	public void testCreateForumTopic() throws ForumServiceException {
+	public void testCreateForumTopic() throws Exception {
 		forum = createForum();
 		ForumTopic topic = new ForumTopic(forumService);
 		topic.setTitle("Test topic titile" + System.currentTimeMillis());

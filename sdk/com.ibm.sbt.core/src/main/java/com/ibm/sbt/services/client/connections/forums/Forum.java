@@ -23,6 +23,7 @@ import org.w3c.dom.Node;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.xpath.XPathExpression;
+import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.connections.forums.model.BaseForumEntity;
@@ -96,7 +97,7 @@ public class Forum extends BaseForumEntity {
         return getAsInt(ForumsXPath.threadCount);
     }
     
-	public EntityList<ForumTopic> getTopics() throws ForumServiceException{
+	public EntityList<ForumTopic> getTopics() throws ClientServicesException{
     	return getTopics(null);
     }
     /**
@@ -105,7 +106,7 @@ public class Forum extends BaseForumEntity {
      * @method getTopics
      * @param parameters
      */
-    public EntityList<ForumTopic> getTopics(Map<String, String> parameters) throws ForumServiceException{
+    public EntityList<ForumTopic> getTopics(Map<String, String> parameters) throws ClientServicesException{
     	return getService().getForumTopics(getUid(), parameters);
     }
     /**
@@ -123,9 +124,9 @@ public class Forum extends BaseForumEntity {
 	 * This method updates the forum on the server
 	 * 
 	 * @return
-	 * @throws ForumServiceException
+	 * @throws ClientServicesException
 	 */
-	public Forum save() throws ForumServiceException{
+	public Forum save() throws ClientServicesException{
 		if(StringUtil.isEmpty(getUid())){
 			return getService().createForum(this);
 		}else{
@@ -139,10 +140,10 @@ public class Forum extends BaseForumEntity {
 	 * This method deletes the forum on the server
 	 * 
 	 * @return
-	 * @throws ForumServiceException
+	 * @throws ClientServicesException
 	 */
 
-	public void remove() throws ForumServiceException {
+	public void remove() throws ClientServicesException {
 	   	getService().removeForum(getUid());
 	}
 	
@@ -150,10 +151,10 @@ public class Forum extends BaseForumEntity {
 	 * This method loads the forum 
 	 * 
 	 * @return
-	 * @throws ForumServiceException
+	 * @throws ClientServicesException
 	 */
 	
-	public Forum load() throws ForumServiceException
+	public Forum load() throws ClientServicesException
     {
 		return getService().getForum(getUid());
     }

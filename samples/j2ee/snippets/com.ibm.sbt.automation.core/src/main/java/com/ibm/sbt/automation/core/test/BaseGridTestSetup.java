@@ -18,13 +18,11 @@ import com.ibm.sbt.services.client.connections.activity.ActivityService;
 import com.ibm.sbt.services.client.connections.activity.ActivityServiceException;
 import com.ibm.sbt.services.client.connections.communities.Community;
 import com.ibm.sbt.services.client.connections.communities.CommunityService;
-import com.ibm.sbt.services.client.connections.communities.CommunityServiceException;
 import com.ibm.sbt.services.client.connections.files.File;
 import com.ibm.sbt.services.client.connections.files.FileService;
 import com.ibm.sbt.services.client.connections.files.model.FileCreationParameters;
 import com.ibm.sbt.services.client.connections.forums.Forum;
 import com.ibm.sbt.services.client.connections.forums.ForumService;
-import com.ibm.sbt.services.client.connections.forums.ForumServiceException;
 
 public class BaseGridTestSetup extends BaseApiTest{
 	
@@ -53,7 +51,7 @@ public class BaseGridTestSetup extends BaseApiTest{
 	/**The Id of the test activity */
 	private String testActivityID;
 	
-	private ForumService fourmService;
+	private ForumService forumService;
 	
 	private String testForumID;
 	
@@ -68,8 +66,8 @@ public class BaseGridTestSetup extends BaseApiTest{
 		} catch (AuthenticationException e) {
 			e.printStackTrace();
 		}
-		fourmService = new ForumService();
-		Forum forum = new Forum(fourmService);
+		forumService = new ForumService();
+		Forum forum = new Forum(forumService);
 		forum.setTitle("Test forum 1ab" + System.currentTimeMillis());
 		forum.setContent("Test forum created by Create Forum Java snippet");
 		List<String> tags = new ArrayList<String>();
@@ -79,7 +77,7 @@ public class BaseGridTestSetup extends BaseApiTest{
 		try {
 			forum = forum.save();
 			testForumID = forum.getUid();
-		} catch (ForumServiceException e) {
+		} catch (ClientServicesException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
@@ -87,8 +85,8 @@ public class BaseGridTestSetup extends BaseApiTest{
 	
 	public void deleteForum(){
 		try {
-			this.fourmService.removeForum(testForumID);
-		} catch (ForumServiceException e) {
+			this.forumService.removeForum(testForumID);
+		} catch (ClientServicesException e) {
 			e.printStackTrace();
 		}
 	}

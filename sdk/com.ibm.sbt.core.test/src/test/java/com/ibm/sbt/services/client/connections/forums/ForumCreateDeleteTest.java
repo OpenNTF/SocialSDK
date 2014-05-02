@@ -32,7 +32,7 @@ import org.junit.Test;
 public class ForumCreateDeleteTest extends BaseForumServiceTest {
 
 	@Test
-	public void testCreateForum() throws ForumServiceException {
+	public void testCreateForum() throws Exception {
 		Forum forum = new Forum(forumService);
 		forum.setTitle("Test forum title" + System.currentTimeMillis());
 		forum.setContent("Test forum content");

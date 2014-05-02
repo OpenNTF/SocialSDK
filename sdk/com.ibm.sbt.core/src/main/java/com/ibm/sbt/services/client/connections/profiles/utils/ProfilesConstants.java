@@ -19,7 +19,7 @@ package com.ibm.sbt.services.client.connections.profiles.utils;
 import java.util.HashMap;
 
 
-public class ProfilesConstants {
+public final class ProfilesConstants {
 
 	// Request Parameters
 	public static final String EMAIL				= "email";

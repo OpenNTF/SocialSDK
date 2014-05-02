@@ -24,6 +24,7 @@ import org.w3c.dom.Node;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.xpath.XPathExpression;
+import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.connections.forums.model.BaseForumEntity;
@@ -82,14 +83,14 @@ public class ForumTopic extends BaseForumEntity{
 	 * This method creates/updates the IBM Connections Forum Topic on the server
 	 *
 	 * @return ForumTopic
-	 * @throws ForumServiceException
+	 * @throws ClientServicesException
 	 */
-	public ForumTopic save(String forumId) throws ForumServiceException {
+	public ForumTopic save(String forumId) throws ClientServicesException {
 		if(StringUtil.isEmpty(getUid())){
 			if(StringUtil.isEmpty(forumId) && StringUtil.isNotEmpty(getForumUuid())){ // if a forumId was not provided but was set using setForumUuid method
 				forumId = getForumUuid();
 			}else if(StringUtil.isEmpty(forumId) && StringUtil.isEmpty(getForumUuid())){ // Can not create topic without ForumUuid
-				throw new ForumServiceException(new Exception("No Parent Forum ID mentioned while creating Forum Topic"));
+				throw new ClientServicesException(new Exception("No Parent Forum ID mentioned while creating Forum Topic"));
 			}
 			return getService().createForumTopic(this,forumId);
 		}else{
@@ -103,19 +104,19 @@ public class ForumTopic extends BaseForumEntity{
 	 * This method updates the IBM Connections Forum Topic on the server
 	 *
 	 * @return ForumTopic
-	 * @throws ForumServiceException
+	 * @throws ClientServicesException
 	 */
-	public ForumTopic save() throws ForumServiceException {
+	public ForumTopic save() throws ClientServicesException {
 		return save("");
 	}
 
 	/**
 	 * This method deletes the IBM Connections forum on the server
 	 *
-	 * @throws ForumServiceException
+	 * @throws ClientServicesException
 	 */
 
-	public void remove() throws ForumServiceException {
+	public void remove() throws ClientServicesException {
 		getService().removeForumTopic(getUid());
 	}
 
@@ -123,10 +124,10 @@ public class ForumTopic extends BaseForumEntity{
 	 * This method loads the IBM Connections Forum Topic
 	 *
 	 * @return ForumTopic
-	 * @throws ForumServiceException
+	 * @throws ClientServicesException
 	 */
 
-	public ForumTopic load() throws ForumServiceException
+	public ForumTopic load() throws ClientServicesException
 	{
 		return getService().getForumTopic(getUid());
 	}
@@ -136,10 +137,10 @@ public class ForumTopic extends BaseForumEntity{
 	 * This method returns Replies for this IBM Connections forum Topic
 	 *
 	 * @return ReplyList
-	 * @throws ForumServiceException
+	 * @throws ClientServicesException
 	 */
 
-	public EntityList<ForumReply> getReplies() throws ForumServiceException
+	public EntityList<ForumReply> getReplies() throws ClientServicesException
 	{
 		return getService().getForumTopicReplies(getUid());
 	}
@@ -148,9 +149,9 @@ public class ForumTopic extends BaseForumEntity{
 	 * This method returns Recommendations for the IBM Connections forum Topic
 	 *
 	 * @return RecommendationList
-	 * @throws ForumServiceException
+	 * @throws ClientServicesException
 	 */
-	public EntityList<Recommendation> getRecommendations() throws ForumServiceException
+	public EntityList<Recommendation> getRecommendations() throws ClientServicesException
 	{
 		return getService().getRecommendations(getUid());
 	}
@@ -159,10 +160,10 @@ public class ForumTopic extends BaseForumEntity{
 	 * entry document.
 	 *
 	 * @return String
-	 * @throws ForumServiceException
+	 * @throws ClientServicesException
 	 */
 
-	public String getPermisisons() throws ForumServiceException
+	public String getPermisisons() throws ClientServicesException
 	{
 		return super.getAsString(ForumsXPath.permissions);
 	}
@@ -259,7 +260,7 @@ public class ForumTopic extends BaseForumEntity{
 	 * @method like
 	 * @return Recommendation
 	 */
-	public Recommendation like() throws ForumServiceException {
+	public Recommendation like() throws ClientServicesException {
 		return getService().createRecommendation(getTopicUuid());
 	}
 	/**
@@ -268,7 +269,7 @@ public class ForumTopic extends BaseForumEntity{
 	 * @method unLike
 	 * @return boolean
 	 */
-	public boolean unLike() throws ForumServiceException {
+	public boolean unLike() throws ClientServicesException {
 		return getService().deleteRecommendation(getTopicUuid());
 	}
 	/**

@@ -36,6 +36,7 @@ import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.AtomFeedHandler;
 import com.ibm.sbt.services.client.base.AuthType;
 import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.base.ConnectionsService;
 import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.NamedUrlPart;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
@@ -65,7 +66,7 @@ import com.ibm.sbt.services.endpoints.Endpoint;
  * </pre>	
  */
 
-public class CommunityService extends BaseService {
+public class CommunityService extends ConnectionsService {
 	private static final long serialVersionUID = 4832918694422006289L;
 	private static final String COMMUNITY_UNIQUE_IDENTIFIER = "communityUuid";
 	private static final String USERID 						= "userid";
@@ -813,51 +814,27 @@ public class CommunityService extends BaseService {
 	 ****************************************************************/
 
 	protected Community getCommunityEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
-		try {
-			return getEntity(requestUrl, getParameters(parameters), getCommunityFeedHandler());
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		}
+		return getEntity(requestUrl, parameters, getCommunityFeedHandler());
 	}
 
 	protected Member getMemberEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
-		try {
-			return getEntity(requestUrl, getParameters(parameters), getMemberFeedHandler());
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		}
+		return getEntity(requestUrl, parameters, getMemberFeedHandler());
 	}
 
 	protected Invite getInviteEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
-		try {
-			return getEntity(requestUrl, getParameters(parameters), getInviteFeedHandler());
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		}
+		return getEntity(requestUrl, parameters, getInviteFeedHandler());
 	}
 
 	protected EntityList<Community> getCommunityEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
-		try {
-			return getEntities(requestUrl, getParameters(parameters), getCommunityFeedHandler());
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		}
+		return getEntities(requestUrl, parameters, getCommunityFeedHandler());
 	}
 
 	protected EntityList<Member> getMemberEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
-		try {
-			return getEntities(requestUrl, getParameters(parameters), getMemberFeedHandler());
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		}
+		return getEntities(requestUrl, parameters, getMemberFeedHandler());
 	}
 
 	protected EntityList<Invite> getInviteEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
-		try {
-			return getEntities(requestUrl, getParameters(parameters), getInviteFeedHandler());
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		}
+		return getEntities(requestUrl, parameters, getInviteFeedHandler());
 	}
 
 	/***************************************************************

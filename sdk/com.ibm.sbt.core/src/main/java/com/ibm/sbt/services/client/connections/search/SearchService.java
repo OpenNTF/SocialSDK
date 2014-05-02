@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -40,7 +40,6 @@ package com.ibm.sbt.services.client.connections.search;
 import static com.ibm.sbt.services.client.base.CommonConstants.COMMA;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -52,13 +51,14 @@ import org.w3c.dom.Node;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.ClientServicesException;
-import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.AtomFeedHandler;
 import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.base.ConnectionsService;
 import com.ibm.sbt.services.client.base.IFeedHandler;
+import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.endpoints.Endpoint;
 
-public class SearchService extends BaseService {
+public class SearchService extends ConnectionsService {
 	
 	private static final long serialVersionUID = -8445895408209299706L;
 
@@ -99,14 +99,18 @@ public class SearchService extends BaseService {
 		return "search";
 	}
 	
+	//------------------------------------------------------------------------------------------------------------------
+	// Getting Search feeds
+	//------------------------------------------------------------------------------------------------------------------
+	
     /**
      * Search IBM Connection for public information.
      * 
      * @param query Text to search for
      * @return ResultList
-     * @throws SearchServiceException
+     * @throws ClientServicesException
      */
-	public ResultList getResults(String query) throws SearchServiceException{
+	public EntityList<Result> getResults(String query) throws ClientServicesException {
 		return getResults(query, null);
 	}
 	
@@ -120,11 +124,6 @@ public class SearchService extends BaseService {
 			protected Result entityInstance(BaseService service, Node node, XPathExpression xpath) {
 				return new Result(service, node, nameSpaceCtx, xpath);
 			}
-
-			@Override
-			public ResultList createEntityList(Response requestData) {
-				return new ResultList((Response)requestData, this);
-			}
 		};
 	}
 
@@ -137,11 +136,6 @@ public class SearchService extends BaseService {
 			@Override
 			protected Scope entityInstance(BaseService service, Node node, XPathExpression xpath) {
 				return new Scope(service, node, nameSpaceCtx, xpath);
-			}
-
-			@Override
-			public ScopeList createEntityList(Response requestData) {
-				return new ScopeList((Response)requestData, this);
 			}
 		};
 	}
@@ -161,12 +155,6 @@ public class SearchService extends BaseService {
 			protected FacetValue entityInstance(BaseService service, Node node, XPathExpression xpath) {
 				return new FacetValue(service, node, nameSpaceCtx, xpath);
 			}
-
-			@Override
-			public FacetValueList createEntityList(Response requestData) {
-				return new FacetValueList((Response)requestData, this);
-			}
-			
 		};
 	}
 	
@@ -177,10 +165,10 @@ public class SearchService extends BaseService {
 	 *            Text to search for
 	 * @param Map
 	 *            for additional parameters
-	 * @return ResultList
-	 * @throws SearchServiceException
+	 * @return EntityList<Result>
+	 * @throws ClientServicesException
 	 */
-	public ResultList getResults(String query,Map<String, String> parameters) throws SearchServiceException{
+	public EntityList<Result> getResults(String query,Map<String, String> parameters) throws ClientServicesException {
 		if(parameters==null){
 			parameters= new HashMap<String,String>();
 		}
@@ -232,10 +220,10 @@ public class SearchService extends BaseService {
 	 * 
 	 * @param String
 	 *            Single tag to be search for, for multiple tags use other overloaded method
-	 * @return ResultList
-	 * @throws SearchServiceException
+	 * @return EntityList<Result>
+	 * @throws ClientServicesException
 	 */
-	public ResultList getResultsByTag(String tag) throws SearchServiceException{
+	public EntityList<Result> getResultsByTag(String tag) throws ClientServicesException {
 		List<String> taglist = new ArrayList<String>();
 		taglist.add(tag);
 		return getResultsByTag(taglist,null);
@@ -246,10 +234,10 @@ public class SearchService extends BaseService {
 	 * 
 	 * @param List
 	 *            of Tags to searched for
-	 * @return ResultList
-	 * @throws SearchServiceException
+	 * @return EntityList<Result>
+	 * @throws ClientServicesException
 	 */
-	public ResultList getResultsByTag(List<String> tags) throws SearchServiceException{
+	public EntityList<Result> getResultsByTag(List<String> tags) throws ClientServicesException {
 		return getResultsByTag(tags,null);
 	}
 	
@@ -258,11 +246,11 @@ public class SearchService extends BaseService {
 	 * 
 	 * @param List
 	 *            of Tags to searched for
-	 * @return ResultList
-	 * @throws SearchServiceException
+	 * @return EntityList<Result>
+	 * @throws ClientServicesException
 	 */
-	public ResultList getResultsByTag(List<String> tags,
-			Map<String, String> parameters) throws SearchServiceException {
+	public EntityList<Result> getResultsByTag(List<String> tags,
+			Map<String, String> parameters) throws ClientServicesException {
 		// High level wrapper, provides a convenient mechanism for search for
 		// tags, uses constraints internally
 		List<String> formattedTags = new ArrayList<String>();
@@ -283,9 +271,9 @@ public class SearchService extends BaseService {
 	 * @param query
 	 *            Text to search for
 	 * @return ResultList
-	 * @throws SearchServiceException
+	 * @throws ClientServicesException
 	 */
-	public ResultList getMyResults(String query) throws SearchServiceException{
+	public EntityList<Result> getMyResults(String query) throws ClientServicesException {
 		return getMyResults(query, null);
 	}
 	
@@ -298,10 +286,10 @@ public class SearchService extends BaseService {
 	 *            Text to search for
 	 * @param Map
 	 *            for additional parameters
-	 * @return ResultList
-	 * @throws SearchServiceException
+	 * @return EntityList<Result>
+	 * @throws ClientServicesException
 	 */
-	public ResultList getMyResults(String query,Map<String, String> parameters) throws SearchServiceException{
+	public EntityList<Result> getMyResults(String query,Map<String, String> parameters) throws ClientServicesException {
 		if(parameters==null){
 			parameters= new HashMap<String,String>();
 		}
@@ -317,8 +305,10 @@ public class SearchService extends BaseService {
 	 * 
 	 * @param query
 	 *            Text to search for
+	 * @param EntityList<FacetValue>
+	 * @throws ClientServicesException
 	 */
-	public FacetValueList getPeople(String query) throws SearchServiceException{
+	public EntityList<FacetValue> getPeople(String query) throws ClientServicesException {
 		return getPeople(query, null);
 	}
 	
@@ -330,12 +320,10 @@ public class SearchService extends BaseService {
 	 *            Text to search for
 	 * @param Map
 	 *            for additional parameters
-	 * @return ResultList
-	 * @throws SearchServiceException
+	 * @return EntityList<FacetValue>
+	 * @throws ClientServicesException
 	 */
-	public FacetValueList getPeople(String query,Map<String, String> parameters) throws SearchServiceException{
-		FacetValueList searchResults;
-		
+	public EntityList<FacetValue> getPeople(String query,Map<String, String> parameters) throws ClientServicesException {
 		if(parameters==null){
 			parameters= new HashMap<String,String>();
 		}
@@ -355,8 +343,10 @@ public class SearchService extends BaseService {
 	 * 
 	 * @param query
 	 *            Text to search for
+	 * @return EntityList<FacetValue>
+	 * @throws ClientServicesException
 	 */
-	public FacetValueList getMyPeople(String query) throws SearchServiceException{
+	public EntityList<FacetValue> getMyPeople(String query) throws ClientServicesException {
 		return getMyPeople(query, null);
 	}
 	
@@ -369,12 +359,10 @@ public class SearchService extends BaseService {
 	 *            Text to search for
 	 * @param Map
 	 *            for additional parameters
-	 * @return ResultList
-	 * @throws SearchServiceException
+	 * @return EntityList<FacetValue>
+	 * @throws ClientServicesException
 	 */
-	public FacetValueList getMyPeople(String query,Map<String, String> parameters) throws SearchServiceException{
-		ResultList searchResults;
-		
+	public EntityList<FacetValue> getMyPeople(String query,Map<String, String> parameters) throws ClientServicesException {		
 		if(parameters==null){
 			parameters= new HashMap<String,String>();
 		}
@@ -394,12 +382,12 @@ public class SearchService extends BaseService {
      * @param query Text to search for
      * @param Constraint
      * 
-     * @return ResultList
-     * @throws SearchServiceException
+     * @return EntityList<Result>
+     * @throws ClientServicesException
      * 
 	   *http://www-10.IBM.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Constraints&content=pdcontent  
      */
-	public ResultList getResultsWithConstraint(String query, Constraint constraint) throws SearchServiceException{
+	public EntityList<Result> getResultsWithConstraint(String query, Constraint constraint) throws ClientServicesException {
 		List<Constraint> constraintList = new ArrayList<Constraint>();
 		constraintList.add(constraint);
 		return getResultsWithConstraint(query, constraintList,null);
@@ -412,12 +400,12 @@ public class SearchService extends BaseService {
      * @param query Text to search for
      * @param List<Constraint>
      * 
-     * @return ResultList
-     * @throws SearchServiceException
+     * @return EntityList<Scope>
+     * @throws ClientServicesException
      * 
 	   *http://www-10.IBM.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Constraints&content=pdcontent  
      */
-	public ResultList getResultsWithConstraint(String query, List<Constraint> constraints) throws SearchServiceException{
+	public EntityList<Result> getResultsWithConstraint(String query, List<Constraint> constraints) throws ClientServicesException {
 		return getResultsWithConstraint(query, constraints,null);
 	}
     
@@ -428,12 +416,12 @@ public class SearchService extends BaseService {
      * @param query Text to search for
      * @param List<Constraint>
      * 
-     * @return ResultList
-     * @throws SearchServiceException
+     * @return EntityList<Result>
+     * @throws ClientServicesException
      * 
 	   *http://www-10.IBM.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Constraints&content=pdcontent  
      */
-	public ResultList getResultsWithConstraint(String query, List<Constraint> constraints, Map<String, String> parameters) throws SearchServiceException{
+	public EntityList<Result> getResultsWithConstraint(String query, List<Constraint> constraints, Map<String, String> parameters) throws ClientServicesException{
 		// We can not use a map of constraints, since there could be multiple constraints but map can have only one key named constraint
 		String formattedConstraints = generateConstraintParameter(constraints);
 		if(parameters == null){
@@ -447,73 +435,37 @@ public class SearchService extends BaseService {
      * Search IBM Connection for available scopes ( Applications in which search can be executed )
      * 
      * @method getScopes
-     * @return ScopeList
+     * @return EntityList<Scope>
 	 * @throws SearchServiceException 
      */
-     public ScopeList getScopes() throws SearchServiceException {
+     public EntityList<Scope> getScopes() throws ClientServicesException {
     	Map<String,String> params = new HashMap<String,String>();
 		String searchQry = SearchUrls.SCOPES.format(this);
 		return getScopeEntityList(searchQry, params);
      }
 
-	protected Result getResultEntity(String requestUrl, Map<String, String> parameters) throws SearchServiceException {
-		try {
-			return (Result)getEntity(requestUrl, getParameters(parameters), getResultFeedHandler());
-		} catch (IOException e) {
-			throw new SearchServiceException(e);
-		} catch(ClientServicesException e){
-			throw new SearchServiceException(e);
-		}
+	protected Result getResultEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
+		return (Result)getEntity(requestUrl, parameters, getResultFeedHandler());
 	}
 
-	protected ResultList getResultEntityList(String requestUrl, Map<String, String> parameters) throws SearchServiceException {
-		try {
-			return (ResultList)getEntities(requestUrl, getParameters(parameters), getResultFeedHandler());
-		} catch (IOException e) {
-			throw new SearchServiceException(e);
-		} catch(ClientServicesException e){
-			throw new SearchServiceException(e);
-		}
+	protected EntityList<Result> getResultEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
+		return getEntities(requestUrl, parameters, getResultFeedHandler());
 	}
 
-	protected FacetValue getFacetValueEntity(String requestUrl, Map<String, String> parameters) throws SearchServiceException {
-		try {
-			return (FacetValue)getEntity(requestUrl, getParameters(parameters), getFacetValueFeedHandler("Person"));
-		} catch (IOException e) {
-			throw new SearchServiceException(e);
-		} catch(ClientServicesException e){
-			throw new SearchServiceException(e);
-		}
+	protected FacetValue getFacetValueEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
+		return (FacetValue)getEntity(requestUrl, parameters, getFacetValueFeedHandler("Person"));
 	}
 
-	protected FacetValueList getFacetValueEntityList(String requestUrl, Map<String, String> parameters) throws SearchServiceException {
-		try {
-			return (FacetValueList)getEntities(requestUrl, getParameters(parameters), getFacetValueFeedHandler("Person"));
-		} catch (IOException e) {
-			throw new SearchServiceException(e);
-		} catch(ClientServicesException e){
-			throw new SearchServiceException(e);
-		}
+	protected EntityList<FacetValue> getFacetValueEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
+		return getEntities(requestUrl, parameters, getFacetValueFeedHandler("Person"));
 	}
      
-	protected Scope getScopeEntity(String requestUrl, Map<String, String> parameters) throws SearchServiceException {
-		try {
-			return (Scope)getEntity(requestUrl, getParameters(parameters), getScopeFeedHandler());
-		} catch (IOException e) {
-			throw new SearchServiceException(e);
-		} catch(ClientServicesException e){
-			throw new SearchServiceException(e);
-		}
+	protected Scope getScopeEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
+		return (Scope)getEntity(requestUrl, parameters, getScopeFeedHandler());
 	}
 
-	protected ScopeList getScopeEntityList(String requestUrl, Map<String, String> parameters) throws SearchServiceException {
-		try {
-			return (ScopeList)getEntities(requestUrl, getParameters(parameters), getScopeFeedHandler());
-		} catch (IOException e) {
-			throw new SearchServiceException(e);
-		} catch(ClientServicesException e){
-			throw new SearchServiceException(e);
-		}
+	protected EntityList<Scope> getScopeEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
+		return getEntities(requestUrl, parameters, getScopeFeedHandler());
 	}
 
 	/*

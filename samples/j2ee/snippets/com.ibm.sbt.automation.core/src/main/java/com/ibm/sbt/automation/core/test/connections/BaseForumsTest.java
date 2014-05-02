@@ -22,7 +22,6 @@ import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.connections.forums.Forum;
 import com.ibm.sbt.services.client.connections.forums.ForumReply;
 import com.ibm.sbt.services.client.connections.forums.ForumService;
-import com.ibm.sbt.services.client.connections.forums.ForumServiceException;
 import com.ibm.sbt.services.client.connections.forums.ForumTopic;
 import com.ibm.sbt.services.client.connections.forums.model.BaseForumEntity;
 import com.ibm.sbt.services.client.connections.forums.transformers.BaseForumTransformer;
@@ -72,7 +71,7 @@ public class BaseForumsTest extends BaseApiTest {
     	
     	try {
     		return forumService.createForumTopic(forumTopic);
-    	} catch (ForumServiceException fse) {
+    	} catch (Exception fse) {
     		fail("Error creating forum topic", fse);
     	}
     	
@@ -84,7 +83,7 @@ public class BaseForumsTest extends BaseApiTest {
     	
     	try {
     		return forumService.getForumTopic(topicUuid);
-    	} catch (ForumServiceException fse) {
+    	} catch (Exception fse) {
     		if (failOnError) {
     			fail("Error retrieving forum topic", fse);
     		}
@@ -98,7 +97,7 @@ public class BaseForumsTest extends BaseApiTest {
     	
     	try {
     		return forumService.getForumReply(replyUuid);
-    	} catch (ForumServiceException fse) {
+    	} catch (Exception fse) {
     		if (failOnError) {
     			fail("Error retrieving forum reply", fse);
     		}
@@ -117,7 +116,7 @@ public class BaseForumsTest extends BaseApiTest {
     	
     	try {
     		return forumService.createForumReply(forumReply);
-    	} catch (ForumServiceException fse) {
+    	} catch (Exception fse) {
     		fail("Error creating forum reply", fse);
     	}
     	
@@ -129,7 +128,7 @@ public class BaseForumsTest extends BaseApiTest {
     	
     	try {
     		return forumService.getForumReply(replyUuid);
-    	} catch (ForumServiceException fse) {
+    	} catch (Exception fse) {
     		fail("Error retrieving forum reply", fse);
     	}
     	
@@ -313,7 +312,7 @@ public class BaseForumsTest extends BaseApiTest {
         		pe.getCause().printStackTrace();
         	}
             Assert.fail("Error authenicating: " + pe.getMessage());
-        } catch (ForumServiceException cse) {
+        } catch (Exception cse) {
             fail("Error getting last created forum", cse);
         } 
         
@@ -337,7 +336,7 @@ public class BaseForumsTest extends BaseApiTest {
         		pe.getCause().printStackTrace();
         	}
             Assert.fail("Error authenicating: " + pe.getMessage());
-        } catch (ForumServiceException cse) {
+        } catch (Exception cse) {
         	if (failOnCse) {
         		fail("Error retrieving forum", cse);
         	}
@@ -370,7 +369,7 @@ public class BaseForumsTest extends BaseApiTest {
         		pe.getCause().printStackTrace();
         	}
             Assert.fail("Error authenicating: " + pe.getMessage());
-        } catch (ForumServiceException cse) {
+        } catch (Exception cse) {
         	// TODO remove this when we upgrade the QSI
         	Throwable t = cse.getCause();
         	if (t instanceof ClientServicesException) {
@@ -398,7 +397,7 @@ public class BaseForumsTest extends BaseApiTest {
             		pe.getCause().printStackTrace();
             	}
                 Assert.fail("Error authenicating: " + pe.getMessage());
-            } catch (ForumServiceException cse) {
+            } catch (Exception cse) {
                 forum = null;
             	// check if forum delete failed because
             	// forum was already deleted
@@ -427,15 +426,15 @@ public class BaseForumsTest extends BaseApiTest {
             		pe.getCause().printStackTrace();
             	}
                 Assert.fail("Error authenicating: " + pe.getMessage());
-            } catch (ForumServiceException cse) {
+            } catch (Exception cse) {
                 fail("Error deleting forum "+forumId, cse);
             }
         }
     }
     
-	protected ForumTopic createForumTopic(Forum forum, ForumTopic topic) throws ForumServiceException {
+	protected ForumTopic createForumTopic(Forum forum, ForumTopic topic) throws Exception {
 		if (null == topic){
-			throw new ForumServiceException(null,"Topic object passed was null");
+			throw new ClientServicesException(null,"Topic object passed was null");
 		}
 		Response result = null;
 		try {
@@ -458,13 +457,13 @@ public class BaseForumsTest extends BaseApiTest {
 			//topic = (ForumTopic) new TopicsFeedHandler(this).createEntity(result);
 
 		} catch (Exception e) {
-			throw new ForumServiceException(e, "error creating forum");
+			throw new ClientServicesException(e, "error creating forum");
 		}
 
         return topic;
 	}
         
-    protected void fail(String message, ForumServiceException fse) {
+    protected void fail(String message, Exception fse) {
     	String failure = message;
     	
     	Throwable cause = fse.getCause();

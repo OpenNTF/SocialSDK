@@ -22,10 +22,9 @@ import com.ibm.commons.runtime.Context;
 import com.ibm.commons.runtime.RuntimeFactory;
 import com.ibm.commons.runtime.impl.app.RuntimeFactoryStandalone;
 import com.ibm.sbt.security.authentication.AuthenticationException;
+import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.BaseService;
-import com.ibm.sbt.services.client.connections.communities.Community;
 import com.ibm.sbt.services.client.connections.communities.CommunityService;
-import com.ibm.sbt.services.client.connections.communities.CommunityServiceException;
 import com.ibm.sbt.services.client.connections.files.File;
 import com.ibm.sbt.services.client.connections.files.FileService;
 import com.ibm.sbt.services.client.connections.files.FileServiceException;
@@ -134,7 +133,7 @@ public class DownloadFileApp {
 	 * @return Collection of public files
 	 * @throws FileServiceException
 	 */
-	public Collection<File> getPublicFiles() throws FileServiceException {
+	public Collection<File> getPublicFiles() throws ClientServicesException {
 		return fileService.getPublicFiles();
 	}
 
@@ -157,7 +156,7 @@ public class DownloadFileApp {
 							file.getLibraryId(), true);
 				}
 			}
-		} catch (FileServiceException e) {
+		} catch (ClientServicesException e) {
 			e.printStackTrace();
 		} catch (AuthenticationException e) {
 			e.printStackTrace();

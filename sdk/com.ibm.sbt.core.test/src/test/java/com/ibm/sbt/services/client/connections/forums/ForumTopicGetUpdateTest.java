@@ -29,12 +29,12 @@ import org.junit.Test;
 public class ForumTopicGetUpdateTest extends BaseForumServiceTest {
 
 	@Before
-	public void initForum() throws ForumServiceException {
+	public void initForum() throws Exception {
 		topic = createForumTopic();
 	}
 
 	@Test
-	public void testGetForumTopic() throws ForumServiceException {
+	public void testGetForumTopic() throws Exception {
 		ForumTopic topicGot = forumService.getForumTopic(topic.getTopicUuid());
 
 		assertEquals(unRandomize(topic.getTitle()), unRandomize(topicGot.getTitle()));
@@ -42,7 +42,7 @@ public class ForumTopicGetUpdateTest extends BaseForumServiceTest {
 	}
 
 	@Test
-	public void testUpdateTopic() throws ForumServiceException {
+	public void testUpdateTopic() throws Exception {
 		topic.setTitle("new Test topic title" + System.currentTimeMillis());
 		topic.setContent("new Test topic content" + System.currentTimeMillis());
 		forumService.updateForumTopic(topic);
@@ -55,7 +55,7 @@ public class ForumTopicGetUpdateTest extends BaseForumServiceTest {
 	}
 
 	@After
-	public void deleteTopicOnExit() throws ForumServiceException {
+	public void deleteTopicOnExit() throws Exception {
 		deleteForumTopic(topic);
 	}
 }

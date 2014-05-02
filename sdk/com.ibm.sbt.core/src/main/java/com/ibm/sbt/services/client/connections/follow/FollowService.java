@@ -29,6 +29,7 @@ import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.AtomFeedHandler;
 import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.base.ConnectionsService;
 import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.NamedUrlPart;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
@@ -44,7 +45,7 @@ import com.ibm.sbt.services.endpoints.Endpoint;
  * http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.5+API+Documentation#action=openDocument&res_title=Getting_a_feed_of_the_followed_resources_ic45&content=pdcontent
  */
 
-public class FollowService extends BaseService{
+public class FollowService extends ConnectionsService {
 	
 	private static final long serialVersionUID = 8450637561663717438L;
 
@@ -176,25 +177,15 @@ public class FollowService extends BaseService{
 	}
 	
 	private EntityList<FollowedResource> getResources(String apiUrl, Map<String, String> parameters) throws ClientServicesException {
-		try {
-			return (EntityList<FollowedResource>)getEntities(apiUrl, parameters, getFollowFeedHandler());
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		}
-
+		return (EntityList<FollowedResource>)getEntities(apiUrl, parameters, getFollowFeedHandler());
 	}
 		
 	private FollowedResource getResource(String apiUrl,Map<String, String> parameters) throws ClientServicesException {
-		try {
-			EntityList<FollowedResource> resources = (EntityList<FollowedResource>)getEntities(apiUrl, parameters, getFollowFeedHandler());
-			if(resources!=null && resources.size()>0){
-				return (FollowedResource) resources.get(0);
-			}else{
-				return null;
-			}
-			
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
+		EntityList<FollowedResource> resources = (EntityList<FollowedResource>)getEntities(apiUrl, parameters, getFollowFeedHandler());
+		if(resources!=null && resources.size()>0){
+			return (FollowedResource) resources.get(0);
+		}else{
+			return null;
 		}
 	}
 	

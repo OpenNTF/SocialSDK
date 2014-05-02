@@ -20,7 +20,6 @@ import static com.ibm.sbt.services.client.base.CommonConstants.APPLICATION_ATOM_
 import static com.ibm.sbt.services.client.base.CommonConstants.CONTENT_TYPE;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,6 +31,7 @@ import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.AtomFeedHandler;
 import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.base.ConnectionsService;
 import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.connections.wikis.serializers.WikiPageSerializer;
@@ -43,7 +43,7 @@ import com.ibm.sbt.services.endpoints.Endpoint;
  * @author Carlos Manias
  *
  */
-public class WikiService extends BaseService {
+public class WikiService extends ConnectionsService {
 	
 	private static final long serialVersionUID = -1677227570229926652L;
 
@@ -381,40 +381,24 @@ public class WikiService extends BaseService {
 	
 	private EntityList<Wiki> getWikiEntityList(String requestUrl, 
 			Map<String, String> parameters) throws ClientServicesException {
-		try {
-			return (EntityList<Wiki>)getEntities(requestUrl, getParameters(parameters), 
-					getWikiFeedHandler());
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		}
+		return (EntityList<Wiki>)getEntities(requestUrl, parameters, 
+				getWikiFeedHandler());
 	}
 	
 	private Wiki getWikiEntity(String requestUrl, Map<String, String> parameters) 
 			throws ClientServicesException {
-		try {
-			return (Wiki)getEntity(requestUrl, parameters, getWikiFeedHandler());
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		}
+		return (Wiki)getEntity(requestUrl, parameters, getWikiFeedHandler());
 	}
 	
 	private EntityList<WikiPage> getWikiPagesEntityList(String requestUrl, 
 			Map<String, String> parameters) throws ClientServicesException {
-		try {
-			return (EntityList<WikiPage>)getEntities(requestUrl, 
-					getParameters(parameters), getWikiPageFeedHandler());
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		}
+		return (EntityList<WikiPage>)getEntities(requestUrl, 
+				parameters, getWikiPageFeedHandler());
 	}
 	
 	private WikiPage getWikiPageEntity(String requestUrl, Map<String, String> parameters) 
 			throws ClientServicesException {
-		try {
-			return (WikiPage)getEntity(requestUrl, parameters, getWikiPageFeedHandler());
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		}
+		return (WikiPage)getEntity(requestUrl, parameters, getWikiPageFeedHandler());
 	}
 	
 	public IFeedHandler<Wiki> getWikiFeedHandler() {

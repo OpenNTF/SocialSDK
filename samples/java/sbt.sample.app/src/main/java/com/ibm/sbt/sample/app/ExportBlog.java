@@ -32,14 +32,12 @@ import com.ibm.commons.runtime.RuntimeFactory;
 import com.ibm.commons.runtime.impl.app.RuntimeFactoryStandalone;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.security.authentication.AuthenticationException;
+import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.connections.blogs.BlogPost;
-import com.ibm.sbt.services.client.connections.blogs.BlogPostList;
 import com.ibm.sbt.services.client.connections.blogs.BlogService;
-import com.ibm.sbt.services.client.connections.blogs.BlogServiceException;
 import com.ibm.sbt.services.client.connections.blogs.Comment;
-import com.ibm.sbt.services.client.connections.blogs.CommentList;
-import com.ibm.sbt.services.client.connections.blogs.model.BaseBlogEntity;
 import com.ibm.sbt.services.endpoints.BasicEndpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
 
@@ -136,7 +134,7 @@ public class ExportBlog {
 		}
 	}
 
-	public void export(String blogHandle, String csvFile) throws BlogServiceException, FileNotFoundException {
+	public void export(String blogHandle, String csvFile) throws ClientServicesException, FileNotFoundException {
 		long start = System.currentTimeMillis();
 		
 		File file = new File(csvFile);
@@ -153,7 +151,7 @@ public class ExportBlog {
 		params.put("sortBy", "modified");
 		params.put("sortOrder", "desc");
 		
-		BlogPostList postList = blogService.getBlogPosts(blogHandle, params);
+		EntityList<BlogPost> postList = blogService.getBlogPosts(blogHandle, params);
 		
 		int totalResults = postList.getTotalResults();
 		int totalPosts = postList.size();
@@ -161,8 +159,8 @@ public class ExportBlog {
 		while (true) {
 			System.out.println("Read "+totalPosts+" of "+totalResults+" blogs posts.");
 
-			for (Iterator<BaseBlogEntity> iter = postList.iterator(); iter.hasNext(); ) {
-				entries.add(new BlogPostEntry((BlogPost)iter.next()));
+			for (Iterator<BlogPost> iter = postList.iterator(); iter.hasNext(); ) {
+				entries.add(new BlogPostEntry(iter.next()));
 			}
 			
 			params.put("page", StringUtil.toString(++page));
@@ -191,9 +189,9 @@ public class ExportBlog {
 		
 		private String delim = ",";
 		private BlogPost blogPost;
-		private CommentList commentList;
+		private EntityList<Comment> commentList;
 		
-		BlogPostEntry(BlogPost blogPost) throws BlogServiceException {
+		BlogPostEntry(BlogPost blogPost) throws ClientServicesException {
 			this.blogPost = blogPost;
 			
 			if (blogPost.getCommentCount() > 0) {
@@ -225,7 +223,7 @@ public class ExportBlog {
 			printWriter.write(sb.toString());
 			
 			if (commentList != null) {
-				for (Iterator<BaseBlogEntity> iter = commentList.iterator(); iter.hasNext(); ) {
+				for (Iterator<Comment> iter = commentList.iterator(); iter.hasNext(); ) {
 					Comment comment = (Comment)iter.next();
 					
 					sb = new StringBuilder();

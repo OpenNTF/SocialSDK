@@ -18,7 +18,6 @@ package com.ibm.sbt.services.client.connections.blogs;
 
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -393,8 +392,6 @@ public class BlogService extends ConnectionsService {
 			String createBlogUrl = BlogUrls.MY_BLOGS.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle));
 			result = createData(createBlogUrl, null, headers, payload);
 			blog = getBlogFeedHandler().createEntity(result);
-		} catch (IOException e) {
-			throw new ClientServicesException(e, "error creating blog");
 		} catch (TransformerException e) {
 			throw new ClientServicesException(e, "error creating blog");
 		}

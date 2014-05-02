@@ -17,7 +17,6 @@ package com.ibm.sbt.services.client.connections.follow;
 
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -152,8 +151,6 @@ public class FollowService extends ConnectionsService {
 		} catch (TransformerException e) {
 			throw new FollowServiceException(e, "Problem occured in startFollowing");
 		} catch (ClientServicesException e) {
-			throw new FollowServiceException(e, "Problem occured in startFollowing");
-		} catch (IOException e) {
 			throw new FollowServiceException(e, "Problem occured in startFollowing");
 		}
 	}

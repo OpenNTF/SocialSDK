@@ -17,7 +17,6 @@ package com.ibm.sbt.services.client.connections.communities;
 
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.HashMap;
@@ -307,22 +306,16 @@ public class CommunityService extends ConnectionsService {
 			throw new ClientServicesException(null, Messages.NullCommunityObjectException);
 		}
 
+		Object communityPayload;
 		try {
-			Object communityPayload;
-			try {
-				communityPayload =  community.constructCreateRequestBody();
-			} catch (TransformerException e) {
-				throw new ClientServicesException(e, Messages.CreateCommunityPayloadException);
-			}
-			String url = CommunityUrls.COMMUNITIES_MY.format(this);
-			Response requestData = createData(url, null, communityPayload,ClientService.FORMAT_CONNECTIONS_OUTPUT);
-			community.clearFieldsMap();
-			return extractCommunityIdFromHeaders(requestData);
-		} catch (ClientServicesException e) {
-			throw new ClientServicesException(e, Messages.CreateCommunityException);
-		} catch (IOException e) {
-			throw new ClientServicesException(e, Messages.CreateCommunityException);
+			communityPayload =  community.constructCreateRequestBody();
+		} catch (TransformerException e) {
+			throw new ClientServicesException(e, Messages.CreateCommunityPayloadException);
 		}
+		String url = CommunityUrls.COMMUNITIES_MY.format(this);
+		Response requestData = createData(url, null, communityPayload,ClientService.FORMAT_CONNECTIONS_OUTPUT);
+		community.clearFieldsMap();
+		return extractCommunityIdFromHeaders(requestData);
 	}
 
 	private String extractCommunityIdFromHeaders(Response requestData){
@@ -359,33 +352,27 @@ public class CommunityService extends ConnectionsService {
 	 * @throws ClientServicesException
 	 */
 	public void updateCommunity(Community community) throws ClientServicesException {
-		try {
-			Map<String, String> parameters = new HashMap<String, String>();
-			parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, community.getCommunityUuid());
-			String url = CommunityUrls.COMMUNITY_INSTANCE.format(this);
-			Object communityPayload;
-			if(community.getFieldsMap().get(CommunityXPath.title)== null)
-				community.setTitle(community.getTitle());
-			if(community.getFieldsMap().get(CommunityXPath.content)== null)
-				community.setContent(community.getContent());
-			if(community.getFieldsMap().get(CommunityXPath.communityType)== null)
-				community.setCommunityType(community.getCommunityType());
-			if(!community.getFieldsMap().toString().contains(CommunityXPath.tags.toString()))
-				community.setTags(community.getTags());
-			community.setAsString(CommunityXPath.communityUuid, community.getCommunityUuid());
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, community.getCommunityUuid());
+		String url = CommunityUrls.COMMUNITY_INSTANCE.format(this);
+		Object communityPayload;
+		if(community.getFieldsMap().get(CommunityXPath.title)== null)
+			community.setTitle(community.getTitle());
+		if(community.getFieldsMap().get(CommunityXPath.content)== null)
+			community.setContent(community.getContent());
+		if(community.getFieldsMap().get(CommunityXPath.communityType)== null)
+			community.setCommunityType(community.getCommunityType());
+		if(!community.getFieldsMap().toString().contains(CommunityXPath.tags.toString()))
+			community.setTags(community.getTags());
+		community.setAsString(CommunityXPath.communityUuid, community.getCommunityUuid());
 
-			try {
-				communityPayload = community.constructCreateRequestBody();
-			} catch (TransformerException e) {
-				throw new ClientServicesException(e, Messages.CreateCommunityPayloadException);
-			}
-			super.updateData(url, parameters,communityPayload, COMMUNITY_UNIQUE_IDENTIFIER);
-			community.clearFieldsMap();
-		} catch (ClientServicesException e) {
-			throw new ClientServicesException(e, Messages.UpdateCommunityException);
-		} catch (IOException e) {
-			throw new ClientServicesException(e, Messages.UpdateCommunityException);
+		try {
+			communityPayload = community.constructCreateRequestBody();
+		} catch (TransformerException e) {
+			throw new ClientServicesException(e, Messages.CreateCommunityPayloadException);
 		}
+		updateData(url, parameters,communityPayload, COMMUNITY_UNIQUE_IDENTIFIER);
+		community.clearFieldsMap();
 	}
 	/**
 	 * Update Community Logo, supported for connections
@@ -396,30 +383,24 @@ public class CommunityService extends ConnectionsService {
 	 * @throws ClientServicesException
 	 */
 	public void updateCommunityLogo(java.io.File file, String communityId) throws ClientServicesException{
-
-		try {
-			Map<String, String> parameters = new HashMap<String, String>();
-			parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityId);
-			String name = file.getName();
-			int dot = StringUtil.lastIndexOfIgnoreCase(name, ".");
-			String ext = "";
-			if (dot > -1) {
-				ext = name.substring(dot + 1); // add one for the dot!
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityId);
+		String name = file.getName();
+		int dot = StringUtil.lastIndexOfIgnoreCase(name, ".");
+		String ext = "";
+		if (dot > -1) {
+			ext = name.substring(dot + 1); // add one for the dot!
+		}
+		if (!StringUtil.isEmpty(ext)) {
+			Map<String, String> headers = new HashMap<String, String>();
+			if (StringUtil.equalsIgnoreCase(ext,"jpg")) {
+				headers.put("Content-Type", "image/jpeg");	// content-type should be image/jpeg for file extension - jpeg/jpg
+			} else {
+				headers.put("Content-Type", "image/" + ext);
 			}
-			if (!StringUtil.isEmpty(ext)) {
-				Map<String, String> headers = new HashMap<String, String>();
-				if (StringUtil.equalsIgnoreCase(ext,"jpg")) {
-					headers.put("Content-Type", "image/jpeg");	// content-type should be image/jpeg for file extension - jpeg/jpg
-				} else {
-					headers.put("Content-Type", "image/" + ext);
-				}
-				// the url doesn't have atom in base 
-				String url = "/communities/service/html/image";
-				getClientService().put(url, parameters, headers, file, ClientService.FORMAT_NULL);
-
-			}
-		} catch (ClientServicesException e) {
-			throw new ClientServicesException(e, Messages.UpdateCommunityLogoException);
+			// the url doesn't have atom in base 
+			String url = "/communities/service/html/image";
+			getClientService().put(url, parameters, headers, file, ClientService.FORMAT_NULL);
 		}
 	}
 
@@ -437,17 +418,10 @@ public class CommunityService extends ConnectionsService {
 			throw new ClientServicesException(null, Messages.NullCommunityIdException);
 		}
 
-		try {
-			Map<String, String> parameters = new HashMap<String, String>();
-			parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
-			String url = CommunityUrls.COMMUNITY_INSTANCE.format(this);
-			super.deleteData(url, parameters, COMMUNITY_UNIQUE_IDENTIFIER);
-		} catch (ClientServicesException e) {
-			throw new ClientServicesException(e, Messages.DeleteCommunityException, communityUuid);
-		} catch (IOException e) {
-			throw new ClientServicesException(e, Messages.DeleteCommunityException, communityUuid);
-		}		
-
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
+		String url = CommunityUrls.COMMUNITY_INSTANCE.format(this);
+		deleteData(url, parameters, COMMUNITY_UNIQUE_IDENTIFIER);
 	}
 
 	//------------------------------------------------------------------------------------------------------------------
@@ -480,12 +454,8 @@ public class CommunityService extends ConnectionsService {
 		} catch (TransformerException e) {
 			throw new ClientServicesException(e, Messages.CreateCommunityPayloadException);
 		}
-		try {
-			Response result = super.createData(url, parameters, communityPayload);
-			invite = getInviteFeedHandler().createEntity(result);
-		} catch (Exception e) {
-			throw new ClientServicesException(e, Messages.CreateInvitationException);
-		}
+		Response result = createData(url, parameters, communityPayload);
+		invite = getInviteFeedHandler().createEntity(result);
 		return invite;
 	}
 
@@ -520,12 +490,7 @@ public class CommunityService extends ConnectionsService {
 			throw new ClientServicesException(e, Messages.CreateCommunityPayloadException);
 		}
 
-		try {
-			super.createData(url, parameters, communityPayload);
-		} catch (Exception e) {
-			success = false;
-			throw new ClientServicesException(e, Messages.AcceptInvitationException);
-		} 
+		createData(url, parameters, communityPayload);
 		return success;
 
 	}
@@ -547,7 +512,7 @@ public class CommunityService extends ConnectionsService {
 		if (StringUtil.isEmpty(communityUuid)){
 			throw new ClientServicesException(null, Messages.NullCommunityIdException);
 		}
-		boolean success = true;
+		boolean success = false;
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put(COMMUNITY_UNIQUE_IDENTIFIER, communityUuid);
 		if(EntityUtil.isEmail(contributorId)){
@@ -558,12 +523,8 @@ public class CommunityService extends ConnectionsService {
 		}
 		String url = CommunityUrls.COMMUNITY_INVITES.format(this);
 
-		try {
-			super.deleteData(url, parameters, communityUuid);
-		} catch (Exception e) {
-			success = false;
-			throw new ClientServicesException(e, Messages.DeclineInvitationException);
-		}
+		deleteData(url, parameters, communityUuid);
+		success = true;
 		return success;
 	}
 	
@@ -584,9 +545,7 @@ public class CommunityService extends ConnectionsService {
 		parameters.put(USERID, inviteUuid); // the parameter name should be inviteUuid, this is a bug on connections
 		String url = CommunityUrls.COMMUNITY_INVITES.format(this);
 		return getInviteEntity(url, parameters);
-
 	}
-
 
 	//------------------------------------------------------------------------------------------------------------------
 	// Working with community members
@@ -661,15 +620,9 @@ public class CommunityService extends ConnectionsService {
 		}
 
 		String url = CommunityUrls.COMMUNITY_MEMBERS.format(this,CommunityUrls.getCommunityUuid(communityUuid));
-		try {
-			Response response = super.createData(url, parameters, communityPayload);
-			int statusCode = response.getResponse().getStatusLine().getStatusCode();
-			return statusCode == HttpServletResponse.SC_CREATED;
-		} catch (ClientServicesException e) {
-			throw new ClientServicesException(e, Messages.AddMemberException, memberId, communityUuid);
-		} catch (IOException e) {
-			throw new ClientServicesException(e, Messages.AddMemberException, memberId, communityUuid);
-		}
+		Response response = createData(url, parameters, communityPayload);
+		int statusCode = response.getResponse().getStatusLine().getStatusCode();
+		return statusCode == HttpServletResponse.SC_CREATED;
 	}
 	/**
 	 * Update member of a community.
@@ -708,14 +661,7 @@ public class CommunityService extends ConnectionsService {
 		}
 
 		String url = CommunityUrls.COMMUNITY_MEMBERS.format(this, CommunityUrls.getCommunityUuid(communityUuid));
-		try {
-			super.createData(url, parameters, memberPayload);
-		} catch (ClientServicesException e) {
-			throw new ClientServicesException(e, Messages.UpdateMemberException, memberId, member.getRole(), communityUuid);
-		} catch (IOException e) {
-			throw new ClientServicesException(e, Messages.UpdateMemberException, memberId, member.getRole(), communityUuid);
-		}
-
+		createData(url, parameters, memberPayload);
 	}
 	/**
 	 * Remove member from a community.
@@ -740,14 +686,8 @@ public class CommunityService extends ConnectionsService {
 			parameters.put("userid", memberId);
 		}
 
-		try {
-			String url = CommunityUrls.COMMUNITY_MEMBERS.format(this,CommunityUrls.getCommunityUuid(communityUuid));
-			super.deleteData(url, parameters, COMMUNITY_UNIQUE_IDENTIFIER);
-		} catch (ClientServicesException e) {
-			throw new ClientServicesException(e, Messages.RemoveMemberException, memberId, communityUuid);
-		} catch (IOException e) {
-			throw new ClientServicesException(e, Messages.RemoveMemberException, memberId, communityUuid);
-		}
+		String url = CommunityUrls.COMMUNITY_MEMBERS.format(this,CommunityUrls.getCommunityUuid(communityUuid));
+		deleteData(url, parameters, COMMUNITY_UNIQUE_IDENTIFIER);
 	}
 
 	//------------------------------------------------------------------------------------------------------------------
@@ -762,7 +702,7 @@ public class CommunityService extends ConnectionsService {
 	 * @throws ClientServicesException
 	 */
 	public EntityList<File> getCommunityFiles(String communityId, HashMap<String, String> params) throws ClientServicesException {
-		FileService fileService = new FileService(this.endpoint);
+		FileService fileService = new FileService(endpoint);
 		try {
 			return fileService.getCommunityFiles(communityId, params);
 		} catch (ClientServicesException e) {
@@ -780,7 +720,7 @@ public class CommunityService extends ConnectionsService {
 	 * @throws ClientServicesException
 	 */
 	public long downloadCommunityFile(OutputStream ostream, final String fileId, final String libraryId, Map<String, String> params) throws ClientServicesException {
-		FileService svc = new FileService(this.endpoint);
+		FileService svc = new FileService(endpoint);
 		try {
 			return svc.downloadCommunityFile(ostream, fileId, libraryId, params);
 		} catch (ClientServicesException e) {
@@ -797,7 +737,7 @@ public class CommunityService extends ConnectionsService {
 	 * @throws ClientServicesException
 	 */
 	public File uploadFile(InputStream iStream, String communityId, final String title, long length) throws ClientServicesException {
-		FileService svc = new FileService(this.endpoint);
+		FileService svc = new FileService(endpoint);
 		try {
 			return svc.uploadCommunityFile(iStream, communityId, title, length);
 		} catch (ClientServicesException e) {

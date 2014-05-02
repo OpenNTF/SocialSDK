@@ -30,12 +30,12 @@ import org.junit.Test;
 public class ForumGetUpdateTest extends BaseForumServiceTest {
 
 	@Before
-	public void initForum() throws ForumServiceException {
+	public void initForum() throws Exception {
 		forum = createForum();
 	}
 
 	@Test
-	public void testGetForum() throws ForumServiceException {
+	public void testGetForum() throws Exception {
 		Forum forumGot = forumService.getForum(forum.getForumUuid());
 
 		assertEquals(forum.getTitle(), forumGot.getTitle());
@@ -43,7 +43,7 @@ public class ForumGetUpdateTest extends BaseForumServiceTest {
 	}
 
 	@Test
-	public void testUpdateForum() throws ForumServiceException {
+	public void testUpdateForum() throws Exception {
 		forum.setTitle("new Test forum title" + System.currentTimeMillis());
 		forum.setContent("new Test forum content");
 		forumService.updateForum(forum);
@@ -53,7 +53,7 @@ public class ForumGetUpdateTest extends BaseForumServiceTest {
 	}
 
 	@After
-	public void deleteForumOnExit() throws ForumServiceException {
+	public void deleteForumOnExit() throws Exception {
 		deleteForum(forum);
 	}
 }

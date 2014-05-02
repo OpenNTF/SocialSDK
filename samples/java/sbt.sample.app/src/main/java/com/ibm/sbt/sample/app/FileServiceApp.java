@@ -16,29 +16,13 @@
 package com.ibm.sbt.sample.app;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.HashMap;
-import java.util.Map;
 
-import com.ibm.commons.util.io.StreamUtil;
 import com.ibm.commons.xml.DOMUtil;
-import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
-import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
-import com.ibm.sbt.services.client.connections.files.AccessType;
-import com.ibm.sbt.services.client.connections.files.Categories;
 import com.ibm.sbt.services.client.connections.files.Comment;
 import com.ibm.sbt.services.client.connections.files.File;
 import com.ibm.sbt.services.client.connections.files.FileService;
-import com.ibm.sbt.services.client.connections.files.FileServiceException;
-import com.ibm.sbt.services.client.connections.files.ResultType;
-import com.ibm.sbt.services.client.connections.files.SubFilters;
-import com.ibm.sbt.services.client.connections.files.model.Headers;
-import com.ibm.sbt.services.client.connections.files.util.Messages;
-import com.ibm.sbt.services.client.connections.profiles.Profile;
 
 
 /**
@@ -60,7 +44,7 @@ public class FileServiceApp extends BaseApp {
     	return fileService;
     }
     
-    public Comment addCommentToFile(String fileId, String comment, String userId) throws FileServiceException, TransformerException {
+    public Comment addCommentToFile(String fileId, String comment, String userId) throws ClientServicesException, TransformerException {
     	return getFileService().addCommentToFile(fileId, comment, userId, null);
     }
     

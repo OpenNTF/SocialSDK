@@ -33,7 +33,7 @@ import com.ibm.sbt.services.client.connections.forums.model.BaseForumEntity;
 public class ForumServiceGetTests extends BaseForumServiceTest {
 
 	@Test
-	public void testGetAllForums() throws ForumServiceException {
+	public void testGetAllForums() throws Exception {
 		EntityList<Forum> entries = forumService.getAllForums();
 		assertNotNull(entries);
 		for (BaseForumEntity forum : entries) {
@@ -42,7 +42,7 @@ public class ForumServiceGetTests extends BaseForumServiceTest {
 	}
 
 	@Test
-	public void testGetMyForums() throws ForumServiceException {
+	public void testGetMyForums() throws Exception {
 		EntityList<Forum> entries = forumService.getMyForums();
 		assertNotNull(entries);
 		for (BaseForumEntity forum : entries) {
@@ -51,7 +51,7 @@ public class ForumServiceGetTests extends BaseForumServiceTest {
 	}
 
 	@Test
-	public void testGetPublicForums() throws ForumServiceException {
+	public void testGetPublicForums() throws Exception {
 		EntityList<Forum> entries = forumService.getPublicForums();
 		assertNotNull(entries);
 		for (BaseForumEntity forum : entries) {
@@ -60,7 +60,7 @@ public class ForumServiceGetTests extends BaseForumServiceTest {
 	}
 
 	@Test
-	public void testGetPublicForumTopics() throws ForumServiceException {
+	public void testGetPublicForumTopics() throws Exception {
 		EntityList<ForumTopic> entries = forumService.getPublicForumTopics();
 		assertNotNull(entries);
 		for (BaseForumEntity topic : entries) {
@@ -69,7 +69,7 @@ public class ForumServiceGetTests extends BaseForumServiceTest {
 	}
 
 	@Test
-	public void testGetMyForumTopics() throws ForumServiceException {
+	public void testGetMyForumTopics() throws Exception {
 		EntityList<ForumTopic> entries = forumService.getMyForumTopics();
 		assertNotNull(entries);
 		for (BaseForumEntity topic : entries) {
@@ -79,7 +79,7 @@ public class ForumServiceGetTests extends BaseForumServiceTest {
 
 
 	@Test
-	public void testGetForumReplies() throws ForumServiceException {
+	public void testGetForumReplies() throws Exception {
 		EntityList<ForumTopic> topics = forumService.getMyForumTopics();
 		ForumTopic topic = (ForumTopic) topics.iterator().next();
 		Map<String, String> parameters = new HashMap<String, String>();
@@ -93,7 +93,7 @@ public class ForumServiceGetTests extends BaseForumServiceTest {
 	}
 
 	@Test
-	public void testGetRecommendations() throws ForumServiceException {
+	public void testGetRecommendations() throws Exception {
 		EntityList<ForumTopic> topics = forumService.getMyForumTopics();
 		ForumTopic topic = (ForumTopic) topics.get(0);
 		EntityList<Recommendation> recommendations = forumService.getRecommendations(topic.getTopicUuid());
@@ -104,7 +104,7 @@ public class ForumServiceGetTests extends BaseForumServiceTest {
 	}
 
 	@Test
-	public void testGetForumsTags() throws ForumServiceException {
+	public void testGetForumsTags() throws Exception {
 		EntityList<Tag> entries = forumService.getForumsTags();
 		assertNotNull(entries);
 		for (Tag tag : entries) {
@@ -113,7 +113,7 @@ public class ForumServiceGetTests extends BaseForumServiceTest {
 	}
 
 	@Test
-	public void testGetForumTopicsTags() throws ForumServiceException {
+	public void testGetForumTopicsTags() throws Exception {
 		EntityList<Forum> forums = forumService.getPublicForums();
 		Forum forum = (Forum) forums.get(0);
 		EntityList<Tag> entries = forumService.getForumTopicsTags(forum.getForumUuid());

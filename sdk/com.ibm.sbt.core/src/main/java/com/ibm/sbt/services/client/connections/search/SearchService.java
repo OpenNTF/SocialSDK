@@ -40,7 +40,6 @@ package com.ibm.sbt.services.client.connections.search;
 import static com.ibm.sbt.services.client.base.CommonConstants.COMMA;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -446,51 +445,27 @@ public class SearchService extends ConnectionsService {
      }
 
 	protected Result getResultEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
-		try {
-			return (Result)getEntity(requestUrl, parameters, getResultFeedHandler());
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		} 
+		return (Result)getEntity(requestUrl, parameters, getResultFeedHandler());
 	}
 
 	protected EntityList<Result> getResultEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
-		try {
-			return getEntities(requestUrl, parameters, getResultFeedHandler());
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		} 
+		return getEntities(requestUrl, parameters, getResultFeedHandler());
 	}
 
 	protected FacetValue getFacetValueEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
-		try {
-			return (FacetValue)getEntity(requestUrl, parameters, getFacetValueFeedHandler("Person"));
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		} 
+		return (FacetValue)getEntity(requestUrl, parameters, getFacetValueFeedHandler("Person"));
 	}
 
 	protected EntityList<FacetValue> getFacetValueEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
-		try {
-			return getEntities(requestUrl, parameters, getFacetValueFeedHandler("Person"));
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		} 
+		return getEntities(requestUrl, parameters, getFacetValueFeedHandler("Person"));
 	}
      
 	protected Scope getScopeEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
-		try {
-			return (Scope)getEntity(requestUrl, parameters, getScopeFeedHandler());
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		} 
+		return (Scope)getEntity(requestUrl, parameters, getScopeFeedHandler());
 	}
 
 	protected EntityList<Scope> getScopeEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
-		try {
-			return getEntities(requestUrl, parameters, getScopeFeedHandler());
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		} 
+		return getEntities(requestUrl, parameters, getScopeFeedHandler());
 	}
 
 	/*

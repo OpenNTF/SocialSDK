@@ -18,7 +18,6 @@ package com.ibm.sbt.services.client.connections.cmisfiles;
 
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
 
-import java.io.IOException;
 import java.util.Map;
 
 import org.w3c.dom.Node;
@@ -212,11 +211,7 @@ public class CMISFileService extends ConnectionsService {
 	 * Factory methods
 	 ****************************************************************/
 	protected EntityList<CMISFile> getFileEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
-		try {
-			return getEntities(requestUrl, parameters, getFileFeedHandler());
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		}
+		return getEntities(requestUrl, parameters, getFileFeedHandler());
 	}
 	
     /**

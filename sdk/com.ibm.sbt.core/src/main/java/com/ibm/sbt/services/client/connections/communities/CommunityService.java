@@ -823,51 +823,27 @@ public class CommunityService extends ConnectionsService {
 	 ****************************************************************/
 
 	protected Community getCommunityEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
-		try {
-			return getEntity(requestUrl, parameters, getCommunityFeedHandler());
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		}
+		return getEntity(requestUrl, parameters, getCommunityFeedHandler());
 	}
 
 	protected Member getMemberEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
-		try {
-			return getEntity(requestUrl, parameters, getMemberFeedHandler());
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		}
+		return getEntity(requestUrl, parameters, getMemberFeedHandler());
 	}
 
 	protected Invite getInviteEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
-		try {
-			return getEntity(requestUrl, parameters, getInviteFeedHandler());
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		}
+		return getEntity(requestUrl, parameters, getInviteFeedHandler());
 	}
 
 	protected EntityList<Community> getCommunityEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
-		try {
-			return getEntities(requestUrl, parameters, getCommunityFeedHandler());
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		}
+		return getEntities(requestUrl, parameters, getCommunityFeedHandler());
 	}
 
 	protected EntityList<Member> getMemberEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
-		try {
-			return getEntities(requestUrl, parameters, getMemberFeedHandler());
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		}
+		return getEntities(requestUrl, parameters, getMemberFeedHandler());
 	}
 
 	protected EntityList<Invite> getInviteEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
-		try {
-			return getEntities(requestUrl, parameters, getInviteFeedHandler());
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		}
+		return getEntities(requestUrl, parameters, getInviteFeedHandler());
 	}
 
 	/***************************************************************

@@ -753,59 +753,31 @@ public class BlogService extends ConnectionsService {
 	 * Factory methods
 	 ****************************************************************/
 	protected Blog getBlogEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
-		try {
-			return getEntity(requestUrl, parameters, getBlogFeedHandler());
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		}
+		return getEntity(requestUrl, parameters, getBlogFeedHandler());
 	}
 	
 	protected Comment getCommentEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
-		try {
-			return getEntity(requestUrl, parameters, getCommentFeedHandler());
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		}
+		return getEntity(requestUrl, parameters, getCommentFeedHandler());
 	}
 	
 	protected BlogPost getBlogPostEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
-		try {
-			return getEntity(requestUrl, parameters, getBlogPostFeedHandler());
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		}
+		return getEntity(requestUrl, parameters, getBlogPostFeedHandler());
 	}
 	
 	protected EntityList<Blog> getBlogEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
-		try {
-			return getEntities(requestUrl, parameters, getBlogFeedHandler());
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		}
+		return getEntities(requestUrl, parameters, getBlogFeedHandler());
 	}
 	
 	protected EntityList<BlogPost> getBlogPostEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
-		try {
-			return getEntities(requestUrl, parameters, getBlogPostFeedHandler());
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		}
+		return getEntities(requestUrl, parameters, getBlogPostFeedHandler());
 	}
 	
 	protected EntityList<Comment> getCommentEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
-		try {
-			return getEntities(requestUrl, parameters, getCommentFeedHandler());
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		}
+		return getEntities(requestUrl, parameters, getCommentFeedHandler());
 	}
 	
 	protected EntityList<Tag> getTagEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
-		try {
-			return getEntities(requestUrl, parameters, getTagFeedHandler());
-		} catch (IOException e) {
-			throw new ClientServicesException(e);
-		}
+		return getEntities(requestUrl, parameters, getTagFeedHandler());
 	}
 	
 	private void setHomepageFromEndpoint(Endpoint endpoint){

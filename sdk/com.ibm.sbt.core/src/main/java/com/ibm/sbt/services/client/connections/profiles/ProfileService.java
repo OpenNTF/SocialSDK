@@ -173,11 +173,6 @@ public class ProfileService extends ConnectionsService {
 	 * This method returns a feed of profiles instead of the Atom entry of a single profile.
 	 * If you want to retrieve an Atom entry document, see Retrieving a profile entry. The content element of each returned entry includes the vCard information for the person being represented by the entry.
 	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Searching_Profiles_programmatically_ic40a&content=pdcontent">
-	 *			Searching Profiles programmatically</a>
-	 *
-	 * 
 	 * @param parameters 
 	 * 				  list of query string parameters to pass to API
 	 * @return EntityList&lt;Profile&gt;
@@ -194,10 +189,6 @@ public class ProfileService extends ConnectionsService {
 	 * The content element of each returned entry includes the vcard information for the person being represented by the entry.<br>
 	 * In addition, it provides a list of the fully qualified URLs for each IBM® Connections application link displayed in the business card.
 	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Searching_for_a_users_profile_ic40a&content=pdcontent">
-	 *			Searching for a user's profile</a>
-	 *
 	 * @param id
 	 *             unique identifier of User , it can either be email or id 				
 	 * @return Profile
@@ -213,10 +204,6 @@ public class ProfileService extends ConnectionsService {
 	 * The content element of each returned entry includes the vcard information for the person being represented by the entry.<br>
 	 * In addition, it provides a list of the fully qualified URLs for each IBM® Connections application link displayed in the business card.
 	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Searching_for_a_users_profile_ic40a&content=pdcontent">
-	 *			Searching for a user's profile</a>
-	 *
 	 * @param id
 	 *             unique identifier of User , it can either be email or id 				
 	 * @param parameters 
@@ -235,10 +222,6 @@ public class ProfileService extends ConnectionsService {
 	 * For example, the profile of the user's manager, that manager's manager, and so on.
 	 * The content element of each returned entry includes the vcard information for the person being represented by the entry.
 	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Searching_for_a_persons_reportto_chain_ic40a&content=pdcontent">
-	 *			Searching for a person's report-to-chain</a>
-	 * 
 	 * @param id 
 	 * 		   unique identifier of the user whose report to chain is required, it can be email or userID
 	 * @return EntityList&lt;Profile&gt;
@@ -252,10 +235,6 @@ public class ProfileService extends ConnectionsService {
 	 * Retrieve the profiles of the people who comprise a specific user's report-to chain. 
 	 * For example, the profile of the user's manager, that manager's manager, and so on.
 	 * The content element of each returned entry includes the vcard information for the person being represented by the entry.
-	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Searching_for_a_persons_reportto_chain_ic40a&content=pdcontent">
-	 *			Searching for a person's report-to-chain</a>
 	 * 
 	 * @param id 
 	 * 		   unique identifier of the user whose report to chain is required, it can be email or userID
@@ -273,10 +252,6 @@ public class ProfileService extends ConnectionsService {
 	 * Retrieve the profiles of the people who report to a specific user.
 	 * The content element of each returned entry includes the vcard information for the person being represented by the entry.
 	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Searching_for_a_persons_direct_reports_ic40a&content=pdcontent">
-	 *			Searching for a person's direct reports</a>
-	 * 
 	 * @param id 
 	 * 		   unique identifier of the user whose direct reports are required, it can be email or userID
 	 * @return EntityList&lt;Profile&gt;
@@ -289,10 +264,6 @@ public class ProfileService extends ConnectionsService {
 	/**
 	 * Retrieve the profiles of the people who report to a specific user.
 	 * The content element of each returned entry includes the vcard information for the person being represented by the entry.
-	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Searching_for_a_persons_direct_reports_ic40a&content=pdcontent">
-	 *			Searching for a person's direct reports</a>
 	 * 
 	 * @param id 
 	 * 		   unique identifier of the user whose direct reports are required, it can be email or userID
@@ -310,10 +281,6 @@ public class ProfileService extends ConnectionsService {
 	 * Returns a feed that lists the contacts that a person has designated as colleagues. <br>
 	 * You can use this resource to subscribe to a person's list of colleagues.
 	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Searching_for_a_persons_colleagues_ic40a&content=pdcontent">
-	 *			Searching a person's colleagues</a>
-	 * 
 	 * @param id 
 	 * 		   unique identifier of the user whose colleagues are required, it can be email or userID
 	 * @return EntityList&lt;Profile&gt;
@@ -326,10 +293,6 @@ public class ProfileService extends ConnectionsService {
 	/**
 	 * Returns a feed that lists the contacts that a person has designated as colleagues. <br>
 	 * You can use this resource to subscribe to a person's list of colleagues.
-	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Searching_for_a_persons_colleagues_ic40a&content=pdcontent">
-	 *			Searching a person's colleagues</a>
 	 * 
 	 * @param id 
 	 * 		   unique identifier of the user whose colleagues are required, it can be email or userID
@@ -376,10 +339,6 @@ public class ProfileService extends ConnectionsService {
 	/**
 	 * Returns an entry of the colleague connection if one exists.
 	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Checking_whether_two_people_are_colleagues_ic40a&content=pdcontent">
-	 *			Checking whether two people are colleagues</a>
-	 * 
 	 * @param sourceId 
 	 * 				 userid or email of first user
 	 * @param targetId 
@@ -401,10 +360,6 @@ public class ProfileService extends ConnectionsService {
 	 * <li> The status of the connection
 	 * The output is displayed as a profile entry.
 	 *  
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Finding_colleagues_shared_by_two_people_ic40a&content=pdcontent">
-	 *			Finding colleagues shared by two people</a>
-	 * 
 	 * @param sourceId 
 	 * 				 userid or email of first user
 	 * @param targetId 
@@ -423,10 +378,6 @@ public class ProfileService extends ConnectionsService {
 	 * <li> The status of the connection
 	 * The output is displayed as a profile entry.
 	 *  
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Finding_colleagues_shared_by_two_people_ic40a&content=pdcontent">
-	 *			Finding colleagues shared by two people</a>
-	 * 
 	 * @param sourceId 
 	 * 				 userid or email of first user
 	 * @param targetId 
@@ -460,10 +411,6 @@ public class ProfileService extends ConnectionsService {
 	 * <li> The status of the connection
 	 * The output is displayed as a connection entry.
 	 *  
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Finding_colleagues_shared_by_two_people_ic40a&content=pdcontent">
-	 *			Finding colleagues shared by two people</a>
-	 * 
 	 * @param sourceId 
 	 * 				 userid or email of first user
 	 * @param targetId 
@@ -482,10 +429,6 @@ public class ProfileService extends ConnectionsService {
 	 * <li> The status of the connection
 	 * The output is displayed as a connection entry.
 	 *  
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Finding_colleagues_shared_by_two_people_ic40a&content=pdcontent">
-	 *			Finding colleagues shared by two people</a>
-	 * 
 	 * @param sourceId 
 	 * 				 userid or email of first user
 	 * @param targetId 
@@ -603,10 +546,6 @@ public class ProfileService extends ConnectionsService {
 	 * You can only replace a photo if you are the profile owner or an administrator.
 	 * See Authenticating requests for information about how to authenticate the request. <br>
 	 *  
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Replacing_a_photo_ic40a&content=pdcontent">
-	 *			Replacing a photo</a>
-	 * 
 	 * @param File
 	 * 			image to be uploaded as profile photo
 	 * @param userid
@@ -650,11 +589,6 @@ public class ProfileService extends ConnectionsService {
 	 * See Authenticating requests for information about how to authenticate the request.<br>
 	 * A default Invite message is used while sending the invite
 	 *  
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Inviting_a_person_to_become_your_colleague_ic40a&content=pdcontent">
-	 *			Inviting a person to become your colleague</a>
-	 * 
-	 *  
 	 * @param id
 	 * 		   unique identifier of the user to whom the invite is to be sent, it can be email or userID
 	 * @return Id of the Connection
@@ -675,10 +609,6 @@ public class ProfileService extends ConnectionsService {
 	 * See Accepting an invitation to become a colleague or Deleting connections for information about how to accept or decline an invitation. <br>
 	 * See Authenticating requests for information about how to authenticate the request.<br>
 	 * A default Invite message is used while sending the invite
-	 *  
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Inviting_a_person_to_become_your_colleague_ic40a&content=pdcontent">
-	 *			Inviting a person to become your colleague</a>
 	 *  
 	 * @param id
 	 * 		   unique identifier of the user to whom the invite is to be sent, it can be email or userID
@@ -703,10 +633,6 @@ public class ProfileService extends ConnectionsService {
 	 * can delete the connection. Deleted connections cannot be restored.
 	 * See Authenticating requests for information about how to authenticate the request.
 	 *  
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Deleting_connections_ic40a&content=pdcontent">
-	 *			Deleting connections</a>
-	 * 
 	 * @param connectionId 
 	 * 					unique id of the connection
 	 * @throws ClientServicesException 
@@ -728,10 +654,6 @@ public class ProfileService extends ConnectionsService {
 	 * If you want to retrieve a feed, see Searching for a person's colleagues. <br>
 	 * See Authenticating requests for information about how to authenticate the request.
 	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Retrieving_connections_ic40a&content=pdcontent">
-	 *			Retrieving connections</a>
-	 * 
 	 * @param id 
 	 * 		   unique identifier of the user whose colleagues are required, it can be email or userID
 	 * @return EntityList&lt;ColleagueConnection&gt;
@@ -749,10 +671,6 @@ public class ProfileService extends ConnectionsService {
 	 * This method returns the Atom entry of a single connection entry as opposed to a feed of all the connection entries.
 	 * If you want to retrieve a feed, see Searching for a person's colleagues. <br>
 	 * See Authenticating requests for information about how to authenticate the request.
-	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Retrieving_connections_ic40a&content=pdcontent">
-	 *			Retrieving connections</a>
 	 * 
 	 * @param id 
 	 * 		   unique identifier of the user whose colleagues are required, it can be email or userID
@@ -782,10 +700,6 @@ public class ProfileService extends ConnectionsService {
 	 * and send it back with this request. 
 	 * See Inviting a person to become your colleague for more information.<br>
 	 * See Authenticating requests for information about how to authenticate the request.
-	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Accepting_an_invitation_to_become_a_colleague_ic40a&content=pdcontent">
-	 *			Accepting an invitation to become a colleague</a>
 	 * 
 	 * @param ColleagueConnection 
 	 * @throws ClientServicesException 
@@ -852,10 +766,6 @@ public class ProfileService extends ConnectionsService {
 	 * Users can only update their own profiles. 
 	 * See Authenticating requests for information about how to authenticate the request.<br>
 	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Updating_profile_entries_ic40a&content=pdcontent">
-	 *			Updating profile entries</a>
-	 * 
 	 * @param Profile
 	 * @throws ClientServicesException 
 	 */
@@ -882,10 +792,6 @@ public class ProfileService extends ConnectionsService {
 	 *  use a HTTP GET request to retrieve the tags category document for that profile.<br>
 	 *  You can retrieve tags created by any user for any user.
 	 *  
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Retrieving_profile_tags_ic40a&content=pdcontent">
-	 *			Retrieving profile tags</a>
-	 * 
 	 * @param id 
 	 *        unique identifier of the user whose tags are required, it can be email or userKey
 	 * @return EntityList&lg;Tag&gt;
@@ -900,10 +806,6 @@ public class ProfileService extends ConnectionsService {
 	 *  use a HTTP GET request to retrieve the tags category document for that profile.<br>
 	 *  You can retrieve tags created by any user for any user.
 	 *  
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Retrieving_profile_tags_ic40a&content=pdcontent">
-	 *			Retrieving profile tags</a>
-	 * 
 	 * @param id 
 	 *        unique identifier of the user whose tags are required, it can be email or userKey
 	 * @param parameters 
@@ -928,13 +830,6 @@ public class ProfileService extends ConnectionsService {
 	 * by leaving them out of the updated set. <br>
 	 * See Authenticating requests for information about how to authenticate the request. 
 	 *  
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Creating_profile_tags_ic40a&content=pdcontent">
-	 *			Creating profile tags</a>
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Updating_profile_tags_ic40a&content=pdcontent">
-	 *			Updating profile tags</a>
-	 * 
 	 * @param sourceId
 	 *        unique identifier of the user who wants to add tags to a profile
 	 * @param targetId

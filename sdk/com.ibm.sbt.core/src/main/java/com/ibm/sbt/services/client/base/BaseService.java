@@ -443,8 +443,16 @@ public abstract class BaseService implements Serializable {
        return result;
    }
    
-   protected boolean checkResponseCode(Response response, HTTPCode code){
-	   return code.checkCode(response.getResponse().getStatusLine().getStatusCode());
+   protected void checkResponseCode(Response response, HTTPCode expectedCode) throws ClientServicesException {
+	   if (response != null && response.getResponse() != null && response.getRequest()!=null) {
+		   if (response.getResponse().getStatusLine() != null && expectedCode.checkCode(response.getResponse().getStatusLine().getStatusCode())) {
+			   return;
+		   } else {
+			   throw new ClientServicesException(response.getResponse(), response.getRequest());
+		   }
+	   } else {
+		   throw new ClientServicesException(null, "Response is null");
+	   }
    }
 	
 	/**

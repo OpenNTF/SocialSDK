@@ -45,8 +45,8 @@ public class LikeUnlikePostTest extends BaseForumServiceTest {
 
     @After
     public void deleteForumTopicDataOnExit() throws Exception {
-    	forumService.removeForumTopic(topic.getTopicUuid());
-    	forumService.removeForum(topic.getForumUuid());
+    	forumService.deleteForumTopic(topic.getTopicUuid());
+    	forumService.deleteForum(topic.getForumUuid());
     }
 }
 

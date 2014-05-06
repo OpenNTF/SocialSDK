@@ -15,8 +15,6 @@
  */
 package com.ibm.sbt.services.client.connections.forums;
 
-import static com.ibm.sbt.services.client.base.CommonConstants.APPLICATION_ATOM_XML;
-import static com.ibm.sbt.services.client.base.CommonConstants.CONTENT_TYPE;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.v4_5;
 
@@ -388,11 +386,8 @@ public class ForumService extends ConnectionsService {
 			BaseForumTransformer transformer = new BaseForumTransformer(forum);
 			Object 	payload = transformer.transform(forum.getFieldsMap());
 
-			Map<String, String> headers = new HashMap<String, String>();
-			headers.put("Content-Type", "application/atom+xml");
-
 			String url = ForumUrls.FORUMS.format(this);
-			result = createData(url, null, headers, payload);
+			result = createData(url, null, getAtomHeaders(), payload);
 			forum = getForumFeedHandler().createEntity(result);
 
 		} catch (Exception e) {
@@ -546,11 +541,8 @@ public class ForumService extends ConnectionsService {
 			Map<String, String> params = new HashMap<String, String>();
 			params.put(FORUM_UNIQUE_IDENTIFIER, forumId);
 
-			Map<String, String> headers = new HashMap<String, String>();
-			headers.put(CONTENT_TYPE, APPLICATION_ATOM_XML);
-
 			String url = ForumUrls.TOPICS.format(this);
-			result = createData(url, params, headers,payload);
+			result = createData(url, params, getAtomHeaders(), payload);
 			topic = getForumTopicFeedHandler().createEntity(result);
 
 		} catch (Exception e) {
@@ -623,10 +615,7 @@ public class ForumService extends ConnectionsService {
 			Map<String, String> parameters = new HashMap<String, String>();
 			parameters.put(TOPIC_UNIQUE_IDENTIFIER, topic.getUid());
 
-			Map<String, String> headers = new HashMap<String, String>();
-			headers.put(CONTENT_TYPE, APPLICATION_ATOM_XML);
-
-			getClientService().put(url, parameters,headers, payload,ClientService.FORMAT_NULL);
+			getClientService().put(url, parameters, getAtomHeaders(), payload,ClientService.FORMAT_NULL);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new ClientServicesException(e, "error updating topic");
@@ -710,10 +699,8 @@ public class ForumService extends ConnectionsService {
 
 			params.put(TOPIC_UNIQUE_IDENTIFIER, topicId);
 
-			Map<String, String> headers = new HashMap<String, String>();
-			headers.put("Content-Type", "application/atom+xml");
 			String url = ForumUrls.REPLIES.format(this);
-			result = createData(url, params, headers,payload);
+			result = createData(url, params, getAtomHeaders(), payload);
 			reply = getForumReplyFeedHandler().createEntity(result);
 
 		} catch (Exception e) {
@@ -796,10 +783,8 @@ public class ForumService extends ConnectionsService {
 			Map<String, String> params = new HashMap<String, String>();
 			params.put(REPLY_UNIQUE_IDENTIFIER, reply.getUid());
 
-			Map<String, String> headers = new HashMap<String, String>();
-			headers.put("Content-Type", "application/atom+xml");
 			String url = ForumUrls.REPLY.format(this);
-			updateData(url, params, headers,payload, reply.getUid());
+			updateData(url, params, getAtomHeaders(), payload, reply.getUid());
 
 		} catch (Exception e) {
 			throw new ClientServicesException(e, "error updating forum reply");
@@ -950,10 +935,8 @@ public class ForumService extends ConnectionsService {
 			Map<String, String> params = new HashMap<String, String>();
 			params.put(COMM_UNIQUE_IDENTIFIER, communityId);
 
-			Map<String, String> headers = new HashMap<String, String>();
-			headers.put(CONTENT_TYPE, APPLICATION_ATOM_XML);
 			String postUrl = ForumUrls.TOPICS.format(this);
-			result = createData(postUrl, params, headers,payload);
+			result = createData(postUrl, params, getAtomHeaders() ,payload);
 			topic = getForumTopicFeedHandler().createEntity(result);
 
 		} catch (Exception e) {

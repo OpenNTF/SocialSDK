@@ -73,7 +73,7 @@ public class Blog extends BaseBlogEntity {
 	* @method getBlogUuid
 	* @return blogUuid of the blog
 	*/
-	public String getBlogUuid() throws ClientServicesException{
+	public String getBlogUuid() {
 		return super.getUid();
 	}
 	/**
@@ -82,7 +82,7 @@ public class Blog extends BaseBlogEntity {
 	* @method getHandle
 	* @return Blog handle
 	*/
-	public String getHandle() throws ClientServicesException{
+	public String getHandle() {
 		return getAsString(BlogXPath.handle);
 	}
 	/**
@@ -100,9 +100,30 @@ public class Blog extends BaseBlogEntity {
 	* @method getTimeZone
 	* @return {String} Blog TimeZone
 	*/
-	public String getTimeZone() throws ClientServicesException{
+	public String getTimeZone() {
 		return getAsString(BlogXPath.timeZone);
 	}
+	
+	public String getReplyTo() {
+		return getAsString(BlogXPath.inReplyToRef);
+	}
+	
+	public String getFlagTerm() {
+		return getAsString(BlogXPath.flagTerm);
+	}
+	
+	public void setFlagTerm(String flagTerm) {
+		setAsString(BlogXPath.flagTerm, flagTerm);
+	}
+	
+	public String getFlagLabel() {
+		return getAsString(BlogXPath.flagLabel);
+	}
+	
+	public void setFlagLabel(String flagLabel) {
+		setAsString(BlogXPath.flagLabel, flagLabel);
+	}
+	
 	/**
 	* Sets the Blog timezone
 	*

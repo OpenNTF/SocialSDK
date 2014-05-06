@@ -97,15 +97,15 @@ public class BaseForumServiceTest extends BaseUnitTest {
 	}
 	
 	protected void deleteForum(Forum forum) throws Exception {
-		forumService.removeForum(forum.getForumUuid());
+		forumService.deleteForum(forum.getForumUuid());
 	}
 	
 	protected void deleteForumTopic(ForumTopic topic) throws Exception {
-		forumService.removeForumTopic(topic.getTopicUuid());
+		forumService.deleteForumTopic(topic.getTopicUuid());
 	}
 	
 	protected void deleteForumReply(ForumReply reply) throws Exception {
-		forumService.removeForumReply(reply.getReplyUuid());
+		forumService.deleteForumReply(reply.getReplyUuid());
 	}
 	
 	protected void assertValid(Forum forum) {

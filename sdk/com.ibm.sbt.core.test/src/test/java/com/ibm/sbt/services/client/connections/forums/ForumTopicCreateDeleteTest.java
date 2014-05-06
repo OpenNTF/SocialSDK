@@ -48,7 +48,7 @@ public class ForumTopicCreateDeleteTest extends BaseForumServiceTest {
 			ForumTopic createdTopic = createForumTopic();
 			ForumTopic topicGot = forumService.getForumTopic(createdTopic.getTopicUuid());
 			assertEquals(createdTopic.getTitle(), topicGot.getTitle());
-			forumService.removeForumTopic(createdTopic);
+			forumService.deleteForumTopic(createdTopic);
 			forumService.getForumTopic(createdTopic.getTopicUuid());
 			fail("Getting a Topic that does no longer exist should throw an exception.");
 		}

@@ -37,7 +37,6 @@ public class ActivityNodeCrudrTest extends BaseActivityServiceTest {
 		
 		ActivityNode created = activityService.createActivityNode(activityNode);
 		
-		
 		//String createdXml = created.toXmlString();
 		//System.out.println("CREATED: " + createdXml);
 		

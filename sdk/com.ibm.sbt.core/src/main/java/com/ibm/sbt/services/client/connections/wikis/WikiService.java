@@ -95,10 +95,6 @@ public class WikiService extends ConnectionsService {
 	 * Get a feed that lists all of the wikis.
 	 * This returns a feed of wikis to which the authenticated user has access.
 	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Getting_a_feed_of_all_wikis_ic40a&content=pdcontent">
-	 *			Getting a feed of all wikis</a>
-	 * 
 	 * @param parameters 
 	 * @return EntityList&lt;Wiki&gt;
 	 * @throws ClientServicesException
@@ -110,10 +106,6 @@ public class WikiService extends ConnectionsService {
 	/**
 	 * Get a feed that lists all of the wikis.
 	 * This returns a feed of wikis to which the authenticated user has access.
-	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Getting_a_feed_of_all_wikis_ic40a&content=pdcontent">
-	 *			Getting a feed of all wikis</a>
 	 * 
 	 * @param parameters 
 	 * @return EntityList&lt;Wiki&gt;
@@ -128,9 +120,6 @@ public class WikiService extends ConnectionsService {
 	/**
 	 * Get a feed that lists all of the public wikis.
 	 * This returns a feed of wikis to which everyone who can log into the Wikis application has access.
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Getting_a_feed_of_public_wikis_ic40a&content=pdcontent">
-	 *			Getting a feed of public wikis</a>
 	 *
 	 * @param parameters
 	 * @return EntityList&lt;Wiki&gt;
@@ -144,9 +133,6 @@ public class WikiService extends ConnectionsService {
 	/**
 	 * Get a feed that lists all of the public wikis.
 	 * This returns a feed of wikis to which everyone who can log into the Wikis application has access.
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Getting_a_feed_of_public_wikis_ic40a&content=pdcontent">
-	 *			Getting a feed of public wikis</a>
 	 *
 	 * @param parameters
 	 * @return EntityList&lt;Wiki&gt;
@@ -160,9 +146,6 @@ public class WikiService extends ConnectionsService {
 	/**
 	 * Get a feed that lists all of the wikis of which the authenticated user is a member. 
 	 * This returns a list of wikis of which the authenticated user is a member. 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Getting_a_feed_of_a_persons_wikis_ic40a&content=pdcontent">
-	 *			Getting a feed of a person's wikis</a>
 	 * 
 	 * @return EntityList&lt;Wiki&gt;
 	 * @throws ClientServicesException
@@ -174,9 +157,6 @@ public class WikiService extends ConnectionsService {
 	/**
 	 * Get a feed that lists all of the wikis of which the authenticated user is a member. 
 	 * This returns a list of wikis of which the authenticated user is a member. 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Getting_a_feed_of_a_persons_wikis_ic40a&content=pdcontent">
-	 *			Getting a feed of a person's wikis</a>
 	 * 
 	 * @param parameters
 	 * @return EntityList&lt;Wiki&gt;
@@ -190,9 +170,6 @@ public class WikiService extends ConnectionsService {
 	/**
 	 * Get a feed that returns all wikis sorted by wikis with the most comments first. 
 	 * This returns a feed of wikis to which everyone who can log into the Wikis application has access. 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Getting_a_feed_of_the_wikis_with_the_most_comments_ic40a&content=pdcontent">
-	 *			Getting a feed of the wikis with the most comments</a>
 	 *
 	 * @return EntityList&lt;Wiki&gt;
 	 * @throws ClientServicesException
@@ -204,9 +181,6 @@ public class WikiService extends ConnectionsService {
 	/**
 	 * Get a feed that returns all wikis sorted by wikis with the most comments first. 
 	 * This returns a feed of wikis to which everyone who can log into the Wikis application has access. 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Getting_a_feed_of_the_wikis_with_the_most_comments_ic40a&content=pdcontent">
-	 *			Getting a feed of the wikis with the most comments</a>
 	 *
 	 * @param parameters
 	 * @return EntityList&lt;Wiki&gt;
@@ -220,10 +194,7 @@ public class WikiService extends ConnectionsService {
 	/**
 	 * Get a feed that returns all wikis sorted by most recommended. 
 	 * This returns a feed of wikis to which everyone who can log into the Wikis application has access.  
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Getting_a_feed_of_the_wikis_with_the_most_comments_ic40a&content=pdcontent">
-	 *			Getting a feed of the wikis with the most recommendations</a>
-	 *
+	 * 
 	 * @return EntityList&lt;Wiki&gt;
 	 * @throws ClientServicesException
 	 */
@@ -234,9 +205,6 @@ public class WikiService extends ConnectionsService {
 	/**
 	 * Get a feed that returns all wikis sorted by most recommended. 
 	 * This returns a feed of wikis to which everyone who can log into the Wikis application has access.  
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Getting_a_feed_of_the_wikis_with_the_most_comments_ic40a&content=pdcontent">
-	 *			Getting a feed of the wikis with the most recommendations</a>
 	 *
 	 * @param parameters
 	 * @return EntityList&lt;Wiki&gt;
@@ -250,9 +218,6 @@ public class WikiService extends ConnectionsService {
 	/**
 	 * Get a feed that returns all wikis sorted by most visited. 
 	 * This returns a feed of wikis to which everyone who can log into the Wikis application has access.
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Getting_a_feed_of_the_wikis_with_the_most_comments_ic40a&content=pdcontent">
-	 *			Getting a feed of the most visited wikis</a>
 	 *
 	 * @return EntityList&lt;Wiki&gt;
 	 * @throws ClientServicesException
@@ -264,9 +229,6 @@ public class WikiService extends ConnectionsService {
 	/**
 	 * Get a feed that returns all wikis sorted by most visited. 
 	 * This returns a feed of wikis to which everyone who can log into the Wikis application has access.
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Getting_a_feed_of_the_wikis_with_the_most_comments_ic40a&content=pdcontent">
-	 *			Getting a feed of the most visited wikis</a>
 	 *
 	 * @param parameters
 	 * @return EntityList&lt;Wiki&gt;
@@ -280,9 +242,6 @@ public class WikiService extends ConnectionsService {
 	/**
 	 * Get a feed that lists all of the pages in a specific wiki.
 	 * This returns a feed of the pages in a given wiki. 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Getting_a_feed_of_wiki_pages_ic40a&content=pdcontent">
-	 *			Getting a feed of the wiki pages</a>
 	 *
 	 * @param wikiLabel
 	 * @return EntityList&lt;WikiPage&gt;
@@ -295,9 +254,6 @@ public class WikiService extends ConnectionsService {
 	/**
 	 * Get a feed that lists all of the pages in a specific wiki.
 	 * This returns a feed of the pages in a given wiki. 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Getting_a_feed_of_wiki_pages_ic40a&content=pdcontent">
-	 *			Getting a feed of the wiki pages</a>
 	 *
 	 * @param wikiLabel
 	 * @param parameters
@@ -313,9 +269,6 @@ public class WikiService extends ConnectionsService {
 	/**
 	 * Get a feed that lists all of the pages in a specific wiki that have been added 
 	 * or edited by the authenticated user.
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Getting_a_feed_of_wiki_pages_edited_by_someone_ic40a&content=pdcontent">
-	 *			Getting a feed of the wiki pages edited by someone</a>
 	 *
 	 * @param wikiLabel
 	 * @return EntityList&lt;WikiPage&gt;
@@ -328,9 +281,6 @@ public class WikiService extends ConnectionsService {
 	/**
 	 * Get a feed that lists all of the pages in a specific wiki that have been added 
 	 * or edited by the authenticated user.
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Getting_a_feed_of_wiki_pages_edited_by_someone_ic40a&content=pdcontent">
-	 *			Getting a feed of the wiki pages edited by someone</a>
 	 *
 	 * @param wikiLabel
 	 * @param parameters
@@ -346,10 +296,6 @@ public class WikiService extends ConnectionsService {
 	 * Get a feed that lists the pages that have been deleted from wikis and are currently 
 	 * stored in the trash.
 	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Getting_a_feed_of_wiki_pages_in_the_trash_ic40a&content=pdcontent">
-	 *			Getting a feed of the wiki pages in the trash</a>
-	 *
 	 * @param wikiLabelOrId
 	 * @return EntityList&lt;WikiPage&gt;
 	 * @throws ClientServicesException
@@ -362,10 +308,6 @@ public class WikiService extends ConnectionsService {
 	 * Get a feed that lists the pages that have been deleted from wikis and are currently 
 	 * stored in the trash.
 	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Getting_a_feed_of_wiki_pages_in_the_trash_ic40a&content=pdcontent">
-	 *			Getting a feed of the wiki pages in the trash</a>
-	 *
 	 * @param wikiLabelOrId
 	 * @param parameters
 	 * @return EntityList&lt;WikiPage&gt;
@@ -387,10 +329,6 @@ public class WikiService extends ConnectionsService {
 	 * You do not need to authenticate with the server to send a request to retrieve public resources.<br>
 	 * If authentication is provided, the user must have permission to view the specified resource.
 	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Retrieving_a_wiki_ic40a&content=pdcontent">
-	 *			Retrieving a wiki</a>
-	 *
 	 * @param wikiLabel
 	 * @return Wiki
 	 * @throws ClientServicesException
@@ -407,10 +345,6 @@ public class WikiService extends ConnectionsService {
 	 * You do not need to authenticate with the server to send a request to retrieve public resources.<br>
 	 * If authentication is provided, the user must have permission to view the specified resource.
 	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Retrieving_a_wiki_ic40a&content=pdcontent">
-	 *			Retrieving a wiki</a>
-	 *
 	 * @param wikiLabel
 	 * @param parameters
 	 * @return Wiki
@@ -424,10 +358,6 @@ public class WikiService extends ConnectionsService {
 	/**
 	 * Use the API to create a wiki programmatically.
 	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Creating_a_wiki_ic40a&content=pdcontent">
-	 *			Creating a wiki</a>
-	 *
 	 * @param wiki
 	 * @return Wiki
 	 * @throws ClientServicesException
@@ -439,10 +369,6 @@ public class WikiService extends ConnectionsService {
 	/**
 	 * Use the API to create a wiki programmatically.
 	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Creating_a_wiki_ic40a&content=pdcontent">
-	 *			Creating a wiki</a>
-	 *
 	 * @param wiki
 	 * @param parameters
 	 * @return Wiki
@@ -461,10 +387,6 @@ public class WikiService extends ConnectionsService {
 	 * For example, if you want to add a new tag to a wiki definition entry, retrieve the existing tags, 
 	 * and send them all back with the new tag in the update request. 
 	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Updating_a_wiki_ic40a&content=pdcontent">
-	 *			Updating a wiki</a>
-	 *
 	 * @param wikiLabel
 	 * @param wiki
 	 * @throws ClientServicesException
@@ -480,10 +402,6 @@ public class WikiService extends ConnectionsService {
 	 * For example, if you want to add a new tag to a wiki definition entry, retrieve the existing tags, 
 	 * and send them all back with the new tag in the update request. 
 	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Updating_a_wiki_ic40a&content=pdcontent">
-	 *			Updating a wiki</a>
-	 *
 	 * @param wikiLabel
 	 * @param wiki
 	 * @param parameters
@@ -499,10 +417,6 @@ public class WikiService extends ConnectionsService {
 	 * Delete a wiki.
 	 * Only the owner of a wiki can delete it. Deleted wikis cannot be restored.
 	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Deleting_wikis_ic40a&content=pdcontent">
-	 *			Deleting a wiki</a>
-	 *
 	 * @param wikiLabel
 	 * @throws ClientServicesException
 	 */
@@ -522,10 +436,6 @@ public class WikiService extends ConnectionsService {
 	 * You do not need to authenticate with the server to send a request to retrieve public resources. <br>
 	 * If authentication is provided, the user must have permission to view the specified resource.
 	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Retrieving_a_wiki_page_ic40a&content=pdcontent">
-	 *			Retrieving a wiki page</a>
-	 *
 	 * @param wikiLabel
 	 * @param pageLabel
 	 * @return WikiPage
@@ -542,10 +452,6 @@ public class WikiService extends ConnectionsService {
 	 * You do not need to authenticate with the server to send a request to retrieve public resources. <br>
 	 * If authentication is provided, the user must have permission to view the specified resource.
 	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Retrieving_a_wiki_page_ic40a&content=pdcontent">
-	 *			Retrieving a wiki page</a>
-	 *
 	 * @param wikiLabel
 	 * @param pageLabel
 	 * @param parameters
@@ -560,10 +466,6 @@ public class WikiService extends ConnectionsService {
 	/**
 	 * Create a wiki page programmatically.
 	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Creating_a_wiki_page_programmatically_ic40a&content=pdcontent">
-	 *			Creating a wiki page</a>
-	 *
 	 * @param wikiPage
 	 * @return WikiPage
 	 * @throws ClientServicesException
@@ -575,10 +477,6 @@ public class WikiService extends ConnectionsService {
 	/**
 	 * Create a wiki page programmatically.
 	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Creating_a_wiki_page_programmatically_ic40a&content=pdcontent">
-	 *			Creating a wiki page</a>
-	 *
 	 * @param wikiPage
 	 * @param parameters
 	 * @return WikiPage
@@ -593,10 +491,6 @@ public class WikiService extends ConnectionsService {
 	/**
 	 * Update a wiki page programmatically
 	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Updating_a_wiki_page_ic40a&content=pdcontent">
-	 *			Updating a wiki page</a>
-	 *
 	 * @param wikiLabel
 	 * @param wikiPage
 	 * @throws ClientServicesException
@@ -608,10 +502,6 @@ public class WikiService extends ConnectionsService {
 	/**
 	 * Update a wiki page programmatically
 	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Updating_a_wiki_page_ic40a&content=pdcontent">
-	 *			Updating a wiki page</a>
-	 *
 	 * @param wikiLabel
 	 * @param wikiPage
 	 * @param parameters
@@ -627,10 +517,6 @@ public class WikiService extends ConnectionsService {
 	 * Delete a wiki page.
 	 * Only the owner of a wiki page can delete it. Deleted wiki pages cannot be restored.
 	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Deleting_wiki_pages_ic40a&content=pdcontent">
-	 *			Delete a wiki page</a>
-	 *
 	 * @param wikiLabel
 	 * @param wikiPageLable
 	 * @throws ClientServicesException

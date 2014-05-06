@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * © Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -88,53 +88,43 @@ import com.ibm.sbt.services.client.connections.files.util.Messages;
 import com.ibm.sbt.services.endpoints.Endpoint;
 
 /**
- * FileService can be used to perform File related operations.
- * <p>
- * Relies on the ID's provided by the user to perform the task.
+ * The Files application of IBM® Connections enables teams to create a shared repository of files. The Files API allows application programs to add files to a collection and to read and modify existing files. 
+ * 
+ * @see <href a="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.5+API+Documentation#action=openDocument&res_title=Files_API_ic45&content=pdcontent"/>
  * 
  * @Represents Connections FileService
  * @author Vimal Dhupar
  * @author Carlos Manias
- * @see http 
- *      ://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation
- *      #action=openDocument&res_title=Files_API_ic40a&content=pdcontent
  */
 public class FileService extends ConnectionsService {
 	
-	private static final long serialVersionUID = 6858863659072208180L;
+	private static final long serialVersionUID = 685886362342208180L;
 	static final String sourceClass = FileService.class.getName();
 	static final Logger logger = Logger.getLogger(sourceClass);
-	private final HashMap<String, String> commentParams = new HashMap<String, String>();
 
     /**
-     * Default Constructor - 0 argument constructor Calls the Constructor of BaseService Class.
-     * <p>
-     * Creates FileService with Default Endpoint.
+     * Creates FileService with default endpoint.
      */
     public FileService() {
         this(getDefaultEndpoint());
     }
 
 	/**
-     * Constructor
-     * 		Creates a service object with specified endpoint
-     * 
-     * @param endpoint
-     */
+	 * Create FileService instance with specified endpoint.
+	 * 
+	 * @param endpoint the endpoint name to use to retrieve the endpoint from the Context
+	 */
     public FileService(String endpoint) {
         super(endpoint);
-        commentParams.put(CATEGORY, CATEGORY_COMMENT);
     }
     
 	/**
-     * Constructor
-     * 		Creates a service object with specified endpoint
-     * 
-     * @param endpoint
-     */
+	 * Create FileService instance with specified endpoint.
+	 * 
+	 * @param endpoint the endpoint object to use for authentication
+	 */
     public FileService(Endpoint endpoint) {
         super(endpoint);
-        commentParams.put(CATEGORY, CATEGORY_COMMENT);
     }
 
 	/**
@@ -145,19 +135,13 @@ public class FileService extends ConnectionsService {
 		return "files";
 	}
     
-    private static String getDefaultEndpoint() {
-		return "connections";
-	}
+
     
     @Override
     public NamedUrlPart getAuthType(){
     	return new NamedUrlPart(AUTH_TYPE, AuthType.BASIC.get());
     }
     
-    protected HashMap<String, String> getCommentParams(){
-    	return commentParams;
-    }
-
 	/***************************************************************
 	 * FeedHandlers for each entity type
 	 ****************************************************************/
@@ -2855,13 +2839,17 @@ public class FileService extends ConnectionsService {
 
 	protected Comment getCommentEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
         if (parameters == null)
-            parameters = getCommentParams();
+            //TODO parameters = getCommentParams();
         else
-            parameters.putAll(getCommentParams());
+            //TODO parameters.putAll(getCommentParams());
 		return getEntity(requestUrl, parameters, getCommentFeedHandler());
 	}
 
 	protected EntityList<Comment> getCommentEntityList(String requestUrl, Map<String, String> parameters, Map<String,String> headers) throws ClientServicesException {
 		return getEntities(requestUrl, parameters, headers, getCommentFeedHandler());
+	}
+	
+    private static String getDefaultEndpoint() {
+		return "connections";
 	}
 }

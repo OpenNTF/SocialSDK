@@ -53,6 +53,6 @@ public class ForumCreateDeleteTest extends BaseForumServiceTest {
 		Forum createdForum = createForum();
 		Forum forumGot = forumService.getForum(createdForum.getForumUuid());
 		assertEquals(createdForum.getTitle(), forumGot.getTitle());
-		forumService.removeForum(createdForum.getForumUuid());
+		forumService.deleteForum(createdForum.getForumUuid());
 	}
 }

@@ -117,7 +117,7 @@ public class ForumTopic extends BaseForumEntity{
 	 */
 
 	public void remove() throws ClientServicesException {
-		getService().removeForumTopic(getUid());
+		getService().deleteForumTopic(getUid());
 	}
 
 	/**

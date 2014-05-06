@@ -144,7 +144,7 @@ public class Forum extends BaseForumEntity {
 	 */
 
 	public void remove() throws ClientServicesException {
-	   	getService().removeForum(getUid());
+	   	getService().deleteForum(getUid());
 	}
 	
 	/**

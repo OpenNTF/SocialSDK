@@ -463,8 +463,8 @@ public class ForumService extends ConnectionsService {
 	 * 				forum which is to be deleted
 	 * @throws CommunityServiceException
 	 */
-	public void removeForum(Forum forum) throws ClientServicesException {
-		removeForum(forum.getUid());
+	public void deleteForum(Forum forum) throws ClientServicesException {
+		deleteForum(forum.getUid());
 	}
 
 	/**
@@ -478,7 +478,7 @@ public class ForumService extends ConnectionsService {
 	 * 				forumUuid which is to be deleted
 	 * @throws ClientServicesException
 	 */
-	public void removeForum(String forumUuid) throws ClientServicesException {
+	public void deleteForum(String forumUuid) throws ClientServicesException {
 		if (StringUtil.isEmpty(forumUuid)){
 			throw new ClientServicesException(null, "null forum id");
 		}
@@ -632,8 +632,8 @@ public class ForumService extends ConnectionsService {
 	 * 				forum topic which is to be deleted
 	 * @throws ClientServicesException
 	 */
-	public void removeForumTopic(ForumTopic topic) throws ClientServicesException {
-		removeForum(topic.getUid());
+	public void deleteForumTopic(ForumTopic topic) throws ClientServicesException {
+		deleteForum(topic.getUid());
 	}
 
 	/**
@@ -646,7 +646,7 @@ public class ForumService extends ConnectionsService {
 	 * 				topicUuid which is to be deleted
 	 * @throws ClientServicesException
 	 */
-	public void removeForumTopic(String topicUuid) throws ClientServicesException {
+	public void deleteForumTopic(String topicUuid) throws ClientServicesException {
 		if (StringUtil.isEmpty(topicUuid)){
 			throw new ClientServicesException(null, "null topic id");
 		}
@@ -803,8 +803,8 @@ public class ForumService extends ConnectionsService {
 	 * 				reply which is to be deleted
 	 * @throws CommunityServiceException
 	 */
-	public void removeForumReply(ForumReply reply) throws ClientServicesException {
-		removeForum(reply.getUid());
+	public void deleteForumReply(ForumReply reply) throws ClientServicesException {
+		deleteForum(reply.getUid());
 	}
 
 	/**
@@ -819,7 +819,7 @@ public class ForumService extends ConnectionsService {
 	 * 				replyUuid which is to be deleted
 	 * @throws ClientServicesException
 	 */
-	public void removeForumReply(String replyUuid) throws ClientServicesException {
+	public void deleteForumReply(String replyUuid) throws ClientServicesException {
 		if (StringUtil.isEmpty(replyUuid)){
 			throw new ClientServicesException(null, "null reply id");
 		}

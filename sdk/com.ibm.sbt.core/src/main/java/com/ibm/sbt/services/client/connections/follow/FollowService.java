@@ -37,7 +37,13 @@ import com.ibm.sbt.services.client.connections.follow.transformer.FollowTransfor
 import com.ibm.sbt.services.endpoints.Endpoint;
 
 /**
- * Use this Service to keep track of IBM� Connections resources that interest you, such as a person or community, a blog or a particular file.
+ * Use this Service to keep track of IBM® Connections resources that interest you, 
+ * such as a person or community, a blog or a particular file.
+ * 
+ * @see
+ *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.5+API+Documentation#action=openDocument&res_title=Forums_API_ic45&content=pdcontent">
+ *			Forums API</a>
+ * 
  * @author Manish Kataria 
  * @author Carlos Manias
  * 
@@ -48,14 +54,27 @@ public class FollowService extends ConnectionsService {
 	
 	private static final long serialVersionUID = 8450637561663717438L;
 
+	/**
+	 * Create FollowService instance with default endpoint.
+	 */
 	public FollowService() {
 		super();
 	}
 	
+	/**
+	 * Create FollowService instance with specified endpoint.
+	 * 
+	 * @param endpoint
+	 */
 	public FollowService(String endpoint) {
 		super(endpoint);
 	}
 	
+	/**
+	 * Create FollowService instance with specified endpoint.
+	 * 
+	 * @param endpoint
+	 */
 	public FollowService(Endpoint endpoint) {
 		super(endpoint);
 	}
@@ -77,7 +96,7 @@ public class FollowService extends ConnectionsService {
 		return part;
     }
 	
-	/*
+	/**
 	 * This method returns resources that are being followed by the authenticated user.
 	 * @param source
 	 * @param type
@@ -88,7 +107,7 @@ public class FollowService extends ConnectionsService {
 		return getFollowedResources(source,type,null);
 	}
 	
-	/*
+	/**
 	 * This method returns resources that are being followed by the authenticated user.
 	 * @param source
 	 * @param type
@@ -102,7 +121,7 @@ public class FollowService extends ConnectionsService {
 	}
 	
 	
-	/*
+	/**
 	 * This method returns specific resource that is being followed by the authenticated user.
 	 * @param source
 	 * @param type
@@ -115,7 +134,7 @@ public class FollowService extends ConnectionsService {
 		return getResource(url, generateParams(null, source, type, resourceId));
 	}
 	
-	/* This method allows authenticated user to start following a resource
+	/** This method allows authenticated user to start following a resource
 	 * @param source
 	 * @param type
 	 * @param resourceId
@@ -143,7 +162,7 @@ public class FollowService extends ConnectionsService {
 		}
 	}
 	
-	/* This method allows authenticated user to stop following a resource
+	/** This method allows authenticated user to stop following a resource
 	 * @param source
 	 * @param type
 	 * @param resourceId
@@ -191,5 +210,4 @@ public class FollowService extends ConnectionsService {
 		}
 		return params;
 	}
-
 }

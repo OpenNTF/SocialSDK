@@ -116,10 +116,6 @@ public class ForumService extends ConnectionsService {
 	/** 
 	 * Get a feed that includes all stand-alone and community forums created in the enterprise.
 	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Getting_the_Forums_feed_ic40a&content=pdcontent">
-	 *			Getting the Forums feed</a>
-	 * 
 	 * @return EntityList&lt;Forum&gt;
 	 * @throws ClientServicesException
 	 */
@@ -133,10 +129,6 @@ public class ForumService extends ConnectionsService {
 	 * You can narrow down the forums that are returned by passing parameters to the request 
 	 * that you use to retrieve the feed.
 	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Getting_the_Forums_feed_ic40a&content=pdcontent">
-	 *			Getting the Forums feed</a>
-	 * 
 	 * @param parameters
 	 * @return EntityList&lt;Forum&gt;
 	 * @throws ClientServicesException
@@ -148,10 +140,6 @@ public class ForumService extends ConnectionsService {
 
 	/**
 	 * Get a feed that includes all of the forums hosted by the Forums application.
-	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Getting_the_Public_Forums_feed_ic40a&content=pdcontent">
-	 *			Getting the Public Forums feed</a>
 	 * 
 	 * @return EntityList&lt;Forum&gt;
 	 * @throws ClientServicesException
@@ -167,10 +155,6 @@ public class ForumService extends ConnectionsService {
 	 * You can narrow down the forums that are returned by passing parameters to the
 	 * request that you use to retrieve the feed.
 	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Getting_the_Public_Forums_feed_ic40a&content=pdcontent">
-	 *			Getting the Public Forums feed</a>
-	 * 
 	 * @param parameters
 	 * @return EntityList&lt;Forum&gt;
 	 * @throws ClientServicesException
@@ -185,11 +169,6 @@ public class ForumService extends ConnectionsService {
 	 * Get a feed that includes forums created by the authenticated user 
 	 * or associated with communities to which the user belongs.
 	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Getting_the_My_Forums_feed_ic40a&content=pdcontent">
-	 *			Getting My Forums feed</a>
-	 * 
-	 * 
 	 * @return EntityList&lt;Forum&gt;
 	 * @throws ClientServicesException
 	 */
@@ -203,10 +182,6 @@ public class ForumService extends ConnectionsService {
 	 * You can narrow down the forums that are returned by passing parameters 
 	 * to the request that you use to retrieve the feed.
 	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Getting_the_My_Forums_feed_ic40a&content=pdcontent">
-	 *			Getting My Forums feed</a>
-	 * 
 	 * @param parameters
 	 * @return EntityList&lt;Forum&gt;
 	 * @throws ClientServicesException
@@ -219,10 +194,6 @@ public class ForumService extends ConnectionsService {
 	/**
 	 * Get a feed that includes the topics in a specific forum,
 	 * whether it is a stand-alone or community forum.
-	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Getting_a_feed_of_forum_topics_ic40a&content=pdcontent">
-	 *			Getting a feed of forum topics</a>
 	 * 
 	 * @param forumUid
 	 * @return EntityList&lt;ForumTopic&gt;
@@ -238,10 +209,6 @@ public class ForumService extends ConnectionsService {
 	 * whether it is a stand-alone or community forum.
 	 * You can narrow down the topics that are returned by passing parameters to the request 
 	 * that you use to retrieve the feed.
-	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Getting_a_feed_of_forum_topics_ic40a&content=pdcontent">
-	 *			Getting a feed of forum topics</a>
 	 * 
 	 * @param forumUid
 	 * @param parameters
@@ -259,10 +226,6 @@ public class ForumService extends ConnectionsService {
 	 * Get a feed that includes the topics in a specific forum,
 	 * whether it is a stand-alone or community forum.
 	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Getting_a_feed_of_forum_topics_ic40a&content=pdcontent">
-	 *			Getting a feed of forum topics</a>
-	 * 
 	 * @return EntityList&lt;ForumTopic&gt;
 	 * @throws ClientServicesException
 	 */
@@ -275,10 +238,6 @@ public class ForumService extends ConnectionsService {
 	 * whether it is a stand-alone or community forum.
 	 * You can narrow down the topics that are returned by passing parameters to the request 
 	 * that you use to retrieve the feed.
-	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Getting_a_feed_of_forum_topics_ic40a&content=pdcontent">
-	 *			Getting a feed of forum topics</a>
 	 * 
 	 * @param parameters
 	 * @return EntityList&lt;ForumTopic&gt;
@@ -295,10 +254,6 @@ public class ForumService extends ConnectionsService {
 	 * You can narrow down the topics that are returned by passing parameters 
 	 * to the request that you use to retrieve the feed.
 	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Getting_the_My_Topics_feed_ic40a&content=pdcontent">
-	 *			Getting the My Topics feed</a>
-	 * 
 	 * @return EntityList&lt;ForumTopic&gt;
 	 * @throws ClientServicesException
 	 */
@@ -311,10 +266,6 @@ public class ForumService extends ConnectionsService {
 	 * and in forums associated with communities to which the user belongs.
 	 * You can narrow down the topics that are returned by passing parameters 
 	 * to the request that you use to retrieve the feed.
-	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Getting_the_My_Topics_feed_ic40a&content=pdcontent">
-	 *			Getting the My Topics feed</a>
 	 * 
 	 * @param parameters
 	 * @return EntityList&lt;ForumTopic&gt;
@@ -330,10 +281,6 @@ public class ForumService extends ConnectionsService {
      * You can narrow down the replies that are returned by passing parameters to the request
      * that you use to retrieve the feed.
 	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Getting_a_feed_of_forum_replies_ic40a&content=pdcontent">
-	 *			Getting a feed of forum replies</a>
-     * 
      * @param topicUuid
 	 * @return EntityList&lt;ForumReply&gt;
 	 * @throws ClientServicesException
@@ -347,10 +294,6 @@ public class ForumService extends ConnectionsService {
      * You can narrow down the replies that are returned by passing parameters to the request
      * that you use to retrieve the feed.
 	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Getting_a_feed_of_forum_replies_ic40a&content=pdcontent">
-	 *			Getting a feed of forum replies</a>
-     * 
      * @param topicUuid
 	 * @param parameters
 	 * @return EntityList&lt;ForumReply&gt;
@@ -365,10 +308,6 @@ public class ForumService extends ConnectionsService {
 	/**
 	 * Get a category document that lists the tags that have been assigned to forums.
 	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Getting_the_Forums_tag_collection_ic40a&content=pdcontent">
-	 *			Getting the Forums tag collection</a>
-	 * 
 	 * @return EntityList&lt;Tag&gt;
 	 * @throws ClientServicesException
 	 */
@@ -380,10 +319,6 @@ public class ForumService extends ConnectionsService {
 	/**
 	 * This method returns the tags that have been assigned to forum topics
 	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Getting_a_list_of_the_tags_assigned_to_forum_topics_ic40a&content=pdcontent">
-	 *			Getting a list of the tags assigned to the forum topics</a>
-	 * 
 	 * @param forumUuid
 	 * @return EntityList&lt;Tag&gt;
 	 * @throws ClientServicesException
@@ -394,10 +329,6 @@ public class ForumService extends ConnectionsService {
 
 	/**
 	 * This method returns the tags that have been assigned to forum topics
-	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Getting_a_list_of_the_tags_assigned_to_forum_topics_ic40a&content=pdcontent">
-	 *			Getting a list of the tags assigned to the forum topics</a>
 	 * 
 	 * @param forumUuid
 	 * @param parameters
@@ -444,10 +375,6 @@ public class ForumService extends ConnectionsService {
 	 * containing the forum entry document to the root collection resource.
 	 * See Authenticating requests for information about how to authenticate the request.
 	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Creating_forums_programmatically_ic40a&content=pdcontent">
-	 *			Creating forums programmatically</a>
-	 * 
 	 * @param Forum
 	 * @return Forum
 	 * @throws ClientServicesException
@@ -478,10 +405,6 @@ public class ForumService extends ConnectionsService {
 	/**
 	 * To retrieve complete information about a forum, use the edit <link> found in the forum entry in the Forums feed.
 	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Retrieving_forums_ic40a&content=pdcontent">
-	 *			Retrieving forums</a>
-	 *
 	 * @param forumUuid
 	 *			   id of forum
 	 * @return A Forum
@@ -501,10 +424,6 @@ public class ForumService extends ConnectionsService {
 	 * To avoid deleting all existing data, retrieve any data you want to retain first,
 	 * and send it back with this request. See Retrieving forums for more information. <br>
 	 * See Authenticating requests for information about how to authenticate the request.
-	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Updating_forums_ic40a&content=pdcontent">
-	 *			Updating forums</a>
 	 * 
 	 * @param Forum
 	 * @return Response
@@ -545,10 +464,6 @@ public class ForumService extends ConnectionsService {
 	 * can delete it's own recommendation.<br>
 	 * See Authenticating requests for information about how to authenticate the request.
 	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.5+API+Documentation#action=openDocument&res_title=Deleting_forums_programmatically_ic45&content=pdcontent">
-	 *			Deleting forums programatically</a>
-	 * 
 	 * @param Forum
 	 * 				forum which is to be deleted
 	 * @throws CommunityServiceException
@@ -563,10 +478,6 @@ public class ForumService extends ConnectionsService {
 	 * Only the user who have already recommended the post
 	 * can delete it's own recommendation.<br>
 	 * See Authenticating requests for information about how to authenticate the request.
-	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.5+API+Documentation#action=openDocument&res_title=Deleting_forums_programmatically_ic45&content=pdcontent">
-	 *			Deleting forums programatically</a>
 	 * 
 	 * @param String
 	 * 				forumUuid which is to be deleted
@@ -602,10 +513,6 @@ public class ForumService extends ConnectionsService {
 	 * containing the forum topic to the forum topics resource.<br>
 	 * See Authenticating requests for information about how to authenticate the request.
 	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Creating_a_standalone_forum_topic_programmatically_ic40a&content=pdcontent">
-	 *			Creating a stand-alone forum topic programmatically</a>
-	 * 
 	 * @param topic
 	 * 		the topic to be created
 	 * @return ForumTopic
@@ -619,10 +526,6 @@ public class ForumService extends ConnectionsService {
 	 * To add a topic to a stand-alone forum, send an Atom entry document 
 	 * containing the forum topic to the forum topics resource.<br>
 	 * See Authenticating requests for information about how to authenticate the request.
-	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Creating_a_standalone_forum_topic_programmatically_ic40a&content=pdcontent">
-	 *			Creating a stand-alone forum topic programmatically</a>
 	 * 
 	 * @param topic
 	 * 		the topic to be created
@@ -661,10 +564,6 @@ public class ForumService extends ConnectionsService {
 	 * To retrieve complete information about a forum topic,
 	 * use the edit link found in the forum topic entry in the forum topics feed.
 	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Retrieving_a_standalone_forum_topic_programmatically_ic40a&content=pdcontent">
-	 *			Retrieving a stand-alone forum topic programmatically</a>
-	 * 
 	 * @param topicId
 	 * 				The id of the forum topic to be retrieved
 	 * @return ForumTopic
@@ -677,10 +576,6 @@ public class ForumService extends ConnectionsService {
 	/**
 	 * To retrieve complete information about a forum topic,
 	 * use the edit link found in the forum topic entry in the forum topics feed.
-	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Retrieving_a_standalone_forum_topic_programmatically_ic40a&content=pdcontent">
-	 *			Retrieving a stand-alone forum topic programmatically</a>
 	 * 
 	 * @param topicId
 	 * 				The id of the forum topic to be retrieved
@@ -704,10 +599,6 @@ public class ForumService extends ConnectionsService {
 	 * you want to retain first, and send it back with this request.
 	 * See Retrieving forum topics for more information.<br>
 	 * See Authenticating requests for information about how to authenticate the request.
-	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Updating_a_standalone_forum_topic_programmatically_ic40a&content=pdcontent">
-	 *			Updating a stand-alone forum topic programmatically</a>
 	 * 
 	 * @param ForumTopic
 	 * @throws ClientServicesException
@@ -748,10 +639,6 @@ public class ForumService extends ConnectionsService {
 	 * Deleted topics cannot be restored.<br>
 	 * See Authenticating requests for information about how to authenticate the request.
 	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Deleting_a_standalone_forum_topic_programmatically_ic40a&content=pdcontent">
-	 *			Deleting a stand-alone forum topic programmatically</a>
-	 * 
 	 * @param ForumTopic
 	 * 				forum topic which is to be deleted
 	 * @throws ClientServicesException
@@ -765,10 +652,6 @@ public class ForumService extends ConnectionsService {
 	 * Only the owner of a stand-alone forum can delete a topic from the forum.
 	 * Deleted topics cannot be restored.<br>
 	 * See Authenticating requests for information about how to authenticate the request.
-	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Deleting_a_standalone_forum_topic_programmatically_ic40a&content=pdcontent">
-	 *			Deleting a stand-alone forum topic programmatically</a>
 	 * 
 	 * @param String
 	 * 				topicUuid which is to be deleted
@@ -794,10 +677,6 @@ public class ForumService extends ConnectionsService {
 	 * send an Atom entry document containing the forum reply to the forum replies resource.<br>
 	 * See Authenticating requests for information about how to authenticate the request.
 	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Creating_a_standalone_forum_reply_programmatically_ic40a&content=pdcontent">
-	 *			Creating a stand-alone forum reply programmatically</a>
-	 * 
 	 * @param ForumReply
 	 * @return ForumReply
 	 * @throws ClientServicesException
@@ -811,10 +690,6 @@ public class ForumService extends ConnectionsService {
 	 * send an Atom entry document containing the forum reply to the forum replies resource.<br>
 	 * See Authenticating requests for information about how to authenticate the request.
 	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Creating_a_standalone_forum_reply_programmatically_ic40a&content=pdcontent">
-	 *			Creating a stand-alone forum reply programmatically</a>
-	 *
 	 * @param ForumReply
 	 * @param topicId
 	 * @return ForumReply
@@ -856,10 +731,6 @@ public class ForumService extends ConnectionsService {
 	 * This method returns the Atom entry of a single reply entry as opposed to a feed of all the reply entries.
 	 * See Authenticating requests for information about how to authenticate the request.
 	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Retrieving_a_standalone_forum_reply_programmatically_ic40a&content=pdcontent">
-	 *			Retrieving a stand-alone forum reply programmatically</a>
-	 * 
 	 * @param replyId
 	 * @return ForumReply
 	 * @throws ClientServicesException
@@ -875,10 +746,6 @@ public class ForumService extends ConnectionsService {
 	 * prior to performing an update. See Updating forum replies for more information.<br>
 	 * This method returns the Atom entry of a single reply entry as opposed to a feed of all the reply entries.
 	 * See Authenticating requests for information about how to authenticate the request.
-	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Retrieving_a_standalone_forum_reply_programmatically_ic40a&content=pdcontent">
-	 *			Retrieving a stand-alone forum reply programmatically</a>
 	 * 
 	 * @param replyId
 	 * @param parameters
@@ -906,10 +773,6 @@ public class ForumService extends ConnectionsService {
 	 * <category scheme="http://www.ibm.com/xmlns/prod/sn/flags term="deleted"> element in the entry content.<br>
 	 * See Deleting forum replies for more information.<br> 
 	 * See Authenticating requests for information about how to authenticate the request.
-	 * 
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Updating_a_standalone_forum_reply_programmatically_ic40a&content=pdcontent">
-	 *			Updating a stand-alone forum reply programmatically</a>
 	 * 
 	 * @param ForumReply
 	 * @return void
@@ -951,10 +814,6 @@ public class ForumService extends ConnectionsService {
 	 * If you want a custom message to be displayed, use the HTTP PUT command instead.<br>
 	 * Only the owner of a stand-alone forum can delete a forum reply from it. Deleted replies cannot be restored. <br>
 	 *  
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Deleting_a_standalone_forum_reply_programmatically_ic40a&content=pdcontent">
-	 *			Deleting a stand-alone forum reply programmatically</a>
-	 * 
 	 * @param ForumReply
 	 * 				reply which is to be deleted
 	 * @throws CommunityServiceException
@@ -971,10 +830,6 @@ public class ForumService extends ConnectionsService {
 	 * If you want a custom message to be displayed, use the HTTP PUT command instead.<br>
 	 * Only the owner of a stand-alone forum can delete a forum reply from it. Deleted replies cannot be restored. <br>
 	 *  
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Deleting_a_standalone_forum_reply_programmatically_ic40a&content=pdcontent">
-	 *			Deleting a stand-alone forum reply programmatically</a>
-	 * 
 	 * @param String
 	 * 				replyUuid which is to be deleted
 	 * @throws ClientServicesException
@@ -1018,10 +873,6 @@ public class ForumService extends ConnectionsService {
 	 * to the forum topic/reply resources.<br>
 	 * See Authenticating requests for information about how to authenticate the request.
 	 *  
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.5+API+Documentation#action=openDocument&res_title=Creating_a_stand-alone_forum_recommendation_programmatically_ic45&content=pdcontent">
-	 *			Creating a stand-alone forum recommendation programmatically</a>
-	 * 
 	 * @since 4.5
 	 * @param postUuid
 	 * @return Recommendation
@@ -1057,10 +908,6 @@ public class ForumService extends ConnectionsService {
 	 * Only the user who have already recommended the post
 	 * can delete it's own recommendation.<br>
 	 * See Authenticating requests for information about how to authenticate the request.
-	 *  
-	 * @see
-	 *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.5+API+Documentation#action=openDocument&res_title=Deleting_a_stand-alone_forum_recommendation_programmatically_ic45&content=pdcontent">
-	 *			Deleting a stand-alone forum recommendation programmatically</a>
 	 *  
 	 * @since 4.5
 	 * @param postUuid

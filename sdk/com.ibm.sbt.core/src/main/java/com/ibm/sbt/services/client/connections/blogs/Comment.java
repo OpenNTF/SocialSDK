@@ -65,7 +65,7 @@ public class Comment extends BaseBlogEntity {
 	* @return {String} id of the blog post comment
 	* @throws ClientServicesException
 	*/
-	public String getCommentUuid() throws ClientServicesException {
+	public String getCommentUuid() {
 		return super.getUid();
 	}
 	/**

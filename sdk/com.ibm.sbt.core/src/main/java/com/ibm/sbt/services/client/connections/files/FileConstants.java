@@ -37,6 +37,10 @@ public final class FileConstants {
 	public static final String VISIBILITY_PUBLIC	= "public";
 	public static final String VISIBILITY_PRIVATE	= "private";
 	public static final String X_UPDATE_NONCE	= "X-Update-Nonce";
-    
 	
+	public static final String REPORT_ITEM = "http://www.ibm.com/xmlns/prod/sn/report-item";
+    
+	public enum FlagType{
+	    COMMENT, FILE;
+	}
 }

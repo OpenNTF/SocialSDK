@@ -70,7 +70,8 @@ public final class ConnectionsConstants {
 	public static final String LABEL = "label";
 	public static final String COMPLETED = "completed";
 	public static final String PERSON = "person";
-
+    public static final String IN_REF_TO = "in-ref-to";
+    public static final String REF_ITEM_TYPE = "ref-item-type";
 	/**
 	 * Activity ATOM
 	 */

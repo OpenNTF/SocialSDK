@@ -17,11 +17,15 @@
 package com.ibm.sbt.services.client.connections.blogs.serializers;
 
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.*;
+
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+
 import com.ibm.sbt.services.client.base.ConnectionsConstants.Namespace;
 import com.ibm.sbt.services.client.base.serializers.AtomEntitySerializer;
+import com.ibm.sbt.services.client.connections.blogs.BlogConstants;
 import com.ibm.sbt.services.client.connections.blogs.Comment;
+import com.ibm.sbt.services.client.connections.blogs.BlogConstants.*;
 import com.ibm.sbt.services.client.connections.blogs.model.BlogXPath;
 
 /**
@@ -53,7 +57,7 @@ public class BlogCommentSerializer extends AtomEntitySerializer<Comment> {
 	}
 	
 	private Element thr() {
-		return element(BLOG_REPLY_TO,attribute(Namespace.BLOG_REF.getPrefix(), Namespace.BLOG_REF.getUrl() + entity.getPostUuid()));
+		return element(BlogConstants.BLOG_REPLY_TO,attribute(BlogNamespace.BLOG_REF.getPrefix(), BlogNamespace.BLOG_REF.getUrl() + entity.getPostUuid()));
 	}
 	
 	protected void generateUpdatePayload() {

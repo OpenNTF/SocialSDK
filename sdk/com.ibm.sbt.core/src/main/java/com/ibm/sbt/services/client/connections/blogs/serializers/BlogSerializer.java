@@ -20,11 +20,14 @@ import static com.ibm.sbt.services.client.base.CommonConstants.APPLICATION_ATOM_
 import static com.ibm.sbt.services.client.base.CommonConstants.COMMA;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.*;
 import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.CATEGORIES;
+
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+
 import com.ibm.sbt.services.client.base.ConnectionsConstants.Namespace;
 import com.ibm.sbt.services.client.base.serializers.AtomEntitySerializer;
 import com.ibm.sbt.services.client.connections.blogs.Blog;
+import com.ibm.sbt.services.client.connections.blogs.BlogConstants;
 
 /**
  * @author Benjamin Jakobus
@@ -61,7 +64,7 @@ public class BlogSerializer extends AtomEntitySerializer<Blog> {
 	}
 
 	private Element timeZone() {
-		return textElement(TIMEZONE, entity.getTimeZone());
+		return textElement(BlogConstants.TIMEZONE, entity.getTimeZone());
 	}
 	
 	public String tagsPayload(){
@@ -70,7 +73,7 @@ public class BlogSerializer extends AtomEntitySerializer<Blog> {
 	}
 
 	private Element handle() {
-		return textElement(BLOG_HANDLE, entity.getHandle());
+		return textElement(BlogConstants.BLOG_HANDLE, entity.getHandle());
 	}
 
 	

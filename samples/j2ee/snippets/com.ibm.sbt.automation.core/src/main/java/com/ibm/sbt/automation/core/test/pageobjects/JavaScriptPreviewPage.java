@@ -21,11 +21,9 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.ibm.commons.util.io.json.JsonException;
 import com.ibm.commons.util.io.json.JsonJavaFactory;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.commons.util.io.json.JsonParser;
-import com.ibm.sbt.automation.core.environment.TestEnvironment;
 import com.ibm.sbt.automation.core.environment.TestEnvironmentFactory;
 
 /**

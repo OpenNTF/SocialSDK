@@ -25,9 +25,9 @@ import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.connections.activity.ActivityService;
-import com.ibm.sbt.services.client.connections.activity.Tag;
 import com.ibm.sbt.services.client.connections.activity.TagList;
 import com.ibm.sbt.services.client.connections.activity.model.ActivityXPath;
+import com.ibm.sbt.services.client.connections.common.Tag;
 
 /**
  * Feed Handler for Tags
@@ -67,7 +67,7 @@ public class TagFeedHandler implements IFeedHandler {
 
 		XPathExpression expr = (data instanceof Document) ? (XPathExpression)ActivityXPath.TagEntry.getPath() : null;
 		XmlDataHandler handler = new XmlDataHandler(node, nameSpaceCtx, expr);
-		Tag profileTag = new Tag(service, handler);
+		Tag profileTag = new Tag();
 		return profileTag;
 	}
 

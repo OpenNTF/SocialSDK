@@ -19,7 +19,7 @@ import org.w3c.dom.Node;
 
 import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.xpath.XPathExpression;
-import com.ibm.sbt.services.client.base.BaseEntity;
+import com.ibm.sbt.services.client.base.AtomEntity;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 
@@ -37,7 +37,7 @@ import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
  * @author mwallace
  *
  */
-public class Tag extends BaseEntity {
+public class Tag extends AtomEntity {
 
 	/**
 	 * Default constructor

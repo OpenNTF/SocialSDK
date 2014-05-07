@@ -57,7 +57,7 @@ public class BlogCommentSerializer extends AtomEntitySerializer<Comment> {
 	}
 	
 	private Element thr() {
-		return element(BlogConstants.BLOG_REPLY_TO,attribute(BlogNamespace.BLOG_REF.getPrefix(), BlogNamespace.BLOG_REF.getUrl() + entity.getPostUuid()));
+		return element(BlogConstants.BLOG_REPLY_TO,attribute(BlogConstants.BLOG_REF, BlogConstants.BLOG_REF_VALUE + entity.getPostUuid()));
 	}
 	
 	protected void generateUpdatePayload() {

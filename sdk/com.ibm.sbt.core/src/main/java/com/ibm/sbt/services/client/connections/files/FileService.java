@@ -73,7 +73,6 @@ import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.NamedUrlPart;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
-import com.ibm.sbt.services.client.connections.communities.CommunityServiceException;
 import com.ibm.sbt.services.client.connections.files.model.FileCommentParameterBuilder;
 import com.ibm.sbt.services.client.connections.files.model.FileCommentsFeedParameterBuilder;
 import com.ibm.sbt.services.client.connections.files.model.FileEntryXPath;
@@ -634,7 +633,7 @@ public class FileService extends ConnectionsService {
      * @throws ClientServicesException
      * @throws TransformerException 
      */
-    public FileList addFilesToFolder(String folderId, List<String> listOfFileIds,
+    public EntityList<File> addFilesToFolder(String folderId, List<String> listOfFileIds,
             Map<String, String> params) throws ClientServicesException, TransformerException {
         if (StringUtil.isEmpty(folderId)) {
             throw new ClientServicesException(null, Messages.Invalid_CollectionId);
@@ -652,7 +651,7 @@ public class FileService extends ConnectionsService {
         Object payload = constructPayloadForMultipleEntries(listOfFileIds, FileRequestParams.ITEMID.getFileRequestParams());
         Response result;
         result = (Response) createData(requestUri, params, headers, payload);
-        return (FileList) getFileFeedHandler().createEntityList(result);
+        return getFileFeedHandler().createEntityList(result);
     }
 
     /**
@@ -2805,8 +2804,8 @@ public class FileService extends ConnectionsService {
             String accessType = AccessType.AUTHENTICATED.getText();
             requestUri = FileUrls.MODERATION.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.action.get(action), FileUrlParts.contentType.get(content));
         }
-        FileList resultantEntries;
-        resultantEntries = (FileList) getEntities(requestUri, null, getFileFeedHandler());
+        EntityList<File> resultantEntries;
+        resultantEntries = getEntities(requestUri, null, getFileFeedHandler());
        
         String uri = null;
         for (File entry : resultantEntries) {

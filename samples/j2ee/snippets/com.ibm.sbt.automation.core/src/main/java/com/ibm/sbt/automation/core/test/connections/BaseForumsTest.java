@@ -391,7 +391,7 @@ public class BaseForumsTest extends BaseApiTest {
             	loginConnections();
                 ForumService forumService = getForumService();
                 // TODO should be deleteForum
-                forumService.removeForum(forum.getForumUuid());
+                forumService.deleteForum(forum.getForumUuid());
             } catch (AuthenticationException pe) {
             	if (pe.getCause() != null) {
             		pe.getCause().printStackTrace();
@@ -420,7 +420,7 @@ public class BaseForumsTest extends BaseApiTest {
             try {
             	loginConnections();
                 ForumService forumService = getForumService();
-                forumService.removeForum(forumId);
+                forumService.deleteForum(forumId);
             } catch (AuthenticationException pe) {
             	if (pe.getCause() != null) {
             		pe.getCause().printStackTrace();

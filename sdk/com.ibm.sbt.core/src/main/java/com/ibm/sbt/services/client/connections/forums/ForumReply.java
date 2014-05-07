@@ -276,7 +276,7 @@ public class ForumReply extends BaseForumEntity{
 	 * @throws ClientServicesException
 	 */
 	public void remove() throws ClientServicesException {
-		getService().removeForumReply(getUid());
+		getService().deleteForumReply(getUid());
 	}
 
 	/**

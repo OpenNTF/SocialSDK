@@ -56,6 +56,7 @@ import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.ConnectionsService;
 import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
+import com.ibm.sbt.services.client.connections.blogs.BlogUrlParts;
 import com.ibm.sbt.services.endpoints.Endpoint;
 
 public class SearchService extends ConnectionsService {
@@ -66,7 +67,6 @@ public class SearchService extends ConnectionsService {
 	/**
 	 * Default Constructor
 	 */
-	
 	public SearchService() {
 		this(DEFAULT_ENDPOINT_NAME);
 	}
@@ -99,67 +99,10 @@ public class SearchService extends ConnectionsService {
 		return "search";
 	}
 	
-	//------------------------------------------------------------------------------------------------------------------
-	// Getting Search feeds
-	//------------------------------------------------------------------------------------------------------------------
-	
-    /**
-     * Search IBM Connection for public information.
-     * 
-     * @param query Text to search for
-     * @return ResultList
-     * @throws ClientServicesException
-     */
-	public EntityList<Result> getResults(String query) throws ClientServicesException {
-		return getResults(query, null);
-	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public IFeedHandler<Result> getResultFeedHandler() {
-		return new AtomFeedHandler<Result>(this) {
-			@Override
-			protected Result entityInstance(BaseService service, Node node, XPathExpression xpath) {
-				return new Result(service, node, nameSpaceCtx, xpath);
-			}
-		};
-	}
 
-	/**
-	 * 
-	 * @return
-	 */
-	public IFeedHandler<Scope> getScopeFeedHandler() {
-		return new AtomFeedHandler<Scope>(this) {
-			@Override
-			protected Scope entityInstance(BaseService service, Node node, XPathExpression xpath) {
-				return new Scope(service, node, nameSpaceCtx, xpath);
-			}
-		};
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public IFeedHandler<FacetValue> getFacetValueFeedHandler(final String facetId) {
-		return new AtomFeedHandler<FacetValue>(this) {
-			@Override
-			protected XPathExpression getEntityXPath(Node node){
-				return FacetValueXPath.facetId.getFacetPath(facetId);
-			}
-			
-			@Override
-			protected FacetValue entityInstance(BaseService service, Node node, XPathExpression xpath) {
-				return new FacetValue(service, node, nameSpaceCtx, xpath);
-			}
-		};
-	}
 	
 	/**
-	 * Search IBM Connection for public information.
+	 * Lists the elements in an Atom entry representing the result returned by a search.
 	 * 
 	 * @param query
 	 *            Text to search for
@@ -178,45 +121,13 @@ public class SearchService extends ConnectionsService {
 		String searchQry = SearchUrls.SEARCH.format(this);
 		return getResultEntityList(searchQry, parameters);
 	}
-
-/*	*//**
-     * Search IBM Connections for public information, tagged with the specified tags.
-     * 
-	 * @param tag
-	 * @return
-	 * @throws SearchServiceException
-	 *//*
-    public ResultList getResultsByTag(String tag) throws SearchServiceException {
-    	return getResultsByTag(new String[]{ tag }, null);
-	}
-	
-    *//**
-     * Search IBM Connections for public information, tagged with the specified tags.
-     * 
-     * @param tags
-     * @param parameters
-     * @return
-     * @throws SearchServiceException
-     *//*
-    public ResultList getResultsByTag(String[] tags, Map<String, String> parameters) throws SearchServiceException {
-		ResultList searchResults;
-		
-		if(parameters==null){
-			parameters= new HashMap<String,String>();
-		}
-		
-		try {
-			parameters.put("constraint", createTagConstraint(tags));		
-			String searchQry = resolveUrl(SearchType.PUBLIC);
-			searchResults = (ResultList) getEntities(searchQry, parameters, new SearchFeedHandler(this));
-		} catch (Exception e) {
-			throw new SearchServiceException(e);
-		} 
-		return searchResults;
-	}*/
 	
 	/**
-	 * Search IBM Connections for public information, tagged with the specified tags.
+	 * The category document identifies the tags that have been assigned to particular 
+	 * items, such as blog posts or community entries. Tags are single-word keywords that 
+	 * categorize a posting or entry. A tag classifies the information in the posting or 
+	 * entry to make it easier to find the content later. The format of the tags document 
+	 * is an Atom publishing protocol (APP) categories document.
 	 * 
 	 * @param String
 	 *            Single tag to be search for, for multiple tags use other overloaded method
@@ -230,7 +141,11 @@ public class SearchService extends ConnectionsService {
 	}
 	
 	/**
-	 * Search IBM Connections for public information, tagged with the specified tags.
+	 * The category document identifies the tags that have been assigned to particular 
+	 * items, such as blog posts or community entries. Tags are single-word keywords that 
+	 * categorize a posting or entry. A tag classifies the information in the posting or 
+	 * entry to make it easier to find the content later. The format of the tags document 
+	 * is an Atom publishing protocol (APP) categories document.
 	 * 
 	 * @param List
 	 *            of Tags to searched for
@@ -242,7 +157,11 @@ public class SearchService extends ConnectionsService {
 	}
 	
 	/**
-	 * Search IBM Connections for public information, tagged with the specified tags.
+	 * The category document identifies the tags that have been assigned to particular 
+	 * items, such as blog posts or community entries. Tags are single-word keywords that 
+	 * categorize a posting or entry. A tag classifies the information in the posting or 
+	 * entry to make it easier to find the content later. The format of the tags document 
+	 * is an Atom publishing protocol (APP) categories document.
 	 * 
 	 * @param List
 	 *            of Tags to searched for
@@ -264,9 +183,6 @@ public class SearchService extends ConnectionsService {
 	}
 	
 	/**
-	 * Search IBM Connections for both public information and private
-	 * information that you have access to. You must provide authentication
-	 * information in the request to retrieve this resource.
 	 * 
 	 * @param query
 	 *            Text to search for
@@ -278,9 +194,6 @@ public class SearchService extends ConnectionsService {
 	}
 	
 	/**
-	 * Search IBM Connections for both public information and private
-	 * information that you have access to. You must provide authentication
-	 * information in the request to retrieve this resource.
 	 * 
 	 * @param query
 	 *            Text to search for
@@ -289,19 +202,12 @@ public class SearchService extends ConnectionsService {
 	 * @return EntityList<Result>
 	 * @throws ClientServicesException
 	 */
-	public EntityList<Result> getMyResults(String query,Map<String, String> parameters) throws ClientServicesException {
-		if(parameters==null){
-			parameters= new HashMap<String,String>();
-		}
-		
-		parameters.put("query", query);		
-		String searchQry = SearchUrls.MYSEARCH.format(this);
+	public EntityList<Result> getMyResults(String query, Map<String, String> parameters) throws ClientServicesException {		
+		String searchQry = SearchUrls.MYSEARCH.format(this, SearchUrls.getQuery(query));
 		return getResultEntityList(searchQry, parameters);
 	}
 	
 	/**
-	 * Search IBM Connection for public information, and then return the
-	 * people associated with the results.
 	 * 
 	 * @param query
 	 *            Text to search for
@@ -313,8 +219,6 @@ public class SearchService extends ConnectionsService {
 	}
 	
 	/**
-	 * Search IBM Connection for public information, and then return the
-	 * people associated with the results.
 	 * 
 	 * @param query
 	 *            Text to search for
@@ -337,9 +241,6 @@ public class SearchService extends ConnectionsService {
 	}
 	
 	/**
-	 * Search IBM Connections for both public information and private
-	 * information that you have access to. You must provide authentication
-	 * information in the request to retrieve this resource.
 	 * 
 	 * @param query
 	 *            Text to search for
@@ -351,9 +252,6 @@ public class SearchService extends ConnectionsService {
 	}
 	
 	/**
-	 * Search IBM Connections for both public information and private
-	 * information that you have access to. You must provide authentication
-	 * information in the request to retrieve this resource.
 	 * 
 	 * @param query
 	 *            Text to search for
@@ -376,9 +274,6 @@ public class SearchService extends ConnectionsService {
 	}
 	
     /**
-     * Search IBM Connection for public information with constraints
-     * A field constraint allows only results matching specific field values.
-     * 
      * @param query Text to search for
      * @param Constraint
      * 
@@ -394,9 +289,6 @@ public class SearchService extends ConnectionsService {
 	}
 	
     /**
-     * Search IBM Connection for public information with constraints
-     * A field constraint allows only results matching specific field values.
-     * 
      * @param query Text to search for
      * @param List<Constraint>
      * 
@@ -410,9 +302,6 @@ public class SearchService extends ConnectionsService {
 	}
     
     /**
-     * Search IBM Connection for public information with constraints
-     * A field constraint allows only results matching specific field values.
-     * 
      * @param query Text to search for
      * @param List<Constraint>
      * 
@@ -443,6 +332,66 @@ public class SearchService extends ConnectionsService {
 		String searchQry = SearchUrls.SCOPES.format(this);
 		return getScopeEntityList(searchQry, params);
      }
+     
+  	
+     /**
+      * Lists the elements in an Atom entry representing the result returned by a search.
+      * 
+      * @param query Text to search for
+      * @return ResultList
+      * @throws ClientServicesException
+      */
+ 	public EntityList<Result> getResults(String query) throws ClientServicesException {
+ 		return getResults(query, null);
+ 	}
+     
+ 	//------------------------------------------------------------------------------------------------------------------
+ 	// Getting Search feeds
+ 	//------------------------------------------------------------------------------------------------------------------
+
+ 	/**
+ 	 * 
+ 	 * @return
+ 	 */
+ 	public IFeedHandler<Result> getResultFeedHandler() {
+ 		return new AtomFeedHandler<Result>(this) {
+ 			@Override
+ 			protected Result entityInstance(BaseService service, Node node, XPathExpression xpath) {
+ 				return new Result(service, node, nameSpaceCtx, xpath);
+ 			}
+ 		};
+ 	}
+
+ 	/**
+ 	 * 
+ 	 * @return
+ 	 */
+ 	public IFeedHandler<Scope> getScopeFeedHandler() {
+ 		return new AtomFeedHandler<Scope>(this) {
+ 			@Override
+ 			protected Scope entityInstance(BaseService service, Node node, XPathExpression xpath) {
+ 				return new Scope(service, node, nameSpaceCtx, xpath);
+ 			}
+ 		};
+ 	}
+
+ 	/**
+ 	 * 
+ 	 * @return
+ 	 */
+ 	public IFeedHandler<FacetValue> getFacetValueFeedHandler(final String facetId) {
+ 		return new AtomFeedHandler<FacetValue>(this) {
+ 			@Override
+ 			protected XPathExpression getEntityXPath(Node node){
+ 				return FacetValueXPath.facetId.getFacetPath(facetId);
+ 			}
+ 			
+ 			@Override
+ 			protected FacetValue entityInstance(BaseService service, Node node, XPathExpression xpath) {
+ 				return new FacetValue(service, node, nameSpaceCtx, xpath);
+ 			}
+ 		};
+ 	}
 
 	protected Result getResultEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
 		return (Result)getEntity(requestUrl, parameters, getResultFeedHandler());
@@ -471,18 +420,6 @@ public class SearchService extends ConnectionsService {
 	/*
 	 * Internal service methods
 	 */
-	
-/*    private String createTagConstraint(String[] tags) throws JsonException {
-    	String[] tagValues = new String[tags.length];
-    	for (int i=0; i<tags.length; i++) {
-    		tagValues[i] = "Tag/" + tags[i];
-    	}
-    	
-    	JsonObject jsonObject = (JsonObject)JsonJavaFactory.instanceEx.createObject(null, null);
-    	jsonObject.putJsonProperty("type", "category");
-    	jsonObject.putJsonProperty("values", tagValues);
-    	return jsonObject.toString();
-    }*/
      
  	private List<String> createTagConstraint(List<String> tags){
 		List<String> formattedTags = new ArrayList<String>();
@@ -493,7 +430,6 @@ public class SearchService extends ConnectionsService {
 		}
 		return formattedTags;
 	}
-	
 	
 	/*
 	 * Method formats the list of constraint into String as required by Search api.

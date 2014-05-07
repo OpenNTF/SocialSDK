@@ -1,8 +1,3 @@
-package com.ibm.sbt.automation.core.utils;
-
-import com.ibm.sbt.automation.core.environment.TestEnvironment;
-import com.ibm.sbt.automation.core.environment.TestEnvironmentFactory;
-
 /*
  * © Copyright IBM Corp. 2012
  * 
@@ -18,6 +13,10 @@ import com.ibm.sbt.automation.core.environment.TestEnvironmentFactory;
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
+package com.ibm.sbt.automation.core.utils;
+
+import com.ibm.sbt.automation.core.environment.TestEnvironment;
+import com.ibm.sbt.automation.core.environment.TestEnvironmentFactory;
 
 /**
  * @author mkataria

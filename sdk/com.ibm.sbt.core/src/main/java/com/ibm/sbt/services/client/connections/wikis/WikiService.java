@@ -360,7 +360,7 @@ public class WikiService extends ConnectionsService {
 	 * @throws ClientServicesException
 	 */
 	public Wiki createWiki(Wiki wiki) throws ClientServicesException {
-		return createWiki(wiki);
+		return createWiki(wiki, null);
 	}
 	
 	/**
@@ -389,7 +389,7 @@ public class WikiService extends ConnectionsService {
 	 * @throws ClientServicesException
 	 */
 	public void updateWiki(Wiki wiki) throws ClientServicesException {
-		updateWiki(wiki);
+		updateWiki(wiki, null);
 	}
 	
 	/**

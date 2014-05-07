@@ -35,6 +35,7 @@ import com.ibm.sbt.services.BaseUnitTest;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.SerializationUtil;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
+import com.ibm.sbt.services.client.connections.common.Tag;
 import com.ibm.sbt.services.client.smartcloud.profiles.ProfileServiceException;
 
 /**

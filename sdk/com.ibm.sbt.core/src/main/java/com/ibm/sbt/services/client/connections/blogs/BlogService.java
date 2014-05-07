@@ -34,9 +34,10 @@ import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.ConnectionsService;
 import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
-import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.blogs.model.BlogXPath;
-import com.ibm.sbt.services.client.connections.blogs.transformers.BaseBlogTransformer;
+import com.ibm.sbt.services.client.connections.blogs.serializers.BlogCommentSerializer;
+import com.ibm.sbt.services.client.connections.blogs.serializers.BlogPostSerializer;
+import com.ibm.sbt.services.client.connections.blogs.serializers.BlogSerializer;
 import com.ibm.sbt.services.endpoints.Endpoint;
 /**
  * BlogService
@@ -369,34 +370,38 @@ public class BlogService extends ConnectionsService {
 	}
 	
 	/**
-	 * Wrapper method to create a Blog
-	 *
-	 * User should be authenticated to call this method
+	 * Create a blog by sending an Atom entry document containing the new blog to the user's blog feed.
 	 * 
 	 * @param Blog
 	 * @return Blog
 	 * @throws ClientServicesException
 	 */
 	public Blog createBlog(Blog blog) throws ClientServicesException {
-		if (null == blog){
+		return createBlog(blog, null);
+	}
+	
+	/**
+	 * Create a blog by sending an Atom entry document containing the new blog to the user's blog feed.
+	 * 
+	 * @param activity
+	 * @param parameters
+	 * @return
+	 * @throws ClientServicesException 
+	 */
+	public Blog createBlog(Blog blog, Map<String, String> parameters) throws ClientServicesException {
+		String requestUrl = BlogUrls.MY_BLOGS.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle));
+		if (null == blog) {
 			throw new ClientServicesException(null,"null blog");
 		}
-		Response result = null;
+		BlogSerializer serializer = new BlogSerializer(blog);
+		String payload = serializer.createPayload();
 		try {
-			BaseBlogTransformer transformer = new BaseBlogTransformer(blog);
-			Object 	payload = transformer.transform(blog.getFieldsMap());
-			
-			Map<String, String> headers = new HashMap<String, String>();
-			headers.put("Content-Type", "application/atom+xml");
-			
-			String createBlogUrl = BlogUrls.MY_BLOGS.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle));
-			result = createData(createBlogUrl, null, headers, payload);
-			blog = getBlogFeedHandler().createEntity(result);
-		} catch (TransformerException e) {
-			throw new ClientServicesException(e, "error creating blog");
+			Response response = createData(requestUrl, parameters, getAtomHeaders(), payload);
+			blog = getBlogFeedHandler().createEntity(response);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-
-        return blog;
+		return blog;
 	}
 	
 	/**
@@ -432,16 +437,13 @@ public class BlogService extends ConnectionsService {
 			if(!blog.getFieldsMap().toString().contains(BlogXPath.tags.toString()))
 				blog.setTags(blog.getTags());
 
-			BaseBlogTransformer transformer = new BaseBlogTransformer(blog);
-			Object 	payload = transformer.transform(blog.getFieldsMap());
-			
-			Map<String, String> headers = new HashMap<String, String>();
-			headers.put("Content-Type", "application/atom+xml");
+			BlogSerializer serializer = new BlogSerializer(blog);
+			String payload = serializer.updatePayload();
 			
 			String updateBlogUrl = BlogUrls.GET_UPDATE_REMOVE_BLOG.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle), BlogUrlParts.entryAnchor.get(blog.getUid()));
 			// not using super.updateData, as unique id needs to be provided, along with passing params, since no params
 			//is passed, it'll throw NPE in BaseService updateData - check with Manish
-			getClientService().put(updateBlogUrl, null,headers, payload,ClientService.FORMAT_NULL);
+			getClientService().put(updateBlogUrl, null, getAtomHeaders(), payload,ClientService.FORMAT_NULL);
 
 		} catch (Exception e) {
 			throw new ClientServicesException(e, "error updating blog");
@@ -572,20 +574,12 @@ public class BlogService extends ConnectionsService {
 			throw new ClientServicesException(null,"blog handle is not passed");
 		}
 		Response result = null;
-		try {
-			BaseBlogTransformer transformer = new BaseBlogTransformer(post);
-			Object 	payload = transformer.transform(post.getFieldsMap());
-			
-			Map<String, String> headers = new HashMap<String, String>();
-			headers.put("Content-Type", "application/atom+xml");
-			String createPostUrl = BlogUrls.CREATE_BLOG_POST.format(this, BlogUrlParts.blogHandle.get(blogHandle));
-			result = createData(createPostUrl, null, headers, payload);
-			post = getBlogPostFeedHandler().createEntity(result);
+		BlogPostSerializer serializer = new BlogPostSerializer(post);
+		String payload = serializer.createPayload();
 
-		} catch (Exception e) {
-			throw new ClientServicesException(e, "error creating blog post");
-		}
-		
+		String createPostUrl = BlogUrls.CREATE_BLOG_POST.format(this, BlogUrlParts.blogHandle.get(blogHandle));
+		result = createData(createPostUrl, null, getAtomHeaders(), payload);
+		post = getBlogPostFeedHandler().createEntity(result);
         return post;
 	}
 	
@@ -600,27 +594,19 @@ public class BlogService extends ConnectionsService {
 		if (null == post){
 			throw new ClientServicesException(null,"null post");
 		}
-		try {
-			if(post.getFieldsMap().get(AtomXPath.title)== null)
-				post.setTitle(post.getTitle());
-			if(post.getFieldsMap().get(AtomXPath.content)== null)
-				post.setContent(post.getContent());
-			if(!post.getFieldsMap().toString().contains(BlogXPath.tags.toString()))
-				post.setTags(post.getTags());
-
-			BaseBlogTransformer transformer = new BaseBlogTransformer(post);
-			Object 	payload = transformer.transform(post.getFieldsMap());
+		if(post.getFieldsMap().get(AtomXPath.title)== null)
+			post.setTitle(post.getTitle());
+		if(post.getFieldsMap().get(AtomXPath.content)== null)
+			post.setContent(post.getContent());
+		if(!post.getFieldsMap().toString().contains(BlogXPath.tags.toString()))
+			post.setTags(post.getTags());
 			
-			Map<String, String> headers = new HashMap<String, String>();
-			headers.put("Content-Type", "application/atom+xml");
+		BlogPostSerializer serializer = new BlogPostSerializer(post);
+		String payload = serializer.updatePayload();
 			
-			String updatePostUrl = BlogUrls.UPDATE_REMOVE_POST.format(this, BlogUrlParts.blogHandle.get(blogHandle), BlogUrlParts.entryAnchor.get(post.getUid()));
-			Response result = getClientService().put(updatePostUrl, null,headers, payload,ClientService.FORMAT_NULL);
-			post = getBlogPostFeedHandler().createEntity(result);
-		} catch (Exception e) {
-			throw new ClientServicesException(e, "error updating blog post");
-		}
-
+		String updatePostUrl = BlogUrls.UPDATE_REMOVE_POST.format(this, BlogUrlParts.blogHandle.get(blogHandle), BlogUrlParts.entryAnchor.get(post.getUid()));
+		Response result = getClientService().put(updatePostUrl, null, getAtomHeaders(), payload,ClientService.FORMAT_NULL);
+		post = getBlogPostFeedHandler().createEntity(result);
 		return post;
 	}
 	
@@ -661,15 +647,12 @@ public class BlogService extends ConnectionsService {
 		Response result = null;
 		try {
 			comment.setPostUuid(postUuid);
-			BaseBlogTransformer transformer = new BaseBlogTransformer(comment);
-			
-			Object 	payload = transformer.transform(comment.getFieldsMap());
-			
-			Map<String, String> headers = new HashMap<String, String>();
-			headers.put("Content-Type", "application/atom+xml");
+			BlogCommentSerializer serializer = new BlogCommentSerializer(comment);
+			String payload = serializer.createPayload();
+
 			String createCommentUrl = BlogUrls.CREATE_COMMENT.format(this, BlogUrlParts.blogHandle.get(blogHandle), BlogUrlParts.entryAnchor.get(""));
 			
-			result = createData(createCommentUrl, null, headers, payload);
+			result = createData(createCommentUrl, null, getAtomHeaders(), payload);
 			comment = getCommentFeedHandler().createEntity(result);
 
 		} catch (Exception e) {
@@ -767,6 +750,8 @@ public class BlogService extends ConnectionsService {
 			}
 		};
 	}
+
+	
 	/***************************************************************
 	 * Factory methods
 	 ****************************************************************/

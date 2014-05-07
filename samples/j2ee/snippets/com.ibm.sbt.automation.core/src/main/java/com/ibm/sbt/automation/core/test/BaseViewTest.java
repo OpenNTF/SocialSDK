@@ -1,9 +1,3 @@
-package com.ibm.sbt.automation.core.test;
-
-import org.openqa.selenium.WebElement;
-import com.ibm.sbt.automation.core.test.pageobjects.GridResultPage;
-import com.ibm.sbt.automation.core.test.pageobjects.VCardResultPage;
-import com.ibm.sbt.automation.core.test.pageobjects.WrapperResultPage;
 /*
  * © Copyright IBM Corp. 2014
  * 
@@ -19,6 +13,7 @@ import com.ibm.sbt.automation.core.test.pageobjects.WrapperResultPage;
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
+package com.ibm.sbt.automation.core.test;
 
 /**
  * @author Francis 

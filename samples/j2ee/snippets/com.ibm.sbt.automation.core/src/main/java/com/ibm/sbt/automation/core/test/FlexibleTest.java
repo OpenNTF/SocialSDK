@@ -1,37 +1,39 @@
+/*
+ * © Copyright IBM Corp. 2013
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); 
+ * you may not use this file except in compliance with the License. 
+ * You may obtain a copy of the License at:
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0 
+ * 
+ * Unless required by applicable law or agreed to in writing, software 
+ * distributed under the License is distributed on an "AS IS" BASIS, 
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or 
+ * implied. See the License for the specific language governing 
+ * permissions and limitations under the License.
+ */
 package com.ibm.sbt.automation.core.test;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.HashMap;
-import java.util.Properties;
 
-import javax.management.RuntimeErrorException;
-
-import org.apache.xml.utils.UnImplNode;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.ibm.commons.runtime.Application;
-import com.ibm.commons.runtime.Context;
-import com.ibm.commons.runtime.RuntimeFactory;
-import com.ibm.commons.runtime.impl.app.RuntimeFactoryStandalone;
 import com.ibm.commons.runtime.util.ParameterProcessor;
 import com.ibm.javascript.units.AbstractRhinoTest;
-import com.ibm.javascript.units.BaseRhinoTest;
 import com.ibm.sbt.automation.core.environment.TestEnvironment;
 import com.ibm.sbt.automation.core.environment.TestEnvironmentFactory;
 import com.ibm.sbt.automation.core.test.BaseTest.AuthType;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 import com.ibm.sbt.automation.core.test.pageobjects.ResultPage;
-import com.ibm.sbt.jslibrary.SBTEnvironment.Endpoint;
 import com.ibm.sbt.playground.assets.jssnippets.JSSnippet;
 import com.ibm.sbt.security.authentication.AuthenticationException;
-import com.ibm.sbt.services.endpoints.EndpointFactory;
-import com.ibm.sbt.test.lib.MockEndpoint;
 
 public class FlexibleTest {
 

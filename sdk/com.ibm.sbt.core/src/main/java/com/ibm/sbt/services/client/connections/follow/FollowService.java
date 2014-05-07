@@ -32,8 +32,7 @@ import com.ibm.sbt.services.client.base.ConnectionsService;
 import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.NamedUrlPart;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
-import com.ibm.sbt.services.client.base.transformers.TransformerException;
-import com.ibm.sbt.services.client.connections.follow.transformer.FollowTransformer;
+import com.ibm.sbt.services.client.connections.follow.serializers.FollowSerializer;
 import com.ibm.sbt.services.endpoints.Endpoint;
 
 /**
@@ -95,9 +94,16 @@ public class FollowService extends ConnectionsService {
 		}
 		return part;
     }
+
+	/***************************************************************
+	 * Getting a feed of the followed resources
+	 ****************************************************************/
 	
 	/**
-	 * This method returns resources that are being followed by the authenticated user.
+	 * You can use this Atom API request to get a feed that lists the resources
+	 * that are being followed by the authenticated user. 
+	 * You must provide the values of the source and type as parameters to this request
+	 * 
 	 * @param source
 	 * @param type
 	 * @return EntityList<FollowedResource>
@@ -108,7 +114,10 @@ public class FollowService extends ConnectionsService {
 	}
 	
 	/**
-	 * This method returns resources that are being followed by the authenticated user.
+	 * You can use this Atom API request to get a feed that lists the resources
+	 * that are being followed by the authenticated user. 
+	 * You must provide the values of the source and type as parameters to this request
+	 * 
 	 * @param source
 	 * @param type
 	 * @param parameters
@@ -122,7 +131,10 @@ public class FollowService extends ConnectionsService {
 	
 	
 	/**
-	 * This method returns specific resource that is being followed by the authenticated user.
+	 * You can use this Atom API request to get a feed that lists the resources
+	 * that are being followed by the authenticated user. 
+	 * You must provide the values of the source and type as parameters to this request
+	 * 
 	 * @param source
 	 * @param type
 	 * @param resourceId
@@ -134,7 +146,16 @@ public class FollowService extends ConnectionsService {
 		return getResource(url, generateParams(null, source, type, resourceId));
 	}
 	
-	/** This method allows authenticated user to start following a resource
+	/***************************************************************
+	 * Start following a resource
+	 ****************************************************************/
+
+	/** 
+	 * 
+	 * To start following a resource, send an Atom entry document 
+	 * containing information about the resource to the followed resources feed. <br>
+	 * See Authenticating requests for information about how to authenticate the request.
+	 * 
 	 * @param source
 	 * @param type
 	 * @param resourceId
@@ -143,26 +164,25 @@ public class FollowService extends ConnectionsService {
 	 */
 	public FollowedResource startFollowing(String source, String type, String resourceId)  throws ClientServicesException {
 		Response result = null;
-		try {
-			FollowedResource resource = new FollowedResource();
-			resource.setResourceId(resourceId);
-			resource.setSource(source);
-			resource.setResourceType(type);
-			FollowTransformer transformer = new FollowTransformer();
-			
-			Map<String, String> headers = new HashMap<String, String>();
-			headers.put("Content-Type", "application/atom+xml");
-			
-			String atomPayload = transformer.transform(resource.getFieldsMap());
-			String url = FollowUrls.format(source, this, Resource.get(resourceId));
-			result = createData(url, generateParams(null, source, type, null), headers, atomPayload);
-			return getFollowFeedHandler().createEntity(result);
-		} catch (TransformerException e) {
-			throw new ClientServicesException(e, "Problem occured in startFollowing");
-		}
+		FollowedResource resource = new FollowedResource();
+		resource.setResourceId(resourceId);
+		resource.setSource(source);
+		resource.setResourceType(type);
+		FollowSerializer serializer = new FollowSerializer(resource);
+		String atomPayload = serializer.startFollowingPayload();
+		String url = FollowUrls.format(source, this, Resource.get(resourceId));
+		result = createData(url, generateParams(null, source, type, null), getAtomHeaders(), atomPayload);
+		return getFollowFeedHandler().createEntity(result);
 	}
+
+	/***************************************************************
+	 * Stop following a resource
+	 ****************************************************************/
 	
-	/** This method allows authenticated user to stop following a resource
+	/** 
+	 * To stop following a resource, use the HTTP DELETE method. <br>
+	 * See Authenticating requests for information about how to authenticate the request.
+	 * 
 	 * @param source
 	 * @param type
 	 * @param resourceId
@@ -174,21 +194,29 @@ public class FollowService extends ConnectionsService {
 		deleteData(stopResourceUrl, generateParams(null, source, type, resourceId), resourceId);
 		return true;
 	}
+
+	/***************************************************************
+	 * Factory methods
+	 ****************************************************************/
 	
-	private EntityList<FollowedResource> getResources(String apiUrl, Map<String, String> parameters) throws ClientServicesException {
-		return (EntityList<FollowedResource>)getEntities(apiUrl, parameters, getFollowFeedHandler());
+	protected EntityList<FollowedResource> getResources(String apiUrl, Map<String, String> parameters) throws ClientServicesException {
+		return getEntities(apiUrl, parameters, getFollowFeedHandler());
 	}
 		
-	private FollowedResource getResource(String apiUrl,Map<String, String> parameters) throws ClientServicesException {
+	protected FollowedResource getResource(String apiUrl,Map<String, String> parameters) throws ClientServicesException {
 		EntityList<FollowedResource> resources = (EntityList<FollowedResource>)getEntities(apiUrl, parameters, getFollowFeedHandler());
 		if(resources!=null && resources.size()>0){
-			return (FollowedResource) resources.get(0);
+			return resources.get(0);
 		}else{
 			return null;
 		}
 	}
+
+	/***************************************************************
+	 * Handler Factory methods
+	 ****************************************************************/
 	
-	private IFeedHandler<FollowedResource> getFollowFeedHandler() {
+	protected IFeedHandler<FollowedResource> getFollowFeedHandler() {
 		return new AtomFeedHandler<FollowedResource>(this, false) {
 			@Override
 			protected FollowedResource entityInstance(BaseService service, Node node, XPathExpression xpath) {
@@ -196,6 +224,10 @@ public class FollowService extends ConnectionsService {
 			}
 		};
 	}
+
+	/***************************************************************
+	 * Utility methods
+	 ****************************************************************/
 	
 	private Map<String, String> generateParams(Map<String, String> params, String source, String type, String resourceId){
 		params = params == null? new HashMap<String, String>():params;

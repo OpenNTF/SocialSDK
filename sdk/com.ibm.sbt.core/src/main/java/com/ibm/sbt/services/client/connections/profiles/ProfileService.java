@@ -85,16 +85,8 @@ import com.ibm.sbt.services.endpoints.Endpoint;
  *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.5+API+Documentation#action=openDocument&res_title=Profiles_API_ic45&content=pdcontent">
  *			Profiles API</a>
  * 
- * @Represents Connections ProfileService
  * @author Swati Singh
  * @author Carlos Manias
- * <pre>
- * Sample Usage
- * {@code
- * 	ProfileService _service = new ProfileService();
- *  Profile profile = _service.getProfile(userId);
- * }
- * </pre>
  */
 public class ProfileService extends ConnectionsService {
 

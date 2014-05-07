@@ -17,13 +17,13 @@
 package com.ibm.sbt.services.client.connections.blogs;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.connections.blogs.model.BaseBlogEntity;
+import com.ibm.sbt.services.client.connections.common.Tag;
 
 /**
  * @author Swati Singh
@@ -157,8 +157,8 @@ public class BlogServiceGetTests extends BaseBlogServiceTest {
 	
 	protected void assertValid(Tag tag) {
 		assertNotNull("Invalid Tag", tag.getTerm());
-		assertNotNull("Invalid Tag visibility", tag.getVisibility());
+		assertNotNull("Invalid Tag visibility", tag.isVisible());
 		assertNotNull("Invalid Tag frequency", tag.getFrequency());
-		assertNotNull("Invalid Tag intensity", tag.getIntensity());
+		assertNotNull("Invalid Tag intensity", tag.isVisible());
 	}
 }

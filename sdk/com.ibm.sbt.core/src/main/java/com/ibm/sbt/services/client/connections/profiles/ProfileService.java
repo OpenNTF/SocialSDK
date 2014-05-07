@@ -68,6 +68,7 @@ import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.NamedUrlPart;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.base.datahandlers.JsonDataHandler;
+import com.ibm.sbt.services.client.connections.common.Tag;
 import com.ibm.sbt.services.client.connections.profiles.model.ProfileXPath;
 import com.ibm.sbt.services.client.connections.profiles.serializers.ColleagueConnectionSerializer;
 import com.ibm.sbt.services.client.connections.profiles.serializers.ProfileSerializer;

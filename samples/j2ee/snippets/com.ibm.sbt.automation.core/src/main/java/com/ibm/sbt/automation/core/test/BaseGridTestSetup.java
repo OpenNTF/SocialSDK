@@ -1,3 +1,18 @@
+/*
+ * © Copyright IBM Corp. 2013
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); 
+ * you may not use this file except in compliance with the License. 
+ * You may obtain a copy of the License at:
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0 
+ * 
+ * Unless required by applicable law or agreed to in writing, software 
+ * distributed under the License is distributed on an "AS IS" BASIS, 
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or 
+ * implied. See the License for the specific language governing 
+ * permissions and limitations under the License.
+ */
 package com.ibm.sbt.automation.core.test;
 
 import java.io.ByteArrayInputStream;
@@ -13,9 +28,8 @@ import com.ibm.sbt.automation.core.utils.Trace;
 import com.ibm.sbt.security.authentication.AuthenticationException;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
-import com.ibm.sbt.services.client.connections.activity.Activity;
-import com.ibm.sbt.services.client.connections.activity.ActivityService;
-import com.ibm.sbt.services.client.connections.activity.ActivityServiceException;
+import com.ibm.sbt.services.client.connections.activities.Activity;
+import com.ibm.sbt.services.client.connections.activities.ActivityService;
 import com.ibm.sbt.services.client.connections.communities.Community;
 import com.ibm.sbt.services.client.connections.communities.CommunityService;
 import com.ibm.sbt.services.client.connections.files.File;
@@ -106,39 +120,31 @@ public class BaseGridTestSetup extends BaseApiTest{
 		//TODO Implement when this is implemented in the Java API
 	}
 	
-	public void createActivity(){
+	public void createActivity() throws ClientServicesException{
 		try {
 			loginConnections();
 		} catch (AuthenticationException e1) {
 			e1.printStackTrace();
 		}
-		try {
-			this.activityService = new ActivityService();
-			Activity activity = new Activity(activityService);
-			activity.setTitle("JSPActivity" + System.currentTimeMillis());
-			activity.setContent("GoalOfActivity - " + System.currentTimeMillis());
-			List<String> tagList = new ArrayList<String>();
-			tagList.add("tag1");
-			tagList.add("tag2");
-			activity.setTags(tagList);
-			activity.setDueDate(new Date());
-			activity = activityService.createActivity(activity);
-			this.testActivityID = activity.getActivityId();
-		} catch (ActivityServiceException e) {
-			e.printStackTrace();
-		}
+		this.activityService = new ActivityService();
+		Activity activity = new Activity(activityService);
+		activity.setTitle("JSPActivity" + System.currentTimeMillis());
+		activity.setContent("GoalOfActivity - " + System.currentTimeMillis());
+		List<String> tagList = new ArrayList<String>();
+		tagList.add("tag1");
+		tagList.add("tag2");
+		activity.setTags(tagList);
+		activity.setDuedate(new Date());
+		activity = activityService.createActivity(activity);
+		this.testActivityID = activity.getActivityUuid();
 	}
 	
-	public void deleteActivity(){
+	public void deleteActivity() throws ClientServicesException{
 		if(this.activityService ==  null){
 			this.activityService = new ActivityService();
 		}else if (this.activityService != null){
-			try {
-				this.activityService.deleteActivity(testActivityID);
-				System.out.println("Activty Deleted");
-			} catch (ActivityServiceException e) {
-				e.printStackTrace();
-			}
+			this.activityService.deleteActivity(testActivityID, null);
+			System.out.println("Activty Deleted");
 		}
 	}
 	

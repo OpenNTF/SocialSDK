@@ -1,13 +1,3 @@
-package com.ibm.sbt.automation.core.test;
-
-import org.junit.Assert;
-import org.openqa.selenium.WebElement;
-
-import com.ibm.sbt.automation.core.test.pageobjects.WrapperResultPage;
-import com.ibm.sbt.services.client.ClientServicesException;
-import com.ibm.sbt.services.client.connections.communities.Community;
-import com.ibm.sbt.services.client.connections.communities.CommunityService;
-import com.ibm.sbt.services.client.connections.communities.CommunityServiceException;
 /*
  * © Copyright IBM Corp. 2012
  * 
@@ -24,6 +14,15 @@ import com.ibm.sbt.services.client.connections.communities.CommunityServiceExcep
  * permissions and limitations under the License.
  */
 
+package com.ibm.sbt.automation.core.test;
+
+import org.junit.Assert;
+import org.openqa.selenium.WebElement;
+
+import com.ibm.sbt.automation.core.test.pageobjects.WrapperResultPage;
+import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.services.client.connections.communities.Community;
+import com.ibm.sbt.services.client.connections.communities.CommunityService;
 /**
  * @author Francis 
  * @date 26 Mar 2013

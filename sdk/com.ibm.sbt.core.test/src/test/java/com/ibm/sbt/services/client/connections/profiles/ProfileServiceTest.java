@@ -32,8 +32,10 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import com.ibm.sbt.services.BaseUnitTest;
+import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.SerializationUtil;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
+import com.ibm.sbt.services.client.smartcloud.profiles.ProfileServiceException;
 
 /**
  * Tests for the java connections Profile API by calling Connections server
@@ -86,7 +88,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 		profileAdminService.deleteProfile(profile.getUserid());
 	}
 
-	@Test(expected = ProfileServiceException.class)
+	@Test(expected = ClientServicesException.class)
 	public final void testGetProfileWithNullUserId() throws Exception {
 		profileService.getProfile(null);
 	}

@@ -37,7 +37,13 @@ import com.ibm.sbt.services.client.connections.follow.transformer.FollowTransfor
 import com.ibm.sbt.services.endpoints.Endpoint;
 
 /**
- * Use this Service to keep track of IBM� Connections resources that interest you, such as a person or community, a blog or a particular file.
+ * Use this Service to keep track of IBM® Connections resources that interest you, 
+ * such as a person or community, a blog or a particular file.
+ * 
+ * @see
+ *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.5+API+Documentation#action=openDocument&res_title=Forums_API_ic45&content=pdcontent">
+ *			Forums API</a>
+ * 
  * @author Manish Kataria 
  * @author Carlos Manias
  * 
@@ -48,14 +54,27 @@ public class FollowService extends ConnectionsService {
 	
 	private static final long serialVersionUID = 8450637561663717438L;
 
+	/**
+	 * Create FollowService instance with default endpoint.
+	 */
 	public FollowService() {
 		super();
 	}
 	
+	/**
+	 * Create FollowService instance with specified endpoint.
+	 * 
+	 * @param endpoint
+	 */
 	public FollowService(String endpoint) {
 		super(endpoint);
 	}
 	
+	/**
+	 * Create FollowService instance with specified endpoint.
+	 * 
+	 * @param endpoint
+	 */
 	public FollowService(Endpoint endpoint) {
 		super(endpoint);
 	}
@@ -77,61 +96,52 @@ public class FollowService extends ConnectionsService {
 		return part;
     }
 	
-	/*
+	/**
 	 * This method returns resources that are being followed by the authenticated user.
 	 * @param source
 	 * @param type
 	 * @return EntityList<FollowedResource>
-	 * @throws FollowServiceException
+	 * @throws ClientServicesException
 	 */
-	public EntityList<FollowedResource> getFollowedResources(String source, String type) throws FollowServiceException{
+	public EntityList<FollowedResource> getFollowedResources(String source, String type) throws ClientServicesException {
 		return getFollowedResources(source,type,null);
 	}
 	
-	/*
+	/**
 	 * This method returns resources that are being followed by the authenticated user.
 	 * @param source
 	 * @param type
 	 * @param parameters
 	 * @return EntityList<FollowedResource>
-	 * @throws FollowServiceException
+	 * @throws ClientServicesException
 	 */
-	public EntityList<FollowedResource> getFollowedResources(String source, String type, Map<String, String> parameters)  throws FollowServiceException{
-		try {
-			String url = FollowUrls.format(source, this, Resource.get(""));
-			return getResources(url, generateParams(parameters, source, type, null));
-		} catch (ClientServicesException e) {
-			throw new FollowServiceException(e, "Problem occured in getFollowedResources");
-		}
+	public EntityList<FollowedResource> getFollowedResources(String source, String type, Map<String, String> parameters)  throws ClientServicesException {
+		String url = FollowUrls.format(source, this, Resource.get(""));
+		return getResources(url, generateParams(parameters, source, type, null));
 	}
 	
 	
-	/*
+	/**
 	 * This method returns specific resource that is being followed by the authenticated user.
 	 * @param source
 	 * @param type
 	 * @param resourceId
 	 * @return FollowedResource
-	 * @throws FollowServiceException
+	 * @throws ClientServicesException
 	 */
-	public FollowedResource getFollowedResource(String source, String type, String resourceId)  throws FollowServiceException{
-		try {
-			String url = FollowUrls.format(source, this, Resource.get(resourceId));
-			return getResource(url, generateParams(null, source, type, resourceId));
-		} catch (ClientServicesException e) {
-			throw new FollowServiceException(e, "Problem occured in getFollowedResource");
-		}
-		
+	public FollowedResource getFollowedResource(String source, String type, String resourceId)  throws ClientServicesException{
+		String url = FollowUrls.format(source, this, Resource.get(resourceId));
+		return getResource(url, generateParams(null, source, type, resourceId));
 	}
 	
-	/* This method allows authenticated user to start following a resource
+	/** This method allows authenticated user to start following a resource
 	 * @param source
 	 * @param type
 	 * @param resourceId
 	 * @return FollowedResource
-	 * @throws FollowServiceException
+	 * @throws ClientServicesException
 	 */
-	public FollowedResource startFollowing(String source, String type, String resourceId)  throws FollowServiceException{
+	public FollowedResource startFollowing(String source, String type, String resourceId)  throws ClientServicesException {
 		Response result = null;
 		try {
 			FollowedResource resource = new FollowedResource();
@@ -147,30 +157,22 @@ public class FollowService extends ConnectionsService {
 			String url = FollowUrls.format(source, this, Resource.get(resourceId));
 			result = createData(url, generateParams(null, source, type, null), headers, atomPayload);
 			return getFollowFeedHandler().createEntity(result);
-
 		} catch (TransformerException e) {
-			throw new FollowServiceException(e, "Problem occured in startFollowing");
-		} catch (ClientServicesException e) {
-			throw new FollowServiceException(e, "Problem occured in startFollowing");
+			throw new ClientServicesException(e, "Problem occured in startFollowing");
 		}
 	}
 	
-	/* This method allows authenticated user to stop following a resource
+	/** This method allows authenticated user to stop following a resource
 	 * @param source
 	 * @param type
 	 * @param resourceId
 	 * @return boolean
-	 * @throws FollowServiceException
+	 * @throws ClientServicesException
 	 */
-	public boolean stopFollowing(String source,String type,String resourceId) throws FollowServiceException{
-		try {
-			String stopResourceUrl = FollowUrls.format(source, this, Resource.get(resourceId));
-			deleteData(stopResourceUrl, generateParams(null, source, type, resourceId), resourceId);
-			return true;
-		} catch (Exception e) {
-			throw new FollowServiceException(e, "Problem occured in stopFollowing");
-		}
-		
+	public boolean stopFollowing(String source,String type,String resourceId) throws ClientServicesException{
+		String stopResourceUrl = FollowUrls.format(source, this, Resource.get(resourceId));
+		deleteData(stopResourceUrl, generateParams(null, source, type, resourceId), resourceId);
+		return true;
 	}
 	
 	private EntityList<FollowedResource> getResources(String apiUrl, Map<String, String> parameters) throws ClientServicesException {
@@ -208,5 +210,4 @@ public class FollowService extends ConnectionsService {
 		}
 		return params;
 	}
-
 }

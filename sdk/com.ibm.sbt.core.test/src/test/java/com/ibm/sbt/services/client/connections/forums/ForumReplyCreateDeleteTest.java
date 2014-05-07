@@ -48,7 +48,7 @@ public class ForumReplyCreateDeleteTest extends BaseForumServiceTest {
 			ForumReply createdReply = createForumReply();
 			ForumReply replyGot = forumService.getForumReply(createdReply.getReplyUuid());
 			assertEquals(createdReply.getTitle(), replyGot.getTitle());
-			forumService.removeForumReply(createdReply);
+			forumService.deleteForumReply(createdReply);
 			forumService.getForumReply(createdReply.getReplyUuid());
 			fail("Getting a Reply that does no longer exist should throw an exception.");
 		}

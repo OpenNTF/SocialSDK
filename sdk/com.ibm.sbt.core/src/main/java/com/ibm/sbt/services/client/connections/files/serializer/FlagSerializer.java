@@ -16,31 +16,30 @@
 
 package com.ibm.sbt.services.client.connections.files.serializer;
 
-import static com.ibm.sbt.services.client.base.CommonConstants.*;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.*;
-import static com.ibm.sbt.services.client.connections.files.FileConstants.*;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.CONTENT;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.ENTRY;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.IN_REF_TO;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.REF;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.REF_ITEM_TYPE;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.REL;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.TEXT;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.TYPE;
+import static com.ibm.sbt.services.client.connections.files.FileConstants.REPORT_ITEM;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
-import com.ibm.commons.util.StringUtil;
-import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.ConnectionsConstants.Namespace;
-import com.ibm.sbt.services.client.base.serializers.AtomEntitySerializer;
 import com.ibm.sbt.services.client.base.serializers.XmlSerializer;
-import com.ibm.sbt.services.client.connections.files.util.Messages;
-import com.ibm.sbt.services.client.connections.profiles.Profile;
-import com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.ProfileAttribute;
-import com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.VCardField;
+import com.ibm.sbt.services.client.connections.files.FileConstants.FlagType;
 
 /**
  * 
  * @author Lorenzo Boccaccia
- *
+ * 
  */
 public class FlagSerializer extends XmlSerializer {
 
-
-	private String id;
-    private String reason;
+    private String   id;
+    private String   reason;
     private FlagType what;
 
     public FlagSerializer(String objectId, String flagReason, FlagType flagWhat) {
@@ -50,50 +49,46 @@ public class FlagSerializer extends XmlSerializer {
     }
 
     private void generateFlagPayload() {
-		Node entry = entry();
-		
-		appendChildren(entry,
-				inRefTo(),
-				reason()
-		);
-	}
-    
-	public String flagPayload(){
-	
-	    generateFlagPayload();
-	    return serializeToString();
-	}
-	
-	private Node entry() {
-		Element element = element(Namespace.ATOM.getUrl(), ENTRY);
-		element.setAttributeNS(Namespace.XMLNS.getUrl(), Namespace.SNX.getNSPrefix(), Namespace.SNX.getUrl());
-		Node root = rootNode(element);
-		return root;
-	}
-	
-
-
-	private Element reason() {
-		Element element = textElement(CONTENT, reason,
-				attribute(TYPE, TEXT));
-		return element;
-	}
-
-	private Element inRefTo() {
-		Element element = element(Namespace.SNX.getUrl(), IN_REF_TO, 
-		        attribute(REL, REPORT_ITEM),
-		        attribute(REF, id),
-		        attribute(REF_ITEM_TYPE, getItemType())
-		        );
-		return element;
-	}
-
-    private String getItemType()  {
-        switch(what) {
-            case COMMENT: return "comment";
-            default: return "document";
-        }
+        Node entry = entry();
+        appendChildren(entry,
+                inRefTo(),
+                reason());
     }
 
+    public String flagPayload() {
+        generateFlagPayload();
+        return serializeToString();
+    }
+
+    private Node entry() {
+        Element element = element(Namespace.ATOM.getUrl(), ENTRY);
+        element.setAttributeNS(Namespace.XMLNS.getUrl(), Namespace.SNX.getNSPrefix(), Namespace.SNX.getUrl());
+        Node root = rootNode(element);
+        return root;
+    }
+
+    private Element reason() {
+        Element element = textElement(CONTENT, reason,
+                attribute(TYPE, TEXT));
+        return element;
+    }
+
+    private Element inRefTo() {
+        Element element = element(Namespace.SNX.getUrl(), IN_REF_TO,
+                attribute(REL, REPORT_ITEM),
+                attribute(REF, id),
+                attribute(REF_ITEM_TYPE, getItemType())
+                );
+        return element;
+    }
+
+    private String getItemType() {
+        switch (what) {
+            case COMMENT:
+                return "comment";
+            default:
+                return "document";
+        }
+    }
 
 }

@@ -46,6 +46,7 @@ public class Blog extends BaseBlogEntity {
 	}
 	
 	public Blog(){}
+	
 	/**
      * Constructor
      * @param BaseService
@@ -66,6 +67,7 @@ public class Blog extends BaseBlogEntity {
 	public void setBlogUuid(String blogUuid) {
         setAsString(BlogXPath.uid, blogUuid);
     }
+	
     /**
 	* Return the value of IBM Connections blog UuiD from blog ATOM
 	* entry document.
@@ -73,18 +75,20 @@ public class Blog extends BaseBlogEntity {
 	* @method getBlogUuid
 	* @return blogUuid of the blog
 	*/
-	public String getBlogUuid() throws ClientServicesException{
-		return super.getUid();
+	public String getBlogUuid() {
+		return getUid();
 	}
+	
 	/**
 	* Returns the Blog handle
 	*
 	* @method getHandle
 	* @return Blog handle
 	*/
-	public String getHandle() throws ClientServicesException{
+	public String getHandle() {
 		return getAsString(BlogXPath.handle);
 	}
+	
 	/**
 	* Sets the Blog hanlde
 	*
@@ -94,15 +98,37 @@ public class Blog extends BaseBlogEntity {
 	public void setHandle(String handle) {
         setAsString(BlogXPath.handle, handle);
     }
+	
 	/**
 	* Returns the Blog timeZone
 	*
 	* @method getTimeZone
 	* @return {String} Blog TimeZone
 	*/
-	public String getTimeZone() throws ClientServicesException{
+	public String getTimeZone() {
 		return getAsString(BlogXPath.timeZone);
 	}
+	
+	public String getReplyTo() {
+		return getAsString(BlogXPath.inReplyToRef);
+	}
+	
+	public String getFlagTerm() {
+		return getAsString(BlogXPath.flagTerm);
+	}
+	
+	public void setFlagTerm(String flagTerm) {
+		setAsString(BlogXPath.flagTerm, flagTerm);
+	}
+	
+	public String getFlagLabel() {
+		return getAsString(BlogXPath.flagLabel);
+	}
+	
+	public void setFlagLabel(String flagLabel) {
+		setAsString(BlogXPath.flagLabel, flagLabel);
+	}
+	
 	/**
 	* Sets the Blog timezone
 	*
@@ -112,6 +138,7 @@ public class Blog extends BaseBlogEntity {
 	public void setTimeZone(String handle) {
         setAsString(BlogXPath.timeZone, handle);
     }
+	
 	/**
 	 * This method creates the blog on the server
 	 * 
@@ -121,6 +148,7 @@ public class Blog extends BaseBlogEntity {
 	public Blog save() throws ClientServicesException {
 		return getService().createBlog(this);
 	}
+	
 	/**
      * This method removes the blog on the server
      *
@@ -129,6 +157,4 @@ public class Blog extends BaseBlogEntity {
     public void remove() throws ClientServicesException {
 		getService().removeBlog(getUid());
 	}
-	
-
 }

@@ -209,6 +209,14 @@ public class BlogPost extends BaseBlogEntity {
 		String entryAnchor = getEntryAnchor();
 		return getService().getEntryComments(blogHandle, entryAnchor, parameters);
 	}
+	
+	public String getType() {
+		return getAsString(BlogXPath.blogType);
+	}
+	
+	public void setType(String type) {
+		setAsString(BlogXPath.blogType, type);
+	}
 
 	/*
 	 * Extract Blog handle from BlogPost alternate url

@@ -15,8 +15,6 @@
  */
 package com.ibm.sbt.services.client.connections.activities;
 
-import static com.ibm.sbt.services.client.base.CommonConstants.APPLICATION_ATOM_XML;
-import static com.ibm.sbt.services.client.base.CommonConstants.CONTENT_TYPE;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
 
 import java.util.HashMap;
@@ -54,16 +52,9 @@ import com.ibm.sbt.services.endpoints.Endpoint;
  *
  */
 public class ActivityService extends ConnectionsService {
-	
-	
+		
 	private static final long serialVersionUID = 1L;
 
-	private static Map<String,String> ATOM_HEADERS = new HashMap<String, String>();
-	
-	static {
-		ATOM_HEADERS.put(CONTENT_TYPE, APPLICATION_ATOM_XML);
-	}
-	
 	/**
 	 * Create ActivityService instance with default endpoint.
 	 */
@@ -760,7 +751,7 @@ public class ActivityService extends ConnectionsService {
 	protected Activity createActivityEntity(String requestUrl, Activity activity, Map<String, String> parameters) throws ClientServicesException {
 		try {
 			ActivitySerializer serializer = new ActivitySerializer(activity);
-			Response response = createData(requestUrl, parameters, getHeaders(), serializer.generateCreate());
+			Response response = createData(requestUrl, parameters, getAtomHeaders(), serializer.generateCreate());
 			if (isValidResponse(response, HTTPCode.CREATED)) {
 				return updateActivityEntityData(activity, response);
 			} else {
@@ -783,7 +774,7 @@ public class ActivityService extends ConnectionsService {
 				payload = serializer.generateUpdate();
 			}
 			String uniqueId = (activity == null) ? null : activity.getActivityUuid();
-			Response response = putData(requestUrl, parameters, getHeaders(), payload, uniqueId);
+			Response response = putData(requestUrl, parameters, getAtomHeaders(), payload, uniqueId);
 			if (isValidResponse(response, expectedCode)) {
 				return;
 			} else {
@@ -838,7 +829,7 @@ public class ActivityService extends ConnectionsService {
 	protected ActivityNode createActivityNodeEntity(String requestUrl, ActivityNode activityNode, Map<String, String> parameters) throws ClientServicesException {
 		try {
 			ActivityNodeSerializer serializer = new ActivityNodeSerializer(activityNode);
-			Response response = createData(requestUrl, parameters, getHeaders(), serializer.generateCreate());
+			Response response = createData(requestUrl, parameters, getAtomHeaders(), serializer.generateCreate());
 			if (isValidResponse(response, HTTPCode.CREATED)) {
 				return updateActivityNodeEntityData(activityNode, response);
 			} else {
@@ -856,7 +847,7 @@ public class ActivityService extends ConnectionsService {
 	protected void updateActivityNodeEntity(String requestUrl, ActivityNode activityNode, Map<String, String> parameters, HTTPCode expectedCode) throws ClientServicesException {
 		try {
 			ActivityNodeSerializer serializer = new ActivityNodeSerializer(activityNode);
-			Response response = putData(requestUrl, parameters, getHeaders(), serializer.generateUpdate(), activityNode.getActivityNodeUuid());
+			Response response = putData(requestUrl, parameters, getAtomHeaders(), serializer.generateUpdate(), activityNode.getActivityNodeUuid());
 			if (isValidResponse(response, expectedCode)) {
 				return;
 			} else {
@@ -911,7 +902,7 @@ public class ActivityService extends ConnectionsService {
 	protected Member createMemberEntity(String requestUrl, Member member, Map<String, String> parameters) throws ClientServicesException {
 		try {
 			MemberSerializer serializer = new MemberSerializer(member);
-			Response response = createData(requestUrl, parameters, getHeaders(), serializer.generateCreate());
+			Response response = createData(requestUrl, parameters, getAtomHeaders(), serializer.generateCreate());
 			if (isValidResponse(response, HTTPCode.CREATED)) {
 				return updateMemberEntityData(member, response);
 			} else {
@@ -929,7 +920,7 @@ public class ActivityService extends ConnectionsService {
 	protected Member updateMemberEntity(String requestUrl, Member member, Map<String, String> parameters) throws ClientServicesException {
 		try {
 			MemberSerializer serializer = new MemberSerializer(member);
-			Response response = putData(requestUrl, parameters, getHeaders(), serializer.generateUpdate(), null);
+			Response response = putData(requestUrl, parameters, getAtomHeaders(), serializer.generateUpdate(), null);
 			if (isValidResponse(response, HTTPCode.OK)) {
 				return updateMemberEntityData(member, response);
 			} else {
@@ -1038,7 +1029,4 @@ public class ActivityService extends ConnectionsService {
 		else return parameters;
 	}
 	
-	protected Map<String,String> getHeaders() {
-		return ATOM_HEADERS;
-	}
 }

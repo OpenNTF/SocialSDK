@@ -20,10 +20,18 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import com.ibm.sbt.services.client.connections.activities.ActivityCrudrTest;
+import com.ibm.sbt.services.client.connections.activities.ActivityDescendantsSinceTest;
 import com.ibm.sbt.services.client.connections.activities.ActivityFeedTest;
+import com.ibm.sbt.services.client.connections.activities.ActivityFieldCrudrTest;
 import com.ibm.sbt.services.client.connections.activities.ActivityMemberArudTest;
 import com.ibm.sbt.services.client.connections.activities.ActivityNodeCrudrTest;
+import com.ibm.sbt.services.client.connections.activities.ActivityPriorityTest;
+import com.ibm.sbt.services.client.connections.activities.ActivityTest;
 import com.ibm.sbt.services.client.connections.activities.ActivityUrlsTest;
+import com.ibm.sbt.services.client.connections.activities.CreateActivitiesTest;
+import com.ibm.sbt.services.client.connections.activities.GetActivityDescendantsTest;
+import com.ibm.sbt.services.client.connections.activities.GetMyActivitiesTest;
+import com.ibm.sbt.services.client.connections.activities.PublicActivityTest;
 
 /**
  * @author mwallace
@@ -32,10 +40,18 @@ import com.ibm.sbt.services.client.connections.activities.ActivityUrlsTest;
 @RunWith(Suite.class)
 @SuiteClasses({ 
 	ActivityUrlsTest.class,
-	ActivityFeedTest.class,
 	ActivityCrudrTest.class,
+	ActivityDescendantsSinceTest.class,
+	ActivityFeedTest.class,
+	ActivityFieldCrudrTest.class,
 	ActivityNodeCrudrTest.class,
-	ActivityMemberArudTest.class
+	ActivityMemberArudTest.class,
+	ActivityPriorityTest.class,
+	ActivityTest.class,
+	CreateActivitiesTest.class,
+	GetMyActivitiesTest.class,
+	PublicActivityTest.class,
+	GetActivityDescendantsTest.class
 })
 public class ActivitiesTestSuite {
 }

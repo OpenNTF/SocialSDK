@@ -46,6 +46,7 @@ public class Blog extends BaseBlogEntity {
 	}
 	
 	public Blog(){}
+	
 	/**
      * Constructor
      * @param BaseService
@@ -66,6 +67,7 @@ public class Blog extends BaseBlogEntity {
 	public void setBlogUuid(String blogUuid) {
         setAsString(BlogXPath.uid, blogUuid);
     }
+	
     /**
 	* Return the value of IBM Connections blog UuiD from blog ATOM
 	* entry document.
@@ -74,8 +76,9 @@ public class Blog extends BaseBlogEntity {
 	* @return blogUuid of the blog
 	*/
 	public String getBlogUuid() {
-		return super.getUid();
+		return getUid();
 	}
+	
 	/**
 	* Returns the Blog handle
 	*
@@ -85,6 +88,7 @@ public class Blog extends BaseBlogEntity {
 	public String getHandle() {
 		return getAsString(BlogXPath.handle);
 	}
+	
 	/**
 	* Sets the Blog hanlde
 	*
@@ -94,6 +98,7 @@ public class Blog extends BaseBlogEntity {
 	public void setHandle(String handle) {
         setAsString(BlogXPath.handle, handle);
     }
+	
 	/**
 	* Returns the Blog timeZone
 	*
@@ -133,6 +138,7 @@ public class Blog extends BaseBlogEntity {
 	public void setTimeZone(String handle) {
         setAsString(BlogXPath.timeZone, handle);
     }
+	
 	/**
 	 * This method creates the blog on the server
 	 * 
@@ -142,6 +148,7 @@ public class Blog extends BaseBlogEntity {
 	public Blog save() throws ClientServicesException {
 		return getService().createBlog(this);
 	}
+	
 	/**
      * This method removes the blog on the server
      *
@@ -150,6 +157,4 @@ public class Blog extends BaseBlogEntity {
     public void remove() throws ClientServicesException {
 		getService().removeBlog(getUid());
 	}
-	
-
 }

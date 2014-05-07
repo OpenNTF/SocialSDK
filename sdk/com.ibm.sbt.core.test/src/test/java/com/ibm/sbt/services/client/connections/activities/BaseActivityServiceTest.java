@@ -17,6 +17,7 @@ package com.ibm.sbt.services.client.connections.activities;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,6 +43,8 @@ public class BaseActivityServiceTest extends BaseUnitTest {
 	protected ActivityService activityService;
 	protected Activity activity;
 	
+	static protected SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+	
 	@Before
 	public void initActivityServiceTest() {
 		if (activityService==null) {
@@ -54,6 +57,7 @@ public class BaseActivityServiceTest extends BaseUnitTest {
 		if (activity != null) {
 			try {
 				activityService.deleteActivity(activity);
+				//System.out.println("Deleted "+activity.getActivityUuid());
 			} catch (Exception e) {
 			}
 		}
@@ -169,6 +173,40 @@ public class BaseActivityServiceTest extends BaseUnitTest {
 		activityNode.setTitle(title);
 		activityNode.setTags(tags);
 		return activityService.createActivityNode(activityNode);
+    }
+    
+    protected List<ActivityNode> createActivityDescendants(String activityUuid, int count, long interval) throws ClientServicesException {
+    	List<ActivityNode> activityNodes = new ArrayList<ActivityNode>();
+    	
+    	for (int i=0; i<count; i++) {
+    		long now = System.currentTimeMillis();
+    		String title = "Descendant-" + now;
+    		activityNodes.add(createActivityNode(activityUuid, title));
+    		
+    		try {
+				Thread.sleep(interval);
+			} catch (InterruptedException e) {
+			}
+    	}
+    	
+    	return activityNodes;
+    }
+        	
+    protected List<Activity> createActivities(String titlePrefix, int count, long interval) throws ClientServicesException {
+    	List<Activity> activities = new ArrayList<Activity>();
+    	
+    	for (int i=0; i<count; i++) {
+    		long now = System.currentTimeMillis();
+    		String title = titlePrefix + now;
+    		activities.add(createActivity(title));
+    		
+    		try {
+				Thread.sleep(interval);
+			} catch (InterruptedException e) {
+			}
+    	}
+    	
+    	return activities;
     }
         	
 }

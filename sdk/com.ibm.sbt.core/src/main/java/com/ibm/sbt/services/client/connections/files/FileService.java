@@ -55,18 +55,21 @@ import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.NamedUrlPart;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
+import com.ibm.sbt.services.client.connections.files.FileConstants.FlagType;
 import com.ibm.sbt.services.client.connections.files.model.FileCommentParameterBuilder;
 import com.ibm.sbt.services.client.connections.files.model.FileCommentsFeedParameterBuilder;
 import com.ibm.sbt.services.client.connections.files.model.FileEntryXPath;
 import com.ibm.sbt.services.client.connections.files.model.FileRequestParams;
 import com.ibm.sbt.services.client.connections.files.model.FileRequestPayload;
 import com.ibm.sbt.services.client.connections.files.model.Headers;
+import com.ibm.sbt.services.client.connections.files.serializer.FlagSerializer;
 import com.ibm.sbt.services.client.connections.files.transformers.CommentTransformer;
 import com.ibm.sbt.services.client.connections.files.transformers.FileTransformer;
 import com.ibm.sbt.services.client.connections.files.transformers.FolderTransformer;
 import com.ibm.sbt.services.client.connections.files.transformers.ModerationTransformer;
 import com.ibm.sbt.services.client.connections.files.transformers.MultipleFileTransformer;
 import com.ibm.sbt.services.client.connections.files.util.Messages;
+import com.ibm.sbt.services.client.connections.profiles.ProfileUrls;
 import com.ibm.sbt.services.endpoints.Endpoint;
 
 /**
@@ -112,7 +115,487 @@ public class FileService extends ConnectionsService {
     public FileService(String endpoint) {
         super(endpoint);
     }
+    
+    /**
+     * Return mapping key for this service
+     */
+    @Override
+    public String getServiceMappingKey() {
+        return "files";
+    }
+    
+    /*****************************************************************
+     * Getting Files feeds
+     ****************************************************************/
+    
+    /**
+     * Get a feed that lists all public files. 
+     * 
+     * @return EntityList&lt;File&gt;
+     * @throws ClientServicesException 
+     */
+    public EntityList<File> getPublicFiles() throws ClientServicesException {
+        return this.getPublicFiles(null);
+    }
 
+    /**
+     * Get a feed that lists all public files. 
+     * 
+     * @param parameters 
+     *                list of query string parameters to pass to API
+     * @return EntityList&lt;File&gt;
+     * @throws ClientServicesException 
+     */
+    public EntityList<File> getPublicFiles(Map<String, String> parameters) throws ClientServicesException {
+        String accessType = AccessType.PUBLIC.getText();
+        String requestUri = FileUrls.GET_PUBLIC_FILES.format(this, FileUrlParts.accessType.get(accessType));
+        return this.getFileEntityList(requestUri, parameters);
+    }
+    
+    /**
+     * Get a feed that lists the files that you have pinned. 
+     * 
+     * @return EntityList&lt;File&gt;
+     * @throws ClientServicesException 
+     */
+    public EntityList<File> getPinnedFiles() throws ClientServicesException {
+        return this.getPinnedFiles(null);
+    }
+
+    /**
+     * Get a feed that lists the files that you have pinned. 
+     * 
+     * @param parameters 
+     *                list of query string parameters to pass to API
+     * @return EntityList&lt;File&gt;
+     * @throws ClientServicesException 
+     */
+    public EntityList<File> getPinnedFiles(Map<String, String> parameters) throws ClientServicesException {
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.MYFAVORITES_DOCUMENTS_FEED.format(this,
+                FileUrlParts.accessType.get(accessType));
+        return this.getFileEntityList(requestUri, parameters);
+    }
+    
+    //////////////////////////////////////////////////////////////////////////////////////////////////
+    //TODO: Get My Folder requires to fetch the link from the service document
+    //////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    /**
+     * Get a feed that lists file folders that you have pinned. 
+     * 
+     * @return EntityList&lt;File&gt;
+     * @throws ClientServicesException 
+     */
+    public EntityList<File> getPinnedFolders() throws ClientServicesException {
+        return this.getPinnedFolders(null);
+    }
+    
+    /**
+     * Get a feed that lists file folders that you have pinned. 
+     * 
+     * @param parameters 
+     *                list of query string parameters to pass to API
+     * @return EntityList&lt;File&gt;
+     * @throws ClientServicesException 
+     */
+    public EntityList<File> getPinnedFolders(Map<String, String> parameters) throws ClientServicesException {
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.MYFAVORITES_COLLECTIONS_FEED.format(this,
+                FileUrlParts.accessType.get(accessType));
+        return this.getFileEntityList(requestUri, parameters);
+    }
+    
+    /**
+     * Get a feed that lists the folders that you added files to recently. 
+     * 
+     * @return EntityList&lt;File&gt;
+     * @throws ClientServicesException 
+     */
+    public EntityList<File> getFoldersWithRecentlyAddedFiles() throws ClientServicesException {
+        return this.getFoldersWithRecentlyAddedFiles(null);
+    }
+
+    /**
+     * Get a feed that lists the folders that you added files to recently. 
+     * 
+     * @param parameters 
+     *                list of query string parameters to pass to API
+     * @return EntityList&lt;File&gt;
+     * @throws ClientServicesException 
+     */
+    public EntityList<File> getFoldersWithRecentlyAddedFiles(Map<String, String> parameters)
+            throws ClientServicesException {
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.GET_FOLDERS_WITH_RECENT_FILES.format(this,
+                FileUrlParts.accessType.get(accessType));
+        return this.getFileEntityList(requestUri, parameters);
+    }
+    
+    /**
+     * Get a feed that lists the files associated with a file folder. 
+     * 
+     * @param folderId - uuid of the folder/collection.
+     * @return EntityList&lt;File&gt;
+     * @throws ClientServicesException 
+     */
+    public EntityList<File> getFilesInFolder(String folderId) throws ClientServicesException {
+        return this.getFilesInFolder(folderId, null);
+    }
+
+    /**
+     * Get a feed that lists the files associated with a file folder. 
+     * 
+     * @param folderId - uuid of the folder/collection.
+     * @param parameters 
+     *                list of query string parameters to pass to API
+     * @return EntityList&lt;File&gt;
+     * @throws ClientServicesException 
+     */
+    public EntityList<File> getFilesInFolder(String folderId, Map<String, String> parameters)
+            throws ClientServicesException {
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.COLLECTION_FEED.format(this, FileUrlParts.accessType.get(accessType),
+                FileUrlParts.folderId.get(folderId));
+        return this.getFileEntityList(requestUri, parameters);
+    }
+    
+    public EntityList<File> getPublicFolders() throws ClientServicesException {
+        return this.getPublicFolders(null);
+    }
+
+    /**
+     * Get a feed that lists public file folders. 
+     * 
+     * 
+     * @param parameters 
+     *                list of query string parameters to pass to API
+     * @return EntityList&lt;File&gt;
+     * @throws ClientServicesException 
+     */
+    public EntityList<File> getPublicFolders(Map<String, String> params) throws ClientServicesException {
+        String accessType = AccessType.PUBLIC.getText();
+        String requestUri = FileUrls.COLLECTIONS_FEED.format(this, FileUrlParts.accessType.get(accessType));
+        return this.getFileEntityList(requestUri, params);
+    }
+    
+    /**
+     * Get a feed that lists the files in a person's library.<br/> 
+     *
+     * @param userId
+     * @return EntityList&lt;File&gt;
+     * @throws ClientServicesException 
+     */
+    public EntityList<File> getPublicUserFiles(String userId) throws ClientServicesException {
+        return this.getPublicUserFiles(userId, null);
+    }
+
+    /**
+     * Get a feed that lists the files in a person's library.<br/> 
+     *
+     * @param userId
+     * @param parameters 
+     *                list of query string parameters to pass to API
+     * @return EntityList&lt;File&gt;
+     * @throws ClientServicesException 
+     */
+    public EntityList<File> getPublicUserFiles(String userId, Map<String, String> parameters)
+            throws ClientServicesException {
+        String accessType = AccessType.PUBLIC.getText();
+        String requestUri = FileUrls.GET_ALL_USER_FILES.format(this, FileUrlParts.accessType.get(accessType),
+                FileUrlParts.userId.get(userId));
+        return this.getFileEntityList(requestUri, parameters);
+    }
+    
+    /**
+     * Get a feed that lists the files in a person's library you have access to.<br/> 
+     * This feed includes any files in the library that have been shared with you and all user public files.
+     *  
+     * @param userId
+     * @return EntityList&lt;File&gt;
+     * @throws ClientServicesException 
+     */
+    public EntityList<File> getSharedUserFiles(String userId) throws ClientServicesException {
+        return this.getSharedUserFiles(userId, null);
+    }
+
+    /**
+     * Get a feed that lists the files in a person's library you have access to.<br/> 
+     * This feed includes any files in the library that have been shared with you and all user public files.
+     *
+     * @param userId
+     * @param parameters 
+     *                list of query string parameters to pass to API
+     * @return EntityList&lt;File&gt;
+     * @throws ClientServicesException 
+     */
+    public EntityList<File> getSharedUserFiles(String userId, Map<String, String> parameters)
+            throws ClientServicesException {
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.GET_ALL_USER_FILES.format(this, FileUrlParts.accessType.get(accessType),
+                FileUrlParts.userId.get(userId));
+        return this.getFileEntityList(requestUri, parameters);
+    }
+    
+    /**
+     * Get a feed that lists the files in your library. 
+     * 
+     * @return EntityList&lt;File&gt;
+     * @throws ClientServicesException 
+     */
+    public EntityList<File> getMyFiles() throws ClientServicesException {
+        return this.getMyFiles(null);
+    }
+
+    /**
+     * Get a feed that lists the files in your library. 
+     * 
+     * @param parameters 
+     *                list of query string parameters to pass to API
+     * @return EntityList&lt;File&gt;
+     * @throws ClientServicesException 
+     */
+    public EntityList<File> getMyFiles(Map<String, String> parameters) throws ClientServicesException {
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.MYUSERLIBRARY_FEED.format(this, FileUrlParts.accessType.get(accessType));
+        return this.getFileEntityList(requestUri, parameters);
+    }
+    
+    
+    
+    /**
+     * Get a feed that lists the share entries. A share entry describes an instance in which access that has been given to a file.
+     * This returns a feed of shares to which the authenticated user has access. 
+     * 
+     * @param parameters 
+     *                list of query string parameters to pass to API
+     * @return EntityList&lt;File&gt;
+     * @throws ClientServicesException 
+     */
+    public EntityList<File> getFilesSharedWithMe() throws ClientServicesException {
+        return this.getFilesSharedWithMe(null);
+    }
+
+    /**
+     * Get a feed that lists the share entries. A share entry describes an instance in which access that has been given to a file.
+     * This returns a feed of shares to which the authenticated user has access. 
+     * 
+     * @param parameters 
+     *                list of query string parameters to pass to API
+     * @return EntityList&lt;File&gt;
+     * @throws ClientServicesException 
+     */
+    public EntityList<File> getFilesSharedWithMe(Map<String, String> parameters) throws ClientServicesException {
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.DOCUMENTS_SHARED_FEED.format(this,
+                FileUrlParts.accessType.get(accessType));
+        Map<String, String> params = new HashMap<String, String>();
+        params.put(FileRequestParams.DIRECTION.getFileRequestParams(), FileConstants.DIRECTION_INBOUND);
+        if (parameters!=null) params.putAll(parameters);
+        return this.getFileEntityList(requestUri, params);
+    }
+    
+    
+    /**
+     * Get a feed that lists the share entries. A share entry describes an instance in which access that has been given to a file.
+     * This returns a feed of shares to which the authenticated user has access. 
+     * 
+     * @param parameters 
+     *                list of query string parameters to pass to API
+     * @return EntityList&lt;File&gt;
+     * @throws ClientServicesException 
+     */
+    public EntityList<File> getFilesSharedByMe() throws ClientServicesException {
+        return this.getFilesSharedByMe(null);
+    }
+
+    /**
+     * Get a feed that lists the share entries. A share entry describes an instance in which access that has been given to a file.
+     * This returns a feed of shares to which the authenticated user has access. 
+     * 
+     * @param parameters 
+     *                list of query string parameters to pass to API
+     * @return EntityList&lt;File&gt;
+     * @throws ClientServicesException 
+     */
+    public EntityList<File> getFilesSharedByMe(Map<String, String> params) throws ClientServicesException {
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.DOCUMENTS_SHARED_FEED.format(this,
+                FileUrlParts.accessType.get(accessType));
+        params = this.getParameters(params);
+        params.put(FileRequestParams.DIRECTION.getFileRequestParams(), FileConstants.DIRECTION_INBOUND);
+        return this.getFileEntityList(requestUri, params);
+    }
+    
+    
+    
+    
+    /**
+     * Get a feed that lists all of the comments associated with a file. 
+     * 
+     * @return EntityList&lt;Comment&gt;
+     * @throws ClientServicesException 
+     */
+    public EntityList<Comment> getPublicUserFileComments(String fileId, String userId) throws ClientServicesException {
+        return getPublicUserFileComments(fileId, userId, null);
+    }
+    
+    /**
+     * Get a feed that lists all of the comments associated with a file. 
+     * 
+     * @param parameters 
+     *                list of query string parameters to pass to API
+     * @return EntityList&lt;Comment&gt;
+     * @throws ClientServicesException 
+     */
+    public EntityList<Comment> getPublicUserFileComments(String fileId, String userId, Map<String, String> parameters) throws ClientServicesException {
+        String accessType = AccessType.PUBLIC.getText();
+        String requestUri = FileUrls.USERLIBRARY_DOCUMENT_FEED.format(this,
+                FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId),
+                FileUrlParts.fileId.get(fileId));
+        return this.getCommentEntityList(requestUri, parameters, null);
+    }
+    
+    /**
+     * Get a feed that lists all of the comments associated with a file. 
+     * 
+     * @return EntityList&lt;Comment&gt;
+     * @throws ClientServicesException 
+     */
+    public EntityList<Comment> getAllUserFileComments(String fileId, String userId) throws ClientServicesException {
+        return getAllUserFileComments(fileId, userId, null);
+    }
+    
+    /**
+     * Get a feed that lists all of the comments associated with a file. 
+     * 
+     * @param parameters 
+     *                list of query string parameters to pass to API
+     * @return EntityList&lt;Comment&gt;
+     * @throws ClientServicesException 
+     */
+    public EntityList<Comment> getAllUserFileComments(String fileId, String userId, Map<String, String> parameters) throws ClientServicesException {
+        String accessType = AccessType.PUBLIC.getText();
+        String requestUri = FileUrls.USERLIBRARY_DOCUMENT_FEED.format(this,
+                FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId),
+                FileUrlParts.fileId.get(fileId));
+        return this.getCommentEntityList(requestUri, parameters, null);
+    }
+    
+    /**
+     * Get a feed that lists all of the comments associated with one of your files. 
+     * 
+     * @return EntityList&lt;Comment&gt;
+     * @throws ClientServicesException 
+     */
+    public EntityList<Comment> getMyFileComments(String fileId) throws ClientServicesException{
+        return getMyFileComments(fileId, null);
+    }
+    
+    /**
+     * Get a feed that lists all of the comments associated with one of your files. 
+     * 
+     * @param parameters 
+     *                list of query string parameters to pass to API
+     * @return EntityList&lt;Comment&gt;
+     * @throws ClientServicesException 
+     */
+    public EntityList<Comment> getMyFileComments(String fileId, Map<String, String> parameters)
+            throws ClientServicesException {
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.MYUSERLIBRARY_DOCUMENT_FEED.format(this,
+                FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
+        return this.getCommentEntityList(requestUri, parameters, null);
+    }
+
+    /**
+     * Get a feed that lists all of the files in your recycle bin. 
+     * 
+     * @param fileId
+     * @return
+     * @throws ClientServicesException
+     */
+    public File getFileFromRecycleBin(String fileId) throws ClientServicesException {
+        return this.getFileFromRecycleBin(fileId, null, null);
+    }
+    
+    
+    /**
+     * Using the Atom Publishing Protocol, also known as AtomPub, you can flag content as inappropriate so that the site administrator can take care of it.
+     * 
+     * @param objectId id of the file/comment which needs to be flagged as inappropriate.
+     * @param flagReason why the file/comment is being flagged as inappropriate.
+     * @param flagWhat whether it is a file or a comment, from the FlagType enum.
+     * @throws ClientServicesException
+     */
+    public void flagAsInappropriate(String objectId, String flagReason, FlagType flagWhat)
+            throws ClientServicesException {
+        if (StringUtil.isEmpty(objectId)) {
+            throw new ClientServicesException(null, Messages.Invalid_FileId);
+        }
+        if (flagWhat == null) {
+            throw new ClientServicesException(null, Messages.Invalid_FileId);
+        }
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.COLLECTION_ENTRY.format(this, FileUrlParts.accessType.get(accessType));
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put(Headers.ContentType, Headers.ATOM);
+        
+        Object payload = new FlagSerializer(objectId, flagReason, flagWhat).flagPayload();
+        this.updateData(requestUri, null, headers, payload, objectId);
+    }
+    
+    /*****************************************************************
+     * Working with files
+     ****************************************************************/
+    
+    /*****************************************************************
+     * Working with folders
+     ****************************************************************/
+    
+    /*****************************************************************
+     * Working with shares
+     ****************************************************************/
+    
+    /*****************************************************************
+     * Working with comments
+     ****************************************************************/
+    
+    /*****************************************************************
+     * Working with files in the trash
+     ****************************************************************/
+    
+    /*****************************************************************
+     * Working with versions
+     ****************************************************************/
+    
+    /*****************************************************************
+     * Working with file attachments programmatically
+     ****************************************************************/
+    
+    /*****************************************************************
+     * Working with pinned files
+     ****************************************************************/
+    
+    
+    /*****************************************************************
+     * Working with pinned folders
+     ****************************************************************/
+    
+    /*****************************************************************
+     * Moderating community files and comments programmatically
+     ****************************************************************/
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     public void actOnCommentAwaitingApproval(String commentId, String action, String actionReason)
             throws ClientServicesException, TransformerException {
         // get thr uri from here ::
@@ -137,10 +620,6 @@ public class FileService extends ConnectionsService {
         headers.put(Headers.ContentType, Headers.ATOM);
         this.updateData(requestUri, null, headers, payload, commentId);
     }
-
-    /***************************************************************
-     * FeedHandlers for each entity type
-     ****************************************************************/
 
     public void actOnFileAwaitingApproval(String fileId, String action, String actionReason)
             throws ClientServicesException, TransformerException {
@@ -941,35 +1420,7 @@ public class FileService extends ConnectionsService {
         return noOfBytes;
     }
 
-    /**
-     * flagAsInappropriate
-     * <p>
-     * To flag a file/comment as inappropriate. <br>
-     * Rest API Used : /files/basic/api/reports
-     * 
-     * @param id - id of the file/comment which needs to be flagged as inappropriate.
-     * @param flagReason - reason , why the file/comment is being flagged as inappropriate.
-     * @param flagWhat - If flagging file as inappropriate, flagWhat should be the string "file". If flagging
-     *        a comment, then flagWhat should be the String "comment".
-     * @throws ClientServicesException
-     * @throws TransformerException
-     */
-    public void flagAsInappropriate(String id, String flagReason, String flagWhat)
-            throws ClientServicesException, TransformerException {
-        if (StringUtil.isEmpty(id)) {
-            throw new ClientServicesException(null, Messages.Invalid_FileId);
-        }
-        if (StringUtil.isEmpty(flagWhat)) {
-            throw new ClientServicesException(null, Messages.Invalid_FileId);
-        }
-        String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.COLLECTION_ENTRY.format(this, FileUrlParts.accessType.get(accessType));
-        Map<String, String> headers = new HashMap<String, String>();
-        headers.put(Headers.ContentType, Headers.ATOM);
 
-        Object payload = this.constructPayloadForFlagging(id, flagReason, flagWhat);
-        this.updateData(requestUri, null, headers, payload, id);
-    }
 
     /**
      * Method to get All comments of a Community File
@@ -1008,66 +1459,9 @@ public class FileService extends ConnectionsService {
         return this.getCommentEntityList(requestUri, parameters, null);
     }
 
-    /**
-     * retrieve all comments from a file of the authenticated user
-     * 
-     * @param fileId
-     * @param parameters a map of paramters; can be generated using the {@link FileCommentsFeedParameterBuilder}
-     * @return
-     * @throws ClientServicesException
-     */
-    public EntityList<Comment> getAllFileComments(String fileId, Map<String, String> parameters)
-            throws ClientServicesException {
-        String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.MYUSERLIBRARY_DOCUMENT_FEED.format(this,
-                FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
-        return this.getCommentEntityList(requestUri, parameters, null);
-    }
 
-    /**
-     * retrieve all comments from a file of any user
-     * 
-     * @param fileId
-     * @param userId
-     * @param anonymousAccess try anonymous access - will only work if the file visibility is public
-     * @param parameters a map of paramters; can be generated using the {@link FileCommentsFeedParameterBuilder}
-     * @return
-     * @throws ClientServicesException
-     */
-    public EntityList<Comment> getAllUserFileComments(String fileId, String userId, boolean anonymousAccess,
-            Map<String, String> parameters) throws ClientServicesException {
-        String accessType = anonymousAccess ? AccessType.PUBLIC.getText() : AccessType.AUTHENTICATED
-                .getText();
-        String requestUri = FileUrls.USERLIBRARY_DOCUMENT_FEED.format(this,
-                FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId),
-                FileUrlParts.fileId.get(fileId));
 
-        return this.getCommentEntityList(requestUri, parameters, null);
-    }
 
-    public EntityList<File> getAllUserFiles(String userId) throws ClientServicesException {
-        return this.getAllUserFiles(userId, null);
-    }
-
-    /**
-     * getAllUserFiles
-     * <p>
-     * Rest API used : /files/basic/anonymous/api/userlibrary/{userid}/feed <br>
-     * Public method. No Auth required.
-     * 
-     * @param userId
-     * @param params - Map of Parameters. See {@link FileRequestParams} for possible values.
-     * @return FileList
-     * @throws ClientServicesException
-     */
-
-    public EntityList<File> getAllUserFiles(String userId, Map<String, String> params)
-            throws ClientServicesException {
-        String accessType = AccessType.PUBLIC.getText();
-        String requestUri = FileUrls.GET_ALL_USER_FILES.format(this, FileUrlParts.accessType.get(accessType),
-                FileUrlParts.userId.get(userId));
-        return this.getFileEntityList(requestUri, params);
-    }
 
     @Override
     public NamedUrlPart getAuthType() {
@@ -1301,17 +1695,7 @@ public class FileService extends ConnectionsService {
         };
     }
 
-    /**
-     * getFileFromRecycleBin
-     * <p>
-     * 
-     * @param fileId
-     * @return
-     * @throws ClientServicesException
-     */
-    public File getFileFromRecycleBin(String fileId) throws ClientServicesException {
-        return this.getFileFromRecycleBin(fileId, null, null);
-    }
+
 
     /**
      * getFileFromRecycleBin
@@ -1326,19 +1710,8 @@ public class FileService extends ConnectionsService {
         return this.getFileFromRecycleBin(fileId, userId, null);
     }
 
-    /**
-     * getFileFromRecycleBin
-     * <p>
-     * Retrieve a file from the recycle bin. This method returns the Atom document of the file. <br>
-     * Rest API Used : /files/basic/api/userlibrary/{userid}/view/recyclebin/{document-id}/entry
-     * 
-     * @param fileId Id of the file in recycle bin.
-     * @param userId
-     * @param params
-     * @return File
-     * @throws ClientServicesException
-     */
-    public File getFileFromRecycleBin(String fileId, String userId, Map<String, String> params)
+
+    private File getFileFromRecycleBin(String fileId, String userId, Map<String, String> params)
             throws ClientServicesException {
         String accessType = AccessType.AUTHENTICATED.getText();
         String requestUri;
@@ -1399,27 +1772,7 @@ public class FileService extends ConnectionsService {
         return this.getFileEntityList(requestUri, params);
     }
 
-    public EntityList<File> getFilesInFolder(String folderId) throws ClientServicesException {
-        return this.getFilesInFolder(folderId, null);
-    }
 
-    /**
-     * getFilesInFolder
-     * <p>
-     * Rest API used : /files/basic/api/collection/{collection-id}/feed
-     * 
-     * @param folderId - uuid of the folder/collection.
-     * @param params - Map of Parameters. See {@link FileRequestParams} for possible values.
-     * @return FileList
-     * @throws ClientServicesException
-     */
-    public EntityList<File> getFilesInFolder(String folderId, Map<String, String> params)
-            throws ClientServicesException {
-        String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.COLLECTION_FEED.format(this, FileUrlParts.accessType.get(accessType),
-                FileUrlParts.folderId.get(folderId));
-        return this.getFileEntityList(requestUri, params);
-    }
 
     /**
      * getFilesInMyRecycleBin
@@ -1463,39 +1816,7 @@ public class FileService extends ConnectionsService {
         result = this.getClientService().get(requestUri, null, ClientService.FORMAT_XML);
         return (Document) result;
     }
-
-    /**
-     * getFilesSharedByMe
-     * <p>
-     * This method calls getFilesSharedByMe(Map<String, String> params) with null params
-     * 
-     * @return FileList
-     * @throws ClientServicesException
-     */
-    public EntityList<File> getFilesSharedByMe() throws ClientServicesException {
-        return this.getFilesSharedByMe(null);
-    }
-
-    /**
-     * getFilesSharedByMe
-     * <p>
-     * Rest API used : /files/basic/api/documents/shared/feed <br>
-     * This method is used to get Files Shared By the person.
-     * 
-     * @param params - Map of Parameters. See {@link FileRequestParams} for possible values.
-     * @return FileList
-     * @throws ClientServicesException
-     */
-
-    public EntityList<File> getFilesSharedByMe(Map<String, String> params) throws ClientServicesException {
-        String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.DOCUMENTS_SHARED_FEED.format(this,
-                FileUrlParts.accessType.get(accessType));
-        params = this.getParameters(params);
-        params.put(FileRequestParams.DIRECTION.getFileRequestParams(), FileConstants.DIRECTION_OUTBOUND);
-        return this.getFileEntityList(requestUri, params);
-    }
-
+    
     /**
      * getFilesSharedWithMe
      * <p>
@@ -1505,31 +1826,7 @@ public class FileService extends ConnectionsService {
      * @throws ClientServicesException
      */
 
-    public EntityList<File> getFilesSharedWithMe() throws ClientServicesException {
-        return this.getFilesSharedWithMe(null);
-    }
 
-    /**
-     * getFilesSharedWithMe
-     * <p>
-     * Rest API used : /files/basic/api/documents/shared/feed <br>
-     * This method is used to get Files Shared With the person.
-     * 
-     * @param params - Map of Parameters. See {@link FileRequestParams} for possible values.
-     * @return FileList
-     * @throws ClientServicesException
-     */
-
-    public EntityList<File> getFilesSharedWithMe(Map<String, String> params) throws ClientServicesException {
-        if (null == params) {
-            params = new HashMap<String, String>();
-        }
-        String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.DOCUMENTS_SHARED_FEED.format(this,
-                FileUrlParts.accessType.get(accessType));
-        params.put(FileRequestParams.DIRECTION.getFileRequestParams(), FileConstants.DIRECTION_INBOUND);
-        return this.getFileEntityList(requestUri, params);
-    }
 
     /**
      * getFileWithGivenVersion
@@ -1653,75 +1950,11 @@ public class FileService extends ConnectionsService {
         return this.getFileEntity(requestUri, null);
     }
 
-    public EntityList<File> getFoldersWithRecentlyAddedFiles() throws ClientServicesException {
-        return this.getFoldersWithRecentlyAddedFiles(null);
-    }
 
-    /**
-     * getFoldersWithRecentlyAddedFiles
-     * <p>
-     * Rest API used : /files/basic/api/collections/addedto/feed
-     * 
-     * @param params - Map of Parameters. See {@link FileRequestParams} for possible values.
-     * @return FileList
-     * @throws ClientServicesException
-     */
-    public EntityList<File> getFoldersWithRecentlyAddedFiles(Map<String, String> params)
-            throws ClientServicesException {
-        String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.GET_FOLDERS_WITH_RECENT_FILES.format(this,
-                FileUrlParts.accessType.get(accessType));
-        return this.getFileEntityList(requestUri, params);
-    }
 
-    /**
-     * getMyFiles
-     * <p>
-     * calls getMyFiles(Map<String, String> params) internally with null parameters, if user has not specific any params
-     * 
-     * @return FileList
-     * @throws ClientServicesException
-     */
 
-    public EntityList<File> getMyFiles() throws ClientServicesException {
-        return this.getMyFiles(null);
-    }
 
-    /**
-     * getMyFiles
-     * <p>
-     * Rest API used : /files/basic/api/myuserlibrary/feed <br>
-     * This method is used to get Files of the person.
-     * 
-     * @param params - Map of Parameters. See {@link FileRequestParams} for possible values.
-     * @return FileList
-     * @throws ClientServicesException
-     */
 
-    public EntityList<File> getMyFiles(Map<String, String> params) throws ClientServicesException {
-        String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.MYUSERLIBRARY_FEED.format(this, FileUrlParts.accessType.get(accessType));
-        return this.getFileEntityList(requestUri, params);
-    }
-
-    public EntityList<File> getMyFolders() throws ClientServicesException {
-        return this.getMyFolders(null);
-    }
-
-    /**
-     * getMyFolders
-     * <p>
-     * Rest API used : /files/basic/api/collections/feed Required Parameters : creator={snx:userid}
-     * 
-     * @param params - Map of Parameters. See {@link FileRequestParams} for possible values.
-     * @return FileList
-     * @throws ClientServicesException
-     */
-    public EntityList<File> getMyFolders(Map<String, String> params) throws ClientServicesException {
-        String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.COLLECTIONS_FEED.format(this, FileUrlParts.accessType.get(accessType));
-        return this.getFileEntityList(requestUri, params);
-    }
 
     /**
      * getNonce
@@ -1743,46 +1976,7 @@ public class FileService extends ConnectionsService {
         return (String) ((Response) result).getData();
     }
 
-    public EntityList<File> getPinnedFiles() throws ClientServicesException {
-        return this.getPinnedFiles(null);
-    }
 
-    /**
-     * getPinnedFiles
-     * <p>
-     * Rest API used : /files/basic/api/myfavorites/documents/feed
-     * 
-     * @param params - Map of Parameters. See {@link FileRequestParams} for possible values.
-     * @return FileList
-     * @throws ClientServicesException
-     */
-    public EntityList<File> getPinnedFiles(Map<String, String> params) throws ClientServicesException {
-        String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.MYFAVORITES_DOCUMENTS_FEED.format(this,
-                FileUrlParts.accessType.get(accessType));
-        return this.getFileEntityList(requestUri, params);
-    }
-
-    public EntityList<File> getPinnedFolders() throws ClientServicesException {
-        return this.getPinnedFolders(null);
-    }
-
-    /**
-     * getMyPinnedFolders
-     * <p>
-     * Rest API used : /files/basic/api/myfavorites/collections/feed
-     * 
-     * @param params - Map of Parameters. See {@link FileRequestParams} for possible values.
-     * @return FileList
-     * @throws ClientServicesException
-     */
-    public EntityList<File> getPinnedFolders(Map<String, String> params) throws ClientServicesException {
-        String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.MYFAVORITES_COLLECTIONS_FEED.format(this,
-                FileUrlParts.accessType.get(accessType));
-        return this.getFileEntityList(requestUri, params);
-
-    }
 
     /**
      * getPublicFile
@@ -1804,56 +1998,13 @@ public class FileService extends ConnectionsService {
         return this.getFileEntity(requestUri, parameters);
     }
 
-    public EntityList<File> getPublicFiles() throws ClientServicesException {
-        return this.getPublicFiles(null);
-    }
 
-    /**
-     * getPublicFiles
-     * <p>
-     * Rest API used : /files/basic/anonymous/api/documents/feed <br>
-     * This method returns a list of Public Files.
-     * 
-     * @param params - Map of Parameters. See {@link FileRequestParams} for possible values.
-     * @return FileList
-     * @throws ClientServicesException
-     */
-    public EntityList<File> getPublicFiles(Map<String, String> params) throws ClientServicesException {
-        String accessType = AccessType.PUBLIC.getText();
-        String requestUri = FileUrls.GET_PUBLIC_FILES.format(this, FileUrlParts.accessType.get(accessType));
-        params = (null == params) ? new HashMap<String, String>() : params;
-        params.put(FileRequestParams.VISIBILITY.getFileRequestParams(), FileConstants.VISIBILITY_PUBLIC);
-        return this.getFileEntityList(requestUri, params);
-    }
 
-    public EntityList<File> getPublicFolders() throws ClientServicesException {
-        return this.getPublicFolders(null);
-    }
 
-    /**
-     * getPublicFileFolders
-     * <p>
-     * Rest API used : /files/basic/anonymous/api/collections/feed <br>
-     * Public method. No Auth required.
-     * 
-     * @param params - Map of Parameters. See {@link FileRequestParams} for possible values.
-     * @return FileList
-     * @throws ClientServicesException
-     */
 
-    public EntityList<File> getPublicFolders(Map<String, String> params) throws ClientServicesException {
-        String accessType = AccessType.PUBLIC.getText();
-        String requestUri = FileUrls.COLLECTIONS_FEED.format(this, FileUrlParts.accessType.get(accessType));
-        return this.getFileEntityList(requestUri, params);
-    }
 
-    /**
-     * Return mapping key for this service
-     */
-    @Override
-    public String getServiceMappingKey() {
-        return "files";
-    }
+
+
 
     /**
      * 

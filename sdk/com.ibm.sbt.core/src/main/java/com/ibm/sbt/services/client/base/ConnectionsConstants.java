@@ -110,6 +110,14 @@ public final class ConnectionsConstants {
 	public static final String COMMUNITYUUID = "communityUuid";
 	public static final String PERMISSIONS = "permissions";
 	public static final String PAGE = "page";
+	
+	/**
+	 * Blog ATOM
+	 */
+	public static final String BLOG_HANDLE = "snx:handle";
+	public static final String TIMEZONE = "snx:timezone";
+	public static final String BLOG_REPLY_TO = "thr:in-reply-to";
+	public static final String FLAG = "category";
 
 	public static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 
@@ -128,6 +136,7 @@ public final class ConnectionsConstants {
 		CONTAINER("container","http://www.ibm.com/xmlns/prod/sn/container"),
 		PRIORITY("priority","http://www.ibm.com/xmlns/prod/sn/priority"),
 		FLAGS("flags","http://www.ibm.com/xmlns/prod/sn/flags"),
+		CATEGORY("scheme", "http://www.ibm.com/xmlns/prod/sn/issue"),
 		CONNECTION("connection", "http://www.ibm.com/xmlns/prod/sn/connection/type"),
 		STATUS("status", "http://www.ibm.com/xmlns/prod/sn/status"),
 		THR("thr", "http://purl.org/syndication/thread/1.0"),
@@ -146,6 +155,7 @@ public final class ConnectionsConstants {
 		OPENSOCIAL("opensocial", "http://ns.opensocial.org/2008/opensocial"), 
 		TAG("tag", "tag:ibm.com,2006:td/type"),
 		TAGENTRY("tag","tag:profiles.ibm.com,2006:entry"),
+		BLOG_REF("ref","urn:lsid:ibm.com:blogs:entry-"),
 		XMLNS("xmlns", "http://www.w3.org/2000/xmlns/");
 		
 		private final String prefix;

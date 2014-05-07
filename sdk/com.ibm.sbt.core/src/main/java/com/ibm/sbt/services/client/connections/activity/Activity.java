@@ -40,6 +40,7 @@ import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.activity.feedHandler.MemberFeedHandler;
 import com.ibm.sbt.services.client.connections.activity.model.ActivityXPath;
 import com.ibm.sbt.services.client.connections.activity.transformers.ActivityTransformer;
+import com.ibm.sbt.services.client.connections.common.Tag;
 
 
 /**

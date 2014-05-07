@@ -26,7 +26,7 @@ import com.ibm.sbt.services.client.base.AtomEntity;
 import com.ibm.sbt.services.client.base.AtomXPath;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
-import com.ibm.sbt.services.client.connections.forums.model.Author;
+import com.ibm.sbt.services.client.connections.common.Person;
 
 /**
  * Recommendation Entry Class - represents forum Recommendation Atom entry.
@@ -43,26 +43,26 @@ public class Recommendation extends AtomEntity{
 	public Recommendation(){}
 
 	@Override
-	public Author getAuthor(){
-		return new Author(getService(), new XmlDataHandler((Node)this.getDataHandler().getData(), 
+	public Person getAuthor(){
+		return new Person(getService(), new XmlDataHandler((Node)this.getDataHandler().getData(), 
     		nameSpaceCtx, (XPathExpression)AtomXPath.author.getPath()));
 	}
 	
 
 
 	public String getName() {
-		return this.getAuthor().getName();
+		return getAuthor().getName();
 	}
 
 	public String getEmail() {
-		return this.getAuthor().getEmail();
+		return getAuthor().getEmail();
 	}
 
 	public String getUserId() {
-		return this.getAuthor().getId();
+		return getAuthor().getId();
 	}
 
 	public String getUserState() {
-		return this.getAuthor().getUserState();
+		return getAuthor().getUserState();
 	}
 }

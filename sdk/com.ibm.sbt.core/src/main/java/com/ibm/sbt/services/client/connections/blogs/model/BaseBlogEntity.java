@@ -31,14 +31,13 @@ import com.ibm.sbt.services.client.base.AtomXPath;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.connections.blogs.BlogService;
+import com.ibm.sbt.services.client.connections.common.Person;
 
 /**
  * Base model object to be used with Blogs, Posts and Comments
  * 
  * @author Swati Singh 
  */
-
-
 public class BaseBlogEntity extends AtomEntity {
 	
 	private final String BLOGID = "urn:lsid:ibm.com:blogs:blog-";
@@ -71,7 +70,6 @@ public class BaseBlogEntity extends AtomEntity {
 	/**
 	* Returns the Uuid of the Blog,post or comment
 	*
-	* @method getUid
 	* @return uuid
 	*/
 	public String getUid(){
@@ -93,19 +91,28 @@ public class BaseBlogEntity extends AtomEntity {
 	/**
 	* Gets an author of IBM Connections Blog.
 	*
-	* @method getAuthor
 	* @return Author
 	*/
 	@Override
-	public Author getAuthor(){
-		return new Author(getService(),new XmlDataHandler((Node)this.getDataHandler().getData(), 
+	public Person getAuthor(){
+		return new Person(getService(),new XmlDataHandler((Node)this.getDataHandler().getData(), 
 	    		nameSpaceCtx, (XPathExpression)AtomXPath.author.getPath()));
+	}
+
+	/**
+	* Gets a contributor of IBM Connections Blog.
+	*
+	* @return Author
+	*/
+	@Override
+	public Person getContributor(){
+		return new Person(getService(),new XmlDataHandler((Node)this.getDataHandler().getData(), 
+	    		nameSpaceCtx, (XPathExpression)AtomXPath.contributor.getPath()));
 	}
 	
 	/**
 	* Return the Recommendations count
 	*
-	* @method getRecomendationsCount
 	* @return {String} recommendations Count
 	*/
 	public String getRecommendationsCount() {
@@ -114,15 +121,12 @@ public class BaseBlogEntity extends AtomEntity {
 	
 	/**Returns the list of Tags
     *
-    * @method getTags()
     * @return the list of Tags
     */
 	public List<String> getTags() {
 		return (List<String>) Arrays.asList(getDataHandler().getAsArray(BlogXPath.tags));
 	}
 	/**sets the tags
-    *
-    * @method setTags()
     *
     * @param List of Tags
     */

@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * Â© Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,6 +23,14 @@ import com.ibm.sbt.services.client.base.AtomEntity;
 import com.ibm.sbt.services.client.base.BaseService;
 
 /**
+ * Lists the elements in a member Atom entry.
+ * You can create member entries in the Activities, Communities, and Forums applications. 
+ * Most elements of a member are the same for all services.
+ * The first table lists the common elements; the additional tables define extensions used by specific services.
+ * 
+ * @see
+ *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.5+API+Documentation#action=openDocument&res_title=Member_entry_content_ic45&content=pdcontent">
+ *			Member entry content</a>
  * @author mwallace
  *
  */

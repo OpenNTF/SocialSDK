@@ -17,7 +17,6 @@
 package com.ibm.sbt.services.client.connections.forums;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +24,7 @@ import java.util.List;
 import org.junit.Before;
 
 import com.ibm.sbt.services.BaseUnitTest;
+import com.ibm.sbt.services.client.connections.common.Tag;
 
 /**
  * @author Swati Singh
@@ -128,9 +128,9 @@ public class BaseForumServiceTest extends BaseUnitTest {
 	
 	protected void assertValid(Tag tag) {
 		assertNotNull("Invalid Tag", tag.getTerm());
-		assertNotNull("Invalid Tag visibility", tag.getVisibility());
+		assertNotNull("Invalid Tag visibility", tag.isVisible());
 		assertNotNull("Invalid Tag frequency", tag.getFrequency());
-		assertNotNull("Invalid Tag intensity", tag.getIntensity());
+		assertNotNull("Invalid Tag intensity", tag.isVisible());
 	}
 	
 	protected void assertValid(Recommendation recommendation) {

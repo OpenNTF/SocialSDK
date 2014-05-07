@@ -29,6 +29,7 @@ import com.ibm.sbt.services.client.base.AtomEntity;
 import com.ibm.sbt.services.client.base.AtomXPath;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
+import com.ibm.sbt.services.client.connections.common.Person;
 import com.ibm.sbt.services.client.connections.forums.ForumService;
 import com.ibm.sbt.services.client.connections.forums.ForumsXPath;
 
@@ -95,23 +96,23 @@ public class BaseForumEntity extends AtomEntity {
 	}
 
 	@Override
-	public Author getAuthor(){
-		return new Author(getService(),new XmlDataHandler((Node)this.getDataHandler().getData(), 
+	public Person getAuthor(){
+		return new Person(getService(),new XmlDataHandler((Node)getDataHandler().getData(), 
 	    		nameSpaceCtx, (XPathExpression)AtomXPath.author.getPath()));
 	}
 
 	@Override
-	public Contributor getContributor(){
-		return new Contributor(getService(), new XmlDataHandler((Node)this.getDataHandler().getData(), 
+	public Person getContributor(){
+		return new Person(getService(), new XmlDataHandler((Node)getDataHandler().getData(), 
 	    		nameSpaceCtx, (XPathExpression)AtomXPath.contributor.getPath()));
 	}
 
 	public String createdBy(){
-		return this.getAuthor().getName();
+		return getAuthor().getName();
 	}
 
 	public String updatedBy(){
-		return this.getContributor().getName();
+		return getContributor().getName();
 	}
 
 

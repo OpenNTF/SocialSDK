@@ -29,6 +29,7 @@ import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.connections.activity.feedHandler.TagFeedHandler;
 import com.ibm.sbt.services.client.connections.activity.model.ActivityXPath;
+import com.ibm.sbt.services.client.connections.common.Tag;
 
 /**
 * @Represents Activity TagList

@@ -6,6 +6,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import com.ibm.sbt.services.client.connections.common.Tag;
+
 /**
  * Tests for the java connections Activities API a test class provides its own
  * tests extending the test endpoint abstract class

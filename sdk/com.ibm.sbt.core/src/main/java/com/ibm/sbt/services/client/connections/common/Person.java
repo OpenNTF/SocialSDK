@@ -88,13 +88,6 @@ public class Person extends AtomEntity {
 		return getAsString(AtomXPath.personName);
 	}
 	
-	/**
-	 * @deprecated Use getUserState instead
-	 */
-	public String getState() {
-		return getUserState();
-	}
-
 	public String getUserState() {
 		return getAsString(AtomXPath.personUserState);
 	}

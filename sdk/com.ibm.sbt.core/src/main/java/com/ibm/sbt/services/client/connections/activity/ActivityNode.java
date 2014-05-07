@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -29,9 +29,7 @@ import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.Response;
-import com.ibm.sbt.services.client.base.AtomXPath;
 import com.ibm.sbt.services.client.base.BaseService;
-import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.activity.feedHandler.BookmarkFieldFeedHandler;
@@ -41,7 +39,6 @@ import com.ibm.sbt.services.client.connections.activity.feedHandler.PersonFieldF
 import com.ibm.sbt.services.client.connections.activity.feedHandler.TextFieldFeedHandler;
 import com.ibm.sbt.services.client.connections.activity.model.ActivityXPath;
 import com.ibm.sbt.services.client.connections.activity.transformers.ActivityTransformer;
-import com.ibm.sbt.services.client.connections.files.model.Author;
 
 /**
  * Activity Node Model Class representing an Activity Node Object

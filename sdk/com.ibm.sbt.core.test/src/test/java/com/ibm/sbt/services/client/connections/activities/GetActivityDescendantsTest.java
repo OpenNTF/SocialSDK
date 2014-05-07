@@ -34,9 +34,9 @@ import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 public class GetActivityDescendantsTest extends BaseActivityServiceTest {
 
 	@Test
-	public void testCreateActivityNode() throws ClientServicesException, XMLException {
+	public void testActivityDescendants() throws ClientServicesException, XMLException {
 		long start = System.currentTimeMillis();
-		Activity activity = createActivity("CreatedActivityNodes-"+start);
+		Activity activity = createActivity("ActivityDescendants-"+start);
 		String activityUuid = activity.getActivityUuid();
 		System.out.println("Created "+activityUuid);
     	List<String> tags = new ArrayList<String>();

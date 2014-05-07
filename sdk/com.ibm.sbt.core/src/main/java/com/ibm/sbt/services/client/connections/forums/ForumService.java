@@ -15,8 +15,6 @@
  */
 package com.ibm.sbt.services.client.connections.forums;
 
-import static com.ibm.sbt.services.client.base.CommonConstants.APPLICATION_ATOM_XML;
-import static com.ibm.sbt.services.client.base.CommonConstants.CONTENT_TYPE;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.v4_5;
 
@@ -38,14 +36,17 @@ import com.ibm.sbt.services.client.base.ConnectionsService;
 import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.NamedUrlPart;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
-import com.ibm.sbt.services.client.connections.communities.Community;
-import com.ibm.sbt.services.client.connections.communities.CommunityServiceException;
 import com.ibm.sbt.services.client.connections.forums.transformers.BaseForumTransformer;
 import com.ibm.sbt.services.endpoints.Endpoint;
 
 
 /**
- * Forum model object
+ * The Forums application of IBM® Connections enables a team to discuss issues that are pertinent to their work. 
+ * The Forums API allows application programs to create new forums, and to read and modify existing forums. 
+ * 
+ * @see
+ *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.5+API+Documentation#action=openDocument&res_title=Forums_API_ic45&content=pdcontent">
+ *			Forums API</a>
  * 
  * @author Manish Kataria 
  * @author Swati Singh
@@ -65,29 +66,27 @@ public class ForumService extends ConnectionsService {
 	private static final String POST_UNIQUE_IDENTIFIER  = "postUuid"; 
 	private static final String COMM_UNIQUE_IDENTIFIER	= "communityUuid";
 	public static final String CREATE_OP 				= "create";
-	/**
-	 * Default Constructor
-	 */
 
+	/**
+	 * Create ForumService instance with default endpoint.
+	 */
 	public ForumService() {
 		this(DEFAULT_ENDPOINT_NAME);
 	}
 
 	/**
-	 * Constructor
+	 * Create ForumService instance with specified endpoint.
 	 * 
 	 * @param endpoint
-	 *            Creates ForumService Object with the specified endpoint
 	 */
 	public ForumService(String endpoint) {
 		super(endpoint, DEFAULT_CACHE_SIZE);
 	}
 
 	/**
-	 * Constructor
+	 * Create ForumService instance with specified endpoint.
 	 * 
 	 * @param endpoint
-	 *            Creates ForumService Object with the specified endpoint
 	 */
 	public ForumService(Endpoint endpoint) {
 		super(endpoint, DEFAULT_CACHE_SIZE);
@@ -108,74 +107,14 @@ public class ForumService extends ConnectionsService {
 		return new NamedUrlPart("authType", auth);
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
-	public IFeedHandler<Forum> getForumFeedHandler() {
-		return new AtomFeedHandler<Forum>(this) {
-			@Override
-			protected Forum entityInstance(BaseService service, Node node, XPathExpression xpath) {
-				return new Forum(service, node, nameSpaceCtx, xpath);
-			}
-		};
-	}
+	/***************************************************************
+	 * Getting Forum feeds
+	 ****************************************************************/
 
-	/**
+	/** 
+	 * Get a feed that includes all stand-alone and community forums created in the enterprise.
 	 * 
-	 * @return
-	 */
-	public IFeedHandler<ForumTopic> getForumTopicFeedHandler() {
-		return new AtomFeedHandler<ForumTopic>(this) {
-			@Override
-			protected ForumTopic entityInstance(BaseService service, Node node, XPathExpression xpath) {
-				return new ForumTopic(service, node, nameSpaceCtx, xpath);
-			}
-		};
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public IFeedHandler<ForumReply> getForumReplyFeedHandler() {
-		return new AtomFeedHandler<ForumReply>(this) {
-			@Override
-			protected ForumReply entityInstance(BaseService service, Node node, XPathExpression xpath) {
-				return new ForumReply(service, node, nameSpaceCtx, xpath);
-			}
-		};
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public IFeedHandler<Recommendation> getRecommendationFeedHandler() {
-		return new AtomFeedHandler<Recommendation>(this) {
-			@Override
-			protected Recommendation entityInstance(BaseService service, Node node, XPathExpression xpath) {
-				return new Recommendation(service, node, nameSpaceCtx, xpath);
-			}
-		};
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public IFeedHandler<Tag> getTagFeedHandler() {
-		return new AtomFeedHandler<Tag>(this) {
-			@Override
-			protected Tag entityInstance(BaseService service, Node node, XPathExpression xpath) {
-				return new Tag(service, node, nameSpaceCtx, xpath);
-			}
-		};
-	}
-
-	/** This method returns the all forums
-	 * 
-	 * @return
+	 * @return EntityList&lt;Forum&gt;
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Forum> getAllForums() throws ClientServicesException{
@@ -184,10 +123,12 @@ public class ForumService extends ConnectionsService {
 	}
 
 	/**
-	 * This method returns the all forums
+	 * Get a feed that includes all stand-alone and community forums created in the enterprise.
+	 * You can narrow down the forums that are returned by passing parameters to the request 
+	 * that you use to retrieve the feed.
 	 * 
 	 * @param parameters
-	 * @return
+	 * @return EntityList&lt;Forum&gt;
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Forum> getAllForums(Map<String, String> parameters) throws ClientServicesException {
@@ -196,9 +137,9 @@ public class ForumService extends ConnectionsService {
 	}
 
 	/**
-	 * This method returns the public forums
+	 * Get a feed that includes all of the forums hosted by the Forums application.
 	 * 
-	 * @return
+	 * @return EntityList&lt;Forum&gt;
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Forum> getPublicForums() throws ClientServicesException{
@@ -207,10 +148,13 @@ public class ForumService extends ConnectionsService {
 	}
 
 	/**
-	 * This method returns the public forums
+	/**
+	 * Get a feed that includes all of the forums hosted by the Forums application.
+	 * You can narrow down the forums that are returned by passing parameters to the
+	 * request that you use to retrieve the feed.
 	 * 
 	 * @param parameters
-	 * @return
+	 * @return EntityList&lt;Forum&gt;
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Forum> getPublicForums(Map<String, String> parameters) throws ClientServicesException {
@@ -220,9 +164,10 @@ public class ForumService extends ConnectionsService {
 
 
 	/**
-	 * This method returns the my forums
+	 * Get a feed that includes forums created by the authenticated user 
+	 * or associated with communities to which the user belongs.
 	 * 
-	 * @return
+	 * @return EntityList&lt;Forum&gt;
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Forum> getMyForums() throws ClientServicesException {
@@ -230,21 +175,138 @@ public class ForumService extends ConnectionsService {
 	}
 
 	/**
-	 * This method returns the public forums
+	 * Get a feed that includes forums created by the authenticated user 
+	 * or associated with communities to which the user belongs.
+	 * You can narrow down the forums that are returned by passing parameters 
+	 * to the request that you use to retrieve the feed.
 	 * 
 	 * @param parameters
-	 * @return
+	 * @return EntityList&lt;Forum&gt;
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Forum> getMyForums(Map<String, String> parameters) throws ClientServicesException {
 		String myForumsUrl = ForumUrls.FORUMS_MY.format(this);
 		return getForumEntityList(myForumsUrl, parameters);
 	}
+	
+	/**
+	 * Get a feed that includes the topics in a specific forum,
+	 * whether it is a stand-alone or community forum.
+	 * 
+	 * @param forumUid
+	 * @return EntityList&lt;ForumTopic&gt;
+	 * @throws ClientServicesException
+	 */
+	public EntityList<ForumTopic> getForumTopics(String forumUid) throws ClientServicesException {
+		return getForumTopics(forumUid, null);
+	}
+
 
 	/**
-	 * This method returns the tags that have been assigned to forums
+	 * Get a feed that includes the topics in a specific forum,
+	 * whether it is a stand-alone or community forum.
+	 * You can narrow down the topics that are returned by passing parameters to the request 
+	 * that you use to retrieve the feed.
 	 * 
-	 * @return TagList
+	 * @param forumUid
+	 * @param parameters
+	 * @return EntityList&lt;ForumTopic&gt;
+	 * @throws ClientServicesException
+	 */
+	public EntityList<ForumTopic> getForumTopics(String forumUid, Map<String, String> parameters) throws ClientServicesException {
+		parameters = getParameters(parameters);
+		parameters.put(FORUM_UNIQUE_IDENTIFIER, forumUid);
+		String myTopicsUrl = ForumUrls.TOPICS.format(this);
+		return getForumTopicEntityList(myTopicsUrl, parameters);
+	}
+
+	/**
+	 * Get a feed that includes the topics in a specific forum,
+	 * whether it is a stand-alone or community forum.
+	 * 
+	 * @return EntityList&lt;ForumTopic&gt;
+	 * @throws ClientServicesException
+	 */
+	public EntityList<ForumTopic> getPublicForumTopics() throws ClientServicesException {
+		return getPublicForumTopics(null);
+	}
+
+	/**
+	 * Get a feed that includes the topics in a specific forum,
+	 * whether it is a stand-alone or community forum.
+	 * You can narrow down the topics that are returned by passing parameters to the request 
+	 * that you use to retrieve the feed.
+	 * 
+	 * @param parameters
+	 * @return EntityList&lt;ForumTopic&gt;
+	 * @throws ClientServicesException
+	 */
+	public EntityList<ForumTopic> getPublicForumTopics(Map<String, String> parameters) throws ClientServicesException {
+		String myTopicsUrl = ForumUrls.TOPICS.format(this);
+		return getForumTopicEntityList(myTopicsUrl, parameters);
+	}
+
+	/**
+	 * Get a feed that includes the topics that the authenticated user created in stand-alone forums
+	 * and in forums associated with communities to which the user belongs.
+	 * You can narrow down the topics that are returned by passing parameters 
+	 * to the request that you use to retrieve the feed.
+	 * 
+	 * @return EntityList&lt;ForumTopic&gt;
+	 * @throws ClientServicesException
+	 */
+	public EntityList<ForumTopic> getMyForumTopics() throws ClientServicesException {
+		return getMyForumTopics(null);
+	}
+
+	/**
+	 * Get a feed that includes the topics that the authenticated user created in stand-alone forums
+	 * and in forums associated with communities to which the user belongs.
+	 * You can narrow down the topics that are returned by passing parameters 
+	 * to the request that you use to retrieve the feed.
+	 * 
+	 * @param parameters
+	 * @return EntityList&lt;ForumTopic&gt;
+	 * @throws ClientServicesException
+	 */
+	public EntityList<ForumTopic> getMyForumTopics(Map<String, String> parameters) throws ClientServicesException {
+		String myTopicsUrl = ForumUrls.TOPICS_MY.format(this);
+		return getForumTopicEntityList(myTopicsUrl, parameters);
+	}
+
+	/**
+     * Get a feed that includes all of the replies for a specific forum topic.
+     * You can narrow down the replies that are returned by passing parameters to the request
+     * that you use to retrieve the feed.
+	 * 
+     * @param topicUuid
+	 * @return EntityList&lt;ForumReply&gt;
+	 * @throws ClientServicesException
+	 */
+	public EntityList<ForumReply> getForumTopicReplies(String topicUuid) throws ClientServicesException {
+		return getForumTopicReplies(topicUuid, null);
+	}
+
+	 /**
+     * Get a feed that includes all of the replies for a specific forum topic.
+     * You can narrow down the replies that are returned by passing parameters to the request
+     * that you use to retrieve the feed.
+	 * 
+     * @param topicUuid
+	 * @param parameters
+	 * @return EntityList&lt;ForumReply&gt;
+	 * @throws ClientServicesException
+	 */
+	public EntityList<ForumReply> getForumTopicReplies(String topicUuid, Map<String, String> parameters) throws ClientServicesException {
+		parameters = getParameters(parameters);
+		parameters.put(TOPIC_UNIQUE_IDENTIFIER, topicUuid);
+		return getReplies(parameters);
+	}
+
+	/**
+	 * Get a category document that lists the tags that have been assigned to forums.
+	 * 
+	 * @return EntityList&lt;Tag&gt;
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Tag> getForumsTags() throws ClientServicesException {
@@ -255,10 +317,8 @@ public class ForumService extends ConnectionsService {
 	/**
 	 * This method returns the tags that have been assigned to forum topics
 	 * 
-	 * @method getForumTopicsTags
-	 * 
 	 * @param forumUuid
-	 * @return TagList
+	 * @return EntityList&lt;Tag&gt;
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Tag> getForumTopicsTags(String forumUuid) throws ClientServicesException {
@@ -268,11 +328,9 @@ public class ForumService extends ConnectionsService {
 	/**
 	 * This method returns the tags that have been assigned to forum topics
 	 * 
-	 * @method getForumTopicsTags
-	 *  
 	 * @param forumUuid
 	 * @param parameters
-	 * @return TagList
+	 * @return EntityList&lt;Tag&gt;
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Tag> getForumTopicsTags(String forumUuid, Map<String, String> parameters) throws ClientServicesException {
@@ -281,12 +339,11 @@ public class ForumService extends ConnectionsService {
 		String tagsUrl = ForumUrls.TAGS_TOPICS.format(this);
 		return getTagEntityList(tagsUrl, null);
 	}
-	
+
 	/**
-	 * Wrapper method to get list of recommendations for a ForumTopic or ForumReply
-	 * API Supported on Connections 4.5 or above
-	 * <p>
-	 * User should be authenticated to call this method
+	 * Get recommendations
+	 * 
+	 * @since 4.5
 	 * @param postUuid
 	 * @return RecommendationList
 	 * @throws ClientServicesException
@@ -298,82 +355,23 @@ public class ForumService extends ConnectionsService {
 		String recommendationsUrl = ForumUrls.RECOMMENDATION_ENTRIES.format(this);
 		return getRecommendationEntityList(recommendationsUrl, parameters);
 	}
+	
+	////////////////////////////////////////////////////////////////////////////////
+	//TODO: Getting a list of inappropriate content flag options in Forums
+	////////////////////////////////////////////////////////////////////////////////
+
+	////////////////////////////////////////////////////////////////////////////////
+	//TODO: Flagging a forum entry or reply as inappropriate
+	////////////////////////////////////////////////////////////////////////////////
+	
+	/***************************************************************
+	 * Working with stand-alone forums
+	 ****************************************************************/
 
 	/**
-	 * Wrapper method to create a recommendation, API Supported on Connections 4.5 or above
-	 * <p>
-	 * User should be authenticated to call this method
-	 * @param postUuid
-	 * @return Recommendation
-	 * @throws ClientServicesException
-	 */
-	public Recommendation createRecommendation(String postUuid) throws ClientServicesException{
-		checkVersion();
-		String recommendationsUrl = ForumUrls.RECOMMENDATION_ENTRIES.format(this);
-		Map<String, String> parameters = new HashMap<String, String>();
-
-		parameters.put(POST_UNIQUE_IDENTIFIER, postUuid);
-		Response result;
-		Recommendation recommendation;
-		// not using transformer, as the payload to be sent is constant
-		String payload = "<entry xmlns='http://www.w3.org/2005/Atom'><category scheme='http://www.ibm.com/xmlns/prod/sn/type' term='recommendation'></category></entry>";
-		try {
-			result = createData(recommendationsUrl, parameters, null,payload);
-			recommendation = getRecommendationFeedHandler().createEntity(result);
-
-		} catch (Exception e) {
-			throw new ClientServicesException(e);
-		}
-		return recommendation;
-
-	}
-
-	/**
-	 * Wrapper method to delete a recommendation, API Supported on Connections 4.5 or above
-	 * <p>
-	 * User should be authenticated to call this method
-	 * @param postUuid
-	 * @return boolean
-	 * @throws ClientServicesException
-	 */
-	public boolean deleteRecommendation(String postUuid) throws ClientServicesException{
-		checkVersion();
-		String recommendationsUrl = ForumUrls.RECOMMENDATION_ENTRIES.format(this);
-		Map<String, String> parameters = new HashMap<String, String>();
-
-		parameters.put(POST_UNIQUE_IDENTIFIER, postUuid);
-		try {
-			deleteData(recommendationsUrl, parameters, postUuid);
-			return true;
-		} catch (Exception e) {
-			throw new ClientServicesException(e);
-		}
-	}
-
-	// todo : missing overloaded method accepting params for getForum
-
-	/**
-	 * Wrapper method to get a Stand-alone forum
-	 * <p>
-	 * fetches forum content from server and populates the data member of {@link Community} with the fetched content 
-	 *
-	 * @param forumUuid
-	 *			   id of forum
-	 * @return A Forum
-	 * @throws ClientServicesException
-	 */
-	public Forum getForum(String forumUuid) throws ClientServicesException {
-		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put(FORUM_UNIQUE_IDENTIFIER, forumUuid);
-		String url = ForumUrls.FORUM.format(this);
-		return getForumEntity(url, parameters);
-	}
-
-	/**
-	 * Wrapper method to create a forum
-	 * <p>
-	 * User should be authenticated to call this method
-	 * 
+	 * To create a stand-alone forum, send an Atom entry document
+	 * containing the forum entry document to the root collection resource.
+	 * See Authenticating requests for information about how to authenticate the request.
 	 * 
 	 * @param Forum
 	 * @return Forum
@@ -388,11 +386,8 @@ public class ForumService extends ConnectionsService {
 			BaseForumTransformer transformer = new BaseForumTransformer(forum);
 			Object 	payload = transformer.transform(forum.getFieldsMap());
 
-			Map<String, String> headers = new HashMap<String, String>();
-			headers.put("Content-Type", "application/atom+xml");
-
 			String url = ForumUrls.FORUMS.format(this);
-			result = createData(url, null, headers, payload);
+			result = createData(url, null, getAtomHeaders(), payload);
 			forum = getForumFeedHandler().createEntity(result);
 
 		} catch (Exception e) {
@@ -403,9 +398,27 @@ public class ForumService extends ConnectionsService {
 	}
 
 	/**
-	 * Wrapper method to update a forum
-	 * <p>
-	 * User should be authenticated as owner of the forum to call this method
+	 * To retrieve complete information about a forum, use the edit <link> found in the forum entry in the Forums feed.
+	 * 
+	 * @param forumUuid
+	 *			   id of forum
+	 * @return A Forum
+	 * @throws ClientServicesException
+	 */
+	public Forum getForum(String forumUuid) throws ClientServicesException {
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put(FORUM_UNIQUE_IDENTIFIER, forumUuid);
+		String url = ForumUrls.FORUM.format(this);
+		return getForumEntity(url, parameters);
+	}
+
+	/**
+	 * To update a stand-alone forum, send an updated forum document
+	 * in Atom format to the existing forum's edit web address.<br>
+	 * All existing forum entry metadata will be replaced with the new data.
+	 * To avoid deleting all existing data, retrieve any data you want to retain first,
+	 * and send it back with this request. See Retrieving forums for more information. <br>
+	 * See Authenticating requests for information about how to authenticate the request.
 	 * 
 	 * @param Forum
 	 * @return Response
@@ -440,28 +453,32 @@ public class ForumService extends ConnectionsService {
 	}
 
 	/**
-	 * Wrapper method to delete a forum
-	 * <p>
-	 * User should be logged in as a owner of the forum to call this method.
+	 * To delete a recommendation of a post(topic or reply) in a forum, 
+	 * use the HTTP DELETE method.<br>
+	 * Only the user who have already recommended the post
+	 * can delete it's own recommendation.<br>
+	 * See Authenticating requests for information about how to authenticate the request.
 	 * 
 	 * @param Forum
 	 * 				forum which is to be deleted
 	 * @throws CommunityServiceException
 	 */
-	public void removeForum(Forum forum) throws ClientServicesException {
-		removeForum(forum.getUid());
+	public void deleteForum(Forum forum) throws ClientServicesException {
+		deleteForum(forum.getUid());
 	}
 
 	/**
-	 * Wrapper method to delete a forum
-	 * <p>
-	 * User should be logged in as a owner of the forum to call this method.
+	 * To delete a recommendation of a post(topic or reply) in a forum, 
+	 * use the HTTP DELETE method.<br>
+	 * Only the user who have already recommended the post
+	 * can delete it's own recommendation.<br>
+	 * See Authenticating requests for information about how to authenticate the request.
 	 * 
 	 * @param String
 	 * 				forumUuid which is to be deleted
 	 * @throws ClientServicesException
 	 */
-	public void removeForum(String forumUuid) throws ClientServicesException {
+	public void deleteForum(String forumUuid) throws ClientServicesException {
 		if (StringUtil.isEmpty(forumUuid)){
 			throw new ClientServicesException(null, "null forum id");
 		}
@@ -482,112 +499,18 @@ public class ForumService extends ConnectionsService {
 
 	}
 	
-	protected boolean isForumDeleted(Response response){
-		StatusLine statusLine = response.getResponse().getStatusLine();
-		return statusLine.getStatusCode() == 204;
-	}
+	/***************************************************************
+	 * Working with stand-alone forum topics
+	 ****************************************************************/
 
 	/**
-	 * This method returns the public topics
+	 * To add a topic to a stand-alone forum, send an Atom entry document 
+	 * containing the forum topic to the forum topics resource.<br>
+	 * See Authenticating requests for information about how to authenticate the request.
 	 * 
-	 * @return TopicList
-	 * @throws ClientServicesException
-	 */
-	public EntityList<ForumTopic> getPublicForumTopics() throws ClientServicesException {
-		return getPublicForumTopics(null);
-	}
-
-	/**
-	 * This method returns the public topics
-	 * 
-	 * @param parameters
-	 * @return TopicList
-	 * @throws ClientServicesException
-	 */
-	public EntityList<ForumTopic> getPublicForumTopics(Map<String, String> parameters) throws ClientServicesException {
-		String myTopicsUrl = ForumUrls.TOPICS.format(this);
-		return getForumTopicEntityList(myTopicsUrl, parameters);
-	}
-
-	/**
-	 * This method returns the my topics
-	 * 
-	 * @return TopicList
-	 * @throws ClientServicesException
-	 */
-	public EntityList<ForumTopic> getMyForumTopics() throws ClientServicesException {
-		return getMyForumTopics(null);
-	}
-
-	/**
-	 * This method returns the my topics
-	 * 
-	 * @param parameters
-	 * @return TopicList
-	 * @throws ClientServicesException
-	 */
-	public EntityList<ForumTopic> getMyForumTopics(Map<String, String> parameters) throws ClientServicesException {
-		String myTopicsUrl = ForumUrls.TOPICS_MY.format(this);
-		return getForumTopicEntityList(myTopicsUrl, parameters);
-	}
-
-	/**
-	 * This method returns the topics for a particular forum
-	 * 
-	 * @param parameters
-	 * @return
-	 * @throws ClientServicesException
-	 */
-	public EntityList<ForumTopic> getForumTopics(String forumUid) throws ClientServicesException {
-		return getForumTopics(forumUid, null);
-	}
-
-
-	/**
-	 * This method returns the topics for a particular forum
-	 * 
-	 * @param parameters
-	 * @return TopicList
-	 * @throws ClientServicesException
-	 */
-	public EntityList<ForumTopic> getForumTopics(String forumUid, Map<String, String> parameters) throws ClientServicesException {
-		parameters = getParameters(parameters);
-		parameters.put(FORUM_UNIQUE_IDENTIFIER, forumUid);
-		String myTopicsUrl = ForumUrls.TOPICS.format(this);
-		return getForumTopicEntityList(myTopicsUrl, parameters);
-	}
-
-	/**
-	 * This method returns topic
-	 * 
-	 * @param parameters
-	 * @return TopicList
-	 * @throws ClientServicesException
-	 */
-	public ForumTopic getForumTopic(String topicId) throws ClientServicesException {
-		return getForumTopic(topicId, null);
-	}
-
-	/**
-	 * This method returns topic
-	 * 
-	 * @param parameters
-	 * @return
-	 * @throws ClientServicesException
-	 */
-	public ForumTopic getForumTopic(String topicId, Map<String, String> parameters) throws ClientServicesException {
-		parameters = getParameters(parameters);
-		parameters.put(TOPIC_UNIQUE_IDENTIFIER, topicId);
-		String myTopicsUrl = ForumUrls.TOPIC.format(this);
-		return getForumTopicEntity(myTopicsUrl, parameters);
-	}
-
-	/**
-	 * Wrapper method to create a Topic
-	 * <p>
-	 * User should be authenticated to call this method
-	 * @param ForumTopic
-	 * @return Topic
+	 * @param topic
+	 * 		the topic to be created
+	 * @return ForumTopic
 	 * @throws ClientServicesException
 	 */
 	public ForumTopic createForumTopic(ForumTopic topic) throws ClientServicesException {
@@ -595,11 +518,15 @@ public class ForumService extends ConnectionsService {
 	}
 
 	/**
-	 * Wrapper method to create a Topic
-	 * <p>
-	 * User should be authenticated to call this method
-	 * @param ForumTopic
-	 * @return Topic
+	 * To add a topic to a stand-alone forum, send an Atom entry document 
+	 * containing the forum topic to the forum topics resource.<br>
+	 * See Authenticating requests for information about how to authenticate the request.
+	 * 
+	 * @param topic
+	 * 		the topic to be created
+	 * @param forumId
+	 * 		the id of the forum where the topic will be added
+	 * @return ForumTopic
 	 * @throws ClientServicesException
 	 */
 	public ForumTopic createForumTopic(ForumTopic topic,String forumId) throws ClientServicesException {
@@ -614,11 +541,8 @@ public class ForumService extends ConnectionsService {
 			Map<String, String> params = new HashMap<String, String>();
 			params.put(FORUM_UNIQUE_IDENTIFIER, forumId);
 
-			Map<String, String> headers = new HashMap<String, String>();
-			headers.put(CONTENT_TYPE, APPLICATION_ATOM_XML);
-
 			String url = ForumUrls.TOPICS.format(this);
-			result = createData(url, params, headers,payload);
+			result = createData(url, params, getAtomHeaders(), payload);
 			topic = getForumTopicFeedHandler().createEntity(result);
 
 		} catch (Exception e) {
@@ -627,44 +551,46 @@ public class ForumService extends ConnectionsService {
 
 		return topic;
 	}
-
+	
 	/**
-	 * Wrapper method to create a Topic for default Forum of a Community
-	 * <p>
-	 * User should be authenticated to call this method
-	 * @param ForumTopic
-	 * @return Topic
+	 * To retrieve complete information about a forum topic,
+	 * use the edit link found in the forum topic entry in the forum topics feed.
+	 * 
+	 * @param topicId
+	 * 				The id of the forum topic to be retrieved
+	 * @return ForumTopic
 	 * @throws ClientServicesException
 	 */
-	public ForumTopic createCommunityForumTopic(ForumTopic topic,String communityId) throws ClientServicesException {
-		if (null == topic){
-			throw new ClientServicesException(null,"Topic object passed was null");
-		}
-		Response result = null;
-		try {
-			BaseForumTransformer transformer = new BaseForumTransformer(topic);
-			Object 	payload = transformer.transform(topic.getFieldsMap());
-
-			Map<String, String> params = new HashMap<String, String>();
-			params.put(COMM_UNIQUE_IDENTIFIER, communityId);
-
-			Map<String, String> headers = new HashMap<String, String>();
-			headers.put(CONTENT_TYPE, APPLICATION_ATOM_XML);
-			String postUrl = ForumUrls.TOPICS.format(this);
-			result = createData(postUrl, params, headers,payload);
-			topic = getForumTopicFeedHandler().createEntity(result);
-
-		} catch (Exception e) {
-			throw new ClientServicesException(e, "error creating forum");
-		}
-
-		return topic;
+	public ForumTopic getForumTopic(String topicId) throws ClientServicesException {
+		return getForumTopic(topicId, null);
 	}
 
 	/**
-	 * Wrapper method to update a topic
-	 * <p>
-	 * User should be authenticated as owner of the forum to call this method
+	 * To retrieve complete information about a forum topic,
+	 * use the edit link found in the forum topic entry in the forum topics feed.
+	 * 
+	 * @param topicId
+	 * 				The id of the forum topic to be retrieved
+	 * @param parameters
+	 * @return ForumTopic
+	 * @throws ClientServicesException
+	 */
+	public ForumTopic getForumTopic(String topicId, Map<String, String> parameters) throws ClientServicesException {
+		parameters = getParameters(parameters);
+		parameters.put(TOPIC_UNIQUE_IDENTIFIER, topicId);
+		String myTopicsUrl = ForumUrls.TOPIC.format(this);
+		return getForumTopicEntity(myTopicsUrl, parameters);
+	}
+
+	/**
+	 * To update a topic in a stand-alone forum, 
+	 * send an updated forum topic document in Atom format 
+	 * to the existing forum topic's edit web address.<br>
+	 * All existing forum topic metadata will be replaced with the new data.
+	 * To avoid deleting all existing data, retrieve any data 
+	 * you want to retain first, and send it back with this request.
+	 * See Retrieving forum topics for more information.<br>
+	 * See Authenticating requests for information about how to authenticate the request.
 	 * 
 	 * @param ForumTopic
 	 * @throws ClientServicesException
@@ -689,66 +615,337 @@ public class ForumService extends ConnectionsService {
 			Map<String, String> parameters = new HashMap<String, String>();
 			parameters.put(TOPIC_UNIQUE_IDENTIFIER, topic.getUid());
 
-			Map<String, String> headers = new HashMap<String, String>();
-			headers.put(CONTENT_TYPE, APPLICATION_ATOM_XML);
-
-			getClientService().put(url, parameters,headers, payload,ClientService.FORMAT_NULL);
+			getClientService().put(url, parameters, getAtomHeaders(), payload,ClientService.FORMAT_NULL);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new ClientServicesException(e, "error updating topic");
 		}
-
 	}
-
+	
 	/**
-	 * Wrapper method to delete a topic
-	 * <p>
-	 * User should be logged in as a owner of the forum to call this method.
+	 * To delete a topic from a forum, use the HTTP DELETE method.<bR>
+	 * Only the owner of a stand-alone forum can delete a topic from the forum.
+	 * Deleted topics cannot be restored.<br>
+	 * See Authenticating requests for information about how to authenticate the request.
 	 * 
-	 * @param Forum
-	 * 				forum which is to be deleted
-	 * @throws CommunityServiceException
+	 * @param ForumTopic
+	 * 				forum topic which is to be deleted
+	 * @throws ClientServicesException
 	 */
-	public void removeForumTopic(ForumTopic topic) throws ClientServicesException {
-		removeForum(topic.getUid());
+	public void deleteForumTopic(ForumTopic topic) throws ClientServicesException {
+		deleteForum(topic.getUid());
 	}
 
 	/**
-	 * Wrapper method to delete a topic
-	 * <p>
-	 * User should be logged in as a owner of the forum to call this method.
+	 * To delete a topic from a forum, use the HTTP DELETE method.<bR>
+	 * Only the owner of a stand-alone forum can delete a topic from the forum.
+	 * Deleted topics cannot be restored.<br>
+	 * See Authenticating requests for information about how to authenticate the request.
 	 * 
 	 * @param String
 	 * 				topicUuid which is to be deleted
 	 * @throws ClientServicesException
 	 */
-	public void removeForumTopic(String topicUuid) throws ClientServicesException {
+	public void deleteForumTopic(String topicUuid) throws ClientServicesException {
 		if (StringUtil.isEmpty(topicUuid)){
 			throw new ClientServicesException(null, "null topic id");
 		}
 
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put(TOPIC_UNIQUE_IDENTIFIER, topicUuid);
+		String deleteTopicUrl = ForumUrls.TOPIC.format(this);
+		super.deleteData(deleteTopicUrl, parameters, TOPIC_UNIQUE_IDENTIFIER);
+	}
+
+	////////////////////////////////////////////////////////////////////////////////
+	//TODO: Moving a stand-alone forum topic programmatically
+	////////////////////////////////////////////////////////////////////////////////
+
+	/**
+	 * To post a reply to a topic in a stand-alone forum, 
+	 * send an Atom entry document containing the forum reply to the forum replies resource.<br>
+	 * See Authenticating requests for information about how to authenticate the request.
+	 * 
+	 * @param ForumReply
+	 * @return ForumReply
+	 * @throws ClientServicesException
+	 */
+	public ForumReply createForumReply(ForumReply reply) throws ClientServicesException {
+		return createForumReply(reply, reply.getTopicUuid());
+	}
+
+	/**
+	 * To post a reply to a topic in a stand-alone forum, 
+	 * send an Atom entry document containing the forum reply to the forum replies resource.<br>
+	 * See Authenticating requests for information about how to authenticate the request.
+	 * 
+	 * @param ForumReply
+	 * @param topicId
+	 * @return ForumReply
+	 * @throws ClientServicesException
+	 */
+	public ForumReply createForumReply(ForumReply reply, String topicId) throws ClientServicesException {
+		if (null == reply || StringUtil.isEmpty(topicId)){
+			throw new ClientServicesException(null,"Reply object passed was null");
+		}
+		Response result = null;
+		try {
+			if(StringUtil.isEmpty(reply.getTopicUuid())){
+				reply.setTopicUuid(topicId);
+			}
+			BaseForumTransformer transformer = new BaseForumTransformer(reply, CREATE_OP);
+			Object 	payload = transformer.transform(reply.getFieldsMap());
+			Map<String, String> params = new HashMap<String, String>();
+
+			params.put(TOPIC_UNIQUE_IDENTIFIER, topicId);
+
+			String url = ForumUrls.REPLIES.format(this);
+			result = createData(url, params, getAtomHeaders(), payload);
+			reply = getForumReplyFeedHandler().createEntity(result);
+
+		} catch (Exception e) {
+			throw new ClientServicesException(e, "error creating forum reply");
+		}
+
+		return reply;
+	}
+
+	/**
+	 * To retrieve complete information about a reply to a topic in a stand-alone forum,
+	 * use the edit link found in the forum reply entry in the forum replies feed.<br>
+	 * You can use this operation to obtain forum reply information that you want to preserve
+	 * prior to performing an update. See Updating forum replies for more information.<br>
+	 * This method returns the Atom entry of a single reply entry as opposed to a feed of all the reply entries.
+	 * See Authenticating requests for information about how to authenticate the request.
+	 * 
+	 * @param replyId
+	 * @return ForumReply
+	 * @throws ClientServicesException
+	 */
+	public ForumReply getForumReply(String replyId) throws ClientServicesException {
+		return getForumReply(replyId, null);
+	}
+
+	/**
+	 * To retrieve complete information about a reply to a topic in a stand-alone forum,
+	 * use the edit link found in the forum reply entry in the forum replies feed.<br>
+	 * You can use this operation to obtain forum reply information that you want to preserve
+	 * prior to performing an update. See Updating forum replies for more information.<br>
+	 * This method returns the Atom entry of a single reply entry as opposed to a feed of all the reply entries.
+	 * See Authenticating requests for information about how to authenticate the request.
+	 * 
+	 * @param replyId
+	 * @param parameters
+	 * @return ForumReply
+	 * @throws ClientServicesException
+	 */
+	public ForumReply getForumReply(String replyId, Map<String, String> parameters) throws ClientServicesException {
+		parameters = getParameters(parameters);
+		String myRepliesUrl = ForumUrls.REPLY.format(this);
+		parameters.put(REPLY_UNIQUE_IDENTIFIER, replyId);
+		return getForumReplyEntity(myRepliesUrl, parameters);
+	}
+
+	/**
+	 * To update a reply to a topic in a stand-alone forum, 
+	 * send an updated forum reply document in Atom format 
+	 * to the existing reply's edit web address.<br>
+	 * All existing forum reply entry metadata will be replaced with the new data.<br>
+	 * To avoid deleting all existing data, retrieve any data you want to retain first,
+	 * and send it back with this request. <br>
+	 * See Retrieving forum replies for more information. 
+	 * If you want to delete a reply and provide a customized message
+	 * about why the reply was removed, send this request without 
+	 * first retrieving the reply data and include a 
+	 * <category scheme="http://www.ibm.com/xmlns/prod/sn/flags term="deleted"> element in the entry content.<br>
+	 * See Deleting forum replies for more information.<br> 
+	 * See Authenticating requests for information about how to authenticate the request.
+	 * 
+	 * @param ForumReply
+	 * @return void
+	 * @throws ClientServicesException
+	 */
+	public void updateForumReply(ForumReply reply) throws ClientServicesException {
+		if (null == reply){
+			throw new ClientServicesException(null,"Reply object passed was null");
+		}
+		try {
+			
+			if(reply.getFieldsMap().get(ForumsXPath.title)== null)
+				reply.setTitle(reply.getTitle());
+			if(reply.getFieldsMap().get(ForumsXPath.content)== null)
+				reply.setContent(reply.getContent());
+			if(!reply.getFieldsMap().toString().contains(ForumsXPath.tags.toString()))
+				reply.setTags(reply.getTags());
+			
+			BaseForumTransformer transformer = new BaseForumTransformer(reply);
+			Object 	payload = transformer.transform(reply.getFieldsMap());
+			Map<String, String> params = new HashMap<String, String>();
+			params.put(REPLY_UNIQUE_IDENTIFIER, reply.getUid());
+
+			String url = ForumUrls.REPLY.format(this);
+			updateData(url, params, getAtomHeaders(), payload, reply.getUid());
+
+		} catch (Exception e) {
+			throw new ClientServicesException(e, "error updating forum reply");
+		}
+	}
+
+	/**
+	 * Because replies often have child replies associated with them, when you delete a reply from a forum,
+	 * the reply is not entirely removed. <br>
+	 * Instead, if you use the HTTP DELETE command to delete the reply,
+	 * the reply content is replaced with a standard message that states that the content has been removed.<br>
+	 * If you want a custom message to be displayed, use the HTTP PUT command instead.<br>
+	 * Only the owner of a stand-alone forum can delete a forum reply from it. Deleted replies cannot be restored. <br>
+	 *  
+	 * @param ForumReply
+	 * 				reply which is to be deleted
+	 * @throws CommunityServiceException
+	 */
+	public void deleteForumReply(ForumReply reply) throws ClientServicesException {
+		deleteForum(reply.getUid());
+	}
+
+	/**
+	 * Because replies often have child replies associated with them, when you delete a reply from a forum,
+	 * the reply is not entirely removed. <br>
+	 * Instead, if you use the HTTP DELETE command to delete the reply,
+	 * the reply content is replaced with a standard message that states that the content has been removed.<br>
+	 * If you want a custom message to be displayed, use the HTTP PUT command instead.<br>
+	 * Only the owner of a stand-alone forum can delete a forum reply from it. Deleted replies cannot be restored. <br>
+	 *  
+	 * @param String
+	 * 				replyUuid which is to be deleted
+	 * @throws ClientServicesException
+	 */
+	public void deleteForumReply(String replyUuid) throws ClientServicesException {
+		if (StringUtil.isEmpty(replyUuid)){
+			throw new ClientServicesException(null, "null reply id");
+		}
+
 		try {
 			Map<String, String> parameters = new HashMap<String, String>();
-			parameters.put(TOPIC_UNIQUE_IDENTIFIER, topicUuid);
-			String deleteTopicUrl = ForumUrls.TOPIC.format(this);
-			super.deleteData(deleteTopicUrl, parameters, TOPIC_UNIQUE_IDENTIFIER);
+
+			parameters.put(REPLY_UNIQUE_IDENTIFIER, replyUuid);
+			String deleteReplyUrl = ForumUrls.REPLY.format(this);
+
+			super.deleteData(deleteReplyUrl, parameters, REPLY_UNIQUE_IDENTIFIER);
 		} catch (Exception e) {
-			throw new ClientServicesException(e,"error deleting forum");
+			throw new ClientServicesException(e,"error deleting forum reply");
 		} 	
 	}
 
-	private EntityList<ForumReply> getReplies(Map<String, String> parameters) throws ClientServicesException {
-		if (parameters != null){
-			if(StringUtil.isEmpty(parameters.get(TOPIC_UNIQUE_IDENTIFIER)) && 
-					StringUtil.isEmpty(parameters.get(REPLY_UNIQUE_IDENTIFIER))){
-					throw new ClientServicesException(null, "null post Uuid");
-			}
-		} else {
-			parameters = new HashMap<String, String>();
+	////////////////////////////////////////////////////////////////////////////////
+	//TODO: Splitting a stand-alone forum reply programmatically
+	////////////////////////////////////////////////////////////////////////////////
+
+	/***************************************************************
+	 * Working with stand-alone forum members
+	 ****************************************************************/
+
+	////////////////////////////////////////////////////////////////////////////////
+	//TODO: ALL WORKING WITH FORUM MEMBERS
+	////////////////////////////////////////////////////////////////////////////////
+
+	/***************************************************************
+	 * Working with stand-alone forum recommendations
+	 ****************************************************************/
+
+	/**
+	 * To like a post(topic/reply) in a stand-alone forum, 
+	 * send an Atom entry document containing the forum recommendation 
+	 * to the forum topic/reply resources.<br>
+	 * See Authenticating requests for information about how to authenticate the request.
+	 *  
+	 * @since 4.5
+	 * @param postUuid
+	 * @return Recommendation
+	 * @throws ClientServicesException
+	 */
+	public Recommendation createRecommendation(String postUuid) throws ClientServicesException{
+		checkVersion();
+		String recommendationsUrl = ForumUrls.RECOMMENDATION_ENTRIES.format(this);
+		Map<String, String> parameters = new HashMap<String, String>();
+
+		parameters.put(POST_UNIQUE_IDENTIFIER, postUuid);
+		Response result;
+		Recommendation recommendation;
+		// not using transformer, as the payload to be sent is constant
+		String payload = "<entry xmlns='http://www.w3.org/2005/Atom'><category scheme='http://www.ibm.com/xmlns/prod/sn/type' term='recommendation'></category></entry>";
+		try {
+			result = createData(recommendationsUrl, parameters, null,payload);
+			recommendation = getRecommendationFeedHandler().createEntity(result);
+
+		} catch (Exception e) {
+			throw new ClientServicesException(e);
 		}
-		String myRepliesUrl = ForumUrls.REPLIES.format(this);
-		return getForumReplyEntityList(myRepliesUrl, parameters);
+		return recommendation;
 	}
+	
+	////////////////////////////////////////////////////////////////////////////////
+	//TODO: Retrieving a stand-alone forum recommendation programatically
+	////////////////////////////////////////////////////////////////////////////////
+
+	/**
+	 * To delete a recommendation of a post(topic or reply) 
+	 * in a forum, use the HTTP DELETE method.<br>
+	 * Only the user who have already recommended the post
+	 * can delete it's own recommendation.<br>
+	 * See Authenticating requests for information about how to authenticate the request.
+	 *  
+	 * @since 4.5
+	 * @param postUuid
+	 * @return boolean
+	 * @throws ClientServicesException
+	 */
+	public boolean deleteRecommendation(String postUuid) throws ClientServicesException{
+		checkVersion();
+		String recommendationsUrl = ForumUrls.RECOMMENDATION_ENTRIES.format(this);
+		Map<String, String> parameters = new HashMap<String, String>();
+
+		parameters.put(POST_UNIQUE_IDENTIFIER, postUuid);
+		try {
+			deleteData(recommendationsUrl, parameters, postUuid);
+			return true;
+		} catch (Exception e) {
+			throw new ClientServicesException(e);
+		}
+	}
+
+	//----------------------------------------------------------------------------------------------
+
+	/**
+	 * Wrapper method to create a Topic for default Forum of a Community
+	 * <p>
+	 * User should be authenticated to call this method
+	 * @param ForumTopic
+	 * @return Topic
+	 * @throws ClientServicesException
+	 */
+	public ForumTopic createCommunityForumTopic(ForumTopic topic,String communityId) throws ClientServicesException {
+		if (null == topic){
+			throw new ClientServicesException(null,"Topic object passed was null");
+		}
+		Response result = null;
+		try {
+			BaseForumTransformer transformer = new BaseForumTransformer(topic);
+			Object 	payload = transformer.transform(topic.getFieldsMap());
+
+			Map<String, String> params = new HashMap<String, String>();
+			params.put(COMM_UNIQUE_IDENTIFIER, communityId);
+
+			String postUrl = ForumUrls.TOPICS.format(this);
+			result = createData(postUrl, params, getAtomHeaders() ,payload);
+			topic = getForumTopicFeedHandler().createEntity(result);
+
+		} catch (Exception e) {
+			throw new ClientServicesException(e, "error creating forum");
+		}
+
+		return topic;
+	}
+
 
 	 /**
      * Get a list for forum replies that includes the replies in the specified post.
@@ -760,29 +957,6 @@ public class ForumService extends ConnectionsService {
 	 * @throws ClientServicesException
 	 */
 	public EntityList<ForumReply> getForumReplies(Map<String, String> parameters) throws ClientServicesException {
-		return getReplies(parameters);
-	}
-	/**
-     * Get a list for forum replies that includes the replies of a Forum Topic.
-     * 
-     * @param topicUuid
-	 * @return ReplyList
-	 * @throws ClientServicesException
-	 */
-	public EntityList<ForumReply> getForumTopicReplies(String topicUuid) throws ClientServicesException {
-		return getForumTopicReplies(topicUuid, null);
-	}
-	 /**
-     * Get a list for forum replies that includes the replies of a Forum Topic.
-     * 
-     * @param topicUuid
-	 * @param parameters
-	 * @return ReplyList
-	 * @throws ClientServicesException
-	 */
-	public EntityList<ForumReply> getForumTopicReplies(String topicUuid, Map<String, String> parameters) throws ClientServicesException {
-		parameters = getParameters(parameters);
-		parameters.put(TOPIC_UNIQUE_IDENTIFIER, topicUuid);
 		return getReplies(parameters);
 	}
 
@@ -810,163 +984,78 @@ public class ForumService extends ConnectionsService {
 		return getReplies(parameters);
 	}
 
-	/**
-	 * This method returns reply
-	 * 
-	 * @param replyId
-	 * @return ForumReply
-	 * @throws ClientServicesException
-	 */
-	public ForumReply getForumReply(String replyId) throws ClientServicesException {
-		return getForumReply(replyId, null);
-	}
+	/***************************************************************
+	 * Handler factory methods
+	 ****************************************************************/
 
 	/**
-	 * This method returns reply
-	 * @param replyId
-	 * @param parameters
-	 * @return ForumReply
-	 * @throws ClientServicesException
+	 * Returns a ForumFeedHandler
+	 * @return
 	 */
-	public ForumReply getForumReply(String replyId, Map<String, String> parameters) throws ClientServicesException {
-		parameters = getParameters(parameters);
-		String myRepliesUrl = ForumUrls.REPLY.format(this);
-		parameters.put(REPLY_UNIQUE_IDENTIFIER, replyId);
-		return getForumReplyEntity(myRepliesUrl, parameters);
-	}
-
-	/**
-	 * Wrapper method to create a Reply
-	 * <p>
-	 * User should be authenticated to call this method
-	 * @param ForumReply
-	 * @return ForumReply
-	 * @throws ClientServicesException
-	 */
-	public ForumReply createForumReply(ForumReply reply) throws ClientServicesException {
-		return createForumReply(reply, reply.getTopicUuid());
-	}
-
-	/**
-	 * Wrapper method to create a Reply
-	 * <p>
-	 * User should be authenticated to call this method
-	 * @param ForumReply
-	 * @param topicId
-	 * @return ForumReply
-	 * @throws ClientServicesException
-	 */
-	public ForumReply createForumReply(ForumReply reply,String topicId) throws ClientServicesException {
-		if (null == reply || StringUtil.isEmpty(topicId)){
-			throw new ClientServicesException(null,"Reply object passed was null");
-		}
-		Response result = null;
-		try {
-			if(StringUtil.isEmpty(reply.getTopicUuid())){
-				reply.setTopicUuid(topicId);
+	public IFeedHandler<Forum> getForumFeedHandler() {
+		return new AtomFeedHandler<Forum>(this) {
+			@Override
+			protected Forum entityInstance(BaseService service, Node node, XPathExpression xpath) {
+				return new Forum(service, node, nameSpaceCtx, xpath);
 			}
-			BaseForumTransformer transformer = new BaseForumTransformer(reply, CREATE_OP);
-			Object 	payload = transformer.transform(reply.getFieldsMap());
-			Map<String, String> params = new HashMap<String, String>();
-
-			params.put(TOPIC_UNIQUE_IDENTIFIER, topicId);
-
-			Map<String, String> headers = new HashMap<String, String>();
-			headers.put("Content-Type", "application/atom+xml");
-			String url = ForumUrls.REPLIES.format(this);
-			result = createData(url, params, headers,payload);
-			reply = getForumReplyFeedHandler().createEntity(result);
-
-		} catch (Exception e) {
-			throw new ClientServicesException(e, "error creating forum reply");
-		}
-
-		return reply;
+		};
 	}
 
 	/**
-	 * Wrapper method to update a Reply
-	 * <p>
-	 * User should be authenticated to call this method
-	 * @param ForumReply
-	 * @return void
-	 * @throws ClientServicesException
+	 * Returns a ForumTopicFeedHandler
+	 * @return
 	 */
-	public void updateForumReply(ForumReply reply) throws ClientServicesException {
-		if (null == reply){
-			throw new ClientServicesException(null,"Reply object passed was null");
-		}
-		try {
-			
-			if(reply.getFieldsMap().get(ForumsXPath.title)== null)
-				reply.setTitle(reply.getTitle());
-			if(reply.getFieldsMap().get(ForumsXPath.content)== null)
-				reply.setContent(reply.getContent());
-			if(!reply.getFieldsMap().toString().contains(ForumsXPath.tags.toString()))
-				reply.setTags(reply.getTags());
-			
-			BaseForumTransformer transformer = new BaseForumTransformer(reply);
-			Object 	payload = transformer.transform(reply.getFieldsMap());
-			Map<String, String> params = new HashMap<String, String>();
-			params.put(REPLY_UNIQUE_IDENTIFIER, reply.getUid());
-
-			Map<String, String> headers = new HashMap<String, String>();
-			headers.put("Content-Type", "application/atom+xml");
-			String url = ForumUrls.REPLY.format(this);
-			updateData(url, params, headers,payload, reply.getUid());
-
-		} catch (Exception e) {
-			throw new ClientServicesException(e, "error updating forum reply");
-		}
-
+	public IFeedHandler<ForumTopic> getForumTopicFeedHandler() {
+		return new AtomFeedHandler<ForumTopic>(this) {
+			@Override
+			protected ForumTopic entityInstance(BaseService service, Node node, XPathExpression xpath) {
+				return new ForumTopic(service, node, nameSpaceCtx, xpath);
+			}
+		};
 	}
 
 	/**
-	 * Wrapper method to delete a forum reply
-	 * <p>
-	 * User should be logged in as a owner of the forum to call this method.
-	 * 
-	 * @param ForumReply
-	 * 				reply which is to be deleted
-	 * @throws CommunityServiceException
+	 * Returns a ForumReplyFeedHandler
+	 * @return
 	 */
-	public void removeForumReply(ForumReply reply) throws ClientServicesException {
-		removeForum(reply.getUid());
+	public IFeedHandler<ForumReply> getForumReplyFeedHandler() {
+		return new AtomFeedHandler<ForumReply>(this) {
+			@Override
+			protected ForumReply entityInstance(BaseService service, Node node, XPathExpression xpath) {
+				return new ForumReply(service, node, nameSpaceCtx, xpath);
+			}
+		};
 	}
 
 	/**
-	 * Wrapper method to delete a forum reply
-	 * <p>
-	 * User should be logged in as a owner of the forum to call this method.
-	 * 
-	 * @param String
-	 * 				replyUuid which is to be deleted
-	 * @throws ClientServicesException
+	 * Returns a RecommendationFeedHandler
+	 * @return
 	 */
-	public void removeForumReply(String replyUuid) throws ClientServicesException {
-		if (StringUtil.isEmpty(replyUuid)){
-			throw new ClientServicesException(null, "null reply id");
-		}
-
-		try {
-			Map<String, String> parameters = new HashMap<String, String>();
-
-			parameters.put(REPLY_UNIQUE_IDENTIFIER, replyUuid);
-			String deleteReplyUrl = ForumUrls.REPLY.format(this);
-
-			super.deleteData(deleteReplyUrl, parameters, REPLY_UNIQUE_IDENTIFIER);
-		} catch (Exception e) {
-			throw new ClientServicesException(e,"error deleting forum reply");
-		} 	
-
+	public IFeedHandler<Recommendation> getRecommendationFeedHandler() {
+		return new AtomFeedHandler<Recommendation>(this) {
+			@Override
+			protected Recommendation entityInstance(BaseService service, Node node, XPathExpression xpath) {
+				return new Recommendation(service, node, nameSpaceCtx, xpath);
+			}
+		};
 	}
 
-	protected void checkVersion() throws ClientServicesException{
-		if (!getApiVersion().isAtLeast(v4_5)){
-			UnsupportedOperationException ex = new UnsupportedOperationException("This API is only supported on connections 4.5 or above");
-			throw new ClientServicesException(ex);
-		}
+	/**
+	 * Returns a TagFeedHandler
+	 * @return
+	 */
+	public IFeedHandler<Tag> getTagFeedHandler() {
+		return new AtomFeedHandler<Tag>(this) {
+			@Override
+			protected Tag entityInstance(BaseService service, Node node, XPathExpression xpath) {
+				return new Tag(service, node, nameSpaceCtx, xpath);
+			}
+		};
 	}
+
+	/***************************************************************
+	 * Factory methods
+	 ****************************************************************/
 
 	protected Forum getForumEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
 		return (Forum)getEntity(requestUrl, parameters, getForumFeedHandler());
@@ -1002,5 +1091,34 @@ public class ForumService extends ConnectionsService {
 
 	protected EntityList<Tag> getTagEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
 		return getEntities(requestUrl, parameters, getTagFeedHandler());
+	}
+
+	/***************************************************************
+	 * Utility methods
+	 ****************************************************************/
+
+	protected void checkVersion() throws ClientServicesException{
+		if (!getApiVersion().isAtLeast(v4_5)){
+			UnsupportedOperationException ex = new UnsupportedOperationException("This API is only supported on connections 4.5 or above");
+			throw new ClientServicesException(ex);
+		}
+	}
+
+	protected boolean isForumDeleted(Response response){
+		StatusLine statusLine = response.getResponse().getStatusLine();
+		return statusLine.getStatusCode() == 204;
+	}
+
+	private EntityList<ForumReply> getReplies(Map<String, String> parameters) throws ClientServicesException {
+		if (parameters != null){
+			if(StringUtil.isEmpty(parameters.get(TOPIC_UNIQUE_IDENTIFIER)) && 
+					StringUtil.isEmpty(parameters.get(REPLY_UNIQUE_IDENTIFIER))){
+					throw new ClientServicesException(null, "null post Uuid");
+			}
+		} else {
+			parameters = new HashMap<String, String>();
+		}
+		String myRepliesUrl = ForumUrls.REPLIES.format(this);
+		return getForumReplyEntityList(myRepliesUrl, parameters);
 	}
 }

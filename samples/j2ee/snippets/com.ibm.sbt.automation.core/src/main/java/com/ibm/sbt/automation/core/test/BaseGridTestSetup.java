@@ -85,7 +85,7 @@ public class BaseGridTestSetup extends BaseApiTest{
 	
 	public void deleteForum(){
 		try {
-			this.forumService.removeForum(testForumID);
+			this.forumService.deleteForum(testForumID);
 		} catch (ClientServicesException e) {
 			e.printStackTrace();
 		}

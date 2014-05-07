@@ -27,7 +27,7 @@ import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
-import com.ibm.sbt.services.client.connections.activity.Member;
+import com.ibm.sbt.services.client.connections.common.Member;
 
 /**
  * Wiki class represents an entry for a Wiki returned by the

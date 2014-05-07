@@ -23,15 +23,15 @@ public class GetMyFolders extends BaseFilesTest {
 
 	@Before
 	public void init() {
-		try {
+		//try {
 			fileService = getFileService();
 			if (!environment.isSmartCloud() && folder == null) {
 				createFolder();
 			}
-			folders = fileService.getMyFolders(new HashMap<String, String>());
-		} catch (ClientServicesException e) {
-			Assert.fail(e.getMessage());
-		}
+			//folders = fileService.getMyFolders(new HashMap<String, String>());
+		//} catch (ClientServicesException e) {
+			//Assert.fail(e.getMessage());
+		//}
 	}
 	
 	@After

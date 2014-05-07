@@ -18,7 +18,14 @@ package com.ibm.sbt.services.client.connections.blogs.serializers;
 
 import static com.ibm.sbt.services.client.base.CommonConstants.APPLICATION_ATOM_XML;
 import static com.ibm.sbt.services.client.base.CommonConstants.COMMA;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.*;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.CATEGORY;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.CONTENT;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.ENTRY;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.TAGS;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.TERM;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.TYPE;
+import static com.ibm.sbt.services.client.connections.blogs.BlogConstants.BLOG_HANDLE;
+import static com.ibm.sbt.services.client.connections.blogs.BlogConstants.TIMEZONE;
 import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.CATEGORIES;
 
 import org.w3c.dom.Element;
@@ -27,7 +34,6 @@ import org.w3c.dom.Node;
 import com.ibm.sbt.services.client.base.ConnectionsConstants.Namespace;
 import com.ibm.sbt.services.client.base.serializers.AtomEntitySerializer;
 import com.ibm.sbt.services.client.connections.blogs.Blog;
-import com.ibm.sbt.services.client.connections.blogs.BlogConstants;
 
 /**
  * @author Benjamin Jakobus
@@ -64,7 +70,7 @@ public class BlogSerializer extends AtomEntitySerializer<Blog> {
 	}
 
 	private Element timeZone() {
-		return textElement(BlogConstants.TIMEZONE, entity.getTimeZone());
+		return textElement(TIMEZONE, entity.getTimeZone());
 	}
 	
 	public String tagsPayload(){
@@ -73,7 +79,7 @@ public class BlogSerializer extends AtomEntitySerializer<Blog> {
 	}
 
 	private Element handle() {
-		return textElement(BlogConstants.BLOG_HANDLE, entity.getHandle());
+		return textElement(BLOG_HANDLE, entity.getHandle());
 	}
 
 	

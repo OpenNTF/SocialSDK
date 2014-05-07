@@ -34,40 +34,6 @@ public final class BlogConstants{
 	public static final String TIMEZONE = "snx:timezone";
 	public static final String BLOG_REPLY_TO = "thr:in-reply-to";
 	public static final String FLAG = "category";
-	
-	
-
-	/**
-	 * Enum containing the namespaces and prefixes used in ATOM construction (payloads) and parsing (xpath)
-	 * 
-	 * @author Benjamin jakobus
-	 *
-	 */
-	public enum BlogNamespace {
-		BLOG_REF("ref","urn:lsid:ibm.com:blogs:entry-");
-		
-		private final String prefix;
-		private final String url;
-		
-		BlogNamespace(String prefix, String url){
-			this.prefix = prefix;
-			this.url = url;
-		}
-
-		public String getPrefix(){
-			return prefix;
-		}
-		
-		public String getUrl(){
-			return url;
-		}
-	}
-	
-	public static NamespaceContext	nameSpaceCtx = new NamespaceContextImpl();
-	
-	static{
-		for (BlogNamespace namespace : BlogNamespace.values()){
-			((NamespaceContextImpl)nameSpaceCtx).addNamespace(namespace.getPrefix(), namespace.getUrl());
-		}
-	}
+	public static final String BLOG_REF = "ref";
+	public static final String BLOG_REF_VALUE = "urn:lsid:ibm.com:blogs:entry-";
 }

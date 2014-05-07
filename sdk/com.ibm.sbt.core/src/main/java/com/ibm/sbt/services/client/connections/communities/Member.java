@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -57,16 +57,6 @@ public class Member extends Person {
 		}
 	}
 	
-	/**
-	 * Constructor
-	 * 
-	 * @param svc
-	 * @param handler
-	 */
-	public Member(CommunityService svc, XmlDataHandler handler){
-		super(svc,handler);
-	}
-
     /**
      * 
      * @param service

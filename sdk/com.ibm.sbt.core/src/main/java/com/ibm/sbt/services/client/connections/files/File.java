@@ -37,19 +37,17 @@ import com.ibm.sbt.services.client.base.AtomXPath;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
-import com.ibm.sbt.services.client.connections.files.model.Author;
+import com.ibm.sbt.services.client.connections.common.Person;
 import com.ibm.sbt.services.client.connections.files.model.FileEntryXPath;
 import com.ibm.sbt.services.client.connections.files.model.FileRequestPayload;
-import com.ibm.sbt.services.client.connections.files.model.Modifier;
-import com.ibm.sbt.services.client.connections.files.model.Person;
 
 /**
  * @Represents Connections File
  * @author Vimal Dhupar
  */
 public class File extends AtomEntity {
-	private Author			authorEntry;
-	private Modifier		modifierEntry;
+	private Person	authorEntry;
+	private Person	modifierEntry;
 
 	public File() {
 	}
@@ -168,13 +166,12 @@ public class File extends AtomEntity {
 	}
 
 	/**
-	 * Method to get the Author ojbect for the File
-	 * @see Author.java 
-	 * @return Author
+	 * Method to get the Author object for the File
+	 * @return Person
 	 */
-	public Author getAuthor() {
+	public Person getAuthor() {
 		if(null == authorEntry) {
-			 authorEntry = new Author(getService(), new XmlDataHandler((Node)getDataHandler().getData(), 
+			 authorEntry = new Person(getService(), new XmlDataHandler((Node)getDataHandler().getData(), 
 		        		nameSpaceCtx, (XPathExpression)AtomXPath.author.getPath()));
 		}
 		return authorEntry;
@@ -219,7 +216,7 @@ public class File extends AtomEntity {
 	 */
 	public Person getModifier() {
 		if(null == modifierEntry) {
-			modifierEntry = new Modifier(getService(), new XmlDataHandler((Node)getDataHandler().getData(), 
+			modifierEntry = new Person(getService(), new XmlDataHandler((Node)getDataHandler().getData(), 
 	        		nameSpaceCtx, (XPathExpression)AtomXPath.modifier.getPath()));
 		}
 		return modifierEntry;

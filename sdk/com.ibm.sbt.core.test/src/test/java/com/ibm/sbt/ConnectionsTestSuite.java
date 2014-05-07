@@ -21,7 +21,6 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import com.ibm.sbt.services.client.base.URLBuilderTest;
-import com.ibm.sbt.services.client.connections.activity.ActivityServiceTestSuite;
 import com.ibm.sbt.services.client.connections.activitystreams.ActivityStreamServiceTest;
 import com.ibm.sbt.services.client.connections.blogs.BlogServiceTestSuite;
 import com.ibm.sbt.services.client.connections.bookmarks.BookmarkServiceTest;
@@ -41,7 +40,6 @@ import com.ibm.sbt.services.client.connections.wikis.WikiServiceTestSuite;
 @RunWith(Suite.class)
 @SuiteClasses({
 										// 		Errors/Failures/Ignored
-	ActivityServiceTestSuite.class,		//		0/0/3						
 	ActivityStreamServiceTest.class,	//		0/0/0
 	BlogServiceTestSuite.class,			//		0/0/0	
 	BookmarkServiceTest.class,			//		0/0/0	

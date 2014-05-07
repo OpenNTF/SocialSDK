@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -17,17 +17,16 @@ package com.ibm.sbt.test.js.connections.activities.api;
 
 import java.util.List;
 
-import org.junit.Assert;
-
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.ibm.sbt.automation.core.test.BaseApiTest;
 import com.ibm.sbt.automation.core.test.connections.BaseActivitiesTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
-import com.ibm.sbt.services.client.connections.activity.Activity;
-import com.ibm.sbt.services.client.connections.activity.ActivityNode;
+import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.services.client.connections.activities.Activity;
+import com.ibm.sbt.services.client.connections.activities.ActivityNode;
 
 /**
  * @author mwallace
@@ -42,15 +41,15 @@ public class GetAllToDos extends BaseActivitiesTest {
     ActivityNode activityNode;
     
    	@Before
-   	public void init() {
+   	public void init() throws ClientServicesException {
    		activity = createActivity();	
-   		activityNode = createActivityNode(activity.getActivityId(), "todo");   		
+   		activityNode = createActivityNode(activity.getActivityUuid(), "todo");
    	}
    	
    	@After
-	public void destroy() {
-		deleteActivityNode(activityNode.getActivityId());
-		deleteActivity(activity.getActivityId());		
+	public void destroy() throws ClientServicesException {
+		deleteActivityNode(activityNode.getActivityNodeUuid());
+		deleteActivity(activity.getActivityUuid());		
 	}
    
    	

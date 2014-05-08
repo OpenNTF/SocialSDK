@@ -16,8 +16,10 @@
 
 package com.ibm.sbt.services.client.base.serializers;
 
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
+import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.base.ConnectionsConstants.Namespace;
 import com.ibm.sbt.services.client.connections.common.Person;
 
@@ -36,12 +38,44 @@ public class PersonSerializer extends BaseEntitySerializer<Person> {
 		super(entity);
 	}
 	
+	/**
+	 * Returns a full or partial xml representation of a Person,
+	 * depending on the fields with data
+	 * @param nodeName
+	 * @return
+	 */
 	public Node xmlNode(String nodeName) {
-		return appendChildren(rootNode(element(nodeName)),
-				textElement(NAME, entity.getName()),
-				textElement(EMAIL, entity.getEmail()),
-				textElement(Namespace.SNX.getUrl(), USER_ID, entity.getId()),
-				textElement(Namespace.SNX.getUrl(), USER_STATE, entity.getUserState())
-		);
+		Element[] textElements = new Element[getNumFields()];
+		int index = 0;
+		if (StringUtil.isNotEmpty(entity.getName())) {
+			textElements[index++] = textElement(NAME, entity.getName());
+		}
+		if (StringUtil.isNotEmpty(entity.getEmail())) {
+			textElements[index++] = textElement(EMAIL, entity.getEmail());
+		}
+		if (StringUtil.isNotEmpty(entity.getId())) {
+			textElements[index++] = textElement(Namespace.SNX.getUrl(), USER_ID, entity.getId());
+		}
+		if (StringUtil.isNotEmpty(entity.getUserState())) {
+			textElements[index] = textElement(Namespace.SNX.getUrl(), USER_STATE, entity.getUserState());
+		}
+		return appendChildren(rootNode(element(nodeName)), textElements);
+	}
+	
+	private int getNumFields(){
+		int nodeCount = 0;
+		if (StringUtil.isNotEmpty(entity.getName())) {
+			nodeCount++;
+		}
+		if (StringUtil.isNotEmpty(entity.getEmail())) {
+			nodeCount++;
+		}
+		if (StringUtil.isNotEmpty(entity.getId())) {
+			nodeCount++;
+		}
+		if (StringUtil.isNotEmpty(entity.getUserState())) {
+			nodeCount++;
+		}
+		return nodeCount;
 	}
 }

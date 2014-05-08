@@ -62,6 +62,8 @@ import com.ibm.sbt.services.client.connections.files.model.FileEntryXPath;
 import com.ibm.sbt.services.client.connections.files.model.FileRequestParams;
 import com.ibm.sbt.services.client.connections.files.model.FileRequestPayload;
 import com.ibm.sbt.services.client.connections.files.model.Headers;
+import com.ibm.sbt.services.client.connections.files.serializer.EntityIdSerializer;
+import com.ibm.sbt.services.client.connections.files.serializer.FileSerializer;
 import com.ibm.sbt.services.client.connections.files.serializer.FlagSerializer;
 import com.ibm.sbt.services.client.connections.files.transformers.CommentTransformer;
 import com.ibm.sbt.services.client.connections.files.transformers.FileTransformer;
@@ -71,6 +73,7 @@ import com.ibm.sbt.services.client.connections.files.transformers.MultipleFileTr
 import com.ibm.sbt.services.client.connections.files.util.Messages;
 import com.ibm.sbt.services.client.connections.profiles.ProfileUrls;
 import com.ibm.sbt.services.endpoints.Endpoint;
+import com.ibm.xtq.bcel.generic.NEW;
 
 /**
  * The Files application of IBM® Connections enables teams to create a shared repository of files. The Files API allows application programs to add files to a collection and to read and modify existing files.
@@ -445,7 +448,7 @@ public class FileService extends ConnectionsService {
      * 
      * @param parameters 
      *                list of query string parameters to pass to API
-     * @return EntityList&lt;Comment&gt;
+     * @return EntityList&lt;File&gt;
      * @throws ClientServicesException 
      */
     public EntityList<Comment> getPublicUserFileComments(String fileId, String userId, Map<String, String> parameters) throws ClientServicesException {
@@ -549,9 +552,704 @@ public class FileService extends ConnectionsService {
      * Working with files
      ****************************************************************/
     
+    /**
+     * A cryptographic nonce (number used once) key is a server-specified data string that is generated each time a 401 response is made. The server returns the data string to the client, and the client then passes that string unchanged back to the server with its subsequent request. Cryptographic keys prevent unauthorized access to data and protect against replay attacks. See RFC 2617 for more information about these keys. 
+     * 
+     * @return String - nonce value
+     * @throws ClientServicesException
+     */
+    public String getNonce() throws ClientServicesException {
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.GET_NONCE.format(this, FileUrlParts.accessType.get(accessType));
+        Object result = null;
+        result = this.getClientService().get(requestUri, null, ClientService.FORMAT_TEXT);
+        if (result == null) {
+            return null;
+        }
+        return (String) ((Response) result).getData();
+    }
+    
+    /**
+     * Add a file to your library programmatically.
+     * 
+     * @param file - a readable file on the server
+     * @return File
+     * @throws ClientServicesException
+     */
+    public File uploadFile(java.io.File file) throws ClientServicesException {
+        return this.uploadFile(file, null);
+    }
+
+    /**
+     * Add a file to your library programmatically.
+     * 
+     * @param file - a readable file on the server
+     * @param parameters - file creation parameters, can be null
+     * @return File
+     * @throws ClientServicesException
+     */
+    public File uploadFile(java.io.File file, Map<String, String> parameters) throws ClientServicesException {
+        if (file == null) {
+            throw new ClientServicesException(null, Messages.Invalid_FileId);
+        }
+        if (!file.canRead()) {
+            throw new ClientServicesException(null, Messages.MessageCannotReadFile,
+                    file.getAbsolutePath());
+        }
+
+        try {
+            return this.uploadFile(new FileInputStream(file), file.getName(), file.length(), parameters);
+        } catch (FileNotFoundException e) {
+            throw new ClientServicesException(null, Messages.MessageCannotReadFile,
+                    file.getAbsolutePath());
+        }
+    }
+
+    /**
+     * Add a file to your library programmatically.
+     * 
+     * @param stream the content to be uploaded
+     * @param title the title to be used for uploading the file
+     * @param length the length of the file
+     * @return File
+     * @throws ClientServicesException
+     */
+    public File uploadFile(java.io.InputStream stream, final String title, long length)
+            throws ClientServicesException {
+        return this.uploadFile(stream, title, length, null);
+    }
+
+    /**
+     * Add a file to your library programmatically.
+     * 
+     * @param stream the content to be uploaded
+     * @param title the title to be used for uploading the file
+     * @param length the length of the file
+     * @param p parameters
+     * @return File
+     * @throws ClientServicesException
+     */
+    public File uploadFile(java.io.InputStream stream, final String title, long length,
+            Map<String, String> p) throws ClientServicesException {
+        if (stream == null) {
+            throw new ClientServicesException(null, Messages.Invalid_Stream);
+        }
+        if (title == null) {
+            throw new ClientServicesException(null, Messages.Invalid_Name);
+        }
+        Content contentFile = this.getContentObject(title, stream, length);
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.MYUSERLIBRARY_FEED.format(this, FileUrlParts.accessType.get(accessType));
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put(FileConstants.X_UPDATE_NONCE, this.getNonce()); // It is not clearly documented which Content Type requires Nonce, thus adding nonce in header for all upload requests. 
+        Response data = this.createData(requestUri, p, headers, contentFile);
+        if (FileService.logger.isLoggable(Level.FINEST)) {
+            FileService.logger.exiting(FileService.sourceClass, "uploadFile", data);
+        }
+
+        return this.getFileFeedHandler().createEntity(data);
+    }
+    
+    //////////////////////////////////////////////////////////////////////////////////////////////////
+    //TODO: add file using multipart POST
+    //////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    /**
+     * Add a file or files to a folder programmatically.
+     * You cannot add a file from your local directory to a folder; the file must already have been uploaded to the Files application. To add a file to a folder you must be an editor of the folder.
+     * 
+     * @param folderId ID of the Collection / Folder to which File(s) need to be added.
+     * @param listOfFileIds A list of file ids, which need to be added to the collection.
+     * @param params - Map of Parameters. See {@link FileRequestParams} for possible values.
+     * @return EntityList&lt;File&gt;
+     * @throws ClientServicesException
+     * @throws TransformerException
+     */
+    public EntityList<File> addFilesToFolder(String folderId, List<String> listOfFileIds,
+            Map<String, String> params) throws ClientServicesException, TransformerException {
+        if (StringUtil.isEmpty(folderId)) {
+            throw new ClientServicesException(null, Messages.Invalid_CollectionId);
+        }
+        for (String fileId : listOfFileIds) {
+            if (StringUtil.isEmpty(fileId)) {
+                throw new ClientServicesException(null, Messages.Invalid_FileId);
+            }
+        }
+        String accessType = AccessType.AUTHENTICATED.getText();
+        params = (null == params) ? new HashMap<String, String>() : params;
+        String requestUri = FileUrls.COLLECTION_FEED.format(this, FileUrlParts.accessType.get(accessType),
+                FileUrlParts.folderId.get(folderId));
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put(Headers.ContentType, Headers.ATOM);
+        Object payload = new EntityIdSerializer(listOfFileIds).fileIdListPayload();
+        Response result;
+        result = this.createData(requestUri, params, headers, payload);
+        return this.getFileFeedHandler().createEntityList(result);
+    }
+    
+    /**
+     * Add a file to a folder programmatically.
+     * You cannot add a file from your local directory to a folder; the file must already have been uploaded to the Files application. To add a file to a folder you must be an editor of the folder.
+     * 
+     * @param folderId ID of the Collection / Folder to which File(s) need to be added.
+     * @param listOfFileIds A list of file ids, which need to be added to the collection.
+     * @param params - Map of Parameters. See {@link FileRequestParams} for possible values.
+     * @return EntityList&lt;File&gt;
+     * @throws ClientServicesException
+     * @throws TransformerException
+     */
+    public void addFileToFolder(String fileId, String folderId) throws ClientServicesException,
+            TransformerException {
+        List<String> c = Arrays.asList(new String[] { folderId });
+        this.addFileToFolders(fileId, c);
+    }
+
+    /**
+     * Add a file to multiple folders programmatically.
+     * You cannot add a file from your local directory to a folder; the file must already have been uploaded to the Files application. To add a file to a folder you must be an editor of the folder.
+     * 
+     * @param fileId
+     * @param folderIds - list of folder Ids to which the file needs to be added.
+     * @throws ClientServicesException
+     * @throws TransformerException
+     */
+    public void addFileToFolders(String fileId, List<String> folderIds) throws ClientServicesException,
+            TransformerException {
+        this.addFileToFolders(fileId, folderIds, null, null);
+    }
+
+    /**
+     * Add a file to multiple folders programmatically.
+     * You cannot add a file from your local directory to a folder; the file must already have been uploaded to the Files application. To add a file to a folder you must be an editor of the folder.
+     * 
+     * @param fileId
+     * @param folderIds - list of folder Ids to which the file needs to be added.
+     * @param params
+     * @throws ClientServicesException
+     * @throws TransformerException
+     */
+    public void addFileToFolders(String fileId, List<String> folderIds, Map<String, String> params)
+            throws ClientServicesException, TransformerException {
+        this.addFileToFolders(fileId, folderIds, null, params);
+    }
+
+    /**
+     * Add a file to multiple folders programmatically.
+     * You cannot add a file from your local directory to a folder; the file must already have been uploaded to the Files application. To add a file to a folder you must be an editor of the folder.
+     * 
+     * @param fileId
+     * @param folderIds - list of folder Ids to which the file needs to be added.
+     * @param userId
+     * @throws ClientServicesException
+     * @throws TransformerException
+     */
+    public void addFileToFolders(String fileId, List<String> folderIds, String userId)
+            throws ClientServicesException, TransformerException {
+        this.addFileToFolders(fileId, folderIds, userId, null);
+    }
+
+    /**
+     * Add a file to multiple folders programmatically.
+     * You cannot add a file from your local directory to a folder; the file must already have been uploaded to the Files application. To add a file to a folder you must be an editor of the folder.
+     * 
+     * @param fileId
+     * @param folderIds - list of folder Ids to which the file needs to be added.
+     * @param userId
+     * @param params
+     * @throws ClientServicesException
+     * @throws TransformerException
+     */
+    public void addFileToFolders(String fileId, List<String> folderIds, String userId,
+            Map<String, String> params) throws ClientServicesException, TransformerException {
+        String accessType = AccessType.AUTHENTICATED.getText();
+
+        String requestUri;
+        if (StringUtil.isEmpty(userId)) {
+            requestUri = FileUrls.MYUSERLIBRARY_DOCUMENT_FEED.format(this,
+                    FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
+        } else {
+            requestUri = FileUrls.USERLIBRARY_DOCUMENT_FEED.format(this,
+                    FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId),
+                    FileUrlParts.fileId.get(fileId));
+        }
+
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put(Headers.ContentType, Headers.ATOM);
+        headers.put(Headers.ContentLanguage, Headers.UTF);
+
+        params = (null == params) ? new HashMap<String, String>() : params;
+        Object payload = new EntityIdSerializer(folderIds,FileConstants.CATEGORY_COLLECTION).fileIdListPayload();
+        this.createData(requestUri, params, headers, payload);
+    }
+    
+    /**
+     * Share a file with a community or multiple communities programmatically.
+     * 
+     * @param fileId Id of the file to be shared
+     * @param communityIds Id/Ids of the communities with which the file needs to be shared
+     * @param params
+     * @return
+     * @throws ClientServicesException
+     * @throws TransformerException
+     */
+    public void shareFileWithCommunities(String fileId, List<String> communityIds, Map<String, String> params)
+            throws ClientServicesException, TransformerException {
+        if (StringUtil.isEmpty(fileId)) {
+            throw new ClientServicesException(null, Messages.Invalid_FileId);
+        }
+        for (String communityId : communityIds) {
+            if (StringUtil.isEmpty(communityId)) {
+                throw new ClientServicesException(null, Messages.Invalid_CommunityId);
+            }
+        }
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.MYUSERLIBRARY_RECYCLEBIN_ENTRY.format(this,
+                FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
+        params = (null == params) ? new HashMap<String, String>() : params;
+        
+        Object payload =  new EntityIdSerializer(communityIds,FileConstants.CATEGORY_COMMUNITY).fileIdListPayload();
+        
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put(Headers.ContentType, Headers.ATOM);
+        headers.put(Headers.ContentLanguage, Headers.UTF);
+        this.createData(requestUri, params, headers, payload);
+    }
+    
+    /**
+     * Method to download the specified file
+     * 
+     * @param ostream - output stream which contains the binary content of the file
+     * @param file
+     * @param params
+     * 
+     * @return long - no of bytes
+     * @throws ClientServicesException
+     */
+    public long downloadFile(OutputStream ostream, File file, Map<String, String> params)
+            throws ClientServicesException {
+        // file content url
+        String requestUrl = file.getEditMediaUrl();
+
+        // request headers
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put(Headers.ContentType, Headers.BINARY);
+
+        // trigger request to download the file
+        Response response = null;
+        response = this.getClientService().get(requestUrl, params, headers, ClientService.FORMAT_INPUTSTREAM);
+
+        // read the file data
+        InputStream istream = (InputStream) response.getData();
+        long noOfBytes = 0;
+        try {
+            if (istream != null) {
+                noOfBytes = StreamUtil.copyStream(istream, ostream);
+                ostream.flush();
+            }
+        } catch (IllegalStateException e) {
+            throw new ClientServicesException(e, Messages.MessageExceptionInDownloadingFile);
+        } catch (IOException e) {
+            throw new ClientServicesException(e, Messages.MessageExceptionInDownloadingFile);
+        }
+        return noOfBytes;
+    }
+
+    /**
+     * Method to download a File of logged in user
+     * 
+     * @param ostream - output stream which contains the binary content of the file
+     * @param fileId
+     * @return long - no of bytes
+     * @throws ClientServicesException
+     */
+    public long downloadFile(OutputStream ostream, final String fileId) throws ClientServicesException {
+        return this.downloadFile(ostream, fileId, null, false);
+    }
+
+    /**
+     * Method to download a File of logged in user
+     * 
+     * @param ostream - output stream which contains the binary content of the file
+     * @param fileId
+     * @param libraryId - required in case of public file
+     * @param params
+     * @return long - no of bytes
+     * @throws ClientServicesException
+     */
+    public long downloadFile(OutputStream ostream, final String fileId, Map<String, String> params)
+            throws ClientServicesException {
+        return this.downloadFile(ostream, fileId, null, params, false);
+    }
+
+    /**
+     * Method to download a File
+     * 
+     * @param ostream - output stream which contains the binary content of the file
+     * @param fileId
+     * @param libraryId - required in case of public files
+     * @param isPublic - flag to indicate public file
+     * @return long - no of bytes
+     * @throws ClientServicesException
+     */
+    public long downloadFile(OutputStream ostream, final String fileId, final String libraryId,
+            boolean isPublic) throws ClientServicesException {
+        return this.downloadFile(ostream, fileId, libraryId, null, isPublic);
+    }
+
+    /**
+     * Method to download a File
+     * 
+     * @param ostream - output stream which contains the binary content of the file
+     * @param fileId
+     * @param libraryId - required in case of public file
+     * @param params
+     * @param isPublic - flag to indicate public file
+     * @return long - no of bytes
+     * @throws ClientServicesException
+     */
+    public long downloadFile(OutputStream ostream, final String fileId, final String libraryId,
+            Map<String, String> params, boolean isPublic) throws ClientServicesException {
+        File file = !isPublic ? this.getFile(fileId) : this.getPublicFile(fileId, libraryId, null);
+        // now we have the file.. we need to download it.. 
+        String accessType = !isPublic ? AccessType.AUTHENTICATED.getText() : AccessType.PUBLIC.getText();
+        String category = !isPublic ? Categories.MYUSERLIBRARY.get() : null;
+        String libraryFilter = (libraryId != null) ? "library" : "";
+
+        String requestUrl = FileUrls.DOWNLOAD_FILE.format(this, FileUrlParts.accessType.get(accessType),
+                FileUrlParts.category.get(category), FileUrlParts.fileId.get(file.getFileId()),
+                FileUrlParts.libraryFilter.get(libraryFilter), FileUrlParts.libraryId.get(libraryId));
+
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put(Headers.ContentType, Headers.BINARY);
+        Response response = null;
+        response = this.getClientService().get(requestUrl, params, headers, ClientService.FORMAT_INPUTSTREAM);
+        InputStream istream = (InputStream) response.getData();
+        long noOfBytes = 0;
+        try {
+            if (istream != null) {
+                noOfBytes = StreamUtil.copyStream(istream, ostream);
+                ostream.flush();
+            }
+        } catch (IllegalStateException e) {
+            throw new ClientServicesException(e, Messages.MessageExceptionInDownloadingFile);
+        } catch (IOException e) {
+            throw new ClientServicesException(e, Messages.MessageExceptionInDownloadingFile);
+        }
+        return noOfBytes;
+    }
+
+    
+    /**
+     * Method to download a community file. A community file is a public file.
+     * 
+     * @param ostream - output stream which contains the binary content of the file
+     * @param fileId
+     * @param libraryId - Library Id of which the file is a part. This value can be obtained by using File's getLibraryId method.
+     * @return
+     * @throws ClientServicesException
+     */
+    public long downloadCommunityFile(OutputStream ostream, final String fileId, final String libraryId)
+            throws ClientServicesException {
+        return this.downloadCommunityFile(ostream, fileId, libraryId, null);
+    }
+    
+    /**
+     * Retrieve an Atom document representation of the metadata for a file from your library. This method returns the Atom document containing the metadata associated with a file in a library. If you want to retrieve the file itself, see Retrieving a file
+     * 
+     * @param fileId - ID of the file to be fetched from the Connections Server
+     * @param parameters - Map of Parameters. See {@link FileRequestParams} for possible values.
+     * @param load - a flag to determine whether the network call should be made or an empty placeholder of
+     *        the File object should be returned. load - true : network call is made to fetch the
+     *        file load - false : an empty File object is returned, and then updations can be made on
+     *        this object.
+     * @return File
+     * @throws ClientServicesException
+     */
+    public File getFile(String fileId, Map<String, String> parameters, boolean load)
+            throws ClientServicesException {
+        File file = new File(fileId);
+        if (load) {
+            SubFilters subFilters = new SubFilters();
+            subFilters.setFileId(fileId);
+            String accessType = AccessType.AUTHENTICATED.getText();
+            String requestUri = FileUrls.MYUSERLIBRARY_DOCUMENT_ENTRY.format(this,
+                    FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
+            return this.getFileEntity(requestUri, parameters);
+        }
+        return file;
+    }
+
+    /**
+     * Retrieve an Atom document representation of the metadata for a file from your library. This method returns the Atom document containing the metadata associated with a file in a library. If you want to retrieve the file itself, see Retrieving a file
+     * 
+     * @param fileId - ID of the file to be fetched from the Connections Server
+     * @param libraryId - ID of the library to which the public file belongs
+     * @param parameters - Map of Parameters. See {@link FileRequestParams} for possible values.
+     * @return File
+     * @throws ClientServicesException
+     */
+    public File getFile(String fileId, String libraryId, Map<String, String> parameters)
+            throws ClientServicesException {
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.MYUSERLIBRARY_DOCUMENT_ENTRY.format(this,
+                FileUrlParts.accessType.get(accessType), FileUrlParts.libraryId.get(libraryId),
+                FileUrlParts.fileId.get(fileId));
+        return this.getFileEntity(requestUri, parameters);
+    }
+    
+    /**
+     * Delete a file and the Atom document representation of its associated metadata from your collection. 
+     * Only the owner of a collection can delete a file from the collection. 
+     * 
+     * @param fileId - id of the file to be deleted
+     * @throws ClientServicesException
+     */
+    public void deleteFile(String fileId) throws ClientServicesException {
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.MYUSERLIBRARY_DOCUMENT_ENTRY.format(this,
+                FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
+        this.deleteData(requestUri, null, null);
+    }
+    
+    /**
+     * Removes a file from a folder. 
+     * This action does not delete the file entirely; it only removes its association with the folder. 
+     * The currently authenticated user must be the owner of the folder, an administrator, 
+     * the owner of the item in the folder or have been given delete access to the folder. 
+     * Delete access is granted through the manager role of a folder.
+     * 
+     * @param folderId ID of the Collection / Folder from which the File needs to be removed.
+     * @param fileId file Id of the file which need to be removed from the collection.
+     * @throws ClientServicesException
+     */
+    public void removeFileFromFolder(String folderId, String fileId) throws ClientServicesException {
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.COLLECTION_FEED.format(this, FileUrlParts.accessType.get(accessType),
+                FileUrlParts.folderId.get(folderId));
+        Map<String, String> params = new HashMap<String, String>();
+        params.put(FileRequestParams.ITEMID.getFileRequestParams(), fileId);
+        this.deleteData(requestUri, params, null);
+    }
+
+
+    /**
+     * Update a file in your file collection programmatically.
+     * To update the metadata associated with the file, pass new values for the document elements using input parameters.
+     * 
+     * @param iStream
+     * @param fileId
+     * @param title
+     * @param params
+     * @return File
+     * @throws ClientServicesException
+     */
+    public File updateFile(java.io.InputStream inputStream, File file, Map<String, String> params)
+            throws ClientServicesException {
+        String requestUrl = file.getEditMediaUrl();
+
+        Content contentFile = this.getContentObject(file.getTitle(), inputStream);
+
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put(FileConstants.X_UPDATE_NONCE, this.getNonce()); // It is not clearly documented which Content Type requires Nonce, thus adding nonce in header for all upload requests. 
+
+        Response result = this.updateData(requestUrl, params, headers, contentFile, null);
+        return this.getFileFeedHandler().createEntity(result);
+    }
+
+    /**
+     * Update the Atom document representation of the metadata for a file from your library.
+     * 
+     * @param FileId - pass the fileID of the file to be updated
+     * @param params - Map of Parameters. See {@link FileRequestParams} for possible values.possible values.
+     * @param requestBody - Document which is passed directly as requestBody to the execute request. This
+     *        method is used to update the metadata/content of File in Connections.
+     * @return File
+     * @throws ClientServicesException
+     */
+    public File updateFileMetadata(File file, Map<String, String> params)
+            throws ClientServicesException {
+        String accessType = AccessType.AUTHENTICATED.getText();
+        if (file==null) {
+            throw new ClientServicesException(null, Messages.Invalid_File);
+        }
+        String payload = new FileSerializer(file).generateFileUpdatePayload();
+        String requestUri = FileUrls.MYUSERLIBRARY_DOCUMENT_ENTRY.format(this,
+                FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(file.getFileId()));
+        Response result = this.updateData(requestUri, params, new ClientService.ContentString(
+                payload, CommonConstants.APPLICATION_ATOM_XML), null);
+        return this.getFileFeedHandler().createEntity(result);
+    }
+
+    
+    //////////////////////////////////////////////////////////////////////////////////////////////////
+    //TODO: add file using multipart POST
+    //////////////////////////////////////////////////////////////////////////////////////////////////
+    
+
     /*****************************************************************
      * Working with folders
      ****************************************************************/
+
+    /**
+     * Create a file folder programmatically.
+     * 
+     * @param name name of the folder to be created
+     * @return File
+     * @throws ClientServicesException
+     * @throws TransformerException
+     */
+    public File createFolder(String name) throws ClientServicesException, TransformerException {
+        return this.createFolder(name, null);
+    }
+
+    /**
+     * Create a file folder programmatically.
+     * 
+     * @param name name of the folder to be created
+     * @param summary description of the folder
+     * @return File
+     * @throws ClientServicesException
+     * @throws TransformerException
+     */
+    public File createFolder(String name, String summary) throws ClientServicesException {
+        File f  = new File();
+        f.setTitle(name);
+        f.setLabel(name);
+        f.setSummary(summary);
+        return createFolder(f);
+        
+    }
+    /**
+     * Create a file folder programmatically.
+     * 
+     * @param folder the folder objct to be created
+     * @return File
+     * @throws ClientServicesException
+     * @throws TransformerException
+     */
+    public File createFolder(File folder)
+            throws ClientServicesException {
+        String accessType = AccessType.AUTHENTICATED.getText();
+
+        String requestUri = FileUrls.COLLECTIONS_FEED.format(this, FileUrlParts.accessType.get(accessType));
+        String payload = new FileSerializer(folder).generateFileUpdatePayload();
+
+        Response result = this.createData(requestUri, null, new ClientService.ContentString(payload,
+                CommonConstants.APPLICATION_ATOM_XML));
+        File r = this.getFileFeedHandler().createEntity(result);
+        folder.clearFieldsMap();
+        folder.setData(r.getDataHandler().getData());
+        return folder;
+    }
+
+    /**
+     * Retrieve an Atom document representation of a file folder.
+     * 
+     * @param folderId
+     * @return
+     * @throws ClientServicesException
+     */
+    public File getFolder(String folderId) throws ClientServicesException {
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.COLLECTION_ENTRY.format(this, FileUrlParts.accessType.get(accessType),
+                FileUrlParts.folderId.get(folderId));
+        return this.getFileEntity(requestUri, null);
+    }
+    
+    /**
+     * Delete a file folder using the HTTP DELETE request. Deleting a folder does not delete the files in the folder. Only a manager of a folder can delete the folder
+     * 
+     * @param folderId
+     * @throws ClientServicesException
+     */
+    public void deleteFolder(String folderId) throws ClientServicesException {
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.COLLECTION_ENTRY.format(this, FileUrlParts.accessType.get(accessType),
+                FileUrlParts.folderId.get(folderId));
+        this.deleteData(requestUri, null, null);
+    }
+    
+    /**
+     * Update the Atom document representation of the file folder.
+     * 
+     * @param folder
+     * @return
+     * @throws ClientServicesException
+     */
+    public File updateFolder(File folder) throws ClientServicesException{
+            String accessType = AccessType.AUTHENTICATED.getText();
+            String requestUri = FileUrls.COLLECTION_ENTRY.format(this, FileUrlParts.accessType.get(accessType),
+                    FileUrlParts.folderId.get(folder.getFileId()));
+            String payload = new FileSerializer(folder).generateFileUpdatePayload();
+            Map<String, String> headers = new HashMap<String, String>();
+            headers.put(Headers.ContentType, Headers.ATOM);
+
+            Response result = this.updateData(requestUri, null, headers, payload, null);
+            File r = this.getFileFeedHandler().createEntity(result);
+            folder.clearFieldsMap();
+            folder.setData(r.getDataHandler().getData());
+            return folder;
+    }
+    
+    /**
+     * Update the Atom document representation of the file folder.
+     * 
+     * @param folderId
+     * @param title
+     * @param label
+     * @param summary
+     * @return
+     * @throws ClientServicesException
+     */
+    public File updateFolder(String folderId, String title, String label, String summary) throws ClientServicesException{
+         File f = new File();
+        f.setFileId(folderId);
+        f.setLabel(label);
+        f.setTitle(title);
+        f.setSummary(summary);
+        return updateFolder(f);
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     /*****************************************************************
      * Working with shares
@@ -796,133 +1494,7 @@ public class FileService extends ConnectionsService {
         return this.getCommentFeedHandler().createEntity(result);
     }
 
-    /**
-     * addFilesToFolder
-     * <p>
-     * Rest API used : /files/basic/api/collection/{collection-id}/feed <br>
-     * 
-     * @param folderId ID of the Collection / Folder to which File(s) need to be added.
-     * @param listOfFileIds A list of file Ids, which need to be added to the collection.
-     * @param params - Map of Parameters. See {@link FileRequestParams} for possible values.
-     * @return FileList
-     * @throws ClientServicesException
-     * @throws TransformerException
-     */
-    public EntityList<File> addFilesToFolder(String folderId, List<String> listOfFileIds,
-            Map<String, String> params) throws ClientServicesException, TransformerException {
-        if (StringUtil.isEmpty(folderId)) {
-            throw new ClientServicesException(null, Messages.Invalid_CollectionId);
-        }
-        for (String fileId : listOfFileIds) {
-            if (StringUtil.isEmpty(fileId)) {
-                throw new ClientServicesException(null, Messages.Invalid_FileId);
-            }
-        }
-        String accessType = AccessType.AUTHENTICATED.getText();
-        params = (null == params) ? new HashMap<String, String>() : params;
-        String requestUri = FileUrls.COLLECTION_FEED.format(this, FileUrlParts.accessType.get(accessType),
-                FileUrlParts.folderId.get(folderId));
-        Map<String, String> headers = new HashMap<String, String>();
-        headers.put(Headers.ContentType, Headers.ATOM);
-        Object payload = this.constructPayloadForMultipleEntries(listOfFileIds,
-                FileRequestParams.ITEMID.getFileRequestParams());
-        Response result;
-        result = this.createData(requestUri, params, headers, payload);
-        return this.getFileFeedHandler().createEntityList(result);
-    }
 
-    public void addFileToFolder(String fileId, String folderId) throws ClientServicesException,
-            TransformerException {
-        List<String> c = Arrays.asList(new String[] { folderId });
-        this.addFileToFolders(fileId, c);
-    }
-
-    /**
-     * addFileToFolders
-     * <p>
-     * Add a file to a folder or multiple folders. <br>
-     * Rest API used : /files/basic/api/userlibrary/{user-id}/document/{document-id-or-label}/feed <br>
-     * 
-     * @param fileId
-     * @param folderIds - list of folder Ids to which the file needs to be added.
-     * @throws ClientServicesException
-     * @throws TransformerException
-     */
-    public void addFileToFolders(String fileId, List<String> folderIds) throws ClientServicesException,
-            TransformerException {
-        this.addFileToFolders(fileId, folderIds, null, null);
-    }
-
-    /**
-     * addFileToFolders
-     * <p>
-     * Add a file to a folder or multiple folders. <br>
-     * Rest API used : /files/basic/api/userlibrary/{user-id}/document/{document-id-or-label}/feed <br>
-     * 
-     * @param fileId
-     * @param folderIds - list of folder Ids to which the file needs to be added.
-     * @param params
-     * @throws ClientServicesException
-     * @throws TransformerException
-     */
-    public void addFileToFolders(String fileId, List<String> folderIds, Map<String, String> params)
-            throws ClientServicesException, TransformerException {
-        this.addFileToFolders(fileId, folderIds, null, params);
-    }
-
-    /**
-     * addFileToFolders
-     * <p>
-     * Add a file to a folder or multiple folders. <br>
-     * Rest API used : /files/basic/api/userlibrary/{user-id}/document/{document-id-or-label}/feed <br>
-     * 
-     * @param fileId
-     * @param folderIds - list of folder Ids to which the file needs to be added.
-     * @param userId
-     * @throws ClientServicesException
-     * @throws TransformerException
-     */
-    public void addFileToFolders(String fileId, List<String> folderIds, String userId)
-            throws ClientServicesException, TransformerException {
-        this.addFileToFolders(fileId, folderIds, userId, null);
-    }
-
-    /**
-     * addFileToFolders
-     * <p>
-     * Add a file to a folder or multiple folders. <br>
-     * Rest API used : /files/basic/api/userlibrary/{user-id}/document/{document-id-or-label}/feed <br>
-     * 
-     * @param fileId
-     * @param folderIds - list of folder Ids to which the file needs to be added.
-     * @param userId
-     * @param params
-     * @throws ClientServicesException
-     * @throws TransformerException
-     */
-    public void addFileToFolders(String fileId, List<String> folderIds, String userId,
-            Map<String, String> params) throws ClientServicesException, TransformerException {
-        String accessType = AccessType.AUTHENTICATED.getText();
-
-        String requestUri;
-        if (StringUtil.isEmpty(userId)) {
-            requestUri = FileUrls.MYUSERLIBRARY_DOCUMENT_FEED.format(this,
-                    FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
-        } else {
-            requestUri = FileUrls.USERLIBRARY_DOCUMENT_FEED.format(this,
-                    FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId),
-                    FileUrlParts.fileId.get(fileId));
-        }
-
-        Map<String, String> headers = new HashMap<String, String>();
-        headers.put(Headers.ContentType, Headers.ATOM);
-        headers.put(Headers.ContentLanguage, Headers.UTF);
-
-        params = (null == params) ? new HashMap<String, String>() : params;
-        Object payload = this.constructPayloadForMultipleEntries(folderIds,
-                FileRequestParams.ITEMID.getFileRequestParams(), "collection");
-        this.createData(requestUri, params, headers, payload);
-    }
 
     public Comment createComment(String fileId, String comment) throws ClientServicesException,
             TransformerException {
@@ -980,41 +1552,6 @@ public class FileService extends ConnectionsService {
         Response result = this.createData(requestUri, params, headers, new ClientService.ContentXml(
                 payload, CommonConstants.APPLICATION_ATOM_XML));
         return this.getCommentFeedHandler().createEntity(result);
-    }
-
-    public File createFolder(String name) throws ClientServicesException, TransformerException {
-        return this.createFolder(name, null, null);
-    }
-
-    /**
-     * createFolder
-     * <p>
-     * Rest API used : /files/basic/api/collections/feed
-     * 
-     * @param name name of the folder to be created
-     * @param description description of the folder
-     * @param shareWith If the folder needs to be shared, specify the details in this parameter. <br>
-     *        Pass Coma separated List of id, (person/community/group) or role(reader/Contributor/owner)
-     *        in order
-     * @return File
-     * @throws ClientServicesException
-     * @throws TransformerException
-     */
-    public File createFolder(String name, String description) throws ClientServicesException,
-            TransformerException {
-        return this.createFolder(name, description, null);
-    }
-
-    public File createFolder(String name, String description, String shareWith)
-            throws ClientServicesException, TransformerException {
-        String accessType = AccessType.AUTHENTICATED.getText();
-
-        String requestUri = FileUrls.COLLECTIONS_FEED.format(this, FileUrlParts.accessType.get(accessType));
-        Document payload = this.constructPayloadFolder(name, description, shareWith, "create");
-
-        Response result = this.createData(requestUri, null, new ClientService.ContentXml(payload,
-                CommonConstants.APPLICATION_ATOM_XML));
-        return this.getFileFeedHandler().createEntity(result);
     }
 
     /**
@@ -1121,20 +1658,7 @@ public class FileService extends ConnectionsService {
         this.deleteData(requestUri, null, null);
     }
 
-    /**
-     * delete
-     * <p>
-     * Rest API used : /files/basic/api/myuserlibrary/document/{document-id}/entry <br>
-     * 
-     * @param fileId - id of the file to be deleted
-     * @throws ClientServicesException
-     */
-    public void deleteFile(String fileId) throws ClientServicesException {
-        String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.MYUSERLIBRARY_DOCUMENT_ENTRY.format(this,
-                FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
-        this.deleteData(requestUri, null, null);
-    }
+
 
     public void deleteFileAwaitingApproval(String fileId) throws ClientServicesException {
         if (StringUtil.isEmpty(fileId)) {
@@ -1252,35 +1776,9 @@ public class FileService extends ConnectionsService {
         this.deleteData(requestUri, null, null);
     }
 
-    /**
-     * deleteFolder
-     * <p>
-     * Deletes the folder corresponding to the folderId mentioned as input. <br>
-     * Rest API Used : /basic/api/collection/{collection-id}/entry
-     * 
-     * @param folderId
-     * @throws ClientServicesException
-     */
-    public void deleteFolder(String folderId) throws ClientServicesException {
-        String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.COLLECTION_ENTRY.format(this, FileUrlParts.accessType.get(accessType),
-                FileUrlParts.folderId.get(folderId));
-        this.deleteData(requestUri, null, null);
-    }
 
-    /**
-     * Method to download a community file. A community file is a public file.
-     * 
-     * @param ostream - output stream which contains the binary content of the file
-     * @param fileId
-     * @param libraryId - Library Id of which the file is a part. This value can be obtained by using File's getLibraryId method.
-     * @return
-     * @throws ClientServicesException
-     */
-    public long downloadCommunityFile(OutputStream ostream, final String fileId, final String libraryId)
-            throws ClientServicesException {
-        return this.downloadCommunityFile(ostream, fileId, libraryId, null);
-    }
+
+
 
     /**
      * Method to download a community file. A community file is a public file.
@@ -1297,128 +1795,6 @@ public class FileService extends ConnectionsService {
         return this.downloadFile(ostream, fileId, libraryId, params, true);
     }
 
-    /**
-     * Method to download the specified file
-     * 
-     * @param ostream - output stream which contains the binary content of the file
-     * @param file
-     * @param params
-     * 
-     * @return long - no of bytes
-     * @throws ClientServicesException
-     */
-    public long downloadFile(OutputStream ostream, File file, Map<String, String> params)
-            throws ClientServicesException {
-        // file content url
-        String requestUrl = file.getEditMediaUrl();
-
-        // request headers
-        Map<String, String> headers = new HashMap<String, String>();
-        headers.put(Headers.ContentType, Headers.BINARY);
-
-        // trigger request to download the file
-        Response response = null;
-        response = this.getClientService().get(requestUrl, params, headers, ClientService.FORMAT_INPUTSTREAM);
-
-        // read the file data
-        InputStream istream = (InputStream) response.getData();
-        long noOfBytes = 0;
-        try {
-            if (istream != null) {
-                noOfBytes = StreamUtil.copyStream(istream, ostream);
-                ostream.flush();
-            }
-        } catch (IllegalStateException e) {
-            throw new ClientServicesException(e, Messages.MessageExceptionInDownloadingFile);
-        } catch (IOException e) {
-            throw new ClientServicesException(e, Messages.MessageExceptionInDownloadingFile);
-        }
-        return noOfBytes;
-    }
-
-    /**
-     * Method to download a File of logged in user
-     * 
-     * @param ostream - output stream which contains the binary content of the file
-     * @param fileId
-     * @return long - no of bytes
-     * @throws ClientServicesException
-     */
-    public long downloadFile(OutputStream ostream, final String fileId) throws ClientServicesException {
-        return this.downloadFile(ostream, fileId, null, false);
-    }
-
-    /**
-     * Method to download a File of logged in user
-     * 
-     * @param ostream - output stream which contains the binary content of the file
-     * @param fileId
-     * @param libraryId - required in case of public file
-     * @param params
-     * @return long - no of bytes
-     * @throws ClientServicesException
-     */
-    public long downloadFile(OutputStream ostream, final String fileId, Map<String, String> params)
-            throws ClientServicesException {
-        return this.downloadFile(ostream, fileId, null, params, false);
-    }
-
-    /**
-     * Method to download a File
-     * 
-     * @param ostream - output stream which contains the binary content of the file
-     * @param fileId
-     * @param libraryId - required in case of public files
-     * @param isPublic - flag to indicate public file
-     * @return long - no of bytes
-     * @throws ClientServicesException
-     */
-    public long downloadFile(OutputStream ostream, final String fileId, final String libraryId,
-            boolean isPublic) throws ClientServicesException {
-        return this.downloadFile(ostream, fileId, libraryId, null, isPublic);
-    }
-
-    /**
-     * Method to download a File
-     * 
-     * @param ostream - output stream which contains the binary content of the file
-     * @param fileId
-     * @param libraryId - required in case of public file
-     * @param params
-     * @param isPublic - flag to indicate public file
-     * @return long - no of bytes
-     * @throws ClientServicesException
-     */
-    public long downloadFile(OutputStream ostream, final String fileId, final String libraryId,
-            Map<String, String> params, boolean isPublic) throws ClientServicesException {
-        File file = !isPublic ? this.getFile(fileId) : this.getPublicFile(fileId, libraryId, null);
-        // now we have the file.. we need to download it.. 
-        String accessType = !isPublic ? AccessType.AUTHENTICATED.getText() : AccessType.PUBLIC.getText();
-        String category = !isPublic ? Categories.MYUSERLIBRARY.get() : null;
-        String libraryFilter = (libraryId != null) ? "library" : "";
-
-        String requestUrl = FileUrls.DOWNLOAD_FILE.format(this, FileUrlParts.accessType.get(accessType),
-                FileUrlParts.category.get(category), FileUrlParts.fileId.get(file.getFileId()),
-                FileUrlParts.libraryFilter.get(libraryFilter), FileUrlParts.libraryId.get(libraryId));
-
-        Map<String, String> headers = new HashMap<String, String>();
-        headers.put(Headers.ContentType, Headers.BINARY);
-        Response response = null;
-        response = this.getClientService().get(requestUrl, params, headers, ClientService.FORMAT_INPUTSTREAM);
-        InputStream istream = (InputStream) response.getData();
-        long noOfBytes = 0;
-        try {
-            if (istream != null) {
-                noOfBytes = StreamUtil.copyStream(istream, ostream);
-                ostream.flush();
-            }
-        } catch (IllegalStateException e) {
-            throw new ClientServicesException(e, Messages.MessageExceptionInDownloadingFile);
-        } catch (IOException e) {
-            throw new ClientServicesException(e, Messages.MessageExceptionInDownloadingFile);
-        }
-        return noOfBytes;
-    }
 
 
 
@@ -1601,52 +1977,7 @@ public class FileService extends ConnectionsService {
         return this.getFile(fileId, null, load);
     }
 
-    /**
-     * getFile
-     * <p>
-     * Rest API for getting files :- /files/basic/api/myuserlibrary/document/{document-id}/entry
-     * 
-     * @param fileId - ID of the file to be fetched from the Connections Server
-     * @param parameters - Map of Parameters. See {@link FileRequestParams} for possible values.
-     * @param load - a flag to determine whether the network call should be made or an empty placeholder of
-     *        the File object should be returned. load - true : network call is made to fetch the
-     *        file load - false : an empty File object is returned, and then updations can be made on
-     *        this object.
-     * @return File
-     * @throws ClientServicesException
-     */
-    public File getFile(String fileId, Map<String, String> parameters, boolean load)
-            throws ClientServicesException {
-        File file = new File(fileId);
-        if (load) {
-            SubFilters subFilters = new SubFilters();
-            subFilters.setFileId(fileId);
-            String accessType = AccessType.AUTHENTICATED.getText();
-            String requestUri = FileUrls.MYUSERLIBRARY_DOCUMENT_ENTRY.format(this,
-                    FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
-            return this.getFileEntity(requestUri, parameters);
-        }
-        return file;
-    }
 
-    /**
-     * getFile
-     * Read the specified file from the specified library
-     * 
-     * @param fileId - ID of the file to be fetched from the Connections Server
-     * @param libraryId - ID of the library to which the public file belongs
-     * @param parameters - Map of Parameters. See {@link FileRequestParams} for possible values.
-     * @return File
-     * @throws ClientServicesException
-     */
-    public File getFile(String fileId, String libraryId, Map<String, String> parameters)
-            throws ClientServicesException {
-        String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.MYUSERLIBRARY_DOCUMENT_ENTRY.format(this,
-                FileUrlParts.accessType.get(accessType), FileUrlParts.libraryId.get(libraryId),
-                FileUrlParts.fileId.get(fileId));
-        return this.getFileEntity(requestUri, parameters);
-    }
 
     public File getFileAwaitingAction(String fileId) throws ClientServicesException {
         if (StringUtil.isEmpty(fileId)) {
@@ -1933,22 +2264,6 @@ public class FileService extends ConnectionsService {
         return this.getFileEntityList(requestUri, params);
     }
 
-    /**
-     * getFolder
-     * <p>
-     * retrieves the atom entry document of the folder, whose folder id is mentioned as input. <br>
-     * Rest API used : /basic/api/collection/{collection-id}/entry
-     * 
-     * @param folderId
-     * @return
-     * @throws ClientServicesException
-     */
-    public File getFolder(String folderId) throws ClientServicesException {
-        String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.COLLECTION_ENTRY.format(this, FileUrlParts.accessType.get(accessType),
-                FileUrlParts.folderId.get(folderId));
-        return this.getFileEntity(requestUri, null);
-    }
 
 
 
@@ -1956,25 +2271,8 @@ public class FileService extends ConnectionsService {
 
 
 
-    /**
-     * getNonce
-     * <p>
-     * Returns the Cryptographic Key - Nonce value obtained from Connections Server <br>
-     * Rest API used : /files/basic/api/nonce
-     * 
-     * @return String - nonce value
-     * @throws ClientServicesException
-     */
-    public String getNonce() throws ClientServicesException {
-        String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.GET_NONCE.format(this, FileUrlParts.accessType.get(accessType));
-        Object result = null;
-        result = this.getClientService().get(requestUri, null, ClientService.FORMAT_TEXT);
-        if (result == null) {
-            return null;
-        }
-        return (String) ((Response) result).getData();
-    }
+
+
 
 
 
@@ -2103,24 +2401,6 @@ public class FileService extends ConnectionsService {
         this.createData(requestUri, params, null);
     }
 
-    /**
-     * removeFileFromFolder
-     * <p>
-     * Removes a file from a folder. This action does not delete the file entirely; it only removes its association with the folder.<br>
-     * Rest API used : /files/basic/api/collection/{collection-id}/feed
-     * 
-     * @param folderId ID of the Collection / Folder from which the File needs to be removed.
-     * @param fileId file Id of the file which need to be removed from the collection.
-     * @throws ClientServicesException
-     */
-    public void removeFileFromFolder(String folderId, String fileId) throws ClientServicesException {
-        String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.COLLECTION_FEED.format(this, FileUrlParts.accessType.get(accessType),
-                FileUrlParts.folderId.get(folderId));
-        Map<String, String> params = new HashMap<String, String>();
-        params.put(FileRequestParams.ITEMID.getFileRequestParams(), fileId);
-        this.deleteData(requestUri, params, null);
-    }
 
     /**
      * restoreFileFromRecycleBin
@@ -2165,40 +2445,7 @@ public class FileService extends ConnectionsService {
         return this.getFileFeedHandler().createEntity(data);
     }
 
-    /**
-     * shareFileWithCommunities
-     * <p>
-     * Share a file with a community or multiple communities programmatically.<br>
-     * Rest API Used : /basic/api/myuserlibrary/document/{document-id}/feed
-     * 
-     * @param fileId Id of the file to be shared
-     * @param communityIds Id/Ids of the communities with which the file needs to be shared
-     * @param params
-     * @return
-     * @throws ClientServicesException
-     * @throws TransformerException
-     */
-    public void shareFileWithCommunities(String fileId, List<String> communityIds, Map<String, String> params)
-            throws ClientServicesException, TransformerException {
-        if (StringUtil.isEmpty(fileId)) {
-            throw new ClientServicesException(null, Messages.Invalid_FileId);
-        }
-        for (String communityId : communityIds) {
-            if (StringUtil.isEmpty(communityId)) {
-                throw new ClientServicesException(null, Messages.Invalid_CommunityId);
-            }
-        }
-        String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.MYUSERLIBRARY_RECYCLEBIN_ENTRY.format(this,
-                FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
-        params = (null == params) ? new HashMap<String, String>() : params;
-        Object payload = this.constructPayloadForMultipleEntries(communityIds,
-                FileRequestParams.ITEMID.getFileRequestParams(), FileConstants.CATEGORY_COMMUNITY);
-        Map<String, String> headers = new HashMap<String, String>();
-        headers.put(Headers.ContentType, Headers.ATOM);
-        headers.put(Headers.ContentLanguage, Headers.UTF);
-        this.createData(requestUri, params, headers, payload);
-    }
+
 
     /**
      * unlock
@@ -2373,170 +2620,14 @@ public class FileService extends ConnectionsService {
         String requestUri = FileUrls.COMMUNITY_FILE_METADATA.format(this,
                 FileUrlParts.accessType.get(accessType), FileUrlParts.communityId.get(communityLibraryId),
                 FileUrlParts.fileId.get(fileEntry.getFileId()));
-        Document updateFilePayload = null;
-        try {
-            updateFilePayload = this.constructPayload(fileEntry.getFileId(), fileEntry.getFieldsMap());
-        } catch (TransformerException e) {
-            throw new ClientServicesException(e);
-        }
-        Response result = this.updateData(requestUri, params, new ClientService.ContentXml(
+        String updateFilePayload = new FileSerializer(fileEntry).generateFileUpdatePayload();
+        
+        Response result = this.updateData(requestUri, params, new ClientService.ContentString(
                 updateFilePayload, "application/atom+xml"), null);
-        return this.getFileFeedHandler().createEntity(result);
-    }
-
-    /**
-     * Method to updateFile. This method should be used to upload new version of a file, and to simultaneously update file metadata.
-     * <p>
-     * Supported Parameters :
-     * 
-     * @see http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.5+API+Documentation
-     *      #action=openDocument&res_title=Updating_a_file_ic45&content=pdcontent
-     * @param iStream
-     * @param fileId
-     * @param title
-     * @param params
-     * @return File
-     * @throws ClientServicesException
-     */
-    public File updateFile(InputStream iStream, String fileId, String title, Map<String, String> params)
-            throws ClientServicesException {
-        File newVersionFile = this.uploadNewVersionFile(iStream, fileId, title, params);
-        try {
-            return this.updateFileMetadata(newVersionFile, params);
-        } catch (TransformerException e) {
-            throw new ClientServicesException(e, Messages.MessageExceptionInUpdate);
-        }
-    }
-
-    /**
-     * Update the specified file.
-     * 
-     * @param inputStream
-     * @param file
-     * @param params
-     * @return
-     * @throws ClientServicesException
-     */
-    public File updateFile(java.io.InputStream inputStream, File file, Map<String, String> params)
-            throws ClientServicesException {
-        String requestUrl = file.getEditMediaUrl();
-
-        Content contentFile = this.getContentObject(file.getTitle(), inputStream);
-
-        Map<String, String> headers = new HashMap<String, String>();
-        headers.put(FileConstants.X_UPDATE_NONCE, this.getNonce()); // It is not clearly documented which Content Type requires Nonce, thus adding nonce in header for all upload requests. 
-
-        Response result = this.updateData(requestUrl, params, headers, contentFile, null);
-        return this.getFileFeedHandler().createEntity(result);
-    }
-
-    /**
-     * updateFileMetadata
-     * 
-     * @param File
-     * @param params
-     * @param payloadMap
-     * @return
-     * @throws ClientServicesException
-     * @throws TransformerException
-     */
-    public File updateFileMetadata(File fileEntry, Map<String, String> params)
-            throws ClientServicesException, TransformerException {
-        if (fileEntry == null) {
-            throw new ClientServicesException(null, Messages.Invalid_FileEntry);
-        }
-        if (StringUtil.isEmpty(fileEntry.getFileId())) {
-            throw new ClientServicesException(null, Messages.Invalid_FileId);
-        }
-        return this.updateFileMetadata(fileEntry.getFileId(), params, fileEntry.getFieldsMap());
-    }
-
-    /**
-     * updateFileMetadata
-     * 
-     * @param File
-     * @param params
-     * @param requestBody
-     * @return File
-     * @throws ClientServicesException
-     */
-    public File updateFileMetadata(File fileEntry, Map<String, String> params, Document requestBody)
-            throws ClientServicesException {
-        if (fileEntry == null) {
-            throw new ClientServicesException(null, Messages.Invalid_File);
-        }
-        if (StringUtil.isEmpty(fileEntry.getFileId())) {
-            throw new ClientServicesException(null, Messages.Invalid_FileId);
-        }
-        return this.updateFileMetadata(fileEntry.getFileId(), params, requestBody);
-    }
-
-    /**
-     * updateFileMetadata
-     * 
-     * @param fileId
-     * @param updationsMap a Map of updations which need to be done to the file.
-     * @return
-     * @throws ClientServicesException
-     * @throws TransformerException
-     */
-    public File updateFileMetadata(String fileId, Map<String, String> updationsMap)
-            throws ClientServicesException, TransformerException {
-        Map<String, Object> payloadMap = new HashMap<String, Object>();
-        Map<String, String> paramsMap = new HashMap<String, String>();
-        this.parseUpdationsMap(updationsMap, payloadMap, paramsMap);
-        return this.updateFileMetadata(fileId, paramsMap, payloadMap);
-    }
-
-    /**
-     * updateFileMetadata
-     * <p>
-     * This method is used to update the metadata/content of File in Connections. <br>
-     * Rest API used : /files/basic/api/myuserlibrary/document/{document-id}/entry. <br>
-     * User should get the specific file before calling this API, by using getFile method.
-     * 
-     * @param FileId - pass the fileID of the file to be updated
-     * @param params - Map of Parameters. See {@link FileRequestParams} for possible values.possible values.
-     * @param requestBody - Document which is passed directly as requestBody to the execute request. This
-     *        method is used to update the metadata/content of File in Connections.
-     * @return File
-     * @throws ClientServicesException
-     */
-    public File updateFileMetadata(String fileId, Map<String, String> params, Document requestBody)
-            throws ClientServicesException {
-        String accessType = AccessType.AUTHENTICATED.getText();
-        if (StringUtil.isEmpty(fileId)) {
-            return new File();
-        }
-        String requestUri = FileUrls.MYUSERLIBRARY_DOCUMENT_ENTRY.format(this,
-                FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
-        Response result = this.updateData(requestUri, params, new ClientService.ContentXml(
-                requestBody, CommonConstants.APPLICATION_ATOM_XML), null);
-        return this.getFileFeedHandler().createEntity(result);
-    }
-
-    /**
-     * updateFileMetadata
-     * <p>
-     * This method is used to update the metadata/content of File in Connections. <br>
-     * Rest API used : /files/basic/api/myuserlibrary/document/{document-id}/entry. <br>
-     * User should get the specific file before calling this API, by using getFile method.
-     * 
-     * @param FileId - pass the fileID of the file to be updated
-     * @param params - Map of Parameters. See {@link FileRequestParams} for possible values.
-     * @param payloadMap - Map of entries for which we will construct a Request Body. See {@link FileRequestPayload} for possible values.
-     * @return File
-     * @throws ClientServicesException
-     * @throws TransformerException
-     */
-    public File updateFileMetadata(String fileId, Map<String, String> params,
-            Map<String, Object> payloadMap) throws ClientServicesException, TransformerException {
-        if (StringUtil.isEmpty(fileId)) {
-            return new File();
-        }
-        Document updateFilePayload = null;
-        updateFilePayload = this.constructPayload(fileId, payloadMap);
-        return this.updateFileMetadata(fileId, params, updateFilePayload);
+        File r = this.getFileFeedHandler().createEntity(result);
+        fileEntry.clearFieldsMap();
+        fileEntry.setData(r.getDataHandler().getData());
+        return fileEntry;
     }
 
     // Need to figure out what should be done with the label updation of comment. Connection Doc states that
@@ -2563,40 +2654,21 @@ public class FileService extends ConnectionsService {
         this.updateData(requestUri, null, headers, payload, null);
     }
 
-    public void updateFlaggedFile(String fileId, Map<String, String> updationsMap/* to title, tag and content */)
+    public void updateFlaggedFile(File file)
             throws ClientServicesException, TransformerException {
-        if (StringUtil.isEmpty(fileId)) {
+        if (file == null) {
             throw new ClientServicesException(null, Messages.Invalid_FileId);
         }
-        String requestUri = this.getModerationUri(fileId, Categories.REVIEW.get(),
+        String requestUri = this.getModerationUri(file.getFileId(), Categories.REVIEW.get(),
                 ModerationContentTypes.DOCUMENTS.get());
-        // File File = (File) executeGet(requestUri, null, ClientService.FORMAT_XML,
-        // null).get(0);
 
-        Map<String, Object> payloadMap = new HashMap<String, Object>();
-        Map<String, String> paramsMap = new HashMap<String, String>();
-        Map<String, String> headers = new HashMap<String, String>();
-        this.parseUpdationsMap(updationsMap, payloadMap, paramsMap);
-        if (payloadMap != null && !payloadMap.isEmpty()) {
-            headers.put(Headers.ContentType, Headers.ATOM);
-        }
-        Document payload = this.constructPayload(fileId, payloadMap);
-
+        HashMap<String, String> headers = new HashMap<String, String>();
+        headers.put(Headers.ContentType, Headers.ATOM);
+        String payload = new FileSerializer(file).generateFileUpdatePayload();
         this.updateData(requestUri, null, headers, payload, null);
     }
 
-    public File updateFolder(String folderId, String name, String description, String shareWith)
-            throws ClientServicesException, TransformerException {
-        String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.COLLECTION_ENTRY.format(this, FileUrlParts.accessType.get(accessType),
-                FileUrlParts.folderId.get(folderId));
-        Document payload = this.constructPayloadFolder(name, description, shareWith, "update");
-        Map<String, String> headers = new HashMap<String, String>();
-        headers.put(Headers.ContentType, Headers.ATOM);
 
-        Response result = this.updateData(requestUri, null, headers, payload, null);
-        return this.getFileFeedHandler().createEntity(result);
-    }
 
     /**
      * Method to upload a File to Community
@@ -2626,94 +2698,6 @@ public class FileService extends ConnectionsService {
         return this.getFileFeedHandler().createEntity(data);
     }
 
-    /**
-     * Upload a new file; cannot be used to update an existing file
-     * <p>
-     * Rest API Used : /files/basic/api/myuserlibrary/feed <br>
-     * 
-     * @param file - a readable file on the server
-     * @return File
-     * @throws ClientServicesException
-     */
-    public File uploadFile(java.io.File file) throws ClientServicesException {
-        return this.uploadFile(file, null);
-    }
-
-    /**
-     * Upload a new file; cannot be used to update an existing file
-     * <p>
-     * Rest API Used : /files/basic/api/myuserlibrary/feed <br>
-     * 
-     * @param file - a readable file on the server
-     * @param parameters - file creation parameters, can be null
-     * @return File
-     * @throws ClientServicesException
-     */
-    public File uploadFile(java.io.File file, Map<String, String> parameters) throws ClientServicesException {
-        if (file == null) {
-            throw new ClientServicesException(null, Messages.Invalid_FileId);
-        }
-        if (!file.canRead()) {
-            throw new ClientServicesException(null, Messages.MessageCannotReadFile,
-                    file.getAbsolutePath());
-        }
-
-        try {
-            return this.uploadFile(new FileInputStream(file), file.getName(), file.length(), parameters);
-        } catch (FileNotFoundException e) {
-            throw new ClientServicesException(null, Messages.MessageCannotReadFile,
-                    file.getAbsolutePath());
-        }
-    }
-
-    /**
-     * Upload a new file; cannot be used to update an existing file
-     * <p>
-     * Rest API Used : /files/basic/api/myuserlibrary/feed <br>
-     * 
-     * @param stream
-     * @param title
-     * @param length
-     * @return File
-     * @throws ClientServicesException
-     */
-    public File uploadFile(java.io.InputStream stream, final String title, long length)
-            throws ClientServicesException {
-        return this.uploadFile(stream, title, length, null);
-    }
-
-    /**
-     * Upload a new file; cannot be used to update an existing file
-     * <p>
-     * Rest API Used : /files/basic/api/myuserlibrary/feed <br>
-     * 
-     * @param stream
-     * @param title
-     * @param length
-     * @param p - parameters
-     * @return File
-     * @throws ClientServicesException
-     */
-    public File uploadFile(java.io.InputStream stream, final String title, long length,
-            Map<String, String> p) throws ClientServicesException {
-        if (stream == null) {
-            throw new ClientServicesException(null, Messages.Invalid_Stream);
-        }
-        if (title == null) {
-            throw new ClientServicesException(null, Messages.Invalid_Name);
-        }
-        Content contentFile = this.getContentObject(title, stream, length);
-        String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.MYUSERLIBRARY_FEED.format(this, FileUrlParts.accessType.get(accessType));
-        Map<String, String> headers = new HashMap<String, String>();
-        headers.put(FileConstants.X_UPDATE_NONCE, this.getNonce()); // It is not clearly documented which Content Type requires Nonce, thus adding nonce in header for all upload requests. 
-        Response data = this.createData(requestUri, p, headers, contentFile);
-        if (FileService.logger.isLoggable(Level.FINEST)) {
-            FileService.logger.exiting(FileService.sourceClass, "uploadFile", data);
-        }
-
-        return this.getFileFeedHandler().createEntity(data);
-    }
 
     /**
      * Method to Upload new version of a Community File
@@ -2840,71 +2824,6 @@ public class FileService extends ConnectionsService {
         return (Document) result.getData();
     }
 
-    /**
-     * constructPayload
-     * <p>
-     * This method constructs the Atom entry document for the APIs requiring payload input. Currently this method constructs payload for updating Label, Summary, Visibility, Title of the file.
-     * 
-     * @param File - pass the File object to be updated
-     * @param payloadMap - Map of entries for which we will construct a Request Body. See {@link FileRequestPayload} for possible values.
-     * @return Document
-     * @throws TransformerException
-     */
-
-    private Document constructPayload(String fileId, Map<String, Object> payloadMap)
-            throws TransformerException {
-        payloadMap.put("category", "document");
-        payloadMap.put("id", fileId);
-        FileTransformer fileTransformer = new FileTransformer();
-        String requestBody = fileTransformer.transform(payloadMap);
-        return this.convertToXML(requestBody);
-    }
-
-    /**
-     * constructPayloadFolder
-     * 
-     * @param name
-     * @param description
-     * @param shareWith
-     * @param operation
-     * @return
-     * @throws TransformerException
-     */
-    private Document constructPayloadFolder(String name, String description, String shareWith,
-            String operation) throws TransformerException {
-        return this.constructPayloadFolder(name, description, shareWith, operation, null);
-    }
-
-    private Document constructPayloadFolder(String name, String description, String shareWith,
-            String operation, String entityId) throws TransformerException {
-
-        Map<String, Object> fieldsMap = new HashMap<String, Object>();
-        fieldsMap.put(FileConstants.CATEGORY, FileConstants.CATEGORY_COLLECTION);
-        if (!StringUtil.isEmpty(operation)) {
-            if (operation.equals("update")) {
-                fieldsMap.put("id", entityId);
-            }
-        }
-        fieldsMap.put("label", name);
-        fieldsMap.put("title", name);
-        fieldsMap.put("summary", description);
-        if (StringUtil.isEmpty(shareWith) || StringUtil.equalsIgnoreCase(shareWith, "null")) {
-            fieldsMap.put(FileConstants.VISIBILITY, FileConstants.VISIBILITY_PRIVATE);
-        } else {
-            fieldsMap.put(FileConstants.VISIBILITY, FileConstants.VISIBILITY_PRIVATE);
-            String parts[] = shareWith.split(",");
-            if ((parts.length) != 3) {
-                return null;
-            } else {
-                fieldsMap.put("shareWithId", parts[0]);
-                fieldsMap.put("shareWithWhat", parts[1]);
-                fieldsMap.put("shareWithRole", parts[2]);
-            }
-        }
-        FolderTransformer folderTransformer = new FolderTransformer();
-        String payload = folderTransformer.transform(fieldsMap);
-        return this.convertToXML(payload.toString());
-    }
 
     /**
      * constructPayloadForComments
@@ -2942,29 +2861,6 @@ public class FileService extends ConnectionsService {
         return this.convertToXML(payload.toString());
     }
 
-    /**
-     * constructPayloadForFlagging
-     * 
-     * @param fileId
-     * @param flagReason
-     * @param flagWhat
-     * @return
-     * @throws TransformerException
-     */
-    private Object constructPayloadForFlagging(String fileId, String content, String entity)
-            throws TransformerException {
-        if (entity.equalsIgnoreCase("file")) {
-            entity = "document";
-        }
-        Map<String, Object> fieldsMap = new HashMap<String, Object>();
-        fieldsMap.put("entity", entity);
-        fieldsMap.put("fileId", fileId);
-        fieldsMap.put("content", content);
-
-        ModerationTransformer moderationTransformer = new ModerationTransformer();
-        String payload = moderationTransformer.transform(fieldsMap);
-        return this.convertToXML(payload.toString());
-    }
 
     private Object constructPayloadForModeration(String fileId, String action, String actionReason,
             String entity) throws TransformerException {
@@ -2981,18 +2877,6 @@ public class FileService extends ConnectionsService {
         return this.convertToXML(payload.toString());
     }
 
-    private Document constructPayloadForMultipleEntries(List<String> listOfFileIds, String multipleEntryId)
-            throws TransformerException {
-        return this.constructPayloadForMultipleEntries(listOfFileIds, multipleEntryId, null);
-    }
-
-    private Document constructPayloadForMultipleEntries(List<String> listOfIds, String multipleEntryId,
-            String category) throws TransformerException {
-
-        MultipleFileTransformer mfTransformer = new MultipleFileTransformer();
-        String payload = mfTransformer.transform(listOfIds, category);
-        return this.convertToXML(payload.toString());
-    }
 
     /**
      * convertToXML
@@ -3018,24 +2902,6 @@ public class FileService extends ConnectionsService {
             throw new TransformerException(e, e.getMessage());
         }
         return document;
-    }
-
-    private boolean filePayloadParamsContains(String key) {
-        for (FileRequestPayload payloadEntry : FileRequestPayload.values()) {
-            if (payloadEntry.toString().equalsIgnoreCase(key)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean fileRequestParamsContains(String key) {
-        for (FileRequestParams param : FileRequestParams.values()) {
-            if (param.toString().equalsIgnoreCase(key)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     /**
@@ -3106,23 +2972,6 @@ public class FileService extends ConnectionsService {
             return null;
         }
         return uri;
-    }
-
-    private void parseUpdationsMap(Map<String, String> updationsMap, Map<String, Object> payloadMap,
-            Map<String, String> paramsMap) {
-        // here parse the entries in the updations map and create paramsMap, payloadMap appropriately.
-        Iterator<Map.Entry<String, String>> entries = updationsMap.entrySet().iterator();
-        while (entries.hasNext()) {
-            Map.Entry<String, String> fieldMapPairs = entries.next();
-            String key = fieldMapPairs.getKey();
-            if (this.fileRequestParamsContains(key)) {
-                paramsMap.put(key, fieldMapPairs.getValue());
-            } else if (this.filePayloadParamsContains(key)) {
-                payloadMap.put(key, fieldMapPairs.getValue());
-            } else {
-                // these parameters currently will get ignored. check this .. TODO
-            }
-        }
     }
 
     /**

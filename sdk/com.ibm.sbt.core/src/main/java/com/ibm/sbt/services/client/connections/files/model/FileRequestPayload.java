@@ -23,7 +23,7 @@ package com.ibm.sbt.services.client.connections.files.model;
  * @author Vimal Dhupar
  */
 public enum FileRequestPayload {
-	VISIBILITY("visibility"), SUMMARY("summary"), LABEL("label"), COMMENT("comment");
+	VISIBILITY("visibility"), SUMMARY("summary"), LABEL("label"), COMMENT("comment"), NOTIFICATION("notification");
 
 	String	fileRequestPayload;
 

@@ -154,7 +154,7 @@ public class Blog extends BaseBlogEntity {
      *
      * @throws BlogServiceException
      */
-    public void remove() throws ClientServicesException {
-		getService().removeBlog(getUid());
+    public void delete() throws ClientServicesException {
+		getService().deleteBlog(getUid());
 	}
 }

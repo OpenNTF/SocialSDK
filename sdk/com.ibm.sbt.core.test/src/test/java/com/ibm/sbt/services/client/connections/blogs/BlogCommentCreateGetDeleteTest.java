@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -18,7 +18,6 @@ package com.ibm.sbt.services.client.connections.blogs;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
 
 import org.junit.After;
 import org.junit.Before;
@@ -56,13 +55,8 @@ public class BlogCommentCreateGetDeleteTest extends BaseBlogServiceTest {
 
 	@Test
 	public void deleteComment() throws Exception {
-		try {
-			blogService.removeBlogComment(blog.getBlogUuid(), comment.getCommentUuid());
-			blogService.getBlogComment(blog.getHandle(), comment.getCommentUuid());
-		}
-		catch(Exception e) {
-			assertNotNull(e.getMessage());
-		}
+		blogService.deleteBlogComment(blog.getBlogUuid(), comment.getCommentUuid());
+		blogService.getBlogComment(blog.getHandle(), comment.getCommentUuid());
 	}
 
 	@After

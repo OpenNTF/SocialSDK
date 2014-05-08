@@ -42,8 +42,9 @@ import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.base.util.EntityUtil;
 import com.ibm.sbt.services.client.connections.communities.model.CommunityXPath;
+import com.ibm.sbt.services.client.connections.communities.serializers.CommunityInviteSerializer;
+import com.ibm.sbt.services.client.connections.communities.serializers.CommunityMemberSerializer;
 import com.ibm.sbt.services.client.connections.communities.transformers.CommunityMemberTransformer;
-import com.ibm.sbt.services.client.connections.communities.transformers.InviteTransformer;
 import com.ibm.sbt.services.client.connections.communities.util.Messages;
 import com.ibm.sbt.services.client.connections.files.File;
 import com.ibm.sbt.services.client.connections.files.FileService;
@@ -266,7 +267,8 @@ public class CommunityService extends ConnectionsService {
 	//------------------------------------------------------------------------------------------------------------------
 
 	/**
-	 * Creates a community
+	 * To create a community, send an Atom entry document 
+	 * containing the new community to the My Communities resource.
 	 * <p>
 	 * User should be authenticated to call this method
 	 * 
@@ -288,7 +290,8 @@ public class CommunityService extends ConnectionsService {
 	}
 
 	/**
-	 * Creates a community
+	 * To create a community, send an Atom entry document 
+	 * containing the new community to the My Communities resource.
 	 * <p>
 	 * User should be authenticated to call this method
 	 * 
@@ -309,13 +312,13 @@ public class CommunityService extends ConnectionsService {
 		Object communityPayload;
 		try {
 			communityPayload =  community.constructCreateRequestBody();
-		} catch (TransformerException e) {
+			String url = CommunityUrls.COMMUNITIES_MY.format(this);
+			Response requestData = createData(url, null, communityPayload,ClientService.FORMAT_CONNECTIONS_OUTPUT);
+			community.clearFieldsMap();
+			return extractCommunityIdFromHeaders(requestData);
+		} catch (ClientServicesException e) {
 			throw new ClientServicesException(e, Messages.CreateCommunityPayloadException);
 		}
-		String url = CommunityUrls.COMMUNITIES_MY.format(this);
-		Response requestData = createData(url, null, communityPayload,ClientService.FORMAT_CONNECTIONS_OUTPUT);
-		community.clearFieldsMap();
-		return extractCommunityIdFromHeaders(requestData);
 	}
 
 	private String extractCommunityIdFromHeaders(Response requestData){
@@ -325,7 +328,8 @@ public class CommunityService extends ConnectionsService {
 	}
 
 	/**
-	 * Get a Community
+	 * To retrieve a community entry, use the edit link for the 
+	 * community entry which can be found in the my communities feed.
 	 * <p>
 	 * fetches community content from server and populates the data member of {@link Community} with the fetched content 
 	 *
@@ -343,7 +347,8 @@ public class CommunityService extends ConnectionsService {
 	}
 
 	/**
-	 * Update a community
+	 * To update a community, send a replacement community entry document 
+	 * in Atom format to the existing community's edit web address.
 	 * <p>
 	 * User should be logged in as a owner of the community to call this method.
 	 * 
@@ -368,7 +373,7 @@ public class CommunityService extends ConnectionsService {
 
 		try {
 			communityPayload = community.constructCreateRequestBody();
-		} catch (TransformerException e) {
+		} catch (ClientServicesException e) {
 			throw new ClientServicesException(e, Messages.CreateCommunityPayloadException);
 		}
 		updateData(url, parameters,communityPayload, COMMUNITY_UNIQUE_IDENTIFIER);
@@ -450,8 +455,10 @@ public class CommunityService extends ConnectionsService {
 		String url = CommunityUrls.COMMUNITY_INVITES.format(this);
 		Object communityPayload;
 		try {
-			communityPayload = new InviteTransformer().transform(invite.getFieldsMap());
-		} catch (TransformerException e) {
+			CommunityInviteSerializer serializer = new CommunityInviteSerializer(invite);
+			communityPayload = serializer.createPayload();//new InviteTransformer().transform(invite.getFieldsMap());
+			System.out.println(communityPayload);
+		} catch (ClientServicesException e) {
 			throw new ClientServicesException(e, Messages.CreateCommunityPayloadException);
 		}
 		Response result = createData(url, parameters, communityPayload);
@@ -484,8 +491,9 @@ public class CommunityService extends ConnectionsService {
 
 		Member member = new Member(this, contributorId);
 		try {
-			communityPayload = new CommunityMemberTransformer().transform(member.getFieldsMap());
-		} catch (TransformerException e) {
+			CommunityMemberSerializer serializer = new CommunityMemberSerializer(member);
+			communityPayload = serializer.createPayload();//new CommunityMemberTransformer().transform(member.getFieldsMap());
+		} catch (ClientServicesException e) {
 			success = false;
 			throw new ClientServicesException(e, Messages.CreateCommunityPayloadException);
 		}
@@ -614,8 +622,9 @@ public class CommunityService extends ConnectionsService {
 
 		Object communityPayload;
 		try {
-			communityPayload = new CommunityMemberTransformer().transform(member.getFieldsMap());
-		} catch (TransformerException e) {
+			CommunityMemberSerializer serializer = new CommunityMemberSerializer(member);
+			communityPayload = serializer.createPayload();
+		} catch (ClientServicesException e) {
 			throw new ClientServicesException(e, Messages.CreateCommunityPayloadException);
 		}
 

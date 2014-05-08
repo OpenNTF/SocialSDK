@@ -18,7 +18,6 @@ package com.ibm.sbt.services.client.connections.blogs;
 
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import org.w3c.dom.Node;
@@ -38,6 +37,7 @@ import com.ibm.sbt.services.client.connections.blogs.model.BlogXPath;
 import com.ibm.sbt.services.client.connections.blogs.serializers.BlogCommentSerializer;
 import com.ibm.sbt.services.client.connections.blogs.serializers.BlogPostSerializer;
 import com.ibm.sbt.services.client.connections.blogs.serializers.BlogSerializer;
+import com.ibm.sbt.services.client.connections.common.Tag;
 import com.ibm.sbt.services.endpoints.Endpoint;
 /**
  * BlogService

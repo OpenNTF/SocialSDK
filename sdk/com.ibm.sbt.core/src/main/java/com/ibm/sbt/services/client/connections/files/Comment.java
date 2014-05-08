@@ -28,9 +28,8 @@ import com.ibm.sbt.services.client.base.AtomEntity;
 import com.ibm.sbt.services.client.base.AtomXPath;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
-import com.ibm.sbt.services.client.connections.files.model.Author;
+import com.ibm.sbt.services.client.connections.common.Person;
 import com.ibm.sbt.services.client.connections.files.model.FileEntryXPath;
-import com.ibm.sbt.services.client.connections.files.model.Modifier;
 
 /**
  * Comment Entry Class - representing a Comment Entry of the File.
@@ -38,10 +37,10 @@ import com.ibm.sbt.services.client.connections.files.model.Modifier;
  * @author Vimal Dhupar
  */
 public class Comment extends AtomEntity {
-	private String		commentId;
-	private String		comment;
-	private Author		authorEntry;
-	private Modifier	modifierEntry;
+	private String	commentId;
+	private String	comment;
+	private Person	authorEntry;
+	private Person	modifierEntry;
 	
 	public Comment() {
 	}
@@ -52,9 +51,9 @@ public class Comment extends AtomEntity {
 	
 	public Comment(FileService svc, XmlDataHandler dh) {
         super(svc, dh);
-        authorEntry = new Author(getService(), new XmlDataHandler((Node)this.getDataHandler().getData(), 
+        authorEntry = new Person(getService(), new XmlDataHandler((Node)this.getDataHandler().getData(), 
         		nameSpaceCtx, (XPathExpression)AtomXPath.author.getPath()));
-        modifierEntry = new Modifier(getService(), new XmlDataHandler((Node)this.getDataHandler().getData(), 
+        modifierEntry = new Person(getService(), new XmlDataHandler((Node)this.getDataHandler().getData(), 
         		nameSpaceCtx, (XPathExpression)AtomXPath.modifier.getPath()));
     }
 
@@ -118,11 +117,11 @@ public class Comment extends AtomEntity {
 		return this.getAsDate(FileEntryXPath.Published);
 	}
 
-	public Modifier getModifier() {
+	public Person getModifier() {
 		return modifierEntry;
 	}
 
-	public Author getAuthor() {
+	public Person getAuthor() {
 		return authorEntry;
 	}
 

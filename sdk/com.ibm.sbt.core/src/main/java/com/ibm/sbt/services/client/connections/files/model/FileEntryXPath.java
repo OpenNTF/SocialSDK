@@ -41,6 +41,7 @@ public enum FileEntryXPath implements FieldEntry {
 	Category(".//a:category/@label"),
 	Modified(".//td:modified"),
 	Visibility(".//td:visibility"),
+	Notification(".//td:notification"),
 	LibraryType(".//td:libraryType"),
 	VersionUuid(".//td:versionUuid"),
 	RestrictedVisibility(".//td:restrictedVisibility"),

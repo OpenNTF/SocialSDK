@@ -1,17 +1,3 @@
-package com.ibm.sbt.automation.core.environment;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
-
-import com.ibm.commons.util.StringUtil;
-import com.ibm.sbt.automation.core.test.BaseTest;
-import com.ibm.sbt.automation.core.test.BaseTest.SnippetType;
-import com.ibm.sbt.automation.core.test.pageobjects.PlaygroundResultPage;
-import com.ibm.sbt.automation.core.test.pageobjects.ResultPage;
-
-
 /*
  * © Copyright IBM Corp. 2013
  * 
@@ -27,6 +13,18 @@ import com.ibm.sbt.automation.core.test.pageobjects.ResultPage;
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
+package com.ibm.sbt.automation.core.environment;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
+
+import com.ibm.commons.util.StringUtil;
+import com.ibm.sbt.automation.core.test.BaseTest;
+import com.ibm.sbt.automation.core.test.BaseTest.SnippetType;
+import com.ibm.sbt.automation.core.test.pageobjects.PlaygroundResultPage;
+import com.ibm.sbt.automation.core.test.pageobjects.ResultPage;
 
 /**
  * @author mkataria

@@ -128,13 +128,13 @@ public class BlogServiceGetTests extends BaseBlogServiceTest {
 	
 	@Test
 	public void getBlogTags() throws ClientServicesException {
-			Blog blog = createBlog();
-			EntityList<Tag> entries = blogService.getBlogTags(blog.getHandle());
-			assertNotNull(entries);
-			for (Tag tag : entries) {
-				assertValid((Tag)tag);
-			}
-			deleteBlog(blog);
+		Blog blog = createBlog();
+		EntityList<Tag> entries = blogService.getBlogTags(blog.getHandle());
+		assertNotNull(entries);
+		for (Tag tag : entries) {
+			assertValid((Tag)tag);
+		}
+		deleteBlog(blog);
 	}
 	
 	protected void assertValid(Blog blog) {

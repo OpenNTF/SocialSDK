@@ -183,8 +183,8 @@ public class BlogPost extends BaseBlogEntity {
 	 * 
 	 * @throws BlogServiceException
 	 */
-	public void remove() throws ClientServicesException {
-		getService().removeBlogPost(getPostUuid(), getBlogHandle());
+	public void delete() throws ClientServicesException {
+		getService().deleteBlogPost(getPostUuid(), getBlogHandle());
 	}
 	
 	/**

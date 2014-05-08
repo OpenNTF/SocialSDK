@@ -63,8 +63,8 @@ public class BlogSerializationTests extends BaseBlogServiceTest {
 				try {
 					ObjectInputStream ois = new ObjectInputStream(new FileInputStream(serFile));
 					allblogs = (EntityList<Blog>)ois.readObject();
-					for (Iterator iterator = allblogs.iterator(); iterator.hasNext();) {
-						Blog localBlog = (Blog) iterator.next();
+					for (Iterator<Blog> iterator = allblogs.iterator(); iterator.hasNext();) {
+						Blog localBlog = iterator.next();
 					}
 				} catch (Exception e) {}
 				assertEquals(true, (allblogs.size()>0));
@@ -143,8 +143,8 @@ public class BlogSerializationTests extends BaseBlogServiceTest {
 				try {
 					ObjectInputStream ois = new ObjectInputStream(new FileInputStream(serFile));
 					allcomments = (EntityList<Comment>) ois.readObject();
-					for (Iterator iterator = allcomments.iterator(); iterator.hasNext();) {
-						Comment localcoment = (Comment) iterator.next();
+					for (Iterator<Comment> iterator = allcomments.iterator(); iterator.hasNext();) {
+						Comment localcoment = iterator.next();
 					}
 				} catch (Exception e) {}
 				assertEquals(true, (allcomments.size()>0));

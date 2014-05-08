@@ -39,20 +39,19 @@ import com.ibm.sbt.services.client.connections.blogs.serializers.BlogPostSeriali
 import com.ibm.sbt.services.client.connections.blogs.serializers.BlogSerializer;
 import com.ibm.sbt.services.client.connections.common.Tag;
 import com.ibm.sbt.services.endpoints.Endpoint;
+
 /**
  * BlogService
  * 
  * @author Swati Singh
  * @author Carlos Manias
  */
-
 public class BlogService extends ConnectionsService {
 	
 	private static final long serialVersionUID = 2838345461937687654L;
 	
-	public String contextRoot = "blogs";
-	public String defaultHomepageHandle = "homepage";
-	public static String BLOG_HOMEPAGE_KEY = "blogHomepageHandle";
+	private String defaultHomepageHandle = "homepage";
+	private static String BLOG_HOMEPAGE_KEY = "blogHomepageHandle";
 	
 	/**
 	 * Constructor Creates BlogService Object with default endpoint
@@ -69,7 +68,7 @@ public class BlogService extends ConnectionsService {
 	 */
 	public BlogService(String endpoint) {
 		super(endpoint);
-		this.setHomepageFromEndpoint(this.getEndpoint());
+		setHomepageFromEndpoint(getEndpoint());
 	}
 	
 	/**
@@ -80,7 +79,7 @@ public class BlogService extends ConnectionsService {
 	 */
 	public BlogService(Endpoint endpoint) {
 		super(endpoint);
-		this.setHomepageFromEndpoint(this.getEndpoint());
+		setHomepageFromEndpoint(getEndpoint());
 	}
 
 	/**
@@ -92,31 +91,16 @@ public class BlogService extends ConnectionsService {
 	}
 	
 	//------------------------------------------------------------------------------------------------------------------
-	// Getting Blog feeds
+	// TODO: Getting Blog feeds
 	//------------------------------------------------------------------------------------------------------------------
 
-	
 	/**
 	 * Get a feed that includes all of the blogs hosted by the Blogs application. You can narrow down 
 	 * the blogs that are returned by passing parameters to the request that you use to retrieve the feed. 
 	 * If you do not specify any input parameters, the server returns all of the blogs that are displayed 
 	 * in the Public Blogs>Blogs Listing view from the product user interface.
 	 * 
-	 * @deprecated use getAllBlogs instead
 	 * @return EntityList<Blog>
-	 * @throws ClientServicesException
-	 */
-	public EntityList<Blog> getBlogs() throws ClientServicesException{
-		return getAllBlogs();
-	}
-	
-	/**
-	 * Get a feed that includes all of the blogs hosted by the Blogs application. You can narrow down 
-	 * the blogs that are returned by passing parameters to the request that you use to retrieve the feed. 
-	 * If you do not specify any input parameters, the server returns all of the blogs that are displayed 
-	 * in the Public Blogs>Blogs Listing view from the product user interface.
-	 * 
-	 * @return
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Blog> getAllBlogs() throws ClientServicesException{
@@ -395,12 +379,8 @@ public class BlogService extends ConnectionsService {
 		}
 		BlogSerializer serializer = new BlogSerializer(blog);
 		String payload = serializer.createPayload();
-		try {
-			Response response = createData(requestUrl, parameters, getAtomHeaders(), payload);
-			blog = getBlogFeedHandler().createEntity(response);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		Response response = createData(requestUrl, parameters, getAtomHeaders(), payload);
+		blog = getBlogFeedHandler().createEntity(response);
 		return blog;
 	}
 	
@@ -411,11 +391,7 @@ public class BlogService extends ConnectionsService {
 	 * @throws ClientServicesException
 	 */
 	public Blog getBlog(String blogUuid) throws ClientServicesException {
-	
-		if(StringUtil.isEmpty(blogUuid)){
-			throw new ClientServicesException(null, "null blogUuid");
-		}
-		String url = BlogUrls.GET_UPDATE_REMOVE_BLOG.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle), BlogUrlParts.entryAnchor.get(blogUuid));		
+		String url = BlogUrls.GET_UPDATE_REMOVE_BLOG.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle), BlogUrlParts.entryAnchor.get(blogUuid));
 		return getBlogEntity(url, null);
 	}
 	
@@ -429,26 +405,20 @@ public class BlogService extends ConnectionsService {
 		if (null == blog){
 			throw new ClientServicesException(null,"null blog");
 		}
-		try {
-			if(blog.getFieldsMap().get(AtomXPath.title)== null)
-				blog.setTitle(blog.getTitle());
-			if(blog.getFieldsMap().get(AtomXPath.summary)== null)
-				blog.setSummary(blog.getSummary());
-			if(!blog.getFieldsMap().toString().contains(BlogXPath.tags.toString()))
-				blog.setTags(blog.getTags());
+		if(blog.getFieldsMap().get(AtomXPath.title)== null)
+			blog.setTitle(blog.getTitle());
+		if(blog.getFieldsMap().get(AtomXPath.summary)== null)
+			blog.setSummary(blog.getSummary());
+		if(!blog.getFieldsMap().toString().contains(BlogXPath.tags.toString()))
+			blog.setTags(blog.getTags());
 
-			BlogSerializer serializer = new BlogSerializer(blog);
-			String payload = serializer.updatePayload();
-			
-			String updateBlogUrl = BlogUrls.GET_UPDATE_REMOVE_BLOG.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle), BlogUrlParts.entryAnchor.get(blog.getUid()));
-			// not using super.updateData, as unique id needs to be provided, along with passing params, since no params
-			//is passed, it'll throw NPE in BaseService updateData - check with Manish
-			getClientService().put(updateBlogUrl, null, getAtomHeaders(), payload,ClientService.FORMAT_NULL);
-
-		} catch (Exception e) {
-			throw new ClientServicesException(e, "error updating blog");
-		}
-
+		BlogSerializer serializer = new BlogSerializer(blog);
+		String payload = serializer.updatePayload();
+		
+		String updateBlogUrl = BlogUrls.GET_UPDATE_REMOVE_BLOG.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle), BlogUrlParts.entryAnchor.get(blog.getUid()));
+		// not using super.updateData, as unique id needs to be provided, along with passing params, since no params
+		//is passed, it'll throw NPE in BaseService updateData - check with Manish
+		getClientService().put(updateBlogUrl, null, getAtomHeaders(), payload,ClientService.FORMAT_NULL);
 	}
 	
 	/**
@@ -459,16 +429,9 @@ public class BlogService extends ConnectionsService {
 	 * 				blogUuid which is to be deleted
 	 * @throws ClientServicesException
 	 */
-	public void removeBlog(String blogUuid) throws ClientServicesException {
-		if (StringUtil.isEmpty(blogUuid)){
-			throw new ClientServicesException(null, "null blog Uuid");
-		}
-		try {
-			String deleteBlogUrl = BlogUrls.GET_UPDATE_REMOVE_BLOG.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle), BlogUrlParts.entryAnchor.get(blogUuid));
-			getClientService().delete(deleteBlogUrl);
-		} catch (Exception e) {
-			throw new ClientServicesException(e,"error deleting blog");
-		} 	
+	public void deleteBlog(String blogUuid) throws ClientServicesException {
+		String deleteBlogUrl = BlogUrls.GET_UPDATE_REMOVE_BLOG.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle), BlogUrlParts.entryAnchor.get(blogUuid));
+		getClientService().delete(deleteBlogUrl);
 	}
 	
 	/**
@@ -480,12 +443,6 @@ public class BlogService extends ConnectionsService {
 	 * @throws ClientServicesException
 	 */
 	public BlogPost getBlogPost(String blogHandle, String entryid) throws ClientServicesException {
-		if (StringUtil.isEmpty(blogHandle)){
-			throw new ClientServicesException(null,"blog handle is null");
-		}
-		if (StringUtil.isEmpty(entryid)){
-			throw new ClientServicesException(null,"entry id is null");
-		}
 		String url = BlogUrls.BLOG_POST.format(this, BlogUrlParts.blogHandle.get(blogHandle), BlogUrlParts.getEntryId(entryid));
 		return getBlogPostEntity(url, null);
 	}
@@ -500,18 +457,8 @@ public class BlogService extends ConnectionsService {
 	 * @throws ClientServicesException
 	 */
 	public void recommendPost(String blogHandle, String postUuid) throws ClientServicesException {
-		if (StringUtil.isEmpty(blogHandle)){
-			throw new ClientServicesException(null,"blog handle is null");
-		}
-		if (StringUtil.isEmpty(postUuid)){
-			throw new ClientServicesException(null,"postUuid is null");
-		}
-		try {
-			String recommendPostUrl = BlogUrls.RECOMMEND_POST.format(this, BlogUrlParts.blogHandle.get(blogHandle), BlogUrlParts.entryAnchor.get(postUuid));
-			super.createData(recommendPostUrl, null, null);
-		} catch (Exception e) {
-			throw new ClientServicesException(e, "error recommending blog post");
-		}
+		String recommendPostUrl = BlogUrls.RECOMMEND_POST.format(this, BlogUrlParts.blogHandle.get(blogHandle), BlogUrlParts.entryAnchor.get(postUuid));
+		createData(recommendPostUrl, null, null);
 	}
 	
 	/**
@@ -524,18 +471,8 @@ public class BlogService extends ConnectionsService {
 	 * @throws ClientServicesException
 	 */
 	public void unrecommendPost(String blogHandle, String postUuid) throws ClientServicesException {
-		if (StringUtil.isEmpty(blogHandle)){
-			throw new ClientServicesException(null,"blog handle is null");
-		}
-		if (StringUtil.isEmpty(postUuid)){
-			throw new ClientServicesException(null,"postUuid is null");
-		}
-		try {
-			String recommendPostUrl = BlogUrls.RECOMMEND_POST.format(this, BlogUrlParts.blogHandle.get(blogHandle), BlogUrlParts.entryAnchor.get(postUuid));
-			super.deleteData(recommendPostUrl, null, null);
-		} catch (Exception e) {
-			throw new ClientServicesException(e, "error unrecommending blog post");
-		}
+		String recommendPostUrl = BlogUrls.RECOMMEND_POST.format(this, BlogUrlParts.blogHandle.get(blogHandle), BlogUrlParts.entryAnchor.get(postUuid));
+		deleteData(recommendPostUrl, null, null);
 	}
 	
 	/**
@@ -547,12 +484,6 @@ public class BlogService extends ConnectionsService {
 	 * @throws ClientServicesException
 	 */
 	public Comment getBlogComment(String blogHandle, String commentUuid) throws ClientServicesException {
-		if (StringUtil.isEmpty(blogHandle)){
-			throw new ClientServicesException(null,"blog handle is null");
-		}
-		if (StringUtil.isEmpty(commentUuid)){
-			throw new ClientServicesException(null,"commentUuid is null");
-		}
 		String url = BlogUrls.GET_REMOVE_COMMENT.format(this, BlogUrlParts.blogHandle.get(blogHandle), BlogUrlParts.entryAnchor.get(commentUuid));
 		return getCommentEntity(url, null);
 	}
@@ -569,9 +500,6 @@ public class BlogService extends ConnectionsService {
 	public BlogPost createBlogPost(BlogPost post, String blogHandle) throws ClientServicesException {
 		if (null == post){
 			throw new ClientServicesException(null,"null post");
-		}
-		if (StringUtil.isEmpty(blogHandle)){
-			throw new ClientServicesException(null,"blog handle is not passed");
 		}
 		Response result = null;
 		BlogPostSerializer serializer = new BlogPostSerializer(post);
@@ -619,16 +547,9 @@ public class BlogService extends ConnectionsService {
 	 * @param blogHandle
 	 * @throws ClientServicesException
 	 */
-	public void removeBlogPost(String postUuid, String blogHandle) throws ClientServicesException {
-		if (StringUtil.isEmpty(postUuid)){
-			throw new ClientServicesException(null, "null post id");
-		}
-		try {
-			String deletePostUrl = BlogUrls.UPDATE_REMOVE_POST.format(this, BlogUrlParts.blogHandle.get(blogHandle), BlogUrlParts.entryAnchor.get(postUuid));
-			getClientService().delete(deletePostUrl);
-		} catch (Exception e) {
-			throw new ClientServicesException(e,"error deleting post");
-		} 	
+	public void deleteBlogPost(String postUuid, String blogHandle) throws ClientServicesException {
+		String deletePostUrl = BlogUrls.UPDATE_REMOVE_POST.format(this, BlogUrlParts.blogHandle.get(blogHandle), BlogUrlParts.entryAnchor.get(postUuid));
+		getClientService().delete(deletePostUrl);
 	}
 	
 	/**
@@ -645,19 +566,14 @@ public class BlogService extends ConnectionsService {
 			throw new ClientServicesException(null,"null comment");
 		}
 		Response result = null;
-		try {
-			comment.setPostUuid(postUuid);
-			BlogCommentSerializer serializer = new BlogCommentSerializer(comment);
-			String payload = serializer.createPayload();
+		comment.setPostUuid(postUuid);
+		BlogCommentSerializer serializer = new BlogCommentSerializer(comment);
+		String payload = serializer.createPayload();
 
-			String createCommentUrl = BlogUrls.CREATE_COMMENT.format(this, BlogUrlParts.blogHandle.get(blogHandle), BlogUrlParts.entryAnchor.get(""));
-			
-			result = createData(createCommentUrl, null, getAtomHeaders(), payload);
-			comment = getCommentFeedHandler().createEntity(result);
-
-		} catch (Exception e) {
-			throw new ClientServicesException(e, "error creating blog comment");
-		}
+		String createCommentUrl = BlogUrls.CREATE_COMMENT.format(this, BlogUrlParts.blogHandle.get(blogHandle), BlogUrlParts.entryAnchor.get(""));
+		
+		result = createData(createCommentUrl, null, getAtomHeaders(), payload);
+		comment = getCommentFeedHandler().createEntity(result);
 
         return comment;
 	}
@@ -670,23 +586,14 @@ public class BlogService extends ConnectionsService {
 	 * @return Comment
 	 * @throws ClientServicesException
 	 */
-	public void removeBlogComment(String blogHandle, String commentUuid) throws ClientServicesException {
-		if (StringUtil.isEmpty(blogHandle)){
-			throw new ClientServicesException(null,"blog handle is null");
-		}
-		if (StringUtil.isEmpty(commentUuid)){
-			throw new ClientServicesException(null,"commentUuid is null");
-		}
-		try {
-			String getCommentUrl = BlogUrls.GET_REMOVE_COMMENT.format(this, BlogUrlParts.blogHandle.get(blogHandle), BlogUrlParts.entryAnchor.get(commentUuid));
-			getClientService().delete(getCommentUrl);
-		} catch (Exception e) {
-			throw new ClientServicesException(e, "error deleting blog comment");
-		}
+	public void deleteBlogComment(String blogHandle, String commentUuid) throws ClientServicesException {
+		String getCommentUrl = BlogUrls.GET_REMOVE_COMMENT.format(this, BlogUrlParts.blogHandle.get(blogHandle), BlogUrlParts.entryAnchor.get(commentUuid));
+		getClientService().delete(getCommentUrl);
 	}
-	/*
-	 * Util methods
-	 */
+
+	/***************************************************************
+	 * Utility methods
+	 ****************************************************************/
 	
 	/**
 	 * 
@@ -705,7 +612,7 @@ public class BlogService extends ConnectionsService {
      * @param defaultHandle
      */
 	public void setHomepageHandle(String defaultHandle) {
-		this.defaultHomepageHandle = defaultHandle;
+		defaultHomepageHandle = defaultHandle;
 	}
 	
 	/***************************************************************
@@ -751,7 +658,6 @@ public class BlogService extends ConnectionsService {
 		};
 	}
 
-	
 	/***************************************************************
 	 * Factory methods
 	 ****************************************************************/
@@ -788,7 +694,7 @@ public class BlogService extends ConnectionsService {
 		if(serviceMap != null){
 			String homepage = serviceMap.get(BLOG_HOMEPAGE_KEY);
 			if(StringUtil.isNotEmpty(homepage)){
-				this.defaultHomepageHandle = homepage;				
+				defaultHomepageHandle = homepage;				
 			}
 		}
 	}

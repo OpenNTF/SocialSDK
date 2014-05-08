@@ -16,15 +16,11 @@
 
 package com.ibm.sbt.services.client.connections.blogs;
 
-import com.ibm.commons.xml.NamespaceContext;
-import com.ibm.commons.xml.NamespaceContextImpl;
 /**
  * Blog constants
  * 
  * @author Benjamin Jakobus
  */
-
-
 public final class BlogConstants{
 	
 	/**

@@ -17,7 +17,6 @@
 package com.ibm.sbt.services.client.connections.blogs;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 
@@ -29,30 +28,21 @@ public class BlogPostDeleteTest extends BaseBlogServiceTest {
 
 	@Test
 	public void deleteBlog() throws Exception {
-		try {
-			blog = createBlog();
-			Blog blogGot = blogService.getBlog(blog.getBlogUuid());
-			assertEquals(blog.getTitle(), blogGot.getTitle());
-			blogService.removeBlog(blog.getBlogUuid());
-			blogService.getBlog(blog.getBlogUuid());
-		}
-		catch(Exception e) {
-			assertNotNull(e.getMessage());
-		}
+		blog = createBlog();
+		Blog blogGot = blogService.getBlog(blog.getBlogUuid());
+		assertEquals(blog.getTitle(), blogGot.getTitle());
+		blogService.deleteBlog(blog.getBlogUuid());
+		blogService.getBlog(blog.getBlogUuid());
 	}
 
 	@Test
 	public void deleteBlogPost() throws Exception {
-		try {
-			blogPost = createBlogPost();
-			BlogPost blogPostGot = blogService.getBlogPost(blogPost.getBlogHandle(), blogPost.getPostUuid());
-			assertEquals(blogPost.getTitle(), blogPostGot.getTitle());
-			blogService.removeBlogPost(blogPost.getPostUuid(), blogPost.getBlogHandle());
-			blogService.getBlogPost(blogPost.getBlogHandle(), blogPost.getPostUuid());
-			deleteBlog(blog);
-		}catch(Exception e) {
-			assertNotNull(e.getMessage());
-		}
+		blogPost = createBlogPost();
+		BlogPost blogPostGot = blogService.getBlogPost(blogPost.getBlogHandle(), blogPost.getPostUuid());
+		assertEquals(blogPost.getTitle(), blogPostGot.getTitle());
+		blogService.deleteBlogPost(blogPost.getPostUuid(), blogPost.getBlogHandle());
+		blogService.getBlogPost(blogPost.getBlogHandle(), blogPost.getPostUuid());
+		deleteBlog(blog);
 	}
 
 }

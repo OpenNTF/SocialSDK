@@ -31,9 +31,8 @@ import com.ibm.sbt.services.client.base.AtomEntity;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
-import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.communities.model.CommunityXPath;
-import com.ibm.sbt.services.client.connections.communities.transformers.CommunityTransformer;
+import com.ibm.sbt.services.client.connections.communities.serializers.CommunitySerializer;
 
 /**
  * This class represents a Connections Community entity
@@ -271,7 +270,7 @@ public class Community extends AtomEntity {
 	 * This method is used by communityService wrapper methods to construct request body for Add/Update operations
 	 * @return Object
 	 */
-	public Object constructCreateRequestBody() throws TransformerException {
+	public Object constructCreateRequestBody() throws ClientServicesException {
 		return createCommunityRequestPayload();
 	}
 	
@@ -403,9 +402,9 @@ public class Community extends AtomEntity {
 	   	return getService().getMembers(getCommunityUuid(), parameters);
 	}
 	
-	private String createCommunityRequestPayload() throws TransformerException {
-		CommunityTransformer transformer = new CommunityTransformer(this);
-		String xml = transformer.transform(fields);
+	private String createCommunityRequestPayload() throws ClientServicesException {
+		CommunitySerializer serializer = new CommunitySerializer(this);
+		String xml = serializer.createPayload();
 		return xml;		
 	}
 	

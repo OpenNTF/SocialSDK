@@ -16,8 +16,6 @@
 
 package com.ibm.sbt.services.client.connections.blogs;
 
-import static org.junit.Assert.fail;
-
 import org.junit.Before;
 
 import com.ibm.sbt.services.BaseUnitTest;
@@ -73,14 +71,14 @@ public class BaseBlogServiceTest extends BaseUnitTest {
 	}
 	
 	protected void deleteBlog(Blog blog) throws ClientServicesException {
-		blogService.removeBlog(blog.getBlogUuid());
+		blogService.deleteBlog(blog.getBlogUuid());
 	}
 	
 	protected void deleteBlogPost(BlogPost post) throws ClientServicesException {
-		blogService.removeBlogPost(post.getPostUuid(), blog.getHandle());
+		blogService.deleteBlogPost(post.getPostUuid(), blog.getHandle());
 	}
 
 	protected void deleteBlogComment(Comment comment) throws ClientServicesException {
-		blogService.removeBlogComment(blog.getHandle(), comment.getCommentUuid());
+		blogService.deleteBlogComment(blog.getHandle(), comment.getCommentUuid());
 	}
 }

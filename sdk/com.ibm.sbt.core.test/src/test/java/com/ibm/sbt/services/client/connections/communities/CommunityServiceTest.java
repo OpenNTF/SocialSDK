@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -23,6 +23,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.ibm.commons.runtime.Context;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.test.lib.TestEnvironment;
 

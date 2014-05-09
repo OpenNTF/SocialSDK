@@ -37,7 +37,7 @@ public enum FileUrls implements URLContainer {
     GET_FLAGGED_COMMENTS(new VersionedUrl(v4_0, 				"{files}/{authType}/{accessType}/review/comments")),
     GET_FLAGGED_FILES(new VersionedUrl(v4_0, 					"{files}/{authType}/{accessType}/review/documents")),
     DELETE_FILE_SHARE(new VersionedUrl(v4_0, 					"{files}/{authType}/{accessType}/shares/feed")),
-    GET_PUBLIC_FILES(new VersionedUrl(v4_0, 					"{files}/{authType}/{accessType}/documents/feed")),
+    GET_PUBLIC_FILES(new VersionedUrl(v4_0, 					"{files}/{authType}/{accessType}/documents/feed?visibility=public")),
     COLLECTIONS_FEED(new VersionedUrl(v4_0, 					"{files}/{authType}/{accessType}/collections/feed")),
     DOCUMENTS_SHARED_FEED(new VersionedUrl(v4_0, 				"{files}/{authType}/{accessType}/documents/shared/feed")),
     MYUSERLIBRARY_FEED(new VersionedUrl(v4_0, 					"{files}/{authType}/{accessType}/myuserlibrary/feed")),

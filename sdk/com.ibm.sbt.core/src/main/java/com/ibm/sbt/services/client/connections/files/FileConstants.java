@@ -16,27 +16,38 @@
 package com.ibm.sbt.services.client.connections.files;
 
 /**
- * Class used to maintain the constants used by Files API and related classes. 
+ * Class used to maintain the constants used by Files API and related classes.
  * 
  * @author Vimal Dhupar
  */
 public final class FileConstants {
 
-	public final static char SEPARATOR   = '/';
-	
-	public static final String LOCKTYPE_HARD	= "HARD";
-	public static final String LOCKTYPE_NONE	= "NONE";
-	public static final String CATEGORY	= "category";
-	public static final String CATEGORY_DOCUMENT	= "document";
-	public static final String CATEGORY_COMMENT	= "comment";
-	public static final String CATEGORY_COLLECTION	= "collection";
-	public static final String CATEGORY_COMMUNITY	= "community";
-	public static final String DIRECTION_INBOUND	= "inbound";
-	public static final String DIRECTION_OUTBOUND	= "outbound";
-	public static final String VISIBILITY	= "visibility";
-	public static final String VISIBILITY_PUBLIC	= "public";
-	public static final String VISIBILITY_PRIVATE	= "private";
-	public static final String X_UPDATE_NONCE	= "X-Update-Nonce";
-    
-	
+    public final static char   SEPARATOR           = '/';
+
+    public static final String LOCKTYPE_HARD       = "HARD";
+    public static final String LOCKTYPE_NONE       = "NONE";
+    public static final String CATEGORY            = "category";
+    public static final String CATEGORY_DOCUMENT   = "document";
+    public static final String CATEGORY_TAG        = "tag_word";
+    public static final String CATEGORY_COMMENT    = "comment";
+    public static final String CATEGORY_COLLECTION = "collection";
+    public static final String CATEGORY_COMMUNITY  = "community";
+    public static final String DIRECTION_INBOUND   = "inbound";
+    public static final String DIRECTION_OUTBOUND  = "outbound";
+    public static final String VISIBILITY          = "visibility";
+    public static final String NOTIFICATION        = "notification";
+    public static final String MODIFIED            = "modified";
+    public static final String MODIFIER            = "modifier";
+    public static final String MODERATION          = "moderation";
+    public static final String CREATED             = "created";
+    public static final String VISIBILITY_PUBLIC   = "public";
+    public static final String VISIBILITY_PRIVATE  = "private";
+    public static final String X_UPDATE_NONCE      = "X-Update-Nonce";
+
+    public static final String REPORT_ITEM         = "http://www.ibm.com/xmlns/prod/sn/report-item";
+    public static final String ITEM_ID             = "itemId";
+
+    public enum ItemType {
+        COMMENT, FILE;
+    }
 }

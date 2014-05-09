@@ -38,13 +38,24 @@ public class PersonSerializer extends BaseEntitySerializer<Person> {
 		super(entity);
 	}
 	
+	   /**
+     * Returns a full or partial xml representation of a Person,
+     * depending on the fields with data
+     * @param nodeName
+     * @return
+     */
+    public Node xmlNode(String nodeName) {
+        return xmlNode(nodeName, null);
+    }
+	
 	/**
 	 * Returns a full or partial xml representation of a Person,
 	 * depending on the fields with data
 	 * @param nodeName
+	 * @param namespaceUri
 	 * @return
 	 */
-	public Node xmlNode(String nodeName) {
+	public Node xmlNode(String namespaceUri, String nodeName) {
 		Element[] textElements = new Element[getNumFields()];
 		int index = 0;
 		if (StringUtil.isNotEmpty(entity.getName())) {
@@ -59,7 +70,12 @@ public class PersonSerializer extends BaseEntitySerializer<Person> {
 		if (StringUtil.isNotEmpty(entity.getUserState())) {
 			textElements[index] = textElement(Namespace.SNX.getUrl(), USER_STATE, entity.getUserState());
 		}
-		return appendChildren(rootNode(element(nodeName)), textElements);
+		Element e;
+		if (namespaceUri==null)
+		    e = element(nodeName);
+		else 
+		    e = element(namespaceUri, nodeName);
+		return appendChildren(rootNode(e), textElements);
 	}
 	
 	private int getNumFields(){

@@ -23,7 +23,6 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.ibm.commons.runtime.Context;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.test.lib.TestEnvironment;
 

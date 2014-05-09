@@ -22,12 +22,13 @@ package com.ibm.sbt.services.client.connections.communities;
  *
  */
 public final class CommunityConstants {
-	
+
 	public static final String COMMUNITY_TERM = "term";
 	public static final String COMMUNITY = "community";
 	public static final String COMMUNITY_TYPE = "snx:communityType";
 	public static final String INVITE = "invite";
 	public static final String MEMBER_TERM = "term";
 	public static final String MEMBER_TERM_VALUE = "person";
-	
-	}
+	public static final String SNX_ROLE = "snx:role";
+
+}

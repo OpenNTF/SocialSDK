@@ -48,10 +48,12 @@ public class Comment extends AtomEntity {
 	
 	public Comment(FileService svc, XmlDataHandler dh) {
         super(svc, dh);
+        if (dh!=null) {
         authorEntry = new Person(getService(), new XmlDataHandler((Node)this.getDataHandler().getData(), 
         		nameSpaceCtx, (XPathExpression)AtomXPath.author.getPath()));
         modifierEntry = new Person(getService(), new XmlDataHandler((Node)this.getDataHandler().getData(), 
         		nameSpaceCtx, (XPathExpression)AtomXPath.modifier.getPath()));
+        }
     }
 
     /**

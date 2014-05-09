@@ -442,10 +442,11 @@ public class FileServiceTest extends BaseUnitTest {
     @Test
     public void testCreateDeleteFolder() throws Exception {
         FileService fileService = new FileService();
-        String name = "testCreateFolder";
-        String description = "testCreateFolder";
+        Random random = new Random(System.currentTimeMillis());
+        String name = "testCreateFolder"  + random.nextInt();
+        String description = "testCreateFolder" + random.nextInt();
         File folder = fileService.createFolder(name, description);
-        assertEquals(folder.getTitle(), name);
+        assertEquals(unRandomize(folder.getTitle()), unRandomize(name));
 
         //now delete the folder created
         fileService.deleteFolder(folder.getFileId());
@@ -465,9 +466,20 @@ public class FileServiceTest extends BaseUnitTest {
 
     @Test
     public void testShareFileWithCommunity() throws Exception {
+        if (TestEnvironment.isSmartCloudEnvironment())
+            return;
         FileService fileService = new FileService();
-        EntityList<File> listOfFiles = fileService.getMyFiles();
-        String fileId = listOfFiles.get(0).getFileId();
+        String name = "test file " + System.currentTimeMillis();
+
+        byte[] bytes = name.getBytes();
+        ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
+
+        HashMap<String, String> p = new HashMap<String, String>();
+        p.put("visibility", "public");
+        File file = fileService.uploadFile(bais, name, bytes.length, p);
+        
+        String fileId = file.getFileId();
+        
         EntityList<Community> publicCommunities = new CommunityService().getPublicCommunities();
 
         List<String> c = new LinkedList<String>();
@@ -475,6 +487,8 @@ public class FileServiceTest extends BaseUnitTest {
         c.add(publicCommunities.get(1).getCommunityUuid());
         
         fileService.shareFileWithCommunities(fileId, c, null);
+        
+        fileService.deleteFile(file.getFileId());
     }
 
     @Test

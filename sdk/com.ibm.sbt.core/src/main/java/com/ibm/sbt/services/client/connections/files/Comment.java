@@ -73,7 +73,7 @@ public class Comment extends AtomEntity {
 		if (!StringUtil.isEmpty(commentId)) {
 			return commentId;
 		}
-		if (!getAsString(FileEntryXPath.Category).equals("comment")) {
+		if (getAsString(FileEntryXPath.Category) != null && !getAsString(FileEntryXPath.Category).equals("comment")) {
 			return null;
 		}
 		return getAsString(FileEntryXPath.Uuid);
@@ -83,20 +83,14 @@ public class Comment extends AtomEntity {
 		if (!StringUtil.isEmpty(comment)) {
 			return comment;
 		}
-		if (!getAsString(FileEntryXPath.Category).equals("comment")) {
-			return null;
-		}
-		return getAsString(FileEntryXPath.Comment);
+		return getContent();
 	}
+	
 	
 	public String getTitle() {
 		return this.getAsString(FileEntryXPath.Title);
 	}
 	
-	public String getContent() {
-		return this.getAsString(FileEntryXPath.Content);
-	}
-
 	public Date getCreated() {
 		return this.getAsDate(FileEntryXPath.Created);
 	}
@@ -145,5 +139,8 @@ public class Comment extends AtomEntity {
 
 	private void setComment(String comment) {
 		this.comment = comment;
+		setContent(comment);
 	}
+	
+	
 }

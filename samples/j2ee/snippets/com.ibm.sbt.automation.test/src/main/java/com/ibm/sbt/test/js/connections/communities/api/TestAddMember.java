@@ -1,5 +1,5 @@
 /*
- * ï¿½ Copyright IBM Corp. 2012
+ * © Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -15,13 +15,9 @@
  */
 package com.ibm.sbt.test.js.connections.communities.api;
 
-import org.junit.Assert;
 import org.junit.Test;
 
-import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.automation.core.test.connections.BaseCommunitiesTest;
-import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
-import com.ibm.sbt.services.client.connections.communities.Member;
 
 /**
  * @author mwallace
@@ -31,15 +27,13 @@ import com.ibm.sbt.services.client.connections.communities.Member;
 public class TestAddMember extends BaseCommunitiesTest {
 
     @Test
-    public void testAddMember() {
+    public void testAddMember() throws Exception {
     	String id = getProperty("sample.email2");
     	if (getEnvironment().isSmartCloud()) {
     		id = getProperty("smartcloud.id2");
     	}
         
-        boolean added = addMember(community, id, "member");
-        
-        Assert.assertTrue("Add member failed", added);
+        addMember(community, id, "member");
     }
 
 }

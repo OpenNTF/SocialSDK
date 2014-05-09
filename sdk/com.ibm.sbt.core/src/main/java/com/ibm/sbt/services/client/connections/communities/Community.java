@@ -338,9 +338,9 @@ public class Community extends AtomEntity {
 	 * @return
 	 * @throws ClientServicesException
 	 */
-	public boolean addMember(Member member) throws ClientServicesException {
-		return getService().addMember(getCommunityUuid(), member);
-    	}
+	public void addMember(Member member) throws ClientServicesException {
+		getService().addMember(getCommunityUuid(), member);
+    }
 
 	/**
 	 * This method removes Community member

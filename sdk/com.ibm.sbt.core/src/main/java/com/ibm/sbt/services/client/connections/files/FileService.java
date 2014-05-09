@@ -25,7 +25,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.w3c.dom.Document;
@@ -44,6 +43,7 @@ import com.ibm.sbt.services.client.base.AtomFeedHandler;
 import com.ibm.sbt.services.client.base.AuthType;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.CommonConstants;
+import com.ibm.sbt.services.client.base.CommonConstants.HTTPCode;
 import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.ConnectionsService;
 import com.ibm.sbt.services.client.base.IFeedHandler;
@@ -351,8 +351,6 @@ public class FileService extends ConnectionsService {
         return getFileEntityList(requestUri, parameters);
     }
     
-    
-    
     /**
      * Get a feed that lists the share entries. A share entry describes an instance in which access that has been given to a file.
      * This returns a feed of shares to which the authenticated user has access. 
@@ -385,7 +383,6 @@ public class FileService extends ConnectionsService {
         return getFileEntityList(requestUri, params);
     }
     
-    
     /**
      * Get a feed that lists the share entries. A share entry describes an instance in which access that has been given to a file.
      * This returns a feed of shares to which the authenticated user has access. 
@@ -416,9 +413,6 @@ public class FileService extends ConnectionsService {
         params.put(FileRequestParams.DIRECTION.getFileRequestParams(), FileConstants.DIRECTION_INBOUND);
         return getFileEntityList(requestUri, params);
     }
-    
-    
-    
     
     /**
      * Get a feed that lists all of the comments associated with a file. 
@@ -629,12 +623,10 @@ public class FileService extends ConnectionsService {
         String requestUri = FileUrls.MYUSERLIBRARY_FEED.format(this, FileUrlParts.accessType.get(accessType));
         Map<String, String> headers = new HashMap<String, String>();
         headers.put(FileConstants.X_UPDATE_NONCE, getNonce()); // It is not clearly documented which Content Type requires Nonce, thus adding nonce in header for all upload requests. 
-        Response data = createData(requestUri, p, headers, contentFile);
-        if (FileService.logger.isLoggable(Level.FINEST)) {
-            FileService.logger.exiting(FileService.sourceClass, "uploadFile", data);
-        }
+        Response response = createData(requestUri, p, headers, contentFile);
+        checkResponseCode(response, HTTPCode.CREATED);
 
-        return getFileFeedHandler().createEntity(data);
+        return getFileFeedHandler().createEntity(response);
     }
     
     //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -669,9 +661,9 @@ public class FileService extends ConnectionsService {
         Map<String, String> headers = new HashMap<String, String>();
         headers.put(Headers.ContentType, Headers.ATOM);
         String payload = new EntityIdSerializer(listOfFileIds).fileIdListPayload();
-        Response result;
-        result = createData(requestUri, params, headers, payload);
-        return getFileFeedHandler().createEntityList(result);
+        Response response = createData(requestUri, params, headers, payload);
+        checkResponseCode(response, HTTPCode.NO_CONTENT);
+        return getFileFeedHandler().createEntityList(response);
     }
     
     /**
@@ -766,7 +758,8 @@ public class FileService extends ConnectionsService {
 
         params = (null == params) ? new HashMap<String, String>() : params;
         String payload = new EntityIdSerializer(folderIds,FileConstants.CATEGORY_COLLECTION).fileIdListPayload();
-        createData(requestUri, params, headers, payload);
+        Response response = createData(requestUri, params, headers, payload);
+        checkResponseCode(response, HTTPCode.NO_CONTENT);
     }
     
     /**
@@ -799,7 +792,8 @@ public class FileService extends ConnectionsService {
         Map<String, String> headers = new HashMap<String, String>();
         headers.put(Headers.ContentType, Headers.ATOM);
         headers.put(Headers.ContentLanguage, Headers.UTF);
-        createData(requestUri, params, headers, payload);
+        Response response = createData(requestUri, params, headers, payload);
+        checkResponseCode(response, HTTPCode.NO_CONTENT);
     }
     
     /**
@@ -996,7 +990,8 @@ public class FileService extends ConnectionsService {
         String accessType = AccessType.AUTHENTICATED.getText();
         String requestUri = FileUrls.MYUSERLIBRARY_DOCUMENT_ENTRY.format(this,
                 FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
-        deleteData(requestUri, null, null);
+        Response response = deleteData(requestUri, null, null);
+        checkResponseCode(response, HTTPCode.NO_CONTENT);
     }
     
     /**
@@ -1016,7 +1011,8 @@ public class FileService extends ConnectionsService {
                 FileUrlParts.folderId.get(folderId));
         Map<String, String> params = new HashMap<String, String>();
         params.put(FileRequestParams.ITEMID.getFileRequestParams(), fileId);
-        deleteData(requestUri, params, null);
+        Response response = deleteData(requestUri, params, null);
+        checkResponseCode(response, HTTPCode.NO_CONTENT);
     }
 
 
@@ -1040,8 +1036,9 @@ public class FileService extends ConnectionsService {
         Map<String, String> headers = new HashMap<String, String>();
         headers.put(FileConstants.X_UPDATE_NONCE, getNonce()); // It is not clearly documented which Content Type requires Nonce, thus adding nonce in header for all upload requests. 
 
-        Response result = updateData(requestUrl, params, headers, contentFile, null);
-        return getFileFeedHandler().createEntity(result);
+        Response response = updateData(requestUrl, params, headers, contentFile, null);
+        checkResponseCode(response, HTTPCode.OK);
+        return getFileFeedHandler().createEntity(response);
     }
 
     /**
@@ -1063,9 +1060,10 @@ public class FileService extends ConnectionsService {
         String payload = new FileSerializer(file).generateFileUpdatePayload();
         String requestUri = FileUrls.MYUSERLIBRARY_DOCUMENT_ENTRY.format(this,
                 FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(file.getFileId()));
-        Response result = updateData(requestUri, params, new ClientService.ContentString(
+        Response response = updateData(requestUri, params, new ClientService.ContentString(
                 payload, CommonConstants.APPLICATION_ATOM_XML), null);
-        return getFileFeedHandler().createEntity(result);
+        checkResponseCode(response, HTTPCode.OK);
+        return getFileFeedHandler().createEntity(response);
     }
 
     
@@ -1122,9 +1120,10 @@ public class FileService extends ConnectionsService {
         String requestUri = FileUrls.COLLECTIONS_FEED.format(this, FileUrlParts.accessType.get(accessType));
         String payload = new FileSerializer(folder).generateFileUpdatePayload();
 
-        Response result = createData(requestUri, null, new ClientService.ContentString(payload,
+        Response response = createData(requestUri, null, new ClientService.ContentString(payload,
                 CommonConstants.APPLICATION_ATOM_XML));
-        File r = getFileFeedHandler().createEntity(result);
+        checkResponseCode(response, HTTPCode.CREATED);
+        File r = getFileFeedHandler().createEntity(response);
         folder.clearFieldsMap();
         folder.setDataHandler(r.getDataHandler());
         return folder;
@@ -1154,7 +1153,8 @@ public class FileService extends ConnectionsService {
         String accessType = AccessType.AUTHENTICATED.getText();
         String requestUri = FileUrls.COLLECTION_ENTRY.format(this, FileUrlParts.accessType.get(accessType),
                 FileUrlParts.folderId.get(folderId));
-        deleteData(requestUri, null, null);
+        Response response = deleteData(requestUri, null, null);
+        checkResponseCode(response, HTTPCode.NO_CONTENT);
     }
     
     /**
@@ -1165,18 +1165,19 @@ public class FileService extends ConnectionsService {
      * @throws ClientServicesException
      */
     public File updateFolder(File folder) throws ClientServicesException{
-            String accessType = AccessType.AUTHENTICATED.getText();
-            String requestUri = FileUrls.COLLECTION_ENTRY.format(this, FileUrlParts.accessType.get(accessType),
-                    FileUrlParts.folderId.get(folder.getFileId()));
-            String payload = new FileSerializer(folder).generateFileUpdatePayload();
-            Map<String, String> headers = new HashMap<String, String>();
-            headers.put(Headers.ContentType, Headers.ATOM);
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.COLLECTION_ENTRY.format(this, FileUrlParts.accessType.get(accessType),
+                FileUrlParts.folderId.get(folder.getFileId()));
+        String payload = new FileSerializer(folder).generateFileUpdatePayload();
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put(Headers.ContentType, Headers.ATOM);
 
-            Response result = updateData(requestUri, null, headers, payload, null);
-            File r = getFileFeedHandler().createEntity(result);
-            folder.clearFieldsMap();
-            folder.setDataHandler(r.getDataHandler());
-            return folder;
+        Response response = updateData(requestUri, null, headers, payload, null);
+        checkResponseCode(response, HTTPCode.OK);
+        File r = getFileFeedHandler().createEntity(response);
+        folder.clearFieldsMap();
+        folder.setDataHandler(r.getDataHandler());
+        return folder;
     }
     
     /**

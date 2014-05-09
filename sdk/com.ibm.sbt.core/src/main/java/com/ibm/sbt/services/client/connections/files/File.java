@@ -39,7 +39,6 @@ import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.common.Person;
 import com.ibm.sbt.services.client.connections.files.model.FileEntryXPath;
-import com.ibm.sbt.services.client.connections.files.model.FileRequestPayload;
 
 /**
  * @Represents Connections File
@@ -97,7 +96,13 @@ public class File extends AtomEntity {
 			return id;
 		}
 	}
-
+    /**
+     * Method to get the FileId of the File
+     * @return String 
+     */
+    public void setFileId(String id) {
+       super.setId((id==null || id.startsWith("urn:lsid:ibm.com:td:"))? id : "urn:lsid:ibm.com:td:"+id);
+    }
 	/**
 	 * Method to get the Label of the File
 	 * @return String
@@ -215,7 +220,7 @@ public class File extends AtomEntity {
 	 * @return Person
 	 */
 	public Person getModifier() {
-		if(null == modifierEntry) {
+		if(null == modifierEntry && getDataHandler()!=null) {
 			modifierEntry = new Person(getService(), new XmlDataHandler((Node)getDataHandler().getData(), 
 	        		nameSpaceCtx, (XPathExpression)AtomXPath.modifier.getPath()));
 		}
@@ -223,16 +228,25 @@ public class File extends AtomEntity {
 	}
 
 	/**
-	 * getVisibility
+	 * getNotification
 	 * <p>
-	 * returns the visibility status of the file, whether private, public or shared?
+	 * Indicates whether the currently authenticated user wants to receive notifications as people edit the document. Options are on or off.
 	 * 
 	 * @return
 	 */
-	public String getVisibility() {
-		return getAsString(FileEntryXPath.Visibility);
+	public String getNotification() {
+		return getAsString(FileEntryXPath.Notification);
 	}
-
+    /**
+     * getVisibility
+     * <p>
+     * returns the visibility status of the file, whether private, public or shared?
+     * 
+     * @return
+     */
+    public String getVisibility() {
+        return getAsString(FileEntryXPath.Visibility);
+    }
 	/**
 	 * Method to return the Library Id of the File
 	 * @return String
@@ -467,6 +481,9 @@ public class File extends AtomEntity {
 	 * @throws FileServiceException
 	 */
 	public File load() throws ClientServicesException {
+	    if(this.getCategory()!= null && this.getCategory().equals(FileConstants.CATEGORY_COLLECTION)) {
+	        return getService().getFolder(getFileId());
+	    }
 		return getService().getFile(getFileId());
     }
 	
@@ -558,7 +575,7 @@ public class File extends AtomEntity {
 	 * @param label
 	 */
 	public void setLabel(String label) {
-		fields.put(FileRequestPayload.LABEL.getFileRequestPayload(), label);
+		fields.put(FileEntryXPath.Label.getName(), label);
 	}
 	
 	/**
@@ -566,15 +583,23 @@ public class File extends AtomEntity {
 	 * @param visibility
 	 */
 	public void setVisibility(String visibility) {
-		fields.put(FileRequestPayload.VISIBILITY.getFileRequestPayload(), visibility);
+		fields.put(FileEntryXPath.Visibility.getName(), visibility);
 	}
-	
+	   
+    /**
+     * Method to set Notification of a File
+     * @param visibility
+     */
+    public void setNotification(String visibility) {
+        fields.put(FileEntryXPath.Notification.getName(), visibility);
+    }
+    
 	/**
 	 * Method to set Summary of a File
 	 * @param summary
 	 */
 	public void setSummary(String summary) {
-		fields.put(FileRequestPayload.SUMMARY.getFileRequestPayload(), summary);
+		fields.put(FileEntryXPath.Summary.getName(), summary);
 	}
 	
 }

@@ -30,6 +30,7 @@ import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.AtomFeedHandler;
 import com.ibm.sbt.services.client.base.AtomXPath;
 import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.base.CommonConstants.HTTPCode;
 import com.ibm.sbt.services.client.base.ConnectionsService;
 import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
@@ -431,7 +432,8 @@ public class BlogService extends ConnectionsService {
 	 */
 	public void deleteBlog(String blogUuid) throws ClientServicesException {
 		String deleteBlogUrl = BlogUrls.GET_UPDATE_REMOVE_BLOG.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle), BlogUrlParts.entryAnchor.get(blogUuid));
-		getClientService().delete(deleteBlogUrl);
+		Response response = getClientService().delete(deleteBlogUrl);
+		checkResponseCode(response, HTTPCode.NO_CONTENT);
 	}
 	
 	/**
@@ -549,7 +551,8 @@ public class BlogService extends ConnectionsService {
 	 */
 	public void deleteBlogPost(String postUuid, String blogHandle) throws ClientServicesException {
 		String deletePostUrl = BlogUrls.UPDATE_REMOVE_POST.format(this, BlogUrlParts.blogHandle.get(blogHandle), BlogUrlParts.entryAnchor.get(postUuid));
-		getClientService().delete(deletePostUrl);
+		Response response = getClientService().delete(deletePostUrl);
+		checkResponseCode(response, HTTPCode.NO_CONTENT);
 	}
 	
 	/**
@@ -588,7 +591,8 @@ public class BlogService extends ConnectionsService {
 	 */
 	public void deleteBlogComment(String blogHandle, String commentUuid) throws ClientServicesException {
 		String getCommentUrl = BlogUrls.GET_REMOVE_COMMENT.format(this, BlogUrlParts.blogHandle.get(blogHandle), BlogUrlParts.entryAnchor.get(commentUuid));
-		getClientService().delete(getCommentUrl);
+		Response response = getClientService().delete(getCommentUrl);
+		checkResponseCode(response, HTTPCode.NO_CONTENT);
 	}
 
 	/***************************************************************

@@ -72,6 +72,7 @@ public class CommunityServiceTest extends BaseCommunityServiceTest {
 			assertNotNull(member.getUserid());
 			assertNotNull(member.getName());
 		}
+		communityService.updateMember(community.getCommunityUuid(), newMember);
 		communityService.removeMember(community.getCommunityUuid(),
 				id);
 	}

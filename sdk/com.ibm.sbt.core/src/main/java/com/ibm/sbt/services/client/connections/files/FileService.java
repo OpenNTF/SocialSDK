@@ -24,7 +24,6 @@ import java.io.OutputStream;
 import java.io.StringReader;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -57,23 +56,16 @@ import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.files.FileConstants.FlagType;
 import com.ibm.sbt.services.client.connections.files.model.FileCommentParameterBuilder;
-import com.ibm.sbt.services.client.connections.files.model.FileCommentsFeedParameterBuilder;
 import com.ibm.sbt.services.client.connections.files.model.FileEntryXPath;
 import com.ibm.sbt.services.client.connections.files.model.FileRequestParams;
-import com.ibm.sbt.services.client.connections.files.model.FileRequestPayload;
 import com.ibm.sbt.services.client.connections.files.model.Headers;
 import com.ibm.sbt.services.client.connections.files.serializer.EntityIdSerializer;
 import com.ibm.sbt.services.client.connections.files.serializer.FileSerializer;
 import com.ibm.sbt.services.client.connections.files.serializer.FlagSerializer;
 import com.ibm.sbt.services.client.connections.files.transformers.CommentTransformer;
-import com.ibm.sbt.services.client.connections.files.transformers.FileTransformer;
-import com.ibm.sbt.services.client.connections.files.transformers.FolderTransformer;
 import com.ibm.sbt.services.client.connections.files.transformers.ModerationTransformer;
-import com.ibm.sbt.services.client.connections.files.transformers.MultipleFileTransformer;
 import com.ibm.sbt.services.client.connections.files.util.Messages;
-import com.ibm.sbt.services.client.connections.profiles.ProfileUrls;
 import com.ibm.sbt.services.endpoints.Endpoint;
-import com.ibm.xtq.bcel.generic.NEW;
 
 /**
  * The Files application of IBM® Connections enables teams to create a shared repository of files. The Files API allows application programs to add files to a collection and to read and modify existing files.

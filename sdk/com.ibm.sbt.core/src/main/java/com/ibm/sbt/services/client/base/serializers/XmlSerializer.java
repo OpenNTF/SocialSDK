@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -122,18 +122,18 @@ public class XmlSerializer {
 		return docBuilder.newDocument();
 	}
 	
-	protected <T extends Node> Node appendChildren(String rootElementName, List<T> childs) {
+	protected <T extends Node> Node appendChildren(String rootElementName, List<T> children) {
 		Node element = element(rootElementName);
-		return appendChildren(element, childs);
+		return appendChildren(element, children);
 	}
 	
-	protected <T extends Node> Node appendChildren(String rootElementName, T... childs) {
-		return appendChildren(rootElementName, childs);
+	protected <T extends Node> Node appendChildren(String rootElementName, T... children) {
+		return appendChildren(rootElementName, children);
 	}
 	
-	protected <T extends Node> Node appendChildren(Node root, List<T> childs) {
-		if(childs != null) {
-			for(Node child : childs) {
+	protected <T extends Node> Node appendChildren(Node root, List<T> children) {
+		if(children != null) {
+			for(Node child : children) {
 				if(child != null) {
 					try {
 						root.appendChild(child);
@@ -147,8 +147,8 @@ public class XmlSerializer {
 		return root;
 	}
 	
-	protected Node appendChildren(Node root, Node... childs) {
-		return appendChildren(root, list(childs));
+	protected Node appendChildren(Node root, Node... children) {
+		return appendChildren(root, list(children));
 	}
 	
 	protected Node rootNode(Node root) {

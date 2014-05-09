@@ -961,6 +961,7 @@ public class FileService extends ConnectionsService {
     public File getFile(String fileId, Map<String, String> parameters, boolean load)
             throws ClientServicesException {
         File file = new File(fileId);
+        file.setService(this);
         if (load) {
             SubFilters subFilters = new SubFilters();
             subFilters.setFileId(fileId);
@@ -1105,7 +1106,7 @@ public class FileService extends ConnectionsService {
      * @throws TransformerException
      */
     public File createFolder(String name, String summary) throws ClientServicesException {
-        File f  = new File();
+        File f  = new File(this,null);
         f.setTitle(name);
         f.setLabel(name);
         f.setSummary(summary);
@@ -1195,7 +1196,7 @@ public class FileService extends ConnectionsService {
      * @throws ClientServicesException
      */
     public File updateFolder(String folderId, String title, String label, String summary) throws ClientServicesException{
-         File f = new File();
+         File f = new File(this,null);
         f.setFileId(folderId);
         f.setLabel(label);
         f.setTitle(title);
@@ -1274,7 +1275,7 @@ public class FileService extends ConnectionsService {
      */
     public Comment addCommentToFile(String fileId, String comment, Map<String, String> params)
             throws ClientServicesException, TransformerException {
-        Comment c = new Comment();
+        Comment c = new Comment(this,null);
         c.setContent(comment);
         return this.addCommentToFile(fileId, c, null, params);
     }
@@ -1291,7 +1292,7 @@ public class FileService extends ConnectionsService {
      */
     public Comment addCommentToFile(String fileId, String comment, String userId, Map<String, String> params)
             throws ClientServicesException, TransformerException {
-        Comment c = new Comment();
+        Comment c = new Comment(this,null);
         c.setContent(comment);
         return this.addCommentToFile(fileId, c, userId, params);
     }
@@ -1566,8 +1567,10 @@ public class FileService extends ConnectionsService {
         String requestUri = FileUrls.COMMUNITY_FILE_COMMENT.format(this,
                 FileUrlParts.accessType.get(accessType), FileUrlParts.communityId.get(communityId),
                 FileUrlParts.fileId.get(fileId));
-        Document payload = this.constructPayloadForComments(comment);
-        Response result = this.createData(requestUri, null, new ClientService.ContentXml(payload,
+        Comment c = new Comment(this, null);
+        c.setContent(comment);
+        String payload = new CommentSerializer(c).generateCommentUpdatePayload();
+        Response result = this.createData(requestUri, null, new ClientService.ContentString(payload,
                 CommonConstants.APPLICATION_ATOM_XML));
         return this.getCommentFeedHandler().createEntity(result);
     }
@@ -1625,9 +1628,11 @@ public class FileService extends ConnectionsService {
                     FileUrlParts.fileId.get(fileId));
         }
 
-        Document payload = this.constructPayloadForComments(comment);
+        Comment c = new Comment(this, null);
+        c.setContent(comment);
+        String payload = new CommentSerializer(c).generateCommentUpdatePayload();
         Map<String, String> headers = new HashMap<String, String>();
-        Response result = this.createData(requestUri, params, headers, new ClientService.ContentXml(
+        Response result = this.createData(requestUri, params, headers, new ClientService.ContentString(
                 payload, CommonConstants.APPLICATION_ATOM_XML));
         return this.getCommentFeedHandler().createEntity(result);
     }
@@ -2605,7 +2610,10 @@ public class FileService extends ConnectionsService {
         }
         Map<String, String> headers = new HashMap<String, String>();
         headers.put(Headers.ContentType, Headers.ATOM);
-        Object payload = this.constructPayloadForComments(comment);
+        Comment c = new Comment(this, null);
+        c.setContent(comment);
+        c.setId(commentId);
+        String payload = new CommentSerializer(c).generateCommentUpdatePayload();
         Response result = this.updateData(requestUri, params, headers, payload, null);
         return this.getCommentFeedHandler().createEntity(result);
     }
@@ -2684,7 +2692,11 @@ public class FileService extends ConnectionsService {
         // if (payloadMap != null && !payloadMap.isEmpty()) {
         headers.put(Headers.ContentType, Headers.ATOM);
         // }
-        Document payload = this.constructPayloadForComments(updatedComment); // TODO
+        
+        Comment c = new Comment(this, null);
+        c.setId(commentId);
+        c.setContent(updatedComment);
+        String payload = new CommentSerializer(c).generateCommentUpdatePayload();
         this.updateData(requestUri, null, headers, payload, null);
     }
 
@@ -2857,44 +2869,6 @@ public class FileService extends ConnectionsService {
         result = this.retrieveData(requestUri, null);
         return (Document) result.getData();
     }
-
-
-    /**
-     * constructPayloadForComments
-     * 
-     * @param comment - comment for which a payload Document needs to be constructed.
-     * @return Document - payload Document which is sent as part of the request body.
-     * @throws TransformerException
-     */
-
-    private Document constructPayloadForComments(String comment) throws TransformerException {
-        return this.constructPayloadForComments(null, comment);
-    }
-
-    /**
-     * constructPayloadForComments
-     * 
-     * @param operation - used to determine whether we need the payload for adding / deleting / updating a
-     *        comment.
-     * @param commentToBeAdded - plaintext comment which needs to be added to the File.
-     * @return Document - payload Document which is sent as part of the request body.
-     * @throws TransformerException
-     */
-
-    private Document constructPayloadForComments(String operation, String commentToBeAdded)
-            throws TransformerException {
-        Map<String, Object> fieldsMap = new HashMap<String, Object>();
-        fieldsMap.put("category", FileConstants.CATEGORY_COMMENT);
-        if (!StringUtil.isEmpty(operation) && !operation.equals("delete")) {
-            fieldsMap.put("deleteWithRecord", "false");
-        } else {
-            fieldsMap.put("content", commentToBeAdded);
-        }
-        CommentTransformer commentTransformer = new CommentTransformer();
-        String payload = commentTransformer.transform(fieldsMap);
-        return this.convertToXML(payload.toString());
-    }
-
 
     private Object constructPayloadForModeration(String fileId, String action, String actionReason,
             String entity) throws TransformerException {

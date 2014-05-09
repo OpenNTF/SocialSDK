@@ -53,6 +53,14 @@ public class CommunityMemberSerializer extends AtomEntitySerializer<Member> {
 		);
 	}
 	
+	protected void generateUpdatePayload() {
+		Node entry = entry();
+		appendChildren(entry,
+				contributor(),
+				role()
+		);
+	}
+	
 	@Override
 	protected Node entry() {
 		Element element = element(Namespace.ATOM.getUrl(), ENTRY);
@@ -84,7 +92,8 @@ public class CommunityMemberSerializer extends AtomEntitySerializer<Member> {
 	}
 
 	public String updatePayload() throws ClientServicesException {
-		generateCreatePayload();
+		generateUpdatePayload();
+		System.out.println(serializeToString());
 		return serializeToString();
 	}
 }

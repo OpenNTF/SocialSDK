@@ -55,8 +55,7 @@ public class BlogCommentCreateGetDeleteTest extends BaseBlogServiceTest {
 
 	@Test
 	public void deleteComment() throws Exception {
-		blogService.deleteBlogComment(blog.getBlogUuid(), comment.getCommentUuid());
-		blogService.getBlogComment(blog.getHandle(), comment.getCommentUuid());
+		blogService.deleteBlogComment(blog.getHandle(), comment.getCommentUuid());
 	}
 
 	@After

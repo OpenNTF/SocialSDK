@@ -16,11 +16,8 @@
 package com.ibm.sbt.services.client.connections.files;
 
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
-
 import java.util.Date;
-
 import org.w3c.dom.Node;
-
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.xpath.XPathExpression;
@@ -69,6 +66,11 @@ public class Comment extends AtomEntity {
 		super(service, node, namespaceCtx, xpathExpression);
 	}
 	
+	@Override
+	public void setId(String id) {
+	    //comment comes with uuid but parent entity wants urn qualified id
+	    super.setId((id==null || id.startsWith("urn:lsid:ibm.com:td:"))? id : "urn:lsid:ibm.com:td:"+id);
+	}
 	public String getCommentId() {
 		if (!StringUtil.isEmpty(commentId)) {
 			return commentId;

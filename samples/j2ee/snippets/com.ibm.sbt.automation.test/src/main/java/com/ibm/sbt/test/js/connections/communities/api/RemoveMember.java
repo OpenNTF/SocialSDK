@@ -1,5 +1,5 @@
 /*
- * ï¿½ Copyright IBM Corp. 2012
+ * © Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -21,7 +21,6 @@ import org.junit.Test;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.automation.core.test.connections.BaseCommunitiesTest;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
-import com.ibm.sbt.services.client.connections.communities.Member;
 
 /**
  * @author mwallace
@@ -33,7 +32,7 @@ public class RemoveMember extends BaseCommunitiesTest {
     static final String SNIPPET_ID = "Social_Communities_API_RemoveMember";
 
     @Test
-    public void testRemoveMember() {
+    public void testRemoveMember() throws Exception {
     	String id = getProperty("sample.email2");
     	if (getEnvironment().isSmartCloud()) {
     		id = getProperty("smartcloud.id2");

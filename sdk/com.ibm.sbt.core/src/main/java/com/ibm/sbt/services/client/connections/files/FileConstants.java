@@ -37,6 +37,8 @@ public final class FileConstants {
     public static final String VISIBILITY          = "visibility";
     public static final String NOTIFICATION        = "notification";
     public static final String MODIFIED            = "modified";
+    public static final String MODIFIER            = "modifier";
+    public static final String CREATED             = "created";
     public static final String VISIBILITY_PUBLIC   = "public";
     public static final String VISIBILITY_PRIVATE  = "private";
     public static final String X_UPDATE_NONCE      = "X-Update-Nonce";

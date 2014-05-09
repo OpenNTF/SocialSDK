@@ -84,8 +84,6 @@ public class CommunityMemberSerializer extends AtomEntitySerializer<Member> {
 		return (new PersonSerializer(entity).xmlNode(CONTRIBUTOR));
 	}
 	
-	
-	
 	public String createPayload() throws ClientServicesException {
 		generateCreatePayload();
 		return serializeToString();

@@ -65,9 +65,11 @@ public class FileSerializer extends AtomEntitySerializer<File> {
         
         if (entity.getModified()!=null)     
             appendChildren(n, textElement(ConnectionsConstants.Namespace.TD.getUrl(), FileConstants.MODIFIED, DateSerializer.toString(entity.getModified())));
+        if (entity.getCreated()!=null)     
+            appendChildren(n, textElement(ConnectionsConstants.Namespace.TD.getUrl(), FileConstants.CREATED, DateSerializer.toString(entity.getCreated())));
             
         if (entity.getModifier()!=null)   
-            appendChildren(n,new PersonSerializer(entity.getModifier()).xmlNode(FileConstants.MODIFIER));
+            appendChildren(n,new PersonSerializer(entity.getModifier()).xmlNode(ConnectionsConstants.Namespace.TD.getUrl(),FileConstants.MODIFIER ));
         
         return n;
     }

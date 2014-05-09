@@ -36,7 +36,6 @@ import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.SerializationUtil;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.connections.common.Tag;
-import com.ibm.sbt.services.client.smartcloud.profiles.ProfileServiceException;
 
 /**
  * Tests for the java connections Profile API by calling Connections server
@@ -89,8 +88,10 @@ public class ProfileServiceTest extends BaseUnitTest {
 		profileAdminService.deleteProfile(profile.getUserid());
 	}
 
-	@Test(expected = ClientServicesException.class)
+	@Test()
 	public final void testGetProfileWithNullUserId() throws Exception {
+		thrown.expect(ClientServicesException.class);
+		thrown.expectMessage("Required input parameter is missing : id");
 		profileService.getProfile(null);
 	}
 
@@ -232,17 +233,21 @@ public class ProfileServiceTest extends BaseUnitTest {
 	/**
 	 * Updating Profile of a user with credentials of some other user
 	 */
-	@Test(expected = ProfileServiceException.class)
-	public final void testUpdateProfileWithInvalidCredentials()
-			throws Exception {
+	@Test
+	public final void testUpdateProfileWithInvalidCredentials() throws Exception {
 		Profile profile = profileService.getProfile(properties
 				.getProperty("email2"));
 		profile.setTelephoneNumber("TEST_PHONE_NUMBER");
+		thrown.expect(ClientServicesException.class);
+		thrown.expectMessage("404:Not Found");
 		profileService.updateProfile(profile);
 	}
 
-	@Test(expected = ProfileServiceException.class)
+
+	@Test
 	public final void testUpdateProfileWithNullArgument() throws Exception {
+		thrown.expect(ClientServicesException.class);
+		thrown.expectMessage("Invalid Input : Profile passed is null");
 		profileService.updateProfile(null);
 	}
 
@@ -261,7 +266,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 		Profile profile = profileService.getProfile(properties
 				.getProperty("email1"));
 		File file = new File("config/image");
-		thrown.expect(ProfileServiceException.class);
+		thrown.expect(ClientServicesException.class);
 		thrown.expectMessage("Cannot open the file");
 		profileService.updateProfilePhoto(file, profile.getUserid());
 	}
@@ -273,7 +278,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 				.getProperty("email1"));
 		File file = new File("image1.jpg");
 		profile.setPhotoLocation(file.getAbsolutePath());
-		thrown.expect(ProfileServiceException.class);
+		thrown.expect(ClientServicesException.class);
 		thrown.expectMessage("Cannot open the file");
 		profileService.updateProfilePhoto(file, profile.getUserid());
 	}

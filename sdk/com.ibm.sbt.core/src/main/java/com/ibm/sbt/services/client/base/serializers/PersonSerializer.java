@@ -55,7 +55,7 @@ public class PersonSerializer extends BaseEntitySerializer<Person> {
 	 * @param namespaceUri
 	 * @return
 	 */
-	public Node xmlNode(String namespaceUri, String nodeName) {
+	public Node xmlNode(String nodeName, String namespaceUri) {
 		Element[] textElements = new Element[getNumFields()];
 		int index = 0;
 		if (StringUtil.isNotEmpty(entity.getName())) {
@@ -86,7 +86,7 @@ public class PersonSerializer extends BaseEntitySerializer<Person> {
 		if (StringUtil.isNotEmpty(entity.getEmail())) {
 			nodeCount++;
 		}
-		if (StringUtil.isNotEmpty(entity.getId())) {
+		if (StringUtil.isNotEmpty(entity.getUserid())) {
 			nodeCount++;
 		}
 		if (StringUtil.isNotEmpty(entity.getUserState())) {

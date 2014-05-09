@@ -32,7 +32,6 @@ public class BlogPostDeleteTest extends BaseBlogServiceTest {
 		Blog blogGot = blogService.getBlog(blog.getBlogUuid());
 		assertEquals(blog.getTitle(), blogGot.getTitle());
 		blogService.deleteBlog(blog.getBlogUuid());
-		blogService.getBlog(blog.getBlogUuid());
 	}
 
 	@Test

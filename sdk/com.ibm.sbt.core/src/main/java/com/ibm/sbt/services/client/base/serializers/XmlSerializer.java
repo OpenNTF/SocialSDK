@@ -80,7 +80,6 @@ public class XmlSerializer {
 		Writer stringWriter = new StringWriter();
 		lsOutput.setCharacterStream(stringWriter);
 		lsSerializer.write(doc, lsOutput);
-		
 		return stringWriter.toString();
 	}
 

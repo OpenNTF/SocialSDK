@@ -737,18 +737,18 @@ public class CommunityService extends ConnectionsService {
 		}
 		Map<String, String> parameters = new HashMap<String, String>();
 
-		parameters.put("memberid", member.getUserid());
+		parameters.put("userid", member.getUserid());
+		parameters.put("email", member.getEmail());
 
 		Object memberPayload;
 		try {
-			member.setUserid(member.getUserid()); // to add this in fields map for update
 			CommunityMemberSerializer serializer = new CommunityMemberSerializer(member);
 			memberPayload = serializer.updatePayload();
 		} catch (ClientServicesException e) {
 			throw new ClientServicesException(e, Messages.UpdateMemberException);
 		}
 		String url = CommunityUrls.COMMUNITY_MEMBERS.format(this, CommunityUrls.getCommunityUuid(communityUuid));
-		createData(url, parameters, memberPayload);
+		updateData(url, parameters, memberPayload, null);
 	}
 	
 	/**

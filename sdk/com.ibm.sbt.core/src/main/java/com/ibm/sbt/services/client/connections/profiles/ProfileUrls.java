@@ -35,7 +35,7 @@ public enum ProfileUrls implements URLContainer {
 	 * NON-ADMIN URLS
 	 */
 	PROFILE(new VersionedUrl(v4_0, 					"{profiles}/{authType}/atom/profile.do?{userId}")),
-	PROFILE_ENTRY(new VersionedUrl(v4_0, 			"{profiles}/{authType}/atom/profileEntry.do")),
+	PROFILE_ENTRY(new VersionedUrl(v4_0, 			"{profiles}/{authType}/atom/profileEntry.do?{userId}")),
 	PHOTO(new VersionedUrl(v4_0, 					"{profiles}/{authType}/atom/photo.do?{userId}")),
 	GET_TAGS(new VersionedUrl(v4_0, 				"{profiles}/{authType}/atom/profileTags.do?{targetId}")),
 	TAGS(new VersionedUrl(v4_0, 					"{profiles}/{authType}/atom/profileTags.do?{sourceId}&{targetId}")),

@@ -239,7 +239,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 				.getProperty("email2"));
 		profile.setTelephoneNumber("TEST_PHONE_NUMBER");
 		thrown.expect(ClientServicesException.class);
-		thrown.expectMessage("404:Not Found");
+		thrown.expectMessage("403:Forbidden");
 		profileService.updateProfile(profile);
 	}
 

@@ -31,9 +31,8 @@ import com.ibm.sbt.services.client.base.AtomEntity;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
-import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.communities.model.CommunityXPath;
-import com.ibm.sbt.services.client.connections.communities.transformers.CommunityTransformer;
+import com.ibm.sbt.services.client.connections.communities.serializers.CommunitySerializer;
 
 /**
  * This class represents a Connections Community entity
@@ -55,9 +54,9 @@ public class Community extends AtomEntity {
 		setService(communityService);
 		setAsString(CommunityXPath.communityUuid, communityUuid);
 	}
-	
+
 	public Community(){}
-	
+
 	/**
 	 * Constructor
 	 * 
@@ -78,7 +77,7 @@ public class Community extends AtomEntity {
 			XPathExpression xpathExpression) {
 		super(service, node, namespaceCtx, xpathExpression);
 	}
-	
+
 	/**
 	 * Constructor
 	 * @param svc
@@ -114,7 +113,7 @@ public class Community extends AtomEntity {
 	public String getTitle() {
 		return getAsString(CommunityXPath.title);
 	}
-	
+
 	/**
 	 * @sets the title
 	 * 
@@ -172,11 +171,11 @@ public class Community extends AtomEntity {
 	/**
 	 * @return the list of Tags
 	 */
-	
+
 	public List<String> getTags() {
 		return (List<String>) Arrays.asList(getDataHandler().getAsArray(CommunityXPath.tags));
 	}
-	
+
 	/**
 	 * @sets the tags
 	 */
@@ -194,7 +193,7 @@ public class Community extends AtomEntity {
 	public void setTags(String tags) {
 		setAsString(CommunityXPath.tags, tags);
 	}
-	
+
 	/**
 	 * @return the memberCount
 	 */
@@ -207,28 +206,28 @@ public class Community extends AtomEntity {
 	public String getCommunityType(){
 		return getAsString(CommunityXPath.communityType);		
 	}
-	
+
 	/**
 	 * @set the communityType
 	 */
 	public void setCommunityType(String communityType){
 		setAsString(CommunityXPath.communityType, communityType);	
 	}
-	
+
 	/**
 	 * @return the published date of community
 	 */
 	public Date getPublished(){
 		return getAsDate(CommunityXPath.published);
 	}
-	
+
 	/**
 	 * @return the community theme
 	 */
 	public String getCommunityTheme(){
 		return getAsString(CommunityXPath.communityTheme);
 	}
-	
+
 	public void setCommunityTheme(String theme) {
 		setAsString(CommunityXPath.communityTheme, theme);
 	}
@@ -238,8 +237,8 @@ public class Community extends AtomEntity {
 	public Date getUpdated(){
 		return getAsDate(CommunityXPath.updated);
 	}
-	
-	
+
+
 	/**
 	 * @return the authorUid
 	 */
@@ -249,7 +248,7 @@ public class Community extends AtomEntity {
 		author.setEmail(getAsString(CommunityXPath.authorEmail));
 		return author;
 	}
-	
+
 	/**
 	 * @return the ContributorId
 	 */
@@ -259,7 +258,7 @@ public class Community extends AtomEntity {
 		contributor.setEmail(getAsString(CommunityXPath.contributorEmail));
 		return contributor;
 	}
-	
+
 	/**
 	 * @return the membersUrl
 	 */
@@ -271,34 +270,32 @@ public class Community extends AtomEntity {
 	 * This method is used by communityService wrapper methods to construct request body for Add/Update operations
 	 * @return Object
 	 */
-	public Object constructCreateRequestBody() throws TransformerException {
+	public Object constructCreateRequestBody() throws ClientServicesException {
 		return createCommunityRequestPayload();
 	}
-	
+
 	/**
 	 * This method loads the community 
 	 * 
 	 * @return
 	 * @throws ClientServicesException
 	 */
-	
-	public Community load() throws ClientServicesException
-    {
+
+	public Community load() throws ClientServicesException {
 		return getService().getCommunity(getCommunityUuid());
-    }
-	
+    	}
+
 	/**
 	 * This method updates the community 
 	 * 
 	 * @return
 	 * @throws ClientServicesException
 	 */
-	
-	public void update() throws ClientServicesException
-    {
+
+	public void update() throws ClientServicesException {
 		getService().updateCommunity(this);
-    }
-		
+    	}
+
 	/**
 	 * This method deletes the community on the server
 	 * 
@@ -315,47 +312,46 @@ public class Community extends AtomEntity {
 	 * @return
 	 * @throws ClientServicesException
 	 */
-	public Community save() throws ClientServicesException{
-		if(StringUtil.isEmpty(getCommunityUuid())){
+	public Community save() throws ClientServicesException {
+		if(StringUtil.isEmpty(getCommunityUuid())) {
 			String id = getService().createCommunity(this);
 			return getService().getCommunity(id);
-		}else{
+		} else {
 			getService().updateCommunity(this);
 			return getService().getCommunity(getCommunityUuid());
 		}
 	}
+
 	/**
 	 * This method gets Community member
 	 * 
 	 * @return
 	 * @throws ClientServicesException
 	 */
-	public Member getMember(String memberID) throws ClientServicesException
-    {
+	public Member getMember(String memberID) throws ClientServicesException {
 		return getService().getMember(getCommunityUuid(), memberID );
-    }
-	
+    	}
+
 	/**
 	 * This method adds Community member
 	 * 
 	 * @return
 	 * @throws ClientServicesException
 	 */
-	public boolean addMember(Member member) throws ClientServicesException
-    {
+	public boolean addMember(Member member) throws ClientServicesException {
 		return getService().addMember(getCommunityUuid(), member);
-    }
-	
+    	}
+
 	/**
 	 * This method removes Community member
 	 * 
 	 * @return
 	 * @throws ClientServicesException
 	 */
-	public void removeMember(String memberID) throws ClientServicesException
-    {
+	public void removeMember(String memberID) throws ClientServicesException {
 		getService().removeMember(getCommunityUuid(), memberID );
-    }
+    	}
+    	
 	/**
 	 * This method gets the subcommunities of a community
 	 * 
@@ -365,7 +361,7 @@ public class Community extends AtomEntity {
 	public EntityList<Community> getSubCommunities() throws ClientServicesException {
 	   	return getService().getSubCommunities(getCommunityUuid());
 	}
-	
+
 	/**
 	 * This method gets the subcommunities of a community
 	 * 
@@ -402,21 +398,21 @@ public class Community extends AtomEntity {
 	public EntityList<Member> getMembers(Map<String, String> parameters) throws ClientServicesException {
 	   	return getService().getMembers(getCommunityUuid(), parameters);
 	}
-	
-	private String createCommunityRequestPayload() throws TransformerException {
-		CommunityTransformer transformer = new CommunityTransformer(this);
-		String xml = transformer.transform(fields);
+
+	private String createCommunityRequestPayload() throws ClientServicesException {
+		CommunitySerializer serializer = new CommunitySerializer(this);
+		String xml = serializer.createPayload();
 		return xml;		
 	}
-	
+
 	@Override
-	public CommunityService getService(){
+	public CommunityService getService() {
 		return (CommunityService)super.getService();
 	}
-	
+
 	@Override
-	public XmlDataHandler getDataHandler(){
+	public XmlDataHandler getDataHandler() {
 		return (XmlDataHandler)super.getDataHandler();
 	}
-	
+
 }

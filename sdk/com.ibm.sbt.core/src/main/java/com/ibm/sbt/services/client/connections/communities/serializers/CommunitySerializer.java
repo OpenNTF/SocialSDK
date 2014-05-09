@@ -34,14 +34,14 @@ import com.ibm.sbt.services.client.base.serializers.AtomEntitySerializer;
 import com.ibm.sbt.services.client.connections.communities.Community;
 
 public class CommunitySerializer extends AtomEntitySerializer<Community> {
-	
-	public CommunitySerializer(Community community){
+
+	public CommunitySerializer(Community community) {
 		super(community);
 	}
-	
+
 	protected void generateCreatePayload() throws ClientServicesException {
 		Node entry = entry();
-		
+
 		appendChildren(entry,
 				title(),
 				content(),
@@ -50,12 +50,12 @@ public class CommunitySerializer extends AtomEntitySerializer<Community> {
 				id()
 		);
 	}
-	
-	public String createPayload() throws ClientServicesException{
+
+	public String createPayload() throws ClientServicesException {
 		generateCreatePayload();
 		return serializeToString();
 	}
-	
+
 	@Override
 	protected Node entry() {
 		Element element = element(Namespace.ATOM.getUrl(), ENTRY);
@@ -65,15 +65,16 @@ public class CommunitySerializer extends AtomEntitySerializer<Community> {
 		Node root = rootNode(element);
 		return root;
 	}
+
 	@Override
 	protected Element content() {
 		return textElement(CONTENT, entity.getContent(), attribute(TYPE, HTML));
 	}
-	
+
 	protected Element category() {
 		return textElement(CATEGORY, "", attribute(COMMUNITY_TERM, COMMUNITY), attribute(Namespace.SCHEME.getPrefix(), Namespace.SCHEME.getUrl()));
 	}
-	
+
 	protected Element type() {
 		return textElement(COMMUNITY_TYPE, entity.getCommunityType());
 	}

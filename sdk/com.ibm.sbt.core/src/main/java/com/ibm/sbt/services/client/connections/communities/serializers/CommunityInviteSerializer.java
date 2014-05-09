@@ -33,6 +33,9 @@ import com.ibm.sbt.services.client.base.ConnectionsConstants.Namespace;
 import com.ibm.sbt.services.client.base.serializers.AtomEntitySerializer;
 import com.ibm.sbt.services.client.connections.communities.Invite;
 
+/**
+ * @author Dave Tobin
+ */
 
 public class CommunityInviteSerializer extends AtomEntitySerializer<Invite> {
 	

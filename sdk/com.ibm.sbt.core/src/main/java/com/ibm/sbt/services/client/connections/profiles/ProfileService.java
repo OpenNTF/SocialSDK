@@ -206,6 +206,9 @@ public class ProfileService extends ConnectionsService {
 	 */
 	public Profile getProfile(String id, Map<String, String> parameters) throws ClientServicesException {
 		// TODO: Do a cache lookup first. If cache miss, make a network call to get profile
+		if (StringUtil.isEmpty(id)){
+			throw new ClientServicesException(null, Messages.InvalidArgument_1);
+		}
 		String url = ProfileUrls.PROFILE.format(this, ProfileParams.userId.get(id));
 		return getProfileEntity(url, parameters);
 	}
@@ -563,7 +566,8 @@ public class ProfileService extends ConnectionsService {
 				headers.put(CONTENT_TYPE, IMAGE_ + ext);
 			}
 			String url = ProfileUrls.PHOTO.format(this, ProfileParams.userId.get(userId));
-			getClientService().put(url, null, headers, file, ClientService.FORMAT_NULL);
+			Response response = getClientService().put(url, null, headers, file, ClientService.FORMAT_NULL);
+			checkResponseCode(response, HTTPCode.OK);
 		}
 	}
 
@@ -613,9 +617,10 @@ public class ProfileService extends ConnectionsService {
 	public String sendInvite(String id, String inviteMsg)throws ClientServicesException {
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put(CONNECTION_TYPE, COLLEAGUE);
-		Object payload = constructSendInviteRequestBody(inviteMsg);
+		String payload = constructSendInviteRequestBody(inviteMsg);
 		String url = ProfileUrls.CONNECTIONS.format(this, ProfileParams.userId.get(id));
 		Response response = createData(url, parameters, payload);
+		checkResponseCode(response, HTTPCode.CREATED);
 		return extractConnectionIdFromHeaders(response);
 	}
 
@@ -635,7 +640,8 @@ public class ProfileService extends ConnectionsService {
 			throw new ClientServicesException(null, Messages.InvalidArgument_2);
 		}
 		String url = ProfileUrls.CONNECTION.format(this, ProfileUrls.getConnectionId(connectionId));
-		deleteData(url, null, connectionId);
+		Response response = deleteData(url, null, connectionId);
+		checkResponseCode(response, HTTPCode.OK);
 	}
 
 	/**
@@ -702,9 +708,10 @@ public class ProfileService extends ConnectionsService {
 		if (connection == null) {
 			throw new ClientServicesException(null, Messages.InvalidArgument_6);
 		}
-		Object payload = constructAcceptInviteRequestBody(connection, ACCEPTED);
+		String payload = constructAcceptInviteRequestBody(connection, ACCEPTED);
 		String url = ProfileUrls.CONNECTION.format(this, ProfileUrls.getConnectionId(connection.getConnectionId()));
-		updateData(url, null, payload, connection.getConnectionId());
+		Response response = updateData(url, null, payload, connection.getConnectionId());
+		checkResponseCode(response, HTTPCode.OK);
 	}
 	
 	/***************************************************************
@@ -766,14 +773,15 @@ public class ProfileService extends ConnectionsService {
 		if (profile == null) {
 			throw new ClientServicesException(null, Messages.InvalidArgument_3);
 		}
-			Map<String, String> parameters = new HashMap<String, String>();
-			parameters.put(OUTPUT, VCARD);
-			parameters.put(FORMAT, FULL);
-			String id = profile.getUserid();
-			Object updateProfilePayload = constructUpdateRequestBody(profile);
-			String updateUrl = ProfileUrls.PROFILE_ENTRY.format(this, ProfileParams.userId.get(id));
-			updateData(updateUrl, parameters,updateProfilePayload, ProfileParams.userId.getParamName(profile.getAsString("uid")));
-			profile.clearFieldsMap();
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put(OUTPUT, VCARD);
+		parameters.put(FORMAT, FULL);
+		String id = profile.getUserid();
+		String updateProfilePayload = constructUpdateRequestBody(profile);
+		String updateUrl = ProfileUrls.PROFILE_ENTRY.format(this, ProfileParams.userId.get(id));
+		Response response = updateData(updateUrl, parameters,updateProfilePayload, ProfileParams.userId.getParamName(profile.getAsString("uid")));
+		checkResponseCode(response, HTTPCode.OK);
+		profile.clearFieldsMap();
 	}
 
 	/***************************************************************
@@ -807,7 +815,7 @@ public class ProfileService extends ConnectionsService {
 	 * @throws ClientServicesException 
 	 */
 	public EntityList<Tag> getTags(String id, Map<String, String> parameters) throws ClientServicesException {
-	  String url = ProfileUrls.TAGS.format(this, ProfileParams.targetId.get(id));
+	  String url = ProfileUrls.GET_TAGS.format(this, ProfileParams.targetId.get(id));
 	  return getTagEntityList(url, parameters);
 	}
 	  
@@ -872,14 +880,10 @@ public class ProfileService extends ConnectionsService {
 	public String getMyUserId() throws ClientServicesException{
 		String id = "";
 		String peopleApiUrl = ProfileUrls.MY_USER_ID.format(this);
-		try {
-			Response feed = getClientService().get(peopleApiUrl);
-			JsonDataHandler dataHandler = new JsonDataHandler((JsonJavaObject)feed.getData());
-			id = dataHandler.getAsString("entry/id");
-			id = id.substring(id.lastIndexOf(CH_COLON)+1, id.length());
-		} catch (ClientServicesException e) {
-			throw new ClientServicesException(e, Messages.ProfileException, id);
-		}
+		Response feed = getClientService().get(peopleApiUrl);
+		JsonDataHandler dataHandler = new JsonDataHandler((JsonJavaObject)feed.getData());
+		id = dataHandler.getAsString("entry/id");
+		id = id.substring(id.lastIndexOf(CH_COLON)+1, id.length());
 		return id;
 	}
 
@@ -967,37 +971,37 @@ public class ProfileService extends ConnectionsService {
 
 	/*
 	 * This method is used by ProfileService wrapper methods to construct request body for Add operations
-	 * @return Object
+	 * @return String
 	 */
-	protected Object constructCreateRequestBody(Profile profile) {
+	protected String constructCreateRequestBody(Profile profile) {
 		ProfileSerializer serializer = new ProfileSerializer(profile);
 		return serializer.createPayload();
 	}
 
 	/*
 	 * This method is used by ProfileService wrapper methods to construct request body for Update operations
-	 * @return Object
+	 * @return String
 	 */
-	protected Object constructUpdateRequestBody(Profile profile) {
+	protected String constructUpdateRequestBody(Profile profile) {
 		ProfileSerializer serializer = new ProfileSerializer(profile);
 		return serializer.updatePayload();
 	}
 
 	/*
 	 * This method is used by ProfileService wrapper methods to construct request body for Add operations
-	 * @return Object
+	 * @return String
 	 */
-	protected Object constructAcceptInviteRequestBody(ColleagueConnection connectionEntry, String action) {
+	protected String constructAcceptInviteRequestBody(ColleagueConnection connectionEntry, String action) {
 		ColleagueConnectionSerializer serializer = new ColleagueConnectionSerializer(connectionEntry);
 		return serializer.acceptInvitePayload();
 	}
 
 	/*
 	 * This method is used by ProfileService wrapper methods to construct request body for Add operations
-	 * @return Object
+	 * @return String
 	 * @throws ProfileServiceException 
 	 */
-	protected Object constructSendInviteRequestBody(String inviteMsg) throws ClientServicesException {
+	protected String constructSendInviteRequestBody(String inviteMsg) throws ClientServicesException {
 		ColleagueConnection colleagueConnection = new ColleagueConnection(this, null);
 		colleagueConnection.setContent(inviteMsg);
 		ColleagueConnectionSerializer serializer = new ColleagueConnectionSerializer(colleagueConnection);

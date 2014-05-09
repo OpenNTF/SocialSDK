@@ -54,6 +54,7 @@ import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.base.ConnectionsConstants.Namespace;
 import com.ibm.sbt.services.client.base.serializers.AtomEntitySerializer;
 import com.ibm.sbt.services.client.connections.profiles.Profile;
+import com.ibm.sbt.services.client.connections.profiles.model.ProfileXPath;
 import com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.ProfileAttribute;
 import com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.VCardField;
 
@@ -149,6 +150,12 @@ public class ProfileSerializer extends AtomEntitySerializer<Profile> {
 				}
 			}
 			String value = entity.getAsString(field.getEntityValue());
+			if (StringUtil.isEmpty(value)){
+				ProfileXPath xpath = ProfileXPath.getByName(field.getEntityValue());
+				if (xpath != null){
+					value = entity.getAsString(xpath);
+				}
+			}
 			if (StringUtil.isNotEmpty(value)){
 				sb.append(field.getVCardValue()).append(COLON).append(value).append(NL);
 			}

@@ -28,6 +28,7 @@ import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.AtomFeedHandler;
 import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.base.CommonConstants.HTTPCode;
 import com.ibm.sbt.services.client.base.ConnectionsService;
 import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.NamedUrlPart;
@@ -40,7 +41,7 @@ import com.ibm.sbt.services.endpoints.Endpoint;
  * such as a person or community, a blog or a particular file.
  * 
  * @see
- *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.5+API+Documentation#action=openDocument&res_title=Forums_API_ic45&content=pdcontent">
+ *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.5+API+Documentation#action=openDocument&res_title=Following_API_ic45&content=pdcontent&sa=true">
  *			Forums API</a>
  * 
  * @author Manish Kataria 
@@ -163,7 +164,6 @@ public class FollowService extends ConnectionsService {
 	 * @throws ClientServicesException
 	 */
 	public FollowedResource startFollowing(String source, String type, String resourceId)  throws ClientServicesException {
-		Response result = null;
 		FollowedResource resource = new FollowedResource();
 		resource.setResourceId(resourceId);
 		resource.setSource(source);
@@ -171,8 +171,10 @@ public class FollowService extends ConnectionsService {
 		FollowSerializer serializer = new FollowSerializer(resource);
 		String atomPayload = serializer.startFollowingPayload();
 		String url = FollowUrls.format(source, this, Resource.get(resourceId));
-		result = createData(url, generateParams(null, source, type, null), getAtomHeaders(), atomPayload);
-		return getFollowFeedHandler().createEntity(result);
+		Response response = createData(url, generateParams(null, source, type, null), getAtomHeaders(), atomPayload);
+		//Returns 200 but should be 201
+		checkResponseCode(response, HTTPCode.OK);
+		return getFollowFeedHandler().createEntity(response);
 	}
 
 	/***************************************************************
@@ -191,7 +193,9 @@ public class FollowService extends ConnectionsService {
 	 */
 	public boolean stopFollowing(String source,String type,String resourceId) throws ClientServicesException{
 		String stopResourceUrl = FollowUrls.format(source, this, Resource.get(resourceId));
-		deleteData(stopResourceUrl, generateParams(null, source, type, resourceId), resourceId);
+		Response response = deleteData(stopResourceUrl, generateParams(null, source, type, resourceId), resourceId);
+		//Returns 202 but should be 204
+		checkResponseCode(response, HTTPCode.ACCEPTED);
 		return true;
 	}
 

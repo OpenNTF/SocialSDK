@@ -1,5 +1,6 @@
 package com.ibm.sbt.services.client.connections.files.serializer;
 
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.CONTRIBUTOR;
 import javax.xml.bind.DatatypeConverter;
 import org.apache.http.client.utils.DateUtils;
 import org.w3c.dom.Node;
@@ -7,7 +8,7 @@ import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.serializers.AtomEntitySerializer;
 import com.ibm.sbt.services.client.base.serializers.BaseEntitySerializer.DateSerializer;
-import com.ibm.sbt.services.client.connections.common.serializers.PersonSerializer;
+import com.ibm.sbt.services.client.base.serializers.PersonSerializer;
 /*
  * © Copyright IBM Corp. 2012
  * 
@@ -65,10 +66,9 @@ public class FileSerializer extends AtomEntitySerializer<File> {
         if (entity.getModified()!=null)     
             appendChildren(n, textElement(ConnectionsConstants.Namespace.TD.getUrl(), FileConstants.MODIFIED, DateSerializer.toString(entity.getModified())));
             
-        if (entity.getModifier()!=null) ;     
-            //TODO fix after personserializer
-            //appendChildren(n, textElement(ConnectionsConstants.Namespace.TD.getUrl(), FileConstants.MODIFIED, DateSerializer.toString(entity.getModified())));
-      
+        if (entity.getModifier()!=null)   
+            appendChildren(n,new PersonSerializer(entity.getModifier()).xmlNode(FileConstants.MODIFIER));
+        
         return n;
     }
 

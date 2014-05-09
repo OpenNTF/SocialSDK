@@ -1202,54 +1202,170 @@ public class FileService extends ConnectionsService {
         return updateFolder(f);
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     /*****************************************************************
      * Working with shares
      ****************************************************************/
     
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////
+    //TODO: add creating share api
+    //////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////
+    //TODO: add retrieving share api
+    //////////////////////////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * Delete a file share programmatically.
+     * Only the owner of a file can delete shares from that file.
+     * 
+     * @param fileId - sharedWhat : This is a required parameter. Document uuid. Delete a set of share
+     *        resources for the specified document.<br>
+     * @throws ClientServicesException
+     */
+    public void deleteFileShare(String fileId) throws ClientServicesException {
+        this.deleteFileShare(fileId, null);
+    }
+
+    /**
+     * Delete a file share programmatically.
+     * Only the owner of a file can delete shares from that file.
+     * 
+     * @param fileId - sharedWhat : This is a required parameter. Document uuid. Delete a set of share
+     *        resources for the specified document.<br>
+     *        - sharedWith : User ID of the user with whom the document has been shared, but you would
+     *        like to prevent from having access to it. You can specify more than one person. Separate
+     *        multiple user IDs with a comma. Any share resources for the document that have the specified
+     *        users as targets of the share will be deleted. The default is to delete the document's
+     *        shares with all users.
+     * @param userId
+     * @throws ClientServicesException
+     */
+    public void deleteFileShare(String fileId, String userId) throws ClientServicesException {
+        if (StringUtil.isEmpty(fileId)) {
+            throw new ClientServicesException(null, Messages.Invalid_FileId);
+        }
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri = FileUrls.DELETE_FILE_SHARE.format(this, FileUrlParts.accessType.get(accessType));
+
+        Map<String, String> params = new HashMap<String, String>();
+        params.put(FileRequestParams.SHAREDWHAT.getFileRequestParams(), fileId);
+        if (!StringUtil.isEmpty(userId)) {
+            params.put(FileRequestParams.SHAREDWITH.getFileRequestParams(), userId);
+        }
+        this.deleteData(requestUri, params, null);
+    }
+    
+    
     /*****************************************************************
      * Working with comments
      ****************************************************************/
+    
+    /**
+     * Create a comment programmatically.
+     * 
+     * @param fileId - ID of the file
+     * @param params - Map of Parameters. See {@link FileRequestParams} for possible values.
+     * @param comment - Comment to be added to the File
+     * @return Comment
+     * @throws ClientServiceException
+     * @throws TransformerException
+     */
+    public Comment addCommentToFile(String fileId, String comment, Map<String, String> params)
+            throws ClientServicesException, TransformerException {
+        return this.addCommentToFile(fileId, comment, null, params);
+    }
+
+    /**
+     * Create a comment programmatically.
+     * 
+     * @param fileId - ID of the file
+     * @param params - Map of Parameters. See {@link FileRequestParams} for possible values.
+     * @param comment - Comment to be added to the File
+     * @param libraryId - Id of the library the file is present
+     * @return Comment
+     * @throws ClientServicesException
+     * @throws TransformerException
+     */
+    public Comment addCommentToFile(String fileId, String comment, String userId,
+            Map<String, String> params) throws ClientServicesException, TransformerException {
+        //FIX: DUPLICATE METHOD see createComment()
+        if (StringUtil.isEmpty(fileId)) {
+            throw new ClientServicesException(null, Messages.Invalid_FileId);
+        }
+        String accessType = AccessType.AUTHENTICATED.getText();
+        String requestUri;
+        if (StringUtil.isEmpty(userId)) {
+            requestUri = FileUrls.MYUSERLIBRARY_DOCUMENT_FEED.format(this,
+                    FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
+        } else {
+            requestUri = FileUrls.USERLIBRARY_DOCUMENT_FEED.format(this,
+                    FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId),
+                    FileUrlParts.fileId.get(fileId));
+        }
+        Document payload = this.constructPayloadForComments(comment);
+        Response result = this.createData(requestUri, null, new ClientService.ContentXml(payload,
+                CommonConstants.APPLICATION_ATOM_XML));
+        return this.getCommentFeedHandler().createEntity(result);
+    }
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     /*****************************************************************
      * Working with files in the trash
@@ -1428,58 +1544,6 @@ public class FileService extends ConnectionsService {
         String requestUri = FileUrls.COMMUNITY_FILE_COMMENT.format(this,
                 FileUrlParts.accessType.get(accessType), FileUrlParts.communityId.get(communityId),
                 FileUrlParts.fileId.get(fileId));
-        Document payload = this.constructPayloadForComments(comment);
-        Response result = this.createData(requestUri, null, new ClientService.ContentXml(payload,
-                CommonConstants.APPLICATION_ATOM_XML));
-        return this.getCommentFeedHandler().createEntity(result);
-    }
-
-    /**
-     * addCommentToFile
-     * <p>
-     * Rest API used : /files/basic/api/userlibrary/{userid}/document/{document-id}/feed <br>
-     * 
-     * @param fileId - ID of the file
-     * @param params - Map of Parameters. See {@link FileRequestParams} for possible values.
-     * @param comment - Comment to be added to the File
-     * @return Comment
-     * @throws ClientServiceException
-     * @throws TransformerException
-     */
-    public Comment addCommentToFile(String fileId, String comment, Map<String, String> params)
-            throws ClientServicesException, TransformerException {
-        return this.addCommentToFile(fileId, comment, null, params);
-    }
-
-    /**
-     * addCommentToFile
-     * <p>
-     * Rest API used : /files/basic/api/userlibrary/{userid}/document/{document-id}/feed <br>
-     * 
-     * @param fileId - ID of the file
-     * @param params - Map of Parameters. See {@link FileRequestParams} for possible values.
-     * @param comment - Comment to be added to the File
-     * @param libraryId - Id of the library the file is present
-     * @return Comment
-     * @throws ClientServicesException
-     * @throws TransformerException
-     */
-    public Comment addCommentToFile(String fileId, String comment, String userId,
-            Map<String, String> params) throws ClientServicesException, TransformerException {
-        //FIX: DUPLICATE METHOD see createComment()
-        if (StringUtil.isEmpty(fileId)) {
-            throw new ClientServicesException(null, Messages.Invalid_FileId);
-        }
-        String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri;
-        if (StringUtil.isEmpty(userId)) {
-            requestUri = FileUrls.MYUSERLIBRARY_DOCUMENT_FEED.format(this,
-                    FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
-        } else {
-            requestUri = FileUrls.USERLIBRARY_DOCUMENT_FEED.format(this,
-                    FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId),
-                    FileUrlParts.fileId.get(fileId));
-        }
         Document payload = this.constructPayloadForComments(comment);
         Response result = this.createData(requestUri, null, new ClientService.ContentXml(payload,
                 CommonConstants.APPLICATION_ATOM_XML));
@@ -1699,50 +1763,6 @@ public class FileService extends ConnectionsService {
         this.deleteData(requestUri, null, null);
     }
 
-    /**
-     * deleteFileShare
-     * <p>
-     * Delete a file share programmatically. Only the owner of a file can delete shares from that file.<br>
-     * Rest API Used : /files/basic/api/shares/feed?sharedWhat={document-id}
-     * 
-     * @param fileId - sharedWhat : This is a required parameter. Document uuid. Delete a set of share
-     *        resources for the specified document.<br>
-     * @throws ClientServicesException
-     */
-    public void deleteFileShare(String fileId) throws ClientServicesException {
-        this.deleteFileShare(fileId, null);
-    }
-
-    /**
-     * deleteFileShare
-     * <p>
-     * Delete a file share programmatically. Only the owner of a file can delete shares from that file.<br>
-     * Rest API Used : /files/basic/api/shares/feed?sharedWhat={document-id}
-     * 
-     * @param fileId - sharedWhat : This is a required parameter. Document uuid. Delete a set of share
-     *        resources for the specified document.<br>
-     *        - sharedWith : User ID of the user with whom the document has been shared, but you would
-     *        like to prevent from having access to it. You can specify more than one person. Separate
-     *        multiple user IDs with a comma. Any share resources for the document that have the specified
-     *        users as targets of the share will be deleted. The default is to delete the document's
-     *        shares with all users.
-     * @param userId
-     * @throws ClientServicesException
-     */
-    public void deleteFileShare(String fileId, String userId) throws ClientServicesException {
-        if (StringUtil.isEmpty(fileId)) {
-            throw new ClientServicesException(null, Messages.Invalid_FileId);
-        }
-        String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.DELETE_FILE_SHARE.format(this, FileUrlParts.accessType.get(accessType));
-
-        Map<String, String> params = new HashMap<String, String>();
-        params.put(FileRequestParams.SHAREDWHAT.getFileRequestParams(), fileId);
-        if (!StringUtil.isEmpty(userId)) {
-            params.put(FileRequestParams.SHAREDWITH.getFileRequestParams(), userId);
-        }
-        this.deleteData(requestUri, params, null);
-    }
 
     public void deleteFlaggedComment(String commentId) throws ClientServicesException {
         if (StringUtil.isEmpty(commentId)) {

@@ -51,17 +51,13 @@ import com.ibm.sbt.services.endpoints.Endpoint;
 /**
  * CommunityService can be used to perform Community Related operations.
  * 
- * @Represents Connections Community Service
+ * @see
+ *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.5+API+Documentation#action=openDocument&res_title=Communities_API_ic45&content=pdcontent">
+ *			Communities API</a>
+ *
  * @author Swati Singh
  * @author Manish Kataria
  * @author Carlos Manias
- * <pre>
- * Sample Usage
- * {@code
- * 	CommunityService _service = new CommunityService();
- *	Collection<Community> communities = _service.getPublicCommunities();
- * }
- * </pre>	
  */
 
 public class CommunityService extends ConnectionsService {

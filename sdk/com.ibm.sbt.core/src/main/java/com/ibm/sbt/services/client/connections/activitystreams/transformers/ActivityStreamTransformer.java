@@ -1,10 +1,5 @@
-package com.ibm.sbt.services.client.connections.activitystreams.transformers;
-
-import java.util.Map;
-
-import com.ibm.commons.util.StringUtil;
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -18,6 +13,11 @@ import com.ibm.commons.util.StringUtil;
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
+package com.ibm.sbt.services.client.connections.activitystreams.transformers;
+
+import java.util.Map;
+
+import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.base.transformers.AbstractBaseTransformer;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.activitystreams.ASDataPopulator;
@@ -40,8 +40,7 @@ public class ActivityStreamTransformer extends AbstractBaseTransformer {
 	public  final String DATA_POPULATOR = "dataPopulator";
 	
 	@Override
-	public String transform(Map<String, Object> fieldmap)
-			throws TransformerException {
+	public String transform(Map<String, Object> fieldmap) throws TransformerException {
 		
 		String	asTemplate = getTemplateContent(SOURCE_PATH+ACTIVITYSTREAM);
 		String finalPayload = asTemplate;

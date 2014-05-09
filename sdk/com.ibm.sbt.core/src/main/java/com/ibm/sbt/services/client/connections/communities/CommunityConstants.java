@@ -30,5 +30,6 @@ public final class CommunityConstants {
 	public static final String MEMBER_TERM = "term";
 	public static final String MEMBER_TERM_VALUE = "person";
 	public static final String SNX_ROLE = "snx:role";
+	public static final String NAME = "name";
 
 }

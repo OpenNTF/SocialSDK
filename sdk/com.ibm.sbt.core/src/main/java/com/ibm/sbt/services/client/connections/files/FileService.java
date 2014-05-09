@@ -789,7 +789,7 @@ public class FileService extends ConnectionsService {
             }
         }
         String accessType = AccessType.AUTHENTICATED.getText();
-        String requestUri = FileUrls.MYUSERLIBRARY_RECYCLEBIN_ENTRY.format(this,
+        String requestUri = FileUrls.MYUSERLIBRARY_DOCUMENT_FEED.format(this,
                 FileUrlParts.accessType.get(accessType), FileUrlParts.fileId.get(fileId));
         params = (null == params) ? new HashMap<String, String>() : params;
         

@@ -33,7 +33,7 @@ public class FileServiceSerializersTest extends BaseUnitTest {
 
     @Test
     public void testFlagSerializer() {
-        String payload = new FlagSerializer("identifier","reason",FileConstants.FlagType.COMMENT).flagPayload();
+        String payload = new FlagSerializer("identifier","reason",FileConstants.ItemType.COMMENT).flagPayload();
         
         assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\"?><entry xmlns=\"http://www.w3.org/2005/Atom\" xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\">\r\n   <in-ref-to xmlns=\"http://www.ibm.com/xmlns/prod/sn\" ref=\"identifier\" ref-item-type=\"comment\" rel=\"http://www.ibm.com/xmlns/prod/sn/report-item\"/>\r\n   <content type=\"text\">reason</content>\r\n</entry>",
                 payload);

@@ -1,1 +1,0 @@
-<snx:in-ref-to rel="http://www.ibm.com/xmlns/prod/sn/report-item" ref="${fileId}" ref-item-type="${entity}" />

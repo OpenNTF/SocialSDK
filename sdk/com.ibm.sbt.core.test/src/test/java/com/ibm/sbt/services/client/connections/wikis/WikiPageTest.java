@@ -18,11 +18,12 @@ package com.ibm.sbt.services.client.connections.wikis;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.test.lib.TestEnvironment;
@@ -32,6 +33,7 @@ import com.ibm.sbt.test.lib.TestEnvironment;
  *
  */
 public class WikiPageTest extends BaseWikiServiceTest {
+	@Rule public ExpectedException thrown= ExpectedException.none();
 	private Wiki wiki;
 	
 	@Before
@@ -79,14 +81,9 @@ public class WikiPageTest extends BaseWikiServiceTest {
 		assertEquals(wikiPageCreated.getSummary(), wikiPageGot.getSummary());
 		
 		wikiService.deleteWikiPage(wiki.getLabel(), wikiPageCreated.getLabel());
-		
-		try {
-			wikiService.getWikiPage(wiki.getLabel(), wikiPageCreated.getLabel(), null);
-			fail("Getting a wiki page that does no longer exist should throw an exception.");
-		}
-		catch(ClientServicesException e) {
-			assertEquals(404, e.getResponseStatusCode());
-		}
+		thrown.expect(ClientServicesException.class);
+		thrown.expectMessage("404:Not Found");
+		wikiService.getWikiPage(wiki.getLabel(), wikiPageCreated.getLabel(), null);
 	}
 	
 	@After

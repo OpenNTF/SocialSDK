@@ -149,7 +149,9 @@ public final class ConnectionsConstants {
 		OPENSOCIAL("opensocial", "http://ns.opensocial.org/2008/opensocial"), 
 		TAG("tag", "tag:ibm.com,2006:td/type"),
 		TAGENTRY("tag","tag:profiles.ibm.com,2006:entry"),
-		XMLNS("xmlns", "http://www.w3.org/2000/xmlns/");
+		SCHEME("scheme","http://www.ibm.com/xmlns/prod/sn/type"),
+		XMLNS("xmlns", "http://www.w3.org/2000/xmlns/"),
+		COMPONENT("component","http://www.ibm.com/xmlns/prod/sn/communities");
 		
 		private final String prefix;
 		private final String url;

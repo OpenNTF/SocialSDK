@@ -30,13 +30,14 @@ import com.ibm.sbt.services.client.base.VersionedUrl;
 public enum CommunityUrls implements URLContainer {
 	COMMUNITIES_ALL(new VersionedUrl(v4_0, 			"{communities}/service/atom/{authType}/communities/all")),
 	COMMUNITIES_MY(new VersionedUrl(v4_0, 			"{communities}/service/atom/{authType}/communities/my")),
-	COMMUNITY_INSTANCE(new VersionedUrl(v4_0, 		"{communities}/service/atom/{authType}/community/instance")),
+	COMMUNITY_INSTANCE(new VersionedUrl(v4_0, 		"{communities}/service/atom/{authType}/community/instance?{communityUuid}")),
+	COMMUNITY_UPDATE(new VersionedUrl(v4_0, 		"{communities}/service/atom/{authType}/community/instance")),
 	COMMUNITY_MEMBERS(new VersionedUrl(v4_0, 		"{communities}/service/atom/{authType}/community/members?{communityUuid}")),
 	COMMUNITY_SUBCOMMUNITIES(new VersionedUrl(v4_0, "{communities}/service/atom/{authType}/community/subcommunities")),
 	COMMUNITY_BOOKMARKS(new VersionedUrl(v4_0, 		"{communities}/service/atom/{authType}/community/bookmarks")),
 	COMMUNITY_FORUMTOPICS(new VersionedUrl(v4_0, 	"{communities}/service/atom/{authType}/community/forum/topics")),
 	COMMUNITY_MYINVITES(new VersionedUrl(v4_0, 		"{communities}/service/atom/{authType}/community/invites/my")),
-	COMMUNITY_INVITES(new VersionedUrl(v4_0, 		"{communities}/service/atom/{authType}/community/invites"));
+	COMMUNITY_INVITES(new VersionedUrl(v4_0, 		"{communities}/service/atom/{authType}/community/invites?{communityUuid}"));
 	// CommunityType remoteApplications???
 
 	private URLBuilder builder;

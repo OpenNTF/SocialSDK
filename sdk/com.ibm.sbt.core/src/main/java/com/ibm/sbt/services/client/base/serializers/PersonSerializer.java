@@ -53,8 +53,8 @@ public class PersonSerializer extends BaseEntitySerializer<Person> {
 		if (StringUtil.isNotEmpty(entity.getEmail())) {
 			textElements[index++] = textElement(EMAIL, entity.getEmail());
 		}
-		if (StringUtil.isNotEmpty(entity.getId())) {
-			textElements[index++] = textElement(Namespace.SNX.getUrl(), USER_ID, entity.getId());
+		if (StringUtil.isNotEmpty(entity.getUserid())) {
+			textElements[index++] = textElement(Namespace.SNX.getUrl(), USER_ID, entity.getUserid());
 		}
 		if (StringUtil.isNotEmpty(entity.getUserState())) {
 			textElements[index] = textElement(Namespace.SNX.getUrl(), USER_STATE, entity.getUserState());

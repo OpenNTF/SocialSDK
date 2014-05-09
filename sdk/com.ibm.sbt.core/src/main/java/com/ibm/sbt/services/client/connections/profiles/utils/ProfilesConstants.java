@@ -16,7 +16,6 @@
 
 package com.ibm.sbt.services.client.connections.profiles.utils;
 
-import java.util.HashMap;
 
 
 public final class ProfilesConstants {
@@ -63,11 +62,6 @@ public final class ProfilesConstants {
 	public static final String COUNTRYNAME = "countryName";
 	public static final String VCARD_ADDR = "ADR;WORK:;;";
 
-	
-	// field maps for add/update profile
-	public static final HashMap<String, String> createFieldsIdentifierMap;
-	public static final HashMap<String, String> updateFieldsIdentifierMap;
-	
 	public enum VCardField {
 		ALTERNATE_LAST_NAME("alternateLastname", "X_ALTERNATE_LAST_NAME"),
 		BUILDING("bldgId", "X_BUILDING"),
@@ -84,7 +78,7 @@ public final class ProfilesConstants {
 		EXPERIENCE("experience", "X_EXPERIENCE"),
 		FAX_NUMBER("faxNumber", "TEL;FAX"),
 		FLOOR("floor", "X_FLOOR"),
-		GROUPWARE_EMAIL("groupwareEmail", "EMAIL;X_GROUPWARE_MAIL"),
+		GROUPWARE_EMAIL("groupwareMail", "EMAIL;X_GROUPWARE_MAIL"),
 		GUID("guid", "UID"),
 		IP_TELEPHONE_NUMBER("ipTelephoneNumber", "TEL;X_IP"),
 		IS_MANAGER("isManager", "X_IS_MANAGER"),
@@ -103,9 +97,11 @@ public final class ProfilesConstants {
 		PREFERRED_FIRST_NAME("preferredFirstName", "NICKNAME"),
 		PREFERRED_LANGUAGE("preferredLanguage", "X_PREFERRED_LANGUAGE"),
 		PREFERRED_LAST_NAME("preferredLastName", "X_PREFERRED_LAST_NAME"),
+		PHOTO("photo","PHOTO;VALUE=URL"),
 		TELEPHONE_NUMBER("telephoneNumber", "TEL;WORK"),
 		TIMEZONE("timezone", "TZ"),
 		UID("uid", "X_PROFILE_UID"),
+		URL("fnUrl", "URL"),
 		WORK_LOCATION("workLocation", "ADR;WORK"),
 		WORK_LOCATION_CODE("workLocationCode", "X_WORKLOCATION_CODE");
 
@@ -153,39 +149,5 @@ public final class ProfilesConstants {
 			return atomName;
 		}
 	}
-
-	static 
-	{
-		createFieldsIdentifierMap = new HashMap<String, String>();
-		String[][] createPairs = {
-
-				{"guid",				"com.ibm.snx_profiles.base.guid"},
-				{"email",				"com.ibm.snx_profiles.base.email"},
-				{"uid",					"com.ibm.snx_profiles.base.uid"},
-				{"distinguishedName", 	"com.ibm.snx_profiles.base.distinguishedName"},
-				{"displayName", 		"com.ibm.snx_profiles.base.displayName"},
-				{"givenNames", 			"com.ibm.snx_profiles.base.givenNames"},
-				{"surname", 			"com.ibm.snx_profiles.base.surname"},
-				{"userState",			"com.ibm.snx_profiles.base.userState"},
-		};
-		for (String[] pair : createPairs) {
-			createFieldsIdentifierMap.put(pair[0], pair[1]);
-		}
-
-		updateFieldsIdentifierMap = new HashMap<String, String>();
-		String[][] updatePairs = {
-
-				{"building" , 		 "X_BUILDING"},
-				{"floor" ,			 "X_FLOOR"},
-				{"officeName",		 "X_OFFICE_NUMBER"},
-				{"jobResp",          "TITLE"},
-				{"telephoneNumber",  "TEL;WORK"},
-				{"workLocation",	 "ADR;WORK"}
-		};
-		for (String[] pair : updatePairs) {
-			updateFieldsIdentifierMap.put(pair[0], pair[1]);
-		}
-	}
-	
 }
 

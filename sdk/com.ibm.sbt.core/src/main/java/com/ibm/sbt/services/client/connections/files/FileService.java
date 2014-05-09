@@ -21,20 +21,14 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.StringReader;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
 import com.ibm.commons.runtime.mime.MIME;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.StreamUtil;
@@ -54,7 +48,7 @@ import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.NamedUrlPart;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
-import com.ibm.sbt.services.client.connections.files.FileConstants.FlagType;
+import com.ibm.sbt.services.client.connections.files.FileConstants.ItemType;
 import com.ibm.sbt.services.client.connections.files.model.FileCommentParameterBuilder;
 import com.ibm.sbt.services.client.connections.files.model.FileEntryXPath;
 import com.ibm.sbt.services.client.connections.files.model.FileRequestParams;
@@ -63,8 +57,7 @@ import com.ibm.sbt.services.client.connections.files.serializer.CommentSerialize
 import com.ibm.sbt.services.client.connections.files.serializer.EntityIdSerializer;
 import com.ibm.sbt.services.client.connections.files.serializer.FileSerializer;
 import com.ibm.sbt.services.client.connections.files.serializer.FlagSerializer;
-import com.ibm.sbt.services.client.connections.files.transformers.CommentTransformer;
-import com.ibm.sbt.services.client.connections.files.transformers.ModerationTransformer;
+import com.ibm.sbt.services.client.connections.files.serializer.ModerationSerializer;
 import com.ibm.sbt.services.client.connections.files.util.Messages;
 import com.ibm.sbt.services.endpoints.Endpoint;
 
@@ -524,7 +517,7 @@ public class FileService extends ConnectionsService {
      * @param flagWhat whether it is a file or a comment, from the FlagType enum.
      * @throws ClientServicesException
      */
-    public void flagAsInappropriate(String objectId, String flagReason, FlagType flagWhat)
+    public void flagAsInappropriate(String objectId, String flagReason, ItemType flagWhat)
             throws ClientServicesException {
         if (StringUtil.isEmpty(objectId)) {
             throw new ClientServicesException(null, Messages.Invalid_FileId);
@@ -1444,7 +1437,7 @@ public class FileService extends ConnectionsService {
             requestUri = FileUrls.MODERATION.format(this, FileUrlParts.accessType.get(accessType),
                     FileUrlParts.action.get(action), FileUrlParts.contentType.get(content));
         }
-        Object payload = this.constructPayloadForModeration(commentId, action, actionReason, "comment");
+        String payload = new ModerationSerializer(commentId, action, actionReason, ItemType.COMMENT).moderationPayload();
         Map<String, String> headers = new HashMap<String, String>();
         headers.put(Headers.ContentType, Headers.ATOM);
         this.updateData(requestUri, null, headers, payload, commentId);
@@ -1468,7 +1461,7 @@ public class FileService extends ConnectionsService {
             requestUri = FileUrls.MODERATION.format(this, FileUrlParts.accessType.get(accessType),
                     FileUrlParts.action.get(action), FileUrlParts.contentType.get(content));
         }
-        Object payload = this.constructPayloadForModeration(fileId, action, actionReason, "file");
+        String payload = new ModerationSerializer(fileId, action, actionReason, ItemType.FILE).moderationPayload();
         Map<String, String> headers = new HashMap<String, String>();
         headers.put(Headers.ContentType, Headers.ATOM);
         this.updateData(requestUri, null, headers, payload, fileId);
@@ -1493,7 +1486,7 @@ public class FileService extends ConnectionsService {
             requestUri = FileUrls.MODERATION.format(this, FileUrlParts.accessType.get(accessType),
                     FileUrlParts.action.get(action), FileUrlParts.contentType.get(content));
         }
-        Object payload = this.constructPayloadForModeration(commentId, action, actionReason, "comment");
+        String payload = new ModerationSerializer(commentId, action, actionReason, ItemType.COMMENT).moderationPayload();
         Map<String, String> headers = new HashMap<String, String>();
         headers.put(Headers.ContentType, Headers.ATOM);
         this.updateData(requestUri, null, headers, payload, commentId);
@@ -1517,7 +1510,8 @@ public class FileService extends ConnectionsService {
             requestUri = FileUrls.MODERATION.format(this, FileUrlParts.accessType.get(accessType),
                     FileUrlParts.action.get(action), FileUrlParts.contentType.get(content));
         }
-        Object payload = this.constructPayloadForModeration(fileId, action, actionReason, "file");
+        String payload = new ModerationSerializer(fileId, action, actionReason, ItemType.FILE).moderationPayload();
+
         Map<String, String> headers = new HashMap<String, String>();
         headers.put(Headers.ContentType, Headers.ATOM);
         this.updateData(requestUri, null, headers, payload, fileId);
@@ -2869,49 +2863,7 @@ public class FileService extends ConnectionsService {
         result = this.retrieveData(requestUri, null);
         return (Document) result.getData();
     }
-
-    private Object constructPayloadForModeration(String fileId, String action, String actionReason,
-            String entity) throws TransformerException {
-        if (entity.equalsIgnoreCase("file")) {
-            entity = "document";
-        }
-        Map<String, Object> fieldsMap = new HashMap<String, Object>();
-        fieldsMap.put("entity", entity);
-        fieldsMap.put("fileId", fileId);
-        fieldsMap.put("content", actionReason);
-        fieldsMap.put("action", action);
-        ModerationTransformer moderationTransformer = new ModerationTransformer();
-        String payload = moderationTransformer.transform(fieldsMap);
-        return this.convertToXML(payload.toString());
-    }
-
-
-    /**
-     * convertToXML
-     * <p>
-     * Utility method to construct XML payload
-     * 
-     * @param requestBody
-     * @return Document
-     */
-    private Document convertToXML(String requestBody) throws TransformerException {
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        factory.setNamespaceAware(true);
-        DocumentBuilder builder;
-        Document document = null;
-        try {
-            builder = factory.newDocumentBuilder();
-            document = builder.parse(new InputSource(new StringReader(requestBody.toString())));
-        } catch (ParserConfigurationException e) {
-            throw new TransformerException(e, e.getMessage());
-        } catch (SAXException e) {
-            throw new TransformerException(e, e.getMessage());
-        } catch (IOException e) {
-            throw new TransformerException(e, e.getMessage());
-        }
-        return document;
-    }
-
+    
     /**
      * Method to create the content object based on the mime type.
      * Content type is set using the getMimeType method. In case the mime type cannot be found from the extension,

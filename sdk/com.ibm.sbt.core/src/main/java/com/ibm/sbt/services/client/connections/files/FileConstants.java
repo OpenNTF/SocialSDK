@@ -38,6 +38,7 @@ public final class FileConstants {
     public static final String NOTIFICATION        = "notification";
     public static final String MODIFIED            = "modified";
     public static final String MODIFIER            = "modifier";
+    public static final String MODERATION          = "moderation";
     public static final String CREATED             = "created";
     public static final String VISIBILITY_PUBLIC   = "public";
     public static final String VISIBILITY_PRIVATE  = "private";
@@ -46,7 +47,7 @@ public final class FileConstants {
     public static final String REPORT_ITEM         = "http://www.ibm.com/xmlns/prod/sn/report-item";
     public static final String ITEM_ID             = "itemId";
 
-    public enum FlagType {
+    public enum ItemType {
         COMMENT, FILE;
     }
 }

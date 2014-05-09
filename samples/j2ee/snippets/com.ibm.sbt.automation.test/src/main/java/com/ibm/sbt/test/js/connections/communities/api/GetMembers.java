@@ -1,5 +1,5 @@
 /*
- * ï¿½ Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -40,7 +40,7 @@ public class GetMembers extends BaseCommunitiesTest {
     }
 
     @Test
-    public void testGetCommunityMembers() {
+    public void testGetCommunityMembers() throws Exception {
     	String name1 = getProperty("sample.displayName1");
     	String userid1 = getProperty("sample.userId1");
     	String email1 = getProperty("sample.email1");

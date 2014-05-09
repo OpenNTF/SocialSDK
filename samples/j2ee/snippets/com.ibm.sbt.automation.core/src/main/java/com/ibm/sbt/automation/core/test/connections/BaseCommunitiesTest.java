@@ -25,9 +25,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.TimeZone;
 
-import junit.framework.Assert;
-
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 
 import com.ibm.commons.util.io.json.JsonJavaObject;
@@ -302,34 +301,22 @@ public class BaseCommunitiesTest extends FlexibleTest {
         }
     }
     
-    protected boolean addMember(Community community, String id, String role) {
-        try {
-            CommunityService communityService = getCommunityService();
-            Member member = new Member(communityService, id);
-            member.setRole(role);
-            boolean added = communityService.addMember(community.getCommunityUuid(), member);
-            Assert.assertTrue("Unable to add member: "+id, added);
-            Trace.log("Added member: "+id);
-            return added;
-        } catch (ClientServicesException cse) {
-            fail("Error adding member", cse);
-        } 
-        return false;
+    protected void addMember(Community community, String id, String role) throws Exception {
+        CommunityService communityService = getCommunityService();
+        Member member = new Member(communityService, id);
+        member.setRole(role);
+        communityService.addMember(community.getCommunityUuid(), member);
     }
 
-    protected boolean hasMember(Community community, String id) {
-        try {
-            CommunityService communityService = getCommunityService();
-            EntityList<Member> memberList = communityService.getMembers(community.getCommunityUuid());
-            for (int i=0; i<memberList.size(); i++) {
-            	Member member = (Member)memberList.get(i);
-                if (id.equals(member.getEmail()) || id.equals(member.getUserid())) {
-                    return true;
-                }
+    protected boolean hasMember(Community community, String id) throws Exception {
+        CommunityService communityService = getCommunityService();
+        EntityList<Member> memberList = communityService.getMembers(community.getCommunityUuid());
+        for (int i=0; i<memberList.size(); i++) {
+        	Member member = (Member)memberList.get(i);
+            if (id.equals(member.getEmail()) || id.equals(member.getUserid())) {
+                return true;
             }
-        } catch (ClientServicesException cse) {
-            fail("Error getting members", cse);
-        } 
+        }
         return false;
     }   
     

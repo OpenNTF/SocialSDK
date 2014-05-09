@@ -9,7 +9,7 @@ public class Messages {
 
 	public static String	InvalidArgument_1				= "Required input parameter is missing : id";
 	public static String	InvalidArgument_2				= "Required input parameter is missing : connectionId";
-	public static String	InvalidArgument_3				= "Invalid Input  : Profile passed is null";
+	public static String	InvalidArgument_3				= "Invalid Input : Profile passed is null";
 	public static String	InvalidArgument_4				= "Required input parameter is missing  : source id is missing";
 	public static String	InvalidArgument_5				= "Required input parameter is missing  : target id is missing";
 	public static String	InvalidArgument_6				= "Invalid Input  : Connection passed is null";

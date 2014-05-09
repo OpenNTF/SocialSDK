@@ -1250,7 +1250,8 @@ public class FileService extends ConnectionsService {
         if (!StringUtil.isEmpty(userId)) {
             params.put(FileRequestParams.SHAREDWITH.getFileRequestParams(), userId);
         }
-        deleteData(requestUri, params, null);
+        Response response = deleteData(requestUri, params, null);
+        checkResponseCode(response, HTTPCode.NO_CONTENT);
     }
     
     
@@ -1319,9 +1320,10 @@ public class FileService extends ConnectionsService {
                     FileUrlParts.fileId.get(fileId));
         }
         String payload = new CommentSerializer(comment).generateCommentUpdatePayload();
-        Response result = createData(requestUri, null, new ClientService.ContentString(payload,
+        Response response = createData(requestUri, null, new ClientService.ContentString(payload,
                 CommonConstants.APPLICATION_ATOM_XML));
-        Comment ret = getCommentFeedHandler().createEntity(result);
+        checkResponseCode(response, HTTPCode.CREATED);
+        Comment ret = getCommentFeedHandler().createEntity(response);
         comment.clearFieldsMap();
         comment.setDataHandler(ret.getDataHandler());
         return comment;

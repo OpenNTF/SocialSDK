@@ -63,6 +63,8 @@ public class CommunityServiceTest extends BaseCommunityServiceTest {
 		if (TestEnvironment.isSmartCloudEnvironment()) id = TestEnvironment.getSecondaryUserUuid();
 		Member newMember = new Member(communityService,
 				id);
+		newMember.setTitle("test Title" + System.currentTimeMillis());
+		newMember.setName("test name" + System.currentTimeMillis());
 		communityService.addMember(community.getCommunityUuid(), newMember);
 		EntityList<Member> members = communityService.getMembers(community
 				.getCommunityUuid());

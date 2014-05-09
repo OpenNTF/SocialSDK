@@ -737,7 +737,7 @@ public class CommunityService extends ConnectionsService {
 		}
 		Map<String, String> parameters = new HashMap<String, String>();
 
-		parameters.put("userid", member.getUserid());
+		parameters.put("memberid", member.getUserid());
 
 		Object memberPayload;
 		try {
@@ -747,7 +747,6 @@ public class CommunityService extends ConnectionsService {
 		} catch (ClientServicesException e) {
 			throw new ClientServicesException(e, Messages.UpdateMemberException);
 		}
-
 		String url = CommunityUrls.COMMUNITY_MEMBERS.format(this, CommunityUrls.getCommunityUuid(communityUuid));
 		createData(url, parameters, memberPayload);
 	}

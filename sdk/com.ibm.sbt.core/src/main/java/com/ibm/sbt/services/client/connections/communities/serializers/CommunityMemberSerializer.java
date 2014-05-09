@@ -17,8 +17,8 @@
 package com.ibm.sbt.services.client.connections.communities.serializers;
 
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.CATEGORY;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.ENTRY;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.CONTRIBUTOR;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.ENTRY;
 import static com.ibm.sbt.services.client.connections.communities.CommunityConstants.MEMBER_TERM;
 import static com.ibm.sbt.services.client.connections.communities.CommunityConstants.MEMBER_TERM_VALUE;
 import static com.ibm.sbt.services.client.connections.communities.CommunityConstants.SNX_ROLE;
@@ -29,8 +29,8 @@ import org.w3c.dom.Node;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.ConnectionsConstants.Namespace;
 import com.ibm.sbt.services.client.base.serializers.AtomEntitySerializer;
-import com.ibm.sbt.services.client.connections.communities.Member;
 import com.ibm.sbt.services.client.base.serializers.PersonSerializer;
+import com.ibm.sbt.services.client.connections.communities.Member;
 
 
 /**
@@ -46,6 +46,7 @@ public class CommunityMemberSerializer extends AtomEntitySerializer<Member> {
 	protected void generateCreatePayload() {
 		Node entry = entry();
 		appendChildren(entry,
+				title(),
 				contributor(),
 				role(),
 				category()
@@ -75,14 +76,7 @@ public class CommunityMemberSerializer extends AtomEntitySerializer<Member> {
 		return (new PersonSerializer(entity).xmlNode(CONTRIBUTOR));
 	}
 	
-	protected void generateUpdatePayload() {
-		Node entry = genericAtomEntry();
-		
-		appendChildren(entry,
-				title(),
-				contributor()
-		);
-	}
+	
 	
 	public String createPayload() throws ClientServicesException {
 		generateCreatePayload();
@@ -90,7 +84,7 @@ public class CommunityMemberSerializer extends AtomEntitySerializer<Member> {
 	}
 
 	public String updatePayload() throws ClientServicesException {
-		generateUpdatePayload();
+		generateCreatePayload();
 		return serializeToString();
 	}
 }

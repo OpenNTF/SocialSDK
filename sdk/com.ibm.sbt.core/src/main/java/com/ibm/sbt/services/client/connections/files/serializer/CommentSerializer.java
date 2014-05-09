@@ -3,6 +3,7 @@ package com.ibm.sbt.services.client.connections.files.serializer;
 import org.w3c.dom.Node;
 import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.serializers.AtomEntitySerializer;
+import com.ibm.sbt.services.client.base.serializers.PersonSerializer;
 import com.ibm.sbt.services.client.connections.files.Comment;
 import com.ibm.sbt.services.client.connections.files.FileConstants;
 /*
@@ -53,10 +54,9 @@ public class CommentSerializer extends AtomEntitySerializer<Comment> {
         if (entity.getCreated()!=null)     
             appendChildren(n, textElement(ConnectionsConstants.Namespace.TD.getUrl(), FileConstants.CREATED, DateSerializer.toString(entity.getCreated())));
             
-        if (entity.getModifier()!=null) ;     
-            //TODO fix after personserializer
-            //appendChildren(n, textElement(ConnectionsConstants.Namespace.TD.getUrl(), FileConstants.MODIFIED, DateSerializer.toString(entity.getModified())));
-      
+        if (entity.getModifier()!=null)   
+            appendChildren(n,new PersonSerializer(entity.getModifier()).xmlNode(ConnectionsConstants.Namespace.TD.getUrl(),FileConstants.MODIFIER ));
+
         return n;
     }
 

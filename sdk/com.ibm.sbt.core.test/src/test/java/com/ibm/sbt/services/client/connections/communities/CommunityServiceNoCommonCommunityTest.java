@@ -18,14 +18,15 @@ package com.ibm.sbt.services.client.connections.communities;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import com.ibm.sbt.services.BaseUnitTest;
 import com.ibm.sbt.services.client.ClientServicesException;
@@ -44,6 +45,7 @@ import com.ibm.sbt.test.lib.TestEnvironment;
 public class CommunityServiceNoCommonCommunityTest extends BaseUnitTest {
 
 	protected CommunityService communityService;
+	@Rule public ExpectedException thrown= ExpectedException.none();
 
 	@Before
 	public void initCommunityService() throws Exception {
@@ -142,11 +144,10 @@ public class CommunityServiceNoCommonCommunityTest extends BaseUnitTest {
 		assertEquals("Java Community Content", community.getContent());
 
 		communityService.deleteCommunity(community.getCommunityUuid());
-
 	}
 
 	@Test
-	public void testCreateCommunityTwice() {
+	public void testCreateCommunityTwice() throws Exception {
 		if (TestEnvironment.isSmartCloudEnvironment()) return;
 		String uuid1 = null;
 		String uuid2 = null;
@@ -155,51 +156,20 @@ public class CommunityServiceNoCommonCommunityTest extends BaseUnitTest {
 		String NEW_COMMUNITY = "New Community "
 				+ System.currentTimeMillis();
 
-		try {
-			Community c = new Community(null);
-			c.setTitle(NEW_COMMUNITY);
-			c.setContent(TEST_COMMUNITY_DESCRIPTION);
-			uuid1 = communityService.createCommunity(c);
-			c = communityService.getCommunity(uuid1);
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail(e.getMessage());
-		}
+		Community c = new Community(null);
+		c.setTitle(NEW_COMMUNITY);
+		c.setContent(TEST_COMMUNITY_DESCRIPTION);
+		uuid1 = communityService.createCommunity(c);
+		c = communityService.getCommunity(uuid1);
 
-		try {
-			Community c = new Community(null);
-			c = new Community(null);
-			c.setTitle(NEW_COMMUNITY);
-			c.setContent(TEST_COMMUNITY_DESCRIPTION);
-			uuid2 = communityService.createCommunity(c);
-		} catch (ClientServicesException e) {
-			if (e.getCause() instanceof ClientServicesException
-					&& (((ClientServicesException) e.getCause())
-							.getResponseStatusCode() == 409)) {
-				// duplicate entity exception
-				return;
-			}
-			// in all other cases log the exception and fail
-			e.printStackTrace();
-			fail(e.getMessage());
-
-		} finally {
-			if (communityService != null) {
-				if (uuid1 != null) {
-					try {
-						communityService.deleteCommunity(uuid1);
-					} catch (Exception c) {
-					}
-				}
-				if (uuid2 != null) {
-					try {
-						communityService.deleteCommunity(uuid2);
-					} catch (Exception c) {
-					}
-				}
-			}
-		}
-		fail("Duplicated creation did not fail");
+		c = new Community(null);
+		c.setTitle(NEW_COMMUNITY);
+		c.setContent(TEST_COMMUNITY_DESCRIPTION);
+		thrown.expect(ClientServicesException.class);
+		thrown.expectMessage("409:Conflict");
+		uuid2 = communityService.createCommunity(c);
+		communityService.deleteCommunity(uuid1);
+		communityService.deleteCommunity(uuid2);
 	}
 
 }

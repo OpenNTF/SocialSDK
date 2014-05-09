@@ -424,7 +424,7 @@ public class WikiService extends ConnectionsService {
 		String requestUrl = WikiUrls.WIKI_AUTH.format(this, WikiUrls.getWikiLabel(wikiLabel));
 		Response response = deleteData(requestUrl);
 		//FIX: According to documentation should return 204 but returns 200
-		//checkResponseCode(response, HTTPCode.NO_CONTENT);
+		checkResponseCode(response, HTTPCode.OK);
 	}
 	
 	/***************************************************************

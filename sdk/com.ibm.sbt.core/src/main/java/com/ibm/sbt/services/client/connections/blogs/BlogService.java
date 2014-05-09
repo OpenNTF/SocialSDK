@@ -24,7 +24,6 @@ import org.w3c.dom.Node;
 
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.xpath.XPathExpression;
-import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.AtomFeedHandler;
@@ -381,6 +380,7 @@ public class BlogService extends ConnectionsService {
 		BlogSerializer serializer = new BlogSerializer(blog);
 		String payload = serializer.createPayload();
 		Response response = createData(requestUrl, parameters, getAtomHeaders(), payload);
+		checkResponseCode(response, HTTPCode.CREATED);
 		blog = getBlogFeedHandler().createEntity(response);
 		return blog;
 	}
@@ -417,9 +417,8 @@ public class BlogService extends ConnectionsService {
 		String payload = serializer.updatePayload();
 		
 		String updateBlogUrl = BlogUrls.GET_UPDATE_REMOVE_BLOG.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle), BlogUrlParts.entryAnchor.get(blog.getUid()));
-		// not using super.updateData, as unique id needs to be provided, along with passing params, since no params
-		//is passed, it'll throw NPE in BaseService updateData - check with Manish
-		getClientService().put(updateBlogUrl, null, getAtomHeaders(), payload,ClientService.FORMAT_NULL);
+		Response response = updateData(updateBlogUrl, null, payload, null);
+		checkResponseCode(response, HTTPCode.OK);
 	}
 	
 	/**
@@ -503,13 +502,13 @@ public class BlogService extends ConnectionsService {
 		if (null == post){
 			throw new ClientServicesException(null,"null post");
 		}
-		Response result = null;
 		BlogPostSerializer serializer = new BlogPostSerializer(post);
 		String payload = serializer.createPayload();
 
 		String createPostUrl = BlogUrls.CREATE_BLOG_POST.format(this, BlogUrlParts.blogHandle.get(blogHandle));
-		result = createData(createPostUrl, null, getAtomHeaders(), payload);
-		post = getBlogPostFeedHandler().createEntity(result);
+		Response response = createData(createPostUrl, null, getAtomHeaders(), payload);
+		checkResponseCode(response, HTTPCode.CREATED);
+		post = getBlogPostFeedHandler().createEntity(response);
         return post;
 	}
 	
@@ -535,8 +534,9 @@ public class BlogService extends ConnectionsService {
 		String payload = serializer.updatePayload();
 			
 		String updatePostUrl = BlogUrls.UPDATE_REMOVE_POST.format(this, BlogUrlParts.blogHandle.get(blogHandle), BlogUrlParts.entryAnchor.get(post.getUid()));
-		Response result = getClientService().put(updatePostUrl, null, getAtomHeaders(), payload,ClientService.FORMAT_NULL);
-		post = getBlogPostFeedHandler().createEntity(result);
+		Response response = updateData(updatePostUrl, null, payload, null);
+		checkResponseCode(response, HTTPCode.OK);
+		post = getBlogPostFeedHandler().createEntity(response);
 		return post;
 	}
 	
@@ -576,6 +576,7 @@ public class BlogService extends ConnectionsService {
 		String createCommentUrl = BlogUrls.CREATE_COMMENT.format(this, BlogUrlParts.blogHandle.get(blogHandle), BlogUrlParts.entryAnchor.get(""));
 		
 		result = createData(createCommentUrl, null, getAtomHeaders(), payload);
+		checkResponseCode(result, HTTPCode.CREATED);
 		comment = getCommentFeedHandler().createEntity(result);
 
         return comment;

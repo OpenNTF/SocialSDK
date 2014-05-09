@@ -59,6 +59,7 @@ import com.ibm.sbt.services.client.connections.files.model.FileCommentParameterB
 import com.ibm.sbt.services.client.connections.files.model.FileEntryXPath;
 import com.ibm.sbt.services.client.connections.files.model.FileRequestParams;
 import com.ibm.sbt.services.client.connections.files.model.Headers;
+import com.ibm.sbt.services.client.connections.files.serializer.CommentSerializer;
 import com.ibm.sbt.services.client.connections.files.serializer.EntityIdSerializer;
 import com.ibm.sbt.services.client.connections.files.serializer.FileSerializer;
 import com.ibm.sbt.services.client.connections.files.serializer.FlagSerializer;
@@ -1130,7 +1131,7 @@ public class FileService extends ConnectionsService {
                 CommonConstants.APPLICATION_ATOM_XML));
         File r = this.getFileFeedHandler().createEntity(result);
         folder.clearFieldsMap();
-        folder.setData(r.getDataHandler().getData());
+        folder.setDataHandler(r.getDataHandler());
         return folder;
     }
 
@@ -1179,7 +1180,7 @@ public class FileService extends ConnectionsService {
             Response result = this.updateData(requestUri, null, headers, payload, null);
             File r = this.getFileFeedHandler().createEntity(result);
             folder.clearFieldsMap();
-            folder.setData(r.getDataHandler().getData());
+            folder.setDataHandler(r.getDataHandler());
             return folder;
     }
     
@@ -1273,9 +1274,27 @@ public class FileService extends ConnectionsService {
      */
     public Comment addCommentToFile(String fileId, String comment, Map<String, String> params)
             throws ClientServicesException, TransformerException {
-        return this.addCommentToFile(fileId, comment, null, params);
+        Comment c = new Comment();
+        c.setContent(comment);
+        return this.addCommentToFile(fileId, c, null, params);
     }
-
+    /**
+     * Create a comment programmatically.
+     * 
+     * @param fileId - ID of the file
+     * @param params - Map of Parameters. See {@link FileRequestParams} for possible values.
+     * @param comment - Comment to be added to the File
+     * @param userId - the user owning the file
+     * @return Comment
+     * @throws ClientServiceException
+     * @throws TransformerException
+     */
+    public Comment addCommentToFile(String fileId, String comment, String userId, Map<String, String> params)
+            throws ClientServicesException, TransformerException {
+        Comment c = new Comment();
+        c.setContent(comment);
+        return this.addCommentToFile(fileId, c, userId, params);
+    }
     /**
      * Create a comment programmatically.
      * 
@@ -1283,11 +1302,11 @@ public class FileService extends ConnectionsService {
      * @param params - Map of Parameters. See {@link FileRequestParams} for possible values.
      * @param comment - Comment to be added to the File
      * @param libraryId - Id of the library the file is present
-     * @return Comment
+     * @return Comment the comment to create
      * @throws ClientServicesException
      * @throws TransformerException
      */
-    public Comment addCommentToFile(String fileId, String comment, String userId,
+    public Comment addCommentToFile(String fileId, Comment comment, String userId,
             Map<String, String> params) throws ClientServicesException, TransformerException {
         //FIX: DUPLICATE METHOD see createComment()
         if (StringUtil.isEmpty(fileId)) {
@@ -1303,10 +1322,13 @@ public class FileService extends ConnectionsService {
                     FileUrlParts.accessType.get(accessType), FileUrlParts.userId.get(userId),
                     FileUrlParts.fileId.get(fileId));
         }
-        Document payload = this.constructPayloadForComments(comment);
-        Response result = this.createData(requestUri, null, new ClientService.ContentXml(payload,
+        String payload = new CommentSerializer(comment).generateCommentUpdatePayload();
+        Response result = this.createData(requestUri, null, new ClientService.ContentString(payload,
                 CommonConstants.APPLICATION_ATOM_XML));
-        return this.getCommentFeedHandler().createEntity(result);
+        Comment ret = this.getCommentFeedHandler().createEntity(result);
+        comment.clearFieldsMap();
+        comment.setDataHandler(ret.getDataHandler());
+        return comment;
     }
 
 
@@ -2638,7 +2660,7 @@ public class FileService extends ConnectionsService {
                 updateFilePayload, "application/atom+xml"), null);
         File r = this.getFileFeedHandler().createEntity(result);
         fileEntry.clearFieldsMap();
-        fileEntry.setData(r.getDataHandler().getData());
+        fileEntry.setDataHandler(r.getDataHandler());
         return fileEntry;
     }
 

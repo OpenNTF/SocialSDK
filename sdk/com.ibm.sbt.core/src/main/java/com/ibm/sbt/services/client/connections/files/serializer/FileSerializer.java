@@ -40,7 +40,8 @@ public class FileSerializer extends AtomEntitySerializer<File> {
     
     public Node getFileEntry() {
         Node n =genericAtomEntry();
-        appendChildren(n, textElement(ConnectionsConstants.Namespace.TD.getUrl(), ConnectionsConstants.UUID, entity.getFileId()));
+        if (entity.getFileId()!=null)
+            appendChildren(n, textElement(ConnectionsConstants.Namespace.TD.getUrl(), ConnectionsConstants.UUID, entity.getFileId()));
         if (entity.getLabel() != null)
             appendChildren(n, textElement(ConnectionsConstants.Namespace.TD.getUrl(), ConnectionsConstants.LABEL, entity.getLabel()));
         appendChildren(n, element(ConnectionsConstants.Namespace.TD.getUrl(), ConnectionsConstants.CATEGORY, 

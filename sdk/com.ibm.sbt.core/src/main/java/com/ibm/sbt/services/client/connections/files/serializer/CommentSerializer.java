@@ -33,22 +33,18 @@ public class CommentSerializer extends AtomEntitySerializer<Comment> {
     }
 
     
-    public Node getFileEntry() {
+    public Node getCommentEntry() {
         Node n =genericAtomEntry();
-        appendChildren(n, textElement(ConnectionsConstants.Namespace.TD.getUrl(), ConnectionsConstants.UUID, entity.getCommentId()));
+        if (entity.getCommentId()!=null)
+            appendChildren(n, textElement(ConnectionsConstants.Namespace.TD.getUrl(), ConnectionsConstants.UUID, entity.getCommentId()));
 
-        appendChildren(n, element(ConnectionsConstants.Namespace.TD.getUrl(), ConnectionsConstants.CATEGORY, 
+        appendChildren(n, element(ConnectionsConstants.CATEGORY, 
                 attribute(ConnectionsConstants.SCHEME, ConnectionsConstants.Namespace.TAG.getUrl()),
                 attribute(ConnectionsConstants.TERM, FileConstants.CATEGORY_COMMENT),
                 attribute(ConnectionsConstants.LABEL, FileConstants.CATEGORY_COMMENT)
                 )
                 );
-        
        
-        appendChildren(n, textElement(ConnectionsConstants.CONTENT, entity.getContent()),
-                attribute(ConnectionsConstants.TYPE,ConnectionsConstants.TEXT));
-        
-        
         if (entity.getModified()!=null)     
             appendChildren(n, textElement(ConnectionsConstants.Namespace.TD.getUrl(), FileConstants.MODIFIED, DateSerializer.toString(entity.getModified())));
         if (entity.getCreated()!=null)     
@@ -61,8 +57,8 @@ public class CommentSerializer extends AtomEntitySerializer<Comment> {
     }
 
 
-    public String generateFileUpdatePayload() {
-       getFileEntry();
+    public String generateCommentUpdatePayload() {
+       getCommentEntry();
        
         return serializeToString();
     }

@@ -51,6 +51,7 @@ public final class ConnectionsConstants {
 	 * General ATOM
 	 */
 	public static final String ENTRY = "entry";
+	public static final String FEED = "feed";
 	public static final String TAGS = "tags";
 	public static final String CATEGORY = "category";
 	public static final String SCHEME = "scheme";
@@ -62,6 +63,8 @@ public final class ConnectionsConstants {
 	public static final String DATA = "data";
 	public static final String TITLE = "title";
 	public static final String ID = "id";
+	public static final String UUID = "uuid";
+
 	public static final String PUBLISHED = "published";
 	public static final String UPDATED = "updated";
 	public static final String SUMMARY = "summary";
@@ -70,7 +73,8 @@ public final class ConnectionsConstants {
 	public static final String LABEL = "label";
 	public static final String COMPLETED = "completed";
 	public static final String PERSON = "person";
-
+    public static final String IN_REF_TO = "in-ref-to";
+    public static final String REF_ITEM_TYPE = "ref-item-type";
 	/**
 	 * Activity ATOM
 	 */

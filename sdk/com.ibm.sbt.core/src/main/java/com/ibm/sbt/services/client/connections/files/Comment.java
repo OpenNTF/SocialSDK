@@ -16,11 +16,8 @@
 package com.ibm.sbt.services.client.connections.files;
 
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
-
 import java.util.Date;
-
 import org.w3c.dom.Node;
-
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.xpath.XPathExpression;
@@ -51,10 +48,12 @@ public class Comment extends AtomEntity {
 	
 	public Comment(FileService svc, XmlDataHandler dh) {
         super(svc, dh);
+        if (dh!=null) {
         authorEntry = new Person(getService(), new XmlDataHandler((Node)this.getDataHandler().getData(), 
         		nameSpaceCtx, (XPathExpression)AtomXPath.author.getPath()));
         modifierEntry = new Person(getService(), new XmlDataHandler((Node)this.getDataHandler().getData(), 
         		nameSpaceCtx, (XPathExpression)AtomXPath.modifier.getPath()));
+        }
     }
 
     /**
@@ -69,11 +68,16 @@ public class Comment extends AtomEntity {
 		super(service, node, namespaceCtx, xpathExpression);
 	}
 	
+	@Override
+	public void setId(String id) {
+	    //comment comes with uuid but parent entity wants urn qualified id
+	    super.setId((id==null || id.startsWith("urn:lsid:ibm.com:td:"))? id : "urn:lsid:ibm.com:td:"+id);
+	}
 	public String getCommentId() {
 		if (!StringUtil.isEmpty(commentId)) {
 			return commentId;
 		}
-		if (!getAsString(FileEntryXPath.Category).equals("comment")) {
+		if (getAsString(FileEntryXPath.Category) != null && !getAsString(FileEntryXPath.Category).equals("comment")) {
 			return null;
 		}
 		return getAsString(FileEntryXPath.Uuid);
@@ -83,20 +87,14 @@ public class Comment extends AtomEntity {
 		if (!StringUtil.isEmpty(comment)) {
 			return comment;
 		}
-		if (!getAsString(FileEntryXPath.Category).equals("comment")) {
-			return null;
-		}
-		return getAsString(FileEntryXPath.Comment);
+		return getContent();
 	}
+	
 	
 	public String getTitle() {
 		return this.getAsString(FileEntryXPath.Title);
 	}
 	
-	public String getContent() {
-		return this.getAsString(FileEntryXPath.Content);
-	}
-
 	public Date getCreated() {
 		return this.getAsDate(FileEntryXPath.Created);
 	}
@@ -145,5 +143,8 @@ public class Comment extends AtomEntity {
 
 	private void setComment(String comment) {
 		this.comment = comment;
+		setContent(comment);
 	}
+	
+	
 }

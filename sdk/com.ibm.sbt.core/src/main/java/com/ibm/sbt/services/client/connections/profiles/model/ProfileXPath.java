@@ -79,4 +79,13 @@ public enum ProfileXPath implements FieldEntry {
 	public String getName() {
 		return this.name();
 	}
+	
+	public static ProfileXPath getByName(String name){
+		ProfileXPath profileXPath = null;
+		try {
+			profileXPath = valueOf(name);
+		} catch (Exception e){
+		}
+		return profileXPath;
+	}
 }

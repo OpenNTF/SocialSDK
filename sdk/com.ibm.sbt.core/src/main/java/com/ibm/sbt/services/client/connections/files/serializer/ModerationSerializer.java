@@ -16,19 +16,18 @@
 
 package com.ibm.sbt.services.client.connections.files.serializer;
 
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.CONTENT;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.ENTRY;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.IN_REF_TO;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.REF;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.REF_ITEM_TYPE;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.REL;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.TEXT;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.TYPE;
 import static com.ibm.sbt.services.client.connections.files.FileConstants.REPORT_ITEM;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.ConnectionsConstants.Namespace;
 import com.ibm.sbt.services.client.base.serializers.XmlSerializer;
+import com.ibm.sbt.services.client.connections.files.FileConstants;
 import com.ibm.sbt.services.client.connections.files.FileConstants.ItemType;
 
 /**
@@ -36,26 +35,33 @@ import com.ibm.sbt.services.client.connections.files.FileConstants.ItemType;
  * @author Lorenzo Boccaccia
  * 
  */
-public class FlagSerializer extends XmlSerializer {
+public class ModerationSerializer extends XmlSerializer {
 
     private String   id;
+    private String   action;
     private String   reason;
     private ItemType what;
 
-    public FlagSerializer(String objectId, String flagReason, ItemType flagWhat) {
+    public ModerationSerializer(String objectId, String action, String reason, ItemType flagWhat) {
         this.id = objectId;
-        this.reason = flagReason;
+        this.action = action;
         this.what = flagWhat;
+        this.reason = reason;
     }
 
     private void generateFlagPayload() {
         Node entry = entry();
         appendChildren(entry,
                 inRefTo(),
+                action(),
                 reason());
     }
 
-    public String flagPayload() {
+    private Node reason() {
+        return textElement(ConnectionsConstants.CONTENT, reason);
+    }
+
+    public String moderationPayload() {
         generateFlagPayload();
         return serializeToString();
     }
@@ -67,9 +73,8 @@ public class FlagSerializer extends XmlSerializer {
         return root;
     }
 
-    private Element reason() {
-        Element element = textElement(CONTENT, reason,
-                attribute(TYPE, TEXT));
+    private Element action() {
+        Element element = textElement(Namespace.SNX.getUrl(), FileConstants.MODERATION, action);
         return element;
     }
 

@@ -43,11 +43,7 @@ public class FileCommentParameterBuilder {
     public enum IdentifierType {
         UUID,LABEL;
     }
-    /**
-     * Indicates how the document is identified in the {document-id} variable segment of the web address. <br>
-     * By default, look up is performed with the expectation that the URL contains the value from the <td:uuid> element of a file Atom entry. <br>
-     * Specify label if the URL instead contains the value from the <td:label> element of a file Atom entry.
-     */
+
     /**
      * Indicates how the document is identified in the {document-id} variable segment of the web address. 
      * By default, look up is performed with the expectation that the URL contains the value from the <td:uuid> element of a File Atom entry. 

@@ -39,7 +39,6 @@ import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.base.transformers.TransformerException;
 import com.ibm.sbt.services.client.connections.common.Person;
 import com.ibm.sbt.services.client.connections.files.model.FileEntryXPath;
-import com.ibm.sbt.services.client.connections.files.model.FileRequestPayload;
 
 /**
  * @Represents Connections File
@@ -102,7 +101,7 @@ public class File extends AtomEntity {
      * @return String 
      */
     public void setFileId(String id) {
-       super.setId(id.startsWith("urn:lsid:ibm.com:td:")? id : "urn:lsid:ibm.com:td:"+id);
+       super.setId((id==null || id.startsWith("urn:lsid:ibm.com:td:"))? id : "urn:lsid:ibm.com:td:"+id);
     }
 	/**
 	 * Method to get the Label of the File
@@ -221,7 +220,7 @@ public class File extends AtomEntity {
 	 * @return Person
 	 */
 	public Person getModifier() {
-		if(null == modifierEntry) {
+		if(null == modifierEntry && getDataHandler()!=null) {
 			modifierEntry = new Person(getService(), new XmlDataHandler((Node)getDataHandler().getData(), 
 	        		nameSpaceCtx, (XPathExpression)AtomXPath.modifier.getPath()));
 		}
@@ -576,7 +575,7 @@ public class File extends AtomEntity {
 	 * @param label
 	 */
 	public void setLabel(String label) {
-		fields.put(FileRequestPayload.LABEL.getFileRequestPayload(), label);
+		fields.put(FileEntryXPath.Label.getName(), label);
 	}
 	
 	/**
@@ -584,7 +583,7 @@ public class File extends AtomEntity {
 	 * @param visibility
 	 */
 	public void setVisibility(String visibility) {
-		fields.put(FileRequestPayload.VISIBILITY.getFileRequestPayload(), visibility);
+		fields.put(FileEntryXPath.Visibility.getName(), visibility);
 	}
 	   
     /**
@@ -592,7 +591,7 @@ public class File extends AtomEntity {
      * @param visibility
      */
     public void setNotification(String visibility) {
-        fields.put(FileRequestPayload.NOTIFICATION.getFileRequestPayload(), visibility);
+        fields.put(FileEntryXPath.Notification.getName(), visibility);
     }
     
 	/**
@@ -600,7 +599,7 @@ public class File extends AtomEntity {
 	 * @param summary
 	 */
 	public void setSummary(String summary) {
-		fields.put(FileRequestPayload.SUMMARY.getFileRequestPayload(), summary);
+		fields.put(FileEntryXPath.Summary.getName(), summary);
 	}
 	
 }

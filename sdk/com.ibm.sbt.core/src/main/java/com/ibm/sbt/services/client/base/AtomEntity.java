@@ -173,7 +173,7 @@ public class AtomEntity extends BaseEntity {
     public void setContent(String content) {
         this.setAsString(AtomXPath.content, content);
     }
-
+    
     /**
      * Gets a author from ATOM entry document.
      * 

@@ -25,8 +25,11 @@ import java.util.Map;
 
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.services.client.Response;
+import com.ibm.sbt.services.client.base.CommonConstants.HTTPCode;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.connections.profiles.utils.Messages;
+import com.ibm.sbt.services.client.smartcloud.profiles.ProfileServiceException;
 import com.ibm.sbt.services.endpoints.Endpoint;
 
 /**
@@ -99,7 +102,8 @@ public class ProfileAdminService extends ProfileService {
 	public void deleteProfile(String id) throws ClientServicesException
 	{	
 		String deleteUrl = ProfileUrls.ADMIN_PROFILE_ENTRY.format(this, ProfileParams.userId.get(id));
-		deleteData(deleteUrl, null, ProfileParams.userId.getParamName(id));
+		Response response = deleteData(deleteUrl, null, ProfileParams.userId.getParamName(id));
+		checkResponseCode(response, HTTPCode.OK);
 	}
 
 	/**
@@ -120,7 +124,8 @@ public class ProfileAdminService extends ProfileService {
 		Object createPayload = constructCreateRequestBody(profile);
 		
 		String createUrl = ProfileUrls.ADMIN_PROFILES.format(this);
-		createData(createUrl, parameters, createPayload, ClientService.FORMAT_CONNECTIONS_OUTPUT);
+		Response response = createData(createUrl, parameters, createPayload, ClientService.FORMAT_CONNECTIONS_OUTPUT);
+		checkResponseCode(response, HTTPCode.OK);
 	}
 
 	/**
@@ -157,7 +162,8 @@ public class ProfileAdminService extends ProfileService {
 		String id = profile.getUserid();
 		Object updateProfilePayload = constructUpdateRequestBody(profile);
 		String updateUrl = ProfileUrls.ADMIN_PROFILE_ENTRY.format(this, ProfileParams.userId.get(id));
-		super.updateData(updateUrl, parameters,updateProfilePayload, ProfileParams.userId.getParamName(profile.getAsString("uid")));
+		Response response = updateData(updateUrl, parameters,updateProfilePayload, ProfileParams.userId.getParamName(profile.getAsString("uid")));
+		checkResponseCode(response, HTTPCode.OK);
 		profile.clearFieldsMap();
 	}
 }

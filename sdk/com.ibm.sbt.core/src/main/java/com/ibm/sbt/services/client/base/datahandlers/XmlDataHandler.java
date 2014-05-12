@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -45,9 +46,11 @@ import com.ibm.commons.xml.xpath.XPathExpression;
  */
 public class XmlDataHandler implements DataHandler<Node> {
 
-	final public String CONNECTIONS_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss";
-	final public DateFormat DateFormat = new SimpleDateFormat(CONNECTIONS_DATE_FORMAT);
-
+	final static public String CONNECTIONS_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss";
+	final static public DateFormat dateFormat = new SimpleDateFormat(CONNECTIONS_DATE_FORMAT);
+	static {
+		dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+	}
 	
 	private NamespaceContext nameSpaceCtx;
 	private Node data;
@@ -412,7 +415,7 @@ public class XmlDataHandler implements DataHandler<Node> {
 		Date date = null;
 		try {
 			if (value != null) {
-				date = DateFormat.parse(value.trim());
+				date = dateFormat.parse(value.trim());
 			}
 		} catch (ParseException e) {
 
@@ -430,7 +433,7 @@ public class XmlDataHandler implements DataHandler<Node> {
 		String value = getAsString(fieldName);
 		Date date = null;
 		try {
-			date = DateFormat.parse(value.trim());
+			date = dateFormat.parse(value.trim());
 		} catch (Exception e) {
 		}
 		return date;

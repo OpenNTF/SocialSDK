@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -36,7 +36,7 @@ import com.ibm.sbt.services.client.connections.forums.ForumReply;
 import com.ibm.sbt.services.client.connections.forums.ForumService;
 import com.ibm.sbt.services.client.connections.forums.ForumTopic;
 import com.ibm.sbt.services.client.connections.forums.model.BaseForumEntity;
-import com.ibm.sbt.services.client.connections.forums.transformers.BaseForumTransformer;
+import com.ibm.sbt.services.client.connections.forums.serializers.ForumSerializer;
 
 /**
  * @author mwallace
@@ -455,8 +455,7 @@ public class BaseForumsTest extends BaseApiTest {
 						
 			String forumUuid = "";
 			
-			BaseForumTransformer transformer = new BaseForumTransformer(topic);
-			Object 	payload = transformer.transform(topic.getFieldsMap());
+			ForumSerializer serializer = new ForumSerializer(topic);
 			
 			Map<String, String> params = new HashMap<String, String>();
 			params.put("forumUuid", forum.getForumUuid());
@@ -465,7 +464,7 @@ public class BaseForumsTest extends BaseApiTest {
 			headers.put("Content-Type", "application/atom+xml");
 			
 			//String url = resolveUrl(ForumType.TOPICS,null,params);
-			//result = createData(url, null, headers,payload);
+			//result = createData(url, null, headers,serializer.generateCreate());
 			//topic = (ForumTopic) new TopicsFeedHandler(this).createEntity(result);
 
 		} catch (Exception e) {

@@ -269,8 +269,8 @@ public class ForumTopic extends BaseForumEntity{
 	 * @method unLike
 	 * @return boolean
 	 */
-	public boolean unLike() throws ClientServicesException {
-		return getService().deleteRecommendation(getTopicUuid());
+	public void unLike() throws ClientServicesException {
+		getService().deleteRecommendation(getTopicUuid());
 	}
 	/**
 	 * Set to true, indicates that the topic is a question.

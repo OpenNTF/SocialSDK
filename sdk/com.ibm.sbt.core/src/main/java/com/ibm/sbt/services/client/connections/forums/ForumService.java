@@ -32,12 +32,13 @@ import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.AtomFeedHandler;
 import com.ibm.sbt.services.client.base.AuthType;
 import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.base.CommonConstants.HTTPCode;
 import com.ibm.sbt.services.client.base.ConnectionsService;
 import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.NamedUrlPart;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.connections.common.Tag;
-import com.ibm.sbt.services.client.connections.forums.transformers.BaseForumTransformer;
+import com.ibm.sbt.services.client.connections.forums.serializers.ForumSerializer;
 import com.ibm.sbt.services.endpoints.Endpoint;
 
 
@@ -104,7 +105,7 @@ public class ForumService extends ConnectionsService {
 	@Override
 	public NamedUrlPart getAuthType(){
 		String auth = super.getAuthType().getValue();
-		auth = AuthType.BASIC.get().equalsIgnoreCase(auth)?"":auth;
+		auth = AuthType.BASIC.get().equalsIgnoreCase(auth) ? "" : auth;
 		return new NamedUrlPart("authType", auth);
 	}
 
@@ -382,18 +383,12 @@ public class ForumService extends ConnectionsService {
 		if (null == forum){
 			throw new ClientServicesException(null,"null forum");
 		}
-		Response result = null;
-		try {
-			BaseForumTransformer transformer = new BaseForumTransformer(forum);
-			Object 	payload = transformer.transform(forum.getFieldsMap());
+		ForumSerializer serializer = new ForumSerializer(forum);
 
-			String url = ForumUrls.FORUMS.format(this);
-			result = createData(url, null, getAtomHeaders(), payload);
-			forum = getForumFeedHandler().createEntity(result);
-
-		} catch (Exception e) {
-			throw new ClientServicesException(e, "error creating forum");
-		}
+		String url = ForumUrls.FORUMS.format(this);
+		Response response = createData(url, null, getAtomHeaders(), serializer.generateCreate());
+		checkResponseCode(response, HTTPCode.CREATED);
+		forum = getForumFeedHandler(false).createEntity(response);
 
 		return forum;
 	}
@@ -425,32 +420,27 @@ public class ForumService extends ConnectionsService {
 	 * @return Response
 	 * @throws ClientServicesException
 	 */
-	public Response updateForum(Forum forum) throws ClientServicesException {
+	public void updateForum(Forum forum) throws ClientServicesException {
 		if (null == forum){
 			throw new ClientServicesException(null,"null forum");
 		}
 
-		try {
-			Map<String, String> parameters = new HashMap<String, String>();
+		Map<String, String> parameters = new HashMap<String, String>();
 
-			parameters.put(FORUM_UNIQUE_IDENTIFIER, forum.getUid());
-			if(forum.getFieldsMap().get(ForumsXPath.title)== null)
-				forum.setTitle(forum.getTitle());
-			if(forum.getFieldsMap().get(ForumsXPath.content)== null)
-				forum.setContent(forum.getContent());
-			if(!forum.getFieldsMap().toString().contains(ForumsXPath.tags.toString()))
-				forum.setTags(forum.getTags());
-			
-			BaseForumTransformer transformer = new BaseForumTransformer(forum);
-			Object payload = transformer.transform(forum.getFieldsMap());
+		parameters.put(FORUM_UNIQUE_IDENTIFIER, forum.getUid());
+		if(forum.getFieldsMap().get(ForumsXPath.title)== null)
+			forum.setTitle(forum.getTitle());
+		if(forum.getFieldsMap().get(ForumsXPath.content)== null)
+			forum.setContent(forum.getContent());
+		if(!forum.getFieldsMap().toString().contains(ForumsXPath.tags.toString()))
+			forum.setTags(forum.getTags());
+		
+		ForumSerializer serializer = new ForumSerializer(forum);
 
-			String url = ForumUrls.FORUM.format(this);
+		String url = ForumUrls.FORUM.format(this);
 
-			return updateData(url, parameters, payload, FORUM_UNIQUE_IDENTIFIER);
-		} catch (Exception e) {
-			throw new ClientServicesException(e, "error updating forum");
-		}
-
+		Response response = updateData(url, parameters, serializer.generateUpdate(), FORUM_UNIQUE_IDENTIFIER);
+		checkResponseCode(response, HTTPCode.OK);
 	}
 
 	/**
@@ -484,20 +474,13 @@ public class ForumService extends ConnectionsService {
 			throw new ClientServicesException(null, "null forum id");
 		}
 
-		try {
-			Map<String, String> parameters = new HashMap<String, String>();
+		Map<String, String> parameters = new HashMap<String, String>();
 
-			parameters.put(FORUM_UNIQUE_IDENTIFIER, forumUuid);
-			String deleteForumUrl = ForumUrls.FORUM.format(this);
+		parameters.put(FORUM_UNIQUE_IDENTIFIER, forumUuid);
+		String deleteForumUrl = ForumUrls.FORUM.format(this);
 
-			Response response = super.deleteData(deleteForumUrl, parameters, FORUM_UNIQUE_IDENTIFIER);
-			if (!isForumDeleted(response)){
-				throw new ClientServicesException(new Exception(),"error deleting forum, received HTTP Status code "+response.getResponse().getStatusLine().getStatusCode());
-			}
-		} catch (Exception e) {
-			throw new ClientServicesException(e,"error deleting forum");
-		} 	
-
+		Response response = deleteData(deleteForumUrl, parameters, FORUM_UNIQUE_IDENTIFIER);
+		checkResponseCode(response, HTTPCode.NO_CONTENT);
 	}
 	
 	/***************************************************************
@@ -534,21 +517,15 @@ public class ForumService extends ConnectionsService {
 		if (null == topic){
 			throw new ClientServicesException(null,"Topic object passed was null");
 		}
-		Response result = null;
-		try {
-			BaseForumTransformer transformer = new BaseForumTransformer(topic);
-			Object 	payload = transformer.transform(topic.getFieldsMap());
+		ForumSerializer serializer = new ForumSerializer(topic);
 
-			Map<String, String> params = new HashMap<String, String>();
-			params.put(FORUM_UNIQUE_IDENTIFIER, forumId);
+		Map<String, String> params = new HashMap<String, String>();
+		params.put(FORUM_UNIQUE_IDENTIFIER, forumId);
 
-			String url = ForumUrls.TOPICS.format(this);
-			result = createData(url, params, getAtomHeaders(), payload);
-			topic = getForumTopicFeedHandler().createEntity(result);
-
-		} catch (Exception e) {
-			throw new ClientServicesException(e, "error creating forum");
-		}
+		String url = ForumUrls.TOPICS.format(this);
+		Response response = createData(url, params, getAtomHeaders(), serializer.generateCreate());
+		checkResponseCode(response, HTTPCode.CREATED);
+		topic = getForumTopicFeedHandler(false).createEntity(response);
 
 		return topic;
 	}
@@ -600,27 +577,21 @@ public class ForumService extends ConnectionsService {
 		if (null == topic || StringUtil.isEmpty(topic.getUid())) {
 			throw new ClientServicesException(null,"Topic object passed was null");
 		}
-		try {
-			String url = ForumUrls.TOPICS.format(this);
-			if(topic.getFieldsMap().get(ForumsXPath.title)== null)
-				topic.setTitle(topic.getTitle());
-			if(topic.getFieldsMap().get(ForumsXPath.content)== null)
-				topic.setContent(topic.getContent());
-			if(!topic.getFieldsMap().toString().contains(ForumsXPath.tags.toString()))
-				topic.setTags(topic.getTags());
-			
-			BaseForumTransformer transformer = new BaseForumTransformer(topic);
+		String url = ForumUrls.TOPICS.format(this);
+		if(topic.getFieldsMap().get(ForumsXPath.title)== null)
+			topic.setTitle(topic.getTitle());
+		if(topic.getFieldsMap().get(ForumsXPath.content)== null)
+			topic.setContent(topic.getContent());
+		if(!topic.getFieldsMap().toString().contains(ForumsXPath.tags.toString()))
+			topic.setTags(topic.getTags());
+		
+		ForumSerializer serializer = new ForumSerializer(topic);
 
-			Object payload = transformer.transform(topic.getFieldsMap());
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put(TOPIC_UNIQUE_IDENTIFIER, topic.getUid());
 
-			Map<String, String> parameters = new HashMap<String, String>();
-			parameters.put(TOPIC_UNIQUE_IDENTIFIER, topic.getUid());
-
-			getClientService().put(url, parameters, getAtomHeaders(), payload,ClientService.FORMAT_NULL);
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new ClientServicesException(e, "error updating topic");
-		}
+		Response response = getClientService().put(url, parameters, getAtomHeaders(), serializer.generateUpdate(),ClientService.FORMAT_NULL);
+		checkResponseCode(response, HTTPCode.OK);
 	}
 	
 	/**
@@ -655,7 +626,8 @@ public class ForumService extends ConnectionsService {
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put(TOPIC_UNIQUE_IDENTIFIER, topicUuid);
 		String deleteTopicUrl = ForumUrls.TOPIC.format(this);
-		super.deleteData(deleteTopicUrl, parameters, TOPIC_UNIQUE_IDENTIFIER);
+		Response response = deleteData(deleteTopicUrl, parameters, TOPIC_UNIQUE_IDENTIFIER);
+		checkResponseCode(response, HTTPCode.NO_CONTENT);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////
@@ -689,24 +661,18 @@ public class ForumService extends ConnectionsService {
 		if (null == reply || StringUtil.isEmpty(topicId)){
 			throw new ClientServicesException(null,"Reply object passed was null");
 		}
-		Response result = null;
-		try {
-			if(StringUtil.isEmpty(reply.getTopicUuid())){
-				reply.setTopicUuid(topicId);
-			}
-			BaseForumTransformer transformer = new BaseForumTransformer(reply, CREATE_OP);
-			Object 	payload = transformer.transform(reply.getFieldsMap());
-			Map<String, String> params = new HashMap<String, String>();
-
-			params.put(TOPIC_UNIQUE_IDENTIFIER, topicId);
-
-			String url = ForumUrls.REPLIES.format(this);
-			result = createData(url, params, getAtomHeaders(), payload);
-			reply = getForumReplyFeedHandler().createEntity(result);
-
-		} catch (Exception e) {
-			throw new ClientServicesException(e, "error creating forum reply");
+		if(StringUtil.isEmpty(reply.getTopicUuid())){
+			reply.setTopicUuid(topicId);
 		}
+		ForumSerializer serializer = new ForumSerializer(reply);
+		Map<String, String> params = new HashMap<String, String>();
+
+		params.put(TOPIC_UNIQUE_IDENTIFIER, topicId);
+
+		String url = ForumUrls.REPLIES.format(this);
+		Response response = createData(url, params, getAtomHeaders(), serializer.generateCreate());
+		checkResponseCode(response, HTTPCode.CREATED);
+		reply = getForumReplyFeedHandler(false).createEntity(response);
 
 		return reply;
 	}
@@ -770,26 +736,20 @@ public class ForumService extends ConnectionsService {
 		if (null == reply){
 			throw new ClientServicesException(null,"Reply object passed was null");
 		}
-		try {
-			
-			if(reply.getFieldsMap().get(ForumsXPath.title)== null)
-				reply.setTitle(reply.getTitle());
-			if(reply.getFieldsMap().get(ForumsXPath.content)== null)
-				reply.setContent(reply.getContent());
-			if(!reply.getFieldsMap().toString().contains(ForumsXPath.tags.toString()))
-				reply.setTags(reply.getTags());
-			
-			BaseForumTransformer transformer = new BaseForumTransformer(reply);
-			Object 	payload = transformer.transform(reply.getFieldsMap());
-			Map<String, String> params = new HashMap<String, String>();
-			params.put(REPLY_UNIQUE_IDENTIFIER, reply.getUid());
+		if(reply.getFieldsMap().get(ForumsXPath.title)== null)
+			reply.setTitle(reply.getTitle());
+		if(reply.getFieldsMap().get(ForumsXPath.content)== null)
+			reply.setContent(reply.getContent());
+		if(!reply.getFieldsMap().toString().contains(ForumsXPath.tags.toString()))
+			reply.setTags(reply.getTags());
+		
+		ForumSerializer serializer = new ForumSerializer(reply);
+		Map<String, String> params = new HashMap<String, String>();
+		params.put(REPLY_UNIQUE_IDENTIFIER, reply.getUid());
 
-			String url = ForumUrls.REPLY.format(this);
-			updateData(url, params, getAtomHeaders(), payload, reply.getUid());
-
-		} catch (Exception e) {
-			throw new ClientServicesException(e, "error updating forum reply");
-		}
+		String url = ForumUrls.REPLY.format(this);
+		Response response = updateData(url, params, getAtomHeaders(), serializer.generateUpdate(), reply.getUid());
+		checkResponseCode(response, HTTPCode.OK);
 	}
 
 	/**
@@ -824,17 +784,13 @@ public class ForumService extends ConnectionsService {
 		if (StringUtil.isEmpty(replyUuid)){
 			throw new ClientServicesException(null, "null reply id");
 		}
+		Map<String, String> parameters = new HashMap<String, String>();
 
-		try {
-			Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put(REPLY_UNIQUE_IDENTIFIER, replyUuid);
+		String deleteReplyUrl = ForumUrls.REPLY.format(this);
 
-			parameters.put(REPLY_UNIQUE_IDENTIFIER, replyUuid);
-			String deleteReplyUrl = ForumUrls.REPLY.format(this);
-
-			super.deleteData(deleteReplyUrl, parameters, REPLY_UNIQUE_IDENTIFIER);
-		} catch (Exception e) {
-			throw new ClientServicesException(e,"error deleting forum reply");
-		} 	
+		Response response = deleteData(deleteReplyUrl, parameters, REPLY_UNIQUE_IDENTIFIER);
+		checkResponseCode(response, HTTPCode.NO_CONTENT);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////
@@ -870,17 +826,13 @@ public class ForumService extends ConnectionsService {
 		Map<String, String> parameters = new HashMap<String, String>();
 
 		parameters.put(POST_UNIQUE_IDENTIFIER, postUuid);
-		Response result;
 		Recommendation recommendation;
 		// not using transformer, as the payload to be sent is constant
 		String payload = "<entry xmlns='http://www.w3.org/2005/Atom'><category scheme='http://www.ibm.com/xmlns/prod/sn/type' term='recommendation'></category></entry>";
-		try {
-			result = createData(recommendationsUrl, parameters, null,payload);
-			recommendation = getRecommendationFeedHandler().createEntity(result);
+		Response response= createData(recommendationsUrl, parameters, null,payload);
+		checkResponseCode(response, HTTPCode.CREATED);
+		recommendation = getRecommendationFeedHandler().createEntity(response);
 
-		} catch (Exception e) {
-			throw new ClientServicesException(e);
-		}
 		return recommendation;
 	}
 	
@@ -900,18 +852,15 @@ public class ForumService extends ConnectionsService {
 	 * @return boolean
 	 * @throws ClientServicesException
 	 */
-	public boolean deleteRecommendation(String postUuid) throws ClientServicesException{
+	public void deleteRecommendation(String postUuid) throws ClientServicesException{
 		checkVersion();
 		String recommendationsUrl = ForumUrls.RECOMMENDATION_ENTRIES.format(this);
 		Map<String, String> parameters = new HashMap<String, String>();
 
 		parameters.put(POST_UNIQUE_IDENTIFIER, postUuid);
-		try {
-			deleteData(recommendationsUrl, parameters, postUuid);
-			return true;
-		} catch (Exception e) {
-			throw new ClientServicesException(e);
-		}
+		Response response = deleteData(recommendationsUrl, parameters, postUuid);
+			
+		checkResponseCode(response, HTTPCode.NO_CONTENT);
 	}
 
 	//----------------------------------------------------------------------------------------------
@@ -928,21 +877,15 @@ public class ForumService extends ConnectionsService {
 		if (null == topic){
 			throw new ClientServicesException(null,"Topic object passed was null");
 		}
-		Response result = null;
-		try {
-			BaseForumTransformer transformer = new BaseForumTransformer(topic);
-			Object 	payload = transformer.transform(topic.getFieldsMap());
+		ForumSerializer serializer = new ForumSerializer(topic);
 
-			Map<String, String> params = new HashMap<String, String>();
-			params.put(COMM_UNIQUE_IDENTIFIER, communityId);
+		Map<String, String> params = new HashMap<String, String>();
+		params.put(COMM_UNIQUE_IDENTIFIER, communityId);
 
-			String postUrl = ForumUrls.TOPICS.format(this);
-			result = createData(postUrl, params, getAtomHeaders() ,payload);
-			topic = getForumTopicFeedHandler().createEntity(result);
-
-		} catch (Exception e) {
-			throw new ClientServicesException(e, "error creating forum");
-		}
+		String postUrl = ForumUrls.TOPICS.format(this);
+		Response response = createData(postUrl, params, getAtomHeaders() ,serializer.generateCreate());
+		checkResponseCode(response, HTTPCode.CREATED);
+		topic = getForumTopicFeedHandler().createEntity(response);
 
 		return topic;
 	}
@@ -990,11 +933,20 @@ public class ForumService extends ConnectionsService {
 	 ****************************************************************/
 
 	/**
+	 * Returns a ForumHandler
+	 */
+	public IFeedHandler<Forum> getForumFeedHandler(){
+		return getForumFeedHandler(true);
+	}
+	
+	/**
 	 * Returns a ForumFeedHandler
+	 * 
+	 * @param isFeed true if the response is a feed, false if the response contains one entry.
 	 * @return
 	 */
-	public IFeedHandler<Forum> getForumFeedHandler() {
-		return new AtomFeedHandler<Forum>(this) {
+	public IFeedHandler<Forum> getForumFeedHandler(boolean isFeed) {
+		return new AtomFeedHandler<Forum>(this, isFeed) {
 			@Override
 			protected Forum entityInstance(BaseService service, Node node, XPathExpression xpath) {
 				return new Forum(service, node, nameSpaceCtx, xpath);
@@ -1007,7 +959,17 @@ public class ForumService extends ConnectionsService {
 	 * @return
 	 */
 	public IFeedHandler<ForumTopic> getForumTopicFeedHandler() {
-		return new AtomFeedHandler<ForumTopic>(this) {
+		return getForumTopicFeedHandler(true);
+	}
+	
+	/**
+	 * Returns a ForumTopicFeedHandler
+	 * 
+	 * @param isFeed true if the response is a feed, false if the response contains one entry.
+	 * @return
+	 */
+	public IFeedHandler<ForumTopic> getForumTopicFeedHandler(boolean isFeed) {
+		return new AtomFeedHandler<ForumTopic>(this, isFeed) {
 			@Override
 			protected ForumTopic entityInstance(BaseService service, Node node, XPathExpression xpath) {
 				return new ForumTopic(service, node, nameSpaceCtx, xpath);
@@ -1020,7 +982,17 @@ public class ForumService extends ConnectionsService {
 	 * @return
 	 */
 	public IFeedHandler<ForumReply> getForumReplyFeedHandler() {
-		return new AtomFeedHandler<ForumReply>(this) {
+		return getForumReplyFeedHandler(true);
+	}
+	
+	/**
+	 * Returns a ForumReplyFeedHandler
+	 * 
+	 * @param isFeed true if the response is a feed, false if the response contains one entry.
+	 * @return
+	 */
+	public IFeedHandler<ForumReply> getForumReplyFeedHandler(boolean isFeed) {
+		return new AtomFeedHandler<ForumReply>(this, isFeed) {
 			@Override
 			protected ForumReply entityInstance(BaseService service, Node node, XPathExpression xpath) {
 				return new ForumReply(service, node, nameSpaceCtx, xpath);
@@ -1059,15 +1031,15 @@ public class ForumService extends ConnectionsService {
 	 ****************************************************************/
 
 	protected Forum getForumEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
-		return (Forum)getEntity(requestUrl, parameters, getForumFeedHandler());
+		return (Forum)getEntity(requestUrl, parameters, getForumFeedHandler(false));
 	}
 
 	protected ForumTopic getForumTopicEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
-		return (ForumTopic)getEntity(requestUrl, parameters, getForumTopicFeedHandler());
+		return (ForumTopic)getEntity(requestUrl, parameters, getForumTopicFeedHandler(false));
 	}
 
 	protected ForumReply getForumReplyEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
-		return (ForumReply)getEntity(requestUrl, parameters, getForumReplyFeedHandler());
+		return (ForumReply)getEntity(requestUrl, parameters, getForumReplyFeedHandler(false));
 	}
 
 	protected Recommendation getRecommendationEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {

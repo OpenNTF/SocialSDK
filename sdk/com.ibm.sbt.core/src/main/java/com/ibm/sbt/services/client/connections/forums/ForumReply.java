@@ -168,8 +168,8 @@ public class ForumReply extends BaseForumEntity{
 	 * @method unLike
 	 * @return boolean
 	 */
-	public boolean unLike() throws ClientServicesException {
-		return getService().deleteRecommendation(getReplyUuid());
+	public void unLike() throws ClientServicesException {
+		getService().deleteRecommendation(getReplyUuid());
 	}
 	/**
 	 * Returns the recommendation count for the topic, supported on Connections 4.5 or above

@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * ï¿½ Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,8 @@
  */
 package com.ibm.sbt.services.client.connections.activities;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,68 +33,135 @@ import com.ibm.sbt.services.client.base.datahandlers.EntityList;
  *
  */
 public class ActivityDescendantsSinceTest extends BaseActivityServiceTest {
+	
+	private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");	
 
 	@Test
-	public void testDescendantsSince() throws ClientServicesException, XMLException {
+	public void testDescendantsUpdatedSince() throws ClientServicesException, XMLException {
 		long start = System.currentTimeMillis();
-		activity = createActivity("ActivityDescendantsSince-"+start);
-		String activityUuid = activity.getActivityUuid();
-		//System.out.println(activity.toXmlString());
+		activity = createActivity("ActivityDescendantsUpdatedSince-"+start);
 		
-		List<ActivityNode> createdNodes = createActivityDescendants(activityUuid, 10, 1000);
+		List<ActivityNode> nodes = createTestData(activity);
 		
-		ActivityNode activityNode = createdNodes.get(5);
-		String title = activityNode.getTitle();
+		ActivityNode node = nodes.get(2);
 		
 		Map<String, String> params = new HashMap<String, String>();
-		params.put("since", title.substring(title.indexOf('-')+1));
-		EntityList<ActivityNode> activityNodes = activityService.getActivityNodeDescendants(activityUuid, params);
-		//System.out.println(activityNodes.size());
+		params.put("since", "" + node.getUpdated().getTime());
+		EntityList<ActivityNode> activityNodes = activityService.getActivityNodeDescendants(activity.getActivityUuid(), params);
+		System.out.println("Nodes " + activityNodes.size() + " update since: " + dateFormat.format(node.getUpdated()));
 		
-		Assert.assertEquals(5, activityNodes.size());
+		Assert.assertEquals(3, activityNodes.size());
 	}
 	
 	@Test
-	public void testDescendantsUntil() throws ClientServicesException, XMLException {
+	public void testDescendantsUpdatedUntil() throws ClientServicesException, XMLException {
 		long start = System.currentTimeMillis();
-		activity = createActivity("ActivityDescendantsSince-"+start);
-		String activityUuid = activity.getActivityUuid();
-		//System.out.println(activity.toXmlString());
+		activity = createActivity("ActivityDescendantsUpdatedUntil-"+start);
 		
-		List<ActivityNode> createdNodes = createActivityDescendants(activityUuid, 10, 1000);
+		List<ActivityNode> nodes = createTestData(activity);
 		
-		ActivityNode activityNode = createdNodes.get(5);
-		String title = activityNode.getTitle();
+		ActivityNode node = nodes.get(2);
 		
 		Map<String, String> params = new HashMap<String, String>();
-		params.put("until", title.substring(title.indexOf('-')+1));
-		EntityList<ActivityNode> activityNodes = activityService.getActivityNodeDescendants(activityUuid, params);
-		//System.out.println(activityNodes.size());
+		params.put("until", "" + node.getUpdated().getTime());
+		EntityList<ActivityNode> activityNodes = activityService.getActivityNodeDescendants(activity.getActivityUuid(), params);
+		System.out.println("Nodes " + activityNodes.size() + " update until: " + dateFormat.format(node.getUpdated()));
 		
-		Assert.assertEquals(5, activityNodes.size());
+		Assert.assertEquals(2, activityNodes.size());
 	}
 	
 	@Test
-	public void testDescendantsSinceUntil() throws ClientServicesException, XMLException {
+	public void testDescendantsUpdatedSinceUntil() throws ClientServicesException, XMLException {
 		long start = System.currentTimeMillis();
-		activity = createActivity("ActivityDescendantsSince-"+start);
-		String activityUuid = activity.getActivityUuid();
-		//System.out.println(activity.toXmlString());
+		activity = createActivity("ActivityDescendantsUpdatedSinceUntil-"+start);
 		
-		List<ActivityNode> createdNodes = createActivityDescendants(activityUuid, 10, 1000);
+		List<ActivityNode> nodes = createTestData(activity);
 		
-		ActivityNode sinceNode = createdNodes.get(3);
-		String since = sinceNode.getTitle();
-		ActivityNode untilNode = createdNodes.get(7);
-		String until = untilNode.getTitle();
+		ActivityNode sinceNode = nodes.get(1);
+		ActivityNode untilNode = nodes.get(3);
 		
 		Map<String, String> params = new HashMap<String, String>();
-		params.put("since", since.substring(since.indexOf('-')+1));
-		params.put("until", until.substring(until.indexOf('-')+1));
-		EntityList<ActivityNode> activityNodes = activityService.getActivityNodeDescendants(activityUuid, params);
-		//System.out.println(activityNodes.size());
+		params.put("since", "" + sinceNode.getUpdated().getTime());
+		params.put("until", "" + untilNode.getUpdated().getTime());
+		EntityList<ActivityNode> activityNodes = activityService.getActivityNodeDescendants(activity.getActivityUuid(), params);
+		System.out.println("Nodes " + activityNodes.size() + 
+				" update since: " + dateFormat.format(sinceNode.getUpdated()) +
+				" until: " + dateFormat.format(untilNode.getUpdated()));
 		
-		Assert.assertEquals(4, activityNodes.size());
+		Assert.assertEquals(2, activityNodes.size());
 	}
 	
+	@Test
+	public void testDescendantsCreatedSince() throws ClientServicesException, XMLException {
+		long start = System.currentTimeMillis();
+		activity = createActivity("ActivityDescendantsCreatedSince-"+start);
+		
+		List<ActivityNode> nodes = createTestData(activity);
+		
+		ActivityNode node = nodes.get(2);
+		
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("since", "" + node.getPublished().getTime());
+		params.put("filterKey", "create");
+		EntityList<ActivityNode> activityNodes = activityService.getActivityNodeDescendants(activity.getActivityUuid(), params);
+		System.out.println("Nodes " + activityNodes.size() + " create since: " + dateFormat.format(node.getPublished()));
+		
+		Assert.assertEquals(3, activityNodes.size());
+	}
+	
+	@Test
+	public void testDescendantsCreatedUntil() throws ClientServicesException, XMLException {
+		long start = System.currentTimeMillis();
+		activity = createActivity("ActivityDescendantsCreatedUntil-"+start);
+		
+		List<ActivityNode> nodes = createTestData(activity);
+		
+		ActivityNode node = nodes.get(2);
+		
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("until", "" + node.getPublished().getTime());
+		params.put("filterKey", "create");
+		EntityList<ActivityNode> activityNodes = activityService.getActivityNodeDescendants(activity.getActivityUuid(), params);
+		System.out.println("Nodes " + activityNodes.size() + " create until: " + dateFormat.format(node.getPublished()));
+		
+		Assert.assertEquals(2, activityNodes.size());
+	}
+	
+	@Test
+	public void testDescendantsCreatedSinceUntil() throws ClientServicesException, XMLException {
+		long start = System.currentTimeMillis();
+		activity = createActivity("ActivityDescendantsCreatedSinceUntil-"+start);
+		
+		List<ActivityNode> nodes = createTestData(activity);
+		
+		ActivityNode sinceNode = nodes.get(1);
+		ActivityNode untilNode = nodes.get(3);
+		
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("since", "" + sinceNode.getPublished().getTime());
+		params.put("until", "" + untilNode.getPublished().getTime());
+		params.put("filterKey", "create");
+		EntityList<ActivityNode> activityNodes = activityService.getActivityNodeDescendants(activity.getActivityUuid(), params);
+		System.out.println("Nodes " + activityNodes.size() + 
+				" create since: " + dateFormat.format(sinceNode.getPublished()) +
+				" until: " + dateFormat.format(untilNode.getPublished()));
+		
+		Assert.assertEquals(2, activityNodes.size());
+	}
+	
+	protected List<ActivityNode> createTestData(Activity activity) throws ClientServicesException {
+		String activityUuid = activity.getActivityUuid();
+		
+		List<ActivityNode> createdNodes = createActivityDescendants(activityUuid, 5, 1000);
+		
+		List<ActivityNode> touchedNodes = touchActivityNodes(createdNodes, true, 1000);
+		
+		for (ActivityNode node : touchedNodes) {
+			String title = node.getTitle();
+			Date create = new Date(Long.parseLong(title.substring(title.indexOf('-')+1)));
+			System.out.println(node.getTitle() + "  " + dateFormat.format(create) + "  " + dateFormat.format(node.getPublished()) + "  " + dateFormat.format(node.getUpdated()));
+		}
+
+		return touchedNodes;
+	}
 }

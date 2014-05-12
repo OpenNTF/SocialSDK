@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * ï¿½ Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,6 +56,7 @@ public class CreateSubscriptionsApp extends BaseBssApp {
 					"D0NWJLL",	// IBM SmartCloud iNotes - Application Specific License
 					"D0NWKLL",	// IBM SmartCloud Engage for Enterprise Deployment - ASL
 					"D0NWLLL",	// IBM SmartCloud Connections
+					"D09TILL", 	// IBM SmartCloud Connections
 					"D0Y5ELL",	// IBM SmartCloud Docs
 					"D100PLL",	// IBM SmartCloud Additional Storage Collaboration GB
 					"D0PUILL",	// IBM SmartCloud Notes - ASL MTU AU(bill mth to mth)

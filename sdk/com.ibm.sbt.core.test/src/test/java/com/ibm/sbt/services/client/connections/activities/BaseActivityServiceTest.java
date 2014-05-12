@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * ï¿½ Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.After;
@@ -191,7 +192,40 @@ public class BaseActivityServiceTest extends BaseUnitTest {
     	
     	return activityNodes;
     }
-        	
+       
+	protected List<ActivityNode> touchActivityNodes(List<ActivityNode> nodes, boolean reverse, long interval) throws ClientServicesException {
+		List<ActivityNode> touchedNodes = new ArrayList<ActivityNode>();
+		Date now = new Date();
+		if (reverse) {
+			for (int i=nodes.size(); i>0; i--) {
+				ActivityNode node = nodes.get(i-1);
+				node.setContent("Updated at "+now);
+				activityService.updateActivityNode(node);
+				
+				touchedNodes.add(activityService.getActivityNode(node.getActivityNodeUuid()));
+	    		
+	    		try {
+					Thread.sleep(interval);
+				} catch (InterruptedException e) {
+				}
+			}
+		} else {
+			for (int i=0; i<nodes.size(); i++) {
+				ActivityNode node = nodes.get(i);
+				node.setContent("Updated at "+now);
+				activityService.updateActivityNode(node);
+				
+				touchedNodes.add(activityService.getActivityNode(node.getActivityNodeUuid()));
+	    		
+	    		try {
+					Thread.sleep(interval);
+				} catch (InterruptedException e) {
+				}
+			}
+		}
+		return touchedNodes;
+	}
+    
     protected List<Activity> createActivities(String titlePrefix, int count, long interval) throws ClientServicesException {
     	List<Activity> activities = new ArrayList<Activity>();
     	

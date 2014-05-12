@@ -37,7 +37,7 @@ public enum AtomXPath implements FieldEntry {
 	contributor("./a:contributor"),
 	author("./a:author"),
 	modifier("./td:modifier"),
-	published("./published"),
+	published("./a:published"),
 	summary("./a:summary"),
 	updated("./a:updated"),
 	categoryTerm("./a:category/@term"),

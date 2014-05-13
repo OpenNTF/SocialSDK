@@ -22,7 +22,7 @@
 <%@page import="java.util.Map"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="com.ibm.sbt.services.client.connections.forums.ForumService"%>
-<%@page import="com.ibm.sbt.services.client.connections.forums.Tag"%>
+<%@page import="com.ibm.sbt.services.client.connections.common.Tag"%>
 <%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -43,9 +43,8 @@
 			for (Tag tag : tags) {
 				out.println("<b>Tag : </b> " + tag.getTerm());
 				out.println("<b>Tag Frequency: </b> " + tag.getFrequency());
-				out.println("<b>Tag Visibility :</b> "
-						+ tag.getVisibility());
-				out.println("<b>Tag Intensity :</b> " + tag.getIntensity());
+				out.println("<b>Visible:</b> "
+						+ tag.isVisible());
 				out.println("<br>");
 			}
 		} catch (Throwable e) {

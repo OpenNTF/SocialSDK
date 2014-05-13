@@ -18,7 +18,7 @@
 <%@page import="com.ibm.sbt.services.client.connections.files.FileService"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.Comment"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.File"%>
-<%@page import="com.ibm.sbt.services.client.connections.files.FileList"%>
+<%@page import="com.ibm.sbt.services.client.connections.common.Tag"%>
 <%@page import="java.nio.charset.Charset"%>
 <%@page import="java.io.ByteArrayInputStream"%>
 <%@page import="org.w3c.dom.Document"%>

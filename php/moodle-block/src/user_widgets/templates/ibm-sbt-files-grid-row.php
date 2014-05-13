@@ -33,7 +33,7 @@
 <img id="ibm-sbt-loading-***REMOVED*** echo $timestamp; ?>" style="display: none;" src="***REMOVED*** echo $CFG->wwwroot; ?>/blocks/ibmsbt/user_widgets/templates/assets/loading_small.gif" />
 <script type="text/template" id="fileRow-***REMOVED*** echo $timestamp; ?>">
 <tr style="padding-bottom: 0.3em; font-size: 12px;">
-	<td style="width:100%;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inline-block; padding-left: 10px;">
+	<td style="width:15em;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inline-block; padding-left: 10px;">
 			<span dojoAttachPoint="placeLinkNode">
 				<a href="javascript: void(0)" target="_self" title="${title}" dojoAttachPoint="placeTitleLink" data-dojo-attach-event="onclick: handleClick">${title}</a>
 			</span>

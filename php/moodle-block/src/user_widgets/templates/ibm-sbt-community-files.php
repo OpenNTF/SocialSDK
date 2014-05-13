@@ -17,7 +17,7 @@
 </style>
 <button style="font-size: 12px;" class="btn btn-primary" onclick="document.getElementById('ibm-sbt-communities-upload-dialog-***REMOVED*** echo $timestamp; ?>').style.display='block';">Upload</button>
 <br/>
-<span style="font-size: 12px;">Select your community:</span>
+<span style="font-size: 12px;">***REMOVED*** echo get_string('select_community', 'block_ibmsbt');?></span>
 <select style="font-size: 12px;" id="ibm-sbt-communities-***REMOVED*** echo $timestamp; ?>" onchange="onCommunityChange***REMOVED*** echo $timestamp; ?>();"></select>
 <br />
 <div id="ibm-sbt-community-files-list-***REMOVED*** echo $timestamp; ?>"></div>
@@ -25,8 +25,8 @@
 <div class="ibmsbtCommunityFileUploadDialog" id="ibm-sbt-communities-upload-dialog-***REMOVED*** echo $timestamp; ?>">
 	<input style="font-size: 12px;" type="file" id="ibm-sbt-community-files-***REMOVED*** echo $timestamp; ?>" accept="image/*"></input>
 	<br/>
-	<button style="font-size: 12px;" class="btn btn-primary" id="ibm-sbt-communities-file-upload-dialog-button-***REMOVED*** echo $timestamp; ?>">Upload</button>
-	<button style="font-size: 12px;" class="btn btn-primary" onclick="document.getElementById('ibm-sbt-communities-upload-dialog-***REMOVED*** echo $timestamp; ?>').style.display='none';">Cancel</button>
+	<button style="font-size: 12px;" class="btn btn-primary" id="ibm-sbt-communities-file-upload-dialog-button-***REMOVED*** echo $timestamp; ?>">***REMOVED*** echo get_string('upload', 'block_ibmsbt');?></button>
+	<button style="font-size: 12px;" class="btn btn-primary" onclick="document.getElementById('ibm-sbt-communities-upload-dialog-***REMOVED*** echo $timestamp; ?>').style.display='none';">***REMOVED*** echo get_string('close', 'block_ibmsbt');?></button>
 	<br/>
 </div>
 <div id="ibm-sbt-community-files-error-***REMOVED*** echo $timestamp; ?>" style="display: none;" class="alert alert-error"></div>
@@ -34,7 +34,7 @@
 <span style="display: none; font-size: 12px;" id="ibm-sbt-community-files-success-***REMOVED*** echo $timestamp; ?>"></span><br/><br/>
 <script type="text/template" id="fileRow-***REMOVED*** echo $timestamp; ?>">
 <tr style="padding-bottom: 0.3em; font-size: 12px;">
-	<td style="width:100%;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inline-block; padding-left: 10px;">
+	<td style="width:15em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inline-block; padding-left: 10px;">
 			<span dojoAttachPoint="placeLinkNode">
 				<a href="javascript: void(0)" target="_self" title="${title}" dojoAttachPoint="placeTitleLink" data-dojo-attach-event="onclick: handleClick">${title}</a>
 			</span>

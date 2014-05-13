@@ -79,7 +79,6 @@ class block_ibmsbt extends block_base {
 					return;
 				}
 			}
-
 			// Check if token expired. If yes, clear the credential store and load login display
 			if (($settings->getAuthenticationMethod($this->config->endpoint) == 'oauth1' 
 					|| $settings->getAuthenticationMethod($this->config->endpoint) == 'oauth2') && $store->getOAuthAccessToken($this->config->endpoint) != null) {
@@ -109,7 +108,7 @@ class block_ibmsbt extends block_base {
 					|| $settings->getAuthenticationMethod($this->config->endpoint) == 'oauth2') && $store->getOAuthAccessToken($this->config->endpoint) == null &&
 			(!isset($_COOKIE['IBMSBTKOAuthLogin']) || $_COOKIE['IBMSBTKOAuthLogin'] != 'yes')) {
 				if (isloggedin() === false || !isset($USER->id) || $USER->id === null) {
-					echo "This widget uses single-sign on. Please log into Moodle.";
+					print get_string('please_login', 'block_ibmsbt');
 				} else {
 					require $blockPath . '/core/views/oauth-login-display.php';
 				}
@@ -145,7 +144,7 @@ class block_ibmsbt extends block_base {
 					|| $settings->getBasicAuthMethod($this->config->endpoint) == 'profile' )
 					&& $store->getBasicAuthUsername($this->config->endpoint) == null ) {
 				if (!isloggedin()) {
-					echo 'This widget uses single-sign on. Please log into Moodle.';
+					print get_string('please_login', 'block_ibmsbt');
 					echo '</div>';
 					$this->content->text = ob_get_clean();
 					return $this->content;
@@ -166,11 +165,11 @@ class block_ibmsbt extends block_base {
 			
 			echo '</div>';
 			if (!isloggedin()) {
-				echo 'This widget uses single-sign on. Please log into Moodle.';
+				print get_string('please_login', 'block_ibmsbt');
 			}
 			$this->content->text = ob_get_clean();
 		} else {
-			$this->content->text = 'This widget uses single-sign on. Please log into Moodle.';
+			$this->content->text = get_string('please_login', 'block_ibmsbt');
 		}
 		return $this->content;
 	}
@@ -182,7 +181,7 @@ class block_ibmsbt extends block_base {
 		if (! empty ( $this->config->title )) {
 			$this->title = $this->config->title;
 		} else {
-			$this->config->title = 'Default title ...';
+			$this->config->title = get_string('default_title', 'block_ibmsbt');
 		}
 		
 		if (empty ( $this->config->text )) {

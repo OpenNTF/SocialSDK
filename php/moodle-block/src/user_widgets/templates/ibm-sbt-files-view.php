@@ -1,7 +1,7 @@
 <style>
 	.ibmsbtDialog {
   		background:white;
-    	z-index:5000; 
+    	z-index: 8000; 
     	-moz-box-shadow: 1px 0px 10px rgba(0, 0, 0, 0.7); 
     	-moz-border-radius: 6px; 
     	-webkit-border-radius: 6px; 
@@ -13,7 +13,7 @@
 
 <script type="text/template" id="filesViewRow<?php echo $timestamp; ?>">
 <tr>
-	<td style="width:160px;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inline-block; padding-left: 10px;">
+	<td style="width:15em;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inline-block; padding-left: 10px;">
 			<span dojoAttachPoint="placeLinkNode">
 				<input type="checkbox" data-dojo-attach-point="rowSelectionInput" data-dojo-attach-event="onclick: handleCheckBox" />
 				<a href="javascript: void(0)" target="_self" title="${tooltip}" dojoAttachPoint="placeTitleLink" data-dojo-attach-event="onclick: handleClick">${title}</a>

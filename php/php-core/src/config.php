@@ -14,9 +14,5 @@
 * implied. See the License for the specific language governing
 * permissions and limitations under the License.
 */
-/**
- * @author Benjamin Jakobus
- */
 
-$plugin->version = 201405131644;  // YYYYMMDDHHSS (year, month, day, 24-hr time)
-$plugin->requires = 2010112400; // YYYYMMDDHH (This is the release version for Moodle 2.0)
+// Add your configuration files here

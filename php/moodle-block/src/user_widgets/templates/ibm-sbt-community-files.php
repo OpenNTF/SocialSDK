@@ -17,7 +17,7 @@
 </style>
 <button style="font-size: 12px;" class="btn btn-primary" onclick="document.getElementById('ibm-sbt-communities-upload-dialog-<?php echo $timestamp; ?>').style.display='block';">Upload</button>
 <br/>
-<span style="font-size: 12px;">Select your community:</span>
+<span style="font-size: 12px;"><?php echo get_string('select_community', 'block_ibmsbt');?></span>
 <select style="font-size: 12px;" id="ibm-sbt-communities-<?php echo $timestamp; ?>" onchange="onCommunityChange<?php echo $timestamp; ?>();"></select>
 <br />
 <div id="ibm-sbt-community-files-list-<?php echo $timestamp; ?>"></div>
@@ -25,8 +25,8 @@
 <div class="ibmsbtCommunityFileUploadDialog" id="ibm-sbt-communities-upload-dialog-<?php echo $timestamp; ?>">
 	<input style="font-size: 12px;" type="file" id="ibm-sbt-community-files-<?php echo $timestamp; ?>" accept="image/*"></input>
 	<br/>
-	<button style="font-size: 12px;" class="btn btn-primary" id="ibm-sbt-communities-file-upload-dialog-button-<?php echo $timestamp; ?>">Upload</button>
-	<button style="font-size: 12px;" class="btn btn-primary" onclick="document.getElementById('ibm-sbt-communities-upload-dialog-<?php echo $timestamp; ?>').style.display='none';">Cancel</button>
+	<button style="font-size: 12px;" class="btn btn-primary" id="ibm-sbt-communities-file-upload-dialog-button-<?php echo $timestamp; ?>"><?php echo get_string('upload', 'block_ibmsbt');?></button>
+	<button style="font-size: 12px;" class="btn btn-primary" onclick="document.getElementById('ibm-sbt-communities-upload-dialog-<?php echo $timestamp; ?>').style.display='none';"><?php echo get_string('close', 'block_ibmsbt');?></button>
 	<br/>
 </div>
 <div id="ibm-sbt-community-files-error-<?php echo $timestamp; ?>" style="display: none;" class="alert alert-error"></div>

@@ -6,15 +6,15 @@ global $CFG;
 require_once $CFG->dirroot . '/blocks/ibmsbt/user_widgets/templates/ibm-sbt-files-grid-row.php';
 ?>
 <select style="font-size: 12px;" id="ibm-sbt-files-list-<?php echo $timestamp; ?>" onchange="onTypeChange<?php echo $timestamp; ?>();">
-	<option value="myFiles">My files</option>
-	<option value="publicFiles">Public files</option>
-	<option value="myPinnedFiles">My pinned files</option>
-	<option value="myFolders">My folders</option>
-	<option value="publicFolders">Public folders</option>
-	<option value="myPinnedFolders">My pinned folders</option>
-	<option value="activeFolders">Active folders</option>
-	<option value="sharedWithMe">Files shared with me</option>
-	<option value="sharedByMe">Files shared by me</option>
+	<option value="myFiles"><?php echo get_string('my_files', 'block_ibmsbt');?></option>
+	<option value="publicFiles"><?php echo get_string('public_files', 'block_ibmsbt');?></option>
+	<option value="myPinnedFiles"><?php echo get_string('my_pinned_files', 'block_ibmsbt');?></option>
+	<option value="myFolders"><?php echo get_string('my_folders', 'block_ibmsbt');?></option>
+	<option value="publicFolders"><?php echo get_string('public_folders', 'block_ibmsbt');?></option>
+	<option value="myPinnedFolders"><?php echo get_string('my_pinned_folders', 'block_ibmsbt');?></option>
+	<option value="activeFolders"><?php echo get_string('active_folders', 'block_ibmsbt');?></option>
+	<option value="sharedWithMe"><?php echo get_string('files_shared_with_me', 'block_ibmsbt');?></option>
+	<option value="sharedByMe"><?php echo get_string('files_shared_by_me', 'block_ibmsbt');?></option>
 </select>
 
 <div id="<?php echo $this->config->elementID;?>"></div>
@@ -46,7 +46,7 @@ function uploadFile(fileService, grid, dom) {
 		// additional paramertes to add file metadata			
 		visibility : privacy
 	}).then(function(file) {
-		displayMessage(dom, "File uploaded successfuly");
+		displayMessage(dom, "<?php echo get_string('successful_upload', 'block_ibmsbt');?>");
 		grid.update(null);
 		document.getElementById('ibm-sbt-upload-dialog-<?php echo $timestamp; ?>').style.display='none';
 		dom.byId("ibm-sbt-loading-<?php echo $timestamp; ?>").style.display = "none";

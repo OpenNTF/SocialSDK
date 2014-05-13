@@ -1,7 +1,7 @@
 <style>
 	.ibmsbtFileUploadDialog {
-  		background:white;
-    	z-index:5000; 
+  		background: white;
+    	z-index: 8000; 
     	-moz-box-shadow: 1px 0px 10px rgba(0, 0, 0, 0.7); 
     	-moz-border-radius: 6px; 
     	-webkit-border-radius: 6px; 
@@ -17,16 +17,16 @@
 </style>
 
 <div class="ibmsbtFileUploadDialog" id="ibm-sbt-upload-dialog-<?php echo $timestamp; ?>" style="font-size: 12px;">
-	<h1>Upload a file</h1><br/><br/>
+	<h1><?php echo get_string('upload_file', 'block_ibmsbt');?></h1><br/><br/>
 	<input type="file" id="ibm-sbt-file-<?php echo $timestamp; ?>"/>
-	<input checked="checked" type="radio" id="ibm-sbt-file-privacy-public-<?php echo $timestamp; ?>" name="ibm-sbt-file-privacy-<?php echo $timestamp; ?>" value="public"/>Public
-	<input type="radio" id="ibm-sbt-file-privacy-private-<?php echo $timestamp; ?>" name="ibm-sbt-file-privacy-<?php echo $timestamp; ?>" value="private"/>Private
+	<input checked="checked" type="radio" id="ibm-sbt-file-privacy-public-<?php echo $timestamp; ?>" name="ibm-sbt-file-privacy-<?php echo $timestamp; ?>" value="public"/><?php echo get_string('public', 'block_ibmsbt');?>
+	<input type="radio" id="ibm-sbt-file-privacy-private-<?php echo $timestamp; ?>" name="ibm-sbt-file-privacy-<?php echo $timestamp; ?>" value="private"/><?php echo get_string('private', 'block_ibmsbt');?>
 	<br/><br/>
-	<button style="font-size: 12px;" class="btn btn-primary" id="ibm-sbt-upload-button-<?php echo $timestamp; ?>">Upload File</button>
-	<button style="font-size: 12px;" class="btn btn-primary" onclick="document.getElementById('ibm-sbt-upload-dialog-<?php echo $timestamp; ?>').style.display='none';">Close</button>
+	<button style="font-size: 12px;" class="btn btn-primary" id="ibm-sbt-upload-button-<?php echo $timestamp; ?>"><?php echo get_string('upload_file', 'block_ibmsbt');?></button>
+	<button style="font-size: 12px;" class="btn btn-primary" onclick="document.getElementById('ibm-sbt-upload-dialog-<?php echo $timestamp; ?>').style.display='none';"><?php echo get_string('close', 'block_ibmsbt');?></button>
 </div>
-<button style="font-size: 12px;" class="btn btn-primary" onclick="document.getElementById('ibm-sbt-upload-dialog-<?php echo $timestamp; ?>').style.display='block';" id="ibm-sbt-upload-button-<?php echo $timestamp; ?>">Upload File</button>
-<button style="font-size: 12px;" class="btn btn-primary" onclick="window.open('<?php echo $settings->getURL($this->config->endpoint);?>/files/app#', '_blank');">Open Files</button><br/><br/>
+<button style="font-size: 12px;" class="btn btn-primary" onclick="document.getElementById('ibm-sbt-upload-dialog-<?php echo $timestamp; ?>').style.display='block';" id="ibm-sbt-upload-button-<?php echo $timestamp; ?>"><?php echo get_string('upload_file', 'block_ibmsbt');?></button>
+<button style="font-size: 12px;" class="btn btn-primary" onclick="window.open('<?php echo $settings->getURL($this->config->endpoint);?>/files/app#', '_blank');"><?php echo get_string('open_files', 'block_ibmsbt');?></button><br/><br/>
 
 <div style="font-size: 12px;"><strong id="ibm-sbt-success-<?php echo $timestamp; ?>"></strong></div>
 <div style="font-size: 12px;"><strong style="color: red;" id="ibm-sbt-error-<?php echo $timestamp; ?>"></strong></div>

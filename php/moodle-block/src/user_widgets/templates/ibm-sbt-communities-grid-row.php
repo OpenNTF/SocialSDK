@@ -26,15 +26,15 @@
 		<div id="ibm-sbt-error-<?php echo $timestamp; ?>" style="display:none;" class="alert alert-error"></div>
 		<table>
 			<tr>
-				<td><label class="control-label" for="ibm-sbt-community-title-<?php echo $timestamp; ?>">Title:</label></td>
+				<td><label class="control-label" for="ibm-sbt-community-title-<?php echo $timestamp; ?>"><?php echo get_string('title', 'block_ibmsbt');?>:</label></td>
 				<td><input id="ibm-sbt-community-title-<?php echo $timestamp; ?>" type="text" /></td>
 			</tr>
 			<tr>
-				<td><label class="control-label" for="ibm-sbt-community-content-<?php echo $timestamp; ?>">Content:</label></td>
+				<td><label class="control-label" for="ibm-sbt-community-content-<?php echo $timestamp; ?>"><?php echo get_string('content', 'block_ibmsbt');?>:</label></td>
 				<td><input id="ibm-sbt-community-content-<?php echo $timestamp; ?>" type="text-<?php echo $timestamp; ?>" /></td>
 			</tr>
 			<tr>
-				<td><label class="control-label" for="ibm-sbt-community-tags-<?php echo $timestamp; ?>">Tags:</label></td>
+				<td><label class="control-label" for="ibm-sbt-community-tags-<?php echo $timestamp; ?>"><?php echo get_string('tags', 'block_ibmsbt');?>:</label></td>
 				<td><input id="ibm-sbt-community-tags-<?php echo $timestamp; ?>" type="text" /></td>
 			</tr>
 		</table>

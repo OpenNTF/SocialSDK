@@ -44,10 +44,6 @@ define(["../../../declare",
     	 */
         _nls: nls,
         
-        pinFiles: false,
-        pinnedClass: "lconnSprite lconnSprite-iconPinned16-on",
-        unPinnedClass: "lconnSprite lconnSprite-iconPinned16-off",
-    
          /**
           * @method constructor
           * @param args, setting args.type, will set the appropriate template
@@ -228,15 +224,6 @@ define(["../../../declare",
             } else {
                 return stringUtil.replace(this._nls.nLikes, item);
             }
-        },
-        
-        pinFileOnOrOff: function(grid, item, i, items){
-        	if(!this.pinFiles){
-        		return "";
-        	}else if (this.pinFiles){
-        		return this.unPinnedClass;
-        	}
-        	
         },
         
         getUserProfileHref: function(grid,item,i,items){

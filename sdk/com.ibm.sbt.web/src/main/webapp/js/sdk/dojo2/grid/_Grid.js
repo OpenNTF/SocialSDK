@@ -17,15 +17,15 @@
 /**
  * 
  */
-define([ "../../declare", "../../store/AtomStore", "dojo/_base/lang", "dojo/_base/Deferred", "../../widget/_TemplatedWidget"], 
-        function(declare, AtomStore, lang, Deferred, _TemplatedWidget) {
+define([ "../../declare", "../../store/AtomStore", "dojo/_base/lang", "dojo/_base/Deferred", "../../widget/_TemplatedWidget", "../../text!../../controls/grid/templates/Grid.html"], 
+        function(declare, AtomStore, lang, Deferred, _TemplatedWidget, GridTemplate) {
 
     /*
      * @module sbt._bridge.grid._Grid
      */
     var _Grid = declare([ _TemplatedWidget ], {
 
-        templatePath: require.toUrl("sbt/controls/grid/templates/Grid.html"),
+        templateString: GridTemplate,
         
         /*
          * Creates an instance of an atom store.

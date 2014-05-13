@@ -59,3 +59,6 @@ $string['general_config'] = 'General Configuration';
 $string['must_be_logged_in_message'] = 'You must be logged in to perform this action.';
 $string['only_admins_message'] = 'Only admins can perform this action.';
 $string['creating_community'] = 'Creating community';
+$string['create_community'] = 'Create Community';
+$string['create'] = 'Create';
+$string['open_communities'] = 'Open Communities';

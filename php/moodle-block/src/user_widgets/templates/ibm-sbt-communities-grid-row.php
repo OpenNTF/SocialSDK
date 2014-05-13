@@ -18,8 +18,8 @@
 </style>
 
 <div>
-	<button style="font-size: 12px;" class="btn btn-primary" onclick="document.getElementById('ibm-sbt-create-community-<?php echo $timestamp; ?>').style.display = 'block';">Create</button>
-	<button style="font-size: 12px;" class="btn btn-primary" onclick="window.open('<?php echo $settings->getURL($this->config->endpoint);?>/communities', '_blank');">Open Communities</button>
+	<button style="font-size: 12px;" class="btn btn-primary" onclick="document.getElementById('ibm-sbt-create-community-<?php echo $timestamp; ?>').style.display = 'block';"><?php echo get_string('create', 'block_ibmsbt');?></button>
+	<button style="font-size: 12px;" class="btn btn-primary" onclick="window.open('<?php echo $settings->getURL($this->config->endpoint);?>/communities', '_blank');"><?php echo get_string('open_communities', 'block_ibmsbt');?></button>
 	
 	<div class="ibmsbtCommunityDialog" id="ibm-sbt-create-community-<?php echo $timestamp; ?>" style="font-size: 12px;">
 		<div id="ibm-sbt-success-<?php echo $timestamp; ?>" display: none; font-weight: bold; color: green;"></div>
@@ -39,13 +39,13 @@
 			</tr>
 		</table>
 		<br/><br/>
-		<button class="btn btn-primary" id="ibm-sbt-create-community-button-<?php echo $timestamp; ?>">Create Community</button>
-		<button class="btn btn-primary" onclick="document.getElementById('ibm-sbt-create-community-<?php echo $timestamp; ?>').style.display = 'none';">Cancel</button>
+		<button class="btn btn-primary" id="ibm-sbt-create-community-button-<?php echo $timestamp; ?>"><?php echo get_string('create_community', 'block_ibmsbt');?></button>
+		<button class="btn btn-primary" onclick="document.getElementById('ibm-sbt-create-community-<?php echo $timestamp; ?>').style.display = 'none';"><?php echo get_string('close', 'block_ibmsbt');?></button>
 	</div>
 </div>
 <script type="text/template" id="communityRow-<?php echo $timestamp; ?>">
 <tr class="${rowClass}" style="font-size: 12px;">
-	<td style="width:100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inline-block; padding-left: 10px;">
+	<td style="width:15em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inline-block; padding-left: 10px;">
 			<span dojoAttachPoint="placeLinkNode">
 				<a href="javascript: void(0)" target="_self" title="${title}<br/>Tags: ${tags}" dojoAttachPoint="placeTitleLink" data-dojo-attach-event="onclick: handleClick">${title}</a>
 			</span>

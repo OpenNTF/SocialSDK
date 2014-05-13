@@ -50,7 +50,7 @@
 				out.println("date published :"+entry.getPublished());
 				out.println("date updated : "+entry.getUpdated());
 				out.println("author name : "+author.getName());
-				out.println("author state : "+author.getState());
+				out.println("author state : "+author.getUserState());
 				out.println("author email : "+author.getEmail());
 				out.println("author uid : "+author.getId());
 				out.println("forum title : "+entry.getTitle());

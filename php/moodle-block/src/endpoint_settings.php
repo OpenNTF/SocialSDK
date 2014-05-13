@@ -42,7 +42,7 @@ if (!defined('BASE_LOCATION')) {
 
 // Make sure that the user is authorized to perform the action
 if (!isloggedin() && !defined('IBM_SBT_TEST')) {
-	echo "You must be logged in to perform this action.";
+	echo get_string('must_be_logged_in_message', 'block_ibmsbt');
 	return;
 }
 
@@ -55,7 +55,7 @@ foreach ($admins as $admin) {
 	}
 }
 if (!$isadmin && !defined('IBM_SBT_TEST')) {
-	echo "Only admins can perform this action.";
+	echo get_string('only_admins_message', 'block_ibmsbt');
 	return;
 } 
 

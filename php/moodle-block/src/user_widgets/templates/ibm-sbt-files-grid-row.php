@@ -1,7 +1,7 @@
 <style>
 	.ibmsbtFileUploadDialog {
-  		background:white;
-    	z-index:5000; 
+  		background: white;
+    	z-index: 8000; 
     	-moz-box-shadow: 1px 0px 10px rgba(0, 0, 0, 0.7); 
     	-moz-border-radius: 6px; 
     	-webkit-border-radius: 6px; 
@@ -17,23 +17,23 @@
 </style>
 
 <div class="ibmsbtFileUploadDialog" id="ibm-sbt-upload-dialog-***REMOVED*** echo $timestamp; ?>" style="font-size: 12px;">
-	<h1>Upload a file</h1><br/><br/>
+	<h1>***REMOVED*** echo get_string('upload_file', 'block_ibmsbt');?></h1><br/><br/>
 	<input type="file" id="ibm-sbt-file-***REMOVED*** echo $timestamp; ?>"/>
-	<input checked="checked" type="radio" id="ibm-sbt-file-privacy-public-***REMOVED*** echo $timestamp; ?>" name="ibm-sbt-file-privacy-***REMOVED*** echo $timestamp; ?>" value="public"/>Public
-	<input type="radio" id="ibm-sbt-file-privacy-private-***REMOVED*** echo $timestamp; ?>" name="ibm-sbt-file-privacy-***REMOVED*** echo $timestamp; ?>" value="private"/>Private
+	<input checked="checked" type="radio" id="ibm-sbt-file-privacy-public-***REMOVED*** echo $timestamp; ?>" name="ibm-sbt-file-privacy-***REMOVED*** echo $timestamp; ?>" value="public"/>***REMOVED*** echo get_string('public', 'block_ibmsbt');?>
+	<input type="radio" id="ibm-sbt-file-privacy-private-***REMOVED*** echo $timestamp; ?>" name="ibm-sbt-file-privacy-***REMOVED*** echo $timestamp; ?>" value="private"/>***REMOVED*** echo get_string('private', 'block_ibmsbt');?>
 	<br/><br/>
-	<button style="font-size: 12px;" class="btn btn-primary" id="ibm-sbt-upload-button-***REMOVED*** echo $timestamp; ?>">Upload File</button>
-	<button style="font-size: 12px;" class="btn btn-primary" onclick="document.getElementById('ibm-sbt-upload-dialog-***REMOVED*** echo $timestamp; ?>').style.display='none';">Close</button>
+	<button style="font-size: 12px;" class="btn btn-primary" id="ibm-sbt-upload-button-***REMOVED*** echo $timestamp; ?>">***REMOVED*** echo get_string('upload_file', 'block_ibmsbt');?></button>
+	<button style="font-size: 12px;" class="btn btn-primary" onclick="document.getElementById('ibm-sbt-upload-dialog-***REMOVED*** echo $timestamp; ?>').style.display='none';">***REMOVED*** echo get_string('close', 'block_ibmsbt');?></button>
 </div>
-<button style="font-size: 12px;" class="btn btn-primary" onclick="document.getElementById('ibm-sbt-upload-dialog-***REMOVED*** echo $timestamp; ?>').style.display='block';" id="ibm-sbt-upload-button-***REMOVED*** echo $timestamp; ?>">Upload File</button>
-<button style="font-size: 12px;" class="btn btn-primary" onclick="window.open('***REMOVED*** echo $settings->getURL($this->config->endpoint);?>/files/app#', '_blank');">Open Files</button><br/><br/>
+<button style="font-size: 12px;" class="btn btn-primary" onclick="document.getElementById('ibm-sbt-upload-dialog-***REMOVED*** echo $timestamp; ?>').style.display='block';" id="ibm-sbt-upload-button-***REMOVED*** echo $timestamp; ?>">***REMOVED*** echo get_string('upload_file', 'block_ibmsbt');?></button>
+<button style="font-size: 12px;" class="btn btn-primary" onclick="window.open('***REMOVED*** echo $settings->getURL($this->config->endpoint);?>/files/app#', '_blank');">***REMOVED*** echo get_string('open_files', 'block_ibmsbt');?></button><br/><br/>
 
 <div style="font-size: 12px;"><strong id="ibm-sbt-success-***REMOVED*** echo $timestamp; ?>"></strong></div>
 <div style="font-size: 12px;"><strong style="color: red;" id="ibm-sbt-error-***REMOVED*** echo $timestamp; ?>"></strong></div>
 <img id="ibm-sbt-loading-***REMOVED*** echo $timestamp; ?>" style="display: none;" src="***REMOVED*** echo $CFG->wwwroot; ?>/blocks/ibmsbt/user_widgets/templates/assets/loading_small.gif" />
 <script type="text/template" id="fileRow-***REMOVED*** echo $timestamp; ?>">
 <tr style="padding-bottom: 0.3em; font-size: 12px;">
-	<td style="width:100%;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inline-block; padding-left: 10px;">
+	<td style="width:15em;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inline-block; padding-left: 10px;">
 			<span dojoAttachPoint="placeLinkNode">
 				<a href="javascript: void(0)" target="_self" title="${title}" dojoAttachPoint="placeTitleLink" data-dojo-attach-event="onclick: handleClick">${title}</a>
 			</span>

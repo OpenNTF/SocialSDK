@@ -1,7 +1,7 @@
 <style>
 	.ibmsbtDialog {
   		background:white;
-    	z-index:5000; 
+    	z-index: 8000; 
     	-moz-box-shadow: 1px 0px 10px rgba(0, 0, 0, 0.7); 
     	-moz-border-radius: 6px; 
     	-webkit-border-radius: 6px; 

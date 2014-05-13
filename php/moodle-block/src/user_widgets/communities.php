@@ -64,7 +64,7 @@ require_once $CFG->dirroot . '/blocks/ibmsbt/user_widgets/templates/ibm-sbt-comm
 	
 	        dom.byId("ibm-sbt-success-***REMOVED*** echo $timestamp; ?>").style.display = "block";
 	        dom.byId("ibm-sbt-error-***REMOVED*** echo $timestamp; ?>").style.display = "none";
-	        dom.setText("ibm-sbt-success-***REMOVED*** echo $timestamp; ?>", "Creating community...");
+	        dom.setText("ibm-sbt-success-***REMOVED*** echo $timestamp; ?>", "***REMOVED*** echo get_string('creating_community', 'block_ibmsbt'); ?>...");
 	
 	        communityService.createCommunity(community).then(  
 	                function(community) { 

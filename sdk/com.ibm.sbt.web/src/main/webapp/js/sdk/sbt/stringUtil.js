@@ -118,6 +118,12 @@ define(['./xml'], function(xml) {
                 hash |= 0;
             }
             return hash;
+        },
+        
+        htmlEntity : function(htmlContent){
+        	return htmlContent.replace(/[\u00A0-\u9999<>\&]/gim, function(c) {
+        		   return '&#'+c.charCodeAt(0)+';';
+        	});
         }
 
 	};

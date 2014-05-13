@@ -293,7 +293,7 @@ define([ "../declare", "../lang", "../stringUtil", "./BaseConstants", "./BaseEnt
         createTitle : function() {
         	var title = this.getTitle();
         	if (title) {
-        		return stringUtil.transform(TitleTmpl, { "title" : title });
+        		return stringUtil.transform(TitleTmpl, { "title" : stringUtil.htmlEntity(title) });
         	}
         	return "";
         },

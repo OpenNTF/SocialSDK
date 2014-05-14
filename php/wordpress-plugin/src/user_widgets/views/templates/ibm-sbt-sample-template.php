@@ -4,8 +4,6 @@
 }
 
 .sampleWidget h1 {
-	font-family: 'Sofia', cursive;
-	font: normal 18px Sofia, serif;
 	text-align:center;
 	padding:20px 0;
 }

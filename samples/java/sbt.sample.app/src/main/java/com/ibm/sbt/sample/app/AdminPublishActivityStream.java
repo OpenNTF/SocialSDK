@@ -160,7 +160,7 @@ public class AdminPublishActivityStream {
             AdminPublishActivityStream paas = new AdminPublishActivityStream();
             JsonJavaObject template;
             try {
-                paas.getEndpoint().login("admin", "***REMOVED***");
+                paas.getEndpoint().login("admin", "passw0rd");
                 template = paas.mergeData(args[0], args[1]);
                 String streamEntry = paas.postToStream(template);
                 if(streamEntry != null)

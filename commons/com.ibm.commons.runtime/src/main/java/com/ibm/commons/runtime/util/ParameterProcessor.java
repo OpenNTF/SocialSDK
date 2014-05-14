@@ -356,7 +356,7 @@ public class ParameterProcessor {
         final Map<String, String> params = new HashMap<String, String>();
         params.put("name1", "value1");
         params.put("name2", "value2");
-        params.put("sample.email1", "***REMOVED***@renovations.com");
+        params.put("sample.email1", "fadams@renovations.com");
         
         ParameterProvider provider = new ParameterProvider() {
             @Override
@@ -401,7 +401,7 @@ public class ParameterProcessor {
         }
         
         String input5 = "require(['sbt/connections/ProfileService','sbt/dom'], function(ProfileService,dom) {\nvar email = '%{sample.email1}';\nvar svc = new ProfileService();";
-        String result5 = "require(['sbt/connections/ProfileService','sbt/dom'], function(ProfileService,dom) {\nvar email = '***REMOVED***@renovations.com';\nvar svc = new ProfileService();";;
+        String result5 = "require(['sbt/connections/ProfileService','sbt/dom'], function(ProfileService,dom) {\nvar email = 'fadams@renovations.com';\nvar svc = new ProfileService();";;
         String output5 = process(input5, provider);
         if (!result5.equals(output5)) {
             System.err.println("Example 5 failed: "+output5);

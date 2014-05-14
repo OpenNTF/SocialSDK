@@ -134,7 +134,7 @@
         <name><![CDATA[Content-Language]]></name>
         <value><![CDATA[en-US]]></value>
     </header></headers>
-<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?><entry xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:td="urn:ibm.com/td" xmlns="http://www.w3.org/2005/Atom"><id>urn:lsid:ibm.com:td:dd0be9d6-5843-41ea-a5e2-3757c8bec78d</id><td:uuid>dd0be9d6-5843-41ea-a5e2-3757c8bec78d</td:uuid><td:label>test file 1399642376729</td:label><link href="https://dev.sdkdemo.com:444/files/basic/api/library/29227af4-02db-42b2-92cb-df99260bf4f5/document/dd0be9d6-5843-41ea-a5e2-3757c8bec78d/entry" rel="self"></link><link href="https://dev.sdkdemo.com:444/files/app/file/dd0be9d6-5843-41ea-a5e2-3757c8bec78d" rel="alternate" type="text/html"></link><link href="https://dev.sdkdemo.com:444/files/basic/api/library/29227af4-02db-42b2-92cb-df99260bf4f5/document/dd0be9d6-5843-41ea-a5e2-3757c8bec78d/entry" rel="edit"></link><link href="https://dev.sdkdemo.com:444/files/basic/api/library/29227af4-02db-42b2-92cb-df99260bf4f5/document/dd0be9d6-5843-41ea-a5e2-3757c8bec78d/media" rel="edit-media"></link><link href="https://dev.sdkdemo.com:444/files/basic/anonymous/api/library/29227af4-02db-42b2-92cb-df99260bf4f5/document/dd0be9d6-5843-41ea-a5e2-3757c8bec78d/media/test%20file%201399642376729" rel="enclosure" type="binary/octet-stream" title="test file 1399642376729" hreflang="en" length="23"></link><link href="" rel="thumbnail"></link><category term="document" scheme="tag:ibm.com,2006:td/type" label="document"></category><link href="https://dev.sdkdemo.com:444/files/basic/api/library/29227af4-02db-42b2-92cb-df99260bf4f5/document/dd0be9d6-5843-41ea-a5e2-3757c8bec78d/feed" rel="replies" type="application/atom+xml" thr:count="0" xmlns:thr="http://purl.org/syndication/thread/1.0"></link><td:notifications><td:media>on</td:media><td:comment>on</td:comment></td:notifications><author><name>Frank Adams</name><snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid><email>***REMOVED***@renovations.com</email><snx:userState>active</snx:userState></author><title type="text">test file 1399642376729</title><published>2014-05-09T13:34:14.056Z</published><updated>2014-05-09T13:34:14.090Z</updated><td:created>2014-05-09T13:34:14.056Z</td:created><td:modified>2014-05-09T13:34:14.056Z</td:modified><td:lastAccessed></td:lastAccessed><td:modifier><name>Frank Adams</name><snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid><email>***REMOVED***@renovations.com</email><snx:userState>active</snx:userState></td:modifier><td:visibility>public</td:visibility><td:libraryId>29227af4-02db-42b2-92cb-df99260bf4f5</td:libraryId><td:libraryType>personalFiles</td:libraryType><td:versionUuid>2fa54f94-05b4-4ac4-bc3a-6d609be0f5da</td:versionUuid><td:versionLabel>1</td:versionLabel><td:propagation>true</td:propagation><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/share">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/collections">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/attachments">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/versions">1</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/references">0</snx:rank><td:totalMediaSize>23</td:totalMediaSize><summary type="text"></summary><content type="binary/octet-stream" src="https://dev.sdkdemo.com:444/files/basic/api/library/29227af4-02db-42b2-92cb-df99260bf4f5/document/dd0be9d6-5843-41ea-a5e2-3757c8bec78d/media"></content><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/anonymous_hit">0</snx:rank><td:restrictedVisibility>false</td:restrictedVisibility><td:objectTypeName>snx:file</td:objectTypeName><td:lock type="NONE"></td:lock></entry>]]></data>
+<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?><entry xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:td="urn:ibm.com/td" xmlns="http://www.w3.org/2005/Atom"><id>urn:lsid:ibm.com:td:dd0be9d6-5843-41ea-a5e2-3757c8bec78d</id><td:uuid>dd0be9d6-5843-41ea-a5e2-3757c8bec78d</td:uuid><td:label>test file 1399642376729</td:label><link href="https://dev.sdkdemo.com:444/files/basic/api/library/29227af4-02db-42b2-92cb-df99260bf4f5/document/dd0be9d6-5843-41ea-a5e2-3757c8bec78d/entry" rel="self"></link><link href="https://dev.sdkdemo.com:444/files/app/file/dd0be9d6-5843-41ea-a5e2-3757c8bec78d" rel="alternate" type="text/html"></link><link href="https://dev.sdkdemo.com:444/files/basic/api/library/29227af4-02db-42b2-92cb-df99260bf4f5/document/dd0be9d6-5843-41ea-a5e2-3757c8bec78d/entry" rel="edit"></link><link href="https://dev.sdkdemo.com:444/files/basic/api/library/29227af4-02db-42b2-92cb-df99260bf4f5/document/dd0be9d6-5843-41ea-a5e2-3757c8bec78d/media" rel="edit-media"></link><link href="https://dev.sdkdemo.com:444/files/basic/anonymous/api/library/29227af4-02db-42b2-92cb-df99260bf4f5/document/dd0be9d6-5843-41ea-a5e2-3757c8bec78d/media/test%20file%201399642376729" rel="enclosure" type="binary/octet-stream" title="test file 1399642376729" hreflang="en" length="23"></link><link href="" rel="thumbnail"></link><category term="document" scheme="tag:ibm.com,2006:td/type" label="document"></category><link href="https://dev.sdkdemo.com:444/files/basic/api/library/29227af4-02db-42b2-92cb-df99260bf4f5/document/dd0be9d6-5843-41ea-a5e2-3757c8bec78d/feed" rel="replies" type="application/atom+xml" thr:count="0" xmlns:thr="http://purl.org/syndication/thread/1.0"></link><td:notifications><td:media>on</td:media><td:comment>on</td:comment></td:notifications><author><name>Frank Adams</name><snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid><email>fadams@renovations.com</email><snx:userState>active</snx:userState></author><title type="text">test file 1399642376729</title><published>2014-05-09T13:34:14.056Z</published><updated>2014-05-09T13:34:14.090Z</updated><td:created>2014-05-09T13:34:14.056Z</td:created><td:modified>2014-05-09T13:34:14.056Z</td:modified><td:lastAccessed></td:lastAccessed><td:modifier><name>Frank Adams</name><snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid><email>fadams@renovations.com</email><snx:userState>active</snx:userState></td:modifier><td:visibility>public</td:visibility><td:libraryId>29227af4-02db-42b2-92cb-df99260bf4f5</td:libraryId><td:libraryType>personalFiles</td:libraryType><td:versionUuid>2fa54f94-05b4-4ac4-bc3a-6d609be0f5da</td:versionUuid><td:versionLabel>1</td:versionLabel><td:propagation>true</td:propagation><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/share">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/collections">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/attachments">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/versions">1</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/references">0</snx:rank><td:totalMediaSize>23</td:totalMediaSize><summary type="text"></summary><content type="binary/octet-stream" src="https://dev.sdkdemo.com:444/files/basic/api/library/29227af4-02db-42b2-92cb-df99260bf4f5/document/dd0be9d6-5843-41ea-a5e2-3757c8bec78d/media"></content><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/anonymous_hit">0</snx:rank><td:restrictedVisibility>false</td:restrictedVisibility><td:objectTypeName>snx:file</td:objectTypeName><td:lock type="NONE"></td:lock></entry>]]></data>
 </response>
 <response statusCode="200" statusReason="OK">
 <headers>
@@ -272,13 +272,13 @@
       <name>Frank Adams</name>
       <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
       <snx:userState>active</snx:userState>
-      <email>***REMOVED***@renovations.com</email>
+      <email>fadams@renovations.com</email>
     </author>
     <contributor>
       <name>Frank Adams</name>
       <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
       <snx:userState>active</snx:userState>
-      <email>***REMOVED***@renovations.com</email>
+      <email>fadams@renovations.com</email>
     </contributor>
     <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/activitystreams/urn:lsid:lconn.ibm.com:communities.community:d029137a-da7a-4bc5-b840-04a720fc45ff/@all/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/activitystream" type="application/atom+xml">
     </link>
@@ -334,13 +334,13 @@
       <name>Frank Adams</name>
       <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
       <snx:userState>active</snx:userState>
-      <email>***REMOVED***@renovations.com</email>
+      <email>fadams@renovations.com</email>
     </author>
     <contributor>
       <name>Frank Adams</name>
       <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
       <snx:userState>active</snx:userState>
-      <email>***REMOVED***@renovations.com</email>
+      <email>fadams@renovations.com</email>
     </contributor>
     <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/activitystreams/urn:lsid:lconn.ibm.com:communities.community:9ae832c6-eb96-4dba-bfc1-fb810d3d9794/@all/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/activitystream" type="application/atom+xml">
     </link>
@@ -396,13 +396,13 @@
       <name>Frank Adams</name>
       <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
       <snx:userState>active</snx:userState>
-      <email>***REMOVED***@renovations.com</email>
+      <email>fadams@renovations.com</email>
     </author>
     <contributor>
       <name>Frank Adams</name>
       <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
       <snx:userState>active</snx:userState>
-      <email>***REMOVED***@renovations.com</email>
+      <email>fadams@renovations.com</email>
     </contributor>
     <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/activitystreams/urn:lsid:lconn.ibm.com:communities.community:7430747b-b212-4c06-84f8-b78fc3c05e66/@all/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/activitystream" type="application/atom+xml">
     </link>
@@ -458,13 +458,13 @@
       <name>Frank Adams</name>
       <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
       <snx:userState>active</snx:userState>
-      <email>***REMOVED***@renovations.com</email>
+      <email>fadams@renovations.com</email>
     </author>
     <contributor>
       <name>Frank Adams</name>
       <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
       <snx:userState>active</snx:userState>
-      <email>***REMOVED***@renovations.com</email>
+      <email>fadams@renovations.com</email>
     </contributor>
     <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/activitystreams/urn:lsid:lconn.ibm.com:communities.community:1c5784c3-99c5-4bda-b327-92c73736a3bc/@all/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/activitystream" type="application/atom+xml">
     </link>
@@ -520,13 +520,13 @@
       <name>Frank Adams</name>
       <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
       <snx:userState>active</snx:userState>
-      <email>***REMOVED***@renovations.com</email>
+      <email>fadams@renovations.com</email>
     </author>
     <contributor>
       <name>Frank Adams</name>
       <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
       <snx:userState>active</snx:userState>
-      <email>***REMOVED***@renovations.com</email>
+      <email>fadams@renovations.com</email>
     </contributor>
     <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/activitystreams/urn:lsid:lconn.ibm.com:communities.community:3796fb05-50e2-4be6-bd5f-a1db4861a6cf/@all/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/activitystream" type="application/atom+xml">
     </link>
@@ -582,13 +582,13 @@
       <name>Frank Adams</name>
       <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
       <snx:userState>active</snx:userState>
-      <email>***REMOVED***@renovations.com</email>
+      <email>fadams@renovations.com</email>
     </author>
     <contributor>
       <name>Frank Adams</name>
       <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
       <snx:userState>active</snx:userState>
-      <email>***REMOVED***@renovations.com</email>
+      <email>fadams@renovations.com</email>
     </contributor>
     <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/activitystreams/urn:lsid:lconn.ibm.com:communities.community:770510a9-82eb-4bbe-a20d-f21343083a7c/@all/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/activitystream" type="application/atom+xml">
     </link>
@@ -644,13 +644,13 @@
       <name>Frank Adams</name>
       <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
       <snx:userState>active</snx:userState>
-      <email>***REMOVED***@renovations.com</email>
+      <email>fadams@renovations.com</email>
     </author>
     <contributor>
       <name>Frank Adams</name>
       <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
       <snx:userState>active</snx:userState>
-      <email>***REMOVED***@renovations.com</email>
+      <email>fadams@renovations.com</email>
     </contributor>
     <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/activitystreams/urn:lsid:lconn.ibm.com:communities.community:392b4ee5-ab7c-41b1-8e65-c7bdc7cc3aac/@all/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/activitystream" type="application/atom+xml">
     </link>
@@ -706,13 +706,13 @@
       <name>Frank Adams</name>
       <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
       <snx:userState>active</snx:userState>
-      <email>***REMOVED***@renovations.com</email>
+      <email>fadams@renovations.com</email>
     </author>
     <contributor>
       <name>Frank Adams</name>
       <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
       <snx:userState>active</snx:userState>
-      <email>***REMOVED***@renovations.com</email>
+      <email>fadams@renovations.com</email>
     </contributor>
     <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/activitystreams/urn:lsid:lconn.ibm.com:communities.community:88504982-0bc6-4f8b-b91a-ae55ce89859d/@all/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/activitystream" type="application/atom+xml">
     </link>
@@ -768,13 +768,13 @@
       <name>Frank Adams</name>
       <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
       <snx:userState>active</snx:userState>
-      <email>***REMOVED***@renovations.com</email>
+      <email>fadams@renovations.com</email>
     </author>
     <contributor>
       <name>Frank Adams</name>
       <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
       <snx:userState>active</snx:userState>
-      <email>***REMOVED***@renovations.com</email>
+      <email>fadams@renovations.com</email>
     </contributor>
     <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/activitystreams/urn:lsid:lconn.ibm.com:communities.community:88eca5ee-2dd7-4e2f-8d04-66d2eaacd4aa/@all/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/activitystream" type="application/atom+xml">
     </link>
@@ -830,13 +830,13 @@
       <name>Frank Adams</name>
       <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
       <snx:userState>active</snx:userState>
-      <email>***REMOVED***@renovations.com</email>
+      <email>fadams@renovations.com</email>
     </author>
     <contributor>
       <name>Frank Adams</name>
       <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
       <snx:userState>active</snx:userState>
-      <email>***REMOVED***@renovations.com</email>
+      <email>fadams@renovations.com</email>
     </contributor>
     <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/activitystreams/urn:lsid:lconn.ibm.com:communities.community:c336a891-7e87-4075-9f13-fe11239b31a0/@all/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/activitystream" type="application/atom+xml">
     </link>

@@ -15,24 +15,24 @@
   		padding: 2em 5em 5em 5em;
     }
 </style>
-<button style="font-size: 12px;" class="btn btn-primary" onclick="document.getElementById('ibm-sbt-communities-upload-dialog-***REMOVED*** echo $timestamp; ?>').style.display='block';">Upload</button>
+<button style="font-size: 12px;" class="btn btn-primary" onclick="document.getElementById('ibm-sbt-communities-upload-dialog-<?php echo $timestamp; ?>').style.display='block';">Upload</button>
 <br/>
-<span style="font-size: 12px;">***REMOVED*** echo get_string('select_community', 'block_ibmsbt');?></span>
-<select style="font-size: 12px;" id="ibm-sbt-communities-***REMOVED*** echo $timestamp; ?>" onchange="onCommunityChange***REMOVED*** echo $timestamp; ?>();"></select>
+<span style="font-size: 12px;"><?php echo get_string('select_community', 'block_ibmsbt');?></span>
+<select style="font-size: 12px;" id="ibm-sbt-communities-<?php echo $timestamp; ?>" onchange="onCommunityChange<?php echo $timestamp; ?>();"></select>
 <br />
-<div id="ibm-sbt-community-files-list-***REMOVED*** echo $timestamp; ?>"></div>
+<div id="ibm-sbt-community-files-list-<?php echo $timestamp; ?>"></div>
 
-<div class="ibmsbtCommunityFileUploadDialog" id="ibm-sbt-communities-upload-dialog-***REMOVED*** echo $timestamp; ?>">
-	<input style="font-size: 12px;" type="file" id="ibm-sbt-community-files-***REMOVED*** echo $timestamp; ?>" accept="image/*"></input>
+<div class="ibmsbtCommunityFileUploadDialog" id="ibm-sbt-communities-upload-dialog-<?php echo $timestamp; ?>">
+	<input style="font-size: 12px;" type="file" id="ibm-sbt-community-files-<?php echo $timestamp; ?>" accept="image/*"></input>
 	<br/>
-	<button style="font-size: 12px;" class="btn btn-primary" id="ibm-sbt-communities-file-upload-dialog-button-***REMOVED*** echo $timestamp; ?>">***REMOVED*** echo get_string('upload', 'block_ibmsbt');?></button>
-	<button style="font-size: 12px;" class="btn btn-primary" onclick="document.getElementById('ibm-sbt-communities-upload-dialog-***REMOVED*** echo $timestamp; ?>').style.display='none';">***REMOVED*** echo get_string('close', 'block_ibmsbt');?></button>
+	<button style="font-size: 12px;" class="btn btn-primary" id="ibm-sbt-communities-file-upload-dialog-button-<?php echo $timestamp; ?>"><?php echo get_string('upload', 'block_ibmsbt');?></button>
+	<button style="font-size: 12px;" class="btn btn-primary" onclick="document.getElementById('ibm-sbt-communities-upload-dialog-<?php echo $timestamp; ?>').style.display='none';"><?php echo get_string('close', 'block_ibmsbt');?></button>
 	<br/>
 </div>
-<div id="ibm-sbt-community-files-error-***REMOVED*** echo $timestamp; ?>" style="display: none;" class="alert alert-error"></div>
-<img id="ibm-sbt-loading-***REMOVED*** echo $timestamp; ?>" style="display: none;" src="***REMOVED*** echo $CFG->wwwroot; ?>/blocks/ibmsbt/user_widgets/templates/assets/loading_small.gif" />
-<span style="display: none; font-size: 12px;" id="ibm-sbt-community-files-success-***REMOVED*** echo $timestamp; ?>"></span><br/><br/>
-<script type="text/template" id="fileRow-***REMOVED*** echo $timestamp; ?>">
+<div id="ibm-sbt-community-files-error-<?php echo $timestamp; ?>" style="display: none;" class="alert alert-error"></div>
+<img id="ibm-sbt-loading-<?php echo $timestamp; ?>" style="display: none;" src="<?php echo $CFG->wwwroot; ?>/blocks/ibmsbt/user_widgets/templates/assets/loading_small.gif" />
+<span style="display: none; font-size: 12px;" id="ibm-sbt-community-files-success-<?php echo $timestamp; ?>"></span><br/><br/>
+<script type="text/template" id="fileRow-<?php echo $timestamp; ?>">
 <tr style="padding-bottom: 0.3em; font-size: 12px;">
 	<td style="width:15em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inline-block; padding-left: 10px;">
 			<span dojoAttachPoint="placeLinkNode">
@@ -41,7 +41,7 @@
 	</td>
 </tr>
 </script>
-<script type="text/template" id="pagingHeader-***REMOVED*** echo $timestamp; ?>">
+<script type="text/template" id="pagingHeader-<?php echo $timestamp; ?>">
 <div dojoAttachPoint="pagingHeader" style="font-size: 12px;">
 	<div>
 		<hr style="width:90%; left: -30px; border: 0; height: 1px;"/>
@@ -56,7 +56,7 @@
 			<span style="${hideNextLabel}">${nls.next}</span>
 </div>
 </script>
-<script type="text/template" id="pagingFooter-***REMOVED*** echo $timestamp; ?>" style="font-size: 12px;">
+<script type="text/template" id="pagingFooter-<?php echo $timestamp; ?>" style="font-size: 12px;">
 <div dojoattachpoint="pagingFooter" class="lotusPaging">
 		Show:
 			<a href="javascript: void(0)" title="${nls.show10Items}" aria-pressed="false"

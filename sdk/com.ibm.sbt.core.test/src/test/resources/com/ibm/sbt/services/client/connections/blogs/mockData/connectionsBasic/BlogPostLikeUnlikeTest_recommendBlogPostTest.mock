@@ -58,7 +58,7 @@
         <name><![CDATA[Content-Language]]></name>
         <value><![CDATA[en-US]]></value>
     </header></headers>
-<data><![CDATA[<?xml version="1.0"?><entry xmlns="http://www.w3.org/2005/Atom"><id>urn:lsid:ibm.com:blogs:person-EFD413BC-E572-760A-8625-7C6E00506453</id><title type="text">Frank Adams</title><summary type="text">Frank Adams</summary><updated>2014-02-10T16:50:17.017Z</updated><category term="person" scheme="http://www.ibm.com/xmlns/prod/sn/type"></category><contributor><name>Frank Adams</name><email>***REMOVED***@renovations.com</email><snx:userid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">EFD413BC-E572-760A-8625-7C6E00506453</snx:userid><snx:userState xmlns:snx="http://www.ibm.com/xmlns/prod/sn">active</snx:userState></contributor><link href="https://qs.renovations.com:444/blogs/roller-ui/rendering/api/TestHandle1392051005170/api/recommend/entries/c0c8d82a-a30d-4414-bd3f-1b59e11452c4/EFD413BC-E572-760A-8625-7C6E00506453" rel="self"></link></entry>]]></data>
+<data><![CDATA[<?xml version="1.0"?><entry xmlns="http://www.w3.org/2005/Atom"><id>urn:lsid:ibm.com:blogs:person-EFD413BC-E572-760A-8625-7C6E00506453</id><title type="text">Frank Adams</title><summary type="text">Frank Adams</summary><updated>2014-02-10T16:50:17.017Z</updated><category term="person" scheme="http://www.ibm.com/xmlns/prod/sn/type"></category><contributor><name>Frank Adams</name><email>fadams@renovations.com</email><snx:userid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">EFD413BC-E572-760A-8625-7C6E00506453</snx:userid><snx:userState xmlns:snx="http://www.ibm.com/xmlns/prod/sn">active</snx:userState></contributor><link href="https://qs.renovations.com:444/blogs/roller-ui/rendering/api/TestHandle1392051005170/api/recommend/entries/c0c8d82a-a30d-4414-bd3f-1b59e11452c4/EFD413BC-E572-760A-8625-7C6E00506453" rel="self"></link></entry>]]></data>
 </response>
 <response statusCode="200" statusReason="OK">
 <headers>
@@ -134,7 +134,7 @@
       <title type="text">Test Blog Post1392051005869</title>
       <author>
         <name>Frank Adams</name>
-                <email>***REMOVED***@renovations.com</email>
+                <email>fadams@renovations.com</email>
                 <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                 <snx:userState>active</snx:userState>
               </author>
@@ -304,7 +304,7 @@
       <title type="text">Test Blog Post1392051005869</title>
       <author>
         <name>Frank Adams</name>
-                <email>***REMOVED***@renovations.com</email>
+                <email>fadams@renovations.com</email>
                 <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                 <snx:userState>active</snx:userState>
               </author>

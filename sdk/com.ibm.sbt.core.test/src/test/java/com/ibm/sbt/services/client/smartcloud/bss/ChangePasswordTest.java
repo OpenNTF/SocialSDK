@@ -37,8 +37,8 @@ public class ChangePasswordTest extends BaseBssTest {
     		
     		UserCredentialJsonBuilder userCredential = new UserCredentialJsonBuilder();
     		userCredential.setLoginName(loginName)
-    					  .setNewPassword("new_***REMOVED***")
-    					  .setConfirmPassword("new_***REMOVED***");
+    					  .setNewPassword("new_passw0rd")
+    					  .setConfirmPassword("new_passw0rd");
     		
     		AuthenticationService authenticationService = getAuthenticationService();
     		authenticationService.changePassword(userCredential);
@@ -71,7 +71,7 @@ public class ChangePasswordTest extends BaseBssTest {
     		
     		UserCredentialJsonBuilder userCredential = new UserCredentialJsonBuilder();
     		userCredential.setLoginName(loginName)
-    					  .setNewPassword("one_time_***REMOVED***");
+    					  .setNewPassword("one_time_passw0rd");
     		System.out.println(userCredential.toJson());
     		
     		AuthenticationService authenticationService = getAuthenticationService();
@@ -79,9 +79,9 @@ public class ChangePasswordTest extends BaseBssTest {
     		
     		userCredential = new UserCredentialJsonBuilder();
     		userCredential.setLoginName(loginName)
-    					  .setOldPassword("one_time_***REMOVED***")
-    					  .setNewPassword("new_***REMOVED***")
-    					  .setConfirmPassword("new_***REMOVED***");
+    					  .setOldPassword("one_time_passw0rd")
+    					  .setNewPassword("new_passw0rd")
+    					  .setConfirmPassword("new_passw0rd");
     		
     		authenticationService.changePassword(userCredential);
     		

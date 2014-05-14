@@ -75,7 +75,7 @@
         	
     		UserCredentialJsonBuilder userCredential = new UserCredentialJsonBuilder();
     		userCredential.setLoginName(loginName)
-    					  .setNewPassword("one_time_***REMOVED***");
+    					  .setNewPassword("one_time_passw0rd");
     		
     		authenticationService.setOneTimePassword(userCredential);
 			

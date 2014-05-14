@@ -1,13 +1,13 @@
 
 <div id="grantAccessDiv">
 	<div class="alert alert-error" id="grantAccessErrorDiv" style="display: none;"></div>
-	<div id="desc">***REMOVED*** echo get_string('grant_access_message', 'block_ibmsbt'); ?></div>
-	<button class="btn btn-primary" id="grantAccessBtn" onclick="grantAccess()">***REMOVED*** echo get_string('grant_access', 'block_ibmsbt'); ?></button>
+	<div id="desc"><?php echo get_string('grant_access_message', 'block_ibmsbt'); ?></div>
+	<button class="btn btn-primary" id="grantAccessBtn" onclick="grantAccess()"><?php echo get_string('grant_access', 'block_ibmsbt'); ?></button>
 </div>
 
 <script type="text/javascript">
 	function grantAccess() {
-		***REMOVED*** 
+		<?php 
 			if (!isset($_SERVER['HTTPS']) || !$_SERVER['HTTPS']) {
 				echo "alert('" . get_string('cookie_policy', 'block_ibmsbt') . "');";
 				echo "return;";

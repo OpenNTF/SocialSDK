@@ -1,4 +1,4 @@
-***REMOVED***
+<?php
 ob_start();
 //change this to your path
 $path = '/home/benjamin/PHPWorkspace/wordpress-develop/tests/phpunit/includes/bootstrap.php';

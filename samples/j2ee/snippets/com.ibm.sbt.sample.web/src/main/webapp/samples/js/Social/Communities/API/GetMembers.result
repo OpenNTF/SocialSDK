@@ -57,13 +57,13 @@
             "role": "owner",
             "name": "Frank Adams",
             "userid": "0F19F8AD-37EA-6033-8525-7BBF005634B5",
-            "email": "***REMOVED***@renovations.com"
+            "email": "fadams@renovations.com"
         }
     },
     "getCommunityUuid": "a61f520b-31a9-4aa4-991b-265ca892896f",
     "getName": "Frank Adams",
     "getUserid": "0F19F8AD-37EA-6033-8525-7BBF005634B5",
-    "getEmail": "***REMOVED***@renovations.com",
+    "getEmail": "fadams@renovations.com",
     "getRole": "owner",
     "isLoaded": true
 },

@@ -1,4 +1,4 @@
-***REMOVED***
+<?php
 // A simple proxy for testing the OpenSearchStore
 // Note, this simple proxy requires a curl-enabled PHP install
 if(!$_GET['url']){ return; }

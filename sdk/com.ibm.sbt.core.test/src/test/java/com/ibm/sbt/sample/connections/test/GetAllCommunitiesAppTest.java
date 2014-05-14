@@ -30,7 +30,7 @@ public class GetAllCommunitiesAppTest extends BaseUnitTest {
     @Test
     public void testCommunitiesService() throws Exception {
         /*GetAllCommunitiesApp app = new GetAllCommunitiesApp("connections", false);
-        authenticateEndpoint(app.getEndpoint(), "***REMOVED***", "***REMOVED***");
+        authenticateEndpoint(app.getEndpoint(), "fadams", "passw0rd");
         Collection<Community> communities = app.getPublicCommunities();
         
         assertNotNull("Expected getPublicCommunities() not to be null", communities);

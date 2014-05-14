@@ -78,10 +78,10 @@
             ],
             "authorUserid": "0F19F8AD-37EA-6033-8525-7BBF005634B5",
             "authorName": "Frank Adams",
-            "authorEmail": "***REMOVED***@renovations.com",
+            "authorEmail": "fadams@renovations.com",
             "contributorUserid": "0F19F8AD-37EA-6033-8525-7BBF005634B5",
             "contributorName": "Frank Adams",
-            "contributorEmail": "***REMOVED***@renovations.com",
+            "contributorEmail": "fadams@renovations.com",
             "summary": "Test CommunityGetSave",
             "communityUrl": "https://qs.renovations.com:444/communities/service/html/communityview?communityUuid=81c878be-0273-4de7-bd61-560015c0fbf2",
             "logoUrl": "https://qs.renovations.com:444/communities/service/html/image?communityUuid=81c878be-0273-4de7-bd61-560015c0fbf2&lastMod=1381488409732",
@@ -101,12 +101,12 @@
     "getAuthor": {
         "authorUserid": "0F19F8AD-37EA-6033-8525-7BBF005634B5",
         "authorName": "Frank Adams",
-        "authorEmail": "***REMOVED***@renovations.com"
+        "authorEmail": "fadams@renovations.com"
     },
     "getContributor": {
         "contributorUserid": "0F19F8AD-37EA-6033-8525-7BBF005634B5",
         "contributorName": "Frank Adams",
-        "contributorEmail": "***REMOVED***@renovations.com"
+        "contributorEmail": "fadams@renovations.com"
     },
     "getSummary": "Test CommunityGetSave",
     "getCommunityUrl": "https://qs.renovations.com:444/communities/service/html/communityview?communityUuid=81c878be-0273-4de7-bd61-560015c0fbf2",
@@ -231,10 +231,10 @@
             ],
             "authorUserid": "0F19F8AD-37EA-6033-8525-7BBF005634B5",
             "authorName": "Frank Adams",
-            "authorEmail": "***REMOVED***@renovations.com",
+            "authorEmail": "fadams@renovations.com",
             "contributorUserid": "0F19F8AD-37EA-6033-8525-7BBF005634B5",
             "contributorName": "Frank Adams",
-            "contributorEmail": "***REMOVED***@renovations.com",
+            "contributorEmail": "fadams@renovations.com",
             "summary": "Test CommunityGetSave",
             "communityUrl": "https://qs.renovations.com:444/communities/service/html/communityview?communityUuid=81c878be-0273-4de7-bd61-560015c0fbf2",
             "logoUrl": "https://qs.renovations.com:444/communities/service/html/image?communityUuid=81c878be-0273-4de7-bd61-560015c0fbf2&lastMod=1381488409732",
@@ -254,12 +254,12 @@
     "getAuthor": {
         "authorUserid": "0F19F8AD-37EA-6033-8525-7BBF005634B5",
         "authorName": "Frank Adams",
-        "authorEmail": "***REMOVED***@renovations.com"
+        "authorEmail": "fadams@renovations.com"
     },
     "getContributor": {
         "contributorUserid": "0F19F8AD-37EA-6033-8525-7BBF005634B5",
         "contributorName": "Frank Adams",
-        "contributorEmail": "***REMOVED***@renovations.com"
+        "contributorEmail": "fadams@renovations.com"
     },
     "getSummary": "Test CommunityGetSave",
     "getCommunityUrl": "https://qs.renovations.com:444/communities/service/html/communityview?communityUuid=81c878be-0273-4de7-bd61-560015c0fbf2",
@@ -384,10 +384,10 @@
             ],
             "authorUserid": "0F19F8AD-37EA-6033-8525-7BBF005634B5",
             "authorName": "Frank Adams",
-            "authorEmail": "***REMOVED***@renovations.com",
+            "authorEmail": "fadams@renovations.com",
             "contributorUserid": "0F19F8AD-37EA-6033-8525-7BBF005634B5",
             "contributorName": "Frank Adams",
-            "contributorEmail": "***REMOVED***@renovations.com",
+            "contributorEmail": "fadams@renovations.com",
             "summary": "Test CommunityGetSave",
             "communityUrl": "https://qs.renovations.com:444/communities/service/html/communityview?communityUuid=81c878be-0273-4de7-bd61-560015c0fbf2",
             "logoUrl": "https://qs.renovations.com:444/communities/service/html/image?communityUuid=81c878be-0273-4de7-bd61-560015c0fbf2&lastMod=1381488409732",
@@ -407,12 +407,12 @@
     "getAuthor": {
         "authorUserid": "0F19F8AD-37EA-6033-8525-7BBF005634B5",
         "authorName": "Frank Adams",
-        "authorEmail": "***REMOVED***@renovations.com"
+        "authorEmail": "fadams@renovations.com"
     },
     "getContributor": {
         "contributorUserid": "0F19F8AD-37EA-6033-8525-7BBF005634B5",
         "contributorName": "Frank Adams",
-        "contributorEmail": "***REMOVED***@renovations.com"
+        "contributorEmail": "fadams@renovations.com"
     },
     "getSummary": "Test CommunityGetSave",
     "getCommunityUrl": "https://qs.renovations.com:444/communities/service/html/communityview?communityUuid=81c878be-0273-4de7-bd61-560015c0fbf2",

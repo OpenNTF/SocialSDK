@@ -37,7 +37,7 @@ public class ResetPasswordTest extends BaseBssTest {
     		
     		UserCredentialJsonBuilder userCredential = new UserCredentialJsonBuilder();
     		userCredential.setNewPassword("new_password")
-    					  .setConfirmPassword("new_***REMOVED***");
+    					  .setConfirmPassword("new_passw0rd");
     		
     		AuthenticationService authenticationService = getAuthenticationService();
     		authenticationService.changePassword(userCredential);

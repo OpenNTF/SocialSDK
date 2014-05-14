@@ -1,4 +1,4 @@
-***REMOVED***
+<?php
 /**
  * (C) Copyright IBM Corp. 2014
  *
@@ -42,7 +42,7 @@ function ibm_sbt_encrypt($key, $data, $iv){
 		$b = mcrypt_get_block_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC);
 		$enc = mcrypt_module_open(MCRYPT_RIJNDAEL_256, '', MCRYPT_MODE_CBC, '');
 		mcrypt_generic_init($enc, $key, $iv);
-		$***REMOVED*** $b - (strlen($data) % $b);
+		$dataPad = $b - (strlen($data) % $b);
 		$data .= str_repeat(chr($dataPad), $dataPad);
 	
 		$encrypted_data = mcrypt_generic($enc, $data);

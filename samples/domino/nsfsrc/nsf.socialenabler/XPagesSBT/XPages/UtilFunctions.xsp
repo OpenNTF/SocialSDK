@@ -42,11 +42,11 @@
 				</xp:tr>
 				<xp:tr>
 					<xp:td>
-					@IdentityFromId('facebook','***REMOVED***@facebook.com')
+					@IdentityFromId('facebook','fadams@facebook.com')
 					</xp:td>
 					<xp:td>
 						<xp:text escape="true" id="computedField3"
-							value="#{javascript:@IdFromIdentity('facebook','***REMOVED***@facebook.com')}">
+							value="#{javascript:@IdFromIdentity('facebook','fadams@facebook.com')}">
 						</xp:text>
 					</xp:td>
 				</xp:tr>

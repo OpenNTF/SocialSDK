@@ -112,13 +112,13 @@
     <name>Frank Adams</name>
     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
     <snx:userState>active</snx:userState>
-    <email>***REMOVED***@renovations.com</email>
+    <email>fadams@renovations.com</email>
   </author>
   <contributor>
     <name>Frank Adams</name>
     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
     <snx:userState>active</snx:userState>
-    <email>***REMOVED***@renovations.com</email>
+    <email>fadams@renovations.com</email>
   </contributor>
   <link href="https://dev.sdkdemo.com:444/connections/opensocial/rest/activitystreams/urn:lsid:lconn.ibm.com:communities.community:752e39c7-0660-47c2-9c34-469969787024/@all/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/activitystream" type="application/atom+xml">
   </link>

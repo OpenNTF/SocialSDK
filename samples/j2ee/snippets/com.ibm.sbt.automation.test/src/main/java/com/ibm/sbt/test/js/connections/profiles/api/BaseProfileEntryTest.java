@@ -40,7 +40,7 @@ public class BaseProfileEntryTest extends BaseApiTest {
         Assert.assertEquals("Frank Adams", json.getString("name"));
         Assert.assertEquals("FrankAdams@renovations.com", json.getString("email"));
         Assert.assertEquals("Frank Adams", json.getString("title"));
-        Assert.assertEquals("***REMOVED***@gmail.com", json.getString("altEmail"));
+        Assert.assertEquals("fadams@gmail.com", json.getString("altEmail"));
         Assert.assertEquals("https://qs.renovations.com:444/profiles/photo.do?key=e0b62b52-6a67-4489-b03b-4eb1f62c73e7&lastMod=1365182136427", json.getString("photoUrl"));
         Assert.assertEquals("Chief Operating Officer", json.getString("jobTitle"));
         Assert.assertEquals("<empty>", json.getString("organizationUnit"));
@@ -56,7 +56,7 @@ public class BaseProfileEntryTest extends BaseApiTest {
         Assert.assertEquals("<empty>", json.getString("countryName"));
         Assert.assertEquals("https://qs.renovations.com:444/profiles/audio.do?key=e0b62b52-6a67-4489-b03b-4eb1f62c73e7&lastMod=1365182136427", json.getString("soundUrl"));
         Assert.assertEquals("Profile information for Frank Adams", json.getString("summary"));
-        Assert.assertEquals("***REMOVED***@gmail.com", json.getString("groupwareMail"));
+        Assert.assertEquals("fadams@gmail.com", json.getString("groupwareMail"));
     }
 
 }

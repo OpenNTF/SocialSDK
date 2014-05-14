@@ -21,12 +21,27 @@ import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.base.ConnectionsConstants;
+import com.ibm.sbt.services.client.base.datahandlers.FieldEntry;
+import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 
 /**
  * @author mwallace
  *
  */
 public class ActivityNode extends NodeEntity {
+	
+	private InReplyTo inReplyTo;
+	private AssignedTo assignedTo;
+	
+	static public final String TYPE_ACTIVITY = "activity";
+	static public final String TYPE_CHAT = "chat";
+	static public final String TYPE_EMAIL = "email";
+	static public final String TYPE_ENTRY = "entry";
+	static public final String TYPE_ENTRY_TEMPLATE = "entrytemplate";
+	static public final String TYPE_REPLY = "reply";
+	static public final String TYPE_SECTION = "section";
+	static public final String TYPE_TODO = "todo";
 
 	/**
 	 * Default constructor
@@ -41,6 +56,16 @@ public class ActivityNode extends NodeEntity {
 	 */
 	public ActivityNode(ActivityService service) {
 		setService(service);
+	}
+
+	/**
+	 * Construct ActivityNode associated with the specified service
+	 * 
+	 * @param service
+	 */
+	public ActivityNode(ActivityService service, String activityUuid) {
+		setService(service);
+		setActivityUuid(activityUuid);
 	}
 
 	/**
@@ -76,5 +101,69 @@ public class ActivityNode extends NodeEntity {
 	public String getActivityUuid() {
 		return getAsString(ActivityXPath.activity);
 	}
+	
+	/**
+	 * Returns the details of the node this node is in reply to
+	 * @return
+	 */
+	public InReplyTo getInReplyTo() {
+		if (inReplyTo == null && getDataHandler() != null) {
+			inReplyTo = createInReplyTo((Node)getDataHandler().getData(), ActivityXPath.in_reply_to);
+		}
+		return inReplyTo;
+	}
+	
+	/**
+	 * Sets the details of the node this node is in reply to
+	 * 
+	 * @param href
+	 */
+	public void setInReplyTo(ActivityNode node) {
+		this.inReplyTo = new InReplyTo(node);
+	}
+	
+	/**
+	 * Sets the details of the node this node is in reply to
+	 * 
+	 * @param href
+	 */
+	public void setInReplyTo(InReplyTo inReplyTo) {
+		this.inReplyTo = inReplyTo;
+	}
+	
+	/**
+	 * Returns the details of the person this node is assigned to
+	 * @return
+	 */
+	public AssignedTo getAssignedTo() {
+		if (assignedTo == null) {
+			assignedTo = createAssignedTo((Node)getDataHandler().getData(), ActivityXPath.in_reply_to);
+		}
+		return assignedTo;
+	}
+	
+	/**
+	 * Sets the details of the person this node is assigned to
+	 * 
+	 * @param href
+	 */
+	public void setAssignedTo(AssignedTo assignedTo) {
+		this.assignedTo = assignedTo;
+	}
+	
+	/**
+	 * Create a InReplyTo to from the specified node
+	 */
+	protected AssignedTo createAssignedTo(Node node, FieldEntry fieldEntry) {
+		return new AssignedTo(getService(), new XmlDataHandler(node, ConnectionsConstants.nameSpaceCtx, (XPathExpression)fieldEntry.getPath()));
+	}
+
+	/**
+	 * Create a InReplyTo to from the specified node
+	 */
+	protected InReplyTo createInReplyTo(Node node, FieldEntry fieldEntry) {
+		return new InReplyTo(getService(), new XmlDataHandler(node, ConnectionsConstants.nameSpaceCtx, (XPathExpression)fieldEntry.getPath()));
+	}
+	
 	
 }

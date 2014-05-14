@@ -17,9 +17,9 @@
 <%@page import="java.util.Date"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.Activity"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.ActivityList"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.ActivityService"%>
+<%@page import="com.ibm.sbt.services.client.connections.activities.Activity"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
+<%@page import="com.ibm.sbt.services.client.connections.activities.ActivityService"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
@@ -40,11 +40,11 @@
 	<%
 	try {		
 		ActivityService activityService = new ActivityService();
-		ActivityList activities = activityService.getActivitiesInTrash();
+		EntityList<Activity> activities = activityService.getThrashedActivities();
 		if(activities != null && !activities.isEmpty()) { 
 			Activity activity = activities.get(0);
-			activityService.restoreActivity(activity.getActivityId());
-			out.println("Activity restored : " + activityService.getActivity(activity.getActivityId()).getTitle() );
+			activityService.restoreActivity(activity);
+			out.println("Activity restored : " + activityService.getActivity(activity.getActivityUuid()).getTitle() );
 		} else {
 			out.println("Trash is Empty. No Activity to restore");
 		}

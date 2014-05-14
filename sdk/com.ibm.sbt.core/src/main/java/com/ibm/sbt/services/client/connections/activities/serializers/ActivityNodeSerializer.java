@@ -18,12 +18,14 @@ package com.ibm.sbt.services.client.connections.activities.serializers;
 
 import static com.ibm.sbt.services.client.base.CommonConstants.APPLICATION_XML;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.ACTIVITY;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.ACTIVITY_NODE;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.CATEGORY;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.CONTENT;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.HREF;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.IN_REPLY_TO;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.LABEL;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.LABEL_ACTIVITYNODE;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.REF;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.SCHEME;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.SOURCE;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.TERM;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.TYPE;
 
@@ -33,6 +35,7 @@ import org.w3c.dom.Node;
 import com.ibm.sbt.services.client.base.ConnectionsConstants.Namespace;
 import com.ibm.sbt.services.client.base.serializers.AtomEntitySerializer;
 import com.ibm.sbt.services.client.connections.activities.ActivityNode;
+import com.ibm.sbt.services.client.connections.activities.InReplyTo;
 
 /**
  * @author mwallace
@@ -55,9 +58,10 @@ public class ActivityNodeSerializer extends AtomEntitySerializer<ActivityNode> {
 		Node entry = genericAtomEntry();
 		
 		appendChildren(entry,
-				title(),
 				activityNodeCategory(),
-				activityUuid()
+				activityUuid(),
+				flagsCategory(), 
+				inReplyTo()
 		);
 		
 		appendChildren(entry, tags());
@@ -69,8 +73,23 @@ public class ActivityNodeSerializer extends AtomEntitySerializer<ActivityNode> {
 	protected Element activityNodeCategory() {
 		return element(CATEGORY, 
 				attribute(SCHEME, Namespace.TYPE.getUrl()), 
-				attribute(TERM, ACTIVITY_NODE), 
-				attribute(LABEL, LABEL_ACTIVITYNODE));
+				attribute(TERM, entity.getType()));
+	}
+	
+	protected Element flagsCategory() {
+		return entity.getFlags() != null ? element(CATEGORY, 
+				attribute(SCHEME, Namespace.FLAGS.getUrl()), 
+				attribute(TERM, entity.getFlags()), 
+				attribute(LABEL, entity.getFlags())) : null;
+	}
+	
+	protected Element inReplyTo() {
+		InReplyTo inReplyTo = entity.getInReplyTo();
+		return inReplyTo != null ? element(IN_REPLY_TO, 
+				attribute(SCHEME, Namespace.THR.getUrl()),
+				attribute(REF, inReplyTo.getRef()),
+				attribute(SOURCE, inReplyTo.getSource()),
+				attribute(HREF, inReplyTo.getHref())) : null;
 	}
 	
 	protected Element activityUuid() {

@@ -14,9 +14,9 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<%@page import="com.ibm.sbt.services.client.connections.activity.Tag"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.TagList"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.ActivityService"%>
+<%@page import="com.ibm.sbt.services.client.connections.common.Tag"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
+<%@page import="com.ibm.sbt.services.client.connections.activities.ActivityService"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
@@ -37,7 +37,7 @@
 	<%
 	try {		
 		ActivityService activityService = new ActivityService();
-		TagList tags = activityService.getAllTags();
+		EntityList<Tag> tags = activityService.getActivityTags();
 		if(tags != null && ! tags.isEmpty()) {
 			for (Tag tag : tags) {
 				out.println(tag.getTerm());

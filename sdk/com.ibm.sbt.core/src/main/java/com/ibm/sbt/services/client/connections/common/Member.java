@@ -72,6 +72,20 @@ public class Member extends AtomEntity {
 	public Member(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
 		super(service, node, namespaceCtx, xpathExpression);
 	}
+	
+	@Override
+	public String getId() {
+		String id = super.getId();
+		if (id != null) {
+			if (id.lastIndexOf(':') != -1) {
+				id = id.substring(id.lastIndexOf(':') + 1);
+			}
+			if (id.lastIndexOf("memberid=") != -1) {
+				id = id.substring(id.lastIndexOf("memberid=") + 9);
+			}
+		}
+		return id;
+	}
 
 	/**
 	 * Sets the contributor from ATOM entry document.

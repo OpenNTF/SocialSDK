@@ -1,4 +1,4 @@
-***REMOVED***
+<?php
 /*
  * © Copyright IBM Corp. 2014
  *
@@ -51,11 +51,11 @@ class SBTSampleWidget extends SBTBaseGridWidget {
 		
 		?>
 			<p>
-				<label for="***REMOVED*** echo $this->get_field_id('ibm-sbtk-files-pin-file'); ?>">Pin file:</label> 
-				<input ***REMOVED*** echo ($pinFile ? 'checked="checked"' : ''); ?> id="***REMOVED*** echo $this->get_field_id('ibm-sbtk-files-pin-file'); ?>" name="***REMOVED*** echo $this->get_field_name('ibm-sbtk-files-pin-file'); ?>" type="checkbox" value="pin" />
+				<label for="<?php echo $this->get_field_id('ibm-sbtk-files-pin-file'); ?>">Pin file:</label> 
+				<input <?php echo ($pinFile ? 'checked="checked"' : ''); ?> id="<?php echo $this->get_field_id('ibm-sbtk-files-pin-file'); ?>" name="<?php echo $this->get_field_name('ibm-sbtk-files-pin-file'); ?>" type="checkbox" value="pin" />
 			</p>
 			
-		***REMOVED*** 
+		<?php 
 	}
 		
 	/**

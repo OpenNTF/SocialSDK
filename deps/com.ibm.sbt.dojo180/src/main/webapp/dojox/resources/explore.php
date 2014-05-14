@@ -1,4 +1,4 @@
-***REMOVED*** // IF you don't have PHP5 installed, you can't use this index! ?>
+<?php // IF you don't have PHP5 installed, you can't use this index! ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
 	"http://www.w3.org/TR/html4/strict.dtd">
 <html>
@@ -48,7 +48,7 @@
 			<tr class="top"><th rowspan="2">Test</th><th colspan="4">Tundra</th><th colspan="4">Nihilo</th><th colspan="4">Soria</th></tr>
 			<tr class="tests"><th>Normal</th><th>a11y</th><th>rtl</th><th>a11y + rtl<th>Normal</th><th>a11y</th><th>rtl</th><th>a11y + rtl<th>Normal</th><th>a11y</th><th>rtl</th><th>a11y + rtl</tr>
 		</thead>
-		<tbody>***REMOVED***
+		<tbody><?php
 
 			foreach(getprojects() as $project){
 				$note = "";
@@ -79,7 +79,7 @@
 		include theme / rtl / a11y testing capabilities.</p>
 </body>
 </html>
-***REMOVED***
+<?php
 
 function getprojects(){
 	$projects = array();

@@ -1,4 +1,4 @@
-***REMOVED***
+<?php
 /*
  * © Copyright IBM Corp. 2014
 *
@@ -101,16 +101,16 @@ class SBTPluginSettings extends BasePluginController
 		?>
         
         <div class="wrap">
-        	***REMOVED*** $this->pluginOptionsTabs(); ?>          
+        	<?php $this->pluginOptionsTabs(); ?>          
             <form method="post" action="#">
-            ***REMOVED***
+            <?php
                 settings_fields($tab);
                 do_settings_sections($tab);
                 submit_button();
             ?>
             </form>
         </div>
-        ***REMOVED***
+        <?php
     }
    
     /**

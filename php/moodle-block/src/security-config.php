@@ -1,4 +1,4 @@
-***REMOVED***
+<?php
 /**
  * (C) Copyright IBM Corp. 2014
  *

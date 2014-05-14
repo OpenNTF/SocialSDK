@@ -1,9 +1,9 @@
 
 
 <button id="actionBtn" href="javascript:;" role="button">Start a Forum</button>
-<div id="***REMOVED*** echo (isset($instance['ibm-sbtk-element-id']) ? $instance['ibm-sbtk-element-id'] : "myIBMElementID"); ?>"></div>
+<div id="<?php echo (isset($instance['ibm-sbtk-element-id']) ? $instance['ibm-sbtk-element-id'] : "myIBMElementID"); ?>"></div>
 
-***REMOVED*** 
+<?php 
 	if ((isset($instance['ibm-sbtk-template']) && $instance['ibm-sbtk-template'] != "")) {
 		require_once BASE_PATH . "{$instance['ibm-sbtk-template']}";
 	} else {
@@ -30,10 +30,10 @@ require(["sbt/dom",
 	        type : "my",
 	        hideSorter: false,
 	        hidePager: false,
-	        endpoint: "***REMOVED*** echo (isset($instance['ibm-sbtk-endpoint']) ? $instance['ibm-sbtk-endpoint'] : 'connections'); ?>",
+	        endpoint: "<?php echo (isset($instance['ibm-sbtk-endpoint']) ? $instance['ibm-sbtk-endpoint'] : 'connections'); ?>",
 	        rendererArgs : { template : ForumRow, pagerTemplate : PagingHeader, footerTemplate : PagingFooter}
 	    });
-	    dom.byId("***REMOVED*** echo (isset($instance['ibm-sbtk-element-id']) ? $instance['ibm-sbtk-element-id'] : "myIBMElementID"); ?>").appendChild(forumGrid.domNode);
+	    dom.byId("<?php echo (isset($instance['ibm-sbtk-element-id']) ? $instance['ibm-sbtk-element-id'] : "myIBMElementID"); ?>").appendChild(forumGrid.domNode);
 
 	    forumGrid.renderer.tableClass = "table";
 	    forumGrid.renderer.template = ForumRow;

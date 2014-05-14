@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-***REMOVED***
+<?php
 /*
 Copyright (c) 2003-2013, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.md or http://ckeditor.com/license
@@ -23,7 +23,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 				<th>Value</th>
 			</tr>
 		</thead>
-***REMOVED***
+<?php
 
 if (!empty($_POST))
 {
@@ -38,10 +38,10 @@ if (!empty($_POST))
 			$value = htmlspecialchars( (string)$value );
 ?>
 		<tr>
-			<th style="vertical-align: top">***REMOVED*** echo htmlspecialchars( (string)$key ); ?></th>
-			<td><pre class="samples">***REMOVED*** echo $value; ?></pre></td>
+			<th style="vertical-align: top"><?php echo htmlspecialchars( (string)$key ); ?></th>
+			<td><pre class="samples"><?php echo $value; ?></pre></td>
 		</tr>
-	***REMOVED***
+	<?php
 	}
 }
 ?>

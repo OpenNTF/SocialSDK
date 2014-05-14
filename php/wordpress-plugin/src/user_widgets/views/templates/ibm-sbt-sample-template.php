@@ -1,4 +1,3 @@
-<link href='http://fonts.googleapis.com/css?family=Sofia' rel='stylesheet' type='text/css'>
 <style>
 .sampleWidget {
 	background-color: #37FCFC;
@@ -16,7 +15,6 @@ tr:hover {
 }
         
 .sampleWidget {
-	font-family: 'Sofia', cursive, Sofia, serif; font-weight: 400; ;
 	text-align:center;
 	padding:20px 0;
 }

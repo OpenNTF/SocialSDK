@@ -1,4 +1,4 @@
-***REMOVED***
+<?php
 	require_once("./JSON.php");
 
 	$filename = "./logs/analytics.log";

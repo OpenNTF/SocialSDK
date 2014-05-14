@@ -34,7 +34,7 @@ define(['./declare', './lang', './config', './_bridge/Transport', './json'], fun
          *         [
          *             {
          *                 "from" : "sdary@renovations.com",
-         *                 "to" : ["***REMOVED***@renovations.com", "tamado@renovations.com"],
+         *                 "to" : ["fadams@renovations.com", "tamado@renovations.com"],
          *                 "cc" : ["pclemmons@renovations.com"],
          *                 "bcc" : [],
          *                 "subject" : "This is a test email",
@@ -66,7 +66,7 @@ define(['./declare', './lang', './config', './_bridge/Transport', './json'], fun
          *              },
          *              {
          *                     "from" : "sdaryn@renovations.com",
-         *                     "to" : ["***REMOVED***@renovations.com", "tamado@renovations.com"],
+         *                     "to" : ["fadams@renovations.com", "tamado@renovations.com"],
          *                     "subject": "This is a test email",
          *                     "mimeParts" : 
          *                         [

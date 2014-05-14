@@ -1,4 +1,4 @@
-***REMOVED*** 
+<?php 
 
 // Autoloader
 require_once '../autoload.php';

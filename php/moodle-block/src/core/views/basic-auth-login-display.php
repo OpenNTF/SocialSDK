@@ -20,27 +20,27 @@
 	
 	<div name="grantAccessDiv" style="display: none;">
         	<div class="alert alert-error" id="grantAccessErrorDiv" style="display: none;"></div>
-			<div id="desc">***REMOVED*** echo get_string('grant_access_message', 'block_ibmsbt'); ?></div>
-	    	<button class="btn btn-primary" name="grantAccessBtn">***REMOVED*** echo get_string('grant_access', 'block_ibmsbt'); ?></button>
+			<div id="desc"><?php echo get_string('grant_access_message', 'block_ibmsbt'); ?></div>
+	    	<button class="btn btn-primary" name="grantAccessBtn"><?php echo get_string('grant_access', 'block_ibmsbt'); ?></button>
 		</div>
 		
 		<div name="checkAccessDiv">
-			<div id="desc">***REMOVED*** echo get_string('check_grant_access_message', 'block_ibmsbt'); ?></div>
+			<div id="desc"><?php echo get_string('check_grant_access_message', 'block_ibmsbt'); ?></div>
 		</div>
 	
         <div name="accessGrantedDiv" style="display: none;">
-			<button class="btn btn-primary" name="logoutBtn">***REMOVED*** echo get_string('logout', 'block_ibmsbt'); ?></button>
+			<button class="btn btn-primary" name="logoutBtn"><?php echo get_string('logout', 'block_ibmsbt'); ?></button>
 		</div>
 		
 		<script type="text/javascript">
 		require([ "sbt/dom", "sbt/config" ],
 			
 			function(dom, config) {
-				var endpoint = config.findEndpoint("***REMOVED*** echo $this->config->endpoint; ?>");
+				var endpoint = config.findEndpoint("<?php echo $this->config->endpoint; ?>");
 
 				endpoint.isAuthenticationValid({	
 					"forceAuthentication": true, 
-					"actionUrl": "***REMOVED*** echo plugins_url(); ?>/index.php?classpath=services&class=Proxy&method=route&uid=***REMOVED*** global $USER; echo $USER->id?>&isAuthenticated=true"}).then(
+					"actionUrl": "<?php echo plugins_url(); ?>/index.php?classpath=services&class=Proxy&method=route&uid=<?php global $USER; echo $USER->id?>&isAuthenticated=true"}).then(
 						function(response) {
 							if (response.result) {
 								setWidgetsDisplay("block");
@@ -54,10 +54,10 @@
 			});
 		
 			function grantAccess(dom, config) {
-				var endpoint = config.findEndpoint("***REMOVED*** echo $this->config->endpoint; ?>");
+				var endpoint = config.findEndpoint("<?php echo $this->config->endpoint; ?>");
 				config.Properties["loginUi"] = "dialog";
 
-				***REMOVED*** 
+				<?php 
 					if (!isset($_SERVER['HTTPS']) || !$_SERVER['HTTPS']) {
 						echo "alert('" . get_string('cookie_policy', 'block_ibmsbt') . "');";
 						echo "return;";
@@ -65,7 +65,7 @@
 				?>
 
 				endpoint.authenticate({"forceAuthentication": true, 
-					"actionUrl": "***REMOVED*** echo plugins_url(); ?>/index.php?classpath=services&class=Proxy&method=route&uid=***REMOVED*** global $USER; echo $USER->id?>&isAuthenticated=true"}).then(
+					"actionUrl": "<?php echo plugins_url(); ?>/index.php?classpath=services&class=Proxy&method=route&uid=<?php global $USER; echo $USER->id?>&isAuthenticated=true"}).then(
 					function(response) {
 						location.reload();
 					},
@@ -98,8 +98,8 @@
         		for (var i = 0; i < logoutBtn.length; i++) {
   
         			logoutBtn[i].onclick = function(evt) {	
-        				var endpoint = config.findEndpoint("***REMOVED*** echo $this->config->endpoint; ?>");
-        				endpoint.logout({"actionUrl": "***REMOVED*** echo plugins_url(); ?>/index.php?classpath=services&class=Proxy&method=route&uid=***REMOVED*** global $USER; echo $USER->id?>&basicAuthLogout=true"}).then(
+        				var endpoint = config.findEndpoint("<?php echo $this->config->endpoint; ?>");
+        				endpoint.logout({"actionUrl": "<?php echo plugins_url(); ?>/index.php?classpath=services&class=Proxy&method=route&uid=<?php global $USER; echo $USER->id?>&basicAuthLogout=true"}).then(
         						function(response) {
         							displayGrantAccess(dom, config);
         							var logoutBtn = document.getElementsByName("logoutBtn");

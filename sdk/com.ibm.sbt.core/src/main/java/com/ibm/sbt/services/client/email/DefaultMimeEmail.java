@@ -51,7 +51,7 @@ public class DefaultMimeEmail extends AbstractMimeEmail implements MimeEmail {
      * Constructs a MIME email from a JSON object. The JSON object should follow the below model. <code>
      * 
      *   {
-     *     "to" : ["***REMOVED***@renovations.com", "tamado@renovations.com"],
+     *     "to" : ["fadams@renovations.com", "tamado@renovations.com"],
      *     "cc" : ["pclemmons@renovations.com"],
      *     "bcc" : [],
      *     "subject" : "This is a test email"

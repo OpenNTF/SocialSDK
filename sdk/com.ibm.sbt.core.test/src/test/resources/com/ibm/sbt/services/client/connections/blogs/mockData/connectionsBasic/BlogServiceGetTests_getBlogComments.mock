@@ -70,7 +70,7 @@
         <name><![CDATA[Content-Language]]></name>
         <value><![CDATA[en-US]]></value>
     </header></headers>
-<data><![CDATA[<?xml version="1.0"?><entry xmlns="http://www.w3.org/2005/Atom"><id>urn:lsid:ibm.com:blogs:blog-7ff667f2-690a-4612-a37f-c9ea2631fc57</id><link href="https://dev.sdkdemo.com:444/blogs/TestHandle1397818102646" rel="alternate" type="text/html"></link><link href="https://qs.renovations.com:444/blogs/homepage/api/blogs/7ff667f2-690a-4612-a37f-c9ea2631fc57" rel="edit" type="application/atom+xml"></link><snx:AllowCoedit enabled="no" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:AllowCoedit><title type="text">Test Blog1397818102646</title><summary type="text"> </summary><updated>2014-04-18T10:49:10.555Z</updated><app:edited xmlns:app="http://www.w3.org/2007/app">2014-04-18T10:49:10.555Z</app:edited><published>2014-04-18T10:49:10.555Z</published><snx:timezone xmlns:snx="http://www.ibm.com/xmlns/prod/sn">America/Chicago</snx:timezone><snx:locale xmlns:snx="http://www.ibm.com/xmlns/prod/sn">en_US</snx:locale><snx:handle xmlns:snx="http://www.ibm.com/xmlns/prod/sn">TestHandle1397818102646</snx:handle><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations" xmlns:snx="http://www.ibm.com/xmlns/prod/sn">0</snx:rank><app:control xmlns:app="http://www.w3.org/2007/app"><snx:comments enabled="yes" days="0" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:comments><snx:emailcomments enabled="disabled" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:emailcomments><snx:commentmoderated enabled="no" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:commentmoderated><snx:AllowCoedit enabled="no" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:AllowCoedit></app:control><author><name>Frank Adams</name><email>***REMOVED***@renovations.com</email><snx:userid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">EFD413BC-E572-760A-8625-7C6E00506453</snx:userid><snx:userState xmlns:snx="http://www.ibm.com/xmlns/prod/sn">active</snx:userState></author><category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type"></category></entry>]]></data>
+<data><![CDATA[<?xml version="1.0"?><entry xmlns="http://www.w3.org/2005/Atom"><id>urn:lsid:ibm.com:blogs:blog-7ff667f2-690a-4612-a37f-c9ea2631fc57</id><link href="https://dev.sdkdemo.com:444/blogs/TestHandle1397818102646" rel="alternate" type="text/html"></link><link href="https://qs.renovations.com:444/blogs/homepage/api/blogs/7ff667f2-690a-4612-a37f-c9ea2631fc57" rel="edit" type="application/atom+xml"></link><snx:AllowCoedit enabled="no" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:AllowCoedit><title type="text">Test Blog1397818102646</title><summary type="text"> </summary><updated>2014-04-18T10:49:10.555Z</updated><app:edited xmlns:app="http://www.w3.org/2007/app">2014-04-18T10:49:10.555Z</app:edited><published>2014-04-18T10:49:10.555Z</published><snx:timezone xmlns:snx="http://www.ibm.com/xmlns/prod/sn">America/Chicago</snx:timezone><snx:locale xmlns:snx="http://www.ibm.com/xmlns/prod/sn">en_US</snx:locale><snx:handle xmlns:snx="http://www.ibm.com/xmlns/prod/sn">TestHandle1397818102646</snx:handle><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations" xmlns:snx="http://www.ibm.com/xmlns/prod/sn">0</snx:rank><app:control xmlns:app="http://www.w3.org/2007/app"><snx:comments enabled="yes" days="0" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:comments><snx:emailcomments enabled="disabled" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:emailcomments><snx:commentmoderated enabled="no" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:commentmoderated><snx:AllowCoedit enabled="no" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></snx:AllowCoedit></app:control><author><name>Frank Adams</name><email>fadams@renovations.com</email><snx:userid xmlns:snx="http://www.ibm.com/xmlns/prod/sn">EFD413BC-E572-760A-8625-7C6E00506453</snx:userid><snx:userState xmlns:snx="http://www.ibm.com/xmlns/prod/sn">active</snx:userState></author><category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type"></category></entry>]]></data>
 </response>
 <response statusCode="200" statusReason="OK">
 <headers>
@@ -155,7 +155,7 @@
         <title type="text">Re: Test Blog Post1397818055805</title>
         <author>
           <name>Frank Adams</name>
-                    <email>***REMOVED***@renovations.com</email>
+                    <email>fadams@renovations.com</email>
                     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                   <snx:userState>active</snx:userState>
                 </author>
@@ -192,7 +192,7 @@
         <title type="text">Re: BlogPost at 1397817462822</title>
         <author>
           <name>Frank Adams</name>
-                    <email>***REMOVED***@renovations.com</email>
+                    <email>fadams@renovations.com</email>
                     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                   <snx:userState>active</snx:userState>
                 </author>
@@ -229,7 +229,7 @@
         <title type="text">Re: BlogPost at 1397817366464</title>
         <author>
           <name>Frank Adams</name>
-                    <email>***REMOVED***@renovations.com</email>
+                    <email>fadams@renovations.com</email>
                     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                   <snx:userState>active</snx:userState>
                 </author>
@@ -266,7 +266,7 @@
         <title type="text">Re: BlogPost at 1397817294735</title>
         <author>
           <name>Frank Adams</name>
-                    <email>***REMOVED***@renovations.com</email>
+                    <email>fadams@renovations.com</email>
                     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                   <snx:userState>active</snx:userState>
                 </author>
@@ -303,7 +303,7 @@
         <title type="text">Re: BlogPost at 1397817284835</title>
         <author>
           <name>Frank Adams</name>
-                    <email>***REMOVED***@renovations.com</email>
+                    <email>fadams@renovations.com</email>
                     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                   <snx:userState>active</snx:userState>
                 </author>
@@ -340,7 +340,7 @@
         <title type="text">Re: Updated Test Blog title</title>
         <author>
           <name>Frank Adams</name>
-                    <email>***REMOVED***@renovations.com</email>
+                    <email>fadams@renovations.com</email>
                     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                   <snx:userState>active</snx:userState>
                 </author>
@@ -377,7 +377,7 @@
         <title type="text">Re: Test Blog Post1397808985249</title>
         <author>
           <name>Frank Adams</name>
-                    <email>***REMOVED***@renovations.com</email>
+                    <email>fadams@renovations.com</email>
                     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                   <snx:userState>active</snx:userState>
                 </author>
@@ -414,7 +414,7 @@
         <title type="text">Re: Test Blog Post1397808985249</title>
         <author>
           <name>Frank Adams</name>
-                    <email>***REMOVED***@renovations.com</email>
+                    <email>fadams@renovations.com</email>
                     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                   <snx:userState>active</snx:userState>
                 </author>
@@ -451,7 +451,7 @@
         <title type="text">Re: BlogPost at 1397803396312</title>
         <author>
           <name>Frank Adams</name>
-                    <email>***REMOVED***@renovations.com</email>
+                    <email>fadams@renovations.com</email>
                     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                   <snx:userState>active</snx:userState>
                 </author>
@@ -488,7 +488,7 @@
         <title type="text">Re: BlogPost at 1397803298098</title>
         <author>
           <name>Frank Adams</name>
-                    <email>***REMOVED***@renovations.com</email>
+                    <email>fadams@renovations.com</email>
                     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                   <snx:userState>active</snx:userState>
                 </author>
@@ -525,7 +525,7 @@
         <title type="text">Re: BlogPost at 1397803226128</title>
         <author>
           <name>Frank Adams</name>
-                    <email>***REMOVED***@renovations.com</email>
+                    <email>fadams@renovations.com</email>
                     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                   <snx:userState>active</snx:userState>
                 </author>
@@ -562,7 +562,7 @@
         <title type="text">Re: BlogPost at 1397803216131</title>
         <author>
           <name>Frank Adams</name>
-                    <email>***REMOVED***@renovations.com</email>
+                    <email>fadams@renovations.com</email>
                     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                   <snx:userState>active</snx:userState>
                 </author>
@@ -599,7 +599,7 @@
         <title type="text">Re: Updated Test Blog title</title>
         <author>
           <name>Frank Adams</name>
-                    <email>***REMOVED***@renovations.com</email>
+                    <email>fadams@renovations.com</email>
                     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                   <snx:userState>active</snx:userState>
                 </author>
@@ -636,7 +636,7 @@
         <title type="text">Re: BlogPost at 1397789564535</title>
         <author>
           <name>Frank Adams</name>
-                    <email>***REMOVED***@renovations.com</email>
+                    <email>fadams@renovations.com</email>
                     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                   <snx:userState>active</snx:userState>
                 </author>
@@ -673,7 +673,7 @@
         <title type="text">Re: BlogPost at 1397789484280</title>
         <author>
           <name>Frank Adams</name>
-                    <email>***REMOVED***@renovations.com</email>
+                    <email>fadams@renovations.com</email>
                     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                   <snx:userState>active</snx:userState>
                 </author>
@@ -710,7 +710,7 @@
         <title type="text">Re: BlogPost at 1397789386262</title>
         <author>
           <name>Frank Adams</name>
-                    <email>***REMOVED***@renovations.com</email>
+                    <email>fadams@renovations.com</email>
                     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                   <snx:userState>active</snx:userState>
                 </author>
@@ -747,7 +747,7 @@
         <title type="text">Re: BlogPost at 1397789313648</title>
         <author>
           <name>Frank Adams</name>
-                    <email>***REMOVED***@renovations.com</email>
+                    <email>fadams@renovations.com</email>
                     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                   <snx:userState>active</snx:userState>
                 </author>
@@ -784,7 +784,7 @@
         <title type="text">Re: BlogPost at 1397789303757</title>
         <author>
           <name>Frank Adams</name>
-                    <email>***REMOVED***@renovations.com</email>
+                    <email>fadams@renovations.com</email>
                     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                   <snx:userState>active</snx:userState>
                 </author>
@@ -821,7 +821,7 @@
         <title type="text">Re: Updated Test Blog title</title>
         <author>
           <name>Frank Adams</name>
-                    <email>***REMOVED***@renovations.com</email>
+                    <email>fadams@renovations.com</email>
                     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                   <snx:userState>active</snx:userState>
                 </author>
@@ -858,7 +858,7 @@
         <title type="text">Re: BlogPost at 1397775382939</title>
         <author>
           <name>Frank Adams</name>
-                    <email>***REMOVED***@renovations.com</email>
+                    <email>fadams@renovations.com</email>
                     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                   <snx:userState>active</snx:userState>
                 </author>
@@ -895,7 +895,7 @@
         <title type="text">Re: BlogPost at 1397775303374</title>
         <author>
           <name>Frank Adams</name>
-                    <email>***REMOVED***@renovations.com</email>
+                    <email>fadams@renovations.com</email>
                     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                   <snx:userState>active</snx:userState>
                 </author>
@@ -932,7 +932,7 @@
         <title type="text">Re: BlogPost at 1397775204548</title>
         <author>
           <name>Frank Adams</name>
-                    <email>***REMOVED***@renovations.com</email>
+                    <email>fadams@renovations.com</email>
                     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                   <snx:userState>active</snx:userState>
                 </author>
@@ -969,7 +969,7 @@
         <title type="text">Re: BlogPost at 1397775131369</title>
         <author>
           <name>Frank Adams</name>
-                    <email>***REMOVED***@renovations.com</email>
+                    <email>fadams@renovations.com</email>
                     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                   <snx:userState>active</snx:userState>
                 </author>
@@ -1006,7 +1006,7 @@
         <title type="text">Re: BlogPost at 1397775120958</title>
         <author>
           <name>Frank Adams</name>
-                    <email>***REMOVED***@renovations.com</email>
+                    <email>fadams@renovations.com</email>
                     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                   <snx:userState>active</snx:userState>
                 </author>
@@ -1043,7 +1043,7 @@
         <title type="text">Re: Updated Test Blog title</title>
         <author>
           <name>Frank Adams</name>
-                    <email>***REMOVED***@renovations.com</email>
+                    <email>fadams@renovations.com</email>
                     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                   <snx:userState>active</snx:userState>
                 </author>
@@ -1080,7 +1080,7 @@
         <title type="text">Re: BlogPost at 1397761267335</title>
         <author>
           <name>Frank Adams</name>
-                    <email>***REMOVED***@renovations.com</email>
+                    <email>fadams@renovations.com</email>
                     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                   <snx:userState>active</snx:userState>
                 </author>
@@ -1117,7 +1117,7 @@
         <title type="text">Re: BlogPost at 1397761187645</title>
         <author>
           <name>Frank Adams</name>
-                    <email>***REMOVED***@renovations.com</email>
+                    <email>fadams@renovations.com</email>
                     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                   <snx:userState>active</snx:userState>
                 </author>
@@ -1154,7 +1154,7 @@
         <title type="text">Re: BlogPost at 1397761090116</title>
         <author>
           <name>Frank Adams</name>
-                    <email>***REMOVED***@renovations.com</email>
+                    <email>fadams@renovations.com</email>
                     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                   <snx:userState>active</snx:userState>
                 </author>
@@ -1191,7 +1191,7 @@
         <title type="text">Re: BlogPost at 1397761018264</title>
         <author>
           <name>Frank Adams</name>
-                    <email>***REMOVED***@renovations.com</email>
+                    <email>fadams@renovations.com</email>
                     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                   <snx:userState>active</snx:userState>
                 </author>
@@ -1228,7 +1228,7 @@
         <title type="text">Re: BlogPost at 1397761008307</title>
         <author>
           <name>Frank Adams</name>
-                    <email>***REMOVED***@renovations.com</email>
+                    <email>fadams@renovations.com</email>
                     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                   <snx:userState>active</snx:userState>
                 </author>
@@ -1265,7 +1265,7 @@
         <title type="text">Re: Updated Test Blog title</title>
         <author>
           <name>Frank Adams</name>
-                    <email>***REMOVED***@renovations.com</email>
+                    <email>fadams@renovations.com</email>
                     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                   <snx:userState>active</snx:userState>
                 </author>
@@ -1302,7 +1302,7 @@
         <title type="text">Re: BlogPost at 1397747304185</title>
         <author>
           <name>Frank Adams</name>
-                    <email>***REMOVED***@renovations.com</email>
+                    <email>fadams@renovations.com</email>
                     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                   <snx:userState>active</snx:userState>
                 </author>
@@ -1339,7 +1339,7 @@
         <title type="text">Re: BlogPost at 1397747223032</title>
         <author>
           <name>Frank Adams</name>
-                    <email>***REMOVED***@renovations.com</email>
+                    <email>fadams@renovations.com</email>
                     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                   <snx:userState>active</snx:userState>
                 </author>
@@ -1376,7 +1376,7 @@
         <title type="text">Re: BlogPost at 1397747127414</title>
         <author>
           <name>Frank Adams</name>
-                    <email>***REMOVED***@renovations.com</email>
+                    <email>fadams@renovations.com</email>
                     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                   <snx:userState>active</snx:userState>
                 </author>
@@ -1413,7 +1413,7 @@
         <title type="text">Re: BlogPost at 1397747055900</title>
         <author>
           <name>Frank Adams</name>
-                    <email>***REMOVED***@renovations.com</email>
+                    <email>fadams@renovations.com</email>
                     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                   <snx:userState>active</snx:userState>
                 </author>
@@ -1450,7 +1450,7 @@
         <title type="text">Re: BlogPost at 1397747045887</title>
         <author>
           <name>Frank Adams</name>
-                    <email>***REMOVED***@renovations.com</email>
+                    <email>fadams@renovations.com</email>
                     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                   <snx:userState>active</snx:userState>
                 </author>
@@ -1487,7 +1487,7 @@
         <title type="text">Re: Updated Test Blog title</title>
         <author>
           <name>Frank Adams</name>
-                    <email>***REMOVED***@renovations.com</email>
+                    <email>fadams@renovations.com</email>
                     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                   <snx:userState>active</snx:userState>
                 </author>
@@ -1524,7 +1524,7 @@
         <title type="text">Re: BlogPost at 1397733430110</title>
         <author>
           <name>Frank Adams</name>
-                    <email>***REMOVED***@renovations.com</email>
+                    <email>fadams@renovations.com</email>
                     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                   <snx:userState>active</snx:userState>
                 </author>
@@ -1561,7 +1561,7 @@
         <title type="text">Re: BlogPost at 1397733350758</title>
         <author>
           <name>Frank Adams</name>
-                    <email>***REMOVED***@renovations.com</email>
+                    <email>fadams@renovations.com</email>
                     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                   <snx:userState>active</snx:userState>
                 </author>
@@ -1598,7 +1598,7 @@
         <title type="text">Re: BlogPost at 1397733253519</title>
         <author>
           <name>Frank Adams</name>
-                    <email>***REMOVED***@renovations.com</email>
+                    <email>fadams@renovations.com</email>
                     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                   <snx:userState>active</snx:userState>
                 </author>
@@ -1635,7 +1635,7 @@
         <title type="text">Re: BlogPost at 1397733181950</title>
         <author>
           <name>Frank Adams</name>
-                    <email>***REMOVED***@renovations.com</email>
+                    <email>fadams@renovations.com</email>
                     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                   <snx:userState>active</snx:userState>
                 </author>
@@ -1672,7 +1672,7 @@
         <title type="text">Re: BlogPost at 1397733171784</title>
         <author>
           <name>Frank Adams</name>
-                    <email>***REMOVED***@renovations.com</email>
+                    <email>fadams@renovations.com</email>
                     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                   <snx:userState>active</snx:userState>
                 </author>
@@ -1709,7 +1709,7 @@
         <title type="text">Re: Updated Test Blog title</title>
         <author>
           <name>Frank Adams</name>
-                    <email>***REMOVED***@renovations.com</email>
+                    <email>fadams@renovations.com</email>
                     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                   <snx:userState>active</snx:userState>
                 </author>
@@ -1746,7 +1746,7 @@
         <title type="text">Re: BlogPost at 1397719319082</title>
         <author>
           <name>Frank Adams</name>
-                    <email>***REMOVED***@renovations.com</email>
+                    <email>fadams@renovations.com</email>
                     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                   <snx:userState>active</snx:userState>
                 </author>
@@ -1783,7 +1783,7 @@
         <title type="text">Re: BlogPost at 1397719097244</title>
         <author>
           <name>Frank Adams</name>
-                    <email>***REMOVED***@renovations.com</email>
+                    <email>fadams@renovations.com</email>
                     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                   <snx:userState>active</snx:userState>
                 </author>
@@ -1820,7 +1820,7 @@
         <title type="text">Re: BlogPost at 1397718821565</title>
         <author>
           <name>Frank Adams</name>
-                    <email>***REMOVED***@renovations.com</email>
+                    <email>fadams@renovations.com</email>
                     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                   <snx:userState>active</snx:userState>
                 </author>
@@ -1857,7 +1857,7 @@
         <title type="text">Re: Updated Test Blog title</title>
         <author>
           <name>Frank Adams</name>
-                    <email>***REMOVED***@renovations.com</email>
+                    <email>fadams@renovations.com</email>
                     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                   <snx:userState>active</snx:userState>
                 </author>
@@ -1894,7 +1894,7 @@
         <title type="text">Re: Updated Test Blog title</title>
         <author>
           <name>Frank Adams</name>
-                    <email>***REMOVED***@renovations.com</email>
+                    <email>fadams@renovations.com</email>
                     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                   <snx:userState>active</snx:userState>
                 </author>
@@ -1931,7 +1931,7 @@
         <title type="text">Re: BlogPost at 1397700529502</title>
         <author>
           <name>Frank Adams</name>
-                    <email>***REMOVED***@renovations.com</email>
+                    <email>fadams@renovations.com</email>
                     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                   <snx:userState>active</snx:userState>
                 </author>
@@ -1968,7 +1968,7 @@
         <title type="text">Re: BlogPost at 1397700254415</title>
         <author>
           <name>Frank Adams</name>
-                    <email>***REMOVED***@renovations.com</email>
+                    <email>fadams@renovations.com</email>
                     <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
                   <snx:userState>active</snx:userState>
                 </author>

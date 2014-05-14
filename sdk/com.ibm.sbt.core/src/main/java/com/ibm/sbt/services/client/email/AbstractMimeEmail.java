@@ -52,7 +52,7 @@ public abstract class AbstractMimeEmail implements MimeEmail {
      * <code>
      *
      *   {
-     *     "to" : ["***REMOVED***@renovations.com", "tamado@renovations.com"],
+     *     "to" : ["fadams@renovations.com", "tamado@renovations.com"],
      *     "cc" : ["pclemmons@renovations.com"],
      *     "bcc" : [],
      *     "subject" : "This is a test email"

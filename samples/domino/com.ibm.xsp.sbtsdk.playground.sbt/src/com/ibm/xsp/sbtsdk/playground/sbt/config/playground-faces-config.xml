@@ -224,12 +224,12 @@
 		<managed-property>
 			<property-name>user
 			</property-name>
-			<value>***REMOVED***</value>
+			<value>fadams</value>
 		</managed-property>
 		<managed-property>
 			<property-name>password
 			</property-name>
-			<value>***REMOVED***</value>
+			<value>passw0rd</value>
 		</managed-property>
 	</managed-bean>
 

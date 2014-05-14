@@ -47,13 +47,13 @@ public class WikiPageFeedHandlerTest extends BaseWikiServiceTest {
 		assertNotNull(wikiPage.getAuthor());
 		assertEquals("Frank Adams", wikiPage.getAuthor().getName());
 		assertEquals("0F19F8AD-37EA-6033-8525-7BBF005634B5", wikiPage.getAuthor().getId());
-		assertEquals("***REMOVED***@renovations.com", wikiPage.getAuthor().getEmail());
+		assertEquals("fadams@renovations.com", wikiPage.getAuthor().getEmail());
 		assertEquals("active", wikiPage.getAuthor().getUserState());
 		
 		assertNotNull(wikiPage.getModifier());
 		assertEquals("Frank Adams", wikiPage.getModifier().getName());
 		assertEquals("0F19F8AD-37EA-6033-8525-7BBF005634B5", wikiPage.getModifier().getId());
-		assertEquals("***REMOVED***@renovations.com", wikiPage.getModifier().getEmail());
+		assertEquals("fadams@renovations.com", wikiPage.getModifier().getEmail());
 		assertEquals("active", wikiPage.getModifier().getUserState());
 		
 		assertEquals("2013-11-28T15:06:58.000Z", DateSerializer.toString(wikiPage.getPublished()));

@@ -1,6 +1,6 @@
 
 <div id="ibm_sbtk_login_template" style="display: none">
-***REMOVED*** 
+<?php 
 	require BASE_PATH . '/core/views/oauth-login-display.php';
 ?>
 </div>
@@ -11,11 +11,11 @@
 		<script type="text/javascript">
 		require(["sbt/dom", "sbt/config"],
 				function(dom, config) {
-			var endpoint = config.findEndpoint("***REMOVED*** echo $this->endpoint; ?>");
+			var endpoint = config.findEndpoint("<?php echo $this->endpoint; ?>");
 
 			endpoint.isAuthenticationValid({	
 				"forceAuthentication": true, 
-				"actionUrl": "***REMOVED*** echo plugins_url(PLUGIN_NAME); ?>/core/index.php?classpath=services&class=Proxy&method=route&isAuthenticated=true"}).then(
+				"actionUrl": "<?php echo plugins_url(PLUGIN_NAME); ?>/core/index.php?classpath=services&class=Proxy&method=route&isAuthenticated=true"}).then(
 					function(response) {
 						logout(dom, config);
 					}, function(response) {
@@ -26,8 +26,8 @@
         		var logoutBtn = document.getElementsByName("logoutBtn");
         		for (var i = 0; i < logoutBtn.length; i++) {
         			logoutBtn[i].onclick = function(evt) {	
-        				var endpoint = config.findEndpoint("***REMOVED*** echo $this->endpoint; ?>");
-        				endpoint.logout({"actionUrl": "***REMOVED*** echo plugins_url(PLUGIN_NAME); ?>/core/index.php?classpath=services&class=Proxy&method=route&OAuthLogout=true"}).then(
+        				var endpoint = config.findEndpoint("<?php echo $this->endpoint; ?>");
+        				endpoint.logout({"actionUrl": "<?php echo plugins_url(PLUGIN_NAME); ?>/core/index.php?classpath=services&class=Proxy&method=route&OAuthLogout=true"}).then(
         						function(response) {
         							var widgets = document.getElementsByName("ibm_sbtk_widget");
         							var loginTemplate = document.getElementById("ibm_sbtk_login_template");

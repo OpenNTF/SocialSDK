@@ -1,4 +1,4 @@
-***REMOVED***
+<?php
 /*
  * © Copyright IBM Corp. 2014
 *
@@ -22,7 +22,7 @@ $agnostic_deploy_url = str_replace('http://', '//', $deploy_url);
 ?>
 <script type="text/javascript">
 	var djConfig = {
-	baseUrl: "***REMOVED*** echo $agnostic_deploy_url; ?>",
+	baseUrl: "<?php echo $agnostic_deploy_url; ?>",
 	parseOnLoad: true,
 	locale: "en"
 };
@@ -30,7 +30,7 @@ $agnostic_deploy_url = str_replace('http://', '//', $deploy_url);
 </script>
 
 
-***REMOVED*** 
+<?php 
 	if ($js_library != 'none') {
 		switch ($js_library) {
 			case 'Dojo Toolkit 1.4.3':
@@ -118,17 +118,17 @@ $agnostic_deploy_url = str_replace('http://', '//', $deploy_url);
 		_sbt = 0;
 		require({
 			paths: {
-				"sbt": "***REMOVED*** echo $agnostic_deploy_url; ?>/js/sdk/sbt"
+				"sbt": "<?php echo $agnostic_deploy_url; ?>/js/sdk/sbt"
 			}
 		});
 		require({
 			paths: {
-				"sbt/_bridge": "***REMOVED*** echo $agnostic_deploy_url; ?>/js/sdk/_bridges/dojo-amd"
+				"sbt/_bridge": "<?php echo $agnostic_deploy_url; ?>/js/sdk/_bridges/dojo-amd"
 			}
 		});
 		require({
 			paths: {
-				"sbt/widget": "***REMOVED*** echo $agnostic_deploy_url; ?>/js/sdk/dojo2"
+				"sbt/widget": "<?php echo $agnostic_deploy_url; ?>/js/sdk/dojo2"
 			}
 		});
 
@@ -137,11 +137,11 @@ $agnostic_deploy_url = str_replace('http://', '//', $deploy_url);
 				var sbt = {};
 				sbt.Properties = {
 					"libraryUrl": "",
-					"serviceUrl": "***REMOVED*** echo plugins_url(PLUGIN_NAME); ?>/core/index.php?classpath=services&class=Proxy&method=fileOperations&_redirectUrl=",
-					"sbtUrl": "***REMOVED*** echo $agnostic_deploy_url; ?>/js/sdk"
+					"serviceUrl": "<?php echo plugins_url(PLUGIN_NAME); ?>/core/index.php?classpath=services&class=Proxy&method=fileOperations&_redirectUrl=",
+					"sbtUrl": "<?php echo $agnostic_deploy_url; ?>/js/sdk"
 				};
 				sbt.Endpoints = {
-						***REMOVED*** 
+						<?php 
 							foreach($endpoints as $endpoint) {
 								echo generateEndpoint($endpoint, $agnostic_deploy_url) . "\n";
 							}
@@ -159,7 +159,7 @@ $agnostic_deploy_url = str_replace('http://', '//', $deploy_url);
 	};
 </script>
 
-***REMOVED*** 
+<?php 
 
 /**
  * Generates the JavaScript for an IBM Connections endpoint.

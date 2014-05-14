@@ -54,7 +54,7 @@
         <name><![CDATA[Content-Language]]></name>
         <value><![CDATA[en-US]]></value>
     </header></headers>
-<data><![CDATA[{"entry":{"displayName":"Frank Adams","emails":[{"type":"primary","value":"***REMOVED***@renovations.com","primary":true}],"id":"urn:lsid:lconn.ibm.com:profiles.person:EFD413BC-E572-760A-8625-7C6E00506453"}}]]></data>
+<data><![CDATA[{"entry":{"displayName":"Frank Adams","emails":[{"type":"primary","value":"fadams@renovations.com","primary":true}],"id":"urn:lsid:lconn.ibm.com:profiles.person:EFD413BC-E572-760A-8625-7C6E00506453"}}]]></data>
 </response>
 <response statusCode="200" statusReason="OK">
 <headers>
@@ -122,6 +122,6 @@
         <name><![CDATA[Content-Language]]></name>
         <value><![CDATA[en-US]]></value>
     </header></headers>
-<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?><feed xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:td="urn:ibm.com/td" xmlns="http://www.w3.org/2005/Atom"><generator version="4.5.0.0" uri="http://www.ibm.com/xmlns/prod/sn">IBM Connections - Files</generator><id>urn:lsid:ibm.com:td:myshares</id><title type="text">All Shares for Frank Adams</title><link href="https://dev.sdkdemo.com:444/files/basic/api/myshares/feed" rel="self"></link><author><name>Frank Adams</name><snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid><email>***REMOVED***@renovations.com</email><snx:userState>active</snx:userState></author><updated>2014-02-19T11:09:18.927Z</updated><opensearch:totalResults>0</opensearch:totalResults><app:collection href="https://dev.sdkdemo.com:444/files/basic/api/myshares/feed" xmlns:app="http://www.w3.org/2007/app"><title type="text">myshares</title></app:collection></feed>]]></data>
+<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?><feed xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:td="urn:ibm.com/td" xmlns="http://www.w3.org/2005/Atom"><generator version="4.5.0.0" uri="http://www.ibm.com/xmlns/prod/sn">IBM Connections - Files</generator><id>urn:lsid:ibm.com:td:myshares</id><title type="text">All Shares for Frank Adams</title><link href="https://dev.sdkdemo.com:444/files/basic/api/myshares/feed" rel="self"></link><author><name>Frank Adams</name><snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid><email>fadams@renovations.com</email><snx:userState>active</snx:userState></author><updated>2014-02-19T11:09:18.927Z</updated><opensearch:totalResults>0</opensearch:totalResults><app:collection href="https://dev.sdkdemo.com:444/files/basic/api/myshares/feed" xmlns:app="http://www.w3.org/2007/app"><title type="text">myshares</title></app:collection></feed>]]></data>
 </response>
 </responses>

@@ -154,9 +154,9 @@ public class URLBuilderTest extends BaseUnitTest {
 	@Test
 	public void testGenerateUrlWithUrlParameters(){
 		ProfileService service = new ProfileService();
-		String urlAssertEmail = "profiles/atom/connection.do?sourceEmail=bjordan%40renovations.com&targetEmail=***REMOVED***%40renovations.com&connectionType=colleague";
+		String urlAssertEmail = "profiles/atom/connection.do?sourceEmail=bjordan%40renovations.com&targetEmail=fadams%40renovations.com&connectionType=colleague";
 		String sourceId = "bjordan@renovations.com";
-		String targetId = "***REMOVED***@renovations.com";
+		String targetId = "fadams@renovations.com";
 		String url = ProfileUrls.CHECK_COLLEAGUE.format(service, ProfileParams.sourceId.get(sourceId), ProfileParams.targetId.get(targetId));
 		assertEquals(urlAssertEmail, url);
 	}

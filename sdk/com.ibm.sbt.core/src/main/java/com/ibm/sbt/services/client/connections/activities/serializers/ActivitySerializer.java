@@ -96,8 +96,10 @@ public class ActivitySerializer extends AtomEntitySerializer<Activity> {
 				externalCategory(),
 				completedCategory(),
 				templateCategory(),
+				flagsCategory(),
 				linkContainer(),
 				summary(),
+				subtitle(),
 				inReplyTo(),
 				assignedTo()
 		);
@@ -155,6 +157,13 @@ public class ActivitySerializer extends AtomEntitySerializer<Activity> {
 				attribute(LABEL, LABEL_COMMUNITYACTIVITY)) : null;
 	}
 	
+	protected Element flagsCategory() {
+		return entity.getFlags() != null ? element(CATEGORY, 
+				attribute(SCHEME, Namespace.FLAGS.getUrl()), 
+				attribute(TERM, entity.getFlags()), 
+				attribute(LABEL, entity.getFlags())) : null;
+	}
+		
 	protected Element communityUuid() {
 		return entity.isCommunityActivity() ? 
 				textElement(Namespace.SNX.getUrl(), COMMUNITYUUID, entity.getCommunityUuid()) : null;

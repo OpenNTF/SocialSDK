@@ -68,6 +68,7 @@ public final class ConnectionsConstants {
 	public static final String PUBLISHED = "published";
 	public static final String UPDATED = "updated";
 	public static final String SUMMARY = "summary";
+	public static final String SUBTITLE = "subtitle";
 	public static final String AUTHOR = "author";
 	public static final String CONTRIBUTOR = "contributor";
 	public static final String LABEL = "label";
@@ -75,6 +76,7 @@ public final class ConnectionsConstants {
 	public static final String PERSON = "person";
     public static final String IN_REF_TO = "in-ref-to";
     public static final String REF_ITEM_TYPE = "ref-item-type";
+    
 	/**
 	 * Activity ATOM
 	 */

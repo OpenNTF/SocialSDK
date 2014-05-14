@@ -15,8 +15,6 @@
  */
 package com.ibm.sbt.services.client.connections.activities;
 
-import java.util.Date;
-
 import org.w3c.dom.Node;
 
 import com.ibm.commons.util.StringUtil;
@@ -134,6 +132,26 @@ public class Activity extends NodeEntity {
 	}
 	
 	/**
+	 * Return the activity goal.
+	 * 
+	 * @return
+	 */
+	public String getGoal() {
+		return getSubtitle();
+		
+	}
+	
+	/**
+	 * Set the activity goal.
+	 * 
+	 * @param goal
+	 * @return
+	 */
+	public void setGoal(String goal) {
+		setSubtitle(goal);
+	}	
+	
+	/**
 	 * Returns link to an icon that depicts the status of an activity.
 	 * 
 	 * @return icon
@@ -149,24 +167,6 @@ public class Activity extends NodeEntity {
 	 */
 	public String getThemeId() {
 		return getAsString(ActivityXPath.themeId);
-	}
-	
-	/**
-	 * Returns the date on which the activity is due to be completed.
-	 * 
-	 * @return due date
-	 */
-	public Date getDuedate() {
-		return getAsDate(ActivityXPath.duedate);
-	}
-	
-	/**
-	 * Set the date on which the activity is due to be completed.
-	 * 
-	 * @param due date
-	 */
-	public void setDuedate(Date duedate) {
-		setAsDate(ActivityXPath.duedate, duedate);
 	}
 	
 	/**

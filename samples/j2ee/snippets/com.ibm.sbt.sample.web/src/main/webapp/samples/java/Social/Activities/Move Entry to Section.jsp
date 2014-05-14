@@ -14,14 +14,14 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<%@page import="com.ibm.sbt.services.client.connections.activity.model.ActivityNodeType"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.ActivityNode"%>
+<%@page import="com.ibm.sbt.services.client.connections.activities.InReplyTo"%>
+<%@page import="com.ibm.sbt.services.client.connections.activities.ActivityNode"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.Activity"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.ActivityList"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.ActivityService"%>
+<%@page import="com.ibm.sbt.services.client.connections.activities.Activity"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
+<%@page import="com.ibm.sbt.services.client.connections.activities.ActivityService"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
@@ -42,11 +42,11 @@
 	<%
 	try {		
 		ActivityService activityService = new ActivityService();
-		ActivityList activities = activityService.getMyActivities();
+		EntityList<Activity> activities = activityService.getMyActivities();
 		
 		if(activities != null && !activities.isEmpty()) {
-			ActivityNode node = new ActivityNode(activityService, activities.get(0).getActivityId());
-			node.setEntryType(ActivityNodeType.Entry.getActivityNodeType());
+			ActivityNode node = new ActivityNode(activityService, activities.get(0).getActivityUuid());
+			node.setType(ActivityNode.TYPE_ENTRY);
 			node.setTitle("Entry under Section.." + System.currentTimeMillis());
 			List<String> tagList = new ArrayList<String>();
 			tagList.add("tag2");
@@ -54,14 +54,16 @@
 			node.setContent("Entry moved under Section Programmatically");
 			node = activityService.createActivityNode(node);
 			
-			ActivityNode sectionNode = new ActivityNode(activityService, activities.get(0).getActivityId());
-			sectionNode.setEntryType(ActivityNodeType.Section.getActivityNodeType());
+			ActivityNode sectionNode = new ActivityNode(activityService, activities.get(0).getActivityUuid());
+			sectionNode.setType(ActivityNode.TYPE_SECTION);
 			sectionNode.setTitle("sectionNode from JSP " + System.currentTimeMillis());
 			sectionNode.setContent("SectionNode Content " + System.currentTimeMillis());
 			sectionNode.setPosition(2000);	
 			sectionNode = activityService.createActivityNode(sectionNode);
 			
-			activityService.moveEntryToSection(node.getActivityId(), sectionNode.getId());
+			node.setInReplyTo(new InReplyTo(sectionNode));
+			activityService.updateActivityNode(node);
+			
 			out.println("Entry : " + node.getTitle() + " moved to Section : " + sectionNode.getTitle());
 		}  else {
 			out.println("No Activites Found");

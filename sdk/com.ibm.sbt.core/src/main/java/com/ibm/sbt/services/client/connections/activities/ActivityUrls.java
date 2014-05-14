@@ -38,10 +38,11 @@ public enum ActivityUrls implements URLContainer {
 	ACTIVITY_CATEGORIES(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/categories")), //	Getting a list of the categories assigned to this activity
 	TUNED_OUT_ACTIVITIES(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/tunedout")), // Getting a feed of the tuned out activities
 	ACTIVITY_TEMPLATES(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/entrytemplates?activityUuid={activityUuid}")), //	Retrieves a feed of entry templates
-	THRASHED_ACTIVITIES(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/trash")), //	Retrieves a feed of the activities and entries in the trash
+	TRASHED_ACTIVITIES(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/trash")), // Retrieves a feed of the activities and entries in the trash
+	TRASHED_ACTIVITY_NODES(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/trash?activityUuid={activityUuid}")), // Retrieves a feed of the activities and entries in the trash
 	ACTIVITY(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/activity?activityUuid={activityUuid}")), // Retrieving an Activity entry and creating an activity node
 	ACTIVITY_NODE(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/activitynode?activityNodeUuid={activityNodeUuid}")), // Retrieve, update, deleting activity nodes programmatically
-	THRASHED_ACTIVITY_NODE(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/trashednode?activityNodeUuid={activityNodeUuid}")), // Restoring activity nodes programmatically
+	TRASHED_ACTIVITY_NODE(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/trashednode?activityNodeUuid={activityNodeUuid}")), // Restoring activity nodes programmatically
 	ACTIVITY_ACL(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/acl?activityUuid={activityUuid}")), // Adding an activity member programmatically
 	ACTIVITY_MEMBER(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/acl?activityUuid={activityUuid}&memberid={memberId}")), //	Retrieve, update and delete an activity member programmatically
 	ACTIVITY_DESCENDANTS(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/descendants?activityNodeUuid={activityNodeUuid}")), // Getting a feed of the Activity descendants

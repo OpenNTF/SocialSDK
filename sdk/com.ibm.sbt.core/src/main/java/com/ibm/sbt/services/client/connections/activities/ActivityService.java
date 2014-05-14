@@ -268,6 +268,50 @@ public class ActivityService extends ConnectionsService {
 	}
 
 	/**
+	 * Get a feed of all activities that are in the trash. 
+	 * 
+	 * @return
+	 * @throws ClientServicesException 
+	 */
+	public EntityList<Activity> getTrashedActivities() throws ClientServicesException {
+		return getTrashedActivities(null);
+	}
+
+	/**
+	 * Get a feed of all activities that are in the trash. 
+	 * 
+	 * @param parameters
+	 * @return
+	 * @throws ClientServicesException 
+	 */
+	public EntityList<Activity> getTrashedActivities(Map<String, String> parameters) throws ClientServicesException {
+		String requestUrl = ActivityUrls.TRASHED_ACTIVITIES.format(this);
+		return getActivityEntityList(requestUrl, parameters);
+	}
+
+	/**
+	 * Get a feed of all activity nodes that are in the trash. 
+	 * 
+	 * @return
+	 * @throws ClientServicesException 
+	 */
+	public EntityList<ActivityNode> getTrashedActivityNodes(String activityUuid) throws ClientServicesException {
+		return getTrashedActivityNodes(null);
+	}
+
+	/**
+	 * Get a feed of all activity nodes that are in the trash. 
+	 * 
+	 * @param parameters
+	 * @return
+	 * @throws ClientServicesException 
+	 */
+	public EntityList<ActivityNode> getTrashedActivityNodes(String activityUuid, Map<String, String> parameters) throws ClientServicesException {
+		String requestUrl = ActivityUrls.TRASHED_ACTIVITY_NODES.format(this, ActivityUrls.activityPart(activityUuid));
+		return getActivityNodeEntityList(requestUrl, parameters);
+	}
+
+	/**
 	 * 
 	 * @return
 	 * @throws ClientServicesException 
@@ -389,6 +433,18 @@ public class ActivityService extends ConnectionsService {
 	 * To delete an existing activity, use the HTTP DELETE method.
 	 * Deleted activities are moved to the trash collection and can be restored.  
 	 * 
+	 * @param activity
+	 * @return
+	 * @throws ClientServicesException 
+	 */
+	public String deleteActivity(String activityUuid) throws ClientServicesException {
+		return deleteActivity(activityUuid, null);
+	}
+
+	/**
+	 * To delete an existing activity, use the HTTP DELETE method.
+	 * Deleted activities are moved to the trash collection and can be restored.  
+	 * 
 	 * @param activityUuid
 	 * @param parameters
 	 * @return
@@ -421,7 +477,7 @@ public class ActivityService extends ConnectionsService {
 	 */
 	public void restoreActivity(Activity activity, Map<String, String> parameters) throws ClientServicesException {
 		activity.setDeleted(false);
-		String requestUrl = ActivityUrls.THRASHED_ACTIVITY_NODE.format(this, ActivityUrls.activityNodePart(activity.getActivityUuid()));
+		String requestUrl = ActivityUrls.TRASHED_ACTIVITY_NODE.format(this, ActivityUrls.activityNodePart(activity.getActivityUuid()));
 		updateActivityEntity(requestUrl, activity, parameters, HTTPCode.NO_CONTENT);
 	}
 
@@ -507,6 +563,16 @@ public class ActivityService extends ConnectionsService {
 
 	/**
 	 * 
+	 * @param activityNode
+	 * @return
+	 * @throws ClientServicesException 
+	 */
+	public String deleteActivityNode(String activityNodeUuid) throws ClientServicesException {
+		return deleteActivityNode(activityNodeUuid, null);
+	}
+
+	/**
+	 * 
 	 * @param activityNodeUuid
 	 * @param parameters
 	 * @return
@@ -537,10 +603,10 @@ public class ActivityService extends ConnectionsService {
 	 */
 	public void restoreActivityNode(ActivityNode activityNode, Map<String, String> parameters) throws ClientServicesException {
 		// TODO Remove the <category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="deleted"/> flag element from the entry before restoring it.
-		String requestUrl = ActivityUrls.THRASHED_ACTIVITY_NODE.format(this,ActivityUrls.activityNodePart( activityNode.getActivityNodeUuid()));
+		String requestUrl = ActivityUrls.TRASHED_ACTIVITY_NODE.format(this,ActivityUrls.activityNodePart( activityNode.getActivityNodeUuid()));
 		updateActivityNodeEntity(requestUrl, activityNode, parameters, HTTPCode.NO_CONTENT);
 	}
-
+	
 	//------------------------------------------------------------------------------------------------------------------
 	// Working with activity nodes programmatically.
 	//------------------------------------------------------------------------------------------------------------------

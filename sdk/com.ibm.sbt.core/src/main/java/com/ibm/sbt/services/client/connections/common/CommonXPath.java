@@ -34,7 +34,7 @@ public enum CommonXPath implements FieldEntry {
 	title("@title"),
 	size("@size"),
 	type("@type"),
-	role("./snx.role"),
+	role("./snx:role"),
 	category_type("./category[scheme='http://www.ibm.com/xmlns/prod/sn/type']/@term");
 	
 	private final XPathExpression path;

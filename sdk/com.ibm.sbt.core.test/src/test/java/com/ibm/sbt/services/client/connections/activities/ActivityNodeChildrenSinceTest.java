@@ -32,7 +32,7 @@ import com.ibm.sbt.services.client.base.datahandlers.EntityList;
  * @author mwallace
  *
  */
-public class ActivityDescendantsSinceTest extends BaseActivityServiceTest {
+public class ActivityNodeChildrenSinceTest extends BaseActivityServiceTest {
 	
 	private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");	
 
@@ -47,7 +47,7 @@ public class ActivityDescendantsSinceTest extends BaseActivityServiceTest {
 		
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("since", "" + node.getUpdated().getTime());
-		EntityList<ActivityNode> activityNodes = activityService.getActivityNodeDescendants(activity.getActivityUuid(), params);
+		EntityList<ActivityNode> activityNodes = activityService.getActivityNodeChildren(activity.getActivityUuid(), params);
 		System.out.println("Nodes " + activityNodes.size() + " update since: " + dateFormat.format(node.getUpdated()));
 		
 		Assert.assertEquals(3, activityNodes.size());
@@ -64,7 +64,7 @@ public class ActivityDescendantsSinceTest extends BaseActivityServiceTest {
 		
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("until", "" + node.getUpdated().getTime());
-		EntityList<ActivityNode> activityNodes = activityService.getActivityNodeDescendants(activity.getActivityUuid(), params);
+		EntityList<ActivityNode> activityNodes = activityService.getActivityNodeChildren(activity.getActivityUuid(), params);
 		System.out.println("Nodes " + activityNodes.size() + " update until: " + dateFormat.format(node.getUpdated()));
 		
 		Assert.assertEquals(2, activityNodes.size());
@@ -83,7 +83,7 @@ public class ActivityDescendantsSinceTest extends BaseActivityServiceTest {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("since", "" + sinceNode.getUpdated().getTime());
 		params.put("until", "" + untilNode.getUpdated().getTime());
-		EntityList<ActivityNode> activityNodes = activityService.getActivityNodeDescendants(activity.getActivityUuid(), params);
+		EntityList<ActivityNode> activityNodes = activityService.getActivityNodeChildren(activity.getActivityUuid(), params);
 		System.out.println("Nodes " + activityNodes.size() + 
 				" update since: " + dateFormat.format(sinceNode.getUpdated()) +
 				" until: " + dateFormat.format(untilNode.getUpdated()));
@@ -103,7 +103,7 @@ public class ActivityDescendantsSinceTest extends BaseActivityServiceTest {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("since", "" + node.getPublished().getTime());
 		params.put("filterKey", "create");
-		EntityList<ActivityNode> activityNodes = activityService.getActivityNodeDescendants(activity.getActivityUuid(), params);
+		EntityList<ActivityNode> activityNodes = activityService.getActivityNodeChildren(activity.getActivityUuid(), params);
 		System.out.println("Nodes " + activityNodes.size() + " create since: " + dateFormat.format(node.getPublished()));
 		
 		Assert.assertEquals(3, activityNodes.size());
@@ -121,7 +121,7 @@ public class ActivityDescendantsSinceTest extends BaseActivityServiceTest {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("until", "" + node.getPublished().getTime());
 		params.put("filterKey", "create");
-		EntityList<ActivityNode> activityNodes = activityService.getActivityNodeDescendants(activity.getActivityUuid(), params);
+		EntityList<ActivityNode> activityNodes = activityService.getActivityNodeChildren(activity.getActivityUuid(), params);
 		System.out.println("Nodes " + activityNodes.size() + " create until: " + dateFormat.format(node.getPublished()));
 		
 		Assert.assertEquals(2, activityNodes.size());
@@ -141,7 +141,7 @@ public class ActivityDescendantsSinceTest extends BaseActivityServiceTest {
 		params.put("since", "" + sinceNode.getPublished().getTime());
 		params.put("until", "" + untilNode.getPublished().getTime());
 		params.put("filterKey", "create");
-		EntityList<ActivityNode> activityNodes = activityService.getActivityNodeDescendants(activity.getActivityUuid(), params);
+		EntityList<ActivityNode> activityNodes = activityService.getActivityNodeChildren(activity.getActivityUuid(), params);
 		System.out.println("Nodes " + activityNodes.size() + 
 				" create since: " + dateFormat.format(sinceNode.getPublished()) +
 				" until: " + dateFormat.format(untilNode.getPublished()));

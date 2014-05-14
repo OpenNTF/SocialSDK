@@ -231,7 +231,7 @@ public class BaseActivityServiceTest extends BaseUnitTest {
     	
     	for (int i=0; i<count; i++) {
     		long now = System.currentTimeMillis();
-    		String title = titlePrefix + now;
+    		String title = titlePrefix + "-" + now;
     		activities.add(createActivity(title));
     		
     		try {
@@ -240,7 +240,41 @@ public class BaseActivityServiceTest extends BaseUnitTest {
 			}
     	}
     	
+		System.out.println("         TITLE                    CREATE                  PUBLISHED                 UPDATED");
+		for (Activity activity : activities) {
+			String title = activity.getTitle();
+			Date create = new Date(Long.parseLong(title.substring(title.indexOf('-')+1)));
+			System.out.println(activity.getTitle() + "  " + dateFormat.format(create) + "  " + dateFormat.format(activity.getPublished()) + "  " + dateFormat.format(activity.getUpdated()));
+		}
+    	
     	return activities;
     }
-        	
+    
+    protected void deleteActivities(List<Activity> activities) {
+    	for (Activity activity : activities) {
+			try {
+				//System.out.println("Deleting "+activity.getTitle());
+				activityService.deleteActivity(activity);
+			} catch (Exception e) {
+			}
+    	}
+    }
+        
+	protected List<ActivityNode> createActivityDescendants(Activity activity) throws ClientServicesException {
+		String activityUuid = activity.getActivityUuid();
+		
+		List<ActivityNode> createdNodes = createActivityDescendants(activityUuid, 5, 1000);
+		
+		List<ActivityNode> touchedNodes = touchActivityNodes(createdNodes, true, 1000);
+		
+		System.out.println("         TITLE                    CREATE                  PUBLISHED                 UPDATED");
+		for (ActivityNode node : touchedNodes) {
+			String title = node.getTitle();
+			Date create = new Date(Long.parseLong(title.substring(title.indexOf('-')+1)));
+			System.out.println(node.getTitle() + "  " + dateFormat.format(create) + "  " + dateFormat.format(node.getPublished()) + "  " + dateFormat.format(node.getUpdated()));
+		}
+
+		return touchedNodes;
+	}
+    
 }

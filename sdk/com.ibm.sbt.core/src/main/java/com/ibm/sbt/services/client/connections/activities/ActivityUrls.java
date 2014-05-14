@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * ï¿½ Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,6 +45,7 @@ public enum ActivityUrls implements URLContainer {
 	ACTIVITY_ACL(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/acl?activityUuid={activityUuid}")), // Adding an activity member programmatically
 	ACTIVITY_MEMBER(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/acl?activityUuid={activityUuid}&memberid={memberId}")), //	Retrieve, update and delete an activity member programmatically
 	ACTIVITY_DESCENDANTS(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/descendants?activityNodeUuid={activityNodeUuid}")), // Getting a feed of the Activity descendants
+	ACTIVITY_NODECHILDREN(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/nodechildren?activityNodeUuid={activityNodeUuid}")), // Getting a feed of the Activity descendants
 	;
 	
 	private URLBuilder builder;

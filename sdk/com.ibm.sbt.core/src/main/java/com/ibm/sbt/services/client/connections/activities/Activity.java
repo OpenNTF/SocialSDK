@@ -125,6 +125,15 @@ public class Activity extends NodeEntity {
 	}
 	
 	/**
+	 * Set the community ID to which a community activity belongs.
+	 * 
+	 * @param communityUuid
+	 */
+	public void setCommunityUuid(String communityUuid) {
+		setAsString(ActivityXPath.communityUuid, communityUuid);
+	}
+	
+	/**
 	 * Returns link to an icon that depicts the status of an activity.
 	 * 
 	 * @return icon
@@ -395,6 +404,20 @@ public class Activity extends NodeEntity {
 	//------------------------------------------------------------------------------------------------------------------
 	// Working with activity members programmatically.
 	//------------------------------------------------------------------------------------------------------------------
+	
+	/**
+	 * Return list of the members for this Activity.
+	 * 
+	 * @return
+	 * @throws ClientServicesException
+	 */
+	public EntityList<Member> getMembers() throws ClientServicesException {
+		ActivityService activityService = getActivityService();
+		if (activityService == null) {
+			throw new ClientServicesException(null, "No activity service associated with this activity.");
+		}
+		return activityService.getMembers(getActivityUuid());
+	}
 	
 	/**
 	 * Add an activity member.

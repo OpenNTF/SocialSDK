@@ -228,6 +228,24 @@ public class ActivityService extends ConnectionsService {
 	}
 	
 	/**
+	 * 
+	 * @return
+	 */
+	public EntityList<ActivityNode> getActivityNodeChildren(String activityNodeUuid) throws ClientServicesException {
+		return getActivityNodeChildren(activityNodeUuid, null);
+	}
+
+	/**
+	 * 
+	 * @param parameters
+	 * @return
+	 */
+	public EntityList<ActivityNode> getActivityNodeChildren(String activityNodeUuid, Map<String, String> parameters) throws ClientServicesException {
+		String requestUrl = ActivityUrls.ACTIVITY_NODECHILDREN.format(this, ActivityUrls.activityNodePart(activityNodeUuid));
+		return getActivityNodeEntityList(requestUrl, parameters);
+	}
+	
+	/**
 	 * Get a feed of all active activities that the currently authenticated user has tuned out. 
 	 * 
 	 * @return
@@ -247,6 +265,26 @@ public class ActivityService extends ConnectionsService {
 	public EntityList<Activity> getTunedOutActivities(Map<String, String> parameters) throws ClientServicesException {
 		String requestUrl = ActivityUrls.TUNED_OUT_ACTIVITIES.format(this);
 		return getActivityEntityList(requestUrl, parameters);
+	}
+
+	/**
+	 * 
+	 * @return
+	 * @throws ClientServicesException 
+	 */
+	public EntityList<Member> getMembers(String activityUuid) throws ClientServicesException {
+		return getMembers(activityUuid, null);
+	}
+
+	/**
+	 * 
+	 * @param parameters
+	 * @return
+	 * @throws ClientServicesException 
+	 */
+	public EntityList<Member> getMembers(String activityUuid, Map<String, String> parameters) throws ClientServicesException {
+		String requestUrl = ActivityUrls.ACTIVITY_ACL.format(this, ActivityUrls.activityPart(activityUuid));
+		return getMemberEntityList(requestUrl, parameters);
 	}
 
 	//------------------------------------------------------------------------------------------------------------------
@@ -550,7 +588,7 @@ public class ActivityService extends ConnectionsService {
 	 * @return
 	 */
 	public Member addMember(String activityUuid, Member member, Map<String, String> parameters) throws ClientServicesException {
-		String requestUrl = ActivityUrls.ACTIVITY.format(this, ActivityUrls.activityPart(activityUuid));
+		String requestUrl = ActivityUrls.ACTIVITY_ACL.format(this, ActivityUrls.activityPart(activityUuid));
 		return createMemberEntity(requestUrl, member, parameters);
 	}
 	
@@ -938,7 +976,7 @@ public class ActivityService extends ConnectionsService {
 	protected void deleteMemberEntity(String requestUrl, String memberId, Map<String, String> parameters) throws ClientServicesException {
 		try {
 			Response response = deleteData(requestUrl, parameters, memberId);
-			if (isValidResponse(response, HTTPCode.NO_CONTENT)) {
+			if (isValidResponse(response, HTTPCode.OK)) {
 				return;
 			} else {
 				throw new ClientServicesException(response.getResponse(), response.getRequest());
@@ -975,6 +1013,10 @@ public class ActivityService extends ConnectionsService {
 	
 	protected EntityList<Category> getCategoryEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
 		return (EntityList<Category>)getEntities(requestUrl, getParameters(parameters), getCategoryFeedHandler());
+	}
+	
+	protected EntityList<Member> getMemberEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
+		return (EntityList<Member>)getEntities(requestUrl, getParameters(parameters), getMemberFeedHandler(true));
 	}
 	
 	protected IFeedHandler<Activity> getActivityFeedHandler(boolean isFeed) {

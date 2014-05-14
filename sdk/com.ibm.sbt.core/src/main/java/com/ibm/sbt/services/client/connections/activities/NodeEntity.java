@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * ï¿½ Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@ package com.ibm.sbt.services.client.connections.activities;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.w3c.dom.Element;
@@ -94,6 +95,42 @@ public class NodeEntity extends AtomEntity {
 	}
 	
 	/**
+	 * Sets the type
+	 * 
+	 * @param type
+	 */
+	public void setType(String type) {
+		setAsString(ActivityXPath.type, type);
+	}
+	
+	/**
+	 * Return the type
+	 * 
+	 * @return
+	 */
+	public String getType() {
+		return getAsString(ActivityXPath.type);
+	}
+	
+	/**
+	 * Sets the flags
+	 * 
+	 * @param type
+	 */
+	public void setFlags(String flags) {
+		setAsString(ActivityXPath.flags, flags);
+	}
+	
+	/**
+	 * Return the flags
+	 * 
+	 * @return
+	 */
+	public String getFlags() {
+		return getAsString(ActivityXPath.flags);
+	}
+	
+	/**
 	 * Returns permissions.
 	 * 
 	 * @return permissions
@@ -121,6 +158,33 @@ public class NodeEntity extends AtomEntity {
 	}
 	
 	/**
+	 * Set the position of the activity.
+	 * 
+	 * @param position
+	 */
+	public void setPosition(long position) {
+		setAsLong(ActivityXPath.position, position);
+	}
+	
+	/**
+	 * Returns the date on which the activity is due to be completed.
+	 * 
+	 * @return due date
+	 */
+	public Date getDuedate() {
+		return getAsDate(ActivityXPath.duedate);
+	}
+	
+	/**
+	 * Set the date on which the activity is due to be completed.
+	 * 
+	 * @param due date
+	 */
+	public void setDuedate(Date duedate) {
+		setAsDate(ActivityXPath.duedate, duedate);
+	}
+		
+	/**
 	 * Returns the tags on the node.
 	 * 
 	 * @return
@@ -128,7 +192,7 @@ public class NodeEntity extends AtomEntity {
 	public List<String> getTags() {
 		return super.getBaseTags();
 	}
-
+	
 	/**
 	 * Set the tags on the node.
 	 * 
@@ -154,6 +218,16 @@ public class NodeEntity extends AtomEntity {
 			}
 		}
 		return fields.toArray(new Field[fields.size()]);
+	}
+
+	/**
+	 * Set the fields
+	 * 
+	 * @param fields
+	 */
+	public void setFields(List<Field> fields) {
+		this.fields = new ArrayList<Field>();
+		this.fields.addAll(fields);
 	}
 	
 	/**

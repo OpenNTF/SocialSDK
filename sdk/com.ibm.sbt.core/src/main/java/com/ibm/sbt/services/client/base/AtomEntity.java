@@ -36,6 +36,8 @@ import com.ibm.sbt.services.client.connections.common.Person;
  *
  */
 public class AtomEntity extends BaseEntity {
+	
+	private String contentType = "html";
 
 	/**
 	 * Construct an AtomEntity instance.
@@ -59,7 +61,6 @@ public class AtomEntity extends BaseEntity {
 		super(service, dataHandler);
 	}
 	
-	
 	/**
 	 * Construct an AtomEntity instance.
 	 * 
@@ -68,6 +69,7 @@ public class AtomEntity extends BaseEntity {
 	public AtomEntity(BaseService service) {
 		super(service, null);
 	}
+
 	/**
 	 * Construct an AtomEntity instance.
 	 * 
@@ -77,14 +79,28 @@ public class AtomEntity extends BaseEntity {
 	public AtomEntity(BaseService service, String id) {
 		super(service, null);
 		setAsString(AtomXPath.id, id);
-		
 	}
+	
 	/**
 	 * Default Constructor.
 	 */
 	public AtomEntity() {
 	}
 	
+	/**
+	 * @return the contentType
+	 */
+	public String getContentType() {
+		return contentType;
+	}
+
+	/**
+	 * @param contentType the contentType to set
+	 */
+	public void setContentType(String contentType) {
+		this.contentType = contentType;
+	}
+
 	/**
 	 * Set the data for the entity from the specified response.
 	 * 
@@ -152,6 +168,26 @@ public class AtomEntity extends BaseEntity {
      */
     public void setSummary(String summary) {
         this.setAsString(AtomXPath.summary, summary);
+    }
+    
+    /**
+     * Return the value of subtitle from ATOM entry document.
+     * 
+     * @method getSubtitle
+     * @return {String} ATOM entry subtitle
+     */
+    public String getSubtitle() {
+        return this.getAsString(AtomXPath.subtitle);
+    }
+
+    /**
+     * Sets subtitle of ATOM entry.
+     * 
+     * @method setSummary
+     * @param {String} title ATOM entry subtitle
+     */
+    public void setSubtitle(String subtitle) {
+        this.setAsString(AtomXPath.subtitle, subtitle);
     }
     
     /**

@@ -15,14 +15,13 @@
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%@page import="com.ibm.commons.util.StringUtil"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.Member"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.MemberList"%>
+<%@page import="com.ibm.sbt.services.client.connections.common.Member"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.Activity"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.ActivityList"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.ActivityService"%>
+<%@page import="com.ibm.sbt.services.client.connections.activities.Activity"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
+<%@page import="com.ibm.sbt.services.client.connections.activities.ActivityService"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
@@ -43,16 +42,16 @@
 	<%
 	try {		
 		ActivityService activityService = new ActivityService();
-		ActivityList activities = activityService.getMyActivities();
+		EntityList<Activity> activities = activityService.getMyActivities();
 		if(activities != null && ! activities.isEmpty()) {
 			Activity activity = activities.get(0);
-			MemberList members = activityService.getMembers(activity.getActivityId());
+			EntityList<Member> members = activityService.getMembers(activity.getActivityUuid());
 			if(members != null && ! members.isEmpty()) {
 				Member memberToBeUpdated = null ;
-				for(Member mem : members) {
-					if(!StringUtil.equalsIgnoreCase(mem.getRole(),"owner")) {
-						out.println("MEm id, name = " + mem.getUserid() + mem.getName() + mem.getRole());
-						memberToBeUpdated = mem;
+				for(Member member : members) {
+					if(!StringUtil.equalsIgnoreCase(member.getRole(),"owner")) {
+						out.println("Member " + member.getId() + "," + member.getName() + "," + member.getRole());
+						memberToBeUpdated = member;
 						break;
 					}
 				}
@@ -62,7 +61,7 @@
 					} else { 
 						memberToBeUpdated.setRole("member"); 
 					}
-					activityService.updateMember(activity.getActivityId(), memberToBeUpdated);
+					activityService.updateMember(activity.getActivityUuid(), memberToBeUpdated);
 					out.println("Member updated : " + memberToBeUpdated.getName());
 				} else {
 					out.println("No members other than owner. Member cant be updated");

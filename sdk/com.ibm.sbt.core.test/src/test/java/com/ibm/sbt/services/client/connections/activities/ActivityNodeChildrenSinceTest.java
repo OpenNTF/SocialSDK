@@ -16,7 +16,6 @@
 package com.ibm.sbt.services.client.connections.activities;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

@@ -14,20 +14,19 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<%@page import="com.ibm.sbt.services.client.connections.activity.model.ActivityNodeType"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.BookmarkField"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.DateField"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.PersonField"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.TextField"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.FieldList"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.Field"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.ActivityNode"%>
+<%@page import="com.ibm.sbt.services.client.connections.common.Link"%>
+<%@page import="com.ibm.sbt.services.client.connections.activities.LinkField"%>
+<%@page import="com.ibm.sbt.services.client.connections.activities.DateField"%>
+<%@page import="com.ibm.sbt.services.client.connections.activities.PersonField"%>
+<%@page import="com.ibm.sbt.services.client.connections.activities.TextField"%>
+<%@page import="com.ibm.sbt.services.client.connections.activities.Field"%>
+<%@page import="com.ibm.sbt.services.client.connections.activities.ActivityNode"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.Activity"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.ActivityList"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.ActivityService"%>
+<%@page import="com.ibm.sbt.services.client.connections.activities.Activity"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
+<%@page import="com.ibm.sbt.services.client.connections.activities.ActivityService"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
@@ -48,11 +47,12 @@
 	<%
 	try {		
 		ActivityService activityService = new ActivityService();
-		ActivityList activities = activityService.getMyActivities();
+		EntityList<Activity> activities = activityService.getMyActivities();
 		
 		if(activities != null && !activities.isEmpty()) {
-			ActivityNode entryNode = new ActivityNode(activityService, activities.get(0).getActivityId());
-			entryNode.setEntryType(ActivityNodeType.Entry.getActivityNodeType());
+			ActivityNode entryNode = new ActivityNode(activityService);
+			entryNode.setActivityUuid(activities.get(0).getActivityUuid());
+			entryNode.setType(ActivityNode.TYPE_ENTRY);
 			entryNode.setTitle("EntryNode from JSP " + System.currentTimeMillis());
 			List<String> tagList = new ArrayList<String>();
 			tagList.add("entryNodeTag");
@@ -60,21 +60,22 @@
 			
 			entryNode.setContent("Entry Node Content " + System.currentTimeMillis());
 			entryNode.setPosition(1000);
-			List<String> flagList = new ArrayList<String>();
-			flagList.add("private");
-			entryNode.setFlags(flagList);
+			entryNode.setFlags("private");
 			
-			Field textField = new TextField("Summary JSP ");
-			textField.setFieldName("MyTextField");
-			Field dateField = new DateField(new Date());
-			dateField.setFieldName("MyDateField");
-			Field bookmarkField = new BookmarkField("www.google.com" , "BookGoogle");
-			bookmarkField.setFieldName("MyBookMarkField");
+			TextField textField = new TextField();
+			textField.setName("MyTextField");
+			textField.setSummary("Summary JSP");
+			DateField dateField = new DateField();
+			dateField.setName("MyDateField");
+			dateField.setDate(new Date());
+			LinkField linkField = new LinkField();
+			linkField.setName("MyBookMarkField");
+			linkField.setLink(new Link("BookGoogle", "www.google.com"));
 			
 	 		List<Field> fieldList = new ArrayList<Field>();
 			fieldList.add(textField);
 			fieldList.add(dateField);
-			fieldList.add(bookmarkField);
+			fieldList.add(linkField);
 			
 			entryNode.setFields(fieldList);		
 			entryNode = activityService.createActivityNode(entryNode);// add act id here for consistency

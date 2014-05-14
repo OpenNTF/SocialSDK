@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * ï¿½ Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ import org.junit.Test;
 
 import com.ibm.commons.xml.XMLException;
 import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.connections.common.Member;
 
 /**
@@ -32,20 +33,74 @@ public class ActivityMemberArudTest extends BaseActivityServiceTest {
 	public void testAddActivityMember() throws ClientServicesException, XMLException {
 		Activity activity = createActivity();
 		
-		Member member = activity.addMember(Member.TYPE_PERSON, "daviryan@ie.ibm.com", Member.ROLE_OWNER);
-		System.out.println(member.toXmlString());
+		Member member = activity.addMember(Member.TYPE_PERSON, "20089125", Member.ROLE_OWNER);
+		//System.out.println(member.toXmlString());
+		System.out.println(member.getId());
+		
+		EntityList<Member> members = activity.getMembers();
+		boolean found = false;
+		for (Member nextMember : members) {
+			System.out.println(nextMember.getId());
+			//System.out.println(nextMember.getTitle());
+			//System.out.println(nextMember.getRole());
+			//System.out.println(nextMember.toXmlString());
+			if (nextMember.getId().equals(member.getId())) {
+				found = true;
+				break;
+			}
+		}
+		Assert.assertEquals(2, members.size());
+		Assert.assertTrue(found);
 	}
 	
 	@Test
 	public void testRetrieveActivityMember() throws ClientServicesException, XMLException {
+		Activity activity = createActivity();
+		
+		Member member = activity.addMember(Member.TYPE_PERSON, "20089125", Member.ROLE_OWNER);
+		//System.out.println(member.toXmlString());
+		System.out.println(member.getId());
+		String id = member.getId();
+		
+		member = activity.getMember(member.getId());
+		Assert.assertNotNull(member);
+		Assert.assertEquals(Member.ROLE_OWNER, member.getRole());
+		Assert.assertEquals(id, member.getId());
 	}
 	
 	@Test
 	public void testUpdateActivityMember() throws ClientServicesException, XMLException {
+		Activity activity = createActivity();
+		
+		Member member = activity.addMember(Member.TYPE_PERSON, "20089125", Member.ROLE_MEMBER);
+		//System.out.println(member.toXmlString());
+		System.out.println(member.getId());
+		String id = member.getId();
+		
+		member.setRole(Member.ROLE_OWNER);
+		activity.updateMember(member);
+		
+		member = activity.getMember(member.getId());
+		Assert.assertNotNull(member);
+		Assert.assertEquals(Member.ROLE_OWNER, member.getRole());
+		Assert.assertEquals(id, member.getId());
 	}
 	
 	@Test
 	public void testDeleteActivityMember() throws ClientServicesException, XMLException {
+		Activity activity = createActivity();
+		
+		Member member = activity.addMember(Member.TYPE_PERSON, "20089125", Member.ROLE_MEMBER);
+		//System.out.println(member.toXmlString());
+		//String id = member.getId();
+		
+		EntityList<Member> members = activity.getMembers();
+		Assert.assertEquals(2, members.size());
+		
+		activity.deleteMember(member);
+		
+		members = activity.getMembers();
+		Assert.assertEquals(1, members.size());
 	}
 	
 }

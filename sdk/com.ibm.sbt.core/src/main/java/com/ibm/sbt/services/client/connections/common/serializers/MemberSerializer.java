@@ -56,7 +56,10 @@ public class MemberSerializer extends AtomEntitySerializer<Member> {
 	}
 	
 	protected Element role() {
-		return textElement(Namespace.SNX.getUrl(), "role", entity.getRole());
+		Element element = element(Namespace.SNX.getUrl(), "role", 
+				attribute("component", entity.getComponent()));
+		addText(element, entity.getRole());
+		return element;
 	}	
 		
 }

@@ -25,21 +25,15 @@ import static com.ibm.sbt.services.client.base.ConnectionsConstants.COMMUNITYUUI
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.COMMUNITY_ACTIVITY;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.COMPLETED;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.CONTENT;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.DATE;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.EXTERNAL;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.FID;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.FIELD;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.FILE;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.HREF;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.IN_REPLY_TO;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.LABEL;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.LABEL_COMMUNITYACTIVITY;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.LABEL_ACTIVITY;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.LABEL_COMMUNITYACTIVITY;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.LABEL_EXTERNAL;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.LINK;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.NAME;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.PERSON;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.POSITION;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.REF;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.REL;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.SCHEME;
@@ -47,13 +41,9 @@ import static com.ibm.sbt.services.client.base.ConnectionsConstants.SNX_DUEDATE;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.SOURCE;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.TEMPLATE;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.TERM;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.TEXT;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.TYPE;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.USERID;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.dateFormat;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -62,8 +52,6 @@ import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.base.ConnectionsConstants.Namespace;
 import com.ibm.sbt.services.client.base.serializers.AtomEntitySerializer;
 import com.ibm.sbt.services.client.connections.activities.Activity;
-import com.ibm.sbt.services.client.connections.activities.DateField;
-import com.ibm.sbt.services.client.connections.activities.Field;
 import com.ibm.sbt.services.client.connections.common.Person;
 
 
@@ -93,12 +81,10 @@ public class ActivitySerializer extends AtomEntitySerializer<Activity> {
 				communityUuid(),
 				communityCategory(),
 				priorityCategory(),
-				externalCategory(),
 				completedCategory(),
 				templateCategory(),
 				flagsCategory(),
 				linkContainer(),
-				summary(),
 				subtitle(),
 				inReplyTo(),
 				assignedTo()
@@ -110,44 +96,11 @@ public class ActivitySerializer extends AtomEntitySerializer<Activity> {
 		return serializeToString();
 	}
 	
-	protected List<Element> fields() {
-		Field[] fields = entity.getFields();
-		if (fields == null) {
-			return null;
-		}
-		ArrayList<Element> elements = new ArrayList<Element>();
-		for (Field field : fields) {
-			Element element = element(FIELD, 
-				attribute(SCHEME, Namespace.SNX.getUrl()),
-				attribute(FID, field.getFid()),
-				attribute(NAME, field.getName()),
-				attribute(TYPE, field.getType()),
-				attribute(POSITION, EMPTY+field.getPosition()));
-
-			String type = field.getType();
-			if (DATE.equals(type)) {
-				DateField dateField = (DateField)field;
-				addText(element, DateSerializer.toString(dateField.getDate()));
-			} else if (FILE.equals(type)) {
-				//FileField fileField = (FileField)field;
-			} else if (LINK.equals(type)) {
-				//LinkField linkField = (LinkField)field;
-			} else if (PERSON.equals(type)) {
-				//PersonField personField = (PersonField)field;
-			} else if (TEXT.equals(type)) {
-				//TextField textField = (TextField)field;
-			}
-		}
-		
-		return elements;
-	}
-	
 	protected Element activityCategory() {
-	    //only when create (id is null)
-		return entity.getActivityUuid()==null? element(CATEGORY, 
+		return element(CATEGORY, 
 				attribute(SCHEME, Namespace.TYPE.getUrl()), 
 				attribute(TERM, ACTIVITY), 
-				attribute(LABEL, LABEL_ACTIVITY)):null;
+				attribute(LABEL, LABEL_ACTIVITY));
 	}
 	
 	protected Element communityCategory() {
@@ -222,10 +175,4 @@ public class ActivitySerializer extends AtomEntitySerializer<Activity> {
 				attribute(USERID, assignedTo.getUserid())) : null;
 	}
 
-	@Override
-	protected Element content() {
-		return textElement(CONTENT, entity.getContent(), 
-				attribute(TYPE, APPLICATION_ATOM_XML));
-	}
-	
 }

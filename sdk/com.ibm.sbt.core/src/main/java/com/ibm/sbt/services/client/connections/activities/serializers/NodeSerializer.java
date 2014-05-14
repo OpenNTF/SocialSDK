@@ -97,8 +97,8 @@ class NodeSerializer extends AtomEntitySerializer<NodeEntity> {
 	protected Element activityNodeCategory() {
 		return element("category", 
 				attribute("scheme", "http://www.ibm.com/xmlns/prod/sn/type"), 
-				attribute("term", "activity_node"), 
-				attribute("label", "Activity Node"));
+				attribute("term", "activity"), 
+				attribute("label", "Activity"));
 	}
 	
 	protected Element activityUuid() {

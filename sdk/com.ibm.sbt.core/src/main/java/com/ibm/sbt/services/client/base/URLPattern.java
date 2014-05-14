@@ -140,7 +140,7 @@ public class URLPattern {
 		}
 		
 		protected String getPartValue(List<NamedUrlPart> parts){
-			String value = getName();;
+			String value = getName();
 			if (isMutable()){
 				boolean partMatch = false;
 				for (NamedUrlPart part : parts){

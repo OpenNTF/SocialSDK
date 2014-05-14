@@ -14,16 +14,15 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<%@page import="com.ibm.sbt.services.client.connections.activity.model.ActivityNodeType"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.FieldList"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.Field"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.ActivityNode"%>
+<%@page import="com.ibm.sbt.services.client.connections.activities.AssignedTo"%>
+<%@page import="com.ibm.sbt.services.client.connections.activities.Field"%>
+<%@page import="com.ibm.sbt.services.client.connections.activities.ActivityNode"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.Activity"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.ActivityList"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.ActivityService"%>
+<%@page import="com.ibm.sbt.services.client.connections.activities.Activity"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
+<%@page import="com.ibm.sbt.services.client.connections.activities.ActivityService"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
@@ -44,22 +43,22 @@
 	<%
 	try {		
 		ActivityService activityService = new ActivityService();
-		ActivityList activities = activityService.getMyActivities();
+		EntityList<Activity> activities = activityService.getMyActivities();
 		
 		if(activities != null && !activities.isEmpty()) {	
-			ActivityNode todoNode = new ActivityNode(activityService, activities.get(0).getActivityId());
-			todoNode.setEntryType(ActivityNodeType.ToDo.getActivityNodeType());
+			ActivityNode todoNode = new ActivityNode(activityService, activities.get(0).getActivityUuid());
+			todoNode.setType(ActivityNode.TYPE_TODO);
 			todoNode.setContent("Todo Node Content " + System.currentTimeMillis());
 			todoNode.setTitle("todoNode from JSP " + System.currentTimeMillis());
 			List<String> tagList = new ArrayList<String>();
 			tagList.add("todoNodeTag");
 			todoNode.setTags(tagList);
 			todoNode.setPosition(1000);
-			todoNode.setDueDate(new Date()); 
+			todoNode.setDuedate(new Date()); 
 			
 			String assignedToName = Context.get().getProperty("sample.displayName1");
 			String assignedToId = Context.get().getProperty("sample.userId1");
-			todoNode.setAssignedTo(assignedToName, assignedToId);
+			todoNode.setAssignedTo(new AssignedTo(assignedToName, assignedToId));
 	
 			todoNode = activityService.createActivityNode(todoNode);
 			out.println("Todo Node Created : " + todoNode.getId());

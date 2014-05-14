@@ -17,9 +17,9 @@
 <%@page import="java.util.Date"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.Activity"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.ActivityList"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.ActivityService"%>
+<%@page import="com.ibm.sbt.services.client.connections.activities.Activity"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
+<%@page import="com.ibm.sbt.services.client.connections.activities.ActivityService"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
@@ -40,7 +40,7 @@
 	<%
 	try {		
 		ActivityService activityService = new ActivityService();
-		ActivityList activities = activityService.getMyActivities();
+		EntityList<Activity> activities = activityService.getMyActivities();
 		
 		if(activities != null && !activities.isEmpty()) {
 			Activity activity = activities.get(0);
@@ -53,10 +53,10 @@
 			tagList.add("tag123");
 			tagList.add("tagabc");
 			activity.setTags(tagList);
-			activity.setDueDate(new Date());
+			activity.setDuedate(new Date());
 			
 			activityService.updateActivity(activity);
-			out.println("Activity after updation : " + activityService.getActivity(activity.getActivityId()).getTitle() );
+			out.println("Activity after updation : " + activityService.getActivity(activity.getActivityUuid()).getTitle() );
 		}  else {
 			out.println("No Activites Found");
 		}

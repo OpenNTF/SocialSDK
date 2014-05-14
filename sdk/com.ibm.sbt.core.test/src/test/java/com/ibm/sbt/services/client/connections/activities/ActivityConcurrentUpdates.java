@@ -3,10 +3,9 @@ package com.ibm.sbt.services.client.connections.activities;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ibm.commons.util.StringUtil;
-
-import org.junit.Assert;
 import org.junit.Test;
+
+import com.ibm.commons.util.StringUtil;
 
 public class ActivityConcurrentUpdates {
 	
@@ -32,7 +31,7 @@ public class ActivityConcurrentUpdates {
 			List<Thread> threads = new ArrayList<Thread>();
 			
 			for (ActivityClient client : clients) {
-				Thread thread = client.createActivityNodes(activity, 10);
+				Thread thread = client.createActivityNodes(activity, 20);
 				threads.add(thread);
 			}
 			

@@ -40,6 +40,7 @@ public class ActivityDescendantsSortByTest extends BaseActivityServiceTest {
 		activity = createActivity("ActivityDescendantsUpdatedSince-"+start);
 		
 		List<ActivityNode> nodes = createActivityDescendants(activity);
+		org.junit.Assert.assertNotNull(nodes);
 				
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("sortBy", "modified");

@@ -31,6 +31,7 @@ import static com.ibm.sbt.services.client.base.ConnectionsConstants.TEXT;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.TITLE;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.TYPE;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.UPDATED;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.SUBTITLE;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.dateFormat;
 
 import java.util.ArrayList;
@@ -89,10 +90,15 @@ public class AtomEntitySerializer<T extends AtomEntity> extends BaseEntitySerial
 	}
 	
 	protected Element summary() {
-		return textElement(SUMMARY, entity.getSummary(), attribute(TYPE, TEXT)); }
+		return textElement(SUMMARY, entity.getSummary(), attribute(TYPE, TEXT)); 
+	}
+	
+	protected Element subtitle() {
+		return textElement(SUBTITLE, entity.getSubtitle(), attribute(TYPE, TEXT)); 
+	}
 	
 	protected Element content() {
-		return textElement(CONTENT, entity.getContent(), attribute(TYPE, TEXT));
+		return textElement(CONTENT, entity.getContent(), attribute(TYPE, entity.getContentType()));
 	}
 	
 	protected Node author() {

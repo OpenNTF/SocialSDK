@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * ï¿½ Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,12 +19,15 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.ibm.sbt.services.client.connections.activities.ActivitiesSinceTest;
+import com.ibm.sbt.services.client.connections.activities.ActivityAddMemberTest;
 import com.ibm.sbt.services.client.connections.activities.ActivityCrudrTest;
 import com.ibm.sbt.services.client.connections.activities.ActivityDescendantsSinceTest;
 import com.ibm.sbt.services.client.connections.activities.ActivityFeedTest;
 import com.ibm.sbt.services.client.connections.activities.ActivityFieldCrudrTest;
 import com.ibm.sbt.services.client.connections.activities.ActivityMemberArudTest;
 import com.ibm.sbt.services.client.connections.activities.ActivityNodeCrudrTest;
+import com.ibm.sbt.services.client.connections.activities.ActivityNodeTypesTest;
 import com.ibm.sbt.services.client.connections.activities.ActivityPriorityTest;
 import com.ibm.sbt.services.client.connections.activities.ActivityTest;
 import com.ibm.sbt.services.client.connections.activities.ActivityUrlsTest;
@@ -39,6 +42,8 @@ import com.ibm.sbt.services.client.connections.activities.PublicActivityTest;
  */
 @RunWith(Suite.class)
 @SuiteClasses({ 
+	ActivitiesSinceTest.class,
+	ActivityAddMemberTest.class,
 	ActivityUrlsTest.class,
 	ActivityCrudrTest.class,
 	ActivityDescendantsSinceTest.class,
@@ -51,7 +56,8 @@ import com.ibm.sbt.services.client.connections.activities.PublicActivityTest;
 	CreateActivitiesTest.class,
 	GetMyActivitiesTest.class,
 	PublicActivityTest.class,
-	GetActivityDescendantsTest.class
+	GetActivityDescendantsTest.class,
+	ActivityNodeTypesTest.class
 })
 public class ActivitiesTestSuite {
 }

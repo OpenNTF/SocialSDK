@@ -61,12 +61,13 @@ public class ForumService extends ConnectionsService {
 
 	/**
 	 * Used in constructing REST APIs
+	 * 
+	 * TODO Remove these
 	 */
 	private static final String FORUM_UNIQUE_IDENTIFIER = "forumUuid";
 	private static final String TOPIC_UNIQUE_IDENTIFIER = "topicUuid";
 	private static final String REPLY_UNIQUE_IDENTIFIER = "replyUuid";
 	private static final String POST_UNIQUE_IDENTIFIER  = "postUuid"; 
-	private static final String COMM_UNIQUE_IDENTIFIER	= "communityUuid";
 	public static final String CREATE_OP 				= "create";
 
 	/**
@@ -192,8 +193,7 @@ public class ForumService extends ConnectionsService {
 	}
 	
 	/**
-	 * Get a feed that includes the topics in a specific forum,
-	 * whether it is a stand-alone or community forum.
+	 * Get a feed that includes the topics in a specific stand-alone forum.
 	 * 
 	 * @param forumUid
 	 * @return EntityList&lt;ForumTopic&gt;
@@ -203,10 +203,8 @@ public class ForumService extends ConnectionsService {
 		return getForumTopics(forumUid, null);
 	}
 
-
 	/**
-	 * Get a feed that includes the topics in a specific forum,
-	 * whether it is a stand-alone or community forum.
+	 * Get a feed that includes the topics in a specific stand-alone forum.
 	 * You can narrow down the topics that are returned by passing parameters to the request 
 	 * that you use to retrieve the feed.
 	 * 
@@ -215,10 +213,34 @@ public class ForumService extends ConnectionsService {
 	 * @return EntityList&lt;ForumTopic&gt;
 	 * @throws ClientServicesException
 	 */
-	public EntityList<ForumTopic> getForumTopics(String forumUid, Map<String, String> parameters) throws ClientServicesException {
-		parameters = getParameters(parameters);
-		parameters.put(FORUM_UNIQUE_IDENTIFIER, forumUid);
-		String myTopicsUrl = ForumUrls.TOPICS.format(this);
+	public EntityList<ForumTopic> getForumTopics(String forumUuid, Map<String, String> parameters) throws ClientServicesException {
+		String myTopicsUrl = ForumUrls.FORUM_TOPICS.format(this, ForumUrls.forumPart(forumUuid));
+		return getForumTopicEntityList(myTopicsUrl, parameters);
+	}
+
+	/**
+	 * Get a feed that includes the topics in a specific community forum.
+	 * 
+	 * @param communityUuid
+	 * @return EntityList&lt;ForumTopic&gt;
+	 * @throws ClientServicesException
+	 */
+	public EntityList<ForumTopic> getCommunityTopics(String communityUuid) throws ClientServicesException {
+		return getCommunityTopics(communityUuid, null);
+	}
+
+	/**
+	 * Get a feed that includes the topics in a specific community forum.
+	 * You can narrow down the topics that are returned by passing parameters to the request 
+	 * that you use to retrieve the feed.
+	 * 
+	 * @param communityUuid
+	 * @param parameters
+	 * @return EntityList&lt;ForumTopic&gt;
+	 * @throws ClientServicesException
+	 */
+	public EntityList<ForumTopic> getCommunityTopics(String communityUuid, Map<String, String> parameters) throws ClientServicesException {
+		String myTopicsUrl = ForumUrls.COMMUNITY_TOPICS.format(this, ForumUrls.communityPart(communityUuid));
 		return getForumTopicEntityList(myTopicsUrl, parameters);
 	}
 
@@ -244,7 +266,7 @@ public class ForumService extends ConnectionsService {
 	 * @throws ClientServicesException
 	 */
 	public EntityList<ForumTopic> getPublicForumTopics(Map<String, String> parameters) throws ClientServicesException {
-		String myTopicsUrl = ForumUrls.TOPICS.format(this);
+		String myTopicsUrl = ForumUrls.PUBLIC_TOPICS.format(this);
 		return getForumTopicEntityList(myTopicsUrl, parameters);
 	}
 
@@ -513,17 +535,14 @@ public class ForumService extends ConnectionsService {
 	 * @return ForumTopic
 	 * @throws ClientServicesException
 	 */
-	public ForumTopic createForumTopic(ForumTopic topic,String forumId) throws ClientServicesException {
+	public ForumTopic createForumTopic(ForumTopic topic,String forumUuid) throws ClientServicesException {
 		if (null == topic){
 			throw new ClientServicesException(null,"Topic object passed was null");
 		}
 		ForumSerializer serializer = new ForumSerializer(topic);
 
-		Map<String, String> params = new HashMap<String, String>();
-		params.put(FORUM_UNIQUE_IDENTIFIER, forumId);
-
-		String url = ForumUrls.TOPICS.format(this);
-		Response response = createData(url, params, getAtomHeaders(), serializer.generateCreate());
+		String url = ForumUrls.FORUM_TOPICS.format(this, ForumUrls.forumPart(forumUuid));
+		Response response = createData(url, null, getAtomHeaders(), serializer.generateCreate());
 		checkResponseCode(response, HTTPCode.CREATED);
 		topic = getForumTopicFeedHandler(false).createEntity(response);
 
@@ -577,7 +596,9 @@ public class ForumService extends ConnectionsService {
 		if (null == topic || StringUtil.isEmpty(topic.getUid())) {
 			throw new ClientServicesException(null,"Topic object passed was null");
 		}
-		String url = ForumUrls.TOPICS.format(this);
+		String url = ForumUrls.FORUM_TOPICS.format(this, ForumUrls.forumPart(topic.getForumUuid()));
+		
+		// TODO Carlos WHY ARE WE DOING THIS?
 		if(topic.getFieldsMap().get(ForumsXPath.title)== null)
 			topic.setTitle(topic.getTitle());
 		if(topic.getFieldsMap().get(ForumsXPath.content)== null)
@@ -586,11 +607,7 @@ public class ForumService extends ConnectionsService {
 			topic.setTags(topic.getTags());
 		
 		ForumSerializer serializer = new ForumSerializer(topic);
-
-		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put(TOPIC_UNIQUE_IDENTIFIER, topic.getUid());
-
-		Response response = getClientService().put(url, parameters, getAtomHeaders(), serializer.generateUpdate(),ClientService.FORMAT_NULL);
+		Response response = getClientService().put(url, null, getAtomHeaders(), serializer.generateUpdate(),ClientService.FORMAT_NULL);
 		checkResponseCode(response, HTTPCode.OK);
 	}
 	
@@ -879,11 +896,8 @@ public class ForumService extends ConnectionsService {
 		}
 		ForumSerializer serializer = new ForumSerializer(topic);
 
-		Map<String, String> params = new HashMap<String, String>();
-		params.put(COMM_UNIQUE_IDENTIFIER, communityId);
-
-		String postUrl = ForumUrls.TOPICS.format(this);
-		Response response = createData(postUrl, params, getAtomHeaders() ,serializer.generateCreate());
+		String postUrl = ForumUrls.COMMUNITY_TOPICS.format(this, ForumUrls.communityPart(communityId));
+		Response response = createData(postUrl, null, getAtomHeaders() ,serializer.generateCreate());
 		checkResponseCode(response, HTTPCode.CREATED);
 		topic = getForumTopicFeedHandler().createEntity(response);
 

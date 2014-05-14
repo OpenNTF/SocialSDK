@@ -88,6 +88,15 @@ public class Member extends AtomEntity {
 	}
 
 	/**
+	 * Returns the name of the member.
+	 * 
+	 * @return
+	 */
+	public String getName() {
+		return getTitle();
+	}
+	
+	/**
 	 * Sets the contributor from ATOM entry document.
 	 * 
 	 * @param id

@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * ï¿½ Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -155,7 +155,7 @@ public class Field extends BaseEntity {
 	}
 		
 	/**
-	 * @return
+	 * Create a link to from the specified node
 	 */
 	protected Link createLink(Node node, FieldEntry fieldEntry) {
 		return new Link(getService(), new XmlDataHandler(node, ConnectionsConstants.nameSpaceCtx, (XPathExpression)fieldEntry.getPath()));

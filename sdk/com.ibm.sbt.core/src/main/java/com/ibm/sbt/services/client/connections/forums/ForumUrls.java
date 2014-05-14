@@ -38,11 +38,21 @@ public enum ForumUrls implements URLContainer {
 	TAGS_TOPICS(new VersionedUrl(v4_0, "{forums}/{authType}/atom/tags/topics")),
 	RECOMMENDATION_ENTRIES(new VersionedUrl(v4_0, "{forums}/{authType}/atom/recommendation/entries")),
 	TOPIC(new VersionedUrl(v4_0, "{forums}/{authType}/atom/topic")),
-	TOPICS(new VersionedUrl(v4_0, "{forums}/{authType}/atom/topics")),
+	PUBLIC_TOPICS(new VersionedUrl(v4_0, "{forums}/{authType}/atom/topics")),
+	FORUM_TOPICS(new VersionedUrl(v4_0, "{forums}/{authType}/atom/topics?forumUuid={forumUuid}")),
+	COMMUNITY_TOPICS(new VersionedUrl(v4_0, "{forums}/{authType}/atom/topics?communityUuid={communityUuid}")),
 	TOPICS_MY(new VersionedUrl(v4_0, "{forums}/{authType}/atom/topics/my")),
 	REPLIES(new VersionedUrl(v4_0, "{forums}/{authType}/atom/replies")),
 	REPLY(new VersionedUrl(v4_0, "{forums}/{authType}/atom/reply"));
 
+	static final public NamedUrlPart forumPart(String forumUuid) {
+		return new NamedUrlPart("forumUuid", forumUuid);
+	}
+	
+	static final public NamedUrlPart communityPart(String communityUuid) {
+		return new NamedUrlPart("communityUuid", communityUuid);
+	}
+	
 	private URLBuilder builder;
 	
 	private ForumUrls(VersionedUrl... urlVersions) {

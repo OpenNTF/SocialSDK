@@ -14,15 +14,13 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<%@page import="com.ibm.sbt.services.client.connections.activity.model.ActivityNodeContentType"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.model.ActivityNodeType"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.ActivityNode"%>
+<%@page import="com.ibm.sbt.services.client.connections.activities.ActivityNode"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.Activity"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.ActivityList"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.ActivityService"%>
+<%@page import="com.ibm.sbt.services.client.connections.activities.Activity"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
+<%@page import="com.ibm.sbt.services.client.connections.activities.ActivityService"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
@@ -43,14 +41,15 @@
 	<%
 	try {		
 		ActivityService activityService = new ActivityService();
-		ActivityList activities = activityService.getMyActivities();
+		EntityList<Activity> activities = activityService.getMyActivities();
 		
 		if(activities != null && !activities.isEmpty()) {
-			ActivityNode emailNode = new ActivityNode(activityService, activities.get(0).getActivityId());
-			emailNode.setEntryType(ActivityNodeType.Email.getActivityNodeType());
+			ActivityNode emailNode = new ActivityNode(activityService);
+			emailNode.setActivityUuid(activities.get(0).getActivityUuid());
+			emailNode.setType(ActivityNode.TYPE_EMAIL);
 			emailNode.setTitle("EmailNode from JSP " + System.currentTimeMillis());
 			emailNode.setContent("TEXT Content");
-			emailNode.setContentType(ActivityNodeContentType.Text.getActivityNodeContentType());
+			emailNode.setContentType("text");
 			List<String> tagList = new ArrayList<String>();
 			tagList.add("emailTag");
 			emailNode.setTags(tagList);

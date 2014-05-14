@@ -14,16 +14,14 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<%@page import="com.ibm.sbt.services.client.connections.activity.model.ActivityNodeType"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.FieldList"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.Field"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.ActivityNode"%>
+<%@page import="com.ibm.sbt.services.client.connections.activities.Field"%>
+<%@page import="com.ibm.sbt.services.client.connections.activities.ActivityNode"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.Activity"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.ActivityList"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.ActivityService"%>
+<%@page import="com.ibm.sbt.services.client.connections.activities.Activity"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
+<%@page import="com.ibm.sbt.services.client.connections.activities.ActivityService"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
@@ -44,11 +42,11 @@
 	<%
 	try {		
 		ActivityService activityService = new ActivityService();
-		ActivityList activities = activityService.getMyActivities();
+		EntityList<Activity> activities = activityService.getMyActivities();
 		
 		if(activities != null && !activities.isEmpty()) {
-			ActivityNode sectionNode = new ActivityNode(activityService, activities.get(0).getActivityId());
-			sectionNode.setEntryType(ActivityNodeType.Section.getActivityNodeType());
+			ActivityNode sectionNode = new ActivityNode(activityService, activities.get(0).getActivityUuid());
+			sectionNode.setType(ActivityNode.TYPE_SECTION);
 			sectionNode.setTitle("sectionNode from JSP " + System.currentTimeMillis());
 			sectionNode.setContent("SectionNode Content " + System.currentTimeMillis());
 			sectionNode.setPosition(2000);	

@@ -49,7 +49,8 @@ public class BaseActivityServiceTest extends BaseUnitTest {
 	@Before
 	public void initActivityServiceTest() {
 		if (activityService==null) {
-			activityService = new ActivityService(getBasicEndpoint());
+			BasicEndpoint endpoint = getBasicEndpoint();
+			activityService = (endpoint == null) ? new ActivityService() : new ActivityService(endpoint);
 		}
 	}
 	
@@ -68,7 +69,7 @@ public class BaseActivityServiceTest extends BaseUnitTest {
 	 * @return the basicEndpoint
 	 */
 	protected BasicEndpoint getBasicEndpoint() {
-    	if (basicEndpoint == null) {
+    	if (basicEndpoint == null && System.getProperty("ServerUrl") != null) {
 	    	String url = System.getProperty("ServerUrl");
 	    	String user = System.getProperty("UserName");
 	    	String password = System.getProperty("Password");

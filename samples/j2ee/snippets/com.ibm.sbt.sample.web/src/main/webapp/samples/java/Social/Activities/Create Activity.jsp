@@ -17,9 +17,9 @@
 <%@page import="java.util.Date"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.Activity"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.ActivityList"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.ActivityService"%>
+<%@page import="com.ibm.sbt.services.client.connections.activities.Activity"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
+<%@page import="com.ibm.sbt.services.client.connections.activities.ActivityService"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
@@ -47,7 +47,7 @@
 		tagList.add("tag1");
 		tagList.add("tag2");
 		activity.setTags(tagList);
-		activity.setDueDate(new Date());
+		activity.setDuedate(new Date());
 		
 		activity = activityService.createActivity(activity);
 		

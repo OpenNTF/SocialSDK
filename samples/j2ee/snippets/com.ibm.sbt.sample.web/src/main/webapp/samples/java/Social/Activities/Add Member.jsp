@@ -14,12 +14,11 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<%@page import="com.ibm.sbt.services.client.connections.activity.MemberList"%>
 <%@page import="com.ibm.commons.util.StringUtil"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.Member"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.Activity"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.ActivityList"%>
-<%@page import="com.ibm.sbt.services.client.connections.activity.ActivityService"%>
+<%@page import="com.ibm.sbt.services.client.connections.common.Member"%>
+<%@page import="com.ibm.sbt.services.client.connections.activities.Activity"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
+<%@page import="com.ibm.sbt.services.client.connections.activities.ActivityService"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
@@ -40,13 +39,14 @@
 	<%
 	try {		
 		ActivityService activityService = new ActivityService();
-		ActivityList activities = activityService.getMyActivities();
+		EntityList<Activity> activities = activityService.getMyActivities();
 		String memberId = "";
 		String activityId = "";
 		if(activities != null && ! activities.isEmpty()) {
 			String id = Context.get().getProperty("sample.userId2");
-			Member memberToBeAdded = new Member(activityService, id);
-			memberToBeAdded = activityService.addMember(activities.get(0).getActivityId(), memberToBeAdded);
+			Member memberToBeAdded = new Member();
+			memberToBeAdded.setId(id);
+			memberToBeAdded = activityService.addMember(activities.get(0).getActivityUuid(), memberToBeAdded);
 			out.println("Member Added ");
 			if(memberToBeAdded != null) {
 				out.println("Member Name : " + memberToBeAdded.getName() + " added to Activity : " + activityId);

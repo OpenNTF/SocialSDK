@@ -1,4 +1,4 @@
-***REMOVED***
+<?php
 
 // THIS IS AN EXAMPLE
 // you will obviously need to do more server side work than I am doing here to check and move your upload.
@@ -34,4 +34,4 @@ if(is_array($_FILES)){
 // yeah, seems you have to wrap iframeIO stuff in textareas?
 $foo = $json->encode($ar);
 ?>
-<textarea>***REMOVED*** print $foo; ?></textarea>
+<textarea><?php print $foo; ?></textarea>

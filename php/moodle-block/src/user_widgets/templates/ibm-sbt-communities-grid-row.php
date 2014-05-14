@@ -18,32 +18,32 @@
 </style>
 
 <div>
-	<button style="font-size: 12px;" class="btn btn-primary" onclick="document.getElementById('ibm-sbt-create-community-***REMOVED*** echo $timestamp; ?>').style.display = 'block';">***REMOVED*** echo get_string('create', 'block_ibmsbt');?></button>
-	<button style="font-size: 12px;" class="btn btn-primary" onclick="window.open('***REMOVED*** echo $settings->getURL($this->config->endpoint);?>/communities', '_blank');">***REMOVED*** echo get_string('open_communities', 'block_ibmsbt');?></button>
+	<button style="font-size: 12px;" class="btn btn-primary" onclick="document.getElementById('ibm-sbt-create-community-<?php echo $timestamp; ?>').style.display = 'block';"><?php echo get_string('create', 'block_ibmsbt');?></button>
+	<button style="font-size: 12px;" class="btn btn-primary" onclick="window.open('<?php echo $settings->getURL($this->config->endpoint);?>/communities', '_blank');"><?php echo get_string('open_communities', 'block_ibmsbt');?></button>
 	
-	<div class="ibmsbtCommunityDialog" id="ibm-sbt-create-community-***REMOVED*** echo $timestamp; ?>" style="font-size: 12px;">
-		<div id="ibm-sbt-success-***REMOVED*** echo $timestamp; ?>" display: none; font-weight: bold; color: green;"></div>
-		<div id="ibm-sbt-error-***REMOVED*** echo $timestamp; ?>" style="display:none;" class="alert alert-error"></div>
+	<div class="ibmsbtCommunityDialog" id="ibm-sbt-create-community-<?php echo $timestamp; ?>" style="font-size: 12px;">
+		<div id="ibm-sbt-success-<?php echo $timestamp; ?>" display: none; font-weight: bold; color: green;"></div>
+		<div id="ibm-sbt-error-<?php echo $timestamp; ?>" style="display:none;" class="alert alert-error"></div>
 		<table>
 			<tr>
-				<td><label class="control-label" for="ibm-sbt-community-title-***REMOVED*** echo $timestamp; ?>">***REMOVED*** echo get_string('title', 'block_ibmsbt');?>:</label></td>
-				<td><input id="ibm-sbt-community-title-***REMOVED*** echo $timestamp; ?>" type="text" /></td>
+				<td><label class="control-label" for="ibm-sbt-community-title-<?php echo $timestamp; ?>"><?php echo get_string('title', 'block_ibmsbt');?>:</label></td>
+				<td><input id="ibm-sbt-community-title-<?php echo $timestamp; ?>" type="text" /></td>
 			</tr>
 			<tr>
-				<td><label class="control-label" for="ibm-sbt-community-content-***REMOVED*** echo $timestamp; ?>">***REMOVED*** echo get_string('content', 'block_ibmsbt');?>:</label></td>
-				<td><input id="ibm-sbt-community-content-***REMOVED*** echo $timestamp; ?>" type="text-***REMOVED*** echo $timestamp; ?>" /></td>
+				<td><label class="control-label" for="ibm-sbt-community-content-<?php echo $timestamp; ?>"><?php echo get_string('content', 'block_ibmsbt');?>:</label></td>
+				<td><input id="ibm-sbt-community-content-<?php echo $timestamp; ?>" type="text-<?php echo $timestamp; ?>" /></td>
 			</tr>
 			<tr>
-				<td><label class="control-label" for="ibm-sbt-community-tags-***REMOVED*** echo $timestamp; ?>">***REMOVED*** echo get_string('tags', 'block_ibmsbt');?>:</label></td>
-				<td><input id="ibm-sbt-community-tags-***REMOVED*** echo $timestamp; ?>" type="text" /></td>
+				<td><label class="control-label" for="ibm-sbt-community-tags-<?php echo $timestamp; ?>"><?php echo get_string('tags', 'block_ibmsbt');?>:</label></td>
+				<td><input id="ibm-sbt-community-tags-<?php echo $timestamp; ?>" type="text" /></td>
 			</tr>
 		</table>
 		<br/><br/>
-		<button class="btn btn-primary" id="ibm-sbt-create-community-button-***REMOVED*** echo $timestamp; ?>">***REMOVED*** echo get_string('create_community', 'block_ibmsbt');?></button>
-		<button class="btn btn-primary" onclick="document.getElementById('ibm-sbt-create-community-***REMOVED*** echo $timestamp; ?>').style.display = 'none';">***REMOVED*** echo get_string('close', 'block_ibmsbt');?></button>
+		<button class="btn btn-primary" id="ibm-sbt-create-community-button-<?php echo $timestamp; ?>"><?php echo get_string('create_community', 'block_ibmsbt');?></button>
+		<button class="btn btn-primary" onclick="document.getElementById('ibm-sbt-create-community-<?php echo $timestamp; ?>').style.display = 'none';"><?php echo get_string('close', 'block_ibmsbt');?></button>
 	</div>
 </div>
-<script type="text/template" id="communityRow-***REMOVED*** echo $timestamp; ?>">
+<script type="text/template" id="communityRow-<?php echo $timestamp; ?>">
 <tr class="${rowClass}" style="font-size: 12px;">
 	<td style="width:15em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inline-block; padding-left: 10px;">
 			<span dojoAttachPoint="placeLinkNode">
@@ -62,7 +62,7 @@
 	</td>
 </tr>
 </script>
-<script type="text/template" id="pagingHeader-***REMOVED*** echo $timestamp; ?>">
+<script type="text/template" id="pagingHeader-<?php echo $timestamp; ?>">
 <div dojoAttachPoint="pagingHeader" style="font-size: 12px;">
 	<div>
 		<hr style="width:90%; margin: 0.7em 0; left: -30px; border: 0; height: 1px;"/>
@@ -80,7 +80,7 @@
 		</div>
 </div>
 </script>
-<script type="text/template" id="pagingFooter-***REMOVED*** echo $timestamp; ?>">
+<script type="text/template" id="pagingFooter-<?php echo $timestamp; ?>">
 <div dojoattachpoint="pagingFooter" class="lotusPaging" style="font-size: 12px;">
 	<div>
 		<hr style="width:90%; margin: 0.7em 0; left: -30px; border: 0; height: 1px;"/>

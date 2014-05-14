@@ -26,7 +26,7 @@ function ibm_sbt_generate_callback_url() {
 		alert('You must specify an endpoint name before the callback URL can be generated');
 		return;
 	}
-	var url = "***REMOVED*** global $CFG; echo $CFG->wwwroot . '/blocks/ibmsbt/core/index.php?classpath=endpoint&class=SBTOAuth2Endpoint&method=authenticationCallback&endpointName='?>";
+	var url = "<?php global $CFG; echo $CFG->wwwroot . '/blocks/ibmsbt/core/index.php?classpath=endpoint&class=SBTOAuth2Endpoint&method=authenticationCallback&endpointName='?>";
 	url += endpointName;
 	document.getElementById('new_callback_url').value = url;
 }
@@ -337,7 +337,7 @@ function ibm_sbt_save_new_endpoint() {
 	};
 	
 	$.ajax({
-	    url : "***REMOVED*** global $CFG; echo $CFG->wwwroot . '/blocks/ibmsbt/endpoint_settings.php'; ?>",
+	    url : "<?php global $CFG; echo $CFG->wwwroot . '/blocks/ibmsbt/endpoint_settings.php'; ?>",
 	    type: "POST",
 	    data : formData,
 	    success: function(data, textStatus, jqXHR)
@@ -378,7 +378,7 @@ function ibm_sbt_remove_endpoint() {
 	};
 	
 	$.ajax({
-	    url : "***REMOVED*** global $CFG; echo $CFG->wwwroot . '/blocks/ibmsbt/endpoint_settings.php'; ?>",
+	    url : "<?php global $CFG; echo $CFG->wwwroot . '/blocks/ibmsbt/endpoint_settings.php'; ?>",
 	    type: "POST",
 	    data : formData,
 	    success: function(data, textStatus, jqXHR)
@@ -408,7 +408,7 @@ function ibm_sbt_edit_endpoint() {
 	};
 	
 	$.ajax({
-	    url : "***REMOVED*** global $CFG; echo $CFG->wwwroot . '/blocks/ibmsbt/endpoint_settings.php'; ?>",
+	    url : "<?php global $CFG; echo $CFG->wwwroot . '/blocks/ibmsbt/endpoint_settings.php'; ?>",
 	    type: "POST",
 	    data : formData,
 	    success: function(data, textStatus, jqXHR)
@@ -450,7 +450,7 @@ function ibm_sbt_edit_endpoint() {
 
 <div id="ibm-sbt-endpoint-manager" title="Manage your endpoints" style="display: none;">
 	<select id="endpoint_list" multiple="multiple" style="width: 100%;">
-		***REMOVED*** 
+		<?php 
 			$settings = new SBTSettings();
 			$endpoints = $settings->getEndpoints();
 			

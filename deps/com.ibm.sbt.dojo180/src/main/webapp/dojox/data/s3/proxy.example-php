@@ -1,4 +1,4 @@
-***REMOVED***
+<?php
 // enter your Amazon S3 secret key and access key here:
 $accessKey = "access key";
 $secretAccessKey = "secret access key";

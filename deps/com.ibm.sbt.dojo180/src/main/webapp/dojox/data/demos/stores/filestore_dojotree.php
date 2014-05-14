@@ -1,4 +1,4 @@
-***REMOVED***
+<?php
 	//Define the root directory to use for this service.
 	//All file lookups are relative to this path.
 	$rootDir = "../../../..";

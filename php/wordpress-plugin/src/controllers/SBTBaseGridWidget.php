@@ -1,4 +1,4 @@
-***REMOVED***
+<?php
 /*
  * © Copyright IBM Corp. 2014
  *
@@ -64,22 +64,22 @@ class SBTBaseGridWidget extends SBTBaseWidget {
 		
 		?>
 			<p>
-				<label for="***REMOVED*** echo $this->get_field_id('ibm-sbtk-grid-page-size'); ?>">Items per page:</label> 
-				<input class="widefat" id="***REMOVED*** echo $this->get_field_id('ibm-sbtk-grid-page-size'); ?>" name="***REMOVED*** echo $this->get_field_name('ibm-sbtk-grid-page-size'); ?>" type="text" value="***REMOVED*** echo esc_attr($pageSize); ?>"/>
+				<label for="<?php echo $this->get_field_id('ibm-sbtk-grid-page-size'); ?>">Items per page:</label> 
+				<input class="widefat" id="<?php echo $this->get_field_id('ibm-sbtk-grid-page-size'); ?>" name="<?php echo $this->get_field_name('ibm-sbtk-grid-page-size'); ?>" type="text" value="<?php echo esc_attr($pageSize); ?>"/>
 			</p>
 			<p>
-				<label for="***REMOVED*** echo $this->get_field_id('ibm-sbtk-grid-pager'); ?>">***REMOVED*** echo $GLOBALS[LANG]['pager']?>:</label> 
-				<input ***REMOVED*** echo ($pager ? 'checked="checked"' : ''); ?> id="***REMOVED*** echo $this->get_field_id('ibm-sbtk-grid-pager'); ?>" name="***REMOVED*** echo $this->get_field_name('ibm-sbtk-grid-pager'); ?>" type="checkbox" value="pager" />
+				<label for="<?php echo $this->get_field_id('ibm-sbtk-grid-pager'); ?>"><?php echo $GLOBALS[LANG]['pager']?>:</label> 
+				<input <?php echo ($pager ? 'checked="checked"' : ''); ?> id="<?php echo $this->get_field_id('ibm-sbtk-grid-pager'); ?>" name="<?php echo $this->get_field_name('ibm-sbtk-grid-pager'); ?>" type="checkbox" value="pager" />
 			</p>
 			<p>
-				<label for="***REMOVED*** echo $this->get_field_id('ibm-sbtk-grid-sorter'); ?>">***REMOVED*** echo $GLOBALS[LANG]['sorter']?>:</label> 
-				<input ***REMOVED*** echo ($sorter ? 'checked="checked"' : ''); ?> id="***REMOVED*** echo $this->get_field_id('ibm-sbtk-grid-sorter'); ?>" name="***REMOVED*** echo $this->get_field_name('ibm-sbtk-grid-sorter'); ?>" type="checkbox" value="sorter" />
+				<label for="<?php echo $this->get_field_id('ibm-sbtk-grid-sorter'); ?>"><?php echo $GLOBALS[LANG]['sorter']?>:</label> 
+				<input <?php echo ($sorter ? 'checked="checked"' : ''); ?> id="<?php echo $this->get_field_id('ibm-sbtk-grid-sorter'); ?>" name="<?php echo $this->get_field_name('ibm-sbtk-grid-sorter'); ?>" type="checkbox" value="sorter" />
 			</p>
 			<p>
-				<label for="***REMOVED*** echo $this->get_field_id('ibm-sbtk-grid-footer'); ?>">***REMOVED*** echo $GLOBALS[LANG]['footer']?>:</label> 
-				<input ***REMOVED*** echo ($footer ? 'checked="checked"' : ''); ?> id="***REMOVED*** echo $this->get_field_id('ibm-sbtk-grid-footer'); ?>" name="***REMOVED*** echo $this->get_field_name('ibm-sbtk-grid-footer'); ?>" type="checkbox" value="footer" />
+				<label for="<?php echo $this->get_field_id('ibm-sbtk-grid-footer'); ?>"><?php echo $GLOBALS[LANG]['footer']?>:</label> 
+				<input <?php echo ($footer ? 'checked="checked"' : ''); ?> id="<?php echo $this->get_field_id('ibm-sbtk-grid-footer'); ?>" name="<?php echo $this->get_field_name('ibm-sbtk-grid-footer'); ?>" type="checkbox" value="footer" />
 			</p>
-		***REMOVED*** 
+		<?php 
 	}
 		
 	/**

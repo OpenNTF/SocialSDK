@@ -1,4 +1,4 @@
-***REMOVED*** ob_start();
+<?php ob_start();
 
 /**
  * Plugin Name: Social Business Toolkit integration plugin

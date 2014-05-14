@@ -79,6 +79,7 @@ public final class ConnectionsConstants {
 	 * Activity ATOM
 	 */
 	public static final String ACTIVITY = "activity";
+	public static final String LABEL_ACTIVITY = "Activity";
 	public static final String ACTIVITY_NODE = "activity_node";
 	public static final String LABEL_ACTIVITYNODE = "Activity Node";
 	public static final String FIELD = "field";

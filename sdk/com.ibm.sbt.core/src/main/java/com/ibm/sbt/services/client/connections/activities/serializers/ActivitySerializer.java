@@ -34,6 +34,7 @@ import static com.ibm.sbt.services.client.base.ConnectionsConstants.HREF;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.IN_REPLY_TO;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.LABEL;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.LABEL_COMMUNITYACTIVITY;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.LABEL_ACTIVITY;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.LABEL_EXTERNAL;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.LINK;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.NAME;
@@ -140,10 +141,11 @@ public class ActivitySerializer extends AtomEntitySerializer<Activity> {
 	}
 	
 	protected Element activityCategory() {
-		return element(CATEGORY, 
+	    //only when create (id is null)
+		return entity.getActivityUuid()==null? element(CATEGORY, 
 				attribute(SCHEME, Namespace.TYPE.getUrl()), 
 				attribute(TERM, ACTIVITY), 
-				attribute(LABEL, ACTIVITY));
+				attribute(LABEL, LABEL_ACTIVITY)):null;
 	}
 	
 	protected Element communityCategory() {

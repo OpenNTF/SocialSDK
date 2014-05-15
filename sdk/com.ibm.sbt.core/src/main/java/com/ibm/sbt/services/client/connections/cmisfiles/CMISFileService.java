@@ -37,6 +37,8 @@ import com.ibm.sbt.services.endpoints.Endpoint;
  */
 public class CMISFileService extends BaseService {
 	
+	private static final String[] serviceMappingKeys = new String[]{"files"};
+	
 	private String repositoryId;
 
     /**
@@ -66,8 +68,8 @@ public class CMISFileService extends BaseService {
 	 * Return mapping key for this service
 	 */
 	@Override
-	public String getServiceMappingKey() {
-		return "files";
+	public String[] getServiceMappingKeys() {
+		return serviceMappingKeys;
 	}
     
     /**

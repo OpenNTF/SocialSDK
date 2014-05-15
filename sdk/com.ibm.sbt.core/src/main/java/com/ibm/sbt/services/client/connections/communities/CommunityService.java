@@ -73,6 +73,7 @@ import com.ibm.sbt.services.endpoints.Endpoint;
 public class CommunityService extends BaseService {
 	private static final String COMMUNITY_UNIQUE_IDENTIFIER = "communityUuid";
 	private static final String USERID 						= "userid";
+	private static final String[] serviceMappingKeys = new String[]{"communities"};
 	
 	/**
 	 * Constructor Creates CommunityService Object with default endpoint and default cache size
@@ -127,8 +128,8 @@ public class CommunityService extends BaseService {
 	 * Return mapping key for this service
 	 */
 	@Override
-	public String getServiceMappingKey() {
-		return "communities";
+	public String[] getServiceMappingKeys() {
+		return serviceMappingKeys;
 	}
 	
 	@Override

@@ -35,6 +35,7 @@ import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesCon
 import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.COLLEAGUE;
 import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.CONNECTION;
 import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.CONNECTIONID;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.CONNECTIONS;
 import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.CONNECTION_TYPE;
 import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.CONNECTION_UNIQUE_IDENTIFIER;
 import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.EMAIL;
@@ -101,6 +102,8 @@ public class ProfileService extends BaseService {
 
 	private static final long serialVersionUID = -598413531035038479L;
 
+	private static final String[] serviceMappingKeys = new String[]{PROFILES, CONNECTIONS};
+	
 	/**
 	 * Constructor Creates ProfileService Object with default endpoint and default cache size
 	 */
@@ -164,8 +167,8 @@ public class ProfileService extends BaseService {
 	 * Return mapping key for this service
 	 */
 	@Override
-	public String getServiceMappingKey() {
-		return PROFILES;
+	public String[] getServiceMappingKeys() {
+		return serviceMappingKeys;
 	}
 
 	/**

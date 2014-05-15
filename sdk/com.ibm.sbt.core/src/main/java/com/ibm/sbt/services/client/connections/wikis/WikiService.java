@@ -45,6 +45,7 @@ import com.ibm.sbt.services.endpoints.Endpoint;
  */
 public class WikiService extends BaseService {
 	
+	private static final String[] serviceMappingKeys = new String[]{"wikis"};
 	public WikiService() {
 		super();
 	}
@@ -61,8 +62,8 @@ public class WikiService extends BaseService {
 	 * Return mapping key for this service
 	 */
 	@Override
-	public String getServiceMappingKey() {
-		return "wikis";
+	public String[] getServiceMappingKeys() {
+		return serviceMappingKeys;
 	}
 	
 	/**

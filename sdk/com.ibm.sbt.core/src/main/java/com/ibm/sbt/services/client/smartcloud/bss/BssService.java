@@ -52,6 +52,7 @@ public class BssService extends JsonService {
 	public static String API_AUTHENTICATION_CHANGEPASSWORD = "/api/bss/service/authentication/changePassword";
 	public static String API_AUTHENTICATION_RESETPASSWORD = "/api/bss/service/authentication/resetPassword";
 	public static String API_AUTHENTICATION_SETONETIMEPASSWORD = "/api/bss/service/authentication/setOneTimePassword";
+	private static final String[] serviceMappingKeys = new String[]{""};
 	
 	public enum DurationUnits {
 		YEARS, MONTHS, DAYS
@@ -197,8 +198,8 @@ public class BssService extends JsonService {
 	 * Return mapping key for this service
 	 */
 	@Override
-	public String getServiceMappingKey() {
-		return "";
+	public String[] getServiceMappingKeys() {
+		return serviceMappingKeys;
 	}
     
     /* (non-Javadoc)

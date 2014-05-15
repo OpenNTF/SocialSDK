@@ -46,6 +46,8 @@ import com.ibm.sbt.services.endpoints.Endpoint;
 
 public class FollowService extends BaseService{
 	
+	private static final String[] serviceMappingKeys = new String[]{""};
+	
 	public FollowService() {
 		super();
 	}
@@ -62,8 +64,8 @@ public class FollowService extends BaseService{
 	 * Return mapping key for this service
 	 */
 	@Override
-	public String getServiceMappingKey() {
-		return "";
+	public String[] getServiceMappingKeys() {
+		return serviceMappingKeys;
 	}
 
 	@Override

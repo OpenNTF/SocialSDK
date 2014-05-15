@@ -33,6 +33,8 @@ import com.ibm.sbt.services.endpoints.Endpoint;
  */
 public class BookmarkService extends BaseService {
 	
+	private static final String[] serviceMappingKeys = new String[]{""};
+	
 	/**
 	 * Construct an instance of the BookmarkService using the default "connections" endpoint.
 	 */
@@ -62,8 +64,8 @@ public class BookmarkService extends BaseService {
 	 * Return mapping key for this service
 	 */
 	@Override
-	public String getServiceMappingKey() {
-		return ""; //dogear?
+	public String[] getServiceMappingKeys() {
+		return serviceMappingKeys; //dogear?
 	}
 	
 	/**

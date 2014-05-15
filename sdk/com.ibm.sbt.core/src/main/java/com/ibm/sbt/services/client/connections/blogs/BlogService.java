@@ -48,6 +48,7 @@ public class BlogService extends BaseService {
 	public String contextRoot = "blogs";
 	public String defaultHomepageHandle = "homepage";
 	public static String BLOG_HOMEPAGE_KEY = "blogHomepageHandle";
+	private static final String[] serviceMappingKeys = new String[]{"blogs"};
 	
 	/**
 	 * Constructor Creates BlogService Object with default endpoint
@@ -82,8 +83,8 @@ public class BlogService extends BaseService {
 	 * Return mapping key for this service
 	 */
 	@Override
-	public String getServiceMappingKey() {
-		return "blogs";
+	public String[] getServiceMappingKeys() {
+		return serviceMappingKeys;
 	}
 	
 	private void setHomepageFromEndpoint(Endpoint endpoint){

@@ -57,7 +57,7 @@ public class SearchService extends BaseService {
 	 * Used in constructing REST APIs
 	 */
 	private static final String separator				= ",";
-	
+	private static final String[] serviceMappingKeys = new String[]{"search"};
 	/**
 	 * Default Constructor
 	 */
@@ -90,8 +90,8 @@ public class SearchService extends BaseService {
 	 * Return mapping key for this service
 	 */
 	@Override
-	public String getServiceMappingKey() {
-		return "search";
+	public String[] getServiceMappingKeys() {
+		return serviceMappingKeys;
 	}
 	
     /**

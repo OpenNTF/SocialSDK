@@ -42,6 +42,8 @@ public class ProfileService extends BaseService {
 	
 	private final ProfileFeedHandler profileFeedHandler	= new ProfileFeedHandler(this);
 
+	private static final String[] serviceMappingKeys = new String[]{""};
+	
 	/**
 	 * Default Constructor - 0 argument constructor Calls the Constructor of BaseService Class.
 	 */
@@ -95,8 +97,8 @@ public class ProfileService extends BaseService {
 	 * Return mapping key for this service
 	 */
 	@Override
-	public String getServiceMappingKey() {
-		return "";
+	public String[] getServiceMappingKeys() {
+		return serviceMappingKeys;
 	}
 		
 	/**

@@ -76,7 +76,7 @@ public class ForumTopic extends BaseForumEntity{
 	 * @return {String} topicUuid
 	 */
 	public String getTopicUuid() {
-		return super.getUid();
+		return getUid();
 	}
 
 	/**
@@ -163,9 +163,8 @@ public class ForumTopic extends BaseForumEntity{
 	 * @throws ClientServicesException
 	 */
 
-	public String getPermisisons() throws ClientServicesException
-	{
-		return super.getAsString(ForumsXPath.permissions);
+	public String getPermisisons() throws ClientServicesException {
+		return getAsString(ForumsXPath.permissions);
 	}
 
 	/**
@@ -369,7 +368,7 @@ public class ForumTopic extends BaseForumEntity{
 		return answered;
 	}
 	public List<String> getTags() {
-		return super.getBaseTags();
+		return getBaseTags();
 	}
 
 

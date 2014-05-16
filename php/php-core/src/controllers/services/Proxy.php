@@ -119,9 +119,7 @@ class Proxy extends BaseController
 		}
 		
 		$url = $proxyHelper->cleanURL($url, $server);
-		syslog(LOG_INFO, $url);
-		syslog(LOG_INFO, $method);
-		syslog(LOG_INFO, $body);
+
 		// Make request
  		$response = $endpoint->makeRequest($server, $url, $method, $options, $body, $forwardHeader, $endpointName);
 

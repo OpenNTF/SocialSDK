@@ -40,6 +40,17 @@
 	</td>
 </tr>
 </script>
+<script type="text/template" id="folderRow-<?php echo $timestamp; ?>">
+<tr style="padding-bottom: 0.3em; font-size: 12px;">
+	<td style="width:14em;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inline-block; padding-left: 10px;">
+			<span role="listitem"> 
+                <a class="entry-title" target="_blank" rel="bookmark" title="${title}" href="${folderUrl}"> 
+                	${title} 
+            	</a>
+            </span>
+	</td>
+</tr>
+</script>
 <script type="text/template" id="pagingHeader-<?php echo $timestamp; ?>">
 <div dojoAttachPoint="pagingHeader" style="font-size: 12px;">
 	<div>

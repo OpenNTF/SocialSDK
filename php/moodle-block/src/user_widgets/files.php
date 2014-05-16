@@ -16,7 +16,6 @@ require_once $CFG->dirroot . '/blocks/ibmsbt/user_widgets/templates/ibm-sbt-file
 	<option value="sharedWithMe"><?php echo get_string('files_shared_with_me', 'block_ibmsbt');?></option>
 	<option value="sharedByMe"><?php echo get_string('files_shared_by_me', 'block_ibmsbt');?></option>
 </select>
-
 <div id="<?php echo $this->config->elementID;?>"></div>
 <script type="text/javascript">
 
@@ -41,7 +40,6 @@ function uploadFile(fileService, grid, dom) {
 		privacy = 'public';
 	}
 	
-	// "your-files" is the ID of the HTML5 File Control. Refer to Upload File.html
 	fileService.uploadFile("ibm-sbt-file-<?php echo $timestamp; ?>", {
 		// additional paramertes to add file metadata			
 		visibility : privacy

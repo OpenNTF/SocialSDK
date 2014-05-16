@@ -74,6 +74,13 @@ class SBTProxyHelper extends BaseController
 		return $forwardHeader;
 	}
 	
+	/**
+	 * Prepares the URL for forwarding (i.e. cleans it and appends any set $_GET parameters).
+	 * 
+	 * @param string $url		The URL to clean
+	 * @param unknown $server
+	 * @return string
+	 */
 	public function cleanURL($url, $server) 
 	{
 		$url = str_replace('https', '', $url);
@@ -84,6 +91,13 @@ class SBTProxyHelper extends BaseController
 		$server = str_replace('http://', '', $server);
 		$url = str_replace($server, '', $url);
 		$url = str_replace('//', '', $url);
+		
+		foreach ($_GET as $key => $value) { 
+			if ($key == 'class' || $key == 'classpath' || $key == 'method' || $key == 'endpointName' || $key == '_redirectUrl') {
+				continue;
+			}
+			$url .= "&$key=$value";
+		}
 		
 		return $url;
 	}

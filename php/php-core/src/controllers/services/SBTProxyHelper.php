@@ -92,40 +92,11 @@ class SBTProxyHelper extends BaseController
 		$url = str_replace($server, '', $url);
 		$url = str_replace('//', '', $url);
 		
-		if (isset($_GET['ps'])) {
-			$url .= '&ps=' . $_GET['ps'];
-		}
-		
-		if (isset($_GET['sortBy'])) {
-			$url .= '&sortBy=' . $_GET['sortBy'];
-		}
-		
-		if (isset($_GET['sortOrder'])) {
-			$url .= '&sortOrder=' . $_GET['sortOrder'];
-		}
-		
-		if (isset($_GET['creator'])) {
-			$url .= '&creator=' . $_GET['creator'];
-		}
-		
-		if (isset($_GET['dojo.preventCache'])) {
-			$url .= '&dojo.preventCache=' . $_GET['dojo.preventCache'];
-		}
-		
-		if (isset($_GET['page'])) {
-			$url .= '&page=' . $_GET['page'];
-		}
-		
-		if (isset($_GET['addedBy'])) {
-			$url .= '&addedBy=' . $_GET['addedBy'];
-		}
-		
-		if (isset($_GET['tag'])) {
-			$url .= '&tag=' . $_GET['tag'];
-		}
-		
-		if (isset($_GET['created'])) {
-			$url .= '&created=' . $_GET['created'];
+		foreach ($_GET as $key => $value) { 
+			if ($key == 'class' || $key == 'classpath' || $key == 'method' || $key == 'endpointName' || $key == '_redirectUrl') {
+				continue;
+			}
+			$url .= "&$key=$value";
 		}
 		
 		return $url;

@@ -74,6 +74,13 @@ class SBTProxyHelper extends BaseController
 		return $forwardHeader;
 	}
 	
+	/**
+	 * Prepares the URL for forwarding (i.e. cleans it and appends any set $_GET parameters).
+	 * 
+	 * @param string $url		The URL to clean
+	 * @param unknown $server
+	 * @return string
+	 */
 	public function cleanURL($url, $server) 
 	{
 		$url = str_replace('https', '', $url);
@@ -84,6 +91,42 @@ class SBTProxyHelper extends BaseController
 		$server = str_replace('http://', '', $server);
 		$url = str_replace($server, '', $url);
 		$url = str_replace('//', '', $url);
+		
+		if (isset($_GET['ps'])) {
+			$url .= '&ps=' . $_GET['ps'];
+		}
+		
+		if (isset($_GET['sortBy'])) {
+			$url .= '&sortBy=' . $_GET['sortBy'];
+		}
+		
+		if (isset($_GET['sortOrder'])) {
+			$url .= '&sortOrder=' . $_GET['sortOrder'];
+		}
+		
+		if (isset($_GET['creator'])) {
+			$url .= '&creator=' . $_GET['creator'];
+		}
+		
+		if (isset($_GET['dojo.preventCache'])) {
+			$url .= '&dojo.preventCache=' . $_GET['dojo.preventCache'];
+		}
+		
+		if (isset($_GET['page'])) {
+			$url .= '&page=' . $_GET['page'];
+		}
+		
+		if (isset($_GET['addedBy'])) {
+			$url .= '&addedBy=' . $_GET['addedBy'];
+		}
+		
+		if (isset($_GET['tag'])) {
+			$url .= '&tag=' . $_GET['tag'];
+		}
+		
+		if (isset($_GET['created'])) {
+			$url .= '&created=' . $_GET['created'];
+		}
 		
 		return $url;
 	}

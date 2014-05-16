@@ -84,8 +84,14 @@ function onTypeChange<?php echo $timestamp; ?>() {
 		
 				var typeList = dom.byId("ibm-sbt-files-list-<?php echo $timestamp; ?>");
 				var currentType = typeList.options[typeList.selectedIndex].value;
-		
-				var domNode = dom.byId("fileRow-<?php echo $timestamp; ?>");
+
+				var domNode = null;
+
+				if (currentType == 'myFolders' || currentType == 'publicFolders' || currentType == 'myPinnedFolders' || currentType == 'activeFolders') {
+					domNode = dom.byId("folderRow-<?php echo $timestamp; ?>");
+				} else {
+					domNode = dom.byId("fileRow-<?php echo $timestamp; ?>");
+				}
 				var FileRow = domNode.text || domNode.textContent;
 			    domNode = dom.byId("pagingHeader-<?php echo $timestamp; ?>");
 			    var PagingHeader = domNode.text || domNode.textContent;

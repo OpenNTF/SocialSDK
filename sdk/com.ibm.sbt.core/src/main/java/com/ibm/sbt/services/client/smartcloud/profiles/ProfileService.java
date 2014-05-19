@@ -68,6 +68,7 @@ public class ProfileService extends BaseService {
 	 */
 	public ProfileService(String endpoint, int cacheSize) {
 		super(endpoint, cacheSize);
+		serviceMappingKeys = new String[]{""};
 	}
 		
 	/**
@@ -89,16 +90,9 @@ public class ProfileService extends BaseService {
 	 */
 	public ProfileService(Endpoint endpoint, int cacheSize) {
 		super(endpoint, cacheSize);
+		serviceMappingKeys = new String[]{""};
 	}
 
-	/**
-	 * Return mapping key for this service
-	 */
-	@Override
-	public String getServiceMappingKey() {
-		return "";
-	}
-		
 	/**
 	 * getProfile
 	 * <p>

@@ -35,6 +35,7 @@ import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesCon
 import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.COLLEAGUE;
 import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.CONNECTION;
 import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.CONNECTIONID;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.CONNECTIONS;
 import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.CONNECTION_TYPE;
 import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.CONNECTION_UNIQUE_IDENTIFIER;
 import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.EMAIL;
@@ -129,6 +130,7 @@ public class ProfileService extends BaseService {
 
 	public ProfileService(String endpoint, int cacheSize) {
 		super(endpoint, cacheSize);
+		serviceMappingKeys = new String[]{PROFILES, CONNECTIONS};
 	}
 	
 	/**
@@ -151,6 +153,7 @@ public class ProfileService extends BaseService {
 	 */
 	public ProfileService(Endpoint endpoint, int cacheSize) {
 		super(endpoint, cacheSize);
+		serviceMappingKeys = new String[]{PROFILES, CONNECTIONS};
 	}
 	
 	@Override
@@ -158,14 +161,6 @@ public class ProfileService extends BaseService {
 		String auth = super.getAuthType().getValue();
 		auth = AuthType.BASIC.get().equalsIgnoreCase(auth)?"":auth;
 		return new NamedUrlPart(AUTH_TYPE, auth);
-	}
-
-	/**
-	 * Return mapping key for this service
-	 */
-	@Override
-	public String getServiceMappingKey() {
-		return PROFILES;
 	}
 
 	/**

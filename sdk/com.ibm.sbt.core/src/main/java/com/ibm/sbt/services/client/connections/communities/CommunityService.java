@@ -100,6 +100,7 @@ public class CommunityService extends BaseService {
 	 */
 	public CommunityService(String endpoint, int cacheSize) {
 		super(endpoint, cacheSize);
+		serviceMappingKeys = new String[]{"communities"};
 	}
 
 	/**
@@ -121,16 +122,9 @@ public class CommunityService extends BaseService {
 	 */
 	public CommunityService(Endpoint endpoint, int cacheSize) {
 		super(endpoint, cacheSize);
+		serviceMappingKeys = new String[]{"communities"};
 	}
 
-	/**
-	 * Return mapping key for this service
-	 */
-	@Override
-	public String getServiceMappingKey() {
-		return "communities";
-	}
-	
 	@Override
 	public NamedUrlPart getAuthType(){
 		String auth = super.getAuthType().getValue();

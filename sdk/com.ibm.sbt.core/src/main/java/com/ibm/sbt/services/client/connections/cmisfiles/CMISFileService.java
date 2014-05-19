@@ -52,6 +52,7 @@ public class CMISFileService extends BaseService {
      */
     public CMISFileService(String endpoint) {
         super(endpoint);
+        serviceMappingKeys = new String[]{"files"};
     }
     
 	/**
@@ -60,16 +61,9 @@ public class CMISFileService extends BaseService {
      */
     public CMISFileService(Endpoint endpoint) {
         super(endpoint);
+        serviceMappingKeys = new String[]{"files"};
     }
 
-	/**
-	 * Return mapping key for this service
-	 */
-	@Override
-	public String getServiceMappingKey() {
-		return "files";
-	}
-    
     /**
      * Method to get the Default endpoint to be used with the service
      * @return

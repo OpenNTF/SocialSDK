@@ -53,7 +53,7 @@ import com.ibm.sbt.services.endpoints.Endpoint;
 public class ActivityStreamService extends BaseService {
 	private final ActivityStreamFeedHandler activityStreamFeedHandler = new ActivityStreamFeedHandler(this);
 	// Typical url pattern /activitystream/user/group/application
-
+	
 	/**
 	 * Constructor Creates ActivityStreamService Object with default endpoint
 	 */
@@ -69,6 +69,7 @@ public class ActivityStreamService extends BaseService {
 	 */
 	public ActivityStreamService(String endpoint) {
 		super(endpoint, DEFAULT_CACHE_SIZE);
+		serviceMappingKeys = new String[]{"connections"};
 	}
 	
 	/**
@@ -79,16 +80,9 @@ public class ActivityStreamService extends BaseService {
 	 */
 	public ActivityStreamService(Endpoint endpoint) {
 		super(endpoint, DEFAULT_CACHE_SIZE);
+		serviceMappingKeys = new String[]{"connections"};
 	}
 
-	/**
-	 * Return mapping key for this service
-	 */
-	@Override
-	public String getServiceMappingKey() {
-		return "connections";
-	}
-	
 	/**
 	 * Returns updates from ActivityStream service
 	 * <p>

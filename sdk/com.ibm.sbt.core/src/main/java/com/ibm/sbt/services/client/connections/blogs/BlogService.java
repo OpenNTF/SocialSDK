@@ -65,6 +65,7 @@ public class BlogService extends BaseService {
 	public BlogService(String endpoint) {
 		super(endpoint);
 		this.setHomepageFromEndpoint(this.getEndpoint());
+		serviceMappingKeys = new String[]{"blogs"};
 	}
 	
 	/**
@@ -76,16 +77,9 @@ public class BlogService extends BaseService {
 	public BlogService(Endpoint endpoint) {
 		super(endpoint);
 		this.setHomepageFromEndpoint(this.getEndpoint());
+		serviceMappingKeys = new String[]{"blogs"};
 	}
 
-	/**
-	 * Return mapping key for this service
-	 */
-	@Override
-	public String getServiceMappingKey() {
-		return "blogs";
-	}
-	
 	private void setHomepageFromEndpoint(Endpoint endpoint){
 		Map<String, String> serviceMap = endpoint.getServiceMappings();
 		if(serviceMap != null){

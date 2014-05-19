@@ -69,6 +69,7 @@ public class ActivityService extends BaseService {
 	 */
 	public ActivityService(String endpoint) {
 		super(endpoint);
+		serviceMappingKeys = new String[]{"activities"};
 	}
 	
 	/**
@@ -79,17 +80,9 @@ public class ActivityService extends BaseService {
 	 */
 	public ActivityService(Endpoint endpoint) {
 		super(endpoint);
+		serviceMappingKeys = new String[]{"activities"};
 	}
 	
-
-	/**
-	 * Return mapping key for this service
-	 */
-	@Override
-	public String getServiceMappingKey() {
-		return "activities";
-	}
-
     /**
      * Method returns Activities of the logged in user
      * 

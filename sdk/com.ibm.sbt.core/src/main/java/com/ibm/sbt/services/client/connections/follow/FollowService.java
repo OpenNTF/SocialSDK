@@ -48,22 +48,17 @@ public class FollowService extends BaseService{
 	
 	public FollowService() {
 		super();
+		serviceMappingKeys = new String[]{""};
 	}
 	
 	public FollowService(String endpoint) {
 		super(endpoint);
+		serviceMappingKeys = new String[]{""};
 	}
 	
 	public FollowService(Endpoint endpoint) {
 		super(endpoint);
-	}
-
-	/**
-	 * Return mapping key for this service
-	 */
-	@Override
-	public String getServiceMappingKey() {
-		return "";
+		serviceMappingKeys = new String[]{""};
 	}
 
 	@Override

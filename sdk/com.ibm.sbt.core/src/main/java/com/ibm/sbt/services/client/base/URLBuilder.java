@@ -56,9 +56,11 @@ public class URLBuilder {
 	 */
 	public String format(BaseService service, NamedUrlPart... args) {
 		URLPattern urlPattern = getPattern(service.getApiVersion());
-		NamedUrlPart[] namedParts = Arrays.copyOf(args, args.length+2);
+		NamedUrlPart[] serviceMappings = service.getServiceMappings();
+		NamedUrlPart[] namedParts = Arrays.copyOf(args, args.length + serviceMappings.length + 1);
 		namedParts[args.length] = service.getAuthType();
-		namedParts[args.length+1] = service.getServiceMapping();
+		System.arraycopy(serviceMappings, 0, namedParts, args.length + 1, serviceMappings.length);
+		
 		return urlPattern.format(namedParts);
 	}
 }

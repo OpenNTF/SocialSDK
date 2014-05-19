@@ -38,6 +38,7 @@ public class BookmarkService extends BaseService {
 	 */
 	public BookmarkService() {
 		super(DEFAULT_ENDPOINT_NAME);
+		serviceMappingKeys = new String[]{"dogear"};
 	}
 
 	/**
@@ -47,6 +48,7 @@ public class BookmarkService extends BaseService {
 	 */
 	public BookmarkService(String endpointName) {
 		super(endpointName);
+		serviceMappingKeys = new String[]{"dogear"};
 	}
 
 	/**
@@ -56,14 +58,15 @@ public class BookmarkService extends BaseService {
 	 */
 	public BookmarkService(Endpoint endpoint) {
 		super(endpoint);
+		serviceMappingKeys = new String[]{"dogear"};
 	}
 
 	/**
 	 * Return mapping key for this service
 	 */
 	@Override
-	public String getServiceMappingKey() {
-		return ""; //dogear?
+	public String[] getServiceMappingKeys() {
+		return serviceMappingKeys; //dogear?
 	}
 	
 	/**

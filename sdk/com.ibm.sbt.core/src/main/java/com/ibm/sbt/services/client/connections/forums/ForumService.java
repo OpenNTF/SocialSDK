@@ -60,6 +60,7 @@ public class ForumService extends BaseService {
 	private static final String POST_UNIQUE_IDENTIFIER  = "postUuid"; 
 	private static final String COMM_UNIQUE_IDENTIFIER	= "communityUuid";
 	public static final String CREATE_OP 				= "create";
+	
 	/**
 	 * Default Constructor
 	 */
@@ -76,6 +77,7 @@ public class ForumService extends BaseService {
 	 */
 	public ForumService(String endpoint) {
 		super(endpoint, DEFAULT_CACHE_SIZE);
+		serviceMappingKeys = new String[]{"forums"};
 	}
 
 	/**
@@ -86,14 +88,7 @@ public class ForumService extends BaseService {
 	 */
 	public ForumService(Endpoint endpoint) {
 		super(endpoint, DEFAULT_CACHE_SIZE);
-	}
-
-	/**
-	 * Return mapping key for this service
-	 */
-	@Override
-	public String getServiceMappingKey() {
-		return "forums";
+		serviceMappingKeys = new String[]{"forums"};
 	}
 
 	@Override

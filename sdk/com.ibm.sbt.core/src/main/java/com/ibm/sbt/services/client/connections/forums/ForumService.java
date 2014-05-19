@@ -18,7 +18,6 @@ package com.ibm.sbt.services.client.connections.forums;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.v4_5;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.http.StatusLine;
@@ -58,17 +57,6 @@ import com.ibm.sbt.services.endpoints.Endpoint;
 public class ForumService extends ConnectionsService {
 
 	private static final long serialVersionUID = -4926901916081556236L;
-
-	/**
-	 * Used in constructing REST APIs
-	 * 
-	 * TODO Remove these
-	 */
-	private static final String FORUM_UNIQUE_IDENTIFIER = "forumUuid";
-	private static final String TOPIC_UNIQUE_IDENTIFIER = "topicUuid";
-	private static final String REPLY_UNIQUE_IDENTIFIER = "replyUuid";
-	private static final String POST_UNIQUE_IDENTIFIER  = "postUuid"; 
-	public static final String CREATE_OP 				= "create";
 
 	/**
 	 * Create ForumService instance with default endpoint.
@@ -322,9 +310,8 @@ public class ForumService extends ConnectionsService {
 	 * @throws ClientServicesException
 	 */
 	public EntityList<ForumReply> getForumTopicReplies(String topicUuid, Map<String, String> parameters) throws ClientServicesException {
-		parameters = getParameters(parameters);
-		parameters.put(TOPIC_UNIQUE_IDENTIFIER, topicUuid);
-		return getReplies(parameters);
+		String url = ForumUrls.TOPIC_REPLIES.format(this, ForumUrls.topicPart(topicUuid));
+		return getReplies(url, parameters);
 	}
 
 	/**
@@ -358,9 +345,7 @@ public class ForumService extends ConnectionsService {
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Tag> getForumTopicsTags(String forumUuid, Map<String, String> parameters) throws ClientServicesException {
-		parameters = getParameters(parameters);
-		parameters.put(FORUM_UNIQUE_IDENTIFIER, forumUuid);
-		String tagsUrl = ForumUrls.TAGS_TOPICS.format(this);
+		String tagsUrl = ForumUrls.TAGS_TOPICS.format(this, ForumUrls.forumPart(forumUuid));
 		return getTagEntityList(tagsUrl, null);
 	}
 
@@ -374,10 +359,8 @@ public class ForumService extends ConnectionsService {
 	 */
 	public EntityList<Recommendation> getRecommendations(String postUuid) throws ClientServicesException{
 		checkVersion();
-		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put(POST_UNIQUE_IDENTIFIER, postUuid);
-		String recommendationsUrl = ForumUrls.RECOMMENDATION_ENTRIES.format(this);
-		return getRecommendationEntityList(recommendationsUrl, parameters);
+		String recommendationsUrl = ForumUrls.RECOMMENDATION_ENTRIES.format(this, ForumUrls.postPart(postUuid));
+		return getRecommendationEntityList(recommendationsUrl, null);
 	}
 	
 	////////////////////////////////////////////////////////////////////////////////
@@ -424,10 +407,8 @@ public class ForumService extends ConnectionsService {
 	 * @throws ClientServicesException
 	 */
 	public Forum getForum(String forumUuid) throws ClientServicesException {
-		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put(FORUM_UNIQUE_IDENTIFIER, forumUuid);
-		String url = ForumUrls.FORUM.format(this);
-		return getForumEntity(url, parameters);
+		String url = ForumUrls.FORUM.format(this, ForumUrls.forumPart(forumUuid));
+		return getForumEntity(url, null);
 	}
 
 	/**
@@ -447,9 +428,7 @@ public class ForumService extends ConnectionsService {
 			throw new ClientServicesException(null,"null forum");
 		}
 
-		Map<String, String> parameters = new HashMap<String, String>();
-
-		parameters.put(FORUM_UNIQUE_IDENTIFIER, forum.getUid());
+		// TODO Carlos is this required?
 		if(forum.getFieldsMap().get(ForumsXPath.title)== null)
 			forum.setTitle(forum.getTitle());
 		if(forum.getFieldsMap().get(ForumsXPath.content)== null)
@@ -459,9 +438,9 @@ public class ForumService extends ConnectionsService {
 		
 		ForumSerializer serializer = new ForumSerializer(forum);
 
-		String url = ForumUrls.FORUM.format(this);
+		String url = ForumUrls.FORUM.format(this, ForumUrls.forumPart(forum.getForumUuid()));
 
-		Response response = updateData(url, parameters, serializer.generateUpdate(), FORUM_UNIQUE_IDENTIFIER);
+		Response response = updateData(url, null, serializer.generateUpdate(), forum.getForumUuid());
 		checkResponseCode(response, HTTPCode.OK);
 	}
 
@@ -496,12 +475,9 @@ public class ForumService extends ConnectionsService {
 			throw new ClientServicesException(null, "null forum id");
 		}
 
-		Map<String, String> parameters = new HashMap<String, String>();
+		String deleteForumUrl = ForumUrls.FORUM.format(this, ForumUrls.forumPart(forumUuid));
 
-		parameters.put(FORUM_UNIQUE_IDENTIFIER, forumUuid);
-		String deleteForumUrl = ForumUrls.FORUM.format(this);
-
-		Response response = deleteData(deleteForumUrl, parameters, FORUM_UNIQUE_IDENTIFIER);
+		Response response = deleteData(deleteForumUrl, null, forumUuid);
 		checkResponseCode(response, HTTPCode.NO_CONTENT);
 	}
 	
@@ -572,10 +548,8 @@ public class ForumService extends ConnectionsService {
 	 * @return ForumTopic
 	 * @throws ClientServicesException
 	 */
-	public ForumTopic getForumTopic(String topicId, Map<String, String> parameters) throws ClientServicesException {
-		parameters = getParameters(parameters);
-		parameters.put(TOPIC_UNIQUE_IDENTIFIER, topicId);
-		String myTopicsUrl = ForumUrls.TOPIC.format(this);
+	public ForumTopic getForumTopic(String topicUuid, Map<String, String> parameters) throws ClientServicesException {
+		String myTopicsUrl = ForumUrls.TOPIC.format(this, ForumUrls.topicPart(topicUuid));
 		return getForumTopicEntity(myTopicsUrl, parameters);
 	}
 
@@ -640,10 +614,8 @@ public class ForumService extends ConnectionsService {
 			throw new ClientServicesException(null, "null topic id");
 		}
 
-		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put(TOPIC_UNIQUE_IDENTIFIER, topicUuid);
-		String deleteTopicUrl = ForumUrls.TOPIC.format(this);
-		Response response = deleteData(deleteTopicUrl, parameters, TOPIC_UNIQUE_IDENTIFIER);
+		String url = ForumUrls.TOPIC.format(this, ForumUrls.topicPart(topicUuid));
+		Response response = deleteData(url, null, topicUuid);
 		checkResponseCode(response, HTTPCode.NO_CONTENT);
 	}
 
@@ -661,7 +633,7 @@ public class ForumService extends ConnectionsService {
 	 * @throws ClientServicesException
 	 */
 	public ForumReply createForumReply(ForumReply reply) throws ClientServicesException {
-		return createForumReply(reply, reply.getTopicUuid());
+		return createForumReply(reply.getTopicUuid(), reply);
 	}
 
 	/**
@@ -674,20 +646,13 @@ public class ForumService extends ConnectionsService {
 	 * @return ForumReply
 	 * @throws ClientServicesException
 	 */
-	public ForumReply createForumReply(ForumReply reply, String topicId) throws ClientServicesException {
-		if (null == reply || StringUtil.isEmpty(topicId)){
-			throw new ClientServicesException(null,"Reply object passed was null");
-		}
+	public ForumReply createForumReply(String topicUuid, ForumReply reply) throws ClientServicesException {
 		if(StringUtil.isEmpty(reply.getTopicUuid())){
-			reply.setTopicUuid(topicId);
+			reply.setTopicUuid(topicUuid);
 		}
 		ForumSerializer serializer = new ForumSerializer(reply);
-		Map<String, String> params = new HashMap<String, String>();
-
-		params.put(TOPIC_UNIQUE_IDENTIFIER, topicId);
-
-		String url = ForumUrls.REPLIES.format(this);
-		Response response = createData(url, params, getAtomHeaders(), serializer.generateCreate());
+		String url = ForumUrls.TOPIC_REPLIES.format(this, ForumUrls.topicPart(topicUuid));
+		Response response = createData(url, null, getAtomHeaders(), serializer.generateCreate());
 		checkResponseCode(response, HTTPCode.CREATED);
 		reply = getForumReplyFeedHandler(false).createEntity(response);
 
@@ -723,10 +688,8 @@ public class ForumService extends ConnectionsService {
 	 * @return ForumReply
 	 * @throws ClientServicesException
 	 */
-	public ForumReply getForumReply(String replyId, Map<String, String> parameters) throws ClientServicesException {
-		parameters = getParameters(parameters);
-		String myRepliesUrl = ForumUrls.REPLY.format(this);
-		parameters.put(REPLY_UNIQUE_IDENTIFIER, replyId);
+	public ForumReply getForumReply(String replyUuid, Map<String, String> parameters) throws ClientServicesException {
+		String myRepliesUrl = ForumUrls.REPLY.format(this, ForumUrls.replyPart(replyUuid));
 		return getForumReplyEntity(myRepliesUrl, parameters);
 	}
 
@@ -761,11 +724,8 @@ public class ForumService extends ConnectionsService {
 			reply.setTags(reply.getTags());
 		
 		ForumSerializer serializer = new ForumSerializer(reply);
-		Map<String, String> params = new HashMap<String, String>();
-		params.put(REPLY_UNIQUE_IDENTIFIER, reply.getUid());
-
-		String url = ForumUrls.REPLY.format(this);
-		Response response = updateData(url, params, getAtomHeaders(), serializer.generateUpdate(), reply.getUid());
+		String url = ForumUrls.REPLY.format(this, ForumUrls.replyPart(reply.getUid()));
+		Response response = updateData(url, null, getAtomHeaders(), serializer.generateUpdate(), reply.getUid());
 		checkResponseCode(response, HTTPCode.OK);
 	}
 
@@ -798,15 +758,8 @@ public class ForumService extends ConnectionsService {
 	 * @throws ClientServicesException
 	 */
 	public void deleteForumReply(String replyUuid) throws ClientServicesException {
-		if (StringUtil.isEmpty(replyUuid)){
-			throw new ClientServicesException(null, "null reply id");
-		}
-		Map<String, String> parameters = new HashMap<String, String>();
-
-		parameters.put(REPLY_UNIQUE_IDENTIFIER, replyUuid);
-		String deleteReplyUrl = ForumUrls.REPLY.format(this);
-
-		Response response = deleteData(deleteReplyUrl, parameters, REPLY_UNIQUE_IDENTIFIER);
+		String deleteReplyUrl = ForumUrls.REPLY.format(this, ForumUrls.replyPart(replyUuid));
+		Response response = deleteData(deleteReplyUrl, null, replyUuid);
 		checkResponseCode(response, HTTPCode.NO_CONTENT);
 	}
 
@@ -839,14 +792,11 @@ public class ForumService extends ConnectionsService {
 	 */
 	public Recommendation createRecommendation(String postUuid) throws ClientServicesException{
 		checkVersion();
-		String recommendationsUrl = ForumUrls.RECOMMENDATION_ENTRIES.format(this);
-		Map<String, String> parameters = new HashMap<String, String>();
-
-		parameters.put(POST_UNIQUE_IDENTIFIER, postUuid);
+		String recommendationsUrl = ForumUrls.RECOMMENDATION_ENTRIES.format(this, ForumUrls.postPart(postUuid));
 		Recommendation recommendation;
 		// not using transformer, as the payload to be sent is constant
 		String payload = "<entry xmlns='http://www.w3.org/2005/Atom'><category scheme='http://www.ibm.com/xmlns/prod/sn/type' term='recommendation'></category></entry>";
-		Response response= createData(recommendationsUrl, parameters, null,payload);
+		Response response= createData(recommendationsUrl, null, null, payload);
 		checkResponseCode(response, HTTPCode.CREATED);
 		recommendation = getRecommendationFeedHandler().createEntity(response);
 
@@ -871,12 +821,8 @@ public class ForumService extends ConnectionsService {
 	 */
 	public void deleteRecommendation(String postUuid) throws ClientServicesException{
 		checkVersion();
-		String recommendationsUrl = ForumUrls.RECOMMENDATION_ENTRIES.format(this);
-		Map<String, String> parameters = new HashMap<String, String>();
-
-		parameters.put(POST_UNIQUE_IDENTIFIER, postUuid);
-		Response response = deleteData(recommendationsUrl, parameters, postUuid);
-			
+		String recommendationsUrl = ForumUrls.RECOMMENDATION_ENTRIES.format(this, ForumUrls.postPart(postUuid));
+		Response response = deleteData(recommendationsUrl, null, postUuid);
 		checkResponseCode(response, HTTPCode.NO_CONTENT);
 	}
 
@@ -904,25 +850,38 @@ public class ForumService extends ConnectionsService {
 		return topic;
 	}
 
-
-	 /**
+	/**
      * Get a list for forum replies that includes the replies in the specified post.
      * The post uuid must be specified in the parametetrs as either:
      * topicUuid or replyUuid 
      * 
 	 * @param parameters
-	 * @return ReplyList
+	 * @return EntityList<ForumReply>
 	 * @throws ClientServicesException
 	 */
-	public EntityList<ForumReply> getForumReplies(Map<String, String> parameters) throws ClientServicesException {
-		return getReplies(parameters);
+	public EntityList<ForumReply> getForumReplies(String postUuid) throws ClientServicesException {
+		return getForumReplies(postUuid, null);
+	}
+
+	/**
+     * Get a list for forum replies that includes the replies in the specified post.
+     * The post uuid must be specified in the parametetrs as either:
+     * topicUuid or replyUuid 
+     * 
+	 * @param parameters
+	 * @return EntityList<ForumReply>
+	 * @throws ClientServicesException
+	 */
+	public EntityList<ForumReply> getForumReplies(String postUuid, Map<String, String> parameters) throws ClientServicesException {
+		String url = ForumUrls.FORUM_REPLIES.format(this, ForumUrls.postPart(postUuid));
+		return getReplies(url, parameters);
 	}
 
 	/**
      * Get a list for forum replies that includes the replies of a Forum Reply.
      * 
      * @param topicUuid
-	 * @return ReplyList
+	 * @return EntityList<ForumReply>
 	 * @throws ClientServicesException
 	 */
 	public EntityList<ForumReply> getForumReplyReplies(String replyUuid) throws ClientServicesException {
@@ -933,13 +892,12 @@ public class ForumService extends ConnectionsService {
      * 
      * @param replyUuid
 	 * @param parameters
-	 * @return ReplyList
+	 * @return EntityList<ForumReply>
 	 * @throws ClientServicesException
 	 */
 	public EntityList<ForumReply> getForumReplyReplies(String replyUuid, Map<String, String> parameters) throws ClientServicesException {
-		parameters = getParameters(parameters);
-		parameters.put(REPLY_UNIQUE_IDENTIFIER, replyUuid);
-		return getReplies(parameters);
+		String url = ForumUrls.REPLY_REPLIES.format(this, ForumUrls.replyPart(replyUuid));
+		return getReplies(url, parameters);
 	}
 
 	/***************************************************************
@@ -1096,16 +1054,7 @@ public class ForumService extends ConnectionsService {
 		return statusLine.getStatusCode() == 204;
 	}
 
-	private EntityList<ForumReply> getReplies(Map<String, String> parameters) throws ClientServicesException {
-		if (parameters != null){
-			if(StringUtil.isEmpty(parameters.get(TOPIC_UNIQUE_IDENTIFIER)) && 
-					StringUtil.isEmpty(parameters.get(REPLY_UNIQUE_IDENTIFIER))){
-					throw new ClientServicesException(null, "null post Uuid");
-			}
-		} else {
-			parameters = new HashMap<String, String>();
-		}
-		String myRepliesUrl = ForumUrls.REPLIES.format(this);
-		return getForumReplyEntityList(myRepliesUrl, parameters);
+	private EntityList<ForumReply> getReplies(String url, Map<String, String> parameters) throws ClientServicesException {
+		return getForumReplyEntityList(url, null);
 	}
 }

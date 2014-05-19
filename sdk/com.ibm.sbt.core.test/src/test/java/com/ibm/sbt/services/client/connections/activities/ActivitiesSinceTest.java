@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * ï¿½ Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,49 +34,55 @@ public class ActivitiesSinceTest extends BaseActivityServiceTest {
 
 	@Test
 	public void testActivitiesSince() throws ClientServicesException, XMLException {
-		List<Activity> createdActivities = createActivities("Activities-", 10, 1000);
+		List<Activity> createdActivities = createActivities("Activities", 5, 1000);
 		
-		Activity activity = createdActivities.get(5);
+		Activity activity = createdActivities.get(2);
 		String title = activity.getTitle();
 		
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("nodetype", "activity");
-		params.put("since", title.substring(title.indexOf('-')+1));
+		params.put("since", "" + activity.getPublished().getTime());
 		EntityList<Activity> myActivities = activityService.getMyActivities(params);
 		System.out.println(myActivities.size());
 		
-		Assert.assertEquals(5, myActivities.size());
+		Assert.assertEquals(3, myActivities.size());
 	}
 	
 	@Test
 	public void testActivitiesUntil() throws ClientServicesException, XMLException {
-		List<Activity> createdActivities = createActivities("Activities-", 10, 1000);
+		List<Activity> createdActivities = createActivities("Activities", 5, 1000);
 		
-		Activity activity = createdActivities.get(5);
-		String title = activity.getTitle();
+		Activity activity = createdActivities.get(2);
 		
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("nodetype", "activity");
-		params.put("until", title.substring(title.indexOf('-')+1));
+		params.put("until", "" + activity.getPublished().getTime());
 		EntityList<Activity> myActivities = activityService.getMyActivities(params);
 		System.out.println(myActivities.size());
 		
-		Assert.assertEquals(5, myActivities.size());
+		Assert.assertEquals(2, myActivities.size());
 	}
 	
 	@Test
 	public void testActivitiesSinceUntil() throws ClientServicesException, XMLException {
-		List<Activity> createdActivities = createActivities("Activities-", 10, 1000);
-		
-		Activity sinceActivity = createdActivities.get(3);
-		String sinceTitle = sinceActivity.getTitle();
-		Activity untilActivity = createdActivities.get(5);
-		String untilTitle = untilActivity.getTitle();
-		
 		Map<String, String> params = new HashMap<String, String>();
+		params.put("ps", "200");
+		EntityList<Activity> activities = activityService.getMyActivities(params);
+		for (Activity activity : activities) {
+			if (!activity.isDeleted()) {
+				activity.delete();
+			}
+		}
+		
+		List<Activity> createdActivities = createActivities("Activities", 5, 1000);
+		
+		Activity sinceActivity = createdActivities.get(1);
+		Activity untilActivity = createdActivities.get(3);
+		
+		params = new HashMap<String, String>();
 		params.put("nodetype", "activity");
-		params.put("since", sinceTitle.substring(sinceTitle.indexOf('-')+1));
-		params.put("until", untilTitle.substring(untilTitle.indexOf('-')+1));
+		params.put("since", "" + sinceActivity.getPublished().getTime());
+		params.put("until", "" + untilActivity.getPublished().getTime());
 		EntityList<Activity> myActivities = activityService.getMyActivities(params);
 		System.out.println(myActivities.size());
 		

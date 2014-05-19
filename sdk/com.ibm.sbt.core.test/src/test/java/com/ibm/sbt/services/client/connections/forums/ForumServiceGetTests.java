@@ -83,10 +83,8 @@ public class ForumServiceGetTests extends BaseForumServiceTest {
 	public void testGetForumReplies() throws Exception {
 		EntityList<ForumTopic> topics = forumService.getMyForumTopics();
 		ForumTopic topic = (ForumTopic) topics.iterator().next();
-		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put("topicUuid", topic.getTopicUuid());
 		
-		EntityList<ForumReply> entries = forumService.getForumReplies(parameters);
+		EntityList<ForumReply> entries = forumService.getForumReplies(topic.getTopicUuid());
 		assertNotNull(entries);
 		for (BaseForumEntity reply : entries) {
 			assertValid((ForumReply)reply);

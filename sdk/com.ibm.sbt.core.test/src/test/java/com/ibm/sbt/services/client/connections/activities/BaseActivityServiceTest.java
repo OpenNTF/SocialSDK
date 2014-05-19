@@ -43,6 +43,7 @@ public class BaseActivityServiceTest extends BaseUnitTest {
 	private BasicEndpoint basicEndpoint;
 	protected ActivityService activityService;
 	protected Activity activity;
+	protected List<Activity> activities;
 	
 	static protected SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 	
@@ -59,7 +60,12 @@ public class BaseActivityServiceTest extends BaseUnitTest {
 		if (activity != null) {
 			try {
 				activityService.deleteActivity(activity);
-				//System.out.println("Deleted "+activity.getActivityUuid());
+			} catch (Exception e) {
+			}
+		}
+		if (activities != null) {
+			try {
+				deleteActivities(activities);
 			} catch (Exception e) {
 			}
 		}
@@ -115,9 +121,9 @@ public class BaseActivityServiceTest extends BaseUnitTest {
     protected Activity createActivity() throws ClientServicesException {
 		return createActivity(createActivityTitle());
     }
-        	
+    
     protected Activity createActivity(String title) throws ClientServicesException {
-		return createActivity(title, Activity.NORMAL);
+		return createActivity(title, Activity.PRIORITY_NORMAL);
     }
         	
     protected Activity createActivity(String title, int priority) throws ClientServicesException {
@@ -134,6 +140,28 @@ public class BaseActivityServiceTest extends BaseUnitTest {
 		activity.setTitle(title);
 		activity.setTags(tags);
 		activity.setPriority(priority);
+		activity.setSummary("Goal for " + title);
+		
+		if (fields != null) {
+			for (Field field : fields) {
+				activity.addField(field);
+			}
+		}
+		
+		return activityService.createActivity(activity);
+    }
+        	
+    protected Activity createActivity(String title, String type, int priority, Field[] fields) throws ClientServicesException {
+    	List<String> tags = new ArrayList<String>();
+    	tags.add("personal");
+    	tags.add("unit_test");
+    	tags.add("ibmsbt");
+    	
+		activity = new Activity();
+		activity.setTitle(title);
+		activity.setTags(tags);
+		activity.setPriority(priority);
+		activity.setType(type);
 		activity.setSummary("Goal for " + title);
 		
 		if (fields != null) {
@@ -228,7 +256,7 @@ public class BaseActivityServiceTest extends BaseUnitTest {
 	}
     
     protected List<Activity> createActivities(String titlePrefix, int count, long interval) throws ClientServicesException {
-    	List<Activity> activities = new ArrayList<Activity>();
+    	activities = new ArrayList<Activity>();
     	
     	for (int i=0; i<count; i++) {
     		long now = System.currentTimeMillis();

@@ -31,22 +31,36 @@ import com.ibm.sbt.services.client.base.VersionedUrl;
  */
 public enum ForumUrls implements URLContainer {
 	FORUMS(new VersionedUrl(v4_0, "{forums}/{authType}/atom/forums")),
-	FORUM(new VersionedUrl(v4_0, "{forums}/{authType}/atom/forum")),
+	FORUM(new VersionedUrl(v4_0, "{forums}/{authType}/atom/forum?forumUuid={forumUuid}")),
 	FORUMS_PUBLIC(new VersionedUrl(v4_0, "{forums}/{authType}/atom/forums/public")),
 	FORUMS_MY(new VersionedUrl(v4_0, "{forums}/{authType}/atom/forums/my")),
 	TAGS_FORUMS(new VersionedUrl(v4_0, "{forums}/{authType}/atom/tags/forums")),
-	TAGS_TOPICS(new VersionedUrl(v4_0, "{forums}/{authType}/atom/tags/topics")),
-	RECOMMENDATION_ENTRIES(new VersionedUrl(v4_0, "{forums}/{authType}/atom/recommendation/entries")),
-	TOPIC(new VersionedUrl(v4_0, "{forums}/{authType}/atom/topic")),
+	TAGS_TOPICS(new VersionedUrl(v4_0, "{forums}/{authType}/atom/tags/topics?forumUuid={forumUuid}")),
+	RECOMMENDATION_ENTRIES(new VersionedUrl(v4_0, "{forums}/{authType}/atom/recommendation/entries?postUuid={postUuid}")),
+	TOPIC(new VersionedUrl(v4_0, "{forums}/{authType}/atom/topic?topicUuid={topicUuid}")),
 	PUBLIC_TOPICS(new VersionedUrl(v4_0, "{forums}/{authType}/atom/topics")),
 	FORUM_TOPICS(new VersionedUrl(v4_0, "{forums}/{authType}/atom/topics?forumUuid={forumUuid}")),
 	COMMUNITY_TOPICS(new VersionedUrl(v4_0, "{forums}/{authType}/atom/topics?communityUuid={communityUuid}")),
 	TOPICS_MY(new VersionedUrl(v4_0, "{forums}/{authType}/atom/topics/my")),
-	REPLIES(new VersionedUrl(v4_0, "{forums}/{authType}/atom/replies")),
+	FORUM_REPLIES(new VersionedUrl(v4_0, "{forums}/{authType}/atom/replies?postUuid={postUuid}")),
+	TOPIC_REPLIES(new VersionedUrl(v4_0, "{forums}/{authType}/atom/replies?topicUuid={topicUuid}")),
+	REPLY_REPLIES(new VersionedUrl(v4_0, "{forums}/{authType}/atom/replies?replyUuid={replyUuid}")),
 	REPLY(new VersionedUrl(v4_0, "{forums}/{authType}/atom/reply"));
 
+	static final public NamedUrlPart replyPart(String replyUuid) {
+		return new NamedUrlPart("replyUuid", replyUuid);
+	}
+	
 	static final public NamedUrlPart forumPart(String forumUuid) {
 		return new NamedUrlPart("forumUuid", forumUuid);
+	}
+	
+	static final public NamedUrlPart postPart(String postUuid) {
+		return new NamedUrlPart("postUuid", postUuid);
+	}
+	
+	static final public NamedUrlPart topicPart(String topicUuid) {
+		return new NamedUrlPart("topicUuid", topicUuid);
 	}
 	
 	static final public NamedUrlPart communityPart(String communityUuid) {

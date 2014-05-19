@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2012
+ * © Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -21,6 +21,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import com.ibm.sbt.automation.core.environment.TestEnvironment;
 import com.ibm.sbt.automation.core.test.BaseServiceTest;
 import com.ibm.sbt.automation.core.test.pageobjects.ResultPage;
 
@@ -34,7 +35,7 @@ public class ReadProfilePhoto extends BaseServiceTest {
     @Test
     public void testNoError() {
         createContext();
-        addSnippetParam("sample.id1", environment.getCurrentUserUuid());
+        addSnippetParam("sample.id1", TestEnvironment.getCurrentUserUuid());
         ResultPage resultPage = launchSnippet("Social_Profiles_REST_Read_Profile_Photo", AuthType.NONE);
         WebElement contentEl = resultPage.getWebElement().findElement(By.id("content"));
         WebElement imgEl = contentEl.findElement(By.tagName("img"));

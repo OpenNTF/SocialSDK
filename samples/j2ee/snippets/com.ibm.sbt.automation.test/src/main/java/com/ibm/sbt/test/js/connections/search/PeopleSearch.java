@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2012
+ * © Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -15,9 +15,7 @@
  */
 package com.ibm.sbt.test.js.connections.search;
 
-import junit.framework.Assert;
-
-import org.junit.Ignore;
+import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;

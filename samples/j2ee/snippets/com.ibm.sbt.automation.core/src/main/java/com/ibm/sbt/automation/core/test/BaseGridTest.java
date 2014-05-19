@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * Â© Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -25,7 +25,6 @@ import com.ibm.sbt.automation.core.test.pageobjects.GridPagerPage;
 import com.ibm.sbt.automation.core.test.pageobjects.GridResultPage;
 import com.ibm.sbt.automation.core.test.pageobjects.GridSorterPage;
 import com.ibm.sbt.automation.core.test.pageobjects.ResultPage;
-import com.ibm.sbt.automation.core.utils.Trace;
 
 
 /**

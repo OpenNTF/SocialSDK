@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -32,9 +32,6 @@ import com.ibm.sbt.test.controls.ProfilesGridTestSuite;
 import com.ibm.sbt.test.controls.VCardTestSuite;
 import com.ibm.sbt.test.controls.ViewTestSuite;
 import com.ibm.sbt.test.controls.WrapperTestSuite;
-import com.ibm.sbt.test.controls.grid.profiles.MyProfilePanel;
-import com.ibm.sbt.test.controls.grid.profiles.ProfilePanel;
-import com.ibm.sbt.test.controls.grid.profiles.ProfileTags;
 
 /**
  * @author mwallace

@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -24,12 +24,11 @@ import org.junit.runners.Suite.SuiteClasses;
 import com.ibm.sbt.automation.core.environment.TestEnvironment;
 import com.ibm.sbt.automation.core.environment.TestEnvironmentFactory;
 import com.ibm.sbt.test.js.smartcloud.ActivitiesTestSuite;
-import com.ibm.sbt.test.js.smartcloud.SearchRestTestSuite;
-import com.ibm.sbt.test.js.smartcloud.SearchTestSuite;
 import com.ibm.sbt.test.js.smartcloud.CommunitiesTestSuite;
 import com.ibm.sbt.test.js.smartcloud.FilesTestSuite;
 import com.ibm.sbt.test.js.smartcloud.ProfilesGridTestSuite;
 import com.ibm.sbt.test.js.smartcloud.ProfilesTestSuite;
+import com.ibm.sbt.test.js.smartcloud.SearchTestSuite;
 import com.ibm.sbt.test.sample.SampleFrameworkTestSuite;
 
 /**

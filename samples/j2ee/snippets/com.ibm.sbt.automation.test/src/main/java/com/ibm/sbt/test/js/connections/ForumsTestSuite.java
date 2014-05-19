@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -24,6 +24,7 @@ import com.ibm.sbt.test.js.connections.forums.CreateUpdateDeleteReply;
 import com.ibm.sbt.test.js.connections.forums.CreateUpdateDeleteTopic;
 import com.ibm.sbt.test.js.connections.forums.GetMyAnsweredTopics;
 import com.ibm.sbt.test.js.connections.forums.GetMyForumEntries;
+import com.ibm.sbt.test.js.connections.forums.GetMyTopics;
 import com.ibm.sbt.test.js.connections.forums.GetMyTopicsRecommendations;
 import com.ibm.sbt.test.js.connections.forums.StartAForum;
 import com.ibm.sbt.test.js.connections.forums.api.CreateForum;
@@ -53,8 +54,8 @@ import com.ibm.sbt.test.js.connections.forums.api.UpdateForumTopic;
 	CreateUpdateDeleteTopic.class,
 	GetMyAnsweredTopics.class,
 	GetMyForumEntries.class,
-	com.ibm.sbt.test.js.connections.forums.GetMyForums.class,
-	com.ibm.sbt.test.js.connections.forums.GetMyTopics.class,
+	GetMyForums.class,
+	GetMyTopics.class,
 	GetMyTopicsRecommendations.class,
 	StartAForum.class,
 	GetMyForums.class,

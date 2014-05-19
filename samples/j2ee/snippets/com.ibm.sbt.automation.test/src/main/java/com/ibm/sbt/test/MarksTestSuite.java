@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -21,10 +21,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.ibm.sbt.automation.core.environment.TestEnvironment;
-import com.ibm.sbt.automation.core.environment.TestEnvironmentFactory;
-import com.ibm.sbt.test.js.connections.communities.api.UpdateCommunity;
-import com.ibm.sbt.test.js.connections.communities.api.UpdateCommunityJson;
 import com.ibm.sbt.test.js.connections.communities.api.UpdateCommunityTags;
 import com.ibm.sbt.test.js.connections.files.api.AddCommentToFile;
 import com.ibm.sbt.test.js.connections.profiles.api.GetProfile;

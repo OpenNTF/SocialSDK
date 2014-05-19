@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -20,25 +20,17 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.ibm.sbt.test.js.connections.activitystreams.api.GetMyActionableView;
 import com.ibm.sbt.test.js.connections.activitystreams.api.GetMySavedView;
 import com.ibm.sbt.test.js.connections.activitystreams.api.GetMyStatusUpdates;
-import com.ibm.sbt.test.js.connections.activitystreams.api.GetNotificationsForMe;
-import com.ibm.sbt.test.js.connections.activitystreams.api.GetNotificationsFromMe;
 import com.ibm.sbt.test.js.connections.activitystreams.api.GetPublicActivityStream;
-import com.ibm.sbt.test.js.connections.activitystreams.api.GetResponsesToMyContent;
 import com.ibm.sbt.test.js.connections.activitystreams.api.GetUpdatesFromACommunity;
 import com.ibm.sbt.test.js.connections.activitystreams.api.GetUpdatesFromAUser;
 import com.ibm.sbt.test.js.connections.activitystreams.api.GetUpdatesFromCommunitiesIFollow;
-import com.ibm.sbt.test.js.connections.activitystreams.api.GetUpdatesFromMyNetwork;
 import com.ibm.sbt.test.js.connections.activitystreams.api.GetUpdatesFromPeopleIFollow;
 import com.ibm.sbt.test.js.connections.activitystreams.api.PostAStatusUpdate;
 import com.ibm.sbt.test.js.connections.activitystreams.api.PostEntry;
 import com.ibm.sbt.test.js.connections.activitystreams.api.PostEntryIntoACommunityStream;
 import com.ibm.sbt.test.js.connections.activitystreams.api.PostEntryWithEmbeddedExperience;
-import com.ibm.sbt.test.js.connections.activitystreams.api.SearchByFilters;
-import com.ibm.sbt.test.js.connections.activitystreams.api.SearchByQuery;
-import com.ibm.sbt.test.js.connections.activitystreams.api.SearchByTags;
 
 /**
  * @author rajmeetbal

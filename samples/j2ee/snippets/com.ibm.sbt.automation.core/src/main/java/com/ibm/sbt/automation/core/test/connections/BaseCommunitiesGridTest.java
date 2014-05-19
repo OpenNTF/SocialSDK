@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -15,19 +15,10 @@
  */
 package com.ibm.sbt.automation.core.test.connections;
 
-import java.util.List;
-
-import junit.framework.Assert;
-
 import org.junit.After;
 import org.junit.Before;
-import org.openqa.selenium.WebElement;
 
 import com.ibm.sbt.automation.core.test.BaseGridTest;
-import com.ibm.sbt.automation.core.test.pageobjects.GridPagerPage;
-import com.ibm.sbt.automation.core.test.pageobjects.GridResultPage;
-import com.ibm.sbt.automation.core.test.pageobjects.GridSorterPage;
-import com.ibm.sbt.automation.core.test.pageobjects.ResultPage;
 import com.ibm.sbt.services.client.connections.communities.CommunityService;
 import com.ibm.sbt.services.client.connections.communities.Member;
 

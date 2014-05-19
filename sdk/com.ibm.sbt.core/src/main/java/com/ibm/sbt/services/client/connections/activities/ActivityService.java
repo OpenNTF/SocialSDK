@@ -270,8 +270,8 @@ public class ActivityService extends ConnectionsService {
 	 * @return
 	 * @throws ClientServicesException 
 	 */
-	public EntityList<Activity> getTrashedActivities() throws ClientServicesException {
-		return getTrashedActivities(null);
+	public EntityList<Activity> getThrashedActivities() throws ClientServicesException {
+		return getThrashedActivities(null);
 	}
 
 	/**
@@ -281,7 +281,7 @@ public class ActivityService extends ConnectionsService {
 	 * @return
 	 * @throws ClientServicesException 
 	 */
-	public EntityList<Activity> getTrashedActivities(Map<String, String> parameters) throws ClientServicesException {
+	public EntityList<Activity> getThrashedActivities(Map<String, String> parameters) throws ClientServicesException {
 		String requestUrl = ActivityUrls.TRASHED_ACTIVITIES.format(this);
 		return getActivityEntityList(requestUrl, parameters);
 	}
@@ -292,8 +292,8 @@ public class ActivityService extends ConnectionsService {
 	 * @return
 	 * @throws ClientServicesException 
 	 */
-	public EntityList<ActivityNode> getTrashedActivityNodes(String activityUuid) throws ClientServicesException {
-		return getTrashedActivityNodes(null);
+	public EntityList<ActivityNode> getThrashedActivityNodes(String activityUuid) throws ClientServicesException {
+		return getThrashedActivityNodes(null);
 	}
 
 	/**

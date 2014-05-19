@@ -40,7 +40,7 @@
 	<%
 	try {
 		BlogService service = new BlogService();
-		EntityList<Blog> blogs = service.getBlogs();
+		EntityList<Blog> blogs = service.getAllBlogs();
 		if(blogs.size()>0){
 			String blogHandle = ((Blog)blogs.get(0)).getHandle();
 			EntityList<BlogPost> posts = service.getBlogPosts(blogHandle);

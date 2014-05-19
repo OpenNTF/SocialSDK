@@ -14,7 +14,6 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<%@page import="com.ibm.sbt.services.client.connections.files.model.FileRequestPayload"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.model.FileCreationParameters"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.FileService"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.Comment"%>

@@ -39,8 +39,8 @@
 			if(invites.size()>0){
 				String communityId = invites.get(0).getCommunityUuid();
 				String userId = invites.get(0).getContributor().getUserid();
-				boolean success = svc.declineInvite(communityId, userId);
-				out.println("Invite declined"+success);
+				svc.declineInvite(communityId, userId);
+				out.println("Invite declined");
 			}
 			else{
 				out.println("No invites exist to decline");

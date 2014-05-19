@@ -43,7 +43,7 @@ public class ActivityUrlsTest extends BaseActivityServiceTest {
 		Assert.assertEquals("activities/service/atom2/completed", ActivityUrls.COMPLETED_ACTIVITIES.format(activityService));
 		Assert.assertEquals("activities/service/atom2/activities", ActivityUrls.MY_ACTIVITIES.format(activityService));
 		Assert.assertEquals("activities/service/atom2/trash", ActivityUrls.TRASHED_ACTIVITIES.format(activityService));
-		Assert.assertEquals("activities/service/atom2/todos", ActivityUrls.TODO_ACTIVITIES.format(activityService));
+		Assert.assertEquals("activities/service/atom2/todos", ActivityUrls.TODO_ENTRIES.format(activityService));
 		Assert.assertEquals("activities/service/atom2/activitynode?activityNodeUuid=11111-22222-33333-44444", ActivityUrls.ACTIVITY_NODE.format(activityService, activityNodeUuid));
 		Assert.assertEquals("activities/service/atom2/trashednode?activityNodeUuid=11111-22222-33333-44444", ActivityUrls.TRASHED_ACTIVITY_NODE.format(activityService, activityNodeUuid));
 		Assert.assertEquals("activities/service/atom2/acl?activityUuid=11111-22222-33333-44444", ActivityUrls.ACTIVITY_ACL.format(activityService, activityUuid));

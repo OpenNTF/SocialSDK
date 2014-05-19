@@ -156,8 +156,8 @@ public class ActivityService extends ConnectionsService {
 	 * 
 	 * @return
 	 */
-	public EntityList<Activity> getToDoActivities() throws ClientServicesException {
-		return getToDoActivities(null);
+	public EntityList<ActivityNode> getToDos() throws ClientServicesException {
+		return getToDos(null);
 	}
 
 	/**
@@ -166,9 +166,9 @@ public class ActivityService extends ConnectionsService {
 	 * @param parameters
 	 * @return
 	 */
-	public EntityList<Activity> getToDoActivities(Map<String, String> parameters) throws ClientServicesException {
-		String requestUrl = ActivityUrls.TODO_ACTIVITIES.format(this);
-		return getActivityEntityList(requestUrl, parameters);
+	public EntityList<ActivityNode> getToDos(Map<String, String> parameters) throws ClientServicesException {
+		String requestUrl = ActivityUrls.TODO_ENTRIES.format(this);
+		return getActivityNodeEntityList(requestUrl, parameters);
 	}
 
 	/**
@@ -821,14 +821,13 @@ public class ActivityService extends ConnectionsService {
 	/**
 	 * Change the priority for the specified activity for the currently authenticated user.
 	 * 
-	 * @param activityUuid
+	 * @param activityNodeUuid
 	 * @throws ClientServicesException
 	 */	
-	public void changePriority(String activityUuid, int priority) throws ClientServicesException {
-		String requestUrl = ActivityUrls.ACTIVITY_NODE.format(this, ActivityUrls.activityPart(activityUuid));
-		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put("priority", ""+priority);
-		updateActivityEntity(requestUrl, null, parameters, HTTPCode.NO_CONTENT);		
+	public void changePriority(String activityNodeUuid, int priority) throws ClientServicesException {
+		String requestUrl = ActivityUrls.CHANGE_PRIORITY.format(this, 
+				ActivityUrls.activityNodePart(activityNodeUuid), ActivityUrls.priorityPart(priority));
+		updateActivityEntity(requestUrl, null, null, HTTPCode.NO_CONTENT);		
 	}
 		
 	//------------------------------------------------------------------------------------------------------------------

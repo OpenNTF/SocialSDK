@@ -21,6 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import org.junit.After;
 import org.junit.Before;
@@ -45,7 +46,10 @@ public class BaseActivityServiceTest extends BaseUnitTest {
 	protected Activity activity;
 	protected List<Activity> activities;
 	
-	static protected SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+	static protected SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+	static {
+		dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+	}
 	
 	@Before
 	public void initActivityServiceTest() {
@@ -151,7 +155,7 @@ public class BaseActivityServiceTest extends BaseUnitTest {
 		return activityService.createActivity(activity);
     }
         	
-    protected Activity createActivity(String title, String type, int priority, Field[] fields) throws ClientServicesException {
+    protected Activity createActivity(String title, String type) throws ClientServicesException {
     	List<String> tags = new ArrayList<String>();
     	tags.add("personal");
     	tags.add("unit_test");
@@ -160,15 +164,9 @@ public class BaseActivityServiceTest extends BaseUnitTest {
 		activity = new Activity();
 		activity.setTitle(title);
 		activity.setTags(tags);
-		activity.setPriority(priority);
+		activity.setPriority(Activity.PRIORITY_NORMAL);
 		activity.setType(type);
 		activity.setSummary("Goal for " + title);
-		
-		if (fields != null) {
-			for (Field field : fields) {
-				activity.addField(field);
-			}
-		}
 		
 		return activityService.createActivity(activity);
     }
@@ -202,6 +200,14 @@ public class BaseActivityServiceTest extends BaseUnitTest {
 		activityNode.setActivityUuid(activityUuid);
 		activityNode.setTitle(title);
 		activityNode.setTags(tags);
+		return activityService.createActivityNode(activityNode);
+    }
+    
+    protected ActivityNode createActivityNode(String activityUuid, String title, String type) throws ClientServicesException {
+		ActivityNode activityNode = new ActivityNode();
+		activityNode.setActivityUuid(activityUuid);
+		activityNode.setTitle(title);
+		activityNode.setType(type);
 		return activityService.createActivityNode(activityNode);
     }
     

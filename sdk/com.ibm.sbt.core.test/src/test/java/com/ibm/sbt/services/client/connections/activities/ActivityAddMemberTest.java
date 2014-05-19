@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * ï¿½ Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,8 +37,6 @@ public class ActivityAddMemberTest extends BaseActivityServiceTest {
 		Assert.assertNotNull(member);
 		
 		//System.out.println(member.toXmlString());
-		
-		this.activity = null;
 	}
 
 }

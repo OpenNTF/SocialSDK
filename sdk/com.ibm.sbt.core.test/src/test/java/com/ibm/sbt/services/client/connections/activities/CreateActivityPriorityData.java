@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * ï¿½ Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,16 +28,18 @@ public class CreateActivityPriorityData extends BaseActivityServiceTest {
 
 	@Test
 	public void createActivityPriorityData() throws ClientServicesException, XMLException {
-		int[] priorities = new int[] { -1, 1, 500, 999, 1000, 1001, 1500, 1999, 2000, 2001, 2500, 2999, 3000 };
+		int[] priorities = new int[] { 0, 1, 2000, 3000 };
 		for (int i=0; i<priorities.length; i++) {
+			//System.out.println("Change priority: "+priorities[i]);
 			Activity created = createActivity(createTitle(priorities[i]));
 			
 			created.changePriority(priorities[i]);
 			
 			Activity read = activityService.getActivity(created.getActivityUuid());
 			System.out.println(priorities[i]+"="+read.getPriority());
+			
+			activityService.deleteActivity(created);
 		}
-		activity = null;
 	}
 	
     protected String createTitle(int priority) {

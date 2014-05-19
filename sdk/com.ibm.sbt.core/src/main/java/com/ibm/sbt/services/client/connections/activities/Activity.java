@@ -48,7 +48,7 @@ public class Activity extends NodeEntity {
     public static final int PRIORITY_MEDIUM = 2000;
     public static final int PRIORITY_HIGH = 3000;
 		
-	/**
+    /**
 	 * Default constructor
 	 */
 	public Activity() {

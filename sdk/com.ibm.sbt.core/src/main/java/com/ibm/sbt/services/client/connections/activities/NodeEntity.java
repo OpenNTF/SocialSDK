@@ -203,6 +203,26 @@ public class NodeEntity extends AtomEntity {
 	}
 
 	/**
+	 * Returns true if the node is deleted.
+	 * 
+	 * Flag that is only present on an node that is deleted, meaning it is in the Trash view and has not been removed from the system.
+	 * 
+	 * @return
+	 */
+	public boolean isDeleted() {
+		return exists(ActivityXPath.deleted);
+	}
+	
+	/**
+	 * Set deleted flag for the node.
+	 * 
+	 * @param deleted
+	 */
+	public void setDeleted(boolean deleted) {
+		setAsBoolean(ActivityXPath.deleted, deleted);
+	}
+	
+	/**
 	 * 
 	 * @return
 	 */

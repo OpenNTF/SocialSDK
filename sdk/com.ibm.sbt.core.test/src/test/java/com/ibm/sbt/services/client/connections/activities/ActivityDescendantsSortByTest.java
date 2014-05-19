@@ -35,7 +35,7 @@ public class ActivityDescendantsSortByTest extends BaseActivityServiceTest {
 	private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");	
 
 	@Test
-	public void testDescendantsUpdatedSince() throws ClientServicesException, XMLException {
+	public void testDescendantsModifiedSort() throws ClientServicesException, XMLException {
 		long start = System.currentTimeMillis();
 		activity = createActivity("ActivityDescendantsUpdatedSince-"+start);
 		
@@ -56,6 +56,56 @@ public class ActivityDescendantsSortByTest extends BaseActivityServiceTest {
 		System.out.println("\nActivity shildren sorted descending by modification date");
 		for (ActivityNode node : activityChildren) {
 			System.out.println(node.getTitle() + " modified: " + dateFormat.format(node.getUpdated()));
+		}
+	}
+
+	@Test
+	public void testDescendantsLastModSort() throws ClientServicesException, XMLException {
+		long start = System.currentTimeMillis();
+		activity = createActivity("ActivityDescendantsUpdatedSince-"+start);
+		
+		List<ActivityNode> nodes = createActivityDescendants(activity);
+		org.junit.Assert.assertNotNull(nodes);
+				
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("sortBy", "LASTMOD");
+		params.put("sortOrder", "asc");
+		EntityList<ActivityNode> activityDescendants = activityService.getActivityNodeDescendants(activity.getActivityUuid(), params);
+		System.out.println("\nActivity descendants sorted ascending by LASTMOD date");
+		for (ActivityNode node : activityDescendants) {
+			System.out.println(node.getTitle() + "  modified: " + dateFormat.format(node.getUpdated()));
+		}
+		
+		params.put("sortOrder", "desc");
+		EntityList<ActivityNode> activityChildren = activityService.getActivityNodeChildren(activity.getActivityUuid(), params);
+		System.out.println("\nActivity shildren sorted descending by LASTMOD date");
+		for (ActivityNode node : activityChildren) {
+			System.out.println(node.getTitle() + " modified: " + dateFormat.format(node.getUpdated()));
+		}
+	}
+	
+	@Test
+	public void testDescendantsCreatedSort() throws ClientServicesException, XMLException {
+		long start = System.currentTimeMillis();
+		activity = createActivity("ActivityDescendantsUpdatedSince-"+start);
+		
+		List<ActivityNode> nodes = createActivityDescendants(activity);
+		org.junit.Assert.assertNotNull(nodes);
+				
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("sortBy", "CREATED");
+		params.put("sortOrder", "asc");
+		EntityList<ActivityNode> activityDescendants = activityService.getActivityNodeDescendants(activity.getActivityUuid(), params);
+		System.out.println("\nActivity descendants sorted ascending by CREATED date");
+		for (ActivityNode node : activityDescendants) {
+			System.out.println(node.getTitle() + " created: " + dateFormat.format(node.getPublished()));
+		}
+		
+		params.put("sortOrder", "desc");
+		EntityList<ActivityNode> activityChildren = activityService.getActivityNodeChildren(activity.getActivityUuid(), params);
+		System.out.println("\nActivity shildren sorted descending by CREATED date");
+		for (ActivityNode node : activityChildren) {
+			System.out.println(node.getTitle() + " created: " + dateFormat.format(node.getPublished()));
 		}
 	}
 		

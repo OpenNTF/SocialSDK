@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * ï¿½ Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,13 +29,13 @@ public class ActivityPriorityTest extends BaseActivityServiceTest {
 
 	@Test
 	public void testTuneOutActivity() throws ClientServicesException {
-		Activity created = createActivity(createTitle(Activity.MEDIUM), Activity.MEDIUM);
+		Activity created = createActivity(createTitle(Activity.PRIORITY_MEDIUM), Activity.PRIORITY_MEDIUM);
 		
-		created.changePriority(Activity.TUNED_OUT);
+		created.changePriority(Activity.PRIORITY_TUNED_OUT);
 		
 		Activity read = activityService.getActivity(activity.getActivityUuid());
 		Assert.assertEquals(activity.getUpdated().getTime(), read.getUpdated().getTime());
-		Assert.assertEquals(Activity.TUNED_OUT, read.getPriority());
+		Assert.assertEquals(Activity.PRIORITY_TUNED_OUT, read.getPriority());
 		
 		EntityList<Activity> activities = activityService.getTunedOutActivities();
 		Assert.assertNotNull("Expected non null activities", activities);

@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * ï¿½ Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -96,7 +96,7 @@ public class ActivityNodeCrudrTest extends BaseActivityServiceTest {
 		Assert.assertEquals(createdNodeUuid, activityNodeUuid);
 		
 		ActivityNode read = activityService.getActivityNode(activityNodeUuid);
-		Assert.assertNull(read);
+		Assert.assertTrue(read.isDeleted());
 	}
 	
 	@Test

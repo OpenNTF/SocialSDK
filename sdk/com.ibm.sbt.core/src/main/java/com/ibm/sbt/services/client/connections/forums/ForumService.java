@@ -183,7 +183,7 @@ public class ForumService extends ConnectionsService {
 	/**
 	 * Get a feed that includes the topics in a specific stand-alone forum.
 	 * 
-	 * @param forumUid
+	 * @param forumUuid
 	 * @return EntityList&lt;ForumTopic&gt;
 	 * @throws ClientServicesException
 	 */
@@ -196,7 +196,7 @@ public class ForumService extends ConnectionsService {
 	 * You can narrow down the topics that are returned by passing parameters to the request 
 	 * that you use to retrieve the feed.
 	 * 
-	 * @param forumUid
+	 * @param topicUuid
 	 * @param parameters
 	 * @return EntityList&lt;ForumTopic&gt;
 	 * @throws ClientServicesException
@@ -310,8 +310,8 @@ public class ForumService extends ConnectionsService {
 	 * @throws ClientServicesException
 	 */
 	public EntityList<ForumReply> getForumTopicReplies(String topicUuid, Map<String, String> parameters) throws ClientServicesException {
-		String myRepliesUrl = ForumUrls.TOPIC_REPLIES.format(this, ForumUrls.topicPart(topicUuid));
-		return getForumReplyEntityList(myRepliesUrl, parameters);
+		String url = ForumUrls.TOPIC_REPLIES.format(this, ForumUrls.topicPart(topicUuid));
+		return getReplies(url, parameters);
 	}
 
 	/**
@@ -492,7 +492,7 @@ public class ForumService extends ConnectionsService {
 	 * 
 	 * @param topic
 	 * 		the topic to be created
-	 * @param forumId
+	 * @param forumUuid
 	 * 		the id of the forum where the topic will be added
 	 * @return ForumTopic
 	 * @throws ClientServicesException
@@ -515,27 +515,27 @@ public class ForumService extends ConnectionsService {
 	 * To retrieve complete information about a forum topic,
 	 * use the edit link found in the forum topic entry in the forum topics feed.
 	 * 
-	 * @param topicId
+	 * @param topicUuid
 	 * 				The id of the forum topic to be retrieved
 	 * @return ForumTopic
 	 * @throws ClientServicesException
 	 */
-	public ForumTopic getForumTopic(String topicId) throws ClientServicesException {
-		return getForumTopic(topicId, null);
+	public ForumTopic getForumTopic(String topicUuid) throws ClientServicesException {
+		return getForumTopic(topicUuid, null);
 	}
 
 	/**
 	 * To retrieve complete information about a forum topic,
 	 * use the edit link found in the forum topic entry in the forum topics feed.
 	 * 
-	 * @param topicId
+	 * @param topicUuid
 	 * 				The id of the forum topic to be retrieved
 	 * @param parameters
 	 * @return ForumTopic
 	 * @throws ClientServicesException
 	 */
-	public ForumTopic getForumTopic(String topicId, Map<String, String> parameters) throws ClientServicesException {
-		String myTopicsUrl = ForumUrls.TOPIC.format(this, ForumUrls.topicPart(topicId));
+	public ForumTopic getForumTopic(String topicUuid, Map<String, String> parameters) throws ClientServicesException {
+		String myTopicsUrl = ForumUrls.TOPIC.format(this, ForumUrls.topicPart(topicUuid));
 		return getForumTopicEntity(myTopicsUrl, parameters);
 	}
 
@@ -607,7 +607,7 @@ public class ForumService extends ConnectionsService {
 	 * @throws ClientServicesException
 	 */
 	public ForumReply createForumReply(ForumReply reply) throws ClientServicesException {
-		return createForumReply(reply, reply.getTopicUuid());
+		return createForumReply(reply.getTopicUuid(), reply);
 	}
 
 	/**
@@ -616,19 +616,16 @@ public class ForumService extends ConnectionsService {
 	 * See Authenticating requests for information about how to authenticate the request.
 	 * 
 	 * @param ForumReply
-	 * @param topicId
+	 * @param topicUuid
 	 * @return ForumReply
 	 * @throws ClientServicesException
 	 */
-	public ForumReply createForumReply(ForumReply reply, String topicId) throws ClientServicesException {
-		if (null == reply){
-			throw new ClientServicesException(null,"Reply object passed was null");
-		}
+	public ForumReply createForumReply(String topicUuid, ForumReply reply) throws ClientServicesException {
 		if(StringUtil.isEmpty(reply.getTopicUuid())){
-			reply.setTopicUuid(topicId);
+			reply.setTopicUuid(topicUuid);
 		}
 		ForumSerializer serializer = new ForumSerializer(reply);
-		String url = ForumUrls.TOPIC_REPLIES.format(this, ForumUrls.topicPart(topicId));
+		String url = ForumUrls.TOPIC_REPLIES.format(this, ForumUrls.topicPart(topicUuid));
 		Response response = createData(url, null, getAtomHeaders(), serializer.generateCreate());
 		checkResponseCode(response, HTTPCode.CREATED);
 		reply = getForumReplyFeedHandler(false).createEntity(response);
@@ -644,12 +641,12 @@ public class ForumService extends ConnectionsService {
 	 * This method returns the Atom entry of a single reply entry as opposed to a feed of all the reply entries.
 	 * See Authenticating requests for information about how to authenticate the request.
 	 * 
-	 * @param replyId
+	 * @param replyUuid
 	 * @return ForumReply
 	 * @throws ClientServicesException
 	 */
-	public ForumReply getForumReply(String replyId) throws ClientServicesException {
-		return getForumReply(replyId, null);
+	public ForumReply getForumReply(String replyUuid) throws ClientServicesException {
+		return getForumReply(replyUuid, null);
 	}
 
 	/**
@@ -660,13 +657,13 @@ public class ForumService extends ConnectionsService {
 	 * This method returns the Atom entry of a single reply entry as opposed to a feed of all the reply entries.
 	 * See Authenticating requests for information about how to authenticate the request.
 	 * 
-	 * @param replyId
+	 * @param replyUuid
 	 * @param parameters
 	 * @return ForumReply
 	 * @throws ClientServicesException
 	 */
-	public ForumReply getForumReply(String replyId, Map<String, String> parameters) throws ClientServicesException {
-		String myRepliesUrl = ForumUrls.REPLY.format(this, ForumUrls.replyPart(replyId));
+	public ForumReply getForumReply(String replyUuid, Map<String, String> parameters) throws ClientServicesException {
+		String myRepliesUrl = ForumUrls.REPLY.format(this, ForumUrls.replyPart(replyUuid));
 		return getForumReplyEntity(myRepliesUrl, parameters);
 	}
 
@@ -767,7 +764,7 @@ public class ForumService extends ConnectionsService {
 		Recommendation recommendation;
 		// not using transformer, as the payload to be sent is constant
 		String payload = "<entry xmlns='http://www.w3.org/2005/Atom'><category scheme='http://www.ibm.com/xmlns/prod/sn/type' term='recommendation'></category></entry>";
-		Response response= createData(recommendationsUrl, null, null,payload);
+		Response response = createData(recommendationsUrl, null, null,payload);
 		checkResponseCode(response, HTTPCode.CREATED);
 		recommendation = getRecommendationFeedHandler().createEntity(response);
 
@@ -793,7 +790,7 @@ public class ForumService extends ConnectionsService {
 	public void deleteRecommendation(String postUuid) throws ClientServicesException{
 		checkVersion();
 		String recommendationsUrl = ForumUrls.RECOMMENDATION_ENTRIES.format(this, ForumUrls.postPart(postUuid));
-		Response response = deleteData(recommendationsUrl, null, postUuid);
+		Response response = deleteData(recommendationsUrl, null, null);
 		checkResponseCode(response, HTTPCode.NO_CONTENT);
 	}
 
@@ -804,43 +801,57 @@ public class ForumService extends ConnectionsService {
 	 * <p>
 	 * User should be authenticated to call this method
 	 * @param ForumTopic
+	 * @param communityUuid
 	 * @return Topic
 	 * @throws ClientServicesException
 	 */
-	public ForumTopic createCommunityForumTopic(ForumTopic topic, String communityId) throws ClientServicesException {
+	public ForumTopic createCommunityForumTopic(ForumTopic topic, String communityUuid) throws ClientServicesException {
 		if (null == topic){
 			throw new ClientServicesException(null,"Topic object passed was null");
 		}
 		ForumSerializer serializer = new ForumSerializer(topic);
 
-		String postUrl = ForumUrls.COMMUNITY_TOPICS.format(this, ForumUrls.communityPart(communityId));
+		String postUrl = ForumUrls.COMMUNITY_TOPICS.format(this, ForumUrls.communityPart(communityUuid));
 		Response response = createData(postUrl, null, getAtomHeaders(), serializer.generateCreate());
 		checkResponseCode(response, HTTPCode.CREATED);
 		topic = getForumTopicFeedHandler().createEntity(response);
 
 		return topic;
 	}
-
+	
+	/**
+     * Get a list for forum replies that includes the replies in the specified post.
+     * The post uuid must be specified in the parametetrs as either:
+     * topicUuid or replyUuid 
+     * 
+	 * @param topicUuid
+	 * @return EntityList<ForumReply>
+	 * @throws ClientServicesException
+	 */
+	public EntityList<ForumReply> getForumReplies(String topicUuid) throws ClientServicesException {
+		return getForumReplies(topicUuid, null);
+	}
 
 	 /**
      * Get a list for forum replies that includes the replies in the specified post.
      * The post uuid must be specified in the parametetrs as either:
      * topicUuid or replyUuid 
      * 
+	 * @param topicUuid
 	 * @param parameters
-	 * @return ReplyList
+	 * @return EntityList<ForumReply>
 	 * @throws ClientServicesException
 	 */
-	public EntityList<ForumReply> getForumReplies(Map<String, String> parameters) throws ClientServicesException {
-		String myRepliesUrl = ForumUrls.REPLIES.format(this);
-		return getForumReplyEntityList(myRepliesUrl, parameters);
+	public EntityList<ForumReply> getForumReplies(String topicUuid, Map<String, String> parameters) throws ClientServicesException {
+		String url = ForumUrls.FORUM_REPLIES.format(this, ForumUrls.topicPart(topicUuid));
+		return getReplies(url, parameters);
 	}
 
 	/**
      * Get a list for forum replies that includes the replies of a Forum Reply.
      * 
-     * @param topicUuid
-	 * @return ReplyList
+     * @param replyUuid
+	 * @return EntityList<ForumReply>
 	 * @throws ClientServicesException
 	 */
 	public EntityList<ForumReply> getForumReplyReplies(String replyUuid) throws ClientServicesException {
@@ -851,12 +862,12 @@ public class ForumService extends ConnectionsService {
      * 
      * @param replyUuid
 	 * @param parameters
-	 * @return ReplyList
+	 * @return EntityList<ForumReply>
 	 * @throws ClientServicesException
 	 */
 	public EntityList<ForumReply> getForumReplyReplies(String replyUuid, Map<String, String> parameters) throws ClientServicesException {
-		String myRepliesUrl = ForumUrls.REPLY_REPLIES.format(this, ForumUrls.replyPart(replyUuid));
-		return getForumReplyEntityList(myRepliesUrl, parameters);
+		String url = ForumUrls.REPLY_REPLIES.format(this, ForumUrls.replyPart(replyUuid));
+		return getReplies(url, parameters);
 	}
 
 	/***************************************************************
@@ -1011,5 +1022,9 @@ public class ForumService extends ConnectionsService {
 	protected boolean isForumDeleted(Response response){
 		StatusLine statusLine = response.getResponse().getStatusLine();
 		return statusLine.getStatusCode() == 204;
+	}
+	
+	private EntityList<ForumReply> getReplies(String url, Map<String, String> parameters) throws ClientServicesException {
+		return getForumReplyEntityList(url, null);
 	}
 }

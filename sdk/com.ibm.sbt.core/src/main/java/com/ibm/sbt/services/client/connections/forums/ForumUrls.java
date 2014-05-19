@@ -42,29 +42,29 @@ public enum ForumUrls implements URLContainer {
 	FORUM_TOPICS(new VersionedUrl(v4_0, "{forums}/{authType}/atom/topics?forumUuid={forumUuid}")),
 	COMMUNITY_TOPICS(new VersionedUrl(v4_0, "{forums}/{authType}/atom/topics?communityUuid={communityUuid}")),
 	TOPICS_MY(new VersionedUrl(v4_0, "{forums}/{authType}/atom/topics/my")),
-	REPLIES(new VersionedUrl(v4_0, "{forums}/{authType}/atom/replies")),
-	REPLY_REPLIES(new VersionedUrl(v4_0, "{forums}/{authType}/atom/replies?replyUuid={replyUuid}")),
+	FORUM_REPLIES(new VersionedUrl(v4_0, "{forums}/{authType}/atom/replies?topicUuid={topicUuid}")),
 	TOPIC_REPLIES(new VersionedUrl(v4_0, "{forums}/{authType}/atom/replies?topicUuid={topicUuid}")),
+	REPLY_REPLIES(new VersionedUrl(v4_0, "{forums}/{authType}/atom/replies?replyUuid={replyUuid}")),
 	REPLY(new VersionedUrl(v4_0, "{forums}/{authType}/atom/reply?replyUuid={replyUuid}"));
 
-	public static final NamedUrlPart forumPart(String forumUuid) {
+	static final public NamedUrlPart replyPart(String replyUuid) {
+		return new NamedUrlPart("replyUuid", replyUuid);
+	}
+	
+	static final public NamedUrlPart forumPart(String forumUuid) {
 		return new NamedUrlPart("forumUuid", forumUuid);
 	}
-
-	 public static final NamedUrlPart postPart(String postUuid) {
+	
+	static final public NamedUrlPart postPart(String postUuid) {
 		return new NamedUrlPart("postUuid", postUuid);
 	}
 	
-	public static final NamedUrlPart communityPart(String communityUuid) {
-		return new NamedUrlPart("communityUuid", communityUuid);
-	}
-
-	public static final NamedUrlPart topicPart(String topicUuid) {
+	static final public NamedUrlPart topicPart(String topicUuid) {
 		return new NamedUrlPart("topicUuid", topicUuid);
 	}
-
-	public static final NamedUrlPart replyPart(String replyUuid) {
-		return new NamedUrlPart("replyUuid", replyUuid);
+	
+	static final public NamedUrlPart communityPart(String communityUuid) {
+		return new NamedUrlPart("communityUuid", communityUuid);
 	}
 	
 	private URLBuilder builder;

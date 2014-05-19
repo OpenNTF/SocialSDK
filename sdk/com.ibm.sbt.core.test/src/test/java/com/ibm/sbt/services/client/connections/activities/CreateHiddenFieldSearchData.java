@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * ï¿½ Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,7 +35,7 @@ public class CreateHiddenFieldSearchData extends BaseActivityServiceTest {
 				fields[j] = createHiddenField("Field"+j, "Content"+j);
 			}
 			
-			Activity created = createActivity(createTitle(""+i), Activity.MEDIUM, fields);
+			Activity created = createActivity(createTitle(""+i), Activity.PRIORITY_MEDIUM, fields);
 			
 			Activity read = activityService.getActivity(created.getActivityUuid());
 			System.out.println("Read: "+read.toXmlString());

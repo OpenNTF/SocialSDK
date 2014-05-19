@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * ï¿½ Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,16 +40,21 @@ public class ActivityFeedTest extends BaseActivityServiceTest {
 
 	@Test
 	public void testGetCompletedActivities() throws ClientServicesException {
+		Activity activity = this.activity;
+		activity.setCompleted(true);
+		activityService.updateActivity(activity);
+		
 		EntityList<Activity> activities = activityService.getCompletedActivities();
 		Assert.assertNotNull("Expected non null activities", activities);
 		Assert.assertFalse("Expected non empty activities", activities.isEmpty());
-		for (Activity activity : activities) {
-			Assert.assertNotNull("Invalid activity id", activity.getId());
+		for (Activity nextActivity : activities) {
+			Assert.assertNotNull("Invalid activity id", nextActivity.getId());
 		}
 	}
 
 	@Test
 	public void testGetToDoActivities() throws ClientServicesException {
+		Activity todo = createActivity();
 		EntityList<Activity> activities = activityService.getToDoActivities();
 		Assert.assertNotNull("Expected non null activities", activities);
 		Assert.assertFalse("Expected non empty activities", activities.isEmpty());

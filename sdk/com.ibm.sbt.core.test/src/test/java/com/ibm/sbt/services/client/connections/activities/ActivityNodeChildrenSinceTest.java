@@ -101,7 +101,7 @@ public class ActivityNodeChildrenSinceTest extends BaseActivityServiceTest {
 		
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("since", "" + node.getPublished().getTime());
-		params.put("filterKey", "create");
+		params.put("rangeId", "created");
 		EntityList<ActivityNode> activityNodes = activityService.getActivityNodeChildren(activity.getActivityUuid(), params);
 		System.out.println("Nodes " + activityNodes.size() + " create since: " + dateFormat.format(node.getPublished()));
 		
@@ -119,7 +119,7 @@ public class ActivityNodeChildrenSinceTest extends BaseActivityServiceTest {
 		
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("until", "" + node.getPublished().getTime());
-		params.put("filterKey", "create");
+		params.put("rangeId", "created");
 		EntityList<ActivityNode> activityNodes = activityService.getActivityNodeChildren(activity.getActivityUuid(), params);
 		System.out.println("Nodes " + activityNodes.size() + " create until: " + dateFormat.format(node.getPublished()));
 		
@@ -139,7 +139,7 @@ public class ActivityNodeChildrenSinceTest extends BaseActivityServiceTest {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("since", "" + sinceNode.getPublished().getTime());
 		params.put("until", "" + untilNode.getPublished().getTime());
-		params.put("filterKey", "create");
+		params.put("rangeId", "created");
 		EntityList<ActivityNode> activityNodes = activityService.getActivityNodeChildren(activity.getActivityUuid(), params);
 		System.out.println("Nodes " + activityNodes.size() + 
 				" create since: " + dateFormat.format(sinceNode.getPublished()) +

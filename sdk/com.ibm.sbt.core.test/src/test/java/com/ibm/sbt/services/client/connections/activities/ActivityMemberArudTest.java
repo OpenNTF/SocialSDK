@@ -33,7 +33,7 @@ public class ActivityMemberArudTest extends BaseActivityServiceTest {
 	public void testAddActivityMember() throws ClientServicesException, XMLException {
 		Activity activity = createActivity();
 		
-		Member member = activity.addMember(Member.TYPE_PERSON, "20089125", Member.ROLE_OWNER);
+		Member member = activity.addMember(Member.TYPE_PERSON, getMemberId(), Member.ROLE_OWNER);
 		//System.out.println(member.toXmlString());
 		System.out.println(member.getId());
 		
@@ -57,7 +57,7 @@ public class ActivityMemberArudTest extends BaseActivityServiceTest {
 	public void testRetrieveActivityMember() throws ClientServicesException, XMLException {
 		Activity activity = createActivity();
 		
-		Member member = activity.addMember(Member.TYPE_PERSON, "20089125", Member.ROLE_OWNER);
+		Member member = activity.addMember(Member.TYPE_PERSON, getMemberId(), Member.ROLE_OWNER);
 		//System.out.println(member.toXmlString());
 		System.out.println(member.getId());
 		String id = member.getId();
@@ -72,7 +72,7 @@ public class ActivityMemberArudTest extends BaseActivityServiceTest {
 	public void testUpdateActivityMember() throws ClientServicesException, XMLException {
 		Activity activity = createActivity();
 		
-		Member member = activity.addMember(Member.TYPE_PERSON, "20089125", Member.ROLE_MEMBER);
+		Member member = activity.addMember(Member.TYPE_PERSON, getMemberId(), Member.ROLE_MEMBER);
 		//System.out.println(member.toXmlString());
 		System.out.println(member.getId());
 		String id = member.getId();
@@ -90,7 +90,7 @@ public class ActivityMemberArudTest extends BaseActivityServiceTest {
 	public void testDeleteActivityMember() throws ClientServicesException, XMLException {
 		Activity activity = createActivity();
 		
-		Member member = activity.addMember(Member.TYPE_PERSON, "20089125", Member.ROLE_MEMBER);
+		Member member = activity.addMember(Member.TYPE_PERSON, getMemberId(), Member.ROLE_MEMBER);
 		//System.out.println(member.toXmlString());
 		//String id = member.getId();
 		

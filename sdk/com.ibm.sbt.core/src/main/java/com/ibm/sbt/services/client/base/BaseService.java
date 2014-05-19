@@ -146,12 +146,16 @@ public abstract class BaseService implements Serializable {
 		return Version.parse(endpoint.getApiVersion());
 	}
 	
+	/**
+	 * Subclasses must list the context roots of the Connections APIs they use.
+	 * @return
+	 */
 	public String[] getServiceMappingKeys(){
 		return serviceMappingKeys;
 	}
 	
 	/**
-	 * Returns either the configured or the default serviceMapping for the service 
+	 * Returns either the configured or the default serviceMappings for the service 
 	 * @return
 	 */
 	public NamedUrlPart[] getServiceMappings(){

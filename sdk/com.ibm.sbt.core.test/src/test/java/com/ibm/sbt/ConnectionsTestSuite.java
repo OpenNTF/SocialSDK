@@ -21,6 +21,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import com.ibm.sbt.services.client.base.URLBuilderTest;
+import com.ibm.sbt.services.client.connections.ActivitiesTestSuite;
 import com.ibm.sbt.services.client.connections.activitystreams.ActivityStreamServiceTest;
 import com.ibm.sbt.services.client.connections.blogs.BlogServiceTestSuite;
 import com.ibm.sbt.services.client.connections.bookmarks.BookmarkServiceTest;
@@ -50,6 +51,7 @@ import com.ibm.sbt.services.client.connections.wikis.WikiServiceTestSuite;
 	ForumServiceTestSuite.class,		// 		0/0/0	
 	ProfileServiceTestSuite.class,		//		0/0/0	
 	WikiServiceTestSuite.class,			//		0/0/0	
+	ActivitiesTestSuite.class,			//		0/0/0
 	URLBuilderTest.class
 })
 public class ConnectionsTestSuite {

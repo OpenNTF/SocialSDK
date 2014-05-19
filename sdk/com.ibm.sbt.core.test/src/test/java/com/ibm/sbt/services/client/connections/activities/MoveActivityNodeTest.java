@@ -57,8 +57,6 @@ public class MoveActivityNodeTest extends BaseActivityServiceTest {
 		
 		//System.out.println(updated.toXmlString());
 		
-		this.activity = null;
-		
 		Assert.assertEquals(sectionNode.getId(), updated.getInReplyTo().getRef());
 		Assert.assertEquals(sectionNode.getSelfUrl(), updated.getInReplyTo().getHref());
 	}

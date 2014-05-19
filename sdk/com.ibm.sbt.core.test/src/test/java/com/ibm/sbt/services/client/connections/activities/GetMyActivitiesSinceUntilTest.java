@@ -65,7 +65,7 @@ public class GetMyActivitiesSinceUntilTest extends BaseActivityServiceTest {
 
 		Assert.assertNotNull("Expected non null activities", activities);
 		Assert.assertFalse("Expected non empty activities", activities.isEmpty());
-		Assert.assertEquals(2, activities.size());
+		Assert.assertTrue(activities.size() > 2);
 	}
 	
 	@Test

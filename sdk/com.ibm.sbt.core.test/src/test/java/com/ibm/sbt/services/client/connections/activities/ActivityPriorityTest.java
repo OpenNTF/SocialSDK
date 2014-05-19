@@ -28,7 +28,7 @@ import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 public class ActivityPriorityTest extends BaseActivityServiceTest {
 
 	@Test
-	public void testTuneOutActivity() throws ClientServicesException {
+	public void testTunedOutActivity() throws ClientServicesException {
 		Activity created = createActivity(createTitle(Activity.PRIORITY_MEDIUM), Activity.PRIORITY_MEDIUM);
 		
 		created.changePriority(Activity.PRIORITY_TUNED_OUT);
@@ -41,6 +41,8 @@ public class ActivityPriorityTest extends BaseActivityServiceTest {
 		Assert.assertNotNull("Expected non null activities", activities);
 		Assert.assertFalse("Expected non empty activities", activities.isEmpty());
 		Assert.assertNotNull(created.getActivityUuid(), activities.get(0).getId());
+		
+		activityService.deleteActivity(created);
 	}
 	
     protected String createTitle(int priority) {

@@ -60,8 +60,6 @@ public class ActivityService extends BaseService {
 
 	private static Map<String,String> ATOM_HEADERS = new HashMap<String, String>();
 	
-	private static final String[] serviceMappingKeys = new String[]{"activities"};
-	
 	static {
 		ATOM_HEADERS.put(CONTENT_TYPE, APPLICATION_ATOM_XML);
 	}
@@ -80,6 +78,7 @@ public class ActivityService extends BaseService {
 	 */
 	public ActivityService(String endpoint) {
 		super(endpoint);
+		serviceMappingKeys = new String[]{"activities"};
 	}
 	
 	/**
@@ -89,13 +88,9 @@ public class ActivityService extends BaseService {
 	 */
 	public ActivityService(Endpoint endpoint) {
 		super(endpoint);
+		serviceMappingKeys = new String[]{"activities"};
 	}
 
-	@Override
-	public String[] getServiceMappingKeys() {
-		return serviceMappingKeys;
-	}
-	
 	//------------------------------------------------------------------------------------------------------------------
 	// Getting Activities feeds
 	//------------------------------------------------------------------------------------------------------------------

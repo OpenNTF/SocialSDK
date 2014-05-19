@@ -73,7 +73,6 @@ import com.ibm.sbt.services.endpoints.Endpoint;
 public class CommunityService extends BaseService {
 	private static final String COMMUNITY_UNIQUE_IDENTIFIER = "communityUuid";
 	private static final String USERID 						= "userid";
-	private static final String[] serviceMappingKeys = new String[]{"communities"};
 	
 	/**
 	 * Constructor Creates CommunityService Object with default endpoint and default cache size
@@ -101,6 +100,7 @@ public class CommunityService extends BaseService {
 	 */
 	public CommunityService(String endpoint, int cacheSize) {
 		super(endpoint, cacheSize);
+		serviceMappingKeys = new String[]{"communities"};
 	}
 
 	/**
@@ -122,16 +122,9 @@ public class CommunityService extends BaseService {
 	 */
 	public CommunityService(Endpoint endpoint, int cacheSize) {
 		super(endpoint, cacheSize);
+		serviceMappingKeys = new String[]{"communities"};
 	}
 
-	/**
-	 * Return mapping key for this service
-	 */
-	@Override
-	public String[] getServiceMappingKeys() {
-		return serviceMappingKeys;
-	}
-	
 	@Override
 	public NamedUrlPart getAuthType(){
 		String auth = super.getAuthType().getValue();

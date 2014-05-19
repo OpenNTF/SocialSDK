@@ -57,7 +57,7 @@ public class SearchService extends BaseService {
 	 * Used in constructing REST APIs
 	 */
 	private static final String separator				= ",";
-	private static final String[] serviceMappingKeys = new String[]{"search"};
+	
 	/**
 	 * Default Constructor
 	 */
@@ -74,6 +74,7 @@ public class SearchService extends BaseService {
 	 */
 	public SearchService(String endpoint) {
 		super(endpoint, DEFAULT_CACHE_SIZE);
+		serviceMappingKeys = new String[]{"search"};
 	}
 	
 	/**
@@ -84,16 +85,9 @@ public class SearchService extends BaseService {
 	 */
 	public SearchService(Endpoint endpoint) {
 		super(endpoint, DEFAULT_CACHE_SIZE);
+		serviceMappingKeys = new String[]{"search"};
 	}
 
-	/**
-	 * Return mapping key for this service
-	 */
-	@Override
-	public String[] getServiceMappingKeys() {
-		return serviceMappingKeys;
-	}
-	
     /**
      * Search IBM Connection for public information.
      * 

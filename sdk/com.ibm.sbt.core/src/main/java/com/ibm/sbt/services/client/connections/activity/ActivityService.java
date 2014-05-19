@@ -54,8 +54,6 @@ public class ActivityService extends BaseService {
 	
 	private static final long serialVersionUID = 8417747837396382209L;
 
-	private static final String[] serviceMappingKeys = new String[]{"activities"};
-	
 	/**
 	 * Constructor Creates ActivityService Object with default endpoint
 	 */
@@ -71,6 +69,7 @@ public class ActivityService extends BaseService {
 	 */
 	public ActivityService(String endpoint) {
 		super(endpoint);
+		serviceMappingKeys = new String[]{"activities"};
 	}
 	
 	/**
@@ -81,17 +80,9 @@ public class ActivityService extends BaseService {
 	 */
 	public ActivityService(Endpoint endpoint) {
 		super(endpoint);
+		serviceMappingKeys = new String[]{"activities"};
 	}
 	
-
-	/**
-	 * Return mapping key for this service
-	 */
-	@Override
-	public String[] getServiceMappingKeys() {
-		return serviceMappingKeys;
-	}
-
     /**
      * Method returns Activities of the logged in user
      * 

@@ -102,8 +102,6 @@ public class ProfileService extends BaseService {
 
 	private static final long serialVersionUID = -598413531035038479L;
 
-	private static final String[] serviceMappingKeys = new String[]{PROFILES, CONNECTIONS};
-	
 	/**
 	 * Constructor Creates ProfileService Object with default endpoint and default cache size
 	 */
@@ -132,6 +130,7 @@ public class ProfileService extends BaseService {
 
 	public ProfileService(String endpoint, int cacheSize) {
 		super(endpoint, cacheSize);
+		serviceMappingKeys = new String[]{PROFILES, CONNECTIONS};
 	}
 	
 	/**
@@ -154,6 +153,7 @@ public class ProfileService extends BaseService {
 	 */
 	public ProfileService(Endpoint endpoint, int cacheSize) {
 		super(endpoint, cacheSize);
+		serviceMappingKeys = new String[]{PROFILES, CONNECTIONS};
 	}
 	
 	@Override
@@ -161,14 +161,6 @@ public class ProfileService extends BaseService {
 		String auth = super.getAuthType().getValue();
 		auth = AuthType.BASIC.get().equalsIgnoreCase(auth)?"":auth;
 		return new NamedUrlPart(AUTH_TYPE, auth);
-	}
-
-	/**
-	 * Return mapping key for this service
-	 */
-	@Override
-	public String[] getServiceMappingKeys() {
-		return serviceMappingKeys;
 	}
 
 	/**

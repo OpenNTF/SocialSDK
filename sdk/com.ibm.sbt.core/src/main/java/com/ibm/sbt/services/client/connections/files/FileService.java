@@ -82,7 +82,6 @@ public class FileService extends BaseService {
 	static final String sourceClass = FileService.class.getName();
 	static final Logger logger = Logger.getLogger(sourceClass);
 	private final HashMap<String, String> commentParams = new HashMap<String, String>();
-	private static final String[] serviceMappingKeys = new String[]{"files"};
 
     /**
      * Default Constructor - 0 argument constructor Calls the Constructor of BaseService Class.
@@ -102,6 +101,7 @@ public class FileService extends BaseService {
     public FileService(String endpoint) {
         super(endpoint);
         commentParams.put("category", "comment");
+        serviceMappingKeys = new String[]{"files"};
     }
     
 	/**
@@ -113,16 +113,9 @@ public class FileService extends BaseService {
     public FileService(Endpoint endpoint) {
         super(endpoint);
         commentParams.put("category", "comment");
+        serviceMappingKeys = new String[]{"files"};
     }
 
-	/**
-	 * Return mapping key for this service
-	 */
-	@Override
-	public String[] getServiceMappingKeys() {
-		return serviceMappingKeys;
-	}
-    
     private static String getDefaultEndpoint() {
 		return "connections";
 	}

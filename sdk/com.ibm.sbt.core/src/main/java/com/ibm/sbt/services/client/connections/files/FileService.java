@@ -589,7 +589,7 @@ public class FileService extends ConnectionsService {
      * @return File
      * @throws ClientServicesException
      */
-    public File uploadFile(java.io.InputStream stream, final String title, long length)
+    public File uploadFile(InputStream stream, final String title, long length)
             throws ClientServicesException {
         return uploadFile(stream, title, length, null);
     }
@@ -604,7 +604,7 @@ public class FileService extends ConnectionsService {
      * @return File
      * @throws ClientServicesException
      */
-    public File uploadFile(java.io.InputStream stream, final String title, long length,
+    public File uploadFile(InputStream stream, final String title, long length,
             Map<String, String> p) throws ClientServicesException {
         if (stream == null) {
             throw new ClientServicesException(null, Messages.Invalid_Stream);
@@ -1021,7 +1021,7 @@ public class FileService extends ConnectionsService {
      * @return File
      * @throws ClientServicesException
      */
-    public File updateFile(java.io.InputStream inputStream, File file, Map<String, String> params)
+    public File updateFile(InputStream inputStream, File file, Map<String, String> params)
             throws ClientServicesException {
         String requestUrl = file.getEditMediaUrl();
 
@@ -2623,7 +2623,7 @@ public class FileService extends ConnectionsService {
      * @return File
      * @throws ClientServicesException
      */
-    public File updateCommunityFile(java.io.InputStream iStream, String fileId, String title,
+    public File updateCommunityFile(InputStream iStream, String fileId, String title,
             String communityLibraryId, Map<String, String> params) throws ClientServicesException {
         File newVersionFile = uploadNewVersionCommunityFile(iStream, fileId, title, communityLibraryId,
                 params);
@@ -2752,7 +2752,7 @@ public class FileService extends ConnectionsService {
      * @return File
      * @throws ClientServicesException
      */
-    public File uploadNewVersionCommunityFile(java.io.InputStream iStream, String fileId, String title,
+    public File uploadNewVersionCommunityFile(InputStream iStream, String fileId, String title,
             String communityId, Map<String, String> params)
             throws ClientServicesException {
         if (StringUtil.isEmpty(fileId)) {
@@ -2789,7 +2789,7 @@ public class FileService extends ConnectionsService {
      * @return File
      * @throws ClientServicesException
      */
-    public File uploadNewVersionFile(java.io.InputStream iStream, String fileId, String title,
+    public File uploadNewVersionFile(InputStream iStream, String fileId, String title,
             Map<String, String> params)
             throws ClientServicesException {
         if (iStream == null) {

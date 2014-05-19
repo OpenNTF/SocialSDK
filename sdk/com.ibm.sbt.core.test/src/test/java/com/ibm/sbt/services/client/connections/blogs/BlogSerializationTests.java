@@ -102,9 +102,9 @@ public class BlogSerializationTests extends BaseBlogServiceTest {
 				EntityList<BlogPost> allposts = null;
 				try {
 					ObjectInputStream ois = new ObjectInputStream(new FileInputStream(serFile));
-					allposts = (EntityList) ois.readObject();
-					for (Iterator iterator = allposts.iterator(); iterator.hasNext();) {
-						BlogPost localBlogPost = (BlogPost) iterator.next();
+					allposts = (EntityList<BlogPost>) ois.readObject();
+					for (Iterator<BlogPost> iterator = allposts.iterator(); iterator.hasNext();) {
+						BlogPost localBlogPost = iterator.next();
 					}
 				} catch (Exception e) {}
 				assertEquals(true, (allposts.size()>0));

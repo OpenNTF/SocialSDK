@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * ï¿½ Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -246,7 +246,7 @@ public class SimpleProxyServlet extends HttpServlet implements Servlet
         
         // Print request headers
         buf.append("\nHeaders:\n");
-        Enumeration headers = request.getHeaderNames();
+        Enumeration<String> headers = request.getHeaderNames();
         String name;
         while (headers.hasMoreElements())
         {

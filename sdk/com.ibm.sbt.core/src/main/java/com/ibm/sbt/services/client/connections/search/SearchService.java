@@ -39,6 +39,7 @@ package com.ibm.sbt.services.client.connections.search;
 
 import static com.ibm.sbt.services.client.base.CommonConstants.COMMA;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.PROFILES;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -79,6 +80,7 @@ public class SearchService extends ConnectionsService {
 	 */
 	public SearchService(String endpoint) {
 		super(endpoint, DEFAULT_CACHE_SIZE);
+		serviceMappingKeys = new String[]{"search"};
 	}
 	
 	/**
@@ -89,18 +91,9 @@ public class SearchService extends ConnectionsService {
 	 */
 	public SearchService(Endpoint endpoint) {
 		super(endpoint, DEFAULT_CACHE_SIZE);
+		serviceMappingKeys = new String[]{"search"};
 	}
 
-	/**
-	 * Return mapping key for this service
-	 */
-	@Override
-	public String getServiceMappingKey() {
-		return "search";
-	}
-	
-
-	
 	/**
 	 * Lists the elements in an Atom entry representing the result returned by a search.
 	 * 

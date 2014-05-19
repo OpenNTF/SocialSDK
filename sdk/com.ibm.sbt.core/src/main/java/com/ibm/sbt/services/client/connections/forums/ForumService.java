@@ -84,6 +84,7 @@ public class ForumService extends ConnectionsService {
 	 */
 	public ForumService(String endpoint) {
 		super(endpoint, DEFAULT_CACHE_SIZE);
+		serviceMappingKeys = new String[]{"forums"};
 	}
 
 	/**
@@ -93,14 +94,7 @@ public class ForumService extends ConnectionsService {
 	 */
 	public ForumService(Endpoint endpoint) {
 		super(endpoint, DEFAULT_CACHE_SIZE);
-	}
-
-	/**
-	 * Return mapping key for this service
-	 */
-	@Override
-	public String getServiceMappingKey() {
-		return "forums";
+		serviceMappingKeys = new String[]{"forums"};
 	}
 
 	@Override

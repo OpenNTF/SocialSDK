@@ -90,6 +90,7 @@ public class CommunityService extends ConnectionsService {
 	 */
 	public CommunityService(String endpoint, int cacheSize) {
 		super(endpoint, cacheSize);
+		serviceMappingKeys = new String[]{"communities"};
 	}
 
 	/**
@@ -100,6 +101,7 @@ public class CommunityService extends ConnectionsService {
 	 */
 	public CommunityService(Endpoint endpoint) {
 		this(endpoint, DEFAULT_CACHE_SIZE);
+		serviceMappingKeys = new String[]{"communities"};
 	}
 
 	/**
@@ -111,14 +113,7 @@ public class CommunityService extends ConnectionsService {
 	 */
 	public CommunityService(Endpoint endpoint, int cacheSize) {
 		super(endpoint, cacheSize);
-	}
-
-	/**
-	 * Return mapping key for this service
-	 */
-	@Override
-	public String getServiceMappingKey() {
-		return "communities";
+		serviceMappingKeys = new String[]{"communities"};
 	}
 
 	@Override

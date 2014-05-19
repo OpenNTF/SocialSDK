@@ -63,6 +63,7 @@ public class CMISFileService extends ConnectionsService {
      */
     public CMISFileService(String endpoint) {
         super(endpoint);
+        serviceMappingKeys = new String[]{"files"};
     }
     
 	/**
@@ -71,16 +72,9 @@ public class CMISFileService extends ConnectionsService {
      */
     public CMISFileService(Endpoint endpoint) {
         super(endpoint);
+        serviceMappingKeys = new String[]{"files"};
     }
 
-	/**
-	 * Return mapping key for this service
-	 */
-	@Override
-	public String getServiceMappingKey() {
-		return "files";
-	}
-	
 	//------------------------------------------------------------------------------------------------------------------
 	// Getting CMIS File feeds
 	//------------------------------------------------------------------------------------------------------------------

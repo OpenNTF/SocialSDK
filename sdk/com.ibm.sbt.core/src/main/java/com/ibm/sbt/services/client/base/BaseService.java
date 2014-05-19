@@ -51,6 +51,7 @@ public abstract class BaseService implements Serializable {
 	protected Handler							dataFormat;
 	protected transient Endpoint				endpoint;
 
+	protected String[] serviceMappingKeys = new String[]{};
 	/**
 	 * Constructor
 	 */
@@ -145,20 +146,29 @@ public abstract class BaseService implements Serializable {
 		return Version.parse(endpoint.getApiVersion());
 	}
 	
-	abstract public String getServiceMappingKey();
+	public String[] getServiceMappingKeys(){
+		return serviceMappingKeys;
+	}
 	
 	/**
 	 * Returns either the configured or the default serviceMapping for the service 
 	 * @return
 	 */
-	public NamedUrlPart getServiceMapping(){
-		String serviceMappingKey = getServiceMappingKey();
-		String serviceMappingValue = serviceMappingKey;
+	public NamedUrlPart[] getServiceMappings(){
+		String[] serviceMappingKeys = getServiceMappingKeys();
 		Map<String, String> serviceMappings = getEndpoint().getServiceMappings();
-		if (serviceMappings.containsKey(serviceMappingKey)){
-			serviceMappingValue = serviceMappings.get(serviceMappingKey);
+		
+		NamedUrlPart[] urlParts = new NamedUrlPart[serviceMappingKeys.length];
+		for(int i = 0;i < serviceMappingKeys.length; i++){
+			String key = serviceMappingKeys[i];
+			if (serviceMappings.containsKey(key)){
+				urlParts[i] = new NamedUrlPart(key, serviceMappings.get(key));
+			}else{
+				urlParts[i] = new NamedUrlPart(key, key);
+			}
 		}
-		return new NamedUrlPart(serviceMappingKey, serviceMappingValue);
+		
+		return urlParts;
 	}
     
 	/**

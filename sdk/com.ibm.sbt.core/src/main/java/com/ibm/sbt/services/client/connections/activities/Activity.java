@@ -36,17 +36,17 @@ public class Activity extends NodeEntity {
 	/**
 	 * Specifies the starting page of a template. The term attribute identifies the default view to use. 
 	 */
-	static final public String RECENT = "recent"; //$NON-NLS-1$
-	static final public String OUTLINE = "outline"; //$NON-NLS-1$
-	static final public String TODO = "todo"; //$NON-NLS-1$
+	static final public String VIEW_RECENT = "recent"; //$NON-NLS-1$
+	static final public String VIEW_OUTLINE = "outline"; //$NON-NLS-1$
+	static final public String VIEW_TODO = "todo"; //$NON-NLS-1$
 	
 	/**
 	 * Standard priority values for an activity. 
 	 */
-    public static final int TUNED_OUT = 0;
-    public static final int NORMAL = 1;
-    public static final int MEDIUM = 2000;
-    public static final int HIGH = 3000;
+    public static final int PRIORITY_TUNED_OUT = 0;
+    public static final int PRIORITY_NORMAL = 1;
+    public static final int PRIORITY_MEDIUM = 2000;
+    public static final int PRIORITY_HIGH = 3000;
 		
 	/**
 	 * Default constructor
@@ -178,26 +178,6 @@ public class Activity extends NodeEntity {
 	}
 
 	/**
-	 * Returns true if the activity is deleted.
-	 * 
-	 * Flag that is only present on an activity that is deleted, meaning it is in the Trash view and has not been removed from the system.
-	 * 
-	 * @return
-	 */
-	public boolean isDeleted() {
-		return exists(ActivityXPath.deleted);
-	}
-	
-	/**
-	 * Set deleted flag for the activity.
-	 * 
-	 * @param deleted
-	 */
-	public void setDeleted(boolean deleted) {
-		setAsBoolean(ActivityXPath.deleted, deleted);
-	}
-	
-	/**
 	 * Returns the default view of an activity template.
 	 * 
 	 * Specifies the starting page of a template. The term attribute identifies the default view to use. 
@@ -286,8 +266,8 @@ public class Activity extends NodeEntity {
 	 * 
 	 * @param completed
 	 */
-	public void setCompleted(boolean external) {
-		setAsBoolean(ActivityXPath.completed, external);
+	public void setCompleted(boolean completed) {
+		setAsBoolean(ActivityXPath.completed, completed);
 	}
 	
 	/**

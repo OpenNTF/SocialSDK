@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * ï¿½ Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,29 +43,28 @@ public class GetActivityDescendantsTest extends BaseActivityServiceTest {
     	tags.add("ibm");
 		for (int i=0; i<2; i++) {
 			start = System.currentTimeMillis();
-			ActivityNode activityNode = createActivityNode(activityUuid, "CreatedNode-"+start);
+			ActivityNode activityNode = createActivityNode(activityUuid, "CreatedNode-"+start, tags);
 			long duration = System.currentTimeMillis() - start;
 			System.out.println("Creating "+activityNode.getActivityNodeUuid()+" took "+duration+"(ms)");
 		}
     	tags.add("sbt");
 		for (int i=0; i<2; i++) {
 			start = System.currentTimeMillis();
-			ActivityNode activityNode = createActivityNode(activityUuid, "CreatedNode-"+start);
+			ActivityNode activityNode = createActivityNode(activityUuid, "CreatedNode-"+start, tags);
 			long duration = System.currentTimeMillis() - start;
 			System.out.println("Creating "+activityNode.getActivityNodeUuid()+" took "+duration+"(ms)");
 		}
 		// prevent last activity being auto-deleted
-		activity = null;
+		//this.activity = null;
 		
 		Map<String, String> params = new HashMap<String, String>();
-		params.put("tag", "ibm");
+		params.put("tag", "sbt");
 		EntityList<ActivityNode> activityNodes = activityService.getActivityNodeDescendants(activityUuid, params);
 		Assert.assertEquals(2, activityNodes.size());
 		for (ActivityNode activityNode : activityNodes) {
 			Assert.assertNotNull("Invalid activity id", activityNode.getActivityUuid());
-			System.out.println(activityNode.toXmlString());
+			//System.out.println(activityNode.toXmlString());
 		}
-		
 	}
 	
 }

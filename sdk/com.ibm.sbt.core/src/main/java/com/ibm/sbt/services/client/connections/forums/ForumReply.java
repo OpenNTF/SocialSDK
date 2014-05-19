@@ -263,7 +263,7 @@ public class ForumReply extends BaseForumEntity{
 			}else if(StringUtil.isEmpty(topicId) && StringUtil.isEmpty(topicUuid)){ // Can not create reply without topicUuid
 				throw new ClientServicesException(new Exception("No Parent Topic ID mentioned while creating Forum Reply"));
 			}
-			return getService().createForumReply(this,topicId);
+			return getService().createForumReply(topicId, this);
 		}else{
 			//update scenario
 			getService().updateForumReply(this);

@@ -15,16 +15,12 @@
  */
 package com.ibm.sbt.services.client.connections.activities;
 
-import java.util.Date;
-
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 
 import com.ibm.commons.xml.XMLException;
 import com.ibm.sbt.services.client.ClientServicesException;
-import com.ibm.sbt.services.client.connections.activities.serializers.ActivitySerializer;
-import com.ibm.sbt.services.client.connections.common.Link;
-import com.ibm.sbt.services.client.connections.common.Person;
 
 /**
  * @author mwallace
@@ -33,10 +29,10 @@ import com.ibm.sbt.services.client.connections.common.Person;
 public class ActivityFieldLimitTest extends BaseActivityServiceTest {
 
 	@Test
-	public void testFields() throws ClientServicesException, XMLException {
-		Activity activity = createActivity();
+	public void testFieldsLimit() throws ClientServicesException, XMLException {
+		Activity activity = createActivity();		
 		
-		int limit = 2000;
+		int limit = 50;
 		
 		for (int i=0; i<limit; i++) {
 			TextField textField = new TextField();
@@ -54,16 +50,42 @@ public class ActivityFieldLimitTest extends BaseActivityServiceTest {
 		activity.update();
 		
 		long duration = System.currentTimeMillis() - start;
-		System.out.println("Update took: "+duration+"(ms)");
+		System.out.println("Update with " + limit + " fields took: "+duration+"(ms)");
 		
+		start = System.currentTimeMillis();
 		
 		Activity read = activity.getActivityService().getActivity(activity.getActivityUuid());
 		//System.out.println(read.toXmlString());
 		
 		Field[] fields = read.getFields();
 		
+		duration = System.currentTimeMillis() - start;
+		System.out.println("Read with " + fields.length + " fields took: "+duration+"(ms)");
+			
 		Assert.assertNotNull(fields);
 		Assert.assertEquals(limit, fields.length);
+	}
+
+	@Test
+	public void testFieldsScale() throws ClientServicesException, XMLException {
+		Activity activity = createActivity();
+		
+		int limit = 50;
+		int count = 0;
+		for (int i=0; i<limit; i++) {
+			for (int j=0; j<10; j++) {
+				TextField textField = new TextField();
+				textField.setName("test_text_"+count);
+				textField.setPosition(1000);
+				textField.setSummary("Test_Text_Field");
+				activity.addField(textField);
+				count++;
+			}
+			long start = System.currentTimeMillis();
+			activity.update();
+			long duration = System.currentTimeMillis() - start;
+			System.out.println("Update with " + count + " fields took: "+duration+"(ms)");
+		}
 	}
 
 }

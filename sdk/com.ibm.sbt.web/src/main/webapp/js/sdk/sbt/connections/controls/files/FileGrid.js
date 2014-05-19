@@ -322,6 +322,13 @@ function(declare, lang, dom, stringUtil, sbt, parameter, Grid,
 							direction : this.direction
 						});
 					}
+					
+					if(this.creator){
+						params = lang.mixin(params, {
+							creator : this.creator
+						});
+					}
+					
 					if(this.type == "filesSharedWithMe"){
 						params = lang.mixin(params, {
 							direction : "inbound"

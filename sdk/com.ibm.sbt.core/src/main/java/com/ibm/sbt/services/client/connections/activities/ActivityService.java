@@ -54,12 +54,12 @@ import com.ibm.sbt.services.endpoints.Endpoint;
 public class ActivityService extends ConnectionsService {
 		
 	private static final long serialVersionUID = 1L;
-
 	/**
 	 * Create ActivityService instance with default endpoint.
 	 */
 	public ActivityService() {
 		this(DEFAULT_ENDPOINT_NAME);
+		serviceMappingKeys = new String[]{"activities"};
 	}
 
 	/**
@@ -69,6 +69,7 @@ public class ActivityService extends ConnectionsService {
 	 */
 	public ActivityService(String endpoint) {
 		super(endpoint);
+		serviceMappingKeys = new String[]{"activities"};
 	}
 	
 	/**
@@ -78,13 +79,9 @@ public class ActivityService extends ConnectionsService {
 	 */
 	public ActivityService(Endpoint endpoint) {
 		super(endpoint);
+		serviceMappingKeys = new String[]{"activities"};
 	}
 
-	@Override
-	public String getServiceMappingKey() {
-		return "activities";	
-	}
-	
 	//------------------------------------------------------------------------------------------------------------------
 	// Getting Activities feeds
 	//------------------------------------------------------------------------------------------------------------------

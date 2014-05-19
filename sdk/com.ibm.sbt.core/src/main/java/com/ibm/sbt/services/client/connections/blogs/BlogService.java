@@ -69,6 +69,7 @@ public class BlogService extends ConnectionsService {
 	public BlogService(String endpoint) {
 		super(endpoint);
 		setHomepageFromEndpoint(getEndpoint());
+		serviceMappingKeys = new String[]{"blogs"};
 	}
 	
 	/**
@@ -80,16 +81,9 @@ public class BlogService extends ConnectionsService {
 	public BlogService(Endpoint endpoint) {
 		super(endpoint);
 		setHomepageFromEndpoint(getEndpoint());
+		serviceMappingKeys = new String[]{"blogs"};
 	}
 
-	/**
-	 * Return mapping key for this service
-	 */
-	@Override
-	public String getServiceMappingKey() {
-		return "blogs";
-	}
-	
 	//------------------------------------------------------------------------------------------------------------------
 	// TODO: Getting Blog feeds
 	//------------------------------------------------------------------------------------------------------------------

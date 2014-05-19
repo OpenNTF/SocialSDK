@@ -36,7 +36,7 @@ public class PeopleSearch extends BaseAuthServiceTest {
     @Test
     public void testPeopleSearch() {
     	PeopleSearchPage searchPage = launchSnippet();
-        boolean success = searchPage.peopleSearch("Roger");
+        boolean success = searchPage.peopleSearch("Frank");
         Assert.assertTrue("No results when search for people", success);
     }
 

@@ -57,7 +57,7 @@ public class ActivityStreamServiceTest extends BaseUnitTest {
 
 		for (ActivityStreamEntity asentry : updates) {
 			System.err.println("asentry.getActor() " + asentry.getActor().getName());
-			assertEquals(asentry.getActor().getName(), "Frank Adams");
+			assertEquals(asentry.getActor().getName(), TestEnvironment.getCurrentUserDisplayName());
 		}
 	}
 

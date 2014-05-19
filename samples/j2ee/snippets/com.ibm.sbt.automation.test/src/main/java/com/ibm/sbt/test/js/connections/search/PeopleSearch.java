@@ -36,7 +36,7 @@ public class PeopleSearch extends BaseAuthServiceTest {
     @Test
     public void testPeopleSearch() {
     	PeopleSearchPage searchPage = launchSnippet();
-        boolean success = searchPage.peopleSearch("Frank");
+        boolean success = searchPage.peopleSearch("Roger");
         Assert.assertTrue("No results when search for people", success);
     }
 
@@ -60,7 +60,10 @@ public class PeopleSearch extends BaseAuthServiceTest {
     public String getAuthenticatedMatch() {
         return "searchBtn";
     }
-
+    @Override
+    protected boolean isEnvironmentValid() {
+        return super.isEnvironmentValid() && !getTestEnvironment().isSmartCloud();
+    }
     // Internals
 
     private PeopleSearchPage launchSnippet() {

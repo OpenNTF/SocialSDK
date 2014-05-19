@@ -41,7 +41,6 @@ public class CreateHiddenFieldSearchData extends BaseActivityServiceTest {
 			System.out.println("Read: "+read.toXmlString());
 			Assert.assertEquals(5, read.getFields().length);
 		}
-		activity = null;
 	}
 
     protected String createTitle(String name) {

@@ -24,12 +24,10 @@ import static com.ibm.sbt.services.client.base.ConnectionsConstants.CATEGORY;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.COMMUNITYUUID;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.COMMUNITY_ACTIVITY;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.COMPLETED;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.CONTENT;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.EXTERNAL;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.HREF;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.IN_REPLY_TO;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.LABEL;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.LABEL_ACTIVITY;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.LABEL_COMMUNITYACTIVITY;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.LABEL_EXTERNAL;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.LINK;
@@ -97,10 +95,10 @@ public class ActivitySerializer extends AtomEntitySerializer<Activity> {
 	}
 	
 	protected Element activityCategory() {
+		String type = entity.getType();
 		return element(CATEGORY, 
 				attribute(SCHEME, Namespace.TYPE.getUrl()), 
-				attribute(TERM, ACTIVITY), 
-				attribute(LABEL, LABEL_ACTIVITY));
+				attribute(TERM, StringUtil.isEmpty(type) ? ACTIVITY : type));
 	}
 	
 	protected Element communityCategory() {

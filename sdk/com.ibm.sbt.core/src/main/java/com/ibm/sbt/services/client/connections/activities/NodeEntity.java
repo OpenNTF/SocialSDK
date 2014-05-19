@@ -42,6 +42,18 @@ public class NodeEntity extends AtomEntity {
 	static final String UUID_PREFIX = "urn:lsid:ibm.com:oa:"; ////$NON-NLS-1$
 	
 	/**
+	 * Standard type values for an activity. 
+	 */
+	static public final String TYPE_ACTIVITY = "activity";
+	static public final String TYPE_CHAT = "chat";
+	static public final String TYPE_EMAIL = "email";
+	static public final String TYPE_ENTRY = "entry";
+	static public final String TYPE_ENTRY_TEMPLATE = "entrytemplate";
+	static public final String TYPE_REPLY = "reply";
+	static public final String TYPE_SECTION = "section";
+	static public final String TYPE_TODO = "todo";
+	
+	/**
 	 * Default constructor
 	 */
 	public NodeEntity() {

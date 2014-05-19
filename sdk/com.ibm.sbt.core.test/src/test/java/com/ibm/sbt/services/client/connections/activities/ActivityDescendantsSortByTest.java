@@ -15,7 +15,6 @@
  */
 package com.ibm.sbt.services.client.connections.activities;
 
-import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,8 +31,6 @@ import com.ibm.sbt.services.client.base.datahandlers.EntityList;
  */
 public class ActivityDescendantsSortByTest extends BaseActivityServiceTest {
 	
-	private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");	
-
 	@Test
 	public void testDescendantsModifiedSort() throws ClientServicesException, XMLException {
 		long start = System.currentTimeMillis();

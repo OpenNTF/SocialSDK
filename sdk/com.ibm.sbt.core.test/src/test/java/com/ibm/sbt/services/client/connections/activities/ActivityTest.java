@@ -49,7 +49,7 @@ public class ActivityTest extends BaseActivityServiceTest {
 		Assert.assertEquals("com.ibm.sbt.services.client.connections.activities.ActivityServiceCrudrTest#1615749198 Community - 1396026691896", activity.getTitle());
 		Assert.assertEquals(true, activity.isCommunityActivity());
 		Assert.assertEquals("commuid-5f89a416-68e5-4666-af8e-72150bf50e22", activity.getCommunityUuid());
-		Assert.assertEquals("Normal", activity.getPriority());
+		Assert.assertEquals(1, activity.getPriority());
 		Assert.assertEquals("https://apps.na.collabservtest.lotus.com/activities/service/atom2/acl?activityUuid=5f89a416-68e5-4666-af8e-72150bf50e22", activity.getMemberListUrl());
 		Assert.assertArrayEquals(new String[] { "https://apps.na.collabservtest.lotus.com/activities/service/atom2/categories?activityUuid=5f89a416-68e5-4666-af8e-72150bf50e22" }, activity.getActivityNodeUrls());
 		Assert.assertEquals(true, activity.isCompleted());

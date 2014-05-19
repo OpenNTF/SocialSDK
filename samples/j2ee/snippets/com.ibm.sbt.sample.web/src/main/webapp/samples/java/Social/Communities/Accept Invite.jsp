@@ -40,8 +40,8 @@
 			if(invites.size()>0){
 				String communityId = invites.get(0).getCommunityUuid();
 				String userId = invites.get(0).getContributor().getUserid();
-				boolean success = svc.acceptInvite(communityId, userId);
-				out.println("Invite accepted"+success);
+				svc.acceptInvite(communityId, userId);
+				out.println("Invite accepted");
 			}
 			else{
 				out.println("No invites exist to accept");

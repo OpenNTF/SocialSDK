@@ -23,7 +23,7 @@
 <%@page import="java.util.Map"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="com.ibm.sbt.services.client.connections.blogs.BlogService"%>
-<%@page import="com.ibm.sbt.services.client.connections.blogs.Tag"%>
+<%@page import="com.ibm.sbt.services.client.connections.common.Tag"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <html>
@@ -44,8 +44,7 @@
 				out.println("<b>Tag : </b> " + tag.getTerm());
 				out.println("<b>Tag Frequency: </b> " + tag.getFrequency());
 				out.println("<b>Tag Visibility :</b> "
-						+ tag.getVisibility());
-				out.println("<b>Tag Intensity :</b> " + tag.getIntensity());
+						+ tag.isVisible());
 				out.println("<br>");
 			}
 		} catch (Throwable e) {

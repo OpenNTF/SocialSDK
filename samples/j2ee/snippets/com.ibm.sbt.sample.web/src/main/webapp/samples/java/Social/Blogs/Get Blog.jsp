@@ -21,7 +21,6 @@
 <%@page import="com.ibm.sbt.services.client.connections.blogs.BlogService"%>
 <%@page import="com.ibm.sbt.services.client.connections.blogs.model.BaseBlogEntity"%>
 <%@page import="com.ibm.sbt.services.client.connections.blogs.Blog"%>
-<%@page import="com.ibm.sbt.services.client.connections.blogs.model.Author"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.commons.util.StringUtil"%>
 <%@page import="com.ibm.sbt.services.client.connections.activitystreams.model.Reply"%>

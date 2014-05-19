@@ -41,7 +41,7 @@
 			        FileService fileService = new FileService();
 			        EntityList<File> fileEntries = fileService.getMyFiles();
 			        File fileEntry = fileEntries.get(0);
-			        EntityList<Comment> commentEntries = fileService.getAllFileComments(fileEntry.getFileId(), null);
+			        EntityList<Comment> commentEntries = fileService.getPublicUserFileComments(fileEntry.getFileId(), null);
 			        if (commentEntries != null && !commentEntries.isEmpty()) {
 			            for (Comment commentEntry : commentEntries) {
 			                out.println("Comment Id	: " + commentEntry.getCommentId() + " , ");

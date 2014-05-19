@@ -16,11 +16,9 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%@page import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
 <%@page import="com.ibm.sbt.services.client.connections.communities.Community"%>
-<%@page import="com.ibm.sbt.services.client.connections.communities.CommunityServiceException"%>
 <%@page import="java.nio.charset.Charset"%>
 <%@page import="java.io.ByteArrayInputStream"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.model.FileRequestParams"%>
-<%@page import="com.ibm.sbt.services.client.connections.files.model.FileRequestPayload"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.model.FileCreationParameters"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.FileService"%>
 <%@page import="com.ibm.sbt.services.client.connections.files.Comment"%>
@@ -57,7 +55,7 @@
 	          String content = "New Version Uploaded";
 			  String name = "NewVersionFile" + System.nanoTime() + ".txt";
 			  fileEntry = fileService.updateFile(new ByteArrayInputStream(content.getBytes(Charset.forName("UTF-8"))), 
-					  fileEntry.getFileId(), name, paramsMap);
+					  fileEntry, paramsMap);
 	          out.println("New Version of File Uploaded  : " + fileEntry.getFileId());
           } else {
         	  out.println("No Files to be updated");

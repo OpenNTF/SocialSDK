@@ -22,7 +22,6 @@
 <%@page import="com.ibm.sbt.services.client.connections.blogs.model.BaseBlogEntity"%>
 <%@page import="com.ibm.sbt.services.client.connections.blogs.Blog"%>
 <%@page import="com.ibm.sbt.services.client.connections.blogs.BlogPost"%>
-<%@page import="com.ibm.sbt.services.client.connections.blogs.model.Author"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.sbt.services.client.connections.activitystreams.model.Reply"%>
 <%@page import="java.util.List"%>
@@ -46,7 +45,7 @@
 				BlogPost post = (BlogPost)posts.get(0);
 				out.println("title of Post to be remove:"+post.getTitle()+"<br>");
 				out.println("blog handle of post to be removed:"+post.getBlogHandle()+"<br>");
-				post.remove();
+				post.delete();
 			}
 			else{
 				out.println("No Blog post exists");

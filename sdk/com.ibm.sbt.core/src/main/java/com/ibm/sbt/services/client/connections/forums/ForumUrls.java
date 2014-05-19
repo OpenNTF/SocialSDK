@@ -42,10 +42,10 @@ public enum ForumUrls implements URLContainer {
 	FORUM_TOPICS(new VersionedUrl(v4_0, "{forums}/{authType}/atom/topics?forumUuid={forumUuid}")),
 	COMMUNITY_TOPICS(new VersionedUrl(v4_0, "{forums}/{authType}/atom/topics?communityUuid={communityUuid}")),
 	TOPICS_MY(new VersionedUrl(v4_0, "{forums}/{authType}/atom/topics/my")),
-	FORUM_REPLIES(new VersionedUrl(v4_0, "{forums}/{authType}/atom/replies?postUuid={postUuid}")),
+	FORUM_REPLIES(new VersionedUrl(v4_0, "{forums}/{authType}/atom/replies?topicUuid={topicUuid}")),
 	TOPIC_REPLIES(new VersionedUrl(v4_0, "{forums}/{authType}/atom/replies?topicUuid={topicUuid}")),
 	REPLY_REPLIES(new VersionedUrl(v4_0, "{forums}/{authType}/atom/replies?replyUuid={replyUuid}")),
-	REPLY(new VersionedUrl(v4_0, "{forums}/{authType}/atom/reply"));
+	REPLY(new VersionedUrl(v4_0, "{forums}/{authType}/atom/reply?replyUuid={replyUuid}"));
 
 	static final public NamedUrlPart replyPart(String replyUuid) {
 		return new NamedUrlPart("replyUuid", replyUuid);

@@ -26,7 +26,6 @@ public final class FileConstants {
 
     public static final String LOCKTYPE_HARD       = "HARD";
     public static final String LOCKTYPE_NONE       = "NONE";
-    public static final String CATEGORY            = "category";
     public static final String CATEGORY_DOCUMENT   = "document";
     public static final String CATEGORY_TAG        = "tag_word";
     public static final String CATEGORY_COMMENT    = "comment";

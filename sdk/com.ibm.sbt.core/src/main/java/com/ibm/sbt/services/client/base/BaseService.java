@@ -326,7 +326,6 @@ public abstract class BaseService implements Serializable {
 	 */
     public Response deleteData(String serviceUrl, Map<String, String> parameters, Map<String, String> headers, String nameParameterId)
             throws ClientServicesException {
-        //TODO : remove the data format after review with Phil
         String uniqueId = null;
         if (nameParameterId != null) {
             uniqueId = (parameters == null) ? nameParameterId : parameters.get(nameParameterId);

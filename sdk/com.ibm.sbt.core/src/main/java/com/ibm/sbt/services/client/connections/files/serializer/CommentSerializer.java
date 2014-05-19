@@ -1,13 +1,5 @@
-package com.ibm.sbt.services.client.connections.files.serializer;
-
-import org.w3c.dom.Node;
-import com.ibm.sbt.services.client.base.ConnectionsConstants;
-import com.ibm.sbt.services.client.base.serializers.AtomEntitySerializer;
-import com.ibm.sbt.services.client.base.serializers.PersonSerializer;
-import com.ibm.sbt.services.client.connections.files.Comment;
-import com.ibm.sbt.services.client.connections.files.FileConstants;
 /*
- * © Copyright IBM Corp. 2012
+ * © Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -21,6 +13,24 @@ import com.ibm.sbt.services.client.connections.files.FileConstants;
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
+package com.ibm.sbt.services.client.connections.files.serializer;
+
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.CATEGORY;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.LABEL;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.SCHEME;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.TERM;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.UUID;
+import static com.ibm.sbt.services.client.connections.files.FileConstants.CATEGORY_COMMENT;
+import static com.ibm.sbt.services.client.connections.files.FileConstants.CREATED;
+import static com.ibm.sbt.services.client.connections.files.FileConstants.MODIFIED;
+import static com.ibm.sbt.services.client.connections.files.FileConstants.MODIFIER;
+
+import org.w3c.dom.Node;
+
+import com.ibm.sbt.services.client.base.ConnectionsConstants.Namespace;
+import com.ibm.sbt.services.client.base.serializers.AtomEntitySerializer;
+import com.ibm.sbt.services.client.base.serializers.PersonSerializer;
+import com.ibm.sbt.services.client.connections.files.Comment;
 
 /**
  * @author Lorenzo Boccaccia 
@@ -36,30 +46,28 @@ public class CommentSerializer extends AtomEntitySerializer<Comment> {
     public Node getCommentEntry() {
         Node n =genericAtomEntry();
         if (entity.getCommentId()!=null)
-            appendChildren(n, textElement(ConnectionsConstants.Namespace.TD.getUrl(), ConnectionsConstants.UUID, entity.getCommentId()));
+            appendChildren(n, textElement(Namespace.TD.getUrl(), UUID, entity.getCommentId()));
 
-        appendChildren(n, element(ConnectionsConstants.CATEGORY, 
-                attribute(ConnectionsConstants.SCHEME, ConnectionsConstants.Namespace.TAG.getUrl()),
-                attribute(ConnectionsConstants.TERM, FileConstants.CATEGORY_COMMENT),
-                attribute(ConnectionsConstants.LABEL, FileConstants.CATEGORY_COMMENT)
+        appendChildren(n, element(CATEGORY, 
+                attribute(SCHEME, Namespace.TAG.getUrl()),
+                attribute(TERM, CATEGORY_COMMENT),
+                attribute(LABEL, CATEGORY_COMMENT)
                 )
                 );
        
         if (entity.getModified()!=null)     
-            appendChildren(n, textElement(ConnectionsConstants.Namespace.TD.getUrl(), FileConstants.MODIFIED, DateSerializer.toString(entity.getModified())));
+            appendChildren(n, textElement(Namespace.TD.getUrl(), MODIFIED, DateSerializer.toString(entity.getModified())));
         if (entity.getCreated()!=null)     
-            appendChildren(n, textElement(ConnectionsConstants.Namespace.TD.getUrl(), FileConstants.CREATED, DateSerializer.toString(entity.getCreated())));
+            appendChildren(n, textElement(Namespace.TD.getUrl(), CREATED, DateSerializer.toString(entity.getCreated())));
             
         if (entity.getModifier()!=null)   
-            appendChildren(n,new PersonSerializer(entity.getModifier()).xmlNode(FileConstants.MODIFIER, ConnectionsConstants.Namespace.TD.getUrl() ));
+            appendChildren(n,new PersonSerializer(entity.getModifier()).xmlNode(MODIFIER, Namespace.TD.getUrl() ));
 
         return n;
     }
 
-
     public String generateCommentUpdatePayload() {
        getCommentEntry();
-       
         return serializeToString();
     }
 }

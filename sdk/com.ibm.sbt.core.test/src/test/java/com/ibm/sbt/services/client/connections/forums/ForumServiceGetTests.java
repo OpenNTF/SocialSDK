@@ -25,7 +25,6 @@ import org.junit.Test;
 
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.connections.common.Tag;
-import com.ibm.sbt.services.client.connections.forums.model.BaseForumEntity;
 
 /**
  * @author Swati Singh
@@ -37,8 +36,8 @@ public class ForumServiceGetTests extends BaseForumServiceTest {
 	public void testGetAllForums() throws Exception {
 		EntityList<Forum> entries = forumService.getAllForums();
 		assertNotNull(entries);
-		for (BaseForumEntity forum : entries) {
-			assertValid((Forum)forum);
+		for (Forum forum : entries) {
+			assertValid(forum);
 		}
 	}
 
@@ -46,8 +45,8 @@ public class ForumServiceGetTests extends BaseForumServiceTest {
 	public void testGetMyForums() throws Exception {
 		EntityList<Forum> entries = forumService.getMyForums();
 		assertNotNull(entries);
-		for (BaseForumEntity forum : entries) {
-			assertValid((Forum)forum);
+		for (Forum forum : entries) {
+			assertValid(forum);
 		}
 	}
 
@@ -55,8 +54,8 @@ public class ForumServiceGetTests extends BaseForumServiceTest {
 	public void testGetPublicForums() throws Exception {
 		EntityList<Forum> entries = forumService.getPublicForums();
 		assertNotNull(entries);
-		for (BaseForumEntity forum : entries) {
-			assertValid((Forum)forum);
+		for (Forum forum : entries) {
+			assertValid(forum);
 		}
 	}
 
@@ -64,8 +63,8 @@ public class ForumServiceGetTests extends BaseForumServiceTest {
 	public void testGetPublicForumTopics() throws Exception {
 		EntityList<ForumTopic> entries = forumService.getPublicForumTopics();
 		assertNotNull(entries);
-		for (BaseForumEntity topic : entries) {
-			assertValid((ForumTopic)topic);
+		for (ForumTopic topic : entries) {
+			assertValid(topic);
 		}
 	}
 
@@ -73,11 +72,10 @@ public class ForumServiceGetTests extends BaseForumServiceTest {
 	public void testGetMyForumTopics() throws Exception {
 		EntityList<ForumTopic> entries = forumService.getMyForumTopics();
 		assertNotNull(entries);
-		for (BaseForumEntity topic : entries) {
-			assertValid((ForumTopic)topic);
+		for (ForumTopic topic : entries) {
+			assertValid(topic);
 		}
 	}
-
 
 	@Test
 	public void testGetForumReplies() throws Exception {
@@ -86,8 +84,8 @@ public class ForumServiceGetTests extends BaseForumServiceTest {
 		
 		EntityList<ForumReply> entries = forumService.getForumReplies(topic.getTopicUuid());
 		assertNotNull(entries);
-		for (BaseForumEntity reply : entries) {
-			assertValid((ForumReply)reply);
+		for (ForumReply reply : entries) {
+			assertValid(reply);
 		}
 	}
 
@@ -107,7 +105,7 @@ public class ForumServiceGetTests extends BaseForumServiceTest {
 		EntityList<Tag> entries = forumService.getForumsTags();
 		assertNotNull(entries);
 		for (Tag tag : entries) {
-			assertValid((Tag)tag);
+			assertValid(tag);
 		}
 	}
 
@@ -118,8 +116,7 @@ public class ForumServiceGetTests extends BaseForumServiceTest {
 		EntityList<Tag> entries = forumService.getForumTopicsTags(forum.getForumUuid());
 		assertNotNull(entries);
 		for (Tag tag : entries) {
-			assertValid((Tag)tag);
+			assertValid(tag);
 		}
 	}
-
 }

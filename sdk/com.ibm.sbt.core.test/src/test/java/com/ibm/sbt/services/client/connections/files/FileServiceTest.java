@@ -20,6 +20,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+
 import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -30,7 +31,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+
+import org.junit.Ignore;
 import org.junit.Test;
+
 import com.ibm.sbt.services.BaseUnitTest;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
@@ -416,6 +420,7 @@ public class FileServiceTest extends BaseUnitTest {
         }
     }
 
+    @Ignore
     @Test
     public void testAddFilesToFolder() throws Exception {
         //TODO: fix for smartcloud
@@ -426,7 +431,7 @@ public class FileServiceTest extends BaseUnitTest {
         fs.add("FileID1");
         fs.add("FileID2");
         //TODO: fix with getmy folder implementation
-        //fileService.addFilesToFolder("folderid", fs, null);
+        fileService.addFilesToFolder("folderid", fs, null);
     }
 
     @Test

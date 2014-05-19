@@ -49,9 +49,10 @@ public class URLBuilderTest extends BaseUnitTest {
 	@Test
 	public void testGenerateURLPredefinedParameters() {
 		CommunityService service = new CommunityService();
+		String communityUuid = "thisIsACommunityUuid";
 		//URL pattern is "communities/service/atom/{authType}/{communityEntity}/{communityType}"
-		String url = CommunityUrls.COMMUNITY_MEMBERS.format(service);
-		assertEquals("communities/service/atom/community/members", url);
+		String url = CommunityUrls.COMMUNITY_MEMBERS.format(service, CommunityUrls.getCommunityUuid(communityUuid));
+		assertEquals("communities/service/atom/community/members?communityUuid=thisIsACommunityUuid", url);
 	}
 
 	@Test

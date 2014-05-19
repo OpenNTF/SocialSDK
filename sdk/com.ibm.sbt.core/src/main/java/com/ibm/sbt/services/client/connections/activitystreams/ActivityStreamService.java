@@ -382,18 +382,8 @@ public class ActivityStreamService extends ConnectionsService {
 	 */
 	public ActivityStreamEntityList getUpdatesFromUser(String userId, Map<String, String> params)
 			throws ActivityStreamServiceException {
-		if (StringUtil.isEmpty(userId)) {
-			throw new ActivityStreamServiceException(null,"userid passed was null");
-		}
-
-		if (null == params) {
-			params = new HashMap<String, String>();
-			params.put(ActivityStreamRequestParams.lang, getUserLanguage());
-		}
-
-		String url = ActivityStreamUrls.AS_USER_INVOLVED_ALL.format(this, ASUser.get(userId));
+		String url = ActivityStreamUrls.AS_USER_INVOLVED_ALL.format(this, ASUser.get(userId), ActivityStreamUrls.getLang(getUserLanguage()));
 		return getActivityStreamEntities(url, params);
-
 	}
 	
 	

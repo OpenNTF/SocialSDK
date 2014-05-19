@@ -161,6 +161,7 @@ public class BssService extends JsonService {
 	 */
 	public BssService(String endpointName) {
 		super(endpointName);
+		serviceMappingKeys = new String[]{""};
 	}
 
 	/**
@@ -171,6 +172,7 @@ public class BssService extends JsonService {
      */
     public BssService(String endpointName, int cacheSize) {
        super(endpointName, cacheSize);
+       serviceMappingKeys = new String[]{""};
     }
 
 	/**
@@ -181,6 +183,7 @@ public class BssService extends JsonService {
      */
     public BssService(Endpoint endpoint) {
         super(endpoint);
+        serviceMappingKeys = new String[]{""};
     }
 
 	/**
@@ -191,16 +194,9 @@ public class BssService extends JsonService {
      */
     public BssService(Endpoint endpoint, int cacheSize) {
     	super(endpoint, cacheSize);
+    	serviceMappingKeys = new String[]{""};
     }
 
-	/**
-	 * Return mapping key for this service
-	 */
-	@Override
-	public String getServiceMappingKey() {
-		return "";
-	}
-    
     /* (non-Javadoc)
      * @see com.ibm.sbt.services.client.base.BaseService#getDataFormat()
      */

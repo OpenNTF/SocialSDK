@@ -126,6 +126,7 @@ public class ProfileService extends ConnectionsService {
 	 */
 	public ProfileService(String endpoint, int cacheSize) {
 		super(endpoint, cacheSize);
+		serviceMappingKeys = new String[]{PROFILES};
 	}
 	
 	/**
@@ -137,6 +138,7 @@ public class ProfileService extends ConnectionsService {
 	 */
 	public ProfileService(Endpoint endpoint, int cacheSize) {
 		super(endpoint, cacheSize);
+		serviceMappingKeys = new String[]{PROFILES};
 	}
 	
 	@Override
@@ -144,14 +146,6 @@ public class ProfileService extends ConnectionsService {
 		String auth = super.getAuthType().getValue();
 		auth = AuthType.BASIC.get().equalsIgnoreCase(auth)?EMPTY:auth;
 		return new NamedUrlPart(AUTH_TYPE, auth);
-	}
-
-	/**
-	 * Return mapping key for this service
-	 */
-	@Override
-	public String getServiceMappingKey() {
-		return PROFILES;
 	}
 
 	/***************************************************************

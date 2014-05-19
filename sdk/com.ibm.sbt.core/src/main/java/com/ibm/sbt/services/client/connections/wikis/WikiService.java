@@ -66,6 +66,7 @@ public class WikiService extends ConnectionsService {
 	 */
 	public WikiService(String endpoint) {
 		super(endpoint);
+		serviceMappingKeys = new String[]{"wikis"};
 	}
 	
 	/**
@@ -75,14 +76,7 @@ public class WikiService extends ConnectionsService {
 	 */
 	public WikiService(Endpoint endpoint) {
 		super(endpoint);
-	}
-
-	/**
-	 * Return mapping key for this service
-	 */
-	@Override
-	public String getServiceMappingKey() {
-		return "wikis";
+		serviceMappingKeys = new String[]{"wikis"};
 	}
 
 	/***************************************************************

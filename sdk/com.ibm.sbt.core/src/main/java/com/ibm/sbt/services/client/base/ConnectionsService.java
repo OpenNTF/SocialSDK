@@ -41,27 +41,27 @@ public abstract class ConnectionsService extends BaseService {
 
 	public ConnectionsService(String endpoint) {
 		super(endpoint);
+		serviceMappingKeys = new String[]{"connections"};
 	}
 
 	public ConnectionsService(Endpoint endpoint) {
 		super(endpoint);
+		serviceMappingKeys = new String[]{"connections"};
 	}
 
 	public ConnectionsService(String endpoint, int defaultCacheSize) {
 		super(endpoint, defaultCacheSize);
+		serviceMappingKeys = new String[]{"connections"};
 	}
 
 	public ConnectionsService(Endpoint endpoint, int defaultCacheSize) {
 		super(endpoint, defaultCacheSize);
+		serviceMappingKeys = new String[]{"connections"};
 	}
 
 	public ConnectionsService() {
 		super();
-	}
-
-	@Override
-	public String getServiceMappingKey() {
-		return "connections";
+		serviceMappingKeys = new String[]{"connections"};
 	}
 
 	protected Map<String,String> getAtomHeaders() {

@@ -69,6 +69,7 @@ public class ActivityStreamService extends ConnectionsService {
 	 */
 	public ActivityStreamService(String endpoint) {
 		super(endpoint, DEFAULT_CACHE_SIZE);
+		serviceMappingKeys = new String[]{"connections"};
 	}
 	
 	/**
@@ -79,16 +80,9 @@ public class ActivityStreamService extends ConnectionsService {
 	 */
 	public ActivityStreamService(Endpoint endpoint) {
 		super(endpoint, DEFAULT_CACHE_SIZE);
+		serviceMappingKeys = new String[]{"connections"};
 	}
 
-	/**
-	 * Return mapping key for this service
-	 */
-	@Override
-	public String getServiceMappingKey() {
-		return "connections";
-	}
-	
 	/**
 	 * Returns updates from ActivityStream service
 	 * <p>

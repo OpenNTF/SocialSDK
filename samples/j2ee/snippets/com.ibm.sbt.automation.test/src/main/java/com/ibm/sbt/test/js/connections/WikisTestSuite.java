@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -20,22 +20,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.ibm.sbt.test.js.connections.blogs.api.DeleteBlog;
-import com.ibm.sbt.test.js.connections.blogs.api.DeleteComment;
-import com.ibm.sbt.test.js.connections.blogs.api.DeletePost;
-import com.ibm.sbt.test.js.connections.blogs.api.GetAllBlogPosts;
-import com.ibm.sbt.test.js.connections.blogs.api.CreateBlog;
-import com.ibm.sbt.test.js.connections.blogs.api.CreateComment;
-import com.ibm.sbt.test.js.connections.blogs.api.CreatePost;
-import com.ibm.sbt.test.js.connections.blogs.api.GetBlogComments;
-import com.ibm.sbt.test.js.connections.blogs.api.GetBlogPosts;
-import com.ibm.sbt.test.js.connections.blogs.api.GetAllBlogs;
-import com.ibm.sbt.test.js.connections.blogs.api.GetAllBlogComments;
-import com.ibm.sbt.test.js.connections.blogs.api.GetComment;
-import com.ibm.sbt.test.js.connections.blogs.api.GetFeaturedBlogs;
-import com.ibm.sbt.test.js.connections.blogs.api.GetMyBlogs;
-import com.ibm.sbt.test.js.connections.blogs.api.UpdateBlog;
-import com.ibm.sbt.test.js.connections.blogs.api.UpdatePost;
 import com.ibm.sbt.test.js.connections.wikis.api.GetAllWikis;
 import com.ibm.sbt.test.js.connections.wikis.api.GetMyWikis;
 import com.ibm.sbt.test.js.connections.wikis.api.GetPublicWikis;

@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -24,26 +24,24 @@ import com.ibm.sbt.test.js.connections.activities.api.AddMember;
 import com.ibm.sbt.test.js.connections.activities.api.ChangeEntryType;
 import com.ibm.sbt.test.js.connections.activities.api.CreateActivity;
 import com.ibm.sbt.test.js.connections.activities.api.CreateActivityNode;
-import com.ibm.sbt.test.js.connections.activities.api.DeleteMember;
 import com.ibm.sbt.test.js.connections.activities.api.DeleteAndRestoreActivity;
 import com.ibm.sbt.test.js.connections.activities.api.DeleteAndRestoreActivityNode;
+import com.ibm.sbt.test.js.connections.activities.api.DeleteMember;
 import com.ibm.sbt.test.js.connections.activities.api.GetActivitiesInTrash;
 import com.ibm.sbt.test.js.connections.activities.api.GetActivity;
-import com.ibm.sbt.test.js.connections.activities.api.GetMember;
-import com.ibm.sbt.test.js.connections.activities.api.GetMembers;
 import com.ibm.sbt.test.js.connections.activities.api.GetActivityNode;
 import com.ibm.sbt.test.js.connections.activities.api.GetActivityNodeTags;
 import com.ibm.sbt.test.js.connections.activities.api.GetActivityNodes;
 import com.ibm.sbt.test.js.connections.activities.api.GetActivityNodesInTrash;
-import com.ibm.sbt.test.js.connections.activities.api.GetActivityTags;
 import com.ibm.sbt.test.js.connections.activities.api.GetAllActivities;
 import com.ibm.sbt.test.js.connections.activities.api.GetAllTags;
 import com.ibm.sbt.test.js.connections.activities.api.GetAllToDos;
 import com.ibm.sbt.test.js.connections.activities.api.GetCompletedActivities;
+import com.ibm.sbt.test.js.connections.activities.api.GetMember;
+import com.ibm.sbt.test.js.connections.activities.api.GetMembers;
 import com.ibm.sbt.test.js.connections.activities.api.GetMyActivities;
 import com.ibm.sbt.test.js.connections.activities.api.MoveEntryToSection;
 import com.ibm.sbt.test.js.connections.activities.api.UpdateActivity;
-import com.ibm.sbt.test.js.connections.activities.api.UpdateMember;
 import com.ibm.sbt.test.js.connections.activities.api.UpdateActivityNode;
 
 /**

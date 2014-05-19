@@ -17,7 +17,7 @@
 </style>
 
 <div class="ibmsbtFileUploadDialog" id="ibm-sbt-upload-dialog-<?php echo $timestamp; ?>" style="font-size: 12px;">
-	<h1><?php echo get_string('upload_file', 'block_ibmsbt');?></h1><br/><br/>
+	<h1><?php echo get_string('upload_file', 'block_ibmsbt');?></h1>
 	<input type="file" id="ibm-sbt-file-<?php echo $timestamp; ?>"/>
 	<input checked="checked" type="radio" id="ibm-sbt-file-privacy-public-<?php echo $timestamp; ?>" name="ibm-sbt-file-privacy-<?php echo $timestamp; ?>" value="public"/><?php echo get_string('public', 'block_ibmsbt');?>
 	<input type="radio" id="ibm-sbt-file-privacy-private-<?php echo $timestamp; ?>" name="ibm-sbt-file-privacy-<?php echo $timestamp; ?>" value="private"/><?php echo get_string('private', 'block_ibmsbt');?>

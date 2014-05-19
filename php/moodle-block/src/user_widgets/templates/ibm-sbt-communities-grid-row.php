@@ -22,20 +22,21 @@
 	<button style="font-size: 12px;" class="btn btn-primary" onclick="window.open('<?php echo $settings->getURL($this->config->endpoint);?>/communities', '_blank');"><?php echo get_string('open_communities', 'block_ibmsbt');?></button>
 	
 	<div class="ibmsbtCommunityDialog" id="ibm-sbt-create-community-<?php echo $timestamp; ?>" style="font-size: 12px;">
+		<h1><?php echo get_string('create_community', 'block_ibmsbt');?></h1>
 		<div id="ibm-sbt-success-<?php echo $timestamp; ?>" display: none; font-weight: bold; color: green;"></div>
 		<div id="ibm-sbt-error-<?php echo $timestamp; ?>" style="display:none;" class="alert alert-error"></div>
 		<table>
 			<tr>
-				<td><label class="control-label" for="ibm-sbt-community-title-<?php echo $timestamp; ?>"><?php echo get_string('title', 'block_ibmsbt');?>:</label></td>
-				<td><input id="ibm-sbt-community-title-<?php echo $timestamp; ?>" type="text" /></td>
+				<td style="padding: 1em;"><label class="control-label" for="ibm-sbt-community-title-<?php echo $timestamp; ?>"><?php echo get_string('title', 'block_ibmsbt');?>:</label></td>
+				<td style="padding: 1em;"><input id="ibm-sbt-community-title-<?php echo $timestamp; ?>" type="text" /></td>
 			</tr>
-			<tr>
-				<td><label class="control-label" for="ibm-sbt-community-content-<?php echo $timestamp; ?>"><?php echo get_string('content', 'block_ibmsbt');?>:</label></td>
-				<td><input id="ibm-sbt-community-content-<?php echo $timestamp; ?>" type="text-<?php echo $timestamp; ?>" /></td>
+			<tr style="padding: 5em;">
+				<td style="padding: 1em;"><label class="control-label" for="ibm-sbt-community-content-<?php echo $timestamp; ?>"><?php echo get_string('content', 'block_ibmsbt');?>:</label></td>
+				<td style="padding: 1em;"><input id="ibm-sbt-community-content-<?php echo $timestamp; ?>" type="text" /></td>
 			</tr>
-			<tr>
-				<td><label class="control-label" for="ibm-sbt-community-tags-<?php echo $timestamp; ?>"><?php echo get_string('tags', 'block_ibmsbt');?>:</label></td>
-				<td><input id="ibm-sbt-community-tags-<?php echo $timestamp; ?>" type="text" /></td>
+			<tr style="padding: 5em;">
+				<td style="padding: 1em;"><label class="control-label" for="ibm-sbt-community-tags-<?php echo $timestamp; ?>"><?php echo get_string('tags', 'block_ibmsbt');?>:</label></td>
+				<td style="padding: 1em;"><input id="ibm-sbt-community-tags-<?php echo $timestamp; ?>" type="text" /></td>
 			</tr>
 		</table>
 		<br/><br/>

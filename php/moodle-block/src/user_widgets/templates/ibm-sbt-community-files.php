@@ -23,11 +23,11 @@
 <div id="ibm-sbt-community-files-list-<?php echo $timestamp; ?>"></div>
 
 <div class="ibmsbtCommunityFileUploadDialog" id="ibm-sbt-communities-upload-dialog-<?php echo $timestamp; ?>">
+	<h1><?php echo get_string('upload_file', 'block_ibmsbt');?></h1>
 	<input style="font-size: 12px;" type="file" id="ibm-sbt-community-files-<?php echo $timestamp; ?>" accept="image/*"></input>
 	<br/>
 	<button style="font-size: 12px;" class="btn btn-primary" id="ibm-sbt-communities-file-upload-dialog-button-<?php echo $timestamp; ?>"><?php echo get_string('upload', 'block_ibmsbt');?></button>
 	<button style="font-size: 12px;" class="btn btn-primary" onclick="document.getElementById('ibm-sbt-communities-upload-dialog-<?php echo $timestamp; ?>').style.display='none';"><?php echo get_string('close', 'block_ibmsbt');?></button>
-	<br/>
 </div>
 <div id="ibm-sbt-community-files-error-<?php echo $timestamp; ?>" style="display: none;" class="alert alert-error"></div>
 <img id="ibm-sbt-loading-<?php echo $timestamp; ?>" style="display: none;" src="<?php echo $CFG->wwwroot; ?>/blocks/ibmsbt/user_widgets/templates/assets/loading_small.gif" />

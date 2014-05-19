@@ -35,7 +35,7 @@ public enum ActivityStreamUrls implements URLContainer {
 	AS_ME_ALL_STATUS( new VersionedUrl(v4_0, 		"{connections}/opensocial/{authType}/rest/activitystreams/@me/@all/@status")),
 	AS_ME_FOLLOWING_STATUS( new VersionedUrl(v4_0, 	"{connections}/opensocial/{authType}/rest/activitystreams/@me/@following/@status")),
 	AS_ME_ALL_COMMUNITIES( new VersionedUrl(v4_0, 	"{connections}/opensocial/{authType}/rest/activitystreams/@me/@all/@communities")),
-	AS_USER_INVOLVED_ALL( new VersionedUrl(v4_0, 	"{connections}/opensocial/{authType}/rest/activitystreams/{user}/@involved/@all")),
+	AS_USER_INVOLVED_ALL( new VersionedUrl(v4_0, 	"{connections}/opensocial/{authType}/rest/activitystreams/{user}/@involved/@all?lang={lang}")),
 	AS_COMMUNITY_ALL( new VersionedUrl(v4_0, 		"{connections}/opensocial/{authType}/rest/activitystreams/{user}/@all")),
 	AS_ME_RESPONSES( new VersionedUrl(v4_0, 		"{connections}/opensocial/{authType}/rest/activitystreams/@me/@responses")),
 	AS_ME_NOTESFROMME( new VersionedUrl(v4_0, 		"{connections}/opensocial/{authType}/rest/activitystreams/@me/@notesfromme")),
@@ -60,5 +60,9 @@ public enum ActivityStreamUrls implements URLContainer {
 
 	public String getPattern(Version version){
 		return builder.getPattern(version).getUrlPattern();
+	}
+	
+	public static NamedUrlPart getLang(String lang){
+		return new NamedUrlPart("lang",lang);
 	}
 }

@@ -34,7 +34,7 @@
 <span style="display: none; font-size: 12px;" id="ibm-sbt-community-files-success-<?php echo $timestamp; ?>"></span><br/><br/>
 <script type="text/template" id="fileRow-<?php echo $timestamp; ?>">
 <tr style="padding-bottom: 0.3em; font-size: 12px;">
-	<td style="width:15em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inline-block; padding-left: 10px;">
+	<td style="width:14em;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inline-block; padding-left: 10px;">
 			<span dojoAttachPoint="placeLinkNode">
 				<a href="javascript: void(0)" target="_self" title="${title}" dojoAttachPoint="placeTitleLink" data-dojo-attach-event="onclick: handleClick">${title}</a>
 			</span>
@@ -57,7 +57,7 @@
 </div>
 </script>
 <script type="text/template" id="pagingFooter-<?php echo $timestamp; ?>" style="font-size: 12px;">
-<div dojoattachpoint="pagingFooter" class="lotusPaging">
+<div dojoattachpoint="pagingFooter" class="lotusPaging" style="font-size: 12px;">
 		Show:
 			<a href="javascript: void(0)" title="${nls.show10Items}" aria-pressed="false"
 				role="button" data-dojo-attach-event="onclick: show10ItemsPerPage">10</a> |
@@ -68,7 +68,6 @@
 		
 			<a href="javascript: void(0)" title="${nls.show50Items}" data-dojo-attach-event="onclick: show50ItemsPerPage"
 			aria-pressed="false" role="button">50</a> |
-	
 	
 			<a href="javascript: void(0)" title="${nls.show100Items}" data-dojo-attach-event="onclick: show100ItemsPerPage"
 			aria-pressed="false" role="button">100</a>

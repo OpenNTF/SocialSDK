@@ -1,9 +1,10 @@
 <?php 
 // Ensure that element IDs are unique
-$timestamp = time();
+$milliseconds = microtime(true) * 1000; 
+$timestamp = round($milliseconds);
 
 global $CFG;
-require_once $CFG->dirroot . '/blocks/ibmsbt/user_widgets/templates/ibm-sbt-files-grid-row.php';
+require $CFG->dirroot . '/blocks/ibmsbt/user_widgets/templates/ibm-sbt-files-grid-row.php';
 ?>
 <select style="font-size: 12px;" id="ibm-sbt-files-list-<?php echo $timestamp; ?>" onchange="onTypeChange<?php echo $timestamp; ?>();">
 	<option value="myFiles"><?php echo get_string('my_files', 'block_ibmsbt');?></option>
@@ -18,6 +19,7 @@ require_once $CFG->dirroot . '/blocks/ibmsbt/user_widgets/templates/ibm-sbt-file
 </select>
 <div id="<?php echo $this->config->elementID;?>"></div>
 <script type="text/javascript">
+var userId<?php echo $timestamp; ?> = null;
 
 function addOnClickHandlers(fileService,grid, dom) {
 
@@ -76,12 +78,17 @@ function clearError(dom) {
 
 
 
+
+
 function onTypeChange<?php echo $timestamp; ?>() {
 	require(["sbt/dom", "sbt/connections/controls/files/FileGrid", "sbt/connections/FileService"], 
 			function(dom, FileGrid, FileService) {
+				if (userId<?php echo $timestamp; ?> == null) {
+					alert("User ID could not be loaded. There seems to be a problem with your profile. Cannot load file service.");
+					return;
+				}
 				var fileService = new FileService({endpoint: "<?php echo $this->config->endpoint; ?>"});
 				
-		
 				var typeList = dom.byId("ibm-sbt-files-list-<?php echo $timestamp; ?>");
 				var currentType = typeList.options[typeList.selectedIndex].value;
 
@@ -99,10 +106,10 @@ function onTypeChange<?php echo $timestamp; ?>() {
 			    var PagingFooter = domNode.text || domNode.textContent;
 
 				
-			    var grid = null;
+			    var grid<?php echo $timestamp; ?> = null;
 
 			    if (currentType == 'sharedWithMe') {
-				    grid = new FileGrid({
+				    grid<?php echo $timestamp; ?> = new FileGrid({
 				    	 type : 'fileShares',
 				    	 direction: 'inbound',
 				    	 endpoint: "<?php echo $this->config->endpoint; ?>",
@@ -112,7 +119,7 @@ function onTypeChange<?php echo $timestamp; ?>() {
 				    	 rendererArgs : { template : FileRow, pagerTemplate : PagingHeader, footerTemplate : PagingFooter}       	 
 				    });
 			    } else if (currentType == 'sharedByMe') {
-			    	grid = new FileGrid({
+			    	grid<?php echo $timestamp; ?> = new FileGrid({
 				    	 type : 'fileShares',
 				    	 direction: 'outbound',
 				    	 endpoint: "<?php echo $this->config->endpoint; ?>",
@@ -121,8 +128,8 @@ function onTypeChange<?php echo $timestamp; ?>() {
 				         hideFooter: false,
 				    	 rendererArgs : { template : FileRow, pagerTemplate : PagingHeader, footerTemplate : PagingFooter}       	 
 				    });
-			    } else {
-			    	grid = new FileGrid({
+			    } else if (currentType == 'publicFolders') {
+			    	grid<?php echo $timestamp; ?> = new FileGrid({
 				    	 type : currentType,
 				    	 endpoint: "<?php echo $this->config->endpoint; ?>",
 				         hidePager: false,
@@ -130,17 +137,44 @@ function onTypeChange<?php echo $timestamp; ?>() {
 				         hideFooter: false,
 				    	 rendererArgs : { template : FileRow, pagerTemplate : PagingHeader, footerTemplate : PagingFooter}       	 
 				    });
+			    } else {
+			    	grid<?php echo $timestamp; ?> = new FileGrid({
+				    	 type : currentType,
+				    	 endpoint: "<?php echo $this->config->endpoint; ?>",
+				         hidePager: false,
+				         hideSorter: true,
+				         hideFooter: false,
+				         creator: userId<?php echo $timestamp; ?>,
+				    	 rendererArgs : { template : FileRow, pagerTemplate : PagingHeader, footerTemplate : PagingFooter}       	 
+				    });
 			    }
 
-			    grid.renderer.tableClass = "table";
-			    grid.renderer.template = FileRow;
+			    grid<?php echo $timestamp; ?>.renderer.tableClass = "table";
+			    grid<?php echo $timestamp; ?>.renderer.template = FileRow;
 			    dom.byId("<?php echo $this->config->elementID;?>").innerHTML = "";
-			    dom.byId("<?php echo $this->config->elementID;?>").appendChild(grid.domNode);    
-			    grid.update();
-			    initFileUploadControls(fileService, grid, dom);
+			    dom.byId("<?php echo $this->config->elementID;?>").appendChild(grid<?php echo $timestamp; ?>.domNode);    
+			    grid<?php echo $timestamp; ?>.update();
+			    initFileUploadControls(fileService, grid<?php echo $timestamp; ?>, dom);
 		});
 }
 
+require([ "sbt/connections/ProfileService", "sbt/dom", "sbt/config" ], function(ProfileService, dom, config) {
 
-onTypeChange<?php echo $timestamp; ?>();
+	var endpoint = config.findEndpoint("<?php echo $this->config->endpoint; ?>");
+	var url = "/connections/opensocial/basic/rest/people/@me/";
+	endpoint.request(url, { handleAs : "json" }).then(
+		function(response) {
+			userId<?php echo $timestamp; ?> = parseUserid(response.entry);
+			onTypeChange<?php echo $timestamp; ?>();
+		}, 
+		function(error) {
+			console.log(error);
+		}
+	);
+
+	function parseUserid(entry) {
+		return entry.id.substring("urn:lsid:lconn.ibm.com:profiles.person:".length);
+	}
+});
+
 </script>

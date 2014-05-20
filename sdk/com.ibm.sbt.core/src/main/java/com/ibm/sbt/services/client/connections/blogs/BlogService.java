@@ -69,6 +69,7 @@ public class BlogService extends ConnectionsService {
 	public BlogService(String endpoint) {
 		super(endpoint);
 		setHomepageFromEndpoint(getEndpoint());
+		serviceMappingKeys = new String[]{"blogs"};
 	}
 	
 	/**
@@ -80,10 +81,6 @@ public class BlogService extends ConnectionsService {
 	public BlogService(Endpoint endpoint) {
 		super(endpoint);
 		setHomepageFromEndpoint(getEndpoint());
-	}
-
-	@Override
-	protected void initServiceMappingKeys(){
 		serviceMappingKeys = new String[]{"blogs"};
 	}
 

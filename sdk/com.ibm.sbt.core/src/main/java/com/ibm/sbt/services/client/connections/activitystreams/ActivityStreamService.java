@@ -69,6 +69,7 @@ public class ActivityStreamService extends ConnectionsService {
 	 */
 	public ActivityStreamService(String endpoint) {
 		super(endpoint, DEFAULT_CACHE_SIZE);
+		serviceMappingKeys = new String[]{"connections"};
 	}
 	
 	/**
@@ -79,6 +80,7 @@ public class ActivityStreamService extends ConnectionsService {
 	 */
 	public ActivityStreamService(Endpoint endpoint) {
 		super(endpoint, DEFAULT_CACHE_SIZE);
+		serviceMappingKeys = new String[]{"connections"};
 	}
 
 	/**

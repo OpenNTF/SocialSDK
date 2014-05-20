@@ -39,6 +39,7 @@ package com.ibm.sbt.services.client.connections.search;
 
 import static com.ibm.sbt.services.client.base.CommonConstants.COMMA;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
+import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants.PROFILES;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -56,6 +57,7 @@ import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.ConnectionsService;
 import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
+import com.ibm.sbt.services.client.connections.blogs.BlogUrlParts;
 import com.ibm.sbt.services.endpoints.Endpoint;
 
 public class SearchService extends ConnectionsService {
@@ -78,6 +80,7 @@ public class SearchService extends ConnectionsService {
 	 */
 	public SearchService(String endpoint) {
 		super(endpoint, DEFAULT_CACHE_SIZE);
+		serviceMappingKeys = new String[]{"search"};
 	}
 	
 	/**
@@ -88,10 +91,6 @@ public class SearchService extends ConnectionsService {
 	 */
 	public SearchService(Endpoint endpoint) {
 		super(endpoint, DEFAULT_CACHE_SIZE);
-	}
-	
-	@Override
-	protected void initServiceMappingKeys(){
 		serviceMappingKeys = new String[]{"search"};
 	}
 

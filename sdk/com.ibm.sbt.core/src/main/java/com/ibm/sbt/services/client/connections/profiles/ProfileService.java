@@ -126,6 +126,7 @@ public class ProfileService extends ConnectionsService {
 	 */
 	public ProfileService(String endpoint, int cacheSize) {
 		super(endpoint, cacheSize);
+		serviceMappingKeys = new String[]{PROFILES};
 	}
 	
 	/**
@@ -137,13 +138,9 @@ public class ProfileService extends ConnectionsService {
 	 */
 	public ProfileService(Endpoint endpoint, int cacheSize) {
 		super(endpoint, cacheSize);
-	}
-	
-	@Override
-	protected void initServiceMappingKeys(){
 		serviceMappingKeys = new String[]{PROFILES};
 	}
-
+	
 	@Override
 	public NamedUrlPart getAuthType(){
 		String auth = super.getAuthType().getValue();

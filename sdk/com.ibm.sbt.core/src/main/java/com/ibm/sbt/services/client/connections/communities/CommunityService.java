@@ -90,10 +90,6 @@ public class CommunityService extends ConnectionsService {
 	 */
 	public CommunityService(String endpoint, int cacheSize) {
 		super(endpoint, cacheSize);
-	}
-
-	@Override
-	protected void initServiceMappingKeys(){
 		serviceMappingKeys = new String[]{"communities"};
 	}
 

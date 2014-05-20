@@ -41,30 +41,26 @@ public abstract class ConnectionsService extends BaseService {
 
 	public ConnectionsService(String endpoint) {
 		super(endpoint);
-		initServiceMappingKeys();
+		serviceMappingKeys = new String[]{"connections"};
 	}
 
 	public ConnectionsService(Endpoint endpoint) {
 		super(endpoint);
-		initServiceMappingKeys();
+		serviceMappingKeys = new String[]{"connections"};
 	}
 
 	public ConnectionsService(String endpoint, int defaultCacheSize) {
 		super(endpoint, defaultCacheSize);
-		initServiceMappingKeys();
+		serviceMappingKeys = new String[]{"connections"};
 	}
 
 	public ConnectionsService(Endpoint endpoint, int defaultCacheSize) {
 		super(endpoint, defaultCacheSize);
-		initServiceMappingKeys();
+		serviceMappingKeys = new String[]{"connections"};
 	}
 
 	public ConnectionsService() {
 		super();
-		initServiceMappingKeys();
-	}
-	
-	protected void initServiceMappingKeys(){
 		serviceMappingKeys = new String[]{"connections"};
 	}
 

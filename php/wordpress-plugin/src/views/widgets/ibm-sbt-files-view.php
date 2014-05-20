@@ -4,9 +4,9 @@
 $timestamp = time();
 
 	if ((isset($instance['ibm-sbtk-template']) && $instance['ibm-sbtk-template'] != "")) {
-		require_once BASE_PATH . "{$instance['ibm-sbtk-template']}";
+		require BASE_PATH . "{$instance['ibm-sbtk-template']}";
 	} else {
-		require_once 'templates/ibm-sbt-files-view.php';
+		require 'templates/ibm-sbt-files-view.php';
 	}
 ?>
 <script type="text/javascript">
@@ -45,6 +45,12 @@ require(["sbt/declare", "sbt/dom", "sbt/connections/controls/files/FilesView", "
 			dialogArgs:{templateString:dialogTemplate},
 			actionBarArgs: {actionTemplate:actionTemplate, disabledClass: "btn-disabled"}
 		});
+
+		if ("<?php echo $instance['ibm-sbtk-files-type'] ?>" == "publicFiles") {
+			filesView.hideAction("share");
+			filesView.hideAction("Upload File");
+		}
+		filesView.hideAction("Add Tags");
 
 	    filesView.grid.renderer.tableClass = "table";
 	    var gridTemplate = dom.byId("filesViewRow-<?php echo $timestamp; ?>").textContent;

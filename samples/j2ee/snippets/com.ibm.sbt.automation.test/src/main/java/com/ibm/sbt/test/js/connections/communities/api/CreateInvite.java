@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2013
+ * @ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -64,7 +64,7 @@ public class CreateInvite extends BaseCommunitiesTest {
         
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         JsonJavaObject json = previewPage.getJson();
-        Assert.assertEquals(500, json.getAsInt("code"));
+        Assert.assertTrue(400 == json.getAsInt("code") || 500 == json.getAsInt("code"));
         Assert.assertEquals("Error generating atom document.", json.getString("message"));
     }
 
@@ -75,7 +75,7 @@ public class CreateInvite extends BaseCommunitiesTest {
         
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         JsonJavaObject json = previewPage.getJson();
-        Assert.assertEquals(500, json.getAsInt("code"));
+        Assert.assertTrue(400 == json.getAsInt("code") || 500 == json.getAsInt("code"));
         Assert.assertEquals("Error generating atom document.", json.getString("message"));
     }
 

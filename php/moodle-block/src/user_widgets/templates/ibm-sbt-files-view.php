@@ -13,7 +13,7 @@
 
 <script type="text/template" id="filesViewRow<?php echo $timestamp; ?>">
 <tr>
-	<td style="width:15em;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inline-block; padding-left: 10px;">
+	<td style="width:15em;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inline-block; padding-left: 10px; font-size: 12px;">
 			<span dojoAttachPoint="placeLinkNode">
 				<input type="checkbox" data-dojo-attach-point="rowSelectionInput" data-dojo-attach-event="onclick: handleCheckBox" />
 				<a href="javascript: void(0)" target="_self" title="${tooltip}" dojoAttachPoint="placeTitleLink" data-dojo-attach-event="onclick: handleClick">${title}</a>
@@ -296,7 +296,7 @@
 <div dojoAttachPoint="domNode">
 	<div dojoAttachPoint="mainNode">
 		<div role="alert" style="display: none; padding-top: 3em;" class="alert alert-success ibmsbtDialog" dojoattachpoint="messageNode">
-			<span class="alert alert-success" dojoattachpoint="messageBody"></span>
+			<span dojoattachpoint="messageBody"></span>
 			&nbsp;<a dojoattachevent="onclick: hideMessage" title="${nls.root.messageClose}" dojoattachpoint="messageClose" role="button"  href="javascript:;">Close</a>
 		</div>	
 		<br/><br/>

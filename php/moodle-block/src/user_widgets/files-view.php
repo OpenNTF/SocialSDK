@@ -1,19 +1,16 @@
 <?php 	
 // Ensure that element IDs are unique
-$timestamp = time();
+$milliseconds = microtime(true) * 1000; 
+$timestamp = round($milliseconds);
 
 global $CFG;
-require_once $CFG->dirroot . '/blocks/ibmsbt/user_widgets/templates/ibm-sbt-files-view.php';
+require $CFG->dirroot . '/blocks/ibmsbt/user_widgets/templates/ibm-sbt-files-view.php';
 ?>
 
 <select id="ibm-sbt-files-view-list-<?php echo $timestamp; ?>" onchange="onFilesViewTypeChange<?php echo $timestamp; ?>();">
 	<option value="myFiles"><?php echo get_string('my_files', 'block_ibmsbt');?></option>
 	<option value="publicFiles"><?php echo get_string('public_files', 'block_ibmsbt');?></option>
 	<option value="myPinnedFiles"><?php echo get_string('my_pinned_files', 'block_ibmsbt');?></option>
-	<option value="myFolders"><?php echo get_string('my_folders', 'block_ibmsbt');?></option>
-	<option value="publicFolders"><?php echo get_string('public_folders', 'block_ibmsbt');?></option>
-	<option value="myPinnedFolders"><?php echo get_string('my_pinned_folders', 'block_ibmsbt');?></option>
-	<option value="activeFolders"><?php echo get_string('active_folders', 'block_ibmsbt');?></option>
 </select>
 <div id="<?php echo $this->config->elementID; ?>"></div>
 
@@ -39,7 +36,7 @@ function onFilesViewTypeChange<?php echo $timestamp; ?>() {
 			    var PagingFooter = domNode.text || domNode.textContent;
 			    domNode = dom.byId("filesViewRow<?php echo $timestamp; ?>");
 			    var FileRow = domNode.text || domNode.textContent;
-			
+				
 				var filesView = new FilesView({
 					gridArgs: {
 						 type : currentType,
@@ -60,6 +57,12 @@ function onFilesViewTypeChange<?php echo $timestamp; ?>() {
 					actionBarArgs: {actionTemplate:actionTemplate, disabledClass: "btn-disabled"}
 				});
 
+				if (currentType == "publicFiles") {
+					filesView.hideAction("share");
+					filesView.hideAction("Upload File");
+				}
+				filesView.hideAction("Add Tags");
+				console.log(filesView.actionBar.actions);
 			    filesView.grid.renderer.tableClass = "table";
 			    var gridTemplate = dom.byId("filesViewRow<?php echo $timestamp; ?>").textContent;
 			    filesView.grid.renderer.template = gridTemplate;

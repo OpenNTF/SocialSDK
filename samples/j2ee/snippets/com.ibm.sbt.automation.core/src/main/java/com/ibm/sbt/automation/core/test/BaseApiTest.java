@@ -21,8 +21,6 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Rule;
-import org.junit.After;
-import org.junit.Rule;
 import org.junit.rules.TestName;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -30,17 +28,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.ibm.commons.runtime.Application;
-import com.ibm.commons.runtime.Context;
-import com.ibm.commons.runtime.RuntimeFactory;
-import com.ibm.commons.runtime.impl.app.RuntimeFactoryStandalone;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.json.JsonException;
 import com.ibm.commons.util.io.json.JsonJavaFactory;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.commons.util.io.json.JsonParser;
 import com.ibm.sbt.automation.core.environment.TestEnvironment;
-import com.ibm.sbt.automation.core.environment.TestEnvironmentFactory;
 import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 import com.ibm.sbt.automation.core.test.pageobjects.ResultPage;
 import com.ibm.sbt.automation.core.utils.Trace;

@@ -17,8 +17,7 @@ package com.ibm.sbt.automation.core.test;
 
 import java.util.List;
 
-import junit.framework.Assert;
-
+import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 
 import com.ibm.sbt.automation.core.test.pageobjects.GridPagerPage;

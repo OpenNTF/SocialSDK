@@ -15,9 +15,7 @@
  */
 package com.ibm.sbt.automation.core.test.connections;
 
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -29,14 +27,12 @@ import com.ibm.sbt.automation.core.test.BaseApiTest;
 import com.ibm.sbt.automation.core.utils.Trace;
 import com.ibm.sbt.security.authentication.AuthenticationException;
 import com.ibm.sbt.services.client.ClientServicesException;
-import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.connections.forums.Forum;
 import com.ibm.sbt.services.client.connections.forums.ForumReply;
 import com.ibm.sbt.services.client.connections.forums.ForumService;
 import com.ibm.sbt.services.client.connections.forums.ForumTopic;
 import com.ibm.sbt.services.client.connections.forums.model.BaseForumEntity;
-import com.ibm.sbt.services.client.connections.forums.serializers.ForumSerializer;
 
 /**
  * @author mwallace
@@ -380,7 +376,7 @@ public class BaseForumsTest extends BaseApiTest {
         	if (pe.getCause() != null) {
         		pe.getCause().printStackTrace();
         	}
-            Assert.fail("Error authenicating: " + pe.getMessage());
+            Assert.fail("Error authenticating: " + pe.getMessage());
         } catch (Exception cse) {
         	// TODO remove this when we upgrade the QSI
         	Throwable t = cse.getCause();
@@ -445,33 +441,8 @@ public class BaseForumsTest extends BaseApiTest {
     }
     
 	protected ForumTopic createForumTopic(Forum forum, ForumTopic topic) throws Exception {
-		if (null == topic){
-			throw new ClientServicesException(null,"Topic object passed was null");
-		}
-		Response result = null;
-		try {
-			ForumService forumService = getForumService();
-			EntityList<ForumTopic> topicList = forumService.getForumTopics(forum.getForumUuid());
-						
-			String forumUuid = "";
-			
-			ForumSerializer serializer = new ForumSerializer(topic);
-			
-			Map<String, String> params = new HashMap<String, String>();
-			params.put("forumUuid", forum.getForumUuid());
-			
-			Map<String, String> headers = new HashMap<String, String>();
-			headers.put("Content-Type", "application/atom+xml");
-			
-			//String url = resolveUrl(ForumType.TOPICS,null,params);
-			//result = createData(url, null, headers,serializer.generateCreate());
-			//topic = (ForumTopic) new TopicsFeedHandler(this).createEntity(result);
-
-		} catch (Exception e) {
-			throw new ClientServicesException(e, "error creating forum");
-		}
-
-        return topic;
+		ForumService forumService = getForumService();
+		return forumService.createForumTopic(topic, forum.getUid());
 	}
         
     protected void fail(String message, Exception fse) {

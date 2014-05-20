@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -37,7 +37,7 @@ public class ProfileTagSearch extends BaseGridTest {
 	public void createTag(){
 		addSnippetParam("sample.email1", getProperty("sample.email1"));
 		addSnippetParam("sample.email2", getProperty("sample.email2"));
-		super.launchSnippet("Social_Profiles_Add_Tags",this.authType.AUTO_DETECT);
+		super.launchSnippet("Social_Profiles_Add_Tags", AuthType.AUTO_DETECT);
 	}
 
     @Test

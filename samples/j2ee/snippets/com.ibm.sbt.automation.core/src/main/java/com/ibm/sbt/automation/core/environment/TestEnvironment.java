@@ -346,14 +346,14 @@ public abstract class TestEnvironment extends com.ibm.sbt.test.lib.TestEnvironme
 				if ("ie".equals(browserName)) {
 					cap = DesiredCapabilities.internetExplorer();
 				} else if ("chrome".equals(browserName)) {
-					cap = new DesiredCapabilities().chrome();
+					cap = DesiredCapabilities.chrome();
 				} else if ("safari".equals(browserName)) {
-					cap = new DesiredCapabilities().safari();
+					cap = DesiredCapabilities.safari();
 				} else if ("headless".equals(browserName)) {
-					cap = new DesiredCapabilities().htmlUnit();
+					cap = DesiredCapabilities.htmlUnit();
 
 				} else {
-					cap = new DesiredCapabilities().firefox();
+					cap = DesiredCapabilities.firefox();
 				}
 				cap.setCapability(CapabilityType.TAKES_SCREENSHOT, true);
 				cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);

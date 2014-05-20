@@ -36,6 +36,7 @@ import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.SerializationUtil;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.connections.common.Tag;
+import com.ibm.sbt.test.lib.TestEnvironment;
 
 /**
  * Tests for the java connections Profile API by calling Connections server
@@ -217,11 +218,11 @@ public class ProfileServiceTest extends BaseUnitTest {
 	
 	@Test
 	public final void testAddTags() throws Exception {
-		Profile profile = profileService.getProfile(properties.getProperty("email2"));
+		Profile profile = profileService.getProfile(TestEnvironment.getSecondaryUserEmail());
 		profile.setAsString("tags", "tag1, tag2, tag3");
-		profileService.addTags(properties.getProperty("email1"), properties.getProperty("email2"), profile);
+		profileService.addTags(TestEnvironment.getCurrentUserEmail(), TestEnvironment.getSecondaryUserEmail(), profile);
 
-		EntityList<Tag> tags = profileService.getTags(properties.getProperty("email2"));
+		EntityList<Tag> tags = profileService.getTags(TestEnvironment.getSecondaryUserEmail());
 		for(Tag tag : tags){
 			assertNotNull(tag.getTerm());
 		}
@@ -235,8 +236,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 	 */
 	@Test
 	public final void testUpdateProfileWithInvalidCredentials() throws Exception {
-		Profile profile = profileService.getProfile(properties
-				.getProperty("email2"));
+		Profile profile = profileService.getProfile(TestEnvironment.getSecondaryUserEmail());
 		profile.setTelephoneNumber("TEST_PHONE_NUMBER");
 		thrown.expect(ClientServicesException.class);
 		thrown.expectMessage("403:Forbidden");

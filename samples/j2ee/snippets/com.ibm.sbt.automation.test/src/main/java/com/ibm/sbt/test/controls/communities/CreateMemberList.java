@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2012
+ * © Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -21,7 +21,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.ibm.sbt.automation.core.test.BaseTest;
-import com.ibm.sbt.automation.core.test.BaseTest.AuthType;
 import com.ibm.sbt.automation.core.test.pageobjects.BaseResultPage;
 import com.ibm.sbt.automation.core.test.pageobjects.ResultPage;
 

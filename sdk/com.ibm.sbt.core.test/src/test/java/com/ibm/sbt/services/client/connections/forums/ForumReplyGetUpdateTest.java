@@ -17,7 +17,6 @@
 package com.ibm.sbt.services.client.connections.forums;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import org.junit.After;
 import org.junit.Before;

@@ -99,7 +99,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 	@Test
 	public void testSearchProfilesWithParams() throws Exception {
 		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put("email", properties.getProperty("email1"));
+		parameters.put("email", TestEnvironment.getCurrentUserEmail());
 		parameters.put("ps", "5");
 		EntityList<Profile> profileEntries = profileService.searchProfiles(parameters);
 		if (profileEntries != null && !profileEntries.isEmpty()) {
@@ -119,8 +119,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 
 	@Test
 	public void testGetColleagues() throws Exception {
-		EntityList<Profile> profileEntries = profileService.getColleagues(properties
-				.getProperty("user1"));
+		EntityList<Profile> profileEntries = profileService.getColleagues(TestEnvironment.getCurrentUserEmail());
 		if (profileEntries != null && !profileEntries.isEmpty()) {
 			for (Profile profile : profileEntries) {
 				assertNotNull(profile.getName());
@@ -137,7 +136,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 	@Test
 	public void testGetColleaguesConnectionEntries() throws Exception {
 		EntityList<ColleagueConnection> connectionEntries = profileService
-				.getColleagueConnections(properties.getProperty("user1"));
+				.getColleagueConnections(TestEnvironment.getCurrentUserEmail());
 		if (connectionEntries != null && !connectionEntries.isEmpty()) {
 			for (ColleagueConnection Connection : connectionEntries) {
 				assertNotNull(Connection.getTitle());
@@ -156,8 +155,8 @@ public class ProfileServiceTest extends BaseUnitTest {
 	@Test
 	public void testGetCommonColleaguesProfiles() throws Exception {
 		EntityList<Profile> profileEntries = profileService.getCommonColleagues(
-				properties.getProperty("email1"),
-				properties.getProperty("email2"));
+				TestEnvironment.getCurrentUserEmail(),
+				TestEnvironment.getSecondaryUserEmail());
 		if (profileEntries != null && !profileEntries.isEmpty()) {
 			for (Profile profileEntry : profileEntries) {
 				assertNotNull(profileEntry.getJobTitle());
@@ -168,7 +167,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 	@Test
 	public void testGetReportToChain() throws Exception {
 		EntityList<Profile> profileEntries = profileService
-				.getReportingChain(properties.getProperty("user1"));
+				.getReportingChain(TestEnvironment.getCurrentUserEmail());
 		if (profileEntries != null && !profileEntries.isEmpty()) {
 			for (Profile profile : profileEntries) {
 				assertNotNull(profile.getName());
@@ -178,8 +177,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 
 	@Test
 	public void testGetDirectReports() throws Exception {
-		EntityList<Profile> profileEntries = profileService.getPeopleManaged(properties
-				.getProperty("user1"));
+		EntityList<Profile> profileEntries = profileService.getPeopleManaged(TestEnvironment.getCurrentUserEmail());
 		if (profileEntries != null && !profileEntries.isEmpty()) {
 			for (Profile profile : profileEntries) {
 				assertNotNull(profile.getName());
@@ -189,9 +187,9 @@ public class ProfileServiceTest extends BaseUnitTest {
 
 	@Test
 	public void testSendInviteAndCheckColleagues() throws Exception {
-		String user1 = properties.getProperty("email1");
-		String user2 = properties.getProperty("email2");
-		String connectionId = profileService.sendInvite(properties.getProperty("email2"));
+		String user1 = TestEnvironment.getCurrentUserEmail();
+		String user2 = TestEnvironment.getSecondaryUserEmail();
+		String connectionId = profileService.sendInvite(TestEnvironment.getSecondaryUserEmail());
 		ColleagueConnection connection = profileService.checkColleague(user1, user2);
 		assertNotNull(connection.getTitle());
 		assertNotNull(connection.getConnectionId());
@@ -205,12 +203,11 @@ public class ProfileServiceTest extends BaseUnitTest {
 
 	@Test
 	public final void testUpdateProfile() throws Exception {
-		Profile profile = profileService.getProfile(properties
-				.getProperty("email1"));
+		Profile profile = profileService.getProfile(TestEnvironment.getCurrentUserEmail());
 		String phoneNumber = "9999999999";
 		profile.setTelephoneNumber(phoneNumber);
 		profileService.updateProfile(profile);
-		profile = profileService.getProfile(properties.getProperty("email1"));
+		profile = profileService.getProfile(TestEnvironment.getCurrentUserEmail());
 		assertEquals(phoneNumber, profile.getTelephoneNumber());
 
 		profileService.getEndpoint().logout();
@@ -228,7 +225,6 @@ public class ProfileServiceTest extends BaseUnitTest {
 		}
 
 		profileService.getEndpoint().logout();
-	
 	}
 
 	/**
@@ -253,7 +249,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 
 	@Test
 	public final void testUpdateProfilePhoto() throws Exception {
-		Profile profile = profileService.getProfile(properties.getProperty("email1"));
+		Profile profile = profileService.getProfile(TestEnvironment.getCurrentUserEmail());
 		File file = new File("src/test/java/com/ibm/sbt/config/image1.jpg");
 		profileService.updateProfilePhoto(file, profile.getUserid());
 		//profile = profileService.getProfile(properties.getProperty("email1"));
@@ -263,8 +259,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 
 	@Test
 	public final void testUpdateProfilePhotoNullExtension() throws Exception {
-		Profile profile = profileService.getProfile(properties
-				.getProperty("email1"));
+		Profile profile = profileService.getProfile(TestEnvironment.getCurrentUserEmail());
 		File file = new File("config/image");
 		thrown.expect(ClientServicesException.class);
 		thrown.expectMessage("Cannot open the file");
@@ -274,8 +269,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 	@Test
 	public final void testUpdateProfilePhotoForInvalidFilePath()
 			throws Exception {
-		Profile profile = profileService.getProfile(properties
-				.getProperty("email1"));
+		Profile profile = profileService.getProfile(TestEnvironment.getCurrentUserEmail());
 		File file = new File("image1.jpg");
 		profile.setPhotoLocation(file.getAbsolutePath());
 		thrown.expect(ClientServicesException.class);
@@ -285,7 +279,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 	
 	@Test
 	public final void testProfileSerialization() throws Exception {
-		Profile profile = profileService.getProfile(properties.getProperty("email1"));
+		Profile profile = profileService.getProfile(TestEnvironment.getCurrentUserEmail());
 		new SerializationUtil() {
 			@Override
 			public void validateSerializable() {
@@ -294,7 +288,7 @@ public class ProfileServiceTest extends BaseUnitTest {
 					ObjectInputStream ois = new ObjectInputStream(new FileInputStream(serFile));
 					profileObject = (Profile) ois.readObject();
 				} catch (Exception e) {}
-				assertEquals(properties.getProperty("email1"), profileObject.getEmail());
+				assertEquals(TestEnvironment.getCurrentUserEmail(), profileObject.getEmail());
 			}
 		}.isSerializable(profile);
 	}

@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<%@page import="com.ibm.sbt.services.client.connections.activities.Activity"%>
+<%@page import="com.ibm.sbt.services.client.connections.activities.ActivityNode"%>
 <%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList"%>
 <%@page import="com.ibm.sbt.services.client.connections.activities.ActivityService"%>
 <%@page import="java.io.PrintWriter"%>
@@ -37,9 +37,9 @@
 	<%
 	try {		
 		ActivityService activityService = new ActivityService();
-		EntityList<Activity> activities = activityService.getToDoActivities();
+		EntityList<ActivityNode> activities = activityService.getToDos();
 		if(activities != null && ! activities.isEmpty()) {
-			for (Activity activity : activities) {
+			for (ActivityNode activity : activities) {
 				out.println(activity.getTitle());
 			}
 		} else {

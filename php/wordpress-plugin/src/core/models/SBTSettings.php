@@ -212,13 +212,15 @@ class SBTSettings {
 	 * @return	True if user is required to log into Wordpress; false if not.
 	 */
 	public function requireSignOn($endpointName = "connections") {
-		$endpoints = get_option(ENDPOINTS);
-		foreach ($endpoints as $endpoint) {
-			$decodedEndpoint = (array)json_decode($endpoint, true);
-			if ($decodedEndpoint['name'] == $endpointName) {
-				return $decodedEndpoint['require_sign_on'] == 'require_sign_on';
-			}
-		}
+		// Uncomment to enable anonymous and non-anonymous access
+// 		$endpoints = get_option(ENDPOINTS);
+// 		foreach ($endpoints as $endpoint) {
+// 			$decodedEndpoint = (array)json_decode($endpoint, true);
+// 			if ($decodedEndpoint['name'] == $endpointName) {
+// 				return $decodedEndpoint['require_sign_on'] == 'require_sign_on';
+// 			}
+// 		}
+		return true;
 	}
 	
 	/**

@@ -98,3 +98,10 @@ $lang['logout_from_endpoint']	= 'Logout from Endpoint';
 $lang['endpoint']				= 'Endpoint';
 $lang['must_login']				= 'This widget uses single-sign on. Please log into Wordpress.';
 $lang['require_sign_on']		= 'Users must be logged into Wordpress to use this entpoint';
+$lang['open_files']				= 'Open Files';
+$lang['upload_file']			= 'Upload File';
+$lang['public']					= 'Public';
+$lang['private']				= 'Private';
+$lang['close']					= 'Close';
+$lang['successful_upload']		= 'Your file has been uploaded';
+

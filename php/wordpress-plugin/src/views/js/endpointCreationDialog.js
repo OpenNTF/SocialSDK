@@ -146,7 +146,7 @@ function ibm_sbt_reset() {
 	document.getElementById("new_endpoint_name").disabled = false;
 	document.getElementById("tr_new_consumer_secret").style.display = 'none';
 	document.getElementById("tr_new_consumer_key").style.display = 'none';
-	document.getElementById("new_require_sign_on").checked = true;
+	//document.getElementById("new_require_sign_on").checked = true;
 	document.getElementById("tr_new_callback_url").style.display = 'none';
 	document.getElementById("tr_new_authorization_url").style.display = 'none';
 	document.getElementById("tr_new_access_token_url").style.display = 'none';
@@ -287,7 +287,7 @@ function ibm_sbt_save_new_endpoint() {
 	document.getElementById("authentication_method").value = document.getElementById("new_authentication_method").value;
 	document.getElementById("server_type").value = document.getElementById("new_server_type").value;
 	document.getElementById("allow_client_access").checked = document.getElementById("new_allow_client_access").checked;
-	document.getElementById("require_sign_on").checked = document.getElementById("new_require_sign_on").checked;
+	//document.getElementById("require_sign_on").checked = document.getElementById("new_require_sign_on").checked;
 	document.getElementById("submit").click();
 	$("#dialog").dialog('close');
 }

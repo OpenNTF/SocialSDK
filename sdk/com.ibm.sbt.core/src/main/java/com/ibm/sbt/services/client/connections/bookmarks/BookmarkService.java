@@ -46,7 +46,7 @@ public class BookmarkService extends ConnectionsService {
 	 * Construct an instance of the BookmarkService using the default "connections" endpoint.
 	 */
 	public BookmarkService() {
-		super(DEFAULT_ENDPOINT_NAME);
+		this(DEFAULT_ENDPOINT_NAME);
 	}
 
 	/**
@@ -56,7 +56,6 @@ public class BookmarkService extends ConnectionsService {
 	 */
 	public BookmarkService(String endpointName) {
 		super(endpointName);
-		serviceMappingKeys = new String[]{"dogear"};
 	}
 
 	/**
@@ -66,6 +65,10 @@ public class BookmarkService extends ConnectionsService {
 	 */
 	public BookmarkService(Endpoint endpoint) {
 		super(endpoint);
+	}
+
+	@Override
+	protected void initServiceMappingKeys(){
 		serviceMappingKeys = new String[]{"dogear"};
 	}
 

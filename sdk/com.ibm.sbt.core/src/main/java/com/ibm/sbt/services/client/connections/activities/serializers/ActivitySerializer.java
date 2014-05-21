@@ -143,7 +143,7 @@ public class ActivitySerializer extends AtomEntitySerializer<Activity> {
 	
 	protected Element completedCategory() {
 		return entity.isCompleted() ? element(CATEGORY, 
-				attribute(SCHEME, Namespace.TYPE.getUrl()), 
+				attribute(SCHEME, Namespace.FLAGS.getUrl()), 
 				attribute(TERM, COMPLETED)) : null;
 	}
 	

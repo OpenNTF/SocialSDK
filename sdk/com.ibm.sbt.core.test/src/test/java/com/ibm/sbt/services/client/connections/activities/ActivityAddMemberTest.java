@@ -33,6 +33,8 @@ public class ActivityAddMemberTest extends BaseActivityServiceTest {
 		String memberId = getMemberId();
 		
 		Activity activity = createActivity();
+		this.activity = null;
+
 		Member member = activity.addMember("person", memberId, "member");
 		Assert.assertNotNull(member);
 		

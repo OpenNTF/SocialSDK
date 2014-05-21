@@ -472,6 +472,20 @@ public class Activity extends NodeEntity {
 	}
 
 	/**
+	 * Delete an activity member.
+	 * 
+	 * @param member
+	 * @return
+	 */
+	public String deleteMember(String memberId) throws ClientServicesException {
+		ActivityService activityService = getActivityService();
+		if (activityService == null) {
+			throw new ClientServicesException(null, "No activity service associated with this activity.");
+		}
+		return activityService.deleteMember(getActivityUuid(), memberId, null);
+	}
+
+	/**
 	 * Set the priority for this activity.
 	 * 
 	 * @throws ClientServicesException

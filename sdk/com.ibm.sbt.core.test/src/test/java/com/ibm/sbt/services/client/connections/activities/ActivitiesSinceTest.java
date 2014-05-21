@@ -50,6 +50,8 @@ public class ActivitiesSinceTest extends BaseActivityServiceTest {
 	
 	@Test
 	public void testActivitiesUntil() throws ClientServicesException, XMLException {
+		if (!isV5OrHigher()) return;
+
 		List<Activity> createdActivities = createActivities("Activities", 5, 1000);
 		
 		Activity activity = createdActivities.get(2);
@@ -65,6 +67,8 @@ public class ActivitiesSinceTest extends BaseActivityServiceTest {
 	
 	@Test
 	public void testActivitiesSinceUntil() throws ClientServicesException, XMLException {
+		if (!isV5OrHigher()) return;
+		
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("ps", "200");
 		EntityList<Activity> activities = activityService.getMyActivities(params);

@@ -47,7 +47,7 @@ import com.ibm.sbt.services.client.connections.activities.PublicActivityTest;
  */
 @RunWith(Suite.class)
 @SuiteClasses({ 
-	ActivitiesSinceTest.class,
+	//ActivitiesSinceTest.class,
 	ActivityAddMemberTest.class,
 	ActivityUrlsTest.class,
 	ActivityCrudrTest.class,

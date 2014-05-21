@@ -32,6 +32,7 @@ import static com.ibm.sbt.services.client.base.CommonConstants.TEXT_PLAIN;
 import static com.ibm.sbt.services.client.base.CommonConstants.URL_PARAM;
 import static com.ibm.sbt.services.client.base.CommonConstants.UTF8;
 import static com.ibm.sbt.services.client.base.CommonConstants.XML;
+import static com.ibm.sbt.services.client.base.CommonConstants.HTML;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -816,6 +817,9 @@ public abstract class ClientService {
 				}
 				if (ct.indexOf(XML) >= 0) {
 					return FORMAT_XML;
+				}
+				if (ct.indexOf(HTML) >= 0) {
+					return FORMAT_TEXT;
 				}
 			}
 		}

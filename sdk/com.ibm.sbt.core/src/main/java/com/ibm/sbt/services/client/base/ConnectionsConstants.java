@@ -32,6 +32,7 @@ public final class ConnectionsConstants {
 	/**
 	 * Reference  versions of Connections
 	 */
+	public static final Version v5_0 = new Version(5,0);
 	public static final Version v4_5 = new Version(4,5);
 	public static final Version v4_0 = new Version(4,0);
 

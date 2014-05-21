@@ -23,6 +23,7 @@ import java.util.Map;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
+import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
@@ -33,6 +34,7 @@ import com.ibm.sbt.services.client.base.CategoryFeedHandler;
 import com.ibm.sbt.services.client.base.CommonConstants.HTTPCode;
 import com.ibm.sbt.services.client.base.ConnectionsService;
 import com.ibm.sbt.services.client.base.IFeedHandler;
+import com.ibm.sbt.services.client.base.Version;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.connections.activities.serializers.ActivityNodeSerializer;
 import com.ibm.sbt.services.client.connections.activities.serializers.ActivitySerializer;
@@ -697,7 +699,8 @@ public class ActivityService extends ConnectionsService {
 	 * @return
 	 */
 	public Member getMember(String activityUuid, String memberId, Map<String, String> parameters) throws ClientServicesException {
-		String requestUrl = ActivityUrls.ACTIVITY_MEMBER.format(this, ActivityUrls.activityPart(activityUuid), ActivityUrls.memberPart(memberId));
+		String requestUrl = ActivityUrls.ACTIVITY_MEMBER.format(this, 
+				ActivityUrls.activityPart(activityUuid), ActivityUrls.memberPart(memberId));
 		return getMemberEntity(requestUrl, parameters);
 	}
 	
@@ -709,7 +712,7 @@ public class ActivityService extends ConnectionsService {
 	 * @return
 	 */
 	public Member updateMember(Activity activity, Member member) throws ClientServicesException {
-		return addMember(activity, member, null);
+		return updateMember(activity, member, null);
 	}
 	
 	/**
@@ -720,7 +723,7 @@ public class ActivityService extends ConnectionsService {
 	 * @return
 	 */
 	public Member updateMember(String activityUuid, Member member) throws ClientServicesException {
-		return addMember(activityUuid, member, null);
+		return updateMember(activityUuid, member, null);
 	}
 	
 	/**
@@ -732,7 +735,7 @@ public class ActivityService extends ConnectionsService {
 	 * @return
 	 */
 	public Member updateMember(Activity activity, Member member, Map<String, String> parameters) throws ClientServicesException {
-		return addMember(activity.getActivityUuid(), member, parameters);
+		return updateMember(activity.getActivityUuid(), member, parameters);
 	}
 	
 	/**
@@ -1057,9 +1060,13 @@ public class ActivityService extends ConnectionsService {
 	
 	protected Member updateMemberEntityData(Member member, Response response) {
 		// Response does not contain a valid member entry
-		Node node = (Node)response.getData();
-		XPathExpression xpath = (node instanceof Document) ? (XPathExpression)AtomXPath.singleEntry.getPath() : null;
-		member.setData(node, nameSpaceCtx, xpath);
+		Node node = null;
+		Object data = response.getData();
+		if (data instanceof Node) {
+			node = (Node)data;
+			XPathExpression xpath = (node instanceof Document) ? (XPathExpression)AtomXPath.singleEntry.getPath() : null;
+			member.setData(node, nameSpaceCtx, xpath);
+		}
 		member.setService(this);
 		return member;
 	}
@@ -1136,4 +1143,14 @@ public class ActivityService extends ConnectionsService {
 		else return parameters;
 	}
 	
+	protected boolean isV5OrHigher() {
+		Endpoint endpoint = getEndpoint();
+		String apiVersion = endpoint.getApiVersion();
+		if (StringUtil.isNotEmpty(apiVersion)) {
+			Version version = Version.parse(apiVersion);
+			return (version.getMajor() >= 5);
+		}
+		return false;
+	}
+		
 }

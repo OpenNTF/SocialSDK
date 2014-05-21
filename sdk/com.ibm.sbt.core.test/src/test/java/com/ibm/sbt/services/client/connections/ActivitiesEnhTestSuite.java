@@ -21,6 +21,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
 import com.ibm.sbt.services.client.connections.activities.ActivityDescendantsSinceTest;
 import com.ibm.sbt.services.client.connections.activities.ActivityDescendantsSortByTest;
+import com.ibm.sbt.services.client.connections.activities.ActivityFeedEnhTest;
 import com.ibm.sbt.services.client.connections.activities.ActivityNodeChildrenSinceTest;
 
 /**
@@ -31,7 +32,8 @@ import com.ibm.sbt.services.client.connections.activities.ActivityNodeChildrenSi
 @SuiteClasses({ 
 	ActivityDescendantsSinceTest.class,
 	ActivityNodeChildrenSinceTest.class,
-	ActivityDescendantsSortByTest.class
+	ActivityDescendantsSortByTest.class,
+	ActivityFeedEnhTest.class
 })
 public class ActivitiesEnhTestSuite {
 }

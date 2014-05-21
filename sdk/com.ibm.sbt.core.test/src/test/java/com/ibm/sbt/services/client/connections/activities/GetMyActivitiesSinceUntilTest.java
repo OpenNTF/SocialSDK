@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.ibm.commons.xml.XMLException;
@@ -68,8 +69,11 @@ public class GetMyActivitiesSinceUntilTest extends BaseActivityServiceTest {
 		Assert.assertTrue(activities.size() > 2);
 	}
 	
+	@Ignore
 	@Test
 	public void testGetMyActivitiesSinceUntil() throws ClientServicesException, XMLException {
+		if (!isV5OrHigher()) return;
+
 		List<Activity> createdActivities = createActivities("MyActivities", 5, 1000);
 		
 		Activity sinceActivity = createdActivities.get(1);

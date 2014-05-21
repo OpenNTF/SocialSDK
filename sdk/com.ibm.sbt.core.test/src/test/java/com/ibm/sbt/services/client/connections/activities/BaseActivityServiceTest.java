@@ -32,6 +32,9 @@ import com.ibm.commons.xml.DOMUtil;
 import com.ibm.commons.xml.XMLException;
 import com.ibm.sbt.services.BaseUnitTest;
 import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.services.client.base.Version;
+import com.ibm.sbt.services.client.base.datahandlers.EntityList;
+import com.ibm.sbt.services.client.connections.common.Member;
 import com.ibm.sbt.services.endpoints.BasicEndpoint;
 import com.ibm.sbt.test.lib.TestEnvironment;
 
@@ -73,6 +76,11 @@ public class BaseActivityServiceTest extends BaseUnitTest {
 			} catch (Exception e) {
 			}
 		}
+	}
+	
+	protected boolean isV5OrHigher() {
+		Version version = activityService.getApiVersion();
+		return version.isAtLeast(5);
 	}
 	
     /**
@@ -311,5 +319,25 @@ public class BaseActivityServiceTest extends BaseUnitTest {
 
 		return touchedNodes;
 	}
+	
+	protected Member getMember(Activity activity, String userid) throws ClientServicesException, XMLException {
+		EntityList<Member> members = activity.getMembers();
+		for (Member member : members) {
+			if (userid.equals(member.getContributor().getUserid())) {
+				return member;
+			}
+		}
+		return null;
+	}
+
+	protected boolean containsActivity(EntityList<Activity> activities, Activity activity) throws ClientServicesException, XMLException {
+		for (Activity nextActivity : activities) {
+			if (activity.getId().equals(nextActivity.getId())) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
     
 }

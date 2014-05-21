@@ -82,6 +82,7 @@ public final class CommonConstants {
 	 */
 	public static final String	JSON		= "json";
 	public static final String	XML			= "xml";
+	public static final String	HTML		= "html";
 	
 	/**
 	 * Boolean value names

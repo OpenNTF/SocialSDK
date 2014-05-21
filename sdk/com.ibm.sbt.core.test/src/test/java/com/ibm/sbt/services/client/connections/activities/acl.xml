@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app"
+	xmlns:snx="http://www.ibm.com/xmlns/prod/sn">
+	<generator uri="http://www.ibm.com/xmlns/prod/sn" version="4.5.0.0">IBM
+		Connections - Activities</generator>
+	<id>urn:lsid:ibm.com:oa:313a32a7-66af-4c4f-8f81-1b75bd2dfb94</id>
+	<title type="text">Test</title>
+	<snx:totalMembers>2</snx:totalMembers>
+	<author>
+		<name>Frank Adams</name>
+		<email>fadams@renovations.com</email>
+		<snx:userid>6B54D23A-0A70-C7A4-8525-7CA50082A393</snx:userid>
+		<snx:role>owner</snx:role>
+		<snx:userState>active</snx:userState>
+	</author>
+	<updated>2014-05-19T18:30:49Z</updated>
+	<snx:accessLevel>private</snx:accessLevel>
+	<link rel="self" type="application/atom+xml"
+		href="https://sdkdev.swg.usma.ibm.com:444/activities/service/atom2/acl?activityUuid=313a32a7-66af-4c4f-8f81-1b75bd2dfb94" />
+	<entry>
+		<id>https://sdkdev.swg.usma.ibm.com:444/activities/service/atom2/acl?activityUuid=313a32a7-66af-4c4f-8f81-1b75bd2dfb94&amp;memberid=55a48ad3-3cf8-48a4-94c4-028e9dfa1364
+		</id>
+		<contributor>
+			<name>Bill Jordan</name>
+			<email>bjordan@renovations.com</email>
+			<snx:userid>A47A4476-259B-82B8-8525-7CA5008277B8</snx:userid>
+			<snx:role>member</snx:role>
+			<snx:userState>active</snx:userState>
+		</contributor>
+		<title>Bill Jordan</title>
+		<updated>2014-05-19T15:44:57Z</updated>
+		<summary type="text">Member profile for Bill Jordan</summary>
+		<link rel="edit" type="application/atom+xml"
+			href="https://sdkdev.swg.usma.ibm.com:444/activities/service/atom2/acl?activityUuid=313a32a7-66af-4c4f-8f81-1b75bd2dfb94&amp;memberid=55a48ad3-3cf8-48a4-94c4-028e9dfa1364" />
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/type"
+			term="person" />
+		<snx:role component="http://www.ibm.com/xmlns/prod/sn/activities">member</snx:role>
+		<snx:permissions>none, view_activity, edit_activity_tags,
+			edit_statements, delete_statements, add_members, delete_members,
+			create_entries, edit_personal_entries, delete_personal_entries,
+			edit_personal_entry_tags, edit_all_entry_tags, view_members
+		</snx:permissions>
+	</entry>
+	<entry>
+		<id>https://sdkdev.swg.usma.ibm.com:444/activities/service/atom2/acl?activityUuid=313a32a7-66af-4c4f-8f81-1b75bd2dfb94&amp;memberid=39fcc54a-ca4c-44b1-a1a8-6628433765db
+		</id>
+		<contributor>
+			<name>Frank Adams</name>
+			<email>fadams@renovations.com</email>
+			<snx:userid>6B54D23A-0A70-C7A4-8525-7CA50082A393</snx:userid>
+			<snx:role>owner</snx:role>
+			<snx:userState>active</snx:userState>
+		</contributor>
+		<title>Frank Adams</title>
+		<updated>2014-05-19T15:44:29Z</updated>
+		<summary type="text">Member profile for Frank Adams</summary>
+		<link rel="edit" type="application/atom+xml"
+			href="https://sdkdev.swg.usma.ibm.com:444/activities/service/atom2/acl?activityUuid=313a32a7-66af-4c4f-8f81-1b75bd2dfb94&amp;memberid=39fcc54a-ca4c-44b1-a1a8-6628433765db" />
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/type"
+			term="person" />
+		<snx:role component="http://www.ibm.com/xmlns/prod/sn/activities">owner</snx:role>
+		<snx:permissions>none, create_activity, view_activity, edit_activity,
+			delete_activity, activity_owner, edit_activity_tags, design_activity,
+			edit_statements, delete_statements, add_members, delete_members,
+			create_entries, edit_personal_entries, edit_all_entries,
+			delete_personal_entries, delete_all_entries,
+			edit_personal_entry_tags, edit_all_entry_tags, view_members
+		</snx:permissions>
+	</entry>
+	<snx:showAddButton>true</snx:showAddButton>
+</feed> 

@@ -41,7 +41,7 @@ public class ActivityFeedTest extends BaseActivityServiceTest {
 		activityService.deleteActivity(created);
 	}
 
-	//@Test
+	@Test
 	public void testGetCompletedActivities() throws ClientServicesException {
 		Activity activity = createActivity();
 		activity.setCompleted(true);

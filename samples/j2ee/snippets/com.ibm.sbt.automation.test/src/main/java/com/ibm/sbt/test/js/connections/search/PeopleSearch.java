@@ -60,7 +60,10 @@ public class PeopleSearch extends BaseAuthServiceTest {
     public String getAuthenticatedMatch() {
         return "searchBtn";
     }
-
+    @Override
+    protected boolean isEnvironmentValid() {
+        return super.isEnvironmentValid() && !getTestEnvironment().isSmartCloud();
+    }
     // Internals
 
     private PeopleSearchPage launchSnippet() {

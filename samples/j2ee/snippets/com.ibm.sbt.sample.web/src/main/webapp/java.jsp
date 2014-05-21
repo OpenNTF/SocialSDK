@@ -25,6 +25,7 @@
     </style>
     <link href="/sbt.bootstrap211/bootstrap/css/bootstrap-responsive.css" rel="stylesheet"></link>
     <script src="/sbt.dojo180/dojo/dojo.js"></script>
+    <% if(request.getParameter("showSmartCloudNavbar")!=null) Context.get().setProperty("showSmartCloudNavbar", request.getParameter("showSmartCloudNavbar")); %>
     <%=Util.getHomeTheme(request)%>
   </head>
 

@@ -65,7 +65,9 @@ public class CreateInvite extends BaseCommunitiesTest {
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         JsonJavaObject json = previewPage.getJson();
         Assert.assertTrue(400 == json.getAsInt("code") || 500 == json.getAsInt("code"));
-        Assert.assertEquals("Error generating atom document.", json.getString("message"));
+        Assert.assertNotNull(json.getString("message"));
+        Assert.assertTrue(json.getString("message").equals("Error generating atom document.") || 
+                json.getString("message").equals("Unknown user."));
     }
 
     @Test
@@ -76,7 +78,8 @@ public class CreateInvite extends BaseCommunitiesTest {
         JavaScriptPreviewPage previewPage = executeSnippet(SNIPPET_ID);
         JsonJavaObject json = previewPage.getJson();
         Assert.assertTrue(400 == json.getAsInt("code") || 500 == json.getAsInt("code"));
-        Assert.assertEquals("Error generating atom document.", json.getString("message"));
+        Assert.assertTrue(json.getString("message").equals("Error generating atom document.") || 
+                json.getString("message").equals("Unknown user."));
     }
 
     @Test

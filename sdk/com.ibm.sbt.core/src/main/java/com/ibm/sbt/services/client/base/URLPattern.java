@@ -13,6 +13,11 @@
  */
 package com.ibm.sbt.services.client.base;
 
+import static com.ibm.sbt.services.client.base.CommonConstants.DOUBLE_SLASH;
+import static com.ibm.sbt.services.client.base.CommonConstants.SLASH;
+import static com.ibm.sbt.services.client.base.CommonConstants.CH_LEFT_BRACE;
+import static com.ibm.sbt.services.client.base.CommonConstants.CH_RIGHT_BRACE;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -48,7 +53,16 @@ public class URLPattern {
 		for (NamedUrlPart namedPart : namedParts) {
 			url = StringUtil.replace(url, "{" + namedPart.getName() + "}", namedPart.getValue());
 		}
-		return url;
+		int indexStart = indexPlaceholder(url);
+		if (indexStart >= 0){
+			int indexEnd = url.indexOf(CH_RIGHT_BRACE, indexStart);
+			String partName = url.substring(indexStart + 1, indexEnd-1);
+			throw new IllegalArgumentException("Missing parameter: "+partName);
+		}
+		return url.replaceAll(DOUBLE_SLASH, SLASH);
 	}
-
+	
+	protected int indexPlaceholder(String url){
+		return url.indexOf(CH_LEFT_BRACE);
+	}
 }

@@ -2,10 +2,11 @@
 
 <?php 
 // Ensure that element IDs are unique
-$timestamp = time();
+$milliseconds = microtime(true) * 1000; 
+$timestamp = round($milliseconds);
 
 global $CFG;
-require_once $CFG->dirroot . '/blocks/ibmsbt/user_widgets/templates/ibm-sbt-communities-grid-row.php';
+require $CFG->dirroot . '/blocks/ibmsbt/user_widgets/templates/ibm-sbt-communities-grid-row.php';
 ?>
 <div id="<?php echo $this->config->elementID;?>"></div>
 <script type="text/javascript">

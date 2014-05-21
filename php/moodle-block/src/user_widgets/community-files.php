@@ -2,10 +2,11 @@
 
 <?php 
 // Ensure that element IDs are unique
-$timestamp = time();
+$milliseconds = microtime(true) * 1000; 
+$timestamp = round($milliseconds);
 
 global $CFG;
-require_once $CFG->dirroot . '/blocks/ibmsbt/user_widgets/templates/ibm-sbt-community-files.php';
+require $CFG->dirroot . '/blocks/ibmsbt/user_widgets/templates/ibm-sbt-community-files.php';
 ?>
 
 <script type="text/javascript">
@@ -17,7 +18,7 @@ function onCommunityChange<?php echo $timestamp; ?>() {
 		var currentCommunity = communityList.options[communityList.selectedIndex].value;
 
 		var domNode = dom.byId("fileRow-<?php echo $timestamp; ?>");
-		console.log(domNode);
+
 		var FileRow = domNode.text || domNode.textContent;
 	    domNode = dom.byId("pagingHeader-<?php echo $timestamp; ?>");
 	    var PagingHeader = domNode.text || domNode.textContent;
@@ -35,7 +36,9 @@ function onCommunityChange<?php echo $timestamp; ?>() {
 	    });
 		dom.byId("ibm-sbt-community-files-list-<?php echo $timestamp; ?>").innerHTML = "";
         dom.byId("ibm-sbt-community-files-list-<?php echo $timestamp; ?>").appendChild(grid<?php echo $timestamp; ?>.domNode);
-        
+
+        grid<?php echo $timestamp; ?>.renderer.tableClass = "table";
+	    grid<?php echo $timestamp; ?>.renderer.template = FileRow;
         grid<?php echo $timestamp; ?>.update();
 	});
 }
@@ -93,9 +96,7 @@ function clearError<?php echo $timestamp; ?>(dom) {
 }
 
 function loadCommunity<?php echo $timestamp; ?>(communityService, dom) {
-	communityService.getMyCommunities({
-		ps : 1
-	}).then(function(communities) {
+	communityService.getMyCommunities({ps: 10000}).then(function(communities) {
 		var communityList = dom.byId("ibm-sbt-communities-<?php echo $timestamp; ?>");
 		for (var i = 0; i < communities.length; i++) {
 			var opt = document.createElement('option');

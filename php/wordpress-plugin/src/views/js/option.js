@@ -62,7 +62,7 @@ function ibm_sbt_edit_selected_endpoint() {
 	document.getElementById("new_server_type").value = document.getElementById("server_type").value;
 	document.getElementById("new_endpoint_version").value = document.getElementById("endpoint_version").value;
 	document.getElementById("new_allow_client_access").checked = document.getElementById("allow_client_access").checked;
-	document.getElementById("new_require_sign_on").checked = document.getElementById("require_sign_on").checked;
+	//document.getElementById("new_require_sign_on").checked = document.getElementById("require_sign_on").checked;
 	
 	ibm_sbt_new_server_type_change();
 	ibm_sbt_change_new_basic_auth_method();

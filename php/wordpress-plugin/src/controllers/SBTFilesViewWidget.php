@@ -64,12 +64,6 @@ class SBTFilesViewWidget extends SBTBaseGridWidget {
 				<option <?php echo ($type == 'myFiles' ? 'selected="selected"' : ''); ?> value="myFiles"><?php echo $GLOBALS[LANG]['my-files']?></option>
 				<option <?php echo ($type == 'publicFiles' ? 'selected="selected"' : ''); ?> value="publicFiles"><?php echo $GLOBALS[LANG]['public-files']?></option>
 				<option <?php echo ($type == 'myPinnedFiles' ? 'selected="selected"' : ''); ?> value="myPinnedFiles"><?php echo $GLOBALS[LANG]['pinned-files']?></option>
-				<option <?php echo ($type == 'myFolders' ? 'selected="selected"' : ''); ?> value="myFolders"><?php echo $GLOBALS[LANG]['my-folders']?></option>
-				<option <?php echo ($type == 'publicFolders' ? 'selected="selected"' : ''); ?> value="publicFolders"><?php echo $GLOBALS[LANG]['public-folders']?></option>
-				<option <?php echo ($type == 'myPinnedFolders' ? 'selected="selected"' : ''); ?> value="myPinnedFolders"><?php echo $GLOBALS[LANG]['my-pinned-folders']?></option>
-				<option <?php echo ($type == 'activeFolders' ? 'selected="selected"' : ''); ?> value="activeFolders"><?php echo $GLOBALS[LANG]['active-folders']?></option>
-				<option <?php echo ($type == 'fileShares' ? 'selected="selected"' : ''); ?> value="fileShares"><?php echo $GLOBALS[LANG]['file-shares']?></option>
-				<option <?php echo ($type == 'communityFiles' ? 'selected="selected"' : ''); ?> value="communityFiles"><?php echo $GLOBALS[LANG]['community-files']?></option>
 			</select>
 		</p>
 		<?php 

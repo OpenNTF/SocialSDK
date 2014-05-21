@@ -59,8 +59,7 @@ class SBTBaseWidget extends WP_Widget {
 			$this->endpoint = "connections";
 		}
 		
-		if (!$this->_isUserLoggedIn() && $settings->requireSignOn($this->endpoint)) {
-			
+		if (!$this->_isUserLoggedIn()) { // Add && $settings->requireSignOn($this->endpoint) to enable both anon and non-anon access
 			echo '<div class="widget-area" style="width: 100%;"><aside class="widget widget_recent_entries"><h3 class="widget-title">' . $this->widget_name . '</h3>';
 			echo '' . $GLOBALS[LANG]['must_login'] . '</aside></div>';
 			return;
@@ -68,7 +67,6 @@ class SBTBaseWidget extends WP_Widget {
 		
  		// If tokens exist, make sure that they are valid. Otherwise clear the store and force the
  		// user to re-log
-
  		if (($settings->getAuthenticationMethod($this->endpoint) == 'oauth1' || 
  				$settings->getAuthenticationMethod($this->endpoint) == 'oauth2') 
  				&& $store->getOAuthAccessToken($this->endpoint) != null) {
@@ -179,6 +177,12 @@ class SBTBaseWidget extends WP_Widget {
 			$instance['ibm-sbtk-element-id'] = (!empty($new_instance['ibm-sbtk-element-id'])) ? strip_tags($new_instance['ibm-sbtk-element-id'] ) : '';
 			$instance['ibm-sbtk-template'] = (!empty($new_instance['ibm-sbtk-template'])) ? strip_tags($new_instance['ibm-sbtk-template'] ) : '';
 			$instance['ibm-sbtk-endpoint'] = (!empty($new_instance['ibm-sbtk-endpoint'])) ? strip_tags($new_instance['ibm-sbtk-endpoint'] ) : '';
+			
+			// Delete user sessions
+			$sessions = get_option(USER_SESSIONS);
+			foreach ($sessions as $session) {
+				delete_option($session['id']);
+			}
 			return $instance;
 		}
 		

@@ -19,6 +19,7 @@ import java.util.List;
 
 import org.openqa.selenium.WebElement;
 
+import com.ibm.sbt.automation.core.environment.TestEnvironment;
 import com.ibm.sbt.automation.core.test.pageobjects.ResultPage;
 import com.ibm.sbt.automation.core.test.pageobjects.VCardResultPage;
 
@@ -84,8 +85,8 @@ public class BaseVCardTest extends BaseTest{
 	 */
 	protected VCardResultPage launchVCard(String snippetId) {
 		createContext();
-		addSnippetParam("sample.id1", environment.getCurrentUserUuid());
-		addSnippetParam("sample.displayName1", environment.getCurrentUserDisplayName()); 
+		addSnippetParam("sample.id1", TestEnvironment.getCurrentUserUuid());
+		addSnippetParam("sample.displayName1", TestEnvironment.getCurrentUserDisplayName()); 
         ResultPage resultPage = super.launchSnippet(snippetId, authType);
         return wrapResultPage(resultPage);
 	}

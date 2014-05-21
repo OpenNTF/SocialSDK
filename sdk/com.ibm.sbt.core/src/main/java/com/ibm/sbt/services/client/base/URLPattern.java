@@ -13,6 +13,13 @@
  */
 package com.ibm.sbt.services.client.base;
 
+import static com.ibm.sbt.services.client.base.CommonConstants.CH_LEFT_BRACE;
+import static com.ibm.sbt.services.client.base.CommonConstants.CH_RIGHT_BRACE;
+import static com.ibm.sbt.services.client.base.CommonConstants.DOUBLE_SLASH;
+import static com.ibm.sbt.services.client.base.CommonConstants.LEFT_BRACE;
+import static com.ibm.sbt.services.client.base.CommonConstants.RIGHT_BRACE;
+import static com.ibm.sbt.services.client.base.CommonConstants.SLASH;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -46,9 +53,18 @@ public class URLPattern {
 		List<NamedUrlPart> namedParts = Arrays.asList(args);
 		String url = this.urlPattern;
 		for (NamedUrlPart namedPart : namedParts) {
-			url = StringUtil.replace(url, "{" + namedPart.getName() + "}", namedPart.getValue());
+			url = StringUtil.replace(url, LEFT_BRACE + namedPart.getName() + RIGHT_BRACE, namedPart.getValue());
 		}
-		return url;
+		checkNoMissingParameters(url);
+		return url.replaceAll(DOUBLE_SLASH, SLASH);
 	}
-
+	
+	protected void checkNoMissingParameters(String url){
+		int indexStart = url.indexOf(CH_LEFT_BRACE);
+		if (indexStart >= 0){
+			int indexEnd = url.indexOf(CH_RIGHT_BRACE, indexStart);
+			String partName = url.substring(indexStart + 1, indexEnd-1);
+			throw new IllegalArgumentException("Missing parameter: "+partName);
+		}
+	}
 }

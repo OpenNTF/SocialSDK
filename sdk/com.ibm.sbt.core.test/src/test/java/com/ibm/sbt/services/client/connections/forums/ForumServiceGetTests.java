@@ -18,9 +18,6 @@ package com.ibm.sbt.services.client.connections.forums;
 
 import static org.junit.Assert.assertNotNull;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.junit.Test;
 
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;

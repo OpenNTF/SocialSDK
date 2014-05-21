@@ -19,8 +19,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import junit.framework.Assert;
-
+import org.junit.Assert;
 import org.junit.Before;
 
 import com.ibm.sbt.automation.core.test.BaseApiTest;

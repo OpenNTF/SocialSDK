@@ -69,7 +69,7 @@ public class BaseWidgetTest extends BaseTest{
 	 * @return boolean of wether the functions all work or not 
 	 */
 	public boolean checkWidgetBaseClass(String snippetId){
-		resultPage = this.launchSnippet(snippetId, this.authType.AUTO_DETECT);
+		resultPage = this.launchSnippet(snippetId, AuthType.AUTO_DETECT);
 		element = resultPage.getWebElement();
 		
 		boolean attachAndStop = this.checkAttachAndStopEvent();

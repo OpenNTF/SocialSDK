@@ -57,6 +57,10 @@ public class BaseForumServiceTest extends BaseUnitTest {
 		return forum;
 	}
 
+	protected String formatContent(String original){
+		return "\n    " + original +"\n  ";
+	}
+
 	protected Forum createForum() throws Exception {
 		return createForum(newForum());
 	}

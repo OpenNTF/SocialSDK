@@ -76,7 +76,7 @@ public class FileServiceTest extends BaseUnitTest {
         if (fileEntries != null && !fileEntries.isEmpty()) {
             for (File fEntry : fileEntries) {
                 assertEquals(fEntry.getCategory(), "document");
-                assertEquals(fEntry.getAuthor().getName(), "Frank Adams");
+                assertEquals(fEntry.getAuthor().getName(), TestEnvironment.getCurrentUserDisplayName());
             }
         }
     }

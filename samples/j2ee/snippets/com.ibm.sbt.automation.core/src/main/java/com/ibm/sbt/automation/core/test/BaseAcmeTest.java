@@ -98,7 +98,7 @@ public class BaseAcmeTest extends BaseTest{
 	}
 	
 	protected AcmeResultPage launchAcmeAirlines(String snippetId) {
-		this.setAuthType(this.authType.AUTO_DETECT);
+		this.setAuthType(AuthType.AUTO_DETECT);
 		AcmeResultPage resultPage = launchAcmeSample(snippetId);
         return resultPage;
     }

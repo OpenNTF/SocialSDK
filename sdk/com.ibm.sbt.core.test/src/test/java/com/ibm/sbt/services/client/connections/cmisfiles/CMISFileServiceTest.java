@@ -26,6 +26,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import com.ibm.sbt.services.BaseUnitTest;
+import com.ibm.sbt.test.lib.TestEnvironment;
 
 public class CMISFileServiceTest extends BaseUnitTest {
 
@@ -43,7 +44,7 @@ public class CMISFileServiceTest extends BaseUnitTest {
 		List<CMISFile> fileEntries = fileService.getMyFiles();
 		if (fileEntries != null && !fileEntries.isEmpty()) {
 			for (CMISFile fEntry : fileEntries) {
-				assertEquals(fEntry.getAuthor().getName(), "Frank Adams");
+				assertEquals(fEntry.getAuthor().getName(), TestEnvironment.getCurrentUserDisplayName());
 			}
 		}
 	}
@@ -63,7 +64,7 @@ public class CMISFileServiceTest extends BaseUnitTest {
 		List<CMISFile> fileEntries = fileService.getMyCollections();
 		if (fileEntries != null && !fileEntries.isEmpty()) {
 			for (CMISFile fEntry : fileEntries) {
-				assertEquals(fEntry.getAuthor().getName(), "Frank Adams");
+				assertEquals(fEntry.getAuthor().getName(), TestEnvironment.getCurrentUserDisplayName());
 			}
 		}
 	}

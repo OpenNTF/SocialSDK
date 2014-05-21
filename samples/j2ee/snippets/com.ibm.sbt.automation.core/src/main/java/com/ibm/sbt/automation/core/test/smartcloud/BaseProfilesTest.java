@@ -15,7 +15,7 @@
  */
 package com.ibm.sbt.automation.core.test.smartcloud;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.automation.core.test.BaseApiTest;

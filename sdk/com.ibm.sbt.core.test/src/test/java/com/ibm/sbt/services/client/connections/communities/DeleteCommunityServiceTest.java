@@ -19,6 +19,7 @@ package com.ibm.sbt.services.client.connections.communities;
 import org.junit.Test;
 
 import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.services.client.base.Version;
 
 /**
  * Tests for the java connections Communities API a test class provides its own
@@ -34,10 +35,11 @@ public class DeleteCommunityServiceTest extends BaseCommunityServiceTest {
 	public final void testDeleteCommunity() throws Exception {
 		String communityUuid = community.getCommunityUuid();
 		communityService.deleteCommunity(communityUuid);
-		thrown.expect(ClientServicesException.class);
-		thrown.expectMessage("404:Not Found");
-		thrown.expectMessage("Request to url");
-		community = communityService.getCommunity(communityUuid);
-		
+		if (communityService.getApiVersion().lessThan(new Version(5, 0))){
+			thrown.expect(ClientServicesException.class);
+			thrown.expectMessage("404:Not Found");
+			thrown.expectMessage("Request to url");
+			community = communityService.getCommunity(communityUuid);
+		}
 	}
 }

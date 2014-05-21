@@ -999,7 +999,7 @@ public class ProfileService extends ConnectionsService {
 		ColleagueConnection colleagueConnection = new ColleagueConnection(this, null);
 		colleagueConnection.setContent(inviteMsg);
 		ColleagueConnectionSerializer serializer = new ColleagueConnectionSerializer(colleagueConnection);
-		return serializer.acceptInvitePayload();
+		return serializer.sendInvitePayload();
 	}
 
 	protected String extractConnectionIdFromHeaders(Response requestData){

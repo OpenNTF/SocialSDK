@@ -206,7 +206,6 @@ public class ProfileServiceTest extends BaseUnitTest {
 		ColleagueConnection connection = profileService.checkColleague(user1, user2);
 		assertNotNull(connection.getTitle());
 		assertNotNull(connection.getConnectionId());
-		assertEquals(user1, connection.getAuthor().getEmail());
 		assertEquals(user2, connection.getContributorEmail());
 
 		//Fix the Person abstraction is no performing xpath lookups correctly

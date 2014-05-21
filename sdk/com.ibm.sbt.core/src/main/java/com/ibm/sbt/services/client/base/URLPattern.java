@@ -53,16 +53,16 @@ public class URLPattern {
 		for (NamedUrlPart namedPart : namedParts) {
 			url = StringUtil.replace(url, "{" + namedPart.getName() + "}", namedPart.getValue());
 		}
-		int indexStart = indexPlaceholder(url);
+		checkNoMissingParameters(url);
+		return url.replaceAll(DOUBLE_SLASH, SLASH);
+	}
+	
+	protected void checkNoMissingParameters(String url){
+		int indexStart = url.indexOf(CH_LEFT_BRACE);
 		if (indexStart >= 0){
 			int indexEnd = url.indexOf(CH_RIGHT_BRACE, indexStart);
 			String partName = url.substring(indexStart + 1, indexEnd-1);
 			throw new IllegalArgumentException("Missing parameter: "+partName);
 		}
-		return url.replaceAll(DOUBLE_SLASH, SLASH);
-	}
-	
-	protected int indexPlaceholder(String url){
-		return url.indexOf(CH_LEFT_BRACE);
 	}
 }

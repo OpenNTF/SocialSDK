@@ -24,7 +24,7 @@ package com.ibm.sbt.services.client.base;
 public final class CommonConstants {
 
 	/**
-	 * Common String characters
+	 * 
 	 */
 	public static final String 	NL = "\n";
 	public static final String 	EMPTY = "";
@@ -38,6 +38,8 @@ public final class CommonConstants {
 
 	public static final char 	CH_LEFT_BRACE = '{';
 	public static final char 	CH_RIGHT_BRACE = '}';
+	public static final String	LEFT_BRACE = "{";
+	public static final String	RIGHT_BRACE = "}";
 	public static final String 	SLASH = "/";
 	public static final String 	RE_QUESTION_MARK = "\\?";
 	public static final String 	AMPERSAND = "&";

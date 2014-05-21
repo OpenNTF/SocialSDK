@@ -38,6 +38,9 @@ public class SampleFrameworkJava extends BaseSampleFrameworkTest{
 	
 	@Test
 	public void testFramework() {
+	    if (getTestEnvironment().isSmartCloud()) {
+	        addSnippetParam("showSmartCloudNavbar", "true");
+	    }
 	    SampleFrameworkResultPage resultPage = launchSampleFramework();
         assertTrue("Expected the main container to be displayed", checkMainContent(resultPage));
         assertTrue("Expected tree to be displayed", checkTree(resultPage));

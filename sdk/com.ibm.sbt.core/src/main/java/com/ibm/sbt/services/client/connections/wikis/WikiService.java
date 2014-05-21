@@ -56,7 +56,7 @@ public class WikiService extends ConnectionsService {
 	 * Create WikiService instance with default endpoint.
 	 */
 	public WikiService() {
-		super();
+		this(DEFAULT_ENDPOINT_NAME);
 	}
 	
 	/**

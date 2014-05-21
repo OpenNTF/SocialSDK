@@ -16,6 +16,7 @@
 
 package com.ibm.sbt.services.client.connections.profiles;
 
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.v5_0;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -129,8 +130,14 @@ public class ProfileServiceTest extends BaseUnitTest {
 
 	@Test
 	public void testGetColleaguesForInvalidUser() throws Exception {
+		if (profileService.getApiVersion().isAtLeast(v5_0)){
+			thrown.expect(ClientServicesException.class);
+			thrown.expectMessage("400:Bad Request");
+		}
 		EntityList<Profile> profileEntries = profileService.getColleagues("abc@xyz.c");
-		assertEquals(0, profileEntries.size());
+		if (profileService.getApiVersion().lessThan(v5_0)){
+			assertEquals(0, profileEntries.size());
+		}
 	}
 
 	@Test
@@ -147,9 +154,15 @@ public class ProfileServiceTest extends BaseUnitTest {
 	@Test
 	public void testGetColleaguesConnectionEntriesForInvalidUser()
 			throws Exception {
+		if (profileService.getApiVersion().isAtLeast(v5_0)){
+			thrown.expect(ClientServicesException.class);
+			thrown.expectMessage("400:Bad Request");
+		}
 		EntityList<ColleagueConnection> connectionEntries = profileService
 				.getColleagueConnections("abc@xyz.c");
-		assertEquals(0, connectionEntries.size());
+		if (profileService.getApiVersion().lessThan(v5_0)){
+			assertEquals(0, connectionEntries.size());
+		}
 	}
 
 	@Test

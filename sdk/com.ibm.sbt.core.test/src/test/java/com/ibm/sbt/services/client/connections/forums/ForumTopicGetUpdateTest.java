@@ -16,6 +16,7 @@
 
 package com.ibm.sbt.services.client.connections.forums;
 
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.v5_0;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.After;
@@ -38,7 +39,12 @@ public class ForumTopicGetUpdateTest extends BaseForumServiceTest {
 		ForumTopic topicGot = forumService.getForumTopic(topic.getTopicUuid());
 
 		assertEquals(unRandomize(topic.getTitle()), unRandomize(topicGot.getTitle()));
-		assertEquals(unRandomize(topic.getContent()), unRandomize(topicGot.getContent()));
+
+		if (forumService.getApiVersion().isAtLeast(v5_0)) {
+			assertEquals(unRandomize(formatContent(topic.getContent())), unRandomize(topicGot.getContent()));
+		} else {
+			assertEquals(unRandomize(topic.getContent()), unRandomize(topicGot.getContent()));
+		}
 	}
 
 	@Test

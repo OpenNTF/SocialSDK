@@ -178,15 +178,15 @@ public class Version implements Serializable, Comparable<Version> {
 	 * @return
 	 */
 	public boolean isAtLeast(int _major, int _minor, int _subversion) {
-		if (this.major < _major) {
+		if (this.major > _major) {
 			return true;
 		}
 		if (this.major == _major) {
-			if (this.minor < _minor) {
+			if (this.minor > _minor) {
 				return true;
 			}
 			if (this.minor == _minor) {
-				if (this.subversion <= _subversion) {
+				if (this.subversion >= _subversion) {
 					return true;
 				}
 			}

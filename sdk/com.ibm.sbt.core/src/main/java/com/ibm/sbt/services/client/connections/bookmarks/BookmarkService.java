@@ -46,7 +46,7 @@ public class BookmarkService extends ConnectionsService {
 	 * Construct an instance of the BookmarkService using the default "connections" endpoint.
 	 */
 	public BookmarkService() {
-		super(DEFAULT_ENDPOINT_NAME);
+		this(DEFAULT_ENDPOINT_NAME);
 	}
 
 	/**

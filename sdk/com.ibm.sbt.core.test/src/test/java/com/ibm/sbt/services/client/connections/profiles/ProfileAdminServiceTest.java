@@ -44,9 +44,10 @@ public class ProfileAdminServiceTest extends BaseUnitTest {
 	
 	@Test
 	public final void testCreateAndDeleteProfile() throws Exception{
-		Profile profile = profileAdminService.getProfile("testUser@renovations.com");
+		Profile profile = profileAdminService.getProfile("testUser");
 		
-		profile.setAsString("guid", "testUser"+System.currentTimeMillis());
+		String guid = "testUser"+System.currentTimeMillis();
+		profile.setAsString("guid", guid);
 		String email = "testUser"+System.currentTimeMillis()+"@renovations.com";
 		profile.setAsString("email", email);
 		profile.setAsString("uid", "testUser"+System.currentTimeMillis());
@@ -57,7 +58,7 @@ public class ProfileAdminServiceTest extends BaseUnitTest {
 		profile.setAsString("userState", "active");
 		 
 		profileAdminService.createProfile(profile);
-		profile = profileAdminService.getProfile(email);
+		profile = profileAdminService.getProfile(guid);
 		assertNotNull(profile.getName());
 		profileAdminService.deleteProfile(email);
 		profile = profileAdminService.getProfile(email);

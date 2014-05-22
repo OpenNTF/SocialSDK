@@ -68,7 +68,6 @@ public class FollowService extends ConnectionsService {
 	 */
 	public FollowService(String endpoint) {
 		super(endpoint);
-		serviceMappingKeys = new String[]{""};
 	}
 	
 	/**
@@ -78,6 +77,10 @@ public class FollowService extends ConnectionsService {
 	 */
 	public FollowService(Endpoint endpoint) {
 		super(endpoint);
+	}
+
+	@Override
+	protected void initServiceMappingKeys(){
 		serviceMappingKeys = new String[]{""};
 	}
 

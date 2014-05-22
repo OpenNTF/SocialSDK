@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * Â© Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -31,7 +31,8 @@ import com.ibm.sbt.service.core.handlers.AbstractServiceHandler;
  */
 public class ConnectionsProxyHandler extends AbstractServiceHandler {
 
-    public static final String URL_PATH = "connections";
+	private static final long serialVersionUID = -6584958095421220361L;
+	public static final String URL_PATH = "connections";
 
     public ConnectionsProxyHandler() {
     }

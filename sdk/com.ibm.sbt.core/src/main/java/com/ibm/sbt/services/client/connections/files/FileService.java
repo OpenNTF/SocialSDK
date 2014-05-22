@@ -96,7 +96,6 @@ public class FileService extends ConnectionsService {
      */
     public FileService(Endpoint endpoint) {
         super(endpoint);
-        serviceMappingKeys = new String[]{"files"};
     }
 
     /**
@@ -106,8 +105,12 @@ public class FileService extends ConnectionsService {
      */
     public FileService(String endpoint) {
         super(endpoint);
-        serviceMappingKeys = new String[]{"files"};
     }
+
+	@Override
+	protected void initServiceMappingKeys(){
+		serviceMappingKeys = new String[]{"files"};
+	}
     
     /*****************************************************************
      * Getting Files feeds

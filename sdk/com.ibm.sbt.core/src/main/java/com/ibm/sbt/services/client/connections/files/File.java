@@ -548,6 +548,15 @@ public class File extends AtomEntity {
 	public void update(Map<String, String> params) throws ClientServicesException, TransformerException {
 		getService().updateFileMetadata(this, params);
     }
+
+	/**
+	 * Method to save a File 
+	 * @throws FileServiceException
+	 * @throws TransformerException
+	 */
+	public void save() throws ClientServicesException, TransformerException {
+		save(null);
+    }
 	
 	/**
 	 * Method to save a File 

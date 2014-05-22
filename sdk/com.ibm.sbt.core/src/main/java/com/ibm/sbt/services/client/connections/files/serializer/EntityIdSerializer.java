@@ -1,18 +1,3 @@
-package com.ibm.sbt.services.client.connections.files.serializer;
-
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.*;
-import static com.ibm.sbt.services.client.connections.files.FileConstants.*;
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import com.ibm.sbt.services.client.base.ConnectionsConstants;
-import com.ibm.sbt.services.client.base.ConnectionsConstants.Namespace;
-import com.ibm.sbt.services.client.base.datahandlers.EntityList;
-import com.ibm.sbt.services.client.base.serializers.XmlSerializer;
-import com.ibm.sbt.services.client.connections.files.File;
-
 /*
  * © Copyright IBM Corp. 2012
  * 
@@ -28,6 +13,26 @@ import com.ibm.sbt.services.client.connections.files.File;
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
+
+package com.ibm.sbt.services.client.connections.files.serializer;
+
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.ENTRY;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.FEED;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.LABEL;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.SCHEME;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.TERM;
+import static com.ibm.sbt.services.client.connections.files.FileConstants.ITEM_ID;
+
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
+
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+
+import com.ibm.sbt.services.client.base.ConnectionsConstants;
+import com.ibm.sbt.services.client.base.ConnectionsConstants.Namespace;
+import com.ibm.sbt.services.client.base.serializers.XmlSerializer;
 
 /**
  * @author Lorenzo Boccaccia

@@ -61,7 +61,6 @@ public class ActivityService extends ConnectionsService {
 	 */
 	public ActivityService() {
 		this(DEFAULT_ENDPOINT_NAME);
-		serviceMappingKeys = new String[]{"activities"};
 	}
 
 	/**
@@ -71,7 +70,6 @@ public class ActivityService extends ConnectionsService {
 	 */
 	public ActivityService(String endpoint) {
 		super(endpoint);
-		serviceMappingKeys = new String[]{"activities"};
 	}
 	
 	/**
@@ -81,6 +79,10 @@ public class ActivityService extends ConnectionsService {
 	 */
 	public ActivityService(Endpoint endpoint) {
 		super(endpoint);
+	}
+
+	@Override
+	protected void initServiceMappingKeys(){
 		serviceMappingKeys = new String[]{"activities"};
 	}
 

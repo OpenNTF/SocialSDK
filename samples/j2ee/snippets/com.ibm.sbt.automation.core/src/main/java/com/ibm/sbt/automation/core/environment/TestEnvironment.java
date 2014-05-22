@@ -3,7 +3,6 @@ package com.ibm.sbt.automation.core.environment;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -19,7 +18,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
@@ -36,7 +35,6 @@ import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.automation.core.test.BaseTest;
@@ -47,7 +45,7 @@ import com.ibm.sbt.services.endpoints.BasicEndpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
 
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -1375,6 +1373,12 @@ public abstract class TestEnvironment extends com.ibm.sbt.test.lib.TestEnvironme
 				BasicEndpoint connections = (BasicEndpoint) EndpointFactory
 						.getEndpoint("connections");
 				connections.setUrl(getProperty(PROP_OVERRIDE_CONNECTIONS_BE));
+				if (StringUtils.isNotEmpty(getProperty(PROP_BASIC_USERNAME))) {
+				    connections.setUser(getProperty(PROP_BASIC_USERNAME));
+				}
+				if (StringUtils.isNotEmpty(getProperty(PROP_BASIC_PASSWORD))) {
+                    connections.setUser(getProperty(PROP_BASIC_PASSWORD));
+                }
 				context.getSessionMap().put("connections", connections);
 			}
 
@@ -1382,6 +1386,12 @@ public abstract class TestEnvironment extends com.ibm.sbt.test.lib.TestEnvironme
 				BasicEndpoint smartcloud = (BasicEndpoint) EndpointFactory
 						.getEndpoint("smartcloud");
 				smartcloud.setUrl(getProperty(PROP_OVERRIDE_SMARTCLOUD_BE));
+                if (StringUtils.isNotEmpty(getProperty(PROP_OAUTH10_USERNAME))) {
+                    smartcloud.setUser(getProperty(PROP_OAUTH10_USERNAME));
+                }
+                if (StringUtils.isNotEmpty(getProperty(PROP_OAUTH10_PASSWORD))) {
+                    smartcloud.setUser(getProperty(PROP_OAUTH10_PASSWORD));
+                }
 				context.getSessionMap().put("smartcloud", smartcloud);
 			}
 		} catch (Throwable e) {

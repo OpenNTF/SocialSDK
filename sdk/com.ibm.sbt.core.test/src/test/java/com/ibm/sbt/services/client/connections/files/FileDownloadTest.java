@@ -15,52 +15,19 @@
  */
 package com.ibm.sbt.services.client.connections.files;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.ibm.commons.util.StringUtil;
-import com.ibm.commons.xml.XMLException;
-import com.ibm.sbt.services.BaseUnitTest;
-import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
-import com.ibm.sbt.services.client.connections.communities.CommunityService;
-import com.ibm.sbt.services.endpoints.BasicEndpoint;
-import com.ibm.sbt.services.endpoints.ConnectionsBasicEndpoint;
 
 /**
  * @author mwallace
  *
  */
-public class FileDownloadTest extends BaseUnitTest {
-	
-	protected FileService fileService;
-	protected CommunityService communityService;
-	
-	@Before
-	public void createFileService() {
-		String url = System.getProperty("url");
-		String user = System.getProperty("user");
-		String password = System.getProperty("password");
-		if (StringUtil.isNotEmpty(url) && StringUtil.isNotEmpty(user) && StringUtil.isNotEmpty(password)) {
-			BasicEndpoint endpoint = new ConnectionsBasicEndpoint();
-			endpoint.setUrl(url);
-			endpoint.setUser(user);
-			endpoint.setPassword(password);
-			endpoint.setForceTrustSSLCertificate(true);
-			
-			fileService = new FileService(endpoint);
-			communityService = new CommunityService(endpoint);
-		} else {
-			fileService = new FileService();
-			communityService = new CommunityService();
-		}
-	}
-	
+public class FileDownloadTest extends BaseFileServiceTest {
 	
 	@Test
 	public void testDownloadPrivateFile() throws Exception {
@@ -73,15 +40,15 @@ public class FileDownloadTest extends BaseUnitTest {
 		fileService.deleteFile(file.getFileId());
 	}
 
-
 	@Test
 	public void testDownloadPublicFile() throws Exception {
 		File file = uploadFile("testDownloadPublicFile");
 		
 		file.setVisibility("public");
-		file.save(null);
+		file.save();
+		String fileId = file.getFileId();
 		
-		file = fileService.getFile(file.getFileId());
+		file = fileService.getFile(fileId);
 		Assert.assertEquals("Error making file public", "public", file.getVisibility());
 		
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -90,7 +57,7 @@ public class FileDownloadTest extends BaseUnitTest {
 		
 		fileService.deleteFile(file.getFileId());
 	}
-	
+
 	@Ignore
 	@Test
 	public void testDownloadSharedWithMeFiles() throws Exception {
@@ -145,40 +112,4 @@ public class FileDownloadTest extends BaseUnitTest {
 			Assert.assertEquals("Error reading file shared with me", file.getTitle(), sharedWithMe.getTitle());
 		}
 	}
-	
-	// Internals
-	
-	private String createCommunity(String baseName, String type) throws ClientServicesException {
-		String title = baseName + System.currentTimeMillis();
-		String content = baseName + " content";
-
-		return communityService.createCommunity(title, content, type);
-	}
-	
-	private File uploadCommunityFile(String baseName, String communityUuid) throws ClientServicesException, XMLException {
-		String name = baseName + System.currentTimeMillis();
-
-		byte[] bytes = name.getBytes();
-		ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
-
-		File file = fileService.uploadCommunityFile(bais, communityUuid, name, bytes.length);
-		Assert.assertNotNull("Error uploading file", file);
-		//System.out.println(DOMUtil.getXMLString(file.getDataHandler().getData()));
-		
-		return file;
-	}
-	
-	private File uploadFile(String baseName) throws ClientServicesException, XMLException {
-		String name = baseName + System.currentTimeMillis();
-
-		byte[] bytes = name.getBytes();
-		ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
-
-		File file = fileService.uploadFile(bais, name, bytes.length);
-		Assert.assertNotNull("Error uploading file", file);
-		//System.out.println(DOMUtil.getXMLString(file.getDataHandler().getData()));
-		
-		return file;
-	}
-	
 }

@@ -1,10 +1,12 @@
 package com.ibm.sbt.services.client.connections.files;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+
 import java.util.LinkedList;
 import java.util.List;
+
 import org.junit.Test;
-import com.ibm.sbt.services.BaseUnitTest;
+
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.connections.files.serializer.EntityIdSerializer;
 import com.ibm.sbt.services.client.connections.files.serializer.FileSerializer;
@@ -29,7 +31,7 @@ import com.ibm.sbt.services.client.connections.files.serializer.FlagSerializer;
  * @author Lorenzo Boccaccia 
  * @date 7 May 2014
  */
-public class FileServiceSerializersTest extends BaseUnitTest {
+public class FileServiceSerializersTest extends BaseFileServiceTest {
 
     @Test
     public void testFlagSerializer() {

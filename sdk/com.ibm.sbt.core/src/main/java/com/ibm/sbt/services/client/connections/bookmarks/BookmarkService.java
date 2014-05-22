@@ -56,7 +56,6 @@ public class BookmarkService extends ConnectionsService {
 	 */
 	public BookmarkService(String endpointName) {
 		super(endpointName);
-		serviceMappingKeys = new String[]{"dogear"};
 	}
 
 	/**
@@ -66,6 +65,10 @@ public class BookmarkService extends ConnectionsService {
 	 */
 	public BookmarkService(Endpoint endpoint) {
 		super(endpoint);
+	}
+
+	@Override
+	protected void initServiceMappingKeys(){
 		serviceMappingKeys = new String[]{"dogear"};
 	}
 

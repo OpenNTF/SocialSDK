@@ -29,7 +29,6 @@ import org.junit.runners.Suite.SuiteClasses;
 	FileServiceTest.class,
 	FileDownloadTest.class,
 	FileUpdateTest.class,
-
 })
 public class FileServiceTestSuite {
 

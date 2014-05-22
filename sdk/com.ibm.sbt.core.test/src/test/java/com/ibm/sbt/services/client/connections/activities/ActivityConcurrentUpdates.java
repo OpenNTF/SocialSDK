@@ -24,6 +24,10 @@ import com.ibm.commons.util.StringUtil;
 
 /**
  * @author mwallace
+ * 
+ * Set the following system properties:
+ * -DServerUrl=https://apps.na.collabservtest.lotus.com
+ * -DUsers=<login1>:<password1>:<userid1>,<login2>:<password2>:<userid2>
  *
  */
 public class ActivityConcurrentUpdates {

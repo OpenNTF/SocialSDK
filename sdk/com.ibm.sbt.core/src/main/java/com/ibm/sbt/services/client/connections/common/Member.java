@@ -54,6 +54,7 @@ public class Member extends AtomEntity {
 	static public final String TYPE_PERSON = "person"; //$NON-NLS-1$
 	static public final String TYPE_GROUP = "group"; //$NON-NLS-1$
 	static public final String TYPE_COMMUNITY = "community"; //$NON-NLS-1$
+	static public final String TYPE_ORGANIZATION = "organization"; //$NON-NLS-1$
 
 	/**
 	 * Default constructor

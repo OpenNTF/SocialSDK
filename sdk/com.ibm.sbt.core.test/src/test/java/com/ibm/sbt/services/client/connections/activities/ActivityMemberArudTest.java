@@ -37,7 +37,7 @@ public class ActivityMemberArudTest extends BaseActivityServiceTest {
 		
 		String name = TestEnvironment.getSecondaryUserDisplayName();
 		String userid = TestEnvironment.getSecondaryUserUuid();
-		
+	
 		Member member = activity.addMember(Member.TYPE_PERSON, userid, Member.ROLE_OWNER);
 		
 		EntityList<Member> members = activity.getMembers();

@@ -128,4 +128,13 @@ public class TestEnvironment {
 				getPropertyBasePath() + OTHER_USER_DISPLAYNAME);
 	}
 
+	public static String getEnvironmentProperty(String name) {
+		return Context.get().getProperty(
+				getPropertyBasePath() + name);
+	}
+
+	public static String getProperty(String name) {
+		return Context.get().getProperty(name);
+	}
+
 }

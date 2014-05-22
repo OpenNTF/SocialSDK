@@ -38,13 +38,13 @@ class SBTProxyHelper extends BaseController
 	
 		$forwardHeader = array();
 
-		foreach ($headers as $key => $value) {
-			$forwardHeader[$key] = $value;
-		}
-		
-// 		if (isset($headers['Content-Length'])) {
-// 			$forwardHeader['Content-Length'] = $headers['Content-Length'];
+// 		foreach ($headers as $key => $value) {
+// 			$forwardHeader[$key] = $value;
 // 		}
+		
+		if (isset($headers['Content-Length'])) {
+			$forwardHeader['Content-Length'] = $headers['Content-Length'];
+		}
 	
 		if (isset($headers['Slug'])) {
 			$forwardHeader['Slug'] = $headers['Slug'];
@@ -56,17 +56,17 @@ class SBTProxyHelper extends BaseController
 			$forwardHeader['x-update-nonce'] = $headers['X-Update-Nonce'];
 		}
 	
-// 		if (isset($headers['Transfer-Encoding'])) {
-// 			$forwardHeader['Transfer-Encoding'] = $headers['Transfer-Encoding'];
-// 		}
+		if (isset($headers['Transfer-Encoding'])) {
+			$forwardHeader['Transfer-Encoding'] = $headers['Transfer-Encoding'];
+		}
 	
-// 		if (isset($headers['Content-Type'])) {
-// 			$forwardHeader['Content-Type'] = $headers['Content-Type'];
-// 		}
+		if (isset($headers['Content-Type'])) {
+			$forwardHeader['Content-Type'] = $headers['Content-Type'];
+		}
 		
-// 		if (isset($headers['Content-Language'])) {
-// 			$forwardHeader['Content-Language'] = $headers['Content-Language'];
-// 		}
+		if (isset($headers['Content-Language'])) {
+			$forwardHeader['Content-Language'] = $headers['Content-Language'];
+		}
 	
 		if ($method == 'PUT' || $method == 'POST') {
 			if (!isset($forwardHeader['X-Update-Nonce'])) {
@@ -76,9 +76,21 @@ class SBTProxyHelper extends BaseController
 			}
 		}
 	
-// 		if (isset($headers['Content-Type'])) {
-// 			$forwardHeader['Content-Type'] = $headers['Content-Type'];
-// 		}
+		if (isset($headers['page'])) {
+			$forwardHeader['page'] = $headers['page'];
+		}
+		
+		if (isset($headers['sortBy'])) {
+			$forwardHeader['sortBy'] = $headers['sortBy'];
+		}
+		
+		if (isset($headers['sortOrder'])) {
+			$forwardHeader['sortOrder'] = $headers['sortOrder'];
+		}
+		
+		if (isset($headers['creator'])) {
+			$forwardHeader['creator'] = $headers['creator'];
+		}
 	
 		return $forwardHeader;
 	}

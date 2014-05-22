@@ -23,6 +23,7 @@ import static com.ibm.sbt.services.client.connections.profiles.utils.ProfilesCon
 import java.util.HashMap;
 import java.util.Map;
 
+import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
@@ -165,5 +166,28 @@ public class ProfileAdminService extends ProfileService {
 		Response response = updateData(updateUrl, parameters,updateProfilePayload, ProfileParams.userId.getParamName(profile.getAsString("uid")));
 		checkResponseCode(response, HTTPCode.OK);
 		profile.clearFieldsMap();
+	}
+
+	/**
+	 * This method returns a feed of profile as opposed to retrieving the Atom entry of the profile.<br>
+	 * If you want to retrieve an Atom entry document, see Retrieving a profile entry.<br>
+	 * The content element of each returned entry includes the vcard information for the person being represented by the entry.<br>
+	 * In addition, it provides a list of the fully qualified URLs for each IBM® Connections application link displayed in the business card.
+	 * 
+	 * @param id
+	 *             unique identifier of User , it can either be email or id 				
+	 * @param parameters 
+	 * 				list of query string parameters to pass to API
+	 * @return Profile
+	 * @throws ClientServicesException 
+	 */
+	@Override
+	public Profile getProfile(String id, Map<String, String> parameters) throws ClientServicesException {
+		// TODO: Do a cache lookup first. If cache miss, make a network call to get profile
+		if (StringUtil.isEmpty(id)){
+			throw new ClientServicesException(null, Messages.InvalidArgument_1);
+		}
+		String url = ProfileUrls.ADMIN_GET_PROFILES.format(this, ProfileParams.userId.get(id));
+		return getProfileEntity(url, parameters);
 	}
 }

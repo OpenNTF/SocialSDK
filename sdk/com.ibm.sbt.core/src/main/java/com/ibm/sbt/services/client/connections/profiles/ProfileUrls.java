@@ -56,7 +56,8 @@ public enum ProfileUrls implements URLContainer {
 	 * ADMIN URLS
 	 */
 	ADMIN_PROFILE_ENTRY(new VersionedUrl(v4_0, 		"{profiles}/{authType}/admin/atom/profileEntry.do?{userId}")),
-	ADMIN_PROFILES(new VersionedUrl(v4_0, 			"{profiles}/{authType}/admin/atom/profiles.do"));
+	ADMIN_PROFILES(new VersionedUrl(v4_0, 			"{profiles}/{authType}/admin/atom/profiles.do?")),
+	ADMIN_GET_PROFILES(new VersionedUrl(v4_0, 			"{profiles}/{authType}/admin/atom/profiles.do?{userId}"));
 	
 	private URLBuilder builder;
 	

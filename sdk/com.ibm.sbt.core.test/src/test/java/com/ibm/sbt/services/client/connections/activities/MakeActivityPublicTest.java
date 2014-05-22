@@ -50,26 +50,30 @@ public class MakeActivityPublicTest extends BaseActivityServiceTest {
 			Activity publicActivity = activityService.getActivity(publicUuid);
 			EntityList<Member> members = publicActivity.getMembers();
 			Assert.assertEquals(2, members.size());
+			for (Member nMember : members) {
+				System.out.println(nMember.toXmlString());
+			}
 			String orgid = TestEnvironment.getProperty("customerid");
+			orgid = StringUtil.isEmpty(orgid) ? "*" : orgid;
 			Member member = getMember(publicActivity, orgid);
 			Assert.assertNotNull(member);
 		}
 	}
 	
 	@Test
-	@Ignore
 	public void testMakeActivityPublic() throws ClientServicesException, XMLException {
 		Activity created = createActivity();
 		
 		// uncomment to stop the activity being deleted
 		//this.activity = null;
 		
-		EntityList<Member> members = activity.getMembers();
+		EntityList<Member> members = created.getMembers();
 		Assert.assertEquals(1, members.size());
 		
 		String orgid = TestEnvironment.getProperty("customerid");
-		activity.addMember(Member.TYPE_ORGANIZATION, orgid, Member.ROLE_READER);
-		members = activity.getMembers();
+		orgid = StringUtil.isEmpty(orgid) ? "*" : orgid;
+		created.addMember(Member.TYPE_ORGANIZATION, orgid, Member.ROLE_READER);
+		members = created.getMembers();
 		Assert.assertEquals(2, members.size());
 		Member member = getMember(created, orgid);
 		Assert.assertNotNull(member);

@@ -51,7 +51,7 @@ public class GetActivityReplyNodeTagsTest extends BaseActivityServiceTest {
 		ActivityNode activityReply = new ActivityNode();
 		activityReply.setActivityUuid(activity.getActivityUuid());
 		activityReply.setTitle(createActivityNodeTitle());
-    	activityNode.setTags(tags);    	
+		activityReply.setTags(tags);    	
 		activityReply.setType(ActivityNode.TYPE_REPLY);
 		activityReply.setInReplyTo(activityNode);
 		activityReply = activityService.createActivityNode(activityReply);
@@ -85,7 +85,7 @@ public class GetActivityReplyNodeTagsTest extends BaseActivityServiceTest {
 		ActivityNode activityReply = new ActivityNode();
 		activityReply.setActivityUuid(activity.getActivityUuid());
 		activityReply.setTitle(createActivityNodeTitle());
-    	activityNode.setTags(tags);    	
+		activityReply.setTags(tags);    	
 		activityReply.setType(ActivityNode.TYPE_REPLY);
 		activityReply.setInReplyTo(activityNode);
 		activityReply = activityService.createActivityNode(activityReply);

@@ -76,7 +76,7 @@ public class OAuth1Handler extends OAuthHandler implements Serializable{
 	private String			oauth_session_handle;
 	private int 			expireThreshold;
 	private String 			applicationPage;
-	private boolean 		storeRead;
+	
 	protected String 			appId;
 	protected String 			serviceName;
 	protected String 			credentialStore;
@@ -490,13 +490,11 @@ public class OAuth1Handler extends OAuthHandler implements Serializable{
 
 
 	private void readConsumerToken() throws OAuthException {
-		if (!storeRead) {
 			try {
 				CredentialStore factory = CredentialStoreFactory.getCredentialStore(getCredentialStore());
 				if (factory != null) {
 					ConsumerToken consumerToken = (ConsumerToken) factory.load(getServiceName(), CONSUMER_TOKEN_STORE_TYPE, null);
 					if (consumerToken != null) {
-						storeRead = true;
 						if (StringUtil.isNotEmpty(consumerToken.getConsumerKey())) {
 							setConsumerKey(consumerToken.getConsumerKey());
 						}
@@ -520,7 +518,6 @@ public class OAuth1Handler extends OAuthHandler implements Serializable{
 			} catch (CredentialStoreException cse) {
 				throw new OAuthException(cse, cse.getMessage());
 			}
-		}
 	}
 
 	// ==========================================================
@@ -595,7 +592,7 @@ public class OAuth1Handler extends OAuthHandler implements Serializable{
 		// Look for a token in the store
 		// If the user is anonymous, then the token might had been stored in the session
 		if (!force) {
-			if (getAccessTokenObject() != null) {
+			if (getAccessTokenObject() != null && context.isCurrentUserAnonymous()) {
             	// if cred store is not defined in end point return from bean
             	tk = getAccessTokenObject();
             }else{

@@ -92,7 +92,7 @@
          connector should be using the OpenSSL style configuration
          described in the APR documentation -->
     <Connector SSLEnabled="true" clientAuth="false" 
-             keystoreFile="conf/keystore" keystorePass="***REMOVED***" 
+             keystoreFile="conf/keystore" keystorePass="passw0rd" 
 			 maxThreads="150" port="8443" protocol="HTTP/1.1" 
 			 scheme="https" secure="true" sslProtocol="TLS"/>  
 

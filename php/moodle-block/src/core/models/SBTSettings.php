@@ -1,4 +1,3 @@
-***REMOVED***
 /*
  * © Copyright IBM Corp. 2013
 *

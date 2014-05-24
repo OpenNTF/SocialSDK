@@ -45,7 +45,7 @@
 		user credentials -->
     <!--
 	<Resource name="jdbc/ibmsbt-dbtokenstore" auth="Container" type="javax.sql.DataSource"
-    	maxActive="100" maxIdle="30" maxWait="10000" username="admin" password="***REMOVED***" 
+    	maxActive="100" maxIdle="30" maxWait="10000" username="admin" password="passw0rd" 
     	driverClassName="<drive class name>" url="jdbc:mysql://localhost:3306/<database name>"/>
 	-->
 
@@ -56,6 +56,6 @@
 
     <!-- Configures the mail session for the SDK, by default this uses the IBM Developer QuickStart Image -->
     <Resource name="mail/ibmsbt-session" type="javax.mail.Session" auth="Container" mail.smtp.host="qs.renovations.com"
-		mail.smtp.auth="true" mail.user="admin" password="***REMOVED***" mail.from="admin@renovations.com" mail.debug="false"/>
+		mail.smtp.auth="true" mail.user="admin" password="passw0rd" mail.from="admin@renovations.com" mail.debug="false"/>
 
 </Context>

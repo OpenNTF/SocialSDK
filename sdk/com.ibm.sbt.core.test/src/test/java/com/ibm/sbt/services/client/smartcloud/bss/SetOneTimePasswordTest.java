@@ -72,7 +72,7 @@ public class SetOneTimePasswordTest extends BaseBssTest {
     		
     		UserCredentialJsonBuilder userCredential = new UserCredentialJsonBuilder();
     		userCredential.setLoginName(loginName)
-    					  .setNewPassword("one_time_***REMOVED***");
+    					  .setNewPassword("one_time_passw0rd");
     		System.out.println(userCredential.toJson());
     		
     		AuthenticationService authenticationService = getAuthenticationService();

@@ -98,7 +98,7 @@ public class DownloadFileApp {
 		this.endpoint = endpoint;
 		this.fileService.setEndpoint(this.endpoint);
 		this.communityService.setEndpoint(this.endpoint);
-		this.endpoint.login("asingh", "***REMOVED***");
+		this.endpoint.login("asingh", "passw0rd");
 	}
 
 	/**

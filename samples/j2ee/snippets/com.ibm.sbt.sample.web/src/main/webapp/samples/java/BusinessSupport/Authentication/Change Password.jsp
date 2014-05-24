@@ -75,15 +75,15 @@
         	
     		UserCredentialJsonBuilder userCredential = new UserCredentialJsonBuilder();
     		userCredential.setLoginName(loginName)
-    					  .setNewPassword("one_time_***REMOVED***");
+    					  .setNewPassword("one_time_passwordx");
     		
     		authenticationService.setOneTimePassword(userCredential);
     		
     		userCredential = new UserCredentialJsonBuilder();
     		userCredential.setLoginName(loginName)
-    					  .setOldPassword("one_time_***REMOVED***")
-    					  .setNewPassword("new_***REMOVED***")
-    					  .setConfirmPassword("new_***REMOVED***");
+    					  .setOldPassword("one_time_passwordx")
+    					  .setNewPassword("new_passwordx")
+    					  .setConfirmPassword("new_passwordx");
     		
     		authenticationService.changePassword(userCredential);
 			

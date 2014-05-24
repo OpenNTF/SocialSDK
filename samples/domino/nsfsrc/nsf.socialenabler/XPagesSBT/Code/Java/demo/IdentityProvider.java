@@ -7,7 +7,7 @@ public class IdentityProvider implements IdentityMapper {
 
 	public String getUserIdFromIdentity(String target, String identity) {
 		if(StringUtil.equals(target,"facebook")) {
-			if(StringUtil.equals(identity,"***REMOVED***@facebook.com")) {
+			if(StringUtil.equals(identity,"fadams@facebook.com")) {
 				return "CN=Frank Adams/O=renovations";
 			}
 		}
@@ -17,7 +17,7 @@ public class IdentityProvider implements IdentityMapper {
 	public String getUserIdentityFromId(String target, String id) {
 		if(StringUtil.equals(target,"facebook")) {
 			if(StringUtil.equals(id,"CN=Frank Adams/O=renovations")) {
-				return "***REMOVED***@facebook.com";
+				return "fadams@facebook.com";
 			}
 		}
 		return null;

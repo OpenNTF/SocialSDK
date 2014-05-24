@@ -41,7 +41,7 @@ public class AdminPublishActivityStreamTest extends BaseUnitTest {
     public void testPost() throws Exception {
     	/*
         AdminPublishActivityStream apas = new AdminPublishActivityStream("connections", false);
-        authenticateEndpoint(apas.getEndpoint(), "admin", "***REMOVED***");
+        authenticateEndpoint(apas.getEndpoint(), "admin", "passw0rd");
         
         InputStream propertiesStream = this.getClass().getClassLoader().getResourceAsStream("com/ibm/sbt/sample/app/data.properties");
         Properties props = new Properties();

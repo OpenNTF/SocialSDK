@@ -82,7 +82,7 @@ public class CreateCommunitiesApp {
         this.communityService.setEndpoint(this.endpoint);
         
         try {
-			endpoint.login("admin", "***REMOVED***");
+			endpoint.login("admin", "passw0rd");
 		} catch (AuthenticationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -35,7 +35,7 @@ define('sbt/emailService',['sbt/declare', 'sbt/lang', 'sbt/config', 'sbt/_bridge
          *         [
          *             {
          *                 "from" : "sdary@renovations.com",
-         *                 "to" : ["***REMOVED***@renovations.com", "tamado@renovations.com"],
+         *                 "to" : ["fadams@renovations.com", "tamado@renovations.com"],
          *                 "cc" : ["pclemmons@renovations.com"],
          *                 "bcc" : [],
          *                 "subject" : "This is a test email",
@@ -67,7 +67,7 @@ define('sbt/emailService',['sbt/declare', 'sbt/lang', 'sbt/config', 'sbt/_bridge
          *              },
          *              {
          *                     "from" : "sdaryn@renovations.com",
-         *                     "to" : ["***REMOVED***@renovations.com", "tamado@renovations.com"],
+         *                     "to" : ["fadams@renovations.com", "tamado@renovations.com"],
          *                     "subject": "This is a test email",
          *                     "mimeParts" : 
          *                         [

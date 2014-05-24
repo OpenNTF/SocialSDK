@@ -1,4 +1,3 @@
-***REMOVED***
 /**
  * Plugin Name: Social Business Toolkit integration plugin
  * Plugin URI: http://example.com

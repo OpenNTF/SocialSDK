@@ -40,7 +40,7 @@ public class ProvisionSubscriberTest extends BaseBssTest {
     		setOneTimePassword(loginName, "passw1rd");
     		
     		// Step 4. Change password
-    		changePassword(loginName, "passw1rd", "***REMOVED***");
+    		changePassword(loginName, "passw1rd", "passw0rd");
     		
     		// Step 5. Activate subscriber
     		activateSubscriber(subscriberId);

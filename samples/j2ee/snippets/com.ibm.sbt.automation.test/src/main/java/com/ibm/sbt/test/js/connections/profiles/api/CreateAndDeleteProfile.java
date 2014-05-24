@@ -83,7 +83,7 @@ public class CreateAndDeleteProfile extends BaseProfilesTest {
             return "admin";
         }
         if (TestEnvironment.PROP_BASIC_PASSWORD.equals(name)) {
-            return "***REMOVED***";
+            return "fadams";
         }
         return super.getProperty(name);
     }*/

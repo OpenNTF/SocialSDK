@@ -66,7 +66,7 @@ public class BookmarkServiceTest extends BaseUnitTest {
 	@Test
 	public void testGetMyBookmarks() throws BookmarkServiceException {
 		Map<String, String> params = new HashMap<String, String>();
-		params.put("email", "***REMOVED***@renovations.com");
+		params.put("email", "fadams@renovations.com");
 		BookmarkList list = service.getAllBookmarks();
 		assertNotNull("Expected non null BookmarkList", list);
 		for (Bookmark bookmark : list) {

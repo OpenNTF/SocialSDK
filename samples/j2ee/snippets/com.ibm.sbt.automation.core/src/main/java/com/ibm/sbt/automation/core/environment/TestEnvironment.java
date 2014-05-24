@@ -1370,6 +1370,7 @@ public abstract class TestEnvironment extends com.ibm.sbt.test.lib.TestEnvironme
 	public void decorateContext(Context context) {
 		try {
 			if (!StringUtil.isEmpty(getProperty(PROP_OVERRIDE_CONNECTIONS_BE))) {
+				logger.info("overriding connections url with " + getProperty(PROP_OVERRIDE_CONNECTIONS_BE));
 				BasicEndpoint connections = (BasicEndpoint) EndpointFactory
 						.getEndpoint("connections");
 				connections.setUrl(getProperty(PROP_OVERRIDE_CONNECTIONS_BE));
@@ -1383,6 +1384,7 @@ public abstract class TestEnvironment extends com.ibm.sbt.test.lib.TestEnvironme
 			}
 
 			if (!StringUtil.isEmpty(getProperty(PROP_OVERRIDE_SMARTCLOUD_BE))) {
+				logger.info("overriding smartcloud url with " + getProperty(PROP_OVERRIDE_SMARTCLOUD_BE));
 				BasicEndpoint smartcloud = (BasicEndpoint) EndpointFactory
 						.getEndpoint("smartcloud");
 				smartcloud.setUrl(getProperty(PROP_OVERRIDE_SMARTCLOUD_BE));

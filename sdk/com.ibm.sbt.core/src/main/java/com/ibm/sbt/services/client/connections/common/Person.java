@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -41,7 +41,8 @@ public class Person extends BaseEntity {
 	}
 	
 	public String getId() {
-		String id = getUserid();
+		//author object override this. cannot change author, so no using getUserId directly here.
+		String id = getAsString(AtomXPath.personUserid);
 		if (StringUtil.isEmpty(id)) {
 			id = getEmail();
 		}

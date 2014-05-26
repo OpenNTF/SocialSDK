@@ -1,4 +1,4 @@
-***REMOVED***
+<?php
 /*
  * © Copyright IBM Corp. 2013
 *
@@ -175,58 +175,6 @@ class Proxy extends BaseController
 				if (isset($_GET['tag'])) {
 					$url .= '&tag=' . $_GET['tag'];
 				}
-				
-// 				if (isset($_GET['commentNotification'])) {
-// 					$url .= '&commentNotification=' . $_GET['commentNotification'];
-// 				} else {
-// 					$_POST['commentNotification'] = 'on';
-// 					$url .= 'visibility=private';
-// 				}
-				
-// 				$milliseconds = round(microtime(true) * 1000);
-// 				if (isset($_GET['created'])) {
-// 					$url .= '&commentNotification=' . $_GET['commentNotification'];
-// 				} else {
-// 					$_POST['created'] = $milliseconds;
-// 					$url .= 'visibility=private';
-// 				}
-				
-				
-// 				if (isset($_GET['commentNotification'])) {
-// 					$url .= '&includePath=' . $_GET['includePath'];
-// 				} else {
-// 					$url .= 'includePath=true';
-// 				}
-				
-// 				if (isset($_GET['mediaNotification'])) {
-// 					$url .= '&mediaNotification=' . $_GET['mediaNotification'];
-// 				} else {
-// 					$url .= 'mediaNotification=off';
-// 				}
-				
-// 				if (isset($_GET['modified'])) {
-// 					$url .= '&modified=' . $_GET['modified'];
-// 				} else {
-// 					$url .= 'modified=' . $milliseconds;
-// 				}
-				
-// 				if (isset($_GET['propagate'])) {
-// 					$url .= '&propagate=' . $_GET['propagate'];
-// 				} else {
-// 					$url .= 'propagate=false';
-// 				}
-				
-// 				if (isset($_GET['sharePermission'])) {
-// 					$url .= '&sharePermission=' . $_GET['sharePermission'];
-// 				} else {
-// 					$url .= 'sharePermission=Edit';
-// 				}
-				
-// 				if (isset($_GET['shareSummary'])) {
-// 					$url .= '&shareSummary=' . $_GET['shareSummary'];
-// 				} else {
-// 					$url .= 'shareSummary=NA';
-// 				}
 			
 				// Update request
 				$_REQUEST['_redirectUrl'] = $url;

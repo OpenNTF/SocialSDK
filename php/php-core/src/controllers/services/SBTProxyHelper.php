@@ -1,4 +1,4 @@
-***REMOVED***
+<?php
 /*
  * © Copyright IBM Corp. 2013
 *
@@ -37,9 +37,14 @@ class SBTProxyHelper extends BaseController
 		$headers = apache_request_headers();
 	
 		$forwardHeader = array();
-		if (isset($headers['Content-Length'])) {
-			$forwardHeader['Content-Length'] = $headers['Content-Length'];
+
+		foreach ($headers as $key => $value) {
+			$forwardHeader[$key] = $value;
 		}
+		
+// 		if (isset($headers['Content-Length'])) {
+// 			$forwardHeader['Content-Length'] = $headers['Content-Length'];
+// 		}
 	
 		if (isset($headers['Slug'])) {
 			$forwardHeader['Slug'] = $headers['Slug'];
@@ -51,13 +56,17 @@ class SBTProxyHelper extends BaseController
 			$forwardHeader['x-update-nonce'] = $headers['X-Update-Nonce'];
 		}
 	
-		if (isset($headers['Transfer-Encoding'])) {
-			$forwardHeader['Transfer-Encoding'] = $headers['Transfer-Encoding'];
-		}
+// 		if (isset($headers['Transfer-Encoding'])) {
+// 			$forwardHeader['Transfer-Encoding'] = $headers['Transfer-Encoding'];
+// 		}
 	
-		if (isset($headers['Content-Type'])) {
-			$forwardHeader['Content-Type'] = $headers['Content-Type'];
-		}
+// 		if (isset($headers['Content-Type'])) {
+// 			$forwardHeader['Content-Type'] = $headers['Content-Type'];
+// 		}
+		
+// 		if (isset($headers['Content-Language'])) {
+// 			$forwardHeader['Content-Language'] = $headers['Content-Language'];
+// 		}
 	
 		if ($method == 'PUT' || $method == 'POST') {
 			if (!isset($forwardHeader['X-Update-Nonce'])) {
@@ -67,13 +76,20 @@ class SBTProxyHelper extends BaseController
 			}
 		}
 	
-		if (isset($headers['Content-Type'])) {
-			$forwardHeader['Content-Type'] = $headers['Content-Type'];
-		}
+// 		if (isset($headers['Content-Type'])) {
+// 			$forwardHeader['Content-Type'] = $headers['Content-Type'];
+// 		}
 	
 		return $forwardHeader;
 	}
 	
+	/**
+	 * Prepares the URL for forwarding (i.e. cleans it and appends any set $_GET parameters).
+	 * 
+	 * @param string $url		The URL to clean
+	 * @param unknown $server
+	 * @return string
+	 */
 	public function cleanURL($url, $server) 
 	{
 		$url = str_replace('https', '', $url);
@@ -84,6 +100,28 @@ class SBTProxyHelper extends BaseController
 		$server = str_replace('http://', '', $server);
 		$url = str_replace($server, '', $url);
 		$url = str_replace('//', '', $url);
+		
+		// Check if the URL already contains GET parameters
+		if (strpos($url, '?') === false) {
+			$url .= "?";
+		}
+		
+		foreach ($_GET as $key => $value) { 
+			if ($key == 'class' || $key == 'classpath' || $key == 'method' || $key == 'endpointName' || $key == '_redirectUrl' || $key == 'uid') {
+				continue;
+			}
+			
+			if ($url[strlen($url) - 1] == '?') {
+				$url .= "$key=$value";
+			} else {
+				$url .= "&$key=$value";
+			}
+		}
+		
+		// Remove trailing '?' if no GET parameters were appended
+		if ($url[strlen($url) - 1] == '?') {
+			$url = rtrim($url, '?');
+		}
 		
 		return $url;
 	}

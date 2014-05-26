@@ -102,6 +102,7 @@ public final class CommonConstants {
 	public static final String APPLICATION_JSON = "application/json";
 	public static final String APPLICATION_OCTET_STREAM = "application/octet-stream";
 	public static final String BINARY_OCTET_STREAM = "binary/octet-stream";
+	public static final String MULTIPART_RELATED = "multipart/related";
 
 	/**
 	 * General Services

@@ -267,7 +267,23 @@ public class NodeEntity extends AtomEntity {
 	 * @param fid
 	 * @return
 	 */
-	public Field getField(String fid) {
+	public Field getFieldByName(String name) {
+		if (fields != null) {
+			for (Field field : fields) {
+				if (field.getName().equals(name)) {
+					return field;
+				}
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * 
+	 * @param fid
+	 * @return
+	 */
+	public Field getFieldById(String fid) {
 		if (fields != null) {
 			for (Field field : fields) {
 				if (field.getFid().equals(fid)) {

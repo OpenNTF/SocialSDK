@@ -15,6 +15,7 @@
  */
 package com.ibm.sbt.services.client.connections.activities;
 
+import java.io.ByteArrayInputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -180,4 +181,36 @@ public class ActivityClient {
 		return thread;
 	}
 	
+	public Thread uploadFiles(final Activity activity, final int count) throws InterruptedException {
+		Thread thread = new Thread() {
+			@Override
+			public void run() {
+				ByteArrayInputStream fileContent = new ByteArrayInputStream("MyFileContent".getBytes());
+				for (int i=0; i<count; i++) {
+					try {
+				    	long start = System.currentTimeMillis();
+
+				    	ActivityService activityService = getActivityService();
+						
+						String fileName = "File["+user+"-"+System.currentTimeMillis()+"]";
+				    	activityService.uploadFile(activity, fileName, fileContent, "text/plain");
+
+						long duration = System.currentTimeMillis() - start;
+						logger.fine("Uploaded activity file: "+duration+"(ms)");
+				    	
+						System.out.println(user+" uploaded file "+fileName+" duration:"+duration+"(ms)");
+						
+					} catch (Exception e) {
+						System.err.println("Error uploading file for: "+user+" caused by: "+e.getMessage());
+						//e.printStackTrace();
+					}
+				}
+			}
+		};
+
+		thread.start();
+		
+		return thread;
+	}
+
 }

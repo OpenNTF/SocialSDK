@@ -18,6 +18,7 @@ package com.ibm.sbt.services.client;
 import static com.ibm.sbt.services.client.base.CommonConstants.APPLICATION_JSON;
 import static com.ibm.sbt.services.client.base.CommonConstants.APPLICATION_OCTET_STREAM;
 import static com.ibm.sbt.services.client.base.CommonConstants.APPLICATION_XML;
+import static com.ibm.sbt.services.client.base.CommonConstants.MULTIPART_RELATED;
 import static com.ibm.sbt.services.client.base.CommonConstants.BINARY;
 import static com.ibm.sbt.services.client.base.CommonConstants.BINARY_OCTET_STREAM;
 import static com.ibm.sbt.services.client.base.CommonConstants.CH_SLASH;
@@ -66,9 +67,17 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.entity.ContentType;
 import org.apache.http.entity.FileEntity;
 import org.apache.http.entity.InputStreamEntity;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.entity.mime.FormBodyPart;
+import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.entity.mime.content.ByteArrayBody;
+import org.apache.http.entity.mime.content.ContentBody;
+import org.apache.http.entity.mime.content.InputStreamBody;
+import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.util.EntityUtils;
@@ -81,6 +90,7 @@ import com.ibm.commons.util.FastStringBuffer;
 import com.ibm.commons.util.PathUtil;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.StreamUtil;
+import com.ibm.commons.util.io.json.JsonArray;
 import com.ibm.commons.util.io.json.JsonException;
 import com.ibm.commons.util.io.json.JsonFactory;
 import com.ibm.commons.util.io.json.JsonGenerator;
@@ -609,6 +619,91 @@ public abstract class ClientService {
 
 	}
 
+	public static class ContentList extends Content {
+		
+		private List<ContentPart> contentParts;
+
+		protected ContentList(List<ContentPart> content) {
+			this(content, MULTIPART_RELATED);
+		}
+		
+		protected ContentList(List<ContentPart> content, String contentType) {
+			super(contentType);
+			
+			this.contentParts = content;
+		}
+		
+		@Override
+		protected HttpEntity createEntity() throws ClientServicesException {
+			MultipartEntityBuilder entityBuilder = MultipartEntityBuilder.create();
+			for (ContentPart contentPart : contentParts) {
+				if (contentPart.getData() instanceof InputStream) {
+					entityBuilder.addBinaryBody(contentPart.getName(), 
+							(InputStream)contentPart.getData(), 
+							contentPart.getContentType(),
+							contentPart.getFileName());
+				}
+				else if (contentPart.getData() instanceof byte[]) {
+					entityBuilder.addBinaryBody(contentPart.getName(), 
+							(byte[])contentPart.getData(),
+							contentPart.getContentType(),
+							contentPart.getFileName());
+				}
+				else if (contentPart.getData() instanceof String) {
+					entityBuilder.addTextBody(contentPart.getName(), 
+							(String)contentPart.getData(), 
+							contentPart.getContentType());
+				}
+			}
+			return entityBuilder.build();
+		}
+		
+	}
+	
+	public static class ContentPart {
+		
+		private String name;
+		private Object data;
+		private ContentType contentType;
+		private String fileName;
+		
+		public ContentPart(String name, byte[] data, String fileName, String mimeType) {
+			this.name = name;
+			this.data = data;
+			this.fileName = fileName;
+			this.contentType = ContentType.create(mimeType);
+		}
+		
+		public ContentPart(String name, InputStream data, String fileName, String mimeType) {
+			this.name = name;
+			this.data = data;
+			this.fileName = fileName;
+			this.contentType = ContentType.create(mimeType);
+		}
+		
+		public ContentPart(String name, String data, String mimeType) {
+			this.name = name;
+			this.data = data;
+			this.contentType = ContentType.create(mimeType);
+		}
+		
+		public String getName() {
+			return name;
+		}
+		
+		public Object getData() {
+			return data;
+		}
+		
+		public ContentType getContentType() {
+			return contentType;
+		}
+		
+		public String getFileName() {
+			return fileName;
+		}
+	}
+	
 	protected Content createRequestContent(Args args, Object content) throws ClientServicesException {
 		if (args.getHeaders() != null && args.getHeaders().get(CONTENT_TYPE) != null) {
 			String contentType = args.getHeaders().get(CONTENT_TYPE);
@@ -618,15 +713,17 @@ public abstract class ClientService {
 			if (content instanceof Node) {
 				return new ContentXml((Node) content, contentType);
 			}
-			if ((content instanceof JsonObject) || (content instanceof List)) {
+			if ((content instanceof JsonObject) || (content instanceof JsonArray)) {
 				return new ContentJson(content, contentType);
 			}
 			if (content instanceof File) {
 				return new ContentFile((File) content, contentType);
 			}
 			if (content instanceof InputStream) {
-				return new ContentStream(args.getHeaders().get(SLUG), (InputStream) content, -1,
-						contentType);
+				return new ContentStream(args.getHeaders().get(SLUG), (InputStream) content, -1, contentType);
+			}
+			if (content instanceof List) {
+				return new ContentList((List) content, contentType);
 			}
 		} else {
 			if (content instanceof String) {
@@ -635,7 +732,7 @@ public abstract class ClientService {
 			if (content instanceof Node) {
 				return new ContentXml((Node) content);
 			}
-			if ((content instanceof JsonObject) || (content instanceof List)) {
+			if ((content instanceof JsonObject) || (content instanceof JsonArray)) {
 				return new ContentJson(content);
 			}
 			if (content instanceof File) {
@@ -643,6 +740,9 @@ public abstract class ClientService {
 			}
 			if (content instanceof InputStream) {
 				return new ContentStream((InputStream) content);
+			}
+			if (content instanceof List) {
+				return new ContentList((List) content);
 			}
 		}
 

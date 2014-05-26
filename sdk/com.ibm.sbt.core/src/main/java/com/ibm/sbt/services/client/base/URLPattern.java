@@ -63,7 +63,7 @@ public class URLPattern {
 		int indexStart = url.indexOf(CH_LEFT_BRACE);
 		if (indexStart >= 0){
 			int indexEnd = url.indexOf(CH_RIGHT_BRACE, indexStart);
-			String partName = url.substring(indexStart + 1, indexEnd-1);
+			String partName = url.substring(indexStart + 1, indexEnd);
 			throw new IllegalArgumentException("Missing parameter: "+partName);
 		}
 	}

@@ -15,6 +15,8 @@
  */
 package com.ibm.sbt.services.client.connections.activities;
 
+import java.io.InputStream;
+
 import org.w3c.dom.Node;
 
 import com.ibm.commons.util.StringUtil;
@@ -496,6 +498,22 @@ public class Activity extends NodeEntity {
 			throw new ClientServicesException(null, "No activity service associated with this activity.");
 		}
 		activityService.changePriority(this, priority);
+	}
+
+	/**
+	 * Upload a file.
+	 * 
+	 * @param fileName
+	 * @param fileContent
+	 * @param mimeType
+	 * @throws ClientServicesException
+	 */
+	public void uploadFile(String fileName, InputStream fileContent, String mimeType) throws ClientServicesException {
+		ActivityService activityService = getActivityService();
+		if (activityService == null) {
+			throw new ClientServicesException(null, "No activity service associated with this activity.");
+		}
+		activityService.uploadFile(this, fileName, fileContent, mimeType);
 	}
 	
 }

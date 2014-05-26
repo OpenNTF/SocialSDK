@@ -15,9 +15,15 @@
  */
 package com.ibm.sbt.services.client.connections.activities;
 
+import static com.ibm.sbt.services.client.base.CommonConstants.APPLICATION_ATOM_XML;
+import static com.ibm.sbt.services.client.base.CommonConstants.CONTENT_TYPE;
+import static com.ibm.sbt.services.client.base.CommonConstants.SLUG;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
 
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.w3c.dom.Document;
@@ -25,6 +31,8 @@ import org.w3c.dom.Node;
 
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.xpath.XPathExpression;
+import com.ibm.sbt.services.client.ClientService;
+import com.ibm.sbt.services.client.ClientService.ContentPart;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.AtomFeedHandler;
@@ -477,11 +485,36 @@ public class ActivityService extends ConnectionsService {
 	 * @throws ClientServicesException 
 	 */
 	public void restoreActivity(Activity activity, Map<String, String> parameters) throws ClientServicesException {
-		activity.setDeleted(false);
 		String requestUrl = ActivityUrls.TRASHED_ACTIVITY_NODE.format(this, ActivityUrls.activityNodePart(activity.getActivityUuid()));
 		updateActivityEntity(requestUrl, activity, parameters, HTTPCode.NO_CONTENT);
+		activity.setDeleted(false);
 	}
-
+	
+	/**
+	 * 
+	 * @param activity
+	 * @param fileName
+	 * @param fileContent
+	 * @param mimeType
+	 * @throws ClientServicesException
+	 */
+	public void uploadFile(Activity activity, String fileName, InputStream fileContent, String mimeType) throws ClientServicesException {
+		uploadFile(activity.getActivityUuid(), fileName, fileContent, mimeType);
+	}
+	
+	/**
+	 * 
+	 * @param activity
+	 * @param fileName
+	 * @param fileContent
+	 * @param mimeType
+	 * @throws ClientServicesException
+	 */
+	public void uploadFile(String activityUuid, String fileName, InputStream fileContent, String mimeType) throws ClientServicesException {
+		String requestUrl = ActivityUrls.ACTIVITY.format(this, ActivityUrls.activityPart(activityUuid));
+		createActivityFile(requestUrl, fileName, fileContent, mimeType);
+	}
+	
 	//------------------------------------------------------------------------------------------------------------------
 	// Working with activity nodes programmatically.
 	//------------------------------------------------------------------------------------------------------------------
@@ -608,6 +641,40 @@ public class ActivityService extends ConnectionsService {
 		updateActivityNodeEntity(requestUrl, activityNode, parameters, HTTPCode.NO_CONTENT);
 	}
 	
+	/*
+	 * Create an entry with one file attachment, by using a multipart post method to post the file.
+	 * 
+	 * @param activityNode
+	 * @param fileName
+	 * @param fileContent
+	 * @throws ClientServicesException
+	 */
+//	public ActivityNode createActivityNode(ActivityNode activityNode, String fileName, InputStream fileContent, String mimeType) throws ClientServicesException {
+//		return createActivityNode(activityNode, fileName, fileContent, mimeType, null);
+//	}
+
+	/*
+	 * Create an entry with one file attachment, by using a multipart post method to post the file. 
+	 * 
+	 * @param activityNode
+	 * @param fileName
+	 * @param fileContent
+	 * @param parameters
+	 * @throws ClientServicesException
+	 */
+//	public ActivityNode createActivityNode(ActivityNode activityNode, String fileName, InputStream fileContent, String mimeType, Map<String, String> parameters) throws ClientServicesException {
+//		// create file field if required
+//		if (activityNode.getFieldByName(fileName) == null) {
+//			FileField field = new FileField();
+//			field.setName(fileName);
+//			field.setPosition(1000);
+//			activityNode.addField(field);
+//		}		
+//		
+//		String requestUrl = ActivityUrls.ACTIVITY.format(this, ActivityUrls.activityPart(activityNode.getActivityUuid()));
+//		return createActivityNodeEntity(requestUrl, activityNode, fileName, fileContent, mimeType, parameters);
+//	}
+
 	//------------------------------------------------------------------------------------------------------------------
 	// Working with activity nodes programmatically.
 	//------------------------------------------------------------------------------------------------------------------
@@ -911,6 +978,27 @@ public class ActivityService extends ConnectionsService {
 		}
 	}
 	
+	protected void createActivityFile(String requestUrl, String fileName, InputStream fileContent, String mimeType) throws ClientServicesException {
+		try {
+			Map<String,String> headers = new HashMap<String, String>();
+			headers.put(SLUG, fileName);
+			headers.put(CONTENT_TYPE, mimeType);
+			Response response = createData(requestUrl, null, headers, fileContent);
+			if (isValidResponse(response, HTTPCode.CREATED)) {
+				return;
+			} else {
+				throw new ClientServicesException(response.getResponse(), response.getRequest());
+			}
+		}
+		catch(ClientServicesException e) {
+			throw e;
+		}
+		catch(Exception e) {
+			throw new ClientServicesException(e);
+		}
+	}
+
+	
 	protected Activity updateActivityEntityData(Activity activity, Response response) {
 		Node node = (Node)response.getData();
 		XPathExpression xpath = (node instanceof Document) ? (XPathExpression)AtomXPath.singleEntry.getPath() : null;
@@ -918,7 +1006,7 @@ public class ActivityService extends ConnectionsService {
 		activity.setService(this);
 		return activity;
 	}
-		
+	
 	protected ActivityNode getActivityNodeEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
 		try {
 			return getEntity(requestUrl, parameters, getActivityNodeFeedHandler(false));
@@ -935,6 +1023,29 @@ public class ActivityService extends ConnectionsService {
 		try {
 			ActivityNodeSerializer serializer = new ActivityNodeSerializer(activityNode);
 			Response response = createData(requestUrl, parameters, getAtomHeaders(), serializer.generateCreate());
+			if (isValidResponse(response, HTTPCode.CREATED)) {
+				return updateActivityNodeEntityData(activityNode, response);
+			} else {
+				throw new ClientServicesException(response.getResponse(), response.getRequest());
+			}
+		}
+		catch(ClientServicesException e) {
+			throw e;
+		}
+		catch(Exception e) {
+			throw new ClientServicesException(e);
+		}
+	}
+
+	protected ActivityNode createActivityNodeEntity(String requestUrl, ActivityNode activityNode, String fileName, InputStream fileContent, String mimeType, Map<String, String> parameters) throws ClientServicesException {
+		try {
+			ActivityNodeSerializer serializer = new ActivityNodeSerializer(activityNode);
+			
+			List<ClientService.ContentPart> contentParts = new ArrayList<ClientService.ContentPart>();
+			contentParts.add(new ContentPart("activityNode", serializer.generateCreate(), APPLICATION_ATOM_XML));
+			contentParts.add(new ContentPart(fileName, fileContent, fileName, mimeType));
+			
+			Response response = createData(requestUrl, parameters, getMultipartHeaders(), contentParts);
 			if (isValidResponse(response, HTTPCode.CREATED)) {
 				return updateActivityNodeEntityData(activityNode, response);
 			} else {

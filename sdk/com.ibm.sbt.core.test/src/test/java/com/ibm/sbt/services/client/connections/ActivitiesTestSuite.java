@@ -24,6 +24,7 @@ import com.ibm.sbt.services.client.connections.activities.ActivityAddMemberTest;
 import com.ibm.sbt.services.client.connections.activities.ActivityCrudrTest;
 import com.ibm.sbt.services.client.connections.activities.ActivityFeedTest;
 import com.ibm.sbt.services.client.connections.activities.ActivityFieldCrudrTest;
+import com.ibm.sbt.services.client.connections.activities.ActivityFileTest;
 import com.ibm.sbt.services.client.connections.activities.ActivityMemberArudTest;
 import com.ibm.sbt.services.client.connections.activities.ActivityNodeCrudrTest;
 import com.ibm.sbt.services.client.connections.activities.ActivityNodeDatesTest;
@@ -51,6 +52,7 @@ import com.ibm.sbt.services.client.connections.activities.PublicActivityTest;
 	ActivityAddMemberTest.class,
 	ActivityUrlsTest.class,
 	ActivityCrudrTest.class,
+	ActivityFileTest.class,
 	//ActivityDescendantsSinceTest.class,
 	//ActivityNodeChildrenSinceTest.class,
 	//ActivityDescendantsSortByTest.class,

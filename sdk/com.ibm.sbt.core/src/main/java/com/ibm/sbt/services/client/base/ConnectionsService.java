@@ -17,6 +17,7 @@ package com.ibm.sbt.services.client.base;
 
 import static com.ibm.sbt.services.client.base.CommonConstants.APPLICATION_ATOM_XML;
 import static com.ibm.sbt.services.client.base.CommonConstants.BINARY_OCTET_STREAM;
+import static com.ibm.sbt.services.client.base.CommonConstants.MULTIPART_RELATED;
 import static com.ibm.sbt.services.client.base.CommonConstants.CONTENT_TYPE;
 
 import java.util.HashMap;
@@ -34,9 +35,13 @@ public abstract class ConnectionsService extends BaseService {
 	private static final long serialVersionUID = -1444389644260625300L;
 
 	private static Map<String,String> ATOM_HEADERS = new HashMap<String, String>();
-	
 	static {
 		ATOM_HEADERS.put(CONTENT_TYPE, APPLICATION_ATOM_XML);
+	}
+
+	private static Map<String,String> MULTIPART_HEADERS = new HashMap<String, String>();
+	static {
+		MULTIPART_HEADERS.put(CONTENT_TYPE, MULTIPART_RELATED);
 	}
 
 	public ConnectionsService(String endpoint) {
@@ -70,6 +75,10 @@ public abstract class ConnectionsService extends BaseService {
 
 	protected Map<String,String> getAtomHeaders() {
 		return ATOM_HEADERS;
+	}
+
+	protected Map<String,String> getMultipartHeaders() {
+		return MULTIPART_HEADERS;
 	}
 
 	protected Map<String,String> getBinaryHeaders() {

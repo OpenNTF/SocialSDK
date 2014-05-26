@@ -1,4 +1,4 @@
-***REMOVED***
+<?php
 /*
  * © Copyright IBM Corp. 2014
  *
@@ -59,7 +59,7 @@ class SBTBaseWidget extends WP_Widget {
 			$this->endpoint = "connections";
 		}
 		
-		if (!$this->_isUserLoggedIn()) {
+		if (!$this->_isUserLoggedIn() && $settings->requireSignOn($this->endpoint)) {
 			
 			echo '<div class="widget-area" style="width: 100%;"><aside class="widget widget_recent_entries"><h3 class="widget-title">' . $this->widget_name . '</h3>';
 			echo '' . $GLOBALS[LANG]['must_login'] . '</aside></div>';
@@ -145,18 +145,18 @@ class SBTBaseWidget extends WP_Widget {
 	
 		?>
 				<p>
-					<label for="***REMOVED*** echo $this->get_field_id('ibm-sbtk-element-id'); ?>">ID:<br/><span style="font-size: 10px; color: red;">(For this widget to work, the ID must be unique)</label> 
-					<input class="widefat" id="***REMOVED*** echo $this->get_field_id('ibm-sbtk-element-id'); ?>" name="***REMOVED*** echo $this->get_field_name('ibm-sbtk-element-id'); ?>" type="text" value="***REMOVED*** echo esc_attr($this->elID); ?>"/>
+					<label for="<?php echo $this->get_field_id('ibm-sbtk-element-id'); ?>">ID:<br/><span style="font-size: 10px; color: red;">(For this widget to work, the ID must be unique)</label> 
+					<input class="widefat" id="<?php echo $this->get_field_id('ibm-sbtk-element-id'); ?>" name="<?php echo $this->get_field_name('ibm-sbtk-element-id'); ?>" type="text" value="<?php echo esc_attr($this->elID); ?>"/>
 				</p>
 				<p>
-					<label for="***REMOVED*** echo $this->get_field_id('ibm-sbtk-template'); ?>">Template<br/><span style="font-size: 10px;">(path must be relative to ***REMOVED*** echo BASE_PATH; ?>)</span>:</label> 
-					<input class="widefat" id="***REMOVED*** echo $this->get_field_id('ibm-sbtk-template'); ?>" name="***REMOVED*** echo $this->get_field_name('ibm-sbtk-template'); ?>" type="text" value="***REMOVED*** echo esc_attr($template); ?>"/>
+					<label for="<?php echo $this->get_field_id('ibm-sbtk-template'); ?>">Template<br/><span style="font-size: 10px;">(path must be relative to <?php echo BASE_PATH; ?>)</span>:</label> 
+					<input class="widefat" id="<?php echo $this->get_field_id('ibm-sbtk-template'); ?>" name="<?php echo $this->get_field_name('ibm-sbtk-template'); ?>" type="text" value="<?php echo esc_attr($template); ?>"/>
 				</p>
 				
 				<p>
-				<label for="***REMOVED*** echo $this->get_field_id('ibm-sbtk-endpoint'); ?>">***REMOVED*** echo $GLOBALS[LANG]['endpoint']?>:</label> 
-				<select id="***REMOVED*** echo $this->get_field_id('ibm-sbtk-endpoint'); ?>" name="***REMOVED*** echo $this->get_field_name('ibm-sbtk-endpoint'); ?>">
-					***REMOVED*** 
+				<label for="<?php echo $this->get_field_id('ibm-sbtk-endpoint'); ?>"><?php echo $GLOBALS[LANG]['endpoint']?>:</label> 
+				<select id="<?php echo $this->get_field_id('ibm-sbtk-endpoint'); ?>" name="<?php echo $this->get_field_name('ibm-sbtk-endpoint'); ?>">
+					<?php 
 						$settings = new SBTSettings();
 						$endpoints = $settings->getEndpoints();
 						foreach ($endpoints as $ep) {
@@ -165,7 +165,7 @@ class SBTBaseWidget extends WP_Widget {
 					?>
 				</select>
 			</p>
-			***REMOVED*** 
+			<?php 
 		}
 			
 		/**

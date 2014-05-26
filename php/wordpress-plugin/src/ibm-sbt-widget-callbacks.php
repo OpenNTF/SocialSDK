@@ -1,6 +1,6 @@
-***REMOVED***
+<?php
 /*
- * © Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2014
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,6 +41,20 @@ function ibm_sbtk_header($args = array()) {
 		if (($settings->getAuthenticationMethod($endpoint['name']) == 'oauth1' 
 				|| $settings->getAuthenticationMethod($endpoint['name']) == 'oauth2') 
 				&& $store->getOAuthAccessToken($endpoint['name']) == null && (!isset($_COOKIE['IBMSBTKOAuthLogin']) || $_COOKIE['IBMSBTKOAuthLogin'] != 'yes')) {
+			$deploy_url = $settings->getSDKDeployURL($endpoint['name']);
+			
+			$authentication_method = $settings->getAuthenticationMethod($endpoint['name']);
+			$js_library = $settings->getJSLibrary($endpoint['name']);
+			
+			$url = $settings->getURL($endpoint['name']);
+			$name = $settings->getName($endpoint['name']);
+			$api_version = $settings->getAPIVersion($endpoint['name']);
+			$type = $settings->getServerType($endpoint['name']);
+			$allow_client_access = $settings->allowClientAccess($endpoint['name']);
+			
+			$endpoints = $settings->getEndpoints();
+			// Load the header view
+			require BASE_PATH . '/views/includes/header.php';
 			return;
 		}
 	}

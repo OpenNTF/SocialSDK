@@ -1,4 +1,4 @@
-***REMOVED***
+<?php
 /*
  * © Copyright IBM Corp. 2013
 *
@@ -207,6 +207,21 @@ class SBTSettings {
 	}
 	
 	/**
+	 * Returns true if user is required to log into Wordpress; false if not.
+	 *
+	 * @return	True if user is required to log into Wordpress; false if not.
+	 */
+	public function requireSignOn($endpointName = "connections") {
+		$endpoints = get_option(ENDPOINTS);
+		foreach ($endpoints as $endpoint) {
+			$decodedEndpoint = (array)json_decode($endpoint, true);
+			if ($decodedEndpoint['name'] == $endpointName) {
+				return $decodedEndpoint['require_sign_on'] == 'require_sign_on';
+			}
+		}
+	}
+	
+	/**
 	 * Returns the password used for basic authentication.
 	 *
 	 * @return
@@ -340,7 +355,7 @@ class SBTSettings {
 			$endpoint['endpoint_version'] = (isset($_POST['endpoint_version']) ? $_POST['endpoint_version'] : "");
 			$endpoint['allow_client_access'] = (isset($_POST['allow_client_access']) ? $_POST['allow_client_access'] : "");
 			$endpoint['oauth_origin'] = get_site_url();
-			syslog(LOG_INFO, "ORIGIN: " . $endpoint['oauth_origin']);
+			$endpoint['require_sign_on'] = (isset($_POST['require_sign_on']) && $_POST['require_sign_on'] == 'require_sign_on' ? $_POST['require_sign_on'] : "");
 				
 			// If deletion_point is set to "yes", then the endpoint will be deleted.
 			// Note: The deletion UI controls will need to be uncommented in

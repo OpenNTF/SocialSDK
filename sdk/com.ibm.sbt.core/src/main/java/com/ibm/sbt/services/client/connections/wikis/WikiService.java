@@ -441,7 +441,7 @@ public class WikiService extends ConnectionsService {
 	 * @throws ClientServicesException
 	 */
 	public WikiPage getWikiPage(String wikiLabel, String pageLabel) throws ClientServicesException {
-		return getWikiPage(wikiLabel, pageLabel);
+		return getWikiPage(wikiLabel, pageLabel, null);
 	}
 
 	/**

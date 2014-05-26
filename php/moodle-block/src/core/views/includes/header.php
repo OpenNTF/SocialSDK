@@ -1,3 +1,4 @@
+<?php
 /**
  * Plugin Name: Social Business Toolkit integration plugin
  * Plugin URI: http://example.com
@@ -16,14 +17,14 @@ function plugins_url() {
 ?>
 <script type="text/javascript">
 	var djConfig = {
-	baseUrl: "***REMOVED*** echo $agnostic_deploy_url; ?>",
+	baseUrl: "<?php echo $agnostic_deploy_url; ?>",
 	parseOnLoad: true,
 	locale: "en"
 };
 
 </script>
 
-<script src="***REMOVED*** echo $js_library; ?>"></script>
+<script src="<?php echo $js_library; ?>"></script>
 <link rel="stylesheet" type="text/css" title="Style" href="//ajax.googleapis.com/ajax/libs/dojo/1.8.0/dojox/grid/enhanced/resources/claro/EnhancedGrid.css">
 <link rel="stylesheet" type="text/css" title="Style" href="//ajax.googleapis.com/ajax/libs/dojo/1.8.0/dojox/grid/enhanced/resources/EnhancedGrid_rtl.css">
 
@@ -32,17 +33,17 @@ function plugins_url() {
 		_sbt = 0;
 		require({
 			paths: {
-				"sbt": "***REMOVED*** echo $agnostic_deploy_url; ?>/js/sdk/sbt"
+				"sbt": "<?php echo $agnostic_deploy_url; ?>/js/sdk/sbt"
 			}
 		});
 		require({
 			paths: {
-				"sbt/_bridge": "***REMOVED*** echo $agnostic_deploy_url; ?>/js/sdk/_bridges/dojo-amd"
+				"sbt/_bridge": "<?php echo $agnostic_deploy_url; ?>/js/sdk/_bridges/dojo-amd"
 			}
 		});
 		require({
 			paths: {
-				"sbt/widget": "***REMOVED*** echo $agnostic_deploy_url; ?>/js/sdk/dojo2"
+				"sbt/widget": "<?php echo $agnostic_deploy_url; ?>/js/sdk/dojo2"
 			}
 		});
 
@@ -51,11 +52,11 @@ function plugins_url() {
 				var sbt = {};
 				sbt.Properties = {
 					"libraryUrl": "",
-					"serviceUrl": "***REMOVED*** echo plugins_url(); ?>/index.php?classpath=services&class=Proxy&&uid=***REMOVED*** global $USER; echo $USER->id; ?>&method=fileOperations&_redirectUrl=",
-					"sbtUrl": "***REMOVED*** echo $agnostic_deploy_url; ?>/js/sdk"
+					"serviceUrl": "<?php echo plugins_url(); ?>/index.php?classpath=services&class=Proxy&&uid=<?php global $USER; echo $USER->id; ?>&method=fileOperations&_redirectUrl=",
+					"sbtUrl": "<?php echo $agnostic_deploy_url; ?>/js/sdk"
 				};
 				sbt.Endpoints = {
-						***REMOVED*** 
+						<?php 
 							foreach($endpoints as $endpoint) {
 								echo generateEndpoint($endpoint->auth_type, $endpoint->server_url, $agnostic_deploy_url, $endpoint->name, $endpoint->api_version);
 							}
@@ -69,7 +70,7 @@ function plugins_url() {
 	};
 </script>
 
-***REMOVED*** 
+<?php 
 
 
 

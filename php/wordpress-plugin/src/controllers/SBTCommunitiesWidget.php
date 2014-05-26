@@ -1,4 +1,4 @@
-***REMOVED***
+<?php
 /*
  * © Copyright IBM Corp. 2014
  *
@@ -49,14 +49,14 @@ class SBTCommunitiesWidget extends SBTBaseGridWidget {
 		}
 		?>
 			<p>
-				<label for="***REMOVED*** echo $this->get_field_id('ibm-sbtk-communities-type'); ?>">***REMOVED*** echo $GLOBALS[LANG]['community-type']?>:</label> 
-				<select id="***REMOVED*** echo $this->get_field_id('ibm-sbtk-communities-type'); ?>" name="***REMOVED*** echo $this->get_field_name('ibm-sbtk-communities-type'); ?>">
-					<option ***REMOVED*** echo ($type == 'my' ? 'selected="selected"' : ''); ?> value="my">***REMOVED*** echo $GLOBALS[LANG]['my-communities']?></option>
-					<option ***REMOVED*** echo ($type == 'public' ? 'selected="selected"' : ''); ?> value="public">***REMOVED*** echo $GLOBALS[LANG]['public-communities']?></option>
-					<option ***REMOVED*** echo ($type == 'invited' ? 'selected="selected"' : ''); ?> value="invited">***REMOVED*** echo $GLOBALS[LANG]['invited-communities']?></option>
+				<label for="<?php echo $this->get_field_id('ibm-sbtk-communities-type'); ?>"><?php echo $GLOBALS[LANG]['community-type']?>:</label> 
+				<select id="<?php echo $this->get_field_id('ibm-sbtk-communities-type'); ?>" name="<?php echo $this->get_field_name('ibm-sbtk-communities-type'); ?>">
+					<option <?php echo ($type == 'my' ? 'selected="selected"' : ''); ?> value="my"><?php echo $GLOBALS[LANG]['my-communities']?></option>
+					<option <?php echo ($type == 'public' ? 'selected="selected"' : ''); ?> value="public"><?php echo $GLOBALS[LANG]['public-communities']?></option>
+					<option <?php echo ($type == 'invited' ? 'selected="selected"' : ''); ?> value="invited"><?php echo $GLOBALS[LANG]['invited-communities']?></option>
 				</select>
 			</p>
-			***REMOVED*** 
+			<?php 
 		}
 			
 		/**

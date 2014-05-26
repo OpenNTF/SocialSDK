@@ -1,4 +1,4 @@
-***REMOVED***
+<?php
 /*
  * © Copyright IBM Corp. 2013
 *
@@ -41,8 +41,8 @@ class SBTSettings
 	{
 		$this->_settings['SmartCloud']['name'] 					= "SmartCloud";
 		$this->_settings['SmartCloud']['url'] 					= 'https://apps.na.collabserv.com';
-		$this->_settings['SmartCloud']['consumer_key'] 			= '***REMOVED***';
-		$this->_settings['SmartCloud']['consumer_secret']		= '***REMOVED***';
+		$this->_settings['SmartCloud']['consumer_key'] 			= 'b43c48f51c498717c8547aee0590abc2';
+		$this->_settings['SmartCloud']['consumer_secret']		= 'd46e0237d5de41feb4b446089a0575f3';
 		$this->_settings['SmartCloud']['request_token_url']		= 'https://apps.na.collabserv.com/manage/oauth/getRequestToken';
 		$this->_settings['SmartCloud']['authorization_url']		= 'https://apps.na.collabserv.com/manage/oauth/authorizeToken';
 		$this->_settings['SmartCloud']['access_token_url']		= 'https://apps.na.collabserv.com/manage/oauth/getAccessToken';

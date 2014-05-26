@@ -1,4 +1,4 @@
-***REMOVED***
+<?php
 /*
  * © Copyright IBM Corp. 2014
  *
@@ -56,24 +56,24 @@ class SBTFilesWidget extends SBTBaseGridWidget {
 		
 		?>
 			<p>
-				<label for="***REMOVED*** echo $this->get_field_id('ibm-sbtk-files-pin-file'); ?>">Pin file:</label> 
-				<input ***REMOVED*** echo ($pinFile ? 'checked="checked"' : ''); ?> id="***REMOVED*** echo $this->get_field_id('ibm-sbtk-files-pin-file'); ?>" name="***REMOVED*** echo $this->get_field_name('ibm-sbtk-files-pin-file'); ?>" type="checkbox" value="pin" />
+				<label for="<?php echo $this->get_field_id('ibm-sbtk-files-pin-file'); ?>">Pin file:</label> 
+				<input <?php echo ($pinFile ? 'checked="checked"' : ''); ?> id="<?php echo $this->get_field_id('ibm-sbtk-files-pin-file'); ?>" name="<?php echo $this->get_field_name('ibm-sbtk-files-pin-file'); ?>" type="checkbox" value="pin" />
 			</p>
 			<p>
-				<label for="***REMOVED*** echo $this->get_field_id('ibm-sbtk-files-type'); ?>">***REMOVED*** echo $GLOBALS[LANG]['file-type']?>:</label> 
-				<select id="***REMOVED*** echo $this->get_field_id('ibm-sbtk-files-type'); ?>" name="***REMOVED*** echo $this->get_field_name('ibm-sbtk-files-type'); ?>">
-					<option ***REMOVED*** echo ($type == 'myFiles' ? 'selected="selected"' : ''); ?> value="myFiles">***REMOVED*** echo $GLOBALS[LANG]['my-files']?></option>
-					<option ***REMOVED*** echo ($type == 'publicFiles' ? 'selected="selected"' : ''); ?> value="publicFiles">***REMOVED*** echo $GLOBALS[LANG]['public-files']?></option>
-					<option ***REMOVED*** echo ($type == 'myPinnedFiles' ? 'selected="selected"' : ''); ?> value="myPinnedFiles">***REMOVED*** echo $GLOBALS[LANG]['pinned-files']?></option>
-					<option ***REMOVED*** echo ($type == 'myFolders' ? 'selected="selected"' : ''); ?> value="myFolders">***REMOVED*** echo $GLOBALS[LANG]['my-folders']?></option>
-					<option ***REMOVED*** echo ($type == 'publicFolders' ? 'selected="selected"' : ''); ?> value="publicFolders">***REMOVED*** echo $GLOBALS[LANG]['public-folders']?></option>
-					<option ***REMOVED*** echo ($type == 'myPinnedFolders' ? 'selected="selected"' : ''); ?> value="myPinnedFolders">***REMOVED*** echo $GLOBALS[LANG]['my-pinned-folders']?></option>
-					<option ***REMOVED*** echo ($type == 'activeFolders' ? 'selected="selected"' : ''); ?> value="activeFolders">***REMOVED*** echo $GLOBALS[LANG]['active-folders']?></option>
-					<option ***REMOVED*** echo ($type == 'fileShares' ? 'selected="selected"' : ''); ?> value="fileShares">***REMOVED*** echo $GLOBALS[LANG]['file-shares']?></option>
-					<option ***REMOVED*** echo ($type == 'communityFiles' ? 'selected="selected"' : ''); ?> value="communityFiles">***REMOVED*** echo $GLOBALS[LANG]['community-files']?></option>
+				<label for="<?php echo $this->get_field_id('ibm-sbtk-files-type'); ?>"><?php echo $GLOBALS[LANG]['file-type']?>:</label> 
+				<select id="<?php echo $this->get_field_id('ibm-sbtk-files-type'); ?>" name="<?php echo $this->get_field_name('ibm-sbtk-files-type'); ?>">
+					<option <?php echo ($type == 'myFiles' ? 'selected="selected"' : ''); ?> value="myFiles"><?php echo $GLOBALS[LANG]['my-files']?></option>
+					<option <?php echo ($type == 'publicFiles' ? 'selected="selected"' : ''); ?> value="publicFiles"><?php echo $GLOBALS[LANG]['public-files']?></option>
+					<option <?php echo ($type == 'myPinnedFiles' ? 'selected="selected"' : ''); ?> value="myPinnedFiles"><?php echo $GLOBALS[LANG]['pinned-files']?></option>
+					<option <?php echo ($type == 'myFolders' ? 'selected="selected"' : ''); ?> value="myFolders"><?php echo $GLOBALS[LANG]['my-folders']?></option>
+					<option <?php echo ($type == 'publicFolders' ? 'selected="selected"' : ''); ?> value="publicFolders"><?php echo $GLOBALS[LANG]['public-folders']?></option>
+					<option <?php echo ($type == 'myPinnedFolders' ? 'selected="selected"' : ''); ?> value="myPinnedFolders"><?php echo $GLOBALS[LANG]['my-pinned-folders']?></option>
+					<option <?php echo ($type == 'activeFolders' ? 'selected="selected"' : ''); ?> value="activeFolders"><?php echo $GLOBALS[LANG]['active-folders']?></option>
+					<option <?php echo ($type == 'fileShares' ? 'selected="selected"' : ''); ?> value="fileShares"><?php echo $GLOBALS[LANG]['file-shares']?></option>
+					<option <?php echo ($type == 'communityFiles' ? 'selected="selected"' : ''); ?> value="communityFiles"><?php echo $GLOBALS[LANG]['community-files']?></option>
 				</select>
 			</p>
-		***REMOVED*** 
+		<?php 
 	}
 		
 	/**

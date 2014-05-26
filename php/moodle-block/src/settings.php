@@ -1,4 +1,4 @@
-***REMOVED*** 
+<?php 
 /**
  * (C) Copyright IBM Corp. 2012
  *
@@ -23,7 +23,7 @@ require_once 'core/autoload.php';
 
 $settings->add(new admin_setting_heading(
 		'general',
-		'General Configuration',
+		get_string('general_config', 'block_ibmsbt'),
 		''
 ));
 

@@ -1,4 +1,4 @@
-***REMOVED***
+<?php
 /*
  * © Copyright IBM Corp. 2014
 *
@@ -101,16 +101,16 @@ class SBTPluginSettings extends BasePluginController
 		?>
         
         <div class="wrap">
-        	***REMOVED*** $this->pluginOptionsTabs(); ?>          
+        	<?php $this->pluginOptionsTabs(); ?>          
             <form method="post" action="#">
-            ***REMOVED***
+            <?php
                 settings_fields($tab);
                 do_settings_sections($tab);
                 submit_button();
             ?>
             </form>
         </div>
-        ***REMOVED***
+        <?php
     }
    
     /**
@@ -306,6 +306,7 @@ class SBTPluginSettings extends BasePluginController
     	$basic_auth_method = '';
     	$endpointVersion = '';
     	$callbackURL = '';
+    	$require_sign_on = true;
     	if ($this->endpoints) {
     		foreach ($this->endpoints as $val) {
     			$endpoint = (array)json_decode($val, true);
@@ -321,6 +322,9 @@ class SBTPluginSettings extends BasePluginController
     				if (isset($endpoint['server_type'])) {
     					$server_type = $endpoint['server_type'];
     				}
+    				if (isset($endpoint['require_sign_on']) && $endpoint['require_sign_on'] != 'require_sign_on') {
+    					$require_sign_on = false;
+    				}
     				if (isset($endpoint['basic_auth_method'])) {
     					$basic_auth_method = $endpoint['basic_auth_method'];
     				}
@@ -332,12 +336,14 @@ class SBTPluginSettings extends BasePluginController
     			}
     		}
     	}
+
     	$viewData['callback_url'] = $callbackURL;
     	$viewData['basic_auth_method'] = $basic_auth_method;
     	$viewData['server_type'] = $server_type;
     	$viewData['force_ssl_trust'] = $ssl_trust;
     	$viewData['allow_client_access'] = $clientAccess;
     	$viewData['endpoint_version'] = $endpointVersion; 
+    	$viewData['require_sign_on'] = $require_sign_on;
     	$this->loadView('wp-settings/hiddenEndpointFields', $viewData);
     }	
     

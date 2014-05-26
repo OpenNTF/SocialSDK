@@ -1,13 +1,13 @@
 
 <div id="grantAccessDiv">
 	<div class="alert alert-error" id="grantAccessErrorDiv" style="display: none;"></div>
-	<div id="desc">***REMOVED*** echo $GLOBALS[LANG]['no_access_granted']; ?></div>
+	<div id="desc"><?php echo $GLOBALS[LANG]['no_access_granted']; ?></div>
 	<button class="btn btn-primary" id="grantAccessBtn" onclick="grantAccess()">Grant Access</button>
 </div>
 
 <script type="text/javascript">
 	function grantAccess() {
-		***REMOVED*** 
+		<?php 
 			if (!isset($_SERVER['HTTPS']) || !$_SERVER['HTTPS']) {
 				echo "alert('The IBM Connect cookie policy requires that you use HTTPS to perform this action. Please try again by accessing this webpage using the HTTPS protocol.');";
 				echo "return;";

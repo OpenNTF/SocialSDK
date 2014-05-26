@@ -9,7 +9,7 @@ function SCLogin() {
 	var left = 99;
 	var top = 99;
 
-	URL= "***REMOVED*** echo $settings->getURL($this->config->endpoint); ?>/manage/account/dashboardHandler/input";
+	URL= "<?php echo $settings->getURL($this->config->endpoint); ?>/manage/account/dashboardHandler/input";
        
 	window.open(URL,'SCLogin', 'width='+width+', height='+height+', top='+top+', left='+left+', scrollbars=yes, status=no, toolbar=no, location=no, directories=no, menubar=no, resizable=no, fullscreen=no');
 }
@@ -22,7 +22,7 @@ function SCLogout() {
 	var left = 99;
 	var top = 99;
 
-	URL= "***REMOVED*** echo $settings->getURL($this->config->endpoint); ?>/manage/account/logoutSSO";
+	URL= "<?php echo $settings->getURL($this->config->endpoint); ?>/manage/account/logoutSSO";
        
 	window.open(URL,'SCLogout', 'width='+width+', height='+height+', top='+top+', left='+left+', scrollbars=yes, status=no, toolbar=no, location=no, directories=no, menubar=no, resizable=no, fullscreen=no');
 }
@@ -55,7 +55,7 @@ function JoinMeeting() {
 	// If using SmartCloud - use this one
 	//
 	
-	var URL='***REMOVED*** echo $settings->getURL($this->config->endpoint); ?>/meetings/join?id=' + MeetingID.value;
+	var URL='<?php echo $settings->getURL($this->config->endpoint); ?>/meetings/join?id=' + MeetingID.value;
 	//
 	// If using Greenhouse or on premises ST Meetings - use this one
 	//
@@ -75,7 +75,7 @@ function HostMeeting(URL) {
 }
 </script>
 
-***REMOVED*** 
+<?php 
 	$url = $settings->getURL($this->config->endpoint);
 	$parse = parse_url($url);
 	$host = $parse['host']; 
@@ -85,7 +85,7 @@ function HostMeeting(URL) {
 		$host = str_replace('apps.', 'webchat.na.', $host);
 	}
 ?>
-<a href="javascript:Chat('https://***REMOVED*** echo $host; ?>/stwebclient/popup.jsp?lang=en-us');">Start a Chat</a><br/>
+<a href="javascript:Chat('https://<?php echo $host; ?>/stwebclient/popup.jsp?lang=en-us');">Start a Chat</a><br/>
 <span style="font-size: 12px;">Join Meeting</span>:
 <input id='mtgid' type='text'  value='' size='18' />
 <input style="font-size: 12px;" type='button' onclick='JoinMeeting()' value = 'OK'/>

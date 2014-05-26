@@ -1,4 +1,4 @@
-***REMOVED***
+<?php
 /*
  * © Copyright IBM Corp. 2014
  *
@@ -37,8 +37,8 @@ class SBTSettings_test extends SBTBaseTestCase
 		$this->config['form_auth_login_page'] = '';
 		$this->config['form_auth_cookie_cache'] = '';
 		$this->config['basic_auth_method'] = 'global';
-		$this->config['basic_auth_password'] = '***REMOVED***';
-		$this->config['basic_auth_username'] = '***REMOVED***';
+		$this->config['basic_auth_password'] = 'passw0rd';
+		$this->config['basic_auth_username'] = 'fadams';
 		$this->config['auth_type'] = 'oauth1';
 		$this->config['authorization_url'] = 'https://apps.na.collabserv.com/manage/oauth/authorizeToken';
 		$this->config['oauth2_callback_url'] = '';

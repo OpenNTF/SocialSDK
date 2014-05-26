@@ -1,4 +1,4 @@
-***REMOVED***
+<?php
 /*
  * © Copyright IBM Corp. 2013
  *
@@ -34,7 +34,7 @@ class block_ibmsbt_edit_form extends block_edit_form {
 
         // List of available samples. Note: keys must reflect relative path from
         // core/samples and must omit the .php file extension
-        $plugins = array('choose' => 'Choose one...');
+        $plugins = array('choose' => get_string('choose_one', 'block_ibmsbt'));
         $path = str_replace('core', '', BASE_PATH) . '/user_widgets/';
         if ($handle = opendir($path)) {
         	while (false !== ($file = readdir($handle))) {
@@ -78,7 +78,7 @@ class block_ibmsbt_edit_form extends block_edit_form {
         	$endpoints[$record->name] = $record->name;
         }
         
-        $mform->addElement('select', 'config_endpoint', 'Endpoint: (<a href="#" onclick="ibm_sbt_manage_endpoints();">Click here to <strong>manage your endpoints</strong></a>)', $endpoints);
+        $mform->addElement('select', 'config_endpoint', 'Endpoint: (<a href="#" onclick="ibm_sbt_manage_endpoints();">' . get_string('click_here_to', 'block_ibmsbt') . '<strong>' . get_string('manage_your_endpoints', 'block_ibmsbt') . '</strong></a>)', $endpoints);
         $mform->setDefault('config_endpoint', 'connections');
         
         // Type dropdown

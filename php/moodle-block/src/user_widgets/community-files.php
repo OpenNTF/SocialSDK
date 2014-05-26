@@ -1,102 +1,103 @@
-<div id="***REMOVED*** echo $this->config->elementID;?>"></div>
+<div id="<?php echo $this->config->elementID;?>"></div>
 
-***REMOVED*** 
+<?php 
 // Ensure that element IDs are unique
-$timestamp = time();
+$milliseconds = microtime(true) * 1000; 
+$timestamp = round($milliseconds);
 
 global $CFG;
-require_once $CFG->dirroot . '/blocks/ibmsbt/user_widgets/templates/ibm-sbt-community-files.php';
+require $CFG->dirroot . '/blocks/ibmsbt/user_widgets/templates/ibm-sbt-community-files.php';
 ?>
 
 <script type="text/javascript">
-var grid***REMOVED*** echo $timestamp; ?>;
+var grid<?php echo $timestamp; ?>;
 
-function onCommunityChange***REMOVED*** echo $timestamp; ?>() {
+function onCommunityChange<?php echo $timestamp; ?>() {
 	require(["sbt/dom", "sbt/connections/controls/files/FileGrid"], function(dom, FileGrid) {
-		var communityList = dom.byId("ibm-sbt-communities-***REMOVED*** echo $timestamp; ?>");
+		var communityList = dom.byId("ibm-sbt-communities-<?php echo $timestamp; ?>");
 		var currentCommunity = communityList.options[communityList.selectedIndex].value;
 
-		var domNode = dom.byId("fileRow-***REMOVED*** echo $timestamp; ?>");
-		console.log(domNode);
+		var domNode = dom.byId("fileRow-<?php echo $timestamp; ?>");
+
 		var FileRow = domNode.text || domNode.textContent;
-	    domNode = dom.byId("pagingHeader-***REMOVED*** echo $timestamp; ?>");
+	    domNode = dom.byId("pagingHeader-<?php echo $timestamp; ?>");
 	    var PagingHeader = domNode.text || domNode.textContent;
-	    domNode = dom.byId("pagingFooter-***REMOVED*** echo $timestamp; ?>");
+	    domNode = dom.byId("pagingFooter-<?php echo $timestamp; ?>");
 	    var PagingFooter = domNode.text || domNode.textContent;
 		
-		grid***REMOVED*** echo $timestamp; ?> = new FileGrid({
+		grid<?php echo $timestamp; ?> = new FileGrid({
 	         type : "communityFiles",
 	         communityId: currentCommunity,
-	         endpoint: "***REMOVED*** echo $this->config->endpoint; ?>",
+	         endpoint: "<?php echo $this->config->endpoint; ?>",
 	         hidePager: false,
 	         hideSorter: true,
 	         hideFooter: false,
 	    	 rendererArgs : { template : FileRow, pagerTemplate : PagingHeader, footerTemplate : PagingFooter}       
 	    });
-		dom.byId("ibm-sbt-community-files-list-***REMOVED*** echo $timestamp; ?>").innerHTML = "";
-        dom.byId("ibm-sbt-community-files-list-***REMOVED*** echo $timestamp; ?>").appendChild(grid***REMOVED*** echo $timestamp; ?>.domNode);
-        
-        grid***REMOVED*** echo $timestamp; ?>.update();
+		dom.byId("ibm-sbt-community-files-list-<?php echo $timestamp; ?>").innerHTML = "";
+        dom.byId("ibm-sbt-community-files-list-<?php echo $timestamp; ?>").appendChild(grid<?php echo $timestamp; ?>.domNode);
+
+        grid<?php echo $timestamp; ?>.renderer.tableClass = "table";
+	    grid<?php echo $timestamp; ?>.renderer.template = FileRow;
+        grid<?php echo $timestamp; ?>.update();
 	});
 }
 
-function addOnClickHandlers***REMOVED*** echo $timestamp; ?>(communityService, dom) {
+function addOnClickHandlers<?php echo $timestamp; ?>(communityService, dom) {
 
-	dom.byId("ibm-sbt-communities-file-upload-dialog-button-***REMOVED*** echo $timestamp; ?>").onclick = function(evt) {
-		var communityList = dom.byId("ibm-sbt-communities-***REMOVED*** echo $timestamp; ?>");
+	dom.byId("ibm-sbt-communities-file-upload-dialog-button-<?php echo $timestamp; ?>").onclick = function(evt) {
+		var communityList = dom.byId("ibm-sbt-communities-<?php echo $timestamp; ?>");
 		var currentCommunity = communityList.options[communityList.selectedIndex].value;
 		var communityName = communityList.options[communityList.selectedIndex].innerHTML;
 		if (currentCommunity) {
-			uploadCommunityFile***REMOVED*** echo $timestamp; ?>(communityService, currentCommunity, communityName, dom);
+			uploadCommunityFile<?php echo $timestamp; ?>(communityService, currentCommunity, communityName, dom);
 		}
 	};
 }
 
-function handleLoggedIn***REMOVED*** echo $timestamp; ?>(communityService, dom) {
-	loadCommunity***REMOVED*** echo $timestamp; ?>(communityService, dom);
-	addOnClickHandlers***REMOVED*** echo $timestamp; ?>(communityService, dom);
+function handleLoggedIn<?php echo $timestamp; ?>(communityService, dom) {
+	loadCommunity<?php echo $timestamp; ?>(communityService, dom);
+	addOnClickHandlers<?php echo $timestamp; ?>(communityService, dom);
 }
 
-function uploadCommunityFile***REMOVED*** echo $timestamp; ?>(communityService, communityId, communityName, dom) {
-	displayMessage***REMOVED*** echo $timestamp; ?>(dom, "Uploading...Please wait.");
-	var img = dom.byId("ibm-sbt-loading-***REMOVED*** echo $timestamp; ?>");
+function uploadCommunityFile<?php echo $timestamp; ?>(communityService, communityId, communityName, dom) {
+	displayMessage<?php echo $timestamp; ?>(dom, "Uploading...Please wait.");
+	var img = dom.byId("ibm-sbt-loading-<?php echo $timestamp; ?>");
 	img.style.display = "block";
-	communityService.uploadCommunityFile("ibm-sbt-community-files-***REMOVED*** echo $timestamp; ?>", communityId).then(
+	communityService.uploadCommunityFile("ibm-sbt-community-files-<?php echo $timestamp; ?>", communityId).then(
 		function(community) {
-			displayMessage***REMOVED*** echo $timestamp; ?>(dom, "Community file uploaded successfuly to community : " + communityName);
-			document.getElementById('ibm-sbt-communities-upload-dialog-***REMOVED*** echo $timestamp; ?>').style.display='none';
+			displayMessage<?php echo $timestamp; ?>(dom, "Community file uploaded successfuly to community : " + communityName);
+			document.getElementById('ibm-sbt-communities-upload-dialog-<?php echo $timestamp; ?>').style.display='none';
 			img.style.display = "none";
-			grid***REMOVED*** echo $timestamp; ?>.update(null);
+			grid<?php echo $timestamp; ?>.update(null);
 		}, 
 		function(error) {
-			handleError***REMOVED*** echo $timestamp; ?>(dom, error);
+			handleError<?php echo $timestamp; ?>(dom, error);
 		}
 	);
 }
 
-function displayMessage***REMOVED*** echo $timestamp; ?>(dom, msg) {
-	dom.setText("ibm-sbt-community-files-success-***REMOVED*** echo $timestamp; ?>", msg);
-	dom.byId("ibm-sbt-community-files-success-***REMOVED*** echo $timestamp; ?>").style.display = "";
-	dom.byId("ibm-sbt-community-files-error-***REMOVED*** echo $timestamp; ?>").style.display = "none";
+function displayMessage<?php echo $timestamp; ?>(dom, msg) {
+	dom.setText("ibm-sbt-community-files-success-<?php echo $timestamp; ?>", msg);
+	dom.byId("ibm-sbt-community-files-success-<?php echo $timestamp; ?>").style.display = "";
+	dom.byId("ibm-sbt-community-files-error-<?php echo $timestamp; ?>").style.display = "none";
 }
 
-function handleError***REMOVED*** echo $timestamp; ?>(dom, error) {
-	dom.setText("ibm-sbt-community-files-error-***REMOVED*** echo $timestamp; ?>", "Error: " + error.message);
+function handleError<?php echo $timestamp; ?>(dom, error) {
+	dom.setText("ibm-sbt-community-files-error-<?php echo $timestamp; ?>", "Error: " + error.message);
 
-	dom.byId("ibm-sbt-community-files-success-***REMOVED*** echo $timestamp; ?>").style.display = "none";
-	dom.byId("ibm-sbt-community-files-error-***REMOVED*** echo $timestamp; ?>").style.display = "";
+	dom.byId("ibm-sbt-community-files-success-<?php echo $timestamp; ?>").style.display = "none";
+	dom.byId("ibm-sbt-community-files-error-<?php echo $timestamp; ?>").style.display = "";
 }
 
-function clearError***REMOVED*** echo $timestamp; ?>(dom) {
-	dom.setText("ibm-sbt-community-files-error-***REMOVED*** echo $timestamp; ?>", "");
-	dom.byId("ibm-sbt-community-files-error-***REMOVED*** echo $timestamp; ?>").style.display = "none";
+function clearError<?php echo $timestamp; ?>(dom) {
+	dom.setText("ibm-sbt-community-files-error-<?php echo $timestamp; ?>", "");
+	dom.byId("ibm-sbt-community-files-error-<?php echo $timestamp; ?>").style.display = "none";
 }
 
-function loadCommunity***REMOVED*** echo $timestamp; ?>(communityService, dom) {
-	communityService.getMyCommunities({
-		ps : 1
-	}).then(function(communities) {
-		var communityList = dom.byId("ibm-sbt-communities-***REMOVED*** echo $timestamp; ?>");
+function loadCommunity<?php echo $timestamp; ?>(communityService, dom) {
+	communityService.getMyCommunities({ps: 10000}).then(function(communities) {
+		var communityList = dom.byId("ibm-sbt-communities-<?php echo $timestamp; ?>");
 		for (var i = 0; i < communities.length; i++) {
 			var opt = document.createElement('option');
 		    opt.value = communities[i].getCommunityUuid();
@@ -107,18 +108,18 @@ function loadCommunity***REMOVED*** echo $timestamp; ?>(communityService, dom) {
 		    opt.innerHTML = title;
 		    communityList.appendChild(opt);
 		}
-		onCommunityChange***REMOVED*** echo $timestamp; ?>();
+		onCommunityChange<?php echo $timestamp; ?>();
 	}, function(error) {
-		handleError***REMOVED*** echo $timestamp; ?>(dom, error);
+		handleError<?php echo $timestamp; ?>(dom, error);
 	});
 
 }
 
 require([ "sbt/connections/CommunityService", "sbt/dom", "sbt/config", ], function(CommunityService, dom, config) {
-	var communityService = new CommunityService({endpoint: "***REMOVED*** echo $this->config->endpoint; ?>"});
+	var communityService = new CommunityService({endpoint: "<?php echo $this->config->endpoint; ?>"});
 	// To make sure authentication happens before upload
 	communityService.endpoint.authenticate().then(function() {
-		handleLoggedIn***REMOVED*** echo $timestamp; ?>(communityService, dom);
+		handleLoggedIn<?php echo $timestamp; ?>(communityService, dom);
 	});
 });
 </script>

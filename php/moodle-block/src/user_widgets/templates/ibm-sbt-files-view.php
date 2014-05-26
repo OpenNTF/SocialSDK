@@ -1,7 +1,7 @@
 <style>
 	.ibmsbtDialog {
   		background:white;
-    	z-index:5000; 
+    	z-index: 8000; 
     	-moz-box-shadow: 1px 0px 10px rgba(0, 0, 0, 0.7); 
     	-moz-border-radius: 6px; 
     	-webkit-border-radius: 6px; 
@@ -11,9 +11,9 @@
     }
 </style>
 
-<script type="text/template" id="filesViewRow***REMOVED*** echo $timestamp; ?>">
+<script type="text/template" id="filesViewRow<?php echo $timestamp; ?>">
 <tr>
-	<td style="width:160px;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inline-block; padding-left: 10px;">
+	<td style="width:15em;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inline-block; padding-left: 10px; font-size: 12px;">
 			<span dojoAttachPoint="placeLinkNode">
 				<input type="checkbox" data-dojo-attach-point="rowSelectionInput" data-dojo-attach-event="onclick: handleCheckBox" />
 				<a href="javascript: void(0)" target="_self" title="${tooltip}" dojoAttachPoint="placeTitleLink" data-dojo-attach-event="onclick: handleClick">${title}</a>
@@ -21,7 +21,7 @@
 	</td>
 </tr>
 </script>
-<script type="text/template" id="filesViewPagingHeader***REMOVED*** echo $timestamp; ?>">
+<script type="text/template" id="filesViewPagingHeader<?php echo $timestamp; ?>">
 <div dojoAttachPoint="pagingHeader">
 	<div>
 		<hr style="width:90%; margin: 0.7em 0; left: -30px; border: 0; height: 1px;"/>
@@ -39,7 +39,7 @@
 		</div>
 </div>
 </script>
-<script type="text/template" id="filesViewPagingFooter***REMOVED*** echo $timestamp; ?>">
+<script type="text/template" id="filesViewPagingFooter<?php echo $timestamp; ?>">
 <div dojoattachpoint="pagingFooter" class="lotusPaging" style="">
 	<div>
 		<hr style="width:90%; margin: 0.7em 0; left: -30px; border: 0; height: 1px;"/>
@@ -65,13 +65,13 @@
 </div>
 </script>
 
-<script type="text/template" id="filesViewActionTemplate***REMOVED*** echo $timestamp; ?>">
+<script type="text/template" id="filesViewActionTemplate<?php echo $timestamp; ?>">
 <span id="${id}">
 <input type="button" value="${name}" class="btn" role="button" data-dojo-attach-point="actionNameNode"></input>
 </span>
 </script>
 
-<script type="text/template" id="filesViewMoveToTrashTemplate***REMOVED*** echo $timestamp; ?>">
+<script type="text/template" id="filesViewMoveToTrashTemplate<?php echo $timestamp; ?>">
 <div>
 	<div dojoattachpoint="messageDiv">
 		${moveToTrashMessage} 
@@ -82,7 +82,7 @@
 </div>
 </script>
 
-<script type="text/template" id="filesViewUploadFileTemplate***REMOVED*** echo $timestamp; ?>">
+<script type="text/template" id="filesViewUploadFileTemplate<?php echo $timestamp; ?>">
 <div>
 	<form >
 	<table style="font-weight:700; margin:5px;">
@@ -140,7 +140,7 @@
 </div>
 </script>
 
-<script type="text/template" id="filesViewAddTagsTemplate***REMOVED*** echo $timestamp; ?>">
+<script type="text/template" id="filesViewAddTagsTemplate<?php echo $timestamp; ?>">
 <div>	
 	<form class="form-inline">
 	<table cellpadding="0" class="table" role="presentation">
@@ -168,7 +168,7 @@
 </div>
 </script>
 
-<script type="text/template" id="filesViewShareFilesTemplate***REMOVED*** echo $timestamp; ?>">
+<script type="text/template" id="filesViewShareFilesTemplate<?php echo $timestamp; ?>">
 <div>
 	<table role="presentation" class="table">
 		<tbody>
@@ -265,7 +265,7 @@
 </div>
 </script>
 
-<script type="text/template" id="filesViewDialogTemplate***REMOVED*** echo $timestamp; ?>">
+<script type="text/template" id="filesViewDialogTemplate<?php echo $timestamp; ?>">
 <div role="dialog" class="ibmsbtDialog">
 	<div dojoattachpoint="titleBar" style="display: none;">
 		<span dojoattachpoint="titleNode"></span> 
@@ -292,11 +292,11 @@
 </div>
 </script>
 
-<script type="text/template" id="filesViewViewTemplate***REMOVED*** echo $timestamp; ?>">
+<script type="text/template" id="filesViewViewTemplate<?php echo $timestamp; ?>">
 <div dojoAttachPoint="domNode">
 	<div dojoAttachPoint="mainNode">
 		<div role="alert" style="display: none; padding-top: 3em;" class="alert alert-success ibmsbtDialog" dojoattachpoint="messageNode">
-			<span class="alert alert-success" dojoattachpoint="messageBody"></span>
+			<span dojoattachpoint="messageBody"></span>
 			&nbsp;<a dojoattachevent="onclick: hideMessage" title="${nls.root.messageClose}" dojoattachpoint="messageClose" role="button"  href="javascript:;">Close</a>
 		</div>	
 		<br/><br/>

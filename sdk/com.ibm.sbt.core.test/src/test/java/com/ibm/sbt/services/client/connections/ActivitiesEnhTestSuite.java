@@ -23,6 +23,8 @@ import com.ibm.sbt.services.client.connections.activities.ActivityDescendantsSin
 import com.ibm.sbt.services.client.connections.activities.ActivityDescendantsSortByTest;
 import com.ibm.sbt.services.client.connections.activities.ActivityFeedEnhTest;
 import com.ibm.sbt.services.client.connections.activities.ActivityNodeChildrenSinceTest;
+import com.ibm.sbt.services.client.connections.activities.GetActivityReplyNodeTagsTest;
+import com.ibm.sbt.services.client.connections.activities.MakeActivityPublicTest;
 
 /**
  * @author mwallace
@@ -30,10 +32,12 @@ import com.ibm.sbt.services.client.connections.activities.ActivityNodeChildrenSi
  */
 @RunWith(Suite.class)
 @SuiteClasses({ 
-	ActivityDescendantsSinceTest.class,
-	ActivityNodeChildrenSinceTest.class,
-	ActivityDescendantsSortByTest.class,
-	ActivityFeedEnhTest.class
+	//ActivityDescendantsSinceTest.class,
+	//ActivityNodeChildrenSinceTest.class,
+	//ActivityDescendantsSortByTest.class,
+	ActivityFeedEnhTest.class,
+	MakeActivityPublicTest.class,
+	GetActivityReplyNodeTagsTest.class
 })
 public class ActivitiesEnhTestSuite {
 }

@@ -145,11 +145,11 @@ public class Member extends AtomEntity {
 	}
 	
 	/**
-	 * Specifies the member type.
+	 * Returns the member type.
 	 * 
 	 * @return
 	 */
-	public String setType() {
+	public String getType() {
 		return getAsString(CommonXPath.type);
 	}
 	

@@ -52,7 +52,7 @@ public class MemberSerializer extends AtomEntitySerializer<Member> {
 	private Element memberCategory() {
 		return element("category", 
 				attribute("scheme", "http://www.ibm.com/xmlns/prod/sn/type"), 
-				attribute("term", "person"));
+				attribute("term", entity.getType()));
 	}
 	
 	protected Element role() {

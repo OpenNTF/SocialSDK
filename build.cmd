@@ -70,7 +70,7 @@ set PATH=%JAVA_HOME%\bin;%M2_HOME%\bin;%PATH%
 set MAVEN_OPTS=-Xmx1536m
 
 if not (%LABEL%) == (SNAPSHOT) echo changing version to %LABEL%
-if not (%LABEL%) == (SNAPSHOT) call mvn org.eclipse.tycho:tycho-versions-plugin:0.19.0:set-version -DnewVersion=1.0.0.%LABEL% %NOTES_PLATFORM%
+if not (%LABEL%) == (SNAPSHOT) call mvn org.eclipse.tycho:tycho-versions-plugin:0.19.0:set-version -DnewVersion=1.0.2.%LABEL% %NOTES_PLATFORM%
 
 
 mvn clean install javadoc:aggregate -DtoolsDir=%toolsDir%  %WORKING_DIR% %LOCAL_REPO% %NOTES_PLATFORM% 

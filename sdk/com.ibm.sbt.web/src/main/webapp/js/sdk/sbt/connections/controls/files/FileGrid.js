@@ -572,7 +572,7 @@ function(declare, lang, dom, stringUtil, sbt, parameter, Grid,
 				 */
 				sortByNumberOfFiles : function(el, data, ev) {
 					this._sort("files", true, el, data, ev);
-				},
+				}
 
 			});
 

@@ -192,8 +192,8 @@ public class ActivityClient {
 
 				    	ActivityService activityService = getActivityService();
 						
-						String fileName = "File["+user+"-"+System.currentTimeMillis()+"]";
-				    	activityService.uploadFile(activity, fileName, fileContent, "text/plain");
+						String fileName = "MyFile"+i;
+						activity.uploadFile(fileName, fileContent, "text/plain");
 
 						long duration = System.currentTimeMillis() - start;
 						logger.fine("Uploaded activity file: "+duration+"(ms)");

@@ -33,9 +33,7 @@ public class ActivityFileTest extends BaseActivityServiceTest {
 	public void testCreateActivityNodeFile() throws ClientServicesException, XMLException {
 		Activity activity = createActivity();
 		
-		ActivityNode activityNode = new ActivityNode();
-		activityNode.setActivityUuid(activity.getActivityUuid());
-		activityNode.setTitle(createActivityTitle());
+		this.activity = null;
 		
 		ByteArrayInputStream fileContent = new ByteArrayInputStream("MyFileContent".getBytes());
 		
@@ -45,10 +43,6 @@ public class ActivityFileTest extends BaseActivityServiceTest {
 	@Test
 	public void testCreateActivityNodeFiles() throws ClientServicesException, XMLException {
 		Activity activity = createActivity();
-		
-		ActivityNode activityNode = new ActivityNode();
-		activityNode.setActivityUuid(activity.getActivityUuid());
-		activityNode.setTitle(createActivityTitle());
 		
 		ByteArrayInputStream fileContent = new ByteArrayInputStream("MyFileContent".getBytes());
 		

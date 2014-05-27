@@ -18,6 +18,7 @@ package com.ibm.sbt.services.client.connections.activities;
 import static com.ibm.sbt.services.client.base.CommonConstants.APPLICATION_ATOM_XML;
 import static com.ibm.sbt.services.client.base.CommonConstants.CONTENT_TYPE;
 import static com.ibm.sbt.services.client.base.CommonConstants.SLUG;
+import static com.ibm.sbt.services.client.base.CommonConstants.TITLE;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
 
 import java.io.InputStream;
@@ -983,6 +984,7 @@ public class ActivityService extends ConnectionsService {
 			Map<String,String> headers = new HashMap<String, String>();
 			headers.put(SLUG, fileName);
 			headers.put(CONTENT_TYPE, mimeType);
+			headers.put(TITLE, fileName);
 			Response response = createData(requestUrl, null, headers, fileContent);
 			if (isValidResponse(response, HTTPCode.CREATED)) {
 				return;

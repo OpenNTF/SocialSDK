@@ -61,6 +61,7 @@ public final class CommonConstants {
 	public static final String 	SLUG				= "slug";
 	public static final String 	CONTENT_ENCODING	= "Content-Encoding";
 	public static final String 	GZIP				= "gzip";
+	public static final String 	TITLE				= "Title";
 
 	/**
 	 * File extensions

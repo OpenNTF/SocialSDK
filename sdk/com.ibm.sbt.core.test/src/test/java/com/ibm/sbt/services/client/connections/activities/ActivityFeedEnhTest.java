@@ -15,12 +15,9 @@
  */
 package com.ibm.sbt.services.client.connections.activities;
 
-import static org.junit.Assert.assertEquals;
-
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -30,8 +27,6 @@ import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.connections.common.Link;
 import com.ibm.sbt.services.client.connections.common.Person;
-import com.ibm.sbt.services.client.connections.files.File;
-import com.ibm.sbt.services.client.connections.files.model.FileRequestParams;
 import com.ibm.sbt.test.lib.TestEnvironment;
 
 /**

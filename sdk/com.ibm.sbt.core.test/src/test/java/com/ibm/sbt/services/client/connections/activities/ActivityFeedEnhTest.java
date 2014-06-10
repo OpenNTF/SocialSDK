@@ -97,16 +97,17 @@ public class ActivityFeedEnhTest extends BaseActivityServiceTest {
 		// The original number of fields in the source node
 		int orgNumFields = srcActivity.getFields().length;
 		
-		destActivity.setCompleted(true);
-		activityService.updateActivity(destActivity);
+		activityService.updateActivity(srcActivity);
 		
-		
+		ActivityNode an = null;
 		// Move all fields
 		for (Field f : srcActivity.getFields()) {
-			destActivity = activityService.moveField(destActivity.getActivityUuid(), f.getFid());
+			an = activityService.moveFieldToEntry(destActivity.getActivityUuid(), f.getFid());
 		}
 		
-		Activity read = activity.getActivityService().getActivity(destActivity.getActivityUuid());
+		Assert.assertNotNull(an);
+		
+		Activity read = an.getActivityService().getActivity(destActivity.getActivityUuid());
 		Field[] fields = read.getFields();
 		
 		// Check that all fields have been moved

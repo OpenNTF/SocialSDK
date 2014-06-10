@@ -59,20 +59,20 @@ public class ActivityFeedEnhTest extends BaseActivityServiceTest {
 		date.setTime(1397650699000L);
 		DateField dateField = new DateField();
 		dateField.setName("test_date");
-		dateField.setPosition(1000);
+		dateField.setPosition(2000);
 		dateField.setDate(date);
 		
 		// Field 3
 		TextField hiddenTextField = new TextField();
 		hiddenTextField.setName("test_hidden_text");
-		hiddenTextField.setPosition(1000);
+		hiddenTextField.setPosition(3000);
 		hiddenTextField.setSummary("Hidden_Text_Field");
 		hiddenTextField.setHidden(true);
 		
 		// Field 4
 		LinkField linkField = new LinkField();
 		linkField.setName("test_link");
-		linkField.setPosition(1000);
+		linkField.setPosition(4000);
 		linkField.setLink(new Link("IBM", "http://www.ibm.com"));
 		
 		// Field 5
@@ -82,7 +82,7 @@ public class ActivityFeedEnhTest extends BaseActivityServiceTest {
 		
 		PersonField personField = new PersonField();
 		personField.setName("test_person");
-		personField.setPosition(1000);
+		personField.setPosition(5000);
 		personField.setPerson(new Person(name, email, userid));
 
 		
@@ -102,7 +102,7 @@ public class ActivityFeedEnhTest extends BaseActivityServiceTest {
 		ActivityNode an = null;
 		// Move all fields
 		for (Field f : srcActivity.getFields()) {
-			an = activityService.moveFieldToEntry(destActivity.getActivityUuid(), f.getFid());
+			an = activityService.moveFieldToEntry(destActivity.getActivityUuid(), f.getFid(), (int) f.getPosition());
 		}
 		
 		Assert.assertNotNull(an);

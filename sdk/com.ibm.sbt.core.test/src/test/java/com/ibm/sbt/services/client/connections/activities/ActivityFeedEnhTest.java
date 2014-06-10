@@ -100,6 +100,7 @@ public class ActivityFeedEnhTest extends BaseActivityServiceTest {
 		activityService.updateActivity(srcActivity);
 		
 		ActivityNode an = null;
+		
 		// Move all fields
 		for (Field f : srcActivity.getFields()) {
 			an = activityService.moveFieldToEntry(destActivity.getActivityUuid(), f.getFid(), (int) f.getPosition());

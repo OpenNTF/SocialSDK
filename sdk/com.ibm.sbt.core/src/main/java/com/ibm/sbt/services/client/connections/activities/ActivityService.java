@@ -900,17 +900,17 @@ public class ActivityService extends ConnectionsService {
 		updateActivityEntity(requestUrl, null, null, HTTPCode.NO_CONTENT);		
 	}
 	
-	public ActivityNode moveFieldToNode(String destinationUuid, String fieldUuid) throws ClientServicesException {
-		return moveFieldToNode(destinationUuid, fieldUuid, null);
+	public ActivityNode moveFieldToEntry(String destinationUuid, String fieldUuid) throws ClientServicesException {
+		return moveFieldToEntry(destinationUuid, fieldUuid, null);
 	}
 
-	public ActivityNode moveFieldToNode(String destinationUuid, String fieldUuid, int position) throws ClientServicesException {
+	public ActivityNode moveFieldToEntry(String destinationUuid, String fieldUuid, int position) throws ClientServicesException {
 		Map<String, String> parameters = getParameters(null);
 		parameters.put("position", Integer.toString(position));
-		return moveFieldToNode(destinationUuid, fieldUuid, parameters);
+		return moveFieldToEntry(destinationUuid, fieldUuid, parameters);
 	}
 
-	public ActivityNode moveFieldToNode(String destinationUuid, String fieldUuid, Map<String, String> parameters) throws ClientServicesException {
+	public ActivityNode moveFieldToEntry(String destinationUuid, String fieldUuid, Map<String, String> parameters) throws ClientServicesException {
 		String requestUrl = ActivityUrls.MOVE_FIELD.format(this, 
 				ActivityUrls.destinationPart(destinationUuid), ActivityUrls.fieldPart(fieldUuid));
 		Response response = putData(requestUrl, parameters, getAtomHeaders(), null, null);
@@ -923,11 +923,6 @@ public class ActivityService extends ConnectionsService {
 	// Internal implementations
 	//------------------------------------------------------------------------------------------------------------------
 		
-	protected boolean isValidResponse(Response response, HTTPCode expectedCode) {
-		int statusCode = response.getResponse().getStatusLine().getStatusCode();
-		return (expectedCode.checkCode(statusCode));
-	}
-	
 	protected Activity getActivityEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
 		try {
 			return getEntity(requestUrl, parameters, getActivityFeedHandler(false));
@@ -944,11 +939,8 @@ public class ActivityService extends ConnectionsService {
 		try {
 			ActivitySerializer serializer = new ActivitySerializer(activity);
 			Response response = createData(requestUrl, parameters, getAtomHeaders(), serializer.generateCreate());
-			if (isValidResponse(response, HTTPCode.CREATED)) {
-				return updateActivityEntityData(activity, response);
-			} else {
-				throw new ClientServicesException(response.getResponse(), response.getRequest());
-			}
+			checkResponseCode(response, HTTPCode.CREATED);
+			return updateActivityEntityData(activity, response);
 		}
 		catch(ClientServicesException e) {
 			throw e;
@@ -967,11 +959,7 @@ public class ActivityService extends ConnectionsService {
 			}
 			String uniqueId = (activity == null) ? null : activity.getActivityUuid();
 			Response response = putData(requestUrl, parameters, getAtomHeaders(), payload, uniqueId);
-			if (isValidResponse(response, expectedCode)) {
-				return;
-			} else {
-				throw new ClientServicesException(response.getResponse(), response.getRequest());
-			}
+			checkResponseCode(response, expectedCode);
 		}
 		catch(ClientServicesException e) {
 			throw e;
@@ -984,11 +972,7 @@ public class ActivityService extends ConnectionsService {
 	protected void deleteActivityEntity(String requestUrl, String activityUuid, Map<String, String> parameters) throws ClientServicesException {
 		try {
 			Response response = deleteData(requestUrl, parameters, activityUuid);
-			if (isValidResponse(response, HTTPCode.NO_CONTENT)) {
-				return;
-			} else {
-				throw new ClientServicesException(response.getResponse(), response.getRequest());
-			}
+			checkResponseCode(response, HTTPCode.NO_CONTENT);
 		}
 		catch(ClientServicesException e) {
 			throw e;
@@ -1005,11 +989,7 @@ public class ActivityService extends ConnectionsService {
 			headers.put(CONTENT_TYPE, mimeType);
 			headers.put(TITLE, fileName);
 			Response response = createData(requestUrl, null, headers, fileContent);
-			if (isValidResponse(response, HTTPCode.CREATED)) {
-				return;
-			} else {
-				throw new ClientServicesException(response.getResponse(), response.getRequest());
-			}
+			checkResponseCode(response, HTTPCode.CREATED);
 		}
 		catch(ClientServicesException e) {
 			throw e;
@@ -1018,7 +998,6 @@ public class ActivityService extends ConnectionsService {
 			throw new ClientServicesException(e);
 		}
 	}
-
 	
 	protected Activity updateActivityEntityData(Activity activity, Response response) {
 		Node node = (Node)response.getData();
@@ -1044,11 +1023,8 @@ public class ActivityService extends ConnectionsService {
 		try {
 			ActivityNodeSerializer serializer = new ActivityNodeSerializer(activityNode);
 			Response response = createData(requestUrl, parameters, getAtomHeaders(), serializer.generateCreate());
-			if (isValidResponse(response, HTTPCode.CREATED)) {
-				return updateActivityNodeEntityData(activityNode, response);
-			} else {
-				throw new ClientServicesException(response.getResponse(), response.getRequest());
-			}
+			checkResponseCode(response, HTTPCode.CREATED);
+			return updateActivityNodeEntityData(activityNode, response);
 		}
 		catch(ClientServicesException e) {
 			throw e;
@@ -1067,11 +1043,8 @@ public class ActivityService extends ConnectionsService {
 			contentParts.add(new ContentPart(fileName, fileContent, fileName, mimeType));
 			
 			Response response = createData(requestUrl, parameters, getMultipartHeaders(), contentParts);
-			if (isValidResponse(response, HTTPCode.CREATED)) {
-				return updateActivityNodeEntityData(activityNode, response);
-			} else {
-				throw new ClientServicesException(response.getResponse(), response.getRequest());
-			}
+			checkResponseCode(response, HTTPCode.CREATED);
+			return updateActivityNodeEntityData(activityNode, response);
 		}
 		catch(ClientServicesException e) {
 			throw e;
@@ -1085,11 +1058,7 @@ public class ActivityService extends ConnectionsService {
 		try {
 			ActivityNodeSerializer serializer = new ActivityNodeSerializer(activityNode);
 			Response response = putData(requestUrl, parameters, getAtomHeaders(), serializer.generateUpdate(), activityNode.getActivityNodeUuid());
-			if (isValidResponse(response, expectedCode)) {
-				return;
-			} else {
-				throw new ClientServicesException(response.getResponse(), response.getRequest());
-			}
+			checkResponseCode(response, expectedCode);
 		}
 		catch(ClientServicesException e) {
 			throw e;
@@ -1102,11 +1071,7 @@ public class ActivityService extends ConnectionsService {
 	protected void deleteActivityNodeEntity(String requestUrl, String activityNodeUuid, Map<String, String> parameters) throws ClientServicesException {
 		try {
 			Response response = deleteData(requestUrl, parameters, activityNodeUuid);
-			if (isValidResponse(response, HTTPCode.NO_CONTENT)) {
-				return;
-			} else {
-				throw new ClientServicesException(response.getResponse(), response.getRequest());
-			}
+			checkResponseCode(response, HTTPCode.NO_CONTENT);
 		}
 		catch(ClientServicesException e) {
 			throw e;
@@ -1140,11 +1105,8 @@ public class ActivityService extends ConnectionsService {
 		try {
 			MemberSerializer serializer = new MemberSerializer(member);
 			Response response = createData(requestUrl, parameters, getAtomHeaders(), serializer.generateCreate());
-			if (isValidResponse(response, HTTPCode.CREATED)) {
-				return updateMemberEntityData(member, response);
-			} else {
-				throw new ClientServicesException(response.getResponse(), response.getRequest());
-			}
+			checkResponseCode(response, HTTPCode.CREATED);
+			return updateMemberEntityData(member, response);
 		}
 		catch(ClientServicesException e) {
 			throw e;
@@ -1158,11 +1120,8 @@ public class ActivityService extends ConnectionsService {
 		try {
 			MemberSerializer serializer = new MemberSerializer(member);
 			Response response = putData(requestUrl, parameters, getAtomHeaders(), serializer.generateUpdate(), null);
-			if (isValidResponse(response, HTTPCode.OK)) {
-				return updateMemberEntityData(member, response);
-			} else {
-				throw new ClientServicesException(response.getResponse(), response.getRequest());
-			}
+			checkResponseCode(response, HTTPCode.OK);
+			return updateMemberEntityData(member, response);
 		}
 		catch(ClientServicesException e) {
 			throw e;
@@ -1175,11 +1134,7 @@ public class ActivityService extends ConnectionsService {
 	protected void deleteMemberEntity(String requestUrl, String memberId, Map<String, String> parameters) throws ClientServicesException {
 		try {
 			Response response = deleteData(requestUrl, parameters, memberId);
-			if (isValidResponse(response, HTTPCode.OK)) {
-				return;
-			} else {
-				throw new ClientServicesException(response.getResponse(), response.getRequest());
-			}
+			checkResponseCode(response, HTTPCode.OK);
 		}
 		catch(ClientServicesException e) {
 			throw e;

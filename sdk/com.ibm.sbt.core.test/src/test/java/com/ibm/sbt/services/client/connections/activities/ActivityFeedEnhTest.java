@@ -20,7 +20,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import com.ibm.commons.xml.XMLException;
 import com.ibm.sbt.services.client.ClientServicesException;
@@ -34,9 +36,11 @@ import com.ibm.sbt.test.lib.TestEnvironment;
  *
  */
 public class ActivityFeedEnhTest extends BaseActivityServiceTest {
+	
+	@Rule public ExpectedException thrown= ExpectedException.none();
 
 	@Test
-	public void testIncludeCompletedActivities() throws ClientServicesException, XMLException {
+	public void testMoveField() throws ClientServicesException, XMLException {
 		// Create activities
 		Activity srcActivity = createActivity();
 		Activity destActivity = createActivity();
@@ -154,8 +158,122 @@ public class ActivityFeedEnhTest extends BaseActivityServiceTest {
 		activityService.deleteActivity(destActivity);
 	}
 	
+	@Test(expected=ClientServicesException.class)
+	public void testMoveNonexistentField() throws ClientServicesException, XMLException {
+		// Create activities
+		Activity srcActivity = createActivity();
+		Activity destActivity = createActivity();
+		
+		// Create text field
+		TextField textField = new TextField();
+		textField.setName("test_text");
+		textField.setPosition(1000);
+		textField.setSummary("Test_Text_Field");
+
+		
+		// Populate source activity
+		srcActivity.addField(textField);
+		
+		// We don't update on purpose
+		
+		
+		ActivityNode an = null;
+		for (Field f : srcActivity.getFields()) {
+			an = activityService.moveFieldToEntry(destActivity.getActivityUuid(), f.getFid(), (int) f.getPosition());
+		}
+
+		// Delete the activities again
+		activityService.deleteActivity(srcActivity);
+		activityService.deleteActivity(destActivity);
+	}
+	
+	@Test(expected=ClientServicesException.class)
+	public void testMoveNullDestUuid() throws ClientServicesException, XMLException {
+		// Create activities
+		Activity srcActivity = createActivity();
+		Activity destActivity = createActivity();
+		
+		// Create text field
+		TextField textField = new TextField();
+		textField.setName("test_text");
+		textField.setPosition(1000);
+		textField.setSummary("Test_Text_Field");
+
+		
+		// Populate source activity and update
+		srcActivity.addField(textField);
+		srcActivity.update();
+		activityService.updateActivity(srcActivity);
+		
+		ActivityNode an = null;
+		for (Field f : srcActivity.getFields()) {
+			an = activityService.moveFieldToEntry(null, f.getFid(), (int) f.getPosition());
+		}
+
+		// Delete the activities again
+		activityService.deleteActivity(srcActivity);
+		activityService.deleteActivity(destActivity);
+	}
+	
+
+	
+
+	@Test(expected=ClientServicesException.class)
+	public void testMoveFieldWithWrongFieldUuid() throws ClientServicesException, XMLException {
+		// Create activities
+		Activity srcActivity = createActivity();
+		Activity destActivity = createActivity();
+		
+		// Create text field
+		TextField textField = new TextField();
+		textField.setName("test_text");
+		textField.setPosition(1000);
+		textField.setSummary("Test_Text_Field");
+
+		
+		// Populate source activity and update
+		srcActivity.addField(textField);
+		srcActivity.update();		
+		
+		activityService.updateActivity(srcActivity);
+		
+		// Test wrong fieldUuid
+		ActivityNode an = activityService.moveFieldToEntry(destActivity.getActivityUuid(), "FooBarNonExistentField");
+
+		// Delete the activities again
+		activityService.deleteActivity(srcActivity);
+		activityService.deleteActivity(destActivity);
+	}
+	
+	@Test(expected=ClientServicesException.class)
+	public void testMoveFieldWithWrongDestUuid() throws ClientServicesException, XMLException {
+		// Create activities
+		Activity srcActivity = createActivity();
+		Activity destActivity = createActivity();
+		
+		// Create text field
+		TextField textField = new TextField();
+		textField.setName("test_text");
+		textField.setPosition(1000);
+		textField.setSummary("Test_Text_Field");
+
+		
+		// Populate source activity and update
+		srcActivity.addField(textField);
+		srcActivity.update();		
+		
+		activityService.updateActivity(srcActivity);
+		
+		// Test wrong fieldUuid
+		ActivityNode an = activityService.moveFieldToEntry("FooBar", textField.getFid());
+
+		// Delete the activities again
+		activityService.deleteActivity(srcActivity);
+		activityService.deleteActivity(destActivity);
+	}
+	
 	@Test
-	public void testMoveField() throws ClientServicesException, XMLException {
+	public void testIncludeCompletedActivities() throws ClientServicesException, XMLException {
 		Activity openActivity = createActivity();
 		
 		Activity completedActivity = createActivity();
@@ -182,18 +300,5 @@ public class ActivityFeedEnhTest extends BaseActivityServiceTest {
 		Assert.assertTrue(containsActivity(allActivities, openActivity));
 		Assert.assertTrue(containsActivity(allActivities, completedActivity));
 	}
-	
-//	File file = uploadFile("testUpdateFileMetadata");
-//    EntityList<File> listOfFiles = fileService.getMyFiles();
-//    String testFileId = listOfFiles.get(0).getFileId();
-//    File fileEntry = fileService.getFile(testFileId, false);
-//    Map<String, String> paramsMap = new HashMap<String, String>();
-//    Random random = new Random();
-//    paramsMap.put(FileRequestParams.TAG.getFileRequestParams(), "Junit_Tag" + random.nextInt());
-//    String label = "Junit_Label_New" + random.nextInt();
-//    fileEntry.setLabel(label);
-//    fileEntry = fileService.updateFileMetadata(fileEntry, paramsMap);
-//    assertEquals(unRandomize(fileEntry.getLabel()), unRandomize(label));
-//    fileService.deleteFile(file.getFileId());
 	
 }

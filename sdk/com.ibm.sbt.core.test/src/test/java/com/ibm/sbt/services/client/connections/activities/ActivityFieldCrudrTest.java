@@ -153,7 +153,6 @@ public class ActivityFieldCrudrTest extends BaseActivityServiceTest {
 		Assert.assertEquals("http://www.ibm.com", ((LinkField)fields[0]).getLink().getHref());
 	}
 	
-	
 	@Test
 	public void createPersonField() throws ClientServicesException, XMLException {
 		Activity activity = createActivity();
@@ -188,4 +187,43 @@ public class ActivityFieldCrudrTest extends BaseActivityServiceTest {
 		Assert.assertEquals(userid, ((PersonField)fields[0]).getPerson().getUserid());
 		Assert.assertNotNull(((PersonField)fields[0]).getPerson().getUserState());
 	}
+
+	@Test
+	public void createDuplicateNameField() throws ClientServicesException, XMLException {
+		Activity activity = createActivity();
+		
+		TextField textField1 = new TextField();
+		textField1.setName("test_text");
+		textField1.setPosition(1000);
+		textField1.setSummary("Test_Text_Field1");
+		
+		TextField textField2 = new TextField();
+		textField2.setName("test_text");
+		textField2.setPosition(1000);
+		textField2.setSummary("Test_Text_Field2");
+		
+		activity.addField(textField1);
+		activity.addField(textField2);
+		activity.update();
+		
+		ActivitySerializer serializer = new ActivitySerializer(activity);
+		System.out.println(serializer.generateUpdate());
+		
+		Activity read = activity.getActivityService().getActivity(activity.getActivityUuid());
+		System.out.println(read.toXmlString());
+		
+		Field[] fields = read.getFields();
+		
+		Assert.assertNotNull(fields);
+		Assert.assertEquals(2, fields.length);
+		Assert.assertTrue(fields[0] instanceof TextField);
+		Assert.assertEquals("test_text", ((TextField)fields[0]).getName());
+		Assert.assertEquals(1000, ((TextField)fields[0]).getPosition());
+		Assert.assertEquals("Test_Text_Field1", ((TextField)fields[0]).getSummary());
+		Assert.assertTrue(fields[1] instanceof TextField);
+		Assert.assertEquals("test_text", ((TextField)fields[1]).getName());
+		Assert.assertEquals(1000, ((TextField)fields[1]).getPosition());
+		Assert.assertEquals("Test_Text_Field2", ((TextField)fields[1]).getSummary());
+	}
+
 }

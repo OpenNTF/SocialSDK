@@ -213,4 +213,47 @@ public class ActivityClient {
 		return thread;
 	}
 
+	public Thread createActivities(final int count, final ActivityClient[] participants) throws InterruptedException {
+		Thread thread = new Thread() {
+			@Override
+			public void run() {
+				ByteArrayInputStream fileContent = new ByteArrayInputStream("MyFileContent".getBytes());
+				for (int i=0; i<count; i++) {
+					try {
+				    	long start = System.currentTimeMillis();
+				    	
+				    	String user = getUser();
+				    	String title = "Activity["+user+"-"+i+"-"+System.currentTimeMillis()+"]";
+				    	
+				    	ActivityService activityService = getActivityService();
+				    	Activity activity = new Activity(activityService);
+				    	activity.setTitle(title);
+
+				    	activity = activityService.createActivity(activity);
+
+						long duration = System.currentTimeMillis() - start;
+						logger.fine("Created activity: "+duration+"(ms)");
+						
+						System.out.println(user+" created activity "+activity.getActivityUuid()+" duration:"+duration+"(ms)");
+				    	
+				    	for (ActivityClient participant : participants) {
+				    		if (!participant.getUser().equals(user)) {
+				    			activity.addMember(Member.TYPE_PERSON, participant.getId(), Member.ROLE_OWNER);
+
+				    			System.out.println("Added member "+participant.getUser());
+				    		}
+				    	}
+					} catch (Exception e) {
+						System.err.println("Error creating activity for: "+user+" caused by: "+e.getMessage());
+						//e.printStackTrace();
+					}
+				}
+			}
+		};
+
+		thread.start();
+		
+		return thread;
+	}
+
 }

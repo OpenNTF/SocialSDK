@@ -33,7 +33,7 @@ import com.ibm.sbt.services.client.base.datahandlers.EntityList;
  */
 public class ActivityDescendantsSinceTest extends BaseActivityServiceTest {
 	
-	private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");	
+	private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");	
 
 	@Test
 	public void testDescendantsUpdatedSince() throws ClientServicesException, XMLException {
@@ -47,7 +47,8 @@ public class ActivityDescendantsSinceTest extends BaseActivityServiceTest {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("since", "" + node.getUpdated().getTime());
 		EntityList<ActivityNode> activityNodes = activityService.getActivityNodeDescendants(activity.getActivityUuid(), params);
-		System.out.println("Nodes " + activityNodes.size() + " update since: " + dateFormat.format(node.getUpdated()));
+		System.out.println("Nodes:" + activityNodes.size() + " updated since: " + dateFormat.format(node.getUpdated()));
+		dumpNodes(activityNodes);
 		
 		Assert.assertEquals(3, activityNodes.size());
 	}
@@ -64,7 +65,8 @@ public class ActivityDescendantsSinceTest extends BaseActivityServiceTest {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("until", "" + node.getUpdated().getTime());
 		EntityList<ActivityNode> activityNodes = activityService.getActivityNodeDescendants(activity.getActivityUuid(), params);
-		System.out.println("Nodes " + activityNodes.size() + " update until: " + dateFormat.format(node.getUpdated()));
+		System.out.println("Nodes:" + activityNodes.size() + " updated until: " + dateFormat.format(node.getUpdated()));
+		dumpNodes(activityNodes);
 		
 		Assert.assertEquals(2, activityNodes.size());
 	}
@@ -83,9 +85,10 @@ public class ActivityDescendantsSinceTest extends BaseActivityServiceTest {
 		params.put("since", "" + sinceNode.getUpdated().getTime());
 		params.put("until", "" + untilNode.getUpdated().getTime());
 		EntityList<ActivityNode> activityNodes = activityService.getActivityNodeDescendants(activity.getActivityUuid(), params);
-		System.out.println("Nodes " + activityNodes.size() + 
-				" update since: " + dateFormat.format(sinceNode.getUpdated()) +
+		System.out.println("Nodes:" + activityNodes.size() + 
+				" updated since: " + dateFormat.format(sinceNode.getUpdated()) +
 				" until: " + dateFormat.format(untilNode.getUpdated()));
+		dumpNodes(activityNodes);
 		
 		Assert.assertEquals(2, activityNodes.size());
 	}
@@ -103,7 +106,8 @@ public class ActivityDescendantsSinceTest extends BaseActivityServiceTest {
 		params.put("since", "" + node.getPublished().getTime());
 		params.put("rangeId", "created");
 		EntityList<ActivityNode> activityNodes = activityService.getActivityNodeDescendants(activity.getActivityUuid(), params);
-		System.out.println("Nodes " + activityNodes.size() + " create since: " + dateFormat.format(node.getPublished()));
+		System.out.println("Nodes:" + activityNodes.size() + " created since: " + dateFormat.format(node.getPublished()));
+		dumpNodes(activityNodes);
 		
 		Assert.assertEquals(3, activityNodes.size());
 	}
@@ -121,7 +125,8 @@ public class ActivityDescendantsSinceTest extends BaseActivityServiceTest {
 		params.put("until", "" + node.getPublished().getTime());
 		params.put("rangeId", "created");
 		EntityList<ActivityNode> activityNodes = activityService.getActivityNodeDescendants(activity.getActivityUuid(), params);
-		System.out.println("Nodes " + activityNodes.size() + " create until: " + dateFormat.format(node.getPublished()));
+		System.out.println("Nodes:" + activityNodes.size() + " created until: " + dateFormat.format(node.getPublished()));
+		dumpNodes(activityNodes);
 		
 		Assert.assertEquals(2, activityNodes.size());
 	}
@@ -141,9 +146,10 @@ public class ActivityDescendantsSinceTest extends BaseActivityServiceTest {
 		params.put("until", "" + untilNode.getPublished().getTime());
 		params.put("rangeId", "created");
 		EntityList<ActivityNode> activityNodes = activityService.getActivityNodeDescendants(activity.getActivityUuid(), params);
-		System.out.println("Nodes " + activityNodes.size() + 
-				" create since: " + dateFormat.format(sinceNode.getPublished()) +
+		System.out.println("Nodes:" + activityNodes.size() + 
+				" created since: " + dateFormat.format(sinceNode.getPublished()) +
 				" until: " + dateFormat.format(untilNode.getPublished()));
+		dumpNodes(activityNodes);
 		
 		Assert.assertEquals(2, activityNodes.size());
 	}

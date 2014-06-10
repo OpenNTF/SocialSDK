@@ -32,12 +32,12 @@ import com.ibm.sbt.services.client.connections.activities.MakeActivityPublicTest
  */
 @RunWith(Suite.class)
 @SuiteClasses({ 
-	//ActivityDescendantsSinceTest.class,
-	//ActivityNodeChildrenSinceTest.class,
-	//ActivityDescendantsSortByTest.class,
-	ActivityFeedEnhTest.class,
-	MakeActivityPublicTest.class,
-	GetActivityReplyNodeTagsTest.class
+	ActivityDescendantsSinceTest.class,
+	ActivityNodeChildrenSinceTest.class,
+	ActivityDescendantsSortByTest.class,
+	ActivityFeedEnhTest.class//,
+	//MakeActivityPublicTest.class,
+	//GetActivityReplyNodeTagsTest.class
 })
 public class ActivitiesEnhTestSuite {
 }

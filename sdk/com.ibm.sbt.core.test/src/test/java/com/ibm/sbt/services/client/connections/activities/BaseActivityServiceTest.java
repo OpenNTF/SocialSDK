@@ -310,14 +310,18 @@ public class BaseActivityServiceTest extends BaseUnitTest {
 		
 		List<ActivityNode> touchedNodes = touchActivityNodes(createdNodes, true, 1000);
 		
-		System.out.println("         TITLE                    CREATE                  PUBLISHED                 UPDATED");
-		for (ActivityNode node : touchedNodes) {
-			String title = node.getTitle();
-			Date create = new Date(Long.parseLong(title.substring(title.indexOf('-')+1)));
-			System.out.println(node.getTitle() + "  " + dateFormat.format(create) + "  " + dateFormat.format(node.getPublished()) + "  " + dateFormat.format(node.getUpdated()));
-		}
+		dumpNodes(touchedNodes);
 
 		return touchedNodes;
+	}
+	
+	protected void dumpNodes(List<ActivityNode> nodes) {
+		System.out.println("         TITLE                 PUBLISHED            UPDATED");
+		for (ActivityNode node : nodes) {
+			String title = node.getTitle();
+			Date create = new Date(Long.parseLong(title.substring(title.indexOf('-')+1)));
+			System.out.println(node.getTitle() + "  " + dateFormat.format(node.getPublished()) + "  " + dateFormat.format(node.getUpdated()));
+		}
 	}
 	
 	protected Member getMember(Activity activity, String userid) throws ClientServicesException, XMLException {

@@ -379,10 +379,6 @@ public class Activity extends NodeEntity {
 		service.updateActivity(this);
 	}
 	
-	public Field getField(String fid) {
-		return null;
-	}
-	
 	//------------------------------------------------------------------------------------------------------------------
 	// Working with activity members programmatically.
 	//------------------------------------------------------------------------------------------------------------------

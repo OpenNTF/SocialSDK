@@ -34,7 +34,7 @@ public class ActivityDescendantsSortByTest extends BaseActivityServiceTest {
 	@Test
 	public void testDescendantsModifiedSort() throws ClientServicesException, XMLException {
 		long start = System.currentTimeMillis();
-		activity = createActivity("ActivityDescendantsUpdatedSince-"+start);
+		activity = createActivity("ActivityDescendantsModifiedSort-"+start);
 		
 		List<ActivityNode> nodes = createActivityDescendants(activity);
 		org.junit.Assert.assertNotNull(nodes);
@@ -56,10 +56,11 @@ public class ActivityDescendantsSortByTest extends BaseActivityServiceTest {
 		}
 	}
 
+	/*
 	@Test
 	public void testDescendantsLastModSort() throws ClientServicesException, XMLException {
 		long start = System.currentTimeMillis();
-		activity = createActivity("ActivityDescendantsUpdatedSince-"+start);
+		activity = createActivity("ActivityDescendantsLastModSort-"+start);
 		
 		List<ActivityNode> nodes = createActivityDescendants(activity);
 		org.junit.Assert.assertNotNull(nodes);
@@ -75,32 +76,33 @@ public class ActivityDescendantsSortByTest extends BaseActivityServiceTest {
 		
 		params.put("sortOrder", "desc");
 		EntityList<ActivityNode> activityChildren = activityService.getActivityNodeChildren(activity.getActivityUuid(), params);
-		System.out.println("\nActivity shildren sorted descending by LASTMOD date");
+		System.out.println("\nActivity children sorted descending by LASTMOD date");
 		for (ActivityNode node : activityChildren) {
 			System.out.println(node.getTitle() + " modified: " + dateFormat.format(node.getUpdated()));
 		}
 	}
+	*/
 	
 	@Test
 	public void testDescendantsCreatedSort() throws ClientServicesException, XMLException {
 		long start = System.currentTimeMillis();
-		activity = createActivity("ActivityDescendantsUpdatedSince-"+start);
+		activity = createActivity("ActivityDescendantsCreatedSort-"+start);
 		
 		List<ActivityNode> nodes = createActivityDescendants(activity);
 		org.junit.Assert.assertNotNull(nodes);
 				
 		Map<String, String> params = new HashMap<String, String>();
-		params.put("sortBy", "CREATED");
+		params.put("sortBy", "created");
 		params.put("sortOrder", "asc");
 		EntityList<ActivityNode> activityDescendants = activityService.getActivityNodeDescendants(activity.getActivityUuid(), params);
-		System.out.println("\nActivity descendants sorted ascending by CREATED date");
+		System.out.println("\nActivity descendants sorted ascending by created date");
 		for (ActivityNode node : activityDescendants) {
 			System.out.println(node.getTitle() + " created: " + dateFormat.format(node.getPublished()));
 		}
 		
 		params.put("sortOrder", "desc");
 		EntityList<ActivityNode> activityChildren = activityService.getActivityNodeChildren(activity.getActivityUuid(), params);
-		System.out.println("\nActivity shildren sorted descending by CREATED date");
+		System.out.println("\nActivity shildren sorted descending by created date");
 		for (ActivityNode node : activityChildren) {
 			System.out.println(node.getTitle() + " created: " + dateFormat.format(node.getPublished()));
 		}

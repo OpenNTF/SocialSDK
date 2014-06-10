@@ -23,6 +23,7 @@ import com.ibm.commons.xml.XMLException;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.connections.common.Member;
+import com.ibm.sbt.services.client.connections.common.serializers.MemberSerializer;
 import com.ibm.sbt.test.lib.TestEnvironment;
 
 /**
@@ -31,6 +32,21 @@ import com.ibm.sbt.test.lib.TestEnvironment;
  */
 public class ActivityMemberArudTest extends BaseActivityServiceTest {
 
+	@Test
+	public void testMemberXml() throws ClientServicesException, XMLException {
+		Member member = new Member();
+		member.setComponent(Member.COMPONENT_ACTIVITIES);
+		member.setContributor("memberId");
+		member.setRole("role");
+		member.setType("type");
+		
+		MemberSerializer serializer = new MemberSerializer(member);
+		
+		System.out.println(serializer.generateCreate());
+		
+		
+	}
+	
 	@Test
 	public void testAddActivityMember() throws ClientServicesException, XMLException {
 		Activity activity = createActivity();

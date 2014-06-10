@@ -51,12 +51,10 @@ public class ActivityFeedEnhTest extends BaseActivityServiceTest {
 		
 		activityService.deleteActivity(openActivity);
 
-		System.out.println(openActivities.size());
 		Assert.assertTrue(containsActivity(openActivities, openActivity));
 		Assert.assertTrue(!containsActivity(openActivities, completedActivity));
 		
 		Assert.assertNotNull("Expected non null activities", allActivities);
-		System.out.println(allActivities.size());
 		Assert.assertTrue(containsActivity(allActivities, openActivity));
 		Assert.assertTrue(containsActivity(allActivities, completedActivity));
 	}

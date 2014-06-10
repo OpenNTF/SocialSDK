@@ -263,6 +263,7 @@ public class NodeEntity extends AtomEntity {
 	}
 	
 	/**
+	 * Return the first field with the specified name.
 	 * 
 	 * @param fid
 	 * @return
@@ -279,6 +280,7 @@ public class NodeEntity extends AtomEntity {
 	}
 	
 	/**
+	 * Return the field with the specified id.
 	 * 
 	 * @param fid
 	 * @return

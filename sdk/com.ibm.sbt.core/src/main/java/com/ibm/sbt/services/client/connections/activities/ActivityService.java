@@ -899,6 +899,25 @@ public class ActivityService extends ConnectionsService {
 				ActivityUrls.activityNodePart(activityNodeUuid), ActivityUrls.priorityPart(priority));
 		updateActivityEntity(requestUrl, null, null, HTTPCode.NO_CONTENT);		
 	}
+	
+	public ActivityNode moveFieldToNode(String destinationUuid, String fieldUuid) throws ClientServicesException {
+		return moveFieldToNode(destinationUuid, fieldUuid, null);
+	}
+
+	public ActivityNode moveFieldToNode(String destinationUuid, String fieldUuid, int position) throws ClientServicesException {
+		Map<String, String> parameters = getParameters(null);
+		parameters.put("position", Integer.toString(position));
+		return moveFieldToNode(destinationUuid, fieldUuid, parameters);
+	}
+
+	public ActivityNode moveFieldToNode(String destinationUuid, String fieldUuid, Map<String, String> parameters) throws ClientServicesException {
+		String requestUrl = ActivityUrls.MOVE_FIELD.format(this, 
+				ActivityUrls.destinationPart(destinationUuid), ActivityUrls.fieldPart(fieldUuid));
+		Response response = putData(requestUrl, parameters, getAtomHeaders(), null, null);
+		checkResponseCode(response, HTTPCode.OK);
+		
+		return getActivityNodeFeedHandler(false).createEntity(response);
+	}
 		
 	//------------------------------------------------------------------------------------------------------------------
 	// Internal implementations

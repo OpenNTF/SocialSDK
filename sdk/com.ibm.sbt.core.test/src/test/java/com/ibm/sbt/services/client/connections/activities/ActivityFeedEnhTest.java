@@ -126,7 +126,7 @@ public class ActivityFeedEnhTest extends BaseActivityServiceTest {
 		Field movedTextField = read.getFieldByName(textField.getName());
 		Assert.assertTrue(movedTextField instanceof TextField);
 		Assert.assertEquals("test_text", movedTextField);
-		Assert.assertEquals(1000, ((TextField)movedTextField).getPosition());
+		Assert.assertEquals(2000, ((TextField)movedTextField).getPosition());
 		Assert.assertEquals("Test_Text_Field", ((TextField)movedTextField).getSummary());
 		
 		// Check hidden text field
@@ -134,14 +134,14 @@ public class ActivityFeedEnhTest extends BaseActivityServiceTest {
 		Assert.assertTrue(movedHiddenTextField instanceof TextField);
 		Assert.assertTrue(((TextField)movedHiddenTextField).isHidden());
 		Assert.assertEquals("test_hidden_text", ((TextField)movedHiddenTextField).getName());
-		Assert.assertEquals(1000, ((TextField)movedHiddenTextField).getPosition());
+		Assert.assertEquals(3000, ((TextField)movedHiddenTextField).getPosition());
 		Assert.assertEquals("Hidden_Text_Field", ((TextField)movedHiddenTextField).getSummary());
 		
 		// Check link field
 		Field movedLinkField = read.getFieldByName(linkField.getName());
 		Assert.assertTrue(movedLinkField instanceof LinkField);
 		Assert.assertEquals("test_link", ((LinkField)movedLinkField).getName());
-		Assert.assertEquals(1000, ((LinkField)movedLinkField).getPosition());
+		Assert.assertEquals(4000, ((LinkField)movedLinkField).getPosition());
 		Assert.assertEquals("IBM", ((LinkField)movedLinkField).getLink().getTitle());
 		Assert.assertEquals("http://www.ibm.com", ((LinkField)movedLinkField).getLink().getHref());
 		
@@ -149,7 +149,7 @@ public class ActivityFeedEnhTest extends BaseActivityServiceTest {
 		Field movedPersonField = read.getFieldByName(personField.getName());
 		Assert.assertTrue(movedPersonField instanceof PersonField);
 		Assert.assertEquals("test_person", ((PersonField)movedPersonField).getName());
-		Assert.assertEquals(1000, ((PersonField)movedPersonField).getPosition());
+		Assert.assertEquals(5000, ((PersonField)movedPersonField).getPosition());
 		Assert.assertEquals(name, ((PersonField)movedPersonField).getPerson().getName());
 		//Assert.assertEquals(email, ((PersonField)fields[0]).getPerson().getEmail());
 		Assert.assertEquals(userid, ((PersonField)movedPersonField).getPerson().getUserid());

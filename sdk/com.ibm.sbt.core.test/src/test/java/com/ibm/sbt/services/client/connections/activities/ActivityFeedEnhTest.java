@@ -151,7 +151,6 @@ public class ActivityFeedEnhTest extends BaseActivityServiceTest {
 		Assert.assertEquals("test_person", ((PersonField)movedPersonField).getName());
 		Assert.assertEquals(5000, ((PersonField)movedPersonField).getPosition());
 		Assert.assertEquals(name, ((PersonField)movedPersonField).getPerson().getName());
-		//Assert.assertEquals(email, ((PersonField)fields[0]).getPerson().getEmail());
 		Assert.assertEquals(userid, ((PersonField)movedPersonField).getPerson().getUserid());
 		Assert.assertNotNull(((PersonField)movedPersonField).getPerson().getUserState());
 

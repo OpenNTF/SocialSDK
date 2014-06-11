@@ -180,6 +180,7 @@ public class ActivityFeedEnhTest extends BaseActivityServiceTest {
 		TextField textField = new TextField();
 		textField.setName("test_text");
 		textField.setSummary("Test_Text_Field");
+		textField.setPosition(1000);
 		
 		// Field 2 
 		Date date = new Date();
@@ -187,51 +188,51 @@ public class ActivityFeedEnhTest extends BaseActivityServiceTest {
 		DateField dateField = new DateField();
 		dateField.setName("test_date");
 		dateField.setDate(date);
+		dateField.setPosition(2000);
 		
 		// Field 3
 		TextField hiddenTextField = new TextField();
 		hiddenTextField.setName("test_hidden_text");
 		hiddenTextField.setSummary("Hidden_Text_Field");
 		hiddenTextField.setHidden(true);
-		
-		// Field 4
-		LinkField linkField = new LinkField();
-		linkField.setName("test_link");
-		linkField.setLink(new Link("IBM", "http://www.ibm.com"));
+		hiddenTextField.setPosition(3000);
 		
 		// Populate source activity and update
 		srcActivityNode1.addField(textField);
 		srcActivityNode2.addField(hiddenTextField);
 		srcActivityNode3.addField(dateField);
-		activityService.createActivityNode(srcActivityNode1);
-		activityService.createActivityNode(srcActivityNode2);
-		activityService.createActivityNode(srcActivityNode3);
-		activityService.createActivityNode(destActivityNode);
-		
+		srcActivityNode1 = activityService.createActivityNode(srcActivityNode1);
+		srcActivityNode2 = activityService.createActivityNode(srcActivityNode2);
+		srcActivityNode3 = activityService.createActivityNode(srcActivityNode3);
+		destActivityNode = activityService.createActivityNode(destActivityNode);
 		
 		// The original number of fields in the source node
 		int totalNumFields = srcActivityNode1.getFields().length + srcActivityNode2.getFields().length + srcActivityNode3.getFields().length;
 		
 		ActivityNode an = null;
 		
+		srcActivityNode1 = activityService.getActivityNode(srcActivityNode1.getActivityNodeUuid());
+		srcActivityNode2 = activityService.getActivityNode(srcActivityNode2.getActivityNodeUuid());
+		srcActivityNode3 = activityService.getActivityNode(srcActivityNode3.getActivityNodeUuid());
+
 		// Move all fields from source acitivity 1
 		for (Field f : srcActivityNode1.getFields()) {
-			an = activityService.moveFieldToEntry(destActivityNode.getActivityUuid(), f.getFid());
+			an = activityService.moveFieldToEntry(destActivityNode.getActivityNodeUuid(), f.getFid());
 		}
 		
 		// Move all fields from source acitivity 2
 		for (Field f : srcActivityNode2.getFields()) {
-			an = activityService.moveFieldToEntry(destActivityNode.getActivityUuid(), f.getFid());
+			an = activityService.moveFieldToEntry(destActivityNode.getActivityNodeUuid(), f.getFid());
 		}
 				
 		// Move all fields from source acitivity 3
 		for (Field f : srcActivityNode3.getFields()) {
-			an = activityService.moveFieldToEntry(destActivityNode.getActivityUuid(), f.getFid());
+			an = activityService.moveFieldToEntry(destActivityNode.getActivityNodeUuid(), f.getFid());
 		}
 		
 		Assert.assertNotNull(an);
 		
-		ActivityNode read = an.getActivityService().getActivityNode(destActivityNode.getActivityUuid());
+		ActivityNode read = activityService.getActivityNode(destActivityNode.getActivityNodeUuid());
 		Field[] fields = read.getFields();
 		
 		// Check that all fields have been moved
@@ -241,32 +242,24 @@ public class ActivityFeedEnhTest extends BaseActivityServiceTest {
 		// Check text field
 		Field movedTextField = read.getFieldByName(textField.getName());
 		Assert.assertTrue(movedTextField instanceof TextField);
-		Assert.assertEquals("test_text", movedTextField);
+		Assert.assertEquals("test_text", movedTextField.getName());
 		Assert.assertEquals(1000, ((TextField)movedTextField).getPosition());
 		Assert.assertEquals("Test_Text_Field", ((TextField)movedTextField).getSummary());
-		
-		// Check date field
-		Field movedDateField = read.getFieldByName(dateField.getName());
-		Assert.assertTrue(movedDateField instanceof DateField);
-		Assert.assertEquals("test_date", ((DateField)movedDateField).getName());
-		Assert.assertEquals(2000, ((DateField)movedDateField).getPosition());
-		Assert.assertNotNull(((DateField)movedDateField).getDate());
 		
 		// Check hidden text field
 		Field movedHiddenTextField = read.getFieldByName(hiddenTextField.getName());
 		Assert.assertTrue(movedHiddenTextField instanceof TextField);
 		Assert.assertTrue(((TextField)movedHiddenTextField).isHidden());
 		Assert.assertEquals("test_hidden_text", ((TextField)movedHiddenTextField).getName());
-		Assert.assertEquals(3000, ((TextField)movedHiddenTextField).getPosition());
+		Assert.assertEquals(2000, ((TextField)movedHiddenTextField).getPosition());
 		Assert.assertEquals("Hidden_Text_Field", ((TextField)movedHiddenTextField).getSummary());
 		
-		// Check link field
-		Field movedLinkField = read.getFieldByName(linkField.getName());
-		Assert.assertTrue(movedLinkField instanceof LinkField);
-		Assert.assertEquals("test_link", ((LinkField)movedLinkField).getName());
-		Assert.assertEquals(4000, ((LinkField)movedLinkField).getPosition());
-		Assert.assertEquals("IBM", ((LinkField)movedLinkField).getLink().getTitle());
-		Assert.assertEquals("http://www.ibm.com", ((LinkField)movedLinkField).getLink().getHref());
+		// Check date field
+		Field movedDateField = read.getFieldByName(dateField.getName());
+		Assert.assertTrue(movedDateField instanceof DateField);
+		Assert.assertEquals("test_date", ((DateField)movedDateField).getName());
+		Assert.assertEquals(3000, ((DateField)movedDateField).getPosition());
+		Assert.assertNotNull(((DateField)movedDateField).getDate());
 		
 		// Delete the activities again
 		activityService.deleteActivityNode(srcActivityNode1);

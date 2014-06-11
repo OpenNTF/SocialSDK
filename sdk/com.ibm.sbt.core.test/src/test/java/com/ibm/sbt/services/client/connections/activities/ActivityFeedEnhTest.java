@@ -321,9 +321,9 @@ public class ActivityFeedEnhTest extends BaseActivityServiceTest {
 		srcActivityNode.setTitle("Source ActivityNode");
 		srcActivityNode.setType("ENTRY");
 		
-		ActivityNode dstActivityNode = createActivityNode();
+		ActivityNode dstActivityNode = new ActivityNode();
 		dstActivityNode.setActivityUuid(activity.getActivityUuid());
-		dstActivityNode.setTitle("Source ActivityNode");
+		dstActivityNode.setTitle("Destination ActivityNode");
 		dstActivityNode.setType("ENTRY");
 		
 		// Create text field
@@ -335,8 +335,10 @@ public class ActivityFeedEnhTest extends BaseActivityServiceTest {
 		
 		// Populate source activity and update
 		srcActivityNode.addField(textField);
-		activityService.createActivityNode(srcActivityNode);
-		activityService.createActivityNode(dstActivityNode);
+		srcActivityNode = activityService.createActivityNode(srcActivityNode);
+		dstActivityNode = activityService.createActivityNode(dstActivityNode);
+		
+		srcActivityNode = activityService.getActivityNode(srcActivityNode.getActivityNodeUuid());
 		
 		ActivityNode an = null;
 		for (Field f : srcActivityNode.getFields()) {
@@ -390,8 +392,19 @@ public class ActivityFeedEnhTest extends BaseActivityServiceTest {
 	@Test
 	public void testMoveFieldWithWrongDestUuid() throws ClientServicesException, XMLException {
 		// Create activities
-		Activity srcActivity = createActivity();
-		Activity destActivity = createActivity();
+		activity = new Activity();
+		activity.setTitle(createActivityTitle());
+		activity = activityService.createActivity(activity);
+		
+		ActivityNode srcActivityNode = new ActivityNode();
+		srcActivityNode.setActivityUuid(activity.getActivityUuid());
+		srcActivityNode.setTitle("Source ActivityNode");
+		srcActivityNode.setType("ENTRY");
+		
+		ActivityNode dstActivityNode = new ActivityNode();
+		dstActivityNode.setActivityUuid(activity.getActivityUuid());
+		dstActivityNode.setTitle("Destination ActivityNode");
+		dstActivityNode.setType("ENTRY");
 		
 		// Create text field
 		TextField textField = new TextField();
@@ -401,18 +414,21 @@ public class ActivityFeedEnhTest extends BaseActivityServiceTest {
 
 		
 		// Populate source activity and update
-		srcActivity.addField(textField);
-		srcActivity.update();		
+		srcActivityNode.addField(textField);
 		
-		activityService.updateActivity(srcActivity);
+		srcActivityNode = activityService.createActivityNode(srcActivityNode);
+		dstActivityNode = activityService.createActivityNode(dstActivityNode);
+		
+		srcActivityNode = activityService.getActivityNode(srcActivityNode.getActivityNodeUuid());
+
 		
 		// Test wrong fieldUuid
 		thrown.expect(ClientServicesException.class);
 		ActivityNode an = activityService.moveFieldToEntry("FooBar", textField.getFid());
 
 		// Delete the activities again
-		activityService.deleteActivity(srcActivity);
-		activityService.deleteActivity(destActivity);
+		activityService.deleteActivityNode(srcActivityNode);
+		activityService.deleteActivityNode(dstActivityNode);
 	}
 	
 	@Test

@@ -41,10 +41,22 @@ public class ActivityFeedEnhTest extends BaseActivityServiceTest {
 
 	@Test
 	public void testMoveField() throws ClientServicesException, XMLException {
-		// Create activities
-		Activity srcActivity = createActivity();
-		Activity destActivity = createActivity();
+		// Create activity nodes
 		
+		activity = new Activity();
+		activity.setTitle(createActivityTitle());
+		activity = activityService.createActivity(activity);
+		
+		ActivityNode srcActivityNode = new ActivityNode();
+		srcActivityNode.setActivityUuid(activity.getActivityUuid());
+		srcActivityNode.setTitle("Source ActivityNode");
+		srcActivityNode.setType("ENTRY");
+
+		ActivityNode dstActivityNode = createActivityNode();
+		dstActivityNode.setActivityUuid(activity.getActivityUuid());
+		dstActivityNode.setTitle("Source ActivityNode");
+		dstActivityNode.setType("ENTRY");
+
 		// Create fields
 		
 		// Field 1
@@ -74,59 +86,48 @@ public class ActivityFeedEnhTest extends BaseActivityServiceTest {
 		linkField.setPosition(4000);
 		linkField.setLink(new Link("IBM", "http://www.ibm.com"));
 		
-		// Field 5
-		String name = TestEnvironment.getSecondaryUserDisplayName();
-		String email = TestEnvironment.getSecondaryUserEmail();
-		String userid = TestEnvironment.getSecondaryUserUuid();
-		
-		PersonField personField = new PersonField();
-		personField.setName("test_person");
-		personField.setPosition(5000);
-		personField.setPerson(new Person(name, email, userid));
-
-		
 		// Populate source activity and update
-		srcActivity.addField(textField);
-		srcActivity.addField(hiddenTextField);
-		srcActivity.addField(dateField);
-		srcActivity.addField(linkField);
-		srcActivity.addField(personField);
-		srcActivity.update();
+		srcActivityNode.addField(textField);
+		srcActivityNode.addField(hiddenTextField);
+		srcActivityNode.addField(dateField);
+		srcActivityNode.addField(linkField);
+
+		activityService.createActivityNode(srcActivityNode);
+		activityService.createActivityNode(dstActivityNode);
 		
 		// The original number of fields in the source node
-		int orgNumFields = srcActivity.getFields().length;
-		
-		activityService.updateActivity(srcActivity);
+		int orgNumFields = srcActivityNode.getFields().length;
 		
 		ActivityNode an = null;
+		srcActivityNode = activityService.getActivityNode(srcActivityNode.getActivityNodeUuid());
 		
 		// Move all fields
-		for (Field f : srcActivity.getFields()) {
-			an = activityService.moveFieldToEntry(destActivity.getActivityUuid(), f.getFid(), (int) f.getPosition());
+		for (Field f : srcActivityNode.getFields()) {
+			an = activityService.moveFieldToEntry(dstActivityNode.getActivityNodeUuid(), f.getFid());
 		}
 		
 		Assert.assertNotNull(an);
 		
-		Activity read = an.getActivityService().getActivity(destActivity.getActivityUuid());
+		ActivityNode read = activityService.getActivityNode(dstActivityNode.getActivityNodeUuid());
 		Field[] fields = read.getFields();
 		
 		// Check that all fields have been moved
 		Assert.assertNotNull(fields);
 		Assert.assertEquals(orgNumFields, fields.length);
 		
+		// Check text field
+		Field movedTextField = read.getFieldByName(textField.getName());
+		Assert.assertTrue(movedTextField instanceof TextField);
+		Assert.assertEquals("test_text", movedTextField.getName());
+		Assert.assertEquals(1000, ((TextField)movedTextField).getPosition());
+		Assert.assertEquals("Test_Text_Field", ((TextField)movedTextField).getSummary());
+
 		// Check date field
 		Field movedDateField = read.getFieldByName(dateField.getName());
 		Assert.assertTrue(movedDateField instanceof DateField);
 		Assert.assertEquals("test_date", ((DateField)movedDateField).getName());
-		Assert.assertEquals(1000, ((DateField)movedDateField).getPosition());
+		Assert.assertEquals(2000, ((DateField)movedDateField).getPosition());
 		Assert.assertNotNull(((DateField)movedDateField).getDate());
-		
-		// Check text field
-		Field movedTextField = read.getFieldByName(textField.getName());
-		Assert.assertTrue(movedTextField instanceof TextField);
-		Assert.assertEquals("test_text", movedTextField);
-		Assert.assertEquals(2000, ((TextField)movedTextField).getPosition());
-		Assert.assertEquals("Test_Text_Field", ((TextField)movedTextField).getSummary());
 		
 		// Check hidden text field
 		Field movedHiddenTextField = read.getFieldByName(hiddenTextField.getName());
@@ -144,18 +145,10 @@ public class ActivityFeedEnhTest extends BaseActivityServiceTest {
 		Assert.assertEquals("IBM", ((LinkField)movedLinkField).getLink().getTitle());
 		Assert.assertEquals("http://www.ibm.com", ((LinkField)movedLinkField).getLink().getHref());
 		
-		// Check person field
-		Field movedPersonField = read.getFieldByName(personField.getName());
-		Assert.assertTrue(movedPersonField instanceof PersonField);
-		Assert.assertEquals("test_person", ((PersonField)movedPersonField).getName());
-		Assert.assertEquals(5000, ((PersonField)movedPersonField).getPosition());
-		Assert.assertEquals(name, ((PersonField)movedPersonField).getPerson().getName());
-		Assert.assertEquals(userid, ((PersonField)movedPersonField).getPerson().getUserid());
-		Assert.assertNotNull(((PersonField)movedPersonField).getPerson().getUserState());
-
 		// Delete the activities again
-		activityService.deleteActivity(srcActivity);
-		activityService.deleteActivity(destActivity);
+		activityService.deleteActivityNode(srcActivityNode);
+		activityService.deleteActivityNode(dstActivityNode);
+		activityService.deleteActivity(activity);
 	}
 	
 	@Test(expected=ClientServicesException.class)
@@ -310,6 +303,8 @@ public class ActivityFeedEnhTest extends BaseActivityServiceTest {
 		
 		Activity destActivity = createActivity();
 		
+		ActivityNode node = new ActivityNode();
+		
 		// Field 1
 		TextField textField = new TextField();
 		textField.setName("test_text");
@@ -357,10 +352,6 @@ public class ActivityFeedEnhTest extends BaseActivityServiceTest {
 		srcActivity1.update();
 		srcActivity2.update();
 		srcActivity3.update();
-		
-		activityService.updateActivity(srcActivity1);
-		activityService.updateActivity(srcActivity2);
-		activityService.updateActivity(srcActivity3);
 		
 		// The original number of fields in the source node
 		int totalNumFields = srcActivity1.getFields().length + srcActivity2.getFields().length + srcActivity3.getFields().length;

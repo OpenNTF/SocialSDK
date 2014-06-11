@@ -306,4 +306,140 @@ public class ActivityFeedEnhTest extends BaseActivityServiceTest {
 		Assert.assertTrue(containsActivity(allActivities, completedActivity));
 	}
 	
+		@Test
+	public void testReduceFieldsToSingleNode() throws ClientServicesException, XMLException {
+		// Create activities
+		Activity srcActivity1 = createActivity();
+		Activity srcActivity2 = createActivity();
+		Activity srcActivity3 = createActivity();
+		
+		Activity destActivity = createActivity();
+		
+		// Field 1
+		TextField textField = new TextField();
+		textField.setName("test_text");
+		textField.setPosition(1000);
+		textField.setSummary("Test_Text_Field");
+		
+		// Field 2 
+		Date date = new Date();
+		date.setTime(1397650699000L);
+		DateField dateField = new DateField();
+		dateField.setName("test_date");
+		dateField.setPosition(2000);
+		dateField.setDate(date);
+		
+		// Field 3
+		TextField hiddenTextField = new TextField();
+		hiddenTextField.setName("test_hidden_text");
+		hiddenTextField.setPosition(3000);
+		hiddenTextField.setSummary("Hidden_Text_Field");
+		hiddenTextField.setHidden(true);
+		
+		// Field 4
+		LinkField linkField = new LinkField();
+		linkField.setName("test_link");
+		linkField.setPosition(4000);
+		linkField.setLink(new Link("IBM", "http://www.ibm.com"));
+		
+		// Field 5
+		String name = TestEnvironment.getSecondaryUserDisplayName();
+		String email = TestEnvironment.getSecondaryUserEmail();
+		String userid = TestEnvironment.getSecondaryUserUuid();
+		
+		PersonField personField = new PersonField();
+		personField.setName("test_person");
+		personField.setPosition(5000);
+		personField.setPerson(new Person(name, email, userid));
+		
+		// Populate source activity and update
+		srcActivity1.addField(textField);
+		srcActivity1.addField(hiddenTextField);
+		srcActivity2.addField(dateField);
+		srcActivity2.addField(linkField);
+		srcActivity3.addField(personField);
+		
+		srcActivity1.update();
+		srcActivity2.update();
+		srcActivity3.update();
+		
+		activityService.updateActivity(srcActivity1);
+		activityService.updateActivity(srcActivity2);
+		activityService.updateActivity(srcActivity3);
+		
+		// The original number of fields in the source node
+		int totalNumFields = srcActivity1.getFields().length + srcActivity2.getFields().length + srcActivity3.getFields().length;
+		
+		ActivityNode an = null;
+		
+		// Move all fields from source acitivity 1
+		for (Field f : srcActivity1.getFields()) {
+			an = activityService.moveFieldToEntry(destActivity.getActivityUuid(), f.getFid(), (int) f.getPosition());
+		}
+		
+		// Move all fields from source acitivity 2
+		for (Field f : srcActivity2.getFields()) {
+			an = activityService.moveFieldToEntry(destActivity.getActivityUuid(), f.getFid(), (int) f.getPosition());
+		}
+				
+		// Move all fields from source acitivity 3
+		for (Field f : srcActivity3.getFields()) {
+			an = activityService.moveFieldToEntry(destActivity.getActivityUuid(), f.getFid(), (int) f.getPosition());
+		}
+		
+		Assert.assertNotNull(an);
+		
+		Activity read = an.getActivityService().getActivity(destActivity.getActivityUuid());
+		Field[] fields = read.getFields();
+		
+		// Check that all fields have been moved
+		Assert.assertNotNull(fields);
+		Assert.assertEquals(totalNumFields, fields.length);
+		
+		// Check date field
+		Field movedDateField = read.getFieldByName(dateField.getName());
+		Assert.assertTrue(movedDateField instanceof DateField);
+		Assert.assertEquals("test_date", ((DateField)movedDateField).getName());
+		Assert.assertEquals(1000, ((DateField)movedDateField).getPosition());
+		Assert.assertNotNull(((DateField)movedDateField).getDate());
+		
+		// Check text field
+		Field movedTextField = read.getFieldByName(textField.getName());
+		Assert.assertTrue(movedTextField instanceof TextField);
+		Assert.assertEquals("test_text", movedTextField);
+		Assert.assertEquals(2000, ((TextField)movedTextField).getPosition());
+		Assert.assertEquals("Test_Text_Field", ((TextField)movedTextField).getSummary());
+		
+		// Check hidden text field
+		Field movedHiddenTextField = read.getFieldByName(hiddenTextField.getName());
+		Assert.assertTrue(movedHiddenTextField instanceof TextField);
+		Assert.assertTrue(((TextField)movedHiddenTextField).isHidden());
+		Assert.assertEquals("test_hidden_text", ((TextField)movedHiddenTextField).getName());
+		Assert.assertEquals(3000, ((TextField)movedHiddenTextField).getPosition());
+		Assert.assertEquals("Hidden_Text_Field", ((TextField)movedHiddenTextField).getSummary());
+		
+		// Check link field
+		Field movedLinkField = read.getFieldByName(linkField.getName());
+		Assert.assertTrue(movedLinkField instanceof LinkField);
+		Assert.assertEquals("test_link", ((LinkField)movedLinkField).getName());
+		Assert.assertEquals(4000, ((LinkField)movedLinkField).getPosition());
+		Assert.assertEquals("IBM", ((LinkField)movedLinkField).getLink().getTitle());
+		Assert.assertEquals("http://www.ibm.com", ((LinkField)movedLinkField).getLink().getHref());
+		
+		// Check person field
+		Field movedPersonField = read.getFieldByName(personField.getName());
+		Assert.assertTrue(movedPersonField instanceof PersonField);
+		Assert.assertEquals("test_person", ((PersonField)movedPersonField).getName());
+		Assert.assertEquals(5000, ((PersonField)movedPersonField).getPosition());
+		Assert.assertEquals(name, ((PersonField)movedPersonField).getPerson().getName());
+		Assert.assertEquals(userid, ((PersonField)movedPersonField).getPerson().getUserid());
+		Assert.assertNotNull(((PersonField)movedPersonField).getPerson().getUserState());
+
+		// Delete the activities again
+		activityService.deleteActivity(srcActivity1);
+		activityService.deleteActivity(srcActivity2);
+		activityService.deleteActivity(srcActivity3);
+		activityService.deleteActivity(destActivity);
+	}
+	
 }

@@ -128,6 +128,7 @@ public class ExportWiki {
             WikiPage wikiPage = iter.next();
             entityToJsonObject(wikiPage, AtomXPath.values(), wikiEntry);
             entityToJsonObject(wikiPage, WikiXPath.values(), wikiEntry);
+            wikiEntry.put("content", wikiPage.getContent());
             array.putObject(index++, wikiEntry);
         }
         result.putArray("pages", array);

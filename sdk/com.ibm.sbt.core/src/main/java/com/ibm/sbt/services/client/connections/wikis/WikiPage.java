@@ -16,11 +16,16 @@
 
 package com.ibm.sbt.services.client.connections.wikis;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.StringWriter;
+
+import org.apache.commons.io.IOUtils;
 import org.w3c.dom.Node;
 
 import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.xpath.XPathExpression;
-import com.ibm.sbt.services.client.base.AtomXPath;
+import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 
@@ -65,18 +70,19 @@ public class WikiPage extends WikiBaseEntity {
 	
 	@Override
 	public String getContent() {
-		if (fields.containsKey(AtomXPath.content.getName())){
-			Object value = fields.get(AtomXPath.content.getName());
-			return (value == null) ? null : value.toString();
+		String contentUrl = this.getAsString(WikiXPath.enclosureUrl);
+		StringWriter writer = new StringWriter();
+		try {
+			InputStream contentStream = (InputStream)getService().getEndpoint().xhrGet(contentUrl).getData();
+			IOUtils.copy(contentStream, writer, "UTF-8");
+			contentStream.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClientServicesException e) {
+			e.printStackTrace();
 		}
-		else {
-			String contentUrl = this.getAsString(WikiXPath.contentSrc);
-			try {
-				return (String)getService().retrieveData(contentUrl, null).getData();
-			} catch (Exception e) {
-				throw new RuntimeException(e);
-			}
-		}
+		String content = writer.toString();
+		return content;
 	}
 	
 	/**

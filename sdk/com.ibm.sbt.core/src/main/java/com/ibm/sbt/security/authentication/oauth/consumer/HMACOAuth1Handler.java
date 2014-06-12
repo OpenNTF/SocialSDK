@@ -298,7 +298,7 @@ public class HMACOAuth1Handler extends OAuth1Handler implements Serializable {
 		treeMap.put(Configuration.SIGNATURE_METHOD, getSignatureMethod());
 		treeMap.put(Configuration.VERSION, Configuration.OAUTH_VERSION1);
 		treeMap.put(Configuration.TIMESTAMP, timeStamp);
-		treeMap.put(Configuration.OAUTH_TOKEN, applicationAccessToken);
+		treeMap.put(Configuration.OAUTH_TOKEN, getAccessToken());
 
 		for (Map.Entry<String, String> entry : params.entrySet()) {
 			String key = entry.getKey();
@@ -328,7 +328,7 @@ public class HMACOAuth1Handler extends OAuth1Handler implements Serializable {
 		headerStr.append(",").append(Configuration.SIGNATURE_METHOD).append("=\"")
 				.append(getSignatureMethod()).append("\"");
 		headerStr.append(",").append(Configuration.TIMESTAMP).append("=\"").append(timeStamp).append("\"");
-		headerStr.append(",").append(Configuration.OAUTH_TOKEN).append("=\"").append(applicationAccessToken)
+		headerStr.append(",").append(Configuration.OAUTH_TOKEN).append("=\"").append(getAccessToken())
 				.append("\"");
 		headerStr.append(",").append(Configuration.VERSION).append("=\"")
 				.append(Configuration.OAUTH_VERSION1).append("\"");

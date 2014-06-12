@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2013
+ * (C) Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -2094,7 +2094,8 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
 					
 			var headers = {
 				"Content-Type" : false,
-				"Process-Data" : false //processData = false is reaquired by jquery
+				"Process-Data" : false, //processData = false is reaquired by jquery
+				"X-Endpoint-name" : this.endpoint.name
 			};
 			var options = {
 				method : "POST",

@@ -48,7 +48,7 @@ public enum ActivityUrls implements URLContainer {
 	ACTIVITY_MEMBER(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/acl?activityUuid={activityUuid}&memberid={memberId}")), // Retrieve, update and delete an activity member programmatically
 	ACTIVITY_DESCENDANTS(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/descendants?activityNodeUuid={activityNodeUuid}")), // Getting a feed of the Activity descendants
 	ACTIVITY_NODECHILDREN(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/nodechildren?activityNodeUuid={activityNodeUuid}")), // Getting a feed of the Activity descendants
-	MOVE_FIELD(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/moveField?destinationUuid={destinationUuid}&fieldUuid={fieldUuid}")), // Move a field from an ActivityNode to another
+	MOVE_FIELD(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/moveField?destNodeUuid={destinationUuid}&fieldUuid={fieldUuid}")), // Move a field from an ActivityNode to another
 	;
 	
 	private URLBuilder builder;

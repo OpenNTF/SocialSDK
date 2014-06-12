@@ -245,21 +245,21 @@ public class ActivityFeedEnhTest extends BaseActivityServiceTest {
 		Assert.assertEquals("test_text", movedTextField.getName());
 		Assert.assertEquals(1000, ((TextField)movedTextField).getPosition());
 		Assert.assertEquals("Test_Text_Field", ((TextField)movedTextField).getSummary());
+
+		// Check date field
+		Field movedDateField = read.getFieldByName(dateField.getName());
+		Assert.assertTrue(movedDateField instanceof DateField);
+		Assert.assertEquals("test_date", ((DateField)movedDateField).getName());
+		Assert.assertEquals(2000, ((DateField)movedDateField).getPosition());
+		Assert.assertNotNull(((DateField)movedDateField).getDate());
 		
 		// Check hidden text field
 		Field movedHiddenTextField = read.getFieldByName(hiddenTextField.getName());
 		Assert.assertTrue(movedHiddenTextField instanceof TextField);
 		Assert.assertTrue(((TextField)movedHiddenTextField).isHidden());
 		Assert.assertEquals("test_hidden_text", ((TextField)movedHiddenTextField).getName());
-		Assert.assertEquals(2000, ((TextField)movedHiddenTextField).getPosition());
+		Assert.assertEquals(3000, ((TextField)movedHiddenTextField).getPosition());
 		Assert.assertEquals("Hidden_Text_Field", ((TextField)movedHiddenTextField).getSummary());
-		
-		// Check date field
-		Field movedDateField = read.getFieldByName(dateField.getName());
-		Assert.assertTrue(movedDateField instanceof DateField);
-		Assert.assertEquals("test_date", ((DateField)movedDateField).getName());
-		Assert.assertEquals(3000, ((DateField)movedDateField).getPosition());
-		Assert.assertNotNull(((DateField)movedDateField).getDate());
 		
 		// Delete the activities again
 		activityService.deleteActivityNode(srcActivityNode1);
@@ -301,6 +301,7 @@ public class ActivityFeedEnhTest extends BaseActivityServiceTest {
 		ActivityNode an = null;
 		for (Field f : srcActivityNode.getFields()) {
 			thrown.expect(ClientServicesException.class);
+			thrown.expectMessage("400:Bad Request");
 			an = activityService.moveFieldToEntry(dstActivityNode.getActivityUuid(), f.getFid());
 		}
 
@@ -343,6 +344,7 @@ public class ActivityFeedEnhTest extends BaseActivityServiceTest {
 		ActivityNode an = null;
 		for (Field f : srcActivityNode.getFields()) {
 			thrown.expect(ClientServicesException.class);
+			thrown.expectMessage("400:Bad Request");
 			an = activityService.moveFieldToEntry(null, f.getFid());
 		}
 
@@ -382,6 +384,7 @@ public class ActivityFeedEnhTest extends BaseActivityServiceTest {
 		
 		// Test wrong fieldUuid
 		thrown.expect(ClientServicesException.class);
+		thrown.expectMessage("400:Bad Request");
 		ActivityNode an = activityService.moveFieldToEntry(dstActivityNode.getActivityUuid(), "FooBarNonExistentField");
 
 		// Delete the activities again
@@ -424,7 +427,94 @@ public class ActivityFeedEnhTest extends BaseActivityServiceTest {
 		
 		// Test wrong fieldUuid
 		thrown.expect(ClientServicesException.class);
+		thrown.expectMessage("400:Bad Request");
 		ActivityNode an = activityService.moveFieldToEntry("FooBar", textField.getFid());
+
+		// Delete the activities again
+		activityService.deleteActivityNode(srcActivityNode);
+		activityService.deleteActivityNode(dstActivityNode);
+	}
+
+	@Test
+	public void testMoveFieldToDeletedNode() throws ClientServicesException, XMLException {
+		// Create activities
+		activity = new Activity();
+		activity.setTitle(createActivityTitle());
+		activity = activityService.createActivity(activity);
+		
+		ActivityNode srcActivityNode = new ActivityNode();
+		srcActivityNode.setActivityUuid(activity.getActivityUuid());
+		srcActivityNode.setTitle("Source ActivityNode");
+		srcActivityNode.setType("ENTRY");
+		
+		ActivityNode dstActivityNode = new ActivityNode();
+		dstActivityNode.setActivityUuid(activity.getActivityUuid());
+		dstActivityNode.setTitle("Destination ActivityNode");
+		dstActivityNode.setType("ENTRY");
+		
+		// Create text field
+		TextField textField = new TextField();
+		textField.setName("test_text");
+		textField.setPosition(1000);
+		textField.setSummary("Test_Text_Field");
+
+		
+		// Populate source activity and update
+		srcActivityNode.addField(textField);
+		
+		srcActivityNode = activityService.createActivityNode(srcActivityNode);
+		dstActivityNode = activityService.createActivityNode(dstActivityNode);
+		activityService.deleteActivityNode(dstActivityNode);
+		
+		srcActivityNode = activityService.getActivityNode(srcActivityNode.getActivityNodeUuid());
+
+		
+		// Test wrong fieldUuid
+		thrown.expect(ClientServicesException.class);
+		thrown.expectMessage("400:Bad Request");
+		ActivityNode an = activityService.moveFieldToEntry(dstActivityNode.getActivityUuid(), textField.getFid());
+
+		// Delete the activities again
+		activityService.deleteActivityNode(srcActivityNode);
+	}
+
+	@Test
+	public void testMoveFieldUnsupportedNodeType() throws ClientServicesException, XMLException {
+		// Create activities
+		activity = new Activity();
+		activity.setTitle(createActivityTitle());
+		activity = activityService.createActivity(activity);
+		
+		ActivityNode srcActivityNode = new ActivityNode();
+		srcActivityNode.setActivityUuid(activity.getActivityUuid());
+		srcActivityNode.setTitle("Source ActivityNode");
+		srcActivityNode.setType("ENTRY");
+		
+		ActivityNode dstActivityNode = new ActivityNode();
+		dstActivityNode.setActivityUuid(activity.getActivityUuid());
+		dstActivityNode.setTitle("Destination ActivityNode");
+		dstActivityNode.setType("SECTION");
+		
+		// Create text field
+		TextField textField = new TextField();
+		textField.setName("test_text");
+		textField.setPosition(1000);
+		textField.setSummary("Test_Text_Field");
+
+		
+		// Populate source activity and update
+		srcActivityNode.addField(textField);
+		
+		srcActivityNode = activityService.createActivityNode(srcActivityNode);
+		dstActivityNode = activityService.createActivityNode(dstActivityNode);
+		
+		srcActivityNode = activityService.getActivityNode(srcActivityNode.getActivityNodeUuid());
+
+		
+		// Test wrong fieldUuid
+		thrown.expect(ClientServicesException.class);
+		thrown.expectMessage("400:Bad Request");
+		ActivityNode an = activityService.moveFieldToEntry(dstActivityNode.getActivityUuid(), textField.getFid());
 
 		// Delete the activities again
 		activityService.deleteActivityNode(srcActivityNode);

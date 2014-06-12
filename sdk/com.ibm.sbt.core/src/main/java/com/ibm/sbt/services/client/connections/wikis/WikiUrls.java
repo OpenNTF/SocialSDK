@@ -38,14 +38,16 @@ public enum WikiUrls implements URLContainer {
 	MOST_VISITED_WIKIS(    new VersionedUrl(v4_0, "{wikis}/{authType}/anonymous/api/wikis/mostvisited")),
 	WIKI_MYPAGES(          new VersionedUrl(v4_0, "{wikis}/{authType}/api/wiki/{wikiLabel}/mypages")),
 	WIKI_PAGES_TRASH(      new VersionedUrl(v4_0, "{wikis}/{authType}/anonymous/api/wiki/{wikiLabel}/recyclebin/feed")),
-	WIKI_PAGES(            new VersionedUrl(v4_0, "{wikis}/{authType}/anonymous/api/wiki/{wikiLabel}/feed")),
-	WIKI_PAGES_AUTH(       new VersionedUrl(v4_0, "{wikis}/{authType}/api/wiki/{wikiLabel}/feed")),
-	WIKI(                  new VersionedUrl(v4_0, "{wikis}/{authType}/anonymous/api/wiki/{wikiLabel}/entry")),
-	WIKI_AUTH(             new VersionedUrl(v4_0, "{wikis}/{authType}/api/wiki/{wikiLabel}/entry")),
-	WIKI_PAGE(             new VersionedUrl(v4_0, "{wikis}/{authType}/anonymous/api/wiki/{wikiLabel}/page/{wikiPage}/entry")),
-	WIKI_PAGE_AUTH(        new VersionedUrl(v4_0, "{wikis}/{authType}/api/wiki/{wikiLabel}/page/{wikiPage}/entry"));
+	WIKI_PAGES(            new VersionedUrl(v4_0, "{wikis}/{authType}/{authenticated}/api/wiki/{wikiLabel}/feed")),
+	WIKI(                  new VersionedUrl(v4_0, "{wikis}/{authType}/{authenticated}/api/wiki/{wikiLabel}/entry")),
+	WIKI_PAGE(             new VersionedUrl(v4_0, "{wikis}/{authType}/{authenticated}/api/wiki/{wikiLabel}/page/{wikiPage}/entry"));
 	
 	private URLBuilder builder;
+	
+	public static NamedUrlPart authenticated(boolean authenticated) {
+		String isAuthenticated = authenticated ? "" : "anonymous";
+		return new NamedUrlPart("authenticated", isAuthenticated);
+	}
 	
 	private WikiUrls(VersionedUrl... urlVersions) {
 		builder = new URLBuilder(urlVersions);

@@ -156,7 +156,7 @@ public class WikiService extends BaseService {
 	 */
 	public EntityList<WikiPage> getWikiPages(String wikiLabel, Map<String, String> parameters) 
 			throws ClientServicesException {
-		String requestUrl = WikiUrls.WIKI_PAGES.format(this, WikiUrlParts.wikiLabel.get(wikiLabel));
+		String requestUrl = WikiUrls.WIKI_PAGES.format(this, WikiUrlParts.wikiLabel.get(wikiLabel), WikiUrls.authenticated(endpoint.isAuthenticated()));
 		return getWikiPagesEntityList(requestUrl, parameters);
 	}
 	

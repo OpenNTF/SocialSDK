@@ -18,6 +18,7 @@ package com.ibm.sbt.sample.app;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.Iterator;
 
 import com.ibm.commons.util.io.json.JsonException;
@@ -60,19 +61,25 @@ public class ExportWiki {
         basicEndpoint.setForceTrustSSLCertificate(true);
         basicEndpoint.setUser(user);
         basicEndpoint.setPassword(password);
-
-        this.wikiService = new WikiService();
-        this.setEndpoint(basicEndpoint);
+        basicEndpoint.login(user, password);
+        
+        wikiService = new WikiService();
+        setEndpoint(basicEndpoint);
     }
-
+    /**
+     * 
+     * @return
+     */
+    public BasicEndpoint getEndpoint(){
+    	return endpoint;
+    }
+    
     /**
      * 
      * @param endpoint
      *            The endpoint you want this class to use.
-     * @throws AuthenticationException
      */
-    public void setEndpoint(BasicEndpoint endpoint)
-            throws AuthenticationException {
+    public void setEndpoint(BasicEndpoint endpoint) {
         this.endpoint = endpoint;
         this.wikiService.setEndpoint(this.endpoint);
     }
@@ -115,11 +122,13 @@ public class ExportWiki {
     public void export(String wikiLabel, String outputFile)
             throws ClientServicesException, JsonException, IOException {
         long start = System.currentTimeMillis();
-
-        Wiki wiki = wikiService.getWiki(wikiLabel, null);
+        
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("includeTags", "true");
+        Wiki wiki = wikiService.getWiki(wikiLabel, params);
         JsonJavaObject result = entityToJsonObject(wiki, WikiXPath.values(),
                 null);
-        EntityList<WikiPage> wikiPages = wikiService.getWikiPages(wikiLabel);
+        EntityList<WikiPage> wikiPages = wikiService.getWikiPages(wikiLabel, params);
 
         JsonJavaArray array = new JsonJavaArray();
         int index = 0;
@@ -128,6 +137,7 @@ public class ExportWiki {
             WikiPage wikiPage = iter.next();
             entityToJsonObject(wikiPage, AtomXPath.values(), wikiEntry);
             entityToJsonObject(wikiPage, WikiXPath.values(), wikiEntry);
+            wikiEntry.put("content", wikiPage.getContent());
             array.putObject(index++, wikiEntry);
         }
         result.putArray("pages", array);

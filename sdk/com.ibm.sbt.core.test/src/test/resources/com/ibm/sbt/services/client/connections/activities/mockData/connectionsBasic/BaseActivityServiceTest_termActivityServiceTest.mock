@@ -1,0 +1,607 @@
+<?xml version="1.0"?>
+<responses>
+<response statusCode="204" statusReason="No Content">
+<headers>
+    <header>
+        <name><![CDATA[Date]]></name>
+        <value><![CDATA[Fri, 13 Jun 2014 12:55:45 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-Powered-By]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-LConn-Auth]]></name>
+        <value><![CDATA[false]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-UA-Compatible]]></name>
+        <value><![CDATA[IE=9,8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Expires]]></name>
+        <value><![CDATA[Thu, 1 Jan 1970 00:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Cache-Control]]></name>
+        <value><![CDATA[no-store, no-cache, must-revalidate]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Accept]]></name>
+        <value><![CDATA[application/atom+xml]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Location]]></name>
+        <value><![CDATA[https://lcauto31.swg.usma.ibm.com:443/activities/service/atom2/trashednode?activityNodeUuid=c76cc1fe-5b66-4020-811e-9af19259c680]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Length]]></name>
+        <value><![CDATA[0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[lcLang=en_us; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=otsDRTnq5R5sobQckqjFTMCzMpiOAF7KDFCG2YzHK48uDsxsXJCbdDmtPHCOSf/rUUJ6WHTZ+yaHVJUi+VsvuN8L5OGVke3tRtuxOl1rCfqa/Hqh0urrsaybwd6oKGf43rGwqzsj1kzWvEPLNsJ1cSYYSA+6fOrussRNzyMQK//exKMCnAJOfNKQg5tE3oQW94pe2S8ro65r0vynPTHcTH57MsAYHFPikHFXZlQMK0e0lhCtcQXUyWTWkij6qn/o3816laS2Js+XHMLRd/1dTVA0b29tXOmZoGO3yBz2NQUYmxxcZiEdS45f4+Avl3sZW9+lJc19da3lxRjPerFLWdSXVKvoqpN0j4XaTLQRpLT1d72+oXrD3koHDEhm2pARn9xNbb27nYf7vEEVp99Wo8DLqt2JXCRTOEJ/tLdEwYHAcfpFhV9WnRwsOECJAVQqwiqWXZ2pS3weG/MoWgo+66Y9sUZ8ba5/Vlqki8wVvw17m1bmQsuxdQ19Um3xab1oTqG9MVD8ujvreAZtg+ZbPfP6Bbvxzb2ScTRrjrOgyCZiOK/UfC4hX1058KolH4azVO+GbXsldAHBNioDw1fNrHJwi5Jq4o9xnoOaiyraAQjGxWSgZhgqxn5J1ukk2atH25H6OS2FyBZcLm396xgcr9Yd3THNzGRHqmfwgSjBq2hYPwK5sAodCf4W4q9BcJmh/U11Fr+JKtErUZ3ih/fBBw==; Path=/; Domain=.swg.usma.ibm.com]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[ICSESSIONID=0000C7mm_18hz1ir9G1_JPHcBve:-1; Path=/; HttpOnly]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Keep-Alive]]></name>
+        <value><![CDATA[timeout=10, max=100]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Connection]]></name>
+        <value><![CDATA[Keep-Alive]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Type]]></name>
+        <value><![CDATA[text/html]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header></headers>
+</response>
+<response statusCode="204" statusReason="No Content">
+<headers>
+    <header>
+        <name><![CDATA[Date]]></name>
+        <value><![CDATA[Fri, 13 Jun 2014 12:55:54 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-Powered-By]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-LConn-Auth]]></name>
+        <value><![CDATA[false]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-UA-Compatible]]></name>
+        <value><![CDATA[IE=9,8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Expires]]></name>
+        <value><![CDATA[Thu, 1 Jan 1970 00:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Cache-Control]]></name>
+        <value><![CDATA[no-store, no-cache, must-revalidate]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Accept]]></name>
+        <value><![CDATA[application/atom+xml]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Location]]></name>
+        <value><![CDATA[https://lcauto31.swg.usma.ibm.com:443/activities/service/atom2/trashednode?activityNodeUuid=ce54e070-ce48-41de-abf5-3b225a6e77e0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Length]]></name>
+        <value><![CDATA[0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[lcLang=en_us; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=otsDRTnq5R5sobQckqjFTMCzMpiOAF7KDFCG2YzHK48uDsxsXJCbdDmtPHCOSf/rUUJ6WHTZ+yaHVJUi+VsvuN8L5OGVke3tRtuxOl1rCfqa/Hqh0urrsaybwd6oKGf43rGwqzsj1kzWvEPLNsJ1cSYYSA+6fOrussRNzyMQK//exKMCnAJOfNKQg5tE3oQW94pe2S8ro65r0vynPTHcTH57MsAYHFPikHFXZlQMK0e0lhCtcQXUyWTWkij6qn/o3816laS2Js+XHMLRd/1dTVA0b29tXOmZoGO3yBz2NQUYmxxcZiEdS45f4+Avl3sZW9+lJc19da3lxRjPerFLWdSXVKvoqpN0j4XaTLQRpLT1d72+oXrD3koHDEhm2pARn9xNbb27nYf7vEEVp99Wo8DLqt2JXCRTOEJ/tLdEwYHAcfpFhV9WnRwsOECJAVQqwiqWXZ2pS3weG/MoWgo+66Y9sUZ8ba5/Vlqki8wVvw17m1bmQsuxdQ19Um3xab1oTqG9MVD8ujvreAZtg+ZbPfP6Bbvxzb2ScTRrjrOgyCZiOK/UfC4hX1058KolH4azVO+GbXsldAHBNioDw1fNrHJwi5Jq4o9xnoOaiyraAQjGxWSgZhgqxn5J1ukk2atH25H6OS2FyBZcLm396xgcr9Yd3THNzGRHqmfwgSjBq2hYPwK5sAodCf4W4q9BcJmh/U11Fr+JKtErUZ3ih/fBBw==; Path=/; Domain=.swg.usma.ibm.com]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[ICSESSIONID=00007c7NyU_linpa494_WJNwV_-:-1; Path=/; HttpOnly]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Keep-Alive]]></name>
+        <value><![CDATA[timeout=10, max=100]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Connection]]></name>
+        <value><![CDATA[Keep-Alive]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Type]]></name>
+        <value><![CDATA[text/html]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header></headers>
+</response>
+<response statusCode="204" statusReason="No Content">
+<headers>
+    <header>
+        <name><![CDATA[Date]]></name>
+        <value><![CDATA[Fri, 13 Jun 2014 12:56:01 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-Powered-By]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-LConn-Auth]]></name>
+        <value><![CDATA[false]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-UA-Compatible]]></name>
+        <value><![CDATA[IE=9,8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Expires]]></name>
+        <value><![CDATA[Thu, 1 Jan 1970 00:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Cache-Control]]></name>
+        <value><![CDATA[no-store, no-cache, must-revalidate]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Accept]]></name>
+        <value><![CDATA[application/atom+xml]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Location]]></name>
+        <value><![CDATA[https://lcauto31.swg.usma.ibm.com:443/activities/service/atom2/trashednode?activityNodeUuid=98a412c6-6ca5-46e1-8d7b-13631c9466df]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Length]]></name>
+        <value><![CDATA[0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[lcLang=en_us; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=otsDRTnq5R5sobQckqjFTMCzMpiOAF7KDFCG2YzHK48uDsxsXJCbdDmtPHCOSf/rUUJ6WHTZ+yaHVJUi+VsvuN8L5OGVke3tRtuxOl1rCfqa/Hqh0urrsaybwd6oKGf43rGwqzsj1kzWvEPLNsJ1cSYYSA+6fOrussRNzyMQK//exKMCnAJOfNKQg5tE3oQW94pe2S8ro65r0vynPTHcTH57MsAYHFPikHFXZlQMK0e0lhCtcQXUyWTWkij6qn/o3816laS2Js+XHMLRd/1dTVA0b29tXOmZoGO3yBz2NQUYmxxcZiEdS45f4+Avl3sZW9+lJc19da3lxRjPerFLWdSXVKvoqpN0j4XaTLQRpLT1d72+oXrD3koHDEhm2pARn9xNbb27nYf7vEEVp99Wo8DLqt2JXCRTOEJ/tLdEwYHAcfpFhV9WnRwsOECJAVQqwiqWXZ2pS3weG/MoWgo+66Y9sUZ8ba5/Vlqki8wVvw17m1bmQsuxdQ19Um3xab1oTqG9MVD8ujvreAZtg+ZbPfP6Bbvxzb2ScTRrjrOgyCZiOK/UfC4hX1058KolH4azVO+GbXsldAHBNioDw1fNrHJwi5Jq4o9xnoOaiyraAQjGxWSgZhgqxn5J1ukk2atH25H6OS2FyBZcLm396xgcr9Yd3THNzGRHqmfwgSjBq2hYPwK5sAodCf4W4q9BcJmh/U11Fr+JKtErUZ3ih/fBBw==; Path=/; Domain=.swg.usma.ibm.com]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[ICSESSIONID=0000dUBJI3Ssfye48WwzElx7CZl:-1; Path=/; HttpOnly]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Keep-Alive]]></name>
+        <value><![CDATA[timeout=10, max=100]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Connection]]></name>
+        <value><![CDATA[Keep-Alive]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Type]]></name>
+        <value><![CDATA[text/html]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header></headers>
+</response>
+<response statusCode="204" statusReason="No Content">
+<headers>
+    <header>
+        <name><![CDATA[Date]]></name>
+        <value><![CDATA[Fri, 13 Jun 2014 12:56:08 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-Powered-By]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-LConn-Auth]]></name>
+        <value><![CDATA[false]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-UA-Compatible]]></name>
+        <value><![CDATA[IE=9,8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Expires]]></name>
+        <value><![CDATA[Thu, 1 Jan 1970 00:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Cache-Control]]></name>
+        <value><![CDATA[no-store, no-cache, must-revalidate]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Accept]]></name>
+        <value><![CDATA[application/atom+xml]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Location]]></name>
+        <value><![CDATA[https://lcauto31.swg.usma.ibm.com:443/activities/service/atom2/trashednode?activityNodeUuid=3711e1c3-8173-47f7-9b54-fa3d019459fe]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Length]]></name>
+        <value><![CDATA[0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[lcLang=en_us; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=otsDRTnq5R5sobQckqjFTMCzMpiOAF7KDFCG2YzHK48uDsxsXJCbdDmtPHCOSf/rUUJ6WHTZ+yaHVJUi+VsvuN8L5OGVke3tRtuxOl1rCfqa/Hqh0urrsaybwd6oKGf43rGwqzsj1kzWvEPLNsJ1cSYYSA+6fOrussRNzyMQK//exKMCnAJOfNKQg5tE3oQW94pe2S8ro65r0vynPTHcTH57MsAYHFPikHFXZlQMK0e0lhCtcQXUyWTWkij6qn/o3816laS2Js+XHMLRd/1dTVA0b29tXOmZoGO3yBz2NQUYmxxcZiEdS45f4+Avl3sZW9+lJc19da3lxRjPerFLWdSXVKvoqpN0j4XaTLQRpLT1d72+oXrD3koHDEhm2pARn9xNbb27nYf7vEEVp99Wo8DLqt2JXCRTOEJ/tLdEwYHAcfpFhV9WnRwsOECJAVQqwiqWXZ2pS3weG/MoWgo+66Y9sUZ8ba5/Vlqki8wVvw17m1bmQsuxdQ19Um3xab1oTqG9MVD8ujvreAZtg+ZbPfP6Bbvxzb2ScTRrjrOgyCZiOK/UfC4hX1058KolH4azVO+GbXsldAHBNioDw1fNrHJwi5Jq4o9xnoOaiyraAQjGxWSgZhgqxn5J1ukk2atH25H6OS2FyBZcLm396xgcr9Yd3THNzGRHqmfwgSjBq2hYPwK5sAodCf4W4q9BcJmh/U11Fr+JKtErUZ3ih/fBBw==; Path=/; Domain=.swg.usma.ibm.com]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[ICSESSIONID=00005OPpPtfcGEbGTJi-X-PlXzB:-1; Path=/; HttpOnly]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Keep-Alive]]></name>
+        <value><![CDATA[timeout=10, max=100]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Connection]]></name>
+        <value><![CDATA[Keep-Alive]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Type]]></name>
+        <value><![CDATA[text/html]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header></headers>
+</response>
+<response statusCode="204" statusReason="No Content">
+<headers>
+    <header>
+        <name><![CDATA[Date]]></name>
+        <value><![CDATA[Fri, 13 Jun 2014 12:56:17 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-Powered-By]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-LConn-Auth]]></name>
+        <value><![CDATA[false]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-UA-Compatible]]></name>
+        <value><![CDATA[IE=9,8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Expires]]></name>
+        <value><![CDATA[Thu, 1 Jan 1970 00:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Cache-Control]]></name>
+        <value><![CDATA[no-store, no-cache, must-revalidate]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Accept]]></name>
+        <value><![CDATA[application/atom+xml]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Location]]></name>
+        <value><![CDATA[https://lcauto31.swg.usma.ibm.com:443/activities/service/atom2/trashednode?activityNodeUuid=da3994d4-3e9e-4f83-949f-a8afe6734efa]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Length]]></name>
+        <value><![CDATA[0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[lcLang=en_us; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=otsDRTnq5R5sobQckqjFTMCzMpiOAF7KDFCG2YzHK48uDsxsXJCbdDmtPHCOSf/rUUJ6WHTZ+yaHVJUi+VsvuN8L5OGVke3tRtuxOl1rCfqa/Hqh0urrsaybwd6oKGf43rGwqzsj1kzWvEPLNsJ1cSYYSA+6fOrussRNzyMQK//exKMCnAJOfNKQg5tE3oQW94pe2S8ro65r0vynPTHcTH57MsAYHFPikHFXZlQMK0e0lhCtcQXUyWTWkij6qn/o3816laS2Js+XHMLRd/1dTVA0b29tXOmZoGO3yBz2NQUYmxxcZiEdS45f4+Avl3sZW9+lJc19da3lxRjPerFLWdSXVKvoqpN0j4XaTLQRpLT1d72+oXrD3koHDEhm2pARn9xNbb27nYf7vEEVp99Wo8DLqt2JXCRTOEJ/tLdEwYHAcfpFhV9WnRwsOECJAVQqwiqWXZ2pS3weG/MoWgo+66Y9sUZ8ba5/Vlqki8wVvw17m1bmQsuxdQ19Um3xab1oTqG9MVD8ujvreAZtg+ZbPfP6Bbvxzb2ScTRrjrOgyCZiOK/UfC4hX1058KolH4azVO+GbXsldAHBNioDw1fNrHJwi5Jq4o9xnoOaiyraAQjGxWSgZhgqxn5J1ukk2atH25H6OS2FyBZcLm396xgcr9Yd3THNzGRHqmfwgSjBq2hYPwK5sAodCf4W4q9BcJmh/U11Fr+JKtErUZ3ih/fBBw==; Path=/; Domain=.swg.usma.ibm.com]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[ICSESSIONID=0000uGGVhol4QN0LyNzL2N2tCYV:-1; Path=/; HttpOnly]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Keep-Alive]]></name>
+        <value><![CDATA[timeout=10, max=100]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Connection]]></name>
+        <value><![CDATA[Keep-Alive]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Type]]></name>
+        <value><![CDATA[text/html]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header></headers>
+</response>
+<response statusCode="204" statusReason="No Content">
+<headers>
+    <header>
+        <name><![CDATA[Date]]></name>
+        <value><![CDATA[Fri, 13 Jun 2014 12:56:24 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-Powered-By]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-LConn-Auth]]></name>
+        <value><![CDATA[false]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-UA-Compatible]]></name>
+        <value><![CDATA[IE=9,8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Expires]]></name>
+        <value><![CDATA[Thu, 1 Jan 1970 00:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Cache-Control]]></name>
+        <value><![CDATA[no-store, no-cache, must-revalidate]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Accept]]></name>
+        <value><![CDATA[application/atom+xml]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Location]]></name>
+        <value><![CDATA[https://lcauto31.swg.usma.ibm.com:443/activities/service/atom2/trashednode?activityNodeUuid=5521af07-0311-4310-903c-629ac3685d84]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Length]]></name>
+        <value><![CDATA[0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[lcLang=en_us; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=otsDRTnq5R5sobQckqjFTMCzMpiOAF7KDFCG2YzHK48uDsxsXJCbdDmtPHCOSf/rUUJ6WHTZ+yaHVJUi+VsvuN8L5OGVke3tRtuxOl1rCfqa/Hqh0urrsaybwd6oKGf43rGwqzsj1kzWvEPLNsJ1cSYYSA+6fOrussRNzyMQK//exKMCnAJOfNKQg5tE3oQW94pe2S8ro65r0vynPTHcTH57MsAYHFPikHFXZlQMK0e0lhCtcQXUyWTWkij6qn/o3816laS2Js+XHMLRd/1dTVA0b29tXOmZoGO3yBz2NQUYmxxcZiEdS45f4+Avl3sZW9+lJc19da3lxRjPerFLWdSXVKvoqpN0j4XaTLQRpLT1d72+oXrD3koHDEhm2pARn9xNbb27nYf7vEEVp99Wo8DLqt2JXCRTOEJ/tLdEwYHAcfpFhV9WnRwsOECJAVQqwiqWXZ2pS3weG/MoWgo+66Y9sUZ8ba5/Vlqki8wVvw17m1bmQsuxdQ19Um3xab1oTqG9MVD8ujvreAZtg+ZbPfP6Bbvxzb2ScTRrjrOgyCZiOK/UfC4hX1058KolH4azVO+GbXsldAHBNioDw1fNrHJwi5Jq4o9xnoOaiyraAQjGxWSgZhgqxn5J1ukk2atH25H6OS2FyBZcLm396xgcr9Yd3THNzGRHqmfwgSjBq2hYPwK5sAodCf4W4q9BcJmh/U11Fr+JKtErUZ3ih/fBBw==; Path=/; Domain=.swg.usma.ibm.com]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[ICSESSIONID=0000jCJCxyVNcsItDCPs_B0TP1G:-1; Path=/; HttpOnly]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Keep-Alive]]></name>
+        <value><![CDATA[timeout=10, max=100]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Connection]]></name>
+        <value><![CDATA[Keep-Alive]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Type]]></name>
+        <value><![CDATA[text/html]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header></headers>
+</response>
+<response statusCode="204" statusReason="No Content">
+<headers>
+    <header>
+        <name><![CDATA[Date]]></name>
+        <value><![CDATA[Fri, 13 Jun 2014 12:56:32 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-Powered-By]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-LConn-Auth]]></name>
+        <value><![CDATA[false]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-UA-Compatible]]></name>
+        <value><![CDATA[IE=9,8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Expires]]></name>
+        <value><![CDATA[Thu, 1 Jan 1970 00:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Cache-Control]]></name>
+        <value><![CDATA[no-store, no-cache, must-revalidate]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Accept]]></name>
+        <value><![CDATA[application/atom+xml]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Location]]></name>
+        <value><![CDATA[https://lcauto31.swg.usma.ibm.com:443/activities/service/atom2/trashednode?activityNodeUuid=23c53aae-eccc-47da-95d0-91184521f486]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Length]]></name>
+        <value><![CDATA[0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[lcLang=en_us; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=otsDRTnq5R5sobQckqjFTMCzMpiOAF7KDFCG2YzHK48uDsxsXJCbdDmtPHCOSf/rUUJ6WHTZ+yaHVJUi+VsvuN8L5OGVke3tRtuxOl1rCfqa/Hqh0urrsaybwd6oKGf43rGwqzsj1kzWvEPLNsJ1cSYYSA+6fOrussRNzyMQK//exKMCnAJOfNKQg5tE3oQW94pe2S8ro65r0vynPTHcTH57MsAYHFPikHFXZlQMK0e0lhCtcQXUyWTWkij6qn/o3816laS2Js+XHMLRd/1dTVA0b29tXOmZoGO3yBz2NQUYmxxcZiEdS45f4+Avl3sZW9+lJc19da3lxRjPerFLWdSXVKvoqpN0j4XaTLQRpLT1d72+oXrD3koHDEhm2pARn9xNbb27nYf7vEEVp99Wo8DLqt2JXCRTOEJ/tLdEwYHAcfpFhV9WnRwsOECJAVQqwiqWXZ2pS3weG/MoWgo+66Y9sUZ8ba5/Vlqki8wVvw17m1bmQsuxdQ19Um3xab1oTqG9MVD8ujvreAZtg+ZbPfP6Bbvxzb2ScTRrjrOgyCZiOK/UfC4hX1058KolH4azVO+GbXsldAHBNioDw1fNrHJwi5Jq4o9xnoOaiyraAQjGxWSgZhgqxn5J1ukk2atH25H6OS2FyBZcLm396xgcr9Yd3THNzGRHqmfwgSjBq2hYPwK5sAodCf4W4q9BcJmh/U11Fr+JKtErUZ3ih/fBBw==; Path=/; Domain=.swg.usma.ibm.com]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[ICSESSIONID=0000GOI9wT2Wtdho-HMJAyGZ_G1:-1; Path=/; HttpOnly]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Keep-Alive]]></name>
+        <value><![CDATA[timeout=10, max=100]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Connection]]></name>
+        <value><![CDATA[Keep-Alive]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Type]]></name>
+        <value><![CDATA[text/html]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header></headers>
+</response>
+<response statusCode="204" statusReason="No Content">
+<headers>
+    <header>
+        <name><![CDATA[Date]]></name>
+        <value><![CDATA[Fri, 13 Jun 2014 12:56:51 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-Powered-By]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-LConn-Auth]]></name>
+        <value><![CDATA[false]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-UA-Compatible]]></name>
+        <value><![CDATA[IE=9,8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Expires]]></name>
+        <value><![CDATA[Thu, 1 Jan 1970 00:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Cache-Control]]></name>
+        <value><![CDATA[no-store, no-cache, must-revalidate]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Accept]]></name>
+        <value><![CDATA[application/atom+xml]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Location]]></name>
+        <value><![CDATA[https://lcauto31.swg.usma.ibm.com:443/activities/service/atom2/trashednode?activityNodeUuid=053b6300-f0d6-4cb0-8522-9771cf7ca9f9]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Length]]></name>
+        <value><![CDATA[0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[lcLang=en_us; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=otsDRTnq5R5sobQckqjFTMCzMpiOAF7KDFCG2YzHK48uDsxsXJCbdDmtPHCOSf/rUUJ6WHTZ+yaHVJUi+VsvuN8L5OGVke3tRtuxOl1rCfqa/Hqh0urrsaybwd6oKGf43rGwqzsj1kzWvEPLNsJ1cSYYSA+6fOrussRNzyMQK//exKMCnAJOfNKQg5tE3oQW94pe2S8ro65r0vynPTHcTH57MsAYHFPikHFXZlQMK0e0lhCtcQXUyWTWkij6qn/o3816laS2Js+XHMLRd/1dTVA0b29tXOmZoGO3yBz2NQUYmxxcZiEdS45f4+Avl3sZW9+lJc19da3lxRjPerFLWdSXVKvoqpN0j4XaTLQRpLT1d72+oXrD3koHDEhm2pARn9xNbb27nYf7vEEVp99Wo8DLqt2JXCRTOEJ/tLdEwYHAcfpFhV9WnRwsOECJAVQqwiqWXZ2pS3weG/MoWgo+66Y9sUZ8ba5/Vlqki8wVvw17m1bmQsuxdQ19Um3xab1oTqG9MVD8ujvreAZtg+ZbPfP6Bbvxzb2ScTRrjrOgyCZiOK/UfC4hX1058KolH4azVO+GbXsldAHBNioDw1fNrHJwi5Jq4o9xnoOaiyraAQjGxWSgZhgqxn5J1ukk2atH25H6OS2FyBZcLm396xgcr9Yd3THNzGRHqmfwgSjBq2hYPwK5sAodCf4W4q9BcJmh/U11Fr+JKtErUZ3ih/fBBw==; Path=/; Domain=.swg.usma.ibm.com]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[ICSESSIONID=0000crg23dnV99m88k7-Rkg40m7:-1; Path=/; HttpOnly]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Keep-Alive]]></name>
+        <value><![CDATA[timeout=10, max=100]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Connection]]></name>
+        <value><![CDATA[Keep-Alive]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Type]]></name>
+        <value><![CDATA[text/html]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header></headers>
+</response>
+<response statusCode="301" statusReason="Moved Permanently">
+<headers>
+    <header>
+        <name><![CDATA[Date]]></name>
+        <value><![CDATA[Fri, 13 Jun 2014 12:57:08 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-Powered-By]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-LConn-Auth]]></name>
+        <value><![CDATA[false]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-UA-Compatible]]></name>
+        <value><![CDATA[IE=9,8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Expires]]></name>
+        <value><![CDATA[Thu, 1 Jan 1970 00:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Cache-Control]]></name>
+        <value><![CDATA[no-store, no-cache, must-revalidate]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Accept]]></name>
+        <value><![CDATA[application/atom+xml]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Location]]></name>
+        <value><![CDATA[https://lcauto31.swg.usma.ibm.com:443/activities/service/atom2/trashednode?activityNodeUuid=4dc293c0-5cdb-4122-af82-7cde7d1d174f]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[lcLang=en_us; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=otsDRTnq5R5sobQckqjFTMCzMpiOAF7KDFCG2YzHK48uDsxsXJCbdDmtPHCOSf/rUUJ6WHTZ+yaHVJUi+VsvuN8L5OGVke3tRtuxOl1rCfqa/Hqh0urrsaybwd6oKGf43rGwqzsj1kzWvEPLNsJ1cSYYSA+6fOrussRNzyMQK//exKMCnAJOfNKQg5tE3oQW94pe2S8ro65r0vynPTHcTH57MsAYHFPikHFXZlQMK0e0lhCtcQXUyWTWkij6qn/o3816laS2Js+XHMLRd/1dTVA0b29tXOmZoGO3yBz2NQUYmxxcZiEdS45f4+Avl3sZW9+lJc19da3lxRjPerFLWdSXVKvoqpN0j4XaTLQRpLT1d72+oXrD3koHDEhm2pARn9xNbb27nYf7vEEVp99Wo8DLqt2JXCRTOEJ/tLdEwYHAcfpFhV9WnRwsOECJAVQqwiqWXZ2pS3weG/MoWgo+66Y9sUZ8ba5/Vlqki8wVvw17m1bmQsuxdQ19Um3xab1oTqG9MVD8ujvreAZtg+ZbPfP6Bbvxzb2ScTRrjrOgyCZiOK/UfC4hX1058KolH4azVO+GbXsldAHBNioDw1fNrHJwi5Jq4o9xnoOaiyraAQjGxWSgZhgqxn5J1ukk2atH25H6OS2FyBZcLm396xgcr9Yd3THNzGRHqmfwgSjBq2hYPwK5sAodCf4W4q9BcJmh/U11Fr+JKtErUZ3ih/fBBw==; Path=/; Domain=.swg.usma.ibm.com]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[ICSESSIONID=0000fWzFAB4o5fuSziXZJOiWQmp:-1; Path=/; HttpOnly]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Length]]></name>
+        <value><![CDATA[0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Keep-Alive]]></name>
+        <value><![CDATA[timeout=10, max=100]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Connection]]></name>
+        <value><![CDATA[Keep-Alive]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Type]]></name>
+        <value><![CDATA[text/html]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header></headers>
+<data><![CDATA[]]></data>
+</response>
+</responses>

@@ -550,4 +550,54 @@ public class ActivityFeedEnhTest extends BaseActivityServiceTest {
 		Assert.assertTrue(containsActivity(allActivities, completedActivity));
 	}
 	
+	@Test
+	public void testMoveFileFieldToReply() throws ClientServicesException {
+		// Create activities
+		activity = new Activity();
+		activity.setTitle(createActivityTitle());
+		activity = activityService.createActivity(activity);
+				
+		ActivityNode srcActivityNode = new ActivityNode();
+		srcActivityNode.setActivityUuid(activity.getActivityUuid());
+		srcActivityNode.setTitle("Source ActivityNode");
+		srcActivityNode.setType("ENTRY");
+				
+		ActivityNode dstActivityNode = new ActivityNode();
+		dstActivityNode.setActivityUuid(activity.getActivityUuid());
+		dstActivityNode.setTitle("Destination ActivityNode");
+		dstActivityNode.setType("REPLY");
+				
+		// Create text field
+		FileField fileField = new FileField();
+		fileField.setName("test_file");
+		fileField.setPosition(1000);
+		fileField.setEditMediaLink(new Link("MediaLink", "http://www.ibm.com/test"));
+		
+		// Populate source activity and update
+		srcActivityNode.addField(fileField);
+				
+		srcActivityNode = activityService.createActivityNode(srcActivityNode);
+		dstActivityNode = activityService.createActivityNode(dstActivityNode);
+				
+		srcActivityNode = activityService.getActivityNode(srcActivityNode.getActivityNodeUuid());
+
+		ActivityNode read = activityService.moveFieldToEntry(dstActivityNode.getActivityUuid(), fileField.getFid());
+
+		Field[] fields = read.getFields();
+		
+		// Check that all fields have been moved
+		Assert.assertNotNull(fields);
+		Assert.assertEquals(1, fields.length);
+		
+		// Check text field
+		FileField movedFileField = (FileField) read.getFieldByName(fileField.getName());
+		Assert.assertEquals("test_file", movedFileField.getName());
+		Assert.assertEquals(1000, (movedFileField).getPosition());
+		Assert.assertEquals("http://www.ibm.com/test", (movedFileField).getEditMediaLink().toString());
+		
+		// Delete the activities again
+		activityService.deleteActivityNode(srcActivityNode);
+		activityService.deleteActivityNode(dstActivityNode);
+	}
+	
 }

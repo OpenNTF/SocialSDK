@@ -23,9 +23,11 @@ import java.io.StringWriter;
 import org.apache.commons.io.IOUtils;
 import org.w3c.dom.Node;
 
+import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.services.client.base.AtomXPath;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 
@@ -69,17 +71,45 @@ public class WikiPage extends WikiBaseEntity {
 	public WikiPage(){}
 	
 	@Override
+	/**
+	 * get the html markup of the wiki page from the content attribute if present, otherwise make the request.
+	 */
 	public String getContent() {
-		String contentUrl = this.getAsString(WikiXPath.enclosureUrl);
-		StringWriter writer = new StringWriter();
+		if (fields.containsKey(AtomXPath.content.getName())){
+			Object value = fields.get(AtomXPath.content.getName());
+			return (value == null) ? null : value.toString();
+		} 
+		
+		String content = "";
 		try {
-			InputStream contentStream = (InputStream)getService().getEndpoint().xhrGet(contentUrl).getData();
-			IOUtils.copy(contentStream, writer, "UTF-8");
-			contentStream.close();
-		} catch (IOException e) {
-			e.printStackTrace();
+			content = getHtmlMarkup();
 		} catch (ClientServicesException e) {
 			e.printStackTrace();
+		}
+		
+		return content;
+	}
+	
+	/**
+	 * Make a request to get the HTML markup of the wiki page.
+	 * @return
+	 * @throws ClientServicesException
+	 */
+	public String getHtmlMarkup() throws ClientServicesException{
+		String contentUrl = getAsString(WikiXPath.enclosureUrl);
+		StringWriter writer = new StringWriter();
+		InputStream contentStream = null;
+		try {
+			contentStream = (InputStream)getService().getEndpoint().xhrGet(contentUrl).getData();
+			IOUtils.copy(contentStream, writer, "UTF-8");
+		} catch (IOException e) {
+			throw new ClientServicesException(e);
+		} finally{
+			try {
+				contentStream.close();
+			} catch (IOException e) {
+				throw new ClientServicesException(e);
+			}
 		}
 		String content = writer.toString();
 		return content;

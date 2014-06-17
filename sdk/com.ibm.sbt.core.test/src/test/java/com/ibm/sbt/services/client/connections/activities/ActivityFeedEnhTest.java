@@ -146,7 +146,6 @@ public class ActivityFeedEnhTest extends BaseActivityServiceTest {
 		// Delete the activities again
 		activityService.deleteActivityNode(srcActivityNode);
 		activityService.deleteActivityNode(dstActivityNode);
-		activityService.deleteActivity(activity);
 	}
 
 	@Test
@@ -551,7 +550,7 @@ public class ActivityFeedEnhTest extends BaseActivityServiceTest {
 	}
 	
 	@Test
-	public void testMoveFileFieldToReply() throws ClientServicesException {
+	public void testMoveFieldToReply() throws ClientServicesException {
 		// Create activities
 		activity = new Activity();
 		activity.setTitle(createActivityTitle());
@@ -562,26 +561,27 @@ public class ActivityFeedEnhTest extends BaseActivityServiceTest {
 		srcActivityNode.setTitle("Source ActivityNode");
 		srcActivityNode.setType("ENTRY");
 				
-		ActivityNode dstActivityNode = new ActivityNode();
+		ActivityNode dstActivityNode = createActivityNode();
 		dstActivityNode.setActivityUuid(activity.getActivityUuid());
-		dstActivityNode.setTitle("Destination ActivityNode");
+		dstActivityNode.setTitle("Source ActivityNode");
 		dstActivityNode.setType("REPLY");
 				
 		// Create text field
-		FileField fileField = new FileField();
-		fileField.setName("test_file");
-		fileField.setPosition(1000);
-		fileField.setEditMediaLink(new Link("MediaLink", "http://www.ibm.com/test"));
-		
+		TextField textField = new TextField();
+		textField.setName("test_text");
+		textField.setPosition(1000);
+		textField.setSummary("Test_Text_Field");
+
+				
 		// Populate source activity and update
-		srcActivityNode.addField(fileField);
-				
-		srcActivityNode = activityService.createActivityNode(srcActivityNode);
-		dstActivityNode = activityService.createActivityNode(dstActivityNode);
-				
+		srcActivityNode.addField(textField);
+		activityService.createActivityNode(srcActivityNode);
+		activityService.createActivityNode(dstActivityNode);
+		
+		
 		srcActivityNode = activityService.getActivityNode(srcActivityNode.getActivityNodeUuid());
 
-		ActivityNode read = activityService.moveFieldToEntry(dstActivityNode.getActivityUuid(), fileField.getFid());
+		ActivityNode read = activityService.moveFieldToEntry(dstActivityNode.getActivityUuid(), textField.getFid());
 
 		Field[] fields = read.getFields();
 		
@@ -590,10 +590,10 @@ public class ActivityFeedEnhTest extends BaseActivityServiceTest {
 		Assert.assertEquals(1, fields.length);
 		
 		// Check text field
-		FileField movedFileField = (FileField) read.getFieldByName(fileField.getName());
-		Assert.assertEquals("test_file", movedFileField.getName());
-		Assert.assertEquals(1000, (movedFileField).getPosition());
-		Assert.assertEquals("http://www.ibm.com/test", (movedFileField).getEditMediaLink().toString());
+		TextField movedTextField = (TextField) read.getFieldByName(textField.getName());
+		Assert.assertEquals("text_field", movedTextField.getName());
+		Assert.assertEquals("Test_Text_Field", movedTextField.getSummary());
+		Assert.assertEquals(1000, (movedTextField).getPosition());
 		
 		// Delete the activities again
 		activityService.deleteActivityNode(srcActivityNode);

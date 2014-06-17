@@ -563,7 +563,7 @@ public class ActivityFeedEnhTest extends BaseActivityServiceTest {
 				
 		ActivityNode dstActivityNode = createActivityNode();
 		dstActivityNode.setActivityUuid(activity.getActivityUuid());
-		dstActivityNode.setTitle("Source ActivityNode");
+		dstActivityNode.setTitle("Destination ActivityNode");
 		dstActivityNode.setType("REPLY");
 				
 		// Create text field

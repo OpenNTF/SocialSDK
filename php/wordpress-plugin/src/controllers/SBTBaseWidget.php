@@ -88,11 +88,11 @@ class SBTBaseWidget extends WP_Widget {
  		} else {
 			$endpoint = new SBTBasicAuthEndpoint();
             $service = '/files/basic/api/myuserlibrary/feed';
-            $response = $endpoint->makeRequest($settings->getURL($this->config->endpoint), $service, 'GET', array(), null, null, $this->config->endpoint);
+            $response = $endpoint->makeRequest($settings->getURL($this->endpoint), $service, 'GET', array(), null, null, $this->endpoint);
                 
             if ($response->getStatusCode() == 401) {
 				// Delete old credentials. 
-				$store->deleteBasicAuthCredentials($this->config->endpoint);
+				$store->deleteBasicAuthCredentials($this->endpoint);
 			}
         }		
  	

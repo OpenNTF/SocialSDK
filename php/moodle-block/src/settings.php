@@ -1,6 +1,6 @@
 <?php 
 /**
- * (C) Copyright IBM Corp. 2012
+ * (C) Copyright IBM Corp. 2013
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,14 +30,12 @@ $settings->add(new admin_setting_heading(
 $settings->add(new admin_setting_configtext('sdk_deploy_url', 'SDK Deploy URL:', '', BASE_LOCATION . 'system/libs/js-sdk', PARAM_RAW));
 
 $libraries = array(
-		'//ajax.googleapis.com/ajax/libs/dojo/1.4.3/dojo/dojo.js' => 'Dojo Toolkit 1.4.3', 
 		'//ajax.googleapis.com/ajax/libs/dojo/1.5.2/dojo/dojo.js' => 'Dojo Toolkit 1.5.2',
 		'//ajax.googleapis.com/ajax/libs/dojo/1.6.1/dojo/dojo.js' => 'Dojo Toolkit 1.6.1',
 		'//ajax.googleapis.com/ajax/libs/dojo/1.7.4/dojo/dojo.js' => 'Dojo Toolkit 1.7.4',
 		'//ajax.googleapis.com/ajax/libs/dojo/1.8.4/dojo/dojo.js' => 'Dojo Toolkit 1.8.4',
 		'//ajax.googleapis.com/ajax/libs/dojo/1.9.0/dojo/dojo.js' => 'Dojo Toolkit 1.9.0',
 		'//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js' => 'JQuery 1.8.3',
-		'//ajax.googleapis.com/ajax/libs/dojo/1.4.3/dojo/dojo.js.uncompressed.js' => 'Dojo Toolkit 1.4.3 uncompressed',
 		'//ajax.googleapis.com/ajax/libs/dojo/1.5.2/dojo/dojo.js.uncompressed.js' => 'Dojo Toolkit 1.5.2 uncompressed',
 		'//ajax.googleapis.com/ajax/libs/dojo/1.6.1/dojo/dojo.js.uncompressed.js' => 'Dojo Toolkit 1.6.1 uncompressed',
 		'//ajax.googleapis.com/ajax/libs/dojo/1.7.4/dojo/dojo.js.uncompressed.js' => 'Dojo Toolkit 1.7.4 uncompressed',

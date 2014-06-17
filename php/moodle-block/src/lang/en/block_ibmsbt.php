@@ -62,3 +62,4 @@ $string['creating_community'] = 'Creating community';
 $string['create_community'] = 'Create Community';
 $string['create'] = 'Create';
 $string['open_communities'] = 'Open Communities';
+$string['incorrect_credentials'] = 'Wrong username or password. Please try again.';

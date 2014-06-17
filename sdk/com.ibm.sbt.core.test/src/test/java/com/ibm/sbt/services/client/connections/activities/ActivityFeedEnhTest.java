@@ -568,6 +568,7 @@ public class ActivityFeedEnhTest extends BaseActivityServiceTest {
 		textField.setSummary("Test_Text_Field");
 		// Populate source activity and update
 		srcActivityNode.addField(textField);
+
 		activityService.createActivityNode(srcActivityNode);
 		
 		ActivityNode dstActivityNode = new ActivityNode();
@@ -579,18 +580,28 @@ public class ActivityFeedEnhTest extends BaseActivityServiceTest {
 		activityService.createActivityNode(dstActivityNode);
 		
 		srcActivityNode = activityService.getActivityNode(srcActivityNode.getActivityNodeUuid());
-		ActivityNode read = activityService.moveFieldToEntry(dstActivityNode.getActivityUuid(), textField.getFid());
-		Field[] fields = read.getFields();
+		dstActivityNode = activityService.getActivityNode(dstActivityNode.getActivityNodeUuid());
 		
-		// Check that all fields have been moved
+		ActivityNode read = null;
+		
+		// Move all fields
+		for (Field f : srcActivityNode.getFields()) {
+			read = activityService.moveFieldToEntry(dstActivityNode.getActivityNodeUuid(), f.getFid());
+		}
+		
+		
+		Assert.assertNotNull(read);
+		
+		Field[] fields = read.getFields();
 		Assert.assertNotNull(fields);
+		// Check that all fields have been moved
+		
 		Assert.assertEquals(1, fields.length);
 		
 		// Check text field
 		TextField movedTextField = (TextField) read.getFieldByName(textField.getName());
-		Assert.assertEquals("text_field", movedTextField.getName());
+		Assert.assertEquals("test_text", movedTextField.getName());
 		Assert.assertEquals("Test_Text_Field", movedTextField.getSummary());
-		Assert.assertEquals(1000, (movedTextField).getPosition());
 		
 		// Delete the activities again
 		activityService.deleteActivityNode(srcActivityNode);

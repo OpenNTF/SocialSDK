@@ -44,11 +44,6 @@ public enum WikiUrls implements URLContainer {
 	
 	private URLBuilder builder;
 	
-	public static NamedUrlPart authenticated(boolean authenticated) {
-		String isAuthenticated = authenticated ? "" : "anonymous";
-		return new NamedUrlPart("authenticated", isAuthenticated);
-	}
-	
 	private WikiUrls(VersionedUrl... urlVersions) {
 		builder = new URLBuilder(urlVersions);
 	}

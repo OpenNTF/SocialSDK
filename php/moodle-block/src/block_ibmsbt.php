@@ -68,6 +68,9 @@ class block_ibmsbt extends block_base {
 			
 			$blockPath = $CFG->dirroot . '/blocks/ibmsbt/';
 
+			// Our default assumption is that user supplies incorrect credentials; only if 
+			// the test request shows a 401 do we change this flag
+			$incorrectCredentials = false;
 			
 			// If the user clicked "login", then trigger the OAuth dance
 			if (isset($_COOKIE['IBMSBTKOAuthLogin']) && $_COOKIE['IBMSBTKOAuthLogin'] == 'yes' && $store->getOAuthAccessToken($this->config->endpoint) == null) {
@@ -90,7 +93,6 @@ class block_ibmsbt extends block_base {
 				}
 			
 				$service = '/files/basic/api/myuserlibrary/feed';
-
 				$response = $endpoint->makeRequest($settings->getURL($this->config->endpoint), $service, 'GET', array(), null, null, $this->config->endpoint);
 
 				if (is_string($response)) {
@@ -101,14 +103,30 @@ class block_ibmsbt extends block_base {
 					// Delete old credentials. 
 					$store->deleteOAuthCredentials($this->config->endpoint);
 				}
-			}
+			} else {
+				$endpoint = new SBTBasicAuthEndpoint();
+                $service = '/files/basic/api/myuserlibrary/feed';
+                $response = $endpoint->makeRequest($settings->getURL($this->config->endpoint), $service, 'GET', array(), null, null, $this->config->endpoint);
+                
+                if ($response->getStatusCode() == 401) {
+					// Delete old credentials. 
+					$store->deleteBasicAuthCredentials($this->config->endpoint);
+                   	if ( $store->getBasicAuthPassword($this->config->endpoint) != null) {
+                   		$incorrectCredentials = true;
+                   	}
+				}
+            }
 
 			echo '<div name="ibm_sbtk_widget">';
 			if (($settings->getAuthenticationMethod($this->config->endpoint) == 'oauth1' 
 					|| $settings->getAuthenticationMethod($this->config->endpoint) == 'oauth2') && $store->getOAuthAccessToken($this->config->endpoint) == null &&
 			(!isset($_COOKIE['IBMSBTKOAuthLogin']) || $_COOKIE['IBMSBTKOAuthLogin'] != 'yes')) {
 				if (isloggedin() === false || !isset($USER->id) || $USER->id === null) {
-					print get_string('please_login', 'block_ibmsbt');
+					if (!$incorrectCredentials) {
+						print get_string('please_login', 'block_ibmsbt');
+					} else {
+						print get_string('incorrect_credentials', 'block_ibmsbt');
+					}
 				} else {
 					require $blockPath . '/core/views/oauth-login-display.php';
 				}

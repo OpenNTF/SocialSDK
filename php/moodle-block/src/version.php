@@ -18,5 +18,5 @@
  * @author Benjamin Jakobus
  */
 
-$plugin->version = 201405131644;  // YYYYMMDDHHSS (year, month, day, 24-hr time)
+$plugin->version = 201406131645;  // YYYYMMDDHHSS (year, month, day, 24-hr time)
 $plugin->requires = 2010112400; // YYYYMMDDHH (This is the release version for Moodle 2.0)

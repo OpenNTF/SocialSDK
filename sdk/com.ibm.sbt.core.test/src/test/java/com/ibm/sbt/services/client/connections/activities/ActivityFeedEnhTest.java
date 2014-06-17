@@ -560,29 +560,26 @@ public class ActivityFeedEnhTest extends BaseActivityServiceTest {
 		srcActivityNode.setActivityUuid(activity.getActivityUuid());
 		srcActivityNode.setTitle("Source ActivityNode");
 		srcActivityNode.setType("ENTRY");
-				
-		ActivityNode dstActivityNode = createActivityNode();
-		dstActivityNode.setActivityUuid(activity.getActivityUuid());
-		dstActivityNode.setTitle("Destination ActivityNode");
-		dstActivityNode.setType("REPLY");
-				
+		
 		// Create text field
 		TextField textField = new TextField();
 		textField.setName("test_text");
 		textField.setPosition(1000);
 		textField.setSummary("Test_Text_Field");
-
-				
 		// Populate source activity and update
 		srcActivityNode.addField(textField);
 		activityService.createActivityNode(srcActivityNode);
+		
+		ActivityNode dstActivityNode = new ActivityNode();
+		dstActivityNode.setActivityUuid(activity.getActivityUuid());
+		dstActivityNode.setTitle(createActivityNodeTitle());
+		dstActivityNode.setType(ActivityNode.TYPE_REPLY);
+		dstActivityNode.setInReplyTo(srcActivityNode);
+				
 		activityService.createActivityNode(dstActivityNode);
 		
-		
 		srcActivityNode = activityService.getActivityNode(srcActivityNode.getActivityNodeUuid());
-
 		ActivityNode read = activityService.moveFieldToEntry(dstActivityNode.getActivityUuid(), textField.getFid());
-
 		Field[] fields = read.getFields();
 		
 		// Check that all fields have been moved

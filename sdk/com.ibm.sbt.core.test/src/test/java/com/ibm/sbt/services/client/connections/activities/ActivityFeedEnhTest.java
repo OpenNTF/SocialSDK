@@ -52,8 +52,8 @@ public class ActivityFeedEnhTest extends BaseActivityServiceTest {
 
 		ActivityNode dstActivityNode = createActivityNode();
 		dstActivityNode.setActivityUuid(activity.getActivityUuid());
-		dstActivityNode.setTitle("Source ActivityNode");
-		dstActivityNode.setType("ENTRY");
+		dstActivityNode.setTitle("Destination ActivityNode");
+		dstActivityNode.setType("REPLY");
 
 		// Create fields
 		
@@ -91,6 +91,7 @@ public class ActivityFeedEnhTest extends BaseActivityServiceTest {
 		srcActivityNode.addField(linkField);
 
 		activityService.createActivityNode(srcActivityNode);
+		dstActivityNode.setInReplyTo(srcActivityNode);
 		activityService.createActivityNode(dstActivityNode);
 		
 		// The original number of fields in the source node
@@ -143,9 +144,8 @@ public class ActivityFeedEnhTest extends BaseActivityServiceTest {
 		Assert.assertEquals("IBM", ((LinkField)movedLinkField).getLink().getTitle());
 		Assert.assertEquals("http://www.ibm.com", ((LinkField)movedLinkField).getLink().getHref());
 		
-		// Delete the activities again
-		activityService.deleteActivityNode(srcActivityNode);
 		activityService.deleteActivityNode(dstActivityNode);
+		activityService.deleteActivityNode(srcActivityNode);
 	}
 
 	@Test
@@ -548,64 +548,4 @@ public class ActivityFeedEnhTest extends BaseActivityServiceTest {
 		Assert.assertTrue(containsActivity(allActivities, openActivity));
 		Assert.assertTrue(containsActivity(allActivities, completedActivity));
 	}
-	
-	@Test
-	public void testMoveFieldToReply() throws ClientServicesException {
-		// Create activities
-		activity = new Activity();
-		activity.setTitle(createActivityTitle());
-		activity = activityService.createActivity(activity);
-				
-		ActivityNode srcActivityNode = new ActivityNode();
-		srcActivityNode.setActivityUuid(activity.getActivityUuid());
-		srcActivityNode.setTitle("Source ActivityNode");
-		srcActivityNode.setType("ENTRY");
-		
-		// Create text field
-		TextField textField = new TextField();
-		textField.setName("test_text");
-		textField.setPosition(1000);
-		textField.setSummary("Test_Text_Field");
-		// Populate source activity and update
-		srcActivityNode.addField(textField);
-
-		activityService.createActivityNode(srcActivityNode);
-		
-		ActivityNode dstActivityNode = new ActivityNode();
-		dstActivityNode.setActivityUuid(activity.getActivityUuid());
-		dstActivityNode.setTitle(createActivityNodeTitle());
-		dstActivityNode.setType(ActivityNode.TYPE_REPLY);
-		dstActivityNode.setInReplyTo(srcActivityNode);
-				
-		activityService.createActivityNode(dstActivityNode);
-		
-		srcActivityNode = activityService.getActivityNode(srcActivityNode.getActivityNodeUuid());
-		dstActivityNode = activityService.getActivityNode(dstActivityNode.getActivityNodeUuid());
-		
-		ActivityNode read = null;
-		
-		// Move all fields
-		for (Field f : srcActivityNode.getFields()) {
-			read = activityService.moveFieldToEntry(dstActivityNode.getActivityNodeUuid(), f.getFid());
-		}
-		
-		
-		Assert.assertNotNull(read);
-		
-		Field[] fields = read.getFields();
-		Assert.assertNotNull(fields);
-		// Check that all fields have been moved
-		
-		Assert.assertEquals(1, fields.length);
-		
-		// Check text field
-		TextField movedTextField = (TextField) read.getFieldByName(textField.getName());
-		Assert.assertEquals("test_text", movedTextField.getName());
-		Assert.assertEquals("Test_Text_Field", movedTextField.getSummary());
-		
-		// Delete the activities again
-		activityService.deleteActivityNode(srcActivityNode);
-		activityService.deleteActivityNode(dstActivityNode);
-	}
-	
 }

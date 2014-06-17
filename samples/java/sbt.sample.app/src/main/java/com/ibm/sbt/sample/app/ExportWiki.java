@@ -20,7 +20,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.json.JsonException;
 import com.ibm.commons.util.io.json.JsonGenerator;
 import com.ibm.commons.util.io.json.JsonJavaArray;
@@ -110,6 +113,39 @@ public class ExportWiki {
         }
         return jsonObject;
     }
+    
+    /*
+     * returns an array of the json objects describing each image in the wikiPage.
+     */
+    public JsonJavaArray extractImagesFromWikiPage(String pageHTML){
+    	JsonJavaArray imageAttributeObjects = new JsonJavaArray();
+        
+        Pattern p = Pattern.compile("<img([^>]*[^>]*)>([^<>]*)</img>");
+        Matcher m = p.matcher(pageHTML);
+        while(m.find()) {
+        	String imgAttrs = m.group(1);
+        	if(imgAttrs==null){
+        		break;
+        	}
+        	JsonJavaObject jsonAttrs = new JsonJavaObject();
+        	imgAttrs = imgAttrs.trim();
+        	String[] attrs = imgAttrs.split("\" ");
+        	
+        	for(int i = 0; i < attrs.length; i++){
+        		String attr = attrs[i];
+        		attr = attr.replaceAll("\"", "");
+        		String[] nameValue = attr.split("=");
+        		if(nameValue.length == 2){
+        			jsonAttrs.put(nameValue[0], nameValue[1]);
+        		}else if(nameValue.length == 1){
+        			jsonAttrs.put(nameValue[0], "");
+        		}
+        	}
+        	imageAttributeObjects.add(jsonAttrs);
+        }
+        
+        return imageAttributeObjects;
+    }
 
     /**
      * 
@@ -129,7 +165,7 @@ public class ExportWiki {
         JsonJavaObject result = entityToJsonObject(wiki, WikiXPath.values(),
                 null);
         EntityList<WikiPage> wikiPages = wikiService.getWikiPages(wikiLabel, params);
-
+        
         JsonJavaArray array = new JsonJavaArray();
         int index = 0;
         for (Iterator<WikiPage> iter = wikiPages.iterator(); iter.hasNext();) {
@@ -137,7 +173,10 @@ public class ExportWiki {
             WikiPage wikiPage = iter.next();
             entityToJsonObject(wikiPage, AtomXPath.values(), wikiEntry);
             entityToJsonObject(wikiPage, WikiXPath.values(), wikiEntry);
-            wikiEntry.put("content", wikiPage.getContent());
+            String pageHTML = wikiPage.getContent();
+            wikiEntry.put("content", pageHTML);
+            
+            wikiEntry.putArray("pageImages", extractImagesFromWikiPage(pageHTML));
             array.putObject(index++, wikiEntry);
         }
         result.putArray("pages", array);

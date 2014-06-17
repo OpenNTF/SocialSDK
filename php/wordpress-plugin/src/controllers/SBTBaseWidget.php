@@ -78,7 +78,6 @@ class SBTBaseWidget extends WP_Widget {
  			}
  			
  			$service = '/files/basic/api/myuserlibrary/feed';
- 			
  			$response = $endpoint->makeRequest($settings->getURL($this->endpoint), $service, 'GET', array(), null, null, $this->endpoint);
  			
  			if ($response->getStatusCode() == 401) {
@@ -86,7 +85,16 @@ class SBTBaseWidget extends WP_Widget {
  				setcookie('IBMSBTKOAuthLogin', "", $timestamp - 604800);
  				require BASE_PATH . '/core/views/oauth-login-display.php';
  			}
- 		}		
+ 		} else {
+			$endpoint = new SBTBasicAuthEndpoint();
+            $service = '/files/basic/api/myuserlibrary/feed';
+            $response = $endpoint->makeRequest($settings->getURL($this->config->endpoint), $service, 'GET', array(), null, null, $this->config->endpoint);
+                
+            if ($response->getStatusCode() == 401) {
+				// Delete old credentials. 
+				$store->deleteBasicAuthCredentials($this->config->endpoint);
+			}
+        }		
  	
 		echo '<div name="ibm_sbtk_widget" class="widget-area" style="width:100%"><aside class="widget widget_recent_entries">';
 		echo '<h3 class="widget-title">' . $this->widget_name . '</h3>';

@@ -62,8 +62,6 @@ public class ExportWiki {
         BasicEndpoint basicEndpoint = new BasicEndpoint();
         basicEndpoint.setUrl(url);
         basicEndpoint.setForceTrustSSLCertificate(true);
-        basicEndpoint.setUser(user);
-        basicEndpoint.setPassword(password);
         basicEndpoint.login(user, password);
         
         wikiService = new WikiService();

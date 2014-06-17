@@ -36,6 +36,7 @@ public class MockEndpoint extends BasicEndpoint {
 	private Endpoint endpoint;
 	private String innerEndpoint;
 	private String mockMode;
+	private boolean authenticated = true;
 
 	public MockEndpoint() {
 		super();		
@@ -45,9 +46,13 @@ public class MockEndpoint extends BasicEndpoint {
 		this.endpoint = endpoint;
 	}
 	
+	public void setAuthenticated(boolean authenticated){
+		this.authenticated = authenticated;
+	}
+	
 	@Override
 	public boolean isAuthenticated(){
-		return true;
+		return authenticated;
 	}
 
 	@Override

@@ -392,7 +392,7 @@ public class BlogService extends BaseService {
 			parameters = new HashMap<String, String>();
 		}
 		try {
-			String latestPostsUrl = BlogUrls.BLOG_POSTS.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle));
+			String latestPostsUrl = BlogUrls.BLOG_POSTS.format(this, BlogUrlParts.blogHandle.get(blogHandle));
 			posts = (BlogPostList)getEntities(latestPostsUrl, parameters, new BlogPostsFeedHandler(this));
 		} catch (ClientServicesException e) {
 			throw new BlogServiceException(e);

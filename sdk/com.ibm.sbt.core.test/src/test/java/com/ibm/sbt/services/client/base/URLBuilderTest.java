@@ -58,7 +58,7 @@ public class URLBuilderTest extends BaseUnitTest {
 		//URL pattern is "wikis/{authType}/api/wiki/{wikiLabel}/page/{wikiPage}/entry"
 		String wikiLabel = "myWikiLabel";
 		String pageLabel = "myPageLabel";
-		String url = WikiUrls.WIKI_PAGE_AUTH.format(service, WikiUrlParts.wikiLabel.get(wikiLabel), WikiUrlParts.wikiPage.get(pageLabel));
+		String url = WikiUrls.WIKI_PAGE.format(service, WikiUrlParts.wikiLabel.get(wikiLabel), WikiUrlParts.wikiPage.get(pageLabel));
 		assertEquals("wikis/basic/api/wiki/"+wikiLabel+"/page/"+pageLabel+"/entry", url);
 	}
 
@@ -69,7 +69,7 @@ public class URLBuilderTest extends BaseUnitTest {
 		String wikiLabel = "myWikiLabel";
 		String pageLabel = "myPageLabel";
 		//This url has the correct parameters but in a different order. It works regardless. The first parameter needs to be the Version, though
-		String url = WikiUrls.WIKI_PAGE_AUTH.format(service, WikiUrlParts.wikiPage.get(pageLabel), WikiUrlParts.wikiLabel.get(wikiLabel));
+		String url = WikiUrls.WIKI_PAGE.format(service, WikiUrlParts.wikiPage.get(pageLabel), WikiUrlParts.wikiLabel.get(wikiLabel));
 		assertEquals("wikis/basic/api/wiki/"+wikiLabel+"/page/"+pageLabel+"/entry", url);
 	}
 
@@ -82,7 +82,7 @@ public class URLBuilderTest extends BaseUnitTest {
 		//This url has the correct number of parameters but one of the parameters is not correct
 		thrown.expect(IllegalArgumentException.class);
 		thrown.expectMessage("Missing parameter");
-		String url = WikiUrls.WIKI_PAGE_AUTH.format(service, WikiUrlParts.wikiLabel.get(wikiLabel), FileUrlParts.fileId.get("dummy"));
+		String url = WikiUrls.WIKI_PAGE.format(service, WikiUrlParts.wikiLabel.get(wikiLabel), FileUrlParts.fileId.get("dummy"));
 		assertEquals("wikis/basic/api/wiki/"+wikiLabel+"/page/"+pageLabel+"/entry", url);
 	}
 
@@ -91,7 +91,7 @@ public class URLBuilderTest extends BaseUnitTest {
 		WikiService service = new WikiService();
 		//URL pattern is "wikis/{authType}/api/wiki/{wikiLabel}/page/{wikiPage}/entry
 		//When a parameter is empty, it is simply removed from the url
-		String url2 = WikiUrls.WIKI_PAGE_AUTH.format(service, WikiUrlParts.wikiLabel.get(""), WikiUrlParts.wikiPage.get("myPageLabel"));
+		String url2 = WikiUrls.WIKI_PAGE.format(service, WikiUrlParts.wikiLabel.get(""), WikiUrlParts.wikiPage.get("myPageLabel"));
 		assertEquals("wikis/basic/api/wiki/page/myPageLabel/entry", url2);
 	}
 

@@ -17,6 +17,9 @@ import java.util.Arrays;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
+import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.services.endpoints.Endpoint;
+
 /**
  * URLBuilder provides a unified way to generate urls
  * 
@@ -57,10 +60,25 @@ public class URLBuilder {
 	public String format(BaseService service, NamedUrlPart... args) {
 		URLPattern urlPattern = getPattern(service.getApiVersion());
 		NamedUrlPart[] serviceMappings = service.getServiceMappings();
-		NamedUrlPart[] namedParts = Arrays.copyOf(args, args.length + serviceMappings.length + 1);
+		NamedUrlPart[] namedParts = Arrays.copyOf(args, args.length + 2 + serviceMappings.length);
 		namedParts[args.length] = service.getAuthType();
-		System.arraycopy(serviceMappings, 0, namedParts, args.length + 1, serviceMappings.length);
-		
+
+		String isAuthenticated = "anonymous";
+		Endpoint ep = service.getEndpoint();
+
+		if(ep != null){
+			try {
+				if(ep.isAuthenticated()){
+					isAuthenticated = "";
+				}
+			} catch (ClientServicesException e) {
+				e.printStackTrace();
+			}
+		}
+		namedParts[args.length + 1] = new NamedUrlPart("authenticated", isAuthenticated);
+
+		System.arraycopy(serviceMappings, 0, namedParts, args.length + 2, serviceMappings.length);
+
 		return urlPattern.format(namedParts);
 	}
 }

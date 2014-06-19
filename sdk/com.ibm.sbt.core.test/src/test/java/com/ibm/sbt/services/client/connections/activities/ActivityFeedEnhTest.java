@@ -52,8 +52,8 @@ public class ActivityFeedEnhTest extends BaseActivityServiceTest {
 
 		ActivityNode dstActivityNode = createActivityNode();
 		dstActivityNode.setActivityUuid(activity.getActivityUuid());
-		dstActivityNode.setTitle("Source ActivityNode");
-		dstActivityNode.setType("ENTRY");
+		dstActivityNode.setTitle("Destination ActivityNode");
+		dstActivityNode.setType("REPLY");
 
 		// Create fields
 		
@@ -91,6 +91,7 @@ public class ActivityFeedEnhTest extends BaseActivityServiceTest {
 		srcActivityNode.addField(linkField);
 
 		activityService.createActivityNode(srcActivityNode);
+		dstActivityNode.setInReplyTo(srcActivityNode);
 		activityService.createActivityNode(dstActivityNode);
 		
 		// The original number of fields in the source node
@@ -143,10 +144,8 @@ public class ActivityFeedEnhTest extends BaseActivityServiceTest {
 		Assert.assertEquals("IBM", ((LinkField)movedLinkField).getLink().getTitle());
 		Assert.assertEquals("http://www.ibm.com", ((LinkField)movedLinkField).getLink().getHref());
 		
-		// Delete the activities again
-		activityService.deleteActivityNode(srcActivityNode);
 		activityService.deleteActivityNode(dstActivityNode);
-		activityService.deleteActivity(activity);
+		activityService.deleteActivityNode(srcActivityNode);
 	}
 
 	@Test
@@ -549,5 +548,4 @@ public class ActivityFeedEnhTest extends BaseActivityServiceTest {
 		Assert.assertTrue(containsActivity(allActivities, openActivity));
 		Assert.assertTrue(containsActivity(allActivities, completedActivity));
 	}
-	
 }

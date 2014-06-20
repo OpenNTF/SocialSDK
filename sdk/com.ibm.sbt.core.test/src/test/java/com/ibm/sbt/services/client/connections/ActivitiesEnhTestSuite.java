@@ -35,9 +35,9 @@ import com.ibm.sbt.services.client.connections.activities.MakeActivityPublicTest
 	ActivityDescendantsSinceTest.class,
 	ActivityNodeChildrenSinceTest.class,
 	ActivityDescendantsSortByTest.class,
-	ActivityFeedEnhTest.class//,
-	//MakeActivityPublicTest.class,
-	//GetActivityReplyNodeTagsTest.class
+	ActivityFeedEnhTest.class,
+	MakeActivityPublicTest.class,
+	GetActivityReplyNodeTagsTest.class
 })
 public class ActivitiesEnhTestSuite {
 }

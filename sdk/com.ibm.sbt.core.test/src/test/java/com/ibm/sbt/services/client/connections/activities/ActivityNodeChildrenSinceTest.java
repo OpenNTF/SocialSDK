@@ -36,7 +36,7 @@ public class ActivityNodeChildrenSinceTest extends BaseActivityServiceTest {
 	private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");	
 
 	@Test
-	public void testDescendantsUpdatedSince() throws ClientServicesException, XMLException {
+	public void testNodeChildrenUpdatedSince() throws ClientServicesException, XMLException {
 		long start = System.currentTimeMillis();
 		activity = createActivity("ActivityDescendantsUpdatedSince-"+start);
 		
@@ -53,7 +53,7 @@ public class ActivityNodeChildrenSinceTest extends BaseActivityServiceTest {
 	}
 	
 	@Test
-	public void testDescendantsUpdatedUntil() throws ClientServicesException, XMLException {
+	public void testNodeChildrenUpdatedUntil() throws ClientServicesException, XMLException {
 		long start = System.currentTimeMillis();
 		activity = createActivity("ActivityDescendantsUpdatedUntil-"+start);
 		
@@ -70,7 +70,7 @@ public class ActivityNodeChildrenSinceTest extends BaseActivityServiceTest {
 	}
 	
 	@Test
-	public void testDescendantsUpdatedSinceUntil() throws ClientServicesException, XMLException {
+	public void testNodeChildrenUpdatedSinceUntil() throws ClientServicesException, XMLException {
 		long start = System.currentTimeMillis();
 		activity = createActivity("ActivityDescendantsUpdatedSinceUntil-"+start);
 		
@@ -91,7 +91,7 @@ public class ActivityNodeChildrenSinceTest extends BaseActivityServiceTest {
 	}
 	
 	@Test
-	public void testDescendantsCreatedSince() throws ClientServicesException, XMLException {
+	public void testNodeChildrenCreatedSince() throws ClientServicesException, XMLException {
 		long start = System.currentTimeMillis();
 		activity = createActivity("ActivityDescendantsCreatedSince-"+start);
 		
@@ -109,7 +109,7 @@ public class ActivityNodeChildrenSinceTest extends BaseActivityServiceTest {
 	}
 	
 	@Test
-	public void testDescendantsCreatedUntil() throws ClientServicesException, XMLException {
+	public void testNodeChildrenCreatedUntil() throws ClientServicesException, XMLException {
 		long start = System.currentTimeMillis();
 		activity = createActivity("ActivityDescendantsCreatedUntil-"+start);
 		
@@ -127,7 +127,7 @@ public class ActivityNodeChildrenSinceTest extends BaseActivityServiceTest {
 	}
 	
 	@Test
-	public void testDescendantsCreatedSinceUntil() throws ClientServicesException, XMLException {
+	public void testNodeChildrenCreatedSinceUntil() throws ClientServicesException, XMLException {
 		long start = System.currentTimeMillis();
 		activity = createActivity("ActivityDescendantsCreatedSinceUntil-"+start);
 		

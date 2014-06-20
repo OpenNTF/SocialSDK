@@ -40,6 +40,7 @@ public enum ActivityXPath implements FieldEntry {
 	priority("./a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/priority']/@term"),
 	defaultView("./a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/default-view']/@term"),
 	deleted("./a:category[@term='deleted']"),
+	reply("./a:category[@term='reply']"),
 	external("./a:category[@term='external']"),
 	completed("./a:category[@term='completed']"),
 	template("./a:category[@term='template']"),

@@ -103,6 +103,7 @@ public class ActivityDescendantsSinceTest extends BaseActivityServiceTest {
 		ActivityNode node = nodes.get(2);
 		
 		Map<String, String> params = new HashMap<String, String>();
+		System.out.println(node.getPublished().getTime());
 		params.put("since", "" + node.getPublished().getTime());
 		params.put("rangeId", "created");
 		EntityList<ActivityNode> activityNodes = activityService.getActivityNodeDescendants(activity.getActivityUuid(), params);
@@ -145,11 +146,15 @@ public class ActivityDescendantsSinceTest extends BaseActivityServiceTest {
 		params.put("since", "" + sinceNode.getPublished().getTime());
 		params.put("until", "" + untilNode.getPublished().getTime());
 		params.put("rangeId", "created");
+		System.out.println("since="+sinceNode.getPublished().getTime());
+		System.out.println("until="+untilNode.getPublished().getTime());
 		EntityList<ActivityNode> activityNodes = activityService.getActivityNodeDescendants(activity.getActivityUuid(), params);
 		System.out.println("Nodes:" + activityNodes.size() + 
 				" created since: " + dateFormat.format(sinceNode.getPublished()) +
 				" until: " + dateFormat.format(untilNode.getPublished()));
 		dumpNodes(activityNodes);
+		
+		activity = null;
 		
 		Assert.assertEquals(2, activityNodes.size());
 	}

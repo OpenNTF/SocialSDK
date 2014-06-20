@@ -215,6 +215,17 @@ public class NodeEntity extends AtomEntity {
 	}
 
 	/**
+	 * Returns true if the node is a reply.
+	 * 
+	 * Flag that is only present on an node that is a reply.
+	 * 
+	 * @return
+	 */
+	public boolean isReply() {
+		return exists(ActivityXPath.reply);
+	}
+	
+	/**
 	 * Returns true if the node is deleted.
 	 * 
 	 * Flag that is only present on an node that is deleted, meaning it is in the Trash view and has not been removed from the system.

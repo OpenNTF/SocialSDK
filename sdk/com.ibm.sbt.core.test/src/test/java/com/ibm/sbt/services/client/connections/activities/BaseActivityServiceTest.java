@@ -224,7 +224,7 @@ public class BaseActivityServiceTest extends BaseUnitTest {
     	
     	for (int i=0; i<count; i++) {
     		long now = System.currentTimeMillis();
-    		String title = "Descendant-" + now;
+    		String title = i + ". Descendant-" + now;
     		activityNodes.add(createActivityNode(activityUuid, title));
     		
     		try {
@@ -316,7 +316,7 @@ public class BaseActivityServiceTest extends BaseUnitTest {
 	}
 	
 	protected void dumpNodes(List<ActivityNode> nodes) {
-		System.out.println("         TITLE                 PUBLISHED            UPDATED");
+		System.out.println("            TITLE                 PUBLISHED            UPDATED");
 		for (ActivityNode node : nodes) {
 			String title = node.getTitle();
 			Date create = new Date(Long.parseLong(title.substring(title.indexOf('-')+1)));

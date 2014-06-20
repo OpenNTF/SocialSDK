@@ -249,7 +249,7 @@ public class ActivityFeedEnhTest extends BaseActivityServiceTest {
 		Field movedDateField = read.getFieldByName(dateField.getName());
 		Assert.assertTrue(movedDateField instanceof DateField);
 		Assert.assertEquals("test_date", ((DateField)movedDateField).getName());
-		Assert.assertEquals(2000, ((DateField)movedDateField).getPosition());
+		Assert.assertEquals(3000, ((DateField)movedDateField).getPosition());
 		Assert.assertNotNull(((DateField)movedDateField).getDate());
 		
 		// Check hidden text field
@@ -257,7 +257,7 @@ public class ActivityFeedEnhTest extends BaseActivityServiceTest {
 		Assert.assertTrue(movedHiddenTextField instanceof TextField);
 		Assert.assertTrue(((TextField)movedHiddenTextField).isHidden());
 		Assert.assertEquals("test_hidden_text", ((TextField)movedHiddenTextField).getName());
-		Assert.assertEquals(3000, ((TextField)movedHiddenTextField).getPosition());
+		Assert.assertEquals(2000, ((TextField)movedHiddenTextField).getPosition());
 		Assert.assertEquals("Hidden_Text_Field", ((TextField)movedHiddenTextField).getSummary());
 		
 		// Delete the activities again

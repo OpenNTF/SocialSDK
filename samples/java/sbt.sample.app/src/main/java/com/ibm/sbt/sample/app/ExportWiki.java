@@ -23,7 +23,6 @@ import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.json.JsonException;
 import com.ibm.commons.util.io.json.JsonGenerator;
 import com.ibm.commons.util.io.json.JsonJavaArray;
@@ -159,25 +158,40 @@ public class ExportWiki {
         
         HashMap<String, String> params = new HashMap<String, String>();
         params.put("includeTags", "true");
+        params.put("ps", "20");
         Wiki wiki = wikiService.getWiki(wikiLabel, params);
         JsonJavaObject result = entityToJsonObject(wiki, WikiXPath.values(),
                 null);
-        EntityList<WikiPage> wikiPages = wikiService.getWikiPages(wikiLabel, params);
         
-        JsonJavaArray array = new JsonJavaArray();
-        int index = 0;
-        for (Iterator<WikiPage> iter = wikiPages.iterator(); iter.hasNext();) {
-            JsonJavaObject wikiEntry = new JsonJavaObject();
-            WikiPage wikiPage = iter.next();
-            entityToJsonObject(wikiPage, AtomXPath.values(), wikiEntry);
-            entityToJsonObject(wikiPage, WikiXPath.values(), wikiEntry);
-            String pageHTML = wikiPage.getContent();
-            wikiEntry.put("content", pageHTML);
-            
-            wikiEntry.putArray("pageImages", extractImagesFromWikiPage(pageHTML));
-            array.putObject(index++, wikiEntry);
-        }
-        result.putArray("pages", array);
+        JsonJavaArray pagesArray = new JsonJavaArray();
+        int page = 1;
+        int writtenPages = 0;
+        boolean morePages = true;
+        do{
+        	params.put("page", Integer.toString(page));
+        	EntityList<WikiPage> wikiPages = wikiService.getWikiPages(wikiLabel, params);
+	        for (Iterator<WikiPage> iter = wikiPages.iterator(); iter.hasNext();) {
+	            JsonJavaObject wikiEntry = new JsonJavaObject();
+	            WikiPage wikiPage = iter.next();
+	            entityToJsonObject(wikiPage, AtomXPath.values(), wikiEntry);
+	            entityToJsonObject(wikiPage, WikiXPath.values(), wikiEntry);
+	            String pageHTML = wikiPage.getContent();
+	            wikiEntry.put("content", pageHTML);
+	            
+	            wikiEntry.putArray("pageImages", extractImagesFromWikiPage(pageHTML));
+	            pagesArray.add(wikiEntry);
+	        }
+	        writtenPages += wikiPages.size();
+	        int total = wikiPages.getTotalResults();
+	        if(writtenPages < total){
+            	morePages = true;
+                page++;
+            }else{
+            	morePages = false;
+            }
+        }while(morePages);
+        
+        result.putArray("pages", pagesArray);
         writeToFile(result, outputFile);
         double duration = (System.currentTimeMillis() - start) / 1000d;
         System.out.println("Export took: " + duration + "(secs)");

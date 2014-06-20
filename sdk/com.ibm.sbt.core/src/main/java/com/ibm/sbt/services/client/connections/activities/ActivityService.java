@@ -918,7 +918,20 @@ public class ActivityService extends ConnectionsService {
 		
 		return getActivityNodeFeedHandler(false).createEntity(response);
 	}
-		
+
+   public ActivityNode moveNode(String nodeUuid, String destinationUuid) throws ClientServicesException {
+       return this.moveNode(nodeUuid, destinationUuid, null);
+    }	
+	
+   public ActivityNode moveNode(String nodeUuid, String destinationUuid, Map<String, String> parameters) throws ClientServicesException {
+        String requestUrl = ActivityUrls.MOVE_NODE.format(this, 
+                ActivityUrls.activityNodePart(nodeUuid), ActivityUrls.destinationPart(destinationUuid));
+        Response response = createData(requestUrl, parameters, getAtomHeaders(), null, null);
+        checkResponseCode(response, HTTPCode.OK);
+        
+        return getActivityNodeFeedHandler(false).createEntity(response);
+    }
+	
 	//------------------------------------------------------------------------------------------------------------------
 	// Internal implementations
 	//------------------------------------------------------------------------------------------------------------------

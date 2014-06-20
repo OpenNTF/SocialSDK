@@ -295,7 +295,7 @@ public class BlogService extends ConnectionsService {
 	 * @throws ClientServicesException
 	 */
 	public EntityList<BlogPost> getBlogPosts(String blogHandle, Map<String, String> parameters) throws ClientServicesException {
-		String url = BlogUrls.BLOG_POSTS.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle));
+		String url = BlogUrls.BLOG_POSTS.format(this, BlogUrlParts.blogHandle.get(blogHandle));
 		return getBlogPostEntityList(url, parameters);
 	}
 	

@@ -211,6 +211,11 @@ class SBTCredentialStore {
 		$this->iv = $pivIv;
 	}
 	
+	/**
+	 * Initializes the profile session. That is, it creates a (random) private key,
+	 * generates a session ID and updates the session table with the new user session 
+	 * (which consists of the ID and a timestamp - used to determine its expiration).
+	 */
 	private function _initProfileSession() {
 		$pivKey = $this->gen_string(32);
 		
@@ -594,6 +599,11 @@ class SBTCredentialStore {
 		return $this->_get('__SBTK_TOKEN_TYPE');
 	}
 	
+	/**
+	 * Returns true if the user is logged in; false if not.
+	 * 
+	 * @return boolean		true if the user is logged in; false if not.
+	 */
 	private function _isUserLoggedIn() {
 		$data = SBTCookie::get(WP_SESSION_INDICATOR);
 		$this->userID  = $data;

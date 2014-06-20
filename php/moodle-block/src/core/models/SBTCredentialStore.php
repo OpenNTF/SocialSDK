@@ -378,7 +378,9 @@ class SBTCredentialStore {
 	 * @param string $key
 	 */
 	public function destroyStore($endpoint = "connections") {
-		// TODO
+		$this->deleteTokens($endpoint);
+		$this->deleteBasicAuthCredentials($endpoint);
+		$this->deleteOAuthCredentials($endpoint);
 	}
 	
 	public function storeToken($token, $endpoint = "connections") {

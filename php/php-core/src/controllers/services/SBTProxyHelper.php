@@ -37,10 +37,6 @@ class SBTProxyHelper extends BaseController
 		$headers = apache_request_headers();
 	
 		$forwardHeader = array();
-
-// 		foreach ($headers as $key => $value) {
-// 			$forwardHeader[$key] = $value;
-// 		}
 		
 		if (isset($headers['Content-Length'])) {
 			$forwardHeader['Content-Length'] = $headers['Content-Length'];

@@ -16,10 +16,16 @@
 
 package com.ibm.sbt.services.client.connections.wikis;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.StringWriter;
+
+import org.apache.commons.io.IOUtils;
 import org.w3c.dom.Node;
 
 import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.xpath.XPathExpression;
+import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.AtomXPath;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
@@ -68,15 +74,41 @@ public class WikiPage extends WikiBaseEntity {
 		if (fields.containsKey(AtomXPath.content.getName())){
 			Object value = fields.get(AtomXPath.content.getName());
 			return (value == null) ? null : value.toString();
+		} 
+
+		String content = "";
+		try {
+			content = getHtmlMarkup();
+		} catch (ClientServicesException e) {
+			e.printStackTrace();
 		}
-		else {
-			String contentUrl = this.getAsString(WikiXPath.contentSrc);
+
+		return content;
+	}
+	
+	/**
+	 * Make a request to get the HTML markup of the wiki page.
+	 * @return
+	 * @throws ClientServicesException
+	 */
+	public String getHtmlMarkup() throws ClientServicesException{
+		String contentUrl = getAsString(WikiXPath.enclosureUrl);
+		StringWriter writer = new StringWriter();
+		InputStream contentStream = null;
+		try {
+			contentStream = (InputStream)getService().getEndpoint().xhrGet(contentUrl).getData();
+			IOUtils.copy(contentStream, writer, "UTF-8");
+		} catch (IOException e) {
+			throw new ClientServicesException(e);
+		} finally{
 			try {
-				return (String)getService().retrieveData(contentUrl, null).getData();
-			} catch (Exception e) {
-				throw new RuntimeException(e);
+				contentStream.close();
+			} catch (IOException e) {
+				throw new ClientServicesException(e);
 			}
 		}
+		String content = writer.toString();
+		return content;
 	}
 	
 	/**

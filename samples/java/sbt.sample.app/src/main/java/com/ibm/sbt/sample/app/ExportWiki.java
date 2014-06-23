@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * © Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,10 @@ package com.ibm.sbt.sample.app;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.ibm.commons.util.io.json.JsonException;
 import com.ibm.commons.util.io.json.JsonGenerator;
@@ -64,6 +67,14 @@ public class ExportWiki {
         this.wikiService = new WikiService();
         this.setEndpoint(basicEndpoint);
     }
+    
+    /**
+     * 
+     * @return
+     */
+    public BasicEndpoint getEndpoint(){
+        return endpoint;
+    }
 
     /**
      * 
@@ -104,6 +115,39 @@ public class ExportWiki {
         return jsonObject;
     }
 
+    /*
+     * returns an array of the json objects describing each image in the wikiPage.
+     */
+    public JsonJavaArray extractImagesFromWikiPage(String pageHTML){
+    	JsonJavaArray imageAttributeObjects = new JsonJavaArray();
+        
+        Pattern p = Pattern.compile("<img([^>]*)>([^<>]*)</img>");
+        Matcher m = p.matcher(pageHTML);
+        while(m.find()) {
+        	String imgAttrs = m.group(1);
+        	if(imgAttrs==null){
+        		break;
+        	}
+        	JsonJavaObject jsonAttrs = new JsonJavaObject();
+        	imgAttrs = imgAttrs.trim();
+        	String[] attrs = imgAttrs.split("\" ");
+        	
+        	for(int i = 0; i < attrs.length; i++){
+        		String attr = attrs[i];
+        		attr = attr.replaceAll("\"", "");
+        		String[] nameValue = attr.split("=");
+        		if(nameValue.length == 2){
+        			jsonAttrs.put(nameValue[0], nameValue[1]);
+        		}else if(nameValue.length == 1){
+        			jsonAttrs.put(nameValue[0], "");
+        		}
+        	}
+        	imageAttributeObjects.add(jsonAttrs);
+        }
+        
+        return imageAttributeObjects;
+    }
+    
     /**
      * 
      * @param wikiLabel
@@ -114,23 +158,44 @@ public class ExportWiki {
      */
     public void export(String wikiLabel, String outputFile)
             throws ClientServicesException, JsonException, IOException {
-        long start = System.currentTimeMillis();
-
-        Wiki wiki = wikiService.getWiki(wikiLabel, null);
+    	long start = System.currentTimeMillis();
+        
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("includeTags", "true");
+        params.put("ps", "20");
+        Wiki wiki = wikiService.getWiki(wikiLabel, params);
         JsonJavaObject result = entityToJsonObject(wiki, WikiXPath.values(),
                 null);
-        EntityList<WikiPage> wikiPages = wikiService.getWikiPages(wikiLabel);
+        
+        JsonJavaArray pagesArray = new JsonJavaArray();
+        int page = 1;
+        int writtenPages = 0;
+        boolean morePages = true;
+        do{
+        	params.put("page", Integer.toString(page));
+        	EntityList<WikiPage> wikiPages = wikiService.getWikiPages(wikiLabel, params);
+	        for (Iterator<WikiPage> iter = wikiPages.iterator(); iter.hasNext();) {
+	            JsonJavaObject wikiEntry = new JsonJavaObject();
+	            WikiPage wikiPage = iter.next();
+	            entityToJsonObject(wikiPage, AtomXPath.values(), wikiEntry);
+	            entityToJsonObject(wikiPage, WikiXPath.values(), wikiEntry);
+	            String pageHTML = wikiPage.getContent();
+	            wikiEntry.put("content", pageHTML);
 
-        JsonJavaArray array = new JsonJavaArray();
-        int index = 0;
-        for (Iterator<WikiPage> iter = wikiPages.iterator(); iter.hasNext();) {
-            JsonJavaObject wikiEntry = new JsonJavaObject();
-            WikiPage wikiPage = iter.next();
-            entityToJsonObject(wikiPage, AtomXPath.values(), wikiEntry);
-            entityToJsonObject(wikiPage, WikiXPath.values(), wikiEntry);
-            array.putObject(index++, wikiEntry);
-        }
-        result.putArray("pages", array);
+	            wikiEntry.putArray("pageImages", extractImagesFromWikiPage(pageHTML));
+	            pagesArray.add(wikiEntry);
+	        }
+	        writtenPages += wikiPages.size();
+	        int total = wikiPages.getTotalResults();
+	        if(writtenPages < total){
+            	morePages = true;
+                page++;
+            }else{
+            	morePages = false;
+            }
+        }while(morePages);
+        
+        result.putArray("pages", pagesArray);
         writeToFile(result, outputFile);
         double duration = (System.currentTimeMillis() - start) / 1000d;
         System.out.println("Export took: " + duration + "(secs)");

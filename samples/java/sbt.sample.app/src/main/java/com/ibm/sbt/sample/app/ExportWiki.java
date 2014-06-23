@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * © Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -121,7 +121,7 @@ public class ExportWiki {
     public JsonJavaArray extractImagesFromWikiPage(String pageHTML){
     	JsonJavaArray imageAttributeObjects = new JsonJavaArray();
         
-        Pattern p = Pattern.compile("<img([^>]*[^>]*)>([^<>]*)</img>");
+        Pattern p = Pattern.compile("<img([^>]*)>([^<>]*)</img>");
         Matcher m = p.matcher(pageHTML);
         while(m.find()) {
         	String imgAttrs = m.group(1);

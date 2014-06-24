@@ -346,7 +346,7 @@ public class WikiService extends ConnectionsService {
 	 * @throws ClientServicesException
 	 */
 	public Wiki getWiki(String wikiLabel, Map<String, String> parameters) throws ClientServicesException {
-		String requestUrl = WikiUrls.WIKI_AUTH.format(this, WikiUrls.getWikiLabel(wikiLabel)); 
+		String requestUrl = WikiUrls.WIKI.format(this, WikiUrls.getWikiLabel(wikiLabel)); 
 		return getWikiEntity(requestUrl, parameters);
 	}
 
@@ -405,7 +405,7 @@ public class WikiService extends ConnectionsService {
 	 */
 	public void updateWiki(Wiki wiki, Map<String, String> parameters) 
 			throws ClientServicesException {
-		String requestUrl = WikiUrls.WIKI_AUTH.format(this, WikiUrls.getWikiLabel(wiki.getLabel()));
+		String requestUrl = WikiUrls.WIKI.format(this, WikiUrls.getWikiLabel(wiki.getLabel()));
 		Response response = updateWikiAux(requestUrl, wiki, parameters);
 		checkResponseCode(response, HTTPCode.OK);
 	}
@@ -418,7 +418,7 @@ public class WikiService extends ConnectionsService {
 	 * @throws ClientServicesException
 	 */
 	public void deleteWiki(String wikiLabel) throws ClientServicesException {
-		String requestUrl = WikiUrls.WIKI_AUTH.format(this, WikiUrls.getWikiLabel(wikiLabel));
+		String requestUrl = WikiUrls.WIKI.format(this, WikiUrls.getWikiLabel(wikiLabel));
 		Response response = deleteData(requestUrl);
 		//FIX: According to documentation should return 204 but returns 200
 		checkResponseCode(response, HTTPCode.OK);
@@ -458,7 +458,7 @@ public class WikiService extends ConnectionsService {
 	 * @throws ClientServicesException
 	 */
 	public WikiPage getWikiPage(String wikiLabel, String pageLabel, Map<String, String> parameters) throws ClientServicesException {
-		String requestUrl = WikiUrls.WIKI_PAGE_AUTH.format(this, WikiUrls.getWikiLabel(wikiLabel), WikiUrls.getWikiPage(pageLabel));
+		String requestUrl = WikiUrls.WIKI_PAGE.format(this, WikiUrls.getWikiLabel(wikiLabel), WikiUrls.getWikiPage(pageLabel));
 		return getWikiPageEntity(requestUrl, parameters);
 	}
 
@@ -482,7 +482,7 @@ public class WikiService extends ConnectionsService {
 	 * @throws ClientServicesException
 	 */
 	public WikiPage createWikiPage(String wikiLabel, WikiPage wikiPage, Map<String, String> parameters) throws ClientServicesException {
-		String requestUrl = WikiUrls.WIKI_PAGES_AUTH.format(this, WikiUrls.getWikiLabel(wikiLabel));
+		String requestUrl = WikiUrls.WIKI_PAGES.format(this, WikiUrls.getWikiLabel(wikiLabel));
 		Response response = createWikiPageAux(requestUrl, wikiPage, parameters);
 		checkResponseCode(response, HTTPCode.CREATED);
 		return getWikiPageFeedHandler().createEntity(response);
@@ -509,7 +509,7 @@ public class WikiService extends ConnectionsService {
 	 */
 	public void updateWikiPage(String wikiLabel, WikiPage wikiPage, 
 			Map<String, String> parameters) throws ClientServicesException {
-		String requestUrl = WikiUrls.WIKI_PAGE_AUTH.format(this, WikiUrls.getWikiLabel(wikiLabel), WikiUrls.getWikiPage(wikiPage.getLabel()));
+		String requestUrl = WikiUrls.WIKI_PAGE.format(this, WikiUrls.getWikiLabel(wikiLabel), WikiUrls.getWikiPage(wikiPage.getLabel()));
 		Response response = updateWikiPageAux(requestUrl, wikiPage, parameters);
 		checkResponseCode(response, HTTPCode.OK);
 	}
@@ -523,7 +523,7 @@ public class WikiService extends ConnectionsService {
 	 * @throws ClientServicesException
 	 */
 	public void deleteWikiPage(String wikiLabel, String wikiPageLabel) throws ClientServicesException {
-		String requestUrl = WikiUrls.WIKI_PAGE_AUTH.format(this, WikiUrls.getWikiLabel(wikiLabel), WikiUrls.getWikiPage(wikiPageLabel));
+		String requestUrl = WikiUrls.WIKI_PAGE.format(this, WikiUrls.getWikiLabel(wikiLabel), WikiUrls.getWikiPage(wikiPageLabel));
 		Response response = deleteData(requestUrl);
 		checkResponseCode(response, HTTPCode.NO_CONTENT);
 	}

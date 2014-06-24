@@ -21,7 +21,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
 import com.ibm.sbt.services.client.connections.activities.ActivityDescendantsSinceTest;
 import com.ibm.sbt.services.client.connections.activities.ActivityDescendantsSortByTest;
-import com.ibm.sbt.services.client.connections.activities.ActivityFeedEnhTest;
+import com.ibm.sbt.services.client.connections.activities.ActivityMoveFieldTest;
 import com.ibm.sbt.services.client.connections.activities.ActivityNodeChildrenSinceTest;
 import com.ibm.sbt.services.client.connections.activities.GetActivityReplyNodeTagsTest;
 import com.ibm.sbt.services.client.connections.activities.MakeActivityPublicTest;
@@ -35,8 +35,8 @@ import com.ibm.sbt.services.client.connections.activities.MakeActivityPublicTest
 	ActivityDescendantsSinceTest.class,
 	ActivityNodeChildrenSinceTest.class,
 	ActivityDescendantsSortByTest.class,
-	ActivityFeedEnhTest.class,
-	MakeActivityPublicTest.class,
+	ActivityMoveFieldTest.class,
+	//MakeActivityPublicTest.class,
 	GetActivityReplyNodeTagsTest.class
 })
 public class ActivitiesEnhTestSuite {

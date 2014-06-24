@@ -30,10 +30,10 @@ import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.connections.common.Link;
 
 /**
- * @author mwallace
+ * @author carlos manias
  *
  */
-public class ActivityFeedEnhTest extends BaseActivityServiceTest {
+public class ActivityMoveFieldTest extends BaseActivityServiceTest {
 	
 	@Rule public ExpectedException thrown= ExpectedException.none();
 

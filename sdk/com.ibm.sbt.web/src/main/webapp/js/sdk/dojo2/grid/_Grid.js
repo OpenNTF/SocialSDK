@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -17,15 +17,16 @@
 /**
  * 
  */
-define([ "../../declare", "../../store/AtomStore", "dojo/_base/lang", "dojo/_base/Deferred", "../../widget/_TemplatedWidget"], 
-        function(declare, AtomStore, lang, Deferred, _TemplatedWidget) {
+define([ "../../declare", "../../store/AtomStore", "dojo/_base/lang", "dojo/_base/Deferred", 
+         "../../widget/_TemplatedWidget", "../../text!../../controls/grid/templates/Grid.html"], 
+        function(declare, AtomStore, lang, Deferred, _TemplatedWidget, GridTemplate) {
 
     /*
      * @module sbt._bridge.grid._Grid
      */
     var _Grid = declare([ _TemplatedWidget ], {
 
-        templatePath: require.toUrl("sbt/controls/grid/templates/Grid.html"),
+        templatePath: GridTemplate,
         
         /*
          * Creates an instance of an atom store.

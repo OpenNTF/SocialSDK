@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2011
+ * ï¿½ Copyright IBM Corp. 2011
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -43,7 +43,6 @@ import com.ibm.sbt.services.client.ClientService.HandlerXml;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.connections.ConnectionsService;
 import com.ibm.sbt.services.client.connections.files.FileService;
-import com.ibm.sbt.services.client.connections.files.FileServiceException;
 import com.ibm.sbt.services.client.connections.files.model.FileCreationParameters;
 import com.ibm.sbt.services.client.connections.files.model.FileRequestParams;
 import com.ibm.sbt.services.client.connections.files.model.Headers;
@@ -357,7 +356,7 @@ public class ConnectionsFiles extends AbstractType {
     	    is = new FileInputStream(serverFile);
 			com.ibm.sbt.services.client.connections.files.File entry = svc.uploadFile(is,name, serverFile.length(),p.buildParameters());
 				 
-		}catch (FileServiceException e) {
+		}catch (ClientServicesException e) {
             throw new FacesExceptionEx(e);
         } catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

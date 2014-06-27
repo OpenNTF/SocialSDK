@@ -21,17 +21,19 @@ import static com.ibm.sbt.services.client.base.ConnectionsConstants.CATEGORY;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.CONTENT;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.CONTRIBUTOR;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.ENTRY;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.FEED;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.ID;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.SNXUSERID;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.LABEL;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.PUBLISHED;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.SCHEME;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.SUBTITLE;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.SUMMARY;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.TERM;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.TEXT;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.TITLE;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.TYPE;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.UPDATED;
-import static com.ibm.sbt.services.client.base.ConnectionsConstants.SUBTITLE;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.dateFormat;
 
 import java.util.ArrayList;
@@ -69,8 +71,24 @@ public class AtomEntitySerializer<T extends AtomEntity> extends BaseEntitySerial
 		return entry;
 	}
 
+	/**
+	 * 
+	 * @return A Root node entry element
+	 */
 	protected Node entry() {
 		return rootNode(element(Namespace.ATOM.getUrl(), ENTRY));
+	}
+
+	/**
+	 * 
+	 * @return An Entry element that is not the root element and can be used inside a Feed
+	 */
+	protected Node entryElement() {
+		return element(ENTRY);
+	}
+
+	protected Node feed() {
+		return rootNode(element(Namespace.ATOM.getUrl(), FEED));
 	}
 	
 	protected Element title() {
@@ -107,6 +125,18 @@ public class AtomEntitySerializer<T extends AtomEntity> extends BaseEntitySerial
 	
 	protected Node contributor() {
 		return (new PersonSerializer(entity.getContributor())).xmlNode(CONTRIBUTOR);
+	}
+	
+	protected Node snxUserID(){
+		return element(SNXUSERID, entity.getId());
+	}
+
+	/**
+	 * 
+	 * @return A contributor element with no sub elements
+	 */
+	protected Node contributorElement(){
+		return element(CONTRIBUTOR);
 	}
 
 	protected Element category(String scheme, String term) {

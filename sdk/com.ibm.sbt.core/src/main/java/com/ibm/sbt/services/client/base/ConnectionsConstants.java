@@ -51,6 +51,7 @@ public final class ConnectionsConstants {
 	/**
 	 * General ATOM
 	 */
+	
 	public static final String ENTRY = "entry";
 	public static final String FEED = "feed";
 	public static final String TAGS = "tags";
@@ -65,6 +66,7 @@ public final class ConnectionsConstants {
 	public static final String TITLE = "title";
 	public static final String ID = "id";
 	public static final String UUID = "uuid";
+	public static final String SNXUSERID = "snx:userid";
 
 	public static final String PUBLISHED = "published";
 	public static final String UPDATED = "updated";

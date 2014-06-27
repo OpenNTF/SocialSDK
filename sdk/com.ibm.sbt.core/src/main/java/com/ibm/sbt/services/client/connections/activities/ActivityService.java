@@ -727,6 +727,24 @@ public class ActivityService extends ConnectionsService {
 		return createMemberEntity(requestUrl, member, parameters);
 	}
 	
+	public void addMembers(Activity activity, Member[] members) throws ClientServicesException{
+		addMembers(activity.getActivityUuid(), members, null);
+	}
+	
+	public void addMembers(Activity activity, Member[] members, Map<String, String> parameters ) throws ClientServicesException{
+		addMembers(activity.getActivityUuid(), members, parameters);
+	}
+	
+	public void addMembers(String activityUuid, Member[] members) throws ClientServicesException{
+		addMembers(activityUuid, members, null);
+	}
+	
+	public void addMembers(String activityUuid, Member[] members, Map<String, String> parameters) throws ClientServicesException {
+		String requestUrl = ActivityUrls.ACTIVITY_ACL.format(this, ActivityUrls.activityPart(activityUuid));
+		System.out.println(requestUrl);
+		createMemberFeed(requestUrl, members, parameters);
+	}
+	
 	/**
 	 * Retrieve an activity member.
 	 * 
@@ -948,6 +966,24 @@ public class ActivityService extends ConnectionsService {
 		catch(Exception e) {
 			throw new ClientServicesException(e);
 		}
+	}
+	
+	protected void createMemberFeed(String requestUrl, Member[] members, Map<String, String> parameters) throws ClientServicesException {
+		try {
+			MemberSerializer serializer = new MemberSerializer(members[0]);
+
+			Response response = createData(requestUrl, parameters, getAtomHeaders(), serializer.generateMemberFeed(members));
+			checkResponseCode(response, HTTPCode.CREATED);
+				//return updateMemberEntityData(members, response);
+			
+		}
+		catch(ClientServicesException e) {
+			throw e;
+		}
+		catch(Exception e) {
+			throw new ClientServicesException(e);
+		}
+
 	}
 
 	protected void updateActivityEntity(String requestUrl, Activity activity, Map<String, String> parameters, HTTPCode expectedCode) throws ClientServicesException {

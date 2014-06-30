@@ -200,19 +200,30 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
            }
          },
                 
-        getParentCommunityUrl: function(){
-        	return this.getAsString("parentCommunityUrl");
-        },
-
-        /**
-         * Set the external flag of the IBM Connections community.
-         * 
-         * @method setExternal
-         * @param {Boolean} External flag of the Community
-         */
-        setExternal : function(external) {
-            return this.setAsBoolean("isExternal", external);
-        },
+     	/**
+          * function to check if a community is a sub community of another community
+          * 
+          * @method isSubCommunity
+          * @return Returns true if this community is a sub community
+          */
+         isSubCommunity : function(){
+         	var parentUrl = this.getParentCommunityUrl();
+         	if(parentUrl != null && parentUrl != ""){
+         		return true;
+         	}else{
+         		return false;
+         	}
+         },
+         
+         /**
+          * If this community is a sub community this function gets the url of the parent community
+          * else it returns null. 
+          * @method getParentCommunityUrl
+          * @returns The Url of the parent community if the community is a sub community else returns null 
+          */
+         getParentCommunityUrl: function(){
+         	return this.getAsString("parentCommunityUrl");
+         },
 
         /**
          * Return tags of IBM Connections community from community ATOM entry

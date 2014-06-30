@@ -101,7 +101,8 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
             memberCount : "snx:membercount",
             communityType : "snx:communityType",
             communityUrl : "a:link[@rel='alternate']/@href",
-            isExternal : "snx:isExternal"
+            isExternal : "snx:isExternal",
+            parentCommunityUrl: "a:link[@rel='http://www.ibm.com/xmlns/prod/sn/parentcommunity']/@href"
         }),
         
         /**

@@ -28,6 +28,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
 	var CategoryInvite = "<category term=\"invite\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category>";
 	var CategoryEvent = "<category term=\"event\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category>";
     
+	var parentLinkTmpl = "<link href=\"${getParentCommunityUrl}\" rel=\"http://www.ibm.com/xmlns/prod/sn/parentcommunity\" type=\"application/atom+xml\"> </link>";
 	var IsExternalTmpl = "<snx:isExternal>${isExternal}</snx:isExternal>";
     var CommunityTypeTmpl = "<snx:communityType>${getCommunityType}</snx:communityType>";
     var CommunityUuidTmpl = "<snx:communityUuid xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\">${getCommunityUuid}</snx:communityUuid><id>instance?communityUuid=${getCommunityUuid}</id> ";
@@ -98,6 +99,9 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             postData += stringUtil.transform(IsExternalTmpl, this, transformer, this);
         	if (this.getCommunityUuid()) {
                 postData += stringUtil.transform(CommunityUuidTmpl, this, transformer, this);
+        	}
+        	if(this.isSubCommunity()){
+        		 postData += stringUtil.transform(parentLinkTmpl, this, transformer, this);
         	}
         	if (this.getCommunityTheme()) {
                 postData += stringUtil.transform(CommunityThemeTmpl, this, transformer, this);
@@ -182,6 +186,22 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          */
         isExternal : function() {
             return this.getAsBoolean("isExternal");
+        },
+        
+        /**
+         * Returns true if this community is a sub community
+         */
+         isSubCommunity : function(){
+           var parentUrl = this.getParentCommunityUrl();
+           if(parentUrl != null && parentUrl != ""){
+                return true;
+           }else{
+                return false;
+           }
+         },
+                
+        getParentCommunityUrl: function(){
+        	return this.getAsString("parentCommunityUrl");
         },
 
         /**

@@ -29,7 +29,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
 	var CategoryEvent = "<category term=\"event\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category>";
     
 	var IsExternalTmpl = "<snx:isExternal>${isExternal}</snx:isExternal>";
-	var parentLinkTmpl = "<link href=\"${parentCommunityUrl}\" rel=\"http://www.ibm.com/xmlns/prod/sn/parentcommunity\" type=\"application/atom+xml\"> </link>";
+	var parentLinkTmpl = "<link href=\"${getParentCommunityUrl}\" rel=\"http://www.ibm.com/xmlns/prod/sn/parentcommunity\" type=\"application/atom+xml\"> </link>";
     var CommunityTypeTmpl = "<snx:communityType>${getCommunityType}</snx:communityType>";
     var CommunityUuidTmpl = "<snx:communityUuid xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\">${getCommunityUuid}</snx:communityUuid><id>instance?communityUuid=${getCommunityUuid}</id> ";
     var CommunityThemeTmpl = "<snx:communityTheme xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\" snx:uuid=\"default\">${getCommunityTheme}</snx:communityTheme>";
@@ -198,13 +198,20 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             return this.setAsBoolean("isExternal", external);
         },
         
+        /**
+         * Returns true if this community is a sub community
+         */
         isSubCommunity : function(){
-        	var parentUrl = this.getAsString("parentCommunityUrl");
+        	var parentUrl = this.getParentCommunityUrl();
         	if(parentUrl != null && parentUrl != ""){
         		return true;
         	}else{
         		return false;
         	}
+        },
+        
+        getParentCommunityUrl: function(){
+        	return this.getAsString("parentCommunityUrl");
         },
 
         /**

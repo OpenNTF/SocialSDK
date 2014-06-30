@@ -1,6 +1,6 @@
 require(["sbt/connections/CommunityService", "sbt/dom"], 
     function(CommunityService, dom) {
-	    var createRow = function(title, communityUuid, isSub) {
+	    var createRow = function(title, communityUuid) {
 	        var table = dom.byId("communitiesTable");
 	        var tr = document.createElement("tr");
 	        table.appendChild(tr);
@@ -10,13 +10,10 @@ require(["sbt/connections/CommunityService", "sbt/dom"],
 	        td = document.createElement("td");
 	        td.appendChild(dom.createTextNode(communityUuid));
 	        tr.appendChild(td);
-	        td = document.createElement("td");
-	        td.appendChild(dom.createTextNode(isSub));
-	        tr.appendChild(td);
 	    };
     
     	var communityService = new CommunityService();
-    	communityService.getPublicCommunities({ ps: 10 }).then(
+    	communityService.getPublicCommunities({ ps: 5 }).then(
             function(communities){
                 if (communities.length == 0) {
                 	dom.setText("content", "There are no public communities.");
@@ -25,8 +22,6 @@ require(["sbt/connections/CommunityService", "sbt/dom"],
                         var community = communities[i];
                         var title = community.getTitle(); 
                         var communityUuid = community.getCommunityUuid(); 
-                        var isSub = community.isSubCommunity();
-                        createRow(title, communityUuid, isSub);
                     }
                 }
             },

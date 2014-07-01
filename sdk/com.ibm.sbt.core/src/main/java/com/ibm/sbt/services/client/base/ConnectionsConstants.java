@@ -47,10 +47,12 @@ public final class ConnectionsConstants {
 	 */
 	public static final String REL = "rel";
 	public static final String HREF = "href";
+
 	
 	/**
 	 * General ATOM
 	 */
+	
 	public static final String ENTRY = "entry";
 	public static final String FEED = "feed";
 	public static final String TAGS = "tags";
@@ -65,6 +67,7 @@ public final class ConnectionsConstants {
 	public static final String TITLE = "title";
 	public static final String ID = "id";
 	public static final String UUID = "uuid";
+	public static final String SNXUSERID = "snx:userid";
 
 	public static final String PUBLISHED = "published";
 	public static final String UPDATED = "updated";
@@ -159,6 +162,7 @@ public final class ConnectionsConstants {
 		TAGENTRY("tag","tag:profiles.ibm.com,2006:entry"),
 		SCHEME("scheme","http://www.ibm.com/xmlns/prod/sn/type"),
 		XMLNS("xmlns", "http://www.w3.org/2000/xmlns/"),
+		parentRel("rel", "http://www.ibm.com/xmlns/prod/sn/parentcommunity"),
 		COMPONENT("component","http://www.ibm.com/xmlns/prod/sn/communities");
 		
 		private final String prefix;

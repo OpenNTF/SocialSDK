@@ -48,6 +48,7 @@ public class ActivityNodeChildrenSinceTest extends BaseActivityServiceTest {
 		params.put("since", "" + node.getUpdated().getTime());
 		EntityList<ActivityNode> activityNodes = activityService.getActivityNodeChildren(activity.getActivityUuid(), params);
 		System.out.println("Nodes " + activityNodes.size() + " updated since: " + dateFormat.format(node.getUpdated()));
+		dumpNodes(activityNodes);
 		
 		Assert.assertEquals(3, activityNodes.size());
 	}
@@ -65,6 +66,7 @@ public class ActivityNodeChildrenSinceTest extends BaseActivityServiceTest {
 		params.put("until", "" + node.getUpdated().getTime());
 		EntityList<ActivityNode> activityNodes = activityService.getActivityNodeChildren(activity.getActivityUuid(), params);
 		System.out.println("Nodes " + activityNodes.size() + " update until: " + dateFormat.format(node.getUpdated()));
+		dumpNodes(activityNodes);
 		
 		Assert.assertEquals(2, activityNodes.size());
 	}
@@ -86,6 +88,7 @@ public class ActivityNodeChildrenSinceTest extends BaseActivityServiceTest {
 		System.out.println("Nodes " + activityNodes.size() + 
 				" updated since: " + dateFormat.format(sinceNode.getUpdated()) +
 				" until: " + dateFormat.format(untilNode.getUpdated()));
+		dumpNodes(activityNodes);
 		
 		Assert.assertEquals(2, activityNodes.size());
 	}
@@ -104,6 +107,7 @@ public class ActivityNodeChildrenSinceTest extends BaseActivityServiceTest {
 		params.put("rangeId", "created");
 		EntityList<ActivityNode> activityNodes = activityService.getActivityNodeChildren(activity.getActivityUuid(), params);
 		System.out.println("Nodes " + activityNodes.size() + " created since: " + dateFormat.format(node.getPublished()));
+		dumpNodes(activityNodes);
 		
 		Assert.assertEquals(3, activityNodes.size());
 	}
@@ -122,6 +126,7 @@ public class ActivityNodeChildrenSinceTest extends BaseActivityServiceTest {
 		params.put("rangeId", "created");
 		EntityList<ActivityNode> activityNodes = activityService.getActivityNodeChildren(activity.getActivityUuid(), params);
 		System.out.println("Nodes " + activityNodes.size() + " created until: " + dateFormat.format(node.getPublished()));
+		dumpNodes(activityNodes);
 		
 		Assert.assertEquals(2, activityNodes.size());
 	}
@@ -144,6 +149,7 @@ public class ActivityNodeChildrenSinceTest extends BaseActivityServiceTest {
 		System.out.println("Nodes " + activityNodes.size() + 
 				" created since: " + dateFormat.format(sinceNode.getPublished()) +
 				" until: " + dateFormat.format(untilNode.getPublished()));
+		dumpNodes(activityNodes);
 		
 		Assert.assertEquals(2, activityNodes.size());
 	}

@@ -22,7 +22,6 @@ require(["sbt/connections/CommunityService", "sbt/dom"],
                         var community = communities[i];
                         var title = community.getTitle(); 
                         var communityUuid = community.getCommunityUuid(); 
-                        createRow(title, communityUuid);
                     }
                 }
             },

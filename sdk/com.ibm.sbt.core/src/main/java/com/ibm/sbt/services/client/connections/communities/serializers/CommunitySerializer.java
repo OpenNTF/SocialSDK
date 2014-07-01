@@ -21,6 +21,8 @@ import static com.ibm.sbt.services.client.base.ConnectionsConstants.CONTENT;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.ENTRY;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.HTML;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.TYPE;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.HREF;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.LINK;
 import static com.ibm.sbt.services.client.connections.communities.CommunityConstants.COMMUNITY;
 import static com.ibm.sbt.services.client.connections.communities.CommunityConstants.COMMUNITY_TERM;
 import static com.ibm.sbt.services.client.connections.communities.CommunityConstants.COMMUNITY_TYPE;
@@ -50,9 +52,28 @@ public class CommunitySerializer extends AtomEntitySerializer<Community> {
 				id()
 		);
 	}
+	
+	protected void generateSubCommUpdatePayload() throws ClientServicesException {
+		Node entry = entry();
+
+		appendChildren(entry,
+				title(),
+				content(),
+				category(),
+				type(),
+				content(),
+				id(),
+				parentLink()
+		);
+	}
 
 	public String createPayload() throws ClientServicesException {
 		generateCreatePayload();
+		return serializeToString();
+	}
+	
+	public String subCommUpdatePayload() throws ClientServicesException {
+		generateSubCommUpdatePayload();
 		return serializeToString();
 	}
 
@@ -77,5 +98,9 @@ public class CommunitySerializer extends AtomEntitySerializer<Community> {
 
 	protected Element type() {
 		return textElement(COMMUNITY_TYPE, entity.getCommunityType());
+	}
+	
+	protected Element parentLink(){
+		return textElement(LINK, "", attribute(HREF, entity.getParentCommunityUrl()), attribute(Namespace.parentRel.getPrefix(), Namespace.parentRel.getUrl()), attribute(TYPE,"application/atom+xml") );
 	}
 }

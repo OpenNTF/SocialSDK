@@ -213,6 +213,26 @@ public class Community extends AtomEntity {
 	public void setCommunityType(String communityType){
 		setAsString(CommunityXPath.communityType, communityType);	
 	}
+	
+	/**
+	 * checks if a community is a sub community
+	 * @return true if the community is a sub community else false
+	 */
+	public boolean isSubCommunity(){
+		return exists(CommunityXPath.parentCommunityUrl);
+	}
+	
+	/**
+	 * gets the url of of the parent community if the community is a sub community
+	 * @return The url of the parent community or null, if the community is not a sub community.
+	 */
+	public String getParentCommunityUrl(){
+		if(isSubCommunity()){
+			return getAsString(CommunityXPath.parentCommunityUrl);
+		}else {
+			return null;
+		}
+	}
 
 	/**
 	 * @return the published date of community
@@ -272,6 +292,10 @@ public class Community extends AtomEntity {
 	 */
 	public Object constructCreateRequestBody() throws ClientServicesException {
 		return createCommunityRequestPayload();
+	}
+	
+	public Object constructSubCommUpdateRequestBody() throws ClientServicesException {
+		return subCommUpdateRequestPayload();
 	}
 
 	/**
@@ -403,6 +427,12 @@ public class Community extends AtomEntity {
 		CommunitySerializer serializer = new CommunitySerializer(this);
 		String xml = serializer.createPayload();
 		return xml;		
+	}
+	
+	private String subCommUpdateRequestPayload() throws ClientServicesException {
+		CommunitySerializer serializer = new CommunitySerializer(this);
+		String xml = serializer.subCommUpdatePayload();
+		return xml;	
 	}
 
 	@Override

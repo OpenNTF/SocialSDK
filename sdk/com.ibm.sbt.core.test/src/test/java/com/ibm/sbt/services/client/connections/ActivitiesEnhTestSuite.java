@@ -19,12 +19,12 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.ibm.sbt.services.client.connections.activities.ActivityAddMembers;
 import com.ibm.sbt.services.client.connections.activities.ActivityDescendantsSinceTest;
 import com.ibm.sbt.services.client.connections.activities.ActivityDescendantsSortByTest;
-import com.ibm.sbt.services.client.connections.activities.ActivityFeedEnhTest;
+import com.ibm.sbt.services.client.connections.activities.ActivityMoveFieldTest;
 import com.ibm.sbt.services.client.connections.activities.ActivityNodeChildrenSinceTest;
 import com.ibm.sbt.services.client.connections.activities.GetActivityReplyNodeTagsTest;
-import com.ibm.sbt.services.client.connections.activities.MakeActivityPublicTest;
 
 /**
  * @author mwallace
@@ -35,9 +35,10 @@ import com.ibm.sbt.services.client.connections.activities.MakeActivityPublicTest
 	ActivityDescendantsSinceTest.class,
 	ActivityNodeChildrenSinceTest.class,
 	ActivityDescendantsSortByTest.class,
-	ActivityFeedEnhTest.class,
-	MakeActivityPublicTest.class,
-	GetActivityReplyNodeTagsTest.class
+	ActivityMoveFieldTest.class,
+	//MakeActivityPublicTest.class,
+	GetActivityReplyNodeTagsTest.class,
+	ActivityAddMembers.class
 })
 public class ActivitiesEnhTestSuite {
 }

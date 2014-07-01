@@ -29,6 +29,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
 	var CategoryEvent = "<category term=\"event\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category>";
     
 	var IsExternalTmpl = "<snx:isExternal>${isExternal}</snx:isExternal>";
+	var parentLinkTmpl = "<link href=\"${getParentCommunityUrl}\" rel=\"http://www.ibm.com/xmlns/prod/sn/parentcommunity\" type=\"application/atom+xml\"> </link>";
     var CommunityTypeTmpl = "<snx:communityType>${getCommunityType}</snx:communityType>";
     var CommunityUuidTmpl = "<snx:communityUuid xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\">${getCommunityUuid}</snx:communityUuid><id>instance?communityUuid=${getCommunityUuid}</id> ";
     var CommunityThemeTmpl = "<snx:communityTheme xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\" snx:uuid=\"default\">${getCommunityTheme}</snx:communityTheme>";
@@ -98,6 +99,9 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             postData += stringUtil.transform(IsExternalTmpl, this, transformer, this);
         	if (this.getCommunityUuid()) {
                 postData += stringUtil.transform(CommunityUuidTmpl, this, transformer, this);
+        	}
+        	if(this.isSubCommunity()){
+        		postData += stringUtil.transform(parentLinkTmpl, this, transformer, this);
         	}
         	if (this.getCommunityTheme()) {
                 postData += stringUtil.transform(CommunityThemeTmpl, this, transformer, this);
@@ -192,6 +196,31 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
          */
         setExternal : function(external) {
             return this.setAsBoolean("isExternal", external);
+        },
+        
+        /**
+         * function to check if a community is a sub community of another community
+         * 
+         * @method isSubCommunity
+         * @return Returns true if this community is a sub community
+         */
+        isSubCommunity : function(){
+        	var parentUrl = this.getParentCommunityUrl();
+        	if(parentUrl != null && parentUrl != ""){
+        		return true;
+        	}else{
+        		return false;
+        	}
+        },
+        
+        /**
+         * If this community is a sub community this function gets the url of the parent community
+         * else it returns null. 
+         * @method getParentCommunityUrl
+         * @returns The Url of the parent community if the community is a sub community else returns null 
+         */
+        getParentCommunityUrl: function(){
+        	return this.getAsString("parentCommunityUrl");
         },
 
         /**

@@ -17,11 +17,16 @@ package com.ibm.sbt.services.client.connections.activities;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
+import java.util.Date;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import com.ibm.commons.xml.XMLException;
+import com.ibm.sbt.security.authentication.AuthenticationException;
 import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.services.client.connections.common.Member;
+import com.ibm.sbt.services.endpoints.BasicEndpoint;
 import com.ibm.sbt.test.lib.TestEnvironment;
 
 /**
@@ -67,6 +72,7 @@ public class ActivityFeedMoveTest extends BaseActivityServiceTest {
         entryNode = activityService.moveNode(entryNode.getActivityNodeUuid(), todoNode.getActivityNodeUuid());
         entryNode = activityService.moveNode(entryNode.getActivityNodeUuid(), sectionNode.getActivityNodeUuid());
         todoNode = activityService.moveNode(todoNode.getActivityNodeUuid(), sectionNode.getActivityNodeUuid());
+
 
 	}
 
@@ -124,4 +130,50 @@ public class ActivityFeedMoveTest extends BaseActivityServiceTest {
         }
         fail();
     }
+    
+    @Test
+    public void testNotFound() throws ClientServicesException, XMLException {
+        // Create activity nodes
+        
+        activity = new Activity();
+        activity.setTitle(createActivityTitle());
+        activity = activityService.createActivity(activity);
+        
+        try {
+            activityService.moveNode("1234", activity.getActivityUuid());
+        } catch(ClientServicesException ex) {
+            assertEquals(404,ex.getResponseStatusCode());
+            return;
+        }
+        fail();
+    }
+    
+    
+    @Test
+    public void testNotAuthorized() throws ClientServicesException, XMLException, AuthenticationException {
+        // Create activity nodes
+        
+        activity = new Activity();
+        activity.setTitle(createActivityTitle());
+        activity = activityService.createActivity(activity);
+        
+        ActivityNode entryNode = new ActivityNode();
+        entryNode.setActivityUuid(activity.getActivityUuid());
+        entryNode.setTitle("Source ActivityNode");
+        entryNode.setType("ENTRY");
+        activityService.createActivityNode(entryNode);
+
+        ((BasicEndpoint)activityService.getEndpoint()).login(TestEnvironment.getSecondaryUsername(),TestEnvironment.getSecondaryUserPassword());
+
+        try {
+            activityService.moveNode(entryNode.getActivityNodeUuid(), activity.getActivityUuid());
+        } catch(ClientServicesException ex) {
+            assertEquals(403,ex.getResponseStatusCode());
+            return;
+        } finally {
+            ((BasicEndpoint)activityService.getEndpoint()).login(TestEnvironment.getCurrentUsername(),TestEnvironment.getCurrentUserPassword());
+        }
+        fail();
+    }
+
 }

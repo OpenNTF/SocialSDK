@@ -989,4 +989,24 @@ public class CommunityService extends BaseService {
 			throw new CommunityServiceException(e, Messages.UploadCommunitiesException);
 		}
 	}
+	
+	/**
+	 * Check if a community is a sub community of another community. 
+	 * @return True if the community is a sub community else returns false
+	 */
+	public boolean isSubCommunity(Community community) {		
+		return community.exists(CommunityXPath.parentCommunityUrl);
+	}
+
+	/**
+	 * gets the url of of the parent community if the community is a sub community
+	 * @return The url of the parent community or null, if the community is not a sub community.
+	 */
+	public String getParentCommunityUrl(Community community) {
+		if(isSubCommunity(community)){
+			return community.getAsString(CommunityXPath.parentCommunityUrl);
+		}else 
+			return null;
+
+	}
 }

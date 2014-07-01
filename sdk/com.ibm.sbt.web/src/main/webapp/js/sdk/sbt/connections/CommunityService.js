@@ -28,6 +28,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
 	var CategoryInvite = "<category term=\"invite\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category>";
 	var CategoryEvent = "<category term=\"event\" scheme=\"http://www.ibm.com/xmlns/prod/sn/type\"></category>";
     
+	var parentLinkTmpl = "<link href=\"${getParentCommunityUrl}\" rel=\"http://www.ibm.com/xmlns/prod/sn/parentcommunity\" type=\"application/atom+xml\"> </link>";
 	var IsExternalTmpl = "<snx:isExternal>${isExternal}</snx:isExternal>";
     var CommunityTypeTmpl = "<snx:communityType>${getCommunityType}</snx:communityType>";
     var CommunityUuidTmpl = "<snx:communityUuid xmlns:snx=\"http://www.ibm.com/xmlns/prod/sn\">${getCommunityUuid}</snx:communityUuid><id>instance?communityUuid=${getCommunityUuid}</id> ";
@@ -98,6 +99,9 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             postData += stringUtil.transform(IsExternalTmpl, this, transformer, this);
         	if (this.getCommunityUuid()) {
                 postData += stringUtil.transform(CommunityUuidTmpl, this, transformer, this);
+        	}
+        	if(this.isSubCommunity()){
+        		 postData += stringUtil.transform(parentLinkTmpl, this, transformer, this);
         	}
         	if (this.getCommunityTheme()) {
                 postData += stringUtil.transform(CommunityThemeTmpl, this, transformer, this);
@@ -183,16 +187,43 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         isExternal : function() {
             return this.getAsBoolean("isExternal");
         },
-
+        
         /**
-         * Set the external flag of the IBM Connections community.
-         * 
-         * @method setExternal
-         * @param {Boolean} External flag of the Community
+         * Returns true if this community is a sub community
          */
-        setExternal : function(external) {
-            return this.setAsBoolean("isExternal", external);
-        },
+         isSubCommunity : function(){
+           var parentUrl = this.getParentCommunityUrl();
+           if(parentUrl != null && parentUrl != ""){
+                return true;
+           }else{
+                return false;
+           }
+         },
+                
+     	/**
+          * function to check if a community is a sub community of another community
+          * 
+          * @method isSubCommunity
+          * @return Returns true if this community is a sub community
+          */
+         isSubCommunity : function(){
+         	var parentUrl = this.getParentCommunityUrl();
+         	if(parentUrl != null && parentUrl != ""){
+         		return true;
+         	}else{
+         		return false;
+         	}
+         },
+         
+         /**
+          * If this community is a sub community this function gets the url of the parent community
+          * else it returns null. 
+          * @method getParentCommunityUrl
+          * @returns The Url of the parent community if the community is a sub community else returns null 
+          */
+         getParentCommunityUrl: function(){
+         	return this.getAsString("parentCommunityUrl");
+         },
 
         /**
          * Return tags of IBM Connections community from community ATOM entry

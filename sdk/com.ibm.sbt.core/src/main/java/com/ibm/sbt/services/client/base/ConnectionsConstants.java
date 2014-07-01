@@ -47,6 +47,7 @@ public final class ConnectionsConstants {
 	 */
 	public static final String REL = "rel";
 	public static final String HREF = "href";
+
 	
 	/**
 	 * General ATOM
@@ -159,6 +160,7 @@ public final class ConnectionsConstants {
 		TAGENTRY("tag","tag:profiles.ibm.com,2006:entry"),
 		SCHEME("scheme","http://www.ibm.com/xmlns/prod/sn/type"),
 		XMLNS("xmlns", "http://www.w3.org/2000/xmlns/"),
+		parentRel("rel", "http://www.ibm.com/xmlns/prod/sn/parentcommunity"),
 		COMPONENT("component","http://www.ibm.com/xmlns/prod/sn/communities");
 		
 		private final String prefix;

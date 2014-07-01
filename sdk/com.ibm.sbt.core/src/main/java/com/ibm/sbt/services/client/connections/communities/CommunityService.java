@@ -251,6 +251,22 @@ public class CommunityService extends ConnectionsService {
 		String url = CommunityUrls.COMMUNITY_MYINVITES.format(this);
 		return getInviteEntityList(url, parameters);
 	}
+	
+	/**
+	 * Check if a community is a sub community of another community. 
+	 * @return True if the community is a sub community else returns false
+	 */
+	public boolean isSubCommunity(Community community) {		
+		return community.exists(CommunityXPath.parentCommunityUrl);
+	}
+	
+	public String getParentCommunityUrl(Community community) {
+		if(isSubCommunity(community)){
+			return community.getAsString(CommunityXPath.parentCommunityUrl);
+		}else 
+			return null;
+		
+	}
 
 
 	/***************************************************************
@@ -369,8 +385,13 @@ public class CommunityService extends ConnectionsService {
 		if(!community.getFieldsMap().toString().contains(CommunityXPath.tags.toString()))
 			community.setTags(community.getTags());
 		community.setAsString(CommunityXPath.communityUuid, community.getCommunityUuid());
-
-		communityPayload = community.constructCreateRequestBody();
+		
+		if(isSubCommunity(community)){
+			communityPayload = community.constructSubCommUpdateRequestBody();
+		}else{
+			communityPayload = community.constructCreateRequestBody();
+		}
+		
 		Response response = updateData(url, parameters, communityPayload, COMMUNITY_UNIQUE_IDENTIFIER);
 		checkResponseCode(response, HTTPCode.OK);
 		community.clearFieldsMap();

@@ -45,6 +45,23 @@ public class MemberSerializer extends AtomEntitySerializer<Member> {
 		return serializeToString();
 	}
 	
+	public String generateMemberFeed(Member[] members) {
+		Node feed = feed();
+
+		for(int i=0;i<members.length;i++) {
+			this.entity = members[i];
+
+			Node entry = entryElement();
+
+			Node contrib = contributorElement();
+			contrib.appendChild(textElement(Namespace.SNX.getUrl(),"snx:userid",this.entity.getId()));
+			entry.appendChild(contrib);
+			entry.appendChild(textElement(Namespace.SNX.getUrl(), "snx:role", "member"));
+			feed.appendChild(entry);
+		}
+		return serializeToString();
+	}
+	
 	public String generateUpdate() {
 		return generateCreate();
 	}

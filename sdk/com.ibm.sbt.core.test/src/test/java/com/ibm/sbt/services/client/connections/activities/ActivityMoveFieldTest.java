@@ -42,7 +42,7 @@ public class ActivityMoveFieldTest extends BaseActivityServiceTest {
 	@Rule public ExpectedException thrown= ExpectedException.none();
 	
 	@Test
-	public void testMoveFieldACL() throws ClientServicesException {
+	public void testMoveNodeACL() throws ClientServicesException {
 		Activity activityA = new Activity();
 		activityA.setTitle(createActivityTitle());
 		activityA = activityService.createActivity(activityA);

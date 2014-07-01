@@ -8,5 +8,6 @@ ${getCommunityType}
 ${getCommunityUuid}
 ${getCommunityId}
 ${getCommunityTheme}
+${getParentLink}
 </entry>
 

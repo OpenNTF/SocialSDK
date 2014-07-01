@@ -54,6 +54,7 @@ public class CommunityTransformer extends AbstractBaseTransformer {
 		String typeXml = "";
 		String communityUuidXml = "";
 		String communityIdXml = "";
+		String parentCommunityLinkxml = "";
 		
 		for(Map.Entry<String, Object> xmlEntry : fieldmap.entrySet()){
 			
@@ -76,6 +77,11 @@ public class CommunityTransformer extends AbstractBaseTransformer {
 			}
 			
 		}
+		if(this.community.isSubCommunity()){
+			parentCommunityLinkxml = getXMLRep(getStream(sourcepath+"SubCommunityParentLinkTmpl.xml"),"parentCommunityUrl", this.community.getParentCommunityUrl());
+			xml = getXMLRep(xml, "getParentLink",parentCommunityLinkxml);
+		}
+		
 		if(StringUtil.isNotEmpty(titleXml)){
 			xml = getXMLRep(xml, "getTitle",titleXml);
 		}

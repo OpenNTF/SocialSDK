@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * ï¿½ Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -50,6 +50,7 @@ public enum CommunityXPath implements FieldEntry {
 	communityTheme("./snx:communityTheme"),
 	role("./snx:role"),
 	inviteCommunityUrl("./a:link[@rel='http://www.ibm.com/xmlns/prod/sn/community']/@href"),
+	parentCommunityUrl("a:link[@rel='http://www.ibm.com/xmlns/prod/sn/parentcommunity']/@href"),
 	inviteUrl("./a:link[@rel='edit']/@href");
 	
 	private final XPathExpression path;

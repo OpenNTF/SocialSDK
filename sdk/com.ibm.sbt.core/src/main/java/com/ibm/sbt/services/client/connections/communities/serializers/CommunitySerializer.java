@@ -74,7 +74,6 @@ public class CommunitySerializer extends AtomEntitySerializer<Community> {
 	
 	public String subCommUpdatePayload() throws ClientServicesException {
 		generateSubCommUpdatePayload();
-		System.out.println(serializeToString());
 		return serializeToString();
 	}
 

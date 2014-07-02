@@ -18,12 +18,12 @@ package com.ibm.sbt.services.client.connections.activities;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
+import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
 import com.ibm.commons.xml.XMLException;
 import com.ibm.sbt.security.authentication.AuthenticationException;
 import com.ibm.sbt.services.client.ClientServicesException;
@@ -89,15 +89,24 @@ public class ActivityMoveFieldTest extends BaseActivityServiceTest {
 		activityService.moveNode(srcActivityNode.getActivityNodeUuid(), activityB.getActivityUuid());
 
 		BasicEndpoint endpoint = (BasicEndpoint)activityService.getEndpoint();
+		ActivityNode read = null;
 		try {
 			endpoint.logout();
-			endpoint.login(TestEnvironment.getSecondaryUserEmail(), TestEnvironment.getSecondaryUserPassword());
+			endpoint.login(TestEnvironment.getSecondaryUsername(), TestEnvironment.getSecondaryUserPassword());
+			read = activityService.getActivityNode(srcActivityNode.getActivityNodeUuid());
 		} catch (AuthenticationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		ActivityNode read = activityService.getActivityNode(srcActivityNode.getActivityNodeUuid());
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } finally {
+            try {
+                endpoint.logout();
+                endpoint.login(TestEnvironment.getCurrentUsername(), TestEnvironment.getCurrentUserPassword());
+            } catch (AuthenticationException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+           
+        }
 		Assert.assertNotNull(srcActivityNode);
 
 		Field movedTextField = read.getFieldByName(textField.getName());
@@ -122,6 +131,7 @@ public class ActivityMoveFieldTest extends BaseActivityServiceTest {
 		Assert.assertEquals("Hidden_Text_Field", ((TextField)movedHiddenTextField).getSummary());
 	}
 
+	
 	@Test
 	public void testMoveField() throws ClientServicesException, XMLException {
 		// Create activity nodes

@@ -35,6 +35,7 @@
 				<include>com.ibm.sbt:sbt.jquery182</include>
 				<include>com.ibm.sbt:sbt.bootstrap211</include>
 				<include>com.ibm.sbt:sbt.ckeditor422</include>
+				<include>com.ibm.sbt:com.ibm.sbt.proxy.web</include>
 			</includes>
 			<binaries>
 				<outputDirectory>sbtsdk/redist/war</outputDirectory>

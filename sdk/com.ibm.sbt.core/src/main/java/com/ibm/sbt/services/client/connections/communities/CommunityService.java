@@ -315,8 +315,14 @@ public class CommunityService extends ConnectionsService {
 		if (null == community) {
 			throw new ClientServicesException(null, Messages.NullCommunityObjectException);
 		}
-		Object communityPayload =  community.constructCreateRequestBody();
-		String url = CommunityUrls.COMMUNITIES_MY.format(this);
+		
+		Object communityPayload = null;
+	    if(isSubCommunity(community)){
+	        communityPayload = community.constructSubCommUpdateRequestBody();
+	    }else{
+	        communityPayload = community.constructCreateRequestBody();
+	    }
+	    String url = CommunityUrls.COMMUNITIES_MY.format(this);
 		Response response = createData(url, null, communityPayload,ClientService.FORMAT_CONNECTIONS_OUTPUT);
 		checkResponseCode(response, HTTPCode.CREATED);
 		community.clearFieldsMap();

@@ -235,6 +235,15 @@ public class Community extends AtomEntity {
 	}
 
 	/**
+     * sets the url of of the parent community if the community is a sub community
+     * requires a url as returned from the {@link #getCommunityUrl()} method
+     * @return The url of the parent community or null, if the community is not a sub community.
+     */
+    public void setParentCommunityUrl(String url){
+        setAsString(CommunityXPath.parentCommunityUrl, url);
+    }
+
+	/**
 	 * @return the published date of community
 	 */
 	public Date getPublished(){

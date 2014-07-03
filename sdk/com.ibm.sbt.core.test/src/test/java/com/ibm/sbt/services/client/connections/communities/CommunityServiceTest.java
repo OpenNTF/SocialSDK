@@ -2,23 +2,18 @@ package com.ibm.sbt.services.client.connections.communities;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-<<<<<<< HEAD
 import static org.junit.Assert.fail;
-
-=======
->>>>>>> 74625fd... added sub community creation support
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-<<<<<<< HEAD
 
 import com.ibm.sbt.services.BaseUnitTest;
 import com.ibm.sbt.services.client.ClientServicesException;
-=======
+
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.connections.communities.model.CommunityXPath;
->>>>>>> 74625fd... added sub community creation support
+
 import com.ibm.sbt.test.lib.TestEnvironment;
 
 /**

@@ -233,6 +233,10 @@ public class Community extends AtomEntity {
 			return null;
 		}
 	}
+	
+	public void setParentCommunityUrl(String parentCommunityUrl){
+		this.setAsString(CommunityXPath.parentCommunityUrl, parentCommunityUrl);
+	}
 
 	/**
 	 * @return the published date of community

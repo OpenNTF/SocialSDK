@@ -330,6 +330,19 @@ public class CommunityService extends ConnectionsService {
 		return urlLocation.substring(urlLocation.indexOf(COMMUNITY_UNIQUE_IDENTIFIER+"=") + (COMMUNITY_UNIQUE_IDENTIFIER+"=").length());
 	}
 	
+	public String createSubCommunity(Community subCommunity, Community parentCommunity) throws ClientServicesException{
+		if (null == subCommunity || parentCommunity == null) {
+			throw new ClientServicesException(null, Messages.NullCommunityObjectException);
+		}
+		subCommunity.setParentCommunityUrl(parentCommunity.getSelfUrl());
+		Object communityPayload =  subCommunity.constructSubCommUpdateRequestBody();
+		String url = CommunityUrls.COMMUNITIES_MY.format(this);
+		Response response = createData(url, null, communityPayload,ClientService.FORMAT_CONNECTIONS_OUTPUT);
+		checkResponseCode(response, HTTPCode.CREATED);
+		subCommunity.clearFieldsMap();
+		return extractCommunityIdFromHeaders(response);
+	}
+	
 	/**
 	 * To retrieve a community entry, use the edit link for the 
 	 * community entry which can be found in the my communities feed.

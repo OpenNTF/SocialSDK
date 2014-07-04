@@ -220,26 +220,6 @@ public class Community extends BaseEntity {
 	}
 	
 	/**
-	 * checks if a community is a sub community
-	 * @return true if the community is a sub community else false
-	 */
-	public boolean isSubCommunity(){
-		return exists(CommunityXPath.parentCommunityUrl);
-	}
-	
-	/**
-	 * gets the url of of the parent community if the community is a sub community
-	 * @return The url of the parent community or null, if the community is not a sub community.
-	 */
-	public String getParentCommunityUrl(){
-		if(isSubCommunity()){
-			return getAsString(CommunityXPath.parentCommunityUrl);
-		}else {
-			return null;
-		}
-	}
-
-	/**
      * sets the url of of the parent community if the community is a sub community
      * requires a url as returned from the {@link #getCommunityUrl()} method
      * @return The url of the parent community or null, if the community is not a sub community.

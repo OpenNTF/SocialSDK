@@ -649,11 +649,7 @@ public class CommunityService extends BaseService {
 		try {
 			Object communityPayload;
 			try {
-			    if(isSubCommunity(community)){
-			        communityPayload = community.constructSubCommUpdateRequestBody();
-			    }else{
-			        communityPayload = community.constructCreateRequestBody();
-			    }
+		        communityPayload = community.constructCreateRequestBody();
 			} catch (TransformerException e) {
 				throw new CommunityServiceException(e, Messages.CreateCommunityPayloadException);
 			}

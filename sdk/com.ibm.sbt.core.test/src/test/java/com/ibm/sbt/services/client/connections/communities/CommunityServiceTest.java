@@ -68,26 +68,6 @@ public class CommunityServiceTest extends BaseUnitTest {
     }
 
     @Test
-    public final void testAddRemoveMember() throws Exception {
-        String id = TestEnvironment.getSecondaryUserEmail();
-        if (TestEnvironment.isSmartCloudEnvironment())
-            id = TestEnvironment.getSecondaryUserUuid();
-        Member newMember = new Member(communityService,
-                id);
-        newMember.setName("test name" + System.currentTimeMillis());
-        communityService.addMember(community.getCommunityUuid(), newMember);
-        EntityList<Member> members = communityService.getMembers(community
-                .getCommunityUuid());
-        for (Member member : members) {
-            assertNotNull(member.getUserid());
-            assertNotNull(member.getName());
-        }
-        communityService.updateMember(community.getCommunityUuid(), newMember);
-        communityService.removeMember(community.getCommunityUuid(),
-                id);
-    }
-
-    @Test
     public final void testSubs() throws Exception {
         
         Community sub  = new Community(communityService, "");

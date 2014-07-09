@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2013
+ * Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -219,6 +219,15 @@ public class Community extends BaseEntity {
 		setAsString(CommunityXPath.communityType, communityType);	
 	}
 	
+	/**
+     * sets the url of of the parent community if the community is a sub community
+     * requires a url as returned from the {@link #getCommunityUrl()} method
+     * @return The url of the parent community or null, if the community is not a sub community.
+     */
+    public void setParentCommunityUrl(String url){
+        setAsString(CommunityXPath.parentCommunityUrl, url);
+    }
+
 	/**
 	 * @return the published date of community
 	 */

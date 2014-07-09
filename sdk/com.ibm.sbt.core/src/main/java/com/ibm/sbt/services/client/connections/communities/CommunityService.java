@@ -1,5 +1,5 @@
 /*
- * ��� Copyright IBM Corp. 2013
+ * Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -320,6 +320,7 @@ public class CommunityService extends BaseService {
 		if (StringUtil.isEmpty(communityUuid)){
 			throw new CommunityServiceException(null, Messages.NullCommunityIdException);
 		}
+
 		if(null == parameters){
 			parameters = new HashMap<String, String>();
 		}
@@ -648,7 +649,7 @@ public class CommunityService extends BaseService {
 		try {
 			Object communityPayload;
 			try {
-				communityPayload =  community.constructCreateRequestBody();
+		        communityPayload = community.constructCreateRequestBody();
 			} catch (TransformerException e) {
 				throw new CommunityServiceException(e, Messages.CreateCommunityPayloadException);
 			}

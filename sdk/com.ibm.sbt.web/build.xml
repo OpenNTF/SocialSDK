@@ -71,24 +71,27 @@
 	<!-- RUN DOJO AMD -->
 	<target name="run.dojo-amd-build" depends="prepareDojoAMD">
 		<exec executable="${dojo.build}">
-			<arg
-				line="-p ${src.dir}/${dojo.amd.dir}/sbt-dojo-amd.profile.js releaseDir=${release.dir}/${dojo.amd.dir}" />
+			<arg value="-p" />
+			<arg value="${src.dir}/${dojo.amd.dir}/sbt-dojo-amd.profile.js" />
+			<arg value="releaseDir=${release.dir}/${dojo.amd.dir}" />
 		</exec>
 	</target>
 
 	<!-- RUN DOJO NON AMD -->
 	<target name="run.dojo-nonamd-build" depends="prepareDojoNonAMD">
 		<exec dir="${scriptsFolder}" executable="${dojo.build}">
-			<arg
-				line="-p ${src.dir}/${dojo.nonamd.dir}/sbt-dojo-nonamd.profile.js releaseDir=${release.dir}/${dojo.noamd.dir}" />
+			<arg value="-p" />
+			<arg value="${src.dir}/${dojo.nonamd.dir}/sbt-dojo-nonamd.profile.js" />
+			<arg value="releaseDir=${release.dir}/${dojo.noamd.dir}" />
 		</exec>
 	</target>
 
 	<!-- RUN JQUERY -->
 	<target name="run.jquery-build" depends="prepareJQuery">
 		<exec dir="${scriptsFolder}" executable="${dojo.build}">
-			<arg
-				line="-p ${src.dir}/${jquery.dir}/sbt-jquery.profile.js releaseDir=${release.dir}/${jquery.dir}" />
+			<arg line="-p" />
+			<arg value="${src.dir}/${jquery.dir}/sbt-jquery.profile.js" />
+			<arg value="releaseDir=${release.dir}/${jquery.dir}" />
 		</exec>
 	</target>
 

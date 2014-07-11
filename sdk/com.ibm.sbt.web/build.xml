@@ -17,8 +17,7 @@
 			<pathelement location="${release.path}" />
 		</path>
 
-		<pathconvert targetos="unix" property="release.dir"
-			refid="release.tmp" />
+		<pathconvert targetos="unix" property="release.dir" refid="release.tmp" />
 	</target>
 
 	<target name="clean">
@@ -52,8 +51,7 @@
 		<copy todir="${src.dir}/${dojo.nonamd.dir}/sbt/widget">
 			<fileset dir="${sbt.src.dir}/dojo" includes="**" />
 		</copy>
-		<copy file="${sbt.src.dir}/sbt-dojo-nonamd.profile.js"
-			tofile="${src.dir}/${dojo.nonamd.dir}/sbt-dojo-nonamd.profile.js" />
+		<copy file="${sbt.src.dir}/sbt-dojo-nonamd.profile.js" tofile="${src.dir}/${dojo.nonamd.dir}/sbt-dojo-nonamd.profile.js" />
 	</target>
 
 	<!-- PREPARE JQUERY -->
@@ -64,8 +62,7 @@
 		<copy todir="${src.dir}/${jquery.dir}/sbt/_bridge">
 			<fileset dir="${sbt.src.dir}/_bridges/jquery" includes="**" />
 		</copy>
-		<copy file="${src.dir}/${sbt.src.dir}/sbt-jquery.profile.js"
-			tofile="${src.dir}/${jquery.dir}/sbt-jquery.profile.js" />
+		<copy file="${src.dir}/${sbt.src.dir}/sbt-jquery.profile.js" tofile="${src.dir}/${jquery.dir}/sbt-jquery.profile.js" />
 	</target>
 
 	<!-- RUN DOJO AMD -->

@@ -99,7 +99,7 @@ if [ "$use_node" = "0" ]; then
     cmdflags="`dirname "$0"`/../../dojo/dojo.js"
 else
     cmd="java"
-    cmdflags="-Xms256m -Xmx256m -cp `dirname "$0"`/../shrinksafe/js.jar:`dirname "$0"`/../closureCompiler/compiler.jar:`dirname "$0"`/../shrinksafe/shrinksafe.jar org.mozilla.javascript.tools.shell.Main  `dirname "$0"`/../../dojo/dojo.js baseUrl=`dirname "$0"`/../../dojo"
+    cmdflags="-Xms256m -Xmx256m -cp \"`dirname "$0"`/../shrinksafe/js.jar:`dirname "$0"`/../closureCompiler/compiler.jar:`dirname "$0"`/../shrinksafe/shrinksafe.jar\" org.mozilla.javascript.tools.shell.Main  \"`dirname "$0"`/../../dojo/dojo.js\" \"baseUrl=`dirname "$0"`/../../dojo\""
 fi
 
 $cmd $cmdflags load=build $ba

@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<responses>
+<response statusCode="200" statusReason="OK">
+<headers>
+    <header>
+        <name><![CDATA[content-language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header>
+    <header>
+        <name><![CDATA[content-type]]></name>
+        <value><![CDATA[application/json]]></value>
+    </header>
+    <header>
+        <name><![CDATA[date]]></name>
+        <value><![CDATA[Thu, 10 Jul 2014 10:58:39 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[p3p]]></name>
+        <value><![CDATA[CP="NON CUR OTPi OUR NOR UNI"]]></value>
+    </header>
+    <header>
+        <name><![CDATA[vary]]></name>
+        <value><![CDATA[Accept-Encoding]]></value>
+    </header>
+    <header>
+        <name><![CDATA[transfer-encoding]]></name>
+        <value><![CDATA[chunked]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-powered-by]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-ua-compatible]]></name>
+        <value><![CDATA[IE=9,8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-lconn-auth]]></name>
+        <value><![CDATA[true]]></value>
+    </header>
+    <header>
+        <name><![CDATA[cache-control]]></name>
+        <value><![CDATA[private, must-revalidate, max-age=0, no-cache=set-cookie, private, must-revalidate]]></value>
+    </header>
+    <header>
+        <name><![CDATA[expires]]></name>
+        <value><![CDATA[Thu, 01 Dec 1994 16:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=iqcEPIWqmlBjTdJbIbDdzRqDmydVKfzGzo3D89VO+iAmhHntv8xh8BfxyhiMaC3GvjQ1KTTVZjX2y0oGar6aDJ7W2F3QV2nrkk7QVuUtKn7mVahR7eLEOwFmoDIP0byCIbOPcr2Wrhd0CoTO97TOW23X5qkbPqTgADfYpU52KS24jwWA9+6nU1+nGpiuHJCAsqSisgDGga3nXs4APJlJONpbzN4A91U5mPsBo6iAAIKzeJZ1YYl+Ql6mBr9gb5+aEFTPCQGG+LagpKV0umFhHTpiwHl+/795Sq7jYK7+aDgEIrSnlm0SkmNn6XqhvYgeArg4BYaQKNNsdwXCYvvIQ6TEDlKmfblmIHsqPd50gc+W2bF584X75wZogXWOXOGN8bzAdTLxyxZiRuevM93m3grJlwGHom0lbioCvnnCGCcAv7hQRUyEY5BOdBtnKuUqURiq8fvq6UWWE4v8OCmusPzXfCXhTQG5i3+OMkjh5OZzuOZJd9ch1m3afQi369uqd91tMv+6FaeyhtF3VLp5jzNnvDsCcSz3AMTQ6s7Yr/nHsK6j4S+nCAoGsZDjhPQUxzuorBsH5wncOAxgeilpXNFP0UZLGF+K5M+qF4g7so6bPLwA6oaiexyuYZzUcRZv8f1JtiLeWmx9KK6Ew5SCC9YaJpf6Rt8tR+oPz9XgzTI/g0byr587mpRARybcyjuCVOGM0stkg/0/UA2wkkQJgVqCPRqYkVqOSlGUD7BT8cnt7ssMUusQsVOkrSKwjfHE;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[user_lang=ZW5fVVM%3D-MjAwMDAyNjk%3D;Secure; Domain=cfdev3.swg.usma.ibm.com; Path=/; Expires=Fri, 11-Jul-14 10:58:39 GMT;Secure;]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[BIGipServerCFDev3-WebSEAL-80-fe=655360266.20480.0000;secure; path=/]]></value>
+    </header></headers>
+<data><![CDATA[{"entry":{"appData":{"connections":{"isExternal":"false","organizationId":"urn:lsid:lconn.ibm.com:connections.organization:20000266"}},"displayName":"Lorenzo Boccaccia","emails":[{"type":"primary","value":"lorenzo_boccaccia@mailinator.com","primary":true}],"id":"urn:lsid:lconn.ibm.com:profiles.person:20000269"}}]]></data>
+</response>
+<response statusCode="200" statusReason="OK">
+<headers>
+    <header>
+        <name><![CDATA[content-language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header>
+    <header>
+        <name><![CDATA[content-type]]></name>
+        <value><![CDATA[application/atom+xml;type=feed]]></value>
+    </header>
+    <header>
+        <name><![CDATA[date]]></name>
+        <value><![CDATA[Thu, 10 Jul 2014 10:58:41 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[p3p]]></name>
+        <value><![CDATA[CP="NON CUR OTPi OUR NOR UNI"]]></value>
+    </header>
+    <header>
+        <name><![CDATA[vary]]></name>
+        <value><![CDATA[Accept-Encoding]]></value>
+    </header>
+    <header>
+        <name><![CDATA[transfer-encoding]]></name>
+        <value><![CDATA[chunked]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-powered-by]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-ua-compatible]]></name>
+        <value><![CDATA[IE=9,8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-lconn-auth]]></name>
+        <value><![CDATA[true]]></value>
+    </header>
+    <header>
+        <name><![CDATA[cache-control]]></name>
+        <value><![CDATA[private, must-revalidate, max-age=0, no-cache=set-cookie]]></value>
+    </header>
+    <header>
+        <name><![CDATA[expires]]></name>
+        <value><![CDATA[Thu, 01 Dec 1994 16:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=llV2L08Vaz/5cb02GtU71+DfnGNFkKD0gdVXaT1bRIvsnOPnJ14yosAKF4LnI9cBkGddi9acIl257efl3JpJPLfQDIG8zBpw2MovcD3uF8SJtVDck+Ugpqkl7MdEttXk2gobKiyro5F+DLX6Hks5R9PiRAVx4Zm15+I1a6XccbLc68SVAC5fjawvKl91jXs1vi0Dy3qhpjnguBIR12tdXqPQwhrHPNqFzDkDqigcCvsYUxYfzHHobIhC/7Rl1igM0KwZI/upXI6fLchyCmGNdxblQhrxJ+nOuxvUw1BPYTBbCey+uKNHl4vO7GdI7pM95L/4MRON3Jq7sB7WhbQfKJWDzJtzKyy8/AezJRkwDH8+xWLO3ip8Ip8YooDtqhG1wYuLMXmiix+UKR2Zm0AbYH2ymrxkqbySEYGNzSmWV099pb6HGCBzcnWzFrgVFL5VNLp3PjQxQ1qoBASu+LwupRIYJvygRu42sWAsj28uLJTBfAxdLicvJ8DHieofHpYZQ1v+TCG4JWXeCVVJteLHGgsWXVdTnG7yatCCPn7MrLT1ZU81bVkHbdE3vz6uYrNJVaSotODYQkdDt5OeHjsTcxhNnAWK9CMSbbdUdMswdwr0tfJOlAvur8NpctrZ5mOBeQIVbC5o7N73v7z68k2lBQBEche5BIfuY8ioymjf6bz20C9opwO36jL/hi2zppu978qeCTgzBP+pa4ZqOvkembZVISc/oL53UiBEfECY0vp7N+Osh7zJlWXtA7v7SoE1;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[entitlements=MzYxMTA2NGUxZjI3MDNhYTUyZTUzNzRhZmRmMDYyYzY1NGI2N2MwOQ==-YmhfYWN0aXZpdGllcyxiaF9hY3Rpdml0aWVzX19hbGxvd19vdmVyYWdlLGJoX2NoYXQsYmhfY29tbXVuaXRpZXMsYmhfY29udGFjdHMsYmhfZGFzaGJvYXJkLGJoX2ZlZWRiYWNrLGJoX2ZpbGVyLGJoX2ZpbGVyX19hbGxvd19vdmVyYWdlLGJoX2ZvcnVtcyxiaF93aGF0c19uZXcsYnNzX2FkbWluLGJzc19pbnZpdGVfZ3Vlc3QsbGNfYWN0aXZpdGllcyxsY19uZXdzLA==-MjAwMDAyNjk=;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token=878d9b0c-d44a-47b4-8019-8ef81bb3303e;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token_forum=25ad721e-79d0-4c16-aeac-72184d2abab7;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[JSESSIONID=0000_gtXM-cFBPO4kvD0RwbEU2w:18of2tvfe;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[user_lang=ZW5fVVM%3D-MjAwMDAyNjk%3D;Secure; Domain=cfdev3.swg.usma.ibm.com; Path=/; Expires=Fri, 11-Jul-14 10:58:41 GMT;Secure;]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[BIGipServerCFDev3-WebSEAL-80-fe=655360266.20480.0000;secure; path=/]]></value>
+    </header></headers>
+<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?><atom:feed xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:cmisra="http://docs.oasis-open.org/ns/cmis/restatom/200908/" xmlns:cmism="http://docs.oasis-open.org/ns/cmis/messaging/200908/" xmlns:lcmis="http://www.ibm.com/xmlns/prod/sn/cmis" xmlns:cmis="http://docs.oasis-open.org/ns/cmis/core/200908/" xmlns:app="http://www.w3.org/2007/app" xmlns:atom="http://www.w3.org/2005/Atom"><atom:title type="text">Folders Shared With Me</atom:title><atom:author><atom:name>Lorenzo Boccaccia</atom:name><atom:email></atom:email><lcmis:email></lcmis:email><snx:userid>20000269</snx:userid><snx:userState>active</snx:userState><lcmis:displayName>Lorenzo Boccaccia</lcmis:displayName><lcmis:principalId>20000269</lcmis:principalId><snx:orgId>20000266</snx:orgId><snx:orgName>Unify</snx:orgName></atom:author><atom:updated>2014-07-10T10:58:41.358Z</atom:updated><atom:id>http://www.ibm.com/xmlns/prod/sn/cmis/snx:virtual!.!collectionssharedwith</atom:id><atom:link href="https://apps.cfdev3.swg.usma.ibm.com/files/basic/cmis/repository/p%2120000269/folderc/snx%3Avirtual%21.%21collectionssharedwith" rel="self" type="application/atom+xml;type=feed"></atom:link><atom:link href="https://apps.cfdev3.swg.usma.ibm.com/files/basic/cmis/repository/p%2120000269/servicedoc" rel="service" type="application/atomsvc+xml"></atom:link><atom:link href="https://apps.cfdev3.swg.usma.ibm.com/files/basic/cmis/repository/p%2120000269/object/snx%3Avirtual%21.%21collectionssharedwith" rel="via" type="application/atom+xml;type=entry" cmisra:id="snx:virtual!.!collectionssharedwith" xmlns:cmisra="http://docs.oasis-open.org/ns/cmis/restatom/200908/"></atom:link><atom:link href="https://apps.cfdev3.swg.usma.ibm.com/files/basic/cmis/repository/p%2120000269/folderc/snx%3Aroot" rel="up" type="application/atom+xml;type=entry" cmisra:id="snx:root" xmlns:cmisra="http://docs.oasis-open.org/ns/cmis/restatom/200908/"></atom:link><atom:link href="https://apps.cfdev3.swg.usma.ibm.com/files/basic/cmis/repository/p%2120000269/mfolderc/snx%3Avirtual%21.%21collectionssharedwith" rel="http://www.ibm.com/xmlns/prod/sn/cmis/multipart-form/folderChildrenCollection" type="text/html"></atom:link><cmisra:numItems>0</cmisra:numItems><atom:link href="https://apps.cfdev3.swg.usma.ibm.com/files/basic/cmis/repository/p%2120000269/folderc/snx%3Avirtual%21.%21collectionssharedwith?skipCount=0&amp;maxItems=10" rel="first" type="application/atom+xml;type=feed"></atom:link><app:collection href="https://apps.cfdev3.swg.usma.ibm.com/files/basic/cmis/repository/p%2120000269/folderc/snx%3Avirtual%21.%21collectionssharedwith"><atom:title type="text">Folders Shared With Me</atom:title><app:accept>*/*</app:accept></app:collection></atom:feed>]]></data>
+</response>
+</responses>

@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<responses>
+<response statusCode="400" statusReason="Bad Request">
+<headers>
+    <header>
+        <name><![CDATA[content-language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header>
+    <header>
+        <name><![CDATA[content-type]]></name>
+        <value><![CDATA[application/xml;charset=UTF-8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[date]]></name>
+        <value><![CDATA[Thu, 10 Jul 2014 11:05:55 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[p3p]]></name>
+        <value><![CDATA[CP="NON CUR OTPi OUR NOR UNI"]]></value>
+    </header>
+    <header>
+        <name><![CDATA[server]]></name>
+        <value><![CDATA[IBM OpenActivities (v1.0)]]></value>
+    </header>
+    <header>
+        <name><![CDATA[vary]]></name>
+        <value><![CDATA[Accept-Encoding]]></value>
+    </header>
+    <header>
+        <name><![CDATA[transfer-encoding]]></name>
+        <value><![CDATA[chunked]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-powered-by]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-ua-compatible]]></name>
+        <value><![CDATA[IE=9,8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-lconn-auth]]></name>
+        <value><![CDATA[true]]></value>
+    </header>
+    <header>
+        <name><![CDATA[pragma]]></name>
+        <value><![CDATA[no-cache]]></value>
+    </header>
+    <header>
+        <name><![CDATA[cache-control]]></name>
+        <value><![CDATA[private, no-store, must-revalidate,max-age=0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[expires]]></name>
+        <value><![CDATA[Thu, 01 Jan 1970 00:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=97WRyqbyK/lvBSXptNw7eoTB/uFJBO6jGyE2WTlVWLD1ykm5givh1RkQag5EiIuAj9ZCxXN/IslgXBL0gAPjxXN8ne3AVPo7vlwQ4lXhD6RVFFmTCu/OpYz2ZeL36GD+maKzvncDBBeyWUu5AzsBb1jhu151TVQ4Cba3Ja9elb5/l1v4cbOHRmdUofNGvjL8iRH2S/elMzvdc3eN7I+vWpUq32ZxxINoNzvUhOmUXPfhCJlvu4/F2j/PK8mY4RNU6HYsSrx4dC5JyFwilIGiwANFYsE+0l7dy2TZeCWzZiwbRXOUcaomBe5+4WYJ8JFBJJ3tCIJsn1bOvkHrTsMb8hMC/urjzKIs1p0rgh6MaORSSvB6Tjp9AN4ahS40UOut1pFQLHfodVZeczlF+02rmSa/Vd7FyEJcmnf9+/Y40bg3O3+ol1/KrS71geTKnCYyN0lLhdC9d+kSAfcvuZ05JCFbELdLEJAAeoNlu0CuKeraGlrp4wYzDmlkbo8FcDq4wSwTo6tQ2qF79U84WbYEnU4YlcTIBa01PXzWPS4AUiiW3hZ3wL9QeEnYBkw7PiPsRBAaKJbJ1CZY1AQKgGDWCkkDlA0OFM3hElYP1vQKKyKbhi74gZVor7heJkETHouRJ46obuiUDcYK6okmy56SH/vqDWegh+xfZTj1qbCTgqR2ShFPD6zywjv4s1ac3LaSFs62LCqLcNhppYk8tGrMUM1MUCzSgIr6KM3HygvyANXx3ol4ax0ZSlXIJrRHLsuG;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[entitlements=MzYxMTA2NGUxZjI3MDNhYTUyZTUzNzRhZmRmMDYyYzY1NGI2N2MwOQ==-YmhfYWN0aXZpdGllcyxiaF9hY3Rpdml0aWVzX19hbGxvd19vdmVyYWdlLGJoX2NoYXQsYmhfY29tbXVuaXRpZXMsYmhfY29udGFjdHMsYmhfZGFzaGJvYXJkLGJoX2ZlZWRiYWNrLGJoX2ZpbGVyLGJoX2ZpbGVyX19hbGxvd19vdmVyYWdlLGJoX2ZvcnVtcyxiaF93aGF0c19uZXcsYnNzX2FkbWluLGJzc19pbnZpdGVfZ3Vlc3QsbGNfYWN0aXZpdGllcyxsY19uZXdzLA==-MjAwMDAyNjk=;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token=e5dd5161-39a3-4034-824f-f94ceb7a34ae;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token_forum=8fba13a2-c9ac-499a-b4af-f3169347027b;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[JSESSIONID=0000iwo2MSdLe1b2Hf0nngluEa8:18of2u1ot;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[user_lang=ZW5fVVM%3D-MjAwMDAyNjk%3D;Secure; Domain=cfdev3.swg.usma.ibm.com; Path=/; Expires=Fri, 11-Jul-14 11:05:55 GMT;Secure;]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[BIGipServerCFDev3-WebSEAL-80-fe=655360266.20480.0000;secure; path=/]]></value>
+    </header></headers>
+<data><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+
+
+
+
+
+
+
+<error xmlns="http://www.ibm.com/xmlns/prod/sn">
+  <code></code>
+  <message>Identifier: LC1DFEFF55658D42C2BD01BBD5BFF389CB
+No UUID was provided</message>
+  <displaymessage></displaymessage>
+  <errortype></errortype>
+
+  <trace>java.lang.Exception: Identifier: LC1DFEFF55658D42C2BD01BBD5BFF389CB
+No UUID was provided</trace>
+</error>
+]]></data>
+</response>
+</responses>

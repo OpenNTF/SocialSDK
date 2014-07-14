@@ -1,0 +1,310 @@
+<?xml version="1.0"?>
+<responses>
+<response statusCode="201" statusReason="Created">
+<headers>
+    <header>
+        <name><![CDATA[accept]]></name>
+        <value><![CDATA[application/atom+xml]]></value>
+    </header>
+    <header>
+        <name><![CDATA[content-language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header>
+    <header>
+        <name><![CDATA[content-type]]></name>
+        <value><![CDATA[application/atom+xml;charset=UTF-8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[date]]></name>
+        <value><![CDATA[Thu, 10 Jul 2014 10:56:58 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[location]]></name>
+        <value><![CDATA[https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activitynode?activityNodeUuid=8b76a335-9288-4666-a4c7-5aca0320d068]]></value>
+    </header>
+    <header>
+        <name><![CDATA[p3p]]></name>
+        <value><![CDATA[CP="NON CUR OTPi OUR NOR UNI"]]></value>
+    </header>
+    <header>
+        <name><![CDATA[server]]></name>
+        <value><![CDATA[IBM OpenActivities (v1.0)]]></value>
+    </header>
+    <header>
+        <name><![CDATA[vary]]></name>
+        <value><![CDATA[Accept-Encoding]]></value>
+    </header>
+    <header>
+        <name><![CDATA[transfer-encoding]]></name>
+        <value><![CDATA[chunked]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-powered-by]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-ua-compatible]]></name>
+        <value><![CDATA[IE=9,8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-lconn-auth]]></name>
+        <value><![CDATA[true]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-uuid]]></name>
+        <value><![CDATA[8b76a335-9288-4666-a4c7-5aca0320d068]]></value>
+    </header>
+    <header>
+        <name><![CDATA[cache-control]]></name>
+        <value><![CDATA[private, no-store, must-revalidate,max-age=0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[expires]]></name>
+        <value><![CDATA[Thu, 1 Jan 1970 00:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=97WRyqbyK/lvBSXptNw7eoTB/uFJBO6jGyE2WTlVWLD1ykm5givh1RkQag5EiIuAj9ZCxXN/IslgXBL0gAPjxXN8ne3AVPo7vlwQ4lXhD6RVFFmTCu/OpYz2ZeL36GD+maKzvncDBBeyWUu5AzsBb1jhu151TVQ4Cba3Ja9elb5/l1v4cbOHRmdUofNGvjL8iRH2S/elMzvdc3eN7I+vWpUq32ZxxINoNzvUhOmUXPfhCJlvu4/F2j/PK8mY4RNU6HYsSrx4dC5JyFwilIGiwANFYsE+0l7dy2TZeCWzZiwbRXOUcaomBe5+4WYJ8JFBJJ3tCIJsn1bOvkHrTsMb8hMC/urjzKIs1p0rgh6MaORSSvB6Tjp9AN4ahS40UOut1pFQLHfodVZeczlF+02rmSa/Vd7FyEJcmnf9+/Y40bg3O3+ol1/KrS71geTKnCYyN0lLhdC9d+kSAfcvuZ05JCFbELdLEJAAeoNlu0CuKeraGlrp4wYzDmlkbo8FcDq4wSwTo6tQ2qF79U84WbYEnU4YlcTIBa01PXzWPS4AUiiW3hZ3wL9QeEnYBkw7PiPsRBAaKJbJ1CZY1AQKgGDWCkkDlA0OFM3hElYP1vQKKyKbhi74gZVor7heJkETHouRJ46obuiUDcYK6okmy56SH/vqDWegh+xfZTj1qbCTgqR2ShFPD6zywjv4s1ac3LaSFs62LCqLcNhppYk8tGrMUM1MUCzSgIr6KM3HygvyANXx3ol4ax0ZSlXIJrRHLsuG;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[entitlements=MzYxMTA2NGUxZjI3MDNhYTUyZTUzNzRhZmRmMDYyYzY1NGI2N2MwOQ==-YmhfYWN0aXZpdGllcyxiaF9hY3Rpdml0aWVzX19hbGxvd19vdmVyYWdlLGJoX2NoYXQsYmhfY29tbXVuaXRpZXMsYmhfY29udGFjdHMsYmhfZGFzaGJvYXJkLGJoX2ZlZWRiYWNrLGJoX2ZpbGVyLGJoX2ZpbGVyX19hbGxvd19vdmVyYWdlLGJoX2ZvcnVtcyxiaF93aGF0c19uZXcsYnNzX2FkbWluLGJzc19pbnZpdGVfZ3Vlc3QsbGNfYWN0aXZpdGllcyxsY19uZXdzLA==-MjAwMDAyNjk=;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token=a0ce1c23-6605-4afe-bda3-6dca5528dc8e;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token_forum=2f7a624a-20a5-4bce-abf7-df0c3e5b05d9;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[JSESSIONID=0000UMMlg3DZ-DYptDTfxVUpBMu:18of2u1ot;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[user_lang=ZW5fVVM%3D-MjAwMDAyNjk%3D;Secure; Domain=cfdev3.swg.usma.ibm.com; Path=/; Expires=Fri, 11-Jul-14 10:56:58 GMT;Secure;]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[BIGipServerCFDev3-WebSEAL-80-fe=655360266.20480.0000;secure; path=/]]></value>
+    </header></headers>
+<data><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+
+
+
+
+
+
+
+
+
+
+
+
+<entry xmlns="http://www.w3.org/2005/Atom"
+  xmlns:app="http://www.w3.org/2007/app"   
+  xmlns:snx="http://www.ibm.com/xmlns/prod/sn"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+  xmlns:thr="http://purl.org/syndication/thread/1.0"
+  >
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <id>urn:lsid:ibm.com:oa:8b76a335-9288-4666-a4c7-5aca0320d068</id>
+  <title type="text">CreatedActivityNodes-1404989814881</title>
+  <updated>2014-07-10T10:56:57Z</updated>
+  <published>2014-07-10T10:56:57Z</published>
+  <author>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <snx:org><uri>https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/memberprofile?memberid=</uri>
+  </snx:org>
+  <name>Lorenzo Boccaccia</name>
+  
+  <snx:userid>20000269</snx:userid>
+  <snx:ldapid>ddf8efaf-0138-4726-b94b-598654399ef3</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </author>
+  <contributor>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <snx:org><uri>https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/memberprofile?memberid=</uri>
+  </snx:org>
+  <name>Lorenzo Boccaccia</name>
+  
+  <snx:userid>20000269</snx:userid>
+  <snx:ldapid>ddf8efaf-0138-4726-b94b-598654399ef3</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </contributor>
+  	
+    
+    
+  	     
+  	  
+  	    
+  	  
+ 	      <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="activity" label="Activity"/>
+  	  
+  	
+    
+  
+
+  <category scheme="http://www.ibm.com/xmlns/prod/sn/priority" term="1" label="Normal"/>
+  
+    
+    
+  
+  
+  
+  
+  
+  
+  
+  <category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="external" label="External"/>
+  
+  
+  
+  
+  
+    <category term="ibmsbt" />
+  
+    <category term="personal" />
+  
+    <category term="unit_test" />
+  
+  
+    <link rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/acl?activityUuid=8b76a335-9288-4666-a4c7-5aca0320d068" />
+    <link rel="http://www.ibm.com/xmlns/prod/sn/history" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activity/history?activityUuid=8b76a335-9288-4666-a4c7-5aca0320d068" />
+    <link rel="http://www.ibm.com/xmlns/prod/sn/templates" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/entrytemplates?activityUuid=8b76a335-9288-4666-a4c7-5aca0320d068" />
+   
+  
+  
+
+  
+    <app:collection href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activity?activityUuid=8b76a335-9288-4666-a4c7-5aca0320d068">
+      <title type="text">CreatedActivityNodes-1404989814881</title>
+      <app:categories href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/categories?activityUuid=8b76a335-9288-4666-a4c7-5aca0320d068"/>
+    </app:collection> 
+  
+  <snx:activity>8b76a335-9288-4666-a4c7-5aca0320d068</snx:activity>
+  
+  
+  
+    <link rel="edit" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activitynode?activityNodeUuid=8b76a335-9288-4666-a4c7-5aca0320d068" />
+  
+   
+  
+    
+      <link rel="self" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activity?activityUuid=8b76a335-9288-4666-a4c7-5aca0320d068"/>
+      
+        <link rel="alternate" type="application/xhtml+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/html/activity/recent?activityUuid=8b76a335-9288-4666-a4c7-5aca0320d068"/>
+      	<link rel="alternate" type="text/html" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/html/activity/recent?activityUuid=8b76a335-9288-4666-a4c7-5aca0320d068"/>
+      
+     
+    
+  
+ 
+  <snx:position>-2147483648</snx:position>
+  <snx:depth>0</snx:depth>  
+  
+  <snx:permissions>none, create_activity, view_activity, edit_activity, delete_activity, activity_owner, edit_activity_tags, design_activity, edit_statements, delete_statements, add_members, delete_members, create_entries, edit_personal_entries, edit_all_entries, delete_personal_entries, delete_all_entries, edit_personal_entry_tags, edit_all_entry_tags, view_members</snx:permissions>
+  <snx:icon>https://apps.cfdev3.swg.usma.ibm.com/activities/nav/common/images/iconActivities16.png</snx:icon>
+
+  
+    
+    
+    
+    
+      
+      
+        
+          <content type="text">
+          	Goal for CreatedActivityNodes-1404989814881
+      	  </content>
+        
+        
+      
+    
+  
+  
+  
+
+    
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</entry>
+]]></data>
+</response>
+</responses>

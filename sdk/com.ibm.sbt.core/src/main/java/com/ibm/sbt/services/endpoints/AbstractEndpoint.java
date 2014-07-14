@@ -20,10 +20,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import org.apache.http.client.CookieStore;
 import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
-
 import com.ibm.commons.runtime.Application;
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.util.StringUtil;
@@ -74,6 +74,9 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
     protected Map<String, Object> clientParams = new HashMap<String, Object>();
     
     private int authenticationErrorCode = 401;
+    private CookieStore cookieStore = new BasicCookieStore();
+    
+    private boolean enableCookies = false;
     
     protected static final String PLATFORM_CONNECTIONS = "connections";
     protected static final String PLATFORM_SMARTCLOUD = "smartcloud";
@@ -516,4 +519,19 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
     	this.serviceMappings.putAll(serviceMappings);
     }
 
+    /**
+     * <p>enable/disable the management of cookies by the Endpoint</p>
+     * <p>when enabled, the endpoint store the connection cookies so the server doesn't create
+     * a new session for every connection made increasing response performance for single requests.</p>
+     * <p>enable only when endpoint are maintained in a session</p>
+     * @param cookies
+     */
+    public void enableStatefulCookies(boolean enableCookies) {
+        this.enableCookies = enableCookies;
+    }
+    
+    @Override
+    public CookieStore getCookies() {
+        return enableCookies ? this.cookieStore : new BasicCookieStore();
+    }
 }

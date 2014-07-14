@@ -280,6 +280,7 @@ public class NodeEntity extends AtomEntity {
 	 * @return
 	 */
 	public Field getFieldByName(String name) {
+	    getFields();
 		if (fields != null) {
 			for (Field field : fields) {
 				if (field.getName().equals(name)) {

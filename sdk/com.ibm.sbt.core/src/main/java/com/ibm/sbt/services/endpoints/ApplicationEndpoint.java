@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * ï¿½ Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -18,12 +18,11 @@ package com.ibm.sbt.services.endpoints;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
-
+import org.apache.http.client.CookieStore;
 import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
-
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.runtime.util.UrlUtil;
 import com.ibm.sbt.security.authentication.AuthenticationException;
@@ -48,6 +47,10 @@ public class ApplicationEndpoint implements Endpoint {
     	
 	private static final int authenticationErrorCode = 401;
 	private boolean forceDisableExpectedContinue;
+
+    private boolean enableCookies = false;
+
+    private BasicCookieStore cookieStore = new BasicCookieStore();
 	
     public ApplicationEndpoint() {
     }
@@ -324,5 +327,21 @@ public class ApplicationEndpoint implements Endpoint {
 			boolean forceDisableExpectedContinue) {
 		this.forceDisableExpectedContinue = forceDisableExpectedContinue;
 	}
+
+    /**
+     * <p>enable/disable the management of cookies by the Endpoint</p>
+     * <p>when enabled, the endpoint store the connection cookies so the server doesn't create
+     * a new session for every connection made increasing response performance for single requests.</p>
+     * <p>enable only when endpoint are maintained in a session</p>
+     * @param cookies
+     */
+    public void enableStatefulCookies(boolean enableCookies) {
+        this.enableCookies  = enableCookies;
+    }
+    
+    @Override
+    public CookieStore getCookies() {
+        return enableCookies ? this.cookieStore  : new BasicCookieStore();
+    }
 	
 }

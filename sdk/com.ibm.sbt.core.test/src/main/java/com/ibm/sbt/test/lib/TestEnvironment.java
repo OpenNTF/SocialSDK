@@ -129,7 +129,7 @@ public class TestEnvironment {
                 getPropertyBasePath() + OTHER_USER_DISPLAYNAME);
     }
 
-    private static String getProperty(String p) {
+    protected static String getProperty(String p) {
         return System.getProperty(p, Context.get().getProperty(p));
     }
 

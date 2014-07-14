@@ -212,7 +212,8 @@ public abstract class TestEnvironment extends com.ibm.sbt.test.lib.TestEnvironme
 	 * @return
 	 */
 	public static String getProperty(String name) {
-	    String envp = TestEnvironmentFactory.getEnvironment().properties.getProperty(name);
+	    TestEnvironment environment = TestEnvironmentFactory.getEnvironment();
+		String envp = environment == null? null : environment.properties.getProperty(name);
 		if (envp == null) return com.ibm.sbt.test.lib.TestEnvironment.getProperty(name);
         return envp;
 	}

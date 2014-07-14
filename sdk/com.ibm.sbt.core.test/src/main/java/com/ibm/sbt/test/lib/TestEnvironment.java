@@ -1,6 +1,7 @@
 package com.ibm.sbt.test.lib;
 
 import com.ibm.commons.runtime.Context;
+import com.ibm.commons.runtime.RuntimeFactory;
 
 public class TestEnvironment {
 
@@ -130,7 +131,8 @@ public class TestEnvironment {
     }
 
     protected static String getProperty(String p) {
-        return System.getProperty(p, Context.get().getProperty(p));
+    	Context ctx = RuntimeFactory.get().getContextUnchecked();
+        return System.getProperty(p, ctx != null? Context.get().getProperty(p) : null);
     }
 
 }

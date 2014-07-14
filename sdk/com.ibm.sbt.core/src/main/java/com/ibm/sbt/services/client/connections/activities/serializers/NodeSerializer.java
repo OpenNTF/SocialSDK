@@ -79,7 +79,11 @@ class NodeSerializer extends AtomEntitySerializer<NodeEntity> {
 				Element name = addText(element(Namespace.ATOM.getUrl(), "name"), personField.getPerson().getName());
 				Element email = addText(element(Namespace.ATOM.getUrl(), "email"), personField.getPerson().getEmail());
 				Element userid = addText(element(Namespace.SNX.getUrl(), "userid"), personField.getPerson().getUserid());
-				appendChildren(element, name, email, userid);
+                if (personField.getPerson().getEmail() != null) {
+                    appendChildren(element, name, email, userid);
+                } else {
+                    appendChildren(element, name, userid);
+                };
 			} else if (field instanceof TextField) {
 				TextField textField = (TextField)field;
 				Element summary = element(Namespace.ATOM.getUrl(), "summary", 

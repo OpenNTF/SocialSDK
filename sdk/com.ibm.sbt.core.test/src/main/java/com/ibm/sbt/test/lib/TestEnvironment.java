@@ -1,6 +1,7 @@
 package com.ibm.sbt.test.lib;
 
 import com.ibm.commons.runtime.Context;
+import com.ibm.commons.runtime.RuntimeFactory;
 
 public class TestEnvironment {
 
@@ -20,7 +21,7 @@ public class TestEnvironment {
 
 	private static boolean requiresAuthentication;
 	private static boolean enableSmartcloud = System.getProperty(
-			"testEnvironment", "connections").equals("smartcloud");
+			"testEnvironment", System.getProperty("environment","connections")).equals("smartcloud");
 	private static String mockMode;
 	private static final TestEnvironment instance = new TestEnvironment();
 
@@ -133,8 +134,9 @@ public class TestEnvironment {
 				getPropertyBasePath() + name);
 	}
 
-	public static String getProperty(String name) {
-		return Context.get().getProperty(name);
-	}
+    protected static String getProperty(String p) {
+        Context ctx = RuntimeFactory.get().getContextUnchecked();
+        return System.getProperty(p, ctx != null? Context.get().getProperty(p) : null);
+    }
 
 }

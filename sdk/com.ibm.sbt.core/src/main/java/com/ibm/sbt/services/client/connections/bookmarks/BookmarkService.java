@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -24,7 +24,7 @@ import com.ibm.sbt.services.client.connections.bookmarks.feedhandler.BookmarkFee
 import com.ibm.sbt.services.endpoints.Endpoint;
 
 /**
- * The Bookmarks application of IBM� Connections is a social bookmarking tool that you can use to save, organize, and share Internet and intranet bookmarks. 
+ * The Bookmarks application of IBM© Connections is a social bookmarking tool that you can use to save, organize, and share Internet and intranet bookmarks. 
  * The Bookmarks API allows application programs to read and write to the collections of bookmarks stored in the Bookmarks application.
  * 
  * @author mwallace

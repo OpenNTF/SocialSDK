@@ -37,7 +37,7 @@ import com.ibm.sbt.services.client.connections.follow.transformer.FollowTransfor
 import com.ibm.sbt.services.endpoints.Endpoint;
 
 /**
- * Use this Service to keep track of IBM� Connections resources that interest you, such as a person or community, a blog or a particular file.
+ * Use this Service to keep track of IBM© Connections resources that interest you, such as a person or community, a blog or a particular file.
  * @author Manish Kataria 
  * @author Carlos Manias
  * 

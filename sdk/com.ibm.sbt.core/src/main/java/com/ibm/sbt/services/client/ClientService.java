@@ -34,7 +34,6 @@ import static com.ibm.sbt.services.client.base.CommonConstants.URL_PARAM;
 import static com.ibm.sbt.services.client.base.CommonConstants.UTF8;
 import static com.ibm.sbt.services.client.base.CommonConstants.XML;
 import static com.ibm.sbt.services.client.base.CommonConstants.HTML;
-
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
@@ -53,13 +52,12 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.GZIPInputStream;
-
 import javax.servlet.http.HttpServletResponse;
-
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
+import org.apache.http.client.CookieStore;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
@@ -82,7 +80,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.util.EntityUtils;
 import org.w3c.dom.Node;
-
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.runtime.NoAccessSignal;
 import com.ibm.commons.runtime.util.UrlUtil;
@@ -243,11 +240,13 @@ public abstract class ClientService {
 	 * @param httpClient
 	 * @throws ClientServicesException
 	 */
-	protected void initialize(DefaultHttpClient httpClient) throws ClientServicesException {
-		if (endpoint != null) {
-			endpoint.initialize(httpClient);
-		}
-	}
+    protected void initialize(DefaultHttpClient httpClient) throws ClientServicesException {
+        if (endpoint != null) {
+            CookieStore cookies = endpoint.getCookies();
+            httpClient.setCookieStore(cookies);
+            endpoint.initialize(httpClient);
+        }
+    }
 
 	/**
 	 * Return true if force trust SSL certificate is set for the associated Endpoint.

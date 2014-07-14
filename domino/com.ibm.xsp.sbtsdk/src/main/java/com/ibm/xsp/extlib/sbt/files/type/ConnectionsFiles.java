@@ -43,6 +43,7 @@ import com.ibm.sbt.services.client.ClientService.HandlerXml;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.connections.ConnectionsService;
 import com.ibm.sbt.services.client.connections.files.FileService;
+import com.ibm.sbt.services.client.connections.files.FileServiceException;
 import com.ibm.sbt.services.client.connections.files.model.FileCreationParameters;
 import com.ibm.sbt.services.client.connections.files.model.FileRequestParams;
 import com.ibm.sbt.services.client.connections.files.model.Headers;
@@ -351,17 +352,17 @@ public class ConnectionsFiles extends AbstractType {
         p.visibility = FileCreationParameters.Visibility.PUBLIC;
         InputStream is;
 
-       try {
-    	  
-    	    is = new FileInputStream(serverFile);
+     
+	    try {
+			is = new FileInputStream(serverFile);
 			com.ibm.sbt.services.client.connections.files.File entry = svc.uploadFile(is,name, serverFile.length(),p.buildParameters());
-				 
-		}catch (ClientServicesException e) {
-            throw new FacesExceptionEx(e);
-        } catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (FileServiceException e) {
+			throw new FacesExceptionEx(e);
+		} catch (FileNotFoundException e) {
+			throw new FacesExceptionEx(e);
 		}
+				 
+		
        
     }
 

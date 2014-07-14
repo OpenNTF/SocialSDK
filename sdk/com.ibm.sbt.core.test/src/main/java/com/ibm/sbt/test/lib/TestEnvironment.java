@@ -134,7 +134,7 @@ public class TestEnvironment {
 				getPropertyBasePath() + name);
 	}
 
-    protected static String getProperty(String p) {
+    public static String getProperty(String p) {
         Context ctx = RuntimeFactory.get().getContextUnchecked();
         return System.getProperty(p, ctx != null? Context.get().getProperty(p) : null);
     }

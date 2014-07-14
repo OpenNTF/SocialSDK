@@ -4,7 +4,7 @@
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Thu, 10 Jul 2014 12:17:03 GMT]]></value>
+        <value><![CDATA[Mon, 14 Jul 2014 15:46:46 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -28,7 +28,7 @@
     </header>
     <header>
         <name><![CDATA[Last-Modified]]></name>
-        <value><![CDATA[Thu, 10 Jul 2014 12:17:03 GMT]]></value>
+        <value><![CDATA[Mon, 14 Jul 2014 15:46:46 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Pragma]]></name>
@@ -36,7 +36,7 @@
     </header>
     <header>
         <name><![CDATA[Content-Length]]></name>
-        <value><![CDATA[5203]]></value>
+        <value><![CDATA[5195]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
@@ -44,11 +44,11 @@
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=Ppsrcr7hseKUnDjcR1LhJyMcKB8uHa3eEcFVse3iIlMPfbeOTOEGZ1FyeOJxuqcbaX0RMxcL7FUvGujzyaN9yGnNv2+NLz67YbABjzDvWiAO+TZqsELVWwwpjtL17o7ZN51yBS3uSmP9KWMP7OmqVJkIFuUjQedpOb2iIHFjIkfluvC6VRa3C766zV5d1b3ng0IcyJu1ItichrPrzJTTr1HrxkpxWLD214IrXZDBZnRTefcrEMmMe8NK9/WdpYQPl/m6V/m+awp7MLrHeAYZtxVBNHXKJZ3Ur5xHXLe6/P6P0Y4TIeKMuXnnEDpR6XowXndTABs1Q72ke4z9cIGaVcZEnL4TMgXGGn2UTCZRckCB5IYom1t6V5Gm8zgo0JVn5Pskz+b4vIO0h7Z80LgUgPTl7O2GPWpmy+Ot5ujUaeJfyXtphIDsF6bOYgRwBc3j8rPTIrqrSbT08fCdrAu69sya9HrEYf2hWQ8VWulWAgeM8/WDPBGDLZdm7C+nTmWr1ZIxQJyYBKY/VXJO/doQbGPh3Elt6+tfJbpLsRlJoTzZaf//TxdlUOEpeWGu1lynLkmQKeEnznA+Agrb+EIjDfYufDBxzkOeQooYiUyuX7++4qfTxfsshVX+3Pckp/5s2fPG+aD/QJ0To8C2HwcILkisgFw8dP1eJKdUwRhjx3jLpq/W0P9INm07n2X+83O8Uf4fu0nCu2ZmcYxGHz3BpQ==; Path=/; Domain=.swg.usma.ibm.com]]></value>
+        <value><![CDATA[LtpaToken2=kRkFJOvJJzW4JMEHTgQYXW+qzFokQsxcRhWoqdEfPDpZiEK4c9hCvS7Gl+mIDTQUtnKM27/Sd+iLkqYkQguaoAGOBMRa3EJNDpDEds+rrZI7/9hdUwNSChKwJxklFQeXSZSScu3kDllEh2w4Wgs+nbe0FSgrz0x+K3Ew6VRG1UhBldig1TugyGTTYaR6c9tnIulE38PCWf4y6fzJyjSb0W/LODm0Bl1qLc5sTkGxq4KnWoSq+kqx4M7PebUFjAccV6EA4i9g8Uh+fNbVduth+beLk7KC1m9WNldEHEjPqFodyjUYf77f+aLkREyK1pjSSR7IJsWstN3JDTxBb4+4yo59Pubn0BZ7wkVQ65tG3elSzYVbISkzTwQE3GUrURd1AfzRIcQGAxH+P+tJpKLjAHJNeaPCHbRTBonBuEMMJ55dxJw4AsZlzGMDwQ35G2Ze0Y2M1NEFjapOSsirf3wCjGSW6/NgfW6AAhYtlqE9BK7kR8AHFzSJXqROG8eyPYbAzajDP/ufdPUt5+FZ7ev1nWaH/wOARiGoyS/vf3qztDTcICKbW0L3U9SR/nYT/WhdW0UilXwU/ECrWQF9IrVImws0aLXfhnCAFlJHizfY5Wf/+Rrz2bpBGht8BGMzosP3D3/t8q3RavCnT895I05Piyltve2fDUjgwHzRb8fHN/c54QSG72+bfsppqmVWT2sTSeGM6mqbURYjx+6NJGvorA==; Path=/; Domain=.swg.usma.ibm.com]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[ICSESSIONID=0000bNc-MH-A2JrA9Yo1SbFG3rY:-1; Path=/; HttpOnly]]></value>
+        <value><![CDATA[ICSESSIONID=00006yj_f5QJRn4YHzPCr6gxZIG:-1; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Keep-Alive]]></name>
@@ -68,69 +68,69 @@
     </header></headers>
 <data><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <entry xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns="http://www.w3.org/2005/Atom">
-  <snx:communityUuid>621f2004-aa7a-439e-8eb2-5a18be8f71a0</snx:communityUuid>
-  <id>http://communities.ibm.com:2006/service/atom/community/instance?communityUuid=621f2004-aa7a-439e-8eb2-5a18be8f71a0</id>
-  <title type="text">test Title1404994701872</title>
+  <snx:communityUuid>2f86d7cf-8167-43b6-ab37-7b4347436b1e</snx:communityUuid>
+  <id>http://communities.ibm.com:2006/service/atom/community/instance?communityUuid=2f86d7cf-8167-43b6-ab37-7b4347436b1e</id>
+  <title type="text">test Title1405352802339</title>
   <category term="community" scheme="http://www.ibm.com/xmlns/prod/sn/type">
   </category>
-  <link href="https://lcauto19.swg.usma.ibm.com/communities/service/atom/community/instance?communityUuid=621f2004-aa7a-439e-8eb2-5a18be8f71a0" rel="self">
+  <link href="https://lcauto53.swg.usma.ibm.com/communities/service/atom/community/instance?communityUuid=2f86d7cf-8167-43b6-ab37-7b4347436b1e" rel="self">
   </link>
-  <link href="https://lcauto19.swg.usma.ibm.com/communities/service/atom/community/instance?communityUuid=621f2004-aa7a-439e-8eb2-5a18be8f71a0" rel="edit">
+  <link href="https://lcauto53.swg.usma.ibm.com/communities/service/atom/community/instance?communityUuid=2f86d7cf-8167-43b6-ab37-7b4347436b1e" rel="edit">
   </link>
-  <link href="https://lcauto19.swg.usma.ibm.com/communities/service/html/communitystart?communityUuid=621f2004-aa7a-439e-8eb2-5a18be8f71a0" rel="alternate" type="text/html">
+  <link href="https://lcauto53.swg.usma.ibm.com/communities/service/html/communitystart?communityUuid=2f86d7cf-8167-43b6-ab37-7b4347436b1e" rel="alternate" type="text/html">
   </link>
-  <link href="https://lcauto19.swg.usma.ibm.com/communities/service/html/image?communityUuid=621f2004-aa7a-439e-8eb2-5a18be8f71a0&amp;lastMod=1404994617862" rel="http://www.ibm.com/xmlns/prod/sn/logo">
+  <link href="https://lcauto53.swg.usma.ibm.com/communities/service/html/image?communityUuid=2f86d7cf-8167-43b6-ab37-7b4347436b1e&amp;lastMod=1405352800937" rel="http://www.ibm.com/xmlns/prod/sn/logo">
   </link>
-  <link href="https://lcauto19.swg.usma.ibm.com/communities/service/atom/community/service?communityUuid=621f2004-aa7a-439e-8eb2-5a18be8f71a0" rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml">
+  <link href="https://lcauto53.swg.usma.ibm.com/communities/service/atom/community/service?communityUuid=2f86d7cf-8167-43b6-ab37-7b4347436b1e" rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml">
   </link>
-  <link href="https://lcauto19.swg.usma.ibm.com/communities/service/atom/community/members?communityUuid=621f2004-aa7a-439e-8eb2-5a18be8f71a0" rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml">
+  <link href="https://lcauto53.swg.usma.ibm.com/communities/service/atom/community/members?communityUuid=2f86d7cf-8167-43b6-ab37-7b4347436b1e" rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml">
   </link>
-  <link href="https://lcauto19.swg.usma.ibm.com/communities/service/atom/community/bookmarks?communityUuid=621f2004-aa7a-439e-8eb2-5a18be8f71a0" rel="http://www.ibm.com/xmlns/prod/sn/bookmarks" type="application/atom+xml">
+  <link href="https://lcauto53.swg.usma.ibm.com/communities/service/atom/community/bookmarks?communityUuid=2f86d7cf-8167-43b6-ab37-7b4347436b1e" rel="http://www.ibm.com/xmlns/prod/sn/bookmarks" type="application/atom+xml">
   </link>
-  <link href="https://lcauto19.swg.usma.ibm.com/communities/service/atom/community/feeds?communityUuid=621f2004-aa7a-439e-8eb2-5a18be8f71a0" rel="http://www.ibm.com/xmlns/prod/sn/feeds" type="application/atom+xml">
+  <link href="https://lcauto53.swg.usma.ibm.com/communities/service/atom/community/feeds?communityUuid=2f86d7cf-8167-43b6-ab37-7b4347436b1e" rel="http://www.ibm.com/xmlns/prod/sn/feeds" type="application/atom+xml">
   </link>
-  <link href="https://lcauto19.swg.usma.ibm.com/communities/service/atom/community/remoteApplications?communityUuid=621f2004-aa7a-439e-8eb2-5a18be8f71a0" rel="http://www.ibm.com/xmlns/prod/sn/remote-applications" type="application/atom+xml">
+  <link href="https://lcauto53.swg.usma.ibm.com/communities/service/atom/community/remoteApplications?communityUuid=2f86d7cf-8167-43b6-ab37-7b4347436b1e" rel="http://www.ibm.com/xmlns/prod/sn/remote-applications" type="application/atom+xml">
   </link>
-  <link href="https://lcauto19.swg.usma.ibm.com/communities/service/atom/community/forum/topics?communityUuid=621f2004-aa7a-439e-8eb2-5a18be8f71a0" rel="http://www.ibm.com/xmlns/prod/sn/forum-topics" type="application/atom+xml">
+  <link href="https://lcauto53.swg.usma.ibm.com/communities/service/atom/community/forum/topics?communityUuid=2f86d7cf-8167-43b6-ab37-7b4347436b1e" rel="http://www.ibm.com/xmlns/prod/sn/forum-topics" type="application/atom+xml">
   </link>
-  <link href="https://lcauto19.swg.usma.ibm.com/communities/service/atom/community/invites?communityUuid=621f2004-aa7a-439e-8eb2-5a18be8f71a0" rel="http://www.ibm.com/xmlns/prod/sn/invitations-list" type="application/atom+xml">
+  <link href="https://lcauto53.swg.usma.ibm.com/communities/service/atom/community/invites?communityUuid=2f86d7cf-8167-43b6-ab37-7b4347436b1e" rel="http://www.ibm.com/xmlns/prod/sn/invitations-list" type="application/atom+xml">
   </link>
-  <link href="https://lcauto19.swg.usma.ibm.com/communities/service/atom/community/widgets?communityUuid=621f2004-aa7a-439e-8eb2-5a18be8f71a0" rel="http://www.ibm.com/xmlns/prod/sn/widgets" type="application/atom+xml">
+  <link href="https://lcauto53.swg.usma.ibm.com/communities/service/atom/community/widgets?communityUuid=2f86d7cf-8167-43b6-ab37-7b4347436b1e" rel="http://www.ibm.com/xmlns/prod/sn/widgets" type="application/atom+xml">
   </link>
   <snx:membercount>1</snx:membercount>
   <snx:communityType>public</snx:communityType>
   <snx:handle></snx:handle>
-  <link href="https://lcauto19.swg.usma.ibm.com/communities/service/atom/community/subcommunities?communityUuid=621f2004-aa7a-439e-8eb2-5a18be8f71a0" rel="http://www.ibm.com/xmlns/prod/sn/subcommunities" type="application/atom+xml">
+  <link href="https://lcauto53.swg.usma.ibm.com/communities/service/atom/community/subcommunities?communityUuid=2f86d7cf-8167-43b6-ab37-7b4347436b1e" rel="http://www.ibm.com/xmlns/prod/sn/subcommunities" type="application/atom+xml">
   </link>
   <snx:preModeration>true</snx:preModeration>
   <snx:postModeration>true</snx:postModeration>
-  <published>2014-07-10T12:16:57.862Z</published>
-  <updated>2014-07-10T12:17:03.168Z</updated>
+  <published>2014-07-14T15:46:40.937Z</published>
+  <updated>2014-07-14T15:46:46.050Z</updated>
   <content type="html">test Content</content>
   <summary type="text">test Content</summary>
   <author>
-    <name>Amy Jones101</name>
-    <snx:userid>8cbefec0-f6df-1032-9ad5-d02a14283ea9</snx:userid>
+    <name>Amy Jones1</name>
+    <snx:userid>4cbc45c0-16a7-1033-9239-95472f45d54f</snx:userid>
     <snx:userState>active</snx:userState>
     <snx:isExternal>false</snx:isExternal>
-    <email>ajones101@janet.iris.com</email>
+    <email>ajones1@janet.iris.com</email>
   </author>
   <contributor>
-    <name>Amy Jones101</name>
-    <snx:userid>8cbefec0-f6df-1032-9ad5-d02a14283ea9</snx:userid>
+    <name>Amy Jones1</name>
+    <snx:userid>4cbc45c0-16a7-1033-9239-95472f45d54f</snx:userid>
     <snx:userState>active</snx:userState>
     <snx:isExternal>false</snx:isExternal>
-    <email>ajones101@janet.iris.com</email>
+    <email>ajones1@janet.iris.com</email>
   </contributor>
-  <link href="https://lcauto19.swg.usma.ibm.com/connections/opensocial/rest/activitystreams/urn:lsid:lconn.ibm.com:communities.community:621f2004-aa7a-439e-8eb2-5a18be8f71a0/@all/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/activitystream" type="application/atom+xml">
+  <link href="https://lcauto53.swg.usma.ibm.com/connections/opensocial/rest/activitystreams/urn:lsid:lconn.ibm.com:communities.community:2f86d7cf-8167-43b6-ab37-7b4347436b1e/@all/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/activitystream" type="application/atom+xml">
   </link>
-  <link href="https://lcauto19.swg.usma.ibm.com/connections/opensocial/rest/ublog/urn:lsid:lconn.ibm.com:communities.community:621f2004-aa7a-439e-8eb2-5a18be8f71a0/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/microblog" type="application/atom+xml">
+  <link href="https://lcauto53.swg.usma.ibm.com/connections/opensocial/rest/ublog/urn:lsid:lconn.ibm.com:communities.community:2f86d7cf-8167-43b6-ab37-7b4347436b1e/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/microblog" type="application/atom+xml">
   </link>
   <snx:communityTheme snx:uuid="default">
   </snx:communityTheme>
   <snx:communityStartPage></snx:communityStartPage>
   <snx:isExternal>false</snx:isExternal>
-  <link href="https://lcauto19.swg.usma.ibm.com/communities/service/atom/community/broadcasts?communityUuid=621f2004-aa7a-439e-8eb2-5a18be8f71a0" rel="http://www.ibm.com/xmlns/prod/sn/community-broadcasts" type="application/atom+xml">
+  <link href="https://lcauto53.swg.usma.ibm.com/communities/service/atom/community/broadcasts?communityUuid=2f86d7cf-8167-43b6-ab37-7b4347436b1e" rel="http://www.ibm.com/xmlns/prod/sn/community-broadcasts" type="application/atom+xml">
   </link>
 </entry>]]></data>
 </response>
@@ -138,7 +138,7 @@
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Thu, 10 Jul 2014 12:17:04 GMT]]></value>
+        <value><![CDATA[Mon, 14 Jul 2014 15:46:47 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -162,7 +162,7 @@
     </header>
     <header>
         <name><![CDATA[Last-Modified]]></name>
-        <value><![CDATA[Thu, 10 Jul 2014 12:17:04 GMT]]></value>
+        <value><![CDATA[Mon, 14 Jul 2014 15:46:47 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Pragma]]></name>
@@ -170,7 +170,7 @@
     </header>
     <header>
         <name><![CDATA[Content-Length]]></name>
-        <value><![CDATA[5203]]></value>
+        <value><![CDATA[5195]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
@@ -178,11 +178,11 @@
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=Ppsrcr7hseKUnDjcR1LhJyMcKB8uHa3eEcFVse3iIlMPfbeOTOEGZ1FyeOJxuqcbaX0RMxcL7FUvGujzyaN9yGnNv2+NLz67YbABjzDvWiAO+TZqsELVWwwpjtL17o7ZN51yBS3uSmP9KWMP7OmqVJkIFuUjQedpOb2iIHFjIkfluvC6VRa3C766zV5d1b3ng0IcyJu1ItichrPrzJTTr1HrxkpxWLD214IrXZDBZnRTefcrEMmMe8NK9/WdpYQPl/m6V/m+awp7MLrHeAYZtxVBNHXKJZ3Ur5xHXLe6/P6P0Y4TIeKMuXnnEDpR6XowXndTABs1Q72ke4z9cIGaVcZEnL4TMgXGGn2UTCZRckCB5IYom1t6V5Gm8zgo0JVn5Pskz+b4vIO0h7Z80LgUgPTl7O2GPWpmy+Ot5ujUaeJfyXtphIDsF6bOYgRwBc3j8rPTIrqrSbT08fCdrAu69sya9HrEYf2hWQ8VWulWAgeM8/WDPBGDLZdm7C+nTmWr1ZIxQJyYBKY/VXJO/doQbGPh3Elt6+tfJbpLsRlJoTzZaf//TxdlUOEpeWGu1lynLkmQKeEnznA+Agrb+EIjDfYufDBxzkOeQooYiUyuX7++4qfTxfsshVX+3Pckp/5s2fPG+aD/QJ0To8C2HwcILkisgFw8dP1eJKdUwRhjx3jLpq/W0P9INm07n2X+83O8Uf4fu0nCu2ZmcYxGHz3BpQ==; Path=/; Domain=.swg.usma.ibm.com]]></value>
+        <value><![CDATA[LtpaToken2=kRkFJOvJJzW4JMEHTgQYXW+qzFokQsxcRhWoqdEfPDpZiEK4c9hCvS7Gl+mIDTQUtnKM27/Sd+iLkqYkQguaoAGOBMRa3EJNDpDEds+rrZI7/9hdUwNSChKwJxklFQeXSZSScu3kDllEh2w4Wgs+nbe0FSgrz0x+K3Ew6VRG1UhBldig1TugyGTTYaR6c9tnIulE38PCWf4y6fzJyjSb0W/LODm0Bl1qLc5sTkGxq4KnWoSq+kqx4M7PebUFjAccV6EA4i9g8Uh+fNbVduth+beLk7KC1m9WNldEHEjPqFodyjUYf77f+aLkREyK1pjSSR7IJsWstN3JDTxBb4+4yo59Pubn0BZ7wkVQ65tG3elSzYVbISkzTwQE3GUrURd1AfzRIcQGAxH+P+tJpKLjAHJNeaPCHbRTBonBuEMMJ55dxJw4AsZlzGMDwQ35G2Ze0Y2M1NEFjapOSsirf3wCjGSW6/NgfW6AAhYtlqE9BK7kR8AHFzSJXqROG8eyPYbAzajDP/ufdPUt5+FZ7ev1nWaH/wOARiGoyS/vf3qztDTcICKbW0L3U9SR/nYT/WhdW0UilXwU/ECrWQF9IrVImws0aLXfhnCAFlJHizfY5Wf/+Rrz2bpBGht8BGMzosP3D3/t8q3RavCnT895I05Piyltve2fDUjgwHzRb8fHN/c54QSG72+bfsppqmVWT2sTSeGM6mqbURYjx+6NJGvorA==; Path=/; Domain=.swg.usma.ibm.com]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[ICSESSIONID=0000uoDJFUmwcBqUWLf-OHjj43N:-1; Path=/; HttpOnly]]></value>
+        <value><![CDATA[ICSESSIONID=0000-xrCjyBSrHWX9VwQFLGuMI_:-1; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Keep-Alive]]></name>
@@ -202,69 +202,69 @@
     </header></headers>
 <data><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <entry xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns="http://www.w3.org/2005/Atom">
-  <snx:communityUuid>621f2004-aa7a-439e-8eb2-5a18be8f71a0</snx:communityUuid>
-  <id>http://communities.ibm.com:2006/service/atom/community/instance?communityUuid=621f2004-aa7a-439e-8eb2-5a18be8f71a0</id>
-  <title type="text">test Title1404994701872</title>
+  <snx:communityUuid>2f86d7cf-8167-43b6-ab37-7b4347436b1e</snx:communityUuid>
+  <id>http://communities.ibm.com:2006/service/atom/community/instance?communityUuid=2f86d7cf-8167-43b6-ab37-7b4347436b1e</id>
+  <title type="text">test Title1405352802339</title>
   <category term="community" scheme="http://www.ibm.com/xmlns/prod/sn/type">
   </category>
-  <link href="https://lcauto19.swg.usma.ibm.com/communities/service/atom/community/instance?communityUuid=621f2004-aa7a-439e-8eb2-5a18be8f71a0" rel="self">
+  <link href="https://lcauto53.swg.usma.ibm.com/communities/service/atom/community/instance?communityUuid=2f86d7cf-8167-43b6-ab37-7b4347436b1e" rel="self">
   </link>
-  <link href="https://lcauto19.swg.usma.ibm.com/communities/service/atom/community/instance?communityUuid=621f2004-aa7a-439e-8eb2-5a18be8f71a0" rel="edit">
+  <link href="https://lcauto53.swg.usma.ibm.com/communities/service/atom/community/instance?communityUuid=2f86d7cf-8167-43b6-ab37-7b4347436b1e" rel="edit">
   </link>
-  <link href="https://lcauto19.swg.usma.ibm.com/communities/service/html/communitystart?communityUuid=621f2004-aa7a-439e-8eb2-5a18be8f71a0" rel="alternate" type="text/html">
+  <link href="https://lcauto53.swg.usma.ibm.com/communities/service/html/communitystart?communityUuid=2f86d7cf-8167-43b6-ab37-7b4347436b1e" rel="alternate" type="text/html">
   </link>
-  <link href="https://lcauto19.swg.usma.ibm.com/communities/service/html/image?communityUuid=621f2004-aa7a-439e-8eb2-5a18be8f71a0&amp;lastMod=1404994617862" rel="http://www.ibm.com/xmlns/prod/sn/logo">
+  <link href="https://lcauto53.swg.usma.ibm.com/communities/service/html/image?communityUuid=2f86d7cf-8167-43b6-ab37-7b4347436b1e&amp;lastMod=1405352800937" rel="http://www.ibm.com/xmlns/prod/sn/logo">
   </link>
-  <link href="https://lcauto19.swg.usma.ibm.com/communities/service/atom/community/service?communityUuid=621f2004-aa7a-439e-8eb2-5a18be8f71a0" rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml">
+  <link href="https://lcauto53.swg.usma.ibm.com/communities/service/atom/community/service?communityUuid=2f86d7cf-8167-43b6-ab37-7b4347436b1e" rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml">
   </link>
-  <link href="https://lcauto19.swg.usma.ibm.com/communities/service/atom/community/members?communityUuid=621f2004-aa7a-439e-8eb2-5a18be8f71a0" rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml">
+  <link href="https://lcauto53.swg.usma.ibm.com/communities/service/atom/community/members?communityUuid=2f86d7cf-8167-43b6-ab37-7b4347436b1e" rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml">
   </link>
-  <link href="https://lcauto19.swg.usma.ibm.com/communities/service/atom/community/bookmarks?communityUuid=621f2004-aa7a-439e-8eb2-5a18be8f71a0" rel="http://www.ibm.com/xmlns/prod/sn/bookmarks" type="application/atom+xml">
+  <link href="https://lcauto53.swg.usma.ibm.com/communities/service/atom/community/bookmarks?communityUuid=2f86d7cf-8167-43b6-ab37-7b4347436b1e" rel="http://www.ibm.com/xmlns/prod/sn/bookmarks" type="application/atom+xml">
   </link>
-  <link href="https://lcauto19.swg.usma.ibm.com/communities/service/atom/community/feeds?communityUuid=621f2004-aa7a-439e-8eb2-5a18be8f71a0" rel="http://www.ibm.com/xmlns/prod/sn/feeds" type="application/atom+xml">
+  <link href="https://lcauto53.swg.usma.ibm.com/communities/service/atom/community/feeds?communityUuid=2f86d7cf-8167-43b6-ab37-7b4347436b1e" rel="http://www.ibm.com/xmlns/prod/sn/feeds" type="application/atom+xml">
   </link>
-  <link href="https://lcauto19.swg.usma.ibm.com/communities/service/atom/community/remoteApplications?communityUuid=621f2004-aa7a-439e-8eb2-5a18be8f71a0" rel="http://www.ibm.com/xmlns/prod/sn/remote-applications" type="application/atom+xml">
+  <link href="https://lcauto53.swg.usma.ibm.com/communities/service/atom/community/remoteApplications?communityUuid=2f86d7cf-8167-43b6-ab37-7b4347436b1e" rel="http://www.ibm.com/xmlns/prod/sn/remote-applications" type="application/atom+xml">
   </link>
-  <link href="https://lcauto19.swg.usma.ibm.com/communities/service/atom/community/forum/topics?communityUuid=621f2004-aa7a-439e-8eb2-5a18be8f71a0" rel="http://www.ibm.com/xmlns/prod/sn/forum-topics" type="application/atom+xml">
+  <link href="https://lcauto53.swg.usma.ibm.com/communities/service/atom/community/forum/topics?communityUuid=2f86d7cf-8167-43b6-ab37-7b4347436b1e" rel="http://www.ibm.com/xmlns/prod/sn/forum-topics" type="application/atom+xml">
   </link>
-  <link href="https://lcauto19.swg.usma.ibm.com/communities/service/atom/community/invites?communityUuid=621f2004-aa7a-439e-8eb2-5a18be8f71a0" rel="http://www.ibm.com/xmlns/prod/sn/invitations-list" type="application/atom+xml">
+  <link href="https://lcauto53.swg.usma.ibm.com/communities/service/atom/community/invites?communityUuid=2f86d7cf-8167-43b6-ab37-7b4347436b1e" rel="http://www.ibm.com/xmlns/prod/sn/invitations-list" type="application/atom+xml">
   </link>
-  <link href="https://lcauto19.swg.usma.ibm.com/communities/service/atom/community/widgets?communityUuid=621f2004-aa7a-439e-8eb2-5a18be8f71a0" rel="http://www.ibm.com/xmlns/prod/sn/widgets" type="application/atom+xml">
+  <link href="https://lcauto53.swg.usma.ibm.com/communities/service/atom/community/widgets?communityUuid=2f86d7cf-8167-43b6-ab37-7b4347436b1e" rel="http://www.ibm.com/xmlns/prod/sn/widgets" type="application/atom+xml">
   </link>
   <snx:membercount>1</snx:membercount>
   <snx:communityType>public</snx:communityType>
   <snx:handle></snx:handle>
-  <link href="https://lcauto19.swg.usma.ibm.com/communities/service/atom/community/subcommunities?communityUuid=621f2004-aa7a-439e-8eb2-5a18be8f71a0" rel="http://www.ibm.com/xmlns/prod/sn/subcommunities" type="application/atom+xml">
+  <link href="https://lcauto53.swg.usma.ibm.com/communities/service/atom/community/subcommunities?communityUuid=2f86d7cf-8167-43b6-ab37-7b4347436b1e" rel="http://www.ibm.com/xmlns/prod/sn/subcommunities" type="application/atom+xml">
   </link>
   <snx:preModeration>true</snx:preModeration>
   <snx:postModeration>true</snx:postModeration>
-  <published>2014-07-10T12:16:57.862Z</published>
-  <updated>2014-07-10T12:17:03.844Z</updated>
+  <published>2014-07-14T15:46:40.937Z</published>
+  <updated>2014-07-14T15:46:46.619Z</updated>
   <content type="html">test Content</content>
   <summary type="text">test Content</summary>
   <author>
-    <name>Amy Jones101</name>
-    <snx:userid>8cbefec0-f6df-1032-9ad5-d02a14283ea9</snx:userid>
+    <name>Amy Jones1</name>
+    <snx:userid>4cbc45c0-16a7-1033-9239-95472f45d54f</snx:userid>
     <snx:userState>active</snx:userState>
     <snx:isExternal>false</snx:isExternal>
-    <email>ajones101@janet.iris.com</email>
+    <email>ajones1@janet.iris.com</email>
   </author>
   <contributor>
-    <name>Amy Jones101</name>
-    <snx:userid>8cbefec0-f6df-1032-9ad5-d02a14283ea9</snx:userid>
+    <name>Amy Jones1</name>
+    <snx:userid>4cbc45c0-16a7-1033-9239-95472f45d54f</snx:userid>
     <snx:userState>active</snx:userState>
     <snx:isExternal>false</snx:isExternal>
-    <email>ajones101@janet.iris.com</email>
+    <email>ajones1@janet.iris.com</email>
   </contributor>
-  <link href="https://lcauto19.swg.usma.ibm.com/connections/opensocial/rest/activitystreams/urn:lsid:lconn.ibm.com:communities.community:621f2004-aa7a-439e-8eb2-5a18be8f71a0/@all/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/activitystream" type="application/atom+xml">
+  <link href="https://lcauto53.swg.usma.ibm.com/connections/opensocial/rest/activitystreams/urn:lsid:lconn.ibm.com:communities.community:2f86d7cf-8167-43b6-ab37-7b4347436b1e/@all/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/activitystream" type="application/atom+xml">
   </link>
-  <link href="https://lcauto19.swg.usma.ibm.com/connections/opensocial/rest/ublog/urn:lsid:lconn.ibm.com:communities.community:621f2004-aa7a-439e-8eb2-5a18be8f71a0/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/microblog" type="application/atom+xml">
+  <link href="https://lcauto53.swg.usma.ibm.com/connections/opensocial/rest/ublog/urn:lsid:lconn.ibm.com:communities.community:2f86d7cf-8167-43b6-ab37-7b4347436b1e/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/microblog" type="application/atom+xml">
   </link>
   <snx:communityTheme snx:uuid="default">
   </snx:communityTheme>
   <snx:communityStartPage></snx:communityStartPage>
   <snx:isExternal>false</snx:isExternal>
-  <link href="https://lcauto19.swg.usma.ibm.com/communities/service/atom/community/broadcasts?communityUuid=621f2004-aa7a-439e-8eb2-5a18be8f71a0" rel="http://www.ibm.com/xmlns/prod/sn/community-broadcasts" type="application/atom+xml">
+  <link href="https://lcauto53.swg.usma.ibm.com/communities/service/atom/community/broadcasts?communityUuid=2f86d7cf-8167-43b6-ab37-7b4347436b1e" rel="http://www.ibm.com/xmlns/prod/sn/community-broadcasts" type="application/atom+xml">
   </link>
 </entry>]]></data>
 </response>

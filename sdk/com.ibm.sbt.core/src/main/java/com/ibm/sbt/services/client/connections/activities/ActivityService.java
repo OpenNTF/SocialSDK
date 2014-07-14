@@ -44,7 +44,7 @@ import com.ibm.sbt.services.client.connections.common.serializers.MemberSerializ
 import com.ibm.sbt.services.endpoints.Endpoint;
 
 /**
- * The Activities application of IBM��� Connections enables a team to collect, organize, share, and reuse work related to a project goal. 
+ * The Activities application of IBM©©© Connections enables a team to collect, organize, share, and reuse work related to a project goal. 
  * The Activities API allows application programs to create new activities, and to read and modify existing activities.
  * 
  * Use the Atom subscription API to retrieve resources from the activities hosted by the Activities application.

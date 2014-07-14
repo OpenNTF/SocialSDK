@@ -1,6 +1,7 @@
 package com.ibm.sbt.test.lib;
 
 import com.ibm.commons.runtime.Context;
+import com.ibm.commons.runtime.RuntimeFactory;
 
 public class TestEnvironment {
 
@@ -129,8 +130,9 @@ public class TestEnvironment {
                 getPropertyBasePath() + OTHER_USER_DISPLAYNAME);
     }
 
-    private static String getProperty(String p) {
-        return System.getProperty(p, Context.get().getProperty(p));
+    protected static String getProperty(String p) {
+    	Context ctx = RuntimeFactory.get().getContextUnchecked();
+        return System.getProperty(p, ctx != null? Context.get().getProperty(p) : null);
     }
 
 }

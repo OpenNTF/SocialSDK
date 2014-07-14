@@ -58,8 +58,116 @@
 					</execution>
 				</executions>
 			</plugin>
+
+			<plugin>
+				<groupId>com.googlecode.maven-download-plugin</groupId>
+				<artifactId>maven-download-plugin</artifactId>
+				<version>1.1.0</version>
+				<executions>
+					<execution>
+						<id>download-tools</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>wget</goal>
+						</goals>
+						<configuration>
+							<url>http://download.dojotoolkit.org/release-1.8.0/dojo-release-1.8.0-src.zip</url>
+							<unpack>true</unpack>
+							<outputDirectory>${project.build.directory}/tools</outputDirectory>
+							<md5>b8e504a012ae0598a616af10d4ad6bad</md5>
+						</configuration>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>org.codehaus.plexus</groupId>
+						<artifactId>plexus-archiver</artifactId>
+						<version>2.4.4</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.7</version>
+				<executions>
+					<execution>
+						<id>aggregate</id>
+						<phase>process-classes</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target>
+								<copy
+									todir="${project.build.directory}/tools/dojo-release-1.8.0-src/util"
+									overwrite="true">
+									<fileset dir="${project.build.scriptSourceDirectory}" />
+								</copy>
+
+								<ant antfile="build.xml" target="build" />
+							</target>
+						</configuration>
+					</execution>
+					<execution>
+						<id>overwrite</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target>
+								<copy todir="${project.build.directory}/classes/js/sdk/_layers"
+									overwrite="true">
+									<fileset dir="${project.build.directory}/release/">
+										<include name="*.js" />
+									</fileset>
+								</copy>
+							</target>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+
 		</plugins>
 
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											com.googlecode.maven-download-plugin
+										</groupId>
+										<artifactId>
+											maven-download-plugin
+										</artifactId>
+										<versionRange>
+											[1.1.0,)
+										</versionRange>
+										<goals>
+											<goal>wget</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 
 </project>

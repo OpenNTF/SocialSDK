@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2010
+ * Â© Copyright IBM Corp. 2010
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -47,7 +47,6 @@ import com.ibm.sbt.services.client.ClientService.HandlerJson;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.ClientService.HandlerXml;
 import com.ibm.sbt.services.client.connections.files.FileService;
-import com.ibm.sbt.services.client.connections.files.FileServiceException;
 import com.ibm.sbt.services.client.connections.files.model.FileRequestParams;
 import com.ibm.sbt.services.client.connections.files.model.Headers;
 import com.ibm.sbt.services.endpoints.Endpoint;

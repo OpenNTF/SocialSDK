@@ -1,0 +1,723 @@
+<?xml version="1.0"?>
+<responses>
+<response statusCode="201" statusReason="Created">
+<headers>
+    <header>
+        <name><![CDATA[content-language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header>
+    <header>
+        <name><![CDATA[content-type]]></name>
+        <value><![CDATA[text/html; charset=UTF-8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[date]]></name>
+        <value><![CDATA[Fri, 11 Jul 2014 10:36:59 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[last-modified]]></name>
+        <value><![CDATA[Fri, 11 Jul 2014 10:36:57 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[location]]></name>
+        <value><![CDATA[https://apps.na.collabservtest.lotus.com/communities/service/atom/community/instance?communityUuid=6ca39731-5144-40bc-9c99-17b0ded86709]]></value>
+    </header>
+    <header>
+        <name><![CDATA[p3p]]></name>
+        <value><![CDATA[CP="NON CUR OTPi OUR NOR UNI"]]></value>
+    </header>
+    <header>
+        <name><![CDATA[vary]]></name>
+        <value><![CDATA[Accept-Encoding]]></value>
+    </header>
+    <header>
+        <name><![CDATA[transfer-encoding]]></name>
+        <value><![CDATA[chunked]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-powered-by]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-ua-compatible]]></name>
+        <value><![CDATA[IE=9,8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-lconn-auth]]></name>
+        <value><![CDATA[true]]></value>
+    </header>
+    <header>
+        <name><![CDATA[cache-control]]></name>
+        <value><![CDATA[no-store, no-cache, must-revalidate, private, must-revalidate]]></value>
+    </header>
+    <header>
+        <name><![CDATA[expires]]></name>
+        <value><![CDATA[Thu, 1 Jan 1970 00:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=RMvtuhQFT0HPI4YsKs+/6mdvPCkLG0afjM6fpmBoicQBQpLdlTh5yTmvGHQX0W0eYyc/Mn273KQ1uqevhGVZmWRuO6/FUJoBoLmzl9ICUDr7e6JVsetxN896ImOKrxYThYjUjCCBvYsdvliXPLWoMKRzxcaxYOtMk9CCrjZL13daaImJluZCzH43i0tl75gi29+w/cBz+bYmoplZgbbXovDu612LtaSv6Ett89+vC+FvgI7zyQnAOQ/csUBITbf7Sv6i2LLGdgK1FyZ4dAGp9CrIvaqIJY0ASJX3TbE2bxdeC0HhpNJO8RkG5Qv1yL4xTR6H3nZ9BwzR/IcwGIZIU9e+ZYdA3HWLLQxhiaePJr8K6Vt4o0pzUSiJbgICnvmYIqNhAcddzq3+HcIlGJN+HIYVAYbj7F+++KLOPr8Aa6mi2FUG0gKu4TkDZ3bVPOGk2f3HWew7abzmjR/JDXUnhfoXmPZPpO7SLSv2QS/34c8gFfsi8DlKfiDFyzpgB4nXO1PYw/akVFckmXNC6W/hozySjsbuMdrQ2YA7dI8yKVd9ZvRBnoNDdZMqu4YfttPTARaMzVFfZ0aOk3v4Y+iTswrJrlxzl3TyrmBJN5zebYAsNpLAfWTVVRg9u8b3yyK/UZZ4reLDIOteqLMjMbc8K1NvwVx5JX6tFKx0qsIAoEBpoWZQmm2eXgvP0QfG3ww9FL+4aF8CYn+XfEqOCU8wMob3wdHvN52okT/7X2dOh2/EYZfiRkncV5QX4maLmVjV;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[entitlements=MDczMDQxODI2N2M1MTBlMzg2NTliY2ZjZGE1NDk4NDY3YWJiMWQxNQ==-YmhfYWN0aXZpdGllcyxiaF9hY3Rpdml0aWVzX19hbGxvd19vdmVyYWdlLGJoX2NoYXQsYmhfY29tbXVuaXRpZXMsYmhfY29udGFjdHMsYmhfZGFzaGJvYXJkLGJoX2ZlZWRiYWNrLGJoX2ZpbGVyLGJoX2ZpbGVyX19hbGxvd19vdmVyYWdlLGJoX2Zvcm1zLGJoX2ZvcnVtcyxiaF9tZWV0aW5ncyxiaF93aGF0c19uZXcsYnNzX2FkbWluLGJzc19pbnZpdGVfZ3Vlc3QsYnNzX3VpX19pc19pc3Zfb2ZmZXJpbmcsaGFzX2FjY2Vzc29yeV9zdWJzY3JpcHRpb24saXN2X3N1Z2FyX2NybSxpc3ZfdHJpbG9nLGxjX2FjdGl2aXRpZXMsbGNfbmV3cyxzYW1ldGltZV9tZWV0aW5nLA==-MjAwODkxMjc=;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token=6f13ce1a-95b5-44bc-b333-c726938d8349;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token_forum=754d469b-ff4e-4731-8841-7f98a8dd34f8;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[JSESSIONID=000046beUuioQsGL6iA1UXUfn4G:18ouimp97;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[user_lang=ZW5fVVM%3D-MjAwODkxMjc%3D;Secure; Domain=na.collabservtest.lotus.com; Path=/; Expires=Sat, 12-Jul-14 10:36:59 GMT;Secure;]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[BIGipServerC1-AC-9083-fe=2708116416.31523.0000;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[BIGipServerC1-WebSEAL-80-fe=2607518656.20480.0000;secure; path=/]]></value>
+    </header></headers>
+<data><![CDATA[]]></data>
+</response>
+<response statusCode="200" statusReason="OK">
+<headers>
+    <header>
+        <name><![CDATA[content-language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header>
+    <header>
+        <name><![CDATA[content-type]]></name>
+        <value><![CDATA[application/atom+xml;charset=UTF-8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[date]]></name>
+        <value><![CDATA[Fri, 11 Jul 2014 10:37:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[last-modified]]></name>
+        <value><![CDATA[Fri, 11 Jul 2014 10:37:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[p3p]]></name>
+        <value><![CDATA[CP="NON CUR OTPi OUR NOR UNI"]]></value>
+    </header>
+    <header>
+        <name><![CDATA[vary]]></name>
+        <value><![CDATA[Accept-Encoding]]></value>
+    </header>
+    <header>
+        <name><![CDATA[transfer-encoding]]></name>
+        <value><![CDATA[chunked]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-powered-by]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-ua-compatible]]></name>
+        <value><![CDATA[IE=9,8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-lconn-auth]]></name>
+        <value><![CDATA[true]]></value>
+    </header>
+    <header>
+        <name><![CDATA[pragma]]></name>
+        <value><![CDATA[no-cache]]></value>
+    </header>
+    <header>
+        <name><![CDATA[cache-control]]></name>
+        <value><![CDATA[no-store, no-cache, must-revalidate, private, must-revalidate]]></value>
+    </header>
+    <header>
+        <name><![CDATA[expires]]></name>
+        <value><![CDATA[Thu, 1 Jan 1970 00:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=Xit9T/fpFdoyF9NyWSFSAY7PvN9xn39LkaCd/9v7QJJ4QwC4lPGRzYp/fojmpATlT+9zchJdslHs53hUz+sDAHTp0iK4hWDub8fLb/grSU1pBzyI37DtOx1B/9qLlN6RCBCLjgbIYye758wUWgxOXDrACUBbqo/Cvg9JFZruEvHHnZ3wpaDavZV2mKDrW46ANZp2GG1L9lQCzlTNDHP7q9dNQaaDRlQEYXvGmAKNqTIzYhJs6F1T9fi6us5gOvkvTMeAq5SGewIefs9gy0srJ5+y+Jb05KLax3iZeZJNh9rW8AE02VBKDIb1pxYbDecre/mrq2el5Gsm2AkeOCPHpsJiuElHFbw15DX07CqojLK/AoOWPS+gx17+EzYlrdCh8mtYq1GQrfj+1loJ79+Hqt4qAlgKB2cmKf2Lns7wcRNjdJIQNGVvSWbzcVSJwoxrFXMzkO62K5Rfx+E4nSdYd0IOt/eQjuBKSv5OBQWW9XbVZGX5ZMF9b66fxcj+Mvv4rnVVcB9sK5JKJL46qOvbTjRtKPBIv9hfKruOjDOLK/113JkAcwZudbtSHPBPr5KXV/47QMtfOTtpd+S6ygLL+8uMZlTgaQFHxqnmXFyu3eZzMjEyi36Jq0bl3SgTKUQo2ToNOU5nAcOTds0eQPQh2otKm4tgPU6jVRnXVOQ8fgjJLX8yiebWsTFnyIvbJZPehN/1Ulxpc686iWsSy9Cp1ztEypTD3YlwIudCRHI5NG2Kd68ZzK6I8LHzziV5rTkq;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[entitlements=MDczMDQxODI2N2M1MTBlMzg2NTliY2ZjZGE1NDk4NDY3YWJiMWQxNQ==-YmhfYWN0aXZpdGllcyxiaF9hY3Rpdml0aWVzX19hbGxvd19vdmVyYWdlLGJoX2NoYXQsYmhfY29tbXVuaXRpZXMsYmhfY29udGFjdHMsYmhfZGFzaGJvYXJkLGJoX2ZlZWRiYWNrLGJoX2ZpbGVyLGJoX2ZpbGVyX19hbGxvd19vdmVyYWdlLGJoX2Zvcm1zLGJoX2ZvcnVtcyxiaF9tZWV0aW5ncyxiaF93aGF0c19uZXcsYnNzX2FkbWluLGJzc19pbnZpdGVfZ3Vlc3QsYnNzX3VpX19pc19pc3Zfb2ZmZXJpbmcsaGFzX2FjY2Vzc29yeV9zdWJzY3JpcHRpb24saXN2X3N1Z2FyX2NybSxpc3ZfdHJpbG9nLGxjX2FjdGl2aXRpZXMsbGNfbmV3cyxzYW1ldGltZV9tZWV0aW5nLA==-MjAwODkxMjc=;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token=231fdddf-90c9-40b4-8979-a31be09ce85d;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token_forum=8e91ce76-1b39-4684-b6a3-b307c046f9d3;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[JSESSIONID=0000ibSFdeNah3jkQI_ikgyxXDl:18ouih24s;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[user_lang=ZW5fVVM%3D-MjAwODkxMjc%3D;Secure; Domain=na.collabservtest.lotus.com; Path=/; Expires=Sat, 12-Jul-14 10:37:00 GMT;Secure;]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[BIGipServerC1-AC-9083-fe=2691339200.31523.0000;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[BIGipServerC1-WebSEAL-80-fe=2590741440.20480.0000;secure; path=/]]></value>
+    </header></headers>
+<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<entry xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns="http://www.w3.org/2005/Atom">
+  <snx:communityUuid>6ca39731-5144-40bc-9c99-17b0ded86709</snx:communityUuid>
+  <id>http://communities.ibm.com:2006/service/atom/community/instance?communityUuid=6ca39731-5144-40bc-9c99-17b0ded86709</id>
+  <title type="text">JavaTestCommunity 1405075013037</title>
+  <category term="community" scheme="http://www.ibm.com/xmlns/prod/sn/type">
+  </category>
+  <link href="https://apps.na.collabservtest.lotus.com/communities/service/atom/community/instance?communityUuid=6ca39731-5144-40bc-9c99-17b0ded86709" rel="self">
+  </link>
+  <link href="https://apps.na.collabservtest.lotus.com/communities/service/atom/community/instance?communityUuid=6ca39731-5144-40bc-9c99-17b0ded86709" rel="edit">
+  </link>
+  <link href="https://apps.na.collabservtest.lotus.com/communities/service/html/communitystart?communityUuid=6ca39731-5144-40bc-9c99-17b0ded86709" rel="alternate" type="text/html">
+  </link>
+  <link href="https://apps.na.collabservtest.lotus.com/communities/service/html/image?communityUuid=6ca39731-5144-40bc-9c99-17b0ded86709&amp;lastMod=1405075017133" rel="http://www.ibm.com/xmlns/prod/sn/logo">
+  </link>
+  <link href="https://apps.na.collabservtest.lotus.com/communities/service/atom/community/service?communityUuid=6ca39731-5144-40bc-9c99-17b0ded86709" rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml">
+  </link>
+  <link href="https://apps.na.collabservtest.lotus.com/communities/service/atom/community/members?communityUuid=6ca39731-5144-40bc-9c99-17b0ded86709" rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml">
+  </link>
+  <link href="https://apps.na.collabservtest.lotus.com/communities/service/atom/community/bookmarks?communityUuid=6ca39731-5144-40bc-9c99-17b0ded86709" rel="http://www.ibm.com/xmlns/prod/sn/bookmarks" type="application/atom+xml">
+  </link>
+  <link href="https://apps.na.collabservtest.lotus.com/communities/service/atom/community/feeds?communityUuid=6ca39731-5144-40bc-9c99-17b0ded86709" rel="http://www.ibm.com/xmlns/prod/sn/feeds" type="application/atom+xml">
+  </link>
+  <link href="https://apps.na.collabservtest.lotus.com/communities/service/atom/community/remoteApplications?communityUuid=6ca39731-5144-40bc-9c99-17b0ded86709" rel="http://www.ibm.com/xmlns/prod/sn/remote-applications" type="application/atom+xml">
+  </link>
+  <link href="https://apps.na.collabservtest.lotus.com/communities/service/atom/community/forum/topics?communityUuid=6ca39731-5144-40bc-9c99-17b0ded86709" rel="http://www.ibm.com/xmlns/prod/sn/forum-topics" type="application/atom+xml">
+  </link>
+  <link href="https://apps.na.collabservtest.lotus.com/communities/service/atom/community/invites?communityUuid=6ca39731-5144-40bc-9c99-17b0ded86709" rel="http://www.ibm.com/xmlns/prod/sn/invitations-list" type="application/atom+xml">
+  </link>
+  <link href="https://apps.na.collabservtest.lotus.com/communities/service/atom/community/widgets?communityUuid=6ca39731-5144-40bc-9c99-17b0ded86709" rel="http://www.ibm.com/xmlns/prod/sn/widgets" type="application/atom+xml">
+  </link>
+  <snx:membercount>1</snx:membercount>
+  <snx:communityType>private</snx:communityType>
+  <snx:handle></snx:handle>
+  <link href="https://apps.na.collabservtest.lotus.com/communities/service/atom/community/subcommunities?communityUuid=6ca39731-5144-40bc-9c99-17b0ded86709" rel="http://www.ibm.com/xmlns/prod/sn/subcommunities" type="application/atom+xml">
+  </link>
+  <snx:preModeration>true</snx:preModeration>
+  <snx:postModeration>true</snx:postModeration>
+  <published>2014-07-11T10:36:57.133Z</published>
+  <updated>2014-07-11T10:36:59.814Z</updated>
+  <content type="html">Java Community Content</content>
+  <summary type="text">Java Community Content</summary>
+  <author>
+    <name>Carlos Manias</name>
+    <snx:userid>20089127</snx:userid>
+    <snx:userState>active</snx:userState>
+    <snx:orgId type="text">20085940</snx:orgId>
+  </author>
+  <contributor>
+    <name>Carlos Manias</name>
+    <snx:userid>20089127</snx:userid>
+    <snx:userState>active</snx:userState>
+    <snx:orgId type="text">20085940</snx:orgId>
+  </contributor>
+  <link href="https://apps.na.collabservtest.lotus.com/connections/opensocial/rest/activitystreams/urn:lsid:lconn.ibm.com:communities.community:6ca39731-5144-40bc-9c99-17b0ded86709/@all/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/activitystream" type="application/atom+xml">
+  </link>
+  <link href="https://apps.na.collabservtest.lotus.com/connections/opensocial/rest/ublog/urn:lsid:lconn.ibm.com:communities.community:6ca39731-5144-40bc-9c99-17b0ded86709/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/microblog" type="application/atom+xml">
+  </link>
+  <snx:communityTheme snx:uuid="default">
+  </snx:communityTheme>
+  <snx:communityStartPage></snx:communityStartPage>
+  <snx:isExternal>true</snx:isExternal>
+  <link href="https://apps.na.collabservtest.lotus.com/communities/service/atom/community/broadcasts?communityUuid=6ca39731-5144-40bc-9c99-17b0ded86709" rel="http://www.ibm.com/xmlns/prod/sn/community-broadcasts" type="application/atom+xml">
+  </link>
+</entry>]]></data>
+</response>
+<response statusCode="201" statusReason="Created">
+<headers>
+    <header>
+        <name><![CDATA[content-language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header>
+    <header>
+        <name><![CDATA[content-type]]></name>
+        <value><![CDATA[text/html; charset=UTF-8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[date]]></name>
+        <value><![CDATA[Fri, 11 Jul 2014 10:37:04 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[last-modified]]></name>
+        <value><![CDATA[Fri, 11 Jul 2014 10:37:01 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[location]]></name>
+        <value><![CDATA[https://apps.na.collabservtest.lotus.com/communities/service/atom/community/instance?communityUuid=116e9a68-5fef-4ae6-b65d-f9d456a87986]]></value>
+    </header>
+    <header>
+        <name><![CDATA[p3p]]></name>
+        <value><![CDATA[CP="NON CUR OTPi OUR NOR UNI"]]></value>
+    </header>
+    <header>
+        <name><![CDATA[vary]]></name>
+        <value><![CDATA[Accept-Encoding]]></value>
+    </header>
+    <header>
+        <name><![CDATA[transfer-encoding]]></name>
+        <value><![CDATA[chunked]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-powered-by]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-ua-compatible]]></name>
+        <value><![CDATA[IE=9,8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-lconn-auth]]></name>
+        <value><![CDATA[true]]></value>
+    </header>
+    <header>
+        <name><![CDATA[cache-control]]></name>
+        <value><![CDATA[no-store, no-cache, must-revalidate, private, must-revalidate]]></value>
+    </header>
+    <header>
+        <name><![CDATA[expires]]></name>
+        <value><![CDATA[Thu, 1 Jan 1970 00:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=RMvtuhQFT0HPI4YsKs+/6mdvPCkLG0afjM6fpmBoicQBQpLdlTh5yTmvGHQX0W0eYyc/Mn273KQ1uqevhGVZmWRuO6/FUJoBoLmzl9ICUDr7e6JVsetxN896ImOKrxYThYjUjCCBvYsdvliXPLWoMKRzxcaxYOtMk9CCrjZL13daaImJluZCzH43i0tl75gi29+w/cBz+bYmoplZgbbXovDu612LtaSv6Ett89+vC+FvgI7zyQnAOQ/csUBITbf7Sv6i2LLGdgK1FyZ4dAGp9CrIvaqIJY0ASJX3TbE2bxdeC0HhpNJO8RkG5Qv1yL4xTR6H3nZ9BwzR/IcwGIZIU9e+ZYdA3HWLLQxhiaePJr8K6Vt4o0pzUSiJbgICnvmYIqNhAcddzq3+HcIlGJN+HIYVAYbj7F+++KLOPr8Aa6mi2FUG0gKu4TkDZ3bVPOGk2f3HWew7abzmjR/JDXUnhfoXmPZPpO7SLSv2QS/34c8gFfsi8DlKfiDFyzpgB4nXO1PYw/akVFckmXNC6W/hozySjsbuMdrQ2YA7dI8yKVd9ZvRBnoNDdZMqu4YfttPTARaMzVFfZ0aOk3v4Y+iTswrJrlxzl3TyrmBJN5zebYAsNpLAfWTVVRg9u8b3yyK/UZZ4reLDIOteqLMjMbc8K1NvwVx5JX6tFKx0qsIAoEBpoWZQmm2eXgvP0QfG3ww9FL+4aF8CYn+XfEqOCU8wMob3wdHvN52okT/7X2dOh2/EYZfiRkncV5QX4maLmVjV;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[entitlements=MDczMDQxODI2N2M1MTBlMzg2NTliY2ZjZGE1NDk4NDY3YWJiMWQxNQ==-YmhfYWN0aXZpdGllcyxiaF9hY3Rpdml0aWVzX19hbGxvd19vdmVyYWdlLGJoX2NoYXQsYmhfY29tbXVuaXRpZXMsYmhfY29udGFjdHMsYmhfZGFzaGJvYXJkLGJoX2ZlZWRiYWNrLGJoX2ZpbGVyLGJoX2ZpbGVyX19hbGxvd19vdmVyYWdlLGJoX2Zvcm1zLGJoX2ZvcnVtcyxiaF9tZWV0aW5ncyxiaF93aGF0c19uZXcsYnNzX2FkbWluLGJzc19pbnZpdGVfZ3Vlc3QsYnNzX3VpX19pc19pc3Zfb2ZmZXJpbmcsaGFzX2FjY2Vzc29yeV9zdWJzY3JpcHRpb24saXN2X3N1Z2FyX2NybSxpc3ZfdHJpbG9nLGxjX2FjdGl2aXRpZXMsbGNfbmV3cyxzYW1ldGltZV9tZWV0aW5nLA==-MjAwODkxMjc=;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token=bea6a939-a1cb-4c8b-97d1-d9cb403feacb;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token_forum=09a4abc5-8ccb-4fe8-8d86-af3fd176cffb;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[JSESSIONID=0000pvQApMd1y6rzXwwhPu55qpW:18ouimp97;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[user_lang=ZW5fVVM%3D-MjAwODkxMjc%3D;Secure; Domain=na.collabservtest.lotus.com; Path=/; Expires=Sat, 12-Jul-14 10:37:04 GMT;Secure;]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[BIGipServerC1-AC-9083-fe=2708116416.31523.0000;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[BIGipServerC1-WebSEAL-80-fe=2590741440.20480.0000;secure; path=/]]></value>
+    </header></headers>
+<data><![CDATA[]]></data>
+</response>
+<response statusCode="200" statusReason="OK">
+<headers>
+    <header>
+        <name><![CDATA[content-language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header>
+    <header>
+        <name><![CDATA[content-type]]></name>
+        <value><![CDATA[application/atom+xml;charset=UTF-8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[date]]></name>
+        <value><![CDATA[Fri, 11 Jul 2014 10:37:05 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[last-modified]]></name>
+        <value><![CDATA[Fri, 11 Jul 2014 10:37:05 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[p3p]]></name>
+        <value><![CDATA[CP="NON CUR OTPi OUR NOR UNI"]]></value>
+    </header>
+    <header>
+        <name><![CDATA[vary]]></name>
+        <value><![CDATA[Accept-Encoding]]></value>
+    </header>
+    <header>
+        <name><![CDATA[transfer-encoding]]></name>
+        <value><![CDATA[chunked]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-powered-by]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-ua-compatible]]></name>
+        <value><![CDATA[IE=9,8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-lconn-auth]]></name>
+        <value><![CDATA[true]]></value>
+    </header>
+    <header>
+        <name><![CDATA[pragma]]></name>
+        <value><![CDATA[no-cache]]></value>
+    </header>
+    <header>
+        <name><![CDATA[cache-control]]></name>
+        <value><![CDATA[no-store, no-cache, must-revalidate, private, must-revalidate]]></value>
+    </header>
+    <header>
+        <name><![CDATA[expires]]></name>
+        <value><![CDATA[Thu, 1 Jan 1970 00:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=Xit9T/fpFdoyF9NyWSFSAY7PvN9xn39LkaCd/9v7QJJ4QwC4lPGRzYp/fojmpATlT+9zchJdslHs53hUz+sDAHTp0iK4hWDub8fLb/grSU1pBzyI37DtOx1B/9qLlN6RCBCLjgbIYye758wUWgxOXDrACUBbqo/Cvg9JFZruEvHHnZ3wpaDavZV2mKDrW46ANZp2GG1L9lQCzlTNDHP7q9dNQaaDRlQEYXvGmAKNqTIzYhJs6F1T9fi6us5gOvkvTMeAq5SGewIefs9gy0srJ5+y+Jb05KLax3iZeZJNh9rW8AE02VBKDIb1pxYbDecre/mrq2el5Gsm2AkeOCPHpsJiuElHFbw15DX07CqojLK/AoOWPS+gx17+EzYlrdCh8mtYq1GQrfj+1loJ79+Hqt4qAlgKB2cmKf2Lns7wcRNjdJIQNGVvSWbzcVSJwoxrFXMzkO62K5Rfx+E4nSdYd0IOt/eQjuBKSv5OBQWW9XbVZGX5ZMF9b66fxcj+Mvv4rnVVcB9sK5JKJL46qOvbTjRtKPBIv9hfKruOjDOLK/113JkAcwZudbtSHPBPr5KXV/47QMtfOTtpd+S6ygLL+8uMZlTgaQFHxqnmXFyu3eZzMjEyi36Jq0bl3SgTKUQo2ToNOU5nAcOTds0eQPQh2otKm4tgPU6jVRnXVOQ8fgjJLX8yiebWsTFnyIvbJZPehN/1Ulxpc686iWsSy9Cp1ztEypTD3YlwIudCRHI5NG2Kd68ZzK6I8LHzziV5rTkq;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[entitlements=MDczMDQxODI2N2M1MTBlMzg2NTliY2ZjZGE1NDk4NDY3YWJiMWQxNQ==-YmhfYWN0aXZpdGllcyxiaF9hY3Rpdml0aWVzX19hbGxvd19vdmVyYWdlLGJoX2NoYXQsYmhfY29tbXVuaXRpZXMsYmhfY29udGFjdHMsYmhfZGFzaGJvYXJkLGJoX2ZlZWRiYWNrLGJoX2ZpbGVyLGJoX2ZpbGVyX19hbGxvd19vdmVyYWdlLGJoX2Zvcm1zLGJoX2ZvcnVtcyxiaF9tZWV0aW5ncyxiaF93aGF0c19uZXcsYnNzX2FkbWluLGJzc19pbnZpdGVfZ3Vlc3QsYnNzX3VpX19pc19pc3Zfb2ZmZXJpbmcsaGFzX2FjY2Vzc29yeV9zdWJzY3JpcHRpb24saXN2X3N1Z2FyX2NybSxpc3ZfdHJpbG9nLGxjX2FjdGl2aXRpZXMsbGNfbmV3cyxzYW1ldGltZV9tZWV0aW5nLA==-MjAwODkxMjc=;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token=1f581b9f-5644-431c-a0b6-7d8b27b670d9;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token_forum=abe89c4a-2824-479d-bc6b-feefeb69955e;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[JSESSIONID=0000f7Q8_EKentKKKLcNDfzcZZV:18ouih24s;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[user_lang=ZW5fVVM%3D-MjAwODkxMjc%3D;Secure; Domain=na.collabservtest.lotus.com; Path=/; Expires=Sat, 12-Jul-14 10:37:05 GMT;Secure;]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[BIGipServerC1-AC-9083-fe=2691339200.31523.0000;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[BIGipServerC1-WebSEAL-80-fe=2590741440.20480.0000;secure; path=/]]></value>
+    </header></headers>
+<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<entry xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns="http://www.w3.org/2005/Atom">
+  <snx:communityUuid>116e9a68-5fef-4ae6-b65d-f9d456a87986</snx:communityUuid>
+  <id>http://communities.ibm.com:2006/service/atom/community/instance?communityUuid=116e9a68-5fef-4ae6-b65d-f9d456a87986</id>
+  <title type="text">JavaTestCommunity 1405075018932</title>
+  <category term="community" scheme="http://www.ibm.com/xmlns/prod/sn/type">
+  </category>
+  <link href="https://apps.na.collabservtest.lotus.com/communities/service/atom/community/instance?communityUuid=116e9a68-5fef-4ae6-b65d-f9d456a87986" rel="self">
+  </link>
+  <link href="https://apps.na.collabservtest.lotus.com/communities/service/atom/community/instance?communityUuid=116e9a68-5fef-4ae6-b65d-f9d456a87986" rel="edit">
+  </link>
+  <link href="https://apps.na.collabservtest.lotus.com/communities/service/html/communitystart?communityUuid=116e9a68-5fef-4ae6-b65d-f9d456a87986" rel="alternate" type="text/html">
+  </link>
+  <link href="https://apps.na.collabservtest.lotus.com/communities/service/html/image?communityUuid=116e9a68-5fef-4ae6-b65d-f9d456a87986&amp;lastMod=1405075021951" rel="http://www.ibm.com/xmlns/prod/sn/logo">
+  </link>
+  <link href="https://apps.na.collabservtest.lotus.com/communities/service/atom/community/service?communityUuid=116e9a68-5fef-4ae6-b65d-f9d456a87986" rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml">
+  </link>
+  <link href="https://apps.na.collabservtest.lotus.com/communities/service/atom/community/members?communityUuid=116e9a68-5fef-4ae6-b65d-f9d456a87986" rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml">
+  </link>
+  <link href="https://apps.na.collabservtest.lotus.com/communities/service/atom/community/bookmarks?communityUuid=116e9a68-5fef-4ae6-b65d-f9d456a87986" rel="http://www.ibm.com/xmlns/prod/sn/bookmarks" type="application/atom+xml">
+  </link>
+  <link href="https://apps.na.collabservtest.lotus.com/communities/service/atom/community/feeds?communityUuid=116e9a68-5fef-4ae6-b65d-f9d456a87986" rel="http://www.ibm.com/xmlns/prod/sn/feeds" type="application/atom+xml">
+  </link>
+  <link href="https://apps.na.collabservtest.lotus.com/communities/service/atom/community/remoteApplications?communityUuid=116e9a68-5fef-4ae6-b65d-f9d456a87986" rel="http://www.ibm.com/xmlns/prod/sn/remote-applications" type="application/atom+xml">
+  </link>
+  <link href="https://apps.na.collabservtest.lotus.com/communities/service/atom/community/forum/topics?communityUuid=116e9a68-5fef-4ae6-b65d-f9d456a87986" rel="http://www.ibm.com/xmlns/prod/sn/forum-topics" type="application/atom+xml">
+  </link>
+  <link href="https://apps.na.collabservtest.lotus.com/communities/service/atom/community/invites?communityUuid=116e9a68-5fef-4ae6-b65d-f9d456a87986" rel="http://www.ibm.com/xmlns/prod/sn/invitations-list" type="application/atom+xml">
+  </link>
+  <link href="https://apps.na.collabservtest.lotus.com/communities/service/atom/community/widgets?communityUuid=116e9a68-5fef-4ae6-b65d-f9d456a87986" rel="http://www.ibm.com/xmlns/prod/sn/widgets" type="application/atom+xml">
+  </link>
+  <snx:membercount>1</snx:membercount>
+  <snx:communityType>private</snx:communityType>
+  <snx:handle></snx:handle>
+  <link href="https://apps.na.collabservtest.lotus.com/communities/service/atom/community/subcommunities?communityUuid=116e9a68-5fef-4ae6-b65d-f9d456a87986" rel="http://www.ibm.com/xmlns/prod/sn/subcommunities" type="application/atom+xml">
+  </link>
+  <snx:preModeration>true</snx:preModeration>
+  <snx:postModeration>true</snx:postModeration>
+  <published>2014-07-11T10:37:01.951Z</published>
+  <updated>2014-07-11T10:37:04.421Z</updated>
+  <content type="html">Java Community Content</content>
+  <summary type="text">Java Community Content</summary>
+  <author>
+    <name>Carlos Manias</name>
+    <snx:userid>20089127</snx:userid>
+    <snx:userState>active</snx:userState>
+    <snx:orgId type="text">20085940</snx:orgId>
+  </author>
+  <contributor>
+    <name>Carlos Manias</name>
+    <snx:userid>20089127</snx:userid>
+    <snx:userState>active</snx:userState>
+    <snx:orgId type="text">20085940</snx:orgId>
+  </contributor>
+  <link href="https://apps.na.collabservtest.lotus.com/connections/opensocial/rest/activitystreams/urn:lsid:lconn.ibm.com:communities.community:116e9a68-5fef-4ae6-b65d-f9d456a87986/@all/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/activitystream" type="application/atom+xml">
+  </link>
+  <link href="https://apps.na.collabservtest.lotus.com/connections/opensocial/rest/ublog/urn:lsid:lconn.ibm.com:communities.community:116e9a68-5fef-4ae6-b65d-f9d456a87986/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/microblog" type="application/atom+xml">
+  </link>
+  <snx:communityTheme snx:uuid="default">
+  </snx:communityTheme>
+  <snx:communityStartPage></snx:communityStartPage>
+  <snx:isExternal>true</snx:isExternal>
+  <link href="https://apps.na.collabservtest.lotus.com/communities/service/atom/community/broadcasts?communityUuid=116e9a68-5fef-4ae6-b65d-f9d456a87986" rel="http://www.ibm.com/xmlns/prod/sn/community-broadcasts" type="application/atom+xml">
+  </link>
+</entry>]]></data>
+</response>
+<response statusCode="201" statusReason="Created">
+<headers>
+    <header>
+        <name><![CDATA[content-language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header>
+    <header>
+        <name><![CDATA[content-type]]></name>
+        <value><![CDATA[text/html; charset=UTF-8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[date]]></name>
+        <value><![CDATA[Fri, 11 Jul 2014 10:37:09 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[last-modified]]></name>
+        <value><![CDATA[Fri, 11 Jul 2014 10:37:06 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[location]]></name>
+        <value><![CDATA[https://apps.na.collabservtest.lotus.com/communities/service/atom/community/instance?communityUuid=439cbc0f-d4f0-4af1-a253-a5e786ecc3ab]]></value>
+    </header>
+    <header>
+        <name><![CDATA[p3p]]></name>
+        <value><![CDATA[CP="NON CUR OTPi OUR NOR UNI"]]></value>
+    </header>
+    <header>
+        <name><![CDATA[vary]]></name>
+        <value><![CDATA[Accept-Encoding]]></value>
+    </header>
+    <header>
+        <name><![CDATA[transfer-encoding]]></name>
+        <value><![CDATA[chunked]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-powered-by]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-ua-compatible]]></name>
+        <value><![CDATA[IE=9,8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-lconn-auth]]></name>
+        <value><![CDATA[true]]></value>
+    </header>
+    <header>
+        <name><![CDATA[cache-control]]></name>
+        <value><![CDATA[no-store, no-cache, must-revalidate, private, must-revalidate]]></value>
+    </header>
+    <header>
+        <name><![CDATA[expires]]></name>
+        <value><![CDATA[Thu, 1 Jan 1970 00:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=RMvtuhQFT0HPI4YsKs+/6mdvPCkLG0afjM6fpmBoicQBQpLdlTh5yTmvGHQX0W0eYyc/Mn273KQ1uqevhGVZmWRuO6/FUJoBoLmzl9ICUDr7e6JVsetxN896ImOKrxYThYjUjCCBvYsdvliXPLWoMKRzxcaxYOtMk9CCrjZL13daaImJluZCzH43i0tl75gi29+w/cBz+bYmoplZgbbXovDu612LtaSv6Ett89+vC+FvgI7zyQnAOQ/csUBITbf7Sv6i2LLGdgK1FyZ4dAGp9CrIvaqIJY0ASJX3TbE2bxdeC0HhpNJO8RkG5Qv1yL4xTR6H3nZ9BwzR/IcwGIZIU9e+ZYdA3HWLLQxhiaePJr8K6Vt4o0pzUSiJbgICnvmYIqNhAcddzq3+HcIlGJN+HIYVAYbj7F+++KLOPr8Aa6mi2FUG0gKu4TkDZ3bVPOGk2f3HWew7abzmjR/JDXUnhfoXmPZPpO7SLSv2QS/34c8gFfsi8DlKfiDFyzpgB4nXO1PYw/akVFckmXNC6W/hozySjsbuMdrQ2YA7dI8yKVd9ZvRBnoNDdZMqu4YfttPTARaMzVFfZ0aOk3v4Y+iTswrJrlxzl3TyrmBJN5zebYAsNpLAfWTVVRg9u8b3yyK/UZZ4reLDIOteqLMjMbc8K1NvwVx5JX6tFKx0qsIAoEBpoWZQmm2eXgvP0QfG3ww9FL+4aF8CYn+XfEqOCU8wMob3wdHvN52okT/7X2dOh2/EYZfiRkncV5QX4maLmVjV;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[entitlements=MDczMDQxODI2N2M1MTBlMzg2NTliY2ZjZGE1NDk4NDY3YWJiMWQxNQ==-YmhfYWN0aXZpdGllcyxiaF9hY3Rpdml0aWVzX19hbGxvd19vdmVyYWdlLGJoX2NoYXQsYmhfY29tbXVuaXRpZXMsYmhfY29udGFjdHMsYmhfZGFzaGJvYXJkLGJoX2ZlZWRiYWNrLGJoX2ZpbGVyLGJoX2ZpbGVyX19hbGxvd19vdmVyYWdlLGJoX2Zvcm1zLGJoX2ZvcnVtcyxiaF9tZWV0aW5ncyxiaF93aGF0c19uZXcsYnNzX2FkbWluLGJzc19pbnZpdGVfZ3Vlc3QsYnNzX3VpX19pc19pc3Zfb2ZmZXJpbmcsaGFzX2FjY2Vzc29yeV9zdWJzY3JpcHRpb24saXN2X3N1Z2FyX2NybSxpc3ZfdHJpbG9nLGxjX2FjdGl2aXRpZXMsbGNfbmV3cyxzYW1ldGltZV9tZWV0aW5nLA==-MjAwODkxMjc=;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token=56a22ba0-d558-4b61-b7b2-d61444490988;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token_forum=599e606d-0fc2-4a8d-896c-865cdcbf925b;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[JSESSIONID=0000AXKTcm6CSNrSbvOWd0-ALEO:18ouimp97;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[user_lang=ZW5fVVM%3D-MjAwODkxMjc%3D;Secure; Domain=na.collabservtest.lotus.com; Path=/; Expires=Sat, 12-Jul-14 10:37:09 GMT;Secure;]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[BIGipServerC1-AC-9083-fe=2708116416.31523.0000;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[BIGipServerC1-WebSEAL-80-fe=2607518656.20480.0000;secure; path=/]]></value>
+    </header></headers>
+<data><![CDATA[]]></data>
+</response>
+<response statusCode="200" statusReason="OK">
+<headers>
+    <header>
+        <name><![CDATA[content-language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header>
+    <header>
+        <name><![CDATA[content-type]]></name>
+        <value><![CDATA[application/atom+xml;charset=UTF-8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[date]]></name>
+        <value><![CDATA[Fri, 11 Jul 2014 10:37:10 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[last-modified]]></name>
+        <value><![CDATA[Fri, 11 Jul 2014 10:37:10 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[p3p]]></name>
+        <value><![CDATA[CP="NON CUR OTPi OUR NOR UNI"]]></value>
+    </header>
+    <header>
+        <name><![CDATA[vary]]></name>
+        <value><![CDATA[Accept-Encoding]]></value>
+    </header>
+    <header>
+        <name><![CDATA[transfer-encoding]]></name>
+        <value><![CDATA[chunked]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-powered-by]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-ua-compatible]]></name>
+        <value><![CDATA[IE=9,8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-lconn-auth]]></name>
+        <value><![CDATA[true]]></value>
+    </header>
+    <header>
+        <name><![CDATA[pragma]]></name>
+        <value><![CDATA[no-cache]]></value>
+    </header>
+    <header>
+        <name><![CDATA[cache-control]]></name>
+        <value><![CDATA[no-store, no-cache, must-revalidate, private, must-revalidate]]></value>
+    </header>
+    <header>
+        <name><![CDATA[expires]]></name>
+        <value><![CDATA[Thu, 1 Jan 1970 00:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=Xit9T/fpFdoyF9NyWSFSAY7PvN9xn39LkaCd/9v7QJJ4QwC4lPGRzYp/fojmpATlT+9zchJdslHs53hUz+sDAHTp0iK4hWDub8fLb/grSU1pBzyI37DtOx1B/9qLlN6RCBCLjgbIYye758wUWgxOXDrACUBbqo/Cvg9JFZruEvHHnZ3wpaDavZV2mKDrW46ANZp2GG1L9lQCzlTNDHP7q9dNQaaDRlQEYXvGmAKNqTIzYhJs6F1T9fi6us5gOvkvTMeAq5SGewIefs9gy0srJ5+y+Jb05KLax3iZeZJNh9rW8AE02VBKDIb1pxYbDecre/mrq2el5Gsm2AkeOCPHpsJiuElHFbw15DX07CqojLK/AoOWPS+gx17+EzYlrdCh8mtYq1GQrfj+1loJ79+Hqt4qAlgKB2cmKf2Lns7wcRNjdJIQNGVvSWbzcVSJwoxrFXMzkO62K5Rfx+E4nSdYd0IOt/eQjuBKSv5OBQWW9XbVZGX5ZMF9b66fxcj+Mvv4rnVVcB9sK5JKJL46qOvbTjRtKPBIv9hfKruOjDOLK/113JkAcwZudbtSHPBPr5KXV/47QMtfOTtpd+S6ygLL+8uMZlTgaQFHxqnmXFyu3eZzMjEyi36Jq0bl3SgTKUQo2ToNOU5nAcOTds0eQPQh2otKm4tgPU6jVRnXVOQ8fgjJLX8yiebWsTFnyIvbJZPehN/1Ulxpc686iWsSy9Cp1ztEypTD3YlwIudCRHI5NG2Kd68ZzK6I8LHzziV5rTkq;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[entitlements=MDczMDQxODI2N2M1MTBlMzg2NTliY2ZjZGE1NDk4NDY3YWJiMWQxNQ==-YmhfYWN0aXZpdGllcyxiaF9hY3Rpdml0aWVzX19hbGxvd19vdmVyYWdlLGJoX2NoYXQsYmhfY29tbXVuaXRpZXMsYmhfY29udGFjdHMsYmhfZGFzaGJvYXJkLGJoX2ZlZWRiYWNrLGJoX2ZpbGVyLGJoX2ZpbGVyX19hbGxvd19vdmVyYWdlLGJoX2Zvcm1zLGJoX2ZvcnVtcyxiaF9tZWV0aW5ncyxiaF93aGF0c19uZXcsYnNzX2FkbWluLGJzc19pbnZpdGVfZ3Vlc3QsYnNzX3VpX19pc19pc3Zfb2ZmZXJpbmcsaGFzX2FjY2Vzc29yeV9zdWJzY3JpcHRpb24saXN2X3N1Z2FyX2NybSxpc3ZfdHJpbG9nLGxjX2FjdGl2aXRpZXMsbGNfbmV3cyxzYW1ldGltZV9tZWV0aW5nLA==-MjAwODkxMjc=;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token=02a022e4-c7eb-4412-8860-7d3d6cb1eb49;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token_forum=99db1025-746e-44a7-8070-f794808fb3f7;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[JSESSIONID=0000yDuhenwz3NZB_pkM61F3aLM:18ouih24s;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[user_lang=ZW5fVVM%3D-MjAwODkxMjc%3D;Secure; Domain=na.collabservtest.lotus.com; Path=/; Expires=Sat, 12-Jul-14 10:37:10 GMT;Secure;]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[BIGipServerC1-AC-9083-fe=2691339200.31523.0000;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[BIGipServerC1-WebSEAL-80-fe=2590741440.20480.0000;secure; path=/]]></value>
+    </header></headers>
+<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<entry xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns="http://www.w3.org/2005/Atom">
+  <snx:communityUuid>439cbc0f-d4f0-4af1-a253-a5e786ecc3ab</snx:communityUuid>
+  <id>http://communities.ibm.com:2006/service/atom/community/instance?communityUuid=439cbc0f-d4f0-4af1-a253-a5e786ecc3ab</id>
+  <title type="text">JavaTestCommunity 1405075023676</title>
+  <category term="community" scheme="http://www.ibm.com/xmlns/prod/sn/type">
+  </category>
+  <link href="https://apps.na.collabservtest.lotus.com/communities/service/atom/community/instance?communityUuid=439cbc0f-d4f0-4af1-a253-a5e786ecc3ab" rel="self">
+  </link>
+  <link href="https://apps.na.collabservtest.lotus.com/communities/service/atom/community/instance?communityUuid=439cbc0f-d4f0-4af1-a253-a5e786ecc3ab" rel="edit">
+  </link>
+  <link href="https://apps.na.collabservtest.lotus.com/communities/service/html/communitystart?communityUuid=439cbc0f-d4f0-4af1-a253-a5e786ecc3ab" rel="alternate" type="text/html">
+  </link>
+  <link href="https://apps.na.collabservtest.lotus.com/communities/service/html/image?communityUuid=439cbc0f-d4f0-4af1-a253-a5e786ecc3ab&amp;lastMod=1405075026779" rel="http://www.ibm.com/xmlns/prod/sn/logo">
+  </link>
+  <link href="https://apps.na.collabservtest.lotus.com/communities/service/atom/community/service?communityUuid=439cbc0f-d4f0-4af1-a253-a5e786ecc3ab" rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml">
+  </link>
+  <link href="https://apps.na.collabservtest.lotus.com/communities/service/atom/community/members?communityUuid=439cbc0f-d4f0-4af1-a253-a5e786ecc3ab" rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml">
+  </link>
+  <link href="https://apps.na.collabservtest.lotus.com/communities/service/atom/community/bookmarks?communityUuid=439cbc0f-d4f0-4af1-a253-a5e786ecc3ab" rel="http://www.ibm.com/xmlns/prod/sn/bookmarks" type="application/atom+xml">
+  </link>
+  <link href="https://apps.na.collabservtest.lotus.com/communities/service/atom/community/feeds?communityUuid=439cbc0f-d4f0-4af1-a253-a5e786ecc3ab" rel="http://www.ibm.com/xmlns/prod/sn/feeds" type="application/atom+xml">
+  </link>
+  <link href="https://apps.na.collabservtest.lotus.com/communities/service/atom/community/remoteApplications?communityUuid=439cbc0f-d4f0-4af1-a253-a5e786ecc3ab" rel="http://www.ibm.com/xmlns/prod/sn/remote-applications" type="application/atom+xml">
+  </link>
+  <link href="https://apps.na.collabservtest.lotus.com/communities/service/atom/community/forum/topics?communityUuid=439cbc0f-d4f0-4af1-a253-a5e786ecc3ab" rel="http://www.ibm.com/xmlns/prod/sn/forum-topics" type="application/atom+xml">
+  </link>
+  <link href="https://apps.na.collabservtest.lotus.com/communities/service/atom/community/invites?communityUuid=439cbc0f-d4f0-4af1-a253-a5e786ecc3ab" rel="http://www.ibm.com/xmlns/prod/sn/invitations-list" type="application/atom+xml">
+  </link>
+  <link href="https://apps.na.collabservtest.lotus.com/communities/service/atom/community/widgets?communityUuid=439cbc0f-d4f0-4af1-a253-a5e786ecc3ab" rel="http://www.ibm.com/xmlns/prod/sn/widgets" type="application/atom+xml">
+  </link>
+  <snx:membercount>1</snx:membercount>
+  <snx:communityType>private</snx:communityType>
+  <snx:handle></snx:handle>
+  <link href="https://apps.na.collabservtest.lotus.com/communities/service/atom/community/subcommunities?communityUuid=439cbc0f-d4f0-4af1-a253-a5e786ecc3ab" rel="http://www.ibm.com/xmlns/prod/sn/subcommunities" type="application/atom+xml">
+  </link>
+  <snx:preModeration>true</snx:preModeration>
+  <snx:postModeration>true</snx:postModeration>
+  <published>2014-07-11T10:37:06.779Z</published>
+  <updated>2014-07-11T10:37:09.472Z</updated>
+  <content type="html">Java Community Content</content>
+  <summary type="text">Java Community Content</summary>
+  <author>
+    <name>Carlos Manias</name>
+    <snx:userid>20089127</snx:userid>
+    <snx:userState>active</snx:userState>
+    <snx:orgId type="text">20085940</snx:orgId>
+  </author>
+  <contributor>
+    <name>Carlos Manias</name>
+    <snx:userid>20089127</snx:userid>
+    <snx:userState>active</snx:userState>
+    <snx:orgId type="text">20085940</snx:orgId>
+  </contributor>
+  <link href="https://apps.na.collabservtest.lotus.com/connections/opensocial/rest/activitystreams/urn:lsid:lconn.ibm.com:communities.community:439cbc0f-d4f0-4af1-a253-a5e786ecc3ab/@all/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/activitystream" type="application/atom+xml">
+  </link>
+  <link href="https://apps.na.collabservtest.lotus.com/connections/opensocial/rest/ublog/urn:lsid:lconn.ibm.com:communities.community:439cbc0f-d4f0-4af1-a253-a5e786ecc3ab/@all?format=atom" rel="http://www.ibm.com/xmlns/prod/sn/microblog" type="application/atom+xml">
+  </link>
+  <snx:communityTheme snx:uuid="default">
+  </snx:communityTheme>
+  <snx:communityStartPage></snx:communityStartPage>
+  <snx:isExternal>true</snx:isExternal>
+  <link href="https://apps.na.collabservtest.lotus.com/communities/service/atom/community/broadcasts?communityUuid=439cbc0f-d4f0-4af1-a253-a5e786ecc3ab" rel="http://www.ibm.com/xmlns/prod/sn/community-broadcasts" type="application/atom+xml">
+  </link>
+</entry>]]></data>
+</response>
+</responses>

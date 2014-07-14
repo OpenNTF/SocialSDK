@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<responses>
+<response statusCode="200" statusReason="OK">
+<headers>
+    <header>
+        <name><![CDATA[content-language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header>
+    <header>
+        <name><![CDATA[content-type]]></name>
+        <value><![CDATA[application/json]]></value>
+    </header>
+    <header>
+        <name><![CDATA[date]]></name>
+        <value><![CDATA[Thu, 10 Jul 2014 10:57:39 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[p3p]]></name>
+        <value><![CDATA[CP="NON CUR OTPi OUR NOR UNI"]]></value>
+    </header>
+    <header>
+        <name><![CDATA[vary]]></name>
+        <value><![CDATA[Accept-Encoding]]></value>
+    </header>
+    <header>
+        <name><![CDATA[transfer-encoding]]></name>
+        <value><![CDATA[chunked]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-powered-by]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-ua-compatible]]></name>
+        <value><![CDATA[IE=9,8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-lconn-auth]]></name>
+        <value><![CDATA[true]]></value>
+    </header>
+    <header>
+        <name><![CDATA[cache-control]]></name>
+        <value><![CDATA[private, must-revalidate, max-age=0, no-cache=set-cookie, private, must-revalidate]]></value>
+    </header>
+    <header>
+        <name><![CDATA[expires]]></name>
+        <value><![CDATA[Thu, 01 Dec 1994 16:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=iqcEPIWqmlBjTdJbIbDdzRqDmydVKfzGzo3D89VO+iAmhHntv8xh8BfxyhiMaC3GvjQ1KTTVZjX2y0oGar6aDJ7W2F3QV2nrkk7QVuUtKn7mVahR7eLEOwFmoDIP0byCIbOPcr2Wrhd0CoTO97TOW23X5qkbPqTgADfYpU52KS24jwWA9+6nU1+nGpiuHJCAsqSisgDGga3nXs4APJlJONpbzN4A91U5mPsBo6iAAIKzeJZ1YYl+Ql6mBr9gb5+aEFTPCQGG+LagpKV0umFhHTpiwHl+/795Sq7jYK7+aDgEIrSnlm0SkmNn6XqhvYgeArg4BYaQKNNsdwXCYvvIQ6TEDlKmfblmIHsqPd50gc+W2bF584X75wZogXWOXOGN8bzAdTLxyxZiRuevM93m3grJlwGHom0lbioCvnnCGCcAv7hQRUyEY5BOdBtnKuUqURiq8fvq6UWWE4v8OCmusPzXfCXhTQG5i3+OMkjh5OZzuOZJd9ch1m3afQi369uqd91tMv+6FaeyhtF3VLp5jzNnvDsCcSz3AMTQ6s7Yr/nHsK6j4S+nCAoGsZDjhPQUxzuorBsH5wncOAxgeilpXNFP0UZLGF+K5M+qF4g7so6bPLwA6oaiexyuYZzUcRZv8f1JtiLeWmx9KK6Ew5SCC9YaJpf6Rt8tR+oPz9XgzTI/g0byr587mpRARybcyjuCVOGM0stkg/0/UA2wkkQJgVqCPRqYkVqOSlGUD7BT8cnt7ssMUusQsVOkrSKwjfHE;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[user_lang=ZW5fVVM%3D-MjAwMDAyNjk%3D;Secure; Domain=cfdev3.swg.usma.ibm.com; Path=/; Expires=Fri, 11-Jul-14 10:57:39 GMT;Secure;]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[BIGipServerCFDev3-WebSEAL-80-fe=655360266.20480.0000;secure; path=/]]></value>
+    </header></headers>
+<data><![CDATA[{"startIndex":0,"totalResults":-1,"connections":{"snapshot":"2014-07-10T10:57:39.283Z","isAdmin":"false","unreadNotifications":2},"filtered":true,"title":"IBM Connections - Public stories","itemsPerPage":0,"sorted":true,"list":[],"updatedSince":true}]]></data>
+</response>
+</responses>

@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<responses>
+<response statusCode="200" statusReason="OK">
+<headers>
+    <header>
+        <name><![CDATA[content-language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header>
+    <header>
+        <name><![CDATA[content-type]]></name>
+        <value><![CDATA[application/atom+xml; charset=UTF-8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[date]]></name>
+        <value><![CDATA[Thu, 10 Jul 2014 11:00:25 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[etag]]></name>
+        <value><![CDATA["myshares:modified=1404990025797:updated=1404990025821"]]></value>
+    </header>
+    <header>
+        <name><![CDATA[last-modified]]></name>
+        <value><![CDATA[Thu, 10 Jul 2014 11:00:25 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[p3p]]></name>
+        <value><![CDATA[CP="NON CUR OTPi OUR NOR UNI"]]></value>
+    </header>
+    <header>
+        <name><![CDATA[vary]]></name>
+        <value><![CDATA[Accept-Encoding]]></value>
+    </header>
+    <header>
+        <name><![CDATA[transfer-encoding]]></name>
+        <value><![CDATA[chunked]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-powered-by]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-ua-compatible]]></name>
+        <value><![CDATA[IE=9,8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-lconn-auth]]></name>
+        <value><![CDATA[true]]></value>
+    </header>
+    <header>
+        <name><![CDATA[cache-control]]></name>
+        <value><![CDATA[private, must-revalidate, max-age=0, no-cache=set-cookie]]></value>
+    </header>
+    <header>
+        <name><![CDATA[expires]]></name>
+        <value><![CDATA[Thu, 01 Dec 1994 16:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=llV2L08Vaz/5cb02GtU71+DfnGNFkKD0gdVXaT1bRIvsnOPnJ14yosAKF4LnI9cBkGddi9acIl257efl3JpJPLfQDIG8zBpw2MovcD3uF8SJtVDck+Ugpqkl7MdEttXk2gobKiyro5F+DLX6Hks5R9PiRAVx4Zm15+I1a6XccbLc68SVAC5fjawvKl91jXs1vi0Dy3qhpjnguBIR12tdXqPQwhrHPNqFzDkDqigcCvsYUxYfzHHobIhC/7Rl1igM0KwZI/upXI6fLchyCmGNdxblQhrxJ+nOuxvUw1BPYTBbCey+uKNHl4vO7GdI7pM95L/4MRON3Jq7sB7WhbQfKJWDzJtzKyy8/AezJRkwDH8+xWLO3ip8Ip8YooDtqhG1wYuLMXmiix+UKR2Zm0AbYH2ymrxkqbySEYGNzSmWV099pb6HGCBzcnWzFrgVFL5VNLp3PjQxQ1qoBASu+LwupRIYJvygRu42sWAsj28uLJTBfAxdLicvJ8DHieofHpYZQ1v+TCG4JWXeCVVJteLHGgsWXVdTnG7yatCCPn7MrLT1ZU81bVkHbdE3vz6uYrNJVaSotODYQkdDt5OeHjsTcxhNnAWK9CMSbbdUdMswdwr0tfJOlAvur8NpctrZ5mOBeQIVbC5o7N73v7z68k2lBQBEche5BIfuY8ioymjf6bz20C9opwO36jL/hi2zppu978qeCTgzBP+pa4ZqOvkembZVISc/oL53UiBEfECY0vp7N+Osh7zJlWXtA7v7SoE1;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[entitlements=MzYxMTA2NGUxZjI3MDNhYTUyZTUzNzRhZmRmMDYyYzY1NGI2N2MwOQ==-YmhfYWN0aXZpdGllcyxiaF9hY3Rpdml0aWVzX19hbGxvd19vdmVyYWdlLGJoX2NoYXQsYmhfY29tbXVuaXRpZXMsYmhfY29udGFjdHMsYmhfZGFzaGJvYXJkLGJoX2ZlZWRiYWNrLGJoX2ZpbGVyLGJoX2ZpbGVyX19hbGxvd19vdmVyYWdlLGJoX2ZvcnVtcyxiaF93aGF0c19uZXcsYnNzX2FkbWluLGJzc19pbnZpdGVfZ3Vlc3QsbGNfYWN0aXZpdGllcyxsY19uZXdzLA==-MjAwMDAyNjk=;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token=2c8e41fe-bd05-4591-918c-5bd74ee6f7ca;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token_forum=5b81ce34-5786-4a4c-887a-175687555788;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[JSESSIONID=00005PiyL6gNlugsfEO4saSB8sD:18of2tvfe;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[user_lang=ZW5fVVM%3D-MjAwMDAyNjk%3D;Secure; Domain=cfdev3.swg.usma.ibm.com; Path=/; Expires=Fri, 11-Jul-14 11:00:25 GMT;Secure;]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[BIGipServerCFDev3-WebSEAL-80-fe=655360266.20480.0000;secure; path=/]]></value>
+    </header></headers>
+<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?><feed xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:td="urn:ibm.com/td" xmlns="http://www.w3.org/2005/Atom"><id>urn:lsid:ibm.com:td:documents</id><link href="https://apps.cfdev3.swg.usma.ibm.com/files/basic/api/documents/shared/feed" rel="self"></link><title type="text">Files Shared With You</title><updated>2014-07-10T11:00:25.821Z</updated><generator version="4.5.0.0" uri="http://www.ibm.com/xmlns/prod/sn">IBM Connections - Files</generator><snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/item">0</snx:rank><opensearch:totalResults>0</opensearch:totalResults></feed>]]></data>
+</response>
+</responses>

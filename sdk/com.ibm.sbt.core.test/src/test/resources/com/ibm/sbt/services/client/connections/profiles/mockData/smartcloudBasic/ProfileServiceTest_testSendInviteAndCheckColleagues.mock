@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<responses>
+<response statusCode="404" statusReason="Not Found">
+<headers>
+    <header>
+        <name><![CDATA[content-type]]></name>
+        <value><![CDATA[text/html; charset=UTF-8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[date]]></name>
+        <value><![CDATA[Thu, 10 Jul 2014 11:01:31 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[p3p]]></name>
+        <value><![CDATA[CP="NON CUR OTPi OUR NOR UNI"]]></value>
+    </header>
+    <header>
+        <name><![CDATA[vary]]></name>
+        <value><![CDATA[Accept-Encoding]]></value>
+    </header>
+    <header>
+        <name><![CDATA[transfer-encoding]]></name>
+        <value><![CDATA[chunked]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-powered-by]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[cache-control]]></name>
+        <value><![CDATA[private, must-revalidate]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[BIGipServerCFDev3-WebSEAL-80-fe=655360266.20480.0000;secure; path=/]]></value>
+    </header></headers>
+<data><![CDATA[<H1>SRVE0255E: A WebGroup/Virtual Host to handle /profiles/atom/connections.do has not been defined.</H1><BR><H3>SRVE0255E: A WebGroup/Virtual Host to handle apps.cfdev3.swg.usma.ibm.com:443 has not been defined.</H3><BR><I>IBM WebSphere Application Server</I>]]></data>
+</response>
+</responses>

@@ -1,0 +1,299 @@
+<?xml version="1.0"?>
+<responses>
+<response statusCode="403" statusReason="Forbidden">
+<headers>
+    <header>
+        <name><![CDATA[content-language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header>
+    <header>
+        <name><![CDATA[content-type]]></name>
+        <value><![CDATA[text/html;charset=UTF-8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[date]]></name>
+        <value><![CDATA[Thu, 10 Jul 2014 10:58:17 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[p3p]]></name>
+        <value><![CDATA[CP="NON CUR OTPi OUR NOR UNI"]]></value>
+    </header>
+    <header>
+        <name><![CDATA[vary]]></name>
+        <value><![CDATA[Accept-Encoding]]></value>
+    </header>
+    <header>
+        <name><![CDATA[transfer-encoding]]></name>
+        <value><![CDATA[chunked]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-powered-by]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-ua-compatible]]></name>
+        <value><![CDATA[IE=9,8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-lconn-auth]]></name>
+        <value><![CDATA[true]]></value>
+    </header>
+    <header>
+        <name><![CDATA[$wsep]]></name>
+        <value><![CDATA[]]></value>
+    </header>
+    <header>
+        <name><![CDATA[cache-control]]></name>
+        <value><![CDATA[no-cache="set-cookie, set-cookie2", private, must-revalidate]]></value>
+    </header>
+    <header>
+        <name><![CDATA[expires]]></name>
+        <value><![CDATA[Thu, 01 Dec 1994 16:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=iqcEPIWqmlBjTdJbIbDdzRqDmydVKfzGzo3D89VO+iAmhHntv8xh8BfxyhiMaC3GvjQ1KTTVZjX2y0oGar6aDJ7W2F3QV2nrkk7QVuUtKn7mVahR7eLEOwFmoDIP0byCIbOPcr2Wrhd0CoTO97TOW23X5qkbPqTgADfYpU52KS24jwWA9+6nU1+nGpiuHJCAsqSisgDGga3nXs4APJlJONpbzN4A91U5mPsBo6iAAIKzeJZ1YYl+Ql6mBr9gb5+atAWi3rqDPxQKfHlvXLsBvTUBrnQS05rWJoDFBWJHKrbgH58Hc1o9Ou7+po9V/JSNmUjR0eRRtvdokGin1Bsh77ZbHUehfGMJ52IvmMP5Z34kVGpsH7uxJLZIPx7O55iruNK2F64xU8Gcfi1Ugd2Rmr8NJKsSKJ3hY5LjVQpqu3ebkHAGaJPtwPWAu1DKDiBAKZOWVpWoaREDIXnzek+pJYs2N1MbTT7ANFD9ZcWhfr861KN99Vf3WbBx1cCdeKKlMpasYg3tqq+NHWG4oSIAGX7fen+3m8giIk49EaMA98u5PsRGX7QI5+T1+0tvKzMav3P0Mf8rh7jXcX266968fkVkNYn1HV8LbYThuHXK/Ox4rUxWOZiz+24D6mwsjdt4RkQHPOqKfwIyKh1/W1LmP3ogD/mpVpO8ZdF9VFs1pREpnNvsHnBnTgU0tYF9I50ljHt05vHGBFmAT0pKA9xFvTRH9E/Vd5wH77AAZG0jQdY0UDlfIMmGxncyDrWBNcT3;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[entitlements=MzYxMTA2NGUxZjI3MDNhYTUyZTUzNzRhZmRmMDYyYzY1NGI2N2MwOQ==-YmhfYWN0aXZpdGllcyxiaF9hY3Rpdml0aWVzX19hbGxvd19vdmVyYWdlLGJoX2NoYXQsYmhfY29tbXVuaXRpZXMsYmhfY29udGFjdHMsYmhfZGFzaGJvYXJkLGJoX2ZlZWRiYWNrLGJoX2ZpbGVyLGJoX2ZpbGVyX19hbGxvd19vdmVyYWdlLGJoX2ZvcnVtcyxiaF93aGF0c19uZXcsYnNzX2FkbWluLGJzc19pbnZpdGVfZ3Vlc3QsbGNfYWN0aXZpdGllcyxsY19uZXdzLA==-MjAwMDAyNjk=;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token=3a4add29-53f1-4351-94ba-c9c24431e8cb;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token_forum=475937e3-92aa-4420-8438-fd01894a47f1;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[JSESSIONID=0000-sftV7lH_zr4pjMAD3Sw2uX:18of2u29m;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[user_lang=ZW5fVVM%3D-MjAwMDAyNjk%3D;Secure; Domain=cfdev3.swg.usma.ibm.com; Path=/; Expires=Fri, 11-Jul-14 10:58:17 GMT;Secure;]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[BIGipServerCFDev3-WebSEAL-80-fe=655360266.20480.0000;secure; path=/]]></value>
+    </header></headers>
+<data><![CDATA[<H1>Error Page Exception</H1>
+<H4>SRVE0260E: The server cannot use the error page specified for your application to handle the Original Exception printed below.</H4>
+<BR><H3>Original Exception: </H3>
+<B>Error Message: </B>SRVE0295E: Error reported: 404<BR>
+<B>Error Code: </B>404<BR>
+<B>Target Servlet: </B><BR>
+<B>Error Stack: </B><BR>
+com.ibm.ws.webcontainer.webapp.WebAppErrorReport: SRVE0295E: Error reported: 404
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.webapp.WebAppDispatcherContext.sendError(WebAppDispatcherContext.java:626)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.webapp.WebAppDispatcherContext.sendError(WebAppDispatcherContext.java:656)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.srt.SRTServletResponse.sendError(SRTServletResponse.java:1301)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.srt.SRTServletResponse.sendError(SRTServletResponse.java:1275)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at org.apache.roller.ui.core.filters.URLPatternFilter.doFilter(URLPatternFilter.java:76)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.filter.FilterInstanceWrapper.doFilter(FilterInstanceWrapper.java:195)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.filter.WebAppFilterChain.doFilter(WebAppFilterChain.java:91)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.lconn.core.web.request.HttpRequestFilter.doFilter(HttpRequestFilter.java:203)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.filter.FilterInstanceWrapper.doFilter(FilterInstanceWrapper.java:195)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.filter.WebAppFilterChain.doFilter(WebAppFilterChain.java:91)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.lotuslive.connections.filter.ContextMatchDomainRedirectionFilter.doFilter(ContextMatchDomainRedirectionFilter.java:126)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.filter.FilterInstanceWrapper.doFilter(FilterInstanceWrapper.java:195)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.filter.WebAppFilterChain.doFilter(WebAppFilterChain.java:91)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at language.filter.LanguageFilter.doFilter(LanguageFilter.java:149)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.filter.FilterInstanceWrapper.doFilter(FilterInstanceWrapper.java:195)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.filter.WebAppFilterChain.doFilter(WebAppFilterChain.java:91)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.lotuslive.connections.filter.SessionToCookieFilter.doFilter(SessionToCookieFilter.java:79)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.filter.FilterInstanceWrapper.doFilter(FilterInstanceWrapper.java:195)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.filter.WebAppFilterChain.doFilter(WebAppFilterChain.java:91)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at entitlements.filter.EntitlementFilter.doFilter(EntitlementFilter.java:177)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.filter.FilterInstanceWrapper.doFilter(FilterInstanceWrapper.java:195)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.filter.WebAppFilterChain.doFilter(WebAppFilterChain.java:91)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.filter.WebAppFilterManager.doFilter(WebAppFilterManager.java:960)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.filter.WebAppFilterManager.invokeFilters(WebAppFilterManager.java:1064)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.webapp.WebApp.handleRequest(WebApp.java:3826)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.webapp.WebGroup.handleRequest(WebGroup.java:304)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.WebContainer.handleRequest(WebContainer.java:976)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.WSWebContainer.handleRequest(WSWebContainer.java:1662)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.channel.WCChannelLink.ready(WCChannelLink.java:200)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.http.channel.inbound.impl.HttpInboundLink.handleDiscrimination(HttpInboundLink.java:459)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.http.channel.inbound.impl.HttpInboundLink.handleNewRequest(HttpInboundLink.java:526)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.http.channel.inbound.impl.HttpInboundLink.processRequest(HttpInboundLink.java:312)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.http.channel.inbound.impl.HttpInboundLink.ready(HttpInboundLink.java:283)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.tcp.channel.impl.NewConnectionInitialReadCallback.sendToDiscriminators(NewConnectionInitialReadCallback.java:214)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.tcp.channel.impl.NewConnectionInitialReadCallback.complete(NewConnectionInitialReadCallback.java:113)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.tcp.channel.impl.AioReadCompletionListener.futureCompleted(AioReadCompletionListener.java:175)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.io.async.AbstractAsyncFuture.invokeCallback(AbstractAsyncFuture.java:217)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.io.async.AsyncChannelFuture$1.run(AsyncChannelFuture.java:205)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.util.ThreadPool$Worker.run(ThreadPool.java:1862)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+<BR>
+<BR><BR><H3>Error Page Exception: </H3>
+<B>Error Message: </B>SRVE0295E: Error reported: 403<BR>
+<B>Error Code: </B>403<BR>
+<B>Target Servlet: </B>GenericServletWrapper<BR>
+<B>Error Stack: </B><BR>
+com.ibm.ws.webcontainer.webapp.WebAppErrorReport: SRVE0295E: Error reported: 403
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.webapp.WebAppDispatcherContext.sendError(WebAppDispatcherContext.java:626)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.webapp.WebAppDispatcherContext.sendError(WebAppDispatcherContext.java:656)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.srt.SRTServletResponse.sendError(SRTServletResponse.java:1301)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.srt.SRTServletResponse.sendError(SRTServletResponse.java:1275)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at filters.auth.actions.Forbidden.process(Forbidden.java:46)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at filters.auth.actions.WebSEALForbidden.process(WebSEALForbidden.java:49)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at filters.auth.AuthenticationPool.finalAction(AuthenticationPool.java:43)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at filters.auth.AuthenticationService.check(AuthenticationService.java:155)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.lotus.lotuslive.connections.tai.LotusLiveTrustAssociationInterceptor.negotiateValidateandEstablishTrust(LotusLiveTrustAssociationInterceptor.java:175)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.security.web.TAIWrapper.negotiateAndValidateEstablishedTrust(TAIWrapper.java:101)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.security.web.WebAuthenticator.handleTrustAssociation(WebAuthenticator.java:418)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.security.web.WebAuthenticator.authenticate(WebAuthenticator.java:3085)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.security.web.WebCollaborator.SetAuthenticatedSubjectIfNeeded(WebCollaborator.java:3187)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.security.web.WebCollaborator.authorize(WebCollaborator.java:673)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.security.web.EJSWebCollaborator.preInvoke(EJSWebCollaborator.java:437)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.collaborator.WebAppSecurityCollaboratorImpl.preInvoke(WebAppSecurityCollaboratorImpl.java:230)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.wsspi.webcontainer.collaborator.CollaboratorHelper.preInvokeCollaborators(CollaboratorHelper.java:432)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.filter.WebAppFilterManager.invokeFilters(WebAppFilterManager.java:1054)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.webapp.WebAppRequestDispatcher.dispatch(WebAppRequestDispatcher.java:1385)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.webapp.WebAppRequestDispatcher.forward(WebAppRequestDispatcher.java:194)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.webapp.WebApp.sendError(WebApp.java:3328)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.webapp.WebAppDispatcherContext.sendError(WebAppDispatcherContext.java:634)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.webapp.WebAppDispatcherContext.sendError(WebAppDispatcherContext.java:656)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.srt.SRTServletResponse.sendError(SRTServletResponse.java:1301)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.srt.SRTServletResponse.sendError(SRTServletResponse.java:1275)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at org.apache.roller.ui.core.filters.URLPatternFilter.doFilter(URLPatternFilter.java:76)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.filter.FilterInstanceWrapper.doFilter(FilterInstanceWrapper.java:195)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.filter.WebAppFilterChain.doFilter(WebAppFilterChain.java:91)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.lconn.core.web.request.HttpRequestFilter.doFilter(HttpRequestFilter.java:203)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.filter.FilterInstanceWrapper.doFilter(FilterInstanceWrapper.java:195)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.filter.WebAppFilterChain.doFilter(WebAppFilterChain.java:91)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.lotuslive.connections.filter.ContextMatchDomainRedirectionFilter.doFilter(ContextMatchDomainRedirectionFilter.java:126)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.filter.FilterInstanceWrapper.doFilter(FilterInstanceWrapper.java:195)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.filter.WebAppFilterChain.doFilter(WebAppFilterChain.java:91)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at language.filter.LanguageFilter.doFilter(LanguageFilter.java:149)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.filter.FilterInstanceWrapper.doFilter(FilterInstanceWrapper.java:195)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.filter.WebAppFilterChain.doFilter(WebAppFilterChain.java:91)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.lotuslive.connections.filter.SessionToCookieFilter.doFilter(SessionToCookieFilter.java:79)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.filter.FilterInstanceWrapper.doFilter(FilterInstanceWrapper.java:195)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.filter.WebAppFilterChain.doFilter(WebAppFilterChain.java:91)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at entitlements.filter.EntitlementFilter.doFilter(EntitlementFilter.java:177)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.filter.FilterInstanceWrapper.doFilter(FilterInstanceWrapper.java:195)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.filter.WebAppFilterChain.doFilter(WebAppFilterChain.java:91)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.filter.WebAppFilterManager.doFilter(WebAppFilterManager.java:960)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.filter.WebAppFilterManager.invokeFilters(WebAppFilterManager.java:1064)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.webapp.WebApp.handleRequest(WebApp.java:3826)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.webapp.WebGroup.handleRequest(WebGroup.java:304)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.WebContainer.handleRequest(WebContainer.java:976)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.WSWebContainer.handleRequest(WSWebContainer.java:1662)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.webcontainer.channel.WCChannelLink.ready(WCChannelLink.java:200)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.http.channel.inbound.impl.HttpInboundLink.handleDiscrimination(HttpInboundLink.java:459)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.http.channel.inbound.impl.HttpInboundLink.handleNewRequest(HttpInboundLink.java:526)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.http.channel.inbound.impl.HttpInboundLink.processRequest(HttpInboundLink.java:312)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.http.channel.inbound.impl.HttpInboundLink.ready(HttpInboundLink.java:283)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.tcp.channel.impl.NewConnectionInitialReadCallback.sendToDiscriminators(NewConnectionInitialReadCallback.java:214)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.tcp.channel.impl.NewConnectionInitialReadCallback.complete(NewConnectionInitialReadCallback.java:113)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.tcp.channel.impl.AioReadCompletionListener.futureCompleted(AioReadCompletionListener.java:175)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.io.async.AbstractAsyncFuture.invokeCallback(AbstractAsyncFuture.java:217)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.io.async.AsyncChannelFuture$1.run(AsyncChannelFuture.java:205)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+	at com.ibm.ws.util.ThreadPool$Worker.run(ThreadPool.java:1862)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;
+<BR>
+]]></data>
+</response>
+</responses>

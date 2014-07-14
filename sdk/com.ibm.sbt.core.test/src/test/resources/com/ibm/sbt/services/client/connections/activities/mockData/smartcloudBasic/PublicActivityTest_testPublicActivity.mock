@@ -1,0 +1,2191 @@
+<?xml version="1.0"?>
+<responses>
+<response statusCode="200" statusReason="OK">
+<headers>
+    <header>
+        <name><![CDATA[accept]]></name>
+        <value><![CDATA[application/atom+xml]]></value>
+    </header>
+    <header>
+        <name><![CDATA[content-language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header>
+    <header>
+        <name><![CDATA[content-type]]></name>
+        <value><![CDATA[application/atom+xml;charset=UTF-8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[date]]></name>
+        <value><![CDATA[Thu, 10 Jul 2014 10:57:15 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[etag]]></name>
+        <value><![CDATA[W/"1404989835422-ddf8efaf-0138-4726-b94b-598654399ef3"]]></value>
+    </header>
+    <header>
+        <name><![CDATA[p3p]]></name>
+        <value><![CDATA[CP="NON CUR OTPi OUR NOR UNI"]]></value>
+    </header>
+    <header>
+        <name><![CDATA[server]]></name>
+        <value><![CDATA[IBM OpenActivities (v1.0)]]></value>
+    </header>
+    <header>
+        <name><![CDATA[vary]]></name>
+        <value><![CDATA[Accept-Encoding]]></value>
+    </header>
+    <header>
+        <name><![CDATA[transfer-encoding]]></name>
+        <value><![CDATA[chunked]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-powered-by]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-ua-compatible]]></name>
+        <value><![CDATA[IE=9,8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-lconn-auth]]></name>
+        <value><![CDATA[true]]></value>
+    </header>
+    <header>
+        <name><![CDATA[cache-control]]></name>
+        <value><![CDATA[private, no-store, must-revalidate,max-age=0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[pragma]]></name>
+        <value><![CDATA[no-cache]]></value>
+    </header>
+    <header>
+        <name><![CDATA[expires]]></name>
+        <value><![CDATA[Thu, 1 Jan 1970 00:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=97WRyqbyK/lvBSXptNw7eoTB/uFJBO6jGyE2WTlVWLD1ykm5givh1RkQag5EiIuAj9ZCxXN/IslgXBL0gAPjxXN8ne3AVPo7vlwQ4lXhD6RVFFmTCu/OpYz2ZeL36GD+maKzvncDBBeyWUu5AzsBb1jhu151TVQ4Cba3Ja9elb5/l1v4cbOHRmdUofNGvjL8iRH2S/elMzvdc3eN7I+vWpUq32ZxxINoNzvUhOmUXPfhCJlvu4/F2j/PK8mY4RNU6HYsSrx4dC5JyFwilIGiwANFYsE+0l7dy2TZeCWzZiwbRXOUcaomBe5+4WYJ8JFBJJ3tCIJsn1bOvkHrTsMb8hMC/urjzKIs1p0rgh6MaORSSvB6Tjp9AN4ahS40UOut1pFQLHfodVZeczlF+02rmSa/Vd7FyEJcmnf9+/Y40bg3O3+ol1/KrS71geTKnCYyN0lLhdC9d+kSAfcvuZ05JCFbELdLEJAAeoNlu0CuKeraGlrp4wYzDmlkbo8FcDq4wSwTo6tQ2qF79U84WbYEnU4YlcTIBa01PXzWPS4AUiiW3hZ3wL9QeEnYBkw7PiPsRBAaKJbJ1CZY1AQKgGDWCkkDlA0OFM3hElYP1vQKKyKbhi74gZVor7heJkETHouRJ46obuiUDcYK6okmy56SH/vqDWegh+xfZTj1qbCTgqR2ShFPD6zywjv4s1ac3LaSFs62LCqLcNhppYk8tGrMUM1MUCzSgIr6KM3HygvyANXx3ol4ax0ZSlXIJrRHLsuG;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[entitlements=MzYxMTA2NGUxZjI3MDNhYTUyZTUzNzRhZmRmMDYyYzY1NGI2N2MwOQ==-YmhfYWN0aXZpdGllcyxiaF9hY3Rpdml0aWVzX19hbGxvd19vdmVyYWdlLGJoX2NoYXQsYmhfY29tbXVuaXRpZXMsYmhfY29udGFjdHMsYmhfZGFzaGJvYXJkLGJoX2ZlZWRiYWNrLGJoX2ZpbGVyLGJoX2ZpbGVyX19hbGxvd19vdmVyYWdlLGJoX2ZvcnVtcyxiaF93aGF0c19uZXcsYnNzX2FkbWluLGJzc19pbnZpdGVfZ3Vlc3QsbGNfYWN0aXZpdGllcyxsY19uZXdzLA==-MjAwMDAyNjk=;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token=d122e4e8-d896-4411-8a0a-8aebdb1068bd;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token_forum=72a2931c-c8c4-4558-b0db-91ae930d3a8b;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[JSESSIONID=0000vlM7qf5sXaCjtjFY8V2RtkX:18of2u1ot;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[user_lang=ZW5fVVM%3D-MjAwMDAyNjk%3D;Secure; Domain=cfdev3.swg.usma.ibm.com; Path=/; Expires=Fri, 11-Jul-14 10:57:15 GMT;Secure;]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[BIGipServerCFDev3-WebSEAL-80-fe=655360266.20480.0000;secure; path=/]]></value>
+    </header></headers>
+<data><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<feed xmlns="http://www.w3.org/2005/Atom"
+  xmlns:app="http://www.w3.org/2007/app"   
+  xmlns:snx="http://www.ibm.com/xmlns/prod/sn"
+  xmlns:os="http://a9.com/-/spec/opensearch/1.1/"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+  xmlns:thr="http://purl.org/syndication/thread/1.0">
+  
+  
+  
+  
+  <generator uri="http://www.ibm.com/xmlns/prod/sn" version="4.5.0.0">IBM Connections - Activities</generator>
+  <icon>https://apps.cfdev3.swg.usma.ibm.com/activities/styles/images/favicon.ico</icon>
+  <logo>https://apps.cfdev3.swg.usma.ibm.com/activities/nav/common/images/iconActivities128.png</logo>
+  <id>https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activities</id>
+  <title type="text">Activity Dashboard for Lorenzo Boccaccia</title>
+  <updated>2014-07-10T10:57:12Z</updated> 
+  <author>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <snx:org><uri>https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/memberprofile?memberid=933a25b3-41f1-43ee-867e-1e6ca672efc9</uri>
+    <name>Unify</name><snx:userid>20000266</snx:userid>
+  </snx:org>
+  <name>Lorenzo Boccaccia</name>
+  
+  <snx:userid>20000269</snx:userid>
+  
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </author> 
+  <link rel="self" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activities"/>
+  <link rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/service" />
+  <link rel="http://www.ibm.com/xmlns/prod/sn/tag-cloud" type="application/atomcat+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/tags" />
+  <link rel="alternate" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/html/activities" />
+  
+
+
+
+
+
+
+
+	
+  <link rel="current" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activities"/>
+  <link rel="first" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activities" />
+  <link rel="last" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activities?page=26" />
+  
+  <link rel="next" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activities?page=2" />
+  
+  
+
+ 
+  <os:totalResults>256</os:totalResults>
+  <os:startIndex>1</os:startIndex>
+  
+  
+  
+  
+    
+    <entry>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <id>urn:lsid:ibm.com:oa:b82076c7-67b5-434d-8b90-602d4ed5e82c</id>
+  <title type="text">com.ibm.sbt.services.client.connections.activities.MoveActivityNodeTest#1582318025_Activity-1404989830201</title>
+  <updated>2014-07-10T10:57:12Z</updated>
+  <published>2014-07-10T10:57:12Z</published>
+  <author>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <snx:org><uri>https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/memberprofile?memberid=</uri>
+  </snx:org>
+  <name>Lorenzo Boccaccia</name>
+  
+  <snx:userid>20000269</snx:userid>
+  <snx:ldapid>ddf8efaf-0138-4726-b94b-598654399ef3</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </author>
+  <contributor>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <snx:org><uri>https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/memberprofile?memberid=</uri>
+  </snx:org>
+  <name>Lorenzo Boccaccia</name>
+  
+  <snx:userid>20000269</snx:userid>
+  <snx:ldapid>ddf8efaf-0138-4726-b94b-598654399ef3</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </contributor>
+  	
+    
+    
+  	     
+  	  
+  	    
+  	  
+ 	      <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="activity" label="Activity"/>
+  	  
+  	
+    
+  
+
+  <category scheme="http://www.ibm.com/xmlns/prod/sn/priority" term="1" label="Normal"/>
+  
+    
+    
+  
+  
+  
+  
+  
+  
+  
+  <category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="external" label="External"/>
+  
+  
+  
+  
+  
+    <category term="ibmsbt" />
+  
+    <category term="personal" />
+  
+    <category term="unit_test" />
+  
+  
+    <link rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/acl?activityUuid=b82076c7-67b5-434d-8b90-602d4ed5e82c" />
+    <link rel="http://www.ibm.com/xmlns/prod/sn/history" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activity/history?activityUuid=b82076c7-67b5-434d-8b90-602d4ed5e82c" />
+    <link rel="http://www.ibm.com/xmlns/prod/sn/templates" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/entrytemplates?activityUuid=b82076c7-67b5-434d-8b90-602d4ed5e82c" />
+   
+  
+  
+
+  
+    <app:collection href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activity?activityUuid=b82076c7-67b5-434d-8b90-602d4ed5e82c">
+      <title type="text">com.ibm.sbt.services.client.connections.activities.MoveActivityNodeTest#1582318025_Activity-1404989830201</title>
+      <app:categories href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/categories?activityUuid=b82076c7-67b5-434d-8b90-602d4ed5e82c"/>
+    </app:collection> 
+  
+  <snx:activity>b82076c7-67b5-434d-8b90-602d4ed5e82c</snx:activity>
+  
+  
+  
+    <link rel="edit" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activitynode?activityNodeUuid=b82076c7-67b5-434d-8b90-602d4ed5e82c" />
+  
+   
+  
+    
+      <link rel="self" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activity?activityUuid=b82076c7-67b5-434d-8b90-602d4ed5e82c"/>
+      
+        <link rel="alternate" type="application/xhtml+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/html/activity/recent?activityUuid=b82076c7-67b5-434d-8b90-602d4ed5e82c"/>
+      	<link rel="alternate" type="text/html" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/html/activity/recent?activityUuid=b82076c7-67b5-434d-8b90-602d4ed5e82c"/>
+      
+     
+    
+  
+ 
+  <snx:position>-2147483648</snx:position>
+  <snx:depth>0</snx:depth>  
+  
+  <snx:permissions>none, create_activity, view_activity, edit_activity, delete_activity, activity_owner, edit_activity_tags, design_activity, edit_statements, delete_statements, add_members, delete_members, create_entries, edit_personal_entries, edit_all_entries, delete_personal_entries, delete_all_entries, edit_personal_entry_tags, edit_all_entry_tags, view_members</snx:permissions>
+  <snx:icon>https://apps.cfdev3.swg.usma.ibm.com/activities/nav/common/images/iconActivities16.png</snx:icon>
+
+  
+    
+    
+    
+    
+      
+      
+        
+          <content type="text">
+          	Goal for com.ibm.sbt.services.client.connections.activities.MoveActivityNodeTest#1582318025_Activity-1404989830201
+      	  </content>
+        
+        
+      
+    
+  
+  
+  
+
+    
+  
+  
+  
+  
+
+    </entry>
+  
+    
+    <entry>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <id>urn:lsid:ibm.com:oa:2a82b051-7211-4dc6-a4fa-eb2d4fdf4228</id>
+  <title type="text">MyActivities-1404989825962</title>
+  <updated>2014-07-10T10:57:08Z</updated>
+  <published>2014-07-10T10:57:08Z</published>
+  <author>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <snx:org><uri>https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/memberprofile?memberid=</uri>
+  </snx:org>
+  <name>Lorenzo Boccaccia</name>
+  
+  <snx:userid>20000269</snx:userid>
+  <snx:ldapid>ddf8efaf-0138-4726-b94b-598654399ef3</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </author>
+  <contributor>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <snx:org><uri>https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/memberprofile?memberid=</uri>
+  </snx:org>
+  <name>Lorenzo Boccaccia</name>
+  
+  <snx:userid>20000269</snx:userid>
+  <snx:ldapid>ddf8efaf-0138-4726-b94b-598654399ef3</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </contributor>
+  	
+    
+    
+  	     
+  	  
+  	    
+  	  
+ 	      <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="activity" label="Activity"/>
+  	  
+  	
+    
+  
+
+  <category scheme="http://www.ibm.com/xmlns/prod/sn/priority" term="1" label="Normal"/>
+  
+    
+    
+  
+  
+  
+  
+  
+  
+  
+  <category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="external" label="External"/>
+  
+  
+  
+  
+  
+    <category term="ibmsbt" />
+  
+    <category term="personal" />
+  
+    <category term="unit_test" />
+  
+  
+    <link rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/acl?activityUuid=2a82b051-7211-4dc6-a4fa-eb2d4fdf4228" />
+    <link rel="http://www.ibm.com/xmlns/prod/sn/history" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activity/history?activityUuid=2a82b051-7211-4dc6-a4fa-eb2d4fdf4228" />
+    <link rel="http://www.ibm.com/xmlns/prod/sn/templates" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/entrytemplates?activityUuid=2a82b051-7211-4dc6-a4fa-eb2d4fdf4228" />
+   
+  
+  
+
+  
+    <app:collection href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activity?activityUuid=2a82b051-7211-4dc6-a4fa-eb2d4fdf4228">
+      <title type="text">MyActivities-1404989825962</title>
+      <app:categories href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/categories?activityUuid=2a82b051-7211-4dc6-a4fa-eb2d4fdf4228"/>
+    </app:collection> 
+  
+  <snx:activity>2a82b051-7211-4dc6-a4fa-eb2d4fdf4228</snx:activity>
+  
+  
+  
+    <link rel="edit" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activitynode?activityNodeUuid=2a82b051-7211-4dc6-a4fa-eb2d4fdf4228" />
+  
+   
+  
+    
+      <link rel="self" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activity?activityUuid=2a82b051-7211-4dc6-a4fa-eb2d4fdf4228"/>
+      
+        <link rel="alternate" type="application/xhtml+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/html/activity/recent?activityUuid=2a82b051-7211-4dc6-a4fa-eb2d4fdf4228"/>
+      	<link rel="alternate" type="text/html" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/html/activity/recent?activityUuid=2a82b051-7211-4dc6-a4fa-eb2d4fdf4228"/>
+      
+     
+    
+  
+ 
+  <snx:position>-2147483648</snx:position>
+  <snx:depth>0</snx:depth>  
+  
+  <snx:permissions>none, create_activity, view_activity, edit_activity, delete_activity, activity_owner, edit_activity_tags, design_activity, edit_statements, delete_statements, add_members, delete_members, create_entries, edit_personal_entries, edit_all_entries, delete_personal_entries, delete_all_entries, edit_personal_entry_tags, edit_all_entry_tags, view_members</snx:permissions>
+  <snx:icon>https://apps.cfdev3.swg.usma.ibm.com/activities/nav/common/images/iconActivities16.png</snx:icon>
+
+  
+    
+    
+    
+    
+      
+      
+        
+          <content type="text">
+          	Goal for MyActivities-1404989825962
+      	  </content>
+        
+        
+      
+    
+  
+  
+  
+
+    
+  
+  
+  
+  
+
+    </entry>
+  
+    
+    <entry>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <id>urn:lsid:ibm.com:oa:3bc35b40-aa3f-443a-9a8c-e99961306fbc</id>
+  <title type="text">MyActivities-1404989823360</title>
+  <updated>2014-07-10T10:57:06Z</updated>
+  <published>2014-07-10T10:57:06Z</published>
+  <author>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <snx:org><uri>https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/memberprofile?memberid=</uri>
+  </snx:org>
+  <name>Lorenzo Boccaccia</name>
+  
+  <snx:userid>20000269</snx:userid>
+  <snx:ldapid>ddf8efaf-0138-4726-b94b-598654399ef3</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </author>
+  <contributor>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <snx:org><uri>https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/memberprofile?memberid=</uri>
+  </snx:org>
+  <name>Lorenzo Boccaccia</name>
+  
+  <snx:userid>20000269</snx:userid>
+  <snx:ldapid>ddf8efaf-0138-4726-b94b-598654399ef3</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </contributor>
+  	
+    
+    
+  	     
+  	  
+  	    
+  	  
+ 	      <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="activity" label="Activity"/>
+  	  
+  	
+    
+  
+
+  <category scheme="http://www.ibm.com/xmlns/prod/sn/priority" term="1" label="Normal"/>
+  
+    
+    
+  
+  
+  
+  
+  
+  
+  
+  <category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="external" label="External"/>
+  
+  
+  
+  
+  
+    <category term="ibmsbt" />
+  
+    <category term="personal" />
+  
+    <category term="unit_test" />
+  
+  
+    <link rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/acl?activityUuid=3bc35b40-aa3f-443a-9a8c-e99961306fbc" />
+    <link rel="http://www.ibm.com/xmlns/prod/sn/history" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activity/history?activityUuid=3bc35b40-aa3f-443a-9a8c-e99961306fbc" />
+    <link rel="http://www.ibm.com/xmlns/prod/sn/templates" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/entrytemplates?activityUuid=3bc35b40-aa3f-443a-9a8c-e99961306fbc" />
+   
+  
+  
+
+  
+    <app:collection href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activity?activityUuid=3bc35b40-aa3f-443a-9a8c-e99961306fbc">
+      <title type="text">MyActivities-1404989823360</title>
+      <app:categories href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/categories?activityUuid=3bc35b40-aa3f-443a-9a8c-e99961306fbc"/>
+    </app:collection> 
+  
+  <snx:activity>3bc35b40-aa3f-443a-9a8c-e99961306fbc</snx:activity>
+  
+  
+  
+    <link rel="edit" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activitynode?activityNodeUuid=3bc35b40-aa3f-443a-9a8c-e99961306fbc" />
+  
+   
+  
+    
+      <link rel="self" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activity?activityUuid=3bc35b40-aa3f-443a-9a8c-e99961306fbc"/>
+      
+        <link rel="alternate" type="application/xhtml+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/html/activity/recent?activityUuid=3bc35b40-aa3f-443a-9a8c-e99961306fbc"/>
+      	<link rel="alternate" type="text/html" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/html/activity/recent?activityUuid=3bc35b40-aa3f-443a-9a8c-e99961306fbc"/>
+      
+     
+    
+  
+ 
+  <snx:position>-2147483648</snx:position>
+  <snx:depth>0</snx:depth>  
+  
+  <snx:permissions>none, create_activity, view_activity, edit_activity, delete_activity, activity_owner, edit_activity_tags, design_activity, edit_statements, delete_statements, add_members, delete_members, create_entries, edit_personal_entries, edit_all_entries, delete_personal_entries, delete_all_entries, edit_personal_entry_tags, edit_all_entry_tags, view_members</snx:permissions>
+  <snx:icon>https://apps.cfdev3.swg.usma.ibm.com/activities/nav/common/images/iconActivities16.png</snx:icon>
+
+  
+    
+    
+    
+    
+      
+      
+        
+          <content type="text">
+          	Goal for MyActivities-1404989823360
+      	  </content>
+        
+        
+      
+    
+  
+  
+  
+
+    
+  
+  
+  
+  
+
+    </entry>
+  
+    
+    <entry>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <id>urn:lsid:ibm.com:oa:39e49aba-156c-4415-8624-0755bc24428a</id>
+  <title type="text">ActivityHiddenField_0-1404989819612</title>
+  <updated>2014-07-10T10:57:02Z</updated>
+  <published>2014-07-10T10:57:02Z</published>
+  <author>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <snx:org><uri>https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/memberprofile?memberid=</uri>
+  </snx:org>
+  <name>Lorenzo Boccaccia</name>
+  
+  <snx:userid>20000269</snx:userid>
+  <snx:ldapid>ddf8efaf-0138-4726-b94b-598654399ef3</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </author>
+  <contributor>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <snx:org><uri>https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/memberprofile?memberid=</uri>
+  </snx:org>
+  <name>Lorenzo Boccaccia</name>
+  
+  <snx:userid>20000269</snx:userid>
+  <snx:ldapid>ddf8efaf-0138-4726-b94b-598654399ef3</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </contributor>
+  	
+    
+    
+  	     
+  	  
+  	    
+  	  
+ 	      <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="activity" label="Activity"/>
+  	  
+  	
+    
+  
+
+  <category scheme="http://www.ibm.com/xmlns/prod/sn/priority" term="1" label="Normal"/>
+  
+    
+    
+  
+  
+  
+  
+  
+  
+  
+  <category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="external" label="External"/>
+  
+  
+  
+  
+  
+    <category term="ibmsbt" />
+  
+    <category term="personal" />
+  
+    <category term="unit_test" />
+  
+  
+    <link rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/acl?activityUuid=39e49aba-156c-4415-8624-0755bc24428a" />
+    <link rel="http://www.ibm.com/xmlns/prod/sn/history" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activity/history?activityUuid=39e49aba-156c-4415-8624-0755bc24428a" />
+    <link rel="http://www.ibm.com/xmlns/prod/sn/templates" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/entrytemplates?activityUuid=39e49aba-156c-4415-8624-0755bc24428a" />
+   
+  
+  
+
+  
+    <app:collection href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activity?activityUuid=39e49aba-156c-4415-8624-0755bc24428a">
+      <title type="text">ActivityHiddenField_0-1404989819612</title>
+      <app:categories href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/categories?activityUuid=39e49aba-156c-4415-8624-0755bc24428a"/>
+    </app:collection> 
+  
+  <snx:activity>39e49aba-156c-4415-8624-0755bc24428a</snx:activity>
+  
+  
+  
+    <link rel="edit" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activitynode?activityNodeUuid=39e49aba-156c-4415-8624-0755bc24428a" />
+  
+   
+  
+    
+      <link rel="self" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activity?activityUuid=39e49aba-156c-4415-8624-0755bc24428a"/>
+      
+        <link rel="alternate" type="application/xhtml+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/html/activity/recent?activityUuid=39e49aba-156c-4415-8624-0755bc24428a"/>
+      	<link rel="alternate" type="text/html" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/html/activity/recent?activityUuid=39e49aba-156c-4415-8624-0755bc24428a"/>
+      
+     
+    
+  
+ 
+  <snx:position>-2147483648</snx:position>
+  <snx:depth>0</snx:depth>  
+  
+  <snx:permissions>none, create_activity, view_activity, edit_activity, delete_activity, activity_owner, edit_activity_tags, design_activity, edit_statements, delete_statements, add_members, delete_members, create_entries, edit_personal_entries, edit_all_entries, delete_personal_entries, delete_all_entries, edit_personal_entry_tags, edit_all_entry_tags, view_members</snx:permissions>
+  <snx:icon>https://apps.cfdev3.swg.usma.ibm.com/activities/nav/common/images/iconActivities16.png</snx:icon>
+
+  
+    
+    
+    
+    
+      
+      
+        
+          <content type="text">
+          	Goal for ActivityHiddenField_0-1404989819612
+      	  </content>
+        
+        
+      
+    
+  
+  
+  
+
+  
+    
+    
+        
+    
+    
+    
+    <snx:field name="Field4"  fid="8a919b65-3f98-4b1a-ae2a-7e3cbc6d5d1c" position="1000" type="text" hidden="true">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<summary type="text">Content4</summary>
+
+
+
+
+    </snx:field>
+  
+    
+    
+        
+    
+    
+    
+    <snx:field name="Field2"  fid="2b68ac3c-adf6-4dfe-a478-a6bc0d9153bf" position="1000" type="text" hidden="true">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<summary type="text">Content2</summary>
+
+
+
+
+    </snx:field>
+  
+    
+    
+        
+    
+    
+    
+    <snx:field name="Field3"  fid="dbeddd67-9c6a-45b1-96d2-138147a2912a" position="1000" type="text" hidden="true">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<summary type="text">Content3</summary>
+
+
+
+
+    </snx:field>
+  
+    
+    
+        
+    
+    
+    
+    <snx:field name="Field1"  fid="76c28792-900c-48e7-b78b-70ad243f918e" position="1000" type="text" hidden="true">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<summary type="text">Content1</summary>
+
+
+
+
+    </snx:field>
+  
+    
+    
+        
+    
+    
+    
+    <snx:field name="Field0"  fid="8bc85d1b-ed65-4f47-a149-f6af05886da2" position="1000" type="text" hidden="true">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<summary type="text">Content0</summary>
+
+
+
+
+    </snx:field>
+    
+  
+  
+  
+  
+
+    </entry>
+  
+    
+    <entry>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <id>urn:lsid:ibm.com:oa:4c4eaae6-1465-42ab-9441-0ac9ed862ce0</id>
+  <title type="text">ActivityPriority0 - 1404989817485</title>
+  <updated>2014-07-10T10:57:00Z</updated>
+  <published>2014-07-10T10:57:00Z</published>
+  <author>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <snx:org><uri>https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/memberprofile?memberid=</uri>
+  </snx:org>
+  <name>Lorenzo Boccaccia</name>
+  
+  <snx:userid>20000269</snx:userid>
+  <snx:ldapid>ddf8efaf-0138-4726-b94b-598654399ef3</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </author>
+  <contributor>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <snx:org><uri>https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/memberprofile?memberid=</uri>
+  </snx:org>
+  <name>Lorenzo Boccaccia</name>
+  
+  <snx:userid>20000269</snx:userid>
+  <snx:ldapid>ddf8efaf-0138-4726-b94b-598654399ef3</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </contributor>
+  	
+    
+    
+  	     
+  	  
+  	    
+  	  
+ 	      <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="activity" label="Activity"/>
+  	  
+  	
+    
+  
+
+  <category scheme="http://www.ibm.com/xmlns/prod/sn/priority" term="1" label="Normal"/>
+  
+    
+    
+  
+  
+  
+  
+  
+  
+  
+  <category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="external" label="External"/>
+  
+  
+  
+  
+  
+    <category term="ibmsbt" />
+  
+    <category term="personal" />
+  
+    <category term="unit_test" />
+  
+  
+    <link rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/acl?activityUuid=4c4eaae6-1465-42ab-9441-0ac9ed862ce0" />
+    <link rel="http://www.ibm.com/xmlns/prod/sn/history" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activity/history?activityUuid=4c4eaae6-1465-42ab-9441-0ac9ed862ce0" />
+    <link rel="http://www.ibm.com/xmlns/prod/sn/templates" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/entrytemplates?activityUuid=4c4eaae6-1465-42ab-9441-0ac9ed862ce0" />
+   
+  
+  
+
+  
+    <app:collection href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activity?activityUuid=4c4eaae6-1465-42ab-9441-0ac9ed862ce0">
+      <title type="text">ActivityPriority0 - 1404989817485</title>
+      <app:categories href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/categories?activityUuid=4c4eaae6-1465-42ab-9441-0ac9ed862ce0"/>
+    </app:collection> 
+  
+  <snx:activity>4c4eaae6-1465-42ab-9441-0ac9ed862ce0</snx:activity>
+  
+  
+  
+    <link rel="edit" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activitynode?activityNodeUuid=4c4eaae6-1465-42ab-9441-0ac9ed862ce0" />
+  
+   
+  
+    
+      <link rel="self" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activity?activityUuid=4c4eaae6-1465-42ab-9441-0ac9ed862ce0"/>
+      
+        <link rel="alternate" type="application/xhtml+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/html/activity/recent?activityUuid=4c4eaae6-1465-42ab-9441-0ac9ed862ce0"/>
+      	<link rel="alternate" type="text/html" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/html/activity/recent?activityUuid=4c4eaae6-1465-42ab-9441-0ac9ed862ce0"/>
+      
+     
+    
+  
+ 
+  <snx:position>-2147483648</snx:position>
+  <snx:depth>0</snx:depth>  
+  
+  <snx:permissions>none, create_activity, view_activity, edit_activity, delete_activity, activity_owner, edit_activity_tags, design_activity, edit_statements, delete_statements, add_members, delete_members, create_entries, edit_personal_entries, edit_all_entries, delete_personal_entries, delete_all_entries, edit_personal_entry_tags, edit_all_entry_tags, view_members</snx:permissions>
+  <snx:icon>https://apps.cfdev3.swg.usma.ibm.com/activities/nav/common/images/iconActivities16.png</snx:icon>
+
+  
+    
+    
+    
+    
+      
+      
+        
+          <content type="text">
+          	Goal for ActivityPriority0 - 1404989817485
+      	  </content>
+        
+        
+      
+    
+  
+  
+  
+
+    
+  
+  
+  
+  
+
+    </entry>
+  
+    
+    <entry>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <id>urn:lsid:ibm.com:oa:8b76a335-9288-4666-a4c7-5aca0320d068</id>
+  <title type="text">CreatedActivityNodes-1404989814881</title>
+  <updated>2014-07-10T10:56:57Z</updated>
+  <published>2014-07-10T10:56:57Z</published>
+  <author>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <snx:org><uri>https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/memberprofile?memberid=</uri>
+  </snx:org>
+  <name>Lorenzo Boccaccia</name>
+  
+  <snx:userid>20000269</snx:userid>
+  <snx:ldapid>ddf8efaf-0138-4726-b94b-598654399ef3</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </author>
+  <contributor>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <snx:org><uri>https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/memberprofile?memberid=</uri>
+  </snx:org>
+  <name>Lorenzo Boccaccia</name>
+  
+  <snx:userid>20000269</snx:userid>
+  <snx:ldapid>ddf8efaf-0138-4726-b94b-598654399ef3</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </contributor>
+  	
+    
+    
+  	     
+  	  
+  	    
+  	  
+ 	      <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="activity" label="Activity"/>
+  	  
+  	
+    
+  
+
+  <category scheme="http://www.ibm.com/xmlns/prod/sn/priority" term="1" label="Normal"/>
+  
+    
+    
+  
+  
+  
+  
+  
+  
+  
+  <category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="external" label="External"/>
+  
+  
+  
+  
+  
+    <category term="ibmsbt" />
+  
+    <category term="personal" />
+  
+    <category term="unit_test" />
+  
+  
+    <link rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/acl?activityUuid=8b76a335-9288-4666-a4c7-5aca0320d068" />
+    <link rel="http://www.ibm.com/xmlns/prod/sn/history" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activity/history?activityUuid=8b76a335-9288-4666-a4c7-5aca0320d068" />
+    <link rel="http://www.ibm.com/xmlns/prod/sn/templates" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/entrytemplates?activityUuid=8b76a335-9288-4666-a4c7-5aca0320d068" />
+   
+  
+  
+
+  
+    <app:collection href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activity?activityUuid=8b76a335-9288-4666-a4c7-5aca0320d068">
+      <title type="text">CreatedActivityNodes-1404989814881</title>
+      <app:categories href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/categories?activityUuid=8b76a335-9288-4666-a4c7-5aca0320d068"/>
+    </app:collection> 
+  
+  <snx:activity>8b76a335-9288-4666-a4c7-5aca0320d068</snx:activity>
+  
+  
+  
+    <link rel="edit" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activitynode?activityNodeUuid=8b76a335-9288-4666-a4c7-5aca0320d068" />
+  
+   
+  
+    
+      <link rel="self" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activity?activityUuid=8b76a335-9288-4666-a4c7-5aca0320d068"/>
+      
+        <link rel="alternate" type="application/xhtml+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/html/activity/recent?activityUuid=8b76a335-9288-4666-a4c7-5aca0320d068"/>
+      	<link rel="alternate" type="text/html" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/html/activity/recent?activityUuid=8b76a335-9288-4666-a4c7-5aca0320d068"/>
+      
+     
+    
+  
+ 
+  <snx:position>-2147483648</snx:position>
+  <snx:depth>0</snx:depth>  
+  
+  <snx:permissions>none, create_activity, view_activity, edit_activity, delete_activity, activity_owner, edit_activity_tags, design_activity, edit_statements, delete_statements, add_members, delete_members, create_entries, edit_personal_entries, edit_all_entries, delete_personal_entries, delete_all_entries, edit_personal_entry_tags, edit_all_entry_tags, view_members</snx:permissions>
+  <snx:icon>https://apps.cfdev3.swg.usma.ibm.com/activities/nav/common/images/iconActivities16.png</snx:icon>
+
+  
+    
+    
+    
+    
+      
+      
+        
+          <content type="text">
+          	Goal for CreatedActivityNodes-1404989814881
+      	  </content>
+        
+        
+      
+    
+  
+  
+  
+
+    
+  
+  
+  
+  
+
+    </entry>
+  
+    
+    <entry>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <id>urn:lsid:ibm.com:oa:7f7ed1af-4148-4191-9c01-c71def3606dd</id>
+  <title type="text">ActivityPriority2000 - 1404989812063</title>
+  <updated>2014-07-10T10:56:54Z</updated>
+  <published>2014-07-10T10:56:54Z</published>
+  <author>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <snx:org><uri>https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/memberprofile?memberid=</uri>
+  </snx:org>
+  <name>Lorenzo Boccaccia</name>
+  
+  <snx:userid>20000269</snx:userid>
+  <snx:ldapid>ddf8efaf-0138-4726-b94b-598654399ef3</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </author>
+  <contributor>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <snx:org><uri>https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/memberprofile?memberid=</uri>
+  </snx:org>
+  <name>Lorenzo Boccaccia</name>
+  
+  <snx:userid>20000269</snx:userid>
+  <snx:ldapid>ddf8efaf-0138-4726-b94b-598654399ef3</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </contributor>
+  	
+    
+    
+  	     
+  	  
+  	    
+  	  
+ 	      <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="activity" label="Activity"/>
+  	  
+  	
+    
+  
+
+  <category scheme="http://www.ibm.com/xmlns/prod/sn/priority" term="1" label="Normal"/>
+  
+    
+    
+  
+  
+  
+  
+  
+  
+  
+  <category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="external" label="External"/>
+  
+  
+  
+  
+  
+    <category term="ibmsbt" />
+  
+    <category term="personal" />
+  
+    <category term="unit_test" />
+  
+  
+    <link rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/acl?activityUuid=7f7ed1af-4148-4191-9c01-c71def3606dd" />
+    <link rel="http://www.ibm.com/xmlns/prod/sn/history" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activity/history?activityUuid=7f7ed1af-4148-4191-9c01-c71def3606dd" />
+    <link rel="http://www.ibm.com/xmlns/prod/sn/templates" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/entrytemplates?activityUuid=7f7ed1af-4148-4191-9c01-c71def3606dd" />
+   
+  
+  
+
+  
+    <app:collection href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activity?activityUuid=7f7ed1af-4148-4191-9c01-c71def3606dd">
+      <title type="text">ActivityPriority2000 - 1404989812063</title>
+      <app:categories href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/categories?activityUuid=7f7ed1af-4148-4191-9c01-c71def3606dd"/>
+    </app:collection> 
+  
+  <snx:activity>7f7ed1af-4148-4191-9c01-c71def3606dd</snx:activity>
+  
+  
+  
+    <link rel="edit" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activitynode?activityNodeUuid=7f7ed1af-4148-4191-9c01-c71def3606dd" />
+  
+   
+  
+    
+      <link rel="self" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activity?activityUuid=7f7ed1af-4148-4191-9c01-c71def3606dd"/>
+      
+        <link rel="alternate" type="application/xhtml+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/html/activity/recent?activityUuid=7f7ed1af-4148-4191-9c01-c71def3606dd"/>
+      	<link rel="alternate" type="text/html" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/html/activity/recent?activityUuid=7f7ed1af-4148-4191-9c01-c71def3606dd"/>
+      
+     
+    
+  
+ 
+  <snx:position>-2147483648</snx:position>
+  <snx:depth>0</snx:depth>  
+  
+  <snx:permissions>none, create_activity, view_activity, edit_activity, delete_activity, activity_owner, edit_activity_tags, design_activity, edit_statements, delete_statements, add_members, delete_members, create_entries, edit_personal_entries, edit_all_entries, delete_personal_entries, delete_all_entries, edit_personal_entry_tags, edit_all_entry_tags, view_members</snx:permissions>
+  <snx:icon>https://apps.cfdev3.swg.usma.ibm.com/activities/nav/common/images/iconActivities16.png</snx:icon>
+
+  
+    
+    
+    
+    
+      
+      
+        
+          <content type="text">
+          	Goal for ActivityPriority2000 - 1404989812063
+      	  </content>
+        
+        
+      
+    
+  
+  
+  
+
+    
+  
+  
+  
+  
+
+    </entry>
+  
+    
+    <entry>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <id>urn:lsid:ibm.com:oa:1d1c2947-c5b1-428a-9128-32c5934edcbb</id>
+  <title type="text">com.ibm.sbt.services.client.connections.activities.ActivityNodeTypesTest#-113410273_Activity-1404989809767</title>
+  <updated>2014-07-10T10:56:52Z</updated>
+  <published>2014-07-10T10:56:52Z</published>
+  <author>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <snx:org><uri>https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/memberprofile?memberid=</uri>
+  </snx:org>
+  <name>Lorenzo Boccaccia</name>
+  
+  <snx:userid>20000269</snx:userid>
+  <snx:ldapid>ddf8efaf-0138-4726-b94b-598654399ef3</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </author>
+  <contributor>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <snx:org><uri>https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/memberprofile?memberid=</uri>
+  </snx:org>
+  <name>Lorenzo Boccaccia</name>
+  
+  <snx:userid>20000269</snx:userid>
+  <snx:ldapid>ddf8efaf-0138-4726-b94b-598654399ef3</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </contributor>
+  	
+    
+    
+  	     
+  	  
+  	    
+  	  
+ 	      <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="activity" label="Activity"/>
+  	  
+  	
+    
+  
+
+  <category scheme="http://www.ibm.com/xmlns/prod/sn/priority" term="1" label="Normal"/>
+  
+    
+    
+  
+  
+  
+  
+  
+  
+  
+  <category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="external" label="External"/>
+  
+  
+  
+  
+  
+    <category term="ibmsbt" />
+  
+    <category term="personal" />
+  
+    <category term="unit_test" />
+  
+  
+    <link rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/acl?activityUuid=1d1c2947-c5b1-428a-9128-32c5934edcbb" />
+    <link rel="http://www.ibm.com/xmlns/prod/sn/history" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activity/history?activityUuid=1d1c2947-c5b1-428a-9128-32c5934edcbb" />
+    <link rel="http://www.ibm.com/xmlns/prod/sn/templates" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/entrytemplates?activityUuid=1d1c2947-c5b1-428a-9128-32c5934edcbb" />
+   
+  
+  
+
+  
+    <app:collection href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activity?activityUuid=1d1c2947-c5b1-428a-9128-32c5934edcbb">
+      <title type="text">com.ibm.sbt.services.client.connections.activities.ActivityNodeTypesTest#-113410273_Activity-1404989809767</title>
+      <app:categories href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/categories?activityUuid=1d1c2947-c5b1-428a-9128-32c5934edcbb"/>
+    </app:collection> 
+  
+  <snx:activity>1d1c2947-c5b1-428a-9128-32c5934edcbb</snx:activity>
+  
+  
+  
+    <link rel="edit" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activitynode?activityNodeUuid=1d1c2947-c5b1-428a-9128-32c5934edcbb" />
+  
+   
+  
+    
+      <link rel="self" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activity?activityUuid=1d1c2947-c5b1-428a-9128-32c5934edcbb"/>
+      
+        <link rel="alternate" type="application/xhtml+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/html/activity/recent?activityUuid=1d1c2947-c5b1-428a-9128-32c5934edcbb"/>
+      	<link rel="alternate" type="text/html" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/html/activity/recent?activityUuid=1d1c2947-c5b1-428a-9128-32c5934edcbb"/>
+      
+     
+    
+  
+ 
+  <snx:position>-2147483648</snx:position>
+  <snx:depth>0</snx:depth>  
+  
+  <snx:permissions>none, create_activity, view_activity, edit_activity, delete_activity, activity_owner, edit_activity_tags, design_activity, edit_statements, delete_statements, add_members, delete_members, create_entries, edit_personal_entries, edit_all_entries, delete_personal_entries, delete_all_entries, edit_personal_entry_tags, edit_all_entry_tags, view_members</snx:permissions>
+  <snx:icon>https://apps.cfdev3.swg.usma.ibm.com/activities/nav/common/images/iconActivities16.png</snx:icon>
+
+  
+    
+    
+    
+    
+      
+      
+        
+          <content type="text">
+          	Goal for com.ibm.sbt.services.client.connections.activities.ActivityNodeTypesTest#-113410273_Activity-1404989809767
+      	  </content>
+        
+        
+      
+    
+  
+  
+  
+
+    
+  
+  
+  
+  
+
+    </entry>
+  
+    
+    <entry>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <id>urn:lsid:ibm.com:oa:4148a3f4-6333-4f16-9dbe-1eaf0170e1cf</id>
+  <title type="text">com.ibm.sbt.services.client.connections.activities.ActivityNodeTypesTest#-1526993526_Activity-1404989807105</title>
+  <updated>2014-07-10T10:56:50Z</updated>
+  <published>2014-07-10T10:56:50Z</published>
+  <author>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <snx:org><uri>https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/memberprofile?memberid=</uri>
+  </snx:org>
+  <name>Lorenzo Boccaccia</name>
+  
+  <snx:userid>20000269</snx:userid>
+  <snx:ldapid>ddf8efaf-0138-4726-b94b-598654399ef3</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </author>
+  <contributor>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <snx:org><uri>https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/memberprofile?memberid=</uri>
+  </snx:org>
+  <name>Lorenzo Boccaccia</name>
+  
+  <snx:userid>20000269</snx:userid>
+  <snx:ldapid>ddf8efaf-0138-4726-b94b-598654399ef3</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </contributor>
+  	
+    
+    
+  	     
+  	  
+  	    
+  	  
+ 	      <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="activity" label="Activity"/>
+  	  
+  	
+    
+  
+
+  <category scheme="http://www.ibm.com/xmlns/prod/sn/priority" term="1" label="Normal"/>
+  
+    
+    
+  
+  
+  
+  
+  
+  
+  
+  <category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="external" label="External"/>
+  
+  
+  
+  
+  
+    <category term="ibmsbt" />
+  
+    <category term="personal" />
+  
+    <category term="unit_test" />
+  
+  
+    <link rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/acl?activityUuid=4148a3f4-6333-4f16-9dbe-1eaf0170e1cf" />
+    <link rel="http://www.ibm.com/xmlns/prod/sn/history" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activity/history?activityUuid=4148a3f4-6333-4f16-9dbe-1eaf0170e1cf" />
+    <link rel="http://www.ibm.com/xmlns/prod/sn/templates" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/entrytemplates?activityUuid=4148a3f4-6333-4f16-9dbe-1eaf0170e1cf" />
+   
+  
+  
+
+  
+    <app:collection href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activity?activityUuid=4148a3f4-6333-4f16-9dbe-1eaf0170e1cf">
+      <title type="text">com.ibm.sbt.services.client.connections.activities.ActivityNodeTypesTest#-1526993526_Activity-1404989807105</title>
+      <app:categories href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/categories?activityUuid=4148a3f4-6333-4f16-9dbe-1eaf0170e1cf"/>
+    </app:collection> 
+  
+  <snx:activity>4148a3f4-6333-4f16-9dbe-1eaf0170e1cf</snx:activity>
+  
+  
+  
+    <link rel="edit" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activitynode?activityNodeUuid=4148a3f4-6333-4f16-9dbe-1eaf0170e1cf" />
+  
+   
+  
+    
+      <link rel="self" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activity?activityUuid=4148a3f4-6333-4f16-9dbe-1eaf0170e1cf"/>
+      
+        <link rel="alternate" type="application/xhtml+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/html/activity/recent?activityUuid=4148a3f4-6333-4f16-9dbe-1eaf0170e1cf"/>
+      	<link rel="alternate" type="text/html" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/html/activity/recent?activityUuid=4148a3f4-6333-4f16-9dbe-1eaf0170e1cf"/>
+      
+     
+    
+  
+ 
+  <snx:position>-2147483648</snx:position>
+  <snx:depth>0</snx:depth>  
+  
+  <snx:permissions>none, create_activity, view_activity, edit_activity, delete_activity, activity_owner, edit_activity_tags, design_activity, edit_statements, delete_statements, add_members, delete_members, create_entries, edit_personal_entries, edit_all_entries, delete_personal_entries, delete_all_entries, edit_personal_entry_tags, edit_all_entry_tags, view_members</snx:permissions>
+  <snx:icon>https://apps.cfdev3.swg.usma.ibm.com/activities/nav/common/images/iconActivities16.png</snx:icon>
+
+  
+    
+    
+    
+    
+      
+      
+        
+          <content type="text">
+          	Goal for com.ibm.sbt.services.client.connections.activities.ActivityNodeTypesTest#-1526993526_Activity-1404989807105
+      	  </content>
+        
+        
+      
+    
+  
+  
+  
+
+    
+  
+  
+  
+  
+
+    </entry>
+  
+    
+    <entry>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <id>urn:lsid:ibm.com:oa:d80f5982-079b-4c2e-8135-970e29ff87ec</id>
+  <title type="text">com.ibm.sbt.services.client.connections.activities.ActivityNodeTypesTest#774954067_Activity-1404989804550</title>
+  <updated>2014-07-10T10:56:47Z</updated>
+  <published>2014-07-10T10:56:47Z</published>
+  <author>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <snx:org><uri>https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/memberprofile?memberid=</uri>
+  </snx:org>
+  <name>Lorenzo Boccaccia</name>
+  
+  <snx:userid>20000269</snx:userid>
+  <snx:ldapid>ddf8efaf-0138-4726-b94b-598654399ef3</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </author>
+  <contributor>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <snx:org><uri>https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/memberprofile?memberid=</uri>
+  </snx:org>
+  <name>Lorenzo Boccaccia</name>
+  
+  <snx:userid>20000269</snx:userid>
+  <snx:ldapid>ddf8efaf-0138-4726-b94b-598654399ef3</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </contributor>
+  	
+    
+    
+  	     
+  	  
+  	    
+  	  
+ 	      <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="activity" label="Activity"/>
+  	  
+  	
+    
+  
+
+  <category scheme="http://www.ibm.com/xmlns/prod/sn/priority" term="1" label="Normal"/>
+  
+    
+    
+  
+  
+  
+  
+  
+  
+  
+  <category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="external" label="External"/>
+  
+  
+  
+  
+  
+    <category term="ibmsbt" />
+  
+    <category term="personal" />
+  
+    <category term="unit_test" />
+  
+  
+    <link rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/acl?activityUuid=d80f5982-079b-4c2e-8135-970e29ff87ec" />
+    <link rel="http://www.ibm.com/xmlns/prod/sn/history" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activity/history?activityUuid=d80f5982-079b-4c2e-8135-970e29ff87ec" />
+    <link rel="http://www.ibm.com/xmlns/prod/sn/templates" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/entrytemplates?activityUuid=d80f5982-079b-4c2e-8135-970e29ff87ec" />
+   
+  
+  
+
+  
+    <app:collection href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activity?activityUuid=d80f5982-079b-4c2e-8135-970e29ff87ec">
+      <title type="text">com.ibm.sbt.services.client.connections.activities.ActivityNodeTypesTest#774954067_Activity-1404989804550</title>
+      <app:categories href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/categories?activityUuid=d80f5982-079b-4c2e-8135-970e29ff87ec"/>
+    </app:collection> 
+  
+  <snx:activity>d80f5982-079b-4c2e-8135-970e29ff87ec</snx:activity>
+  
+  
+  
+    <link rel="edit" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activitynode?activityNodeUuid=d80f5982-079b-4c2e-8135-970e29ff87ec" />
+  
+   
+  
+    
+      <link rel="self" type="application/atom+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/atom2/activity?activityUuid=d80f5982-079b-4c2e-8135-970e29ff87ec"/>
+      
+        <link rel="alternate" type="application/xhtml+xml" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/html/activity/recent?activityUuid=d80f5982-079b-4c2e-8135-970e29ff87ec"/>
+      	<link rel="alternate" type="text/html" href="https://apps.cfdev3.swg.usma.ibm.com/activities/service/html/activity/recent?activityUuid=d80f5982-079b-4c2e-8135-970e29ff87ec"/>
+      
+     
+    
+  
+ 
+  <snx:position>-2147483648</snx:position>
+  <snx:depth>0</snx:depth>  
+  
+  <snx:permissions>none, create_activity, view_activity, edit_activity, delete_activity, activity_owner, edit_activity_tags, design_activity, edit_statements, delete_statements, add_members, delete_members, create_entries, edit_personal_entries, edit_all_entries, delete_personal_entries, delete_all_entries, edit_personal_entry_tags, edit_all_entry_tags, view_members</snx:permissions>
+  <snx:icon>https://apps.cfdev3.swg.usma.ibm.com/activities/nav/common/images/iconActivities16.png</snx:icon>
+
+  
+    
+    
+    
+    
+      
+      
+        
+          <content type="text">
+          	Goal for com.ibm.sbt.services.client.connections.activities.ActivityNodeTypesTest#774954067_Activity-1404989804550
+      	  </content>
+        
+        
+      
+    
+  
+  
+  
+
+    
+  
+  
+  
+  
+
+    </entry>
+  	
+       
+  
+  
+</feed>
+]]></data>
+</response>
+</responses>

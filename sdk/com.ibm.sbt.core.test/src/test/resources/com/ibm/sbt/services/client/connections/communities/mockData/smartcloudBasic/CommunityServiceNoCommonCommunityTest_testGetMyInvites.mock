@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<responses>
+<response statusCode="200" statusReason="OK">
+<headers>
+    <header>
+        <name><![CDATA[content-language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header>
+    <header>
+        <name><![CDATA[content-type]]></name>
+        <value><![CDATA[application/atom+xml;charset=UTF-8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[date]]></name>
+        <value><![CDATA[Thu, 10 Jul 2014 10:59:18 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[last-modified]]></name>
+        <value><![CDATA[Thu, 10 Jul 2014 10:59:18 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[p3p]]></name>
+        <value><![CDATA[CP="NON CUR OTPi OUR NOR UNI"]]></value>
+    </header>
+    <header>
+        <name><![CDATA[vary]]></name>
+        <value><![CDATA[Accept-Encoding]]></value>
+    </header>
+    <header>
+        <name><![CDATA[transfer-encoding]]></name>
+        <value><![CDATA[chunked]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-powered-by]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-ua-compatible]]></name>
+        <value><![CDATA[IE=9,8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-lconn-auth]]></name>
+        <value><![CDATA[true]]></value>
+    </header>
+    <header>
+        <name><![CDATA[cache-control]]></name>
+        <value><![CDATA[no-store, no-cache, must-revalidate, private, must-revalidate]]></value>
+    </header>
+    <header>
+        <name><![CDATA[expires]]></name>
+        <value><![CDATA[Thu, 1 Jan 1970 00:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=iqcEPIWqmlBjTdJbIbDdzRqDmydVKfzGzo3D89VO+iAmhHntv8xh8BfxyhiMaC3GvjQ1KTTVZjX2y0oGar6aDJ7W2F3QV2nrkk7QVuUtKn7mVahR7eLEOwFmoDIP0byCIbOPcr2Wrhd0CoTO97TOW23X5qkbPqTgADfYpU52KS24jwWA9+6nU1+nGpiuHJCAsqSisgDGga3nXs4APJlJONpbzN4A91U5mPsBo6iAAIKzeJZ1YYl+Ql6mBr9gb5+atAWi3rqDPxQKfHlvXLsBvTUBrnQS05rWJoDFBWJHKrbgH58Hc1o9Ou7+po9V/JSNmUjR0eRRtvdokGin1Bsh77ZbHUehfGMJ52IvmMP5Z34kVGpsH7uxJLZIPx7O55iruNK2F64xU8Gcfi1Ugd2Rmr8NJKsSKJ3hY5LjVQpqu3ebkHAGaJPtwPWAu1DKDiBAKZOWVpWoaREDIXnzek+pJYs2N1MbTT7ANFD9ZcWhfr861KN99Vf3WbBx1cCdeKKlMpasYg3tqq+NHWG4oSIAGX7fen+3m8giIk49EaMA98u5PsRGX7QI5+T1+0tvKzMav3P0Mf8rh7jXcX266968fkVkNYn1HV8LbYThuHXK/Ox4rUxWOZiz+24D6mwsjdt4RkQHPOqKfwIyKh1/W1LmP3ogD/mpVpO8ZdF9VFs1pREpnNvsHnBnTgU0tYF9I50ljHt05vHGBFmAT0pKA9xFvTRH9E/Vd5wH77AAZG0jQdY0UDlfIMmGxncyDrWBNcT3;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[entitlements=MzYxMTA2NGUxZjI3MDNhYTUyZTUzNzRhZmRmMDYyYzY1NGI2N2MwOQ==-YmhfYWN0aXZpdGllcyxiaF9hY3Rpdml0aWVzX19hbGxvd19vdmVyYWdlLGJoX2NoYXQsYmhfY29tbXVuaXRpZXMsYmhfY29udGFjdHMsYmhfZGFzaGJvYXJkLGJoX2ZlZWRiYWNrLGJoX2ZpbGVyLGJoX2ZpbGVyX19hbGxvd19vdmVyYWdlLGJoX2ZvcnVtcyxiaF93aGF0c19uZXcsYnNzX2FkbWluLGJzc19pbnZpdGVfZ3Vlc3QsbGNfYWN0aXZpdGllcyxsY19uZXdzLA==-MjAwMDAyNjk=;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token=da46a1b8-1f98-4b0b-b1b7-ce0c6c91197a;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token_forum=378826d2-70d3-4245-a058-c7d74aa055a8;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[JSESSIONID=0000ejrmC0wHb_b6c0ToXnCJzbh:18of2u29m;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[user_lang=ZW5fVVM%3D-MjAwMDAyNjk%3D;Secure; Domain=cfdev3.swg.usma.ibm.com; Path=/; Expires=Fri, 11-Jul-14 10:59:18 GMT;Secure;]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[BIGipServerCFDev3-WebSEAL-80-fe=655360266.20480.0000;secure; path=/]]></value>
+    </header></headers>
+<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns="http://www.w3.org/2005/Atom">
+  <id>urn:lsid:ibm.com:communities:invites-b80e0496-5b89-49af-8f55-1ea537207993</id>
+  <title type="text">Invitations for Lorenzo Boccaccia</title>
+  <updated>2014-07-10T10:59:18.817Z</updated>
+  <generator version="4.5.0.0" uri="http://www.ibm.com/xmlns/prod/sn">IBM Connections - Communities</generator>
+  <link href="https://apps.cfdev3.swg.usma.ibm.com/communities/service/atom/service" rel="http://www.ibm.com/xmlns/prod/sn/service">
+  </link>
+  <link href="https://apps.cfdev3.swg.usma.ibm.com/communities/service/atom/service" rel="service">
+  </link>
+  <link href="https://apps.cfdev3.swg.usma.ibm.com/communities/service/atom/community/invites/my" rel="self">
+  </link>
+  <opensearch:totalResults>0</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <opensearch:itemsPerPage>20</opensearch:itemsPerPage>
+</feed>]]></data>
+</response>
+</responses>

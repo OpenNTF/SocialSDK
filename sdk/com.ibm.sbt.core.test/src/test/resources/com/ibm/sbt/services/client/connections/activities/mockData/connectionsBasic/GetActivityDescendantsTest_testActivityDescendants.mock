@@ -1,0 +1,1930 @@
+<?xml version="1.0"?>
+<responses>
+<response statusCode="201" statusReason="Created">
+<headers>
+    <header>
+        <name><![CDATA[Date]]></name>
+        <value><![CDATA[Thu, 10 Jul 2014 12:14:18 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-Powered-By]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-LConn-Auth]]></name>
+        <value><![CDATA[false]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-UA-Compatible]]></name>
+        <value><![CDATA[IE=9,8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Expires]]></name>
+        <value><![CDATA[Thu, 1 Jan 1970 00:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Cache-Control]]></name>
+        <value><![CDATA[no-store, no-cache, must-revalidate]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Accept]]></name>
+        <value><![CDATA[application/atom+xml]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Location]]></name>
+        <value><![CDATA[https://lcauto19.swg.usma.ibm.com/activities/service/atom2/activitynode?activityNodeUuid=cc1a9a0a-05a0-4767-bc33-aeb832f167cf]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-UUID]]></name>
+        <value><![CDATA[cc1a9a0a-05a0-4767-bc33-aeb832f167cf]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Length]]></name>
+        <value><![CDATA[4456]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[lcLang=en_us; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=Ppsrcr7hseKUnDjcR1LhJyMcKB8uHa3eEcFVse3iIlMPfbeOTOEGZ1FyeOJxuqcbaX0RMxcL7FUvGujzyaN9yGnNv2+NLz67YbABjzDvWiAO+TZqsELVWwwpjtL17o7ZN51yBS3uSmP9KWMP7OmqVJkIFuUjQedpOb2iIHFjIkfluvC6VRa3C766zV5d1b3ng0IcyJu1ItichrPrzJTTr1HrxkpxWLD214IrXZDBZnRTefcrEMmMe8NK9/WdpYQPl/m6V/m+awp7MLrHeAYZtxVBNHXKJZ3Ur5xHXLe6/P6P0Y4TIeKMuXnnEDpR6XowXndTABs1Q72ke4z9cIGaVcZEnL4TMgXGGn2UTCZRckCB5IYom1t6V5Gm8zgo0JVn5Pskz+b4vIO0h7Z80LgUgPTl7O2GPWpmy+Ot5ujUaeJfyXtphIDsF6bOYgRwBc3j8rPTIrqrSbT08fCdrAu69sya9HrEYf2hWQ8VWulWAgeM8/WDPBGDLZdm7C+nTmWr1ZIxQJyYBKY/VXJO/doQbGPh3Elt6+tfJbpLsRlJoTzZaf//TxdlUOEpeWGu1lynLkmQKeEnznA+Agrb+EIjDfYufDBxzkOeQooYiUyuX7++4qfTxfsshVX+3Pckp/5s2fPG+aD/QJ0To8C2HwcILkisgFw8dP1eJKdUwRhjx3jLpq/W0P9INm07n2X+83O8Uf4fu0nCu2ZmcYxGHz3BpQ==; Path=/; Domain=.swg.usma.ibm.com]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[ICSESSIONID=0000No_zgMMuZZmWkNc1gtV-FnR:-1; Path=/; HttpOnly]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Keep-Alive]]></name>
+        <value><![CDATA[timeout=10, max=100]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Connection]]></name>
+        <value><![CDATA[Keep-Alive]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Type]]></name>
+        <value><![CDATA[application/atom+xml;charset=UTF-8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header></headers>
+<data><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+
+
+
+
+
+
+
+
+
+
+
+
+<entry xmlns="http://www.w3.org/2005/Atom"
+  xmlns:app="http://www.w3.org/2007/app"   
+  xmlns:snx="http://www.ibm.com/xmlns/prod/sn"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+  xmlns:thr="http://purl.org/syndication/thread/1.0"
+  >
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <id>urn:lsid:ibm.com:oa:cc1a9a0a-05a0-4767-bc33-aeb832f167cf</id>
+  <title type="text">ActivityDescendants-1404994537710</title>
+  <updated>2014-07-10T12:14:18Z</updated>
+  <published>2014-07-10T12:14:18Z</published>
+  <author>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <name>Amy Jones101</name>
+  <email>ajones101@janet.iris.com</email>
+  <snx:userid>8cbefec0-f6df-1032-9ad5-d02a14283ea9</snx:userid>
+  <snx:ldapid>f17e163d-9e45-4260-80a3-357f392842c7</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+  
+  <snx:isExternal>false</snx:isExternal>
+  
+  
+
+  </author>
+  <contributor>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <name>Amy Jones101</name>
+  <email>ajones101@janet.iris.com</email>
+  <snx:userid>8cbefec0-f6df-1032-9ad5-d02a14283ea9</snx:userid>
+  <snx:ldapid>f17e163d-9e45-4260-80a3-357f392842c7</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+  
+  <snx:isExternal>false</snx:isExternal>
+  
+  
+
+  </contributor>
+  	
+    
+    
+  	     
+  	  
+  	    
+  	  
+ 	      <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="activity" label="Activity"/>
+  	  
+  	
+    
+  
+
+  <category scheme="http://www.ibm.com/xmlns/prod/sn/priority" term="1" label="Normal"/>
+  
+    
+    
+  
+  
+  
+  
+  
+  
+  <category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="internal" label="Internal"/>
+  
+  
+  
+  
+  
+  
+    <category term="ibmsbt" />
+  
+    <category term="personal" />
+  
+    <category term="unit_test" />
+  
+  
+    <link rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml" href="https://lcauto19.swg.usma.ibm.com/activities/service/atom2/acl?activityUuid=cc1a9a0a-05a0-4767-bc33-aeb832f167cf" />
+    <link rel="http://www.ibm.com/xmlns/prod/sn/history" type="application/atom+xml" href="https://lcauto19.swg.usma.ibm.com/activities/service/atom2/activity/history?activityUuid=cc1a9a0a-05a0-4767-bc33-aeb832f167cf" />
+    <link rel="http://www.ibm.com/xmlns/prod/sn/templates" type="application/atom+xml" href="https://lcauto19.swg.usma.ibm.com/activities/service/atom2/entrytemplates?activityUuid=cc1a9a0a-05a0-4767-bc33-aeb832f167cf" />
+   
+  
+  
+
+  
+    <app:collection href="https://lcauto19.swg.usma.ibm.com/activities/service/atom2/activity?activityUuid=cc1a9a0a-05a0-4767-bc33-aeb832f167cf">
+      <title type="text">ActivityDescendants-1404994537710</title>
+      <app:categories href="https://lcauto19.swg.usma.ibm.com/activities/service/atom2/categories?activityUuid=cc1a9a0a-05a0-4767-bc33-aeb832f167cf"/>
+    </app:collection> 
+  
+  <snx:activity>cc1a9a0a-05a0-4767-bc33-aeb832f167cf</snx:activity>
+  
+  
+  
+    <link rel="edit" type="application/atom+xml" href="https://lcauto19.swg.usma.ibm.com/activities/service/atom2/activitynode?activityNodeUuid=cc1a9a0a-05a0-4767-bc33-aeb832f167cf" />
+  
+   
+  
+    
+      <link rel="self" type="application/atom+xml" href="https://lcauto19.swg.usma.ibm.com/activities/service/atom2/activity?activityUuid=cc1a9a0a-05a0-4767-bc33-aeb832f167cf"/>
+      
+        <link rel="alternate" type="application/xhtml+xml" href="https://lcauto19.swg.usma.ibm.com/activities/service/html/activity/recent?activityUuid=cc1a9a0a-05a0-4767-bc33-aeb832f167cf"/>
+      	<link rel="alternate" type="text/html" href="https://lcauto19.swg.usma.ibm.com/activities/service/html/activity/recent?activityUuid=cc1a9a0a-05a0-4767-bc33-aeb832f167cf"/>
+      
+     
+    
+  
+ 
+  <snx:position>-2147483648</snx:position>
+  <snx:depth>0</snx:depth>  
+  
+  <snx:permissions>none, create_activity, view_activity, edit_activity, delete_activity, activity_owner, edit_activity_tags, design_activity, edit_statements, delete_statements, add_members, delete_members, create_entries, edit_personal_entries, edit_all_entries, delete_personal_entries, delete_all_entries, edit_personal_entry_tags, edit_all_entry_tags, view_members</snx:permissions>
+  <snx:icon>https://lcauto19.swg.usma.ibm.com/activities/nav/common/images/iconActivities16.png</snx:icon>
+
+  
+    
+    
+    
+    
+      
+      
+        
+          <content type="text">
+          	Goal for ActivityDescendants-1404994537710
+      	  </content>
+        
+        
+      
+    
+  
+  
+  
+
+    
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</entry>
+]]></data>
+</response>
+<response statusCode="201" statusReason="Created">
+<headers>
+    <header>
+        <name><![CDATA[Date]]></name>
+        <value><![CDATA[Thu, 10 Jul 2014 12:14:19 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-Powered-By]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-LConn-Auth]]></name>
+        <value><![CDATA[false]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-UA-Compatible]]></name>
+        <value><![CDATA[IE=9,8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Expires]]></name>
+        <value><![CDATA[Thu, 1 Jan 1970 00:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Cache-Control]]></name>
+        <value><![CDATA[no-store, no-cache, must-revalidate]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Accept]]></name>
+        <value><![CDATA[application/atom+xml, multipart/related; q=0.5, */*; q=0.2]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Location]]></name>
+        <value><![CDATA[https://lcauto19.swg.usma.ibm.com/activities/service/atom2/activitynode?activityNodeUuid=8013f3c1-3fa2-4451-9c05-251759dd41e1]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-UUID]]></name>
+        <value><![CDATA[8013f3c1-3fa2-4451-9c05-251759dd41e1]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[lcLang=en_us; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=Ppsrcr7hseKUnDjcR1LhJyMcKB8uHa3eEcFVse3iIlMPfbeOTOEGZ1FyeOJxuqcbaX0RMxcL7FUvGujzyaN9yGnNv2+NLz67YbABjzDvWiAO+TZqsELVWwwpjtL17o7ZN51yBS3uSmP9KWMP7OmqVJkIFuUjQedpOb2iIHFjIkfluvC6VRa3C766zV5d1b3ng0IcyJu1ItichrPrzJTTr1HrxkpxWLD214IrXZDBZnRTefcrEMmMe8NK9/WdpYQPl/m6V/m+awp7MLrHeAYZtxVBNHXKJZ3Ur5xHXLe6/P6P0Y4TIeKMuXnnEDpR6XowXndTABs1Q72ke4z9cIGaVcZEnL4TMgXGGn2UTCZRckCB5IYom1t6V5Gm8zgo0JVn5Pskz+b4vIO0h7Z80LgUgPTl7O2GPWpmy+Ot5ujUaeJfyXtphIDsF6bOYgRwBc3j8rPTIrqrSbT08fCdrAu69sya9HrEYf2hWQ8VWulWAgeM8/WDPBGDLZdm7C+nTmWr1ZIxQJyYBKY/VXJO/doQbGPh3Elt6+tfJbpLsRlJoTzZaf//TxdlUOEpeWGu1lynLkmQKeEnznA+Agrb+EIjDfYufDBxzkOeQooYiUyuX7++4qfTxfsshVX+3Pckp/5s2fPG+aD/QJ0To8C2HwcILkisgFw8dP1eJKdUwRhjx3jLpq/W0P9INm07n2X+83O8Uf4fu0nCu2ZmcYxGHz3BpQ==; Path=/; Domain=.swg.usma.ibm.com]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[ICSESSIONID=0000SyEirKHUE0ffcdoudnlAWid:-1; Path=/; HttpOnly]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Keep-Alive]]></name>
+        <value><![CDATA[timeout=10, max=100]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Connection]]></name>
+        <value><![CDATA[Keep-Alive]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Transfer-Encoding]]></name>
+        <value><![CDATA[chunked]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Type]]></name>
+        <value><![CDATA[application/atom+xml;charset=UTF-8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header></headers>
+<data><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+
+
+
+
+
+
+
+
+
+
+
+
+<entry xmlns="http://www.w3.org/2005/Atom"
+  xmlns:app="http://www.w3.org/2007/app"   
+  xmlns:snx="http://www.ibm.com/xmlns/prod/sn"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+  xmlns:thr="http://purl.org/syndication/thread/1.0"
+  >
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <id>urn:lsid:ibm.com:oa:8013f3c1-3fa2-4451-9c05-251759dd41e1</id>
+  <title type="text">CreatedNode-1404994539057</title>
+  <updated>2014-07-10T12:14:20Z</updated>
+  <published>2014-07-10T12:14:20Z</published>
+  <author>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <name>Amy Jones101</name>
+  <email>ajones101@janet.iris.com</email>
+  <snx:userid>8cbefec0-f6df-1032-9ad5-d02a14283ea9</snx:userid>
+  <snx:ldapid>f17e163d-9e45-4260-80a3-357f392842c7</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+  
+  <snx:isExternal>false</snx:isExternal>
+  
+  
+
+  </author>
+  <contributor>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <name>Amy Jones101</name>
+  <email>ajones101@janet.iris.com</email>
+  <snx:userid>8cbefec0-f6df-1032-9ad5-d02a14283ea9</snx:userid>
+  <snx:ldapid>f17e163d-9e45-4260-80a3-357f392842c7</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+  
+  <snx:isExternal>false</snx:isExternal>
+  
+  
+
+  </contributor>
+  	
+    
+    
+  	     
+  	  
+  	    
+  	  
+ 	      <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="" label="Unknown"/>
+  	  
+  	
+    
+  
+
+  
+  
+  
+  
+  
+  
+  
+  <category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="internal" label="Internal"/>
+  
+  
+  
+  
+  
+  
+    <category term="ibm" />
+  
+   
+  
+    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:cc1a9a0a-05a0-4767-bc33-aeb832f167cf" 
+       type="application/atom+xml" 
+       href="https://lcauto19.swg.usma.ibm.com/activities/service/atom2/activitynode?activityNodeUuid=cc1a9a0a-05a0-4767-bc33-aeb832f167cf"
+       source="urn:lsid:ibm.com:oa:cc1a9a0a-05a0-4767-bc33-aeb832f167cf"
+    />
+  
+  
+
+  
+  <snx:activity>cc1a9a0a-05a0-4767-bc33-aeb832f167cf</snx:activity>
+  
+  
+  
+    <link rel="edit" type="application/atom+xml" href="https://lcauto19.swg.usma.ibm.com/activities/service/atom2/activitynode?activityNodeUuid=8013f3c1-3fa2-4451-9c05-251759dd41e1" />
+  
+   
+  
+    
+    
+      <link rel="self" type="application/atom+xml" href="https://lcauto19.swg.usma.ibm.com/activities/service/atom2/activitynode?activityNodeUuid=8013f3c1-3fa2-4451-9c05-251759dd41e1"/>
+ 	  <link rel="alternate" type="application/xhtml+xml" href="https://lcauto19.swg.usma.ibm.com/activities/service/html/activityentry?uuid=8013f3c1-3fa2-4451-9c05-251759dd41e1"/>
+      <link rel="alternate" type="text/html" href="https://lcauto19.swg.usma.ibm.com/activities/service/html/activityentry?uuid=8013f3c1-3fa2-4451-9c05-251759dd41e1"/>
+          
+    
+  
+ 
+  <snx:position>1000</snx:position>
+  <snx:depth>1</snx:depth>  
+  
+  <snx:permissions>none, create_activity, view_activity, edit_activity, delete_activity, activity_owner, edit_activity_tags, design_activity, edit_statements, delete_statements, add_members, delete_members, create_entries, edit_personal_entries, edit_all_entries, delete_personal_entries, delete_all_entries, edit_personal_entry_tags, edit_all_entry_tags, view_members</snx:permissions>
+  
+
+  
+    
+    
+    
+    
+      
+      
+        
+        
+          <summary type="text">
+          	
+          </summary>
+        
+      
+    
+  
+  
+  
+
+    
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</entry>
+]]></data>
+</response>
+<response statusCode="201" statusReason="Created">
+<headers>
+    <header>
+        <name><![CDATA[Date]]></name>
+        <value><![CDATA[Thu, 10 Jul 2014 12:14:22 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-Powered-By]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-LConn-Auth]]></name>
+        <value><![CDATA[false]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-UA-Compatible]]></name>
+        <value><![CDATA[IE=9,8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Expires]]></name>
+        <value><![CDATA[Thu, 1 Jan 1970 00:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Cache-Control]]></name>
+        <value><![CDATA[no-store, no-cache, must-revalidate]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Accept]]></name>
+        <value><![CDATA[application/atom+xml, multipart/related; q=0.5, */*; q=0.2]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Location]]></name>
+        <value><![CDATA[https://lcauto19.swg.usma.ibm.com/activities/service/atom2/activitynode?activityNodeUuid=dc8a328b-f427-4070-90fa-a197a7858188]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-UUID]]></name>
+        <value><![CDATA[dc8a328b-f427-4070-90fa-a197a7858188]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[lcLang=en_us; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=Ppsrcr7hseKUnDjcR1LhJyMcKB8uHa3eEcFVse3iIlMPfbeOTOEGZ1FyeOJxuqcbaX0RMxcL7FUvGujzyaN9yGnNv2+NLz67YbABjzDvWiAO+TZqsELVWwwpjtL17o7ZN51yBS3uSmP9KWMP7OmqVJkIFuUjQedpOb2iIHFjIkfluvC6VRa3C766zV5d1b3ng0IcyJu1ItichrPrzJTTr1HrxkpxWLD214IrXZDBZnRTefcrEMmMe8NK9/WdpYQPl/m6V/m+awp7MLrHeAYZtxVBNHXKJZ3Ur5xHXLe6/P6P0Y4TIeKMuXnnEDpR6XowXndTABs1Q72ke4z9cIGaVcZEnL4TMgXGGn2UTCZRckCB5IYom1t6V5Gm8zgo0JVn5Pskz+b4vIO0h7Z80LgUgPTl7O2GPWpmy+Ot5ujUaeJfyXtphIDsF6bOYgRwBc3j8rPTIrqrSbT08fCdrAu69sya9HrEYf2hWQ8VWulWAgeM8/WDPBGDLZdm7C+nTmWr1ZIxQJyYBKY/VXJO/doQbGPh3Elt6+tfJbpLsRlJoTzZaf//TxdlUOEpeWGu1lynLkmQKeEnznA+Agrb+EIjDfYufDBxzkOeQooYiUyuX7++4qfTxfsshVX+3Pckp/5s2fPG+aD/QJ0To8C2HwcILkisgFw8dP1eJKdUwRhjx3jLpq/W0P9INm07n2X+83O8Uf4fu0nCu2ZmcYxGHz3BpQ==; Path=/; Domain=.swg.usma.ibm.com]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[ICSESSIONID=0000vBBPyMO4seJGsmLhLaoNXKe:-1; Path=/; HttpOnly]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Keep-Alive]]></name>
+        <value><![CDATA[timeout=10, max=100]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Connection]]></name>
+        <value><![CDATA[Keep-Alive]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Transfer-Encoding]]></name>
+        <value><![CDATA[chunked]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Type]]></name>
+        <value><![CDATA[application/atom+xml;charset=UTF-8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header></headers>
+<data><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+
+
+
+
+
+
+
+
+
+
+
+
+<entry xmlns="http://www.w3.org/2005/Atom"
+  xmlns:app="http://www.w3.org/2007/app"   
+  xmlns:snx="http://www.ibm.com/xmlns/prod/sn"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+  xmlns:thr="http://purl.org/syndication/thread/1.0"
+  >
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <id>urn:lsid:ibm.com:oa:dc8a328b-f427-4070-90fa-a197a7858188</id>
+  <title type="text">CreatedNode-1404994541236</title>
+  <updated>2014-07-10T12:14:22Z</updated>
+  <published>2014-07-10T12:14:22Z</published>
+  <author>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <name>Amy Jones101</name>
+  <email>ajones101@janet.iris.com</email>
+  <snx:userid>8cbefec0-f6df-1032-9ad5-d02a14283ea9</snx:userid>
+  <snx:ldapid>f17e163d-9e45-4260-80a3-357f392842c7</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+  
+  <snx:isExternal>false</snx:isExternal>
+  
+  
+
+  </author>
+  <contributor>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <name>Amy Jones101</name>
+  <email>ajones101@janet.iris.com</email>
+  <snx:userid>8cbefec0-f6df-1032-9ad5-d02a14283ea9</snx:userid>
+  <snx:ldapid>f17e163d-9e45-4260-80a3-357f392842c7</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+  
+  <snx:isExternal>false</snx:isExternal>
+  
+  
+
+  </contributor>
+  	
+    
+    
+  	     
+  	  
+  	    
+  	  
+ 	      <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="" label="Unknown"/>
+  	  
+  	
+    
+  
+
+  
+  
+  
+  
+  
+  
+  
+  <category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="internal" label="Internal"/>
+  
+  
+  
+  
+  
+  
+    <category term="ibm" />
+  
+   
+  
+    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:cc1a9a0a-05a0-4767-bc33-aeb832f167cf" 
+       type="application/atom+xml" 
+       href="https://lcauto19.swg.usma.ibm.com/activities/service/atom2/activitynode?activityNodeUuid=cc1a9a0a-05a0-4767-bc33-aeb832f167cf"
+       source="urn:lsid:ibm.com:oa:cc1a9a0a-05a0-4767-bc33-aeb832f167cf"
+    />
+  
+  
+
+  
+  <snx:activity>cc1a9a0a-05a0-4767-bc33-aeb832f167cf</snx:activity>
+  
+  
+  
+    <link rel="edit" type="application/atom+xml" href="https://lcauto19.swg.usma.ibm.com/activities/service/atom2/activitynode?activityNodeUuid=dc8a328b-f427-4070-90fa-a197a7858188" />
+  
+   
+  
+    
+    
+      <link rel="self" type="application/atom+xml" href="https://lcauto19.swg.usma.ibm.com/activities/service/atom2/activitynode?activityNodeUuid=dc8a328b-f427-4070-90fa-a197a7858188"/>
+ 	  <link rel="alternate" type="application/xhtml+xml" href="https://lcauto19.swg.usma.ibm.com/activities/service/html/activityentry?uuid=dc8a328b-f427-4070-90fa-a197a7858188"/>
+      <link rel="alternate" type="text/html" href="https://lcauto19.swg.usma.ibm.com/activities/service/html/activityentry?uuid=dc8a328b-f427-4070-90fa-a197a7858188"/>
+          
+    
+  
+ 
+  <snx:position>2000</snx:position>
+  <snx:depth>1</snx:depth>  
+  
+  <snx:permissions>none, create_activity, view_activity, edit_activity, delete_activity, activity_owner, edit_activity_tags, design_activity, edit_statements, delete_statements, add_members, delete_members, create_entries, edit_personal_entries, edit_all_entries, delete_personal_entries, delete_all_entries, edit_personal_entry_tags, edit_all_entry_tags, view_members</snx:permissions>
+  
+
+  
+    
+    
+    
+    
+      
+      
+        
+        
+          <summary type="text">
+          	
+          </summary>
+        
+      
+    
+  
+  
+  
+
+    
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</entry>
+]]></data>
+</response>
+<response statusCode="201" statusReason="Created">
+<headers>
+    <header>
+        <name><![CDATA[Date]]></name>
+        <value><![CDATA[Thu, 10 Jul 2014 12:14:24 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-Powered-By]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-LConn-Auth]]></name>
+        <value><![CDATA[false]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-UA-Compatible]]></name>
+        <value><![CDATA[IE=9,8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Expires]]></name>
+        <value><![CDATA[Thu, 1 Jan 1970 00:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Cache-Control]]></name>
+        <value><![CDATA[no-store, no-cache, must-revalidate]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Accept]]></name>
+        <value><![CDATA[application/atom+xml, multipart/related; q=0.5, */*; q=0.2]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Location]]></name>
+        <value><![CDATA[https://lcauto19.swg.usma.ibm.com/activities/service/atom2/activitynode?activityNodeUuid=f4f5821e-d9f7-49cd-9477-5c342941cc86]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-UUID]]></name>
+        <value><![CDATA[f4f5821e-d9f7-49cd-9477-5c342941cc86]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[lcLang=en_us; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=Ppsrcr7hseKUnDjcR1LhJyMcKB8uHa3eEcFVse3iIlMPfbeOTOEGZ1FyeOJxuqcbaX0RMxcL7FUvGujzyaN9yGnNv2+NLz67YbABjzDvWiAO+TZqsELVWwwpjtL17o7ZN51yBS3uSmP9KWMP7OmqVJkIFuUjQedpOb2iIHFjIkfluvC6VRa3C766zV5d1b3ng0IcyJu1ItichrPrzJTTr1HrxkpxWLD214IrXZDBZnRTefcrEMmMe8NK9/WdpYQPl/m6V/m+awp7MLrHeAYZtxVBNHXKJZ3Ur5xHXLe6/P6P0Y4TIeKMuXnnEDpR6XowXndTABs1Q72ke4z9cIGaVcZEnL4TMgXGGn2UTCZRckCB5IYom1t6V5Gm8zgo0JVn5Pskz+b4vIO0h7Z80LgUgPTl7O2GPWpmy+Ot5ujUaeJfyXtphIDsF6bOYgRwBc3j8rPTIrqrSbT08fCdrAu69sya9HrEYf2hWQ8VWulWAgeM8/WDPBGDLZdm7C+nTmWr1ZIxQJyYBKY/VXJO/doQbGPh3Elt6+tfJbpLsRlJoTzZaf//TxdlUOEpeWGu1lynLkmQKeEnznA+Agrb+EIjDfYufDBxzkOeQooYiUyuX7++4qfTxfsshVX+3Pckp/5s2fPG+aD/QJ0To8C2HwcILkisgFw8dP1eJKdUwRhjx3jLpq/W0P9INm07n2X+83O8Uf4fu0nCu2ZmcYxGHz3BpQ==; Path=/; Domain=.swg.usma.ibm.com]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[ICSESSIONID=0000YxDcJ6R_ShvjkwWRlH4Shfl:-1; Path=/; HttpOnly]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Keep-Alive]]></name>
+        <value><![CDATA[timeout=10, max=100]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Connection]]></name>
+        <value><![CDATA[Keep-Alive]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Transfer-Encoding]]></name>
+        <value><![CDATA[chunked]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Type]]></name>
+        <value><![CDATA[application/atom+xml;charset=UTF-8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header></headers>
+<data><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+
+
+
+
+
+
+
+
+
+
+
+
+<entry xmlns="http://www.w3.org/2005/Atom"
+  xmlns:app="http://www.w3.org/2007/app"   
+  xmlns:snx="http://www.ibm.com/xmlns/prod/sn"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+  xmlns:thr="http://purl.org/syndication/thread/1.0"
+  >
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <id>urn:lsid:ibm.com:oa:f4f5821e-d9f7-49cd-9477-5c342941cc86</id>
+  <title type="text">CreatedNode-1404994543176</title>
+  <updated>2014-07-10T12:14:24Z</updated>
+  <published>2014-07-10T12:14:24Z</published>
+  <author>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <name>Amy Jones101</name>
+  <email>ajones101@janet.iris.com</email>
+  <snx:userid>8cbefec0-f6df-1032-9ad5-d02a14283ea9</snx:userid>
+  <snx:ldapid>f17e163d-9e45-4260-80a3-357f392842c7</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+  
+  <snx:isExternal>false</snx:isExternal>
+  
+  
+
+  </author>
+  <contributor>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <name>Amy Jones101</name>
+  <email>ajones101@janet.iris.com</email>
+  <snx:userid>8cbefec0-f6df-1032-9ad5-d02a14283ea9</snx:userid>
+  <snx:ldapid>f17e163d-9e45-4260-80a3-357f392842c7</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+  
+  <snx:isExternal>false</snx:isExternal>
+  
+  
+
+  </contributor>
+  	
+    
+    
+  	     
+  	  
+  	    
+  	  
+ 	      <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="" label="Unknown"/>
+  	  
+  	
+    
+  
+
+  
+  
+  
+  
+  
+  
+  
+  <category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="internal" label="Internal"/>
+  
+  
+  
+  
+  
+  
+    <category term="ibm" />
+  
+    <category term="sbt" />
+  
+   
+  
+    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:cc1a9a0a-05a0-4767-bc33-aeb832f167cf" 
+       type="application/atom+xml" 
+       href="https://lcauto19.swg.usma.ibm.com/activities/service/atom2/activitynode?activityNodeUuid=cc1a9a0a-05a0-4767-bc33-aeb832f167cf"
+       source="urn:lsid:ibm.com:oa:cc1a9a0a-05a0-4767-bc33-aeb832f167cf"
+    />
+  
+  
+
+  
+  <snx:activity>cc1a9a0a-05a0-4767-bc33-aeb832f167cf</snx:activity>
+  
+  
+  
+    <link rel="edit" type="application/atom+xml" href="https://lcauto19.swg.usma.ibm.com/activities/service/atom2/activitynode?activityNodeUuid=f4f5821e-d9f7-49cd-9477-5c342941cc86" />
+  
+   
+  
+    
+    
+      <link rel="self" type="application/atom+xml" href="https://lcauto19.swg.usma.ibm.com/activities/service/atom2/activitynode?activityNodeUuid=f4f5821e-d9f7-49cd-9477-5c342941cc86"/>
+ 	  <link rel="alternate" type="application/xhtml+xml" href="https://lcauto19.swg.usma.ibm.com/activities/service/html/activityentry?uuid=f4f5821e-d9f7-49cd-9477-5c342941cc86"/>
+      <link rel="alternate" type="text/html" href="https://lcauto19.swg.usma.ibm.com/activities/service/html/activityentry?uuid=f4f5821e-d9f7-49cd-9477-5c342941cc86"/>
+          
+    
+  
+ 
+  <snx:position>3000</snx:position>
+  <snx:depth>1</snx:depth>  
+  
+  <snx:permissions>none, create_activity, view_activity, edit_activity, delete_activity, activity_owner, edit_activity_tags, design_activity, edit_statements, delete_statements, add_members, delete_members, create_entries, edit_personal_entries, edit_all_entries, delete_personal_entries, delete_all_entries, edit_personal_entry_tags, edit_all_entry_tags, view_members</snx:permissions>
+  
+
+  
+    
+    
+    
+    
+      
+      
+        
+        
+          <summary type="text">
+          	
+          </summary>
+        
+      
+    
+  
+  
+  
+
+    
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</entry>
+]]></data>
+</response>
+<response statusCode="201" statusReason="Created">
+<headers>
+    <header>
+        <name><![CDATA[Date]]></name>
+        <value><![CDATA[Thu, 10 Jul 2014 12:14:25 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-Powered-By]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-LConn-Auth]]></name>
+        <value><![CDATA[false]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-UA-Compatible]]></name>
+        <value><![CDATA[IE=9,8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Expires]]></name>
+        <value><![CDATA[Thu, 1 Jan 1970 00:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Cache-Control]]></name>
+        <value><![CDATA[no-store, no-cache, must-revalidate]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Accept]]></name>
+        <value><![CDATA[application/atom+xml, multipart/related; q=0.5, */*; q=0.2]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Location]]></name>
+        <value><![CDATA[https://lcauto19.swg.usma.ibm.com/activities/service/atom2/activitynode?activityNodeUuid=60e50822-325e-4008-ad8b-7f23f4a6510e]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-UUID]]></name>
+        <value><![CDATA[60e50822-325e-4008-ad8b-7f23f4a6510e]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[lcLang=en_us; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=Ppsrcr7hseKUnDjcR1LhJyMcKB8uHa3eEcFVse3iIlMPfbeOTOEGZ1FyeOJxuqcbaX0RMxcL7FUvGujzyaN9yGnNv2+NLz67YbABjzDvWiAO+TZqsELVWwwpjtL17o7ZN51yBS3uSmP9KWMP7OmqVJkIFuUjQedpOb2iIHFjIkfluvC6VRa3C766zV5d1b3ng0IcyJu1ItichrPrzJTTr1HrxkpxWLD214IrXZDBZnRTefcrEMmMe8NK9/WdpYQPl/m6V/m+awp7MLrHeAYZtxVBNHXKJZ3Ur5xHXLe6/P6P0Y4TIeKMuXnnEDpR6XowXndTABs1Q72ke4z9cIGaVcZEnL4TMgXGGn2UTCZRckCB5IYom1t6V5Gm8zgo0JVn5Pskz+b4vIO0h7Z80LgUgPTl7O2GPWpmy+Ot5ujUaeJfyXtphIDsF6bOYgRwBc3j8rPTIrqrSbT08fCdrAu69sya9HrEYf2hWQ8VWulWAgeM8/WDPBGDLZdm7C+nTmWr1ZIxQJyYBKY/VXJO/doQbGPh3Elt6+tfJbpLsRlJoTzZaf//TxdlUOEpeWGu1lynLkmQKeEnznA+Agrb+EIjDfYufDBxzkOeQooYiUyuX7++4qfTxfsshVX+3Pckp/5s2fPG+aD/QJ0To8C2HwcILkisgFw8dP1eJKdUwRhjx3jLpq/W0P9INm07n2X+83O8Uf4fu0nCu2ZmcYxGHz3BpQ==; Path=/; Domain=.swg.usma.ibm.com]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[ICSESSIONID=00005NmGNZjIslvBX0rpzc75wA6:-1; Path=/; HttpOnly]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Keep-Alive]]></name>
+        <value><![CDATA[timeout=10, max=100]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Connection]]></name>
+        <value><![CDATA[Keep-Alive]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Transfer-Encoding]]></name>
+        <value><![CDATA[chunked]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Type]]></name>
+        <value><![CDATA[application/atom+xml;charset=UTF-8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header></headers>
+<data><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+
+
+
+
+
+
+
+
+
+
+
+
+<entry xmlns="http://www.w3.org/2005/Atom"
+  xmlns:app="http://www.w3.org/2007/app"   
+  xmlns:snx="http://www.ibm.com/xmlns/prod/sn"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+  xmlns:thr="http://purl.org/syndication/thread/1.0"
+  >
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <id>urn:lsid:ibm.com:oa:60e50822-325e-4008-ad8b-7f23f4a6510e</id>
+  <title type="text">CreatedNode-1404994544684</title>
+  <updated>2014-07-10T12:14:25Z</updated>
+  <published>2014-07-10T12:14:25Z</published>
+  <author>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <name>Amy Jones101</name>
+  <email>ajones101@janet.iris.com</email>
+  <snx:userid>8cbefec0-f6df-1032-9ad5-d02a14283ea9</snx:userid>
+  <snx:ldapid>f17e163d-9e45-4260-80a3-357f392842c7</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+  
+  <snx:isExternal>false</snx:isExternal>
+  
+  
+
+  </author>
+  <contributor>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <name>Amy Jones101</name>
+  <email>ajones101@janet.iris.com</email>
+  <snx:userid>8cbefec0-f6df-1032-9ad5-d02a14283ea9</snx:userid>
+  <snx:ldapid>f17e163d-9e45-4260-80a3-357f392842c7</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+  
+  <snx:isExternal>false</snx:isExternal>
+  
+  
+
+  </contributor>
+  	
+    
+    
+  	     
+  	  
+  	    
+  	  
+ 	      <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="" label="Unknown"/>
+  	  
+  	
+    
+  
+
+  
+  
+  
+  
+  
+  
+  
+  <category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="internal" label="Internal"/>
+  
+  
+  
+  
+  
+  
+    <category term="ibm" />
+  
+    <category term="sbt" />
+  
+   
+  
+    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:cc1a9a0a-05a0-4767-bc33-aeb832f167cf" 
+       type="application/atom+xml" 
+       href="https://lcauto19.swg.usma.ibm.com/activities/service/atom2/activitynode?activityNodeUuid=cc1a9a0a-05a0-4767-bc33-aeb832f167cf"
+       source="urn:lsid:ibm.com:oa:cc1a9a0a-05a0-4767-bc33-aeb832f167cf"
+    />
+  
+  
+
+  
+  <snx:activity>cc1a9a0a-05a0-4767-bc33-aeb832f167cf</snx:activity>
+  
+  
+  
+    <link rel="edit" type="application/atom+xml" href="https://lcauto19.swg.usma.ibm.com/activities/service/atom2/activitynode?activityNodeUuid=60e50822-325e-4008-ad8b-7f23f4a6510e" />
+  
+   
+  
+    
+    
+      <link rel="self" type="application/atom+xml" href="https://lcauto19.swg.usma.ibm.com/activities/service/atom2/activitynode?activityNodeUuid=60e50822-325e-4008-ad8b-7f23f4a6510e"/>
+ 	  <link rel="alternate" type="application/xhtml+xml" href="https://lcauto19.swg.usma.ibm.com/activities/service/html/activityentry?uuid=60e50822-325e-4008-ad8b-7f23f4a6510e"/>
+      <link rel="alternate" type="text/html" href="https://lcauto19.swg.usma.ibm.com/activities/service/html/activityentry?uuid=60e50822-325e-4008-ad8b-7f23f4a6510e"/>
+          
+    
+  
+ 
+  <snx:position>4000</snx:position>
+  <snx:depth>1</snx:depth>  
+  
+  <snx:permissions>none, create_activity, view_activity, edit_activity, delete_activity, activity_owner, edit_activity_tags, design_activity, edit_statements, delete_statements, add_members, delete_members, create_entries, edit_personal_entries, edit_all_entries, delete_personal_entries, delete_all_entries, edit_personal_entry_tags, edit_all_entry_tags, view_members</snx:permissions>
+  
+
+  
+    
+    
+    
+    
+      
+      
+        
+        
+          <summary type="text">
+          	
+          </summary>
+        
+      
+    
+  
+  
+  
+
+    
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</entry>
+]]></data>
+</response>
+<response statusCode="200" statusReason="OK">
+<headers>
+    <header>
+        <name><![CDATA[Date]]></name>
+        <value><![CDATA[Thu, 10 Jul 2014 12:14:27 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-Powered-By]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-LConn-Auth]]></name>
+        <value><![CDATA[false]]></value>
+    </header>
+    <header>
+        <name><![CDATA[X-UA-Compatible]]></name>
+        <value><![CDATA[IE=9,8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Expires]]></name>
+        <value><![CDATA[Thu, 1 Jan 1970 00:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Last-Modified]]></name>
+        <value><![CDATA[Thu, 10 Jul 2014 12:14:27 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Pragma]]></name>
+        <value><![CDATA[no-cache]]></value>
+    </header>
+    <header>
+        <name><![CDATA[ETag]]></name>
+        <value><![CDATA[W/"1404994467564-f17e163d-9e45-4260-80a3-357f392842c7"]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Length]]></name>
+        <value><![CDATA[8368]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[lcLang=en_us; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=Ppsrcr7hseKUnDjcR1LhJyMcKB8uHa3eEcFVse3iIlMPfbeOTOEGZ1FyeOJxuqcbaX0RMxcL7FUvGujzyaN9yGnNv2+NLz67YbABjzDvWiAO+TZqsELVWwwpjtL17o7ZN51yBS3uSmP9KWMP7OmqVJkIFuUjQedpOb2iIHFjIkfluvC6VRa3C766zV5d1b3ng0IcyJu1ItichrPrzJTTr1HrxkpxWLD214IrXZDBZnRTefcrEMmMe8NK9/WdpYQPl/m6V/m+awp7MLrHeAYZtxVBNHXKJZ3Ur5xHXLe6/P6P0Y4TIeKMuXnnEDpR6XowXndTABs1Q72ke4z9cIGaVcZEnL4TMgXGGn2UTCZRckCB5IYom1t6V5Gm8zgo0JVn5Pskz+b4vIO0h7Z80LgUgPTl7O2GPWpmy+Ot5ujUaeJfyXtphIDsF6bOYgRwBc3j8rPTIrqrSbT08fCdrAu69sya9HrEYf2hWQ8VWulWAgeM8/WDPBGDLZdm7C+nTmWr1ZIxQJyYBKY/VXJO/doQbGPh3Elt6+tfJbpLsRlJoTzZaf//TxdlUOEpeWGu1lynLkmQKeEnznA+Agrb+EIjDfYufDBxzkOeQooYiUyuX7++4qfTxfsshVX+3Pckp/5s2fPG+aD/QJ0To8C2HwcILkisgFw8dP1eJKdUwRhjx3jLpq/W0P9INm07n2X+83O8Uf4fu0nCu2ZmcYxGHz3BpQ==; Path=/; Domain=.swg.usma.ibm.com]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[ICSESSIONID=0000eQXppQakHpHR_qsSuY9dntU:-1; Path=/; HttpOnly]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Cache-Control]]></name>
+        <value><![CDATA[private, must-revalidate, max-age=0, no-cache=set-cookie]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Keep-Alive]]></name>
+        <value><![CDATA[timeout=10, max=100]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Connection]]></name>
+        <value><![CDATA[Keep-Alive]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Type]]></name>
+        <value><![CDATA[application/atom+xml;charset=UTF-8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header></headers>
+<data><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<feed xmlns="http://www.w3.org/2005/Atom"
+  xmlns:app="http://www.w3.org/2007/app"   
+  xmlns:snx="http://www.ibm.com/xmlns/prod/sn"
+  xmlns:os="http://a9.com/-/spec/opensearch/1.1/"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+  xmlns:thr="http://purl.org/syndication/thread/1.0">
+  
+  
+  
+  
+  <generator uri="http://www.ibm.com/xmlns/prod/sn" version="5.0.0.0">IBM Connections - Activities</generator>
+  <icon>https://lcauto19.swg.usma.ibm.com/activities/styles/images/favicon.ico</icon>
+  <logo>https://lcauto19.swg.usma.ibm.com/activities/nav/common/images/iconActivities128.png</logo>
+  <id>https://lcauto19.swg.usma.ibm.com/activities/service/atom2/activitydescendants?activityUuid=cc1a9a0a-05a0-4767-bc33-aeb832f167cf&amp;tag=sbt</id>
+  <title type="text">ActivityDescendants-1404994537710</title>
+  <updated>2014-07-10T12:14:25Z</updated> 
+  <author>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <name>Amy Jones101</name>
+  <email>ajones101@janet.iris.com</email>
+  <snx:userid>8cbefec0-f6df-1032-9ad5-d02a14283ea9</snx:userid>
+  
+  
+  <snx:role>owner</snx:role>
+  
+  <snx:userState>active</snx:userState>
+  
+  
+  
+  <snx:isExternal>false</snx:isExternal>
+  
+  
+
+  </author> 
+  <link rel="self" href="https://lcauto19.swg.usma.ibm.com/activities/service/atom2/activitydescendants?activityUuid=cc1a9a0a-05a0-4767-bc33-aeb832f167cf&amp;tag=sbt"/>
+  <link rel="http://www.ibm.com/xmlns/prod/sn/service" type="application/atomsvc+xml" href="https://lcauto19.swg.usma.ibm.com/activities/service/atom2/service" />
+  <link rel="http://www.ibm.com/xmlns/prod/sn/tag-cloud" type="application/atomcat+xml" href="https://lcauto19.swg.usma.ibm.com/activities/service/atom2/tags?tag=sbt" />
+  <link rel="alternate" href="https://lcauto19.swg.usma.ibm.com/activities/service/html/activityview?activityUuid=cc1a9a0a-05a0-4767-bc33-aeb832f167cf&amp;tag=sbt" />
+  
+
+
+
+
+
+
+
+
+ 
+  <os:totalResults>2</os:totalResults>
+  <os:startIndex>1</os:startIndex>
+  
+  
+  	<snx:activity>cc1a9a0a-05a0-4767-bc33-aeb832f167cf</snx:activity>
+  
+  
+  
+    
+    <entry>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <id>urn:lsid:ibm.com:oa:60e50822-325e-4008-ad8b-7f23f4a6510e</id>
+  <title type="text">CreatedNode-1404994544684</title>
+  <updated>2014-07-10T12:14:25Z</updated>
+  <published>2014-07-10T12:14:25Z</published>
+  <author>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <name>Amy Jones101</name>
+  <email>ajones101@janet.iris.com</email>
+  <snx:userid>8cbefec0-f6df-1032-9ad5-d02a14283ea9</snx:userid>
+  <snx:ldapid>f17e163d-9e45-4260-80a3-357f392842c7</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+  
+  <snx:isExternal>false</snx:isExternal>
+  
+  
+
+  </author>
+  <contributor>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <name>Amy Jones101</name>
+  <email>ajones101@janet.iris.com</email>
+  <snx:userid>8cbefec0-f6df-1032-9ad5-d02a14283ea9</snx:userid>
+  <snx:ldapid>f17e163d-9e45-4260-80a3-357f392842c7</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+  
+  <snx:isExternal>false</snx:isExternal>
+  
+  
+
+  </contributor>
+  	
+    
+    
+  	     
+  	  
+  	    
+  	  
+ 	      <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="" label="Unknown"/>
+  	  
+  	
+    
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="external" label="External"/>
+  
+  
+  
+  
+  
+    <category term="ibm" />
+  
+    <category term="sbt" />
+  
+   
+  
+    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:cc1a9a0a-05a0-4767-bc33-aeb832f167cf" 
+       type="application/atom+xml" 
+       href="https://lcauto19.swg.usma.ibm.com/activities/service/atom2/activitynode?activityNodeUuid=cc1a9a0a-05a0-4767-bc33-aeb832f167cf"
+       source="urn:lsid:ibm.com:oa:cc1a9a0a-05a0-4767-bc33-aeb832f167cf"
+    />
+  
+  
+
+  
+  <snx:activity>cc1a9a0a-05a0-4767-bc33-aeb832f167cf</snx:activity>
+  
+  
+  
+    <link rel="edit" type="application/atom+xml" href="https://lcauto19.swg.usma.ibm.com/activities/service/atom2/activitynode?activityNodeUuid=60e50822-325e-4008-ad8b-7f23f4a6510e" />
+  
+   
+  
+    
+    
+      <link rel="self" type="application/atom+xml" href="https://lcauto19.swg.usma.ibm.com/activities/service/atom2/activitynode?activityNodeUuid=60e50822-325e-4008-ad8b-7f23f4a6510e"/>
+ 	  <link rel="alternate" type="application/xhtml+xml" href="https://lcauto19.swg.usma.ibm.com/activities/service/html/activityentry?uuid=60e50822-325e-4008-ad8b-7f23f4a6510e"/>
+      <link rel="alternate" type="text/html" href="https://lcauto19.swg.usma.ibm.com/activities/service/html/activityentry?uuid=60e50822-325e-4008-ad8b-7f23f4a6510e"/>
+          
+    
+  
+ 
+  <snx:position>4000</snx:position>
+  <snx:depth>0</snx:depth>  
+  
+  <snx:permissions>none, create_activity, view_activity, edit_activity, delete_activity, activity_owner, edit_activity_tags, design_activity, edit_statements, delete_statements, add_members, delete_members, create_entries, edit_personal_entries, edit_all_entries, delete_personal_entries, delete_all_entries, edit_personal_entry_tags, edit_all_entry_tags, view_members</snx:permissions>
+  
+
+  
+    
+    
+    
+    
+      
+      
+        
+        
+          <summary type="text">
+          	
+          </summary>
+        
+      
+    
+  
+  
+  
+
+    
+  
+  
+  
+  
+
+    </entry>
+  
+    
+    <entry>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <id>urn:lsid:ibm.com:oa:f4f5821e-d9f7-49cd-9477-5c342941cc86</id>
+  <title type="text">CreatedNode-1404994543176</title>
+  <updated>2014-07-10T12:14:24Z</updated>
+  <published>2014-07-10T12:14:24Z</published>
+  <author>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <name>Amy Jones101</name>
+  <email>ajones101@janet.iris.com</email>
+  <snx:userid>8cbefec0-f6df-1032-9ad5-d02a14283ea9</snx:userid>
+  <snx:ldapid>f17e163d-9e45-4260-80a3-357f392842c7</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+  
+  <snx:isExternal>false</snx:isExternal>
+  
+  
+
+  </author>
+  <contributor>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <name>Amy Jones101</name>
+  <email>ajones101@janet.iris.com</email>
+  <snx:userid>8cbefec0-f6df-1032-9ad5-d02a14283ea9</snx:userid>
+  <snx:ldapid>f17e163d-9e45-4260-80a3-357f392842c7</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+  
+  <snx:isExternal>false</snx:isExternal>
+  
+  
+
+  </contributor>
+  	
+    
+    
+  	     
+  	  
+  	    
+  	  
+ 	      <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="" label="Unknown"/>
+  	  
+  	
+    
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="external" label="External"/>
+  
+  
+  
+  
+  
+    <category term="ibm" />
+  
+    <category term="sbt" />
+  
+   
+  
+    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:cc1a9a0a-05a0-4767-bc33-aeb832f167cf" 
+       type="application/atom+xml" 
+       href="https://lcauto19.swg.usma.ibm.com/activities/service/atom2/activitynode?activityNodeUuid=cc1a9a0a-05a0-4767-bc33-aeb832f167cf"
+       source="urn:lsid:ibm.com:oa:cc1a9a0a-05a0-4767-bc33-aeb832f167cf"
+    />
+  
+  
+
+  
+  <snx:activity>cc1a9a0a-05a0-4767-bc33-aeb832f167cf</snx:activity>
+  
+  
+  
+    <link rel="edit" type="application/atom+xml" href="https://lcauto19.swg.usma.ibm.com/activities/service/atom2/activitynode?activityNodeUuid=f4f5821e-d9f7-49cd-9477-5c342941cc86" />
+  
+   
+  
+    
+    
+      <link rel="self" type="application/atom+xml" href="https://lcauto19.swg.usma.ibm.com/activities/service/atom2/activitynode?activityNodeUuid=f4f5821e-d9f7-49cd-9477-5c342941cc86"/>
+ 	  <link rel="alternate" type="application/xhtml+xml" href="https://lcauto19.swg.usma.ibm.com/activities/service/html/activityentry?uuid=f4f5821e-d9f7-49cd-9477-5c342941cc86"/>
+      <link rel="alternate" type="text/html" href="https://lcauto19.swg.usma.ibm.com/activities/service/html/activityentry?uuid=f4f5821e-d9f7-49cd-9477-5c342941cc86"/>
+          
+    
+  
+ 
+  <snx:position>3000</snx:position>
+  <snx:depth>0</snx:depth>  
+  
+  <snx:permissions>none, create_activity, view_activity, edit_activity, delete_activity, activity_owner, edit_activity_tags, design_activity, edit_statements, delete_statements, add_members, delete_members, create_entries, edit_personal_entries, edit_all_entries, delete_personal_entries, delete_all_entries, edit_personal_entry_tags, edit_all_entry_tags, view_members</snx:permissions>
+  
+
+  
+    
+    
+    
+    
+      
+      
+        
+        
+          <summary type="text">
+          	
+          </summary>
+        
+      
+    
+  
+  
+  
+
+    
+  
+  
+  
+  
+
+    </entry>
+  	
+       
+  
+  
+</feed>
+]]></data>
+</response>
+</responses>

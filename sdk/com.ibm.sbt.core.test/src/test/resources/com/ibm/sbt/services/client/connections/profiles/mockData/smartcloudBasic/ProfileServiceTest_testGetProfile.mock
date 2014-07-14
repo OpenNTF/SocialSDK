@@ -1,0 +1,172 @@
+<?xml version="1.0"?>
+<responses>
+<response statusCode="200" statusReason="OK">
+<headers>
+    <header>
+        <name><![CDATA[content-length]]></name>
+        <value><![CDATA[4626]]></value>
+    </header>
+    <header>
+        <name><![CDATA[content-type]]></name>
+        <value><![CDATA[text/html]]></value>
+    </header>
+    <header>
+        <name><![CDATA[date]]></name>
+        <value><![CDATA[Thu, 10 Jul 2014 11:01:24 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[p3p]]></name>
+        <value><![CDATA[CP="NON CUR OTPi OUR NOR UNI"]]></value>
+    </header>
+    <header>
+        <name><![CDATA[server]]></name>
+        <value><![CDATA[WebSEAL/6.1.1.3 (Build 110428)]]></value>
+    </header>
+    <header>
+        <name><![CDATA[pragma]]></name>
+        <value><![CDATA[no-cache]]></value>
+    </header>
+    <header>
+        <name><![CDATA[cache-control]]></name>
+        <value><![CDATA[no-cache]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[PD-H-SESSION-ID=4_0_kDag2xMnp6JI3LO4SaFSe2xJ+MPzmdMFitizq5N8s-nNZDuh;secure; Path=/; HttpOnly]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[BIGipServerCFDev3-WebSEAL-80-fe=655360266.20480.0000;secure; path=/]]></value>
+    </header></headers>
+<data><![CDATA[<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- Copyright IBM Corp. 2007, 2008, 2009, 2010, 2011 All Rights Reserved. -->
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+	    <meta http-equiv="cache-control" content="no-cache"/>
+	    <meta http-equiv="pragma" content="no-cache"/>
+	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	    <title>Log In</title>
+
+<!-- START NON-TRANSLATABLE -->
+		<meta name = "viewport" content = "user-scalable=no, width=device-width"/>
+		<link rel="shortcut icon" href="/manage/theme/images/SmartCloud_favicon.ico" />
+		<link type="text/css" href="/manage/css/2.34-SNAPSHOT/bluehouse.css" rel="stylesheet" />
+		<link rel="stylesheet" href="/manage/css/2.34-SNAPSHOT/meetings.css" type="text/css"/>
+		<script type="text/javascript" src="/manage/js/2.34-SNAPSHOT/authUtils.js"></script>
+		<script type="text/javascript" src="/manage/resource/getProductDetails"></script>
+<!--  END NON-TRANSLATABLE -->
+	</head>
+
+<!-- START NON-TRANSLATABLE -->
+	<body class="tundra" style="text-align: center;" onload="initLoginPage();">
+<!-- END NON-TRANSLATABLE -->
+			<!-- need to translate the alt tag contents -->
+			<div id="company_logo" role="banner" aria-label="IBM&reg;">
+				<a class="ibm_login" href="//www.ibm.com" style="text-align: left;" id="loginLogo"><img src="/manage/theme/images/ibm_login.gif" alt="IBM&reg;" /></a>
+			</div>
+			<div id="frame">
+				<div id="joinBox" style="text-align: left;">
+					<div id="mainBox" role="main" aria-labelledby="pageTitle">
+						<div class="mainBox_inner">
+							<h1 id="pageTitle">Log In (Mini Env) </h1>
+
+							<div id="errorMessage" class="error_login" style="display:none;" role="alert" aria-live="assertive">
+								Your username &amp; password are not recognized by the service. Please check your login credentials and try again.
+							</div>
+
+							<div id="suspenderrorMessage" class="error_login" style="display:none;" role="alert" aria-live="assertive">
+								Your account has expired or has been suspended.
+							</div>
+
+							<form id="loginActionForm" name="login" onsubmit="return false;" action="/pkmslogin.form" method="post" role="form">
+								<fieldset>
+									<!-- productName would be dynamically replaced in the productName1 span -->
+									<legend>Log in to <span id="productName1"></span></legend>
+									<input type="hidden" name="login-form-type" value="pwd" />
+									<input type="hidden" id="error-code" name="error-code" value="" />
+		 							<label id="loginActionForm_eMail" for="username">E-mail address:</label>
+		   							<input type="text" name="username" id="username" class="text" aria-required="true" />
+	
+			    					<label id="loginActionForm_Password" for="password">Password:</label>
+			    					<input type="password" name="password" id="password" class="text" aria-required="true" />
+									<div style="padding: 10px 0px 0px 0px;">
+										<a href="/manage/account/public/federatedIdentity/input">Use My Organization's Login</a> <br />
+									</div>
+								</fieldset>
+								<div style="padding: 15px 0px 0px 0px;">
+									<input type="submit" class="lotusBtn ok okLeft" id="submit_form" onclick="submitLoginForm();" value="Log In"/>
+									<a class="forgot" id="forgot"  href="#" onclick="showPasswordRecoveryPage('loginActionForm');">Forgot password?</a>
+									<div style="clear: both;">&nbsp;</div>
+								</div>
+							</form>								
+						</div>
+					</div>
+
+			<div id="userInfo" role="complementary" aria-labelledby="comp_label">
+				<h2 id="comp_label" class="element-invisible">Additional links</h2>
+				<!-- productName would be dynamically replaced in productName2 span -->
+				<p><a href="//www.ibm.com/cloud-computing/social/startatrial/">Sign Up</a> <br />
+				<span id="signUp">Not a member yet? Sign up to get an account.</span>
+				</p>
+				<p><a href="//www.webdialogs.com/join/host.asp">Host a Sametime Unyte Meeting</a><br />
+				<span id="hostMeeting">Customers can still use online meetings and events from Sametime Unyte.</span>
+				</p>
+				
+				<p><a href="//www.lotuslive.com/support/maintenance">Check the Maintenance Schedule</a> 
+				</p>
+			</div>
+
+<!-- START NON-TRANSLATABLE -->
+			<div style="clear: both;">&nbsp;</div>
+					<!-- Do Not Remove For Gomez Scripts -->
+					<div style="display: none;">6h5k7fQJ1VSa6qi5dxgr</div>
+				</div>
+			</div>
+			<script type="text/javascript">
+// START NON-TRANSLATABLE
+				initError();
+// END NON-TRANSLATABLE
+			</script>
+	</body>
+</html>
+<!-- END NON-TRANSLATABLE -->
+]]></data>
+</response>
+<response statusCode="404" statusReason="Not Found">
+<headers>
+    <header>
+        <name><![CDATA[content-type]]></name>
+        <value><![CDATA[text/html; charset=UTF-8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[date]]></name>
+        <value><![CDATA[Thu, 10 Jul 2014 11:01:25 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[p3p]]></name>
+        <value><![CDATA[CP="NON CUR OTPi OUR NOR UNI"]]></value>
+    </header>
+    <header>
+        <name><![CDATA[vary]]></name>
+        <value><![CDATA[Accept-Encoding]]></value>
+    </header>
+    <header>
+        <name><![CDATA[transfer-encoding]]></name>
+        <value><![CDATA[chunked]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-powered-by]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[cache-control]]></name>
+        <value><![CDATA[private, must-revalidate]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[BIGipServerCFDev3-WebSEAL-80-fe=655360266.20480.0000;secure; path=/]]></value>
+    </header></headers>
+<data><![CDATA[<H1>SRVE0255E: A WebGroup/Virtual Host to handle /profiles/atom/profile.do has not been defined.</H1><BR><H3>SRVE0255E: A WebGroup/Virtual Host to handle apps.cfdev3.swg.usma.ibm.com:443 has not been defined.</H3><BR><I>IBM WebSphere Application Server</I>]]></data>
+</response>
+</responses>

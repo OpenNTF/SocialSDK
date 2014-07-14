@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * ï¿½ Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -17,10 +17,9 @@ package com.ibm.sbt.services.endpoints;
 
 import java.util.Map;
 import java.util.Set;
-
+import org.apache.http.client.CookieStore;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.DefaultHttpClient;
-
 import com.ibm.sbt.security.authentication.AuthenticationException;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.Response;
@@ -429,6 +428,10 @@ public interface Endpoint {
     */
     public String getProxyConfig();
 
+    /**
+     * @return the session cookies for the connection
+     */
+    public CookieStore getCookies();
 
 	public boolean isForceDisableExpectedContinue();
 

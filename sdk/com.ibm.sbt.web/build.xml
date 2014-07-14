@@ -67,6 +67,7 @@
 
 	<!-- RUN DOJO AMD -->
 	<target name="run.dojo-amd-build" depends="prepareDojoAMD">
+		<echo message="Running :${dojo.build} -p ${src.dir}/${dojo.amd.dir}/sbt-dojo-amd.profile.js releaseDir=${release.dir}/${dojo.amd.dir}"/>
 		<exec executable="${dojo.build}">
 			<arg value="-p" />
 			<arg value="${src.dir}/${dojo.amd.dir}/sbt-dojo-amd.profile.js" />

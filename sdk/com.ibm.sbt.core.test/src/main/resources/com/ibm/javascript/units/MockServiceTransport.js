@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * ï¿½ Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -164,8 +164,11 @@ define(
 								
 								return '' + sw.toString();
 							} else if (type.indexOf('text/html') !== -1) {
-							
-							return ''+ Packages.org.apache.commons.io.IOUtils.toString(data);
+								if (data && data.getClass) {
+									 if( data.getClass().getName().matches('java.lang.String')) return '' + data;
+									 console.log(data.getClass().getName());
+								}
+							   return ''+ Packages.org.apache.commons.io.IOUtils.toString(data);
 							} else if (type.indexOf('application/json') !== -1) {
 								return '' + data.toString();
 							}	else {
@@ -195,8 +198,13 @@ define(
 
 									
 								} else if (type.indexOf('text/html') !== -1) {
-									if (data)
+									if (data) {}
+										if (data && data.getClass) {
+											 if( data.getClass().getName().matches('java.lang.String')) data = data;
+											 console.log(data.getClass().getName());
+										}
 										data = ''+ Packages.org.apache.commons.io.IOUtils.toString(data).toString();
+								    }
 									if(data)
 										data = undefined;
 									console.log('converting to text' + data);

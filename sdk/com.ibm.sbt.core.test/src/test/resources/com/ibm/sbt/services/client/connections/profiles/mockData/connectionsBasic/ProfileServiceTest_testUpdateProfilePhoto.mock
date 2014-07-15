@@ -4,7 +4,7 @@
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Fri, 18 Apr 2014 10:58:13 GMT]]></value>
+        <value><![CDATA[Tue, 15 Jul 2014 08:58:33 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -16,23 +16,23 @@
     </header>
     <header>
         <name><![CDATA[X-UA-Compatible]]></name>
-        <value><![CDATA[IE=EmulateIE7]]></value>
+        <value><![CDATA[IE=9,8]]></value>
     </header>
     <header>
         <name><![CDATA[Last-Modified]]></name>
-        <value><![CDATA[Fri, 18 Apr 2014 10:58:13 GMT]]></value>
+        <value><![CDATA[Tue, 15 Jul 2014 08:58:33 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/rP2I7oko4g5QJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
+        <value><![CDATA[lcLang=en_us; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=FmGDaIpr/a19HBjbuJkI5VVAjSaJJkL6LSNqAl2z35XH0ma/GLu+MVGQnFnkWLsn2b7XpNqT5/Ci/wbfOinrV+TxGFsHt7954nnah7UE5U2ml6W0n9+sb8XTxJsh6D3ZEXugnA51B5X2bClRu894aV+KdvemaK3tFZuyvipjbJeukZgrJnl1xAgWbCq69ffKnuyfdzv8qmQZ4MfIDm0mSJ35UyTVLOo/dUAzpsD7s/Kx00n685tybHpk34p3ksNxCxn1QrZ8Y0Q0cLPA8nCsYdC9lIOAmOMbzkXLgszYSnCczascVzXqqXv3QGWGl8EBNhnT1YCW20ym4NsR3jOmnoidWkPnzVTd8b1t5C+G4z3nPMg+MSS5afpullubqWu/8STUmJA3Phyl1nRFGLbO5EGR+Tvv9bYjXUAUN8m110EEXyswa1MJEYkE03/gwjnj5oFLQrCAK0R+w0HLz81Yp9aeQORM0dCXtgm8br9SUDVQmN9aFBZudwMbrzB3uSVIIDGRP2ZB+WQxRQVM8U81laTphAFzMzhUG/XOe6NiaWKOA9GN/+byyYZLJZhSJjnSCNVFOEFtjOAi9ohcpRMdmN3GtAEai60pMAGEuRm0wWg258qsvaW2nJ7JLBxCHxSR713uigu5jnIODAI9oVJShc0HjjAyKhq67sbYRpxDmpiTnFICwIEwMXEQsK20yPMOlDnvXkFyNQtfESsWySs8hp0hrzVVEkd0vTIVsR8zNF4=; Path=/]]></value>
+        <value><![CDATA[LtpaToken2=/FIiGiv6ZT+1DaoG6ebk/z6ixxaVP8pqSgM7dhJJWYyWwG40xoSHUPII2cijjg67/La6v/voO36uW3uqIMpETg8dEvErE0ainkkAnzOmg1BTBS/ELyvCAWgQaAjguUl1MJs31LyU3Was+HCCZNUvJHi6tF6JDF1xEpiBZSv5RgXoFvqzCrMp9dbawZSd/ivcMB1QfYWvUaSy//umxFZjWxInhQsaziYIIbrsbwOesQ3TwrE3y9FLiS0L/BOPpCe0rFE2eFtUHWQvvMeBw3U62J87rjAUpI1NT2BdDeqgiKCuWkWAJm1ZHCQY5nsPesOjAC8wXmNdOck+J1j55sf6UxdfnSyGwBmFVneUqGsl19DWxHkXQtcxsO98UIHPAabLETUAOGIrhQuLy0lyyrNf6Yq0L8+0GfI2FIK6zaSaa5AzXf741ePUXu+Aq6QPSBLjV2Uwk0v0x5BkvH6b2fIb8LnGebKRpF9iH1SH4GMUEpo1xEFkC2OuoBMEpjlb2N59wO/IEcV4qmpcyKMmUKpMuoLFf68Ke/ODaupSfLhyC/ZMufKqKt7nb+NZqfgLf/U9DHp25unbrIvkYSk6woq+suG/wfHJbAkQPoe5PCKBmMzdymxgjan07MAKfCw7AqKZ+NuKdvDpknUaUmMnPSaO73UF7uQi1GY2VvkjFxbodTajS4lLbDsZBXguDU3CmCx5CgqrSUKSji/C4/3U/971Yg==; Path=/; Domain=.swg.usma.ibm.com]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LCSESSIONID=0000E190vSUv45ikW3kCSo6XoMF:18dna4k6n; Path=/; HttpOnly]]></value>
+        <value><![CDATA[ICSESSIONID=000049j9bAtmC4iSfrNJU-ZbiKD:-1; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Expires]]></name>
@@ -43,16 +43,16 @@
         <value><![CDATA[private, max-age=600, no-cache=set-cookie]]></value>
     </header>
     <header>
-        <name><![CDATA[Content-Length]]></name>
-        <value><![CDATA[5686]]></value>
-    </header>
-    <header>
         <name><![CDATA[Keep-Alive]]></name>
         <value><![CDATA[timeout=10, max=100]]></value>
     </header>
     <header>
         <name><![CDATA[Connection]]></name>
         <value><![CDATA[Keep-Alive]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Transfer-Encoding]]></name>
+        <value><![CDATA[chunked]]></value>
     </header>
     <header>
         <name><![CDATA[Content-Type]]></name>
@@ -62,13 +62,13 @@
         <name><![CDATA[Content-Language]]></name>
         <value><![CDATA[en-US]]></value>
     </header></headers>
-<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?><feed xmlns:app="http://www.w3.org/2007/app" xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:fh="http://purl.org/syndication/history/1.0" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns="http://www.w3.org/2005/Atom"><id>tag:profiles.ibm.com,2006:feed</id><generator version="4.5.0.0" uri="http://www.ibm.com/xmlns/prod/sn">IBM Connections - Profiles</generator><title type="text">profile with email fadams@renovations.com</title><author><name>IBM Connections - Profiles</name></author><updated>2014-04-18T10:58:13.901Z</updated><fh:complete></fh:complete><link href="https://dev.sdkdemo.com:444/profiles/atom/profileTags.do?targetKey=1766a7fb-d564-4720-b678-9ec9c5b0c27a&amp;lastMod=1397818691826" rel="http://www.ibm.com/xmlns/prod/sn/tag-cloud" type="application/atomcat+xml"></link><link href="https://dev.sdkdemo.com:444/profiles/atom/mv/theboard/entries.do?key=1766a7fb-d564-4720-b678-9ec9c5b0c27a&amp;lastMod=1397818691826" rel="http://www.ibm.com/xmlns/prod/sn/mv/theboard" type="application/atom+xml"></link><link href="https://dev.sdkdemo.com:444/profiles/atom/mv/theboard/entry/status.do?key=1766a7fb-d564-4720-b678-9ec9c5b0c27a" rel="http://www.ibm.com/xmlns/prod/sn/status" type="application/atom+xml"></link><link href="https://dev.sdkdemo.com:444/profiles/atom/connections.do?connectionType=colleague&amp;key=1766a7fb-d564-4720-b678-9ec9c5b0c27a&amp;lastMod=1397818691826" rel="http://www.ibm.com/xmlns/prod/sn/connections/colleague" type="application/atom+xml"></link><link href="https://dev.sdkdemo.com:444/profiles/atom/reportingChain.do?key=1766a7fb-d564-4720-b678-9ec9c5b0c27a" rel="http://www.ibm.com/xmlns/prod/sn/reporting-chain" type="application/atom+xml"></link><link href="https://dev.sdkdemo.com:444/profiles/atom/profileType.do?type=default" rel="http://www.ibm.com/xmlns/prod/sn/profile-type" type="application/profile-type+xml"></link><link href="https://dev.sdkdemo.com:444/profiles/atom/profileExtension.do?key=1766a7fb-d564-4720-b678-9ec9c5b0c27a&amp;extensionId=profileLinks&amp;lastMod=1397818691826" rel="http://www.ibm.com/xmlns/prod/sn/ext-attr" type="text/xml" snx:extensionId="profileLinks" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></link><link href="https://qs.renovations.com:444/profiles/atom/profile.do?email=fadams%40renovations.com" rel="self" type="application/atom+xml"></link><entry><id>tag:profiles.ibm.com,2006:entry1766a7fb-d564-4720-b678-9ec9c5b0c27a</id><title type="text">Frank Adams</title><updated>2014-04-18T10:58:11.826Z</updated><category term="profile" scheme="http://www.ibm.com/xmlns/prod/sn/type"></category><contributor><name>Frank Adams</name><snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid><email>fadams@renovations.com</email><snx:userState>active</snx:userState></contributor><link href="https://dev.sdkdemo.com:444/profiles/atom/profileEntry.do?key=1766a7fb-d564-4720-b678-9ec9c5b0c27a" rel="self" type="application/atom+xml"></link><link href="https://dev.sdkdemo.com:444/profiles/atom/profileType.do?type=default" rel="http://www.ibm.com/xmlns/prod/sn/profile-type" type="application/profile-type+xml"></link><link href="https://dev.sdkdemo.com:444/profiles/html/profileView.do?key=1766a7fb-d564-4720-b678-9ec9c5b0c27a" rel="related" type="text/html"></link><link href="https://dev.sdkdemo.com:444/profiles/photo.do?key=1766a7fb-d564-4720-b678-9ec9c5b0c27a&amp;lastMod=1397818691826" rel="http://www.ibm.com/xmlns/prod/sn/image" type="image"></link><link href="https://dev.sdkdemo.com:444/profiles/audio.do?key=1766a7fb-d564-4720-b678-9ec9c5b0c27a&amp;lastMod=1397818691826" rel="http://www.ibm.com/xmlns/prod/sn/pronunciation" type="audio"></link><link href="https://dev.sdkdemo.com:444/profiles/vcard/profile.do?key=1766a7fb-d564-4720-b678-9ec9c5b0c27a" rel="alternate" type="text/directory"></link><summary type="text">Profile information for Frank Adams</summary><content type="xhtml"><sp_0:div xmlns="http://www.w3.org/1999/xhtml" xmlns:sp_0="http://www.w3.org/1999/xhtml"><span class="vcard"><div><img src="https://dev.sdkdemo.com:444/profiles/photo.do?key=1766a7fb-d564-4720-b678-9ec9c5b0c27a&amp;lastMod=1397818691826" class="photo"></img></div><div><a class="fn url" href="https://dev.sdkdemo.com:444/profiles/atom/profile.do?key=1766a7fb-d564-4720-b678-9ec9c5b0c27a">Frank Adams</a></div><div><a class="sound url" href="https://dev.sdkdemo.com:444/profiles/audio.do?key=1766a7fb-d564-4720-b678-9ec9c5b0c27a&amp;lastMod=1397818691826">Pronunciation</a></div><div><a class="email" href="mailto:fadams@renovations.com">fadams@renovations.com</a></div><div class="x-groupwareMail" style="display:none"></div><div class="org"><span class="organization-unit"></span></div><div class="role"></div><div class="title">Consultant</div><div class="adr work postal"><div class="x-country-code" style="display:none"></div></div><div class="x-office"><span class="x-building">1</span><span class="x-floor">2nd</span><span class="x-office-number">555-1128</span></div><div class="tel"><abbr class="type" title="work">Work:</abbr><span class="value">9999999999</span></div><div class="x-manager-uid" style="display:none">lsuarez</div><div class="x-is-manager" style="display:none"></div><div class="x-profile-key">1766a7fb-d564-4720-b678-9ec9c5b0c27a</div><div class="uid">EFD413BC-E572-760A-8625-7C6E00506453</div><div class="x-profile-uid">fadams</div><div class="x-lconn-userid">EFD413BC-E572-760A-8625-7C6E00506453</div><div class="rev" style="display:none">2014-04-18T10:58:11.826Z</div><div class="x-profile-type" style="display:none">default</div></span></sp_0:div></content></entry></feed>]]></data>
+<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?><feed xmlns:app="http://www.w3.org/2007/app" xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:fh="http://purl.org/syndication/history/1.0" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns="http://www.w3.org/2005/Atom"><id>tag:profiles.ibm.com,2006:feed</id><generator version="5.0.0.0" uri="http://www.ibm.com/xmlns/prod/sn">IBM Connections - Profiles</generator><title type="text">profile with email ajones1@janet.iris.com </title><author><name>IBM Connections - Profiles</name></author><updated>2014-07-15T08:58:33.827Z</updated><fh:complete></fh:complete><link href="https://lcauto51.swg.usma.ibm.com/profiles/atom/profileTags.do?targetKey=e47f7079-ade1-4164-a7d9-c44094add840&amp;lastMod=1405414706505" rel="http://www.ibm.com/xmlns/prod/sn/tag-cloud" type="application/atomcat+xml"></link><link href="https://lcauto51.swg.usma.ibm.com/profiles/atom/mv/theboard/entries.do?key=e47f7079-ade1-4164-a7d9-c44094add840&amp;lastMod=1405414706505" rel="http://www.ibm.com/xmlns/prod/sn/mv/theboard" type="application/atom+xml"></link><link href="https://lcauto51.swg.usma.ibm.com/connections/opensocial/rest/activitystreams/4cbc45c0-16a7-1033-9239-95472f45d54f/@involved/@all" rel="http://activitystrea.ms/spec/1.0/" type="application/atom+xml"></link><link href="https://lcauto51.swg.usma.ibm.com/profiles/atom/mv/theboard/entry/status.do?key=e47f7079-ade1-4164-a7d9-c44094add840" rel="http://www.ibm.com/xmlns/prod/sn/status" type="application/atom+xml"></link><link href="https://lcauto51.swg.usma.ibm.com/profiles/atom/connections.do?connectionType=colleague&amp;key=e47f7079-ade1-4164-a7d9-c44094add840&amp;lastMod=1405414706505" rel="http://www.ibm.com/xmlns/prod/sn/connections/colleague" type="application/atom+xml"></link><link href="https://lcauto51.swg.usma.ibm.com/profiles/atom/reportingChain.do?key=e47f7079-ade1-4164-a7d9-c44094add840" rel="http://www.ibm.com/xmlns/prod/sn/reporting-chain" type="application/atom+xml"></link><link href="https://lcauto51.swg.usma.ibm.com/profiles/atom/peopleManaged.do?key=e47f7079-ade1-4164-a7d9-c44094add840" rel="http://www.ibm.com/xmlns/prod/sn/people-managed" type="application/atom+xml"></link><link href="https://lcauto51.swg.usma.ibm.com/profiles/atom/profileType.do?type=default" rel="http://www.ibm.com/xmlns/prod/sn/profile-type" type="application/profile-type+xml"></link><link href="https://lcauto51.swg.usma.ibm.com/profiles/atom/profileExtension.do?key=e47f7079-ade1-4164-a7d9-c44094add840&amp;extensionId=profileLinks&amp;lastMod=1405414706505" rel="http://www.ibm.com/xmlns/prod/sn/ext-attr" type="text/xml" snx:extensionId="profileLinks" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></link><link href="https://lcauto51.swg.usma.ibm.com/profiles/atom/profile.do?email=ajones1%40janet.iris.com%20" rel="self" type="application/atom+xml"></link><entry><id>tag:profiles.ibm.com,2006:entrye47f7079-ade1-4164-a7d9-c44094add840</id><title type="text">Amy Jones1</title><updated>2014-07-15T08:58:26.505Z</updated><category term="profile" scheme="http://www.ibm.com/xmlns/prod/sn/type"></category><contributor><name>Amy Jones1</name><snx:userid>4cbc45c0-16a7-1033-9239-95472f45d54f</snx:userid><email>ajones1@janet.iris.com</email><snx:userState>active</snx:userState><snx:isExternal>false</snx:isExternal></contributor><link href="https://lcauto51.swg.usma.ibm.com/profiles/atom/profileEntry.do?key=e47f7079-ade1-4164-a7d9-c44094add840" rel="self" type="application/atom+xml"></link><link href="https://lcauto51.swg.usma.ibm.com/profiles/atom/profileType.do?type=default" rel="http://www.ibm.com/xmlns/prod/sn/profile-type" type="application/profile-type+xml"></link><link href="https://lcauto51.swg.usma.ibm.com/profiles/html/profileView.do?key=e47f7079-ade1-4164-a7d9-c44094add840" rel="related" type="text/html"></link><link href="https://lcauto51.swg.usma.ibm.com/profiles/photo.do?key=e47f7079-ade1-4164-a7d9-c44094add840&amp;lastMod=1405414706505" rel="http://www.ibm.com/xmlns/prod/sn/image" type="image"></link><link href="https://lcauto51.swg.usma.ibm.com/profiles/audio.do?key=e47f7079-ade1-4164-a7d9-c44094add840&amp;lastMod=1405414706505" rel="http://www.ibm.com/xmlns/prod/sn/pronunciation" type="audio"></link><link href="https://lcauto51.swg.usma.ibm.com/profiles/vcard/profile.do?key=e47f7079-ade1-4164-a7d9-c44094add840" rel="alternate" type="text/directory"></link><summary type="text">Profile information for Amy Jones1</summary><content type="xhtml"><sp_0:div xmlns="http://www.w3.org/1999/xhtml" xmlns:sp_0="http://www.w3.org/1999/xhtml"><span class="vcard"><div><img src="https://lcauto51.swg.usma.ibm.com/profiles/photo.do?key=e47f7079-ade1-4164-a7d9-c44094add840&amp;lastMod=1405414706505" class="photo"></img></div><div><a class="fn url" href="https://lcauto51.swg.usma.ibm.com/profiles/atom/profile.do?key=e47f7079-ade1-4164-a7d9-c44094add840">Amy Jones1</a></div><div><a class="sound url" href="https://lcauto51.swg.usma.ibm.com/profiles/audio.do?key=e47f7079-ade1-4164-a7d9-c44094add840&amp;lastMod=1405414706505">Pronunciation</a></div><div><a class="email" href="mailto:ajones1@janet.iris.com">ajones1@janet.iris.com</a></div><div class="x-groupwareMail" style="display:none"></div><div class="org"><span class="organization-unit">IBM Software Group</span></div><div class="role">IBM Employee</div><div class="title"></div><div class="adr work postal"><div class="street-address">5 Technology Park Drive</div><div class="extended-address x-streetAddress2"></div><span class="locality">Westford</span><span class="region">Massachusetts</span><span class="postal-code">01886</span><div class="country-name">United States</div><div class="x-country-code" style="display:none">us</div><div class="x-worklocation-code" style="display:none">WM</div></div><div class="x-office"><span class="x-building"></span><span class="x-floor"></span><span class="x-office-number"></span></div><div class="tel"><abbr class="type" title="work">Work:</abbr><span class="value">9999999999</span></div><div class="x-manager-uid" style="display:none"></div><div class="x-is-manager" style="display:none">Y</div><div class="x-profile-key">e47f7079-ade1-4164-a7d9-c44094add840</div><div class="uid">4cbc45c0-16a7-1033-9239-95472f45d54f</div><div class="x-profile-uid">ajones1</div><div class="x-lconn-userid">4cbc45c0-16a7-1033-9239-95472f45d54f</div><div class="rev" style="display:none">2014-07-15T08:58:26.505Z</div><div class="x-profile-type" style="display:none">default</div></span></sp_0:div></content></entry></feed>]]></data>
 </response>
 <response statusCode="200" statusReason="OK">
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Fri, 18 Apr 2014 10:58:14 GMT]]></value>
+        <value><![CDATA[Tue, 15 Jul 2014 08:58:35 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -80,7 +80,7 @@
     </header>
     <header>
         <name><![CDATA[X-UA-Compatible]]></name>
-        <value><![CDATA[IE=EmulateIE7]]></value>
+        <value><![CDATA[IE=9,8]]></value>
     </header>
     <header>
         <name><![CDATA[Pragma]]></name>
@@ -96,15 +96,15 @@
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/rP2I7oko4g5QJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
+        <value><![CDATA[lcLang=en_us; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=FmGDaIpr/a19HBjbuJkI5VVAjSaJJkL6LSNqAl2z35XH0ma/GLu+MVGQnFnkWLsn2b7XpNqT5/Ci/wbfOinrV+TxGFsHt7954nnah7UE5U2ml6W0n9+sb8XTxJsh6D3ZEXugnA51B5X2bClRu894aV+KdvemaK3tFZuyvipjbJeukZgrJnl1xAgWbCq69ffKnuyfdzv8qmQZ4MfIDm0mSJ35UyTVLOo/dUAzpsD7s/Kx00n685tybHpk34p3ksNxCxn1QrZ8Y0Q0cLPA8nCsYdC9lIOAmOMbzkXLgszYSnCczascVzXqqXv3QGWGl8EBNhnT1YCW20ym4NsR3jOmnoidWkPnzVTd8b1t5C+G4z3nPMg+MSS5afpullubqWu/8STUmJA3Phyl1nRFGLbO5EGR+Tvv9bYjXUAUN8m110EEXyswa1MJEYkE03/gwjnj5oFLQrCAK0R+w0HLz81Yp9aeQORM0dCXtgm8br9SUDVQmN9aFBZudwMbrzB3uSVIIDGRP2ZB+WQxRQVM8U81laTphAFzMzhUG/XOe6NiaWKOA9GN/+byyYZLJZhSJjnSCNVFOEFtjOAi9ohcpRMdmN3GtAEai60pMAGEuRm0wWg258qsvaW2nJ7JLBxCHxSR713uigu5jnIODAI9oVJShc0HjjAyKhq67sbYRpxDmpiTnFICwIEwMXEQsK20yPMOlDnvXkFyNQtfESsWySs8hp0hrzVVEkd0vTIVsR8zNF4=; Path=/]]></value>
+        <value><![CDATA[LtpaToken2=/FIiGiv6ZT+1DaoG6ebk/z6ixxaVP8pqSgM7dhJJWYyWwG40xoSHUPII2cijjg67/La6v/voO36uW3uqIMpETg8dEvErE0ainkkAnzOmg1BTBS/ELyvCAWgQaAjguUl1MJs31LyU3Was+HCCZNUvJHi6tF6JDF1xEpiBZSv5RgXoFvqzCrMp9dbawZSd/ivcMB1QfYWvUaSy//umxFZjWxInhQsaziYIIbrsbwOesQ3TwrE3y9FLiS0L/BOPpCe0rFE2eFtUHWQvvMeBw3U62J87rjAUpI1NT2BdDeqgiKCuWkWAJm1ZHCQY5nsPesOjAC8wXmNdOck+J1j55sf6UxdfnSyGwBmFVneUqGsl19DWxHkXQtcxsO98UIHPAabLETUAOGIrhQuLy0lyyrNf6Yq0L8+0GfI2FIK6zaSaa5AzXf741ePUXu+Aq6QPSBLjV2Uwk0v0x5BkvH6b2fIb8LnGebKRpF9iH1SH4GMUEpo1xEFkC2OuoBMEpjlb2N59wO/IEcV4qmpcyKMmUKpMuoLFf68Ke/ODaupSfLhyC/ZMufKqKt7nb+NZqfgLf/U9DHp25unbrIvkYSk6woq+suG/wfHJbAkQPoe5PCKBmMzdymxgjan07MAKfCw7AqKZ+NuKdvDpknUaUmMnPSaO73UF7uQi1GY2VvkjFxbodTajS4lLbDsZBXguDU3CmCx5CgqrSUKSji/C4/3U/971Yg==; Path=/; Domain=.swg.usma.ibm.com]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LCSESSIONID=0000zqbSHmXc2uLrfRpZ9dIdXh3:18dna4k6n; Path=/; HttpOnly]]></value>
+        <value><![CDATA[ICSESSIONID=0000pIkr58Nk0IkqLtbltuNpZJs:-1; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Keep-Alive]]></name>
@@ -144,11 +144,11 @@
 
 
 
-	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 	<html lang="en" dir="LTR">
         <head>
 			
-	<title>Profiles - Directory</title>
+	<title>Directory - Profiles</title>
 	
 			
 			
@@ -165,24 +165,30 @@
 
 
 
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<!-- Copyright IBM Corp. 2012, 2013  All Rights Reserved.              -->
+<!-- Copyright IBM Corp. 2014  All Rights Reserved.                    -->
 
-<link rel="shortcut icon" href="https://dev.sdkdemo.com:444/connections/resources/web/com.ibm.oneui3.styles/imageLibrary/Icons/ComponentsGray/ProfilesGray.ico?etag=20140117.183045" type="image/x-icon">
+<link rel="shortcut icon" href="https://lcauto51.swg.usma.ibm.com/connections/resources/web/com.ibm.oneui3.styles/imageLibrary/Icons/ComponentsGray/ProfilesGray.ico?etag=20140707.175236" type="image/x-icon">
 
-<!-- Copyright IBM Corp. 2013  All Rights Reserved.                    -->
-
+<!-- Copyright IBM Corp. 2014  All Rights Reserved.                    -->
 
 <!--[if IE 6]><script>document.getElementsByTagName("html")[0].className+=" lotusui_ie lotusui_ie6";</script><![endif]-->
 <!--[if IE 7]><script>document.getElementsByTagName("html")[0].className+=" lotusui_ie lotusui_ie7";</script><![endif]-->
 <!--[if IE 8]><script>document.getElementsByTagName("html")[0].className+=" lotusui_ie8";</script><![endif]-->
 <!--[if IE 9]><script>document.getElementsByTagName("html")[0].className+=" lotusui_ie9";</script><![endif]-->
-<link rel="stylesheet" type="text/css" id="lotusBaseStylesheet" href="https://dev.sdkdemo.com:444/connections/resources/web/_style?include=com.ibm.lconn.core.styles.oneui3/base/package3.css&etag=20140117.183045" appName="profiles" base="https://dev.sdkdemo.com:444/connections/resources/web/" query="?version=oneui3&rtl=false&etag=20140117.183045" theme="default" defaultTheme="default" oneui="3"></link>
-<link rel="stylesheet" type="text/css" id="lotusSpritesStylesheet" href="https://dev.sdkdemo.com:444/connections/resources/web/_style?include=com.ibm.lconn.core.styles.oneui3/sprites.css&etag=20140117.183045"></link>
-<link rel="stylesheet" type="text/css" id="lotusThemeStylesheet" href="https://dev.sdkdemo.com:444/connections/resources/web/_lconntheme/default.css?version=oneui3&rtl=false&etag=20140117.183045"></link>
-<!-- Copyright IBM Corp. 2012, 2013  All Rights Reserved.              -->
+<link rel="stylesheet" type="text/css" id="lotusBaseStylesheet" href="https://lcauto51.swg.usma.ibm.com/connections/resources/web/_style?include=com.ibm.lconn.core.styles.oneui3/base/package3.css&etag=20140707.175236" appName="profiles" base="https://lcauto51.swg.usma.ibm.com/connections/resources/web/" query="?version=oneui3&rtl=false&etag=20140707.175236" theme="gen4" defaultTheme="gen4" oneui="3"></link>
+<link rel="stylesheet" type="text/css" id="lotusSpritesStylesheet" href="https://lcauto51.swg.usma.ibm.com/connections/resources/web/_style?include=com.ibm.lconn.core.styles.oneui3/sprites.css&etag=20140707.175236"></link>
+<link rel="stylesheet" type="text/css" id="lotusThemeStylesheet" href="https://lcauto51.swg.usma.ibm.com/connections/resources/web/_lconntheme/gen4.css?version=oneui3&rtl=false&etag=20140707.175236"></link>
+<!-- Copyright IBM Corp. 2014  All Rights Reserved.                    -->
 
-<link rel="stylesheet" type="text/css" id="lotusAppStylesheet" href="https://dev.sdkdemo.com:444/connections/resources/web/_lconnappstyles/default/profiles.css?version=oneui3&rtl=false&etag=20140117.183045"></link>
+<link rel="stylesheet" type="text/css" id="lotusAppStylesheet" href="https://lcauto51.swg.usma.ibm.com/connections/resources/web/_lconnappstyles/gen4/profiles.css?version=oneui3&rtl=false&etag=20140707.175236"></link>
+<!-- Copyright IBM Corp. 2014  All Rights Reserved.                    -->
+
+<!-- IBM Connections Mobile App for iOS -->
+<meta content="app-id=450533489" name="apple-itunes-app" />
+<!-- IBM Connections Mobile App for Android -->
+<meta content="app-id=com.ibm.lotus.connections.mobile" name="google-play-app" />
 
 
 <script type="text/javascript">
@@ -206,74 +212,96 @@
 
 
 
-// REVISE: check if profilesData was previously defined, don't redefine it (specially for items that could be re-inited to "")
-if( typeof(profilesData) == "undefined") {
-	var profilesData = { 
-		config: {
-			profileLastMod: "",
-			appChkSum: "20140117.183045",
-			buildNumber: "SNA4.5_CR_20131108-1601",
-			versionNumber: "4.5.0.0",
-			appStartupDate: "201402271541905",
-			pageId: "",
-			langCookieName: "",
-			loginReturnPageEnc: "%2Fprofiles%2Fatom%2Fphoto.do%3Fuserid%3DEFD413BC-E572-760A-8625-7C6E00506453"
-		},
-			 
-		displayedUser:{ 
-			uid: "", 
-			profileType: "", 
-			email: "",
-			key: "", 
-			displayName: "", 
-			userid:"", 
-			status: "", 
-			inNetwork: (""=="true"?true:false), 
-			isActive: (""=="true"?true:false),
-			enabledFeatures: ""
-		},
-		
-		loggedInUser: {
-			isLoggedIn: (""=="true"?true:false),
-			loggedInUserUID: "",
-			loggedInUserKey: "",
-			displayName: "",
-			status: "" 
-		}
+(function() {
+	if (typeof(profilesData) == "undefined") {
+		window.profilesData = {};
+	}
+	
+	profilesData.config = {
+		profileLastMod: "",
+		appChkSum: "20140707.175236",
+		buildNumber: "IC5.0_CR_Profiles_20140707-1530",
+		versionNumber: "5.0.0.0",
+		appStartupDate: "201407141623867",
+		pageId: "",
+		langCookieName: "",
+		loginReturnPageEnc: "%2Fprofiles%2Fatom%2Fphoto.do%3Fuserid%3D4cbc45c0-16a7-1033-9239-95472f45d54f",
+		isLotusLive: false,
+		isMultiTenant: false,
+		isAdvancedSearchEnabled: true
 	};
 
-	// TO DO: revise this logic at the struts level
-	if ( "1766a7fb-d564-4720-b678-9ec9c5b0c27a" != "") {
-		if( profilesData.loggedInUser.isLoggedIn == "") profilesData.loggedInUser.isLoggedIn = ("1766a7fb-d564-4720-b678-9ec9c5b0c27a"!=""?true:false);
-		if( profilesData.loggedInUser.loggedInUserUID == "") profilesData.loggedInUser.loggedInUserUID = "EFD413BC-E572-760A-8625-7C6E00506453";
-		if( profilesData.loggedInUser.loggedInUserKey == "") profilesData.loggedInUser.loggedInUserKey = "1766a7fb-d564-4720-b678-9ec9c5b0c27a";
+	profilesData.displayedUser = { 
+		uid: "", 
+		profileType: "", 
+		email: "",
+		key: "", 
+		displayName: "", 
+		userid:"", 
+		status: "", 
+		inNetwork: (""=="true"?true:false), 
+		isActive: (""=="true"?true:false),
+		enabledPermissions: [] 
+	};
+
+	profilesData.loggedInUser = {
+		isLoggedIn: (""=="true"?true:false),
+		loggedInUserUID: "",
+		loggedInUserKey: "",
+		userid: "4cbc45c0-16a7-1033-9239-95472f45d54f",
+		displayName: "",
+		status: "",
+		email: "ajones1@janet.iris.com",
+		isExternal: false,
+		enabledPermissions: [] 		
+	};
+	
+	
+	
+	
+	
+		 
+			profilesData.enabledPermissions = profilesData.loggedInUser.enabledPermissions = "profile.search$profile.search.view,profile.connection$profile.connection.view,profile.following$profile.following.view,profile.reportTo$profile.reportTo.view,profile.connection$profile.connection.message.view,profile.status$profile.status.update,profile.status$profile.status.view,profile.colleague$profile.colleague.connect,profile.following$profile.following.add,profile.sand$profile.sand.dyk.view,profile.sand$profile.sand.recommend.view,profile.sand$profile.sand.inCommon.view,profile.sand$profile.sand.socialPath.view,profile.typeAhead$profile.typeAhead.view".split(",");
+		
+				
+		
+		
+			
+
+
+	
+	if ( "e47f7079-ade1-4164-a7d9-c44094add840" != "") {
+		if( profilesData.loggedInUser.isLoggedIn == "") profilesData.loggedInUser.isLoggedIn = ("e47f7079-ade1-4164-a7d9-c44094add840"!=""?true:false);
+		if( profilesData.loggedInUser.loggedInUserUID == "") profilesData.loggedInUser.loggedInUserUID = "4cbc45c0-16a7-1033-9239-95472f45d54f";
+		if( profilesData.loggedInUser.loggedInUserKey == "") profilesData.loggedInUser.loggedInUserKey = "e47f7079-ade1-4164-a7d9-c44094add840";
 	}
 
-	// TO DO: revise this logic at the struts level
-	if( profilesData.loggedInUser.displayName == "" && "Frank Adams" != "") 
-		profilesData.loggedInUser.displayName = "Frank Adams";
+	
+	if( profilesData.loggedInUser.displayName == "") 
+		profilesData.loggedInUser.displayName = "Amy Jones1";
 	
 	if (!profilesData.activityStreamConfig) {
 		try {
-			profilesData.activityStreamConfig = {"defaultUrlTemplateValues":{"userId":"","groupId":"@involved","rollup":"true"},"views":{"profiles-activitystream":{"params":{},"filters":{"label":"Filter By:","options":{"all":{"label":"All","params":{"appId":"@all"},"extensions":["com.ibm.social.as.lconn.extension.ShareboxStatusUpdateExtension"],"selected":"true"},"statusupdates":{"label":"Status Updates","params":{"appId":"@all","broadcast":"true"},"extensions":["com.ibm.social.as.lconn.extension.ShareboxStatusUpdateExtension"]},"activites":{"label":"Activities","params":{"appId":"activities"}},"blogs":{"label":"Blogs","params":{"appId":"blogs"}},"bookmarks":{"label":"Bookmarks","params":{"appId":"bookmarks"}},"communities":{"label":"Communities","params":{"appId":"communities"}},"files":{"label":"Files","params":{"appId":"files"}},"forums":{"label":"Forums","params":{"appId":"forums"}},"profiles":{"label":"Profiles","params":{"appId":"profiles"},"extensions":["com.ibm.social.as.lconn.extension.ShareboxStatusUpdateExtension"]},"wikis":{"label":"Wikis","params":{"appId":"wikis"}}}}}},"defaultUrlTemplate":"\/rest\/activitystreams\/${userId}\/${groupId}\/${appId}","userInfo":{"id":"EFD413BC-E572-760A-8625-7C6E00506453","displayName":"Frank Adams"},"eeManager":"com.ibm.social.as.ee.EEManager","extensions":["com.ibm.social.as.lconn.extension.ProfilesMicroblogDeletionExtension","com.ibm.social.as.lconn.extension.ProfilesCommentExtension","com.ibm.social.as.lconn.extension.ProfilesStatusUpdateExtension","com.ibm.social.as.lconn.extension.GadgetPreloaderExtension"]} ;
+			profilesData.activityStreamConfig = {"defaultUrlTemplateValues":{"userId":"","groupId":"@involved","rollup":"true","shortStrings":"true"},"defaultUrlTemplate":"\/rest\/activitystreams\/urn:lsid:lconn.ibm.com:profiles.person:${userId}\/${groupId}\/${appId}","filters":{"options":{"profiles-activitystream":{"label":"","params":{},"filters":{"label":"Filter By:","options":{"all":{"label":"All","params":{"appId":"@all"},"extensions":["com.ibm.social.as.lconn.extension.ShareboxStatusUpdateExtension"]},"statusupdates":{"label":"Status Updates","params":{"appId":"@all","broadcast":"true"},"extensions":["com.ibm.social.as.lconn.extension.ShareboxStatusUpdateExtension"]},"activites":{"label":"Activities","params":{"appId":"activities"}},"blogs":{"label":"Blogs","params":{"appId":"blogs"}},"bookmarks":{"label":"Bookmarks","params":{"appId":"bookmarks"}},"communities":{"label":"Communities","params":{"appId":"communities"}},"files":{"label":"Files","params":{"appId":"files"}},"forums":{"label":"Forums","params":{"appId":"forums"}},"libraries":{"label":"Libraries","params":{"appId":"ecm_files"}},"profiles":{"label":"Profiles","params":{"appId":"profiles"},"extensions":["com.ibm.social.as.lconn.extension.ShareboxStatusUpdateExtension"]},"wikis":{"label":"Wikis","params":{"appId":"wikis"}}},"defaultItem":"all"}}}},"userInfo":{"id":"4cbc45c0-16a7-1033-9239-95472f45d54f","displayName":"Amy Jones1"},"eeManager":"com.ibm.social.as.ee.EEManager","extensions":["com.ibm.social.as.lconn.extension.ProfilesMicroblogDeletionExtension","com.ibm.social.as.lconn.extension.ProfilesCommentExtension","com.ibm.social.as.lconn.extension.ProfilesStatusUpdateExtension","com.ibm.social.as.lconn.extension.GadgetPreloaderExtension","com.ibm.social.as.extension.RepostExtension"]} ;
 			window.activityStreamConfig = profilesData.activityStreamConfig;
 		} catch (pdError) {
 			window.activityStreamConfig = {};
 		}
 	}
-}
+
+})();
 
 	
 	var appName = "profile";
 
-	var svcHrefProfiles = "https://dev.sdkdemo.com:444/profiles";
+	var svcHrefProfiles = "https://lcauto51.swg.usma.ibm.com/profiles";
 	var applicationContext = "/profiles";
 
-	var svcHrefHelp = "https://dev.sdkdemo.com:444/help";
+	var svcHrefHelp = "https://lcauto51.swg.usma.ibm.com/help";
 	var appCtxHelp = svcHrefHelp.substring(svcHrefHelp.lastIndexOf("/"));
 
 	// alert("profiles: \n["+applicationContext+"]\n["+svcHrefProfiles+"]\n\n"+"help: \n["+appCtxHelp+"]\n["+svcHrefHelp+"]\n");
-	var xsltPath = applicationContext + "/static/xslt/" + 20140117.183045; 
+	var xsltPath = applicationContext + "/static/xslt/" + 20140707.175236; 
 	var profileSearchType = "";
 	var profiles_isBidiRTL = ('RTL' == '' ? true : false); // RTL (bidi?);
 	var bShowEmail = ('showMail' == 'showMail' ? true : false); // show/hide email
@@ -285,18 +313,19 @@ var ibmConfig = {
    serviceName: "profiles",
    proxyURL: "/profiles/ajaxProxy/",
    contextRootEnabler: "/profiles",
-   versionStamp: "20140117.183045"
+   versionStamp: "20140707.175236"
 };
 var baseProtocol = "https";
-var baseHost = "dev.sdkdemo.com:444";
+var baseHost = "lcauto51.swg.usma.ibm.com";
 var basePath = "/connections/resources";
 var needProxy = (baseHost != window.location.host || baseProtocol+":" != window.location.protocol);
-var djConfig = {
+var dojoConfig = djConfig = {
+   async: true,
    isDebug: false,
    baseUrl: (needProxy ? (ibmConfig.proxyURL + encodeURIComponent(baseProtocol) + "/" + encodeURIComponent(baseHost)) : (baseProtocol + "://" + baseHost)) + basePath + "/web/dojo/",
    locale: "en-us",
-   dojoBlankHtmlUrl: "/profiles/static/20140117.183045/nav/blankIE.html",
-   blankGif: "https://dev.sdkdemo.com:444/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140117.183045",
+   dojoBlankHtmlUrl: "/profiles/static/20140707.175236/nav/blankIE.html",
+   blankGif: "https://lcauto51.swg.usma.ibm.com/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140707.175236",
    useCommentedJson: true,  
    proxy: "/profiles/ajaxProxy",
    localizationComplete: true
@@ -304,41 +333,26 @@ var djConfig = {
 </script>
 <script type="text/javascript">
 var netJazzAjaxConfig = {
-    base: "https://dev.sdkdemo.com:444/connections/resources",
+    base: "https://lcauto51.swg.usma.ibm.com/connections/resources",
     skipStyles: true,
-    params: "etag=20140117.183045&lang=en&country=US"
+    params: "etag=20140707.175236&lang=en&country=US"
 };
-CKEDITOR_BASEPATH = window.CKEDITOR_BASEPATH || "https://dev.sdkdemo.com:444/connections/resources/web/com.ibm.oneui.ckeditor/editor/"; 
+CKEDITOR_BASEPATH = window.CKEDITOR_BASEPATH || "https://lcauto51.swg.usma.ibm.com/connections/resources/web/com.ibm.oneui.ckeditor/editor/"; 
 </script>
 <script type="text/javascript">
 	djConfig.parseOnLoad = true;
 
 	ibmConfig.portalURI = applicationContext + "/mashupmaker/enabler";
-	ibmConfig.proxyURL = 'https://dev.sdkdemo.com:444/profiles/ajaxProxy/';
+	ibmConfig.proxyURL = 'https://lcauto51.swg.usma.ibm.com/profiles/ajaxProxy/';
 	ibmConfig.loadServices = false;
-	ibmConfig.loadingHTML = '<img src="https://dev.sdkdemo.com:444/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140117.183045" height="130" width="0"></img>';
+	ibmConfig.loadingHTML = '<img src="https://lcauto51.swg.usma.ibm.com/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140707.175236" height="130" width="0"></img>';
 </script>
-<script type="text/javascript" src="https://dev.sdkdemo.com:444/connections/resources/web/_js?include=dojo.dojo.js~&etag=20140117.183045&lang=en&country=us"></script>
-<script type="text/javascript" src="https://dev.sdkdemo.com:444/connections/resources/web/_js?include=lconn.core.bundle_common.js~&exclude=dojo.dojo.js~&etag=20140117.183045&lang=en&country=us"></script>
-<script type="text/javascript" src="https://dev.sdkdemo.com:444/connections/resources/web/_js?include=lconn.profiles.profilesApp.js~&exclude=dojo.dojo.js~lconn.core.bundle_common.js~&etag=20140117.183045&lang=en&country=us"></script>
+<script type="text/javascript" src="https://lcauto51.swg.usma.ibm.com/connections/resources/web/_js/?include=dojo.main~&etag=20140707.175236&_proxyURL=https%3A%2F%2Flcauto51.swg.usma.ibm.com%2Fconnections%2Fresources&ss=20140707.175236&lang=en&country=US&variant="></script>
+<script type="text/javascript" src="https://lcauto51.swg.usma.ibm.com/connections/resources/web/_js/?include=lconn.core.bundle_common~&etag=20140707.175236&exclude=dojo.main~&_proxyURL=https%3A%2F%2Flcauto51.swg.usma.ibm.com%2Fconnections%2Fresources&ss=20140707.175236&lang=en&country=US&variant="></script>
+<script type="text/javascript" src="https://lcauto51.swg.usma.ibm.com/connections/resources/web/_js/?include=lconn.profiles.profilesApp~&etag=20140707.175236&exclude=dojo.main~lconn.core.bundle_common~&_proxyURL=https%3A%2F%2Flcauto51.swg.usma.ibm.com%2Fconnections%2Fresources&ss=20140707.175236&lang=en&country=US&variant="></script>
 
 <script>	
-	var profilesGlobalServices = {"help":{"enabled":true,"secureUrl":"https:\/\/dev.sdkdemo.com:444\/help","ssl_enabled":true,"url":"http:\/\/dev.sdkdemo.com:81\/help"},"microblogging":{"enabled":true,"secureUrl":"https:\/\/dev.sdkdemo.com:444\/connections\/opensocial","ssl_enabled":true,"url":"http:\/\/dev.sdkdemo.com:81\/connections\/opensocial"},"bss":{"enabled":false,"ssl_enabled":false},"metrics":{"enabled":true,"secureUrl":"https:\/\/dev.sdkdemo.com:444\/metrics","ssl_enabled":true,"url":"http:\/\/dev.sdkdemo.com:81\/metrics"},"wikis":{"enabled":true,"secureUrl":"https:\/\/dev.sdkdemo.com:444\/wikis","ssl_enabled":true,"url":"http:\/\/dev.sdkdemo.com:81\/wikis"},"sand":{"enabled":true,"ssl_enabled":true},"personTag":{"enabled":true,"secureUrl":"https:\/\/dev.sdkdemo.com:444\/profiles\/ibm_semanticTagServlet","ssl_enabled":true,"url":"http:\/\/dev.sdkdemo.com:81\/profiles\/ibm_semanticTagServlet"},"communities":{"enabled":true,"secureUrl":"https:\/\/dev.sdkdemo.com:444\/communities","ssl_enabled":true,"url":"http:\/\/dev.sdkdemo.com:81\/communities"},"ecm_files":{"enabled":false,"ssl_enabled":false},"oauthprovider":{"enabled":true,"secureUrl":"https:\/\/dev.sdkdemo.com:444\/oauth2","ssl_enabled":true,"url":"http:\/\/dev.sdkdemo.com:81\/oauth2"},"connectionsmail":{"enabled":true,"secureUrl":"https:\/\/dev.sdkdemo.com:444\/connections\/resources\/socmail-client","ssl_enabled":true,"url":"http:\/\/dev.sdkdemo.com:81\/connections\/resources\/socmail-client"},"mediaGallery":{"enabled":true,"secureUrl":"https:\/\/dev.sdkdemo.com:444\/news\/widgets\/lw","ssl_enabled":true,"url":"http:\/\/dev.sdkdemo.com:81\/news\/widgets\/lw"},"blogs":{"enabled":true,"secureUrl":"https:\/\/dev.sdkdemo.com:444\/blogs","ssl_enabled":true,"url":"http:\/\/dev.sdkdemo.com:81\/blogs"},"webresources":{"enabled":true,"secureUrl":"https:\/\/dev.sdkdemo.com:444\/connections\/resources","ssl_enabled":true,"url":"http:\/\/dev.sdkdemo.com:81\/connections\/resources"},"news":{"enabled":true,"secureUrl":"https:\/\/dev.sdkdemo.com:444\/news","ssl_enabled":true,"url":"http:\/\/dev.sdkdemo.com:81\/news"},"oauth":{"enabled":true,"secureUrl":"https:\/\/dev.sdkdemo.com:444\/connections\/oauth","ssl_enabled":true,"url":"http:\/\/dev.sdkdemo.com:81\/connections\/oauth"},"dogear":{"enabled":true,"secureUrl":"https:\/\/dev.sdkdemo.com:444\/dogear","ssl_enabled":true,"url":"http:\/\/dev.sdkdemo.com:81\/dogear"},"opensocialLocked":{"enabled":false,"ssl_enabled":false},"mobile":{"enabled":true,"secureUrl":"https:\/\/dev.sdkdemo.com:444\/mobile","ssl_enabled":true,"url":"http:\/\/dev.sdkdemo.com:81\/mobile"},"quickr":{"enabled":false,"ssl_enabled":false},"bookmarklet":{"enabled":true,"secureUrl":"https:\/\/dev.sdkdemo.com:444\/connections\/bookmarklet","ssl_enabled":true,"url":"http:\/\/dev.sdkdemo.com:81\/connections\/bookmarklet"},"moderation":{"enabled":true,"secureUrl":"https:\/\/dev.sdkdemo.com:444\/moderation","ssl_enabled":true,"url":"http:\/\/dev.sdkdemo.com:81\/moderation"},"deploymentConfig":{"enabled":true,"secureUrl":"https:\/\/dev.sdkdemo.com:444\/connections","ssl_enabled":true,"url":"http:\/\/dev.sdkdemo.com:81\/connections"},"search":{"enabled":true,"secureUrl":"https:\/\/dev.sdkdemo.com:444\/search","ssl_enabled":true,"url":"http:\/\/dev.sdkdemo.com:81\/search"},"profiles":{"enabled":true,"secureUrl":"https:\/\/dev.sdkdemo.com:444\/profiles","ssl_enabled":true,"url":"http:\/\/dev.sdkdemo.com:81\/profiles"},"activities":{"enabled":true,"secureUrl":"https:\/\/dev.sdkdemo.com:444\/activities","ssl_enabled":true,"url":"http:\/\/dev.sdkdemo.com:81\/activities"},"directory":{"enabled":false,"ssl_enabled":false},"homepage":{"enabled":true,"secureUrl":"https:\/\/dev.sdkdemo.com:444\/homepage","ssl_enabled":true,"url":"http:\/\/dev.sdkdemo.com:81\/homepage"},"forums":{"enabled":true,"secureUrl":"https:\/\/dev.sdkdemo.com:444\/forums","ssl_enabled":true,"url":"http:\/\/dev.sdkdemo.com:81\/forums"},"cognos":{"enabled":false,"ssl_enabled":false},"opensocial":{"enabled":true,"secureUrl":"https:\/\/dev.sdkdemo.com:444\/connections\/opensocial","ssl_enabled":true,"url":"http:\/\/dev.sdkdemo.com:81\/connections\/opensocial"},"files":{"enabled":true,"secureUrl":"https:\/\/dev.sdkdemo.com:444\/files","ssl_enabled":true,"url":"http:\/\/dev.sdkdemo.com:81\/files"},"sametimeProxy":{"enabled":true,"ssl_enabled":false,"url":"http:\/\/dev.sdkdemo.com:81"}}; // WhiteList Helper Code
-
-	//-------------------------------------------[  Context Parameters into JS Configuration ] 
-	var tagParameterMap = {};
-	var tagParameterList = new Array();
-	var count = 0;
-	
-		
-			
-					
-					tagParameterMap['userid'] = 'EFD413BC-E572-760A-8625-7C6E00506453';
-					tagParameterList[count] = 'userid';
-					count++;
-				
-		
-	
+	var profilesGlobalServices = {"help":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/help","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/help"},"microblogging":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/connections\/opensocial","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/connections\/opensocial"},"bss":{"enabled":false,"ssl_enabled":false},"metrics":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/metrics","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/metrics"},"wikis":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/wikis","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/wikis"},"opengraph":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/connections\/opengraph","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/connections\/opengraph"},"sand":{"enabled":true,"ssl_enabled":true},"pushnotification":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/push","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/push"},"personTag":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/profiles\/ibm_semanticTagServlet","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/profiles\/ibm_semanticTagServlet"},"communities":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/communities","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/communities"},"ecm_files":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/dm","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/dm"},"oauthprovider":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/oauth2","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/oauth2"},"connectionsmail":{"enabled":false,"ssl_enabled":false},"mediaGallery":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/news\/widgets\/lw","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/news\/widgets\/lw"},"webresources":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/connections\/resources","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/connections\/resources"},"blogs":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/blogs","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/blogs"},"news":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/news","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/news"},"oauth":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/connections\/oauth","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/connections\/oauth"},"dogear":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/dogear","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/dogear"},"opensocialLocked":{"enabled":false,"ssl_enabled":false},"mobile":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/mobile","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/mobile"},"quickr":{"enabled":false,"ssl_enabled":false},"bookmarklet":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/connections\/bookmarklet","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/connections\/bookmarklet"},"moderation":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/moderation","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/moderation"},"deploymentConfig":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/connections","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/connections"},"search":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/search","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/search"},"profiles":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/profiles","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/profiles"},"thumbnail":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/connections\/thumbnail","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/connections\/thumbnail"},"activities":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/activities","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/activities"},"directory":{"enabled":false,"ssl_enabled":false},"homepage":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/homepage","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/homepage"},"forums":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/forums","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/forums"},"opensocial":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/connections\/opensocial","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/connections\/opensocial"},"files":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/files","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/files"},"cognos":{"enabled":false,"ssl_enabled":false},"scprofiles":{"enabled":false,"ssl_enabled":false},"sametimeProxy":{"enabled":false,"ssl_enabled":false}}; // WhiteList Helper Code
 		
 	//-------------------------------------------[  Sametime Configuration  ] 
 	var sametimeAwarenessConfig = {	
@@ -419,10 +433,10 @@ CKEDITOR_BASEPATH = window.CKEDITOR_BASEPATH || "https://dev.sdkdemo.com:444/con
 			<div class="lotusDialogHeader">
 				<h1 class="lotusHeading">Profiles</h1>
 				<a title='Close' role="button" class="lotusRight lotusDialogClose" href="javascript:;" onclick="dijit.byId('lotusAlertDialog').hide(); return true;">
-					<img src="https://dev.sdkdemo.com:444/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140117.183045" role="presentation" alt='Close' />
+					<img src="https://lcauto51.swg.usma.ibm.com/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140707.175236" role="presentation" alt='Close' />
 					<span class="lotusAltText">X</span>
 				</a>
-			</div>
+			</div>		
 			<div id="lotusAlertDialogContent" class="lotusDialogContent" style="min-width: 400px;" role="alert">
 			</div>
 			<div class="lotusDialogFooter">
@@ -496,80 +510,53 @@ var profiles_gotoLoginRedirect = function() {
 	
 	<script type="text/javascript">
 if (self != top) {
-   setTimeout(function() {
-      try {
-         // Reset location if in different host.
-         // per Same Origin Policy, try to get top location attributes,
-         // will get permission denied if in different origin.
-         if (self.location.hostname != top.location.hostname) {
-	    document.getElementsByTagName('body')[0].style.display = 'none';
-            top.location=self.location;
-	 }
-      }catch(e){
-         // reset location if in different origin
-	  document.getElementsByTagName('body')[0].style.display = 'none';
+   try {
+      // Reset location if in different host.
+      // per Same Origin Policy, try to get top location attributes,
+      // will get permission denied if in different origin.
+      if (self.location.hostname != top.location.hostname)
          top.location=self.location;
-      }
-   }, 0)
+   }catch(e){
+      // reset location if in different origin
+      top.location=self.location;
+   }
 }
 </script>
 <div class="lotusRightCorner">
-   <div class="lotusInner"><div class="lotusLogo" id="lotusLogo"><span class="lotusAltText">IBM Connections</span></div><ul class="lotusInlinelist lotusUtility lotusNowrap" id="headerMenuContainer"><li class="lotusFirst" id="headerUserText" ><span id="logoutLabel" aria-label="Log in / log out"><a class="lotusUser" id="headerUserName"
+   <div class="lotusInner"><div class="lotusLogo" id="lotusLogo"><span class="lotusAltText">IBM Connections</span></div><ul class="lotusInlinelist lotusUtility lotusNowrap" id="headerMenuContainer"><li class="lotusFirst" id="lotusPerson"><span id="logoutLabel" aria-label="Log in / log out"><a class="lotusUser" id="headerUserName"
                       onmouseover="dojo.require('lconn.core.header');lconn.core.header.menuMouseover(this);"
                       onclick="dojo.require('lconn.core.header');lconn.core.header.menuClick(this);"
                       onfocus="dojo.require('lconn.core.header');lconn.core.header.menuFocus(this);"
                       role="button" 
                       _lconn_menuid="lconnheadermenu-user"
-                      aria-label="Current user Frank Adams"
-                      src="/profiles/static/20140117.183045!en_us/nav/templates/menu/user.jsp?appName=profiles&username=Frank+Adams&userid=EFD413BC-E572-760A-8625-7C6E00506453"
-                      href="javascript:;"> <span id="usernameText">Frank Adams</span> <img role="presentation" alt="" src="https://dev.sdkdemo.com:444/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140117.183045" class="lotusArrow lotusDropDownSprite"><span class="lotusAltText">&#9660;</span></a></span></li><li id="logoutLi" style="display:none"><span id="loginLabel" role="region" aria-label="Log in / log out"><a id="logoutLink" href="/profiles/ibm_security_logout?logoutExitPage=%2fatom%2fphoto.do%3fuserid%3dEFD413BC-E572-760A-8625-7C6E00506453" >Log Out</a></span></li><li class="shareboxLi" id="headerSharebox" ><a class="lotusBannerBtn" href="javascript:;" onclick="dojo.stopEvent(event);dojo.require('com.ibm.social.sharebox.dialogStub');com.ibm.social.sharebox.dialogProxy.show();" aria-haspopup="true" role="button">Share</a></li><li id="languageSelectorText" style="display: none;"></li><li id="lotusBannerMail" class="lotusFirst " style="display: none;" external-content-style="height:auto"><a onmouseover="dojo.require('com.ibm.lconn.socialmail.gadget.NavigationHandler');
-                                       (new com.ibm.lconn.socialmail.gadget.NavigationHandler()).navigateInbox(this, 'onmouseover');"
-                          onclick="dojo.require('com.ibm.lconn.socialmail.gadget.NavigationHandler');
-                                       (new com.ibm.lconn.socialmail.gadget.NavigationHandler()).navigateInbox(this, 'onclick');"
-                          onfocus="dojo.require('com.ibm.lconn.socialmail.gadget.NavigationHandler');
-                                       (new com.ibm.lconn.socialmail.gadget.NavigationHandler()).navigateInbox(this, 'onfocus');" 
-                          role="button" 
-                          _lconn_menuid="lconnheadermenu-mail"
-                          aria-label="Mail" 
-                          src="/profiles/static/20140117.183045!en_us/nav/templates/menu/mail.jsp"
-                          href="javascript:;"
-                          errormessage="Mail cannot be reached at this time"><img role="presentation" alt="" src="https://dev.sdkdemo.com:444/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140117.183045" class="lconnSprite lconnSprite-iconMailWhite16" /><span class="lotusAltText">Mail</span><span class="os-site-mail-notify"></span></a></li><li id="lotusBannerCalendar" class=" " style="display: none;" external-content-style="height:auto"><a onmouseover="dojo.require('com.ibm.lconn.socialmail.gadget.NavigationHandler');
-                                      (new com.ibm.lconn.socialmail.gadget.NavigationHandler()).navigateCalendar(this, 'onmouseover');" 
-                          onclick="dojo.require('com.ibm.lconn.socialmail.gadget.NavigationHandler');
-                                      (new com.ibm.lconn.socialmail.gadget.NavigationHandler()).navigateCalendar(this, 'onclick');" 
-                          onfocus="dojo.require('com.ibm.lconn.socialmail.gadget.NavigationHandler');
-                                      (new com.ibm.lconn.socialmail.gadget.NavigationHandler()).navigateCalendar(this, 'onfocus');" 
-                          role="button" 
-                          _lconn_menuid="lconnheadermenu-calendar"
-                          aria-label="Calendar" 
-                          src="/profiles/static/20140117.183045!en_us/nav/templates/menu/calendar.jsp"
-                          href="javascript:;"
-                          errormessage="Calendar cannot be reached at this time"><img role="presentation" alt="" src="https://dev.sdkdemo.com:444/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140117.183045" class="iconsComponentsWhite16 iconsComponentsWhite16-CalendarWhite16" /><span class="lotusAltText">Calendar</span></a></li><li id="headerHelpLi" ><a role="button" aria-label="Open help window" href="javascript:openHelpWindow(&#039;&#039;,&#039;/topic/com.ibm.lotus.connections.profiles.help/pframe.html&#039;);" id="headerHelpLink"><img role="presentation" alt="" src="https://dev.sdkdemo.com:444/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140117.183045" class="iconsOther16 iconsOther16-bannerHelpNormal16" /><span class="lotusAltText">?</span></a></li><li><span class="lotusBranding"><img src="https://dev.sdkdemo.com:444/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140117.183045" alt="IBM" class="lotusIBMLogo" /><span class="lotusAltText">IBM</span></span></li></ul><ul class="lotusInlinelist lotusLinks" role="navigation" aria-label="Connections"><li id="lotusBannerHomepage" class=" "><a href="https://dev.sdkdemo.com:444/homepage/"><img alt="" role="presentation" src="https://dev.sdkdemo.com:444/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140117.183045" class="lconnBannerIcon lconnSprite lconnSprite-iconHomeBlue16"><span id="lconnBannerHomepageLabel">Home</span></a></li><li id="lotusBannerProfiles" class=" lotusSelected"><a onmouseover="dojo.require('lconn.core.header');lconn.core.header.menuMouseover(this);" 
+                      aria-label="Current user Amy Jones1"
+                      src="/profiles/static/20140707.175236!en_us/nav/templates/menu/user.jsp?appName=profiles&username=Amy+Jones1&userid=4cbc45c0-16a7-1033-9239-95472f45d54f"
+                      href="javascript:;"><img alt="Amy Jones1" src="https://lcauto51.swg.usma.ibm.com/profiles/photo.do?userid=4cbc45c0-16a7-1033-9239-95472f45d54f&small=true" width=26 height=26></img> <img role="presentation" alt="" src="https://lcauto51.swg.usma.ibm.com/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140707.175236" class="lotusArrow lotusDropDownSprite"><span class="lotusAltText">&#9660;</span></a></span></li><li id="logoutLi" class="lotusHidden" style="display:none"><span id="loginLabel" role="region" aria-label="Log in / log out"><a id="logoutLink" href="/profiles/ibm_security_logout?logoutExitPage=%2fatom%2fphoto.do%3fuserid%3d4cbc45c0-16a7-1033-9239-95472f45d54f" >Log Out</a></span></li><li class="shareboxLi" id="headerSharebox" ><a class="lotusBannerBtn" href="javascript:;" onclick="dojo.stopEvent(event);dojo.require('net.jazz.ajax.xdloader');net.jazz.ajax.xdloader.load_async('com.ibm.social.sharebox.dialog', dojo.hitch(this, function() {com.ibm.social.sharebox.show();}));" role="button">Share</a></li><li id="languageSelectorText" style="display: none;"></li><li id="headerHelpLi" ><a role="button" aria-label="Open help window" href="javascript:openHelpWindow(&#039;&#039;,&#039;/topic/com.ibm.lotus.connections.profiles.help/pframe.html&#039;);" id="headerHelpLink"><img role="presentation" alt="" src="https://lcauto51.swg.usma.ibm.com/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140707.175236" class="iconsOther16 iconsOther16-bannerHelpNormal16" /><span class="lotusAltText">?</span></a></li><li><span class="lotusBranding"><img src="https://lcauto51.swg.usma.ibm.com/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140707.175236" alt="IBM" class="lotusIBMLogo" /><span class="lotusAltText">IBM</span></span></li></ul><ul class="lotusInlinelist lotusLinks" role="navigation" aria-label="Connections"><li id="lotusBannerHomepage" class="lotusFirst "><a href="https://lcauto51.swg.usma.ibm.com/homepage/" title="Home" aria-label="Home"><img alt="" role="presentation" src="https://lcauto51.swg.usma.ibm.com/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140707.175236" class="lconnBannerIcon lconnSprite lconnSprite-iconHomeBlue16"><span id="lconnBannerHomepageLabel">Home</span></a></li><li id="lotusBannerProfiles" class=" lotusSelected"><a onmouseover="dojo.require('lconn.core.header');lconn.core.header.menuMouseover(this);" 
                       onclick="dojo.require('lconn.core.header');lconn.core.header.menuClick(this);" 
                       onfocus="dojo.require('lconn.core.header');lconn.core.header.menuFocus(this);" 
                       role="button" 
                       _lconn_menuid="lconnheadermenu-people"
                       aria-label="Profiles" 
-                      src="/profiles/static/20140117.183045!en_us/nav/templates/menu/people.jsp"
-                      href="https://dev.sdkdemo.com:444/profiles/"
-                      errormessage="Profiles is not available"><img alt="" role="presentation" src="https://dev.sdkdemo.com:444/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140117.183045" class="lconnBannerIcon lconnSprite lconnSprite-iconProfilesBlue16">Profiles <img role="presentation" alt="" src="https://dev.sdkdemo.com:444/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140117.183045" class="lotusArrow lotusDropDownSprite"><span class="lotusAltText">&#9660;</span></a></li><li id="lotusBannerCommunities" class=" "><a id="lotusBannerCommunitiesLink" 
+                      src="/profiles/static/20140707.175236!en_us/nav/templates/menu/people.jsp"
+                      href="https://lcauto51.swg.usma.ibm.com/profiles/"
+                      errormessage="Profiles is not available"><img alt="" role="presentation" src="https://lcauto51.swg.usma.ibm.com/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140707.175236" class="lconnBannerIcon lconnSprite lconnSprite-iconProfilesBlue16">Profiles <img role="presentation" alt="" src="https://lcauto51.swg.usma.ibm.com/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140707.175236" class="lotusArrow lotusDropDownSprite"><span class="lotusAltText">&#9660;</span></a></li><li id="lotusBannerCommunities" class=" "><a id="lotusBannerCommunitiesLink" 
                       onmouseover="dojo.require('lconn.core.header');lconn.core.header.menuMouseover(this);" 
                       onclick="dojo.require('lconn.core.header');lconn.core.header.menuClick(this);" 
                       onfocus="dojo.require('lconn.core.header');lconn.core.header.menuFocus(this);" 
                       role="button" 
                       _lconn_menuid="lconnheadermenu-communities"
                       aria-label="Communities" 
-                      src="/profiles/static/20140117.183045!en_us/nav/templates/menu/communities.jsp?authenticated=true"
-                      href="https://dev.sdkdemo.com:444/communities/"
-                      errormessage="Communities is not available"><img alt="" role="presentation" src="https://dev.sdkdemo.com:444/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140117.183045" class="lconnBannerIcon lconnSprite lconnSprite-iconCommunitiesBlue16">Communities <img role="presentation" alt="" src="https://dev.sdkdemo.com:444/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140117.183045" class="lotusArrow lotusDropDownSprite"><span class="lotusAltText">&#9660;</span></a></li><li id="lotusBannerApps" class=" "><a onmouseover="dojo.require('lconn.core.header');lconn.core.header.menuMouseover(this);" 
+                      src="/profiles/static/20140707.175236!en_us/nav/templates/menu/communities.jsp?authenticated=true"
+                      href="https://lcauto51.swg.usma.ibm.com/communities/"
+                      errormessage="Communities is not available"><img alt="" role="presentation" src="https://lcauto51.swg.usma.ibm.com/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140707.175236" class="lconnBannerIcon lconnSprite lconnSprite-iconCommunitiesBlue16">Communities <img role="presentation" alt="" src="https://lcauto51.swg.usma.ibm.com/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140707.175236" class="lotusArrow lotusDropDownSprite"><span class="lotusAltText">&#9660;</span></a></li><li id="lotusBannerApps" class=" "><a onmouseover="dojo.require('lconn.core.header');lconn.core.header.menuMouseover(this);" 
                    onclick="dojo.require('lconn.core.header');lconn.core.header.menuClick(this);" 
                    onfocus="dojo.require('lconn.core.header');lconn.core.header.menuFocus(this);" 
                    role="button" 
                    _lconn_menuid="lconnheadermenu-apps"
                    aria-label="Apps" 
-                   src="/profiles/static/20140117.183045!en_us/nav/templates/menu/apps.jsp"
+                   src="/profiles/static/20140707.175236!en_us/nav/templates/menu/apps.jsp"
                    href="javascript:;"
-                   errormessage="Profiles is not available">Apps <img role="presentation" alt="" src="https://dev.sdkdemo.com:444/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140117.183045" class="lotusArrow lotusDropDownSprite"><span class="lotusAltText">&#9660;</span></a></li><li id="lotusBannerHeaderMetrics" style="display:none" class=""><a href="https://dev.sdkdemo.com:444/metrics/">Metrics</a></li><li id="lotusBannerModeration" style="display:none" class=""><a href="https://dev.sdkdemo.com:444/moderation/">Moderation</a></li></ul></div></div>
+                   errormessage="Profiles is not available">Apps <img role="presentation" alt="" src="https://lcauto51.swg.usma.ibm.com/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140707.175236" class="lotusArrow lotusDropDownSprite"><span class="lotusAltText">&#9660;</span></a></li><li id="lotusBannerHeaderMetrics" style="display:none" class=""><a href="https://lcauto51.swg.usma.ibm.com/metrics/">Metrics</a></li><li id="lotusBannerModeration" style="display:none" class=""><a href="https://lcauto51.swg.usma.ibm.com/moderation/">Moderation</a></li></ul><div class="lotusClear"><!-- IE --></div></div></div>
 
 </div>
 <script type="text/javascript">
@@ -613,8 +600,8 @@ dojo.addOnLoad(function(){
 
 
 <script type="text/javascript">
-	// Added for search scope support
-	var lconn_core_thirdPartySearchEngines = []
+	
+	var lconn_core_thirdPartySearchEngines = [];
 </script>
 
 
@@ -623,27 +610,29 @@ dojo.addOnLoad(function(){
 
 
 
-<div class="lotusTitleBar2 lotusTitleBar2Tabs">
-   <div class="lotusWrapper">
-      <div class="lotusInner">
-         <div class="lotusTitleBarContent">
-            <h2 class="lotusHeading">
-                <img alt="" class="lotusIcon iconsComponentsBlue24 iconsComponentsBlue24-ProfilesBlue24" src="https://dev.sdkdemo.com:444/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140117.183045"><span class="lotusText">Profiles</span>
-            </h2>
-            <div aria-label="Profiles" role="navigation">
-               <ul id="lotusHeaderNavigation_UL" class="lotusNavTabs" role="toolbar">
-                  <li id="liProfileHeader_MyProfile" role="presentation"><div class="lotusTabWrapper"><a id="aProfileHeader_MyProfile" class="lotusTab" href='/profiles/html/myProfileView.do' role="button"><span class="lotusTabInner">My Profile</span></a></div></li>
-                  <li id="liProfileHeader_MyNetwork" role="presentation"><div class="lotusTabWrapper"><a id="aProfileHeader_MyNetwork" class="lotusTab" href='/profiles/html/networkView.do?widgetId=friends&amp;requireAuth=true' role="button"><span class="lotusTabInner">My Network</span></a></div></li>
-                  <li id="liProfileHeader_Directory" role="presentation"><div class="lotusTabWrapper"><a id="aProfileHeader_Directory" class="lotusTab" href='/profiles/html/searchProfiles.do' role="button" aria-pressed="true"><span class="lotusTabInner">Directory</span></a></div></li>
-               </ul>
-            <div class="lotusClear"></div>
-         </div>
-      </div>
-      <div id="commonSearchControlDiv">
-         
 
 
 
+	
+	 
+		<div class="lotusTitleBar2 lotusTitleBar2Tabs">
+		   <div class="lotusWrapper">
+			  <div class="lotusInner">
+				 <div class="lotusTitleBarContent">
+					<h2 class="lotusHeading">
+						<img alt="" class="lotusIcon iconsComponentsBlue24 iconsComponentsBlue24-ProfilesBlue24" src="https://lcauto51.swg.usma.ibm.com/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140707.175236"><span class="lotusText">Profiles</span>
+					</h2>
+					<div aria-label="Profiles" role="navigation" aria-controls="lotusMain">
+					   <ul id="lotusHeaderNavigation_UL" class="lotusNavTabs" role="toolbar" aria-label="Profiles">
+						  <li id="liProfileHeader_MyProfile"><div class="lotusTabWrapper"><a id="aProfileHeader_MyProfile" onclick="lconn.profiles.ProfilesCore.setLastElement(this.id);" class="lotusTab" href='/profiles/html/myProfileView.do' role="button" aria-label="My Profile"><span class="lotusTabInner">My Profile</span></a></div></li>
+						  <li id="liProfileHeader_MyNetwork"><div class="lotusTabWrapper"><a id="aProfileHeader_MyNetwork" onclick="lconn.profiles.ProfilesCore.setLastElement(this.id);" class="lotusTab" href='/profiles/html/networkView.do?widgetId=friends&amp;requireAuth=true' role="button" aria-label="My Network"><span class="lotusTabInner">My Network</span></a></div></li>
+						  <li id="liProfileHeader_Directory"><div class="lotusTabWrapper"><a id="aProfileHeader_Directory" onclick="lconn.profiles.ProfilesCore.setLastElement(this.id);" class="lotusTab" href='/profiles/html/searchProfiles.do' role="button" aria-label="Directory"><span class="lotusTabInner">Directory</span></a></div></li>
+					   </ul>
+					<div class="lotusClear"></div>
+				 </div>
+			  </div>
+			  <div id="commonSearchControlDiv">
+				 
 
 
 
@@ -656,132 +645,58 @@ dojo.addOnLoad(function(){
 
 
 <script type="text/javascript">
-submitSearch = function( ) {
-	//this.searchBar is an lconn.core.SearchBar object
-    var str = searchBar.getValue();
-    str = dojo.string.trim(str); // trim it
-    if (!str) return false;
-
-    var selectedOption = searchBar.selectedOption;
-    
-    // Perform the global search if one of the features is selected
-    if(selectedOption.feature) {
-        return true;
-    }
-    else 
-    {
-    	var encodedSearchStr = encodeURIComponent(str); //SPR#JHUG83E588        
-    	var lang = "en_us";
-		switch( selectedOption.scope ){
- 			case "extkeyword":
-				var searchUrl = selectedOption.action + encodedSearchStr;
-				window.location.replace( searchUrl );
-				break;
- 			case "keyword":
-				var searchUrl = "https://dev.sdkdemo.com:444/profiles/html/keywordSearch.do"+"?keyword="+encodedSearchStr+((lang != "")?"&lang="+lang:""); 
-				window.location.replace( searchUrl );
-				break;
-			case "simple":
-				var searchUrl = "https://dev.sdkdemo.com:444/profiles/html/simpleSearch.do"+"?searchBy=name"+"&searchFor="+encodedSearchStr+((lang != "")?"&lang="+lang:""); 
-				window.location.replace( searchUrl );
-				break;
-			case "advanced":
-				window.location.replace('/profiles/html/advancedSearchView.do');
-				break;
-			default:
-			   	return true;
-       			break;
-	    }
-	}   
-    
-    return false; //Don't submit the form
-};
-
-searchChoiceSelected = function(item, focusTextbox ) {
-	// Hack until common search widget supports onclick
-	searchBar.selectOptionOrig(item, focusTextbox ); // call the original onselect function 
-	if ( searchBar && searchBar.selectedOption && searchBar.selectedOption.scope && searchBar.selectedOption.scope == "advanced") { 
-		window.location.replace('/profiles/html/advancedSearchView.do');
-	}
-	return true;
-}
-
-var searchBar = null;
-if( typeof(dojo) != "undefined") {  
-	dojo.addOnLoad( function(){ 
-		if( typeof(lconn) != "undefined" && lconn.core && lconn.core.SearchBar ) {
-		            
-			searchBar = new lconn.core.SearchBar(
-				{
-					localOptions: [
-						{label: 'Profiles by Name', 		iconClass: 'baseIcon lconnSprite lconnSprite-iconProfiles16', scope: 'simple',   action: '/profiles/html/simpleSearch.do', defaultOption: true , 'class': 'lotusAlignLeft'},
-						{label: 'Profiles by Keyword', 		iconClass: 'baseIcon lconnSprite lconnSprite-iconProfiles16', scope: 'keyword',  action: '/profiles/html/keywordSearch.do' , 'class': 'lotusAlignLeft'},
-						{label: 'Directory Search',	iconClass: 'baseIcon lconnSprite lconnSprite-iconProfiles16', scope: 'advanced', action: '/profiles/html/advancedSearchView.do' , 'class': 'lotusAlignLeft'}
-					],
-					thirdPartySearchEngines: lconn_core_thirdPartySearchEngines,
-					globalOptions: [{}],
-					searchContextPath: 'https://dev.sdkdemo.com:444/search',
-					lblSearch:         'Search',
-					lblSelectScope:    'Select search scope',
-					lblAllConnections: 'All Connections',
-					lblAdvanced:       'Advanced',
-					
-					onSubmit: submitSearch,
-					'class': 'lotusAlignLeft'
-				},
-				dojo.byId('commonSearchControlDiv')
-			);
+if (typeof(dojo) != "undefined") {  
+	dojo.addOnLoad(function(){ 
+		if (dojo.exists("lconn.profiles.SearchBar")) {
+			var cntr = dojo.byId('commonSearchControlDiv');
+			if (cntr) {
 			
-			// Hack until common search widget supports onclick
-			searchBar.selectOptionOrig = searchBar.selectOption;
-			searchBar.selectOption = searchChoiceSelected;
+				var opts = {
+					searchContextPath: 'https://lcauto51.swg.usma.ibm.com/search',
+					localOptions: []
+				};
+
+				
+					
+					
+						opts.localOptions.push({
+							label: 'Profiles by Name',
+							scope: 'simple',
+							action: '/profiles/html/simpleSearch.do'
+						});
+						opts.localOptions.push({
+							label: 'Profiles by Keyword',
+							scope: 'keyword',
+							action: '/profiles/html/keywordSearch.do',
+							valueSearchParam: 'keyword',
+							searchParams: {
+								'keyword' : ''
+							}
+						});
+						
+					
+					
+				
+				 
+				new lconn.profiles.SearchBar(opts, cntr);
+
+			}
 		}
 	});
 }
 
-
 </script>
 
 
-     </div>
-  </div>
-</div>
+			 </div>
+			</div>			 
+		  </div>
+		</div>
+	
+	
 
-<script type="text/javascript">
-(function(){
-	// highlight selected tab based on current URL
-	var suffix = "";
-	var href = window.location.href;
-	var isMyProfile = ( profilesData.loggedInUser.loggedInUserKey == profilesData.displayedUser.key );
-	
-	if ( href.indexOf("/editMyProfileView.do") != -1 || 
-		href.indexOf("/myProfileView.do") != -1 ||
-		(isMyProfile &&	(href.indexOf("/profileView.do") != -1 ||
-						 href.indexOf("/reportingStructureView.do") != -1)) ) {
-		suffix = "MyProfile";
-	}
-	
-	else if ( isMyProfile && href.indexOf("/networkView.do") != -1 ) {
-		suffix = "MyNetwork";
-	} 
-	
-	else if ( href.indexOf("/searchProfiles.do") != -1 ||
-			href.indexOf("/simpleSearch.do") != -1 ||
-			href.indexOf("/simpleSearchView.do") != -1 ||
-			href.indexOf("/advancedSearch.do") != -1 ||
-			href.indexOf("/advancedSearchView.do") != -1 ) { 
-		suffix = "Directory";
-	}
-	
-	//remove any existing selected tabs.
-	dojo.query('#lotusHeaderNavigation_UL li.lotusSelected').removeClass("lotusSelected");
-	
-	//select the currently active tab
-	dojo.query("#liProfileHeader_" + suffix).addClass("lotusSelected");
-	
-})();
 
-</script>
+
 
 					
 				</div>
@@ -799,90 +714,37 @@ if( typeof(dojo) != "undefined") {
 					
 		
 		<script type="text/javascript">
-			var pageTime = 1397818694578;
-			
-
-
-
-
-
-
-
-
-
-
-
-
-
-// REVISE: check if profilesData was previously defined, don't redefine it (specially for items that could be re-inited to "")
-if( typeof(profilesData) == "undefined") {
-	var profilesData = { 
-		config: {
-			profileLastMod: "",
-			appChkSum: "20140117.183045",
-			buildNumber: "SNA4.5_CR_20131108-1601",
-			versionNumber: "4.5.0.0",
-			appStartupDate: "201402271541905",
-			pageId: "",
-			langCookieName: "",
-			loginReturnPageEnc: "%2Fprofiles%2Fatom%2Fphoto.do%3Fuserid%3DEFD413BC-E572-760A-8625-7C6E00506453"
-		},
-			 
-		displayedUser:{ 
-			uid: "", 
-			profileType: "", 
-			email: "",
-			key: "", 
-			displayName: "", 
-			userid:"", 
-			status: "", 
-			inNetwork: (""=="true"?true:false), 
-			isActive: (""=="true"?true:false),
-			enabledFeatures: ""
-		},
-		
-		loggedInUser: {
-			isLoggedIn: (""=="true"?true:false),
-			loggedInUserUID: "",
-			loggedInUserKey: "",
-			displayName: "",
-			status: "" 
-		}
-	};
-
-	// TO DO: revise this logic at the struts level
-	if ( "1766a7fb-d564-4720-b678-9ec9c5b0c27a" != "") {
-		if( profilesData.loggedInUser.isLoggedIn == "") profilesData.loggedInUser.isLoggedIn = ("1766a7fb-d564-4720-b678-9ec9c5b0c27a"!=""?true:false);
-		if( profilesData.loggedInUser.loggedInUserUID == "") profilesData.loggedInUser.loggedInUserUID = "EFD413BC-E572-760A-8625-7C6E00506453";
-		if( profilesData.loggedInUser.loggedInUserKey == "") profilesData.loggedInUser.loggedInUserKey = "1766a7fb-d564-4720-b678-9ec9c5b0c27a";
-	}
-
-	// TO DO: revise this logic at the struts level
-	if( profilesData.loggedInUser.displayName == "" && "Frank Adams" != "") 
-		profilesData.loggedInUser.displayName = "Frank Adams";
-	
-	if (!profilesData.activityStreamConfig) {
-		try {
-			profilesData.activityStreamConfig = {"defaultUrlTemplateValues":{"userId":"","groupId":"@involved","rollup":"true"},"views":{"profiles-activitystream":{"params":{},"filters":{"label":"Filter By:","options":{"all":{"label":"All","params":{"appId":"@all"},"extensions":["com.ibm.social.as.lconn.extension.ShareboxStatusUpdateExtension"],"selected":"true"},"statusupdates":{"label":"Status Updates","params":{"appId":"@all","broadcast":"true"},"extensions":["com.ibm.social.as.lconn.extension.ShareboxStatusUpdateExtension"]},"activites":{"label":"Activities","params":{"appId":"activities"}},"blogs":{"label":"Blogs","params":{"appId":"blogs"}},"bookmarks":{"label":"Bookmarks","params":{"appId":"bookmarks"}},"communities":{"label":"Communities","params":{"appId":"communities"}},"files":{"label":"Files","params":{"appId":"files"}},"forums":{"label":"Forums","params":{"appId":"forums"}},"profiles":{"label":"Profiles","params":{"appId":"profiles"},"extensions":["com.ibm.social.as.lconn.extension.ShareboxStatusUpdateExtension"]},"wikis":{"label":"Wikis","params":{"appId":"wikis"}}}}}},"defaultUrlTemplate":"\/rest\/activitystreams\/${userId}\/${groupId}\/${appId}","userInfo":{"id":"EFD413BC-E572-760A-8625-7C6E00506453","displayName":"Frank Adams"},"eeManager":"com.ibm.social.as.ee.EEManager","extensions":["com.ibm.social.as.lconn.extension.ProfilesMicroblogDeletionExtension","com.ibm.social.as.lconn.extension.ProfilesCommentExtension","com.ibm.social.as.lconn.extension.ProfilesStatusUpdateExtension","com.ibm.social.as.lconn.extension.GadgetPreloaderExtension"]} ;
-			window.activityStreamConfig = profilesData.activityStreamConfig;
-		} catch (pdError) {
-			window.activityStreamConfig = {};
-		}
-	}
-}
-
+			var pageTime = 1405414715282;
 			profilesData.config.pageId = "searchView";
 		</script>
 		<div class="lotusContent" role="main">
 			<div id="profileInfoMsgDiv" class="lotusHidden" role="alert"></div>
 			<a id="mainContent" name="mainContent"></a><!-- skip links for accessibility -->
 			
+				<script type="text/javascript">
+					var div = [];
+					if(dojo.isIE <= 8) {
+						div = document.querySelectorAll(".lotusContent")[0];
+					} else {
+						div = document.getElementsByClassName("lotusContent")[0];
+					}
+					dojo.addClass(div, "newDirectory");
+				</script>
+				<div dojoType="lconn.profiles.directory.DirectoryController">
+					
 
 
 
 
 
 
+
+
+
+
+
+
+	
 
 
 
@@ -893,12 +755,6 @@ if( typeof(profilesData) == "undefined") {
 	
 	
 		
-			
-			
-			
-			
-			
-			
 			
 			
 			
@@ -916,14 +772,6 @@ if( typeof(profilesData) == "undefined") {
 
 
 <h2 id="_profilesWelcomeTitle_p" class="lotusHeading">Looking For an Expert?</h2>
-<div class="lconnDemoThumbnail">
-	<div>
-		<a title="View Demo" href="javascript:;"  onclick="javascript:openDemoWindow(); return false;">
-			<img class="iconsOther48 iconsOther48-WatchDemo" src="https://dev.sdkdemo.com:444/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140117.183045" alt="">
-			<div>View Demo</div>
-		</a>
-	</div>
-</div>
 <p id="_profilesWelcomeBody_p"></p>
 
 
@@ -957,6 +805,9 @@ if( typeof(profilesData) == "undefined") {
 				string = stringlist.join("");
 			}
 		}
+		while (accessString.indexOf(QUOTESTRING) > -1) {
+			accessString = accessString.replace(QUOTESTRING, '"');
+		}
 		
 		var docElement = document.getElementById(id);
 		if(docElement) {
@@ -989,7 +840,7 @@ if( typeof(profilesData) == "undefined") {
 
 </script>
 
-<a href="javascript:;" class="lotusBtnImg lotusClose" id="_profilesViewWelcome_closeLink" title="Close welcome section" onclick="dojo.cookie(this.parentNode.id,'hide',{expires:9999}); dojo.addClass(this.parentNode.id, 'lotusHidden');"><img src="https://dev.sdkdemo.com:444/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140117.183045" alt="Close welcome section">
+<a href="javascript:;" class="lotusBtnImg lotusClose" id="_profilesViewWelcome_closeLink" title="Close welcome section" onclick="dojo.cookie(this.parentNode.id,'hide',{expires:9999}); dojo.addClass(this.parentNode.id, 'lotusHidden');"><img src="https://lcauto51.swg.usma.ibm.com/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140707.175236" alt="Close welcome section">
 		<span class="lotusAltText">X</span>
 	</img></a>
 
@@ -998,7 +849,7 @@ if( typeof(profilesData) == "undefined") {
 	
 		
 
-			
+					
 
 
 
@@ -1011,384 +862,20 @@ if( typeof(profilesData) == "undefined") {
 
 
 
-
-
-	
-
-<div id="divProfilesTypeaheadSearch" class="lotusChunk" role="main">	
+<div id="divProfilesAdvancedSearch" class="lotusChunk lotusHidden" role="search" aria-labelledby="profilesAdvSearchHeader">	
 	<div class="lotusHeader">
-		<h1 id="profilesSimpleSearchHeader">Search the Directory </h1>
-		<div id="profilesSimpleSearchDescription" class="lotusMeta">
-			To find a profile, start typing the name of the person you would like to find and the results will display automatically. 
-		</div>
-	</div>
-	
-	<div id="divProfilesNameSearch" role="search" aria-labelledby="profilesSimpleSearchHeader" aria-describedby="profilesSimpleSearchDescription" class="lotusChunk nameTypeaheadControl">
-		<form id="formProfilesSimpleSearch" class="lotusForm lotusFormPlain" action="/profiles/html/simpleSearch.do" method="GET" onsubmit="return validateSearchDataAndSubmit(this)">	
-			<input type="hidden" name="searchBy" value="name"/>
-			<input type="hidden" name="lang" value="en_us"/>
-			<input type="hidden" name="searchFor" value=""/>
-			<label for="profilesNameSearchField">
-				Display Name:
-			</label>
-	 		<textarea id="profilesNameSearchField" class="lotusHidden" aria-controls="divProfilesNameSearchLiveRegion"></textarea>
-	 		
-			<span id="profilesSimpleSearchButton" title="Search" class="lotusSearch lotusBtnImg">
-				<input type="image" src="https://dev.sdkdemo.com:444/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140117.183045" class="lotusSearchButton" title="Search" alt="Search" onclick="validateSearchDataAndSubmit()"/>
-				<button class="lotusAltText">Search</button>
-			</span>
-		</form>
-		<div id="divProfilesNameSearchLiveRegion" class="lotusAccess" aria-live="assertive" aria-relevant="text" role="status"> </div>
-	</div>
-	<div class="lotusChunk">
-		<a href="javascript:void(0);" 
-			onclick="
-				dojo.addClass(dojo.byId('divProfilesTypeaheadSearch'),'lotusHidden');
-				dojo.removeClass(dojo.byId('divProfilesAdvancedSearch'),'lotusHidden');
-				window.location.hash = '#advancedSearch';
-
-				if ( hasUserInputForNameSearch )
-				   dojo.byId('advancedSearchForm').displayName.value = dojo.byId('profilesNameSearchField').value;
-			   	else
-				   dojo.byId('advancedSearchForm').displayName.value = '';
-
-				setTimeout(function(){
-					dojo.byId('advancedSearchForm').keyword.focus();
-				}, 0);
-				">
-			Display full search options
-		</a>
-	</div>
-	<div id="profilesNameSearchField_popup" role="region" aria-label="No results found."><div id="divProfilesTypeaheadSearchResults" class="lotusChunk lotusViewControl" aria-live="polite" aria-relevant="text">
-	
-	</div></div>
-</div>
-<!-- 
-ptas_fireOnKeys:[1]  
-ptas_delayBetweenKeys:[0] 
-maxResults:[20] 
-liveNameSupport:[true] 
-expandThumbnails:[true] 
-blankOnEmpty:[true] 
--->
-<script type="text/javascript">
-
-	// Used to mark whether there is any user input for search
-	var hasUserInputForNameSearch = false;
-
-	// metrics variables, it will be used in tiles/footer.jsp
-	readTrackerMetrics = {};  
-	readTrackerMetrics.itemType = "SearchView";
-	readTrackerMetrics.contentId = profilesData.config.pageId;
-	readTrackerMetrics.contentTitle = profilesData.config.pageId;
-	
-	function validateSearchDataAndSubmit(frm) {
-		if (typeof frm == "undefined") frm = dojo.byId('formProfilesSimpleSearch');
-		if (frm) {
-			frm.searchFor.value=dojo.byId('profilesNameSearchField').value;
-			if(/\S/.test(frm.searchFor.value) && hasUserInputForNameSearch ){
-				// string isn't empty and just whitespace
-				document.location.href = frm.action + "?" + dojo.formToQuery(frm);
-			}	
-		}
-		return false; //always return false to stop the browser from submitting the form since we are redirecting the browser.
-	}
-
-	function validateAdvSearchDataAndSubmit(frm) {
-		// unlike simple search, we are not validating that a non-empty entry exists. such a check has never been in place
-		if (typeof frm == "undefined") frm = dojo.byId('advancedSearchForm');
-		// add the lang parameter oherwise redirect logic will remove the first (keyword) parameter.
-		if (frm) {
-			var loc = document.location.href + "?#";
-			loc = loc.split("?")[1].split("#")[0];
-			var query = dojo.queryToObject(loc);
-			if (typeof query == "object" && query.lang) {
-				var lang = "lang=" + query.lang + "&";
-			}
-			else {
-				var lang = "";
-			}
-			document.location.href = frm.action + "?" + lang + dojo.formToQuery(frm);
-		}
-		return false; //always return false to stop the browser from submitting the form since we are redirecting the browser.
-	}
-
-var t = "";
-var _growPhoto = function( id ) {
-	t = setTimeout( "profiles_animImgResize('"+id+"',55,155,55,155,100,10)", 500); 
-	return;
-}
-
-var _resetPhoto = function( id ) {
-	clearTimeout( t );
-	if(dojo.byId(id).style.width != "55px")
-		profiles_animImgResize( id,155,55,155,55,1,1);
-	return;
-}
-
-dojo.addOnLoad(
-    function() {
-		if( typeof(lconn) != "undefined" && lconn.core && lconn.core.PeopleDataStore ) {
-	    	var lang = "en_us";
-	    	var showfulladv = "";
-	    	var lastMod = profilesData.config.profileLastMod;
-	    	var peopleTypeAheadStore = new lconn.core.PeopleDataStore({
-	    		jsId:"peopleTypeAheadStore",
-	    		queryParam:"name",
-	    		url:"/profiles/html/nameTypeahead.do"+
-	    			"?count=20"+
-	    			"&extended=true"+ 
-	    			((lastMod != "")?"&lastMod="+lastMod:"")+    		
-	    			((lang != "")?"&lang="+lang:"")
-	    		});
-	    	
-	    	var args={
-	    		minChars:1,
-	    		store:peopleTypeAheadStore,
-	    		searchDelay:0,
-	    		hasDownArrow:false,
-	    		autocomplete:true,
-	    		multipleValues:false
-	    	};
-			
-
-			var peopleTypeAhead = new lconn.profiles.PeopleTypeAhead(args, dojo.byId("profilesNameSearchField"));
-			
-			var fld = dojo.byId("profilesNameSearchField");
-			if (fld) {
-				dojo.style(fld, "width", "auto");
-				dojo.attr(fld, "size", "40");
-			}
-			
-			//need to massage aria behavior for this instance since it techincally isn't a combo
-			var massageSearchTypeaheadField_ = function() {
-				var fld = dojo.byId("profilesNameSearchField");
-				if (fld) {
-					dojo.attr(fld, "role", "textbox");
-					if (dojo.hasAttr(fld, "aria-owns")) {
-						dojo.attr(fld, "aria-controls", dojo.attr(fld, "aria-owns"));
-						dojo.removeAttr(fld, "aria-owns");
-					}
-					dojo.removeAttr(fld, "wairole");
-					dojo.removeAttr(fld, "waistate");
-					dojo.removeAttr(fld, "aria-haspopup");
-					dojo.removeAttr(fld, "aria-autocomplete");
-					dojo.removeAttr(fld, "aria-activedescendant");
-					dojo.removeAttr(fld, "aria-expanded");				
-				}
-			};
-			
-			massageSearchTypeaheadField_();
-
-			
-
-			
-			dojo.connect( peopleTypeAhead, "_hideResultList",  
-				function() {
-					if (peopleTypeAhead.attr('value').length == 0) {
-						dojo.removeAttr(dojo.byId("divProfilesTypeaheadSearchResults"), "role");
-						dojo.attr("profilesNameSearchField_popup", "aria-label", "No results found.");
-					}
-				}
-			);
-	
-	    	dojo.connect( peopleTypeAhead, "_showResultGrid",  
-	        		function(/*Object*/ results, /*Object*/ dataObject) {
-						//make sure the field attributes are correct when showing results
-						massageSearchTypeaheadField_();
-						
-						if (results.length == 0) {
-							dojo.attr("profilesNameSearchField_popup", "aria-label", "No results found.");
-						} else {
-							dojo.attr("profilesNameSearchField_popup", "aria-label", ("Profile search results for {0}").replace(/{0\}/, this.getTextBoxValue()));
-						}
-						
-			        	var el = dojo.byId("divProfilesTypeaheadSearchResults");
-			    		var lr = dojo.byId("divProfilesNameSearchLiveRegion");
-			    		if(lr && generalrs) {
-			    			var lrValue = "";
-			    			if(results.length>0) {
-			    				lrValue = generalrs["label.searchresults.results"];
-			    				if(lrValue) {
-			    					lrValue = lconn.core.i18nOverrider.replaceParams(lrValue, [results.length]);
-			    				}
-			    			} else {
-			    				lrValue = generalrs["label.searchresults.noresults"];
-			    			}
-			    			lr.innerHTML = lrValue || ""; 
-			    		}
-						
-	    				var n=0;
-	    				var out = "";
-	    				out += "<ul id='profileSearchResultsUL' class='lotusList' style='"+(profiles_isBidiRTL?"float:right;":"float:left;")+"width: 99%; list-style:none outside none; display:inline-table'>";
-	    				var zidx = 0;
-						while( n < results.length) {
-							p = results[n];
-							zidx = results.length-n;
-							
-							// build the location string
-							var pLocation = "";
-							var firstItem = true;
-							if( p.ext.bldgId ) {
-								if(firstItem) pLocation += "<ul class='lotusInlinelist' role='list'>";
-								pLocation += (firstItem?"<li class='lotusFirst' role='listitem'>":"<li role='listitem'>")+lconn.core.HTMLUtil.escapeText(p.ext.bldgId)+"</li>";
-								firstItem=false;
-							}
-							   
-							if( p.ext.floor ) {
-								if(firstItem) pLocation += "<ul class='lotusInlinelist' role='list'>";
-								pLocation += (firstItem?"<li class='lotusFirst' role='listitem'>":"<li role='listitem'>")+lconn.core.HTMLUtil.escapeText(p.ext.floor)+"</li>";
-								firstItem=false;
-							}
-	
-							if( p.ext.officeName ) {
-								if(firstItem) pLocation += "<ul class='lotusInlinelist' role='list'>";	
-								pLocation += (firstItem?"<li class='lotusFirst' role='listitem'>":"<li role='listitem'>")+lconn.core.HTMLUtil.escapeText(p.ext.officeName)+"</li>";
-								firstItem=false;
-							}
-							if( !firstItem) pLocation += "</ul>";
-
-							lastUpdate = new Date(p.ext.lastUpdate); // SPR#TESA8E7Q3V
-							
-							try {
-								var photoAltText = "Profile photo";
-								var inactiveText = "This person is no longer an active user.";
-								var isInactive = (p.ext.state === "INACTIVE");
-							} catch (ee) {}
-							
-							// showEmail: true
-							out += 
-								"<li style='"+(profiles_isBidiRTL?"float:right;":"float:left;")+"clear:none;"+"'>" +
-									"<div id='profileSearchResult_"+p.userid+"' "+
-										"style='display:block; overflow:hidden; float:inherit; width:300px; height:59px; padding-bottom:5px; padding-left:5px; margin-right:5px;'"+">"+
-										"<span class='lotusContentColOne' style='width: 55px; height: 55px;'>"+
-											"<a aria-hidden='true' href='/profiles/html/profileView.do?userid="+encodeURIComponent(p.userid)+"' class='vcard' tabindex='-1'> "+
-												"<img id='profileSearchResultImg_"+p.userid+"' "+
-													"alt='" + photoAltText + "' tabindex='-1'"+
-													"class='lotusPhoto' "+
-													"src='/profiles/photo.do?userid="+encodeURIComponent(p.userid)+(lastUpdate != null? "&lastMod="+lastUpdate.getTime(): "")+"' "+
-													
-														"onMouseOver='javascript:_growPhoto(this.id);' "+
-														"onMouseOut='javascript:_resetPhoto(this.id);' "+
-														"role='tooltip' "+
-													 
-													"style='width:55px;height:55px;position:absolute;z-index:"+zidx+";' "+
-												">"+								
-											"</a>"+
-										"</span>"+
-										"<span class='lotusContentColTwo lotusContentColTwoTop'>"+
-											"<span class='vcard'>"+
-												"<a " + (isInactive?"aria-label='" + inactiveText + "'":"") + " href='/profiles/html/profileView.do?userid="+encodeURIComponent(p.userid)+"' class='fn url lotusPerson'>"+p.name+"</a>"+
-												"<span style='display: none;' class='x-lconn-userid'>"+lconn.core.HTMLUtil.escapeText(p.userid)+"</span>"+
-												(isInactive?"<p>" + inactiveText + "</p>":"") + 
-											"</span>"+
-										"</span>"+
-																
-											(!isInactive?"<span class='lotusContentColTwo'>"+
-												"<a class='lotusEmail' href='mailto:"+p.member.replace(/\'/,"&#39;")+"'>"+lconn.core.HTMLUtil.escapeText(p.member)+"</a>"+
-											"</span>":"")+
-										
-										(!isInactive?"<span class='lotusContentColTwo'>"+
-											(p.ext.jobResp ? lconn.core.HTMLUtil.escapeText(p.ext.jobResp) : "&nbsp;")+
-										"</span>":"")+
-									"</div>" +
-								"</li>";
-							++n;
-						}
-	   				out += "</ul>";
-	    				el.innerHTML = out;
-
-	    				/*
-			    		// var elFx = profiles_fadeIn(el);
-	    				dojo.connect(elFx, "onEnd", function(){ // fix for safari 4.0.5
-							dojo.style(el, "display", "");
-						}); 
-	    				elFx.play();
-						*/
-	    				if( "true" != "false")  
-	    					profiles_AddLiveNameSupport("profileSearchResultsUL");
-	    			}
-			);
-
-		    dojo.connect( dojo.byId("profilesNameSearchField"), "onkeyup", 
-						function(ev){ 
-							var elSearch = dojo.byId("profilesNameSearchField");
-							var elResults = dojo.byId("divProfilesTypeaheadSearchResults");
-							if( elSearch.value == "") {
-							    hasUserInputForNameSearch = false;
-
-							    if( "true" != "false") { 
-									elResults.innerHTML = "";
-									dojo.addClass(elResults, "lotusHidden");
-							    }
-							} else {
-							    hasUserInputForNameSearch = true;
-							    if( "true" != "false") {
-									dojo.removeClass(elResults, "lotusHidden");
-								}
-							}
-						}
-			);
-						
-			//IE native mode needs a little more time to render the UI before showing/hiding these areas
-			setTimeout(function() {
-				if ( showfulladv == 'true' ) {
-					dojo.addClass(dojo.byId('divProfilesTypeaheadSearch'),'lotusHidden');
-					dojo.removeClass(dojo.byId('divProfilesAdvancedSearch'),'lotusHidden');
-				}
-				else {
-					dojo.removeClass(dojo.byId("profilesNameSearchField"),"lotusHidden");
-				}
-		
-				if (document.location.hash == '#advancedSearch') {
-					dojo.addClass(dojo.byId('divProfilesTypeaheadSearch'),'lotusHidden');
-					dojo.removeClass(dojo.byId('divProfilesAdvancedSearch'),'lotusHidden');
-				} else if (document.location.hash == '#simpleSearch') {
-					dojo.addClass(dojo.byId('divProfilesAdvancedSearch'),'lotusHidden');
-					dojo.removeClass(dojo.byId('divProfilesTypeaheadSearch'),'lotusHidden');
-				}
-			},0);
-		}
-	});
-</script>
-
-			
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div id="divProfilesAdvancedSearch" class="lotusChunk lotusHidden" role="main">	
-	<div class="lotusHeader">
-		<h1>Search the Directory </h1>
+		<h1 id="profilesAdvSearchHeader">Search the Directory </h1>
 		<div class="lotusMeta">To find a profile, enter the information below for the person you would like to find and click the search button. </div>
 	</div>
 	<div id="divAdvancedSearchHideFull">
-		<a href="javascript:void(0);" 
-			onclick="
-				dojo.addClass(dojo.byId('divProfilesAdvancedSearch'),'lotusHidden');
-				dojo.removeClass(dojo.byId('divProfilesTypeaheadSearch'),'lotusHidden');
-				window.location.hash = '#simpleSearch';
-				dojo.byId('profilesNameSearchField').value = dojo.byId('advancedSearchForm').displayName.value;
-				setTimeout(function(){
-					dojo.byId('profilesNameSearchField').focus();
-				}, 0);
-				">
+		<a href="javascript:void(0);" onclick="lconn.profiles.profilesSearchPage.showSimpleUI();" role="button">
 			Hide full search options
 		</a>
 	</div>
 	
+	
 	<div class="lotusChunk" style="width:500px;">
-		<form name="advancedSearchForm" method="GET" action="/profiles/html/advancedSearch.do" class="lotusForm lotusFormPlain" onsubmit="return validateAdvSearchDataAndSubmit(this)" id="advancedSearchForm">
+		<form name="advancedSearchForm" method="GET" action="/profiles/html/advancedSearch.do" class="lotusForm lotusFormPlain" onsubmit="return lconn.profiles.profilesSearchPage.submitAdvancedSearch(this);" id="advancedSearchForm">
 			
 			<fieldset>
 				<legend class="lotusHidden">???label.advanced.searchForm.legend???</legend>
@@ -1396,22 +883,25 @@ dojo.addOnLoad(
 					<tbody>
 						<tr class="">
 						    <td class="lotusFormLabel" width="125">
-						    
-						    <label for="keyword">Keyword:</label>
+								<label for="keyword">Keyword:</label>
+						    </td>
 						    <td>
-							<input type="text" name="keyword" size="40" value="" class="lotusText" id="keyword">
+								<input type="text" name="keyword" size="40" value="" class="lotusText bidiAware" id="keyword">
 						    </td>
 						</tr>
+						
+						
 						
 							
 							<tr class="">
 								<td class="lotusFormLabel" width="125">
+									
 									
 									
 									<label for="displayName">Display Name:</label>
 								</td>
 								<td>
-									<input type="text" name="displayName" size="40" value="" class="lotusText" id="displayName">
+									<input type="text" name="displayName" size="40" value="" class="lotusText bidiAware" id="displayName">
 								</td>
 							</tr>
 						
@@ -1420,10 +910,11 @@ dojo.addOnLoad(
 								<td class="lotusFormLabel" width="125">
 									
 									
-									<label for="preferredFirstName">First Name:</label>
+									
+									<label for="preferredFirstName">Given Name:</label>
 								</td>
 								<td>
-									<input type="text" name="preferredFirstName" size="40" value="" class="lotusText" id="preferredFirstName">
+									<input type="text" name="preferredFirstName" size="40" value="" class="lotusText bidiAware" id="preferredFirstName">
 								</td>
 							</tr>
 						
@@ -1432,118 +923,132 @@ dojo.addOnLoad(
 								<td class="lotusFormLabel" width="125">
 									
 									
-									<label for="preferredLastName">Last Name:</label>
+									
+									<label for="preferredLastName">Family Name:</label>
 								</td>
 								<td>
-									<input type="text" name="preferredLastName" size="40" value="" class="lotusText" id="preferredLastName">
+									<input type="text" name="preferredLastName" size="40" value="" class="lotusText bidiAware" id="preferredLastName">
 								</td>
 							</tr>
 						
 							
 							<tr class="">
 								<td class="lotusFormLabel" width="125">
+									
 									
 									
 									<label for="profileTags">Tags:</label>
 								</td>
 								<td>
-									<input type="text" name="profileTags" size="40" value="" class="lotusText" id="profileTags">
+									<input type="text" name="profileTags" size="40" value="" class="lotusText bidiAware" id="profileTags">
 								</td>
 							</tr>
 						
 							
 							<tr class="">
 								<td class="lotusFormLabel" width="125">
+									
 									
 									
 									<label for="jobResp">Job Title:</label>
 								</td>
 								<td>
-									<input type="text" name="jobResp" size="40" value="" class="lotusText" id="jobResp">
+									<input type="text" name="jobResp" size="40" value="" class="lotusText bidiAware" id="jobResp">
 								</td>
 							</tr>
 						
 							
 							<tr class="">
 								<td class="lotusFormLabel" width="125">
+									
 									
 									
 									<label for="description">About Me:</label>
 								</td>
 								<td>
-									<input type="text" name="description" size="40" value="" class="lotusText" id="description">
+									<input type="text" name="description" size="40" value="" class="lotusText bidiAware" id="description">
 								</td>
 							</tr>
 						
 							
 							<tr class="">
 								<td class="lotusFormLabel" width="125">
+									
 									
 									
 									<label for="experience">Background:</label>
 								</td>
 								<td>
-									<input type="text" name="experience" size="40" value="" class="lotusText" id="experience">
+									<input type="text" name="experience" size="40" value="" class="lotusText bidiAware" id="experience">
 								</td>
 							</tr>
 						
 							
 							<tr class="">
 								<td class="lotusFormLabel" width="125">
+									
 									
 									
 									<label for="organizationTitle">Organization or Company:</label>
 								</td>
 								<td>
-									<input type="text" name="organizationTitle" size="40" value="" class="lotusText" id="organizationTitle">
+									<input type="text" name="organizationTitle" size="40" value="" class="lotusText bidiAware" id="organizationTitle">
 								</td>
 							</tr>
 						
 							
 							<tr class="">
 								<td class="lotusFormLabel" width="125">
+									
+									
+										
 									
 									
 									<label for="workLocation$city">City:</label>
 								</td>
 								<td>
-									<input type="text" name="workLocation$city" size="40" value="" class="lotusText" id="workLocation$city">
+									<input type="text" name="workLocation$city" size="40" value="" class="lotusText bidiAware" id="workLocation$city">
 								</td>
 							</tr>
 						
 							
 							<tr class="">
 								<td class="lotusFormLabel" width="125">
+									
+									
+										
 									
 									
 									<label for="workLocation$state">State:</label>
 								</td>
 								<td>
-									<input type="text" name="workLocation$state" size="40" value="" class="lotusText" id="workLocation$state">
+									<input type="text" name="workLocation$state" size="40" value="" class="lotusText bidiAware" id="workLocation$state">
 								</td>
 							</tr>
 						
 							
 							<tr class="">
 								<td class="lotusFormLabel" width="125">
+									
 									
 									
 									<label for="countryDisplayValue">Country:</label>
 								</td>
 								<td>
-									<input type="text" name="countryDisplayValue" size="40" value="" class="lotusText" id="countryDisplayValue">
+									<input type="text" name="countryDisplayValue" size="40" value="" class="lotusText bidiAware" id="countryDisplayValue">
 								</td>
 							</tr>
 						
 							
 							<tr class="">
 								<td class="lotusFormLabel" width="125">
+									
 									
 									
 									<label for="email">Email address:</label>
 								</td>
 								<td>
-									<input type="text" name="email" size="40" value="" class="lotusText" id="email">
+									<input type="text" name="email" size="40" value="" class="lotusText bidiAware" id="email">
 								</td>
 							</tr>
 						
@@ -1552,18 +1057,16 @@ dojo.addOnLoad(
 								<td class="lotusFormLabel" width="125">
 									
 									
+									
 									<label for="telephoneNumber">Phone Number:</label>
 								</td>
 								<td>
-									<input type="text" name="telephoneNumber" size="40" value="" class="lotusText" id="telephoneNumber">
+									<input type="text" name="telephoneNumber" size="40" value="" class="lotusText bidiAware" id="telephoneNumber">
 								</td>
 							</tr>
 						
 						
 						
-
-
-
 
 
 
@@ -1578,12 +1081,10 @@ dojo.addOnLoad(
 	<td class="lotusFormLabel" width="125">&nbsp;
 	</td>
 	<td><input type="checkbox" name="includeInactiveUsers" value="true" id="includeInactiveUsers">
-		
 		<label for="includeInactiveUsers">Include inactive users in search results</label>
 	</td>
 </tr>
-
-						
+					
 					</tbody>
 				</table>
 						
@@ -1604,6 +1105,8 @@ dojo.addOnLoad(
 	</div>
 </div>
 
+				</div>
+			
 		</div>
     
 				</div>
@@ -1629,9 +1132,25 @@ dojo.addOnLoad(
 
 
 
-<!-- footer -->
-<div id="lotusFooter" class="lotusFooter" role="contentinfo">
-	<ul><li><a href="https://dev.sdkdemo.com:444/homepage/">Home</a></li><li><a href="javascript:;" onclick="javascript:openDemoWindow(); return false;" class="">Demo</a></li><li><a href="javascript:;" onclick="javascript:openHelpWindow('','/topic/com.ibm.lotus.connections.profiles.help/pframe.html'); return false;" class="">Help</a></li><li><a href="http://www-10.lotus.com/ldd/lcforum.nsf">IBM Support Forums</a></li> <li><a href="/profiles/nav/toolbox?appName=profiles" class="">Bookmarking Tools</a></li><li id="lotusBannerFooterMetrics" style="display:none"><a class="lotusMetricsReaderLink" href="https://dev.sdkdemo.com:444/metrics/">Server Metrics</a></li><li id="lconnFooterMobile" class="lotusHidden"><a id="lconnMobileRedirectLink" href="javascript:;">Mobile UI</a></li><li><a href="/profiles/app/about" class="">About</a></li><li><a href="http://www-306.ibm.com/software/lotus/products/connections/">IBM Connections on ibm.com</a></li><li><a href="http://www.lotus.com/ldd/doc/cct/nextgen.nsf/feedback_choice?OpenForm&amp;Context=footer+ventura+NoTitle+4.5">Submit Feedback</a></li></ul><script type="text/javascript">
+
+
+
+<div id="lotusFooter" class="lotusFooter" role="contentinfo" aria-label="Footer">
+	<ul><li><a href="https://lcauto51.swg.usma.ibm.com/homepage/">Home</a></li><li><a href="javascript:;" onclick="javascript:openHelpWindow('','/topic/com.ibm.lotus.connections.profiles.help/pframe.html'); return false;" class="">Help</a></li><li><a href="http://www-10.lotus.com/ldd/lcforum.nsf">IBM Support Forums</a></li> <li><a href="/profiles/nav/toolbox?appName=profiles" class="">Bookmarking Tools</a></li><li id="lotusBannerFooterMetrics" style="display:none"><a class="lotusMetricsReaderLink" href="https://lcauto51.swg.usma.ibm.com/metrics/">Server Metrics</a></li><li id="lconnFooterMobile" class="lotusHidden"><a id="lconnMobileRedirectLink" href="javascript:;">Mobile UI</a></li><li><a href="/profiles/app/about" class="">About</a></li><li><a href="http://www-306.ibm.com/software/lotus/products/connections/">IBM Connections on ibm.com</a></li><li><a href="http://www.lotus.com/ldd/doc/cct/nextgen.nsf/feedback_choice?OpenForm&amp;Context=footer+ventura+NoTitle+4.5">Submit Feedback</a></li></ul><script type="text/javascript">
+(function(){
+   function loadConnectionsLanguageSelector() {
+      try {
+         dojo.require("lconn.core.header");
+         lconn.core.header.enableLanguageSelector("languageSelectorText", {"en":"English","zh":"\u4e2d\u6587 (\u200f\u7b80\u4f53)","fr":"Fran\u00e7ais","ar":"\u200f\u0627\u0644\u0639\u0631\u0628\u064a\u0629\u200f"},
+            "lcLang", "", -1);
+      } catch (e) {
+         console.error(e);
+      }
+   }
+   if (dojo.exists("lconn.core.header") && !dojo.exists("_skipConnectionsLanguageSelector"))
+      dojo.addOnLoad(loadConnectionsLanguageSelector);
+})();
+</script><script type="text/javascript">
       dojo.require("lconn.core.header.apps");
       dojo.require("lconn.core.auth");
 
@@ -1641,7 +1160,6 @@ dojo.addOnLoad(
             lconn.core.header.apps.updateBannerByRoles();
          });
        </script>
-
 </div>
 
 <script language="Javascript" type="text/javascript">
@@ -1655,7 +1173,7 @@ dojo.addOnLoad(
     var timestamp = lastMod;
 	
 	var layoutInfoUrl = applicationContext + "/widgetInfoPersistence.do?resourceType=profile&appStart=" + profilesData.config.appStartupDate;
-	var userInfoUrl = applicationContext + "/userinfo.do?&timestamp=1397818694649";
+	var userInfoUrl = applicationContext + "/userinfo.do?&timestamp=1405414715329";
 	var resourceId = "";
 	if(resourceId != "")
 	{
@@ -1664,7 +1182,7 @@ dojo.addOnLoad(
 	}
 
 	var WidgetPlacementConfig = {
-		params: {resourceId: "", contextRoot: applicationContext, lastMod: timestamp, version: "20140117.183045", appLangParam: appLang, lang: helpLang},
+		params: {resourceId: "", contextRoot: applicationContext, lastMod: timestamp, version: "20140707.175236", appLangParam: appLang, lang: helpLang},
 		defaultPageId: "profilesView",
 		widgetConfigXMLDocument: null, //if this variable is defined, an http request will not be may to obtain widget data feed via layoutInfoUrl.
 		layoutInfoUrl: layoutInfoUrl, // required only if widgetConfigXMLDocument is not defined
@@ -1679,11 +1197,17 @@ dojo.addOnLoad(
 		lastMod: timestamp, 
 		availableServices: {profile: true},
 		resourceOwner: false,
+		enabledPermissions: [],
 		enabledFeatures: ""
 	};
 	
+	//copy the permissions from the profilesData object;
+	if (profilesData && profilesData.enabledPermissions && profilesData.enabledPermissions.length > 0) {
+		WidgetPlacementConfig.enabledPermissions = profilesData.enabledPermissions;
+	}
+
 	
-	var currentUserGuid = "EFD413BC-E572-760A-8625-7C6E00506453";
+	var currentUserGuid = "4cbc45c0-16a7-1033-9239-95472f45d54f";
 
 	var widgetUserInfo = {
 		canContribute: "false",  
@@ -1691,8 +1215,11 @@ dojo.addOnLoad(
 		
 			
 				"logged-in": "true",
-				displayName: "Frank Adams",  email: "fadams@renovations.com", userid: "EFD413BC-E572-760A-8625-7C6E00506453",
-				userId: "EFD413BC-E572-760A-8625-7C6E00506453", key: "1766a7fb-d564-4720-b678-9ec9c5b0c27a"
+				displayName: "Amy Jones1",  
+				email: "ajones1@janet.iris.com", 
+				userId: "4cbc45c0-16a7-1033-9239-95472f45d54f", 
+				userid: "4cbc45c0-16a7-1033-9239-95472f45d54f", 
+				key: "e47f7079-ade1-4164-a7d9-c44094add840"
 			
 			
 		
@@ -1719,66 +1246,69 @@ dojo.addOnLoad(
 		WidgetPlacementConfig.resourceOwner = false;
 		
     WidgetPlacementConfig.availableServices['help'] = true;
-WidgetPlacementConfig.params['helpSvcRef'] = 'https://dev.sdkdemo.com:444/help';
+WidgetPlacementConfig.params['helpSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/help';
 WidgetPlacementConfig.availableServices['microblogging'] = true;
-WidgetPlacementConfig.params['microbloggingSvcRef'] = 'https://dev.sdkdemo.com:444/connections/opensocial';
+WidgetPlacementConfig.params['microbloggingSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/connections/opensocial';
 WidgetPlacementConfig.availableServices['metrics'] = true;
-WidgetPlacementConfig.params['metricsSvcRef'] = 'https://dev.sdkdemo.com:444/metrics';
+WidgetPlacementConfig.params['metricsSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/metrics';
 WidgetPlacementConfig.availableServices['wikis'] = true;
-WidgetPlacementConfig.params['wikisSvcRef'] = 'https://dev.sdkdemo.com:444/wikis';
+WidgetPlacementConfig.params['wikisSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/wikis';
+WidgetPlacementConfig.availableServices['opengraph'] = true;
+WidgetPlacementConfig.params['opengraphSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/connections/opengraph';
 WidgetPlacementConfig.availableServices['sand'] = true;
 WidgetPlacementConfig.params['sandSvcRef'] = '';
+WidgetPlacementConfig.availableServices['pushnotification'] = true;
+WidgetPlacementConfig.params['pushnotificationSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/push';
 WidgetPlacementConfig.availableServices['personTag'] = true;
-WidgetPlacementConfig.params['personTagSvcRef'] = 'https://dev.sdkdemo.com:444/profiles/ibm_semanticTagServlet';
+WidgetPlacementConfig.params['personTagSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/profiles/ibm_semanticTagServlet';
 WidgetPlacementConfig.availableServices['communities'] = true;
-WidgetPlacementConfig.params['communitiesSvcRef'] = 'https://dev.sdkdemo.com:444/communities';
+WidgetPlacementConfig.params['communitiesSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/communities';
+WidgetPlacementConfig.availableServices['ecm_files'] = true;
+WidgetPlacementConfig.params['ecm_filesSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/dm';
 WidgetPlacementConfig.availableServices['oauthprovider'] = true;
-WidgetPlacementConfig.params['oauthproviderSvcRef'] = 'https://dev.sdkdemo.com:444/oauth2';
-WidgetPlacementConfig.availableServices['connectionsmail'] = true;
-WidgetPlacementConfig.params['connectionsmailSvcRef'] = 'https://dev.sdkdemo.com:444/connections/resources/socmail-client';
+WidgetPlacementConfig.params['oauthproviderSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/oauth2';
 WidgetPlacementConfig.availableServices['mediaGallery'] = true;
-WidgetPlacementConfig.params['mediaGallerySvcRef'] = 'https://dev.sdkdemo.com:444/news/widgets/lw';
+WidgetPlacementConfig.params['mediaGallerySvcRef'] = 'https://lcauto51.swg.usma.ibm.com/news/widgets/lw';
 WidgetPlacementConfig.availableServices['webresources'] = true;
-WidgetPlacementConfig.params['webresourcesSvcRef'] = 'https://dev.sdkdemo.com:444/connections/resources';
+WidgetPlacementConfig.params['webresourcesSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/connections/resources';
 WidgetPlacementConfig.availableServices['blogs'] = true;
-WidgetPlacementConfig.params['blogsSvcRef'] = 'https://dev.sdkdemo.com:444/blogs';
+WidgetPlacementConfig.params['blogsSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/blogs';
 WidgetPlacementConfig.availableServices['news'] = true;
-WidgetPlacementConfig.params['newsSvcRef'] = 'https://dev.sdkdemo.com:444/news';
+WidgetPlacementConfig.params['newsSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/news';
 WidgetPlacementConfig.availableServices['oauth'] = true;
-WidgetPlacementConfig.params['oauthSvcRef'] = 'https://dev.sdkdemo.com:444/connections/oauth';
+WidgetPlacementConfig.params['oauthSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/connections/oauth';
 WidgetPlacementConfig.availableServices['dogear'] = true;
-WidgetPlacementConfig.params['dogearSvcRef'] = 'https://dev.sdkdemo.com:444/dogear';
+WidgetPlacementConfig.params['dogearSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/dogear';
 WidgetPlacementConfig.availableServices['mobile'] = true;
-WidgetPlacementConfig.params['mobileSvcRef'] = 'https://dev.sdkdemo.com:444/mobile';
+WidgetPlacementConfig.params['mobileSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/mobile';
 WidgetPlacementConfig.availableServices['bookmarklet'] = true;
-WidgetPlacementConfig.params['bookmarkletSvcRef'] = 'https://dev.sdkdemo.com:444/connections/bookmarklet';
+WidgetPlacementConfig.params['bookmarkletSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/connections/bookmarklet';
 WidgetPlacementConfig.availableServices['moderation'] = true;
-WidgetPlacementConfig.params['moderationSvcRef'] = 'https://dev.sdkdemo.com:444/moderation';
+WidgetPlacementConfig.params['moderationSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/moderation';
 WidgetPlacementConfig.availableServices['deploymentConfig'] = true;
-WidgetPlacementConfig.params['deploymentConfigSvcRef'] = 'https://dev.sdkdemo.com:444/connections';
+WidgetPlacementConfig.params['deploymentConfigSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/connections';
 WidgetPlacementConfig.availableServices['search'] = true;
-WidgetPlacementConfig.params['searchSvcRef'] = 'https://dev.sdkdemo.com:444/search';
+WidgetPlacementConfig.params['searchSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/search';
 WidgetPlacementConfig.availableServices['profiles'] = true;
-WidgetPlacementConfig.params['profilesSvcRef'] = 'https://dev.sdkdemo.com:444/profiles';
+WidgetPlacementConfig.params['profilesSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/profiles';
+WidgetPlacementConfig.availableServices['thumbnail'] = true;
+WidgetPlacementConfig.params['thumbnailSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/connections/thumbnail';
 WidgetPlacementConfig.availableServices['activities'] = true;
-WidgetPlacementConfig.params['activitiesSvcRef'] = 'https://dev.sdkdemo.com:444/activities';
+WidgetPlacementConfig.params['activitiesSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/activities';
 WidgetPlacementConfig.availableServices['homepage'] = true;
-WidgetPlacementConfig.params['homepageSvcRef'] = 'https://dev.sdkdemo.com:444/homepage';
+WidgetPlacementConfig.params['homepageSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/homepage';
 WidgetPlacementConfig.availableServices['forums'] = true;
-WidgetPlacementConfig.params['forumsSvcRef'] = 'https://dev.sdkdemo.com:444/forums';
+WidgetPlacementConfig.params['forumsSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/forums';
 WidgetPlacementConfig.availableServices['opensocial'] = true;
-WidgetPlacementConfig.params['opensocialSvcRef'] = 'https://dev.sdkdemo.com:444/connections/opensocial';
+WidgetPlacementConfig.params['opensocialSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/connections/opensocial';
 WidgetPlacementConfig.availableServices['files'] = true;
-WidgetPlacementConfig.params['filesSvcRef'] = 'https://dev.sdkdemo.com:444/files';
-WidgetPlacementConfig.availableServices['sametimeProxy'] = true;
-WidgetPlacementConfig.params['sametimeProxySvcRef'] = 'http://dev.sdkdemo.com:81';
+WidgetPlacementConfig.params['filesSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/files';
 
     
     // Engage Widget Framework
 	if( typeof(lconn) == "object" ) {
 	     dojo.addOnLoad(function(){
-			lconn.core.WidgetPlacement.placeWidgetMetadata();
-			lconn.core.WidgetPlacement.renderWidgets();
+			lconn.core.WidgetPlacement.init();
 	     });
 	}
 </script>

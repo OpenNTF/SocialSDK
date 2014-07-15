@@ -130,7 +130,7 @@ public class BaseActivityServiceTest extends BaseUnitTest {
     }
     
     protected String createTitle(String type) {
-    	return this.getClass().getName() + "#" + this.hashCode() + "_" + type + "-" + System.currentTimeMillis();
+    	return this.getClass().getName() + "_" + type + "-" + System.currentTimeMillis();
     }
     
     protected Activity createActivity() throws ClientServicesException {

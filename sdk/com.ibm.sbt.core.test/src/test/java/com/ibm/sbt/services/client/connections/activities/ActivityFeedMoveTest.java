@@ -183,6 +183,103 @@ public class ActivityFeedMoveTest extends BaseActivityServiceTest {
         }
         fail();
     }
+    
+    @Test
+    public void testMoveReply() throws ClientServicesException, XMLException {
+
+        activity = new Activity();
+        activity.setTitle(createActivityTitle());
+        activity = activityService.createActivity(activity);
+
+        ActivityNode entryNode = new ActivityNode();
+        entryNode.setActivityUuid(activity.getActivityUuid());
+        entryNode.setTitle("Source ActivityNode");
+        entryNode.setType("ENTRY");
+        activityService.createActivityNode(entryNode);
+
+        ActivityNode todoNode = createActivityNode();
+        todoNode.setActivityUuid(activity.getActivityUuid());
+        todoNode.setTitle("Destination ActivityNode");
+        todoNode.setType("TODO");
+        activityService.createActivityNode(todoNode);
+
+        ActivityNode replyNode = createActivityNode();
+        replyNode.setActivityUuid(activity.getActivityUuid());
+        replyNode.setTitle("Destination ActivityNode");
+        replyNode.setType("REPLY");
+        replyNode.setInReplyTo(entryNode);
+        activityService.createActivityNode(replyNode);
+
+        try {
+            replyNode = activityService.moveNode(replyNode.getActivityNodeUuid(), activity.getActivityUuid());
+
+            replyNode = activityService.moveNode(replyNode.getActivityNodeUuid(),
+                    todoNode.getActivityNodeUuid());
+            assertEquals(todoNode.getActivityNodeUuid(),
+                    replyNode.getInReplyTo().getHref().replaceAll(".*Uuid=", ""));
+            replyNode = activityService.moveNode(replyNode.getActivityNodeUuid(),
+                    entryNode.getActivityNodeUuid());
+            assertEquals(todoNode.getActivityNodeUuid(),
+                    replyNode.getInReplyTo().getHref().replaceAll(".*Uuid=", ""));
+
+        } catch (ClientServicesException ex) {
+            assertEquals(400, ex.getResponseStatusCode());
+            return;
+        }
+    }
+
+    @Test
+    public void testMoveReplyAdvanced() throws ClientServicesException, XMLException {
+        activity = new Activity();
+        activity.setTitle(createActivityTitle());
+        activity = activityService.createActivity(activity);
+
+        ActivityNode entryNode = new ActivityNode();
+        entryNode.setActivityUuid(activity.getActivityUuid());
+        entryNode.setTitle("Source ActivityNode");
+        entryNode.setType("ENTRY");
+        activityService.createActivityNode(entryNode);
+
+        ActivityNode todoNode = createActivityNode();
+        todoNode.setActivityUuid(activity.getActivityUuid());
+        todoNode.setTitle("Destination ActivityNode");
+        todoNode.setType("TODO");
+        activityService.createActivityNode(todoNode);
+
+        ActivityNode replyNode = createActivityNode();
+        replyNode.setActivityUuid(activity.getActivityUuid());
+        replyNode.setTitle("Destination ActivityNode");
+        replyNode.setType("REPLY");
+        replyNode.setInReplyTo(entryNode);
+        activityService.createActivityNode(replyNode);
+
+        ActivityNode replyNode2 = createActivityNode();
+        replyNode2.setActivityUuid(activity.getActivityUuid());
+        replyNode2.setTitle("Destination ActivityNode");
+        replyNode2.setType("REPLY");
+        replyNode2.setInReplyTo(replyNode);
+
+        activityService.createActivityNode(replyNode2);
+        try {
+            replyNode = activityService.moveNode(replyNode.getActivityNodeUuid(),
+                    todoNode.getActivityNodeUuid());
+
+            replyNode = activityService.moveNode(replyNode.getActivityNodeUuid(),
+                    entryNode.getActivityNodeUuid());
+            replyNode2 = activityService.moveNode(replyNode2.getActivityNodeUuid(),
+                    entryNode.getActivityNodeUuid());
+            replyNode = activityService.moveNode(replyNode.getActivityNodeUuid(),
+                    replyNode2.getActivityNodeUuid());
+
+            replyNode = activityService.getActivityNode(replyNode.getActivityNodeUuid());
+            replyNode2 = activityService.getActivityNode(replyNode2.getActivityNodeUuid());
+
+            replyNode = activityService.moveNode(replyNode.getActivityNodeUuid(), activity.getActivityUuid());
+        } catch (ClientServicesException ex) {
+            assertEquals(400, ex.getResponseStatusCode());
+            return;
+        }
+    }
 
 	@Test
 	public void testMoveNodeACL() throws ClientServicesException {

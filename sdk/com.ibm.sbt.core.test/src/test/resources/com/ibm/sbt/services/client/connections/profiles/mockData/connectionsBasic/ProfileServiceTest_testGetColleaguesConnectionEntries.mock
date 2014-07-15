@@ -4,7 +4,7 @@
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Fri, 18 Apr 2014 10:58:24 GMT]]></value>
+        <value><![CDATA[Tue, 15 Jul 2014 08:58:50 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -16,23 +16,23 @@
     </header>
     <header>
         <name><![CDATA[X-UA-Compatible]]></name>
-        <value><![CDATA[IE=EmulateIE7]]></value>
+        <value><![CDATA[IE=9,8]]></value>
     </header>
     <header>
         <name><![CDATA[Last-Modified]]></name>
-        <value><![CDATA[Fri, 18 Apr 2014 10:58:24 GMT]]></value>
+        <value><![CDATA[Tue, 15 Jul 2014 08:58:50 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/rP2I7oko4g5QJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
+        <value><![CDATA[lcLang=en_us; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=FmGDaIpr/a19HBjbuJkI5VVAjSaJJkL6LSNqAl2z35XH0ma/GLu+MVGQnFnkWLsn2b7XpNqT5/Ci/wbfOinrV+TxGFsHt7954nnah7UE5U2ml6W0n9+sb8XTxJsh6D3ZEXugnA51B5X2bClRu894aV+KdvemaK3tFZuyvipjbJeukZgrJnl1xAgWbCq69ffKnuyfdzv8qmQZ4MfIDm0mSJ35UyTVLOo/dUAzpsD7s/Kx00n685tybHpk34p3ksNxCxn1QrZ8Y0Q0cLPA8nCsYdC9lIOAmOMbzkXLgszYSnCczascVzXqqXv3QGWGl8EBNhnT1YCW20ym4NsR3jOmnoidWkPnzVTd8b1t5C+G4z3nPMg+MSS5afpullubqWu/8STUmJA3Phyl1nRFGLbO5EGR+Tvv9bYjXUAUN8m110EEXyswa1MJEYkE03/gwjnj5oFLQrCAK0R+w0HLz81Yp9aeQORM0dCXtgm8br9SUDVQmN9aFBZudwMbrzB3uSVIIDGRP2ZB+WQxRQVM8U81laTphAFzMzhUG/XOe6NiaWKOA9GN/+byyYZLJZhSJjnSCNVFOEFtjOAi9ohcpRMdmN3GtAEai60pMAGEuRm0wWg258qsvaW2nJ7JLBxCHxSR713uigu5jnIODAI9oVJShc0HjjAyKhq67sbYRpxDmpiTnFICwIEwMXEQsK20yPMOlDnvXkFyNQtfESsWySs8hp0hrzVVEkd0vTIVsR8zNF4=; Path=/]]></value>
+        <value><![CDATA[LtpaToken2=/FIiGiv6ZT+1DaoG6ebk/z6ixxaVP8pqSgM7dhJJWYyWwG40xoSHUPII2cijjg67/La6v/voO36uW3uqIMpETg8dEvErE0ainkkAnzOmg1BTBS/ELyvCAWgQaAjguUl1MJs31LyU3Was+HCCZNUvJHi6tF6JDF1xEpiBZSv5RgXoFvqzCrMp9dbawZSd/ivcMB1QfYWvUaSy//umxFZjWxInhQsaziYIIbrsbwOesQ3TwrE3y9FLiS0L/BOPpCe0rFE2eFtUHWQvvMeBw3U62J87rjAUpI1NT2BdDeqgiKCuWkWAJm1ZHCQY5nsPesOjAC8wXmNdOck+J1j55sf6UxdfnSyGwBmFVneUqGsl19DWxHkXQtcxsO98UIHPAabLETUAOGIrhQuLy0lyyrNf6Yq0L8+0GfI2FIK6zaSaa5AzXf741ePUXu+Aq6QPSBLjV2Uwk0v0x5BkvH6b2fIb8LnGebKRpF9iH1SH4GMUEpo1xEFkC2OuoBMEpjlb2N59wO/IEcV4qmpcyKMmUKpMuoLFf68Ke/ODaupSfLhyC/ZMufKqKt7nb+NZqfgLf/U9DHp25unbrIvkYSk6woq+suG/wfHJbAkQPoe5PCKBmMzdymxgjan07MAKfCw7AqKZ+NuKdvDpknUaUmMnPSaO73UF7uQi1GY2VvkjFxbodTajS4lLbDsZBXguDU3CmCx5CgqrSUKSji/C4/3U/971Yg==; Path=/; Domain=.swg.usma.ibm.com]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LCSESSIONID=0000nPM-kdQE5NPTMdEmQbTls4b:18dna4k6n; Path=/; HttpOnly]]></value>
+        <value><![CDATA[ICSESSIONID=0000UhF86pjRzfI0Ca38J_4qaQG:-1; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Expires]]></name>
@@ -62,6 +62,6 @@
         <name><![CDATA[Content-Language]]></name>
         <value><![CDATA[en-US]]></value>
     </header></headers>
-<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?><feed xmlns:app="http://www.w3.org/2007/app" xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:fh="http://purl.org/syndication/history/1.0" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns="http://www.w3.org/2005/Atom"><id>tag:profiles.ibm.com,2006:feed</id><generator version="4.5.0.0" uri="http://www.ibm.com/xmlns/prod/sn">IBM Connections - Profiles</generator><title type="text">Connections of fadams</title><author><name>IBM Connections - Profiles</name></author><updated>2014-04-18T10:58:24.588Z</updated><opensearch:totalResults>0</opensearch:totalResults><opensearch:startIndex>1</opensearch:startIndex><opensearch:itemsPerPage>10</opensearch:itemsPerPage><link href="https://qs.renovations.com:444/profiles/atom/connections.do?userid=fadams&amp;connectionType=colleague&amp;outputType=connection" rel="self" type="application/atom+xml"></link></feed>]]></data>
+<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?><feed xmlns:app="http://www.w3.org/2007/app" xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:fh="http://purl.org/syndication/history/1.0" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns="http://www.w3.org/2005/Atom"><id>tag:profiles.ibm.com,2006:feed</id><generator version="5.0.0.0" uri="http://www.ibm.com/xmlns/prod/sn">IBM Connections - Profiles</generator><title type="text">Connections of Amy Jones1</title><author><name>IBM Connections - Profiles</name></author><updated>2014-07-15T08:58:50.112Z</updated><opensearch:totalResults>0</opensearch:totalResults><opensearch:startIndex>1</opensearch:startIndex><opensearch:itemsPerPage>10</opensearch:itemsPerPage><link href="https://lcauto51.swg.usma.ibm.com/profiles/atom/connections.do?email=ajones1%40janet.iris.com%20&amp;connectionType=colleague&amp;outputType=connection" rel="self" type="application/atom+xml"></link></feed>]]></data>
 </response>
 </responses>

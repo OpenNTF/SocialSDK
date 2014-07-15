@@ -12,11 +12,11 @@
     </header>
     <header>
         <name><![CDATA[ETag]]></name>
-        <value><![CDATA["myfavoritecollections:modified=1392810441703:updated=1392810441703"]]></value>
+        <value><![CDATA["myfavoritecollections:modified=1404992296129:updated=1404992296129"]]></value>
     </header>
     <header>
         <name><![CDATA[Last-Modified]]></name>
-        <value><![CDATA[Wed, 19 Feb 2014 11:47:21 GMT]]></value>
+        <value><![CDATA[Thu, 10 Jul 2014 11:38:16 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[p3p]]></name>
@@ -44,7 +44,7 @@
     </header>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Wed, 19 Feb 2014 11:47:21 GMT]]></value>
+        <value><![CDATA[Thu, 10 Jul 2014 11:38:16 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Content-Length]]></name>
@@ -56,36 +56,36 @@
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=IUYq6lUcWMd9+sXZniWkayYfhWibVm9Qj+rQBQO2lXRJDnCFU0JjhiwuOuliMLSpMmg+68yPu0Uimz+rTijL2Pp7mAJlaP2Xc7lueaFHHtdy4CexVyqsGkJcNHhbIlTppVVCASVrFXAV6MKgUz8pRz3i5jmi9YIDrlgQ/RBHCB9Y0oaHg9hC0mmzqx3m68rfErv5+IWHNHQgWeH1Z1ZHS9Cl2yr2NrXkDEu+2uju7racIxlb5KLQBfT90Rgitr2I5q8ZYbWJtVA5hva7rr03VCMBtyIw5KTa/N2gEDn6xi2l1s+WawnZ3Ob0bXiRSSDYxM/vPNYziXbZLNT6SP+xmpoF+G+87wo5WvVWuyYAB/OOUP+OzcTtrqj8eFLLG88Ce7vVukMh/afxtgClkFTrIVhAbwTUkaqWFIZvGY8h8P4qQpB6A9y/hD+oKuRSiJyhkdZB9lVGSYe69hM4vsG0xuvSWgJLrfETHo2CbrFneijDOQLC4T9g2BAxBw7f03tBBJMQSlr+UWGPxygW0on+3lNBazIE+x+elswrNzb0Hc8rGyNPdMMCYjGObDMBXSA09fTiHHGL+QDaYhk5bT2O43iZZvIlbcMA9z3g3Ng+2kT8jX3V1m91zx9yBtp567LnFxJ6EduQgNSh4YmhPfZ6fB/J13y9ocXPajhIsC7g89SQLDQbNwE8/k+7kHsFvri4lYcVvirxRU3uXdz/kWGXlKCAssY/gPrPEycIbEN3upcdpUkGJGOxJinMrTc5Ah3U/BGFblu5lDEOs6jjLXFWIw==;Secure; Path=/]]></value>
+        <value><![CDATA[LtpaToken2=8gXtQmKGhFDDHn0HSMMmZrVrG2dVpwxt90l2UZG9CVq4YSPy3ekRJPYljTfZz0bc9ARF/oP6KOs/zfyl8sw57kLiQk5bHVakQ5n3gG2vbXiTERZJ+9cBs4eXreq3TXyMbwhpud1IpAXqm6rzLMQNB9j+sBDD8TR2zdSlOZao7R+cX+VyKNuAUJMfho5Nldi4xIUPA4VsdbD0tXyGXOKJqNXZIjcYrps2X+JjKAITZidsKl1k5aMBh8U/XY0U6NMNlHCbww2UNimsn8BiA/Tzb9rMmfJZegVQ+eG4xvwao4RUq6CjbZkV4n+6GCcLI8VRyXxLshpjhnENS8NTRo7bjPiaoKM1ENPdtPVb7nL7avE3mid5R/P/DMInWBlFQXxwb09ok5O/QnOvejd/Qi3XcYui8dU7fkCGnJqAej9Ym49C7VOL4Q2J2ettTzsJjgt34NhDSGLqhROLMP/tf9YuDm6U/H07ADVPZzNv3pEBdtUaHhDaFRqcQ6nWnOZgPi3fTE2C/qVDFNZXjdIB2RYDm1F2N5l+P0kXWkjpIj2YQ9d0ujcjvWxypaeJiWuEUbw6PNDp16XtySKW2UuLpsYnKE5uAzs1E0d4MTb+0GtQUJCk0L+nb68LgnHgTK7+mSZndZUCm8AEJSeTq05DYXVCk2PwcC7OvpQR2UEGojbyDDv2YMhSgIa5CW2BNFN9zTO4Yy4Lqpg32VknfN4UZqaSYLnklLLnpt4gn79Jjizj3W+T7iKVXiZc81G63I56c+sOxH6UHdcsjm5Nqx/Qiz+wHw==; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[entitlements=ZjhjMTFjMTQ2NGY3ZGFhNDNiYzA4ZjVjNzY5MzU3ZWVhYjNlZmFhOQ==-YmhfYWN0aXZpdGllcyxiaF9hY3Rpdml0aWVzX19hbGxvd19vdmVyYWdlLGJoX2NoYXQsYmhfY29tbXVuaXRpZXMsYmhfY29udGFjdHMsYmhfZGFzaGJvYXJkLGJoX2ZlZWRiYWNrLGJoX2ZpbGVyLGJoX2ZpbGVyX19hbGxvd19vdmVyYWdlLGJoX2Zvcm1zLGJoX2ZvcnVtcyxiaF9tZWV0aW5ncyxiaF93aGF0c19uZXcsYnNzX2FkbWluLGJzc191aV9faXNfbWFpbF9vZmZlcmluZyxic3N1aV9fZW5hYmxlX3N1YnNjcmlwdGlvbixsY19hY3Rpdml0aWVzLGxjX25ld3MsdW55dGVfZXZlbnRzLHVueXRlX21lZXRpbmcseXVuX21haWwseXVuX21haWxfX0FTLHl1bl9tYWlsX19BVix5dW5fbWFpbF9fY29ycF9hZGRyZXNzYm9vayx5dW5fbWFpbF9fZ2VuZXJhdGVkLHl1bl9tYWlsX19pbWFwLHl1bl9tYWlsX19wb3AzLHl1bl9tYWlsX19zbXRwLA==-MjA1NDc1NzQ=;Secure; Path=/]]></value>
+        <value><![CDATA[entitlements=YThmM2MyYmVjNmEwMWVlYzdjNDU4N2E2MDRlM2YxZDhjNTljNDUzMg==-YmhfYWN0aXZpdGllcyxiaF9hY3Rpdml0aWVzX19hbGxvd19vdmVyYWdlLGJoX2NoYXQsYmhfY29tbXVuaXRpZXMsYmhfY29udGFjdHMsYmhfZGFzaGJvYXJkLGJoX2ZlZWRiYWNrLGJoX2ZpbGVyLGJoX2ZpbGVyX19hbGxvd19vdmVyYWdlLGJoX2Zvcm1zLGJoX2ZvcnVtcyxiaF9tZWV0aW5ncyxiaF93aGF0c19uZXcsYnNzX2FkbWluLGJzc191aV9faXNfbWFpbF9vZmZlcmluZyxic3N1aV9fZW5hYmxlX3N1YnNjcmlwdGlvbixsY19hY3Rpdml0aWVzLGxjX25ld3Msc2FtZXRpbWVfbWVldGluZyx1bnl0ZV9ldmVudHMsdW55dGVfbWVldGluZyx5dW5fbWFpbCx5dW5fbWFpbF9fQVMseXVuX21haWxfX0FWLHl1bl9tYWlsX19jb3JwX2FkZHJlc3Nib29rLHl1bl9tYWlsX19nZW5lcmF0ZWQseXVuX21haWxfX2ltYXAseXVuX21haWxfX3BvcDMseXVuX21haWxfX3NtdHAs-MjA1NDc1NzQ=; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[csrf_token=1a9f00f3-87ac-4a5a-9b74-56614b2f32fe;Secure; Path=/]]></value>
+        <value><![CDATA[csrf_token=09c316e8-47e0-437e-b031-3b1355faea00; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[csrf_token_forum=7150592d-24e6-4091-95ab-2d2993bf4a34;Secure; Path=/]]></value>
+        <value><![CDATA[csrf_token_forum=e61ee868-4b16-45c2-9f37-eb2b13e03627; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[JSESSIONID=0000rSZrhD6AqWF16_yUrwkhwvE:18dl2igds;Secure; Path=/]]></value>
+        <value><![CDATA[JSESSIONID=0000lkcec2iNoRGPeXMLnH5eLwe:18nrc8tn9; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[user_lang=ZW5fVVM%3D-MjA1NDc1NzQ%3D;Secure; Domain=na.collabserv.com; Path=/; Expires=Thu, 20-Feb-14 11:47:21 GMT;Secure;]]></value>
+        <value><![CDATA[user_lang=ZW5fVVM%3D-MjA1NDc1NzQ%3D; Domain=na.collabserv.com; Path=/; Expires=Fri, 11-Jul-14 11:38:16 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[BIGipServerE3A-AC-9081-fe=2116226826.31011.0000;Secure; Path=/]]></value>
+        <value><![CDATA[BIGipServerE3B-AC-9081-fe=2267221770.31011.0000; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[BIGipServerE3A-WebSEAL-80-fe=2116029706.20480.0000;secure; path=/]]></value>
+        <value><![CDATA[BIGipServerE3B-WebSEAL-80-fe=2334133514.20480.0000; path=/]]></value>
     </header></headers>
-<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?><feed xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:td="urn:ibm.com/td" xmlns="http://www.w3.org/2005/Atom"><id>urn:lsid:ibm.com:td:collections</id><link href="https://apps.na.collabserv.com/files/basic/api/myfavorites/collections/feed" rel="self"></link><link href="https://apps.na.collabserv.com/files/app/folders/pinned" rel="alternate"></link><title type="text">Pinned Folders Feed</title><author><name>Frank Adams</name><snx:userid>20547574</snx:userid><snx:orgId>20542369</snx:orgId><snx:orgName>IBM Test - SDK Renovations</snx:orgName><email></email><snx:userState>active</snx:userState></author><updated>2014-02-19T11:47:21.703Z</updated><generator version="4.5.0.0" uri="http://www.ibm.com/xmlns/prod/sn">IBM Connections - Files</generator><opensearch:totalResults>0</opensearch:totalResults></feed>]]></data>
+<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?><feed xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:td="urn:ibm.com/td" xmlns="http://www.w3.org/2005/Atom"><id>urn:lsid:ibm.com:td:collections</id><link href="https://apps.na.collabserv.com/files/basic/api/myfavorites/collections/feed" rel="self"></link><link href="https://apps.na.collabserv.com/files/app/folders/pinned" rel="alternate"></link><title type="text">Pinned Folders Feed</title><author><name>Frank Adams</name><snx:userid>20547574</snx:userid><snx:orgId>20542369</snx:orgId><snx:orgName>IBM Test - SDK Renovations</snx:orgName><email></email><snx:userState>active</snx:userState></author><updated>2014-07-10T11:38:16.129Z</updated><generator version="4.5.0.0" uri="http://www.ibm.com/xmlns/prod/sn">IBM Connections - Files</generator><opensearch:totalResults>0</opensearch:totalResults></feed>]]></data>
 </response>
 </responses>

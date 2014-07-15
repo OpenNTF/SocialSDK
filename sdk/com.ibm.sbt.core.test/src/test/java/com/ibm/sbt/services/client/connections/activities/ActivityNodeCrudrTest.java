@@ -73,7 +73,7 @@ public class ActivityNodeCrudrTest extends BaseActivityServiceTest {
 		
 		ActivityNode updated = activityService.getActivityNode(created.getActivityNodeUuid());
 		
-		Assert.assertEquals(read.getTitle(), updated.getTitle());
+		Assert.assertEquals(unRandomize(read.getTitle()), unRandomize(updated.getTitle()));
 		
 		read = activityService.getActivityNode(created.getActivityNodeUuid());
 		
@@ -111,7 +111,7 @@ public class ActivityNodeCrudrTest extends BaseActivityServiceTest {
 		ActivityNode read = activityService.getActivityNode(created.getActivityNodeUuid());
 
 		Assert.assertEquals(created.getActivityNodeUuid(), read.getActivityNodeUuid());
-		Assert.assertEquals(created.getTitle(), read.getTitle());
+		Assert.assertEquals(unRandomize(created.getTitle()), unRandomize(read.getTitle()));
 
 		//System.out.println("RESTORED: " + restored.toXmlString());
 		//System.out.println("READ: " + read.toXmlString());

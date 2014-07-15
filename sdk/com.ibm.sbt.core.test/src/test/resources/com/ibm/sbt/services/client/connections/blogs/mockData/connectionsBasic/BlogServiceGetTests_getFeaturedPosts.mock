@@ -4,7 +4,7 @@
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Fri, 18 Apr 2014 10:49:31 GMT]]></value>
+        <value><![CDATA[Thu, 10 Jul 2014 12:16:41 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -16,35 +16,31 @@
     </header>
     <header>
         <name><![CDATA[X-UA-Compatible]]></name>
-        <value><![CDATA[IE=EmulateIE7]]></value>
+        <value><![CDATA[IE=9,8]]></value>
     </header>
     <header>
         <name><![CDATA[Expires]]></name>
-        <value><![CDATA[Fri, 18 Apr 2014 10:59:31 GMT]]></value>
+        <value><![CDATA[Thu, 10 Jul 2014 12:26:41 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Last-Modified]]></name>
-        <value><![CDATA[Fri, 18 Apr 2014 10:49:29 GMT]]></value>
+        <value><![CDATA[Thu, 10 Jul 2014 12:16:38 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Content-Length]]></name>
+        <value><![CDATA[13447]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken=4Jl4eoIZPslwG9B4GlAzZRhQIcHYFZKTXCS4xInQ3bt/SRk3Nge9rF8oHhsccc8O4kRAzrZVxe0LiW5QxIaY/rP2I7oko4g5QJ7cZeIzqQYrLc+h4YQfdZXR2m6iVOwmiZ/lAO4bCeUle6oy2igewRrjSgKx2fXQ1D1lIlcnnE8GoBL1wAkjxhYo4CDmS5ENa9q4jS0OrhfhowB6OIb9U/hdkwwvBWyWrRkmn5JlWw+HR5frFnsk1+gStxJClMEcjaSF0hIH98fComvHgfHKYj0skRB2uKDsnDwyIgiCou959sojQ0GNrL+7IgSw9CgVQYM74+5oMkW6pCZNCEwc1g==; Path=/]]></value>
+        <value><![CDATA[LtpaToken2=Ppsrcr7hseKUnDjcR1LhJyMcKB8uHa3eEcFVse3iIlMPfbeOTOEGZ1FyeOJxuqcbaX0RMxcL7FUvGujzyaN9yGnNv2+NLz67YbABjzDvWiAO+TZqsELVWwwpjtL17o7ZN51yBS3uSmP9KWMP7OmqVJkIFuUjQedpOb2iIHFjIkfluvC6VRa3C766zV5d1b3ng0IcyJu1ItichrPrzJTTr1HrxkpxWLD214IrXZDBZnRTefcrEMmMe8NK9/WdpYQPl/m6V/m+awp7MLrHeAYZtxVBNHXKJZ3Ur5xHXLe6/P6P0Y4TIeKMuXnnEDpR6XowXndTABs1Q72ke4z9cIGaVcZEnL4TMgXGGn2UTCZRckCB5IYom1t6V5Gm8zgo0JVn5Pskz+b4vIO0h7Z80LgUgPTl7O2GPWpmy+Ot5ujUaeJfyXtphIDsF6bOYgRwBc3j8rPTIrqrSbT08fCdrAu69sya9HrEYf2hWQ8VWulWAgeM8/WDPBGDLZdm7C+nTmWr1ZIxQJyYBKY/VXJO/doQbGPh3Elt6+tfJbpLsRlJoTzZaf//TxdlUOEpeWGu1lynLkmQKeEnznA+Agrb+EIjDfYufDBxzkOeQooYiUyuX7++4qfTxfsshVX+3Pckp/5s2fPG+aD/QJ0To8C2HwcILkisgFw8dP1eJKdUwRhjx3jLpq/W0P9INm07n2X+83O8Uf4fu0nCu2ZmcYxGHz3BpQ==; Path=/; Domain=.swg.usma.ibm.com]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=FmGDaIpr/a19HBjbuJkI5VVAjSaJJkL6LSNqAl2z35XH0ma/GLu+MVGQnFnkWLsn2b7XpNqT5/Ci/wbfOinrV+TxGFsHt7954nnah7UE5U2ml6W0n9+sb8XTxJsh6D3ZEXugnA51B5X2bClRu894aV+KdvemaK3tFZuyvipjbJeukZgrJnl1xAgWbCq69ffKnuyfdzv8qmQZ4MfIDm0mSJ35UyTVLOo/dUAzpsD7s/Kx00n685tybHpk34p3ksNxCxn1QrZ8Y0Q0cLPA8nCsYdC9lIOAmOMbzkXLgszYSnCczascVzXqqXv3QGWGl8EBNhnT1YCW20ym4NsR3jOmnoidWkPnzVTd8b1t5C+G4z3nPMg+MSS5afpullubqWu/8STUmJA3Phyl1nRFGLbO5EGR+Tvv9bYjXUAUN8m110EEXyswa1MJEYkE03/gwjnj5oFLQrCAK0R+w0HLz81Yp9aeQORM0dCXtgm8br9SUDVQmN9aFBZudwMbrzB3uSVIIDGRP2ZB+WQxRQVM8U81laTphAFzMzhUG/XOe6NiaWKOA9GN/+byyYZLJZhSJjnSCNVFOEFtjOAi9ohcpRMdmN3GtAEai60pMAGEuRm0wWg258qsvaW2nJ7JLBxCHxSR713uigu5jnIODAI9oVJShc0HjjAyKhq67sbYRpxDmpiTnFICwIEwMXEQsK20yPMOlDnvXkFyNQtfESsWySs8hp0hrzVVEkd0vTIVsR8zNF4=; Path=/]]></value>
-    </header>
-    <header>
-        <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LCSESSIONID=00007o0UCGlqCH2113MM0DXcwtW:18dna4k6n; Path=/; HttpOnly]]></value>
+        <value><![CDATA[ICSESSIONID=0000IEV58u_iv_CL1SWw4tqvGyq:-1; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Cache-Control]]></name>
         <value><![CDATA[public, max-age=600, s-maxage=600, no-cache=set-cookie]]></value>
-    </header>
-    <header>
-        <name><![CDATA[Content-Length]]></name>
-        <value><![CDATA[15748]]></value>
     </header>
     <header>
         <name><![CDATA[Keep-Alive]]></name>
@@ -74,211 +70,171 @@
   <title type="text">Blogs - Featured Entries</title>
   <subtitle type="text">Featured Blog Entries</subtitle>  
   <id>urn:lsid:ibm.com:blogs:featured</id>
-  <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/blogs?lang=en_us" />
-  <link rel="self" type="application/atom+xml" href="https://qs.renovations.com:444/blogs/homepage/feed/featured/atom?lang=en_us" />
-  <updated>2014-04-18T05:49:31-05:00</updated>
-  <opensearch:totalResults>5</opensearch:totalResults>
-	<generator uri="http://www.ibm.com/xmlns/prod/sn" version="4.5.0.0">IBM Connections - Blogs</generator>
-      <entry xml:base="https://dev.sdkdemo.com:444/blogs/BlogHandle1395237859166/entry/blogpost_at_1395237969831" xml:lang="en-US" >
-      <id>urn:lsid:ibm.com:blogs:entry-61afae3d-7703-4f90-9288-55f51dc46a22</id>
-      <title type="text">BlogPost at 1395237969831</title>
+  <link rel="alternate" type="text/html" href="https://lcauto19.swg.usma.ibm.com/blogs?lang=en_us" />
+  <link rel="self" type="application/atom+xml" href="https://lcauto19.swg.usma.ibm.com/blogs/homepage/feed/featured/atom?lang=en_us" />
+  <updated>2014-07-10T08:16:41-04:00</updated>
+  <opensearch:totalResults>4</opensearch:totalResults>
+	<generator uri="http://www.ibm.com/xmlns/prod/sn" version="5.0.0.0">IBM Connections - Blogs</generator>
+      <entry xml:base="https://lcauto19.swg.usma.ibm.com/blogs/TestHandle1404991252717/entry/Test_Blog_Post1404991253827" xml:lang="en-US" >
+      <id>urn:lsid:ibm.com:blogs:entry-ead263f2-1667-4863-b4a5-c930f36b1e69</id>
+      <title type="text">Test Blog Post1404991253827</title>
       <author>
-        <name>Frank Adams</name>
-                <email>fadams@renovations.com</email>
-                <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+        <name>Amy Jones101</name>
+                <email>ajones101@janet.iris.com</email>
+                <snx:userid>8cbefec0-f6df-1032-9ad5-d02a14283ea9</snx:userid>
                 <snx:userState>active</snx:userState>
-              </author>
-            <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/blogs/BlogHandle1395237859166/entry/blogpost_at_1395237969831?lang=en_us"/>
-      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/blogs/BlogHandle1395237859166/feed/entry/atom?entryid=61afae3d-7703-4f90-9288-55f51dc46a22&amp;lang=en_us"/>
-            <link rel="replies" type="application/atom+xml" href="https://dev.sdkdemo.com:444/blogs/BlogHandle1395237859166/feed/entrycomments/blogpost_at_1395237969831/atom?lang=en_us" thr:count="0"/>
-      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://dev.sdkdemo.com:444/blogs/BlogHandle1395237859166/feed/entryrecommendations/61afae3d-7703-4f90-9288-55f51dc46a22/atom?lang=en_us"/>
-      <app:collection href="https://dev.sdkdemo.com:444/blogs/BlogHandle1395237859166/api/entrycomments/61afae3d-7703-4f90-9288-55f51dc46a22?lang=en_us">
+                <snx:isExternal>false</snx:isExternal>
+      </author>
+                  <link rel="alternate" type="text/html" href="https://lcauto19.swg.usma.ibm.com/blogs/TestHandle1404991252717/entry/Test_Blog_Post1404991253827?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://lcauto19.swg.usma.ibm.com/blogs/TestHandle1404991252717/feed/entry/atom?entryid=ead263f2-1667-4863-b4a5-c930f36b1e69&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://lcauto19.swg.usma.ibm.com/blogs/TestHandle1404991252717/feed/entrycomments/Test_Blog_Post1404991253827/atom?lang=en_us" thr:count="0"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://lcauto19.swg.usma.ibm.com/blogs/TestHandle1404991252717/feed/entryrecommendations/ead263f2-1667-4863-b4a5-c930f36b1e69/atom?lang=en_us"/>
+      <app:collection href="https://lcauto19.swg.usma.ibm.com/blogs/TestHandle1404991252717/api/entrycomments/ead263f2-1667-4863-b4a5-c930f36b1e69?lang=en_us">
 		<title type="text">Comment Entries</title>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
 		<app:categories fixed="yes"/>
-		<app:accept />
+		<app:accept>application/atom+xml;type=entry</app:accept>
 	  </app:collection>
-	  <app:collection href="https://dev.sdkdemo.com:444/blogs/BlogHandle1395237859166/api/recommend/entries/61afae3d-7703-4f90-9288-55f51dc46a22?lang=en_us">
+	  <app:collection href="https://lcauto19.swg.usma.ibm.com/blogs/TestHandle1404991252717/api/recommend/entries/ead263f2-1667-4863-b4a5-c930f36b1e69?lang=en_us">
 		<title type="text">Likes</title>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
 		<app:categories fixed="yes"/>
 		<snx:enabled>true</snx:enabled>
 	  </app:collection>
-      <published>2014-03-19T09:06:37-05:00</published>
-      <updated>2014-03-19T09:06:37-05:00</updated>
+      <published>2014-07-10T07:19:35-04:00</published>
+      <updated>2014-07-10T07:19:35-04:00</updated>
       <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
       <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">0</snx:rank>
-      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">1</snx:rank>
       <source>
-        <id>urn:lsid:ibm.com:blogs:entries-796a7f6d-5d94-421e-a397-d6f18fa3e752</id>
-        <title type="text">Blog at 1395237859166</title>
-        <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/BlogHandle1395237859166/feed/entries/atom?lang=en_us" />
-        <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/BlogHandle1395237859166?lang=en_us"/>
-        <updated>2014-03-19T09:06:37-05:00</updated>
+        <id>urn:lsid:ibm.com:blogs:entries-0d2a6ffd-28b2-4496-b918-1095374cea10</id>
+        <title type="text">Test Blog1404991252717</title>
+        <link type="application/atom+xml" rel="self" href="https://lcauto19.swg.usma.ibm.com/blogs/TestHandle1404991252717/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://lcauto19.swg.usma.ibm.com/blogs/TestHandle1404991252717?lang=en_us"/>
+        <updated>2014-07-10T07:19:35-04:00</updated>
 		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
       </source>
     </entry>
-
-    <entry xml:base="https://dev.sdkdemo.com:444/blogs/BlogHandle1395237995541/entry/blogpost_at_1395238056766" xml:lang="en-US" >
-      <id>urn:lsid:ibm.com:blogs:entry-821107ba-f95b-4147-b9dd-43578968b4cd</id>
-      <title type="text">BlogPost at 1395238056766</title>
+    <entry xml:base="https://lcauto19.swg.usma.ibm.com/blogs/TestHandle1404994652340/entry/Test_Blog_Post1404994653673" xml:lang="en-US" >
+      <id>urn:lsid:ibm.com:blogs:entry-850ac876-7f2a-4e4f-b23f-4d912dce5eb3</id>
+      <title type="text">Test Blog Post1404994653673</title>
       <author>
-        <name>Frank Adams</name>
-                <email>fadams@renovations.com</email>
-                <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+        <name>Amy Jones101</name>
+                <email>ajones101@janet.iris.com</email>
+                <snx:userid>8cbefec0-f6df-1032-9ad5-d02a14283ea9</snx:userid>
                 <snx:userState>active</snx:userState>
-              </author>
-            <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/blogs/BlogHandle1395237995541/entry/blogpost_at_1395238056766?lang=en_us"/>
-      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/blogs/BlogHandle1395237995541/feed/entry/atom?entryid=821107ba-f95b-4147-b9dd-43578968b4cd&amp;lang=en_us"/>
-            <link rel="replies" type="application/atom+xml" href="https://dev.sdkdemo.com:444/blogs/BlogHandle1395237995541/feed/entrycomments/blogpost_at_1395238056766/atom?lang=en_us" thr:count="0"/>
-      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://dev.sdkdemo.com:444/blogs/BlogHandle1395237995541/feed/entryrecommendations/821107ba-f95b-4147-b9dd-43578968b4cd/atom?lang=en_us"/>
-      <app:collection href="https://dev.sdkdemo.com:444/blogs/BlogHandle1395237995541/api/entrycomments/821107ba-f95b-4147-b9dd-43578968b4cd?lang=en_us">
+                <snx:isExternal>false</snx:isExternal>
+      </author>
+                  <link rel="alternate" type="text/html" href="https://lcauto19.swg.usma.ibm.com/blogs/TestHandle1404994652340/entry/Test_Blog_Post1404994653673?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://lcauto19.swg.usma.ibm.com/blogs/TestHandle1404994652340/feed/entry/atom?entryid=850ac876-7f2a-4e4f-b23f-4d912dce5eb3&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://lcauto19.swg.usma.ibm.com/blogs/TestHandle1404994652340/feed/entrycomments/Test_Blog_Post1404994653673/atom?lang=en_us" thr:count="1"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://lcauto19.swg.usma.ibm.com/blogs/TestHandle1404994652340/feed/entryrecommendations/850ac876-7f2a-4e4f-b23f-4d912dce5eb3/atom?lang=en_us"/>
+      <app:collection href="https://lcauto19.swg.usma.ibm.com/blogs/TestHandle1404994652340/api/entrycomments/850ac876-7f2a-4e4f-b23f-4d912dce5eb3?lang=en_us">
 		<title type="text">Comment Entries</title>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
 		<app:categories fixed="yes"/>
-		<app:accept />
+		<app:accept>application/atom+xml;type=entry</app:accept>
 	  </app:collection>
-	  <app:collection href="https://dev.sdkdemo.com:444/blogs/BlogHandle1395237995541/api/recommend/entries/821107ba-f95b-4147-b9dd-43578968b4cd?lang=en_us">
+	  <app:collection href="https://lcauto19.swg.usma.ibm.com/blogs/TestHandle1404994652340/api/recommend/entries/850ac876-7f2a-4e4f-b23f-4d912dce5eb3?lang=en_us">
 		<title type="text">Likes</title>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
 		<app:categories fixed="yes"/>
 		<snx:enabled>true</snx:enabled>
 	  </app:collection>
-      <published>2014-03-19T09:08:05-05:00</published>
-      <updated>2014-03-19T09:08:05-05:00</updated>
-      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
-      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">0</snx:rank>
-      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
-      <source>
-        <id>urn:lsid:ibm.com:blogs:entries-dd7f1488-23e5-4deb-952d-0ec552f13f8a</id>
-        <title type="text">Blog at 1395237995541</title>
-        <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/BlogHandle1395237995541/feed/entries/atom?lang=en_us" />
-        <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/BlogHandle1395237995541?lang=en_us"/>
-        <updated>2014-03-19T09:08:05-05:00</updated>
-		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
-      </source>
-    </entry>
-
-    <entry xml:base="https://dev.sdkdemo.com:444/blogs/BlogHandle1395237859166/entry/blogpost_at_1395237949727" xml:lang="en-US" >
-      <id>urn:lsid:ibm.com:blogs:entry-64ff74fa-7a1c-45c7-a624-35eadc7f03fc</id>
-      <title type="text">BlogPost at 1395237949727</title>
-      <author>
-        <name>Frank Adams</name>
-                <email>fadams@renovations.com</email>
-                <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
-                <snx:userState>active</snx:userState>
-              </author>
-            <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/blogs/BlogHandle1395237859166/entry/blogpost_at_1395237949727?lang=en_us"/>
-      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/blogs/BlogHandle1395237859166/feed/entry/atom?entryid=64ff74fa-7a1c-45c7-a624-35eadc7f03fc&amp;lang=en_us"/>
-            <link rel="replies" type="application/atom+xml" href="https://dev.sdkdemo.com:444/blogs/BlogHandle1395237859166/feed/entrycomments/blogpost_at_1395237949727/atom?lang=en_us" thr:count="1"/>
-      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://dev.sdkdemo.com:444/blogs/BlogHandle1395237859166/feed/entryrecommendations/64ff74fa-7a1c-45c7-a624-35eadc7f03fc/atom?lang=en_us"/>
-      <app:collection href="https://dev.sdkdemo.com:444/blogs/BlogHandle1395237859166/api/entrycomments/64ff74fa-7a1c-45c7-a624-35eadc7f03fc?lang=en_us">
-		<title type="text">Comment Entries</title>
-		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
-		<app:categories fixed="yes"/>
-		<app:accept />
-	  </app:collection>
-	  <app:collection href="https://dev.sdkdemo.com:444/blogs/BlogHandle1395237859166/api/recommend/entries/64ff74fa-7a1c-45c7-a624-35eadc7f03fc?lang=en_us">
-		<title type="text">Likes</title>
-		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
-		<app:categories fixed="yes"/>
-		<snx:enabled>true</snx:enabled>
-	  </app:collection>
-      <published>2014-03-19T09:06:17-05:00</published>
-      <updated>2014-03-19T09:06:17-05:00</updated>
+      <published>2014-07-10T08:16:14-04:00</published>
+      <updated>2014-07-10T08:16:14-04:00</updated>
       <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
       <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">1</snx:rank>
       <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
       <source>
-        <id>urn:lsid:ibm.com:blogs:entries-796a7f6d-5d94-421e-a397-d6f18fa3e752</id>
-        <title type="text">Blog at 1395237859166</title>
-        <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/BlogHandle1395237859166/feed/entries/atom?lang=en_us" />
-        <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/BlogHandle1395237859166?lang=en_us"/>
-        <updated>2014-03-19T09:06:37-05:00</updated>
+        <id>urn:lsid:ibm.com:blogs:entries-dca4f95c-ae04-4285-8d0a-96e7ffc74f70</id>
+        <title type="text">Test Blog1404994652340</title>
+        <link type="application/atom+xml" rel="self" href="https://lcauto19.swg.usma.ibm.com/blogs/TestHandle1404994652340/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://lcauto19.swg.usma.ibm.com/blogs/TestHandle1404994652340?lang=en_us"/>
+        <updated>2014-07-10T08:16:16-04:00</updated>
 		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
       </source>
     </entry>
-
-    <entry xml:base="https://dev.sdkdemo.com:444/blogs/BlogHandle1395237859166/entry/blogpost_at_1395237927717" xml:lang="en-US" >
-      <id>urn:lsid:ibm.com:blogs:entry-76ede35a-c440-4f05-8868-d0eef80bbcf1</id>
-      <title type="text">BlogPost at 1395237927717</title>
+    <entry xml:base="https://lcauto19.swg.usma.ibm.com/blogs/TestHandle1404994648090/entry/Test_Blog_Post1404994649464" xml:lang="en-US" >
+      <id>urn:lsid:ibm.com:blogs:entry-ede5128a-fdd4-4d9b-ab80-58277d9f4bf2</id>
+      <title type="text">Test Blog Post1404994649464</title>
       <author>
-        <name>Frank Adams</name>
-                <email>fadams@renovations.com</email>
-                <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
+        <name>Amy Jones101</name>
+                <email>ajones101@janet.iris.com</email>
+                <snx:userid>8cbefec0-f6df-1032-9ad5-d02a14283ea9</snx:userid>
                 <snx:userState>active</snx:userState>
-              </author>
-            <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/blogs/BlogHandle1395237859166/entry/blogpost_at_1395237927717?lang=en_us"/>
-      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/blogs/BlogHandle1395237859166/feed/entry/atom?entryid=76ede35a-c440-4f05-8868-d0eef80bbcf1&amp;lang=en_us"/>
-            <link rel="replies" type="application/atom+xml" href="https://dev.sdkdemo.com:444/blogs/BlogHandle1395237859166/feed/entrycomments/blogpost_at_1395237927717/atom?lang=en_us" thr:count="1"/>
-      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://dev.sdkdemo.com:444/blogs/BlogHandle1395237859166/feed/entryrecommendations/76ede35a-c440-4f05-8868-d0eef80bbcf1/atom?lang=en_us"/>
-      <app:collection href="https://dev.sdkdemo.com:444/blogs/BlogHandle1395237859166/api/entrycomments/76ede35a-c440-4f05-8868-d0eef80bbcf1?lang=en_us">
+                <snx:isExternal>false</snx:isExternal>
+      </author>
+                  <link rel="alternate" type="text/html" href="https://lcauto19.swg.usma.ibm.com/blogs/TestHandle1404994648090/entry/Test_Blog_Post1404994649464?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://lcauto19.swg.usma.ibm.com/blogs/TestHandle1404994648090/feed/entry/atom?entryid=ede5128a-fdd4-4d9b-ab80-58277d9f4bf2&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://lcauto19.swg.usma.ibm.com/blogs/TestHandle1404994648090/feed/entrycomments/Test_Blog_Post1404994649464/atom?lang=en_us" thr:count="0"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://lcauto19.swg.usma.ibm.com/blogs/TestHandle1404994648090/feed/entryrecommendations/ede5128a-fdd4-4d9b-ab80-58277d9f4bf2/atom?lang=en_us"/>
+      <app:collection href="https://lcauto19.swg.usma.ibm.com/blogs/TestHandle1404994648090/api/entrycomments/ede5128a-fdd4-4d9b-ab80-58277d9f4bf2?lang=en_us">
 		<title type="text">Comment Entries</title>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
 		<app:categories fixed="yes"/>
-		<app:accept />
+		<app:accept>application/atom+xml;type=entry</app:accept>
 	  </app:collection>
-	  <app:collection href="https://dev.sdkdemo.com:444/blogs/BlogHandle1395237859166/api/recommend/entries/76ede35a-c440-4f05-8868-d0eef80bbcf1?lang=en_us">
+	  <app:collection href="https://lcauto19.swg.usma.ibm.com/blogs/TestHandle1404994648090/api/recommend/entries/ede5128a-fdd4-4d9b-ab80-58277d9f4bf2?lang=en_us">
 		<title type="text">Likes</title>
 		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
 		<app:categories fixed="yes"/>
 		<snx:enabled>true</snx:enabled>
 	  </app:collection>
-      <published>2014-03-19T09:05:56-05:00</published>
-      <updated>2014-03-19T09:05:56-05:00</updated>
+      <published>2014-07-10T08:16:10-04:00</published>
+      <updated>2014-07-10T08:16:10-04:00</updated>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">0</snx:rank>
+      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">1</snx:rank>
+      <source>
+        <id>urn:lsid:ibm.com:blogs:entries-c9d229fe-9dd2-4f41-bcf1-55dc7d1b61b0</id>
+        <title type="text">Test Blog1404994648090</title>
+        <link type="application/atom+xml" rel="self" href="https://lcauto19.swg.usma.ibm.com/blogs/TestHandle1404994648090/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://lcauto19.swg.usma.ibm.com/blogs/TestHandle1404994648090?lang=en_us"/>
+        <updated>2014-07-10T08:16:10-04:00</updated>
+		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
+      </source>
+    </entry>
+    <entry xml:base="https://lcauto19.swg.usma.ibm.com/blogs/TestHandle1404991256346/entry/Test_Blog_Post1404991257730" xml:lang="en-US" >
+      <id>urn:lsid:ibm.com:blogs:entry-481136a8-4372-446a-8256-9a4fd5c4b0b2</id>
+      <title type="text">Test Blog Post1404991257730</title>
+      <author>
+        <name>Amy Jones101</name>
+                <email>ajones101@janet.iris.com</email>
+                <snx:userid>8cbefec0-f6df-1032-9ad5-d02a14283ea9</snx:userid>
+                <snx:userState>active</snx:userState>
+                <snx:isExternal>false</snx:isExternal>
+      </author>
+                  <link rel="alternate" type="text/html" href="https://lcauto19.swg.usma.ibm.com/blogs/TestHandle1404991256346/entry/Test_Blog_Post1404991257730?lang=en_us"/>
+      <link rel="self" type="application/atom+xml" href="https://lcauto19.swg.usma.ibm.com/blogs/TestHandle1404991256346/feed/entry/atom?entryid=481136a8-4372-446a-8256-9a4fd5c4b0b2&amp;lang=en_us"/>
+            <link rel="replies" type="application/atom+xml" href="https://lcauto19.swg.usma.ibm.com/blogs/TestHandle1404991256346/feed/entrycomments/Test_Blog_Post1404991257730/atom?lang=en_us" thr:count="1"/>
+      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://lcauto19.swg.usma.ibm.com/blogs/TestHandle1404991256346/feed/entryrecommendations/481136a8-4372-446a-8256-9a4fd5c4b0b2/atom?lang=en_us"/>
+      <app:collection href="https://lcauto19.swg.usma.ibm.com/blogs/TestHandle1404991256346/api/entrycomments/481136a8-4372-446a-8256-9a4fd5c4b0b2?lang=en_us">
+		<title type="text">Comment Entries</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
+		<app:categories fixed="yes"/>
+		<app:accept>application/atom+xml;type=entry</app:accept>
+	  </app:collection>
+	  <app:collection href="https://lcauto19.swg.usma.ibm.com/blogs/TestHandle1404991256346/api/recommend/entries/481136a8-4372-446a-8256-9a4fd5c4b0b2?lang=en_us">
+		<title type="text">Likes</title>
+		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
+		<app:categories fixed="yes"/>
+		<snx:enabled>true</snx:enabled>
+	  </app:collection>
+      <published>2014-07-10T07:19:39-04:00</published>
+      <updated>2014-07-10T07:19:39-04:00</updated>
       <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
       <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">1</snx:rank>
       <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
       <source>
-        <id>urn:lsid:ibm.com:blogs:entries-796a7f6d-5d94-421e-a397-d6f18fa3e752</id>
-        <title type="text">Blog at 1395237859166</title>
-        <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/BlogHandle1395237859166/feed/entries/atom?lang=en_us" />
-        <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/BlogHandle1395237859166?lang=en_us"/>
-        <updated>2014-03-19T09:06:37-05:00</updated>
+        <id>urn:lsid:ibm.com:blogs:entries-28cb3dda-c45c-4597-abf5-8b3805f5f964</id>
+        <title type="text">Test Blog1404991256346</title>
+        <link type="application/atom+xml" rel="self" href="https://lcauto19.swg.usma.ibm.com/blogs/TestHandle1404991256346/feed/entries/atom?lang=en_us" />
+        <link type="text/html" rel="alternate" href="https://lcauto19.swg.usma.ibm.com/blogs/TestHandle1404991256346?lang=en_us"/>
+        <updated>2014-07-10T07:19:40-04:00</updated>
 		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
       </source>
     </entry>
-
-    <entry xml:base="https://dev.sdkdemo.com:444/blogs/BlogHandle1395237859166/entry/blogpost_at_1395237905035" xml:lang="en-US" >
-      <id>urn:lsid:ibm.com:blogs:entry-c4ca4953-d058-4cbb-ba2e-b0fb8da5ba10</id>
-      <title type="text">BlogPost at 1395237905035</title>
-      <author>
-        <name>Frank Adams</name>
-                <email>fadams@renovations.com</email>
-                <snx:userid>EFD413BC-E572-760A-8625-7C6E00506453</snx:userid>
-                <snx:userState>active</snx:userState>
-              </author>
-            <link rel="alternate" type="text/html" href="https://dev.sdkdemo.com:444/blogs/BlogHandle1395237859166/entry/blogpost_at_1395237905035?lang=en_us"/>
-      <link rel="self" type="application/atom+xml" href="https://dev.sdkdemo.com:444/blogs/BlogHandle1395237859166/feed/entry/atom?entryid=c4ca4953-d058-4cbb-ba2e-b0fb8da5ba10&amp;lang=en_us"/>
-            <link rel="replies" type="application/atom+xml" href="https://dev.sdkdemo.com:444/blogs/BlogHandle1395237859166/feed/entrycomments/blogpost_at_1395237905035/atom?lang=en_us" thr:count="0"/>
-      <link rel="http://www.ibm.com/xmlns/prod/sn/recommendations" href="https://dev.sdkdemo.com:444/blogs/BlogHandle1395237859166/feed/entryrecommendations/c4ca4953-d058-4cbb-ba2e-b0fb8da5ba10/atom?lang=en_us"/>
-      <app:collection href="https://dev.sdkdemo.com:444/blogs/BlogHandle1395237859166/api/entrycomments/c4ca4953-d058-4cbb-ba2e-b0fb8da5ba10?lang=en_us">
-		<title type="text">Comment Entries</title>
-		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="comments" />
-		<app:categories fixed="yes"/>
-		<app:accept />
-	  </app:collection>
-	  <app:collection href="https://dev.sdkdemo.com:444/blogs/BlogHandle1395237859166/api/recommend/entries/c4ca4953-d058-4cbb-ba2e-b0fb8da5ba10?lang=en_us">
-		<title type="text">Likes</title>
-		<category scheme="http://www.ibm.com/xmlns/prod/sn/collection" term="recommend" />
-		<app:categories fixed="yes"/>
-		<snx:enabled>true</snx:enabled>
-	  </app:collection>
-      <published>2014-03-19T09:05:35-05:00</published>
-      <updated>2014-03-19T09:05:35-05:00</updated>
-      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/recommendations">0</snx:rank>
-      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/comment">0</snx:rank>
-      <snx:rank scheme="http://www.ibm.com/xmlns/prod/sn/hit">0</snx:rank>
-      <source>
-        <id>urn:lsid:ibm.com:blogs:entries-796a7f6d-5d94-421e-a397-d6f18fa3e752</id>
-        <title type="text">Blog at 1395237859166</title>
-        <link type="application/atom+xml" rel="self" href="https://dev.sdkdemo.com:444/blogs/BlogHandle1395237859166/feed/entries/atom?lang=en_us" />
-        <link type="text/html" rel="alternate" href="https://dev.sdkdemo.com:444/blogs/BlogHandle1395237859166?lang=en_us"/>
-        <updated>2014-03-19T09:06:37-05:00</updated>
-		<category term="blog" scheme="http://www.ibm.com/xmlns/prod/sn/type" />
-      </source>
-    </entry>
-
 </feed>
 ]]></data>
 </response>

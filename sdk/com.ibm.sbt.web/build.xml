@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<project name="JSbuild" default="build" basedir=".">
+	<property environment="env" />
+
+	<!-- PROPERTIES -->
+	<target name="properties">
+		<property file="./tools.properties" />
+		<condition property="dojo.build" value="${scriptsFolder}/${dojo.build.win}">
+			<os family="windows" />
+		</condition>
+		<condition property="dojo.build" value="${scriptsFolder}/${dojo.build.nix}">
+			<os family="unix" />
+		</condition>
+		<!-- if you have mixed path separators in the release dir shrinksafe die with a out of memory: heap exception -->
+		<echo message="Dojo Build Tool executable: ${dojo.build}" />
+		<path id="release.tmp">
+			<pathelement location="${release.path}" />
+		</path>
+
+		<pathconvert targetos="unix" property="release.dir" refid="release.tmp" />
+	</target>
+
+	<target name="clean">
+		<delete dir="${src.dir}" />
+		<delete dir="${release.dir}" />
+	</target>
+
+	<!-- PREPARE DOJO AMD -->
+	<target name="prepareDojoAMD">
+		<mkdir dir="${src.dir}/${dojo.amd.dir}/sbt" />
+		<copy todir="${src.dir}/${dojo.amd.dir}/sbt">
+			<fileset dir="${sbt.src.dir}/sbt" includes="**" />
+		</copy>
+		<copy todir="${src.dir}/${dojo.amd.dir}/sbt/_bridge">
+			<fileset dir="${sbt.src.dir}/_bridges/dojo-amd" includes="**" />
+		</copy>
+		<copy todir="${src.dir}/${dojo.amd.dir}/sbt/widget">
+			<fileset dir="${sbt.src.dir}/dojo2" includes="**" />
+		</copy>
+		<copy file="${sbt.src.dir}/sbt-dojo-amd.profile.js" tofile="${src.dir}/${dojo.amd.dir}/sbt-dojo-amd.profile.js" />
+	</target>
+
+	<!-- PREPARE DOJO NON AMD -->
+	<target name="prepareDojoNonAMD">
+		<copy todir="${src.dir}/${dojo.nonamd.dir}/sbt">
+			<fileset dir="${sbt.src.dir}/sbt" includes="**" />
+		</copy>
+		<copy todir="${src.dir}/${dojo.nonamd.dir}/sbt/_bridge">
+			<fileset dir="${sbt.src.dir}/_bridges/dojo" includes="**" />
+		</copy>
+		<copy todir="${src.dir}/${dojo.nonamd.dir}/sbt/widget">
+			<fileset dir="${sbt.src.dir}/dojo" includes="**" />
+		</copy>
+		<copy file="${sbt.src.dir}/sbt-dojo-nonamd.profile.js" tofile="${src.dir}/${dojo.nonamd.dir}/sbt-dojo-nonamd.profile.js" />
+	</target>
+
+	<!-- PREPARE JQUERY -->
+	<target name="prepareJQuery">
+		<copy todir="${src.dir}/${jquery.dir}/sbt">
+			<fileset dir="${sbt.src.dir}/sbt" includes="**" />
+		</copy>
+		<copy todir="${src.dir}/${jquery.dir}/sbt/_bridge">
+			<fileset dir="${sbt.src.dir}/_bridges/jquery" includes="**" />
+		</copy>
+		<copy file="${src.dir}/${sbt.src.dir}/sbt-jquery.profile.js" tofile="${src.dir}/${jquery.dir}/sbt-jquery.profile.js" />
+	</target>
+
+	<!-- RUN DOJO AMD -->
+	<target name="run.dojo-amd-build" depends="prepareDojoAMD">
+		<echo message="Running :${dojo.build} -p ${src.dir}/${dojo.amd.dir}/sbt-dojo-amd.profile.js releaseDir=${release.dir}/${dojo.amd.dir}"/>
+		<exec executable="${dojo.build}">
+			<arg value="-p" />
+			<arg value="${src.dir}/${dojo.amd.dir}/sbt-dojo-amd.profile.js" />
+			<arg value="releaseDir=${release.dir}/${dojo.amd.dir}" />
+		</exec>
+	</target>
+
+	<!-- RUN DOJO NON AMD -->
+	<target name="run.dojo-nonamd-build" depends="prepareDojoNonAMD">
+		<exec dir="${scriptsFolder}" executable="${dojo.build}">
+			<arg value="-p" />
+			<arg value="${src.dir}/${dojo.nonamd.dir}/sbt-dojo-nonamd.profile.js" />
+			<arg value="releaseDir=${release.dir}/${dojo.noamd.dir}" />
+		</exec>
+	</target>
+
+	<!-- RUN JQUERY -->
+	<target name="run.jquery-build" depends="prepareJQuery">
+		<exec dir="${scriptsFolder}" executable="${dojo.build}">
+			<arg line="-p" />
+			<arg value="${src.dir}/${jquery.dir}/sbt-jquery.profile.js" />
+			<arg value="releaseDir=${release.dir}/${jquery.dir}" />
+		</exec>
+	</target>
+
+	<target name="build" depends="clean, properties, run.dojo-amd-build" />
+</project>

@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * ï¿½ Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -116,6 +116,17 @@ public class BaseBssTest {
     		authenticationService = new AuthenticationService(getBasicEndpoint());
     	}
     	return authenticationService;
+    }
+    
+    public AuthenticationService getAuthenticationService(String user, String password) {
+    	String url = System.getProperty("ServerUrl");
+    	BasicEndpoint basicEndpoint = new BasicEndpoint();
+		basicEndpoint.setUrl(url);
+		basicEndpoint.setForceTrustSSLCertificate(true);
+		basicEndpoint.setUser(user);
+		basicEndpoint.setPassword(password);
+
+    	return new AuthenticationService(basicEndpoint);
     }
     
     public String registerCustomer() {

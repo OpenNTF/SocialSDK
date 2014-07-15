@@ -315,8 +315,14 @@ public class CommunityService extends ConnectionsService {
 		if (null == community) {
 			throw new ClientServicesException(null, Messages.NullCommunityObjectException);
 		}
-		Object communityPayload =  community.constructCreateRequestBody();
-		String url = CommunityUrls.COMMUNITIES_MY.format(this);
+		
+		Object communityPayload = null;
+	    if(isSubCommunity(community)){
+	        communityPayload = community.constructSubCommUpdateRequestBody();
+	    }else{
+	        communityPayload = community.constructCreateRequestBody();
+	    }
+	    String url = CommunityUrls.COMMUNITIES_MY.format(this);
 		Response response = createData(url, null, communityPayload,ClientService.FORMAT_CONNECTIONS_OUTPUT);
 		checkResponseCode(response, HTTPCode.CREATED);
 		community.clearFieldsMap();
@@ -328,6 +334,19 @@ public class CommunityService extends ConnectionsService {
 		Header header = requestData.getResponse().getFirstHeader("Location");
 		String urlLocation = header!=null?header.getValue():"";
 		return urlLocation.substring(urlLocation.indexOf(COMMUNITY_UNIQUE_IDENTIFIER+"=") + (COMMUNITY_UNIQUE_IDENTIFIER+"=").length());
+	}
+	
+	public String createSubCommunity(Community subCommunity, Community parentCommunity) throws ClientServicesException{
+		if (null == subCommunity || parentCommunity == null) {
+			throw new ClientServicesException(null, Messages.NullCommunityObjectException);
+		}
+		subCommunity.setParentCommunityUrl(parentCommunity.getSelfUrl());
+		Object communityPayload =  subCommunity.constructSubCommUpdateRequestBody();
+		String url = CommunityUrls.COMMUNITIES_MY.format(this);
+		Response response = createData(url, null, communityPayload,ClientService.FORMAT_CONNECTIONS_OUTPUT);
+		checkResponseCode(response, HTTPCode.CREATED);
+		subCommunity.clearFieldsMap();
+		return extractCommunityIdFromHeaders(response);
 	}
 	
 	/**

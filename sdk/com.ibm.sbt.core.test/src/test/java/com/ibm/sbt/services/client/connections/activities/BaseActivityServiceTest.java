@@ -98,6 +98,9 @@ public class BaseActivityServiceTest extends BaseUnitTest {
 			basicEndpoint.setUser(user);
 			basicEndpoint.setPassword(password);
 			
+			// enable to reuse cookies
+			//basicEndpoint.setClientServiceClass("com.ibm.sbt.services.client.CookieStoreClientService");
+			
 			// enable to use a proxy
 			//basicEndpoint.setHttpProxy("localhost:8888");
 			//basicEndpoint.setUseProxy(true);			

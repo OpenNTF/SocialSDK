@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * ï¿½ Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -76,6 +76,43 @@ public class ChangePasswordTest extends BaseBssTest {
     		
     		AuthenticationService authenticationService = getAuthenticationService();
     		authenticationService.setOneTimePassword(userCredential);
+    		
+    		userCredential = new UserCredentialJsonBuilder();
+    		userCredential.setLoginName(loginName)
+    					  .setOldPassword("one_time_passw0rd")
+    					  .setNewPassword("new_passw0rd")
+    					  .setConfirmPassword("new_passw0rd");
+    		
+    		authenticationService.changePassword(userCredential);
+    		
+    	} catch (BssException be) {
+    		JsonJavaObject jsonObject = be.getResponseJson();
+    		System.err.println(jsonObject);
+    		Assert.fail("Error changing password because: "+jsonObject);
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    		Assert.fail("Error changing password caused by: "+e.getMessage());    		
+    	}
+    }
+	
+    @Test
+    public void testChangeMyPassword() {
+    	try {
+    		String subscriberId = addSubscriber();
+    		JsonEntity subscriber = getSubscriberById(subscriberId);
+    		String loginName = subscriber.getAsString("Subscriber/Person/EmailAddress");
+    		System.out.println(loginName);
+    		
+    		UserCredentialJsonBuilder userCredential = new UserCredentialJsonBuilder();
+    		userCredential.setLoginName(loginName)
+    					  .setNewPassword("one_time_passw0rd");
+    		System.out.println(userCredential.toJson());
+    		
+    		AuthenticationService authenticationService = getAuthenticationService();
+    		authenticationService.setOneTimePassword(userCredential);
+    		
+    		
+    		authenticationService = getAuthenticationService(loginName, "one_time_passw0rd");
     		
     		userCredential = new UserCredentialJsonBuilder();
     		userCredential.setLoginName(loginName)

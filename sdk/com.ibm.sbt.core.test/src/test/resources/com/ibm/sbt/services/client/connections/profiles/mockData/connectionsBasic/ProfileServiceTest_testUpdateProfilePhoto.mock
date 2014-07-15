@@ -4,7 +4,7 @@
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Thu, 10 Jul 2014 12:24:06 GMT]]></value>
+        <value><![CDATA[Tue, 15 Jul 2014 08:58:33 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -20,7 +20,7 @@
     </header>
     <header>
         <name><![CDATA[Last-Modified]]></name>
-        <value><![CDATA[Thu, 10 Jul 2014 12:24:06 GMT]]></value>
+        <value><![CDATA[Tue, 15 Jul 2014 08:58:33 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
@@ -28,11 +28,11 @@
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=Ppsrcr7hseKUnDjcR1LhJyMcKB8uHa3eEcFVse3iIlMPfbeOTOEGZ1FyeOJxuqcbaX0RMxcL7FUvGujzyaN9yGnNv2+NLz67YbABjzDvWiAO+TZqsELVWwwpjtL17o7ZN51yBS3uSmP9KWMP7OmqVJkIFuUjQedpOb2iIHFjIkfluvC6VRa3C766zV5d1b3ng0IcyJu1ItichrPrzJTTr1HrxkpxWLD214IrXZDBZnRTefcrEMmMe8NK9/WdpYQPl/m6V/m+awp7MLrHeAYZtxVBNHXKJZ3Ur5xHXLe6/P6P0Y4TIeKMuXnnEDpR6XowXndTABs1Q72ke4z9cIGaVcZEnL4TMgXGGn2UTCZRckCB5IYom1t6V5Gm8zgo0JVn5Pskz+b4vIO0h7Z80LgUgPTl7O2GPWpmy+Ot5ujUaeJfyXtphIDsF6bOYgRwBc3j8rPTIrqrSbT08fCdrAu69sya9HrEYf2hWQ8VWulWAgeM8/WDPBGDLZdm7C+nTmWr1ZIxQJyYBKY/VXJO/doQbGPh3Elt6+tfJbpLsRlJoTzZaf//TxdlUOEpeWGu1lynLkmQKeEnznA+Agrb+EIjDfYufDBxzkOeQooYiUyuX7++4qfTxfsshVX+3Pckp/5s2fPG+aD/QJ0To8C2HwcILkisgFw8dP1eJKdUwRhjx3jLpq/W0P9INm07n2X+83O8Uf4fu0nCu2ZmcYxGHz3BpQ==; Path=/; Domain=.swg.usma.ibm.com]]></value>
+        <value><![CDATA[LtpaToken2=/FIiGiv6ZT+1DaoG6ebk/z6ixxaVP8pqSgM7dhJJWYyWwG40xoSHUPII2cijjg67/La6v/voO36uW3uqIMpETg8dEvErE0ainkkAnzOmg1BTBS/ELyvCAWgQaAjguUl1MJs31LyU3Was+HCCZNUvJHi6tF6JDF1xEpiBZSv5RgXoFvqzCrMp9dbawZSd/ivcMB1QfYWvUaSy//umxFZjWxInhQsaziYIIbrsbwOesQ3TwrE3y9FLiS0L/BOPpCe0rFE2eFtUHWQvvMeBw3U62J87rjAUpI1NT2BdDeqgiKCuWkWAJm1ZHCQY5nsPesOjAC8wXmNdOck+J1j55sf6UxdfnSyGwBmFVneUqGsl19DWxHkXQtcxsO98UIHPAabLETUAOGIrhQuLy0lyyrNf6Yq0L8+0GfI2FIK6zaSaa5AzXf741ePUXu+Aq6QPSBLjV2Uwk0v0x5BkvH6b2fIb8LnGebKRpF9iH1SH4GMUEpo1xEFkC2OuoBMEpjlb2N59wO/IEcV4qmpcyKMmUKpMuoLFf68Ke/ODaupSfLhyC/ZMufKqKt7nb+NZqfgLf/U9DHp25unbrIvkYSk6woq+suG/wfHJbAkQPoe5PCKBmMzdymxgjan07MAKfCw7AqKZ+NuKdvDpknUaUmMnPSaO73UF7uQi1GY2VvkjFxbodTajS4lLbDsZBXguDU3CmCx5CgqrSUKSji/C4/3U/971Yg==; Path=/; Domain=.swg.usma.ibm.com]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[ICSESSIONID=0000gdUw88PIzNUlJ514YV6vuyx:-1; Path=/; HttpOnly]]></value>
+        <value><![CDATA[ICSESSIONID=000049j9bAtmC4iSfrNJU-ZbiKD:-1; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Expires]]></name>
@@ -62,13 +62,13 @@
         <name><![CDATA[Content-Language]]></name>
         <value><![CDATA[en-US]]></value>
     </header></headers>
-<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?><feed xmlns:app="http://www.w3.org/2007/app" xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:fh="http://purl.org/syndication/history/1.0" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns="http://www.w3.org/2005/Atom"><id>tag:profiles.ibm.com,2006:feed</id><generator version="5.0.0.0" uri="http://www.ibm.com/xmlns/prod/sn">IBM Connections - Profiles</generator><title type="text">profile with email ajones1@janet.iris.com </title><author><name>IBM Connections - Profiles</name></author><updated>2014-07-10T12:24:06.410Z</updated><fh:complete></fh:complete><link href="https://lcauto19.swg.usma.ibm.com/profiles/atom/profileTags.do?targetKey=50f116ab-7271-482f-b2c8-2aa75a28d679&amp;lastMod=1404905423033" rel="http://www.ibm.com/xmlns/prod/sn/tag-cloud" type="application/atomcat+xml"></link><link href="https://lcauto19.swg.usma.ibm.com/profiles/atom/mv/theboard/entries.do?key=50f116ab-7271-482f-b2c8-2aa75a28d679&amp;lastMod=1404905423033" rel="http://www.ibm.com/xmlns/prod/sn/mv/theboard" type="application/atom+xml"></link><link href="https://lcauto19.swg.usma.ibm.com/connections/opensocial/rest/activitystreams/4cbc45c0-16a7-1033-9239-95472f45d54f/@involved/@all" rel="http://activitystrea.ms/spec/1.0/" type="application/atom+xml"></link><link href="https://lcauto19.swg.usma.ibm.com/profiles/atom/mv/theboard/entry/status.do?key=50f116ab-7271-482f-b2c8-2aa75a28d679" rel="http://www.ibm.com/xmlns/prod/sn/status" type="application/atom+xml"></link><link href="https://lcauto19.swg.usma.ibm.com/profiles/atom/connections.do?connectionType=colleague&amp;key=50f116ab-7271-482f-b2c8-2aa75a28d679&amp;lastMod=1404905423033" rel="http://www.ibm.com/xmlns/prod/sn/connections/colleague" type="application/atom+xml"></link><link href="https://lcauto19.swg.usma.ibm.com/profiles/atom/reportingChain.do?key=50f116ab-7271-482f-b2c8-2aa75a28d679" rel="http://www.ibm.com/xmlns/prod/sn/reporting-chain" type="application/atom+xml"></link><link href="https://lcauto19.swg.usma.ibm.com/profiles/atom/peopleManaged.do?key=50f116ab-7271-482f-b2c8-2aa75a28d679" rel="http://www.ibm.com/xmlns/prod/sn/people-managed" type="application/atom+xml"></link><link href="https://lcauto19.swg.usma.ibm.com/profiles/atom/profileType.do?type=default" rel="http://www.ibm.com/xmlns/prod/sn/profile-type" type="application/profile-type+xml"></link><link href="https://lcauto19.swg.usma.ibm.com/profiles/atom/profileExtension.do?key=50f116ab-7271-482f-b2c8-2aa75a28d679&amp;extensionId=profileLinks&amp;lastMod=1404905423033" rel="http://www.ibm.com/xmlns/prod/sn/ext-attr" type="text/xml" snx:extensionId="profileLinks" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></link><link href="https://lcauto19.swg.usma.ibm.com/profiles/atom/profile.do?email=ajones1%40janet.iris.com%20" rel="self" type="application/atom+xml"></link><entry><id>tag:profiles.ibm.com,2006:entry50f116ab-7271-482f-b2c8-2aa75a28d679</id><title type="text">Amy Jones1</title><updated>2014-07-09T11:30:23.033Z</updated><category term="profile" scheme="http://www.ibm.com/xmlns/prod/sn/type"></category><contributor><name>Amy Jones1</name><snx:userid>4cbc45c0-16a7-1033-9239-95472f45d54f</snx:userid><email>ajones1@janet.iris.com</email><snx:userState>active</snx:userState><snx:isExternal>false</snx:isExternal></contributor><link href="https://lcauto19.swg.usma.ibm.com/profiles/atom/profileEntry.do?key=50f116ab-7271-482f-b2c8-2aa75a28d679" rel="self" type="application/atom+xml"></link><link href="https://lcauto19.swg.usma.ibm.com/profiles/atom/profileType.do?type=default" rel="http://www.ibm.com/xmlns/prod/sn/profile-type" type="application/profile-type+xml"></link><link href="https://lcauto19.swg.usma.ibm.com/profiles/html/profileView.do?key=50f116ab-7271-482f-b2c8-2aa75a28d679" rel="related" type="text/html"></link><link href="https://lcauto19.swg.usma.ibm.com/profiles/photo.do?key=50f116ab-7271-482f-b2c8-2aa75a28d679&amp;lastMod=1404905423033" rel="http://www.ibm.com/xmlns/prod/sn/image" type="image"></link><link href="https://lcauto19.swg.usma.ibm.com/profiles/audio.do?key=50f116ab-7271-482f-b2c8-2aa75a28d679&amp;lastMod=1404905423033" rel="http://www.ibm.com/xmlns/prod/sn/pronunciation" type="audio"></link><link href="https://lcauto19.swg.usma.ibm.com/profiles/vcard/profile.do?key=50f116ab-7271-482f-b2c8-2aa75a28d679" rel="alternate" type="text/directory"></link><summary type="text">Profile information for Amy Jones1</summary><content type="xhtml"><sp_0:div xmlns="http://www.w3.org/1999/xhtml" xmlns:sp_0="http://www.w3.org/1999/xhtml"><span class="vcard"><div><img src="https://lcauto19.swg.usma.ibm.com/profiles/photo.do?key=50f116ab-7271-482f-b2c8-2aa75a28d679&amp;lastMod=1404905423033" class="photo"></img></div><div><a class="fn url" href="https://lcauto19.swg.usma.ibm.com/profiles/atom/profile.do?key=50f116ab-7271-482f-b2c8-2aa75a28d679">Amy Jones1</a></div><div><a class="sound url" href="https://lcauto19.swg.usma.ibm.com/profiles/audio.do?key=50f116ab-7271-482f-b2c8-2aa75a28d679&amp;lastMod=1404905423033">Pronunciation</a></div><div><a class="email" href="mailto:ajones1@janet.iris.com">ajones1@janet.iris.com</a></div><div class="x-groupwareMail" style="display:none"></div><div class="org"><span class="organization-unit">IBM Software Group</span></div><div class="role">IBM Employee</div><div class="title"></div><div class="adr work postal"><div class="street-address">5 Technology Park Drive</div><div class="extended-address x-streetAddress2"></div><span class="locality">Westford</span><span class="region">Massachusetts</span><span class="postal-code">01886</span><div class="country-name">United States</div><div class="x-country-code" style="display:none">us</div><div class="x-worklocation-code" style="display:none">WM</div></div><div class="x-office"><span class="x-building"></span><span class="x-floor"></span><span class="x-office-number"></span></div><div class="tel"><abbr class="type" title="work">Work:</abbr><span class="value">1-978-399-0001</span></div><div class="x-manager-uid" style="display:none"></div><div class="x-is-manager" style="display:none">Y</div><div class="x-profile-key">50f116ab-7271-482f-b2c8-2aa75a28d679</div><div class="uid">4cbc45c0-16a7-1033-9239-95472f45d54f</div><div class="x-profile-uid">ajones1</div><div class="x-lconn-userid">4cbc45c0-16a7-1033-9239-95472f45d54f</div><div class="rev" style="display:none">2014-07-09T11:30:23.033Z</div><div class="x-profile-type" style="display:none">default</div></span></sp_0:div></content></entry></feed>]]></data>
+<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?><feed xmlns:app="http://www.w3.org/2007/app" xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:fh="http://purl.org/syndication/history/1.0" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns="http://www.w3.org/2005/Atom"><id>tag:profiles.ibm.com,2006:feed</id><generator version="5.0.0.0" uri="http://www.ibm.com/xmlns/prod/sn">IBM Connections - Profiles</generator><title type="text">profile with email ajones1@janet.iris.com </title><author><name>IBM Connections - Profiles</name></author><updated>2014-07-15T08:58:33.827Z</updated><fh:complete></fh:complete><link href="https://lcauto51.swg.usma.ibm.com/profiles/atom/profileTags.do?targetKey=e47f7079-ade1-4164-a7d9-c44094add840&amp;lastMod=1405414706505" rel="http://www.ibm.com/xmlns/prod/sn/tag-cloud" type="application/atomcat+xml"></link><link href="https://lcauto51.swg.usma.ibm.com/profiles/atom/mv/theboard/entries.do?key=e47f7079-ade1-4164-a7d9-c44094add840&amp;lastMod=1405414706505" rel="http://www.ibm.com/xmlns/prod/sn/mv/theboard" type="application/atom+xml"></link><link href="https://lcauto51.swg.usma.ibm.com/connections/opensocial/rest/activitystreams/4cbc45c0-16a7-1033-9239-95472f45d54f/@involved/@all" rel="http://activitystrea.ms/spec/1.0/" type="application/atom+xml"></link><link href="https://lcauto51.swg.usma.ibm.com/profiles/atom/mv/theboard/entry/status.do?key=e47f7079-ade1-4164-a7d9-c44094add840" rel="http://www.ibm.com/xmlns/prod/sn/status" type="application/atom+xml"></link><link href="https://lcauto51.swg.usma.ibm.com/profiles/atom/connections.do?connectionType=colleague&amp;key=e47f7079-ade1-4164-a7d9-c44094add840&amp;lastMod=1405414706505" rel="http://www.ibm.com/xmlns/prod/sn/connections/colleague" type="application/atom+xml"></link><link href="https://lcauto51.swg.usma.ibm.com/profiles/atom/reportingChain.do?key=e47f7079-ade1-4164-a7d9-c44094add840" rel="http://www.ibm.com/xmlns/prod/sn/reporting-chain" type="application/atom+xml"></link><link href="https://lcauto51.swg.usma.ibm.com/profiles/atom/peopleManaged.do?key=e47f7079-ade1-4164-a7d9-c44094add840" rel="http://www.ibm.com/xmlns/prod/sn/people-managed" type="application/atom+xml"></link><link href="https://lcauto51.swg.usma.ibm.com/profiles/atom/profileType.do?type=default" rel="http://www.ibm.com/xmlns/prod/sn/profile-type" type="application/profile-type+xml"></link><link href="https://lcauto51.swg.usma.ibm.com/profiles/atom/profileExtension.do?key=e47f7079-ade1-4164-a7d9-c44094add840&amp;extensionId=profileLinks&amp;lastMod=1405414706505" rel="http://www.ibm.com/xmlns/prod/sn/ext-attr" type="text/xml" snx:extensionId="profileLinks" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"></link><link href="https://lcauto51.swg.usma.ibm.com/profiles/atom/profile.do?email=ajones1%40janet.iris.com%20" rel="self" type="application/atom+xml"></link><entry><id>tag:profiles.ibm.com,2006:entrye47f7079-ade1-4164-a7d9-c44094add840</id><title type="text">Amy Jones1</title><updated>2014-07-15T08:58:26.505Z</updated><category term="profile" scheme="http://www.ibm.com/xmlns/prod/sn/type"></category><contributor><name>Amy Jones1</name><snx:userid>4cbc45c0-16a7-1033-9239-95472f45d54f</snx:userid><email>ajones1@janet.iris.com</email><snx:userState>active</snx:userState><snx:isExternal>false</snx:isExternal></contributor><link href="https://lcauto51.swg.usma.ibm.com/profiles/atom/profileEntry.do?key=e47f7079-ade1-4164-a7d9-c44094add840" rel="self" type="application/atom+xml"></link><link href="https://lcauto51.swg.usma.ibm.com/profiles/atom/profileType.do?type=default" rel="http://www.ibm.com/xmlns/prod/sn/profile-type" type="application/profile-type+xml"></link><link href="https://lcauto51.swg.usma.ibm.com/profiles/html/profileView.do?key=e47f7079-ade1-4164-a7d9-c44094add840" rel="related" type="text/html"></link><link href="https://lcauto51.swg.usma.ibm.com/profiles/photo.do?key=e47f7079-ade1-4164-a7d9-c44094add840&amp;lastMod=1405414706505" rel="http://www.ibm.com/xmlns/prod/sn/image" type="image"></link><link href="https://lcauto51.swg.usma.ibm.com/profiles/audio.do?key=e47f7079-ade1-4164-a7d9-c44094add840&amp;lastMod=1405414706505" rel="http://www.ibm.com/xmlns/prod/sn/pronunciation" type="audio"></link><link href="https://lcauto51.swg.usma.ibm.com/profiles/vcard/profile.do?key=e47f7079-ade1-4164-a7d9-c44094add840" rel="alternate" type="text/directory"></link><summary type="text">Profile information for Amy Jones1</summary><content type="xhtml"><sp_0:div xmlns="http://www.w3.org/1999/xhtml" xmlns:sp_0="http://www.w3.org/1999/xhtml"><span class="vcard"><div><img src="https://lcauto51.swg.usma.ibm.com/profiles/photo.do?key=e47f7079-ade1-4164-a7d9-c44094add840&amp;lastMod=1405414706505" class="photo"></img></div><div><a class="fn url" href="https://lcauto51.swg.usma.ibm.com/profiles/atom/profile.do?key=e47f7079-ade1-4164-a7d9-c44094add840">Amy Jones1</a></div><div><a class="sound url" href="https://lcauto51.swg.usma.ibm.com/profiles/audio.do?key=e47f7079-ade1-4164-a7d9-c44094add840&amp;lastMod=1405414706505">Pronunciation</a></div><div><a class="email" href="mailto:ajones1@janet.iris.com">ajones1@janet.iris.com</a></div><div class="x-groupwareMail" style="display:none"></div><div class="org"><span class="organization-unit">IBM Software Group</span></div><div class="role">IBM Employee</div><div class="title"></div><div class="adr work postal"><div class="street-address">5 Technology Park Drive</div><div class="extended-address x-streetAddress2"></div><span class="locality">Westford</span><span class="region">Massachusetts</span><span class="postal-code">01886</span><div class="country-name">United States</div><div class="x-country-code" style="display:none">us</div><div class="x-worklocation-code" style="display:none">WM</div></div><div class="x-office"><span class="x-building"></span><span class="x-floor"></span><span class="x-office-number"></span></div><div class="tel"><abbr class="type" title="work">Work:</abbr><span class="value">9999999999</span></div><div class="x-manager-uid" style="display:none"></div><div class="x-is-manager" style="display:none">Y</div><div class="x-profile-key">e47f7079-ade1-4164-a7d9-c44094add840</div><div class="uid">4cbc45c0-16a7-1033-9239-95472f45d54f</div><div class="x-profile-uid">ajones1</div><div class="x-lconn-userid">4cbc45c0-16a7-1033-9239-95472f45d54f</div><div class="rev" style="display:none">2014-07-15T08:58:26.505Z</div><div class="x-profile-type" style="display:none">default</div></span></sp_0:div></content></entry></feed>]]></data>
 </response>
 <response statusCode="200" statusReason="OK">
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Thu, 10 Jul 2014 12:24:07 GMT]]></value>
+        <value><![CDATA[Tue, 15 Jul 2014 08:58:35 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -100,11 +100,11 @@
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=Ppsrcr7hseKUnDjcR1LhJyMcKB8uHa3eEcFVse3iIlMPfbeOTOEGZ1FyeOJxuqcbaX0RMxcL7FUvGujzyaN9yGnNv2+NLz67YbABjzDvWiAO+TZqsELVWwwpjtL17o7ZN51yBS3uSmP9KWMP7OmqVJkIFuUjQedpOb2iIHFjIkfluvC6VRa3C766zV5d1b3ng0IcyJu1ItichrPrzJTTr1HrxkpxWLD214IrXZDBZnRTefcrEMmMe8NK9/WdpYQPl/m6V/m+awp7MLrHeAYZtxVBNHXKJZ3Ur5xHXLe6/P6P0Y4TIeKMuXnnEDpR6XowXndTABs1Q72ke4z9cIGaVcZEnL4TMgXGGn2UTCZRckCB5IYom1t6V5Gm8zgo0JVn5Pskz+b4vIO0h7Z80LgUgPTl7O2GPWpmy+Ot5ujUaeJfyXtphIDsF6bOYgRwBc3j8rPTIrqrSbT08fCdrAu69sya9HrEYf2hWQ8VWulWAgeM8/WDPBGDLZdm7C+nTmWr1ZIxQJyYBKY/VXJO/doQbGPh3Elt6+tfJbpLsRlJoTzZaf//TxdlUOEpeWGu1lynLkmQKeEnznA+Agrb+EIjDfYufDBxzkOeQooYiUyuX7++4qfTxfsshVX+3Pckp/5s2fPG+aD/QJ0To8C2HwcILkisgFw8dP1eJKdUwRhjx3jLpq/W0P9INm07n2X+83O8Uf4fu0nCu2ZmcYxGHz3BpQ==; Path=/; Domain=.swg.usma.ibm.com]]></value>
+        <value><![CDATA[LtpaToken2=/FIiGiv6ZT+1DaoG6ebk/z6ixxaVP8pqSgM7dhJJWYyWwG40xoSHUPII2cijjg67/La6v/voO36uW3uqIMpETg8dEvErE0ainkkAnzOmg1BTBS/ELyvCAWgQaAjguUl1MJs31LyU3Was+HCCZNUvJHi6tF6JDF1xEpiBZSv5RgXoFvqzCrMp9dbawZSd/ivcMB1QfYWvUaSy//umxFZjWxInhQsaziYIIbrsbwOesQ3TwrE3y9FLiS0L/BOPpCe0rFE2eFtUHWQvvMeBw3U62J87rjAUpI1NT2BdDeqgiKCuWkWAJm1ZHCQY5nsPesOjAC8wXmNdOck+J1j55sf6UxdfnSyGwBmFVneUqGsl19DWxHkXQtcxsO98UIHPAabLETUAOGIrhQuLy0lyyrNf6Yq0L8+0GfI2FIK6zaSaa5AzXf741ePUXu+Aq6QPSBLjV2Uwk0v0x5BkvH6b2fIb8LnGebKRpF9iH1SH4GMUEpo1xEFkC2OuoBMEpjlb2N59wO/IEcV4qmpcyKMmUKpMuoLFf68Ke/ODaupSfLhyC/ZMufKqKt7nb+NZqfgLf/U9DHp25unbrIvkYSk6woq+suG/wfHJbAkQPoe5PCKBmMzdymxgjan07MAKfCw7AqKZ+NuKdvDpknUaUmMnPSaO73UF7uQi1GY2VvkjFxbodTajS4lLbDsZBXguDU3CmCx5CgqrSUKSji/C4/3U/971Yg==; Path=/; Domain=.swg.usma.ibm.com]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[ICSESSIONID=0000vNoM5O418WNELpkGK7TBh56:-1; Path=/; HttpOnly]]></value>
+        <value><![CDATA[ICSESSIONID=0000pIkr58Nk0IkqLtbltuNpZJs:-1; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Keep-Alive]]></name>
@@ -169,7 +169,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <!-- Copyright IBM Corp. 2014  All Rights Reserved.                    -->
 
-<link rel="shortcut icon" href="https://lcauto19.swg.usma.ibm.com/connections/resources/web/com.ibm.oneui3.styles/imageLibrary/Icons/ComponentsGray/ProfilesGray.ico?etag=20140709.054153" type="image/x-icon">
+<link rel="shortcut icon" href="https://lcauto51.swg.usma.ibm.com/connections/resources/web/com.ibm.oneui3.styles/imageLibrary/Icons/ComponentsGray/ProfilesGray.ico?etag=20140707.175236" type="image/x-icon">
 
 <!-- Copyright IBM Corp. 2014  All Rights Reserved.                    -->
 
@@ -177,12 +177,12 @@
 <!--[if IE 7]><script>document.getElementsByTagName("html")[0].className+=" lotusui_ie lotusui_ie7";</script><![endif]-->
 <!--[if IE 8]><script>document.getElementsByTagName("html")[0].className+=" lotusui_ie8";</script><![endif]-->
 <!--[if IE 9]><script>document.getElementsByTagName("html")[0].className+=" lotusui_ie9";</script><![endif]-->
-<link rel="stylesheet" type="text/css" id="lotusBaseStylesheet" href="https://lcauto19.swg.usma.ibm.com/connections/resources/web/_style?include=com.ibm.lconn.core.styles.oneui3/base/package3.css&etag=20140709.054153" appName="profiles" base="https://lcauto19.swg.usma.ibm.com/connections/resources/web/" query="?version=oneui3&rtl=false&etag=20140709.054153" theme="gen4" defaultTheme="gen4" oneui="3"></link>
-<link rel="stylesheet" type="text/css" id="lotusSpritesStylesheet" href="https://lcauto19.swg.usma.ibm.com/connections/resources/web/_style?include=com.ibm.lconn.core.styles.oneui3/sprites.css&etag=20140709.054153"></link>
-<link rel="stylesheet" type="text/css" id="lotusThemeStylesheet" href="https://lcauto19.swg.usma.ibm.com/connections/resources/web/_lconntheme/gen4.css?version=oneui3&rtl=false&etag=20140709.054153"></link>
+<link rel="stylesheet" type="text/css" id="lotusBaseStylesheet" href="https://lcauto51.swg.usma.ibm.com/connections/resources/web/_style?include=com.ibm.lconn.core.styles.oneui3/base/package3.css&etag=20140707.175236" appName="profiles" base="https://lcauto51.swg.usma.ibm.com/connections/resources/web/" query="?version=oneui3&rtl=false&etag=20140707.175236" theme="gen4" defaultTheme="gen4" oneui="3"></link>
+<link rel="stylesheet" type="text/css" id="lotusSpritesStylesheet" href="https://lcauto51.swg.usma.ibm.com/connections/resources/web/_style?include=com.ibm.lconn.core.styles.oneui3/sprites.css&etag=20140707.175236"></link>
+<link rel="stylesheet" type="text/css" id="lotusThemeStylesheet" href="https://lcauto51.swg.usma.ibm.com/connections/resources/web/_lconntheme/gen4.css?version=oneui3&rtl=false&etag=20140707.175236"></link>
 <!-- Copyright IBM Corp. 2014  All Rights Reserved.                    -->
 
-<link rel="stylesheet" type="text/css" id="lotusAppStylesheet" href="https://lcauto19.swg.usma.ibm.com/connections/resources/web/_lconnappstyles/gen4/profiles.css?version=oneui3&rtl=false&etag=20140709.054153"></link>
+<link rel="stylesheet" type="text/css" id="lotusAppStylesheet" href="https://lcauto51.swg.usma.ibm.com/connections/resources/web/_lconnappstyles/gen4/profiles.css?version=oneui3&rtl=false&etag=20140707.175236"></link>
 <!-- Copyright IBM Corp. 2014  All Rights Reserved.                    -->
 
 <!-- IBM Connections Mobile App for iOS -->
@@ -219,10 +219,10 @@
 	
 	profilesData.config = {
 		profileLastMod: "",
-		appChkSum: "20140709.054153",
-		buildNumber: "IC5.0_SUPPORT_Profiles_20140709-0331",
+		appChkSum: "20140707.175236",
+		buildNumber: "IC5.0_CR_Profiles_20140707-1530",
 		versionNumber: "5.0.0.0",
-		appStartupDate: "201407100330083",
+		appStartupDate: "201407141623867",
 		pageId: "",
 		langCookieName: "",
 		loginReturnPageEnc: "%2Fprofiles%2Fatom%2Fphoto.do%3Fuserid%3D4cbc45c0-16a7-1033-9239-95472f45d54f",
@@ -248,10 +248,10 @@
 		isLoggedIn: (""=="true"?true:false),
 		loggedInUserUID: "",
 		loggedInUserKey: "",
-		userid: "8cbefec0-f6df-1032-9ad5-d02a14283ea9",
+		userid: "4cbc45c0-16a7-1033-9239-95472f45d54f",
 		displayName: "",
 		status: "",
-		email: "ajones101@janet.iris.com",
+		email: "ajones1@janet.iris.com",
 		isExternal: false,
 		enabledPermissions: [] 		
 	};
@@ -261,7 +261,7 @@
 	
 	
 		 
-			profilesData.enabledPermissions = profilesData.loggedInUser.enabledPermissions = "profile.search$profile.search.view,profile.connection$profile.connection.view,profile.following$profile.following.view,profile.reportTo$profile.reportTo.view,profile.connection$profile.connection.message.view,profile.status$profile.status.update,profile.status$profile.status.view,profile.sand$profile.sand.dyk.view,profile.sand$profile.sand.recommend.view,profile.sand$profile.sand.inCommon.view,profile.sand$profile.sand.socialPath.view,profile.typeAhead$profile.typeAhead.view".split(",");
+			profilesData.enabledPermissions = profilesData.loggedInUser.enabledPermissions = "profile.search$profile.search.view,profile.connection$profile.connection.view,profile.following$profile.following.view,profile.reportTo$profile.reportTo.view,profile.connection$profile.connection.message.view,profile.status$profile.status.update,profile.status$profile.status.view,profile.colleague$profile.colleague.connect,profile.following$profile.following.add,profile.sand$profile.sand.dyk.view,profile.sand$profile.sand.recommend.view,profile.sand$profile.sand.inCommon.view,profile.sand$profile.sand.socialPath.view,profile.typeAhead$profile.typeAhead.view".split(",");
 		
 				
 		
@@ -270,19 +270,19 @@
 
 
 	
-	if ( "56b2e2ff-693e-44de-a723-07c268783cde" != "") {
-		if( profilesData.loggedInUser.isLoggedIn == "") profilesData.loggedInUser.isLoggedIn = ("56b2e2ff-693e-44de-a723-07c268783cde"!=""?true:false);
-		if( profilesData.loggedInUser.loggedInUserUID == "") profilesData.loggedInUser.loggedInUserUID = "8cbefec0-f6df-1032-9ad5-d02a14283ea9";
-		if( profilesData.loggedInUser.loggedInUserKey == "") profilesData.loggedInUser.loggedInUserKey = "56b2e2ff-693e-44de-a723-07c268783cde";
+	if ( "e47f7079-ade1-4164-a7d9-c44094add840" != "") {
+		if( profilesData.loggedInUser.isLoggedIn == "") profilesData.loggedInUser.isLoggedIn = ("e47f7079-ade1-4164-a7d9-c44094add840"!=""?true:false);
+		if( profilesData.loggedInUser.loggedInUserUID == "") profilesData.loggedInUser.loggedInUserUID = "4cbc45c0-16a7-1033-9239-95472f45d54f";
+		if( profilesData.loggedInUser.loggedInUserKey == "") profilesData.loggedInUser.loggedInUserKey = "e47f7079-ade1-4164-a7d9-c44094add840";
 	}
 
 	
 	if( profilesData.loggedInUser.displayName == "") 
-		profilesData.loggedInUser.displayName = "Amy Jones101";
+		profilesData.loggedInUser.displayName = "Amy Jones1";
 	
 	if (!profilesData.activityStreamConfig) {
 		try {
-			profilesData.activityStreamConfig = {"defaultUrlTemplateValues":{"userId":"","groupId":"@involved","rollup":"true","shortStrings":"true"},"defaultUrlTemplate":"\/rest\/activitystreams\/urn:lsid:lconn.ibm.com:profiles.person:${userId}\/${groupId}\/${appId}","filters":{"options":{"profiles-activitystream":{"label":"","params":{},"filters":{"label":"Filter By:","options":{"all":{"label":"All","params":{"appId":"@all"},"extensions":["com.ibm.social.as.lconn.extension.ShareboxStatusUpdateExtension"]},"statusupdates":{"label":"Status Updates","params":{"appId":"@all","broadcast":"true"},"extensions":["com.ibm.social.as.lconn.extension.ShareboxStatusUpdateExtension"]},"activites":{"label":"Activities","params":{"appId":"activities"}},"blogs":{"label":"Blogs","params":{"appId":"blogs"}},"bookmarks":{"label":"Bookmarks","params":{"appId":"bookmarks"}},"communities":{"label":"Communities","params":{"appId":"communities"}},"files":{"label":"Files","params":{"appId":"files"}},"forums":{"label":"Forums","params":{"appId":"forums"}},"libraries":{"label":"Libraries","params":{"appId":"ecm_files"}},"profiles":{"label":"Profiles","params":{"appId":"profiles"},"extensions":["com.ibm.social.as.lconn.extension.ShareboxStatusUpdateExtension"]},"wikis":{"label":"Wikis","params":{"appId":"wikis"}}},"defaultItem":"all"}}}},"userInfo":{"id":"8cbefec0-f6df-1032-9ad5-d02a14283ea9","displayName":"Amy Jones101"},"eeManager":"com.ibm.social.as.ee.EEManager","extensions":["com.ibm.social.as.lconn.extension.ProfilesMicroblogDeletionExtension","com.ibm.social.as.lconn.extension.ProfilesCommentExtension","com.ibm.social.as.lconn.extension.ProfilesStatusUpdateExtension","com.ibm.social.as.lconn.extension.GadgetPreloaderExtension","com.ibm.social.as.extension.RepostExtension"]} ;
+			profilesData.activityStreamConfig = {"defaultUrlTemplateValues":{"userId":"","groupId":"@involved","rollup":"true","shortStrings":"true"},"defaultUrlTemplate":"\/rest\/activitystreams\/urn:lsid:lconn.ibm.com:profiles.person:${userId}\/${groupId}\/${appId}","filters":{"options":{"profiles-activitystream":{"label":"","params":{},"filters":{"label":"Filter By:","options":{"all":{"label":"All","params":{"appId":"@all"},"extensions":["com.ibm.social.as.lconn.extension.ShareboxStatusUpdateExtension"]},"statusupdates":{"label":"Status Updates","params":{"appId":"@all","broadcast":"true"},"extensions":["com.ibm.social.as.lconn.extension.ShareboxStatusUpdateExtension"]},"activites":{"label":"Activities","params":{"appId":"activities"}},"blogs":{"label":"Blogs","params":{"appId":"blogs"}},"bookmarks":{"label":"Bookmarks","params":{"appId":"bookmarks"}},"communities":{"label":"Communities","params":{"appId":"communities"}},"files":{"label":"Files","params":{"appId":"files"}},"forums":{"label":"Forums","params":{"appId":"forums"}},"libraries":{"label":"Libraries","params":{"appId":"ecm_files"}},"profiles":{"label":"Profiles","params":{"appId":"profiles"},"extensions":["com.ibm.social.as.lconn.extension.ShareboxStatusUpdateExtension"]},"wikis":{"label":"Wikis","params":{"appId":"wikis"}}},"defaultItem":"all"}}}},"userInfo":{"id":"4cbc45c0-16a7-1033-9239-95472f45d54f","displayName":"Amy Jones1"},"eeManager":"com.ibm.social.as.ee.EEManager","extensions":["com.ibm.social.as.lconn.extension.ProfilesMicroblogDeletionExtension","com.ibm.social.as.lconn.extension.ProfilesCommentExtension","com.ibm.social.as.lconn.extension.ProfilesStatusUpdateExtension","com.ibm.social.as.lconn.extension.GadgetPreloaderExtension","com.ibm.social.as.extension.RepostExtension"]} ;
 			window.activityStreamConfig = profilesData.activityStreamConfig;
 		} catch (pdError) {
 			window.activityStreamConfig = {};
@@ -294,14 +294,14 @@
 	
 	var appName = "profile";
 
-	var svcHrefProfiles = "https://lcauto19.swg.usma.ibm.com/profiles";
+	var svcHrefProfiles = "https://lcauto51.swg.usma.ibm.com/profiles";
 	var applicationContext = "/profiles";
 
-	var svcHrefHelp = "https://lcauto19.swg.usma.ibm.com/help";
+	var svcHrefHelp = "https://lcauto51.swg.usma.ibm.com/help";
 	var appCtxHelp = svcHrefHelp.substring(svcHrefHelp.lastIndexOf("/"));
 
 	// alert("profiles: \n["+applicationContext+"]\n["+svcHrefProfiles+"]\n\n"+"help: \n["+appCtxHelp+"]\n["+svcHrefHelp+"]\n");
-	var xsltPath = applicationContext + "/static/xslt/" + 20140709.054153; 
+	var xsltPath = applicationContext + "/static/xslt/" + 20140707.175236; 
 	var profileSearchType = "";
 	var profiles_isBidiRTL = ('RTL' == '' ? true : false); // RTL (bidi?);
 	var bShowEmail = ('showMail' == 'showMail' ? true : false); // show/hide email
@@ -313,10 +313,10 @@ var ibmConfig = {
    serviceName: "profiles",
    proxyURL: "/profiles/ajaxProxy/",
    contextRootEnabler: "/profiles",
-   versionStamp: "20140709.054153"
+   versionStamp: "20140707.175236"
 };
 var baseProtocol = "https";
-var baseHost = "lcauto19.swg.usma.ibm.com";
+var baseHost = "lcauto51.swg.usma.ibm.com";
 var basePath = "/connections/resources";
 var needProxy = (baseHost != window.location.host || baseProtocol+":" != window.location.protocol);
 var dojoConfig = djConfig = {
@@ -324,8 +324,8 @@ var dojoConfig = djConfig = {
    isDebug: false,
    baseUrl: (needProxy ? (ibmConfig.proxyURL + encodeURIComponent(baseProtocol) + "/" + encodeURIComponent(baseHost)) : (baseProtocol + "://" + baseHost)) + basePath + "/web/dojo/",
    locale: "en-us",
-   dojoBlankHtmlUrl: "/profiles/static/20140709.054153/nav/blankIE.html",
-   blankGif: "https://lcauto19.swg.usma.ibm.com/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140709.054153",
+   dojoBlankHtmlUrl: "/profiles/static/20140707.175236/nav/blankIE.html",
+   blankGif: "https://lcauto51.swg.usma.ibm.com/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140707.175236",
    useCommentedJson: true,  
    proxy: "/profiles/ajaxProxy",
    localizationComplete: true
@@ -333,26 +333,26 @@ var dojoConfig = djConfig = {
 </script>
 <script type="text/javascript">
 var netJazzAjaxConfig = {
-    base: "https://lcauto19.swg.usma.ibm.com/connections/resources",
+    base: "https://lcauto51.swg.usma.ibm.com/connections/resources",
     skipStyles: true,
-    params: "etag=20140709.054153&lang=en&country=US"
+    params: "etag=20140707.175236&lang=en&country=US"
 };
-CKEDITOR_BASEPATH = window.CKEDITOR_BASEPATH || "https://lcauto19.swg.usma.ibm.com/connections/resources/web/com.ibm.oneui.ckeditor/editor/"; 
+CKEDITOR_BASEPATH = window.CKEDITOR_BASEPATH || "https://lcauto51.swg.usma.ibm.com/connections/resources/web/com.ibm.oneui.ckeditor/editor/"; 
 </script>
 <script type="text/javascript">
 	djConfig.parseOnLoad = true;
 
 	ibmConfig.portalURI = applicationContext + "/mashupmaker/enabler";
-	ibmConfig.proxyURL = 'https://lcauto19.swg.usma.ibm.com/profiles/ajaxProxy/';
+	ibmConfig.proxyURL = 'https://lcauto51.swg.usma.ibm.com/profiles/ajaxProxy/';
 	ibmConfig.loadServices = false;
-	ibmConfig.loadingHTML = '<img src="https://lcauto19.swg.usma.ibm.com/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140709.054153" height="130" width="0"></img>';
+	ibmConfig.loadingHTML = '<img src="https://lcauto51.swg.usma.ibm.com/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140707.175236" height="130" width="0"></img>';
 </script>
-<script type="text/javascript" src="https://lcauto19.swg.usma.ibm.com/connections/resources/web/_js/?include=dojo.main~&etag=20140709.054153&_proxyURL=https%3A%2F%2Flcauto19.swg.usma.ibm.com%2Fconnections%2Fresources&ss=20140709.054153&lang=en&country=US&variant="></script>
-<script type="text/javascript" src="https://lcauto19.swg.usma.ibm.com/connections/resources/web/_js/?include=lconn.core.bundle_common~&etag=20140709.054153&exclude=dojo.main~&_proxyURL=https%3A%2F%2Flcauto19.swg.usma.ibm.com%2Fconnections%2Fresources&ss=20140709.054153&lang=en&country=US&variant="></script>
-<script type="text/javascript" src="https://lcauto19.swg.usma.ibm.com/connections/resources/web/_js/?include=lconn.profiles.profilesApp~&etag=20140709.054153&exclude=dojo.main~lconn.core.bundle_common~&_proxyURL=https%3A%2F%2Flcauto19.swg.usma.ibm.com%2Fconnections%2Fresources&ss=20140709.054153&lang=en&country=US&variant="></script>
+<script type="text/javascript" src="https://lcauto51.swg.usma.ibm.com/connections/resources/web/_js/?include=dojo.main~&etag=20140707.175236&_proxyURL=https%3A%2F%2Flcauto51.swg.usma.ibm.com%2Fconnections%2Fresources&ss=20140707.175236&lang=en&country=US&variant="></script>
+<script type="text/javascript" src="https://lcauto51.swg.usma.ibm.com/connections/resources/web/_js/?include=lconn.core.bundle_common~&etag=20140707.175236&exclude=dojo.main~&_proxyURL=https%3A%2F%2Flcauto51.swg.usma.ibm.com%2Fconnections%2Fresources&ss=20140707.175236&lang=en&country=US&variant="></script>
+<script type="text/javascript" src="https://lcauto51.swg.usma.ibm.com/connections/resources/web/_js/?include=lconn.profiles.profilesApp~&etag=20140707.175236&exclude=dojo.main~lconn.core.bundle_common~&_proxyURL=https%3A%2F%2Flcauto51.swg.usma.ibm.com%2Fconnections%2Fresources&ss=20140707.175236&lang=en&country=US&variant="></script>
 
 <script>	
-	var profilesGlobalServices = {"help":{"enabled":true,"secureUrl":"https:\/\/lcauto19.swg.usma.ibm.com\/help","ssl_enabled":true,"url":"http:\/\/lcauto19.swg.usma.ibm.com\/help"},"microblogging":{"enabled":true,"secureUrl":"https:\/\/lcauto19.swg.usma.ibm.com\/connections\/opensocial","ssl_enabled":true,"url":"http:\/\/lcauto19.swg.usma.ibm.com\/connections\/opensocial"},"bss":{"enabled":false,"ssl_enabled":false},"metrics":{"enabled":true,"secureUrl":"https:\/\/lcauto19.swg.usma.ibm.com\/metrics","ssl_enabled":true,"url":"http:\/\/lcauto19.swg.usma.ibm.com\/metrics"},"wikis":{"enabled":true,"secureUrl":"https:\/\/lcauto19.swg.usma.ibm.com\/wikis","ssl_enabled":true,"url":"http:\/\/lcauto19.swg.usma.ibm.com\/wikis"},"opengraph":{"enabled":true,"secureUrl":"https:\/\/lcauto19.swg.usma.ibm.com\/connections\/opengraph","ssl_enabled":true,"url":"http:\/\/lcauto19.swg.usma.ibm.com\/connections\/opengraph"},"sand":{"enabled":true,"ssl_enabled":true},"pushnotification":{"enabled":true,"secureUrl":"https:\/\/lcauto19.swg.usma.ibm.com\/push","ssl_enabled":true,"url":"http:\/\/lcauto19.swg.usma.ibm.com\/push"},"personTag":{"enabled":true,"secureUrl":"https:\/\/lcauto19.swg.usma.ibm.com\/profiles\/ibm_semanticTagServlet","ssl_enabled":true,"url":"http:\/\/lcauto19.swg.usma.ibm.com\/profiles\/ibm_semanticTagServlet"},"communities":{"enabled":true,"secureUrl":"https:\/\/lcauto19.swg.usma.ibm.com\/communities","ssl_enabled":true,"url":"http:\/\/lcauto19.swg.usma.ibm.com\/communities"},"ecm_files":{"enabled":true,"secureUrl":"https:\/\/lcauto19.swg.usma.ibm.com\/dm","ssl_enabled":true,"url":"http:\/\/lcauto19.swg.usma.ibm.com\/dm"},"oauthprovider":{"enabled":true,"secureUrl":"https:\/\/lcauto19.swg.usma.ibm.com\/oauth2","ssl_enabled":true,"url":"http:\/\/lcauto19.swg.usma.ibm.com\/oauth2"},"connectionsmail":{"enabled":false,"ssl_enabled":false},"mediaGallery":{"enabled":true,"secureUrl":"https:\/\/lcauto19.swg.usma.ibm.com\/news\/widgets\/lw","ssl_enabled":true,"url":"http:\/\/lcauto19.swg.usma.ibm.com\/news\/widgets\/lw"},"webresources":{"enabled":true,"secureUrl":"https:\/\/lcauto19.swg.usma.ibm.com\/connections\/resources","ssl_enabled":true,"url":"http:\/\/lcauto19.swg.usma.ibm.com\/connections\/resources"},"blogs":{"enabled":true,"secureUrl":"https:\/\/lcauto19.swg.usma.ibm.com\/blogs","ssl_enabled":true,"url":"http:\/\/lcauto19.swg.usma.ibm.com\/blogs"},"news":{"enabled":true,"secureUrl":"https:\/\/lcauto19.swg.usma.ibm.com\/news","ssl_enabled":true,"url":"http:\/\/lcauto19.swg.usma.ibm.com\/news"},"oauth":{"enabled":true,"secureUrl":"https:\/\/lcauto19.swg.usma.ibm.com\/connections\/oauth","ssl_enabled":true,"url":"http:\/\/lcauto19.swg.usma.ibm.com\/connections\/oauth"},"dogear":{"enabled":true,"secureUrl":"https:\/\/lcauto19.swg.usma.ibm.com\/dogear","ssl_enabled":true,"url":"http:\/\/lcauto19.swg.usma.ibm.com\/dogear"},"opensocialLocked":{"enabled":false,"ssl_enabled":false},"mobile":{"enabled":true,"secureUrl":"https:\/\/lcauto19.swg.usma.ibm.com\/mobile","ssl_enabled":true,"url":"http:\/\/lcauto19.swg.usma.ibm.com\/mobile"},"quickr":{"enabled":false,"ssl_enabled":false},"bookmarklet":{"enabled":true,"secureUrl":"https:\/\/lcauto19.swg.usma.ibm.com\/connections\/bookmarklet","ssl_enabled":true,"url":"http:\/\/lcauto19.swg.usma.ibm.com\/connections\/bookmarklet"},"moderation":{"enabled":true,"secureUrl":"https:\/\/lcauto19.swg.usma.ibm.com\/moderation","ssl_enabled":true,"url":"http:\/\/lcauto19.swg.usma.ibm.com\/moderation"},"deploymentConfig":{"enabled":true,"secureUrl":"https:\/\/lcauto19.swg.usma.ibm.com\/connections","ssl_enabled":true,"url":"http:\/\/lcauto19.swg.usma.ibm.com\/connections"},"search":{"enabled":true,"secureUrl":"https:\/\/lcauto19.swg.usma.ibm.com\/search","ssl_enabled":true,"url":"http:\/\/lcauto19.swg.usma.ibm.com\/search"},"profiles":{"enabled":true,"secureUrl":"https:\/\/lcauto19.swg.usma.ibm.com\/profiles","ssl_enabled":true,"url":"http:\/\/lcauto19.swg.usma.ibm.com\/profiles"},"thumbnail":{"enabled":true,"secureUrl":"https:\/\/lcauto19.swg.usma.ibm.com\/connections\/thumbnail","ssl_enabled":true,"url":"http:\/\/lcauto19.swg.usma.ibm.com\/connections\/thumbnail"},"activities":{"enabled":true,"secureUrl":"https:\/\/lcauto19.swg.usma.ibm.com\/activities","ssl_enabled":true,"url":"http:\/\/lcauto19.swg.usma.ibm.com\/activities"},"directory":{"enabled":false,"ssl_enabled":false},"homepage":{"enabled":true,"secureUrl":"https:\/\/lcauto19.swg.usma.ibm.com\/homepage","ssl_enabled":true,"url":"http:\/\/lcauto19.swg.usma.ibm.com\/homepage"},"forums":{"enabled":true,"secureUrl":"https:\/\/lcauto19.swg.usma.ibm.com\/forums","ssl_enabled":true,"url":"http:\/\/lcauto19.swg.usma.ibm.com\/forums"},"opensocial":{"enabled":true,"secureUrl":"https:\/\/lcauto19.swg.usma.ibm.com\/connections\/opensocial","ssl_enabled":true,"url":"http:\/\/lcauto19.swg.usma.ibm.com\/connections\/opensocial"},"files":{"enabled":true,"secureUrl":"https:\/\/lcauto19.swg.usma.ibm.com\/files","ssl_enabled":true,"url":"http:\/\/lcauto19.swg.usma.ibm.com\/files"},"cognos":{"enabled":false,"ssl_enabled":false},"scprofiles":{"enabled":false,"ssl_enabled":false},"sametimeProxy":{"enabled":false,"ssl_enabled":false}}; // WhiteList Helper Code
+	var profilesGlobalServices = {"help":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/help","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/help"},"microblogging":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/connections\/opensocial","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/connections\/opensocial"},"bss":{"enabled":false,"ssl_enabled":false},"metrics":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/metrics","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/metrics"},"wikis":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/wikis","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/wikis"},"opengraph":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/connections\/opengraph","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/connections\/opengraph"},"sand":{"enabled":true,"ssl_enabled":true},"pushnotification":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/push","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/push"},"personTag":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/profiles\/ibm_semanticTagServlet","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/profiles\/ibm_semanticTagServlet"},"communities":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/communities","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/communities"},"ecm_files":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/dm","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/dm"},"oauthprovider":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/oauth2","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/oauth2"},"connectionsmail":{"enabled":false,"ssl_enabled":false},"mediaGallery":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/news\/widgets\/lw","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/news\/widgets\/lw"},"webresources":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/connections\/resources","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/connections\/resources"},"blogs":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/blogs","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/blogs"},"news":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/news","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/news"},"oauth":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/connections\/oauth","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/connections\/oauth"},"dogear":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/dogear","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/dogear"},"opensocialLocked":{"enabled":false,"ssl_enabled":false},"mobile":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/mobile","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/mobile"},"quickr":{"enabled":false,"ssl_enabled":false},"bookmarklet":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/connections\/bookmarklet","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/connections\/bookmarklet"},"moderation":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/moderation","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/moderation"},"deploymentConfig":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/connections","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/connections"},"search":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/search","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/search"},"profiles":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/profiles","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/profiles"},"thumbnail":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/connections\/thumbnail","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/connections\/thumbnail"},"activities":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/activities","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/activities"},"directory":{"enabled":false,"ssl_enabled":false},"homepage":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/homepage","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/homepage"},"forums":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/forums","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/forums"},"opensocial":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/connections\/opensocial","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/connections\/opensocial"},"files":{"enabled":true,"secureUrl":"https:\/\/lcauto51.swg.usma.ibm.com\/files","ssl_enabled":true,"url":"http:\/\/lcauto51.swg.usma.ibm.com\/files"},"cognos":{"enabled":false,"ssl_enabled":false},"scprofiles":{"enabled":false,"ssl_enabled":false},"sametimeProxy":{"enabled":false,"ssl_enabled":false}}; // WhiteList Helper Code
 		
 	//-------------------------------------------[  Sametime Configuration  ] 
 	var sametimeAwarenessConfig = {	
@@ -433,7 +433,7 @@ CKEDITOR_BASEPATH = window.CKEDITOR_BASEPATH || "https://lcauto19.swg.usma.ibm.c
 			<div class="lotusDialogHeader">
 				<h1 class="lotusHeading">Profiles</h1>
 				<a title='Close' role="button" class="lotusRight lotusDialogClose" href="javascript:;" onclick="dijit.byId('lotusAlertDialog').hide(); return true;">
-					<img src="https://lcauto19.swg.usma.ibm.com/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140709.054153" role="presentation" alt='Close' />
+					<img src="https://lcauto51.swg.usma.ibm.com/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140707.175236" role="presentation" alt='Close' />
 					<span class="lotusAltText">X</span>
 				</a>
 			</div>		
@@ -529,34 +529,34 @@ if (self != top) {
                       onfocus="dojo.require('lconn.core.header');lconn.core.header.menuFocus(this);"
                       role="button" 
                       _lconn_menuid="lconnheadermenu-user"
-                      aria-label="Current user Amy Jones101"
-                      src="/profiles/static/20140709.054153!en_us/nav/templates/menu/user.jsp?appName=profiles&username=Amy+Jones101&userid=8cbefec0-f6df-1032-9ad5-d02a14283ea9"
-                      href="javascript:;"><img alt="Amy Jones101" src="https://lcauto19.swg.usma.ibm.com/profiles/photo.do?userid=8cbefec0-f6df-1032-9ad5-d02a14283ea9&small=true" width=26 height=26></img> <img role="presentation" alt="" src="https://lcauto19.swg.usma.ibm.com/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140709.054153" class="lotusArrow lotusDropDownSprite"><span class="lotusAltText">&#9660;</span></a></span></li><li id="logoutLi" class="lotusHidden" style="display:none"><span id="loginLabel" role="region" aria-label="Log in / log out"><a id="logoutLink" href="/profiles/ibm_security_logout?logoutExitPage=%2fatom%2fphoto.do%3fuserid%3d4cbc45c0-16a7-1033-9239-95472f45d54f" >Log Out</a></span></li><li class="shareboxLi" id="headerSharebox" ><a class="lotusBannerBtn" href="javascript:;" onclick="dojo.stopEvent(event);dojo.require('net.jazz.ajax.xdloader');net.jazz.ajax.xdloader.load_async('com.ibm.social.sharebox.dialog', dojo.hitch(this, function() {com.ibm.social.sharebox.show();}));" role="button">Share</a></li><li id="languageSelectorText" style="display: none;"></li><li id="headerHelpLi" ><a role="button" aria-label="Open help window" href="javascript:openHelpWindow(&#039;&#039;,&#039;/topic/com.ibm.lotus.connections.profiles.help/pframe.html&#039;);" id="headerHelpLink"><img role="presentation" alt="" src="https://lcauto19.swg.usma.ibm.com/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140709.054153" class="iconsOther16 iconsOther16-bannerHelpNormal16" /><span class="lotusAltText">?</span></a></li><li><span class="lotusBranding"><img src="https://lcauto19.swg.usma.ibm.com/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140709.054153" alt="IBM" class="lotusIBMLogo" /><span class="lotusAltText">IBM</span></span></li></ul><ul class="lotusInlinelist lotusLinks" role="navigation" aria-label="Connections"><li id="lotusBannerHomepage" class="lotusFirst "><a href="https://lcauto19.swg.usma.ibm.com/homepage/" title="Home" aria-label="Home"><img alt="" role="presentation" src="https://lcauto19.swg.usma.ibm.com/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140709.054153" class="lconnBannerIcon lconnSprite lconnSprite-iconHomeBlue16"><span id="lconnBannerHomepageLabel">Home</span></a></li><li id="lotusBannerProfiles" class=" lotusSelected"><a onmouseover="dojo.require('lconn.core.header');lconn.core.header.menuMouseover(this);" 
+                      aria-label="Current user Amy Jones1"
+                      src="/profiles/static/20140707.175236!en_us/nav/templates/menu/user.jsp?appName=profiles&username=Amy+Jones1&userid=4cbc45c0-16a7-1033-9239-95472f45d54f"
+                      href="javascript:;"><img alt="Amy Jones1" src="https://lcauto51.swg.usma.ibm.com/profiles/photo.do?userid=4cbc45c0-16a7-1033-9239-95472f45d54f&small=true" width=26 height=26></img> <img role="presentation" alt="" src="https://lcauto51.swg.usma.ibm.com/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140707.175236" class="lotusArrow lotusDropDownSprite"><span class="lotusAltText">&#9660;</span></a></span></li><li id="logoutLi" class="lotusHidden" style="display:none"><span id="loginLabel" role="region" aria-label="Log in / log out"><a id="logoutLink" href="/profiles/ibm_security_logout?logoutExitPage=%2fatom%2fphoto.do%3fuserid%3d4cbc45c0-16a7-1033-9239-95472f45d54f" >Log Out</a></span></li><li class="shareboxLi" id="headerSharebox" ><a class="lotusBannerBtn" href="javascript:;" onclick="dojo.stopEvent(event);dojo.require('net.jazz.ajax.xdloader');net.jazz.ajax.xdloader.load_async('com.ibm.social.sharebox.dialog', dojo.hitch(this, function() {com.ibm.social.sharebox.show();}));" role="button">Share</a></li><li id="languageSelectorText" style="display: none;"></li><li id="headerHelpLi" ><a role="button" aria-label="Open help window" href="javascript:openHelpWindow(&#039;&#039;,&#039;/topic/com.ibm.lotus.connections.profiles.help/pframe.html&#039;);" id="headerHelpLink"><img role="presentation" alt="" src="https://lcauto51.swg.usma.ibm.com/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140707.175236" class="iconsOther16 iconsOther16-bannerHelpNormal16" /><span class="lotusAltText">?</span></a></li><li><span class="lotusBranding"><img src="https://lcauto51.swg.usma.ibm.com/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140707.175236" alt="IBM" class="lotusIBMLogo" /><span class="lotusAltText">IBM</span></span></li></ul><ul class="lotusInlinelist lotusLinks" role="navigation" aria-label="Connections"><li id="lotusBannerHomepage" class="lotusFirst "><a href="https://lcauto51.swg.usma.ibm.com/homepage/" title="Home" aria-label="Home"><img alt="" role="presentation" src="https://lcauto51.swg.usma.ibm.com/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140707.175236" class="lconnBannerIcon lconnSprite lconnSprite-iconHomeBlue16"><span id="lconnBannerHomepageLabel">Home</span></a></li><li id="lotusBannerProfiles" class=" lotusSelected"><a onmouseover="dojo.require('lconn.core.header');lconn.core.header.menuMouseover(this);" 
                       onclick="dojo.require('lconn.core.header');lconn.core.header.menuClick(this);" 
                       onfocus="dojo.require('lconn.core.header');lconn.core.header.menuFocus(this);" 
                       role="button" 
                       _lconn_menuid="lconnheadermenu-people"
                       aria-label="Profiles" 
-                      src="/profiles/static/20140709.054153!en_us/nav/templates/menu/people.jsp"
-                      href="https://lcauto19.swg.usma.ibm.com/profiles/"
-                      errormessage="Profiles is not available"><img alt="" role="presentation" src="https://lcauto19.swg.usma.ibm.com/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140709.054153" class="lconnBannerIcon lconnSprite lconnSprite-iconProfilesBlue16">Profiles <img role="presentation" alt="" src="https://lcauto19.swg.usma.ibm.com/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140709.054153" class="lotusArrow lotusDropDownSprite"><span class="lotusAltText">&#9660;</span></a></li><li id="lotusBannerCommunities" class=" "><a id="lotusBannerCommunitiesLink" 
+                      src="/profiles/static/20140707.175236!en_us/nav/templates/menu/people.jsp"
+                      href="https://lcauto51.swg.usma.ibm.com/profiles/"
+                      errormessage="Profiles is not available"><img alt="" role="presentation" src="https://lcauto51.swg.usma.ibm.com/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140707.175236" class="lconnBannerIcon lconnSprite lconnSprite-iconProfilesBlue16">Profiles <img role="presentation" alt="" src="https://lcauto51.swg.usma.ibm.com/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140707.175236" class="lotusArrow lotusDropDownSprite"><span class="lotusAltText">&#9660;</span></a></li><li id="lotusBannerCommunities" class=" "><a id="lotusBannerCommunitiesLink" 
                       onmouseover="dojo.require('lconn.core.header');lconn.core.header.menuMouseover(this);" 
                       onclick="dojo.require('lconn.core.header');lconn.core.header.menuClick(this);" 
                       onfocus="dojo.require('lconn.core.header');lconn.core.header.menuFocus(this);" 
                       role="button" 
                       _lconn_menuid="lconnheadermenu-communities"
                       aria-label="Communities" 
-                      src="/profiles/static/20140709.054153!en_us/nav/templates/menu/communities.jsp?authenticated=true"
-                      href="https://lcauto19.swg.usma.ibm.com/communities/"
-                      errormessage="Communities is not available"><img alt="" role="presentation" src="https://lcauto19.swg.usma.ibm.com/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140709.054153" class="lconnBannerIcon lconnSprite lconnSprite-iconCommunitiesBlue16">Communities <img role="presentation" alt="" src="https://lcauto19.swg.usma.ibm.com/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140709.054153" class="lotusArrow lotusDropDownSprite"><span class="lotusAltText">&#9660;</span></a></li><li id="lotusBannerApps" class=" "><a onmouseover="dojo.require('lconn.core.header');lconn.core.header.menuMouseover(this);" 
+                      src="/profiles/static/20140707.175236!en_us/nav/templates/menu/communities.jsp?authenticated=true"
+                      href="https://lcauto51.swg.usma.ibm.com/communities/"
+                      errormessage="Communities is not available"><img alt="" role="presentation" src="https://lcauto51.swg.usma.ibm.com/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140707.175236" class="lconnBannerIcon lconnSprite lconnSprite-iconCommunitiesBlue16">Communities <img role="presentation" alt="" src="https://lcauto51.swg.usma.ibm.com/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140707.175236" class="lotusArrow lotusDropDownSprite"><span class="lotusAltText">&#9660;</span></a></li><li id="lotusBannerApps" class=" "><a onmouseover="dojo.require('lconn.core.header');lconn.core.header.menuMouseover(this);" 
                    onclick="dojo.require('lconn.core.header');lconn.core.header.menuClick(this);" 
                    onfocus="dojo.require('lconn.core.header');lconn.core.header.menuFocus(this);" 
                    role="button" 
                    _lconn_menuid="lconnheadermenu-apps"
                    aria-label="Apps" 
-                   src="/profiles/static/20140709.054153!en_us/nav/templates/menu/apps.jsp"
+                   src="/profiles/static/20140707.175236!en_us/nav/templates/menu/apps.jsp"
                    href="javascript:;"
-                   errormessage="Profiles is not available">Apps <img role="presentation" alt="" src="https://lcauto19.swg.usma.ibm.com/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140709.054153" class="lotusArrow lotusDropDownSprite"><span class="lotusAltText">&#9660;</span></a></li><li id="lotusBannerHeaderMetrics" style="display:none" class=""><a href="https://lcauto19.swg.usma.ibm.com/metrics/">Metrics</a></li><li id="lotusBannerModeration" style="display:none" class=""><a href="https://lcauto19.swg.usma.ibm.com/moderation/">Moderation</a></li></ul><div class="lotusClear"><!-- IE --></div></div></div>
+                   errormessage="Profiles is not available">Apps <img role="presentation" alt="" src="https://lcauto51.swg.usma.ibm.com/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140707.175236" class="lotusArrow lotusDropDownSprite"><span class="lotusAltText">&#9660;</span></a></li><li id="lotusBannerHeaderMetrics" style="display:none" class=""><a href="https://lcauto51.swg.usma.ibm.com/metrics/">Metrics</a></li><li id="lotusBannerModeration" style="display:none" class=""><a href="https://lcauto51.swg.usma.ibm.com/moderation/">Moderation</a></li></ul><div class="lotusClear"><!-- IE --></div></div></div>
 
 </div>
 <script type="text/javascript">
@@ -620,7 +620,7 @@ dojo.addOnLoad(function(){
 			  <div class="lotusInner">
 				 <div class="lotusTitleBarContent">
 					<h2 class="lotusHeading">
-						<img alt="" class="lotusIcon iconsComponentsBlue24 iconsComponentsBlue24-ProfilesBlue24" src="https://lcauto19.swg.usma.ibm.com/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140709.054153"><span class="lotusText">Profiles</span>
+						<img alt="" class="lotusIcon iconsComponentsBlue24 iconsComponentsBlue24-ProfilesBlue24" src="https://lcauto51.swg.usma.ibm.com/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140707.175236"><span class="lotusText">Profiles</span>
 					</h2>
 					<div aria-label="Profiles" role="navigation" aria-controls="lotusMain">
 					   <ul id="lotusHeaderNavigation_UL" class="lotusNavTabs" role="toolbar" aria-label="Profiles">
@@ -652,7 +652,7 @@ if (typeof(dojo) != "undefined") {
 			if (cntr) {
 			
 				var opts = {
-					searchContextPath: 'https://lcauto19.swg.usma.ibm.com/search',
+					searchContextPath: 'https://lcauto51.swg.usma.ibm.com/search',
 					localOptions: []
 				};
 
@@ -714,7 +714,7 @@ if (typeof(dojo) != "undefined") {
 					
 		
 		<script type="text/javascript">
-			var pageTime = 1404995047863;
+			var pageTime = 1405414715282;
 			profilesData.config.pageId = "searchView";
 		</script>
 		<div class="lotusContent" role="main">
@@ -840,7 +840,7 @@ if (typeof(dojo) != "undefined") {
 
 </script>
 
-<a href="javascript:;" class="lotusBtnImg lotusClose" id="_profilesViewWelcome_closeLink" title="Close welcome section" onclick="dojo.cookie(this.parentNode.id,'hide',{expires:9999}); dojo.addClass(this.parentNode.id, 'lotusHidden');"><img src="https://lcauto19.swg.usma.ibm.com/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140709.054153" alt="Close welcome section">
+<a href="javascript:;" class="lotusBtnImg lotusClose" id="_profilesViewWelcome_closeLink" title="Close welcome section" onclick="dojo.cookie(this.parentNode.id,'hide',{expires:9999}); dojo.addClass(this.parentNode.id, 'lotusHidden');"><img src="https://lcauto51.swg.usma.ibm.com/connections/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20140707.175236" alt="Close welcome section">
 		<span class="lotusAltText">X</span>
 	</img></a>
 
@@ -1136,7 +1136,7 @@ if (typeof(dojo) != "undefined") {
 
 
 <div id="lotusFooter" class="lotusFooter" role="contentinfo" aria-label="Footer">
-	<ul><li><a href="https://lcauto19.swg.usma.ibm.com/homepage/">Home</a></li><li><a href="javascript:;" onclick="javascript:openHelpWindow('','/topic/com.ibm.lotus.connections.profiles.help/pframe.html'); return false;" class="">Help</a></li><li><a href="http://www-10.lotus.com/ldd/lcforum.nsf">IBM Support Forums</a></li> <li><a href="/profiles/nav/toolbox?appName=profiles" class="">Bookmarking Tools</a></li><li id="lotusBannerFooterMetrics" style="display:none"><a class="lotusMetricsReaderLink" href="https://lcauto19.swg.usma.ibm.com/metrics/">Server Metrics</a></li><li id="lconnFooterMobile" class="lotusHidden"><a id="lconnMobileRedirectLink" href="javascript:;">Mobile UI</a></li><li><a href="/profiles/app/about" class="">About</a></li><li><a href="http://www-306.ibm.com/software/lotus/products/connections/">IBM Connections on ibm.com</a></li><li><a href="http://www.lotus.com/ldd/doc/cct/nextgen.nsf/feedback_choice?OpenForm&amp;Context=footer+ventura+NoTitle+4.5">Submit Feedback</a></li></ul><script type="text/javascript">
+	<ul><li><a href="https://lcauto51.swg.usma.ibm.com/homepage/">Home</a></li><li><a href="javascript:;" onclick="javascript:openHelpWindow('','/topic/com.ibm.lotus.connections.profiles.help/pframe.html'); return false;" class="">Help</a></li><li><a href="http://www-10.lotus.com/ldd/lcforum.nsf">IBM Support Forums</a></li> <li><a href="/profiles/nav/toolbox?appName=profiles" class="">Bookmarking Tools</a></li><li id="lotusBannerFooterMetrics" style="display:none"><a class="lotusMetricsReaderLink" href="https://lcauto51.swg.usma.ibm.com/metrics/">Server Metrics</a></li><li id="lconnFooterMobile" class="lotusHidden"><a id="lconnMobileRedirectLink" href="javascript:;">Mobile UI</a></li><li><a href="/profiles/app/about" class="">About</a></li><li><a href="http://www-306.ibm.com/software/lotus/products/connections/">IBM Connections on ibm.com</a></li><li><a href="http://www.lotus.com/ldd/doc/cct/nextgen.nsf/feedback_choice?OpenForm&amp;Context=footer+ventura+NoTitle+4.5">Submit Feedback</a></li></ul><script type="text/javascript">
 (function(){
    function loadConnectionsLanguageSelector() {
       try {
@@ -1173,7 +1173,7 @@ if (typeof(dojo) != "undefined") {
     var timestamp = lastMod;
 	
 	var layoutInfoUrl = applicationContext + "/widgetInfoPersistence.do?resourceType=profile&appStart=" + profilesData.config.appStartupDate;
-	var userInfoUrl = applicationContext + "/userinfo.do?&timestamp=1404995047885";
+	var userInfoUrl = applicationContext + "/userinfo.do?&timestamp=1405414715329";
 	var resourceId = "";
 	if(resourceId != "")
 	{
@@ -1182,7 +1182,7 @@ if (typeof(dojo) != "undefined") {
 	}
 
 	var WidgetPlacementConfig = {
-		params: {resourceId: "", contextRoot: applicationContext, lastMod: timestamp, version: "20140709.054153", appLangParam: appLang, lang: helpLang},
+		params: {resourceId: "", contextRoot: applicationContext, lastMod: timestamp, version: "20140707.175236", appLangParam: appLang, lang: helpLang},
 		defaultPageId: "profilesView",
 		widgetConfigXMLDocument: null, //if this variable is defined, an http request will not be may to obtain widget data feed via layoutInfoUrl.
 		layoutInfoUrl: layoutInfoUrl, // required only if widgetConfigXMLDocument is not defined
@@ -1207,7 +1207,7 @@ if (typeof(dojo) != "undefined") {
 	}
 
 	
-	var currentUserGuid = "8cbefec0-f6df-1032-9ad5-d02a14283ea9";
+	var currentUserGuid = "4cbc45c0-16a7-1033-9239-95472f45d54f";
 
 	var widgetUserInfo = {
 		canContribute: "false",  
@@ -1215,11 +1215,11 @@ if (typeof(dojo) != "undefined") {
 		
 			
 				"logged-in": "true",
-				displayName: "Amy Jones101",  
-				email: "ajones101@janet.iris.com", 
-				userId: "8cbefec0-f6df-1032-9ad5-d02a14283ea9", 
-				userid: "8cbefec0-f6df-1032-9ad5-d02a14283ea9", 
-				key: "56b2e2ff-693e-44de-a723-07c268783cde"
+				displayName: "Amy Jones1",  
+				email: "ajones1@janet.iris.com", 
+				userId: "4cbc45c0-16a7-1033-9239-95472f45d54f", 
+				userid: "4cbc45c0-16a7-1033-9239-95472f45d54f", 
+				key: "e47f7079-ade1-4164-a7d9-c44094add840"
 			
 			
 		
@@ -1246,63 +1246,63 @@ if (typeof(dojo) != "undefined") {
 		WidgetPlacementConfig.resourceOwner = false;
 		
     WidgetPlacementConfig.availableServices['help'] = true;
-WidgetPlacementConfig.params['helpSvcRef'] = 'https://lcauto19.swg.usma.ibm.com/help';
+WidgetPlacementConfig.params['helpSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/help';
 WidgetPlacementConfig.availableServices['microblogging'] = true;
-WidgetPlacementConfig.params['microbloggingSvcRef'] = 'https://lcauto19.swg.usma.ibm.com/connections/opensocial';
+WidgetPlacementConfig.params['microbloggingSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/connections/opensocial';
 WidgetPlacementConfig.availableServices['metrics'] = true;
-WidgetPlacementConfig.params['metricsSvcRef'] = 'https://lcauto19.swg.usma.ibm.com/metrics';
+WidgetPlacementConfig.params['metricsSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/metrics';
 WidgetPlacementConfig.availableServices['wikis'] = true;
-WidgetPlacementConfig.params['wikisSvcRef'] = 'https://lcauto19.swg.usma.ibm.com/wikis';
+WidgetPlacementConfig.params['wikisSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/wikis';
 WidgetPlacementConfig.availableServices['opengraph'] = true;
-WidgetPlacementConfig.params['opengraphSvcRef'] = 'https://lcauto19.swg.usma.ibm.com/connections/opengraph';
+WidgetPlacementConfig.params['opengraphSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/connections/opengraph';
 WidgetPlacementConfig.availableServices['sand'] = true;
 WidgetPlacementConfig.params['sandSvcRef'] = '';
 WidgetPlacementConfig.availableServices['pushnotification'] = true;
-WidgetPlacementConfig.params['pushnotificationSvcRef'] = 'https://lcauto19.swg.usma.ibm.com/push';
+WidgetPlacementConfig.params['pushnotificationSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/push';
 WidgetPlacementConfig.availableServices['personTag'] = true;
-WidgetPlacementConfig.params['personTagSvcRef'] = 'https://lcauto19.swg.usma.ibm.com/profiles/ibm_semanticTagServlet';
+WidgetPlacementConfig.params['personTagSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/profiles/ibm_semanticTagServlet';
 WidgetPlacementConfig.availableServices['communities'] = true;
-WidgetPlacementConfig.params['communitiesSvcRef'] = 'https://lcauto19.swg.usma.ibm.com/communities';
+WidgetPlacementConfig.params['communitiesSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/communities';
 WidgetPlacementConfig.availableServices['ecm_files'] = true;
-WidgetPlacementConfig.params['ecm_filesSvcRef'] = 'https://lcauto19.swg.usma.ibm.com/dm';
+WidgetPlacementConfig.params['ecm_filesSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/dm';
 WidgetPlacementConfig.availableServices['oauthprovider'] = true;
-WidgetPlacementConfig.params['oauthproviderSvcRef'] = 'https://lcauto19.swg.usma.ibm.com/oauth2';
+WidgetPlacementConfig.params['oauthproviderSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/oauth2';
 WidgetPlacementConfig.availableServices['mediaGallery'] = true;
-WidgetPlacementConfig.params['mediaGallerySvcRef'] = 'https://lcauto19.swg.usma.ibm.com/news/widgets/lw';
+WidgetPlacementConfig.params['mediaGallerySvcRef'] = 'https://lcauto51.swg.usma.ibm.com/news/widgets/lw';
 WidgetPlacementConfig.availableServices['webresources'] = true;
-WidgetPlacementConfig.params['webresourcesSvcRef'] = 'https://lcauto19.swg.usma.ibm.com/connections/resources';
+WidgetPlacementConfig.params['webresourcesSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/connections/resources';
 WidgetPlacementConfig.availableServices['blogs'] = true;
-WidgetPlacementConfig.params['blogsSvcRef'] = 'https://lcauto19.swg.usma.ibm.com/blogs';
+WidgetPlacementConfig.params['blogsSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/blogs';
 WidgetPlacementConfig.availableServices['news'] = true;
-WidgetPlacementConfig.params['newsSvcRef'] = 'https://lcauto19.swg.usma.ibm.com/news';
+WidgetPlacementConfig.params['newsSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/news';
 WidgetPlacementConfig.availableServices['oauth'] = true;
-WidgetPlacementConfig.params['oauthSvcRef'] = 'https://lcauto19.swg.usma.ibm.com/connections/oauth';
+WidgetPlacementConfig.params['oauthSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/connections/oauth';
 WidgetPlacementConfig.availableServices['dogear'] = true;
-WidgetPlacementConfig.params['dogearSvcRef'] = 'https://lcauto19.swg.usma.ibm.com/dogear';
+WidgetPlacementConfig.params['dogearSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/dogear';
 WidgetPlacementConfig.availableServices['mobile'] = true;
-WidgetPlacementConfig.params['mobileSvcRef'] = 'https://lcauto19.swg.usma.ibm.com/mobile';
+WidgetPlacementConfig.params['mobileSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/mobile';
 WidgetPlacementConfig.availableServices['bookmarklet'] = true;
-WidgetPlacementConfig.params['bookmarkletSvcRef'] = 'https://lcauto19.swg.usma.ibm.com/connections/bookmarklet';
+WidgetPlacementConfig.params['bookmarkletSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/connections/bookmarklet';
 WidgetPlacementConfig.availableServices['moderation'] = true;
-WidgetPlacementConfig.params['moderationSvcRef'] = 'https://lcauto19.swg.usma.ibm.com/moderation';
+WidgetPlacementConfig.params['moderationSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/moderation';
 WidgetPlacementConfig.availableServices['deploymentConfig'] = true;
-WidgetPlacementConfig.params['deploymentConfigSvcRef'] = 'https://lcauto19.swg.usma.ibm.com/connections';
+WidgetPlacementConfig.params['deploymentConfigSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/connections';
 WidgetPlacementConfig.availableServices['search'] = true;
-WidgetPlacementConfig.params['searchSvcRef'] = 'https://lcauto19.swg.usma.ibm.com/search';
+WidgetPlacementConfig.params['searchSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/search';
 WidgetPlacementConfig.availableServices['profiles'] = true;
-WidgetPlacementConfig.params['profilesSvcRef'] = 'https://lcauto19.swg.usma.ibm.com/profiles';
+WidgetPlacementConfig.params['profilesSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/profiles';
 WidgetPlacementConfig.availableServices['thumbnail'] = true;
-WidgetPlacementConfig.params['thumbnailSvcRef'] = 'https://lcauto19.swg.usma.ibm.com/connections/thumbnail';
+WidgetPlacementConfig.params['thumbnailSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/connections/thumbnail';
 WidgetPlacementConfig.availableServices['activities'] = true;
-WidgetPlacementConfig.params['activitiesSvcRef'] = 'https://lcauto19.swg.usma.ibm.com/activities';
+WidgetPlacementConfig.params['activitiesSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/activities';
 WidgetPlacementConfig.availableServices['homepage'] = true;
-WidgetPlacementConfig.params['homepageSvcRef'] = 'https://lcauto19.swg.usma.ibm.com/homepage';
+WidgetPlacementConfig.params['homepageSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/homepage';
 WidgetPlacementConfig.availableServices['forums'] = true;
-WidgetPlacementConfig.params['forumsSvcRef'] = 'https://lcauto19.swg.usma.ibm.com/forums';
+WidgetPlacementConfig.params['forumsSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/forums';
 WidgetPlacementConfig.availableServices['opensocial'] = true;
-WidgetPlacementConfig.params['opensocialSvcRef'] = 'https://lcauto19.swg.usma.ibm.com/connections/opensocial';
+WidgetPlacementConfig.params['opensocialSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/connections/opensocial';
 WidgetPlacementConfig.availableServices['files'] = true;
-WidgetPlacementConfig.params['filesSvcRef'] = 'https://lcauto19.swg.usma.ibm.com/files';
+WidgetPlacementConfig.params['filesSvcRef'] = 'https://lcauto51.swg.usma.ibm.com/files';
 
     
     // Engage Widget Framework

@@ -17,8 +17,8 @@ package com.ibm.sbt.test.lib;
 
 
 
+import org.apache.http.client.CookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
-
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
@@ -89,8 +89,13 @@ public class MockEndpoint extends BasicEndpoint {
 	public void initialize(DefaultHttpClient httpClient)
 			throws ClientServicesException {
 		if (TestEnvironment.getRequiresAuthentication()) {
-			endpoint.initialize(httpClient);
+		    endpoint.initialize(httpClient);
 		}
+	}
+	
+	@Override
+	public CookieStore getCookies() {
+	    return endpoint.getCookies();
 	}
 
 }

@@ -146,6 +146,10 @@
 			<property-name>forceTrustSSLCertificate</property-name>
 			<value>true</value>
 		</managed-property>
+		<managed-property>
+			<property-name>enableStatefulCookies</property-name>
+			<value>true</value>
+		</managed-property>
 	</managed-bean>
 
 	<managed-bean>
@@ -221,6 +225,10 @@
 		</managed-property>
 		<managed-property>
 			<property-name>forceTrustSSLCertificate</property-name>
+			<value>true</value>
+		</managed-property>
+		<managed-property>
+			<property-name>enableStatefulCookies</property-name>
 			<value>true</value>
 		</managed-property>
 	</managed-bean>

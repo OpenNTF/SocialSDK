@@ -38,16 +38,6 @@ import com.ibm.sbt.test.lib.TestEnvironment;
  * 
  */
 public class ActivityFeedMoveTest extends BaseActivityServiceTest {
-    @BeforeClass
-    public static void before() {
-        TestEnvironment.enableSmartCloud(true);
-    }
-
-    @AfterClass
-    public static void after() {
-        TestEnvironment.enableSmartCloud(false);
-    }
-
     @Test
     public void testMoveField() throws ClientServicesException, XMLException {
         // Create activity nodes

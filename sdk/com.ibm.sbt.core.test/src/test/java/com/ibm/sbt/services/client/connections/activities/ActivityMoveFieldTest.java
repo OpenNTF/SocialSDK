@@ -29,7 +29,6 @@ import com.ibm.sbt.security.authentication.AuthenticationException;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.connections.common.Link;
-import com.ibm.sbt.services.client.connections.common.Member;
 import com.ibm.sbt.services.endpoints.BasicEndpoint;
 import com.ibm.sbt.test.lib.TestEnvironment;
 
@@ -41,87 +40,6 @@ public class ActivityMoveFieldTest extends BaseActivityServiceTest {
 	
 	@Rule public ExpectedException thrown= ExpectedException.none();
 	
-	@Test
-	public void testMoveNodeACL() throws ClientServicesException {
-		Activity activityA = new Activity();
-		activityA.setTitle(createActivityTitle());
-		activityA = activityService.createActivity(activityA);
-
-		Activity activityB = new Activity();
-		activityB.setTitle(createActivityTitle());
-		activityB = activityService.createActivity(activityB);
-
-		String memberId = getMemberId();
-		Member member = activityB.addMember("person", memberId, "owner");
-
-		ActivityNode srcActivityNode = new ActivityNode();
-		srcActivityNode.setActivityUuid(activityA.getActivityUuid());
-		srcActivityNode.setTitle("Source ActivityNode");
-		srcActivityNode.setType("ENTRY");
-
-		// Field 1
-		TextField textField = new TextField();
-		textField.setName("test_text");
-		textField.setPosition(1000);
-		textField.setSummary("Test_Text_Field");
-
-		// Field 2 
-		Date date = new Date();
-		date.setTime(1397650699000L);
-		DateField dateField = new DateField();
-		dateField.setName("test_date");
-		dateField.setPosition(2000);
-		dateField.setDate(date);
-		
-		// Field 3
-		TextField hiddenTextField = new TextField();
-		hiddenTextField.setName("test_hidden_text");
-		hiddenTextField.setPosition(3000);
-		hiddenTextField.setSummary("Hidden_Text_Field");
-		hiddenTextField.setHidden(true);
-
-		srcActivityNode.addField(textField);
-		srcActivityNode.addField(hiddenTextField);
-		srcActivityNode.addField(dateField);
-
-		srcActivityNode = activityService.createActivityNode(srcActivityNode);
-
-		activityService.moveNode(srcActivityNode.getActivityNodeUuid(), activityB.getActivityUuid());
-
-		BasicEndpoint endpoint = (BasicEndpoint)activityService.getEndpoint();
-		try {
-			endpoint.logout();
-			endpoint.login(TestEnvironment.getSecondaryUserEmail(), TestEnvironment.getSecondaryUserPassword());
-		} catch (AuthenticationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		ActivityNode read = activityService.getActivityNode(srcActivityNode.getActivityNodeUuid());
-		Assert.assertNotNull(srcActivityNode);
-
-		Field movedTextField = read.getFieldByName(textField.getName());
-		Assert.assertTrue(movedTextField instanceof TextField);
-		Assert.assertEquals("test_text", movedTextField.getName());
-		Assert.assertEquals(1000, ((TextField)movedTextField).getPosition());
-		Assert.assertEquals("Test_Text_Field", ((TextField)movedTextField).getSummary());
-
-		// Check date field
-		Field movedDateField = read.getFieldByName(dateField.getName());
-		Assert.assertTrue(movedDateField instanceof DateField);
-		Assert.assertEquals("test_date", ((DateField)movedDateField).getName());
-		Assert.assertEquals(2000, ((DateField)movedDateField).getPosition());
-		Assert.assertNotNull(((DateField)movedDateField).getDate());
-		
-		// Check hidden text field
-		Field movedHiddenTextField = read.getFieldByName(hiddenTextField.getName());
-		Assert.assertTrue(movedHiddenTextField instanceof TextField);
-		Assert.assertTrue(((TextField)movedHiddenTextField).isHidden());
-		Assert.assertEquals("test_hidden_text", ((TextField)movedHiddenTextField).getName());
-		Assert.assertEquals(3000, ((TextField)movedHiddenTextField).getPosition());
-		Assert.assertEquals("Hidden_Text_Field", ((TextField)movedHiddenTextField).getSummary());
-	}
-
 	@Test
 	public void testMoveField() throws ClientServicesException, XMLException {
 		// Create activity nodes

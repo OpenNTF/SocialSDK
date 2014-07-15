@@ -4,7 +4,7 @@
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Thu, 10 Jul 2014 12:24:09 GMT]]></value>
+        <value><![CDATA[Tue, 15 Jul 2014 08:58:36 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -20,7 +20,7 @@
     </header>
     <header>
         <name><![CDATA[Last-Modified]]></name>
-        <value><![CDATA[Thu, 10 Jul 2014 12:24:09 GMT]]></value>
+        <value><![CDATA[Tue, 15 Jul 2014 08:58:36 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
@@ -28,11 +28,11 @@
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=Ppsrcr7hseKUnDjcR1LhJyMcKB8uHa3eEcFVse3iIlMPfbeOTOEGZ1FyeOJxuqcbaX0RMxcL7FUvGujzyaN9yGnNv2+NLz67YbABjzDvWiAO+TZqsELVWwwpjtL17o7ZN51yBS3uSmP9KWMP7OmqVJkIFuUjQedpOb2iIHFjIkfluvC6VRa3C766zV5d1b3ng0IcyJu1ItichrPrzJTTr1HrxkpxWLD214IrXZDBZnRTefcrEMmMe8NK9/WdpYQPl/m6V/m+awp7MLrHeAYZtxVBNHXKJZ3Ur5xHXLe6/P6P0Y4TIeKMuXnnEDpR6XowXndTABs1Q72ke4z9cIGaVcZEnL4TMgXGGn2UTCZRckCB5IYom1t6V5Gm8zgo0JVn5Pskz+b4vIO0h7Z80LgUgPTl7O2GPWpmy+Ot5ujUaeJfyXtphIDsF6bOYgRwBc3j8rPTIrqrSbT08fCdrAu69sya9HrEYf2hWQ8VWulWAgeM8/WDPBGDLZdm7C+nTmWr1ZIxQJyYBKY/VXJO/doQbGPh3Elt6+tfJbpLsRlJoTzZaf//TxdlUOEpeWGu1lynLkmQKeEnznA+Agrb+EIjDfYufDBxzkOeQooYiUyuX7++4qfTxfsshVX+3Pckp/5s2fPG+aD/QJ0To8C2HwcILkisgFw8dP1eJKdUwRhjx3jLpq/W0P9INm07n2X+83O8Uf4fu0nCu2ZmcYxGHz3BpQ==; Path=/; Domain=.swg.usma.ibm.com]]></value>
+        <value><![CDATA[LtpaToken2=/FIiGiv6ZT+1DaoG6ebk/z6ixxaVP8pqSgM7dhJJWYyWwG40xoSHUPII2cijjg67/La6v/voO36uW3uqIMpETg8dEvErE0ainkkAnzOmg1BTBS/ELyvCAWgQaAjguUl1MJs31LyU3Was+HCCZNUvJHi6tF6JDF1xEpiBZSv5RgXoFvqzCrMp9dbawZSd/ivcMB1QfYWvUaSy//umxFZjWxInhQsaziYIIbrsbwOesQ3TwrE3y9FLiS0L/BOPpCe0rFE2eFtUHWQvvMeBw3U62J87rjAUpI1NT2BdDeqgiKCuWkWAJm1ZHCQY5nsPesOjAC8wXmNdOck+J1j55sf6UxdfnSyGwBmFVneUqGsl19DWxHkXQtcxsO98UIHPAabLETUAOGIrhQuLy0lyyrNf6Yq0L8+0GfI2FIK6zaSaa5AzXf741ePUXu+Aq6QPSBLjV2Uwk0v0x5BkvH6b2fIb8LnGebKRpF9iH1SH4GMUEpo1xEFkC2OuoBMEpjlb2N59wO/IEcV4qmpcyKMmUKpMuoLFf68Ke/ODaupSfLhyC/ZMufKqKt7nb+NZqfgLf/U9DHp25unbrIvkYSk6woq+suG/wfHJbAkQPoe5PCKBmMzdymxgjan07MAKfCw7AqKZ+NuKdvDpknUaUmMnPSaO73UF7uQi1GY2VvkjFxbodTajS4lLbDsZBXguDU3CmCx5CgqrSUKSji/C4/3U/971Yg==; Path=/; Domain=.swg.usma.ibm.com]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[ICSESSIONID=0000MKdl5eKbE10glEeg96OVMCT:-1; Path=/; HttpOnly]]></value>
+        <value><![CDATA[ICSESSIONID=0000m2k73VGid24Lrx5DoIA-zf3:-1; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Expires]]></name>
@@ -62,6 +62,6 @@
         <name><![CDATA[Content-Language]]></name>
         <value><![CDATA[en-US]]></value>
     </header></headers>
-<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?><feed xmlns:app="http://www.w3.org/2007/app" xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:fh="http://purl.org/syndication/history/1.0" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns="http://www.w3.org/2005/Atom"><id>tag:profiles.ibm.com,2006:feed</id><generator version="5.0.0.0" uri="http://www.ibm.com/xmlns/prod/sn">IBM Connections - Profiles</generator><title type="text">profiles where  email=abc@xyz.c</title><author><name>IBM Connections - Profiles</name></author><updated>2014-07-10T12:24:09.280Z</updated><opensearch:totalResults>0</opensearch:totalResults><opensearch:startIndex>1</opensearch:startIndex><opensearch:itemsPerPage>10</opensearch:itemsPerPage><link href="https://lcauto19.swg.usma.ibm.com/profiles/atom/search.do?email=abc%40xyz.c" rel="self" type="application/atom+xml"></link></feed>]]></data>
+<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?><feed xmlns:app="http://www.w3.org/2007/app" xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:fh="http://purl.org/syndication/history/1.0" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns="http://www.w3.org/2005/Atom"><id>tag:profiles.ibm.com,2006:feed</id><generator version="5.0.0.0" uri="http://www.ibm.com/xmlns/prod/sn">IBM Connections - Profiles</generator><title type="text">profiles where  email=abc@xyz.c</title><author><name>IBM Connections - Profiles</name></author><updated>2014-07-15T08:58:36.391Z</updated><opensearch:totalResults>0</opensearch:totalResults><opensearch:startIndex>1</opensearch:startIndex><opensearch:itemsPerPage>10</opensearch:itemsPerPage><link href="https://lcauto51.swg.usma.ibm.com/profiles/atom/search.do?email=abc%40xyz.c" rel="self" type="application/atom+xml"></link></feed>]]></data>
 </response>
 </responses>

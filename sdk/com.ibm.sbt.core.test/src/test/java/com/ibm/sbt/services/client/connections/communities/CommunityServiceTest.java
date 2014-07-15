@@ -92,7 +92,7 @@ public class CommunityServiceTest extends BaseCommunityServiceTest {
         sub = sub.save();
         sub = sub.load();
         //we set the url to html page but receive a link to atom
-        Assert.assertTrue(sub.getParentCommunityUrl().contains(community.getCommunityUuid()));
+        Assert.assertTrue(sub.getParentCommunityUrl().contains(unRandomize(community.getCommunityUuid())));
         communityService.deleteCommunity(sub.getCommunityUuid());
  
     }

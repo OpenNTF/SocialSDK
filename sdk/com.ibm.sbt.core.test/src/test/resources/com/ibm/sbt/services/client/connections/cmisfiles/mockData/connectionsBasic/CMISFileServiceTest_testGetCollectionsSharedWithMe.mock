@@ -4,7 +4,7 @@
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Thu, 10 Jul 2014 12:16:51 GMT]]></value>
+        <value><![CDATA[Tue, 15 Jul 2014 08:50:42 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -20,7 +20,7 @@
     </header>
     <header>
         <name><![CDATA[Content-Length]]></name>
-        <value><![CDATA[356]]></value>
+        <value><![CDATA[352]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
@@ -28,7 +28,7 @@
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=Ppsrcr7hseKUnDjcR1LhJyMcKB8uHa3eEcFVse3iIlMPfbeOTOEGZ1FyeOJxuqcbaX0RMxcL7FUvGujzyaN9yGnNv2+NLz67YbABjzDvWiAO+TZqsELVWwwpjtL17o7ZN51yBS3uSmP9KWMP7OmqVJkIFuUjQedpOb2iIHFjIkfluvC6VRa3C766zV5d1b3ng0IcyJu1ItichrPrzJTTr1HrxkpxWLD214IrXZDBZnRTefcrEMmMe8NK9/WdpYQPl/m6V/m+awp7MLrHeAYZtxVBNHXKJZ3Ur5xHXLe6/P6P0Y4TIeKMuXnnEDpR6XowXndTABs1Q72ke4z9cIGaVcZEnL4TMgXGGn2UTCZRckCB5IYom1t6V5Gm8zgo0JVn5Pskz+b4vIO0h7Z80LgUgPTl7O2GPWpmy+Ot5ujUaeJfyXtphIDsF6bOYgRwBc3j8rPTIrqrSbT08fCdrAu69sya9HrEYf2hWQ8VWulWAgeM8/WDPBGDLZdm7C+nTmWr1ZIxQJyYBKY/VXJO/doQbGPh3Elt6+tfJbpLsRlJoTzZaf//TxdlUOEpeWGu1lynLkmQKeEnznA+Agrb+EIjDfYufDBxzkOeQooYiUyuX7++4qfTxfsshVX+3Pckp/5s2fPG+aD/QJ0To8C2HwcILkisgFw8dP1eJKdUwRhjx3jLpq/W0P9INm07n2X+83O8Uf4fu0nCu2ZmcYxGHz3BpQ==; Path=/; Domain=.swg.usma.ibm.com]]></value>
+        <value><![CDATA[LtpaToken2=/FIiGiv6ZT+1DaoG6ebk/z6ixxaVP8pqSgM7dhJJWYyWwG40xoSHUPII2cijjg67/La6v/voO36uW3uqIMpETg8dEvErE0ainkkAnzOmg1BTBS/ELyvCAWgQaAjguUl1MJs31LyU3Was+HCCZNUvJHi6tF6JDF1xEpiBZSv5RgXoFvqzCrMp9dbawZSd/ivcMB1QfYWvUaSy//umxFZjWxInhQsaziYIIbrsbwOesQ3TwrE3y9FLiS0L/BOPpCe0rFE2eFtUHWQvvMeBw3U62J87rjAUpI1NT2BdDeqgiKCuWkWAJm1ZHCQY5nsPesOjAC8wXmNdOck+J1j55sf6UxdfnSyGwBmFVneUqGsl19DWxHkXQtcxsO98UIHPAabLETUAOGIrhQuLy0lyyrNf6Yq0L8+0GfI2FIK6zaSaa5AzXf741ePUXu+Aq6QPSBLjV2Uwk0v0x5BkvH6b2fIb8LnGebKRpF9iH1SH4GMUEpo1xEFkC2OuoBMEpjlb2N59wO/IEcV4qmpcyKMmUKpMuoLFf68Ke/ODaupSfLhyC/ZMufKqKt7nb+NZqfgLf/U9DHp25unbrIvkYSk6woq+suG/wfHJbAkQPoe5PCKBmMzdymxgjan07MAKfCw7AqKZ+NuKdvDpknUaUmMnPSaO73UF7uQi1GY2VvkjFxbodTajS4lLbDsZBXguDU3CmCx5CgqrSUKSji/C4/3U/971Yg==; Path=/; Domain=.swg.usma.ibm.com]]></value>
     </header>
     <header>
         <name><![CDATA[Expires]]></name>
@@ -54,13 +54,13 @@
         <name><![CDATA[Content-Language]]></name>
         <value><![CDATA[en-US]]></value>
     </header></headers>
-<data><![CDATA[{"entry":{"appData":{"connections":{"isExternal":"false","organizationId":"urn:lsid:lconn.ibm.com:connections.organization:00000000-0000-0000-0000-000000000000"}},"displayName":"Amy Jones101","emails":[{"type":"primary","value":"ajones101@janet.iris.com","primary":true}],"id":"urn:lsid:lconn.ibm.com:profiles.person:8cbefec0-f6df-1032-9ad5-d02a14283ea9"}}]]></data>
+<data><![CDATA[{"entry":{"appData":{"connections":{"isExternal":"false","organizationId":"urn:lsid:lconn.ibm.com:connections.organization:00000000-0000-0000-0000-000000000000"}},"displayName":"Amy Jones1","emails":[{"type":"primary","value":"ajones1@janet.iris.com","primary":true}],"id":"urn:lsid:lconn.ibm.com:profiles.person:4cbc45c0-16a7-1033-9239-95472f45d54f"}}]]></data>
 </response>
 <response statusCode="200" statusReason="OK">
 <headers>
     <header>
         <name><![CDATA[Date]]></name>
-        <value><![CDATA[Thu, 10 Jul 2014 12:16:52 GMT]]></value>
+        <value><![CDATA[Tue, 15 Jul 2014 08:50:42 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[X-Powered-By]]></name>
@@ -76,7 +76,7 @@
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=Ppsrcr7hseKUnDjcR1LhJyMcKB8uHa3eEcFVse3iIlMPfbeOTOEGZ1FyeOJxuqcbaX0RMxcL7FUvGujzyaN9yGnNv2+NLz67YbABjzDvWiAO+TZqsELVWwwpjtL17o7ZN51yBS3uSmP9KWMP7OmqVJkIFuUjQedpOb2iIHFjIkfluvC6VRa3C766zV5d1b3ng0IcyJu1ItichrPrzJTTr1HrxkpxWLD214IrXZDBZnRTefcrEMmMe8NK9/WdpYQPl/m6V/m+awp7MLrHeAYZtxVBNHXKJZ3Ur5xHXLe6/P6P0Y4TIeKMuXnnEDpR6XowXndTABs1Q72ke4z9cIGaVcZEnL4TMgXGGn2UTCZRckCB5IYom1t6V5Gm8zgo0JVn5Pskz+b4vIO0h7Z80LgUgPTl7O2GPWpmy+Ot5ujUaeJfyXtphIDsF6bOYgRwBc3j8rPTIrqrSbT08fCdrAu69sya9HrEYf2hWQ8VWulWAgeM8/WDPBGDLZdm7C+nTmWr1ZIxQJyYBKY/VXJO/doQbGPh3Elt6+tfJbpLsRlJoTzZaf//TxdlUOEpeWGu1lynLkmQKeEnznA+Agrb+EIjDfYufDBxzkOeQooYiUyuX7++4qfTxfsshVX+3Pckp/5s2fPG+aD/QJ0To8C2HwcILkisgFw8dP1eJKdUwRhjx3jLpq/W0P9INm07n2X+83O8Uf4fu0nCu2ZmcYxGHz3BpQ==; Path=/; Domain=.swg.usma.ibm.com]]></value>
+        <value><![CDATA[LtpaToken2=/FIiGiv6ZT+1DaoG6ebk/z6ixxaVP8pqSgM7dhJJWYyWwG40xoSHUPII2cijjg67/La6v/voO36uW3uqIMpETg8dEvErE0ainkkAnzOmg1BTBS/ELyvCAWgQaAjguUl1MJs31LyU3Was+HCCZNUvJHi6tF6JDF1xEpiBZSv5RgXoFvqzCrMp9dbawZSd/ivcMB1QfYWvUaSy//umxFZjWxInhQsaziYIIbrsbwOesQ3TwrE3y9FLiS0L/BOPpCe0rFE2eFtUHWQvvMeBw3U62J87rjAUpI1NT2BdDeqgiKCuWkWAJm1ZHCQY5nsPesOjAC8wXmNdOck+J1j55sf6UxdfnSyGwBmFVneUqGsl19DWxHkXQtcxsO98UIHPAabLETUAOGIrhQuLy0lyyrNf6Yq0L8+0GfI2FIK6zaSaa5AzXf741ePUXu+Aq6QPSBLjV2Uwk0v0x5BkvH6b2fIb8LnGebKRpF9iH1SH4GMUEpo1xEFkC2OuoBMEpjlb2N59wO/IEcV4qmpcyKMmUKpMuoLFf68Ke/ODaupSfLhyC/ZMufKqKt7nb+NZqfgLf/U9DHp25unbrIvkYSk6woq+suG/wfHJbAkQPoe5PCKBmMzdymxgjan07MAKfCw7AqKZ+NuKdvDpknUaUmMnPSaO73UF7uQi1GY2VvkjFxbodTajS4lLbDsZBXguDU3CmCx5CgqrSUKSji/C4/3U/971Yg==; Path=/; Domain=.swg.usma.ibm.com]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
@@ -84,7 +84,7 @@
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[ICSESSIONID=0000oPxdZJ0mwms6bZBDY-RuH8X:-1; Path=/; HttpOnly]]></value>
+        <value><![CDATA[ICSESSIONID=00004IEub-_BJcVvwtBumKo6mpX:-1; Path=/; HttpOnly]]></value>
     </header>
     <header>
         <name><![CDATA[Expires]]></name>
@@ -114,6 +114,6 @@
         <name><![CDATA[Content-Language]]></name>
         <value><![CDATA[en-US]]></value>
     </header></headers>
-<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?><atom:feed xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:cmisra="http://docs.oasis-open.org/ns/cmis/restatom/200908/" xmlns:cmism="http://docs.oasis-open.org/ns/cmis/messaging/200908/" xmlns:lcmis="http://www.ibm.com/xmlns/prod/sn/cmis" xmlns:cmis="http://docs.oasis-open.org/ns/cmis/core/200908/" xmlns:app="http://www.w3.org/2007/app" xmlns:atom="http://www.w3.org/2005/Atom"><atom:title type="text">Folders Shared With Me</atom:title><atom:author><atom:name>Amy Jones101</atom:name><atom:email>ajones101@janet.iris.com</atom:email><lcmis:email>ajones101@janet.iris.com</lcmis:email><snx:userid>8cbefec0-f6df-1032-9ad5-d02a14283ea9</snx:userid><snx:userState>active</snx:userState><lcmis:displayName>Amy Jones101</lcmis:displayName><lcmis:principalId>8cbefec0-f6df-1032-9ad5-d02a14283ea9</lcmis:principalId></atom:author><atom:updated>2014-07-10T12:16:52.308Z</atom:updated><atom:id>http://www.ibm.com/xmlns/prod/sn/cmis/snx:virtual!.!collectionssharedwith</atom:id><atom:link href="https://lcauto19.swg.usma.ibm.com/files/basic/cmis/repository/p%218cbefec0-f6df-1032-9ad5-d02a14283ea9/folderc/snx%3Avirtual%21.%21collectionssharedwith" rel="self" type="application/atom+xml;type=feed"></atom:link><atom:link href="https://lcauto19.swg.usma.ibm.com/files/basic/cmis/repository/p%218cbefec0-f6df-1032-9ad5-d02a14283ea9/servicedoc" rel="service" type="application/atomsvc+xml"></atom:link><atom:link href="https://lcauto19.swg.usma.ibm.com/files/basic/cmis/repository/p%218cbefec0-f6df-1032-9ad5-d02a14283ea9/object/snx%3Avirtual%21.%21collectionssharedwith" rel="via" type="application/atom+xml;type=entry" cmisra:id="snx:virtual!.!collectionssharedwith" xmlns:cmisra="http://docs.oasis-open.org/ns/cmis/restatom/200908/"></atom:link><atom:link href="https://lcauto19.swg.usma.ibm.com/files/basic/cmis/repository/p%218cbefec0-f6df-1032-9ad5-d02a14283ea9/folderc/snx%3Aroot" rel="up" type="application/atom+xml;type=entry" cmisra:id="snx:root" xmlns:cmisra="http://docs.oasis-open.org/ns/cmis/restatom/200908/"></atom:link><atom:link href="https://lcauto19.swg.usma.ibm.com/files/basic/cmis/repository/p%218cbefec0-f6df-1032-9ad5-d02a14283ea9/mfolderc/snx%3Avirtual%21.%21collectionssharedwith" rel="http://www.ibm.com/xmlns/prod/sn/cmis/multipart-form/folderChildrenCollection" type="text/html"></atom:link><cmisra:numItems>0</cmisra:numItems><atom:link href="https://lcauto19.swg.usma.ibm.com/files/basic/cmis/repository/p%218cbefec0-f6df-1032-9ad5-d02a14283ea9/folderc/snx%3Avirtual%21.%21collectionssharedwith?skipCount=0&amp;maxItems=10" rel="first" type="application/atom+xml;type=feed"></atom:link><app:collection href="https://lcauto19.swg.usma.ibm.com/files/basic/cmis/repository/p%218cbefec0-f6df-1032-9ad5-d02a14283ea9/folderc/snx%3Avirtual%21.%21collectionssharedwith"><atom:title type="text">Folders Shared With Me</atom:title><app:accept>*/*</app:accept></app:collection></atom:feed>]]></data>
+<data><![CDATA[<?xml version="1.0" encoding="UTF-8"?><atom:feed xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:cmisra="http://docs.oasis-open.org/ns/cmis/restatom/200908/" xmlns:cmism="http://docs.oasis-open.org/ns/cmis/messaging/200908/" xmlns:lcmis="http://www.ibm.com/xmlns/prod/sn/cmis" xmlns:cmis="http://docs.oasis-open.org/ns/cmis/core/200908/" xmlns:app="http://www.w3.org/2007/app" xmlns:atom="http://www.w3.org/2005/Atom"><atom:title type="text">Folders Shared With Me</atom:title><atom:author><atom:name>Amy Jones1</atom:name><atom:email>ajones1@janet.iris.com</atom:email><lcmis:email>ajones1@janet.iris.com</lcmis:email><snx:userid>4cbc45c0-16a7-1033-9239-95472f45d54f</snx:userid><snx:userState>active</snx:userState><lcmis:displayName>Amy Jones1</lcmis:displayName><lcmis:principalId>4cbc45c0-16a7-1033-9239-95472f45d54f</lcmis:principalId></atom:author><atom:updated>2014-07-15T08:50:42.970Z</atom:updated><atom:id>http://www.ibm.com/xmlns/prod/sn/cmis/snx:virtual!.!collectionssharedwith</atom:id><atom:link href="https://lcauto51.swg.usma.ibm.com/files/basic/cmis/repository/p%214cbc45c0-16a7-1033-9239-95472f45d54f/folderc/snx%3Avirtual%21.%21collectionssharedwith" rel="self" type="application/atom+xml;type=feed"></atom:link><atom:link href="https://lcauto51.swg.usma.ibm.com/files/basic/cmis/repository/p%214cbc45c0-16a7-1033-9239-95472f45d54f/servicedoc" rel="service" type="application/atomsvc+xml"></atom:link><atom:link href="https://lcauto51.swg.usma.ibm.com/files/basic/cmis/repository/p%214cbc45c0-16a7-1033-9239-95472f45d54f/object/snx%3Avirtual%21.%21collectionssharedwith" rel="via" type="application/atom+xml;type=entry" cmisra:id="snx:virtual!.!collectionssharedwith" xmlns:cmisra="http://docs.oasis-open.org/ns/cmis/restatom/200908/"></atom:link><atom:link href="https://lcauto51.swg.usma.ibm.com/files/basic/cmis/repository/p%214cbc45c0-16a7-1033-9239-95472f45d54f/folderc/snx%3Aroot" rel="up" type="application/atom+xml;type=entry" cmisra:id="snx:root" xmlns:cmisra="http://docs.oasis-open.org/ns/cmis/restatom/200908/"></atom:link><atom:link href="https://lcauto51.swg.usma.ibm.com/files/basic/cmis/repository/p%214cbc45c0-16a7-1033-9239-95472f45d54f/mfolderc/snx%3Avirtual%21.%21collectionssharedwith" rel="http://www.ibm.com/xmlns/prod/sn/cmis/multipart-form/folderChildrenCollection" type="text/html"></atom:link><cmisra:numItems>0</cmisra:numItems><atom:link href="https://lcauto51.swg.usma.ibm.com/files/basic/cmis/repository/p%214cbc45c0-16a7-1033-9239-95472f45d54f/folderc/snx%3Avirtual%21.%21collectionssharedwith?skipCount=0&amp;maxItems=10" rel="first" type="application/atom+xml;type=feed"></atom:link><app:collection href="https://lcauto51.swg.usma.ibm.com/files/basic/cmis/repository/p%214cbc45c0-16a7-1033-9239-95472f45d54f/folderc/snx%3Avirtual%21.%21collectionssharedwith"><atom:title type="text">Folders Shared With Me</atom:title><app:accept>*/*</app:accept></app:collection></atom:feed>]]></data>
 </response>
 </responses>

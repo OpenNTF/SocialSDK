@@ -60,7 +60,7 @@ public class ActivityCrudrTest extends BaseActivityServiceTest {
 		System.out.println("READ: " + read.toXmlString());
 		
 		Assert.assertEquals(created.getActivityUuid(), read.getActivityUuid());
-		Assert.assertEquals(created.getTitle(), read.getTitle());
+		Assert.assertEquals(unRandomize(created.getTitle()), unRandomize(read.getTitle()));
 	}
 	
 	@Test
@@ -111,7 +111,7 @@ public class ActivityCrudrTest extends BaseActivityServiceTest {
 		Activity read = activityService.getActivity(created.getActivityUuid());
 
 		Assert.assertEquals(created.getActivityUuid(), read.getActivityUuid());
-		Assert.assertEquals(created.getTitle(), read.getTitle());
+		Assert.assertEquals(unRandomize(created.getTitle()), unRandomize(read.getTitle()));
 
 		//System.out.println("RESTORED: " + restored.toXmlString());
 		//System.out.println("READ: " + read.toXmlString());

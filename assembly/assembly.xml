@@ -209,7 +209,7 @@
 			<directory>${project.build.directory}/tomcat</directory>
 			<outputDirectory>sbtsdk/tomcat</outputDirectory>
 			<includes>
-				<include>**/apache-tomcat-7.0.30-sbt.zip</include>
+				<include>**/apache-tomcat-7.0.54-sbt.zip</include>
 			</includes>
 		</fileSet>
 		<fileSet>

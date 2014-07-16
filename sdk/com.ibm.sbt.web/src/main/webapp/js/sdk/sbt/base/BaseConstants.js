@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * ï¿½ Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -58,7 +58,7 @@ define([ "../config" ], function(sbt) {
 	    },
 	
         /**
-         * XPath expressions to be used when reading an forum topic entry
+         * XPath expressions to be used when reading an entry
          */
         AtomEntryXPath : {
             // used by getEntityData
@@ -83,7 +83,8 @@ define([ "../config" ], function(sbt) {
     		categoryTerm : "a:category/@term",
             editUrl : "a:link[@rel='edit']/@href",
             selfUrl : "a:link[@rel='self']/@href",
-            alternateUrl : "a:link[@rel='alternate']/@href"
+            alternateUrl : "a:link[@rel='alternate']/@href",
+            tags : "./a:category[not(@scheme)]/@term"
         },
         
 	    /**

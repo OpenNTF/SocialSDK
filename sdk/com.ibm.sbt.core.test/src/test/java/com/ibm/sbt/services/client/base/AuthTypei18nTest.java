@@ -29,7 +29,7 @@ public class AuthTypei18nTest {
 	@Test
 	public void testGetAuthTypeTurkish() {
 		Locale current = Locale.getDefault();
-		Locale turkey =  Locale.forLanguageTag("tr-TR");
+		Locale turkey =  new Locale("tr", "TR");
 		Locale.setDefault(turkey);
 		String basic = AuthType.BASIC.get();
 		assertEquals("basic", basic);

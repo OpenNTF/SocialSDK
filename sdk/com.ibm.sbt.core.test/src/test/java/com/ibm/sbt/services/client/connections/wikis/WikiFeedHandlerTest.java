@@ -61,9 +61,9 @@ public class WikiFeedHandlerTest extends BaseWikiServiceTest {
 		assertEquals("FrankAdams@renovations.com", wiki.getModifier().getEmail());
 		assertEquals("active", wiki.getModifier().getUserState());
 		
-		assertEquals("2013-10-08T11:14:08.000Z", DateSerializer.toString(wiki.getPublished()));
+		assertEquals("2013-10-08T12:14:08.000Z", DateSerializer.toString(wiki.getPublished()));
 		assertEquals("2013-11-22T15:18:26.000Z", DateSerializer.toString(wiki.getUpdated()));
-		assertEquals("2013-10-08T11:14:08.000Z", DateSerializer.toString(wiki.getCreated()));
+		assertEquals("2013-10-08T12:14:08.000Z", DateSerializer.toString(wiki.getCreated()));
 		assertEquals("2013-11-22T15:18:04.000Z", DateSerializer.toString(wiki.getModified()));
 		
 		assertEquals("Small description of this private wiki.", wiki.getSummary());

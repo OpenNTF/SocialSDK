@@ -4,9 +4,6 @@
 	<comment></comment>
 	<projects>
 		<project>com.ibm.sbt.core</project>
-		<project>com.ibm.commons.xml</project>
-		<project>com.ibm.commons.runtime</project>
-		<project>com.ibm.commons</project>
 		<project>com.ibm.sbt.samples.commons</project>
 	</projects>
 	<buildSpec>

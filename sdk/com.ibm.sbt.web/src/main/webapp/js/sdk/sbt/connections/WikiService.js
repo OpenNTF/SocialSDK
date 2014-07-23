@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -15,7 +15,7 @@
  */
 
 /**
- * The Wikis application of IBM® Connections enables teams to create a shared repository of information. 
+ * The Wikis application of IBMÂ© Connections enables teams to create a shared repository of information. 
  * The Wikis API allows application programs to create new wikis, and to read and modify existing wikis.
  * 
  * @module sbt.connections.WikiService
@@ -217,7 +217,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         },
         
         /**
-         * Return the community’s unique ID if this wiki belongs to a community.
+         * Return the communityÂ©s unique ID if this wiki belongs to a community.
          * 
          * @method getCommunityUuid
          * @return {String} Uuid of the Community
@@ -227,7 +227,7 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         },
 
         /**
-         * Set the community’s unique ID if this wiki belongs to a community.
+         * Set the communityÂ©s unique ID if this wiki belongs to a community.
          * 
          * @method setCommunityUuid
          * @param {String} communityUuid Community Uuid of the forum

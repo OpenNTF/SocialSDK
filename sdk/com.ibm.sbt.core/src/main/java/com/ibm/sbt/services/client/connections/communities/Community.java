@@ -125,7 +125,15 @@ public class Community extends BaseEntity {
 	public String getCommunityUrl() {
 		return getAsString(CommunityXPath.communityUrl);
 	}
-
+	
+    /**
+     * Returns the communityUrl
+     * 
+     * @return communityUrl
+     */
+    public String getSelfUrl() {
+        return getAsString(CommunityXPath.communityAtomUrl);
+    }
 	/**
 	 * Returns the logoUrl
 	 * 

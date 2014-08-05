@@ -69,7 +69,43 @@ public class ActivityFeedMoveTest extends BaseActivityServiceTest {
                 sectionNode.getActivityNodeUuid());
         todoNode = activityService
                 .moveNode(todoNode.getActivityNodeUuid(), sectionNode.getActivityNodeUuid());
+    }
+    
+    @Test
+    public void testMoveFieldChangeActivity() throws ClientServicesException, XMLException {
+        // Create activity nodes
 
+        activity = new Activity();
+        activity.setTitle(createActivityTitle());
+        activity = activityService.createActivity(activity);
+
+        Activity activityb;
+        activityb = new Activity();
+        activityb.setTitle(createActivityTitle());
+        activityb = activityService.createActivity(activityb);
+        
+        
+        ActivityNode entryNode = new ActivityNode();
+        entryNode.setActivityUuid(activity.getActivityUuid());
+        entryNode.setTitle("Source ActivityNode");
+        entryNode.setType("ENTRY");
+        activityService.createActivityNode(entryNode);
+
+        ActivityNode todoNode = createActivityNode();
+        todoNode.setActivityUuid(activity.getActivityUuid());
+        todoNode.setTitle("Destination ActivityNode");
+        todoNode.setType("TODO");
+        activityService.createActivityNode(todoNode);
+
+        ActivityNode sectionNode = createActivityNode();
+        sectionNode.setActivityUuid(activity.getActivityUuid());
+        sectionNode.setTitle("Destination ActivityNode");
+        sectionNode.setType("SECTION");
+        activityService.createActivityNode(sectionNode);
+
+        entryNode = activityService.moveNode(entryNode.getActivityNodeUuid(), activityb.getActivityUuid());
+        sectionNode = activityService.moveNode(sectionNode.getActivityNodeUuid(), activityb.getActivityUuid());
+        todoNode = activityService.moveNode(todoNode.getActivityNodeUuid(), activityb.getActivityUuid());
     }
 
     @Test

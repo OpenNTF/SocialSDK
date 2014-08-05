@@ -741,8 +741,12 @@ public class ActivityService extends ConnectionsService {
 	
 	public void addMembers(String activityUuid, Member[] members, Map<String, String> parameters) throws ClientServicesException {
 		String requestUrl = ActivityUrls.ACTIVITY_ACL.format(this, ActivityUrls.activityPart(activityUuid));
-		System.out.println(requestUrl);
 		createMemberFeed(requestUrl, members, parameters);
+	}
+	
+	public void removeMembers(String activityUuid, Member[] members, Map<String, String> parameters) throws ClientServicesException{
+		String requestUrl = ActivityUrls.ACTIVITY_ACL.format(this, ActivityUrls.activityPart(activityUuid));
+		createDeleteMemberFeed(requestUrl, members, parameters);
 	}
 	
 	/**
@@ -989,6 +993,21 @@ public class ActivityService extends ConnectionsService {
 			checkResponseCode(response, HTTPCode.CREATED);
 				//return updateMemberEntityData(members, response);
 			
+		}
+		catch(ClientServicesException e) {
+			throw e;
+		}
+		catch(Exception e) {
+			throw new ClientServicesException(e);
+		}
+
+	}
+	
+	protected void createDeleteMemberFeed(String requestUrl, Member[] members, Map<String, String> parameters) throws ClientServicesException {
+		try {
+			MemberSerializer serializer = new MemberSerializer(members[0]);
+			Response response = deleteDataWithBody(requestUrl, parameters, getAtomHeaders(), null,serializer.generateMemberFeed(members));
+			checkResponseCode(response, HTTPCode.OK);
 		}
 		catch(ClientServicesException e) {
 			throw e;

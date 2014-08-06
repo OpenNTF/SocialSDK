@@ -1053,7 +1053,7 @@ public abstract class ClientService {
         return delete(args);        
     }
     
-    public final Response deleteWithBody(String serviceUrl, Map<String, String> parameters, Map<String, String> headers,
+    public final Response delete(String serviceUrl, Map<String, String> parameters, Map<String, String> headers,
             Handler format,String content)throws ClientServicesException{
     	Args args = createArgs(serviceUrl, parameters);
         args.setHandler(format);

@@ -1006,7 +1006,7 @@ public class ActivityService extends ConnectionsService {
 	protected void createDeleteMemberFeed(String requestUrl, Member[] members, Map<String, String> parameters) throws ClientServicesException {
 		try {
 			MemberSerializer serializer = new MemberSerializer(members[0]);
-			Response response = deleteDataWithBody(requestUrl, parameters, getAtomHeaders(), null,serializer.generateMemberFeed(members));
+			Response response = delete(requestUrl, parameters, getAtomHeaders(), null,serializer.generateMemberFeed(members));
 			checkResponseCode(response, HTTPCode.OK);
 		}
 		catch(ClientServicesException e) {

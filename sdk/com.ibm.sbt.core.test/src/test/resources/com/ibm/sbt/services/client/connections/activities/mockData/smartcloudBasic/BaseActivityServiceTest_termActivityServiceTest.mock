@@ -3,35 +3,39 @@
 <response statusCode="204" statusReason="No Content">
 <headers>
     <header>
-        <name><![CDATA[Accept]]></name>
+        <name><![CDATA[accept]]></name>
         <value><![CDATA[application/atom+xml]]></value>
     </header>
     <header>
-        <name><![CDATA[Content-Language]]></name>
+        <name><![CDATA[content-language]]></name>
         <value><![CDATA[en-US]]></value>
     </header>
     <header>
-        <name><![CDATA[Content-Length]]></name>
+        <name><![CDATA[content-length]]></name>
         <value><![CDATA[0]]></value>
     </header>
     <header>
-        <name><![CDATA[Content-Type]]></name>
+        <name><![CDATA[content-type]]></name>
         <value><![CDATA[text/html; charset=UTF-8]]></value>
     </header>
     <header>
-        <name><![CDATA[Location]]></name>
-        <value><![CDATA[https://apps.na.collabserv.com:443/activities/service/atom2/trashednode?activityNodeUuid=be612c0c-4c40-483c-ba71-acebcada792b]]></value>
+        <name><![CDATA[date]]></name>
+        <value><![CDATA[Fri, 08 Aug 2014 13:24:03 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[location]]></name>
+        <value><![CDATA[https://apps.na.collabservtest.lotus.com:443/activities/service/atom2/trashednode?activityNodeUuid=f3fc2c35-59ed-471e-a031-9a46074fe131]]></value>
     </header>
     <header>
         <name><![CDATA[p3p]]></name>
         <value><![CDATA[CP="NON CUR OTPi OUR NOR UNI"]]></value>
     </header>
     <header>
-        <name><![CDATA[Server]]></name>
+        <name><![CDATA[server]]></name>
         <value><![CDATA[IBM OpenActivities (v1.0)]]></value>
     </header>
     <header>
-        <name><![CDATA[Vary]]></name>
+        <name><![CDATA[vary]]></name>
         <value><![CDATA[Accept-Encoding]]></value>
     </header>
     <header>
@@ -47,86 +51,82 @@
         <value><![CDATA[true]]></value>
     </header>
     <header>
-        <name><![CDATA[Cache-Control]]></name>
+        <name><![CDATA[cache-control]]></name>
         <value><![CDATA[private, no-store, must-revalidate,max-age=0]]></value>
     </header>
     <header>
-        <name><![CDATA[Expires]]></name>
+        <name><![CDATA[expires]]></name>
         <value><![CDATA[Thu, 1 Jan 1970 00:00:00 GMT]]></value>
     </header>
     <header>
-        <name><![CDATA[Date]]></name>
-        <value><![CDATA[Mon, 14 Jul 2014 15:54:49 GMT]]></value>
-    </header>
-    <header>
-        <name><![CDATA[Connection]]></name>
-        <value><![CDATA[keep-alive]]></value>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=gy77yZ/PjpTzuy8gEFPIPn54NEk9iZgkomYcJ8QqxEk596mFRyBzgSNaCAX9CtCmEt8Vh2szMu/uJW2Dj/NoLOAWpNk5NTjSmSWQhftSwL7+qMKSN/QATrQdXtReECNXcBy1fpbPuqCtJ7qLa63zPqP24xAODaTfmdu8rJgtdkOyh2CIdFY++jXqJuvUVVY2omC/osu/8jVlfgVRWVIFRlrDfFjJfA55B0uojqoPv7swri8uYg64VRcKmaXg+NTxG3VgNqDA0A7UXZmyL95WUN44FqSFk2U9gaHPN54vx46/brmcMcNui71sXzC0+iVuhS0G2PEzL0nmKlJeLEsn4N++hxYj1ZtjCAtnpGEFkYcrYe4YuafxGIWeQJH9ip3AtxHUsQCcOfwWuTITciQQOWgTCcQeGDIiFg7p/mnqnefZ4azarI+A4pWhqdUv21j6AGe7xYixwZLWUy08+FZwrNnofqu6lgHtP4DOlpyXUav81Mz9pS1XH93ApPKJl+kyjjeIDKuGIWhVaa8vZkBD6z3VKN/G+jLsJDfYftqax1lWLTtJvuiRiXNLg33RrAWVCue7BfAlzIvlxPEGaB8HKQ4P4KO7S36yOS/VfBC+aeLcVeC0D/ulv5NU8Gs/erpDGDHhvz+jf2l1ze1vKzWBpZM6SHonTkveGRN0SL+J31CsaXN/WlOg3HiFfPcRH3wI/G1OI4zMHUO2697GK9gzxonp9I9KEi4Kh5zAaWumj6SaM27slnljWLzGINNJFR3H;Secure; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=mfv6pasnPt1sa5mbrnfhQ7B1kiMf7aT3r9sT14IDdM7piuzW2eMr/xVkt0gDCyLKgpjZo54m/JWohFK7rffmuc0iIH605HmXkQq7+HoQ/r2sYj08dPxCCIS0cXM2uutAR+7YQORZ7MlSJshHhX3FiD6tDtUf1zCxNPHWOW50/HDO9WPG6KXi9pN9z1IApw9FBH1ai4yAAyTg/hG8iASy2ALcXx4IhWU3w/iaVLs0BsRu19Jz7nzSRMEZDbVhhsMtximM9dCcLuMjtC/DGbOKsdcOJ0zV1xr8HUFgj6qjNqhy9UGsx8E14Cw/HQ/+yK2ZN2Ajr5fa5SP/++7ayfnbAls3brTMXaBQAb0eeDb1N9zgUsEUT8wBf1R4FoveS6zRuJYT4dPsch7jBvM+bDM3OuGKOXyi+wmdRttqe2rs4k526+3LzJlACdPd1xoK9S4uEsiitcoj6UWZU8d/HAiNci+4xTLVs/TiyyGvHIaRoWS08ZlVZwAiWaNdYRokSX/zKwlLR7xLCj7bKRkq4xmxGRGVveGV7xC9w4t3hKnGma28BHs5auSI2fz0he++79v5nK1rbejZ3eFUu7Fu5IpAqbOAOyJVmshEq84EqFtdhxG7qowAjILNkwYEGuxMY3dKNJXU9lI1XezYNaVovt3EhlZxMeTWQCdseiTGa9Y68ZmUWQtieoGt+OJzmfeOXIw2UtNr/BI8rwH02JiYvYdRHpD1wza2PneRJk5Obuj/eExvo7BmLi8CDCpTpFLrqm3mWl234KrNWdeAj+fFBuJX0g==; Path=/]]></value>
+        <value><![CDATA[entitlements=MDczMDQxODI2N2M1MTBlMzg2NTliY2ZjZGE1NDk4NDY3YWJiMWQxNQ==-YmhfYWN0aXZpdGllcyxiaF9hY3Rpdml0aWVzX19hbGxvd19vdmVyYWdlLGJoX2NoYXQsYmhfY29tbXVuaXRpZXMsYmhfY29udGFjdHMsYmhfZGFzaGJvYXJkLGJoX2ZlZWRiYWNrLGJoX2ZpbGVyLGJoX2ZpbGVyX19hbGxvd19vdmVyYWdlLGJoX2Zvcm1zLGJoX2ZvcnVtcyxiaF9tZWV0aW5ncyxiaF93aGF0c19uZXcsYnNzX2FkbWluLGJzc19pbnZpdGVfZ3Vlc3QsYnNzX3VpX19pc19pc3Zfb2ZmZXJpbmcsaGFzX2FjY2Vzc29yeV9zdWJzY3JpcHRpb24saXN2X3N1Z2FyX2NybSxpc3ZfdHJpbG9nLGxjX2FjdGl2aXRpZXMsbGNfbmV3cyxzYW1ldGltZV9tZWV0aW5nLA==-MjAwODkxMjc=;Secure; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[entitlements=YThmM2MyYmVjNmEwMWVlYzdjNDU4N2E2MDRlM2YxZDhjNTljNDUzMg==-YmhfYWN0aXZpdGllcyxiaF9hY3Rpdml0aWVzX19hbGxvd19vdmVyYWdlLGJoX2NoYXQsYmhfY29tbXVuaXRpZXMsYmhfY29udGFjdHMsYmhfZGFzaGJvYXJkLGJoX2ZlZWRiYWNrLGJoX2ZpbGVyLGJoX2ZpbGVyX19hbGxvd19vdmVyYWdlLGJoX2Zvcm1zLGJoX2ZvcnVtcyxiaF9tZWV0aW5ncyxiaF93aGF0c19uZXcsYnNzX2FkbWluLGJzc191aV9faXNfbWFpbF9vZmZlcmluZyxic3N1aV9fZW5hYmxlX3N1YnNjcmlwdGlvbixsY19hY3Rpdml0aWVzLGxjX25ld3Msc2FtZXRpbWVfbWVldGluZyx1bnl0ZV9ldmVudHMsdW55dGVfbWVldGluZyx5dW5fbWFpbCx5dW5fbWFpbF9fQVMseXVuX21haWxfX0FWLHl1bl9tYWlsX19jb3JwX2FkZHJlc3Nib29rLHl1bl9tYWlsX19nZW5lcmF0ZWQseXVuX21haWxfX2ltYXAseXVuX21haWxfX3BvcDMseXVuX21haWxfX3NtdHAs-MjA1NDc1NzQ=; Path=/]]></value>
+        <value><![CDATA[csrf_token=b3291908-e63f-44e2-938a-2a6d98574c39;Secure; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[csrf_token=30f15f44-3a2b-4182-9f18-dfcb854b54e8; Path=/]]></value>
+        <value><![CDATA[csrf_token_forum=a376f492-a011-40ee-a9bb-5e87f90525bd;Secure; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[csrf_token_forum=7fb21a7a-0b5b-492b-9cc4-921b0d7e971b; Path=/]]></value>
+        <value><![CDATA[JSESSIONID=0000Fi8eQ0HlT6edHHoV6RsskVC:18u0qggjq;Secure; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[JSESSIONID=0000-ToGnUpuj-aRelrJenovMJb:18nrc97bq; Path=/]]></value>
+        <value><![CDATA[user_lang=ZW5fVVM%3D-MjAwODkxMjc%3D;Secure; Domain=na.collabservtest.lotus.com; Path=/; Expires=Sat, 09-Aug-14 13:24:03 GMT;Secure;]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[user_lang=ZW5fVVM%3D-MjA1NDc1NzQ%3D; Domain=na.collabserv.com; Path=/; Expires=Tue, 15-Jul-14 15:54:48 GMT]]></value>
+        <value><![CDATA[BIGipServerC1-AC-9082-fe=2741670848.31267.0000;Secure; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[BIGipServerE3B-AC-9082-fe=2267221770.31267.0000; Path=/]]></value>
-    </header>
-    <header>
-        <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[BIGipServerE3B-WebSEAL-80-fe=2317356298.20480.0000; path=/]]></value>
+        <value><![CDATA[BIGipServerC1-WebSEAL-80-fe=2590741440.20480.0000;secure; path=/]]></value>
     </header></headers>
 </response>
 <response statusCode="204" statusReason="No Content">
 <headers>
     <header>
-        <name><![CDATA[Accept]]></name>
+        <name><![CDATA[accept]]></name>
         <value><![CDATA[application/atom+xml]]></value>
     </header>
     <header>
-        <name><![CDATA[Content-Language]]></name>
+        <name><![CDATA[content-language]]></name>
         <value><![CDATA[en-US]]></value>
     </header>
     <header>
-        <name><![CDATA[Content-Length]]></name>
+        <name><![CDATA[content-length]]></name>
         <value><![CDATA[0]]></value>
     </header>
     <header>
-        <name><![CDATA[Content-Type]]></name>
+        <name><![CDATA[content-type]]></name>
         <value><![CDATA[text/html; charset=UTF-8]]></value>
     </header>
     <header>
-        <name><![CDATA[Location]]></name>
-        <value><![CDATA[https://apps.na.collabserv.com:443/activities/service/atom2/trashednode?activityNodeUuid=64d5381f-af81-4e86-abaa-cbc707d42e4f]]></value>
+        <name><![CDATA[date]]></name>
+        <value><![CDATA[Fri, 08 Aug 2014 13:24:10 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[location]]></name>
+        <value><![CDATA[https://apps.na.collabservtest.lotus.com:443/activities/service/atom2/trashednode?activityNodeUuid=33f04e0a-7464-4270-bac7-83437b1428a9]]></value>
     </header>
     <header>
         <name><![CDATA[p3p]]></name>
         <value><![CDATA[CP="NON CUR OTPi OUR NOR UNI"]]></value>
     </header>
     <header>
-        <name><![CDATA[Server]]></name>
+        <name><![CDATA[server]]></name>
         <value><![CDATA[IBM OpenActivities (v1.0)]]></value>
     </header>
     <header>
-        <name><![CDATA[Vary]]></name>
+        <name><![CDATA[vary]]></name>
         <value><![CDATA[Accept-Encoding]]></value>
     </header>
     <header>
@@ -142,86 +142,82 @@
         <value><![CDATA[true]]></value>
     </header>
     <header>
-        <name><![CDATA[Cache-Control]]></name>
+        <name><![CDATA[cache-control]]></name>
         <value><![CDATA[private, no-store, must-revalidate,max-age=0]]></value>
     </header>
     <header>
-        <name><![CDATA[Expires]]></name>
+        <name><![CDATA[expires]]></name>
         <value><![CDATA[Thu, 1 Jan 1970 00:00:00 GMT]]></value>
     </header>
     <header>
-        <name><![CDATA[Date]]></name>
-        <value><![CDATA[Mon, 14 Jul 2014 15:54:53 GMT]]></value>
-    </header>
-    <header>
-        <name><![CDATA[Connection]]></name>
-        <value><![CDATA[keep-alive]]></value>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=gy77yZ/PjpTzuy8gEFPIPn54NEk9iZgkomYcJ8QqxEk596mFRyBzgSNaCAX9CtCmEt8Vh2szMu/uJW2Dj/NoLOAWpNk5NTjSmSWQhftSwL7+qMKSN/QATrQdXtReECNXcBy1fpbPuqCtJ7qLa63zPqP24xAODaTfmdu8rJgtdkOyh2CIdFY++jXqJuvUVVY2omC/osu/8jVlfgVRWVIFRlrDfFjJfA55B0uojqoPv7swri8uYg64VRcKmaXg+NTxG3VgNqDA0A7UXZmyL95WUN44FqSFk2U9gaHPN54vx46/brmcMcNui71sXzC0+iVuhS0G2PEzL0nmKlJeLEsn4N++hxYj1ZtjCAtnpGEFkYcrYe4YuafxGIWeQJH9ip3AtxHUsQCcOfwWuTITciQQOWgTCcQeGDIiFg7p/mnqnefZ4azarI+A4pWhqdUv21j6AGe7xYixwZLWUy08+FZwrNnofqu6lgHtP4DOlpyXUav81Mz9pS1XH93ApPKJl+kyjjeIDKuGIWhVaa8vZkBD6z3VKN/G+jLsJDfYftqax1lWLTtJvuiRiXNLg33RrAWVCue7BfAlzIvlxPEGaB8HKQ4P4KO7S36yOS/VfBC+aeLcVeC0D/ulv5NU8Gs/erpDGDHhvz+jf2l1ze1vKzWBpZM6SHonTkveGRN0SL+J31CsaXN/WlOg3HiFfPcRH3wI/G1OI4zMHUO2697GK9gzxonp9I9KEi4Kh5zAaWumj6SaM27slnljWLzGINNJFR3H;Secure; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=mfv6pasnPt1sa5mbrnfhQ7B1kiMf7aT3r9sT14IDdM7piuzW2eMr/xVkt0gDCyLKgpjZo54m/JWohFK7rffmuc0iIH605HmXkQq7+HoQ/r2sYj08dPxCCIS0cXM2uutAiwzRgvPAv8skZ0Kw0P0myERgBooLAc4Wo/LByoFpH0+UqFdCnDUf8NCjgY3VxvBm6SShpaHtfSRwMCB36EiXa75JledIoWmD50X854XuVvL7/Yo/tXc8UYWnXpPrjB9NMe4IqFC+Ha1Oz5dCvnkp0l70zE3qk8SEGwxnmi+uBmoW97SpmcwIziX/EBO4u1SxMBdiXo8fXB7eQP9oumKIMPvFjNj7krIsQ55F/ZUsgHgM9U4LmMQ2rH5nYhOmNymWY28FPFdhACrCmSoaJx1bjzhjoOLqopiKwrsLrpIAu3wKmLkDHuOwuxtAPvF/X1jUm9cvSwW+rDDn+dCBlVKk/f+husl/fLJNVrFNXDp5HS6FljaLexUC4WKdIVEIpQi+G2DAYLQTNF13gnCSRVoKe2XYLuqdDqePL6Ag+TdrfWI2BzFm42VLdFU7wi/7K3FBt4eA2VolNCxb7B9qZVqro59qB8EOAmWykE7IzF0xD34eFTC/5JuoC5H4IwZsCjfuux/9OOvW3mMgum24OFDsvKpenDzaD8DUES4kgr1R6mhrk0seOqUXevgWTW74zAnifwl89UbqA+7YgLOEj9vgKOh1lMVgzHMWZJ+t1bCQwybeyA+IbzArvqjB0DZN8RQoPOhkDOnnsra477PvZLPhLA==; Path=/]]></value>
+        <value><![CDATA[entitlements=MDczMDQxODI2N2M1MTBlMzg2NTliY2ZjZGE1NDk4NDY3YWJiMWQxNQ==-YmhfYWN0aXZpdGllcyxiaF9hY3Rpdml0aWVzX19hbGxvd19vdmVyYWdlLGJoX2NoYXQsYmhfY29tbXVuaXRpZXMsYmhfY29udGFjdHMsYmhfZGFzaGJvYXJkLGJoX2ZlZWRiYWNrLGJoX2ZpbGVyLGJoX2ZpbGVyX19hbGxvd19vdmVyYWdlLGJoX2Zvcm1zLGJoX2ZvcnVtcyxiaF9tZWV0aW5ncyxiaF93aGF0c19uZXcsYnNzX2FkbWluLGJzc19pbnZpdGVfZ3Vlc3QsYnNzX3VpX19pc19pc3Zfb2ZmZXJpbmcsaGFzX2FjY2Vzc29yeV9zdWJzY3JpcHRpb24saXN2X3N1Z2FyX2NybSxpc3ZfdHJpbG9nLGxjX2FjdGl2aXRpZXMsbGNfbmV3cyxzYW1ldGltZV9tZWV0aW5nLA==-MjAwODkxMjc=;Secure; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[entitlements=YThmM2MyYmVjNmEwMWVlYzdjNDU4N2E2MDRlM2YxZDhjNTljNDUzMg==-YmhfYWN0aXZpdGllcyxiaF9hY3Rpdml0aWVzX19hbGxvd19vdmVyYWdlLGJoX2NoYXQsYmhfY29tbXVuaXRpZXMsYmhfY29udGFjdHMsYmhfZGFzaGJvYXJkLGJoX2ZlZWRiYWNrLGJoX2ZpbGVyLGJoX2ZpbGVyX19hbGxvd19vdmVyYWdlLGJoX2Zvcm1zLGJoX2ZvcnVtcyxiaF9tZWV0aW5ncyxiaF93aGF0c19uZXcsYnNzX2FkbWluLGJzc191aV9faXNfbWFpbF9vZmZlcmluZyxic3N1aV9fZW5hYmxlX3N1YnNjcmlwdGlvbixsY19hY3Rpdml0aWVzLGxjX25ld3Msc2FtZXRpbWVfbWVldGluZyx1bnl0ZV9ldmVudHMsdW55dGVfbWVldGluZyx5dW5fbWFpbCx5dW5fbWFpbF9fQVMseXVuX21haWxfX0FWLHl1bl9tYWlsX19jb3JwX2FkZHJlc3Nib29rLHl1bl9tYWlsX19nZW5lcmF0ZWQseXVuX21haWxfX2ltYXAseXVuX21haWxfX3BvcDMseXVuX21haWxfX3NtdHAs-MjA1NDc1NzQ=; Path=/]]></value>
+        <value><![CDATA[csrf_token=a84db7b3-1298-4044-b1ee-8a9c095b7788;Secure; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[csrf_token=3005dd56-ef83-47fe-80e2-37f57552b98f; Path=/]]></value>
+        <value><![CDATA[csrf_token_forum=1bfca27e-24ab-4c28-a603-6538702e6f71;Secure; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[csrf_token_forum=a0e79bee-01bc-48f8-9672-5ca2459c7428; Path=/]]></value>
+        <value><![CDATA[JSESSIONID=0000lVRat-Yf3zqfuUUUcZBX-Sq:18u0qggjq;Secure; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[JSESSIONID=0000xJBR3AZKEta9yH-uzp6aC3o:18nrc32ps; Path=/]]></value>
+        <value><![CDATA[user_lang=ZW5fVVM%3D-MjAwODkxMjc%3D;Secure; Domain=na.collabservtest.lotus.com; Path=/; Expires=Sat, 09-Aug-14 13:24:10 GMT;Secure;]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[user_lang=ZW5fVVM%3D-MjA1NDc1NzQ%3D; Domain=na.collabserv.com; Path=/; Expires=Tue, 15-Jul-14 15:54:53 GMT]]></value>
+        <value><![CDATA[BIGipServerC1-AC-9082-fe=2741670848.31267.0000;Secure; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[BIGipServerE3B-AC-9082-fe=2250444554.31267.0000; Path=/]]></value>
-    </header>
-    <header>
-        <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[BIGipServerE3B-WebSEAL-80-fe=2334133514.20480.0000; path=/]]></value>
+        <value><![CDATA[BIGipServerC1-WebSEAL-80-fe=2590741440.20480.0000;secure; path=/]]></value>
     </header></headers>
 </response>
 <response statusCode="204" statusReason="No Content">
 <headers>
     <header>
-        <name><![CDATA[Accept]]></name>
+        <name><![CDATA[accept]]></name>
         <value><![CDATA[application/atom+xml]]></value>
     </header>
     <header>
-        <name><![CDATA[Content-Language]]></name>
+        <name><![CDATA[content-language]]></name>
         <value><![CDATA[en-US]]></value>
     </header>
     <header>
-        <name><![CDATA[Content-Length]]></name>
+        <name><![CDATA[content-length]]></name>
         <value><![CDATA[0]]></value>
     </header>
     <header>
-        <name><![CDATA[Content-Type]]></name>
+        <name><![CDATA[content-type]]></name>
         <value><![CDATA[text/html; charset=UTF-8]]></value>
     </header>
     <header>
-        <name><![CDATA[Location]]></name>
-        <value><![CDATA[https://apps.na.collabserv.com:443/activities/service/atom2/trashednode?activityNodeUuid=78daaf5f-e2ed-41f6-8131-389d3409757f]]></value>
+        <name><![CDATA[date]]></name>
+        <value><![CDATA[Fri, 08 Aug 2014 13:24:18 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[location]]></name>
+        <value><![CDATA[https://apps.na.collabservtest.lotus.com:443/activities/service/atom2/trashednode?activityNodeUuid=3bfb96c7-7a2b-4d10-8d10-85d59dcd204a]]></value>
     </header>
     <header>
         <name><![CDATA[p3p]]></name>
         <value><![CDATA[CP="NON CUR OTPi OUR NOR UNI"]]></value>
     </header>
     <header>
-        <name><![CDATA[Server]]></name>
+        <name><![CDATA[server]]></name>
         <value><![CDATA[IBM OpenActivities (v1.0)]]></value>
     </header>
     <header>
-        <name><![CDATA[Vary]]></name>
+        <name><![CDATA[vary]]></name>
         <value><![CDATA[Accept-Encoding]]></value>
     </header>
     <header>
@@ -237,52 +233,787 @@
         <value><![CDATA[true]]></value>
     </header>
     <header>
-        <name><![CDATA[Cache-Control]]></name>
+        <name><![CDATA[cache-control]]></name>
         <value><![CDATA[private, no-store, must-revalidate,max-age=0]]></value>
     </header>
     <header>
-        <name><![CDATA[Expires]]></name>
+        <name><![CDATA[expires]]></name>
         <value><![CDATA[Thu, 1 Jan 1970 00:00:00 GMT]]></value>
     </header>
     <header>
-        <name><![CDATA[Date]]></name>
-        <value><![CDATA[Mon, 14 Jul 2014 15:54:56 GMT]]></value>
-    </header>
-    <header>
-        <name><![CDATA[Connection]]></name>
-        <value><![CDATA[keep-alive]]></value>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=gy77yZ/PjpTzuy8gEFPIPn54NEk9iZgkomYcJ8QqxEk596mFRyBzgSNaCAX9CtCmEt8Vh2szMu/uJW2Dj/NoLOAWpNk5NTjSmSWQhftSwL7+qMKSN/QATrQdXtReECNXcBy1fpbPuqCtJ7qLa63zPqP24xAODaTfmdu8rJgtdkOyh2CIdFY++jXqJuvUVVY2omC/osu/8jVlfgVRWVIFRlrDfFjJfA55B0uojqoPv7swri8uYg64VRcKmaXg+NTxG3VgNqDA0A7UXZmyL95WUN44FqSFk2U9gaHPN54vx46/brmcMcNui71sXzC0+iVuhS0G2PEzL0nmKlJeLEsn4N++hxYj1ZtjCAtnpGEFkYcrYe4YuafxGIWeQJH9ip3AtxHUsQCcOfwWuTITciQQOWgTCcQeGDIiFg7p/mnqnefZ4azarI+A4pWhqdUv21j6AGe7xYixwZLWUy08+FZwrNnofqu6lgHtP4DOlpyXUav81Mz9pS1XH93ApPKJl+kyjjeIDKuGIWhVaa8vZkBD6z3VKN/G+jLsJDfYftqax1lWLTtJvuiRiXNLg33RrAWVCue7BfAlzIvlxPEGaB8HKQ4P4KO7S36yOS/VfBC+aeLcVeC0D/ulv5NU8Gs/erpDGDHhvz+jf2l1ze1vKzWBpZM6SHonTkveGRN0SL+J31CsaXN/WlOg3HiFfPcRH3wI/G1OI4zMHUO2697GK9gzxonp9I9KEi4Kh5zAaWumj6SaM27slnljWLzGINNJFR3H;Secure; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[LtpaToken2=mfv6pasnPt1sa5mbrnfhQ7B1kiMf7aT3r9sT14IDdM7piuzW2eMr/xVkt0gDCyLKgpjZo54m/JWohFK7rffmuc0iIH605HmXkQq7+HoQ/r2sYj08dPxCCIS0cXM2uutAiwzRgvPAv8skZ0Kw0P0myERgBooLAc4Wo/LByoFpH0+UqFdCnDUf8NCjgY3VxvBm6SShpaHtfSRwMCB36EiXa75JledIoWmD50X854XuVvL7/Yo/tXc8UYWnXpPrjB9NMe4IqFC+Ha1Oz5dCvnkp0l70zE3qk8SEGwxnmi+uBmoW97SpmcwIziX/EBO4u1SxMBdiXo8fXB7eQP9oumKIMPvFjNj7krIsQ55F/ZUsgHgM9U4LmMQ2rH5nYhOmNymWY28FPFdhACrCmSoaJx1bjzhjoOLqopiKwrsLrpIAu3wKmLkDHuOwuxtAPvF/X1jUm9cvSwW+rDDn+dCBlVKk/f+husl/fLJNVrFNXDp5HS6FljaLexUC4WKdIVEIpQi+G2DAYLQTNF13gnCSRVoKe2XYLuqdDqePL6Ag+TdrfWI2BzFm42VLdFU7wi/7K3FBt4eA2VolNCxb7B9qZVqro59qB8EOAmWykE7IzF0xD34eFTC/5JuoC5H4IwZsCjfuux/9OOvW3mMgum24OFDsvKpenDzaD8DUES4kgr1R6mhrk0seOqUXevgWTW74zAnifwl89UbqA+7YgLOEj9vgKOh1lMVgzHMWZJ+t1bCQwybeyA+IbzArvqjB0DZN8RQoPOhkDOnnsra477PvZLPhLA==; Path=/]]></value>
+        <value><![CDATA[entitlements=MDczMDQxODI2N2M1MTBlMzg2NTliY2ZjZGE1NDk4NDY3YWJiMWQxNQ==-YmhfYWN0aXZpdGllcyxiaF9hY3Rpdml0aWVzX19hbGxvd19vdmVyYWdlLGJoX2NoYXQsYmhfY29tbXVuaXRpZXMsYmhfY29udGFjdHMsYmhfZGFzaGJvYXJkLGJoX2ZlZWRiYWNrLGJoX2ZpbGVyLGJoX2ZpbGVyX19hbGxvd19vdmVyYWdlLGJoX2Zvcm1zLGJoX2ZvcnVtcyxiaF9tZWV0aW5ncyxiaF93aGF0c19uZXcsYnNzX2FkbWluLGJzc19pbnZpdGVfZ3Vlc3QsYnNzX3VpX19pc19pc3Zfb2ZmZXJpbmcsaGFzX2FjY2Vzc29yeV9zdWJzY3JpcHRpb24saXN2X3N1Z2FyX2NybSxpc3ZfdHJpbG9nLGxjX2FjdGl2aXRpZXMsbGNfbmV3cyxzYW1ldGltZV9tZWV0aW5nLA==-MjAwODkxMjc=;Secure; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[entitlements=YThmM2MyYmVjNmEwMWVlYzdjNDU4N2E2MDRlM2YxZDhjNTljNDUzMg==-YmhfYWN0aXZpdGllcyxiaF9hY3Rpdml0aWVzX19hbGxvd19vdmVyYWdlLGJoX2NoYXQsYmhfY29tbXVuaXRpZXMsYmhfY29udGFjdHMsYmhfZGFzaGJvYXJkLGJoX2ZlZWRiYWNrLGJoX2ZpbGVyLGJoX2ZpbGVyX19hbGxvd19vdmVyYWdlLGJoX2Zvcm1zLGJoX2ZvcnVtcyxiaF9tZWV0aW5ncyxiaF93aGF0c19uZXcsYnNzX2FkbWluLGJzc191aV9faXNfbWFpbF9vZmZlcmluZyxic3N1aV9fZW5hYmxlX3N1YnNjcmlwdGlvbixsY19hY3Rpdml0aWVzLGxjX25ld3Msc2FtZXRpbWVfbWVldGluZyx1bnl0ZV9ldmVudHMsdW55dGVfbWVldGluZyx5dW5fbWFpbCx5dW5fbWFpbF9fQVMseXVuX21haWxfX0FWLHl1bl9tYWlsX19jb3JwX2FkZHJlc3Nib29rLHl1bl9tYWlsX19nZW5lcmF0ZWQseXVuX21haWxfX2ltYXAseXVuX21haWxfX3BvcDMseXVuX21haWxfX3NtdHAs-MjA1NDc1NzQ=; Path=/]]></value>
+        <value><![CDATA[csrf_token=8be5e1c0-1ea6-4a79-8186-4faa36faaa9e;Secure; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[csrf_token=0f4dca0c-0fe1-498f-9542-ed23be5a6195; Path=/]]></value>
+        <value><![CDATA[csrf_token_forum=96d0922e-6ebf-4af0-8dcf-d44ca9591956;Secure; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[csrf_token_forum=338c5437-e353-4e94-b52c-cf7630f18d5f; Path=/]]></value>
+        <value><![CDATA[JSESSIONID=0000a3NgEfnuKM4aBrKLi4s64kZ:18u0qggjq;Secure; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[JSESSIONID=0000b1A3AC2O909Bkdj7VQoueXV:18nrc32ps; Path=/]]></value>
+        <value><![CDATA[user_lang=ZW5fVVM%3D-MjAwODkxMjc%3D;Secure; Domain=na.collabservtest.lotus.com; Path=/; Expires=Sat, 09-Aug-14 13:24:18 GMT;Secure;]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[user_lang=ZW5fVVM%3D-MjA1NDc1NzQ%3D; Domain=na.collabserv.com; Path=/; Expires=Tue, 15-Jul-14 15:54:55 GMT]]></value>
+        <value><![CDATA[BIGipServerC1-AC-9082-fe=2741670848.31267.0000;Secure; Path=/]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[BIGipServerE3B-AC-9082-fe=2250444554.31267.0000; Path=/]]></value>
+        <value><![CDATA[BIGipServerC1-WebSEAL-80-fe=2590741440.20480.0000;secure; path=/]]></value>
+    </header></headers>
+</response>
+<response statusCode="204" statusReason="No Content">
+<headers>
+    <header>
+        <name><![CDATA[accept]]></name>
+        <value><![CDATA[application/atom+xml]]></value>
+    </header>
+    <header>
+        <name><![CDATA[content-language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header>
+    <header>
+        <name><![CDATA[content-length]]></name>
+        <value><![CDATA[0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[content-type]]></name>
+        <value><![CDATA[text/html; charset=UTF-8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[date]]></name>
+        <value><![CDATA[Fri, 08 Aug 2014 13:24:24 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[location]]></name>
+        <value><![CDATA[https://apps.na.collabservtest.lotus.com:443/activities/service/atom2/trashednode?activityNodeUuid=a5d5d195-0b01-473e-9b9f-126b0e16f93b]]></value>
+    </header>
+    <header>
+        <name><![CDATA[p3p]]></name>
+        <value><![CDATA[CP="NON CUR OTPi OUR NOR UNI"]]></value>
+    </header>
+    <header>
+        <name><![CDATA[server]]></name>
+        <value><![CDATA[IBM OpenActivities (v1.0)]]></value>
+    </header>
+    <header>
+        <name><![CDATA[vary]]></name>
+        <value><![CDATA[Accept-Encoding]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-powered-by]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-ua-compatible]]></name>
+        <value><![CDATA[IE=9,8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-lconn-auth]]></name>
+        <value><![CDATA[true]]></value>
+    </header>
+    <header>
+        <name><![CDATA[cache-control]]></name>
+        <value><![CDATA[private, no-store, must-revalidate,max-age=0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[expires]]></name>
+        <value><![CDATA[Thu, 1 Jan 1970 00:00:00 GMT]]></value>
     </header>
     <header>
         <name><![CDATA[Set-Cookie]]></name>
-        <value><![CDATA[BIGipServerE3B-WebSEAL-80-fe=2334133514.20480.0000; path=/]]></value>
+        <value><![CDATA[LtpaToken2=gy77yZ/PjpTzuy8gEFPIPn54NEk9iZgkomYcJ8QqxEk596mFRyBzgSNaCAX9CtCmEt8Vh2szMu/uJW2Dj/NoLOAWpNk5NTjSmSWQhftSwL7+qMKSN/QATrQdXtReECNXcBy1fpbPuqCtJ7qLa63zPqP24xAODaTfmdu8rJgtdkOyh2CIdFY++jXqJuvUVVY2omC/osu/8jVlfgVRWVIFRlrDfFjJfA55B0uojqoPv7swri8uYg64VRcKmaXg+NTxG3VgNqDA0A7UXZmyL95WUN44FqSFk2U9gaHPN54vx46/brmcMcNui71sXzC0+iVuhS0G2PEzL0nmKlJeLEsn4N++hxYj1ZtjCAtnpGEFkYcrYe4YuafxGIWeQJH9ip3AtxHUsQCcOfwWuTITciQQOWgTCcQeGDIiFg7p/mnqnefZ4azarI+A4pWhqdUv21j6AGe7xYixwZLWUy08+FZwrNnofqu6lgHtP4DOlpyXUav81Mz9pS1XH93ApPKJl+kyjjeIDKuGIWhVaa8vZkBD6z3VKN/G+jLsJDfYftqax1lWLTtJvuiRiXNLg33RrAWVCue7BfAlzIvlxPEGaB8HKQ4P4KO7S36yOS/VfBC+aeLcVeC0D/ulv5NU8Gs/erpDGDHhvz+jf2l1ze1vKzWBpZM6SHonTkveGRN0SL+J31CsaXN/WlOg3HiFfPcRH3wI/G1OI4zMHUO2697GK9gzxonp9I9KEi4Kh5zAaWumj6SaM27slnljWLzGINNJFR3H;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[entitlements=MDczMDQxODI2N2M1MTBlMzg2NTliY2ZjZGE1NDk4NDY3YWJiMWQxNQ==-YmhfYWN0aXZpdGllcyxiaF9hY3Rpdml0aWVzX19hbGxvd19vdmVyYWdlLGJoX2NoYXQsYmhfY29tbXVuaXRpZXMsYmhfY29udGFjdHMsYmhfZGFzaGJvYXJkLGJoX2ZlZWRiYWNrLGJoX2ZpbGVyLGJoX2ZpbGVyX19hbGxvd19vdmVyYWdlLGJoX2Zvcm1zLGJoX2ZvcnVtcyxiaF9tZWV0aW5ncyxiaF93aGF0c19uZXcsYnNzX2FkbWluLGJzc19pbnZpdGVfZ3Vlc3QsYnNzX3VpX19pc19pc3Zfb2ZmZXJpbmcsaGFzX2FjY2Vzc29yeV9zdWJzY3JpcHRpb24saXN2X3N1Z2FyX2NybSxpc3ZfdHJpbG9nLGxjX2FjdGl2aXRpZXMsbGNfbmV3cyxzYW1ldGltZV9tZWV0aW5nLA==-MjAwODkxMjc=;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token=f58c99e8-dc8c-4ac9-8da2-6c94a6962a8f;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token_forum=61d81689-1b47-42f1-b508-3f7fe0959ca0;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[JSESSIONID=0000Wb6XiF4ZaalNg-2gydotnYr:18u0qggjq;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[user_lang=ZW5fVVM%3D-MjAwODkxMjc%3D;Secure; Domain=na.collabservtest.lotus.com; Path=/; Expires=Sat, 09-Aug-14 13:24:24 GMT;Secure;]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[BIGipServerC1-AC-9082-fe=2741670848.31267.0000;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[BIGipServerC1-WebSEAL-80-fe=2590741440.20480.0000;secure; path=/]]></value>
+    </header></headers>
+</response>
+<response statusCode="204" statusReason="No Content">
+<headers>
+    <header>
+        <name><![CDATA[accept]]></name>
+        <value><![CDATA[application/atom+xml]]></value>
+    </header>
+    <header>
+        <name><![CDATA[content-language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header>
+    <header>
+        <name><![CDATA[content-length]]></name>
+        <value><![CDATA[0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[content-type]]></name>
+        <value><![CDATA[text/html; charset=UTF-8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[date]]></name>
+        <value><![CDATA[Fri, 08 Aug 2014 13:24:31 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[location]]></name>
+        <value><![CDATA[https://apps.na.collabservtest.lotus.com:443/activities/service/atom2/trashednode?activityNodeUuid=c1461157-a13c-4a1c-9300-e5be310e5a80]]></value>
+    </header>
+    <header>
+        <name><![CDATA[p3p]]></name>
+        <value><![CDATA[CP="NON CUR OTPi OUR NOR UNI"]]></value>
+    </header>
+    <header>
+        <name><![CDATA[server]]></name>
+        <value><![CDATA[IBM OpenActivities (v1.0)]]></value>
+    </header>
+    <header>
+        <name><![CDATA[vary]]></name>
+        <value><![CDATA[Accept-Encoding]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-powered-by]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-ua-compatible]]></name>
+        <value><![CDATA[IE=9,8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-lconn-auth]]></name>
+        <value><![CDATA[true]]></value>
+    </header>
+    <header>
+        <name><![CDATA[cache-control]]></name>
+        <value><![CDATA[private, no-store, must-revalidate,max-age=0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[expires]]></name>
+        <value><![CDATA[Thu, 1 Jan 1970 00:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=gy77yZ/PjpTzuy8gEFPIPn54NEk9iZgkomYcJ8QqxEk596mFRyBzgSNaCAX9CtCmEt8Vh2szMu/uJW2Dj/NoLOAWpNk5NTjSmSWQhftSwL7+qMKSN/QATrQdXtReECNXcBy1fpbPuqCtJ7qLa63zPqP24xAODaTfmdu8rJgtdkOyh2CIdFY++jXqJuvUVVY2omC/osu/8jVlfgVRWVIFRlrDfFjJfA55B0uojqoPv7swri8uYg64VRcKmaXg+NTxG3VgNqDA0A7UXZmyL95WUN44FqSFk2U9gaHPN54vx46/brmcMcNui71sXzC0+iVuhS0G2PEzL0nmKlJeLEsn4N++hxYj1ZtjCAtnpGEFkYcrYe4YuafxGIWeQJH9ip3AtxHUsQCcOfwWuTITciQQOWgTCcQeGDIiFg7p/mnqnefZ4azarI+A4pWhqdUv21j6AGe7xYixwZLWUy08+FZwrNnofqu6lgHtP4DOlpyXUav81Mz9pS1XH93ApPKJl+kyjjeIDKuGIWhVaa8vZkBD6z3VKN/G+jLsJDfYftqax1lWLTtJvuiRiXNLg33RrAWVCue7BfAlzIvlxPEGaB8HKQ4P4KO7S36yOS/VfBC+aeLcVeC0D/ulv5NU8Gs/erpDGDHhvz+jf2l1ze1vKzWBpZM6SHonTkveGRN0SL+J31CsaXN/WlOg3HiFfPcRH3wI/G1OI4zMHUO2697GK9gzxonp9I9KEi4Kh5zAaWumj6SaM27slnljWLzGINNJFR3H;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[entitlements=MDczMDQxODI2N2M1MTBlMzg2NTliY2ZjZGE1NDk4NDY3YWJiMWQxNQ==-YmhfYWN0aXZpdGllcyxiaF9hY3Rpdml0aWVzX19hbGxvd19vdmVyYWdlLGJoX2NoYXQsYmhfY29tbXVuaXRpZXMsYmhfY29udGFjdHMsYmhfZGFzaGJvYXJkLGJoX2ZlZWRiYWNrLGJoX2ZpbGVyLGJoX2ZpbGVyX19hbGxvd19vdmVyYWdlLGJoX2Zvcm1zLGJoX2ZvcnVtcyxiaF9tZWV0aW5ncyxiaF93aGF0c19uZXcsYnNzX2FkbWluLGJzc19pbnZpdGVfZ3Vlc3QsYnNzX3VpX19pc19pc3Zfb2ZmZXJpbmcsaGFzX2FjY2Vzc29yeV9zdWJzY3JpcHRpb24saXN2X3N1Z2FyX2NybSxpc3ZfdHJpbG9nLGxjX2FjdGl2aXRpZXMsbGNfbmV3cyxzYW1ldGltZV9tZWV0aW5nLA==-MjAwODkxMjc=;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token=07bfae6a-df9e-44b6-9892-8a396a2454c3;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token_forum=4087181b-c77b-4276-ac66-076b95fa1568;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[JSESSIONID=0000OmMO-cvjqNvRy4A_cqYVXie:18u0qggjq;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[user_lang=ZW5fVVM%3D-MjAwODkxMjc%3D;Secure; Domain=na.collabservtest.lotus.com; Path=/; Expires=Sat, 09-Aug-14 13:24:31 GMT;Secure;]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[BIGipServerC1-AC-9082-fe=2741670848.31267.0000;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[BIGipServerC1-WebSEAL-80-fe=2590741440.20480.0000;secure; path=/]]></value>
+    </header></headers>
+</response>
+<response statusCode="204" statusReason="No Content">
+<headers>
+    <header>
+        <name><![CDATA[accept]]></name>
+        <value><![CDATA[application/atom+xml]]></value>
+    </header>
+    <header>
+        <name><![CDATA[content-language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header>
+    <header>
+        <name><![CDATA[content-length]]></name>
+        <value><![CDATA[0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[content-type]]></name>
+        <value><![CDATA[text/html; charset=UTF-8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[date]]></name>
+        <value><![CDATA[Fri, 08 Aug 2014 13:24:37 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[location]]></name>
+        <value><![CDATA[https://apps.na.collabservtest.lotus.com:443/activities/service/atom2/trashednode?activityNodeUuid=a5ec5769-447a-47f7-b89f-c69751c4fa74]]></value>
+    </header>
+    <header>
+        <name><![CDATA[p3p]]></name>
+        <value><![CDATA[CP="NON CUR OTPi OUR NOR UNI"]]></value>
+    </header>
+    <header>
+        <name><![CDATA[server]]></name>
+        <value><![CDATA[IBM OpenActivities (v1.0)]]></value>
+    </header>
+    <header>
+        <name><![CDATA[vary]]></name>
+        <value><![CDATA[Accept-Encoding]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-powered-by]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-ua-compatible]]></name>
+        <value><![CDATA[IE=9,8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-lconn-auth]]></name>
+        <value><![CDATA[true]]></value>
+    </header>
+    <header>
+        <name><![CDATA[cache-control]]></name>
+        <value><![CDATA[private, no-store, must-revalidate,max-age=0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[expires]]></name>
+        <value><![CDATA[Thu, 1 Jan 1970 00:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=gy77yZ/PjpTzuy8gEFPIPn54NEk9iZgkomYcJ8QqxEk596mFRyBzgSNaCAX9CtCmEt8Vh2szMu/uJW2Dj/NoLOAWpNk5NTjSmSWQhftSwL7+qMKSN/QATrQdXtReECNXcBy1fpbPuqCtJ7qLa63zPqP24xAODaTfmdu8rJgtdkOyh2CIdFY++jXqJuvUVVY2omC/osu/8jVlfgVRWVIFRlrDfFjJfA55B0uojqoPv7swri8uYg64VRcKmaXg+NTxG3VgNqDA0A7UXZmyL95WUN44FqSFk2U9gaHPN54vx46/brmcMcNui71sXzC0+iVuhS0G2PEzL0nmKlJeLEsn4N++hxYj1ZtjCAtnpGEFkYcrYe4YuafxGIWeQJH9ip3AtxHUsQCcOfwWuTITciQQOWgTCcQeGDIiFg7p/mnqnefZ4azarI+A4pWhqdUv21j6AGe7xYixwZLWUy08+FZwrNnofqu6lgHtP4DOlpyXUav81Mz9pS1XH93ApPKJl+kyjjeIDKuGIWhVaa8vZkBD6z3VKN/G+jLsJDfYftqax1lWLTtJvuiRiXNLg33RrAWVCue7BfAlzIvlxPEGaB8HKQ4P4KO7S36yOS/VfBC+aeLcVeC0D/ulv5NU8Gs/erpDGDHhvz+jf2l1ze1vKzWBpZM6SHonTkveGRN0SL+J31CsaXN/WlOg3HiFfPcRH3wI/G1OI4zMHUO2697GK9gzxonp9I9KEi4Kh5zAaWumj6SaM27slnljWLzGINNJFR3H;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[entitlements=MDczMDQxODI2N2M1MTBlMzg2NTliY2ZjZGE1NDk4NDY3YWJiMWQxNQ==-YmhfYWN0aXZpdGllcyxiaF9hY3Rpdml0aWVzX19hbGxvd19vdmVyYWdlLGJoX2NoYXQsYmhfY29tbXVuaXRpZXMsYmhfY29udGFjdHMsYmhfZGFzaGJvYXJkLGJoX2ZlZWRiYWNrLGJoX2ZpbGVyLGJoX2ZpbGVyX19hbGxvd19vdmVyYWdlLGJoX2Zvcm1zLGJoX2ZvcnVtcyxiaF9tZWV0aW5ncyxiaF93aGF0c19uZXcsYnNzX2FkbWluLGJzc19pbnZpdGVfZ3Vlc3QsYnNzX3VpX19pc19pc3Zfb2ZmZXJpbmcsaGFzX2FjY2Vzc29yeV9zdWJzY3JpcHRpb24saXN2X3N1Z2FyX2NybSxpc3ZfdHJpbG9nLGxjX2FjdGl2aXRpZXMsbGNfbmV3cyxzYW1ldGltZV9tZWV0aW5nLA==-MjAwODkxMjc=;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token=6aab6af9-c02b-4d4e-b844-6bd4ec5856ab;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token_forum=b1dc5516-1bd9-4044-be51-d0e19cd94936;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[JSESSIONID=0000EEA7j3oT546a3QBB76gSaNn:18u0qggjq;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[user_lang=ZW5fVVM%3D-MjAwODkxMjc%3D;Secure; Domain=na.collabservtest.lotus.com; Path=/; Expires=Sat, 09-Aug-14 13:24:37 GMT;Secure;]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[BIGipServerC1-AC-9082-fe=2741670848.31267.0000;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[BIGipServerC1-WebSEAL-80-fe=2590741440.20480.0000;secure; path=/]]></value>
+    </header></headers>
+</response>
+<response statusCode="404" statusReason="Not Found">
+<headers>
+    <header>
+        <name><![CDATA[content-language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header>
+    <header>
+        <name><![CDATA[content-type]]></name>
+        <value><![CDATA[application/xml;charset=UTF-8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[date]]></name>
+        <value><![CDATA[Fri, 08 Aug 2014 13:24:45 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[p3p]]></name>
+        <value><![CDATA[CP="NON CUR OTPi OUR NOR UNI"]]></value>
+    </header>
+    <header>
+        <name><![CDATA[server]]></name>
+        <value><![CDATA[IBM OpenActivities (v1.0)]]></value>
+    </header>
+    <header>
+        <name><![CDATA[vary]]></name>
+        <value><![CDATA[Accept-Encoding]]></value>
+    </header>
+    <header>
+        <name><![CDATA[transfer-encoding]]></name>
+        <value><![CDATA[chunked]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-powered-by]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-ua-compatible]]></name>
+        <value><![CDATA[IE=9,8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-lconn-auth]]></name>
+        <value><![CDATA[true]]></value>
+    </header>
+    <header>
+        <name><![CDATA[pragma]]></name>
+        <value><![CDATA[no-cache]]></value>
+    </header>
+    <header>
+        <name><![CDATA[cache-control]]></name>
+        <value><![CDATA[private, no-store, must-revalidate,max-age=0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[expires]]></name>
+        <value><![CDATA[Thu, 01 Jan 1970 00:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=hfqHByomciTviU6eY424DEuRSMJtc5kvAT5kAASSRZo+nbIuRI3GgdXRDcPjSRe5D3f2cSLdjtwGS1jKbT7/d/VUFsurHJvV9mYri/E7IUFD7eWbTiZU6LoDUC+LcnGQ+ALNA9Cq2vAjg1L70lW3Ef+aQ+VIPyNK5BRBcV2oDhObhGDdlOoSqRUIL5zOoy/B90r6Ke7Xonen715YicZ9KjhSJ6/xORYLtjsswkUTrFc6NR9g66vyfqmzoWQ0ikMBb+sNUa2iV1UvJxykdPq0KPgIju846X9IYLiLnsDpsPpwgT9y7rtcmKEXDdNXt2rwVvsJX1pN+pt9IWS1V65GfFNTeHqJl8yTRRiE6zTuuBYKQQ9iCYt6VFwCbcu/9eRE4Bw6CMVMjzzQcx5fQwDCyDoN1UEIXaID/u6CuMOejVqkhxV91e1r6wLDhK+UAd4MBMpT9hyn/brM95813uF9QC/bvLpY6I69cXw+INtZvwX6e5DkbQiQUwcWD/tgSM5VspOtys/YhA2K8ZRCNSC8Om2QYVVyn7bRUmNOFZsd9Em45zEyjD3TgqDhla2g6BcPS7eDXy2E0C3WX8VN0Rvm8o5Rxm4Ra4bp1bibpDk2Pb7MbVe+ez2Op6EUAWFLLQdP+5vW7ZFuMFx51b7q3YBjqKHFT64TH4l4xJwLXqDuaoeVzJg9L5DQbYiqYRHqRRbPZIGCFMXXdJF9C09e1U41ickNRIhxu7ketN5owG8aynV/CAfe7ctSBEc5H+5xRHNT;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[entitlements=YzQyNWE0ZTdiNTE1MDhjMjRhOGQ1ZmNkNjQ1YjE4Yzc0YjIyMTIwYg==-YmhfYWN0aXZpdGllcyxiaF9hY3Rpdml0aWVzX19hbGxvd19vdmVyYWdlLGJoX2NoYXQsYmhfY29tbXVuaXRpZXMsYmhfY29udGFjdHMsYmhfZGFzaGJvYXJkLGJoX2ZlZWRiYWNrLGJoX2ZpbGVyLGJoX2ZpbGVyX19hbGxvd19vdmVyYWdlLGJoX2Zvcm1zLGJoX2ZvcnVtcyxiaF9tZWV0aW5ncyxiaF93aGF0c19uZXcsYnNzX2FkbWluLGJzc19pbnZpdGVfZ3Vlc3QsYnNzX3VpX19pc19pc3Zfb2ZmZXJpbmcsaGFzX2FjY2Vzc29yeV9zdWJzY3JpcHRpb24saXN2X3N1Z2FyX2NybSxpc3ZfdHJpbG9nLGxjX2FjdGl2aXRpZXMsbGNfbmV3cyxzYW1ldGltZV9tZWV0aW5nLA==-MjAwODkxMjU=;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token=77980319-fcb2-48f9-bfc1-64611923d24c;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token_forum=a1f89be6-a526-46a4-95be-49bb30869bd1;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[JSESSIONID=0000XngDD7SG-pBiQ2fT9q2x9PW:18u0qggjq;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[user_lang=ZW5fVVM%3D-MjAwODkxMjU%3D;Secure; Domain=na.collabservtest.lotus.com; Path=/; Expires=Sat, 09-Aug-14 13:24:45 GMT;Secure;]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[BIGipServerC1-AC-9082-fe=2741670848.31267.0000;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[BIGipServerC1-WebSEAL-80-fe=2590741440.20480.0000;secure; path=/]]></value>
+    </header></headers>
+<data><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+
+
+
+
+
+
+
+<error xmlns="http://www.ibm.com/xmlns/prod/sn">
+  <code></code>
+  <message>Identifier: LCCAF429F588894D2481E9E5F244C276ED
+Request denied</message>
+  <displaymessage></displaymessage>
+  <errortype></errortype>
+
+  <trace>java.lang.Exception: Identifier: LCCAF429F588894D2481E9E5F244C276ED
+Request denied</trace>
+</error>
+]]></data>
+</response>
+<response statusCode="204" statusReason="No Content">
+<headers>
+    <header>
+        <name><![CDATA[accept]]></name>
+        <value><![CDATA[application/atom+xml]]></value>
+    </header>
+    <header>
+        <name><![CDATA[content-language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header>
+    <header>
+        <name><![CDATA[content-length]]></name>
+        <value><![CDATA[0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[content-type]]></name>
+        <value><![CDATA[text/html; charset=UTF-8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[date]]></name>
+        <value><![CDATA[Fri, 08 Aug 2014 13:24:51 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[location]]></name>
+        <value><![CDATA[https://apps.na.collabservtest.lotus.com:443/activities/service/atom2/trashednode?activityNodeUuid=7dc705bf-37d6-442a-af30-033744128f1a]]></value>
+    </header>
+    <header>
+        <name><![CDATA[p3p]]></name>
+        <value><![CDATA[CP="NON CUR OTPi OUR NOR UNI"]]></value>
+    </header>
+    <header>
+        <name><![CDATA[server]]></name>
+        <value><![CDATA[IBM OpenActivities (v1.0)]]></value>
+    </header>
+    <header>
+        <name><![CDATA[vary]]></name>
+        <value><![CDATA[Accept-Encoding]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-powered-by]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-ua-compatible]]></name>
+        <value><![CDATA[IE=9,8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-lconn-auth]]></name>
+        <value><![CDATA[true]]></value>
+    </header>
+    <header>
+        <name><![CDATA[cache-control]]></name>
+        <value><![CDATA[private, no-store, must-revalidate,max-age=0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[expires]]></name>
+        <value><![CDATA[Thu, 1 Jan 1970 00:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=gy77yZ/PjpTzuy8gEFPIPn54NEk9iZgkomYcJ8QqxEk596mFRyBzgSNaCAX9CtCmEt8Vh2szMu/uJW2Dj/NoLOAWpNk5NTjSmSWQhftSwL7+qMKSN/QATrQdXtReECNXcBy1fpbPuqCtJ7qLa63zPqP24xAODaTfmdu8rJgtdkOyh2CIdFY++jXqJuvUVVY2omC/osu/8jVlfgVRWVIFRlrDfFjJfA55B0uojqoPv7swri8uYg64VRcKmaXg+NTxG3VgNqDA0A7UXZmyL95WUN44FqSFk2U9gaHPN54vx46/brmcMcNui71sXzC0+iVuhS0G2PEzL0nmKlJeLEsn4N++hxYj1ZtjCAtnpGEFkYcrYe4YuafxGIWeQJH9ip3AtxHUsQCcOfwWuTITciQQOWgTCcQeGDIiFg7p/mnqnefZ4azarI+A4pWhqdUv21j6AGe7xYixwZLWUy08+FZwrNnofqu6lgHtP4DOlpyXUav81Mz9pS1XH93ApPKJl+kyjjeIDKuGIWhVaa8vZkBD6z3VKN/G+jLsJDfYftqax1lWLTtJvuiRiXNLg33RrAWVCue7BfAlzIvlxPEGaB8HKQ4P4KO7S36yOS/VfBC+aeLcVeC0D/ulv5NU8Gs/erpDGDHhvz+jf2l1ze1vKzWBpZM6SHonTkveGRN0SL+J31CsaXN/WlOg3HiFfPcRH3wI/G1OI4zMHUO2697GK9gzxonp9I9KEi4Kh5zAaWumj6SaM27slnljWLzGINNJFR3H;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[entitlements=MDczMDQxODI2N2M1MTBlMzg2NTliY2ZjZGE1NDk4NDY3YWJiMWQxNQ==-YmhfYWN0aXZpdGllcyxiaF9hY3Rpdml0aWVzX19hbGxvd19vdmVyYWdlLGJoX2NoYXQsYmhfY29tbXVuaXRpZXMsYmhfY29udGFjdHMsYmhfZGFzaGJvYXJkLGJoX2ZlZWRiYWNrLGJoX2ZpbGVyLGJoX2ZpbGVyX19hbGxvd19vdmVyYWdlLGJoX2Zvcm1zLGJoX2ZvcnVtcyxiaF9tZWV0aW5ncyxiaF93aGF0c19uZXcsYnNzX2FkbWluLGJzc19pbnZpdGVfZ3Vlc3QsYnNzX3VpX19pc19pc3Zfb2ZmZXJpbmcsaGFzX2FjY2Vzc29yeV9zdWJzY3JpcHRpb24saXN2X3N1Z2FyX2NybSxpc3ZfdHJpbG9nLGxjX2FjdGl2aXRpZXMsbGNfbmV3cyxzYW1ldGltZV9tZWV0aW5nLA==-MjAwODkxMjc=;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token=73ca619e-64cd-4fa6-a8f1-dcc201ba0351;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token_forum=83a1a7e8-263c-4c82-93e0-2b6f174fbf81;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[JSESSIONID=0000WOfYzqzNh1qM5DhRBWnhHyr:18u0qggjq;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[user_lang=ZW5fVVM%3D-MjAwODkxMjc%3D;Secure; Domain=na.collabservtest.lotus.com; Path=/; Expires=Sat, 09-Aug-14 13:24:51 GMT;Secure;]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[BIGipServerC1-AC-9082-fe=2741670848.31267.0000;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[BIGipServerC1-WebSEAL-80-fe=2590741440.20480.0000;secure; path=/]]></value>
+    </header></headers>
+</response>
+<response statusCode="204" statusReason="No Content">
+<headers>
+    <header>
+        <name><![CDATA[accept]]></name>
+        <value><![CDATA[application/atom+xml]]></value>
+    </header>
+    <header>
+        <name><![CDATA[content-language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header>
+    <header>
+        <name><![CDATA[content-length]]></name>
+        <value><![CDATA[0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[content-type]]></name>
+        <value><![CDATA[text/html; charset=UTF-8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[date]]></name>
+        <value><![CDATA[Fri, 08 Aug 2014 13:25:08 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[location]]></name>
+        <value><![CDATA[https://apps.na.collabservtest.lotus.com:443/activities/service/atom2/trashednode?activityNodeUuid=67072a45-e763-418e-a0f6-3d4ea8f49886]]></value>
+    </header>
+    <header>
+        <name><![CDATA[p3p]]></name>
+        <value><![CDATA[CP="NON CUR OTPi OUR NOR UNI"]]></value>
+    </header>
+    <header>
+        <name><![CDATA[server]]></name>
+        <value><![CDATA[IBM OpenActivities (v1.0)]]></value>
+    </header>
+    <header>
+        <name><![CDATA[vary]]></name>
+        <value><![CDATA[Accept-Encoding]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-powered-by]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-ua-compatible]]></name>
+        <value><![CDATA[IE=9,8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-lconn-auth]]></name>
+        <value><![CDATA[true]]></value>
+    </header>
+    <header>
+        <name><![CDATA[cache-control]]></name>
+        <value><![CDATA[private, no-store, must-revalidate,max-age=0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[expires]]></name>
+        <value><![CDATA[Thu, 1 Jan 1970 00:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=gy77yZ/PjpTzuy8gEFPIPn54NEk9iZgkomYcJ8QqxEk596mFRyBzgSNaCAX9CtCmEt8Vh2szMu/uJW2Dj/NoLOAWpNk5NTjSmSWQhftSwL7+qMKSN/QATrQdXtReECNXcBy1fpbPuqCtJ7qLa63zPqP24xAODaTfmdu8rJgtdkOyh2CIdFY++jXqJuvUVVY2omC/osu/8jVlfgVRWVIFRlrDfFjJfA55B0uojqoPv7swri8uYg64VRcKmaXg+NTxG3VgNqDA0A7UXZmyL95WUN44FqSFk2U9gaHPN54vx46/brmcMcNui71sXzC0+iVuhS0G2PEzL0nmKlJeLEsn4N++hxYj1ZtjCAtnpGEFkYcrYe4YuafxGIWeQJH9ip3AtxHUsQCcOfwWuTITciQQOWgTCcQeGDIiFg7p/mnqnefZ4azarI+A4pWhqdUv21j6AGe7xYixwZLWUy08+FZwrNnofqu6lgHtP4DOlpyXUav81Mz9pS1XH93ApPKJl+kyjjeIDKuGIWhVaa8vZkBD6z3VKN/G+jLsJDfYftqax1lWLTtJvuiRiXNLg33RrAWVCue7BfAlzIvlxPEGaB8HKQ4P4KO7S36yOS/VfBC+aeLcVeC0D/ulv5NU8Gs/erpDGDHhvz+jf2l1ze1vKzWBpZM6SHonTkveGRN0SL+J31CsaXN/WlOg3HiFfPcRH3wI/G1OI4zMHUO2697GK9gzxonp9I9KEi4Kh5zAaWumj6SaM27slnljWLzGINNJFR3H;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[entitlements=MDczMDQxODI2N2M1MTBlMzg2NTliY2ZjZGE1NDk4NDY3YWJiMWQxNQ==-YmhfYWN0aXZpdGllcyxiaF9hY3Rpdml0aWVzX19hbGxvd19vdmVyYWdlLGJoX2NoYXQsYmhfY29tbXVuaXRpZXMsYmhfY29udGFjdHMsYmhfZGFzaGJvYXJkLGJoX2ZlZWRiYWNrLGJoX2ZpbGVyLGJoX2ZpbGVyX19hbGxvd19vdmVyYWdlLGJoX2Zvcm1zLGJoX2ZvcnVtcyxiaF9tZWV0aW5ncyxiaF93aGF0c19uZXcsYnNzX2FkbWluLGJzc19pbnZpdGVfZ3Vlc3QsYnNzX3VpX19pc19pc3Zfb2ZmZXJpbmcsaGFzX2FjY2Vzc29yeV9zdWJzY3JpcHRpb24saXN2X3N1Z2FyX2NybSxpc3ZfdHJpbG9nLGxjX2FjdGl2aXRpZXMsbGNfbmV3cyxzYW1ldGltZV9tZWV0aW5nLA==-MjAwODkxMjc=;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token=4058d497-8af4-4d53-9c15-bf8660bd8587;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token_forum=9d06d969-3f16-4536-ad6f-ae9d64c296f5;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[JSESSIONID=0000EohUbk0DhKU7hWYybWZhDhz:18u0qggjq;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[user_lang=ZW5fVVM%3D-MjAwODkxMjc%3D;Secure; Domain=na.collabservtest.lotus.com; Path=/; Expires=Sat, 09-Aug-14 13:25:08 GMT;Secure;]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[BIGipServerC1-AC-9082-fe=2741670848.31267.0000;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[BIGipServerC1-WebSEAL-80-fe=2590741440.20480.0000;secure; path=/]]></value>
+    </header></headers>
+</response>
+<response statusCode="204" statusReason="No Content">
+<headers>
+    <header>
+        <name><![CDATA[accept]]></name>
+        <value><![CDATA[application/atom+xml]]></value>
+    </header>
+    <header>
+        <name><![CDATA[content-language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header>
+    <header>
+        <name><![CDATA[content-length]]></name>
+        <value><![CDATA[0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[content-type]]></name>
+        <value><![CDATA[text/html; charset=UTF-8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[date]]></name>
+        <value><![CDATA[Fri, 08 Aug 2014 13:25:21 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[location]]></name>
+        <value><![CDATA[https://apps.na.collabservtest.lotus.com:443/activities/service/atom2/trashednode?activityNodeUuid=861761a6-42e5-4c3a-bd2a-4a3d7e01aab9]]></value>
+    </header>
+    <header>
+        <name><![CDATA[p3p]]></name>
+        <value><![CDATA[CP="NON CUR OTPi OUR NOR UNI"]]></value>
+    </header>
+    <header>
+        <name><![CDATA[server]]></name>
+        <value><![CDATA[IBM OpenActivities (v1.0)]]></value>
+    </header>
+    <header>
+        <name><![CDATA[vary]]></name>
+        <value><![CDATA[Accept-Encoding]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-powered-by]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-ua-compatible]]></name>
+        <value><![CDATA[IE=9,8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-lconn-auth]]></name>
+        <value><![CDATA[true]]></value>
+    </header>
+    <header>
+        <name><![CDATA[cache-control]]></name>
+        <value><![CDATA[private, no-store, must-revalidate,max-age=0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[expires]]></name>
+        <value><![CDATA[Thu, 1 Jan 1970 00:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=gy77yZ/PjpTzuy8gEFPIPn54NEk9iZgkomYcJ8QqxEk596mFRyBzgSNaCAX9CtCmEt8Vh2szMu/uJW2Dj/NoLOAWpNk5NTjSmSWQhftSwL7+qMKSN/QATrQdXtReECNXcBy1fpbPuqCtJ7qLa63zPqP24xAODaTfmdu8rJgtdkOyh2CIdFY++jXqJuvUVVY2omC/osu/8jVlfgVRWVIFRlrDfFjJfA55B0uojqoPv7swri8uYg64VRcKmaXg+NTxG3VgNqDA0A7UXZmyL95WUN44FqSFk2U9gaHPN54vx46/brmcMcNui71sXzC0+iVuhS0G2PEzL0nmKlJeLEsn4N++hxYj1ZtjCAtnpGEFkYcrYe4YuafxGIWeQJH9ip3AtxHUsQCcOfwWuTITciQQOWgTCcQeGDIiFg7p/mnqnefZ4azarI+A4pWhqdUv21j6AGe7xYixwZLWUy08+FZwrNnofqu6lgHtP4DOlpyXUav81Mz9pS1XH93ApPKJl+kyjjeIDKuGIWhVaa8vZkBD6z3VKN/G+jLsJDfYftqax1lWLTtJvuiRiXNLg33RrAWVCue7BfAlzIvlxPEGaB8HKQ4P4KO7S36yOS/VfBC+aeLcVeC0D/ulv5NU8Gs/erpDGDHhvz+jf2l1ze1vKzWBpZM6SHonTkveGRN0SL+J31CsaXN/WlOg3HiFfPcRH3wI/G1OI4zMHUO2697GK9gzxonp9I9KEi4Kh5zAaWumj6SaM27slnljWLzGINNJFR3H;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[entitlements=MDczMDQxODI2N2M1MTBlMzg2NTliY2ZjZGE1NDk4NDY3YWJiMWQxNQ==-YmhfYWN0aXZpdGllcyxiaF9hY3Rpdml0aWVzX19hbGxvd19vdmVyYWdlLGJoX2NoYXQsYmhfY29tbXVuaXRpZXMsYmhfY29udGFjdHMsYmhfZGFzaGJvYXJkLGJoX2ZlZWRiYWNrLGJoX2ZpbGVyLGJoX2ZpbGVyX19hbGxvd19vdmVyYWdlLGJoX2Zvcm1zLGJoX2ZvcnVtcyxiaF9tZWV0aW5ncyxiaF93aGF0c19uZXcsYnNzX2FkbWluLGJzc19pbnZpdGVfZ3Vlc3QsYnNzX3VpX19pc19pc3Zfb2ZmZXJpbmcsaGFzX2FjY2Vzc29yeV9zdWJzY3JpcHRpb24saXN2X3N1Z2FyX2NybSxpc3ZfdHJpbG9nLGxjX2FjdGl2aXRpZXMsbGNfbmV3cyxzYW1ldGltZV9tZWV0aW5nLA==-MjAwODkxMjc=;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token=caa970f0-725f-4090-b4ad-a539f00ea64d;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token_forum=c8944df3-b8d0-4a9e-90f1-629ecc4cc324;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[JSESSIONID=0000wzMleYxpHIXjYa_oSctGHnC:18u0qggjq;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[user_lang=ZW5fVVM%3D-MjAwODkxMjc%3D;Secure; Domain=na.collabservtest.lotus.com; Path=/; Expires=Sat, 09-Aug-14 13:25:21 GMT;Secure;]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[BIGipServerC1-AC-9082-fe=2741670848.31267.0000;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[BIGipServerC1-WebSEAL-80-fe=2590741440.20480.0000;secure; path=/]]></value>
+    </header></headers>
+</response>
+<response statusCode="204" statusReason="No Content">
+<headers>
+    <header>
+        <name><![CDATA[accept]]></name>
+        <value><![CDATA[application/atom+xml]]></value>
+    </header>
+    <header>
+        <name><![CDATA[content-language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header>
+    <header>
+        <name><![CDATA[content-length]]></name>
+        <value><![CDATA[0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[content-type]]></name>
+        <value><![CDATA[text/html; charset=UTF-8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[date]]></name>
+        <value><![CDATA[Fri, 08 Aug 2014 13:25:28 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[location]]></name>
+        <value><![CDATA[https://apps.na.collabservtest.lotus.com:443/activities/service/atom2/trashednode?activityNodeUuid=8095da93-5f1d-4a43-86ae-b0ce2d31b96d]]></value>
+    </header>
+    <header>
+        <name><![CDATA[p3p]]></name>
+        <value><![CDATA[CP="NON CUR OTPi OUR NOR UNI"]]></value>
+    </header>
+    <header>
+        <name><![CDATA[server]]></name>
+        <value><![CDATA[IBM OpenActivities (v1.0)]]></value>
+    </header>
+    <header>
+        <name><![CDATA[vary]]></name>
+        <value><![CDATA[Accept-Encoding]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-powered-by]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-ua-compatible]]></name>
+        <value><![CDATA[IE=9,8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-lconn-auth]]></name>
+        <value><![CDATA[true]]></value>
+    </header>
+    <header>
+        <name><![CDATA[cache-control]]></name>
+        <value><![CDATA[private, no-store, must-revalidate,max-age=0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[expires]]></name>
+        <value><![CDATA[Thu, 1 Jan 1970 00:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=gy77yZ/PjpTzuy8gEFPIPn54NEk9iZgkomYcJ8QqxEk596mFRyBzgSNaCAX9CtCmEt8Vh2szMu/uJW2Dj/NoLOAWpNk5NTjSmSWQhftSwL7+qMKSN/QATrQdXtReECNXcBy1fpbPuqCtJ7qLa63zPqP24xAODaTfmdu8rJgtdkOyh2CIdFY++jXqJuvUVVY2omC/osu/8jVlfgVRWVIFRlrDfFjJfA55B0uojqoPv7swri8uYg64VRcKmaXg+NTxG3VgNqDA0A7UXZmyL95WUN44FqSFk2U9gaHPN54vx46/brmcMcNui71sXzC0+iVuhS0G2PEzL0nmKlJeLEsn4N++hxYj1ZtjCAtnpGEFkYcrYe4YuafxGIWeQJH9ip3AtxHUsQCcOfwWuTITciQQOWgTCcQeGDIiFg7p/mnqnefZ4azarI+A4pWhqdUv21j6AGe7xYixwZLWUy08+FZwrNnofqu6lgHtP4DOlpyXUav81Mz9pS1XH93ApPKJl+kyjjeIDKuGIWhVaa8vZkBD6z3VKN/G+jLsJDfYftqax1lWLTtJvuiRiXNLg33RrAWVCue7BfAlzIvlxPEGaB8HKQ4P4KO7S36yOS/VfBC+aeLcVeC0D/ulv5NU8Gs/erpDGDHhvz+jf2l1ze1vKzWBpZM6SHonTkveGRN0SL+J31CsaXN/WlOg3HiFfPcRH3wI/G1OI4zMHUO2697GK9gzxonp9I9KEi4Kh5zAaWumj6SaM27slnljWLzGINNJFR3H;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[entitlements=MDczMDQxODI2N2M1MTBlMzg2NTliY2ZjZGE1NDk4NDY3YWJiMWQxNQ==-YmhfYWN0aXZpdGllcyxiaF9hY3Rpdml0aWVzX19hbGxvd19vdmVyYWdlLGJoX2NoYXQsYmhfY29tbXVuaXRpZXMsYmhfY29udGFjdHMsYmhfZGFzaGJvYXJkLGJoX2ZlZWRiYWNrLGJoX2ZpbGVyLGJoX2ZpbGVyX19hbGxvd19vdmVyYWdlLGJoX2Zvcm1zLGJoX2ZvcnVtcyxiaF9tZWV0aW5ncyxiaF93aGF0c19uZXcsYnNzX2FkbWluLGJzc19pbnZpdGVfZ3Vlc3QsYnNzX3VpX19pc19pc3Zfb2ZmZXJpbmcsaGFzX2FjY2Vzc29yeV9zdWJzY3JpcHRpb24saXN2X3N1Z2FyX2NybSxpc3ZfdHJpbG9nLGxjX2FjdGl2aXRpZXMsbGNfbmV3cyxzYW1ldGltZV9tZWV0aW5nLA==-MjAwODkxMjc=;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token=57c04eeb-75b5-4dab-855f-a9284f9606a7;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token_forum=ebb420d0-b8f4-4398-a46c-341a38eb0654;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[JSESSIONID=00007tH8WnG65mHSyybPEH9QXMF:18u0qggjq;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[user_lang=ZW5fVVM%3D-MjAwODkxMjc%3D;Secure; Domain=na.collabservtest.lotus.com; Path=/; Expires=Sat, 09-Aug-14 13:25:28 GMT;Secure;]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[BIGipServerC1-AC-9082-fe=2741670848.31267.0000;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[BIGipServerC1-WebSEAL-80-fe=2590741440.20480.0000;secure; path=/]]></value>
     </header></headers>
 </response>
 </responses>

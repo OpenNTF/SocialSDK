@@ -15,11 +15,14 @@
  */
 package com.ibm.sbt.services.client.connections.activities;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -29,6 +32,7 @@ import com.ibm.sbt.security.authentication.AuthenticationException;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.connections.common.Link;
+import com.ibm.sbt.services.client.connections.common.Person;
 import com.ibm.sbt.services.endpoints.BasicEndpoint;
 import com.ibm.sbt.test.lib.TestEnvironment;
 
@@ -39,6 +43,50 @@ import com.ibm.sbt.test.lib.TestEnvironment;
 public class ActivityMoveFieldTest extends BaseActivityServiceTest {
 	
 	@Rule public ExpectedException thrown= ExpectedException.none();
+
+	@Test
+	public void testMovePersonField() throws ClientServicesException, XMLException {
+		activity = new Activity();
+		activity.setTitle(createActivityTitle());
+		activity = activityService.createActivity(activity);
+
+		ActivityNode srcActivityNode = new ActivityNode();
+		srcActivityNode.setActivityUuid(activity.getActivityUuid());
+		srcActivityNode.setTitle("Source ActivityNode");
+		srcActivityNode.setType("ENTRY");
+
+		ActivityNode dstActivityNode = new ActivityNode();
+		dstActivityNode.setActivityUuid(activity.getActivityUuid());
+		dstActivityNode.setTitle("Destination ActivityNode");
+		dstActivityNode.setType("ENTRY");
+
+		// Field 1
+		
+		String name = TestEnvironment.getSecondaryUserDisplayName();
+		String email = TestEnvironment.getSecondaryUserEmail();
+		String userid = TestEnvironment.getSecondaryUserUuid();
+		
+		PersonField personField = new PersonField();
+		personField.setName("test_person");
+		personField.setPosition(1000);
+		personField.setPerson(new Person(name, email, userid));
+
+		srcActivityNode.addField(personField);
+
+		activityService.createActivityNode(srcActivityNode);
+		activityService.createActivityNode(dstActivityNode);
+
+		srcActivityNode = activityService.getActivityNode(srcActivityNode.getActivityNodeUuid());
+		Field f = srcActivityNode.getFields()[0];
+		ActivityNode an = activityService.moveFieldToEntry(dstActivityNode.getActivityNodeUuid(), f.getFid());
+
+		ActivityNode read = activityService.getActivityNode(dstActivityNode.getActivityNodeUuid());
+		PersonField readField = (PersonField)read.getFields()[0];
+		Person readPerson = readField.getPerson();
+		assertEquals("test_person", readField.getName());
+		assertEquals(name, readPerson.getName());
+		assertEquals(userid, readPerson.getUserid());
+	}
 	
 	@Test
 	public void testMoveField() throws ClientServicesException, XMLException {
@@ -107,18 +155,18 @@ public class ActivityMoveFieldTest extends BaseActivityServiceTest {
 		int numFields = 0;
 		for (Field f : srcActivityNode.getFields()) {
 			an = activityService.moveFieldToEntry(dstActivityNode.getActivityNodeUuid(), f.getFid());
-			Assert.assertNotNull(an);
-			Assert.assertEquals(++numFields, an.getFields().length);
+			assertNotNull(an);
+			assertEquals(++numFields, an.getFields().length);
 		}
 		
 		//Check descendants
 		EntityList<ActivityNode> nodeList = activityService.getActivityNodeDescendants(activity.getActivityUuid());
 		for (ActivityNode node : nodeList){
-			Assert.assertNotNull(node);
+			assertNotNull(node);
 			if (node.getActivityNodeUuid().equals(srcActivityNode.getActivityNodeUuid())){
-				Assert.assertEquals(0, node.getFields().length);
+				assertEquals(0, node.getFields().length);
 			} else if (node.getActivityNodeUuid().equals(dstActivityNode.getActivityNodeUuid())){
-				Assert.assertEquals(orgNumFields, node.getFields().length);
+				assertEquals(orgNumFields, node.getFields().length);
 			}
 		}
 		
@@ -126,38 +174,38 @@ public class ActivityMoveFieldTest extends BaseActivityServiceTest {
 		Field[] fields = read.getFields();
 		
 		// Check that all fields have been moved
-		Assert.assertNotNull(fields);
-		Assert.assertEquals(orgNumFields, fields.length);
+		assertNotNull(fields);
+		assertEquals(orgNumFields, fields.length);
 		
 		// Check text field
 		Field movedTextField = read.getFieldByName(textField.getName());
-		Assert.assertTrue(movedTextField instanceof TextField);
-		Assert.assertEquals("test_text", movedTextField.getName());
-		Assert.assertEquals(1000, ((TextField)movedTextField).getPosition());
-		Assert.assertEquals("Test_Text_Field", ((TextField)movedTextField).getSummary());
+		assertTrue(movedTextField instanceof TextField);
+		assertEquals("test_text", movedTextField.getName());
+		assertEquals(1000, ((TextField)movedTextField).getPosition());
+		assertEquals("Test_Text_Field", ((TextField)movedTextField).getSummary());
 
 		// Check date field
 		Field movedDateField = read.getFieldByName(dateField.getName());
-		Assert.assertTrue(movedDateField instanceof DateField);
-		Assert.assertEquals("test_date", ((DateField)movedDateField).getName());
-		Assert.assertEquals(2000, ((DateField)movedDateField).getPosition());
-		Assert.assertNotNull(((DateField)movedDateField).getDate());
+		assertTrue(movedDateField instanceof DateField);
+		assertEquals("test_date", ((DateField)movedDateField).getName());
+		assertEquals(2000, ((DateField)movedDateField).getPosition());
+		assertNotNull(((DateField)movedDateField).getDate());
 		
 		// Check hidden text field
 		Field movedHiddenTextField = read.getFieldByName(hiddenTextField.getName());
-		Assert.assertTrue(movedHiddenTextField instanceof TextField);
-		Assert.assertTrue(((TextField)movedHiddenTextField).isHidden());
-		Assert.assertEquals("test_hidden_text", ((TextField)movedHiddenTextField).getName());
-		Assert.assertEquals(3000, ((TextField)movedHiddenTextField).getPosition());
-		Assert.assertEquals("Hidden_Text_Field", ((TextField)movedHiddenTextField).getSummary());
+		assertTrue(movedHiddenTextField instanceof TextField);
+		assertTrue(((TextField)movedHiddenTextField).isHidden());
+		assertEquals("test_hidden_text", ((TextField)movedHiddenTextField).getName());
+		assertEquals(3000, ((TextField)movedHiddenTextField).getPosition());
+		assertEquals("Hidden_Text_Field", ((TextField)movedHiddenTextField).getSummary());
 		
 		// Check link field
 		Field movedLinkField = read.getFieldByName(linkField.getName());
-		Assert.assertTrue(movedLinkField instanceof LinkField);
-		Assert.assertEquals("test_link", ((LinkField)movedLinkField).getName());
-		Assert.assertEquals(4000, ((LinkField)movedLinkField).getPosition());
-		Assert.assertEquals("IBM", ((LinkField)movedLinkField).getLink().getTitle());
-		Assert.assertEquals("http://www.ibm.com", ((LinkField)movedLinkField).getLink().getHref());
+		assertTrue(movedLinkField instanceof LinkField);
+		assertEquals("test_link", ((LinkField)movedLinkField).getName());
+		assertEquals(4000, ((LinkField)movedLinkField).getPosition());
+		assertEquals("IBM", ((LinkField)movedLinkField).getLink().getTitle());
+		assertEquals("http://www.ibm.com", ((LinkField)movedLinkField).getLink().getHref());
 		
 		activityService.deleteActivityNode(dstActivityNode);
 		activityService.deleteActivityNode(srcActivityNode);
@@ -244,36 +292,36 @@ public class ActivityMoveFieldTest extends BaseActivityServiceTest {
 			an = activityService.moveFieldToEntry(destActivityNode.getActivityNodeUuid(), f.getFid());
 		}
 		
-		Assert.assertNotNull(an);
+		assertNotNull(an);
 		
 		ActivityNode read = activityService.getActivityNode(destActivityNode.getActivityNodeUuid());
 		Field[] fields = read.getFields();
 		
 		// Check that all fields have been moved
-		Assert.assertNotNull(fields);
-		Assert.assertEquals(totalNumFields, fields.length);
+		assertNotNull(fields);
+		assertEquals(totalNumFields, fields.length);
 		
 		// Check text field
 		Field movedTextField = read.getFieldByName(textField.getName());
-		Assert.assertTrue(movedTextField instanceof TextField);
-		Assert.assertEquals("test_text", movedTextField.getName());
-		Assert.assertEquals(1000, ((TextField)movedTextField).getPosition());
-		Assert.assertEquals("Test_Text_Field", ((TextField)movedTextField).getSummary());
+		assertTrue(movedTextField instanceof TextField);
+		assertEquals("test_text", movedTextField.getName());
+		assertEquals(1000, ((TextField)movedTextField).getPosition());
+		assertEquals("Test_Text_Field", ((TextField)movedTextField).getSummary());
 
 		// Check date field
 		Field movedDateField = read.getFieldByName(dateField.getName());
-		Assert.assertTrue(movedDateField instanceof DateField);
-		Assert.assertEquals("test_date", ((DateField)movedDateField).getName());
-		Assert.assertEquals(3000, ((DateField)movedDateField).getPosition());
-		Assert.assertNotNull(((DateField)movedDateField).getDate());
+		assertTrue(movedDateField instanceof DateField);
+		assertEquals("test_date", ((DateField)movedDateField).getName());
+		assertEquals(3000, ((DateField)movedDateField).getPosition());
+		assertNotNull(((DateField)movedDateField).getDate());
 		
 		// Check hidden text field
 		Field movedHiddenTextField = read.getFieldByName(hiddenTextField.getName());
-		Assert.assertTrue(movedHiddenTextField instanceof TextField);
-		Assert.assertTrue(((TextField)movedHiddenTextField).isHidden());
-		Assert.assertEquals("test_hidden_text", ((TextField)movedHiddenTextField).getName());
-		Assert.assertEquals(2000, ((TextField)movedHiddenTextField).getPosition());
-		Assert.assertEquals("Hidden_Text_Field", ((TextField)movedHiddenTextField).getSummary());
+		assertTrue(movedHiddenTextField instanceof TextField);
+		assertTrue(((TextField)movedHiddenTextField).isHidden());
+		assertEquals("test_hidden_text", ((TextField)movedHiddenTextField).getName());
+		assertEquals(2000, ((TextField)movedHiddenTextField).getPosition());
+		assertEquals("Hidden_Text_Field", ((TextField)movedHiddenTextField).getSummary());
 		
 		// Delete the activities again
 		activityService.deleteActivityNode(srcActivityNode1);
@@ -610,17 +658,17 @@ public class ActivityMoveFieldTest extends BaseActivityServiceTest {
 		params.put("ps", "50");
 		
 		EntityList<Activity> openActivities = activityService.getMyActivities(params);
-		Assert.assertNotNull("Expected non null activities", openActivities);
+		assertNotNull("Expected non null activities", openActivities);
 		params.put("completed", "yes");
 		EntityList<Activity> allActivities = activityService.getMyActivities(params);
 		
 		activityService.deleteActivity(openActivity);
 
-		Assert.assertTrue(containsActivity(openActivities, openActivity));
-		Assert.assertTrue(!containsActivity(openActivities, completedActivity));
+		assertTrue(containsActivity(openActivities, openActivity));
+		assertTrue(!containsActivity(openActivities, completedActivity));
 		
-		Assert.assertNotNull("Expected non null activities", allActivities);
-		Assert.assertTrue(containsActivity(allActivities, openActivity));
-		Assert.assertTrue(containsActivity(allActivities, completedActivity));
+		assertNotNull("Expected non null activities", allActivities);
+		assertTrue(containsActivity(allActivities, openActivity));
+		assertTrue(containsActivity(allActivities, completedActivity));
 	}
 }

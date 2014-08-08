@@ -37,6 +37,7 @@ import java.util.Map.Entry;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.http.Header;
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.ProtocolVersion;
 import org.apache.http.conn.EofSensorInputStream;
@@ -175,7 +176,7 @@ public class MockSerializer {
 			throw new UnsupportedOperationException(e1);
 		}
 		for (Header h : allHeaders) {
-			if (h.getName().equals("Content-Type")) {
+			if (h.getName().equalsIgnoreCase("Content-Type")) {
 				e.setContentType(h.getValue());
 			}
 		}

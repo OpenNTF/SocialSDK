@@ -107,6 +107,7 @@ import com.ibm.sbt.service.proxy.ProxyConfigException;
 import com.ibm.sbt.service.proxy.ProxyFactory;
 import com.ibm.sbt.services.endpoints.Endpoint;
 import com.ibm.sbt.services.endpoints.EndpointFactory;
+import com.ibm.sbt.services.util.HttpDeleteWithBody;
 import com.ibm.sbt.services.util.SSLUtil;
 
 /**
@@ -124,6 +125,7 @@ public abstract class ClientService {
 	public static final String METHOD_PUT = "put"; //$NON-NLS-1$
 	public static final String METHOD_POST = "post"; //$NON-NLS-1$
 	public static final String METHOD_DELETE = "delete"; //$NON-NLS-1$
+	public static final String METHOD_DELETE_BODY = "deleteBody"; //$NON-NLS-1$
 
 	// These represents how the result should be formatted to the caller
 	public static final Handler FORMAT_UNKNOWN = null;
@@ -1050,7 +1052,14 @@ public abstract class ClientService {
         args.setHeaders(headers);
         return delete(args);        
     }
-
+    
+    public final Response delete(String serviceUrl, Map<String, String> parameters, Map<String, String> headers,
+            Handler format,String content)throws ClientServicesException{
+    	Args args = createArgs(serviceUrl, parameters);
+        args.setHandler(format);
+        args.setHeaders(headers);
+        return xhr(METHOD_DELETE_BODY, args, content);
+    }
 
 	public final Response delete(Args args) throws ClientServicesException {
 		return xhr(METHOD_DELETE, args, null);
@@ -1090,6 +1099,9 @@ public abstract class ClientService {
 			response = execRequest(httpPut, args, content);
 		} else if (StringUtil.equalsIgnoreCase(method, METHOD_DELETE)) {
 			HttpDelete httpDelete = new HttpDelete(url);
+			response = execRequest(httpDelete, args, content);
+		} else if (StringUtil.equalsIgnoreCase(method,METHOD_DELETE_BODY)){
+			HttpDeleteWithBody httpDelete = new HttpDeleteWithBody(url);
 			response = execRequest(httpDelete, args, content);
 		} else {
 			throw new ClientServicesException(null, "Unsupported HTTP method {0}", method);

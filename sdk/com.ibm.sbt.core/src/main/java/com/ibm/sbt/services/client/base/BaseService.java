@@ -339,6 +339,22 @@ public abstract class BaseService implements Serializable {
 
         return r;
     }
+    
+    public Response delete(String serviceUrl, Map<String, String> parameters, Map<String, String> headers, 
+    		String nameParameterId, String content)throws ClientServicesException{
+    	String uniqueId = null;
+        if (nameParameterId != null) {
+            uniqueId = (parameters == null) ? nameParameterId : parameters.get(nameParameterId);
+        }
+
+        Response r = getClientService().delete(serviceUrl, parameters, headers, getDataFormat(),content);
+        
+        if (cacheSize > 0 && uniqueId != null) {
+            removeFromCache(uniqueId);
+        }
+
+        return r;
+    }
 	/**
 	 * retrieveData
 	 * 

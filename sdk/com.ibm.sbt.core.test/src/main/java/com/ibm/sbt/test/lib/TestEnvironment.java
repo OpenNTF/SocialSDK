@@ -9,6 +9,7 @@ public class TestEnvironment {
 	private final static String SMARTCLOUD = "smartcloud";
 	private final static String CURRENT_USER = "user";
 	private final static String OTHER_USER = "otheruser";
+	private final static String THIRD_USER = "thirduser";
 	private final static String CURRENT_USER_MAIL = "mail";
 	private final static String OTHER_USER_MAIL = "othermail";
 	private final static String CURRENT_USER_PASSWORD = "password";
@@ -97,6 +98,10 @@ public class TestEnvironment {
 
 	public static String getCurrentUserUuid() {
 		return Context.get().getProperty(getPropertyBasePath() + CURRENT_USER);
+	}
+	
+	public static String getThirdUserUuid() {
+		return Context.get().getProperty(getPropertyBasePath() + THIRD_USER);
 	}
 
 	public static String getSecondaryUserPassword() {

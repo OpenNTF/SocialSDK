@@ -1,5 +1,5 @@
 /*
- * © Copyright Twitter
+ * Â© Copyright Twitter
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -25,7 +25,7 @@ public class TwitterRegEx {
     private static String LATIN_ACCENTS_CHARS = "\\u00c0-\\u00d6\\u00d8-\\u00f6\\u00f8-\\u00ff\\u015f";
     private static final String HASHTAG_ALPHA_CHARS = "a-z" + LATIN_ACCENTS_CHARS +
                                                      "\\u0400-\\u04ff\\u0500-\\u0527" + // Cyrillic
-                                                     "\\u2de0–\\u2dff\\ua640–\\ua69f" + // Cyrillic Extended A/B
+                                                     "\\u2de0Â©\\u2dff\\ua640Â©\\ua69f" + // Cyrillic Extended A/B
                                                      "\\u1100-\\u11ff\\u3130-\\u3185\\uA960-\\uA97F\\uAC00-\\uD7AF\\uD7B0-\\uD7FF" + // Hangul (Korean)
                                                      "\\p{InHiragana}\\p{InKatakana}" + // Japanese Hiragana and Katakana
                                                      "\\p{InCJKUnifiedIdeographs}" + // Japanese Kanji / Chinese Han

@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -17,7 +17,7 @@
 dojo.provide("sbt.connections.ForumService");
 
 /**
- * The Forums application of IBM® Connections enables a team to discuss issues that are pertinent to their work. 
+ * The Forums application of IBMÂ© Connections enables a team to discuss issues that are pertinent to their work. 
  * The Forums API allows application programs to create new forums, and to read and modify existing forums.
  * 
  * @module sbt.connections.ForumService

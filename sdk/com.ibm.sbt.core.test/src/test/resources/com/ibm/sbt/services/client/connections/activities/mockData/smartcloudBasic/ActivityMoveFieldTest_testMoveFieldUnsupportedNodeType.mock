@@ -1,0 +1,1398 @@
+<?xml version="1.0"?>
+<responses>
+<response statusCode="201" statusReason="Created">
+<headers>
+    <header>
+        <name><![CDATA[accept]]></name>
+        <value><![CDATA[application/atom+xml]]></value>
+    </header>
+    <header>
+        <name><![CDATA[content-language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header>
+    <header>
+        <name><![CDATA[content-type]]></name>
+        <value><![CDATA[application/atom+xml;charset=UTF-8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[date]]></name>
+        <value><![CDATA[Fri, 08 Aug 2014 13:23:58 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[location]]></name>
+        <value><![CDATA[https://apps.na.collabservtest.lotus.com/activities/service/atom2/activitynode?activityNodeUuid=f3fc2c35-59ed-471e-a031-9a46074fe131]]></value>
+    </header>
+    <header>
+        <name><![CDATA[p3p]]></name>
+        <value><![CDATA[CP="NON CUR OTPi OUR NOR UNI"]]></value>
+    </header>
+    <header>
+        <name><![CDATA[server]]></name>
+        <value><![CDATA[IBM OpenActivities (v1.0)]]></value>
+    </header>
+    <header>
+        <name><![CDATA[vary]]></name>
+        <value><![CDATA[Accept-Encoding]]></value>
+    </header>
+    <header>
+        <name><![CDATA[transfer-encoding]]></name>
+        <value><![CDATA[chunked]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-powered-by]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-ua-compatible]]></name>
+        <value><![CDATA[IE=9,8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-lconn-auth]]></name>
+        <value><![CDATA[true]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-uuid]]></name>
+        <value><![CDATA[f3fc2c35-59ed-471e-a031-9a46074fe131]]></value>
+    </header>
+    <header>
+        <name><![CDATA[cache-control]]></name>
+        <value><![CDATA[private, no-store, must-revalidate,max-age=0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[expires]]></name>
+        <value><![CDATA[Thu, 1 Jan 1970 00:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=gy77yZ/PjpTzuy8gEFPIPn54NEk9iZgkomYcJ8QqxEk596mFRyBzgSNaCAX9CtCmEt8Vh2szMu/uJW2Dj/NoLOAWpNk5NTjSmSWQhftSwL7+qMKSN/QATrQdXtReECNXcBy1fpbPuqCtJ7qLa63zPqP24xAODaTfmdu8rJgtdkOyh2CIdFY++jXqJuvUVVY2omC/osu/8jVlfgVRWVIFRlrDfFjJfA55B0uojqoPv7swri8uYg64VRcKmaXg+NTxG3VgNqDA0A7UXZmyL95WUN44FqSFk2U9gaHPN54vx46/brmcMcNui71sXzC0+iVuhS0G2PEzL0nmKlJeLEsn4N++hxYj1ZtjCAtnpGEFkYcrYe4YuafxGIWeQJH9ip3AtxHUsQCcOfwWuTITciQQOWgTCcQeGDIiFg7p/mnqnefZ4azarI+A4pWhqdUv21j6AGe7xYixwZLWUy08+FZwrNnofqu6lgHtP4DOlpyXUav81Mz9pS1XH93ApPKJl+kyjjeIDKuGIWhVaa8vZkBD6z3VKN/G+jLsJDfYftqax1lWLTtJvuiRiXNLg33RrAWVCue7BfAlzIvlxPEGaB8HKQ4P4KO7S36yOS/VfBC+aeLcVeC0D/ulv5NU8Gs/erpDGDHhvz+jf2l1ze1vKzWBpZM6SHonTkveGRN0SL+J31CsaXN/WlOg3HiFfPcRH3wI/G1OI4zMHUO2697GK9gzxonp9I9KEi4Kh5zAaWumj6SaM27slnljWLzGINNJFR3H;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[entitlements=MDczMDQxODI2N2M1MTBlMzg2NTliY2ZjZGE1NDk4NDY3YWJiMWQxNQ==-YmhfYWN0aXZpdGllcyxiaF9hY3Rpdml0aWVzX19hbGxvd19vdmVyYWdlLGJoX2NoYXQsYmhfY29tbXVuaXRpZXMsYmhfY29udGFjdHMsYmhfZGFzaGJvYXJkLGJoX2ZlZWRiYWNrLGJoX2ZpbGVyLGJoX2ZpbGVyX19hbGxvd19vdmVyYWdlLGJoX2Zvcm1zLGJoX2ZvcnVtcyxiaF9tZWV0aW5ncyxiaF93aGF0c19uZXcsYnNzX2FkbWluLGJzc19pbnZpdGVfZ3Vlc3QsYnNzX3VpX19pc19pc3Zfb2ZmZXJpbmcsaGFzX2FjY2Vzc29yeV9zdWJzY3JpcHRpb24saXN2X3N1Z2FyX2NybSxpc3ZfdHJpbG9nLGxjX2FjdGl2aXRpZXMsbGNfbmV3cyxzYW1ldGltZV9tZWV0aW5nLA==-MjAwODkxMjc=;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token=e34b3826-3fc7-4d37-a211-fac9e3b4636f;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token_forum=67be4f85-d0c7-423a-8e21-5fd76a67782b;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[JSESSIONID=0000eSjBk5oJHvTb4ybKKNy1VuO:18u0qggjq;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[user_lang=ZW5fVVM%3D-MjAwODkxMjc%3D;Secure; Domain=na.collabservtest.lotus.com; Path=/; Expires=Sat, 09-Aug-14 13:23:58 GMT;Secure;]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[BIGipServerC1-AC-9082-fe=2741670848.31267.0000;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[BIGipServerC1-WebSEAL-80-fe=2590741440.20480.0000;secure; path=/]]></value>
+    </header></headers>
+<data><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+
+
+
+
+
+
+
+
+
+
+
+
+<entry xmlns="http://www.w3.org/2005/Atom"
+  xmlns:app="http://www.w3.org/2007/app"   
+  xmlns:snx="http://www.ibm.com/xmlns/prod/sn"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+  xmlns:thr="http://purl.org/syndication/thread/1.0"
+  >
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <id>urn:lsid:ibm.com:oa:f3fc2c35-59ed-471e-a031-9a46074fe131</id>
+  <title type="text">com.ibm.sbt.services.client.connections.activities.ActivityMoveFieldTest_Activity-1407504235382</title>
+  <updated>2014-08-08T13:23:58Z</updated>
+  <published>2014-08-08T13:23:58Z</published>
+  <author>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <snx:org><uri>https://apps.na.collabservtest.lotus.com/activities/service/atom2/memberprofile?memberid=</uri>
+  </snx:org>
+  <name>Carlos Manias</name>
+  
+  <snx:userid>20089127</snx:userid>
+  <snx:ldapid>4a5a465d-df19-4c49-8c14-be38c8e33692</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </author>
+  <contributor>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <snx:org><uri>https://apps.na.collabservtest.lotus.com/activities/service/atom2/memberprofile?memberid=</uri>
+  </snx:org>
+  <name>Carlos Manias</name>
+  
+  <snx:userid>20089127</snx:userid>
+  <snx:ldapid>4a5a465d-df19-4c49-8c14-be38c8e33692</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </contributor>
+  	
+    
+    
+  	     
+  	  
+  	    
+  	  
+ 	      <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="activity" label="Activity"/>
+  	  
+  	
+    
+  
+
+  <category scheme="http://www.ibm.com/xmlns/prod/sn/priority" term="1" label="Normal"/>
+  
+    
+    
+  
+  
+  
+  
+  
+  
+  
+  <category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="external" label="External"/>
+  
+  
+  
+  
+  
+  
+    <link rel="http://www.ibm.com/xmlns/prod/sn/member-list" type="application/atom+xml" href="https://apps.na.collabservtest.lotus.com/activities/service/atom2/acl?activityUuid=f3fc2c35-59ed-471e-a031-9a46074fe131" />
+    <link rel="http://www.ibm.com/xmlns/prod/sn/history" type="application/atom+xml" href="https://apps.na.collabservtest.lotus.com/activities/service/atom2/activity/history?activityUuid=f3fc2c35-59ed-471e-a031-9a46074fe131" />
+    <link rel="http://www.ibm.com/xmlns/prod/sn/templates" type="application/atom+xml" href="https://apps.na.collabservtest.lotus.com/activities/service/atom2/entrytemplates?activityUuid=f3fc2c35-59ed-471e-a031-9a46074fe131" />
+   
+  
+  
+
+  
+    <app:collection href="https://apps.na.collabservtest.lotus.com/activities/service/atom2/activity?activityUuid=f3fc2c35-59ed-471e-a031-9a46074fe131">
+      <title type="text">com.ibm.sbt.services.client.connections.activities.ActivityMoveFieldTest_Activity-1407504235382</title>
+      <app:categories href="https://apps.na.collabservtest.lotus.com/activities/service/atom2/categories?activityUuid=f3fc2c35-59ed-471e-a031-9a46074fe131"/>
+    </app:collection> 
+  
+  <snx:activity>f3fc2c35-59ed-471e-a031-9a46074fe131</snx:activity>
+  
+  
+  
+    <link rel="edit" type="application/atom+xml" href="https://apps.na.collabservtest.lotus.com/activities/service/atom2/activitynode?activityNodeUuid=f3fc2c35-59ed-471e-a031-9a46074fe131" />
+  
+   
+  
+    
+      <link rel="self" type="application/atom+xml" href="https://apps.na.collabservtest.lotus.com/activities/service/atom2/activity?activityUuid=f3fc2c35-59ed-471e-a031-9a46074fe131"/>
+      
+        <link rel="alternate" type="application/xhtml+xml" href="https://apps.na.collabservtest.lotus.com/activities/service/html/activity/recent?activityUuid=f3fc2c35-59ed-471e-a031-9a46074fe131"/>
+      	<link rel="alternate" type="text/html" href="https://apps.na.collabservtest.lotus.com/activities/service/html/activity/recent?activityUuid=f3fc2c35-59ed-471e-a031-9a46074fe131"/>
+      
+     
+    
+  
+ 
+  <snx:position>-2147483648</snx:position>
+  <snx:depth>0</snx:depth>  
+  
+  <snx:permissions>none, create_activity, view_activity, edit_activity, delete_activity, activity_owner, edit_activity_tags, design_activity, edit_statements, delete_statements, add_members, delete_members, create_entries, edit_personal_entries, edit_all_entries, delete_personal_entries, delete_all_entries, edit_personal_entry_tags, edit_all_entry_tags, view_members</snx:permissions>
+  <snx:icon>https://apps.na.collabservtest.lotus.com/activities/nav/common/images/iconActivities16.png</snx:icon>
+
+  
+    
+    
+    
+    
+      
+      
+        
+        
+          <summary type="text">
+          	
+          </summary>
+        
+      
+    
+  
+  
+  
+
+    
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</entry>
+]]></data>
+</response>
+<response statusCode="201" statusReason="Created">
+<headers>
+    <header>
+        <name><![CDATA[accept]]></name>
+        <value><![CDATA[application/atom+xml, multipart/related; q=0.5, */*; q=0.2]]></value>
+    </header>
+    <header>
+        <name><![CDATA[content-language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header>
+    <header>
+        <name><![CDATA[content-type]]></name>
+        <value><![CDATA[application/atom+xml;charset=UTF-8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[date]]></name>
+        <value><![CDATA[Fri, 08 Aug 2014 13:24:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[location]]></name>
+        <value><![CDATA[https://apps.na.collabservtest.lotus.com/activities/service/atom2/activitynode?activityNodeUuid=fa231915-8755-4492-8a17-c16b78094224]]></value>
+    </header>
+    <header>
+        <name><![CDATA[p3p]]></name>
+        <value><![CDATA[CP="NON CUR OTPi OUR NOR UNI"]]></value>
+    </header>
+    <header>
+        <name><![CDATA[server]]></name>
+        <value><![CDATA[IBM OpenActivities (v1.0)]]></value>
+    </header>
+    <header>
+        <name><![CDATA[vary]]></name>
+        <value><![CDATA[Accept-Encoding]]></value>
+    </header>
+    <header>
+        <name><![CDATA[transfer-encoding]]></name>
+        <value><![CDATA[chunked]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-powered-by]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-ua-compatible]]></name>
+        <value><![CDATA[IE=9,8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-lconn-auth]]></name>
+        <value><![CDATA[true]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-uuid]]></name>
+        <value><![CDATA[fa231915-8755-4492-8a17-c16b78094224]]></value>
+    </header>
+    <header>
+        <name><![CDATA[cache-control]]></name>
+        <value><![CDATA[private, no-store, must-revalidate,max-age=0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[expires]]></name>
+        <value><![CDATA[Thu, 1 Jan 1970 00:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=gy77yZ/PjpTzuy8gEFPIPn54NEk9iZgkomYcJ8QqxEk596mFRyBzgSNaCAX9CtCmEt8Vh2szMu/uJW2Dj/NoLOAWpNk5NTjSmSWQhftSwL7+qMKSN/QATrQdXtReECNXcBy1fpbPuqCtJ7qLa63zPqP24xAODaTfmdu8rJgtdkOyh2CIdFY++jXqJuvUVVY2omC/osu/8jVlfgVRWVIFRlrDfFjJfA55B0uojqoPv7swri8uYg64VRcKmaXg+NTxG3VgNqDA0A7UXZmyL95WUN44FqSFk2U9gaHPN54vx46/brmcMcNui71sXzC0+iVuhS0G2PEzL0nmKlJeLEsn4N++hxYj1ZtjCAtnpGEFkYcrYe4YuafxGIWeQJH9ip3AtxHUsQCcOfwWuTITciQQOWgTCcQeGDIiFg7p/mnqnefZ4azarI+A4pWhqdUv21j6AGe7xYixwZLWUy08+FZwrNnofqu6lgHtP4DOlpyXUav81Mz9pS1XH93ApPKJl+kyjjeIDKuGIWhVaa8vZkBD6z3VKN/G+jLsJDfYftqax1lWLTtJvuiRiXNLg33RrAWVCue7BfAlzIvlxPEGaB8HKQ4P4KO7S36yOS/VfBC+aeLcVeC0D/ulv5NU8Gs/erpDGDHhvz+jf2l1ze1vKzWBpZM6SHonTkveGRN0SL+J31CsaXN/WlOg3HiFfPcRH3wI/G1OI4zMHUO2697GK9gzxonp9I9KEi4Kh5zAaWumj6SaM27slnljWLzGINNJFR3H;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[entitlements=MDczMDQxODI2N2M1MTBlMzg2NTliY2ZjZGE1NDk4NDY3YWJiMWQxNQ==-YmhfYWN0aXZpdGllcyxiaF9hY3Rpdml0aWVzX19hbGxvd19vdmVyYWdlLGJoX2NoYXQsYmhfY29tbXVuaXRpZXMsYmhfY29udGFjdHMsYmhfZGFzaGJvYXJkLGJoX2ZlZWRiYWNrLGJoX2ZpbGVyLGJoX2ZpbGVyX19hbGxvd19vdmVyYWdlLGJoX2Zvcm1zLGJoX2ZvcnVtcyxiaF9tZWV0aW5ncyxiaF93aGF0c19uZXcsYnNzX2FkbWluLGJzc19pbnZpdGVfZ3Vlc3QsYnNzX3VpX19pc19pc3Zfb2ZmZXJpbmcsaGFzX2FjY2Vzc29yeV9zdWJzY3JpcHRpb24saXN2X3N1Z2FyX2NybSxpc3ZfdHJpbG9nLGxjX2FjdGl2aXRpZXMsbGNfbmV3cyxzYW1ldGltZV9tZWV0aW5nLA==-MjAwODkxMjc=;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token=10dbcece-0a3f-4866-93ee-4c500f003fb5;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token_forum=0ac39b83-d915-4773-8918-b5ad02189733;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[JSESSIONID=0000ExdnO1P2Pw5X5ijPTO1Ud7X:18u0qggjq;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[user_lang=ZW5fVVM%3D-MjAwODkxMjc%3D;Secure; Domain=na.collabservtest.lotus.com; Path=/; Expires=Sat, 09-Aug-14 13:24:00 GMT;Secure;]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[BIGipServerC1-AC-9082-fe=2741670848.31267.0000;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[BIGipServerC1-WebSEAL-80-fe=2590741440.20480.0000;secure; path=/]]></value>
+    </header></headers>
+<data><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+
+
+
+
+
+
+
+
+
+
+
+
+<entry xmlns="http://www.w3.org/2005/Atom"
+  xmlns:app="http://www.w3.org/2007/app"   
+  xmlns:snx="http://www.ibm.com/xmlns/prod/sn"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+  xmlns:thr="http://purl.org/syndication/thread/1.0"
+  >
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <id>urn:lsid:ibm.com:oa:fa231915-8755-4492-8a17-c16b78094224</id>
+  <title type="text">Source ActivityNode</title>
+  <updated>2014-08-08T13:23:59Z</updated>
+  <published>2014-08-08T13:23:59Z</published>
+  <author>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <snx:org><uri>https://apps.na.collabservtest.lotus.com/activities/service/atom2/memberprofile?memberid=</uri>
+  </snx:org>
+  <name>Carlos Manias</name>
+  
+  <snx:userid>20089127</snx:userid>
+  <snx:ldapid>4a5a465d-df19-4c49-8c14-be38c8e33692</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </author>
+  <contributor>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <snx:org><uri>https://apps.na.collabservtest.lotus.com/activities/service/atom2/memberprofile?memberid=</uri>
+  </snx:org>
+  <name>Carlos Manias</name>
+  
+  <snx:userid>20089127</snx:userid>
+  <snx:ldapid>4a5a465d-df19-4c49-8c14-be38c8e33692</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </contributor>
+  	
+    
+    
+  	     
+  	  
+  	    
+  	  
+ 	      <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="entry" label="Entry"/>
+  	  
+  	
+    
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="external" label="External"/>
+  
+  
+  
+  
+  
+   
+  
+    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:f3fc2c35-59ed-471e-a031-9a46074fe131" 
+       type="application/atom+xml" 
+       href="https://apps.na.collabservtest.lotus.com/activities/service/atom2/activitynode?activityNodeUuid=f3fc2c35-59ed-471e-a031-9a46074fe131"
+       source="urn:lsid:ibm.com:oa:f3fc2c35-59ed-471e-a031-9a46074fe131"
+    />
+  
+  
+
+  
+  <snx:activity>f3fc2c35-59ed-471e-a031-9a46074fe131</snx:activity>
+  
+  
+  
+    <link rel="edit" type="application/atom+xml" href="https://apps.na.collabservtest.lotus.com/activities/service/atom2/activitynode?activityNodeUuid=fa231915-8755-4492-8a17-c16b78094224" />
+  
+   
+  
+    
+    
+      <link rel="self" type="application/atom+xml" href="https://apps.na.collabservtest.lotus.com/activities/service/atom2/activitynode?activityNodeUuid=fa231915-8755-4492-8a17-c16b78094224"/>
+ 	  <link rel="alternate" type="application/xhtml+xml" href="https://apps.na.collabservtest.lotus.com/activities/service/html/activityentry?uuid=fa231915-8755-4492-8a17-c16b78094224"/>
+      <link rel="alternate" type="text/html" href="https://apps.na.collabservtest.lotus.com/activities/service/html/activityentry?uuid=fa231915-8755-4492-8a17-c16b78094224"/>
+          
+    
+  
+ 
+  <snx:position>1000</snx:position>
+  <snx:depth>1</snx:depth>  
+  
+  <snx:permissions>none, create_activity, view_activity, edit_activity, delete_activity, activity_owner, edit_activity_tags, design_activity, edit_statements, delete_statements, add_members, delete_members, create_entries, edit_personal_entries, edit_all_entries, delete_personal_entries, delete_all_entries, edit_personal_entry_tags, edit_all_entry_tags, view_members</snx:permissions>
+  
+
+  
+    
+    
+    
+    
+      
+      
+        
+        
+          <summary type="text">
+          	
+          </summary>
+        
+      
+    
+  
+  
+  
+
+  
+    
+    
+    
+    
+        
+    
+    <snx:field name="test_text"  fid="0a39f891-af3e-4223-9862-5fd1ca4ee3c5" position="1000" type="text" >
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<summary type="text">Test_Text_Field</summary>
+
+
+
+
+    </snx:field>
+    
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</entry>
+]]></data>
+</response>
+<response statusCode="201" statusReason="Created">
+<headers>
+    <header>
+        <name><![CDATA[accept]]></name>
+        <value><![CDATA[application/atom+xml, multipart/related; q=0.5, */*; q=0.2]]></value>
+    </header>
+    <header>
+        <name><![CDATA[content-language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header>
+    <header>
+        <name><![CDATA[content-type]]></name>
+        <value><![CDATA[application/atom+xml;charset=UTF-8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[date]]></name>
+        <value><![CDATA[Fri, 08 Aug 2014 13:24:01 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[location]]></name>
+        <value><![CDATA[https://apps.na.collabservtest.lotus.com/activities/service/atom2/activitynode?activityNodeUuid=a5b04357-2f16-4107-bcba-7798b30f186f]]></value>
+    </header>
+    <header>
+        <name><![CDATA[p3p]]></name>
+        <value><![CDATA[CP="NON CUR OTPi OUR NOR UNI"]]></value>
+    </header>
+    <header>
+        <name><![CDATA[server]]></name>
+        <value><![CDATA[IBM OpenActivities (v1.0)]]></value>
+    </header>
+    <header>
+        <name><![CDATA[vary]]></name>
+        <value><![CDATA[Accept-Encoding]]></value>
+    </header>
+    <header>
+        <name><![CDATA[transfer-encoding]]></name>
+        <value><![CDATA[chunked]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-powered-by]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-ua-compatible]]></name>
+        <value><![CDATA[IE=9,8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-lconn-auth]]></name>
+        <value><![CDATA[true]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-uuid]]></name>
+        <value><![CDATA[a5b04357-2f16-4107-bcba-7798b30f186f]]></value>
+    </header>
+    <header>
+        <name><![CDATA[cache-control]]></name>
+        <value><![CDATA[private, no-store, must-revalidate,max-age=0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[expires]]></name>
+        <value><![CDATA[Thu, 1 Jan 1970 00:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=gy77yZ/PjpTzuy8gEFPIPn54NEk9iZgkomYcJ8QqxEk596mFRyBzgSNaCAX9CtCmEt8Vh2szMu/uJW2Dj/NoLOAWpNk5NTjSmSWQhftSwL7+qMKSN/QATrQdXtReECNXcBy1fpbPuqCtJ7qLa63zPqP24xAODaTfmdu8rJgtdkOyh2CIdFY++jXqJuvUVVY2omC/osu/8jVlfgVRWVIFRlrDfFjJfA55B0uojqoPv7swri8uYg64VRcKmaXg+NTxG3VgNqDA0A7UXZmyL95WUN44FqSFk2U9gaHPN54vx46/brmcMcNui71sXzC0+iVuhS0G2PEzL0nmKlJeLEsn4N++hxYj1ZtjCAtnpGEFkYcrYe4YuafxGIWeQJH9ip3AtxHUsQCcOfwWuTITciQQOWgTCcQeGDIiFg7p/mnqnefZ4azarI+A4pWhqdUv21j6AGe7xYixwZLWUy08+FZwrNnofqu6lgHtP4DOlpyXUav81Mz9pS1XH93ApPKJl+kyjjeIDKuGIWhVaa8vZkBD6z3VKN/G+jLsJDfYftqax1lWLTtJvuiRiXNLg33RrAWVCue7BfAlzIvlxPEGaB8HKQ4P4KO7S36yOS/VfBC+aeLcVeC0D/ulv5NU8Gs/erpDGDHhvz+jf2l1ze1vKzWBpZM6SHonTkveGRN0SL+J31CsaXN/WlOg3HiFfPcRH3wI/G1OI4zMHUO2697GK9gzxonp9I9KEi4Kh5zAaWumj6SaM27slnljWLzGINNJFR3H;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[entitlements=MDczMDQxODI2N2M1MTBlMzg2NTliY2ZjZGE1NDk4NDY3YWJiMWQxNQ==-YmhfYWN0aXZpdGllcyxiaF9hY3Rpdml0aWVzX19hbGxvd19vdmVyYWdlLGJoX2NoYXQsYmhfY29tbXVuaXRpZXMsYmhfY29udGFjdHMsYmhfZGFzaGJvYXJkLGJoX2ZlZWRiYWNrLGJoX2ZpbGVyLGJoX2ZpbGVyX19hbGxvd19vdmVyYWdlLGJoX2Zvcm1zLGJoX2ZvcnVtcyxiaF9tZWV0aW5ncyxiaF93aGF0c19uZXcsYnNzX2FkbWluLGJzc19pbnZpdGVfZ3Vlc3QsYnNzX3VpX19pc19pc3Zfb2ZmZXJpbmcsaGFzX2FjY2Vzc29yeV9zdWJzY3JpcHRpb24saXN2X3N1Z2FyX2NybSxpc3ZfdHJpbG9nLGxjX2FjdGl2aXRpZXMsbGNfbmV3cyxzYW1ldGltZV9tZWV0aW5nLA==-MjAwODkxMjc=;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token=31615836-3ff0-489d-9f08-7759ab06a347;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token_forum=cc0b4ae6-ceed-4a85-a059-4568633dca4e;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[JSESSIONID=0000BOwb6HSK0n0ftzWmX3Qg-aA:18u0qggjq;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[user_lang=ZW5fVVM%3D-MjAwODkxMjc%3D;Secure; Domain=na.collabservtest.lotus.com; Path=/; Expires=Sat, 09-Aug-14 13:24:01 GMT;Secure;]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[BIGipServerC1-AC-9082-fe=2741670848.31267.0000;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[BIGipServerC1-WebSEAL-80-fe=2590741440.20480.0000;secure; path=/]]></value>
+    </header></headers>
+<data><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+
+
+
+
+
+
+
+
+
+
+
+
+<entry xmlns="http://www.w3.org/2005/Atom"
+  xmlns:app="http://www.w3.org/2007/app"   
+  xmlns:snx="http://www.ibm.com/xmlns/prod/sn"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+  xmlns:thr="http://purl.org/syndication/thread/1.0"
+  >
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <id>urn:lsid:ibm.com:oa:a5b04357-2f16-4107-bcba-7798b30f186f</id>
+  <title type="text">Destination ActivityNode</title>
+  <updated>2014-08-08T13:24:01Z</updated>
+  <published>2014-08-08T13:24:01Z</published>
+  <author>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <snx:org><uri>https://apps.na.collabservtest.lotus.com/activities/service/atom2/memberprofile?memberid=</uri>
+  </snx:org>
+  <name>Carlos Manias</name>
+  
+  <snx:userid>20089127</snx:userid>
+  <snx:ldapid>4a5a465d-df19-4c49-8c14-be38c8e33692</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </author>
+  <contributor>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <snx:org><uri>https://apps.na.collabservtest.lotus.com/activities/service/atom2/memberprofile?memberid=</uri>
+  </snx:org>
+  <name>Carlos Manias</name>
+  
+  <snx:userid>20089127</snx:userid>
+  <snx:ldapid>4a5a465d-df19-4c49-8c14-be38c8e33692</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </contributor>
+  	
+    
+    
+  	     
+  	  
+  	    
+  	  
+ 	      <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="section" label="Section"/>
+  	  
+  	
+    
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="external" label="External"/>
+  
+  
+  
+  
+  
+   
+  
+    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:f3fc2c35-59ed-471e-a031-9a46074fe131" 
+       type="application/atom+xml" 
+       href="https://apps.na.collabservtest.lotus.com/activities/service/atom2/activitynode?activityNodeUuid=f3fc2c35-59ed-471e-a031-9a46074fe131"
+       source="urn:lsid:ibm.com:oa:f3fc2c35-59ed-471e-a031-9a46074fe131"
+    />
+  
+  
+
+  
+  <snx:activity>f3fc2c35-59ed-471e-a031-9a46074fe131</snx:activity>
+  
+  
+  
+    <link rel="edit" type="application/atom+xml" href="https://apps.na.collabservtest.lotus.com/activities/service/atom2/activitynode?activityNodeUuid=a5b04357-2f16-4107-bcba-7798b30f186f" />
+  
+   
+  
+    
+    
+      <link rel="self" type="application/atom+xml" href="https://apps.na.collabservtest.lotus.com/activities/service/atom2/activitynode?activityNodeUuid=a5b04357-2f16-4107-bcba-7798b30f186f"/>
+ 	  <link rel="alternate" type="application/xhtml+xml" href="https://apps.na.collabservtest.lotus.com/activities/service/html/activityentry?uuid=a5b04357-2f16-4107-bcba-7798b30f186f"/>
+      <link rel="alternate" type="text/html" href="https://apps.na.collabservtest.lotus.com/activities/service/html/activityentry?uuid=a5b04357-2f16-4107-bcba-7798b30f186f"/>
+          
+    
+  
+ 
+  <snx:position>2000</snx:position>
+  <snx:depth>1</snx:depth>  
+  
+  <snx:permissions>none, create_activity, view_activity, edit_activity, delete_activity, activity_owner, edit_activity_tags, design_activity, edit_statements, delete_statements, add_members, delete_members, create_entries, edit_personal_entries, edit_all_entries, delete_personal_entries, delete_all_entries, edit_personal_entry_tags, edit_all_entry_tags, view_members</snx:permissions>
+  
+
+  
+    
+    
+    
+    
+      
+      
+        
+        
+          <summary type="text">
+          	
+          </summary>
+        
+      
+    
+  
+  
+  
+
+    
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</entry>
+]]></data>
+</response>
+<response statusCode="200" statusReason="OK">
+<headers>
+    <header>
+        <name><![CDATA[accept]]></name>
+        <value><![CDATA[application/atom+xml]]></value>
+    </header>
+    <header>
+        <name><![CDATA[content-language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header>
+    <header>
+        <name><![CDATA[content-type]]></name>
+        <value><![CDATA[application/atom+xml;charset=UTF-8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[date]]></name>
+        <value><![CDATA[Fri, 08 Aug 2014 13:24:02 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[etag]]></name>
+        <value><![CDATA[W/"1407504239840-4a5a465d-df19-4c49-8c14-be38c8e33692"]]></value>
+    </header>
+    <header>
+        <name><![CDATA[p3p]]></name>
+        <value><![CDATA[CP="NON CUR OTPi OUR NOR UNI"]]></value>
+    </header>
+    <header>
+        <name><![CDATA[server]]></name>
+        <value><![CDATA[IBM OpenActivities (v1.0)]]></value>
+    </header>
+    <header>
+        <name><![CDATA[vary]]></name>
+        <value><![CDATA[Accept-Encoding]]></value>
+    </header>
+    <header>
+        <name><![CDATA[transfer-encoding]]></name>
+        <value><![CDATA[chunked]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-powered-by]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-ua-compatible]]></name>
+        <value><![CDATA[IE=9,8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-lconn-auth]]></name>
+        <value><![CDATA[true]]></value>
+    </header>
+    <header>
+        <name><![CDATA[cache-control]]></name>
+        <value><![CDATA[private, no-store, must-revalidate,max-age=0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[pragma]]></name>
+        <value><![CDATA[no-cache]]></value>
+    </header>
+    <header>
+        <name><![CDATA[expires]]></name>
+        <value><![CDATA[Thu, 1 Jan 1970 00:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=gy77yZ/PjpTzuy8gEFPIPn54NEk9iZgkomYcJ8QqxEk596mFRyBzgSNaCAX9CtCmEt8Vh2szMu/uJW2Dj/NoLOAWpNk5NTjSmSWQhftSwL7+qMKSN/QATrQdXtReECNXcBy1fpbPuqCtJ7qLa63zPqP24xAODaTfmdu8rJgtdkOyh2CIdFY++jXqJuvUVVY2omC/osu/8jVlfgVRWVIFRlrDfFjJfA55B0uojqoPv7swri8uYg64VRcKmaXg+NTxG3VgNqDA0A7UXZmyL95WUN44FqSFk2U9gaHPN54vx46/brmcMcNui71sXzC0+iVuhS0G2PEzL0nmKlJeLEsn4N++hxYj1ZtjCAtnpGEFkYcrYe4YuafxGIWeQJH9ip3AtxHUsQCcOfwWuTITciQQOWgTCcQeGDIiFg7p/mnqnefZ4azarI+A4pWhqdUv21j6AGe7xYixwZLWUy08+FZwrNnofqu6lgHtP4DOlpyXUav81Mz9pS1XH93ApPKJl+kyjjeIDKuGIWhVaa8vZkBD6z3VKN/G+jLsJDfYftqax1lWLTtJvuiRiXNLg33RrAWVCue7BfAlzIvlxPEGaB8HKQ4P4KO7S36yOS/VfBC+aeLcVeC0D/ulv5NU8Gs/erpDGDHhvz+jf2l1ze1vKzWBpZM6SHonTkveGRN0SL+J31CsaXN/WlOg3HiFfPcRH3wI/G1OI4zMHUO2697GK9gzxonp9I9KEi4Kh5zAaWumj6SaM27slnljWLzGINNJFR3H;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[entitlements=MDczMDQxODI2N2M1MTBlMzg2NTliY2ZjZGE1NDk4NDY3YWJiMWQxNQ==-YmhfYWN0aXZpdGllcyxiaF9hY3Rpdml0aWVzX19hbGxvd19vdmVyYWdlLGJoX2NoYXQsYmhfY29tbXVuaXRpZXMsYmhfY29udGFjdHMsYmhfZGFzaGJvYXJkLGJoX2ZlZWRiYWNrLGJoX2ZpbGVyLGJoX2ZpbGVyX19hbGxvd19vdmVyYWdlLGJoX2Zvcm1zLGJoX2ZvcnVtcyxiaF9tZWV0aW5ncyxiaF93aGF0c19uZXcsYnNzX2FkbWluLGJzc19pbnZpdGVfZ3Vlc3QsYnNzX3VpX19pc19pc3Zfb2ZmZXJpbmcsaGFzX2FjY2Vzc29yeV9zdWJzY3JpcHRpb24saXN2X3N1Z2FyX2NybSxpc3ZfdHJpbG9nLGxjX2FjdGl2aXRpZXMsbGNfbmV3cyxzYW1ldGltZV9tZWV0aW5nLA==-MjAwODkxMjc=;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token=977120ba-d5c5-4ebb-b384-188d72f683a9;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token_forum=ee51c22a-4a5e-46dd-a07e-a8d170a51e51;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[JSESSIONID=0000zexnzzrOCSg9pqaLvoyv2HK:18u0qggjq;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[user_lang=ZW5fVVM%3D-MjAwODkxMjc%3D;Secure; Domain=na.collabservtest.lotus.com; Path=/; Expires=Sat, 09-Aug-14 13:24:02 GMT;Secure;]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[BIGipServerC1-AC-9082-fe=2741670848.31267.0000;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[BIGipServerC1-WebSEAL-80-fe=2590741440.20480.0000;secure; path=/]]></value>
+    </header></headers>
+<data><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+
+
+
+
+
+
+
+
+
+
+
+
+<entry xmlns="http://www.w3.org/2005/Atom"
+  xmlns:app="http://www.w3.org/2007/app"   
+  xmlns:snx="http://www.ibm.com/xmlns/prod/sn"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+  xmlns:thr="http://purl.org/syndication/thread/1.0"
+  >
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <id>urn:lsid:ibm.com:oa:fa231915-8755-4492-8a17-c16b78094224</id>
+  <title type="text">Source ActivityNode</title>
+  <updated>2014-08-08T13:23:59Z</updated>
+  <published>2014-08-08T13:23:59Z</published>
+  <author>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <snx:org><uri>https://apps.na.collabservtest.lotus.com/activities/service/atom2/memberprofile?memberid=</uri>
+  </snx:org>
+  <name>Carlos Manias</name>
+  
+  <snx:userid>20089127</snx:userid>
+  <snx:ldapid>4a5a465d-df19-4c49-8c14-be38c8e33692</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </author>
+  <contributor>
+    
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <snx:org><uri>https://apps.na.collabservtest.lotus.com/activities/service/atom2/memberprofile?memberid=</uri>
+  </snx:org>
+  <name>Carlos Manias</name>
+  
+  <snx:userid>20089127</snx:userid>
+  <snx:ldapid>4a5a465d-df19-4c49-8c14-be38c8e33692</snx:ldapid>
+  
+  
+  
+  <snx:userState>active</snx:userState>
+  
+  
+
+  </contributor>
+  	
+    
+    
+  	     
+  	  
+  	    
+  	  
+ 	      <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="entry" label="Entry"/>
+  	  
+  	
+    
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="external" label="External"/>
+  
+  
+  
+  
+  
+   
+  
+    <thr:in-reply-to ref="urn:lsid:ibm.com:oa:f3fc2c35-59ed-471e-a031-9a46074fe131" 
+       type="application/atom+xml" 
+       href="https://apps.na.collabservtest.lotus.com/activities/service/atom2/activitynode?activityNodeUuid=f3fc2c35-59ed-471e-a031-9a46074fe131"
+       source="urn:lsid:ibm.com:oa:f3fc2c35-59ed-471e-a031-9a46074fe131"
+    />
+  
+  
+
+  
+  <snx:activity>f3fc2c35-59ed-471e-a031-9a46074fe131</snx:activity>
+  
+  
+  
+    <link rel="edit" type="application/atom+xml" href="https://apps.na.collabservtest.lotus.com/activities/service/atom2/activitynode?activityNodeUuid=fa231915-8755-4492-8a17-c16b78094224" />
+  
+   
+  
+    
+    
+      <link rel="self" type="application/atom+xml" href="https://apps.na.collabservtest.lotus.com/activities/service/atom2/activitynode?activityNodeUuid=fa231915-8755-4492-8a17-c16b78094224"/>
+ 	  <link rel="alternate" type="application/xhtml+xml" href="https://apps.na.collabservtest.lotus.com/activities/service/html/activityentry?uuid=fa231915-8755-4492-8a17-c16b78094224"/>
+      <link rel="alternate" type="text/html" href="https://apps.na.collabservtest.lotus.com/activities/service/html/activityentry?uuid=fa231915-8755-4492-8a17-c16b78094224"/>
+          
+    
+  
+ 
+  <snx:position>1000</snx:position>
+  <snx:depth>1</snx:depth>  
+  
+  <snx:permissions>none, create_activity, view_activity, edit_activity, delete_activity, activity_owner, edit_activity_tags, design_activity, edit_statements, delete_statements, add_members, delete_members, create_entries, edit_personal_entries, edit_all_entries, delete_personal_entries, delete_all_entries, edit_personal_entry_tags, edit_all_entry_tags, view_members</snx:permissions>
+  
+
+  
+    
+    
+    
+    
+      
+      
+        
+        
+          <summary type="text">
+          	
+          </summary>
+        
+      
+    
+  
+  
+  
+
+  
+    
+    
+    
+    
+        
+    
+    <snx:field name="test_text"  fid="0a39f891-af3e-4223-9862-5fd1ca4ee3c5" position="1000" type="text" >
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<summary type="text">Test_Text_Field</summary>
+
+
+
+
+    </snx:field>
+    
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</entry>
+]]></data>
+</response>
+<response statusCode="400" statusReason="Bad Request">
+<headers>
+    <header>
+        <name><![CDATA[content-language]]></name>
+        <value><![CDATA[en-US]]></value>
+    </header>
+    <header>
+        <name><![CDATA[content-type]]></name>
+        <value><![CDATA[application/xml;charset=UTF-8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[date]]></name>
+        <value><![CDATA[Fri, 08 Aug 2014 13:24:02 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[p3p]]></name>
+        <value><![CDATA[CP="NON CUR OTPi OUR NOR UNI"]]></value>
+    </header>
+    <header>
+        <name><![CDATA[server]]></name>
+        <value><![CDATA[IBM OpenActivities (v1.0)]]></value>
+    </header>
+    <header>
+        <name><![CDATA[vary]]></name>
+        <value><![CDATA[Accept-Encoding]]></value>
+    </header>
+    <header>
+        <name><![CDATA[transfer-encoding]]></name>
+        <value><![CDATA[chunked]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-powered-by]]></name>
+        <value><![CDATA[Servlet/3.0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-ua-compatible]]></name>
+        <value><![CDATA[IE=9,8]]></value>
+    </header>
+    <header>
+        <name><![CDATA[x-lconn-auth]]></name>
+        <value><![CDATA[true]]></value>
+    </header>
+    <header>
+        <name><![CDATA[pragma]]></name>
+        <value><![CDATA[no-cache]]></value>
+    </header>
+    <header>
+        <name><![CDATA[cache-control]]></name>
+        <value><![CDATA[private, no-store, must-revalidate,max-age=0]]></value>
+    </header>
+    <header>
+        <name><![CDATA[expires]]></name>
+        <value><![CDATA[Thu, 01 Jan 1970 00:00:00 GMT]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[LtpaToken2=gy77yZ/PjpTzuy8gEFPIPn54NEk9iZgkomYcJ8QqxEk596mFRyBzgSNaCAX9CtCmEt8Vh2szMu/uJW2Dj/NoLOAWpNk5NTjSmSWQhftSwL7+qMKSN/QATrQdXtReECNXcBy1fpbPuqCtJ7qLa63zPqP24xAODaTfmdu8rJgtdkOyh2CIdFY++jXqJuvUVVY2omC/osu/8jVlfgVRWVIFRlrDfFjJfA55B0uojqoPv7swri8uYg64VRcKmaXg+NTxG3VgNqDA0A7UXZmyL95WUN44FqSFk2U9gaHPN54vx46/brmcMcNui71sXzC0+iVuhS0G2PEzL0nmKlJeLEsn4N++hxYj1ZtjCAtnpGEFkYcrYe4YuafxGIWeQJH9ip3AtxHUsQCcOfwWuTITciQQOWgTCcQeGDIiFg7p/mnqnefZ4azarI+A4pWhqdUv21j6AGe7xYixwZLWUy08+FZwrNnofqu6lgHtP4DOlpyXUav81Mz9pS1XH93ApPKJl+kyjjeIDKuGIWhVaa8vZkBD6z3VKN/G+jLsJDfYftqax1lWLTtJvuiRiXNLg33RrAWVCue7BfAlzIvlxPEGaB8HKQ4P4KO7S36yOS/VfBC+aeLcVeC0D/ulv5NU8Gs/erpDGDHhvz+jf2l1ze1vKzWBpZM6SHonTkveGRN0SL+J31CsaXN/WlOg3HiFfPcRH3wI/G1OI4zMHUO2697GK9gzxonp9I9KEi4Kh5zAaWumj6SaM27slnljWLzGINNJFR3H;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[entitlements=MDczMDQxODI2N2M1MTBlMzg2NTliY2ZjZGE1NDk4NDY3YWJiMWQxNQ==-YmhfYWN0aXZpdGllcyxiaF9hY3Rpdml0aWVzX19hbGxvd19vdmVyYWdlLGJoX2NoYXQsYmhfY29tbXVuaXRpZXMsYmhfY29udGFjdHMsYmhfZGFzaGJvYXJkLGJoX2ZlZWRiYWNrLGJoX2ZpbGVyLGJoX2ZpbGVyX19hbGxvd19vdmVyYWdlLGJoX2Zvcm1zLGJoX2ZvcnVtcyxiaF9tZWV0aW5ncyxiaF93aGF0c19uZXcsYnNzX2FkbWluLGJzc19pbnZpdGVfZ3Vlc3QsYnNzX3VpX19pc19pc3Zfb2ZmZXJpbmcsaGFzX2FjY2Vzc29yeV9zdWJzY3JpcHRpb24saXN2X3N1Z2FyX2NybSxpc3ZfdHJpbG9nLGxjX2FjdGl2aXRpZXMsbGNfbmV3cyxzYW1ldGltZV9tZWV0aW5nLA==-MjAwODkxMjc=;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token=d8c1e78f-0fdf-45ee-89a8-5ea12495f238;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[csrf_token_forum=700edadd-f518-4c45-97eb-4b47ab418dab;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[JSESSIONID=0000sC0p8EoKbQi2QMe8fw9u03M:18u0qggjq;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[user_lang=ZW5fVVM%3D-MjAwODkxMjc%3D;Secure; Domain=na.collabservtest.lotus.com; Path=/; Expires=Sat, 09-Aug-14 13:24:02 GMT;Secure;]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[BIGipServerC1-AC-9082-fe=2741670848.31267.0000;Secure; Path=/]]></value>
+    </header>
+    <header>
+        <name><![CDATA[Set-Cookie]]></name>
+        <value><![CDATA[BIGipServerC1-WebSEAL-80-fe=2590741440.20480.0000;secure; path=/]]></value>
+    </header></headers>
+<data><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+
+
+
+
+
+
+
+<error xmlns="http://www.ibm.com/xmlns/prod/sn">
+  <code>400</code>
+  <message>Identifier: LC62CD1F07784348DE91DF67A9ABDEA4EA
+null</message>
+  <displaymessage></displaymessage>
+  <errortype></errortype>
+
+  <trace>java.lang.Exception: Identifier: LC62CD1F07784348DE91DF67A9ABDEA4EA
+null</trace>
+</error>
+]]></data>
+</response>
+</responses>

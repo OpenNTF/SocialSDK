@@ -55,7 +55,7 @@ public class Result extends AtomEntity{
 	}
 	
 	/**
-	 * Identifies the IBM��� Connections application in which the result was found
+	 * Identifies the IBM©©© Connections application in which the result was found
 	 * @return String
 	 */
 	public String getApplication(){

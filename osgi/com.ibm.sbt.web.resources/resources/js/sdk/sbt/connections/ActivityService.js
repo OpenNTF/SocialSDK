@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * Â© Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -17,7 +17,7 @@
 dojo.provide("sbt.connections.ActivityService");
 
 /**
- * The Activities application of IBM® Connections enables a team to collect, organize, share, and reuse work related to a project goal. The Activities API
+ * The Activities application of IBMÂ© Connections enables a team to collect, organize, share, and reuse work related to a project goal. The Activities API
  * allows application programs to create new activities, and to read and modify existing activities.
  * 
  * @module sbt.connections.ActivityService
@@ -1691,7 +1691,7 @@ define('sbt/connections/ActivityService',
 			};
 
 			/**
-			 * ActivityService class which provides wrapper APIs to the Activities application of IBM® Connections which enables a team to collect, organize,
+			 * ActivityService class which provides wrapper APIs to the Activities application of IBMÂ© Connections which enables a team to collect, organize,
 			 * share, and reuse work related to a project goal. The Activities API allows application programs to create new activities, and to read and modify
 			 * existing activities.
 			 * 

@@ -46,7 +46,7 @@ public class FileServiceTest extends BaseFileServiceTest {
 
     public final static String TEST_CONTENT = "This is a sample Content in the Test File. "
                                                     + "Used mainly for Testing the Upload functionality of the FileService Connections API."
-                                                    + "Test Input : ddsfafw4t547���%*���^U���^JUL&><\03242";
+                                                    + "Test Input : ddsfafw4t547©©©%*©©©^U©©©^JUL&><\03242";
     public final static String TEST_NAME    = "FS_TestUploadTest";
     
     @Test

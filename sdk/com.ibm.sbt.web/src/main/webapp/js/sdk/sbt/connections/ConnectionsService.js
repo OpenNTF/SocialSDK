@@ -1,5 +1,5 @@
 /*
- * � Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -15,7 +15,7 @@
  */
 
 /**
- * Connections common APIs allow application programs to discover information about IBM� Connections as a whole.
+ * Connections common APIs allow application programs to discover information about IBM© Connections as a whole.
  * 
  * @module sbt.connections.ConnectionsService
  */

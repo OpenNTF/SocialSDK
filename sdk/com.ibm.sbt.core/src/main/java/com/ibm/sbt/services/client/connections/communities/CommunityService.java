@@ -341,12 +341,7 @@ public class CommunityService extends ConnectionsService {
 			throw new ClientServicesException(null, Messages.NullCommunityObjectException);
 		}
 		subCommunity.setParentCommunityUrl(parentCommunity.getSelfUrl());
-		Object communityPayload =  subCommunity.constructSubCommUpdateRequestBody();
-		String url = CommunityUrls.COMMUNITIES_MY.format(this);
-		Response response = createData(url, null, communityPayload,ClientService.FORMAT_CONNECTIONS_OUTPUT);
-		checkResponseCode(response, HTTPCode.CREATED);
-		subCommunity.clearFieldsMap();
-		return extractCommunityIdFromHeaders(response);
+		return createCommunity(subCommunity);
 	}
 	
 	/**

@@ -48,37 +48,13 @@
     </header></headers>
 <data><![CDATA[<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
-<!-- ***************************************************************** -->
-<!--                                                                   -->
-<!-- IBM Confidential                                                  -->
-<!--                                                                   -->
-<!-- OCO Source Materials                                              -->
-<!--                                                                   -->
-<!-- Copyright IBM Corp. 2007, 2012                                    -->
-<!--                                                                   -->
-<!-- The source code for this program is not published or otherwise    -->
-<!-- divested of its trade secrets, irrespective of what has been      -->
-<!-- deposited with the U.S. Copyright Office.                         -->
-<!--                                                                   -->
-<!-- ***************************************************************** -->
-
+<html>
     <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Cannot Find Page</title>
-	<link rel="stylesheet" href="/status/theme/status.css" type="text/css" />
+	<title>404</title>
     </head>
     <body>
 	<div id="frame">
-		<div id="statusBox">
-			<div class="messageError">
-				<div class="error">
-					<h1>Sorry. We cannot find the page you requested.</h1>
-					<h2>A link might be broken, or the Web address might be incorrect.</h2>
- 					<h4>Return to <a href="/">Home</a> and try again.</h4>
-					<h3>Thanks!</h3>
-				</div>
-			</div>
-		</div>
 	</div>
     </body>
 </html>

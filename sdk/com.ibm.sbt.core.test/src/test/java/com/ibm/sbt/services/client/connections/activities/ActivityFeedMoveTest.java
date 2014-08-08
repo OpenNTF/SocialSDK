@@ -200,6 +200,7 @@ public class ActivityFeedMoveTest extends BaseActivityServiceTest {
         try {
             activityService.moveNode(entryNode.getActivityNodeUuid(), activity.getActivityUuid());
         } catch (ClientServicesException ex) {
+        	ex.printStackTrace();
             assertEquals(403, ex.getResponseStatusCode());
             return;
         } finally {

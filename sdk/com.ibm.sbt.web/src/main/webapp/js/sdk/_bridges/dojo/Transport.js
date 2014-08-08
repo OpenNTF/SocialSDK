@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012
+ * Â© Copyright IBM Corp. 2012
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -40,7 +40,7 @@ define([ './declare', 'dojo/_base/xhr', '../util', '../Promise' ], function(decl
          *            be sent with the request.
          * @param {Boolean}
          *            [options.preventCache=false] If true will send an extra
-         *            query parameter to ensure the the server won’t supply
+         *            query parameter to ensure the the server wonÂ©t supply
          *            cached values.
          * @param {String}
          *            [options.method=GET] The HTTP method that should be used

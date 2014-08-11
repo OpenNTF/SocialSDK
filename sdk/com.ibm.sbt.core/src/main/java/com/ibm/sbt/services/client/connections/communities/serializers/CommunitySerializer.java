@@ -89,7 +89,11 @@ public class CommunitySerializer extends AtomEntitySerializer<Community> {
 
 	@Override
 	protected Element content() {
-		return textElement(CONTENT, entity.getContent(), attribute(TYPE, HTML));
+		String content = entity.getContent();
+		if(content == null){
+			content="";
+		}
+		return textElement(CONTENT, content, attribute(TYPE, HTML));
 	}
 
 	protected Element category() {

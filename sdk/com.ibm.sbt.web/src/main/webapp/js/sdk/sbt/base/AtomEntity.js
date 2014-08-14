@@ -308,7 +308,7 @@ define([ "../declare", "../lang", "../stringUtil", "./BaseConstants", "./BaseEnt
         	var content = this.getContent();
         	if (content) {
         		if (this.contentType == "html") {
-        			content = (content && lang.isString(content)) ? content.replace(/</g,"&lt;").replace(/>/g,"&gt;") : content; 
+        			content = (content && lang.isString(content)) ? stringUtil.htmlEntity(content) : content; 
             	}
         		return stringUtil.transform(ContentTmpl, { "contentType" : this.contentType, "content" : content });
         	}

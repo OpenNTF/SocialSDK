@@ -18,22 +18,23 @@ package com.ibm.sbt.services.client;
 import static com.ibm.sbt.services.client.base.CommonConstants.APPLICATION_JSON;
 import static com.ibm.sbt.services.client.base.CommonConstants.APPLICATION_OCTET_STREAM;
 import static com.ibm.sbt.services.client.base.CommonConstants.APPLICATION_XML;
-import static com.ibm.sbt.services.client.base.CommonConstants.MULTIPART_RELATED;
 import static com.ibm.sbt.services.client.base.CommonConstants.BINARY;
 import static com.ibm.sbt.services.client.base.CommonConstants.BINARY_OCTET_STREAM;
 import static com.ibm.sbt.services.client.base.CommonConstants.CH_SLASH;
 import static com.ibm.sbt.services.client.base.CommonConstants.CONTENT_ENCODING;
 import static com.ibm.sbt.services.client.base.CommonConstants.CONTENT_TYPE;
 import static com.ibm.sbt.services.client.base.CommonConstants.GZIP;
+import static com.ibm.sbt.services.client.base.CommonConstants.HTML;
 import static com.ibm.sbt.services.client.base.CommonConstants.INIT_URL_PARAM;
 import static com.ibm.sbt.services.client.base.CommonConstants.JSON;
 import static com.ibm.sbt.services.client.base.CommonConstants.LOCATION_HEADER;
+import static com.ibm.sbt.services.client.base.CommonConstants.MULTIPART_RELATED;
 import static com.ibm.sbt.services.client.base.CommonConstants.SLUG;
 import static com.ibm.sbt.services.client.base.CommonConstants.TEXT_PLAIN;
 import static com.ibm.sbt.services.client.base.CommonConstants.URL_PARAM;
 import static com.ibm.sbt.services.client.base.CommonConstants.UTF8;
 import static com.ibm.sbt.services.client.base.CommonConstants.XML;
-import static com.ibm.sbt.services.client.base.CommonConstants.HTML;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
@@ -43,6 +44,7 @@ import java.io.Reader;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.nio.charset.Charset;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -52,7 +54,9 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.GZIPInputStream;
+
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -69,17 +73,12 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.entity.FileEntity;
 import org.apache.http.entity.InputStreamEntity;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.entity.mime.FormBodyPart;
-import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
-import org.apache.http.entity.mime.content.ByteArrayBody;
-import org.apache.http.entity.mime.content.ContentBody;
-import org.apache.http.entity.mime.content.InputStreamBody;
-import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.util.EntityUtils;
 import org.w3c.dom.Node;
+
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.runtime.NoAccessSignal;
 import com.ibm.commons.runtime.util.UrlUtil;
@@ -452,7 +451,7 @@ public abstract class ClientService {
 		@Override
 		protected HttpEntity createEntity() throws ClientServicesException {
 			try {
-				return new StringEntity(content);
+				return new StringEntity(content, Charset.forName("UTF-8"));
 			} catch (Exception ex) {
 				throw new ClientServicesException(ex);
 			}
@@ -705,6 +704,32 @@ public abstract class ClientService {
 		}
 	}
 	
+	public static class ContentMultipart extends Content {
+
+		private final HttpEntity content;
+
+		public ContentMultipart(HttpEntity entity, String contentType) {
+			super(contentType);
+			this.content = entity;
+		}
+
+		public ContentMultipart(HttpEntity entity) {
+			this(entity, "multipart/related;type=\"application/atom+xml\"; boundary=MIME_boundary");
+		}
+
+		@Override
+		public HttpEntity createEntity() throws ClientServicesException {
+			return content;
+		}
+
+		@Override
+		protected void setEntity(HttpClient httpClient, HttpRequestBase httpRequestBase, Args args,
+				HttpEntity entity) throws ClientServicesException {
+			httpRequestBase.setHeader(CONTENT_TYPE, getContentType());
+			super.setEntity(httpClient, httpRequestBase, args, entity);
+		}
+	}
+	
 	protected Content createRequestContent(Args args, Object content) throws ClientServicesException {
 		if (args.getHeaders() != null && args.getHeaders().get(CONTENT_TYPE) != null) {
 			String contentType = args.getHeaders().get(CONTENT_TYPE);
@@ -726,6 +751,9 @@ public abstract class ClientService {
 			if (content instanceof List) {
 				return new ContentList((List) content, contentType);
 			}
+			if(content instanceof HttpEntity){
+				return new ContentMultipart((HttpEntity) content);
+			}
 		} else {
 			if (content instanceof String) {
 				return new ContentString((String) content);
@@ -744,6 +772,9 @@ public abstract class ClientService {
 			}
 			if (content instanceof List) {
 				return new ContentList((List) content);
+			}
+			if(content instanceof HttpEntity){
+				return new ContentMultipart((HttpEntity) content);
 			}
 		}
 

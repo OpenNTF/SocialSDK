@@ -78,6 +78,10 @@ public class ExtensionManager {
                 	try {
                 		String prop = System.getProperty("com.ibm.common.ExtensionManager"); //$NON-NLS-1$
                 		if(StringUtil.isEmpty(prop) || StringUtil.equals(prop, "osgi")) { //$NON-NLS-1$
+                			// Make sure that the OSGi framework is actually available
+                			// In case of a Domino agent, for example, the properties are set but OSGi is not available
+                			// Make sure that it exists - if not, it generates an exception that will be caught.
+                			Class.forName("org.eclipse.core.runtime.Platform");
                 			provider = new EclipseProvider();
                 		}
                 	} catch(Throwable t) {}

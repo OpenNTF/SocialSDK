@@ -310,6 +310,46 @@ public class SubscriptionManagementService extends BssService {
     }
     
     /**
+     * This service retrieves details of the specified seat object from the BSS database.
+     * 
+     *  @param subscriptionId The ID of the subscription for which quota is to be changed.
+     *  @param seatId The ID of the seat for which quota is to be changed.
+     *  @param seatObject The seat in JSON format
+     * 
+     * @return
+     * @throws BssException
+     * @throws {@link IllegalArgumentException}
+     */
+    public JsonEntity getSeat(String subscriptionId, String seatId) throws BssException {
+    	try {
+    		String serviceUrl = API_RESOURCE_SUBSCRIPTION + "/" + subscriptionId + API_SEAT + seatId;
+    		return getEntity(serviceUrl, null, getJsonFeedHandler());
+		} catch (Exception e) {
+			throw new BssException(e, "Error retrieving a seat caused by {0}", e.getMessage());
+		}
+    }
+  
+    /**
+     * This operation is to assign or allocate extra storage for a pooled storage subscription.
+     * 
+     *  @param subscriptionId The ID of the subscription for which quota is to be changed.
+     *  @param seatId The ID of the seat for which quota is to be changed.
+     *  @param seatObject The seat in JSON format
+     * 
+     * @return
+     * @throws BssException
+     * @throws {@link IllegalArgumentException}
+     */
+    public void changeQuota(String subscriptionId, String seatId, JsonJavaObject seatObject) throws BssException {
+    	try {
+    		String serviceUrl = API_RESOURCE_SUBSCRIPTION + "/" + subscriptionId + API_SEAT + seatId;
+    		createData(serviceUrl, null, ChangeQuotaHeaders, seatObject, ClientService.FORMAT_JSON);
+		} catch (Exception e) {
+			throw new BssException(e, "Error changing quota caused by {0}", e.getMessage());
+		}
+    }
+  
+    /**
      * Wait for the subscription to change to the specified state and then call the state change listener.
      * 
      * @param subscriptionId

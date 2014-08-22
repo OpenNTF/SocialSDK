@@ -15,6 +15,8 @@
  */
 package com.ibm.sbt.services.client.smartcloud.bss;
 
+import java.util.List;
+
 import org.junit.After;
 import org.junit.Assert;
 
@@ -424,6 +426,26 @@ public class BaseBssTest {
     	return null;
     }
     
+    protected JsonJavaObject findSeat(String subscriberId, String subscriptionId) throws BssException {
+    	JsonEntity jsonEntity = getSubscriberManagementService().getSubscriberById(subscriberId);
+		JsonJavaObject rootObject = jsonEntity.getJsonObject();
+		JsonJavaObject subscriberObject = rootObject.getAsObject("Subscriber");
+		List<Object> seatSet = subscriberObject.getAsList("SeatSet");
+		for (Object seat : seatSet) {
+			String nextId = String.valueOf(((JsonJavaObject)seat).getAsLong("SubscriptionId"));
+			if (nextId.equals(subscriptionId)) {
+				JsonJavaObject seatJson = new JsonJavaObject();
+				seatJson.put("Seat", (JsonJavaObject)seat);
+				return seatJson;
+			}
+		}
+		return null;
+    }
+    
+    protected JsonEntity getSeat(String subscriptionId, String seatId) throws BssException {
+    	return getSubscriptionManagementService().getSeat(subscriptionId, seatId);
+    }
+        
     protected String getUniqueEmail() {
     	return "ibmsbt_"+System.currentTimeMillis()+"@mailinator.com";
     }

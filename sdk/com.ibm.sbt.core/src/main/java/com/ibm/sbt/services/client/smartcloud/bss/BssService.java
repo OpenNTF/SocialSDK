@@ -46,6 +46,7 @@ public class BssService extends JsonService {
 	public static String API_RESOURCE_CUSTOMER = "/api/bss/resource/customer";
 	public static String API_RESOURCE_SUBSCRIBER = "/api/bss/resource/subscriber";
 	public static String API_RESOURCE_SUBSCRIPTION = "/api/bss/resource/subscription";
+	public static String API_SEAT = "/seat/";
 	public static String API_AUTHORIZATION_GETROLELIST = "/api/bss/service/authorization/getRoleList";
 	public static String API_AUTHORIZATION_ASSIGNROLE = "/api/bss/service/authorization/assignRole";
 	public static String API_AUTHORIZATION_UNASSIGNROLE = "/api/bss/service/authorization/unassignRole";
@@ -141,6 +142,12 @@ public class BssService extends JsonService {
 	protected static Map<String, String> RevokeSubscriberHeader = new HashMap<String, String>();
 	static {
 		RevokeSubscriberHeader.put("x-operation", "revokeSubscriber");
+	}
+
+	protected static Map<String, String> ChangeQuotaHeaders = new HashMap<String, String>();
+	static {
+		ChangeQuotaHeaders.put("Content-Type", "application/json");
+		ChangeQuotaHeaders.put("x-operation", "changeQuota");
 	}
 
 	static final String	sourceClass	= BssService.class.getName();

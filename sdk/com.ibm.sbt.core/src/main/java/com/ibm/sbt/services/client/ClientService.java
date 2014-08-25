@@ -141,7 +141,7 @@ public abstract class ClientService {
 	private static final ProfilerType profilerRequest = new ProfilerType("Executing REST request, "); //$NON-NLS-1$
 
 	private static final String sourceClass = ClientService.class.getName();
-	private static final Logger logger = Logger.getLogger(sourceClass);
+	protected static final Logger logger = Logger.getLogger(sourceClass);
 
 	/**
 	 * Default constructor

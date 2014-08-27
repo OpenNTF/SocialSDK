@@ -95,20 +95,28 @@ public class WikiPage extends WikiBaseEntity {
 		String contentUrl = getAsString(WikiXPath.enclosureUrl);
 		StringWriter writer = new StringWriter();
 		InputStream contentStream = null;
+		String html = null;
 		try {
-			contentStream = (InputStream)getService().getEndpoint().xhrGet(contentUrl).getData();
-			IOUtils.copy(contentStream, writer, "UTF-8");
+			Object data = getService().getEndpoint().xhrGet(contentUrl).getData();
+			if (data instanceof String) {
+				html = (String)data;
+			} else if (data instanceof InputStream) {
+				contentStream = (InputStream)data;
+				IOUtils.copy(contentStream, writer, "UTF-8");
+				html = writer.toString();
+			}
 		} catch (IOException e) {
 			throw new ClientServicesException(e);
 		} finally{
 			try {
-				contentStream.close();
+				if (contentStream != null) {
+					contentStream.close();
+				}
 			} catch (IOException e) {
 				throw new ClientServicesException(e);
 			}
 		}
-		String content = writer.toString();
-		return content;
+		return html;
 	}
 	
 	/**

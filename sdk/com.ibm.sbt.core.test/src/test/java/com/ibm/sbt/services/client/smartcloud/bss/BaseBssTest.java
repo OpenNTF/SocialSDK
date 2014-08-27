@@ -193,7 +193,37 @@ public class BaseBssTest {
    		
    		return addSubscriber(customerId);
     }
+    
+    public String addAdministrator(String customerId) {
+    	String subscriberId = addSubscriber(customerId);
+    	
+    	addAdministratorRole(subscriberId);
+    	
+    	return subscriberId;
+    }
     		
+    public void addAdministratorRole(String subscriberId) {
+    	try {
+			JsonEntity subscriber = getSubscriberById(subscriberId);
+			String loginName = subscriber.getAsString("Subscriber/Person/EmailAddress");
+			System.out.println(loginName);
+			
+			AuthorizationService authorizationService = getAuthorizationService();
+			String[] roles = authorizationService.getRoles(loginName);
+			for (String role : roles) {
+				System.out.println(role);
+			}
+	
+			authorizationService.assignRole(loginName, "CustomerAdministrator");
+    	} catch (BssException be) {
+    		JsonJavaObject jsonObject = be.getResponseJson();
+    		System.err.println(jsonObject);
+    		Assert.fail("Error adding administrator role because: "+jsonObject);
+    	} catch (Exception e) {
+    		Assert.fail("Error adding administrator role caused by: "+e.getMessage());    		
+    	}
+    }
+    
     public String addSubscriber(String customerId) {
        	try {
     		SubscriberJsonBuilder subscriber = new SubscriberJsonBuilder();
@@ -374,7 +404,7 @@ public class BaseBssTest {
 			    	} 
 				}
 			};
-    		if (!getSubscriptionManagementService().waitSubscriptionState(subscriptionId, "ACTIVE", 5, 1000, listener)) {
+    		if (!getSubscriptionManagementService().waitSubscriptionState(subscriptionId, "ACTIVE", 500, 1000, listener)) {
     			Assert.fail("Timeout waiting for subscription to activate");
     		}
     	} catch (Exception e) {

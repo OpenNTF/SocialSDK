@@ -17,8 +17,8 @@ package com.ibm.sbt.services.client.base;
 
 import static com.ibm.sbt.services.client.base.CommonConstants.APPLICATION_ATOM_XML;
 import static com.ibm.sbt.services.client.base.CommonConstants.BINARY_OCTET_STREAM;
-import static com.ibm.sbt.services.client.base.CommonConstants.MULTIPART_RELATED;
 import static com.ibm.sbt.services.client.base.CommonConstants.CONTENT_TYPE;
+import static com.ibm.sbt.services.client.base.CommonConstants.MULTIPART_ATOM;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -41,7 +41,7 @@ public abstract class ConnectionsService extends BaseService {
 
 	private static Map<String,String> MULTIPART_HEADERS = new HashMap<String, String>();
 	static {
-		MULTIPART_HEADERS.put(CONTENT_TYPE, MULTIPART_RELATED);
+		MULTIPART_HEADERS.put(CONTENT_TYPE, MULTIPART_ATOM);
 	}
 
 	public ConnectionsService(String endpoint) {

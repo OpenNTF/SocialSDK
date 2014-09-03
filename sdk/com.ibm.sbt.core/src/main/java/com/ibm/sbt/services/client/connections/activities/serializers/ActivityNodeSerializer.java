@@ -67,7 +67,7 @@ public class ActivityNodeSerializer extends AtomEntitySerializer<ActivityNode> {
 		appendChildren(entry, tags());
 		appendChildren(entry, nodeSerializer.fields());
 		
-		return serializeToString();
+		return nodeSerializer.payload(serializeToString());
 	}
 	
 	protected Element activityNodeCategory() {

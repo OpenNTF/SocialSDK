@@ -984,7 +984,8 @@ public class ActivityService extends ConnectionsService {
 	protected Activity createActivityEntity(String requestUrl, Activity activity, Map<String, String> parameters) throws ClientServicesException {
 		try {
 			ActivitySerializer serializer = new ActivitySerializer(activity);
-			Response response = createData(requestUrl, parameters, getAtomHeaders(), serializer.generateCreate());
+			Map<String,String> headers = activity.hasAttachments() ? getMultipartHeaders() : getAtomHeaders();
+			Response response = createData(requestUrl, parameters, headers, serializer.generateCreate());
 			checkResponseCode(response, HTTPCode.CREATED);
 			return updateActivityEntityData(activity, response);
 		}
@@ -1036,8 +1037,9 @@ public class ActivityService extends ConnectionsService {
 				ActivitySerializer serializer = new ActivitySerializer(activity);
 				payload = serializer.generateUpdate();
 			}
+			Map<String,String> headers = activity.hasAttachments() ? getMultipartHeaders() : getAtomHeaders();
 			String uniqueId = (activity == null) ? null : activity.getActivityUuid();
-			Response response = putData(requestUrl, parameters, getAtomHeaders(), payload, uniqueId);
+			Response response = putData(requestUrl, parameters, headers, payload, uniqueId);
 			checkResponseCode(response, expectedCode);
 		}
 		catch(ClientServicesException e) {
@@ -1101,7 +1103,8 @@ public class ActivityService extends ConnectionsService {
 	protected ActivityNode createActivityNodeEntity(String requestUrl, ActivityNode activityNode, Map<String, String> parameters) throws ClientServicesException {
 		try {
 			ActivityNodeSerializer serializer = new ActivityNodeSerializer(activityNode);
-			Response response = createData(requestUrl, parameters, getAtomHeaders(), serializer.generateCreate());
+			Map<String,String> headers = activityNode.hasAttachments() ? getMultipartHeaders() : getAtomHeaders();
+			Response response = createData(requestUrl, parameters, headers, serializer.generateCreate());
 			checkResponseCode(response, HTTPCode.CREATED);
 			return updateActivityNodeEntityData(activityNode, response);
 		}
@@ -1136,7 +1139,8 @@ public class ActivityService extends ConnectionsService {
 	protected void updateActivityNodeEntity(String requestUrl, ActivityNode activityNode, Map<String, String> parameters, HTTPCode expectedCode) throws ClientServicesException {
 		try {
 			ActivityNodeSerializer serializer = new ActivityNodeSerializer(activityNode);
-			Response response = putData(requestUrl, parameters, getAtomHeaders(), serializer.generateUpdate(), activityNode.getActivityNodeUuid());
+			Map<String,String> headers = activityNode.hasAttachments() ? getMultipartHeaders() : getAtomHeaders();
+			Response response = putData(requestUrl, parameters, headers, serializer.generateUpdate(), activityNode.getActivityNodeUuid());
 			checkResponseCode(response, expectedCode);
 		}
 		catch(ClientServicesException e) {

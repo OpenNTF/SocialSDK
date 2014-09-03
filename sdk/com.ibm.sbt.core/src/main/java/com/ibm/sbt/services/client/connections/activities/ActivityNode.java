@@ -20,6 +20,7 @@ import org.w3c.dom.Node;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.xpath.XPathExpression;
+import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.datahandlers.FieldEntry;
@@ -156,5 +157,17 @@ public class ActivityNode extends NodeEntity {
 		return new InReplyTo(getService(), new XmlDataHandler(node, ConnectionsConstants.nameSpaceCtx, (XPathExpression)fieldEntry.getPath()));
 	}
 	
+	
+	/**
+	 * @see ActivityService.updateActivityNode  
+	 * 
+	 * @return
+	 * @throws ClientServicesException 
+	 * @throws {@link NullPointerException} If there is no service associated with this ActivityNode
+	 */
+	public void update() throws ClientServicesException {
+		ActivityService service = getActivityService();
+		service.updateActivityNode(this);
+	}
 	
 }

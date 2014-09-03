@@ -182,6 +182,16 @@ public class BaseActivityServiceTest extends BaseUnitTest {
 		return activityService.createActivity(activity);
     }
         	
+    protected Activity createActivity(String title, List<String> tags) throws ClientServicesException {
+		activity = new Activity();
+		activity.setTitle(title);
+		activity.setTags(tags);
+		activity.setPriority(Activity.PRIORITY_NORMAL);
+		activity.setSummary("Goal for " + title);
+		
+		return activityService.createActivity(activity);
+    }
+        	
     protected ActivityNode createActivityNode() throws ClientServicesException {
 		return createActivityNode(createActivityNodeTitle());
     }
@@ -194,6 +204,7 @@ public class BaseActivityServiceTest extends BaseUnitTest {
 		ActivityNode activityNode = new ActivityNode();
 		activityNode.setActivityUuid(activity.getActivityUuid());
 		activityNode.setTitle(title);
+		activityNode.setType(ActivityNode.TYPE_ENTRY);
 		return activityService.createActivityNode(activityNode);
     }
         	
@@ -210,6 +221,15 @@ public class BaseActivityServiceTest extends BaseUnitTest {
 		ActivityNode activityNode = new ActivityNode();
 		activityNode.setActivityUuid(activityUuid);
 		activityNode.setTitle(title);
+		activityNode.setTags(tags);
+		return activityService.createActivityNode(activityNode);
+    }
+    
+    protected ActivityNode createActivityNode(String activityUuid, String title, String type, List<String> tags) throws ClientServicesException {
+		ActivityNode activityNode = new ActivityNode();
+		activityNode.setActivityUuid(activityUuid);
+		activityNode.setTitle(title);
+		activityNode.setType(type);
 		activityNode.setTags(tags);
 		return activityService.createActivityNode(activityNode);
     }

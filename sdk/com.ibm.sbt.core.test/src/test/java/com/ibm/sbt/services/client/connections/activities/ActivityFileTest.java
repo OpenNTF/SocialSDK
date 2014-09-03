@@ -38,6 +38,10 @@ public class ActivityFileTest extends BaseActivityServiceTest {
 		ByteArrayInputStream fileContent = new ByteArrayInputStream("MyFileContent".getBytes());
 		
 		activity.uploadFile("MyFile", fileContent, "text/plain");
+		
+		activity = activityService.getActivity(activity.getActivityUuid());
+		
+		System.out.println(activity.toXmlString());
 	}
 	
 	@Test

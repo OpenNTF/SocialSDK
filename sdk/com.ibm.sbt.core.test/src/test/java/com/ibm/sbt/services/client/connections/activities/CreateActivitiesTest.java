@@ -17,6 +17,7 @@ package com.ibm.sbt.services.client.connections.activities;
 
 import org.junit.Test;
 
+import com.ibm.commons.xml.XMLException;
 import com.ibm.sbt.services.client.ClientServicesException;
 
 /**
@@ -46,10 +47,11 @@ public class CreateActivitiesTest extends BaseActivityServiceTest {
 	*/
 	
 	@Test
-	public void testCreateActivityNode() throws ClientServicesException {
+	public void testCreateActivityNode() throws ClientServicesException, XMLException {
 		long start = System.currentTimeMillis();
 		Activity activity = createActivity("CreatedActivityNodes-"+start);
 		String activityUuid = activity.getActivityUuid();
+		System.out.println(activity.toXmlString());
 		System.out.println("Created "+activityUuid);
 		for (int i=0; i<25; i++) {
 			start = System.currentTimeMillis();
@@ -63,6 +65,17 @@ public class CreateActivitiesTest extends BaseActivityServiceTest {
 			} catch (InterruptedException e) {
 			}
 		}
+		// prevent last activity being auto-deleted
+		activity = null;
+	}
+	
+	@Test
+	public void testCreateActivity() throws ClientServicesException, XMLException {
+		long start = System.currentTimeMillis();
+		Activity activity = createActivity("CreatedActivityNodes-"+start);
+		String activityUuid = activity.getActivityUuid();
+		System.out.println(activity.toXmlString());
+		System.out.println("Created "+activityUuid);
 		// prevent last activity being auto-deleted
 		activity = null;
 	}

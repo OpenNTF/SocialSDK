@@ -18,6 +18,7 @@ package com.ibm.sbt.services.client.connections.forums.model;
 
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.w3c.dom.Node;
@@ -28,8 +29,10 @@ import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.base.AtomEntity;
 import com.ibm.sbt.services.client.base.AtomXPath;
 import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.connections.common.Person;
+import com.ibm.sbt.services.client.connections.forums.ForumFileField;
 import com.ibm.sbt.services.client.connections.forums.ForumService;
 import com.ibm.sbt.services.client.connections.forums.ForumsXPath;
 
@@ -105,6 +108,23 @@ public class BaseForumEntity extends AtomEntity {
 	public Person getContributor(){
 		return new Person(getService(), new XmlDataHandler((Node)getDataHandler().getData(), 
 	    		nameSpaceCtx, (XPathExpression)AtomXPath.contributor.getPath()));
+	}
+	
+	/**
+	 * Get a list of the fields in this topic.
+	 * @return
+	 */
+	public List<ForumFileField> getFileFields() {
+		List<ForumFileField> result = new ArrayList<ForumFileField>();
+		// Will need to be changed if Forums ever begins to support JSON
+		
+		List<Node> fieldNodes = ((XmlDataHandler)dataHandler).getEntries(ForumsXPath.file_field);
+		
+		for(Node fn : fieldNodes){
+			ForumFileField fileField = new ForumFileField(getService(), fn, ConnectionsConstants.nameSpaceCtx, null);
+			result.add(fileField);
+		}
+		return result;
 	}
 
 	public String createdBy(){

@@ -198,8 +198,8 @@ public class ForumService extends ConnectionsService {
 	 * @return EntityList&lt;ForumTopic&gt;
 	 * @throws ClientServicesException
 	 */
-	public EntityList<ForumTopic> getForumTopics(String topicUuid, Map<String, String> parameters) throws ClientServicesException {
-		String myTopicsUrl = ForumUrls.TOPIC.format(this, ForumUrls.topicPart(topicUuid));
+	public EntityList<ForumTopic> getForumTopics(String forumUuid, Map<String, String> parameters) throws ClientServicesException {
+		String myTopicsUrl = ForumUrls.FORUM_TOPICS.format(this, ForumUrls.forumPart(forumUuid));
 		return getForumTopicEntityList(myTopicsUrl, parameters);
 	}
 
@@ -1022,6 +1022,6 @@ public class ForumService extends ConnectionsService {
 	}
 	
 	private EntityList<ForumReply> getReplies(String url, Map<String, String> parameters) throws ClientServicesException {
-		return getForumReplyEntityList(url, null);
+		return getForumReplyEntityList(url, parameters);
 	}
 }

@@ -121,6 +121,10 @@ public class BaseActivityServiceTest extends BaseUnitTest {
 		return DOMUtil.createDocument(inputStream);
 	}
 		
+	protected InputStream readFile(String fileName) throws IOException, XMLException {
+		return this.getClass().getClassLoader().getResourceAsStream("com/ibm/sbt/services/client/connections/activities/"+fileName);
+	}
+		
     protected String createActivityTitle() {
     	return createTitle("Activity");
     }

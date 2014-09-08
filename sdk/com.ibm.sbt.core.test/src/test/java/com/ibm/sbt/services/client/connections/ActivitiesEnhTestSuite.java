@@ -35,11 +35,11 @@ import com.ibm.sbt.services.client.connections.activities.GetActivityReplyNodeTa
 	ActivityDescendantsSinceTest.class,
 	ActivityNodeChildrenSinceTest.class,
 	ActivityDescendantsSortByTest.class,
-	ActivityMoveFieldTest.class,
-	ActivityFeedMoveTest.class,
+	//ActivityMoveFieldTest.class,
+	//ActivityFeedMoveTest.class,
 	//MakeActivityPublicTest.class,
-	GetActivityReplyNodeTagsTest.class,
-	ActivityAddMembers.class
+	//GetActivityReplyNodeTagsTest.class,
+	//ActivityAddMembers.class
 })
 public class ActivitiesEnhTestSuite {
 }

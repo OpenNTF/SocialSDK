@@ -95,4 +95,72 @@ public class ActivityEntryContentTest extends BaseActivityServiceTest {
 		System.out.println("READ LENGTH: " + summary.length());
 	}
 
+	@Test
+	public void testCreateActivityNodeCompare() throws ClientServicesException, XMLException, UnsupportedEncodingException {
+		createActivity();
+		
+		StringBuilder summary = new StringBuilder();
+		for (int i=0; i<512; i++) {
+			summary.append('0');
+		}
+		
+		StringBuilder content = new StringBuilder();
+		for (int i=0; i<2560; i++) {
+			content.append('0');
+		}
+		
+		long start = 0;
+		
+		Activity summaryActivity = new Activity();
+		summaryActivity.setTitle(createActivityTitle());
+		summaryActivity.setContent(content.toString());
+		
+		start = System.currentTimeMillis();
+		summaryActivity = activityService.createActivity(summaryActivity);
+		System.out.println("Create summary activity took: "+(System.currentTimeMillis()-start)+"(ms)");
+		
+		Activity fieldActivity = new Activity();
+		fieldActivity.setTitle(createActivityTitle());
+		fieldActivity.setContent(content.toString());
+		for (int i=0; i<5; i++) {
+			TextField textField = new TextField();
+			textField.setName("content"+i);
+			textField.setPosition(1000);
+			textField.setSummary(summary.toString());
+			fieldActivity.addField(textField);			
+		}
+		
+		start = System.currentTimeMillis();
+		fieldActivity = activityService.createActivity(fieldActivity);
+		System.out.println("Create field activity took: "+(System.currentTimeMillis()-start)+"(ms)");
+
+		Activity activity = createActivity();
+		
+		ActivityNode summaryNode = new ActivityNode();
+		summaryNode.setActivityUuid(activity.getActivityUuid());
+		summaryNode.setTitle(createActivityTitle());
+		summaryNode.setType(ActivityNode.TYPE_ENTRY);
+		summaryNode.setSummary(content.toString());
+		
+		start = System.currentTimeMillis();
+		summaryNode = activityService.createActivityNode(summaryNode);
+		System.out.println("Create summary node took: "+(System.currentTimeMillis()-start)+"(ms)");
+		
+		ActivityNode fieldNode = new ActivityNode();
+		fieldNode.setActivityUuid(activity.getActivityUuid());
+		fieldNode.setTitle(createActivityTitle());
+		fieldNode.setType(ActivityNode.TYPE_ENTRY);
+		for (int i=0; i<5; i++) {
+			TextField textField = new TextField();
+			textField.setName("content"+i);
+			textField.setPosition(1000);
+			textField.setSummary(summary.toString());
+			fieldNode.addField(textField);			
+		}
+		
+		start = System.currentTimeMillis();
+		activityService.createActivityNode(fieldNode);
+		System.out.println("Create field node took: "+(System.currentTimeMillis()-start)+"(ms)");
+	}
+
 }

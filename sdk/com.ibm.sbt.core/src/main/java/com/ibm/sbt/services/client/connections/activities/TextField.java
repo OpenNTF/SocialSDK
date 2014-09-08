@@ -20,6 +20,7 @@ import org.w3c.dom.Node;
 import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.connections.common.Link;
 
 /**
  * @author mwallace
@@ -27,6 +28,8 @@ import com.ibm.sbt.services.client.base.BaseService;
  */
 public class TextField extends Field {
 
+	private Link link;
+	
 	/**
 	 * Default constructor
 	 */
@@ -71,4 +74,16 @@ public class TextField extends Field {
 		setAsString(ActivityXPath.field_summary, summary);
 	}
 	
+	
+	/**
+	 * Return the link.
+	 * 
+	 * @return link
+	 */
+	public Link getLink() {
+		if (link == null && getDataHandler() != null) {
+			link = createLink((Node)getDataHandler().getData(), ActivityXPath.field_link);
+		}
+		return link;
+	}
 }

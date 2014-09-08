@@ -15,7 +15,6 @@
  */
 package com.ibm.sbt.services.client.connections.activities;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,31 +28,26 @@ import com.ibm.sbt.services.client.ClientServicesException;
  * @author mwallace
  *
  */
-public class ActivityLargeContentTest extends BaseActivityServiceTest {
+public class ActivityCreateWithTagsTest extends BaseActivityServiceTest {
 
 	@Test
-	public void testCreateActivity() throws ClientServicesException, XMLException, UnsupportedEncodingException {
-		StringBuilder content = new StringBuilder();
-		for (int i=0; i<4096; i++) {
-			content.append(i).append('-');
-		}
-		
-		System.out.println("BYTES: " + content.toString().getBytes("UTF-8").length);
-		System.out.println("LENGTH: " + content.toString().length());
-
+	public void testCreateActivityWithTags() throws ClientServicesException, XMLException {
+    	List<String> tags = new ArrayList<String>();
+    	tags.add("personal");
+    	tags.add("unit_test");
+    	tags.add("ibmsbt");
+    	
 		Activity activity = new Activity();
 		activity.setTitle(createActivityTitle());
-		activity.setContent(content.toString());
-
+		activity.setTags(tags);
+		
 		Activity created = activityService.createActivity(activity);
 		
-		Activity read = activityService.getActivity(created.getActivityUuid());
-		
 		System.out.println("CREATED: " + created.toXmlString());
-		System.out.println("READ: " + read.toXmlString());
 		
-		System.out.println("BYTES: " + read.getSummary().getBytes("UTF-8").length);
-		System.out.println("LENGTH: " + read.getSummary().length());
+		Assert.assertNotNull("Invalid activity id", created.getId());
+		Assert.assertNotNull("Invalid activity edit url", created.getEditUrl());
+		Assert.assertEquals("Invalid activity tags", 3, created.getTags().size());
 	}
-	
+
 }

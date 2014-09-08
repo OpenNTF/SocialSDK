@@ -31,8 +31,11 @@ public class ActivityFileFieldTest extends BaseActivityServiceTest {
 	public void testCreateFileField() throws ClientServicesException, XMLException {
 		Activity activity = createActivity();
 		
+		this.activity = null;
+		
 		FileField fileField = new FileField();
 		fileField.setName("test_file");
+		fileField.setHidden(true);
 		fileField.setPosition(1000);
 
 		ActivityNode activityNode = new ActivityNode();
@@ -40,7 +43,7 @@ public class ActivityFileFieldTest extends BaseActivityServiceTest {
 		activityNode.setTitle(createActivityTitle());
 		activityNode.setType(ActivityNode.TYPE_ENTRY);
 		activityNode.addField(fileField);
-		activityNode.addAttachment(new ActivityAttachment("test_file", "MyFileContent", "text/plain"));
+		activityNode.addAttachment(new ActivityAttachment("test_file", "MyFileContent Fethard Crook", "text/plain"));
 		
 		ActivityNode createdNode = activityService.createActivityNode(activityNode);
 		
@@ -51,6 +54,7 @@ public class ActivityFileFieldTest extends BaseActivityServiceTest {
 		Assert.assertNotNull(fields);
 		Assert.assertEquals(1, fields.length);
 		Assert.assertTrue(fields[0] instanceof FileField);
+		//Assert.assertTrue(fields[0].isHidden());
 		Assert.assertEquals("test_file", ((FileField)fields[0]).getName());
 		Assert.assertEquals(1000, ((FileField)fields[0]).getPosition());
 		Assert.assertNotNull(((FileField)fields[0]).getEnclosureLink());

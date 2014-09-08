@@ -55,6 +55,9 @@ public abstract class AtomFeedHandler<T extends AtomEntity> implements IFeedHand
 	
 	@Override
 	public T createEntity(Response response) {
+		if (response == null) {
+			return null;
+		}
 		Object data = response.getData();
 		if (data instanceof Node) {
 			return createEntityFromData((Node)data);

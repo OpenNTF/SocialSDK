@@ -40,6 +40,7 @@ public class BaseBssTest {
 	private SubscriptionManagementService subscriptionManagement;
 	private AuthorizationService authorizationService;
 	private AuthenticationService authenticationService;
+	private WorkflowService workflowService;
 	
     @After
     public void cleanup() {
@@ -118,6 +119,13 @@ public class BaseBssTest {
     		authenticationService = new AuthenticationService(getBasicEndpoint());
     	}
     	return authenticationService;
+    }
+    
+    public WorkflowService getWorkflowService() {
+    	if (workflowService == null) {
+    		workflowService = new WorkflowService(getBasicEndpoint());
+    	}
+    	return workflowService;
     }
     
     public AuthenticationService getAuthenticationService(String user, String password) {

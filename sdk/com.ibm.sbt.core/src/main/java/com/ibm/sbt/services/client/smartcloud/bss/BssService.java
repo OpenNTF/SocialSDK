@@ -53,6 +53,7 @@ public class BssService extends JsonService {
 	public static String API_AUTHENTICATION_CHANGEPASSWORD = "/api/bss/service/authentication/changePassword";
 	public static String API_AUTHENTICATION_RESETPASSWORD = "/api/bss/service/authentication/resetPassword";
 	public static String API_AUTHENTICATION_SETONETIMEPASSWORD = "/api/bss/service/authentication/setOneTimePassword";
+	public static String API_RESOURCE_WORKFLOW = "/api/bss/resource/workflow";
 	
 	public enum DurationUnits {
 		YEARS, MONTHS, DAYS

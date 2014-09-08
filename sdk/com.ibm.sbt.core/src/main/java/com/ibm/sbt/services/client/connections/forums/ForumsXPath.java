@@ -58,7 +58,10 @@ public enum ForumsXPath implements FieldEntry{
 	intensity("./@snx:intensityBin"), 
 	visibility("./@snx:visibilityBin"),
 	ThreadRecommendationCount("./a:category[@term='ThreadRecommendationCount'][@scheme=\"http://www.ibm.com/xmlns/prod/sn/flags\"]/@label"),
-	RecommendationCount("./a:link[@rel=\"recommendations\"]/@snx:recommendation")
+	RecommendationCount("./a:link[@rel=\"recommendations\"]/@snx:recommendation"),
+	contentModifiedBy("./snx:contentModifiedBy"),
+	contentModifiedWhen("./snx:contentModifiedWhen")
+
 	;
 
 

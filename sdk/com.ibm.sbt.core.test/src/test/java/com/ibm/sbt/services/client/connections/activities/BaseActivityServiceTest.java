@@ -45,6 +45,7 @@ import com.ibm.sbt.test.lib.TestEnvironment;
 public class BaseActivityServiceTest extends BaseUnitTest {
 
 	private BasicEndpoint basicEndpoint;
+	private BasicEndpoint altEndpoint;
 	protected ActivityService activityService;
 	protected Activity activity;
 	protected List<Activity> activities;
@@ -108,6 +109,21 @@ public class BaseActivityServiceTest extends BaseUnitTest {
     	return basicEndpoint;
 	}
 	
+	protected BasicEndpoint getAltEndpoint() {
+    	if (altEndpoint == null && System.getProperty("ServerUrl") != null) {
+	    	String url = System.getProperty("ServerUrl");
+	    	String user = System.getProperty("UserNameAlt");
+	    	String password = System.getProperty("PasswordAlt");
+	    	
+	    	altEndpoint = new BasicEndpoint();
+	    	altEndpoint.setUrl(url);
+	    	altEndpoint.setForceTrustSSLCertificate(true);
+	    	altEndpoint.setUser(user);
+	    	altEndpoint.setPassword(password);
+    	}
+    	return altEndpoint;
+	}
+
 	protected String getMemberId() {
 		String memberId = System.getProperty("MemberId");
 		if (StringUtil.isEmpty(memberId)) {
@@ -192,6 +208,17 @@ public class BaseActivityServiceTest extends BaseUnitTest {
 		activity.setTags(tags);
 		activity.setPriority(Activity.PRIORITY_NORMAL);
 		activity.setSummary("Goal for " + title);
+		
+		return activityService.createActivity(activity);
+    }
+        	
+    protected Activity createActivity(String title, List<String> tags, boolean completed) throws ClientServicesException {
+		activity = new Activity();
+		activity.setTitle(title);
+		activity.setTags(tags);
+		activity.setPriority(Activity.PRIORITY_NORMAL);
+		activity.setSummary("Goal for " + title);
+		activity.setCompleted(completed);
 		
 		return activityService.createActivity(activity);
     }

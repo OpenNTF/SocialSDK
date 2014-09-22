@@ -58,7 +58,7 @@ public class AdditionalStorageSubscriptionTest extends BaseBssTest {
     		// Step 8. Entitle subscriber
     		entitleSubscriber(subscriberId, engageSubscriptionId, true);
     		entitleSubscriber(subscriberId, storageSubscriptionId, true);
-    		
+
     		// Optional: Check seats
     		JsonEntity jsonEntity = getSubscriberManagementService().getSubscriberById(subscriberId);
     		JsonJavaObject rootObject = jsonEntity.getJsonObject();

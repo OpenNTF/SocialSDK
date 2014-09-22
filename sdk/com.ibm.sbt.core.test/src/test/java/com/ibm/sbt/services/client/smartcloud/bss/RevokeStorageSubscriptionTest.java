@@ -40,7 +40,7 @@ public class RevokeStorageSubscriptionTest extends BaseBssTest {
 
     		// Step 2. Add Subscriber
     		String subscriberId = addAdministrator(customerId);
-    		System.out.println(getSubscriberById(subscriberId));
+    		JsonEntity administrator = getSubscriberById(subscriberId);
 
     		// Step 3. Create "IBM SmartCloud Connections" Subscription
     		String engageSubscriptionId = createSubscription(customerId, 3, "D0NWLLL", 5);

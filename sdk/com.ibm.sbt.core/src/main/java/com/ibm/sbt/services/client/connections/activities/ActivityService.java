@@ -340,6 +340,27 @@ public class ActivityService extends ConnectionsService {
 		String requestUrl = ActivityUrls.ACTIVITY_ACL.format(this, ActivityUrls.activityPart(activityUuid));
 		return getMemberEntityList(requestUrl, parameters);
 	}
+	
+	/**
+	 * 
+	 * @return
+	 * @throws ClientServicesException 
+	 */
+	public EntityList<ActivityUpdate> getHistory(String activityUuid) throws ClientServicesException {
+		return getHistory(activityUuid, null);
+	}
+
+	/**
+	 * 
+	 * @param parameters
+	 * @return
+	 * @throws ClientServicesException 
+	 */
+	public EntityList<ActivityUpdate> getHistory(String activityUuid, Map<String, String> parameters) throws ClientServicesException {
+		String requestUrl = ActivityUrls.ACTIVITY_HISTORY.format(this, ActivityUrls.activityPart(activityUuid));
+		return getActivityUpdateEntityList(requestUrl, parameters);
+	}
+	
 
 	//------------------------------------------------------------------------------------------------------------------
 	// Working with activities programmatically.
@@ -1260,6 +1281,10 @@ public class ActivityService extends ConnectionsService {
 		return (EntityList<Member>)getEntities(requestUrl, getParameters(parameters), getMemberFeedHandler(true));
 	}
 	
+	protected EntityList<ActivityUpdate> getActivityUpdateEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
+		return (EntityList<ActivityUpdate>)getEntities(requestUrl, getParameters(parameters), getActivityUpdateFeedHandler(true));
+	}
+	
 	protected IFeedHandler<Activity> getActivityFeedHandler(boolean isFeed) {
 		return new AtomFeedHandler<Activity>(this, isFeed) {
 			@Override
@@ -1283,6 +1308,15 @@ public class ActivityService extends ConnectionsService {
 			@Override
 			protected Member entityInstance(BaseService service, Node node, XPathExpression xpath) {
 				return new Member(service, node, nameSpaceCtx, xpath);
+			}
+		};
+	}
+		
+	protected IFeedHandler<ActivityUpdate> getActivityUpdateFeedHandler(boolean isFeed) {
+		return new AtomFeedHandler<ActivityUpdate>(this, isFeed) {
+			@Override
+			protected ActivityUpdate entityInstance(BaseService service, Node node, XPathExpression xpath) {
+				return new ActivityUpdate(service, node, nameSpaceCtx, xpath);
 			}
 		};
 	}

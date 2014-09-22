@@ -65,7 +65,7 @@ public class AddSubscriberTest extends BaseBssTest {
     				  .setRole(SubscriberManagementService.Role.User)
     				  .setFamilyName("Doe")
     				  .setGivenName("John")
-    				  .setEmailAddress(getUniqueEmail())
+    				  .setEmailAddress(getUniqueEmail(customerId))
     				  .setNamePrefix("Mr")
     				  .setNameSuffix("")
     				  .setEmployeeNumber("6A7777B")

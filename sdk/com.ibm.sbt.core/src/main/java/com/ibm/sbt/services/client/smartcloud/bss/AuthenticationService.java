@@ -204,4 +204,74 @@ public class AuthenticationService extends BssService {
 		} 
     }
 	
+    /**
+     * This Service operation sets the password for a user in TAM after conditionally doing checks against the Password policy. 
+     * The service does the following:
+     *     Checks if the user's account is valid and ACTIVE in TAM. The login operation fails if the user is not a valid TAM user or if the user is SUSPENDED.
+     *     If the bypassPolicy parameter is 'false' or not specified, service operation Validates the NewPassword against BSS password policy. The Operation 
+     *     fails if the password does not conform to the policy.
+     *     If the bypassPolicy parameter is 'true', then service operation will set the new password for the user irrespective of the policy. Please note 
+     *     that if the caller chooses to bypass our password policy restrictions then they're responsible for security aspects of the passwords should they be weak or reused.
+     * 
+     * @param userCredential
+     * @param bypassPolicy
+     * @throws BssException
+     * @throws IOException
+     * @throws JsonException
+     */
+    public void setUserPassword(UserCredentialJsonBuilder userCredential, boolean bypassPolicy) throws BssException, IOException, JsonException {
+    	setUserPassword(userCredential.toJson(), bypassPolicy);
+    }
+
+    /**
+     * This Service operation sets the password for a user in TAM after conditionally doing checks against the Password policy. 
+     * The service does the following:
+     *     Checks if the user's account is valid and ACTIVE in TAM. The login operation fails if the user is not a valid TAM user or if the user is SUSPENDED.
+     *     If the bypassPolicy parameter is 'false' or not specified, service operation Validates the NewPassword against BSS password policy. The Operation 
+     *     fails if the password does not conform to the policy.
+     *     If the bypassPolicy parameter is 'true', then service operation will set the new password for the user irrespective of the policy. Please note 
+     *     that if the caller chooses to bypass our password policy restrictions then they're responsible for security aspects of the passwords should they be weak or reused.
+     * 
+     * @param userCredentialJson
+     * @param bypassPolicy
+     * @throws BssException
+     * @throws JsonException
+     * @throws IOException
+     */
+    public void setUserPassword(String userCredentialJson, boolean bypassPolicy) throws BssException, JsonException, IOException {
+    	JsonJavaObject jsonObject = (JsonJavaObject)JsonParser.fromJson(JsonJavaFactory.instanceEx, userCredentialJson);
+    	setUserPassword(jsonObject, bypassPolicy);
+    }
+
+    /**
+     * This Service operation sets the password for a user in TAM after conditionally doing checks against the Password policy. 
+     * The service does the following:
+     *     Checks if the user's account is valid and ACTIVE in TAM. The login operation fails if the user is not a valid TAM user or if the user is SUSPENDED.
+     *     If the bypassPolicy parameter is 'false' or not specified, service operation Validates the NewPassword against BSS password policy. The Operation 
+     *     fails if the password does not conform to the policy.
+     *     If the bypassPolicy parameter is 'true', then service operation will set the new password for the user irrespective of the policy. Please note 
+     *     that if the caller chooses to bypass our password policy restrictions then they're responsible for security aspects of the passwords should they be weak or reused.
+     *     
+     * @param userCredentialObject
+     * @param bypassPolicy
+     * @throws BssException
+     */
+    public void setUserPassword(JsonJavaObject userCredentialObject, boolean bypassPolicy) throws BssException {
+		try {
+    		StringBuilder sb = new StringBuilder();
+    		sb.append(API_AUTHENTICATION_SETUSERPASSWORD).append("?bypassPolicy=").append(bypassPolicy);
+    		String serviceUrl = sb.toString(); 
+    		
+    		Response response = createData(serviceUrl, null, JsonHeader, userCredentialObject, ClientService.FORMAT_JSON);
+    		
+    		// expect a 204
+    		int statusCode = response.getResponse().getStatusLine().getStatusCode();
+    		if (statusCode != 204) {
+    			throw new BssException(response, "Error setting one time password {0}", userCredentialObject);
+    		}
+		} catch (Exception e) {
+			throw new BssException(e, "Error setting one time password {0} caused by {1}", userCredentialObject, e.getMessage());			
+		} 
+    }
+	
 }

@@ -826,6 +826,32 @@ public class CommunityService extends ConnectionsService {
 		return svc.uploadCommunityFile(iStream, communityId, title, length);
 	}
 
+	//------------------------------------------------------------------------------------------------------------------
+	// Working with remote applications
+	//------------------------------------------------------------------------------------------------------------------
+
+	/**
+	 * To retrieve a list of remote applications associated with a community, use the remote applications link in the community entry Atom document.
+	 * 
+	 * @param communityUuid
+	 * @return
+	 */
+	public EntityList<RemoteApplication> getRemoteApplications(String communityUuid) {
+		return getRemoteApplications(communityUuid, null);
+	}
+	
+	/**
+	 * To retrieve a list of remote applications associated with a community, use the remote applications link in the community entry Atom document.
+	 * 
+	 * @param communityUuid
+	 * @param parameters
+	 * @return
+	 */
+	public EntityList<RemoteApplication> getRemoteApplications(String communityUuid, Map<String, String> parameters) {
+		String url = CommunityUrls.COMMUNITY_INSTANCE.format(this, CommunityUrls.getCommunityUuid(communityUuid));
+		return getRemoteApplications(url, parameters);
+	}
+	
 	/***************************************************************
 	 * Factory methods
 	 ****************************************************************/
@@ -852,6 +878,10 @@ public class CommunityService extends ConnectionsService {
 
 	protected EntityList<Invite> getInviteEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
 		return getEntities(requestUrl, parameters, getInviteFeedHandler());
+	}
+
+	protected EntityList<RemoteApplication> getRemoteApplicationsEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
+		return getEntities(requestUrl, parameters, getRemoteApplicationFeedHandler());
 	}
 
 	/***************************************************************
@@ -897,4 +927,18 @@ public class CommunityService extends ConnectionsService {
 
 		};
 	}
+
+	/**
+	 * Factory method to instantiate a FeedHandler for Remote Applications
+	 * @return IFeedHandler<Invite>
+	 */
+	protected IFeedHandler<RemoteApplication> getRemoteApplicationFeedHandler() {
+		return new AtomFeedHandler<RemoteApplication>(this) {
+			@Override
+			protected RemoteApplication entityInstance(BaseService service, Node node, XPathExpression xpath) {
+				return new RemoteApplication(service, node, nameSpaceCtx, xpath);
+			}
+		};
+	}
+
 }

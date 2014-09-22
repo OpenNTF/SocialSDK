@@ -34,9 +34,12 @@ import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.junit.experimental.categories.Categories.ExcludeCategory;
 
+import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.XMLException;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
+import com.ibm.sbt.services.client.connections.common.Member;
+import com.ibm.sbt.test.lib.TestEnvironment;
 
 /**
  * @author mwallace
@@ -51,16 +54,35 @@ public class ActivitiesByTagTest extends BaseActivityServiceTest {
     	tags.add("ibmsbt");
     	
 
-    	Activity activity = createActivity(createActivityTitle(), tags);
+    	Activity activity = createActivity(createActivityTitle(), tags, true);
+    	
+    	this.activity = null;
+    			
+		//String orgid = TestEnvironment.getProperty("customerid");
+		//orgid = StringUtil.isEmpty(orgid) ? "*" : orgid;
+		//activity.addMember(Member.TYPE_ORGANIZATION, orgid, Member.ROLE_READER);
+		String userid = System.getProperty("UserIdAlt");
+		activity.addMember(Member.TYPE_PERSON, userid, Member.ROLE_READER);
+		
+		//System.out.println(activity.toXmlString());
     	
     	Map<String, String> parameters = new HashMap<String, String>();
     	parameters.put("nodetype", "activity");
     	parameters.put("tag", "fethard");
+    	parameters.put("priority", "all");
+    	parameters.put("completed", "yes");
 
 		EntityList<Activity> activities = activityService.getMyActivities(parameters);
 		
-		Assert.assertEquals(1, activities.size());
+		Assert.assertTrue(activities.size() > 0);
 		Assert.assertEquals(activity.getActivityUuid(), activities.get(0).getActivityUuid());
+		Assert.assertEquals(2, activities.get(0).getTags().size());	
+		
+		ActivityService activityServiceAlt = new ActivityService(getAltEndpoint());
+		EntityList<Activity> activitiesAlt = activityServiceAlt.getMyActivities(parameters);
+		Assert.assertTrue(activitiesAlt.size()>0);
+		Assert.assertEquals(activity.getActivityUuid(), activitiesAlt.get(0).getActivityUuid());
+		Assert.assertEquals(2, activitiesAlt.get(0).getTags().size());	
 	}
 	
 }

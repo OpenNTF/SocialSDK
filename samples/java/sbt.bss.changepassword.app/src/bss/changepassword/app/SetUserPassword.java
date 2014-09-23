@@ -28,7 +28,7 @@ import com.ibm.sbt.services.endpoints.BasicEndpoint;
  * @author mwallace
  *
  */
-public class ChangePassword {
+public class SetUserPassword {
 
 	private String url;
 	private String user;
@@ -39,7 +39,7 @@ public class ChangePassword {
 	private AuthenticationService authenticationService;
 	private SubscriberManagementService subscriberManagementService;
 	
-	public ChangePassword(String url, String user, String password) {
+	public SetUserPassword(String url, String user, String password) {
 		this.url = url;
 		this.user = user;
 		this.password = password;
@@ -76,28 +76,15 @@ public class ChangePassword {
     	return subscriberManagementService;
     }
         
-	public void setOneTimePassword(String loginName, String password) throws BssException, JsonException, IOException {
+    public void setUserPassword(String loginName, String newPassword, boolean bypassPolicy) throws BssException, JsonException, IOException {
 		UserCredentialJsonBuilder userCredential = new UserCredentialJsonBuilder();
 		userCredential.setLoginName(loginName)
-					  .setNewPassword(password);
+					  .setNewPassword(newPassword);
 		
-		System.out.println("Set one-time password: " + userCredential.toJson());
-		
-		AuthenticationService authenticationService = getAuthenticationService();
-		authenticationService.setOneTimePassword(userCredential);
-	}
-    
-    public void changePassword(String loginName, String oldPassword, String newPassword) throws BssException, JsonException, IOException {
-		UserCredentialJsonBuilder userCredential = new UserCredentialJsonBuilder();
-		userCredential.setLoginName(loginName)
-					  .setOldPassword(oldPassword)
-					  .setNewPassword(newPassword)
-					  .setConfirmPassword(newPassword);
-		
-		System.out.println("Change password: " + userCredential.toJson());
+		System.out.println("Set password: " + userCredential.toJson());
 		
 		AuthenticationService authenticationService = getAuthenticationService();
-		authenticationService.changePassword(userCredential);
+		authenticationService.setUserPassword(userCredential, bypassPolicy);
     }
     	
 	/**
@@ -106,8 +93,8 @@ public class ChangePassword {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		if (args.length < 6) {
-			System.out.println("Usage: java bss.changepassword.app.ChangePassword <url> <user> <password> <loginName> <one_time_password> <new_password>");
+		if (args.length < 5) {
+			System.out.println("Usage: java bss.changepassword.app.SetUserPassword <url> <user> <password> <loginName> <new_password> [bypass_policy]");
 			return;
 		}
 		
@@ -115,26 +102,25 @@ public class ChangePassword {
 		String user = args[1];
 		String password = args[2];
 		String loginName = args[3];
-		String oneTimePassword = args[4];
-		String newPassword = args[5];
+		String newPassword = args[4];
 		
-		ChangePassword cp = null;
+		boolean bypassPolicy = (args.length > 5 && "false".equalsIgnoreCase(args[5])) ? false : true;
+		
+		SetUserPassword cp = null;
 		try {
-			cp = new ChangePassword(url, user, password);
+			cp = new SetUserPassword(url, user, password);
 			
-			cp.setOneTimePassword(loginName, oneTimePassword);
-				
-			cp.changePassword(loginName, oneTimePassword, newPassword);
+			cp.setUserPassword(loginName, newPassword, bypassPolicy);
 			
-			System.out.println("Successfully changed password for: "+loginName);
+			System.out.println("Successfully set password for: "+loginName);
 		} catch (BssException be) {
-			System.err.println("Error changing password for: "+loginName);
+			System.err.println("Error setting password for: "+loginName);
 			if (be.getResponseJson() != null) {
 				System.err.println(be.getResponseJson());
 			} 
 			be.printStackTrace();
 		} catch (Exception e) {
-			System.err.println("Error changing password for: "+loginName);
+			System.err.println("Error setting password for: "+loginName);
 			e.printStackTrace();
 		}
 

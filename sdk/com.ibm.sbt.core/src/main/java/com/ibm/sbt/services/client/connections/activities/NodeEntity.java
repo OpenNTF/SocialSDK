@@ -43,6 +43,8 @@ public class NodeEntity extends AtomEntity {
 
 	static final String UUID_PREFIX = "urn:lsid:ibm.com:oa:"; ////$NON-NLS-1$
 	
+	static final Field[] NO_FIELDS = new Field[0];
+	
 	/**
 	 * Standard type values for an activity. 
 	 */
@@ -253,16 +255,18 @@ public class NodeEntity extends AtomEntity {
 	 */
 	public Field[] getFields() {
 		if (fields == null) {
-			fields = new ArrayList<Field>();
 			if (getDataHandler() != null) {
 				XmlDataHandler xmlHandler = (XmlDataHandler)getDataHandler();
 				List<Node> fieldNodes = xmlHandler.getEntries(ActivityXPath.field);
-				for (Node fieldNode : fieldNodes) {
-					fields.add(createField(fieldNode));
+				if (fieldNodes != null && !fieldNodes.isEmpty()) {
+					fields = new ArrayList<Field>();
+					for (Node fieldNode : fieldNodes) {
+						fields.add(createField(fieldNode));
+					}
 				}
 			}
 		}
-		return fields.toArray(new Field[fields.size()]);
+		return (fields == null) ? NO_FIELDS : fields.toArray(new Field[fields.size()]);
 	}
 
 	/**

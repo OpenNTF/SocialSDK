@@ -53,16 +53,15 @@ public class ActivitiesByTagTest extends BaseActivityServiceTest {
     	tags.add("fethard");
     	tags.add("ibmsbt");
     	
-
     	Activity activity = createActivity(createActivityTitle(), tags, true);
     	
     	this.activity = null;
     			
-		//String orgid = TestEnvironment.getProperty("customerid");
-		//orgid = StringUtil.isEmpty(orgid) ? "*" : orgid;
-		//activity.addMember(Member.TYPE_ORGANIZATION, orgid, Member.ROLE_READER);
-		String userid = System.getProperty("UserIdAlt");
-		activity.addMember(Member.TYPE_PERSON, userid, Member.ROLE_READER);
+		String orgid = TestEnvironment.getProperty("customerid");
+		orgid = StringUtil.isEmpty(orgid) ? "*" : orgid;
+		activity.addMember(Member.TYPE_ORGANIZATION, orgid, Member.ROLE_READER);
+		//String userid = System.getProperty("UserIdAlt");
+		//activity.addMember(Member.TYPE_PERSON, userid, Member.ROLE_READER);
 		
 		//System.out.println(activity.toXmlString());
     	

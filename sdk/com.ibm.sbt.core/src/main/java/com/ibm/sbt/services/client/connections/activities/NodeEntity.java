@@ -322,6 +322,9 @@ public class NodeEntity extends AtomEntity {
 		if (fields == null) {
 			getFields();
 		}
+		if (fields == null) {
+			fields = new ArrayList<Field>();
+		}
 		fields.add(field);
 	}
 	

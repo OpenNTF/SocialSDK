@@ -66,8 +66,8 @@ public class ProvisioningTermsOfUseTest extends BaseBssTest {
     	    		// Set password
     	    		setPassword(loginName, "onet1me!", "passw0rd");
     	    		
-    	    		// Create Unify Pool Subscription
-    	    		String poolSubscriptionId = createSubscription(customerId, 3, "D0NWLLL-UNIFYPOOL", 1);
+    	    		// Create Pool Subscription
+    	    		String poolSubscriptionId = createSubscription(customerId, 3, "", 1);
 
     	    		// Entitle pool
     	    		entitleSubscriber(subscriberId, poolSubscriptionId, true);
@@ -77,7 +77,6 @@ public class ProvisioningTermsOfUseTest extends BaseBssTest {
     	    		String seatId = String.valueOf(seatJson.getAsObject("Seat").getAsLong("Id"));
     	    		boolean acceptedTOU = seatJson.getAsObject("Seat").getAsBoolean("HasAcceptedTermsOfUse");
     	    		if (!acceptedTOU) {
-    	    			System.err.println("D0NWLLL-UNIFYPOOL");
     	    			System.err.println(dateFormat.format(new Date()));
     	    			System.err.println(seatJson);
     	    			System.err.println("Customer.Id: "+customerId);

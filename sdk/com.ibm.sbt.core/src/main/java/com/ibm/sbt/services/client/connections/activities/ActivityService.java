@@ -17,6 +17,7 @@ package com.ibm.sbt.services.client.connections.activities;
 
 import static com.ibm.sbt.services.client.base.CommonConstants.APPLICATION_ATOM_XML;
 import static com.ibm.sbt.services.client.base.CommonConstants.CONTENT_TYPE;
+import static com.ibm.sbt.services.client.base.CommonConstants.CONTENT_LENGTH;
 import static com.ibm.sbt.services.client.base.CommonConstants.SLUG;
 import static com.ibm.sbt.services.client.base.CommonConstants.TITLE;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;

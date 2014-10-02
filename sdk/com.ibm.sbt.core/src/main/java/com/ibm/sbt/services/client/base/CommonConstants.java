@@ -60,6 +60,7 @@ public final class CommonConstants {
 	public static final String 	IMAGE_JPG			= "image/jpg";
 	public static final String 	SLUG				= "slug";
 	public static final String 	CONTENT_ENCODING	= "Content-Encoding";
+	public static final String 	TRANSFER_ENCODING	= "Transfer-Encoding";
 	public static final String 	GZIP				= "gzip";
 	public static final String 	TITLE				= "Title";
 
@@ -97,6 +98,7 @@ public final class CommonConstants {
 	 * Content Type
 	 */
 	public static final String CONTENT_TYPE = "Content-Type";
+	public static final String CONTENT_LENGTH = "Content-Length";
 	public static final String APPLICATION_XML = "application/xml";
 	public static final String APPLICATION_ATOM_XML = "application/atom+xml";
 	public static final String TEXT_PLAIN = "text/plain";

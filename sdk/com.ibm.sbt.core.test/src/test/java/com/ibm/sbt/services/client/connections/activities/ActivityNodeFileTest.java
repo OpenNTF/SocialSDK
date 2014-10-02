@@ -16,8 +16,8 @@
 package com.ibm.sbt.services.client.connections.activities;
 
 import java.io.ByteArrayInputStream;
+import java.util.Arrays;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 import com.ibm.commons.xml.XMLException;
@@ -33,23 +33,24 @@ public class ActivityNodeFileTest extends BaseActivityServiceTest {
 	public void testCreateActivityNodeFile() throws ClientServicesException, XMLException {
 		Activity activity = createActivity();
 		
-		this.activity = null;
+		this.activity = null; // prevent deletion
 		
 		ActivityNode activityNode = new ActivityNode();
 		activityNode.setActivityUuid(activity.getActivityUuid());
 		activityNode.setTitle(createActivityTitle());
 		
-		ByteArrayInputStream fileContent = new ByteArrayInputStream("MyFileContent".getBytes());
+		activityService.createActivityNode(activityNode);
 		
-		//ActivityNode created = activityService.createActivityNode(activityNode, "myFile", fileContent, "text/plain");
+		byte[] bytes = new byte[Integer.valueOf(1024)];
+		Arrays.fill(bytes, (byte)0);		
+		ByteArrayInputStream fileContent = new ByteArrayInputStream(bytes);
+		activityService.uploadNodeFile(activityNode, "MyFile", fileContent, "text/plain");
 		
-		//System.out.println(created.toXmlString());
+		activityNode = activityService.getActivityNode(activityNode.getActivityNodeUuid());
+		System.out.println(activityNode.toXmlString());
 		
-		//Assert.assertTrue("Invalid activity node instance", activityNode == created);
-		//Assert.assertEquals("Invalid activity node id", activity.getActivityUuid(), activityNode.getActivityUuid());
-		//Assert.assertNotNull("Invalid activity node id", activityNode.getId());
-		//Assert.assertNotNull("Invalid activity node id", activityNode.getActivityNodeUuid());
-		//Assert.assertNotNull("Invalid activity node edit url", activityNode.getEditUrl());		
+		// TODO this should update the activity node with an attachment but instead seems to create a new activity entry
+		// check code to see is this the expected behaviour
 	}
 	
 }

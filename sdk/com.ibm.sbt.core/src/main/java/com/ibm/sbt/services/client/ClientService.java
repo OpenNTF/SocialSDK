@@ -23,6 +23,7 @@ import static com.ibm.sbt.services.client.base.CommonConstants.BINARY;
 import static com.ibm.sbt.services.client.base.CommonConstants.BINARY_OCTET_STREAM;
 import static com.ibm.sbt.services.client.base.CommonConstants.CH_SLASH;
 import static com.ibm.sbt.services.client.base.CommonConstants.CONTENT_ENCODING;
+import static com.ibm.sbt.services.client.base.CommonConstants.TRANSFER_ENCODING;
 import static com.ibm.sbt.services.client.base.CommonConstants.CONTENT_TYPE;
 import static com.ibm.sbt.services.client.base.CommonConstants.GZIP;
 import static com.ibm.sbt.services.client.base.CommonConstants.INIT_URL_PARAM;
@@ -372,6 +373,10 @@ public abstract class ClientService {
 			}
 			headers.put(name, value);
 			return this;
+		}
+
+		public boolean hasHeader(String name) {
+			return (headers == null) ? false : headers.containsKey(name);
 		}
 
 		public Handler getHandler() {
@@ -750,7 +755,8 @@ public abstract class ClientService {
 				return new ContentFile((File) content, contentType);
 			}
 			if (content instanceof InputStream) {
-				return new ContentStream(args.getHeaders().get(SLUG), (InputStream) content, -1, contentType);
+				int length = getLength(args, (InputStream)content);
+				return new ContentStream(args.getHeaders().get(SLUG), (InputStream)content, length, contentType);
 			}
 			if (content instanceof List) {
 				return new ContentList((List) content, contentType);
@@ -772,7 +778,8 @@ public abstract class ClientService {
 				return new ContentFile((File) content);
 			}
 			if (content instanceof InputStream) {
-				return new ContentStream((InputStream) content);
+				int length = getLength(args, (InputStream)content);
+				return new ContentStream((InputStream) content, length, args.getHeaders().get(SLUG));
 			}
 			if (content instanceof List) {
 				return new ContentList((List) content);
@@ -784,6 +791,14 @@ public abstract class ClientService {
 
 		throw new ClientServicesException(null, "Cannot create HTTP content for object of type {0}",
 				content.getClass());
+	}
+	
+	protected int getLength(Args args, InputStream istream) throws ClientServicesException {
+		try {
+			return args.hasHeader(TRANSFER_ENCODING) ? -1 : istream.available();
+		} catch (IOException e) {
+			throw new ClientServicesException(e);
+		}
 	}
 
 	// =================================================================

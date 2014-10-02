@@ -15,6 +15,9 @@
  */
 package com.ibm.sbt.services.client.connections.activities;
 
+import java.io.ByteArrayInputStream;
+import java.util.Arrays;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -31,19 +34,22 @@ public class ActivityFileFieldTest extends BaseActivityServiceTest {
 	public void testCreateFileField() throws ClientServicesException, XMLException {
 		Activity activity = createActivity();
 		
-		this.activity = null;
-		
+		this.activity = null; // prevent deletion
+				
 		FileField fileField = new FileField();
 		fileField.setName("test_file");
 		fileField.setHidden(true);
 		fileField.setPosition(1000);
 
+		byte[] bytes = new byte[Integer.valueOf(1024)];
+		Arrays.fill(bytes, (byte)0);
+				
 		ActivityNode activityNode = new ActivityNode();
 		activityNode.setActivityUuid(activity.getActivityUuid());
 		activityNode.setTitle(createActivityTitle());
 		activityNode.setType(ActivityNode.TYPE_ENTRY);
 		activityNode.addField(fileField);
-		activityNode.addAttachment(new ActivityAttachment("test_file", "MyFileContent Fethard Crook", "text/plain"));
+		activityNode.addAttachment(new ActivityAttachment("test_file", new String(bytes), "text/plain"));
 		
 		ActivityNode createdNode = activityService.createActivityNode(activityNode);
 		
@@ -62,15 +68,20 @@ public class ActivityFileFieldTest extends BaseActivityServiceTest {
 	
 	@Test
 	public void testAddFileField() throws ClientServicesException, XMLException {
-		Activity activity = createActivity();
+		createActivity();
 		ActivityNode activityNode = createActivityNode();
+		
+		this.activity = null; // prevent deletion
 		
 		FileField fileField = new FileField();
 		fileField.setName("test_file");
 		fileField.setPosition(1000);
 		
+		byte[] bytes = new byte[Integer.valueOf(1024)];
+		Arrays.fill(bytes, (byte)0);
+		
 		activityNode.addField(fileField);
-		activityNode.addAttachment(new ActivityAttachment("test_file", "MyFileContent", "text/plain"));
+		activityNode.addAttachment(new ActivityAttachment("test_file", new String(bytes), "text/plain"));
 		activityNode.setSummary("xxx");
 		activityNode.update();
 		

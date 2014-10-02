@@ -33,6 +33,7 @@ public enum CommonXPath implements FieldEntry {
 	href("@href"),
 	title("@title"),
 	size("@size"),
+	length("@length"),
 	type("@type"),
 	role("./snx:role"),
 	category_type("./category[scheme='http://www.ibm.com/xmlns/prod/sn/type']/@term");

@@ -34,6 +34,7 @@ import static com.ibm.sbt.services.client.base.CommonConstants.URL_PARAM;
 import static com.ibm.sbt.services.client.base.CommonConstants.UTF8;
 import static com.ibm.sbt.services.client.base.CommonConstants.XML;
 import static com.ibm.sbt.services.client.base.CommonConstants.HTML;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
@@ -52,7 +53,9 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.GZIPInputStream;
+
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -65,6 +68,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.entity.AbstractHttpEntity;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.FileEntity;
 import org.apache.http.entity.InputStreamEntity;
@@ -80,6 +84,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.util.EntityUtils;
 import org.w3c.dom.Node;
+
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.runtime.NoAccessSignal;
 import com.ibm.commons.runtime.util.UrlUtil;
@@ -435,6 +440,30 @@ public abstract class ClientService {
 			return null;
 		}
 	}
+	
+	public static class ContentHttpEntity extends Content {
+		
+		private final HttpEntity	content;
+
+		public ContentHttpEntity(HttpEntity content) {
+			super(content.getContentType().getValue());
+			this.content = content;
+		}
+
+		public ContentHttpEntity(HttpEntity content, String contentType) {
+			super(contentType);
+			this.content = content;
+		}
+
+		@Override
+		protected HttpEntity createEntity() throws ClientServicesException {
+			try {
+				return content;
+			} catch (Exception ex) {
+				throw new ClientServicesException(ex);
+			}
+		}
+	}
 
 	public static class ContentString extends Content {
 
@@ -726,6 +755,9 @@ public abstract class ClientService {
 			if (content instanceof List) {
 				return new ContentList((List) content, contentType);
 			}
+			if (content instanceof HttpEntity) {
+				return new ContentHttpEntity((HttpEntity) content, contentType);
+			}
 		} else {
 			if (content instanceof String) {
 				return new ContentString((String) content);
@@ -744,6 +776,9 @@ public abstract class ClientService {
 			}
 			if (content instanceof List) {
 				return new ContentList((List) content);
+			}
+			if (content instanceof HttpEntity) {
+				return new ContentHttpEntity((HttpEntity) content);
 			}
 		}
 
@@ -1055,6 +1090,14 @@ public abstract class ClientService {
     
     public final Response delete(String serviceUrl, Map<String, String> parameters, Map<String, String> headers,
             Handler format,String content)throws ClientServicesException{
+    	Args args = createArgs(serviceUrl, parameters);
+        args.setHandler(format);
+        args.setHeaders(headers);
+        return xhr(METHOD_DELETE_BODY, args, content);
+    }
+
+    public final Response delete(String serviceUrl, Map<String, String> parameters, Map<String, String> headers, Object content,
+            Handler format)throws ClientServicesException{
     	Args args = createArgs(serviceUrl, parameters);
         args.setHandler(format);
         args.setHeaders(headers);

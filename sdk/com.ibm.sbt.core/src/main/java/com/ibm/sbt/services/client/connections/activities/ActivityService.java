@@ -534,7 +534,32 @@ public class ActivityService extends ConnectionsService {
 	 */
 	public void uploadFile(String activityUuid, String fileName, InputStream fileContent, String mimeType) throws ClientServicesException {
 		String requestUrl = ActivityUrls.ACTIVITY.format(this, ActivityUrls.activityPart(activityUuid));
-		createActivityFile(requestUrl, fileName, fileContent, mimeType);
+		createActivityNodeFile(requestUrl, fileName, fileContent, mimeType);
+	}
+	
+	/**
+	 * 
+	 * @param activityNode
+	 * @param fileName
+	 * @param fileContent
+	 * @param mimeType
+	 * @throws ClientServicesException
+	 */
+	public void uploadNodeFile(ActivityNode activityNode, String fileName, InputStream fileContent, String mimeType) throws ClientServicesException {
+		uploadFile(activityNode.getActivityNodeUuid(), fileName, fileContent, mimeType);
+	}
+	
+	/**
+	 * 
+	 * @param activityNodeUuid
+	 * @param fileName
+	 * @param fileContent
+	 * @param mimeType
+	 * @throws ClientServicesException
+	 */
+	public void uploadNodeFile(String activityNodeUuid, String fileName, InputStream fileContent, String mimeType) throws ClientServicesException {
+		String requestUrl = ActivityUrls.ACTIVITY_NODE.format(this, ActivityUrls.activityNodePart(activityNodeUuid));
+		createActivityNodeFile(requestUrl, fileName, fileContent, mimeType);
 	}
 	
 	//------------------------------------------------------------------------------------------------------------------
@@ -1084,7 +1109,7 @@ public class ActivityService extends ConnectionsService {
 		}
 	}
 	
-	protected void createActivityFile(String requestUrl, String fileName, InputStream fileContent, String mimeType) throws ClientServicesException {
+	protected void createActivityNodeFile(String requestUrl, String fileName, InputStream fileContent, String mimeType) throws ClientServicesException {
 		try {
 			Map<String,String> headers = new HashMap<String, String>();
 			headers.put(SLUG, fileName);

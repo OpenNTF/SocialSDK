@@ -55,11 +55,11 @@ public class PublicActivityDescendantsTest extends BaseActivityServiceTest {
 		orgid = StringUtil.isEmpty(orgid) ? "*" : orgid;
 		activity.addMember(Member.TYPE_ORGANIZATION, orgid, Member.ROLE_READER);
 
-		EntityList<ActivityNode> descendants = activityService.getActivityNodeDescendants(activityUuid);
+		EntityList<ActivityNode> descendants = activityService.getActivityDescendants(activityUuid);
 		Assert.assertEquals(3, descendants.size());
 
 		ActivityService activityServiceAlt = new ActivityService(getAltEndpoint());
-		EntityList<ActivityNode> descendantsAlt = activityServiceAlt.getActivityNodeDescendants(activityUuid);
+		EntityList<ActivityNode> descendantsAlt = activityServiceAlt.getActivityDescendants(activityUuid);
 		Assert.assertEquals(3, descendantsAlt.size());
 		EntityList<ActivityNode> childrenAlt = activityServiceAlt.getActivityNodeChildren(activityUuid);
 		Assert.assertEquals(3, childrenAlt.size());

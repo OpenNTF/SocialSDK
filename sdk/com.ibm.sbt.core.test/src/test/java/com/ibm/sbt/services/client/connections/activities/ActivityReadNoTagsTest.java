@@ -183,7 +183,7 @@ public class ActivityReadNoTagsTest extends BaseActivityServiceTest {
 		
 		System.out.println("\n\n");
 		
-		EntityList<ActivityNode> descendants = activityService.getActivityNodeDescendants(activityUuid);
+		EntityList<ActivityNode> descendants = activityService.getActivityDescendants(activityUuid);
 		for (ActivityNode descendant : descendants) {
 			System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------");
 			System.out.println(descendant.getType());

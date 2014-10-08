@@ -68,9 +68,9 @@ public class BssException extends AbstractException {
 	 * @return
 	 */
 	public JsonJavaObject getResponseJson() {
-		Throwable cause = getCause();
-		if (cause instanceof ClientServicesException) {
-			String responseBody = ((ClientServicesException)cause).getResponseBody();
+		ClientServicesException cse = getClientServicesException(this);
+		if (cse != null) {
+			String responseBody = cse.getResponseBody();
 			if (StringUtil.isNotEmpty(responseBody)) {
 				try {
 					return (JsonJavaObject)JsonParser.fromJson(JsonJavaFactory.instanceEx, responseBody);
@@ -110,9 +110,9 @@ public class BssException extends AbstractException {
 	 * @return
 	 */
 	public int getResponseStatusCode() {
-		Throwable cause = getCause();
-		if (cause instanceof ClientServicesException) {
-			return ((ClientServicesException)cause).getResponseStatusCode();
+		ClientServicesException cse = getClientServicesException(this);
+		if (cse != null) {
+			return cse.getResponseStatusCode();
 		}
 		return 0;
 	}
@@ -215,6 +215,17 @@ public class BssException extends AbstractException {
 			} catch (Exception e) {
 				logger.log(Level.WARNING, "Unable to extract exception message: "+responseJson, e);
 			}
+		}
+		return null;
+	}
+	
+	private ClientServicesException getClientServicesException(Throwable t) {
+		Throwable cause = t.getCause();
+		if (cause instanceof ClientServicesException) {
+			return getClientServicesException(cause);
+		}
+		if (t instanceof ClientServicesException) {
+			return (ClientServicesException)t;
 		}
 		return null;
 	}

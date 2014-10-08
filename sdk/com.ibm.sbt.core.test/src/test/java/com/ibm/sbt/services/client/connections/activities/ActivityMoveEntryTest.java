@@ -37,7 +37,7 @@ public class ActivityMoveEntryTest extends BaseActivityServiceTest {
 		
 		activityService.moveNode(activityNode.getActivityNodeUuid(), activity2.getActivityUuid());
 		
-		EntityList<ActivityNode> descendants = activityService.getActivityNodeDescendants(activity2.getActivityUuid());
+		EntityList<ActivityNode> descendants = activityService.getActivityDescendants(activity2.getActivityUuid());
 		
 		Assert.assertTrue("Invalid number of descendants", descendants.size() == 1);
 		Assert.assertEquals("Invalid activity node id", activityNode.getActivityNodeUuid(), descendants.get(0).getActivityNodeUuid());

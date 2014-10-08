@@ -26,6 +26,7 @@ import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.JsonEntity;
+import com.ibm.sbt.services.client.base.NamedUrlPart;
 import com.ibm.sbt.services.endpoints.Endpoint;
 
 /**
@@ -90,9 +91,8 @@ public class AuthorizationService extends BssService {
      */
     public String[] getRoles(String loginName) throws BssException {
     	try {
-    		Map<String, String> params = new HashMap<String, String>();
-    		params.put("loginName", loginName);
-			Response serverResponse = createData(API_AUTHORIZATION_GETROLELIST, params, null, null, ClientService.FORMAT_JSON);
+			String serviceUrl = BssUrls.API_AUTHORIZATION_GETROLELIST.format(this, new NamedUrlPart("loginName", loginName));
+			Response serverResponse = createData(serviceUrl, null, null, null, ClientService.FORMAT_JSON);
 			
 			JsonJavaObject rolesObject = (JsonJavaObject)serverResponse.getData();
 			List<Object> roles = rolesObject.getAsList(PROPERTY_LIST);
@@ -111,9 +111,8 @@ public class AuthorizationService extends BssService {
      */
     public void assignRole(String loginName, String role) throws BssException {
     	try {
-    		loginName = URLEncoder.encode(loginName, "UTF-8");
-    		role = URLEncoder.encode(role, "UTF-8");
-    		String serviceUrl = API_AUTHORIZATION_ASSIGNROLE + "?loginName=" + loginName + "&role=" + role;
+			String serviceUrl = BssUrls.API_AUTHORIZATION_ASSIGNROLE.format(this, 
+					new NamedUrlPart("loginName", loginName), new NamedUrlPart("role", role));
 			Response response = createData(serviceUrl, null, null);
     		
     		// expect a 204
@@ -135,9 +134,8 @@ public class AuthorizationService extends BssService {
      */
     public void unassignRole(String loginName, String role) throws BssException {
     	try {
-    		loginName = URLEncoder.encode(loginName, "UTF-8");
-    		role = URLEncoder.encode(role, "UTF-8");
-    		String serviceUrl = API_AUTHORIZATION_UNASSIGNROLE + "?loginName=" + loginName + "&role=" + role;
+			String serviceUrl = BssUrls.API_AUTHORIZATION_UNASSIGNROLE.format(this, 
+					new NamedUrlPart("loginName", loginName), new NamedUrlPart("role", role));
 			Response response = createData(serviceUrl, null, null);
     		
     		// expect a 204

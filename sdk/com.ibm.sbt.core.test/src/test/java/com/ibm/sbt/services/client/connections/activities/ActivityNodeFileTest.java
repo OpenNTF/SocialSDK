@@ -44,7 +44,7 @@ public class ActivityNodeFileTest extends BaseActivityServiceTest {
 		byte[] bytes = new byte[Integer.valueOf(1024)];
 		Arrays.fill(bytes, (byte)0);		
 		ByteArrayInputStream fileContent = new ByteArrayInputStream(bytes);
-		activityService.uploadNodeFile(activityNode, "MyFile", fileContent, "text/plain");
+		activityService.uploadFile(activityNode, "MyFile", fileContent, "text/plain");
 		
 		activityNode = activityService.getActivityNode(activityNode.getActivityNodeUuid());
 		System.out.println(activityNode.toXmlString());

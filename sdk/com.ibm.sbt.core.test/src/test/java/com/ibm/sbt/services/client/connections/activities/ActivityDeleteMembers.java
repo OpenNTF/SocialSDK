@@ -2,6 +2,7 @@ package com.ibm.sbt.services.client.connections.activities;
 
 import static org.junit.Assert.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Before;
@@ -26,7 +27,7 @@ public class ActivityDeleteMembers extends BaseActivityServiceTest {
 		member2.setId(memberId2);
 		Member[] members = {member,member2};
 		activity = createActivity();
-		activityService.addMembers(activity, members);
+		activityService.addMembers(activity, Arrays.asList(members));
 	}
 	
 	@Test
@@ -40,7 +41,7 @@ public class ActivityDeleteMembers extends BaseActivityServiceTest {
 		Member[] members = {member,member2};
 		
 		List<Member> membersBefore = activityService.getMembers(activity.getActivityUuid());
-		activityService.removeMembers(activity.getActivityUuid(), members,null);
+		activityService.removeMembers(activity.getActivityUuid(), Arrays.asList(members), null);
 		
 		List<Member> membersAfter = activityService.getMembers(activity.getActivityUuid());
 		assertTrue(membersAfter.size() == membersBefore.size()-2);

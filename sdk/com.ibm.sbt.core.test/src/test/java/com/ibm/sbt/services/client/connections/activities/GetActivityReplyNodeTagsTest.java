@@ -56,7 +56,7 @@ public class GetActivityReplyNodeTagsTest extends BaseActivityServiceTest {
 		activityReply.setInReplyTo(activityNode);
 		activityReply = activityService.createActivityNode(activityReply);
 		
-		EntityList<ActivityNode> activityNodes = activityService.getActivityNodeDescendants(activity.getActivityUuid());
+		EntityList<ActivityNode> activityNodes = activityService.getActivityDescendants(activity.getActivityUuid());
 		Assert.assertEquals(2, activityNodes.size());
 		for (ActivityNode nextNode : activityNodes) {
 			System.out.println(nextNode.toXmlString());

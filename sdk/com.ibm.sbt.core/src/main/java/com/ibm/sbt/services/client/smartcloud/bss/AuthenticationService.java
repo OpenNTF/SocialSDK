@@ -16,8 +16,6 @@
 package com.ibm.sbt.services.client.smartcloud.bss;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import com.ibm.commons.util.io.json.JsonException;
 import com.ibm.commons.util.io.json.JsonJavaFactory;
@@ -25,6 +23,7 @@ import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.commons.util.io.json.JsonParser;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.Response;
+import com.ibm.sbt.services.client.base.NamedUrlPart;
 import com.ibm.sbt.services.endpoints.Endpoint;
 
 /**
@@ -121,7 +120,8 @@ public class AuthenticationService extends BssService {
      */
     public void changePassword(JsonJavaObject userCredentialObject) throws BssException {
 		try {
-			Response response = createData(API_AUTHENTICATION_CHANGEPASSWORD, null, JsonHeader, userCredentialObject, ClientService.FORMAT_JSON);
+			String serviceUrl = BssUrls.API_AUTHENTICATION_CHANGEPASSWORD.format(this);
+			Response response = createData(serviceUrl, null, JsonHeader, userCredentialObject, ClientService.FORMAT_JSON);
     		
     		// expect a 204
     		int statusCode = response.getResponse().getStatusLine().getStatusCode();
@@ -142,9 +142,8 @@ public class AuthenticationService extends BssService {
      */
     public void resetPassword(String loginName) throws BssException {
 		try {
-    		Map<String, String> params = new HashMap<String, String>();
-    		params.put("loginName", loginName);
-			Response response = createData(API_AUTHENTICATION_RESETPASSWORD, params, null);
+			String serviceUrl = BssUrls.API_AUTHENTICATION_RESETPASSWORD.format(this, new NamedUrlPart("loginName", loginName));
+			Response response = createData(serviceUrl, null, null);
     		
     		// expect a 204
     		int statusCode = response.getResponse().getStatusLine().getStatusCode();
@@ -192,7 +191,8 @@ public class AuthenticationService extends BssService {
      */
     public void setOneTimePassword(JsonJavaObject userCredentialObject) throws BssException {
 		try {
-			Response response = createData(API_AUTHENTICATION_SETONETIMEPASSWORD, null, JsonHeader, userCredentialObject, ClientService.FORMAT_JSON);
+			String serviceUrl = BssUrls.API_AUTHENTICATION_SETONETIMEPASSWORD.format(this);
+			Response response = createData(serviceUrl, null, JsonHeader, userCredentialObject, ClientService.FORMAT_JSON);
     		
     		// expect a 204
     		int statusCode = response.getResponse().getStatusLine().getStatusCode();
@@ -258,10 +258,7 @@ public class AuthenticationService extends BssService {
      */
     public void setUserPassword(JsonJavaObject userCredentialObject, boolean bypassPolicy) throws BssException {
 		try {
-    		StringBuilder sb = new StringBuilder();
-    		sb.append(API_AUTHENTICATION_SETUSERPASSWORD).append("?bypassPolicy=").append(bypassPolicy);
-    		String serviceUrl = sb.toString(); 
-    		
+			String serviceUrl = BssUrls.API_AUTHENTICATION_SETUSERPASSWORD.format(this, new NamedUrlPart("bypassPolicy", bypassPolicy ? "true" : "false"));
     		Response response = createData(serviceUrl, null, JsonHeader, userCredentialObject, ClientService.FORMAT_JSON);
     		
     		// expect a 204

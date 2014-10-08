@@ -18,6 +18,7 @@ package com.ibm.sbt.services.client.smartcloud.bss;
 import java.util.HashMap;
 
 import com.ibm.sbt.services.client.base.JsonEntity;
+import com.ibm.sbt.services.client.base.NamedUrlPart;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.endpoints.Endpoint;
 
@@ -93,10 +94,7 @@ public class WorkflowService extends BssService {
      */
     public EntityList<JsonEntity> getWorkflowsByCustomerId(String customerId, int pageNumber, int pageSize) throws BssException {
     	try {
-    		StringBuilder sb = new StringBuilder();
-    		sb.append(API_RESOURCE_WORKFLOW).append("?_namedQuery=getWorkflowByCustomerId&customerId=").append(customerId);
-    		String serviceUrl = sb.toString(); 
-    		
+    		String serviceUrl = BssUrls.API_RESOURCE_GET_WORKFLOW_BY_CUSTOMERID.format(this, new NamedUrlPart("customerId", customerId));    		
     		HashMap<String, String> params = new HashMap<String, String>();
     		params.put("_pageNumber", String.valueOf(pageNumber));
     		params.put("_pageSize", String.valueOf(pageSize));
@@ -116,10 +114,7 @@ public class WorkflowService extends BssService {
      */
     public EntityList<JsonEntity> getWorkflowsByStatus(String workflowStatus, int pageNumber, int pageSize) throws BssException {
     	try {
-    		StringBuilder sb = new StringBuilder();
-    		sb.append(API_RESOURCE_WORKFLOW).append("?_namedQuery=getWorkflowByStatus&workflowStatus=").append(workflowStatus);
-    		String serviceUrl = sb.toString(); 
-    		
+    		String serviceUrl = BssUrls.API_RESOURCE_GET_WORKFLOW_BY_STATUS.format(this, new NamedUrlPart("workflowStatus", workflowStatus));    		
     		HashMap<String, String> params = new HashMap<String, String>();    		
     		params.put("_pageNumber", String.valueOf(pageNumber));
     		params.put("_pageSize", String.valueOf(pageSize));
@@ -139,10 +134,7 @@ public class WorkflowService extends BssService {
      */
     public EntityList<JsonEntity> getWorkflowsBySubscriberId(String subscriberId, int pageNumber, int pageSize) throws BssException {
     	try {
-    		StringBuilder sb = new StringBuilder();
-    		sb.append(API_RESOURCE_WORKFLOW).append("?_namedQuery=getWorkflowBySubscriberId&subscriberId=").append(subscriberId);
-    		String serviceUrl = sb.toString(); 
-    		
+    		String serviceUrl = BssUrls.API_RESOURCE_GET_WORKFLOW_BY_SUBSCRIBERID.format(this, new NamedUrlPart("subscriberId", subscriberId));    		
     		HashMap<String, String> params = new HashMap<String, String>();
     		params.put("_pageNumber", String.valueOf(pageNumber));
     		params.put("_pageSize", String.valueOf(pageSize));

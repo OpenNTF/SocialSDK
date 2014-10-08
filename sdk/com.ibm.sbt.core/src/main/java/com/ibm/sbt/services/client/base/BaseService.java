@@ -340,8 +340,7 @@ public abstract class BaseService implements Serializable {
         return r;
     }
     
-    public Response delete(String serviceUrl, Map<String, String> parameters, Map<String, String> headers, 
-    		String nameParameterId, String content)throws ClientServicesException{
+    public Response delete(String serviceUrl, Map<String, String> parameters, Map<String, String> headers, String nameParameterId, String content)throws ClientServicesException{
     	String uniqueId = null;
         if (nameParameterId != null) {
             uniqueId = (parameters == null) ? nameParameterId : parameters.get(nameParameterId);

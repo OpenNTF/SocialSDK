@@ -63,6 +63,19 @@ public class Member extends AtomEntity {
 	}
 
 	/**
+	 * 
+	 * @param type
+	 * @param memberId
+	 * @param role
+	 */
+	public Member(String type, String memberId, String role) {
+		setComponent(COMPONENT_ACTIVITIES);
+		setType(type);
+		setContributor(memberId);
+		setRole(role);
+	}
+
+	/**
 	 * Construct Member based on the specified node
 	 * 
 	 * @param service

@@ -16,6 +16,9 @@
 package com.ibm.sbt.services.client.connections.activities;
 
 import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,13 +43,47 @@ public class ActivityEntryPerformanceTest extends BaseActivityServiceTest {
 		Activity activity = createActivity();
 		String activityUuid = activity.getActivityUuid();
 		String title = activity.getThemeId();
-		System.out.println("#,NodeUUID,Time(ms)");
+
+		FileField fileField = new FileField();
+		fileField.setName("test_file");
+		fileField.setHidden(true);
+		fileField.setPosition(2000);
+		
+		byte[] bytes = new byte[Integer.valueOf(1024)];
+		Arrays.fill(bytes, (byte)0);
+				
+		StringWriter stringWriter = new StringWriter();
+		PrintWriter writer = new PrintWriter(stringWriter);
+		writer.println("#,NodeUUID,Time(ms)");
 		for (int i=0; i<500; i++) {
-			long start = System.currentTimeMillis();
-			ActivityNode activityNode = createActivityNode(activityUuid, title + " - " + i, ActivityNode.TYPE_ENTRY);
-			long duration = System.currentTimeMillis() - start;
-			System.out.println(i+","+activityNode.getActivityNodeUuid()+","+duration);
+			try {
+				long start = System.currentTimeMillis();
+				
+				System.out.print(i + " ");
+				
+				ActivityNode activityNode = new ActivityNode();
+				activityNode.setActivityUuid(activityUuid);
+				activityNode.setTitle(title + " - " + i);
+				activityNode.setType(ActivityNode.TYPE_ENTRY);
+				for (int j=0; j<5; j++) {
+					TextField textField = new TextField();
+					textField.setName("test_text"+j);
+					textField.setPosition(1000);
+					textField.setSummary("Test_Text_Field");
+					activityNode.addField(textField);
+				}
+				activityNode.addField(fileField);
+				activityNode.addAttachment(new ActivityAttachment("test_file", new String(bytes), "text/plain"));
+				
+				activityNode = activityService.createActivityNode(activityNode);
+				
+				long duration = System.currentTimeMillis() - start;
+				writer.println(i+","+activityNode.getActivityNodeUuid()+","+duration);				
+			} catch (Exception e) {
+			}
 		}
+		
+		System.out.println(stringWriter.toString());
 
 		/*
 		long start = System.currentTimeMillis();

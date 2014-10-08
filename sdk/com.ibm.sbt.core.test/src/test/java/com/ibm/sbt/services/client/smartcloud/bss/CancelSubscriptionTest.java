@@ -46,18 +46,22 @@ public class CancelSubscriptionTest extends BaseBssTest {
 			
 			subscriptionManagement.cancelSubscription(subscriptionId);
 			
-			jsonEntity = subscriptionManagement.getSubscriptionById(subscriptionId);
-			Assert.assertNotNull("Unable to retrieve subscription: "+subscriptionId, jsonEntity);
-			Assert.assertEquals(subscriptionId, subscriptionManagement.getSubscriptionId(jsonEntity.getJsonObject()));
-			
-			rootObject = jsonEntity.getJsonObject();
-			Assert.assertNotNull("Unable to retrieve subscription: "+subscriptionId, rootObject);
-			
-			System.out.println(rootObject);
-			JsonJavaObject subscriptionObject = rootObject.getAsObject("Subscription");
-			System.out.println(subscriptionObject);
-			Assert.assertEquals("CANCEL_PENDING", subscriptionObject.get("SubscriptionState"));
-			
+			try {
+				jsonEntity = subscriptionManagement.getSubscriptionById(subscriptionId);
+				Assert.assertNotNull("Unable to retrieve subscription: "+subscriptionId, jsonEntity);
+				Assert.assertEquals(subscriptionId, subscriptionManagement.getSubscriptionId(jsonEntity.getJsonObject()));
+				
+				rootObject = jsonEntity.getJsonObject();
+				Assert.assertNotNull("Unable to retrieve subscription: "+subscriptionId, rootObject);
+				
+				System.out.println(rootObject);
+				JsonJavaObject subscriptionObject = rootObject.getAsObject("Subscription");
+				System.out.println(subscriptionObject);
+				Assert.assertEquals("CANCEL_PENDING", subscriptionObject.get("SubscriptionState"));
+				
+			} catch (BssException be) {
+				Assert.assertEquals("Unexpected response when retrieving cancelled subscription", 404, be.getResponseStatusCode());
+			}
     	} catch (BssException be) {
     		JsonJavaObject jsonObject = be.getResponseJson();
     		System.out.println(jsonObject);

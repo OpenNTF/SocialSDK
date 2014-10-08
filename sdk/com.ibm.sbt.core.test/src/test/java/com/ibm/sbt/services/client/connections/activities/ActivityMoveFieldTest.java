@@ -160,7 +160,7 @@ public class ActivityMoveFieldTest extends BaseActivityServiceTest {
 		}
 		
 		//Check descendants
-		EntityList<ActivityNode> nodeList = activityService.getActivityNodeDescendants(activity.getActivityUuid());
+		EntityList<ActivityNode> nodeList = activityService.getActivityDescendants(activity.getActivityUuid());
 		for (ActivityNode node : nodeList){
 			assertNotNull(node);
 			if (node.getActivityNodeUuid().equals(srcActivityNode.getActivityNodeUuid())){

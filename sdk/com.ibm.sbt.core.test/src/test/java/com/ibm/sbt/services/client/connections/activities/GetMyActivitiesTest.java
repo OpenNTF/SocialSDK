@@ -36,7 +36,7 @@ public class GetMyActivitiesTest extends BaseActivityServiceTest {
 		for (Activity activity : activities) {
 			Assert.assertNotNull("Invalid activity id", activity.getActivityUuid());
 			System.out.println(activity.toXmlString());
-			EntityList<ActivityNode> activityNodes = activityService.getActivityNodeDescendants(activity.getActivityUuid());
+			EntityList<ActivityNode> activityNodes = activityService.getActivityDescendants(activity.getActivityUuid());
 			for (ActivityNode activityNode : activityNodes) {
 				Assert.assertNotNull("Invalid activity node id", activityNode.getActivityNodeUuid());
 				System.err.println(activityNode.toXmlString());

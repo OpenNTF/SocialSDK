@@ -59,7 +59,7 @@ public class GetActivityDescendantsTest extends BaseActivityServiceTest {
 		
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("tag", "sbt");
-		EntityList<ActivityNode> activityNodes = activityService.getActivityNodeDescendants(activityUuid, params);
+		EntityList<ActivityNode> activityNodes = activityService.getActivityDescendants(activityUuid, params);
 		Assert.assertEquals(2, activityNodes.size());
 		for (ActivityNode activityNode : activityNodes) {
 			Assert.assertNotNull("Invalid activity id", activityNode.getActivityUuid());

@@ -18,13 +18,19 @@ package com.ibm.sbt.services.client.connections;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
+
 import com.ibm.sbt.services.client.connections.activities.ActivityAddMembers;
 import com.ibm.sbt.services.client.connections.activities.ActivityDescendantsSinceTest;
 import com.ibm.sbt.services.client.connections.activities.ActivityDescendantsSortByTest;
 import com.ibm.sbt.services.client.connections.activities.ActivityFeedMoveTest;
+import com.ibm.sbt.services.client.connections.activities.ActivityLargeContentTest;
+import com.ibm.sbt.services.client.connections.activities.ActivityLargeFieldTest;
 import com.ibm.sbt.services.client.connections.activities.ActivityMoveFieldTest;
 import com.ibm.sbt.services.client.connections.activities.ActivityNodeChildrenSinceTest;
+import com.ibm.sbt.services.client.connections.activities.ActivityReadNoTagsTest;
+import com.ibm.sbt.services.client.connections.activities.CreateActivityPerformanceTest;
 import com.ibm.sbt.services.client.connections.activities.GetActivityReplyNodeTagsTest;
+import com.ibm.sbt.services.client.connections.activities.MakeActivityPublicTest;
 
 /**
  * @author mwallace
@@ -37,9 +43,13 @@ import com.ibm.sbt.services.client.connections.activities.GetActivityReplyNodeTa
 	ActivityDescendantsSortByTest.class,
 	ActivityMoveFieldTest.class,
 	ActivityFeedMoveTest.class,
-	//MakeActivityPublicTest.class,
+	MakeActivityPublicTest.class,
 	GetActivityReplyNodeTagsTest.class,
-	ActivityAddMembers.class
+	ActivityAddMembers.class,
+	CreateActivityPerformanceTest.class,
+	ActivityLargeContentTest.class,
+	ActivityReadNoTagsTest.class,
+	ActivityLargeFieldTest.class
 })
 public class ActivitiesEnhTestSuite {
 }

@@ -36,26 +36,26 @@
 	<h4>Get Activity Nodes of an Activity</h4>
 	<div id="content">
 	<%
-	try {		
-		ActivityService activityService = new ActivityService();
-		EntityList<Activity> activities = activityService.getMyActivities();
-		if(activities != null && !activities.isEmpty()) {
-			EntityList<ActivityNode> listNodes = activityService.getActivityNodeDescendants(activities.get(0).getActivityUuid()); 
-			if(listNodes != null && !listNodes.isEmpty()) {
-				for (ActivityNode activityNode : listNodes) {
-					out.println(activityNode.getTitle());
-				}
-			} else {
-				out.println("No Activity Nodes");
+		try {		
+			ActivityService activityService = new ActivityService();
+			EntityList<Activity> activities = activityService.getMyActivities();
+			if(activities != null && !activities.isEmpty()) {
+		EntityList<ActivityNode> listNodes = activityService.getActivityDescendants(activities.get(0).getActivityUuid()); 
+		if(listNodes != null && !listNodes.isEmpty()) {
+			for (ActivityNode activityNode : listNodes) {
+				out.println(activityNode.getTitle());
 			}
 		} else {
-			out.println("No Activities Found");
+			out.println("No Activity Nodes");
 		}
-	} catch (Throwable e) {
-		out.println("<pre>");
-		out.println(e.getMessage());
-		out.println("</pre>");	
-	}					
+			} else {
+		out.println("No Activities Found");
+			}
+		} catch (Throwable e) {
+			out.println("<pre>");
+			out.println(e.getMessage());
+			out.println("</pre>");	
+		}
 	%>
 	</div>
 </body>

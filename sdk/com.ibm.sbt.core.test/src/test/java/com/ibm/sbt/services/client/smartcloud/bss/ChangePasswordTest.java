@@ -16,6 +16,7 @@
 package com.ibm.sbt.services.client.smartcloud.bss;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.ibm.commons.util.io.json.JsonJavaObject;
@@ -96,6 +97,7 @@ public class ChangePasswordTest extends BaseBssTest {
     }
 	
     @Test
+    @Ignore // This use case is not supported
     public void testChangeMyPassword() {
     	try {
     		String subscriberId = addSubscriber();
@@ -110,7 +112,6 @@ public class ChangePasswordTest extends BaseBssTest {
     		
     		AuthenticationService authenticationService = getAuthenticationService();
     		authenticationService.setOneTimePassword(userCredential);
-    		
     		
     		authenticationService = getAuthenticationService(loginName, "one_time_passw0rd");
     		

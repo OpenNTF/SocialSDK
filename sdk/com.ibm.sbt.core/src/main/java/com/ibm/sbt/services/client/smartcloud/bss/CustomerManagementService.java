@@ -28,6 +28,7 @@ import com.ibm.commons.util.io.json.JsonParser;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.JsonEntity;
+import com.ibm.sbt.services.client.base.NamedUrlPart;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.endpoints.Endpoint;
 
@@ -104,7 +105,7 @@ public class CustomerManagementService extends BssService {
      */
     public JsonEntity getCustomerById(String customerId) throws BssException {
     	try {
-    		String serviceUrl = API_RESOURCE_CUSTOMER + "/" + customerId;
+    		String serviceUrl = BssUrls.API_RESOURCE_CUSTOMER_CUSTOMERID.format(this, BssUrls.customerId(customerId));
 			return getEntity(serviceUrl, null, getJsonFeedHandler());
 		} catch (Exception e) {
 			throw new BssException(e, "Error retrieving customer {0} caused by {1}", customerId, e.getMessage());
@@ -129,7 +130,7 @@ public class CustomerManagementService extends BssService {
     public void updateCustomerProfile(JsonJavaObject customerObject) throws BssException {
     	try {
     		String customerId = getCustomerId(customerObject);
-    		String serviceUrl = API_RESOURCE_CUSTOMER + "/" + customerId;
+    		String serviceUrl = BssUrls.API_RESOURCE_CUSTOMER_CUSTOMERID.format(this, BssUrls.customerId(customerId));
     		Response response = updateData(serviceUrl, null, JsonHeader, customerObject, null);
     		
     		// expect a 204
@@ -153,7 +154,7 @@ public class CustomerManagementService extends BssService {
      */
     public void unregisterCustomer(String customerId) throws BssException {
     	try {
-    		String serviceUrl = API_RESOURCE_CUSTOMER + "/" + customerId;
+    		String serviceUrl = BssUrls.API_RESOURCE_CUSTOMER_CUSTOMERID.format(this, BssUrls.customerId(customerId));
     		Response response = deleteData(serviceUrl, null, null);
     		
     		// expect a 204
@@ -176,7 +177,7 @@ public class CustomerManagementService extends BssService {
      */
     public void suspendCustomer(String customerId) throws BssException {
     	try {
-    		String serviceUrl = API_RESOURCE_CUSTOMER + "/" + customerId;
+    		String serviceUrl = BssUrls.API_RESOURCE_CUSTOMER_CUSTOMERID.format(this, BssUrls.customerId(customerId));
     		Response response = createData(serviceUrl, (Map<String, String>)null, SuspendCustomerHeader, (Object)null);
     		
     		// expect a 204
@@ -199,7 +200,7 @@ public class CustomerManagementService extends BssService {
      */
     public void unsuspendCustomer(String customerId) throws BssException {
     	try {
-    		String serviceUrl = API_RESOURCE_CUSTOMER + "/" + customerId;
+    		String serviceUrl = BssUrls.API_RESOURCE_CUSTOMER_CUSTOMERID.format(this, BssUrls.customerId(customerId));
     		Response response = createData(serviceUrl, (Map<String, String>)null, UnsuspendCustomerHeader, (Object)null);
     		
     		// expect a 204
@@ -220,7 +221,8 @@ public class CustomerManagementService extends BssService {
      */
     public EntityList<JsonEntity> getCustomers() throws BssException {
     	try {
-			return (EntityList<JsonEntity>)getEntities(API_RESOURCE_CUSTOMER, null, getJsonFeedHandler());
+    		String serviceUrl = BssUrls.API_RESOURCE_CUSTOMER.format(this);
+			return (EntityList<JsonEntity>)getEntities(serviceUrl, null, getJsonFeedHandler());
 		} catch (Exception e) {
 			throw new BssException(e, "Error retrieving customer list caused by {0}", e.getMessage());
 		}
@@ -239,7 +241,8 @@ public class CustomerManagementService extends BssService {
     		HashMap<String, String> params = new HashMap<String, String>();
     		params.put("_pageNumber", String.valueOf(pageNumber));
     		params.put("_pageSize", String.valueOf(pageSize));
-			return (EntityList<JsonEntity>)getEntities(API_RESOURCE_CUSTOMER, params, getJsonFeedHandler());
+    		String serviceUrl = BssUrls.API_RESOURCE_CUSTOMER.format(this);
+			return (EntityList<JsonEntity>)getEntities(serviceUrl, params, getJsonFeedHandler());
 		} catch (Exception e) {
 			throw new BssException(e, "Error retrieving customer list caused by {0}", e.getMessage());
 		}
@@ -258,10 +261,8 @@ public class CustomerManagementService extends BssService {
     		throw new IllegalArgumentException("Invalid contact email address");
     	}
     	try {
-    		HashMap<String, String> params = new HashMap<String, String>();
-    		params.put("_namedQuery", "getCustomersByContactEmail");
-    		params.put("emailAddress", contactEmail);
-			return (EntityList<JsonEntity>)getEntities(API_RESOURCE_CUSTOMER, params, getJsonFeedHandler());
+    		String serviceUrl = BssUrls.API_RESOURCE_GET_CUSTOMERS_BY_CONTACT_EMAIL.format(this, new NamedUrlPart("emailAddress", contactEmail));
+			return (EntityList<JsonEntity>)getEntities(serviceUrl, null, getJsonFeedHandler());
 		} catch (Exception e) {
 			throw new BssException(e, "Error retrieving customer list by contact email {0} caused by {1}", contactEmail, e.getMessage());
 		}
@@ -280,10 +281,8 @@ public class CustomerManagementService extends BssService {
     		throw new IllegalArgumentException("Invalid subscriber email address");
     	}
     	try {
-    		HashMap<String, String> params = new HashMap<String, String>();
-    		params.put("_namedQuery", "getCustomersByContactEmail");
-    		params.put("emailAddress", subscriberEmail);
-			return (EntityList<JsonEntity>)getEntities(API_RESOURCE_CUSTOMER, params, getJsonFeedHandler());
+    		String serviceUrl = BssUrls.API_RESOURCE_GET_CUSTOMERS_BY_SUBSCIBER_EMAIL.format(this, new NamedUrlPart("emailAddress", subscriberEmail));
+			return (EntityList<JsonEntity>)getEntities(serviceUrl, null, getJsonFeedHandler());
 		} catch (Exception e) {
 			throw new BssException(e, "Error retrieving customer list by subscriber email {0} caused by {1}", subscriberEmail, e.getMessage());
 		}
@@ -302,10 +301,8 @@ public class CustomerManagementService extends BssService {
     		throw new IllegalArgumentException("Invalid organization name");
     	}
     	try {
-    		HashMap<String, String> params = new HashMap<String, String>();
-    		params.put("_namedQuery", "getCustomerByOrgName");
-    		params.put("orgName", orgName);
-			return (EntityList<JsonEntity>)getEntities(API_RESOURCE_CUSTOMER, params, getJsonFeedHandler());
+    		String serviceUrl = BssUrls.API_RESOURCE_GET_CUSTOMER_BY_ORGNAME.format(this, new NamedUrlPart("orgName", orgName));
+			return (EntityList<JsonEntity>)getEntities(serviceUrl, null, getJsonFeedHandler());
 		} catch (Exception e) {
 			throw new BssException(e, "Error retrieving customer list by organization name {0} caused by {1]", orgName, e.getMessage());
 		}
@@ -348,7 +345,8 @@ public class CustomerManagementService extends BssService {
      */
     public JsonJavaObject registerCustomer(JsonJavaObject customerObject) throws BssException {
 		try {
-			Response serverResponse = createData(API_RESOURCE_CUSTOMER, null, JsonHeader, customerObject, ClientService.FORMAT_JSON);
+    		String serviceUrl = BssUrls.API_RESOURCE_CUSTOMER.format(this);
+			Response serverResponse = createData(serviceUrl, null, JsonHeader, customerObject, ClientService.FORMAT_JSON);
 			return (JsonJavaObject)serverResponse.getData();
 		} catch (Exception e) {
 			throw new BssException(e, "Error registering customer {0} caused by {1}", customerObject, e.getMessage());

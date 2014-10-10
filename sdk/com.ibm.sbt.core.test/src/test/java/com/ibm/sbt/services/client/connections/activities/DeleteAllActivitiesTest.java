@@ -33,14 +33,17 @@ public class DeleteAllActivitiesTest extends BaseActivityServiceTest {
 	@Test
 	public void deleteAllActivities() throws ClientServicesException, XMLException {
 		Map<String, String> params = new HashMap<String, String>();
-		params.put("ps", "200");
+		params.put("ps", "100");
 		EntityList<Activity> activities = activityService.getMyActivities(params);
 		System.out.println("Deleting "+activities.getTotalResults()+" activities.");
-		for (Activity activity : activities) {
-			if (!activity.isDeleted()) {
-				System.out.println("Deleting: "+activity.getActivityUuid());
-				activity.delete();
+		while (activities.getTotalResults() > 0) {
+			for (Activity activity : activities) {
+				if (!activity.isDeleted()) {
+					System.out.println("Deleting: "+activity.getActivityUuid());
+					activity.delete();
+				}
 			}
+			activities = activityService.getMyActivities(params);
 		}
 	}
 	

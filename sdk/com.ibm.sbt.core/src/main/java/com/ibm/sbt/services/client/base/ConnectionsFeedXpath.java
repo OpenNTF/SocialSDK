@@ -32,6 +32,7 @@ public enum ConnectionsFeedXpath implements FieldEntry {
 	TotalResults("/a:feed/opensearch:totalResults"),
 	StartIndex("/a:feed/opensearch:startIndex"), 
 	ItemsPerPage("/a:feed/opensearch:itemsPerPage"),
+	TotalMembers("/a:feed/snx:totalMembers"),
 	CurrentPage("/rel=self");
 
 	private final XPathExpression path;

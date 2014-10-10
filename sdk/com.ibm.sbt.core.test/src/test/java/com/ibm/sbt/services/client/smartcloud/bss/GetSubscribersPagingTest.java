@@ -33,7 +33,7 @@ public class GetSubscribersPagingTest extends BaseBssTest {
     		int pageNumber = 1;
     		while(true) {
     			EntityList<JsonEntity> subscriberList = getSubscriberManagementService().getSubscribers(pageNumber++, 5);
-    			if (subscriberList.isEmpty()) break;
+    			if (subscriberList.isEmpty() || pageNumber > 5) break;
     			System.out.println(subscriberList.getData());
     		}
     	} catch (Exception e) {

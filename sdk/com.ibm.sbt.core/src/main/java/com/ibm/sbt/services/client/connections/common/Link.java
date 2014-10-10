@@ -68,4 +68,12 @@ public class Link extends BaseEntity {
 	public void setType(String type) {
 		setAsString(CommonXPath.type, type);
 	}
+	
+	public long getLength() {
+		return getAsLong(CommonXPath.length);
+	}
+	
+	public void setLength(long length) {
+		setAsLong(CommonXPath.length, length);
+	}
 }

@@ -16,15 +16,23 @@
 
 package com.ibm.sbt.services.client.connections.activities.serializers;
 
+import static com.ibm.sbt.services.client.base.CommonConstants.APPLICATION_ATOM_XML;
+import static com.ibm.sbt.services.client.base.CommonConstants.CONTENT_TYPE;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.dateFormat;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMultipart;
 
 import org.w3c.dom.Element;
 
 import com.ibm.sbt.services.client.base.ConnectionsConstants.Namespace;
 import com.ibm.sbt.services.client.base.serializers.AtomEntitySerializer;
+import com.ibm.sbt.services.client.connections.activities.ActivityAttachment;
 import com.ibm.sbt.services.client.connections.activities.DateField;
 import com.ibm.sbt.services.client.connections.activities.Field;
 import com.ibm.sbt.services.client.connections.activities.FileField;
@@ -113,6 +121,46 @@ class NodeSerializer extends AtomEntitySerializer<NodeEntity> {
 	protected Element content() {
 		return textElement("content", entity.getContent(), 
 				attribute("type", "application/atom+xml"));
+	}
+	
+	protected boolean hasAttachments() {
+		return entity.hasAttachments();
+	}
+	
+	protected MimeMultipart multipart(String atom) throws MessagingException {
+		MimeMultipart multipart = new MimeMultipart();
+		
+		// add atom
+		MimeBodyPart atomPart = new MimeBodyPart();
+		atomPart.setContent(atom, APPLICATION_ATOM_XML);
+		atomPart.setHeader(CONTENT_TYPE, APPLICATION_ATOM_XML);
+		multipart.addBodyPart(atomPart, 0);
+		
+		// add the attachments
+		List<ActivityAttachment> attachments = entity.getAttachments();
+		for (ActivityAttachment attachment : attachments) {
+			multipart.addBodyPart(attachment.toMimeBodyPart());
+		}
+		
+		return multipart;
+	}
+	
+	public String payload(String atom) {
+		if (hasAttachments()) {
+			try {
+				ByteArrayOutputStream baos = new ByteArrayOutputStream();
+				
+				MimeMultipart multipart = multipart(atom);
+				multipart.writeTo(baos);
+				
+				return new String(baos.toByteArray());
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
+		} else {
+			return atom;
+		}
 	}
 	
 }

@@ -16,6 +16,8 @@
 
 package com.ibm.sbt.services.client.connections.common.serializers;
 
+import java.util.List;
+
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
@@ -45,18 +47,20 @@ public class MemberSerializer extends AtomEntitySerializer<Member> {
 		return serializeToString();
 	}
 	
-	public String generateMemberFeed(Member[] members) {
+	public String generateMemberFeed(List<Member> members) {
 		Node feed = feed();
 
-		for(int i=0;i<members.length;i++) {
-			this.entity = members[i];
+		for(Member member : members) {
+			this.entity = member;
 
 			Node entry = entryElement();
 
-			Node contrib = contributorElement();
-			contrib.appendChild(textElement(Namespace.SNX.getUrl(),"snx:userid",this.entity.getId()));
-			entry.appendChild(contrib);
-			entry.appendChild(textElement(Namespace.SNX.getUrl(), "snx:role", "member"));
+			appendChildren(entry,
+					contributor(),
+					memberCategory(),
+					role()
+			);
+			
 			feed.appendChild(entry);
 		}
 		return serializeToString();

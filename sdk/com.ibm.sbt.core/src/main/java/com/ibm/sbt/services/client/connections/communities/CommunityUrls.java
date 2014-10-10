@@ -37,8 +37,8 @@ public enum CommunityUrls implements URLContainer {
 	COMMUNITY_BOOKMARKS(new VersionedUrl(v4_0, 		"{communities}/service/atom/{authType}/community/bookmarks")),
 	COMMUNITY_FORUMTOPICS(new VersionedUrl(v4_0, 	"{communities}/service/atom/{authType}/community/forum/topics")),
 	COMMUNITY_MYINVITES(new VersionedUrl(v4_0, 		"{communities}/service/atom/{authType}/community/invites/my")),
-	COMMUNITY_INVITES(new VersionedUrl(v4_0, 		"{communities}/service/atom/{authType}/community/invites?{communityUuid}"));
-	// CommunityType remoteApplications???
+	COMMUNITY_INVITES(new VersionedUrl(v4_0, 		"{communities}/service/atom/{authType}/community/invites?{communityUuid}")),
+	COMMUNITY_REMOVE_APPLICATIONS(new VersionedUrl(v4_0, "{communities/service/atom/community/remoteApplications?{communityUuid}"));
 
 	private URLBuilder builder;
 	

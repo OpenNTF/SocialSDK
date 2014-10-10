@@ -88,10 +88,10 @@ public class ActivitySerializer extends AtomEntitySerializer<Activity> {
 				assignedTo()
 		);
 
-		appendChildren(entry, tags());
+		//appendChildren(entry, tags());
 		appendChildren(entry, nodeSerializer.fields());
 		
-		return serializeToString();
+		return nodeSerializer.payload(serializeToString());
 	}
 	
 	protected Element activityCategory() {

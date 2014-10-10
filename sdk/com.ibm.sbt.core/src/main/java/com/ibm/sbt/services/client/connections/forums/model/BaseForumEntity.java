@@ -107,15 +107,6 @@ public class BaseForumEntity extends AtomEntity {
 	    		nameSpaceCtx, (XPathExpression)AtomXPath.contributor.getPath()));
 	}
 
-	public String createdBy(){
-		return getAuthor().getName();
-	}
-
-	public String updatedBy(){
-		return getContributor().getName();
-	}
-
-
 	/**
 	 * @sets the tags
 	 */

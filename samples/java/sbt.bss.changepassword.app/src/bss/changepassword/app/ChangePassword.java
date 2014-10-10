@@ -18,8 +18,6 @@ package bss.changepassword.app;
 import java.io.IOException;
 
 import com.ibm.commons.util.io.json.JsonException;
-import com.ibm.sbt.services.client.base.JsonEntity;
-import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.smartcloud.bss.AuthenticationService;
 import com.ibm.sbt.services.client.smartcloud.bss.BssException;
 import com.ibm.sbt.services.client.smartcloud.bss.SubscriberManagementService;

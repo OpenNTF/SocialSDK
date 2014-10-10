@@ -46,6 +46,11 @@
             <property-name>url</property-name>
             <value>%{acme.url}</value>
         </managed-property>
+        <!-- Trust the connection -->
+        <managed-property>
+            <property-name>forceTrustSSLCertificate</property-name>
+            <value>true</value>
+        </managed-property>
     </managed-bean>
     
     <!--  OpenSocial Environment -->

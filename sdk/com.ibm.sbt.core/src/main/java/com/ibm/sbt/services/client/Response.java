@@ -33,7 +33,7 @@ import com.ibm.sbt.services.client.ClientServicesException;
  * @author Carlos Manias
  *
  */
-public class Response implements Serializable{
+public class Response implements Serializable {
 
 	private Object data;
 	private transient HttpResponse response;
@@ -53,33 +53,47 @@ public class Response implements Serializable{
 		this.data = parseContent();
 	}
 	
-	public Response(Object data){
+	public Response(Object data) {
 		this.data = data;
 	}
+	
 	public void setHeaders(Header[] h) {
 		this.headers = h;
 	}
 	
-	public Object getData(){
+	public Object getData() {
 		return data;
 	}
 	
-	public HttpResponse getResponse(){
+	public HttpResponse getResponse() {
 		return response;
 	}
 	
-	public HttpRequestBase getRequest(){
+	public HttpRequestBase getRequest() {
 		return request;
 	}
 	
-	public Args getArgs(){
+	public Args getArgs() {
 		return args;
 	}
 	
-	public HttpClient getHttpClient(){
+	public HttpClient getHttpClient() {
 		return httpClient;
 	}
 	
+	public Header[] getResponseHeaders() {
+		return headers;
+	}
+
+	public String getResponseHeader(String name) {
+		for (Header header : headers) {
+			if (header.getName().equalsIgnoreCase(name)) {
+				return header.getValue();
+			}
+		}
+		return null;
+	}
+
 	protected Object parseContent() throws ClientServicesException {
 		try {
 			Object data = null;
@@ -89,10 +103,5 @@ public class Response implements Serializable{
 			throw new ClientServicesException(e);
 		}
 
-	}
-
-	public Header[] getResponseHeaders() {
-		// TODO Auto-generated method stub
-		return headers;
 	}
 }

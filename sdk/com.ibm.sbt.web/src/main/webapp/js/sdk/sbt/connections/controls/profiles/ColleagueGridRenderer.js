@@ -60,6 +60,10 @@ define(["../../../declare", "../../../stringUtil",
                 this.renderViewAll(grid, el, items, data);
              }
           },
+          
+          renderLoading: function(grid, el) {
+        	// don't display loading  
+          },
 
           renderContainer: function(grid, el, items, data) {          
               return dom.create("div", { "class": this.containerClass }, el);

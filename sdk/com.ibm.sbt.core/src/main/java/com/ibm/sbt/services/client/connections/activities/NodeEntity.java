@@ -17,6 +17,7 @@ package com.ibm.sbt.services.client.connections.activities;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -38,8 +39,11 @@ import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 public class NodeEntity extends AtomEntity {
 	
 	private List<Field> fields;
+	private List<ActivityAttachment> attachments = new ArrayList<ActivityAttachment>();
 
 	static final String UUID_PREFIX = "urn:lsid:ibm.com:oa:"; ////$NON-NLS-1$
+	
+	static final Field[] NO_FIELDS = new Field[0];
 	
 	/**
 	 * Standard type values for an activity. 
@@ -251,16 +255,18 @@ public class NodeEntity extends AtomEntity {
 	 */
 	public Field[] getFields() {
 		if (fields == null) {
-			fields = new ArrayList<Field>();
 			if (getDataHandler() != null) {
 				XmlDataHandler xmlHandler = (XmlDataHandler)getDataHandler();
 				List<Node> fieldNodes = xmlHandler.getEntries(ActivityXPath.field);
-				for (Node fieldNode : fieldNodes) {
-					fields.add(createField(fieldNode));
+				if (fieldNodes != null && !fieldNodes.isEmpty()) {
+					fields = new ArrayList<Field>();
+					for (Node fieldNode : fieldNodes) {
+						fields.add(createField(fieldNode));
+					}
 				}
 			}
 		}
-		return fields.toArray(new Field[fields.size()]);
+		return (fields == null) ? NO_FIELDS : fields.toArray(new Field[fields.size()]);
 	}
 
 	/**
@@ -316,6 +322,9 @@ public class NodeEntity extends AtomEntity {
 		if (fields == null) {
 			getFields();
 		}
+		if (fields == null) {
+			fields = new ArrayList<Field>();
+		}
 		fields.add(field);
 	}
 	
@@ -354,6 +363,36 @@ public class NodeEntity extends AtomEntity {
 			}
 		}
 		throw new IllegalArgumentException(MessageFormat.format("Node does contain field with id: {0}", fid));
+	}
+	
+	/**
+	 * Add an attachment
+	 * 
+	 * @param attachment
+	 */
+	public void addAttachment(ActivityAttachment attachment) {
+		attachments.add(attachment);
+	}
+	
+	/**
+	 * Return true if this node has attachments
+	 */
+	public boolean hasAttachments() {
+		return !attachments.isEmpty();
+	}
+	
+	/**
+	 * Return copy of attachments
+	 * 
+	 * @return
+	 */
+	public List<ActivityAttachment> getAttachments() {
+		if (attachments.isEmpty()) {
+			return Collections.emptyList();
+		}
+		List<ActivityAttachment> copy = new ArrayList<ActivityAttachment>();
+		copy.addAll(attachments);
+		return copy;
 	}
 	
 	//

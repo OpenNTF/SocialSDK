@@ -42,7 +42,7 @@ public class ActivityDescendantsSortByTest extends BaseActivityServiceTest {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("sortBy", "modified");
 		params.put("sortOrder", "asc");
-		EntityList<ActivityNode> activityDescendants = activityService.getActivityNodeDescendants(activity.getActivityUuid(), params);
+		EntityList<ActivityNode> activityDescendants = activityService.getActivityDescendants(activity.getActivityUuid(), params);
 		System.out.println("\nActivity descendants sorted ascending by modification date");
 		for (ActivityNode node : activityDescendants) {
 			System.out.println(node.getTitle() + "  modified: " + dateFormat.format(node.getUpdated()));
@@ -67,7 +67,7 @@ public class ActivityDescendantsSortByTest extends BaseActivityServiceTest {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("sortfields", "title,modified");
 		params.put("sortorder", "desc,asc");
-		EntityList<ActivityNode> activityDescendants = activityService.getActivityNodeDescendants(activity.getActivityUuid(), params);
+		EntityList<ActivityNode> activityDescendants = activityService.getActivityDescendants(activity.getActivityUuid(), params);
 		System.out.println("\nActivity descendants sorted descending by title and ascending by modification date");
 		for (ActivityNode node : activityDescendants) {
 			System.out.println(node.getTitle() + "  modified: " + dateFormat.format(node.getUpdated()));
@@ -119,7 +119,7 @@ public class ActivityDescendantsSortByTest extends BaseActivityServiceTest {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("sortBy", "created");
 		params.put("sortOrder", "asc");
-		EntityList<ActivityNode> activityDescendants = activityService.getActivityNodeDescendants(activity.getActivityUuid(), params);
+		EntityList<ActivityNode> activityDescendants = activityService.getActivityDescendants(activity.getActivityUuid(), params);
 		System.out.println("\nActivity descendants sorted ascending by created date");
 		for (ActivityNode node : activityDescendants) {
 			System.out.println(node.getTitle() + " created: " + dateFormat.format(node.getPublished()));

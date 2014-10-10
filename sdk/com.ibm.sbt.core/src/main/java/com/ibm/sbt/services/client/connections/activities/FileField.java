@@ -30,6 +30,7 @@ public class FileField extends Field {
 
 	private Link editMediaLink;
 	private Link enclosureLink;
+	private Link link;
 	
 	/**
 	 * Default constructor
@@ -94,4 +95,17 @@ public class FileField extends Field {
 	public void setEnclosureLink(Link enclosureLink) {
 		this.enclosureLink = enclosureLink;
 	}
+
+	/**
+	 * Return the link.
+	 * 
+	 * @return link
+	 */
+	public Link getLink() {
+		if (link == null && getDataHandler() != null) {
+			link = createLink((Node)getDataHandler().getData(), ActivityXPath.field_link);
+		}
+		return link;
+	}
+	
 }

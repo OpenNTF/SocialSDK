@@ -16,8 +16,8 @@
 package com.ibm.sbt.services.client.connections.activities;
 
 import java.io.ByteArrayInputStream;
+import java.util.Arrays;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 import com.ibm.commons.xml.XMLException;
@@ -33,24 +33,16 @@ public class ActivityFileTest extends BaseActivityServiceTest {
 	public void testCreateActivityNodeFile() throws ClientServicesException, XMLException {
 		Activity activity = createActivity();
 		
-		this.activity = null;
-		
-		ByteArrayInputStream fileContent = new ByteArrayInputStream("MyFileContent".getBytes());
-		
+		this.activity = null; // prevent deletion
+				
+		byte[] bytes = new byte[Integer.valueOf(1024)];
+		Arrays.fill(bytes, (byte)0);
+		ByteArrayInputStream fileContent = new ByteArrayInputStream(bytes);
 		activity.uploadFile("MyFile", fileContent, "text/plain");
-	}
-	
-	@Test
-	public void testCreateActivityNodeFiles() throws ClientServicesException, XMLException {
-		Activity activity = createActivity();
 		
-		ByteArrayInputStream fileContent = new ByteArrayInputStream("MyFileContent".getBytes());
+		activity = activityService.getActivity(activity.getActivityUuid());
 		
-		activity.uploadFile("MyFile1", fileContent, "text/plain");
-		activity.uploadFile("MyFile2", fileContent, "text/plain");
-		activity.uploadFile("MyFile3", fileContent, "text/plain");
-		activity.uploadFile("MyFile4", fileContent, "text/plain");
-		activity.uploadFile("MyFile5", fileContent, "text/plain");
+		System.out.println(activity.toXmlString());
 	}
 	
 }

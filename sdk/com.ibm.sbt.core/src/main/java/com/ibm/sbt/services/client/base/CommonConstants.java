@@ -60,8 +60,10 @@ public final class CommonConstants {
 	public static final String 	IMAGE_JPG			= "image/jpg";
 	public static final String 	SLUG				= "slug";
 	public static final String 	CONTENT_ENCODING	= "Content-Encoding";
+	public static final String 	TRANSFER_ENCODING	= "Transfer-Encoding";
 	public static final String 	GZIP				= "gzip";
 	public static final String 	TITLE				= "Title";
+	public static final String 	CHUNKED				= "chunked";
 
 	/**
 	 * File extensions
@@ -97,6 +99,7 @@ public final class CommonConstants {
 	 * Content Type
 	 */
 	public static final String CONTENT_TYPE = "Content-Type";
+	public static final String CONTENT_LENGTH = "Content-Length";
 	public static final String APPLICATION_XML = "application/xml";
 	public static final String APPLICATION_ATOM_XML = "application/atom+xml";
 	public static final String TEXT_PLAIN = "text/plain";
@@ -104,6 +107,11 @@ public final class CommonConstants {
 	public static final String APPLICATION_OCTET_STREAM = "application/octet-stream";
 	public static final String BINARY_OCTET_STREAM = "binary/octet-stream";
 	public static final String MULTIPART_RELATED = "multipart/related";
+	public static final String MULTIPART_ATOM = "multipart/related;type=\"application/atom+xml\"";
+	public static final String X_IBM_UPLOAD_METHOD = "X-IBM-UPLOAD-METHOD";
+	public static final String X_IBM_UPLOAD_SIZE = "X-IBM-UPLOAD-SIZE";
+	public static final String X_IBM_UPLOAD_TOKEN = "X-IBM-UPLOAD-TOKEN";
+	public static final String UPLOAD_METHOD_PHASES = "phases";
 
 	/**
 	 * General Services

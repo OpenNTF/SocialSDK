@@ -29,6 +29,7 @@ import com.ibm.commons.util.io.json.JsonParser;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.JsonEntity;
+import com.ibm.sbt.services.client.base.NamedUrlPart;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.endpoints.Endpoint;
 
@@ -133,7 +134,8 @@ public class SubscriberManagementService extends BssService {
      */
     public JsonJavaObject addSubscriber(JsonJavaObject subscriberJson) throws BssException {
 		try {
-			Response serverResponse = createData(API_RESOURCE_SUBSCRIBER, null, JsonHeader, subscriberJson, ClientService.FORMAT_JSON);
+			String serviceUrl = BssUrls.API_RESOURCE_SUBSCRIBER.format(this);
+			Response serverResponse = createData(serviceUrl, null, JsonHeader, subscriberJson, ClientService.FORMAT_JSON);
 			return (serverResponse == null) ? null : (JsonJavaObject)serverResponse.getData();
 		} catch (Exception e) {
 			throw new BssException(e, "Error adding subscriber {0} caused by {1}", subscriberJson, e.getMessage());
@@ -149,7 +151,7 @@ public class SubscriberManagementService extends BssService {
      */
     public JsonEntity getSubscriberById(String subscriberId) throws BssException {
     	try {
-    		String serviceUrl = API_RESOURCE_SUBSCRIBER + "/" + subscriberId;
+    		String serviceUrl = BssUrls.API_RESOURCE_SUBSCRIBER_SUBSCRIBERID.format(this, BssUrls.subscriberId(subscriberId));
 			return getEntity(serviceUrl, null, getJsonFeedHandler());
 		} catch (Exception e) {
 			throw new BssException(e, "Error retrieving subscriber {0} caused by {1}", subscriberId, e.getMessage());
@@ -164,7 +166,7 @@ public class SubscriberManagementService extends BssService {
      */
     public void activateSubscriber(String subscriberId) throws BssException {
     	try {
-    		String serviceUrl = API_RESOURCE_SUBSCRIBER + "/" + subscriberId;
+    		String serviceUrl = BssUrls.API_RESOURCE_SUBSCRIBER_SUBSCRIBERID.format(this, BssUrls.subscriberId(subscriberId));
     		Response response = createData(serviceUrl, (Map<String, String>)null, ActivateSubscriberHeader, (Object)null);
     		
     		// expect a 204
@@ -188,7 +190,7 @@ public class SubscriberManagementService extends BssService {
      */
     public void deleteSubscriber(String subscriberId) throws BssException {
     	try {
-    		String serviceUrl = API_RESOURCE_SUBSCRIBER + "/" + subscriberId;
+    		String serviceUrl = BssUrls.API_RESOURCE_SUBSCRIBER_SUBSCRIBERID.format(this, BssUrls.subscriberId(subscriberId));
     		Response response = deleteData(serviceUrl, null, null);
     		
     		// expect a 204
@@ -212,7 +214,7 @@ public class SubscriberManagementService extends BssService {
     public void updateSubscribeProfile(JsonJavaObject subscriberObject) throws BssException {
     	try {
     		String subscriberId = getSubscriberId(subscriberObject);
-    		String serviceUrl = API_RESOURCE_SUBSCRIBER + "/" + subscriberId;
+    		String serviceUrl = BssUrls.API_RESOURCE_SUBSCRIBER_SUBSCRIBERID.format(this, BssUrls.subscriberId(subscriberId));
     		Response response = updateData(serviceUrl, null, JsonHeader, subscriberObject, null);
     		
     		// expect a 204
@@ -234,7 +236,8 @@ public class SubscriberManagementService extends BssService {
      */
     public EntityList<JsonEntity> getSubscribers() throws BssException {
     	try {
-			return (EntityList<JsonEntity>)getEntities(API_RESOURCE_SUBSCRIBER, null, getJsonFeedHandler());
+			String serviceUrl = BssUrls.API_RESOURCE_SUBSCRIBER.format(this);
+			return (EntityList<JsonEntity>)getEntities(serviceUrl, null, getJsonFeedHandler());
 		} catch (Exception e) {
 			throw new BssException(e, "Error retrieving subscriber list caused by {0}", e.getMessage());
 		}
@@ -251,10 +254,11 @@ public class SubscriberManagementService extends BssService {
      */
     public EntityList<JsonEntity> getSubscribers(int pageNumber, int pageSize) throws BssException {
     	try {
+			String serviceUrl = BssUrls.API_RESOURCE_SUBSCRIBER.format(this);
     		HashMap<String, String> params = new HashMap<String, String>();
     		params.put("_pageNumber", String.valueOf(pageNumber));
     		params.put("_pageSize", String.valueOf(pageSize));
-			return (EntityList<JsonEntity>)getEntities(API_RESOURCE_SUBSCRIBER, params, getJsonFeedHandler());
+			return (EntityList<JsonEntity>)getEntities(serviceUrl, params, getJsonFeedHandler());
 		} catch (Exception e) {
 			throw new BssException(e, "Error retrieving subscriber list page {0},{1} caused by {2}", pageNumber, pageNumber, e.getMessage());
 		}
@@ -269,14 +273,24 @@ public class SubscriberManagementService extends BssService {
      * @throws {@link IllegalArgumentException}
      */
     public EntityList<JsonEntity> getSubscribersByEmail(String email) throws BssException {
+    	return getSubscribersByEmail(email, new HashMap<String, String>());
+    }
+    
+    /**
+     * Get a list of subscribers with a given email address.
+     * 
+     * @param email
+     * @return
+     * @throws BssException
+     * @throws {@link IllegalArgumentException}
+     */
+    public EntityList<JsonEntity> getSubscribersByEmail(String email, HashMap<String, String> params) throws BssException {
     	if (StringUtil.isEmpty(email)) {
     		throw new IllegalArgumentException("Invalid email address");
     	}
     	try {
-    		HashMap<String, String> params = new HashMap<String, String>();
-    		params.put("_namedQuery", "getSubscriberByEmailAddress");
-    		params.put("emailAddress", email);
-			return (EntityList<JsonEntity>)getEntities(API_RESOURCE_SUBSCRIBER, params, getJsonFeedHandler());
+			String serviceUrl = BssUrls.API_RESOURCE_GET_SUBSCRIBERS_BY_EMAIL_ADDRESS.format(this, new NamedUrlPart("emailAddress", email));
+			return (EntityList<JsonEntity>)getEntities(serviceUrl, params, getJsonFeedHandler());
 		} catch (Exception e) {
 			throw new BssException(e, "Error retrieving subscriber list by email {0} caused by {1}", email, e.getMessage());
 		}
@@ -291,14 +305,25 @@ public class SubscriberManagementService extends BssService {
      * @throws {@link IllegalArgumentException}
      */
     public EntityList<JsonEntity> getSubscribersById(String customerId) throws BssException {
+    	return getSubscribersById(customerId, new HashMap<String, String>());
+    }
+  
+    /**
+     * Get a list of all subscribers for a customer with a given ID.
+     * 
+     * @param customerId
+     * @param params
+     * @return
+     * @throws BssException
+     * @throws {@link IllegalArgumentException}
+     */
+    public EntityList<JsonEntity> getSubscribersById(String customerId, Map<String, String> params) throws BssException {
     	if (StringUtil.isEmpty(customerId)) {
     		throw new IllegalArgumentException("Invalid id");
     	}
     	try {
-    		HashMap<String, String> params = new HashMap<String, String>();
-    		params.put("_namedQuery", "getSubscriberByCustomer");
-    		params.put("customer", customerId);
-			return (EntityList<JsonEntity>)getEntities(API_RESOURCE_SUBSCRIBER, params, getJsonFeedHandler());
+			String serviceUrl = BssUrls.API_RESOURCE_GET_SUBSCRIBER_BY_CUSTOMER.format(this, new NamedUrlPart("customerId", customerId));
+			return (EntityList<JsonEntity>)getEntities(serviceUrl, params, getJsonFeedHandler());
 		} catch (Exception e) {
 			throw new BssException(e, "Error retrieving subscriber list by customer id {0} caused by {1}", customerId, e.getMessage());
 		}
@@ -317,7 +342,7 @@ public class SubscriberManagementService extends BssService {
     	try {
     		Map<String, String> params = new HashMap<String, String>();
     		params.put("_force", force ? "true" : "false");
-    		String serviceUrl = API_RESOURCE_SUBSCRIBER + "/" + subscriberId;
+    		String serviceUrl = BssUrls.API_RESOURCE_SUBSCRIBER_SUBSCRIBERID.format(this, BssUrls.subscriberId(subscriberId));
     		Response response = createData(serviceUrl, params, SuspendSubscriberHeader, (Object)null);
     		
     		// expect a 204
@@ -340,7 +365,7 @@ public class SubscriberManagementService extends BssService {
      */
     public void unsuspendSubscriber(String subscriberId) throws BssException {
     	try {
-    		String serviceUrl = API_RESOURCE_SUBSCRIBER + "/" + subscriberId;
+    		String serviceUrl = BssUrls.API_RESOURCE_SUBSCRIBER_SUBSCRIBERID.format(this, BssUrls.subscriberId(subscriberId));
     		Response response = createData(serviceUrl, (Map<String, String>)null, UnsuspendSubscriberHeader, (Object)null);
     		
     		// expect a 204
@@ -364,12 +389,11 @@ public class SubscriberManagementService extends BssService {
      */
     public JsonEntity entitleSubscriber(String subscriberId, String subscriptionId, boolean acceptTOU) throws BssException {
        	try {
-    		Map<String, String> params = new HashMap<String, String>();
-    		params.put("acceptTOU", acceptTOU ? "true" : "false");
-    		String serviceUrl = API_RESOURCE_SUBSCRIBER + "/" + subscriberId + "/subscription/" + subscriptionId;
-    		Response response = createData(serviceUrl, params, EntitleSubscriberHeader, (Object)null);
-    		//HttpEntity entity = response.getResponse().getEntity();
-    		//System.out.println(EntityUtils.toString(entity));
+       		String serviceUrl = BssUrls.API_RESOURCE_ENTITLE_SUBSCRIBER.format(this, 
+       				new NamedUrlPart("subscriberId", subscriberId), 
+       				new NamedUrlPart("subscriptionId", subscriptionId), 
+       				new NamedUrlPart("acceptTOU", acceptTOU ? "true" : "false"));
+    		Response response = createData(serviceUrl, null, EntitleSubscriberHeader, (Object)null);
     		return getJsonFeedHandler().createEntity(response);
 		} catch (Exception e) {
 			throw new BssException(e, "Error entitling subscriber {0} to {1} with {2} caused by {3}", subscriberId, subscriptionId, acceptTOU, e.getMessage());
@@ -388,10 +412,11 @@ public class SubscriberManagementService extends BssService {
      */
     public void revokeSubscriber(String subscriberId, String seatId, boolean force) throws BssException {
        	try {
-    		Map<String, String> params = new HashMap<String, String>();
-    		params.put("_force", force ? "true" : "false");
-    		String serviceUrl = API_RESOURCE_SUBSCRIBER + "/" + subscriberId + "/seat/" + seatId;
-    		Response response = createData(serviceUrl, params, RevokeSubscriberHeader, (Object)null);
+       		String serviceUrl = BssUrls.API_RESOURCE_REVOKE_SUBSCRIBER.format(this, 
+       				new NamedUrlPart("subscriberId", subscriberId), 
+       				new NamedUrlPart("seatId", seatId), 
+       				new NamedUrlPart("_force", force ? "true" : "false"));
+    		Response response = createData(serviceUrl, null, RevokeSubscriberHeader, (Object)null);
     		
     		// expect a 204
     		int statusCode = response.getResponse().getStatusLine().getStatusCode();

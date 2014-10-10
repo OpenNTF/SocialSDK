@@ -26,7 +26,7 @@ define([ "../../declare", "../../store/AtomStore", "dojo/_base/lang", "dojo/_bas
      */
     var _Grid = declare([ _TemplatedWidget ], {
 
-        templatePath: GridTemplate,
+        templateString: GridTemplate,
         
         /*
          * Creates an instance of an atom store.

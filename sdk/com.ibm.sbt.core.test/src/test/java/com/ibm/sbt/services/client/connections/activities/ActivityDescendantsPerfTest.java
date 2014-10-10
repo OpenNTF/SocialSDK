@@ -43,7 +43,7 @@ public class ActivityDescendantsPerfTest extends BaseActivityServiceTest {
 		List<ActivityNode> nodes = createActivityDescendants(activity);
 		
 		Map<String, String> params = new HashMap<String, String>();
-		EntityList<ActivityNode> activityNodes = activityService.getActivityNodeDescendants(activity.getActivityUuid(), params);
+		EntityList<ActivityNode> activityNodes = activityService.getActivityDescendants(activity.getActivityUuid(), params);
 		dumpNodes(activityNodes);
 		
 		Assert.assertEquals(5, activityNodes.size());
@@ -60,7 +60,7 @@ public class ActivityDescendantsPerfTest extends BaseActivityServiceTest {
 		
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("since", "" + node.getUpdated().getTime());
-		EntityList<ActivityNode> activityNodes = activityService.getActivityNodeDescendants(activity.getActivityUuid(), params);
+		EntityList<ActivityNode> activityNodes = activityService.getActivityDescendants(activity.getActivityUuid(), params);
 		System.out.println("Nodes:" + activityNodes.size() + " updated since: " + dateFormat.format(node.getUpdated()));
 		dumpNodes(activityNodes);
 		
@@ -78,7 +78,7 @@ public class ActivityDescendantsPerfTest extends BaseActivityServiceTest {
 		
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("until", "" + node.getUpdated().getTime());
-		EntityList<ActivityNode> activityNodes = activityService.getActivityNodeDescendants(activity.getActivityUuid(), params);
+		EntityList<ActivityNode> activityNodes = activityService.getActivityDescendants(activity.getActivityUuid(), params);
 		System.out.println("Nodes:" + activityNodes.size() + " updated until: " + dateFormat.format(node.getUpdated()));
 		dumpNodes(activityNodes);
 		
@@ -98,7 +98,7 @@ public class ActivityDescendantsPerfTest extends BaseActivityServiceTest {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("since", "" + sinceNode.getUpdated().getTime());
 		params.put("until", "" + untilNode.getUpdated().getTime());
-		EntityList<ActivityNode> activityNodes = activityService.getActivityNodeDescendants(activity.getActivityUuid(), params);
+		EntityList<ActivityNode> activityNodes = activityService.getActivityDescendants(activity.getActivityUuid(), params);
 		System.out.println("Nodes:" + activityNodes.size() + 
 				" updated since: " + dateFormat.format(sinceNode.getUpdated()) +
 				" until: " + dateFormat.format(untilNode.getUpdated()));
@@ -123,7 +123,7 @@ public class ActivityDescendantsPerfTest extends BaseActivityServiceTest {
 		params.put("rangeId", "created");
 		System.out.println("since="+sinceNode.getPublished().getTime());
 		System.out.println("until="+untilNode.getPublished().getTime());
-		EntityList<ActivityNode> activityNodes = activityService.getActivityNodeDescendants(activity.getActivityUuid(), params);
+		EntityList<ActivityNode> activityNodes = activityService.getActivityDescendants(activity.getActivityUuid(), params);
 		System.out.println("Nodes:" + activityNodes.size() + 
 				" created since: " + dateFormat.format(sinceNode.getPublished()) +
 				" until: " + dateFormat.format(untilNode.getPublished()));

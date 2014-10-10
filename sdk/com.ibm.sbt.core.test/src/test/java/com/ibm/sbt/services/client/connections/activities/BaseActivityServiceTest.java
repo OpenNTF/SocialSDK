@@ -45,6 +45,7 @@ import com.ibm.sbt.test.lib.TestEnvironment;
 public class BaseActivityServiceTest extends BaseUnitTest {
 
 	private BasicEndpoint basicEndpoint;
+	private BasicEndpoint altEndpoint;
 	protected ActivityService activityService;
 	protected Activity activity;
 	protected List<Activity> activities;
@@ -108,6 +109,21 @@ public class BaseActivityServiceTest extends BaseUnitTest {
     	return basicEndpoint;
 	}
 	
+	protected BasicEndpoint getAltEndpoint() {
+    	if (altEndpoint == null && System.getProperty("ServerUrl") != null) {
+	    	String url = System.getProperty("ServerUrl");
+	    	String user = System.getProperty("UserNameAlt");
+	    	String password = System.getProperty("PasswordAlt");
+	    	
+	    	altEndpoint = new BasicEndpoint();
+	    	altEndpoint.setUrl(url);
+	    	altEndpoint.setForceTrustSSLCertificate(true);
+	    	altEndpoint.setUser(user);
+	    	altEndpoint.setPassword(password);
+    	}
+    	return altEndpoint;
+	}
+
 	protected String getMemberId() {
 		String memberId = System.getProperty("MemberId");
 		if (StringUtil.isEmpty(memberId)) {
@@ -119,6 +135,10 @@ public class BaseActivityServiceTest extends BaseUnitTest {
 	protected Node readXml(String fileName) throws IOException, XMLException {
 		InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("com/ibm/sbt/services/client/connections/activities/"+fileName);
 		return DOMUtil.createDocument(inputStream);
+	}
+		
+	protected InputStream readFile(String fileName) throws IOException, XMLException {
+		return this.getClass().getClassLoader().getResourceAsStream("com/ibm/sbt/services/client/connections/activities/"+fileName);
 	}
 		
     protected String createActivityTitle() {
@@ -182,6 +202,27 @@ public class BaseActivityServiceTest extends BaseUnitTest {
 		return activityService.createActivity(activity);
     }
         	
+    protected Activity createActivity(String title, List<String> tags) throws ClientServicesException {
+		activity = new Activity();
+		activity.setTitle(title);
+		activity.setTags(tags);
+		activity.setPriority(Activity.PRIORITY_NORMAL);
+		activity.setSummary("Goal for " + title);
+		
+		return activityService.createActivity(activity);
+    }
+        	
+    protected Activity createActivity(String title, List<String> tags, boolean completed) throws ClientServicesException {
+		activity = new Activity();
+		activity.setTitle(title);
+		activity.setTags(tags);
+		activity.setPriority(Activity.PRIORITY_NORMAL);
+		activity.setSummary("Goal for " + title);
+		activity.setCompleted(completed);
+		
+		return activityService.createActivity(activity);
+    }
+        	
     protected ActivityNode createActivityNode() throws ClientServicesException {
 		return createActivityNode(createActivityNodeTitle());
     }
@@ -194,6 +235,7 @@ public class BaseActivityServiceTest extends BaseUnitTest {
 		ActivityNode activityNode = new ActivityNode();
 		activityNode.setActivityUuid(activity.getActivityUuid());
 		activityNode.setTitle(title);
+		activityNode.setType(ActivityNode.TYPE_ENTRY);
 		return activityService.createActivityNode(activityNode);
     }
         	
@@ -210,6 +252,15 @@ public class BaseActivityServiceTest extends BaseUnitTest {
 		ActivityNode activityNode = new ActivityNode();
 		activityNode.setActivityUuid(activityUuid);
 		activityNode.setTitle(title);
+		activityNode.setTags(tags);
+		return activityService.createActivityNode(activityNode);
+    }
+    
+    protected ActivityNode createActivityNode(String activityUuid, String title, String type, List<String> tags) throws ClientServicesException {
+		ActivityNode activityNode = new ActivityNode();
+		activityNode.setActivityUuid(activityUuid);
+		activityNode.setTitle(title);
+		activityNode.setType(type);
 		activityNode.setTags(tags);
 		return activityService.createActivityNode(activityNode);
     }

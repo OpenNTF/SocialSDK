@@ -45,9 +45,10 @@ public enum ActivityUrls implements URLContainer {
 	ACTIVITY_NODE(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/activitynode?activityNodeUuid={activityNodeUuid}")), // Retrieve, update, deleting activity nodes programmatically
 	TRASHED_ACTIVITY_NODE(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/trashednode?activityNodeUuid={activityNodeUuid}")), // Restoring activity nodes programmatically
 	ACTIVITY_ACL(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/acl?activityUuid={activityUuid}")), // Adding an activity member programmatically
+	ACTIVITY_HISTORY(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/history?activityUuid={activityUuid}")), // Retrieving the history for an activity
 	ACTIVITY_MEMBER(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/acl?activityUuid={activityUuid}&memberid={memberId}")), // Retrieve, update and delete an activity member programmatically
 	DESCENDANTS(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/descendants?activityNodeUuid={activityNodeUuid}")), // Getting a feed of the Activity descendants
-	ACTIVITY_DESCENDANTS(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/activitydescendants?nodeUuid={activityNodeUuid}")), // Getting a feed of the Activity descendants
+	ACTIVITY_DESCENDANTS(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/activitydescendants?activityUuid={activityUuid}")), // Getting a feed of the Activity descendants
 	ACTIVITY_NODECHILDREN(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/nodechildren?activityNodeUuid={activityNodeUuid}")), // Getting a feed of the Activity descendants
     MOVE_FIELD(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/moveField?destNodeUuid={destinationUuid}&fieldUuid={fieldUuid}")), // Move a field from an ActivityNode to another
     MOVE_NODE(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/moveEntry?activityNodeUuid={activityNodeUuid}&destNodeUuid={destinationUuid}")), // Move a field from an ActivityNode to another
@@ -55,6 +56,10 @@ public enum ActivityUrls implements URLContainer {
 	;
 	
 	private URLBuilder builder;
+	
+	static final public NamedUrlPart nodePart(String nodeUuid) {
+		return new NamedUrlPart("nodeUuid", nodeUuid);
+	}
 	
 	static final public NamedUrlPart activityNodePart(String activityNodeUuid) {
 		return new NamedUrlPart("activityNodeUuid", activityNodeUuid);

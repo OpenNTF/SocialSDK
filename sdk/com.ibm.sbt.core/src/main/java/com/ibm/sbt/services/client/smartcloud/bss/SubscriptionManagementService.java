@@ -29,6 +29,7 @@ import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.JsonEntity;
+import com.ibm.sbt.services.client.base.NamedUrlPart;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.endpoints.Endpoint;
 
@@ -132,7 +133,8 @@ public class SubscriptionManagementService extends BssService {
      */
     public EntityList<JsonEntity> createSubscription(JsonJavaObject orderObject) throws BssException {
 		try {
-			Response serverResponse = createData(API_RESOURCE_SUBSCRIPTION, null, JsonHeader, orderObject, ClientService.FORMAT_JSON);
+			String serviceUrl = BssUrls.API_RESOURCE_SUBSCRIPTION.format(this);
+			Response serverResponse = createData(serviceUrl, null, JsonHeader, orderObject, ClientService.FORMAT_JSON);
 			
 			IFeedHandler<JsonEntity> jsonHandler = getJsonFeedHandler();
 			return jsonHandler.createEntityList(serverResponse);
@@ -150,7 +152,7 @@ public class SubscriptionManagementService extends BssService {
      */
     public JsonEntity getSubscriptionById(String subscriptionId) throws BssException {
     	try {
-    		String serviceUrl = API_RESOURCE_SUBSCRIPTION + "/" + subscriptionId;
+    		String serviceUrl = BssUrls.API_RESOURCE_SUBSCRIPTION_SUBSCRIPTIONID.format(this, new NamedUrlPart("subscriptionId", subscriptionId));
 			return getEntity(serviceUrl, null, getJsonFeedHandler());
 		} catch (Exception e) {
 			throw new BssException(e, "Error retrieving subscription {0} caused by {1}", subscriptionId, e.getMessage());
@@ -170,10 +172,9 @@ public class SubscriptionManagementService extends BssService {
     		throw new IllegalArgumentException("Invalid id");
     	}
     	try {
-    		HashMap<String, String> params = new HashMap<String, String>();
-    		params.put("_namedQuery", "getSubscriptionByCustomer");
-    		params.put("customerId", customerId);
-			return (EntityList<JsonEntity>)getEntities(API_RESOURCE_SUBSCRIPTION, params, getJsonFeedHandler());
+    		String serviceUrl = BssUrls.API_RESOURCE_GET_SUBSCRIPTION_BY_CUSTOMERID.format(this, 
+    				new NamedUrlPart("customerId", customerId)); 
+			return (EntityList<JsonEntity>)getEntities(serviceUrl, null, getJsonFeedHandler());
 		} catch (Exception e) {
 			throw new BssException(e, "Error retrieving subscription list by customer id {0} caused by {1}", customerId, e.getMessage());
 		}
@@ -188,7 +189,8 @@ public class SubscriptionManagementService extends BssService {
      */
     public EntityList<JsonEntity> getSubscriptions() throws BssException {
     	try {
-			return (EntityList<JsonEntity>)getEntities(API_RESOURCE_SUBSCRIPTION, null, getJsonFeedHandler());
+			String serviceUrl = BssUrls.API_RESOURCE_SUBSCRIPTION.format(this);
+			return (EntityList<JsonEntity>)getEntities(serviceUrl, null, getJsonFeedHandler());
 		} catch (Exception e) {
 			throw new BssException(e, "Error retrieving subscription list caused by {0}", e.getMessage());
 		}
@@ -208,7 +210,8 @@ public class SubscriptionManagementService extends BssService {
     		HashMap<String, String> params = new HashMap<String, String>();
     		params.put("_pageNumber", String.valueOf(pageNumber));
     		params.put("_pageSize", String.valueOf(pageSize));
-			return (EntityList<JsonEntity>)getEntities(API_RESOURCE_SUBSCRIPTION, params, getJsonFeedHandler());
+			String serviceUrl = BssUrls.API_RESOURCE_SUBSCRIPTION.format(this);
+			return (EntityList<JsonEntity>)getEntities(serviceUrl, params, getJsonFeedHandler());
 		} catch (Exception e) {
 			throw new BssException(e, "Error retrieving subscription list for page {0},{1} caused by {2}", pageNumber, pageSize, e.getMessage());
 		}
@@ -225,7 +228,7 @@ public class SubscriptionManagementService extends BssService {
      */
     public void suspendSubscription(String subscriptionId) throws BssException {
     	try {
-    		String serviceUrl = API_RESOURCE_SUBSCRIPTION + "/" + subscriptionId;
+    		String serviceUrl = BssUrls.API_RESOURCE_SUBSCRIPTION_SUBSCRIPTIONID.format(this, new NamedUrlPart("subscriptionId", subscriptionId));
     		Response response = createData(serviceUrl, null, SuspendSubscriptionHeader, (Object)null);
     		
     		// expect a 204
@@ -249,7 +252,7 @@ public class SubscriptionManagementService extends BssService {
      */
     public void unsuspendSubscription(String subscriptionId) throws BssException {
     	try {
-    		String serviceUrl = API_RESOURCE_SUBSCRIPTION + "/" + subscriptionId;
+    		String serviceUrl = BssUrls.API_RESOURCE_SUBSCRIPTION_SUBSCRIPTIONID.format(this, new NamedUrlPart("subscriptionId", subscriptionId));
     		Response response = createData(serviceUrl, (Map<String, String>)null, UnsuspendSubscriptionHeader, (Object)null);
     		
     		// expect a 204
@@ -273,7 +276,7 @@ public class SubscriptionManagementService extends BssService {
      */
     public void cancelSubscription(String subscriptionId) throws BssException {
     	try {
-    		String serviceUrl = API_RESOURCE_SUBSCRIPTION + "/" + subscriptionId;
+    		String serviceUrl = BssUrls.API_RESOURCE_SUBSCRIPTION_SUBSCRIPTIONID.format(this, new NamedUrlPart("subscriptionId", subscriptionId));
     		Response response = deleteData(serviceUrl, null, null);
     		
     		// expect a 204
@@ -296,7 +299,7 @@ public class SubscriptionManagementService extends BssService {
     public void updateSubscription(JsonJavaObject subscriptionObject) throws BssException {
     	try {
     		String subscriptionId = getSubscriptionId(subscriptionObject);
-    		String serviceUrl = API_RESOURCE_SUBSCRIPTION + "/" + subscriptionId;
+    		String serviceUrl = BssUrls.API_RESOURCE_SUBSCRIPTION_SUBSCRIPTIONID.format(this, new NamedUrlPart("subscriptionId", subscriptionId));
     		Response response = updateData(serviceUrl, null, JsonHeader, subscriptionObject, null);
     		
     		// expect a 204
@@ -322,7 +325,8 @@ public class SubscriptionManagementService extends BssService {
      */
     public JsonEntity getSeat(String subscriptionId, String seatId) throws BssException {
     	try {
-    		String serviceUrl = API_RESOURCE_SUBSCRIPTION + "/" + subscriptionId + API_SEAT + seatId;
+    		String serviceUrl = BssUrls.API_RESOURCE_SUBSCRIPTION_SEAT.format(this, 
+    				new NamedUrlPart("subscriptionId", subscriptionId), new NamedUrlPart("seatId", seatId));
     		return getEntity(serviceUrl, null, getJsonFeedHandler());
 		} catch (Exception e) {
 			throw new BssException(e, "Error retrieving a seat caused by {0}", e.getMessage());
@@ -342,7 +346,8 @@ public class SubscriptionManagementService extends BssService {
      */
     public void changeQuota(String subscriptionId, String seatId, JsonJavaObject seatObject) throws BssException {
     	try {
-    		String serviceUrl = API_RESOURCE_SUBSCRIPTION + "/" + subscriptionId + API_SEAT + seatId;
+    		String serviceUrl = BssUrls.API_RESOURCE_SUBSCRIPTION_SEAT.format(this, 
+    				new NamedUrlPart("subscriptionId", subscriptionId), new NamedUrlPart("seatId", seatId));
     		createData(serviceUrl, null, ChangeQuotaHeaders, seatObject, ClientService.FORMAT_JSON);
 		} catch (Exception e) {
 			throw new BssException(e, "Error changing quota caused by {0}", e.getMessage());

@@ -45,8 +45,8 @@ public class DeleteSubscriberTest extends BaseBssTest {
 				jsonEntity = subscriberManagement.getSubscriberById(subscriberId);
 				Assert.assertNull("Able to retrieve deleted subscriber: "+subscriberId, jsonEntity);				
 			} catch (BssException be) {
-				String responseCode = be.getResponseCode();
-				Assert.assertEquals("404", responseCode);
+				int responseCode = be.getResponseStatusCode();
+				Assert.assertEquals(404, responseCode);
 			}
 				
     	} catch (BssException be) {

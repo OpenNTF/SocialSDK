@@ -16,6 +16,7 @@
 package com.ibm.sbt.services.client.connections.activities;
 
 import java.io.InputStream;
+import java.util.List;
 
 import org.w3c.dom.Node;
 
@@ -347,7 +348,7 @@ public class Activity extends NodeEntity {
 	 */
 	public EntityList<ActivityNode> getDescendants() throws ClientServicesException {
 		ActivityService service = getActivityService();
-		return service.getActivityNodeDescendants(this.getActivityUuid());
+		return service.getActivityDescendants(this.getActivityUuid());
 	}
 
 	//------------------------------------------------------------------------------------------------------------------
@@ -426,6 +427,20 @@ public class Activity extends NodeEntity {
 			throw new ClientServicesException(null, "No activity service associated with this activity.");
 		}
 		return activityService.addMember(this, member);
+	}
+	
+	/**
+	 * Add activity members.
+	 * 
+	 * @param members
+	 * @return
+	 */
+	public void addMembers(List<Member> members) throws ClientServicesException {
+		ActivityService activityService = getActivityService();
+		if (activityService == null) {
+			throw new ClientServicesException(null, "No activity service associated with this activity.");
+		}
+		activityService.addMembers(this, members);
 	}
 	
 	/**
@@ -509,7 +524,7 @@ public class Activity extends NodeEntity {
 		if (activityService == null) {
 			throw new ClientServicesException(null, "No activity service associated with this activity.");
 		}
-		activityService.uploadFile(this, fileName, fileContent, mimeType);
+		activityService.uploadFile(getActivityUuid(), fileName, fileContent, mimeType);
 	}
 	
 }

@@ -2,6 +2,7 @@ package com.ibm.sbt.services.client.connections.activities;
 
 import static org.junit.Assert.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Test;
@@ -21,9 +22,9 @@ public class ActivityAddMembers extends BaseActivityServiceTest {
 		Member member2 = new Member();
 		member.setId(memberId);
 		member2.setId(memberId2);
-		Member[] members = {member,member2};
+		Member[] members = { member, member2 };
 		Activity activity = createActivity();
-		activityService.addMembers(activity, members);
+		activityService.addMembers(activity, Arrays.asList(members));
 		List<Member> members2 = activityService.getMembers(activity.getActivityUuid());
 		assertTrue(members2.size() == members.length);
 	}
@@ -37,7 +38,7 @@ public class ActivityAddMembers extends BaseActivityServiceTest {
 		Member[] members = {member,member2};
 		Activity activity = createActivity();
 		try{
-			activityService.addMembers(activity, members);
+			activityService.addMembers(activity, Arrays.asList(members));
 		}
 		catch(ClientServicesException e){
 			assertTrue(404 == e.getResponseStatusCode());
@@ -55,7 +56,7 @@ public class ActivityAddMembers extends BaseActivityServiceTest {
 		Member[] members = {member,member2};
 		Activity activity = createActivity();
 		try{
-			activityService.addMembers("1234322", members);
+			activityService.addMembers("1234322", Arrays.asList(members));
 		}
 		catch(ClientServicesException e){
 			//Activities return a 200 when the activity uuid is not found

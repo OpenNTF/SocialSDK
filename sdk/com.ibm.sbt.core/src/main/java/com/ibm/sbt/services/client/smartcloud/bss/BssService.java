@@ -42,7 +42,8 @@ public class BssService extends JsonService {
 	public static String PROPERTY_ID = "Id";
 	
 	public static String RESELLER_ORDER = "RESELLER-ORDER";
-	
+
+	/*
 	public static String API_RESOURCE_CUSTOMER = "/api/bss/resource/customer";
 	public static String API_RESOURCE_SUBSCRIBER = "/api/bss/resource/subscriber";
 	public static String API_RESOURCE_SUBSCRIPTION = "/api/bss/resource/subscription";
@@ -53,6 +54,9 @@ public class BssService extends JsonService {
 	public static String API_AUTHENTICATION_CHANGEPASSWORD = "/api/bss/service/authentication/changePassword";
 	public static String API_AUTHENTICATION_RESETPASSWORD = "/api/bss/service/authentication/resetPassword";
 	public static String API_AUTHENTICATION_SETONETIMEPASSWORD = "/api/bss/service/authentication/setOneTimePassword";
+	public static String API_RESOURCE_WORKFLOW = "/api/bss/resource/workflow";
+	public static String API_AUTHENTICATION_SETUSERPASSWORD = "/api/bss/service/authentication/setUserPassword";
+	*/
 	
 	public enum DurationUnits {
 		YEARS, MONTHS, DAYS

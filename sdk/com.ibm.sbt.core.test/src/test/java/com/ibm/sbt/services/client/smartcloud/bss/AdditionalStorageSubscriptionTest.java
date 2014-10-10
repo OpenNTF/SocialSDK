@@ -35,8 +35,12 @@ public class AdditionalStorageSubscriptionTest extends BaseBssTest {
     		// Step 1. Create customer
     		String customerId = registerCustomer();
     		
+    		// prevent deletion
+    		setCustomerId(null);
+
     		// Step 2. Add Subscriber
-    		String subscriberId = addSubscriber(customerId);
+    		String subscriberId = addAdministrator(customerId);
+    		System.out.println(getSubscriberById(subscriberId));
 
     		// Step 3. Create "IBM SmartCloud Connections" Subscription
     		String engageSubscriptionId = createSubscription(customerId, 3, "D0NWLLL", 5);
@@ -44,7 +48,7 @@ public class AdditionalStorageSubscriptionTest extends BaseBssTest {
     		System.out.println("D0NWLLL : " + getSubscriptionById(engageSubscriptionId).toJsonString());
 
     		// Step 4. Create Extra Storage Subscription
-    		String storageSubscriptionId = createSubscription(customerId, 3, "D100PLL", 6);
+    		String storageSubscriptionId = createSubscription(customerId, 3, "D100PLL", 100);
     		System.out.println(storageSubscriptionId);
     		System.out.println("D100PLL : " + getSubscriptionById(storageSubscriptionId).toJsonString());
 
@@ -54,7 +58,7 @@ public class AdditionalStorageSubscriptionTest extends BaseBssTest {
     		// Step 8. Entitle subscriber
     		entitleSubscriber(subscriberId, engageSubscriptionId, true);
     		entitleSubscriber(subscriberId, storageSubscriptionId, true);
-    		
+
     		// Optional: Check seats
     		JsonEntity jsonEntity = getSubscriberManagementService().getSubscriberById(subscriberId);
     		JsonJavaObject rootObject = jsonEntity.getJsonObject();
@@ -71,7 +75,7 @@ public class AdditionalStorageSubscriptionTest extends BaseBssTest {
 
     		// Step 9. Change quota
     		seatJson = seatEntity.getJsonObject();
-    		seatJson.getAsObject("Seat").putInt("EntitlementQuantityAllocated", 1);
+    		seatJson.getAsObject("Seat").putInt("EntitlementQuantityAllocated", 25);
     		getSubscriptionManagementService().changeQuota(storageSubscriptionId, seatId, seatJson);
     		
     		// Optional: Check seats

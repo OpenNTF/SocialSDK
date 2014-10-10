@@ -35,7 +35,7 @@ public class RegisterCustomerTest extends BaseBssTest {
         	
         	getCustomerManagementService().registerCustomer(customer);
 
-    		Assert.fail("Expected bad request response");
+    		fail("Expected bad request response");
     		
     	} catch (BssException be) {
     		// expecting this exception
@@ -49,7 +49,7 @@ public class RegisterCustomerTest extends BaseBssTest {
     		Assert.assertEquals("BZSAP1033E", be.getMessageId());
     	} catch (Exception e) {
     		e.printStackTrace();
-    		Assert.fail("Error registering customer caused by: "+e.getMessage());    		
+    		fail("Error registering customer caused by: "+e.getMessage());    		
     	}
     }
 	
@@ -68,7 +68,7 @@ public class RegisterCustomerTest extends BaseBssTest {
         	        .setOrganizationState("Massachusetts")
         	        .setContactFamilyName("Ninty")
         	        .setContactGivenName("Joe")
-        	        .setContactEmailAddress(getUniqueEmail())
+        	        .setContactEmailAddress(getUniqueEmail("0"))
         	        .setContactNamePrefix("Mr")
         	        .setContactEmployeeNumber("6A77777")
         	        .setContactLanguagePreference("EN_US")
@@ -95,10 +95,10 @@ public class RegisterCustomerTest extends BaseBssTest {
     		JsonJavaObject jsonObject = be.getResponseJson();
     		System.err.println(jsonObject);
     		//be.printStackTrace();
-    		Assert.fail("Error registering customer because: "+jsonObject);
+    		fail("Error registering customer because: "+jsonObject);
     	} catch (Exception e) {
     		e.printStackTrace();
-    		Assert.fail("Error registering customer caused by: "+e.getMessage());    		
+    		fail("Error registering customer caused by: "+e.getMessage());    		
     	}
     }
 	

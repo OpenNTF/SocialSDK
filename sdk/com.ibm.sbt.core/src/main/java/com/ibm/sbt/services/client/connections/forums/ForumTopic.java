@@ -16,7 +16,10 @@
 
 package com.ibm.sbt.services.client.connections.forums;
 
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
+
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import org.w3c.dom.Node;
@@ -25,8 +28,11 @@ import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.services.client.base.AtomXPath;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
+import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
+import com.ibm.sbt.services.client.connections.common.Person;
 import com.ibm.sbt.services.client.connections.forums.model.BaseForumEntity;
 import com.ibm.sbt.services.client.connections.forums.model.FlagType;
 
@@ -310,6 +316,7 @@ public class ForumTopic extends BaseForumEntity{
 		return pin;
 
 	}
+	
 	/**
 	 * Check if a Topic is locked
 	 *
@@ -329,6 +336,7 @@ public class ForumTopic extends BaseForumEntity{
 		}
 		return lock;
 	}
+	
 	/**
 	 * Check if a Topic is a question
 	 *
@@ -348,6 +356,7 @@ public class ForumTopic extends BaseForumEntity{
 		}
 		return question;
 	}
+	
 	/**
 	 * Check if a Topic is answered
 	 *
@@ -367,9 +376,30 @@ public class ForumTopic extends BaseForumEntity{
 		}
 		return answered;
 	}
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public List<String> getTags() {
 		return getBaseTags();
 	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public Person getContentModifiedBy() {
+		return new Person(getService(), new XmlDataHandler((Node)getDataHandler().getData(), 
+	    		nameSpaceCtx, (XPathExpression)ForumsXPath.contentModifiedBy.getPath()));
+	}
 
+	/**
+	 * 
+	 * @return
+	 */
+    public Date getContentModifiedWhen() {
+        return this.getAsDate(ForumsXPath.contentModifiedWhen);
+    }
 
 }

@@ -22,8 +22,6 @@ import static org.junit.Assert.fail;
 
 import java.util.Date;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.ibm.commons.xml.XMLException;
@@ -212,6 +210,130 @@ public class ActivityFeedMoveTest extends BaseActivityServiceTest {
     }
     
     @Test
+    public void testMoveReplyThread() throws ClientServicesException{
+        activity = new Activity();
+        activity.setTitle(createActivityTitle());
+        activity = activityService.createActivity(activity);
+
+        ActivityNode entryNode = new ActivityNode();
+        entryNode.setActivityUuid(activity.getActivityUuid());
+        entryNode.setTitle("Entry ActivityNode A");
+        entryNode.setType("ENTRY");
+        activityService.createActivityNode(entryNode);
+
+        ActivityNode replyNode = createActivityNode();
+        replyNode.setActivityUuid(activity.getActivityUuid());
+        replyNode.setTitle("Reply ActivityNode 1A");
+        replyNode.setType("REPLY");
+        replyNode.setInReplyTo(entryNode);
+        activityService.createActivityNode(replyNode);
+
+        ActivityNode replyNode2 = createActivityNode();
+        replyNode2.setActivityUuid(activity.getActivityUuid());
+        replyNode2.setTitle("Reply ActivityNode 2A");
+        replyNode2.setType("REPLY");
+        replyNode2.setInReplyTo(replyNode);
+        activityService.createActivityNode(replyNode2);
+
+        ActivityNode replyNode3 = createActivityNode();
+        replyNode3.setActivityUuid(activity.getActivityUuid());
+        replyNode3.setTitle("Reply ActivityNode 3A");
+        replyNode3.setType("REPLY");
+        replyNode3.setInReplyTo(replyNode2);
+        activityService.createActivityNode(replyNode3);
+
+        ActivityNode replyNode4 = createActivityNode();
+        replyNode4.setActivityUuid(activity.getActivityUuid());
+        replyNode4.setTitle("Reply ActivityNode 4A");
+        replyNode4.setType("REPLY");
+        replyNode4.setInReplyTo(replyNode3);
+        activityService.createActivityNode(replyNode4);
+
+        Activity activityB = new Activity();
+        activityB.setTitle(createActivityTitle());
+        activityB = activityService.createActivity(activityB);
+
+        ActivityNode entryNodeB = new ActivityNode();
+        entryNodeB.setActivityUuid(activityB.getActivityUuid());
+        entryNodeB.setTitle("Entry ActivityNode B");
+        entryNodeB.setType("ENTRY");
+        activityService.createActivityNode(entryNodeB);
+
+        ActivityNode replyNodeB = createActivityNode();
+        replyNodeB.setActivityUuid(activityB.getActivityUuid());
+        replyNodeB.setTitle("Reply ActivityNode 1B");
+        replyNodeB.setType("REPLY");
+        replyNodeB.setInReplyTo(entryNodeB);
+        activityService.createActivityNode(replyNodeB);
+
+        ActivityNode replyNode2B = createActivityNode();
+        replyNode2B.setActivityUuid(activityB.getActivityUuid());
+        replyNode2B.setTitle("Reply ActivityNode 2B");
+        replyNode2B.setType("REPLY");
+        replyNode2B.setInReplyTo(replyNodeB);
+        activityService.createActivityNode(replyNode2B);
+
+        ActivityNode replyNode3B = createActivityNode();
+        replyNode3B.setActivityUuid(activityB.getActivityUuid());
+        replyNode3B.setTitle("Reply ActivityNode 3B");
+        replyNode3B.setType("REPLY");
+        replyNode3B.setInReplyTo(replyNode2B);
+        activityService.createActivityNode(replyNode3B);
+
+        ActivityNode replyNode4B = createActivityNode();
+        replyNode4B.setActivityUuid(activityB.getActivityUuid());
+        replyNode4B.setTitle("Reply ActivityNode 4B");
+        replyNode4B.setType("REPLY");
+        replyNode4B.setInReplyTo(replyNode3B);
+        activityService.createActivityNode(replyNode4B);
+
+        replyNode = activityService.moveNode(replyNode.getActivityNodeUuid(), replyNode4B.getActivityNodeUuid());
+        
+        ActivityNode threadNode = activityService.getActivityNode(replyNode4.getActivityNodeUuid());
+        assertEquals(replyNode4.getActivityNodeUuid(), threadNode.getActivityNodeUuid());
+        assertEquals("Reply ActivityNode 4A", threadNode.getTitle());
+
+        threadNode = activityService.getActivityNode(threadNode.getInReplyTo().getHref().replaceAll(".*Uuid=", ""));
+        assertEquals(replyNode3.getActivityNodeUuid(), threadNode.getActivityNodeUuid());
+        assertEquals("Reply ActivityNode 3A", threadNode.getTitle());
+
+        threadNode = activityService.getActivityNode(threadNode.getInReplyTo().getHref().replaceAll(".*Uuid=", ""));
+        assertEquals(replyNode2.getActivityNodeUuid(), threadNode.getActivityNodeUuid());
+        assertEquals("Reply ActivityNode 2A", threadNode.getTitle());
+
+        threadNode = activityService.getActivityNode(threadNode.getInReplyTo().getHref().replaceAll(".*Uuid=", ""));
+        assertEquals(replyNode.getActivityNodeUuid(), threadNode.getActivityNodeUuid());
+        assertEquals("Reply ActivityNode 1A", threadNode.getTitle());
+
+        threadNode = activityService.getActivityNode(threadNode.getInReplyTo().getHref().replaceAll(".*Uuid=", ""));
+        assertEquals(replyNode4B.getActivityNodeUuid(), threadNode.getActivityNodeUuid());
+        assertEquals("Reply ActivityNode 4B", threadNode.getTitle());
+
+        threadNode = activityService.getActivityNode(threadNode.getInReplyTo().getHref().replaceAll(".*Uuid=", ""));
+        assertEquals(replyNode3B.getActivityNodeUuid(), threadNode.getActivityNodeUuid());
+        assertEquals("Reply ActivityNode 3B", threadNode.getTitle());
+
+        threadNode = activityService.getActivityNode(threadNode.getInReplyTo().getHref().replaceAll(".*Uuid=", ""));
+        assertEquals(replyNode2B.getActivityNodeUuid(), threadNode.getActivityNodeUuid());
+        assertEquals("Reply ActivityNode 2B", threadNode.getTitle());
+
+        threadNode = activityService.getActivityNode(threadNode.getInReplyTo().getHref().replaceAll(".*Uuid=", ""));
+        assertEquals(replyNodeB.getActivityNodeUuid(), threadNode.getActivityNodeUuid());
+        assertEquals("Reply ActivityNode 1B", threadNode.getTitle());
+
+        threadNode = activityService.getActivityNode(threadNode.getInReplyTo().getHref().replaceAll(".*Uuid=", ""));
+        assertEquals(entryNodeB.getActivityNodeUuid(), threadNode.getActivityNodeUuid());
+        assertEquals("Entry ActivityNode B", threadNode.getTitle());
+    	
+		if (activityB != null) {
+			try {
+				activityService.deleteActivity(activityB);
+			} catch (Exception e) {
+			}
+		}
+    }
+    
+    @Test
     public void testMoveReply() throws ClientServicesException, XMLException {
 
         activity = new Activity();
@@ -237,22 +359,17 @@ public class ActivityFeedMoveTest extends BaseActivityServiceTest {
         replyNode.setInReplyTo(entryNode);
         activityService.createActivityNode(replyNode);
 
-        try {
-            replyNode = activityService.moveNode(replyNode.getActivityNodeUuid(), activity.getActivityUuid());
+        replyNode = activityService.moveNode(replyNode.getActivityNodeUuid(), activity.getActivityUuid());
 
-            replyNode = activityService.moveNode(replyNode.getActivityNodeUuid(),
-                    todoNode.getActivityNodeUuid());
-            assertEquals(todoNode.getActivityNodeUuid(),
-                    replyNode.getInReplyTo().getHref().replaceAll(".*Uuid=", ""));
-            replyNode = activityService.moveNode(replyNode.getActivityNodeUuid(),
-                    entryNode.getActivityNodeUuid());
-            assertEquals(todoNode.getActivityNodeUuid(),
-                    replyNode.getInReplyTo().getHref().replaceAll(".*Uuid=", ""));
+        replyNode = activityService.moveNode(replyNode.getActivityNodeUuid(),
+                todoNode.getActivityNodeUuid());
+        assertEquals(todoNode.getActivityNodeUuid(),
+                replyNode.getInReplyTo().getHref().replaceAll(".*Uuid=", ""));
+        replyNode = activityService.moveNode(replyNode.getActivityNodeUuid(),
+                entryNode.getActivityNodeUuid());
+        assertEquals(todoNode.getActivityNodeUuid(),
+                replyNode.getInReplyTo().getHref().replaceAll(".*Uuid=", ""));
 
-        } catch (ClientServicesException ex) {
-            assertEquals(400, ex.getResponseStatusCode());
-            return;
-        }
     }
 
     @Test
@@ -287,25 +404,20 @@ public class ActivityFeedMoveTest extends BaseActivityServiceTest {
         replyNode2.setInReplyTo(replyNode);
 
         activityService.createActivityNode(replyNode2);
-        try {
-            replyNode = activityService.moveNode(replyNode.getActivityNodeUuid(),
-                    todoNode.getActivityNodeUuid());
+        replyNode = activityService.moveNode(replyNode.getActivityNodeUuid(),
+                todoNode.getActivityNodeUuid());
 
-            replyNode = activityService.moveNode(replyNode.getActivityNodeUuid(),
-                    entryNode.getActivityNodeUuid());
-            replyNode2 = activityService.moveNode(replyNode2.getActivityNodeUuid(),
-                    entryNode.getActivityNodeUuid());
-            replyNode = activityService.moveNode(replyNode.getActivityNodeUuid(),
-                    replyNode2.getActivityNodeUuid());
+        replyNode = activityService.moveNode(replyNode.getActivityNodeUuid(),
+                entryNode.getActivityNodeUuid());
+        replyNode2 = activityService.moveNode(replyNode2.getActivityNodeUuid(),
+                entryNode.getActivityNodeUuid());
+        replyNode = activityService.moveNode(replyNode.getActivityNodeUuid(),
+                replyNode2.getActivityNodeUuid());
 
-            replyNode = activityService.getActivityNode(replyNode.getActivityNodeUuid());
-            replyNode2 = activityService.getActivityNode(replyNode2.getActivityNodeUuid());
+        replyNode = activityService.getActivityNode(replyNode.getActivityNodeUuid());
+        replyNode2 = activityService.getActivityNode(replyNode2.getActivityNodeUuid());
 
-            replyNode = activityService.moveNode(replyNode.getActivityNodeUuid(), activity.getActivityUuid());
-        } catch (ClientServicesException ex) {
-            assertEquals(400, ex.getResponseStatusCode());
-            return;
-        }
+        replyNode = activityService.moveNode(replyNode.getActivityNodeUuid(), activity.getActivityUuid());
     }
 
 	@Test

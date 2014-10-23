@@ -295,7 +295,7 @@ public abstract class BaseService implements Serializable {
 	 * @return the client serivce associated with the current Endpoint
 	 * @throws ClientServicesException
 	 */
-	protected ClientService getClientService() throws ClientServicesException {
+	public ClientService getClientService() throws ClientServicesException {
 		return endpoint.getClientService();
 	}
 

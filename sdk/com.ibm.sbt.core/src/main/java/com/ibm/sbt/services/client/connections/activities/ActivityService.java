@@ -46,9 +46,11 @@ import com.ibm.sbt.services.client.base.AtomXPath;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.CategoryFeedHandler;
 import com.ibm.sbt.services.client.base.CommonConstants.HTTPCode;
+import com.ibm.sbt.services.client.base.ConnectionsFeedXpath;
 import com.ibm.sbt.services.client.base.ConnectionsService;
 import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.Version;
+import com.ibm.sbt.services.client.base.datahandlers.AtomEntityList;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.connections.activities.serializers.ActivityNodeSerializer;
 import com.ibm.sbt.services.client.connections.activities.serializers.ActivitySerializer;
@@ -1372,6 +1374,15 @@ public class ActivityService extends ConnectionsService {
 			@Override
 			protected Member entityInstance(BaseService service, Node node, XPathExpression xpath) {
 				return new Member(service, node, nameSpaceCtx, xpath);
+			}
+			/* (non-Javadoc)
+			 * @see com.ibm.sbt.services.client.base.AtomFeedHandler#createEntityList(com.ibm.sbt.services.client.Response)
+			 */
+			@Override
+			public EntityList<Member> createEntityList(Response dataHolder) {
+				AtomEntityList<Member> entityList = (AtomEntityList<Member>)super.createEntityList(dataHolder);
+				entityList.setTotalResults(ConnectionsFeedXpath.TotalMembers);
+				return entityList;
 			}
 		};
 	}

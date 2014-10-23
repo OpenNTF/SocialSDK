@@ -50,6 +50,9 @@
                     <div id="snippetContainer" style="border-style:solid;border-width:1px;width=500px;height:300px;border-color:#D3D3D3;overflow:none;">
                         <%@include file="includes/java_snippet.jsp"%>
                     </div>
+                    <div>
+						Please download the Social Business Toolkit SDK:<a>https://github.com/OpenNTF/SocialSDK/wiki/GettingStartedJava</a>
+					</div>
                 </div>
                 <div><hr/></div>
                 <%@include file="includes/java_runner.jsp"%>

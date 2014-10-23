@@ -33,9 +33,11 @@ import com.ibm.sbt.services.client.ClientServicesException;
  * @author Carlos Manias
  *
  */
-public class Response implements Serializable {
+public class Response<T> implements Serializable {
 
-	private Object data;
+	private static final long serialVersionUID = 1L;
+	
+	private T data;
 	private transient HttpResponse response;
 	private transient HttpRequestBase request;
 	private transient HttpClient httpClient;
@@ -53,7 +55,7 @@ public class Response implements Serializable {
 		this.data = parseContent();
 	}
 	
-	public Response(Object data) {
+	public Response(T data) {
 		this.data = data;
 	}
 	
@@ -61,7 +63,7 @@ public class Response implements Serializable {
 		this.headers = h;
 	}
 	
-	public Object getData() {
+	public T getData() {
 		return data;
 	}
 	
@@ -94,10 +96,9 @@ public class Response implements Serializable {
 		return null;
 	}
 
-	protected Object parseContent() throws ClientServicesException {
+	protected T parseContent() throws ClientServicesException {
 		try {
-			Object data = null;
-			data = handler.parseContent(null, response, response.getEntity());
+			T data = (T)handler.parseContent(null, response, response.getEntity());
 			return data;
 		} catch (IOException e) {
 			throw new ClientServicesException(e);

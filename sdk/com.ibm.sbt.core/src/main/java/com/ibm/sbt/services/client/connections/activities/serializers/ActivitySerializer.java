@@ -25,11 +25,13 @@ import static com.ibm.sbt.services.client.base.ConnectionsConstants.COMMUNITYUUI
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.COMMUNITY_ACTIVITY;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.COMPLETED;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.EXTERNAL;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.INTERNAL;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.HREF;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.IN_REPLY_TO;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.LABEL;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.LABEL_COMMUNITYACTIVITY;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.LABEL_EXTERNAL;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.LABEL_INTERNAL;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.LINK;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.NAME;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.REF;
@@ -82,6 +84,7 @@ public class ActivitySerializer extends AtomEntitySerializer<Activity> {
 				completedCategory(),
 				templateCategory(),
 				flagsCategory(),
+				externalCategory(),
 				linkContainer(),
 				subtitle(),
 				inReplyTo(),
@@ -135,10 +138,10 @@ public class ActivitySerializer extends AtomEntitySerializer<Activity> {
 	}
 	
 	protected Element externalCategory() {
-		return entity.isExternal() ? element(CATEGORY, 
+		return element(CATEGORY, 
 				attribute(SCHEME, Namespace.FLAGS.getUrl()),
-				attribute(LABEL, LABEL_EXTERNAL),
-				attribute(TERM, EXTERNAL)) : null;
+				attribute(LABEL, entity.isExternal() ? LABEL_EXTERNAL : LABEL_INTERNAL),
+				attribute(TERM, entity.isExternal() ? EXTERNAL: INTERNAL));
 	}
 	
 	protected Element completedCategory() {

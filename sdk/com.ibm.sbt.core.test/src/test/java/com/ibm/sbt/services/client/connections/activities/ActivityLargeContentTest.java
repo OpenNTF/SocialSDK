@@ -24,6 +24,7 @@ import org.junit.Test;
 
 import com.ibm.commons.xml.XMLException;
 import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 
 /**
  * @author mwallace
@@ -54,6 +55,9 @@ public class ActivityLargeContentTest extends BaseActivityServiceTest {
 		
 		System.out.println("BYTES: " + read.getSummary().getBytes("UTF-8").length);
 		System.out.println("LENGTH: " + read.getSummary().length());
+		
+		EntityList<Activity> activities = activityService.getMyActivities();
+		System.out.println("READ: " + activities.get(0).toXmlString());
 	}
 	
 }

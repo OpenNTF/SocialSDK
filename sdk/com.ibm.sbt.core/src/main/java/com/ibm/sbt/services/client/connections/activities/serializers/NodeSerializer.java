@@ -28,6 +28,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMultipart;
 
+import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
 
 import com.ibm.sbt.services.client.base.ConnectionsConstants.Namespace;
@@ -62,8 +63,10 @@ class NodeSerializer extends AtomEntitySerializer<NodeEntity> {
 				attribute("fid", field.getFid()),
 				attribute("name", field.getName()),
 				attribute("type", field.getType()),
-				attribute("position", field.getPosition()),
 				attribute("hidden", field.isHidden()));
+			if (field.hasPosition()) {
+				element.setAttribute("position", "" + field.getPosition());
+			}
 			if (field instanceof DateField) {
 				DateField dateField = (DateField)field;
 				addText(element, DateSerializer.toString(dateFormat, dateField.getDate()));

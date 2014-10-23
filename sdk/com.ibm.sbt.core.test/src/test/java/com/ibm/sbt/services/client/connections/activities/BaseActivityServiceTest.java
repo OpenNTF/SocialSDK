@@ -253,6 +253,7 @@ public class BaseActivityServiceTest extends BaseUnitTest {
 		activityNode.setActivityUuid(activityUuid);
 		activityNode.setTitle(title);
 		activityNode.setTags(tags);
+		activityNode.setType(ActivityNode.TYPE_ENTRY);
 		return activityService.createActivityNode(activityNode);
     }
     

@@ -147,6 +147,10 @@ public class BaseBssTest {
     }
     
     public String registerCustomer() {
+    	return registerCustomer(getUniqueEmail("0"));
+    }
+    
+    public String registerCustomer(String email) {
     	try {
     		CustomerJsonBuilder customer = new CustomerJsonBuilder();
         	customer.setOrgName("Abe Industrial")
@@ -160,7 +164,7 @@ public class BaseBssTest {
         	        .setOrganizationState("Massachusetts")
         	        .setContactFamilyName("Ninty")
         	        .setContactGivenName("Joe")
-        	        .setContactEmailAddress(getUniqueEmail("0"))
+        	        .setContactEmailAddress(email)
         	        .setContactNamePrefix("Mr")
         	        .setContactEmployeeNumber("6A77777")
         	        .setContactLanguagePreference("EN_US")
@@ -231,6 +235,28 @@ public class BaseBssTest {
 			}
 	
 			authorizationService.assignRole(loginName, "CustomerAdministrator");
+    	} catch (BssException be) {
+    		JsonJavaObject jsonObject = be.getResponseJson();
+    		System.err.println(jsonObject);
+    		fail("Error adding administrator role because: "+jsonObject);
+    	} catch (Exception e) {
+    		fail("Error adding administrator role caused by: "+e.getMessage());    		
+    	}
+    }
+
+    public void addVendorRole(String subscriberId) {
+    	try {
+			JsonEntity subscriber = getSubscriberById(subscriberId);
+			String loginName = subscriber.getAsString("Subscriber/Person/EmailAddress");
+			System.out.println(loginName);
+			
+			AuthorizationService authorizationService = getAuthorizationService();
+			String[] roles = authorizationService.getRoles(loginName);
+			for (String role : roles) {
+				System.out.println(role);
+			}
+	
+			authorizationService.assignRole(loginName, "VSR");
     	} catch (BssException be) {
     		JsonJavaObject jsonObject = be.getResponseJson();
     		System.err.println(jsonObject);

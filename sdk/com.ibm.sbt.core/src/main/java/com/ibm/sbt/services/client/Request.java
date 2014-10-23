@@ -16,6 +16,8 @@
 package com.ibm.sbt.services.client;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,19 +25,30 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
 
+import com.ibm.commons.util.io.json.JsonJavaArray;
+import com.ibm.commons.util.io.json.JsonJavaObject;
+import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.ClientService.Handler;
 import com.ibm.sbt.services.client.ClientService.HandlerInputStream;
 import com.ibm.sbt.services.client.ClientService.HandlerJson;
 import com.ibm.sbt.services.client.ClientService.HandlerString;
 import com.ibm.sbt.services.client.ClientService.HandlerXml;
+import com.ibm.sbt.services.client.base.AtomXPath;
+import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.endpoints.BasicEndpoint;
 import com.ibm.sbt.services.endpoints.Endpoint;
+import com.ibm.sbt.services.rest.atom.AtomEntry;
+import com.ibm.sbt.services.rest.atom.AtomFeed;
 
 /**
  * @author mwallace
@@ -43,7 +56,7 @@ import com.ibm.sbt.services.endpoints.Endpoint;
  */
 public class Request {
 
-	private ClientService clientService;
+	private BaseService baseService;
 	private String method;
 	private String serviceUrl;
 	private Map<String, String> parameters = new HashMap<String, String>();
@@ -52,18 +65,18 @@ public class Request {
 	private HttpEntity body = null; 
 	private List<BodyPart> bodyParts = new ArrayList<Request.BodyPart>();
 	
-	public Request(ClientService clientService, String method, String serviceUrl) {
-		if (clientService == null) {
-			throw new IllegalStateException("ClientService must not be null.");
+	public Request(BaseService baseService, String method, String serviceUrl) {
+		if (baseService == null) {
+			throw new IllegalStateException("BaseService must not be null.");
 		}
 		
-		this.clientService = clientService;
+		this.baseService = baseService;
 		this.method = method;
 		this.serviceUrl = serviceUrl;
 	}
 	
 	public Request basicAuth(String user, String password) {
-		Endpoint endpoint = clientService.getEndpoint();
+		Endpoint endpoint = baseService.getEndpoint();
 		if (endpoint instanceof BasicEndpoint) {
 			((BasicEndpoint)endpoint).setUser(user);
 			((BasicEndpoint)endpoint).setPassword(password);
@@ -131,46 +144,84 @@ public class Request {
 		return null;
 	}
 	
-	public Response response() throws ClientServicesException {
-		return response(handler);
+	public Response<Object> response() throws ClientServicesException {
+		return response(handler, Object.class);
 	}
 	
-	public Response asJson() throws ClientServicesException {
-		return response(new HandlerJson());
+	public Response<JsonJavaObject> asJson() throws ClientServicesException {
+		return response(new HandlerJson(), JsonJavaObject.class);
 	}
 
-	public Response asString() throws ClientServicesException {
-		return response(new HandlerString());
+	public Response<JsonJavaArray> asJsonArray() throws ClientServicesException {
+		return response(new HandlerJson(), JsonJavaArray.class);
 	}
 
-	public Response asXml() throws ClientServicesException {
-		return response(new HandlerXml());
+	public Response<String> asString() throws ClientServicesException {
+		return response(new HandlerString(), String.class);
 	}
 
-	public Response asInputStream() throws ClientServicesException {
-		return response(new HandlerInputStream());
+	public Response<Node> asXml() throws ClientServicesException {
+		return response(new HandlerXml(), Node.class);
 	}
 
+	public Response<InputStream> asInputStream() throws ClientServicesException {
+		return response(new HandlerInputStream(), InputStream.class);
+	}
+
+	public Response<AtomEntry> asAtomEntry() throws ClientServicesException {
+		return response(new HandlerAtomEntry(), AtomEntry.class);
+	}
+
+	public Response<AtomFeed> asAtomFeed() throws ClientServicesException {
+		return response(new HandlerAtomFeed(), AtomFeed.class);
+	}
+	
 	//
 	// Internals
 	//
 
-	public Response response(Handler handler) throws ClientServicesException {
+	public <T> Response<T> response(Handler handler, Class<T> responseClass) throws ClientServicesException {
 		if (ClientService.METHOD_GET.equals(method)) {
-			return clientService.get(serviceUrl, parameters, headers, handler);
+			return baseService.getClientService().get(serviceUrl, parameters, headers, handler);
 		} else if (ClientService.METHOD_POST.equals(method)) {
-			return clientService.post(serviceUrl, parameters, headers, getBody(), handler);
+			return baseService.getClientService().post(serviceUrl, parameters, headers, getBody(), handler);
 		} else if (ClientService.METHOD_PUT.equals(method)) {
-			return clientService.put(serviceUrl, parameters, headers, getBody(), handler);
+			return baseService.getClientService().put(serviceUrl, parameters, headers, getBody(), handler);
 		} else if (ClientService.METHOD_DELETE.equals(method)) {
-			return clientService.delete(serviceUrl, parameters, headers, handler);
+			return baseService.getClientService().delete(serviceUrl, parameters, headers, handler);
 		} else if (ClientService.METHOD_DELETE_BODY.equals(method)) {
-			return clientService.delete(serviceUrl, parameters, headers, getBody(), handler);
+			return baseService.getClientService().delete(serviceUrl, parameters, headers, getBody(), handler);
 		} else {
 			throw new IllegalStateException("Unknown method: "+method);
 		}
 	}
 	
+	private class HandlerAtomEntry extends HandlerXml {
+		@Override
+		public Object parseContent(HttpRequestBase request, HttpResponse response, HttpEntity entity) throws ClientServicesException, IOException {
+			Document document = (Document)super.parseContent(request, response, entity);
+			return new AtomEntry(document);
+		}
+	}
+	
+	private class HandlerAtomFeed extends HandlerXml {
+		@Override
+		public Object parseContent(HttpRequestBase request, HttpResponse response, HttpEntity entity) throws ClientServicesException, IOException {
+			Document document = (Document)super.parseContent(request, response, entity);
+			return new AtomFeed(document);
+		}
+	}
+	
+	private  XPathExpression getAtomXPath(Node node, boolean isFeed) {
+		if (node instanceof Document){
+			return (XPathExpression)(isFeed ? AtomXPath.entry.getPath() : AtomXPath.singleEntry.getPath());
+		} else {
+			 return null;
+		}
+	}
+
+	
+		
 	private class BodyPart {
 		
 		String name;

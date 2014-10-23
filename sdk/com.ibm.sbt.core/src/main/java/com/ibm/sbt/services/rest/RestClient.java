@@ -15,11 +15,28 @@
  */
 package com.ibm.sbt.services.rest;
 
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.w3c.dom.Node;
+
 import com.ibm.commons.runtime.Application;
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.runtime.impl.app.RuntimeFactoryStandalone;
+import com.ibm.commons.util.io.json.JsonJavaObject;
+import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.ClientService;
+import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Request;
+import com.ibm.sbt.services.client.base.AtomEntity;
+import com.ibm.sbt.services.client.base.AtomFeedHandler;
+import com.ibm.sbt.services.client.base.BaseService;
+import com.ibm.sbt.services.client.base.IFeedHandler;
+import com.ibm.sbt.services.client.base.JsonEntity;
+import com.ibm.sbt.services.client.base.JsonFeedHandler;
+import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.endpoints.BasicEndpoint;
 import com.ibm.sbt.services.endpoints.ConnectionsBasicEndpoint;
 import com.ibm.sbt.services.endpoints.Endpoint;
@@ -30,7 +47,7 @@ import com.ibm.sbt.services.endpoints.Endpoint;
  */
 public class RestClient {
 	
-	private ClientService clientService;
+	private RestService restService;
 	
 	/**
 	 * Construct a RestClient instance which uses basic authentication.
@@ -41,7 +58,7 @@ public class RestClient {
 	 */
 	public RestClient(String url, String user, String password) {
 		BasicEndpoint endpoint = createBasicEndpoint(url, user, password);
-		clientService = new RestClientService(endpoint);
+		restService = new RestService(endpoint);
 	}
 
 	/**
@@ -57,7 +74,7 @@ public class RestClient {
 			Context.init(application, null, null);
 		}
 		
-		clientService = new RestClientService(endpointName);
+		restService = new RestService(endpointName);
 	}
 
 	/**
@@ -66,7 +83,7 @@ public class RestClient {
 	 * @param endpoint
 	 */
 	public RestClient(Endpoint endpoint) {
-		clientService = new RestClientService(endpoint);
+		restService = new RestService(endpoint);
 	}
 
 	/**
@@ -81,32 +98,52 @@ public class RestClient {
 	// HTTP call support
 	//
 	
-	public final Request get(String serviceUrl) { 
-		return new Request(getClientService(serviceUrl), ClientService.METHOD_GET, serviceUrl);
+	public static Request get(String serviceUrl) { 
+		RestClient restClient = new RestClient();
+		return new Request(restClient.getService(serviceUrl), ClientService.METHOD_GET, serviceUrl);
 	}
 	
-	public final Request delete(String serviceUrl) { 
-		return new Request(getClientService(serviceUrl), ClientService.METHOD_DELETE, serviceUrl);
+	public final Request doGet(String serviceUrl) { 
+		return new Request(getService(serviceUrl), ClientService.METHOD_GET, serviceUrl);
 	}
 	
-	public final Request post(String serviceUrl) { 
-		return new Request(getClientService(serviceUrl), ClientService.METHOD_POST, serviceUrl);
+	public static Request delete(String serviceUrl) { 
+		RestClient restClient = new RestClient();
+		return new Request(restClient.getService(serviceUrl), ClientService.METHOD_DELETE, serviceUrl);
 	}
 	
-	public final Request put(String serviceUrl) { 
-		return new Request(getClientService(serviceUrl), ClientService.METHOD_PUT, serviceUrl);
+	public final Request doDelete(String serviceUrl) { 
+		return new Request(getService(serviceUrl), ClientService.METHOD_DELETE, serviceUrl);
+	}
+	
+	public static Request post(String serviceUrl) { 
+		RestClient restClient = new RestClient();
+		return new Request(restClient.getService(serviceUrl), ClientService.METHOD_POST, serviceUrl);
+	}
+	
+	public final Request doPost(String serviceUrl) { 
+		return new Request(getService(serviceUrl), ClientService.METHOD_POST, serviceUrl);
+	}
+	
+	public static Request put(String serviceUrl) { 
+		RestClient restClient = new RestClient();
+		return new Request(restClient.getService(serviceUrl), ClientService.METHOD_PUT, serviceUrl);
+	}
+	
+	public final Request doPut(String serviceUrl) { 
+		return new Request(getService(serviceUrl), ClientService.METHOD_PUT, serviceUrl);
 	}
 	
 	//
 	// Internals
 	//
 	
-	protected ClientService getClientService(String serviceUrl) {
-		if (clientService == null) {
+	public RestService getService(String serviceUrl) {
+		if (restService == null) {
 			BasicEndpoint endpoint = createBasicEndpoint(serviceUrl, null, null);
-			clientService = new RestClientService(endpoint);
+			restService = new RestService(endpoint);
 		}
-		return clientService;
+		return restService;
 	}
 	
 	/*
@@ -124,15 +161,74 @@ public class RestClient {
 	/*
 	 * 
 	 */
-	private class RestClientService extends ClientService {
+	public class RestService extends BaseService {
 		
-		RestClientService(Endpoint endpoint) {
+		private static final long serialVersionUID = 1L;
+
+		RestService(Endpoint endpoint) {
 			super(endpoint);
 		}
 		
-		RestClientService(String endpointName) {
+		RestService(String endpointName) {
 			super(endpointName);
 		}
+		
+		public Map<String, String> getParameters(Map<String, String> parameters) {
+			if(parameters == null) return new HashMap<String, String>();
+			else return parameters;
+		}
+
+		// ATOM support
+			    
+		public AtomEntity getAtomEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
+			try {
+				return getEntity(requestUrl, parameters, getAtomFeedHandler(false));
+			} catch (ClientServicesException e) {
+				throw e;
+			} catch (Exception e) {
+				throw new ClientServicesException(e);
+			}
+		}
+	    
+		public EntityList<AtomEntity> getAtomEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
+			return (EntityList<AtomEntity>)getEntities(requestUrl, getParameters(parameters), getAtomFeedHandler(true));
+		}
+		
+		public IFeedHandler<AtomEntity> getAtomFeedHandler(boolean isFeed) {
+			return new AtomFeedHandler<AtomEntity>(this, isFeed) {
+
+				@Override
+				public AtomEntity entityInstance(BaseService service, Node node, XPathExpression xpath) {
+					return new AtomEntity(service, node, nameSpaceCtx, xpath);
+				}
+			};
+		}
+		
+		// JSON support
+		
+		public JsonEntity getJsonEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
+			try {
+				return getEntity(requestUrl, parameters, getJsonFeedHandler("."));
+			} catch (ClientServicesException e) {
+				throw e;
+			} catch (Exception e) {
+				throw new ClientServicesException(e);
+			}
+		}
+	    
+		public EntityList<JsonEntity> getJsonEntityList(String requestUrl, Map<String, String> parameters, String entitiesPath) throws ClientServicesException {
+			return (EntityList<JsonEntity>)getEntities(requestUrl, getParameters(parameters), getJsonFeedHandler(entitiesPath));
+		}
+		
+		public IFeedHandler<JsonEntity> getJsonFeedHandler(String entitiesPath) {
+			return new JsonFeedHandler<JsonEntity>(this, entitiesPath) {
+				@Override
+				public JsonEntity newEntity(BaseService service, JsonJavaObject jsonObject) {
+					return new JsonEntity(service, jsonObject);
+				}
+			};
+		}
+		
 		
 	}
 

@@ -16,6 +16,7 @@
 package com.ibm.sbt.services.client.connections.activities;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,12 +40,24 @@ public class ActivityCreatePerformanceTest extends BaseActivityServiceTest {
 		int totalResults = activities.getTotalResults();
 		//System.out.println(DOMUtil.getXMLString((Node)activities.getData()));
 		System.out.println("Total number of activities: "+totalResults);
-		System.out.println("Creating "+5+" activities");
-		for (int i=0; i<5; i++) {
+		int count = 1000;
+		System.out.println("Creating "+count+" activities");
+		for (int i=0; i<count; i++) {
 			long start = System.currentTimeMillis();
 			Activity activity = createActivity();
 			long duration = System.currentTimeMillis() - start;
-			System.out.println("Creating "+activity.getActivityUuid()+" took "+duration+"(ms)");
+			System.out.println(i+" Creating "+activity.getActivityUuid()+" took "+duration+"(ms)");
+			
+			System.out.println(activity.getActivityUuid() + "=" + activity.isExternal());
+			if (activity.isExternal()) {
+				System.err.println(activity.getActivityUuid() + "=" + activity.isExternal());
+			}
+			
+			start = System.currentTimeMillis();
+			activity.setContent("Updated "+(new Date()));
+			activity.update();
+			duration = System.currentTimeMillis() - start;
+			System.out.println(i+" Updating "+activity.getActivityUuid()+" took "+duration+"(ms)");
 		}
 		// prevent last activity being auto-deleted
 		activity = null;

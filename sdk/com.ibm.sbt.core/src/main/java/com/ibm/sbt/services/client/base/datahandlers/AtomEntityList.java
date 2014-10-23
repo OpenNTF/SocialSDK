@@ -34,6 +34,11 @@ import com.ibm.sbt.services.client.base.IFeedHandler;
  *
  */
 public class AtomEntityList<T extends AtomEntity> extends EntityList<T> {
+	
+	private FieldEntry TotalResults = ConnectionsFeedXpath.TotalResults;
+	private FieldEntry StartIndex = ConnectionsFeedXpath.StartIndex;
+	private FieldEntry ItemsPerPage = ConnectionsFeedXpath.ItemsPerPage;
+	private FieldEntry CurrentPage = ConnectionsFeedXpath.CurrentPage;
 
 	public AtomEntityList(Response requestData, IFeedHandler<T> feedHandler) {
 		super(requestData, feedHandler);
@@ -50,7 +55,7 @@ public class AtomEntityList<T extends AtomEntity> extends EntityList<T> {
 	}
 	
 	@Override
-	public Document getData(){
+	public Document getData() {
 		return (Document)super.getData();
 	}
 
@@ -60,21 +65,50 @@ public class AtomEntityList<T extends AtomEntity> extends EntityList<T> {
 	
 	@Override
 	public int getTotalResults() {
-		return getDataHandler().getAsInt(ConnectionsFeedXpath.TotalResults);
+		return getDataHandler().getAsInt(TotalResults);
 	}
 
 	@Override
 	public int getStartIndex() {
-		return getDataHandler().getAsInt(ConnectionsFeedXpath.StartIndex);
+		return getDataHandler().getAsInt(StartIndex);
 	}
 
 	@Override
 	public int getItemsPerPage() {
-		return getDataHandler().getAsInt(ConnectionsFeedXpath.ItemsPerPage);
+		return getDataHandler().getAsInt(ItemsPerPage);
 	}
 
 	@Override
 	public int getCurrentPage() {
-		return getDataHandler().getAsInt(ConnectionsFeedXpath.CurrentPage);
+		return getDataHandler().getAsInt(CurrentPage);
 	}
+
+	/**
+	 * @param totalResults the totalResults to set
+	 */
+	public void setTotalResults(FieldEntry totalResults) {
+		TotalResults = totalResults;
+	}
+
+	/**
+	 * @param startIndex the startIndex to set
+	 */
+	public void setStartIndex(FieldEntry startIndex) {
+		StartIndex = startIndex;
+	}
+
+	/**
+	 * @param itemsPerPage the itemsPerPage to set
+	 */
+	public void setItemsPerPage(FieldEntry itemsPerPage) {
+		ItemsPerPage = itemsPerPage;
+	}
+
+	/**
+	 * @param currentPage the currentPage to set
+	 */
+	public void setCurrentPage(FieldEntry currentPage) {
+		CurrentPage = currentPage;
+	}
+	
 }

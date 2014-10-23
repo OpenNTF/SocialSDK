@@ -113,6 +113,10 @@ public class Field extends BaseEntity {
 		setAsString(ActivityXPath.field_name, name);
 	}
 	
+	public boolean hasPosition() {
+		return getAsLong(ActivityXPath.field_position) != null;
+	}
+	
 	/**
 	 * Position of the field in the containing Activity entry's array of fields. 
 	 * Use numbers separated by large increments to allow for repositioning. 

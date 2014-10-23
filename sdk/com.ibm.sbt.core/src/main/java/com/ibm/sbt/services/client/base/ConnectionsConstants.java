@@ -99,6 +99,8 @@ public final class ConnectionsConstants {
 	public static final String LABEL_COMMUNITYACTIVITY = "Community Activity";
 	public static final String EXTERNAL = "external";
 	public static final String LABEL_EXTERNAL = "External";
+	public static final String INTERNAL = "internal";
+	public static final String LABEL_INTERNAL = "internal";
 	public static final String TEMPLATE = "template";
 	public static final String SNX_DUEDATE = "snx:duedate";
 	public static final String REF = "ref";

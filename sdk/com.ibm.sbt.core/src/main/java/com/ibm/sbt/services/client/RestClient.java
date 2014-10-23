@@ -36,6 +36,7 @@ import com.ibm.commons.util.StringUtil;
  * REST service client that simply uses a base URL.
  * 
  * @author Philippe Riand
+ * @deprecated
  */
 public class RestClient extends ClientService {
 

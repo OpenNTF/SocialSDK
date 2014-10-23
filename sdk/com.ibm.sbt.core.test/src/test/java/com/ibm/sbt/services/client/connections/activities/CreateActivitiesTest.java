@@ -80,4 +80,20 @@ public class CreateActivitiesTest extends BaseActivityServiceTest {
 		activity = null;
 	}
 	
+	@Test
+	public void testCreateActivities() throws ClientServicesException, XMLException {
+		for (int i=0; i<10; i++) {
+			long start = System.currentTimeMillis();
+			Activity activity = new Activity();
+			activity.setTitle("Title 1");
+			activity.setPriority(Activity.PRIORITY_NORMAL);
+			activity.setExternal(true);
+			activityService.createActivity(activity);
+			//Activity activity = createActivity("CreatedActivityNodes-"+start);
+			String activityUuid = activity.getActivityUuid();
+			System.out.println(activity.toXmlString());
+			System.out.println("Created "+activityUuid+" external:" + activity.isExternal());
+		}
+	}
+	
 }

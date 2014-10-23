@@ -314,7 +314,7 @@ public class BaseEntity implements Externalizable {
 	 */
 	public boolean exists(FieldEntry field){
 		if (fields.containsKey(field.getName())){
-			return true;
+			return (Boolean)fields.get(field.getName());
 		}
 		if (dataHandler != null) {
 			return (dataHandler.getEntry(field) != null);

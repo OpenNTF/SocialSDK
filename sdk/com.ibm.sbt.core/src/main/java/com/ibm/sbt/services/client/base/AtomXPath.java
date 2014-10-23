@@ -47,6 +47,7 @@ public enum AtomXPath implements FieldEntry {
 	repliesUrl("./a:link[@rel='replies']/@href"),
 	editUrl("./a:link[@rel='edit']/@href"),
 	selfUrl("./a:link[@rel='self']/@href"),
+	nextUrl("./a:link[@rel='next']/@href"),
 	alternateUrl("./a:link[@rel='alternate']/@href"),
 	tags("./a:category[not(@scheme)]/@term"),
 	

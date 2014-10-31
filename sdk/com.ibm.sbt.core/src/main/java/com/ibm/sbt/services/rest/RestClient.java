@@ -67,13 +67,7 @@ public class RestClient {
 	 * @param endpointName
 	 */
 	public RestClient(String endpointName) {
-		// perform standalone intialization if needed
-		if (Context.getUnchecked() == null) {
-			RuntimeFactoryStandalone runtimeFactory = new RuntimeFactoryStandalone();
-			Application application = runtimeFactory.initApplication(null);
-			Context.init(application, null, null);
-		}
-		
+		initContext();
 		restService = new RestService(endpointName);
 	}
 
@@ -97,6 +91,25 @@ public class RestClient {
 	//
 	// HTTP call support
 	//
+	
+	public static RestClient endpoint(String endpointName){
+		return new RestClient(endpointName);
+	}
+
+	public final RestClient useEndpoint(String endpointName) { 
+		initContext();
+		restService = new RestService(endpointName);
+		return this;
+	}
+
+	public static RestClient endpoint(Endpoint endpoint){
+		return new RestClient(endpoint);
+	}
+
+	public final RestClient useEndpoint(Endpoint endpoint) { 
+		restService = new RestService(endpoint);
+		return this;
+	}
 	
 	public static Request get(String serviceUrl) { 
 		RestClient restClient = new RestClient();
@@ -144,6 +157,17 @@ public class RestClient {
 			restService = new RestService(endpoint);
 		}
 		return restService;
+	}
+
+	/*
+	 * Perform standalone intialization if needed
+	 */
+	private static void initContext(){
+		if (Context.getUnchecked() == null) {
+			RuntimeFactoryStandalone runtimeFactory = new RuntimeFactoryStandalone();
+			Application application = runtimeFactory.initApplication(null);
+			Context.init(application, null, null);
+		}
 	}
 	
 	/*

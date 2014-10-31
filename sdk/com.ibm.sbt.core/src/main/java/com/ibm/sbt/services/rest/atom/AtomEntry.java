@@ -23,7 +23,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
 import com.ibm.commons.xml.DOMUtil;
-import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.XMLException;
 import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.base.AtomXPath;
@@ -48,6 +47,83 @@ public class AtomEntry {
 	public AtomEntry(Node node) {
 		XPathExpression xpath = (node instanceof Document) ? (XPathExpression)AtomXPath.singleEntry.getPath() : null;
 		dataHandler = new XmlDataHandler(node, nameSpaceCtx, xpath);
+	}
+	
+	/**
+	 * Return the String value from the ATOM entry document using the given xpath expression
+	 * 
+	 * @method getAsString
+	 * @param xpath
+	 * @return
+	 */
+	public String getAsString(String xpath){
+		return dataHandler.getAsString(xpath);
+	}
+
+	/**
+	 * Return the Long value from the ATOM entry document using the given xpath expression
+	 * 
+	 * @method getAsLong
+	 * @param xpath
+	 * @return
+	 */
+	public Long getAsLong(String xpath){
+		return dataHandler.getAsLong(xpath);
+	}
+
+	/**
+	 * Return the int value from the ATOM entry document using the given xpath expression
+	 * 
+	 * @method getAsInt
+	 * @param xpath
+	 * @return
+	 */
+	public int getAsInt(String xpath){
+		return dataHandler.getAsInt(xpath);
+	}
+
+	/**
+	 * Return the Float value from the ATOM entry document using the given xpath expression
+	 * 
+	 * @method getAsFloat
+	 * @param xpath
+	 * @return
+	 */
+	public Float getAsFloat(String xpath){
+		return dataHandler.getAsFloat(xpath);
+	}
+
+	/**
+	 * Return the String[] value from the ATOM entry document using the given xpath expression
+	 * 
+	 * @method getAsArray
+	 * @param xpath
+	 * @return
+	 */
+	public String[] getAsArray(String xpath){
+		return dataHandler.getAsArray(xpath);
+	}
+
+	/**
+	 * Return the Date value from the ATOM entry document using the given xpath expression
+	 * 
+	 * @method getAsDate
+	 * @param xpath
+	 * @return
+	 */
+	public Date getAsDate(String xpath){
+		return dataHandler.getAsDate(xpath);
+	}
+
+	/**
+	 * Return the boolean value from the ATOM entry document using the given xpath expression
+	 * 
+	 * @method getAsBoolean
+	 * @param xpath
+	 * @return
+	 */
+	public boolean getAsBoolean(String xpath){
+		return dataHandler.getAsBoolean(xpath);
 	}
 	
     /**

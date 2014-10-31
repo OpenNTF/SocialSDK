@@ -471,7 +471,7 @@ public abstract class BaseService implements Serializable {
        return result;
    }
    
-   protected void checkResponseCode(Response response, HTTPCode expectedCode) throws ClientServicesException {
+   protected void checkResponseCode(Response<?> response, HTTPCode expectedCode) throws ClientServicesException {
 	   if (response != null && response.getResponse() != null && response.getRequest()!=null) {
 		   if (response.getResponse().getStatusLine() != null && expectedCode.checkCode(response.getResponse().getStatusLine().getStatusCode())) {
 			   return;

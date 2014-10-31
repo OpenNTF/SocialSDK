@@ -96,6 +96,18 @@ public class Response<T> implements Serializable {
 		return null;
 	}
 
+   public Response<T> checkResponseCode(int expectedCode) throws ClientServicesException {
+	   if (response != null && getResponse() != null && getRequest()!=null) {
+		   if (getResponse().getStatusLine() != null && getResponse().getStatusLine().getStatusCode() == expectedCode) {
+			   return this;
+		   } else {
+			   throw new ClientServicesException(getResponse(), getRequest());
+		   }
+	   } else {
+		   throw new ClientServicesException(null, "Response is null");
+	   }
+   }
+
 	protected T parseContent() throws ClientServicesException {
 		try {
 			T data = (T)handler.parseContent(null, response, response.getEntity());

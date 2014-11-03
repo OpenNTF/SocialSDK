@@ -119,6 +119,7 @@ public class ActivityLargeFieldTest extends BaseActivityServiceTest {
 	public void testCreateLargeFields() throws ClientServicesException, XMLException, IOException {
 		InputStream stream = readFile("latin.txt");
 		String content = IOUtils.toString(stream);
+		System.out.println("CONTENT SIZE: "+content.length());
 		
 		Activity activity = new Activity();
 		activity.setTitle(createActivityTitle());
@@ -131,7 +132,7 @@ public class ActivityLargeFieldTest extends BaseActivityServiceTest {
 		activity.addField(textField);
 
 		activityService.createActivity(activity);
-		//System.out.println(activity.toXmlString());
+		System.out.println(activity.toXmlString());
 		
 		this.activity = null;
 		
@@ -143,7 +144,7 @@ public class ActivityLargeFieldTest extends BaseActivityServiceTest {
 		activityEntry.addField(textField);
 
 		activityService.createActivityNode(activityEntry);
-		//System.out.println(activityEntry.toXmlString());
+		System.out.println(activityEntry.toXmlString());
 		
 		ActivityNode activityReply = new ActivityNode();
 		activityReply.setActivityUuid(activity.getActivityUuid());
@@ -154,7 +155,7 @@ public class ActivityLargeFieldTest extends BaseActivityServiceTest {
 		activityReply.addField(textField);
 
 		activityService.createActivityNode(activityReply);
-		//System.out.println(activityReply.toXmlString());
+		System.out.println(activityReply.toXmlString());
 		
 	}
 	

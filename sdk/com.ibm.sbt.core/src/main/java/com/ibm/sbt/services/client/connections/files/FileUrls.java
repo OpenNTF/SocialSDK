@@ -51,7 +51,7 @@ public enum FileUrls implements URLContainer {
     UPLOAD_NEW_VERSION_COMMUNITY_FILE(new VersionedUrl(v4_0, 	"{files}/{authType}/{accessType}/library/{communityId}/document/{fileId}/entry")),
     USERLIBRARY_DOCUMENT_COMMENT_ENTRY(new VersionedUrl(v4_0, 	"{files}/{authType}/{accessType}/userlibrary/{userId}/document/{fileId}/comment/{commentId}/entry")),
     MYUSERLIBRARY_DOCUMENT_COMMENT_ENTRY(new VersionedUrl(v4_0, "{files}/{authType}/{accessType}/myuserlibrary/document/{fileId}/comment/{commentId}/entry")),
-    GET_COMMUNITY_COLLECTION(new VersionedUrl(v4_0, 			"{files}/{authType}/{accessType}/communitycollection/{communityCollectionId}/feed")),
+    GET_COMMUNITY_COLLECTION(new VersionedUrl(v4_0, 			"{files}/{authType}/{accessType}/communitycollection/{communityId}/feed")),
     DOWNLOAD_FILE(new VersionedUrl(v4_0, 						"{files}/{authType}/{accessType}/{category}/file/{fileId}/{libraryFilter}/{libraryId}/media")),
     COMMUNITY_FILE_METADATA(new VersionedUrl(v4_0, 				"{files}/{authType}/{accessType}/library/{communityLibraryId}/document/{fileId}/entry")),
     COLLECTION_FEED(new VersionedUrl(v4_0, 						"{files}/{authType}/{accessType}/collection/{folderId}/feed")),

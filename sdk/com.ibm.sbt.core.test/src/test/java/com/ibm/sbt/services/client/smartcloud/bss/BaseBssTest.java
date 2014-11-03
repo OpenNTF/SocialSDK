@@ -21,6 +21,7 @@ import org.junit.After;
 import org.junit.Assert;
 
 import com.ibm.commons.util.io.json.JsonJavaObject;
+import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.JsonEntity;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.smartcloud.bss.BssService.BillingFrequency;
@@ -324,8 +325,20 @@ public class BaseBssTest {
     		
     	} catch (BssException be) {
     		JsonJavaObject jsonObject = be.getResponseJson();
-    		System.err.println(jsonObject);
-    		fail("Error creating subscription because: "+jsonObject);
+    		if (jsonObject != null) {
+    			fail("Error creating subscription because: "+jsonObject);
+    		} else {
+    			ClientServicesException cse = getClientServicesException(be);
+    			if (cse != null) {
+    				fail("Error creating subscription because: "+
+    					cse.getResponseStatusCode() + " " + 
+    					cse.getReasonPhrase() + " " +
+    					cse.getResponseBody());
+    			} else {
+    				be.printStackTrace();
+    				fail("Error creating subscription because: "+be.getMessage());
+    			}
+    		}
     	} catch (Exception e) {
     		fail("Error creating subscription caused by: "+e.getMessage());    		
     	}
@@ -580,7 +593,7 @@ public class BaseBssTest {
     }
         
     protected String getUniqueEmail(String customerId) {
-    	return "user_"+customerId+"_"+System.currentTimeMillis()+"@ivthouse.com";
+    	return "user_"+customerId+"_"+System.currentTimeMillis()+"@bluebox.lotus.com";
     }
 	
 	protected boolean arrayContains(String value, String[] expectedValues) {
@@ -590,6 +603,17 @@ public class BaseBssTest {
 			}
 		}
 		return false;
+	}
+	
+	protected ClientServicesException getClientServicesException(Throwable t) {
+		Throwable cause = t.getCause();
+		if (cause instanceof ClientServicesException) {
+			return getClientServicesException(cause);
+		}
+		if (t instanceof ClientServicesException) {
+			return (ClientServicesException)t;
+		}
+		return null;
 	}
 	
     

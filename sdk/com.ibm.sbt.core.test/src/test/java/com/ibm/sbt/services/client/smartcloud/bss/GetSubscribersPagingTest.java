@@ -41,5 +41,16 @@ public class GetSubscribersPagingTest extends BaseBssTest {
     		Assert.fail("Error retrieving subscriber list caused by: "+e.getMessage());    		
     	}
     }
-		
+	
+    @Test
+    public void testGetSubscribersListLargePage() {
+    	try {
+    		int pageNumber = 100;
+   			EntityList<JsonEntity> subscriberList = getSubscriberManagementService().getSubscribers(pageNumber++, 5);
+   			System.out.println("Page 101: "+subscriberList.isEmpty());
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    		Assert.fail("Error retrieving subscriber list caused by: "+e.getMessage());    		
+    	}
+    }    
 }

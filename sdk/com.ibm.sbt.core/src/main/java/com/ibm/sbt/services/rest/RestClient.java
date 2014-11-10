@@ -52,9 +52,10 @@ public class RestClient {
 	/**
 	 * Construct a RestClient instance which uses basic authentication.
 	 * 
-	 * @param url
-	 * @param user
-	 * @param password
+	 * @param url The URL of the target server.
+	 * @param user The username to authenticate with.
+	 * @param password The Password to authenticate with.
+	 * @return RestClient An instance of the RestClient
 	 */
 	public RestClient(String url, String user, String password) {
 		BasicEndpoint endpoint = createBasicEndpoint(url, user, password);
@@ -64,7 +65,8 @@ public class RestClient {
 	/**
 	 * Construct a RestClient instance which uses the specified endpoint.
 	 * 
-	 * @param endpointName
+	 * @param String endpointName The name of the endpoint in Strinf format.
+	 * @return RestClient An instance of the RestClient
 	 */
 	public RestClient(String endpointName) {
 		initContext();
@@ -74,7 +76,8 @@ public class RestClient {
 	/**
 	 * Construct a RestClient instance which uses the specified endpoint.
 	 * 
-	 * @param endpoint
+	 * @param Endpoint The endpoint which the rest client will use
+	 * @return RestClient An instance of the RestClient
 	 */
 	public RestClient(Endpoint endpoint) {
 		restService = new RestService(endpoint);
@@ -83,7 +86,7 @@ public class RestClient {
 	/**
 	 * Construct a RestClient instance.
 	 * 
-	 * @param endpoint
+	 * @return RestClient - An instance of the RestClient
 	 */
 	public RestClient() {
 	}
@@ -111,38 +114,78 @@ public class RestClient {
 		return this;
 	}
 	
+	/**
+	 * Method to send an HTTP GET request to a server, Using a static instance of RestClient .
+	 * @param serviceUrl - The url that the GET request is sent to.
+	 * @return Request - The Request Object.
+	 */
 	public static Request get(String serviceUrl) { 
 		RestClient restClient = new RestClient();
 		return new Request(restClient.getService(serviceUrl), ClientService.METHOD_GET, serviceUrl);
 	}
 	
+	/**
+	 * Method to send an HTTP GET request to a server.
+	 * @param serviceUrl The url that the GET request is sent to.
+	 * @return Request The Request Object.
+	 */
 	public final Request doGet(String serviceUrl) { 
 		return new Request(getService(serviceUrl), ClientService.METHOD_GET, serviceUrl);
 	}
 	
+	/**
+	 * Method to send an HTTP DELETE request using a static instance of the restClient. 
+	 * @param serviceUrl  The URL the request is sent to
+	 * @return Request The Request Object
+	 */
 	public static Request delete(String serviceUrl) { 
 		RestClient restClient = new RestClient();
 		return new Request(restClient.getService(serviceUrl), ClientService.METHOD_DELETE, serviceUrl);
 	}
 	
+	/**
+	 * Method to send an HTTP DELETE request.
+	 * @param serviceUrl  The URL the request is sent to
+	 * @return Request The Request Object
+	 */
 	public final Request doDelete(String serviceUrl) { 
 		return new Request(getService(serviceUrl), ClientService.METHOD_DELETE, serviceUrl);
 	}
 	
+	/**
+	 * Method to send an HTTP POST request using a static instance of the restClient 
+	 * @param serviceUrl  The URL the request is sent to
+	 * @return Request The Request Object
+	 */
 	public static Request post(String serviceUrl) { 
 		RestClient restClient = new RestClient();
 		return new Request(restClient.getService(serviceUrl), ClientService.METHOD_POST, serviceUrl);
 	}
 	
+	/**
+	 * Method to send an HTTP POST request.
+	 * @param serviceUrl  The URL the request is sent to
+	 * @return Request The Request Object
+	 */
 	public final Request doPost(String serviceUrl) { 
 		return new Request(getService(serviceUrl), ClientService.METHOD_POST, serviceUrl);
 	}
 	
+	/**
+	 * Method to send an HTTP PUT request using a static instance of the restClient 
+	 * @param serviceUrl  The URL the request is sent to
+	 * @return Request The Request Object
+	 */
 	public static Request put(String serviceUrl) { 
 		RestClient restClient = new RestClient();
 		return new Request(restClient.getService(serviceUrl), ClientService.METHOD_PUT, serviceUrl);
 	}
 	
+	/**
+	 * Method to send an HTTP PUT request.
+	 * @param serviceUrl  The URL the request is sent to
+	 * @return Request The Request Object
+	 */
 	public final Request doPut(String serviceUrl) { 
 		return new Request(getService(serviceUrl), ClientService.METHOD_PUT, serviceUrl);
 	}
@@ -151,7 +194,7 @@ public class RestClient {
 	// Internals
 	//
 	
-	public RestService getService(String serviceUrl) {
+	private RestService getService(String serviceUrl) {
 		if (restService == null) {
 			BasicEndpoint endpoint = createBasicEndpoint(serviceUrl, null, null);
 			restService = new RestService(endpoint);

@@ -21,6 +21,7 @@
 <%@page import="com.ibm.sbt.services.rest.atom.AtomEntry"%>
 <%@page import="com.ibm.sbt.services.client.Response"%>
 <%@page import=" com.ibm.sbt.services.rest.RestClient"%>
+<%@page import="com.ibm.sbt.services.client.ClientServicesException" %>
 <%@page import="java.util.*"%>
 
 				
@@ -45,7 +46,7 @@
         	for(AtomEntry atomEntry : feed.getEntries()){
         		out.println(atomEntry.getTitle());
         	}
-		} catch (Throwable e) {
+		} catch (ClientServicesException e) {
 			out.println("<pre>");
 			out.println("Problem Occurred while fetching my files: " + e.getMessage());
 			out.println("</pre>");

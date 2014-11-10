@@ -21,6 +21,7 @@
 <%@page import="com.ibm.sbt.services.rest.atom.AtomEntry"%>
 <%@page import="com.ibm.sbt.services.client.Response"%>
 <%@page import=" com.ibm.sbt.services.rest.RestClient"%>
+<%@page import="com.ibm.sbt.services.client.ClientServicesException" %>
 <%@page import="java.util.*"%>
 
 				
@@ -60,7 +61,7 @@
 			} else {
 				out.println("There are no activities available to update");
 			}
-		} catch (Throwable e) {
+		} catch (ClientServicesException e) {
 			out.println("<pre>");
 			out.println("Problem Occurred while updating Activity: " + e.getMessage());
 			out.println("</pre>");

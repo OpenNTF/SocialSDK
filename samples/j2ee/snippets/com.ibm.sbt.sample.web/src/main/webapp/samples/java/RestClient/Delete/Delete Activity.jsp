@@ -21,6 +21,7 @@
 <%@page import="com.ibm.sbt.services.rest.atom.AtomEntry"%>
 <%@page import="com.ibm.sbt.services.client.Response"%>
 <%@page import=" com.ibm.sbt.services.rest.RestClient"%>
+<%@page import="com.ibm.sbt.services.client.ClientServicesException" %>
 <%@page import="java.util.*"%>
 
 				
@@ -51,7 +52,7 @@
 			}else{
 				out.println("There are no Activities to delete, please create an activitiy and run this sample again");
 			}
-		} catch (Throwable e) {
+		} catch (ClientServicesException e) {
 			out.println("<pre>");
 			out.println("Problem Occurred while deleting Activity: " + e.getMessage());
 			out.println("</pre>");

@@ -21,6 +21,7 @@
 <%@page import="com.ibm.sbt.services.rest.atom.AtomEntry"%>
 <%@page import="com.ibm.sbt.services.client.Response"%>
 <%@page import=" com.ibm.sbt.services.rest.RestClient"%>
+<%@page import="com.ibm.sbt.services.client.ClientServicesException" %>
 <%@page import="java.util.*"%>
 
 				
@@ -46,12 +47,12 @@
 			AtomEntry entry = feed.getEntries().get(0);
 			String communityId = entry.getAsString("./snx:communityUuid");
 			if(communityId != null){
-				Response<String> deleteResponse = restClient.doDelete(deleteApiPath).parameter("communityUuid", communityId).asString().checkResponseCode(201);
+				Response<String> deleteResponse = restClient.doDelete(deleteApiPath).parameter("communityUuid", communityId).asString().checkResponseCode(200);
 				out.print("Successfully deleted community - "+communityId);
 			}else{
 				out.println("There are no communities to delete, please create a community and run this sample again");
 			}
-		} catch (Throwable e) {
+		} catch (ClientServicesException e) {
 			out.println("<pre>");
 			out.println("Problem Occurred while deleting community: " + e.getMessage());
 			out.println("</pre>");

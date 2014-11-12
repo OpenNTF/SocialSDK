@@ -470,7 +470,7 @@ public class WikiService extends ConnectionsService {
 	 * @throws ClientServicesException
 	 */
 	public WikiPage createWikiPage(String wikiLabel, WikiPage wikiPage) throws ClientServicesException {
-		return createWikiPage(wikiLabel, wikiPage);
+		return createWikiPage(wikiLabel, wikiPage, null);
 	}
 	
 	/**
@@ -482,6 +482,7 @@ public class WikiService extends ConnectionsService {
 	 * @throws ClientServicesException
 	 */
 	public WikiPage createWikiPage(String wikiLabel, WikiPage wikiPage, Map<String, String> parameters) throws ClientServicesException {
+		parameters = getParameters(parameters);
 		String requestUrl = WikiUrls.WIKI_PAGES.format(this, WikiUrls.getWikiLabel(wikiLabel));
 		Response response = createWikiPageAux(requestUrl, wikiPage, parameters);
 		checkResponseCode(response, HTTPCode.CREATED);

@@ -1188,6 +1188,7 @@ public class ActivityService extends ConnectionsService {
 	protected Activity updateActivityEntityData(Activity activity, Response response) {
 		Node node = (Node) response.getData();
 		XPathExpression xpath = (node instanceof Document) ? (XPathExpression) AtomXPath.singleEntry.getPath() : null;
+		activity.clearFieldsMap();
 		activity.setData(node, nameSpaceCtx, xpath);
 		activity.setService(this);
 		return activity;

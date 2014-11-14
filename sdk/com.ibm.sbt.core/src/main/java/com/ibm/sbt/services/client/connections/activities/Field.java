@@ -162,7 +162,11 @@ public class Field extends BaseEntity {
 	 * Create a link to from the specified node
 	 */
 	protected Link createLink(Node node, FieldEntry fieldEntry) {
-		return new Link(getService(), new XmlDataHandler(node, ConnectionsConstants.nameSpaceCtx, (XPathExpression)fieldEntry.getPath()));
+		XmlDataHandler dataHandler = new XmlDataHandler(node, ConnectionsConstants.nameSpaceCtx, (XPathExpression)fieldEntry.getPath());
+		if (dataHandler.getData() != null) {
+			return new Link(getService(), dataHandler);
+		}
+		return null;
 	}
 	
 }

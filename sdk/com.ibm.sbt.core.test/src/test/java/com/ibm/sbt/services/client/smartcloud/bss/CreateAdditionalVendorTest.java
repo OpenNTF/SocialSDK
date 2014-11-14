@@ -15,15 +15,11 @@
  */
 package com.ibm.sbt.services.client.smartcloud.bss;
 
-import java.util.List;
-import java.util.logging.Level;
-
 import org.junit.Assert;
 import org.junit.Test;
 
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.services.client.base.JsonEntity;
-import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 
 /**
  * @author mwallace
@@ -37,6 +33,15 @@ public class CreateAdditionalVendorTest extends BaseBssTest {
     		String customerId = System.getProperty("CustomerId");
 			String engageSubscriptionId = createSubscription(customerId, 3, "D0NWLLL", 50);
 			System.out.println("SubscriptionId:"+engageSubscriptionId);
+			
+			final SubscriptionManagementService subscriptionManagement = getSubscriptionManagementService();
+			StateChangeListener stateChangeListener = new StateChangeListener(){
+				@Override
+				public void stateChanged(JsonEntity jsonEntity) {
+					System.out.println(jsonEntity.toJsonString());
+				}
+			};
+			subscriptionManagement.waitSubscriptionState(engageSubscriptionId, "ACTIVE" , 5, 1000, stateChangeListener);
 
 	    	String subscriberId = addSubscriber(customerId);
     		JsonEntity subscriber = getSubscriberById(subscriberId);

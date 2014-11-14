@@ -31,6 +31,7 @@ import com.ibm.sbt.services.client.base.AtomEntity;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.ConnectionsConstants;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
+import com.ibm.sbt.services.client.connections.common.Link;
 
 /**
  * @author mwallace
@@ -40,6 +41,7 @@ public class NodeEntity extends AtomEntity {
 	
 	private List<Field> fields;
 	private List<ActivityAttachment> attachments = new ArrayList<ActivityAttachment>();
+	private Link enclosureLink;
 
 	static final String UUID_PREFIX = "urn:lsid:ibm.com:oa:"; ////$NON-NLS-1$
 	
@@ -82,6 +84,15 @@ public class NodeEntity extends AtomEntity {
 	 */
 	public NodeEntity(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
 		super(service, node, namespaceCtx, xpathExpression);
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.ibm.sbt.services.client.base.BaseEntity#clearFieldsMap()
+	 */
+	@Override
+	public void clearFieldsMap() {
+		fields = null;
+		super.clearFieldsMap();
 	}
 	
 	/**
@@ -393,6 +404,18 @@ public class NodeEntity extends AtomEntity {
 		List<ActivityAttachment> copy = new ArrayList<ActivityAttachment>();
 		copy.addAll(attachments);
 		return copy;
+	}
+	
+	/**
+	 * Return the link.
+	 * 
+	 * @return link
+	 */
+	public Link getEnclosureLink() {
+		if (enclosureLink == null && getDataHandler() != null) {
+			enclosureLink = createLink((Node)getDataHandler().getData(), ActivityXPath.enclsoure_link);
+		}
+		return enclosureLink;
 	}
 	
 	//

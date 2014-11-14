@@ -29,6 +29,7 @@ import com.ibm.commons.xml.XMLException;
 import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.base.datahandlers.FieldEntry;
 import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
+import com.ibm.sbt.services.client.connections.common.Link;
 import com.ibm.sbt.services.client.connections.common.Person;
 
 /**
@@ -390,4 +391,16 @@ public class AtomEntity extends BaseEntity {
 		}
 		return null;
 	}
+	
+	/**
+	 * Create a link to from the specified node
+	 */
+	protected Link createLink(Node node, FieldEntry fieldEntry) {
+		XmlDataHandler dataHandler = new XmlDataHandler(node, ConnectionsConstants.nameSpaceCtx, (XPathExpression)fieldEntry.getPath());
+		if (dataHandler.getData() != null) {
+			return new Link(getService(), dataHandler);
+		}
+		return null;
+	}
+		
 }

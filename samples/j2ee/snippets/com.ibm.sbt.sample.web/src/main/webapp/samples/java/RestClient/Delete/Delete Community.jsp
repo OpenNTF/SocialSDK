@@ -56,6 +56,8 @@
 			out.println("<pre>");
 			out.println("Problem Occurred while deleting community: " + e.getMessage());
 			out.println("</pre>");
+		} catch(NullPointerException e){
+			
 		}
 	%>
 	</div>

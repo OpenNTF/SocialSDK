@@ -65,6 +65,8 @@
 			out.println("<pre>");
 			out.println("Problem Occurred while updating Activity: " + e.getMessage());
 			out.println("</pre>");
+		} catch(NullPointerException e){
+			
 		}
 	%>
 	</div>

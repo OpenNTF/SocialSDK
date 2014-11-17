@@ -60,6 +60,8 @@
 				out.println("<pre>");
 				out.println("Problem Occurred while creating Bookmark: " + e.getMessage());
 				out.println("</pre>");
+			} catch(NullPointerException e){
+				
 			}
 		%>
 	</div>

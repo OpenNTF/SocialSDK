@@ -61,6 +61,7 @@ import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
+import org.apache.http.auth.AuthenticationException;
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpDelete;
@@ -1300,17 +1301,10 @@ public abstract class ClientService {
 			}
 		}
 		
-
 		if(isResponseRequireAuthentication(httpResponse)){
 			forceAuthentication(args);
-			return null;
+			throw new ClientServicesException(new AuthenticationException());
 		}
-		
-/*		if ((httpResponse.getStatusLine().getStatusCode() == HttpServletResponse.SC_UNAUTHORIZED) || 
-			(endpoint != null && endpoint.getAuthenticationErrorCode() == statusCode)) {
-			forceAuthentication(args);
-			return null;
-		}*/
 		
 		Handler format = findHandler(httpRequestBase, httpResponse, args.handler);
 		

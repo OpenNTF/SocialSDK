@@ -45,6 +45,7 @@ public enum ActivityXPath implements FieldEntry {
 	completed("./a:category[@term='completed']"),
 	template("./a:category[@term='template']"),
 	memberListHref("./a:link[@rel='http://www.ibm.com/xmlns/prod/sn/member-list']/@href"),
+	enclsoure_link("./a:link[@rel='enclosure']"),
 	activityNode("./snx:activityNode"),
 	assignedTo("./snx:assignedto"),
 	collectionTitle("./app:collection/a:title"),

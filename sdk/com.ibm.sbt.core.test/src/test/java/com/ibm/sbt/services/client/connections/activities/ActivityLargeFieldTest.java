@@ -20,17 +20,21 @@ import java.io.InputStream;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.activity.ActivityRequiredException;
 
 import junit.framework.TestFailure;
 
 import org.apache.commons.io.IOUtils;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.experimental.categories.Categories.ExcludeCategory;
 
 import com.ibm.commons.xml.XMLException;
 import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 
 /**
  * @author mwallace
@@ -159,4 +163,45 @@ public class ActivityLargeFieldTest extends BaseActivityServiceTest {
 		
 	}
 	
+
+	@Test
+	public void testLargeFieldMyActivities() throws ClientServicesException, XMLException, IOException {
+		InputStream stream = readFile("latin.txt");
+		String content = IOUtils.toString(stream);
+		System.out.println("Content Size: "+content.length());
+		
+		Activity activity = new Activity();
+		activity.setTitle(createActivityTitle());
+		activity.setContent("Activity-"+System.currentTimeMillis());
+		TextField textField = new TextField();
+		textField.setName("large_field");
+		textField.setPosition(1000);
+		textField.setSummary(content);
+		textField.setHidden(true); // only hidden text fields can have more than 512 bytes
+		activity.addField(textField);
+
+		activityService.createActivity(activity);
+		System.out.println("Created Activity");
+		System.out.println(activity.toXmlString());
+		
+		Field[] fields = activity.getFields();
+		Assert.assertNotNull(fields);
+		Assert.assertEquals(1, fields.length);
+		Assert.assertNotNull(((TextField)fields[0]).getLink());
+		
+		this.activity = null;
+
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("includeEnclosureLink", "true");
+		EntityList<Activity> activities = activityService.getMyActivities(params);
+		System.out.println("Get My Activities First Activity");
+		System.out.println(activities.get(0).toXmlString());
+		
+		fields = activities.get(0).getFields();
+		Assert.assertNotNull(fields);
+		Assert.assertEquals(1, fields.length);
+		Assert.assertNotNull(((TextField)fields[0]).getLink());
+		
+	}
+
 }

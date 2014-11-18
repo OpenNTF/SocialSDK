@@ -15,10 +15,15 @@
  */
 package com.ibm.sbt.services.client.connections.activities;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -49,14 +54,17 @@ public class ActivityLargeContentTest extends BaseActivityServiceTest {
 		Activity created = activityService.createActivity(activity);
 		
 		Activity read = activityService.getActivity(created.getActivityUuid());
-		
-		System.out.println("CREATED: " + created.toXmlString());
+		Assert.assertNotNull(read.getEnclosureLink());
+		Assert.assertEquals(content.toString().length(), read.getEnclosureLink().getLength());
+		Assert.assertEquals(1520, read.getSummary().getBytes("UTF-8").length);
 		System.out.println("READ: " + read.toXmlString());
 		
-		System.out.println("BYTES: " + read.getSummary().getBytes("UTF-8").length);
-		System.out.println("LENGTH: " + read.getSummary().length());
-		
-		EntityList<Activity> activities = activityService.getMyActivities();
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("includeEnclosureLink", "true");
+		EntityList<Activity> activities = activityService.getMyActivities(params);
+		Assert.assertNotNull(activities.get(0).getEnclosureLink());
+		Assert.assertEquals(content.toString().length(), activities.get(0).getEnclosureLink().getLength());
+		Assert.assertEquals(1520, activities.get(0).getSummary().getBytes("UTF-8").length);
 		System.out.println("READ: " + activities.get(0).toXmlString());
 	}
 	

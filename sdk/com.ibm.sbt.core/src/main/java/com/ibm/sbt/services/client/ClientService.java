@@ -18,23 +18,23 @@ package com.ibm.sbt.services.client;
 import static com.ibm.sbt.services.client.base.CommonConstants.APPLICATION_JSON;
 import static com.ibm.sbt.services.client.base.CommonConstants.APPLICATION_OCTET_STREAM;
 import static com.ibm.sbt.services.client.base.CommonConstants.APPLICATION_XML;
-import static com.ibm.sbt.services.client.base.CommonConstants.MULTIPART_RELATED;
 import static com.ibm.sbt.services.client.base.CommonConstants.BINARY;
 import static com.ibm.sbt.services.client.base.CommonConstants.BINARY_OCTET_STREAM;
 import static com.ibm.sbt.services.client.base.CommonConstants.CH_SLASH;
 import static com.ibm.sbt.services.client.base.CommonConstants.CONTENT_ENCODING;
-import static com.ibm.sbt.services.client.base.CommonConstants.TRANSFER_ENCODING;
 import static com.ibm.sbt.services.client.base.CommonConstants.CONTENT_TYPE;
 import static com.ibm.sbt.services.client.base.CommonConstants.GZIP;
+import static com.ibm.sbt.services.client.base.CommonConstants.HTML;
 import static com.ibm.sbt.services.client.base.CommonConstants.INIT_URL_PARAM;
 import static com.ibm.sbt.services.client.base.CommonConstants.JSON;
 import static com.ibm.sbt.services.client.base.CommonConstants.LOCATION_HEADER;
+import static com.ibm.sbt.services.client.base.CommonConstants.MULTIPART_RELATED;
 import static com.ibm.sbt.services.client.base.CommonConstants.SLUG;
 import static com.ibm.sbt.services.client.base.CommonConstants.TEXT_PLAIN;
+import static com.ibm.sbt.services.client.base.CommonConstants.TRANSFER_ENCODING;
 import static com.ibm.sbt.services.client.base.CommonConstants.URL_PARAM;
 import static com.ibm.sbt.services.client.base.CommonConstants.UTF8;
 import static com.ibm.sbt.services.client.base.CommonConstants.XML;
-import static com.ibm.sbt.services.client.base.CommonConstants.HTML;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -61,6 +61,7 @@ import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
+import org.apache.http.auth.AuthenticationException;
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpDelete;
@@ -69,20 +70,14 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpRequestBase;
-import org.apache.http.entity.AbstractHttpEntity;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.FileEntity;
 import org.apache.http.entity.InputStreamEntity;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.entity.mime.FormBodyPart;
-import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
-import org.apache.http.entity.mime.content.ByteArrayBody;
-import org.apache.http.entity.mime.content.ContentBody;
-import org.apache.http.entity.mime.content.InputStreamBody;
-import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreProtocolPNames;
+import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.w3c.dom.Node;
 
@@ -486,7 +481,7 @@ public abstract class ClientService {
 		@Override
 		protected HttpEntity createEntity() throws ClientServicesException {
 			try {
-				return new StringEntity(content);
+				return new StringEntity(content, HTTP.UTF_8);
 			} catch (Exception ex) {
 				throw new ClientServicesException(ex);
 			}
@@ -1306,17 +1301,10 @@ public abstract class ClientService {
 			}
 		}
 		
-
 		if(isResponseRequireAuthentication(httpResponse)){
 			forceAuthentication(args);
-			return null;
+			throw new ClientServicesException(new AuthenticationException());
 		}
-		
-/*		if ((httpResponse.getStatusLine().getStatusCode() == HttpServletResponse.SC_UNAUTHORIZED) || 
-			(endpoint != null && endpoint.getAuthenticationErrorCode() == statusCode)) {
-			forceAuthentication(args);
-			return null;
-		}*/
 		
 		Handler format = findHandler(httpRequestBase, httpResponse, args.handler);
 		

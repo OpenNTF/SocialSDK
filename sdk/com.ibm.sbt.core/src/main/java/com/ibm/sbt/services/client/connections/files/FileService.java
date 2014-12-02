@@ -2655,7 +2655,7 @@ public class FileService extends ConnectionsService {
         }
         String accessType = AccessType.AUTHENTICATED.getText();
         String requestUri = FileUrls.COMMUNITY_FILE_METADATA.format(this,
-                FileUrlParts.accessType.get(accessType), FileUrlParts.communityId.get(communityLibraryId),
+                FileUrlParts.accessType.get(accessType), FileUrlParts.communityLibraryId.get(communityLibraryId),
                 FileUrlParts.fileId.get(fileEntry.getFileId()));
         String updateFilePayload = new FileSerializer(fileEntry).generateFileUpdatePayload();
         

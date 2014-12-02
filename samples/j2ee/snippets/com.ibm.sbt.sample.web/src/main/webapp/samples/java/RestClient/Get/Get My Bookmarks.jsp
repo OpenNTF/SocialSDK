@@ -1,5 +1,5 @@
 <!-- /*
- * © Copyright IBM Corp. 2012
+ * © Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -17,8 +17,11 @@
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.ibm.commons.runtime.Application"%>
 <%@page import="com.ibm.commons.runtime.Context"%>
-<%@page import="com.ibm.sbt.services.rest.RestClient"%>
+<%@page import="com.ibm.sbt.services.rest.atom.AtomFeed"%>
+<%@page import="com.ibm.sbt.services.rest.atom.AtomEntry"%>
 <%@page import="com.ibm.sbt.services.client.Response"%>
+<%@page import=" com.ibm.sbt.services.rest.RestClient"%>
+<%@page import="com.ibm.sbt.services.client.ClientServicesException" %>
 <%@page import="java.util.*"%>
 
 				
@@ -27,18 +30,27 @@
 	
 <html>
 <head>
-<title>SBT JAVA Sample - Get My Communities</title>
+<title>SBT Rest Client Sample - Get My Bookmarks</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 
 <body>
-	<div id="content">
+	<div id="content">	
 	<%
-	Response<String> response1 = 
-	RestClient.get("https://apps.na.collabserv.com/communities/service/atom/communities/my")
-			  .basicAuth("sam.brown4@yopmail.com", "l0tus@ibm")
-			  .asString();
-	out.println(response1.getData());
+	 final String apiPath = "/dogear/atom";
+	
+		try {
+			RestClient restClient = new RestClient("connections");
+			Response<AtomFeed> responseFeed = restClient.doGet(apiPath).parameter("access", "private").asAtomFeed();	
+			AtomFeed feed = responseFeed.getData();
+        	for(AtomEntry atomEntry : feed.getEntries()){
+        		out.println(atomEntry.getTitle());
+        	}
+		} catch (ClientServicesException e) {
+			out.println("<pre>");
+			out.println("Problem Occurred while fetching my bookmarks: " + e.getMessage());
+			out.println("</pre>");
+		}
 	%>
 	</div>
 </body>

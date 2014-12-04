@@ -51,6 +51,7 @@ public class CommunitySerializer extends AtomEntitySerializer<Community> {
 				type(),
 				id()
 		);
+		appendChildren(entry, tags());
 	}
 	
 	protected void generateSubCommUpdatePayload() throws ClientServicesException {
@@ -61,10 +62,10 @@ public class CommunitySerializer extends AtomEntitySerializer<Community> {
 				content(),
 				category(),
 				type(),
-				content(),
 				id(),
 				parentLink()
 		);
+		appendChildren(entry, tags());
 	}
 
 	public String createPayload() throws ClientServicesException {

@@ -31,6 +31,7 @@ import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.AtomFeedHandler;
+import com.ibm.sbt.services.client.base.AtomXPath;
 import com.ibm.sbt.services.client.base.AuthType;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.CommonConstants.HTTPCode;
@@ -396,7 +397,7 @@ public class CommunityService extends ConnectionsService {
 			community.setContent(community.getContent());
 		if(community.getFieldsMap().get(CommunityXPath.communityType)== null)
 			community.setCommunityType(community.getCommunityType());
-		if(!community.getFieldsMap().toString().contains(CommunityXPath.tags.toString()))
+		if(!community.getFieldsMap().toString().contains(AtomXPath.tags.toString()))
 			community.setTags(community.getTags());
 		community.setAsString(CommunityXPath.communityUuid, community.getCommunityUuid());
 		

@@ -159,9 +159,5 @@ public class Forum extends BaseForumEntity {
 		return getService().getForum(getUid());
     }
 
-	public List<String> getTags() {
-		return super.getBaseTags();
-	}
-	
 
 }

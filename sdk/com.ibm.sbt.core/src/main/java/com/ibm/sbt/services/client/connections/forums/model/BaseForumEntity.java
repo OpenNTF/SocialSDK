@@ -18,6 +18,7 @@ package com.ibm.sbt.services.client.connections.forums.model;
 
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.w3c.dom.Node;
@@ -110,22 +111,24 @@ public class BaseForumEntity extends AtomEntity {
 	/**
 	 * @sets the tags
 	 */
-	// FIXME this method should also be removed from here. 
 	public void setTags(List<String> tags) {
-		if(!tags.isEmpty()){
-			for (int i = 0; i < tags.size(); i++){
-				fields.put(ForumsXPath.tags.toString() + i , tags.get(i));
-			}
-		}
+		super.setBaseTags(tags);
 	}
 
 	/**
 	 * @sets the tags
 	 */
+	@Deprecated
 	public void setTags(String tags) {
-		setAsString(ForumsXPath.tags, tags);
+		List<String> tagsList = new ArrayList<String>();
+		tagsList.add(tags);
+		setTags(tagsList);
 	}
 
+	public List<String> getTags() {
+		return super.getBaseTags();
+	}
+	
 	@Override
 	public ForumService getService(){
 		return (ForumService)super.getService();

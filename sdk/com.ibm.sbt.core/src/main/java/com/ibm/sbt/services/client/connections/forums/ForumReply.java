@@ -290,10 +290,5 @@ public class ForumReply extends BaseForumEntity{
 		return getService().getForumReply(getUid());
 	}
 
-	public List<String> getTags() {
-		return super.getBaseTags();
-	}
-
-
 
 }

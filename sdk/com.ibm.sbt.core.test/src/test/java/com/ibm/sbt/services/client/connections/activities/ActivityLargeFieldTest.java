@@ -200,6 +200,7 @@ public class ActivityLargeFieldTest extends BaseActivityServiceTest {
 		fields = activities.get(0).getFields();
 		Assert.assertNotNull(fields);
 		Assert.assertEquals(1, fields.length);
+		Assert.assertTrue(((TextField)fields[0]).isHidden());
 		Assert.assertNotNull(((TextField)fields[0]).getLink());
 		
 	}

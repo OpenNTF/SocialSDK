@@ -172,7 +172,7 @@ public class SubscriberManagementService extends BssService {
     		// expect a 204
     		int statusCode = response.getResponse().getStatusLine().getStatusCode();
     		if (statusCode != 204) {
-    			throw new BssException(response, "Error deleting subscriber {0} caused by {1}", subscriberId, statusCode);
+    			throw new BssException(response, "Error activating subscriber {0} caused by {1}", subscriberId, statusCode);
     		}
 		} catch (Exception e) {
 			throw new BssException(e, "Error activating subscriber {0} caused by {1}", subscriberId, e.getMessage());

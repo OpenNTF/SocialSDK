@@ -33,6 +33,7 @@ public enum CommunityUrls implements URLContainer {
 	COMMUNITY_INSTANCE(new VersionedUrl(v4_0, 		"{communities}/service/atom/{authType}/community/instance?{communityUuid}")),
 	COMMUNITY_UPDATE(new VersionedUrl(v4_0, 		"{communities}/service/atom/{authType}/community/instance")),
 	COMMUNITY_MEMBERS(new VersionedUrl(v4_0, 		"{communities}/service/atom/{authType}/community/members?{communityUuid}")),
+	COMMUNITY_MEMBER(new VersionedUrl(v4_0, 		"{communities}/service/atom/{authType}/community/members?{communityUuid}&{userid}")),
 	COMMUNITY_SUBCOMMUNITIES(new VersionedUrl(v4_0, "{communities}/service/atom/{authType}/community/subcommunities")),
 	COMMUNITY_BOOKMARKS(new VersionedUrl(v4_0, 		"{communities}/service/atom/{authType}/community/bookmarks")),
 	COMMUNITY_FORUMTOPICS(new VersionedUrl(v4_0, 	"{communities}/service/atom/{authType}/community/forum/topics")),
@@ -44,6 +45,10 @@ public enum CommunityUrls implements URLContainer {
 	
 	public static NamedUrlPart getCommunityUuid(String id){
 		return new NamedUrlPart("communityUuid", "communityUuid"+"="+id);		
+	}
+	
+	public static NamedUrlPart getUserid(String id){
+		return new NamedUrlPart("userid", "userid"+"="+id);		
 	}
 	
 	public String format(BaseService service, NamedUrlPart... args) {

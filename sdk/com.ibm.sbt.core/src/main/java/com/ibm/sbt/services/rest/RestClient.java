@@ -114,6 +114,10 @@ public class RestClient {
 		return this;
 	}
 	
+	public Endpoint getEndpoint(){
+		return restService.getEndpoint();
+	}
+	
 	/**
 	 * Method to send an HTTP GET request to a server, Using a static instance of RestClient .
 	 * @param serviceUrl - The url that the GET request is sent to.

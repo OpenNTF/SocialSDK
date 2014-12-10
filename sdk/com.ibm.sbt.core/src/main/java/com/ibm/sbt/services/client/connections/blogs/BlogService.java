@@ -407,7 +407,7 @@ public class BlogService extends ConnectionsService {
 			blog.setTitle(blog.getTitle());
 		if(blog.getFieldsMap().get(AtomXPath.summary)== null)
 			blog.setSummary(blog.getSummary());
-		if(!blog.getFieldsMap().toString().contains(BlogXPath.tags.toString()))
+		if(!blog.getFieldsMap().toString().contains(AtomXPath.tags.toString()))
 			blog.setTags(blog.getTags());
 
 		BlogSerializer serializer = new BlogSerializer(blog);
@@ -524,7 +524,7 @@ public class BlogService extends ConnectionsService {
 			post.setTitle(post.getTitle());
 		if(post.getFieldsMap().get(AtomXPath.content)== null)
 			post.setContent(post.getContent());
-		if(!post.getFieldsMap().toString().contains(BlogXPath.tags.toString()))
+		if(!post.getFieldsMap().toString().contains(AtomXPath.tags.toString()))
 			post.setTags(post.getTags());
 			
 		BlogPostSerializer serializer = new BlogPostSerializer(post);

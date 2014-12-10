@@ -131,6 +131,7 @@ public final class ProfilesConstants {
 			GIVEN_NAMES("givenNames", "com.ibm.snx_profiles.base.givenNames"),
 			SURNAME("surname", "com.ibm.snx_profiles.base.surname"),
 			USER_STATE("userState",	"com.ibm.snx_profiles.base.userState"),
+			USER_MODE("userMode","com.ibm.snx_profiles.base.userMode")
 		;
 		
 		private final String entityName;

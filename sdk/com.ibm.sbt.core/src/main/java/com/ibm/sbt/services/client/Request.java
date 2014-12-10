@@ -29,7 +29,10 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.entity.mime.content.ByteArrayBody;
+import org.apache.http.entity.mime.content.ContentBody;
 import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.entity.mime.content.InputStreamBody;
 import org.apache.http.entity.mime.content.StringBody;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -61,7 +64,7 @@ public class Request {
 	private Map<String, String> parameters = new HashMap<String, String>();
 	private Map<String, String> headers = new HashMap<String, String>();
 	private Handler handler = null;
-	private String body = null; 
+	private Object body = null; 
 	private List<BodyPart> bodyParts = new ArrayList<Request.BodyPart>();
 	
 	/**
@@ -161,6 +164,19 @@ public class Request {
 		this.headers.put("Content-Type", mimeType);
 		return this;
 	}
+
+	/**
+	 * Method to set the request input body.
+	 * @param body the request body to add to the request.
+	 * @param mimeType the Content type of the body i.e application/atom+xml
+	 * @return The Request object
+	 * @throws UnsupportedEncodingException
+	 */
+	public Request body(InputStream body, String mimeType) throws UnsupportedEncodingException {
+		this.body = body;
+		this.headers.put("Content-Type", mimeType);
+		return this;
+	}
 	
 	/**
 	 * Method to build the request body in parts, or to add to the existing request body.
@@ -187,21 +203,49 @@ public class Request {
 		bodyParts.add(new BodyPart(name, file, mimeType));
 		return this;
 	}
+
+	/**
+	 * Method to build the request body in parts, or to add to the existing request body.
+	 * @param name
+	 * @param inputStream
+	 * @param mimeType
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
+	public Request bodyPart(String name, InputStream inputStream, String mimeType) throws UnsupportedEncodingException {
+		bodyParts.add(new BodyPart(name, inputStream, mimeType));
+		return this;
+	}
 	
+	/**
+	 * Method to build the request body in parts, or to add to the existing request body.
+	 * @param name
+	 * @param byteArrayData
+	 * @param mimeType
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
+	/*
+	public Request bodyPart(String name, byte[] byteArrayData, String mimeType) throws UnsupportedEncodingException {
+		bodyParts.add(new BodyPart(name, byteArrayData, mimeType));
+		return this;
+	}
+	*/
+
 	/**
 	 * Method to retrieve the request body.
 	 * @return The request body
 	 */
-	public String getBody() {
+	public Object getBody() {
 		if (body != null) {
 			return body;
 		}
 		if (!bodyParts.isEmpty()) {
 			MultipartEntityBuilder builder = MultipartEntityBuilder.create();
 			for (BodyPart bodyPart : bodyParts) {
-				bodyPart.addPart(builder);
+				builder.addPart(bodyPart.getName(), bodyPart.getData());
 			}
-			return builder.build().toString();
+			return builder.build();
 		}
 		return null;
 	}
@@ -322,36 +366,62 @@ public class Request {
 		}
 	}
 
-	
-		
 	private class BodyPart {
-		
-		String name;
-		String stringData;
-		File fileData;
-		String mimeType;
+		private final String name;
+		private final ContentBody data;
 		
 		BodyPart(String name, String stringData, String mimeType) {
 			this.name = name;
-			this.stringData = stringData;
-			this.mimeType = mimeType;
+			this.data = new StringBody(stringData, ContentType.create(mimeType));
 		}
 
 		BodyPart(String name, File fileData, String mimeType) {
 			this.name = name;
-			this.fileData = fileData;
-			this.mimeType = mimeType;
+			this.data = new FileBody(fileData, ContentType.create(mimeType));
+		}
+
+		BodyPart(String name, InputStream inputStreamData, String mimeType) {
+			this.name = name;
+			this.data = new InputStreamBody(inputStreamData, ContentType.create(mimeType));
+		}
+
+		BodyPart(String name, byte[] byteArrayData, String mimeType) {
+			this.name = name;
+			this.data = new ByteArrayBody(byteArrayData, ContentType.create(mimeType), name);
 		}
 		
-		void addPart(MultipartEntityBuilder builder) {
-			if (stringData != null) {
-				builder.addPart(name, new StringBody(stringData, ContentType.create(mimeType)));
-			}
-			if (fileData != null) {
-				builder.addPart(name, new FileBody(fileData, ContentType.create(mimeType)));
-			}
-			
+		public final String getName(){
+			return name;
+		}
+		
+		public final ContentBody getData(){
+			return data;
 		}
 	}
 	
+	/*
+	private class BodyPart {
+		private final String name;
+		private final Object data;
+		private final String mimeType;
+		
+		BodyPart(String name, Object data, String mimeType) {
+			this.name = name;
+			this.data = data;
+			this.mimeType = mimeType;
+		}
+
+		public final String getName(){
+			return name;
+		}
+
+		public final String getMimeType(){
+			return mimeType;
+		}
+		
+		public final Object getData(){
+			return data;
+		}
+	}
+	*/
 }

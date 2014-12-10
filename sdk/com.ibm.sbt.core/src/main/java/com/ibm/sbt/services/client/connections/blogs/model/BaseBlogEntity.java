@@ -124,18 +124,14 @@ public class BaseBlogEntity extends AtomEntity {
     * @return the list of Tags
     */
 	public List<String> getTags() {
-		return (List<String>) Arrays.asList(getDataHandler().getAsArray(BlogXPath.tags));
+		return super.getBaseTags();
 	}
 	/**sets the tags
     *
     * @param List of Tags
     */
 	public void setTags(List<String> tags) {
-		if(!tags.isEmpty()){
-			for (int i = 0; i < tags.size(); i++){
-				   fields.put(BlogXPath.tags.toString() + i , tags.get(i));
-			}
-		}
+		super.setBaseTags(tags);
 	}
 	
 	@Override

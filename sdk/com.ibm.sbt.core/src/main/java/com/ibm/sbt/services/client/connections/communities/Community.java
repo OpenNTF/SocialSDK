@@ -16,6 +16,7 @@
 package com.ibm.sbt.services.client.connections.communities;
 
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -173,25 +174,24 @@ public class Community extends AtomEntity {
 	 */
 
 	public List<String> getTags() {
-		return (List<String>) Arrays.asList(getDataHandler().getAsArray(CommunityXPath.tags));
+		return super.getBaseTags();
 	}
 
 	/**
 	 * @sets the tags
 	 */
 	public void setTags(List<String> tags) {
-		if(!tags.isEmpty()){
-			for (int i = 0; i < tags.size(); i++){
-				   fields.put((CommunityXPath.tags).toString() + i , tags.get(i));
-			}
-		}
+		super.setBaseTags(tags);
 	}
 
 	/**
 	 * @sets the tags
 	 */
+	@Deprecated
 	public void setTags(String tags) {
-		setAsString(CommunityXPath.tags, tags);
+		List<String> tagsList = new ArrayList<String>();
+		tagsList.add(tags);
+		setTags(tagsList);
 	}
 
 	/**

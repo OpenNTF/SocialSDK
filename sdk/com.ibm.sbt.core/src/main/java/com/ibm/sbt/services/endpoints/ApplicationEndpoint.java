@@ -18,17 +18,21 @@ package com.ibm.sbt.services.endpoints;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
+
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.runtime.util.UrlUtil;
 import com.ibm.sbt.security.authentication.AuthenticationException;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientService.Args;
 import com.ibm.sbt.services.client.ClientService.Handler;
+import com.ibm.sbt.services.client.ClientServiceListener;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.endpoints.js.JSReference;
@@ -57,6 +61,14 @@ public class ApplicationEndpoint implements Endpoint {
     
     protected IllegalStateException newNotApplicableException() {
     	throw new IllegalStateException("This function is not application for an ApplicationEndpoint");
+    }
+    
+    /* (non-Javadoc)
+     * @see com.ibm.sbt.services.endpoints.Endpoint#setListener(com.ibm.sbt.services.client.ClientServiceListener)
+     */
+    @Override
+    public void setListener(ClientServiceListener listener) {
+    	throw newNotApplicableException();
     }
     
     /* (non-Javadoc)

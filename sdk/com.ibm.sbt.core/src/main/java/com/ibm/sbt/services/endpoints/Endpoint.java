@@ -17,11 +17,14 @@ package com.ibm.sbt.services.endpoints;
 
 import java.util.Map;
 import java.util.Set;
+
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.DefaultHttpClient;
+
 import com.ibm.sbt.security.authentication.AuthenticationException;
 import com.ibm.sbt.services.client.ClientService;
+import com.ibm.sbt.services.client.ClientServiceListener;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.ClientService.Args;
 import com.ibm.sbt.services.client.ClientService.Handler;
@@ -387,6 +390,10 @@ public interface Endpoint {
      * @throws ClientServicesException
      */
     public ClientService getClientService() throws ClientServicesException;
+    
+    /**
+     */
+	public void setListener(ClientServiceListener listener);   
     
     //
     // Manage the server credential

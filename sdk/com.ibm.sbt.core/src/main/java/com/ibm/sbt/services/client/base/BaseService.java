@@ -27,6 +27,7 @@ import java.util.Map;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientService.Handler;
+import com.ibm.sbt.services.client.ClientServiceListener;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.Response;
 import com.ibm.sbt.services.client.base.CommonConstants.HTTPCode;
@@ -41,17 +42,19 @@ import com.ibm.sbt.services.endpoints.EndpointFactory;
  */
 public abstract class BaseService implements Serializable {
 
-	private static final long 					serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-	public static final int						DEFAULT_CACHE_SIZE		= 0;
-	public static final String					DEFAULT_ENDPOINT_NAME	= "connections";
-	
-	protected transient static HashMap<String, Object>	cache					= new HashMap<String, Object>();
-	protected transient int						cacheSize;
-	protected Handler							dataFormat;
-	protected transient Endpoint				endpoint;
+	public static final int DEFAULT_CACHE_SIZE = 0;
+	public static final String DEFAULT_ENDPOINT_NAME = "connections";
 
+	protected transient static HashMap<String, Object> cache = new HashMap<String, Object>();
+	protected transient int cacheSize;
+	protected Handler dataFormat;
+	protected transient Endpoint endpoint;
+	protected Map<String, String> headers = new HashMap<String, String>();
 	protected String[] serviceMappingKeys = new String[]{};
+	
+	
 	/**
 	 * Constructor
 	 */
@@ -102,6 +105,15 @@ public abstract class BaseService implements Serializable {
     public BaseService(Endpoint endpoint, int cacheSize) {
         this.endpoint = endpoint;
         this.cacheSize = cacheSize;
+    }
+    
+    /**
+     * Add a default header
+     * 
+     * @param name
+     */
+    public void addDefaultHeader(String name, String value) {
+    	headers.put(name, value);
     }
 
 	/**
@@ -273,7 +285,7 @@ public abstract class BaseService implements Serializable {
 	 *             when the creation fails, as null/false return may have other meaning here
 	 */
 	public Response createData(String serviceUrl, Map<String, String> parameters, Object content, Handler format) throws ClientServicesException {
-    	return createData(serviceUrl, parameters, new HashMap<String, String>(), content);	    
+    	return createData(serviceUrl, parameters, getDefaultHeaders(), content);	    
 	}
 	
 	
@@ -312,7 +324,7 @@ public abstract class BaseService implements Serializable {
 	 */
 	public Response deleteData(String serviceUrl, Map<String, String> parameters, String nameParameterId)
 			throws ClientServicesException {
-	    return deleteData(serviceUrl, parameters, new HashMap<String, String>(), nameParameterId);
+	    return deleteData(serviceUrl, parameters, getDefaultHeaders(), nameParameterId);
 	}
 	
 	/**
@@ -411,7 +423,7 @@ public abstract class BaseService implements Serializable {
 	 */
 	//TODO Fix cache with DataHolder object
 	public Response retrieveData(String url, Map<String, String> parameters, String nameParameterId) throws ClientServicesException {
-			return retrieveData(url, parameters, new HashMap<String, String>(), nameParameterId);
+			return retrieveData(url, parameters, getDefaultHeaders(), nameParameterId);
 	}
 	
 	/**
@@ -429,7 +441,7 @@ public abstract class BaseService implements Serializable {
 	//TODO: Use Args pattern to pass the headers and avoid hard-coding the content-type
 	public Response updateData(String serviceUrl, Map<String, String> parameters, Object content,
 			String nameParameterId) throws ClientServicesException {
-	    return updateData(serviceUrl, parameters, new HashMap<String, String>(), content, nameParameterId);
+	    return updateData(serviceUrl, parameters, getDefaultHeaders(), content, nameParameterId);
 	}
 
 	/**
@@ -523,7 +535,6 @@ public abstract class BaseService implements Serializable {
 		cache.put(key, content);
 	}
 
-	
 	/**
 	 * Returns a valid parameters HashMap even if null is passed
 	 * 
@@ -533,6 +544,17 @@ public abstract class BaseService implements Serializable {
 	protected Map<String, String> getParameters(Map<String, String> parameters) {
 		if(parameters == null) return new HashMap<String, String>();
 		else return parameters;
+	}
+	
+	/**
+	 * Return default headers
+	 *  
+	 * @return
+	 */
+	protected Map<String, String> getDefaultHeaders() {
+		Map<String, String> defaultHeaders = new HashMap<String, String>();
+		defaultHeaders.putAll(headers);
+		return defaultHeaders;
 	}
 	
 	/**

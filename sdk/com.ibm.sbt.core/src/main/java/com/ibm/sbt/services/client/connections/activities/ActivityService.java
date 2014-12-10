@@ -1006,17 +1006,52 @@ public class ActivityService extends ConnectionsService {
 		String requestUrl = ActivityUrls.CHANGE_PRIORITY.format(this, ActivityUrls.activityNodePart(activityNodeUuid), ActivityUrls.priorityPart(priority));
 		updateActivityEntity(requestUrl, null, null, HTTPCode.NO_CONTENT);
 	}
+	
+	/**
+	 * Change the completion status of the specified activity
+	 * 
+	 * @param activity
+	 * @param completed
+	 * @throws ClientServicesException
+	 */
+	public void setCompletion(Activity activity, boolean completed) throws ClientServicesException {
+		String requestUrl = ActivityUrls.SET_COMPLETION.format(this, ActivityUrls.activityNodePart(activity.getActivityUuid()), ActivityUrls.completedPart(completed));
+		updateActivityEntity(requestUrl, null, null, HTTPCode.NO_CONTENT);
+	}
 
+	/**
+	 * 
+	 * @param destinationUuid
+	 * @param fieldUuid
+	 * @return
+	 * @throws ClientServicesException
+	 */
 	public ActivityNode moveFieldToEntry(String destinationUuid, String fieldUuid) throws ClientServicesException {
 		return moveFieldToEntry(destinationUuid, fieldUuid, null);
 	}
 
+	/**
+	 * 
+	 * @param destinationUuid
+	 * @param fieldUuid
+	 * @param position
+	 * @return
+	 * @throws ClientServicesException
+	 */
 	public ActivityNode moveFieldToEntry(String destinationUuid, String fieldUuid, int position) throws ClientServicesException {
 		Map<String, String> parameters = getParameters(null);
 		parameters.put("position", Integer.toString(position));
 		return moveFieldToEntry(destinationUuid, fieldUuid, parameters);
 	}
 
+	/**
+	 * 
+	 * @param destinationUuid
+	 * @param fieldUuid
+	 * @param parameters
+	 * @return
+	 * @throws ClientServicesException
+	 */
 	public ActivityNode moveFieldToEntry(String destinationUuid, String fieldUuid, Map<String, String> parameters) throws ClientServicesException {
 		String requestUrl = ActivityUrls.MOVE_FIELD.format(this, ActivityUrls.destinationPart(destinationUuid), ActivityUrls.fieldPart(fieldUuid));
 		Response response = putData(requestUrl, parameters, getAtomHeaders(), null, null);
@@ -1025,10 +1060,25 @@ public class ActivityService extends ConnectionsService {
 		return getActivityNodeFeedHandler(false).createEntity(response);
 	}
 
+	/**
+	 * 
+	 * @param nodeUuid
+	 * @param destinationUuid
+	 * @return
+	 * @throws ClientServicesException
+	 */
 	public ActivityNode moveNode(String nodeUuid, String destinationUuid) throws ClientServicesException {
 		return this.moveNode(nodeUuid, destinationUuid, null);
 	}
 
+	/**
+	 * 
+	 * @param nodeUuid
+	 * @param destinationUuid
+	 * @param parameters
+	 * @return
+	 * @throws ClientServicesException
+	 */
 	public ActivityNode moveNode(String nodeUuid, String destinationUuid, Map<String, String> parameters) throws ClientServicesException {
 		String requestUrl = ActivityUrls.MOVE_NODE.format(this, ActivityUrls.activityNodePart(nodeUuid), ActivityUrls.destinationPart(destinationUuid));
 		Response response = createData(requestUrl, parameters, getAtomHeaders(), null, null);
@@ -1037,10 +1087,25 @@ public class ActivityService extends ConnectionsService {
 		return getActivityNodeFeedHandler(false).createEntity(response);
 	}
 
+	/**
+	 * 
+	 * @param nodeUuid
+	 * @param destinationUuid
+	 * @return
+	 * @throws ClientServicesException
+	 */
 	public ActivityNode copyNode(String nodeUuid, String destinationUuid) throws ClientServicesException {
 		return this.copyNode(nodeUuid, destinationUuid, null);
 	}
 
+	/**
+	 * 
+	 * @param nodeUuid
+	 * @param destinationUuid
+	 * @param parameters
+	 * @return
+	 * @throws ClientServicesException
+	 */
 	public ActivityNode copyNode(String nodeUuid, String destinationUuid, Map<String, String> parameters) throws ClientServicesException {
 		String requestUrl = ActivityUrls.COPY_NODE.format(this, ActivityUrls.activityNodePart(nodeUuid), ActivityUrls.destinationPart(destinationUuid));
 		Response response = createData(requestUrl, parameters, getAtomHeaders(), null, null);
@@ -1111,7 +1176,10 @@ public class ActivityService extends ConnectionsService {
 				ActivitySerializer serializer = new ActivitySerializer(activity);
 				payload = serializer.generateUpdate();
 			}
-			Map<String, String> headers = activity.hasAttachments() ? getMultipartHeaders() : getAtomHeaders();
+			Map<String, String> headers = getAtomHeaders();
+			if (activity != null && activity.hasAttachments()) {
+				headers = getMultipartHeaders();
+			}
 			String uniqueId = (activity == null) ? null : activity.getActivityUuid();
 			Response response = putData(requestUrl, parameters, headers, payload, uniqueId);
 			checkResponseCode(response, expectedCode);

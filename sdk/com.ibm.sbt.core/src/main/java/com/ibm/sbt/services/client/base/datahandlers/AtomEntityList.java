@@ -40,6 +40,9 @@ public class AtomEntityList<T extends AtomEntity> extends EntityList<T> {
 	private FieldEntry ItemsPerPage = ConnectionsFeedXpath.ItemsPerPage;
 	private FieldEntry CurrentPage = ConnectionsFeedXpath.CurrentPage;
 
+	public AtomEntityList() {
+	}
+	
 	public AtomEntityList(Response requestData, IFeedHandler<T> feedHandler) {
 		super(requestData, feedHandler);
 	}

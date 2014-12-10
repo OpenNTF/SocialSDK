@@ -45,6 +45,8 @@ public class ActivityTest extends BaseActivityServiceTest {
 		XPathExpression xpath = (XPathExpression)AtomXPath.singleEntry.getPath();
 		Activity activity = new Activity(activityService, node, nameSpaceCtx, xpath);
 		
+		System.out.println(activity.toXmlString());
+		
 		Assert.assertEquals("5f89a416-68e5-4666-af8e-72150bf50e22", activity.getActivityUuid());
 		Assert.assertEquals("com.ibm.sbt.services.client.connections.activities.ActivityServiceCrudrTest#1615749198 Community - 1396026691896", activity.getTitle());
 		Assert.assertEquals(true, activity.isCommunityActivity());

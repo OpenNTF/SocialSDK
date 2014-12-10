@@ -20,10 +20,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
+
 import com.ibm.commons.runtime.Application;
 import com.ibm.commons.runtime.Context;
 import com.ibm.commons.util.StringUtil;
@@ -35,6 +37,7 @@ import com.ibm.sbt.services.client.AuthenticationService;
 import com.ibm.sbt.services.client.ClientService;
 import com.ibm.sbt.services.client.ClientService.Args;
 import com.ibm.sbt.services.client.ClientService.Handler;
+import com.ibm.sbt.services.client.ClientServiceListener;
 import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.GenericService;
 import com.ibm.sbt.services.client.Response;
@@ -70,6 +73,7 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
     private String proxyConfig;
     private boolean allowClientAccess = true;
     private boolean useProxy = true;
+    private ClientServiceListener listener;
     
     protected Map<String, Object> clientParams = new HashMap<String, Object>();
     
@@ -86,6 +90,14 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
     protected static final String PLATFORM_TWITTER = "twitter";
     
     public AbstractEndpoint() {
+    }
+    
+    /* (non-Javadoc)
+     * @see com.ibm.sbt.services.endpoints.Endpoint#setListener(com.ibm.sbt.services.client.ClientServiceListener)
+     */
+    @Override
+    public void setListener(ClientServiceListener listener) {
+    	this.listener = listener;
     }
     
     @Override
@@ -413,13 +425,15 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
     			}
     			// set endpoint
     			clientService.setEndpoint(this);
-
+    			clientService.setListener(this.listener);
     			return clientService;
    		} catch(Exception ex) {
     			throw new ClientServicesException(ex,"Cannot create ClientService class {0}",cls);
     		}
     	}
-    	return new GenericService(this);
+    	ClientService clientService = new GenericService(this);
+    	clientService.setListener(this.listener);
+		return clientService;
     }
 
     @Override

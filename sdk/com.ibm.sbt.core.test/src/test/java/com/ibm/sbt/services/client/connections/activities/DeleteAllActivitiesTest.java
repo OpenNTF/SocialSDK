@@ -39,8 +39,11 @@ public class DeleteAllActivitiesTest extends BaseActivityServiceTest {
 		while (activities.getTotalResults() > 0) {
 			for (Activity activity : activities) {
 				if (!activity.isDeleted()) {
-					System.out.println("Deleting: "+activity.getActivityUuid());
-					activity.delete();
+					try {
+						activity.delete();
+						System.out.println("Deleted: "+activity.getActivityUuid());
+					} catch (Exception e) {
+					}
 				}
 			}
 			activities = activityService.getMyActivities(params);

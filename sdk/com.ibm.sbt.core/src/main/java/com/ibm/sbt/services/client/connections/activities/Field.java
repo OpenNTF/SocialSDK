@@ -79,10 +79,7 @@ public class Field extends BaseEntity {
 	 * @return hidden
 	 */
 	public boolean isHidden() {
-		if (fields.containsKey(ActivityXPath.field_hidden.getName())){
-			return (Boolean)fields.get(ActivityXPath.field_hidden.getName());
-		}
-		return exists(ActivityXPath.field_hidden);
+		return getAsBoolean(ActivityXPath.field_hidden);
 	}
 	
 	/**

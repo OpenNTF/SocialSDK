@@ -43,7 +43,7 @@ public enum BssUrls implements URLContainer {
 	API_RESOURCE_GET_SUBSCRIBER_BY_CUSTOMER(new VersionedUrl(v4_0, "/api/bss/resource/subscriber?_namedQuery=getSubscriberByCustomer&customer={customerId}")),
 	API_RESOURCE_SUBSCRIPTION(new VersionedUrl(v4_0, "/api/bss/resource/subscription")),
 	API_RESOURCE_SUBSCRIPTION_SUBSCRIPTIONID(new VersionedUrl(v4_0, "/api/bss/resource/subscription/{subscriptionId}")),
-	API_RESOURCE_GET_SUBSCRIPTION_BY_CUSTOMERID(new VersionedUrl(v4_0, "/api/bss/resource/subscription?_namedQuery=getSubscriptionByCustomer&customerId=customerId")),
+	API_RESOURCE_GET_SUBSCRIPTION_BY_CUSTOMERID(new VersionedUrl(v4_0, "/api/bss/resource/subscription?_namedQuery=getSubscriptionByCustomer&customerId={customerId}")),
 	API_RESOURCE_SUBSCRIPTION_SEAT(new VersionedUrl(v4_0, "/api/bss/resource/subscription/{subscriptionId}/seat/{seatId}")),
 	API_AUTHORIZATION_GETROLELIST(new VersionedUrl(v4_0, "/api/bss/service/authorization/getRoleList?loginName={loginName}")),
 	API_AUTHORIZATION_ASSIGNROLE(new VersionedUrl(v4_0, "/api/bss/service/authorization/assignRole?loginName={loginName}&role={role}")),

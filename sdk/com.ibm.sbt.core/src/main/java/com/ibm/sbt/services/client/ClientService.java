@@ -45,6 +45,7 @@ import java.io.Reader;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -120,6 +121,8 @@ import com.ibm.sbt.services.util.SSLUtil;
 public abstract class ClientService {
 
 	protected Endpoint endpoint;
+	
+	private ClientServiceListener listener;
 
 	// Constants for the methods
 	public static final String METHOD_GET = "get"; //$NON-NLS-1$
@@ -1135,6 +1138,11 @@ public abstract class ClientService {
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.entering(sourceClass, "xhr", new Object[] { method, args });
 		}
+		
+		// notify listener
+		if (!notifyListener(method, args, content)) {
+			return null;
+		}
 
 		checkAuthentication(args);
 		checkUrl(args);
@@ -1159,6 +1167,9 @@ public abstract class ClientService {
 		} else {
 			throw new ClientServicesException(null, "Unsupported HTTP method {0}", method);
 		}
+
+		// notify listener
+		response = notifyListener(method, args, content, response);
 		
 		if (logger.isLoggable(Level.FINEST)) {
 			logger.exiting(sourceClass, "xhr", response);
@@ -1563,4 +1574,23 @@ public abstract class ClientService {
 
 		return httpClient;
 	}
+	
+	public void setListener(ClientServiceListener listener) {
+		this.listener = listener;
+	}
+	
+	private boolean notifyListener(String method, Args args, Object content) throws ClientServicesException {
+		if (listener != null) {
+			return listener.preXhr(method, args, content);
+		}
+		return true;
+	}
+	
+	private Response notifyListener(String method, Args args, Object content, Response response) throws ClientServicesException {
+		if (listener != null) {
+			return listener.postXhr(method, args, content, response);
+		}
+		return response;
+	}
+	
 }

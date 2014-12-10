@@ -42,6 +42,7 @@ public enum ActivityUrls implements URLContainer {
 	TRASHED_ACTIVITY_NODES(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/trash?activityUuid={activityUuid}")), // Retrieves a feed of the activities and entries in the trash
 	ACTIVITY(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/activity?activityUuid={activityUuid}")), // Retrieving an Activity entry and creating an activity node
 	CHANGE_PRIORITY(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/activitynode?activityNodeUuid={activityNodeUuid}&priority={priority}")), // Change the priority of the specified activity
+	SET_COMPLETION(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/activitynode?activityNodeUuid={activityNodeUuid}&completed={completed}")), // Set the completion status of the specified activity
 	ACTIVITY_NODE(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/activitynode?activityNodeUuid={activityNodeUuid}")), // Retrieve, update, deleting activity nodes programmatically
 	TRASHED_ACTIVITY_NODE(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/trashednode?activityNodeUuid={activityNodeUuid}")), // Restoring activity nodes programmatically
 	ACTIVITY_ACL(new VersionedUrl(ConnectionsConstants.v4_0, "{activities}/service/atom2/acl?activityUuid={activityUuid}")), // Adding an activity member programmatically
@@ -67,6 +68,10 @@ public enum ActivityUrls implements URLContainer {
 	
 	static final public NamedUrlPart priorityPart(int priority) {
 		return new NamedUrlPart("priority", "" + priority);
+	}
+	
+	static final public NamedUrlPart completedPart(boolean completed) {
+		return new NamedUrlPart("completed", completed ? "yes" : "no");
 	}
 	
 	static final public NamedUrlPart activityPart(String activityUuid) {

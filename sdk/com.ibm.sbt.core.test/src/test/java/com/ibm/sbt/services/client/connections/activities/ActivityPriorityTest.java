@@ -45,6 +45,24 @@ public class ActivityPriorityTest extends BaseActivityServiceTest {
 		activityService.deleteActivity(created);
 	}
 	
+	@Test
+	public void testNegativePriorityActivity() throws ClientServicesException {
+		Activity created = createActivity(createTitle(Activity.PRIORITY_MEDIUM), Activity.PRIORITY_MEDIUM);
+		
+		created.changePriority(-1);
+		
+		Activity read = activityService.getActivity(activity.getActivityUuid());
+		Assert.assertEquals(activity.getUpdated().getTime(), read.getUpdated().getTime());
+		Assert.assertEquals(-1, read.getPriority());
+		
+		EntityList<Activity> activities = activityService.getTunedOutActivities();
+		Assert.assertNotNull("Expected non null activities", activities);
+		Assert.assertFalse("Expected non empty activities", activities.isEmpty());
+		Assert.assertNotNull(created.getActivityUuid(), activities.get(0).getId());
+		
+		activityService.deleteActivity(created);
+	}
+	
     protected String createTitle(int priority) {
     	return "ActivityPriority" + priority + " - " + System.currentTimeMillis();
     }	

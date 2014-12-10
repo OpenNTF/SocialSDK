@@ -31,7 +31,7 @@ public class CreateAdditionalVendorTest extends BaseBssTest {
     public void testCreateAdditionalVendor() {
     	try {
     		String customerId = System.getProperty("CustomerId");
-			String engageSubscriptionId = createSubscription(customerId, 3, "D0NWLLL", 50);
+			String engageSubscriptionId = createSubscription(customerId, 3, "D0NWLLL", 1);
 			System.out.println("SubscriptionId:"+engageSubscriptionId);
 			
 			final SubscriptionManagementService subscriptionManagement = getSubscriptionManagementService();

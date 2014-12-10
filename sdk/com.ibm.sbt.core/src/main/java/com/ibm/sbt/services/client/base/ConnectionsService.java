@@ -44,6 +44,11 @@ public abstract class ConnectionsService extends BaseService {
 		MULTIPART_HEADERS.put(CONTENT_TYPE, MULTIPART_ATOM);
 	}
 
+	private static Map<String,String> BINARY_HEADERS = new HashMap<String, String>();
+	static {
+		BINARY_HEADERS.put(CONTENT_TYPE, BINARY_OCTET_STREAM);
+	}
+	
 	public ConnectionsService(String endpoint) {
 		super(endpoint);
 		initServiceMappingKeys();
@@ -69,21 +74,25 @@ public abstract class ConnectionsService extends BaseService {
 		initServiceMappingKeys();
 	}
 	
-	protected void initServiceMappingKeys(){
+	protected void initServiceMappingKeys() {
 		serviceMappingKeys = new String[]{"connections"};
 	}
 
 	protected Map<String,String> getAtomHeaders() {
-		return ATOM_HEADERS;
+		Map<String, String> headers = getDefaultHeaders();
+		headers.putAll(ATOM_HEADERS);
+		return headers;
 	}
 
 	protected Map<String,String> getMultipartHeaders() {
-		return MULTIPART_HEADERS;
+		Map<String, String> headers = getDefaultHeaders();
+		headers.putAll(MULTIPART_HEADERS);
+		return headers;
 	}
 
 	protected Map<String,String> getBinaryHeaders() {
-		Map<String, String> map = new HashMap<String, String>();
-		map.put(CONTENT_TYPE, BINARY_OCTET_STREAM);
-		return map;
+		Map<String, String> headers = getDefaultHeaders();
+		headers.putAll(BINARY_HEADERS);
+		return headers;
 	}
 }

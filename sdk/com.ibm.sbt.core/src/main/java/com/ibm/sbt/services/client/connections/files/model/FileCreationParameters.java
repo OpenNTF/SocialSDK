@@ -121,9 +121,12 @@ public class FileCreationParameters {
         if (propagate!=null) {
             ret.put("propagate", propagate.toString());
         }  
-        if (sharePermission!=null) {
-            ret.put("sharePermission", sharePermission.toString().toLowerCase());
-        }
+        if (sharePermission == Permission.VIEW)
+            ret.put("sharePermission", "View");
+
+        if (sharePermission == Permission.EDIT)
+            ret.put("sharePermission", "Edit");
+
         if (shareSummary!=null) {
             ret.put("shareSummary", shareSummary.toString());
         }

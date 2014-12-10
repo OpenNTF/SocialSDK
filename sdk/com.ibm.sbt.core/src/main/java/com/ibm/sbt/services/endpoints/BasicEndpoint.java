@@ -38,7 +38,6 @@ import com.ibm.commons.runtime.util.UrlUtil;
 import com.ibm.commons.util.PathUtil;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.sbt.security.authentication.AuthenticationException;
-import com.ibm.sbt.security.authentication.password.PasswordException;
 import com.ibm.sbt.security.authentication.password.consumer.UserPassword;
 import com.ibm.sbt.security.credential.store.CredentialStore;
 import com.ibm.sbt.security.credential.store.CredentialStoreException;

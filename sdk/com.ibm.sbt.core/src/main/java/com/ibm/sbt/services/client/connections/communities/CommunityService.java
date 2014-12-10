@@ -664,7 +664,7 @@ public class CommunityService extends ConnectionsService {
 		else{
 			parameters.put("userid", memberId);
 		}
-		String url = CommunityUrls.COMMUNITY_MEMBERS.format(this,CommunityUrls.getCommunityUuid(communityUuid));		
+		String url = CommunityUrls.COMMUNITY_MEMBERS.format(this,CommunityUrls.getCommunityUuid(communityUuid),CommunityUrls.getUserid(memberId));		
 
 		return getMemberEntity(url, parameters);
 	}
@@ -862,7 +862,7 @@ public class CommunityService extends ConnectionsService {
 	}
 
 	protected Member getMemberEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
-		return getEntity(requestUrl, parameters, getMemberFeedHandler());
+		return getEntity(requestUrl, parameters, getMemberHandler());
 	}
 
 	protected Invite getInviteEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
@@ -908,6 +908,19 @@ public class CommunityService extends ConnectionsService {
 	 */
 	protected IFeedHandler<Member> getMemberFeedHandler() {
 		return new AtomFeedHandler<Member>(this) {
+			@Override
+			protected Member entityInstance(BaseService service, Node node, XPathExpression xpath) {
+				return new Member(service, node, nameSpaceCtx, xpath);
+			}
+		};
+	}
+	
+	/**
+	 * Factory method to instantiate a FeedHandler for Members
+	 * @return IFeedHandler<Member>
+	 */
+	protected IFeedHandler<Member> getMemberHandler() {
+		return new AtomFeedHandler<Member>(this,false) {
 			@Override
 			protected Member entityInstance(BaseService service, Node node, XPathExpression xpath) {
 				return new Member(service, node, nameSpaceCtx, xpath);

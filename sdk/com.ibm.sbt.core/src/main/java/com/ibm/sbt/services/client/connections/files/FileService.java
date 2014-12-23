@@ -1126,7 +1126,7 @@ public class FileService extends ConnectionsService {
         return folder;
     }
 	
-	/**
+    /**
      * Create a file folder in a community programmatically.
      * 
      * @param name name of the folder to be created
@@ -1155,11 +1155,11 @@ public class FileService extends ConnectionsService {
         return createCommunityFolder(f);
         
     }
-	
-	/**
+
+    /**
      * Create a file folder in a community programmatically.
      * 
-	 * @param communityId
+     * @param communityId
      * @param folder the folder objct to be created
      * @return File
      * @throws ClientServicesException

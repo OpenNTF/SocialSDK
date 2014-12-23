@@ -1168,7 +1168,7 @@ public class FileService extends ConnectionsService {
 	public File createCommunityFolder(String communityId, File folder) throws ClientServicesException {
 		String accessType = AccessType.AUTHENTICATED.getText();
 
-	    String requestUri = IFileUrls.COMMUNITY_COLLECTIONS_FEED.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.communityId.get(communityId));
+	    String requestUri = FileUrls.COMMUNITY_COLLECTIONS_FEED.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.communityId.get(communityId));
 	    String payload = new FolderSerializer(folder).generateFolderUpdatePayload();
 	    
 	    Response response = createData(requestUri, null, new ClientService.ContentString(payload, CommonConstants.APPLICATION_ATOM_XML));

@@ -27,6 +27,7 @@ import com.ibm.sbt.services.client.base.VersionedUrl;
 /**
  * @author Carlos Manias
  */
+ 
 public enum FileUrls implements URLContainer {
     SERVICE_DOCUMENT(new VersionedUrl(v4_0, 					"{files}/{authType}/{accessType}/introspection")),
     GET_NONCE(new VersionedUrl(v4_0, 							"{files}/{authType}/{accessType}/nonce")),

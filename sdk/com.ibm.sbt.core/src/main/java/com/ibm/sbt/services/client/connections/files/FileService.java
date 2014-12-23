@@ -1135,8 +1135,8 @@ public class FileService extends ConnectionsService {
      * @throws ClientServicesException
      * @throws TransformerException
      */
-    public File createCommunityFolder(String name) throws ClientServicesException, TransformerException {
-        return createCommunityFolder(name, null);
+    public File createCommunityFolder(String communityId, String name) throws ClientServicesException, TransformerException {
+        return createCommunityFolder(communityId, name, null);
     }
 
     /**
@@ -1148,12 +1148,12 @@ public class FileService extends ConnectionsService {
      * @throws ClientServicesException
      * @throws TransformerException
      */
-    public File createCommunityFolder(String name, String summary) throws ClientServicesException {
+    public File createCommunityFolder(String communityId, String name, String summary) throws ClientServicesException {
         File f  = new File(this,null);
         f.setTitle(name);
         f.setLabel(name);
         f.setSummary(summary);
-        return createCommunityFolder(f);
+        return createCommunityFolder(communityId, f);
         
     }
 

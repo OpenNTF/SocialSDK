@@ -59,6 +59,7 @@ import com.ibm.sbt.services.client.connections.files.serializer.CommentSerialize
 import com.ibm.sbt.services.client.connections.files.serializer.EntityIdSerializer;
 import com.ibm.sbt.services.client.connections.files.serializer.FileSerializer;
 import com.ibm.sbt.services.client.connections.files.serializer.FlagSerializer;
+import com.ibm.sbt.services.client.connections.files.serializer.FolderSerializer;
 import com.ibm.sbt.services.client.connections.files.serializer.ModerationSerializer;
 import com.ibm.sbt.services.client.connections.files.util.Messages;
 import com.ibm.sbt.services.endpoints.Endpoint;

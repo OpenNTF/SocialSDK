@@ -13,6 +13,8 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
+ 
+package com.ibm.sbt.services.client.connections.files.serializer;
 
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.CATEGORY;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.LABEL;

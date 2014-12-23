@@ -38,8 +38,8 @@ import com.ibm.sbt.services.client.connections.files.File;
 
 public class FolderSerializer extends AtomEntitySerializer<File> {
 
-	private final static String FOLDERTERM 		= "collection";
-	private final static String FOLDERLABEL 	= "collection";
+    private final static String FOLDERTERM 	= "collection";
+    private final static String FOLDERLABEL 	= "collection";
 
     public FolderSerializer(File entity) {
         super(entity);
@@ -55,20 +55,6 @@ public class FolderSerializer extends AtomEntitySerializer<File> {
             appendChildren(n, textElement(Namespace.TD.getUrl(), LABEL, entity.getLabel()));
         }
         
-        /* 
-         * Originele FileSerializer voegt aan de category een namespace toe: Namespace.TD.getUrl()
-         * Voor het toevoegen van een folder moet deze worden weggelaten.
-         * 
-         * Layout van een folderentry:
-         * 
-         * 		<?xml version="1.0" encoding="UTF-8"?>
-    	 * 		<entry xmlns="http://www.w3.org/2005/Atom">
-    	 * 			<category term="collection" label="collection" scheme="tag:ibm.com,2006:td/type" />
-    	 *	   		<label xmlns="urn:ibm.com/td" makeUnique="true">FOLDERNAAM</label>
-    	 *	   		<title>FOLDERNAAM</title>
-    	 *	   		<summary type="text" />
-    	 * 		</entry>
-         */
         appendChildren(n, element(CATEGORY, attribute(SCHEME, Namespace.TAG.getUrl()), attribute(TERM, FOLDERTERM), attribute(LABEL, FOLDERLABEL)));
         
         if (entity.getTags()!=null) {

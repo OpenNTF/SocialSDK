@@ -59,6 +59,7 @@ import com.ibm.sbt.services.client.connections.files.serializer.CommentSerialize
 import com.ibm.sbt.services.client.connections.files.serializer.EntityIdSerializer;
 import com.ibm.sbt.services.client.connections.files.serializer.FileSerializer;
 import com.ibm.sbt.services.client.connections.files.serializer.FlagSerializer;
+import com.ibm.sbt.services.client.connections.files.serializer.FolderSerializer;
 import com.ibm.sbt.services.client.connections.files.serializer.ModerationSerializer;
 import com.ibm.sbt.services.client.connections.files.util.Messages;
 import com.ibm.sbt.services.endpoints.Endpoint;
@@ -1125,6 +1126,59 @@ public class FileService extends ConnectionsService {
         folder.setDataHandler(r.getDataHandler());
         return folder;
     }
+	
+    /**
+     * Create a file folder in a community programmatically.
+     * 
+     * @param name name of the folder to be created
+     * @return File
+     * @throws ClientServicesException
+     * @throws TransformerException
+     */
+    public File createCommunityFolder(String name) throws ClientServicesException, TransformerException {
+        return createCommunityFolder(name, null);
+    }
+
+    /**
+     * Create a file folder in a community programmatically.
+     * 
+     * @param name name of the folder to be created
+     * @param summary description of the folder
+     * @return File
+     * @throws ClientServicesException
+     * @throws TransformerException
+     */
+    public File createCommunityFolder(String name, String summary) throws ClientServicesException {
+        File f  = new File(this,null);
+        f.setTitle(name);
+        f.setLabel(name);
+        f.setSummary(summary);
+        return createCommunityFolder(f);
+        
+    }
+
+    /**
+     * Create a file folder in a community programmatically.
+     * 
+     * @param communityId
+     * @param folder the folder objct to be created
+     * @return File
+     * @throws ClientServicesException
+     * @throws TransformerException
+     */
+	public File createCommunityFolder(String communityId, File folder) throws ClientServicesException {
+		String accessType = AccessType.AUTHENTICATED.getText();
+
+	    String requestUri = FileUrls.COMMUNITY_COLLECTIONS_FEED.format(this, FileUrlParts.accessType.get(accessType), FileUrlParts.communityId.get(communityId));
+	    String payload = new FolderSerializer(folder).generateFolderUpdatePayload();
+	    
+	    Response response = createData(requestUri, null, new ClientService.ContentString(payload, CommonConstants.APPLICATION_ATOM_XML));
+	    checkResponseCode(response, HTTPCode.CREATED);
+	    File r = getFileFeedHandler().createEntity(response);
+	    folder.clearFieldsMap();
+	    folder.setDataHandler(r.getDataHandler());
+	    return folder;
+	}
 
     /**
      * Retrieve an Atom document representation of a file folder.

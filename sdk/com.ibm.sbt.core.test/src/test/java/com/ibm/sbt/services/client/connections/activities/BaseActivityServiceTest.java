@@ -132,6 +132,22 @@ public class BaseActivityServiceTest extends BaseUnitTest {
 		return memberId;
 	}
 	
+	protected String getMemberEmail() {
+		String memberId = System.getProperty("MemberEmail");
+		if (StringUtil.isEmpty(memberId)) {
+			memberId = TestEnvironment.getSecondaryUserEmail();
+		}
+		return memberId;
+	}
+	
+	protected String getMemberName() {
+		String memberId = System.getProperty("MemberName");
+		if (StringUtil.isEmpty(memberId)) {
+			memberId = TestEnvironment.getSecondaryUserDisplayName();
+		}
+		return memberId;
+	}
+	
 	protected Node readXml(String fileName) throws IOException, XMLException {
 		InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("com/ibm/sbt/services/client/connections/activities/"+fileName);
 		return DOMUtil.createDocument(inputStream);

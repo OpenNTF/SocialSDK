@@ -40,4 +40,17 @@ public class GetSubscriptionsTest extends BaseBssTest {
     	}
     }
 		
+    @Test
+    public void testGetSubscriptionsList200() {
+    	try {
+			EntityList<JsonEntity> subscriptionList = getSubscriptionManagementService().getSubscriptions(200, 2);
+			for (JsonEntity subscription : subscriptionList) {
+				System.out.println(subscription.toJsonString());
+			}
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    		Assert.fail("Error retrieving subscription list caused by: "+e.getMessage());    		
+    	}
+    }
+		
 }

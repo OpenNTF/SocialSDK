@@ -157,9 +157,9 @@ public class ActivityFieldCrudrTest extends BaseActivityServiceTest {
 	public void createPersonField() throws ClientServicesException, XMLException {
 		Activity activity = createActivity();
 		
-		String name = TestEnvironment.getSecondaryUserDisplayName();
-		String email = TestEnvironment.getSecondaryUserEmail();
-		String userid = TestEnvironment.getSecondaryUserUuid();
+		String name = getMemberName();
+		String email = getMemberEmail();
+		String userid = getMemberId();
 		
 		PersonField personField = new PersonField();
 		personField.setName("test_person");
@@ -179,7 +179,7 @@ public class ActivityFieldCrudrTest extends BaseActivityServiceTest {
 		
 		Assert.assertNotNull(fields);
 		Assert.assertEquals(1, fields.length);
-		Assert.assertTrue(fields[0] instanceof PersonField);
+		Assert.assertEquals(PersonField.class.getName(), fields[0].getClass().getName());
 		Assert.assertEquals("test_person", ((PersonField)fields[0]).getName());
 		Assert.assertEquals(1000, ((PersonField)fields[0]).getPosition());
 		Assert.assertEquals(name, ((PersonField)fields[0]).getPerson().getName());

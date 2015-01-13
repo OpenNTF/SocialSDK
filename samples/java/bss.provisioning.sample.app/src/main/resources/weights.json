@@ -1,0 +1,35 @@
+{ 
+	"settings": { 
+		"maxSystemWeight": 10000000,
+		"resetDuration": 60000
+	}, 
+	"default": { 
+		"limit": 15000, 
+		"/": [ { "weight": 140 } ], 
+		"/resource/customer": [
+			{ "weight": 6736, "method": "DELETE" },
+			{ "weight": 111, "method": "GET" },
+			{ "weight": 791, "method": "POST" }
+		],
+		"/resource/subscriber": [
+			{ "weight": 880, "method": "DELETE" },
+			{ "weight": 161, "method": "GET" },
+			{ "weight": 1074, "method": "POST" }
+		],
+		"/resource/subscription": [
+			{ "weight": 3819, "method": "DELETE" },
+			{ "weight": 77, "method": "GET" },
+			{ "weight": 4669, "method": "POST" }
+		],
+
+		"/service/authentication": [ 
+			{ "weight": 163 }
+		],
+		"/service/authentication/changepassword": [
+			{ "weight": 402 }
+		],
+		"/service/authentication/getrolelist": [
+			{ "weight": 77 }
+		]
+	} 
+}

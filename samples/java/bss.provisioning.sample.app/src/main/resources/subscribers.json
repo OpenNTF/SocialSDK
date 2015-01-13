@@ -1,0 +1,253 @@
+{ "Subscribers" : [
+    {
+    "Subscriber": {
+      "CustomerId":"<customerId>",
+      "Person": {
+        "EmployeeNumber":"6A7777B",
+        "WorkPhone":"111-111-1111",
+        "RoleSet": [
+          "User"
+        ],
+        "Fax":"111-111-1114",
+        "LanguagePreference":"EN_US",
+        "Photo":"",
+        "NameSuffix":"",
+        "HomePhone":"111-111-1113",
+        "NamePrefix":"Mr",
+        "GivenName":"John",
+        "EmailAddress":"user0_1421083378397@ivthouse.com",
+        "TimeZone":"America\/Central",
+        "FamilyName":"Doe",
+        "WebSiteAddress":"www.example.com",
+        "JobTitle":"Director",
+        "MobilePhone":"111-111-1112"
+      }
+    }
+  },
+    {
+    "Subscriber": {
+      "CustomerId":"<customerId>",
+      "Person": {
+        "EmployeeNumber":"6A7777B",
+        "WorkPhone":"111-111-1111",
+        "RoleSet": [
+          "User"
+        ],
+        "Fax":"111-111-1114",
+        "LanguagePreference":"EN_US",
+        "Photo":"",
+        "NameSuffix":"",
+        "HomePhone":"111-111-1113",
+        "NamePrefix":"Mr",
+        "GivenName":"John",
+        "EmailAddress":"user1_1421083378407@ivthouse.com",
+        "TimeZone":"America\/Central",
+        "FamilyName":"Doe",
+        "WebSiteAddress":"www.example.com",
+        "JobTitle":"Director",
+        "MobilePhone":"111-111-1112"
+      }
+    }
+  },
+    {
+    "Subscriber": {
+      "CustomerId":"<customerId>",
+      "Person": {
+        "EmployeeNumber":"6A7777B",
+        "WorkPhone":"111-111-1111",
+        "RoleSet": [
+          "User"
+        ],
+        "Fax":"111-111-1114",
+        "LanguagePreference":"EN_US",
+        "Photo":"",
+        "NameSuffix":"",
+        "HomePhone":"111-111-1113",
+        "NamePrefix":"Mr",
+        "GivenName":"John",
+        "EmailAddress":"user2_1421083378417@ivthouse.com",
+        "TimeZone":"America\/Central",
+        "FamilyName":"Doe",
+        "WebSiteAddress":"www.example.com",
+        "JobTitle":"Director",
+        "MobilePhone":"111-111-1112"
+      }
+    }
+  },
+    {
+    "Subscriber": {
+      "CustomerId":"<customerId>",
+      "Person": {
+        "EmployeeNumber":"6A7777B",
+        "WorkPhone":"111-111-1111",
+        "RoleSet": [
+          "User"
+        ],
+        "Fax":"111-111-1114",
+        "LanguagePreference":"EN_US",
+        "Photo":"",
+        "NameSuffix":"",
+        "HomePhone":"111-111-1113",
+        "NamePrefix":"Mr",
+        "GivenName":"John",
+        "EmailAddress":"user3_1421083378417@ivthouse.com",
+        "TimeZone":"America\/Central",
+        "FamilyName":"Doe",
+        "WebSiteAddress":"www.example.com",
+        "JobTitle":"Director",
+        "MobilePhone":"111-111-1112"
+      }
+    }
+  },
+    {
+    "Subscriber": {
+      "CustomerId":"<customerId>",
+      "Person": {
+        "EmployeeNumber":"6A7777B",
+        "WorkPhone":"111-111-1111",
+        "RoleSet": [
+          "User"
+        ],
+        "Fax":"111-111-1114",
+        "LanguagePreference":"EN_US",
+        "Photo":"",
+        "NameSuffix":"",
+        "HomePhone":"111-111-1113",
+        "NamePrefix":"Mr",
+        "GivenName":"John",
+        "EmailAddress":"user4_1421083378417@ivthouse.com",
+        "TimeZone":"America\/Central",
+        "FamilyName":"Doe",
+        "WebSiteAddress":"www.example.com",
+        "JobTitle":"Director",
+        "MobilePhone":"111-111-1112"
+      }
+    }
+  },
+    {
+    "Subscriber": {
+      "CustomerId":"<customerId>",
+      "Person": {
+        "EmployeeNumber":"6A7777B",
+        "WorkPhone":"111-111-1111",
+        "RoleSet": [
+          "User"
+        ],
+        "Fax":"111-111-1114",
+        "LanguagePreference":"EN_US",
+        "Photo":"",
+        "NameSuffix":"",
+        "HomePhone":"111-111-1113",
+        "NamePrefix":"Mr",
+        "GivenName":"John",
+        "EmailAddress":"user5_1421083378417@ivthouse.com",
+        "TimeZone":"America\/Central",
+        "FamilyName":"Doe",
+        "WebSiteAddress":"www.example.com",
+        "JobTitle":"Director",
+        "MobilePhone":"111-111-1112"
+      }
+    }
+  },
+    {
+    "Subscriber": {
+      "CustomerId":"<customerId>",
+      "Person": {
+        "EmployeeNumber":"6A7777B",
+        "WorkPhone":"111-111-1111",
+        "RoleSet": [
+          "User"
+        ],
+        "Fax":"111-111-1114",
+        "LanguagePreference":"EN_US",
+        "Photo":"",
+        "NameSuffix":"",
+        "HomePhone":"111-111-1113",
+        "NamePrefix":"Mr",
+        "GivenName":"John",
+        "EmailAddress":"user6_1421083378417@ivthouse.com",
+        "TimeZone":"America\/Central",
+        "FamilyName":"Doe",
+        "WebSiteAddress":"www.example.com",
+        "JobTitle":"Director",
+        "MobilePhone":"111-111-1112"
+      }
+    }
+  },
+    {
+    "Subscriber": {
+      "CustomerId":"<customerId>",
+      "Person": {
+        "EmployeeNumber":"6A7777B",
+        "WorkPhone":"111-111-1111",
+        "RoleSet": [
+          "User"
+        ],
+        "Fax":"111-111-1114",
+        "LanguagePreference":"EN_US",
+        "Photo":"",
+        "NameSuffix":"",
+        "HomePhone":"111-111-1113",
+        "NamePrefix":"Mr",
+        "GivenName":"John",
+        "EmailAddress":"user7_1421083378417@ivthouse.com",
+        "TimeZone":"America\/Central",
+        "FamilyName":"Doe",
+        "WebSiteAddress":"www.example.com",
+        "JobTitle":"Director",
+        "MobilePhone":"111-111-1112"
+      }
+    }
+  },
+    {
+    "Subscriber": {
+      "CustomerId":"<customerId>",
+      "Person": {
+        "EmployeeNumber":"6A7777B",
+        "WorkPhone":"111-111-1111",
+        "RoleSet": [
+          "User"
+        ],
+        "Fax":"111-111-1114",
+        "LanguagePreference":"EN_US",
+        "Photo":"",
+        "NameSuffix":"",
+        "HomePhone":"111-111-1113",
+        "NamePrefix":"Mr",
+        "GivenName":"John",
+        "EmailAddress":"user8_1421083378417@ivthouse.com",
+        "TimeZone":"America\/Central",
+        "FamilyName":"Doe",
+        "WebSiteAddress":"www.example.com",
+        "JobTitle":"Director",
+        "MobilePhone":"111-111-1112"
+      }
+    }
+  },
+    {
+    "Subscriber": {
+      "CustomerId":"<customerId>",
+      "Person": {
+        "EmployeeNumber":"6A7777B",
+        "WorkPhone":"111-111-1111",
+        "RoleSet": [
+          "User"
+        ],
+        "Fax":"111-111-1114",
+        "LanguagePreference":"EN_US",
+        "Photo":"",
+        "NameSuffix":"",
+        "HomePhone":"111-111-1113",
+        "NamePrefix":"Mr",
+        "GivenName":"John",
+        "EmailAddress":"user9_1421083378417@ivthouse.com",
+        "TimeZone":"America\/Central",
+        "FamilyName":"Doe",
+        "WebSiteAddress":"www.example.com",
+        "JobTitle":"Director",
+        "MobilePhone":"111-111-1112"
+      }
+    }
+  }
+]
+}

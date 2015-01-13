@@ -12,6 +12,7 @@
 	</parent>
 	<modules>
 		<module>sbt.sample.app</module>
+		<module>bss.provisioning.sample.app</module>
 	</modules>
 
 	</project>

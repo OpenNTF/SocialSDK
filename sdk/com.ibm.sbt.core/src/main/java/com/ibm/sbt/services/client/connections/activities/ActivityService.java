@@ -1203,6 +1203,8 @@ public class ActivityService extends ConnectionsService {
 
 	protected void createActivityNodeFile(String requestUrl, String fileName, InputStream fileContent, String mimeType) throws ClientServicesException {
 		try {
+			HTTPCode expectedCode = HTTPCode.CREATED;
+			
 			Map<String, String> headers = new HashMap<String, String>();
 			headers.put(SLUG, fileName);
 			headers.put(CONTENT_TYPE, mimeType);
@@ -1216,11 +1218,13 @@ public class ActivityService extends ConnectionsService {
 				String token = xresponse.getResponseHeader(X_IBM_UPLOAD_TOKEN);
 
 				headers.put(X_IBM_UPLOAD_TOKEN, token);
-				headers.put(X_IBM_UPLOAD_METHOD, UPLOAD_METHOD_PHASES);				
+				headers.put(X_IBM_UPLOAD_METHOD, UPLOAD_METHOD_PHASES);	
+				
+				expectedCode = HTTPCode.OK;
 			}
 
 			Response response = createData(requestUrl, null, headers, fileContent, null);
-			checkResponseCode(response, HTTPCode.OK);
+			checkResponseCode(response, expectedCode);
 		} catch (ClientServicesException e) {
 			throw e;
 		} catch (Exception e) {

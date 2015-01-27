@@ -285,7 +285,7 @@ public abstract class BaseService implements Serializable {
 	 *             when the creation fails, as null/false return may have other meaning here
 	 */
 	public Response createData(String serviceUrl, Map<String, String> parameters, Object content, Handler format) throws ClientServicesException {
-    	return createData(serviceUrl, parameters, getDefaultHeaders(), content);	    
+    	return createData(serviceUrl, parameters, getDefaultHeaders(), content, format);	    
 	}
 	
 	

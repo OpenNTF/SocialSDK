@@ -16,6 +16,7 @@
 package com.ibm.sbt.services.client.connections.activities;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.ibm.sbt.services.client.ClientServicesException;
@@ -46,6 +47,8 @@ public class ActivityPriorityTest extends BaseActivityServiceTest {
 	}
 	
 	@Test
+	@Ignore 
+	// Negative priorities are not supported
 	public void testNegativePriorityActivity() throws ClientServicesException {
 		Activity created = createActivity(createTitle(Activity.PRIORITY_MEDIUM), Activity.PRIORITY_MEDIUM);
 		

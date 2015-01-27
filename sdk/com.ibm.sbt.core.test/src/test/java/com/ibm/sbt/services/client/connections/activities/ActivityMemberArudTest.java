@@ -51,8 +51,8 @@ public class ActivityMemberArudTest extends BaseActivityServiceTest {
 	public void testAddActivityMember() throws ClientServicesException, XMLException {
 		Activity activity = createActivity();
 		
-		String name = TestEnvironment.getSecondaryUserDisplayName();
-		String userid = TestEnvironment.getSecondaryUserUuid();
+		String name = getMemberName();
+		String userid = getMemberId();
 	
 		Member member = activity.addMember(Member.TYPE_PERSON, userid, Member.ROLE_OWNER);
 		
@@ -78,7 +78,7 @@ public class ActivityMemberArudTest extends BaseActivityServiceTest {
 
 		this.activity = null;
 		
-		String userid = TestEnvironment.getSecondaryUserUuid();
+		String userid = getMemberId();
 		
 		activity.addMember(Member.TYPE_PERSON, userid, Member.ROLE_OWNER);
 		
@@ -94,7 +94,7 @@ public class ActivityMemberArudTest extends BaseActivityServiceTest {
 	public void testUpdateActivityMember() throws ClientServicesException, XMLException {
 		Activity activity = createActivity();
 		
-		String userid = TestEnvironment.getSecondaryUserUuid();
+		String userid = getMemberId();
 		
 		activity.addMember(Member.TYPE_PERSON, userid, Member.ROLE_MEMBER);
 				
@@ -113,7 +113,8 @@ public class ActivityMemberArudTest extends BaseActivityServiceTest {
 	public void testDeleteActivityMember() throws ClientServicesException, XMLException {
 		Activity activity = createActivity();
 		
-		String userid = TestEnvironment.getSecondaryUserUuid();
+		String userid = getMemberId();
+		
 		activity.addMember(Member.TYPE_PERSON, userid, Member.ROLE_MEMBER);
 		
 		EntityList<Member> members = activity.getMembers();

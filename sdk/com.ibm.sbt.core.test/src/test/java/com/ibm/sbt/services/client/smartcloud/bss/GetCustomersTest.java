@@ -40,4 +40,17 @@ public class GetCustomersTest extends BaseBssTest {
     	}
     }
 		
+    @Test
+    public void testGetCustomerList200() {
+    	try {
+			EntityList<JsonEntity> customerList = getCustomerManagementService().getCustomers(200, 2);
+			for (JsonEntity customer : customerList) {
+				System.out.println(customer.toJsonString());
+			}
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    		Assert.fail("Error retrieving customer list caused by: "+e.getMessage());    		
+    	}
+    }
+		
 }

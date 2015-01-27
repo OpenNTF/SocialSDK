@@ -206,7 +206,7 @@ define([ "../declare", "../lang", "../stringUtil", "../config", "../Promise", ".
 //			var url = consts.ActivityStreamUrls.activityStreamBaseUrl+this.endpoint.authType+consts.ActivityStreamUrls.activityStreamRestUrl+_userType+"/"+_groupType+"/"+_applicationType;
             var url = this.constructUrl(consts.ActivityStreamUrls.activityStreamBaseUrl+"{authType}"+consts.ActivityStreamUrls.activityStreamRestUrl+"{userType}/{groupType}/{appType}", 
                     {}, 
-                    { authType : this.endpoint.authType, userType : _userType, groupType : _groupType, appType : _applicationType });
+                    { authType : (this.endpoint.authType == "sso")  ? "":this.endpoint.authType, userType : _userType, groupType : _groupType, appType : _applicationType });
             var options = {
                 method : "GET",
                 handleAs : "json",

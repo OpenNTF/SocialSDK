@@ -1,10 +1,10 @@
 { 
 	"settings": { 
 		"maxSystemWeight": 10000000,
-		"resetDuration": 60000
+		"resetDuration": 3600000
 	}, 
 	"default": { 
-		"limit": 15000, 
+		"limit": 500000, 
 		"/": [ { "weight": 140 } ], 
 		"/resource/customer": [
 			{ "weight": 6736, "method": "DELETE" },

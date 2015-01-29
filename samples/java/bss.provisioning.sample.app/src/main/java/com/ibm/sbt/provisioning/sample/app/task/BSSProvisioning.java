@@ -83,6 +83,10 @@ public class BSSProvisioning implements Runnable {
 	 */
 	private static String weightsFile ;
 	/**
+	 * boolean set to true when the default weights.json file ( that comes packaged in the jar) must be used
+	 */
+	private static boolean weightsFileAsInput = false ;
+	/**
 	 * a queue containing all the {@link SubscriberTask} instances representing to the
 	 * subscribers in input to be provisioned
 	 */
@@ -128,9 +132,9 @@ public class BSSProvisioning implements Runnable {
 	 * 				    &nbsp;&nbsp;&nbsp;&nbsp;args[1] : BSS user(required)<br> 
 	 * 					&nbsp;&nbsp;&nbsp;&nbsp;args[2] : BSS password<br>
 	 * 					&nbsp;&nbsp;&nbsp;&nbsp;args[3] : partNumber/subscriptionIdentifier<br>
-	 * 					&nbsp;&nbsp;&nbsp;&nbsp;args[4] : path to the customer.json file(optional)<br> 
-	 * 					&nbsp;&nbsp;&nbsp;&nbsp;args[5] : path to the weights.json file(optional)<br> 
-	 * 					&nbsp;&nbsp;&nbsp;&nbsp;args[6] : path to the subscribers.json file(optional)<br> 
+	 * 					&nbsp;&nbsp;&nbsp;&nbsp;args[4] : path to the customer.json file(required)<br> 
+	 * 					&nbsp;&nbsp;&nbsp;&nbsp;args[5] : path to the subscribers.json file(required)<br> 
+	 * 					&nbsp;&nbsp;&nbsp;&nbsp;args[6] : path to the weights.json file(optional)<br> 
 	 *   				&nbsp;&nbsp;&nbsp;&nbsp;args[7] : number of threads in the provisioning threadpool(optional default to 10)<br>
 	 */
 	public static void main( String[] args ){
@@ -147,35 +151,58 @@ public class BSSProvisioning implements Runnable {
 		stateTransitionReport = new ConcurrentHashMap<String,String[]>();
 		subscriberWeightReport = new ConcurrentHashMap<String,int[]>();
 		
-		if (args.length < 7 || args.length > 8) {
+		if (args.length < 6 || args.length > 8) {
 			// Note: The email must be unique for each run of the application, it is used as the administrator email address
-			logger.severe("Usage: java com.ibm.sbt.provisioning.sample.app.BSSProvisioning "
-					+ "args[0] = BSS host url(required) "
-					+ "args[1] = BSS user(required) "
-					+ "args[2] = BSS password(required) "
-					+ "args[3] = partNumber/subscriptionIdentifier(required)"
-					+ "args[4] = customer.json's path(required) "
-					+ "args[5] = weights.json's path(required) "
-					+ "args[6] = subscribers.json's path(required) "
-					+ "args[7] = provisioning threadpool size(optional default to 10)"
-					+ "The application accepts as input 4,5,7 or 8 input arguments");
+			logger.severe("Usage: java com.ibm.sbt.provisioning.sample.app.BSSProvisioning\n "
+					+ "args[0] = BSS host url(required)\n "
+					+ "args[1] = BSS user(required)\n "
+					+ "args[2] = BSS password(required)\n "
+					+ "args[3] = partNumber/subscriptionIdentifier(required)\n"
+					+ "args[4] = customer.json's path(required)\n "
+					+ "args[5] = path to the subscribers.json file(required)\n "
+					+ "args[6] = path to the weights.json file(optional)\n "
+					+ "args[7] = provisioning threadpool size(optional default to 10)\n"
+					+ "The application accepts as input 4,5,7 or 8 input arguments\n");
 		}else{
 			String url = args[0];
 			String user = args[1];
 			String password = args[2];
 			String partNumber = args[3];
 			String customerFile = args[4]; 
-			weightsFile = args[5]; 
-			String subscribersFile = args[6];
+			String subscribersFile = args[5];
 			
+			weightsFile = "/weights.json"; 
 			int threadpoolSize = 10 ;
 			
 			switch( args.length ){
+				case 6 :
+					break ;
 				case 7 :
+					boolean isNotAnInt = false ;
+					try{
+						threadpoolSize = Integer.parseInt(args[6]);
+					}catch( NumberFormatException nfe ){
+						logger.severe("NumberFormatException thrown while parsing arg[6], assuming it represents the path to the weights.json file ");
+						isNotAnInt = true ;
+					}
+					if(isNotAnInt){
+						weightsFile = args[6]; 
+						weightsFileAsInput = true ;
+					}
 					break ;
 				case 8 :
-					threadpoolSize = Integer.parseInt(args[7]);
+					weightsFile = args[6]; 
+					weightsFileAsInput = true ;
+					try{
+						threadpoolSize = Integer.parseInt(args[7]);
+					}catch( NumberFormatException nfe ){
+						logger.severe("NumberFormatException thrown while parsing arg[7], using default threadpoolsize (10) ");
+						isNotAnInt = true ;
+					}
 					break ;
+			}
+			for(String arg :args){
+				System.out.println(arg);
 			}
 			
 			List<JsonJavaObject> subscribers = null ;
@@ -632,6 +659,12 @@ public class BSSProvisioning implements Runnable {
 	 */
 	public static String getWeightsFile() {
 		return weightsFile;
+	}
+	/**
+	 * {@link #weightsFileAsInput} getter method
+	 */
+	public static boolean isWeightsFileAsInput() {
+		return weightsFileAsInput;
 	}
 	/**
 	 * {@link #subscriberTasks} getter method

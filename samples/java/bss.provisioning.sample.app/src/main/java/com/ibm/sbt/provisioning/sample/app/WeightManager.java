@@ -196,7 +196,7 @@ public class WeightManager {
 		Map<String, Integer> weightPerBSSCall = null ;
 		JsonDataHandler handler = null ;
 		try{
-			weightsJson = com.ibm.sbt.provisioning.sample.app.util.Util.readFully(weightsFilePath);
+			weightsJson = com.ibm.sbt.provisioning.sample.app.util.Util.readWeightsJson(weightsFilePath,BSSProvisioning.isWeightsFileAsInput());
 			handler = new JsonDataHandler(weightsJson);
 		}catch( IOException ioe ){
 			System.out.println(ioe.getMessage());

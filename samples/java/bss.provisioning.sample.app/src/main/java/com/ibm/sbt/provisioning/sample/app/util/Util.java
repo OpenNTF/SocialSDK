@@ -15,9 +15,12 @@
  */
 package com.ibm.sbt.provisioning.sample.app.util;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -45,6 +48,28 @@ public class Util {
 	    fis.read(data);
 	    fis.close();
 	    return new String(data, "UTF-8");
+	}
+	
+	/**
+	 * Method used for reading the weights.json input file
+	 * <p>
+	 * @param  filePath  file path either inside the jar or on the file system<br>
+	 * @param  useDefault  boolean set to true when the default weights.json file ( that comes packaged in the jar) must be used<br>
+	 * @return a String representation of the content of the file passed as argument
+	 */
+	public static String readWeightsJson(String filePath, boolean isWeightFileAsInput ) throws IOException {
+		String weightsJsonContentAsString = null ;
+		if(!isWeightFileAsInput){
+			InputStream in = Util.class.getResourceAsStream(filePath);
+			BufferedReader br = new BufferedReader ( new InputStreamReader(in,"UTF-8"));
+	        String s ;
+	        while( ( s = br.readLine()) != null ){
+	        	weightsJsonContentAsString = weightsJsonContentAsString == null ? s : weightsJsonContentAsString + s ;
+	        }
+		}else{
+			weightsJsonContentAsString = readFully(filePath) ;
+		}
+		return weightsJsonContentAsString ;
 	}
 	
 	/**

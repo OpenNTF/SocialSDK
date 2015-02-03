@@ -113,9 +113,6 @@ public class ForumUploader {
         
         forumService = new ForumService();
         forumService.setEndpoint(basicEndpoint);
-        extraTags.add("author");
-        extraTags.add("modifier");
-        extraTags.add("uploaded");
 		
 		dateFormat = new SimpleDateFormat("EEE, MMM d, yyyy");
     }
@@ -238,6 +235,9 @@ public class ForumUploader {
 			replies = replyFeedHandler.createEntityList(getXmlResponse(topicReplyFile));
 			for(int j = replies.size() - 1; j > -1 ; j--){
 				ForumReply reply = replies.get(j);
+				if(reply.isDeleted()){
+					continue;
+				}
 				List<ForumFileField> fileFields = reply.getFileFields();
 				String newReplyUuid = "";
 	    		if(fileFields.size() > 0){
@@ -305,7 +305,7 @@ public class ForumUploader {
     private MultipartEntity createMultipartEntity(String xml, File[] attachments){
     	MultipartEntity mEntity = new MultipartEntity(HttpMultipartMode.STRICT, "MIME_boundary", Charset.forName("UTF-8"));
 		
-		StringBody xmlBody = new StringBody(xml, ContentType.APPLICATION_ATOM_XML);
+    	StringBody xmlBody = new StringBody(xml, ContentType.create(ContentType.APPLICATION_ATOM_XML.getMimeType(), Charset.forName("UTF-8")));
 		FormBodyPart xmlBodyPart = new FormBodyPart("xml", xmlBody);
 		mEntity.addPart(xmlBodyPart);
 		xmlBodyPart.getHeader().removeFields("Content-Disposition");

@@ -2,11 +2,14 @@ package com.ibm.sbt.sample.app;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.MalformedURLException;
+import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -131,13 +134,16 @@ public class ForumExporter {
 	    	urlParams.put("ps", "100");
 			forumTopics = (AtomEntityList<ForumTopic>) forumService.getForumTopics(forumId, urlParams);
 			totalTopics = forumTopics.getTotalResults();
-			System.out.println("Found " + totalTopics + " topics");
+			if(page == 1){
+				System.out.println("Found " + totalTopics + " topics");
+			}
+			
 			if(forumTopics.size() > 0){
 				downloadAttachments(forumTopics);
 				// write the topics feed to disk before getting the next page
 				writeFeed(forumTopics, "topics_" + forumId + "_" + page);
 				writtenTopics += forumTopics.size();
-				System.out.println("Exported " + page + " topic feeds of " + (((totalTopics - 1) / 100) + 1) + ", containing " + totalTopics + " topics");
+				System.out.println("Exported " + page + " topic feeds of " + (((totalTopics - 1) / 100) + 1) + ", containing " + forumTopics.size() + " topics");
 				if(exportReplies){
 					int writtenReplies = 0;
 					System.out.println("Exporting replies for topics in topic feed " + page + "...");
@@ -220,8 +226,9 @@ public class ForumExporter {
     }
 
     private void writeXmlToFile(String xml, File file) throws IOException{
-    	FileWriter fw = new FileWriter(file);
-    	BufferedWriter bw = new BufferedWriter(fw);
+    	FileOutputStream fos = new FileOutputStream(file);
+    	OutputStreamWriter osw = new OutputStreamWriter(fos, Charset.forName("UTF-8"));
+    	BufferedWriter bw = new BufferedWriter(osw);
     	PrintWriter out = new PrintWriter(bw);
     	out.write(xml);
     	out.flush();

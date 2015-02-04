@@ -145,7 +145,7 @@ public class Request {
 	 */
 	public Request parameters(Map<String, String> parameters) {
 		if (parameters != null) {
-			for(Map.Entry<String, String> entry : headers.entrySet()) {
+			for(Map.Entry<String, String> entry : parameters.entrySet()) {
 				parameter(entry.getKey(), entry.getValue());
 			}
 		}

@@ -3,7 +3,6 @@ package com.ibm.sbt.sample.app;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStreamWriter;
@@ -24,10 +23,10 @@ import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.AtomEntity;
 import com.ibm.sbt.services.client.base.datahandlers.AtomEntityList;
 import com.ibm.sbt.services.client.connections.forums.Forum;
+import com.ibm.sbt.services.client.connections.forums.ForumFileField;
 import com.ibm.sbt.services.client.connections.forums.ForumReply;
 import com.ibm.sbt.services.client.connections.forums.ForumService;
 import com.ibm.sbt.services.client.connections.forums.ForumTopic;
-import com.ibm.sbt.services.client.connections.forums.ForumFileField;
 import com.ibm.sbt.services.client.connections.forums.model.BaseForumEntity;
 import com.ibm.sbt.services.endpoints.BasicEndpoint;
 
@@ -35,7 +34,6 @@ import com.ibm.sbt.services.endpoints.BasicEndpoint;
  * @author Francis
  */
 public class ForumExporter {
-	
     public static void main(String[] args){
     	boolean exportTopics = true;
     	boolean exportTopicReplies = true;
@@ -93,6 +91,9 @@ public class ForumExporter {
 
     private ForumService forumService;
     private File forumExportDirectory;
+    // It is necessary to replace all of the vcard links. Forums api throws a 403 if the person the vcard is linking does not exist.
+    private final static String VCARD_PATTERN = "(&lt;span(\\s*)class=\"x-lconn-userid\"(\\s*)style=\"display:(\\s*)none\"&gt;)(\\s*)(20089094)(\\s*)(&lt;/span&gt;)";
+	private final static String VCARD_REPLACE = "";
 	/**
      * 
      * @param url
@@ -230,7 +231,7 @@ public class ForumExporter {
     	OutputStreamWriter osw = new OutputStreamWriter(fos, Charset.forName("UTF-8"));
     	BufferedWriter bw = new BufferedWriter(osw);
     	PrintWriter out = new PrintWriter(bw);
-    	out.write(xml);
+    	out.write(xml.replaceAll(VCARD_PATTERN, VCARD_REPLACE));
     	out.flush();
     	out.close();
     }

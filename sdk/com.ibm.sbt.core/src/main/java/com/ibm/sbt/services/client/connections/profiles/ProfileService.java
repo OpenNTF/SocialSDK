@@ -73,6 +73,7 @@ import com.ibm.sbt.services.client.connections.profiles.model.ProfileXPath;
 import com.ibm.sbt.services.client.connections.profiles.serializers.ColleagueConnectionSerializer;
 import com.ibm.sbt.services.client.connections.profiles.serializers.ProfileSerializer;
 import com.ibm.sbt.services.client.connections.profiles.utils.Messages;
+import com.ibm.sbt.services.client.connections.profiles.utils.ProfilesConstants;
 import com.ibm.sbt.services.client.smartcloud.profiles.ProfileServiceException;
 import com.ibm.sbt.services.endpoints.Endpoint;
 
@@ -876,11 +877,15 @@ public class ProfileService extends ConnectionsService {
 	 */
 	public String getMyUserId() throws ClientServicesException{
 		String id = "";
-		String peopleApiUrl = ProfileUrls.MY_USER_ID.format(this);
+		
+		NamedUrlPart commonPart = new NamedUrlPart("connections",ProfilesConstants.COMMON);
+		String peopleApiUrl = ProfileUrls.MY_USER_ID.format(this,commonPart);
+		
 		Response feed = getClientService().get(peopleApiUrl);
 		JsonDataHandler dataHandler = new JsonDataHandler((JsonJavaObject)feed.getData());
 		id = dataHandler.getAsString("entry/id");
 		id = id.substring(id.lastIndexOf(CH_COLON)+1, id.length());
+		
 		return id;
 	}
 

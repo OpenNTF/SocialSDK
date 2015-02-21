@@ -1,4 +1,4 @@
-define("dojox/editor/plugins/PageBreak", [
+define([
 	"dojo",
 	"dijit",
 	"dojox",

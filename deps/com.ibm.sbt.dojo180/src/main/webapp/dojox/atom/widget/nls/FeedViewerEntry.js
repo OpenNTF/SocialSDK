@@ -1,4 +1,4 @@
-define("dojox/atom/widget/nls/FeedViewerEntry", { root:
+define({ root:
 //begin v1.x content
 ({
 	deleteButton: "[Delete]"

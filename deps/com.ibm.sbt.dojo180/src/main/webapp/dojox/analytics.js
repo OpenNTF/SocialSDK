@@ -1,4 +1,4 @@
-define("dojox/analytics", ["./analytics/_base"], function(analytics) {
+define(["./analytics/_base"], function(analytics) {
 	/*=====
 	 return {
 		 // summary:

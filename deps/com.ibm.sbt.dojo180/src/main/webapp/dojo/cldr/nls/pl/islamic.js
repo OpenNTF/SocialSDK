@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/pl/islamic", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "MM.yyyy",
 	"dateFormatItem-yyyyMMMEd": "E, d MMM y G",
@@ -18,6 +18,8 @@ define(
 		"sobota"
 	],
 	"dateFormatItem-MMM": "LLL",
+	"dateTimeFormat-short": "{1}, {0}",
+	"dateTimeFormat-medium": "{1}, {0}",
 	"quarters-standAlone-abbr": [
 		"1 kw.",
 		"2 kw.",
@@ -67,6 +69,12 @@ define(
 	],
 	"dateFormatItem-yMMMM": "LLLL y",
 	"dateFormatItem-ms": "mm:ss",
+	"quarters-standAlone-narrow": [
+		"K1",
+		"K2",
+		"K3",
+		"K4"
+	],
 	"months-standAlone-wide": [
 		"Muharram",
 		"Safar",
@@ -87,15 +95,15 @@ define(
 	"dateFormatItem-MMMd": "d MMM",
 	"dateFormatItem-yyQ": "Q y G",
 	"months-format-abbr": [
-		null,
-		null,
-		"Rabi I",
-		"Rabi II",
+		"Muh.",
+		"Saf.",
+		"Rab. I",
+		"Rab. II",
 		"Dżu. I",
 		"Dżu. II",
 		"Ra.",
 		"Sza.",
-		null,
+		"Ram.",
 		"Szaw.",
 		"Zu al-k.",
 		"Zu al-h."
@@ -144,6 +152,15 @@ define(
 		"11",
 		"12"
 	],
+	"days-standAlone-short": [
+		"niedz.",
+		"pon.",
+		"wt.",
+		"śr.",
+		"czw.",
+		"pt.",
+		"sob."
+	],
 	"dateFormatItem-hm": "hh:mm a",
 	"days-standAlone-abbr": [
 		"niedz.",
@@ -161,18 +178,27 @@ define(
 	"dateFormatItem-yMEd": "E, d.MM.yyyy",
 	"dateFormatItem-yyyyQ": "G y Q",
 	"months-format-wide": [
-		null,
-		null,
+		"Muharram",
+		"Safar",
 		"Rabi I",
 		"Rabi II",
 		"Dżumada I",
 		"Dżumada II",
 		"Radżab",
 		"Szaban",
-		null,
+		"Ramadan",
 		"Szawwal",
 		"Zu al-kada",
 		"Zu al-hidżdża"
+	],
+	"days-format-short": [
+		"niedz.",
+		"pon.",
+		"wt.",
+		"śr.",
+		"czw.",
+		"pt.",
+		"sob."
 	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

@@ -1,4 +1,4 @@
-define("dojox/charting/plot2d/StackedColumns", ["dojo/_base/declare", "./Columns", "./commonStacked"], 
+define(["dojo/_base/declare", "./Columns", "./commonStacked"], 
 	function( declare, Columns, commonStacked){
 
 	return declare("dojox.charting.plot2d.StackedColumns", Columns, {
@@ -10,13 +10,9 @@ define("dojox/charting/plot2d/StackedColumns", ["dojo/_base/declare", "./Columns
 			// returns: Object
 			//		{hmin, hmax, vmin, vmax} min/max in both directions.
 			var stats = commonStacked.collectStats(this.series);
-			this._maxRunLength = stats.hmax;
 			stats.hmin -= 0.5;
 			stats.hmax += 0.5;
 			return stats; // Object
-		},
-		getDataLength: function(run){
-			return this._maxRunLength;
 		},
 		getValue: function(value, index, seriesIndex, indexed){
 			var y,x;

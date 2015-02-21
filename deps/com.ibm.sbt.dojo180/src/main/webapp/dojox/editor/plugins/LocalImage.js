@@ -1,4 +1,4 @@
-define("dojox/editor/plugins/LocalImage", [
+define([
 	"dojo",//FIXME
 	"dijit",//FIXME
 	"dijit/registry",

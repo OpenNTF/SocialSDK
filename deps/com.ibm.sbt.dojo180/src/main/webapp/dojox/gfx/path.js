@@ -1,4 +1,4 @@
-define("dojox/gfx/path", ["./_base", "dojo/_base/lang","dojo/_base/declare", "./matrix", "./shape"], 
+define(["./_base", "dojo/_base/lang","dojo/_base/declare", "./matrix", "./shape"], 
 	function(g, lang, declare, matrix, shapeLib){
 // summary:
 //		This module contains the core graphics Path API.
@@ -211,7 +211,9 @@ define("dojox/gfx/path", ["./_base", "dojo/_base/lang","dojo/_base/declare", "./
 			if(typeof this.shape.path == "string"){
 				this.shape.path += path.join("");
 			}else{
-				Array.prototype.push.apply(this.shape.path, path); //FIXME: why not simple push()?
+				for(i = 0, l = path.length; i < l; ++i){
+					this.shape.path.push(path[i]);
+				}
 			}
 		},
 

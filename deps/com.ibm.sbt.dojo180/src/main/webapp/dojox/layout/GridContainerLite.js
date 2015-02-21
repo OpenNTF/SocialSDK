@@ -1,6 +1,4 @@
-require({cache:{
-'url:dojox/layout/resources/GridContainer.html':"<div id=\"${id}\" class=\"gridContainer\" dojoAttachPoint=\"containerNode\" tabIndex=\"0\" dojoAttachEvent=\"onkeypress:_selectFocus\">\n\t<div dojoAttachPoint=\"gridContainerDiv\">\n\t\t<table class=\"gridContainerTable\" dojoAttachPoint=\"gridContainerTable\" cellspacing=\"0\" cellpadding=\"0\">\n\t\t\t<tbody>\n\t\t\t\t<tr dojoAttachPoint=\"gridNode\" >\n\t\t\t\t\t\n\t\t\t\t</tr>\n\t\t\t</tbody>\n\t\t</table>\n\t</div>\n</div>"}});
-define("dojox/layout/GridContainerLite", [
+define([
 	"dojo/_base/kernel",
 	"dojo/text!./resources/GridContainer.html",
 	"dojo/_base/declare", // declare 
@@ -454,7 +452,7 @@ define("dojox/layout/GridContainerLite", [
 			//console.log("dojox.layout.GridContainerLite ::: _insertChild", child, column, p);
 			var zone = this._grid[column].node,
 				length = zone.childNodes.length;
-			if(typeof(p) == undefined || p > length){
+			if(typeof p === "undefined" || p > length){
 				p = length;
 			}
 			if(this._disabled){

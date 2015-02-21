@@ -1,4 +1,4 @@
-define("dojox/gantt/TabMenu", [
+define([
 	"./contextMenuTab",
 	"./GanttTaskControl",
 	"./GanttProjectControl",

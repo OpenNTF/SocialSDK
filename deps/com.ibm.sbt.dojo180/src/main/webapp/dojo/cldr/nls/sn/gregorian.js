@@ -1,8 +1,7 @@
 define(
-"dojo/cldr/nls/sn/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
-	"field-dayperiod": "Zuva",
 	"dateFormatItem-yQ": "Q y",
 	"field-minute": "Mineti",
 	"eraNames": [
@@ -169,6 +168,15 @@ define(
 		"M",
 		"Z"
 	],
+	"days-standAlone-short": [
+		"Svo",
+		"Muv",
+		"Chip",
+		"Chit",
+		"Chin",
+		"Chis",
+		"Mug"
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"Svo",
@@ -197,6 +205,15 @@ define(
 		"Gumiguru",
 		"Mbudzi",
 		"Zvita"
+	],
+	"days-format-short": [
+		"Svo",
+		"Muv",
+		"Chip",
+		"Chit",
+		"Chin",
+		"Chis",
+		"Mug"
 	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

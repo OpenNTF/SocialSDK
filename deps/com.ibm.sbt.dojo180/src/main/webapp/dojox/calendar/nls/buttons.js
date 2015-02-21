@@ -1,4 +1,4 @@
-define("dojox/calendar/nls/buttons", { root: {
+define({ root: {
 //begin v1.x content
 	previousButton: "◄",
 	nextButton: "►",
@@ -29,6 +29,7 @@ define("dojox/calendar/nls/buttons", { root: {
 "ja": true,
 "it": true,
 "hu": true,
+"he": true,
 "fr": true,
 "fi": true,
 "es": true,

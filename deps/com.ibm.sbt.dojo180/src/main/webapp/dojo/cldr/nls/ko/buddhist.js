@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/ko/buddhist", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "G y. M.",
 	"dateFormatItem-yQ": "G y년 Q분기",
@@ -82,6 +82,15 @@ define(
 	"dateFormatItem-yMMMd": "G y년 MMM d일",
 	"dateFormatItem-MEEEEd": "M. d. EEEE",
 	"dateFormatItem-MEd": "M. d. (E)",
+	"days-standAlone-short": [
+		"일",
+		"월",
+		"화",
+		"수",
+		"목",
+		"금",
+		"토"
+	],
 	"dateFormatItem-hm": "a h:mm",
 	"dateFormat-short": "G y. M. d",
 	"dateFormatItem-yMMMEd": "G y년 MMM d일 (E)",
@@ -101,6 +110,15 @@ define(
 		"10월",
 		"11월",
 		"12월"
+	],
+	"days-format-short": [
+		"일",
+		"월",
+		"화",
+		"수",
+		"목",
+		"금",
+		"토"
 	],
 	"dateFormatItem-d": "d일",
 	"quarters-format-wide": [

@@ -1,9 +1,8 @@
 define(
-"dojo/cldr/nls/it/buddhist", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y G",
 	"dateFormatItem-yQ": "Q-y G",
-	"dayPeriods-format-wide-pm": "p.",
 	"eraNames": [
 		"EB"
 	],
@@ -36,9 +35,11 @@ define(
 		"D"
 	],
 	"dateFormatItem-Gy": "y G",
-	"dayPeriods-format-wide-am": "m.",
 	"quarters-standAlone-abbr": [
-		"T1"
+		"T1",
+		"T2",
+		"T3",
+		"T4"
 	],
 	"dateFormatItem-y": "y G",
 	"months-standAlone-abbr": [
@@ -75,15 +76,17 @@ define(
 	"dateFormatItem-yyMM": "MM/y G",
 	"dateFormat-medium": "dd/MMM/y G",
 	"dateFormatItem-Hms": "HH:mm:ss",
+	"dayPeriods-format-narrow-pm": "p.",
 	"dateFormatItem-yyQQQQ": "QQQQ y G",
 	"dateFormatItem-yMd": "d/M/y G",
 	"quarters-standAlone-wide": [
-		"1º trimestre",
-		"2º trimestre",
-		"3º trimestre",
-		"4º trimestre"
+		"Primo trimestre",
+		"Secondo trimestre",
+		"Terzo trimestre",
+		"Quarto trimestre"
 	],
 	"dateFormatItem-ms": "mm:ss",
+	"dayPeriods-format-narrow-am": "m.",
 	"months-standAlone-wide": [
 		"Gennaio",
 		"Febbraio",
@@ -147,6 +150,15 @@ define(
 		"N",
 		"D"
 	],
+	"days-standAlone-short": [
+		"dom",
+		"lun",
+		"mar",
+		"mer",
+		"gio",
+		"ven",
+		"sab"
+	],
 	"dateFormatItem-hm": "hh:mm a",
 	"dateFormat-short": "dd/MM/y G",
 	"dateFormatItem-yMMMEd": "E d MMM y G",
@@ -166,6 +178,15 @@ define(
 		"ottobre",
 		"novembre",
 		"dicembre"
+	],
+	"days-format-short": [
+		"dom",
+		"lun",
+		"mar",
+		"mer",
+		"gio",
+		"ven",
+		"sab"
 	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

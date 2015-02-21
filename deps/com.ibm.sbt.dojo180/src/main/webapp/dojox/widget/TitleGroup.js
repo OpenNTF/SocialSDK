@@ -1,4 +1,4 @@
-define("dojox/widget/TitleGroup", ["dojo", "dijit/registry", "dijit/_Widget", "dijit/TitlePane"], function(dojo, registry, widget, titlepane){
+define(["dojo", "dijit/registry", "dijit/_Widget", "dijit/TitlePane"], function(dojo, registry, widget, titlepane){
 	
 	var tp = titlepane.prototype,
 		lookup = function(){

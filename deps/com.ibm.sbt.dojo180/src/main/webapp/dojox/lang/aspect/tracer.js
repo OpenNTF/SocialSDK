@@ -1,5 +1,3 @@
-// wrapped by build app
-define("dojox/lang/aspect/tracer", ["dijit","dojo","dojox"], function(dijit,dojo,dojox){
 dojo.provide("dojox.lang.aspect.tracer");
 
 (function(){
@@ -44,4 +42,3 @@ dojo.provide("dojox.lang.aspect.tracer");
 		return new Tracer(grouping);	// Object
 	};
 })();
-});

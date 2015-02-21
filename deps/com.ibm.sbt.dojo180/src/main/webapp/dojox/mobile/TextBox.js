@@ -1,4 +1,4 @@
-define("dojox/mobile/TextBox", [
+define([
 	"dojo/_base/declare",
 	"dojo/dom-construct",
 	"dijit/_WidgetBase",
@@ -19,6 +19,7 @@ define("dojox/mobile/TextBox", [
 		// Map widget attributes to DOMNode attributes.
 		_setPlaceHolderAttr: function(/*String*/value){
 			value = this._cv ? this._cv(value) : value;
+			this._set("placeHolder", value);
 			this.textbox.setAttribute("placeholder", value);
 		},
 

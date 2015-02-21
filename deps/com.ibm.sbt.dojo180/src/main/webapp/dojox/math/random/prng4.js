@@ -1,5 +1,5 @@
 // AMD-ID "dojox/math/random/prng4"
-define("dojox/math/random/prng4", ["dojo", "dojox"], function(dojo, dojox) {
+define(["dojo", "dojox"], function(dojo, dojox) {
 	
 	dojo.getObject("math.random.prng4", true, dojox);
 

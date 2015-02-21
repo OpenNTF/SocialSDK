@@ -1,5 +1,3 @@
-// wrapped by build app
-define("dojox/widget/DocTester", ["dijit","dojo","dojox","dojo/require!dojo/string,dijit/_Widget,dijit/_Templated,dojox/form/BusyButton,dojox/testing/DocTest"], function(dijit,dojo,dojox){
 dojo.provide("dojox.widget.DocTester");
 
 dojo.require("dojo.string");
@@ -14,7 +12,7 @@ dojo.declare('dojox.widget.DocTester',
 		// summary:
 		//		A widget to run DocTests inside an HTML page.
 
-		templateString: dojo.cache("dojox.widget", "DocTester/DocTester.html", "<div dojoAttachPoint=\"domNode\" class=\"dojoxDocTester\">\n\t<div dojoAttachPoint=\"containerNode\"></div>\n\t<button dojoType=\"dojox.form.BusyButton\" busyLabel=\"Testing...\" dojoAttachPoint=\"runButtonNode\">Run tests</button>\n\t<button dojoType=\"dijit.form.Button\" dojoAttachPoint=\"resetButtonNode\" style=\"display:none;\">Reset</button>\n\t<span>\n\t\t<span dojoAttachPoint=\"numTestsNode\">0</span> tests,\n\t\t<span dojoAttachPoint=\"numTestsOkNode\">0</span> passed,\n\t\t<span dojoAttachPoint=\"numTestsNokNode\">0</span> failed\n\t</span>\n</div>"),
+		templateString: dojo.cache('dojox.widget','DocTester/DocTester.html'),
 		widgetsInTemplate: true,
 	
 		_fillContent:function(/*DomNode*/source){
@@ -89,4 +87,3 @@ dojo.declare('dojox.widget.DocTester',
 		}
 	}
 );
-});

@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/gv/number", //begin v1.x content
+//begin v1.x content
 {
 	"currencyFormat": "¤#,##0.00"
 }

@@ -1,6 +1,15 @@
 define(
-"dojo/cldr/nls/he/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"א'",
+		"ב'",
+		"ג'",
+		"ד'",
+		"ה'",
+		"ו'",
+		"ש'"
+	],
 	"months-format-narrow": [
 		"1",
 		"2",
@@ -15,13 +24,28 @@ define(
 		"11",
 		"12"
 	],
+	"quarters-standAlone-narrow": [
+		"ר1",
+		"ר2",
+		"ר3",
+		"ר4"
+	],
 	"field-weekday": "יום בשבוע",
 	"dateFormatItem-yQQQ": "y QQQ",
-	"dateFormatItem-yMEd": "E, d.M.yyyy",
+	"dateFormatItem-yMEd": "E, d/M/y",
 	"dateFormatItem-MMMEd": "E, d בMMM",
 	"eraNarrow": [
 		"לפנה״ס",
 		"לסה״נ"
+	],
+	"days-format-short": [
+		"א'",
+		"ב'",
+		"ג'",
+		"ד'",
+		"ה'",
+		"ו'",
+		"ש'"
 	],
 	"dateFormat-long": "d בMMMM y",
 	"months-format-wide": [
@@ -38,6 +62,7 @@ define(
 		"נובמבר",
 		"דצמבר"
 	],
+	"dateTimeFormat-medium": "{1}, {0}",
 	"dayPeriods-format-wide-pm": "אחה״צ",
 	"dateFormat-full": "EEEE, d בMMMM y",
 	"dateFormatItem-Md": "d/M",
@@ -162,9 +187,10 @@ define(
 		"4"
 	],
 	"field-day-relative+-1": "אתמול",
+	"dateFormatItem-h": "‏h a",
 	"field-day-relative+-2": "שלשום",
 	"dateFormatItem-MMMd": "d בMMM",
-	"dateFormatItem-MEd": "E, M-d",
+	"dateFormatItem-MEd": "E, d/M",
 	"dateFormatItem-yMMMM": "MMMM y",
 	"field-day": "יום",
 	"days-format-wide": [
@@ -179,6 +205,20 @@ define(
 	"field-zone": "אזור",
 	"dateFormatItem-yyyyMM": "MM/yyyy",
 	"dateFormatItem-y": "y",
+	"months-standAlone-narrow": [
+		"1",
+		"2",
+		"3",
+		"4",
+		"5",
+		"6",
+		"7",
+		"8",
+		"9",
+		"10",
+		"11",
+		"12"
+	],
 	"field-year-relative+-1": "שנה שעברה",
 	"field-month-relative+-1": "חודש שעבר",
 	"dateFormatItem-yyMM": "MM/yy",
@@ -198,21 +238,21 @@ define(
 		"לספירה"
 	],
 	"days-format-narrow": [
-		"א",
-		"ב",
-		"ג",
-		"ד",
-		"ה",
-		"ו",
-		"ש"
+		"א'",
+		"ב'",
+		"ג'",
+		"ד'",
+		"ה'",
+		"ו׳",
+		"ש׳"
 	],
 	"field-month": "חודש",
 	"days-standAlone-narrow": [
-		"א",
-		"ב",
-		"ג",
-		"ד",
-		"ה",
+		"א׳",
+		"ב׳",
+		"ג׳",
+		"ד׳",
+		"ה׳",
 		"ו",
 		"ש"
 	],
@@ -231,6 +271,7 @@ define(
 	"field-week-relative+-1": "שבוע שעבר",
 	"field-year-relative+1": "שנה הבאה",
 	"dateFormatItem-mmss": "mm:ss",
+	"dateTimeFormat-short": "{1}, {0}",
 	"dateFormatItem-Hms": "HH:mm:ss",
 	"dateFormatItem-hms": "h:mm:ss a",
 	"dateFormatItem-yyyy": "y",

@@ -1,4 +1,4 @@
-define("dojox/dgauges/_circularUtils", function(){
+define(function(){
 	// module:
 	//		dojox/dgauges/components/_circularUtils
 	// summary:

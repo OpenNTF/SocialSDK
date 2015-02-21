@@ -1,4 +1,4 @@
-define("dojox/mobile/View", [
+define([
 	"dojo/_base/array",
 	"dojo/_base/config",
 	"dojo/_base/connect",
@@ -112,8 +112,12 @@ define("dojox/mobile/View", [
 				// correctly initialized.
 				this.show(true, true);
 
-				this.onStartView();
-				connect.publish("/dojox/mobile/startView", [this]);
+				// Defer firing events to let user connect to events just after creation
+				// TODO: revisit this for 2.0
+				this.defer(function(){
+					this.onStartView();
+					connect.publish("/dojox/mobile/startView", [this]);
+				});
 			}
 
 			if(this.domNode.style.visibility != "visible"){ // this check is to avoid screen flickers
@@ -209,6 +213,14 @@ define("dojox/mobile/View", [
 				}
 			}
 			this._clearClasses(toNode); // just in case toNode is a sibling of an ancestor.
+			
+			// #16337
+			// Uninitialization may fail to clear _inProgress when multiple
+			// performTransition calls occur in a short duration of time.
+			var toWidget = registry.byNode(toNode);
+			if(toWidget){
+				toWidget._inProgress = false;
+			}
 		},
 
 		convertToId: function(moveTo){
@@ -268,6 +280,9 @@ define("dojox/mobile/View", [
 			//		Transition forward to a blank view, and then open another page.
 			//	|	performTransition(null, 1, "slide", null, function(){location.href = href;});
 
+			if(this._inProgress){ return; } // transition is in progress
+			this._inProgress = true;
+			
 			// normalize the arg
 			var detail, optArgs;
 			if(moveTo && typeof(moveTo) === "object"){
@@ -538,17 +553,20 @@ define("dojox/mobile/View", [
 			}
 
 			var c = this._detail.context, m = this._detail.method;
-			if(!c && !m){ return; }
-			if(!m){
-				m = c;
-				c = null;
+			if(c || m){
+				if(!m){
+					m = c;
+					c = null;
+				}
+				c = c || win.global;
+				if(typeof(m) == "string"){
+					c[m].apply(c, this._optArgs);
+				}else if(typeof(m) == "function"){
+					m.apply(c, this._optArgs);
+				}
 			}
-			c = c || win.global;
-			if(typeof(m) == "string"){
-				c[m].apply(c, this._optArgs);
-			}else if(typeof(m) == "function"){
-				m.apply(c, this._optArgs);
-			}
+			this._detail = this._optArgs = this._arguments = undefined;
+			this._inProgress = false;
 		},
 
 		isVisible: function(/*Boolean?*/checkAncestors){

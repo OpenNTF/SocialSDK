@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/hr/buddhist", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M. yyyy.",
 	"dateFormatItem-yQ": "Q. yyyy.",
@@ -152,6 +152,15 @@ define(
 		"11.",
 		"12."
 	],
+	"days-standAlone-short": [
+		"ned",
+		"pon",
+		"uto",
+		"sri",
+		"čet",
+		"pet",
+		"sub"
+	],
 	"dateFormatItem-hm": "hh:mm a",
 	"days-standAlone-abbr": [
 		"ned",
@@ -180,6 +189,15 @@ define(
 		"listopada",
 		"studenoga",
 		"prosinca"
+	],
+	"days-format-short": [
+		"ned",
+		"pon",
+		"uto",
+		"sri",
+		"čet",
+		"pet",
+		"sub"
 	],
 	"dateFormatItem-d": "d.",
 	"quarters-format-wide": [

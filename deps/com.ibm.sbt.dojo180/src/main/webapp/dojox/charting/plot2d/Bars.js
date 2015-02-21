@@ -1,4 +1,4 @@
-define("dojox/charting/plot2d/Bars", ["dojo/_base/kernel", "dojo/_base/lang", "dojo/_base/array", "dojo/_base/declare", "./CartesianBase", "./_PlotEvents", "./common",
+define(["dojo/_base/kernel", "dojo/_base/lang", "dojo/_base/array", "dojo/_base/declare", "./CartesianBase", "./_PlotEvents", "./common",
 	"dojox/gfx/fx", "dojox/lang/utils", "dojox/lang/functional", "dojox/lang/functional/reversed"], 
 	function(dojo, lang, arr, declare, CartesianBase, _PlotEvents, dc, fx, du, df, dfr){
 		
@@ -164,11 +164,14 @@ define("dojox/charting/plot2d/Bars", ["dojo/_base/kernel", "dojo/_base/lang", "d
 				var theme = t.next("bar", [this.opt, run]),
 					eventSeries = new Array(run.data.length);
 				s = run.group;
-				var l = this.getDataLength(run);
 				var indexed = arr.some(run.data, function(item){
 					return typeof item == "number" || (item && !item.hasOwnProperty("x"));
 				});
-				for(var j = 0; j < l; ++j){
+				// on indexed charts we can easily just interate from the first visible to the last visible
+				// data point to save time
+				var min = indexed?Math.max(0, Math.floor(this._vScaler.bounds.from - 1)):0;
+				var max = indexed?Math.min(run.data.length, Math.ceil(this._vScaler.bounds.to)):run.data.length;
+				for(var j = min; j < max; ++j){
 					var value = run.data[j];
 					if(value != null){
 						var val = this.getValue(value, j, i, indexed),
@@ -230,9 +233,6 @@ define("dojox/charting/plot2d/Bars", ["dojo/_base/kernel", "dojo/_base/lang", "d
 			}
 			this.dirty = false;
 			return this;	//	dojox/charting/plot2d/Bars
-		},
-		getDataLength: function(run){
-			return Math.min(run.data.length, Math.ceil(this._vScaler.bounds.to));
 		},
 		getValue: function(value, j, seriesIndex, indexed){
 			var y,x;

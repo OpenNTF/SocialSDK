@@ -1,4 +1,4 @@
-define("dijit/DialogUnderlay", [
+define([
 	"dojo/_base/declare", // declare
 	"dojo/dom-attr", // domAttr.set
 	"dojo/window", // winUtils.getBox

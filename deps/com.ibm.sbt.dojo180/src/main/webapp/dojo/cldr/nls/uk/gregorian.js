@@ -1,6 +1,15 @@
 define(
-"dojo/cldr/nls/uk/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"Нд",
+		"Пн",
+		"Вт",
+		"Ср",
+		"Чт",
+		"Пт",
+		"Сб"
+	],
 	"months-format-narrow": [
 		"С",
 		"Л",
@@ -15,6 +24,12 @@ define(
 		"Л",
 		"Г"
 	],
+	"quarters-standAlone-narrow": [
+		"1",
+		"2",
+		"3",
+		"4"
+	],
 	"field-weekday": "День тижня",
 	"dateFormatItem-yQQQ": "QQQ y",
 	"dateFormatItem-yMEd": "E, dd.MM.yyyy",
@@ -24,6 +39,15 @@ define(
 		"н.е."
 	],
 	"dayPeriods-format-wide-morning": "ранку",
+	"days-format-short": [
+		"Нд",
+		"Пн",
+		"Вт",
+		"Ср",
+		"Чт",
+		"Пт",
+		"Сб"
+	],
 	"dateFormat-long": "d MMMM y 'р'.",
 	"months-format-wide": [
 		"січня",
@@ -89,10 +113,12 @@ define(
 		"лист.",
 		"груд."
 	],
+	"dateFormatItem-yyQ": "Q yy",
 	"timeFormat-full": "HH:mm:ss zzzz",
 	"field-day-relative+0": "Сьогодні",
 	"field-day-relative+1": "Завтра",
 	"field-day-relative+2": "Післязавтра",
+	"dateFormatItem-H": "HH",
 	"months-standAlone-abbr": [
 		"Січ",
 		"Лют",
@@ -165,6 +191,7 @@ define(
 		"4"
 	],
 	"field-day-relative+-1": "Вчора",
+	"dateFormatItem-h": "h a",
 	"dateTimeFormat-long": "{1} {0}",
 	"field-day-relative+-2": "Позавчора",
 	"dateFormatItem-MMMd": "d MMM",

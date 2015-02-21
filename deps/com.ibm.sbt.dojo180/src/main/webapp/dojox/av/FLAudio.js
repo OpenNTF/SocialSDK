@@ -1,4 +1,4 @@
-define("dojox/av/FLAudio", ['dojo', 'dojox/embed/Flash', 'dojox/timing/doLater'],function(dojo, dijit){
+define(['dojo', 'dojox/embed/Flash', 'dojox/timing/doLater'],function(dojo, dijit){
 
 dojo.experimental("dojox.av.FLVideo");
 

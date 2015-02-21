@@ -1,4 +1,4 @@
-define("dojox/grid/_Events", [
+define([
 	"dojo/keys",
 	"dojo/dom-class",
 	"dojo/_base/declare",
@@ -272,7 +272,6 @@ return declare("dojox.grid._Events", null, {
 			event = e;
 		}
 		this.focus.setFocusCell(event.cell, event.rowIndex);
-		this.onRowClick(event);
 		this.edit.setEditCell(event.cell, event.rowIndex);
 		this.onRowDblClick(e);
 	},

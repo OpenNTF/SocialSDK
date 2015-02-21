@@ -1,4 +1,4 @@
-define("dojox/image/LightboxNano", ["dojo", "dojo/fx"], function(dojo, fx) {
+define(["dojo", "dojo/fx"], function(dojo, fx) {
 
 	var abs = "absolute",
 		vis = "visibility",

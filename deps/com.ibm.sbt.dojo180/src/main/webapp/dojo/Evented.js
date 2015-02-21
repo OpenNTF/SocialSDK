@@ -1,4 +1,4 @@
-define("dojo/Evented", ["./aspect", "./on"], function(aspect, on){
+define(["./aspect", "./on"], function(aspect, on){
 	// module:
 	//		dojo/Evented
 

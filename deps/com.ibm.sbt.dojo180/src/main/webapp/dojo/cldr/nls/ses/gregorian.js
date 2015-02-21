@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/ses/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"field-dayperiod": "Adduha wala Aluula",
@@ -12,7 +12,6 @@ define(
 	],
 	"dateFormatItem-MMMEd": "E d MMM",
 	"field-day-relative+-1": "Bi",
-	"field-weekday": "Zaari",
 	"dateFormatItem-yQQQ": "QQQ y",
 	"dateFormatItem-MMdd": "dd/MM",
 	"days-standAlone-wide": [
@@ -176,6 +175,15 @@ define(
 		"N",
 		"D"
 	],
+	"days-standAlone-short": [
+		"Alh",
+		"Ati",
+		"Ata",
+		"Ala",
+		"Alm",
+		"Alz",
+		"Asi"
+	],
 	"days-standAlone-abbr": [
 		"Alh",
 		"Ati",
@@ -203,6 +211,15 @@ define(
 		"Oktoobur",
 		"Noowanbur",
 		"Deesanbur"
+	],
+	"days-format-short": [
+		"Alh",
+		"Ati",
+		"Ata",
+		"Ala",
+		"Alm",
+		"Alz",
+		"Asi"
 	],
 	"quarters-format-wide": [
 		"Arrubu 1",

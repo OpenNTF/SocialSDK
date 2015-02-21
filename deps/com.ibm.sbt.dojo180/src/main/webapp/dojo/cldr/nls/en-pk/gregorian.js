@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/en-pk/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"timeFormat-long": "h:mm:ss a z",
 	"dateFormat-medium": "dd-MMM-y",

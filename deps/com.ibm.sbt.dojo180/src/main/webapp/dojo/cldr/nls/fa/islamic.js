@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/fa/islamic", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "yyyy/M",
 	"dateFormatItem-yQ": "Q y",
@@ -177,6 +177,15 @@ define(
 		"ذ",
 		"ذ"
 	],
+	"days-standAlone-short": [
+		"۱ش",
+		"۲ش",
+		"۳ش",
+		"۴ش",
+		"۵ش",
+		"ج",
+		"ش"
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"یکشنبه",
@@ -205,6 +214,15 @@ define(
 		"شوال",
 		"ذیقعدهٔ",
 		"ذیحجهٔ"
+	],
+	"days-format-short": [
+		"۱ش",
+		"۲ش",
+		"۳ش",
+		"۴ش",
+		"۵ش",
+		"ج",
+		"ش"
 	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

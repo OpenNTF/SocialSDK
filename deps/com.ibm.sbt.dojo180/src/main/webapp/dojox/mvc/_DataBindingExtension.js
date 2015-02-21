@@ -1,4 +1,4 @@
-define("dojox/mvc/_DataBindingExtension", [
+define([
 	"dojo/_base/array",
 	"dojo/aspect",
 	"dojo/_base/lang",

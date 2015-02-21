@@ -1,4 +1,4 @@
-define("dojox/grid/_RowManager", [
+define([
 	"dojo/_base/declare",
 	"dojo/_base/lang",
 	"dojo/dom-class"

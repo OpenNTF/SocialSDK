@@ -1,4 +1,4 @@
-define("dojox/NodeList/delegate", [
+define([
 	"dojo/_base/lang",
 	"dojo/query",
 	"dojo/_base/NodeList",	// for this.connect()

@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/pt-pt/japanese", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yQ": "QQQ 'de' y G",
 	"dateFormat-short": "d/M/y G",

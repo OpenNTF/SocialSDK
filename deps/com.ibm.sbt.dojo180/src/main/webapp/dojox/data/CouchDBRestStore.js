@@ -1,4 +1,4 @@
-define("dojox/data/CouchDBRestStore", ["dojo", "dojox", "dojox/data/JsonRestStore"], function(dojo, dojox) {
+define(["dojo", "dojox", "dojox/data/JsonRestStore"], function(dojo, dojox) {
 dojo.declare("dojox.data.CouchDBRestStore",
 	dojox.data.JsonRestStore,
 	{

@@ -1,5 +1,3 @@
-// wrapped by build app
-define("dojox/wire/_base", ["dijit","dojo","dojox"], function(dijit,dojo,dojox){
 dojo.provide("dojox.wire._base");
 
 dojox.wire._defaultWireClass = "dojox.wire.Wire";
@@ -192,5 +190,3 @@ dojox.wire.disconnect = function(/*Object*/connection){
 		dojo.disconnect(connection.handle);
 	}
 };
-
-});

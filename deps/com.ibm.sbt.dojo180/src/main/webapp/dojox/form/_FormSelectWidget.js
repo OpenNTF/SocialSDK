@@ -1,4 +1,4 @@
-define("dojox/form/_FormSelectWidget", [
+define([
 	"dojo/_base/kernel",
 	"dojo/_base/lang",
 	"dijit/form/_FormSelectWidget"

@@ -1,4 +1,4 @@
-define("dojox/mobile/ContentPane", [
+define([
 	"dojo/_base/declare",
 	"./Container",
 	"./_ContentPaneMixin"

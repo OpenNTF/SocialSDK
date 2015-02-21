@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/ro/buddhist", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "MM.yyyy",
 	"dateFormatItem-yQ": "'trimestrul' Q y",
@@ -156,6 +156,15 @@ define(
 		"N",
 		"D"
 	],
+	"days-standAlone-short": [
+		"Du",
+		"Lu",
+		"Ma",
+		"Mi",
+		"Jo",
+		"Vi",
+		"Sâ"
+	],
 	"days-standAlone-abbr": [
 		"Du",
 		"Lu",
@@ -183,6 +192,15 @@ define(
 		"octombrie",
 		"noiembrie",
 		"decembrie"
+	],
+	"days-format-short": [
+		"Du",
+		"Lu",
+		"Ma",
+		"Mi",
+		"Jo",
+		"Vi",
+		"Sâ"
 	],
 	"quarters-format-wide": [
 		"trimestrul I",

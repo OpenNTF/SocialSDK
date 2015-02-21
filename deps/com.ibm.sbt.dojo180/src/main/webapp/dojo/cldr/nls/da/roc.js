@@ -1,10 +1,10 @@
 define(
-"dojo/cldr/nls/da/roc", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormat-medium": "d. MMM y G",
 	"dateFormatItem-MMMEd": "E d. MMM",
 	"dateFormatItem-MMdd": "dd/MM",
-	"dateFormatItem-MEd": "E. d/M",
+	"dateFormatItem-MEd": "E d/M",
 	"dateFormatItem-yyyyMMM": "MMM y G",
 	"dateFormatItem-Hm": "HH.mm",
 	"dateFormatItem-H": "HH",
@@ -13,9 +13,9 @@ define(
 	"dateFormatItem-hm": "h.mm a",
 	"dateFormatItem-Md": "d/M",
 	"dateFormatItem-M": "M",
-	"dateFormatItem-yyyyMMMEd": "E. d. MMM y G",
+	"dateFormatItem-yyyyMMMEd": "E d. MMM y G",
 	"dateFormatItem-MMMMEd": "E d. MMMM",
-	"dateFormatItem-yyyyMEd": "E. d/M/y GGGGG",
+	"dateFormatItem-yyyyMEd": "E d/M/y GGGGG",
 	"dateFormatItem-yyyyMM": "MM/y GGGGG",
 	"dateFormatItem-yyyy": "y G",
 	"dateFormatItem-yyMM": "MM/y GGGGG",

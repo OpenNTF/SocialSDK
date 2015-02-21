@@ -1,10 +1,10 @@
 define(
-"dojo/cldr/nls/ewo/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
-	"field-dayperiod": "Kírí / Ngǝgógǝle",
+	"field-dayperiod": "Kírí / Ngəgógəle",
 	"dateFormatItem-yQ": "Q y",
-	"dayPeriods-format-wide-pm": "ngǝgógǝle",
+	"dayPeriods-format-wide-pm": "ngəgógəle",
 	"field-minute": "Enútɛn",
 	"eraNames": [
 		"osúsúa Yésus kiri",
@@ -18,9 +18,9 @@ define(
 	"days-standAlone-wide": [
 		"sɔ́ndɔ",
 		"mɔ́ndi",
-		"sɔ́ndɔ mǝlú mǝ́bɛ̌",
-		"sɔ́ndɔ mǝlú mǝ́lɛ́",
-		"sɔ́ndɔ mǝlú mǝ́nyi",
+		"sɔ́ndɔ məlú mə́bɛ̌",
+		"sɔ́ndɔ məlú mə́lɛ́",
+		"sɔ́ndɔ məlú mə́nyi",
 		"fúladé",
 		"séradé"
 	],
@@ -103,7 +103,7 @@ define(
 		"ngɔn lála",
 		"ngɔn nyina",
 		"ngɔn tána",
-		"ngɔn samǝna",
+		"ngɔn saməna",
 		"ngɔn zamgbála",
 		"ngɔn mwom",
 		"ngɔn ebulú",
@@ -155,7 +155,7 @@ define(
 		"s"
 	],
 	"dateFormatItem-yMMMd": "d MMM y",
-	"field-second": "Akábǝga",
+	"field-second": "Akábəga",
 	"field-day": "Amǒs",
 	"dateFormatItem-MEd": "E d/M",
 	"months-format-narrow": [
@@ -171,6 +171,15 @@ define(
 		"a",
 		"d",
 		"b"
+	],
+	"days-standAlone-short": [
+		"sɔ́n",
+		"mɔ́n",
+		"smb",
+		"sml",
+		"smn",
+		"fúl",
+		"sér"
 	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
@@ -193,13 +202,22 @@ define(
 		"ngɔn lála",
 		"ngɔn nyina",
 		"ngɔn tána",
-		"ngɔn samǝna",
+		"ngɔn saməna",
 		"ngɔn zamgbála",
 		"ngɔn mwom",
 		"ngɔn ebulú",
 		"ngɔn awóm",
 		"ngɔn awóm ai dziá",
 		"ngɔn awóm ai bɛ̌"
+	],
+	"days-format-short": [
+		"sɔ́n",
+		"mɔ́n",
+		"smb",
+		"sml",
+		"smn",
+		"fúl",
+		"sér"
 	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [
@@ -211,9 +229,9 @@ define(
 	"days-format-wide": [
 		"sɔ́ndɔ",
 		"mɔ́ndi",
-		"sɔ́ndɔ mǝlú mǝ́bɛ̌",
-		"sɔ́ndɔ mǝlú mǝ́lɛ́",
-		"sɔ́ndɔ mǝlú mǝ́nyi",
+		"sɔ́ndɔ məlú mə́bɛ̌",
+		"sɔ́ndɔ məlú mə́lɛ́",
+		"sɔ́ndɔ məlú mə́nyi",
 		"fúladé",
 		"séradé"
 	],

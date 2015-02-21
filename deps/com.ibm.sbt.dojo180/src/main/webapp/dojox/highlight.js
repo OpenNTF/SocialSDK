@@ -1,4 +1,4 @@
-define("dojox/highlight", ["./highlight/_base"], function(highlight){
+define(["./highlight/_base"], function(highlight){
 	/*=====
 	 return {
 	 // summary:

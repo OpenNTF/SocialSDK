@@ -1,9 +1,27 @@
 define(
-"dojo/cldr/nls/gv/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"Jed",
+		"Jel",
+		"Jem",
+		"Jerc",
+		"Jerd",
+		"Jeh",
+		"Jes"
+	],
 	"eraNames": [
 		"RC",
 		"AD"
+	],
+	"days-format-short": [
+		"Jed",
+		"Jel",
+		"Jem",
+		"Jerc",
+		"Jerd",
+		"Jeh",
+		"Jes"
 	],
 	"eraAbbr": [
 		"RC",

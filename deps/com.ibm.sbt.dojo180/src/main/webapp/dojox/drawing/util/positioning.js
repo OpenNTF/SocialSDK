@@ -1,4 +1,4 @@
-define("dojox/drawing/util/positioning", ['./common'], function(common){
+define(['./common'], function(common){
 	
 	var textOffset = 4;  // distance from line to text box
 	var textYOffset = 20;  // height of text box

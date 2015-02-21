@@ -1,4 +1,4 @@
-define("dojox/gfx/shape", ["./_base", "dojo/_base/lang", "dojo/_base/declare", "dojo/_base/kernel", "dojo/_base/sniff",
+define(["./_base", "dojo/_base/lang", "dojo/_base/declare", "dojo/_base/kernel", "dojo/_base/sniff",
 	"dojo/_base/connect", "dojo/_base/array", "dojo/dom-construct", "dojo/_base/Color", "./matrix" /*===== , "./path" =====*/ ], 
 	function(g, lang, declare, kernel, has, events, arr, domConstruct, Color, matrixLib){
 
@@ -13,7 +13,18 @@ define("dojox/gfx/shape", ["./_base", "dojo/_base/lang", "dojo/_base/declare", "
 	var _ids = {};
 	// a simple set impl to map shape<->id
 	var registry = {};
-	
+	var disposeCount = 0, fixIELeak = has("ie") < 9;
+
+	function repack(oldRegistry){
+		var newRegistry = {};
+		for(var key in oldRegistry){
+			if(oldRegistry.hasOwnProperty(key)){
+				newRegistry[key] = oldRegistry[key]
+			}
+		}
+		return newRegistry;
+	}
+
 	shape.register = function(/*dojox/gfx/shape.Shape*/s){
 		// summary:
 		//		Register the specified shape into the graphics registry.
@@ -38,13 +49,23 @@ define("dojox/gfx/shape", ["./_base", "dojo/_base/lang", "dojo/_base/declare", "
 		// returns: dojox/gfx/shape.Shape
 		return registry[id]; //dojox/gfx/shape.Shape
 	};
-	
-	shape.dispose = function(/*dojox/gfx/shape.Shape*/s){
+
+	shape.dispose = function(/*dojox/gfx/shape.Shape*/s, /*Boolean?*/recurse){
 		// summary:
 		//		Removes the specified shape from the registry.
 		// s: dojox/gfx/shape.Shape
 		//		The shape to unregister.
+		if(recurse && s.children){
+			for(var i=0; i< s.children.length; ++i){
+				shape.dispose(s.children[i], true);
+			}
+		}
 		delete registry[s.getUID()];
+		++disposeCount;
+		if(fixIELeak && disposeCount>10000){
+			registry = repack(registry);
+			disposeCount = 0;
+		}
 	};
 	
 	shape.Shape = declare("dojox.gfx.shape.Shape", null, {

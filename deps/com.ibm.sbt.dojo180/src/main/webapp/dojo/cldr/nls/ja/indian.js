@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/ja/indian", //begin v1.x content
+//begin v1.x content
 {
 	"months-format-abbr": [
 		"カイトラ",
@@ -32,6 +32,20 @@ define(
 	"eraAbbr": [
 		"サカ"
 	],
+	"months-format-narrow": [
+		"1",
+		"2",
+		"3",
+		"4",
+		"5",
+		"6",
+		"7",
+		"8",
+		"9",
+		"10",
+		"11",
+		"12"
+	],
 	"months-standAlone-abbr": [
 		"カイトラ",
 		"ヴァイサカ",
@@ -59,6 +73,20 @@ define(
 		"パウサ",
 		"マーガ",
 		"パルグナ"
+	],
+	"months-standAlone-narrow": [
+		"1",
+		"2",
+		"3",
+		"4",
+		"5",
+		"6",
+		"7",
+		"8",
+		"9",
+		"10",
+		"11",
+		"12"
 	]
 }
 //end v1.x content

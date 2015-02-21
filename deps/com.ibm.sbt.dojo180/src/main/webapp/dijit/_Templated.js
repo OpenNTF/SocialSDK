@@ -1,4 +1,4 @@
-define("dijit/_Templated", [
+define([
 	"./_WidgetBase",
 	"./_TemplatedMixin",
 	"./_WidgetsInTemplateMixin",

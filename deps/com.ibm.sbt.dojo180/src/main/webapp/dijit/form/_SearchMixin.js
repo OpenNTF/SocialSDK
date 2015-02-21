@@ -1,4 +1,4 @@
-define("dijit/form/_SearchMixin", [
+define([
 	"dojo/data/util/filter", // patternToRegExp
 	"dojo/_base/declare", // declare
 	"dojo/_base/event", // event.stop
@@ -44,6 +44,14 @@ define("dijit/form/_SearchMixin", [
 		//		A query that can be passed to `store` to initially filter the items.
 		//		ComboBox overwrites any reference to the `searchAttr` and sets it to the `queryExpr` with the user's input substituted.
 		query: {},
+
+		// list: [const] String
+		//		Alternate to specifying a store.  Id of a dijit/form/DataList widget.
+		list: "",
+		_setListAttr: function(list){
+			// Avoid having list applied to the DOM node, since it has native meaning in modern browsers
+			this._set("list", list);
+		},
 
 		// searchDelay: Integer
 		//		Delay in milliseconds between when user types something and we start
@@ -100,7 +108,7 @@ define("dijit/form/_SearchMixin", [
 			var key = evt.charOrCode;
 
 			// except for cutting/pasting case - ctrl + x/v
-			if(evt.altKey || ((evt.ctrlKey || evt.metaKey) && (key != 'x' && key != 'v')) || key == keys.SHIFT){
+			if("type" in evt && evt.type.substring(0,3) == "key" && (evt.altKey || ((evt.ctrlKey || evt.metaKey) && (key != 'x' && key != 'v')) || key == keys.SHIFT)){
 				return; // throw out weird key combinations and spurious events
 			}
 
@@ -150,7 +158,7 @@ define("dijit/form/_SearchMixin", [
 		},
 
 		_startSearchFromInput: function(){
-			this._startSearch(this.focusNode.value.replace(/([\\\*\?])/g, "\\$1"));
+			this._startSearch(this.focusNode.value);
 		},
 
 		_startSearch: function(/*String*/ text){
@@ -173,7 +181,7 @@ define("dijit/form/_SearchMixin", [
 						deep: true
 					}
 				},
-				qs = string.substitute(this.queryExpr, [text]),
+				qs = string.substitute(this.queryExpr, [text.replace(/([\\\*\?])/g, "\\$1")]),
 				q,
 				startQuery = function(){
 					var resPromise = _this._fetchHandle = _this.store.query(query, options);

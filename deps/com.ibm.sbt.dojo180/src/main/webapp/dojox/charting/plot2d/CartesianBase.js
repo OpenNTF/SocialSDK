@@ -1,4 +1,4 @@
-define("dojox/charting/plot2d/CartesianBase", ["dojo/_base/lang", "dojo/_base/declare", "dojo/_base/connect", 
+define(["dojo/_base/lang", "dojo/_base/declare", "dojo/_base/connect", 
 		"./Base",
 		"../scaler/primitive", "dojox/gfx/fx"],
 	function(lang, declare, hub, Base, primitive, fx){

@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/om/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormat-medium": "dd-MMM-y",
 	"dateFormatItem-MMdd": "dd/MM",
@@ -22,6 +22,15 @@ define(
 		"D"
 	],
 	"timeFormat-full": "h:mm:ss a zzzz",
+	"days-format-short": [
+		"Dil",
+		"Wix",
+		"Qib",
+		"Rob",
+		"Kam",
+		"Jim",
+		"San"
+	],
 	"months-standAlone-narrow": [
 		"J",
 		"F",
@@ -78,6 +87,15 @@ define(
 		"Onk",
 		"Sad",
 		"Mud"
+	],
+	"days-standAlone-short": [
+		"Dil",
+		"Wix",
+		"Qib",
+		"Rob",
+		"Kam",
+		"Jim",
+		"San"
 	],
 	"dayPeriods-format-wide-am": "WD",
 	"timeFormat-medium": "h:mm:ss a",

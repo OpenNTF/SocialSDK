@@ -1,4 +1,4 @@
-define("dijit/_editor/html", [
+define([
 	"dojo/_base/array",
 	"dojo/_base/lang", // lang.setObject
 	"dojo/sniff" // has("ie")

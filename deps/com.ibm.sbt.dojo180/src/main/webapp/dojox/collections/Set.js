@@ -1,4 +1,4 @@
-define("dojox/collections/Set", ["./_base", "./ArrayList"], function(dxc, ArrayList){
+define(["./_base", "./ArrayList"], function(dxc, ArrayList){
 
 	dxc.Set=new (function(){
 		function conv(arr){

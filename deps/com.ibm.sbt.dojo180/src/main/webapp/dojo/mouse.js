@@ -1,4 +1,4 @@
-define("dojo/mouse", ["./_base/kernel", "./on", "./has", "./dom", "./_base/window"], function(dojo, on, has, dom, win){
+define(["./_base/kernel", "./on", "./has", "./dom", "./_base/window"], function(dojo, on, has, dom, win){
 
 	// module:
 	//		dojo/mouse
@@ -8,7 +8,7 @@ define("dojo/mouse", ["./_base/kernel", "./on", "./has", "./dom", "./_base/windo
 	has.add("events-mousewheel", win.doc && 'onmousewheel' in win.doc);
 
 	var mouseButtons;
-	if(has("dom-quirks") || !has("dom-addeventlistener")){
+	if((has("dom-quirks") && has("ie")) || !has("dom-addeventlistener")){
 		mouseButtons = {
 			LEFT:   1,
 			MIDDLE: 4,
@@ -119,7 +119,7 @@ define("dojo/mouse", ["./_base/kernel", "./on", "./has", "./dom", "./_base/windo
 		//		mouseenter and mouseleave event emulation.
 		// example:
 		//		To use these events, you register a mouseenter like this:
-		//		|	define(["dojo/on", dojo/mouse"], function(on, mouse){
+		//		|	define(["dojo/on", "dojo/mouse"], function(on, mouse){
 		//		|		on(targetNode, mouse.enter, function(event){
 		//		|			dojo.addClass(targetNode, "highlighted");
 		//		|		});

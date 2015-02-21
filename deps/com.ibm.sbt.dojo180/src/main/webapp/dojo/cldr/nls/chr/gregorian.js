@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/chr/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"dateFormatItem-yQ": "Q y",
@@ -149,6 +149,15 @@ define(
 		"Ꮕ",
 		"Ꭴ"
 	],
+	"days-standAlone-short": [
+		"ᏆᏍᎬ",
+		"ᏉᏅᎯ",
+		"ᏔᎵᏁ",
+		"ᏦᎢᏁ",
+		"ᏅᎩᏁ",
+		"ᏧᎾᎩ",
+		"ᏈᏕᎾ"
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"ᏆᏍᎬ",
@@ -177,6 +186,15 @@ define(
 		"ᏚᏂᏅᏗ",
 		"ᏅᏓᏕᏆ",
 		"ᎤᏍᎩᏱ"
+	],
+	"days-format-short": [
+		"ᏆᏍᎬ",
+		"ᏉᏅᎯ",
+		"ᏔᎵᏁ",
+		"ᏦᎢᏁ",
+		"ᏅᎩᏁ",
+		"ᏧᎾᎩ",
+		"ᏈᏕᎾ"
 	],
 	"days-format-wide": [
 		"ᎤᎾᏙᏓᏆᏍᎬ",

@@ -1,7 +1,8 @@
 define(
-"dojo/cldr/nls/hu/hebrew", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "y.M.",
+	"dateFormatItem-yQ": "y. Q",
 	"months-standAlone-abbr-leap": "Ádár II",
 	"dayPeriods-format-wide-pm": "du.",
 	"eraNames": [
@@ -71,6 +72,12 @@ define(
 		"4. negyedév"
 	],
 	"dayPeriods-format-narrow-am": "de.",
+	"quarters-standAlone-narrow": [
+		"1.",
+		"2.",
+		"3.",
+		"4."
+	],
 	"months-standAlone-wide": [
 		"Tisri",
 		"Hesván",
@@ -131,6 +138,15 @@ define(
 	],
 	"dateFormatItem-yMMMd": "y. MMM d.",
 	"dateFormatItem-MEd": "M. d., E",
+	"days-standAlone-short": [
+		"V",
+		"H",
+		"K",
+		"Sze",
+		"Cs",
+		"P",
+		"Szo"
+	],
 	"dateFormatItem-hm": "a h:mm",
 	"days-standAlone-abbr": [
 		"V",

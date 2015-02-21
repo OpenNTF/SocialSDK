@@ -1,4 +1,4 @@
-define("dojox/mobile/_StoreListMixin", [
+define([
 	"dojo/_base/array",
 	"dojo/_base/declare",
 	"./_StoreMixin",

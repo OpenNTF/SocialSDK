@@ -1,4 +1,4 @@
-define("dojox/charting/plot2d/Stacked", ["dojo/_base/declare", "./Default", "./commonStacked"], 
+define(["dojo/_base/declare", "./Default", "./commonStacked"], 
 	function(declare, Default, commonStacked){
 
 	return declare("dojox.charting.plot2d.Stacked", Default, {
@@ -12,7 +12,6 @@ define("dojox/charting/plot2d/Stacked", ["dojo/_base/declare", "./Default", "./c
 			// returns: Object
 			//		{hmin, hmax, vmin, vmax} min/max in both directions.
 			var stats = commonStacked.collectStats(this.series);
-			this._maxRunLength = stats.hmax;
 			return stats; // Object
 		},
 		

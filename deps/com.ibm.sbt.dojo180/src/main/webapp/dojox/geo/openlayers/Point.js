@@ -1,4 +1,4 @@
-define("dojox/geo/openlayers/Point", [
+define([
 	"dojo/_base/declare",
 	"./Geometry"
 ], function(declare, Geometry){

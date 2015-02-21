@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/seh/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "MM/y",
 	"dateFormatItem-yQ": "y Q",
@@ -10,7 +10,6 @@ define(
 	],
 	"dateFormatItem-MMMEd": "E, d MMM",
 	"field-day-relative+-1": "Zuro",
-	"field-weekday": "Ntsiku",
 	"dateFormatItem-yQQQ": "y QQQ",
 	"dateFormatItem-MMdd": "dd/MM",
 	"days-standAlone-wide": [
@@ -155,6 +154,15 @@ define(
 		"N",
 		"D"
 	],
+	"days-standAlone-short": [
+		"Dim",
+		"Pos",
+		"Pir",
+		"Tat",
+		"Nai",
+		"Sha",
+		"Sab"
+	],
 	"days-standAlone-abbr": [
 		"Dim",
 		"Pos",
@@ -182,6 +190,15 @@ define(
 		"Otubro",
 		"Novembro",
 		"Decembro"
+	],
+	"days-format-short": [
+		"Dim",
+		"Pos",
+		"Pir",
+		"Tat",
+		"Nai",
+		"Sha",
+		"Sab"
 	],
 	"dateFormatItem-d": "d",
 	"days-format-wide": [

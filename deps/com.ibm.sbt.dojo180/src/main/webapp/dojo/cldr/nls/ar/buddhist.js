@@ -1,18 +1,23 @@
 define(
-"dojo/cldr/nls/ar/buddhist", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M‏/y G",
-	"dateFormatItem-yQ": "yyyy Q",
+	"dateFormatItem-yQ": "Q yyyy",
 	"dayPeriods-format-wide-pm": "م",
 	"eraNames": [
 		"التقويم البوذي"
 	],
 	"dateFormatItem-MMMEd": "E d MMM",
-	"dateFormatItem-yQQQ": "y QQQ",
+	"dateFormatItem-yQQQ": "QQQ y",
 	"dateFormatItem-MMdd": "dd‏/MM",
 	"days-standAlone-wide": [
 		"الأحد",
-		"الاثنين"
+		"الاثنين",
+		"الثلاثاء",
+		"الأربعاء",
+		"الخميس",
+		"الجمعة",
+		"السبت"
 	],
 	"dateFormatItem-MMM": "LLL",
 	"months-standAlone-narrow": [
@@ -31,7 +36,21 @@ define(
 	],
 	"dayPeriods-format-wide-am": "ص",
 	"dateFormatItem-y": "y G",
-	"timeFormat-full": "zzzz h:mm:ss a",
+	"timeFormat-full": "h:mm:ss a zzzz",
+	"months-standAlone-abbr": [
+		"يناير",
+		"فبراير",
+		"مارس",
+		"أبريل",
+		"مايو",
+		"يونيو",
+		"يوليو",
+		"أغسطس",
+		"سبتمبر",
+		"أكتوبر",
+		"نوفمبر",
+		"ديسمبر"
+	],
 	"dateFormatItem-Ed": "E، d",
 	"dateFormatItem-yMMM": "MMM y G",
 	"days-standAlone-narrow": [
@@ -61,9 +80,43 @@ define(
 		"٣",
 		"٤"
 	],
+	"months-standAlone-wide": [
+		"يناير",
+		"فبراير",
+		"مارس",
+		"أبريل",
+		"مايو",
+		"يونيو",
+		"يوليو",
+		"أغسطس",
+		"سبتمبر",
+		"أكتوبر",
+		"نوفمبر",
+		"ديسمبر"
+	],
 	"dateFormatItem-MMMMEd": "E d MMMM",
 	"dateFormatItem-MMMd": "d MMM",
-	"timeFormat-long": "z h:mm:ss a",
+	"quarters-format-narrow": [
+		"١",
+		"٢",
+		"٣",
+		"٤"
+	],
+	"timeFormat-long": "h:mm:ss a z",
+	"months-format-abbr": [
+		"يناير",
+		"فبراير",
+		"مارس",
+		"أبريل",
+		"مايو",
+		"يونيو",
+		"يوليو",
+		"أغسطس",
+		"سبتمبر",
+		"أكتوبر",
+		"نوفمبر",
+		"ديسمبر"
+	],
 	"timeFormat-short": "h:mm a",
 	"dateFormatItem-MMMMd": "d MMMM",
 	"days-format-abbr": [
@@ -78,6 +131,15 @@ define(
 	"dateFormatItem-M": "L",
 	"dateFormatItem-yMMMd": "d MMM، y G",
 	"dateFormatItem-MEd": "E، d/M",
+	"days-standAlone-short": [
+		"الأحد",
+		"الاثنين",
+		"الثلاثاء",
+		"الأربعاء",
+		"الخميس",
+		"الجمعة",
+		"السبت"
+	],
 	"days-standAlone-abbr": [
 		"الأحد",
 		"الاثنين",
@@ -105,6 +167,15 @@ define(
 		"أكتوبر",
 		"نوفمبر",
 		"ديسمبر"
+	],
+	"days-format-short": [
+		"الأحد",
+		"الاثنين",
+		"الثلاثاء",
+		"الأربعاء",
+		"الخميس",
+		"الجمعة",
+		"السبت"
 	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

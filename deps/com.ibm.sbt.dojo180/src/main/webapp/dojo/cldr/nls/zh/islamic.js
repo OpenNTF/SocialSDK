@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/zh/islamic", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "y年M月",
 	"dateFormatItem-yQ": "y年第Q季度",
@@ -22,16 +22,44 @@ define(
 		"星期六"
 	],
 	"dateFormatItem-MMM": "LLL",
+	"months-standAlone-narrow": [
+		"1",
+		"2",
+		"3",
+		"4",
+		"5",
+		"6",
+		"7",
+		"8",
+		"9",
+		"10",
+		"11",
+		"12"
+	],
 	"dayPeriods-format-wide-am": "上午",
 	"quarters-standAlone-abbr": [
-		"一季度",
-		"二季度",
-		"三季度",
-		"四季度"
+		"1季度",
+		"2季度",
+		"3季度",
+		"4季度"
 	],
 	"dateFormatItem-y": "y年",
-	"timeFormat-full": "zzzzah时mm分ss秒",
+	"timeFormat-full": "zzzzah:mm:ss",
 	"dateFormatItem-yyyy": "GGGyy年",
+	"months-standAlone-abbr": [
+		"1月",
+		"2月",
+		"3月",
+		"4月",
+		"5月",
+		"6月",
+		"7月",
+		"8月",
+		"9月",
+		"10月",
+		"11月",
+		"12月"
+	],
 	"dateFormatItem-Ed": "d日E",
 	"dateFormatItem-yMMM": "y年M月",
 	"days-standAlone-narrow": [
@@ -51,7 +79,8 @@ define(
 	"dateFormatItem-Hm": "H:mm",
 	"dateFormat-medium": "Gy年M月d日",
 	"dateFormatItem-Hms": "H:mm:ss",
-	"dateFormatItem-yMd": "y年M月d日",
+	"dayPeriods-format-narrow-pm": "下午",
+	"dateFormatItem-yMd": "y/M/d",
 	"quarters-standAlone-wide": [
 		"第一季度",
 		"第二季度",
@@ -59,18 +88,47 @@ define(
 		"第四季度"
 	],
 	"dateFormatItem-ms": "mm:ss",
+	"dayPeriods-format-narrow-am": "上午",
 	"dateTimeFormat-long": "{1}{0}",
+	"months-standAlone-wide": [
+		"一月",
+		"二月",
+		"三月",
+		"四月",
+		"五月",
+		"六月",
+		"七月",
+		"八月",
+		"九月",
+		"十月",
+		"十一月",
+		"十二月"
+	],
 	"dateFormatItem-yyyyMd": "GGGGGyy-MM-dd",
 	"dateFormatItem-yyyyMMMd": "GGGGGyy年M月d日",
 	"dateFormatItem-MMMd": "M月d日",
-	"timeFormat-long": "zah时mm分ss秒",
-	"timeFormat-short": "ah:mm",
+	"months-format-abbr": [
+		"1月",
+		"2月",
+		"3月",
+		"4月",
+		"5月",
+		"6月",
+		"7月",
+		"8月",
+		"9月",
+		"10月",
+		"11月",
+		"12月"
+	],
+	"timeFormat-long": "zah:mm:ss",
 	"dateFormatItem-H": "H时",
+	"timeFormat-short": "ah:mm",
 	"quarters-format-abbr": [
-		"1季",
-		"2季",
-		"3季",
-		"4季"
+		"1季度",
+		"2季度",
+		"3季度",
+		"4季度"
 	],
 	"dateFormatItem-MMMMdd": "M月dd日",
 	"days-format-abbr": [
@@ -94,6 +152,29 @@ define(
 	],
 	"dateFormatItem-yMMMd": "y年M月d日",
 	"dateFormatItem-MEd": "M-dE",
+	"months-format-narrow": [
+		"1",
+		"2",
+		"3",
+		"4",
+		"5",
+		"6",
+		"7",
+		"8",
+		"9",
+		"10",
+		"11",
+		"12"
+	],
+	"days-standAlone-short": [
+		"周日",
+		"周一",
+		"周二",
+		"周三",
+		"周四",
+		"周五",
+		"周六"
+	],
 	"dateFormatItem-hm": "ah:mm",
 	"days-standAlone-abbr": [
 		"周日",
@@ -109,15 +190,38 @@ define(
 	"dateFormatItem-yMMMEd": "y年M月d日E",
 	"dateFormat-full": "Gy年M月d日EEEE",
 	"dateFormatItem-Md": "M-d",
+	"dateFormatItem-yMEd": "y年M月d日，E",
 	"dateFormatItem-yyyyQ": "Gy年QQQ",
-	"dateFormatItem-yMEd": "y/M/dE",
+	"months-format-wide": [
+		"一月",
+		"二月",
+		"三月",
+		"四月",
+		"五月",
+		"六月",
+		"七月",
+		"八月",
+		"九月",
+		"十月",
+		"十一月",
+		"十二月"
+	],
+	"days-format-short": [
+		"周日",
+		"周一",
+		"周二",
+		"周三",
+		"周四",
+		"周五",
+		"周六"
+	],
 	"dateFormatItem-yyyyMMM": "GGGGGyy年M月",
 	"dateFormatItem-d": "d日",
 	"quarters-format-wide": [
-		"第1季度",
-		"第2季度",
-		"第3季度",
-		"第4季度"
+		"第一季度",
+		"第二季度",
+		"第三季度",
+		"第四季度"
 	],
 	"eraNarrow": [
 		"回历"

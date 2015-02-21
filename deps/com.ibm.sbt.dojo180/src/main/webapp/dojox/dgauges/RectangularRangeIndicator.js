@@ -1,4 +1,4 @@
-define("dojox/dgauges/RectangularRangeIndicator", ["dojo/_base/declare", "dojox/gfx", "./ScaleIndicatorBase", "dojo/_base/event", "dojo/dom-geometry"],
+define(["dojo/_base/declare", "dojox/gfx", "./ScaleIndicatorBase", "dojo/_base/event", "dojo/dom-geometry"],
 	function(declare, gfx, ScaleIndicatorBase, eventUtil, domGeom){
 	return declare("dojox.dgauges.RectangularRangeIndicator", ScaleIndicatorBase, {
 		// summary:
@@ -68,7 +68,7 @@ define("dojox/dgauges/RectangularRangeIndicator", ["dojo/_base/declare", "dojox/
 			//		Internal method.
 			// tags:
 			//		private
-			var gp = [startX, startY, startX, endPosition, startX + endThickness, endPosition, startX, startY + startThickness, startX, startY]
+			var gp = [startX, startY, startX, endPosition, startX + endThickness, endPosition, startX + startThickness, startY, startX, startY]
 			if(fill && fill.colors){
 				// Configure gradient
 				fill.x1 = startX;

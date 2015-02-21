@@ -1,4 +1,4 @@
-define("dojo/main", [
+define([
 	"./_base/kernel",	// kernel.isAsync
 	"./has",
 	"require",
@@ -13,8 +13,8 @@ define("dojo/main", [
 	"./_base/json",
 	"./_base/Color",
 	"./has!dojo-firebug?./_firebug/firebug",
-	"./_base/browser",
-	"./_base/loader"
+	"./has!host-browser?./_base/browser",
+	"./has!dojo-sync-loader?./_base/loader"
 ], function(kernel, has, require, sniff, lang, array, config, ready){
 	// module:
 	//		dojo/main
@@ -31,8 +31,8 @@ define("dojo/main", [
 	}
 
 	// dojoConfig.require is deprecated; use the loader configuration property deps
-	 1 || has.add("dojo-config-require", 1);
-	if( 1 ){
+	has.add("dojo-config-require", 1);
+	if(has("dojo-config-require")){
 		var deps= config.require;
 		if(deps){
 			// config.require may be dot notation

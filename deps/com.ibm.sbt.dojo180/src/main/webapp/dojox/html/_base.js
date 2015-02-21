@@ -1,4 +1,4 @@
-define("dojox/html/_base", [
+define([
 	"dojo/_base/declare",
 	"dojo/Deferred",
 	"dojo/dom-construct",

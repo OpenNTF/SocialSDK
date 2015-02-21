@@ -1,4 +1,4 @@
-define("dojox/mobile/iconUtils", [
+define([
 	"dojo/_base/array",
 	"dojo/_base/config",
 	"dojo/_base/connect",

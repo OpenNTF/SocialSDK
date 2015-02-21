@@ -1,4 +1,4 @@
-define("dojox/gantt/GanttProjectControl", [
+define([
 	"./GanttTaskItem",
 	"./GanttTaskControl",
 	"dijit/focus",

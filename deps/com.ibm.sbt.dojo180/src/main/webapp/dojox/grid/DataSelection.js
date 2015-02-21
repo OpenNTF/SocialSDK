@@ -1,4 +1,4 @@
-define("dojox/grid/DataSelection", [
+define([
 	"dojo/_base/declare",
 	"./_SelectionPreserver",
 	"./Selection"

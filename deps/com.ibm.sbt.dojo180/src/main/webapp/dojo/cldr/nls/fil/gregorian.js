@@ -1,6 +1,15 @@
 define(
-"dojo/cldr/nls/fil/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"Li",
+		"Lu",
+		"Ma",
+		"Mi",
+		"Hu",
+		"Bi",
+		"Sab"
+	],
 	"months-format-narrow": [
 		"E",
 		"P",
@@ -15,13 +24,28 @@ define(
 		"N",
 		"D"
 	],
+	"quarters-standAlone-narrow": [
+		"1",
+		"2",
+		"3",
+		"4"
+	],
 	"field-weekday": "Araw ng Linggo",
 	"dateFormatItem-yQQQ": "y QQQ",
-	"dateFormatItem-yMEd": "E, yyyy-M-d",
+	"dateFormatItem-yMEd": "E, M/d/y",
 	"dateFormatItem-MMMEd": "E MMM d",
 	"eraNarrow": [
 		"BC",
 		"AD"
+	],
+	"days-format-short": [
+		"Li",
+		"Lu",
+		"Ma",
+		"Mi",
+		"Hu",
+		"Bi",
+		"Sab"
 	],
 	"dateFormat-long": "MMMM d, y",
 	"months-format-wide": [
@@ -38,12 +62,14 @@ define(
 		"Nobyembre",
 		"Disyembre"
 	],
+	"dateTimeFormat-medium": "{1} {0}",
+	"dayPeriods-format-wide-pm": "PM",
 	"dateFormat-full": "EEEE, MMMM dd y",
 	"dateFormatItem-Md": "M-d",
 	"dayPeriods-format-abbr-am": "AM",
 	"dateFormatItem-yMd": "M/d/y",
 	"field-era": "Era",
-	"dateFormatItem-yM": "yyyy-M",
+	"dateFormatItem-yM": "M/y",
 	"months-standAlone-wide": [
 		"Enero",
 		"Pebrero",
@@ -67,7 +93,7 @@ define(
 	],
 	"timeFormat-long": "HH:mm:ss z",
 	"field-year": "Taon",
-	"dateFormatItem-yMMM": "y MMM",
+	"dateFormatItem-yMMM": "MMM y",
 	"dateFormatItem-yQ": "Q y",
 	"field-hour": "Oras",
 	"months-format-abbr": [
@@ -85,9 +111,10 @@ define(
 		"Dis"
 	],
 	"timeFormat-full": "HH:mm:ss zzzz",
-	"field-day-relative+0": "Today",
-	"field-day-relative+1": "Tomorrow",
+	"field-day-relative+0": "Ngayon",
+	"field-day-relative+1": "Bukas",
 	"field-day-relative+2": "Araw pagkatapos ng kahapon",
+	"dateFormatItem-H": "HH",
 	"months-standAlone-abbr": [
 		"Ene",
 		"Peb",
@@ -114,6 +141,7 @@ define(
 		"ika-3 sangkapat",
 		"ika-4 na quarter"
 	],
+	"dateFormatItem-M": "L",
 	"days-standAlone-wide": [
 		"Linggo",
 		"Lunes",
@@ -126,6 +154,7 @@ define(
 	"dateFormatItem-MMMMd": "MMMM d",
 	"dateFormatItem-yyMMM": "MMM yy",
 	"timeFormat-medium": "HH:mm:ss",
+	"dateFormatItem-Hm": "HH:mm",
 	"quarters-standAlone-abbr": [
 		"Q1",
 		"Q2",
@@ -155,12 +184,15 @@ define(
 		"3",
 		"4"
 	],
-	"field-day-relative+-1": "Yesterday",
+	"field-day-relative+-1": "Kahapon",
+	"dateFormatItem-h": "h a",
+	"dateTimeFormat-long": "{1} {0}",
 	"dayPeriods-format-narrow-am": "a",
 	"field-day-relative+-2": "Araw bago ang kahapon",
 	"dateFormatItem-MMMd": "MMM d",
 	"dateFormatItem-MEd": "E, M-d",
-	"dateFormatItem-yMMMM": "y MMMM",
+	"dateTimeFormat-full": "{1} {0}",
+	"dateFormatItem-yMMMM": "MMMM y",
 	"field-day": "Araw",
 	"days-format-wide": [
 		"Linggo",
@@ -189,7 +221,8 @@ define(
 	],
 	"field-year-relative+-1": "Nakaraang taon",
 	"field-month-relative+-1": "Nakaraang buwan",
-	"dateFormatItem-yyMM": "yy-MM",
+	"dateFormatItem-yyMM": "MM-yy",
+	"dateFormatItem-hm": "h:mm a",
 	"dayPeriods-format-abbr-pm": "PM",
 	"days-format-abbr": [
 		"Lin",
@@ -225,18 +258,23 @@ define(
 		"S"
 	],
 	"dateFormatItem-MMM": "LLL",
+	"dayPeriods-format-wide-am": "AM",
 	"dateFormatItem-MMMMEd": "E MMMM d",
 	"dateFormat-short": "M/d/yy",
 	"field-second": "Segundo",
-	"dateFormatItem-yMMMEd": "E, y MMM d",
+	"dateFormatItem-yMMMEd": "E, MMM d, y",
 	"field-month-relative+0": "Ngayon buwang ito",
 	"field-month-relative+1": "Susunod na buwan",
+	"dateFormatItem-Ed": "d E",
 	"field-week": "Linggo",
 	"dateFormat-medium": "MMM d, y",
 	"field-year-relative+0": "Sa taong ito",
 	"field-week-relative+-1": "Nakaraang Linggo",
 	"field-year-relative+1": "Susunod na taon",
 	"dayPeriods-format-narrow-pm": "p",
+	"dateTimeFormat-short": "{1} {0}",
+	"dateFormatItem-Hms": "HH:mm:ss",
+	"dateFormatItem-hms": "h:mm:ss a",
 	"field-week-relative+0": "Sa linggong ito",
 	"field-week-relative+1": "Susunod na linggo"
 }

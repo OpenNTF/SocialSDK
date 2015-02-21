@@ -1,4 +1,4 @@
-define("dojo/cookie", ["./_base/kernel", "./regexp"], function(dojo, regexp){
+define(["./_base/kernel", "./regexp"], function(dojo, regexp){
 
 // module:
 //		dojo/cookie

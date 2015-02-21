@@ -1,4 +1,4 @@
-define("dojox/collections/BinaryTree", ["dojo/_base/kernel", "dojo/_base/array", "./_base"], function(dojo, darray, dxc){
+define(["dojo/_base/kernel", "dojo/_base/array", "./_base"], function(dojo, darray, dxc){
 
 	dxc.BinaryTree=function(data){
 		function node(data, rnode, lnode){

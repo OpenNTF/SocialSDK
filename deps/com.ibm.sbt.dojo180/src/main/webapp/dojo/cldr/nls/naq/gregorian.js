@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/naq/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"field-dayperiod": "ǁgoas/ǃuis",
@@ -11,7 +11,6 @@ define(
 		"Xristub khaoǃgâ"
 	],
 	"dateFormatItem-MMMEd": "E, MMM d",
-	"field-day-relative+-1": "ǁAri",
 	"field-weekday": "Wekheb tsees",
 	"dateFormatItem-yQQQ": "QQQ y",
 	"days-standAlone-wide": [
@@ -65,7 +64,6 @@ define(
 	],
 	"dateFormatItem-yMMM": "MMM y",
 	"field-day-relative+0": "Neetsee",
-	"field-day-relative+1": "ǁAri",
 	"days-standAlone-narrow": [
 		"S",
 		"M",
@@ -94,7 +92,6 @@ define(
 	"dateFormatItem-yMMMM": "MMMM y",
 	"dateFormatItem-ms": "mm:ss",
 	"field-year": "Kurib",
-	"field-week": "Wekheb",
 	"months-standAlone-wide": [
 		"ǃKhanni",
 		"ǃKhanǀgôab",
@@ -109,6 +106,7 @@ define(
 		"ǀHooǂgaeb",
 		"Hôasoreǁkhâb"
 	],
+	"field-week": "Wekheb",
 	"dateFormatItem-MMMMEd": "E, MMMM d",
 	"dateFormatItem-MMMd": "MMM d",
 	"timeFormat-long": "h:mm:ss a z",
@@ -171,6 +169,15 @@ define(
 		"N",
 		"D"
 	],
+	"days-standAlone-short": [
+		"Son",
+		"Ma",
+		"De",
+		"Wu",
+		"Do",
+		"Fr",
+		"Sat"
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"Son",
@@ -199,6 +206,15 @@ define(
 		"ǂNûǁnâiseb",
 		"ǀHooǂgaeb",
 		"Hôasoreǁkhâb"
+	],
+	"days-format-short": [
+		"Son",
+		"Ma",
+		"De",
+		"Wu",
+		"Do",
+		"Fr",
+		"Sat"
 	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

@@ -1,4 +1,4 @@
-define("dojo/_base/window", ["./kernel", "./lang", "../sniff"], function(dojo, lang, has){
+define(["./kernel", "./lang", "../sniff"], function(dojo, lang, has){
 // module:
 //		dojo/_base/window
 
@@ -18,7 +18,7 @@ var ret = {
 	 },
 	 =====*/
 
-	doc: this["document"] || null,
+	doc: dojo.global["document"] || null,
 	/*=====
 	doc: {
 		// summary:
@@ -127,7 +127,7 @@ var ret = {
 	}
 };
 
- 1  && lang.mixin(dojo, ret);
+has("extend-dojo") && lang.mixin(dojo, ret);
 
 return ret;
 

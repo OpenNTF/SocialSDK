@@ -1,4 +1,4 @@
-define("dojo/dom-construct", ["exports", "./_base/kernel", "./sniff", "./_base/window", "./dom", "./dom-attr", "./on"],
+define(["exports", "./_base/kernel", "./sniff", "./_base/window", "./dom", "./dom-attr", "./on"],
 		function(exports, dojo, has, win, dom, attr, on){
 	// module:
 	//		dojo/dom-construct
@@ -58,12 +58,6 @@ define("dojo/dom-construct", ["exports", "./_base/kernel", "./sniff", "./_base/w
 		}
 	}
 
-	var _destroyContainer = null,
-		_destroyDoc;
-	on(window, "unload", function(){
-		_destroyContainer = null; //prevent IE leak
-	});
-
 	exports.toDom = function toDom(frag, doc){
 		// summary:
 		//		instantiates an HTML fragment returning the corresponding DOM.
@@ -110,7 +104,7 @@ define("dojo/dom-construct", ["exports", "./_base/kernel", "./sniff", "./_base/w
 
 		// return multiple nodes as a document fragment
 		df = doc.createDocumentFragment();
-		while(fc = master.firstChild){ // intentional assignment
+		while((fc = master.firstChild)){ // intentional assignment
 			df.appendChild(fc);
 		}
 		return df; // DocumentFragment
@@ -269,18 +263,24 @@ define("dojo/dom-construct", ["exports", "./_base/kernel", "./sniff", "./_base/w
 		return tag; // DomNode
 	};
 
-	exports.empty =
-		has("ie") ? function(node){
-			node = dom.byId(node);
-			for(var c; c = node.lastChild;){ // intentional assignment
-				exports.destroy(c);
+	function _empty(/*DomNode*/ node){
+		if(node.canHaveChildren){
+			try{
+				// fast path
+				node.innerHTML = "";
+				return;
+			}catch(e){
+				// innerHTML is readOnly (e.g. TABLE (sub)elements in quirks mode)
+				// Fall through (saves bytes)
 			}
-		} :
-		function(node){
-			dom.byId(node).innerHTML = "";
-		};
-	/*=====
-	 exports.empty = function(node){
+		}
+		// SVG/strict elements don't support innerHTML/canHaveChildren, and OBJECT/APPLET elements in quirks node have canHaveChildren=false
+		for(var c; c = node.lastChild;){ // intentional assignment
+			_destroy(c, node); // destroy is better than removeChild so TABLE subelements are removed in proper order
+		}
+	}
+
+	exports.empty = function empty(/*DOMNode|String*/ node){
 		 // summary:
 		 //		safely removes all children of the node.
 		 // node: DOMNode|String
@@ -292,9 +292,24 @@ define("dojo/dom-construct", ["exports", "./_base/kernel", "./sniff", "./_base/w
 		 // example:
 		 //		Destroy all nodes' children in a list by reference:
 		 //	|	dojo.query(".someNode").forEach(dojo.empty);
-	 };
-	 =====*/
 
+		_empty(dom.byId(node));
+	};
+
+
+	function _destroy(/*DomNode*/ node, /*DomNode*/ parent){
+		// in IE quirks, node.canHaveChildren can be false but firstChild can be non-null (OBJECT/APPLET)
+		if(node.firstChild){
+			_empty(node);
+		}
+		if(parent){
+			// removeNode(false) doesn't leak in IE 6+, but removeChild() and removeNode(true) are known to leak under IE 8- while 9+ is TBD.
+			// In IE quirks mode, PARAM nodes as children of OBJECT/APPLET nodes have a removeNode method that does nothing and
+			// the parent node has canHaveChildren=false even though removeChild correctly removes the PARAM children.
+			// In IE, SVG/strict nodes don't have a removeNode method nor a canHaveChildren boolean.
+			has("ie") && parent.canHaveChildren && "removeNode" in node ? node.removeNode(false) : parent.removeChild(node);
+		}
+	}
 	exports.destroy = function destroy(/*DOMNode|String*/ node){
 		// summary:
 		//		Removes a node from its parent, clobbering it and all of its
@@ -316,18 +331,7 @@ define("dojo/dom-construct", ["exports", "./_base/kernel", "./sniff", "./_base/w
 		//	|	dojo.query(".someNode").forEach(dojo.destroy);
 
 		node = dom.byId(node);
-		try{
-			var doc = node.ownerDocument;
-			// cannot use _destroyContainer.ownerDocument since this can throw an exception on IE
-			if(!_destroyContainer || _destroyDoc != doc){
-				_destroyContainer = doc.createElement("div");
-				_destroyDoc = doc;
-			}
-			_destroyContainer.appendChild(node.parentNode ? node.parentNode.removeChild(node) : node);
-			// NOTE: see http://trac.dojotoolkit.org/ticket/2931. This may be a bug and not a feature
-			_destroyContainer.innerHTML = "";
-		}catch(e){
-			/* squelch */
-		}
+		if(!node){ return; }
+		_destroy(node, node.parentNode);
 	};
 });

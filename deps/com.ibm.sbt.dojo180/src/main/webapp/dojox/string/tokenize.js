@@ -1,4 +1,4 @@
-define("dojox/string/tokenize", [
+define([
 	"dojo/_base/lang",
 	"dojo/_base/sniff"	
 ], function(lang, has){

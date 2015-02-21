@@ -1,6 +1,12 @@
 define(
-"dojo/cldr/nls/fr/hebrew", //begin v1.x content
+//begin v1.x content
 {
+	"quarters-standAlone-wide": [
+		"1er trimestre",
+		"2e trimestre",
+		"3e trimestre",
+		"4e trimestre"
+	],
 	"quarters-format-abbr": [
 		"T1",
 		"T2",
@@ -10,14 +16,23 @@ define(
 	"dateFormatItem-yMd": "d/M/yyyy",
 	"dateFormat-medium": "d MMM y",
 	"dateFormatItem-MMMEd": "E d MMM",
-	"dateFormatItem-MEd": "E d/M",
-	"dateFormatItem-yMEd": "E d/M/yyyy",
-	"dateFormatItem-yMMMd": "d MMM y",
-	"quarters-format-narrow": [
+	"quarters-standAlone-abbr": [
 		"T1",
 		"T2",
 		"T3",
 		"T4"
+	],
+	"dateFormatItem-MEd": "E d/M",
+	"dateFormatItem-yMEd": "E d/M/yyyy",
+	"dateFormatItem-yMMMd": "d MMM y",
+	"days-format-short": [
+		"di",
+		"lu",
+		"ma",
+		"me",
+		"je",
+		"ve",
+		"sa"
 	],
 	"dateFormatItem-Md": "d/M",
 	"months-standAlone-wide": [
@@ -61,6 +76,15 @@ define(
 		"Elloul"
 	],
 	"dateFormatItem-yQQQ": "QQQ y",
+	"days-standAlone-short": [
+		"dim.",
+		"lun.",
+		"mar.",
+		"mer.",
+		"jeu.",
+		"ven.",
+		"sam."
+	],
 	"dateFormat-long": "d MMMM y",
 	"dateFormat-short": "dd/MM/yy",
 	"dateFormatItem-yMMMEd": "E d MMM y",
@@ -78,6 +102,24 @@ define(
 		"Tamouz",
 		"Ab",
 		"Elloul"
+	],
+	"days-standAlone-wide": [
+		"dimanche",
+		"lundi",
+		"mardi",
+		"mercredi",
+		"jeudi",
+		"vendredi",
+		"samedi"
+	],
+	"days-format-narrow": [
+		"D",
+		"L",
+		"M",
+		"M",
+		"J",
+		"V",
+		"S"
 	],
 	"dateFormatItem-yM": "M/yyyy",
 	"dayPeriods-format-narrow-pm": "p",

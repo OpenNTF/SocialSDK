@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/ksb/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"field-dayperiod": "Namshii",
@@ -171,6 +171,15 @@ define(
 		"N",
 		"D"
 	],
+	"days-standAlone-short": [
+		"Jpi",
+		"Jtt",
+		"Jmn",
+		"Jtn",
+		"Alh",
+		"Iju",
+		"Jmo"
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"Jpi",
@@ -199,6 +208,15 @@ define(
 		"Oktoba",
 		"Novemba",
 		"Desemba"
+	],
+	"days-format-short": [
+		"Jpi",
+		"Jtt",
+		"Jmn",
+		"Jtn",
+		"Alh",
+		"Iju",
+		"Jmo"
 	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

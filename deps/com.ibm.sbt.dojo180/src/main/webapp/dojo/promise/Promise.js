@@ -1,4 +1,4 @@
-define("dojo/promise/Promise", [
+define([
 	"../_base/lang"
 ], function(lang){
 	"use strict";

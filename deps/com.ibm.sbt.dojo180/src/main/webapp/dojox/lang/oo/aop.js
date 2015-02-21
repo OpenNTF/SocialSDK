@@ -1,5 +1,3 @@
-// wrapped by build app
-define("dojox/lang/oo/aop", ["dijit","dojo","dojox","dojo/require!dojox/lang/oo/Decorator,dojox/lang/oo/general"], function(dijit,dojo,dojox){
 dojo.provide("dojox.lang.oo.aop");
 
 dojo.require("dojox.lang.oo.Decorator");
@@ -80,5 +78,3 @@ dojo.require("dojox.lang.oo.general");
 			} : function(){ newValue.call(this); }
 	});
 })();
-
-});

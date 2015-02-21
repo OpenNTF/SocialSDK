@@ -1,4 +1,4 @@
-define("dojo/jaxer", ["./_base/kernel"], function(dojo){
+define(["./_base/kernel"], function(dojo){
 	// module:
 	//		dojo/jaxer
 

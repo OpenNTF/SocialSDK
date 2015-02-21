@@ -1,6 +1,15 @@
 define(
-"dojo/cldr/nls/uz/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"Якш",
+		"Душ",
+		"Сеш",
+		"Чор",
+		"Пай",
+		"Жум",
+		"Шан"
+	],
 	"days-format-narrow": [
 		"Я",
 		"Д",
@@ -23,6 +32,15 @@ define(
 		"О",
 		"Н",
 		"Д"
+	],
+	"days-format-short": [
+		"Якш",
+		"Душ",
+		"Сеш",
+		"Чор",
+		"Пай",
+		"Жум",
+		"Шан"
 	],
 	"months-standAlone-abbr": [
 		"Янв",

@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/sq/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M.yyyy",
 	"dayPeriods-format-wide-pm": "MD",
@@ -140,6 +140,15 @@ define(
 		"N",
 		"D"
 	],
+	"days-standAlone-short": [
+		"Die",
+		"Hën",
+		"Mar",
+		"Mër",
+		"Enj",
+		"Pre",
+		"Sht"
+	],
 	"dateFormatItem-hm": "h.mm.a",
 	"days-standAlone-abbr": [
 		"Die",
@@ -168,6 +177,15 @@ define(
 		"tetor",
 		"nëntor",
 		"dhjetor"
+	],
+	"days-format-short": [
+		"Die",
+		"Hën",
+		"Mar",
+		"Mër",
+		"Enj",
+		"Pre",
+		"Sht"
 	],
 	"dateFormatItem-d": "d",
 	"days-format-wide": [

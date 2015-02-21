@@ -1,10 +1,9 @@
 define(
-"dojo/cldr/nls/it/islamic", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"dateFormatItem-yyyyMMMEd": "E d MMM y G",
 	"dateFormatItem-yQ": "Q-y G",
-	"dayPeriods-format-wide-pm": "p.",
 	"dateFormatItem-MMMEd": "E d MMM",
 	"dateFormatItem-hms": "hh:mm:ss a",
 	"dateFormatItem-yQQQ": "QQQ y G",
@@ -19,9 +18,11 @@ define(
 		"Sabato"
 	],
 	"dateFormatItem-MMM": "LLL",
-	"dayPeriods-format-wide-am": "m.",
 	"quarters-standAlone-abbr": [
-		"T1"
+		"T1",
+		"T2",
+		"T3",
+		"T4"
 	],
 	"dateFormatItem-yyyy": "y G",
 	"dateFormatItem-Ed": "E d",
@@ -41,15 +42,17 @@ define(
 	"dateFormatItem-yyMM": "MM/y G",
 	"dateFormat-medium": "dd/MMM/y G",
 	"dateFormatItem-Hms": "HH:mm:ss",
+	"dayPeriods-format-narrow-pm": "p.",
 	"dateFormatItem-yyQQQQ": "QQQQ y G",
 	"dateFormatItem-yMd": "d/M/y",
 	"quarters-standAlone-wide": [
-		"1º trimestre",
-		"2º trimestre",
-		"3º trimestre",
-		"4º trimestre"
+		"Primo trimestre",
+		"Secondo trimestre",
+		"Terzo trimestre",
+		"Quarto trimestre"
 	],
 	"dateFormatItem-ms": "mm:ss",
+	"dayPeriods-format-narrow-am": "m.",
 	"dateFormatItem-yyyyMd": "d/M/y G",
 	"dateFormatItem-yyyyMMMd": "d MMM y G",
 	"dateFormatItem-yyyyMEd": "E, d/M/y G",
@@ -74,13 +77,31 @@ define(
 	"dateFormatItem-M": "L",
 	"dateFormatItem-yMMMd": "d MMM y",
 	"dateFormatItem-MEd": "E d/M",
+	"days-standAlone-short": [
+		"dom",
+		"lun",
+		"mar",
+		"mer",
+		"gio",
+		"ven",
+		"sab"
+	],
 	"dateFormatItem-hm": "hh:mm a",
 	"dateFormat-short": "dd/MM/y G",
 	"dateFormatItem-yyyyM": "M/y G",
 	"dateFormatItem-yMMMEd": "E d MMM y",
 	"dateFormat-full": "EEEE d MMMM y G",
 	"dateFormatItem-Md": "d/M",
-	"dateFormatItem-yMEd": "E, d/M/y",
+	"dateFormatItem-yMEd": "E d/M/y",
+	"days-format-short": [
+		"dom",
+		"lun",
+		"mar",
+		"mer",
+		"gio",
+		"ven",
+		"sab"
+	],
 	"dateFormatItem-yyyyMMM": "MMM y G",
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

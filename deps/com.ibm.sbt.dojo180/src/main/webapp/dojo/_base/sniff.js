@@ -1,4 +1,4 @@
-define("dojo/_base/sniff", ["./kernel", "./lang", "../sniff"], function(dojo, lang, has){
+define(["./kernel", "./lang", "../sniff"], function(dojo, lang, has){
 	// module:
 	//		dojo/_base/sniff
 
@@ -10,7 +10,7 @@ define("dojo/_base/sniff", ["./kernel", "./lang", "../sniff"], function(dojo, la
 	};
 	=====*/
 
-	if(! 1 ){
+	if(!has("host-browser")){
 		return has;
 	}
 

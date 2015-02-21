@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/it-ch/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormat-short": "dd.MM.yy",
 	"dateFormat-medium": "d-MMM-y",

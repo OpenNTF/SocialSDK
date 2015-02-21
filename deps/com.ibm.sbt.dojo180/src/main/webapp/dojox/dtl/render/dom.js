@@ -1,4 +1,4 @@
-define("dojox/dtl/render/dom", [
+define([
 	"dojo/_base/lang",
 	"dojo/dom",
 	"../Context",

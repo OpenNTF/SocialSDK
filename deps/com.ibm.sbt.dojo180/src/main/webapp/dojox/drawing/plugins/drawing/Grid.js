@@ -1,4 +1,4 @@
-define("dojox/drawing/plugins/drawing/Grid", ["dojo", "../../util/oo", "../_Plugin"],
+define(["dojo", "../../util/oo", "../_Plugin"],
 function(dojo, oo, Plugin){
 
 var Grid = oo.declare(

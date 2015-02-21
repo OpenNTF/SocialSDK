@@ -74,7 +74,7 @@ public class BaseWikiServiceTest extends BaseUnitTest {
 	
 	protected WikiPage newWikiPage() {
 		WikiPage wikiPage = new WikiPage(wikiService);
-		wikiPage.setTitle("Test wiki page "+ System.currentTimeMillis());
+		wikiPage.setTitle("WikiPagelabel"+ System.currentTimeMillis());
 		wikiPage.setSummary("Very basic summary "+System.currentTimeMillis());
 		wikiPage.setContent("Content of wiki page "+System.currentTimeMillis());
 		wikiPage.setLabel("WikiPagelabel"+System.currentTimeMillis());

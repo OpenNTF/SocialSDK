@@ -1,4 +1,4 @@
-define("dojox/sketch/_Plugin", [
+define([
 	"dojo/_base/kernel",
 	"dojo/_base/lang",
 	"dojo/_base/array",

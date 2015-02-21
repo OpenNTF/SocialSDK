@@ -1,4 +1,4 @@
-define("dijit/_base/focus", [
+define([
 	"dojo/_base/array", // array.forEach
 	"dojo/dom", // dom.isDescendant
 	"dojo/_base/lang", // lang.isArray

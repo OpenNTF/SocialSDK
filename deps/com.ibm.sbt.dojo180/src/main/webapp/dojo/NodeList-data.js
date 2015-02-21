@@ -1,4 +1,4 @@
-define("dojo/NodeList-data", [
+define([
 	"./_base/kernel", "./query", "./_base/lang", "./_base/array", "./dom-attr"
 ], function(dojo, query, lang, array, attr){
 
@@ -27,7 +27,13 @@ define("dojo/NodeList-data", [
 		}
 	;
 
-	
+	//>>excludeStart("debugging", true);
+	// An alias to the private dataCache for NodeList-data. NEVER USE THIS!
+	// This private is only exposed for the benefit of unit testing, and is
+	// removed during the build process.
+	dojo._nodeDataCache = dataCache;
+	//>>excludeEnd("debugging");
+
 	var dodata = dojo._nodeData = function(node, key, value){
 		// summary:
 		//		Private helper for dojo/NodeList.data for single node data access. Refer to NodeList.data

@@ -1,6 +1,15 @@
 define(
-"dojo/cldr/nls/hu/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"V",
+		"H",
+		"K",
+		"Sze",
+		"Cs",
+		"P",
+		"Szo"
+	],
 	"months-format-narrow": [
 		"J",
 		"F",
@@ -15,6 +24,12 @@ define(
 		"N",
 		"D"
 	],
+	"quarters-standAlone-narrow": [
+		"1.",
+		"2.",
+		"3.",
+		"4."
+	],
 	"field-weekday": "hét napja",
 	"dateFormatItem-yQQQ": "y. QQQ",
 	"dateFormatItem-yMEd": "yyyy.MM.dd., E",
@@ -22,6 +37,15 @@ define(
 	"eraNarrow": [
 		"ie.",
 		"isz."
+	],
+	"days-format-short": [
+		"V",
+		"H",
+		"K",
+		"Sze",
+		"Cs",
+		"P",
+		"Szo"
 	],
 	"dateFormat-long": "y. MMMM d.",
 	"months-format-wide": [
@@ -68,9 +92,10 @@ define(
 	"timeFormat-long": "H:mm:ss z",
 	"field-year": "év",
 	"dateFormatItem-yMMM": "y. MMM",
+	"dateFormatItem-yQ": "y. Q",
 	"dateFormatItem-yyyyMMMM": "y. MMMM",
-	"dateFormatItem-MMdd": "MM.dd.",
 	"field-hour": "óra",
+	"dateFormatItem-MMdd": "MM.dd.",
 	"months-format-abbr": [
 		"jan.",
 		"febr.",
@@ -152,6 +177,7 @@ define(
 		"Szo"
 	],
 	"dateFormatItem-d": "d",
+	"dateFormatItem-ms": "mm:ss",
 	"quarters-format-narrow": [
 		"1",
 		"2",
@@ -174,7 +200,7 @@ define(
 		"péntek",
 		"szombat"
 	],
-	"field-zone": "zóna",
+	"field-zone": "időzóna",
 	"dateFormatItem-yyyyMM": "yyyy.MM",
 	"months-standAlone-narrow": [
 		"J",

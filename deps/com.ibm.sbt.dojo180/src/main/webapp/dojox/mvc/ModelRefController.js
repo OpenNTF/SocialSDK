@@ -1,4 +1,4 @@
-define("dojox/mvc/ModelRefController", [
+define([
 	"dojo/_base/array",
 	"dojo/_base/declare",
 	"dojo/_base/lang",
@@ -192,7 +192,7 @@ define("dojox/mvc/ModelRefController", [
 			// name: String
 			//		The property name.
 
-			return name == "_watchCallbacks" || name == this._refModelProp || name == this._refInModelProp || (name in (this.ownProps || {})) || (name in this.constructor.prototype);
+			return name == "_watchCallbacks" || name == this._refModelProp || name == this._refInModelProp || (name in (this.ownProps || {})) || (name in this.constructor.prototype) || /^dojoAttach(Point|Event)$/i.test(name); // Let dojoAttachPoint/dojoAttachEvent be this controller's property to support <span data-dojo-type="dojox/mvc/ModelRefController" data-dojo-attach-point="controllerNode"> in widgets-in-template
 		}
 	});
 });

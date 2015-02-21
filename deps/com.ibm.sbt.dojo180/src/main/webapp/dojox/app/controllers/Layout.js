@@ -1,6 +1,6 @@
-define("dojox/app/controllers/Layout", ["dojo/_base/lang", "dojo/_base/declare", "dojo/sniff", "dojo/on", "dojo/_base/window", "dojo/_base/array",
-	"dojo/query", "dojo/dom-style", "dojo/dom-attr", "dojo/dom-geometry", "dijit/registry", "../Controller", "../layout/utils"],
-function(lang, declare, has, on, win, array, query, domStyle, domAttr, domGeom, registry, Controller, layoutUtils){
+define(["dojo/_base/lang", "dojo/_base/declare", "dojo/sniff", "dojo/on", "dojo/_base/window", "dojo/_base/array", "dojo/_base/config",
+	"dojo/topic", "dojo/query", "dojo/dom-style", "dojo/dom-attr", "dojo/dom-geometry", "dijit/registry", "../Controller", "../layout/utils"],
+function(lang, declare, has, on, win, array, config, topic, query, domStyle, domAttr, domGeom, registry, Controller, layoutUtils){
 	// module:
 	//		dojox/app/controllers/Layout
 	// summary:
@@ -22,8 +22,14 @@ function(lang, declare, has, on, win, array, query, domStyle, domAttr, domGeom, 
 			};
 			this.inherited(arguments);
 
-			// bind to browsers orientationchange event for ios otherwise bind to browsers resize
-			this.bind(win.global, has("ios") ? "orientationchange" : "resize", lang.hitch(this, this.onResize));
+			// if we are using dojo mobile & we are hiding adress bar we need to be bit smarter and listen to
+			// dojo mobile events instead
+			if(config.mblHideAddressBar){
+				topic.subscribe("/dojox/mobile/afterResizeAll", lang.hitch(this, this.onResize));
+			}else{
+				// bind to browsers orientationchange event for ios otherwise bind to browsers resize
+				this.bind(win.global, has("ios") ? "orientationchange" : "resize", lang.hitch(this, this.onResize));
+			}
 		},
 
 		onResize: function(){
@@ -112,7 +118,6 @@ function(lang, declare, has, on, win, array, query, domStyle, domAttr, domGeom, 
 			//
 			// view: Object
 			//		view instance needs to do layout.
-
 			var node = view.domNode;
 			// set margin box size, unless it wasn't specified, in which case use current size
 			if(changeSize){
@@ -133,20 +138,31 @@ function(lang, declare, has, on, win, array, query, domStyle, domAttr, domGeom, 
 
 			// Compute and save the size of my border box and content box
 			// (w/out calling dojo/_base/html.contentBox() since that may fail if size was recently set)
-			var cs = domStyle.getComputedStyle(node);
-			var me = domGeom.getMarginExtents(node, cs);
-			var be = domGeom.getBorderExtents(node, cs);
-			var bb = (view._borderBox = {
-				w: mb.w - (me.w + be.w),
-				h: mb.h - (me.h + be.h)
-			});
-			var pe = domGeom.getPadExtents(node, cs);
-			view._contentBox = {
-				l: domStyle.toPixelValue(node, cs.paddingLeft),
-				t: domStyle.toPixelValue(node, cs.paddingTop),
-				w: bb.w - pe.w,
-				h: bb.h - pe.h
-			};
+			if(view !== this.app){
+				var cs = domStyle.getComputedStyle(node);
+				var me = domGeom.getMarginExtents(node, cs);
+				var be = domGeom.getBorderExtents(node, cs);
+				var bb = (view._borderBox = {
+					w: mb.w - (me.w + be.w),
+					h: mb.h - (me.h + be.h)
+				});
+				var pe = domGeom.getPadExtents(node, cs);
+				view._contentBox = {
+					l: domStyle.toPixelValue(node, cs.paddingLeft),
+					t: domStyle.toPixelValue(node, cs.paddingTop),
+					w: bb.w - pe.w,
+					h: bb.h - pe.h
+				};
+			}else{
+				// if we are layouting the top level app the above code does not work when hiding address bar
+				// so let's use similar code to dojo mobile.
+				view._contentBox = {
+					l: 0,
+					t: 0,
+					h: win.global.innerHeight || win.doc.documentElement.clientHeight,
+					w: win.global.innerWidth || win.doc.documentElement.clientWidth
+				};
+			}
 
 			this._doLayout(view);
 

@@ -1,13 +1,16 @@
 define(
-"dojo/cldr/nls/en/islamic", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"dateFormatItem-yyyyMMMEd": "E, MMM d, y G",
 	"dateFormatItem-yQ": "Q y",
 	"dateFormatItem-MMMEd": "E, MMM d",
+	"dateTimeFormat-full": "{1} 'at' {0}",
 	"dateFormatItem-hms": "h:mm:ss a",
 	"dateFormatItem-yQQQ": "QQQ y",
 	"dateFormatItem-MMM": "LLL",
+	"dateTimeFormat-short": "{1}, {0}",
+	"dateTimeFormat-medium": "{1}, {0}",
 	"timeFormat-full": "h:mm:ss a zzzz",
 	"dateFormatItem-yyyy": "y G",
 	"dateFormatItem-Ed": "d E",
@@ -30,6 +33,7 @@ define(
 	"dateFormatItem-yMd": "M/d/y",
 	"dateFormatItem-ms": "mm:ss",
 	"dayPeriods-format-narrow-am": "a",
+	"dateTimeFormat-long": "{1} 'at' {0}",
 	"dateFormatItem-yyyyMd": "M/d/y G",
 	"dateFormatItem-yyyyMMMd": "MMM d, y G",
 	"dateFormatItem-yyyyMEd": "E, M/d/y G",
@@ -57,6 +61,15 @@ define(
 	"dateFormatItem-Md": "M/d",
 	"dateFormatItem-yyyyQ": "Q y G",
 	"dateFormatItem-yMEd": "E, M/d/y",
+	"days-format-short": [
+		"Su",
+		"Mo",
+		"Tu",
+		"We",
+		"Th",
+		"Fr",
+		"Sa"
+	],
 	"dateFormatItem-yyyyMMM": "MMM y G",
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

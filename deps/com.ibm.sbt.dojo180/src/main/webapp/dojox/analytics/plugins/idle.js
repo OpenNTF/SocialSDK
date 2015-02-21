@@ -1,4 +1,4 @@
-define("dojox/analytics/plugins/idle", ["dojo/_base/lang", "../_base", "dojo/_base/config", "dojo/ready", 
+define(["dojo/_base/lang", "../_base", "dojo/_base/config", "dojo/ready", 
 		"dojo/aspect", "dojo/_base/window"
 ], function(lang, dxa, config, ready, aspect, window){
 

@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/ar/persian", //begin v1.x content
+//begin v1.x content
 {
 	"months-format-wide": [
 		"فرفردن",

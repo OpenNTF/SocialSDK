@@ -1,4 +1,4 @@
-define("dojox/validate/isbn", ["dojo/_base/lang", "./_base"], function(lang, validate){
+define(["dojo/_base/lang", "./_base"], function(lang, validate){
 
 validate.isValidIsbn = function(/* String */value) {
 	// summary:

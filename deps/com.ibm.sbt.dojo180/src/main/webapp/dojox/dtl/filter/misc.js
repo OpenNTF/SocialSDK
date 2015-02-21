@@ -1,4 +1,4 @@
-define("dojox/dtl/filter/misc", [
+define([
 	"dojo/_base/lang",
 	"dojo/_base/json",	// dojo.toJson
 	"../_base"

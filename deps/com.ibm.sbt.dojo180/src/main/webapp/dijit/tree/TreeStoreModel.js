@@ -1,4 +1,4 @@
-define("dijit/tree/TreeStoreModel", [
+define([
 	"dojo/_base/array", // array.filter array.forEach array.indexOf array.some
 	"dojo/aspect", // aspect.after
 	"dojo/_base/declare", // declare

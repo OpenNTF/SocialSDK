@@ -1,4 +1,4 @@
-define("dojox/analytics/_base", ["dojo/_base/lang", "dojo/_base/config", "dojo/ready", "dojo/_base/unload", 
+define(["dojo/_base/lang", "dojo/_base/config", "dojo/ready", "dojo/_base/unload", 
         "dojo/_base/sniff", "dojo/_base/xhr", "dojo/_base/json", "dojo/io-query", "dojo/io/script"
 ], function(lang, config, ready, unload, has, xhr, json, ioQuery, scriptIO){
 
@@ -23,7 +23,9 @@ define("dojox/analytics/_base", ["dojo/_base/lang", "dojo/_base/config", "dojo/r
 		// we're not going to schedule pushing data to the server until after the page
 		// has completed loading
 		ready(this, "schedulePusher");
-		unload.addOnUnload(this, "pushData", true);
+		unload.addOnUnload(this, function(){
+			this.pushData();
+		});
 	};
 
 	lang.extend(Analytics, {

@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/luo/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"field-dayperiod": "odieochieng'/otieno",
@@ -171,6 +171,15 @@ define(
 		"C",
 		"P"
 	],
+	"days-standAlone-short": [
+		"JMP",
+		"WUT",
+		"TAR",
+		"TAD",
+		"TAN",
+		"TAB",
+		"NGS"
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"JMP",
@@ -199,6 +208,15 @@ define(
 		"Dwe mar Apar",
 		"Dwe mar gi achiel",
 		"Dwe mar Apar gi ariyo"
+	],
+	"days-format-short": [
+		"JMP",
+		"WUT",
+		"TAR",
+		"TAD",
+		"TAN",
+		"TAB",
+		"NGS"
 	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

@@ -1,4 +1,4 @@
-define("dojo/_base/connect", ["./kernel", "../on", "../topic", "../aspect", "./event", "../mouse", "./sniff", "./lang", "../keys"], function(dojo, on, hub, aspect, eventModule, mouse, has, lang){
+define(["./kernel", "../on", "../topic", "../aspect", "./event", "../mouse", "./sniff", "./lang", "../keys"], function(dojo, on, hub, aspect, eventModule, mouse, has, lang){
 // module:
 //		dojo/_base/connect
 
@@ -366,7 +366,7 @@ connect.unsubscribe = connect.disconnect;
  };
  =====*/
 
- 1  && lang.mixin(dojo, connect);
+has("extend-dojo") && lang.mixin(dojo, connect);
 return connect;
 
 });

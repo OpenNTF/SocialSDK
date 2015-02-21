@@ -1,4 +1,4 @@
-define("dojox/mvc/_Container", [
+define([
 	"dojo/_base/declare",
 	"dojo/_base/lang",
 	"dojo/when",

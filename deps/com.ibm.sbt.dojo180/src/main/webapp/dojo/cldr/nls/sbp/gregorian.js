@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/sbp/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"field-dayperiod": "Uluhaavi lwa lusiku",
@@ -144,6 +144,15 @@ define(
 	"field-second": "Isekunde",
 	"field-day": "Lusiku",
 	"dateFormatItem-MEd": "E, M/d",
+	"days-standAlone-short": [
+		"Mul",
+		"Jtt",
+		"Jnn",
+		"Jtn",
+		"Alh",
+		"Iju",
+		"Jmo"
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"Mul",
@@ -172,6 +181,15 @@ define(
 		"Mokhu",
 		"Musongandembwe",
 		"Muhaano"
+	],
+	"days-format-short": [
+		"Mul",
+		"Jtt",
+		"Jnn",
+		"Jtn",
+		"Alh",
+		"Iju",
+		"Jmo"
 	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

@@ -1,4 +1,4 @@
-define("dojox/drawing/manager/Anchors", ["dojo", "../util/oo", "../defaults"], 
+define(["dojo", "../util/oo", "../defaults"], 
 function(dojo, oo, defaults){
 
 var Anchor = oo.declare(

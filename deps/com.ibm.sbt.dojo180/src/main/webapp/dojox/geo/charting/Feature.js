@@ -1,4 +1,4 @@
-define("dojox/geo/charting/Feature", [
+define([
 	"dojo/_base/lang",
 	"dojo/_base/declare",
 	"dojo/_base/array",

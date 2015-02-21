@@ -1,4 +1,4 @@
-define("dojox/form/uploader/plugins/IFrame", [
+define([
 	"dojo/dom-construct",
 	"dojo/_base/declare",
 	"dojo/_base/lang",
@@ -58,6 +58,7 @@ var pluginsIFrame = declare("dojox.form.uploader.plugins.IFrame", [], {
 			content: data,
 			method: "POST",
 			error: lang.hitch(this, function(err){
+				console.error('error parsing server result', err);
 				if(destroyAfter){ domConstruct.destroy(form); }
 				this.onError(err);
 			}),

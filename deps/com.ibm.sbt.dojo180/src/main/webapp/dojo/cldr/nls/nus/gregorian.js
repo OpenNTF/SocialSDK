@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/nus/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"dateFormatItem-yQ": "Q y",
@@ -170,6 +170,15 @@ define(
 		"K",
 		"T"
 	],
+	"days-standAlone-short": [
+		"Cäŋ",
+		"Jiec",
+		"Rɛw",
+		"Diɔ̱k",
+		"Ŋuaan",
+		"Dhieec",
+		"Bäkɛl"
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"Cäŋ",
@@ -198,6 +207,15 @@ define(
 		"Laath",
 		"Kur",
 		"Tio̱p in di̱i̱t"
+	],
+	"days-format-short": [
+		"Cäŋ",
+		"Jiec",
+		"Rɛw",
+		"Diɔ̱k",
+		"Ŋuaan",
+		"Dhieec",
+		"Bäkɛl"
 	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

@@ -1,4 +1,4 @@
-define("dojo/_base/kernel", ["../has", "./config", "require", "module"], function(has, config, require, module){
+define(["../has", "./config", "require", "module"], function(has, config, require, module){
 	// module:
 	//		dojo/_base/kernel
 
@@ -10,6 +10,7 @@ define("dojo/_base/kernel", ["../has", "./config", "require", "module"], functio
 
 		// create dojo, dijit, and dojox
 		// FIXME: in 2.0 remove dijit, dojox being created by dojo
+		global = (function () { return this; })(),
 		dijit = {},
 		dojox = {},
 		dojo = {
@@ -18,7 +19,7 @@ define("dojo/_base/kernel", ["../has", "./config", "require", "module"], functio
 
 			// notice dojo takes ownership of the value of the config module
 			config:config,
-			global:this,
+			global:global,
 			dijit:dijit,
 			dojox:dojox
 		};
@@ -67,7 +68,7 @@ define("dojo/_base/kernel", ["../has", "./config", "require", "module"], functio
 		item = scopeMap[p];
 		item[1]._scopeName = item[0];
 		if(!config.noGlobals){
-			this[item[0]] = item[1];
+			global[item[0]] = item[1];
 		}
 	}
 	dojo.scopeMap = scopeMap;
@@ -76,10 +77,10 @@ define("dojo/_base/kernel", ["../has", "./config", "require", "module"], functio
 
 	// FIXME: dojo.baseUrl and dojo.config.baseUrl should be deprecated
 	dojo.baseUrl = dojo.config.baseUrl = require.baseUrl;
-	dojo.isAsync = ! 1  || require.async;
+	dojo.isAsync = !has("dojo-loader") || require.async;
 	dojo.locale = config.locale;
 
-	var rev = "$Rev: 29262 $".match(/\d+/);
+	var rev = "$Rev: c874130 $".match(/[0-9a-f]{7,}/);
 	dojo.version = {
 		// summary:
 		//		Version number of the Dojo Toolkit
@@ -90,21 +91,21 @@ define("dojo/_base/kernel", ["../has", "./config", "require", "module"], functio
 		//		- minor: Integer: Minor version. If total version is "1.2.0beta1", will be 2
 		//		- patch: Integer: Patch version. If total version is "1.2.0beta1", will be 0
 		//		- flag: String: Descriptor flag. If total version is "1.2.0beta1", will be "beta1"
-		//		- revision: Number: The SVN rev from which dojo was pulled
+		//		- revision: Number: The Git rev from which dojo was pulled
 
-		major: 1, minor: 8, patch: 0, flag: "",
-		revision: rev ? +rev[0] : NaN,
+		major: 1, minor: 8, patch: 9, flag: "",
+		revision: rev ? rev[0] : NaN,
 		toString: function(){
 			var v = dojo.version;
 			return v.major + "." + v.minor + "." + v.patch + v.flag + " (" + v.revision + ")";	// String
 		}
 	};
 
-	// If  1  is truthy, then as a dojo module is defined it should push it's definitions
+	// If has("extend-dojo") is truthy, then as a dojo module is defined it should push it's definitions
 	// into the dojo object, and conversely. In 2.0, it will likely be unusual to augment another object
 	// as a result of defining a module. This has feature gives a way to force 2.0 behavior as the code
 	// is migrated. Absent specific advice otherwise, set extend-dojo to truthy.
-	 1 || has.add("extend-dojo", 1);
+	has.add("extend-dojo", 1);
 
 
 	(Function("d", "d.eval = function(){return d.global.eval ? d.global.eval(arguments[0]) : eval(arguments[0]);}"))(dojo);
@@ -136,7 +137,7 @@ define("dojo/_base/kernel", ["../has", "./config", "require", "module"], functio
 	=====*/
 
 
-	if( 0 ){
+	if(has("host-rhino")){
 		dojo.exit = function(exitcode){
 			quit(exitcode);
 		};
@@ -145,11 +146,11 @@ define("dojo/_base/kernel", ["../has", "./config", "require", "module"], functio
 		};
 	}
 
-	 1 || has.add("dojo-guarantee-console",
+	has.add("dojo-guarantee-console",
 		// ensure that console.log, console.warn, etc. are defined
 		1
 	);
-	if( 1 ){
+	if(has("dojo-guarantee-console")){
 		typeof console != "undefined" || (console = {});
 		//	Be careful to leave 'log' always at the end
 		var cn = [
@@ -164,7 +165,7 @@ define("dojo/_base/kernel", ["../has", "./config", "require", "module"], functio
 				(function(){
 					var tcn = tn + "";
 					console[tcn] = ('log' in console) ? function(){
-						var a = Array.apply({}, arguments);
+						var a = Array.prototype.slice.call(arguments);
 						a.unshift(tcn + ":");
 						console["log"](a.join(" "));
 					} : function(){};
@@ -228,11 +229,11 @@ define("dojo/_base/kernel", ["../has", "./config", "require", "module"], functio
 		};
 	}
 
-	 1 || has.add("dojo-modulePaths",
+	has.add("dojo-modulePaths",
 		// consume dojo.modulePaths processing
 		1
 	);
-	if( 1 ){
+	if(has("dojo-modulePaths")){
 		// notice that modulePaths won't be applied to any require's before the dojo/_base/kernel factory is run;
 		// this is the v1.6- behavior.
 		if(config.modulePaths){
@@ -245,11 +246,11 @@ define("dojo/_base/kernel", ["../has", "./config", "require", "module"], functio
 		}
 	}
 
-	 1 || has.add("dojo-moduleUrl",
+	has.add("dojo-moduleUrl",
 		// include dojo.moduleUrl
 		1
 	);
-	if( 1 ){
+	if(has("dojo-moduleUrl")){
 		dojo.moduleUrl = function(/*String*/module, /*String?*/url){
 			// summary:
 			//		Returns a URL relative to a module.

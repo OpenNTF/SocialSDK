@@ -1,11 +1,25 @@
 define(
-"dojo/cldr/nls/ja/chinese", //begin v1.x content
+//begin v1.x content
 {
-	"dateFormatItem-yMd": "U年M月d日",
 	"dateFormat-medium": "U年MMMd日",
+	"dateFormatItem-yMd": "U年M月d日",
 	"dateFormatItem-MMMEd": "MMMd日(E)",
 	"dateFormatItem-MEd": "M/d(E)",
 	"dateFormatItem-yMEd": "U年M月d日(E)",
+	"months-format-narrow": [
+		"正",
+		"二",
+		"三",
+		"四",
+		"五",
+		"六",
+		"七",
+		"八",
+		"九",
+		"十",
+		"十一",
+		"十二"
+	],
 	"dateFormatItem-y": "U年",
 	"dateFormatItem-yMMMd": "U年MMMd日",
 	"dateFormatItem-Md": "M/d",
@@ -25,8 +39,12 @@ define(
 	],
 	"dateFormatItem-M": "MMM",
 	"dateFormatItem-yQQQ": "UQQQ",
+	"dateFormatItem-MMMEEEEd": "MMMd日EEEE",
 	"dateFormat-long": "U年MMMd日",
-	"dateFormat-short": "U/M/d",
+	"dateFormatItem-yMMMEEEEd": "U年MMMd日EEEE",
+	"dateFormatItem-EEEEd": "d日EEEE",
+	"dateFormatItem-yMEEEEd": "U年M月d日EEEE",
+	"dateFormat-short": "U-M-d",
 	"dateFormatItem-yMMMEd": "U年MMMd日(E)",
 	"months-format-wide": [
 		"正月",

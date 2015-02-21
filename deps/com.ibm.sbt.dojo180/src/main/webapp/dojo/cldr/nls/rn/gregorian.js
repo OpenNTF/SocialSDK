@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/rn/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"field-dayperiod": "M.s/N.s",
@@ -126,6 +126,15 @@ define(
 	"field-second": "Isegonda",
 	"field-day": "Umusi",
 	"dateFormatItem-MEd": "E d/M",
+	"days-standAlone-short": [
+		"cu.",
+		"mbe.",
+		"kab.",
+		"gtu.",
+		"kan.",
+		"gnu.",
+		"gnd."
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"cu.",
@@ -154,6 +163,15 @@ define(
 		"Gitugutu",
 		"Munyonyo",
 		"Kigarama"
+	],
+	"days-format-short": [
+		"cu.",
+		"mbe.",
+		"kab.",
+		"gtu.",
+		"kan.",
+		"gnu.",
+		"gnd."
 	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

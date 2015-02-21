@@ -1,6 +1,15 @@
 define(
-"dojo/cldr/nls/sl/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"ned.",
+		"pon.",
+		"tor.",
+		"sre.",
+		"čet.",
+		"pet.",
+		"sob."
+	],
 	"months-format-narrow": [
 		"j",
 		"f",
@@ -15,6 +24,12 @@ define(
 		"n",
 		"d"
 	],
+	"quarters-standAlone-narrow": [
+		"1",
+		"2",
+		"3",
+		"4"
+	],
 	"field-weekday": "Dan v tednu",
 	"dateFormatItem-yQQQ": "QQQ y",
 	"dateFormatItem-yMEd": "E, d. M. y",
@@ -22,6 +37,15 @@ define(
 	"eraNarrow": [
 		"pr. n. št.",
 		"po Kr."
+	],
+	"days-format-short": [
+		"ned.",
+		"pon.",
+		"tor.",
+		"sre.",
+		"čet.",
+		"pet.",
+		"sob."
 	],
 	"dateFormat-long": "dd. MMMM y",
 	"months-format-wide": [
@@ -38,6 +62,7 @@ define(
 		"november",
 		"december"
 	],
+	"dateTimeFormat-medium": "{1} {0}",
 	"dayPeriods-format-wide-pm": "pop.",
 	"dateFormat-full": "EEEE, dd. MMMM y",
 	"dateFormatItem-Md": "d. M.",
@@ -90,6 +115,7 @@ define(
 	"field-day-relative+0": "Danes",
 	"field-day-relative+1": "Jutri",
 	"field-day-relative+2": "Pojutrišnjem",
+	"dateFormatItem-H": "HH",
 	"months-standAlone-abbr": [
 		"jan",
 		"feb",
@@ -152,9 +178,12 @@ define(
 		"4"
 	],
 	"field-day-relative+-1": "Včeraj",
+	"dateFormatItem-h": "h a",
+	"dateTimeFormat-long": "{1} {0}",
 	"field-day-relative+-2": "Predvčerajšnjim",
 	"dateFormatItem-MMMd": "d. MMM",
 	"dateFormatItem-MEd": "E, d. MM.",
+	"dateTimeFormat-full": "{1} {0}",
 	"field-day": "Dan",
 	"days-format-wide": [
 		"nedelja",
@@ -232,6 +261,7 @@ define(
 	"dateFormatItem-yyyyM": "M/yyyy",
 	"field-year-relative+1": "Naslednje leto",
 	"dateFormatItem-mmss": "mm:ss",
+	"dateTimeFormat-short": "{1} {0}",
 	"dateFormatItem-Hms": "HH:mm:ss",
 	"dateFormatItem-hms": "h:mm:ss a",
 	"field-week-relative+0": "Ta teden",

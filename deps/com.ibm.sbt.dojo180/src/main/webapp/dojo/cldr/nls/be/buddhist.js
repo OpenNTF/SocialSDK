@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/be/buddhist", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M.yy",
 	"dateFormatItem-yQ": "Q 'кв'. y",
@@ -31,7 +31,14 @@ define(
 		"лют",
 		"сак",
 		"кра",
-		"тра"
+		"тра",
+		"чэр",
+		"ліп",
+		"жні",
+		"вер",
+		"кас",
+		"ліс",
+		"сне"
 	],
 	"dateFormatItem-Ed": "E, d",
 	"dateFormatItem-yMMM": "MMM y G",
@@ -56,7 +63,14 @@ define(
 		"люты",
 		"сакавік",
 		"красавік",
-		"травень"
+		"травень",
+		"чэрвень",
+		"ліпень",
+		"жнівень",
+		"верасень",
+		"кастрычнік",
+		"лістапад",
+		"снежань"
 	],
 	"dateFormatItem-MMMd": "d MMM",
 	"timeFormat-long": "HH.mm.ss z",
@@ -98,7 +112,14 @@ define(
 		"л",
 		"с",
 		"к",
-		"т"
+		"т",
+		"ч",
+		"л",
+		"ж",
+		"в",
+		"к",
+		"л",
+		"с"
 	],
 	"dateFormatItem-hm": "h.mm a",
 	"dateFormat-short": "d.M.yy",

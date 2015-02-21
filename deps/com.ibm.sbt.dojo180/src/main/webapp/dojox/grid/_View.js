@@ -1,6 +1,4 @@
-require({cache:{
-'url:dojox/grid/resources/View.html':"<div class=\"dojoxGridView\" role=\"presentation\">\n\t<div class=\"dojoxGridHeader\" dojoAttachPoint=\"headerNode\" role=\"presentation\">\n\t\t<div dojoAttachPoint=\"headerNodeContainer\" style=\"width:9000em\" role=\"presentation\">\n\t\t\t<div dojoAttachPoint=\"headerContentNode\" role=\"row\"></div>\n\t\t</div>\n\t</div>\n\t<input type=\"checkbox\" class=\"dojoxGridHiddenFocus\" dojoAttachPoint=\"hiddenFocusNode\" role=\"presentation\" />\n\t<input type=\"checkbox\" class=\"dojoxGridHiddenFocus\" role=\"presentation\" />\n\t<div class=\"dojoxGridScrollbox\" dojoAttachPoint=\"scrollboxNode\" role=\"presentation\">\n\t\t<div class=\"dojoxGridContent\" dojoAttachPoint=\"contentNode\" hidefocus=\"hidefocus\" role=\"presentation\"></div>\n\t</div>\n</div>\n"}});
-define("dojox/grid/_View", [
+define([
 	"dojo",
 	"dijit/registry",
 	"../main",
@@ -199,7 +197,7 @@ define("dojox/grid/_View", [
 
 		getColumnsWidth: function(){
 			var h = this.headerContentNode;
-			return h && h.firstChild ? h.firstChild.offsetWidth : 0; // Integer
+			return h && h.firstChild ? (h.firstChild.offsetWidth || html.style(h.firstChild, 'width')) : 0; // Integer
 		},
 
 		setColumnsWidth: function(width){
@@ -700,7 +698,7 @@ define("dojox/grid/_View", [
 		_nativeScroll: false,
 
 		doscroll: function(inEvent){
-			if(has('ff') >= 13){
+			if(has('ff') >= 13 || has('chrome')){
 				this._nativeScroll = true;
 			}
 			//var s = dojo.marginBox(this.headerContentNode.firstChild);

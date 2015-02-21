@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/fo/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"quarters-standAlone-wide": [
 		"1. kvartal",
@@ -22,6 +22,15 @@ define(
 	],
 	"field-day-relative+-1": "í gær",
 	"field-day-relative+-2": "í fyrradag",
+	"days-format-short": [
+		"sun",
+		"mán",
+		"týs",
+		"mik",
+		"hós",
+		"frí",
+		"ley"
+	],
 	"months-standAlone-wide": [
 		"januar",
 		"februar",
@@ -50,10 +59,19 @@ define(
 		"nov",
 		"des"
 	],
+	"days-standAlone-short": [
+		"sun",
+		"mán",
+		"týs",
+		"mik",
+		"hós",
+		"frí",
+		"ley"
+	],
 	"field-day-relative+0": "í dag",
-	"field-day-relative+1": "á morgum",
+	"field-day-relative+1": "á morgunn",
 	"dateFormat-long": "d. MMM y",
-	"field-day-relative+2": "í overmorgum",
+	"field-day-relative+2": "á yfirmorgunn",
 	"dateFormat-short": "dd-MM-yy",
 	"months-format-wide": [
 		"januar",

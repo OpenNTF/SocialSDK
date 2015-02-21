@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/luy/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"field-dayperiod": "Vuche/Vwira",
@@ -165,6 +165,15 @@ define(
 		"N",
 		"D"
 	],
+	"days-standAlone-short": [
+		"J2",
+		"J3",
+		"J4",
+		"J5",
+		"Al",
+		"Ij",
+		"J1"
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"J2",
@@ -193,6 +202,15 @@ define(
 		"Oktoba",
 		"Novemba",
 		"Desemba"
+	],
+	"days-format-short": [
+		"J2",
+		"J3",
+		"J4",
+		"J5",
+		"Al",
+		"Ij",
+		"J1"
 	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

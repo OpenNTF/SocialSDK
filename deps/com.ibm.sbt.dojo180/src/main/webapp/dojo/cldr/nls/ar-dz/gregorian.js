@@ -1,12 +1,96 @@
 define(
-"dojo/cldr/nls/ar-dz/gregorian", //begin v1.x content
+//begin v1.x content
 {
-	"dateFormat-short": "yyyy/M/d",
-	"dateFormat-medium": "yyyy/MM/dd",
-	"dateFormatItem-MMdd": "MM/dd",
-	"dateFormatItem-yM": "yyyy/M",
 	"dateFormatItem-Md": "M/d",
-	"dateFormatItem-yyyyMM": "yyyy/MM"
+	"months-format-narrow": [
+		"ج",
+		"ف",
+		"م",
+		"أ",
+		"م",
+		"ج",
+		"ج",
+		"أ",
+		"س",
+		"أ",
+		"ن",
+		"د"
+	],
+	"months-standAlone-abbr": [
+		"جانفي",
+		"فيفري",
+		"مارس",
+		"أفريل",
+		"ماي",
+		"جوان",
+		"جويلية",
+		"أوت",
+		"سبتمبر",
+		"أكتوبر",
+		"نوفمبر",
+		"ديسمبر"
+	],
+	"dateFormatItem-yM": "yyyy/M",
+	"dateFormat-medium": "yyyy/MM/dd",
+	"months-format-abbr": [
+		"جانفي",
+		"فيفري",
+		"مارس",
+		"أفريل",
+		"ماي",
+		"جوان",
+		"جويلية",
+		"أوت",
+		"سبتمبر",
+		"أكتوبر",
+		"نوفمبر",
+		"ديسمبر"
+	],
+	"dateFormatItem-MMdd": "MM/dd",
+	"dateFormatItem-yyyyMM": "yyyy/MM",
+	"months-standAlone-wide": [
+		"جانفي",
+		"فيفري",
+		"مارس",
+		"أفريل",
+		"ماي",
+		"جوان",
+		"جويلية",
+		"أوت",
+		"سبتمبر",
+		"أكتوبر",
+		"نوفمبر",
+		"ديسمبر"
+	],
+	"dateFormat-short": "yyyy/M/d",
+	"months-format-wide": [
+		"جانفي",
+		"فيفري",
+		"مارس",
+		"أفريل",
+		"ماي",
+		"جوان",
+		"جويلية",
+		"أوت",
+		"سبتمبر",
+		"أكتوبر",
+		"نوفمبر",
+		"ديسمبر"
+	],
+	"months-standAlone-narrow": [
+		"ج",
+		"ف",
+		"م",
+		"أ",
+		"م",
+		"ج",
+		"ج",
+		"أ",
+		"س",
+		"أ",
+		"ن",
+		"د"
+	]
 }
 //end v1.x content
 );

@@ -1,4 +1,4 @@
-define("dijit/form/ToggleButton", [
+define([
 	"dojo/_base/declare", // declare
 	"dojo/_base/kernel", // kernel.deprecated
 	"./Button",

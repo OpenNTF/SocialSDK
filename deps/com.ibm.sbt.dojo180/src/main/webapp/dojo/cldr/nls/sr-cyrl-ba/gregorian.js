@@ -1,8 +1,20 @@
 define(
-"dojo/cldr/nls/sr-cyrl-ba/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		null,
+		null,
+		null,
+		"сри"
+	],
 	"timeFormat-full": "HH 'часова', mm 'минута', ss 'секунди' zzzz",
 	"timeFormat-medium": "HH:mm:ss",
+	"days-format-short": [
+		null,
+		null,
+		null,
+		"сри"
+	],
 	"months-standAlone-abbr": [
 		null,
 		null,

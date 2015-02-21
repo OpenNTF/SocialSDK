@@ -1,6 +1,15 @@
 define(
-"dojo/cldr/nls/mo/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"duminică",
+		"luni",
+		"marți",
+		"miercuri",
+		"joi",
+		"vineri",
+		"sâmbătă"
+	],
 	"months-format-narrow": [
 		"I",
 		"F",
@@ -28,6 +37,15 @@ define(
 	"eraNarrow": [
 		"î.Hr.",
 		"d.Hr."
+	],
+	"days-format-short": [
+		"duminică",
+		"luni",
+		"marți",
+		"miercuri",
+		"joi",
+		"vineri",
+		"sâmbătă"
 	],
 	"dateFormat-long": "d MMMM y",
 	"months-format-wide": [

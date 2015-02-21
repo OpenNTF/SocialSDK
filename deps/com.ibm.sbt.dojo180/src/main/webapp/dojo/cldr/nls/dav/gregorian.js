@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/dav/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"field-dayperiod": "KE/PE",
@@ -12,7 +12,6 @@ define(
 	],
 	"dateFormatItem-MMMEd": "E, MMM d",
 	"field-day-relative+-1": "Iguo",
-	"field-weekday": "Ituku",
 	"dateFormatItem-yQQQ": "QQQ y",
 	"days-standAlone-wide": [
 		"Ituku ja jumwa",
@@ -173,6 +172,15 @@ define(
 		"I",
 		"I"
 	],
+	"days-standAlone-short": [
+		"Jum",
+		"Jim",
+		"Kaw",
+		"Kad",
+		"Kan",
+		"Kas",
+		"Ngu"
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"Jum",
@@ -201,6 +209,15 @@ define(
 		"Mori ghwa ikumi",
 		"Mori ghwa ikumi na imweri",
 		"Mori ghwa ikumi na iwi"
+	],
+	"days-format-short": [
+		"Jum",
+		"Jim",
+		"Kaw",
+		"Kad",
+		"Kan",
+		"Kas",
+		"Ngu"
 	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

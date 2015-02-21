@@ -1,4 +1,4 @@
-define("dijit/form/_FormWidgetMixin", [
+define([
 	"dojo/_base/array", // array.forEach
 	"dojo/_base/declare", // declare
 	"dojo/dom-attr", // domAttr.set
@@ -40,6 +40,10 @@ return declare("dijit.form._FormWidgetMixin", null, {
 	// type: [const] String
 	//		Corresponds to the native HTML `<input>` element's attribute.
 	type: "text",
+
+	// type: String
+	//		Apply aria-label in markup to the widget's focusNode
+	"aria-label": "focusNode",
 
 	// tabIndex: String
 	//		Order fields are traversed when user hits the tab key

@@ -1,4 +1,4 @@
-define("dijit/form/_ComboBoxMenu", [
+define([
 	"dojo/_base/declare", // declare
 	"dojo/dom-class", // domClass.add domClass.remove
 	"dojo/dom-style", // domStyle.get
@@ -24,7 +24,7 @@ define("dijit/form/_ComboBoxMenu", [
 		// tags:
 		//		private
 
-		templateString: "<div class='dijitReset dijitMenu' data-dojo-attach-point='containerNode' style='overflow: auto; overflow-x: hidden;'>"
+		templateString: "<div class='dijitReset dijitMenu' data-dojo-attach-point='containerNode' style='overflow: auto; overflow-x: hidden;' role='listbox'>"
 				+"<div class='dijitMenuItem dijitMenuPreviousButton' data-dojo-attach-point='previousButton' role='option'></div>"
 				+"<div class='dijitMenuItem dijitMenuNextButton' data-dojo-attach-point='nextButton' role='option'></div>"
 				+"</div>",
@@ -37,6 +37,7 @@ define("dijit/form/_ComboBoxMenu", [
 				domClass.add(this.previousButton, "dijitMenuItemRtl");
 				domClass.add(this.nextButton, "dijitMenuItemRtl");
 			}
+			this.containerNode.setAttribute("role","listbox");
 		},
 
 		_createMenuItem: function(){

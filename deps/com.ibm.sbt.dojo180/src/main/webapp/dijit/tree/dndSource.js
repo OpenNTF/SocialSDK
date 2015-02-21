@@ -1,4 +1,4 @@
-define("dijit/tree/dndSource", [
+define([
 	"dojo/_base/array", // array.forEach array.indexOf array.map
 	"dojo/_base/connect", // isCopyKey
 	"dojo/_base/declare", // declare

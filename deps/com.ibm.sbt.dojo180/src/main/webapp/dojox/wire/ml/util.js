@@ -1,5 +1,3 @@
-// wrapped by build app
-define("dojox/wire/ml/util", ["dijit","dojo","dojox","dojo/require!dojox/xml/parser,dojox/wire/Wire"], function(dijit,dojo,dojox){
 dojo.provide("dojox.wire.ml.util");
 
 dojo.require("dojox.xml.parser");
@@ -294,6 +292,4 @@ dojo.declare("dojox.wire.ml.XmlElement", null, {
 			return dojox.xml.parser.parse(); //Document
 		}
 	}
-});
-
 });

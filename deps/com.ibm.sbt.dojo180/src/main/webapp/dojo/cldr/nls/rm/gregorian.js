@@ -1,6 +1,15 @@
 define(
-"dojo/cldr/nls/rm/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"du",
+		"gli",
+		"ma",
+		"me",
+		"gie",
+		"ve",
+		"so"
+	],
 	"months-format-narrow": [
 		"S",
 		"F",
@@ -23,6 +32,15 @@ define(
 	"eraNarrow": [
 		"av. Cr.",
 		"s. Cr."
+	],
+	"days-format-short": [
+		"du",
+		"gli",
+		"ma",
+		"me",
+		"gie",
+		"ve",
+		"so"
 	],
 	"dateFormat-long": "d 'da' MMMM y",
 	"months-format-wide": [

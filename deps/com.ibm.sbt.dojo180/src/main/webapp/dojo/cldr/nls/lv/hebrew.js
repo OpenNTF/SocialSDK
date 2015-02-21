@@ -1,50 +1,27 @@
 define(
-"dojo/cldr/nls/lv/hebrew", //begin v1.x content
+//begin v1.x content
 {
-	"quarters-format-abbr": [
+	"dateFormatItem-yM": "MM.yyyy.",
+	"dateFormatItem-yQ": "Q yyyy",
+	"dayPeriods-format-wide-pm": "pēcpusdienā",
+	"dateFormatItem-MMMEd": "E, d. MMM",
+	"days-standAlone-wide": [
+		"Svētdiena",
+		"Pirmdiena",
+		"Otrdiena",
+		"Trešdiena",
+		"Ceturtdiena",
+		"Piektdiena",
+		"Sestdiena"
+	],
+	"dayPeriods-format-wide-am": "priekšpusdienā",
+	"quarters-standAlone-abbr": [
 		"C1",
 		"C2",
 		"C3",
 		"C4"
 	],
-	"dateFormat-medium": "y. 'gada' d. MMM",
-	"dateFormatItem-MMMEd": "E, d. MMM",
-	"dateFormatItem-MEd": "E, dd.MM.",
-	"dateFormatItem-yMEd": "E, dd.MM.yyyy.",
 	"dateFormatItem-y": "y. 'g'.",
-	"quarters-format-narrow": [
-		"1.",
-		"2.",
-		"3.",
-		"4."
-	],
-	"dateFormatItem-Md": "dd.MM.",
-	"months-standAlone-wide": [
-		"tišri",
-		"hešvans",
-		"kisļevs",
-		"tevets",
-		"ševats",
-		"1. adars",
-		"adars",
-		"nisans",
-		"ijars",
-		"sivans",
-		"tamuzs",
-		"avs",
-		"eluls"
-	],
-	"months-format-wide-leap": "2. adars",
-	"days-standAlone-narrow": [
-		"S",
-		"P",
-		"O",
-		"T",
-		"C",
-		"P",
-		"S"
-	],
-	"dayPeriods-format-wide-pm": "pēcpusdienā",
 	"months-standAlone-abbr": [
 		"tišri",
 		"hešvans",
@@ -60,17 +37,33 @@ define(
 		"avs",
 		"eluls"
 	],
-	"dayPeriods-format-wide-am": "priekšpusdienā",
+	"dateFormatItem-Ed": "E, d.",
+	"dateFormatItem-yMMM": "yyyy. 'g'. MMM",
+	"days-standAlone-narrow": [
+		"S",
+		"P",
+		"O",
+		"T",
+		"C",
+		"P",
+		"S"
+	],
+	"dateFormat-long": "y. 'gada' d. MMMM",
+	"dateFormat-medium": "y. 'gada' d. MMM",
+	"dateFormatItem-yMd": "d.M.y.",
+	"quarters-standAlone-wide": [
+		"1. ceturksnis",
+		"2. ceturksnis",
+		"3. ceturksnis",
+		"4. ceturksnis"
+	],
 	"quarters-standAlone-narrow": [
 		"1.",
 		"2.",
 		"3.",
 		"4."
 	],
-	"dateFormat-long": "y. 'gada' d. MMMM",
-	"dateFormat-short": "dd.MM.yy",
-	"dateFormatItem-yMMMEd": "E, yyyy. 'g'. dd. MMM",
-	"months-format-wide": [
+	"months-standAlone-wide": [
 		"tišri",
 		"hešvans",
 		"kisļevs",
@@ -85,7 +78,13 @@ define(
 		"avs",
 		"eluls"
 	],
-	"dateFormatItem-yM": "MM.yyyy.",
+	"dateFormatItem-MMMd": "d. MMM",
+	"quarters-format-narrow": [
+		"1.",
+		"2.",
+		"3.",
+		"4."
+	],
 	"months-format-abbr": [
 		"tišri",
 		"hešvans",
@@ -101,25 +100,12 @@ define(
 		"avs",
 		"eluls"
 	],
-	"days-format-wide": [
-		"svētdiena",
-		"pirmdiena",
-		"otrdiena",
-		"trešdiena",
-		"ceturtdiena",
-		"piektdiena",
-		"sestdiena"
+	"quarters-format-abbr": [
+		"C1",
+		"C2",
+		"C3",
+		"C4"
 	],
-	"dateFormatItem-yQ": "Q yyyy",
-	"dateFormatItem-yMMM": "yyyy. 'g'. MMM",
-	"quarters-format-wide": [
-		"1. ceturksnis",
-		"2. ceturksnis",
-		"3. ceturksnis",
-		"4. ceturksnis"
-	],
-	"dateFormat-full": "EEEE, y. 'gada' d. MMMM",
-	"dateFormatItem-MMMd": "d. MMM",
 	"days-format-abbr": [
 		"Sv",
 		"Pr",
@@ -129,7 +115,80 @@ define(
 		"Pk",
 		"Se"
 	],
-	"dateFormatItem-Ed": "E, d."
+	"days-format-narrow": [
+		"S",
+		"P",
+		"O",
+		"T",
+		"C",
+		"P",
+		"S"
+	],
+	"dateFormatItem-yMMMd": "y. 'g'. d. MMM",
+	"dateFormatItem-MEd": "E, dd.MM.",
+	"days-standAlone-short": [
+		"Sv",
+		"P",
+		"O",
+		"T",
+		"C",
+		"Pk",
+		"S"
+	],
+	"days-standAlone-abbr": [
+		"Sv",
+		"Pr",
+		"Ot",
+		"Tr",
+		"Ce",
+		"Pk",
+		"Se"
+	],
+	"dateFormat-short": "dd.MM.yy",
+	"dateFormatItem-yMMMEd": "E, y. 'g'. d. MMM",
+	"dateFormat-full": "EEEE, y. 'gada' d. MMMM",
+	"dateFormatItem-Md": "dd.MM.",
+	"dateFormatItem-yMEd": "E, d.M.y.",
+	"months-format-wide": [
+		"tišri",
+		"hešvans",
+		"kisļevs",
+		"tevets",
+		"ševats",
+		"1. adars",
+		"adars",
+		"nisans",
+		"ijars",
+		"sivans",
+		"tamuzs",
+		"avs",
+		"eluls"
+	],
+	"days-format-short": [
+		"Sv",
+		"Pr",
+		"Ot",
+		"Tr",
+		"Ce",
+		"Pk",
+		"Se"
+	],
+	"quarters-format-wide": [
+		"1. ceturksnis",
+		"2. ceturksnis",
+		"3. ceturksnis",
+		"4. ceturksnis"
+	],
+	"months-format-wide-leap": "2. adars",
+	"days-format-wide": [
+		"svētdiena",
+		"pirmdiena",
+		"otrdiena",
+		"trešdiena",
+		"ceturtdiena",
+		"piektdiena",
+		"sestdiena"
+	]
 }
 //end v1.x content
 );

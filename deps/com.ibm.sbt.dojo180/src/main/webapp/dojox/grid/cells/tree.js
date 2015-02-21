@@ -1,4 +1,4 @@
-define("dojox/grid/cells/tree", [
+define([
 	"dojo/_base/kernel",
 	"../../main",
 	"dojo/_base/lang",

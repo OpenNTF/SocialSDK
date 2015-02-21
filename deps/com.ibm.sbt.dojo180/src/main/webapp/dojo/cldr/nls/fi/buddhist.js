@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/fi/buddhist", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "L.y G",
 	"dateFormatItem-yMMMMccccd": "cccc, d. MMMM y G",
@@ -161,6 +161,15 @@ define(
 		"M",
 		"J"
 	],
+	"days-standAlone-short": [
+		"su",
+		"ma",
+		"ti",
+		"ke",
+		"to",
+		"pe",
+		"la"
+	],
 	"dateFormatItem-hm": "h.mm a",
 	"days-standAlone-abbr": [
 		"su",
@@ -193,6 +202,15 @@ define(
 		"joulukuuta"
 	],
 	"dayPeriods-format-abbr-am": "ap.",
+	"days-format-short": [
+		"su",
+		"ma",
+		"ti",
+		"ke",
+		"to",
+		"pe",
+		"la"
+	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [
 		"1. neljännes",

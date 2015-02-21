@@ -1,4 +1,4 @@
-define("dojox/mvc/_patches", [
+define([
 	"./_atBindingExtension",
 	"./_DataBindingExtension",
 	"./_TextBoxExtensions"

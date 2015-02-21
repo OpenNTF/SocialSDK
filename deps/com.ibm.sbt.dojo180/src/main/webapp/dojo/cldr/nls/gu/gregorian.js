@@ -1,6 +1,15 @@
 define(
-"dojo/cldr/nls/gu/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"ર",
+		"સો",
+		"મં",
+		"બુ",
+		"ગુ",
+		"શુ",
+		"શ"
+	],
 	"months-format-narrow": [
 		"જા",
 		"ફે",
@@ -15,13 +24,28 @@ define(
 		"ન",
 		"ડિ"
 	],
+	"quarters-standAlone-narrow": [
+		"1",
+		"2",
+		"3",
+		"4"
+	],
 	"field-weekday": "અઠવાડિયાનો દિવસ",
 	"dateFormatItem-yQQQ": "QQQ y",
-	"dateFormatItem-yMEd": "E,d/M/y",
+	"dateFormatItem-yMEd": "E, M/d/y",
 	"dateFormatItem-MMMEd": "E, d MMM",
 	"eraNarrow": [
 		"ઇ સ પુ",
 		"ઇસ"
+	],
+	"days-format-short": [
+		"ર",
+		"સો",
+		"મં",
+		"બુ",
+		"ગુ",
+		"શુ",
+		"શ"
 	],
 	"dateFormat-long": "d MMMM, y",
 	"months-format-wide": [
@@ -34,11 +58,12 @@ define(
 		"જુલાઈ",
 		"ઑગસ્ટ",
 		"સપ્ટેમ્બર",
-		"ઑક્ટ્બર",
+		"ઑક્ટોબર",
 		"નવેમ્બર",
 		"ડિસેમ્બર"
 	],
-	"dayPeriods-format-wide-pm": "ઉત્તર મધ્યાહ્ન",
+	"dateTimeFormat-medium": "{1} {0}",
+	"dayPeriods-format-wide-pm": "PM",
 	"dateFormat-full": "EEEE, d MMMM, y",
 	"dateFormatItem-Md": "d/M",
 	"dateFormatItem-yMd": "d/M/y",
@@ -60,18 +85,18 @@ define(
 	],
 	"timeFormat-short": "hh:mm a",
 	"quarters-format-wide": [
-		"પેહલા હંત 1",
-		"ડૂસઋા હંત 2",
-		"તીસઋા હંત 3",
-		"ચૌતા હંત 4"
+		"પહેલો હંત",
+		"બીજો હંત",
+		"ત્રીજો હંત",
+		"ચોથો હંત"
 	],
 	"timeFormat-long": "hh:mm:ss a z",
 	"field-year": "વર્ષ",
 	"dateFormatItem-yMMM": "MMM y",
 	"dateFormatItem-yQ": "Q y",
 	"dateFormatItem-yyyyMMMM": "MMMM y",
-	"field-hour": "કસાક",
 	"dateFormatItem-MMdd": "dd-MM",
+	"field-hour": "કલાક",
 	"months-format-abbr": [
 		"જાન્યુ",
 		"ફેબ્રુ",
@@ -89,8 +114,9 @@ define(
 	"dateFormatItem-yyQ": "Q yy",
 	"timeFormat-full": "hh:mm:ss a zzzz",
 	"field-day-relative+0": "આજ",
-	"field-day-relative+1": "આવતીકાસ",
-	"field-day-relative+2": "આવતીકાસ પછીનો દિવસ",
+	"field-day-relative+1": "આવતીકાલ",
+	"field-day-relative+2": "પરમ દિવસ",
+	"dateFormatItem-H": "HH",
 	"months-standAlone-abbr": [
 		"જાન્યુ",
 		"ફેબ્રુ",
@@ -99,24 +125,25 @@ define(
 		"મે",
 		"જૂન",
 		"જુલાઈ",
-		"ઑગસ્ટ",
+		"ઑગ",
 		"સપ્ટે",
 		"ઑક્ટો",
 		"નવે",
 		"ડિસે"
 	],
 	"quarters-format-abbr": [
-		"પેહલા હંત 1",
+		"Q1",
 		"Q2",
 		"Q3",
-		"ચૌતા હંત 4"
+		"Q4"
 	],
 	"quarters-standAlone-wide": [
-		"પેહલા હંત 1",
-		"ડૂસઋા હંત 2",
-		"તીસઋા હંત 3",
-		"ચૌતા હંત 4"
+		"પહેલો હંત",
+		"બીજો હંત",
+		"ત્રીજો હંત",
+		"ચોથો હંત"
 	],
+	"dateFormatItem-M": "L",
 	"days-standAlone-wide": [
 		"રવિવાર",
 		"સોમવાર",
@@ -128,11 +155,12 @@ define(
 	],
 	"dateFormatItem-MMMMd": "d MMMM",
 	"timeFormat-medium": "hh:mm:ss a",
+	"dateFormatItem-Hm": "HH:mm",
 	"quarters-standAlone-abbr": [
-		"પેહલા હંત 1",
+		"Q1",
 		"Q2",
 		"Q3",
-		"ચૌતા હંત 4"
+		"Q4"
 	],
 	"eraAbbr": [
 		"ઈલુના જન્મ પહેસાં",
@@ -149,17 +177,22 @@ define(
 		"શુક્ર",
 		"શનિ"
 	],
+	"dateFormatItem-d": "d",
+	"dateFormatItem-ms": "mm:ss",
 	"quarters-format-narrow": [
 		"1",
 		"2",
 		"3",
 		"4"
 	],
-	"field-day-relative+-1": "ગઈકાસ",
-	"dateFormatItem-h": "hh a",
+	"field-day-relative+-1": "ગઈકાલ",
+	"dateFormatItem-h": "h a",
+	"dateTimeFormat-long": "{1} {0}",
+	"dayPeriods-format-narrow-am": "AM",
 	"field-day-relative+-2": "ગઈકાસ પહેસાંનો દિવસ",
 	"dateFormatItem-MMMd": "d MMM",
-	"dateFormatItem-MEd": "E,d/M",
+	"dateFormatItem-MEd": "E, d/M",
+	"dateTimeFormat-full": "{1} {0}",
 	"field-day": "દિવસ",
 	"days-format-wide": [
 		"રવિવાર",
@@ -187,7 +220,7 @@ define(
 		"ન",
 		"ડિ"
 	],
-	"field-year-relative+-1": "છેલ્લુ વર્ષ",
+	"field-year-relative+-1": "પાછલું વર્ષ",
 	"field-month-relative+-1": "છેલ્લો મહિનો",
 	"dateFormatItem-hm": "hh:mm a",
 	"days-format-abbr": [
@@ -213,7 +246,6 @@ define(
 		"શુ",
 		"શ"
 	],
-	"field-month": "મહિનો",
 	"days-standAlone-narrow": [
 		"ર",
 		"સો",
@@ -223,10 +255,12 @@ define(
 		"શુ",
 		"શ"
 	],
-	"dayPeriods-format-wide-am": "પૂર્વ મધ્યાહ્ન",
+	"dateFormatItem-MMM": "LLL",
+	"field-month": "મહિનો",
+	"dayPeriods-format-wide-am": "AM",
 	"dateFormat-short": "d-MM-yy",
 	"field-second": "ક્ષણ",
-	"dateFormatItem-yMMMEd": "E,d,MMM y",
+	"dateFormatItem-yMMMEd": "E, MMM d, y",
 	"field-month-relative+0": "આ મહિને",
 	"field-month-relative+1": "આગલો મહીનો",
 	"dateFormatItem-Ed": "E d",
@@ -234,7 +268,10 @@ define(
 	"dateFormat-medium": "d MMM, y",
 	"field-year-relative+0": "આ વર્ષ",
 	"field-week-relative+-1": "છેલ્લું અઠવાડિયું",
-	"field-year-relative+1": "બીજા વર્ષે",
+	"field-year-relative+1": "આગલું વર્ષ",
+	"dayPeriods-format-narrow-pm": "PM",
+	"dateTimeFormat-short": "{1} {0}",
+	"dateFormatItem-Hms": "HH:mm:ss",
 	"dateFormatItem-hms": "hh:mm:ss a",
 	"field-week-relative+0": "આ અઠવાડિયે",
 	"field-week-relative+1": "આગલા અઠવાડિયે"

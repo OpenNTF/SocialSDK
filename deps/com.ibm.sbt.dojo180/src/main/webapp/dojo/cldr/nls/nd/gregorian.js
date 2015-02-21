@@ -1,8 +1,7 @@
 define(
-"dojo/cldr/nls/nd/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
-	"field-dayperiod": "Ilanga",
 	"dateFormatItem-yQ": "Q y",
 	"field-minute": "Umuzuzu",
 	"eraNames": [
@@ -37,7 +36,6 @@ define(
 		"L",
 		"M"
 	],
-	"field-era": "Umnyaka",
 	"field-hour": "Ihola",
 	"quarters-standAlone-abbr": [
 		"K1",
@@ -169,6 +167,15 @@ define(
 		"L",
 		"M"
 	],
+	"days-standAlone-short": [
+		"Son",
+		"Mvu",
+		"Sib",
+		"Sit",
+		"Sin",
+		"Sih",
+		"Mgq"
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"Son",
@@ -197,6 +204,15 @@ define(
 		"Mfumfu",
 		"Lwezi",
 		"Mpalakazi"
+	],
+	"days-format-short": [
+		"Son",
+		"Mvu",
+		"Sib",
+		"Sit",
+		"Sin",
+		"Sih",
+		"Mgq"
 	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

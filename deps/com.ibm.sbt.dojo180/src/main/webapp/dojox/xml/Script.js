@@ -1,4 +1,4 @@
-define("dojox/xml/Script", [
+define([
 	"dojo/_base/kernel",	// dojo.getObject
 	"dojo/_base/declare",
 	"dojo/parser",

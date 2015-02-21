@@ -1,5 +1,3 @@
-// wrapped by build app
-define("dojox/xmpp/bosh", ["dijit","dojo","dojox","dojo/require!dojo/io/script,dojo/io/iframe,dojox/xml/parser"], function(dijit,dojo,dojox){
 dojo.provide("dojox.xmpp.bosh");
 
 dojo.require("dojo.io.script");
@@ -246,5 +244,3 @@ dojox.xmpp.bosh = {
 		}
 	}
 };
-
-});

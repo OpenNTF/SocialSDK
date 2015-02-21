@@ -1,4 +1,4 @@
-define("dojox/data/css", ["dojo/_base/lang", "dojo/_base/array"], 
+define(["dojo/_base/lang", "dojo/_base/array"], 
   function(lang, array) {
 
 var css = lang.getObject("dojox.data.css",true) 

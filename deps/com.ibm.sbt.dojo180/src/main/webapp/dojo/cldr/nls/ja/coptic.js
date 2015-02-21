@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/ja/coptic", //begin v1.x content
+//begin v1.x content
 {
 	"months-format-abbr": [
 		"トウト",
@@ -31,6 +31,21 @@ define(
 		"メスラ",
 		"ナシエ"
 	],
+	"months-format-narrow": [
+		"1",
+		"2",
+		"3",
+		"4",
+		"5",
+		"6",
+		"7",
+		"8",
+		"9",
+		"10",
+		"11",
+		"12",
+		"13"
+	],
 	"months-standAlone-abbr": [
 		"トウト",
 		"ババ",
@@ -60,6 +75,21 @@ define(
 		"エペープ",
 		"メスラ",
 		"ナシエ"
+	],
+	"months-standAlone-narrow": [
+		"1",
+		"2",
+		"3",
+		"4",
+		"5",
+		"6",
+		"7",
+		"8",
+		"9",
+		"10",
+		"11",
+		"12",
+		"13"
 	]
 }
 //end v1.x content

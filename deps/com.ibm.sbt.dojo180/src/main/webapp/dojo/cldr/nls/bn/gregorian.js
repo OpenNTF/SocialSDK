@@ -1,6 +1,15 @@
 define(
-"dojo/cldr/nls/bn/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"রঃ",
+		"সোঃ",
+		"মঃ",
+		"বুঃ",
+		"বৃঃ",
+		"শুঃ",
+		"শোঃ"
+	],
 	"months-format-narrow": [
 		"জা",
 		"ফে",
@@ -29,6 +38,15 @@ define(
 		"খৃষ্টপূর্ব",
 		"খৃষ্টাব্দ"
 	],
+	"days-format-short": [
+		"রঃ",
+		"সোঃ",
+		"মঃ",
+		"বুঃ",
+		"বৃঃ",
+		"শুঃ",
+		"শোঃ"
+	],
 	"dateFormat-long": "d MMMM, y",
 	"months-format-wide": [
 		"জানুয়ারী",
@@ -44,6 +62,7 @@ define(
 		"নভেম্বর",
 		"ডিসেম্বর"
 	],
+	"dateTimeFormat-medium": "{1} {0}",
 	"dayPeriods-format-wide-pm": "অপরাহ্ণ",
 	"dateFormat-full": "EEEE, d MMMM, y",
 	"dateFormatItem-Md": "d/M",
@@ -97,6 +116,7 @@ define(
 	"field-day-relative+0": "আজ",
 	"field-day-relative+1": "আগামীকাল",
 	"field-day-relative+2": "আগামী পরশু",
+	"dateFormatItem-H": "HH",
 	"months-standAlone-abbr": [
 		"জানুয়ারী",
 		"ফেব্রুয়ারী",
@@ -166,9 +186,13 @@ define(
 		"4"
 	],
 	"field-day-relative+-1": "গতকাল",
+	"dateFormatItem-h": "h a",
+	"dateTimeFormat-long": "{1} {0}",
+	"dayPeriods-format-narrow-am": "পূর্বাহ্ণ",
 	"field-day-relative+-2": "গত পরশু",
 	"dateFormatItem-MMMd": "d MMM",
 	"dateFormatItem-MEd": "E, d-M",
+	"dateTimeFormat-full": "{1} {0}",
 	"dateFormatItem-yMMMM": "MMMM y",
 	"field-day": "দিন",
 	"days-format-wide": [
@@ -199,6 +223,7 @@ define(
 	],
 	"field-year-relative+-1": "আগের বছর",
 	"field-month-relative+-1": "গত মাস",
+	"dateFormatItem-hm": "h:mm a",
 	"days-format-abbr": [
 		"রবি",
 		"সোম",
@@ -246,6 +271,10 @@ define(
 	"field-year-relative+0": "এই বছর",
 	"field-week-relative+-1": "গত সপ্তাহ",
 	"field-year-relative+1": "পরের বছর",
+	"dayPeriods-format-narrow-pm": "অপরাহ্ণ",
+	"dateTimeFormat-short": "{1} {0}",
+	"dateFormatItem-Hms": "HH:mm:ss",
+	"dateFormatItem-hms": "h:mm:ss a",
 	"field-week-relative+0": "এই সপ্তাহ",
 	"field-week-relative+1": "পরবর্তী সপ্তাহ"
 }

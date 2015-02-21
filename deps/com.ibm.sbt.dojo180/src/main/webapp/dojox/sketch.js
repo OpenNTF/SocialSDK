@@ -1,4 +1,4 @@
-define("dojox/sketch", [
+define([
 	"dojo/_base/kernel",
 	"dojo/_base/lang", 
 	"./xml/DomParser", 

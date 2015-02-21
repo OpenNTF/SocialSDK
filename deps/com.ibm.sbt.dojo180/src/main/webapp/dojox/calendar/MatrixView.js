@@ -1,6 +1,4 @@
-require({cache:{
-'url:dojox/calendar/templates/MatrixView.html':"<div data-dojo-attach-events=\"keydown:_onKeyDown\">\n\t<div  class=\"dojoxCalendarYearColumnHeader\" data-dojo-attach-point=\"yearColumnHeader\">\n\t\t<table><tr><td><span data-dojo-attach-point=\"yearColumnHeaderContent\"></span></td></tr></table>\t\t\n\t</div>\t\n\t<div data-dojo-attach-point=\"columnHeader\" class=\"dojoxCalendarColumnHeader\">\n\t\t<table data-dojo-attach-point=\"columnHeaderTable\" class=\"dojoxCalendarColumnHeaderTable\" cellpadding=\"0\" cellspacing=\"0\"></table>\n\t</div>\t\t\n\t<div dojoAttachPoint=\"rowHeader\" class=\"dojoxCalendarRowHeader\">\n\t\t<table data-dojo-attach-point=\"rowHeaderTable\" class=\"dojoxCalendarRowHeaderTable\" cellpadding=\"0\" cellspacing=\"0\"></table>\n\t</div>\t\n\t<div dojoAttachPoint=\"grid\" class=\"dojoxCalendarGrid\">\n\t\t<table data-dojo-attach-point=\"gridTable\" class=\"dojoxCalendarGridTable\" cellpadding=\"0\" cellspacing=\"0\"></table>\n\t</div>\t\n\t<div data-dojo-attach-point=\"itemContainer\" class=\"dojoxCalendarContainer\" data-dojo-attach-event=\"mousedown:_onGridMouseDown,mouseup:_onGridMouseUp,ondblclick:_onGridDoubleClick,touchstart:_onGridTouchStart,touchmove:_onGridTouchMove,touchend:_onGridTouchEnd\">\n\t\t<table data-dojo-attach-point=\"itemContainerTable\" class=\"dojoxCalendarContainerTable\" cellpadding=\"0\" cellspacing=\"0\" style=\"width:100%\"></table>\n\t</div>\t\n</div>\n"}});
-define("dojox/calendar/MatrixView", [
+define([
 "dojo/_base/declare", 
 "dojo/_base/array", 
 "dojo/_base/event", 
@@ -50,6 +48,21 @@ function(
 		//		The column index. 
 		// date: Date
 		//		The date displayed by the column.
+		// triggerEvent: Event
+		//		The origin event.
+	};
+	=====*/
+	
+	/*=====
+	var __ExpandRendererClickEventArgs = {
+		// summary:
+		//		A expand renderer click event.
+		// columnIndex: Integer
+		//		The column index of the cell. 
+		// rowIndex: Integer
+		//		The row index of the cell.
+		// date: Date
+		//		The date displayed by the cell.
 		// triggerEvent: Event
 		//		The origin event.
 	};
@@ -1105,7 +1118,7 @@ function(
 					});
 					this._expandAnimation.play();
 				}else{
-					this._expandRowImpl(size)
+					this._expandRowImpl(size, true);
 				}
 			}			
 		},
@@ -1807,6 +1820,11 @@ function(
 				
 				if(list != null){
 					
+					// sort according to start time the list of label renderers
+					list.sort(lang.hitch(this, function(a, b){						
+						return this.dateModule.compare(a.range[0], b.range[0]);						
+					}));
+					
 					var maxH = this.expandRenderer ? (hasHiddenItems[i] ? cellH - this.expandRendererHeight: cellH) : cellH;
 					posY = hOffsets == null || hOffsets[i] == null ? this.cellPaddingTop : hOffsets[i] + this.verticalGap;
 					var celPos = domGeometry.position(this._getCellAt(index, i));
@@ -2222,10 +2240,38 @@ function(
 			
 			event.stop(e);
 			
-			if(this.getExpandedRowIndex() != -1){
-				this.collapseRow();
-			}else{
-				this.expandRow(renderer.rowIndex, renderer.columnIndex);
+			var ri = renderer.get("rowIndex");
+			var ci = renderer.get("columnIndex");
+			
+			this._onExpandRendererClick(lang.mixin(this._createItemEditEvent(), {
+				rowIndex: ri,
+				columnIndex: ci,
+				renderer: renderer,
+				triggerEvent: e,
+				date: this.renderData.dates[ri][ci]
+			}));
+		},
+		
+		onExpandRendererClick: function(e){
+			// summary:
+			//		Event dispatched when an expand renderer is clicked.
+			// e: __ExpandRendererClickEventArgs
+			//		Expand renderer click event.
+			// tags:
+			//		callback
+		},
+		
+		_onExpandRendererClick: function(e){
+			
+			this._dispatchCalendarEvt(e, "onExpandRendererClick");
+			
+			if(!e.isDefaultPrevented()){
+			
+				if(this.getExpandedRowIndex() != -1){
+					this.collapseRow();
+				}else{
+					this.expandRow(e.rowIndex, e.columnIndex);
+				}
 			}
 		},
 		

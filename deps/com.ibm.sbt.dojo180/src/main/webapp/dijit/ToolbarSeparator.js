@@ -1,4 +1,4 @@
-define("dijit/ToolbarSeparator", [
+define([
 	"dojo/_base/declare", // declare
 	"dojo/dom", // dom.setSelectable
 	"./_Widget",

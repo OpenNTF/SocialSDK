@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/ru/buddhist", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "MM.y G",
 	"dateFormatItem-yQ": "QQQ y 'г'.",
@@ -33,6 +33,12 @@ define(
 	],
 	"dateFormatItem-Gy": "y G",
 	"dayPeriods-format-wide-am": "до полудня",
+	"quarters-standAlone-abbr": [
+		"1-й кв.",
+		"2-й кв.",
+		"3-й кв.",
+		"4-й кв."
+	],
 	"dateFormatItem-y": "y G",
 	"timeFormat-full": "H:mm:ss zzzz",
 	"dateFormatItem-yyyy": "y G",
@@ -73,6 +79,12 @@ define(
 	"dayPeriods-format-narrow-pm": "пп",
 	"dateFormatItem-yyMMM": "LLL yy G",
 	"dateFormatItem-yMd": "dd.MM.y G",
+	"quarters-standAlone-wide": [
+		"1-й квартал",
+		"2-й квартал",
+		"3-й квартал",
+		"4-й квартал"
+	],
 	"dateFormatItem-ms": "mm:ss",
 	"dateFormatItem-yyyyQQQQ": "QQQQ y 'г'. G",
 	"dayPeriods-format-narrow-am": "дп",
@@ -128,13 +140,13 @@ define(
 	],
 	"dateFormatItem-M": "L",
 	"days-format-narrow": [
-		"В",
-		"Пн",
-		"Вт",
-		"С",
-		"Ч",
-		"П",
-		"С"
+		"вс",
+		"пн",
+		"вт",
+		"ср",
+		"чт",
+		"пт",
+		"сб"
 	],
 	"dateFormatItem-yMMMd": "d MMM y G",
 	"dateFormatItem-MEd": "E, dd.MM",
@@ -151,6 +163,15 @@ define(
 		"О",
 		"Н",
 		"Д"
+	],
+	"days-standAlone-short": [
+		"вс",
+		"пн",
+		"вт",
+		"ср",
+		"чт",
+		"пт",
+		"сб"
 	],
 	"days-standAlone-abbr": [
 		"Вс",
@@ -182,6 +203,15 @@ define(
 		"декабря"
 	],
 	"dayPeriods-format-abbr-am": "до полудня",
+	"days-format-short": [
+		"вс",
+		"пн",
+		"вт",
+		"ср",
+		"чт",
+		"пт",
+		"сб"
+	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [
 		"1-й квартал",

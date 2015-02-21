@@ -1,4 +1,4 @@
-define("dojox/sketch/UnderlineAnnotation", ["./Annotation", "./Anchor"], function(){
+define(["./Annotation", "./Anchor"], function(){
 	var ta=dojox.sketch;
 	ta.UnderlineAnnotation=function(figure, id){
 		ta.Annotation.call(this, figure, id);

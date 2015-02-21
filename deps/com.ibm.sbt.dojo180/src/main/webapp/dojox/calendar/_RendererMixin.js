@@ -1,4 +1,4 @@
-define("dojox/calendar/_RendererMixin", ["dojo/_base/declare", "dojo/_base/lang", "dojo/dom-style", "dojo/dom-class", "dojo/Stateful"],
+define(["dojo/_base/declare", "dojo/_base/lang", "dojo/dom-style", "dojo/dom-class", "dojo/Stateful"],
 	 
 	function(declare, lang, domStyle, domClass, Stateful){
 	
@@ -132,7 +132,7 @@ define("dojox/calendar/_RendererMixin", ["dojo/_base/declare", "dojo/_base/lang"
 			//		The size of the item renderer on the time axis. 
 			// tags:
 			//		protected
-			var visible;
+			var visible = true;
 			var limit = this.visibilityLimits[elt];
 			
 			switch(elt){
@@ -224,7 +224,7 @@ define("dojox/calendar/_RendererMixin", ["dojo/_base/declare", "dojo/_base/lang"
 			var startHidden = rd.dateModule.compare(this.item.range[0], this.item.startTime) != 0;
 			var endHidden =  rd.dateModule.compare(this.item.range[1], this.item.endTime) != 0;
 			
-			var visible, limit;
+			var visible;
 			
 			if(this.beforeIcon != null) {
 				visible = this._orientation != "horizontal" || this.isLeftToRight() ? startHidden : endHidden;

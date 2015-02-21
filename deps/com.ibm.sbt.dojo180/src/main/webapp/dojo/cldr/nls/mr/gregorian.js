@@ -1,6 +1,15 @@
 define(
-"dojo/cldr/nls/mr/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"र",
+		"सो",
+		"मं",
+		"बु",
+		"गु",
+		"शु",
+		"श"
+	],
 	"months-format-narrow": [
 		"जा",
 		"फे",
@@ -15,13 +24,28 @@ define(
 		"नो",
 		"डि"
 	],
+	"quarters-standAlone-narrow": [
+		"1",
+		"2",
+		"3",
+		"4"
+	],
 	"field-weekday": "आठवड्याचा दिवस",
 	"dateFormatItem-yQQQ": "QQQ y",
-	"dateFormatItem-yMEd": "E, d/M/y",
+	"dateFormatItem-yMEd": "E, M/d/y",
 	"dateFormatItem-MMMEd": "E, d MMM",
 	"eraNarrow": [
 		"ईसापूर्व",
 		"सन"
+	],
+	"days-format-short": [
+		"र",
+		"सो",
+		"मं",
+		"बु",
+		"गु",
+		"शु",
+		"श"
 	],
 	"dateFormat-long": "d MMMM y",
 	"months-format-wide": [
@@ -38,7 +62,8 @@ define(
 		"नोव्हेंबर",
 		"डिसेंबर"
 	],
-	"dayPeriods-format-wide-pm": "म.नं.",
+	"dateTimeFormat-medium": "{1} {0}",
+	"dayPeriods-format-wide-pm": "PM",
 	"dateFormat-full": "EEEE d MMMM y",
 	"dateFormatItem-Md": "d/M",
 	"dayPeriods-format-abbr-am": "AM",
@@ -83,7 +108,7 @@ define(
 		"जुलै",
 		"ऑग",
 		"सेप्टें",
-		"ऑक्टोबर",
+		"ऑक्ट",
 		"नोव्हें",
 		"डिसें"
 	],
@@ -91,7 +116,7 @@ define(
 	"timeFormat-full": "h-mm-ss a zzzz",
 	"field-day-relative+0": "आज",
 	"field-day-relative+1": "उद्या",
-	"field-day-relative+2": "परवा",
+	"dateFormatItem-H": "HH",
 	"months-standAlone-abbr": [
 		"जाने",
 		"फेब्रु",
@@ -102,13 +127,13 @@ define(
 		"जुलै",
 		"ऑग",
 		"सेप्टें",
-		"ऑक्टोबर",
+		"ऑक्ट",
 		"नोव्हें",
 		"डिसें"
 	],
 	"quarters-format-abbr": [
 		"ति 1",
-		"2 री तिमाही",
+		"ति 2",
 		"ति 3",
 		"ति 4"
 	],
@@ -152,6 +177,8 @@ define(
 		"शुक्र",
 		"शनि"
 	],
+	"dateFormatItem-d": "d",
+	"dateFormatItem-ms": "mm:ss",
 	"quarters-format-narrow": [
 		"1",
 		"2",
@@ -159,10 +186,12 @@ define(
 		"4"
 	],
 	"field-day-relative+-1": "काल",
-	"dayPeriods-format-narrow-am": "a",
-	"field-day-relative+-2": "परवा",
+	"dateFormatItem-h": "h a",
+	"dateTimeFormat-long": "{1} {0}",
+	"dayPeriods-format-narrow-am": "AM",
 	"dateFormatItem-MMMd": "d MMM",
 	"dateFormatItem-MEd": "E, d/M",
+	"dateTimeFormat-full": "{1} {0}",
 	"field-day": "दिवस",
 	"days-format-wide": [
 		"रविवार",
@@ -175,6 +204,7 @@ define(
 	],
 	"field-zone": "झोन",
 	"dateFormatItem-yyyyMM": "MM-yyyy",
+	"dateFormatItem-y": "y",
 	"months-standAlone-narrow": [
 		"जा",
 		"फे",
@@ -191,6 +221,7 @@ define(
 	],
 	"field-year-relative+-1": "मागील वर्ष",
 	"field-month-relative+-1": "मागील महिना",
+	"dateFormatItem-hm": "h:mm a",
 	"dayPeriods-format-abbr-pm": "PM",
 	"days-format-abbr": [
 		"रवि",
@@ -215,7 +246,6 @@ define(
 		"शु",
 		"श"
 	],
-	"field-month": "महिना",
 	"days-standAlone-narrow": [
 		"र",
 		"सो",
@@ -225,10 +255,12 @@ define(
 		"शु",
 		"श"
 	],
-	"dayPeriods-format-wide-am": "म.पू.",
+	"dateFormatItem-MMM": "LLL",
+	"field-month": "महिना",
+	"dayPeriods-format-wide-am": "AM",
 	"dateFormat-short": "d-M-yy",
 	"field-second": "सेकंद",
-	"dateFormatItem-yMMMEd": "E, d MMM y",
+	"dateFormatItem-yMMMEd": "E, MMM d, y",
 	"field-month-relative+0": "हा महिना",
 	"field-month-relative+1": "पुढील महिना",
 	"dateFormatItem-Ed": "E d",
@@ -237,8 +269,10 @@ define(
 	"field-year-relative+0": "या वर्षी",
 	"field-week-relative+-1": "मागील आठवडा",
 	"field-year-relative+1": "पुढील वर्ष",
-	"dayPeriods-format-narrow-pm": "p",
+	"dayPeriods-format-narrow-pm": "PM",
+	"dateTimeFormat-short": "{1} {0}",
 	"dateFormatItem-Hms": "H-mm-ss",
+	"dateFormatItem-hms": "h:mm:ss a",
 	"field-week-relative+0": "हा आठवडा",
 	"field-week-relative+1": "पुढील आठवडा"
 }

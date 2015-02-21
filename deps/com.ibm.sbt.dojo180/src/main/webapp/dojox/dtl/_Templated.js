@@ -1,4 +1,4 @@
-define("dojox/dtl/_Templated", [
+define([
 	"dojo/_base/declare",
 	"./_base",
 	"dijit/_TemplatedMixin",

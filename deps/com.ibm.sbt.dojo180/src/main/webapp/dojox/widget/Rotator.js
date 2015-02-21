@@ -1,4 +1,4 @@
-define("dojox/widget/Rotator", [
+define([
 	"dojo/aspect",
 	"dojo/_base/declare",
 	"dojo/_base/Deferred",
@@ -137,7 +137,7 @@ define("dojox/widget/Rotator", [
 			tt[t] = lang.getObject(t);
 			if(!tt[t]){
 				warn(t, _defaultTransition);
-				tt[_t.transition = _defaultTransition] = d.getObject(_defaultTransition);
+				tt[_t.transition = _defaultTransition] = lang.getObject(_defaultTransition);
 			}
 
 			// clean up the transition params

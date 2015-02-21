@@ -1,4 +1,4 @@
-define("dojox/mobile/ProgressIndicator", [
+define([
 	"dojo/_base/config",
 	"dojo/_base/declare",
 	"dojo/_base/lang",
@@ -148,6 +148,13 @@ define("dojox/mobile/ProgressIndicator", [
 					this.imageNode = null;
 				}
 				this.spinnerNode.style.display = "";
+			}
+		},
+
+		destroy: function(){
+			this.inherited(arguments);
+			if(this === cls._instance){
+				cls._instance = null;
 			}
 		}
 	});

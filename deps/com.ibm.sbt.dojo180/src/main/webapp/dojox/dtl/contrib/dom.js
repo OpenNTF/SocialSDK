@@ -1,4 +1,4 @@
-define("dojox/dtl/contrib/dom", [
+define([
 	"dojo/_base/kernel",
 	"dojo/_base/lang",
 	"dojo/_base/connect",

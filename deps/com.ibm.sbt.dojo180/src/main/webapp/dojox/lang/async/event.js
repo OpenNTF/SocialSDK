@@ -1,5 +1,3 @@
-// wrapped by build app
-define("dojox/lang/async/event", ["dijit","dojo","dojox"], function(dijit,dojo,dojox){
 dojo.provide("dojox.lang.async.event");
 
 // Source of Deferred for events
@@ -41,5 +39,3 @@ dojo.provide("dojox.lang.async.event");
 		};
 	};
 })();
-
-});

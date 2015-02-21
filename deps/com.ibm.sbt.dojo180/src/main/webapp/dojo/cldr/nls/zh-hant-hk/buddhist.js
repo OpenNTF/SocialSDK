@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/zh-hant-hk/buddhist", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "y/M",
 	"dateFormatItem-yQ": "y年QQQ",
@@ -16,10 +16,10 @@ define(
 	],
 	"dayPeriods-format-wide-am": "上午",
 	"quarters-standAlone-abbr": [
-		"一季度",
-		"二季度",
-		"三季度",
-		"四季度"
+		"1季度",
+		"2季度",
+		"3季度",
+		"4季度"
 	],
 	"dateFormatItem-y": "y年",
 	"timeFormat-full": "ah:mm:ss [zzzz]",
@@ -53,6 +53,7 @@ define(
 	"timeFormat-medium": "ahh:mm:ss",
 	"dateFormatItem-yyMM": "yy-MM",
 	"dateFormat-medium": "y年M月d日",
+	"dayPeriods-format-narrow-pm": "下午",
 	"dateFormatItem-yyMMM": "yy年M月",
 	"dateFormatItem-yMd": "y/M/d",
 	"quarters-standAlone-wide": [
@@ -61,6 +62,7 @@ define(
 		"第三季度",
 		"第四季度"
 	],
+	"dayPeriods-format-narrow-am": "上午",
 	"months-standAlone-wide": [
 		"一月",
 		"二月",
@@ -118,6 +120,15 @@ define(
 	],
 	"dateFormatItem-yMMMd": "y年M月d日",
 	"dateFormatItem-MEd": "M-d（E）",
+	"days-standAlone-short": [
+		"日",
+		"一",
+		"二",
+		"三",
+		"四",
+		"五",
+		"六"
+	],
 	"days-standAlone-abbr": [
 		"周日",
 		"周一",
@@ -146,6 +157,15 @@ define(
 		"10月",
 		"11月",
 		"12月"
+	],
+	"days-format-short": [
+		"日",
+		"一",
+		"二",
+		"三",
+		"四",
+		"五",
+		"六"
 	],
 	"quarters-format-wide": [
 		"第1季",

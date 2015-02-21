@@ -1,4 +1,4 @@
-define("dojox/encoding/bits", [
+define([
 	"dojo/_base/lang"	// dojo.extend
 ], function(lang) {
 	var bits = lang.getObject("dojox.encoding.bits", true);

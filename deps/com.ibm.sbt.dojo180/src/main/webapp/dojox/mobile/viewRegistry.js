@@ -1,4 +1,4 @@
-define("dojox/mobile/viewRegistry", [
+define([
 	"dojo/_base/array",
 	"dojo/dom-class",
 	"dijit/registry"

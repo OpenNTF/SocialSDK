@@ -1,4 +1,4 @@
-define("dojo/html", ["./_base/kernel", "./_base/lang", "./_base/array", "./_base/declare", "./dom", "./dom-construct", "./parser"],
+define(["./_base/kernel", "./_base/lang", "./_base/array", "./_base/declare", "./dom", "./dom-construct", "./parser"],
 	function(kernel, lang, darray, declare, dom, domConstruct, parser){
 	// module:
 	//		dojo/html
@@ -30,7 +30,8 @@ define("dojo/html", ["./_base/kernel", "./_base/lang", "./_base/array", "./_base
 	/*=====
 	 dojo.html._emptyNode = function(node){
 		 // summary:
-		 //		removes all child nodes from the given node
+		 //		Removes all child nodes from the given node.   Deprecated, should use dojo/dom-constuct.empty() directly
+		 //		instead.
 		 // node: DOMNode
 		 //		the parent element
 	 };
@@ -209,7 +210,7 @@ define("dojo/html", ["./_base/kernel", "./_base/lang", "./_base/array", "./_base
 				}
 				// this is fast, but if you know its already empty or safe, you could
 				// override empty to skip this step
-				html._emptyNode(this.node);
+				domConstruct.empty(this.node);
 			},
 
 			onBegin: function(){
@@ -309,6 +310,8 @@ define("dojo/html", ["./_base/kernel", "./_base/lang", "./_base/array", "./_base
 						scope: this.parserScope
 					}).then(function(results){
 						return self.parseResults = results;
+					}, function(e){
+						self._onError('Content', e, "Error parsing in _ContentSetter#"+this.id);
 					});
 				}catch(e){
 					this._onError('Content', e, "Error parsing in _ContentSetter#"+this.id);

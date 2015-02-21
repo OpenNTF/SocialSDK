@@ -1,4 +1,4 @@
-define("dojox/editor/plugins/NormalizeIndentOutdent", [
+define([
 	"dojo",
 	"dijit",
 	"dojox",

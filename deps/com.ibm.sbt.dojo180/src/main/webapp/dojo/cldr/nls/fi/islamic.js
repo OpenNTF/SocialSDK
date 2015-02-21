@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/fi/islamic", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "L.yyyy",
 	"dateFormatItem-yyyyMMMEd": "E d. MMM y G",
@@ -136,6 +136,15 @@ define(
 	"dateFormatItem-yMMMd": "d. MMM y",
 	"dateFormatItem-yyyyQQQ": "QQQ y G",
 	"dateFormatItem-MEd": "E d.M.",
+	"days-standAlone-short": [
+		"su",
+		"ma",
+		"ti",
+		"ke",
+		"to",
+		"pe",
+		"la"
+	],
 	"dateFormatItem-hm": "h.mm a",
 	"days-standAlone-abbr": [
 		"su",
@@ -169,6 +178,15 @@ define(
 		"dhu-l-hiddža"
 	],
 	"dayPeriods-format-abbr-am": "ap.",
+	"days-format-short": [
+		"su",
+		"ma",
+		"ti",
+		"ke",
+		"to",
+		"pe",
+		"la"
+	],
 	"dateFormatItem-yyyyMMM": "LLLL y G",
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

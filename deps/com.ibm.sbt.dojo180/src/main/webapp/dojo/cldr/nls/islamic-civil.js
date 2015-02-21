@@ -1,7 +1,16 @@
-define("dojo/cldr/nls/islamic-civil", { root:
+define({ root:
 
 //begin v1.x content
 {
+	"days-standAlone-short": [
+		"1",
+		"2",
+		"3",
+		"4",
+		"5",
+		"6",
+		"7"
+	],
 	"months-format-narrow": [
 		"1",
 		"2",
@@ -27,6 +36,15 @@ define("dojo/cldr/nls/islamic-civil", { root:
 	"dateFormatItem-MMMEd": "E MMM d",
 	"eraNarrow": [
 		"AH"
+	],
+	"days-format-short": [
+		"1",
+		"2",
+		"3",
+		"4",
+		"5",
+		"6",
+		"7"
 	],
 	"dateTimeFormats-appendItem-Day-Of-Week": "{0} {1}",
 	"dateFormat-long": "y MMMM d",

@@ -1,4 +1,4 @@
-define("dijit/main", [
+define([
 	"dojo/_base/kernel"
 ], function(dojo){
 	// module:

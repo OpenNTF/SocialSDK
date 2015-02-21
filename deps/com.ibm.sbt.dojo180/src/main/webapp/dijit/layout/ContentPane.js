@@ -1,22 +1,23 @@
-define("dijit/layout/ContentPane", [
+define([
 	"dojo/_base/kernel", // kernel.deprecated
 	"dojo/_base/lang", // lang.mixin lang.delegate lang.hitch lang.isFunction lang.isObject
 	"../_Widget",
 	"../_Container",
 	"./_ContentPaneResizeMixin",
 	"dojo/string", // string.substitute
-	"dojo/html", // html._ContentSetter html._emptyNode
+	"dojo/html", // html._ContentSetter
 	"dojo/i18n!../nls/loading",
 	"dojo/_base/array", // array.forEach
 	"dojo/_base/declare", // declare
 	"dojo/_base/Deferred", // Deferred
 	"dojo/dom", // dom.byId
 	"dojo/dom-attr", // domAttr.attr
+	"dojo/dom-construct", // empty()
 	"dojo/_base/xhr", // xhr.get
 	"dojo/i18n", // i18n.getLocalization
 	"dojo/when"
 ], function(kernel, lang, _Widget, _Container, _ContentPaneResizeMixin, string, html, nlsLoading,
-	array, declare, Deferred, dom, domAttr, xhr, i18n, when){
+	array, declare, Deferred, dom, domAttr, domConstruct, xhr, i18n, when){
 
 // module:
 //		dijit/layout/ContentPane
@@ -179,11 +180,7 @@ return declare("dijit.layout.ContentPane", [_Widget, _Container, _ContentPaneRes
 
 		// remove the title attribute so it doesn't show up when hovering
 		// over a node  (TODO: remove in 2.0, no longer needed after #11490)
-		this.domNode.title = "";
-
-		if(!domAttr.get(this.domNode,"role")){
-			this.domNode.setAttribute("role", "group");
-		}
+		this.domNode.removeAttribute("title");
 	},
 
 	startup: function(){
@@ -491,7 +488,7 @@ return declare("dijit.layout.ContentPane", [_Widget, _Container, _ContentPaneRes
 
 		// And then clear away all the DOM nodes
 		if(!preserveDom){
-			html._emptyNode(this.containerNode);
+			domConstruct.empty(this.containerNode);
 		}
 
 		// Delete any state information we have about current contents

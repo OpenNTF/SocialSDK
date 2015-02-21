@@ -1,6 +1,4 @@
-require({cache:{
-'url:dijit/templates/InlineEditBox.html':"<span data-dojo-attach-point=\"editNode\" role=\"presentation\" class=\"dijitReset dijitInline dijitOffScreen\"\n\tdata-dojo-attach-event=\"onkeypress: _onKeyPress\"\n\t><span data-dojo-attach-point=\"editorPlaceholder\"></span\n\t><span data-dojo-attach-point=\"buttonContainer\"\n\t\t><button data-dojo-type=\"dijit/form/Button\" data-dojo-props=\"label: '${buttonSave}', 'class': 'saveButton'\"\n\t\t\tdata-dojo-attach-point=\"saveButton\" data-dojo-attach-event=\"onClick:save\"></button\n\t\t><button data-dojo-type=\"dijit/form/Button\"  data-dojo-props=\"label: '${buttonCancel}', 'class': 'cancelButton'\"\n\t\t\tdata-dojo-attach-point=\"cancelButton\" data-dojo-attach-event=\"onClick:cancel\"></button\n\t></span\n></span>\n"}});
-define("dijit/InlineEditBox", [
+define([
 	"require",
 	"dojo/_base/array", // array.forEach
 	"dojo/_base/declare", // declare
@@ -97,7 +95,8 @@ define("dijit/InlineEditBox", [
 				lang: this.lang,
 				textDir: this.textDir
 			});
-			editorParams[ "displayedValue" in Cls.prototype ? "displayedValue" : "value"] = this.value;
+			// set the value in onLoadDeferred instead so the widget has time to finish initializing
+			//editorParams[("displayedValue" in Cls.prototype || "_setDisplayedValueAttr" in Cls.prototype) ? "displayedValue" : "value"] = this.value;
 			this.editWidget = new Cls(editorParams, this.editorPlaceholder);
 
 			if(this.inlineEditBox.autoSave){
@@ -151,7 +150,7 @@ define("dijit/InlineEditBox", [
 			// summary:
 			//		Return the [display] value of the edit widget
 			var ew = this.editWidget;
-			return String(ew.get("displayedValue" in ew ? "displayedValue" : "value"));
+			return String(ew.get(("displayedValue" in ew || "_getDisplayedValueAttr" in ew) ? "displayedValue" : "value"));
 		},
 
 		_onKeyPress: function(e){
@@ -459,10 +458,7 @@ define("dijit/InlineEditBox", [
 			// save some display node values that can be restored later
 			this._savedTabIndex = domAttr.get(this.displayNode, "tabIndex") || "0";
 
-			if(this.wrapperWidget){
-				var ew = this.wrapperWidget.editWidget;
-				ew.set("displayedValue" in ew ? "displayedValue" : "value", this.value);
-			}else{
+			if(!this.wrapperWidget){
 				// Placeholder for edit widget
 				// Put place holder (and eventually editWidget) before the display node so that it's positioned correctly
 				// when Calendar dropdown appears, which happens automatically on focus.
@@ -508,8 +504,14 @@ define("dijit/InlineEditBox", [
 			// or immediately if there is no onLoadDeferred Deferred,
 			// replace the display widget with edit widget, leaving them both displayed for a brief time so that
 			// focus can be shifted without incident.
-			when(ww.editWidget.onLoadDeferred, lang.hitch(ww, function(){
+			var ew = ww.editWidget;
+			var self = this;
+			when(ew.onLoadDeferred, lang.hitch(ww, function(){
+				// set value again in case the edit widget's value is just now valid
+				ew.set(("displayedValue" in ew || "_setDisplayedValueAttr" in ew) ? "displayedValue" : "value", self.value);
 				this.defer(function(){ // defer needed so that the change of focus doesn't happen on mousedown which also sets focus
+					// the saveButton should start out disabled in most cases but the above set could have fired onChange
+					ww.saveButton.set("disabled", "intermediateChanges" in ew);
 					this.focus(); // both nodes are showing, so we can switch focus safely
 					this._resetValue = this.getValue();
 				});

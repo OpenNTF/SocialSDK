@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/en-dsrt/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"field-dayperiod": "𐐈𐐣/𐐑𐐣",
 	"dayPeriods-format-wide-pm": "𐐑𐐣",
@@ -151,6 +151,15 @@ define(
 		"𐐤",
 		"𐐔"
 	],
+	"days-standAlone-short": [
+		"𐐝𐐲𐑌",
+		"𐐣𐐲𐑌",
+		"𐐓𐐭𐑆",
+		"𐐎𐐯𐑌",
+		"𐐛𐐲𐑉",
+		"𐐙𐑉𐐴",
+		"𐐝𐐰𐐻"
+	],
 	"days-standAlone-abbr": [
 		"𐐝𐐲𐑌",
 		"𐐣𐐲𐑌",
@@ -173,6 +182,15 @@ define(
 		"𐐉𐐿𐐻𐐬𐐺𐐲𐑉",
 		"𐐤𐐬𐑂𐐯𐑋𐐺𐐲𐑉",
 		"𐐔𐐨𐑅𐐯𐑋𐐺𐐲𐑉"
+	],
+	"days-format-short": [
+		"𐐝𐐲𐑌",
+		"𐐣𐐲𐑌",
+		"𐐓𐐭𐑆",
+		"𐐎𐐯𐑌",
+		"𐐛𐐲𐑉",
+		"𐐙𐑉𐐴",
+		"𐐝𐐰𐐻"
 	],
 	"quarters-format-wide": [
 		"1𐑅𐐻 𐐿𐐶𐐪𐑉𐐻𐐲𐑉",

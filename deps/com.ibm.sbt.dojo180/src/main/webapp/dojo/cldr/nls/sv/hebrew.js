@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/sv/hebrew", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "yyyy-MM",
 	"dateFormatItem-yQ": "yyyy Q",
@@ -47,6 +47,9 @@ define(
 		"T",
 		"F",
 		"L"
+	],
+	"eraAbbr": [
+		"AM"
 	],
 	"dateFormat-long": "d MMMM y",
 	"dateFormat-medium": "d MMM y",
@@ -116,6 +119,15 @@ define(
 	],
 	"dateFormatItem-yMMMd": "d MMM y",
 	"dateFormatItem-MEd": "E d/M",
+	"days-standAlone-short": [
+		"sö",
+		"må",
+		"ti",
+		"on",
+		"to",
+		"fr",
+		"lö"
+	],
 	"days-standAlone-abbr": [
 		"sön",
 		"mån",
@@ -146,6 +158,15 @@ define(
 		"elúl"
 	],
 	"dayPeriods-format-abbr-am": "FM",
+	"days-format-short": [
+		"sö",
+		"må",
+		"ti",
+		"on",
+		"to",
+		"fr",
+		"lö"
+	],
 	"quarters-format-wide": [
 		"1:a kvartalet",
 		"2:a kvartalet",

@@ -1,6 +1,21 @@
 define(
-"dojo/cldr/nls/ja/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"日",
+		"月",
+		"火",
+		"水",
+		"木",
+		"金",
+		"土"
+	],
+	"quarters-standAlone-narrow": [
+		"1",
+		"2",
+		"3",
+		"4"
+	],
 	"field-weekday": "曜日",
 	"dateFormatItem-yQQQ": "yQQQ",
 	"dateFormatItem-yMEd": "y/M/d(E)",
@@ -8,6 +23,15 @@ define(
 	"eraNarrow": [
 		"BC",
 		"AD"
+	],
+	"days-format-short": [
+		"日",
+		"月",
+		"火",
+		"水",
+		"木",
+		"金",
+		"土"
 	],
 	"dateFormat-long": "y年M月d日",
 	"months-format-wide": [
@@ -94,10 +118,10 @@ define(
 		"12月"
 	],
 	"quarters-format-abbr": [
-		"Q1",
-		"Q2",
-		"Q3",
-		"Q4"
+		"1Q",
+		"2Q",
+		"3Q",
+		"4Q"
 	],
 	"quarters-standAlone-wide": [
 		"第1四半期",
@@ -115,6 +139,7 @@ define(
 		"金曜日",
 		"土曜日"
 	],
+	"dateFormatItem-yMMMEEEEd": "y年M月d日EEEE",
 	"dateFormatItem-yyMMM": "y年M月",
 	"timeFormat-medium": "H:mm:ss",
 	"dateFormatItem-Hm": "H:mm",
@@ -152,6 +177,7 @@ define(
 	"dateTimeFormat-long": "{1} {0}",
 	"field-day-relative+-2": "一昨日",
 	"dateFormatItem-MMMd": "M月d日",
+	"dateFormatItem-EEEEd": "d日EEEE",
 	"dateFormatItem-MEd": "M/d(E)",
 	"dateTimeFormat-full": "{1} {0}",
 	"field-day": "日",
@@ -208,6 +234,7 @@ define(
 		"金",
 		"土"
 	],
+	"dateFormatItem-MMMEEEEd": "M月d日EEEE",
 	"field-month": "月",
 	"days-standAlone-narrow": [
 		"日",

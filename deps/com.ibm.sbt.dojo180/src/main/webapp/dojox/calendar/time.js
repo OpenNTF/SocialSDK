@@ -1,4 +1,4 @@
-define("dojox/calendar/time", ["dojo/_base/lang", "dojo/date", "dojo/cldr/supplemental"], function(lang, date, cldr) {
+define(["dojo/_base/lang", "dojo/date", "dojo/cldr/supplemental", "dojo/date/stamp"], function(lang, date, cldr, stamp) {
 
 // summary: Advanced date manipulation utilities.
 
@@ -12,17 +12,32 @@ time.newDate = function(obj, dateClassObj){
 	//		This object can have several values:
 	//		- the time in milliseconds since gregorian epoch.
 	//		- a Date instance
+	//		- a String instance that can be decoded by the dojo/date/stamp class.
 	// dateClassObj: Object?
 	//		The Date class used, by default the native Date.
+
 	// returns: Date
 	dateClassObj = dateClassObj || Date;  
+	var d;
 	
 	if(typeof(obj) == "number"){
-		return new dateClassObj(time);
+		return new dateClassObj(obj);
 	}else if(obj.getTime){
 		return new dateClassObj(obj.getTime());
-	}else{
-		return new dateClassObj(obj);
+	}else if(obj.toGregorian){
+		d = obj.toGregorian();
+		if(dateClassObj !== Date){
+			d = new dateClassObj(d.getTime());
+		}
+		return d;
+	}else if(typeof obj == "string"){
+		d = stamp.fromISOString(obj);
+		if(d === null){
+			d = new dateClassObj(obj); // kept for backward compat, will throw error in dojo 1.9
+		}else if(dateClassObj !== Date){ // from Date to dateClassObj
+			d = new dateClassObj(d.getTime());
+		}
+		return d;
 	}
 	
 };

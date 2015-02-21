@@ -1,4 +1,4 @@
-define("dojo/_base/unload", ["./kernel", "./lang", "../on"], function(dojo, lang, on){
+define(["./kernel", "./lang", "../on"], function(dojo, lang, on){
 
 // module:
 //		dojo/unload

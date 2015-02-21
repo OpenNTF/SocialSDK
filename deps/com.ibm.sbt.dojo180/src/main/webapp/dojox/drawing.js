@@ -1,4 +1,4 @@
-define("dojox/drawing", ['./drawing/_base'],function(){
+define(['./drawing/_base'],function(){
 	/*=====
 	 return {
 	 // summary:

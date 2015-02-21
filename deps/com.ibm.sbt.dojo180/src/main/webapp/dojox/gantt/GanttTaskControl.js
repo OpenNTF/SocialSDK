@@ -1,4 +1,4 @@
-define("dojox/gantt/GanttTaskControl", [
+define([
     "dijit/focus",
     "dojo/_base/declare",
 	"dojo/_base/array",

@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/ro/islamic", //begin v1.x content
+//begin v1.x content
 {
 	"quarters-standAlone-wide": [
 		"trimestrul I",
@@ -32,6 +32,15 @@ define(
 		"3",
 		"T4"
 	],
+	"days-format-short": [
+		"Du",
+		"Lu",
+		"Ma",
+		"Mi",
+		"Jo",
+		"Vi",
+		"Sâ"
+	],
 	"dateFormatItem-Md": "dd.MM",
 	"days-standAlone-narrow": [
 		"D",
@@ -44,6 +53,15 @@ define(
 	],
 	"dateTimeFormat-long": "{1}, {0}",
 	"dateFormatItem-yQQQ": "QQQ y",
+	"days-standAlone-short": [
+		"Du",
+		"Lu",
+		"Ma",
+		"Mi",
+		"Jo",
+		"Vi",
+		"Sâ"
+	],
 	"quarters-standAlone-narrow": [
 		"T1",
 		"T2",
@@ -53,7 +71,6 @@ define(
 	"dateFormat-long": "d MMMM y",
 	"dateFormat-short": "dd.MM.yyyy",
 	"dateFormatItem-yMMMEd": "E, d MMM y",
-	"dateTimeFormat-short": "{1}, {0}",
 	"days-standAlone-wide": [
 		"duminică",
 		"luni",
@@ -63,6 +80,7 @@ define(
 		"vineri",
 		"sâmbătă"
 	],
+	"dateTimeFormat-short": "{1}, {0}",
 	"dateTimeFormat-full": "{1}, {0}",
 	"days-format-narrow": [
 		"D",

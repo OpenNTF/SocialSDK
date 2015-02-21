@@ -1,4 +1,4 @@
-define("dojox/drawing/plugins/_Plugin", ["dojo", "../util/oo"],
+define(["dojo", "../util/oo"],
 function(dojo, oo){
 
 //dojox.drawing.plugins._Plugin = 

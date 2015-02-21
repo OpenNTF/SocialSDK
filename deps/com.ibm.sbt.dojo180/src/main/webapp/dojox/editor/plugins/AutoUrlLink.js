@@ -1,4 +1,4 @@
-define("dojox/editor/plugins/AutoUrlLink", [
+define([
 	"dojo",
 	"dijit",
 	"dojox",

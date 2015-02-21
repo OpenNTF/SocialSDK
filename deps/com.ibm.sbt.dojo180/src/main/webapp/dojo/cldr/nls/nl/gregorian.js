@@ -1,6 +1,15 @@
 define(
-"dojo/cldr/nls/nl/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"zo",
+		"ma",
+		"di",
+		"wo",
+		"do",
+		"vr",
+		"za"
+	],
 	"months-format-narrow": [
 		"J",
 		"F",
@@ -15,14 +24,29 @@ define(
 		"N",
 		"D"
 	],
+	"quarters-standAlone-narrow": [
+		"1",
+		"2",
+		"3",
+		"4"
+	],
 	"field-weekday": "Dag van de week",
 	"dateFormatItem-yyQQQQ": "QQQQ yy",
 	"dateFormatItem-yQQQ": "QQQ y",
 	"dateFormatItem-yMEd": "E d-M-y",
 	"dateFormatItem-MMMEd": "E d MMM",
 	"eraNarrow": [
-		"v. Chr.",
-		"n. Chr."
+		"v.Chr.",
+		"n.Chr."
+	],
+	"days-format-short": [
+		"zo",
+		"ma",
+		"di",
+		"wo",
+		"do",
+		"vr",
+		"za"
 	],
 	"dateFormat-long": "d MMMM y",
 	"months-format-wide": [
@@ -39,6 +63,7 @@ define(
 		"november",
 		"december"
 	],
+	"dateTimeFormat-medium": "{1} {0}",
 	"dayPeriods-format-wide-pm": "PM",
 	"dateFormat-full": "EEEE d MMMM y",
 	"dateFormatItem-Md": "d-M",
@@ -93,6 +118,7 @@ define(
 	"field-day-relative+0": "Vandaag",
 	"field-day-relative+1": "Morgen",
 	"field-day-relative+2": "Overmorgen",
+	"dateFormatItem-H": "HH",
 	"months-standAlone-abbr": [
 		"jan",
 		"feb",
@@ -141,8 +167,8 @@ define(
 		"K4"
 	],
 	"eraAbbr": [
-		"v. Chr.",
-		"n. Chr."
+		"v.Chr.",
+		"n.Chr."
 	],
 	"field-minute": "Minuut",
 	"field-dayperiod": "AM/PM",
@@ -164,9 +190,12 @@ define(
 		"4"
 	],
 	"field-day-relative+-1": "Gisteren",
+	"dateFormatItem-h": "h a",
+	"dateTimeFormat-long": "{1} {0}",
 	"field-day-relative+-2": "Eergisteren",
 	"dateFormatItem-MMMd": "d-MMM",
 	"dateFormatItem-MEd": "E d-M",
+	"dateTimeFormat-full": "{1} {0}",
 	"field-day": "Dag",
 	"days-format-wide": [
 		"zondag",
@@ -196,6 +225,7 @@ define(
 	"field-year-relative+-1": "Vorig jaar",
 	"field-month-relative+-1": "Vorige maand",
 	"dateFormatItem-yyMM": "MM-yy",
+	"dateFormatItem-hm": "h:mm a",
 	"days-format-abbr": [
 		"zo",
 		"ma",
@@ -219,7 +249,6 @@ define(
 		"V",
 		"Z"
 	],
-	"field-month": "Maand",
 	"days-standAlone-narrow": [
 		"Z",
 		"M",
@@ -230,6 +259,7 @@ define(
 		"Z"
 	],
 	"dateFormatItem-MMM": "LLL",
+	"field-month": "Maand",
 	"dayPeriods-format-wide-am": "AM",
 	"dateFormat-short": "dd-MM-yy",
 	"dateFormatItem-MMd": "d-MM",
@@ -244,6 +274,9 @@ define(
 	"field-year-relative+0": "Dit jaar",
 	"field-week-relative+-1": "Vorige week",
 	"field-year-relative+1": "Volgend jaar",
+	"dateTimeFormat-short": "{1} {0}",
+	"dateFormatItem-Hms": "HH:mm:ss",
+	"dateFormatItem-hms": "h:mm:ss a",
 	"field-week-relative+0": "Deze week",
 	"field-week-relative+1": "Volgende week"
 }

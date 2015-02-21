@@ -1,4 +1,4 @@
-define("dijit/form/_RadioButtonMixin", [
+define([
 	"dojo/_base/array", // array.forEach
 	"dojo/_base/declare", // declare
 	"dojo/dom-attr", // domAttr.set
@@ -50,7 +50,7 @@ define("dijit/form/_RadioButtonMixin", [
 		},
 
 		_getSubmitValue: function(/*String*/ value){
-			return value === null ? "on" : value;
+			return value == null ? "on" : value;
 		},
 
 		_onClick: function(/*Event*/ e){

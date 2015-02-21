@@ -1,4 +1,4 @@
-define("dijit/_TemplatedMixin", [
+define([
 	"dojo/_base/lang", // lang.getObject
 	"dojo/touch",
 	"./_WidgetBase",

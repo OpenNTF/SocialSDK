@@ -1,4 +1,4 @@
-define("dojox/mobile/IconItem", [
+define([
 	"dojo/_base/declare",
 	"dojo/_base/event",
 	"dojo/_base/lang",
@@ -134,7 +134,11 @@ define("dojox/mobile/IconItem", [
 			this.inherited(arguments);
 			if(!this._isOnLine){
 				this._isOnLine = true;
-				this.set("icon", this.icon); // retry applying the attribute
+				// retry applying the attribute for which the custom setter delays the actual 
+				// work until _isOnLine is true. 
+				this.set("icon", this._pendingIcon !== undefined ? this._pendingIcon : this.icon);
+				// Not needed anymore (this code executes only once per life cycle):
+				delete this._pendingIcon; 
 			}
 			if(!this.icon && p.defaultIcon){
 				this.set("icon", p.defaultIcon);
@@ -388,7 +392,7 @@ define("dojox/mobile/IconItem", [
 			// tags:
 			//		private
 			this.inherited(arguments);
-			domStyle.set(this.iconNode, "opacity",
+			this.iconNode && domStyle.set(this.iconNode, "opacity",
 						 selected ? this.getParent().pressedIconOpacity : 1);
 		}
 	});

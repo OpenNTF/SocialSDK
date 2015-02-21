@@ -1,4 +1,4 @@
-define("dijit/form/CurrencyTextBox", [
+define([
 	"dojo/currency", // currency._mixInDefaults currency.format currency.parse currency.regexp
 	"dojo/_base/declare", // declare
 	"dojo/_base/lang", // lang.hitch

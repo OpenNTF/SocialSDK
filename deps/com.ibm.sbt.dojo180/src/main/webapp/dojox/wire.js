@@ -1,4 +1,4 @@
-define("dojox/wire", ['./wire/_base'],function(){
+define(['./wire/_base'],function(){
 	/*=====
 	 return {
 	 // summary:

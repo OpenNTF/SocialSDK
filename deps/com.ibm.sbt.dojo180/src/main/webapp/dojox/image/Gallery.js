@@ -1,5 +1,3 @@
-// wrapped by build app
-define("dojox/image/Gallery", ["dijit","dojo","dojox","dojo/require!dojo/fx,dijit/_Widget,dijit/_Templated,dojox/image/ThumbnailPicker,dojox/image/SlideShow"], function(dijit,dojo,dojox){
 dojo.provide("dojox.image.Gallery");
 dojo.experimental("dojox.image.Gallery");
 //
@@ -63,7 +61,7 @@ dojo.declare("dojox.image.Gallery",
 	//		Time, in seconds, between image changes in the slide show.
 	slideshowInterval: 3,
 	
-	templateString: dojo.cache("dojox.image", "resources/Gallery.html", "<div dojoAttachPoint=\"outerNode\" class=\"imageGalleryWrapper\">\n\t<div dojoAttachPoint=\"thumbPickerNode\"></div>\n\t<div dojoAttachPoint=\"slideShowNode\"></div>\n</div>"),
+	templateString: dojo.cache("dojox.image", "resources/Gallery.html"),
 
 	postCreate: function(){
 		// summary:
@@ -188,6 +186,4 @@ dojo.declare("dojox.image.Gallery",
 			dojo.style(this.thumbPicker.outerNode, "marginLeft", (diff * -1) + "px");
 		}
 	}
-});
-
 });

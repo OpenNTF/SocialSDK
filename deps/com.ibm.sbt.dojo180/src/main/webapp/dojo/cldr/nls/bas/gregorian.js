@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/bas/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"field-dayperiod": "njǎmùha",
@@ -172,6 +172,15 @@ define(
 		"m",
 		"l"
 	],
+	"days-standAlone-short": [
+		"nɔy",
+		"nja",
+		"uum",
+		"ŋge",
+		"mbɔ",
+		"kɔɔ",
+		"jon"
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"nɔy",
@@ -200,6 +209,15 @@ define(
 		"Bìòôm",
 		"Màyɛsèp",
 		"Lìbuy li ńyèe"
+	],
+	"days-format-short": [
+		"nɔy",
+		"nja",
+		"uum",
+		"ŋge",
+		"mbɔ",
+		"kɔɔ",
+		"jon"
 	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

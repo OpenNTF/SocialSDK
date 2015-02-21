@@ -1,5 +1,5 @@
 // AMD-ID "dojox/math/matrix"
-define("dojox/math/matrix", ["dojo", "dojox"], function(dojo, dojox) {
+define(["dojo", "dojox"], function(dojo, dojox) {
 dojo.getObject("math.matrix", true, dojox);
 
 dojo.mixin(dojox.math.matrix, {

@@ -1,4 +1,4 @@
-define("dojox/mobile/ExpandingTextArea", [
+define([
 	"dojo/_base/declare",
 	"dijit/form/_ExpandingTextAreaMixin",
 	"./TextArea"

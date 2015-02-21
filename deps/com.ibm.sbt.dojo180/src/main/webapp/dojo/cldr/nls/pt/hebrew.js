@@ -1,12 +1,26 @@
 define(
-"dojo/cldr/nls/pt/hebrew", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "MM/yyyy",
 	"dateFormatItem-yQ": "yyyy Q",
 	"months-standAlone-abbr-leap": "Adar II",
 	"dateFormatItem-MMMEd": "E, d 'de' MMM",
+	"days-standAlone-wide": [
+		"domingo",
+		"segunda-feira",
+		"terça-feira",
+		"quarta-feira",
+		"quinta-feira",
+		"sexta-feira",
+		"sábado"
+	],
 	"months-format-abbr-leap": "Adar II",
-	"timeFormat-full": "HH'h'mm'min'ss's' zzzz",
+	"quarters-standAlone-abbr": [
+		"T1",
+		"T2",
+		"T3",
+		"T4"
+	],
 	"months-standAlone-abbr": [
 		"Tishri",
 		"Heshvan",
@@ -34,7 +48,6 @@ define(
 		"S"
 	],
 	"dateFormat-long": "d 'de' MMMM 'de' y",
-	"dateFormatItem-Hm": "HH'h'mm",
 	"dateFormat-medium": "dd/MM/yyyy",
 	"dayPeriods-format-narrow-pm": "p",
 	"dateFormatItem-yMd": "dd/MM/yyyy",
@@ -44,7 +57,6 @@ define(
 		"3º trimestre",
 		"4º trimestre"
 	],
-	"dateFormatItem-ms": "mm'min'ss's'",
 	"dayPeriods-format-narrow-am": "a",
 	"months-standAlone-wide": [
 		"Tishri",
@@ -62,7 +74,6 @@ define(
 		"Elul"
 	],
 	"dateFormatItem-MMMd": "d 'de' MMM",
-	"timeFormat-long": "HH'h'mm'min'ss's' z",
 	"months-format-abbr": [
 		"Tishri",
 		"Heshvan",
@@ -93,8 +104,35 @@ define(
 		"sex",
 		"sáb"
 	],
+	"days-format-narrow": [
+		"D",
+		"S",
+		"T",
+		"Q",
+		"Q",
+		"S",
+		"S"
+	],
 	"dateFormatItem-yMMMd": "d 'de' MMM 'de' y",
 	"dateFormatItem-MEd": "E, dd/MM",
+	"days-standAlone-short": [
+		"dom",
+		"seg",
+		"ter",
+		"qua",
+		"qui",
+		"sex",
+		"sáb"
+	],
+	"days-standAlone-abbr": [
+		"dom",
+		"seg",
+		"ter",
+		"qua",
+		"qui",
+		"sex",
+		"sáb"
+	],
 	"months-standAlone-wide-leap": "Adar II",
 	"dateFormat-short": "dd/MM/yy",
 	"dateFormatItem-yMMMEd": "E, d 'de' MMM 'de' y",
@@ -115,6 +153,15 @@ define(
 		"Tamuz",
 		"Av",
 		"Elul"
+	],
+	"days-format-short": [
+		"dom",
+		"seg",
+		"ter",
+		"qua",
+		"qui",
+		"sex",
+		"sáb"
 	],
 	"quarters-format-wide": [
 		"1º trimestre",

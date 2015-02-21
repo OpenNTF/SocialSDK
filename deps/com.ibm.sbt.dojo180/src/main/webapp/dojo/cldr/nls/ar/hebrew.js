@@ -1,40 +1,25 @@
 define(
-"dojo/cldr/nls/ar/hebrew", //begin v1.x content
+//begin v1.x content
 {
-	"dateFormatItem-yMd": "d/M/yyyy",
-	"dateFormat-medium": "dd/MM/yyyy",
-	"dateFormatItem-MMMEd": "E d MMM",
-	"dateFormatItem-MEd": "E، d/M",
-	"dateFormatItem-yMEd": "E، d/M/yyyy",
-	"dateFormatItem-yMMMd": "d MMM، y",
-	"timeFormat-full": "zzzz h:mm:ss a",
-	"dateFormatItem-Md": "d/M",
-	"months-standAlone-wide": [
-		"تشري",
-		"مرحشوان",
-		"كيسلو",
-		"طيفت",
-		"شباط",
-		"آذار الأول",
-		"آذار",
-		"نيسان",
-		"أيار",
-		"سيفان",
-		"تموز",
-		"آب",
-		"أيلول"
-	],
-	"months-format-wide-leap": "آذار الثاني",
-	"days-standAlone-narrow": [
-		"ح",
-		"ن",
-		"ث",
-		"ر",
-		"خ",
-		"ج",
-		"س"
-	],
+	"dateFormatItem-yM": "M/yyyy",
+	"dateFormatItem-yQ": "Q yyyy",
 	"dayPeriods-format-wide-pm": "م",
+	"eraNames": [
+		"ص"
+	],
+	"dateFormatItem-MMMEd": "E، d MMM",
+	"dateFormatItem-yQQQ": "QQQ y",
+	"days-standAlone-wide": [
+		"الأحد",
+		"الاثنين",
+		"الثلاثاء",
+		"الأربعاء",
+		"الخميس",
+		"الجمعة",
+		"السبت"
+	],
+	"dayPeriods-format-wide-am": "ص",
+	"timeFormat-full": "h:mm:ss a zzzz",
 	"months-standAlone-abbr": [
 		"تشري",
 		"مرحشوان",
@@ -50,18 +35,31 @@ define(
 		"آب",
 		"أيلول"
 	],
-	"dayPeriods-format-wide-am": "ص",
+	"dateFormatItem-Ed": "E، d",
+	"dateFormatItem-yMMM": "MMM y",
+	"days-standAlone-narrow": [
+		"ح",
+		"ن",
+		"ث",
+		"ر",
+		"خ",
+		"ج",
+		"س"
+	],
+	"eraAbbr": [
+		"ص"
+	],
+	"dateFormat-long": "d MMMM، y",
+	"timeFormat-medium": "h:mm:ss a",
+	"dateFormat-medium": "dd/MM/yyyy",
+	"dateFormatItem-yMd": "d/M/yyyy",
 	"quarters-standAlone-narrow": [
 		"١",
 		"٢",
 		"٣",
 		"٤"
 	],
-	"timeFormat-medium": "h:mm:ss a",
-	"dateFormat-long": "d MMMM، y",
-	"dateFormat-short": "d/M/yyyy",
-	"dateFormatItem-yMMMEd": "E، d MMM، y",
-	"months-format-wide": [
+	"months-standAlone-wide": [
 		"تشري",
 		"مرحشوان",
 		"كيسلو",
@@ -76,12 +74,14 @@ define(
 		"آب",
 		"أيلول"
 	],
-	"days-standAlone-wide": [
-		"الأحد",
-		"الاثنين"
+	"dateFormatItem-MMMd": "d MMM",
+	"quarters-format-narrow": [
+		"١",
+		"٢",
+		"٣",
+		"٤"
 	],
-	"dateFormatItem-yM": "M/yyyy",
-	"timeFormat-short": "h:mm a",
+	"timeFormat-long": "h:mm:ss a z",
 	"months-format-abbr": [
 		"تشري",
 		"مرحشوان",
@@ -97,35 +97,7 @@ define(
 		"آب",
 		"أيلول"
 	],
-	"days-standAlone-abbr": [
-		"الأحد",
-		"الاثنين",
-		"الثلاثاء",
-		"الأربعاء",
-		"الخميس",
-		"الجمعة",
-		"السبت"
-	],
-	"days-format-wide": [
-		"الأحد",
-		"الاثنين",
-		"الثلاثاء",
-		"الأربعاء",
-		"الخميس",
-		"الجمعة",
-		"السبت"
-	],
-	"timeFormat-long": "z h:mm:ss a",
-	"dateFormatItem-yQ": "yyyy Q",
-	"dateFormatItem-yMMM": "MMM y",
-	"quarters-format-wide": [
-		"الربع الأول",
-		"الربع الثاني",
-		"الربع الثالث",
-		"الربع الرابع"
-	],
-	"dateFormat-full": "EEEE، d MMMM، y",
-	"dateFormatItem-MMMd": "d MMM",
+	"timeFormat-short": "h:mm a",
 	"days-format-abbr": [
 		"الأحد",
 		"الاثنين",
@@ -135,7 +107,74 @@ define(
 		"الجمعة",
 		"السبت"
 	],
-	"dateFormatItem-Ed": "E، d"
+	"dateFormatItem-yMMMd": "d MMM، y",
+	"dateFormatItem-MEd": "E، d/M",
+	"days-standAlone-short": [
+		"الأحد",
+		"الاثنين",
+		"الثلاثاء",
+		"الأربعاء",
+		"الخميس",
+		"الجمعة",
+		"السبت"
+	],
+	"days-standAlone-abbr": [
+		"الأحد",
+		"الاثنين",
+		"الثلاثاء",
+		"الأربعاء",
+		"الخميس",
+		"الجمعة",
+		"السبت"
+	],
+	"dateFormat-short": "d/M/yyyy",
+	"dateFormatItem-yMMMEd": "E، d MMM، y",
+	"dateFormat-full": "EEEE، d MMMM، y",
+	"dateFormatItem-Md": "d/M",
+	"dateFormatItem-yMEd": "E، d/M/yyyy",
+	"months-format-wide": [
+		"تشري",
+		"مرحشوان",
+		"كيسلو",
+		"طيفت",
+		"شباط",
+		"آذار الأول",
+		"آذار",
+		"نيسان",
+		"أيار",
+		"سيفان",
+		"تموز",
+		"آب",
+		"أيلول"
+	],
+	"days-format-short": [
+		"الأحد",
+		"الاثنين",
+		"الثلاثاء",
+		"الأربعاء",
+		"الخميس",
+		"الجمعة",
+		"السبت"
+	],
+	"quarters-format-wide": [
+		"الربع الأول",
+		"الربع الثاني",
+		"الربع الثالث",
+		"الربع الرابع"
+	],
+	"months-format-wide-leap": "آذار الثاني",
+	"eraNarrow": [
+		"ص"
+	],
+	"days-format-wide": [
+		"الأحد",
+		"الاثنين",
+		"الثلاثاء",
+		"الأربعاء",
+		"الخميس",
+		"الجمعة",
+		"السبت"
+	]
 }
 //end v1.x content
 );

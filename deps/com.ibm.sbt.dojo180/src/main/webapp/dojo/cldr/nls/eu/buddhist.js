@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/eu/buddhist", //begin v1.x content
+//begin v1.x content
 {
 	"quarters-format-abbr": [
 		"1Hh",
@@ -7,7 +7,7 @@ define(
 		"3Hh",
 		"4Hh"
 	],
-	"dateFormatItem-yMd": "M/d/y",
+	"dateFormatItem-yMd": "y-M-d",
 	"dateFormat-medium": "y MMM d",
 	"dateFormatItem-MMMEd": "E, MMM d",
 	"dateFormatItem-MEd": "E, M/d",
@@ -17,6 +17,15 @@ define(
 	],
 	"dateFormatItem-y": "y",
 	"dateFormatItem-yMMMd": "MMM d, y",
+	"days-format-short": [
+		"ig.",
+		"al.",
+		"ar.",
+		"az.",
+		"og.",
+		"or.",
+		"lr."
+	],
 	"dateFormatItem-Md": "M/d",
 	"months-standAlone-narrow": [
 		"U",
@@ -45,7 +54,16 @@ define(
 		"I"
 	],
 	"dateFormatItem-yQQQ": "QQQ y",
-	"dateFormat-long": "y'eko' MMM'ren' dd'a'",
+	"days-standAlone-short": [
+		"ig.",
+		"al.",
+		"ar.",
+		"az.",
+		"og.",
+		"or.",
+		"lr."
+	],
+	"dateFormat-long": "y MMMM d",
 	"dateFormat-short": "yyyy-MM-dd",
 	"dateFormatItem-yMMMEd": "E, MMM d, y",
 	"months-format-wide": [
@@ -71,7 +89,7 @@ define(
 		"O",
 		"I"
 	],
-	"dateFormatItem-yM": "M/y",
+	"dateFormatItem-yM": "y-M",
 	"dayPeriods-format-narrow-pm": "p",
 	"months-format-abbr": [
 		"urt",
@@ -108,7 +126,7 @@ define(
 		"3. hiruhilekoa",
 		"4. hiruhilekoa"
 	],
-	"dateFormat-full": "EEEE, y'eko' MMMM'ren' dd'a'",
+	"dateFormat-full": "EEEE, y MMMM dd",
 	"days-format-abbr": [
 		"ig",
 		"al",

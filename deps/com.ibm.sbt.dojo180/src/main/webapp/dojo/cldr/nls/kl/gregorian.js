@@ -1,6 +1,24 @@
 define(
-"dojo/cldr/nls/kl/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"sab",
+		"ata",
+		"mar",
+		"pin",
+		"sis",
+		"tal",
+		"arf"
+	],
+	"days-format-short": [
+		"sab",
+		"ata",
+		"mar",
+		"pin",
+		"sis",
+		"tal",
+		"arf"
+	],
 	"months-standAlone-abbr": [
 		"jan",
 		"feb",
@@ -50,7 +68,6 @@ define(
 		"arf"
 	],
 	"field-day-relative+0": "ullumi",
-	"field-day-relative+1": "aqagu",
 	"months-standAlone-wide": [
 		"januari",
 		"februari",
@@ -65,6 +82,7 @@ define(
 		"novemberi",
 		"decemberi"
 	],
+	"field-day-relative+1": "aqagu",
 	"field-day-relative+2": "aqaguagu",
 	"days-standAlone-wide": [
 		"sabaat",

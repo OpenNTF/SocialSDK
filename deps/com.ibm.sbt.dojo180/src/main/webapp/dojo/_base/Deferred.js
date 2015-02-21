@@ -1,4 +1,4 @@
-define("dojo/_base/Deferred", [
+define([
 	"./kernel",
 	"../Deferred",
 	"../promise/Promise",

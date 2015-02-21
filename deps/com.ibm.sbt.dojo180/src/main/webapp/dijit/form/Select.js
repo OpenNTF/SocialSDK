@@ -1,6 +1,4 @@
-require({cache:{
-'url:dijit/form/templates/Select.html':"<table class=\"dijit dijitReset dijitInline dijitLeft\"\n\tdata-dojo-attach-point=\"_buttonNode,tableNode,focusNode\" cellspacing='0' cellpadding='0'\n\trole=\"listbox\" aria-haspopup=\"true\"\n\t><tbody role=\"presentation\"><tr role=\"presentation\"\n\t\t><td class=\"dijitReset dijitStretch dijitButtonContents\" role=\"presentation\"\n\t\t\t><div class=\"dijitReset dijitInputField dijitButtonText\"  data-dojo-attach-point=\"containerNode,_popupStateNode\" role=\"presentation\"></div\n\t\t\t><div class=\"dijitReset dijitValidationContainer\"\n\t\t\t\t><input class=\"dijitReset dijitInputField dijitValidationIcon dijitValidationInner\" value=\"&#935; \" type=\"text\" tabIndex=\"-1\" readonly=\"readonly\" role=\"presentation\"\n\t\t\t/></div\n\t\t\t><input type=\"hidden\" ${!nameAttrSetting} data-dojo-attach-point=\"valueNode\" value=\"${value}\" aria-hidden=\"true\"\n\t\t/></td\n\t\t><td class=\"dijitReset dijitRight dijitButtonNode dijitArrowButton dijitDownArrowButton dijitArrowButtonContainer\"\n\t\t\tdata-dojo-attach-point=\"titleNode\" role=\"presentation\"\n\t\t\t><input class=\"dijitReset dijitInputField dijitArrowButtonInner\" value=\"&#9660; \" type=\"text\" tabIndex=\"-1\" readonly=\"readonly\" role=\"presentation\"\n\t\t\t\t${_buttonInputDisabled}\n\t\t/></td\n\t></tr></tbody\n></table>\n"}});
-define("dijit/form/Select", [
+define([
 	"dojo/_base/array", // array.forEach
 	"dojo/_base/declare", // declare
 	"dojo/dom-attr", // domAttr.set
@@ -46,8 +44,8 @@ var _SelectMenu = declare("dijit.form._SelectMenu", Menu, {
 		domClass.remove(o, "dijitMenuTable");
 		n.className = o.className + " dijitSelectMenu";
 		o.className = "dijitReset dijitMenuTable";
-		o.setAttribute("role", "listbox");
-		n.setAttribute("role", "presentation");
+		n.setAttribute("role", "listbox");
+		o.setAttribute("role", "presentation");
 		n.appendChild(o);
 	},
 
@@ -327,28 +325,6 @@ var Select = declare("dijit.form.Select", [_FormSelectWidget, _HasDropDown], {
  
 		this.connect(this.domNode, "onselectstart", event.stop);
 		this.domNode.setAttribute("aria-expanded", "false");
-		
-		if(has("ie") < 9){
-			// IE INPUT tag fontFamily has to be set directly using STYLE
-			// the defer gives IE a chance to render the TextBox and to deal with font inheritance
-			this.defer(function(){
-				try{
-					var s = domStyle.getComputedStyle(this.domNode); // can throw an exception if widget is immediately destroyed
-					if(s){
-						var ff = s.fontFamily;
-						if(ff){
-							var inputs = this.domNode.getElementsByTagName("INPUT");
-							if(inputs){
-								for(var i=0; i < inputs.length; i++){
-									inputs[i].style.fontFamily = ff;
-								}
-							}
-						}
-					}
-				}catch(e){/*when used in a Dialog, and this is called before the dialog is
-				 shown, s.fontFamily would trigger "Invalid Argument" error.*/}
-			});
-		}
 	},
 
 	_setStyleAttr: function(/*String||Object*/ value){

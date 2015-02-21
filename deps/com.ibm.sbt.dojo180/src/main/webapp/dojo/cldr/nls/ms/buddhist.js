@@ -1,11 +1,20 @@
 define(
-"dojo/cldr/nls/ms/buddhist", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y G",
 	"dateFormatItem-yQ": "Q y",
 	"dayPeriods-format-wide-pm": "PTG",
 	"dateFormatItem-MMMEd": "E, d MMM",
 	"dateFormatItem-yQQQ": "QQQ y",
+	"days-standAlone-wide": [
+		"Ahad",
+		"Isnin",
+		"Selasa",
+		"Rabu",
+		"Khamis",
+		"Jumaat",
+		"Sabtu"
+	],
 	"months-standAlone-narrow": [
 		"J",
 		"F",
@@ -29,6 +38,20 @@ define(
 	],
 	"dateFormatItem-y": "y",
 	"timeFormat-full": "h:mm:ss a zzzz",
+	"months-standAlone-abbr": [
+		"Jan",
+		"Feb",
+		"Mac",
+		"Apr",
+		"Mei",
+		"Jun",
+		"Jul",
+		"Ogos",
+		"Sep",
+		"Okt",
+		"Nov",
+		"Dis"
+	],
 	"dateFormatItem-Ed": "E, d",
 	"dateFormatItem-yMMM": "MMM y G",
 	"days-standAlone-narrow": [
@@ -49,6 +72,20 @@ define(
 		"Suku Ke-2",
 		"Suku Ke-3",
 		"Suku Ke-4"
+	],
+	"months-standAlone-wide": [
+		"Januari",
+		"Februari",
+		"Mac",
+		"April",
+		"Mei",
+		"Jun",
+		"Julai",
+		"Ogos",
+		"September",
+		"Oktober",
+		"November",
+		"Disember"
 	],
 	"dateFormatItem-MMMd": "d MMM",
 	"timeFormat-long": "h:mm:ss a z",
@@ -108,6 +145,24 @@ define(
 		"N",
 		"D"
 	],
+	"days-standAlone-short": [
+		"Ah",
+		"Is",
+		"Se",
+		"Ra",
+		"Kh",
+		"Ju",
+		"Sa"
+	],
+	"days-standAlone-abbr": [
+		"Ahd",
+		"Isn",
+		"Sel",
+		"Rab",
+		"Kha",
+		"Jum",
+		"Sab"
+	],
 	"dayPeriods-format-abbr-pm": "ptg",
 	"dateFormat-short": "d/MM/y G",
 	"dateFormatItem-yMMMEd": "E, d MMM y G",
@@ -129,6 +184,15 @@ define(
 		"Disember"
 	],
 	"dayPeriods-format-abbr-am": "pg",
+	"days-format-short": [
+		"Ah",
+		"Is",
+		"Se",
+		"Ra",
+		"Kh",
+		"Ju",
+		"Sa"
+	],
 	"quarters-format-wide": [
 		"Suku pertama",
 		"Suku Ke-2",

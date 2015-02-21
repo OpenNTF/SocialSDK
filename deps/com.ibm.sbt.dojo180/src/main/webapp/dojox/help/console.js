@@ -1,5 +1,3 @@
-// wrapped by build app
-define("dojox/help/console", ["dijit","dojo","dojox","dojo/require!dojox/help/_base"], function(dijit,dojo,dojox){
 dojo.provide("dojox.help.console");
 dojo.require("dojox.help._base");
 
@@ -76,4 +74,3 @@ dojo.mixin(dojox.help, {
 });
 
 dojox.help.init();
-});

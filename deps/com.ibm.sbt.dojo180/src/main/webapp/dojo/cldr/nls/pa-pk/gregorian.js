@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/pa-pk/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"quarters-standAlone-wide": [
 		"چوتھاي پہلاں",
@@ -20,6 +20,15 @@ define(
 		"چوتھاي چوتھا"
 	],
 	"field-week": "ہفتہ",
+	"days-format-short": [
+		"اتوار",
+		"پیر",
+		"منگل",
+		"بُدھ",
+		"جمعرات",
+		"جمعہ",
+		"ہفتہ"
+	],
 	"months-standAlone-wide": [
 		"جنوری",
 		"فروری",
@@ -50,6 +59,15 @@ define(
 		"دسمبر"
 	],
 	"field-minute": "منٹ",
+	"days-standAlone-short": [
+		"اتوار",
+		"پیر",
+		"منگل",
+		"بُدھ",
+		"جمعرات",
+		"جمعہ",
+		"ہفتہ"
+	],
 	"field-hour": "گھنٹا",
 	"field-day": "دئن",
 	"field-month": "مہينا",

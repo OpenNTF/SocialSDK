@@ -1,4 +1,4 @@
-define("dijit/_Widget", [
+define([
 	"dojo/aspect",	// aspect.around
 	"dojo/_base/config",	// config.isDebug
 	"dojo/_base/connect",	// connect.connect

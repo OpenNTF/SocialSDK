@@ -1,4 +1,4 @@
-define("dojo/regexp", ["./_base/kernel", "./_base/lang"], function(dojo, lang){
+define(["./_base/kernel", "./_base/lang"], function(dojo, lang){
 
 // module:
 //		dojo/regexp

@@ -1,4 +1,4 @@
-define("dojox/grid/enhanced/plugins/Filter", [
+define([
 	"dojo/_base/declare",
 	"dojo/_base/lang",
 	"../_Plugin",

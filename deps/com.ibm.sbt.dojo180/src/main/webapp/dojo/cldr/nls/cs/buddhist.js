@@ -1,9 +1,8 @@
 define(
-"dojo/cldr/nls/cs/buddhist", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "LLLL y GGGGG",
 	"dateFormatItem-yQ": "Q., y GGGGG",
-	"dayPeriods-format-wide-pm": "odp.",
 	"dateFormatItem-MMMEd": "E, d. M.",
 	"dateFormatItem-yQQQ": "QQQ, y G",
 	"days-standAlone-wide": [
@@ -29,22 +28,21 @@ define(
 		"l",
 		"p"
 	],
-	"dayPeriods-format-wide-am": "dop.",
 	"dateFormatItem-y": "y G",
 	"timeFormat-full": "H:mm:ss zzzz",
 	"months-standAlone-abbr": [
-		"1.",
-		"2.",
-		"3.",
-		"4.",
-		"5.",
-		"6.",
-		"7.",
-		"8.",
-		"9.",
-		"10.",
-		"11.",
-		"12."
+		"led",
+		"úno",
+		"bře",
+		"dub",
+		"kvě",
+		"čvn",
+		"čvc",
+		"srp",
+		"zář",
+		"říj",
+		"lis",
+		"pro"
 	],
 	"dateFormatItem-Ed": "E, d.",
 	"dateFormatItem-yMMM": "LLLL y G",
@@ -86,18 +84,18 @@ define(
 	"dateFormatItem-MMMd": "d. M.",
 	"timeFormat-long": "H:mm:ss z",
 	"months-format-abbr": [
-		"Led",
-		"Úno",
-		"Bře",
-		"Dub",
-		"Kvě",
-		"Čer",
-		"Čvc",
-		"Srp",
-		"Zář",
-		"Říj",
-		"Lis",
-		"Pro"
+		"led",
+		"úno",
+		"bře",
+		"dub",
+		"kvě",
+		"čvn",
+		"čvc",
+		"srp",
+		"zář",
+		"říj",
+		"lis",
+		"pro"
 	],
 	"timeFormat-short": "H:mm",
 	"dateFormatItem-H": "H",
@@ -119,8 +117,17 @@ define(
 		"P",
 		"S"
 	],
-	"dateFormatItem-yMMMd": "d. MMM y",
+	"dateFormatItem-yMMMd": "d. M. y",
 	"dateFormatItem-MEd": "E, d. M.",
+	"days-standAlone-short": [
+		"Ne",
+		"Po",
+		"Út",
+		"St",
+		"Čt",
+		"Pá",
+		"So"
+	],
 	"days-standAlone-abbr": [
 		"ne",
 		"po",
@@ -148,6 +155,15 @@ define(
 		"října",
 		"listopadu",
 		"prosince"
+	],
+	"days-format-short": [
+		"ne",
+		"po",
+		"út",
+		"st",
+		"čt",
+		"pá",
+		"so"
 	],
 	"dateFormatItem-d": "d.",
 	"quarters-format-wide": [

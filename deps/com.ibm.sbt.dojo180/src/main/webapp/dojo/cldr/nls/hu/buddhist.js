@@ -1,8 +1,8 @@
 define(
-"dojo/cldr/nls/hu/buddhist", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "y.M.",
-	"dateFormatItem-yQ": "y Q",
+	"dateFormatItem-yQ": "y. Q",
 	"dayPeriods-format-wide-pm": "du.",
 	"eraNames": [
 		"BK"
@@ -84,6 +84,12 @@ define(
 		"4. negyedév"
 	],
 	"dayPeriods-format-narrow-am": "de.",
+	"quarters-standAlone-narrow": [
+		"1.",
+		"2.",
+		"3.",
+		"4."
+	],
 	"months-standAlone-wide": [
 		"január",
 		"február",
@@ -155,6 +161,15 @@ define(
 		"O",
 		"N",
 		"D"
+	],
+	"days-standAlone-short": [
+		"V",
+		"H",
+		"K",
+		"Sze",
+		"Cs",
+		"P",
+		"Szo"
 	],
 	"dateFormatItem-hm": "a h:mm",
 	"days-standAlone-abbr": [

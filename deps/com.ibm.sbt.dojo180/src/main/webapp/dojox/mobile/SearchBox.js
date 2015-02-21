@@ -1,4 +1,4 @@
-define("dojox/mobile/SearchBox", [
+define([
 	"dojo/_base/declare",
 	"dojo/_base/lang",
 	"dijit/form/_SearchMixin",

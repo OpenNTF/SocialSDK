@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/fi/chinese", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-hms": "h.mm.ss a",
 	"dateFormatItem-Md": "d.M.",

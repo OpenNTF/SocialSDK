@@ -1,4 +1,4 @@
-define("dojo/store/Memory", ["../_base/declare", "./util/QueryResults", "./util/SimpleQueryEngine" /*=====, "./api/Store" =====*/],
+define(["../_base/declare", "./util/QueryResults", "./util/SimpleQueryEngine" /*=====, "./api/Store" =====*/],
 function(declare, QueryResults, SimpleQueryEngine /*=====, Store =====*/){
 
 // module:
@@ -149,7 +149,7 @@ return declare("dojo.store.Memory", base, {
 		//		An array of objects to use as the source of data.
 		if(data.items){
 			// just for convenience with the data format IFRS expects
-			this.idProperty = data.identifier;
+			this.idProperty = data.identifier || this.idProperty;
 			data = this.data = data.items;
 		}else{
 			this.data = data;

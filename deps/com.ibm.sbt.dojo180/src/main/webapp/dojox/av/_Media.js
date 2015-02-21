@@ -1,4 +1,4 @@
-define("dojox/av/_Media", ['dojo'],function(dojo){
+define(['dojo'],function(dojo){
 
 	dojo.experimental("dojox.av.FLVideo");
 

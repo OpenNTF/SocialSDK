@@ -1,4 +1,4 @@
-define("dijit/form/ComboBox", [
+define([
 	"dojo/_base/declare", // declare
 	"./ValidationTextBox",
 	"./ComboBoxMixin"

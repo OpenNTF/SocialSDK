@@ -1,4 +1,4 @@
-define("dojox/form/uploader/FileList", [
+define([
 	"dojo/_base/fx",
 	"dojo/dom-style",
 	"dojo/dom-class",

@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/nn/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M y",
 	"field-dayperiod": "f.m./e.m.-val",
@@ -16,7 +16,7 @@ define(
 	"dateFormatItem-hms": "h:mm:ss a",
 	"dateFormatItem-yQQQ": "QQQ y",
 	"field-day-relative+-2": "i forgårs",
-	"dateFormatItem-MMdd": "dd.MM",
+	"dateFormatItem-MMdd": "d.M.",
 	"days-standAlone-wide": [
 		"søndag",
 		"måndag",
@@ -176,6 +176,15 @@ define(
 		"N",
 		"D"
 	],
+	"days-standAlone-short": [
+		"sø.",
+		"må.",
+		"ty.",
+		"on.",
+		"to.",
+		"fr.",
+		"la."
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"sø.",
@@ -204,6 +213,15 @@ define(
 		"oktober",
 		"november",
 		"desember"
+	],
+	"days-format-short": [
+		"sø.",
+		"må.",
+		"ty.",
+		"on.",
+		"to.",
+		"fr.",
+		"la."
 	],
 	"dateFormatItem-d": "d.",
 	"quarters-format-wide": [

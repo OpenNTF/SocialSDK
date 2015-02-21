@@ -1,4 +1,4 @@
-define("dojox/date/hebrew/Date", [
+define([
 	"dojo/_base/lang",
 	"dojo/_base/declare",
 	"./numerals"

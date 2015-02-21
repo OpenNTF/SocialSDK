@@ -1,4 +1,4 @@
-define("dojox/jsonPath", ['./jsonPath/query'],function(){
+define(['./jsonPath/query'],function(){
 	/*=====
 	 return {
 	 // summary:

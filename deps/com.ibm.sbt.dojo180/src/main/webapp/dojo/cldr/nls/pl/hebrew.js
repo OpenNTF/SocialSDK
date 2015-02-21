@@ -1,10 +1,11 @@
 define(
-"dojo/cldr/nls/pl/hebrew", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "MM.yyyy",
-	"dateFormatItem-yQ": "yyyy Q",
+	"dateFormatItem-yQ": "QQQ y",
 	"dateFormatItem-MMMEd": "E, d MMM",
 	"dateFormatItem-hms": "hh:mm:ss a",
+	"dateFormatItem-yQQQ": "QQQ y",
 	"days-standAlone-wide": [
 		"niedziela",
 		"poniedziałek",
@@ -14,6 +15,8 @@ define(
 		"piątek",
 		"sobota"
 	],
+	"dateTimeFormat-short": "{1}, {0}",
+	"dateTimeFormat-medium": "{1}, {0}",
 	"months-format-abbr-leap": "Adar II",
 	"quarters-standAlone-abbr": [
 		"1 kw.",
@@ -55,6 +58,12 @@ define(
 		"II kwartał",
 		"III kwartał",
 		"IV kwartał"
+	],
+	"quarters-standAlone-narrow": [
+		"K1",
+		"K2",
+		"K3",
+		"K4"
 	],
 	"months-standAlone-wide": [
 		"Tiszri",
@@ -113,6 +122,15 @@ define(
 	],
 	"dateFormatItem-yMMMd": "d MMM y",
 	"dateFormatItem-MEd": "E, d.MM",
+	"days-standAlone-short": [
+		"niedz.",
+		"pon.",
+		"wt.",
+		"śr.",
+		"czw.",
+		"pt.",
+		"sob."
+	],
 	"dateFormatItem-hm": "hh:mm a",
 	"days-standAlone-abbr": [
 		"niedz.",
@@ -143,6 +161,15 @@ define(
 		"Tamuz",
 		"Aw",
 		"Elul"
+	],
+	"days-format-short": [
+		"niedz.",
+		"pon.",
+		"wt.",
+		"śr.",
+		"czw.",
+		"pt.",
+		"sob."
 	],
 	"quarters-format-wide": [
 		"I kwartał",

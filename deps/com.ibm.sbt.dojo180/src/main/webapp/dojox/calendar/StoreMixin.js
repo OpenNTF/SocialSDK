@@ -1,4 +1,4 @@
-define("dojox/calendar/StoreMixin", ["dojo/_base/declare", "dojo/_base/array", "dojo/_base/html", "dojo/_base/lang", "dojo/dom-class",
+define(["dojo/_base/declare", "dojo/_base/array", "dojo/_base/html", "dojo/_base/lang", "dojo/dom-class",
 	"dojo/Stateful", "dojo/when"],
 	function(declare, arr, html, lang, domClass, Stateful, when){
 
@@ -77,8 +77,8 @@ define("dojox/calendar/StoreMixin", ["dojo/_base/declare", "dojo/_base/array", "
 			return {
 				id: store.getIdentity(item),
 				summary: item[this.summaryAttr],
-				startTime: (this.decodeDate && this.decodeDate(item[this.startTimeAttr])) || this.newDate(item[this.startTimeAttr]),
-				endTime: (this.decodeDate && this.decodeDate(item[this.endTimeAttr])) || this.newDate(item[this.endTimeAttr]),
+				startTime: (this.decodeDate && this.decodeDate(item[this.startTimeAttr])) || this.newDate(item[this.startTimeAttr], this.dateClassObj),
+				endTime: (this.decodeDate && this.decodeDate(item[this.endTimeAttr])) || this.newDate(item[this.endTimeAttr], this.dateClassObj),
 				allDay: item[this.allDayAttr] != null ? item[this.allDayAttr] : false,
 				cssClass: this.cssClassFunc ? this.cssClassFunc(item) : null 
 			};
@@ -94,7 +94,9 @@ define("dojox/calendar/StoreMixin", ["dojo/_base/declare", "dojo/_base/array", "
 			//	|		summary: String
 			//	|	}
 			//		By default it is building an object using the summaryAttr, startTimeAttr and endTimeAttr properties
-			//		and decodeDate property if not null.
+			//		and encodeDate property if not null. If the encodeDate property is null a Date object will be set in the start and end time.
+			//		When using a JsonRest store, for example, it is recommended to transfer dates using the ISO format (see dojo.date.stamp).
+			//		In that case, provide a custom function to the encodeDate property that is using the date ISO encoding provided by Dojo. 
 			// renderItem: Object
 			//		The render item. 
 			// store: dojo.store.api.Store
@@ -181,11 +183,15 @@ define("dojox/calendar/StoreMixin", ["dojo/_base/declare", "dojo/_base/array", "
 		_setStoreAttr: function(value){
 			this.displayedItemsInvalidated = true;
 			var r;
-			if(value){
+			if(this._observeHandler){
+				this._observeHandler.remove();
+				this._observeHandler = null;
+			}
+			if(value){				
 				var results = value.query(this.query);
 				if(results.observe){
 					// user asked us to observe the store
-					results.observe(lang.hitch(this, this._updateItems), true);
+					this._observeHandler = results.observe(lang.hitch(this, this._updateItems), true);
 				}				
 				results = results.map(lang.hitch(this, function(item){
 					return this.itemToRenderItem(item, value);

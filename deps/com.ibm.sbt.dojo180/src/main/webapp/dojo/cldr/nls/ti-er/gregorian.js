@@ -1,6 +1,24 @@
 define(
-"dojo/cldr/nls/ti-er/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"ሰንበት",
+		"ሰኑይ",
+		"ሰሉስ",
+		"ረቡዕ",
+		"ሓሙስ",
+		"ዓርቢ",
+		"ቀዳም"
+	],
+	"days-format-short": [
+		"ሰንበት",
+		"ሰኑይ",
+		"ሰሉስ",
+		"ረቡዕ",
+		"ሓሙስ",
+		"ዓርቢ",
+		"ቀዳም"
+	],
 	"months-standAlone-abbr": [
 		"ጥሪ",
 		"ለካቲ",

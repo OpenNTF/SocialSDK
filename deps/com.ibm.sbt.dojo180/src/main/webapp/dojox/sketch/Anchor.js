@@ -1,4 +1,4 @@
-define("dojox/sketch/Anchor", [
+define([
 	"dojo/_base/kernel",
 	"dojo/_base/lang",
 	"../gfx"

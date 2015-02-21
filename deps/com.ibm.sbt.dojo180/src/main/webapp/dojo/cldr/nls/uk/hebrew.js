@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/uk/hebrew", //begin v1.x content
+//begin v1.x content
 {
 	"quarters-standAlone-wide": [
 		"1-й квартал",
@@ -25,6 +25,15 @@ define(
 	"dateFormatItem-MEd": "E, dd.MM",
 	"dateFormatItem-yMEd": "E, dd.MM.yyyy",
 	"dateFormatItem-yMMMd": "d MMM y",
+	"days-format-short": [
+		"Нд",
+		"Пн",
+		"Вт",
+		"Ср",
+		"Чт",
+		"Пт",
+		"Сб"
+	],
 	"dateFormatItem-Md": "dd.MM",
 	"months-standAlone-wide": [
 		"Тішри",
@@ -68,6 +77,15 @@ define(
 		"Елул"
 	],
 	"dateFormatItem-yQQQ": "QQQ y",
+	"days-standAlone-short": [
+		"Нд",
+		"Пн",
+		"Вт",
+		"Ср",
+		"Чт",
+		"Пт",
+		"Сб"
+	],
 	"dayPeriods-format-wide-am": "дп",
 	"dateFormat-long": "d MMMM y 'р'.",
 	"dateFormat-short": "dd.MM.yy",

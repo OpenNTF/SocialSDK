@@ -1,4 +1,4 @@
-define("dijit/Calendar", [
+define([
 	"dojo/_base/array", // array.map
 	"dojo/date",
 	"dojo/date/locale",

@@ -1,4 +1,4 @@
-define("dojox/image", ["./image/_base"], function(image){
+define(["./image/_base"], function(image){
 	/*=====
 	 return {
 	 // summary:

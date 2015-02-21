@@ -1,11 +1,19 @@
 define(
-"dojo/cldr/nls/pt-pt/buddhist", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "MM/yyyy",
 	"dateFormatItem-yQ": "QQQ 'de' y G",
-	"dayPeriods-format-wide-pm": "p.m.",
 	"dateFormatItem-MMMEd": "E, d/MM",
 	"dateFormatItem-yQQQ": "QQQ 'de' y G",
+	"days-standAlone-wide": [
+		"Domingo",
+		"Segunda-feira",
+		"Terça-feira",
+		"Quarta-feira",
+		"Quinta-feira",
+		"Sexta-feira",
+		"Sábado"
+	],
 	"months-standAlone-narrow": [
 		"J",
 		"F",
@@ -20,9 +28,27 @@ define(
 		"N",
 		"D"
 	],
-	"dayPeriods-format-wide-am": "a.m.",
+	"quarters-standAlone-abbr": [
+		"T1",
+		"T2",
+		"T3",
+		"T4"
+	],
 	"dateFormatItem-y": "y",
-	"timeFormat-full": "H:mm:ss zzzz",
+	"months-standAlone-abbr": [
+		"Jan",
+		"Fev",
+		"Mar",
+		"Abr",
+		"Mai",
+		"Jun",
+		"Jul",
+		"Ago",
+		"Set",
+		"Out",
+		"Nov",
+		"Dez"
+	],
 	"dateFormatItem-yMMM": "MM/y",
 	"days-standAlone-narrow": [
 		"D",
@@ -51,11 +77,24 @@ define(
 	"dayPeriods-format-narrow-am": "a.m.",
 	"dateFormatItem-HHmmss": "HH:mm:ss",
 	"dateFormatItem-yyMMMd": "d/MM/yy",
+	"months-standAlone-wide": [
+		"Janeiro",
+		"Fevereiro",
+		"Março",
+		"Abril",
+		"Maio",
+		"Junho",
+		"Julho",
+		"Agosto",
+		"Setembro",
+		"Outubro",
+		"Novembro",
+		"Dezembro"
+	],
 	"dateFormatItem-MMMd": "d/MM",
 	"dateFormatItem-HHmm": "HH:mm",
 	"dateFormatItem-yyMMMEd": "E, d/MM/yy",
 	"dateFormatItem-yyQ": "QQQ 'de' yy G",
-	"timeFormat-long": "H:mm:ss z",
 	"months-format-abbr": [
 		"Jan",
 		"Fev",
@@ -85,7 +124,48 @@ define(
 		"sex",
 		"sáb"
 	],
+	"days-format-narrow": [
+		"D",
+		"S",
+		"T",
+		"Q",
+		"Q",
+		"S",
+		"S"
+	],
 	"dateFormatItem-yMMMd": "d/MM/y",
+	"months-format-narrow": [
+		"J",
+		"F",
+		"M",
+		"A",
+		"M",
+		"J",
+		"J",
+		"A",
+		"S",
+		"O",
+		"N",
+		"D"
+	],
+	"days-standAlone-short": [
+		"dom",
+		"seg",
+		"ter",
+		"qua",
+		"qui",
+		"sex",
+		"sáb"
+	],
+	"days-standAlone-abbr": [
+		"dom",
+		"seg",
+		"ter",
+		"qua",
+		"qui",
+		"sex",
+		"sáb"
+	],
 	"dayPeriods-format-abbr-pm": "p.m.",
 	"dateFormat-short": "d/M/y G",
 	"dateFormatItem-yMMMEd": "E, d/MM/y",
@@ -106,6 +186,15 @@ define(
 		"Dezembro"
 	],
 	"dayPeriods-format-abbr-am": "a.m.",
+	"days-format-short": [
+		"Do",
+		"Sg",
+		"Te",
+		"Qu",
+		"Qi",
+		"Sx",
+		"Sb"
+	],
 	"dateFormatItem-yyyyMMM": "MMM 'de' y",
 	"quarters-format-wide": [
 		"1.º trimestre",

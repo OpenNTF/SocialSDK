@@ -1,4 +1,4 @@
-define("dojox/mobile/_DataListMixin", [
+define([
 	"dojo/_base/array",
 	"dojo/_base/declare",
 	"dijit/registry",

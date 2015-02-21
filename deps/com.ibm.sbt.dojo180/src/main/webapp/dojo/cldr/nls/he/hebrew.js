@@ -1,31 +1,15 @@
 define(
-"dojo/cldr/nls/he/hebrew", //begin v1.x content
+//begin v1.x content
 {
-	"dateFormatItem-yMd": "d.M.yyyy",
-	"dateFormat-medium": "dd MM yyyy",
-	"dateFormatItem-MMMEd": "E, d בMMM",
-	"dateFormatItem-yMEd": "E, d.M.yyyy",
-	"eraNarrow": [
+	"dateFormatItem-yM": "MMMM y",
+	"dateFormatItem-yQ": "yyyy Q",
+	"months-standAlone-abbr-leap": "אדר ב׳",
+	"dayPeriods-format-wide-pm": "אחה״צ",
+	"eraNames": [
 		"לבה״ע"
 	],
-	"months-format-narrow": [
-		"תש",
-		"חש",
-		"כס",
-		"טב",
-		"שב",
-		"אא",
-		"אד",
-		"ני",
-		"אי",
-		"סי",
-		"תמ",
-		"אב",
-		"אל"
-	],
-	"dateFormatItem-yMMMd": "d בMMM y",
-	"months-format-narrow-leap": "א2",
-	"dateFormatItem-Md": "d/M",
+	"dateFormatItem-MMMEd": "E, d בMMMM",
+	"dateFormatItem-MMM": "MMMM",
 	"months-standAlone-narrow": [
 		"תש",
 		"חש",
@@ -40,6 +24,51 @@ define(
 		"תמ",
 		"אב",
 		"אל"
+	],
+	"dateTimeFormat-short": "{1}, {0}",
+	"dayPeriods-format-wide-am": "לפנה״צ",
+	"months-format-narrow-leap": "א2",
+	"dateTimeFormat-medium": "{1}, {0}",
+	"months-format-abbr-leap": "אדר ב׳",
+	"months-standAlone-narrow-leap": "א2",
+	"months-standAlone-abbr": [
+		"תשרי",
+		"חשוון",
+		"כסלו",
+		"טבת",
+		"שבט",
+		"אדר א׳",
+		"אדר",
+		"ניסן",
+		"אייר",
+		"סיוון",
+		"תמוז",
+		"אב",
+		"אלול"
+	],
+	"dateFormatItem-Ed": "E ה-d",
+	"dateFormatItem-yMMM": "MMMM y",
+	"days-standAlone-narrow": [
+		"א׳",
+		"ב׳",
+		"ג׳",
+		"ד׳",
+		"ה׳",
+		"ו",
+		"ש"
+	],
+	"eraAbbr": [
+		"לבה״ע"
+	],
+	"dateFormat-long": "d בMMMM y",
+	"dateFormat-medium": "d בMMMM y",
+	"dateFormatItem-yMd": "d בMMMM y",
+	"dateFormatItem-yMMMM": "MMMM y",
+	"quarters-standAlone-narrow": [
+		"ר1",
+		"ר2",
+		"ר3",
+		"ר4"
 	],
 	"months-standAlone-wide": [
 		"תשרי",
@@ -56,69 +85,11 @@ define(
 		"אב",
 		"אלול"
 	],
-	"months-format-wide-leap": "אדר ב׳",
-	"eraNames": [
-		"לבה״ע"
-	],
-	"days-standAlone-narrow": [
-		"א",
-		"ב",
-		"ג",
-		"ד",
-		"ה",
-		"ו",
-		"ש"
-	],
 	"dateFormatItem-MMMMEd": "E, d בMMMM",
-	"dayPeriods-format-wide-pm": "אחה״צ",
-	"months-standAlone-abbr": [
-		"תשרי",
-		"חשון",
-		"כסלו",
-		"טבת",
-		"שבט",
-		"אדר א׳",
-		"אדר",
-		"ניסן",
-		"אייר",
-		"סיון",
-		"תמוז",
-		"אב",
-		"אלול"
-	],
-	"months-standAlone-narrow-leap": "א2",
-	"dayPeriods-format-wide-am": "לפנה״צ",
-	"dateFormat-long": "d בMMMM y",
-	"dateFormat-short": "dd MM yy",
-	"dateFormatItem-yMMMEd": "E, d בMMM y",
-	"months-format-wide": [
-		"תשרי",
-		"חשון",
-		"כסלו",
-		"טבת",
-		"שבט",
-		"אדר א׳",
-		"אדר",
-		"ניסן",
-		"אייר",
-		"סיון",
-		"תמוז",
-		"אב",
-		"אלול"
-	],
-	"days-format-narrow": [
-		"א",
-		"ב",
-		"ג",
-		"ד",
-		"ה",
-		"ו",
-		"ש"
-	],
-	"dateFormatItem-yM": "M.yyyy",
+	"dateFormatItem-MMMd": "d בMMMM",
 	"months-format-abbr": [
 		"תשרי",
-		"חשון",
+		"חשוון",
 		"כסלו",
 		"טבת",
 		"שבט",
@@ -131,7 +102,90 @@ define(
 		"אב",
 		"אלול"
 	],
-	"eraAbbr": [
+	"dateFormatItem-MMMMd": "d בMMMM",
+	"days-format-abbr": [
+		"יום א׳",
+		"יום ב׳",
+		"יום ג׳",
+		"יום ד׳",
+		"יום ה׳",
+		"יום ו׳",
+		"שבת"
+	],
+	"days-format-narrow": [
+		"א'",
+		"ב'",
+		"ג'",
+		"ד'",
+		"ה'",
+		"ו׳",
+		"ש׳"
+	],
+	"dateFormatItem-M": "MMMM",
+	"dateFormatItem-yMMMd": "d בMMMM y",
+	"dateFormatItem-MEd": "E, d בMMMM",
+	"months-format-narrow": [
+		"תש",
+		"חש",
+		"כס",
+		"טב",
+		"שב",
+		"אא",
+		"אד",
+		"ני",
+		"אי",
+		"סי",
+		"תמ",
+		"אב",
+		"אל"
+	],
+	"days-standAlone-short": [
+		"א'",
+		"ב'",
+		"ג'",
+		"ד'",
+		"ה'",
+		"ו'",
+		"ש'"
+	],
+	"months-standAlone-wide-leap": "אדר ב׳",
+	"dateFormat-short": "d בMMMM y",
+	"dateFormatItem-yMMMEd": "E, d בMMMM y",
+	"dateFormat-full": "EEEE, d בMMMM y",
+	"dateFormatItem-Md": "d בMMMM",
+	"dateFormatItem-yMEd": "E, d בMMMM y",
+	"months-format-wide": [
+		"תשרי",
+		"חשוון",
+		"כסלו",
+		"טבת",
+		"שבט",
+		"אדר א׳",
+		"אדר",
+		"ניסן",
+		"אייר",
+		"סיון",
+		"תמוז",
+		"אב",
+		"אלול"
+	],
+	"days-format-short": [
+		"א'",
+		"ב'",
+		"ג'",
+		"ד'",
+		"ה'",
+		"ו'",
+		"ש'"
+	],
+	"months-format-wide-leap": "אדר ב׳",
+	"quarters-format-wide": [
+		"רבעון 1",
+		"רבעון 2",
+		"רבעון 3",
+		"רבעון 4"
+	],
+	"eraNarrow": [
 		"לבה״ע"
 	],
 	"days-format-wide": [
@@ -142,27 +196,7 @@ define(
 		"יום חמישי",
 		"יום שישי",
 		"יום שבת"
-	],
-	"dateFormatItem-yQ": "yyyy Q",
-	"dateFormatItem-yMMM": "MMM y",
-	"quarters-format-wide": [
-		"רבעון 1",
-		"רבעון 2",
-		"רבעון 3",
-		"רבעון 4"
-	],
-	"dateFormat-full": "EEEE, d בMMMM y",
-	"dateFormatItem-MMMd": "d בMMM",
-	"days-format-abbr": [
-		"יום א׳",
-		"יום ב׳",
-		"יום ג׳",
-		"יום ד׳",
-		"יום ה׳",
-		"יום ו׳",
-		"שבת"
-	],
-	"dateFormatItem-Ed": "E ה-d"
+	]
 }
 //end v1.x content
 );

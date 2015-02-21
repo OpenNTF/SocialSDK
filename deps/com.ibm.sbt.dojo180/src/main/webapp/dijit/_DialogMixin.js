@@ -1,4 +1,4 @@
-define("dijit/_DialogMixin", [
+define([
 	"dojo/_base/declare", // declare
 	"./a11y"	// _getTabNavigable
 ], function(declare, a11y){

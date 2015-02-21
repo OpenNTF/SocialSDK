@@ -1,4 +1,4 @@
-define("dojox/editor/plugins/nls/Save", { root:
+define({ root:
 //begin v1.x content
 ({
 	"save": "Save"

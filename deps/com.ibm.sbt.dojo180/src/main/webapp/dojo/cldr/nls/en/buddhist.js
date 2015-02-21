@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/en/buddhist", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y GGGGG",
 	"dateFormatItem-yQ": "Q y G",
@@ -92,6 +92,15 @@ define(
 		"October",
 		"November",
 		"December"
+	],
+	"days-format-short": [
+		"Su",
+		"Mo",
+		"Tu",
+		"We",
+		"Th",
+		"Fr",
+		"Sa"
 	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

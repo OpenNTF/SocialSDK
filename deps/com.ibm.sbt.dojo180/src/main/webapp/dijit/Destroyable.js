@@ -1,4 +1,4 @@
-define("dijit/Destroyable", [
+define([
 	"dojo/_base/array", // array.forEach array.map
 	"dojo/aspect",
 	"dojo/_base/declare"
@@ -46,10 +46,9 @@ return declare("dijit.Destroyable", null, {
 			});
 
 			// If handle is destroyed manually before this.destroy() is called, remove the listener set directly above.
-			// This callback will also unnecessarily run when handle.destroyMethodName() is called from this.destroy(),
-			// but that's OK except maybe for performance.
-			aspect.after(handle, destroyMethodName, function(){
+			var hdh = aspect.after(handle, destroyMethodName, function(){
 				odh.remove();
+				hdh.remove();
 			}, true);
 		}, this);
 

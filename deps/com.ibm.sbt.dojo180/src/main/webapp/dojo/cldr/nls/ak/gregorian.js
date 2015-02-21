@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/ak/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/yyyy",
 	"field-dayperiod": "Da bere",
@@ -127,6 +127,15 @@ define(
 	"field-second": "Sɛkɛnd",
 	"field-day": "Da",
 	"dateFormatItem-MEd": "E, M/d",
+	"days-standAlone-short": [
+		"Kwe",
+		"Dwo",
+		"Ben",
+		"Wuk",
+		"Yaw",
+		"Fia",
+		"Mem"
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"Kwe",
@@ -155,6 +164,15 @@ define(
 		"Ɔbɛsɛ-Ahinime",
 		"Ɔberɛfɛw-Obubuo",
 		"Mumu-Ɔpɛnimba"
+	],
+	"days-format-short": [
+		"Kwe",
+		"Dwo",
+		"Ben",
+		"Wuk",
+		"Yaw",
+		"Fia",
+		"Mem"
 	],
 	"dateFormatItem-d": "d",
 	"days-format-wide": [

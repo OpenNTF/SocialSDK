@@ -1,4 +1,4 @@
-define("dijit/layout/LayoutContainer", [
+define([
 	"dojo/_base/kernel", // kernel.deprecated
 	"dojo/_base/lang",
 	"dojo/_base/declare", // declare

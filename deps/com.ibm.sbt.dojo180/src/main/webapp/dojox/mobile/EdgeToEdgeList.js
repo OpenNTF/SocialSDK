@@ -1,4 +1,4 @@
-define("dojox/mobile/EdgeToEdgeList", [
+define([
 	"dojo/_base/declare",
 	"./RoundRectList"
 ], function(declare, RoundRectList){

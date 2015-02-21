@@ -1,4 +1,4 @@
-define("dojox/mobile/SpinWheelDatePicker", [
+define([
 	"dojo/_base/array",
 	"dojo/_base/declare",
 	"dojo/dom-class",

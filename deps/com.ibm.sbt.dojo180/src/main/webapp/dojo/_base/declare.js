@@ -1,4 +1,4 @@
-define("dojo/_base/declare", ["./kernel", "../has", "./lang"], function(dojo, has, lang){
+define(["./kernel", "../has", "./lang"], function(dojo, has, lang){
 	// module:
 	//		dojo/_base/declare
 

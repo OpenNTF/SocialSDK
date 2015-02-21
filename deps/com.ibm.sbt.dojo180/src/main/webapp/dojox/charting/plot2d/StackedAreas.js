@@ -1,4 +1,4 @@
-define("dojox/charting/plot2d/StackedAreas", ["dojo/_base/declare", "./Stacked"], function(declare, Stacked){
+define(["dojo/_base/declare", "./Stacked"], function(declare, Stacked){
 
 	return declare("dojox.charting.plot2d.StackedAreas", Stacked, {
 		// summary:

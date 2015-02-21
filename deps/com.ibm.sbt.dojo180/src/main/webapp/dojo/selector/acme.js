@@ -1,4 +1,4 @@
-define("dojo/selector/acme", [
+define([
 	"../dom", "../sniff", "../_base/array", "../_base/lang", "../_base/window"
 ], function(dom, has, array, lang, win){
 
@@ -684,7 +684,7 @@ define("dojo/selector/acme", [
 		}
 	};
 
-	var defaultGetter = (has("ie") && (has("ie") < 9 || has("quirks"))) ? function(cond){
+	var defaultGetter = (has("ie") < 9 || has("ie") == 9 && has("quirks")) ? function(cond){
 		var clc = cond.toLowerCase();
 		if(clc == "class"){ cond = "className"; }
 		return function(elem){

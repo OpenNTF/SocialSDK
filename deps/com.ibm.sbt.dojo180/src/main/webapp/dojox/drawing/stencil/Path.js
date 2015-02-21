@@ -1,4 +1,4 @@
-define("dojox/drawing/stencil/Path", ["dojo", "dojo/_base/array", "../util/oo", "./_Base", "../manager/_registry"], 
+define(["dojo", "dojo/_base/array", "../util/oo", "./_Base", "../manager/_registry"], 
 function(lang, array, oo, Base, registry){
 //console.log('base is', lang.isFunction(Base));
 var Path = oo.declare(

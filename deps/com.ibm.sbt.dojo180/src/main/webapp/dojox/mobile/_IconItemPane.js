@@ -1,4 +1,4 @@
-define("dojox/mobile/_IconItemPane", [
+define([
 	"dojo/_base/declare",
 	"dojo/dom-construct",
 	"./Pane",

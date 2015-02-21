@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/mer/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"field-dayperiod": "Mũthenya",
@@ -171,6 +171,15 @@ define(
 		"N",
 		"D"
 	],
+	"days-standAlone-short": [
+		"KIU",
+		"MRA",
+		"WAI",
+		"WET",
+		"WEN",
+		"WTN",
+		"JUM"
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"KIU",
@@ -199,6 +208,15 @@ define(
 		"Oktũba",
 		"Novemba",
 		"Dicemba"
+	],
+	"days-format-short": [
+		"KIU",
+		"MRA",
+		"WAI",
+		"WET",
+		"WEN",
+		"WTN",
+		"JUM"
 	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

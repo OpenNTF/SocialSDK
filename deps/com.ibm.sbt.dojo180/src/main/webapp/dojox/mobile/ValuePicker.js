@@ -1,4 +1,4 @@
-define("dojox/mobile/ValuePicker", [
+define([
 	"dojo/_base/declare",
 	"./_PickerBase",
 	"./ValuePickerSlot" // to load ValuePickerSlot for you (no direct references)

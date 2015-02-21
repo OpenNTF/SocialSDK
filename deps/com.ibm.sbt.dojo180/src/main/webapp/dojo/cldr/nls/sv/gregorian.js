@@ -1,6 +1,15 @@
 define(
-"dojo/cldr/nls/sv/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"sö",
+		"må",
+		"ti",
+		"on",
+		"to",
+		"fr",
+		"lö"
+	],
 	"months-format-narrow": [
 		"J",
 		"F",
@@ -29,6 +38,15 @@ define(
 		"f.Kr.",
 		"e.Kr."
 	],
+	"days-format-short": [
+		"sö",
+		"må",
+		"ti",
+		"on",
+		"to",
+		"fr",
+		"lö"
+	],
 	"dateFormat-long": "d MMMM y",
 	"months-format-wide": [
 		"januari",
@@ -44,13 +62,14 @@ define(
 		"november",
 		"december"
 	],
+	"dateTimeFormat-medium": "{1} {0}",
 	"dayPeriods-format-wide-pm": "em",
 	"dateFormat-full": "EEEE'en' 'den' d:'e' MMMM y",
 	"dateFormatItem-Md": "d/M",
 	"dayPeriods-format-abbr-am": "FM",
 	"dateFormatItem-yMd": "yyyy-MM-dd",
-	"field-era": "era",
 	"dateFormatItem-yM": "yyyy-MM",
+	"field-era": "era",
 	"months-standAlone-wide": [
 		"januari",
 		"februari",
@@ -73,11 +92,11 @@ define(
 		"4:e kvartalet"
 	],
 	"timeFormat-long": "HH:mm:ss z",
-	"field-year": "år",
 	"dateFormatItem-yMMM": "MMM y",
 	"dateFormatItem-yQ": "yyyy Q",
-	"field-hour": "timme",
+	"field-year": "år",
 	"dateFormatItem-MMdd": "dd/MM",
+	"field-hour": "timme",
 	"months-format-abbr": [
 		"jan",
 		"feb",
@@ -97,6 +116,7 @@ define(
 	"field-day-relative+0": "i dag",
 	"field-day-relative+1": "i morgon",
 	"field-day-relative+2": "i övermorgon",
+	"dateFormatItem-H": "HH",
 	"months-standAlone-abbr": [
 		"jan",
 		"feb",
@@ -161,11 +181,20 @@ define(
 	],
 	"dateFormatItem-d": "d",
 	"dateFormatItem-ms": "mm:ss",
+	"quarters-format-narrow": [
+		"1",
+		"2",
+		"3",
+		"4"
+	],
 	"field-day-relative+-1": "i går",
+	"dateFormatItem-h": "h a",
+	"dateTimeFormat-long": "{1} {0}",
 	"dayPeriods-format-narrow-am": "f",
 	"field-day-relative+-2": "i förrgår",
 	"dateFormatItem-MMMd": "d MMM",
 	"dateFormatItem-MEd": "E d/M",
+	"dateTimeFormat-full": "{1} {0}",
 	"field-day": "dag",
 	"days-format-wide": [
 		"söndag",
@@ -221,7 +250,6 @@ define(
 		"F",
 		"L"
 	],
-	"field-month": "månad",
 	"days-standAlone-narrow": [
 		"S",
 		"M",
@@ -232,6 +260,7 @@ define(
 		"L"
 	],
 	"dateFormatItem-MMM": "LLL",
+	"field-month": "månad",
 	"dayPeriods-format-wide-am": "fm",
 	"dateFormatItem-MMMMEd": "E d:'e' MMMM",
 	"dateFormat-short": "yyyy-MM-dd",
@@ -248,6 +277,7 @@ define(
 	"field-year-relative+1": "nästa år",
 	"dayPeriods-format-narrow-pm": "e",
 	"dateFormatItem-yyyyQQQQ": "QQQQ y",
+	"dateTimeFormat-short": "{1} {0}",
 	"dateFormatItem-Hms": "HH:mm:ss",
 	"dateFormatItem-hms": "h:mm:ss a",
 	"field-week-relative+0": "denna vecka",

@@ -1,11 +1,20 @@
 define(
-"dojo/cldr/nls/kn/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"ಭಾನು",
+		"ಸೋಮ",
+		"ಮಂಗಳ",
+		"ಬುಧ",
+		"ಗುರು",
+		"ಶುಕ್ರ",
+		"ಶನಿ"
+	],
 	"months-format-narrow": [
 		"ಜ",
 		"ಫೆ",
 		"ಮಾ",
-		"ಎ",
+		"ಏ",
 		"ಮೇ",
 		"ಜೂ",
 		"ಜು",
@@ -15,13 +24,28 @@ define(
 		"ನ",
 		"ಡಿ"
 	],
+	"quarters-standAlone-narrow": [
+		"1",
+		"2",
+		"3",
+		"4"
+	],
 	"field-weekday": "ವಾರದ ದಿನ",
 	"dateFormatItem-yQQQ": "QQQ y",
-	"dateFormatItem-yMEd": "E,d/M/y",
+	"dateFormatItem-yMEd": "E, M/d/y",
 	"dateFormatItem-MMMEd": "E, d MMM",
 	"eraNarrow": [
 		"ಕ್ರಿ.ಪೂ",
 		"ಜಾಹೀ"
+	],
+	"days-format-short": [
+		"ಭಾನು",
+		"ಸೋಮ",
+		"ಮಂಗಳ",
+		"ಬುಧ",
+		"ಗುರು",
+		"ಶುಕ್ರ",
+		"ಶನಿ"
 	],
 	"dateFormat-long": "d MMMM y",
 	"months-format-wide": [
@@ -38,6 +62,7 @@ define(
 		"ನವೆಂಬರ್",
 		"ಡಿಸೆಂಬರ್"
 	],
+	"dateTimeFormat-medium": "{1} {0}",
 	"dayPeriods-format-wide-pm": "PM",
 	"dateFormat-full": "EEEE d MMMM y",
 	"dateFormatItem-Md": "d/M",
@@ -61,10 +86,10 @@ define(
 	],
 	"timeFormat-short": "hh:mm a",
 	"quarters-format-wide": [
-		"ಒಂದು 1",
-		"ಎರಡು 2",
-		"ಮೂರು 3",
-		"ನಾಲೃಕ 4"
+		"Q1",
+		"Q2",
+		"Q3",
+		"Q4"
 	],
 	"timeFormat-long": "hh:mm:ss a z",
 	"field-year": "ವರ್ಷ",
@@ -74,15 +99,15 @@ define(
 	"field-hour": "ಗಂಟೆ",
 	"dateFormatItem-MMdd": "dd-MM",
 	"months-format-abbr": [
-		"ಜನವರೀ",
-		"ಫೆಬ್ರವರೀ",
+		"ಜನವರಿ",
+		"ಫೆಬ್ರುವರಿ",
 		"ಮಾರ್ಚ್",
-		"ಎಪ್ರಿಲ್",
-		"ಮೆ",
+		"ಏಪ್ರಿಲ್",
+		"ಮೇ",
 		"ಜೂನ್",
 		"ಜುಲೈ",
 		"ಆಗಸ್ಟ್",
-		"ಸಪ್ಟೆಂಬರ್",
+		"ಸೆಪ್ಟೆಂಬರ್",
 		"ಅಕ್ಟೋಬರ್",
 		"ನವೆಂಬರ್",
 		"ಡಿಸೆಂಬರ್"
@@ -92,32 +117,34 @@ define(
 	"field-day-relative+0": "ಇಂದು",
 	"field-day-relative+1": "ನಾಳೆ",
 	"field-day-relative+2": "ನಾಡಿದ್ದು",
+	"dateFormatItem-H": "HH",
 	"months-standAlone-abbr": [
-		"ಜನವರೀ",
-		"ಫೆಬ್ರವರೀ",
+		"ಜನವರಿ",
+		"ಫೆಬ್ರುವರಿ",
 		"ಮಾರ್ಚ್",
-		"ಎಪ್ರಿಲ್",
-		"ಮೆ",
+		"ಏಪ್ರಿಲ್",
+		"ಮೇ",
 		"ಜೂನ್",
 		"ಜುಲೈ",
 		"ಆಗಸ್ಟ್",
-		"ಸಪ್ಟೆಂಬರ್",
+		"ಸೆಪ್ಟೆಂಬರ್",
 		"ಅಕ್ಟೋಬರ್",
 		"ನವೆಂಬರ್",
 		"ಡಿಸೆಂಬರ್"
 	],
 	"quarters-format-abbr": [
-		"ಒಂದು 1",
-		"ಎರಡು 2",
-		"ಮೂರು 3",
-		"ನಾಲೃಕ 4"
+		"Q1",
+		"Q2",
+		"Q3",
+		"Q4"
 	],
 	"quarters-standAlone-wide": [
-		"ಒಂದು 1",
-		"ಎರಡು 2",
-		"ಮೂರು 3",
-		"ನಾಲೃಕ 4"
+		"Q1",
+		"Q2",
+		"Q3",
+		"Q4"
 	],
+	"dateFormatItem-M": "L",
 	"days-standAlone-wide": [
 		"ರವಿವಾರ",
 		"ಸೋಮವಾರ",
@@ -129,11 +156,12 @@ define(
 	],
 	"dateFormatItem-MMMMd": "d MMMM",
 	"timeFormat-medium": "hh:mm:ss a",
+	"dateFormatItem-Hm": "HH:mm",
 	"quarters-standAlone-abbr": [
-		"ಒಂದು 1",
-		"ಎರಡು 2",
-		"ಮೂರು 3",
-		"ನಾಲೃಕ 4"
+		"Q1",
+		"Q2",
+		"Q3",
+		"Q4"
 	],
 	"eraAbbr": [
 		"ಕ್ರಿ.ಪೂ",
@@ -150,6 +178,8 @@ define(
 		"ಶು.",
 		"ಶನಿ."
 	],
+	"dateFormatItem-d": "d",
+	"dateFormatItem-ms": "mm:ss",
 	"quarters-format-narrow": [
 		"1",
 		"2",
@@ -157,10 +187,13 @@ define(
 		"4"
 	],
 	"field-day-relative+-1": "ನಿನ್ನೆ",
-	"dayPeriods-format-narrow-am": "ಪೂರ್ವಾಹ್ನ",
+	"dateFormatItem-h": "h a",
+	"dateTimeFormat-long": "{1} {0}",
+	"dayPeriods-format-narrow-am": "AM",
 	"field-day-relative+-2": "ಮೊನ್ನೆ",
 	"dateFormatItem-MMMd": "d MMM",
 	"dateFormatItem-MEd": "E, d/M",
+	"dateTimeFormat-full": "{1} {0}",
 	"field-day": "ದಿನ",
 	"days-format-wide": [
 		"ರವಿವಾರ",
@@ -173,6 +206,7 @@ define(
 	],
 	"field-zone": "ಸಮಯ ವಲಯ:",
 	"dateFormatItem-yyyyMM": "MM-yyyy",
+	"dateFormatItem-y": "y",
 	"months-standAlone-narrow": [
 		"ಜ",
 		"ಫೆ",
@@ -189,6 +223,7 @@ define(
 	],
 	"field-year-relative+-1": "ಕೊನೆಯ ವರ್ಷ",
 	"field-month-relative+-1": "ಕಳೆದ ತಿಂಗಳು",
+	"dateFormatItem-hm": "h:mm a",
 	"dayPeriods-format-abbr-pm": "PM",
 	"days-format-abbr": [
 		"ರ.",
@@ -223,18 +258,23 @@ define(
 		"ಶು",
 		"ಶ"
 	],
+	"dateFormatItem-MMM": "LLL",
 	"dayPeriods-format-wide-am": "AM",
 	"dateFormat-short": "d-M-yy",
 	"field-second": "ಸೆಕೆಂಡ್",
-	"dateFormatItem-yMMMEd": "E, d MMM, y",
+	"dateFormatItem-yMMMEd": "E, MMM d, y",
 	"field-month-relative+0": "ಈ ತಿಂಗಳು",
 	"field-month-relative+1": "ಮುಂದಿನ ತಿಂಗಳು",
+	"dateFormatItem-Ed": "d E",
 	"field-week": "ವಾರ",
 	"dateFormat-medium": "d MMM y",
 	"field-year-relative+0": "ಈ ವರ್ಷ",
 	"field-week-relative+-1": "ಕೊನೆಯ ವಾರ",
 	"field-year-relative+1": "ಮುಂದಿನ ವರ್ಷ",
-	"dayPeriods-format-narrow-pm": "ಅಪ.",
+	"dayPeriods-format-narrow-pm": "PM",
+	"dateTimeFormat-short": "{1} {0}",
+	"dateFormatItem-Hms": "HH:mm:ss",
+	"dateFormatItem-hms": "h:mm:ss a",
 	"field-week-relative+0": "ಈ ವಾರ",
 	"field-week-relative+1": "ಮುಂದಿನ ವಾರ"
 }

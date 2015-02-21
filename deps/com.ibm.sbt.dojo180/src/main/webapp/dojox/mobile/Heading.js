@@ -1,4 +1,4 @@
-define("dojox/mobile/Heading", [
+define([
 	"dojo/_base/array",
 	"dojo/_base/connect",
 	"dojo/_base/declare",
@@ -188,7 +188,34 @@ define("dojox/mobile/Heading", [
 			}
 			this.resize();
 		},
-
+		
+		_setMoveToAttr: function(/*String*/moveTo){
+			// tags:
+			//		private
+			this._set("moveTo", moveTo);
+			if(this.backButton){
+				this.backButton.set("moveTo", moveTo);
+			}
+		},
+		
+		_setHrefAttr: function(/*String*/href){
+			// tags:
+			//		private
+			this._set("href", href);
+			if(this.backButton){
+				this.backButton.set("href", href);
+			}
+		},
+		
+		_setTransitionAttr: function(/*String*/transition){
+			// tags:
+			//		private
+			this._set("transition", transition);
+			if(this.backButton){
+				this.backButton.set("transition", transition);
+			}
+		},
+		
 		_setLabelAttr: function(/*String*/label){
 			// tags:
 			//		private

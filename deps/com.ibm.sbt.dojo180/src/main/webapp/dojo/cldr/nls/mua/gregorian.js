@@ -1,8 +1,7 @@
 define(
-"dojo/cldr/nls/mua/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
-	"field-dayperiod": "Cok comme",
 	"dateFormatItem-yQ": "Q y",
 	"dayPeriods-format-wide-pm": "lilli",
 	"field-minute": "Cok comme ma laŋne",
@@ -172,6 +171,15 @@ define(
 		"W",
 		"Y"
 	],
+	"days-standAlone-short": [
+		"Cya",
+		"Cla",
+		"Czi",
+		"Cko",
+		"Cka",
+		"Cga",
+		"Cze"
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"Cya",
@@ -200,6 +208,15 @@ define(
 		"Fĩi Mundaŋ",
 		"Fĩi Gwahlle",
 		"Fĩi Yuru"
+	],
+	"days-format-short": [
+		"Cya",
+		"Cla",
+		"Czi",
+		"Cko",
+		"Cka",
+		"Cga",
+		"Cze"
 	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

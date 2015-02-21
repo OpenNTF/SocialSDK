@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/uz-arab/number", //begin v1.x content
+//begin v1.x content
 {
 	"exponential": "×۱۰^",
 	"group": ".",

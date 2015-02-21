@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/lag/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"field-dayperiod": "Mpɨɨndɨ ja sikʉ",
@@ -171,6 +171,15 @@ define(
 		"S",
 		"S"
 	],
+	"days-standAlone-short": [
+		"Píili",
+		"Táatu",
+		"Íne",
+		"Táano",
+		"Alh",
+		"Ijm",
+		"Móosi"
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"Píili",
@@ -199,6 +208,15 @@ define(
 		"Kwiinyi",
 		"Kʉsaano",
 		"Kʉsasatʉ"
+	],
+	"days-format-short": [
+		"Píili",
+		"Táatu",
+		"Íne",
+		"Táano",
+		"Alh",
+		"Ijm",
+		"Móosi"
 	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

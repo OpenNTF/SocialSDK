@@ -1,4 +1,4 @@
-define("dojox/editor/plugins/nls/LocalImage", { root:
+define({ root:
 //begin v1.x content
 ({
 	insertImageTitle: "Insert Image",

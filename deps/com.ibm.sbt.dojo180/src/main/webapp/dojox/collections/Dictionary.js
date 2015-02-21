@@ -1,4 +1,4 @@
-define("dojox/collections/Dictionary", ["dojo/_base/kernel", "dojo/_base/array", "./_base"], function(dojo, darray, dxc){
+define(["dojo/_base/kernel", "dojo/_base/array", "./_base"], function(dojo, darray, dxc){
 
 	dxc.Dictionary=function(/*dojox.collections.Dictionary?*/ dictionary){
 		// summary:

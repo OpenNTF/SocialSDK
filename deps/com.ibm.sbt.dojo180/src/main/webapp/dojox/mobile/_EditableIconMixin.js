@@ -1,4 +1,4 @@
-define("dojox/mobile/_EditableIconMixin", [
+define([
 	"dojo/_base/array",
 	"dojo/_base/connect",
 	"dojo/_base/declare",

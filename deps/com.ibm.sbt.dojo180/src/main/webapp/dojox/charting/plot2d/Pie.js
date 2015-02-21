@@ -1,4 +1,4 @@
-define("dojox/charting/plot2d/Pie", ["dojo/_base/lang", "dojo/_base/array" ,"dojo/_base/declare", 
+define(["dojo/_base/lang", "dojo/_base/array" ,"dojo/_base/declare", 
 		"./Base", "./_PlotEvents", "./common", "../axis2d/common",
 		"dojox/gfx", "dojox/gfx/matrix", "dojox/lang/functional", "dojox/lang/utils"],
 	function(lang, arr, declare, Base, PlotEvents, dc, da, g, m, df, du){
@@ -228,7 +228,7 @@ define("dojox/charting/plot2d/Pie", ["dojo/_base/lang", "dojo/_base/array" ,"doj
 					slices = df.map(filteredRun, "/this", df.foldl(filteredRun, "+", 0));
 					if(this.opt.labels){
 						labels = arr.map(slices, function(x, i){
-							if(x <= 0){ return ""; }
+							if(x < 0){ return ""; }
 							var v = run[i];
 							return "text" in v ? v.text : this._getLabel(x * 100) + "%";
 						}, this);

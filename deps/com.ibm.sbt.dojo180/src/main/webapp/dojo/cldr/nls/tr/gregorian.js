@@ -1,6 +1,15 @@
 define(
-"dojo/cldr/nls/tr/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"Pa",
+		"Pt",
+		"Sa",
+		"Ça",
+		"Pe",
+		"Cu",
+		"Ct"
+	],
 	"months-format-narrow": [
 		"O",
 		"Ş",
@@ -15,14 +24,29 @@ define(
 		"K",
 		"A"
 	],
+	"quarters-standAlone-narrow": [
+		"1.",
+		"2.",
+		"3.",
+		"4."
+	],
 	"field-weekday": "Haftanın Günü",
 	"dateFormatItem-yyQQQQ": "QQQQ yy",
-	"dateFormatItem-yQQQ": "y-QQQ",
+	"dateFormatItem-yQQQ": "y/QQQ",
 	"dateFormatItem-yMEd": "dd.MM.yyyy E",
 	"dateFormatItem-MMMEd": "d MMMM E",
 	"eraNarrow": [
 		"MÖ",
 		"MS"
+	],
+	"days-format-short": [
+		"Pa",
+		"Pt",
+		"Sa",
+		"Ça",
+		"Pe",
+		"Cu",
+		"Ct"
 	],
 	"dateFormat-long": "d MMMM y",
 	"months-format-wide": [
@@ -39,12 +63,13 @@ define(
 		"Kasım",
 		"Aralık"
 	],
-	"dayPeriods-format-wide-pm": "PM",
+	"dateTimeFormat-medium": "{1} {0}",
+	"dayPeriods-format-wide-pm": "ÖS",
 	"dateFormat-full": "d MMMM y EEEE",
-	"dateFormatItem-Md": "dd.MM",
+	"dateFormatItem-Md": "dd/MM",
 	"dateFormatItem-yMd": "dd.MM.yyyy",
 	"field-era": "Miladi Dönem",
-	"dateFormatItem-yM": "MM.yy",
+	"dateFormatItem-yM": "MM/y",
 	"months-standAlone-wide": [
 		"Ocak",
 		"Şubat",
@@ -69,7 +94,7 @@ define(
 	"timeFormat-long": "HH:mm:ss z",
 	"field-year": "Yıl",
 	"dateFormatItem-yMMM": "MMM y",
-	"dateFormatItem-yQ": "y-Q",
+	"dateFormatItem-yQ": "y/Q",
 	"field-hour": "Saat",
 	"months-format-abbr": [
 		"Oca",
@@ -89,7 +114,7 @@ define(
 	"timeFormat-full": "HH:mm:ss zzzz",
 	"field-day-relative+0": "Bugün",
 	"field-day-relative+1": "Yarın",
-	"field-day-relative+2": "Yarından sonraki gün",
+	"field-day-relative+2": "Öbür gün",
 	"dateFormatItem-H": "HH",
 	"months-standAlone-abbr": [
 		"Oca",
@@ -142,7 +167,7 @@ define(
 		"MS"
 	],
 	"field-minute": "Dakika",
-	"field-dayperiod": "AM/PM",
+	"field-dayperiod": "ÖÖ/ÖS",
 	"days-standAlone-abbr": [
 		"Paz",
 		"Pzt",
@@ -155,15 +180,18 @@ define(
 	"dateFormatItem-d": "d",
 	"dateFormatItem-ms": "mm:ss",
 	"quarters-format-narrow": [
-		"1",
-		"2",
-		"3",
-		"4"
+		"1.",
+		"2.",
+		"3.",
+		"4."
 	],
 	"field-day-relative+-1": "Dün",
+	"dateFormatItem-h": "h a",
+	"dateTimeFormat-long": "{1} {0}",
 	"field-day-relative+-2": "Evvelsi gün",
 	"dateFormatItem-MMMd": "d MMMM",
-	"dateFormatItem-MEd": "dd.MM E",
+	"dateFormatItem-MEd": "dd/MM E",
+	"dateTimeFormat-full": "{1} {0}",
 	"dateFormatItem-yMMMM": "MMMM y",
 	"field-day": "Gün",
 	"days-format-wide": [
@@ -218,7 +246,6 @@ define(
 		"C",
 		"C"
 	],
-	"field-month": "Ay",
 	"days-standAlone-narrow": [
 		"P",
 		"P",
@@ -229,7 +256,8 @@ define(
 		"C"
 	],
 	"dateFormatItem-MMM": "LLL",
-	"dayPeriods-format-wide-am": "AM",
+	"field-month": "Ay",
+	"dayPeriods-format-wide-am": "ÖÖ",
 	"dateFormatItem-MMMMEd": "dd MMMM E",
 	"dateFormat-short": "dd.MM.yyyy",
 	"field-second": "Saniye",
@@ -243,6 +271,7 @@ define(
 	"field-week-relative+-1": "Geçen hafta",
 	"field-year-relative+1": "Gelecek yıl",
 	"dateFormatItem-mmss": "mm:ss",
+	"dateTimeFormat-short": "{1} {0}",
 	"dateFormatItem-Hms": "HH:mm:ss",
 	"dateFormatItem-hms": "h:mm:ss a",
 	"dateFormatItem-yyyy": "y",

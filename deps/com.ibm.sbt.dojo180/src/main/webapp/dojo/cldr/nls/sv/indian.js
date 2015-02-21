@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/sv/indian", //begin v1.x content
+//begin v1.x content
 {
 	"months-format-abbr": [
 		"chaitra",
@@ -28,6 +28,9 @@ define(
 		"paush",
 		"māgh",
 		"phālgun"
+	],
+	"eraAbbr": [
+		"SAKA"
 	],
 	"months-standAlone-abbr": [
 		"chaitra",

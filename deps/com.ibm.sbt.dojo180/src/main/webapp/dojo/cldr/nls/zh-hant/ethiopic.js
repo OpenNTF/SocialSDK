@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/zh-hant/ethiopic", //begin v1.x content
+//begin v1.x content
 {
 	"months-format-abbr": [
 		"1月",
@@ -31,6 +31,21 @@ define(
 		"12月",
 		"13月"
 	],
+	"months-format-narrow": [
+		"1",
+		"2",
+		"3",
+		"4",
+		"5",
+		"6",
+		"7",
+		"8",
+		"9",
+		"10",
+		"11",
+		"12",
+		"13"
+	],
 	"months-standAlone-abbr": [
 		"1月",
 		"2月",
@@ -60,6 +75,21 @@ define(
 		"11月",
 		"12月",
 		"13月"
+	],
+	"months-standAlone-narrow": [
+		"1",
+		"2",
+		"3",
+		"4",
+		"5",
+		"6",
+		"7",
+		"8",
+		"9",
+		"10",
+		"11",
+		"12",
+		"13"
 	]
 }
 //end v1.x content

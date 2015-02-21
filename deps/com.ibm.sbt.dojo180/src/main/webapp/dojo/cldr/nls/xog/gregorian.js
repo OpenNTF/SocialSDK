@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/xog/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"field-dayperiod": "munkyo/Eigulo",
@@ -165,6 +165,15 @@ define(
 		"N",
 		"D"
 	],
+	"days-standAlone-short": [
+		"Sabi",
+		"Bala",
+		"Kubi",
+		"Kusa",
+		"Kuna",
+		"Kuta",
+		"Muka"
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"Sabi",
@@ -193,6 +202,15 @@ define(
 		"Okitobba",
 		"Novemba",
 		"Desemba"
+	],
+	"days-format-short": [
+		"Sabi",
+		"Bala",
+		"Kubi",
+		"Kusa",
+		"Kuna",
+		"Kuta",
+		"Muka"
 	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

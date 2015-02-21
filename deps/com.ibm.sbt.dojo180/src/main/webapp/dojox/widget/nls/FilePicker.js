@@ -1,4 +1,4 @@
-define("dojox/widget/nls/FilePicker", { root:
+define({ root:
 //begin v1.x content
 ({
 	name: "Name",

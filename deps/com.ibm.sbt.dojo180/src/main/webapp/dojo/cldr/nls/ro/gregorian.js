@@ -1,6 +1,15 @@
 define(
-"dojo/cldr/nls/ro/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"Du",
+		"Lu",
+		"Ma",
+		"Mi",
+		"Jo",
+		"Vi",
+		"Sâ"
+	],
 	"months-format-narrow": [
 		"I",
 		"F",
@@ -28,6 +37,15 @@ define(
 	"eraNarrow": [
 		"î.Hr.",
 		"d.Hr."
+	],
+	"days-format-short": [
+		"Du",
+		"Lu",
+		"Ma",
+		"Mi",
+		"Jo",
+		"Vi",
+		"Sâ"
 	],
 	"dateFormat-long": "d MMMM y",
 	"months-format-wide": [
@@ -98,6 +116,7 @@ define(
 	"field-day-relative+0": "azi",
 	"field-day-relative+1": "mâine",
 	"field-day-relative+2": "poimâine",
+	"dateFormatItem-H": "HH",
 	"months-standAlone-abbr": [
 		"ian.",
 		"feb.",
@@ -228,7 +247,6 @@ define(
 		"V",
 		"S"
 	],
-	"field-month": "lună",
 	"days-standAlone-narrow": [
 		"D",
 		"L",
@@ -239,6 +257,7 @@ define(
 		"S"
 	],
 	"dateFormatItem-MMM": "LLL",
+	"field-month": "lună",
 	"dayPeriods-format-wide-am": "AM",
 	"dateFormatItem-MMMMEd": "E, d MMMM",
 	"dateFormat-short": "dd.MM.yyyy",

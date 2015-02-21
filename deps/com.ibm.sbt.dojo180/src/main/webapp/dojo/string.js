@@ -1,4 +1,4 @@
-define("dojo/string", [
+define([
 	"./_base/kernel",	// kernel.global
 	"./_base/lang"
 ], function(kernel, lang){

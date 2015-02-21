@@ -1,4 +1,4 @@
-define("dojox/mobile/TabBar", [
+define([
 	"dojo/_base/array",
 	"dojo/_base/declare",
 	"dojo/_base/window",

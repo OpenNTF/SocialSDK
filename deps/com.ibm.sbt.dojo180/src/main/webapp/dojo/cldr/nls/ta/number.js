@@ -1,13 +1,22 @@
 define(
-"dojo/cldr/nls/ta/number", //begin v1.x content
+//begin v1.x content
 {
-	"decimalFormat": "#,##,##0.###",
 	"group": ",",
-	"nan": "எண் இல்லை",
+	"percentSign": "%",
+	"exponential": "E",
+	"scientificFormat": "#E0",
 	"percentFormat": "#,##,##0%",
+	"list": ";",
+	"infinity": "∞",
+	"minusSign": "-",
+	"decimal": ".",
+	"nan": "NaN",
+	"perMille": "‰",
+	"decimalFormat": "#,##,##0.###",
 	"currencyFormat": "¤ #,##,##0.00",
-	"decimalFormat-short": "000T",
-	"decimal": "."
+	"plusSign": "+",
+	"decimalFormat-long": "000 டிரில்லியன்",
+	"decimalFormat-short": "000T"
 }
 //end v1.x content
 );

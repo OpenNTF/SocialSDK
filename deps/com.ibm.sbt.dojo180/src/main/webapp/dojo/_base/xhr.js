@@ -1,4 +1,4 @@
-define("dojo/_base/xhr", [
+define([
 	"./kernel",
 	"./sniff",
 	"require",
@@ -118,6 +118,14 @@ define("dojo/_base/xhr", [
 			// summary:
 			//		A contentHandler returning an XML Document parsed from the response data
 			var result = xhr.responseXML;
+
+			if(result && has("dom-qsa2.1") && !result.querySelectorAll && has("dom-parser")){
+				// http://bugs.dojotoolkit.org/ticket/15631
+				// IE9 supports a CSS3 querySelectorAll implementation, but the DOM implementation 
+				// returned by IE9 xhr.responseXML does not. Manually create the XML DOM to gain 
+				// the fuller-featured implementation and avoid bugs caused by the inconsistency
+				result = new DOMParser().parseFromString(xhr.responseText, "application/xml");
+			}
 
 			if(has("ie")){
 				if((!result || !result.documentElement)){
@@ -619,6 +627,11 @@ define("dojo/_base/xhr", [
 			dfd.resolve(dfd);
 		}).otherwise(function(error){
 			ioArgs.error = error;
+			if(error.response){
+				error.status = error.response.status;
+				error.responseText = error.response.text;
+				error.xhr = error.response.xhr;
+			}
 			dfd.reject(error);
 		});
 		return dfd; // dojo/_base/Deferred

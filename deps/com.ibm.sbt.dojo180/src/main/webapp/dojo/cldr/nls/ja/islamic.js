@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/ja/islamic", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "y/M",
 	"dateFormatItem-yQ": "y/Q",
@@ -8,6 +8,20 @@ define(
 	"dateFormatItem-hms": "aK:mm:ss",
 	"dateFormatItem-yQQQ": "yQQQ",
 	"dateFormatItem-MMM": "M月",
+	"months-standAlone-narrow": [
+		"1",
+		"2",
+		"3",
+		"4",
+		"5",
+		"6",
+		"7",
+		"8",
+		"9",
+		"10",
+		"11",
+		"12"
+	],
 	"dayPeriods-format-wide-am": "午前",
 	"dateFormatItem-y": "y年",
 	"timeFormat-full": "H時mm分ss秒 zzzz",
@@ -35,6 +49,9 @@ define(
 		"木",
 		"金",
 		"土"
+	],
+	"eraAbbr": [
+		"AH"
 	],
 	"dateFormat-long": "y年M月d日",
 	"timeFormat-medium": "H:mm:ss",
@@ -74,6 +91,12 @@ define(
 	],
 	"timeFormat-short": "H:mm",
 	"dateFormatItem-H": "H時",
+	"quarters-format-abbr": [
+		"1Q",
+		"2Q",
+		"3Q",
+		"4Q"
+	],
 	"days-format-abbr": [
 		"日",
 		"月",
@@ -86,6 +109,29 @@ define(
 	"dateFormatItem-M": "M月",
 	"dateFormatItem-yMMMd": "y年M月d日",
 	"dateFormatItem-MEd": "M/d(E)",
+	"months-format-narrow": [
+		"1",
+		"2",
+		"3",
+		"4",
+		"5",
+		"6",
+		"7",
+		"8",
+		"9",
+		"10",
+		"11",
+		"12"
+	],
+	"days-standAlone-short": [
+		"日",
+		"月",
+		"火",
+		"水",
+		"木",
+		"金",
+		"土"
+	],
 	"dateFormatItem-hm": "aK:mm",
 	"dateFormat-short": "yyyy/MM/dd",
 	"dateFormatItem-yMMMEd": "y年M月d日(E)",
@@ -105,6 +151,15 @@ define(
 		"シャウワール",
 		"ズル・カイダ",
 		"ズル・ヒッジャ"
+	],
+	"days-format-short": [
+		"日",
+		"月",
+		"火",
+		"水",
+		"木",
+		"金",
+		"土"
 	],
 	"dateFormatItem-d": "d日",
 	"quarters-format-wide": [

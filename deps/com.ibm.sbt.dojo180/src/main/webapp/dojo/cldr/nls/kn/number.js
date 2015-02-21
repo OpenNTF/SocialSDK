@@ -1,11 +1,21 @@
 define(
-"dojo/cldr/nls/kn/number", //begin v1.x content
+//begin v1.x content
 {
-	"exponential": "ಪೂರ್ವ",
-	"decimalFormat": "#,##,##0.###",
-	"nan": "ಸಂಖ್ಯೆಯಲ್ಲ",
-	"percentFormat": "#,##,##0%",
-	"currencyFormat": "¤ #,##,##0.00",
+	"group": ",",
+	"percentSign": "%",
+	"exponential": "ಈ",
+	"scientificFormat": "#E0",
+	"percentFormat": "#,##0%",
+	"list": ";",
+	"infinity": "∞",
+	"minusSign": "-",
+	"decimal": ".",
+	"nan": "NaN",
+	"perMille": "‰",
+	"decimalFormat": "#,##0.###",
+	"currencyFormat": "¤#,##0.00;(¤#,##0.00)",
+	"plusSign": "+",
+	"decimalFormat-long": "000 ಟ್ರಿಲಿಯನ್",
 	"decimalFormat-short": "000T"
 }
 //end v1.x content

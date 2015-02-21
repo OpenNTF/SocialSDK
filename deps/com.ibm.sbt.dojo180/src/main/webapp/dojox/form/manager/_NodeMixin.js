@@ -1,4 +1,4 @@
-define("dojox/form/manager/_NodeMixin", [
+define([
 	"dojo/_base/lang",
 	"dojo/_base/array",
 	"dojo/_base/connect",

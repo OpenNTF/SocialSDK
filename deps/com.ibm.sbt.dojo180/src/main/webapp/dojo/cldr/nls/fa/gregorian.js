@@ -1,6 +1,15 @@
 define(
-"dojo/cldr/nls/fa/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"۱ش",
+		"۲ش",
+		"۳ش",
+		"۴ش",
+		"۵ش",
+		"ج",
+		"ش"
+	],
 	"months-format-narrow": [
 		"ژ",
 		"ف",
@@ -29,6 +38,17 @@ define(
 		"ق",
 		"م"
 	],
+	"dayPeriods-format-wide-earlyMorning": "بامداد",
+	"dayPeriods-format-wide-morning": "صبح",
+	"days-format-short": [
+		"۱ش",
+		"۲ش",
+		"۳ش",
+		"۴ش",
+		"۵ش",
+		"ج",
+		"ش"
+	],
 	"dateTimeFormats-appendItem-Day-Of-Week": "{1} {0}",
 	"dateFormat-long": "d MMMM y",
 	"months-format-wide": [
@@ -49,9 +69,10 @@ define(
 	"dayPeriods-format-wide-pm": "بعدازظهر",
 	"dateFormat-full": "EEEE d MMMM y",
 	"dateFormatItem-Md": "M/d",
+	"dayPeriods-format-wide-noon": "ظهر",
 	"dateFormatItem-yMd": "y/M/d",
-	"field-era": "دوره",
 	"dateFormatItem-yM": "y/M",
+	"field-era": "دوره",
 	"months-standAlone-wide": [
 		"ژانویه",
 		"فوریه",
@@ -74,10 +95,10 @@ define(
 		"سهماههٔ چهارم"
 	],
 	"timeFormat-long": "H:mm:ss (z)",
-	"field-year": "سال",
 	"dateFormatItem-yMMM": "MMM y",
-	"dateFormatItem-yQ": "Q y",
-	"dateFormatItem-yyyyMMMM": "MMMM y",
+	"dateFormatItem-yQ": "QQQ y",
+	"field-year": "سال",
+	"dateFormatItem-yyyyMMMM": "MMMM yyyy",
 	"field-hour": "ساعت",
 	"months-format-abbr": [
 		"ژانویهٔ",
@@ -159,6 +180,7 @@ define(
 		"جمعه",
 		"شنبه"
 	],
+	"dayPeriods-format-wide-night": "شب",
 	"dateFormatItem-d": "d",
 	"dateFormatItem-ms": "mm:ss",
 	"quarters-format-narrow": [
@@ -172,6 +194,7 @@ define(
 	"dateTimeFormat-long": "{1}، ساعت {0}",
 	"field-day-relative+-2": "پریروز",
 	"dateFormatItem-MMMd": "d LLL",
+	"dayPeriods-format-wide-midDay": "بعدازظهر",
 	"dateFormatItem-MEd": "E M/d",
 	"dateTimeFormat-full": "{1}، ساعت {0}",
 	"dateFormatItem-yMMMM": "MMMM y",
@@ -241,7 +264,9 @@ define(
 	"field-month": "ماه",
 	"dayPeriods-format-wide-am": "قبلازظهر",
 	"dateFormatItem-MMMMEd": "E d LLLL",
+	"dayPeriods-format-wide-weeHours": "نیمهشب",
 	"dateFormat-short": "yyyy/M/d",
+	"dayPeriods-format-wide-afternoon": "عصر",
 	"dateFormatItem-yyyyMMMMEEEEd": "EEEE d MMMM yyyy",
 	"field-second": "ثانیه",
 	"dateFormatItem-yMMMEd": "E d MMM y",

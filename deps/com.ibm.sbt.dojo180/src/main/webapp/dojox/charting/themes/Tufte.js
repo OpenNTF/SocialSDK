@@ -1,4 +1,4 @@
-define("dojox/charting/themes/Tufte", ["../SimpleTheme", "dojo/_base/Color", "./common"], function(SimpleTheme, Color, themes){
+define(["../SimpleTheme", "dojo/_base/Color", "./common"], function(SimpleTheme, Color, themes){
 	/*
 		A charting theme based on the principles championed by
 		Edward Tufte.  By Alex Russell, Dojo Project Lead.

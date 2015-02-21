@@ -1,4 +1,4 @@
-define("dijit/layout/LinkPane", [
+define([
 	"./ContentPane",
 	"../_TemplatedMixin",
 	"dojo/_base/declare" // declare

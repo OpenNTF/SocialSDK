@@ -1,6 +1,15 @@
 define(
-"dojo/cldr/nls/sr-latn/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"ned",
+		"pon",
+		"uto",
+		"sre",
+		"čet",
+		"pet",
+		"sub"
+	],
 	"months-format-narrow": [
 		"j",
 		"f",
@@ -25,6 +34,15 @@ define(
 		"n. e"
 	],
 	"dateFormatItem-MMMdd": "dd.MMM",
+	"days-format-short": [
+		"ned",
+		"pon",
+		"uto",
+		"sre",
+		"čet",
+		"pet",
+		"sub"
+	],
 	"dateFormat-long": "dd. MMMM y.",
 	"months-format-wide": [
 		"januar",
@@ -133,6 +151,12 @@ define(
 	"dateFormatItem-MMMMd": "d. MMMM",
 	"timeFormat-medium": "HH.mm.ss",
 	"dateFormatItem-Hm": "HH.mm",
+	"quarters-standAlone-abbr": [
+		"Q1",
+		"Q2",
+		"Q3",
+		"Q4"
+	],
 	"eraAbbr": [
 		"p. n. e.",
 		"n. e"

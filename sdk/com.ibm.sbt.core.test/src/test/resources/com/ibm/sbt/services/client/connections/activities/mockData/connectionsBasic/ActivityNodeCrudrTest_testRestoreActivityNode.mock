@@ -109,7 +109,7 @@
 
 
   <id>urn:lsid:ibm.com:oa:2cba03fc-f309-46cb-892e-c2668cbe5d10</id>
-  <title type="text">com.ibm.sbt.services.client.connections.activities.ActivityNodeCrudrTest#-2038658263_Activity-1404994063419</title>
+  <title type="text">com.ibm.sbt.services.client.connections.activities.ActivityNodeCrudrTest_Activity-1404994063419</title>
   <updated>2014-07-10T12:06:24Z</updated>
   <published>2014-07-10T12:06:24Z</published>
   <author>
@@ -212,7 +212,7 @@
 
   
     <app:collection href="https://lcauto19.swg.usma.ibm.com/activities/service/atom2/activity?activityUuid=2cba03fc-f309-46cb-892e-c2668cbe5d10">
-      <title type="text">com.ibm.sbt.services.client.connections.activities.ActivityNodeCrudrTest#-2038658263_Activity-1404994063419</title>
+      <title type="text">com.ibm.sbt.services.client.connections.activities.ActivityNodeCrudrTest_Activity-1404994063419</title>
       <app:categories href="https://lcauto19.swg.usma.ibm.com/activities/service/atom2/categories?activityUuid=2cba03fc-f309-46cb-892e-c2668cbe5d10"/>
     </app:collection> 
   
@@ -394,7 +394,7 @@
 
 
   <id>urn:lsid:ibm.com:oa:5e8b7cb6-68d1-4685-802b-2a00aea37cdc</id>
-  <title type="text">com.ibm.sbt.services.client.connections.activities.ActivityNodeCrudrTest#-2038658263_ActivityNode-1404994063419</title>
+  <title type="text">com.ibm.sbt.services.client.connections.activities.ActivityNodeCrudrTest_ActivityNode-1404994063419</title>
   <updated>2014-07-10T12:06:26Z</updated>
   <published>2014-07-10T12:06:26Z</published>
   <author>
@@ -810,7 +810,7 @@
 
 
   <id>urn:lsid:ibm.com:oa:5e8b7cb6-68d1-4685-802b-2a00aea37cdc</id>
-  <title type="text">com.ibm.sbt.services.client.connections.activities.ActivityNodeCrudrTest#-2038658263_ActivityNode-1404994063419</title>
+  <title type="text">com.ibm.sbt.services.client.connections.activities.ActivityNodeCrudrTest_ActivityNode-1404994063419</title>
   <updated>2014-07-10T12:06:27Z</updated>
   <published>2014-07-10T12:06:26Z</published>
   <author>

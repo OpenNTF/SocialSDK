@@ -1,4 +1,4 @@
-define("dojox/mobile/TextArea", [
+define([
 	"dojo/_base/declare",
 	"dojo/dom-construct",
 	"./TextBox"

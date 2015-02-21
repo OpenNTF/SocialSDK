@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/mfe/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"field-dayperiod": "Peryod dan lazourne",
@@ -173,6 +173,15 @@ define(
 		"n",
 		"d"
 	],
+	"days-standAlone-short": [
+		"dim",
+		"lin",
+		"mar",
+		"mer",
+		"ze",
+		"van",
+		"sam"
+	],
 	"days-standAlone-abbr": [
 		"dim",
 		"lin",
@@ -200,6 +209,15 @@ define(
 		"oktob",
 		"novam",
 		"desam"
+	],
+	"days-format-short": [
+		"dim",
+		"lin",
+		"mar",
+		"mer",
+		"ze",
+		"van",
+		"sam"
 	],
 	"quarters-format-wide": [
 		"1e trimes",

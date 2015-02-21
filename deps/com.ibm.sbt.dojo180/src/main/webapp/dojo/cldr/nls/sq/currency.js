@@ -1,11 +1,15 @@
 define(
-"dojo/cldr/nls/sq/currency", //begin v1.x content
+//begin v1.x content
 {
-	"EUR_displayName": "Euro",
-	"GBP_displayName": "Paund Sterlina Britanike",
-	"JPY_displayName": "Jeni Japonez",
+	"RUB_displayName": "Rubla ruse",
+	"ALL_symbol": "Lek",
 	"CNY_displayName": "Renminbi(Yuan) Kinez",
-	"USD_displayName": "Dollar amerikan"
+	"INR_displayName": "Rupee indiane",
+	"JPY_displayName": "Jeni Japonez",
+	"BRL_displayName": "Real Brazilian",
+	"USD_displayName": "Dollar amerikan",
+	"GBP_displayName": "Paund Sterlina Britanike",
+	"EUR_displayName": "Euro"
 }
 //end v1.x content
 );

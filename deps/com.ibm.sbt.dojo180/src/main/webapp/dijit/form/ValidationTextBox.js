@@ -1,6 +1,4 @@
-require({cache:{
-'url:dijit/form/templates/ValidationTextBox.html':"<div class=\"dijit dijitReset dijitInline dijitLeft\"\n\tid=\"widget_${id}\" role=\"presentation\"\n\t><div class='dijitReset dijitValidationContainer'\n\t\t><input class=\"dijitReset dijitInputField dijitValidationIcon dijitValidationInner\" value=\"&#935; \" type=\"text\" tabIndex=\"-1\" readonly=\"readonly\" role=\"presentation\"\n\t/></div\n\t><div class=\"dijitReset dijitInputField dijitInputContainer\"\n\t\t><input class=\"dijitReset dijitInputInner\" data-dojo-attach-point='textbox,focusNode' autocomplete=\"off\"\n\t\t\t${!nameAttrSetting} type='${type}'\n\t/></div\n></div>\n"}});
-define("dijit/form/ValidationTextBox", [
+define([
 	"dojo/_base/declare", // declare
 	"dojo/_base/kernel", // kernel.deprecated
 	"dojo/i18n", // i18n.getLocalization
@@ -106,7 +104,7 @@ define("dijit/form/ValidationTextBox", [
 			// summary:
 			//		Hook so set('value', ...) works.
 			this.inherited(arguments);
-			this.validate(this.focused);
+			this._refreshState();
 		},
 
 		validator: function(/*anything*/ value, /*__Constraints*/ constraints){
@@ -174,7 +172,7 @@ define("dijit/form/ValidationTextBox", [
 			if(isValid){ this._maskValidSubsetError = true; }
 			var isEmpty = this._isEmpty(this.textbox.value);
 			var isValidSubset = !isValid && isFocused && this._isValidSubset();
-			this._set("state", isValid ? "" : (((((!this._hasBeenBlurred || isFocused) && isEmpty) || isValidSubset) && this._maskValidSubsetError) ? "Incomplete" : "Error"));
+			this._set("state", isValid ? "" : (((((!this._hasBeenBlurred || isFocused) && isEmpty) || isValidSubset) && (this._maskValidSubsetError || (isValidSubset && !this._hasBeenBlurred && isFocused))) ? "Incomplete" : "Error"));
 			this.focusNode.setAttribute("aria-invalid", isValid ? "false" : "true");
 
 			if(this.state == "Error"){
@@ -206,7 +204,7 @@ define("dijit/form/ValidationTextBox", [
 
 		_refreshState: function(){
 			// Overrides TextBox._refreshState()
-			if(this._created){
+			if(this._created){ // should instead be this._started but that would require all programmatic ValidationTextBox instantiations to call startup()
 				this.validate(this.focused);
 			}
 			this.inherited(arguments);
@@ -243,6 +241,7 @@ define("dijit/form/ValidationTextBox", [
 
 		_setPatternAttr: function(/*String|Function*/ pattern){
 			this._set("pattern", pattern); // don't set on INPUT to avoid native HTML5 validation
+			this._refreshState();
 		},
 
 		_getPatternAttr: function(/*__Constraints*/ constraints){

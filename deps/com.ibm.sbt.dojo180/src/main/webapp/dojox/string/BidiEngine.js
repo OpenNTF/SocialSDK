@@ -1,4 +1,4 @@
-define("dojox/string/BidiEngine", ["dojo/_base/lang", "dojo/_base/declare"], 
+define(["dojo/_base/lang", "dojo/_base/declare"], 
   function(lang,declare){
 lang.getObject("string", true, dojox);
 

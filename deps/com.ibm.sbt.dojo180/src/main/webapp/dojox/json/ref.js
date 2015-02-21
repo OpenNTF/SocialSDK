@@ -1,4 +1,4 @@
-define("dojox/json/ref", [
+define([
 	"dojo/_base/array",
 	"dojo/_base/json",
 	"dojo/_base/kernel", 

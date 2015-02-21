@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/se/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"field-day-relative+-1": "ikte",
 	"field-day-relative+0": "odne",

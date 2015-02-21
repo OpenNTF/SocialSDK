@@ -1,49 +1,29 @@
 define(
-"dojo/cldr/nls/pa-arab/gregorian", //begin v1.x content
+//begin v1.x content
 {
-	"quarters-standAlone-wide": [
-		"چوتھاي پہلاں",
-		"چوتھاي دوجا",
-		"چوتھاي تيجا",
-		"چوتھاي چوتھا"
+	"field-minute": "منٹ",
+	"eraNames": [
+		"ايساپورو",
+		"سں"
 	],
-	"quarters-format-abbr": [
-		"چوتھاي پہلاں",
-		"چوتھاي دوجا",
-		"چوتھاي تيجا",
-		"چوتھاي چوتھا"
+	"field-weekday": "ہفتے دا دن",
+	"days-standAlone-wide": [
+		"اتوار",
+		"پیر",
+		"منگل",
+		"بُدھ",
+		"جمعرات",
+		"جمعہ",
+		"ہفتہ"
 	],
-	"dateFormat-medium": "d MMM y",
+	"field-hour": "گھنٹا",
 	"quarters-standAlone-abbr": [
 		"چوتھاي پہلاں",
 		"چوتھاي دوجا",
 		"چوتھاي تيجا",
 		"چوتھاي چوتھا"
 	],
-	"field-week": "ہفتہ",
-	"dateFormatItem-yyMMM": "MMM yy",
 	"timeFormat-full": "h:mm:ss a zzzz",
-	"dateFormatItem-HHmmss": "HH:mm:ss",
-	"dateFormatItem-Md": "d/M",
-	"months-standAlone-wide": [
-		"جنوری",
-		"فروری",
-		"مارچ",
-		"اپریل",
-		"مئ",
-		"جون",
-		"جولائی",
-		"اگست",
-		"ستمبر",
-		"اکتوبر",
-		"نومبر",
-		"دسمبر"
-	],
-	"eraNames": [
-		"ايساپورو",
-		"سں"
-	],
-	"field-year": "ورھا",
 	"months-standAlone-abbr": [
 		"جنوری",
 		"فروری",
@@ -58,15 +38,20 @@ define(
 		"نومبر",
 		"دسمبر"
 	],
-	"field-minute": "منٹ",
-	"timeFormat-medium": "h:mm:ss a",
-	"field-hour": "گھنٹا",
 	"dateFormat-long": "d MMMM y",
-	"field-day": "دئن",
-	"dateFormatItem-yyQ": "Q yy",
-	"field-month": "مہينا",
-	"dateFormat-short": "dd/MM/yyyy",
-	"months-format-wide": [
+	"timeFormat-medium": "h:mm:ss a",
+	"field-zone": "ٹپہ",
+	"dateFormat-medium": "d MMM y",
+	"dateFormatItem-yyMMM": "MMM yy",
+	"quarters-standAlone-wide": [
+		"چوتھاي پہلاں",
+		"چوتھاي دوجا",
+		"چوتھاي تيجا",
+		"چوتھاي چوتھا"
+	],
+	"field-year": "ورھا",
+	"dateFormatItem-HHmmss": "HH:mm:ss",
+	"months-standAlone-wide": [
 		"جنوری",
 		"فروری",
 		"مارچ",
@@ -80,25 +65,9 @@ define(
 		"نومبر",
 		"دسمبر"
 	],
-	"days-standAlone-wide": [
-		"اتوار",
-		"پیر",
-		"منگل",
-		"بُدھ",
-		"جمعرات",
-		"جمعہ",
-		"ہفتہ"
-	],
-	"timeFormat-short": "h:mm a",
-	"days-standAlone-abbr": [
-		"اتوار",
-		"پیر",
-		"منگل",
-		"بُدھ",
-		"جمعرات",
-		"جمعہ",
-		"ہفتہ"
-	],
+	"field-week": "ہفتہ",
+	"dateFormatItem-yyQ": "Q yy",
+	"timeFormat-long": "h:mm:ss a z",
 	"months-format-abbr": [
 		"جنوری",
 		"فروری",
@@ -113,7 +82,15 @@ define(
 		"نومبر",
 		"دسمبر"
 	],
-	"days-format-wide": [
+	"timeFormat-short": "h:mm a",
+	"field-month": "مہينا",
+	"quarters-format-abbr": [
+		"چوتھاي پہلاں",
+		"چوتھاي دوجا",
+		"چوتھاي تيجا",
+		"چوتھاي چوتھا"
+	],
+	"days-format-abbr": [
 		"اتوار",
 		"پیر",
 		"منگل",
@@ -123,17 +100,58 @@ define(
 		"ہفتہ"
 	],
 	"dateFormatItem-mmss": "mm:ss",
-	"timeFormat-long": "h:mm:ss a z",
+	"field-day": "دئن",
+	"days-standAlone-short": [
+		"اتوار",
+		"پیر",
+		"منگل",
+		"بُدھ",
+		"جمعرات",
+		"جمعہ",
+		"ہفتہ"
+	],
+	"days-standAlone-abbr": [
+		"اتوار",
+		"پیر",
+		"منگل",
+		"بُدھ",
+		"جمعرات",
+		"جمعہ",
+		"ہفتہ"
+	],
+	"dateFormat-short": "dd/MM/yyyy",
+	"dateFormat-full": "EEEE, dd MMMM y",
+	"dateFormatItem-Md": "d/M",
+	"months-format-wide": [
+		"جنوری",
+		"فروری",
+		"مارچ",
+		"اپریل",
+		"مئ",
+		"جون",
+		"جولائی",
+		"اگست",
+		"ستمبر",
+		"اکتوبر",
+		"نومبر",
+		"دسمبر"
+	],
+	"days-format-short": [
+		"اتوار",
+		"پیر",
+		"منگل",
+		"بُدھ",
+		"جمعرات",
+		"جمعہ",
+		"ہفتہ"
+	],
 	"quarters-format-wide": [
 		"چوتھاي پہلاں",
 		"چوتھاي دوجا",
 		"چوتھاي تيجا",
 		"چوتھاي چوتھا"
 	],
-	"dateFormat-full": "EEEE, dd MMMM y",
-	"field-weekday": "ہفتے دا دن",
-	"field-zone": "ٹپہ",
-	"days-format-abbr": [
+	"days-format-wide": [
 		"اتوار",
 		"پیر",
 		"منگل",

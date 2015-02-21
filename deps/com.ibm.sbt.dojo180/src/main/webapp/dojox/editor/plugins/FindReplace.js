@@ -1,4 +1,4 @@
-define("dojox/editor/plugins/FindReplace", [
+define([
 	"dojo",
 	"dijit",
 	"dojox",

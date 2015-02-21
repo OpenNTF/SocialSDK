@@ -1,4 +1,4 @@
-define("dojox/widget/rotator/ThumbnailController", [
+define([
 	"dojo/_base/declare",
 	"dojo/_base/connect",
 	"dojo/_base/lang",

@@ -1,4 +1,4 @@
-define("dijit/form/_TextBoxMixin", [
+define([
 	"dojo/_base/array", // array.forEach
 	"dojo/_base/declare", // declare
 	"dojo/dom", // dom.byId
@@ -212,6 +212,11 @@ var _TextBoxMixin = declare("dijit.form._TextBoxMixin", null, {
 		}
 
 		this._processInput(evt);
+
+		if(this.intermediateChanges){
+			// allow the key to post to the widget input box
+			this.defer(function(){ this._handleOnChange(this.get('value'), false); });
+		}
 	},
 
 	_processInput: function(/*Event*/ evt){

@@ -1809,6 +1809,100 @@ define(['./_bridge/json', './_bridge/lang', './log', './stringUtil'], function(j
 });
 
 },
+'sbt/authenticator/templates/login':function(){
+/*
+ * © Copyright IBM Corp. 2012
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); 
+ * you may not use this file except in compliance with the License. 
+ * You may obtain a copy of the License at:
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0 
+ * 
+ * Unless required by applicable law or agreed to in writing, software 
+ * distributed under the License is distributed on an "AS IS" BASIS, 
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or 
+ * implied. See the License for the specific language governing 
+ * permissions and limitations under the License.
+ */
+function submitOnClick(contentForm) {
+    if (contentForm.username.value == "" || contentForm.password.value == "") {
+        document.getElementById("wrongCredsMessage").style.display = "block";
+        return;
+    }
+    var argsMap = getArgsMap();// get map of query string arguments
+    var actionURL = decodeURIComponent(argsMap.actionURL);
+    var loginUi = decodeURIComponent(argsMap.loginUi);
+    if (loginUi.length == 0) {
+        loginUi = "mainWindow";
+    }
+    if (loginUi == "popup") {
+        contentForm.action = actionURL + "?loginUi=popup&redirectURLToLogin="
+                + encodeURIComponent(document.URL)+"&endpointAlias="+opener.globalEndpointAlias;
+    } else if (loginUi == "mainWindow") {
+        var redirectURL = argsMap.redirectURL;
+        contentForm.action = actionURL
+                + "?loginUi=mainWindow&redirectURLToLogin="
+                + encodeURIComponent(document.URL) + "&redirectURL="
+                + encodeURIComponent(redirectURL);
+    }
+    contentForm.submit();
+}
+
+function cancelOnClick() {
+    var argsMap = getArgsMap();// get map of query string arguments
+    var redirectURL = decodeURIComponent(argsMap.redirectURL);
+    var loginUi = decodeURIComponent(argsMap.loginUi);
+    if (loginUi == "popup") {
+        if(window.cancel){
+            window.cancel();
+            delete window.cancel;
+        }
+        window.close();
+    } else {
+        window.location.href = redirectURL;
+    }
+}
+
+function onLoginPageLoad() {
+    var argsMap = getArgsMap();// get map of query string arguments
+    var showWrongCredsMessage = argsMap.showWrongCredsMessage;
+    if (showWrongCredsMessage == "true") {
+        document.getElementById("wrongCredsMessage").style.display = "block";
+    }
+    if(opener && opener.globalLoginFormStrings){
+        var loginForm = opener.globalLoginFormStrings;
+    	document.getElementById('wrongCredsMessage').appendChild(document.createTextNode(loginForm.wrong_creds_message));
+    	document.getElementById('basicLoginFormUsername').appendChild(document.createTextNode(loginForm.username));
+    	document.getElementById('basicLoginFormPassword').appendChild(document.createTextNode(loginForm.password));
+    	document.getElementById('basicLoginFormOK').value = loginForm.login_ok;
+    	document.getElementById('basicLoginFormCancel').value = loginForm.login_cancel;
+    }else{
+        document.getElementById('wrongCredsMessage').appendChild(document.createTextNode(decodeURIComponent(argsMap.wrong_creds_message)));
+        document.getElementById('basicLoginFormUsername').appendChild(document.createTextNode(decodeURIComponent(argsMap.username)));
+        document.getElementById('basicLoginFormPassword').appendChild(document.createTextNode(decodeURIComponent(argsMap.password)));
+		document.getElementById('basicLoginFormOK').value = decodeURIComponent(argsMap.login_ok);
+    	document.getElementById('basicLoginFormCancel').value = decodeURIComponent(argsMap.login_cancel);
+	}
+}
+
+function getArgsMap() {
+    try {
+        var qString = location.search.substring(1);// getting query string args
+        var qStringParams = qString.split("&");// getting array of all query
+                                                // string arg key value pairs
+        var argsMap = {};
+        var i;
+        for (i = 0; i < qStringParams.length; i++) {
+            var argArray = qStringParams[i].split("=");
+            argsMap[argArray[0]] = argArray[1];
+        }
+        return argsMap;
+    } catch (err) {
+        console.log("Error making agrs map in login.js " + err);
+    }
+}
+},
 'sbt/connections/FileConstants':function(){
 /*
  * © Copyright IBM Corp. 2012,2013
@@ -2304,100 +2398,6 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
         AtomUpdateCommunityFileMetadata : "/${files}/basic/api/library/{libraryId}/document/{documentId}/entry"
     }, conn);
 });
-},
-'sbt/authenticator/templates/login':function(){
-/*
- * © Copyright IBM Corp. 2012
- * 
- * Licensed under the Apache License, Version 2.0 (the "License"); 
- * you may not use this file except in compliance with the License. 
- * You may obtain a copy of the License at:
- * 
- * http://www.apache.org/licenses/LICENSE-2.0 
- * 
- * Unless required by applicable law or agreed to in writing, software 
- * distributed under the License is distributed on an "AS IS" BASIS, 
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or 
- * implied. See the License for the specific language governing 
- * permissions and limitations under the License.
- */
-function submitOnClick(contentForm) {
-    if (contentForm.username.value == "" || contentForm.password.value == "") {
-        document.getElementById("wrongCredsMessage").style.display = "block";
-        return;
-    }
-    var argsMap = getArgsMap();// get map of query string arguments
-    var actionURL = decodeURIComponent(argsMap.actionURL);
-    var loginUi = decodeURIComponent(argsMap.loginUi);
-    if (loginUi.length == 0) {
-        loginUi = "mainWindow";
-    }
-    if (loginUi == "popup") {
-        contentForm.action = actionURL + "?loginUi=popup&redirectURLToLogin="
-                + encodeURIComponent(document.URL)+"&endpointAlias="+opener.globalEndpointAlias;
-    } else if (loginUi == "mainWindow") {
-        var redirectURL = argsMap.redirectURL;
-        contentForm.action = actionURL
-                + "?loginUi=mainWindow&redirectURLToLogin="
-                + encodeURIComponent(document.URL) + "&redirectURL="
-                + encodeURIComponent(redirectURL);
-    }
-    contentForm.submit();
-}
-
-function cancelOnClick() {
-    var argsMap = getArgsMap();// get map of query string arguments
-    var redirectURL = decodeURIComponent(argsMap.redirectURL);
-    var loginUi = decodeURIComponent(argsMap.loginUi);
-    if (loginUi == "popup") {
-        if(window.cancel){
-            window.cancel();
-            delete window.cancel;
-        }
-        window.close();
-    } else {
-        window.location.href = redirectURL;
-    }
-}
-
-function onLoginPageLoad() {
-    var argsMap = getArgsMap();// get map of query string arguments
-    var showWrongCredsMessage = argsMap.showWrongCredsMessage;
-    if (showWrongCredsMessage == "true") {
-        document.getElementById("wrongCredsMessage").style.display = "block";
-    }
-    if(opener && opener.globalLoginFormStrings){
-        var loginForm = opener.globalLoginFormStrings;
-    	document.getElementById('wrongCredsMessage').appendChild(document.createTextNode(loginForm.wrong_creds_message));
-    	document.getElementById('basicLoginFormUsername').appendChild(document.createTextNode(loginForm.username));
-    	document.getElementById('basicLoginFormPassword').appendChild(document.createTextNode(loginForm.password));
-    	document.getElementById('basicLoginFormOK').value = loginForm.login_ok;
-    	document.getElementById('basicLoginFormCancel').value = loginForm.login_cancel;
-    }else{
-        document.getElementById('wrongCredsMessage').appendChild(document.createTextNode(decodeURIComponent(argsMap.wrong_creds_message)));
-        document.getElementById('basicLoginFormUsername').appendChild(document.createTextNode(decodeURIComponent(argsMap.username)));
-        document.getElementById('basicLoginFormPassword').appendChild(document.createTextNode(decodeURIComponent(argsMap.password)));
-		document.getElementById('basicLoginFormOK').value = decodeURIComponent(argsMap.login_ok);
-    	document.getElementById('basicLoginFormCancel').value = decodeURIComponent(argsMap.login_cancel);
-	}
-}
-
-function getArgsMap() {
-    try {
-        var qString = location.search.substring(1);// getting query string args
-        var qStringParams = qString.split("&");// getting array of all query
-                                                // string arg key value pairs
-        var argsMap = {};
-        var i;
-        for (i = 0; i < qStringParams.length; i++) {
-            var argArray = qStringParams[i].split("=");
-            argsMap[argArray[0]] = argArray[1];
-        }
-        return argsMap;
-    } catch (err) {
-        console.log("Error making agrs map in login.js " + err);
-    }
-}
 },
 'sbt/pathUtil':function(){
 /*
@@ -3090,33 +3090,6 @@ define([ "../declare", "../lang", "../config", "../stringUtil", "./XmlDataHandle
     return VCardDataHandler;
 });
 },
-'sbt/_bridge/declare':function(){
-/*
- * © Copyright IBM Corp. 2012
- * 
- * Licensed under the Apache License, Version 2.0 (the "License"); 
- * you may not use this file except in compliance with the License. 
- * You may obtain a copy of the License at:
- * 
- * http://www.apache.org/licenses/LICENSE-2.0 
- * 
- * Unless required by applicable law or agreed to in writing, software 
- * distributed under the License is distributed on an "AS IS" BASIS, 
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or 
- * implied. See the License for the specific language governing 
- * permissions and limitations under the License.
- */
-
-/**
- * Social Business Toolkit SDK.
- * 
- * declare() function.
- */
-define(['dojo/_base/declare'],function(declare) {
-	return declare;
-});
-
-},
 'sbt/smartcloud/SmartcloudConstants':function(){
 /*
  * © Copyright IBM Corp. 2012,2013
@@ -3157,6 +3130,33 @@ define([ "../lang", "../base/BaseConstants" ], function(lang, base) {
 
     });
 });
+},
+'sbt/_bridge/declare':function(){
+/*
+ * © Copyright IBM Corp. 2012
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); 
+ * you may not use this file except in compliance with the License. 
+ * You may obtain a copy of the License at:
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0 
+ * 
+ * Unless required by applicable law or agreed to in writing, software 
+ * distributed under the License is distributed on an "AS IS" BASIS, 
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or 
+ * implied. See the License for the specific language governing 
+ * permissions and limitations under the License.
+ */
+
+/**
+ * Social Business Toolkit SDK.
+ * 
+ * declare() function.
+ */
+define(['dojo/_base/declare'],function(declare) {
+	return declare;
+});
+
 },
 'sbt/i18n':function(){
 /*
@@ -3518,6 +3518,294 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
         AdminAtomProfileEntryDo : "/${profiles}/admin/atom/profileEntry.do"
         
     },conn);
+});
+},
+'sbt/connections/FollowConstants':function(){
+/*
+ * © Copyright IBM Corp. 2013
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); 
+ * you may not use this file except in compliance with the License. 
+ * You may obtain a copy of the License at:
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0 
+ * 
+ * Unless required by applicable law or agreed to in writing, software 
+ * distributed under the License is distributed on an "AS IS" BASIS, 
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or 
+ * implied. See the License for the specific language governing 
+ * permissions and limitations under the License.
+ */
+/**
+ * Social Business Toolkit SDK.
+ * Definition of constants for FollowService.
+ */
+define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
+
+    return lang.mixin(conn, {
+    	
+    	/**
+         * Activities Source
+         * 
+         * @property ActivitiesSource
+         * @type String
+         * @for sbt.connections.FollowedResource
+         */
+        ActivitiesSource : "activities",
+        
+        /**
+         * Activity Resource Type
+         * 
+         * @property ActivityResourceType
+         * @type String
+         * @for sbt.connections.FollowedResource
+         */
+        ActivityResourceType : "activity",
+        
+        /**
+         * Blogs Source
+         * 
+         * @property BlogsSource
+         * @type String
+         * @for sbt.connections.FollowedResource
+         */
+        BlogsSource : "blogs",
+        
+        /**
+         * Blog Resource Type
+         * 
+         * @property BlogResourceType
+         * @type String
+         * @for sbt.connections.FollowedResource
+         */
+        BlogResourceType : "blog",
+        
+        /**
+         * Communities Source
+         * 
+         * @property CommunitiesSource
+         * @type String
+         * @for sbt.connections.FollowedResource
+         */
+        CommunitiesSource : "communities",
+
+        /**
+         * Community Resource Type
+         * 
+         * @property CommunitiesResourceType
+         * @type String
+         * @for sbt.connections.FollowedResource
+         */
+        CommunitiesResourceType : "community",
+        
+        /**
+         * Files Source
+         * 
+         * @property FilesSource
+         * @type String
+         * @for sbt.connections.FollowedResource
+         */
+        FilesSource : "files",
+
+        /**
+         * File Resource Type
+         * 
+         * @property FileResourceType
+         * @type String
+         * @for sbt.connections.FollowedResource
+         */
+        FileResourceType : "file",
+        
+        /**
+         * FileFolder Resource Type
+         * 
+         * @property FileFolderResourceType
+         * @type String
+         * @for sbt.connections.FollowedResource
+         */
+        FileFolderResourceType : "file_folder",
+        
+        /**
+         * Forums Source
+         * 
+         * @property ForumsSource
+         * @type String
+         * @for sbt.connections.FollowedResource
+         */
+        ForumsSource : "forums",
+
+        /**
+         * Forum Resource Type
+         * 
+         * @property ForumResourceType
+         * @type String
+         * @for sbt.connections.FollowedResource
+         */
+        ForumResourceType : "forum",
+        
+        /**
+         * ForumTopic Resource Type
+         * 
+         * @property ForumTopicResourceType
+         * @type String
+         * @for sbt.connections.FollowedResource
+         */
+        ForumTopicResourceType : "forum_topic",
+        
+        /**
+         * Profile Source
+         * 
+         * @property ProfilesSource
+         * @type String
+         * @for sbt.connections.FollowedResource
+         */
+        ProfilesSource : "profiles",
+
+        /**
+         * Profile Resource Type
+         * 
+         * @property ProfilesResourceType
+         * @type String
+         * @for sbt.connections.FollowedResource
+         */
+        
+        ProfilesResourceType : "profile",
+        
+        /**
+         * Wikis Source
+         * 
+         * @property WikisSource
+         * @type String
+         * @for sbt.connections.FollowedResource
+         */
+        WikisSource : "wikis",
+
+        /**
+         * Wiki Resource Type
+         * 
+         * @property WikiResourceType
+         * @type String
+         * @for sbt.connections.FollowedResource
+         */
+        WikiResourceType : "wiki",
+        
+        /**
+         * WikiPage Resource Type
+         * 
+         * @property WikiPageResourceType
+         * @type String
+         * @for sbt.connections.FollowedResource
+         */
+        WikiPageResourceType : "wiki_page",
+        
+        /**
+         * Tags Source
+         * 
+         * @property TagsSource
+         * @type String
+         * @for sbt.connections.FollowedResource
+         */
+        TagsSource : "tags",
+
+        /**
+         * Tag Resource Type
+         * 
+         * @property TagResourceType
+         * @type String
+         * @for sbt.connections.FollowedResource
+         */
+        TagResourceType : "tag",
+        
+        
+        /**
+		 * Get the followed resources feed
+		 * 
+		 * @method getFollowedResources
+		 * @param {String} source String specifying the resource. Options are:
+		 *
+		 *	activities
+		 *	blogs
+		 *	communities
+		 *	files
+		 *	forums
+		 *	profiles
+		 *	wikis
+		 *	tags
+		 *
+		 * @param {String} resourceType String representing the resource type. Options are:
+		 * 
+		 * If source=activities
+		 * 	   activity
+		 * 
+		 * If source=blogs
+		 *     blog
+		 *     
+		 * If source=communities
+		 *     community
+		 *     
+		 * If source=files
+		 *     file
+		 *     file_folder
+		 *      
+		 * 
+		 * If source=forums
+		 *     forum
+		 *     forum_topic
+		 *      
+		 * 
+		 * If source=profiles
+		 *     profile
+		 *     
+		 * If source=wikis
+		 *     wiki
+		 *     wiki_page
+		 *      
+		 * 
+		 * If source=tags
+		 *     tag
+		 * 
+		 * @param {Object} [args] Object representing various parameters
+         * that can be passed to get a feed of members of a
+         * community. The parameters must be exactly as they are
+         * supported by IBM Connections like ps, sortBy etc.
+		 */
+    	FollowedResourceFeedXPath : conn.ConnectionsFeedXPath,
+    	
+        /**
+         * XPath expressions to be used when reading a followed resource entry
+         */
+    	FollowedResourceXPath : lang.mixin({}, conn.AtomEntryXPath, {
+            followedResourceUuid : "a:id",
+            categoryType : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/type']/@term",
+            source : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/source']/@term",
+            resourceType : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/resource-type']/@term",
+            resourceId : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/resource-id']/@term",
+            relatedUrl : "a:link[@rel='related']/@href"
+        }),
+        
+        /**
+         * XPath expressions to be used when reading a followed resource entry
+         */
+    	OneFollowedResourceXPath : lang.mixin({}, conn.AtomEntryXPath, {
+    		entry : "/a:feed/a:entry",
+            followedResourceUuid : "a:id",
+            categoryType : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/type']/@term",
+            source : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/source']/@term",
+            resourceType : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/resource-type']/@term",
+            resourceId : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/resource-id']/@term",
+            relatedUrl : "a:link[@rel='related']/@href"
+        }),
+        
+        /**
+         * Get, follow or stop following a resource. 
+         */
+        AtomFollowAPI : "/{service}/follow/atom/resources",
+        
+        /**
+         * Get, follow or stop following a resource. 
+         */
+        AtomStopFollowAPI : "/{service}/follow/atom/resources/{resourceId}"
+    });
 });
 },
 'sbt/base/AtomEntity':function(){
@@ -3928,294 +4216,6 @@ define([ "../declare", "../lang", "../stringUtil", "./BaseConstants", "./BaseEnt
     return AtomEntity;
 });
 
-},
-'sbt/connections/FollowConstants':function(){
-/*
- * © Copyright IBM Corp. 2013
- * 
- * Licensed under the Apache License, Version 2.0 (the "License"); 
- * you may not use this file except in compliance with the License. 
- * You may obtain a copy of the License at:
- * 
- * http://www.apache.org/licenses/LICENSE-2.0 
- * 
- * Unless required by applicable law or agreed to in writing, software 
- * distributed under the License is distributed on an "AS IS" BASIS, 
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or 
- * implied. See the License for the specific language governing 
- * permissions and limitations under the License.
- */
-/**
- * Social Business Toolkit SDK.
- * Definition of constants for FollowService.
- */
-define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
-
-    return lang.mixin(conn, {
-    	
-    	/**
-         * Activities Source
-         * 
-         * @property ActivitiesSource
-         * @type String
-         * @for sbt.connections.FollowedResource
-         */
-        ActivitiesSource : "activities",
-        
-        /**
-         * Activity Resource Type
-         * 
-         * @property ActivityResourceType
-         * @type String
-         * @for sbt.connections.FollowedResource
-         */
-        ActivityResourceType : "activity",
-        
-        /**
-         * Blogs Source
-         * 
-         * @property BlogsSource
-         * @type String
-         * @for sbt.connections.FollowedResource
-         */
-        BlogsSource : "blogs",
-        
-        /**
-         * Blog Resource Type
-         * 
-         * @property BlogResourceType
-         * @type String
-         * @for sbt.connections.FollowedResource
-         */
-        BlogResourceType : "blog",
-        
-        /**
-         * Communities Source
-         * 
-         * @property CommunitiesSource
-         * @type String
-         * @for sbt.connections.FollowedResource
-         */
-        CommunitiesSource : "communities",
-
-        /**
-         * Community Resource Type
-         * 
-         * @property CommunitiesResourceType
-         * @type String
-         * @for sbt.connections.FollowedResource
-         */
-        CommunitiesResourceType : "community",
-        
-        /**
-         * Files Source
-         * 
-         * @property FilesSource
-         * @type String
-         * @for sbt.connections.FollowedResource
-         */
-        FilesSource : "files",
-
-        /**
-         * File Resource Type
-         * 
-         * @property FileResourceType
-         * @type String
-         * @for sbt.connections.FollowedResource
-         */
-        FileResourceType : "file",
-        
-        /**
-         * FileFolder Resource Type
-         * 
-         * @property FileFolderResourceType
-         * @type String
-         * @for sbt.connections.FollowedResource
-         */
-        FileFolderResourceType : "file_folder",
-        
-        /**
-         * Forums Source
-         * 
-         * @property ForumsSource
-         * @type String
-         * @for sbt.connections.FollowedResource
-         */
-        ForumsSource : "forums",
-
-        /**
-         * Forum Resource Type
-         * 
-         * @property ForumResourceType
-         * @type String
-         * @for sbt.connections.FollowedResource
-         */
-        ForumResourceType : "forum",
-        
-        /**
-         * ForumTopic Resource Type
-         * 
-         * @property ForumTopicResourceType
-         * @type String
-         * @for sbt.connections.FollowedResource
-         */
-        ForumTopicResourceType : "forum_topic",
-        
-        /**
-         * Profile Source
-         * 
-         * @property ProfilesSource
-         * @type String
-         * @for sbt.connections.FollowedResource
-         */
-        ProfilesSource : "profiles",
-
-        /**
-         * Profile Resource Type
-         * 
-         * @property ProfilesResourceType
-         * @type String
-         * @for sbt.connections.FollowedResource
-         */
-        
-        ProfilesResourceType : "profile",
-        
-        /**
-         * Wikis Source
-         * 
-         * @property WikisSource
-         * @type String
-         * @for sbt.connections.FollowedResource
-         */
-        WikisSource : "wikis",
-
-        /**
-         * Wiki Resource Type
-         * 
-         * @property WikiResourceType
-         * @type String
-         * @for sbt.connections.FollowedResource
-         */
-        WikiResourceType : "wiki",
-        
-        /**
-         * WikiPage Resource Type
-         * 
-         * @property WikiPageResourceType
-         * @type String
-         * @for sbt.connections.FollowedResource
-         */
-        WikiPageResourceType : "wiki_page",
-        
-        /**
-         * Tags Source
-         * 
-         * @property TagsSource
-         * @type String
-         * @for sbt.connections.FollowedResource
-         */
-        TagsSource : "tags",
-
-        /**
-         * Tag Resource Type
-         * 
-         * @property TagResourceType
-         * @type String
-         * @for sbt.connections.FollowedResource
-         */
-        TagResourceType : "tag",
-        
-        
-        /**
-		 * Get the followed resources feed
-		 * 
-		 * @method getFollowedResources
-		 * @param {String} source String specifying the resource. Options are:
-		 *
-		 *	activities
-		 *	blogs
-		 *	communities
-		 *	files
-		 *	forums
-		 *	profiles
-		 *	wikis
-		 *	tags
-		 *
-		 * @param {String} resourceType String representing the resource type. Options are:
-		 * 
-		 * If source=activities
-		 * 	   activity
-		 * 
-		 * If source=blogs
-		 *     blog
-		 *     
-		 * If source=communities
-		 *     community
-		 *     
-		 * If source=files
-		 *     file
-		 *     file_folder
-		 *      
-		 * 
-		 * If source=forums
-		 *     forum
-		 *     forum_topic
-		 *      
-		 * 
-		 * If source=profiles
-		 *     profile
-		 *     
-		 * If source=wikis
-		 *     wiki
-		 *     wiki_page
-		 *      
-		 * 
-		 * If source=tags
-		 *     tag
-		 * 
-		 * @param {Object} [args] Object representing various parameters
-         * that can be passed to get a feed of members of a
-         * community. The parameters must be exactly as they are
-         * supported by IBM Connections like ps, sortBy etc.
-		 */
-    	FollowedResourceFeedXPath : conn.ConnectionsFeedXPath,
-    	
-        /**
-         * XPath expressions to be used when reading a followed resource entry
-         */
-    	FollowedResourceXPath : lang.mixin({}, conn.AtomEntryXPath, {
-            followedResourceUuid : "a:id",
-            categoryType : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/type']/@term",
-            source : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/source']/@term",
-            resourceType : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/resource-type']/@term",
-            resourceId : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/resource-id']/@term",
-            relatedUrl : "a:link[@rel='related']/@href"
-        }),
-        
-        /**
-         * XPath expressions to be used when reading a followed resource entry
-         */
-    	OneFollowedResourceXPath : lang.mixin({}, conn.AtomEntryXPath, {
-    		entry : "/a:feed/a:entry",
-            followedResourceUuid : "a:id",
-            categoryType : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/type']/@term",
-            source : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/source']/@term",
-            resourceType : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/resource-type']/@term",
-            resourceId : "a:category[@scheme='http://www.ibm.com/xmlns/prod/sn/resource-id']/@term",
-            relatedUrl : "a:link[@rel='related']/@href"
-        }),
-        
-        /**
-         * Get, follow or stop following a resource. 
-         */
-        AtomFollowAPI : "/{service}/follow/atom/resources",
-        
-        /**
-         * Get, follow or stop following a resource. 
-         */
-        AtomStopFollowAPI : "/{service}/follow/atom/resources/{resourceId}"
-    });
-});
 },
 'sbt/defer':function(){
 /*
@@ -15077,6 +15077,73 @@ define(
 		});
 
 },
+'sbt/connections/Tag':function(){
+/*
+ * © Copyright IBM Corp. 2012, 2013
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); 
+ * you may not use this file except in compliance with the License. 
+ * You may obtain a copy of the License at:
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0 
+ * 
+ * Unless required by applicable law or agreed to in writing, software 
+ * distributed under the License is distributed on an "AS IS" BASIS, 
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or 
+ * implied. See the License for the specific language governing 
+ * permissions and limitations under the License.
+ */
+
+/**
+ * 
+ * @module sbt.connections.Tag
+ * @author Rajmeet Bal
+ */
+define(["../declare", "../base/BaseEntity" ], 
+    function(declare, BaseEntity) {
+
+	 /**
+     * Tag class.
+     * 
+     * @class Tag
+     * @namespace sbt.connections
+     */
+    var Tag = declare(BaseEntity, {
+
+        /**
+         * 
+         * @constructor
+         * @param args
+         */
+        constructor : function(args) {            
+        },
+
+        /**
+         * Get term of the tag
+         * 
+         * @method getTerm
+         * @return {String} term of the tag
+         * 
+         */
+        getTerm : function() {
+            return this.getAsString("term");
+        },
+        
+        /**
+         * Get frequency of the tag
+         * 
+         * @method getFrequency
+         * @return {Number} frequency of the tag
+         * 
+         */
+        getFrequency : function() {
+            return this.getAsNumber("frequency");
+        }
+    });
+    return Tag;
+});
+
+},
 'sbt/base/JsonDataHandler':function(){
 /*
  * © Copyright IBM Corp. 2012,2013
@@ -15344,73 +15411,6 @@ define(["../declare", "../lang", "../json", "./DataHandler", "../Jsonpath", "../
 	});
 	return JsonDataHandler;
 });
-},
-'sbt/connections/Tag':function(){
-/*
- * © Copyright IBM Corp. 2012, 2013
- * 
- * Licensed under the Apache License, Version 2.0 (the "License"); 
- * you may not use this file except in compliance with the License. 
- * You may obtain a copy of the License at:
- * 
- * http://www.apache.org/licenses/LICENSE-2.0 
- * 
- * Unless required by applicable law or agreed to in writing, software 
- * distributed under the License is distributed on an "AS IS" BASIS, 
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or 
- * implied. See the License for the specific language governing 
- * permissions and limitations under the License.
- */
-
-/**
- * 
- * @module sbt.connections.Tag
- * @author Rajmeet Bal
- */
-define(["../declare", "../base/BaseEntity" ], 
-    function(declare, BaseEntity) {
-
-	 /**
-     * Tag class.
-     * 
-     * @class Tag
-     * @namespace sbt.connections
-     */
-    var Tag = declare(BaseEntity, {
-
-        /**
-         * 
-         * @constructor
-         * @param args
-         */
-        constructor : function(args) {            
-        },
-
-        /**
-         * Get term of the tag
-         * 
-         * @method getTerm
-         * @return {String} term of the tag
-         * 
-         */
-        getTerm : function() {
-            return this.getAsString("term");
-        },
-        
-        /**
-         * Get frequency of the tag
-         * 
-         * @method getFrequency
-         * @return {Number} frequency of the tag
-         * 
-         */
-        getFrequency : function() {
-            return this.getAsNumber("frequency");
-        }
-    });
-    return Tag;
-});
-
 },
 'sbt/connections/FileService':function(){
 /*
@@ -19459,31 +19459,6 @@ define(['dojo/json'],function(json) {
     return json;
 });
 },
-'sbt/ready':function(){
-/*
- * © Copyright IBM Corp. 2012
- * 
- * Licensed under the Apache License, Version 2.0 (the "License"); 
- * you may not use this file except in compliance with the License. 
- * You may obtain a copy of the License at:
- * 
- * http://www.apache.org/licenses/LICENSE-2.0 
- * 
- * Unless required by applicable law or agreed to in writing, software 
- * distributed under the License is distributed on an "AS IS" BASIS, 
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or 
- * implied. See the License for the specific language governing 
- * permissions and limitations under the License.
- */
-
-/**
- * @module sbt.ready
- */
-define(['./_bridge/ready'],function(ready) {
-	return ready;
-});
-
-},
 'sbt/connections/SearchConstants':function(){
 /*
  * © Copyright IBM Corp. 2013
@@ -19629,6 +19604,31 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
 
     });
 });
+},
+'sbt/ready':function(){
+/*
+ * © Copyright IBM Corp. 2012
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); 
+ * you may not use this file except in compliance with the License. 
+ * You may obtain a copy of the License at:
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0 
+ * 
+ * Unless required by applicable law or agreed to in writing, software 
+ * distributed under the License is distributed on an "AS IS" BASIS, 
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or 
+ * implied. See the License for the specific language governing 
+ * permissions and limitations under the License.
+ */
+
+/**
+ * @module sbt.ready
+ */
+define(['./_bridge/ready'],function(ready) {
+	return ready;
+});
+
 },
 'sbt/smartcloud/CommunityConstants':function(){
 /*
@@ -20029,7 +20029,7 @@ define([ "../declare", "../lang", "../stringUtil", "../config", "../Promise", ".
 //			var url = consts.ActivityStreamUrls.activityStreamBaseUrl+this.endpoint.authType+consts.ActivityStreamUrls.activityStreamRestUrl+_userType+"/"+_groupType+"/"+_applicationType;
             var url = this.constructUrl(consts.ActivityStreamUrls.activityStreamBaseUrl+"{authType}"+consts.ActivityStreamUrls.activityStreamRestUrl+"{userType}/{groupType}/{appType}", 
                     {}, 
-                    { authType : this.endpoint.authType, userType : _userType, groupType : _groupType, appType : _applicationType });
+                    { authType : (this.endpoint.authType == "sso")  ? "":this.endpoint.authType, userType : _userType, groupType : _groupType, appType : _applicationType });
             var options = {
                 method : "GET",
                 handleAs : "json",
@@ -20616,35 +20616,6 @@ define([ "../declare", "../lang" ], function(declare,lang) {
     return DataHandler;
 });
 },
-'sbt/dom':function(){
-/*
- * © Copyright IBM Corp. 2012
- * 
- * Licensed under the Apache License, Version 2.0 (the "License"); 
- * you may not use this file except in compliance with the License. 
- * You may obtain a copy of the License at:
- * 
- * http://www.apache.org/licenses/LICENSE-2.0 
- * 
- * Unless required by applicable law or agreed to in writing, software 
- * distributed under the License is distributed on an "AS IS" BASIS, 
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or 
- * implied. See the License for the specific language governing 
- * permissions and limitations under the License.
- */
-
-/**
- * Definition of some DOM utilities.
- * 
- * @module sbt.dom
- */
-define(['./_bridge/dom'],function(dom) {
-	// The actual implementation is library dependent
-	// NOTE: dom.byId returns either a DOM element or false (null/undefined) 
-	return dom;
-});
-
-},
 'sbt/authenticator/templates/messageSSO':function(){
 /*
  * © Copyright IBM Corp. 2013
@@ -20703,6 +20674,143 @@ function getArgsMap() {
         console.log("Error making agrs map in messageSSO.js " + err);
     }
 }
+},
+'sbt/dom':function(){
+/*
+ * © Copyright IBM Corp. 2012
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); 
+ * you may not use this file except in compliance with the License. 
+ * You may obtain a copy of the License at:
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0 
+ * 
+ * Unless required by applicable law or agreed to in writing, software 
+ * distributed under the License is distributed on an "AS IS" BASIS, 
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or 
+ * implied. See the License for the specific language governing 
+ * permissions and limitations under the License.
+ */
+
+/**
+ * Definition of some DOM utilities.
+ * 
+ * @module sbt.dom
+ */
+define(['./_bridge/dom'],function(dom) {
+	// The actual implementation is library dependent
+	// NOTE: dom.byId returns either a DOM element or false (null/undefined) 
+	return dom;
+});
+
+},
+'sbt/store/parameter':function(){
+/*
+ * © Copyright IBM Corp. 2013
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); 
+ * you may not use this file except in compliance with the License. 
+ * You may obtain a copy of the License at:
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0 
+ * 
+ * Unless required by applicable law or agreed to in writing, software 
+ * distributed under the License is distributed on an "AS IS" BASIS, 
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or 
+ * implied. See the License for the specific language governing 
+ * permissions and limitations under the License.
+ */
+
+/**
+ * 
+ */
+define(["../stringUtil", "../config"], function(stringUtil, config) {
+    var Formatter = {
+        defaultFormat: function(param, val) {
+            return param.key + "=" + val;
+        },
+        sortField: function(vals) {
+            return function(param, val) {
+                var v = vals[val] || "";
+                return param.key + "=" + v;
+            };
+        },
+        
+        ascSortOrderBoolean: function(param, val) {
+            var v = (val === "asc") ? true : false;
+            return param.key + "=" + v;
+        },
+        
+        sortOrder: function(param,val){
+            return param.key + "=" + val;
+        },
+        
+        oneBasedInteger: function(param, val) {
+            var v = Math.floor(val);
+            if(v < 1) {
+                v = 1;
+            }
+            return param.key + "=" + v;
+        },
+        
+        zeroBaseInteger: function(param, val) {
+            var v = Math.floor(val);
+            if(v < 0) {
+                v = 0;
+            }
+            return param.key + "=" + v;
+        }
+
+    };
+    
+    
+    var Parameter = function(args) {
+        var self = this;
+        this.key = args.key;
+        var formatFunc = args.format || Formatter.defaultFormat;
+        this.format = function(val) {
+            return formatFunc(self, val);
+        };
+    };
+    
+   
+    return {
+    	 defaultFormat: function (key){
+			 return new Parameter({key: key, format: Formatter.defaultFormat}); 
+		 },
+		 
+		 sortField: function(key, sortVals){
+			return new Parameter({key: key, format: Formatter.sortField(sortVals)}); 
+		 },
+		 
+		 sortOrder: function(key){
+			 return new Parameter({key: key, format: Formatter.sortOrder});
+		 },
+		 
+		 booleanSortOrder: function (key){
+			 return new Parameter({key: key, format: Formatter.ascSortOrderBoolean});
+		 },
+        
+        /**
+         * 
+         * @param key
+         * @returns
+         */
+        zeroBasedInteger :  function(key) {
+        	return new Parameter({ key: key, format: Formatter.zeroBasedInteger });
+        },
+        
+        /**
+         * 
+         * @param key
+         * @returns
+         */
+        oneBasedInteger :  function(key) {
+        	return new Parameter({ key: key, format: Formatter.oneBasedInteger });
+        }
+    };
+});
+
 },
 'sbt/connections/ConnectionsService':function(){
 /*
@@ -21019,114 +21127,6 @@ define([ "../declare", "../config", "../Promise", "./ConnectionsConstants", "../
     });
     return ConnectionsService;
 });
-},
-'sbt/store/parameter':function(){
-/*
- * © Copyright IBM Corp. 2013
- * 
- * Licensed under the Apache License, Version 2.0 (the "License"); 
- * you may not use this file except in compliance with the License. 
- * You may obtain a copy of the License at:
- * 
- * http://www.apache.org/licenses/LICENSE-2.0 
- * 
- * Unless required by applicable law or agreed to in writing, software 
- * distributed under the License is distributed on an "AS IS" BASIS, 
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or 
- * implied. See the License for the specific language governing 
- * permissions and limitations under the License.
- */
-
-/**
- * 
- */
-define(["../stringUtil", "../config"], function(stringUtil, config) {
-    var Formatter = {
-        defaultFormat: function(param, val) {
-            return param.key + "=" + val;
-        },
-        sortField: function(vals) {
-            return function(param, val) {
-                var v = vals[val] || "";
-                return param.key + "=" + v;
-            };
-        },
-        
-        ascSortOrderBoolean: function(param, val) {
-            var v = (val === "asc") ? true : false;
-            return param.key + "=" + v;
-        },
-        
-        sortOrder: function(param,val){
-            return param.key + "=" + val;
-        },
-        
-        oneBasedInteger: function(param, val) {
-            var v = Math.floor(val);
-            if(v < 1) {
-                v = 1;
-            }
-            return param.key + "=" + v;
-        },
-        
-        zeroBaseInteger: function(param, val) {
-            var v = Math.floor(val);
-            if(v < 0) {
-                v = 0;
-            }
-            return param.key + "=" + v;
-        }
-
-    };
-    
-    
-    var Parameter = function(args) {
-        var self = this;
-        this.key = args.key;
-        var formatFunc = args.format || Formatter.defaultFormat;
-        this.format = function(val) {
-            return formatFunc(self, val);
-        };
-    };
-    
-   
-    return {
-    	 defaultFormat: function (key){
-			 return new Parameter({key: key, format: Formatter.defaultFormat}); 
-		 },
-		 
-		 sortField: function(key, sortVals){
-			return new Parameter({key: key, format: Formatter.sortField(sortVals)}); 
-		 },
-		 
-		 sortOrder: function(key){
-			 return new Parameter({key: key, format: Formatter.sortOrder});
-		 },
-		 
-		 booleanSortOrder: function (key){
-			 return new Parameter({key: key, format: Formatter.ascSortOrderBoolean});
-		 },
-        
-        /**
-         * 
-         * @param key
-         * @returns
-         */
-        zeroBasedInteger :  function(key) {
-        	return new Parameter({ key: key, format: Formatter.zeroBasedInteger });
-        },
-        
-        /**
-         * 
-         * @param key
-         * @returns
-         */
-        oneBasedInteger :  function(key) {
-        	return new Parameter({ key: key, format: Formatter.oneBasedInteger });
-        }
-    };
-});
-
 },
 'sbt/url':function(){
 define(['./declare'], function(declare){

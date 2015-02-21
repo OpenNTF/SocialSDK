@@ -1,4 +1,4 @@
-define("dojox/color/SimpleColorModel", ["dojo/_base/array", "dojo/_base/declare", "dojox/color"], 
+define(["dojo/_base/array", "dojo/_base/declare", "dojox/color"], 
 	function(arr, declare, color){
 	
 	return declare("dojox.color.SimpleColorModel", null, {

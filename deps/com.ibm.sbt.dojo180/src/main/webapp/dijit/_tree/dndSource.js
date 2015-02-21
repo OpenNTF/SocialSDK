@@ -1,4 +1,4 @@
-define("dijit/_tree/dndSource", [
+define([
 	"dojo/_base/kernel", // kernel.deprecated
 	"dojo/_base/lang", // lang.setObject
 	"../tree/dndSource"

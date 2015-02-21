@@ -1,4 +1,4 @@
-define("dojox/flash", ['./flash/_base'],function(){
+define(['./flash/_base'],function(){
 	/*=====
 	 return {
 	 // summary:

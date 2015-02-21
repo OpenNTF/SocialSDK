@@ -1,10 +1,19 @@
 define(
-"dojo/cldr/nls/br/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"field-second": "eilenn",
 	"field-week": "sizhun",
 	"field-day-relative+-1": "decʼh",
 	"field-day-relative+-2": "dercʼhent-decʼh",
+	"days-format-short": [
+		"sul",
+		"lun",
+		"meu.",
+		"mer.",
+		"yaou",
+		"gwe.",
+		"sad."
+	],
 	"months-standAlone-wide": [
 		"Genver",
 		"Cʼhwevrer",
@@ -43,6 +52,15 @@ define(
 		"Ker"
 	],
 	"field-minute": "munut",
+	"days-standAlone-short": [
+		"sul",
+		"lun",
+		"meu.",
+		"mer.",
+		"yaou",
+		"gwe.",
+		"sad."
+	],
 	"field-day-relative+0": "hiziv",
 	"field-hour": "eur",
 	"field-day-relative+1": "warcʼhoazh",

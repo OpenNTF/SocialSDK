@@ -1,4 +1,4 @@
-define("dijit/_base/sniff", [ "dojo/uacss" ], function(){
+define([ "dojo/uacss" ], function(){
 
 	// module:
 	//		dijit/_base/sniff

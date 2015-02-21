@@ -1,6 +1,15 @@
 define(
-"dojo/cldr/nls/pl/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"niedz.",
+		"pon.",
+		"wt.",
+		"śr.",
+		"czw.",
+		"pt.",
+		"sob."
+	],
 	"months-format-narrow": [
 		"s",
 		"l",
@@ -15,8 +24,14 @@ define(
 		"l",
 		"g"
 	],
+	"quarters-standAlone-narrow": [
+		"K1",
+		"K2",
+		"K3",
+		"K4"
+	],
 	"field-weekday": "Dzień tygodnia",
-	"dateFormatItem-yQQQ": "y QQQ",
+	"dateFormatItem-yQQQ": "QQQ y",
 	"dateFormatItem-yMEd": "E, d.MM.yyyy",
 	"dateFormatItem-MMMEd": "E, d MMM",
 	"eraNarrow": [
@@ -25,6 +40,15 @@ define(
 	],
 	"dayPeriods-format-wide-earlyMorning": "nad ranem",
 	"dayPeriods-format-wide-morning": "rano",
+	"days-format-short": [
+		"niedz.",
+		"pon.",
+		"wt.",
+		"śr.",
+		"czw.",
+		"pt.",
+		"sob."
+	],
 	"dateFormat-long": "d MMMM y",
 	"months-format-wide": [
 		"stycznia",
@@ -41,7 +65,7 @@ define(
 		"grudnia"
 	],
 	"dayPeriods-format-wide-evening": "wieczorem",
-	"dateTimeFormat-medium": "{1} {0}",
+	"dateTimeFormat-medium": "{1}, {0}",
 	"dayPeriods-format-wide-pm": "PM",
 	"dateFormat-full": "EEEE, d MMMM y",
 	"dateFormatItem-Md": "d.MM",
@@ -73,7 +97,7 @@ define(
 	"timeFormat-long": "HH:mm:ss z",
 	"field-year": "Rok",
 	"dateFormatItem-yMMM": "LLL y",
-	"dateFormatItem-yQ": "yyyy Q",
+	"dateFormatItem-yQ": "QQQ y",
 	"dateFormatItem-yyyyMMMM": "LLLL y",
 	"field-hour": "Godzina",
 	"dateFormatItem-MMdd": "d.MM",
@@ -91,11 +115,12 @@ define(
 		"lis",
 		"gru"
 	],
-	"dateFormatItem-yyQ": "Q yy",
+	"dateFormatItem-yyQ": "QQQ yy",
 	"timeFormat-full": "HH:mm:ss zzzz",
 	"field-day-relative+0": "Dzisiaj",
 	"field-day-relative+1": "Jutro",
 	"field-day-relative+2": "Pojutrze",
+	"dateFormatItem-H": "HH",
 	"months-standAlone-abbr": [
 		"sty",
 		"lut",
@@ -133,7 +158,7 @@ define(
 		"sobota"
 	],
 	"dateFormatItem-MMMMd": "d MMMM",
-	"dateFormatItem-yyMMM": "LLL yy",
+	"dateFormatItem-yyMMM": "LLLL yy",
 	"timeFormat-medium": "HH:mm:ss",
 	"dateFormatItem-Hm": "HH:mm",
 	"quarters-standAlone-abbr": [
@@ -252,7 +277,7 @@ define(
 	"field-year-relative+0": "Bieżący rok",
 	"field-week-relative+-1": "Zeszły tydzień",
 	"field-year-relative+1": "Przyszły rok",
-	"dateTimeFormat-short": "{1} {0}",
+	"dateTimeFormat-short": "{1}, {0}",
 	"dateFormatItem-Hms": "HH:mm:ss",
 	"dateFormatItem-hms": "hh:mm:ss a",
 	"field-week-relative+0": "Bieżący tydzień",

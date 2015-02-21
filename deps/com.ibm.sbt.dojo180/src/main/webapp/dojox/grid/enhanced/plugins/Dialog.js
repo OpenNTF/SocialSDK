@@ -1,4 +1,4 @@
-define("dojox/grid/enhanced/plugins/Dialog", [
+define([
 	"dojo/_base/declare",
 	"dojo/_base/html",
 	"dojo/window",

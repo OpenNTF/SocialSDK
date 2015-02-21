@@ -1,10 +1,19 @@
 define(
-"dojo/cldr/nls/az-cyrl/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormat-medium": "d MMM, y",
 	"dateFormatItem-MMMEd": "E, d, MMM",
 	"dateFormatItem-yMMMd": "d MMM, y",
 	"timeFormat-full": "HH:mm:ss zzzz",
+	"days-format-short": [
+		"базар",
+		"базар ертәси",
+		"чәршәнбә ахшамы",
+		"чәршәнбә",
+		"ҹүмә ахшамы",
+		"ҹүмә",
+		"шәнбә"
+	],
 	"months-standAlone-wide": [
 		"јанвар",
 		"феврал",
@@ -41,6 +50,15 @@ define(
 		"октјабр",
 		"нојабр",
 		"декабр"
+	],
+	"days-standAlone-short": [
+		"базар",
+		"базар ертәси",
+		"чәршәнбә ахшамы",
+		"чәршәнбә",
+		"ҹүмә ахшамы",
+		"ҹүмә",
+		"шәнбә"
 	],
 	"timeFormat-medium": "HH:mm:ss",
 	"dateFormat-long": "d MMMM , y",

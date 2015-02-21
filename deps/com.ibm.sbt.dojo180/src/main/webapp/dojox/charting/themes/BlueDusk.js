@@ -1,4 +1,4 @@
-define("dojox/charting/themes/BlueDusk", ["../SimpleTheme", "./common"], function(SimpleTheme, themes){
+define(["../SimpleTheme", "./common"], function(SimpleTheme, themes){
 	themes.BlueDusk = new SimpleTheme({
 		colors: [
 			"#292e76",

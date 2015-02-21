@@ -1,5 +1,3 @@
-// wrapped by build app
-define("dojox/secure/DOM", ["dijit","dojo","dojox","dojo/require!dojox/lang/observable"], function(dijit,dojo,dojox){
 dojo.provide("dojox.secure.DOM");
 dojo.require("dojox.lang.observable");
 
@@ -257,5 +255,3 @@ dojox.secure.DOM = function(element){
 dojox.secure.unwrap = function unwrap(result){
 	return (result && result.data__) || result;
 };
-
-});

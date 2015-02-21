@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/ru/hebrew", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "MM.y",
 	"dateFormatItem-yQ": "QQQ y 'г'.",
@@ -20,6 +20,12 @@ define(
 	"dayPeriods-format-wide-am": "до полудня",
 	"dateTimeFormat-medium": "{1}, {0}",
 	"months-format-abbr-leap": "Адар II",
+	"quarters-standAlone-abbr": [
+		"1-й кв.",
+		"2-й кв.",
+		"3-й кв.",
+		"4-й кв."
+	],
 	"timeFormat-full": "H:mm:ss zzzz",
 	"months-standAlone-abbr": [
 		"Тишрей",
@@ -50,10 +56,16 @@ define(
 	"dateFormat-long": "d MMMM y 'г'.",
 	"timeFormat-medium": "H:mm:ss",
 	"dateFormatItem-Hm": "H:mm",
-	"dateFormat-medium": "dd.MM.yyyy",
+	"dateFormat-medium": "dd MMM y 'г'.",
 	"dateFormatItem-Hms": "H:mm:ss",
 	"dayPeriods-format-narrow-pm": "пп",
 	"dateFormatItem-yMd": "dd.MM.y",
+	"quarters-standAlone-wide": [
+		"1-й квартал",
+		"2-й квартал",
+		"3-й квартал",
+		"4-й квартал"
+	],
 	"dayPeriods-format-narrow-am": "дп",
 	"dateTimeFormat-long": "{1}, {0}",
 	"months-standAlone-wide": [
@@ -106,16 +118,25 @@ define(
 		"сб"
 	],
 	"days-format-narrow": [
-		"В",
-		"Пн",
-		"Вт",
-		"С",
-		"Ч",
-		"П",
-		"С"
+		"вс",
+		"пн",
+		"вт",
+		"ср",
+		"чт",
+		"пт",
+		"сб"
 	],
 	"dateFormatItem-yMMMd": "d MMM y 'г'.",
 	"dateFormatItem-MEd": "E, dd.MM",
+	"days-standAlone-short": [
+		"вс",
+		"пн",
+		"вт",
+		"ср",
+		"чт",
+		"пт",
+		"сб"
+	],
 	"days-standAlone-abbr": [
 		"Вс",
 		"Пн",
@@ -131,7 +152,7 @@ define(
 	"dateFormatItem-yMMMEd": "E, d MMM y",
 	"dateFormat-full": "EEEE, d MMMM y 'г'.",
 	"dateFormatItem-Md": "dd.MM",
-	"dateFormatItem-yMEd": "E, dd.MM.y",
+	"dateFormatItem-yMEd": "ccc, d.MM.y 'г'.",
 	"months-format-wide": [
 		"Тишрей",
 		"Хешван",
@@ -148,6 +169,15 @@ define(
 		"Элул"
 	],
 	"dayPeriods-format-abbr-am": "до полудня",
+	"days-format-short": [
+		"вс",
+		"пн",
+		"вт",
+		"ср",
+		"чт",
+		"пт",
+		"сб"
+	],
 	"quarters-format-wide": [
 		"1-й квартал",
 		"2-й квартал",

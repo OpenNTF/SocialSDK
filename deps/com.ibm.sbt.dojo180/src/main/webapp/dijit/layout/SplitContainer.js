@@ -1,4 +1,4 @@
-define("dijit/layout/SplitContainer", [
+define([
 	"dojo/_base/array", // array.forEach array.indexOf array.some
 	"dojo/cookie", // cookie
 	"dojo/_base/declare", // declare

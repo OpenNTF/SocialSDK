@@ -1,7 +1,20 @@
-define("dojo/cldr/nls/coptic", { root:
+define({ root:
 
 //begin v1.x content
 {
+	"months-format-narrow@localeAlias73": {
+		"bundle": "coptic",
+		"target": "months-standAlone-narrow"
+	},
+	"days-standAlone-short": [
+		"1",
+		"2",
+		"3",
+		"4",
+		"5",
+		"6",
+		"7"
+	],
 	"months-format-narrow": [
 		"1",
 		"2",
@@ -17,6 +30,10 @@ define("dojo/cldr/nls/coptic", { root:
 		"12",
 		"13"
 	],
+	"dayPeriods-format-abbr@localeAlias98": {
+		"bundle": "gregorian",
+		"target": "dayPeriods-format-wide"
+	},
 	"quarters-standAlone-narrow": [
 		"1",
 		"2",
@@ -24,21 +41,58 @@ define("dojo/cldr/nls/coptic", { root:
 		"4"
 	],
 	"dateFormatItem-yQQQ": "y QQQ",
-	"dateFormatItem-yMEd": "E, y-M-d",
-	"quarters-format-abbr@localeAlias74": {
+	"dayPeriods-format-narrow@localeAlias100": {
 		"bundle": "gregorian",
-		"target": "quarters-format-wide"
+		"target": "dayPeriods-format-wide"
 	},
-	"dateFormatItem-MMMEd": "E MMM d",
-	"days-format-abbr@localeAlias68": {
+	"days-standAlone-abbr@localeAlias82": {
+		"bundle": "gregorian",
+		"target": "days-format-abbr"
+	},
+	"days-standAlone-abbr@localeAlias83": {
 		"bundle": "gregorian",
 		"target": "days-format-wide"
 	},
+	"dateFormatItem-yMEd": "E, y-M-d",
+	"quarters@localeAlias88": {
+		"bundle": "gregorian",
+		"target": "quarters"
+	},
+	"dateFormatItem-MMMEd": "E MMM d",
 	"eraNarrow": [
 		"ERA0",
 		"ERA1"
 	],
+	"days@localeAlias77": {
+		"bundle": "gregorian",
+		"target": "days"
+	},
+	"dayPeriods-format-narrow@localeAlias96": {
+		"bundle": "gregorian",
+		"target": "dayPeriods-format-abbr"
+	},
+	"days-format-short": [
+		"1",
+		"2",
+		"3",
+		"4",
+		"5",
+		"6",
+		"7"
+	],
+	"dayPeriods-format-narrow@localeAlias97": {
+		"bundle": "gregorian",
+		"target": "dayPeriods-format-wide"
+	},
 	"dateTimeFormats-appendItem-Day-Of-Week": "{0} {1}",
+	"quarters-standAlone-wide@localeAlias93": {
+		"bundle": "gregorian",
+		"target": "quarters-format-wide"
+	},
+	"dayPeriods-format-narrow@localeAlias99": {
+		"bundle": "gregorian",
+		"target": "dayPeriods-format-abbr"
+	},
 	"dateFormat-long": "y MMMM d",
 	"months-format-wide": [
 		"Tout",
@@ -56,35 +110,11 @@ define("dojo/cldr/nls/coptic", { root:
 		"Nasie"
 	],
 	"dateTimeFormat-medium": "{1} {0}",
-	"quarters-standAlone-abbr@localeAlias76": {
-		"bundle": "gregorian",
-		"target": "quarters-format-abbr"
-	},
 	"dayPeriods-format-wide-pm": "PM",
 	"dateFormat-full": "EEEE, y MMMM dd",
-	"quarters-standAlone-abbr@localeAlias77": {
-		"bundle": "gregorian",
-		"target": "quarters-format-wide"
-	},
-	"eraNarrow@localeAlias87": {
-		"bundle": "coptic",
-		"target": "eraAbbr"
-	},
-	"dateFormat@localeAlias88": {
-		"bundle": "gregorian",
-		"target": "dateFormat"
-	},
-	"dayPeriods@localeAlias79": {
-		"bundle": "gregorian",
-		"target": "dayPeriods"
-	},
 	"dateFormatItem-Md": "M-d",
 	"dayPeriods-format-abbr-am": "AM",
 	"dateTimeFormats-appendItem-Second": "{0} ({2}: {1})",
-	"quarters-format-narrow@localeAlias75": {
-		"bundle": "gregorian",
-		"target": "quarters-standAlone-narrow"
-	},
 	"dateFormatItem-yMd": "y-M-d",
 	"dateFormatItem-yM": "y-M",
 	"months-standAlone-wide": [
@@ -113,6 +143,14 @@ define("dojo/cldr/nls/coptic", { root:
 	"dateFormatItem-yMMM": "y MMM",
 	"dateFormatItem-yQ": "y Q",
 	"dateTimeFormats-appendItem-Era": "{0} {1}",
+	"days-standAlone-short@localeAlias84": {
+		"bundle": "gregorian",
+		"target": "days-format-short"
+	},
+	"days-format-abbr@localeAlias78": {
+		"bundle": "gregorian",
+		"target": "days-format-wide"
+	},
 	"months-format-abbr": [
 		"Tout",
 		"Baba",
@@ -128,6 +166,18 @@ define("dojo/cldr/nls/coptic", { root:
 		"Mesra",
 		"Nasie"
 	],
+	"days-standAlone-short@localeAlias85": {
+		"bundle": "gregorian",
+		"target": "days-format-abbr"
+	},
+	"days-standAlone-short@localeAlias86": {
+		"bundle": "gregorian",
+		"target": "days-format-wide"
+	},
+	"quarters-format-abbr@localeAlias89": {
+		"bundle": "gregorian",
+		"target": "quarters-format-wide"
+	},
 	"timeFormat-full": "HH:mm:ss zzzz",
 	"dateTimeFormats-appendItem-Week": "{0} ({2}: {1})",
 	"months-standAlone-abbr": [
@@ -168,7 +218,19 @@ define("dojo/cldr/nls/coptic", { root:
 		"6",
 		"7"
 	],
+	"days-format-short@localeAlias80": {
+		"bundle": "gregorian",
+		"target": "days-format-abbr"
+	},
+	"days-format-short@localeAlias81": {
+		"bundle": "gregorian",
+		"target": "days-format-wide"
+	},
 	"timeFormat-medium": "HH:mm:ss",
+	"dateTime@localeAlias105": {
+		"bundle": "gregorian",
+		"target": "dateTime"
+	},
 	"quarters-standAlone-abbr": [
 		"Q1",
 		"Q2",
@@ -176,6 +238,10 @@ define("dojo/cldr/nls/coptic", { root:
 		"Q4"
 	],
 	"dateFormatItem-Hm": "HH:mm",
+	"eraNarrow@localeAlias102": {
+		"bundle": "coptic",
+		"target": "eraAbbr"
+	},
 	"eraAbbr": [
 		"ERA0",
 		"ERA1"
@@ -189,28 +255,32 @@ define("dojo/cldr/nls/coptic", { root:
 		"6",
 		"7"
 	],
-	"months-standAlone-wide@localeAlias66": {
-		"bundle": "coptic",
-		"target": "months-format-wide"
-	},
 	"dateFormatItem-d": "d",
 	"dateFormatItem-ms": "mm:ss",
+	"quarters-standAlone-abbr@localeAlias91": {
+		"bundle": "gregorian",
+		"target": "quarters-format-abbr"
+	},
+	"quarters-standAlone-abbr@localeAlias92": {
+		"bundle": "gregorian",
+		"target": "quarters-format-wide"
+	},
 	"quarters-format-narrow": [
 		"1",
 		"2",
 		"3",
 		"4"
 	],
-	"days-format-narrow@localeAlias69": {
-		"bundle": "gregorian",
-		"target": "days-standAlone-narrow"
-	},
-	"dateFormatItem-h": "h a",
-	"dateTimeFormat-long": "{1} {0}",
 	"dayPeriods-format-narrow-am": "AM",
-	"dateTime@localeAlias90": {
+	"dateTimeFormat-long": "{1} {0}",
+	"dateFormatItem-h": "h a",
+	"dayPeriods@localeAlias94": {
 		"bundle": "gregorian",
-		"target": "dateTime"
+		"target": "dayPeriods"
+	},
+	"quarters-format-narrow@localeAlias90": {
+		"bundle": "gregorian",
+		"target": "quarters-standAlone-narrow"
 	},
 	"dateFormatItem-MMMd": "MMM d",
 	"dateFormatItem-MEd": "E, M-d",
@@ -224,14 +294,6 @@ define("dojo/cldr/nls/coptic", { root:
 		"6",
 		"7"
 	],
-	"eraNames@localeAlias86": {
-		"bundle": "coptic",
-		"target": "eraAbbr"
-	},
-	"months-format-abbr@localeAlias62": {
-		"bundle": "coptic",
-		"target": "months-format-wide"
-	},
 	"months-standAlone-narrow": [
 		"1",
 		"2",
@@ -249,14 +311,18 @@ define("dojo/cldr/nls/coptic", { root:
 	],
 	"dateFormatItem-y": "y",
 	"dateTimeFormats-appendItem-Day": "{0} ({2}: {1})",
+	"months-standAlone-wide@localeAlias76": {
+		"bundle": "coptic",
+		"target": "months-format-wide"
+	},
 	"dateFormatItem-hm": "h:mm a",
 	"dateTimeFormats-appendItem-Year": "{0} {1}",
 	"dateTimeFormats-appendItem-Hour": "{0} ({2}: {1})",
-	"days-standAlone-wide@localeAlias72": {
-		"bundle": "gregorian",
-		"target": "days-format-wide"
-	},
 	"dayPeriods-format-abbr-pm": "PM",
+	"days-format-narrow@localeAlias79": {
+		"bundle": "gregorian",
+		"target": "days-standAlone-narrow"
+	},
 	"days-format-abbr": [
 		"1",
 		"2",
@@ -290,91 +356,67 @@ define("dojo/cldr/nls/coptic", { root:
 		"7"
 	],
 	"dateFormatItem-MMM": "LLL",
+	"months-format-abbr@localeAlias72": {
+		"bundle": "coptic",
+		"target": "months-format-wide"
+	},
 	"dateTimeFormats-appendItem-Quarter": "{0} ({2}: {1})",
 	"dayPeriods-format-wide-am": "AM",
 	"dateTimeFormats-appendItem-Month": "{0} ({2}: {1})",
 	"dateTimeFormats-appendItem-Minute": "{0} ({2}: {1})",
-	"dayPeriods-format-abbr@localeAlias80": {
-		"bundle": "gregorian",
-		"target": "dayPeriods-format-wide"
-	},
-	"months-standAlone-abbr@localeAlias64": {
-		"bundle": "coptic",
-		"target": "months-format-abbr"
-	},
-	"months-standAlone-abbr@localeAlias65": {
-		"bundle": "coptic",
-		"target": "months-format-wide"
-	},
-	"quarters-standAlone-wide@localeAlias78": {
-		"bundle": "gregorian",
-		"target": "quarters-format-wide"
-	},
-	"dayPeriods-format-abbr@localeAlias83": {
-		"bundle": "gregorian",
-		"target": "dayPeriods-format-wide"
-	},
-	"dateFormat-short": "yyyy-MM-dd",
-	"months-format-narrow@localeAlias63": {
-		"bundle": "coptic",
-		"target": "months-standAlone-narrow"
-	},
-	"dateFormatItem-yMMMEd": "E, y MMM d",
-	"quarters@localeAlias73": {
-		"bundle": "gregorian",
-		"target": "quarters"
-	},
-	"days-standAlone-abbr@localeAlias70": {
-		"bundle": "gregorian",
-		"target": "days-format-abbr"
-	},
-	"days-standAlone-abbr@localeAlias71": {
+	"days-standAlone-wide@localeAlias87": {
 		"bundle": "gregorian",
 		"target": "days-format-wide"
 	},
+	"dateFormat-short": "yyyy-MM-dd",
+	"dateFormatItem-yMMMEd": "E, y MMM d",
+	"eraNames@localeAlias101": {
+		"bundle": "coptic",
+		"target": "eraAbbr"
+	},
 	"dateFormatItem-Ed": "d E",
 	"dateTimeFormats-appendItem-Timezone": "{0} {1}",
+	"dateFormat@localeAlias103": {
+		"bundle": "gregorian",
+		"target": "dateFormat"
+	},
 	"dateFormat-medium": "y MMM d",
-	"dayPeriods-format-narrow@localeAlias81": {
-		"bundle": "gregorian",
-		"target": "dayPeriods-format-abbr"
-	},
-	"dayPeriods-format-narrow@localeAlias82": {
-		"bundle": "gregorian",
-		"target": "dayPeriods-format-wide"
-	},
 	"dayPeriods-format-narrow-pm": "PM",
-	"dayPeriods-format-narrow@localeAlias84": {
-		"bundle": "gregorian",
-		"target": "dayPeriods-format-abbr"
-	},
-	"dayPeriods-format-narrow@localeAlias85": {
-		"bundle": "gregorian",
-		"target": "dayPeriods-format-wide"
-	},
-	"days@localeAlias67": {
-		"bundle": "gregorian",
-		"target": "days"
-	},
 	"dateTimeFormat-short": "{1} {0}",
-	"timeFormat@localeAlias89": {
+	"dateFormatItem-Hms": "HH:mm:ss",
+	"dateFormatItem-hms": "h:mm:ss a",
+	"months-standAlone-abbr@localeAlias74": {
+		"bundle": "coptic",
+		"target": "months-format-abbr"
+	},
+	"months-standAlone-abbr@localeAlias75": {
+		"bundle": "coptic",
+		"target": "months-format-wide"
+	},
+	"timeFormat@localeAlias104": {
 		"bundle": "gregorian",
 		"target": "timeFormat"
 	},
-	"dateFormatItem-Hms": "HH:mm:ss",
-	"dateFormatItem-hms": "h:mm:ss a"
+	"dayPeriods-format-abbr@localeAlias95": {
+		"bundle": "gregorian",
+		"target": "dayPeriods-format-wide"
+	}
 }
 //end v1.x content
 ,
 	"ar": true,
+	"bs-cyrl": true,
 	"hu": true,
+	"id": true,
 	"ja": true,
+	"lo": true,
+	"lt": true,
 	"pl": true,
 	"pt": true,
-	"ro": true,
 	"ru": true,
 	"sr": true,
 	"sv": true,
+	"th": true,
 	"tr": true,
 	"uk": true,
 	"vi": true,

@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/cy/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"field-dayperiod": "AM/PM",
@@ -9,7 +9,9 @@ define(
 		"Oed Crist"
 	],
 	"dateFormatItem-MMMEd": "E, d MMM",
+	"field-day-relative+-1": "ddoe",
 	"field-weekday": "Dydd o'r Wythnos",
+	"field-day-relative+-2": "echdoe",
 	"days-standAlone-wide": [
 		"Dydd Sul",
 		"Dydd Llun",
@@ -57,6 +59,8 @@ define(
 		"Rhag"
 	],
 	"dateFormatItem-yMMM": "MMM y",
+	"field-day-relative+0": "heddiw",
+	"field-day-relative+1": "yfory",
 	"days-standAlone-narrow": [
 		"S",
 		"L",
@@ -70,6 +74,7 @@ define(
 		"CC",
 		"OC"
 	],
+	"field-day-relative+2": "trennydd",
 	"dateFormat-long": "d MMMM y",
 	"timeFormat-medium": "HH:mm:ss",
 	"field-zone": "Cylchfa",
@@ -157,6 +162,15 @@ define(
 		"T",
 		"R"
 	],
+	"days-standAlone-short": [
+		"Sul",
+		"Llun",
+		"Maw",
+		"Mer",
+		"Iau",
+		"Gwen",
+		"Sad"
+	],
 	"days-standAlone-abbr": [
 		"Sul",
 		"Llun",
@@ -178,12 +192,21 @@ define(
 		"Ebrill",
 		"Mai",
 		"Mehefin",
-		"Gorffenaf",
+		"Gorffennaf",
 		"Awst",
 		"Medi",
 		"Hydref",
 		"Tachwedd",
 		"Rhagfyr"
+	],
+	"days-format-short": [
+		"Sul",
+		"Llun",
+		"Maw",
+		"Mer",
+		"Iau",
+		"Gwen",
+		"Sad"
 	],
 	"quarters-format-wide": [
 		"Chwarter 1af",

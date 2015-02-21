@@ -1,4 +1,4 @@
-define("dojox/mobile/IconMenuItem", [
+define([
 	"dojo/_base/declare",
 	"dojo/_base/lang",
 	"dojo/dom-class",
@@ -74,7 +74,11 @@ define("dojox/mobile/IconMenuItem", [
 			this.inherited(arguments);
 			if(!this._isOnLine){
 				this._isOnLine = true;
-				this.set("icon", this.icon); // retry applying the attribute
+				// retry applying the attribute for which the custom setter delays the actual 
+				// work until _isOnLine is true. 
+				this.set("icon", this._pendingIcon !== undefined ? this._pendingIcon : this.icon);
+				// Not needed anymore (this code executes only once per life cycle):
+				delete this._pendingIcon; 
 			}
 		},
 

@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/kam/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"field-dayperiod": "Ĩyakwakya/Ĩyawĩoo",
@@ -171,6 +171,15 @@ define(
 		"Ĩ",
 		"Ĩ"
 	],
+	"days-standAlone-short": [
+		"Wky",
+		"Wkw",
+		"Wkl",
+		"Wtũ",
+		"Wkn",
+		"Wtn",
+		"Wth"
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"Wky",
@@ -199,6 +208,15 @@ define(
 		"Mwai wa ĩkumi",
 		"Mwai wa ĩkumi na ĩmwe",
 		"Mwai wa ĩkumi na ilĩ"
+	],
+	"days-format-short": [
+		"Wky",
+		"Wkw",
+		"Wkl",
+		"Wtũ",
+		"Wkn",
+		"Wtn",
+		"Wth"
 	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

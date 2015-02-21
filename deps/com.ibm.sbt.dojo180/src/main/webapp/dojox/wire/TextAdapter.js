@@ -1,5 +1,3 @@
-// wrapped by build app
-define("dojox/wire/TextAdapter", ["dijit","dojo","dojox","dojo/require!dojox/wire/CompositeWire"], function(dijit,dojo,dojox){
 dojo.provide("dojox.wire.TextAdapter");
 
 dojo.require("dojox.wire.CompositeWire");
@@ -82,6 +80,4 @@ dojo.declare("dojox.wire.TextAdapter", dojox.wire.CompositeWire, {
 			return text + this.delimiter + segment; //String
 		}
 	}
-});
-
 });

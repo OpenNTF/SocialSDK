@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/hi/islamic", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yMd": "d/M/y",
 	"dateFormat-medium": "dd-MM-yyyy",
@@ -8,6 +8,15 @@ define(
 	"dateFormatItem-yMEd": "E, d/M/y",
 	"dateFormatItem-yMMMd": "d MMM, y",
 	"timeFormat-full": "h:mm:ss a zzzz",
+	"days-format-short": [
+		"र",
+		"सो",
+		"मं",
+		"बु",
+		"गु",
+		"शु",
+		"श"
+	],
 	"dateFormatItem-Md": "d/M",
 	"months-standAlone-wide": [
 		"मुहर्रम",
@@ -19,7 +28,9 @@ define(
 		"रजब",
 		"शावन",
 		"रमजान",
-		"शव्व्ल"
+		"शव्व्ल",
+		"जिल-क्दाह",
+		"जिल्-हिज्जाह"
 	],
 	"days-standAlone-narrow": [
 		"र",
@@ -41,9 +52,20 @@ define(
 		"रजब",
 		"शावन",
 		"रमजान",
-		"शव्व्ल"
+		"शव्व्ल",
+		"जिल-क्दाह",
+		"जिल्-हिज्जाह"
 	],
 	"dateFormatItem-yQQQ": "QQQ y",
+	"days-standAlone-short": [
+		"र",
+		"सो",
+		"मं",
+		"बु",
+		"गु",
+		"शु",
+		"श"
+	],
 	"dayPeriods-format-wide-am": "पूर्वाह्न",
 	"timeFormat-medium": "h:mm:ss a",
 	"dateFormat-long": "d MMMM y",
@@ -59,9 +81,12 @@ define(
 		"रजब",
 		"शावन",
 		"रमजान",
-		"शव्व्ल"
+		"शव्व्ल",
+		"जिल-क्दाह",
+		"जिल्-हिज्जाह"
 	],
 	"dateFormatItem-yM": "M-y",
+	"dayPeriods-format-narrow-pm": "अपराह्न",
 	"timeFormat-short": "h:mm a",
 	"months-format-abbr": [
 		"मुहर्रम",
@@ -73,8 +98,11 @@ define(
 		"रजब",
 		"शावन",
 		"रमजान",
-		"शव्व्ल"
+		"शव्व्ल",
+		"जिल-क्दाह",
+		"जिल्-हिज्जाह"
 	],
+	"timeFormat-long": "h:mm:ss a z",
 	"days-format-wide": [
 		"रविवार",
 		"सोमवार",
@@ -84,9 +112,9 @@ define(
 		"शुक्रवार",
 		"शनिवार"
 	],
-	"timeFormat-long": "h:mm:ss a z",
 	"dateFormatItem-yMMM": "MMM y",
 	"dateFormatItem-MMM": "MMM",
+	"dayPeriods-format-narrow-am": "पूर्वाह्न",
 	"quarters-format-wide": [
 		"तिमाही",
 		"दूसरी तिमाही",

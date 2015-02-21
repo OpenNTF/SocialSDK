@@ -1,11 +1,11 @@
 define(
-"dojo/cldr/nls/ur/number", //begin v1.x content
+//begin v1.x content
 {
 	"group": ",",
 	"percentSign": "%",
 	"exponential": "E",
-	"scientificFormat": "#E0",
 	"percentFormat": "#,##0%",
+	"list": ";",
 	"infinity": "∞",
 	"minusSign": "-",
 	"decimal": ".",
@@ -14,7 +14,7 @@ define(
 	"decimalFormat": "#,##0.###",
 	"currencyFormat": "¤#,##0.00",
 	"plusSign": "+",
-	"decimalFormat-short": "000T"
+	"decimalFormat-long": "000 ٹریلین"
 }
 //end v1.x content
 );

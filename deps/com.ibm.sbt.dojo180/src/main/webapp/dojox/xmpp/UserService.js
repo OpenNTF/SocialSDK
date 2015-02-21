@@ -1,5 +1,3 @@
-// wrapped by build app
-define("dojox/xmpp/UserService", ["dijit","dojo","dojox"], function(dijit,dojo,dojox){
 dojo.provide("dojox.xmpp.UserService");
 
 dojo.declare("dojox.xmpp.UserService", null, {
@@ -92,6 +90,4 @@ dojo.declare("dojox.xmpp.UserService", null, {
 	onGetPersonalProfileFailure: function(err){
 		//console.log("UserService::onGetPersonalProfileFailure() ", err);
 	}
-});
-
 });

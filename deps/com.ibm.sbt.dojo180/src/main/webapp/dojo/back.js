@@ -1,4 +1,4 @@
-define("dojo/back", ["./_base/config", "./_base/lang", "./sniff", "./dom", "./dom-construct", "./_base/window", "require"],
+define(["./_base/config", "./_base/lang", "./sniff", "./dom", "./dom-construct", "./_base/window", "require"],
 	function(config, lang, has, dom, domConstruct, baseWindow, require){
 	// module:
 	//		dojo/back
@@ -7,7 +7,7 @@ define("dojo/back", ["./_base/config", "./_base/lang", "./sniff", "./dom", "./do
 		// summary:
 		//		Browser history management resources
 	};
-	 1  && lang.setObject("dojo.back", back);
+	has("extend-dojo") && lang.setObject("dojo.back", back);
 
 	// everyone deals with encoding the hash slightly differently
 

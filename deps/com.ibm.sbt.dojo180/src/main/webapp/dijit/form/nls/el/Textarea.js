@@ -1,5 +1,5 @@
 define(
-"dijit/form/nls/el/Textarea", // used by both the editor and textarea widgets to provide information to screen reader users
+// used by both the editor and textarea widgets to provide information to screen reader users
 ({
 	iframeEditTitle: 'περιοχή επεξεργασίας',  // primary title for editable IFRAME, for screen readers when focus is in the editing area
 	iframeFocusTitle: 'πλαίσιο περιοχής επεξεργασίας'  // secondary title for editable IFRAME when focus is on outer container

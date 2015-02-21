@@ -1,4 +1,4 @@
-define("dojox/charting/themes/Distinctive", ["../SimpleTheme", "./common"], function(SimpleTheme, themes){
+define(["../SimpleTheme", "./common"], function(SimpleTheme, themes){
 	themes.Distinctive = new SimpleTheme({
 		colors: [
 			"#497c91",

@@ -1,4 +1,4 @@
-define("dojox/calendar/Touch", ["dojo/_base/array", "dojo/_base/lang", "dojo/_base/declare", "dojo/dom", "dojo/dom-geometry", "dojo/_base/window", "dojo/on", "dojo/_base/event", "dojo/keys"],
+define(["dojo/_base/array", "dojo/_base/lang", "dojo/_base/declare", "dojo/dom", "dojo/dom-geometry", "dojo/_base/window", "dojo/on", "dojo/_base/event", "dojo/keys"],
 
 	function(arr, lang, declare, dom, domGeometry, win, on, event, keys){
 			
@@ -296,7 +296,7 @@ define("dojox/calendar/Touch", ["dojo/_base/array", "dojo/_base/lang", "dojo/_ba
 					this._onItemDoubleClick({
 						triggerEvent: e,
 						renderer: p.renderer,
-						item: this.itemToRenderItem(p.item, this.get("store"))
+						item: this.renderItemToItem(p.item, this.get("store"))
 					});
 					
 					clearTimeout(this._pendingDoubleTap.timer);
@@ -315,7 +315,7 @@ define("dojox/calendar/Touch", ["dojo/_base/array", "dojo/_base/lang", "dojo/_ba
 					this._onItemClick({
 						triggerEvent: e,
 						renderer: p.renderer,
-						item: this.itemToRenderItem(p.item, this.get("store"))
+						item: this.renderItemToItem(p.item, this.get("store"))
 					});
 				}
 								

@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/de/number", //begin v1.x content
+//begin v1.x content
 {
 	"group": ".",
 	"percentSign": "%",
@@ -15,7 +15,8 @@ define(
 	"decimalFormat": "#,##0.###",
 	"currencyFormat": "#,##0.00 ¤",
 	"plusSign": "+",
-	"decimalFormat-short": "000 B"
+	"decimalFormat-long": "000 Billionen",
+	"decimalFormat-short": "000 Bio"
 }
 //end v1.x content
 );

@@ -1,5 +1,3 @@
-// wrapped by build app
-define("dojox/lang/observable", ["dijit","dojo","dojox"], function(dijit,dojo,dojox){
 dojo.provide("dojox.lang.observable");
 // Used to create a wrapper object with monitored reads and writes
 //
@@ -257,6 +255,4 @@ dojox.lang.makeObservable(function(obj,i){
 		return obj[i];
 	},function(obj,i,value){
 		// just ignore, exceptions don't seem to propagate through the VB stack.
-});
-
 });

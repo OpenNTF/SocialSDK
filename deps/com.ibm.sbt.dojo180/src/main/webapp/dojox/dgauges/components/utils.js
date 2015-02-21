@@ -1,4 +1,4 @@
-define("dojox/dgauges/components/utils", ["dojo/_base/lang", "dojo/_base/Color"], function(lang, Color){
+define(["dojo/_base/lang", "dojo/_base/Color"], function(lang, Color){
 	// module:
 	//		dojox/dgauges/components/utils
 	// summary:

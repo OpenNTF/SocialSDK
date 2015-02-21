@@ -1,4 +1,4 @@
-define("dojox/widget/rotator/Slide", [
+define([
 	"dojo/_base/lang",
 	"dojo/_base/fx",
 	"dojo/dom-style"

@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/ar-sy/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"months-format-abbr": [
 		"كانون الثاني",
@@ -29,7 +29,7 @@ define(
 		"تشرين الثاني",
 		"كانون الأول"
 	],
-	"months-standAlone-wide": [
+	"months-standAlone-abbr": [
 		"كانون الثاني",
 		"شباط",
 		"آذار",
@@ -43,7 +43,7 @@ define(
 		"تشرين الثاني",
 		"كانون الأول"
 	],
-	"months-standAlone-abbr": [
+	"months-standAlone-wide": [
 		"كانون الثاني",
 		"شباط",
 		"آذار",

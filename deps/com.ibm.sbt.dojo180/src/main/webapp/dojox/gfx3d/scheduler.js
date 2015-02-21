@@ -1,4 +1,4 @@
-define("dojox/gfx3d/scheduler", [
+define([
 	"dojo/_base/lang",
 	"dojo/_base/array",	// dojo.forEach, dojo.every
 	"dojo/_base/declare",	// declare

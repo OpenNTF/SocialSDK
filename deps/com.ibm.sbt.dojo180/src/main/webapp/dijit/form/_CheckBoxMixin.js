@@ -1,4 +1,4 @@
-define("dijit/form/_CheckBoxMixin", [
+define([
 	"dojo/_base/declare", // declare
 	"dojo/dom-attr", // domAttr.set
 	"dojo/_base/event" // event.stop
@@ -40,7 +40,6 @@ define("dijit/form/_CheckBoxMixin", [
 		_setReadOnlyAttr: function(/*Boolean*/ value){
 			this._set("readOnly", value);
 			domAttr.set(this.focusNode, 'readOnly', value);
-			this.focusNode.setAttribute("aria-readonly", value);
 		},
 
 		// Override dijit/form/Button._setLabelAttr() since we don't even have a containerNode.
@@ -48,7 +47,7 @@ define("dijit/form/_CheckBoxMixin", [
 		_setLabelAttr: undefined,
 
 		_getSubmitValue: function(/*String*/ value){
-			return !value && value !== 0 ? "on" : value;
+			return (value == null || value === "") ? "on" : value;
 		},
 
 		_setValueAttr: function(newValue){
@@ -60,7 +59,7 @@ define("dijit/form/_CheckBoxMixin", [
 		reset: function(){
 			this.inherited(arguments);
 			// Handle unlikely event that the <input type=checkbox> value attribute has changed
-			this._set("value", this.params.value || "on");
+			this._set("value", this._getSubmitValue(this.params.value));
 			domAttr.set(this.focusNode, 'value', this.value);
 		},
 

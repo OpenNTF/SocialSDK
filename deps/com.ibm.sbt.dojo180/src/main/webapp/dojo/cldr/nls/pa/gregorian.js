@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/pa/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dayPeriods-format-wide-pm": "ਬਾਅਦ ਦੁਪਹਿਰ",
 	"field-minute": "ਮਿੰਟ",
@@ -9,7 +9,6 @@ define(
 	],
 	"field-day-relative+-1": "ਲੰਘਿਆਂ ਕੱਲ",
 	"field-weekday": "ਹਫ਼ਤੇ ਦਾ ਦਿਨ",
-	"field-day-relative+-2": "ਪਰਸੋਂ",
 	"days-standAlone-wide": [
 		"ਐਤਵਾਰ",
 		"ਸੋਮਵਾਰ",
@@ -72,7 +71,6 @@ define(
 		"ਈ. ਪੂ.",
 		"ਸਾਲ"
 	],
-	"field-day-relative+2": "ਪਰਸੋਂ",
 	"dateFormat-long": "d MMMM y",
 	"timeFormat-medium": "h:mm:ss a",
 	"field-zone": "ਖੇਤਰ",
@@ -160,6 +158,15 @@ define(
 		"ਨ",
 		"ਦ"
 	],
+	"days-standAlone-short": [
+		"ਐਤ.",
+		"ਸੋਮ.",
+		"ਮੰਗਲ.",
+		"ਬੁਧ.",
+		"ਵੀਰ.",
+		"ਸ਼ੁਕਰ.",
+		"ਸ਼ਨੀ."
+	],
 	"days-standAlone-abbr": [
 		"ਐਤ.",
 		"ਸੋਮ.",
@@ -185,6 +192,15 @@ define(
 		"ਅਕਤੂਬਰ",
 		"ਨਵੰਬਰ",
 		"ਦਸੰਬਰ"
+	],
+	"days-format-short": [
+		"ਐਤ.",
+		"ਸੋਮ.",
+		"ਮੰਗਲ.",
+		"ਬੁਧ.",
+		"ਵੀਰ.",
+		"ਸ਼ੁਕਰ.",
+		"ਸ਼ਨੀ."
 	],
 	"quarters-format-wide": [
 		"ਇਕ ਚੌਥਾਈ",

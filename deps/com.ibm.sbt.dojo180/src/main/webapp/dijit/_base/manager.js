@@ -1,4 +1,4 @@
-define("dijit/_base/manager", [
+define([
 	"dojo/_base/array",
 	"dojo/_base/config", // defaultDuration
 	"dojo/_base/lang",

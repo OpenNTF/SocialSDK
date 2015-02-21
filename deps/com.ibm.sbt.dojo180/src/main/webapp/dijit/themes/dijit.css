@@ -17,8 +17,8 @@
 	margin:0;
 	border:0;
 	padding:0;
-	line-height:normal;
 	font: inherit;
+	line-height:normal;
 	color: inherit;
 }
 .dj_a11y .dijitReset {
@@ -378,11 +378,11 @@ div.dijitArrowButton {
 .dijitTextBoxDisabled {
 	color: gray;
 }
-.dj_webkit .dijitTextBoxDisabled input {
-	color: #eee; /* because WebKit lightens disabled input/textarea no matter what color you specify */
+.dj_safari .dijitTextBoxDisabled input {
+	color: #B0B0B0; /* because Safari lightens disabled input/textarea no matter what color you specify */
 }
-.dj_webkit textarea.dijitTextAreaDisabled {
-	color: #333; /* because WebKit lightens disabled input/textarea no matter what color you specify */
+.dj_safari textarea.dijitTextAreaDisabled {
+	color: #333; /* because Safari lightens disabled input/textarea no matter what color you specify */
 }
 .dj_gecko .dijitTextBoxReadOnly input.dijitInputField, /* disable arrow and validation presentation inputs but allow real input for text selection */
 .dj_gecko .dijitTextBoxDisabled input {
@@ -668,8 +668,8 @@ div.dijitArrowButton {
 }
 
 .dijitCheckBoxInput {
-	/* place the actual input on top, but all-but-invisible */
-	opacity: 0.01;
+	/* place the actual input on top, but invisible */
+	opacity: 0;
 }
 
 .dj_ie .dijitCheckBoxInput {
@@ -902,6 +902,11 @@ body .dijitAlignClient { position: absolute; }
 /* #6945: stop mouse events */
 .dj_ie .dijitSplitterCover {
 	background: white;
+	opacity: 0;
+}
+.dj_ie6 .dijitSplitterCover,
+.dj_ie7 .dijitSplitterCover,
+.dj_ie8 .dijitSplitterCover {
 	filter: alpha(opacity=0);
 }
 
@@ -1354,7 +1359,7 @@ Main class hierarchy:
 
 .dijitTabContainer {
     z-index: 0; /* so z-index settings below have no effect outside of the TabContainer */
-    overflow-y: visible; /* prevent off-by-one-pixel errors from hiding bottom border (opposite tab labels) */
+    overflow: visible; /* prevent off-by-one-pixel errors from hiding bottom border (opposite tab labels) */
 }
 .dj_ie6 .dijitTabContainer {
     /* workaround IE6 problem when tall content overflows TabContainer, see editor/test_FullScreen.html */
@@ -1800,6 +1805,7 @@ div.dijitTabDisabled, .dj_ie div.dijitTabDisabled {
 
 .dijitSliderDecorationV {
 	height: 100%;
+	white-space: nowrap;
 }
 
 .dijitSliderButton {
@@ -2073,6 +2079,16 @@ div.dijitTabDisabled, .dj_ie div.dijitTabDisabled {
 .dijitSelect .dijitSelectLabel {
 	vertical-align: baseline;
 }
+
+.dijitNumberTextBox {
+	text-align: left;
+	direction: ltr;
+}
+
+.dijitNumberTextBox .dijitInputInner {
+	text-align: inherit; /* input */
+}
+
 .dijitToolbar .dijitSelect {
 	margin: 0;
 }

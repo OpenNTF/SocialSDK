@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/sr-latn/roc", //begin v1.x content
+//begin v1.x content
 {
 	"eraAbbr": [
 		"Pre RK",

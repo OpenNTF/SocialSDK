@@ -1,4 +1,4 @@
-define("dijit/layout/_ContentPaneResizeMixin", [
+define([
 	"dojo/_base/array", // array.filter array.forEach
 	"dojo/_base/declare", // declare
 	"dojo/dom-class",	// domClass.contains domClass.toggle

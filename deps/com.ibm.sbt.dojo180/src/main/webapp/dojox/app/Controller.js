@@ -1,4 +1,4 @@
-define("dojox/app/Controller", ["dojo/_base/lang", "dojo/_base/declare", "dojo/on"], function(lang, declare, on){
+define(["dojo/_base/lang", "dojo/_base/declare", "dojo/on"], function(lang, declare, on){
 	// module:
 	//		dojox/app/Controller
 	// summary:

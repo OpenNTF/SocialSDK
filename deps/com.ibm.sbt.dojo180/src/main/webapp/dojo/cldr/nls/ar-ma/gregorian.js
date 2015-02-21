@@ -1,12 +1,96 @@
 define(
-"dojo/cldr/nls/ar-ma/gregorian", //begin v1.x content
+//begin v1.x content
 {
-	"dateFormat-short": "yyyy/M/d",
-	"dateFormat-medium": "yyyy/MM/dd",
-	"dateFormatItem-MMdd": "MM/dd",
-	"dateFormatItem-yM": "yyyy/M",
 	"dateFormatItem-Md": "M/d",
-	"dateFormatItem-yyyyMM": "yyyy/MM"
+	"months-format-narrow": [
+		"ي",
+		"ف",
+		"م",
+		"ﺃ",
+		"م",
+		"ﻥ",
+		"ﻝ",
+		"غ",
+		"ش",
+		"ﻙ",
+		"ﺏ",
+		"ﺩ"
+	],
+	"months-standAlone-abbr": [
+		"يناير",
+		"فبراير",
+		"مارس",
+		"أبريل",
+		"ماي",
+		"يونيو",
+		"يوليو",
+		"غشت",
+		"سبتمبر",
+		"أكتوبر",
+		"نونبر",
+		"ديسمبر"
+	],
+	"dateFormatItem-yM": "yyyy/M",
+	"dateFormat-medium": "yyyy/MM/dd",
+	"months-format-abbr": [
+		"يناير",
+		"فبراير",
+		"مارس",
+		"ﺄبﺮيﻟ",
+		"ماي",
+		"يونيو",
+		"يوليو",
+		"غشت",
+		"سبتمبر",
+		"أكتوبر",
+		"نونبر",
+		"ديسمبر"
+	],
+	"dateFormatItem-MMdd": "MM/dd",
+	"dateFormatItem-yyyyMM": "yyyy/MM",
+	"months-standAlone-wide": [
+		"يناير",
+		"فبراير",
+		"مارس",
+		"ﺄبﺮيﻟ",
+		"ماي",
+		"يونيو",
+		"يوليو",
+		"غشت",
+		"سبتمبر",
+		"أكتوبر",
+		"نونبر",
+		"ديسمبر"
+	],
+	"dateFormat-short": "yyyy/M/d",
+	"months-format-wide": [
+		"يناير",
+		"فبراير",
+		"مارس",
+		"إبريل",
+		"ماي",
+		"يونيو",
+		"يوليو",
+		"غشت",
+		"سبتمبر",
+		"أكتوبر",
+		"نونبر",
+		"ديسمبر"
+	],
+	"months-standAlone-narrow": [
+		"ي",
+		"ف",
+		"م",
+		"إ",
+		"م",
+		"ﻥ",
+		"ﻝ",
+		"غ",
+		"ش",
+		"ﻙ",
+		"ﺏ",
+		"ﺩ"
+	]
 }
 //end v1.x content
 );

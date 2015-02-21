@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/bm/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"field-dayperiod": "sɔgɔma/tile/wula/su",
@@ -11,7 +11,6 @@ define(
 	],
 	"dateFormatItem-MMMEd": "E d MMM",
 	"field-day-relative+-1": "kunu",
-	"field-weekday": "don",
 	"dateFormatItem-yQQQ": "QQQ y",
 	"dateFormatItem-MMdd": "dd/MM",
 	"days-standAlone-wide": [
@@ -52,7 +51,7 @@ define(
 	"months-standAlone-abbr": [
 		"zan",
 		"feb",
-		"nar",
+		"mar",
 		"awi",
 		"mɛ",
 		"zuw",
@@ -120,7 +119,7 @@ define(
 	"months-format-abbr": [
 		"zan",
 		"feb",
-		"nar",
+		"mar",
 		"awi",
 		"mɛ",
 		"zuw",
@@ -176,6 +175,15 @@ define(
 		"N",
 		"D"
 	],
+	"days-standAlone-short": [
+		"kar",
+		"ntɛ",
+		"tar",
+		"ara",
+		"ala",
+		"jum",
+		"sib"
+	],
 	"days-standAlone-abbr": [
 		"kar",
 		"ntɛ",
@@ -203,6 +211,15 @@ define(
 		"ɔkutɔburu",
 		"nowanburu",
 		"desanburu"
+	],
+	"days-format-short": [
+		"kar",
+		"ntɛ",
+		"tar",
+		"ara",
+		"ala",
+		"jum",
+		"sib"
 	],
 	"quarters-format-wide": [
 		"kalo saba fɔlɔ",

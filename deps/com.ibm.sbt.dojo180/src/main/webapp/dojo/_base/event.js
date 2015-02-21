@@ -1,4 +1,4 @@
-define("dojo/_base/event", ["./kernel", "../on", "../has", "../dom-geometry"], function(dojo, on, has, dom){
+define(["./kernel", "../on", "../has", "../dom-geometry"], function(dojo, on, has, dom){
 	// module:
 	//		dojo/_base/event
 
@@ -50,7 +50,7 @@ define("dojo/_base/event", ["./kernel", "../on", "../has", "../dom-geometry"], f
 		}
 	};
 
-	if( 1 ){
+	if(has("extend-dojo")){
 		dojo.fixEvent = ret.fix;
 		dojo.stopEvent = ret.stop;
 	}

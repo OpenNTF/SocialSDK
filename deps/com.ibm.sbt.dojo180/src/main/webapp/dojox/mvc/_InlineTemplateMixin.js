@@ -1,4 +1,4 @@
-define("dojox/mvc/_InlineTemplateMixin", [
+define([
 	"dojo/_base/declare",
 	"dojo/_base/lang",
 	"dojo/has"

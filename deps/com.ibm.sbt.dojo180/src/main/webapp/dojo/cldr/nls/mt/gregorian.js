@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/mt/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dayPeriods-format-wide-pm": "WN",
 	"field-minute": "Minuta",
@@ -73,12 +73,15 @@ define(
 	"dateFormat-long": "d 'ta'’ MMMM y",
 	"field-zone": "Żona",
 	"dateFormat-medium": "dd MMM y",
+	"field-year-relative+0": "Din is-sena",
+	"field-year-relative+1": "Sena li ġej",
 	"quarters-standAlone-wide": [
 		"K1",
 		"K2",
 		"K3",
 		"K4"
 	],
+	"field-year-relative+-1": "Sena l-oħra",
 	"field-year": "Sena",
 	"months-standAlone-wide": [
 		"Jannar",
@@ -150,6 +153,15 @@ define(
 		"N",
 		"D"
 	],
+	"days-standAlone-short": [
+		"Ħad",
+		"Tne",
+		"Tli",
+		"Erb",
+		"Ħam",
+		"Ġim",
+		"Sib"
+	],
 	"days-standAlone-abbr": [
 		"Ħad",
 		"Tne",
@@ -174,6 +186,15 @@ define(
 		"Ottubru",
 		"Novembru",
 		"Diċembru"
+	],
+	"days-format-short": [
+		"Ħad",
+		"Tne",
+		"Tli",
+		"Erb",
+		"Ħam",
+		"Ġim",
+		"Sib"
 	],
 	"quarters-format-wide": [
 		"K1",

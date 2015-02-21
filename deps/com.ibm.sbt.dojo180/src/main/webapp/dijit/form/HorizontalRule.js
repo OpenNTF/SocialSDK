@@ -1,4 +1,4 @@
-define("dijit/form/HorizontalRule", [
+define([
 	"dojo/_base/declare",	// declare
 	"../_Widget",
 	"../_TemplatedMixin"

@@ -1,21 +1,28 @@
 define(
-"dojo/cldr/nls/zh-hant/japanese", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormat-medium": "Gy/M/d",
 	"dateFormatItem-MMMEd": "M月d日E",
 	"dateFormatItem-MEd": "M/d（E）",
 	"dateFormatItem-yyyyMMM": "Gy年M月",
+	"dateFormatItem-Hm": "HH:mm",
 	"dateFormatItem-H": "H時",
+	"dateTimeFormat-medium": "{1} {0}",
 	"dateFormatItem-y": "Gy年",
 	"dateFormatItem-hm": "ah:mm",
 	"dateFormatItem-Md": "M/d",
 	"dateFormatItem-M": "M月",
 	"dateFormatItem-yyyyMMMEd": "Gy年M月d日E",
 	"dateFormatItem-yyyyMEd": "Gy/M/d（E）",
+	"dateTimeFormat-long": "{1} {0}",
 	"dateFormatItem-yyyy": "Gy年",
 	"dateFormat-long": "Gy年M月d日",
+	"dateFormatItem-Hms": "HH:mm:ss",
+	"dateFormatItem-ms": "mm:ss",
 	"dateFormat-short": "Gy/M/d",
+	"dateTimeFormat-short": "{1} {0}",
 	"dateFormatItem-Gy": "Gy年",
+	"dateTimeFormat-full": "{1} {0}",
 	"dateFormatItem-d": "d日",
 	"dateFormatItem-yyyyMMMd": "Gy年M月d日",
 	"eraAbbr": [
@@ -261,7 +268,7 @@ define(
 	"dateFormatItem-hms": "ah:mm:ss",
 	"dateFormatItem-MMM": "LLL",
 	"dateFormat-full": "Gy年M月d日EEEE",
-	"dateFormatItem-MMMd": "M月d日",
+	"dateFormatItem-MMMd": "MMM d",
 	"dateFormatItem-yyyyMd": "Gy/M/d",
 	"dateFormatItem-yyyyQ": "Gy年QQQ",
 	"dateFormatItem-Ed": "d日（E）"

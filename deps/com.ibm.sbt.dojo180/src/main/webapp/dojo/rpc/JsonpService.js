@@ -1,4 +1,4 @@
-define("dojo/rpc/JsonpService", [
+define([
 	"../_base/array", "../_base/declare", "../_base/lang", "./RpcService", "../io/script"],
 	function(array, declare, lang, RpcService, script){
 

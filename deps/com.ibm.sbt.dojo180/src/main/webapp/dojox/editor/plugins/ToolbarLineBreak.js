@@ -1,4 +1,4 @@
-define("dojox/editor/plugins/ToolbarLineBreak", [
+define([
 	"dojo",
 	"dijit",
 	"dojox",

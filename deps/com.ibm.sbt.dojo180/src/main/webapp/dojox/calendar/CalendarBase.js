@@ -1,4 +1,4 @@
-define("dojox/calendar/CalendarBase", [
+define([
 "dojo/_base/declare", 
 "dojo/_base/sniff", 
 "dojo/_base/event", 
@@ -125,6 +125,23 @@ _nls){
 		//		- "touch"		
 		// triggerEvent: Event
 		//		The event at the origin of this event.
+	};
+	=====*/
+	
+	/*=====
+	var __ExpandRendererClickEventArgs = {
+		// summary:
+		//		A expand renderer click event.
+		// columnIndex: Integer
+		//		The column index of the cell. 
+		// rowIndex: Integer
+		//		The row index of the cell.
+		// date: Date
+		//		The date displayed by the cell.
+		// renderer: dojox/calendar/_RendererMixin
+		//		The renderer clicked.
+		// triggerEvent: Event
+		//		The origin event.
 	};
 	=====*/
 
@@ -1336,7 +1353,7 @@ _nls){
 		
 		onColumnHeaderClick: function(e){
 			// summary:
-			//		Event dispatched when a column header cell is dispatched.
+			//		Event dispatched when a column header cell is clicked.
 			// e: __HeaderClickEventArgs
 			//		Header click event.
 			// tags:
@@ -1350,7 +1367,16 @@ _nls){
 			//		Header click event.
 			// tags:
 			//		callback
-		},		
+		},
+		
+		onExpandRendererClick: function(e){
+			// summary:
+			//		Event dispatched when an expand renderer is clicked.
+			// e: __ExpandRendererClickEventArgs
+			//		Expand renderer click event.
+			// tags:
+			//		callback
+		},
 		
 		onRendererCreated: function(renderer){
 			// summary:

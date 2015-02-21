@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/ml/indian", //begin v1.x content
+//begin v1.x content
 {
 	"months-format-wide": [
 		"ചൈത്രം",
@@ -9,11 +9,11 @@ define(
 		"ശ്രാവണം",
 		"ഭാദ്രപാദം",
 		"ആശ്വിനം",
-		"കാര്ത്തികം",
-		"മാര്ഗശീര്ഷം",
+		"കാർത്തികം",
+		"മാർഗശീർഷം",
 		"പൗഷം",
 		"മാഘം",
-		"ഫല്ഗുനം"
+		"ഫൽഗുനം"
 	],
 	"months-standAlone-narrow": [
 		"ചൈ",

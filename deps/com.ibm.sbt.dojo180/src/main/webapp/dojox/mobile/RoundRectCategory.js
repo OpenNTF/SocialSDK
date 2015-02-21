@@ -1,4 +1,4 @@
-define("dojox/mobile/RoundRectCategory", [
+define([
 	"dojo/_base/declare",
 	"dojo/_base/window",
 	"dojo/dom-construct",

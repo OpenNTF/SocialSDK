@@ -1,8 +1,7 @@
 define(
-"dojo/cldr/nls/ki/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
-	"field-dayperiod": "Mũthenya",
 	"dateFormatItem-yQ": "Q y",
 	"dayPeriods-format-wide-pm": "Hwaĩ-inĩ",
 	"field-minute": "Ndagĩka",
@@ -171,6 +170,15 @@ define(
 		"I",
 		"D"
 	],
+	"days-standAlone-short": [
+		"KMA",
+		"NTT",
+		"NMN",
+		"NMT",
+		"ART",
+		"NMA",
+		"NMM"
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"KMA",
@@ -199,6 +207,15 @@ define(
 		"Mwere wa ikũmi",
 		"Mwere wa ikũmi na ũmwe",
 		"Ndithemba"
+	],
+	"days-format-short": [
+		"KMA",
+		"NTT",
+		"NMN",
+		"NMT",
+		"ART",
+		"NMA",
+		"NMM"
 	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

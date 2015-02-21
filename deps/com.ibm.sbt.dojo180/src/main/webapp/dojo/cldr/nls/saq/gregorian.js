@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/saq/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"field-dayperiod": "TS/TP",
@@ -12,7 +12,6 @@ define(
 	],
 	"dateFormatItem-MMMEd": "E, MMM d",
 	"field-day-relative+-1": "Ng'ole",
-	"field-weekday": "Mpari",
 	"dateFormatItem-yQQQ": "QQQ y",
 	"days-standAlone-wide": [
 		"Mderot ee are",
@@ -171,6 +170,15 @@ define(
 		"T",
 		"T"
 	],
+	"days-standAlone-short": [
+		"Are",
+		"Kun",
+		"Ong",
+		"Ine",
+		"Ile",
+		"Sap",
+		"Kwe"
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"Are",
@@ -199,6 +207,15 @@ define(
 		"Lapa le tomon",
 		"Lapa le tomon obo",
 		"Lapa le tomon waare"
+	],
+	"days-format-short": [
+		"Are",
+		"Kun",
+		"Ong",
+		"Ine",
+		"Ile",
+		"Sap",
+		"Kwe"
 	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

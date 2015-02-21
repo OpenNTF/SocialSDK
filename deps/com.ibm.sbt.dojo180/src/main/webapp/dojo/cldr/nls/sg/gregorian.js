@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/sg/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"field-dayperiod": "Na lâ",
@@ -171,6 +171,15 @@ define(
 		"N",
 		"K"
 	],
+	"days-standAlone-short": [
+		"Bk1",
+		"Bk2",
+		"Bk3",
+		"Bk4",
+		"Bk5",
+		"Lâp",
+		"Lây"
+	],
 	"days-standAlone-abbr": [
 		"Bk1",
 		"Bk2",
@@ -198,6 +207,15 @@ define(
 		"Ngberere",
 		"Nabändüru",
 		"Kakauka"
+	],
+	"days-format-short": [
+		"Bk1",
+		"Bk2",
+		"Bk3",
+		"Bk4",
+		"Bk5",
+		"Lâp",
+		"Lây"
 	],
 	"quarters-format-wide": [
 		"Fângbisïö ôko",

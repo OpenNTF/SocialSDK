@@ -1,4 +1,4 @@
-define("dojox/grid/_ViewManager", [
+define([
 	"dojo/_base/declare",
 	"dojo/_base/sniff",
 	"dojo/dom-class"

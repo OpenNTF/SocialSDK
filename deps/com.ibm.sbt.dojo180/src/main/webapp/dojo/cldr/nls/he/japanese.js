@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/he/japanese", //begin v1.x content
+//begin v1.x content
 {
 	"eraAbbr": [
 		"טאיקה",

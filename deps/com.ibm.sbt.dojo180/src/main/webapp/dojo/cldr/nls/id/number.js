@@ -1,10 +1,22 @@
 define(
-"dojo/cldr/nls/id/number", //begin v1.x content
+//begin v1.x content
 {
 	"group": ".",
+	"percentSign": "%",
+	"exponential": "E",
+	"scientificFormat": "#E0",
+	"percentFormat": "#,##0%",
+	"list": ";",
+	"infinity": "∞",
+	"minusSign": "-",
+	"decimal": ",",
+	"nan": "NaN",
+	"perMille": "‰",
+	"decimalFormat": "#,##0.###",
 	"currencyFormat": "¤#,##0.00",
-	"decimalFormat-short": "000 T",
-	"decimal": ","
+	"plusSign": "+",
+	"decimalFormat-long": "000 triliun",
+	"decimalFormat-short": "000 T"
 }
 //end v1.x content
 );

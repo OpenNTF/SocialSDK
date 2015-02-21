@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/az/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"field-minute": "dəqiqə",
 	"eraNames": [
@@ -129,6 +129,15 @@ define(
 	"dateFormatItem-yMMMd": "d MMM, y",
 	"field-second": "saniyə",
 	"field-day": "bu gün",
+	"days-standAlone-short": [
+		"B.",
+		"B.E.",
+		"Ç.A.",
+		"Ç.",
+		"C.A.",
+		"C",
+		"Ş."
+	],
 	"days-standAlone-abbr": [
 		"B.",
 		"B.E.",
@@ -153,6 +162,15 @@ define(
 		"Oktyabr",
 		"Noyabr",
 		"Dekabr"
+	],
+	"days-format-short": [
+		"B.",
+		"B.E.",
+		"Ç.A.",
+		"Ç.",
+		"C.A.",
+		"C",
+		"Ş."
 	],
 	"quarters-format-wide": [
 		"1-ci kvartal",

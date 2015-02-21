@@ -1,6 +1,15 @@
 define(
-"dojo/cldr/nls/de/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"So.",
+		"Mo.",
+		"Di.",
+		"Mi.",
+		"Do.",
+		"Fr.",
+		"Sa."
+	],
 	"months-format-narrow": [
 		"J",
 		"F",
@@ -15,6 +24,12 @@ define(
 		"N",
 		"D"
 	],
+	"quarters-standAlone-narrow": [
+		"1",
+		"2",
+		"3",
+		"4"
+	],
 	"field-weekday": "Wochentag",
 	"dateFormatItem-yyQQQQ": "QQQQ yy",
 	"dateFormatItem-yQQQ": "QQQ y",
@@ -26,6 +41,15 @@ define(
 	],
 	"dayPeriods-format-wide-earlyMorning": "morgens",
 	"dayPeriods-format-wide-morning": "vormittags",
+	"days-format-short": [
+		"So.",
+		"Mo.",
+		"Di.",
+		"Mi.",
+		"Do.",
+		"Fr.",
+		"Sa."
+	],
 	"dateFormat-long": "d. MMMM y",
 	"months-format-wide": [
 		"Januar",
@@ -42,6 +66,7 @@ define(
 		"Dezember"
 	],
 	"dayPeriods-format-wide-evening": "abends",
+	"dateTimeFormat-medium": "{1} {0}",
 	"dayPeriods-format-wide-pm": "nachm.",
 	"dateFormat-full": "EEEE, d. MMMM y",
 	"dateFormatItem-Md": "d.M.",
@@ -79,18 +104,18 @@ define(
 	"field-hour": "Stunde",
 	"dateFormatItem-MMdd": "dd.MM.",
 	"months-format-abbr": [
-		"Jan",
-		"Feb",
-		"Mär",
-		"Apr",
+		"Jan.",
+		"Feb.",
+		"Mär.",
+		"Apr.",
 		"Mai",
-		"Jun",
-		"Jul",
-		"Aug",
-		"Sep",
-		"Okt",
-		"Nov",
-		"Dez"
+		"Juni",
+		"Juli",
+		"Aug.",
+		"Sep.",
+		"Okt.",
+		"Nov.",
+		"Dez."
 	],
 	"dateFormatItem-yyQ": "Q yy",
 	"timeFormat-full": "HH:mm:ss zzzz",
@@ -137,6 +162,12 @@ define(
 	"dateFormatItem-yyMMM": "MMM yy",
 	"timeFormat-medium": "HH:mm:ss",
 	"dateFormatItem-Hm": "HH:mm",
+	"quarters-standAlone-abbr": [
+		"Q1",
+		"Q2",
+		"Q3",
+		"Q4"
+	],
 	"eraAbbr": [
 		"v. Chr.",
 		"n. Chr."
@@ -162,9 +193,12 @@ define(
 		"4"
 	],
 	"field-day-relative+-1": "Gestern",
+	"dateFormatItem-h": "h a",
+	"dateTimeFormat-long": "{1} {0}",
 	"field-day-relative+-2": "Vorgestern",
 	"dateFormatItem-MMMd": "d. MMM",
 	"dateFormatItem-MEd": "E, d.M.",
+	"dateTimeFormat-full": "{1} {0}",
 	"field-day": "Tag",
 	"days-format-wide": [
 		"Sonntag",
@@ -218,7 +252,6 @@ define(
 		"F",
 		"S"
 	],
-	"field-month": "Monat",
 	"days-standAlone-narrow": [
 		"S",
 		"M",
@@ -229,6 +262,7 @@ define(
 		"S"
 	],
 	"dateFormatItem-MMM": "LLL",
+	"field-month": "Monat",
 	"dayPeriods-format-wide-am": "vorm.",
 	"dateFormatItem-MMMMEd": "E, d. MMMM",
 	"dateFormatItem-MMMMdd": "dd. MMMM",
@@ -245,6 +279,7 @@ define(
 	"field-year-relative+0": "Dieses Jahr",
 	"field-week-relative+-1": "Letzte Woche",
 	"field-year-relative+1": "Nächstes Jahr",
+	"dateTimeFormat-short": "{1} {0}",
 	"dateFormatItem-Hms": "HH:mm:ss",
 	"dateFormatItem-hms": "h:mm:ss a",
 	"dateFormatItem-yyyy": "y",

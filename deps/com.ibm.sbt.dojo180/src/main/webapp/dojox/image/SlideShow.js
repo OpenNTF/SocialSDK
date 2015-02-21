@@ -1,5 +1,3 @@
-// wrapped by build app
-define("dojox/image/SlideShow", ["dijit","dojo","dojox","dojo/require!dojo/string,dojo/fx,dijit/_Widget,dijit/_Templated"], function(dijit,dojo,dojox){
 dojo.provide("dojox.image.SlideShow");
 //
 // dojox.image.SlideShow courtesy Shane O Sullivan, licensed under a Dojo CLA
@@ -98,7 +96,7 @@ dojo.declare("dojox.image.SlideShow",
 	//	Time, in seconds, between image transitions during a slideshow.
 	slideshowInterval: 3,
 	
-	templateString: dojo.cache("dojox.image", "resources/SlideShow.html", "<div dojoAttachPoint=\"outerNode\" class=\"slideShowWrapper\">\n\t<div style=\"position:relative;\" dojoAttachPoint=\"innerWrapper\">\n\t\t<div class=\"slideShowNav\" dojoAttachEvent=\"onclick: _handleClick\">\n\t\t\t<div class=\"dijitInline slideShowTitle\" dojoAttachPoint=\"titleNode\">${title}</div>\n\t\t</div>\n\t\t<div dojoAttachPoint=\"navNode\" class=\"slideShowCtrl\" dojoAttachEvent=\"onclick: _handleClick\">\n\t\t\t<span dojoAttachPoint=\"navPrev\" class=\"slideShowCtrlPrev\"></span>\n\t\t\t<span dojoAttachPoint=\"navPlay\" class=\"slideShowCtrlPlay\"></span>\n\t\t\t<span dojoAttachPoint=\"navNext\" class=\"slideShowCtrlNext\"></span>\n\t\t</div>\n\t\t<div dojoAttachPoint=\"largeNode\" class=\"slideShowImageWrapper\"></div>\t\t\n\t\t<div dojoAttachPoint=\"hiddenNode\" class=\"slideShowHidden\"></div>\n\t</div>\n</div>"),
+	templateString: dojo.cache("dojox.image", "resources/SlideShow.html"),
 	
 	// _imageCounter: Number
 	//	A counter to keep track of which index image is to be loaded next
@@ -676,6 +674,4 @@ dojo.declare("dojox.image.SlideShow",
 			&& m.y <= (top + bb.h)
 		);	//	boolean
 	}
-});
-
 });

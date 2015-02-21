@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/ja/hebrew", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "y/M",
 	"dateFormatItem-yQ": "y/Q",
@@ -56,6 +56,9 @@ define(
 		"金",
 		"土"
 	],
+	"eraAbbr": [
+		"AM"
+	],
 	"dateFormat-long": "y年M月d日",
 	"timeFormat-medium": "H:mm:ss",
 	"dateFormatItem-Hm": "H:mm",
@@ -96,6 +99,12 @@ define(
 	],
 	"timeFormat-short": "H:mm",
 	"dateFormatItem-H": "H時",
+	"quarters-format-abbr": [
+		"1Q",
+		"2Q",
+		"3Q",
+		"4Q"
+	],
 	"days-format-abbr": [
 		"日",
 		"月",
@@ -123,6 +132,15 @@ define(
 		"12",
 		"13"
 	],
+	"days-standAlone-short": [
+		"日",
+		"月",
+		"火",
+		"水",
+		"木",
+		"金",
+		"土"
+	],
 	"dateFormatItem-hm": "aK:mm",
 	"months-standAlone-wide-leap": "アダル II",
 	"dateFormat-short": "yyyy/MM/dd",
@@ -144,6 +162,15 @@ define(
 		"タムズ",
 		"アヴ",
 		"エルル"
+	],
+	"days-format-short": [
+		"日",
+		"月",
+		"火",
+		"水",
+		"木",
+		"金",
+		"土"
 	],
 	"dateFormatItem-d": "d日",
 	"quarters-format-wide": [

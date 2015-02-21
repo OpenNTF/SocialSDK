@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/bn/islamic", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/yyyy",
 	"dateFormatItem-yQ": "Q y",
@@ -55,7 +55,9 @@ define(
 	"dateFormat-long": "d MMMM, y",
 	"timeFormat-medium": "h:mm:ss a",
 	"dateFormat-medium": "d MMM, y",
+	"dayPeriods-format-narrow-pm": "অপরাহ্ণ",
 	"dateFormatItem-yMd": "d/M/y",
+	"dayPeriods-format-narrow-am": "পূর্বাহ্ণ",
 	"quarters-standAlone-narrow": [
 		"১",
 		"২",
@@ -124,6 +126,15 @@ define(
 		"১১",
 		"১২"
 	],
+	"days-standAlone-short": [
+		"রঃ",
+		"সোঃ",
+		"মঃ",
+		"বুঃ",
+		"বৃঃ",
+		"শুঃ",
+		"শোঃ"
+	],
 	"dateFormat-short": "d/M/yy",
 	"dateFormatItem-yMMMEd": "E, d MMM, y",
 	"dateFormat-full": "EEEE, d MMMM, y",
@@ -143,11 +154,23 @@ define(
 		"জ্বিলকদ",
 		"জ্বিলহজ্জ"
 	],
+	"days-format-short": [
+		"রঃ",
+		"সোঃ",
+		"মঃ",
+		"বুঃ",
+		"বৃঃ",
+		"শুঃ",
+		"শোঃ"
+	],
 	"quarters-format-wide": [
 		"প্রথম চতুর্থাংশ",
 		"দ্বিতীয় চতুর্থাংশ",
 		"তৃতীয় চতুর্থাংশ",
 		"চতুর্থ চতুর্থাংশ"
+	],
+	"eraNarrow": [
+		"যুগ"
 	],
 	"days-format-wide": [
 		"রবিবার",
@@ -157,9 +180,6 @@ define(
 		"বৃহষ্পতিবার",
 		"শুক্রবার",
 		"শনিবার"
-	],
-	"eraNarrow": [
-		"যুগ"
 	]
 }
 //end v1.x content

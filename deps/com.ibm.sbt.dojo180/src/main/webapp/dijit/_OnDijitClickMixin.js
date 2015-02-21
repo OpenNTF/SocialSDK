@@ -1,4 +1,4 @@
-define("dijit/_OnDijitClickMixin", [
+define([
 	"dojo/on",
 	"dojo/_base/array", // array.forEach
 	"dojo/keys", // keys.ENTER keys.SPACE

@@ -1,4 +1,4 @@
-define("dojox/drawing/tools/Line", ["dojo/_base/lang", "../util/oo", "../manager/_registry", "../stencil/Line"],
+define(["dojo/_base/lang", "../util/oo", "../manager/_registry", "../stencil/Line"],
 function(lang, oo, registry, StencilLine){
 
 //dojox.drawing.tools.Line 

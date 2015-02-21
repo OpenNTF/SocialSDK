@@ -1,4 +1,4 @@
-define("dojox/atom/widget/nls/PeopleEditor", { root:
+define({ root:
 //begin v1.x content
 ({
 	add: "Add",

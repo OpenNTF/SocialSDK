@@ -1,4 +1,4 @@
-define("dojox/mobile/ToolBarButton", [
+define([
 	"dojo/_base/declare",
 	"dojo/_base/lang",
 	"dojo/_base/window",
@@ -85,6 +85,11 @@ define("dojox/mobile/ToolBarButton", [
 			}
 			this.bodyNode = domConstruct.create("span", {className:"mblToolBarButtonBody"}, this.domNode);
 			this.tableNode = domConstruct.create("table", {cellPadding:"0",cellSpacing:"0",border:"0"}, this.bodyNode);
+			if(!this.label && this.arrow){
+				// The class mblToolBarButtonText is needed for arrow shape too.
+				// If the button has a label, the class is set by _setLabelAttr. If no label, do it here.
+				this.tableNode.className = "mblToolBarButtonText";
+			}
 
 			var row = this.tableNode.insertRow(-1);
 			this.iconParentNode = row.insertCell(-1);
@@ -108,7 +113,11 @@ define("dojox/mobile/ToolBarButton", [
 			this.inherited(arguments);
 			if(!this._isOnLine){
 				this._isOnLine = true;
-				this.set("icon", this.icon); // retry applying the attribute
+				// retry applying the attribute for which the custom setter delays the actual 
+				// work until _isOnLine is true. 
+				this.set("icon", this._pendingIcon !== undefined ? this._pendingIcon : this.icon);
+				// Not needed anymore (this code executes only once per life cycle):
+				delete this._pendingIcon; 
 			}
 		},
 
@@ -133,7 +142,7 @@ define("dojox/mobile/ToolBarButton", [
 			// summary:
 			//		Sets the button label text.
 			this.inherited(arguments);
-			domClass.toggle(this.tableNode, "mblToolBarButtonText", text);
+			domClass.toggle(this.tableNode, "mblToolBarButtonText", text || this.arrow); // also needed if only arrow
 		},
 
 		_setSelectedAttr: function(/*Boolean*/selected){

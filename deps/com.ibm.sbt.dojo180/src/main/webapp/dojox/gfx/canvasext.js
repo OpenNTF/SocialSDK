@@ -1,4 +1,4 @@
-define("dojox/gfx/canvasext", [
+define([
 	"./_base",
 	"./canvas"],
 	function(gfx, canvas){

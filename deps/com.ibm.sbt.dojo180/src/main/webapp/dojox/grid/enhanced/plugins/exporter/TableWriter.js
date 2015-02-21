@@ -1,4 +1,4 @@
-define("dojox/grid/enhanced/plugins/exporter/TableWriter", [
+define([
 	"dojo/_base/declare",
 	"dojo/_base/array",
 	"dojo/dom-geometry",

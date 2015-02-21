@@ -1,4 +1,4 @@
-define("dojox/form/Manager", [
+define([
 	"dijit/_Widget",
 	"dijit/_TemplatedMixin",
 	"./manager/_Mixin",

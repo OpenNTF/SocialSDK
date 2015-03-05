@@ -73,7 +73,7 @@ public class ActivityNodeCrudrTest extends BaseActivityServiceTest {
 		
 		ActivityNode updated = activityService.getActivityNode(created.getActivityNodeUuid());
 		
-		Assert.assertEquals(unRandomize(read.getTitle()), unRandomize(updated.getTitle()));
+		Assert.assertEquals(unRandomize(read.getTitle().replace("#-", "")), unRandomize(updated.getTitle().replace("#-", "")));
 		
 		read = activityService.getActivityNode(created.getActivityNodeUuid());
 		

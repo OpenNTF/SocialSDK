@@ -1,4 +1,4 @@
-define("dojox/mobile/StoreCarousel", [
+define([
 	"dojo/_base/declare",
 	"./Carousel",
 	"./_StoreMixin"

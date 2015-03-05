@@ -1,4 +1,4 @@
-define("dijit/_editor/plugins/TextColor", [
+define([
 	"require",
 	"dojo/colors", // colors.fromRgb
 	"dojo/_base/declare", // declare
@@ -35,6 +35,7 @@ var TextColor = declare("dijit._editor.plugins.TextColor", _Plugin, {
 		this.button.loadDropDown = function(callback){
 			require(["../../ColorPalette"], lang.hitch(this, function(ColorPalette){
 				this.dropDown = new ColorPalette({
+					dir: self.editor.dir,
 					ownerDocument: self.editor.ownerDocument,
 					value: self.value,
 					onChange: function(color){

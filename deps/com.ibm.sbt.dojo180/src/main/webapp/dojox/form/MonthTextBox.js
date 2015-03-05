@@ -1,4 +1,4 @@
-define("dojox/form/MonthTextBox", [
+define([
 	"dojo/_base/kernel",
 	"dojo/_base/lang",
 	"dojox/widget/MonthlyCalendar",

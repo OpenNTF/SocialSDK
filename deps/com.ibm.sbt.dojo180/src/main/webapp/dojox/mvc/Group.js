@@ -1,4 +1,4 @@
-define("dojox/mvc/Group", ["dojo/_base/declare", "dijit/_WidgetBase", 	"dojo/_base/lang"], function(declare, _WidgetBase, lang){
+define(["dojo/_base/declare", "dijit/_WidgetBase", 	"dojo/_base/lang"], function(declare, _WidgetBase, lang){
 
 	return declare("dojox.mvc.Group", _WidgetBase, {
 		// summary:

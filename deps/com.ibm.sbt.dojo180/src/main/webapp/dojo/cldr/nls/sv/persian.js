@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/sv/persian", //begin v1.x content
+//begin v1.x content
 {
 	"months-format-abbr": [
 		"farvardin",
@@ -28,6 +28,9 @@ define(
 		"dey",
 		"bahman",
 		"esfand"
+	],
+	"eraAbbr": [
+		"AP"
 	],
 	"months-standAlone-abbr": [
 		"farvardin",

@@ -1,4 +1,4 @@
-define("dijit/form/MappedTextBox", [
+define([
 	"dojo/_base/declare", // declare
 	"dojo/dom-construct", // domConstruct.place
 	"./ValidationTextBox"

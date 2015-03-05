@@ -1,4 +1,4 @@
-define("dojox/html", ["./html/_base"], function (html) {
+define(["./html/_base"], function (html) {
 	/*=====
 	 return {
 	 // summary:

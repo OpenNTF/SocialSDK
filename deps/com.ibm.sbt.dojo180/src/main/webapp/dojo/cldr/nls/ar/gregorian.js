@@ -1,6 +1,15 @@
 define(
-"dojo/cldr/nls/ar/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"الأحد",
+		"الاثنين",
+		"الثلاثاء",
+		"الأربعاء",
+		"الخميس",
+		"الجمعة",
+		"السبت"
+	],
 	"months-format-narrow": [
 		"ي",
 		"ف",
@@ -22,12 +31,21 @@ define(
 		"٤"
 	],
 	"field-weekday": "اليوم",
-	"dateFormatItem-yQQQ": "y QQQ",
+	"dateFormatItem-yQQQ": "QQQ y",
 	"dateFormatItem-yMEd": "E، d/‏M/‏yyyy",
-	"dateFormatItem-MMMEd": "E d MMM",
+	"dateFormatItem-MMMEd": "E، d MMM",
 	"eraNarrow": [
 		"ق.م",
 		"م"
+	],
+	"days-format-short": [
+		"الأحد",
+		"الاثنين",
+		"الثلاثاء",
+		"الأربعاء",
+		"الخميس",
+		"الجمعة",
+		"السبت"
 	],
 	"dateFormat-long": "d MMMM، y",
 	"months-format-wide": [
@@ -44,6 +62,7 @@ define(
 		"نوفمبر",
 		"ديسمبر"
 	],
+	"dateTimeFormat-medium": "{1} {0}",
 	"dayPeriods-format-wide-pm": "م",
 	"dateFormat-full": "EEEE، d MMMM، y",
 	"dateFormatItem-Md": "d/‏M",
@@ -71,10 +90,10 @@ define(
 		"الربع الثالث",
 		"الربع الرابع"
 	],
-	"timeFormat-long": "z h:mm:ss a",
+	"timeFormat-long": "h:mm:ss a z",
 	"field-year": "السنة",
 	"dateFormatItem-yMMM": "MMM y",
-	"dateFormatItem-yQ": "yyyy Q",
+	"dateFormatItem-yQ": "Q yyyy",
 	"dateFormatItem-yyyyMMMM": "MMMM، y",
 	"field-hour": "الساعات",
 	"dateFormatItem-MMdd": "dd‏/MM",
@@ -93,10 +112,11 @@ define(
 		"ديسمبر"
 	],
 	"dateFormatItem-yyQ": "Q yy",
-	"timeFormat-full": "zzzz h:mm:ss a",
+	"timeFormat-full": "h:mm:ss a zzzz",
 	"field-day-relative+0": "اليوم",
 	"field-day-relative+1": "غدًا",
 	"field-day-relative+2": "بعد الغد",
+	"dateFormatItem-H": "HH",
 	"months-standAlone-abbr": [
 		"يناير",
 		"فبراير",
@@ -166,9 +186,12 @@ define(
 		"٤"
 	],
 	"field-day-relative+-1": "أمس",
+	"dateFormatItem-h": "h a",
+	"dateTimeFormat-long": "{1} {0}",
 	"field-day-relative+-2": "أول أمس",
 	"dateFormatItem-MMMd": "d MMM",
 	"dateFormatItem-MEd": "E، d/M",
+	"dateTimeFormat-full": "{1} {0}",
 	"dateFormatItem-yMMMM": "MMMM y",
 	"field-day": "يوم",
 	"days-format-wide": [
@@ -235,7 +258,7 @@ define(
 	],
 	"dateFormatItem-MMM": "LLL",
 	"dayPeriods-format-wide-am": "ص",
-	"dateFormatItem-MMMMEd": "E d MMMM",
+	"dateFormatItem-MMMMEd": "E، d MMMM",
 	"dateFormat-short": "d‏/M‏/yyyy",
 	"field-second": "الثواني",
 	"dateFormatItem-yMMMEd": "E، d MMM، y",
@@ -247,6 +270,7 @@ define(
 	"field-year-relative+0": "هذه السنة",
 	"field-week-relative+-1": "الأسبوع الماضي",
 	"field-year-relative+1": "السنة التالية",
+	"dateTimeFormat-short": "{1} {0}",
 	"dateFormatItem-Hms": "HH:mm:ss",
 	"dateFormatItem-hms": "h:mm:ss a",
 	"field-week-relative+0": "هذا الأسبوع",

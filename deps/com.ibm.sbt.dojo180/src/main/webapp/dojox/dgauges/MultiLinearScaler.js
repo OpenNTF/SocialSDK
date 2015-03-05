@@ -1,4 +1,4 @@
-define("dojox/dgauges/MultiLinearScaler", ["dojo/_base/declare", "dojo/Stateful"], function(declare, Stateful){
+define(["dojo/_base/declare", "dojo/Stateful"], function(declare, Stateful){
 	return declare("dojox.dgauges.MultiLinearScaler", Stateful, {
 		// summary:
 		//		The multi-linear scaler. This scaler maps numeric values according 
@@ -144,7 +144,6 @@ define("dojox/dgauges/MultiLinearScaler", ["dojo/_base/declare", "dojo/Stateful"
 					continue;
 				}
 			}
-			return res;
 		}
 	});
 });

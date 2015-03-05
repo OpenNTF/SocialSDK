@@ -1,4 +1,4 @@
-define("dojox/mobile/EdgeToEdgeStoreList", [
+define([
 	"dojo/_base/declare",
 	"./EdgeToEdgeList",
 	"./_StoreListMixin"

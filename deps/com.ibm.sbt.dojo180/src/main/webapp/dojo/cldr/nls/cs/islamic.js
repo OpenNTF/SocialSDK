@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/cs/islamic", //begin v1.x content
+//begin v1.x content
 {
 	"quarters-standAlone-wide": [
 		"1. čtvrtletí",
@@ -14,8 +14,17 @@ define(
 	"dateFormatItem-yMEd": "E, d. M. y",
 	"dateFormatItem-Hm": "H:mm",
 	"dateFormatItem-H": "H",
-	"dateFormatItem-yMMMd": "d. MMM y",
+	"dateFormatItem-yMMMd": "d. M. y",
 	"timeFormat-full": "H:mm:ss zzzz",
+	"days-format-short": [
+		"ne",
+		"po",
+		"út",
+		"st",
+		"čt",
+		"pá",
+		"so"
+	],
 	"dateFormatItem-Md": "d. M.",
 	"days-standAlone-narrow": [
 		"N",
@@ -26,9 +35,16 @@ define(
 		"P",
 		"S"
 	],
-	"dayPeriods-format-wide-pm": "odp.",
 	"dateFormatItem-yQQQ": "QQQ y",
-	"dayPeriods-format-wide-am": "dop.",
+	"days-standAlone-short": [
+		"Ne",
+		"Po",
+		"Út",
+		"St",
+		"Čt",
+		"Pá",
+		"So"
+	],
 	"timeFormat-medium": "H:mm:ss",
 	"dateFormat-long": "d. MMMM y",
 	"dateFormatItem-Hms": "H:mm:ss",
@@ -64,6 +80,7 @@ define(
 		"pá",
 		"so"
 	],
+	"timeFormat-long": "H:mm:ss z",
 	"days-format-wide": [
 		"neděle",
 		"pondělí",
@@ -73,7 +90,6 @@ define(
 		"pátek",
 		"sobota"
 	],
-	"timeFormat-long": "H:mm:ss z",
 	"dateFormatItem-yQ": "Q yyyy",
 	"dateFormatItem-yMMM": "LLL y",
 	"quarters-format-wide": [

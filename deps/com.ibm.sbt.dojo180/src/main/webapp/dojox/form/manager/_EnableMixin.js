@@ -1,4 +1,4 @@
-define("dojox/form/manager/_EnableMixin", [
+define([
 	"dojo/_base/lang",
 	"dojo/_base/kernel",
 	"dojo/dom-attr",

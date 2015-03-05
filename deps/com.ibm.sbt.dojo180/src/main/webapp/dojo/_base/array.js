@@ -1,4 +1,4 @@
-define("dojo/_base/array", ["./kernel", "../has", "./lang"], function(dojo, has, lang){
+define(["./kernel", "../has", "./lang"], function(dojo, has, lang){
 	// module:
 	//		dojo/_base/array
 
@@ -337,7 +337,7 @@ define("dojo/_base/array", ["./kernel", "../has", "./lang"], function(dojo, has,
 	};
 
 
-	 1  && lang.mixin(dojo, array);
+	has("extend-dojo") && lang.mixin(dojo, array);
 
 	return array;
 });

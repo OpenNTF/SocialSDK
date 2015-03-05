@@ -1,4 +1,4 @@
-define("dijit/form/RadioButton", [
+define([
 	"dojo/_base/declare", // declare
 	"./CheckBox",
 	"./_RadioButtonMixin"

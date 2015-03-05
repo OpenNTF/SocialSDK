@@ -1,4 +1,4 @@
-define("dojox/drawing/manager/keys", ["dojo", "../util/common"], 
+define(["dojo", "../util/common"], 
 function(dojo, utilCommon){
 	
 	// Ref: isEdit allows events to happen in Drawing, like TextBlocks

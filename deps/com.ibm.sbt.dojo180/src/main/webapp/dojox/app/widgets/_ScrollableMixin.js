@@ -1,10 +1,10 @@
 // This module is modified from dojox/mobile/_ScrollableMixin and dojox/mobile/ScrollableView
-define("dojox/app/widgets/_ScrollableMixin", [
+define([
 	"dojo/_base/declare",
 	"dojo/_base/lang",
 	"dojo/dom-class",
 	"dojo/dom-construct",
-	"./scrollable"],
+	"dojox/mobile/scrollable"],
 	function(declare, lang, domClass, domConstruct, Scrollable){
 	// module:
 	//		dojox/mobile/_ScrollableMixin
@@ -15,7 +15,7 @@ define("dojox/app/widgets/_ScrollableMixin", [
 		// summary:
 		//		Mixin for widgets to have a touch scrolling capability.
 		// description:
-		//		Actual implementation is in scrollable.js.
+		//		Actual implementation is in dojox/mobile/scrollable.js.
 		//		scrollable.js is not a dojo class, but just a collection
 		//		of functions. This module makes scrollable.js a dojo class.
 
@@ -28,7 +28,7 @@ define("dojox/app/widgets/_ScrollableMixin", [
 		allowNestedScrolls: true,
 
 		constructor: function(){
-			this.scrollableParams = {};
+			this.scrollableParams = {noResize: true}; // set noResize to true to match the way it was done in app/widgets/scrollable.js
 		},
 
 		destroy: function(){

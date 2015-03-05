@@ -1,152 +1,7 @@
 define(
-"dojo/cldr/nls/id/gregorian", //begin v1.x content
+//begin v1.x content
 {
-	"dateFormatItem-yM": "M/y",
-	"field-dayperiod": "Siang/Malam",
-	"dateFormatItem-yQ": "Q y",
-	"dayPeriods-format-wide-pm": "PM",
-	"field-minute": "Menit",
-	"eraNames": [
-		"SM",
-		"M"
-	],
-	"dateFormatItem-MMMEd": "E, d MMM",
-	"field-day-relative+-1": "Kemarin",
-	"field-weekday": "Hari dalam Seminggu",
-	"dateFormatItem-yQQQ": "QQQ y",
-	"field-day-relative+-2": "Kemarin lusa",
-	"days-standAlone-wide": [
-		"Minggu",
-		"Senin",
-		"Selasa",
-		"Rabu",
-		"Kamis",
-		"Jumat",
-		"Sabtu"
-	],
-	"months-standAlone-narrow": [
-		"J",
-		"F",
-		"M",
-		"A",
-		"M",
-		"J",
-		"J",
-		"A",
-		"S",
-		"O",
-		"N",
-		"D"
-	],
-	"field-hour": "Jam",
-	"dayPeriods-format-wide-am": "AM",
-	"quarters-standAlone-abbr": [
-		"K1",
-		"K2",
-		"K3",
-		"K4"
-	],
-	"timeFormat-full": "H:mm:ss zzzz",
-	"months-standAlone-abbr": [
-		"Jan",
-		"Feb",
-		"Mar",
-		"Apr",
-		"Mei",
-		"Jun",
-		"Jul",
-		"Agt",
-		"Sep",
-		"Okt",
-		"Nov",
-		"Des"
-	],
-	"dateFormatItem-Ed": "E, d",
-	"dateFormatItem-yMMM": "MMM y",
-	"field-day-relative+0": "Hari Ini",
-	"field-day-relative+1": "Besok",
-	"days-standAlone-narrow": [
-		"M",
-		"S",
-		"S",
-		"R",
-		"K",
-		"J",
-		"S"
-	],
-	"eraAbbr": [
-		"SM",
-		"M"
-	],
-	"field-day-relative+2": "Lusa",
-	"dateFormat-long": "d MMMM yyyy",
-	"timeFormat-medium": "HH:mm:ss",
-	"field-zone": "Zona Waktu",
-	"field-week-relative+-1": "Minggu lalu",
-	"dateFormat-medium": "d MMM yyyy",
-	"field-year-relative+0": "Tahun ini",
-	"field-year-relative+1": "Tahun depan",
-	"dateFormatItem-yMd": "d/M/y",
-	"quarters-standAlone-wide": [
-		"kuartal pertama",
-		"kuartal kedua",
-		"kuartal ketiga",
-		"kuartal keempat"
-	],
-	"field-year-relative+-1": "Tahun lalu",
-	"field-year": "Tahun",
-	"field-week": "Minggu",
-	"months-standAlone-wide": [
-		"Januari",
-		"Februari",
-		"Maret",
-		"April",
-		"Mei",
-		"Juni",
-		"Juli",
-		"Agustus",
-		"September",
-		"Oktober",
-		"November",
-		"Desember"
-	],
-	"dateFormatItem-MMMMEd": "E, d MMMM",
-	"dateFormatItem-MMMd": "d MMM",
-	"quarters-format-narrow": [
-		"1",
-		"2",
-		"3",
-		"4"
-	],
-	"field-week-relative+0": "Minggu ini",
-	"field-week-relative+1": "Minggu berikutnya",
-	"timeFormat-long": "HH:mm:ss z",
-	"months-format-abbr": [
-		"Jan",
-		"Feb",
-		"Mar",
-		"Apr",
-		"Mei",
-		"Jun",
-		"Jul",
-		"Agt",
-		"Sep",
-		"Okt",
-		"Nov",
-		"Des"
-	],
-	"field-month-relative+0": "Bulan ini",
-	"timeFormat-short": "HH:mm",
-	"field-month": "Bulan",
-	"field-month-relative+1": "Bulan berikutnya",
-	"dateFormatItem-MMMMd": "d MMMM",
-	"quarters-format-abbr": [
-		"K1",
-		"K2",
-		"K3",
-		"K4"
-	],
-	"days-format-abbr": [
+	"days-standAlone-short": [
 		"Min",
 		"Sen",
 		"Sel",
@@ -155,19 +10,6 @@ define(
 		"Jum",
 		"Sab"
 	],
-	"days-format-narrow": [
-		"M",
-		"S",
-		"S",
-		"R",
-		"K",
-		"J",
-		"S"
-	],
-	"dateFormatItem-yMMMd": "d MMM y",
-	"field-second": "Detik",
-	"field-day": "Hari",
-	"dateFormatItem-MEd": "E, d/M",
 	"months-format-narrow": [
 		"J",
 		"F",
@@ -182,7 +24,21 @@ define(
 		"N",
 		"D"
 	],
-	"days-standAlone-abbr": [
+	"quarters-standAlone-narrow": [
+		"1",
+		"2",
+		"3",
+		"4"
+	],
+	"field-weekday": "Hari dalam Seminggu",
+	"dateFormatItem-yQQQ": "QQQ y",
+	"dateFormatItem-yMEd": "E, d/M/y",
+	"dateFormatItem-MMMEd": "E, d MMM",
+	"eraNarrow": [
+		"SM",
+		"M"
+	],
+	"days-format-short": [
 		"Min",
 		"Sen",
 		"Sel",
@@ -191,11 +47,7 @@ define(
 		"Jum",
 		"Sab"
 	],
-	"dateFormat-short": "dd/MM/yy",
-	"dateFormatItem-yMMMEd": "E, d MMM y",
-	"dateFormat-full": "EEEE, dd MMMM yyyy",
-	"dateFormatItem-Md": "d/M",
-	"dateFormatItem-yMEd": "E, d/M/y",
+	"dateFormat-long": "d MMMM yyyy",
 	"months-format-wide": [
 		"Januari",
 		"Februari",
@@ -210,13 +62,135 @@ define(
 		"November",
 		"Desember"
 	],
-	"quarters-format-wide": [
-		"kuartal pertama",
-		"kuartal kedua",
-		"kuartal ketiga",
-		"kuartal keempat"
+	"dateTimeFormat-medium": "{1} {0}",
+	"dayPeriods-format-wide-pm": "PM",
+	"dateFormat-full": "EEEE, dd MMMM yyyy",
+	"dateFormatItem-Md": "d/M",
+	"dateFormatItem-yMd": "d/M/y",
+	"field-era": "Era",
+	"dateFormatItem-yM": "M/y",
+	"months-standAlone-wide": [
+		"Januari",
+		"Februari",
+		"Maret",
+		"April",
+		"Mei",
+		"Juni",
+		"Juli",
+		"Agustus",
+		"September",
+		"Oktober",
+		"November",
+		"Desember"
 	],
-	"field-month-relative+-1": "Bulan lalu",
+	"timeFormat-short": "HH.mm",
+	"quarters-format-wide": [
+		"Kuartal ke-1",
+		"Kuartal ke-2",
+		"Kuartal ke-3",
+		"Kuartal ke-4"
+	],
+	"timeFormat-long": "HH.mm.ss z",
+	"field-year": "Tahun",
+	"dateFormatItem-yMMM": "MMM y",
+	"dateFormatItem-yQ": "Q y",
+	"field-hour": "Jam",
+	"months-format-abbr": [
+		"Jan",
+		"Feb",
+		"Mar",
+		"Apr",
+		"Mei",
+		"Jun",
+		"Jul",
+		"Agt",
+		"Sep",
+		"Okt",
+		"Nov",
+		"Des"
+	],
+	"timeFormat-full": "HH.mm.ss zzzz",
+	"field-day-relative+0": "Hari Ini",
+	"field-day-relative+1": "Besok",
+	"field-day-relative+2": "Lusa",
+	"dateFormatItem-H": "HH",
+	"months-standAlone-abbr": [
+		"Jan",
+		"Feb",
+		"Mar",
+		"Apr",
+		"Mei",
+		"Jun",
+		"Jul",
+		"Agt",
+		"Sep",
+		"Okt",
+		"Nov",
+		"Des"
+	],
+	"quarters-format-abbr": [
+		"K1",
+		"K2",
+		"K3",
+		"K4"
+	],
+	"quarters-standAlone-wide": [
+		"Kuartal ke-1",
+		"Kuartal ke-2",
+		"Kuartal ke-3",
+		"Kuartal ke-4"
+	],
+	"dateFormatItem-M": "L",
+	"days-standAlone-wide": [
+		"Minggu",
+		"Senin",
+		"Selasa",
+		"Rabu",
+		"Kamis",
+		"Jumat",
+		"Sabtu"
+	],
+	"dateFormatItem-MMMMd": "d MMMM",
+	"timeFormat-medium": "HH.mm.ss",
+	"dateFormatItem-Hm": "HH.mm",
+	"quarters-standAlone-abbr": [
+		"K1",
+		"K2",
+		"K3",
+		"K4"
+	],
+	"eraAbbr": [
+		"SM",
+		"M"
+	],
+	"field-minute": "Menit",
+	"field-dayperiod": "Siang/Malam",
+	"days-standAlone-abbr": [
+		"Min",
+		"Sen",
+		"Sel",
+		"Rab",
+		"Kam",
+		"Jum",
+		"Sab"
+	],
+	"dateFormatItem-d": "d",
+	"dateFormatItem-ms": "mm.ss",
+	"quarters-format-narrow": [
+		"1",
+		"2",
+		"3",
+		"4"
+	],
+	"field-day-relative+-1": "Kemarin",
+	"dateFormatItem-h": "h a",
+	"dateTimeFormat-long": "{1} {0}",
+	"dayPeriods-format-narrow-am": "AM",
+	"field-day-relative+-2": "Kemarin lusa",
+	"dateFormatItem-MMMd": "d MMM",
+	"dateFormatItem-MEd": "E, d/M",
+	"dateTimeFormat-full": "{1} {0}",
+	"field-day": "Hari",
 	"days-format-wide": [
 		"Minggu",
 		"Senin",
@@ -226,10 +200,78 @@ define(
 		"Jumat",
 		"Sabtu"
 	],
-	"eraNarrow": [
+	"field-zone": "Zona Waktu",
+	"dateFormatItem-y": "y",
+	"months-standAlone-narrow": [
+		"J",
+		"F",
+		"M",
+		"A",
+		"M",
+		"J",
+		"J",
+		"A",
+		"S",
+		"O",
+		"N",
+		"D"
+	],
+	"field-year-relative+-1": "Tahun lalu",
+	"field-month-relative+-1": "Bulan lalu",
+	"dateFormatItem-hm": "h.mm a",
+	"days-format-abbr": [
+		"Min",
+		"Sen",
+		"Sel",
+		"Rab",
+		"Kam",
+		"Jum",
+		"Sab"
+	],
+	"dateFormatItem-yMMMd": "d MMM y",
+	"eraNames": [
 		"SM",
 		"M"
-	]
+	],
+	"days-format-narrow": [
+		"M",
+		"S",
+		"S",
+		"R",
+		"K",
+		"J",
+		"S"
+	],
+	"field-month": "Bulan",
+	"days-standAlone-narrow": [
+		"M",
+		"S",
+		"S",
+		"R",
+		"K",
+		"J",
+		"S"
+	],
+	"dateFormatItem-MMM": "LLL",
+	"dayPeriods-format-wide-am": "AM",
+	"dateFormatItem-MMMMEd": "E, d MMMM",
+	"dateFormat-short": "dd/MM/yy",
+	"field-second": "Detik",
+	"dateFormatItem-yMMMEd": "E, d MMM y",
+	"field-month-relative+0": "Bulan ini",
+	"field-month-relative+1": "Bulan berikutnya",
+	"dateFormatItem-Ed": "E, d",
+	"field-week": "Minggu",
+	"dateFormat-medium": "d MMM yyyy",
+	"field-year-relative+0": "Tahun ini",
+	"field-week-relative+-1": "Minggu lalu",
+	"field-year-relative+1": "Tahun depan",
+	"dayPeriods-format-narrow-pm": "PM",
+	"dateTimeFormat-short": "{1} {0}",
+	"dateFormatItem-Hms": "HH.mm.ss",
+	"dateFormatItem-hms": "h.mm.ss a",
+	"field-week-relative+0": "Minggu ini",
+	"field-week-relative+1": "Minggu berikutnya"
 }
 //end v1.x content
 );

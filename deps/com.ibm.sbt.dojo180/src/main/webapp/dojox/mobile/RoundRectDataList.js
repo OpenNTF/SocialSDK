@@ -1,4 +1,4 @@
-define("dojox/mobile/RoundRectDataList", [
+define([
 	"dojo/_base/declare",
 	"./RoundRectList",
 	"./_DataListMixin"

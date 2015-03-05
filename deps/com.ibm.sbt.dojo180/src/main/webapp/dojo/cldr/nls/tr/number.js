@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/tr/number", //begin v1.x content
+//begin v1.x content
 {
 	"group": ".",
 	"percentSign": "%",
@@ -15,6 +15,7 @@ define(
 	"decimalFormat": "#,##0.###",
 	"currencyFormat": "#,##0.00 ¤",
 	"plusSign": "+",
+	"decimalFormat-long": "000 trilyon",
 	"decimalFormat-short": "000 T"
 }
 //end v1.x content

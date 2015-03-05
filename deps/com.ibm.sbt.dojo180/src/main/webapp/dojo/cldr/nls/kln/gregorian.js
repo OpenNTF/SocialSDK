@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/kln/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"field-dayperiod": "BE/KE",
@@ -171,6 +171,15 @@ define(
 		"K",
 		"K"
 	],
+	"days-standAlone-short": [
+		"Tis",
+		"Tai",
+		"Aen",
+		"Som",
+		"Ang",
+		"Mut",
+		"Loh"
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"Tis",
@@ -202,6 +211,15 @@ define(
 		"Kipsunde nebo aeng"
 	],
 	"dayPeriods-format-abbr-am": "BE",
+	"days-format-short": [
+		"Tis",
+		"Tai",
+		"Aen",
+		"Som",
+		"Ang",
+		"Mut",
+		"Loh"
+	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [
 		"Robo netai",

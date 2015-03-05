@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/ja/ethiopic", //begin v1.x content
+//begin v1.x content
 {
 	"months-format-abbr": [
 		"メスケレム",
@@ -31,6 +31,21 @@ define(
 		"ネハッセ",
 		"パグメン"
 	],
+	"months-format-narrow": [
+		"1",
+		"2",
+		"3",
+		"4",
+		"5",
+		"6",
+		"7",
+		"8",
+		"9",
+		"10",
+		"11",
+		"12",
+		"13"
+	],
 	"months-standAlone-abbr": [
 		"メスケレム",
 		"テケムト",
@@ -60,6 +75,21 @@ define(
 		"ハムレ",
 		"ネハッセ",
 		"パグメン"
+	],
+	"months-standAlone-narrow": [
+		"1",
+		"2",
+		"3",
+		"4",
+		"5",
+		"6",
+		"7",
+		"8",
+		"9",
+		"10",
+		"11",
+		"12",
+		"13"
 	]
 }
 //end v1.x content

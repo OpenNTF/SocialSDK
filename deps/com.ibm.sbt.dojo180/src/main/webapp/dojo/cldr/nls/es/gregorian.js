@@ -1,6 +1,15 @@
 define(
-"dojo/cldr/nls/es/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"D",
+		"L",
+		"M",
+		"X",
+		"J",
+		"V",
+		"S"
+	],
 	"months-format-narrow": [
 		"E",
 		"F",
@@ -24,13 +33,22 @@ define(
 	"field-weekday": "día de la semana",
 	"dateFormatItem-yyQQQQ": "QQQQ 'de' yy",
 	"dateFormatItem-yQQQ": "QQQ y",
-	"dateFormatItem-yMEd": "E d/M/y",
+	"dateFormatItem-yMEd": "EEE, d/M/y",
 	"dateFormatItem-MMMEd": "E d MMM",
 	"eraNarrow": [
 		"a.C.",
 		"d.C."
 	],
 	"dateFormatItem-MMMdd": "dd-MMM",
+	"days-format-short": [
+		"D",
+		"L",
+		"M",
+		"X",
+		"J",
+		"V",
+		"S"
+	],
 	"dateFormat-long": "d 'de' MMMM 'de' y",
 	"months-format-wide": [
 		"enero",
@@ -46,6 +64,7 @@ define(
 		"noviembre",
 		"diciembre"
 	],
+	"dateTimeFormat-medium": "{1} {0}",
 	"dayPeriods-format-wide-pm": "p.m.",
 	"dateFormat-full": "EEEE, d 'de' MMMM 'de' y",
 	"dateFormatItem-Md": "d/M",
@@ -78,6 +97,7 @@ define(
 	"dateFormatItem-yMMM": "MMM y",
 	"dateFormatItem-yQ": "Q y",
 	"field-hour": "hora",
+	"dateFormatItem-MMdd": "dd/MM",
 	"months-format-abbr": [
 		"ene",
 		"feb",
@@ -97,6 +117,7 @@ define(
 	"field-day-relative+0": "hoy",
 	"field-day-relative+1": "mañana",
 	"field-day-relative+2": "pasado mañana",
+	"dateFormatItem-H": "HH",
 	"months-standAlone-abbr": [
 		"ene",
 		"feb",
@@ -168,9 +189,11 @@ define(
 	],
 	"field-day-relative+-1": "ayer",
 	"dateFormatItem-h": "hh a",
+	"dateTimeFormat-long": "{1} {0}",
 	"field-day-relative+-2": "antes de ayer",
 	"dateFormatItem-MMMd": "d MMM",
 	"dateFormatItem-MEd": "E, d/M",
+	"dateTimeFormat-full": "{1} {0}",
 	"dateFormatItem-yMMMM": "MMMM 'de' y",
 	"field-day": "día",
 	"days-format-wide": [
@@ -241,7 +264,7 @@ define(
 	"dateFormat-short": "dd/MM/yy",
 	"dateFormatItem-MMd": "d/MM",
 	"field-second": "segundo",
-	"dateFormatItem-yMMMEd": "E, d MMM y",
+	"dateFormatItem-yMMMEd": "EEE, d 'de' MMMM 'de' y",
 	"field-month-relative+0": "este mes",
 	"field-month-relative+1": "el próximo mes",
 	"dateFormatItem-Ed": "E d",
@@ -250,6 +273,7 @@ define(
 	"field-year-relative+0": "este año",
 	"field-week-relative+-1": "la semana pasada",
 	"field-year-relative+1": "el próximo año",
+	"dateTimeFormat-short": "{1} {0}",
 	"dateFormatItem-Hms": "HH:mm:ss",
 	"dateFormatItem-hms": "hh:mm:ss a",
 	"field-week-relative+0": "esta semana",

@@ -1,4 +1,4 @@
-define("dojox/encoding/compression/lzw", [
+define([
 	"dojo/_base/lang",	// dojo.extend
 	"../bits"
 ], function(lang, bits) {

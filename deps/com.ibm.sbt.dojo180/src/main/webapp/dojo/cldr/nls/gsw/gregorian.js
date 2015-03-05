@@ -1,6 +1,15 @@
 define(
-"dojo/cldr/nls/gsw/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"Su.",
+		"Mä.",
+		"Zi.",
+		"Mi.",
+		"Du.",
+		"Fr.",
+		"Sa."
+	],
 	"months-format-narrow": [
 		"J",
 		"F",
@@ -23,6 +32,15 @@ define(
 	"eraNarrow": [
 		"v. Chr.",
 		"n. Chr."
+	],
+	"days-format-short": [
+		"Su.",
+		"Mä.",
+		"Zi.",
+		"Mi.",
+		"Du.",
+		"Fr.",
+		"Sa."
 	],
 	"dateFormat-long": "d. MMMM y",
 	"months-format-wide": [

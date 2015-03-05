@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/lu/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"field-dayperiod": "Mutantshi wa diba",
@@ -172,6 +172,15 @@ define(
 		"K",
 		"C"
 	],
+	"days-standAlone-short": [
+		"Lum",
+		"Nko",
+		"Ndy",
+		"Ndg",
+		"Njw",
+		"Ngv",
+		"Lub"
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"Lum",
@@ -200,6 +209,15 @@ define(
 		"Lungùdi",
 		"Kaswèkèsè",
 		"Ciswà"
+	],
+	"days-format-short": [
+		"Lum",
+		"Nko",
+		"Ndy",
+		"Ndg",
+		"Njw",
+		"Ngv",
+		"Lub"
 	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

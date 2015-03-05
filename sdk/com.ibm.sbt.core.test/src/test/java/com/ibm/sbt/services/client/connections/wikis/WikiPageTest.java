@@ -56,7 +56,7 @@ public class WikiPageTest extends BaseWikiServiceTest {
 		if (TestEnvironment.isSmartCloudEnvironment()) return;
 		WikiPage wikiPage = wikiService.createWikiPage(wiki.getLabel(), newWikiPage() , null);
 		
-		wikiPage.setTitle("Test wiki page "+ System.currentTimeMillis());
+		wikiPage.setTitle("WikiPagelabel"+ System.currentTimeMillis());
 		wikiPage.setSummary("Very basic summary "+System.currentTimeMillis());
 		wikiPage.setContent("Content of wiki page "+System.currentTimeMillis());
 		

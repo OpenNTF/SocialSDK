@@ -1,5 +1,3 @@
-// wrapped by build app
-define("dojox/xmpp/TransportSession", ["dijit","dojo","dojox","dojo/require!dojox/xmpp/bosh,dojox/xmpp/util,dojox/data/dom"], function(dijit,dojo,dojox){
 dojo.provide("dojox.xmpp.TransportSession");
 dojo.require("dojox.xmpp.bosh");
 dojo.require("dojox.xmpp.util");
@@ -506,6 +504,4 @@ dojo.extend(dojox.xmpp.TransportSession, {
 		onTerminate: function(newState, oldState, message){ },
 		onProcessProtocolResponse: function(msg){},
 		onReady: function(newState, oldState){}
-});
-
 });

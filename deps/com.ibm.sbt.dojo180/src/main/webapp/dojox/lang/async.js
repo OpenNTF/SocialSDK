@@ -1,5 +1,3 @@
-// wrapped by build app
-define("dojox/lang/async", ["dijit","dojo","dojox"], function(dijit,dojo,dojox){
 dojo.provide("dojox.lang.async");
 
 (function(){
@@ -199,5 +197,3 @@ select() - any error is returned, otherwise the selected result is returned.
 loop() - any error is returned, otherwise the last result is returned.
 
 */
-
-});

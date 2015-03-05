@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/el/buddhist", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"dateFormatItem-yQ": "y Q",
@@ -48,7 +48,7 @@ define(
 		"Μάι",
 		"Ιούν",
 		"Ιούλ",
-		"Αυγ",
+		"Αύγ",
 		"Σεπ",
 		"Οκτ",
 		"Νοέ",
@@ -115,11 +115,11 @@ define(
 	"days-format-abbr": [
 		"Κυρ",
 		"Δευ",
-		"Τρι",
+		"Τρί",
 		"Τετ",
-		"Πεμ",
+		"Πέμ",
 		"Παρ",
-		"Σαβ"
+		"Σάβ"
 	],
 	"days-format-narrow": [
 		"Κ",
@@ -145,6 +145,15 @@ define(
 		"Ο",
 		"Ν",
 		"Δ"
+	],
+	"days-standAlone-short": [
+		"Κυ",
+		"Δε",
+		"Τρ",
+		"Τε",
+		"Πε",
+		"Πα",
+		"Σα"
 	],
 	"days-standAlone-abbr": [
 		"Κυρ",
@@ -173,6 +182,15 @@ define(
 		"Οκτωβρίου",
 		"Νοεμβρίου",
 		"Δεκεμβρίου"
+	],
+	"days-format-short": [
+		"Κυ",
+		"Δε",
+		"Τρ",
+		"Τε",
+		"Πε",
+		"Πα",
+		"Σα"
 	],
 	"quarters-format-wide": [
 		"1ο τρίμηνο",

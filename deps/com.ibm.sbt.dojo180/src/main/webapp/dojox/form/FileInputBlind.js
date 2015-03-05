@@ -1,4 +1,4 @@
-define("dojox/form/FileInputBlind", [
+define([
 	"dojo/_base/lang",
 	"dojox/form/FileInputAuto"
 ], function(lang, FileInputAuto){

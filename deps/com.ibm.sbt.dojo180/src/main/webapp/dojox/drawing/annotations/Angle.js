@@ -1,4 +1,4 @@
-define("dojox/drawing/annotations/Angle", ["dojo", "../util/oo", "../util/positioning"], 
+define(["dojo", "../util/oo", "../util/positioning"], 
 function(dojo, oo, positioning){
 
 //dojox.drawing.annotations.Angle = 

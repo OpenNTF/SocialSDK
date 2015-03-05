@@ -1,4 +1,4 @@
-define("dojox/gesture/tap", [
+define([
 	"dojo/_base/kernel",
 	"dojo/_base/declare",
 	"dojo/_base/lang",

@@ -1,4 +1,4 @@
-define("dojox/widget/nls/Wizard", { root:
+define({ root:
 //begin v1.x content
 ({
 next: "Next",

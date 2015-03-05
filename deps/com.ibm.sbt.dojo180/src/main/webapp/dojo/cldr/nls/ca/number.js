@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/ca/number", //begin v1.x content
+//begin v1.x content
 {
 	"group": ".",
 	"percentSign": "%",
@@ -13,8 +13,9 @@ define(
 	"nan": "NaN",
 	"perMille": "‰",
 	"decimalFormat": "#,##0.###",
-	"currencyFormat": "#,##0.00 ¤",
+	"currencyFormat": "¤#,##0.00;(¤#,##0.00)",
 	"plusSign": "+",
+	"decimalFormat-long": "000 bilions",
 	"decimalFormat-short": "000 B"
 }
 //end v1.x content

@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/bo/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormat-medium": "y ལོ་འི་MMMཙེས་d",
 	"field-second": "སྐར་ཆ།",
@@ -10,6 +10,15 @@ define(
 		"སྤྱི་ལོ།"
 	],
 	"dateFormatItem-yMMMd": "y ལོ་འི་MMMཙེས་d",
+	"days-format-short": [
+		"ཉི་མ་",
+		"ཟླ་བ་",
+		"མིག་དམར་",
+		"ཧླག་པ་",
+		"ཕུར་བུ་",
+		"སངས་",
+		"སྤེན་པ་"
+	],
 	"months-standAlone-wide": [
 		"ཟླ་བ་དང་པོ་",
 		"ཟླ་བ་གཉིས་པ་",
@@ -54,6 +63,15 @@ define(
 		"ཟླ་༡༢"
 	],
 	"field-minute": "སྐར་མ།",
+	"days-standAlone-short": [
+		"ཉི་མ་",
+		"ཟླ་བ་",
+		"མིག་དམར་",
+		"ཧླག་པ་",
+		"ཕུར་བུ་",
+		"སངས་",
+		"སྤེན་པ་"
+	],
 	"dayPeriods-format-wide-am": "སྔ་དྲོ་",
 	"field-day-relative+0": "དེ་རིང་",
 	"field-hour": "ཆུ་ཙོ་",
@@ -89,7 +107,7 @@ define(
 		"ཉི",
 		"ཟླ",
 		"མི",
-		"ཧླ",
+		"ཧླག",
 		"ཕུ",
 		"ས",
 		"སྤེ"

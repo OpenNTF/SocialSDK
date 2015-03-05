@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/vi/islamic", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/yyyy",
 	"dateFormatItem-yyyyMMMEd": "E, d MMM y G",
@@ -10,6 +10,15 @@ define(
 	"dateFormatItem-hms": "h:mm:ss a",
 	"dateFormatItem-yQQQ": "QQQ y",
 	"dateFormatItem-MMdd": "dd-MM",
+	"days-standAlone-wide": [
+		"Chủ nhật",
+		"Thứ hai",
+		"Thứ ba",
+		"Thứ tư",
+		"Thứ năm",
+		"Thứ sáu",
+		"Thứ bảy"
+	],
 	"dateFormatItem-MMM": "LLL",
 	"dateTimeFormat-short": "{0} {1}",
 	"dayPeriods-format-wide-am": "SA",
@@ -74,6 +83,15 @@ define(
 	"dateFormatItem-yMMMd": "d MMM, y",
 	"dateFormatItem-MEd": "E, d-M",
 	"dateFormatItem-yyyyQQQ": "QQQ y G",
+	"days-standAlone-short": [
+		"CN",
+		"T2",
+		"T3",
+		"T4",
+		"T5",
+		"T6",
+		"T7"
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"dateFormat-short": "dd/MM/y G",
 	"dateFormatItem-yMMMEd": "E, d MMM y",
@@ -81,6 +99,15 @@ define(
 	"dateFormatItem-Md": "d-M",
 	"dateFormatItem-yMEd": "E, d-M-yyyy",
 	"dateFormatItem-yyyyQ": "Q y G",
+	"days-format-short": [
+		"CN",
+		"T2",
+		"T3",
+		"T4",
+		"T5",
+		"T6",
+		"T7"
+	],
 	"dateFormatItem-yyyyMMM": "MMM y G",
 	"dateFormatItem-d": "'Ngày' d",
 	"quarters-format-wide": [

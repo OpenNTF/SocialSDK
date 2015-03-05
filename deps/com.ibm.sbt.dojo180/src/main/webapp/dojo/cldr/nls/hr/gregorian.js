@@ -1,6 +1,15 @@
 define(
-"dojo/cldr/nls/hr/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"ned",
+		"pon",
+		"uto",
+		"sri",
+		"čet",
+		"pet",
+		"sub"
+	],
 	"months-format-narrow": [
 		"1.",
 		"2.",
@@ -22,14 +31,23 @@ define(
 		"4."
 	],
 	"field-weekday": "dan u tjednu",
-	"dateFormatItem-yyQQQQ": "QQQQ yy.",
 	"dateFormatItem-yQQQ": "QQQ y.",
+	"dateFormatItem-yyQQQQ": "QQQQ yy.",
 	"dateFormatItem-yyMMMEd": "E, d. MMM yy.",
 	"dateFormatItem-yMEd": "E, d. M. y.",
 	"dateFormatItem-MMMEd": "E, d. MMM",
 	"eraNarrow": [
 		"pr.n.e.",
 		"AD"
+	],
+	"days-format-short": [
+		"ned",
+		"pon",
+		"uto",
+		"sri",
+		"čet",
+		"pet",
+		"sub"
 	],
 	"dateFormat-long": "d. MMMM y.",
 	"months-format-wide": [
@@ -46,13 +64,14 @@ define(
 		"studenoga",
 		"prosinca"
 	],
+	"dateTimeFormat-medium": "{1} {0}",
 	"dayPeriods-format-wide-pm": "PM",
 	"dateFormat-full": "EEEE, d. MMMM y.",
 	"dateFormatItem-Md": "d. M.",
 	"dayPeriods-format-wide-noon": "podne",
 	"dateFormatItem-yMd": "d. M. y.",
-	"field-era": "era",
 	"dateFormatItem-yM": "M. yyyy.",
+	"field-era": "era",
 	"months-standAlone-wide": [
 		"siječanj",
 		"veljača",
@@ -75,11 +94,11 @@ define(
 		"4. kvartal"
 	],
 	"timeFormat-long": "HH:mm:ss z",
-	"field-year": "godina",
 	"dateFormatItem-yMMM": "LLL y.",
 	"dateFormatItem-yQ": "Q. yyyy.",
-	"dateFormatItem-yyyyMMMM": "LLLL y.",
+	"field-year": "godina",
 	"dateFormatItem-MMdd": "dd. MM.",
+	"dateFormatItem-yyyyMMMM": "LLLL y.",
 	"field-hour": "sat",
 	"months-format-abbr": [
 		"sij",
@@ -97,6 +116,7 @@ define(
 	],
 	"dateFormatItem-yyQ": "Q yy.",
 	"timeFormat-full": "HH:mm:ss zzzz",
+	"dayPeriods-format-narrow-morning": "prijepodne",
 	"field-day-relative+0": "danas",
 	"field-day-relative+1": "sutra",
 	"field-day-relative+2": "prekosutra",
@@ -137,6 +157,7 @@ define(
 		"petak",
 		"subota"
 	],
+	"dayPeriods-format-narrow-evening": "navečer",
 	"dateFormatItem-MMMMd": "d. MMMM",
 	"dayPeriods-format-abbr-noon": "podne",
 	"timeFormat-medium": "HH:mm:ss",
@@ -172,9 +193,11 @@ define(
 	],
 	"field-day-relative+-1": "jučer",
 	"dateFormatItem-h": "hh a",
+	"dateTimeFormat-long": "{1} {0}",
 	"field-day-relative+-2": "prekjučer",
 	"dateFormatItem-MMMd": "d. MMM",
 	"dateFormatItem-MEd": "E, d. M.",
+	"dateTimeFormat-full": "{1} {0}",
 	"dateFormatItem-yMMMM": "LLLL y.",
 	"field-day": "dan",
 	"days-format-wide": [
@@ -186,7 +209,7 @@ define(
 		"petak",
 		"subota"
 	],
-	"field-zone": "zona",
+	"field-zone": "vremenska zona",
 	"dateFormatItem-yyyyMM": "MM. yyyy.",
 	"dateFormatItem-y": "y.",
 	"months-standAlone-narrow": [
@@ -204,6 +227,7 @@ define(
 		"12."
 	],
 	"field-year-relative+-1": "Prošla godina",
+	"dayPeriods-format-narrow-night": "noću",
 	"field-month-relative+-1": "Prošli mjesec",
 	"dateFormatItem-hm": "hh:mm a",
 	"days-format-abbr": [
@@ -229,6 +253,7 @@ define(
 		"P",
 		"S"
 	],
+	"dayPeriods-format-narrow-earlyMorning": "ujutro",
 	"days-standAlone-narrow": [
 		"n",
 		"p",
@@ -244,6 +269,7 @@ define(
 	"dateFormatItem-MMMMEd": "E, d. MMMM",
 	"dateFormatItem-MMMMdd": "dd. MMMM",
 	"dateFormat-short": "d.M.y.",
+	"dayPeriods-format-narrow-afternoon": "popodne",
 	"dayPeriods-format-narrow-noon": "n",
 	"field-second": "sekunda",
 	"dateFormatItem-yMMMEd": "E, d. MMM y.",
@@ -255,6 +281,7 @@ define(
 	"field-year-relative+0": "Ova godina",
 	"field-week-relative+-1": "Prošli tjedan",
 	"field-year-relative+1": "Sljedeća godina",
+	"dateTimeFormat-short": "{1} {0}",
 	"dateFormatItem-Hms": "HH:mm:ss",
 	"dateFormatItem-hms": "hh:mm:ss a",
 	"field-week-relative+0": "Ovaj tjedan",

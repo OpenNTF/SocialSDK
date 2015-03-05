@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/sv/buddhist", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "G yyyy-MM",
 	"dateFormatItem-yQ": "G yyyy Q",
@@ -53,7 +53,8 @@ define(
 		"aug",
 		"sep",
 		"okt",
-		"nov"
+		"nov",
+		"dec"
 	],
 	"dateFormatItem-Ed": "E d",
 	"dateFormatItem-yMMM": "MMM y G",
@@ -65,6 +66,9 @@ define(
 		"T",
 		"F",
 		"L"
+	],
+	"eraAbbr": [
+		"BE"
 	],
 	"dateFormatItem-yyyyMM": "G yyyy-MM",
 	"dateFormat-long": "d MMMM y G",
@@ -95,7 +99,9 @@ define(
 		"juli",
 		"augusti",
 		"september",
-		"oktober"
+		"oktober",
+		"november",
+		"december"
 	],
 	"dateFormatItem-MMMMEd": "E d:'e' MMMM",
 	"dateFormatItem-MMMd": "d MMM",
@@ -156,6 +162,15 @@ define(
 		"N",
 		"D"
 	],
+	"days-standAlone-short": [
+		"sö",
+		"må",
+		"ti",
+		"on",
+		"to",
+		"fr",
+		"lö"
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"sön",
@@ -187,6 +202,15 @@ define(
 		"december"
 	],
 	"dayPeriods-format-abbr-am": "FM",
+	"days-format-short": [
+		"sö",
+		"må",
+		"ti",
+		"on",
+		"to",
+		"fr",
+		"lö"
+	],
 	"dateFormatItem-yyyyMMM": "MMM y G",
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

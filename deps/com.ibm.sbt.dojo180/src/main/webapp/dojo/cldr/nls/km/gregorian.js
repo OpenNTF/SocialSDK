@@ -1,73 +1,57 @@
 define(
-"dojo/cldr/nls/km/gregorian", //begin v1.x content
+//begin v1.x content
 {
-	"quarters-standAlone-wide": [
-		"ត្រីមាសទី១",
-		"ត្រីមាសទី២",
-		"ត្រីមាសទី៣",
-		"ត្រីមាសទី៤"
+	"days-standAlone-short": [
+		"អាទិត្យ",
+		"ចន្ទ",
+		"អង្គារ",
+		"ពុធ",
+		"ព្រហស្បតិ៍",
+		"សុក្រ",
+		"សៅរ៍"
 	],
-	"quarters-format-abbr": [
-		"ត្រី១",
-		"ត្រី២",
-		"ត្រី៣",
-		"ត្រី៤"
+	"months-format-narrow": [
+		"1",
+		"2",
+		"3",
+		"4",
+		"5",
+		"6",
+		"7",
+		"8",
+		"9",
+		"10",
+		"11",
+		"12"
 	],
-	"dateFormat-medium": "d MMM y",
-	"quarters-standAlone-abbr": [
-		"ត្រី១",
-		"ត្រី២",
-		"ត្រី៣",
-		"ត្រី៤"
-	],
-	"eraNarrow": [
-		"មុន​គ.ស.",
-		"គ.ស."
-	],
-	"dateTimeFormat-medium": "{1}, {0}",
-	"timeFormat-full": "H ម៉ោង m នាទី ss វិនាទី​ zzzz",
-	"months-standAlone-wide": [
-		"មករា",
-		"កុម្ភៈ",
-		"មិនា",
-		"មេសា",
-		"ឧសភា",
-		"មិថុនា",
-		"កក្កដា",
-		"សីហា",
-		"កញ្ញា",
-		"តុលា",
-		"វិច្ឆិកា",
-		"ធ្នូ"
-	],
-	"eraNames": [
-		"មុន​គ្រិស្តសករាជ",
-		"គ្រិស្តសករាជ"
-	],
-	"dayPeriods-format-wide-pm": "ល្ងាច",
-	"dateTimeFormat-long": "{1}, {0}",
-	"months-standAlone-abbr": [
+	"quarters-standAlone-narrow": [
 		"១",
 		"២",
 		"៣",
-		"៤",
-		"៥",
-		"៦",
-		"៧",
-		"៨",
-		"៩",
-		"១០",
-		"១១",
-		"១២"
+		"៤"
 	],
-	"dayPeriods-format-wide-am": "ព្រឹក",
-	"timeFormat-medium": "H:mm:ss",
-	"dateFormat-short": "d/M/yyyy",
-	"dateTimeFormat-short": "{1}, {0}",
+	"field-weekday": "ថ្ងៃនៃសប្ដាហ៍",
+	"dateFormatItem-yQQQ": "QQQ y",
+	"dateFormatItem-yMEd": "E, d-M-y",
+	"dateFormatItem-MMMEd": "E d MMM",
+	"eraNarrow": [
+		"មុន គ.ស.",
+		"គ.ស."
+	],
+	"days-format-short": [
+		"អាទិត្យ",
+		"ចន្ទ",
+		"អង្គារ",
+		"ពុធ",
+		"ព្រហស្បតិ៍",
+		"សុក្រ",
+		"សៅរ៍"
+	],
+	"dateFormat-long": "d MMMM, y",
 	"months-format-wide": [
 		"មករា",
 		"កុម្ភៈ",
-		"មិនា",
+		"មីនា",
 		"មេសា",
 		"ឧសភា",
 		"មិថុនា",
@@ -78,51 +62,202 @@ define(
 		"វិច្ឆិកា",
 		"ធ្នូ"
 	],
-	"dateTimeFormat-full": "{1}, {0}",
-	"timeFormat-short": "H:mm",
+	"dateTimeFormat-medium": "{1}, {0}",
+	"dayPeriods-format-wide-pm": "ល្ងាច",
+	"dateFormat-full": "EEEE, d MMMM y",
+	"dateFormatItem-Md": "M-d",
+	"dateFormatItem-yMd": "d-M-y",
+	"field-era": "សករាជ",
+	"dateFormatItem-yM": "M-y",
+	"months-standAlone-wide": [
+		"មករា",
+		"កុម្ភៈ",
+		"មីនា",
+		"មេសា",
+		"ឧសភា",
+		"មិថុនា",
+		"កក្កដា",
+		"សីហា",
+		"កញ្ញា",
+		"តុលា",
+		"វិច្ឆិកា",
+		"ធ្នូ"
+	],
+	"timeFormat-short": "h:mm a",
+	"quarters-format-wide": [
+		"ត្រីមាស ទី ១",
+		"ត្រីមាស ទី ២",
+		"ត្រីមាស ទី ៣",
+		"ត្រីមាស ទី ៤"
+	],
+	"timeFormat-long": "h:mm:ss a z",
+	"field-year": "ឆ្នាំ",
+	"dateFormatItem-yMMM": "MMM y",
+	"dateFormatItem-yQ": "Q y",
+	"field-hour": "ម៉ោង",
 	"months-format-abbr": [
+		"មករា",
+		"កុម្ភៈ",
+		"មីនា",
+		"មេសា",
+		"ឧសភា",
+		"មិថុនា",
+		"កក្កដា",
+		"សីហា",
+		"កញ្ញា",
+		"តុលា",
+		"វិច្ឆិកា",
+		"ធ្នូ"
+	],
+	"timeFormat-full": "h:mm:ss a zzzz",
+	"field-day-relative+0": "ថ្ងៃនេះ",
+	"field-day-relative+1": "ថ្ងៃស្អែក",
+	"field-day-relative+2": "ខានស្អែក",
+	"dateFormatItem-H": "HH",
+	"months-standAlone-abbr": [
+		"មករា",
+		"កុម្ភៈ",
+		"មីនា",
+		"មេសា",
+		"ឧសភា",
+		"មិថុនា",
+		"កក្កដា",
+		"សីហា",
+		"កញ្ញា",
+		"តុលា",
+		"វិច្ឆិកា",
+		"ធ្នូ"
+	],
+	"quarters-format-abbr": [
+		"ត្រីមាស ១",
+		"ត្រីមាស ២",
+		"ត្រីមាស ៣",
+		"ត្រីមាស ៤"
+	],
+	"quarters-standAlone-wide": [
+		"ត្រីមាសទី ១",
+		"ត្រីមាសទី ២",
+		"ត្រីមាសទី ៣",
+		"ត្រីមាសទី ៤"
+	],
+	"dateFormatItem-M": "L",
+	"days-standAlone-wide": [
+		"អាទិត្យ",
+		"ចន្ទ",
+		"អង្គារ",
+		"ពុធ",
+		"ព្រហស្បតិ៍",
+		"សុក្រ",
+		"សៅរ៍"
+	],
+	"timeFormat-medium": "h:mm:ss a",
+	"dateFormatItem-Hm": "HH:mm",
+	"quarters-standAlone-abbr": [
+		"ត្រីមាស ១",
+		"ត្រីមាស ២",
+		"ត្រីមាស ៣",
+		"ត្រីមាស ៤"
+	],
+	"eraAbbr": [
+		"មុន គ.ស.",
+		"គ.ស."
+	],
+	"field-minute": "នាទី",
+	"field-dayperiod": "ព្រឹក/ល្ងាច",
+	"days-standAlone-abbr": [
+		"អាទិត្យ",
+		"ចន្ទ",
+		"អង្គារ",
+		"ពុធ",
+		"ព្រហស្បតិ៍",
+		"សុក្រ",
+		"សៅរ៍"
+	],
+	"dateFormatItem-d": "d",
+	"dateFormatItem-ms": "mm:ss",
+	"quarters-format-narrow": [
 		"១",
 		"២",
 		"៣",
-		"៤",
-		"៥",
-		"៦",
-		"៧",
-		"៨",
-		"៩",
-		"១០",
-		"១១",
-		"១២"
+		"៤"
 	],
-	"days-standAlone-abbr": [
-		"អា",
-		"ច",
-		"អ",
-		"ពុ",
-		"ព្រ",
-		"សុ",
-		"ស"
+	"field-day-relative+-1": "ម្សិលមិញ",
+	"dateFormatItem-h": "h a",
+	"dateTimeFormat-long": "{1}, {0}",
+	"field-day-relative+-2": "ម្សិលម៉្ងៃ",
+	"dateFormatItem-MMMd": "d MMM",
+	"dateFormatItem-MEd": "E, M-d",
+	"dateTimeFormat-full": "{1}, {0}",
+	"field-day": "ថ្ងៃ",
+	"days-format-wide": [
+		"អាទិត្យ",
+		"ចន្ទ",
+		"អង្គារ",
+		"ពុធ",
+		"ព្រហស្បតិ៍",
+		"សុក្រ",
+		"សៅរ៍"
 	],
-	"timeFormat-long": "H ម៉ោង m នាទី ss វិនាទី​z",
-	"eraAbbr": [
-		"មុន​គ.ស.",
-		"គ.ស."
+	"dateFormatItem-y": "y",
+	"months-standAlone-narrow": [
+		"1",
+		"2",
+		"3",
+		"4",
+		"5",
+		"6",
+		"7",
+		"8",
+		"9",
+		"10",
+		"11",
+		"12"
 	],
-	"quarters-format-wide": [
-		"ត្រីមាសទី១",
-		"ត្រីមាសទី២",
-		"ត្រីមាសទី៣",
-		"ត្រីមាសទី៤"
-	],
+	"dateFormatItem-hm": "h:mm a",
 	"days-format-abbr": [
-		"អា",
-		"ច",
-		"អ",
-		"ពុ",
-		"ព្រ",
-		"សុ",
-		"ស"
-	]
+		"អាទិត្យ",
+		"ចន្ទ",
+		"អង្គារ",
+		"ពុធ",
+		"ព្រហស្បតិ៍",
+		"សុក្រ",
+		"សៅរ៍"
+	],
+	"dateFormatItem-yMMMd": "d MMM y",
+	"eraNames": [
+		"មុនគ្រិស្តសករាជ",
+		"គ្រិស្តសករាជ"
+	],
+	"days-format-narrow": [
+		"1",
+		"2",
+		"3",
+		"4",
+		"5",
+		"6",
+		"7"
+	],
+	"field-month": "ខែ",
+	"days-standAlone-narrow": [
+		"1",
+		"2",
+		"3",
+		"4",
+		"5",
+		"6",
+		"7"
+	],
+	"dateFormatItem-MMM": "LLL",
+	"dayPeriods-format-wide-am": "ព្រឹក",
+	"dateFormat-short": "d/M/yyyy",
+	"field-second": "វិនាទី",
+	"dateFormatItem-yMMMEd": "E, d MMM y",
+	"dateFormatItem-Ed": "d E",
+	"field-week": "សប្ដាហ៍",
+	"dateFormat-medium": "d MMM y",
+	"dateTimeFormat-short": "{1}, {0}",
+	"dateFormatItem-Hms": "HH:mm:ss",
+	"dateFormatItem-hms": "h:mm:ss a"
 }
 //end v1.x content
 );

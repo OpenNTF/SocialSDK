@@ -1,4 +1,4 @@
-define("dojox/date/islamic/Date", ["dojo/_base/lang", "dojo/_base/declare", "dojo/date"], function(lang, declare, dd){
+define(["dojo/_base/lang", "dojo/_base/declare", "dojo/date"], function(lang, declare, dd){
 
 	var IDate = declare("dojox.date.islamic.Date", null, {
 	// summary:

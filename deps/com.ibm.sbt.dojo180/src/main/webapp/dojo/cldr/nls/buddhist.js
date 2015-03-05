@@ -1,7 +1,16 @@
-define("dojo/cldr/nls/buddhist", { root:
+define({ root:
 
 //begin v1.x content
 {
+	"days-standAlone-short": [
+		"1",
+		"2",
+		"3",
+		"4",
+		"5",
+		"6",
+		"7"
+	],
 	"months-format-narrow": [
 		"1",
 		"2",
@@ -27,6 +36,15 @@ define("dojo/cldr/nls/buddhist", { root:
 	"dateFormatItem-MMMEd": "E MMM d",
 	"eraNarrow": [
 		"BE"
+	],
+	"days-format-short": [
+		"1",
+		"2",
+		"3",
+		"4",
+		"5",
+		"6",
+		"7"
 	],
 	"dateTimeFormats-appendItem-Day-Of-Week": "{0} {1}",
 	"dateFormat-long": "G y MMMM d",
@@ -241,6 +259,8 @@ define("dojo/cldr/nls/buddhist", { root:
 ,
 	"ar": true,
 	"be": true,
+	"bs-cyrl": true,
+	"ca": true,
 	"cs": true,
 	"da": true,
 	"de": true,
@@ -260,6 +280,7 @@ define("dojo/cldr/nls/buddhist", { root:
 	"it": true,
 	"ja": true,
 	"ko": true,
+	"lo": true,
 	"lt": true,
 	"ms": true,
 	"nb": true,

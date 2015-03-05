@@ -1,4 +1,4 @@
-define("dijit/form/NumberSpinner", [
+define([
 	"dojo/_base/declare", // declare
 	"dojo/_base/event", // event.stop
 	"dojo/keys", // keys.END keys.HOME
@@ -22,6 +22,8 @@ return declare("dijit.form.NumberSpinner", [_Spinner, NumberTextBox.Mixin], {
 	//
 	// example:
 	//	| new NumberSpinner({ constraints:{ max:300, min:100 }}, "someInput");
+
+	baseClass: "dijitTextBox dijitSpinner dijitNumberTextBox",
 
 	adjust: function(/*Object*/ val, /*Number*/ delta){
 		// summary:
@@ -52,6 +54,7 @@ return declare("dijit.form.NumberSpinner", [_Spinner, NumberTextBox.Mixin], {
 	},
 
 	_onKeyPress: function(e){
+		if(this.disabled || this.readOnly){ return; }
 		if((e.charOrCode == keys.HOME || e.charOrCode == keys.END) && !(e.ctrlKey || e.altKey || e.metaKey)
 		&& typeof this.get('value') != 'undefined' /* gibberish, so HOME and END are default editing keys*/){
 			var value = this.constraints[(e.charOrCode == keys.HOME ? "min" : "max")];

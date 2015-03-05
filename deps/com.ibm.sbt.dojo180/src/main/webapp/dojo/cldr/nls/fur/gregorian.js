@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/fur/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"field-day-relative+-1": "îr",
 	"field-day-relative+0": "vuê",

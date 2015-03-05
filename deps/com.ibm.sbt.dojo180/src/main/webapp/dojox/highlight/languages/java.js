@@ -1,4 +1,4 @@
-define("dojox/highlight/languages/java", ["../_base"], function(dh){
+define(["../_base"], function(dh){
 
 	var dhc = dh.constants;
 	var javakeywords = {

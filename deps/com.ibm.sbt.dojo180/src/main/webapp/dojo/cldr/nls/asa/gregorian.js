@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/asa/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"field-dayperiod": "Marango athiku",
@@ -173,6 +173,15 @@ define(
 		"N",
 		"D"
 	],
+	"days-standAlone-short": [
+		"Jpi",
+		"Jtt",
+		"Jnn",
+		"Jtn",
+		"Alh",
+		"Ijm",
+		"Jmo"
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"Jpi",
@@ -201,6 +210,15 @@ define(
 		"Oktoba",
 		"Novemba",
 		"Desemba"
+	],
+	"days-format-short": [
+		"Jpi",
+		"Jtt",
+		"Jnn",
+		"Jtn",
+		"Alh",
+		"Ijm",
+		"Jmo"
 	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

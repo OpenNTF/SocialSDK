@@ -1,10 +1,13 @@
 define(
-"dojo/cldr/nls/zh-hant/islamic", //begin v1.x content
+//begin v1.x content
 {
-	"dateFormatItem-yM": "Gy/M",
+	"dateFormatItem-yM": "y/M",
 	"dateFormatItem-yyyyMMMEd": "Gy年M月d日E",
 	"dateFormatItem-yQ": "y年QQQ",
 	"dayPeriods-format-wide-pm": "下午",
+	"eraNames": [
+		"伊斯蘭曆"
+	],
 	"dateFormatItem-MMMEd": "M月d日E",
 	"dateTimeFormat-full": "{1}{0}",
 	"dateFormatItem-hms": "ah:mm:ss",
@@ -20,15 +23,29 @@ define(
 		"星期六"
 	],
 	"dateFormatItem-MMM": "LLL",
+	"months-standAlone-narrow": [
+		"1",
+		"2",
+		"3",
+		"4",
+		"5",
+		"6",
+		"7",
+		"8",
+		"9",
+		"10",
+		"11",
+		"12"
+	],
 	"dateFormatItem-Gy": "Gy年",
 	"dayPeriods-format-wide-am": "上午",
 	"quarters-standAlone-abbr": [
-		"一季度",
-		"二季度",
-		"三季度",
-		"四季度"
+		"1季度",
+		"2季度",
+		"3季度",
+		"4季度"
 	],
-	"dateFormatItem-y": "Gy年",
+	"dateFormatItem-y": "y年",
 	"timeFormat-full": "zzzzah時mm分ss秒",
 	"dateFormatItem-yyyy": "Gy年",
 	"months-standAlone-abbr": [
@@ -46,7 +63,7 @@ define(
 		"都爾黑哲月"
 	],
 	"dateFormatItem-Ed": "d日（E）",
-	"dateFormatItem-yMMM": "Gy年M月",
+	"dateFormatItem-yMMM": "y年M月",
 	"days-standAlone-narrow": [
 		"日",
 		"一",
@@ -56,11 +73,15 @@ define(
 		"五",
 		"六"
 	],
+	"eraAbbr": [
+		"伊斯蘭曆"
+	],
 	"dateFormat-long": "Gy年M月d日",
 	"timeFormat-medium": "ah:mm:ss",
 	"dateFormatItem-Hm": "H:mm",
 	"dateFormat-medium": "Gy/M/d",
 	"dateFormatItem-Hms": "H:mm:ss",
+	"dayPeriods-format-narrow-pm": "下午",
 	"dateFormatItem-yMd": "Gy/M/d",
 	"quarters-standAlone-wide": [
 		"第一季度",
@@ -69,6 +90,7 @@ define(
 		"第四季度"
 	],
 	"dateFormatItem-ms": "mm:ss",
+	"dayPeriods-format-narrow-am": "上午",
 	"dateTimeFormat-long": "{1}{0}",
 	"months-standAlone-wide": [
 		"穆哈蘭姆月",
@@ -132,6 +154,29 @@ define(
 	],
 	"dateFormatItem-yMMMd": "Gy年M月d日",
 	"dateFormatItem-MEd": "M/d（E）",
+	"months-format-narrow": [
+		"1",
+		"2",
+		"3",
+		"4",
+		"5",
+		"6",
+		"7",
+		"8",
+		"9",
+		"10",
+		"11",
+		"12"
+	],
+	"days-standAlone-short": [
+		"日",
+		"一",
+		"二",
+		"三",
+		"四",
+		"五",
+		"六"
+	],
 	"dateFormatItem-hm": "ah:mm",
 	"days-standAlone-abbr": [
 		"周日",
@@ -144,10 +189,10 @@ define(
 	],
 	"dateFormat-short": "Gy/M/d",
 	"dateFormatItem-yyyyM": "Gy/M",
-	"dateFormatItem-yMMMEd": "Gy年M月d日E",
+	"dateFormatItem-yMMMEd": "y年M月d日E",
 	"dateFormat-full": "Gy年M月d日EEEE",
 	"dateFormatItem-Md": "M/d",
-	"dateFormatItem-yMEd": "Gy/M/d（E）",
+	"dateFormatItem-yMEd": "y/M/d（E）",
 	"dateFormatItem-yyyyQ": "Gy年QQQ",
 	"months-format-wide": [
 		"穆哈蘭姆月",
@@ -163,6 +208,15 @@ define(
 		"都爾喀爾德月",
 		"都爾黑哲月"
 	],
+	"days-format-short": [
+		"日",
+		"一",
+		"二",
+		"三",
+		"四",
+		"五",
+		"六"
+	],
 	"dateFormatItem-yyyyMMM": "Gy年M月",
 	"dateFormatItem-d": "d日",
 	"quarters-format-wide": [
@@ -170,6 +224,9 @@ define(
 		"第2季",
 		"第3季",
 		"第4季"
+	],
+	"eraNarrow": [
+		"伊斯蘭曆"
 	],
 	"days-format-wide": [
 		"星期日",

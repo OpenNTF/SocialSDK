@@ -1,4 +1,4 @@
-define("dojox/gantt/contextMenuTab", [
+define([
 	"./GanttTaskControl",
 	"dijit/Menu",
 	"dijit/Dialog",

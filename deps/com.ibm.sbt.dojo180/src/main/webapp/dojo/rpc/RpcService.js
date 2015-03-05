@@ -1,4 +1,4 @@
-define("dojo/rpc/RpcService", [
+define([
 	"../_base/array", "../_base/declare", "../_base/Deferred", "../_base/kernel","../_base/lang",
 	"../_base/url", "../_base/xhr"
 ], function(array, declare, Deferred, kernel, lang, _Url, xhr){

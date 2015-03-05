@@ -1,4 +1,4 @@
-define("dojox/charting/StoreSeries", ["dojo/_base/array", "dojo/_base/declare", "dojo/_base/Deferred"], 
+define(["dojo/_base/array", "dojo/_base/declare", "dojo/_base/Deferred"], 
   function(arr, declare, Deferred){
 	
 	return declare("dojox.charting.StoreSeries", null, {
@@ -44,7 +44,7 @@ define("dojox/charting/StoreSeries", ["dojo/_base/array", "dojo/_base/declare", 
 	
 			this.data = [];
 
-			this._initialRendering = false;
+			this._initialRendering = true;
 			this.fetch();
 		},
 	

@@ -1,4 +1,4 @@
-define("dijit/form/_FormValueMixin", [
+define([
 	"dojo/_base/declare", // declare
 	"dojo/dom-attr", // domAttr.set
 	"dojo/keys", // keys.ESCAPE
@@ -26,7 +26,6 @@ define("dijit/form/_FormValueMixin", [
 
 		_setReadOnlyAttr: function(/*Boolean*/ value){
 			domAttr.set(this.focusNode, 'readOnly', value);
-			this.focusNode.setAttribute("aria-readonly", value);
 			this._set("readOnly", value);
 		},
 

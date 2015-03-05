@@ -1,4 +1,4 @@
-define("dojox/mvc/Output", [
+define([
 	"dojo/_base/declare",
 	"dojo/_base/lang",
 	"dojo/dom",

@@ -1,4 +1,4 @@
-define("dojox/dtl/contrib/dijit", [
+define([
 	"dojo/_base/lang",
 	"dojo/_base/connect",
 	"dojo/_base/array",

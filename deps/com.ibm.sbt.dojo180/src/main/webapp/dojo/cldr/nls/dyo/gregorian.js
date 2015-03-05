@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/dyo/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"field-dayperiod": "Bujom / Kalíim",
@@ -10,7 +10,6 @@ define(
 	],
 	"dateFormatItem-MMMEd": "E d MMM",
 	"field-day-relative+-1": "Fucen",
-	"field-weekday": "Funak",
 	"dateFormatItem-hms": "h:mm:ss a",
 	"dateFormatItem-yQQQ": "QQQ y",
 	"days-standAlone-wide": [
@@ -148,6 +147,15 @@ define(
 		"N",
 		"D"
 	],
+	"days-standAlone-short": [
+		"Dim",
+		"Ten",
+		"Tal",
+		"Ala",
+		"Ara",
+		"Arj",
+		"Sib"
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"Dim",
@@ -176,6 +184,15 @@ define(
 		"Oktobar",
 		"Novembar",
 		"Disambar"
+	],
+	"days-format-short": [
+		"Dim",
+		"Ten",
+		"Tal",
+		"Ala",
+		"Ara",
+		"Arj",
+		"Sib"
 	],
 	"dateFormatItem-d": "d",
 	"days-format-wide": [

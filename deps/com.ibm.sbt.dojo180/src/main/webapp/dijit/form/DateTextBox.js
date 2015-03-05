@@ -1,4 +1,4 @@
-define("dijit/form/DateTextBox", [
+define([
 	"dojo/_base/declare", // declare
 	"../Calendar",
 	"./_DateTimeTextBox"

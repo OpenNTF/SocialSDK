@@ -1,6 +1,6 @@
-define("dojox/gfx/svg", ["dojo/_base/lang", "dojo/_base/window", "dojo/dom", "dojo/_base/declare", "dojo/_base/array",
+define(["dojo/_base/lang", "dojo/_base/sniff", "dojo/_base/window", "dojo/dom", "dojo/_base/declare", "dojo/_base/array",
   "dojo/dom-geometry", "dojo/dom-attr", "dojo/_base/Color", "./_base", "./shape", "./path"],
-function(lang, win, dom, declare, arr, domGeom, domAttr, Color, g, gs, pathLib){
+function(lang, has, win, dom, declare, arr, domGeom, domAttr, Color, g, gs, pathLib){
 
 	var svg = g.svg = {
 		// summary:
@@ -11,10 +11,10 @@ function(lang, win, dom, declare, arr, domGeom, domAttr, Color, g, gs, pathLib){
 
 	// Need to detect iOS in order to workaround bug when
 	// touching nodes with text
-	var uagent = navigator.userAgent.toLowerCase(),
-		safMobile = uagent.search('iphone') > -1 ||
-					uagent.search('ipad') > -1 ||
-					uagent.search('ipod') > -1;
+	var uagent = navigator.userAgent,
+		safMobile = has("ios"),
+		android = has("android"),
+		textRenderingFix = has("chrome") || (android && android>=4) ? "auto" : "optimizeLegibility";// #16099, #16461
 
 	function _createElementNS(ns, nodeType){
 		// summary:
@@ -551,7 +551,7 @@ function(lang, win, dom, declare, arr, domGeom, domAttr, Color, g, gs, pathLib){
 			r.setAttribute("text-decoration", s.decoration);
 			r.setAttribute("rotate", s.rotated ? 90 : 0);
 			r.setAttribute("kerning", s.kerning ? "auto" : 0);
-			r.setAttribute("text-rendering", "optimizeLegibility");
+			r.setAttribute("text-rendering", textRenderingFix);
 
 			// update the text content
 			if(r.firstChild){
@@ -701,6 +701,11 @@ else
 	});
 	svg.TextPath.nodeType = "text";
 
+	// Fix for setDimension bug:
+	// http://bugs.dojotoolkit.org/ticket/16100
+	// (https://code.google.com/p/chromium/issues/detail?id=162628)
+	var hasSvgSetAttributeBug = (function(){ var matches = /WebKit\/(\d*)/.exec(uagent); return matches ? matches[1] : 0})() > 534;
+
 	svg.Surface = declare("dojox.gfx.svg.Surface", gs.Surface, {
 		// summary:
 		//		a surface object to be used for drawings (SVG)
@@ -724,6 +729,10 @@ else
 			if(!this.rawNode){ return this; }
 			this.rawNode.setAttribute("width",  width);
 			this.rawNode.setAttribute("height", height);
+			if(hasSvgSetAttributeBug){
+				this.rawNode.style.width =  width;
+				this.rawNode.style.height =  height;
+			}
 			return this;	// self
 		},
 		getDimensions: function(){

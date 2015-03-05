@@ -1,4 +1,4 @@
-define("dojox/grid/enhanced/plugins/exporter/_ExportWriter", [
+define([
 	"dojo/_base/declare"
 ], function(declare){
 //require Exporter here, so the implementations only need to require this file,

@@ -1,4 +1,4 @@
-define("dijit/form/nls/Textarea", { root:
+define({ root:
 //begin v1.x content
 // used by both the editor and textarea widgets to provide information to screen reader users
 ({
@@ -11,6 +11,7 @@ define("dijit/form/nls/Textarea", { root:
 ,
 "zh": true,
 "zh-tw": true,
+"uk": true,
 "tr": true,
 "th": true,
 "sv": true,
@@ -38,6 +39,7 @@ define("dijit/form/nls/Textarea", { root:
 "da": true,
 "cs": true,
 "ca": true,
+"bg": true,
 "az": true,
 "ar": true
 });

@@ -1,4 +1,4 @@
-define("dojox/charting/Theme", ["dojo/_base/lang", "dojo/_base/declare", "dojo/_base/Color", "./SimpleTheme",
+define(["dojo/_base/lang", "dojo/_base/declare", "dojo/_base/Color", "./SimpleTheme",
 	    "dojox/color/_base", "dojox/color/Palette", "dojox/gfx/gradutils"],
 	function(lang, declare, Color, SimpleTheme, colorX, Palette){
 	

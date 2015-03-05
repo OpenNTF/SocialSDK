@@ -1,4 +1,4 @@
-define("dojox/drawing/tools/Pencil", ["dojo/_base/lang", "../util/oo", "../manager/_registry", "../stencil/Path"],
+define(["dojo/_base/lang", "../util/oo", "../manager/_registry", "../stencil/Path"],
 function(lang, oo, registry, StencilPath){
 
 //dojox.drawing.tools.Pencil 

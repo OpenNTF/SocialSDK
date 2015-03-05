@@ -1,6 +1,15 @@
 define(
-"dojo/cldr/nls/sr/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"не",
+		"по",
+		"ут",
+		"ср",
+		"че",
+		"пе",
+		"су"
+	],
 	"months-format-narrow": [
 		"ј",
 		"ф",
@@ -22,8 +31,8 @@ define(
 		"4."
 	],
 	"field-weekday": "дан у недељи",
-	"dateFormatItem-yyQQQQ": "QQQQ yy",
 	"dateFormatItem-yQQQ": "QQQ. y",
+	"dateFormatItem-yyQQQQ": "QQQQ yy",
 	"dateFormatItem-yMEd": "E, d. M. yyyy.",
 	"dateFormatItem-MMMEd": "E d. MMM",
 	"eraNarrow": [
@@ -31,6 +40,15 @@ define(
 		"н.е."
 	],
 	"dateFormatItem-MMMdd": "dd.MMM",
+	"days-format-short": [
+		"нед",
+		"пон",
+		"уто",
+		"сре",
+		"чет",
+		"пет",
+		"суб"
+	],
 	"dateFormat-long": "dd. MMMM y.",
 	"months-format-wide": [
 		"јануар",
@@ -46,13 +64,14 @@ define(
 		"новембар",
 		"децембар"
 	],
+	"dateTimeFormat-medium": "{1} {0}",
 	"dayPeriods-format-wide-pm": "поподне",
 	"dateFormat-full": "EEEE, dd. MMMM y.",
 	"dateFormatItem-Md": "d/M",
 	"dateFormatItem-yyMMdd": "dd.MM.yy",
 	"dateFormatItem-yMd": "d. M. y.",
-	"field-era": "ера",
 	"dateFormatItem-yM": "y-M",
+	"field-era": "ера",
 	"months-standAlone-wide": [
 		"јануар",
 		"фебруар",
@@ -75,12 +94,12 @@ define(
 		"Четврто тромесечје"
 	],
 	"timeFormat-long": "HH.mm.ss z",
-	"field-year": "година",
 	"dateFormatItem-yMMM": "MMM y.",
 	"dateFormatItem-yQ": "y Q",
+	"field-year": "година",
+	"dateFormatItem-MMdd": "MM-dd",
 	"dateFormatItem-yyyyMMMM": "MMMM y.",
 	"field-hour": "час",
-	"dateFormatItem-MMdd": "MM-dd",
 	"months-format-abbr": [
 		"јан",
 		"феб",
@@ -100,6 +119,7 @@ define(
 	"field-day-relative+0": "данас",
 	"field-day-relative+1": "сутра",
 	"field-day-relative+2": "прекосутра",
+	"dateFormatItem-H": "HH",
 	"months-standAlone-abbr": [
 		"јан",
 		"феб",
@@ -171,9 +191,11 @@ define(
 	],
 	"field-day-relative+-1": "јуче",
 	"dateFormatItem-h": "hh a",
+	"dateTimeFormat-long": "{1} {0}",
 	"field-day-relative+-2": "прекјуче",
 	"dateFormatItem-MMMd": "d. MMM",
 	"dateFormatItem-MEd": "E, M-d",
+	"dateTimeFormat-full": "{1} {0}",
 	"dateFormatItem-yMMMM": "MMMM y.",
 	"field-day": "дан",
 	"days-format-wide": [
@@ -229,7 +251,6 @@ define(
 		"п",
 		"с"
 	],
-	"field-month": "месец",
 	"days-standAlone-narrow": [
 		"н",
 		"п",
@@ -240,6 +261,7 @@ define(
 		"с"
 	],
 	"dateFormatItem-MMM": "LLL",
+	"field-month": "месец",
 	"dayPeriods-format-wide-am": "пре подне",
 	"dateFormatItem-MMMMEd": "E d. MMMM",
 	"dateFormatItem-MMMMdd": "dd. MMMM",
@@ -254,6 +276,7 @@ define(
 	"field-year-relative+0": "Ове године",
 	"field-week-relative+-1": "Прошле недеље",
 	"field-year-relative+1": "Следеће године",
+	"dateTimeFormat-short": "{1} {0}",
 	"dateFormatItem-Hms": "HH.mm.ss",
 	"dateFormatItem-hms": "hh.mm.ss a",
 	"dateFormatItem-yyyy": "y.",

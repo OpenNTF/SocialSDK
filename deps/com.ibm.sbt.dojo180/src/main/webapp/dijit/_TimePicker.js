@@ -1,6 +1,4 @@
-require({cache:{
-'url:dijit/templates/TimePicker.html':"<div id=\"widget_${id}\" class=\"dijitMenu\"\n    ><div data-dojo-attach-point=\"upArrow\" class=\"dijitButtonNode dijitUpArrowButton\" data-dojo-attach-event=\"onmouseenter:_buttonMouse,onmouseleave:_buttonMouse\"\n\t\t><div class=\"dijitReset dijitInline dijitArrowButtonInner\" role=\"presentation\">&#160;</div\n\t\t><div class=\"dijitArrowButtonChar\">&#9650;</div></div\n    ><div data-dojo-attach-point=\"timeMenu,focusNode\" data-dojo-attach-event=\"onclick:_onOptionSelected,onmouseover,onmouseout\"></div\n    ><div data-dojo-attach-point=\"downArrow\" class=\"dijitButtonNode dijitDownArrowButton\" data-dojo-attach-event=\"onmouseenter:_buttonMouse,onmouseleave:_buttonMouse\"\n\t\t><div class=\"dijitReset dijitInline dijitArrowButtonInner\" role=\"presentation\">&#160;</div\n\t\t><div class=\"dijitArrowButtonChar\">&#9660;</div></div\n></div>\n"}});
-define("dijit/_TimePicker", [
+define([
 	"dojo/_base/array", // array.forEach
 	"dojo/date", // date.compare
 	"dojo/date/locale", // locale.format
@@ -217,10 +215,15 @@ define("dijit/_TimePicker", [
 				moreAfter = [],
 				estBeforeLength = count - after.length,
 				before = this._getFilteredNodes(0, estBeforeLength, true, after[0]);
-				if(before.length < estBeforeLength && after.length > 0){
-					moreAfter = this._getFilteredNodes(after.length, estBeforeLength - before.length, false, after[after.length-1]);
-				}
+			if(before.length < estBeforeLength && after.length > 0){
+				moreAfter = this._getFilteredNodes(after[after.length-1].idx + 1, estBeforeLength - before.length, false, after[after.length-1]);
+			}
 			array.forEach(before.concat(after, moreAfter), function(n){ this.timeMenu.appendChild(n); }, this);
+			// never show empty due to a bad filter
+			if(!before.length && !after.length && !moreAfter.length && this.filterString){
+				this.filterString = '';
+				this._showText();
+			}
 		},
 
 		constructor: function(/*===== params, srcNodeRef =====*/){
@@ -243,7 +246,11 @@ define("dijit/_TimePicker", [
 
 		_setConstraintsAttr: function(/* Object */ constraints){
 			// brings in visibleRange, increments, etc.
-			lang.mixin(this, constraints);
+			for (var key in { clickableIncrement: 1, visibleIncrement: 1, visibleRange: 1 }) {
+				if (key in constraints) {
+					this[key] = constraints[key];
+				}
+			}
 
 			// locale needs the lang in the constraints as locale
 			if(!constraints.locale){

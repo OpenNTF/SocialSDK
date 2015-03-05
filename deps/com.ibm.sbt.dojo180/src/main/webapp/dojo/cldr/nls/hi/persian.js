@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/hi/persian", //begin v1.x content
+//begin v1.x content
 {
 	"months-format-wide": [
 		"फर्वादिन",

@@ -1,7 +1,20 @@
-define("dojo/cldr/nls/chinese", { root:
+define({ root:
 
 //begin v1.x content
 {
+	"dateTimeFormat@localeAlias69": {
+		"bundle": "gregorian",
+		"target": "dateTimeFormat"
+	},
+	"days-standAlone-short": [
+		"1",
+		"2",
+		"3",
+		"4",
+		"5",
+		"6",
+		"7"
+	],
 	"months-format-narrow": [
 		"1",
 		"2",
@@ -25,15 +38,36 @@ define("dojo/cldr/nls/chinese", { root:
 	"dateFormatItem-yQQQ": "U QQQ",
 	"dateFormatItem-yMEd": "E, y-M-d",
 	"dateFormatItem-MMMEd": "E MMM d",
-	"months-format-abbr@localeAlias33": {
+	"months-standAlone-wide@localeAlias42": {
 		"bundle": "chinese",
 		"target": "months-format-wide"
 	},
-	"days-format-narrow@localeAlias40": {
+	"days-format-short": [
+		"1",
+		"2",
+		"3",
+		"4",
+		"5",
+		"6",
+		"7"
+	],
+	"dateTimeFormats-appendItem-Day-Of-Week": "{0} {1}",
+	"months-format-abbr@localeAlias38": {
+		"bundle": "chinese",
+		"target": "months-format-wide"
+	},
+	"dateTimeFormat@localeAlias70": {
+		"bundle": "gregorian",
+		"target": "dateTimeFormat"
+	},
+	"dateTimeFormat@localeAlias71": {
+		"bundle": "gregorian",
+		"target": "dateTimeFormat"
+	},
+	"days-format-narrow@localeAlias45": {
 		"bundle": "gregorian",
 		"target": "days-standAlone-narrow"
 	},
-	"dateTimeFormats-appendItem-Day-Of-Week": "{0} {1}",
 	"dateFormat-long": "U MMMM d",
 	"months-format-wide": [
 		"1",
@@ -49,10 +83,6 @@ define("dojo/cldr/nls/chinese", { root:
 		"11",
 		"12"
 	],
-	"days-standAlone-wide@localeAlias43": {
-		"bundle": "gregorian",
-		"target": "days-format-wide"
-	},
 	"dayPeriods-format-wide-pm": "PM",
 	"dateFormat-full": "EEEE, U MMMM dd",
 	"dateFormatItem-Md": "M-d",
@@ -102,7 +132,10 @@ define("dojo/cldr/nls/chinese", { root:
 	],
 	"timeFormat-full": "HH:mm:ss zzzz",
 	"dateTimeFormats-appendItem-Week": "{0} ({2}: {1})",
-	"dateFormatItem-H": "HH",
+	"days-standAlone-wide@localeAlias53": {
+		"bundle": "gregorian",
+		"target": "days-format-wide"
+	},
 	"months-standAlone-abbr": [
 		"1",
 		"2",
@@ -117,14 +150,7 @@ define("dojo/cldr/nls/chinese", { root:
 		"11",
 		"12"
 	],
-	"dayPeriods-format-abbr@localeAlias51": {
-		"bundle": "gregorian",
-		"target": "dayPeriods-format-wide"
-	},
-	"months-standAlone-abbr@localeAlias35": {
-		"bundle": "chinese",
-		"target": "months-format-abbr"
-	},
+	"dateFormatItem-H": "HH",
 	"quarters-format-abbr": [
 		"Q1",
 		"Q2",
@@ -137,18 +163,6 @@ define("dojo/cldr/nls/chinese", { root:
 		"Q3",
 		"Q4"
 	],
-	"months-standAlone-abbr@localeAlias36": {
-		"bundle": "chinese",
-		"target": "months-format-wide"
-	},
-	"quarters-standAlone-wide@localeAlias49": {
-		"bundle": "gregorian",
-		"target": "quarters-format-wide"
-	},
-	"dayPeriods-format-abbr@localeAlias54": {
-		"bundle": "gregorian",
-		"target": "dayPeriods-format-wide"
-	},
 	"dateFormatItem-M": "L",
 	"days-standAlone-wide": [
 		"1",
@@ -159,41 +173,25 @@ define("dojo/cldr/nls/chinese", { root:
 		"6",
 		"7"
 	],
-	"months-format-narrow@localeAlias34": {
+	"months-format-narrow@localeAlias39": {
 		"bundle": "chinese",
 		"target": "months-standAlone-narrow"
 	},
-	"quarters@localeAlias44": {
-		"bundle": "gregorian",
-		"target": "quarters"
-	},
-	"days-standAlone-abbr@localeAlias41": {
+	"timeFormat-medium": "HH:mm:ss",
+	"days-standAlone-abbr@localeAlias48": {
 		"bundle": "gregorian",
 		"target": "days-format-abbr"
 	},
-	"timeFormat-medium": "HH:mm:ss",
-	"days-standAlone-abbr@localeAlias42": {
-		"bundle": "gregorian",
-		"target": "days-format-wide"
-	},
-	"dateFormatItem-Hm": "HH:mm",
 	"quarters-standAlone-abbr": [
 		"Q1",
 		"Q2",
 		"Q3",
 		"Q4"
 	],
-	"dayPeriods-format-narrow@localeAlias52": {
+	"dateFormatItem-Hm": "HH:mm",
+	"days-standAlone-abbr@localeAlias49": {
 		"bundle": "gregorian",
-		"target": "dayPeriods-format-abbr"
-	},
-	"dayPeriods-format-narrow@localeAlias53": {
-		"bundle": "gregorian",
-		"target": "dayPeriods-format-wide"
-	},
-	"timeFormat@localeAlias57": {
-		"bundle": "gregorian",
-		"target": "timeFormat"
+		"target": "days-format-wide"
 	},
 	"days-standAlone-abbr": [
 		"1",
@@ -204,19 +202,15 @@ define("dojo/cldr/nls/chinese", { root:
 		"6",
 		"7"
 	],
-	"dayPeriods-format-narrow@localeAlias55": {
-		"bundle": "gregorian",
-		"target": "dayPeriods-format-abbr"
-	},
-	"dayPeriods-format-narrow@localeAlias56": {
-		"bundle": "gregorian",
-		"target": "dayPeriods-format-wide"
-	},
-	"days@localeAlias38": {
-		"bundle": "gregorian",
-		"target": "days"
+	"months-standAlone-abbr@localeAlias40": {
+		"bundle": "chinese",
+		"target": "months-format-abbr"
 	},
 	"dateFormatItem-d": "d",
+	"months-standAlone-abbr@localeAlias41": {
+		"bundle": "chinese",
+		"target": "months-format-wide"
+	},
 	"dateFormatItem-ms": "mm:ss",
 	"quarters-format-narrow": [
 		"1",
@@ -224,8 +218,20 @@ define("dojo/cldr/nls/chinese", { root:
 		"3",
 		"4"
 	],
-	"dateFormatItem-h": "h a",
 	"dayPeriods-format-narrow-am": "AM",
+	"dayPeriods-format-abbr@localeAlias61": {
+		"bundle": "gregorian",
+		"target": "dayPeriods-format-wide"
+	},
+	"dateFormatItem-h": "h a",
+	"quarters-standAlone-wide@localeAlias59": {
+		"bundle": "gregorian",
+		"target": "quarters-format-wide"
+	},
+	"dayPeriods-format-abbr@localeAlias64": {
+		"bundle": "gregorian",
+		"target": "dayPeriods-format-wide"
+	},
 	"dateFormatItem-MMMd": "MMM d",
 	"dateFormatItem-MEd": "E, M-d",
 	"days-format-wide": [
@@ -237,6 +243,10 @@ define("dojo/cldr/nls/chinese", { root:
 		"6",
 		"7"
 	],
+	"quarters@localeAlias54": {
+		"bundle": "gregorian",
+		"target": "quarters"
+	},
 	"months-standAlone-narrow": [
 		"1",
 		"2",
@@ -253,13 +263,29 @@ define("dojo/cldr/nls/chinese", { root:
 	],
 	"dateFormatItem-y": "U",
 	"dateTimeFormats-appendItem-Day": "{0} ({2}: {1})",
-	"quarters-format-abbr@localeAlias45": {
+	"days@localeAlias43": {
 		"bundle": "gregorian",
-		"target": "quarters-format-wide"
+		"target": "days"
 	},
-	"days-format-abbr@localeAlias39": {
+	"dayPeriods-format-narrow@localeAlias62": {
 		"bundle": "gregorian",
-		"target": "days-format-wide"
+		"target": "dayPeriods-format-abbr"
+	},
+	"dayPeriods-format-narrow@localeAlias63": {
+		"bundle": "gregorian",
+		"target": "dayPeriods-format-wide"
+	},
+	"timeFormat@localeAlias67": {
+		"bundle": "gregorian",
+		"target": "timeFormat"
+	},
+	"dayPeriods-format-narrow@localeAlias65": {
+		"bundle": "gregorian",
+		"target": "dayPeriods-format-abbr"
+	},
+	"dayPeriods-format-narrow@localeAlias66": {
+		"bundle": "gregorian",
+		"target": "dayPeriods-format-wide"
 	},
 	"dateFormatItem-hm": "h:mm a",
 	"dateTimeFormats-appendItem-Year": "{0} {1}",
@@ -284,14 +310,6 @@ define("dojo/cldr/nls/chinese", { root:
 		"6",
 		"7"
 	],
-	"quarters-standAlone-abbr@localeAlias47": {
-		"bundle": "gregorian",
-		"target": "quarters-format-abbr"
-	},
-	"quarters-standAlone-abbr@localeAlias48": {
-		"bundle": "gregorian",
-		"target": "quarters-format-wide"
-	},
 	"days-standAlone-narrow": [
 		"1",
 		"2",
@@ -302,62 +320,89 @@ define("dojo/cldr/nls/chinese", { root:
 		"7"
 	],
 	"dateFormatItem-MMM": "LLL",
-	"quarters-format-narrow@localeAlias46": {
+	"dateTimeFormats-appendItem-Quarter": "{0} ({2}: {1})",
+	"dayPeriods-format-wide-am": "AM",
+	"days-standAlone-short@localeAlias50": {
+		"bundle": "gregorian",
+		"target": "days-format-short"
+	},
+	"days-format-abbr@localeAlias44": {
+		"bundle": "gregorian",
+		"target": "days-format-wide"
+	},
+	"days-standAlone-short@localeAlias51": {
+		"bundle": "gregorian",
+		"target": "days-format-abbr"
+	},
+	"days-standAlone-short@localeAlias52": {
+		"bundle": "gregorian",
+		"target": "days-format-wide"
+	},
+	"quarters-format-abbr@localeAlias55": {
+		"bundle": "gregorian",
+		"target": "quarters-format-wide"
+	},
+	"days-format-short@localeAlias46": {
+		"bundle": "gregorian",
+		"target": "days-format-abbr"
+	},
+	"dateTimeFormats-appendItem-Month": "{0} ({2}: {1})",
+	"days-format-short@localeAlias47": {
+		"bundle": "gregorian",
+		"target": "days-format-wide"
+	},
+	"dateTimeFormats-appendItem-Minute": "{0} ({2}: {1})",
+	"dateFormat-short": "y-M-d",
+	"quarters-standAlone-abbr@localeAlias57": {
+		"bundle": "gregorian",
+		"target": "quarters-format-abbr"
+	},
+	"quarters-standAlone-abbr@localeAlias58": {
+		"bundle": "gregorian",
+		"target": "quarters-format-wide"
+	},
+	"dateFormatItem-yMMMEd": "E, U MMM d",
+	"quarters-format-narrow@localeAlias56": {
 		"bundle": "gregorian",
 		"target": "quarters-standAlone-narrow"
 	},
-	"dateTimeFormats-appendItem-Quarter": "{0} ({2}: {1})",
-	"dayPeriods-format-wide-am": "AM",
-	"dateTimeFormats-appendItem-Month": "{0} ({2}: {1})",
-	"dateTimeFormats-appendItem-Minute": "{0} ({2}: {1})",
-	"dayPeriods@localeAlias50": {
-		"bundle": "gregorian",
-		"target": "dayPeriods"
-	},
-	"dateFormat-short": "y-M-d",
-	"dateTimeFormat@localeAlias58": {
-		"bundle": "gregorian",
-		"target": "dateTimeFormat"
-	},
-	"dateTimeFormat@localeAlias59": {
-		"bundle": "gregorian",
-		"target": "dateTimeFormat"
-	},
-	"dateFormatItem-yMMMEd": "E, U MMM d",
 	"dateFormatItem-Ed": "d E",
 	"dateTimeFormats-appendItem-Timezone": "{0} {1}",
 	"dateFormat-medium": "U MMM d",
 	"dayPeriods-format-narrow-pm": "PM",
 	"dateFormatItem-Hms": "HH:mm:ss",
 	"dateFormatItem-hms": "h:mm:ss a",
-	"dateTimeFormat@localeAlias60": {
+	"dayPeriods@localeAlias60": {
+		"bundle": "gregorian",
+		"target": "dayPeriods"
+	},
+	"dateTimeFormat@localeAlias68": {
 		"bundle": "gregorian",
 		"target": "dateTimeFormat"
-	},
-	"dateTimeFormat@localeAlias61": {
-		"bundle": "gregorian",
-		"target": "dateTimeFormat"
-	},
-	"months-standAlone-wide@localeAlias37": {
-		"bundle": "chinese",
-		"target": "months-format-wide"
 	}
 }
 //end v1.x content
 ,
+	"ca": true,
 	"cs": true,
 	"en": true,
+	"en-gb": true,
 	"es": true,
 	"fi": true,
 	"fr": true,
 	"hr": true,
 	"hu": true,
+	"id": true,
 	"ja": true,
 	"ko": true,
+	"lo": true,
+	"lt": true,
+	"ms": true,
 	"pl": true,
 	"pt": true,
 	"ro": true,
 	"ru": true,
+	"th": true,
 	"vi": true,
 	"zh": true,
 	"zh-hant": true

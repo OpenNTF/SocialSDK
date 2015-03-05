@@ -1,4 +1,4 @@
-define("dojox/editor/plugins/Breadcrumb", [
+define([
 	"dojo",
 	"dijit",
 	"dojox",

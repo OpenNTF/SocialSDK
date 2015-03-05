@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/bez/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"field-dayperiod": "Lwamelau",
@@ -173,6 +173,15 @@ define(
 		"K",
 		"K"
 	],
+	"days-standAlone-short": [
+		"Mul",
+		"Vil",
+		"Hiv",
+		"Hid",
+		"Hit",
+		"Hih",
+		"Lem"
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"Mul",
@@ -201,6 +210,15 @@ define(
 		"pa mwedzi gwa kumi",
 		"pa mwedzi gwa kumi na moja",
 		"pa mwedzi gwa kumi na mbili"
+	],
+	"days-format-short": [
+		"Mul",
+		"Vil",
+		"Hiv",
+		"Hid",
+		"Hit",
+		"Hih",
+		"Lem"
 	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

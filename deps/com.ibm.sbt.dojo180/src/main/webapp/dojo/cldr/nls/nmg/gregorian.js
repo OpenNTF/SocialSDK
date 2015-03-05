@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/nmg/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"field-dayperiod": "Máná, Muó, Kugú, Bvul",
@@ -12,7 +12,6 @@ define(
 	],
 	"dateFormatItem-MMMEd": "E d MMM",
 	"field-day-relative+-1": "Nakugú",
-	"field-weekday": "Duö",
 	"dateFormatItem-hms": "h:mm:ss a",
 	"dateFormatItem-yQQQ": "QQQ y",
 	"days-standAlone-wide": [
@@ -144,6 +143,15 @@ define(
 	"field-second": "Nyiɛl",
 	"field-day": "Duö",
 	"dateFormatItem-MEd": "E d/M",
+	"days-standAlone-short": [
+		"sɔ́n",
+		"mɔ́n",
+		"smb",
+		"sml",
+		"smn",
+		"mbs",
+		"sas"
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"sɔ́n",
@@ -172,6 +180,15 @@ define(
 		"ngwɛn wum",
 		"ngwɛn wum navŭr",
 		"krísimin"
+	],
+	"days-format-short": [
+		"sɔ́n",
+		"mɔ́n",
+		"smb",
+		"sml",
+		"smn",
+		"mbs",
+		"sas"
 	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

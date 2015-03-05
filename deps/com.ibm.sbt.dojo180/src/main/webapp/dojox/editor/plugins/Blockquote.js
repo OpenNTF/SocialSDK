@@ -1,4 +1,4 @@
-define("dojox/editor/plugins/Blockquote", [
+define([
 	"dojo",
 	"dijit",
 	"dojox",

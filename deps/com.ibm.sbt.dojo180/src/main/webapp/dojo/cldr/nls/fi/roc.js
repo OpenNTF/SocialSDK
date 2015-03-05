@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/fi/roc", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormat-medium": "d.M.y G",
 	"dateFormatItem-MMMEd": "E d. MMM",

@@ -1,4 +1,4 @@
-define("dojox/widget/UpgradeBar", [
+define([
 	"dojo/_base/kernel", // dojo.eval
 	"dojo/_base/array", // array.forEach
 	"dojo/_base/connect", // connect

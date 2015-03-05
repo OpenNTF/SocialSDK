@@ -1,6 +1,4 @@
-require({cache:{
-'url:dijit/templates/Tooltip.html':"<div class=\"dijitTooltip dijitTooltipLeft\" id=\"dojoTooltip\"\n\t><div class=\"dijitTooltipContainer dijitTooltipContents\" data-dojo-attach-point=\"containerNode\" role='alert'></div\n\t><div class=\"dijitTooltipConnector\" data-dojo-attach-point=\"connectorNode\"></div\n></div>\n"}});
-define("dijit/Tooltip", [
+define([
 	"dojo/_base/array", // array.forEach array.indexOf array.map
 	"dojo/_base/declare", // declare
 	"dojo/_base/fx", // fx.fadeIn fx.fadeOut
@@ -11,7 +9,7 @@ define("dijit/Tooltip", [
 	"dojo/_base/lang", // lang.hitch lang.isArrayLike
 	"dojo/mouse",
 	"dojo/on",
-	"dojo/sniff", // has("ie")
+	"dojo/sniff", // has("ie"), has("trident")
 	"./_base/manager",	// manager.defaultDuration
 	"./place",
 	"./_Widget",
@@ -151,8 +149,8 @@ define("dijit/Tooltip", [
 			// Note that sometimes widthAvailable is negative, but we guard against setting style.width to a
 			// negative number since that causes an exception on IE.
 			var size = domGeometry.position(this.domNode);
-			if(has("ie") == 9){
-				// workaround strange IE9 bug where setting width to offsetWidth causes words to wrap
+			if(has("ie") || has("trident")){
+				// workaround strange IE bug where setting width to offsetWidth causes words to wrap
 				size.w += 2;
 			}
 
@@ -231,25 +229,25 @@ define("dijit/Tooltip", [
 				this._onDeck=null;
 			}
 		},
-		
-		_setAutoTextDir: function(/*Object*/node){
-		    // summary:
-		    //		Resolve "auto" text direction for children nodes
-		    // tags:
-		    //		private
 
-            this.applyTextDir(node, has("ie") ? node.outerText : node.textContent);
-            array.forEach(node.children, function(child){this._setAutoTextDir(child); }, this);
+		_setAutoTextDir: function(/*Object*/node){
+			// summary:
+			//		Resolve "auto" text direction for children nodes
+			// tags:
+			//		private
+
+			this.applyTextDir(node, has("ie") ? node.outerText : node.textContent);
+			array.forEach(node.children, function(child){this._setAutoTextDir(child); }, this);
 		},
-		
+
 		_setTextDirAttr: function(/*String*/ textDir){
-		    // summary:
-		    //		Setter for textDir.
-		    // description:
-		    //		Users shouldn't call this function; they should be calling
-		    //		set('textDir', value)
-		    // tags:
-		    //		private
+			// summary:
+			//		Setter for textDir.
+			// description:
+			//		Users shouldn't call this function; they should be calling
+			//		set('textDir', value)
+			// tags:
+			//		private
 
 			this._set("textDir", textDir);
 

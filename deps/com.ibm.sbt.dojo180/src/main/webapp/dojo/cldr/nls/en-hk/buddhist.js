@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/en-hk/buddhist", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yMd": "d/M/y GGGGG",
 	"dateFormat-medium": "d MMM, y G",
@@ -8,6 +8,15 @@ define(
 	"dateFormatItem-y": "y",
 	"dateFormatItem-yMMMd": "d MMM, y G",
 	"timeFormat-full": "h:mm:ss a zzzz",
+	"days-format-short": [
+		"Su",
+		"Mo",
+		"Tu",
+		"We",
+		"Th",
+		"Fr",
+		"Sa"
+	],
 	"months-standAlone-narrow": [
 		"J",
 		"F",
@@ -68,6 +77,7 @@ define(
 		"Nov",
 		"Dec"
 	],
+	"timeFormat-long": "h:mm:ss a z",
 	"days-format-wide": [
 		"Sunday",
 		"Monday",
@@ -77,10 +87,9 @@ define(
 		"Friday",
 		"Saturday"
 	],
-	"timeFormat-long": "h:mm:ss a z",
 	"dateFormatItem-yQ": "Q y",
-	"dayPeriods-format-narrow-am": "a",
 	"dateFormatItem-yMMM": "MMM y",
+	"dayPeriods-format-narrow-am": "a",
 	"quarters-format-wide": [
 		"1st quarter",
 		"2nd quarter",

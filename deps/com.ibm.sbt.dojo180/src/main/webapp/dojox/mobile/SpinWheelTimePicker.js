@@ -1,4 +1,4 @@
-define("dojox/mobile/SpinWheelTimePicker", [
+define([
 	"dojo/_base/declare",
 	"dojo/dom-class",
 	"./_TimePickerMixin",

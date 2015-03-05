@@ -1,4 +1,4 @@
-define("dojox/json/query", ["dojo/_base/kernel", "dojo/_base/lang", "dojox", "dojo/_base/array"], function(dojo, lang, dojox){
+define(["dojo/_base/kernel", "dojo/_base/lang", "dojox", "dojo/_base/array"], function(dojo, lang, dojox){
 
 	lang.getObject("json", true, dojox);
 

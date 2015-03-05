@@ -1,4 +1,4 @@
-define("dojo/selector/lite", ["../has", "../_base/kernel"], function(has, dojo){
+define(["../has", "../_base/kernel"], function(has, dojo){
 "use strict";
 
 var testDiv = document.createElement("div");

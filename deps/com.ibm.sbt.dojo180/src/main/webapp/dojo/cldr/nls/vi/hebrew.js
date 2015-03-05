@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/vi/hebrew", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/yyyy",
 	"dateFormatItem-yQ": "Q yyyy",
@@ -8,6 +8,15 @@ define(
 	"dateFormatItem-MMMEd": "E, d MMM",
 	"dateTimeFormat-full": "{0} {1}",
 	"dateFormatItem-yQQQ": "QQQ y",
+	"days-standAlone-wide": [
+		"Chủ nhật",
+		"Thứ hai",
+		"Thứ ba",
+		"Thứ tư",
+		"Thứ năm",
+		"Thứ sáu",
+		"Thứ bảy"
+	],
 	"dateTimeFormat-short": "{0} {1}",
 	"dayPeriods-format-wide-am": "SA",
 	"dateTimeFormat-medium": "{0} {1}",
@@ -102,12 +111,30 @@ define(
 	],
 	"dateFormatItem-yMMMd": "d MMM, y",
 	"dateFormatItem-MEd": "E, d-M",
+	"days-standAlone-short": [
+		"CN",
+		"T2",
+		"T3",
+		"T4",
+		"T5",
+		"T6",
+		"T7"
+	],
 	"months-standAlone-wide-leap": "Adar II",
 	"dateFormat-short": "dd/MM/yyyy",
 	"dateFormatItem-yMMMEd": "E, d MMM y",
 	"dateFormat-full": "EEEE, 'ngày' dd MMMM 'năm' y",
 	"dateFormatItem-Md": "d-M",
 	"dateFormatItem-yMEd": "E, d-M-yyyy",
+	"days-format-short": [
+		"CN",
+		"T2",
+		"T3",
+		"T4",
+		"T5",
+		"T6",
+		"T7"
+	],
 	"dateFormatItem-d": "'Ngày' d",
 	"quarters-format-wide": [
 		"Quý 1",

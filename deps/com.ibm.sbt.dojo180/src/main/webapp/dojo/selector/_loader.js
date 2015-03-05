@@ -1,4 +1,4 @@
-define("dojo/selector/_loader", ["../has", "require"],
+define(["../has", "require"],
 		function(has, require){
 
 "use strict";

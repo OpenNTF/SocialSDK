@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/zh-hant/chinese", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yMd": "U年M月d日",
 	"dateFormat-medium": "U年MMMd日",
@@ -10,7 +10,7 @@ define(
 	"dateFormatItem-yMMMd": "U年MMMd日",
 	"dateFormatItem-Md": "M/d",
 	"months-standAlone-narrow": [
-		"一",
+		"正",
 		"二",
 		"三",
 		"四",

@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/ko/roc", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yyyyMMMEd": "G y년 MMM d일 (E)",
 	"dateFormatItem-MMMEd": "MMM d일 (E)",

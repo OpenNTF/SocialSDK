@@ -1,4 +1,4 @@
-define("dojox/gfx3d/object", [
+define([
 	"dojo/_base/array",
 	"dojo/_base/declare",
 	"dojo/_base/lang",

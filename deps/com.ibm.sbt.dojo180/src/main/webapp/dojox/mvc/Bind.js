@@ -1,4 +1,4 @@
-define("dojox/mvc/Bind", [
+define([
 	"dojo/_base/lang",
 	"dojo/_base/array"
 ], function(lang, array){

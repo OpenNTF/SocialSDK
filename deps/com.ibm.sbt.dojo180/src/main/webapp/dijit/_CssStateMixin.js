@@ -1,4 +1,4 @@
-define("dijit/_CssStateMixin", [
+define([
 	"dojo/_base/array", // array.forEach array.map
 	"dojo/_base/declare",	// declare
 	"dojo/dom",			// dom.isDescendant()

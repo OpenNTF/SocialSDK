@@ -1,4 +1,4 @@
-define("dojox/mvc/StatefulArray", [
+define([
 	"dojo/_base/lang",
 	"dojo/Stateful"
 ], function(lang, Stateful){
@@ -35,7 +35,7 @@ define("dojox/mvc/StatefulArray", [
 		//		- Setting an element to this array via set() - Stateful update is done for the new element as well as the new length.
 		//		- Setting a length to this array via set() - Stateful update is done for the removed/added elements as well as the new length.
 
-		var array = lang._toArray(a);
+		var array = lang._toArray(a || []);
 		var ctor = StatefulArray;
 		ctor._meta = {bases: [Stateful]}; // For isInstanceOf()
 		array.constructor = ctor;
@@ -69,8 +69,11 @@ define("dojox/mvc/StatefulArray", [
 				// returns: dojox/mvc/StatefulArray
 				//		The removed elements.
 
-				var l = this.get("length"),
-				 p = Math.min(idx, l),
+				var l = this.get("length");
+
+				idx += idx < 0 ? l : 0;
+
+				var p = Math.min(idx, l),
 				 removals = this.slice(idx, idx + n),
 				 adds = lang._toArray(arguments).slice(2);
 
@@ -100,7 +103,7 @@ define("dojox/mvc/StatefulArray", [
 				return this.get("length");
 			},
 			concat: function(/*Array*/ a){
-				return new StatefulArray([].concat(this).concat(a));
+				return new StatefulArray([].concat.apply(this, arguments));
 			},
 			join: function(/*String*/ sep){
 				// summary:
@@ -122,7 +125,12 @@ define("dojox/mvc/StatefulArray", [
 				// end: Number
 				//		The index to end at. (a[end] won't be picked up)
 
-				var slice = [], end = typeof end === "undefined" ? this.get("length") : end;
+				var l = this.get("length");
+
+				start += start < 0 ? l : 0;
+				end = (end === void 0 ? l : end) + (end < 0 ? l : 0);
+
+				var slice = [];
 				for(var i = start || 0; i < Math.min(end, this.get("length")); i++){
 					slice.push(this.get(i));
 				}

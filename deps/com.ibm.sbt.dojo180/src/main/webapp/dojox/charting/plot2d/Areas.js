@@ -1,4 +1,4 @@
-define("dojox/charting/plot2d/Areas", ["dojo/_base/declare", "./Default"], 
+define(["dojo/_base/declare", "./Default"], 
   function(declare, Default){
 
 	return declare("dojox.charting.plot2d.Areas", Default, {

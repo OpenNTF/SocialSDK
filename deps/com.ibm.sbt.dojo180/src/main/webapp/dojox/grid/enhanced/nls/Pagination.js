@@ -1,4 +1,4 @@
-define("dojox/grid/enhanced/nls/Pagination", { root:
+define({ root:
 //begin v1.x content
 ({
 	"descTemplate": "${2} - ${3} of ${1} ${0}",

@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/kde/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"field-dayperiod": "Muhi/Chilo",
@@ -171,6 +171,15 @@ define(
 		"N",
 		"D"
 	],
+	"days-standAlone-short": [
+		"Ll2",
+		"Ll3",
+		"Ll4",
+		"Ll5",
+		"Ll6",
+		"Ll7",
+		"Ll1"
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"Ll2",
@@ -199,6 +208,15 @@ define(
 		"Mwedi wa Nnyano na Nnyano",
 		"Mwedi wa Nnyano na Nnyano na U",
 		"Mwedi wa Nnyano na Nnyano na M"
+	],
+	"days-format-short": [
+		"Ll2",
+		"Ll3",
+		"Ll4",
+		"Ll5",
+		"Ll6",
+		"Ll7",
+		"Ll1"
 	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

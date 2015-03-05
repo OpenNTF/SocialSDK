@@ -1,4 +1,4 @@
-define("dojox/geo/openlayers/TouchInteractionSupport", [
+define([
 	"dojo/_base/declare",
 	"dojo/_base/connect",
 	"dojo/_base/html",

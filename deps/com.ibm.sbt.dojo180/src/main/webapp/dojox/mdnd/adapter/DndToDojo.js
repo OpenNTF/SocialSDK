@@ -1,4 +1,4 @@
-define("dojox/mdnd/adapter/DndToDojo", ["dojo/_base/kernel",
+define(["dojo/_base/kernel",
 	"dojo/_base/declare",
 	"dojo/_base/connect",
 	"dojo/_base/array",

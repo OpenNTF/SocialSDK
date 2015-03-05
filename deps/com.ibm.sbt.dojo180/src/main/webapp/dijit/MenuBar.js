@@ -1,6 +1,4 @@
-require({cache:{
-'url:dijit/templates/MenuBar.html':"<div class=\"dijitMenuBar dijitMenuPassive\" data-dojo-attach-point=\"containerNode\"  role=\"menubar\" tabIndex=\"${tabIndex}\" data-dojo-attach-event=\"onkeypress: _onKeyPress\"></div>\n"}});
-define("dijit/MenuBar", [
+define([
 	"dojo/_base/declare", // declare
 	"dojo/_base/event", // event.stop
 	"dojo/keys", // keys.DOWN_ARROW

@@ -1,6 +1,4 @@
-require({cache:{
-'url:dijit/templates/Dialog.html':"<div class=\"dijitDialog\" role=\"dialog\" aria-labelledby=\"${id}_title\">\n\t<div data-dojo-attach-point=\"titleBar\" class=\"dijitDialogTitleBar\">\n\t\t<span data-dojo-attach-point=\"titleNode\" class=\"dijitDialogTitle\" id=\"${id}_title\"\n\t\t\t\trole=\"header\" level=\"1\"></span>\n\t\t<span data-dojo-attach-point=\"closeButtonNode\" class=\"dijitDialogCloseIcon\" data-dojo-attach-event=\"ondijitclick: onCancel\" title=\"${buttonCancel}\" role=\"button\" tabIndex=\"-1\">\n\t\t\t<span data-dojo-attach-point=\"closeText\" class=\"closeText\" title=\"${buttonCancel}\">x</span>\n\t\t</span>\n\t</div>\n\t<div data-dojo-attach-point=\"containerNode\" class=\"dijitDialogPaneContent\"></div>\n</div>\n"}});
-define("dijit/Dialog", [
+define([
 	"require",
 	"dojo/_base/array", // array.forEach array.indexOf array.map
 	"dojo/_base/connect", // connect._keypress
@@ -118,7 +116,7 @@ define("dijit/Dialog", [
 		},
 
 		// aria-describedby: String
-		//		Allows the user to add an aria-describedby attribute onto the dialog.   The value should
+		//		Allows the user to add an aria-describedby attribute onto the dialog. The value should
 		//		be the id of the container element of text that describes the dialog purpose (usually
 		//		the first text in the dialog).
 		//	|	<div data-dojo-type="dijit/Dialog" aria-describedby="intro" .....>
@@ -232,7 +230,7 @@ define("dijit/Dialog", [
 			var bb = domGeometry.position(this.domNode);
 
 			// Get viewport size but then reduce it by a bit; Dialog should always have some space around it
-			// to indicate that it's a popup.   This will also compensate for possible scrollbars on viewport.
+			// to indicate that it's a popup.  This will also compensate for possible scrollbars on viewport.
 			var viewport = winUtils.getBox(this.ownerDocument);
 			viewport.w *= this.maxRatio;
 			viewport.h *= this.maxRatio;
@@ -352,7 +350,10 @@ define("dijit/Dialog", [
 			}
 
 			if(this._fadeOutDeferred){
+				// There's a hide() operation in progress, so cancel it, but still call DialogLevelManager.hide()
+				// as though the hide() completed, in preparation for the DialogLevelManager.show() call below.
 				this._fadeOutDeferred.cancel();
+				DialogLevelManager.hide(this);
 			}
 
 			// Recenter Dialog if user scrolls browser.  Connecting to document doesn't work on IE, need to use window.
@@ -462,7 +463,12 @@ define("dijit/Dialog", [
 				if(DialogUnderlay._singleton){	// avoid race condition during show()
 					DialogUnderlay._singleton.layout();
 				}
-				this._position();
+				if(!has("touch")){
+					// If the user has scrolled the display then reposition the Dialog.  But don't do it for touch
+					// devices, because it will counteract when a keyboard pops up and then the browser auto-scrolls
+					// the focused node into view.
+					this._position();
+				}
 				this._size();
 			}
 		},

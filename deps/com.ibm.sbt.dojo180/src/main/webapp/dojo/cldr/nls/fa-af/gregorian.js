@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/fa-af/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"months-format-abbr": [
 		"جنو",
@@ -43,20 +43,6 @@ define(
 		"ن",
 		"د"
 	],
-	"months-standAlone-wide": [
-		"جنوری",
-		"فبروری",
-		"مارچ",
-		"اپریل",
-		"می",
-		"جون",
-		"جولای",
-		"اگست",
-		"سپتمبر",
-		"اکتوبر",
-		"نومبر",
-		"دسمبر"
-	],
 	"months-standAlone-abbr": [
 		"جنو",
 		"فبروری",
@@ -70,6 +56,20 @@ define(
 		"اکتوبر",
 		"نومبر",
 		"دسم"
+	],
+	"months-standAlone-wide": [
+		"جنوری",
+		"فبروری",
+		"مارچ",
+		"اپریل",
+		"می",
+		"جون",
+		"جولای",
+		"اگست",
+		"سپتمبر",
+		"اکتوبر",
+		"نومبر",
+		"دسمبر"
 	],
 	"months-standAlone-narrow": [
 		"ج",

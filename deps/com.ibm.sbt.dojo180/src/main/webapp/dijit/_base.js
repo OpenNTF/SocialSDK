@@ -1,4 +1,4 @@
-define("dijit/_base", [
+define([
 	"./main",
 	"./a11y",	// used to be in dijit/_base/manager
 	"./WidgetSet",	// used to be in dijit/_base/manager

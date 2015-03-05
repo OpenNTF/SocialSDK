@@ -1,4 +1,4 @@
-define("dojox/mobile/DatePicker", [
+define([
 	"dojo/_base/lang",
 	"./_PickerChooser!DatePicker"
 ], function(lang, DatePicker){

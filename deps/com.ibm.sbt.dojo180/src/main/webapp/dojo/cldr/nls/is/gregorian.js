@@ -1,6 +1,15 @@
 define(
-"dojo/cldr/nls/is/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"su",
+		"má",
+		"þr",
+		"mi",
+		"fi",
+		"fö",
+		"la"
+	],
 	"months-format-narrow": [
 		"J",
 		"F",
@@ -15,13 +24,28 @@ define(
 		"N",
 		"D"
 	],
+	"quarters-standAlone-narrow": [
+		"1",
+		"2",
+		"3",
+		"4"
+	],
 	"field-weekday": "vikudagur",
 	"dateFormatItem-yQQQ": "QQQ y",
-	"dateFormatItem-yMEd": "E d.M.yyyy",
+	"dateFormatItem-yMEd": "E d/M/y",
 	"dateFormatItem-MMMEd": "E d. MMM",
 	"eraNarrow": [
 		"f.k.",
 		"e.k."
+	],
+	"days-format-short": [
+		"su",
+		"má",
+		"þr",
+		"mi",
+		"fi",
+		"fö",
+		"la"
 	],
 	"dateFormat-long": "d. MMMM y",
 	"months-format-wide": [
@@ -38,6 +62,7 @@ define(
 		"nóvember",
 		"desember"
 	],
+	"dateTimeFormat-medium": "{1} {0}",
 	"dayPeriods-format-wide-pm": "e.h.",
 	"dateFormat-full": "EEEE, d. MMMM y",
 	"dateFormatItem-Md": "d.M",
@@ -60,10 +85,10 @@ define(
 	],
 	"timeFormat-short": "HH:mm",
 	"quarters-format-wide": [
-		"1st fjórðungur",
-		"2nd fjórðungur",
-		"3rd fjórðungur",
-		"4th fjórðungur"
+		"1. fjórðungur",
+		"2. fjórðungur",
+		"3. fjórðungur",
+		"4. fjórðungur"
 	],
 	"timeFormat-long": "HH:mm:ss z",
 	"field-year": "ár",
@@ -90,6 +115,7 @@ define(
 	"field-day-relative+0": "í dag",
 	"field-day-relative+1": "á morgun",
 	"field-day-relative+2": "eftir tvo daga",
+	"dateFormatItem-H": "HH",
 	"months-standAlone-abbr": [
 		"jan",
 		"feb",
@@ -136,8 +162,8 @@ define(
 		"4F"
 	],
 	"eraAbbr": [
-		"fyrir Krist",
-		"eftir Krist"
+		"f.Kr.",
+		"e.Kr."
 	],
 	"field-minute": "mínúta",
 	"field-dayperiod": "f.h./e.h.",
@@ -160,9 +186,12 @@ define(
 	],
 	"field-day-relative+-1": "í gær",
 	"dateFormatItem-h": "h a",
+	"dateTimeFormat-long": "{1} {0}",
+	"dayPeriods-format-narrow-am": "f.h.",
 	"field-day-relative+-2": "fyrir tveimur dögum",
 	"dateFormatItem-MMMd": "d. MMM",
 	"dateFormatItem-MEd": "E d.M.",
+	"dateTimeFormat-full": "{1} {0}",
 	"dateFormatItem-yMMMM": "MMMM y",
 	"field-day": "dagur",
 	"days-format-wide": [
@@ -177,18 +206,18 @@ define(
 	"field-zone": "svæði",
 	"dateFormatItem-y": "y",
 	"months-standAlone-narrow": [
-		"j",
-		"f",
-		"m",
-		"a",
-		"m",
-		"j",
-		"j",
-		"á",
-		"s",
-		"o",
-		"n",
-		"d"
+		"J",
+		"F",
+		"M",
+		"A",
+		"M",
+		"J",
+		"J",
+		"Á",
+		"S",
+		"O",
+		"N",
+		"D"
 	],
 	"field-year-relative+-1": "Á síðasta ári",
 	"field-month-relative+-1": "Í síðasta mánuði",
@@ -204,8 +233,8 @@ define(
 	],
 	"dateFormatItem-yMMMd": "d MMM, y",
 	"eraNames": [
-		"fyrir Krist",
-		"eftir Krist"
+		"f.Kr.",
+		"e.Kr."
 	],
 	"days-format-narrow": [
 		"S",
@@ -218,13 +247,13 @@ define(
 	],
 	"field-month": "mánuður",
 	"days-standAlone-narrow": [
-		"s",
-		"m",
+		"S",
+		"M",
 		"þ",
-		"m",
-		"f",
-		"f",
-		"l"
+		"M",
+		"F",
+		"F",
+		"L"
 	],
 	"dateFormatItem-MMM": "LLL",
 	"dayPeriods-format-wide-am": "f.h.",
@@ -234,13 +263,15 @@ define(
 	"dateFormatItem-yMMMEd": "E d. MMM y",
 	"field-month-relative+0": "Í þessum mánuði",
 	"field-month-relative+1": "Í næsta mánuði",
-	"dateFormatItem-Ed": "E d",
+	"dateFormatItem-Ed": "e d.",
 	"field-week": "vika",
 	"dateFormat-medium": "d.M.yyyy",
 	"field-year-relative+0": "Á þessu ári",
 	"field-week-relative+-1": "Í síðustu viku",
 	"dateFormatItem-yyyyM": "M.yyyy",
 	"field-year-relative+1": "Á næsta ári",
+	"dayPeriods-format-narrow-pm": "e.h.",
+	"dateTimeFormat-short": "{1} {0}",
 	"dateFormatItem-Hms": "HH:mm:ss",
 	"dateFormatItem-hms": "h:mm:ss a",
 	"field-week-relative+0": "Í þessari viku",

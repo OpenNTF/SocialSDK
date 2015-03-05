@@ -1,4 +1,4 @@
-define("dojox/grid/enhanced/_Events", [
+define([
 	"dojo/_base/kernel",
 	"dojo/_base/declare",
 	"dojo/keys",

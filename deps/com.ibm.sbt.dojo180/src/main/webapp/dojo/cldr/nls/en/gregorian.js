@@ -1,6 +1,16 @@
 define(
-"dojo/cldr/nls/en/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"dateFormatItem-Ehm": "E h:mm a",
+	"days-standAlone-short": [
+		"Su",
+		"Mo",
+		"Tu",
+		"We",
+		"Th",
+		"Fr",
+		"Sa"
+	],
 	"months-format-narrow": [
 		"J",
 		"F",
@@ -29,6 +39,15 @@ define(
 		"B",
 		"A"
 	],
+	"days-format-short": [
+		"Su",
+		"Mo",
+		"Tu",
+		"We",
+		"Th",
+		"Fr",
+		"Sa"
+	],
 	"dateFormat-long": "MMMM d, y",
 	"months-format-wide": [
 		"January",
@@ -44,7 +63,7 @@ define(
 		"November",
 		"December"
 	],
-	"dateTimeFormat-medium": "{1} {0}",
+	"dateTimeFormat-medium": "{1}, {0}",
 	"dayPeriods-format-wide-pm": "PM",
 	"dateFormat-full": "EEEE, MMMM d, y",
 	"dateFormatItem-Md": "M/d",
@@ -151,11 +170,11 @@ define(
 	"dateFormatItem-d": "d",
 	"dateFormatItem-ms": "mm:ss",
 	"field-day-relative+-1": "Yesterday",
-	"dateTimeFormat-long": "{1} {0}",
+	"dateTimeFormat-long": "{1} 'at' {0}",
 	"dayPeriods-format-narrow-am": "a",
 	"dateFormatItem-MMMd": "MMM d",
 	"dateFormatItem-MEd": "E, M/d",
-	"dateTimeFormat-full": "{1} {0}",
+	"dateTimeFormat-full": "{1} 'at' {0}",
 	"field-day": "Day",
 	"days-format-wide": [
 		"Sunday",
@@ -220,7 +239,10 @@ define(
 	],
 	"dateFormatItem-MMM": "LLL",
 	"dayPeriods-format-wide-am": "AM",
+	"dateFormatItem-EHm": "E HH:mm",
 	"dateFormat-short": "M/d/yy",
+	"dateFormatItem-EHms": "E HH:mm:ss",
+	"dateFormatItem-Ehms": "E h:mm:ss a",
 	"dayPeriods-format-narrow-noon": "n",
 	"field-second": "Second",
 	"dateFormatItem-yMMMEd": "E, MMM d, y",
@@ -233,7 +255,7 @@ define(
 	"field-week-relative+-1": "Last week",
 	"field-year-relative+1": "Next year",
 	"dayPeriods-format-narrow-pm": "p",
-	"dateTimeFormat-short": "{1} {0}",
+	"dateTimeFormat-short": "{1}, {0}",
 	"dateFormatItem-Hms": "HH:mm:ss",
 	"dateFormatItem-hms": "h:mm:ss a",
 	"field-week-relative+0": "This week",

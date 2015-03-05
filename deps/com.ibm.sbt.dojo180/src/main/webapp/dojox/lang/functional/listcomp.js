@@ -1,5 +1,3 @@
-// wrapped by build app
-define("dojox/lang/functional/listcomp", ["dijit","dojo","dojox"], function(dijit,dojo,dojox){
 dojo.provide("dojox.lang.functional.listcomp");
 
 // This module adds high-level functions and related constructs:
@@ -55,5 +53,3 @@ dojo.provide("dojox.lang.functional.listcomp");
 		}
 	});
 })();
-
-});

@@ -1,4 +1,4 @@
-define("dojox/geo/openlayers/GreatCircle", [
+define([
 	"dojo/_base/lang",
 	"./_base",
 	"./GeometryFeature"

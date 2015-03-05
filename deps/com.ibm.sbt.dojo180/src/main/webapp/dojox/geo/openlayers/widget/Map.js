@@ -1,4 +1,4 @@
-define("dojox/geo/openlayers/widget/Map", [
+define([
 	"dojo/_base/lang",
 	"dojo/_base/declare",
 	"dojo/_base/array",

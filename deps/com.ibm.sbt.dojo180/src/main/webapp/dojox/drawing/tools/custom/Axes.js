@@ -1,4 +1,4 @@
-define("dojox/drawing/tools/custom/Axes", ["dojo/_base/lang", "../../util/oo", "../../manager/_registry", "../../stencil/Path",
+define(["dojo/_base/lang", "../../util/oo", "../../manager/_registry", "../../stencil/Path",
 	"../../annotations/Arrow", "../../annotations/Label", "../../tools/custom/Vector"],
 function(lang, oo, registry, StencilPath, Arrow, Label, Vector){
 

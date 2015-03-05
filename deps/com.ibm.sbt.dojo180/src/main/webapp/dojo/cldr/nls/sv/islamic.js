@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/sv/islamic", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "yyyy-MM",
 	"dateFormatItem-yyyyMMMEd": "E d MMM y G",
@@ -51,6 +51,9 @@ define(
 		"T",
 		"F",
 		"L"
+	],
+	"eraAbbr": [
+		"AH"
 	],
 	"dateFormatItem-yyyyMM": "G y-MM",
 	"dateFormat-long": "d MMMM y G",
@@ -134,6 +137,15 @@ define(
 	"dateFormatItem-yMMMd": "d MMM y",
 	"dateFormatItem-MEd": "E d/M",
 	"dateFormatItem-yyyyQQQ": "G y QQQ",
+	"days-standAlone-short": [
+		"sö",
+		"må",
+		"ti",
+		"on",
+		"to",
+		"fr",
+		"lö"
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"sön",
@@ -167,6 +179,15 @@ define(
 		"dhu-l-hijja"
 	],
 	"dayPeriods-format-abbr-am": "FM",
+	"days-format-short": [
+		"sö",
+		"må",
+		"ti",
+		"on",
+		"to",
+		"fr",
+		"lö"
+	],
 	"dateFormatItem-yyyyMMM": "MMM y G",
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

@@ -1,6 +1,15 @@
 define(
-"dojo/cldr/nls/nb/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"sø.",
+		"ma.",
+		"ti.",
+		"on.",
+		"to.",
+		"fr.",
+		"lø."
+	],
 	"months-format-narrow": [
 		"J",
 		"F",
@@ -15,14 +24,29 @@ define(
 		"N",
 		"D"
 	],
+	"quarters-standAlone-narrow": [
+		"1",
+		"2",
+		"3",
+		"4"
+	],
 	"field-weekday": "ukedag",
 	"dateFormatItem-yyQQQQ": "QQQQ yy",
 	"dateFormatItem-yQQQ": "QQQ y",
-	"dateFormatItem-yMEd": "E d.M.yyyy",
+	"dateFormatItem-yMEd": "E d.MM.y",
 	"dateFormatItem-MMMEd": "E d. MMM",
 	"eraNarrow": [
 		"f.Kr.",
 		"e.Kr."
+	],
+	"days-format-short": [
+		"sø.",
+		"ma.",
+		"ti.",
+		"on.",
+		"to.",
+		"fr.",
+		"lø."
 	],
 	"dateFormat-long": "d. MMMM y",
 	"months-format-wide": [
@@ -45,8 +69,8 @@ define(
 	"dateFormatItem-Md": "d.M.",
 	"dayPeriods-format-abbr-am": "a.m.",
 	"dateFormatItem-yMd": "d.M.yyyy",
-	"field-era": "tidsalder",
 	"dateFormatItem-yM": "M y",
+	"field-era": "tidsalder",
 	"months-standAlone-wide": [
 		"januar",
 		"februar",
@@ -69,12 +93,12 @@ define(
 		"4. kvartal"
 	],
 	"timeFormat-long": "HH:mm:ss z",
-	"field-year": "år",
 	"dateFormatItem-yMMM": "MMM y",
 	"dateFormatItem-yQ": "Q yyyy",
+	"field-year": "år",
 	"dateFormatItem-yyyyMMMM": "MMMM y",
-	"field-hour": "time",
 	"dateFormatItem-MMdd": "d.M.",
+	"field-hour": "time",
 	"months-format-abbr": [
 		"jan.",
 		"feb.",
@@ -94,6 +118,7 @@ define(
 	"field-day-relative+0": "i dag",
 	"field-day-relative+1": "i morgen",
 	"field-day-relative+2": "i overmorgen",
+	"dateFormatItem-H": "HH",
 	"months-standAlone-abbr": [
 		"jan",
 		"feb",
@@ -163,6 +188,7 @@ define(
 		"4"
 	],
 	"field-day-relative+-1": "i går",
+	"dateFormatItem-h": "h a",
 	"dateTimeFormat-long": "{0} {1}",
 	"dayPeriods-format-narrow-am": "a",
 	"field-day-relative+-2": "i forgårs",
@@ -223,7 +249,6 @@ define(
 		"F",
 		"L"
 	],
-	"field-month": "måned",
 	"days-standAlone-narrow": [
 		"S",
 		"M",
@@ -234,6 +259,7 @@ define(
 		"L"
 	],
 	"dateFormatItem-MMM": "LLL",
+	"field-month": "måned",
 	"dayPeriods-format-wide-am": "AM",
 	"dateFormat-short": "dd.MM.yy",
 	"field-second": "sekund",

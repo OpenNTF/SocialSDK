@@ -1,4 +1,4 @@
-define("dijit/layout/_LayoutWidget", [
+define([
 	"dojo/_base/lang", // lang.mixin
 	"../_Widget",
 	"../_Container",

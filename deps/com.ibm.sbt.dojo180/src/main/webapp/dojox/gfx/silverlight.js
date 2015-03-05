@@ -1,4 +1,4 @@
-define("dojox/gfx/silverlight", ["dojo/_base/kernel", "dojo/_base/lang", "dojo/_base/declare", "dojo/_base/Color", 
+define(["dojo/_base/kernel", "dojo/_base/lang", "dojo/_base/declare", "dojo/_base/Color", 
 		"dojo/_base/array", "dojo/dom-geometry", "dojo/dom", "dojo/_base/sniff", 
 		"./_base", "./shape", "./path"], 
   function(kernel,lang,declare,color,arr,domGeom,dom,has,g,gs,pathLib){
@@ -920,6 +920,9 @@ define("dojox/gfx/silverlight", ["dojo/_base/kernel", "dojo/_base/lang", "dojo/_
 	
 	var eventsProcessing = {
 		connect: function(name, object, method){
+			if(name.indexOf("mouse") === 0){
+				name = "on" + name;
+			}
 			var token, n = name in eventNames ? eventNames[name] :
 				{name: name, fix: function(){ return {}; }};
 			if(arguments.length > 2){

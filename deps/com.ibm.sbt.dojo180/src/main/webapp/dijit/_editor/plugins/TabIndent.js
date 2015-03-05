@@ -1,4 +1,4 @@
-define("dijit/_editor/plugins/TabIndent", [
+define([
 	"dojo/_base/declare", // declare
 	"dojo/_base/kernel", // kernel.experimental
 	"../_Plugin",

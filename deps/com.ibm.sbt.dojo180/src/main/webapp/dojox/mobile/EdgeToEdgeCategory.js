@@ -1,4 +1,4 @@
-define("dojox/mobile/EdgeToEdgeCategory", [
+define([
 	"dojo/_base/declare",
 	"./RoundRectCategory"
 ], function(declare, RoundRectCategory){

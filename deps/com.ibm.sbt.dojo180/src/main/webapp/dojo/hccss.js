@@ -1,13 +1,12 @@
-define("dojo/hccss", [
+define([
 	"require",			// require.toUrl
 	"./_base/config", // config.blankGif
 	"./dom-class", // domClass.add
-	"./dom-construct", // domConstruct.destroy
 	"./dom-style", // domStyle.getComputedStyle
 	"./has",
 	"./ready", // ready
 	"./_base/window" // win.body
-], function(require, config, domClass, domConstruct, domStyle, has, ready, win){
+], function(require, config, domClass, domStyle, has, ready, win){
 
 	// module:
 	//		dojo/hccss
@@ -34,7 +33,11 @@ define("dojo/hccss", [
 			hc = (cs.borderTopColor == cs.borderRightColor) ||
 				(bkImg && (bkImg == "none" || bkImg == "url(invalid-url:)" ));
 
-		domConstruct.destroy(div);
+		if(has("ie") <= 8){
+			div.outerHTML = "";		// prevent mixed-content warning, see http://support.microsoft.com/kb/925014
+		}else{
+			win.body().removeChild(div);
+		}
 
 		return hc;
 	});

@@ -1,6 +1,4 @@
-require({cache:{
-'url:dijit/form/templates/TextBox.html':"<div class=\"dijit dijitReset dijitInline dijitLeft\" id=\"widget_${id}\" role=\"presentation\"\n\t><div class=\"dijitReset dijitInputField dijitInputContainer\"\n\t\t><input class=\"dijitReset dijitInputInner\" data-dojo-attach-point='textbox,focusNode' autocomplete=\"off\"\n\t\t\t${!nameAttrSetting} type='${type}'\n\t/></div\n></div>\n"}});
-define("dijit/form/TextBox", [
+define([
 	"dojo/_base/declare", // declare
 	"dojo/dom-construct", // domConstruct.create
 	"dojo/dom-style", // domStyle.getComputedStyle
@@ -62,14 +60,6 @@ define("dijit/form/TextBox", [
 			}
 		},
 
-		_onInput: function(e){
-			this.inherited(arguments);
-			if(this.intermediateChanges){ // _TextBoxMixin uses onInput
-				// allow the key to post to the widget input box
-				this.defer(function(){ this._handleOnChange(this.get('value'), false); });
-			}
-		},
-
 		_setPlaceHolderAttr: function(v){
 			this._set("placeHolder", v);
 			if(!this._phspan){
@@ -77,16 +67,24 @@ define("dijit/form/TextBox", [
 				// dijitInputField class gives placeHolder same padding as the input field
 				// parent node already has dijitInputField class but it doesn't affect this <span>
 				// since it's position: absolute.
-				this._phspan = domConstruct.create('span',{className:'dijitPlaceHolder dijitInputField'},this.textbox,'after');
+				this._phspan = domConstruct.create('span',{ onmousedown:function(e){ e.preventDefault(); }, className:'dijitPlaceHolder dijitInputField'},this.textbox,'after');
 			}
 			this._phspan.innerHTML="";
 			this._phspan.appendChild(this._phspan.ownerDocument.createTextNode(v));
 			this._updatePlaceHolder();
 		},
 
+		_onInput: function(/*Event*/ evt){
+			// summary:
+			//		Called AFTER the input event has happened
+			//		See if the placeHolder text should be removed or added while editing.
+			this.inherited(arguments);
+			this._updatePlaceHolder();
+		},
+
 		_updatePlaceHolder: function(){
 			if(this._phspan){
-				this._phspan.style.display=(this.placeHolder&&!this.focused&&!this.textbox.value)?"":"none";
+				this._phspan.style.display = (this.placeHolder && !this.textbox.value) ? "" : "none";
 			}
 		},
 
@@ -133,7 +131,7 @@ define("dijit/form/TextBox", [
 		}
 	});
 
-	if(has("ie")){
+	if(has("ie") < 9){
 		TextBox.prototype._isTextSelected = function(){
 			var range = this.ownerDocument.selection.createRange();
 			var parent = range.parentElement();

@@ -1,5 +1,3 @@
-// wrapped by build app
-define("dojox/lang/functional/linrec", ["dijit","dojo","dojox","dojo/require!dojox/lang/functional/lambda,dojox/lang/functional/util"], function(dijit,dojo,dojox){
 dojo.provide("dojox.lang.functional.linrec");
 
 dojo.require("dojox.lang.functional.lambda");
@@ -143,4 +141,3 @@ var linrec2 = function(cond, then, before, after){
 };
 
 */
-});

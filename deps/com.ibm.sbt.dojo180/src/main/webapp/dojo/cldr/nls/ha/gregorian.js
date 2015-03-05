@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/ha/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"field-dayperiod": "Yini",
@@ -169,6 +169,15 @@ define(
 		"N",
 		"D"
 	],
+	"days-standAlone-short": [
+		"Lh",
+		"Li",
+		"Ta",
+		"Lr",
+		"Al",
+		"Ju",
+		"As"
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"Lh",
@@ -197,6 +206,15 @@ define(
 		"Oktoba",
 		"Nuwamba",
 		"Disamba"
+	],
+	"days-format-short": [
+		"Lh",
+		"Li",
+		"Ta",
+		"Lr",
+		"Al",
+		"Ju",
+		"As"
 	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

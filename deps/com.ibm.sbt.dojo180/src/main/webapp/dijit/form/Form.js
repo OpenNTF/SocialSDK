@@ -1,4 +1,4 @@
-define("dijit/form/Form", [
+define([
 	"dojo/_base/declare", // declare
 	"dojo/dom-attr", // domAttr.set
 	"dojo/_base/event", // event.stop

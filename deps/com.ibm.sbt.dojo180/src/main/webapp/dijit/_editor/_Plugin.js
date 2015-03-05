@@ -1,4 +1,4 @@
-define("dijit/_editor/_Plugin", [
+define([
 	"dojo/_base/connect", // connect.connect
 	"dojo/_base/declare", // declare
 	"dojo/_base/lang", // lang.mixin, lang.hitch

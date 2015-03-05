@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/swc/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"field-dayperiod": "Muda wa siku",
@@ -172,6 +172,15 @@ define(
 		"m",
 		"m"
 	],
+	"days-standAlone-short": [
+		"yen",
+		"kwa",
+		"pil",
+		"tat",
+		"ine",
+		"tan",
+		"sit"
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"yen",
@@ -200,6 +209,15 @@ define(
 		"mwezi ya kumi",
 		"mwezi ya kumi na moya",
 		"mwezi ya kumi ya mbili"
+	],
+	"days-format-short": [
+		"yen",
+		"kwa",
+		"pil",
+		"tat",
+		"ine",
+		"tan",
+		"sit"
 	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

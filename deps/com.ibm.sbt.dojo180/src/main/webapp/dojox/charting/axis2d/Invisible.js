@@ -1,4 +1,4 @@
-define("dojox/charting/axis2d/Invisible", ["dojo/_base/lang", "dojo/_base/declare", "./Base", "../scaler/linear",
+define(["dojo/_base/lang", "dojo/_base/declare", "./Base", "../scaler/linear",
 	"dojox/gfx", "dojox/lang/utils"],
 	function(lang, declare, Base, lin, g, du){
 

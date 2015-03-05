@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/ff/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"field-dayperiod": "Sahnga",
@@ -176,6 +176,15 @@ define(
 		"j",
 		"b"
 	],
+	"days-standAlone-short": [
+		"dew",
+		"aaɓ",
+		"maw",
+		"nje",
+		"naa",
+		"mwd",
+		"hbi"
+	],
 	"days-standAlone-abbr": [
 		"dew",
 		"aaɓ",
@@ -203,6 +212,15 @@ define(
 		"yarkomaa",
 		"jolal",
 		"bowte"
+	],
+	"days-format-short": [
+		"dew",
+		"aaɓ",
+		"maw",
+		"nje",
+		"naa",
+		"mwd",
+		"hbi"
 	],
 	"quarters-format-wide": [
 		"Termes 1",

@@ -1,8 +1,9 @@
 define(
-"dojo/cldr/nls/ro/hebrew", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "MM.yyyy",
 	"dateFormatItem-yQ": "'trimestrul' Q y",
+	"months-standAlone-abbr-leap": "Adar II",
 	"dateFormatItem-MMMEd": "E, d MMM",
 	"dateTimeFormat-full": "{1}, {0}",
 	"dateFormatItem-yQQQ": "QQQ y",
@@ -17,6 +18,7 @@ define(
 	],
 	"dateTimeFormat-short": "{1}, {0}",
 	"dateTimeFormat-medium": "{1}, {0}",
+	"months-format-abbr-leap": "Adar II",
 	"quarters-standAlone-abbr": [
 		"T1",
 		"T2",
@@ -29,13 +31,13 @@ define(
 		"Kislev",
 		"Tevet",
 		"Șevat",
-		null,
+		"Adar I",
 		"Adar",
 		"Nisan",
 		"Iyar",
 		"Sivan",
 		"Tammuz",
-		null,
+		"Av",
 		"Elul"
 	],
 	"dateFormatItem-Ed": "E d",
@@ -71,13 +73,13 @@ define(
 		"Kislev",
 		"Tevet",
 		"Șevat",
-		null,
+		"Adar I",
 		"Adar",
 		"Nisan",
 		"Iyar",
 		"Sivan",
 		"Tammuz",
-		null,
+		"Av",
 		"Elul"
 	],
 	"dateFormatItem-MMMd": "d MMM",
@@ -93,13 +95,13 @@ define(
 		"Kislev",
 		"Tevet",
 		"Șevat",
-		null,
+		"Adar I",
 		"Adar",
 		"Nisan",
 		"Iyar",
 		"Sivan",
 		"Tammuz",
-		null,
+		"Av",
 		"Elul"
 	],
 	"quarters-format-abbr": [
@@ -128,6 +130,15 @@ define(
 	],
 	"dateFormatItem-yMMMd": "d MMM y",
 	"dateFormatItem-MEd": "E, dd.MM",
+	"days-standAlone-short": [
+		"Du",
+		"Lu",
+		"Ma",
+		"Mi",
+		"Jo",
+		"Vi",
+		"Sâ"
+	],
 	"days-standAlone-abbr": [
 		"Du",
 		"Lu",
@@ -137,6 +148,7 @@ define(
 		"Vi",
 		"Sâ"
 	],
+	"months-standAlone-wide-leap": "Adar II",
 	"dateFormat-short": "dd.MM.yyyy",
 	"dateFormatItem-yMMMEd": "E, d MMM y",
 	"dateFormat-full": "EEEE, d MMMM y",
@@ -145,9 +157,26 @@ define(
 	"months-format-wide": [
 		"Tișrei",
 		"Heșvan",
-		null,
-		null,
-		"Șevat"
+		"Kislev",
+		"Tevet",
+		"Șevat",
+		"Adar I",
+		"Adar",
+		"Nisan",
+		"Iyar",
+		"Sivan",
+		"Tammuz",
+		"Av",
+		"Elul"
+	],
+	"days-format-short": [
+		"Du",
+		"Lu",
+		"Ma",
+		"Mi",
+		"Jo",
+		"Vi",
+		"Sâ"
 	],
 	"quarters-format-wide": [
 		"trimestrul I",
@@ -155,6 +184,7 @@ define(
 		"trimestrul al III-lea",
 		"trimestrul al IV-lea"
 	],
+	"months-format-wide-leap": "Adar II",
 	"days-format-wide": [
 		"duminică",
 		"luni",

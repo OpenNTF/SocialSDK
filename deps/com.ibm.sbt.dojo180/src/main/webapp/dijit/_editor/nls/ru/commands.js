@@ -1,5 +1,5 @@
 define(
-"dijit/_editor/nls/ru/commands", ({
+({
 	'bold': 'Полужирный',
 	'copy': 'Копировать',
 	'cut': 'Вырезать',
@@ -9,10 +9,10 @@ define(
 	'insertOrderedList': 'Нумерованный список',
 	'insertUnorderedList': 'Список с маркерами',
 	'italic': 'Курсив',
-	'justifyCenter': 'По центру',
+	'justifyCenter': 'Выровнять по центру',
 	'justifyFull': 'По ширине',
-	'justifyLeft': 'По левому краю',
-	'justifyRight': 'По правому краю',
+	'justifyLeft': 'Выровнять по левому краю',
+	'justifyRight': 'Выровнять по правому краю',
 	'outdent': 'Втяжка',
 	'paste': 'Вставить',
 	'redo': 'Повторить',

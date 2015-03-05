@@ -1,5 +1,3 @@
-// wrapped by build app
-define("dojox/lang/typed", ["dijit","dojo","dojox","dojo/require!dojox/json/schema"], function(dijit,dojo,dojox){
 (function(){
 	var jsonSchema, inDojo = typeof dojo != "undefined";
 	if(inDojo){
@@ -149,5 +147,3 @@ define("dojox/lang/typed", ["dijit","dojo","dojox","dojo/require!dojox/json/sche
 		typed = typedFunction;
 	}
 })();
-
-});

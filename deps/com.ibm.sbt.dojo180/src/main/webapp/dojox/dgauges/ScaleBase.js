@@ -1,5 +1,5 @@
-define("dojox/dgauges/ScaleBase", ["dojo/_base/lang", "dojo/_base/declare", "dojox/gfx", "dojo/_base/array", "dojox/widget/_Invalidating"],
-	function(lang, declare, gfx, array, _Invalidating){
+define(["dojo/_base/lang", "dojo/_base/declare", "dojox/gfx", "dojo/_base/array", "dojox/widget/_Invalidating", "dojo/_base/sniff"],
+	function(lang, declare, gfx, array, _Invalidating, has){
 	return declare("dojox.dgauges.ScaleBase", _Invalidating, {
 		// summary:
 		//		The ScaleBase class is the base class for the circular and rectangular scales.
@@ -38,7 +38,8 @@ define("dojox/dgauges/ScaleBase", ["dojo/_base/lang", "dojo/_base/declare", "doj
 			this._indicatorsRenderers = {};
 			this._gauge = null;
 			this._gfxGroup = null;
-			this.tickStroke = {color: "black", width: 0.5};
+			// Fix for #1, IE<9 don't render correctly stroke with width<1
+			this.tickStroke = {color: "black", width: has("ie") <= 8 ? 1 : 0.5};
 			
 			this.addInvalidatingProperties(["scaler", "font", "labelGap", "labelPosition", "tickShapeFunc", "tickLabelFunc", "tickStroke"]);
 			
@@ -167,6 +168,9 @@ define("dojox/dgauges/ScaleBase", ["dojo/_base/lang", "dojo/_base/declare", "doj
 				
 				delete this._indicatorsIndex[name];
 				delete this._indicatorsRenderers[name];
+			}
+			if(this._gauge){
+				this._gauge._resetMainIndicator();
 			}
 			this.invalidateRendering();
 			return indicator;

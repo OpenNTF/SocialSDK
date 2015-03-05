@@ -1,4 +1,4 @@
-define("dijit/Toolbar", [
+define([
 	"require",
 	"dojo/_base/declare", // declare
 	"dojo/has",

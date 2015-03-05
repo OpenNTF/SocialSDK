@@ -1,4 +1,4 @@
-define("dojox/dtl/DomInline", [
+define([
 	"dojo/_base/lang",
 	"./dom",
 	"./_base",

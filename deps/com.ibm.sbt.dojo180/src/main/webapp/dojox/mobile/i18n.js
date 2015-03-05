@@ -1,4 +1,4 @@
-define("dojox/mobile/i18n", [
+define([
 	"dojo/_base/lang",
 	"dojo/i18n",
 	"dijit/_WidgetBase"

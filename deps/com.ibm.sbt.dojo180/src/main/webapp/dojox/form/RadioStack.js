@@ -1,4 +1,4 @@
-define("dojox/form/RadioStack", [
+define([
 	"./CheckedMultiSelect",
 	"./_SelectStackMixin",
 	"dojo/_base/declare"

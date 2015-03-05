@@ -1,11 +1,11 @@
 define(
-"dojo/cldr/nls/lt/buddhist", //begin v1.x content
+//begin v1.x content
 {
-	"dateFormatItem-yM": "y-M",
+	"dateFormatItem-yM": "y-MM",
 	"dateFormatItem-yQ": "y Q",
 	"dayPeriods-format-wide-pm": "popiet",
 	"dateFormatItem-MMMEd": "MMM d, E",
-	"dateFormatItem-hms": "hh:mm:ss a",
+	"dateFormatItem-hms": "h:mm:ss a",
 	"dateFormatItem-yQQQ": "y QQQ",
 	"days-standAlone-wide": [
 		"sekmadienis",
@@ -39,20 +39,21 @@ define(
 	],
 	"dateFormatItem-y": "y",
 	"months-standAlone-abbr": [
-		"Saus.",
-		"Vas.",
-		"Kov.",
-		"Bal.",
-		"Geg.",
-		"Bir.",
-		"Liep.",
-		"Rugp.",
-		"Rugs.",
-		"Spal.",
-		"Lapkr.",
-		"Gruod."
+		"saus.",
+		"vas.",
+		"kov.",
+		"bal.",
+		"geg.",
+		"birž.",
+		"liep.",
+		"rugp.",
+		"rugs.",
+		"spal.",
+		"lapkr.",
+		"gruod."
 	],
-	"dateFormatItem-yMMM": "y MMM",
+	"dateFormatItem-Ed": "E, d",
+	"dateFormatItem-yMMM": "MMM, y",
 	"days-standAlone-narrow": [
 		"S",
 		"P",
@@ -63,7 +64,9 @@ define(
 		"Š"
 	],
 	"dateFormat-long": "y 'm'. MMMM d 'd'.",
+	"dateFormatItem-Hm": "HH:mm",
 	"dateFormat-medium": "y MMM d",
+	"dateFormatItem-Hms": "HH:mm:ss",
 	"dateFormatItem-yMd": "y-M-d",
 	"quarters-standAlone-wide": [
 		"I ketvirtis",
@@ -71,60 +74,50 @@ define(
 		"III ketvirtis",
 		"IV ketvirtis"
 	],
-	"quarters-standAlone-narrow": [
-		"I",
-		"II",
-		"3",
-		"IV"
-	],
+	"dateFormatItem-ms": "mm:ss",
 	"months-standAlone-wide": [
-		"Sausis",
-		"Vasaris",
-		"Kovas",
-		"Balandis",
-		"Gegužė",
-		"Birželis",
-		"Liepa",
-		"Rugpjūtis",
-		"Rugsėjis",
-		"Spalis",
-		"Lapkritis",
-		"Gruodis"
-	],
-	"quarters-format-narrow": [
-		"I",
-		"II",
-		"3",
-		"IV"
+		"sausis",
+		"vasaris",
+		"kovas",
+		"balandis",
+		"gegužė",
+		"birželis",
+		"liepa",
+		"rugpjūtis",
+		"rugsėjis",
+		"spalis",
+		"lapkritis",
+		"gruodis"
 	],
 	"months-format-abbr": [
-		"Saus.",
-		"Vas",
-		"Kov.",
-		"Bal.",
-		"Geg.",
-		"Bir.",
-		"Liep.",
-		"Rugp.",
-		"Rugs.",
-		"Spal.",
-		"Lapkr.",
-		"Gruod."
+		"saus.",
+		"vas.",
+		"kov.",
+		"bal.",
+		"geg.",
+		"birž.",
+		"liep.",
+		"rugp.",
+		"rugs.",
+		"spal.",
+		"lapkr.",
+		"gruod."
 	],
+	"dateFormatItem-H": "HH",
 	"quarters-format-abbr": [
 		"I k.",
 		"II k.",
 		"III k.",
-		"IV ketv."
+		"IV k."
 	],
 	"days-format-abbr": [
-		"Sk",
-		"Pr",
-		"An",
-		"Tr",
-		"Kt",
-		"Pn",
-		"Št"
+		"sk",
+		"pr",
+		"an",
+		"tr",
+		"kt",
+		"pn",
+		"št"
 	],
 	"days-format-narrow": [
 		"S",
@@ -135,6 +128,7 @@ define(
 		"P",
 		"Š"
 	],
+	"dateFormatItem-M": "LL",
 	"dateFormatItem-yMMMd": "y MMM d",
 	"dateFormatItem-MEd": "M-d, E",
 	"months-format-narrow": [
@@ -151,8 +145,7 @@ define(
 		"L",
 		"G"
 	],
-	"dateFormatItem-hm": "hh:mm a",
-	"days-standAlone-abbr": [
+	"days-standAlone-short": [
 		"Sk",
 		"Pr",
 		"An",
@@ -161,13 +154,24 @@ define(
 		"Pn",
 		"Št"
 	],
+	"dateFormatItem-hm": "h:mm a",
+	"days-standAlone-abbr": [
+		"sk",
+		"pr",
+		"an",
+		"tr",
+		"kt",
+		"pn",
+		"št"
+	],
 	"dayPeriods-format-abbr-pm": "pop.",
 	"dateFormat-short": "yyyy-MM-dd",
-	"dateFormatItem-yMMMEd": "y MMM d, E",
+	"dateFormatItem-yMMMEd": "E, MMM d, y",
 	"dateFormat-full": "y G, MMMM d, EEEE",
-	"dateFormatItem-yMEd": "y-M-d E",
+	"dateFormatItem-Md": "MM-d",
+	"dateFormatItem-yMEd": "E, y-MM-d",
 	"months-format-wide": [
-		"sausio",
+		"sausis",
 		"vasaris",
 		"kovas",
 		"balandis",
@@ -181,6 +185,15 @@ define(
 		"gruodis"
 	],
 	"dayPeriods-format-abbr-am": "pr.p.",
+	"days-format-short": [
+		"Sk",
+		"Pr",
+		"An",
+		"Tr",
+		"Kt",
+		"Pn",
+		"Št"
+	],
 	"quarters-format-wide": [
 		"I ketvirtis",
 		"II ketvirtis",

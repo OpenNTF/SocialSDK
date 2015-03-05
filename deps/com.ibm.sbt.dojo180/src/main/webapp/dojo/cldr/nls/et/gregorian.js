@@ -1,6 +1,15 @@
 define(
-"dojo/cldr/nls/et/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"P",
+		"E",
+		"T",
+		"K",
+		"N",
+		"R",
+		"L"
+	],
 	"months-format-narrow": [
 		"J",
 		"V",
@@ -15,13 +24,28 @@ define(
 		"N",
 		"D"
 	],
+	"quarters-standAlone-narrow": [
+		"1.",
+		"2.",
+		"3.",
+		"4."
+	],
 	"field-weekday": "nädalapäev",
 	"dateFormatItem-yQQQ": "QQQ y",
-	"dateFormatItem-yMEd": "E, d.M.y",
+	"dateFormatItem-yMEd": "E, d.M y",
 	"dateFormatItem-MMMEd": "E, d. MMM",
 	"eraNarrow": [
 		"e.m.a.",
 		"m.a.j."
+	],
+	"days-format-short": [
+		"P",
+		"E",
+		"T",
+		"K",
+		"N",
+		"R",
+		"L"
 	],
 	"dateFormat-long": "d. MMMM y",
 	"months-format-wide": [
@@ -38,7 +62,8 @@ define(
 		"november",
 		"detsember"
 	],
-	"dayPeriods-format-wide-pm": "pärast keskpäeva",
+	"dateTimeFormat-medium": "{1} {0}",
+	"dayPeriods-format-wide-pm": "PM",
 	"dateFormat-full": "EEEE, d. MMMM y",
 	"dateFormatItem-Md": "d.M",
 	"dayPeriods-format-abbr-am": "e.k.",
@@ -92,7 +117,7 @@ define(
 	"field-day-relative+0": "täna",
 	"field-day-relative+1": "homme",
 	"field-day-relative+2": "ülehomme",
-	"dateFormatItem-H": "H",
+	"dateFormatItem-H": "HH",
 	"months-standAlone-abbr": [
 		"jaan",
 		"veebr",
@@ -119,6 +144,7 @@ define(
 		"3. kvartal",
 		"4. kvartal"
 	],
+	"dateFormatItem-M": "M",
 	"days-standAlone-wide": [
 		"pühapäev",
 		"esmaspäev",
@@ -130,7 +156,7 @@ define(
 	],
 	"dateFormatItem-MMMMd": "d. MMMM",
 	"timeFormat-medium": "H:mm.ss",
-	"dateFormatItem-Hm": "H:mm",
+	"dateFormatItem-Hm": "HH:mm",
 	"quarters-standAlone-abbr": [
 		"K1",
 		"K2",
@@ -152,6 +178,8 @@ define(
 		"R",
 		"L"
 	],
+	"dateFormatItem-d": "d",
+	"dateFormatItem-ms": "mm.ss",
 	"quarters-format-narrow": [
 		"1",
 		"2",
@@ -159,9 +187,12 @@ define(
 		"4"
 	],
 	"field-day-relative+-1": "eile",
+	"dateFormatItem-h": "h a",
+	"dateTimeFormat-long": "{1} {0}",
 	"field-day-relative+-2": "üleeile",
 	"dateFormatItem-MMMd": "d. MMM",
 	"dateFormatItem-MEd": "E, d.M",
+	"dateTimeFormat-full": "{1} {0}",
 	"field-day": "päev",
 	"days-format-wide": [
 		"pühapäev",
@@ -174,6 +205,7 @@ define(
 	],
 	"field-zone": "vöönd",
 	"dateFormatItem-yyyyMM": "MM.yyyy",
+	"dateFormatItem-y": "y",
 	"months-standAlone-narrow": [
 		"J",
 		"V",
@@ -190,6 +222,7 @@ define(
 	],
 	"field-year-relative+-1": "Eelmine aasta",
 	"field-month-relative+-1": "Eelmine kuu",
+	"dateFormatItem-hm": "h:mm a",
 	"dayPeriods-format-abbr-pm": "p.k.",
 	"days-format-abbr": [
 		"P",
@@ -200,7 +233,7 @@ define(
 		"R",
 		"L"
 	],
-	"dateFormatItem-yMMMd": "d.MMM.y",
+	"dateFormatItem-yMMMd": "d. MMM y",
 	"eraNames": [
 		"enne meie aega",
 		"meie aja järgi"
@@ -214,7 +247,6 @@ define(
 		"R",
 		"L"
 	],
-	"field-month": "kuu",
 	"days-standAlone-narrow": [
 		"P",
 		"E",
@@ -224,19 +256,23 @@ define(
 		"R",
 		"L"
 	],
-	"dayPeriods-format-wide-am": "enne keskpäeva",
+	"dateFormatItem-MMM": "MMMM",
+	"field-month": "kuu",
+	"dayPeriods-format-wide-am": "AM",
 	"dateFormatItem-MMMMEd": "E, d. MMMM",
 	"dateFormat-short": "dd.MM.yy",
 	"field-second": "sekund",
-	"dateFormatItem-yMMMEd": "E, d. MMM y",
+	"dateFormatItem-yMMMEd": "E, d. MMMM y",
 	"field-month-relative+0": "See kuu",
 	"field-month-relative+1": "Järgmine kuu",
+	"dateFormatItem-Ed": "E, d",
 	"field-week": "nädal",
 	"dateFormat-medium": "dd.MM.yyyy",
 	"field-year-relative+0": "Sel aastal",
 	"field-week-relative+-1": "Eelmine nädal",
 	"field-year-relative+1": "Järgmine aasta",
 	"dateFormatItem-mmss": "mm.ss",
+	"dateTimeFormat-short": "{1} {0}",
 	"dateFormatItem-Hms": "H:mm.ss",
 	"dateFormatItem-hms": "h:mm.ss a",
 	"field-week-relative+0": "See nädal",

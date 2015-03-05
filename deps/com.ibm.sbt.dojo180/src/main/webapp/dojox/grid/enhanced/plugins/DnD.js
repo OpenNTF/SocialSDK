@@ -1,4 +1,4 @@
-define("dojox/grid/enhanced/plugins/DnD", [
+define([
 	"dojo/_base/kernel",
 	"dojo/_base/declare",
 	"dojo/_base/connect",

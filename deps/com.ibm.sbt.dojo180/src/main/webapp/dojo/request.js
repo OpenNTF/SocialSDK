@@ -1,4 +1,4 @@
-define("dojo/request", [
+define([
 	'./request/default!'/*=====,
 	'./_base/declare',
 	'./promise/Promise' =====*/

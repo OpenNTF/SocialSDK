@@ -1,4 +1,4 @@
-define("dojox/editor/plugins/UploadImage", [
+define([
 	"dojo",
 	"dijit",
 	"dojox",

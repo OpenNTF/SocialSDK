@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/eo/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormat-medium": "y-MMM-dd",
 	"eraNarrow": [
@@ -7,6 +7,15 @@ define(
 		"pK"
 	],
 	"timeFormat-full": "H-'a' 'horo' 'kaj' m:ss zzzz",
+	"days-format-short": [
+		"di",
+		"lu",
+		"ma",
+		"me",
+		"ĵa",
+		"ve",
+		"sa"
+	],
 	"months-standAlone-wide": [
 		"januaro",
 		"februaro",
@@ -39,6 +48,15 @@ define(
 		"okt",
 		"nov",
 		"dec"
+	],
+	"days-standAlone-short": [
+		"di",
+		"lu",
+		"ma",
+		"me",
+		"ĵa",
+		"ve",
+		"sa"
 	],
 	"dayPeriods-format-wide-am": "atm",
 	"dateFormat-long": "y-MMMM-dd",

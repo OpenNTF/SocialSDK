@@ -1,4 +1,4 @@
-define("dojox/data/S3Store", ["dojo/_base/declare", "dojox/data/JsonRestStore", "dojox/rpc/ProxiedPath"], 
+define(["dojo/_base/declare", "dojox/data/JsonRestStore", "dojox/rpc/ProxiedPath"], 
   function(declare, JsonRestStore, ProxiedPath) {
 return declare("dojox.data.S3Store", JsonRestStore,
 	{

@@ -1,7 +1,16 @@
-define("dojo/cldr/nls/hebrew", { root:
+define({ root:
 
 //begin v1.x content
 {
+	"days-standAlone-short": [
+		"1",
+		"2",
+		"3",
+		"4",
+		"5",
+		"6",
+		"7"
+	],
 	"months-format-narrow": [
 		"1",
 		"2",
@@ -28,6 +37,15 @@ define("dojo/cldr/nls/hebrew", { root:
 	"dateFormatItem-MMMEd": "E MMM d",
 	"eraNarrow": [
 		"AM"
+	],
+	"days-format-short": [
+		"1",
+		"2",
+		"3",
+		"4",
+		"5",
+		"6",
+		"7"
 	],
 	"dateTimeFormats-appendItem-Day-Of-Week": "{0} {1}",
 	"dateFormat-long": "y MMMM d",
@@ -253,13 +271,16 @@ define("dojo/cldr/nls/hebrew", { root:
 ,
 	"ar": true,
 	"bg": true,
+	"bs-cyrl": true,
 	"el": true,
 	"fa": true,
 	"fi": true,
 	"fr": true,
 	"he": true,
 	"hu": true,
+	"id": true,
 	"ja": true,
+	"lo": true,
 	"lv": true,
 	"nl": true,
 	"pl": true,

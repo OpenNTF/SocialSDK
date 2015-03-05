@@ -1,4 +1,4 @@
-define("dojox/mobile/TransitionEvent", [
+define([
 	"dojo/_base/declare",
 	"dojo/_base/Deferred",
 	"dojo/_base/lang",

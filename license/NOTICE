@@ -33,6 +33,26 @@ Available from http://incubator.apache.org/wink/downloads.html
   This product includes software developed at
   The Apache Software Foundation (http://www.apache.org/)
 
+Apache Commons Logging 1.1.1
+Licensed under Apache 2.0
+Available from http://archive.apache.org/dist/commons/logging/source/
+   This product includes software developed by
+   The Apache Software Foundation (http://www.apache.org/).
+
+Apache Commons-Codec 1.6
+Licensed under Apache 2.0
+Available from http://commons.apache.org/codec
+Copyright 2002-2009 The Apache Software Foundation
+   This product includes software developed by
+   The Apache Software Foundation (http://www.apache.org/).
+   --------------------------------------------------------------------------------
+   src/test/org/apache/commons/codec/language/DoubleMetaphoneTest.java contains 
+   test data from http://aspell.sourceforge.net/test/batch0.tab.
+   Copyright (C) 2002 Kevin Atkinson (kevina@gnu.org). Verbatim copying
+   and distribution of this entire article is permitted in any medium,
+   provided this notice is preserved.
+   --------------------------------------------------------------------------------
+
 Apache Commons Email 1.2
 Licensed under Apache 2.0
 Available from http://commons.apache.org/email/
@@ -72,7 +92,7 @@ Available from http://archive.apache.org/dist/httpcomponents/
 
 _______________________________________________________
 
-DOJO TOOLKIT: The Program includes the Dojo Toolkit 1.9.1 software which IBM
+Dojo Toolkit 1.8.9 and 1.9.1 software which IBM
 obtained under the terms and conditions of the following license:
  
 Copyright (c) 2005-2013, The Dojo Foundation
@@ -680,32 +700,28 @@ Note that there is a zip file in this package containing additional license and 
        Apache Software Foundation that were originally developed at iClick, Inc.,
        software copyright (c) 1999.
 
-Apache Tomcat 7.0.30
+Apache Tomcat 7.0.59
 Licensed under Apache 2.0
 Available from http://tomcat.apache.org/
-  Copyright 1999-2012 The Apache Software Foundation
-  This product includes software developed by
+  Copyright 1999-2015 The Apache Software Foundation
+  This product includes software developed at
   The Apache Software Foundation (http://www.apache.org/).
-
   The Windows Installer is built with the Nullsoft
   Scriptable Install System (NSIS), which is
   open source software.  The original software and
   related information is available at
   http://nsis.sourceforge.net.
-
-  Java compilation software for JSP pages is provided by Eclipse,
+  Java compilation software for JSP pages is provided by   Eclipse,
   which is open source software.  The original software and
   related information is available at
   http://www.eclipse.org.
-
   For the bayeux implementation
-  The org.apache.cometd.bayeux API is derivative work originating at the Dojo Foundation
+  The org.apache.cometd.bayeux API is derivative work   originating at the Dojo Foundation
   * Copyright 2007-2008 Guy Molinari
   * Copyright 2007-2008 Filip Hanik
   * Copyright 2007 Dojo Foundation
   * Copyright 2007 Mort Bay Consulting Pty. Ltd.
-
-  The original XML Schemas for Java EE Deployment Descriptors:
+ The original XML Schemas for Java EE Deployment Descriptors:
    - javaee_5.xsd
    - javaee_web_services_1_2.xsd
    - javaee_web_services_client_1_2.xsd
@@ -793,9 +809,9 @@ Yui-min 3.8.0
 Licensed under the BSD license
 Available from http://yui.yahooapis.com/combo?3.8.0pr2/build/yui/yui-min.js
 
-Junit
-Licensed under the EPL 1.0
-Available from Eclipse download at http://download.eclipse.org/releases/juno
+Junit 4.11
+Licensed under the CPL 1.0
+Available from https://github.com/junit-team/junit
 
 Dojo toolkit linkage 1.4.3, 1.6.1, 1.7.4
 Licensed under the BSD liecnse
@@ -823,7 +839,56 @@ Available from https://github.com/OpenSocial/explorer
    This product includes software originally developed by IBM    Corporation
    Copyright 2012 IBM Corp.
 
+Symfony EventDispatcher 2.4
+Licensed under MIT
+Copyright (c) 2004-2013 Fabien Potencier
+Available from https://github.com/symfony/EventDispatcher
 
+Composer 1.0.0
+Licensed under MIT
+Copyright (c) 2011 Nils Adermann, Jordi Boggiano
+Available from https://github.com/composer/composer
 
+Guzzle 3.8
+Licensed under MIT
+Copyright (c) 2011 Michael Dowling, https://github.com/mtdowling <mtdowling@gmail.com>
+copyright 2012 Clay Loveless <clay@php.net>
+Available from https://github.com/guzzle/guzzle
 
+oauth-php Rev 191
+Licensed under MIT
+Copyright (c) 2007-2009 Mediamatic Lab
+Copyright (c) 2010 Corollarium Technologies
+Available from http://oauth-php.googlecode.com/svn/trunk/
 
+PowerMock 1.5.2 
+Licensed under Apache 2.0
+Available from http://code.google.com/p/powermock/
+
+EasyMock 3.2 
+Licensed under Apache 2.0
+Available from http://easymock.org/
+
+cglib 2.2.2 
+Licensed under Apache 2.0
+Available from http://cglib.sourceforge.net/
+This product includes software developed by
+The Apache Software Foundation (http://www.apache.org/).
+
+javassist 3.18
+Licensed under MPL, GPL or Apache.  We have licensed it under Apache.
+Available from http://www.csg.ci.i.u-tokyo.ac.jp/~chiba/javassist/
+
+objenesis 1.2
+Licensed under Apache 2.0
+Available from http://code.google.com/p/objenesis/
+Objenesis
+Copyright 2006-2009 Joe Walnes, Henri Tremblay, Leonardo Mesquita
+
+junit 4.11
+Licensed under Eclipse Public License 1.0
+Available from http://junit.org/
+
+mime4J
+Licensed under Apache 2.0
+Available from http://james.apache.org/mime4j

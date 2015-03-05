@@ -1,4 +1,4 @@
-define("dojox/mobile/_ScrollableMixin", [
+define([
 	"dojo/_base/kernel",
 	"dojo/_base/config",
 	"dojo/_base/declare",

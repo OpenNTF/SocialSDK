@@ -1,4 +1,4 @@
-define("dojox/mvc/equals", [
+define([
 	"dojo/_base/array",
 	"dojo/_base/lang",
 	"dojo/Stateful",

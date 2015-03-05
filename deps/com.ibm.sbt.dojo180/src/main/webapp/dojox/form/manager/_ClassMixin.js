@@ -1,4 +1,4 @@
-define("dojox/form/manager/_ClassMixin", [
+define([
 	"dojo/_base/lang",
 	"dojo/_base/kernel",
 	"dojo/dom-class",

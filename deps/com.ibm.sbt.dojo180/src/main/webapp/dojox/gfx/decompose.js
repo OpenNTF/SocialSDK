@@ -1,4 +1,4 @@
-define("dojox/gfx/decompose", ["./_base", "dojo/_base/lang", "./matrix"], 
+define(["./_base", "dojo/_base/lang", "./matrix"], 
   function (g, lang, m){
 	function eq(/* Number */ a, /* Number */ b){
 		// summary:

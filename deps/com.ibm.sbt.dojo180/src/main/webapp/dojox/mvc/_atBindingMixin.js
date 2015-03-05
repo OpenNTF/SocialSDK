@@ -1,4 +1,4 @@
-define("dojox/mvc/_atBindingMixin", [
+define([
 	"dojo/_base/array",
 	"dojo/_base/lang",
 	"dojo/_base/declare",
@@ -150,7 +150,7 @@ define("dojox/mvc/_atBindingMixin", [
 
 				// Then establish wildcard data bindings
 				if((refs["*"] || {}).atsignature == "dojox.mvc.at"){
-					atWatchHandles["*"] = bind(refs[prop].target, refs["*"].targetProp, this, "*", {bindDirection: refs["*"].bindDirection, converter: refs["*"].converter});
+					atWatchHandles["*"] = bind(refs["*"].target, refs["*"].targetProp, this, "*", {bindDirection: refs["*"].bindDirection, converter: refs["*"].converter});
 				}
 			}
 		},

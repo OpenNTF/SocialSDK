@@ -1,4 +1,4 @@
-define("dojo/promise/first", [
+define([
 	"../_base/array",
 	"../Deferred",
 	"../when"

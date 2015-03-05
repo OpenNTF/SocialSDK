@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/my/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "yy/M",
 	"dayPeriods-format-wide-pm": "ညနေ",
@@ -185,6 +185,15 @@ define(
 		"န",
 		"ဒ"
 	],
+	"days-standAlone-short": [
+		"နွေ",
+		"လာ",
+		"ဂါ",
+		"ဟူး",
+		"တေး",
+		"ကြာ",
+		"နေ"
+	],
 	"days-standAlone-abbr": [
 		"နွေ",
 		"လာ",
@@ -212,6 +221,15 @@ define(
 		"အောက်တိုဘာ",
 		"နိုဝင်ဘာ",
 		"ဒီဇင်ဘာ"
+	],
+	"days-format-short": [
+		"နွေ",
+		"လာ",
+		"ဂါ",
+		"ဟူး",
+		"တေး",
+		"ကြာ",
+		"နေ"
 	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

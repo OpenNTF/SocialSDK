@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/bem/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"field-dayperiod": "Akasuba",
@@ -11,8 +11,6 @@ define(
 		"After Yesu"
 	],
 	"dateFormatItem-MMMEd": "E, MMM d",
-	"field-day-relative+-1": "Mailo",
-	"field-weekday": "Ubushiku",
 	"dateFormatItem-yQQQ": "QQQ y",
 	"days-standAlone-wide": [
 		"Pa Mulungu",
@@ -59,7 +57,6 @@ define(
 	],
 	"dateFormatItem-yMMM": "MMM y",
 	"field-day-relative+0": "Lelo",
-	"field-day-relative+1": "Mailo",
 	"eraAbbr": [
 		"BC",
 		"AD"
@@ -136,6 +133,15 @@ define(
 		"N",
 		"D"
 	],
+	"days-standAlone-short": [
+		"Pa Mulungu",
+		"Palichimo",
+		"Palichibuli",
+		"Palichitatu",
+		"Palichine",
+		"Palichisano",
+		"Pachibelushi"
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"Pa Mulungu",
@@ -164,6 +170,15 @@ define(
 		"Oktoba",
 		"Novemba",
 		"Disemba"
+	],
+	"days-format-short": [
+		"Pa Mulungu",
+		"Palichimo",
+		"Palichibuli",
+		"Palichitatu",
+		"Palichine",
+		"Palichisano",
+		"Pachibelushi"
 	],
 	"dateFormatItem-d": "d",
 	"days-format-wide": [

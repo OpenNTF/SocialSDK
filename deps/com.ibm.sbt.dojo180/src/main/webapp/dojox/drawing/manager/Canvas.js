@@ -1,4 +1,4 @@
-define("dojox/drawing/manager/Canvas", ["dojo", "../util/oo", "dojox/gfx"], 
+define(["dojo", "../util/oo", "dojox/gfx"], 
 function(dojo, oo, gfx){
 
 	//dojox.drawing.manager.Canvas = 

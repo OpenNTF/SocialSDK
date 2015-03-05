@@ -1,6 +1,15 @@
 define(
-"dojo/cldr/nls/kea/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"du",
+		"si",
+		"te",
+		"ku",
+		"ki",
+		"se",
+		"sa"
+	],
 	"months-format-narrow": [
 		"J",
 		"F",
@@ -15,6 +24,12 @@ define(
 		"N",
 		"D"
 	],
+	"quarters-standAlone-narrow": [
+		"1",
+		"2",
+		"3",
+		"4"
+	],
 	"field-weekday": "Dia di simana",
 	"dateFormatItem-yQQQ": "QQQ y",
 	"dateFormatItem-yyMMMEd": "E, d 'de' MMM 'de' yy",
@@ -23,6 +38,15 @@ define(
 	"eraNarrow": [
 		"AK",
 		"DK"
+	],
+	"days-format-short": [
+		"du",
+		"si",
+		"te",
+		"ku",
+		"ki",
+		"se",
+		"sa"
 	],
 	"dateFormat-long": "d 'di' MMMM 'di' y",
 	"months-format-wide": [
@@ -39,9 +63,11 @@ define(
 		"Nuvenbru",
 		"Dizenbru"
 	],
+	"dateTimeFormat-medium": "{1} {0}",
 	"dayPeriods-format-wide-pm": "pm",
 	"dateFormat-full": "EEEE, d 'di' MMMM 'di' y",
 	"dateFormatItem-Md": "dd/MM",
+	"dateFormatItem-yMd": "dd/MM/y",
 	"field-era": "Era",
 	"dateFormatItem-yM": "MM/y",
 	"months-standAlone-wide": [
@@ -89,6 +115,7 @@ define(
 	"timeFormat-full": "HH:mm:ss zzzz",
 	"field-day-relative+0": "Oji",
 	"field-day-relative+1": "Manha",
+	"dateFormatItem-H": "HH",
 	"months-standAlone-abbr": [
 		"Jan",
 		"Fev",
@@ -162,8 +189,11 @@ define(
 		"4"
 	],
 	"field-day-relative+-1": "Onti",
+	"dateFormatItem-h": "h a",
+	"dateTimeFormat-long": "{1} {0}",
 	"dateFormatItem-MMMd": "d MMM",
 	"dateFormatItem-MEd": "E, dd/MM",
+	"dateTimeFormat-full": "{1} {0}",
 	"dateFormatItem-yMMMM": "MMMM 'di' y",
 	"field-day": "Dia",
 	"days-format-wide": [
@@ -193,6 +223,7 @@ define(
 		"D"
 	],
 	"dateFormatItem-yyMM": "MM/yy",
+	"dateFormatItem-hm": "h:mm a",
 	"days-format-abbr": [
 		"dum",
 		"sig",
@@ -202,6 +233,7 @@ define(
 		"ses",
 		"sab"
 	],
+	"dateFormatItem-yMMMd": "d MMM y",
 	"eraNames": [
 		"Antis di Kristu",
 		"Dispos di Kristu"
@@ -215,7 +247,6 @@ define(
 		"s",
 		"s"
 	],
-	"field-month": "Mes",
 	"days-standAlone-narrow": [
 		"d",
 		"s",
@@ -226,6 +257,7 @@ define(
 		"s"
 	],
 	"dateFormatItem-MMM": "LLL",
+	"field-month": "Mes",
 	"dateFormatItem-HHmm": "HH:mm",
 	"dayPeriods-format-wide-am": "am",
 	"dateFormatItem-MMMMEd": "E, d 'di' MMMM",
@@ -235,7 +267,10 @@ define(
 	"dateFormatItem-Ed": "E, d",
 	"field-week": "Simana",
 	"dateFormat-medium": "d 'di' MMM 'di' y",
-	"dateFormatItem-mmss": "mm:ss"
+	"dateFormatItem-mmss": "mm:ss",
+	"dateTimeFormat-short": "{1} {0}",
+	"dateFormatItem-Hms": "HH:mm:ss",
+	"dateFormatItem-hms": "h:mm:ss a"
 }
 //end v1.x content
 );

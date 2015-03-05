@@ -1,4 +1,4 @@
-define("dojox/mvc/StatefulModel", [
+define([
 	"dojo/_base/kernel",
 	"dojo/_base/lang",
 	"dojo/_base/array",

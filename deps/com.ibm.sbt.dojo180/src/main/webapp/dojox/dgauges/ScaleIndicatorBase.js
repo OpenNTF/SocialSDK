@@ -1,5 +1,5 @@
-define("dojox/dgauges/ScaleIndicatorBase", ["dojo/_base/lang", "dojo/_base/declare", "dojo/on", "dojo/_base/connect", "dojo/_base/fx", "dojox/gfx", "dojox/widget/_Invalidating", "./IndicatorBase"],
-	function(lang, declare, on, connect, fx, gfx, _Invalidating, IndicatorBase){
+define(["dojo/_base/lang", "dojo/_base/declare", "dojo/_base/window", "dojo/on", "dojo/_base/connect", "dojo/_base/fx", "dojox/gfx", "dojox/widget/_Invalidating", "./IndicatorBase"],
+	function(lang, declare, win, on, connect, fx, gfx, _Invalidating, IndicatorBase){
 	return declare("dojox.dgauges.ScaleIndicatorBase", IndicatorBase, {
 		// summary:
 		//		The base class for indicators that rely on a scale for their rendering.
@@ -271,14 +271,11 @@ define("dojox/dgauges/ScaleIndicatorBase", ["dojo/_base/lang", "dojo/_base/decla
 				moveEventName = "ontouchmove";
 				upEventName = "ontouchend";
 			}
-			listener = this.scale._gauge._baseGroup.connect(moveEventName, this, this._onMouseMove);
-			this._moveAndUpListeners.push(listener);
-			listener = this._gfxGroup.connect(moveEventName, this, this._onMouseMove);
+			
+			listener = connect.connect(win.doc, moveEventName, this, this._onMouseMove);
 			this._moveAndUpListeners.push(listener);
 			
-			listener = this.scale._gauge._baseGroup.connect(upEventName, this, this._onMouseUp);
-			this._moveAndUpListeners.push(listener);
-			listener = this._gfxGroup.connect(upEventName, this, this._onMouseUp);
+			listener = connect.connect(win.doc, upEventName, this, this._onMouseUp);
 			this._moveAndUpListeners.push(listener);
 		},
 		

@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/es/buddhist", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y G",
 	"dateFormatItem-yQ": "Q y G",
@@ -31,7 +31,14 @@ define(
 		"feb",
 		"mar",
 		"abr",
-		"mayo"
+		"mayo",
+		"jun",
+		"jul",
+		"ago",
+		"sep",
+		"oct",
+		"nov",
+		"dic"
 	],
 	"dateFormatItem-Ed": "E d",
 	"dateFormatItem-yMMM": "MMM y G",
@@ -109,6 +116,15 @@ define(
 	"dateFormatItem-M": "L",
 	"dateFormatItem-yMMMd": "d MMM y G",
 	"dateFormatItem-MEd": "E, d/M",
+	"days-standAlone-short": [
+		"D",
+		"L",
+		"M",
+		"X",
+		"J",
+		"V",
+		"S"
+	],
 	"dateFormatItem-hm": "hh:mm a",
 	"dateFormat-short": "dd/MM/y G",
 	"dateFormatItem-yMMMEd": "E, d MMM y G",
@@ -128,6 +144,15 @@ define(
 		"octubre",
 		"noviembre",
 		"diciembre"
+	],
+	"days-format-short": [
+		"D",
+		"L",
+		"M",
+		"X",
+		"J",
+		"V",
+		"S"
 	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

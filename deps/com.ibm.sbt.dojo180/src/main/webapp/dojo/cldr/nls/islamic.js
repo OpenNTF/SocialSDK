@@ -1,7 +1,16 @@
-define("dojo/cldr/nls/islamic", { root:
+define({ root:
 
 //begin v1.x content
 {
+	"days-standAlone-short": [
+		"1",
+		"2",
+		"3",
+		"4",
+		"5",
+		"6",
+		"7"
+	],
 	"months-format-narrow": [
 		"1",
 		"2",
@@ -27,6 +36,15 @@ define("dojo/cldr/nls/islamic", { root:
 	"dateFormatItem-MMMEd": "E MMM d",
 	"eraNarrow": [
 		"AH"
+	],
+	"days-format-short": [
+		"1",
+		"2",
+		"3",
+		"4",
+		"5",
+		"6",
+		"7"
 	],
 	"dateTimeFormats-appendItem-Day-Of-Week": "{0} {1}",
 	"dateFormat-long": "y MMMM d",
@@ -245,6 +263,7 @@ define("dojo/cldr/nls/islamic", { root:
 	"bg": true,
 	"bn": true,
 	"bs": true,
+	"bs-cyrl": true,
 	"cs": true,
 	"da": true,
 	"de": true,
@@ -260,6 +279,7 @@ define("dojo/cldr/nls/islamic", { root:
 	"id": true,
 	"it": true,
 	"ja": true,
+	"lo": true,
 	"lv": true,
 	"ml": true,
 	"ms": true,
@@ -276,6 +296,7 @@ define("dojo/cldr/nls/islamic", { root:
 	"tr": true,
 	"uk": true,
 	"ur": true,
+	"uz-latn": true,
 	"vi": true,
 	"zh": true,
 	"zh-hans-hk": true,

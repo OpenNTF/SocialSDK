@@ -1,14 +1,22 @@
 define(
-"dojo/cldr/nls/ja/number", //begin v1.x content
+//begin v1.x content
 {
-	"decimalFormat": "#,##0.###",
 	"group": ",",
-	"nan": "NaN（非数）",
+	"percentSign": "%",
+	"exponential": "E",
 	"scientificFormat": "#E0",
 	"percentFormat": "#,##0%",
+	"list": ";",
+	"infinity": "∞",
+	"minusSign": "-",
+	"decimal": ".",
+	"nan": "NaN",
+	"perMille": "‰",
+	"decimalFormat": "#,##0.###",
 	"currencyFormat": "¤#,##0.00",
-	"decimalFormat-short": "000兆",
-	"decimal": "."
+	"plusSign": "+",
+	"decimalFormat-long": "000兆",
+	"decimalFormat-short": "000兆"
 }
 //end v1.x content
 );

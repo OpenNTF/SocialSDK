@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/tzm/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"field-dayperiod": "Zdat azal/Deffir azal",
@@ -171,6 +171,15 @@ define(
 		"N",
 		"D"
 	],
+	"days-standAlone-short": [
+		"Asa",
+		"Ayn",
+		"Asn",
+		"Akr",
+		"Akw",
+		"Asm",
+		"Asḍ"
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"Asa",
@@ -199,6 +208,15 @@ define(
 		"Kṭuber",
 		"Nwanbir",
 		"Dujanbir"
+	],
+	"days-format-short": [
+		"Asa",
+		"Ayn",
+		"Asn",
+		"Akr",
+		"Akw",
+		"Asm",
+		"Asḍ"
 	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

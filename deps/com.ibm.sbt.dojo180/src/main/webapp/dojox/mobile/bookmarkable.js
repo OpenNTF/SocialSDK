@@ -1,4 +1,4 @@
-define("dojox/mobile/bookmarkable", [
+define([
 	"dojo/_base/array",
 	"dojo/_base/connect",
 	"dojo/_base/lang",

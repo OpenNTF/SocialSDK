@@ -1,9 +1,11 @@
 define(
-"dojo/cldr/nls/pt-pt/number", //begin v1.x content
+//begin v1.x content
 {
-	"currencyFormat": "#,##0.00 ¤",
 	"group": " ",
-	"decimalFormat-short": "000 Bi"
+	"decimalFormat-long": "000 biliões",
+	"currencyFormat": "#,##0.00 ¤",
+	"decimalFormat-short": "000 Bi",
+	"decimal": ","
 }
 //end v1.x content
 );

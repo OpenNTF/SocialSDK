@@ -1,4 +1,4 @@
-define("dojox/editor/plugins/StatusBar", [
+define([
 	"dojo",
 	"dijit",
 	"dojox",

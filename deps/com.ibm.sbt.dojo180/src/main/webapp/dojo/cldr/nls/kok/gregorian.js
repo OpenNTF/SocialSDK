@@ -1,9 +1,27 @@
 define(
-"dojo/cldr/nls/kok/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"रवि",
+		"सोम",
+		"मंगळ",
+		"बुध",
+		"गुरु",
+		"शुक्र",
+		"शनि"
+	],
 	"eraNames": [
 		"क्रिस्तपूर्व",
 		"क्रिस्तशखा"
+	],
+	"days-format-short": [
+		"रवि",
+		"सोम",
+		"मंगळ",
+		"बुध",
+		"गुरु",
+		"शुक्र",
+		"शनि"
 	],
 	"eraAbbr": [
 		"क्रिस्तपूर्व",

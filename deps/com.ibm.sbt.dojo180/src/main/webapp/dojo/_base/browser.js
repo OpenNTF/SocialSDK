@@ -1,7 +1,7 @@
 if(require.has){
 	require.has.add("config-selectorEngine", "acme");
 }
-define("dojo/_base/browser", [
+define([
 	"../ready",
 	"./kernel",
 	"./connect", // until we decide if connect is going back into non-browser environments

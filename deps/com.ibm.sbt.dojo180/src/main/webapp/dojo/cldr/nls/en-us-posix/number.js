@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/en-us-posix/number", //begin v1.x content
+//begin v1.x content
 {
 	"decimalFormat": "#0.######",
 	"infinity": "INF",

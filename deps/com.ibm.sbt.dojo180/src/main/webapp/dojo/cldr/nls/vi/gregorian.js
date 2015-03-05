@@ -1,6 +1,15 @@
 define(
-"dojo/cldr/nls/vi/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"CN",
+		"T2",
+		"T3",
+		"T4",
+		"T5",
+		"T6",
+		"T7"
+	],
 	"months-format-narrow": [
 		"1",
 		"2",
@@ -28,6 +37,15 @@ define(
 	"eraNarrow": [
 		"tr. CN",
 		"sau CN"
+	],
+	"days-format-short": [
+		"CN",
+		"T2",
+		"T3",
+		"T4",
+		"T5",
+		"T6",
+		"T7"
 	],
 	"dateFormat-long": "'Ngày' dd 'tháng' M 'năm' y",
 	"months-format-wide": [
@@ -97,6 +115,7 @@ define(
 	"field-day-relative+0": "Hôm nay",
 	"field-day-relative+1": "Ngày mai",
 	"field-day-relative+2": "Ngày kia",
+	"dateFormatItem-H": "HH",
 	"months-standAlone-abbr": [
 		"thg 1",
 		"thg 2",
@@ -166,6 +185,7 @@ define(
 		"4"
 	],
 	"field-day-relative+-1": "Ngày hôm qua",
+	"dateFormatItem-h": "h a",
 	"dateTimeFormat-long": "{0} {1}",
 	"field-day-relative+-2": "Ngày hôm kia",
 	"dateFormatItem-MMMd": "d MMM",
@@ -185,6 +205,20 @@ define(
 	"field-zone": "Múi giờ",
 	"dateFormatItem-yyyyMM": "MM-yyyy",
 	"dateFormatItem-y": "'Năm' y",
+	"months-standAlone-narrow": [
+		"1",
+		"2",
+		"3",
+		"4",
+		"5",
+		"6",
+		"7",
+		"8",
+		"9",
+		"10",
+		"11",
+		"12"
+	],
 	"field-year-relative+-1": "Năm ngoái",
 	"field-month-relative+-1": "Tháng trước",
 	"dateFormatItem-hm": "h:mm a",

@@ -1,5 +1,3 @@
-// wrapped by build app
-define("dojox/xmpp/RosterService", ["dijit","dojo","dojox"], function(dijit,dojo,dojox){
 dojo.provide("dojox.xmpp.RosterService");
 
 dojox.xmpp.roster = {
@@ -267,6 +265,4 @@ dojo.declare("dojox.xmpp.RosterService", null, {
 	onVerifyRosterFailed: function(err){
 		//console.log("onVerifyRosterFailed: ", err);
 	}
-});
-
 });

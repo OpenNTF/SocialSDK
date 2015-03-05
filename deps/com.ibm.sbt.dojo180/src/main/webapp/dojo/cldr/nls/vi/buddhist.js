@@ -1,12 +1,23 @@
 define(
-"dojo/cldr/nls/vi/buddhist", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y GGGGG",
 	"dateFormatItem-yQ": "Q yyyy G",
 	"dayPeriods-format-wide-pm": "CH",
 	"dateFormatItem-MMMEd": "E, d MMM",
+	"dateFormatItem-hms": "h:mm:ss a",
 	"dateFormatItem-yQQQ": "QQQ y G",
 	"dateFormatItem-MMdd": "dd-MM",
+	"days-standAlone-wide": [
+		"Chủ nhật",
+		"Thứ hai",
+		"Thứ ba",
+		"Thứ tư",
+		"Thứ năm",
+		"Thứ sáu",
+		"Thứ bảy"
+	],
+	"dateFormatItem-MMM": "LLL",
 	"dayPeriods-format-wide-am": "SA",
 	"dateFormatItem-y": "'Năm' y G",
 	"dateFormatItem-yyyy": "'Năm' y G",
@@ -23,9 +34,9 @@ define(
 	],
 	"dateFormatItem-yyyyMM": "MM-yyyy G",
 	"dateFormat-long": "'Ngày' dd 'tháng' M 'năm' y G",
-	"dateFormatItem-Hm": "H:mm",
+	"dateFormatItem-Hm": "HH:mm",
 	"dateFormat-medium": "dd-MM-yyyy G",
-	"dateFormatItem-Hms": "H:mm:ss",
+	"dateFormatItem-Hms": "HH:mm:ss",
 	"dateFormatItem-yMd": "d/M/y",
 	"quarters-standAlone-wide": [
 		"Quý 1",
@@ -34,6 +45,21 @@ define(
 		"Quý 4"
 	],
 	"dateFormatItem-yMMMM": "MMMM y G",
+	"dateFormatItem-ms": "mm:ss",
+	"months-standAlone-wide": [
+		"tháng một",
+		"tháng hai",
+		"tháng ba",
+		"tháng tư",
+		"tháng năm",
+		"tháng sáu",
+		"tháng bảy",
+		"tháng tám",
+		"tháng chín",
+		"tháng mười",
+		"tháng mười một",
+		"tháng mười hai"
+	],
 	"dateFormatItem-yyyyMd": "d-M-yyyy G",
 	"dateFormatItem-MMMMEd": "E, d MMMM",
 	"dateFormatItem-MMMd": "d MMM",
@@ -52,6 +78,7 @@ define(
 		"thg 11",
 		"thg 12"
 	],
+	"dateFormatItem-H": "HH'h'",
 	"dateFormatItem-MMMMd": "d MMMM",
 	"days-format-abbr": [
 		"CN",
@@ -63,6 +90,7 @@ define(
 		"Th 7"
 	],
 	"dateFormatItem-mmss": "mm:ss",
+	"dateFormatItem-M": "'tháng' L",
 	"days-format-narrow": [
 		"CN",
 		"T2",
@@ -74,6 +102,16 @@ define(
 	],
 	"dateFormatItem-yMMMd": "d MMM y G",
 	"dateFormatItem-MEd": "E, d-M",
+	"days-standAlone-short": [
+		"CN",
+		"T2",
+		"T3",
+		"T4",
+		"T5",
+		"T6",
+		"T7"
+	],
+	"dateFormatItem-hm": "h:mm a",
 	"dateFormat-short": "dd/MM/yyyy G",
 	"dateFormatItem-yMMMEd": "E, d MMM y G",
 	"dateFormat-full": "EEEE, 'ngày' dd MMMM 'năm' y G",
@@ -93,6 +131,15 @@ define(
 		"tháng mười một",
 		"tháng mười hai"
 	],
+	"days-format-short": [
+		"CN",
+		"T2",
+		"T3",
+		"T4",
+		"T5",
+		"T6",
+		"T7"
+	],
 	"dateFormatItem-d": "'Ngày' d",
 	"quarters-format-wide": [
 		"Quý 1",
@@ -108,7 +155,8 @@ define(
 		"Thứ năm",
 		"Thứ sáu",
 		"Thứ bảy"
-	]
+	],
+	"dateFormatItem-h": "h'h' a"
 }
 //end v1.x content
 );

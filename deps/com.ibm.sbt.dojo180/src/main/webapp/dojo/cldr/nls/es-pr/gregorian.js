@@ -1,13 +1,17 @@
 define(
-"dojo/cldr/nls/es-pr/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"dateFormatItem-Md": "MM/dd",
 	"dateFormatItem-yMEd": "E MM/dd/yy",
-	"dateFormatItem-yMd": "MM/dd/yy",
-	"dateFormat-short": "MM/dd/yy",
-	"dateFormat-medium": "MM/dd/yyyy",
+	"timeFormat-full": "h:mm:ss a zzzz",
+	"timeFormat-medium": "h:mm:ss a",
 	"dateFormatItem-MEd": "E, MM/dd",
 	"dateFormatItem-yM": "MM/yy",
-	"dateFormatItem-Md": "MM/dd"
+	"dateFormat-medium": "MM/dd/yyyy",
+	"dateFormatItem-yMd": "MM/dd/yy",
+	"timeFormat-long": "h:mm:ss a z",
+	"timeFormat-short": "h:mm a",
+	"dateFormat-short": "MM/dd/yy"
 }
 //end v1.x content
 );

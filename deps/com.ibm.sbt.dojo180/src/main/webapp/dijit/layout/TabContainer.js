@@ -1,4 +1,4 @@
-define("dijit/layout/TabContainer", [
+define([
 	"dojo/_base/lang", // lang.getObject
 	"dojo/_base/declare", // declare
 	"./_TabContainerBase",

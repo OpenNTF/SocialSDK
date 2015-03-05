@@ -1,4 +1,4 @@
-define("dojox/form/MultiComboBox", [
+define([
 	"dojo/_base/kernel",
 	"dijit/form/ValidationTextBox",
 	"dijit/form/ComboBoxMixin",

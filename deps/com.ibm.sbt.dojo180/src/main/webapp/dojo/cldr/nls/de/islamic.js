@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/de/islamic", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M.y",
 	"dateFormatItem-yyyyMMMEd": "E, d. MMM y G",
@@ -9,6 +9,15 @@ define(
 	"dateFormatItem-MMMEd": "E, d. MMM",
 	"dateFormatItem-yQQQ": "QQQ y",
 	"dateFormatItem-MMdd": "dd.MM.",
+	"days-standAlone-wide": [
+		"Sonntag",
+		"Montag",
+		"Dienstag",
+		"Mittwoch",
+		"Donnerstag",
+		"Freitag",
+		"Samstag"
+	],
 	"dateFormatItem-MMM": "LLL",
 	"dayPeriods-format-wide-am": "vorm.",
 	"dateFormatItem-yyyy": "y G",
@@ -33,6 +42,12 @@ define(
 	"dateFormatItem-yyMMM": "MMM y G",
 	"dateFormatItem-yyQQQQ": "QQQQ y G",
 	"dateFormatItem-yMd": "d.M.y",
+	"quarters-standAlone-wide": [
+		"1. Quartal",
+		"2. Quartal",
+		"3. Quartal",
+		"4. Quartal"
+	],
 	"dateFormatItem-ms": "mm:ss",
 	"dateFormatItem-yyyyMd": "d.M.y G",
 	"dateFormatItem-yyyyMMMd": "d. MMM y G",
@@ -51,9 +66,27 @@ define(
 	],
 	"dateFormatItem-MMMMdd": "dd. MMMM",
 	"dateFormatItem-M": "L",
+	"days-format-narrow": [
+		"S",
+		"M",
+		"D",
+		"M",
+		"D",
+		"F",
+		"S"
+	],
 	"dateFormatItem-yMMMd": "d. MMM y",
 	"dateFormatItem-yyyyQQQ": "QQQ y G",
 	"dateFormatItem-MEd": "E, d.M.",
+	"days-standAlone-short": [
+		"So.",
+		"Mo.",
+		"Di.",
+		"Mi.",
+		"Do.",
+		"Fr.",
+		"Sa."
+	],
 	"days-standAlone-abbr": [
 		"So",
 		"Mo",
@@ -70,6 +103,15 @@ define(
 	"dateFormatItem-Md": "d.M.",
 	"dateFormatItem-yyyyQ": "Q y G",
 	"dateFormatItem-yMEd": "E, d.M.y",
+	"days-format-short": [
+		"So.",
+		"Mo.",
+		"Di.",
+		"Mi.",
+		"Do.",
+		"Fr.",
+		"Sa."
+	],
 	"dateFormatItem-yyyyMMM": "MMM y G",
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

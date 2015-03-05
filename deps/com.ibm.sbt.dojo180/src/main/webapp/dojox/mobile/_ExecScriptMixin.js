@@ -1,4 +1,4 @@
-define("dojox/mobile/_ExecScriptMixin", [
+define([
 	"dojo/_base/kernel",
 	"dojo/_base/declare",
 	"dojo/_base/window",

@@ -1,4 +1,4 @@
-define("dojox/drawing/stencil/Text", ["dojo", "../util/oo", "./_Base", "../manager/_registry", "../util/typeset"],
+define(["dojo", "../util/oo", "./_Base", "../manager/_registry", "../util/typeset"],
 function(dojo, oo, Base, registry, typeset){
 
 var Text = oo.declare(

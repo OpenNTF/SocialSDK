@@ -1,6 +1,15 @@
 define(
-"dojo/cldr/nls/it/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"dom",
+		"lun",
+		"mar",
+		"mer",
+		"gio",
+		"ven",
+		"sab"
+	],
 	"months-format-narrow": [
 		"G",
 		"F",
@@ -15,14 +24,29 @@ define(
 		"N",
 		"D"
 	],
+	"quarters-standAlone-narrow": [
+		"1",
+		"2",
+		"3",
+		"4"
+	],
 	"field-weekday": "giorno della settimana",
 	"dateFormatItem-yyQQQQ": "QQQQ yy",
 	"dateFormatItem-yQQQ": "QQQ y",
-	"dateFormatItem-yMEd": "E, d/M/y",
+	"dateFormatItem-yMEd": "E d/M/y",
 	"dateFormatItem-MMMEd": "E d MMM",
 	"eraNarrow": [
 		"aC",
 		"dC"
+	],
+	"days-format-short": [
+		"dom",
+		"lun",
+		"mar",
+		"mer",
+		"gio",
+		"ven",
+		"sab"
 	],
 	"dateFormat-long": "dd MMMM y",
 	"months-format-wide": [
@@ -39,7 +63,8 @@ define(
 		"novembre",
 		"dicembre"
 	],
-	"dayPeriods-format-wide-pm": "p.",
+	"dateTimeFormat-medium": "{1} {0}",
+	"dayPeriods-format-wide-pm": "PM",
 	"dateFormat-full": "EEEE d MMMM y",
 	"dateFormatItem-Md": "d/M",
 	"dateFormatItem-yMd": "d/M/y",
@@ -92,6 +117,7 @@ define(
 	"field-day-relative+0": "oggi",
 	"field-day-relative+1": "domani",
 	"field-day-relative+2": "dopodomani",
+	"dateFormatItem-H": "HH",
 	"months-standAlone-abbr": [
 		"gen",
 		"feb",
@@ -113,10 +139,10 @@ define(
 		"T4"
 	],
 	"quarters-standAlone-wide": [
-		"1º trimestre",
-		"2º trimestre",
-		"3º trimestre",
-		"4º trimestre"
+		"Primo trimestre",
+		"Secondo trimestre",
+		"Terzo trimestre",
+		"Quarto trimestre"
 	],
 	"dateFormatItem-M": "L",
 	"days-standAlone-wide": [
@@ -161,9 +187,12 @@ define(
 	],
 	"field-day-relative+-1": "ieri",
 	"dateFormatItem-h": "hh a",
+	"dateTimeFormat-long": "{1} {0}",
+	"dayPeriods-format-narrow-am": "m.",
 	"field-day-relative+-2": "l'altro ieri",
 	"dateFormatItem-MMMd": "d MMM",
 	"dateFormatItem-MEd": "E d/M",
+	"dateTimeFormat-full": "{1} {0}",
 	"field-day": "giorno",
 	"days-format-wide": [
 		"domenica",
@@ -217,7 +246,6 @@ define(
 		"V",
 		"S"
 	],
-	"field-month": "mese",
 	"days-standAlone-narrow": [
 		"D",
 		"L",
@@ -228,7 +256,8 @@ define(
 		"S"
 	],
 	"dateFormatItem-MMM": "LLL",
-	"dayPeriods-format-wide-am": "m.",
+	"field-month": "mese",
+	"dayPeriods-format-wide-am": "AM",
 	"dateFormatItem-MMMMdd": "dd MMMM",
 	"dateFormat-short": "dd/MM/yy",
 	"field-second": "secondo",
@@ -241,6 +270,8 @@ define(
 	"field-year-relative+0": "Questo anno",
 	"field-week-relative+-1": "Settimana scorsa",
 	"field-year-relative+1": "Anno prossimo",
+	"dayPeriods-format-narrow-pm": "p.",
+	"dateTimeFormat-short": "{1} {0}",
 	"dateFormatItem-Hms": "HH:mm:ss",
 	"dateFormatItem-hms": "hh:mm:ss a",
 	"field-week-relative+0": "Questa settimana",

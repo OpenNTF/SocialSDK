@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/lg/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"field-dayperiod": "AM/PM",
@@ -169,6 +169,15 @@ define(
 		"N",
 		"D"
 	],
+	"days-standAlone-short": [
+		"Sab",
+		"Bal",
+		"Lw2",
+		"Lw3",
+		"Lw4",
+		"Lw5",
+		"Lw6"
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"Sab",
@@ -197,6 +206,15 @@ define(
 		"Okitobba",
 		"Novemba",
 		"Desemba"
+	],
+	"days-format-short": [
+		"Sab",
+		"Bal",
+		"Lw2",
+		"Lw3",
+		"Lw4",
+		"Lw5",
+		"Lw6"
 	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

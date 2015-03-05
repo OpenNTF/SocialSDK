@@ -1,6 +1,15 @@
 define(
-"dojo/cldr/nls/cs/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"Ne",
+		"Po",
+		"Út",
+		"St",
+		"Čt",
+		"Pá",
+		"So"
+	],
 	"months-format-narrow": [
 		"1",
 		"2",
@@ -15,13 +24,28 @@ define(
 		"11",
 		"12"
 	],
+	"quarters-standAlone-narrow": [
+		"1",
+		"2",
+		"3",
+		"4"
+	],
 	"field-weekday": "Den v týdnu",
 	"dateFormatItem-yQQQ": "QQQ y",
 	"dateFormatItem-yMEd": "E, d. M. y",
-	"dateFormatItem-MMMEd": "E, d. MMM",
+	"dateFormatItem-MMMEd": "E, d. M.",
 	"eraNarrow": [
 		"př.n.l.",
 		"n. l."
+	],
+	"days-format-short": [
+		"ne",
+		"po",
+		"út",
+		"st",
+		"čt",
+		"pá",
+		"so"
 	],
 	"dateFormat-long": "d. MMMM y",
 	"months-format-wide": [
@@ -38,12 +62,13 @@ define(
 		"listopadu",
 		"prosince"
 	],
-	"dayPeriods-format-wide-pm": "odp.",
+	"dateTimeFormat-medium": "{1} {0}",
+	"dayPeriods-format-wide-pm": "PM",
 	"dateFormat-full": "EEEE, d. MMMM y",
 	"dateFormatItem-Md": "d. M.",
 	"dateFormatItem-yMd": "d. M. y",
 	"field-era": "Letopočet",
-	"dateFormatItem-yM": "M.y",
+	"dateFormatItem-yM": "M/y",
 	"months-standAlone-wide": [
 		"leden",
 		"únor",
@@ -67,23 +92,23 @@ define(
 	],
 	"timeFormat-long": "H:mm:ss z",
 	"field-year": "Rok",
-	"dateFormatItem-yMMM": "LLL y",
+	"dateFormatItem-yMMM": "LLLL y",
 	"dateFormatItem-yQ": "Q yyyy",
 	"dateFormatItem-yyyyMMMM": "LLLL y",
 	"field-hour": "Hodina",
 	"months-format-abbr": [
-		"Led",
-		"Úno",
-		"Bře",
-		"Dub",
-		"Kvě",
-		"Čer",
-		"Čvc",
-		"Srp",
-		"Zář",
-		"Říj",
-		"Lis",
-		"Pro"
+		"led",
+		"úno",
+		"bře",
+		"dub",
+		"kvě",
+		"čvn",
+		"čvc",
+		"srp",
+		"zář",
+		"říj",
+		"lis",
+		"pro"
 	],
 	"dateFormatItem-yyQ": "Q yy",
 	"timeFormat-full": "H:mm:ss zzzz",
@@ -92,18 +117,18 @@ define(
 	"field-day-relative+2": "Pozítří",
 	"dateFormatItem-H": "H",
 	"months-standAlone-abbr": [
-		"1.",
-		"2.",
-		"3.",
-		"4.",
-		"5.",
-		"6.",
-		"7.",
-		"8.",
-		"9.",
-		"10.",
-		"11.",
-		"12."
+		"led",
+		"úno",
+		"bře",
+		"dub",
+		"kvě",
+		"čvn",
+		"čvc",
+		"srp",
+		"zář",
+		"říj",
+		"lis",
+		"pro"
 	],
 	"quarters-format-abbr": [
 		"Q1",
@@ -117,6 +142,7 @@ define(
 		"3. čtvrtletí",
 		"4. čtvrtletí"
 	],
+	"dateFormatItem-M": "L",
 	"days-standAlone-wide": [
 		"neděle",
 		"pondělí",
@@ -150,6 +176,7 @@ define(
 		"so"
 	],
 	"dateFormatItem-d": "d.",
+	"dateFormatItem-ms": "mm:ss",
 	"quarters-format-narrow": [
 		"1",
 		"2",
@@ -157,9 +184,13 @@ define(
 		"4"
 	],
 	"field-day-relative+-1": "Včera",
+	"dateFormatItem-h": "h a",
+	"dateTimeFormat-long": "{1} {0}",
+	"dayPeriods-format-narrow-am": "AM",
 	"field-day-relative+-2": "Předevčírem",
-	"dateFormatItem-MMMd": "d. MMM",
+	"dateFormatItem-MMMd": "d. M.",
 	"dateFormatItem-MEd": "E, d. M.",
+	"dateTimeFormat-full": "{1} {0}",
 	"field-day": "Den",
 	"days-format-wide": [
 		"neděle",
@@ -171,6 +202,7 @@ define(
 		"sobota"
 	],
 	"field-zone": "Časové pásmo",
+	"dateFormatItem-y": "y",
 	"months-standAlone-narrow": [
 		"l",
 		"ú",
@@ -187,6 +219,7 @@ define(
 	],
 	"field-year-relative+-1": "Minulý rok",
 	"field-month-relative+-1": "Minulý měsíc",
+	"dateFormatItem-hm": "h:mm a",
 	"days-format-abbr": [
 		"ne",
 		"po",
@@ -196,7 +229,7 @@ define(
 		"pá",
 		"so"
 	],
-	"dateFormatItem-yMMMd": "d. MMM y",
+	"dateFormatItem-yMMMd": "d. M. y",
 	"eraNames": [
 		"př. n. l.",
 		"n. l."
@@ -210,7 +243,6 @@ define(
 		"P",
 		"S"
 	],
-	"field-month": "Měsíc",
 	"days-standAlone-narrow": [
 		"N",
 		"P",
@@ -220,10 +252,12 @@ define(
 		"P",
 		"S"
 	],
-	"dayPeriods-format-wide-am": "dop.",
+	"dateFormatItem-MMM": "LLL",
+	"field-month": "Měsíc",
+	"dayPeriods-format-wide-am": "AM",
 	"dateFormat-short": "dd.MM.yy",
 	"field-second": "Sekunda",
-	"dateFormatItem-yMMMEd": "E, d. MMM y",
+	"dateFormatItem-yMMMEd": "E, d. M. y",
 	"field-month-relative+0": "Tento měsíc",
 	"field-month-relative+1": "Příští měsíc",
 	"dateFormatItem-Ed": "E, d.",
@@ -231,9 +265,12 @@ define(
 	"dateFormat-medium": "d. M. yyyy",
 	"field-year-relative+0": "Tento rok",
 	"field-week-relative+-1": "Minulý týden",
-	"dateFormatItem-yyyyM": "M.yyyy",
+	"dateFormatItem-yyyyM": "M/yyyy",
 	"field-year-relative+1": "Příští rok",
+	"dayPeriods-format-narrow-pm": "PM",
+	"dateTimeFormat-short": "{1} {0}",
 	"dateFormatItem-Hms": "H:mm:ss",
+	"dateFormatItem-hms": "h:mm:ss a",
 	"dateFormatItem-yyyy": "y",
 	"field-week-relative+0": "Tento týden",
 	"field-week-relative+1": "Příští týden"

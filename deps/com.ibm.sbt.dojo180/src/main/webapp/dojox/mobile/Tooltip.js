@@ -1,4 +1,4 @@
-define("dojox/mobile/Tooltip", [
+define([
 	"dojo/_base/array", // array.forEach
 	"dijit/registry",
 	"dojo/_base/declare",

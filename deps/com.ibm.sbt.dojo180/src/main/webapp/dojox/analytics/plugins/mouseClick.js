@@ -1,4 +1,4 @@
-define("dojox/analytics/plugins/mouseClick", ["dojo/_base/lang","../_base", "dojo/_base/config", "dojo/_base/window", "dojo/on"
+define(["dojo/_base/lang","../_base", "dojo/_base/config", "dojo/_base/window", "dojo/on"
 ], function(lang, dxa, config, window, on){
 
 	// window startup data

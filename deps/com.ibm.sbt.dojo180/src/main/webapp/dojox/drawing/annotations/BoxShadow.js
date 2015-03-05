@@ -1,4 +1,4 @@
-define("dojox/drawing/annotations/BoxShadow", ["dojo", "dojo/_base/Color", "../util/oo"], 
+define(["dojo", "dojo/_base/Color", "../util/oo"], 
 function(dojo, Color, oo){
 
 return oo.declare(

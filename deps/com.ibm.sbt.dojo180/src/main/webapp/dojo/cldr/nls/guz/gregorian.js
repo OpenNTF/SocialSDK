@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/guz/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"field-dayperiod": "Mambia gose Morogoba",
@@ -171,6 +171,15 @@ define(
 		"N",
 		"D"
 	],
+	"days-standAlone-short": [
+		"Cpr",
+		"Ctt",
+		"Cmn",
+		"Cmt",
+		"Ars",
+		"Icm",
+		"Est"
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"Cpr",
@@ -199,6 +208,15 @@ define(
 		"Okitoba",
 		"Nobemba",
 		"Disemba"
+	],
+	"days-format-short": [
+		"Cpr",
+		"Ctt",
+		"Cmn",
+		"Cmt",
+		"Ars",
+		"Icm",
+		"Est"
 	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

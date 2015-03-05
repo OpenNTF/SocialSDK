@@ -1,4 +1,4 @@
-define("dojox/dtl/tag/logic", [
+define([
 	"dojo/_base/lang",
 	"../_base"
 ], function(lang, dd){

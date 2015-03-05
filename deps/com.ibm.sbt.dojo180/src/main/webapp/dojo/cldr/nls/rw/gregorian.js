@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/rw/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"quarters-standAlone-wide": [
 		"igihembwe cya mbere",
@@ -21,6 +21,15 @@ define(
 		"I4"
 	],
 	"timeFormat-full": "HH:mm:ss zzzz",
+	"days-format-short": [
+		"cyu.",
+		"mbe.",
+		"kab.",
+		"gtu.",
+		"kan.",
+		"gnu.",
+		"gnd."
+	],
 	"months-standAlone-wide": [
 		"Mutarama",
 		"Gashyantare",
@@ -48,6 +57,15 @@ define(
 		"ukw.",
 		"ugu.",
 		"uku."
+	],
+	"days-standAlone-short": [
+		"cyu.",
+		"mbe.",
+		"kab.",
+		"gtu.",
+		"kan.",
+		"gnu.",
+		"gnd."
 	],
 	"timeFormat-medium": "HH:mm:ss",
 	"dateFormat-long": "y MMMM d",

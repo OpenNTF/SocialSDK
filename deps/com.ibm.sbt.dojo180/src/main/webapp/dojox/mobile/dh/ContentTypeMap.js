@@ -1,4 +1,4 @@
-define("dojox/mobile/dh/ContentTypeMap", [
+define([
 	"dojo/_base/lang"
 ], function(lang){
 

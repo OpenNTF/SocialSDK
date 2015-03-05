@@ -1,6 +1,12 @@
 define(
-"dojo/cldr/nls/nl/hebrew", //begin v1.x content
+//begin v1.x content
 {
+	"quarters-standAlone-wide": [
+		"1e kwartaal",
+		"2e kwartaal",
+		"3e kwartaal",
+		"4e kwartaal"
+	],
 	"quarters-format-abbr": [
 		"K1",
 		"K2",
@@ -10,9 +16,24 @@ define(
 	"dateFormatItem-yMd": "d-M-y",
 	"dateFormat-medium": "d MMM y",
 	"dateFormatItem-MMMEd": "E d MMM",
+	"quarters-standAlone-abbr": [
+		"K1",
+		"K2",
+		"K3",
+		"K4"
+	],
 	"dateFormatItem-MEd": "E d-M",
 	"dateFormatItem-yMEd": "E d-M-y",
 	"dateFormatItem-yMMMd": "d MMM y",
+	"days-format-short": [
+		"zo",
+		"ma",
+		"di",
+		"wo",
+		"do",
+		"vr",
+		"za"
+	],
 	"dateFormatItem-Md": "d-M",
 	"months-standAlone-wide": [
 		"Tisjrie",
@@ -55,6 +76,15 @@ define(
 		"Elloel"
 	],
 	"dateFormatItem-yQQQ": "QQQ y",
+	"days-standAlone-short": [
+		"zo",
+		"ma",
+		"di",
+		"wo",
+		"do",
+		"vr",
+		"za"
+	],
 	"dateFormat-long": "d MMMM y",
 	"dateFormat-short": "dd-MM-yy",
 	"dateFormatItem-yMMMEd": "E d MMM y",
@@ -73,6 +103,24 @@ define(
 		"Av",
 		"Elloel"
 	],
+	"days-standAlone-wide": [
+		"zondag",
+		"maandag",
+		"dinsdag",
+		"woensdag",
+		"donderdag",
+		"vrijdag",
+		"zaterdag"
+	],
+	"days-format-narrow": [
+		"Z",
+		"M",
+		"D",
+		"W",
+		"D",
+		"V",
+		"Z"
+	],
 	"dateFormatItem-yM": "M-y",
 	"months-format-abbr": [
 		"Tisjrie",
@@ -88,6 +136,15 @@ define(
 		"Tammoez",
 		"Av",
 		"Elloel"
+	],
+	"days-standAlone-abbr": [
+		"zo",
+		"ma",
+		"di",
+		"wo",
+		"do",
+		"vr",
+		"za"
 	],
 	"days-format-wide": [
 		"zondag",

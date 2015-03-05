@@ -1,4 +1,4 @@
-define("dojox/timing/doLater", ["./_base"], function(dxt){
+define(["./_base"], function(dxt){
 	dojo.experimental("dojox.timing.doLater");
 
 	dxt.doLater = function(/*anything*/conditional,/*Object ?*/context, /* Number ? */interval){

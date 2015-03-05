@@ -1,4 +1,4 @@
-define("dijit/layout/AccordionPane", [
+define([
 	"dojo/_base/declare", // declare
 	"dojo/_base/kernel", // kernel.deprecated
 	"./ContentPane"

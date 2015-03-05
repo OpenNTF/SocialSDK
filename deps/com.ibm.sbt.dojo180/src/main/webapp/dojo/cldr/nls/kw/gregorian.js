@@ -1,9 +1,27 @@
 define(
-"dojo/cldr/nls/kw/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"Sul",
+		"Lun",
+		"Mth",
+		"Mhr",
+		"Yow",
+		"Gwe",
+		"Sad"
+	],
 	"eraNames": [
 		"RC",
 		"AD"
+	],
+	"days-format-short": [
+		"Sul",
+		"Lun",
+		"Mth",
+		"Mhr",
+		"Yow",
+		"Gwe",
+		"Sad"
 	],
 	"eraAbbr": [
 		"RC",

@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/dje/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"field-dayperiod": "Subbaahi/Zaarikay banda",
@@ -12,7 +12,6 @@ define(
 	],
 	"dateFormatItem-MMMEd": "E d MMM",
 	"field-day-relative+-1": "Bi",
-	"field-weekday": "Zaari",
 	"dateFormatItem-hms": "h:mm:ss a",
 	"dateFormatItem-yQQQ": "QQQ y",
 	"days-standAlone-wide": [
@@ -172,6 +171,15 @@ define(
 		"N",
 		"D"
 	],
+	"days-standAlone-short": [
+		"Alh",
+		"Ati",
+		"Ata",
+		"Ala",
+		"Alm",
+		"Alz",
+		"Asi"
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"Alh",
@@ -200,6 +208,15 @@ define(
 		"Oktoobur",
 		"Noowanbur",
 		"Deesanbur"
+	],
+	"days-format-short": [
+		"Alh",
+		"Ati",
+		"Ata",
+		"Ala",
+		"Alm",
+		"Alz",
+		"Asi"
 	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

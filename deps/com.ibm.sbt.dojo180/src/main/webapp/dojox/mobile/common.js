@@ -1,4 +1,4 @@
-define("dojox/mobile/common", [
+define([
 	"dojo/_base/array",
 	"dojo/_base/config",
 	"dojo/_base/connect",
@@ -222,35 +222,70 @@ define("dojox/mobile/common", [
 		//	You can disable hiding the address bar with the following dojoConfig.
 		//	var dojoConfig = { mblHideAddressBar: false };
 		var f = dm.resizeAll;
-		if(config["mblHideAddressBar"] !== false &&
-			navigator.appVersion.indexOf("Mobile") != -1 ||
-			config["mblForceHideAddressBar"] === true){
+		// Address bar hiding
+		var isHidingPossible =
+			navigator.appVersion.indexOf("Mobile") != -1 && // only mobile browsers
+			// #17455: hiding Safari's address bar works in iOS < 7 but this is 
+			// no longer possible since iOS 7. Hence, exclude iOS 7 and later: 
+			!(has("iphone") >= 7);
+		// You can disable the hiding of the address bar with the following dojoConfig:
+		// var dojoConfig = { mblHideAddressBar: false };
+		// If unspecified, the flag defaults to true.
+		if((config.mblHideAddressBar !== false && isHidingPossible) ||
+			config.mblForceHideAddressBar === true){
 			dm.hideAddressBar();
-			if(config["mblAlwaysHideAddressBar"] === true){
+			if(config.mblAlwaysHideAddressBar === true){
 				f = dm.hideAddressBar;
 			}
 		}
-		if(has('android') && win.global.onorientationchange !== undefined){
+
+		var ios6 = has('iphone') >= 6; // Full-screen support for iOS6 or later 
+		if((has('android') || ios6) && win.global.onorientationchange !== undefined){
 			var _f = f;
-			f = function(evt){
-				var _conn = connect.connect(null, "onresize", null, function(e){
-					connect.disconnect(_conn);
-					_f(e);
-				});
-			};
-			var curSize = dm.getScreenSize();
-			// Watch for resize events when the virtual keyboard is shown/hidden,
-			// the heuristic to detect this is that the screen width does not change
-			// and the height changes by more than 100 pixels.
-			connect.connect(null, "onresize", null, function(e){
-				var newSize = dm.getScreenSize();
-				if(newSize.w == curSize.w && Math.abs(newSize.h - curSize.h) >= 100){
-					// keyboard has been shown/hidden
-					_f(e);
+			var curSize, curClientWidth, curClientHeight;
+			if(ios6){
+				curClientWidth = win.doc.documentElement.clientWidth;
+				curClientHeight = win.doc.documentElement.clientHeight;
+			}else{ // Android
+				// Call resize for the first resize event after orientationchange
+				// because the size information may not yet be up to date when the 
+				// event orientationchange occurs.
+				f = function(evt){
+					var _conn = connect.connect(null, "onresize", null, function(e){
+						connect.disconnect(_conn);
+						_f(e);
+					});
 				}
-				curSize = newSize;
+				curSize = dm.getScreenSize();
+			};
+			// Android: Watch for resize events when the virtual keyboard is shown/hidden.
+			// The heuristic to detect this is that the screen width does not change
+			// and the height changes by more than 100 pixels.
+			//
+			// iOS >= 6: Watch for resize events when entering or existing the new iOS6 
+			// full-screen mode. The heuristic to detect this is that clientWidth does not
+			// change while the clientHeight does change.
+			connect.connect(null, "onresize", null, function(e){
+				if(ios6){
+					var newClientWidth = win.doc.documentElement.clientWidth,
+						newClientHeight = win.doc.documentElement.clientHeight;
+					if(newClientWidth == curClientWidth && newClientHeight != curClientHeight){
+						// full-screen mode has been entered/exited (iOS6)
+						_f(e);
+					}
+					curClientWidth = newClientWidth;
+					curClientHeight = newClientHeight;
+				}else{ // Android
+					var newSize = dm.getScreenSize();
+					if(newSize.w == curSize.w && Math.abs(newSize.h - curSize.h) >= 100){
+						// keyboard has been shown/hidden (Android)
+						_f(e);
+					}
+					curSize = newSize;
+				}
 			});
 		}
+		
 		connect.connect(null, win.global.onorientationchange !== undefined
 			? "onorientationchange" : "onresize", null, f);
 		win.body().style.visibility = "visible";

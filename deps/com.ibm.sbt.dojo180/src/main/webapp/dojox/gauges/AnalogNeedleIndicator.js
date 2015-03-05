@@ -1,4 +1,4 @@
-define("dojox/gauges/AnalogNeedleIndicator", ["dojo/_base/declare","./AnalogIndicatorBase"],
+define(["dojo/_base/declare","./AnalogIndicatorBase"],
   function(declare, AnalogIndicatorBase) { 
 
 return declare("dojox.gauges.AnalogNeedleIndicator", [AnalogIndicatorBase], {

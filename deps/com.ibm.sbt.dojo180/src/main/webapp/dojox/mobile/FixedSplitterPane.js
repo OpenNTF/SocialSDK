@@ -1,4 +1,4 @@
-define("dojox/mobile/FixedSplitterPane", [
+define([
 	"dojo/_base/kernel",
 	"dojo/_base/declare",
 	"./Container"

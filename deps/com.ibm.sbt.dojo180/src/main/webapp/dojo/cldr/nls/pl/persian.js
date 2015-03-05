@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/pl/persian", //begin v1.x content
+//begin v1.x content
 {
 	"months-format-abbr": [
 		"Farwardin",
@@ -19,13 +19,15 @@ define(
 		"Farwardin",
 		"Ordibeheszt",
 		"Chordād",
-		null,
+		"Tir",
 		"Mordād",
 		"Szahriwar",
-		null,
+		"Mehr",
 		"Ābān",
 		"Āsar",
-		"Déi"
+		"Déi",
+		"Bahman",
+		"Esfand"
 	],
 	"months-format-narrow": [
 		"1",

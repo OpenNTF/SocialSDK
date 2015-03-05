@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/so/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"field-dayperiod": "sn./gn.",
@@ -143,6 +143,15 @@ define(
 	"field-second": "Il biriqsi",
 	"field-day": "Maalin",
 	"dateFormatItem-MEd": "E, M/d",
+	"days-standAlone-short": [
+		"Axd",
+		"Isn",
+		"Tal",
+		"Arb",
+		"Kha",
+		"Jim",
+		"Sab"
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"Axd",
@@ -171,6 +180,15 @@ define(
 		"Bisha Tobnaad",
 		"Bisha Kow iyo Tobnaad",
 		"Bisha Laba iyo Tobnaad"
+	],
+	"days-format-short": [
+		"Axd",
+		"Isn",
+		"Tal",
+		"Arb",
+		"Kha",
+		"Jim",
+		"Sab"
 	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/as/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"quarters-standAlone-wide": [
 		"প্ৰথম প্ৰহৰ",
@@ -23,6 +23,15 @@ define(
 	"field-week": "সপ্তাহ",
 	"field-day-relative+-1": "কালি",
 	"field-day-relative+-2": "পৰহি",
+	"days-format-short": [
+		"ৰবি",
+		"সোম",
+		"মঙ্গল",
+		"বুধ",
+		"বৃহষ্পতি",
+		"শুক্ৰ",
+		"শনি"
+	],
 	"months-standAlone-wide": [
 		"জানুৱাৰী",
 		"ফেব্ৰুৱাৰী",
@@ -54,6 +63,15 @@ define(
 		"ডিসে"
 	],
 	"field-minute": "মিনিট",
+	"days-standAlone-short": [
+		"ৰবি",
+		"সোম",
+		"মঙ্গল",
+		"বুধ",
+		"বৃহষ্পতি",
+		"শুক্ৰ",
+		"শনি"
+	],
 	"dayPeriods-format-wide-am": "পূৰ্বাহ্ণ",
 	"field-hour": "ঘণ্টা",
 	"field-day-relative+1": "কাইলৈ",

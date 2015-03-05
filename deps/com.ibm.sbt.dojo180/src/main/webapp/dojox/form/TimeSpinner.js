@@ -1,4 +1,4 @@
-define("dojox/form/TimeSpinner", [
+define([
 	"dojo/_base/lang",
 	"dojo/_base/event",
 	"dijit/form/_Spinner",

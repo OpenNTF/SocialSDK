@@ -1,6 +1,15 @@
 define(
-"dojo/cldr/nls/ru/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"вс",
+		"пн",
+		"вт",
+		"ср",
+		"чт",
+		"пт",
+		"сб"
+	],
 	"months-format-narrow": [
 		"Я",
 		"Ф",
@@ -18,12 +27,21 @@ define(
 	"field-weekday": "День недели",
 	"dateFormatItem-yQQQ": "y QQQ",
 	"dateFormatItem-yyMMMEd": "E, d MMM yy",
-	"dateFormatItem-yMEd": "E, dd.MM.y",
+	"dateFormatItem-yMEd": "ccc, d.MM.y 'г'.",
 	"dateFormatItem-yyyyLLLL": "LLLL y",
 	"dateFormatItem-MMMEd": "ccc, d MMM",
 	"eraNarrow": [
 		"до н.э.",
 		"н.э."
+	],
+	"days-format-short": [
+		"вс",
+		"пн",
+		"вт",
+		"ср",
+		"чт",
+		"пт",
+		"сб"
 	],
 	"dateFormat-long": "d MMMM y 'г'.",
 	"months-format-wide": [
@@ -46,8 +64,8 @@ define(
 	"dateFormatItem-Md": "dd.MM",
 	"dayPeriods-format-abbr-am": "до полудня",
 	"dateFormatItem-yMd": "dd.MM.y",
-	"field-era": "Эра",
 	"dateFormatItem-yM": "MM.y",
+	"field-era": "Эра",
 	"months-standAlone-wide": [
 		"Январь",
 		"Февраль",
@@ -70,12 +88,12 @@ define(
 		"4-й квартал"
 	],
 	"timeFormat-long": "H:mm:ss z",
-	"field-year": "Год",
 	"dateFormatItem-yMMM": "LLL y",
 	"dateFormatItem-yQ": "QQQ y 'г'.",
+	"field-year": "Год",
+	"dateFormatItem-MMdd": "dd.MM",
 	"dateFormatItem-yyyyMMMM": "LLLL y",
 	"field-hour": "Час",
-	"dateFormatItem-MMdd": "dd.MM",
 	"months-format-abbr": [
 		"янв.",
 		"февр.",
@@ -166,6 +184,7 @@ define(
 		"4"
 	],
 	"field-day-relative+-1": "Вчера",
+	"dateFormatItem-h": "h a",
 	"dateTimeFormat-long": "{1}, {0}",
 	"dayPeriods-format-narrow-am": "дп",
 	"field-day-relative+-2": "Позавчера",
@@ -202,6 +221,7 @@ define(
 	"field-year-relative+-1": "В прошлом году",
 	"field-month-relative+-1": "В прошлом месяце",
 	"dateFormatItem-yyMM": "MM.yy",
+	"dateFormatItem-hm": "h:mm a",
 	"dayPeriods-format-abbr-pm": "после полудня",
 	"days-format-abbr": [
 		"вс",
@@ -218,13 +238,13 @@ define(
 		"н.э."
 	],
 	"days-format-narrow": [
-		"В",
-		"Пн",
-		"Вт",
-		"С",
-		"Ч",
-		"П",
-		"С"
+		"вс",
+		"пн",
+		"вт",
+		"ср",
+		"чт",
+		"пт",
+		"сб"
 	],
 	"days-standAlone-narrow": [
 		"В",
@@ -245,7 +265,7 @@ define(
 	"field-month-relative+1": "В следующем месяце",
 	"dateFormatItem-Ed": "ccc, d",
 	"field-week": "Неделя",
-	"dateFormat-medium": "dd.MM.yyyy",
+	"dateFormat-medium": "dd MMM y 'г'.",
 	"field-year-relative+0": "В этом году",
 	"field-week-relative+-1": "На прошлой неделе",
 	"field-year-relative+1": "В следующем году",
@@ -253,6 +273,7 @@ define(
 	"dateFormatItem-yyyyQQQQ": "QQQQ y 'г'.",
 	"dateTimeFormat-short": "{1}, {0}",
 	"dateFormatItem-Hms": "H:mm:ss",
+	"dateFormatItem-hms": "h:mm:ss a",
 	"dateFormatItem-yyyy": "y",
 	"field-week-relative+0": "На этой неделе",
 	"field-week-relative+1": "На следующей неделе"

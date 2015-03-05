@@ -1,7 +1,7 @@
-define("dojox/dgauges/GaugeBase", ["dojo/_base/lang", "dojo/_base/declare", "dojo/dom-geometry", "dijit/registry", "dijit/_WidgetBase", "dojo/_base/html", 
-		"dojo/_base/event", "dojox/gfx", "dojox/widget/_Invalidating","./ScaleBase", "dojox/gfx/matrix", "dojox/gfx/canvas"],
+define(["dojo/_base/lang", "dojo/_base/declare", "dojo/dom-geometry", "dijit/registry", "dijit/_WidgetBase", "dojo/_base/html", 
+		"dojo/_base/event", "dojox/gfx", "dojox/widget/_Invalidating","./ScaleBase", "dojox/gfx/matrix"],
 	function(lang, // lang.extend
-		declare, domGeom,  WidgetRegistry, _WidgetBase, html, event, gfx, _Invalidating, ScaleBase, matrix, canvas){
+		declare, domGeom,  WidgetRegistry, _WidgetBase, html, event, gfx, _Invalidating, ScaleBase, matrix){
 	return declare("dojox.dgauges.GaugeBase", [_WidgetBase, _Invalidating], {
 		// summary: 
 		//		This class is the base class for the circular and 
@@ -29,10 +29,65 @@ define("dojox/dgauges/GaugeBase", ["dojo/_base/lang", "dojo/_base/declare", "doj
 		_node: null,
 
 		// value: Number
-		//		A convenient way for setting the value of the first indicator of the first
-		//		scale declared in the gauge. It must be changed using the set method.
-		//		For other indicators, you have to set their value explicitly.
+		//		This property acts as a top-level wrapper for the value of the first indicator added to 
+		//		its scale with the name "indicator", i.e. myScale.addIndicator("indicator", myIndicator).
+		//		This property must be manipulated with get("value") and set("value", xxx).
 		value: 0,
+		_mainIndicator: null,
+		
+		_getValueAttr: function(){
+			// summary:
+			//		Internal method.
+			// tags:
+			//		private			
+			if(this._mainIndicator){
+				return this._mainIndicator.get("value");
+			}else{
+				this._setMainIndicator();
+				if(this._mainIndicator){
+					return this._mainIndicator.get("value");
+				}
+			}
+			return this.value;
+		},
+		
+		_setValueAttr: function(value){
+			// summary:
+			//		Internal method.
+			// tags:
+			//		private			
+			this._set("value", value);
+			if(this._mainIndicator){
+				this._mainIndicator.set("value", value);
+			}else{
+				this._setMainIndicator();
+				if(this._mainIndicator){
+					this._mainIndicator.set("value", value);
+				}
+			}
+		},
+		
+		_setMainIndicator: function(){
+			// summary:
+			//		Internal method.
+			// tags:
+			//		private	
+			var indicator;
+			for(var i=0; i<this._scales.length; i++){
+				indicator = this._scales[i].getIndicator("indicator");
+				if(indicator){
+					this._mainIndicator = indicator;
+				}
+			}
+		},
+		
+		_resetMainIndicator: function(){
+			// summary:
+			//		Internal method.
+			// tags:
+			//		private
+			this._mainIndicator = null;
+		},
 		
 		// font: Object
 		//		The font of the gauge used by elements if not overridden.
@@ -82,8 +137,8 @@ define("dojox/dgauges/GaugeBase", ["dojo/_base/lang", "dojo/_base/declare", "doj
 		destroy: function(){
 			// summary:
 			//		Cleanup when a gauge is to be destroyed.
-			
 			this.surface.destroy();
+			this.inherited(arguments);
 		},
 
 		resize: function(width, height){
@@ -189,6 +244,7 @@ define("dojox/dgauges/GaugeBase", ["dojo/_base/lang", "dojo/_base/declare", "doj
 				if(element instanceof ScaleBase){
 					var idxs = this._scales.indexOf(element);
 					this._scales.splice(idxs, 1);
+					this._resetMainIndicator();
 				}
 				delete this._elementsIndex[name];
 				delete this._elementsRenderers[name];

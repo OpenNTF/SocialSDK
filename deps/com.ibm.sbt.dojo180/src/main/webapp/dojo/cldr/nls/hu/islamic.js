@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/hu/islamic", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "y-M",
 	"dateFormatItem-yQ": "y Q",
@@ -19,6 +19,20 @@ define(
 		"péntek",
 		"szombat"
 	],
+	"months-standAlone-narrow": [
+		"1",
+		"2",
+		"3",
+		"4",
+		"5",
+		"6",
+		"7",
+		"8",
+		"9",
+		"10",
+		"11",
+		"12"
+	],
 	"dayPeriods-format-wide-am": "de.",
 	"quarters-standAlone-abbr": [
 		"N1",
@@ -29,18 +43,18 @@ define(
 	"dateFormatItem-y": "y",
 	"timeFormat-full": "H:mm:ss zzzz",
 	"months-standAlone-abbr": [
-		"Muh.",
+		"Moh.",
 		"Saf.",
-		"Rab. I",
-		"Rab. II",
-		"Jum. I",
-		"Jum. II",
-		"Raj.",
-		"Sha.",
+		"Rébi I",
+		"Rébi II",
+		"Dsem. I",
+		"Dsem. II",
+		"Red.",
+		"Sab.",
 		"Ram.",
-		"Shaw.",
-		"Dsül-Q.",
-		"Dsül-H."
+		"Sev.",
+		"Dsül k.",
+		"Dsül h."
 	],
 	"dateFormatItem-Ed": "d E",
 	"dateFormatItem-yMMM": "y MMM",
@@ -71,6 +85,12 @@ define(
 	],
 	"dateFormatItem-ms": "mm:ss",
 	"dayPeriods-format-narrow-am": "de.",
+	"quarters-standAlone-narrow": [
+		"1.",
+		"2.",
+		"3.",
+		"4."
+	],
 	"months-standAlone-wide": [
 		"Moharrem",
 		"Safar",
@@ -88,18 +108,18 @@ define(
 	"dateFormatItem-MMMd": "MMM d.",
 	"timeFormat-long": "H:mm:ss z",
 	"months-format-abbr": [
-		"Moharrem",
-		"Safar",
-		"Rébi el avvel",
-		"Rébi el accher",
-		"Dsemádi el avvel",
-		"Dsemádi el accher",
-		"Redseb",
-		"Sabán",
-		"Ramadán",
-		"Sevvál",
-		"Dsül kade",
-		"Dsül hedse"
+		"Moh.",
+		"Saf.",
+		"Rébi I",
+		"Rébi II",
+		"Dsem. I",
+		"Dsem. II",
+		"Red.",
+		"Sab.",
+		"Ram.",
+		"Sev.",
+		"Dsül k.",
+		"Dsül h."
 	],
 	"timeFormat-short": "H:mm",
 	"dateFormatItem-H": "HH",
@@ -131,19 +151,14 @@ define(
 	],
 	"dateFormatItem-yMMMd": "y. MMM d.",
 	"dateFormatItem-MEd": "M. d., E",
-	"months-format-narrow": [
-		"1",
-		"2",
-		"3",
-		"4",
-		"5",
-		"6",
-		"7",
-		"8",
-		"9",
-		"10",
-		"11",
-		"12"
+	"days-standAlone-short": [
+		"V",
+		"H",
+		"K",
+		"Sze",
+		"Cs",
+		"P",
+		"Szo"
 	],
 	"dateFormatItem-hm": "a h:mm",
 	"days-standAlone-abbr": [

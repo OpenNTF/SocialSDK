@@ -1,5 +1,3 @@
-// wrapped by build app
-define("dojox/mobile/app/List", ["dijit","dojo","dojox","dojo/require!dojo/string,dijit/_WidgetBase"], function(dijit,dojo,dojox){
 dojo.provide("dojox.mobile.app.List");
 dojo.experimental("dojox.mobile.app.List");
 
@@ -644,4 +642,3 @@ dojo.require("dijit._WidgetBase");
 	});
 
 })();
-});

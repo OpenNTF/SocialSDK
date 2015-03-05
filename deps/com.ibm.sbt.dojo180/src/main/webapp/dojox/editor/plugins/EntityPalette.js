@@ -1,4 +1,4 @@
-define("dojox/editor/plugins/EntityPalette", [
+define([
 	"dojo",
 	"dijit",
 	"dojox",

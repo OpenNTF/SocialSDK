@@ -1,4 +1,4 @@
-define("dojox/mobile/RoundRect", [
+define([
 	"dojo/_base/declare",
 	"dojo/dom-class",
 	"./Container"

@@ -1,4 +1,4 @@
-define("dijit/form/VerticalRule", [
+define([
 	"dojo/_base/declare", // declare
 	"./HorizontalRule"
 ], function(declare, HorizontalRule){

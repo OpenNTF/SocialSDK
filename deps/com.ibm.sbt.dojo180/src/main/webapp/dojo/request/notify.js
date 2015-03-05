@@ -1,4 +1,4 @@
-define("dojo/request/notify", ['../Evented', '../_base/lang', './util'], function(Evented, lang, util){
+define(['../Evented', '../_base/lang', './util'], function(Evented, lang, util){
 	// module:
 	//		dojo/request/notify
 	// summary:

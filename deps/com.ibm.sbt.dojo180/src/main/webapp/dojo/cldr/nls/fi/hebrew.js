@@ -1,11 +1,11 @@
 define(
-"dojo/cldr/nls/fi/hebrew", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "L.yyyy",
 	"dateFormatItem-yQ": "Q/yyyy",
 	"months-standAlone-abbr-leap": "adár II",
 	"dayPeriods-format-wide-pm": "ip.",
-	"dateFormatItem-MMMEd": "E d. MMM",
+	"dateFormatItem-MMMEd": "ccc d. MMM",
 	"dateFormatItem-hms": "h.mm.ss a",
 	"dateFormatItem-yQQQ": "QQQ y",
 	"days-standAlone-wide": [
@@ -56,7 +56,7 @@ define(
 		"ab",
 		"elúl"
 	],
-	"dateFormatItem-Ed": "ccc d.",
+	"dateFormatItem-Ed": "E d.",
 	"dateFormatItem-yMMM": "LLL y",
 	"days-standAlone-narrow": [
 		"S",
@@ -157,6 +157,15 @@ define(
 		"A",
 		"E"
 	],
+	"days-standAlone-short": [
+		"su",
+		"ma",
+		"ti",
+		"ke",
+		"to",
+		"pe",
+		"la"
+	],
 	"dateFormatItem-hm": "h.mm a",
 	"days-standAlone-abbr": [
 		"su",
@@ -171,7 +180,7 @@ define(
 	"dayPeriods-format-abbr-pm": "ip.",
 	"dateFormat-short": "d.M.yyyy",
 	"dateFormatItem-yMMMEd": "E d. MMM y",
-	"dateFormat-full": "cccc, d. MMMM y",
+	"dateFormat-full": "cccc d. MMMM y",
 	"dateFormatItem-Md": "d.M.",
 	"dateFormatItem-yMEd": "E d.M.yyyy",
 	"months-format-wide": [
@@ -190,6 +199,15 @@ define(
 		"elúlkuuta"
 	],
 	"dayPeriods-format-abbr-am": "ap.",
+	"days-format-short": [
+		"su",
+		"ma",
+		"ti",
+		"ke",
+		"to",
+		"pe",
+		"la"
+	],
 	"quarters-format-wide": [
 		"1. neljännes",
 		"2. neljännes",

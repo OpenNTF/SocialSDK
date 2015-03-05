@@ -1,4 +1,4 @@
-define("dijit/layout/StackContainer", [
+define([
 	"dojo/_base/array", // array.forEach array.indexOf array.some
 	"dojo/cookie", // cookie
 	"dojo/_base/declare", // declare
@@ -61,7 +61,6 @@ var StackContainer = declare("dijit.layout.StackContainer", _LayoutWidget, {
 	buildRendering: function(){
 		this.inherited(arguments);
 		domClass.add(this.domNode, "dijitLayoutContainer");
-		this.containerNode.setAttribute("role", "tabpanel");
 	},
 
 	postCreate: function(){

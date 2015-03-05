@@ -1,16 +1,29 @@
 define(
-"dojo/cldr/nls/da/islamic", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
-	"dateFormatItem-yyyyMMMEd": "E. d. MMM y G",
+	"dateFormatItem-yyyyMMMEd": "E d. MMM y G",
 	"dateFormatItem-yQ": "Q yyyy",
-	"dayPeriods-format-wide-pm": "e.m.",
 	"dateFormatItem-MMMEd": "E d. MMM",
 	"dateFormatItem-hms": "h.mm.ss a",
 	"dateFormatItem-yQQQ": "QQQ y",
 	"dateFormatItem-MMdd": "dd/MM",
+	"days-standAlone-wide": [
+		"søndag",
+		"mandag",
+		"tirsdag",
+		"onsdag",
+		"torsdag",
+		"fredag",
+		"lørdag"
+	],
 	"dateFormatItem-MMM": "MMM",
-	"dayPeriods-format-wide-am": "f.m.",
+	"quarters-standAlone-abbr": [
+		"K1",
+		"K2",
+		"K3",
+		"K4"
+	],
 	"timeFormat-full": "HH.mm.ss zzzz",
 	"dateFormatItem-yyyy": "y G",
 	"dateFormatItem-Ed": "E d.",
@@ -32,11 +45,17 @@ define(
 	"dateFormatItem-Hms": "HH.mm.ss",
 	"dateFormatItem-yyMMM": "MMM y G",
 	"dateFormatItem-yMd": "d/M/y",
+	"quarters-standAlone-wide": [
+		"1. kvartal",
+		"2. kvartal",
+		"3. kvartal",
+		"4. kvartal"
+	],
 	"dateFormatItem-ms": "mm.ss",
 	"dateFormatItem-yyyyMd": "d/M/y G",
 	"dateFormatItem-yyyyMMMd": "d. MMM y G",
 	"dateFormatItem-MMMMEd": "E d. MMMM",
-	"dateFormatItem-yyyyMEd": "E. d/M/y G",
+	"dateFormatItem-yyyyMEd": "E d/M/y G",
 	"dateFormatItem-MMMd": "d. MMM",
 	"dateFormatItem-yyQ": "Q. 'kvartal' y G",
 	"timeFormat-long": "HH.mm.ss z",
@@ -49,6 +68,38 @@ define(
 		"K4"
 	],
 	"days-format-abbr": [
+		"søn.",
+		"man.",
+		"tir.",
+		"ons.",
+		"tor.",
+		"fre.",
+		"lør."
+	],
+	"dateFormatItem-M": "M",
+	"days-format-narrow": [
+		"S",
+		"M",
+		"T",
+		"O",
+		"T",
+		"F",
+		"L"
+	],
+	"dateFormatItem-yMMMd": "d. MMM y",
+	"dateFormatItem-yyyyQQQ": "QQQ y G",
+	"dateFormatItem-MEd": "E d/M",
+	"days-standAlone-short": [
+		"sø",
+		"ma",
+		"ti",
+		"on",
+		"to",
+		"fr",
+		"lø"
+	],
+	"dateFormatItem-hm": "h.mm a",
+	"days-standAlone-abbr": [
 		"søn",
 		"man",
 		"tir",
@@ -57,18 +108,22 @@ define(
 		"fre",
 		"lør"
 	],
-	"dateFormatItem-M": "M",
-	"dateFormatItem-yMMMd": "d. MMM y",
-	"dateFormatItem-yyyyQQQ": "QQQ y G",
-	"dateFormatItem-MEd": "E. d/M",
-	"dateFormatItem-hm": "h.mm a",
 	"dateFormat-short": "d/M/y G",
 	"dateFormatItem-yyyyM": "M/y G",
-	"dateFormatItem-yMMMEd": "E. d. MMM y",
+	"dateFormatItem-yMMMEd": "E d. MMM y",
 	"dateFormat-full": "EEEE d. MMMM y G",
 	"dateFormatItem-Md": "d/M",
 	"dateFormatItem-yyyyQ": "Q y G",
-	"dateFormatItem-yMEd": "E. d/M/y",
+	"dateFormatItem-yMEd": "E d/M/y",
+	"days-format-short": [
+		"sø",
+		"ma",
+		"ti",
+		"on",
+		"to",
+		"fr",
+		"lø"
+	],
 	"dateFormatItem-yyyyMMM": "MMM y G",
 	"dateFormatItem-d": "d.",
 	"quarters-format-wide": [

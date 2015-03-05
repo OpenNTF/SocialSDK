@@ -1,33 +1,24 @@
 define(
-"dojo/cldr/nls/ne/gregorian", //begin v1.x content
+//begin v1.x content
 {
-	"field-second": "दोस्रो",
-	"field-week": "हप्ता",
-	"field-day-relative+-1": "हिजो",
-	"field-day-relative+-2": "अस्ति",
-	"eraNarrow": [
+	"field-dayperiod": "पूर्व मध्यान्ह/उत्तर मध्यान्ह",
+	"dayPeriods-format-wide-pm": "उत्तर मध्यान्ह",
+	"field-minute": "मिनेट",
+	"eraNames": [
 		"ईसा पूर्व",
 		"सन्"
 	],
-	"months-format-narrow": [
-		"१",
-		"२",
-		"३",
-		"४",
-		"५",
-		"६",
-		"७",
-		"८",
-		"९",
-		"१०",
-		"११",
-		"१२"
-	],
-	"quarters-format-narrow": [
-		"१",
-		"२",
-		"३",
-		"४"
+	"field-day-relative+-1": "हिजो",
+	"field-weekday": "हप्ताको बार",
+	"field-day-relative+-2": "अस्ति",
+	"days-standAlone-wide": [
+		"आइतबार",
+		"सोमबार",
+		"मङ्गलबार",
+		"बुधबार",
+		"बिहीबार",
+		"शुक्रबार",
+		"शनिबार"
 	],
 	"months-standAlone-narrow": [
 		"१",
@@ -43,37 +34,32 @@ define(
 		"११",
 		"१२"
 	],
-	"eraNames": [
-		"ईसा पूर्व",
-		"सन्"
-	],
-	"days-standAlone-narrow": [
-		"१",
-		"२",
-		"३",
-		"४",
-		"५",
-		"६",
-		"७"
-	],
-	"dayPeriods-format-wide-pm": "उत्तर मध्यान्ह",
-	"field-year": "बर्ष",
-	"field-minute": "मिनेट",
+	"field-era": "काल",
+	"field-hour": "घण्टा",
 	"dayPeriods-format-wide-am": "पूर्व मध्यान्ह",
-	"quarters-standAlone-narrow": [
-		"१",
-		"२",
-		"३",
-		"४"
+	"quarters-standAlone-abbr": [
+		"पहिलो सत्र",
+		"दोस्रो सत्र",
+		"तेस्रो सत्र",
+		"चौथो सत्र"
+	],
+	"months-standAlone-abbr": [
+		"जन",
+		"फेब",
+		"मार्च",
+		"अप्रि",
+		"मे",
+		"जुन",
+		"जुला",
+		"अग",
+		"सेप्ट",
+		"अक्टो",
+		"नोभे",
+		"डिसे"
 	],
 	"field-day-relative+0": "आज",
-	"field-hour": "घण्टा",
 	"field-day-relative+1": "भोलि",
-	"field-day": "बार",
-	"field-dayperiod": "पूर्व मध्यान्ह/उत्तर मध्यान्ह",
-	"field-month": "महिना",
-	"field-era": "काल",
-	"days-format-narrow": [
+	"days-standAlone-narrow": [
 		"१",
 		"२",
 		"३",
@@ -86,8 +72,156 @@ define(
 		"ईसा पूर्व",
 		"सन्"
 	],
-	"field-weekday": "हप्ताको बार",
-	"field-zone": "क्षेत्र"
+	"field-zone": "क्षेत्र",
+	"quarters-standAlone-wide": [
+		"पहिलो सत्र",
+		"दोस्रो सत्र",
+		"तेस्रो सत्र",
+		"चौथो सत्र"
+	],
+	"field-year": "बर्ष",
+	"quarters-standAlone-narrow": [
+		"१",
+		"२",
+		"३",
+		"४"
+	],
+	"months-standAlone-wide": [
+		"जनवरी",
+		"फेब्रुअरी",
+		"मार्च",
+		"अप्रिल",
+		"मे",
+		"जुन",
+		"जुलाई",
+		"अगस्ट",
+		"सेप्टेम्बर",
+		"अक्टोबर",
+		"नोभेम्बर",
+		"डिसेम्बर"
+	],
+	"field-week": "हप्ता",
+	"quarters-format-narrow": [
+		"१",
+		"२",
+		"३",
+		"४"
+	],
+	"months-format-abbr": [
+		"जन",
+		"फेब",
+		"मार्च",
+		"अप्रि",
+		"मे",
+		"जुन",
+		"जुला",
+		"अग",
+		"सेप्ट",
+		"अक्टो",
+		"नोभे",
+		"डिसे"
+	],
+	"field-month": "महिना",
+	"quarters-format-abbr": [
+		"पहिलो सत्र",
+		"दोस्रो सत्र",
+		"तेस्रो सत्र",
+		"चौथो सत्र"
+	],
+	"days-format-abbr": [
+		"आइत",
+		"सोम",
+		"मङ्गल",
+		"बुध",
+		"बिही",
+		"शुक्र",
+		"शनि"
+	],
+	"days-format-narrow": [
+		"१",
+		"२",
+		"३",
+		"४",
+		"५",
+		"६",
+		"७"
+	],
+	"field-second": "दोस्रो",
+	"field-day": "बार",
+	"months-format-narrow": [
+		"१",
+		"२",
+		"३",
+		"४",
+		"५",
+		"६",
+		"७",
+		"८",
+		"९",
+		"१०",
+		"११",
+		"१२"
+	],
+	"days-standAlone-short": [
+		"आइत",
+		"सोम",
+		"मङ्गल",
+		"बुध",
+		"बिही",
+		"शुक्र",
+		"शनि"
+	],
+	"days-standAlone-abbr": [
+		"आइत",
+		"सोम",
+		"मङ्गल",
+		"बुध",
+		"बिही",
+		"शुक्र",
+		"शनि"
+	],
+	"months-format-wide": [
+		"जनवरी",
+		"फेब्रुअरी",
+		"मार्च",
+		"अप्रिल",
+		"मे",
+		"जुन",
+		"जुलाई",
+		"अगस्ट",
+		"सेप्टेम्बर",
+		"अक्टोबर",
+		"नोभेम्बर",
+		"डिसेम्बर"
+	],
+	"days-format-short": [
+		"आइत",
+		"सोम",
+		"मङ्गल",
+		"बुध",
+		"बिही",
+		"शुक्र",
+		"शनि"
+	],
+	"quarters-format-wide": [
+		"पहिलो सत्र",
+		"दोस्रो सत्र",
+		"तेस्रो सत्र",
+		"चौथो सत्र"
+	],
+	"days-format-wide": [
+		"आइतबार",
+		"सोमबार",
+		"मङ्गलबार",
+		"बुधबार",
+		"बिहीबार",
+		"शुक्रबार",
+		"शनिबार"
+	],
+	"eraNarrow": [
+		"ईसा पूर्व",
+		"सन्"
+	]
 }
 //end v1.x content
 );

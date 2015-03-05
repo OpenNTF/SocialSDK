@@ -1,4 +1,4 @@
-define("dojox/lang/functional/object", ["dojo/_base/kernel", "dojo/_base/lang", "./lambda"], function(kernel, lang, df){
+define(["dojo/_base/kernel", "dojo/_base/lang", "./lambda"], function(kernel, lang, df){
 
 // This module adds high-level functions and related constructs:
 //	- object/dictionary helpers

@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/lv/number", //begin v1.x content
+//begin v1.x content
 {
 	"group": " ",
 	"percentSign": "%",
@@ -8,14 +8,15 @@ define(
 	"percentFormat": "#,##0%",
 	"list": ";",
 	"infinity": "∞",
-	"minusSign": "−",
+	"minusSign": "-",
 	"decimal": ",",
 	"nan": "nav skaitlis",
 	"perMille": "‰",
 	"decimalFormat": "#,##0.###",
-	"currencyFormat": "#,##0.00 ¤",
+	"currencyFormat": "¤#,##0.00;(¤#,##0.00)",
 	"plusSign": "+",
-	"decimalFormat-short": "000 T"
+	"decimalFormat-long": "000 trilj'.'",
+	"decimalFormat-short": "000 trilj'.'"
 }
 //end v1.x content
 );

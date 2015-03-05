@@ -1,4 +1,4 @@
-define("dijit/_base/wai", [
+define([
 	"dojo/dom-attr", // domAttr.attr
 	"dojo/_base/lang", // lang.mixin
 	"../main",	// export symbols to dijit

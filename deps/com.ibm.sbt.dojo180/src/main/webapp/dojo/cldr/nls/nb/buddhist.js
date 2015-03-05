@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/nb/buddhist", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M y G",
 	"dateFormatItem-yQ": "Q y G",
@@ -154,6 +154,15 @@ define(
 		"N",
 		"D"
 	],
+	"days-standAlone-short": [
+		"sø.",
+		"ma.",
+		"ti.",
+		"on.",
+		"to.",
+		"fr.",
+		"lø."
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"sø.",
@@ -185,6 +194,15 @@ define(
 		"desember"
 	],
 	"dayPeriods-format-abbr-am": "a.m.",
+	"days-format-short": [
+		"sø.",
+		"ma.",
+		"ti.",
+		"on.",
+		"to.",
+		"fr.",
+		"lø."
+	],
 	"dateFormatItem-d": "d.",
 	"quarters-format-wide": [
 		"1. kvartal",

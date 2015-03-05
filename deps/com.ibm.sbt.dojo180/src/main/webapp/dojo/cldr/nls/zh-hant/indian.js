@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/zh-hant/indian", //begin v1.x content
+//begin v1.x content
 {
 	"months-format-abbr": [
 		"制檀邏月",
@@ -29,6 +29,23 @@ define(
 		"磨祛月",
 		"頗勒窶拏月"
 	],
+	"eraAbbr": [
+		"印度曆"
+	],
+	"months-format-narrow": [
+		"1",
+		"2",
+		"3",
+		"4",
+		"5",
+		"6",
+		"7",
+		"8",
+		"9",
+		"10",
+		"11",
+		"12"
+	],
 	"months-standAlone-abbr": [
 		"制檀邏月",
 		"吠舍佉月",
@@ -56,6 +73,20 @@ define(
 		"報沙月",
 		"磨祛月",
 		"頗勒窶拏月"
+	],
+	"months-standAlone-narrow": [
+		"1",
+		"2",
+		"3",
+		"4",
+		"5",
+		"6",
+		"7",
+		"8",
+		"9",
+		"10",
+		"11",
+		"12"
 	]
 }
 //end v1.x content

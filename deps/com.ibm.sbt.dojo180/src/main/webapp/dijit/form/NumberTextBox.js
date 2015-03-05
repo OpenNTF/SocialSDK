@@ -1,4 +1,4 @@
-define("dijit/form/NumberTextBox", [
+define([
 	"dojo/_base/declare", // declare
 	"dojo/_base/lang", // lang.hitch lang.mixin
 	"dojo/number", // number._realNumberRegexp number.format number.parse number.regexp
@@ -82,7 +82,7 @@ define("dijit/form/NumberTextBox", [
 		},
 
 		_onFocus: function(){
-			if(this.disabled){ return; }
+			if(this.disabled || this.readOnly){ return; }
 			var val = this.get('value');
 			if(typeof val == "number" && !isNaN(val)){
 				var formattedValue = this.format(val, this.constraints);

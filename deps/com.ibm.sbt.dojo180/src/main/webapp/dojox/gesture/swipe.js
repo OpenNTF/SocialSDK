@@ -1,4 +1,4 @@
-define("dojox/gesture/swipe", [
+define([
 	"dojo/_base/kernel",
 	"dojo/_base/declare",
 	"./Base",

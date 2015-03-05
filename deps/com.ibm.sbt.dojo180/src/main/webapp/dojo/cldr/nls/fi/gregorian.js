@@ -1,6 +1,15 @@
 define(
-"dojo/cldr/nls/fi/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"su",
+		"ma",
+		"ti",
+		"ke",
+		"to",
+		"pe",
+		"la"
+	],
 	"months-format-narrow": [
 		"T",
 		"H",
@@ -15,13 +24,28 @@ define(
 		"M",
 		"J"
 	],
+	"quarters-standAlone-narrow": [
+		"1",
+		"2",
+		"3",
+		"4"
+	],
 	"field-weekday": "viikonpäivä",
 	"dateFormatItem-yQQQ": "QQQ y",
 	"dateFormatItem-yMEd": "E d.M.yyyy",
-	"dateFormatItem-MMMEd": "E d. MMM",
+	"dateFormatItem-MMMEd": "ccc d. MMM",
 	"eraNarrow": [
 		"eK",
 		"jK"
+	],
+	"days-format-short": [
+		"su",
+		"ma",
+		"ti",
+		"ke",
+		"to",
+		"pe",
+		"la"
 	],
 	"dateFormat-long": "d. MMMM y",
 	"months-format-wide": [
@@ -38,15 +62,16 @@ define(
 		"marraskuuta",
 		"joulukuuta"
 	],
+	"dateTimeFormat-medium": "{1} {0}",
 	"dayPeriods-format-wide-pm": "ip.",
-	"dateFormat-full": "cccc, d. MMMM y",
+	"dateFormat-full": "cccc d. MMMM y",
 	"dateFormatItem-yyyyMEd": "E d.M.yyyy",
 	"dateFormatItem-Md": "d.M.",
 	"dayPeriods-standAlone-wide-pm": "ip.",
 	"dayPeriods-format-abbr-am": "ap.",
 	"dateFormatItem-yMd": "d.M.yyyy",
-	"field-era": "aikakausi",
 	"dateFormatItem-yM": "L.yyyy",
+	"field-era": "aikakausi",
 	"months-standAlone-wide": [
 		"tammikuu",
 		"helmikuu",
@@ -69,9 +94,9 @@ define(
 		"4. neljännes"
 	],
 	"timeFormat-long": "H.mm.ss z",
-	"field-year": "vuosi",
 	"dateFormatItem-yMMM": "LLL y",
 	"dateFormatItem-yQ": "Q/yyyy",
+	"field-year": "vuosi",
 	"dateFormatItem-yyyyMMMM": "LLLL y",
 	"field-hour": "tunti",
 	"months-format-abbr": [
@@ -163,11 +188,14 @@ define(
 		"4"
 	],
 	"field-day-relative+-1": "eilen",
+	"dateFormatItem-h": "h a",
+	"dateTimeFormat-long": "{1} {0}",
 	"dayPeriods-format-narrow-am": "ap.",
 	"field-day-relative+-2": "toissapäivänä",
 	"dateFormatItem-MMMd": "d. MMM",
 	"dateFormatItem-MEd": "E d.M.",
-	"dateFormatItem-yMMMMccccd": "cccc, d. MMMM y",
+	"dateTimeFormat-full": "{1} {0}",
+	"dateFormatItem-yMMMMccccd": "cccc d. MMMM y",
 	"field-day": "päivä",
 	"days-format-wide": [
 		"sunnuntaina",
@@ -196,7 +224,7 @@ define(
 	],
 	"field-year-relative+-1": "viime vuonna",
 	"field-month-relative+-1": "viime kuussa",
-	"dateFormatItem-yyMM": "M/yy",
+	"dateFormatItem-yyMM": "M.yy",
 	"dateFormatItem-hm": "h.mm a",
 	"dayPeriods-format-abbr-pm": "ip.",
 	"days-format-abbr": [
@@ -240,15 +268,16 @@ define(
 	"dateFormatItem-yMMMEd": "E d. MMM y",
 	"field-month-relative+0": "tässä kuussa",
 	"field-month-relative+1": "ensi kuussa",
-	"dateFormatItem-Ed": "ccc d.",
+	"dateFormatItem-Ed": "E d.",
 	"field-week": "viikko",
 	"dateFormat-medium": "d.M.yyyy",
 	"field-year-relative+0": "tänä vuonna",
 	"field-week-relative+-1": "viime viikolla",
-	"dateFormatItem-yyyyM": "M/yyyy",
+	"dateFormatItem-yyyyM": "M.yyyy",
 	"field-year-relative+1": "ensi vuonna",
 	"dayPeriods-format-narrow-pm": "ip.",
 	"dateFormatItem-yyyyQQQQ": "QQQQ y",
+	"dateTimeFormat-short": "{1} {0}",
 	"dateFormatItem-Hms": "H.mm.ss",
 	"dateFormatItem-hms": "h.mm.ss a",
 	"field-week-relative+0": "tällä viikolla",

@@ -1,11 +1,16 @@
 define(
-"dojo/cldr/nls/ti/currency", //begin v1.x content
+//begin v1.x content
 {
-	"EUR_displayName": "አውሮ",
-	"GBP_displayName": "የእንግሊዝ ፓውንድ ስተርሊንግ",
-	"JPY_displayName": "የጃፓን የን",
+	"RUB_displayName": "የራሻ ሩብል",
+	"ETB_symbol": "Br",
 	"CNY_displayName": "የቻይና ዩአን ረንሚንቢ",
-	"USD_displayName": "የአሜሪካን ዶላር"
+	"INR_displayName": "የሕንድ ሩፒ",
+	"ETB_displayName": "የኢትዮጵያ ብር",
+	"JPY_displayName": "የጃፓን የን",
+	"BRL_displayName": "የብራዚል ሪል",
+	"USD_displayName": "የአሜሪካን ዶላር",
+	"GBP_displayName": "የእንግሊዝ ፓውንድ ስተርሊንግ",
+	"EUR_displayName": "አውሮ"
 }
 //end v1.x content
 );

@@ -1,19 +1,34 @@
 define(
-"dojo/cldr/nls/te/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"ఆది",
+		"సోమ",
+		"మం",
+		"బుధ",
+		"గురు",
+		"శుక్ర",
+		"శని"
+	],
 	"months-format-narrow": [
 		"జ",
 		"ఫి",
-		"మ",
-		"ఎ",
-		"మె",
-		"జు",
+		"మా",
+		"ఏ",
+		"మే",
+		"జూ",
 		"జు",
 		"ఆ",
 		"సె",
 		"అ",
 		"న",
 		"డి"
+	],
+	"quarters-standAlone-narrow": [
+		"1",
+		"2",
+		"3",
+		"4"
 	],
 	"field-weekday": "వారంలో రోజు",
 	"dateFormatItem-yQQQ": "QQQ y",
@@ -25,6 +40,15 @@ define(
 	],
 	"dayPeriods-format-wide-earlyMorning": "ఉదయం",
 	"dayPeriods-format-wide-morning": "మధ్యాహ్నం",
+	"days-format-short": [
+		"ఆది",
+		"సోమ",
+		"మం",
+		"బుధ",
+		"గురు",
+		"శుక్ర",
+		"శని"
+	],
 	"dateFormat-long": "d MMMM y",
 	"months-format-wide": [
 		"జనవరి",
@@ -41,13 +65,14 @@ define(
 		"డిసెంబర్"
 	],
 	"dayPeriods-format-wide-evening": "అర్ధరాత్రి",
-	"dayPeriods-format-wide-pm": "అపరాహ్నం",
+	"dateTimeFormat-medium": "{1} {0}",
+	"dayPeriods-format-wide-pm": "PM",
 	"dateFormat-full": "EEEE d MMMM y",
 	"dateFormatItem-Md": "d/M",
 	"dayPeriods-format-wide-noon": "సాయంకాలం",
 	"dateFormatItem-yMd": "d/M/y",
-	"field-era": "యుగం, శకము",
 	"dateFormatItem-yM": "M/y",
+	"field-era": "యుగం, శకము",
 	"months-standAlone-wide": [
 		"జనవరి",
 		"ఫిబ్రవరి",
@@ -64,23 +89,23 @@ define(
 	],
 	"timeFormat-short": "h:mm a",
 	"quarters-format-wide": [
-		"ఒకటి 1",
-		"రెండు 2",
-		"మూడు 3",
-		"నాలుగు 4"
+		"1వ త్రైమాసం",
+		"2వ త్రైమాసం",
+		"3వ త్రైమాసం",
+		"4వ త్రైమాసం"
 	],
 	"timeFormat-long": "h:mm:ss a z",
-	"field-year": "సంవత్సరం",
 	"dateFormatItem-yMMM": "MMM y",
 	"dateFormatItem-yQ": "Q y",
+	"field-year": "సంవత్సరం",
+	"dateFormatItem-MMdd": "dd-MM",
 	"dateFormatItem-yyyyMMMM": "MMMM y",
 	"field-hour": "గంట",
-	"dateFormatItem-MMdd": "dd-MM",
 	"months-format-abbr": [
-		"జనవరి",
-		"ఫిబ్రవరి",
+		"జన",
+		"ఫిబ్ర",
 		"మార్చి",
-		"ఎప్రిల్",
+		"ఏప్రి",
 		"మే",
 		"జూన్",
 		"జూలై",
@@ -95,25 +120,26 @@ define(
 	"field-day-relative+0": "ఈ రోజు",
 	"field-day-relative+1": "రేపు",
 	"field-day-relative+2": "ఎల్లుండి",
+	"dateFormatItem-H": "HH",
 	"months-standAlone-abbr": [
-		"జనవరి",
-		"ఫిబ్రవరి",
+		"జన",
+		"ఫిబ్ర",
 		"మార్చి",
-		"ఎప్రిల్",
+		"ఏప్రి",
 		"మే",
 		"జూన్",
 		"జూలై",
 		"ఆగస్టు",
-		"సెప్టెంబర్",
-		"అక్టోబర్",
-		"నవంబర్",
-		"డిసెంబర్"
+		"సెప్టెం",
+		"అక్టో",
+		"నవం",
+		"డిసెం"
 	],
 	"quarters-format-abbr": [
-		"ఒకటి 1",
-		"రెండు 2",
-		"మూడు 3",
-		"నాలుగు 4"
+		"త్రై1",
+		"త్రై2",
+		"త్రై3",
+		"త్రై4"
 	],
 	"quarters-standAlone-wide": [
 		"మొదటి త్రైమాసికం",
@@ -121,6 +147,7 @@ define(
 		"మూడవ త్రైమాసికం",
 		"నాల్గవ త్రైమాసికం"
 	],
+	"dateFormatItem-M": "L",
 	"days-standAlone-wide": [
 		"ఆదివారం",
 		"సోమవారం",
@@ -132,15 +159,16 @@ define(
 	],
 	"dateFormatItem-MMMMd": "d MMMM",
 	"timeFormat-medium": "h:mm:ss a",
+	"dateFormatItem-Hm": "HH:mm",
 	"quarters-standAlone-abbr": [
-		"ఒకటి 1",
-		"రెండు 2",
-		"మూడు 3",
-		"నాలుగు 4"
+		"త్రై1",
+		"త్రై2",
+		"త్రై3",
+		"త్రై4"
 	],
 	"eraAbbr": [
-		"ఈసాపూర్వ.",
-		"సన్."
+		"క్రీపూ",
+		"క్రీశ"
 	],
 	"field-minute": "నిమిషము",
 	"field-dayperiod": "AM/PM",
@@ -154,6 +182,8 @@ define(
 		"శని"
 	],
 	"dayPeriods-format-wide-night": "తెల్లవారుఝాము",
+	"dateFormatItem-d": "d",
+	"dateFormatItem-ms": "mm:ss",
 	"quarters-format-narrow": [
 		"1",
 		"2",
@@ -161,9 +191,13 @@ define(
 		"4"
 	],
 	"field-day-relative+-1": "నిన్న",
+	"dateFormatItem-h": "h a",
+	"dateTimeFormat-long": "{1} {0}",
+	"dayPeriods-format-narrow-am": "AM",
 	"field-day-relative+-2": "మొన్న",
 	"dateFormatItem-MMMd": "d MMM",
 	"dateFormatItem-MEd": "E, d/M",
+	"dateTimeFormat-full": "{1} {0}",
 	"field-day": "దినం",
 	"days-format-wide": [
 		"ఆదివారం",
@@ -176,12 +210,13 @@ define(
 	],
 	"field-zone": "మండలం",
 	"dateFormatItem-yyyyMM": "MM-yyyy",
+	"dateFormatItem-y": "y",
 	"months-standAlone-narrow": [
 		"జ",
 		"ఫి",
-		"మ",
-		"ఎ",
-		"మె",
+		"మా",
+		"ఏ",
+		"మే",
 		"జు",
 		"జు",
 		"ఆ",
@@ -192,6 +227,7 @@ define(
 	],
 	"field-year-relative+-1": "మునుపటి సంవత్సరం",
 	"field-month-relative+-1": "గత నెల",
+	"dateFormatItem-hm": "h:mm a",
 	"days-format-abbr": [
 		"ఆది",
 		"సోమ",
@@ -215,7 +251,6 @@ define(
 		"శు",
 		"శ"
 	],
-	"field-month": "నెల",
 	"days-standAlone-narrow": [
 		"ఆ",
 		"సో",
@@ -225,7 +260,9 @@ define(
 		"శు",
 		"శ"
 	],
-	"dayPeriods-format-wide-am": "పూర్వాహ్నం",
+	"dateFormatItem-MMM": "LLL",
+	"field-month": "నెల",
+	"dayPeriods-format-wide-am": "AM",
 	"dateFormat-short": "dd-MM-yy",
 	"dayPeriods-format-wide-afternoon": "రాత్రి",
 	"field-second": "క్షణం",
@@ -238,6 +275,10 @@ define(
 	"field-year-relative+0": "ఈ సంవత్సరం",
 	"field-week-relative+-1": "గత వారం",
 	"field-year-relative+1": "తర్వాతి సంవత్సరం",
+	"dayPeriods-format-narrow-pm": "PM",
+	"dateTimeFormat-short": "{1} {0}",
+	"dateFormatItem-Hms": "HH:mm:ss",
+	"dateFormatItem-hms": "h:mm:ss a",
 	"field-week-relative+0": "ఈ వారం",
 	"field-week-relative+1": "తదుపరి వారం"
 }

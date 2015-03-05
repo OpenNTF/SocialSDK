@@ -1,4 +1,4 @@
-define("dojox/editor/plugins/SafePaste", [
+define([
 	"dojo",
 	"dijit",
 	"dojox",

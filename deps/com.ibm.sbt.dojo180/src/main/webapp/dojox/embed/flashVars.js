@@ -1,4 +1,4 @@
-define("dojox/embed/flashVars", ["dojo"], function(dojo){
+define(["dojo"], function(dojo){
 
 dojo.deprecated("dojox.embed.flashVars", "Will be removed in 2.0", "2.0");
 

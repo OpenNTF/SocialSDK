@@ -1,4 +1,4 @@
-define("dojox/calc/_Executor", [
+define([
 	"dojo/_base/kernel",
 	"dojo/_base/declare",
 	"dojo/_base/lang",

@@ -1,4 +1,4 @@
-define("dojox/grid/cells/_base", [
+define([
 	"dojo/_base/kernel",
 	"dojo/_base/declare",
 	"dojo/_base/lang",

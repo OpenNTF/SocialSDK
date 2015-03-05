@@ -1,4 +1,4 @@
-define("dojox/form/manager/_ValueMixin", [
+define([
 	"dojo/_base/lang",
 	"dojo/_base/kernel",
 	"dojo/_base/declare"

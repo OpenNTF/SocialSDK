@@ -1,61 +1,34 @@
 define(
-"dojo/cldr/nls/ii/gregorian", //begin v1.x content
+//begin v1.x content
 {
-	"quarters-standAlone-wide": [
-		"ꃅꑌ",
-		"ꃅꎸ",
-		"ꃅꍵ",
-		"ꃅꋆ"
+	"field-dayperiod": "ꎸꄑ/ꁯꋒ",
+	"dayPeriods-format-wide-pm": "ꁯꋒ",
+	"field-minute": "ꃏ",
+	"eraNames": [
+		"ꃅꋊꂿ",
+		"ꃅꋊꊂ"
 	],
-	"quarters-format-abbr": [
-		"ꃅꑌ",
-		"ꃅꎸ",
-		"ꃅꍵ",
-		"ꃅꋆ"
+	"field-day-relative+-1": "ꀋꅔꉈ",
+	"field-weekday": "ꆏꑍ",
+	"field-day-relative+-2": "ꎴꂿꋍꑍ",
+	"days-standAlone-wide": [
+		"ꑭꆏꑍ",
+		"ꆏꊂꋍ",
+		"ꆏꊂꑍ",
+		"ꆏꊂꌕ",
+		"ꆏꊂꇖ",
+		"ꆏꊂꉬ",
+		"ꆏꊂꃘ"
 	],
-	"field-second": "ꇙ",
+	"field-era": "ꃅꋊ",
+	"field-hour": "ꄮꈉ",
+	"dayPeriods-format-wide-am": "ꎸꄑ",
 	"quarters-standAlone-abbr": [
 		"ꃅꑌ",
 		"ꃅꎸ",
 		"ꃅꍵ",
 		"ꃅꋆ"
 	],
-	"field-week": "ꑭꆏ",
-	"field-day-relative+-1": "ꀋꅔꉈ",
-	"field-day-relative+-2": "ꎴꂿꋍꑍ",
-	"eraNarrow": [
-		"ꃅꋊꂿ",
-		"ꃅꋊꊂ"
-	],
-	"months-standAlone-wide": [
-		"ꋍꆪ",
-		"ꑍꆪ",
-		"ꌕꆪ",
-		"ꇖꆪ",
-		"ꉬꆪ",
-		"ꃘꆪ",
-		"ꏃꆪ",
-		"ꉆꆪ",
-		"ꈬꆪ",
-		"ꊰꆪ",
-		"ꊰꊪꆪ",
-		"ꊰꑋꆪ"
-	],
-	"eraNames": [
-		"ꃅꋊꂿ",
-		"ꃅꋊꊂ"
-	],
-	"days-standAlone-narrow": [
-		"ꆏ",
-		"ꋍ",
-		"ꑍ",
-		"ꌕ",
-		"ꇖ",
-		"ꉬ",
-		"ꃘ"
-	],
-	"dayPeriods-format-wide-pm": "ꁯꋒ",
-	"field-year": "ꈎ",
 	"months-standAlone-abbr": [
 		"ꋍꆪ",
 		"ꑍꆪ",
@@ -70,16 +43,31 @@ define(
 		"ꊰꊪꆪ",
 		"ꊰꑋꆪ"
 	],
-	"field-minute": "ꃏ",
-	"dayPeriods-format-wide-am": "ꎸꄑ",
 	"field-day-relative+0": "ꀃꑍ",
-	"field-hour": "ꄮꈉ",
 	"field-day-relative+1": "ꃆꏂꑍ",
+	"days-standAlone-narrow": [
+		"ꆏ",
+		"ꋍ",
+		"ꑍ",
+		"ꌕ",
+		"ꇖ",
+		"ꉬ",
+		"ꃘ"
+	],
+	"eraAbbr": [
+		"ꃅꋊꂿ",
+		"ꃅꋊꊂ"
+	],
 	"field-day-relative+2": "ꌕꀿꑍ",
-	"field-day": "ꑍ",
-	"field-dayperiod": "ꎸꄑ/ꁯꋒ",
-	"field-month": "ꆪ",
-	"months-format-wide": [
+	"field-zone": "ꃅꄷꄮꈉ",
+	"quarters-standAlone-wide": [
+		"ꃅꑌ",
+		"ꃅꎸ",
+		"ꃅꍵ",
+		"ꃅꋆ"
+	],
+	"field-year": "ꈎ",
+	"months-standAlone-wide": [
 		"ꋍꆪ",
 		"ꑍꆪ",
 		"ꌕꆪ",
@@ -93,34 +81,7 @@ define(
 		"ꊰꊪꆪ",
 		"ꊰꑋꆪ"
 	],
-	"days-standAlone-wide": [
-		"ꑭꆏꑍ",
-		"ꆏꊂꋍ",
-		"ꆏꊂꑍ",
-		"ꆏꊂꌕ",
-		"ꆏꊂꇖ",
-		"ꆏꊂꉬ",
-		"ꆏꊂꃘ"
-	],
-	"field-era": "ꃅꋊ",
-	"days-format-narrow": [
-		"ꆏ",
-		"ꋍ",
-		"ꑍ",
-		"ꌕ",
-		"ꇖ",
-		"ꉬ",
-		"ꃘ"
-	],
-	"days-standAlone-abbr": [
-		"ꑭꆏ",
-		"ꆏꋍ",
-		"ꆏꑍ",
-		"ꆏꌕ",
-		"ꆏꇖ",
-		"ꆏꉬ",
-		"ꆏꃘ"
-	],
+	"field-week": "ꑭꆏ",
 	"months-format-abbr": [
 		"ꋍꆪ",
 		"ꑍꆪ",
@@ -135,26 +96,13 @@ define(
 		"ꊰꊪꆪ",
 		"ꊰꑋꆪ"
 	],
-	"days-format-wide": [
-		"ꑭꆏꑍ",
-		"ꆏꊂꋍ",
-		"ꆏꊂꑍ",
-		"ꆏꊂꌕ",
-		"ꆏꊂꇖ",
-		"ꆏꊂꉬ",
-		"ꆏꊂꃘ"
-	],
-	"eraAbbr": [
-		"ꃅꋊꂿ",
-		"ꃅꋊꊂ"
-	],
-	"quarters-format-wide": [
+	"field-month": "ꆪ",
+	"quarters-format-abbr": [
 		"ꃅꑌ",
 		"ꃅꎸ",
 		"ꃅꍵ",
 		"ꃅꋆ"
 	],
-	"field-weekday": "ꆏꑍ",
 	"days-format-abbr": [
 		"ꑭꆏ",
 		"ꆏꋍ",
@@ -164,7 +112,77 @@ define(
 		"ꆏꉬ",
 		"ꆏꃘ"
 	],
-	"field-zone": "ꃅꄷꄮꈉ"
+	"days-format-narrow": [
+		"ꆏ",
+		"ꋍ",
+		"ꑍ",
+		"ꌕ",
+		"ꇖ",
+		"ꉬ",
+		"ꃘ"
+	],
+	"field-second": "ꇙ",
+	"field-day": "ꑍ",
+	"days-standAlone-short": [
+		"ꑭꆏ",
+		"ꆏꋍ",
+		"ꆏꑍ",
+		"ꆏꌕ",
+		"ꆏꇖ",
+		"ꆏꉬ",
+		"ꆏꃘ"
+	],
+	"days-standAlone-abbr": [
+		"ꑭꆏ",
+		"ꆏꋍ",
+		"ꆏꑍ",
+		"ꆏꌕ",
+		"ꆏꇖ",
+		"ꆏꉬ",
+		"ꆏꃘ"
+	],
+	"months-format-wide": [
+		"ꋍꆪ",
+		"ꑍꆪ",
+		"ꌕꆪ",
+		"ꇖꆪ",
+		"ꉬꆪ",
+		"ꃘꆪ",
+		"ꏃꆪ",
+		"ꉆꆪ",
+		"ꈬꆪ",
+		"ꊰꆪ",
+		"ꊰꊪꆪ",
+		"ꊰꑋꆪ"
+	],
+	"days-format-short": [
+		"ꑭꆏ",
+		"ꆏꋍ",
+		"ꆏꑍ",
+		"ꆏꌕ",
+		"ꆏꇖ",
+		"ꆏꉬ",
+		"ꆏꃘ"
+	],
+	"quarters-format-wide": [
+		"ꃅꑌ",
+		"ꃅꎸ",
+		"ꃅꍵ",
+		"ꃅꋆ"
+	],
+	"days-format-wide": [
+		"ꑭꆏꑍ",
+		"ꆏꊂꋍ",
+		"ꆏꊂꑍ",
+		"ꆏꊂꌕ",
+		"ꆏꊂꇖ",
+		"ꆏꊂꉬ",
+		"ꆏꊂꃘ"
+	],
+	"eraNarrow": [
+		"ꃅꋊꂿ",
+		"ꃅꋊꊂ"
+	]
 }
 //end v1.x content
 );

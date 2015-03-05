@@ -1,4 +1,4 @@
-define("dijit/form/FilteringSelect", [
+define([
 	"dojo/data/util/filter", // filter.patternToRegExp
 	"dojo/_base/declare", // declare
 	"dojo/_base/lang", // lang.mixin
@@ -210,8 +210,10 @@ define("dijit/form/FilteringSelect", [
 				this._set("displayedValue", label);	// for watch("displayedValue") notification
 				var _this = this;
 				var options = {
-					ignoreCase: this.ignoreCase,
-					deep: true
+					queryOptions: {
+						ignoreCase: this.ignoreCase,
+						deep: true
+					}
 				};
 				lang.mixin(options, this.fetchProperties);
 				this._fetchHandle = this.store.query(query, options);

@@ -1,4 +1,4 @@
-define("dijit/tree/model", ["dojo/_base/declare"], function(declare){
+define(["dojo/_base/declare"], function(declare){
 
 return declare(
 	"dijit.tree.model",

@@ -1,4 +1,4 @@
-define("dojox/mdnd/LazyManager", [
+define([
 	"dojo/_base/kernel",	
 	"dojo/_base/declare",
 	"dojo/_base/lang",	// dojo.hitch

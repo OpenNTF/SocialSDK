@@ -1,4 +1,4 @@
-define("dijit/tree/_dndContainer", [
+define([
 	"dojo/aspect",	// aspect.after
 	"dojo/_base/declare", // declare
 	"dojo/dom-class", // domClass.add domClass.remove domClass.replace

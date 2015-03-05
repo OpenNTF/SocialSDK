@@ -1,10 +1,8 @@
-define("dojox/charting/widget/Legend", ["dojo/_base/lang", "dojo/_base/declare", "dijit/_WidgetBase", "dojox/gfx","dojo/_base/array",
+define(["dojo/_base/lang", "dojo/_base/declare", "dijit/_WidgetBase", "dojox/gfx","dojo/_base/array",
 		"dojox/lang/functional", "dojox/lang/functional/array", "dojox/lang/functional/fold",
 		"dojo/dom", "dojo/dom-construct", "dojo/dom-class","dijit/registry"],
 		function(lang, declare, _WidgetBase, gfx, arrayUtil, df, dfa, dff,
 				dom, domFactory, domClass, registry){
-
-	var REVERSED_SERIES = /\.(StackedColumns|StackedAreas|ClusteredBars)$/;
 
 	return declare("dojox.charting.widget.Legend", _WidgetBase, {
 		// summary:
@@ -93,9 +91,6 @@ define("dojox/charting/widget/Legend", ["dojo/_base/lang", "dojo/_base/declare",
 					}, this);
 				}
 			}else{
-				if(this._isReversal()){
-					s = s.slice(0).reverse();
-				}
 				arrayUtil.forEach(s, function(x){
 					this._addLabel(x.dyn, x.legend || x.name);
 				}, this);
@@ -162,11 +157,6 @@ define("dojox/charting/widget/Legend", ["dojo/_base/lang", "dojo/_base/declare",
 				surface.createLine({x1: 2, y1: 2, x2: mb.w - 2, y2: mb.h - 2}).setStroke("black");
 				surface.createLine({x1: 2, y1: mb.h - 2, x2: mb.w - 2, y2: 2}).setStroke("black");
 			}
-		},
-		_isReversal: function(){
-			return (!this.horizontal) && arrayUtil.some(this.chart.stack, function(item){
-				return REVERSED_SERIES.test(item.declaredClass);
-			});
 		}
 	});
 });

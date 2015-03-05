@@ -1,4 +1,4 @@
-define("dojox/charting/themes/Minty", ["../SimpleTheme", "./common"], function(SimpleTheme, themes){
+define(["../SimpleTheme", "./common"], function(SimpleTheme, themes){
 	themes.Minty = new SimpleTheme({
 		colors: [
 			"#80ccbb",

@@ -1,4 +1,4 @@
-define("dojox/form/uploader/plugins/Flash", [
+define([
 	"dojo/dom-form",
 	"dojo/dom-style",
 	"dojo/dom-construct",

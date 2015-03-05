@@ -1,5 +1,5 @@
 define(
-"dijit/_editor/nls/cs/commands", ({
+({
 	'bold': 'Tučné',
 	'copy': 'Kopírovat',
 	'cut': 'Vyjmout',
@@ -39,8 +39,8 @@ define(
 	'fontSize': 'Velikost písma',
 	'fontName': 'Název písma',
 	'tabIndent': 'Odsazení tabulátoru',
-	"fullScreen": "Přepnout celou obrazovku",
-	"viewSource": "Zobrazit zdroj HTML",
+	"fullScreen": "Přepnout režim celé obrazovky",
+	"viewSource": "Zobrazit zdroj ve formátu HTML",
 	"print": "Tisk",
 	"newPage": "Nová stránka",
 	/* Error messages */

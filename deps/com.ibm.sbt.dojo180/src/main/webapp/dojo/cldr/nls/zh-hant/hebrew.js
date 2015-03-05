@@ -1,10 +1,13 @@
 define(
-"dojo/cldr/nls/zh-hant/hebrew", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "y/M",
 	"dateFormatItem-yQ": "y年QQQ",
 	"months-standAlone-abbr-leap": "亞達月 II",
 	"dayPeriods-format-wide-pm": "下午",
+	"eraNames": [
+		"創世紀元"
+	],
 	"dateFormatItem-MMMEd": "M月d日E",
 	"dateTimeFormat-full": "{1}{0}",
 	"dateFormatItem-hms": "ah:mm:ss",
@@ -21,10 +24,10 @@ define(
 	"dayPeriods-format-wide-am": "上午",
 	"months-format-abbr-leap": "亞達月 II",
 	"quarters-standAlone-abbr": [
-		"一季度",
-		"二季度",
-		"三季度",
-		"四季度"
+		"1季度",
+		"2季度",
+		"3季度",
+		"4季度"
 	],
 	"dateFormatItem-y": "y年",
 	"timeFormat-full": "zzzzah時mm分ss秒",
@@ -54,11 +57,15 @@ define(
 		"五",
 		"六"
 	],
+	"eraAbbr": [
+		"創世紀元"
+	],
 	"dateFormat-long": "y年M月d日",
 	"timeFormat-medium": "ah:mm:ss",
 	"dateFormatItem-Hm": "H:mm",
 	"dateFormat-medium": "yyyy/M/d",
 	"dateFormatItem-Hms": "H:mm:ss",
+	"dayPeriods-format-narrow-pm": "下午",
 	"dateFormatItem-yMd": "y/M/d",
 	"quarters-standAlone-wide": [
 		"第一季度",
@@ -66,6 +73,7 @@ define(
 		"第三季度",
 		"第四季度"
 	],
+	"dayPeriods-format-narrow-am": "上午",
 	"dateTimeFormat-long": "{1}{0}",
 	"months-standAlone-wide": [
 		"提斯利月",
@@ -99,8 +107,8 @@ define(
 		"埃波月",
 		"以祿月"
 	],
-	"timeFormat-short": "ah:mm",
 	"dateFormatItem-H": "H時",
+	"timeFormat-short": "ah:mm",
 	"quarters-format-abbr": [
 		"1季",
 		"2季",
@@ -128,6 +136,15 @@ define(
 	],
 	"dateFormatItem-yMMMd": "y年M月d日",
 	"dateFormatItem-MEd": "M/d（E）",
+	"days-standAlone-short": [
+		"日",
+		"一",
+		"二",
+		"三",
+		"四",
+		"五",
+		"六"
+	],
 	"dateFormatItem-hm": "ah:mm",
 	"days-standAlone-abbr": [
 		"周日",
@@ -159,6 +176,15 @@ define(
 		"埃波月",
 		"以祿月"
 	],
+	"days-format-short": [
+		"日",
+		"一",
+		"二",
+		"三",
+		"四",
+		"五",
+		"六"
+	],
 	"dateFormatItem-d": "d日",
 	"quarters-format-wide": [
 		"第1季",
@@ -167,6 +193,9 @@ define(
 		"第4季"
 	],
 	"months-format-wide-leap": "亞達月 II",
+	"eraNarrow": [
+		"創世紀元"
+	],
 	"days-format-wide": [
 		"星期日",
 		"星期一",

@@ -1,4 +1,4 @@
-define("dijit/form/_FormMixin", [
+define([
 	"dojo/_base/array", // array.every array.filter array.forEach array.indexOf array.map
 	"dojo/_base/declare", // declare
 	"dojo/_base/kernel", // kernel.deprecated

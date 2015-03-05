@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/uk/number", //begin v1.x content
+//begin v1.x content
 {
 	"group": " ",
 	"percentSign": "%",
@@ -10,11 +10,12 @@ define(
 	"infinity": "∞",
 	"minusSign": "-",
 	"decimal": ",",
-	"nan": "Не число",
+	"nan": "Не число",
 	"perMille": "‰",
 	"decimalFormat": "#,##0.###",
 	"currencyFormat": "#,##0.00 ¤",
 	"plusSign": "+",
+	"decimalFormat-long": "000 трильйона",
 	"decimalFormat-short": "000 трлн"
 }
 //end v1.x content

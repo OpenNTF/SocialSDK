@@ -1,6 +1,15 @@
 define(
-"dojo/cldr/nls/uz-latn/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"Yaksh",
+		"Dush",
+		"Sesh",
+		"Chor",
+		"Pay",
+		"Cum",
+		"Shan"
+	],
 	"days-format-narrow": [
 		"Y",
 		"D",
@@ -23,6 +32,15 @@ define(
 		"O",
 		"N",
 		"D"
+	],
+	"days-format-short": [
+		"Yaksh",
+		"Dush",
+		"Sesh",
+		"Chor",
+		"Pay",
+		"Cum",
+		"Shan"
 	],
 	"months-standAlone-abbr": [
 		"Yanv",

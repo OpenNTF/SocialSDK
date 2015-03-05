@@ -1,6 +1,15 @@
 define(
-"dojo/cldr/nls/ko/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"일",
+		"월",
+		"화",
+		"수",
+		"목",
+		"금",
+		"토"
+	],
 	"months-format-narrow": [
 		"1월",
 		"2월",
@@ -15,6 +24,12 @@ define(
 		"11월",
 		"12월"
 	],
+	"quarters-standAlone-narrow": [
+		"1",
+		"2",
+		"3",
+		"4"
+	],
 	"field-weekday": "요일",
 	"dateFormatItem-yQQQ": "y년 QQQ",
 	"dateFormatItem-yMEd": "yyyy. M. d. (E)",
@@ -22,6 +37,15 @@ define(
 	"eraNarrow": [
 		"기원전",
 		"서기"
+	],
+	"days-format-short": [
+		"일",
+		"월",
+		"화",
+		"수",
+		"목",
+		"금",
+		"토"
 	],
 	"dateFormat-long": "y년 M월 d일",
 	"months-format-wide": [

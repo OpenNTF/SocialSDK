@@ -1,4 +1,4 @@
-define("dojox/mobile/dh/StringDataSource", [
+define([
 	"dojo/_base/declare"
 ], function(declare){
 

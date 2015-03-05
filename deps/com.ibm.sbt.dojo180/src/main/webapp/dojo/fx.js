@@ -1,4 +1,4 @@
-define("dojo/fx", [
+define([
 	"./_base/lang",
 	"./Evented",
 	"./_base/kernel",

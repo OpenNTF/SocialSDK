@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/ksf/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"field-dayperiod": "Sárúwá / Cɛɛ́nko",
@@ -144,6 +144,15 @@ define(
 	"field-second": "Háu",
 	"field-day": "Ŋwós",
 	"dateFormatItem-MEd": "E d/M",
+	"days-standAlone-short": [
+		"sɔ́n",
+		"lǝn",
+		"maa",
+		"mɛk",
+		"jǝǝ",
+		"júm",
+		"sam"
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"sɔ́n",
@@ -172,6 +181,15 @@ define(
 		"ŋwíí akǝ ntɛk",
 		"ŋwíí akǝ ntɛk di bɔ́k",
 		"ŋwíí akǝ ntɛk di bɛ́ɛ"
+	],
+	"days-format-short": [
+		"sɔ́n",
+		"lǝn",
+		"maa",
+		"mɛk",
+		"jǝǝ",
+		"júm",
+		"sam"
 	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

@@ -4,8 +4,6 @@ The Social Business Toolkit SDK is a set of libraries and code samples that you 
 The SDK can be run on Java-based application servers such WebSphere Application Server, WebSphere Portal, IBM Domino, and Apache Tomcat.
 A built version is distributed on OpenNTF at http://ibmsbt.openntf.org.
 
-You can also collaborate via a community on IBM developerWorks at http://bit.ly/ibmsbtcommunity
-
 OPENNTF
     This project is an OpenNTF project, and is available under the Apache License V2.0.  
     All other aspects of the project, including contributions, defect reports, discussions, 

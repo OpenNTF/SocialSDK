@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/brx/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/yyyy",
 	"field-dayperiod": "फुं/बेलासे",
@@ -172,6 +172,15 @@ define(
 		"न",
 		"दि"
 	],
+	"days-standAlone-short": [
+		"रबि",
+		"सम",
+		"मंगल",
+		"बुद",
+		"बिसथि",
+		"सुखुर",
+		"सुनि"
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"रबि",
@@ -200,6 +209,15 @@ define(
 		"अखथबर",
 		"नबेज्ब़र",
 		"दिसेज्ब़र"
+	],
+	"days-format-short": [
+		"रबि",
+		"सम",
+		"मंगल",
+		"बुद",
+		"बिसथि",
+		"सुखुर",
+		"सुनि"
 	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

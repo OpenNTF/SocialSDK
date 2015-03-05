@@ -1,4 +1,4 @@
-define("dojox/mobile/dh/HtmlContentHandler", [
+define([
 	"dojo/_base/kernel",
 	"dojo/_base/array",
 	"dojo/_base/declare",

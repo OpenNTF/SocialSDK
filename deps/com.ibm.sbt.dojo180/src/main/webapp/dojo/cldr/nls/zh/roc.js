@@ -1,10 +1,11 @@
 define(
-"dojo/cldr/nls/zh/roc", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormat-medium": "Gy-M-d",
 	"dateFormatItem-MMMEd": "M月d日E",
 	"dateFormatItem-MEd": "M-dE",
 	"dateFormatItem-yyyyMMM": "Gy年M月",
+	"dateFormatItem-Hm": "HH:mm",
 	"dateFormatItem-H": "H时",
 	"dateFormatItem-y": "Gy年",
 	"dateFormatItem-hm": "ah:mm",
@@ -14,7 +15,9 @@ define(
 	"dateFormatItem-yyyyMEd": "Gy-M-d（E）",
 	"dateFormatItem-yyyyMM": "Gy-MM",
 	"dateFormatItem-yyyy": "Gy年",
+	"dateFormatItem-Hms": "HH:mm:ss",
 	"dateFormat-long": "Gy年M月d日",
+	"dateFormatItem-ms": "mm:ss",
 	"dateFormat-short": "Gy-M-d",
 	"dateFormatItem-Gy": "Gy年",
 	"dateFormatItem-d": "d日",

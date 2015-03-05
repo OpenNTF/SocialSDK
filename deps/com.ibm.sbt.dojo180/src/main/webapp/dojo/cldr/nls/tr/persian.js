@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/tr/persian", //begin v1.x content
+//begin v1.x content
 {
 	"months-format-wide": [
 		"Ferverdin",
@@ -9,7 +9,7 @@ define(
 		"Mordad",
 		"Şehriver",
 		"Mehr",
-		null,
+		"Aban",
 		"Azer",
 		"Dey",
 		"Behmen",

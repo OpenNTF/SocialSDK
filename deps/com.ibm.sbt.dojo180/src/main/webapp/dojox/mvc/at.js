@@ -1,4 +1,4 @@
-define("dojox/mvc/at", [
+define([
 	"dojo/_base/kernel",
 	"dojo/_base/lang",
 	"./sync",

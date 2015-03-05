@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/mg/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"field-dayperiod": "AM/PM",
@@ -11,7 +11,6 @@ define(
 	],
 	"dateFormatItem-MMMEd": "E d MMM",
 	"field-day-relative+-1": "Omaly",
-	"field-weekday": "Andro",
 	"dateFormatItem-yQQQ": "QQQ y",
 	"dateFormatItem-MMdd": "dd/MM",
 	"days-standAlone-wide": [
@@ -81,7 +80,6 @@ define(
 	],
 	"dateFormat-long": "d MMMM y",
 	"timeFormat-medium": "HH:mm:ss",
-	"field-zone": "Ora",
 	"dateFormatItem-MMd": "d/MM",
 	"dateFormatItem-yyMM": "MM/yy",
 	"dateFormat-medium": "d MMM, y",
@@ -174,6 +172,15 @@ define(
 		"N",
 		"D"
 	],
+	"days-standAlone-short": [
+		"Alah",
+		"Alats",
+		"Tal",
+		"Alar",
+		"Alak",
+		"Zom",
+		"Asab"
+	],
 	"days-standAlone-abbr": [
 		"Alah",
 		"Alats",
@@ -201,6 +208,15 @@ define(
 		"Oktobra",
 		"Novambra",
 		"Desambra"
+	],
+	"days-format-short": [
+		"Alah",
+		"Alats",
+		"Tal",
+		"Alar",
+		"Alak",
+		"Zom",
+		"Asab"
 	],
 	"quarters-format-wide": [
 		"Telovolana voalohany",

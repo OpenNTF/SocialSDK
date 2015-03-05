@@ -8,7 +8,7 @@
   <parent>
     <groupId>com.ibm.sbt</groupId>
     <artifactId>com.ibm.sbt.domino</artifactId>
-    <version>1.1.3-SNAPSHOT</version>
+    <version>1.1.4-SNAPSHOT</version>
   </parent>
 
   <!-- ====================================================================== -->
@@ -46,64 +46,64 @@
   <build>
   	<defaultGoal>package</defaultGoal>
     <plugins>
-      <plugin>
-        <groupId>com.github.goldin</groupId>
-        <artifactId>copy-maven-plugin</artifactId>
-        <version>${com.github.goldin.version}</version>
+                <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.8</version>
+                <executions>
+                
+                                    <execution>
+                        <id>prepare</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>org.opensocial.explorer</groupId>
+                                    <artifactId>opensocial-explorer-webcontent</artifactId>
+                                    <version>${opensocial-explorer-webcontent.version}</version>
+                                    <overWrite>true</overWrite>
+                            <outputDirectory>${project.build.directory}/explorer-resources</outputDirectory>
+                                </artifactItem>
+                            </artifactItems>
+                            <outputDirectory>${project.build.directory}/explorer-resources</outputDirectory>
+                            <overWriteReleases>false</overWriteReleases>
+                            <overWriteSnapshots>true</overWriteSnapshots>
+                        </configuration>
+                    </execution>
+                   
+                </executions>
+            </plugin>
+            
+             <plugin>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>2.7</version>
         <executions>
           <execution>
-            <id>unpack-webcontent</id>
-            <phase>prepare-package</phase>
+            <id>copy-resources</id>
+            <!-- here the phase you need -->
+            <phase>generate-resources</phase>
             <goals>
-              <goal>copy</goal>
+              <goal>copy-resources</goal>
             </goals>
             <configuration>
-              <resources>
+              <outputDirectory>${project.basedir}/WebContent/js</outputDirectory>
+              <resources>          
                 <resource>
-                  <unpack>true</unpack>
-                  <targetPath>${project.build.directory}/webcontent</targetPath>
-                  <dependencies>
-                    <dependency>
-                      <groupId>org.opensocial.explorer</groupId>
-                      <artifactId>opensocial-explorer-webcontent</artifactId>
-                      <version>${opensocial-explorer-webcontent.version}</version>
-                    </dependency>
-                  </dependencies>
-                </resource>
-                <resource>
-                  <targetPath>${project.basedir}/WebContent/js</targetPath>
-                  <directory>${project.build.directory}/webcontent/js/modules</directory>
-                  <preservePath>true</preservePath>
+                  <directory>${project.build.directory}/explorer-resources/js/modules</directory>
+                  <filtering>false</filtering>
+                 
                 </resource>
               </resources>
-            </configuration>
-          </execution>
-          <!-- Runs during the Maven clean phase to remove the copied files -->
-          <execution>
-            <id>clean-explorer</id>
-            <phase>clean</phase>
-            <goals>
-              <goal>copy</goal>
-            </goals>
-            <configuration>
-              <resources>
-                <resource>
-                  <directory>${project.basedir}/WebContent/js</directory>
-                  <includes>
-                    <include>**/*.js</include>
-                    <include>**/*.html</include>
-                    <include>**/*.xml</include>
-                  </includes>
-                  <clean>true</clean>
-                  <cleanEmptyDirectories>true</cleanEmptyDirectories>
-                  <!-- If we can't find the directory that means we are starting from a clean state, don't fail -->
-                  <failIfNotFound>false</failIfNotFound>
-                </resource>
-              </resources>
-            </configuration>
+              <overwrite>true</overwrite>              
+            </configuration>            
           </execution>
         </executions>
       </plugin>
+            
+            
     </plugins>
   </build>
 

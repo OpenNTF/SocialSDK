@@ -1,4 +1,4 @@
-define("dojox/encoding/digests/MD5", ["./_base"], function(dxd) {
+define(["./_base"], function(dxd) {
 
 /*	A port of Paul Johnstone's MD5 implementation
  *	http://pajhome.org.uk/crypt/md5/index.html

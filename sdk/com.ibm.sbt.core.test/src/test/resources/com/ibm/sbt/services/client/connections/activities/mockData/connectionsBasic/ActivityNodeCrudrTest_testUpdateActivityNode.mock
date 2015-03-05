@@ -109,7 +109,7 @@
 
 
   <id>urn:lsid:ibm.com:oa:a4c6c451-6d4e-40b0-a35f-dfa9bceb031a</id>
-  <title type="text">com.ibm.sbt.services.client.connections.activities.ActivityNodeCrudrTest#-1325919357_Activity-1404994041652</title>
+  <title type="text">com.ibm.sbt.services.client.connections.activities.ActivityNodeCrudrTest_Activity-1404994041652</title>
   <updated>2014-07-10T12:06:03Z</updated>
   <published>2014-07-10T12:06:03Z</published>
   <author>
@@ -394,7 +394,7 @@
 
 
   <id>urn:lsid:ibm.com:oa:bdde2cbe-15d7-43fc-9749-e684a88f3793</id>
-  <title type="text">com.ibm.sbt.services.client.connections.activities.ActivityNodeCrudrTest#-1325919357_ActivityNode-1404994041652</title>
+  <title type="text">com.ibm.sbt.services.client.connections.activities.ActivityNodeCrudrTest_ActivityNode-1404994041652</title>
   <updated>2014-07-10T12:06:04Z</updated>
   <published>2014-07-10T12:06:04Z</published>
   <author>
@@ -676,7 +676,7 @@
 
 
   <id>urn:lsid:ibm.com:oa:bdde2cbe-15d7-43fc-9749-e684a88f3793</id>
-  <title type="text">com.ibm.sbt.services.client.connections.activities.ActivityNodeCrudrTest#-1325919357_ActivityNode-1404994041652</title>
+  <title type="text">com.ibm.sbt.services.client.connections.activities.ActivityNodeCrudrTest_ActivityNode-1404994041652</title>
   <updated>2014-07-10T12:06:04Z</updated>
   <published>2014-07-10T12:06:04Z</published>
   <author>
@@ -954,7 +954,7 @@
 
 
   <id>urn:lsid:ibm.com:oa:bdde2cbe-15d7-43fc-9749-e684a88f3793</id>
-  <title type="text">com.ibm.sbt.services.client.connections.activities.ActivityNodeCrudrTest#-1325919357_ActivityNode-1404994054447</title>
+  <title type="text">com.ibm.sbt.services.client.connections.activities.ActivityNodeCrudrTest_ActivityNode-1404994054447</title>
   <updated>2014-07-10T12:06:15Z</updated>
   <published>2014-07-10T12:06:04Z</published>
   <author>
@@ -1236,7 +1236,7 @@
 
 
   <id>urn:lsid:ibm.com:oa:bdde2cbe-15d7-43fc-9749-e684a88f3793</id>
-  <title type="text">com.ibm.sbt.services.client.connections.activities.ActivityNodeCrudrTest#-1325919357_ActivityNode-1404994054447</title>
+  <title type="text">com.ibm.sbt.services.client.connections.activities.ActivityNodeCrudrTest_ActivityNode-1404994054447</title>
   <updated>2014-07-10T12:06:15Z</updated>
   <published>2014-07-10T12:06:04Z</published>
   <author>
@@ -1518,7 +1518,7 @@
 
 
   <id>urn:lsid:ibm.com:oa:bdde2cbe-15d7-43fc-9749-e684a88f3793</id>
-  <title type="text">com.ibm.sbt.services.client.connections.activities.ActivityNodeCrudrTest#-1325919357_ActivityNode-1404994054447</title>
+  <title type="text">com.ibm.sbt.services.client.connections.activities.ActivityNodeCrudrTest_ActivityNode-1404994054447</title>
   <updated>2014-07-10T12:06:15Z</updated>
   <published>2014-07-10T12:06:04Z</published>
   <author>

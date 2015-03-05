@@ -1,4 +1,4 @@
-define("dojox/fx/_core", ["dojo/_base/lang", "dojo/_base/array","./_base"],
+define(["dojo/_base/lang", "dojo/_base/array","./_base"],
 	function(lang, arrayUtil, dojoxFx){
 
 	var line = function(start, end){

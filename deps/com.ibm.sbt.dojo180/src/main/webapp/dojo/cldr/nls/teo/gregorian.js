@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/teo/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"field-dayperiod": "TA/EB",
@@ -12,7 +12,6 @@ define(
 	],
 	"dateFormatItem-MMMEd": "E, MMM d",
 	"field-day-relative+-1": "Jaan",
-	"field-weekday": "Aparan",
 	"dateFormatItem-yQQQ": "QQQ y",
 	"days-standAlone-wide": [
 		"Nakaejuma",
@@ -171,6 +170,15 @@ define(
 		"L",
 		"P"
 	],
+	"days-standAlone-short": [
+		"Jum",
+		"Bar",
+		"Aar",
+		"Uni",
+		"Ung",
+		"Kan",
+		"Sab"
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"Jum",
@@ -199,6 +207,15 @@ define(
 		"Otibar",
 		"Olabor",
 		"Opoo"
+	],
+	"days-format-short": [
+		"Jum",
+		"Bar",
+		"Aar",
+		"Uni",
+		"Ung",
+		"Kan",
+		"Sab"
 	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

@@ -1,4 +1,4 @@
-define("dojox/editor/plugins/ShowBlockNodes", [
+define([
 	"dojo",
 	"dijit",
 	"dojox",

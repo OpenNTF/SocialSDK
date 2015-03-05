@@ -1,4 +1,4 @@
-define("dojox/io/xhrWindowNamePlugin", [
+define([
 	"dojo/_base/kernel",
 	"dojo/_base/json",
 	"dojo/_base/xhr",

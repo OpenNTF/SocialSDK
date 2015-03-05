@@ -1,4 +1,4 @@
-define("dijit/layout/StackController", [
+define([
 	"dojo/_base/array", // array.forEach array.indexOf array.map
 	"dojo/_base/declare", // declare
 	"dojo/dom-class",
@@ -236,7 +236,6 @@ define("dijit/layout/StackController", [
 			this._currentChild = page;
 			newButton.focusNode.setAttribute("tabIndex", "0");
 			var container = registry.byId(this.containerId);
-			container.containerNode.setAttribute("aria-labelledby", newButton.id);
 		},
 
 		onButtonClick: function(/*dijit/_WidgetBase*/ page){

@@ -1,4 +1,4 @@
-define("dojox/dtl/dom", [
+define([
 	"dojo/_base/lang",
 	"./_base",
 	"dojox/string/tokenize",

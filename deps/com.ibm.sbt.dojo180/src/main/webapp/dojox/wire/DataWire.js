@@ -1,5 +1,3 @@
-// wrapped by build app
-define("dojox/wire/DataWire", ["dijit","dojo","dojox","dojo/require!dojox/wire/Wire"], function(dijit,dojo,dojox){
 dojo.provide("dojox.wire.DataWire");
 
 dojo.require("dojox.wire.Wire");
@@ -173,6 +171,4 @@ dojo.declare("dojox.wire.DataWire", dojox.wire.Wire, {
 			this.dataStore.setValue(item, attribute, value);
 		}
 	}
-});
-
 });

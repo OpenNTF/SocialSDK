@@ -1,4 +1,4 @@
-define("dojox/highlight/languages/python", ["../_base"], function(dh){
+define(["../_base"], function(dh){
 
 	var dhc = dh.constants;
 	dh.languages.python = {

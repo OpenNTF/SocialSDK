@@ -1,4 +1,4 @@
-define("dojox/editor/plugins/AutoSave", [
+define([
 	"dojo",
 	"dijit",	// _scopeName
 	"dojox",

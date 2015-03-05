@@ -1,4 +1,4 @@
-define("dojox/grid/enhanced/plugins/Rearrange", [
+define([
 	"dojo/_base/kernel",
 	"dojo/_base/lang",
 	"dojo/_base/declare",

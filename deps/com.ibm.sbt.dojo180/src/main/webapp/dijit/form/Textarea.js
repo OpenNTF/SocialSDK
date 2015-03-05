@@ -1,4 +1,4 @@
-define("dijit/form/Textarea", [
+define([
 	"dojo/_base/declare", // declare
 	"dojo/dom-style", // domStyle.set
 	"./_ExpandingTextAreaMixin",

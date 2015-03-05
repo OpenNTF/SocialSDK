@@ -1,4 +1,4 @@
-define("dojox/collections/ArrayList", ["dojo/_base/kernel", "dojo/_base/array", "./_base"], function(dojo, darray, dxc){
+define(["dojo/_base/kernel", "dojo/_base/array", "./_base"], function(dojo, darray, dxc){
 
 	dxc.ArrayList=function(/*array?*/ arr){
 		// summary:

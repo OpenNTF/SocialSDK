@@ -1,4 +1,4 @@
-define("dojox/grid/_RowSelector", [
+define([
 	"dojo/_base/declare",
 	"./_View"
 ], function(declare, _View){

@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/dua/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"field-dayperiod": "epasi a búnyá",
@@ -171,6 +171,15 @@ define(
 		"t",
 		"e"
 	],
+	"days-standAlone-short": [
+		"ét",
+		"mɔ́s",
+		"kwa",
+		"muk",
+		"ŋgi",
+		"ɗón",
+		"esa"
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"ét",
@@ -199,6 +208,15 @@ define(
 		"mayésɛ́",
 		"tiníní",
 		"eláŋgɛ́"
+	],
+	"days-format-short": [
+		"ét",
+		"mɔ́s",
+		"kwa",
+		"muk",
+		"ŋgi",
+		"ɗón",
+		"esa"
 	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

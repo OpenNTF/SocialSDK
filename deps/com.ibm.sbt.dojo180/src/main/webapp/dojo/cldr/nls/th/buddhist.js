@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/th/buddhist", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/yyyy",
 	"dateFormatItem-yQ": "Q yyyy",
@@ -10,6 +10,15 @@ define(
 	"dateFormatItem-MMMEd": "E d MMM",
 	"dateFormatItem-hms": "h:mm:ss a",
 	"dateFormatItem-yQQQ": "QQQ y",
+	"days-standAlone-wide": [
+		"วันอาทิตย์",
+		"วันจันทร์",
+		"วันอังคาร",
+		"วันพุธ",
+		"วันพฤหัสบดี",
+		"วันศุกร์",
+		"วันเสาร์"
+	],
 	"dateFormatItem-MMM": "LLL",
 	"months-standAlone-narrow": [
 		"ม.ค.",
@@ -26,35 +35,76 @@ define(
 		"ธ.ค."
 	],
 	"dayPeriods-format-wide-am": "ก่อนเที่ยง",
+	"quarters-standAlone-abbr": [
+		"ไตรมาส 1",
+		"ไตรมาส 2",
+		"ไตรมาส 3",
+		"ไตรมาส 4"
+	],
 	"dateFormatItem-y": "G y",
-	"timeFormat-full": "H นาฬิกา m นาที ss วินาที zzzz",
+	"timeFormat-full": "H นาฬิกา mm นาที ss วินาที zzzz",
+	"months-standAlone-abbr": [
+		"ม.ค.",
+		"ก.พ.",
+		"มี.ค.",
+		"เม.ย.",
+		"พ.ค.",
+		"มิ.ย.",
+		"ก.ค.",
+		"ส.ค.",
+		"ก.ย.",
+		"ต.ค.",
+		"พ.ย.",
+		"ธ.ค."
+	],
 	"dateFormatItem-Ed": "E d",
 	"dateFormatItem-yMMM": "MMM y",
 	"days-standAlone-narrow": [
-		"อ",
-		"จ",
-		"อ",
-		"พ",
-		"พ",
-		"ศ",
-		"ส"
+		"อา.",
+		"จ.",
+		"อ.",
+		"พ.",
+		"พฤ.",
+		"ศ.",
+		"ส."
 	],
 	"eraAbbr": [
 		"พ.ศ."
 	],
 	"dateFormatItem-yyyyMMMM": "MMMM y",
 	"dateFormat-long": "d MMMM y",
-	"timeFormat-medium": "H:mm:ss",
-	"dateFormatItem-Hm": "H:mm",
+	"dateFormatItem-Hm": "HH:mm",
 	"dateFormat-medium": "d MMM y",
-	"dateFormatItem-Hms": "H:mm:ss",
+	"dateFormatItem-Hms": "HH:mm:ss",
+	"dayPeriods-format-narrow-pm": "หลังเที่ยง",
 	"dateFormatItem-yMd": "d/M/yyyy",
+	"quarters-standAlone-wide": [
+		"ไตรมาส 1",
+		"ไตรมาส 2",
+		"ไตรมาส 3",
+		"ไตรมาส 4"
+	],
 	"dateFormatItem-yMMMM": "MMMM y",
 	"dateFormatItem-ms": "mm:ss",
+	"dayPeriods-format-narrow-am": "ก่อนเที่ยง",
+	"months-standAlone-wide": [
+		"มกราคม",
+		"กุมภาพันธ์",
+		"มีนาคม",
+		"เมษายน",
+		"พฤษภาคม",
+		"มิถุนายน",
+		"กรกฎาคม",
+		"สิงหาคม",
+		"กันยายน",
+		"ตุลาคม",
+		"พฤศจิกายน",
+		"ธันวาคม"
+	],
 	"dateFormatItem-MMMMEd": "E d MMMM",
 	"dateFormatItem-MMMd": "d MMM",
 	"dateFormatItem-yyQ": "Q yy",
-	"timeFormat-long": "H นาฬิกา m นาที ss วินาที z",
+	"timeFormat-long": "H นาฬิกา mm นาที ss วินาที z",
 	"months-format-abbr": [
 		"ม.ค.",
 		"ก.พ.",
@@ -69,9 +119,14 @@ define(
 		"พ.ย.",
 		"ธ.ค."
 	],
-	"timeFormat-short": "H:mm",
-	"dateFormatItem-H": "H",
+	"dateFormatItem-H": "HH",
 	"dateFormatItem-MMMMd": "d MMMM",
+	"quarters-format-abbr": [
+		"ไตรมาส 1",
+		"ไตรมาส 2",
+		"ไตรมาส 3",
+		"ไตรมาส 4"
+	],
 	"days-format-abbr": [
 		"อา.",
 		"จ.",
@@ -83,6 +138,15 @@ define(
 	],
 	"dateFormatItem-mmss": "mm:ss",
 	"dateFormatItem-M": "L",
+	"days-format-narrow": [
+		"อา.",
+		"จ.",
+		"อ.",
+		"พ.",
+		"พฤ.",
+		"ศ.",
+		"ส."
+	],
 	"dateFormatItem-yMMMd": "d MMM y",
 	"dateFormatItem-MEd": "E, d/M",
 	"months-format-narrow": [
@@ -99,8 +163,26 @@ define(
 		"พ.ย.",
 		"ธ.ค."
 	],
+	"days-standAlone-short": [
+		"อา.",
+		"จ.",
+		"อ.",
+		"พ.",
+		"พฤ.",
+		"ศ.",
+		"ส."
+	],
 	"dateFormatItem-hm": "h:mm a",
-	"dateFormat-short": "d/M/yyyy",
+	"days-standAlone-abbr": [
+		"อา.",
+		"จ.",
+		"อ.",
+		"พ.",
+		"พฤ.",
+		"ศ.",
+		"ส."
+	],
+	"dateFormat-short": "d/M/yy",
 	"dateFormatItem-yyyyM": "M/yyyy",
 	"dateFormatItem-yMMMEd": "E d MMM y",
 	"dateFormat-full": "EEEEที่ d MMMM G y",
@@ -120,6 +202,15 @@ define(
 		"พฤศจิกายน",
 		"ธันวาคม"
 	],
+	"days-format-short": [
+		"อา.",
+		"จ.",
+		"อ.",
+		"พ.",
+		"พฤ.",
+		"ศ.",
+		"ส."
+	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [
 		"ไตรมาส 1",
@@ -138,7 +229,8 @@ define(
 		"วันพฤหัสบดี",
 		"วันศุกร์",
 		"วันเสาร์"
-	]
+	],
+	"dateFormatItem-h": "h a"
 }
 //end v1.x content
 );

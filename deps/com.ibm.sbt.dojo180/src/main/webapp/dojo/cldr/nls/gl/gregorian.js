@@ -1,6 +1,15 @@
 define(
-"dojo/cldr/nls/gl/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"Dom",
+		"Luns",
+		"Mt",
+		"Mc",
+		"Xv",
+		"Ven",
+		"Sáb"
+	],
 	"months-format-narrow": [
 		"X",
 		"F",
@@ -15,13 +24,28 @@ define(
 		"N",
 		"D"
 	],
+	"quarters-standAlone-narrow": [
+		"1",
+		"2",
+		"3",
+		"4"
+	],
 	"field-weekday": "Día da semana",
 	"dateFormatItem-yQQQ": "QQQ y",
-	"dateFormatItem-yMEd": "E, d-M-yyyy",
+	"dateFormatItem-yMEd": "E, d/M/y",
 	"dateFormatItem-MMMEd": "E d MMM",
 	"eraNarrow": [
 		"a.C.",
 		"d.C."
+	],
+	"days-format-short": [
+		"Dom",
+		"Luns",
+		"Mt",
+		"Mc",
+		"Xv",
+		"Ve",
+		"Sáb"
 	],
 	"dateFormat-long": "dd MMMM y",
 	"months-format-wide": [
@@ -38,6 +62,7 @@ define(
 		"Novembro",
 		"Decembro"
 	],
+	"dateTimeFormat-medium": "{1} {0}",
 	"dayPeriods-format-wide-pm": "p.m.",
 	"dateFormat-full": "EEEE dd MMMM y",
 	"dateFormatItem-Md": "d-M",
@@ -92,6 +117,7 @@ define(
 	"field-day-relative+0": "hoxe",
 	"field-day-relative+1": "mañá",
 	"field-day-relative+2": "pasadomañá",
+	"dateFormatItem-H": "HH",
 	"months-standAlone-abbr": [
 		"Xan",
 		"Feb",
@@ -161,10 +187,13 @@ define(
 		"4"
 	],
 	"field-day-relative+-1": "onte",
+	"dateFormatItem-h": "h a",
+	"dateTimeFormat-long": "{1} {0}",
 	"dayPeriods-format-narrow-am": "a",
 	"field-day-relative+-2": "antonte",
 	"dateFormatItem-MMMd": "d MMM",
 	"dateFormatItem-MEd": "E, d-M",
+	"dateTimeFormat-full": "{1} {0}",
 	"dateFormatItem-yMMMM": "MMMM y",
 	"field-day": "Día",
 	"days-format-wide": [
@@ -195,6 +224,7 @@ define(
 	"field-year-relative+-1": "Ano pasado",
 	"field-month-relative+-1": "Mes pasado",
 	"dateFormatItem-yyMM": "MM/yy",
+	"dateFormatItem-hm": "h:mm a",
 	"dayPeriods-format-abbr-pm": "p.m.",
 	"days-format-abbr": [
 		"Dom",
@@ -235,16 +265,19 @@ define(
 	"dateFormatItem-MMMMdd": "dd MMMM",
 	"dateFormat-short": "dd/MM/yy",
 	"field-second": "Segundo",
-	"dateFormatItem-yMMMEd": "E, d MMM y",
+	"dateFormatItem-yMMMEd": "E, d MMM, y",
 	"field-month-relative+0": "Este mes",
 	"field-month-relative+1": "Mes seguinte",
-	"dateFormatItem-Ed": "E d",
+	"dateFormatItem-Ed": "d E",
 	"field-week": "Semana",
 	"dateFormat-medium": "d MMM, y",
 	"field-year-relative+0": "Este ano",
 	"field-week-relative+-1": "Semana pasada",
 	"field-year-relative+1": "Seguinte ano",
 	"dayPeriods-format-narrow-pm": "p",
+	"dateTimeFormat-short": "{1} {0}",
+	"dateFormatItem-Hms": "HH:mm:ss",
+	"dateFormatItem-hms": "h:mm:ss a",
 	"field-week-relative+0": "Esta semana",
 	"field-week-relative+1": "Semana seguinte"
 }

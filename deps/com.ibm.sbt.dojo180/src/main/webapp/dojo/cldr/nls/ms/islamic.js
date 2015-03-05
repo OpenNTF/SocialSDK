@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/ms/islamic", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M-y",
 	"dateFormatItem-yyyyMMMEd": "E, d MMM y G",
@@ -7,6 +7,15 @@ define(
 	"dayPeriods-format-wide-pm": "PTG",
 	"dateFormatItem-MMMEd": "E, d MMM",
 	"dateFormatItem-yQQQ": "QQQ y",
+	"days-standAlone-wide": [
+		"Ahad",
+		"Isnin",
+		"Selasa",
+		"Rabu",
+		"Khamis",
+		"Jumaat",
+		"Sabtu"
+	],
 	"dayPeriods-format-wide-am": "PG",
 	"quarters-standAlone-abbr": [
 		"Suku 1",
@@ -68,14 +77,41 @@ define(
 	],
 	"dateFormatItem-yMMMd": "d MMM y",
 	"dateFormatItem-MEd": "E, d/M",
+	"days-standAlone-short": [
+		"Ah",
+		"Is",
+		"Se",
+		"Ra",
+		"Kh",
+		"Ju",
+		"Sa"
+	],
+	"days-standAlone-abbr": [
+		"Ahd",
+		"Isn",
+		"Sel",
+		"Rab",
+		"Kha",
+		"Jum",
+		"Sab"
+	],
 	"dayPeriods-format-abbr-pm": "ptg",
 	"dateFormat-short": "d/MM/y G",
 	"dateFormatItem-yyyyM": "M/y G",
 	"dateFormatItem-yMMMEd": "E, d MMM y",
 	"dateFormat-full": "EEEE, d MMMM y G",
 	"dateFormatItem-Md": "d/M",
-	"dateFormatItem-yMEd": "E, d-M-yyyy",
+	"dateFormatItem-yMEd": "E, d/M/y",
 	"dayPeriods-format-abbr-am": "pg",
+	"days-format-short": [
+		"Ah",
+		"Is",
+		"Se",
+		"Ra",
+		"Kh",
+		"Ju",
+		"Sa"
+	],
 	"dateFormatItem-yyyyMMM": "MMM y G",
 	"quarters-format-wide": [
 		"Suku pertama",

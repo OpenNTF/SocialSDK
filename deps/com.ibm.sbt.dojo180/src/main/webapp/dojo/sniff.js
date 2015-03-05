@@ -1,4 +1,4 @@
-define("dojo/sniff", ["./has"], function(has){
+define(["./has"], function(has){
 	// module:
 	//		dojo/sniff
 
@@ -10,7 +10,7 @@ define("dojo/sniff", ["./has"], function(has){
 	};
 	=====*/
 
-	if( 1 ){
+	if(has("host-browser")){
 		var n = navigator,
 			dua = n.userAgent,
 			dav = n.appVersion,
@@ -25,6 +25,7 @@ define("dojo/sniff", ["./has"], function(has){
 		has.add("quirks", document.compatMode == "BackCompat");
 		has.add("ios", /iPhone|iPod|iPad/.test(dua));
 		has.add("android", parseFloat(dua.split("Android ")[1]) || undefined);
+		has.add("trident", parseFloat(dav.split("Trident/")[1]) || undefined);
 
 		if(!has("webkit")){
 			// Opera
@@ -35,7 +36,7 @@ define("dojo/sniff", ["./has"], function(has){
 			}
 
 			// Mozilla and firefox
-			if(dua.indexOf("Gecko") >= 0 && !has("khtml") && !has("webkit")){
+			if(dua.indexOf("Gecko") >= 0 && !has("khtml") && !has("webkit") && !has("trident")){
 				has.add("mozilla", tv);
 			}
 			if(has("mozilla")){
@@ -60,7 +61,7 @@ define("dojo/sniff", ["./has"], function(has){
 
 				has.add("ie", isIE);
 			}
-
+			
 			// Wii
 			has.add("wii", typeof opera != "undefined" && opera.wiiremote);
 		}

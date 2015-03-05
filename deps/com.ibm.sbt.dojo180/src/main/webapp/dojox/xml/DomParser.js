@@ -1,4 +1,4 @@
-define("dojox/xml/DomParser", [
+define([
 	"dojo/_base/kernel",// dojo.getObject
 	"dojo/_base/array"	// dojo.forEach
 ], function(dojo){

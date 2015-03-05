@@ -1,4 +1,4 @@
-define("dojox/drawing/defaults", {
+define({
 	// summary:
 	//		Styles and defaults used for Drawing stencils and text.
 	// description:

@@ -1,4 +1,4 @@
-define("dojox/editor/plugins/nls/AutoSave", { root:
+define({ root:
 //begin v1.x content
 ({
 	"saveLabel": "Save",

@@ -1,6 +1,15 @@
 define(
-"dojo/cldr/nls/sh/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"nedelja",
+		"ponedeljak",
+		"utorak",
+		"sreda",
+		"četvrtak",
+		"petak",
+		"subota"
+	],
 	"months-format-narrow": [
 		"j",
 		"f",
@@ -30,6 +39,15 @@ define(
 		"n. e"
 	],
 	"dateFormatItem-MMMdd": "dd.MMM",
+	"days-format-short": [
+		"nedelja",
+		"ponedeljak",
+		"utorak",
+		"sreda",
+		"četvrtak",
+		"petak",
+		"subota"
+	],
 	"dateFormat-long": "dd. MMMM y.",
 	"months-format-wide": [
 		"januar",

@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/rof/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"field-dayperiod": "Nkwaya",
@@ -171,6 +171,15 @@ define(
 		"I",
 		"I"
 	],
+	"days-standAlone-short": [
+		"Ijp",
+		"Ijt",
+		"Ijn",
+		"Ijtn",
+		"Alh",
+		"Iju",
+		"Ijm"
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"Ijp",
@@ -199,6 +208,15 @@ define(
 		"Mweri wa ikumi",
 		"Mweri wa ikumi na moja",
 		"Mweri wa ikumi na mbili"
+	],
+	"days-format-short": [
+		"Ijp",
+		"Ijt",
+		"Ijn",
+		"Ijtn",
+		"Alh",
+		"Iju",
+		"Ijm"
 	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

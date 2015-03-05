@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/ti/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormat-medium": "dd-MMM-y",
 	"dateFormatItem-MMdd": "dd/MM",
@@ -22,6 +22,15 @@ define(
 		"ዲ"
 	],
 	"timeFormat-full": "h:mm:ss a zzzz",
+	"days-format-short": [
+		"ሰንበት",
+		"ሰኑይ",
+		"ሠሉስ",
+		"ረቡዕ",
+		"ኃሙስ",
+		"ዓርቢ",
+		"ቀዳም"
+	],
 	"months-standAlone-narrow": [
 		"ጃ",
 		"ፌ",
@@ -78,6 +87,15 @@ define(
 		"ኦክተ",
 		"ኖቬም",
 		"ዲሴም"
+	],
+	"days-standAlone-short": [
+		"ሰንበት",
+		"ሰኑይ",
+		"ሠሉስ",
+		"ረቡዕ",
+		"ኃሙስ",
+		"ዓርቢ",
+		"ቀዳም"
 	],
 	"dayPeriods-format-wide-am": "ንጉሆ ሰዓተ",
 	"timeFormat-medium": "h:mm:ss a",

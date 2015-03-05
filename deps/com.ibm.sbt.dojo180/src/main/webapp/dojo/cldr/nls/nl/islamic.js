@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/nl/islamic", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M-y",
 	"dateFormatItem-yyyyMMMEd": "E d MMM y G",
@@ -10,6 +10,15 @@ define(
 	"dateFormatItem-MMMEd": "E d MMM",
 	"dateFormatItem-yQQQ": "QQQ y",
 	"dateFormatItem-MMdd": "dd-MM",
+	"days-standAlone-wide": [
+		"zondag",
+		"maandag",
+		"dinsdag",
+		"woensdag",
+		"donderdag",
+		"vrijdag",
+		"zaterdag"
+	],
 	"dateFormatItem-MMM": "LLL",
 	"months-standAlone-narrow": [
 		"1",
@@ -24,6 +33,12 @@ define(
 		"10",
 		"11",
 		"12"
+	],
+	"quarters-standAlone-abbr": [
+		"K1",
+		"K2",
+		"K3",
+		"K4"
 	],
 	"dateFormatItem-yyyy": "y G",
 	"months-standAlone-abbr": [
@@ -63,6 +78,12 @@ define(
 	"dateFormatItem-yyMMM": "MMM yy G",
 	"dateFormatItem-yyQQQQ": "QQQQ yy G",
 	"dateFormatItem-yMd": "d-M-y",
+	"quarters-standAlone-wide": [
+		"1e kwartaal",
+		"2e kwartaal",
+		"3e kwartaal",
+		"4e kwartaal"
+	],
 	"dateFormatItem-ms": "mm:ss",
 	"months-standAlone-wide": [
 		"Moeharram",
@@ -114,9 +135,36 @@ define(
 		"za"
 	],
 	"dateFormatItem-M": "L",
+	"days-format-narrow": [
+		"Z",
+		"M",
+		"D",
+		"W",
+		"D",
+		"V",
+		"Z"
+	],
 	"dateFormatItem-yMMMd": "d MMM y",
 	"dateFormatItem-yyyyQQQ": "QQQ y G",
 	"dateFormatItem-MEd": "E d-M",
+	"days-standAlone-short": [
+		"zo",
+		"ma",
+		"di",
+		"wo",
+		"do",
+		"vr",
+		"za"
+	],
+	"days-standAlone-abbr": [
+		"zo",
+		"ma",
+		"di",
+		"wo",
+		"do",
+		"vr",
+		"za"
+	],
 	"dateFormat-short": "dd-MM-yy G",
 	"dateFormatItem-yyyyM": "M-y G",
 	"dateFormatItem-yMMMEd": "E d MMM y",
@@ -137,6 +185,15 @@ define(
 		"Sjawal",
 		"Doe al kaʻaba",
 		"Doe al hizja"
+	],
+	"days-format-short": [
+		"zo",
+		"ma",
+		"di",
+		"wo",
+		"do",
+		"vr",
+		"za"
 	],
 	"dateFormatItem-yyyyMMM": "MMM y G",
 	"dateFormatItem-d": "d",

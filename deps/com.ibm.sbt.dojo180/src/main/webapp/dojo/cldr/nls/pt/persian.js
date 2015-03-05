@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/pt/persian", //begin v1.x content
+//begin v1.x content
 {
 	"months-format-abbr": [
 		"Farvardin",

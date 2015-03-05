@@ -1,6 +1,15 @@
 define(
-"dojo/cldr/nls/lv/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"Sv",
+		"P",
+		"O",
+		"T",
+		"C",
+		"Pk",
+		"S"
+	],
 	"months-format-narrow": [
 		"J",
 		"F",
@@ -23,11 +32,20 @@ define(
 	],
 	"field-weekday": "Nedēļas diena",
 	"dateFormatItem-yQQQ": "y QQQ",
-	"dateFormatItem-yMEd": "E, dd.MM.yyyy.",
+	"dateFormatItem-yMEd": "E, d.M.y.",
 	"dateFormatItem-MMMEd": "E, d. MMM",
 	"eraNarrow": [
 		"p.m.ē.",
 		"m.ē."
+	],
+	"days-format-short": [
+		"Sv",
+		"Pr",
+		"Ot",
+		"Tr",
+		"Ce",
+		"Pk",
+		"Se"
 	],
 	"dateFormat-long": "y. 'gada' d. MMMM",
 	"months-format-wide": [
@@ -44,24 +62,26 @@ define(
 		"novembris",
 		"decembris"
 	],
+	"dateTimeFormat-medium": "{1} {0}",
 	"dayPeriods-format-wide-pm": "pēcpusdienā",
 	"dateFormat-full": "EEEE, y. 'gada' d. MMMM",
 	"dateFormatItem-Md": "dd.MM.",
-	"field-era": "ēra",
+	"dateFormatItem-yMd": "d.M.y.",
+	"field-era": "Ēra",
 	"dateFormatItem-yM": "MM.yyyy.",
 	"months-standAlone-wide": [
-		"janvāris",
-		"februāris",
-		"marts",
-		"aprīlis",
-		"maijs",
-		"jūnijs",
-		"jūlijs",
-		"augusts",
-		"septembris",
-		"oktobris",
-		"novembris",
-		"decembris"
+		"Janvāris",
+		"Februāris",
+		"Marts",
+		"Aprīlis",
+		"Maijs",
+		"Jūnijs",
+		"Jūlijs",
+		"Augusts",
+		"Septembris",
+		"Oktobris",
+		"Novembris",
+		"Decembris"
 	],
 	"timeFormat-short": "HH:mm",
 	"quarters-format-wide": [
@@ -96,18 +116,18 @@ define(
 	"field-day-relative+2": "parīt",
 	"dateFormatItem-H": "HH",
 	"months-standAlone-abbr": [
-		"janv.",
-		"febr.",
-		"marts",
-		"apr.",
-		"maijs",
-		"jūn.",
-		"jūl.",
-		"aug.",
-		"sept.",
-		"okt.",
-		"nov.",
-		"dec."
+		"Janv.",
+		"Febr.",
+		"Marts",
+		"Apr.",
+		"Maijs",
+		"Jūn.",
+		"Jūl.",
+		"Aug.",
+		"Sept.",
+		"Okt.",
+		"Nov.",
+		"Dec."
 	],
 	"quarters-format-abbr": [
 		"C1",
@@ -123,13 +143,13 @@ define(
 	],
 	"dateFormatItem-M": "L",
 	"days-standAlone-wide": [
-		"svētdiena",
-		"pirmdiena",
-		"otrdiena",
-		"trešdiena",
-		"ceturtdiena",
-		"piektdiena",
-		"sestdiena"
+		"Svētdiena",
+		"Pirmdiena",
+		"Otrdiena",
+		"Trešdiena",
+		"Ceturtdiena",
+		"Piektdiena",
+		"Sestdiena"
 	],
 	"dateFormatItem-MMMMd": "d. MMMM",
 	"timeFormat-medium": "HH:mm:ss",
@@ -145,7 +165,7 @@ define(
 		"m.ē."
 	],
 	"field-minute": "Minūtes",
-	"field-dayperiod": "Dayperiod",
+	"field-dayperiod": "Pirmspusd./pēcpusd.",
 	"days-standAlone-abbr": [
 		"Sv",
 		"Pr",
@@ -165,11 +185,13 @@ define(
 	],
 	"field-day-relative+-1": "vakar",
 	"dateFormatItem-h": "h a",
+	"dateTimeFormat-long": "{1} {0}",
 	"field-day-relative+-2": "aizvakar",
 	"dateFormatItem-MMMd": "d. MMM",
 	"dateFormatItem-MEd": "E, dd.MM.",
+	"dateTimeFormat-full": "{1} {0}",
 	"dateFormatItem-yMMMM": "y. 'g'. MMMM",
-	"field-day": "diena",
+	"field-day": "Diena",
 	"days-format-wide": [
 		"svētdiena",
 		"pirmdiena",
@@ -179,7 +201,7 @@ define(
 		"piektdiena",
 		"sestdiena"
 	],
-	"field-zone": "Josla",
+	"field-zone": "Laika josla",
 	"dateFormatItem-y": "y. 'g'.",
 	"months-standAlone-narrow": [
 		"J",
@@ -207,6 +229,7 @@ define(
 		"Pk",
 		"Se"
 	],
+	"dateFormatItem-yMMMd": "y. 'g'. d. MMM",
 	"eraNames": [
 		"pirms mūsu ēras",
 		"mūsu ērā"
@@ -220,7 +243,6 @@ define(
 		"P",
 		"S"
 	],
-	"field-month": "Mēnesis",
 	"days-standAlone-narrow": [
 		"S",
 		"P",
@@ -231,11 +253,12 @@ define(
 		"S"
 	],
 	"dateFormatItem-MMM": "LLL",
+	"field-month": "Mēnesis",
 	"dayPeriods-format-wide-am": "priekšpusdienā",
 	"dateFormatItem-MMMMEd": "E, d. MMMM",
 	"dateFormat-short": "dd.MM.yy",
 	"field-second": "Sekundes",
-	"dateFormatItem-yMMMEd": "E, yyyy. 'g'. dd. MMM",
+	"dateFormatItem-yMMMEd": "E, y. 'g'. d. MMM",
 	"field-month-relative+0": "Šomēnes",
 	"field-month-relative+1": "Nākammēnes",
 	"dateFormatItem-Ed": "E, d.",
@@ -245,6 +268,7 @@ define(
 	"field-week-relative+-1": "Pagājušajā nedēļā",
 	"field-year-relative+1": "Nākamgad",
 	"dateFormatItem-mmss": "mm:ss",
+	"dateTimeFormat-short": "{1} {0}",
 	"dateFormatItem-Hms": "HH:mm:ss",
 	"dateFormatItem-hms": "h:mm:ss a",
 	"dateFormatItem-yyyy": "y. 'g'.",

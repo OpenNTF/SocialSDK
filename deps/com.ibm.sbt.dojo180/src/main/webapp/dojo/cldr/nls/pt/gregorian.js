@@ -1,6 +1,15 @@
 define(
-"dojo/cldr/nls/pt/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"dom",
+		"seg",
+		"ter",
+		"qua",
+		"qui",
+		"sex",
+		"sáb"
+	],
 	"months-format-narrow": [
 		"J",
 		"F",
@@ -15,6 +24,12 @@ define(
 		"N",
 		"D"
 	],
+	"quarters-standAlone-narrow": [
+		"1",
+		"2",
+		"3",
+		"4"
+	],
 	"field-weekday": "Dia da semana",
 	"dateFormatItem-yQQQ": "y QQQ",
 	"dateFormatItem-yyMMMEd": "E, d 'de' MMM 'de' yy",
@@ -25,6 +40,15 @@ define(
 		"d.C."
 	],
 	"dayPeriods-format-wide-morning": "manhã",
+	"days-format-short": [
+		"dom",
+		"seg",
+		"ter",
+		"qua",
+		"qui",
+		"sex",
+		"sáb"
+	],
 	"dateFormat-long": "d 'de' MMMM 'de' y",
 	"months-format-wide": [
 		"janeiro",
@@ -40,6 +64,8 @@ define(
 		"novembro",
 		"dezembro"
 	],
+	"dateTimeFormat-medium": "{1} {0}",
+	"dayPeriods-format-wide-pm": "PM",
 	"dateFormat-full": "EEEE, d 'de' MMMM 'de' y",
 	"dateFormatItem-Md": "d/M",
 	"dayPeriods-format-abbr-am": "AM",
@@ -68,7 +94,7 @@ define(
 		"3º trimestre",
 		"4º trimestre"
 	],
-	"timeFormat-long": "HH'h'mm'min'ss's' z",
+	"timeFormat-long": "HH:mm:ss z",
 	"field-year": "Ano",
 	"dateFormatItem-yMMM": "MMM 'de' y",
 	"dateFormatItem-yQ": "yyyy Q",
@@ -89,10 +115,11 @@ define(
 		"dez"
 	],
 	"dateFormatItem-yyQ": "Q yy",
-	"timeFormat-full": "HH'h'mm'min'ss's' zzzz",
+	"timeFormat-full": "HH:mm:ss zzzz",
 	"field-day-relative+0": "Hoje",
 	"field-day-relative+1": "Amanhã",
 	"field-day-relative+2": "Depois de amanhã",
+	"dateFormatItem-H": "HH",
 	"months-standAlone-abbr": [
 		"jan",
 		"fev",
@@ -119,7 +146,7 @@ define(
 		"3º trimestre",
 		"4º trimestre"
 	],
-	"dateFormatItem-HHmmss": "HH'h'mm'min'ss's'",
+	"dateFormatItem-HHmmss": "HH:mm:ss",
 	"dateFormatItem-M": "L",
 	"days-standAlone-wide": [
 		"domingo",
@@ -133,7 +160,7 @@ define(
 	"dateFormatItem-yyyyMMM": "MMM 'de' y",
 	"dateFormatItem-yyMMM": "MMM 'de' yy",
 	"timeFormat-medium": "HH:mm:ss",
-	"dateFormatItem-Hm": "HH'h'mm",
+	"dateFormatItem-Hm": "HH:mm",
 	"quarters-standAlone-abbr": [
 		"T1",
 		"T2",
@@ -158,7 +185,7 @@ define(
 	"dayPeriods-format-wide-night": "noite",
 	"dateFormatItem-yyMMMd": "d 'de' MMM 'de' yy",
 	"dateFormatItem-d": "d",
-	"dateFormatItem-ms": "mm'min'ss's'",
+	"dateFormatItem-ms": "mm:ss",
 	"quarters-format-narrow": [
 		"1",
 		"2",
@@ -166,10 +193,13 @@ define(
 		"4"
 	],
 	"field-day-relative+-1": "Ontem",
+	"dateFormatItem-h": "h a",
+	"dateTimeFormat-long": "{1} {0}",
 	"dayPeriods-format-narrow-am": "a",
 	"field-day-relative+-2": "Anteontem",
 	"dateFormatItem-MMMd": "d 'de' MMM",
 	"dateFormatItem-MEd": "E, dd/MM",
+	"dateTimeFormat-full": "{1} {0}",
 	"field-day": "Dia",
 	"days-format-wide": [
 		"domingo",
@@ -200,6 +230,7 @@ define(
 	"field-year-relative+-1": "Ano passado",
 	"field-month-relative+-1": "Mês passado",
 	"dateFormatItem-yyMM": "MM/yy",
+	"dateFormatItem-hm": "h:mm a",
 	"dayPeriods-format-abbr-pm": "PM",
 	"days-format-abbr": [
 		"dom",
@@ -224,7 +255,6 @@ define(
 		"S",
 		"S"
 	],
-	"field-month": "Mês",
 	"days-standAlone-narrow": [
 		"D",
 		"S",
@@ -235,7 +265,9 @@ define(
 		"S"
 	],
 	"dateFormatItem-MMM": "LLL",
-	"dateFormatItem-HHmm": "HH'h'mm",
+	"field-month": "Mês",
+	"dateFormatItem-HHmm": "HH:mm",
+	"dayPeriods-format-wide-am": "AM",
 	"dateFormat-short": "dd/MM/yy",
 	"dayPeriods-format-wide-afternoon": "tarde",
 	"field-second": "Segundo",
@@ -249,6 +281,9 @@ define(
 	"field-week-relative+-1": "Semana passada",
 	"field-year-relative+1": "Próximo ano",
 	"dayPeriods-format-narrow-pm": "p",
+	"dateTimeFormat-short": "{1} {0}",
+	"dateFormatItem-Hms": "HH:mm:ss",
+	"dateFormatItem-hms": "h:mm:ss a",
 	"field-week-relative+0": "Esta semana",
 	"field-week-relative+1": "Próxima semana"
 }

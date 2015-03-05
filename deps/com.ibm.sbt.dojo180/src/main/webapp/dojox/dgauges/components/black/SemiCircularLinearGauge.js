@@ -1,4 +1,4 @@
-define("dojox/dgauges/components/black/SemiCircularLinearGauge", ["dojo/_base/lang", "dojo/_base/declare", "dojo/_base/Color", 
+define(["dojo/_base/lang", "dojo/_base/declare", "dojo/_base/Color", 
 		"../../CircularGauge", 
 		"../../LinearScaler", 
 		"../../CircularScale", 

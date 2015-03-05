@@ -1,6 +1,6 @@
 // TODO: auto scroll?
 
-define("dojox/mobile/_EditableListMixin", [
+define([
 	"dojo/_base/array",
 	"dojo/_base/connect",
 	"dojo/_base/declare",

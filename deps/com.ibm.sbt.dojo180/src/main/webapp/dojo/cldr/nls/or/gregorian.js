@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/or/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormat-medium": "d MMM y",
 	"dateFormatItem-MMdd": "dd-MM",
@@ -18,6 +18,15 @@ define(
 		"ଡି"
 	],
 	"timeFormat-full": "h:mm:ss a zzzz",
+	"days-format-short": [
+		"ରବି",
+		"ସୋମ",
+		"ମଙ୍ଗଳ",
+		"ବୁଧ",
+		"ଗୁରୁ",
+		"ଶୁକ୍ର",
+		"ଶନି"
+	],
 	"months-standAlone-narrow": [
 		"ଜା",
 		"ଫେ",
@@ -72,6 +81,15 @@ define(
 		"ନଭେମ୍ବର",
 		"ଡିସେମ୍ବର"
 	],
+	"days-standAlone-short": [
+		"ରବି",
+		"ସୋମ",
+		"ମଙ୍ଗଳ",
+		"ବୁଧ",
+		"ଗୁରୁ",
+		"ଶୁକ୍ର",
+		"ଶନି"
+	],
 	"dayPeriods-format-wide-am": "am",
 	"dateFormatItem-yyyyMM": "MM-yyyy",
 	"timeFormat-medium": "h:mm:ss a",
@@ -110,16 +128,8 @@ define(
 		"ଶୁ",
 		"ଶ"
 	],
+	"dayPeriods-format-narrow-pm": "pm",
 	"timeFormat-short": "h:mm a",
-	"days-standAlone-abbr": [
-		"ରବି",
-		"ସୋମ",
-		"ମଙ୍ଗଳ",
-		"ବୁଧ",
-		"ଗୁରୁ",
-		"ଶୁକ୍ର",
-		"ଶନି"
-	],
 	"months-format-abbr": [
 		"ଜାନୁଆରୀ",
 		"ଫେବ୍ରୁୟାରୀ",
@@ -134,6 +144,15 @@ define(
 		"ନଭେମ୍ବର",
 		"ଡିସେମ୍ବର"
 	],
+	"days-standAlone-abbr": [
+		"ରବି",
+		"ସୋମ",
+		"ମଙ୍ଗଳ",
+		"ବୁଧ",
+		"ଗୁରୁ",
+		"ଶୁକ୍ର",
+		"ଶନି"
+	],
 	"days-format-wide": [
 		"ରବିବାର",
 		"ସୋମବାର",
@@ -144,6 +163,7 @@ define(
 		"ଶନିବାର"
 	],
 	"timeFormat-long": "h:mm:ss a z",
+	"dayPeriods-format-narrow-am": "am",
 	"dateFormat-full": "EEEE, d MMMM y",
 	"days-format-abbr": [
 		"ରବି",

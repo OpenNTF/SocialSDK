@@ -1,4 +1,4 @@
-define("dojox/gfx/vml", ["dojo/_base/lang", "dojo/_base/declare", "dojo/_base/array", "dojo/_base/Color", "dojo/_base/sniff",
+define(["dojo/_base/lang", "dojo/_base/declare", "dojo/_base/array", "dojo/_base/Color", "dojo/_base/sniff",
 		"dojo/_base/config", "dojo/dom", "dojo/dom-geometry", "dojo/_base/kernel",
 		"./_base", "./shape", "./path", "./arc", "./gradient", "./matrix"],
 function(lang, declare, arr, Color, has, config, dom, domGeom, kernel, g, gs, pathLib, arcLib, gradient, m){
@@ -1027,7 +1027,21 @@ function(lang, declare, arr, Color, has, config, dom, domGeom, kernel, g, gs, pa
 		_closePath: function(){
 			this.lastControl.type = "";	// no control point after this primitive
 			return ["x"];
-		}
+		},
+		_getRealBBox: function(){ 
+			//	summary: 
+			//		returns an array of four points or null 
+			//		This is called by setFill, which actually creates the path, so we want to avoid 
+			//		duping the path repeatedly in the shape by clearing the path before re-add. 
+			this._confirmSegmented(); 
+			if(this.tbbox){ 
+				return this.tbbox;	// Array 
+			} 
+			if(typeof this.shape.path == "string"){ 
+				this.shape.path = ""; 
+			} 
+			return this.inherited(arguments); 
+		} 		
 	});
 	vml.Path.nodeType = "shape";
 

@@ -1,4 +1,4 @@
-define("dojo/request/registry", [
+define([
 	'require',
 	'../_base/array',
 	'./default!platform',

@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/ps/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormat-medium": "d MMM y",
 	"dateFormatItem-Hm": "H:mm",
@@ -9,6 +9,15 @@ define(
 		"م."
 	],
 	"timeFormat-full": "H:mm:ss (zzzz)",
+	"days-format-short": [
+		"یکشنبه",
+		"دوشنبه",
+		"سهشنبه",
+		"چهارشنبه",
+		"پنجشنبه",
+		"جمعه",
+		"شنبه"
+	],
 	"months-standAlone-wide": [
 		"جنوري",
 		"فبروري",
@@ -42,6 +51,15 @@ define(
 		"نومبر",
 		"دسمبر"
 	],
+	"days-standAlone-short": [
+		"یکشنبه",
+		"دوشنبه",
+		"سهشنبه",
+		"چهارشنبه",
+		"پنجشنبه",
+		"جمعه",
+		"شنبه"
+	],
 	"dayPeriods-format-wide-am": "غ.م.",
 	"timeFormat-medium": "H:mm:ss",
 	"dateFormatItem-Hms": "H:mm:ss",
@@ -71,15 +89,6 @@ define(
 		"شنبه"
 	],
 	"timeFormat-short": "H:mm",
-	"days-standAlone-abbr": [
-		"یکشنبه",
-		"دوشنبه",
-		"سهشنبه",
-		"چهارشنبه",
-		"پنجشنبه",
-		"جمعه",
-		"شنبه"
-	],
 	"months-format-abbr": [
 		"جنوري",
 		"فبروري",
@@ -93,6 +102,15 @@ define(
 		"اکتوبر",
 		"نومبر",
 		"دسمبر"
+	],
+	"days-standAlone-abbr": [
+		"یکشنبه",
+		"دوشنبه",
+		"سهشنبه",
+		"چهارشنبه",
+		"پنجشنبه",
+		"جمعه",
+		"شنبه"
 	],
 	"days-format-wide": [
 		"یکشنبه",

@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/ga/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"quarters-standAlone-wide": [
 		"1ú ráithe",
@@ -39,6 +39,15 @@ define(
 		"D",
 		"S",
 		"N"
+	],
+	"days-format-short": [
+		"Domh",
+		"Luan",
+		"Máirt",
+		"Céad",
+		"Déar",
+		"Aoine",
+		"Sath"
 	],
 	"months-standAlone-narrow": [
 		"E",
@@ -86,6 +95,15 @@ define(
 		"DFómh",
 		"Samh",
 		"Noll"
+	],
+	"days-standAlone-short": [
+		"Domh",
+		"Luan",
+		"Máirt",
+		"Céad",
+		"Déar",
+		"Aoine",
+		"Sath"
 	],
 	"dayPeriods-format-wide-am": "a.m.",
 	"field-day-relative+0": "Inniu",

@@ -1,4 +1,4 @@
-define("dojox/calendar/ViewBase", [
+define([
 "dojo/_base/declare", 
 "dojo/_base/lang", 
 "dojo/_base/array", 
@@ -10,6 +10,7 @@ define("dojox/calendar/ViewBase", [
 "dojo/dom", 
 "dojo/dom-style",
 "dojo/dom-construct", 
+"dojo/dom-geometry",
 "dojo/on", 
 "dojo/date", 
 "dojo/date/locale", 
@@ -30,7 +31,8 @@ function(
 	query, 
 	dom, 
 	domStyle,
-	domConstruct, 
+	domConstruct,
+	domGeometry,
 	on, 
 	date, 
 	locale, 
@@ -639,9 +641,9 @@ function(
 				// reset
 				if(this._domScroll !== undefined){
 					if(this._domScroll){
-						domStyle.set(this.sheetContainer, this._cssPrefix+"transform", "translateY(-"+pos+"px)");
+						domStyle.set(this.sheetContainer, this._cssPrefix+"transform", "translateY(0px)");
 					}else{
-						this.scrollContainer.scrollTop = 0
+						this.scrollContainer.scrollTop = 0;
 					}
 				}
 				
@@ -730,8 +732,18 @@ function(
 				}
 			}
 			
+			var containerSize = domGeometry.getMarginBox(this.scrollContainer);
+			var sheetSize = domGeometry.getMarginBox(this.sheetContainer);
+			var max = sheetSize.h - containerSize.h;
+			
+			if(pos < 0){
+				pos = 0;
+			}else if(pos > max){
+				pos = max;
+			}
+			
 			this._scrollPos = pos;
-							
+												
 			if(this._domScroll){				
 				this.scrollContainer.scrollTop = pos;				
 			}else{			
@@ -838,7 +850,6 @@ function(
 				};
 			}
 			
-			var numLanesPerInt;
 			var lanes = [];
 
 			for(var i=0; i<layoutItems.length; i++){
@@ -846,7 +857,7 @@ function(
 				this._layoutPass1(layoutItem, lanes);
 			}
 
-			var addedPassRes;
+			var addedPassRes = null;
 			if(func){
 				addedPassRes = lang.hitch(this, func)(lanes);
 			}
@@ -1079,7 +1090,7 @@ function(
 		_defaultItemToRendererKindFunc:function(item){
 			// tags:
 			//		private
-			return null
+			return null;
 		},
 
 		_createRenderer: function(item, kind, rendererClass, cssClass){			
@@ -1124,12 +1135,12 @@ function(
 						kind: kind
 					};
 
-					this.onRendererCreated(res);
+					this._onRendererCreated(res);
 					
 				} else {
 					renderer = res.renderer; 
 					
-					this.onRendererReused(renderer);
+					this._onRendererReused(renderer);
 				}
 				
 				renderer.owner = this;
@@ -1147,7 +1158,17 @@ function(
 			}
 			return null;
 		},	
-						
+		
+		_onRendererCreated: function(renderer){
+			this.onRendererCreated(renderer);
+			// workaround for a bubble up issue, properly fixed in master with a change of API.
+			// currently we only have a simple view or a view in a view, so testing owner.owner is enough.
+			var calendar = this.owner && this.owner.owner ? this.owner.owner : this.owner;
+			if(calendar){
+				calendar.onRendererCreated(renderer);
+			}
+		},
+		
 		onRendererCreated: function(renderer){
 			// summary:
 			//		Event dispatched when an item renderer has been created.
@@ -1156,6 +1177,14 @@ function(
 			// tags:
 			//		callback
 		},	
+		
+		_onRendererRecycled: function(renderer){
+			this.onRendererRecycled(renderer);
+			var calendar = this.owner && this.owner.owner ? this.owner.owner : this.owner;
+			if(calendar){
+				calendar.onRendererRecycled(renderer);
+			}
+		},
 		
 		onRendererRecycled: function(renderer){
 			// summary:
@@ -1167,6 +1196,14 @@ function(
 
 		},
 		
+		_onRendererReused: function(renderer){
+			this.onRendererReused(renderer);
+			var calendar = this.owner && this.owner.owner ? this.owner.owner : this.owner;
+			if(calendar){
+				calendar.onRendererReused(renderer);
+			}
+		},
+		
 		onRendererReused: function(renderer){
 			// summary:
 			//		Event dispatched when an item renderer that was recycled is reused.
@@ -1174,6 +1211,14 @@ function(
 			//		The renderer reused.
 			// tags:
 			//		callback
+		},
+		
+		_onRendererDestroyed: function(renderer){
+			this.onRendererDestroyed(renderer);
+			var calendar = this.owner && this.owner.owner ? this.owner.owner : this.owner;
+			if(calendar){
+				calendar.onRendererDestroyed(renderer);
+			}
 		},
 		
 		onRendererDestroyed: function(renderer){
@@ -1210,7 +1255,7 @@ function(
 			// tags:
 			//		protected			
 								
-			this.onRendererRecycled(renderer);
+			this._onRendererRecycled(renderer);
 			
 			var pool = this.rendererPool[renderer.kind];
 			
@@ -1237,7 +1282,7 @@ function(
 			//		The item renderer to destroy.
 			// tags:
 			//		protected
-			this.onRendererDestroyed(renderer);
+			this._onRendererDestroyed(renderer);
 			
 			var ir = renderer.renderer;
 			
@@ -1618,13 +1663,14 @@ function(
 				
 				store.put(newItem);
 				
+				var renderers = this.getRenderers(newItem);
 				// renderer created when item put in store
-				var renderer = this.getRenderers(newItem)[0];
-				
-				if(!renderer){
-					return;
+				if(renderers && renderers.length>0){
+					var renderer = renderers[0];					
+					if(renderer){
+						this._onRendererHandleMouseDown(e, renderer.renderer, "resizeEnd");
+					}					
 				}
-				this._onRendererHandleMouseDown(e, renderer.renderer, "resizeEnd");
 			}
 		},
 		
@@ -2063,6 +2109,7 @@ function(
 						
 			this._onItemEditEnd(lang.mixin(this._createItemEditEvent(), {
 				item: this.renderItemToItem(p.editedItem, store),
+				renderItem: p.editedItem,
 				eventSource: eventSource,
 				completed: !canceled
 			}));
@@ -2083,10 +2130,10 @@ function(
 					// Inject new properties in data store item				
 					// and apply data changes
 					var store = this.get("store");
-					store.put(e.item, store);
+					store.put(e.item);
 				}else{			
-					e.item.startTime = this._editStartTimeSave; 
-					e.item.endTime = this._editEndTimeSave;
+					e.renderItem.startTime = this._editStartTimeSave; 
+					e.renderItem.endTime = this._editEndTimeSave;
 				}
 			}
 		},

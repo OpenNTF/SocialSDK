@@ -1,8 +1,9 @@
 define(
-"dojo/cldr/nls/tr/buddhist", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "MM.y G",
 	"dateFormatItem-yQ": "Q y G",
+	"dayPeriods-format-wide-pm": "ÖS",
 	"dateFormatItem-MMMEd": "dd MMM E",
 	"dateFormatItem-hms": "h:mm:ss a",
 	"dateFormatItem-yQQQ": "QQQ y G",
@@ -31,6 +32,7 @@ define(
 		"A"
 	],
 	"dateFormatItem-Gy": "y G",
+	"dayPeriods-format-wide-am": "ÖÖ",
 	"quarters-standAlone-abbr": [
 		"Ç1",
 		"Ç2",
@@ -80,6 +82,12 @@ define(
 	],
 	"dateFormatItem-yMMMM": "MMMM y G",
 	"dateFormatItem-ms": "mm:ss",
+	"quarters-standAlone-narrow": [
+		"1.",
+		"2.",
+		"3.",
+		"4."
+	],
 	"months-standAlone-wide": [
 		"Ocak",
 		"Şubat",
@@ -95,6 +103,12 @@ define(
 		"Aralık"
 	],
 	"dateFormatItem-MMMd": "dd MMM",
+	"quarters-format-narrow": [
+		"1.",
+		"2.",
+		"3.",
+		"4."
+	],
 	"dateFormatItem-yyQ": "Q yy G",
 	"months-format-abbr": [
 		"Oca",
@@ -153,6 +167,15 @@ define(
 		"K",
 		"A"
 	],
+	"days-standAlone-short": [
+		"Pa",
+		"Pt",
+		"Sa",
+		"Ça",
+		"Pe",
+		"Cu",
+		"Ct"
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"Paz",
@@ -181,6 +204,15 @@ define(
 		"Ekim",
 		"Kasım",
 		"Aralık"
+	],
+	"days-format-short": [
+		"Pa",
+		"Pt",
+		"Sa",
+		"Ça",
+		"Pe",
+		"Cu",
+		"Ct"
 	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

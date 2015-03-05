@@ -1,4 +1,4 @@
-define("dojox/geo/charting/widget/Map", [
+define([
 	"dojo/_base/kernel",
 	"dojo/_base/lang",
 	"dojo/_base/declare",

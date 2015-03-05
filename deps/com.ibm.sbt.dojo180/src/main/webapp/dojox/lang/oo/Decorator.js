@@ -1,5 +1,3 @@
-// wrapped by build app
-define("dojox/lang/oo/Decorator", ["dijit","dojo","dojox"], function(dijit,dojo,dojox){
 dojo.provide("dojox.lang.oo.Decorator");
 
 (function(){
@@ -36,5 +34,3 @@ dojo.provide("dojox.lang.oo.Decorator");
 		};
 	};
 })();
-
-});

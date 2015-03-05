@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/ig/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"field-dayperiod": "N'ụtụtụ/N'anyasị",
@@ -125,6 +125,15 @@ define(
 	"field-second": "Nkejinta",
 	"field-day": "Ụbọchị",
 	"dateFormatItem-MEd": "E, M/d",
+	"days-standAlone-short": [
+		"Ụka",
+		"Mọn",
+		"Tiu",
+		"Wen",
+		"Tọọ",
+		"Fraị",
+		"Sat"
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"Ụka",
@@ -153,6 +162,15 @@ define(
 		"Ọktoba",
 		"Novemba",
 		"Disemba"
+	],
+	"days-format-short": [
+		"Ụka",
+		"Mọn",
+		"Tiu",
+		"Wen",
+		"Tọọ",
+		"Fraị",
+		"Sat"
 	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

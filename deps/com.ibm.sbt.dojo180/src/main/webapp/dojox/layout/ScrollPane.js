@@ -1,6 +1,4 @@
-require({cache:{
-'url:dojox/layout/resources/ScrollPane.html':"<div class=\"dojoxScrollWindow\" dojoAttachEvent=\"onmouseenter: _enter, onmouseleave: _leave\">\n    <div class=\"dojoxScrollWrapper\" style=\"${style}\" dojoAttachPoint=\"wrapper\" dojoAttachEvent=\"onmousemove: _calc\">\n\t<div class=\"dojoxScrollPane\" dojoAttachPoint=\"containerNode\"></div>\n    </div>\n    <div dojoAttachPoint=\"helper\" class=\"dojoxScrollHelper\"><span class=\"helperInner\">|</span></div>\n</div>"}});
-define("dojox/layout/ScrollPane", ["dojo/_base/kernel","dojo/_base/declare","dojo/_base/html","dojo/_base/fx",
+define(["dojo/_base/kernel","dojo/_base/declare","dojo/_base/html","dojo/_base/fx",
 		"dijit/_Templated","dijit/layout/ContentPane","dojo/dom-class",
 		"dojo/text!./resources/ScrollPane.html"],
 function(kernel,declare,html,baseFx,Templated,ContentPane,domClass,template){
@@ -119,7 +117,7 @@ var Scrollpane = declare("dojox.layout.ScrollPane",[ContentPane, Templated],{
 	_set: function(/* Float */n){
 		// summary:
 		//		set the pane's scroll offset, and position the virtual scroll helper
-		if(!this._size){ return; }
+		if(!this._size || n === 'focused'){ return; }
 		this.wrapper[this._scroll] = Math.floor(this._line.getValue(n));
 		html.style(this.helper, this._edge, Math.floor(this._helpLine.getValue(n)) + "px");
 	},

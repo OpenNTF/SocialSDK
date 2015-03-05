@@ -1,12 +1,12 @@
-define("dojo/touch", ["./_base/kernel", "./_base/lang", "./aspect", "./dom", "./on", "./has", "./mouse", "./ready", "./_base/window"],
-function(dojo, lang, aspect, dom, on, has, mouse, ready, win){
+define(["./_base/kernel", "./aspect", "./dom", "./on", "./has", "./mouse", "./domReady", "./_base/window"],
+function(dojo, aspect, dom, on, has, mouse, domReady, win){
 
 	// module:
 	//		dojo/touch
 
 	var hasTouch = has("touch");
 
-	// TODO for 2.0: detection of IOS version should be moved from mobile/sniff to dojo/sniff
+	// TODO: get iOS version from dojo/sniff after #15827 is fixed
 	var ios4 = false;
 	if(has("ios")){
 		var ua = navigator.userAgent;
@@ -15,14 +15,45 @@ function(dojo, lang, aspect, dom, on, has, mouse, ready, win){
 		ios4 = os < 5;
 	}
 
+	// Time of most recent touchstart or touchmove event
+	var lastTouch;
+
+	function dualEvent(mouseType, touchType){
+		// Returns synthetic event that listens for both the specified mouse event and specified touch event.
+		// But ignore fake mouse events that were generated due to the user touching the screen.
+		if(hasTouch){
+			return function(node, listener){
+				var handle1 = on(node, touchType, listener),
+					handle2 = on(node, mouseType, function(evt){
+						if(!lastTouch || (new Date()).getTime() > lastTouch + 1000){
+							listener.call(this, evt);
+						}
+					});
+				return {
+					remove: function(){
+						handle1.remove();
+						handle2.remove();
+					}
+				};
+			};
+		}else{
+			// Avoid creating listeners for touch events on performance sensitive older browsers like IE6
+			return function(node, listener){
+				return on(node, mouseType, listener);
+			}
+		}
+	}
+
 	var touchmove, hoveredNode;
 
 	if(hasTouch){
-		ready(function(){
+		domReady(function(){
 			// Keep track of currently hovered node
 			hoveredNode = win.body();	// currently hovered node
 
 			win.doc.addEventListener("touchstart", function(evt){
+				lastTouch = (new Date()).getTime();
+
 				// Precede touchstart event with touch.over event.  DnD depends on this.
 				// Use addEventListener(cb, true) to run cb before any touchstart handlers on node run,
 				// and to ensure this code runs even if the listener on the node does event.stop().
@@ -42,6 +73,8 @@ function(dojo, lang, aspect, dom, on, has, mouse, ready, win){
 
 			// Fire synthetic touchover and touchout events on nodes since the browser won't do it natively.
 			on(win.doc, "touchmove", function(evt){
+				lastTouch = (new Date()).getTime();
+
 				var newNode = win.doc.elementFromPoint(
 					evt.pageX - (ios4 ? 0 : win.global.pageXOffset), // iOS 4 expects page coords
 					evt.pageY - (ios4 ? 0 : win.global.pageYOffset)
@@ -66,40 +99,31 @@ function(dojo, lang, aspect, dom, on, has, mouse, ready, win){
 			});
 		});
 
-		// Define synthetic touchmove event that unlike the native touchmove, fires for the node the finger is
+		// Define synthetic touch.move event that unlike the native touchmove, fires for the node the finger is
 		// currently dragging over rather than the node where the touch started.
 		touchmove = function(node, listener){
 			return on(win.doc, "touchmove", function(evt){
 				if(node === win.doc || dom.isDescendant(hoveredNode, node)){
-					listener.call(this, lang.mixin({}, evt, {
-						target: hoveredNode
-					}));
+					evt.target = hoveredNode;
+					listener.call(this, evt);
 				}
 			});
 		};
 	}
 
 
-	function _handle(type){
-		// type: String
-		//		press | move | release | cancel
-
-		return function(node, listener){//called by on(), see dojo.on
-			return on(node, type, listener);
-		};
-	}
-
 	//device neutral events - touch.press|move|release|cancel/over/out
 	var touch = {
-		press: _handle(hasTouch ? "touchstart": "mousedown"),
-		move: hasTouch ? touchmove :_handle("mousemove"),
-		release: _handle(hasTouch ? "touchend": "mouseup"),
-		cancel: hasTouch ? _handle("touchcancel") : mouse.leave,
-		over: _handle(hasTouch ? "dojotouchover": "mouseover"),
-		out: _handle(hasTouch ? "dojotouchout": "mouseout"),
-		enter: mouse._eventHandler(hasTouch ? "dojotouchover" : "mouseover"),
-		leave: mouse._eventHandler(hasTouch ? "dojotouchout" : "mouseout")
+		press: dualEvent("mousedown", "touchstart"),
+		move: dualEvent("mousemove", touchmove),
+		release: dualEvent("mouseup", "touchend"),
+		cancel: dualEvent(mouse.leave, "touchcancel"),
+		over: dualEvent("mouseover", "dojotouchover"),
+		out: dualEvent("mouseout", "dojotouchout"),
+		enter: mouse._eventHandler(dualEvent("mouseover","dojotouchover")),
+		leave: mouse._eventHandler(dualEvent("mouseout", "dojotouchout"))
 	};
+
 	/*=====
 	touch = {
 		// summary:
@@ -204,7 +228,7 @@ function(dojo, lang, aspect, dom, on, has, mouse, ready, win){
 	};
 	=====*/
 
-	 1  && (dojo.touch = touch);
+	has("extend-dojo") && (dojo.touch = touch);
 
 	return touch;
 });

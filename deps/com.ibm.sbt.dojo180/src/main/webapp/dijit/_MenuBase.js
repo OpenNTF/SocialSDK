@@ -1,4 +1,4 @@
-define("dijit/_MenuBase", [
+define([
 	"dojo/_base/array",	// array.indexOf
 	"dojo/_base/declare", // declare
 	"dojo/dom", // dom.isDescendant domClass.replace
@@ -40,9 +40,20 @@ return declare("dijit._MenuBase",
 	//		or DropDownButton/ComboButton.   Note though that it always get focused when opened via the keyboard.
 	autoFocus: false,
 
+	childSelector: function(/*DOMNode*/ node){
+		// summary:
+		//		Selector (passed to on.selector()) used to identify MenuItem child widgets, but exclude inert children
+		//		like MenuSeparator.  If subclass overrides to a string (ex: "> *"), the subclass must require dojo/query.
+		// tags:
+		//		protected
+
+		var widget = registry.byNode(node);
+		return node.parentNode == this.containerNode && widget && widget.focus;
+	},
+
 	postCreate: function(){
 		var self = this,
-			matches = function(node){ return domClass.contains(node, "dijitMenuItem"); };
+			matches = typeof this.childSelector == "string" ? this.childSelector : lang.hitch(this, "childSelector");
 		this.own(
 			on(this.containerNode, on.selector(matches, mouse.enter), function(){
 				self.onItemHover(registry.byNode(this));
@@ -283,8 +294,12 @@ return declare("dijit._MenuBase",
 			});
 
 			this.currentPopup = popup;
+
 			// detect mouseovers to handle lazy mouse movements that temporarily focus other menu items
-			popup.connect(popup.domNode, "onmouseenter", lang.hitch(self, "_onPopupHover")); // cleaned up when the popped-up widget is destroyed on close
+			if(this.popupHoverHandle){
+				this.popupHoverHandle.remove();
+			}
+			this.own(this.popupHoverHandle = on.once(popup.domNode, "mouseover", lang.hitch(self, "_onPopupHover")));
 		}
 
 		if(focus && popup.focus){

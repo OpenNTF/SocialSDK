@@ -1,8 +1,8 @@
 define(
-"dojo/cldr/nls/fa/hebrew", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "y/M",
-	"dateFormatItem-yQ": "Q y",
+	"dateFormatItem-yQ": "QQQ y",
 	"months-standAlone-abbr-leap": "واذار الثانی",
 	"dayPeriods-format-wide-pm": "بعدازظهر",
 	"dateFormatItem-MMMEd": "E d LLL",
@@ -172,6 +172,15 @@ define(
 		"آ",
 		"ا"
 	],
+	"days-standAlone-short": [
+		"۱ش",
+		"۲ش",
+		"۳ش",
+		"۴ش",
+		"۵ش",
+		"ج",
+		"ش"
+	],
 	"days-standAlone-abbr": [
 		"یکشنبه",
 		"دوشنبه",
@@ -201,6 +210,15 @@ define(
 		"تموز",
 		"آب",
 		"ایلول"
+	],
+	"days-format-short": [
+		"۱ش",
+		"۲ش",
+		"۳ش",
+		"۴ش",
+		"۵ش",
+		"ج",
+		"ش"
 	],
 	"quarters-format-wide": [
 		"سهماههٔ اول",

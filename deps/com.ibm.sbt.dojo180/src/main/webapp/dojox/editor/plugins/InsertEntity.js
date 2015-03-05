@@ -1,4 +1,4 @@
-define("dojox/editor/plugins/InsertEntity", [
+define([
 	"dojo",
 	"dijit",
 	"dojox",

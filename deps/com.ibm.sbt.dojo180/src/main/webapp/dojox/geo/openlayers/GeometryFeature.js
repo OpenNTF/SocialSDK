@@ -1,4 +1,4 @@
-define("dojox/geo/openlayers/GeometryFeature", [
+define([
 	"dojo/_base/declare",
 	"dojo/_base/array",
 	"dojo/_base/lang",

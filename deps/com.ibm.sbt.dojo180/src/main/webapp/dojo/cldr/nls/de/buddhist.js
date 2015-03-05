@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/de/buddhist", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M.y G",
 	"dateFormatItem-yyMMdd": "dd.MM.y G",
@@ -8,6 +8,15 @@ define(
 	"dateFormatItem-MMMEd": "E, d. MMM",
 	"dateFormatItem-yQQQ": "QQQ y G",
 	"dateFormatItem-MMdd": "dd.MM.",
+	"days-standAlone-wide": [
+		"Sonntag",
+		"Montag",
+		"Dienstag",
+		"Mittwoch",
+		"Donnerstag",
+		"Freitag",
+		"Samstag"
+	],
 	"dateFormatItem-MMM": "LLL",
 	"months-standAlone-narrow": [
 		"J",
@@ -62,24 +71,45 @@ define(
 	"dateFormatItem-yyMMM": "MMM y G",
 	"dateFormatItem-yyQQQQ": "QQQQ y G",
 	"dateFormatItem-yMd": "d.M.y G",
+	"quarters-standAlone-wide": [
+		"1. Quartal",
+		"2. Quartal",
+		"3. Quartal",
+		"4. Quartal"
+	],
 	"dateFormatItem-ms": "mm:ss",
+	"months-standAlone-wide": [
+		"Januar",
+		"Februar",
+		"März",
+		"April",
+		"Mai",
+		"Juni",
+		"Juli",
+		"August",
+		"September",
+		"Oktober",
+		"November",
+		"Dezember"
+	],
 	"dateFormatItem-MMMd": "d. MMM",
 	"dateFormatItem-yyQ": "Q y G",
 	"months-format-abbr": [
-		"Jan",
-		"Feb",
-		"Mär",
-		"Apr",
+		"Jan.",
+		"Feb.",
+		"Mär.",
+		"Apr.",
 		"Mai",
-		"Jun",
-		"Jul",
-		"Aug",
-		"Sep",
-		"Okt",
-		"Nov",
-		"Dez"
+		"Juni",
+		"Juli",
+		"Aug.",
+		"Sep.",
+		"Okt.",
+		"Nov.",
+		"Dez."
 	],
 	"dateFormatItem-H": "HH 'Uhr'",
+	"dateFormatItem-MMMMdd": "dd. MMMM",
 	"days-format-abbr": [
 		"So.",
 		"Mo.",
@@ -89,10 +119,41 @@ define(
 		"Fr.",
 		"Sa."
 	],
-	"dateFormatItem-MMMMdd": "dd. MMMM",
 	"dateFormatItem-M": "L",
+	"days-format-narrow": [
+		"S",
+		"M",
+		"D",
+		"M",
+		"D",
+		"F",
+		"S"
+	],
 	"dateFormatItem-yMMMd": "d. MMM y G",
 	"dateFormatItem-MEd": "E, d.M.",
+	"months-format-narrow": [
+		"J",
+		"F",
+		"M",
+		"A",
+		"M",
+		"J",
+		"J",
+		"A",
+		"S",
+		"O",
+		"N",
+		"D"
+	],
+	"days-standAlone-short": [
+		"So.",
+		"Mo.",
+		"Di.",
+		"Mi.",
+		"Do.",
+		"Fr.",
+		"Sa."
+	],
 	"days-standAlone-abbr": [
 		"So",
 		"Mo",
@@ -120,6 +181,15 @@ define(
 		"Oktober",
 		"November",
 		"Dezember"
+	],
+	"days-format-short": [
+		"So.",
+		"Mo.",
+		"Di.",
+		"Mi.",
+		"Do.",
+		"Fr.",
+		"Sa."
 	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

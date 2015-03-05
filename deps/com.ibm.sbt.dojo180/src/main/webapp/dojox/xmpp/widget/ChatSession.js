@@ -1,5 +1,3 @@
-// wrapped by build app
-define("dojox/xmpp/widget/ChatSession", ["dijit","dojo","dojox","dojo/require!dijit/layout/LayoutContainer,dijit/_Templated"], function(dijit,dojo,dojox){
 dojo.provide("dojox.xmpp.widget.ChatSession");
 
 dojo.require("dijit.layout.LayoutContainer");
@@ -8,7 +6,7 @@ dojo.require("dijit._Templated");
 dojo.declare("dojox.xmpp.widget.ChatSession",
 	[dijit.layout.LayoutContainer, dijit._Templated],
 	{
-			templateString: dojo.cache("dojox.xmpp.widget", "templates/ChatSession.html", "<div>\n<div dojoAttachPoint=\"messages\" dojoType=\"dijit.layout.ContentPane\" layoutAlign=\"client\" style=\"overflow:auto\">\n</div>\n<div dojoType=\"dijit.layout.ContentPane\" layoutAlign=\"bottom\" style=\"border-top: 2px solid #333333; height: 35px;\"><input dojoAttachPoint=\"chatInput\" dojoAttachEvent=\"onkeypress: onKeyPress\" style=\"width: 100%;height: 35px;\" /></div>\n</div>"),
+			templateString: dojo.cache("dojox.xmpp.widget", "templates/ChatSession.html"),
 			enableSubWidgets: true,
 			widgetsInTemplate: true,
 			
@@ -41,5 +39,4 @@ dojo.declare("dojox.xmpp.widget.ChatSession",
 					this.chatInput.value = "";
 				}
 			}
-});
 });

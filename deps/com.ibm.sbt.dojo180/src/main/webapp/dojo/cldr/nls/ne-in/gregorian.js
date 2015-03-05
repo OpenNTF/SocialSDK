@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/ne-in/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"quarters-standAlone-wide": [
 		"पहिलो पाउ",
@@ -21,6 +21,15 @@ define(
 		"चौथो पाउ"
 	],
 	"field-week": "साता",
+	"days-format-short": [
+		"आइतवार",
+		"सोमवार",
+		"मङ्गलवार",
+		"बुधवार",
+		"बिहीवार",
+		"शुक्रवार",
+		"शनिवार"
+	],
 	"months-standAlone-wide": [
 		"जनवरी",
 		"फरवरी",
@@ -51,6 +60,15 @@ define(
 		"नोभेम्बर",
 		"दिसम्बर"
 	],
+	"days-standAlone-short": [
+		"आइतवार",
+		"सोमवार",
+		"मङ्गलवार",
+		"बुधवार",
+		"बिहीवार",
+		"शुक्रवार",
+		"शनिवार"
+	],
 	"dayPeriods-format-wide-am": "पूर्वाह्न",
 	"field-day-relative+2": "पर्सि",
 	"field-day": "वार",
@@ -79,15 +97,6 @@ define(
 		"शनिवार"
 	],
 	"field-era": "युग",
-	"days-standAlone-abbr": [
-		"आइतवार",
-		"सोमवार",
-		"मङ्गलवार",
-		"बुधवार",
-		"बिहीवार",
-		"शुक्रवार",
-		"शनिवार"
-	],
 	"months-format-abbr": [
 		"जनवरी",
 		"फरवरी",
@@ -101,6 +110,15 @@ define(
 		"अक्टोबर",
 		"नोभेम्बर",
 		"दिसम्बर"
+	],
+	"days-standAlone-abbr": [
+		"आइतवार",
+		"सोमवार",
+		"मङ्गलवार",
+		"बुधवार",
+		"बिहीवार",
+		"शुक्रवार",
+		"शनिवार"
 	],
 	"days-format-wide": [
 		"आइतवार",

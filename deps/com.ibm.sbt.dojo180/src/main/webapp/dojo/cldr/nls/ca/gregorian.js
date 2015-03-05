@@ -1,6 +1,15 @@
 define(
-"dojo/cldr/nls/ca/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"dg.",
+		"dl.",
+		"dm.",
+		"dc.",
+		"dj.",
+		"dv.",
+		"ds."
+	],
 	"months-format-narrow": [
 		"G",
 		"F",
@@ -8,20 +17,35 @@ define(
 		"A",
 		"M",
 		"J",
-		"G",
+		"J",
 		"A",
 		"S",
 		"O",
 		"N",
 		"D"
 	],
+	"quarters-standAlone-narrow": [
+		"1",
+		"2",
+		"3",
+		"4"
+	],
 	"field-weekday": "dia de la setmana",
 	"dateFormatItem-yQQQ": "QQQ y",
-	"dateFormatItem-yMEd": "E d/M/yyyy",
+	"dateFormatItem-yMEd": "E, d.M.y",
 	"dateFormatItem-MMMEd": "E d MMM",
 	"eraNarrow": [
 		"aC",
 		"dC"
+	],
+	"days-format-short": [
+		"dg.",
+		"dl.",
+		"dt.",
+		"dc.",
+		"dj.",
+		"dv.",
+		"ds."
 	],
 	"dateFormat-long": "d MMMM 'de' y",
 	"months-format-wide": [
@@ -38,6 +62,7 @@ define(
 		"de novembre",
 		"de desembre"
 	],
+	"dateTimeFormat-medium": "{1} {0}",
 	"dayPeriods-format-wide-pm": "p.m.",
 	"dateFormat-full": "EEEE d MMMM 'de' y",
 	"dateFormatItem-Md": "d/M",
@@ -58,14 +83,14 @@ define(
 		"novembre",
 		"desembre"
 	],
-	"timeFormat-short": "H:mm",
+	"timeFormat-short": "H.mm",
 	"quarters-format-wide": [
 		"1r trimestre",
 		"2n trimestre",
 		"3r trimestre",
 		"4t trimestre"
 	],
-	"timeFormat-long": "H:mm:ss z",
+	"timeFormat-long": "H.mm.ss z",
 	"field-year": "any",
 	"dateFormatItem-yMMM": "LLL y",
 	"dateFormatItem-yQ": "Q yyyy",
@@ -85,7 +110,7 @@ define(
 		"de des."
 	],
 	"dateFormatItem-yyQ": "Q yy",
-	"timeFormat-full": "H:mm:ss zzzz",
+	"timeFormat-full": "H.mm.ss zzzz",
 	"field-day-relative+0": "avui",
 	"field-day-relative+1": "demà",
 	"field-day-relative+2": "demà passat",
@@ -127,8 +152,8 @@ define(
 		"Dissabte"
 	],
 	"dateFormatItem-MMMMd": "d MMMM",
-	"timeFormat-medium": "H:mm:ss",
-	"dateFormatItem-Hm": "H:mm",
+	"timeFormat-medium": "H.mm.ss",
+	"dateFormatItem-Hm": "H.mm",
 	"quarters-standAlone-abbr": [
 		"1T",
 		"2T",
@@ -151,7 +176,7 @@ define(
 		"ds"
 	],
 	"dateFormatItem-d": "d",
-	"dateFormatItem-ms": "mm:ss",
+	"dateFormatItem-ms": "mm.ss",
 	"quarters-format-narrow": [
 		"1",
 		"2",
@@ -159,9 +184,13 @@ define(
 		"4"
 	],
 	"field-day-relative+-1": "ahir",
+	"dateFormatItem-h": "h a",
+	"dateTimeFormat-long": "{1} {0}",
+	"dayPeriods-format-narrow-am": "a.m.",
 	"field-day-relative+-2": "abans d'ahir",
 	"dateFormatItem-MMMd": "d MMM",
 	"dateFormatItem-MEd": "E d/M",
+	"dateTimeFormat-full": "{1} {0}",
 	"dateFormatItem-yMMMM": "LLLL 'de' y",
 	"field-day": "dia",
 	"days-format-wide": [
@@ -190,9 +219,9 @@ define(
 		"n",
 		"d"
 	],
-	"field-year-relative+-1": "Última any",
+	"field-year-relative+-1": "Últim any",
 	"field-month-relative+-1": "Últim mes",
-	"dateFormatItem-hm": "h:mm a",
+	"dateFormatItem-hm": "h.mm a",
 	"days-format-abbr": [
 		"dg.",
 		"dl.",
@@ -204,34 +233,34 @@ define(
 	],
 	"dateFormatItem-yMMMd": "d MMM y",
 	"eraNames": [
-		"aC",
-		"dC"
+		"abans de Crist",
+		"després de Crist"
 	],
 	"days-format-narrow": [
-		"G",
-		"l",
-		"T",
-		"C",
-		"J",
-		"V",
-		"S"
+		"dg",
+		"dl",
+		"dt",
+		"dc",
+		"dj",
+		"dv",
+		"ds"
 	],
-	"field-month": "mes",
 	"days-standAlone-narrow": [
-		"g",
-		"l",
-		"t",
-		"c",
-		"j",
-		"v",
-		"s"
+		"dg",
+		"dl",
+		"dt",
+		"dc",
+		"dj",
+		"dv",
+		"ds"
 	],
 	"dateFormatItem-MMM": "LLL",
+	"field-month": "mes",
 	"dayPeriods-format-wide-am": "a.m.",
 	"dateFormatItem-MMMMEd": "E d MMMM",
 	"dateFormat-short": "dd/MM/yy",
 	"field-second": "segon",
-	"dateFormatItem-yMMMEd": "E d MMM y",
+	"dateFormatItem-yMMMEd": "E, d MMM, y",
 	"field-month-relative+0": "Aquest mes",
 	"field-month-relative+1": "Mes següent",
 	"dateFormatItem-Ed": "E d",
@@ -241,8 +270,10 @@ define(
 	"field-week-relative+-1": "Última setmana",
 	"field-year-relative+1": "Any següent",
 	"dateFormatItem-mmss": "mm:ss",
-	"dateFormatItem-Hms": "H:mm:ss",
-	"dateFormatItem-hms": "h:mm:ss a",
+	"dayPeriods-format-narrow-pm": "p.m.",
+	"dateTimeFormat-short": "{1} {0}",
+	"dateFormatItem-Hms": "H.mm.ss",
+	"dateFormatItem-hms": "h.mm.ss a",
 	"field-week-relative+0": "Aquesta setmana",
 	"field-week-relative+1": "Setmana següent"
 }

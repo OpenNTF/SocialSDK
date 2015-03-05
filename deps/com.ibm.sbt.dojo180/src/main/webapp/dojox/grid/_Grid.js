@@ -1,6 +1,4 @@
-require({cache:{
-'url:dojox/grid/resources/_Grid.html':"<div hidefocus=\"hidefocus\" role=\"grid\" dojoAttachEvent=\"onmouseout:_mouseOut\">\n\t<div class=\"dojoxGridMasterHeader\" dojoAttachPoint=\"viewsHeaderNode\" role=\"presentation\"></div>\n\t<div class=\"dojoxGridMasterView\" dojoAttachPoint=\"viewsNode\" role=\"presentation\"></div>\n\t<div class=\"dojoxGridMasterMessages\" style=\"display: none;\" dojoAttachPoint=\"messagesNode\"></div>\n\t<span dojoAttachPoint=\"lastFocusNode\" tabindex=\"0\"></span>\n</div>\n"}});
-define("dojox/grid/_Grid", [
+define([
 	"dojo/_base/kernel",
 	"../main",
 	"dojo/_base/declare",
@@ -348,6 +346,9 @@ define("dojox/grid/_Grid", [
 			if(!this.isLeftToRight()){
 				html.addClass(this.domNode, this.classTag+"Rtl");
 			}
+			if(this.rowHeight > 0){
+				html.addClass(this.viewsNode, this.classTag + "FixedRowHeight");
+			}
 		},
 		
 		postMixInProperties: function(){
@@ -678,13 +679,6 @@ define("dojox/grid/_Grid", [
 			// called.  This saves us an extra call to _resize(), which can
 			// get kind of heavy.
 			
-			// fixes #11101, should ignore resize when in autoheight mode(IE) to avoid a deadlock
-			// e.g when an autoheight editable grid put in dijit.form.Form or other similar containers,
-			// grid switch to editing mode --> grid height change --> From height change
-			// ---> Form call grid.resize() ---> grid height change  --> deaklock
-			if(dojo.isIE && !changeSize && !resultSize && this._autoHeight){
-				return;
-			}
 			this._pendingChangeSize = changeSize;
 			this._pendingResultSize = resultSize;
 			this.sizeChange();

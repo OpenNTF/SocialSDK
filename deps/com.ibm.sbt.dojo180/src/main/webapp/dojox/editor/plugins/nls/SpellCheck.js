@@ -1,4 +1,4 @@
-define("dojox/editor/plugins/nls/SpellCheck", { root:
+define({ root:
 //begin v1.x content
 ({
 	widgetLabel: "Batch Spell Check",

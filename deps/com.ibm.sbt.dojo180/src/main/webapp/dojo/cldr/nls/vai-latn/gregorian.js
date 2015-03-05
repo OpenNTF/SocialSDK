@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/vai-latn/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"dateFormatItem-yQ": "Q y",
@@ -95,6 +95,15 @@ define(
 	"field-second": "jaki-jaka",
 	"field-day": "tele",
 	"dateFormatItem-MEd": "E, M/d",
+	"days-standAlone-short": [
+		"lahadi",
+		"tɛɛnɛɛ",
+		"talata",
+		"alaba",
+		"aimisa",
+		"aijima",
+		"siɓiti"
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"lahadi",
@@ -123,6 +132,15 @@ define(
 		"galo",
 		"kenpkato ɓololɔ",
 		"luukao lɔma"
+	],
+	"days-format-short": [
+		"lahadi",
+		"tɛɛnɛɛ",
+		"talata",
+		"alaba",
+		"aimisa",
+		"aijima",
+		"siɓiti"
 	],
 	"dateFormatItem-d": "d",
 	"days-format-wide": [

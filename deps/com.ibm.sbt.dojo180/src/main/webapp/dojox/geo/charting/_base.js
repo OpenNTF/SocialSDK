@@ -1,4 +1,4 @@
-define("dojox/geo/charting/_base", [
+define([
 	"dojo/_base/lang",
 	"dojo/_base/array",
 	"../../main",

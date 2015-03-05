@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/ln/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"field-dayperiod": "Eleko ya mokɔlɔ",
@@ -11,7 +11,7 @@ define(
 		"Nsima ya Yézu Krís"
 	],
 	"dateFormatItem-MMMEd": "E d MMM",
-	"field-day-relative+-1": "Lóbí",
+	"field-day-relative+-1": "Lóbi elékí",
 	"field-weekday": "Mokɔlɔ ya pɔ́sɔ",
 	"dateFormatItem-hms": "h:mm:ss a",
 	"dateFormatItem-yQQQ": "QQQ y",
@@ -67,7 +67,7 @@ define(
 	"dateFormatItem-Ed": "E d",
 	"dateFormatItem-yMMM": "MMM y",
 	"field-day-relative+0": "Lɛlɔ́",
-	"field-day-relative+1": "Lóbí",
+	"field-day-relative+1": "Lóbi ekoyâ",
 	"days-standAlone-narrow": [
 		"e",
 		"y",
@@ -172,6 +172,15 @@ define(
 		"n",
 		"d"
 	],
+	"days-standAlone-short": [
+		"eye",
+		"ybo",
+		"mbl",
+		"mst",
+		"min",
+		"mtn",
+		"mps"
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"eye",
@@ -200,6 +209,15 @@ define(
 		"sánzá ya zómi",
 		"sánzá ya zómi na mɔ̌kɔ́",
 		"sánzá ya zómi na míbalé"
+	],
+	"days-format-short": [
+		"eye",
+		"ybo",
+		"mbl",
+		"mst",
+		"min",
+		"mtn",
+		"mps"
 	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

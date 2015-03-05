@@ -33,6 +33,7 @@ public final class ProfilesConstants {
 	public static final String TARGETKEY			= "targetKey";
 	public static final String TARGETEMAIL			= "targetEmail";
 	public static final String PROFILES				= "profiles";
+	public static final String COMMON				= "connections";
 	public static final String CONNECTION_UNIQUE_IDENTIFIER = "connectionId";
 	public static final String VCARD = "vcard";
 	public static final String FULL = "full";

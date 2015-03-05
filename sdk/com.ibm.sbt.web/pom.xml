@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>com.ibm.sbt</groupId>
 		<artifactId>com.ibm.sbt.sdk</artifactId>
-		<version>1.1.3-SNAPSHOT</version>
+		<version>1.1.4-SNAPSHOT</version>
 	</parent>
 
 	<build>
@@ -71,10 +71,10 @@
 							<goal>wget</goal>
 						</goals>
 						<configuration>
-							<url>http://download.dojotoolkit.org/release-1.8.0/dojo-release-1.8.0-src.zip</url>
+							<url>http://download.dojotoolkit.org/release-1.8.10/dojo-release-1.8.10-src.zip</url>
 							<unpack>true</unpack>
 							<outputDirectory>${project.build.directory}/tools</outputDirectory>
-							<md5>b8e504a012ae0598a616af10d4ad6bad</md5>
+							<md5>9dc3002637ea3b4763e9f93adaab0f0d</md5>
 						</configuration>
 					</execution>
 				</executions>
@@ -100,7 +100,7 @@
 						<configuration>
 							<target>
 								<copy
-									todir="${project.build.directory}/tools/dojo-release-1.8.0-src/util"
+									todir="${project.build.directory}/tools/dojo-release-1.8.10-src/util"
 									overwrite="true">
 									<fileset dir="${project.build.scriptSourceDirectory}" />
 								</copy>

@@ -1,4 +1,4 @@
-define("dojox/form/_HasDropDown", [
+define([
 	"dojo/_base/kernel",
 	"dojo/_base/lang",
 	"dijit/_HasDropDown"

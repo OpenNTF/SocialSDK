@@ -1,6 +1,15 @@
 define(
-"dojo/cldr/nls/sw/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"Jumapili",
+		"Jumatatu",
+		"Jumanne",
+		"Jumatano",
+		"Alhamisi",
+		"Ijumaa",
+		"Jumamosi"
+	],
 	"months-format-narrow": [
 		"J",
 		"F",
@@ -15,13 +24,28 @@ define(
 		"N",
 		"D"
 	],
+	"quarters-standAlone-narrow": [
+		"1",
+		"2",
+		"3",
+		"4"
+	],
 	"field-weekday": "Siku ya wiki",
 	"dateFormatItem-yQQQ": "QQQ y",
-	"dateFormatItem-yMEd": "E, M/d/y",
-	"dateFormatItem-MMMEd": "E, MMM d",
+	"dateFormatItem-yMEd": "E, d/M/y",
+	"dateFormatItem-MMMEd": "E, d MMM",
 	"eraNarrow": [
 		"KK",
 		"BK"
+	],
+	"days-format-short": [
+		"Jumapili",
+		"Jumatatu",
+		"Jumanne",
+		"Jumatano",
+		"Alhamisi",
+		"Ijumaa",
+		"Jumamosi"
 	],
 	"dateFormat-long": "d MMMM y",
 	"months-format-wide": [
@@ -38,9 +62,10 @@ define(
 		"Novemba",
 		"Desemba"
 	],
+	"dateTimeFormat-medium": "{1} {0}",
 	"dayPeriods-format-wide-pm": "alasiri",
 	"dateFormat-full": "EEEE, d MMMM y",
-	"dateFormatItem-Md": "M/d",
+	"dateFormatItem-Md": "d-M",
 	"dateFormatItem-yMd": "d/M/y",
 	"field-era": "Enzi",
 	"dateFormatItem-yM": "M/y",
@@ -88,6 +113,7 @@ define(
 	"field-day-relative+0": "Leo",
 	"field-day-relative+1": "Kesho",
 	"field-day-relative+2": "Kesho kutwa",
+	"dateFormatItem-H": "HH",
 	"months-standAlone-abbr": [
 		"Jan",
 		"Feb",
@@ -103,10 +129,10 @@ define(
 		"Des"
 	],
 	"quarters-format-abbr": [
-		"R1",
-		"R2",
-		"R3",
-		"R4"
+		"Q1",
+		"Q2",
+		"Q3",
+		"Q4"
 	],
 	"quarters-standAlone-wide": [
 		"Robo 1",
@@ -124,14 +150,14 @@ define(
 		"Ijumaa",
 		"Jumamosi"
 	],
-	"dateFormatItem-MMMMd": "MMMM d",
+	"dateFormatItem-MMMMd": "d MMMM",
 	"timeFormat-medium": "h:mm:ss a",
 	"dateFormatItem-Hm": "HH:mm",
 	"quarters-standAlone-abbr": [
-		"R1",
-		"R2",
-		"R3",
-		"R4"
+		"Q1",
+		"Q2",
+		"Q3",
+		"Q4"
 	],
 	"eraAbbr": [
 		"KK",
@@ -157,9 +183,11 @@ define(
 		"4"
 	],
 	"field-day-relative+-1": "Jana",
+	"dateTimeFormat-long": "{1} {0}",
 	"field-day-relative+-2": "Mtondo",
-	"dateFormatItem-MMMd": "MMM d",
-	"dateFormatItem-MEd": "E, M/d",
+	"dateFormatItem-MMMd": "d MMM",
+	"dateFormatItem-MEd": "E, d/M",
+	"dateTimeFormat-full": "{1} {0}",
 	"dateFormatItem-yMMMM": "MMMM y",
 	"field-day": "Siku",
 	"days-format-wide": [
@@ -225,18 +253,19 @@ define(
 	],
 	"dateFormatItem-MMM": "LLL",
 	"dayPeriods-format-wide-am": "asubuhi",
-	"dateFormatItem-MMMMEd": "E, MMMM d",
+	"dateFormatItem-MMMMEd": "E, d MMMM",
 	"dateFormat-short": "dd/MM/yyyy",
 	"field-second": "Sekunde",
 	"dateFormatItem-yMMMEd": "E, MMM d, y",
 	"field-month-relative+0": "Mwezi huu",
 	"field-month-relative+1": "Mwezi ujao",
-	"dateFormatItem-Ed": "E d",
+	"dateFormatItem-Ed": "d E",
 	"field-week": "Wiki",
 	"dateFormat-medium": "d MMM y",
 	"field-year-relative+0": "Mwaka huu",
 	"field-week-relative+-1": "Wiki iliyopita",
 	"field-year-relative+1": "Mwaka ujao",
+	"dateTimeFormat-short": "{1} {0}",
 	"dateFormatItem-Hms": "HH:mm:ss",
 	"field-week-relative+0": "Wiki hii",
 	"field-week-relative+1": "Wiki ijayo"

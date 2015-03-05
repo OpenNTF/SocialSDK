@@ -1,4 +1,4 @@
-define("dojox/charting/themes/gradientGenerator", ["dojo/_base/lang", "dojo/_base/array", "dojo/_base/Color", "../Theme", "dojox/color/_base", "./common"], 
+define(["dojo/_base/lang", "dojo/_base/array", "dojo/_base/Color", "../Theme", "dojox/color/_base", "./common"], 
 	function(lang, arr, Color, Theme, dxcolor, themes){
 	
 	var gg = lang.getObject("gradientGenerator", true, themes);

@@ -1,6 +1,15 @@
 define(
-"dojo/cldr/nls/bg/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"нд",
+		"пн",
+		"вт",
+		"ср",
+		"чт",
+		"пт",
+		"сб"
+	],
 	"months-format-narrow": [
 		"я",
 		"ф",
@@ -15,11 +24,26 @@ define(
 		"н",
 		"д"
 	],
+	"quarters-standAlone-narrow": [
+		"1",
+		"2",
+		"3",
+		"4"
+	],
 	"field-weekday": "Ден от седмицата",
 	"dateFormatItem-yQQQ": "QQQ y 'г'.",
 	"dateFormatItem-yMEd": "E, d.MM.y 'г'.",
 	"dateFormatItem-MMMEd": "d MMM, E",
 	"eraNarrow": "сл.н.е.",
+	"days-format-short": [
+		"нд",
+		"пн",
+		"вт",
+		"ср",
+		"чт",
+		"пт",
+		"сб"
+	],
 	"dateFormat-long": "dd MMMM y",
 	"months-format-wide": [
 		"януари",
@@ -116,6 +140,7 @@ define(
 		"3-то тримесечие",
 		"4-то тримесечие"
 	],
+	"dateFormatItem-M": "L",
 	"days-standAlone-wide": [
 		"неделя",
 		"понеделник",
@@ -149,6 +174,8 @@ define(
 		"пт",
 		"сб"
 	],
+	"dateFormatItem-d": "d",
+	"dateFormatItem-ms": "mm:ss",
 	"quarters-format-narrow": [
 		"1",
 		"2",
@@ -156,6 +183,7 @@ define(
 		"4"
 	],
 	"field-day-relative+-1": "Вчера",
+	"dateFormatItem-h": "h",
 	"dateTimeFormat-long": "{1}, {0}",
 	"field-day-relative+-2": "Онзи ден",
 	"dateFormatItem-MMMd": "d MMM",
@@ -225,6 +253,7 @@ define(
 		"п",
 		"с"
 	],
+	"dateFormatItem-MMM": "LLL",
 	"dayPeriods-format-wide-am": "пр. об.",
 	"dateFormatItem-MMMMdd": "dd MMMM",
 	"dateFormat-short": "dd.MM.yy",

@@ -1,6 +1,4 @@
-require({cache:{
-'url:dojox/form/resources/PasswordValidator.html':"<div dojoAttachPoint=\"containerNode\">\n\t<input type=\"hidden\" name=\"${name}\" value=\"\" dojoAttachPoint=\"focusNode\" />\n</div>"}});
-define("dojox/form/PasswordValidator", [
+define([
 	"dojo/_base/array",
 	"dojo/_base/lang",
 	"dojo/dom-attr",

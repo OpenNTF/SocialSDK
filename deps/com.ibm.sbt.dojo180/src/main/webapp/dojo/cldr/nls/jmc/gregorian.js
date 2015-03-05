@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/jmc/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"field-dayperiod": "Mfiri o siku",
@@ -12,7 +12,6 @@ define(
 	],
 	"dateFormatItem-MMMEd": "E, MMM d",
 	"field-day-relative+-1": "Ukou",
-	"field-weekday": "Mfiri",
 	"dateFormatItem-yQQQ": "QQQ y",
 	"days-standAlone-wide": [
 		"Jumapilyi",
@@ -171,6 +170,15 @@ define(
 		"N",
 		"D"
 	],
+	"days-standAlone-short": [
+		"Jpi",
+		"Jtt",
+		"Jnn",
+		"Jtn",
+		"Alh",
+		"Iju",
+		"Jmo"
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"Jpi",
@@ -199,6 +207,15 @@ define(
 		"Oktoba",
 		"Novemba",
 		"Desemba"
+	],
+	"days-format-short": [
+		"Jpi",
+		"Jtt",
+		"Jnn",
+		"Jtn",
+		"Alh",
+		"Iju",
+		"Jmo"
 	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

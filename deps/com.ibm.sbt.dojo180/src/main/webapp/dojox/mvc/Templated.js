@@ -1,4 +1,4 @@
-define("dojox/mvc/Templated", [
+define([
 	"dojo/_base/declare",
 	"dojo/_base/lang",
 	"dijit/_WidgetBase",

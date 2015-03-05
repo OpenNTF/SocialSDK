@@ -1,4 +1,4 @@
-define("dojox/grid/enhanced/nls/EnhancedGrid", { root:
+define({ root:
 //begin v1.x content
 ({
 	singleSort: "Single Sort",
@@ -7,8 +7,8 @@ define("dojox/grid/enhanced/nls/EnhancedGrid", { root:
 	descending: "Click to sort Descending",
 	sortingState: "${0} - ${1}",
 	unsorted: "Do not sort this column",
-	indirectSelectionRadio: "Row ${0}, single selection, radio box",
-	indirectSelectionCheckBox: "Row ${0}, multiple selection, check box",
+	indirectSelectionRadio: "Row ${0}, single selection",
+	indirectSelectionCheckBox: "Row ${0}, multiple selection",
 	selectAll: "Select all"
 })
 //end v1.x content

@@ -1,4 +1,4 @@
-define("dijit/_Contained", [
+define([
 	"dojo/_base/declare", // declare
 	"./registry"	// registry.getEnclosingWidget(), registry.byNode()
 ], function(declare, registry){

@@ -1,5 +1,3 @@
-// wrapped by build app
-define("dojox/flash/_base", ["dijit","dojo","dojox","dojo/require!dojo/window"], function(dijit,dojo,dojox){
 dojo.provide("dojox.flash._base");
 dojo.experimental("dojox.flash");
 
@@ -768,5 +766,3 @@ dojox.flash.Install.prototype = {
 dojox.flash.info = new dojox.flash.Info();
 
 // vim:ts=4:noet:tw=0:
-
-});

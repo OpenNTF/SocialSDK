@@ -1,4 +1,4 @@
-define("dojox/drawing/annotations/Arrow", ["../util/oo", "../stencil/Path"], 
+define(["../util/oo", "../stencil/Path"], 
 function(oo, Path){
 
 //dojox.drawing.annotations.Arrow =

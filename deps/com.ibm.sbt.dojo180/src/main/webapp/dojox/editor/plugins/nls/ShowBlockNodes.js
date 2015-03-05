@@ -1,4 +1,4 @@
-define("dojox/editor/plugins/nls/ShowBlockNodes", { root:
+define({ root:
 //begin v1.x content
 ({
 	"showBlockNodes": "Show HTML Block Elements"

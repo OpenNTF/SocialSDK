@@ -1,4 +1,4 @@
-define("dijit/form/DataList", [
+define([
 	"dojo/_base/declare", // declare
 	"dojo/dom", // dom.byId
 	"dojo/_base/lang", // lang.trim

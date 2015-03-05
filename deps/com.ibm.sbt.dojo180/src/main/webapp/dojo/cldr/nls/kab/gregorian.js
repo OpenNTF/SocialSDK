@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/kab/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"field-dayperiod": "n tufat / n tmeddit",
@@ -176,6 +176,15 @@ define(
 		"N",
 		"D"
 	],
+	"days-standAlone-short": [
+		"Yan",
+		"San",
+		"Kraḍ",
+		"Kuẓ",
+		"Sam",
+		"Sḍis",
+		"Say"
+	],
 	"days-standAlone-abbr": [
 		"Yan",
 		"San",
@@ -203,6 +212,15 @@ define(
 		"Tubeṛ",
 		"Nunembeṛ",
 		"Duǧembeṛ"
+	],
+	"days-format-short": [
+		"Yan",
+		"San",
+		"Kraḍ",
+		"Kuẓ",
+		"Sam",
+		"Sḍis",
+		"Say"
 	],
 	"quarters-format-wide": [
 		"akraḍaggur amenzu",

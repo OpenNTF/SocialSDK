@@ -1,4 +1,4 @@
-define("dojox/grid/LazyTreeGridStoreModel", [
+define([
 	"dojo/_base/declare",
 	"dojo/_base/array",
 	"dojo/_base/lang",

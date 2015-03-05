@@ -1,6 +1,15 @@
 define(
-"dojo/cldr/nls/el/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"Κυ",
+		"Δε",
+		"Τρ",
+		"Τε",
+		"Πε",
+		"Πα",
+		"Σα"
+	],
 	"months-format-narrow": [
 		"Ι",
 		"Φ",
@@ -15,6 +24,12 @@ define(
 		"Ν",
 		"Δ"
 	],
+	"quarters-standAlone-narrow": [
+		"1",
+		"2",
+		"3",
+		"4"
+	],
 	"field-weekday": "Ημέρα εβδομάδας",
 	"dateFormatItem-yyQQQQ": "QQQQ yy",
 	"dateFormatItem-yQQQ": "y QQQ",
@@ -23,6 +38,15 @@ define(
 	"eraNarrow": [
 		"π.Χ.",
 		"μ.Χ."
+	],
+	"days-format-short": [
+		"Κυ",
+		"Δε",
+		"Τρ",
+		"Τε",
+		"Πε",
+		"Πα",
+		"Σα"
 	],
 	"dateFormat-long": "d MMMM y",
 	"months-format-wide": [
@@ -39,6 +63,7 @@ define(
 		"Νοεμβρίου",
 		"Δεκεμβρίου"
 	],
+	"dateTimeFormat-medium": "{1} - {0}",
 	"dayPeriods-format-wide-pm": "μ.μ.",
 	"dateFormat-full": "EEEE, d MMMM y",
 	"dateFormatItem-Md": "d/M",
@@ -101,7 +126,7 @@ define(
 		"Μάι",
 		"Ιούν",
 		"Ιούλ",
-		"Αυγ",
+		"Αύγ",
 		"Σεπ",
 		"Οκτ",
 		"Νοέ",
@@ -164,9 +189,12 @@ define(
 		"4"
 	],
 	"field-day-relative+-1": "Χτες",
+	"dateFormatItem-h": "h a",
+	"dateTimeFormat-long": "{1} - {0}",
 	"field-day-relative+-2": "Προχτές",
 	"dateFormatItem-MMMd": "d MMM",
 	"dateFormatItem-MEd": "E, d/M",
+	"dateTimeFormat-full": "{1} - {0}",
 	"field-day": "Ημέρα",
 	"days-format-wide": [
 		"Κυριακή",
@@ -201,11 +229,11 @@ define(
 	"days-format-abbr": [
 		"Κυρ",
 		"Δευ",
-		"Τρι",
+		"Τρί",
 		"Τετ",
-		"Πεμ",
+		"Πέμ",
 		"Παρ",
-		"Σαβ"
+		"Σάβ"
 	],
 	"dateFormatItem-yMMMd": "d MMM y",
 	"eraNames": [
@@ -221,7 +249,6 @@ define(
 		"Π",
 		"Σ"
 	],
-	"field-month": "Μήνας",
 	"days-standAlone-narrow": [
 		"Κ",
 		"Δ",
@@ -232,6 +259,7 @@ define(
 		"Σ"
 	],
 	"dateFormatItem-MMM": "LLL",
+	"field-month": "Μήνας",
 	"dateFormatItem-HHmm": "HH:mm",
 	"dayPeriods-format-wide-am": "π.μ.",
 	"dateFormatItem-MMMMEd": "E, d MMMM",
@@ -248,6 +276,7 @@ define(
 	"field-week-relative+-1": "Προηγούμενη εβδομάδα",
 	"field-year-relative+1": "Επόμενο έτος",
 	"dateFormatItem-mmss": "mm:ss",
+	"dateTimeFormat-short": "{1} - {0}",
 	"dateFormatItem-Hms": "HH:mm:ss",
 	"dateFormatItem-hms": "h:mm:ss a",
 	"dateFormatItem-yyyy": "y",

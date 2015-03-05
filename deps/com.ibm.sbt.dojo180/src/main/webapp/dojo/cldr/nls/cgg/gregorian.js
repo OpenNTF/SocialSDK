@@ -1,5 +1,5 @@
 define(
-"dojo/cldr/nls/cgg/gregorian", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"field-dayperiod": "Nyomushana/nyekiro",
@@ -170,6 +170,15 @@ define(
 		"N",
 		"D"
 	],
+	"days-standAlone-short": [
+		"SAN",
+		"ORK",
+		"OKB",
+		"OKS",
+		"OKN",
+		"OKT",
+		"OMK"
+	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
 		"SAN",
@@ -198,6 +207,15 @@ define(
 		"Okwaikumi",
 		"Okwaikumi na kumwe",
 		"Okwaikumi na ibiri"
+	],
+	"days-format-short": [
+		"SAN",
+		"ORK",
+		"OKB",
+		"OKS",
+		"OKN",
+		"OKT",
+		"OMK"
 	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

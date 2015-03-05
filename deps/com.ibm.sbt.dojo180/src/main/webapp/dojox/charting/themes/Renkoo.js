@@ -1,4 +1,4 @@
-define("dojox/charting/themes/Renkoo", ["../Theme", "dojox/gfx/gradutils", "./common"], function(Theme, gradutils, themes){
+define(["../Theme", "dojox/gfx/gradutils", "./common"], function(Theme, gradutils, themes){
 
 	// created by Tom Trenka
 

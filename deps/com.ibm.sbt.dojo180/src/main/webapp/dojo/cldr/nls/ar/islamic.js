@@ -1,37 +1,42 @@
 define(
-"dojo/cldr/nls/ar/islamic", //begin v1.x content
+//begin v1.x content
 {
 	"dateFormatItem-yM": "M‏/yyyy",
-	"dateFormatItem-yQ": "yyyy Q",
+	"dateFormatItem-yQ": "Q yyyy",
 	"dayPeriods-format-wide-pm": "م",
 	"eraNames": [
 		"هـ"
 	],
 	"dateFormatItem-MMMEd": "E، d MMM",
 	"dateFormatItem-hms": "h:mm:ss a",
-	"dateFormatItem-yQQQ": "y QQQ",
+	"dateFormatItem-yQQQ": "QQQ y",
 	"days-standAlone-wide": [
 		"الأحد",
-		"الاثنين"
+		"الاثنين",
+		"الثلاثاء",
+		"الأربعاء",
+		"الخميس",
+		"الجمعة",
+		"السبت"
 	],
 	"dateFormatItem-MMM": "LLL",
 	"months-standAlone-narrow": [
-		"م",
-		"ص",
-		"ر",
-		"ر",
-		"ج",
-		"ج",
-		"ر",
-		"ش",
-		"ر",
-		"ش",
-		"ذ",
-		"ذ"
+		"١",
+		"٢",
+		"٣",
+		"4",
+		"٥",
+		"٦",
+		"٧",
+		"٨",
+		"٩",
+		"١٠",
+		"١١",
+		"١٢"
 	],
 	"dayPeriods-format-wide-am": "ص",
 	"dateFormatItem-y": "y",
-	"timeFormat-full": "zzzz h:mm:ss a",
+	"timeFormat-full": "h:mm:ss a zzzz",
 	"months-standAlone-abbr": [
 		"محرم",
 		"صفر",
@@ -90,7 +95,13 @@ define(
 	],
 	"dateFormatItem-MMMMEd": "E، d MMMM",
 	"dateFormatItem-MMMd": "d MMM",
-	"timeFormat-long": "z h:mm:ss a",
+	"quarters-format-narrow": [
+		"١",
+		"٢",
+		"٣",
+		"٤"
+	],
+	"timeFormat-long": "h:mm:ss a z",
 	"months-format-abbr": [
 		"محرم",
 		"صفر",
@@ -119,7 +130,7 @@ define(
 	],
 	"dateFormatItem-M": "L",
 	"dateFormatItem-yMMMd": "d MMM، y",
-	"dateFormatItem-MEd": "E، d-M",
+	"dateFormatItem-MEd": "E، d/M",
 	"months-format-narrow": [
 		"١",
 		"٢",
@@ -133,6 +144,15 @@ define(
 		"١٠",
 		"١١",
 		"١٢"
+	],
+	"days-standAlone-short": [
+		"الأحد",
+		"الاثنين",
+		"الثلاثاء",
+		"الأربعاء",
+		"الخميس",
+		"الجمعة",
+		"السبت"
 	],
 	"dateFormatItem-hm": "h:mm a",
 	"days-standAlone-abbr": [
@@ -162,6 +182,15 @@ define(
 		"شوال",
 		"ذو القعدة",
 		"ذو الحجة"
+	],
+	"days-format-short": [
+		"الأحد",
+		"الاثنين",
+		"الثلاثاء",
+		"الأربعاء",
+		"الخميس",
+		"الجمعة",
+		"السبت"
 	],
 	"dateFormatItem-d": "d",
 	"quarters-format-wide": [

@@ -1,6 +1,15 @@
 define(
-"dojo/cldr/nls/am/gregorian", //begin v1.x content
+//begin v1.x content
 {
+	"days-standAlone-short": [
+		"እ",
+		"ሰ",
+		"ማ",
+		"ረ",
+		"ሐ",
+		"ዓ",
+		"ቅ"
+	],
 	"months-format-narrow": [
 		"ጃ",
 		"ፌ",
@@ -15,20 +24,35 @@ define(
 		"ኖ",
 		"ዲ"
 	],
+	"quarters-standAlone-narrow": [
+		"1",
+		"2",
+		"3",
+		"4"
+	],
 	"field-weekday": "አዘቦት",
 	"dateFormatItem-yQQQ": "QQQ y",
-	"dateFormatItem-yMEd": "E, M/d/y",
+	"dateFormatItem-yMEd": "E፣ d/M/y",
 	"dateFormatItem-MMMEd": "E, MMM d",
 	"eraNarrow": [
 		"ዓ/ዓ",
 		"ዓ/ም"
+	],
+	"days-format-short": [
+		"እ",
+		"ሰ",
+		"ማ",
+		"ረ",
+		"ሐ",
+		"ዓ",
+		"ቅ"
 	],
 	"dateFormat-long": "d MMMM y",
 	"months-format-wide": [
 		"ጃንዩወሪ",
 		"ፌብሩወሪ",
 		"ማርች",
-		"ኤፕረል",
+		"ኤፕሪል",
 		"ሜይ",
 		"ጁን",
 		"ጁላይ",
@@ -38,7 +62,8 @@ define(
 		"ኖቬምበር",
 		"ዲሴምበር"
 	],
-	"dayPeriods-format-wide-pm": "ከሳዓት",
+	"dateTimeFormat-medium": "{1} {0}",
+	"dayPeriods-format-wide-pm": "ከሰዓት",
 	"dateFormat-full": "EEEE, d MMMM y",
 	"dateFormatItem-Md": "M/d",
 	"dateFormatItem-yMd": "d/M/y",
@@ -48,13 +73,13 @@ define(
 		"ጃንዩወሪ",
 		"ፌብሩወሪ",
 		"ማርች",
-		"ኤፕረል",
+		"ኤፕሪል",
 		"ሜይ",
 		"ጁን",
 		"ጁላይ",
 		"ኦገስት",
 		"ሴፕቴምበር",
-		"ኦክተውበር",
+		"ኦክቶበር",
 		"ኖቬምበር",
 		"ዲሴምበር"
 	],
@@ -74,7 +99,7 @@ define(
 		"ጃንዩ",
 		"ፌብሩ",
 		"ማርች",
-		"ኤፕረ",
+		"ኤፕሪ",
 		"ሜይ",
 		"ጁን",
 		"ጁላይ",
@@ -93,21 +118,21 @@ define(
 		"ጃንዩ",
 		"ፌብሩ",
 		"ማርች",
-		"ኤፕረ",
+		"ኤፕሪ",
 		"ሜይ",
 		"ጁን",
 		"ጁላይ",
 		"ኦገስ",
 		"ሴፕቴ",
-		"ኦክተ",
+		"ኦክቶ",
 		"ኖቬም",
 		"ዲሴም"
 	],
 	"quarters-format-abbr": [
-		"Q1",
-		"Q2",
-		"Q3",
-		"Q4"
+		"ሩብ1",
+		"ሩብ2",
+		"ሩብ3",
+		"ሩብ4"
 	],
 	"quarters-standAlone-wide": [
 		"1ኛው ሩብ",
@@ -129,17 +154,17 @@ define(
 	"timeFormat-medium": "h:mm:ss a",
 	"dateFormatItem-Hm": "HH:mm",
 	"quarters-standAlone-abbr": [
-		"Q1",
-		"Q2",
-		"Q3",
-		"Q4"
+		"ሩብ1",
+		"ሩብ2",
+		"ሩብ3",
+		"ሩብ4"
 	],
 	"eraAbbr": [
 		"ዓ/ዓ",
 		"ዓ/ም"
 	],
 	"field-minute": "ደቂቃ",
-	"field-dayperiod": "ጡዎት/ከሰአት",
+	"field-dayperiod": "ጥዋት/ከሰዓት",
 	"days-standAlone-abbr": [
 		"እሑድ",
 		"ሰኞ",
@@ -159,9 +184,11 @@ define(
 	],
 	"field-day-relative+-1": "ትናንት",
 	"dateFormatItem-h": "h a",
+	"dateTimeFormat-long": "{1} {0}",
 	"field-day-relative+-2": "ከትናንት ወዲያ",
 	"dateFormatItem-MMMd": "MMM d",
 	"dateFormatItem-MEd": "E, M/d",
+	"dateTimeFormat-full": "{1} {0}",
 	"dateFormatItem-yMMMM": "MMMM y",
 	"field-day": "ቀን",
 	"days-format-wide": [
@@ -189,7 +216,7 @@ define(
 		"ኖ",
 		"ዲ"
 	],
-	"field-year-relative+-1": "ያለፈው አመት",
+	"field-year-relative+-1": "ያለፈው ዓመት",
 	"field-month-relative+-1": "ያለፈው ወር",
 	"dateFormatItem-hm": "h:mm a",
 	"days-format-abbr": [
@@ -226,19 +253,22 @@ define(
 		"ቅ"
 	],
 	"dateFormatItem-MMM": "LLL",
-	"dayPeriods-format-wide-am": "ጡዋት",
+	"dayPeriods-format-wide-am": "ጥዋት",
 	"dateFormatItem-MMMMEd": "E, MMMM d",
 	"dateFormat-short": "dd/MM/yyyy",
 	"field-second": "ሰከንድ",
-	"dateFormatItem-yMMMEd": "E, MMM d, y",
+	"dateFormatItem-yMMMEd": "E፣ MMM d y",
 	"field-month-relative+0": "በዚህ ወር",
 	"field-month-relative+1": "የሚቀጥለው ወር",
+	"dateFormatItem-Ed": "E d",
 	"field-week": "ሳምንት",
 	"dateFormat-medium": "d MMM y",
 	"field-year-relative+0": "በዚህ ዓመት",
 	"field-week-relative+-1": "ባለፈው ሳምንት",
 	"field-year-relative+1": "የሚቀጥለው ዓመት",
+	"dateTimeFormat-short": "{1} {0}",
 	"dateFormatItem-Hms": "HH:mm:ss",
+	"dateFormatItem-hms": "h:mm:ss a",
 	"field-week-relative+0": "በዚህ ሣምንት",
 	"field-week-relative+1": "የሚቀጥለው ሳምንት"
 }

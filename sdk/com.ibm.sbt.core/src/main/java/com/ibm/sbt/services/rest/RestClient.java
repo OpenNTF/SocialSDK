@@ -42,7 +42,11 @@ import com.ibm.sbt.services.endpoints.ConnectionsBasicEndpoint;
 import com.ibm.sbt.services.endpoints.Endpoint;
 
 /**
- * @author mwallace
+ * RestClient is a helper class which enables quick access to REST Styled Web Services
+ * 
+ * @author Mark Wallace <mwallace@ie.ibm.com>
+ * @author David Ryan
+ * @author Paul Bastide <pbastide@us.ibm.com> 
  *
  */
 public class RestClient {
@@ -89,6 +93,9 @@ public class RestClient {
 	 * @return RestClient - An instance of the RestClient
 	 */
 	public RestClient() {
+		//FIX: #1664 - RestClient Endpoint Exception
+		//Adding Standalone Init for General Activation of the Context
+		initContext();
 	}
 
 	//

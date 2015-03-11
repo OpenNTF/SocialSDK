@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -15,12 +15,14 @@
  */
 
 /**
- * Social Business Toolkit SDK.
+ * Social Business Toolkit SDK 
  */
-define(['dojo/i18n'],function(i18n) {
-	    var load = function(id, require, callback){	    	
-	    	i18n.load(id, require, callback); 
-	    };
+
+
+define({
+  root: ({	 
+	  todayAt : "Today at ",
+      on : "on "
+  })
+  
 });
-
-

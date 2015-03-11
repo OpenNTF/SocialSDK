@@ -20,7 +20,7 @@
 define(["../../../declare",
         "../../../dom",
         "../ConnectionsGridRenderer",
-        "../../../lang", "../../../stringUtil", "../../../i18n",
+        "../../../lang", "../../../stringUtil", "../../../LocaleUtil",
         "../../../i18n!./nls/SearchGridRenderer",
         "../../../text!./templates/BookmarkBody.html",
         "../../../text!./templates/CalendarBody.html",
@@ -42,7 +42,7 @@ define(["../../../declare",
         "../../../text!./templates/img.html",
         "../../../text!./templates/em.html",
         "../../../text!./templates/div.html"],
-        function(declare, dom, ConnectionsGridRenderer, lang, stringUtil, i18n, nls, bookmarkBodyTemplate, calendarBodyTemplate, communityBodyTemplate, defaultBodyTemplate, defaultHeaderTemplate, defaultSummaryTemplate, profileBodyTemplate, profileHeaderTemplate, personCardTemplate, statusUpdateExtraHeaderTemplate, statusUpdateHeaderTemplate, aElement, tdElement, trElement, liElement, ulElement, spanElement, imgElement, emElement, divElement) {
+        function(declare, dom, ConnectionsGridRenderer, lang, stringUtil, localeUtil, nls, bookmarkBodyTemplate, calendarBodyTemplate, communityBodyTemplate, defaultBodyTemplate, defaultHeaderTemplate, defaultSummaryTemplate, profileBodyTemplate, profileHeaderTemplate, personCardTemplate, statusUpdateExtraHeaderTemplate, statusUpdateHeaderTemplate, aElement, tdElement, trElement, liElement, ulElement, spanElement, imgElement, emElement, divElement) {
 
     /**
      * @class SearchGridRenderer
@@ -947,12 +947,12 @@ define(["../../../declare",
         },
         
         createdLabel: function(grid, item, i, items){
-            var result = i18n.getSearchUpdatedLabel(item.getValue('created'));
+            var result = localeUtil.getSearchUpdatedLabel(item.getValue('created'));
             return result;
         },
         
         updatedLabel: function(grid, item, i, items){
-            var result = i18n.getSearchUpdatedLabel(item.getValue('updated'));
+            var result = localeUtil.getSearchUpdatedLabel(item.getValue('updated'));
             return result;
         },
         

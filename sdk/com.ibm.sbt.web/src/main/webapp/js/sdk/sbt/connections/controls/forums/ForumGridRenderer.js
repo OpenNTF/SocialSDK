@@ -16,7 +16,7 @@
 
 define(["../../../declare",
         "../ConnectionsGridRenderer",
-        "../../../i18n",
+        "../../../LocaleUtil",
         "../../../dom",
         "../../../lang",
         "../../../connections/ForumConstants",
@@ -34,7 +34,7 @@ define(["../../../declare",
         "../../../text!./templates/BootstrapTopicRow.html",
         "../../../i18n!./nls/ForumGridRenderer"], 
 
-    function(declare, ConnectionsGridRenderer, i18n, dom, lang, consts, ForumRow, tableHeader, TopicRow, ForumTopicRow,
+    function(declare, ConnectionsGridRenderer, localeUtil, dom, lang, consts, ForumRow, tableHeader, TopicRow, ForumTopicRow,
                     TopicHeader, ReplyTemplate, ReplyHeader,ReplyBreadCrumb,TopicBreadCrumb, 
                     MyTopicsBreadCrumb, BootstrapForumRow,BootstrapTopicRow, nls){
                 
@@ -222,7 +222,7 @@ define(["../../../declare",
                 
                 
                 getDateLabel: function(grid, item, i, items){
-                     var result = i18n.getUpdatedLabel(item.getValue('updated'));
+                     var result = localeUtil.getUpdatedLabel(item.getValue('updated'));
                      return result;
                 },
                 

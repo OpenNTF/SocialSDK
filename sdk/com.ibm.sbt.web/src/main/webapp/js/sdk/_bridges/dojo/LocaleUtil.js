@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -16,11 +16,20 @@
 
 /**
  * Social Business Toolkit SDK.
+ * @module sbt.LocaleUtil
  */
-define(['dojo/i18n'],function(i18n) {
-	    var load = function(id, require, callback){	    	
-	    	i18n.load(id, require, callback); 
-	    };
+define(['dojo/date/locale'],function(locale) {
+    
+	return{
+
+	    getLocalizedTime : function(date) {
+	        return locale.format(date, { selector:"time",formatLength:"short" });
+	    },
+	        
+	    getLocalizedDate : function(date) {
+	        return locale.format(date, { selector:"date",formatLength:"medium" });
+	    },
+	};
 });
 
 

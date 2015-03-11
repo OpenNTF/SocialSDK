@@ -19,32 +19,6 @@
  * @module sbt.i18n
  */
 define(['./_bridge/i18n'],function(i18n) {
-    var nls = {
-        todayAt : "Today at ",
-        on : "on "
-    };
-    
-    i18n.getUpdatedLabel = function(dateStr) {
-        var date = new Date(dateStr);
-        var dateClone = new Date(date.getTime());
-        var now = new Date();
-        if (dateClone.setHours(0,0,0,0) == now.setHours(0,0,0,0)) {
-            return nls.todayAt + this.getLocalizedTime(date);
-        } else {
-            return nls.on + this.getLocalizedDate(date);
-        }
-    };
-        
-    i18n.getSearchUpdatedLabel = function(dateStr) {
-        var date = new Date(dateStr);
-        var dateClone = new Date(date.getTime());
-        var now = new Date();
-        if (dateClone.setHours(0,0,0,0) == now.setHours(0,0,0,0)) {
-            return nls.todayAt + this.getLocalizedTime(date);
-        } else {
-            return this.getLocalizedDate(date);
-        }
-    };
     return i18n;
 });
 

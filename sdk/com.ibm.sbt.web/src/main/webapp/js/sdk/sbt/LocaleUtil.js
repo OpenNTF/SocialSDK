@@ -28,9 +28,9 @@ define(['./_bridge/LocaleUtil', 'sbt/i18n!sbt/nls/Locale'],function(localeUtil,n
 	        var dateClone = new Date(date.getTime());
 	        var now = new Date();
 	        if (dateClone.setHours(0,0,0,0) == now.setHours(0,0,0,0)) {
-	            return this.nls.todayAt + this.getLocalizedTime(date);
+	            return this.nls.todayAt + localeUtil.getLocalizedTime(date);
 	        } else {
-	            return this.nls.on + this.getLocalizedDate(date);
+	            return this.nls.on + localeUtil.getLocalizedDate(date);
 	        }
 	    },
 	        
@@ -39,9 +39,9 @@ define(['./_bridge/LocaleUtil', 'sbt/i18n!sbt/nls/Locale'],function(localeUtil,n
 	        var dateClone = new Date(date.getTime());
 	        var now = new Date();
 	        if (dateClone.setHours(0,0,0,0) == now.setHours(0,0,0,0)) {
-	            return this.nls.todayAt + this.getLocalizedTime(date);
+	            return this.nls.todayAt + localeUtil.getLocalizedTime(date);
 	        } else {
-	            return this.getLocalizedDate(date);
+	            return localeUtil.getLocalizedDate(date);
 	        }
 	    }
 	};

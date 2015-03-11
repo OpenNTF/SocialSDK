@@ -16,7 +16,7 @@
 
 define(["../../../declare",
         "../ConnectionsGridRenderer",
-        "../../../LocaleUtil",
+        "../../../localeUtil",
         "../../../text!./templates/ActivityRow.html",
         "../../../text!./templates/BootstrapActivityRow.html",
         "../../../i18n!./nls/ActivityGridRenderer"], 

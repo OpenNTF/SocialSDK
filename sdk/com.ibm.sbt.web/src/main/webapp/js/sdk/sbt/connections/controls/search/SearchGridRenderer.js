@@ -20,7 +20,7 @@
 define(["../../../declare",
         "../../../dom",
         "../ConnectionsGridRenderer",
-        "../../../lang", "../../../stringUtil", "../../../LocaleUtil",
+        "../../../lang", "../../../stringUtil", "../../../localeUtil",
         "../../../i18n!./nls/SearchGridRenderer",
         "../../../text!./templates/BookmarkBody.html",
         "../../../text!./templates/CalendarBody.html",

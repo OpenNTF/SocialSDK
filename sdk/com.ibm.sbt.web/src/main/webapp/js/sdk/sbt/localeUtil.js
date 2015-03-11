@@ -18,7 +18,7 @@
  * Social Business Toolkit SDK.
  * @module sbt.LocaleUtil
  */
-define(['./_bridge/LocaleUtil', 'sbt/i18n!sbt/nls/Locale'],function(localeUtil,nls) {
+define(['./_bridge/localeUtil', 'sbt/i18n!sbt/nls/Locale'],function(localeUtil,nls) {
 	return{
 		
 		 nls : nls,

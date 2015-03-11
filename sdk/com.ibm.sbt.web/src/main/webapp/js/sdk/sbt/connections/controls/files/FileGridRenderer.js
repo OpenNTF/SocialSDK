@@ -19,7 +19,7 @@
  */
 define(["../../../declare",
         "../../../stringUtil", 
-        "../../../LocaleUtil",
+        "../../../localeUtil",
         "../ConnectionsGridRenderer",
         "../../../i18n!./nls/FileGridRenderer",
         "../../../text!./templates/FileRow.html",

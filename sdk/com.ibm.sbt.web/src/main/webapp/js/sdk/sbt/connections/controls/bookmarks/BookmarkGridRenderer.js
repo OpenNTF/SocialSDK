@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-define(["../../../declare", "../../../LocaleUtil", 
+define(["../../../declare", "../../../localeUtil", 
         "../../../connections/controls/ConnectionsGridRenderer",
         "../../../text!../../../connections/controls/bookmarks/templates/BookmarkRow.html",
         "../../../text!../../../connections/controls/bookmarks/templates/BootstrapBookmarkRow.html",

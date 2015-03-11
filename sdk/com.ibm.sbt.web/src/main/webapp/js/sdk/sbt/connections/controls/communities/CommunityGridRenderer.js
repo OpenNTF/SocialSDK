@@ -17,7 +17,7 @@
 /**
  * @module sbt.connections.controls.communities.CommunityGridRenderer
  */
-define(["../../../declare", "../../../stringUtil", "../../../LocaleUtil", "../../../lang",
+define(["../../../declare", "../../../stringUtil", "../../../localeUtil", "../../../lang",
         "../../../connections/controls/ConnectionsGridRenderer",
         "../../../text!../../../connections/controls/communities/templates/CommunityRow.html",
         "../../../text!../../../connections/controls/communities/templates/BootstrapCommunityRow.html",

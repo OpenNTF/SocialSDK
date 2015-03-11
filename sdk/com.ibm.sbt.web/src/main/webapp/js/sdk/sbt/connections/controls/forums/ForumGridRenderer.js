@@ -16,7 +16,7 @@
 
 define(["../../../declare",
         "../ConnectionsGridRenderer",
-        "../../../LocaleUtil",
+        "../../../localeUtil",
         "../../../dom",
         "../../../lang",
         "../../../connections/ForumConstants",

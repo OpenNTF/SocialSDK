@@ -18,9 +18,7 @@
  * Social Business Toolkit SDK.
  */
 define(['dojo/i18n'],function(i18n) {
-	    var load = function(id, require, callback){	    	
-	    	i18n.load(id, require, callback); 
-	    };
+	   return i18n;
 });
 
 

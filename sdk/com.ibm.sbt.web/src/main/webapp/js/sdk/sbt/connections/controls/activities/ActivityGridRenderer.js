@@ -16,12 +16,12 @@
 
 define(["../../../declare",
         "../ConnectionsGridRenderer",
-        "../../../i18n",
+        "../../../localeUtil",
         "../../../text!./templates/ActivityRow.html",
         "../../../text!./templates/BootstrapActivityRow.html",
         "../../../i18n!./nls/ActivityGridRenderer"], 
 
-    function(declare, ConnectionsGridRenderer, i18n, ActivityRow, BootstrapActivityRow, nls){
+    function(declare, ConnectionsGridRenderer, localeUtil, ActivityRow, BootstrapActivityRow, nls){
 		
 		/**
 		 * @class ActivityGridRenderer
@@ -77,7 +77,7 @@ define(["../../../declare",
 	         updatedDate: function(grid, item, i, items) {
 	        	 	var updatedLabel = item.getValue("updated");
 	        	 	if(updatedLabel.length > 0){
-	        	 		 return i18n.getUpdatedLabel(updatedLabel);
+	        	 		 return localeUtil.getUpdatedLabel(updatedLabel);
 	        	 	}else{
 	        	 		return "";
 	        	 	}  
@@ -94,7 +94,7 @@ define(["../../../declare",
 	         getDueDate: function(grid, item, i, items) {
 	        	 var dueDate = item.getValue("dueDate");
 	        	 	if(dueDate.length > 0){
-	        	 		 return i18n.getUpdatedLabel(dueDate);
+	        	 		 return localeUtil.getUpdatedLabel(dueDate);
 	        	 	}else{
 	        	 		return "";
 	        	 	}

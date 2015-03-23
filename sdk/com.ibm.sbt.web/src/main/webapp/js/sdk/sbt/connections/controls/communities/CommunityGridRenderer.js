@@ -17,13 +17,13 @@
 /**
  * @module sbt.connections.controls.communities.CommunityGridRenderer
  */
-define(["../../../declare", "../../../stringUtil", "../../../i18n", "../../../lang",
+define(["../../../declare", "../../../stringUtil", "../../../localeUtil", "../../../lang",
         "../../../connections/controls/ConnectionsGridRenderer",
         "../../../text!../../../connections/controls/communities/templates/CommunityRow.html",
         "../../../text!../../../connections/controls/communities/templates/BootstrapCommunityRow.html",
         "../../../text!../../../connections/controls/communities/templates/TagAnchor.html",
         "../../../i18n!../../../connections/controls/communities/nls/CommunityGridRenderer"], 
-        function(declare, stringUtil, i18n, lang, ConnectionsGridRenderer, CommunityRow,
+        function(declare, stringUtil, localeUtil, lang, ConnectionsGridRenderer, CommunityRow,
         		BootstrapCommunityRow, TagAnchor, nls) {
 
     /**
@@ -118,7 +118,7 @@ define(["../../../declare", "../../../stringUtil", "../../../i18n", "../../../la
           * @returns The date when the community was last updates
           */
          updatedDate: function(grid, item, i, items) {
-                 return i18n.getUpdatedLabel((item.getValue("updated")));
+                 return localeUtil.getUpdatedLabel((item.getValue("updated")));
          },
          
          /**

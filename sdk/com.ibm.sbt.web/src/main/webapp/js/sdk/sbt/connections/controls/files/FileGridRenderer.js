@@ -19,7 +19,7 @@
  */
 define(["../../../declare",
         "../../../stringUtil", 
-        "../../../i18n",
+        "../../../localeUtil",
         "../ConnectionsGridRenderer",
         "../../../i18n!./nls/FileGridRenderer",
         "../../../text!./templates/FileRow.html",
@@ -28,7 +28,7 @@ define(["../../../declare",
         "../../../text!./templates/CommentRow.html",
         "../../../text!./templates/BootstrapFileRow.html",
         "../../../text!./templates/BootstrapFolderRow.html"], 
-        function(declare, stringUtil, i18n, ConnectionsGridRenderer, nls, 
+        function(declare, stringUtil, localeUtil, ConnectionsGridRenderer, nls, 
         		fileTemplate, recycledFileTemplate, folderTemplate, commentTemplate,
         		bootstrapFileTemplate,bootstrapFolderTemplate) {
     
@@ -115,7 +115,7 @@ define(["../../../declare",
           * @returns A String, when the File was created
           */
          createdLabel: function(grid, item, i, items){
-             var result = i18n.getUpdatedLabel(item.getValue('created'));
+             var result = localeUtil.getUpdatedLabel(item.getValue('created'));
              return result;
          },
          
@@ -134,7 +134,7 @@ define(["../../../declare",
           * @returns String, Last modified date
           */
          modifiedLabel: function(grid, item, i, items){
-             var result = i18n.getUpdatedLabel(item.getValue('modified'));
+             var result = localeUtil.getUpdatedLabel(item.getValue('modified'));
              return result;
          },
          
@@ -149,8 +149,8 @@ define(["../../../declare",
           */
          commentEditedLabel: function(grid, item, i, items){
              var result = "";
-             var modified = i18n.getUpdatedLabel(item.getValue('modified'));
-             var created = i18n.getUpdatedLabel(item.getValue('created'));
+             var modified = localeUtil.getUpdatedLabel(item.getValue('modified'));
+             var created = localeUtil.getUpdatedLabel(item.getValue('created'));
              
              if(modified != created)
                  result = "Edited " + modified;

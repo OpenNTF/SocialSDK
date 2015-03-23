@@ -16,10 +16,20 @@
 
 /**
  * Social Business Toolkit SDK.
- * @module sbt.i18n
+ * @module sbt.LocaleUtil
  */
-define(['./_bridge/i18n'],function(i18n) {
-    return i18n;
+define(['dojo/date/locale'],function(locale) {
+    
+	return{
+	 
+	    getLocalizedTime : function(date) {
+	        return locale.format(date, { selector:"time",formatLength:"short" });
+	    },
+	        
+	    getLocalizedDate : function(date) {
+	        return locale.format(date, { selector:"date",formatLength:"medium" });
+	    },
+	};
 });
 
 

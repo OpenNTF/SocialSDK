@@ -34,6 +34,7 @@ import com.ibm.sbt.services.client.connections.activities.serializers.ActivitySe
  */
 public class ActivityCreateShareIntentTest extends BaseActivityServiceTest {
 
+	@org.junit.Ignore("Issue with Mime Depdency")
 	@Test
 	public void testCreateActivities() throws ClientServicesException, XMLException {
 		Activity activityDefault = new Activity();

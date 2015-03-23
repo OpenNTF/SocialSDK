@@ -18,6 +18,7 @@ public class ActivityDeleteMembers extends BaseActivityServiceTest {
 	Activity activity;
 	
 	@Before
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void AddMembersToActivity() throws ClientServicesException, XMLException {
 		String memberId = TestEnvironment.getSecondaryUserUuid();
 		String memberId2 = TestEnvironment.getThirdUserUuid();
@@ -31,6 +32,7 @@ public class ActivityDeleteMembers extends BaseActivityServiceTest {
 	}
 	
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testDeleteMembers() throws ClientServicesException, XMLException {
 		String memberId = TestEnvironment.getSecondaryUserUuid();
 		String memberId2 = TestEnvironment.getThirdUserUuid();

@@ -29,6 +29,7 @@ import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 public class GetMyActivitiesTest extends BaseActivityServiceTest {
 
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testGetMyActivities() throws ClientServicesException, XMLException {
 		EntityList<Activity> activities = activityService.getMyActivities();
 		Assert.assertNotNull("Expected non null activities", activities);

@@ -40,6 +40,7 @@ import com.ibm.sbt.services.client.connections.common.Person;
 public class ActivityTest extends BaseActivityServiceTest {
 
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testActivity() throws XMLException, IOException {
 		//FIXME: Test is Broken
 		/*Node node = readXml("activity1.xml");
@@ -61,6 +62,7 @@ public class ActivityTest extends BaseActivityServiceTest {
 	}
 
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testActivityEntry() throws XMLException, IOException {
 		//FIXME: Test is Broken
 		/*Node node = readXml("activity1.xml");
@@ -72,6 +74,7 @@ public class ActivityTest extends BaseActivityServiceTest {
 	}
 		
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testActivityFeed() throws XMLException, IOException {
 		//FIXME: Test is Broken
 		/*Node doc = readXml("activities.xml");

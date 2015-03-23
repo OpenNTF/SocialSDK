@@ -25,6 +25,7 @@ import java.util.TimeZone;
 
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.Assume;
 import org.junit.Before;
 import org.w3c.dom.Node;
 
@@ -64,7 +65,7 @@ public class BaseActivityServiceTest extends BaseUnitTest {
             }
         } catch (ClassNotFoundException e) {
             System.out.println("Short Circuiting Tests");
-            Assert.assertTrue("Short Circuit", true);
+            Assume.assumeTrue("Short Circuit", true);
         }
     }
 	

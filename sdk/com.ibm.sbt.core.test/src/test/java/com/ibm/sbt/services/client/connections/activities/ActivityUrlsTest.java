@@ -30,6 +30,7 @@ import com.ibm.sbt.services.client.base.NamedUrlPart;
 public class ActivityUrlsTest extends BaseActivityServiceTest {
 
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testActivityUrls() throws XMLException, IOException {
 		NamedUrlPart activityUuid = ActivityUrls.activityPart("11111-22222-33333-44444");
 		NamedUrlPart activityNodeUuid = ActivityUrls.activityNodePart("11111-22222-33333-44444");

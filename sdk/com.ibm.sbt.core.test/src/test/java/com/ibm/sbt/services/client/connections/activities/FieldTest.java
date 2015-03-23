@@ -37,6 +37,7 @@ import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
  */
 public class FieldTest extends BaseActivityServiceTest {
 
+	@org.junit.Ignore("Issue with Mime Depdency")
 	@Test
 	public void testFields() throws XMLException, IOException {
 		//FIXME: Test is Broken

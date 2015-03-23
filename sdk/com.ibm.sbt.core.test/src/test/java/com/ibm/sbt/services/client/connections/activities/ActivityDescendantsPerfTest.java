@@ -36,6 +36,7 @@ public class ActivityDescendantsPerfTest extends BaseActivityServiceTest {
 	private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");	
 
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testDescendants() throws ClientServicesException, XMLException {
 		long start = System.currentTimeMillis();
 		activity = createActivity("ActivityDescendantsUpdatedSince-"+start);
@@ -50,6 +51,7 @@ public class ActivityDescendantsPerfTest extends BaseActivityServiceTest {
 	}
 	
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testDescendantsUpdatedSince() throws ClientServicesException, XMLException {
 		long start = System.currentTimeMillis();
 		activity = createActivity("ActivityDescendantsUpdatedSince-"+start);
@@ -68,6 +70,7 @@ public class ActivityDescendantsPerfTest extends BaseActivityServiceTest {
 	}
 	
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testDescendantsUpdatedUntil() throws ClientServicesException, XMLException {
 		long start = System.currentTimeMillis();
 		activity = createActivity("ActivityDescendantsUpdatedUntil-"+start);
@@ -86,6 +89,7 @@ public class ActivityDescendantsPerfTest extends BaseActivityServiceTest {
 	}
 	
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testDescendantsUpdatedSinceUntil() throws ClientServicesException, XMLException {
 		long start = System.currentTimeMillis();
 		activity = createActivity("ActivityDescendantsUpdatedSinceUntil-"+start);
@@ -108,6 +112,7 @@ public class ActivityDescendantsPerfTest extends BaseActivityServiceTest {
 	}
 	
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testDescendantsCreatedSinceUntil() throws ClientServicesException, XMLException {
 		long start = System.currentTimeMillis();
 		activity = createActivity("ActivityDescendantsCreatedSinceUntil-"+start);

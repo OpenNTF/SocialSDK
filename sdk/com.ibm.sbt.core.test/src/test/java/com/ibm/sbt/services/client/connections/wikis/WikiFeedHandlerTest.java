@@ -36,6 +36,7 @@ import com.ibm.sbt.services.client.base.serializers.BaseEntitySerializer.DateSer
 public class WikiFeedHandlerTest extends BaseWikiServiceTest {
 
 	@Test
+	@org.junit.Ignore
 	public void testWiki() {
 		String wikiFilePath = "wiki.xml";
 		IFeedHandler<Wiki> wikiFeedHandler = wikiService.getWikiFeedHandler();

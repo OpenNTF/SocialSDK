@@ -34,6 +34,7 @@ import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 public class ActivityCreateWithTagsTest extends BaseActivityServiceTest {
 
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testCreateActivityWithTags() throws ClientServicesException, XMLException {
     	List<String> tags = new ArrayList<String>();
         tags.add("client=46454e5f-cabe-4f00-a05a-69f15798f304");

@@ -33,6 +33,7 @@ import com.ibm.commons.util.StringUtil;
 public class ActivityConcurrentCreates {
 	
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testConcurrentCreates() {
 		
 		String url = System.getProperty("ServerUrl");

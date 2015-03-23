@@ -27,6 +27,7 @@ import com.ibm.sbt.services.client.ClientServicesException;
 public class CreateActivityPriorityData extends BaseActivityServiceTest {
 
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void createActivityPriorityData() throws ClientServicesException, XMLException {
 		int[] priorities = new int[] { 0, 1, 2000, 3000 };
 		for (int i=0; i<priorities.length; i++) {

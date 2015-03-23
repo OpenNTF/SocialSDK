@@ -15,6 +15,7 @@ import com.ibm.sbt.test.lib.TestEnvironment;
 public class ActivityAddMembers extends BaseActivityServiceTest {
 
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testAddMembers() throws ClientServicesException, XMLException {
 		String memberId = TestEnvironment.getSecondaryUserUuid();
 		String memberId2 = TestEnvironment.getCurrentUserUuid();
@@ -30,6 +31,7 @@ public class ActivityAddMembers extends BaseActivityServiceTest {
 	}
 	
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testBadUserId() throws ClientServicesException, XMLException {
 		Member member = new Member();
 		Member member2 = new Member();
@@ -46,6 +48,7 @@ public class ActivityAddMembers extends BaseActivityServiceTest {
 	}
 	
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testBadActivityId() throws ClientServicesException, XMLException {
 		String memberId = TestEnvironment.getSecondaryUserUuid();
 		String memberId2 = TestEnvironment.getCurrentUserUuid();

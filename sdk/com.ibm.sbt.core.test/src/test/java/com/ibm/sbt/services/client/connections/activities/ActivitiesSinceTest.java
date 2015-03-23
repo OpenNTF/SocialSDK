@@ -33,6 +33,7 @@ import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 public class ActivitiesSinceTest extends BaseActivityServiceTest {
 
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testActivitiesSince() throws ClientServicesException, XMLException {
 		List<Activity> createdActivities = createActivities("Activities", 5, 1000);
 		
@@ -49,6 +50,7 @@ public class ActivitiesSinceTest extends BaseActivityServiceTest {
 	}
 	
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testActivitiesUntil() throws ClientServicesException, XMLException {
 		if (!isV5OrHigher()) return;
 
@@ -66,6 +68,7 @@ public class ActivitiesSinceTest extends BaseActivityServiceTest {
 	}
 	
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testActivitiesSinceUntil() throws ClientServicesException, XMLException {
 		if (!isV5OrHigher()) return;
 		

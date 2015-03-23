@@ -34,6 +34,7 @@ import com.ibm.sbt.services.client.connections.common.Tag;
 public class ActivityGetUntilTest extends BaseActivityServiceTest {
 
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testGetAllActivitiesUntil() throws ClientServicesException {
 		Date now = new Date();
 				

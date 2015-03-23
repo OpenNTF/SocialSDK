@@ -28,6 +28,7 @@ import com.ibm.sbt.services.client.ClientServicesException;
 public class ActivityNodeCrudrTest extends BaseActivityServiceTest {
 
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testCreateActivityNode() throws ClientServicesException, XMLException {
 		Activity activity = createActivity();
 		
@@ -48,6 +49,7 @@ public class ActivityNodeCrudrTest extends BaseActivityServiceTest {
 	}
 	
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testReadActivityNode() throws ClientServicesException, XMLException {
 		ActivityNode created = createActivityNode();
 		
@@ -63,6 +65,7 @@ public class ActivityNodeCrudrTest extends BaseActivityServiceTest {
 	}
 	
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testUpdateActivityNode() throws ClientServicesException, XMLException {
 		ActivityNode created = createActivityNode();
 		
@@ -87,6 +90,7 @@ public class ActivityNodeCrudrTest extends BaseActivityServiceTest {
 	}
 	
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testDeleteActivityNode() throws ClientServicesException, XMLException {
 		ActivityNode created = createActivityNode();
 		String createdNodeUuid = created.getActivityNodeUuid();
@@ -100,6 +104,7 @@ public class ActivityNodeCrudrTest extends BaseActivityServiceTest {
 	}
 	
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testRestoreActivityNode() throws ClientServicesException, XMLException {
 		ActivityNode created = createActivityNode();
 		

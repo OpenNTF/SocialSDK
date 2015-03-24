@@ -57,7 +57,6 @@ define([ "dojo/_base/declare", "dojo/_base/lang", "dojo/request", "../util", "..
         request : function(url,options) {
         	var promise = new Promise();
             promise.response = new Promise();
-            var args = lang.mixin({withCredentials: true}, options);
             request(url, args).response.then(
                 function(response){
                   promise.fulfilled(response);

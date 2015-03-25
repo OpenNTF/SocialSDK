@@ -59,8 +59,8 @@ define([ "dojo/_base/declare", "dojo/_base/lang", "dojo/request", "../util", "..
             promise.response = new Promise();
             request(url, args).response.then(
                 function(response){
-                  promise.fulfilled(response.data);
-                  promise.response.fulfilled(response);
+                  promise.fulfilled(response.data);//return toolkit agnostic promise
+                  promise.response.fulfilled(response);//return Dojo prmoise.response
                 }, 
                 function(error){
                   promise.rejected(error);

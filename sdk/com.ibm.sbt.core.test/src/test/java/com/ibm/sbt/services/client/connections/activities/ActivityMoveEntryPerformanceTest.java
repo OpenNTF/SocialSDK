@@ -30,6 +30,7 @@ import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 public class ActivityMoveEntryPerformanceTest extends BaseActivityServiceTest {
 
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testMoveEntry() throws ClientServicesException {
 		
 		long start = System.currentTimeMillis();

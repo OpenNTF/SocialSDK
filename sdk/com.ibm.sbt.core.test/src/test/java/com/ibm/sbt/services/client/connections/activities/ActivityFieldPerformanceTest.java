@@ -32,6 +32,7 @@ import com.ibm.sbt.test.lib.TestEnvironment;
 public class ActivityFieldPerformanceTest extends BaseActivityServiceTest {
 
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testCreateLargeActivity() throws ClientServicesException {
 		Activity activity = createActivity();
 		this.activity = null;
@@ -106,7 +107,8 @@ public class ActivityFieldPerformanceTest extends BaseActivityServiceTest {
 		System.out.println(sb.toString());
 	}	
 	
-	@Test @Ignore
+	@Test 
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testUpdateActivity() throws ClientServicesException {
 		String activityUuid = System.getProperty("activityUuid");
 		

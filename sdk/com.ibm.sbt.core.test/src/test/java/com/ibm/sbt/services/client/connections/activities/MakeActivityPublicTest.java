@@ -34,8 +34,10 @@ public class MakeActivityPublicTest extends BaseActivityServiceTest {
 
 	/*
 	 * Used this test to validate private/public activities created via the UI
+	 * @Test
 	 */
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testReadActivities() throws ClientServicesException, XMLException {
 		String privateUuid = TestEnvironment.getProperty("privateUuid");
 		String publicUuid = TestEnvironment.getProperty("publicUuid");
@@ -61,6 +63,7 @@ public class MakeActivityPublicTest extends BaseActivityServiceTest {
 	}
 	
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testMakeActivityPublic() throws ClientServicesException, XMLException {
 		Activity created = createActivity();
 		

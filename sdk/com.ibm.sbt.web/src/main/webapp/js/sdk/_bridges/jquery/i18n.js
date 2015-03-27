@@ -18,19 +18,7 @@
  * Social Business Toolkit SDK.
  */
 define(['requirejs/i18n'],function(i18n) {
-    return {
-    	load: function(name, req, onload, config){
-    		i18n.load(name, req, onload, config); 
-    	},
-        
-        getLocalizedTime: function(date) {
-            return i18n.getLocalizedTime(date);
-        },
-            
-        getLocalizedDate: function(date) {
-            return i18n.getLocalizedDate(date);
-        }
-    }; 
+    return i18n; 
 });
 
 

@@ -17,27 +17,8 @@
 /**
  * Social Business Toolkit SDK.
  */
-define([],function() {
-    dojo.require("dojo.i18n");
-    dojo.require("dojo.date.locale");
-    var i18n = dojo.i18n;
-    var dateLocale = dojo.date.locale;
-    
-    var load = function(id, require, callback){         
-        i18n.load(id, require, callback);
-    };
-    
-    return {
-        load : load,
-        
-        getLocalizedTime: function(date) {
-            return dateLocale.format(date, {selector:"time", formatLength:"short"});
-        },
-            
-        getLocalizedDate: function(date) {
-            return dateLocale.format(date, {selector:"date", formatLength:"medium"});
-        }
-    }; 
+define(["dojo/i18n"],function(i18n) {
+   return i18n;
 });
 
 

@@ -32,6 +32,7 @@ import com.ibm.sbt.test.lib.TestEnvironment;
 public class ActivityUpdatePerformanceTest extends BaseActivityServiceTest {
 
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testUpdateActivity() throws ClientServicesException {
 		String activityUuid = System.getProperty("activityUuid");
 		

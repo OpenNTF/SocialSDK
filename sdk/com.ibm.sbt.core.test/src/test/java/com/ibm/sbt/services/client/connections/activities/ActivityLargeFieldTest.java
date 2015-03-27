@@ -43,6 +43,7 @@ import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 public class ActivityLargeFieldTest extends BaseActivityServiceTest {
 	
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testCreateNodesWithLargeFields() throws ClientServicesException, XMLException, UnsupportedEncodingException {
 		StringBuilder nodeContent = new StringBuilder();
 		nodeContent.append("Swords Rush ~start~county=Waterford;town=Dunmore~end~ ");
@@ -98,6 +99,7 @@ public class ActivityLargeFieldTest extends BaseActivityServiceTest {
 	}
 	
 	@Test(expected=ClientServicesException.class)
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testCreateLargeFieldFails() throws ClientServicesException, XMLException, UnsupportedEncodingException {
 		StringBuilder content = new StringBuilder();
 		for (int i=0; i<4096; i++) {
@@ -120,6 +122,7 @@ public class ActivityLargeFieldTest extends BaseActivityServiceTest {
 	}
 
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testCreateLargeFields() throws ClientServicesException, XMLException, IOException {
 		InputStream stream = readFile("latin.txt");
 		String content = IOUtils.toString(stream);
@@ -165,6 +168,7 @@ public class ActivityLargeFieldTest extends BaseActivityServiceTest {
 	
 
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testLargeFieldMyActivities() throws ClientServicesException, XMLException, IOException {
 		InputStream stream = readFile("latin.txt");
 		String content = IOUtils.toString(stream);

@@ -30,6 +30,7 @@ import com.ibm.sbt.services.client.ClientServicesException;
 public class ActivityNodeFileTest extends BaseActivityServiceTest {
 
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testCreateActivityNodeFile() throws ClientServicesException, XMLException {
 		//FIXME: Test is Broken
 		/*Activity activity = createActivity();

@@ -35,6 +35,7 @@ import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 public class ActivityReadNoTagsTest extends BaseActivityServiceTest {
 	
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testCreateActivity() throws ClientServicesException, XMLException {
 		
 		Activity activity = new Activity();
@@ -149,6 +150,7 @@ public class ActivityReadNoTagsTest extends BaseActivityServiceTest {
 	}
 
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testReadActivity() throws ClientServicesException, XMLException {
 		//https://apps.na.collabservtest.lotus.com/activities/service/atom2/activities?nodetype=activity&page=1&priority=all&tag=user%3D20133257&ps=1&completed=yes
 		Map<String, String> params = new HashMap<String, String>();

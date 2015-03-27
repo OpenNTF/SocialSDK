@@ -28,6 +28,7 @@ import com.ibm.sbt.services.client.ClientServicesException;
 public class MoveActivityNodeTest extends BaseActivityServiceTest {
 
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testMoveActivityNode() throws ClientServicesException, XMLException {
 		Activity activity = createActivity();
 		

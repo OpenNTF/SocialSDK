@@ -47,6 +47,7 @@ public class CreateActivitiesTest extends BaseActivityServiceTest {
 	*/
 	
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testCreateActivityNode() throws ClientServicesException, XMLException {
 		long start = System.currentTimeMillis();
 		Activity activity = createActivity("CreatedActivityNodes-"+start);
@@ -70,6 +71,7 @@ public class CreateActivitiesTest extends BaseActivityServiceTest {
 	}
 	
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testCreateActivity() throws ClientServicesException, XMLException {
 		//FIXME: Test is Broken
 		/*long start = System.currentTimeMillis();
@@ -82,6 +84,7 @@ public class CreateActivitiesTest extends BaseActivityServiceTest {
 	}
 	
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testCreateActivities() throws ClientServicesException, XMLException {
 		//FIXME: Test is Broken
 		/*for (int i=0; i<10; i++) {

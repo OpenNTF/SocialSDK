@@ -31,6 +31,7 @@ import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 public class ActivityPerformanceTest extends BaseActivityServiceTest {
 
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testCreateActivities() throws ClientServicesException {
 		EntityList<Activity> activities = activityService.getMyActivities();
 		int totalResults = activities.getTotalResults();

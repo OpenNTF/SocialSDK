@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-define(["../../../declare", "../../../i18n", 
+define(["../../../declare", "../../../localeUtil", 
         "../../../connections/controls/ConnectionsGridRenderer",
         "../../../text!../../../connections/controls/bookmarks/templates/BookmarkRow.html",
         "../../../text!../../../connections/controls/bookmarks/templates/BootstrapBookmarkRow.html",
@@ -22,7 +22,7 @@ define(["../../../declare", "../../../i18n",
         "../../../i18n!../../../connections/controls/bookmarks/nls/BookmarkGridRenderer",
         "../../../lang",
         "../../../text!../../../connections/controls/bookmarks/templates/BookmarkListItem.html"], 
-        function(declare, i18n,  ConnectionsGridRenderer, BookmarkRow,BootstrapBookmarkRow,
+        function(declare, localeUtil,  ConnectionsGridRenderer, BookmarkRow,BootstrapBookmarkRow,
         		TagAnchor, nls, lang, BookmarkListItem) {
 
                 /**
@@ -81,7 +81,7 @@ define(["../../../declare", "../../../i18n",
                   * @returns The date when the community was last updates
                   */
                  updatedDate: function(grid, item, i, items) {
-                         return i18n.getSearchUpdatedLabel((item.getValue("updated")));
+                         return localeUtil.getSearchUpdatedLabel((item.getValue("updated")));
                  },
                  
                  /**

@@ -1,11 +1,11 @@
 require(["sbt/controls/grid/Grid", 
          "sbt/connections/controls/ConnectionsGridRenderer", 
          "sbt/config",
-         "sbt/i18n",
+         "sbt/localeUtil",
          "sbt/dom", 
          "sbt/store/parameter",
          "sbt/text!sbt/connections/controls/communities/templates/CommunityRow.html"],
-        function(Grid, ConnectionsGridRenderer, sbt, i18n, dom, parameter, CommunityRow) {
+        function(Grid, ConnectionsGridRenderer, sbt, localeUtil, dom, parameter, CommunityRow) {
     
 		var xpath_community = {
 			"entry"				:"/a:entry",
@@ -63,7 +63,7 @@ require(["sbt/controls/grid/Grid",
                  return this.getValue(item, "memberCount");
              },
              updatedDate: function(grid, item, i, items) {
-                 return i18n.getUpdatedLabel(this.getValue(item, "updated"));
+                 return localeUtil.getUpdatedLabel(this.getValue(item, "updated"));
              },
              displayTags: function(grid, item, i, items) {
                  return "display: none";

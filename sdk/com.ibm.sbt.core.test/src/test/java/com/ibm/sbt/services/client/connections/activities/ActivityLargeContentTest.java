@@ -38,6 +38,7 @@ import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 public class ActivityLargeContentTest extends BaseActivityServiceTest {
 
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testCreateActivity() throws ClientServicesException, XMLException, UnsupportedEncodingException {
 		StringBuilder content = new StringBuilder();
 		for (int i=0; i<4096; i++) {

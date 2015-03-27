@@ -36,6 +36,7 @@ public class ActivityNodeChildrenSinceTest extends BaseActivityServiceTest {
 	private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");	
 
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testNodeChildrenUpdatedSince() throws ClientServicesException, XMLException {
 		long start = System.currentTimeMillis();
 		activity = createActivity("ActivityDescendantsUpdatedSince-"+start);
@@ -54,6 +55,7 @@ public class ActivityNodeChildrenSinceTest extends BaseActivityServiceTest {
 	}
 	
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testNodeChildrenUpdatedUntil() throws ClientServicesException, XMLException {
 		long start = System.currentTimeMillis();
 		activity = createActivity("ActivityDescendantsUpdatedUntil-"+start);
@@ -72,6 +74,7 @@ public class ActivityNodeChildrenSinceTest extends BaseActivityServiceTest {
 	}
 	
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testNodeChildrenUpdatedSinceUntil() throws ClientServicesException, XMLException {
 		long start = System.currentTimeMillis();
 		activity = createActivity("ActivityDescendantsUpdatedSinceUntil-"+start);
@@ -94,6 +97,7 @@ public class ActivityNodeChildrenSinceTest extends BaseActivityServiceTest {
 	}
 	
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testNodeChildrenCreatedSince() throws ClientServicesException, XMLException {
 		long start = System.currentTimeMillis();
 		activity = createActivity("ActivityDescendantsCreatedSince-"+start);
@@ -113,6 +117,7 @@ public class ActivityNodeChildrenSinceTest extends BaseActivityServiceTest {
 	}
 	
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testNodeChildrenCreatedUntil() throws ClientServicesException, XMLException {
 		long start = System.currentTimeMillis();
 		activity = createActivity("ActivityDescendantsCreatedUntil-"+start);
@@ -132,6 +137,7 @@ public class ActivityNodeChildrenSinceTest extends BaseActivityServiceTest {
 	}
 	
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testNodeChildrenCreatedSinceUntil() throws ClientServicesException, XMLException {
 		long start = System.currentTimeMillis();
 		activity = createActivity("ActivityDescendantsCreatedSinceUntil-"+start);

@@ -1,35 +1,35 @@
 { 
 	"settings": { 
-		"maxSystemWeight": 10000000,
-		"resetDuration": 3600000
+		"maxSystemWeight": 0,
+		"resetDuration": 0
 	}, 
 	"default": { 
-		"limit": 500000, 
-		"/": [ { "weight": 140 } ], 
+		"limit": 0, 
+		"/": [ { "weight": 0 } ], 
 		"/resource/customer": [
-			{ "weight": 6736, "method": "DELETE" },
-			{ "weight": 111, "method": "GET" },
-			{ "weight": 791, "method": "POST" }
+			{ "weight": 0, "method": "DELETE" },
+			{ "weight": 0, "method": "GET" },
+			{ "weight": 0, "method": "POST" }
 		],
 		"/resource/subscriber": [
-			{ "weight": 880, "method": "DELETE" },
-			{ "weight": 161, "method": "GET" },
-			{ "weight": 1074, "method": "POST" }
+			{ "weight": 0, "method": "DELETE" },
+			{ "weight": 0, "method": "GET" },
+			{ "weight": 0, "method": "POST" }
 		],
 		"/resource/subscription": [
-			{ "weight": 3819, "method": "DELETE" },
-			{ "weight": 77, "method": "GET" },
-			{ "weight": 4669, "method": "POST" }
+			{ "weight": 0, "method": "DELETE" },
+			{ "weight": 0, "method": "GET" },
+			{ "weight": 0, "method": "POST" }
 		],
 
 		"/service/authentication": [ 
-			{ "weight": 163 }
+			{ "weight": 0 }
 		],
 		"/service/authentication/changepassword": [
-			{ "weight": 402 }
+			{ "weight": 0 }
 		],
 		"/service/authentication/getrolelist": [
-			{ "weight": 77 }
+			{ "weight": 0 }
 		]
 	} 
 }

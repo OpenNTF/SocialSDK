@@ -33,6 +33,7 @@ import com.ibm.sbt.test.lib.TestEnvironment;
 public class ActivityMemberArudTest extends BaseActivityServiceTest {
 
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testMemberXml() throws ClientServicesException, XMLException {
 		Member member = new Member();
 		member.setComponent(Member.COMPONENT_ACTIVITIES);
@@ -48,6 +49,7 @@ public class ActivityMemberArudTest extends BaseActivityServiceTest {
 	}
 	
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testAddActivityMember() throws ClientServicesException, XMLException {
 		Activity activity = createActivity();
 		
@@ -73,6 +75,7 @@ public class ActivityMemberArudTest extends BaseActivityServiceTest {
 	}
 	
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testRetrieveActivityMember() throws ClientServicesException, XMLException {
 		Activity activity = createActivity();
 
@@ -91,6 +94,7 @@ public class ActivityMemberArudTest extends BaseActivityServiceTest {
 	
 	//@Ignore
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testUpdateActivityMember() throws ClientServicesException, XMLException {
 		//FIXME: Test is Broken
 		/*
@@ -112,6 +116,7 @@ public class ActivityMemberArudTest extends BaseActivityServiceTest {
 	}
 	
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testDeleteActivityMember() throws ClientServicesException, XMLException {
 		Activity activity = createActivity();
 		

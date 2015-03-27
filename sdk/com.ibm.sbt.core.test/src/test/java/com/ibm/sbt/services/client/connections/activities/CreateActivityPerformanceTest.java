@@ -26,6 +26,7 @@ import com.ibm.sbt.services.client.ClientServicesException;
 public class CreateActivityPerformanceTest extends BaseActivityServiceTest {
 
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testCreateActivities() throws ClientServicesException {
 		int create = 10;
 		System.out.println("Creating "+create+" activities");

@@ -36,6 +36,7 @@ import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 public class ActivityEntryPerformanceTest extends BaseActivityServiceTest {
 
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testCreateActivityEntries() throws ClientServicesException {
 		
 		System.setErr(new PrintStream(new ByteArrayOutputStream())); 

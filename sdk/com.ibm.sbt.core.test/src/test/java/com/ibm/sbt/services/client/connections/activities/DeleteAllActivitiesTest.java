@@ -31,6 +31,7 @@ import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 public class DeleteAllActivitiesTest extends BaseActivityServiceTest {
 
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void deleteAllActivities() throws ClientServicesException, XMLException {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("ps", "100");

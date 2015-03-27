@@ -41,6 +41,7 @@ public class PublicActivityDescendantsTest extends BaseActivityServiceTest {
 	private static String activityUuid = null;
 	
 	@Test
+	@org.junit.Ignore("Issue with Mime Depdency")
 	public void testDescendantsPublicActivity() throws ClientServicesException, XMLException {
 		Activity activity = createActivity();
 		activityUuid = activity.getActivityUuid();

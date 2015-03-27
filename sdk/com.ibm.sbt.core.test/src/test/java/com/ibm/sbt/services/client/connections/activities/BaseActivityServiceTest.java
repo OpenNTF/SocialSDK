@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.TimeZone;
 
 import org.junit.After;
+import org.junit.Assert;
+import org.junit.Assume;
 import org.junit.Before;
 import org.w3c.dom.Node;
 
@@ -55,8 +57,23 @@ public class BaseActivityServiceTest extends BaseUnitTest {
 		dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
 	}
 	
+	@Before 
+    public void override(){
+        try {
+            if(Class.forName("javax.mail.BodyPart") != null){
+                System.out.println("javax.mail.BodyPart exists");
+            }
+        } catch (ClassNotFoundException e) {
+            System.out.println("Short Circuiting Tests");
+            Assume.assumeTrue("Short Circuit", true);
+        }
+    }
+	
 	@Before
 	public void initActivityServiceTest() {
+		
+		
+		
 		if (activityService==null) {
 			BasicEndpoint endpoint = getBasicEndpoint();
 			activityService = (endpoint == null) ? new ActivityService() : new ActivityService(endpoint);

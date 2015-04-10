@@ -18,7 +18,7 @@
  * Social Business Toolkit SDK. Implementation of a transport using the
  * dojo/request API.
  */
-define([ "dojo/_base/declare", "dojo/_base/lang", "dojo/request", "../util" ], function(declare,lang,request,util) {
+define([ "dojo/_base/declare", "dojo/_base/lang", "dojo/request", "../util", "../Promise"], function(declare,lang,request,util, Promise) {
     return declare(null, {
 
         /**
@@ -55,7 +55,19 @@ define([ "dojo/_base/declare", "dojo/_base/lang", "dojo/request", "../util" ], f
          * 
          */
         request : function(url,options) {
-            return request(url, options);
+        	var promise = new Promise();
+            promise.response = new Promise();
+            request(url, args).response.then(
+                function(response){
+                  promise.fulfilled(response.data);//return toolkit agnostic promise
+                  promise.response.fulfilled(response);//return Dojo prmoise.response
+                }, 
+                function(error){
+                  promise.rejected(error);
+                  promise.response.rejected(error);
+                }
+            );
+            return promise;
         },
 
         /**

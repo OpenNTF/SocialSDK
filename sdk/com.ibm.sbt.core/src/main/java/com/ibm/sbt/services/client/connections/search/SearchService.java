@@ -401,7 +401,7 @@ public class SearchService extends ConnectionsService {
       * @throws ClientServicesException
       */
  	public EntityList<Result> getResults(String query) throws ClientServicesException {
- 		return getResults(query, null);
+ 		return getResults(query, new HashMap<String, String>());
  	}
      
  	//------------------------------------------------------------------------------------------------------------------
@@ -523,7 +523,7 @@ public class SearchService extends ConnectionsService {
   				}
   				constraintParameter.append(",").append("\"values\":[").append(values.toString()).append("]");  				
   				constraintParameter.append(",").append("\"exactMatch\":\"").append(constraint.isExactMatch()).append("\"");  				
-  				formattedConstraint.append("}");  				
+  				constraintParameter.append("}");  				
   				formattedConstraint.append(constraintParameter.toString());
   				formattedConstraintsList.add(formattedConstraint.toString());
   			}  			

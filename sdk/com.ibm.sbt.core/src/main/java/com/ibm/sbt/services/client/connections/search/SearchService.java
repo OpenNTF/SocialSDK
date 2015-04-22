@@ -38,8 +38,13 @@
 package com.ibm.sbt.services.client.connections.search;
 
 import static com.ibm.sbt.services.client.base.CommonConstants.COMMA;
+import static com.ibm.sbt.services.client.base.CommonConstants.INIT_URL_PARAM;
+import static com.ibm.sbt.services.client.base.CommonConstants.URL_PARAM;
+import static com.ibm.sbt.services.client.base.CommonConstants.UTF8;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.nameSpaceCtx;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -51,6 +56,7 @@ import org.w3c.dom.Node;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.ClientServicesException;
+import com.ibm.sbt.services.client.ClientService.Args;
 import com.ibm.sbt.services.client.base.AtomFeedHandler;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.ConnectionsService;
@@ -94,7 +100,7 @@ public class SearchService extends ConnectionsService {
 	protected void initServiceMappingKeys(){
 		serviceMappingKeys = new String[]{"search"};
 	}
-
+	
 	/**
 	 * Lists the elements in an Atom entry representing the result returned by a search.
 	 * 
@@ -106,15 +112,74 @@ public class SearchService extends ConnectionsService {
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Result> getResults(String query,Map<String, String> parameters) throws ClientServicesException {
-		if(parameters==null){
-			parameters= new HashMap<String,String>();
-		}
 		
-		parameters.put("query", query);		
-
-		String searchQry = SearchUrls.SEARCH.format(this);
-		return getResultEntityList(searchQry, parameters);
+		Map<String, List<String>> parametersList = new HashMap<String, List<String>>();
+		for(Map.Entry<String, String> entry : parameters.entrySet()){
+			String key = entry.getKey();
+			String value = entry.getValue();
+			List<String> valueList = new ArrayList<String>();
+			valueList.add(value);
+			parametersList.put(key, valueList);
+		}
+		return getResultsList(query, parametersList);
 	}
+
+	/**
+	 * Lists the elements in an Atom entry representing the result returned by a search.
+	 * 
+	 * @param query
+	 *            Text to search for
+	 * @param Map
+	 *            for additional parameters
+	 * @return EntityList<Result>
+	 * @throws ClientServicesException
+	 */
+	public EntityList<Result> getResultsList(String query,Map<String, List<String>> parameters) throws ClientServicesException {
+		if(parameters==null){
+			parameters= new HashMap<String,List<String>>();
+		}
+		List<String> queryList = new ArrayList<String>();
+		queryList.add(query);
+		parameters.put("query", queryList);		
+
+		StringBuilder searchQry = new StringBuilder(SearchUrls.SEARCH.format(this));
+		addUrlParameters(searchQry, parameters);
+		return getResultEntityList(searchQry.toString(), new HashMap<String,String>());
+	}
+	
+	protected void addUrlParameters(StringBuilder b, Map<String,List<String>> parameters) throws ClientServicesException {
+		
+		if (parameters != null) {
+			boolean first = !b.toString().contains("?");
+			for (Map.Entry<String, List<String>> e : parameters.entrySet()) {
+				String name = e.getKey();
+				if (StringUtil.isNotEmpty(name)) {
+					List<String> values = e.getValue();					
+					for(String val : values){
+						first = addParameter(b, first, name, val);
+					}					
+				}
+			}
+		}
+	}
+	
+
+	protected boolean addParameter(StringBuilder b, boolean first, String name, String value) throws ClientServicesException {
+		try {
+			if (value != null) {
+				b.append(first ? INIT_URL_PARAM : URL_PARAM);
+				b.append(name);
+				b.append('=');
+				b.append(URLEncoder.encode(value, UTF8));
+				return false;
+			}
+			return first;
+		} catch (UnsupportedEncodingException ex) {
+			throw new ClientServicesException(ex);
+		}
+	}	
+	
+	
 	
 	/**
 	 * The category document identifies the tags that have been assigned to particular 
@@ -305,13 +370,20 @@ public class SearchService extends ConnectionsService {
 	   *http://www-10.IBM.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Constraints&content=pdcontent  
      */
 	public EntityList<Result> getResultsWithConstraint(String query, List<Constraint> constraints, Map<String, String> parameters) throws ClientServicesException{
+		
+		Map<String, List<String>> params = new HashMap<String, List<String>>();
 		// We can not use a map of constraints, since there could be multiple constraints but map can have only one key named constraint
-		String formattedConstraints = generateConstraintParameter(constraints);
+		List<String> formattedConstraints = generateConstraintParameter(constraints);
 		if(parameters == null){
-			parameters = new HashMap<String, String>();
+			parameters = new HashMap<String,String>();
 		}
-		parameters.put("constraint", formattedConstraints.toString());
-		return getResults(query, parameters);
+		for(Map.Entry<String, String> entry : parameters.entrySet()){
+			List<String> valueList = new ArrayList<String>();
+			valueList.add(entry.getValue());
+			params.put(entry.getKey(), valueList);
+		}
+		params.put("constraint", formattedConstraints);
+		return getResultsList(query, params);
 	}
 
 	/**
@@ -336,7 +408,7 @@ public class SearchService extends ConnectionsService {
       * @throws ClientServicesException
       */
  	public EntityList<Result> getResults(String query) throws ClientServicesException {
- 		return getResults(query, null);
+ 		return getResults(query, new HashMap<String, String>());
  	}
      
  	//------------------------------------------------------------------------------------------------------------------
@@ -429,11 +501,13 @@ public class SearchService extends ConnectionsService {
 	 * Method formats the list of constraint into String as required by Search api.
 	 * 
 	 */
-	private String generateConstraintParameter(List<Constraint> constraints){
-		StringBuilder formattedConstraints = new StringBuilder();
+	private List<String> generateConstraintParameter(List<Constraint> constraints){
+		
+		List<String> formattedConstraintsList = new ArrayList<String>();
+		
   		if(constraints != null){
-  			for (int constraintsCtr = 0; constraintsCtr < constraints.size(); constraintsCtr++) {
-  				Constraint constraint = (Constraint) constraints.get(constraintsCtr);
+  			for (Constraint constraint : constraints) {
+  				StringBuilder formattedConstraint = new StringBuilder();
   				StringBuilder constraintParameter = new StringBuilder("");
   				constraintParameter.append("{\"type\":\"").append(constraint.getType()).append("\"");
   				
@@ -454,18 +528,14 @@ public class SearchService extends ConnectionsService {
   					}
   					
   				}
-  				constraintParameter.append(",").append("\"values\":[").append(values.toString()).append("]");
-  				
-  				constraintParameter.append(",").append("\"exactMatch\":\"").append(constraint.isExactMatch()).append("\"");
-
-  				if(constraintsCtr > 0){
-  					formattedConstraints.append("&constraint=");
-  				}
-  				formattedConstraints.append(constraintParameter.toString());
-  			}
-  			formattedConstraints.append("}");
+  				constraintParameter.append(",").append("\"values\":[").append(values.toString()).append("]");  				
+  				constraintParameter.append(",").append("\"exactMatch\":\"").append(constraint.isExactMatch()).append("\"");  				
+  				constraintParameter.append("}");  				
+  				formattedConstraint.append(constraintParameter.toString());
+  				formattedConstraintsList.add(formattedConstraint.toString());
+  			}  			
   			
   		}
-  		return formattedConstraints.toString();
+  		return formattedConstraintsList;
 	}
 }

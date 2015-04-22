@@ -228,7 +228,7 @@ public class SearchService extends ConnectionsService {
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Result> getResultsByTag(List<String> tags,
-			Map<String, List<String>> parameters) throws ClientServicesException {
+			Map<String, String> parameters) throws ClientServicesException {
 		// High level wrapper, provides a convenient mechanism for search for
 		// tags, uses constraints internally
 		List<String> formattedTags = new ArrayList<String>();
@@ -369,14 +369,21 @@ public class SearchService extends ConnectionsService {
      * 
 	   *http://www-10.IBM.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Constraints&content=pdcontent  
      */
-	public EntityList<Result> getResultsWithConstraint(String query, List<Constraint> constraints, Map<String, List<String>> parameters) throws ClientServicesException{
+	public EntityList<Result> getResultsWithConstraint(String query, List<Constraint> constraints, Map<String, String> parameters) throws ClientServicesException{
+		
+		Map<String, List<String>> params = new HashMap<String, List<String>>();
 		// We can not use a map of constraints, since there could be multiple constraints but map can have only one key named constraint
 		List<String> formattedConstraints = generateConstraintParameter(constraints);
 		if(parameters == null){
-			parameters = new HashMap<String, List<String>>();
+			parameters = new HashMap<String,String>();
 		}
-		parameters.put("constraint", formattedConstraints);
-		return getResultsList(query, parameters);
+		for(Map.Entry<String, String> entry : parameters.entrySet()){
+			List<String> valueList = new ArrayList<String>();
+			valueList.add(entry.getValue());
+			params.put(entry.getKey(), valueList);
+		}
+		params.put("constraint", formattedConstraints);
+		return getResultsList(query, params);
 	}
 
 	/**

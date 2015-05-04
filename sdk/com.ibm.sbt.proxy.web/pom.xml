@@ -16,6 +16,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
+				<version>RELEASE</version>
 				<executions>
 					<execution>
 						<id>make-a-war</id>
@@ -28,11 +29,11 @@
 						</configuration>
 					</execution>
 				</executions>
-
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-install-plugin</artifactId>
+				<version>RELEASE</version>
 				<executions>
 					<execution>
 						<phase>install</phase>
@@ -51,16 +52,14 @@
 					</execution>
 				</executions>
 			</plugin>
-
 			<!-- to also deploy http://communitygrids.blogspot.com/2007/11/maven-making-war-and-jar-at-same-time.html -->
-
 		</plugins>
 	</build>
 	<dependencies>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.sbt.core</artifactId>
-			<version>1.1.4-SNAPSHOT</version>
+			<version>1.1.4.20150504-1200</version>
 			<type>eclipse-plugin</type>
 		</dependency>
 	</dependencies>

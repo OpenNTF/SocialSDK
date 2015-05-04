@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>com.ibm.sbt</groupId>
 		<artifactId>com.ibm.sbt.sdk</artifactId>
-		<version>1.1.4-SNAPSHOT</version>
+		<version>1.1.4.20150504-1700</version>
 	</parent>
 
 
@@ -16,7 +16,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
-				<version>RELEASE</version>
+				<version>2.5</version>
 				<executions>
 					<execution>
 						<id>make-a-war</id>
@@ -33,7 +33,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-install-plugin</artifactId>
-				<version>RELEASE</version>
+				<version>2.5</version>
 				<executions>
 					<execution>
 						<phase>install</phase>
@@ -59,7 +59,7 @@
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.sbt.core</artifactId>
-			<version>1.1.4.20150504-1200</version>
+			<version>1.1.4.20150504-1700</version>
 			<type>eclipse-plugin</type>
 		</dependency>
 	</dependencies>

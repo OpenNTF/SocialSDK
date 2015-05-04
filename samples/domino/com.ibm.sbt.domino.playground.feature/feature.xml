@@ -2,7 +2,7 @@
 <feature
       id="com.ibm.sbt.domino.playground.feature"
       label="Domino Playground Feature"
-      version="1.1.4.20150504-1200"
+      version="1.1.4.20150504-1700"
       provider-name="IBM">
 
    <license url="http://www.apache.org/licenses/LICENSE-2.0">

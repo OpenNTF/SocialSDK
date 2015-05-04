@@ -2,6 +2,6 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Third party libraries used by the SDK
 Bundle-SymbolicName: com.ibm.sbt.libs
-Bundle-Version: 1.1.4.20150504-1200
+Bundle-Version: 1.1.4.20150504-1700
 Bundle-Vendor: IBM
 Eclipse-ExtensibleAPI: true

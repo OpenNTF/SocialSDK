@@ -7,6 +7,6 @@
  <parent>
     <groupId>com.ibm.sbt</groupId>
     <artifactId>com.ibm.sbt.libraries</artifactId>
-    <version>1.1.4.20150504-1200</version>
+    <version>1.1.4.20150504-1700</version>
   </parent>
 </project>

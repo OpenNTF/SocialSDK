@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Snipped discovery related classes
 Bundle-SymbolicName: com.ibm.sbt.samples.commons
-Bundle-Version: 1.1.4.20150504-1200
+Bundle-Version: 1.1.4.20150504-1700
 Bundle-Vendor: IBM
 Require-Bundle: com.ibm.commons,
  com.ibm.commons.xml,

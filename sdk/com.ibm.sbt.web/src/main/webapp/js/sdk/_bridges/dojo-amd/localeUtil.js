@@ -29,7 +29,7 @@ define(['dojo/date/locale'],function(locale) {
 	    getLocalizedDate : function(date) {
 	        return locale.format(date, { selector:"date",formatLength:"medium" });
 	    },
-	};
+	}
 });
 
 

@@ -87,7 +87,7 @@
 							<url>http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.61/bin/apache-tomcat-7.0.61.zip</url>
 							<unpack>true</unpack>
 							<outputDirectory>${project.build.directory}/tomcat/unzip</outputDirectory>
-							<md5>3109af3fda8092c5647fb2380738ee12</md5>
+							<md5>e34610f342045a817b3a100c07c3d1a3</md5>
 						</configuration>
 					</execution>
 					<execution>

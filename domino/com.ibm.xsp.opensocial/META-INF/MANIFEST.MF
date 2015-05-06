@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: OpenSocial Library for XPages
 Bundle-SymbolicName: com.ibm.xsp.opensocial;singleton:=true
-Bundle-Version: 1.1.4.20150504-1700
+Bundle-Version: 1.1.5.qualifier
 Bundle-Vendor: IBM
 Bundle-ClassPath: .
 Require-Bundle: org.eclipse.core.runtime,

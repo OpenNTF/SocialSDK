@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Domino Opensocial App
 Bundle-SymbolicName: com.ibm.sbt.opensocial.domino;singleton:=true
-Bundle-Version: 1.1.4.20150504-1700
+Bundle-Version: 1.1.5.qualifier
 Bundle-Activator: com.ibm.sbt.opensocial.domino.internal.OpenSocialPlugin
 Bundle-Vendor: IBM
 Bundle-ActivationPolicy: lazy

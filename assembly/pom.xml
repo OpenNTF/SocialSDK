@@ -16,7 +16,7 @@
 	<parent>
 		<groupId>com.ibm.sbt</groupId>
 		<artifactId>com.ibm.sbt</artifactId>
-		<version>1.1.4-SNAPSHOT</version>
+		<version>1.1.4.20150504-1700</version>
 	</parent>
 
 	<build>
@@ -84,10 +84,10 @@
 							<goal>wget</goal>
 						</goals>
 						<configuration>
-							<url>http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.59/bin/apache-tomcat-7.0.59.zip</url>
+							<url>http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.61/bin/apache-tomcat-7.0.61.zip</url>
 							<unpack>true</unpack>
 							<outputDirectory>${project.build.directory}/tomcat/unzip</outputDirectory>
-							<md5>3109af3fda8092c5647fb2380738ee12</md5>
+							<md5>e34610f342045a817b3a100c07c3d1a3</md5>
 						</configuration>
 					</execution>
 					<execution>
@@ -145,14 +145,14 @@
 									<artifactId>commons-logging</artifactId>
 									<type>jar</type>
 									<overWrite>false</overWrite>
-									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.59/lib</outputDirectory>
+									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.61/lib</outputDirectory>
 								</artifactItem>
 								<artifactItem>
 									<groupId>com.ibm.sbt</groupId>
 									<artifactId>sbt.dojo180</artifactId>
 									<type>war</type>
 									<overWrite>true</overWrite>
-									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.59/webapps</outputDirectory>
+									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.61/webapps</outputDirectory>
 									<destFileName>sbt.dojo180.war</destFileName>
 								</artifactItem>
 								<artifactItem>
@@ -160,7 +160,7 @@
 									<artifactId>sbt.jquery182</artifactId>
 									<type>war</type>
 									<overWrite>true</overWrite>
-									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.59/webapps</outputDirectory>
+									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.61/webapps</outputDirectory>
 									<destFileName>sbt.jquery182.war</destFileName>
 								</artifactItem>
 								<artifactItem>
@@ -168,7 +168,7 @@
 									<artifactId>sbt.bootstrap211</artifactId>
 									<type>war</type>
 									<overWrite>true</overWrite>
-									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.59/webapps</outputDirectory>
+									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.61/webapps</outputDirectory>
 									<destFileName>sbt.bootstrap211.war</destFileName>
 								</artifactItem>
 								<artifactItem>
@@ -176,7 +176,7 @@
 									<artifactId>sbt.sample.web</artifactId>
 									<type>war</type>
 									<overWrite>true</overWrite>
-									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.59/webapps</outputDirectory>
+									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.61/webapps</outputDirectory>
 									<destFileName>sbt.sample.web.war</destFileName>
 								</artifactItem>
 
@@ -187,7 +187,7 @@
 									<artifactId>com.ibm.sbt.landing</artifactId>
 									<type>war</type>
 									<overWrite>true</overWrite>
-									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.59/webapps</outputDirectory>
+									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.61/webapps</outputDirectory>
 									<destFileName>ROOT.war</destFileName>
 								</artifactItem>
 
@@ -196,7 +196,7 @@
 									<artifactId>acme.social.sample.dataapp</artifactId>
 									<type>war</type>
 									<overWrite>true</overWrite>
-									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.59/webapps</outputDirectory>
+									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.61/webapps</outputDirectory>
 									<destFileName>acme.social.sample.dataapp.war</destFileName>
 								</artifactItem>
 								<artifactItem>
@@ -204,7 +204,7 @@
 									<artifactId>acme.social.sample.webapp</artifactId>
 									<type>war</type>
 									<overWrite>true</overWrite>
-									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.59/webapps</outputDirectory>
+									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.61/webapps</outputDirectory>
 									<destFileName>acme.social.sample.webapp.war</destFileName>
 								</artifactItem>
 								<artifactItem>
@@ -212,7 +212,7 @@
 									<artifactId>helloworld.webapp</artifactId>
 									<type>war</type>
 									<overWrite>true</overWrite>
-									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.59/webapps</outputDirectory>
+									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.61/webapps</outputDirectory>
 									<destFileName>helloworld.webapp.war</destFileName>
 								</artifactItem>
 
@@ -226,7 +226,7 @@
 									<artifactId>smartcloud.webapp</artifactId>
 									<type>war</type>
 									<overWrite>true</overWrite>
-									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.59/webapps</outputDirectory>
+									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.61/webapps</outputDirectory>
 									<destFileName>smartcloud.webapp.war</destFileName>
 								</artifactItem>
 								<artifactItem>
@@ -234,7 +234,7 @@
 									<artifactId>grantaccess.webapp</artifactId>
 									<type>war</type>
 									<overWrite>true</overWrite>
-									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.59/webapps</outputDirectory>
+									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.61/webapps</outputDirectory>
 									<destFileName>grantaccess.webapp.war</destFileName>
 								</artifactItem>
 								<artifactItem>
@@ -242,7 +242,7 @@
 									<artifactId>acme.sample.webapp</artifactId>
 									<type>war</type>
 									<overWrite>true</overWrite>
-									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.59/webapps</outputDirectory>
+									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.61/webapps</outputDirectory>
 									<destFileName>acme.sample.webapp.war</destFileName>
 								</artifactItem>
 
@@ -255,7 +255,7 @@
 									<artifactId>com.ibm.sbt.web</artifactId>
 									<type>war</type>
 									<overWrite>true</overWrite>
-									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.59/webapps</outputDirectory>
+									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.61/webapps</outputDirectory>
 									<destFileName>sbt.war</destFileName>
 								</artifactItem>
 								<artifactItem>
@@ -263,21 +263,21 @@
 									<artifactId>com.ibm.commons</artifactId>
 									<type>jar</type>
 									<overWrite>true</overWrite>
-									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.59/lib</outputDirectory>
+									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.61/lib</outputDirectory>
 								</artifactItem>
 								<artifactItem>
 									<groupId>com.ibm.sbt</groupId>
 									<artifactId>com.ibm.commons.runtime</artifactId>
 									<type>jar</type>
 									<overWrite>true</overWrite>
-									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.59/lib</outputDirectory>
+									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.61/lib</outputDirectory>
 								</artifactItem>
 								<artifactItem>
 									<groupId>com.ibm.sbt</groupId>
 									<artifactId>com.ibm.commons.xml</artifactId>
 									<type>jar</type>
 									<overWrite>true</overWrite>
-									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.59/lib</outputDirectory>
+									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.61/lib</outputDirectory>
 								</artifactItem>
 
 
@@ -318,22 +318,22 @@
 							<target>
 								<!-- Package Tomcat -->
 								<delete
-									dir="${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.59/webapps/ROOT" />
+									dir="${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.61/webapps/ROOT" />
 
 
 
 								<copy
-									todir="${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.59/conf"
+									todir="${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.61/conf"
 									file="./../samples/config/sbt.properties" />
 
 
 								<copy
 									file="./../libraries/com.ibm.sbt.libs.java/lib/com.ibm.sbt.javamail-1.4.5.jar"
-									todir="${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.59/lib" />
+									todir="${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.61/lib" />
 
 
 								<copy
-									todir="${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.59/conf">
+									todir="${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.61/conf">
 									<fileset dir="platform/tomcat">
 										<include name="keystore" />
 										<include name="context.xml" />
@@ -370,7 +370,7 @@
 
 
 								<zip basedir="${project.build.directory}/tomcat/unzip"
-									destfile="${project.build.directory}/tomcat/apache-tomcat-7.0.59-sbt.zip"
+									destfile="${project.build.directory}/tomcat/apache-tomcat-7.0.61-sbt.zip"
 									compress="true" />
 
 								<zip basedir="${project.build.directory}/sources/SocialSDK"
@@ -419,28 +419,28 @@
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>sbt.dojo180</artifactId>
 
-			<version>1.1.4-SNAPSHOT</version>
+			<version>1.1.4.20150504-1700</version>
 			<type>war</type>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>sbt.jquery182</artifactId>
 
-			<version>1.1.4-SNAPSHOT</version>
+			<version>1.1.4.20150504-1700</version>
 			<type>war</type>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>sbt.bootstrap211</artifactId>
 
-			<version>1.1.4-SNAPSHOT</version>
+			<version>1.1.4.20150504-1700</version>
 			<type>war</type>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>sbt.sample.web</artifactId>
 
-			<version>1.1.4-SNAPSHOT</version>
+			<version>1.1.4.20150504-1700</version>
 			<type>war</type>
 		</dependency>
 
@@ -450,7 +450,7 @@
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.sbt.landing</artifactId>
 
-			<version>1.1.4-SNAPSHOT</version>
+			<version>1.1.4.20150504-1700</version>
 			<type>war</type>
 		</dependency>
 
@@ -458,21 +458,21 @@
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>acme.social.sample.dataapp</artifactId>
 
-			<version>1.1.4-SNAPSHOT</version>
+			<version>1.1.4.20150504-1700</version>
 			<type>war</type>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>acme.social.sample.webapp</artifactId>
 
-			<version>1.1.4-SNAPSHOT</version>
+			<version>1.1.4.20150504-1700</version>
 			<type>war</type>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>helloworld.webapp</artifactId>
 
-			<version>1.1.4-SNAPSHOT</version>
+			<version>1.1.4.20150504-1700</version>
 			<type>war</type>
 		</dependency>
 
@@ -485,25 +485,26 @@
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>smartcloud.webapp</artifactId>
 
-			<version>1.1.4-SNAPSHOT</version>
+			<version>1.1.4.20150504-1700</version>
 			<type>war</type>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>grantaccess.webapp</artifactId>
 
-			<version>1.1.4-SNAPSHOT</version>
+			<version>1.1.4.20150504-1700</version>
 			<type>war</type>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>acme.sample.webapp</artifactId>
 
-			<version>1.1.4-SNAPSHOT</version>
+			<version>1.1.4.20150504-1700</version>
 			<type>war</type>
 		</dependency>
 
 
+	
 
 
 
@@ -511,7 +512,7 @@
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.sbt.web</artifactId>
 
-			<version>1.1.4-SNAPSHOT</version>
+			<version>1.1.4.20150504-1700</version>
 			<type>war</type>
 		</dependency>
 
@@ -523,7 +524,7 @@
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.commons.runtime</artifactId>
-			<version>1.1.4-SNAPSHOT</version>
+			<version>1.1.4.20150504-1700</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
@@ -533,20 +534,28 @@
 
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
+			<artifactId>bss.provisioning.sample.app</artifactId>
+			<version>1.1.4.20150504-1700</version>
+			
+		</dependency>
+		
+		
+		<dependency>
+			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.sbt.php.wordpress</artifactId>
-			<version>1.1.4-SNAPSHOT</version>
+			<version>1.1.4.20150504-1700</version>
 			<type>zip</type>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.sbt.php.core</artifactId>
-			<version>1.1.4-SNAPSHOT</version>
+			<version>1.1.4.20150504-1700</version>
 			<type>zip</type>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.sbt.php.moodle</artifactId>
-			<version>1.1.4-SNAPSHOT</version>
+			<version>1.1.4.20150504-1700</version>
 			<type>zip</type>
 		</dependency>
 	</dependencies>

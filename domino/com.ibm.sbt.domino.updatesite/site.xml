@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/com.ibm.sbt.domino.feature_1.1.4.20150504-1700.jar" id="com.ibm.sbt.domino.feature" version="1.1.4.20150504-1700"/>
-   <feature url="features/com.ibm.sbt.opensocial.domino.feature_1.1.4.20150504-1700.jar" id="com.ibm.sbt.opensocial.domino.feature" version="1.1.4.20150504-1700"/>
-   <feature url="features/com.ibm.sbt.opensocial.domino.explorer.feature_1.1.4.20150504-1700.jar" id="com.ibm.sbt.opensocial.domino.explorer.feature" version="1.1.4.20150504-1700"/>
+   <feature url="features/com.ibm.sbt.domino.feature_1.1.5.qualifier.jar" id="com.ibm.sbt.domino.feature" version="1.1.5.qualifier"/>
+   <feature url="features/com.ibm.sbt.opensocial.domino.feature_1.1.5.qualifier.jar" id="com.ibm.sbt.opensocial.domino.feature" version="1.1.5.qualifier"/>
+   <feature url="features/com.ibm.sbt.opensocial.domino.explorer.feature_1.1.5.qualifier.jar" id="com.ibm.sbt.opensocial.domino.explorer.feature" version="1.1.5.qualifier"/>
 </site>

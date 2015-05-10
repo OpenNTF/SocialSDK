@@ -2,8 +2,8 @@
 <%@page import="java.util.Arrays"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.HashMap"%>
-<%@page import="com.ibm.sbt.services.client.connections.communities.Community"%>
-<%@page import="com.ibm.sbt.services.client.connections.communities.CommunityList"%>
+<%@page import="com.ibm.sbt.services.client.connections.communities.*"%>
+<%@page import="com.ibm.sbt.services.client.base.datahandlers.EntityList" %>
 <%@page import="com.ibm.sbt.services.client.connections.communities.CommunityService"%>
 <html>
 <head>
@@ -17,12 +17,9 @@
 			CommunityService svc = new CommunityService();
 			Map<String, String> parameters = new HashMap<String, String>();
 			parameters.put("ps", "5");
-			CommunityList communities = svc.getMyCommunities(parameters);
-			out.println("<br>Listing my communities , Total communities found : "+communities.getTotalResults());
-			out.println("<br>");
-			for (Community community : communities) {
-					out.println("<b>Name : </b> " + community.getTitle());
-					out.println("<br>");
+			EntityList<Community> communities = svc.getMyCommunities();
+			for(Community comm : communities){
+				out.println("Title: " + comm.getTitle() + "<br/>");
 			}
 		} catch (Throwable e) {
 			out.println("<pre>");

@@ -3180,32 +3180,6 @@ define(['dojo/_base/declare'],function(declare) {
  * @module sbt.i18n
  */
 define(['./_bridge/i18n'],function(i18n) {
-    var nls = {
-        todayAt : "Today at ",
-        on : "on "
-    };
-    
-    i18n.getUpdatedLabel = function(dateStr) {
-        var date = new Date(dateStr);
-        var dateClone = new Date(date.getTime());
-        var now = new Date();
-        if (dateClone.setHours(0,0,0,0) == now.setHours(0,0,0,0)) {
-            return nls.todayAt + this.getLocalizedTime(date);
-        } else {
-            return nls.on + this.getLocalizedDate(date);
-        }
-    };
-        
-    i18n.getSearchUpdatedLabel = function(dateStr) {
-        var date = new Date(dateStr);
-        var dateClone = new Date(date.getTime());
-        var now = new Date();
-        if (dateClone.setHours(0,0,0,0) == now.setHours(0,0,0,0)) {
-            return nls.todayAt + this.getLocalizedTime(date);
-        } else {
-            return this.getLocalizedDate(date);
-        }
-    };
     return i18n;
 });
 
@@ -19742,22 +19716,8 @@ define([ "../lang", "../smartcloud/SmartcloudConstants" ], function(lang,conn) {
 /**
  * Social Business Toolkit SDK.
  */
-define(['dojo/i18n', 'dojo/date/locale'],function(i18n, dateLocale) {
-	    var load = function(id, require, callback){	    	
-	    	i18n.load(id, require, callback); 
-	    };
-	    
-	    return {
-	    	load : load,
-	    	
-	        getLocalizedTime: function(date) {
-	            return dateLocale.format(date, { selector:"time",formatLength:"short" });
-	        },
-	            
-	        getLocalizedDate: function(date) {
-	            return dateLocale.format(date, { selector:"date",formatLength:"medium" });
-	        }
-	    }; 
+define(['dojo/i18n'],function(i18n) {
+	   return i18n;
 });
 
 

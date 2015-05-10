@@ -2,14 +2,15 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.ibm.sbt</groupId>
   <artifactId>bss.provisioning.sample.app</artifactId>
-  <version>0.0.1</version>
   <packaging>jar</packaging>
-
-  <name>bss.provisioning.sample.app</name>
-  <url>http://maven.apache.org</url>
-
+  
+	<parent>
+		<groupId>com.ibm.sbt</groupId>
+		<artifactId>com.ibm.sbt.samples.java</artifactId>
+		<version>1.1.5-SNAPSHOT</version>
+	</parent>
+  
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
@@ -18,7 +19,7 @@
     <dependency>
 		<groupId>com.ibm.sbt</groupId>
 		<artifactId>com.ibm.sbt.core</artifactId>
-		<version>LATEST</version>
+		<version>1.1.5-SNAPSHOT</version>
 	</dependency>
     <dependency>
       <groupId>junit</groupId>
@@ -27,6 +28,8 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  <!-- prb112 commented out the shade plugin -->
+  <!--
   <build>
     <plugins>
       <plugin>
@@ -51,6 +54,7 @@
       </plugin>
     </plugins>
   </build>
+  -->
   
 </project>
 

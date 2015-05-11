@@ -56,7 +56,6 @@ import org.w3c.dom.Node;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.ClientServicesException;
-import com.ibm.sbt.services.client.ClientService.Args;
 import com.ibm.sbt.services.client.base.AtomFeedHandler;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.ConnectionsService;
@@ -147,6 +146,26 @@ public class SearchService extends ConnectionsService {
 		return getResultEntityList(searchQry.toString(), new HashMap<String,String>());
 	}
 	
+	/**
+	 * Lists the elements in an Atom entry representing the result returned by a search.
+	 * 
+	 * @param query
+	 *            Text to search for
+	 * @param Map
+	 *            for additional parameters
+	 * @return EntityList<Result>
+	 * @throws ClientServicesException
+	 */
+	public EntityList<Result> getMyResultsList(String query,Map<String, List<String>> parameters) throws ClientServicesException {
+		if(parameters==null){
+			parameters= new HashMap<String,List<String>>();
+		}
+
+		StringBuilder searchQry = new StringBuilder(SearchUrls.MYSEARCH.format(this, SearchUrls.getQuery(query)));
+		addUrlParameters(searchQry, parameters);
+		return getResultEntityList(searchQry.toString(), new HashMap<String,String>());
+	}
+	
 	protected void addUrlParameters(StringBuilder b, Map<String,List<String>> parameters) throws ClientServicesException {
 		
 		if (parameters != null) {
@@ -206,6 +225,24 @@ public class SearchService extends ConnectionsService {
 	 * entry to make it easier to find the content later. The format of the tags document 
 	 * is an Atom publishing protocol (APP) categories document.
 	 * 
+	 * @param String
+	 *            Single tag to be search for, for multiple tags use other overloaded method
+	 * @return EntityList<Result>
+	 * @throws ClientServicesException
+	 */
+	public EntityList<Result> getMyResultsByTag(String tag) throws ClientServicesException {
+		List<String> taglist = new ArrayList<String>();
+		taglist.add(tag);
+		return getMyResultsByTag(taglist,null);
+	}
+	
+	/**
+	 * The category document identifies the tags that have been assigned to particular 
+	 * items, such as blog posts or community entries. Tags are single-word keywords that 
+	 * categorize a posting or entry. A tag classifies the information in the posting or 
+	 * entry to make it easier to find the content later. The format of the tags document 
+	 * is an Atom publishing protocol (APP) categories document.
+	 * 
 	 * @param List
 	 *            of Tags to searched for
 	 * @return EntityList<Result>
@@ -213,6 +250,22 @@ public class SearchService extends ConnectionsService {
 	 */
 	public EntityList<Result> getResultsByTag(List<String> tags) throws ClientServicesException {
 		return getResultsByTag(tags,null);
+	}
+	
+	/**
+	 * The category document identifies the tags that have been assigned to particular 
+	 * items, such as blog posts or community entries. Tags are single-word keywords that 
+	 * categorize a posting or entry. A tag classifies the information in the posting or 
+	 * entry to make it easier to find the content later. The format of the tags document 
+	 * is an Atom publishing protocol (APP) categories document.
+	 * 
+	 * @param List
+	 *            of Tags to searched for
+	 * @return EntityList<Result>
+	 * @throws ClientServicesException
+	 */
+	public EntityList<Result> getMyResultsByTag(List<String> tags) throws ClientServicesException {
+		return getMyResultsByTag(tags,null);
 	}
 	
 	/**
@@ -239,6 +292,32 @@ public class SearchService extends ConnectionsService {
 		constraint.setValues(formattedTags);
 		constraints.add(constraint);
 		return getResultsWithConstraint("", constraints,parameters);
+	}
+	
+	/**
+	 * The category document identifies the tags that have been assigned to particular 
+	 * items, such as blog posts or community entries. Tags are single-word keywords that 
+	 * categorize a posting or entry. A tag classifies the information in the posting or 
+	 * entry to make it easier to find the content later. The format of the tags document 
+	 * is an Atom publishing protocol (APP) categories document.
+	 * 
+	 * @param List
+	 *            of Tags to searched for
+	 * @return EntityList<Result>
+	 * @throws ClientServicesException
+	 */
+	public EntityList<Result> getMyResultsByTag(List<String> tags,
+			Map<String, String> parameters) throws ClientServicesException {
+		// High level wrapper, provides a convenient mechanism for search for
+		// tags, uses constraints internally
+		List<String> formattedTags = new ArrayList<String>();
+		List<Constraint> constraints = new ArrayList<Constraint>();
+		formattedTags = createTagConstraint(tags);
+		Constraint constraint = new Constraint();
+		constraint.setType("category");
+		constraint.setValues(formattedTags);
+		constraints.add(constraint);
+		return getMyResultsWithConstraint("", constraints,parameters);
 	}
 	
 	/**
@@ -349,6 +428,21 @@ public class SearchService extends ConnectionsService {
 	
     /**
      * @param query Text to search for
+     * @param Constraint
+     * 
+     * @return EntityList<Result>
+     * @throws ClientServicesException
+     * 
+	   *http://www-10.IBM.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Constraints&content=pdcontent  
+     */
+	public EntityList<Result> getMyResultsWithConstraint(String query, Constraint constraint) throws ClientServicesException {
+		List<Constraint> constraintList = new ArrayList<Constraint>();
+		constraintList.add(constraint);
+		return getMyResultsWithConstraint(query, constraintList,null);
+	}
+	
+    /**
+     * @param query Text to search for
      * @param List<Constraint>
      * 
      * @return EntityList<Scope>
@@ -358,6 +452,19 @@ public class SearchService extends ConnectionsService {
      */
 	public EntityList<Result> getResultsWithConstraint(String query, List<Constraint> constraints) throws ClientServicesException {
 		return getResultsWithConstraint(query, constraints,null);
+	}
+    
+    /**
+     * @param query Text to search for
+     * @param List<Constraint>
+     * 
+     * @return EntityList<Scope>
+     * @throws ClientServicesException
+     * 
+	   *http://www-10.IBM.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Constraints&content=pdcontent  
+     */
+	public EntityList<Result> getMyResultsWithConstraint(String query, List<Constraint> constraints) throws ClientServicesException {
+		return getMyResultsWithConstraint(query, constraints,null);
 	}
     
     /**
@@ -384,6 +491,32 @@ public class SearchService extends ConnectionsService {
 		}
 		params.put("constraint", formattedConstraints);
 		return getResultsList(query, params);
+	}
+
+    /**
+     * @param query Text to search for
+     * @param List<Constraint>
+     * 
+     * @return EntityList<Result>
+     * @throws ClientServicesException
+     * 
+	   *http://www-10.IBM.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Constraints&content=pdcontent  
+     */
+	public EntityList<Result> getMyResultsWithConstraint(String query, List<Constraint> constraints, Map<String, String> parameters) throws ClientServicesException{
+		
+		Map<String, List<String>> params = new HashMap<String, List<String>>();
+		// We can not use a map of constraints, since there could be multiple constraints but map can have only one key named constraint
+		List<String> formattedConstraints = generateConstraintParameter(constraints);
+		if(parameters == null){
+			parameters = new HashMap<String,String>();
+		}
+		for(Map.Entry<String, String> entry : parameters.entrySet()){
+			List<String> valueList = new ArrayList<String>();
+			valueList.add(entry.getValue());
+			params.put(entry.getKey(), valueList);
+		}
+		params.put("constraint", formattedConstraints);
+		return getMyResultsList(query, params);
 	}
 
 	/**

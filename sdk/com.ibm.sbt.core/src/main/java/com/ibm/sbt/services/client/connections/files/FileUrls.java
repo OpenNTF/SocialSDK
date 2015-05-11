@@ -27,6 +27,7 @@ import com.ibm.sbt.services.client.base.VersionedUrl;
 /**
  * @author Carlos Manias
  */
+ 
 public enum FileUrls implements URLContainer {
     SERVICE_DOCUMENT(new VersionedUrl(v4_0, 					"{files}/{authType}/{accessType}/introspection")),
     GET_NONCE(new VersionedUrl(v4_0, 							"{files}/{authType}/{accessType}/nonce")),
@@ -56,6 +57,7 @@ public enum FileUrls implements URLContainer {
     COMMUNITY_FILE_METADATA(new VersionedUrl(v4_0, 				"{files}/{authType}/{accessType}/library/{communityLibraryId}/document/{fileId}/entry")),
     COLLECTION_FEED(new VersionedUrl(v4_0, 						"{files}/{authType}/{accessType}/collection/{folderId}/feed")),
     COLLECTION_ENTRY(new VersionedUrl(v4_0,						"{files}/{authType}/{accessType}/collection/{folderId}/entry")),
+    COMMUNITY_COLLECTIONS_FEED(new VersionedUrl(v4_0, 		"{files}/{authType}/{accessType}/communitycollection/{communityId}/feed")),
     GET_FOLDERS_WITH_RECENT_FILES(new VersionedUrl(v4_0, 		"{files}/{authType}/{accessType}/collections/addedto/feed")),
     MYUSERLIBRARY_RECYCLEBIN_FEED(new VersionedUrl(v4_0, 		"{files}/{authType}/{accessType}/myuserlibrary/view/recyclebin/feed")),
     MYUSERLIBRARY_RECYCLEBIN_ENTRY(new VersionedUrl(v4_0, 		"{files}/{authType}/{accessType}/myuserlibrary/view/recyclebin/{fileId}/entry")),

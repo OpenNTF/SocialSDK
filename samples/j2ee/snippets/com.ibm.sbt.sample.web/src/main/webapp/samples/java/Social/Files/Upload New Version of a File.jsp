@@ -48,7 +48,7 @@
           FileService fileService = new FileService();
           EntityList<File> fileEntries = fileService.getMyFiles();
           if(fileEntries != null && !fileEntries.isEmpty()) { 
-	          File fileEntry = fileService.getFile(fileEntries.get(0).getFileId(), false);
+	          File fileEntry = fileService.getFile(fileEntries.get(0).getFileId());
 	          Map<String, String> paramsMap = new HashMap<String, String>();
 	          paramsMap.put(FileRequestParams.TAG.getFileRequestParams(), "NewVersionTag");
 			  

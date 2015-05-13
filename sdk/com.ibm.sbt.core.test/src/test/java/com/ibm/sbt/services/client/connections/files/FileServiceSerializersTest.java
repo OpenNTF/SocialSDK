@@ -2,6 +2,7 @@ package com.ibm.sbt.services.client.connections.files;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -29,9 +30,45 @@ import com.ibm.sbt.services.client.connections.files.serializer.FlagSerializer;
 
 /**
  * @author Lorenzo Boccaccia 
- * @date 7 May 2014
+ * @author Paul Bastide <pbastide@us.ibm.com>
+ * @date 7 May 2014, 12 MAY 2015
  */
 public class FileServiceSerializersTest extends BaseFileServiceTest {
+	
+	/**
+	 * test checks the default tags are generated properly and agree with the expected xml 
+	 * 
+	 * @see issue described in https://github.com/OpenNTF/SocialSDK/issues/1636
+	 */
+	@Test
+	public void testTags(){
+		
+		ArrayList<String> tags = new ArrayList<String>();
+		tags.add("test1");
+		tags.add("test2");
+		
+		File file = new File();
+		file.setBaseTags(tags);
+		file.setTitle("Test Title");
+		file.setContent("test");
+		
+		FileSerializer serializer = new FileSerializer(file);
+		
+		String serializedContent = serializer.generateFileUpdatePayload();
+		
+		int count = 0;
+		
+		while(serializedContent.contains("category")){
+			serializedContent = serializedContent.replaceFirst("category", "mashed");
+			count++;
+			System.out.println(count);
+		}
+		
+		System.out.println(serializedContent);
+		
+		assertEquals(3, count);
+		
+	}
 
     @Test
     public void testFlagSerializer() {

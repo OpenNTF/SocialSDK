@@ -20,6 +20,7 @@ import java.util.Date;
 import java.util.logging.Logger;
 
 import com.ibm.commons.util.io.json.JsonJavaObject;
+import com.ibm.sbt.provisioning.sample.app.model.Rest;
 import com.ibm.sbt.provisioning.sample.app.services.Subscriber;
 import com.ibm.sbt.provisioning.sample.app.task.BSSProvisioning;
 import com.ibm.sbt.provisioning.sample.app.util.BSSEndpoints;
@@ -43,21 +44,27 @@ public class AddSubscriber extends WeightedBSSCall<String>{
 		String email = this.subscriberJson.getAsObject("Subscriber").getAsObject("Person").getAsString("EmailAddress");
 		String subscriberId = null ;
 		try {     
-			logger.fine("triggering call : "+ this.getKey() );
+      logger.fine("triggering call : " + this.getUrl() + " " + getMethod());
 			JsonJavaObject subscriber = Subscriber.getInstance().getService().addSubscriber(this.subscriberJson);
 			subscriberId = String.valueOf(subscriber.getAsLong("Long"));
-			BSSProvisioning.getStateTransitionReport().get(email)[1] = new SimpleDateFormat(BSSProvisioning.DATE_FORMAT).format(new Date());
+      BSSProvisioning.getStateTransitionReport().get(email)[1] =
+          new SimpleDateFormat(BSSProvisioning.DATE_FORMAT).format(new Date());
 			BSSProvisioning.getSubscriberWeightReport().get(email)[0]++ ;
-			logger.info("subscriber "+email+" added !!! his id is "+subscriberId);
+      logger.info("subscriber " + email + " added with id " + subscriberId);
     	} catch (BssException be) {
     		logger.severe(" BssException : " + be.getMessage());
+      throw be;
     	} 
     	return subscriberId;
 	}
 
 	@Override
-	public String getKey() {
-		return BSSEndpoints.RES_SUBSCRIBER.getEndpointString()+":POST";
+  public String getUrl(){
+    return BSSEndpoints.RES_SUBSCRIBER.getEndpointString();
 	}
 
+  @Override
+  public Rest getMethod(){
+    return Rest.POST;
+  }
 }

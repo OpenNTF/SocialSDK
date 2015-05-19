@@ -20,18 +20,20 @@ package com.ibm.sbt.provisioning.sample.app.util;
  * */
 public enum BSSEndpoints {
 
-	RES_ROOT("/") , 
-	RES_CUSTOMER("/resource/customer"),
-	RES_SUBSCRIBER("/resource/subscriber") ,
-	RES_SUBSCRIPTION("/resource/subscription") ,
-	SER_AUTHENTICATION("/service/authentication") ,
-	SER_AUTHENTICATION_CHPWD("/service/authentication/changepassword") ,
-	SER_AUTHENTICATION_ROLELIST("/service/authentication/getrolelist") ;
+	RES_ROOT("/", true),
+	RES_CUSTOMER("/resource/customer", false),
+	RES_SUBSCRIBER("/resource/subscriber", false), 
+	RES_SUBSCRIPTION("/resource/subscription", false), 
+	SER_AUTHENTICATION("/service/authentication", true), 
+	SER_AUTHENTICATION_CHPWD("/service/authentication/changepassword", true), 
+	SER_AUTHENTICATION_ROLELIST("/service/authentication/getrolelist", true);
 	
 	private String endpoint ;
+  	private boolean sameWeight; // True if it all 3 methods have the same weight
 	 
-	BSSEndpoints(String endpoint){
+  	BSSEndpoints(String endpoint, boolean sameWeight){
 		this.endpoint = endpoint ;
+    	this.sameWeight = sameWeight;
 	}
 	
 	/**
@@ -42,4 +44,14 @@ public enum BSSEndpoints {
 	public String getEndpointString(){
 		return endpoint ;
 	}
+
+	/**
+   * This method returns true if all 3 methods have the same weight
+   * <p>
+   * 
+   * @return a boolean value, true if all 3 methods have the same weight
+   */
+  public boolean hasSameWeight(){
+    return this.sameWeight;
+  }
 }

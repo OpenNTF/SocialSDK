@@ -16,18 +16,27 @@
 package com.ibm.sbt.provisioning.sample.app.task;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
+import com.ibm.commons.util.io.json.JsonException;
+import com.ibm.commons.util.io.json.JsonJavaFactory;
 import com.ibm.commons.util.io.json.JsonJavaObject;
+import com.ibm.commons.util.io.json.JsonParser;
 import com.ibm.sbt.provisioning.sample.app.WeightManager;
+import com.ibm.sbt.provisioning.sample.app.model.SubscriptionEntitlement;
+import com.ibm.sbt.provisioning.sample.app.model.SubscriptionEntitlement.NotesType;
 import com.ibm.sbt.provisioning.sample.app.weightedBSSCall.WeightedBSSCall;
+import com.ibm.sbt.provisioning.sample.app.weightedBSSCall.authentication.ChangePassword;
 import com.ibm.sbt.provisioning.sample.app.weightedBSSCall.authentication.SetOneTimePassword;
 import com.ibm.sbt.provisioning.sample.app.weightedBSSCall.subscriber.ActivateSubscriber;
 import com.ibm.sbt.provisioning.sample.app.weightedBSSCall.subscriber.AddSubscriber;
 import com.ibm.sbt.provisioning.sample.app.weightedBSSCall.subscriber.EntitleSubscriber;
 import com.ibm.sbt.provisioning.sample.app.weightedBSSCall.subscriber.GetSubscriber;
+import com.ibm.sbt.provisioning.sample.app.weightedBSSCall.subscriber.UpdateNotesSubscriber;
+import com.ibm.sbt.services.client.ClientServicesException;
 import com.ibm.sbt.services.client.base.JsonEntity;
 
 /**
@@ -47,6 +56,8 @@ public class SubscriberTask implements Runnable {
 		SUBSCRIBER_ADDED,
 		SUBSCRIBER_ACTIVE,
 		SUBSCRIBER_ONE_TIME_PWD_SET,
+		SUBSCRIBER_PASSWORD_CHANGED, 
+		SUBSCRIBER_UPDATED, 
 		SUBSCRIBER_ENTITLED,
 		SEAT_ASSIGNED
 	}
@@ -54,21 +65,36 @@ public class SubscriberTask implements Runnable {
 	private JsonJavaObject subscriber ;
 	private String subscriberEmail ;
 	private String customerId ;
-	private String subscriptionId ;
+  	private List<SubscriptionEntitlement> entitlements;
 	private State status ;
 	private String subscriberId ;
+  	private String oneTimePassword;
+  	private String newPassword;
+
 	/**
 	 * Each subscriberTask has a key made up by the subscriberEmail, column, subscriptionId
 	 * */
 	private String taskKey ;
-	
+
+	public SubscriberTask(JsonJavaObject subscriber, String customerId, List<SubscriptionEntitlement> entitlements, 
+			State initialStatus, String newPassword){
+		this.subscriber = subscriber;
+		this.customerId = customerId;
+		this.entitlements = entitlements;
+		this.status = initialStatus;
+		this.oneTimePassword = "onet1me!";
+		this.newPassword = newPassword;
+		this.subscriberEmail = this.subscriber.getAsObject("Subscriber").getAsObject("Person").getAsString("EmailAddress");
+		this.taskKey = this.subscriberEmail;
+	}
+
 	public SubscriberTask( JsonJavaObject subscriber, String customerId, String subscriptionId , State initialStatus ) {
 		this.subscriber = subscriber ;
 		this.customerId = customerId ;
-		this.subscriptionId = subscriptionId ;
 		this.status = initialStatus ;
+    	this.oneTimePassword = "onet1me!";
 		this.subscriberEmail = this.subscriber.getAsObject("Subscriber").getAsObject("Person").getAsString("EmailAddress");
-		this.taskKey = this.subscriberEmail + ":" + subscriptionId ;
+    	this.taskKey = this.subscriberEmail;
 	}
 	
 	/**
@@ -86,40 +112,56 @@ public class SubscriberTask implements Runnable {
 		Thread.currentThread().setName("SubscriberTask: "+ this.taskKey );
 		boolean success = true ;
 		while( success == true ){
-			if( this.status == State.SUBSCRIBER_NON_EXISTENT ) {
+			if (this.status == State.SUBSCRIBER_NON_EXISTENT) {
 				this.subscriberId = addSubscriber();
 				if( this.subscriberId != null ) {
 					this.status = State.SUBSCRIBER_ADDED ;
 				}else{
 					success = false ; 
 				}
-			}else if( this.status == State.SUBSCRIBER_ADDED ){
-				if( activateSubscriber() ){
-					this.status = State.SUBSCRIBER_ACTIVE ;
+			} else if (this.status == State.SUBSCRIBER_ADDED) {
+				if(updateSubscriber()){
+					this.status = State.SUBSCRIBER_UPDATED;
 				}else{
-					success = false ;
+					success = false;
 				}
-			}else if( this.status == State.SUBSCRIBER_ACTIVE ){
-				if( setOneTimePassword() ){
-					this.status = State.SUBSCRIBER_ONE_TIME_PWD_SET ;
-				}else{
-					success = false ;
-				}
-			}else if( this.status == State.SUBSCRIBER_ONE_TIME_PWD_SET ){
-				if( entitleSubscriber() ){
-					this.status = State.SUBSCRIBER_ENTITLED ;
-				}else{
-					success = false ;
-				}
-			}else if( this.status == State.SUBSCRIBER_ENTITLED ){
-				if( waitForSeatAssignment() ){
-					this.status = State.SEAT_ASSIGNED ;
-				}else{
-					success = false ;
-				}
-			}else if( this.status == State.SEAT_ASSIGNED ){
-				success = false ;
-			}
+			} else if (this.status == State.SUBSCRIBER_UPDATED) {
+		    	  if( activateSubscriber() ){
+		    		  this.status = State.SUBSCRIBER_ACTIVE ;
+		    	  }else{
+		    		  success = false ;
+		    	  }
+			} else if ( this.status == State.SUBSCRIBER_ACTIVE ) {
+		    	  if (setOneTimePassword()){
+		    		  this.status = State.SUBSCRIBER_ONE_TIME_PWD_SET ;
+		    	  } else{
+		    		  success = false ;
+		    	  }
+			} else if(this.newPassword == null){
+				// If the new password is null, we don't change it, the user will change it on first login
+        		// If the new password is not null, we change it
+		        this.status = State.SUBSCRIBER_PASSWORD_CHANGED;
+					}else if( this.status == State.SUBSCRIBER_ONE_TIME_PWD_SET ){
+		        if(changePassword()){
+		          this.status = State.SUBSCRIBER_PASSWORD_CHANGED;
+		        }else{
+		          success = false;
+		        }
+		    } else if(this.status == State.SUBSCRIBER_PASSWORD_CHANGED){
+		    	  if( entitleSubscriber() ){
+		    		  this.status = State.SUBSCRIBER_ENTITLED ;
+		    	  }else{
+		    		  success = false ;
+		    	  }
+		    } else if( this.status == State.SUBSCRIBER_ENTITLED ){
+		    	  if( waitForSeatAssignment() ){
+		    		  this.status = State.SEAT_ASSIGNED ;
+		    	  }else{
+		    		  success = false ;
+		    	  }
+		    } else if( this.status == State.SEAT_ASSIGNED ){
+		    	  success = false ;
+		    }
 		}
 		logger.info("Task execution exiting with status:"+ this.status.name() );
 		if( this.status != State.SEAT_ASSIGNED ){
@@ -127,7 +169,37 @@ public class SubscriberTask implements Runnable {
 			logger.info("Re-queuing it..." );
 		}
 	}
-	
+
+	@SuppressWarnings("unchecked")
+	private String identifySubscriberState(){
+		WeightedBSSCall<JsonEntity> getSubscriber = new GetSubscriber(subscriberEmail, null);
+		JsonEntity subscriberEntity = null;
+		try{
+			subscriberEntity = getSubscriber.call();
+			String subscriberState = subscriberEntity.getAsString("SubscriberState");
+			if(subscriberState.equalsIgnoreCase("PENDING")){
+				this.status = State.SUBSCRIBER_ADDED;
+			}else if(subscriberState.equalsIgnoreCase("ACTIVE")){
+				ArrayList<Object> seatSetList = (ArrayList<Object>) subscriberEntity.getAsObject("SeatSet");
+				if(seatSetList.size() > 0){
+					for(Object seatObject:seatSetList){
+						JsonJavaObject seatSet = ((JsonJavaObject) seatObject);
+						String seatState = seatSet.getAsString("SeatState");
+						if(seatState.equalsIgnoreCase("ENTITLE_PENDING")){
+							this.status = State.SUBSCRIBER_ENTITLED;
+						}else if(seatState.equalsIgnoreCase("ASSIGNED")){
+							this.status = State.SEAT_ASSIGNED;
+						}
+					}
+				}
+			}
+			this.subscriberId = subscriberEntity.getAsLong("Id").toString();
+		}catch(Exception e){
+			logger.severe(e.getClass() + " : " + e.getMessage());
+		}
+		return this.subscriberId;
+	}
+
 	/**
 	 * This method will trigger the adding of a subscriber to an organization by mean of invocation of the <code>call()</code> method of the <code>abstract
 	 *  class WeightedBSSCall</code> on an instance of the <code>AddSubscriber</code> class
@@ -144,11 +216,27 @@ public class SubscriberTask implements Runnable {
 				subscriberId = addSubscriber.call();
 			} catch (Exception e) {
 	    		logger.severe(e.getClass()+" : " + e.getMessage());
+	    		String responseBody = ((ClientServicesException) e.getCause()).getResponseBody();
+	    		if(emailAlreadyExists(responseBody)){
+	    			subscriberId = identifySubscriberState();
+	    		}
 			}
 		}
 		return subscriberId ;
 	}
 	
+	private boolean emailAlreadyExists(String errorResponse){
+		try{
+			JsonJavaObject json = (JsonJavaObject) JsonParser.fromJson(JsonJavaFactory.instanceEx2, errorResponse);
+			JsonJavaObject bssResponse = json.getAsObject("BSSResponse");
+			String responseMessage = bssResponse.getAsString("ResponseMessage");
+			return responseMessage.equalsIgnoreCase("The email address already exists");
+		}catch(JsonException e){
+			logger.severe("Error parsing JSON");
+		}
+		return false;
+	}
+
 	/**
 	 * This method will trigger the subscriber activation by mean of invocation of the <code>call()</code> method of the <code>abstract
 	 *  class WeightedBSSCall</code> on an instance of the <code>ActivateSubscriber</code> class
@@ -179,7 +267,7 @@ public class SubscriberTask implements Runnable {
 	private boolean setOneTimePassword(){
 		Boolean oneTimePasswordSet = false ;
 		if( this.subscriber != null ){
-			WeightedBSSCall<Boolean> setOneTimePassword = new SetOneTimePassword(this.subscriberEmail , "onet1me!");
+			WeightedBSSCall<Boolean> setOneTimePassword = new SetOneTimePassword(this.subscriberEmail , this.oneTimePassword);
 			try{
 				logger.info("Setting one time password ...");
 				oneTimePasswordSet = setOneTimePassword.call();
@@ -194,18 +282,86 @@ public class SubscriberTask implements Runnable {
 	}
 	
 	/**
-	 * This method will trigger the entitlement of the subscriber to the subscription by mean of invocation of the <code>call()</code> method of the <code>abstract
-	 *  class WeightedBSSCall</code> on an instance of the <code>EntitleSubscriber</code> class
+	 * This method will trigger the subscriber password changing by mean of invocation of the
+	 * {@link com.ibm.sbt.provisioning.sample.app.weightedBSSCall.WeightedBSSCall#call()} method on an
+	 * instance of the
+	 * {@link com.ibm.sbt.provisioning.sample.app.weightedBSSCall.authentication.ChangePassword} class
 	 * <p>
-	 * @return <code>true</code> if the subscriber is entitled, <code>false</code> otherwise
+	 * 
+	 * @param email email used as user credential of the subscriber<br>
+	 * @param oneTimePassword string representing the one time password<br>
+	 * @param newPassword string representing the new password<br>
+	 * @return <code>true</code> if the password is changed, <code>false</code> otherwise
 	 */
+	private boolean changePassword(){
+		Boolean passwordChanged = false;
+		logger.info("Subscriber changing password ...");
+		WeightedBSSCall<Boolean> changePassword = new ChangePassword(this.subscriberEmail, this.oneTimePassword, this.newPassword);
+		try {
+			passwordChanged = changePassword.call();
+		} catch(Exception e){
+			logger.severe(e.getClass() + " : " + e.getMessage());
+		}
+		return passwordChanged;
+	}
+
+   /**
+   * This method will trigger the adding of a subscriber to an organization by mean of invocation of
+   * the <code>call()</code> method of the <code>abstract
+   *  class WeightedBSSCall</code> on an instance of the <code>AddSubscriber</code> class
+   * <p>
+   * 
+   * @return the BSS subscriber identifier
+   */
+	private boolean updateSubscriber(){
+		boolean updated = false;
+		if(this.subscriber != null){
+			List<NotesType> addedMailAttributes = new ArrayList<NotesType>();
+			for(SubscriptionEntitlement entitlement:entitlements){
+				NotesType entitlementNotesType = entitlement.getNotesType();
+				if(!addedMailAttributes.contains(entitlementNotesType)){
+					addedMailAttributes.add(entitlementNotesType);
+					WeightedBSSCall<Boolean> updateSubscriber = new UpdateNotesSubscriber(this.subscriber, entitlementNotesType);
+					logger.info("Updating subscriber...");
+					try{
+						updated = updateSubscriber.call();
+					}catch(Exception e){
+						logger.severe(e.getClass() + " : " + e.getMessage());
+					}
+				}
+			}
+		}
+		return updated;
+	}
+
+	private String getSubscriberState(){
+		WeightedBSSCall<JsonEntity> getSubscriber = new GetSubscriber(subscriberEmail, null);
+		JsonEntity subscriberEntity = null;
+		try{
+			subscriberEntity = getSubscriber.call();
+		}catch(Exception e){
+			logger.severe(e.getMessage());
+		}
+		return subscriberEntity.getAsString("SubscriberState");
+	}
+  
+	 /**
+	  * This method will trigger the entitlement of the subscriber to the subscription by mean of invocation of the <code>call()</code> method of the <code>abstract
+	  * class WeightedBSSCall</code> on an instance of the <code>EntitleSubscriber</code> class
+	  * <p>
+	  * @return <code>true</code> if the subscriber is entitled, <code>false</code> otherwise
+	  */
 	private boolean entitleSubscriber(){
 		Boolean suscriberEntitled = false ;
-		if( this.subscriberId != null && this.subscriptionId != null ){
-			logger.info("Entitling subscriber...");
-			WeightedBSSCall<Boolean> entitleSubscriber = new EntitleSubscriber(this.subscriberId, this.subscriptionId, this.subscriberEmail);
-			try{
-				suscriberEntitled = entitleSubscriber.call();
+		logger.info("Entitling subscriber...");
+	    String subscriberState = getSubscriberState();
+	    if(!"ACTIVE".equals(subscriberState)){
+	      return suscriberEntitled;
+	    }
+	    for(SubscriptionEntitlement entitlement:entitlements){
+	    	WeightedBSSCall<Boolean> entitleSubscriber = new EntitleSubscriber(this.subscriberId, entitlement.getSubscriptionId(), this.subscriberEmail);
+	    	try{
+	    		suscriberEntitled = entitleSubscriber.call();
 				if( suscriberEntitled == null ){
 					suscriberEntitled = false ;
 				}
@@ -223,11 +379,13 @@ public class SubscriberTask implements Runnable {
 	 * @return <code>true</code> if a seat from the subscription has been assigned to the subscriber, <code>false</code> otherwise
 	 */
 	private boolean waitForSeatAssignment(){
-		boolean seatAssigned = false ;
+    	boolean seatsAssigned = false;
 		if( this.subscriberId != null ){
 			// SUBSCRIBER RETRIEVAL
-			String suscriberEmail = this.subscriber.getAsObject("Subscriber").getAsObject("Person").getAsString("EmailAddress");
+			String suscriberEmail = 
+				this.subscriber.getAsObject("Subscriber").getAsObject("Person").getAsString("EmailAddress");
 			logger.info("Subscriber retrieval by email : " + suscriberEmail );
+
 			WeightedBSSCall<JsonEntity> getSubscriber = new GetSubscriber( suscriberEmail , null );
 			JsonEntity subscriberEntity = null ;
 			try {
@@ -236,31 +394,40 @@ public class SubscriberTask implements Runnable {
 	    		logger.severe(e.getClass()+" : " + e.getMessage());
 			}
 			if( subscriberEntity != null ){
+				logger.info("Retrieved suscriber object");
+				logger.info(subscriberEntity.getJsonObject().toString());
 				List<Object> seatSet = subscriberEntity.getJsonObject().getAsList("SeatSet");
-	    		JsonJavaObject seatJson = findSeat(seatSet, subscriptionId);
-	    		if (seatJson != null) {
-	        		String seatState = seatJson.getAsString("SeatState");
-	        		if(!seatState.equalsIgnoreCase("ASSIGNED")){
-	        			logger.info("seat not assigned !!!");
-	        		}else if(seatState.equalsIgnoreCase("ASSIGNED")){
-	        			BSSProvisioning.getStateTransitionReport().get(this.subscriberEmail)[5] = new SimpleDateFormat(BSSProvisioning.DATE_FORMAT).format(new Date());
-	        			logger.info("seat assigned !!!");
-	        			BSSProvisioning.incrementSubscribersProvisioned();
-	        			if( BSSProvisioning.getSubscribersQuantity() == BSSProvisioning.getSubscribersProvisioned() ){
-	        				logger.finest("ALL PROVISIONED !!!");
-	        				BSSProvisioning.generateStateTransitionReport();
-	        				BSSProvisioning.generateSubscriberWeightReport();
-	        				BSSProvisioning.generateCallsCounterReport();
-	        				WeightManager.getInstance().shutdown();
-	        			}
-	        			seatAssigned = true ;
-	        		}
-	        	}
+		        int numEntitlements = entitlements.size();
+		        int entitlementsAssigned = 0;
+		        for(SubscriptionEntitlement entitlement:entitlements){
+		        	JsonJavaObject seatJson = findSeat(seatSet, entitlement.getSubscriptionId());
+		        	if (seatJson != null) {
+		        		String seatState = seatJson.getAsString("SeatState");
+		        		if(!seatState.equalsIgnoreCase("ASSIGNED")){
+		        			logger.info("seat not assigned !!!");
+		        		} else if(seatState.equalsIgnoreCase("ASSIGNED")){
+		        			entitlementsAssigned++;
+		        			BSSProvisioning.getStateTransitionReport().get(this.subscriberEmail)[5] = new SimpleDateFormat(BSSProvisioning.DATE_FORMAT).format(new Date());
+		        			logger.info("seat assigned !!!");
+		        			if(numEntitlements == entitlementsAssigned){
+		        				BSSProvisioning.incrementSubscribersProvisioned();
+		        				seatsAssigned = true;
+		        			}
+		        			if(BSSProvisioning.getSubscribersQuantity().get() == BSSProvisioning.getSubscribersProvisioned().get()){
+		        				logger.finest("ALL SUBSCRIBERS PROVISIONED !!!");
+		        				BSSProvisioning.generateStateTransitionReport();
+		        				BSSProvisioning.generateSubscriberWeightReport();
+		        				BSSProvisioning.generateCallsCounterReport();
+		        				WeightManager.getInstance().shutdown();
+		        			}
+		        		}
+		        	}
+		        }
 			}else{
 				logger.severe("the subscriber has not been retrieved !!!");
 			}
 		}
-		return seatAssigned ;
+    	return seatsAssigned;
 	}
 	
 	/**
@@ -281,7 +448,6 @@ public class SubscriberTask implements Runnable {
     	return null;
     }
 	
-	// GETTER and SETTER
 	public JsonJavaObject getSubscriber() {
 		return subscriber;
 	}
@@ -292,10 +458,6 @@ public class SubscriberTask implements Runnable {
 	
 	public String getCustomerId() {
 		return customerId;
-	}
-	
-	public String getSubscriptionId() {
-		return subscriptionId;
 	}
 	
 	public State getStatus() {

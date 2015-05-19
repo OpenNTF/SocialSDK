@@ -18,7 +18,7 @@ package com.ibm.sbt.provisioning.sample.app.weightedBSSCall.authentication;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Logger;
-
+import com.ibm.sbt.provisioning.sample.app.model.Rest;
 import com.ibm.sbt.provisioning.sample.app.services.Authentication;
 import com.ibm.sbt.provisioning.sample.app.task.BSSProvisioning;
 import com.ibm.sbt.provisioning.sample.app.util.BSSEndpoints;
@@ -35,6 +35,7 @@ public class SetOneTimePassword extends WeightedBSSCall<Boolean> {
 		this.loginName = loginName ;
 		this.password = password ;
 	}
+
 	/**
 	 * Method used for triggering the proper HTTP call for setting the one time password of an
 	 * organization member, towards the BSS endpoint designed for 
@@ -45,7 +46,7 @@ public class SetOneTimePassword extends WeightedBSSCall<Boolean> {
 		boolean oneTimePasswordSet = false ;    
 		UserCredentialJsonBuilder userCredential = new UserCredentialJsonBuilder();
 		userCredential.setLoginName(this.loginName).setNewPassword(this.password);
-		logger.fine("triggering call : "+ this.getKey() );
+    logger.fine("triggering call : " + this.getUrl() + " " + getMethod());
 		Authentication.getInstance().getService().setOneTimePassword(userCredential);
 		oneTimePasswordSet = true ;
 		String[] subscriberReport = BSSProvisioning.getStateTransitionReport().get(this.loginName);
@@ -59,7 +60,12 @@ public class SetOneTimePassword extends WeightedBSSCall<Boolean> {
 	}
 
 	@Override
-	public String getKey() {
+  public String getUrl(){
 		return BSSEndpoints.SER_AUTHENTICATION.getEndpointString();
 	}
+
+  @Override
+  public Rest getMethod(){
+    return Rest.ALL;
+  }
 }

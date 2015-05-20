@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>com.ibm.sbt</groupId>
 		<artifactId>com.ibm.sbt.sdk</artifactId>
-		<version>1.1.5-SNAPSHOT</version>
+		<version>1.1.5.20150520-1200</version>
 	</parent>
 
 
@@ -59,7 +59,7 @@
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.sbt.core</artifactId>
-			<version>1.1.5-SNAPSHOT</version>
+			<version>1.1.5.20150520-1200</version>
 			<type>eclipse-plugin</type>
 		</dependency>
 	</dependencies>

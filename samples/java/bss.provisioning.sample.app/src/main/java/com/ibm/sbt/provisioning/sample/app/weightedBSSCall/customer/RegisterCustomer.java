@@ -18,6 +18,7 @@ package com.ibm.sbt.provisioning.sample.app.weightedBSSCall.customer;
 import java.util.logging.Logger;
 
 import com.ibm.commons.util.io.json.JsonJavaObject;
+import com.ibm.sbt.provisioning.sample.app.model.Rest;
 import com.ibm.sbt.provisioning.sample.app.services.Customer;
 import com.ibm.sbt.provisioning.sample.app.util.BSSEndpoints;
 import com.ibm.sbt.provisioning.sample.app.weightedBSSCall.WeightedBSSCall;
@@ -30,6 +31,7 @@ public class RegisterCustomer extends WeightedBSSCall<String>{
 	public  RegisterCustomer( String customerJson ){
 		this.customerJson = customerJson ;
 	}
+
 	/**
 	 * Method used for triggering the proper HTTP call for registering a 
 	 * customer/organization, towards the BSS endpoint designed for 
@@ -37,7 +39,7 @@ public class RegisterCustomer extends WeightedBSSCall<String>{
 	 */
 	@Override
 	protected String doCall() throws Exception {
-		logger.fine("triggering call : "+ this.getKey() );
+    logger.fine("triggering call : " + this.getUrl() + " " + getMethod());
     	JsonJavaObject response = Customer.getInstance().getService().registerCustomer(this.customerJson);
     	String customerId = String.valueOf(response.getAsLong("Long"));
     	logger.info("Customer registered !!!");
@@ -45,7 +47,12 @@ public class RegisterCustomer extends WeightedBSSCall<String>{
 	}
 
 	@Override
-	public String getKey() {
-		return BSSEndpoints.RES_CUSTOMER.getEndpointString()+":POST";
+  public String getUrl(){
+    return BSSEndpoints.RES_CUSTOMER.getEndpointString();
 	}
+
+  @Override
+  public Rest getMethod(){
+    return Rest.ALL;
+  }
 }

@@ -41,11 +41,12 @@ public abstract class WeightedBSSCall<T> implements Callable<T>, BSSCall {
 	@Override
 	public final T call() throws Exception {
 		T toReturn = null ;
-		if( WeightManager.getInstance().updateCurrentWeight(this.getKey()) ){
+    	if(WeightManager.getInstance().updateCurrentWeight(this.getUrl(), this.getMethod())){
 			toReturn = this.doCall();
 		}
 		return toReturn ;
 	}
+
 	/**
 	 * The classes belonging to the package <code>com.ibm.sbt.provisioning.sample.app.weightedBSSCall</code> and extending
 	 * this abstract class will implement this method for encapsulating in it the logic needed for triggering the HTTP calls to the BSS API.

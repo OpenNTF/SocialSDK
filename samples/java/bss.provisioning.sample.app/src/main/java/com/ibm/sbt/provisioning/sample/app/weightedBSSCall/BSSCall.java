@@ -14,6 +14,9 @@
  * permissions and limitations under the License.
  */
 package com.ibm.sbt.provisioning.sample.app.weightedBSSCall;
+
+import com.ibm.sbt.provisioning.sample.app.model.Rest;
+
 /**
  * Each call to the BSS API has to be associated with a key needed for retrieving that call's weight 
  * from the {@link com.ibm.sbt.provisioning.sample.app.WeightManager#getWeightPerBSSCall()} <code>Map</code>.
@@ -33,5 +36,7 @@ public interface BSSCall {
 	 * <p>
 	 * @return a String representing the key associated with the BSS API call
 	 */
-	public String getKey();
+  public String getUrl();
+
+  public Rest getMethod();
 }

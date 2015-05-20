@@ -22,12 +22,14 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Logger;
 
 import com.ibm.commons.util.StringUtil;
@@ -35,6 +37,10 @@ import com.ibm.commons.util.io.json.JsonException;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.provisioning.sample.app.WeightManager;
 import com.ibm.sbt.provisioning.sample.app.logging.CustomLogger;
+import com.ibm.sbt.provisioning.sample.app.model.Rest;
+import com.ibm.sbt.provisioning.sample.app.model.Weight;
+import com.ibm.sbt.provisioning.sample.app.model.WeightSet;
+import com.ibm.sbt.provisioning.sample.app.model.Weights;
 import com.ibm.sbt.provisioning.sample.app.util.Util;
 import com.ibm.sbt.provisioning.sample.app.weightedBSSCall.WeightedBSSCall;
 import com.ibm.sbt.provisioning.sample.app.weightedBSSCall.authentication.ChangePassword;
@@ -77,11 +83,15 @@ public class BSSProvisioning implements Runnable {
 	 * <code>BasicEndpoint</code> object representing the
 	 * BSS Host url
 	 */
-	private static BasicEndpoint basicEndpoint ;
+	protected static BasicEndpoint basicEndpoint ;
 	/**
 	 * path to the weights json input file
 	 */
 	private static String weightsFile ;
+    /**
+    * path to the weights data object
+    */
+	protected static Weights weights;
 	/**
 	 * boolean set to true when the default weights.json file ( that comes packaged in the jar) must be used
 	 */
@@ -90,31 +100,31 @@ public class BSSProvisioning implements Runnable {
 	 * a queue containing all the {@link SubscriberTask} instances representing to the
 	 * subscribers in input to be provisioned
 	 */
-	private static ConcurrentLinkedQueue<SubscriberTask> subscriberTasks ;
+	protected static ConcurrentLinkedQueue<SubscriberTask> subscriberTasks ;
 	/**
 	 * the Executor used by the application to provision the subscribers in input
 	 * each in their own thread , executing the <code>run()</code> method of the corresponding
 	 * {@link SubscriberTask} instance
 	 */
-	private static ExecutorService threadpool ;
+	protected static ExecutorService threadpool ;
 	/**
 	 * number of subscribers in input
 	 */
-	private static int subscribersQuantity = 0 ;
+	protected static AtomicInteger subscribersQuantity;
 	/**
 	 * number of currently provisioned subscribers
 	 */
-	private static int subscribersProvisioned = 0 ;
+	protected static AtomicInteger subscribersProvisioned = new AtomicInteger(0);
 	/**
 	 * <code>Map</code> associating each subscribers with a String array, containing a timestamp for each 
 	 * state transition of the corresponding subscriber
 	 */
-	private static Map<String,String[]> stateTransitionReport ;
+	protected static Map<String,String[]> stateTransitionReport ;
 	/**
 	 * <code>Map</code> associating each subscribers with a int array, containing a counter for each 
 	 * of the call made to provision the corresponding subscriber
 	 */
-	private static Map<String,int[]> subscriberWeightReport ;
+	protected static Map<String,int[]> subscriberWeightReport ;
 	
 	/**
 	 * Entry point of the application 
@@ -182,7 +192,8 @@ public class BSSProvisioning implements Runnable {
 					try{
 						threadpoolSize = Integer.parseInt(args[6]);
 					}catch( NumberFormatException nfe ){
-						logger.severe("NumberFormatException thrown while parsing arg[6], assuming it represents the path to the weights.json file ");
+						logger
+							.severe("NumberFormatException thrown while parsing arg[6], assuming it represents the path to the weights.json file ");
 						isNotAnInt = true ;
 					}
 					if(isNotAnInt){
@@ -211,7 +222,7 @@ public class BSSProvisioning implements Runnable {
 				
 				threadpool = Executors.newFixedThreadPool(threadpoolSize);
 				
-				subscribersQuantity = subscribers.size();
+        		subscribersQuantity = new AtomicInteger(subscribers.size());
 				basicEndpoint = new BasicEndpoint();
 				basicEndpoint.setUrl(url);
 				basicEndpoint.setForceTrustSSLCertificate(true);
@@ -236,7 +247,7 @@ public class BSSProvisioning implements Runnable {
 						if( orgAdminEntity != null ){
 							String orgAdminId = String.valueOf(orgAdminEntity.getAsLong("Id"));
 							if( orgAdminId != null ){
-								logger.info( "org admin subscriber "+orgAdminEmail+" added !!! his id is "+orgAdminId );
+								logger.info( "org admin subscriber "+orgAdminEmail+" added with id "+orgAdminId );
 								// ORG.ADMINISTRATOR ACTIVATION
 								Boolean subscriberActive = activateOrgAdmin( orgAdminId ) ;
 								if( subscriberActive!= null && subscriberActive ){
@@ -247,7 +258,8 @@ public class BSSProvisioning implements Runnable {
 										Boolean passwordChanged = orgAdminChangePassword(orgAdminEmail, "onet1me!", "passw0rd") ;
 										if( passwordChanged != null && passwordChanged){
 											// SUBSCRIPTION CREATION
-											String subscriptionId = createSubscription( customerId , 3, partNumber/*"D0NWLLL"*/, subscribersQuantity ) ;
+											String subscriptionId = 
+												createSubscription( customerId , 3, partNumber/*"D0NWLLL"*/, subscribersQuantity.get()) ;
 											if( subscriptionId != null ){
 												// sleeping 10 sec waiting for the subscription to be created and activated
 												try {
@@ -283,7 +295,11 @@ public class BSSProvisioning implements Runnable {
 														// SUBSCRIPTION ACTIVE -->
 														subscriberTasks = new ConcurrentLinkedQueue<SubscriberTask>();
 														for( JsonJavaObject subscriber : subscribers ){
-															String suscriberEmail = subscriber.getAsObject("Subscriber").getAsObject("Person").getAsString("EmailAddress") ;
+															String suscriberEmail = 
+																subscriber
+																	.getAsObject("Subscriber")
+																	.getAsObject("Person")
+																	.getAsString("EmailAddress");
 															SubscriberTask subscriberTask = 
 																	new SubscriberTask(subscriber, customerId, subscriptionId,
 																			SubscriberTask.State.SUBSCRIBER_NON_EXISTENT );	
@@ -354,25 +370,28 @@ public class BSSProvisioning implements Runnable {
 	@Override
 	public void run(){
 		try{
+			logger.info("Provisioning of users... " + BSSProvisioning.getSubscribersProvisioned().get() + "/" + BSSProvisioning.getSubscribersQuantity().get());
 			// first execution in the context of the main thread, all the others in their own thread
 			if(!Thread.currentThread().getName().equals("main")){
 				Thread.currentThread().setName("Provisioning");
 			}
-			// stop submitting when the threshold has been reached and the queue has been emptied
-			while( !WeightManager.getInstance().isThresholdReached() &&
-					subscriberTasks != null && !subscriberTasks.isEmpty() ){
-				SubscriberTask subscriberTask = subscriberTasks.poll();
-				if( subscriberTask != null ){
-					logger.info("Flow : "+subscriberTask.getSubscriberTaskKey()+" and status "+subscriberTask.getStatus().name()+" polled from the queue...submitting it...");
-					if( subscriberTask.getStatus() == SubscriberTask.State.SUBSCRIBER_NON_EXISTENT ){
-						String[] subscriberReport = stateTransitionReport.get(subscriberTask.getSubscriberEmail());
-						subscriberReport[0] = sdf.format(new Date());
+
+			if(BSSProvisioning.getSubscribersQuantity().get() > BSSProvisioning.getSubscribersProvisioned().get()){
+				// stop submitting when the threshold has been reached and the queue has been emptied
+				while( !WeightManager.getInstance().isThresholdReached() && subscriberTasks != null && !subscriberTasks.isEmpty() ){
+					SubscriberTask subscriberTask = subscriberTasks.poll();
+					if( subscriberTask != null ){
+						logger.info("Flow : "+subscriberTask.getSubscriberTaskKey()+" and status " + subscriberTask.getStatus().name()+" polled from the queue...submitting it...");
+						if( subscriberTask.getStatus() == SubscriberTask.State.SUBSCRIBER_NON_EXISTENT ){
+							String[] subscriberReport = stateTransitionReport.get(subscriberTask.getSubscriberEmail());
+							subscriberReport[0] = sdf.format(new Date());
+						}
+						threadpool.submit(subscriberTask);
 					}
-					threadpool.submit(subscriberTask);
+					//sleeping 250 millisec between one submit and the other with the goal of 
+					//avoiding to overwhelm the server with requests
+					Thread.sleep(250);
 				}
-				//sleeping 250 millisec between one submit and the other with the goal of 
-				//avoiding to overwhelm the server with requests
-				Thread.sleep(250);
 			}
 		}catch(Exception e){
 			logger.severe("Catched Exception in the BSSProvisioning run() method : "+e.getMessage() );
@@ -535,12 +554,13 @@ public class BSSProvisioning implements Runnable {
 		try{
 			File csvReport = new File("stateTransitionReport.csv");
 			BufferedWriter bwSub = new BufferedWriter(new FileWriter(csvReport));
-			bwSub.write("Email,SUBSCRIBER_NON_EXISTENT,SUBSCRIBER_ADDED,SUBSCRIBER_ACTIVE,SUBSCRIBER_ONE_TIME_PWD_SET,SUBSCRIBER_ENTITLED,SEAT_ASSIGNED,TOTAL TIME(sec)\n");
-			for( String email : stateTransitionReport.keySet() ){
+		      bwSub
+		        .write("Email,SUBSCRIBER_NON_EXISTENT,SUBSCRIBER_ADDED,SUBSCRIBER_ACTIVE,SUBSCRIBER_ONE_TIME_PWD_SET,SUBSCRIBER_ENTITLED,SEAT_ASSIGNED,TOTAL TIME(sec)\n");
+		      for(String emailSubscriptionId:stateTransitionReport.keySet()){
 				long seatAssigned = 0L ;
 				long subscriberNonExistent = 0L ;
-				String[] timestamps = stateTransitionReport.get(email);
-                bwSub.write(email+",");
+        		String[] timestamps = stateTransitionReport.get(emailSubscriptionId);
+        		bwSub.write(emailSubscriptionId + ",");
                 int index = 0 ;
                 for(String timestamp : timestamps){
                 	if( index == 0 ){
@@ -588,23 +608,32 @@ public class BSSProvisioning implements Runnable {
 			File csvReport = new File("subscriberWeightReport.csv");
 			BufferedWriter bwSub = new BufferedWriter(new FileWriter(csvReport));
 			bwSub.write("Email,/resource/subscriber:POST,/service/authentication,/resource/subscriber:GET,TOTAL_WEIGHT\n");
-			for( String email : subscriberWeightReport.keySet() ){
+      for(String emailSubscriptionId:subscriberWeightReport.keySet()){
 				int totalWeight = 0 ;
-				int[] callNumbers = subscriberWeightReport.get(email);
-                bwSub.write(email+",");
+        int[] callNumbers = subscriberWeightReport.get(emailSubscriptionId);
+        bwSub.write(emailSubscriptionId + ",");
                 int index = 0 ;
                 for(int callNumber : callNumbers){
                 	switch( index ){
         			case 0 :
-        				totalWeight = totalWeight + ( callNumber * WeightManager.getInstance().getWeightPerBSSCall().get("/resource/subscriber:POST"));
+              totalWeight =
+                  totalWeight
+                      + (callNumber * WeightManager.getInstance().getWeightValuePerBSSCall("/resource/subscriber",
+                          Rest.POST));
         				bwSub.write(callNumber+",");
         				break;
         			case 1 :
-        				totalWeight = totalWeight + ( callNumber * WeightManager.getInstance().getWeightPerBSSCall().get("/service/authentication"));
+              totalWeight =
+                  totalWeight
+                      + (callNumber * WeightManager.getInstance().getWeightValuePerBSSCall("/service/authentication",
+                          Rest.ALL));
         				bwSub.write(callNumber+",");
         				break;
         			case 2 :
-        				totalWeight = totalWeight + ( callNumber * WeightManager.getInstance().getWeightPerBSSCall().get("/resource/subscriber:GET"));
+              totalWeight =
+                  totalWeight
+                      + (callNumber * WeightManager.getInstance().getWeightValuePerBSSCall("/resource/subscriber",
+                          Rest.GET));
         				bwSub.write(callNumber+","+totalWeight+"\n");
         				break;
         			}
@@ -632,9 +661,14 @@ public class BSSProvisioning implements Runnable {
 			BufferedWriter bwSub = new BufferedWriter(new FileWriter(csvReport));
 			String header = "" ;
 			String row = "" ;
-			for(String call : WeightManager.getInstance().getCounterPerBSSCall().keySet()){
-				header = header + call + "," ;
-				row = row + WeightManager.getInstance().getCounterPerBSSCall().get(call) + "," ;
+		      WeightSet defaultSet = weights.getDefaultSet();
+		      for(String url:defaultSet.getUrls()){
+		        HashMap<Rest, Weight> methodMap = defaultSet.getAllFromUrl(url);
+		        for(Rest method:methodMap.keySet()){
+		          Weight weight = methodMap.get(method);
+		          header = header + url + ":" + method + ",";
+		          row = row + weight.getCounter() + ",";
+		        }
 			}
 			header = ( header.substring( 0, header.length() -1 ) ) + "\n" ;
 			row = ( row.substring( 0, row.length() -1 ) ) + "\n" ;
@@ -648,60 +682,77 @@ public class BSSProvisioning implements Runnable {
 			ioe.printStackTrace();
 	    }
 	}
+
 	/**
 	 * {@link #basicEndpoint} getter method
 	 */
 	public static BasicEndpoint getBasicEndpoint() {
 		return basicEndpoint;
 	}
+
 	/**
 	 * {@link #weightsFile} getter method
 	 */
 	public static String getWeightsFile() {
 		return weightsFile;
 	}
+
+  /**
+   * {@link #weights} getter method
+   */
+  public static Weights getWeights(){
+    return weights;
+  }
+
 	/**
 	 * {@link #weightsFileAsInput} getter method
 	 */
 	public static boolean isWeightsFileAsInput() {
 		return weightsFileAsInput;
 	}
+
 	/**
 	 * {@link #subscriberTasks} getter method
 	 */
 	public static ConcurrentLinkedQueue<SubscriberTask> getSubscribersTasks() {
 		return subscriberTasks;
 	}
+
 	/**
 	 * {@link #threadpool} getter method
 	 */
 	public static ExecutorService getThreadPool() {
 		return threadpool;
 	}
+
 	/**
 	 * {@link #subscribersQuantity} getter method
 	 */
-	public static int getSubscribersQuantity() {
+  public static AtomicInteger getSubscribersQuantity(){
 		return subscribersQuantity;
 	}
+
 	/**
 	 * {@link #subscribersProvisioned} incrementation method
 	 */
 	public static synchronized void incrementSubscribersProvisioned(){
-		subscribersProvisioned++ ;
+    subscribersProvisioned.incrementAndGet();
 	}
+
 	/**
 	 * {@link #subscribersProvisioned} getter method
 	 */
-	public static synchronized int getSubscribersProvisioned(){
+  public static synchronized AtomicInteger getSubscribersProvisioned(){
 		return subscribersProvisioned ;
 	}
+
 	/**
 	 * {@link #stateTransitionReport} getter method
 	 */
 	public static Map<String, String[]> getStateTransitionReport() {
 		return stateTransitionReport;
 	}
+
 	/**
 	 * {@link #subscriberWeightReport} getter method
 	 */
@@ -720,7 +771,7 @@ public class BSSProvisioning implements Runnable {
 		String customerJson = null ;
 		JsonDataHandler handler = null ;
 		try{
-			customerJson = com.ibm.sbt.provisioning.sample.app.util.Util.readFully(customerFilePath);
+      		customerJson = Util.readFully(customerFilePath);
 			handler = new JsonDataHandler(customerJson);
 		}catch( IOException ioe ){
 			logger.severe("Exception thrown during customer.json file parsing : "+ ioe.getMessage());

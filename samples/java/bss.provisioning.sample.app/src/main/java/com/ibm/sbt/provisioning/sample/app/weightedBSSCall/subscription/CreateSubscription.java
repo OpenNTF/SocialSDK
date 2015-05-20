@@ -16,7 +16,7 @@
 package com.ibm.sbt.provisioning.sample.app.weightedBSSCall.subscription;
 
 import java.util.logging.Logger;
-
+import com.ibm.sbt.provisioning.sample.app.model.Rest;
 import com.ibm.sbt.provisioning.sample.app.services.Subscription;
 import com.ibm.sbt.provisioning.sample.app.util.BSSEndpoints;
 import com.ibm.sbt.provisioning.sample.app.weightedBSSCall.WeightedBSSCall;
@@ -49,13 +49,14 @@ public class CreateSubscription extends WeightedBSSCall<String> {
 	protected String doCall() throws Exception {
 		String subscriptionId = null ;
 		OrderJsonBuilder order = new OrderJsonBuilder();
-		order.setCustomerId(this.customerId)
+    order
+      .setCustomerId(this.customerId)
 			 .setDurationUnits(SubscriptionManagementService.DurationUnits.YEARS)
 		     .setDurationLength(this.duration)
 		     .setPartNumber(this.partNumber)
 		     .setPartQuantity(this.quantity)
 		     .setBillingFrequency(BillingFrequency.ARC);
-		logger.fine("triggering call : "+ this.getKey() );
+    logger.fine("triggering call : " + this.getUrl() + " " + getMethod());
 		EntityList<JsonEntity> subscriptionList = Subscription.getInstance().getService().createSubscription(order);
 		if( subscriptionList != null && subscriptionList.get(0) != null ){
 			subscriptionId = String.valueOf(subscriptionList.get(0).getAsLong("SubscriptionId"));
@@ -65,7 +66,11 @@ public class CreateSubscription extends WeightedBSSCall<String> {
 	}
 
 	@Override
-	public String getKey() {
-		return BSSEndpoints.RES_SUBSCRIPTION.getEndpointString()+":POST";
+  public String getUrl(){
+    return BSSEndpoints.RES_SUBSCRIPTION.getEndpointString();
 	}
+  @Override
+  public Rest getMethod(){
+    return Rest.POST;
+  }
 }

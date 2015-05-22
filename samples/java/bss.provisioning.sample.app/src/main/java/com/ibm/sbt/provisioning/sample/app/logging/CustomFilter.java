@@ -30,7 +30,7 @@ public class CustomFilter implements Filter{
 	@Override
 	public boolean isLoggable(LogRecord record) {
 		boolean isLoggable = true ;
-		if(record.getLoggerName().startsWith("org.apache") ||
+		if(record.getLoggerName() == null || record.getLoggerName().startsWith("org.apache") ||
 				record.getLoggerName().startsWith("com.ibm.sbt.service.proxy.SBTProxy") ||
 				record.getLoggerName().startsWith("com.ibm.sbt.services.client.ClientService") ){
 			isLoggable = false ;

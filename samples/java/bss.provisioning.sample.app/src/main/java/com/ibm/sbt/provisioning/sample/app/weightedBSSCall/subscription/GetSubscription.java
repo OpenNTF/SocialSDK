@@ -16,7 +16,7 @@
 package com.ibm.sbt.provisioning.sample.app.weightedBSSCall.subscription;
 
 import java.util.logging.Logger;
-
+import com.ibm.sbt.provisioning.sample.app.model.Rest;
 import com.ibm.sbt.provisioning.sample.app.services.Subscription;
 import com.ibm.sbt.provisioning.sample.app.util.BSSEndpoints;
 import com.ibm.sbt.provisioning.sample.app.weightedBSSCall.WeightedBSSCall;
@@ -37,15 +37,18 @@ public class GetSubscription extends WeightedBSSCall<JsonEntity>{
 	@Override
 	protected JsonEntity doCall() throws Exception {
 		JsonEntity subscription = null ;    
-		logger.fine("triggering call : "+ this.getKey() );
+    logger.fine("triggering call : " + this.getUrl() + " " + getMethod());
 		subscription = Subscription.getInstance().getService().getSubscriptionById(this.subscriptionId);
 		logger.info("retrieved subscription with id "+ this.subscriptionId );
     	return subscription;
 	}
 
 	@Override
-	public String getKey() {
-		return BSSEndpoints.RES_SUBSCRIPTION.getEndpointString()+":GET";
+  public String getUrl(){
+    return BSSEndpoints.RES_SUBSCRIPTION.getEndpointString();
 	}
+  @Override
+  public Rest getMethod(){
+    return Rest.GET;
 }
-
+}

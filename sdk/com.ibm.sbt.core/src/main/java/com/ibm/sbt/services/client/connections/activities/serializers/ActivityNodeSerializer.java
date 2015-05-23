@@ -20,6 +20,7 @@ import static com.ibm.sbt.services.client.base.CommonConstants.APPLICATION_XML;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.ACTIVITY;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.CATEGORY;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.CONTENT;
+import static com.ibm.sbt.services.client.base.ConnectionsConstants.ENTRY;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.HREF;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.IN_REPLY_TO;
 import static com.ibm.sbt.services.client.base.ConnectionsConstants.LABEL;
@@ -55,7 +56,14 @@ public class ActivityNodeSerializer extends AtomEntitySerializer<ActivityNode> {
 	}
 	
 	public String generateUpdate() {
-		Node entry = genericAtomEntry();
+		Element element = element(Namespace.ATOM.getUrl(), ENTRY);
+		element.setAttributeNS(Namespace.XMLNS.getUrl(), Namespace.APP.getNSPrefix(), Namespace.APP.getUrl());
+		element.setAttributeNS(Namespace.XMLNS.getUrl(),Namespace.THR.getNSPrefix(), Namespace.THR.getUrl());
+		element.setAttributeNS(Namespace.XMLNS.getUrl(),Namespace.SNX.getNSPrefix(), Namespace.SNX.getUrl());
+		element.setAttributeNS(Namespace.XMLNS.getUrl(),Namespace.XHTML.getNSPrefix(), Namespace.XHTML.getUrl());
+		element.setAttributeNS(Namespace.XMLNS.getUrl(),Namespace.OPENSEARCH.getNSPrefix(),Namespace.OPENSEARCH.getUrl());
+
+		Node entry = rootNode(element);
 		
 		appendChildren(entry,
 				activityNodeCategory(),

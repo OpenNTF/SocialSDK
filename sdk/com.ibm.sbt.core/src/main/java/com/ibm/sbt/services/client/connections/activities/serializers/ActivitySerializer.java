@@ -77,7 +77,6 @@ public class ActivitySerializer extends AtomEntitySerializer<Activity> {
 	}
 
 	public String generateUpdate() {
-		// Node entry = genericAtomEntry();
 		Element element = element(Namespace.ATOM.getUrl(), ENTRY);
 		element.setAttributeNS(Namespace.XMLNS.getUrl(), Namespace.APP.getNSPrefix(), Namespace.APP.getUrl());
 		element.setAttributeNS(Namespace.XMLNS.getUrl(),Namespace.THR.getNSPrefix(), Namespace.THR.getUrl());

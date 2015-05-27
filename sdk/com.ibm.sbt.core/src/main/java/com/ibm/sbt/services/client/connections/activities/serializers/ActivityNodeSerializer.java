@@ -74,7 +74,11 @@ public class ActivityNodeSerializer extends AtomEntitySerializer<ActivityNode> {
 
 		Node entry = rootNode(element);
 
-		appendChildren(entry, 
+		appendChildren(entry,
+				title(),
+				id(),
+				summary(),
+				content(),
 				activityNodeCategory(), 
 				activityUuid(), 
 				inReplyTo(), 

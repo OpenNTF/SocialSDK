@@ -128,7 +128,7 @@ public class ActivityNode extends NodeEntity {
 	 * @return
 	 */
 	public AssignedTo getAssignedTo() {
-		if (assignedTo == null) {
+		if (assignedTo == null && getDataHandler() != null) {
 			assignedTo = createAssignedTo((Node)getDataHandler().getData(), ActivityXPath.assignedto);
 		}
 		return assignedTo;

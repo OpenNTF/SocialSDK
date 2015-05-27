@@ -86,10 +86,23 @@ public class ActivitySerializer extends AtomEntitySerializer<Activity> {
 
 		Node entry = rootNode(element);
 
-		appendChildren(entry, activityCategory(), duedate(), communityUuid(),
-				communityCategory(), priorityCategory(), completedCategory(),
-				templateCategory(), flagsCategory(), externalCategory(),
-				linkContainer(), subtitle(), inReplyTo(), assignedTo());
+		appendChildren(entry, 			title(),
+				id(),
+				summary(),
+				content(),
+				activityCategory(), 
+				duedate(), 
+				communityUuid(),
+				communityCategory(), 
+				priorityCategory(), 
+				completedCategory(),
+				templateCategory(), 
+				flagsCategory(), 
+				externalCategory(),
+				linkContainer(), 
+				subtitle(), 
+				inReplyTo(), 
+				assignedTo());
 
 		// appendChildren(entry, tags());
 		appendChildren(entry, nodeSerializer.fields());

@@ -16,7 +16,7 @@
 package com.ibm.sbt.provisioning.sample.app.weightedBSSCall.authentication;
 
 import java.util.logging.Logger;
-
+import com.ibm.sbt.provisioning.sample.app.model.Rest;
 import com.ibm.sbt.provisioning.sample.app.services.Authentication;
 import com.ibm.sbt.provisioning.sample.app.util.BSSEndpoints;
 import com.ibm.sbt.provisioning.sample.app.weightedBSSCall.WeightedBSSCall;
@@ -35,6 +35,7 @@ public class ChangePassword extends WeightedBSSCall<Boolean> {
 		this.oldPassword = oldPassword ;
 		this.newPassword = newPassword ;
 	}
+
 	/**
 	 * Method used for triggering the proper HTTP call for changing the password of an
 	 * organization member, towards the BSS endpoint designed for 
@@ -44,11 +45,12 @@ public class ChangePassword extends WeightedBSSCall<Boolean> {
 	protected Boolean doCall() throws Exception {
 		boolean passwordChanged = false ;
 		UserCredentialJsonBuilder userCredential = new UserCredentialJsonBuilder();
-		userCredential.setLoginName(loginName)
+    userCredential
+      .setLoginName(loginName)
 					  .setOldPassword(oldPassword)
 					  .setNewPassword(newPassword)
 					  .setConfirmPassword(newPassword);
-		logger.fine("triggering call : "+ this.getKey() );
+    logger.fine("triggering call : " + this.getUrl() + " " + getMethod());
 		Authentication.getInstance().getService().changePassword(userCredential);
 		passwordChanged = true ;
 		logger.info("password changed for the user "+ this.loginName);
@@ -56,8 +58,12 @@ public class ChangePassword extends WeightedBSSCall<Boolean> {
 	}
 
 	@Override
-	public String getKey() {
+  public String getUrl(){
 		return BSSEndpoints.SER_AUTHENTICATION_CHPWD.getEndpointString();
 	}
-}
 
+  @Override
+  public Rest getMethod(){
+    return Rest.ALL;
+}
+}

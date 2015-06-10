@@ -50,6 +50,7 @@ import com.ibm.sbt.services.endpoints.js.JSReference;
  * 
  * @author Philippe Riand
  * @author Niklas Heidloff
+ * @author Paul Bastide <pbastide@us.ibm.com>
  */
 public class SSOEndpoint extends AbstractEndpoint {
 
@@ -139,8 +140,23 @@ public class SSOEndpoint extends AbstractEndpoint {
     private static class LtpaInterceptor implements HttpRequestInterceptor {
 
         String _domain;
+        boolean siteminder = false;
 
         public LtpaInterceptor(String url, String domain) {
+        	
+        	/**
+        	 * Customer Reported Issue with SiteMinder
+             * SSO Endpoint is extended with SMSESSION 
+             * 
+             * REF: Must add to managed-beans.xml
+        	 * <managed-property><property-name>siteminder</property-name><value>true</value></managed-property>
+        	 */
+        	Context ctx = Context.get();
+        	String siteminderProp = ctx.getProperty("siteminder");
+        	if((siteminderProp != null) && (siteminderProp.compareTo("true")==0)){
+        		siteminder = true;
+        	}
+        	
         	if (domain == null) {
         	try {
         		URL u = new URL(url);
@@ -236,6 +252,31 @@ public class SSOEndpoint extends AbstractEndpoint {
 
             if(cookieMap.containsKey("LtpaToken2")) {
                 javax.servlet.http.Cookie cookie = (javax.servlet.http.Cookie) cookieMap.get("LtpaToken2");
+                BasicClientCookie2 cookie2 = new BasicClientCookie2(cookie.getName(), getRawCookieValue(cookie, ctx.getHttpRequest()));
+                if(cookie.getDomain()!=null) {
+                    cookie2.setDomain(cookie.getDomain());
+                }
+                else {
+                    cookie2.setDomain(_domain);
+                }
+                if(cookie.getPath()!=null) {
+                    cookie2.setPath(cookie.getPath());
+                }
+                else {
+                    cookie2.setPath("/");
+                }
+                cookieStore.addCookie(cookie2);
+                ltpaTokenFound = true;
+            }
+            
+            /**
+             * Customer Reported Issue with SiteMinder
+             * SSO Endpoint is extended with SMSESSION 
+             * 
+             * REF: shortcircuits using siteminder context check
+             */
+            if(siteminder && cookieMap.containsKey("SMSESSION")) {
+                javax.servlet.http.Cookie cookie = (javax.servlet.http.Cookie) cookieMap.get("SMSESSION");
                 BasicClientCookie2 cookie2 = new BasicClientCookie2(cookie.getName(), getRawCookieValue(cookie, ctx.getHttpRequest()));
                 if(cookie.getDomain()!=null) {
                     cookie2.setDomain(cookie.getDomain());

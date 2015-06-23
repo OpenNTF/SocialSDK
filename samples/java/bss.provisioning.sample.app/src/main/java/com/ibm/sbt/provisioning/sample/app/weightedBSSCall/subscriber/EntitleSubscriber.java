@@ -18,7 +18,7 @@ package com.ibm.sbt.provisioning.sample.app.weightedBSSCall.subscriber;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Logger;
-
+import com.ibm.sbt.provisioning.sample.app.model.Rest;
 import com.ibm.sbt.provisioning.sample.app.services.Subscriber;
 import com.ibm.sbt.provisioning.sample.app.task.BSSProvisioning;
 import com.ibm.sbt.provisioning.sample.app.util.BSSEndpoints;
@@ -45,8 +45,8 @@ public class EntitleSubscriber extends WeightedBSSCall<Boolean>{
 	protected Boolean doCall() throws Exception {
 		boolean subscriberEntitled = false ;
 		try {
-			logger.fine("triggering call : "+ this.getKey() );
-			Subscriber.getInstance().getService().entitleSubscriber(subscriberId, subscriptionId, true);
+      		logger.fine("triggering call : " + this.getUrl() + " " + getMethod());
+      		Subscriber.getInstance().getService().entitleSubscriber(subscriberId, subscriptionId, false);
 			subscriberEntitled = true ;
 			BSSProvisioning.getStateTransitionReport().get(this.email)[4] = new SimpleDateFormat(BSSProvisioning.DATE_FORMAT).format(new Date());
 			BSSProvisioning.getSubscriberWeightReport().get(this.email)[0]++ ;
@@ -58,8 +58,12 @@ public class EntitleSubscriber extends WeightedBSSCall<Boolean>{
 	}
 
 	@Override
-	public String getKey() {
-		return BSSEndpoints.RES_SUBSCRIBER.getEndpointString()+":POST";
+  public String getUrl(){
+    return BSSEndpoints.RES_SUBSCRIBER.getEndpointString();
 	}
 
+  @Override
+  public Rest getMethod(){
+    return Rest.POST;
+  }
 }

@@ -36,55 +36,72 @@ import com.ibm.sbt.services.client.base.serializers.PersonSerializer;
 import com.ibm.sbt.services.client.connections.files.File;
 
 /**
- * @author Lorenzo Boccaccia 
+ * @author Lorenzo Boccaccia
  * @date 8 May 2014
  */
 public class FileSerializer extends AtomEntitySerializer<File> {
 
-    public FileSerializer(File entity) {
-        super(entity);
-    }
+	public FileSerializer(File entity) {
+		super(entity);
+	}
 
-    
-    public Node getFileEntry() {
-        Node n =genericAtomEntry();
-        if (entity.getFileId()!=null)
-            appendChildren(n, textElement(Namespace.TD.getUrl(), UUID, entity.getFileId()));
-        if (entity.getLabel() != null)
-            appendChildren(n, textElement(Namespace.TD.getUrl(), LABEL, entity.getLabel()));
-        appendChildren(n, element(Namespace.TD.getUrl(), CATEGORY, 
-                attribute(SCHEME, Namespace.TAG.getUrl()),
-                attribute(TERM, entity.getCategory()),
-                attribute(LABEL, entity.getCategory())
-                )
-                );
-        if (entity.getTags()!=null)
-        for (String tag : entity.getTags()) {
-            appendChildren(n, textElement(CATEGORY, tag,                
-                    attribute(TERM, CATEGORY_TAG)
-                    ));
-            
-        }
-        if (StringUtil.isNotEmpty( entity.getVisibility()))      
-        appendChildren(n, textElement(Namespace.TD.getUrl(), VISIBILITY, entity.getVisibility()));
-        
-        if (StringUtil.isNotEmpty( entity.getNotification()))      
-            appendChildren(n, textElement(Namespace.TD.getUrl(), NOTIFICATION, entity.getNotification()));
-            
-        
-        if (entity.getModified()!=null)     
-            appendChildren(n, textElement(Namespace.TD.getUrl(), MODIFIED, DateSerializer.toString(entity.getModified())));
-        if (entity.getCreated()!=null)     
-            appendChildren(n, textElement(Namespace.TD.getUrl(), CREATED, DateSerializer.toString(entity.getCreated())));
-            
-        if (entity.getModifier()!=null)   
-            appendChildren(n,new PersonSerializer(entity.getModifier()).xmlNode(MODIFIER, Namespace.TD.getUrl() ));
-        
-        return n;
-    }
+	public Node getFileEntry() {
+		Node n = genericAtomEntry();
+		if (entity.getFileId() != null)
+			appendChildren(
+					n,
+					textElement(Namespace.TD.getUrl(), UUID, entity.getFileId()));
+		if (entity.getLabel() != null)
+			appendChildren(
+					n,
+					textElement(Namespace.TD.getUrl(), LABEL, entity.getLabel()));
+		appendChildren(
+				n,
+				element(Namespace.TD.getUrl(), CATEGORY,
+						attribute(SCHEME, Namespace.TAG.getUrl()),
+						attribute(TERM, entity.getCategory()),
+						attribute(LABEL, entity.getCategory())));
+		if (entity.getTags() != null)
+			for (String tag : entity.getTags()) {
+				appendChildren(
+						n,
+						textElement(CATEGORY, tag,
+								attribute(TERM, CATEGORY_TAG)));
 
-    public String generateFileUpdatePayload() {
-       getFileEntry();
-        return serializeToString();
-    }
+			}
+		if (StringUtil.isNotEmpty(entity.getVisibility()))
+			appendChildren(
+					n,
+					textElement(Namespace.TD.getUrl(), VISIBILITY,
+							entity.getVisibility()));
+
+		if (StringUtil.isNotEmpty(entity.getNotification()))
+			appendChildren(
+					n,
+					textElement(Namespace.TD.getUrl(), NOTIFICATION,
+							entity.getNotification()));
+
+		if (entity.getModified() != null)
+			appendChildren(
+					n,
+					textElement(Namespace.TD.getUrl(), MODIFIED,
+							DateSerializer.toString(entity.getModified())));
+		if (entity.getCreated() != null)
+			appendChildren(
+					n,
+					textElement(Namespace.TD.getUrl(), CREATED,
+							DateSerializer.toString(entity.getCreated())));
+
+		if (entity.getModifier() != null)
+			appendChildren(n,
+					new PersonSerializer(entity.getModifier()).xmlNode(
+							MODIFIER, Namespace.TD.getUrl()));
+
+		return n;
+	}
+
+	public String generateFileUpdatePayload() {
+		getFileEntry();
+		return serializeToString();
+	}
 }

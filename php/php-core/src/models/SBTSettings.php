@@ -41,16 +41,18 @@ class SBTSettings
 	{
 		$this->_settings['SmartCloud']['name'] 					= "SmartCloud";
 		$this->_settings['SmartCloud']['url'] 					= 'https://apps.na.collabserv.com';
-		$this->_settings['SmartCloud']['consumer_key'] 			= 'b43c48f51c498717c8547aee0590abc2';
-		$this->_settings['SmartCloud']['consumer_secret']		= 'd46e0237d5de41feb4b446089a0575f3';
+		//TODO: Set for Your environment
+		$this->_settings['SmartCloud']['consumer_key'] 			= '';
+		$this->_settings['SmartCloud']['consumer_secret']		= '';
 		$this->_settings['SmartCloud']['request_token_url']		= 'https://apps.na.collabserv.com/manage/oauth/getRequestToken';
 		$this->_settings['SmartCloud']['authorization_url']		= 'https://apps.na.collabserv.com/manage/oauth/authorizeToken';
 		$this->_settings['SmartCloud']['access_token_url']		= 'https://apps.na.collabserv.com/manage/oauth/getAccessToken';
 		$this->_settings['SmartCloud']['authentication_method'] = "basic"; //basic or oauth1
 		$this->_settings['SmartCloud']['force_ssl_trust']		= true;
 		$this->_settings['SmartCloud']['basic_auth_method']		= 'global';
-		$this->_settings['SmartCloud']['basic_auth_password']	= 'Password65';
-		$this->_settings['SmartCloud']['basic_auth_username']	= 'frankadams@try.lotuslive.com';
+		//TODO: Set For Your Environment
+		$this->_settings['SmartCloud']['basic_auth_password']	= '';
+		$this->_settings['SmartCloud']['basic_auth_username']	= '';
 	}
 	
 	

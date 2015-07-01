@@ -35,8 +35,8 @@ class Test_Credentials_Store extends WP_UnitTestCase {
 			require BASE_PATH . '/core/models/SBTMemoryCookieAdapter.php';
 		}
 		
-		$username = "sampleUser";
-		$password = "myPassword&123";
+		$username = "";
+		$password = "";
 		
 		ibm_sbtk_activate_plugin();
 		
@@ -61,7 +61,7 @@ class Test_Credentials_Store extends WP_UnitTestCase {
 	 * Tests the storage of the OAuth tokens.
 	 */
 	function test_oauth_token_storage() {
-		$token = "HasdkHas7373&";
+		$token = "";
 		ibm_sbtk_activate_plugin();
 		if (!class_exists('SBTMemoryCookieAdapter')) {
 			require BASE_PATH . '/core/models/SBTMemoryCookieAdapter.php';

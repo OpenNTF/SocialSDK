@@ -161,7 +161,7 @@ function onTypeChange<?php echo $timestamp; ?>() {
 require([ "sbt/connections/ProfileService", "sbt/dom", "sbt/config" ], function(ProfileService, dom, config) {
 
 	var endpoint = config.findEndpoint("<?php echo $this->config->endpoint; ?>");
-	var url = "/connections/opensocial/basic/rest/people/@me/";
+	var url = "/connections/opensocial/basic/rest/people/@me/@self";
 	endpoint.request(url, { handleAs : "json" }).then(
 		function(response) {
 			userId<?php echo $timestamp; ?> = parseUserid(response.entry);

@@ -1,12 +1,13 @@
 <h1 class="sampleWidget">My IBM Connections Sample</h1>
-<div id="<?php echo (isset($instance['ibm-sbtk-element-id']) ? $instance['ibm-sbtk-element-id'] : "myIBMElementID"); ?>"></div>
+<div
+	id="<?php echo (isset($instance['ibm-sbtk-element-id']) ? $instance['ibm-sbtk-element-id'] : "myIBMElementID"); ?>"></div>
 
-<?php 
-	if ((isset($instance['ibm-sbtk-template']) && $instance['ibm-sbtk-template'] != "")) {
-		require_once BASE_PATH . "{$instance['ibm-sbtk-template']}";
-	} else {
-		require_once 'templates/ibm-sbt-sample-template.php';
-	}
+<?php
+if ((isset ( $instance ['ibm-sbtk-template'] ) && $instance ['ibm-sbtk-template'] != "")) {
+	require_once BASE_PATH . "{$instance['ibm-sbtk-template']}";
+} else {
+	require_once 'templates/ibm-sbt-sample-template.php';
+}
 ?>
 
 <script type="text/javascript">

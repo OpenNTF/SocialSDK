@@ -23,7 +23,7 @@ require([ "sbt/connections/ProfileService", "sbt/dom", "sbt/config", "sbt/connec
 	function(ProfileService, dom, config, FileGrid) {
 
 	var endpoint = config.findEndpoint("<?php echo (isset($instance['ibm-sbtk-endpoint']) ? $instance['ibm-sbtk-endpoint'] : 'connections'); ?>");
-	var url = "/connections/connections/opensocial/basic/rest/people/@me/";
+	var url = "/connections/connections/opensocial/basic/rest/people/@me/@self";
 	endpoint.request(url, { handleAs : "json" }).then(
 		function(response) {
 			var userid = parseUserid(response.entry);

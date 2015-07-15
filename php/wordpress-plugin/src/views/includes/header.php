@@ -33,81 +33,13 @@ $agnostic_deploy_url = str_replace('http://', '//', $deploy_url);
 <?php 
 	if ($js_library != 'none') {
 		switch ($js_library) {
-			case 'Dojo Toolkit 1.4.3':
-				echo '<script src="//ajax.googleapis.com/ajax/libs/dojo/1.4.3/dojo/dojo.js"></script>';
-				echo '<link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/dojo/1.4.3/dojo/resources/dojo.css">';
+			
+			case 'Dojo Toolkit 1.8.10':
+				echo '<script src="//ajax.googleapis.com/ajax/libs/dojo/1.8.10/dojo/dojo.js"></script>';
+				echo '<link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/dojo/1.8.10/dojo/resources/dojo.css">
+					  <link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/dojo/1.8.10/dijit/themes/claro/claro.css">';
 				break;
-			case 'Dojo Toolkit 1.5.2':
-				echo '<script src="//ajax.googleapis.com/ajax/libs/dojo/1.5.2/dojo/dojo.js"></script>';
-				echo '<link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/dojo/1.5.2/dojo/resources/dojo.css">
-					  <link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/dojo/1.5.2/dijit/themes/claro/claro.css">';
-				break;
-				
-			case 'Dojo Toolkit 1.6.1':
-				echo '<script src="//ajax.googleapis.com/ajax/libs/dojo/1.6.1/dojo/dojo.js"></script>';
-				echo '<link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/dojo/1.6.1/dojo/resources/dojo.css">
-					  <link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/dojo/1.6.1/dijit/themes/claro/claro.css">';
-				break;
-					
-			case 'Dojo Toolkit 1.7.4':
-				echo '<script src="//ajax.googleapis.com/ajax/libs/dojo/1.7.4/dojo/dojo.js"></script>';
-				echo '<link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/dojo/1.7.4/dojo/resources/dojo.css">
-					  <link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/dojo/1.7.4/dijit/themes/claro/claro.css">';
-				break;
-						
-			case 'Dojo Toolkit 1.8.4':
-				echo '<script src="//ajax.googleapis.com/ajax/libs/dojo/1.8.4/dojo/dojo.js"></script>';
-				echo '<link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/dojo/1.8.4/dojo/resources/dojo.css">
-					  <link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/dojo/1.8.4/dijit/themes/claro/claro.css">';
-				break;
-							
-			case 'Dojo Toolkit 1.9.0':
-				echo '<script src="//ajax.googleapis.com/ajax/libs/dojo/1.9.0/dojo/dojo.js"></script>';
-				echo '<link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/dojo/1.9.0/dojo/resources/dojo.css">
-					  <link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/dojo/1.9.0/dijit/themes/claro/claro.css">';
-				break;
-								
-			case 'JQuery 1.8.3':
-				echo '<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>';
-				break;
-				
-				case 'Dojo Toolkit 1.4.3 uncompressed':
-					echo '<script src="//ajax.googleapis.com/ajax/libs/dojo/1.4.3/dojo/dojo.js.uncompressed.js"></script>';
-					echo '<link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/dojo/1.4.3/dojo/resources/dojo.css">';
-					break;
-				case 'Dojo Toolkit 1.5.2 uncompressed':
-					echo '<script src="//ajax.googleapis.com/ajax/libs/dojo/1.5.2/dojo/dojo.js.uncompressed.js"></script>';
-					echo '<link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/dojo/1.5.2/dojo/resources/dojo.css">
-					  <link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/dojo/1.5.2/dijit/themes/claro/claro.css">';
-					break;
-				
-				case 'Dojo Toolkit 1.6.1 uncompressed':
-					echo '<script src="//ajax.googleapis.com/ajax/libs/dojo/1.6.1/dojo/dojo.js.uncompressed.js"></script>';
-					echo '<link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/dojo/1.6.1/dojo/resources/dojo.css">
-					  <link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/dojo/1.6.1/dijit/themes/claro/claro.css">';
-					break;
-						
-				case 'Dojo Toolkit 1.7.4 uncompressed':
-					echo '<script src="//ajax.googleapis.com/ajax/libs/dojo/1.7.4/dojo/dojo.js.uncompressed.js"></script>';
-					echo '<link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/dojo/1.7.4/dojo/resources/dojo.css">
-					  <link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/dojo/1.7.4/dijit/themes/claro/claro.css">';
-					break;
-				
-				case 'Dojo Toolkit 1.8.4 uncompressed':
-					echo '<script src="//ajax.googleapis.com/ajax/libs/dojo/1.8.4/dojo/dojo.js.uncompressed.js"></script>';
-					echo '<link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/dojo/1.8.4/dojo/resources/dojo.css">
-					  <link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/dojo/1.8.4/dijit/themes/claro/claro.css">';
-					break;
-						
-				case 'Dojo Toolkit 1.9.0 uncompressed':
-					echo '<script src="//ajax.googleapis.com/ajax/libs/dojo/1.9.0/dojo/dojo.js.uncompressed.js"></script>';
-					echo '<link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/dojo/1.9.0/dojo/resources/dojo.css">
-					  <link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/dojo/1.9.0/dijit/themes/claro/claro.css">';
-					break;
-				
-				case 'JQuery 1.8.3 uncompressed':
-					echo '<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js.uncompressed.js"></script>';
-					break;
+			
 		}
 	}
 ?>

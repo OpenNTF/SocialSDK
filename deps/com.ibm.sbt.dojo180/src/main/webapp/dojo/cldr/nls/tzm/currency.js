@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/tzm/currency", //begin v1.x content
 {
 	"USD_displayName": "Ḍular Umirikani",
 	"TZS_displayName": "Cilin Uṭanzani",

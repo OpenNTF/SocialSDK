@@ -1,4 +1,4 @@
-define(["./_base"], function(){
+define("dojox/timing/ThreadPool", ["./_base"], function(){
 	dojo.experimental("dojox.timing.ThreadPool");
 
 //	dojox.timing.Timer is included as part of _base

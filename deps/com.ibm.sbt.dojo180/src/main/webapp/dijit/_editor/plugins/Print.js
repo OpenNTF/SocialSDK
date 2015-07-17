@@ -1,4 +1,4 @@
-define([
+define("dijit/_editor/plugins/Print", [
 	"dojo/_base/declare", // declare
 	"dojo/i18n", // i18n.getLocalization
 	"dojo/_base/lang", // lang.hitch

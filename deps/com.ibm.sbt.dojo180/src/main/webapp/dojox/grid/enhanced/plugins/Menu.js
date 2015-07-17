@@ -1,4 +1,4 @@
-define([
+define("dojox/grid/enhanced/plugins/Menu", [
 	"dojo/_base/declare",
 	"dojo/_base/array",
 	"dojo/_base/lang",

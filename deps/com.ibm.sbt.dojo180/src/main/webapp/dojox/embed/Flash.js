@@ -1,4 +1,4 @@
-define(["dojo"], function(dojo) {
+define("dojox/embed/Flash", ["dojo"], function(dojo) {
 
 	// module:
 	//		dojox/embed/Flash

@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/fr/SpellCheck", ({
 	widgetLabel: "Vérification orthographique par lots",
 	unfound: "Introuvable",
 	skip: "Ignorer",

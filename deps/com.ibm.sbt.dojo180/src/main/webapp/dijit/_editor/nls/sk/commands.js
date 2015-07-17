@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/sk/commands", ({
 	'bold': 'Tučné',
 	'copy': 'Kopírovať',
 	'cut': 'Vystrihnúť',

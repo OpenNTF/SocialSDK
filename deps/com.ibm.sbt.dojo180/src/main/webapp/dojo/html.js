@@ -1,4 +1,4 @@
-define(["./_base/kernel", "./_base/lang", "./_base/array", "./_base/declare", "./dom", "./dom-construct", "./parser"],
+define("dojo/html", ["./_base/kernel", "./_base/lang", "./_base/array", "./_base/declare", "./dom", "./dom-construct", "./parser"],
 	function(kernel, lang, darray, declare, dom, domConstruct, parser){
 	// module:
 	//		dojo/html

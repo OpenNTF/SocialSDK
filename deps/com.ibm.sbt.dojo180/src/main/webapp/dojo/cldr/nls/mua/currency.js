@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/mua/currency", //begin v1.x content
 {
 	"USD_displayName": "Solai Amerika",
 	"TZS_displayName": "Solai Tanzaniya",

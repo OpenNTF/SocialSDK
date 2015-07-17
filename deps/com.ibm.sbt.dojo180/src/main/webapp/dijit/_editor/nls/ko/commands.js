@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/ko/commands", ({
 	'bold': '굵은체',
 	'copy': '복사',
 	'cut': '잘라내기',

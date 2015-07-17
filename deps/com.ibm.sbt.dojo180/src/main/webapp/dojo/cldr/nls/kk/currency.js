@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/kk/currency", //begin v1.x content
 {
 	"RUB_displayName": "Ресей рубль",
 	"KZT_displayName": "Қазақстан теңгесі",

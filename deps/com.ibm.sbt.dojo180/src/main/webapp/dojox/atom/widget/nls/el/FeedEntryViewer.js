@@ -1,5 +1,5 @@
 define(
-({
+"dojox/atom/widget/nls/el/FeedEntryViewer", ({
 	displayOptions: "[επιλογές παρουσίασης]",
 	title: "Τίτλος",
 	authors: "Συντάκτες",

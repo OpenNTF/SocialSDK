@@ -1,4 +1,4 @@
-define(["dojo/dom", "dojo/_base/lang", "dojo/_base/array",  "dojo/_base/connect", "dojo/query",
+define("dojox/charting/widget/BidiSupport", ["dojo/dom", "dojo/_base/lang", "dojo/_base/array",  "dojo/_base/connect", "dojo/query",
 	"dijit/_BidiSupport", "../BidiSupport", "dijit/registry", "./Chart", "./Legend"], 
 	function(dom, lang, arrayUtil, hub, query, dBidi, cBidi, widgetManager, Chart, Legend){
 

@@ -1,4 +1,4 @@
-define(['dojo/_base/kernel', 'dojo/_base/lang'], function(dojo){
+define("dojox/uuid/_base", ['dojo/_base/kernel', 'dojo/_base/lang'], function(dojo){
 
 dojo.getObject("uuid", true, dojox);
 

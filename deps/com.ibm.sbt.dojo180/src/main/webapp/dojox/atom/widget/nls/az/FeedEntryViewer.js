@@ -1,5 +1,5 @@
 define(
-({
+"dojox/atom/widget/nls/az/FeedEntryViewer", ({
 	"close" : "[çıx]",
 	"title" : "Başlıq",
 	"authors" : "Yazıçılar",

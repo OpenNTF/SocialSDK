@@ -1,4 +1,4 @@
-define([
+define("dijit/WidgetSet", [
 	"dojo/_base/array", // array.forEach array.map
 	"dojo/_base/declare", // declare
 	"dojo/_base/kernel", // kernel.global

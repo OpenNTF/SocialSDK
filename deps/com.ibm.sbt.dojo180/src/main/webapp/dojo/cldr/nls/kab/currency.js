@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/kab/currency", //begin v1.x content
 {
 	"USD_displayName": "Adular WD",
 	"TZS_displayName": "Aciling Aṭanẓani",

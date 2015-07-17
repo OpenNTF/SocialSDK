@@ -1,4 +1,4 @@
-define([
+define("dojox/geo/openlayers/LineString", [
 	"dojo/_base/declare",
 	"./Geometry"
 ], function(declare, Geometry){

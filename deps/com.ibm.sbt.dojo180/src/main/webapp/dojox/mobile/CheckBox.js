@@ -1,4 +1,4 @@
-define([
+define("dojox/mobile/CheckBox", [
 	"dojo/_base/declare",
 	"dojo/dom-construct",
 	"dijit/form/_CheckBoxMixin",

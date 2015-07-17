@@ -1,5 +1,5 @@
 define(
-	["require", "./_base/kernel", "./_base/lang", "./_base/array", "./_base/config", "./_base/html", "./_base/window",
+	"dojo/parser", ["require", "./_base/kernel", "./_base/lang", "./_base/array", "./_base/config", "./_base/html", "./_base/window",
 		"./_base/url", "./_base/json", "./aspect", "./date/stamp", "./Deferred", "./has", "./query", "./on", "./ready"],
 	function(require, dojo, dlang, darray, config, dhtml, dwindow, _Url, djson, aspect, dates, Deferred, has, query, don, ready){
 
@@ -851,7 +851,7 @@ define(
 		}
 	};
 
-	if(has("extend-dojo")){
+	if( 1 ){
 		dojo.parser  = parser;
 	}
 

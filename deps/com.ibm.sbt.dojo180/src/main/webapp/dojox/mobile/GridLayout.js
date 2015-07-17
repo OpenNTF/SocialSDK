@@ -1,4 +1,4 @@
-define([
+define("dojox/mobile/GridLayout", [
 	"dojo/_base/declare",
 	"./IconMenu"
 ], function(declare, IconMenu){

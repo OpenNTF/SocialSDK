@@ -1,4 +1,4 @@
-define([
+define("dojox/editor/plugins/_SmileyPalette", [
 	"dojo",
 	"dijit",
 	"dojox",

@@ -1,4 +1,4 @@
-define(['dojo/main', 'dojo/io/iframe', 'dojox/data/dom', 'dojo/_base/xhr', 'dojo/_base/url'], function(dojo, iframe, dom){
+define("dojox/io/proxy/xip", ['dojo/main', 'dojo/io/iframe', 'dojox/data/dom', 'dojo/_base/xhr', 'dojo/_base/url'], function(dojo, iframe, dom){
 	dojo.getObject("io.proxy.xip", true, dojox);
 
 dojox.io.proxy.xip = {

@@ -1,4 +1,4 @@
-define({
+define("dojox/drawing/library/greek", {
 	// summary:
 	//		Greek characters used by typesetter and greekPalette.
 	// description:

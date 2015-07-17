@@ -1,4 +1,4 @@
-define({ root:
+define("dojox/form/nls/CheckedMultiSelect", { root:
 //begin v1.x content
 ({
 	invalidMessage: "At least one item must be selected.",

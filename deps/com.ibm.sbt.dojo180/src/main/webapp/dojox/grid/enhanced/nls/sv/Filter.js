@@ -1,5 +1,5 @@
 define(
-({
+"dojox/grid/enhanced/nls/sv/Filter", ({
 	"clearFilterDialogTitle": "Rensa filter",
 	"filterDefDialogTitle": "Filter",
 	"ruleTitleTemplate": "Regel ${0}",

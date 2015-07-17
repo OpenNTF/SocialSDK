@@ -1,4 +1,4 @@
-define([
+define("dojox/mvc/Repeat", [
 	"dojo/_base/declare",
 	"dojo/_base/lang",
 	"dojo/_base/sniff",

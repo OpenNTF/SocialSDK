@@ -1,4 +1,4 @@
-define(["dojo"], function(dojo) {
+define("dojox/math/random/Simple", ["dojo"], function(dojo) {
 
 	return dojo.declare("dojox.math.random.Simple", null, {
 		// summary:

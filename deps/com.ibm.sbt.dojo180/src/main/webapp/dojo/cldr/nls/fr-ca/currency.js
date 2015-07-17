@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/fr-ca/currency", //begin v1.x content
 {
 	"PGK_symbol": "PGK",
 	"AFN_symbol": "AFN",

@@ -1,4 +1,4 @@
-define(["dojo/_base/lang", "dojo/_base/declare", "dojox/gfx", "dojo/_base/array", "dojox/widget/_Invalidating", "dojo/_base/sniff"],
+define("dojox/dgauges/ScaleBase", ["dojo/_base/lang", "dojo/_base/declare", "dojox/gfx", "dojo/_base/array", "dojox/widget/_Invalidating", "dojo/_base/sniff"],
 	function(lang, declare, gfx, array, _Invalidating, has){
 	return declare("dojox.dgauges.ScaleBase", _Invalidating, {
 		// summary:

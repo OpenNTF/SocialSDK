@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/cs/FindReplace", ({
 	"findLabel": "Najít:",
 	"findTooltip": "Zadejte hledaný text.",
 	"replaceLabel": "Nahrazující řetězec:",

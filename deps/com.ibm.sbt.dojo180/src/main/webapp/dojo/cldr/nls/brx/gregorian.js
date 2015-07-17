@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/brx/gregorian", //begin v1.x content
 {
 	"dateFormatItem-yM": "M/yyyy",
 	"field-dayperiod": "फुं/बेलासे",

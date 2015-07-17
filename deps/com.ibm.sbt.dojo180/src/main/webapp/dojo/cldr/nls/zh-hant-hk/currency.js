@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/zh-hant-hk/currency", //begin v1.x content
 {
 	"HKD_displayName": "港元",
 	"XPF_displayName": "太平洋法郎",

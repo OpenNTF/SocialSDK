@@ -1,5 +1,5 @@
 define(
-({
+"dojox/grid/enhanced/nls/th/Filter", ({
 	"clearFilterDialogTitle": "ลบตัวกรอง",
 	"filterDefDialogTitle": "ตัวกรอง",
 	"ruleTitleTemplate": "กฏ ${0}",

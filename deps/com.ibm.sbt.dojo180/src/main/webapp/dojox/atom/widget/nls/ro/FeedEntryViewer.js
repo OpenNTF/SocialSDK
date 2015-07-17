@@ -1,5 +1,5 @@
 define(
-({
+"dojox/atom/widget/nls/ro/FeedEntryViewer", ({
 	displayOptions: "[opţiuni de afişare]",
 	title: "Titlu",
 	authors: "Autori",

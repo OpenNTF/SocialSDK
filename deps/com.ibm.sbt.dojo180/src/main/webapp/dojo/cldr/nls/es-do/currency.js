@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/es-do/currency", //begin v1.x content
 {
 	"DOP_symbol": "$"
 }

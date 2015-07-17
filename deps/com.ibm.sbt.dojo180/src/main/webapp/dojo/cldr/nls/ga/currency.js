@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/ga/currency", //begin v1.x content
 {
 	"KHR_displayName": "Riel na Cambóide",
 	"FJD_displayName": "Dollar Fhidsí",

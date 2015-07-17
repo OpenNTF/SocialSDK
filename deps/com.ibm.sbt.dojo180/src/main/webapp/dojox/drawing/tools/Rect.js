@@ -1,4 +1,4 @@
-define(["dojo/_base/lang", "../util/oo", "../manager/_registry", "../stencil/Rect"],
+define("dojox/drawing/tools/Rect", ["dojo/_base/lang", "../util/oo", "../manager/_registry", "../stencil/Rect"],
 function(lang, oo, registry, StencilRect){
 
 //dojox.drawing.tools.Rect 

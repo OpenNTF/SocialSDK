@@ -1,4 +1,4 @@
-define(["./has"], function(has){
+define("dojo/sniff", ["./has"], function(has){
 	// module:
 	//		dojo/sniff
 
@@ -10,7 +10,7 @@ define(["./has"], function(has){
 	};
 	=====*/
 
-	if(has("host-browser")){
+	if( 1 ){
 		var n = navigator,
 			dua = n.userAgent,
 			dav = n.appVersion,

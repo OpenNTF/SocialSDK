@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/zh-hans-hk/islamic", //begin v1.x content
 {
 	"dateFormatItem-yQ": "y年QQQ",
 	"dayPeriods-format-wide-pm": "下午",

@@ -1,4 +1,4 @@
-define(["../_base"], function(dh){
+define("dojox/highlight/languages/cpp", ["../_base"], function(dh){
 	
 	var dhc = dh.constants;
 	dh.languages.cpp = {

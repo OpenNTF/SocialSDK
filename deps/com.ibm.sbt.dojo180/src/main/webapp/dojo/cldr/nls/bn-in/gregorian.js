@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/bn-in/gregorian", //begin v1.x content
 {
 	"field-day-relative+-2": "গতপরশু",
 	"quarters-standAlone-wide": [

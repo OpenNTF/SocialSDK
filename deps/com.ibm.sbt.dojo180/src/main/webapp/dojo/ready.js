@@ -1,4 +1,4 @@
-define(["./_base/kernel", "./has", "require", "./has!host-browser?./domReady", "./_base/lang"], function(dojo, has, require, domReady, lang){
+define("dojo/ready", ["./_base/kernel", "./has", "require", "./domReady", "./_base/lang"], function(dojo, has, require, domReady, lang){
 	// module:
 	//		dojo/ready
 	// note:
@@ -120,15 +120,15 @@ define(["./_base/kernel", "./has", "require", "./has!host-browser?./domReady", "
 		onEvent();
 	};
 
-	has.add("dojo-config-addOnLoad", 1);
-	if(has("dojo-config-addOnLoad")){
+	 1 || has.add("dojo-config-addOnLoad", 1);
+	if( 1 ){
 		var dca = dojo.config.addOnLoad;
 		if(dca){
 			ready[(lang.isArray(dca) ? "apply" : "call")](dojo, dca);
 		}
 	}
 
-	if(has("dojo-sync-loader") && dojo.config.parseOnLoad && !dojo.isAsync){
+	if( 1  && dojo.config.parseOnLoad && !dojo.isAsync){
 		ready(99, function(){
 			if(!dojo.parser){
 				dojo.deprecated("Add explicit require(['dojo/parser']);", "", "2.0");

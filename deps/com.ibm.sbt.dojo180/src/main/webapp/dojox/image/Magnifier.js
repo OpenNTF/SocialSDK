@@ -1,4 +1,4 @@
-define(["dojo/_base/declare", "dojo/dom-construct", "dojo/_base/window", "dojox/gfx", "dojox/gfx/canvas", "./MagnifierLite"], function(declare, construct, window, gfx, canvas, MagnifierLite){
+define("dojox/image/Magnifier", ["dojo/_base/declare", "dojo/dom-construct", "dojo/_base/window", "dojox/gfx", "dojox/gfx/canvas", "./MagnifierLite"], function(declare, construct, window, gfx, canvas, MagnifierLite){
 	
 	return declare("dojox.image.Magnifier", MagnifierLite, {
 		// summary:

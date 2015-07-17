@@ -1,4 +1,4 @@
-define(["dojo/_base/declare", "dojo/_base/lang", "dojo/Deferred", "dojo/when", "require", "dojo/dom-attr", "dijit/_TemplatedMixin", "dijit/_WidgetsInTemplateMixin", "./model"],
+define("dojox/app/View", ["dojo/_base/declare", "dojo/_base/lang", "dojo/Deferred", "dojo/when", "require", "dojo/dom-attr", "dijit/_TemplatedMixin", "dijit/_WidgetsInTemplateMixin", "./model"],
 function(declare, lang, Deferred, when, require, dattr, TemplatedMixin, WidgetsInTemplateMixin, Model){
 	// module:
 	//		dojox/app/View

@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/az/gregorian", //begin v1.x content
 {
 	"field-minute": "dəqiqə",
 	"eraNames": [

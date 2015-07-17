@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/sr/hebrew", //begin v1.x content
 {
 	"dayPeriods-format-wide-pm": "поподне",
 	"dateFormatItem-MMMEd": "E d. MMM",

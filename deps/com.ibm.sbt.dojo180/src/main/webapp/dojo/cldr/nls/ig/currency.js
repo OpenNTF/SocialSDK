@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/ig/currency", //begin v1.x content
 {
 	"NGN_displayName": "Naịra",
 	"NGN_symbol": "₦",

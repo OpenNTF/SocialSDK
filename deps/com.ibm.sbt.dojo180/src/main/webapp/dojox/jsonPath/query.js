@@ -1,3 +1,5 @@
+// wrapped by build app
+define("dojox/jsonPath/query", ["dijit","dojo","dojox"], function(dijit,dojo,dojox){
 dojo.provide("dojox.jsonPath.query");
 
 dojox.jsonPath.query = function(/*Object*/ obj, /*String*/ expr, /*Object*/ arg){
@@ -162,3 +164,5 @@ dojox.jsonPath.query = function(/*Object*/ obj, /*String*/ expr, /*Object*/ arg)
 	return false;
 
 };
+
+});

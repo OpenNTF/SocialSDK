@@ -1,5 +1,5 @@
 define(
-// used by both the editor and textarea widgets to provide information to screen reader users
+"dijit/form/nls/hu/Textarea", // used by both the editor and textarea widgets to provide information to screen reader users
 ({
 	iframeEditTitle: 'szerkesztési terület',  // primary title for editable IFRAME, for screen readers when focus is in the editing area
 	iframeFocusTitle: 'szerkesztési terület keret'  // secondary title for editable IFRAME when focus is on outer container

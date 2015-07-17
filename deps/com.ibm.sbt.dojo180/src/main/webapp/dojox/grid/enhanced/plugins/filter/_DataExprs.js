@@ -1,4 +1,4 @@
-define([
+define("dojox/grid/enhanced/plugins/filter/_DataExprs", [
 	"dojo/_base/declare",
 	"dojo/_base/lang",
 	"dojo/date/locale",

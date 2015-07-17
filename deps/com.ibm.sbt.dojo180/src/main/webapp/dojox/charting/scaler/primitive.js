@@ -1,4 +1,4 @@
-define(["dojo/_base/lang"], 
+define("dojox/charting/scaler/primitive", ["dojo/_base/lang"], 
   function(lang){
 	var primitive = lang.getObject("dojox.charting.scaler.primitive", true);
 	return lang.mixin(primitive, {

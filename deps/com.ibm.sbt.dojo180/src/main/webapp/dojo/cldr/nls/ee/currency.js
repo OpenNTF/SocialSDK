@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/ee/currency", //begin v1.x content
 {
 	"KHR_displayName": "kambodiaga riel",
 	"FJD_displayName": "fidziga dollar",

@@ -1,4 +1,4 @@
-define([
+define("dojox/widget/PortletDialogSettings", [
 	"dojo/_base/declare",
 	"dojo/_base/window",
 	"dojo/dom-style",

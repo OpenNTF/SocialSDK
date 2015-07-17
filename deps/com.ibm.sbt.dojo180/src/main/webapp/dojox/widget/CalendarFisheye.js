@@ -1,4 +1,4 @@
-define([
+define("dojox/widget/CalendarFisheye", [
 	"dojo/_base/declare",
 	"./Calendar",
 	"./_FisheyeFX"

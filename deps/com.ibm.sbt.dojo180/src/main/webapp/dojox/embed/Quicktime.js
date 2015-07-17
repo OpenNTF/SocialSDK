@@ -1,4 +1,4 @@
-define([
+define("dojox/embed/Quicktime", [
 	"dojo/_base/kernel",
 	"dojo/_base/lang",
 	"dojo/_base/sniff",

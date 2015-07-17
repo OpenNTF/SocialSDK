@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/hu/Breadcrumb", ({
 	"nodeActions": "${nodeName} műveletek",
 	"selectContents": "Tartalom kiválasztása",
 	"selectElement": "Elem kiválasztása",

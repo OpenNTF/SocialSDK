@@ -1,4 +1,4 @@
-define([], function(){
+define("dojox/drawing/util/oo", [], function(){
 // TODO:
 // allow a declare without a mixin
 

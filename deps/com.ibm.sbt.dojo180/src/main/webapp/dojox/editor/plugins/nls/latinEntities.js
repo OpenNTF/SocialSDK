@@ -1,4 +1,4 @@
-define({ root:
+define("dojox/editor/plugins/nls/latinEntities", { root:
 //begin v1.x content
 ({
 	/* These are already handled in the default RTE

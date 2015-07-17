@@ -1,4 +1,4 @@
-define([
+define("dojox/gantt/GanttProjectItem", [
 	"./GanttTaskItem",
 	"dojo/_base/declare",
 	"./GanttProjectControl",

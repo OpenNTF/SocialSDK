@@ -1,4 +1,6 @@
-define([
+require({cache:{
+'url:dojox/widget/Calendar/CalendarYear.html':"<div class=\"dojoxCalendarYearLabels\" style=\"left: 0px;\" dojoAttachPoint=\"yearContainer\">\n    <table cellspacing=\"0\" cellpadding=\"0\" border=\"0\" style=\"margin: auto;\" dojoAttachEvent=\"onclick: onClick\">\n        <tbody>\n            <tr class=\"dojoxCalendarYearGroupTemplate\">\n                <td class=\"dojoxCalendarNextMonth dojoxCalendarYearTemplate\">\n                    <div class=\"dojoxCalendarYearLabel\">\n                    </div>\n                </td>\n            </tr>\n        </tbody>\n    </table>\n</div>\n"}});
+define("dojox/widget/_CalendarYearView", [
 	"dojo/_base/declare",
 	"./_CalendarView",
 	"dijit/_TemplatedMixin",

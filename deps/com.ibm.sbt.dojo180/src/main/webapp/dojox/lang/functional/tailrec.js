@@ -1,3 +1,5 @@
+// wrapped by build app
+define("dojox/lang/functional/tailrec", ["dijit","dojo","dojox","dojo/require!dojox/lang/functional/lambda,dojox/lang/functional/util"], function(dijit,dojo,dojox){
 dojo.provide("dojox.lang.functional.tailrec");
 
 dojo.require("dojox.lang.functional.lambda");
@@ -114,3 +116,4 @@ var tailrec2 = function(cond, then, before){
 };
 
 */
+});

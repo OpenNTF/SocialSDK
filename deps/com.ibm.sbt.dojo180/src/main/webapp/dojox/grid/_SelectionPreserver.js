@@ -1,4 +1,4 @@
-define([
+define("dojox/grid/_SelectionPreserver", [
 	"dojo/_base/declare",
 	"dojo/_base/connect",
 	"dojo/_base/lang",

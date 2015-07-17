@@ -1,3 +1,5 @@
+// wrapped by build app
+define("dojox/wire/Wire", ["dijit","dojo","dojox","dojo/require!dojox/wire/_base"], function(dijit,dojo,dojox){
 dojo.provide("dojox.wire.Wire");
 
 dojo.require("dojox.wire._base");
@@ -375,4 +377,6 @@ dojo.declare("dojox.wire.Wire", null, {
 		}
 		return useAttr;
 	}
+});
+
 });

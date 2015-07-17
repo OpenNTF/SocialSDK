@@ -1,4 +1,4 @@
-define(["dojo/_base/lang", "dojo/_base/event", "dojo/_base/declare", "dojo/dom-geometry", "dojo/dom-construct",
+define("dojox/treemap/DrillDownUp", ["dojo/_base/lang", "dojo/_base/event", "dojo/_base/declare", "dojo/dom-geometry", "dojo/dom-construct",
 	"dojo/dom-style", "dojo/_base/fx", "dojo/has!touch?dojox/gesture/tap"],
 	function(lang, event, declare, domGeom, domConstruct, domStyle, fx, tap){
 

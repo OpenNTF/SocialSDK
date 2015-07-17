@@ -1,4 +1,4 @@
-define([
+define("dojo/router", [
 	"./router/RouterBase"
 ], function(RouterBase){
 

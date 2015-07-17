@@ -1,3 +1,5 @@
+// wrapped by build app
+define("dojox/layout/ext-dijit/layout/StackContainer-touch", ["dijit","dojo","dojox","dojo/require!dijit/layout/StackContainer"], function(dijit,dojo,dojox){
 dojo.provide("dojox.layout.ext-dijit.layout.StackContainer-touch");
 dojo.experimental("dojox.layout.ext-dijit.layout.StackContainer-touch");
 dojo.require("dijit.layout.StackContainer");
@@ -41,4 +43,6 @@ dojo.connect(dijit.layout.StackContainer.prototype, "postCreate", function(){
 			});
 		},
 		this);
+});
+
 });

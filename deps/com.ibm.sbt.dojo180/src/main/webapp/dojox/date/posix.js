@@ -1,4 +1,4 @@
-define(["dojo/_base/kernel", "dojo/date", "dojo/date/locale", "dojo/string", "dojo/cldr/supplemental"],
+define("dojox/date/posix", ["dojo/_base/kernel", "dojo/date", "dojo/date/locale", "dojo/string", "dojo/cldr/supplemental"],
        function(dojo, dojoDate, dojoDateLocale, dojoString, dojoCldrSupplemental){
 
 dojo.getObject("date.posix", true, dojox);

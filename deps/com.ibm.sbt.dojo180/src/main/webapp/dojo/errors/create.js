@@ -1,4 +1,4 @@
-define(["../_base/lang"], function(lang){
+define("dojo/errors/create", ["../_base/lang"], function(lang){
 	return function(name, ctor, base, props){
 		base = base || Error;
 

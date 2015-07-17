@@ -1,4 +1,4 @@
-define(["dojo/_base/lang", "./_base", "dojo/_base/fx", "dojo/fx","dojo/fx/easing", "dojo/dom", "dojo/dom-style", "dojo/_base/html", "dojo/_base/connect"],
+define("dojox/fx/text", ["dojo/_base/lang", "./_base", "dojo/_base/fx", "dojo/fx","dojo/fx/easing", "dojo/dom", "dojo/dom-style", "dojo/_base/html", "dojo/_base/connect"],
 function(lang, dojoxFx, baseFx, coreFx, easingLib, dom, domStyle, htmlLib, connectUtil ){
 var textFx = lang.getObject("dojox.fx.text", true);
 textFx._split = function(/*Object*/ args){

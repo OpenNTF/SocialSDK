@@ -1,5 +1,5 @@
 define(
-({
+"dojox/grid/enhanced/nls/ar/Filter", ({
 	"clearFilterDialogTitle": "محو ترشيح البيانات",
 	"filterDefDialogTitle": "‏ترشيح البيانات‏",
 	"ruleTitleTemplate": "قاعدة ${0}",

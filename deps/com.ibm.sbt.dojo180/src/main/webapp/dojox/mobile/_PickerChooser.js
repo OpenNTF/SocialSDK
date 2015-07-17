@@ -1,4 +1,4 @@
-define([
+define("dojox/mobile/_PickerChooser", [
 	"dojo/_base/lang",
 	"dojo/_base/window"
 ], function(lang, win){

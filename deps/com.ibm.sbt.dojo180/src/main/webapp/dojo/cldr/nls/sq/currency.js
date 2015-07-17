@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/sq/currency", //begin v1.x content
 {
 	"RUB_displayName": "Rubla ruse",
 	"ALL_symbol": "Lek",

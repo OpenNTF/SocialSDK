@@ -1,4 +1,4 @@
-define(["./kernel", "./lang", "./array", "./config"], function(dojo, lang, ArrayUtil, config){
+define("dojo/_base/Color", ["./kernel", "./lang", "./array", "./config"], function(dojo, lang, ArrayUtil, config){
 
 	var Color = dojo.Color = function(/*Array|String|Object*/ color){
 		// summary:

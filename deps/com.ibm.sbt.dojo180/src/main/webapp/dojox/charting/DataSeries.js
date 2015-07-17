@@ -1,4 +1,4 @@
-define(["dojo/_base/lang", "dojo/_base/declare", "dojo/_base/array", "dojo/_base/connect", "dojox/lang/functional"],
+define("dojox/charting/DataSeries", ["dojo/_base/lang", "dojo/_base/declare", "dojo/_base/array", "dojo/_base/connect", "dojox/lang/functional"],
 	function(Lang, declare, ArrayUtil, connect, df){
 
 	return declare("dojox.charting.DataSeries", null, {

@@ -1,4 +1,4 @@
-define([
+define("dojo/rpc/JsonService", [
 	"../_base/declare", "../_base/Deferred", "../_base/json", "../_base/lang", "../_base/xhr",
 	"./RpcService"
 ], function(declare, Deferred, json, lang, xhr, RpcService){

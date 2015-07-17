@@ -1,4 +1,4 @@
-define(["dojo/_base/lang", "dojo/_base/array", "dojo/_base/window", "dojo/_base/sniff"], 
+define("dojox/html/styles", ["dojo/_base/lang", "dojo/_base/array", "dojo/_base/window", "dojo/_base/sniff"], 
 	function(lang, ArrayUtil, Window, has) {
 	// summary:
 	//		Methods for creating and manipulating dynamic CSS Styles and Style Sheets

@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/bg/TableDialog", ({
 	insertTableTitle: "Вмъкни таблица",
 	modifyTableTitle: "Промени таблица",
 	rows: "Редове:",

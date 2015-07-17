@@ -1,4 +1,4 @@
-define([
+define("dijit/_base/window", [
 	"dojo/window", // windowUtils.get
 	"../main"	// export symbol to dijit
 ], function(windowUtils, dijit){

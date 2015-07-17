@@ -1,4 +1,4 @@
-define([
+define("dojox/data/JsonQueryRestStore", [
 	"dojo/_base/declare",
 	"dojox/data/JsonRestStore", "dojox/data/util/JsonQuery", "dojox/data/ClientFilter",
 	"dojox/json/query"

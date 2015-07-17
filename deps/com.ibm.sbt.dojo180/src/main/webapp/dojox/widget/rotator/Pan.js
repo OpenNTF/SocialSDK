@@ -1,4 +1,4 @@
-define([
+define("dojox/widget/rotator/Pan", [
 	"dojo/_base/array",
 	"dojo/_base/connect",
 	"dojo/_base/lang",

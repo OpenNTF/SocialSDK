@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/om/currency", //begin v1.x content
 {
 	"RUB_displayName": "Russian Ruble",
 	"ETB_symbol": "Br",

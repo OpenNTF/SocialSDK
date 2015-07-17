@@ -1,4 +1,4 @@
-define(["./_base/lang", "./_base/array", "./dom"], function(lang, array, dom){
+define("dojo/dom-class", ["./_base/lang", "./_base/array", "./dom"], function(lang, array, dom){
 	// module:
 	//		dojo/dom-class
 

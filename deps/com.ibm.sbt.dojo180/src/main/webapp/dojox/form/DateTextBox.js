@@ -1,4 +1,4 @@
-define([
+define("dojox/form/DateTextBox", [
 	"dojo/_base/kernel",
 	"dojo/dom-style",
 	"dojox/widget/Calendar",

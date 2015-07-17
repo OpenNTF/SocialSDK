@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/ps/currency", //begin v1.x content
 {
 	"AFN_symbol": "؋",
 	"AFN_displayName": "افغانۍ"

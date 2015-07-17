@@ -1,4 +1,4 @@
-define(["../SimpleTheme", "./common"], function(SimpleTheme, themes){
+define("dojox/charting/themes/Algae", ["../SimpleTheme", "./common"], function(SimpleTheme, themes){
 	themes.Algae = new SimpleTheme({
 		colors: [
 			"#57808f",

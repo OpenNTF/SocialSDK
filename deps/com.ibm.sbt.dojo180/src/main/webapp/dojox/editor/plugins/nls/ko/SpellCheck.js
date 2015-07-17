@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/ko/SpellCheck", ({
 	widgetLabel: "맞춤법 검사 일괄처리",
 	unfound: "찾을 수 없음",
 	skip: "건너뛰기",

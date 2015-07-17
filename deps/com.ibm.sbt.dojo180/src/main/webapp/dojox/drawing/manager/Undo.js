@@ -1,4 +1,4 @@
-define(["dojo", "../util/oo"],//, "../defaults"], 
+define("dojox/drawing/manager/Undo", ["dojo", "../util/oo"],//, "../defaults"], 
 function(dojo, oo){
 
 //dojox.drawing.manager.Undo = 

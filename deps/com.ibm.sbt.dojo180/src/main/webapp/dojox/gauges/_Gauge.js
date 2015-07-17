@@ -1,4 +1,4 @@
-define(["dojo/_base/kernel", "dojo/_base/declare","dojo/_base/lang","dojo/_base/html","dojo/_base/array","dojo/_base/event",
+define("dojox/gauges/_Gauge", ["dojo/_base/kernel", "dojo/_base/declare","dojo/_base/lang","dojo/_base/html","dojo/_base/array","dojo/_base/event",
 		"dojo/_base/connect","dojo/dom-construct", "dijit/_Widget", "dojox/gfx", "./Range", "dojo/fx/easing"], 
   function(kernel, declare, lang, html, arr, event, connect, dom, Widget, gfx, Range) {
 

@@ -1,4 +1,4 @@
-define([
+define("dijit/form/_ExpandingTextAreaMixin", [
 	"dojo/_base/declare", // declare
 	"dojo/dom-construct", // domConstruct.create
 	"dojo/has",

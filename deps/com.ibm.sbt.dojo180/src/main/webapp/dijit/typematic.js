@@ -1,4 +1,4 @@
-define([
+define("dijit/typematic", [
 	"dojo/_base/array", // array.forEach
 	"dojo/_base/connect", // connect.connect
 	"dojo/_base/event", // event.stop

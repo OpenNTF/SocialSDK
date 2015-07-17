@@ -1,4 +1,4 @@
-define(["dojo/_base/kernel","dojo/_base/declare","dojo/_base/array","dojo/_base/lang","dojo/_base/html","dojo/_base/event",
+define("dojox/gauges/AnalogGauge", ["dojo/_base/kernel","dojo/_base/declare","dojo/_base/array","dojo/_base/lang","dojo/_base/html","dojo/_base/event",
 		"dojox/gfx", "./_Gauge","./AnalogLineIndicator", "dojo/dom-geometry"],
 	function(dojo, declare, arr, lang, html, event, 
 			gfx, Gauge, AnalogLineIndicator, domGeometry) {

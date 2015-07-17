@@ -1,4 +1,4 @@
-define(["./collections/_base"], function(collections){
+define("dojox/collections", ["./collections/_base"], function(collections){
 	/*=====
 	 return {
 	 // summary:

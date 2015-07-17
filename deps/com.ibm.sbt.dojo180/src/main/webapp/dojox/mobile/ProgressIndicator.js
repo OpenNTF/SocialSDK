@@ -1,4 +1,4 @@
-define([
+define("dojox/mobile/ProgressIndicator", [
 	"dojo/_base/config",
 	"dojo/_base/declare",
 	"dojo/_base/lang",

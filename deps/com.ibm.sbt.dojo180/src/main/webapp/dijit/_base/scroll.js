@@ -1,4 +1,4 @@
-define([
+define("dijit/_base/scroll", [
 	"dojo/window", // windowUtils.scrollIntoView
 	"../main"	// export symbol to dijit
 ], function(windowUtils, dijit){

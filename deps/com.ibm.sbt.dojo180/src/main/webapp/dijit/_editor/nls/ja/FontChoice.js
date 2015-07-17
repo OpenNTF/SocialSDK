@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/ja/FontChoice", ({
 	fontSize: "サイズ",
 	fontName: "フォント",
 	formatBlock: "フォーマット",

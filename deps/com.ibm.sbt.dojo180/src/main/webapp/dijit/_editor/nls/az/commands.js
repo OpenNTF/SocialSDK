@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/az/commands", ({
 	"removeFormat" : "Formatı Sil",
 	"copy" :"Köçür",
 	"paste" :"Yapışdır",

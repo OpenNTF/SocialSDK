@@ -1,4 +1,4 @@
-define(["dojo/_base/lang","../SimpleTheme", "./common"], function(lang, SimpleTheme, themes){
+define("dojox/charting/themes/Grasshopper", ["dojo/_base/lang","../SimpleTheme", "./common"], function(lang, SimpleTheme, themes){
 	themes.Grasshopper = new SimpleTheme({
 		colors: [
 			"#208040",

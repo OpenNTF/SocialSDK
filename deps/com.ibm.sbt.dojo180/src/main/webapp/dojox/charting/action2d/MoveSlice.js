@@ -1,4 +1,4 @@
-define(["dojo/_base/connect", "dojo/_base/declare", "dojo/_base/array", "./PlotAction", "dojo/fx/easing", "dojox/gfx/matrix",
+define("dojox/charting/action2d/MoveSlice", ["dojo/_base/connect", "dojo/_base/declare", "dojo/_base/array", "./PlotAction", "dojo/fx/easing", "dojox/gfx/matrix",
 	"dojox/gfx/fx", "dojox/lang/functional", "dojox/lang/functional/scan", "dojox/lang/functional/fold"],
 	function(hub, declare, array, PlotAction, dfe, m, gf, df, dfs, dff){
 

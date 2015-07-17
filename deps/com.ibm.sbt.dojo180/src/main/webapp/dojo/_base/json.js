@@ -1,4 +1,4 @@
-define(["./kernel", "../json"], function(dojo, json){
+define("dojo/_base/json", ["./kernel", "../json"], function(dojo, json){
 
 // module:
 //		dojo/_base/json

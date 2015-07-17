@@ -1,4 +1,4 @@
-define(["../../_base/declare", "./Read"], function(declare, Read){
+define("dojo/data/api/Write", ["../../_base/declare", "./Read"], function(declare, Read){
 
 // module:
 //		dojo/data/api/Write

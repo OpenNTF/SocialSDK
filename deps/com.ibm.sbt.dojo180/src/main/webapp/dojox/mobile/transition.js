@@ -1,4 +1,4 @@
-define([
+define("dojox/mobile/transition", [
 	"dojo/_base/Deferred",
 	"dojo/_base/config"
 ], function(Deferred, config){

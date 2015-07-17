@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/st-ls/currency", //begin v1.x content
 {
 	"LSL_symbol": "M"
 }

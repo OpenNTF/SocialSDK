@@ -1,4 +1,4 @@
-define([
+define("dojox/dgauges/components/green/VerticalLinearGauge", [
 		"dojo/_base/lang", 
 		"dojo/_base/declare",
 		"dojo/_base/Color",

@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/bg/hebrew", //begin v1.x content
 {
 	"dateFormatItem-yM": "M.y 'г'.",
 	"dateFormatItem-yQ": "Q y 'г'.",

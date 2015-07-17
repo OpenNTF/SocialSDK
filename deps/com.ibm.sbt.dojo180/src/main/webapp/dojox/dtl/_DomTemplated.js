@@ -1,4 +1,4 @@
-define([
+define("dojox/dtl/_DomTemplated", [
 	"dojo/dom-construct",
 	".",
 	"./contrib/dijit",

@@ -1,4 +1,4 @@
-define([
+define("dojox/mobile/lazyLoadUtils", [
 	"dojo/_base/kernel",
 	"dojo/_base/array",
 	"dojo/_base/config",

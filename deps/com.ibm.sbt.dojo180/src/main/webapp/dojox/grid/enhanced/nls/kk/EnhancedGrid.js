@@ -1,5 +1,5 @@
 define(
-({
+"dojox/grid/enhanced/nls/kk/EnhancedGrid", ({
 	singleSort: "Бір рет сұрыптау",
 	nestedSort: "Кірістірілген сұрыптау",
 	ascending: "Артуы бойынша сұрыптауды басу",

@@ -1,4 +1,4 @@
-define(["dojo/_base/declare", "./GaugeBase", "dojox/gfx/matrix"], function(declare, GaugeBase, matrix){
+define("dojox/dgauges/RectangularGauge", ["dojo/_base/declare", "./GaugeBase", "dojox/gfx/matrix"], function(declare, GaugeBase, matrix){
 	return declare("dojox.dgauges.RectangularGauge", GaugeBase, {
 		// summary:
 		//		The base class for rectangular gauges.

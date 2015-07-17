@@ -1,4 +1,4 @@
-define([
+define("dojox/grid/TreeGrid", [
 	"dojo/_base/kernel",
 	"../main",
 	"dojo/_base/declare",

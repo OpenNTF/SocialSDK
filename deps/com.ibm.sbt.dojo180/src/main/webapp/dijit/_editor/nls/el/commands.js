@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/el/commands", ({
 	'bold': 'Έντονα',
 	'copy': 'Αντιγραφή',
 	'cut': 'Αποκοπή',

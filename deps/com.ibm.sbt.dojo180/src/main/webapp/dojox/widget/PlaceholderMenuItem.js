@@ -1,4 +1,4 @@
-define(["dojo/_base/array", "dojo/_base/declare", "dojo/_base/lang", "dojo/dom-style", "dojo/_base/kernel", "dojo/query", "dijit/registry", "dijit/Menu","dijit/MenuItem"],
+define("dojox/widget/PlaceholderMenuItem", ["dojo/_base/array", "dojo/_base/declare", "dojo/_base/lang", "dojo/dom-style", "dojo/_base/kernel", "dojo/query", "dijit/registry", "dijit/Menu","dijit/MenuItem"],
     function(array, declare, lang, style, kernel, query, registry, Menu, MenuItem){
 
 kernel.experimental("dojox.widget.PlaceholderMenuItem");

@@ -1,3 +1,3 @@
-define(["./functional/lambda", "./functional/array", "./functional/object"], function(df){
+define("dojox/lang/functional", ["./functional/lambda", "./functional/array", "./functional/object"], function(df){
 	return df;
 });

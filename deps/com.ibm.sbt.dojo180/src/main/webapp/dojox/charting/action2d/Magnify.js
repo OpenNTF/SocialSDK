@@ -1,4 +1,4 @@
-define(["dojo/_base/connect", "dojo/_base/declare", 
+define("dojox/charting/action2d/Magnify", ["dojo/_base/connect", "dojo/_base/declare", 
 	"./PlotAction", "dojox/gfx/matrix", 
 	"dojox/gfx/fx", "dojo/fx", "dojo/fx/easing"], 
 	function(Hub, declare, PlotAction, m, gf, df, dfe){

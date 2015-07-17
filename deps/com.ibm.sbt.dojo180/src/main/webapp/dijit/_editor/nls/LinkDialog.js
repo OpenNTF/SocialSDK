@@ -1,4 +1,4 @@
-define({ root:
+define("dijit/_editor/nls/LinkDialog", { root:
 //begin v1.x content
 ({
 	createLinkTitle: "Link Properties",

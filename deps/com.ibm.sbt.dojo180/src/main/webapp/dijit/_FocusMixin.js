@@ -1,4 +1,4 @@
-define([
+define("dijit/_FocusMixin", [
 	"./focus",
 	"./_WidgetBase",
 	"dojo/_base/declare", // declare

@@ -1,4 +1,4 @@
-define(["dojo", "../../util/oo", "../../plugins/_Plugin"], 
+define("dojox/drawing/ui/dom/Zoom", ["dojo", "../../util/oo", "../../plugins/_Plugin"], 
 function(dojo, oo, Plugin){
 
 var Zoom = oo.declare(

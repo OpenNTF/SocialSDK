@@ -1,4 +1,4 @@
-define([
+define("dijit/layout/utils", [
 	"dojo/_base/array", // array.filter array.forEach
 	"dojo/dom-class", // domClass.add domClass.remove
 	"dojo/dom-geometry", // domGeometry.marginBox

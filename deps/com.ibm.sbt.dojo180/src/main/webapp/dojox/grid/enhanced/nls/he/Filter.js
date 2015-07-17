@@ -1,5 +1,5 @@
 define(
-({
+"dojox/grid/enhanced/nls/he/Filter", ({
 	"clearFilterDialogTitle": "ניקוי מסנן",
 	"filterDefDialogTitle": "מסנן",
 	"ruleTitleTemplate": "כלל ${0}",

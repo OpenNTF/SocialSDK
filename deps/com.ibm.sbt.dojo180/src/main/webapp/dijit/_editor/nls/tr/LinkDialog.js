@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/tr/LinkDialog", ({
 	createLinkTitle: "Bağlantı Özellikleri",
 	insertImageTitle: "Resim Özellikleri",
 	url: "URL:",

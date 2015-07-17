@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/yav/currency", //begin v1.x content
 {
 	"BIF_displayName": "faláŋɛ u pulundí",
 	"EGP_displayName": "lífilɛ wu isípit",

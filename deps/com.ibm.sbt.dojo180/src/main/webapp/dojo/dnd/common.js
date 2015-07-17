@@ -1,4 +1,4 @@
-define(["../_base/connect", "../_base/kernel", "../_base/lang", "../dom"],
+define("dojo/dnd/common", ["../_base/connect", "../_base/kernel", "../_base/lang", "../dom"],
 	function(connect, kernel, lang, dom){
 
 // module:

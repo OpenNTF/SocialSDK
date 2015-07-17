@@ -1,4 +1,4 @@
-define(["dojo", "dijit", "dojox/main", "dijit/_Widget", "dijit/_TemplatedMixin", "dojo/fx/easing"],
+define("dojox/image/Badge", ["dojo", "dijit", "dojox/main", "dijit/_Widget", "dijit/_TemplatedMixin", "dojo/fx/easing"],
 function(dojo, dijit, dojox, _Widget, _TemplatedMixin){
 
 	dojo.experimental("dojox.image.Badge");

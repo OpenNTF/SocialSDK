@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/tr/FontChoice", ({
 	fontSize: "Boyut",
 	fontName: "Yazı Tipi",
 	formatBlock: "Biçim",

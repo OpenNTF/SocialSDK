@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/sv/FontChoice", ({
 	fontSize: "Storlek ",
 	fontName: "Teckensnitt",
 	formatBlock: "Format",

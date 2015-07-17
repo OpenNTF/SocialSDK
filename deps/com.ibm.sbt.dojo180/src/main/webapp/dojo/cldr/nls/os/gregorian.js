@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/os/gregorian", //begin v1.x content
 {
 	"field-day-relative+-1": "Знон",
 	"field-day-relative+0": "Абон",

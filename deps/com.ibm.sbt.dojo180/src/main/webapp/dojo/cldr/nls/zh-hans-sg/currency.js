@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/zh-hans-sg/currency", //begin v1.x content
 {
 	"KZT_displayName": "哈萨克斯坦腾格",
 	"FKP_displayName": "福克兰群岛镑",

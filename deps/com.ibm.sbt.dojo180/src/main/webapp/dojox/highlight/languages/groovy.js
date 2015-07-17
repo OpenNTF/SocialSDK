@@ -1,4 +1,4 @@
-define(["../_base"], function(dh){
+define("dojox/highlight/languages/groovy", ["../_base"], function(dh){
 
 	var dhc = dh.constants;
 	var GROOVY_KEYWORDS = {

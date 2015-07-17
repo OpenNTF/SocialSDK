@@ -1,4 +1,4 @@
-define(['dojo', 'dijit', 'dijit/_Widget', 'dijit/_TemplatedMixin', 'dijit/form/Button'],	// TODO: why button??
+define("dojox/av/widget/VolumeButton", ['dojo', 'dijit', 'dijit/_Widget', 'dijit/_TemplatedMixin', 'dijit/form/Button'],	// TODO: why button??
 function(dojo, dijit, _Widget, _TemplatedMixin, Button){
 
 return dojo.declare("dojox.av.widget.VolumeButton", [_Widget, _TemplatedMixin], {

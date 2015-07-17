@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/ru/SpellCheck", ({
 	widgetLabel: "Проверка орфографии",
 	unfound: "Не найдено",
 	skip: "Пропустить",

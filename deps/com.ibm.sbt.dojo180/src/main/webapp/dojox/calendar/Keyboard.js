@@ -1,4 +1,4 @@
-define(["dojo/_base/array", "dojo/_base/lang", "dojo/_base/declare", "dojo/on", "dojo/_base/event", "dojo/keys"],
+define("dojox/calendar/Keyboard", ["dojo/_base/array", "dojo/_base/lang", "dojo/_base/declare", "dojo/on", "dojo/_base/event", "dojo/keys"],
 	function(arr, lang, declare, on, event, keys){
 	
 	return declare("dojox.calendar.Keyboard", null, {

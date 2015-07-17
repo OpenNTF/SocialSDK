@@ -1,4 +1,4 @@
-define(["./timing/_base"], function(timing){
+define("dojox/timing", ["./timing/_base"], function(timing){
 	/*=====
 	 return {
 	 // summary:

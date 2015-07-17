@@ -1,3 +1,5 @@
+// wrapped by build app
+define("dojox/widget/Iterator", ["dijit","dojo","dojox","dojo/require!dijit/Declaration"], function(dijit,dojo,dojox){
 dojo.provide("dojox.widget.Iterator");
 dojo.require("dijit.Declaration");
 
@@ -171,3 +173,5 @@ dojo.declare("dojox.widget.Iterator",
 });
 
 dojox.widget.Iterator._classes = {};
+
+});

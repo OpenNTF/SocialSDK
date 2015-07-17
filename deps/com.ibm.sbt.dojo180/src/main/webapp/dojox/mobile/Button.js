@@ -1,4 +1,4 @@
-define([
+define("dojox/mobile/Button", [
 	"dojo/_base/array",
 	"dojo/_base/declare",
 	"dojo/dom-class",

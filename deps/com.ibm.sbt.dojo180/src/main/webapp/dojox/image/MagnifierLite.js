@@ -1,4 +1,4 @@
-define(["dojo/_base/kernel", "dojo/_base/declare", "dijit/_Widget", "dojo/dom-construct", "dojo/dom-style", "dojo/dom-geometry", "dojo/_base/window", "dojo/_base/lang"], function(kernel, declare, _Widget, construct, style, geometry, window, lang){
+define("dojox/image/MagnifierLite", ["dojo/_base/kernel", "dojo/_base/declare", "dijit/_Widget", "dojo/dom-construct", "dojo/dom-style", "dojo/dom-geometry", "dojo/_base/window", "dojo/_base/lang"], function(kernel, declare, _Widget, construct, style, geometry, window, lang){
 
 	kernel.experimental("dojox.image.MagnifierLite");
 	

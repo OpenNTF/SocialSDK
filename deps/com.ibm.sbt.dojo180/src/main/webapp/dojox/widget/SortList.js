@@ -1,3 +1,5 @@
+// wrapped by build app
+define("dojox/widget/SortList", ["dijit","dojo","dojox","dojo/require!dijit/layout/_LayoutWidget,dijit/_Templated"], function(dijit,dojo,dojox){
 dojo.provide("dojox.widget.SortList");
 dojo.experimental("dojox.widget.SortList"); // level: prototype, designed for dijit.chat.demo
 
@@ -40,7 +42,7 @@ dojo.declare("dojox.widget.SortList",
 	
 	baseClass: "dojoxSortList",
 
-	templateString: dojo.cache("dojox.widget","SortList/SortList.html"),
+	templateString: dojo.cache("dojox.widget", "SortList/SortList.html", "<div class=\"sortList\" id=\"${id}\">\n\t\t<div class=\"sortListTitle\" dojoAttachPoint=\"titleNode\">\n\t\t<div class=\"dijitInline sortListIcon\">&thinsp;</div>\n\t\t<span dojoAttachPoint=\"focusNode\">${title}</span>\n\t\t</div>\n\t\t<div class=\"sortListBodyWrapper\" dojoAttachEvent=\"onmouseover: _set, onmouseout: _unset, onclick:_handleClick\" dojoAttachPoint=\"bodyWrapper\">\n\t\t<ul dojoAttachPoint=\"containerNode\" class=\"sortListBody\"></ul>\n\t</div>\n</div>"),
 
 	_addItem: function(item){
 		dojo.create("li", {
@@ -156,4 +158,6 @@ dojo.declare("dojox.widget.SortList",
 		//		stub function, passes the last changed item, and is fired after current state
 	}
 	
+});
+
 });

@@ -1,5 +1,5 @@
 // AMD-ID "dojox/math/curves"
-define(["dojo", "dojox"], function(dojo, dojox) {
+define("dojox/math/curves", ["dojo", "dojox"], function(dojo, dojox) {
 dojo.getObject("math.curves", true, dojox);
 
 dojo.mixin(dojox.math.curves, {

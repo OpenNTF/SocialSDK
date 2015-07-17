@@ -1,4 +1,4 @@
-define([
+define("dijit/Declaration", [
 	"dojo/_base/array", // array.forEach array.map
 	"dojo/_base/connect", // connect.connect
 	"dojo/_base/declare", // declare

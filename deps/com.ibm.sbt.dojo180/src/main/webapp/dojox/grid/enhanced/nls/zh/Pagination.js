@@ -1,5 +1,5 @@
 define(
-({
+"dojox/grid/enhanced/nls/zh/Pagination", ({
 	"descTemplate": "第 ${2} - ${3} 个（共 ${1} ${0}）",
 	"firstTip": "首页",
 	"lastTip": "末页",

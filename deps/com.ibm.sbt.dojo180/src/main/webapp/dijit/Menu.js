@@ -1,4 +1,4 @@
-define([
+define("dijit/Menu", [
 	"require",
 	"dojo/_base/array", // array.forEach
 	"dojo/_base/declare", // declare

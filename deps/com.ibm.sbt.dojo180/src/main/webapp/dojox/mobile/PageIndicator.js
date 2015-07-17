@@ -1,4 +1,4 @@
-define([
+define("dojox/mobile/PageIndicator", [
 	"dojo/_base/connect",
 	"dojo/_base/declare",
 	"dojo/dom",

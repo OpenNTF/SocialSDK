@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/vai-latn/currency", //begin v1.x content
 {
 	"USD_displayName": "Poo Dala",
 	"TZS_displayName": "Taŋzaniya Siyeŋ",

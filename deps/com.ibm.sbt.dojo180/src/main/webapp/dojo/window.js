@@ -1,4 +1,4 @@
-define(["./_base/lang", "./sniff", "./_base/window", "./dom", "./dom-geometry", "./dom-style", "./dom-construct"],
+define("dojo/window", ["./_base/lang", "./sniff", "./_base/window", "./dom", "./dom-geometry", "./dom-style", "./dom-construct"],
 	function(lang, has, baseWindow, dom, geom, style, domConstruct){
 
 	// feature detection
@@ -232,7 +232,7 @@ define(["./_base/lang", "./sniff", "./_base/window", "./dom", "./dom-geometry", 
 		}
 	};
 
-	has("extend-dojo") && lang.setObject("dojo.window", window);
+	 1  && lang.setObject("dojo.window", window);
 
 	return window;
 });

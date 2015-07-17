@@ -1,4 +1,4 @@
-define([
+define("dojox/mvc/_Controller", [
 	"dojo/_base/declare",
 	"dojo/_base/lang",
 	"dojo/Stateful",

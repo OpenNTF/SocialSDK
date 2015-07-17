@@ -1,4 +1,4 @@
-define([
+define("dojo/dnd/Moveable", [
 	"../_base/array", "../_base/declare", "../_base/event", "../_base/lang",
 	"../dom", "../dom-class", "../Evented", "../on", "../topic", "../touch", "./common", "./Mover", "../_base/window"
 ], function(array, declare, event, lang, dom, domClass, Evented, on, topic, touch, dnd, Mover, win){

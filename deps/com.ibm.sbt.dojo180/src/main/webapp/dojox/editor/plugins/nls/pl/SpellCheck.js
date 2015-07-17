@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/pl/SpellCheck", ({
 	widgetLabel: "Wsadowe sprawdzanie pisowni",
 	unfound: "Nie znaleziono",
 	skip: "Pomiń",

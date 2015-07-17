@@ -1,4 +1,4 @@
-define([
+define("dojox/dtl/filter/htmlstrings", [
 	"dojo/_base/lang",
 	"../_base"
 ], function(lang,dd){

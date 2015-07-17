@@ -1,5 +1,5 @@
 define(
-({
+"dojox/grid/enhanced/nls/ko/EnhancedGrid", ({
 	singleSort: "단일 정렬",
 	nestedSort: "중첩된 정렬",
 	ascending: "오름차순으로 정렬하려면 클릭",

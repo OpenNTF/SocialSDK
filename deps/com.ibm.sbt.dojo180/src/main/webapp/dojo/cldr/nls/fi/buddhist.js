@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/fi/buddhist", //begin v1.x content
 {
 	"dateFormatItem-yM": "L.y G",
 	"dateFormatItem-yMMMMccccd": "cccc, d. MMMM y G",

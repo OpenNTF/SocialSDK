@@ -1,4 +1,4 @@
-define({ root:
+define("dojox/editor/plugins/nls/FindReplace", { root:
 //begin v1.x content
 ({
 	"findLabel": "Find:",

@@ -1,4 +1,4 @@
-define(["dojo/_base/kernel","dojo/_base/lang","dojo/_base/fx","dojo/fx","./_base","dojo/_base/array","dojo/dom","dojo/dom-style","dojo/dom-class",
+define("dojox/fx/style", ["dojo/_base/kernel","dojo/_base/lang","dojo/_base/fx","dojo/fx","./_base","dojo/_base/array","dojo/dom","dojo/dom-style","dojo/dom-class",
 		"dojo/_base/connect"],
 	function(dojo,lang,baseFx,coreFx,dojoxFx,arrayUtil,dom,domStyle,domClass,connectUtil){
 	dojo.experimental("dojox.fx.style");

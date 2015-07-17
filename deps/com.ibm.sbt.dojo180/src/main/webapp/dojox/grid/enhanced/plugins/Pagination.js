@@ -1,4 +1,6 @@
-define([
+require({cache:{
+'url:dojox/grid/enhanced/templates/Pagination.html':"<div dojoAttachPoint=\"paginatorBar\"\n\t><table cellpadding=\"0\" cellspacing=\"0\"  class=\"dojoxGridPaginator\"\n\t\t><tr\n\t\t\t><td dojoAttachPoint=\"descriptionTd\" class=\"dojoxGridDescriptionTd\"\n\t\t\t\t><div dojoAttachPoint=\"descriptionDiv\" class=\"dojoxGridDescription\"></div\n\t\t\t></div></td\n\t\t\t><td dojoAttachPoint=\"sizeSwitchTd\"></td\n\t\t\t><td dojoAttachPoint=\"pageStepperTd\" class=\"dojoxGridPaginatorFastStep\"\n\t\t\t\t><div dojoAttachPoint=\"pageStepperDiv\" class=\"dojoxGridPaginatorStep\"></div\n\t\t\t></td\n\t\t\t><td dojoAttachPoint=\"gotoPageTd\" class=\"dojoxGridPaginatorGotoTd\"\n\t\t\t\t><div dojoAttachPoint=\"gotoPageDiv\" class=\"dojoxGridPaginatorGotoDiv\" dojoAttachEvent=\"onclick:_openGotopageDialog, onkeydown:_openGotopageDialog\"\n\t\t\t\t\t><span class=\"dojoxGridWardButtonInner\">&#8869;</span\n\t\t\t\t></div\n\t\t\t></td\n\t\t></tr\n\t></table\n></div>\n"}});
+define("dojox/grid/enhanced/plugins/Pagination", [
 	"dojo/_base/kernel",
 	"dojo/_base/declare",
 	"dojo/_base/array",

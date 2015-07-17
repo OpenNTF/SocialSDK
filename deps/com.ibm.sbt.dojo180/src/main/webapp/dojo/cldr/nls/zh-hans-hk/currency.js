@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/zh-hans-hk/currency", //begin v1.x content
 {
 	"HKD_displayName": "港元",
 	"KYD_displayName": "开曼群岛元",

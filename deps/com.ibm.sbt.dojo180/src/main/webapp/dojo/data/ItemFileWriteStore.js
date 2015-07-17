@@ -1,4 +1,4 @@
-define(["../_base/lang", "../_base/declare", "../_base/array", "../_base/json", "../_base/kernel",
+define("dojo/data/ItemFileWriteStore", ["../_base/lang", "../_base/declare", "../_base/array", "../_base/json", "../_base/kernel",
 	"./ItemFileReadStore", "../date/stamp"
 ], function(lang, declare, arrayUtil, jsonUtil, kernel, ItemFileReadStore, dateStamp){
 

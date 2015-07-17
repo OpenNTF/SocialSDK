@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/cs/FontChoice", ({
 	fontSize: "Velikost",
 	fontName: "Písmo",
 	formatBlock: "Formát",

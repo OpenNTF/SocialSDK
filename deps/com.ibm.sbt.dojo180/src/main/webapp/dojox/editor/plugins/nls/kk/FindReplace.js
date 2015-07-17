@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/kk/FindReplace", ({
 	"findLabel": "Табу:",
 	"findTooltip": "Табылатын мәтінді енгізу",
 	"replaceLabel": "Келесімен ауыстыру:",

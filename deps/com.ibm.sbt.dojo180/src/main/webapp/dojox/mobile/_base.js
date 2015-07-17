@@ -1,4 +1,4 @@
-define([
+define("dojox/mobile/_base", [
 	"./common",
 	"./View",
 	"./Heading",

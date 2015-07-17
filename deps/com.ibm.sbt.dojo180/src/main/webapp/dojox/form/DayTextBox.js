@@ -1,4 +1,4 @@
-define([
+define("dojox/form/DayTextBox", [
 	"dojo/_base/kernel",
 	"dojo/_base/lang",
 	"dojox/widget/DailyCalendar",

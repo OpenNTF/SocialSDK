@@ -1,5 +1,5 @@
 define(
-({
+"dojox/widget/nls/he/ColorPicker", ({
 redLabel: "א",
 greenLabel: "י",
 blueLabel: "כ",

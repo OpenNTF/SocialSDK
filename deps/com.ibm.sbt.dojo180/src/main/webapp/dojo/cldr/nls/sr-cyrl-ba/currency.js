@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/sr-cyrl-ba/currency", //begin v1.x content
 {
 	"BAM_symbol": "КМ.",
 	"BAM_displayName": "Конвертибилна Марка"

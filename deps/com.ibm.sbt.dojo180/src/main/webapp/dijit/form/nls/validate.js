@@ -1,4 +1,4 @@
-define({ root:
+define("dijit/form/nls/validate", { root:
 //begin v1.x content
 ({
 	invalidMessage: "The value entered is not valid.",

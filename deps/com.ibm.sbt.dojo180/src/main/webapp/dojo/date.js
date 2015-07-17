@@ -1,4 +1,4 @@
-define(["./has", "./_base/lang"], function(has, lang){
+define("dojo/date", ["./has", "./_base/lang"], function(has, lang){
 // module:
 //		dojo/date
 
@@ -340,7 +340,7 @@ date.difference = function(/*Date*/date1, /*Date?*/date2, /*String?*/interval){
 };
 
 // Don't use setObject() because it may overwrite dojo/date/stamp (if that has already been loaded)
-has("extend-dojo") && lang.mixin(lang.getObject("dojo.date", true), date);
+ 1  && lang.mixin(lang.getObject("dojo.date", true), date);
 
 return date;
 });

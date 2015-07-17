@@ -1,4 +1,6 @@
-define([
+require({cache:{
+'url:dojox/grid/resources/Expando.html':"<div class=\"dojoxGridExpando\"\n\t><div class=\"dojoxGridExpandoNode\" dojoAttachEvent=\"onclick:onToggle\"\n\t\t><div class=\"dojoxGridExpandoNodeInner\" dojoAttachPoint=\"expandoInner\"></div\n\t></div\n></div>\n"}});
+define("dojox/grid/LazyTreeGrid", [
 	"dojo/_base/kernel",
 	"dojo/_base/declare",
 	"dojo/_base/lang",

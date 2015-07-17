@@ -1,4 +1,4 @@
-define([
+define("dojox/geo/charting/TouchInteractionSupport", [
 	"dojo/_base/lang",
 	"dojo/_base/declare",
 	"dojo/_base/event",

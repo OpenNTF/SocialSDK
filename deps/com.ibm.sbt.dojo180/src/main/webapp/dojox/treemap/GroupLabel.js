@@ -1,4 +1,4 @@
-define(["dojo/_base/declare", "dojo/dom-construct", "dojo/dom-style"],
+define("dojox/treemap/GroupLabel", ["dojo/_base/declare", "dojo/dom-construct", "dojo/dom-style"],
 	function(declare, domConstruct, domStyle) {
 
 	return declare("dojox.treemap.GroupLabel", null, {

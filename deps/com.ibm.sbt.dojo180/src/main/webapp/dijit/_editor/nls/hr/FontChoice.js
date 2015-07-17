@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/hr/FontChoice", ({
 	fontSize: "Veličina",
 	fontName: "Font",
 	formatBlock: "Oblikovanje",

@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/vi/currency", //begin v1.x content
 {
 	"BRE_displayName": "Đồng Cruzerio của Braxin (1990-1993)",
 	"DEM_displayName": "Đồng Mark Đức",

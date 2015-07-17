@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/my/currency", //begin v1.x content
 {
 	"SUR_displayName": "ဆိုဗီယက် ရူဗယ်",
 	"COP_displayName": "ကိုလံဘီယာ ပီဆို",

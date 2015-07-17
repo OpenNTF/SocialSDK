@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/es-bo/currency", //begin v1.x content
 {
 	"BOB_symbol": "Bs"
 }

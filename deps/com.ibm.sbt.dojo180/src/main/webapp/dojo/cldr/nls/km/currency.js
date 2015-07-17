@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/km/currency", //begin v1.x content
 {
 	"KHR_displayName": "រៀល កម្ពុជា",
 	"FJD_displayName": "ដុល្លារ ហ្វីជី",

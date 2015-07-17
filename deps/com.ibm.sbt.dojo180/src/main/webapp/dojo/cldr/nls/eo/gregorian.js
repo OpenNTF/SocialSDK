@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/eo/gregorian", //begin v1.x content
 {
 	"dateFormat-medium": "y-MMM-dd",
 	"eraNarrow": [

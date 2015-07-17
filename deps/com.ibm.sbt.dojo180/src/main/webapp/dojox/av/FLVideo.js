@@ -1,4 +1,4 @@
-define(['dojo', 'dijit', 'dijit/_Widget', 'dojox/embed/Flash', 'dojox/av/_Media'],
+define("dojox/av/FLVideo", ['dojo', 'dijit', 'dijit/_Widget', 'dojox/embed/Flash', 'dojox/av/_Media'],
 function(dojo, dijit, _Widget, Flash, _Media){
 
 dojo.experimental("dojox.av.FLVideo");

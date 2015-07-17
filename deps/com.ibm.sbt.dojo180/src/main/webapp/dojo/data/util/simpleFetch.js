@@ -1,4 +1,4 @@
-define(["../../_base/lang", "../../_base/kernel", "./sorter"],
+define("dojo/data/util/simpleFetch", ["../../_base/lang", "../../_base/kernel", "./sorter"],
   function(lang, kernel, sorter){
 	// module:
 	//		dojo/data/util/simpleFetch

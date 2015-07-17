@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/vai/currency", //begin v1.x content
 {
 	"USD_displayName": "ꕶꕱ ꕜꕞ",
 	"TZS_displayName": "ꕚꘋꕤꕇꕰ ꔻꔝꘋ",

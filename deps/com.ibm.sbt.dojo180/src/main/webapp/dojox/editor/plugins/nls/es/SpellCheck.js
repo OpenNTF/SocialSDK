@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/es/SpellCheck", ({
 	widgetLabel: "Corrector ortográfico por lotes",
 	unfound: "No encontrado",
 	skip: "Saltar",

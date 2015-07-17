@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/hr/commands", ({
 	'bold': 'Podebljaj',
 	'copy': 'Kopiraj',
 	'cut': 'Izreži',

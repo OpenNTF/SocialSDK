@@ -1,4 +1,4 @@
-define([
+define("dojox/dtl/tag/loader", [
 	"dojo/_base/lang",
 	"../_base",
 	"dojo/_base/array",

@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/he/AutoSave", ({
 	"saveLabel": "שמירה",
 	"saveSettingLabelOn": "הגדרת מרווח שמירה אוטומטית...‏",
 	"saveSettingLabelOff": "השבתת שמירה אוטומטית",

@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/zh-hans-hk/gregorian", //begin v1.x content
 {
 	"dateFormatItem-M": "L",
 	"dateFormatItem-Md": "M-d",

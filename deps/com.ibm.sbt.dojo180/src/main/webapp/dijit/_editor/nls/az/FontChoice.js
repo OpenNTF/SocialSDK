@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/az/FontChoice", ({
 	"1" : "xx-kiçik",
 	"2" : "x-kiçik",
 	"formatBlock" : "Format",

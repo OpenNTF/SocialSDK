@@ -1,9 +1,9 @@
-define([
+define("dojo/request/watch", [
 	'./util',
 	'../errors/RequestTimeoutError',
 	'../errors/CancelError',
 	'../_base/array',
-	'../has!host-browser?../_base/window:',
+	'../_base/window',
 	'../has!host-browser?dom-addeventlistener?:../on:'
 ], function(util, RequestTimeoutError, CancelError, array, win, on){
 	// avoid setting a timer per request. It degrades performance on IE

@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/en-nz/currency", //begin v1.x content
 {
 	"NZD_symbol": "$",
 	"USD_symbol": "US$"

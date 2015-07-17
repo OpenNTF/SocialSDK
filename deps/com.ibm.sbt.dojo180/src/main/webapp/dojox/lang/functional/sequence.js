@@ -1,4 +1,4 @@
-define(["dojo/_base/kernel", "dojo/_base/lang", "./lambda"], function(kernel, lang, df){
+define("dojox/lang/functional/sequence", ["dojo/_base/kernel", "dojo/_base/lang", "./lambda"], function(kernel, lang, df){
 
 // This module adds high-level functions and related constructs:
 //	- sequence generators

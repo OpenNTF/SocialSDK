@@ -1,4 +1,4 @@
-define(["dojo/_base/lang", "../util/oo", "./_Base", "../manager/_registry"], 
+define("dojox/drawing/stencil/Line", ["dojo/_base/lang", "../util/oo", "./_Base", "../manager/_registry"], 
 function(lang, oo, Base, registry){
 var Line = oo.declare(
 	Base,

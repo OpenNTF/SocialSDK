@@ -1,4 +1,4 @@
-define(["../SimpleTheme", "./common"], function(SimpleTheme, themes){
+define("dojox/charting/themes/MiamiNice", ["../SimpleTheme", "./common"], function(SimpleTheme, themes){
 	themes.MiamiNice = new SimpleTheme({
 		colors: [
 			"#7f9599",

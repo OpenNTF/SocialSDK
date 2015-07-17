@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/cy/currency", //begin v1.x content
 {
 	"INR_displayName": "Rwpî India",
 	"RUB_displayName": "Rwbl Rwsia",

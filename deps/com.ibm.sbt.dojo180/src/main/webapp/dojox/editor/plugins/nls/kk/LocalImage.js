@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/kk/LocalImage", ({
 	insertImageTitle: "Суретті кірістіру",
 	url: "Сурет",
 	browse: "Шолу...",

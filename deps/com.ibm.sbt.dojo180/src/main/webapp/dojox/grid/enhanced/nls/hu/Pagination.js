@@ -1,5 +1,5 @@
 define(
-({
+"dojox/grid/enhanced/nls/hu/Pagination", ({
 	"descTemplate": "${2} - ${3} / ${1} ${0}",
 	"firstTip": "Első oldal",
 	"lastTip": "Utolsó oldal",

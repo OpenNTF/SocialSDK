@@ -1,5 +1,5 @@
 define(
-({
+"dojox/grid/enhanced/nls/cs/EnhancedGrid", ({
 	singleSort: "Jednoduché řazení",
 	nestedSort: "Vnořené řazení",
 	ascending: "Po klepnutí bude řazeno vzestupně",

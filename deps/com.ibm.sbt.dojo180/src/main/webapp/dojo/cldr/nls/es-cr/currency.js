@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/es-cr/currency", //begin v1.x content
 {
 	"CRC_symbol": "₡"
 }

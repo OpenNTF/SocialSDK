@@ -1,4 +1,4 @@
-define([
+define("dojox/mobile/IconItem", [
 	"dojo/_base/declare",
 	"dojo/_base/event",
 	"dojo/_base/lang",

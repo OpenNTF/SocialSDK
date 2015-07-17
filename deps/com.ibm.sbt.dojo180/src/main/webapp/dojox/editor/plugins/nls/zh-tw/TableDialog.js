@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/zh-tw/TableDialog", ({
 	insertTableTitle: "插入表格",
 	modifyTableTitle: "修改表格",
 	rows: "列：",

@@ -1,4 +1,4 @@
-define(["dojo/_base/declare", "dojo/_base/event", "dojo/_base/lang", "dojo/on", "dojo/dom-style", "dijit/_WidgetBase"],
+define("dojox/calendar/_VerticalScrollBarBase", ["dojo/_base/declare", "dojo/_base/event", "dojo/_base/lang", "dojo/on", "dojo/dom-style", "dijit/_WidgetBase"],
 function(declare, event, lang, on, domStyle, _WidgetBase){
 	
 		return declare('dojox.calendar._VerticalScrollBarBase', _WidgetBase, {

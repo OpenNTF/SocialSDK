@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/en-gb/currency", //begin v1.x content
 {
 	"VND_displayName": "Vietnamese Dong",
 	"THB_displayName": "Thai Baht",

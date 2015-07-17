@@ -1,4 +1,4 @@
-define([
+define("dojox/geo/openlayers/Geometry", [
 	"dojo/_base/declare"
 ], function(declare){
 

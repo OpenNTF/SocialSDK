@@ -1,4 +1,4 @@
-define(["dojo/_base/kernel",
+define("dojox/mdnd/PureSource", ["dojo/_base/kernel",
 	"dojo/_base/declare",
 	"dojo/_base/lang",
 	"dojo/_base/connect",

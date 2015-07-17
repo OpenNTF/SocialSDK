@@ -1,4 +1,4 @@
-define([
+define("dojox/grid/enhanced/plugins/filter/_ConditionExpr", [
 	"dojo/_base/declare",
 	"dojo/_base/lang",
 	"dojo/_base/array"

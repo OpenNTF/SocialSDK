@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/pt-st/currency", //begin v1.x content
 {
 	"STD_symbol": "Db"
 }

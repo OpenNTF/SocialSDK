@@ -1,4 +1,4 @@
-define(["dojo/_base/declare","dojo/_base/Color" ,"./AnalogIndicatorBase"],
+define("dojox/gauges/GlossyCircularGaugeNeedle", ["dojo/_base/declare","dojo/_base/Color" ,"./AnalogIndicatorBase"],
   function(declare, Color, AnalogIndicatorBase) {
 
 

@@ -1,5 +1,5 @@
 define(
-({
+"dojox/grid/enhanced/nls/ko/Filter", ({
 	"clearFilterDialogTitle": "필터 지우기",
 	"filterDefDialogTitle": "필터",
 	"ruleTitleTemplate": "규칙 ${0}",

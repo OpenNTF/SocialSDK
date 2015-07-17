@@ -1,4 +1,4 @@
-define([
+define("dojox/geo/openlayers/GfxLayer", [
 	"dojo/_base/declare",
 	"dojo/_base/connect",
 	"dojo/dom-style",

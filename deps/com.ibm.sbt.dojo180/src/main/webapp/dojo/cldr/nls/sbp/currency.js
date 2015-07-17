@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/sbp/currency", //begin v1.x content
 {
 	"USD_displayName": "Ihela ya Malekani",
 	"TZS_displayName": "Ihela ya Tansaniya",

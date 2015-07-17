@@ -1,9 +1,9 @@
-define(["./_base/kernel", "require", "./has", "./has!host-browser?./_base/xhr"], function(dojo, require, has, xhr){
+define("dojo/text", ["./_base/kernel", "require", "./has", "./_base/xhr"], function(dojo, require, has, xhr){
 	// module:
 	//		dojo/text
 
 	var getText;
-	if(has("host-browser")){
+	if( 1 ){
 		getText= function(url, sync, load){
 			xhr("GET", {url: url, sync:!!sync, load: load, headers: dojo.config.textPluginHeaders || {}});
 		};

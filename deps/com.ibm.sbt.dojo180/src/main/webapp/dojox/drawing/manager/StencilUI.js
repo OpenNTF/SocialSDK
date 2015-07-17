@@ -1,4 +1,4 @@
-define(["dojo", "../util/oo"],//, "../defaults"], 
+define("dojox/drawing/manager/StencilUI", ["dojo", "../util/oo"],//, "../defaults"], 
 function(dojo, oo){
 	var surface, surfaceNode;
 	//dojox.drawing.manager.StencilUI = 

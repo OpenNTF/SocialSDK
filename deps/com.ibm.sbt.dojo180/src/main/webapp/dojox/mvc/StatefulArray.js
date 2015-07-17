@@ -1,4 +1,4 @@
-define([
+define("dojox/mvc/StatefulArray", [
 	"dojo/_base/lang",
 	"dojo/Stateful"
 ], function(lang, Stateful){

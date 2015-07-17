@@ -1,4 +1,4 @@
-define(["../Theme", "dojox/gfx/gradutils", "./common"], function(Theme, gradutils, themes){
+define("dojox/charting/themes/Claro", ["../Theme", "dojox/gfx/gradutils", "./common"], function(Theme, gradutils, themes){
 	// created by Tom Trenka
 
 	var g = Theme.generateGradient,

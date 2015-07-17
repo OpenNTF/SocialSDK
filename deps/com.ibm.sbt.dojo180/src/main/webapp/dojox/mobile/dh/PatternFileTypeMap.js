@@ -1,4 +1,4 @@
-define([
+define("dojox/mobile/dh/PatternFileTypeMap", [
 	"dojo/_base/lang"
 ], function(lang){
 

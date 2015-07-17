@@ -1,4 +1,4 @@
-define([
+define("dojo/store/DataStore", [
 	"../_base/lang", "../_base/declare", "../_base/Deferred", "../_base/array",
 	"./util/QueryResults", "./util/SimpleQueryEngine" /*=====, "./api/Store" =====*/
 ], function(lang, declare, Deferred, array, QueryResults, SimpleQueryEngine /*=====, Store =====*/){

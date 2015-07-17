@@ -1,4 +1,4 @@
-define(["dojo", "../../util/oo", "../../plugins/_Plugin", "../../manager/_registry"], 
+define("dojox/drawing/ui/dom/Pan", ["dojo", "../../util/oo", "../../plugins/_Plugin", "../../manager/_registry"], 
 function(dojo, oo, Plugin, registry){
 dojo.deprecated("dojox.drawing.ui.dom.Pan", "It may not even make it to the 1.4 release.", 1.4);
 

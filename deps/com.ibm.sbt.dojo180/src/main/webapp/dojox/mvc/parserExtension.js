@@ -1,4 +1,4 @@
-define([
+define("dojox/mvc/parserExtension", [
 	"require",
 	"dojo/_base/kernel",
 	"dojo/_base/lang",

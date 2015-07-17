@@ -1,5 +1,5 @@
 define(
-({
+"dojox/atom/widget/nls/zh/FeedEntryViewer", ({
 	displayOptions: "[显示选项]",
 	title: "标题",
 	authors: "创建者",

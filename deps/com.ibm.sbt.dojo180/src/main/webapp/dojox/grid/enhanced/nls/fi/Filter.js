@@ -1,5 +1,5 @@
 define(
-({
+"dojox/grid/enhanced/nls/fi/Filter", ({
 	"clearFilterDialogTitle": "Tyhjennä suodatin",
 	"filterDefDialogTitle": "Suodata",
 	"ruleTitleTemplate": "Sääntö ${0}",

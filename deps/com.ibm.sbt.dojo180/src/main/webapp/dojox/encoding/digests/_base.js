@@ -1,4 +1,4 @@
-define(["dojo/_base/lang"], function(lang){
+define("dojox/encoding/digests/_base", ["dojo/_base/lang"], function(lang){
 	var d = lang.getObject("dojox.encoding.digests", true);
 
 	//TODO: see if it makes sense to meld this into one with the

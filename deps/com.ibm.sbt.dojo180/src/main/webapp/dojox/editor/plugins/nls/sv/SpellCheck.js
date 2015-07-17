@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/sv/SpellCheck", ({
 	widgetLabel: "Batchstavningskontroll",
 	unfound: "Finns inte",
 	skip: "Hoppa över",

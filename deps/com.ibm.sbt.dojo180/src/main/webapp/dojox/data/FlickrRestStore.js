@@ -1,4 +1,4 @@
-define(["dojo/_base/lang", "dojo/_base/declare", "dojo/_base/array", "dojo/io/script", "dojox/data/FlickrStore", "dojo/_base/connect"], 
+define("dojox/data/FlickrRestStore", ["dojo/_base/lang", "dojo/_base/declare", "dojo/_base/array", "dojo/io/script", "dojox/data/FlickrStore", "dojo/_base/connect"], 
   function(lang, declare, array, scriptIO, FlickrStore, connect) {
 
 var FlickrRestStore = declare("dojox.data.FlickrRestStore",

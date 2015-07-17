@@ -1,4 +1,4 @@
-define(["dojo/_base/kernel", "dojo/_base/lang", "dojo/_base/declare", "dojox/data/GoogleSearchStore"], 
+define("dojox/data/GoogleFeedStore", ["dojo/_base/kernel", "dojo/_base/lang", "dojo/_base/declare", "dojox/data/GoogleSearchStore"], 
   function(dojo, lang, declare, GoogleSearchStore) {
 
 dojo.experimental("dojox.data.GoogleFeedStore");

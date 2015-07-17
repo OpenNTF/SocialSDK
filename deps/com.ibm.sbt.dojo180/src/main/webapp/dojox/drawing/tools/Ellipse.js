@@ -1,4 +1,4 @@
-define(["dojo/_base/lang", "../util/oo", "../manager/_registry", "../stencil/Ellipse"],
+define("dojox/drawing/tools/Ellipse", ["dojo/_base/lang", "../util/oo", "../manager/_registry", "../stencil/Ellipse"],
 function(lang, oo, registry, StencilEllipse){
 
 //dojox.drawing.tools.Ellipse = 

@@ -1,4 +1,4 @@
-define({ root:
+define("dojox/editor/plugins/nls/InsertAnchor", { root:
 //begin v1.x content
 ({
 	insertAnchor: "Insert Anchor",

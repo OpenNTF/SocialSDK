@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/ar/currency", //begin v1.x content
 {
 	"BRE_displayName": "كروزايرو برازيلي - 1990-1993",
 	"DEM_displayName": "مارك ألماني",

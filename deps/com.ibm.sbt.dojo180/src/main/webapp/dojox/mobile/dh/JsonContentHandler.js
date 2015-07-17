@@ -1,4 +1,4 @@
-define([
+define("dojox/mobile/dh/JsonContentHandler", [
 	"dojo/_base/kernel",
 	"dojo/_base/array",
 	"dojo/_base/declare",

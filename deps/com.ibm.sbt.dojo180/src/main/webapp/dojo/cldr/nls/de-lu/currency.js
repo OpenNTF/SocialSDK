@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/de-lu/currency", //begin v1.x content
 {
 	"LUF_symbol": "F",
 	"LUF_decimal": ".",

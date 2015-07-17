@@ -1,4 +1,4 @@
-define([
+define("dojox/dtl/tag/date", [
 	"dojo/_base/lang",
 	"../_base",
 	"../utils/date"

@@ -1,4 +1,6 @@
-define([
+require({cache:{
+'url:dijit/templates/ColorPalette.html':"<div class=\"dijitInline dijitColorPalette\" role=\"grid\">\n\t<table dojoAttachPoint=\"paletteTableNode\" class=\"dijitPaletteTable\" cellSpacing=\"0\" cellPadding=\"0\" role=\"presentation\">\n\t\t<tbody data-dojo-attach-point=\"gridNode\"></tbody>\n\t</table>\n</div>\n"}});
+define("dijit/ColorPalette", [
 	"require",		// require.toUrl
 	"dojo/text!./templates/ColorPalette.html",
 	"./_Widget",	// used also to load dijit/hccss for setting has("highcontrast")

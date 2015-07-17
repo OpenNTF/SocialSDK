@@ -1,4 +1,4 @@
-define(["dojo/_base/kernel"], function(dojo) {
+define("dojox/main", ["dojo/_base/kernel"], function(dojo) {
 	// module:
 	//		dojox/main
 

@@ -1,4 +1,4 @@
-define([
+define("dojox/widget/FisheyeLite", [
 	"dojo/_base/kernel",
 	"dojo/_base/declare",
 	"dojo/_base/lang",

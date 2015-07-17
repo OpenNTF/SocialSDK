@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/az/LinkDialog", ({
 	"text" : "Yazı:",
 	"insertImageTitle" : "Şəkil başlığı əlavə et",
 	"set" : "Yönəlt",

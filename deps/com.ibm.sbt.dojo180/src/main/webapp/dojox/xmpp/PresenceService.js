@@ -1,3 +1,5 @@
+// wrapped by build app
+define("dojox/xmpp/PresenceService", ["dijit","dojo","dojox"], function(dijit,dojo,dojox){
 dojo.provide("dojox.xmpp.PresenceService");
 
 dojox.xmpp.presence = {
@@ -303,5 +305,7 @@ dojo.declare("dojox.xmpp.PresenceService", null, {
 	cancelSubscription: function(contact){
 		this._manageSubscriptions(contact, "unsubscribed");
 	}
+
+});
 
 });

@@ -1,4 +1,4 @@
-define({ root:
+define("dojox/widget/nls/ColorPicker", { root:
 //begin v1.x content
 ({
 redLabel: "r",

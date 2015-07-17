@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/hu/AutoSave", ({
 	"saveLabel": "Mentés",
 	"saveSettingLabelOn": "Automatikus mentés időközének beállítása...",
 	"saveSettingLabelOff": "Automatikus mentés kikapcsolása",

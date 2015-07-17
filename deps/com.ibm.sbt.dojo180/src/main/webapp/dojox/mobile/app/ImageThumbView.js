@@ -1,3 +1,5 @@
+// wrapped by build app
+define("dojox/mobile/app/ImageThumbView", ["dijit","dojo","dojox","dojo/require!dijit/_WidgetBase,dojo/string"], function(dijit,dojo,dojox){
 dojo.provide("dojox.mobile.app.ImageThumbView");
 dojo.experimental("dojox.mobile.app.ImageThumbView");
 
@@ -386,4 +388,5 @@ dojo.declare("dojox.mobile.app.ImageThumbView", dijit._WidgetBase, {
 
 		this.inherited(arguments);
 	}
+});
 });

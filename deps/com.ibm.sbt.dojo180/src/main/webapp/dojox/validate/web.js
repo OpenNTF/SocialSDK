@@ -1,4 +1,4 @@
-define(["./_base", "./regexp"], function(validate, xregexp){
+define("dojox/validate/web", ["./_base", "./regexp"], function(validate, xregexp){
 
 validate.isIpAddress = function(value, flags) {
 	// summary:

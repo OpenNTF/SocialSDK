@@ -1,5 +1,5 @@
 define(
-({
+"dojox/grid/enhanced/nls/tr/EnhancedGrid", ({
 	singleSort: "Tekli Sıralama",
 	nestedSort: "İç İçe Sıralama",
 	ascending: "Artan Sırada sıralamak için tıklatın",

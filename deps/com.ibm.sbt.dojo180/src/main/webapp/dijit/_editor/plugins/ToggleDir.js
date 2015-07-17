@@ -1,4 +1,4 @@
-define([
+define("dijit/_editor/plugins/ToggleDir", [
 	"dojo/_base/declare", // declare
 	"dojo/dom-style", // domStyle.getComputedStyle
 	"dojo/_base/kernel", // kernel.experimental

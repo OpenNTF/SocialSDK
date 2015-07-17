@@ -1,4 +1,4 @@
-define([
+define("dojox/widget/PortletSettings", [
 	"dojo/_base/declare",
 	"dojo/_base/lang",
 	"dojo/dom-style",

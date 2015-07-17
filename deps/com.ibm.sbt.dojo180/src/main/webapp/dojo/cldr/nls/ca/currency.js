@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/ca/currency", //begin v1.x content
 {
 	"BRE_displayName": "cruzeiro brasiler (1990-1993)",
 	"DEM_displayName": "marc alemany",

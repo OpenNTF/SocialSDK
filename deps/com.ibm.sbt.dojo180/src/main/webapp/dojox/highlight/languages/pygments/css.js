@@ -1,4 +1,4 @@
-define(["../../_base", "./_html"], function(dh){
+define("dojox/highlight/languages/pygments/css", ["../../_base", "./_html"], function(dh){
 
 	var dhl = dh.languages;
 	dhl.css = {

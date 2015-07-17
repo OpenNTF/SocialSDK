@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/fa-af/gregorian", //begin v1.x content
 {
 	"months-format-abbr": [
 		"جنو",

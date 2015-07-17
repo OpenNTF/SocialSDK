@@ -1,4 +1,4 @@
-define([
+define("dojox/mobile/CarouselItem", [
 	"dojo/_base/declare",
 	"dojo/dom-construct",
 	"dojo/dom-geometry",

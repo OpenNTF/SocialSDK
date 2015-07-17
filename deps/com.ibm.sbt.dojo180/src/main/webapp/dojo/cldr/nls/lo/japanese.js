@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/lo/japanese", //begin v1.x content
 {
 	"eraAbbr": [
 		"ທະອິກະ (645–650)",

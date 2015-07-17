@@ -1,4 +1,4 @@
-define(["dojo/_base/lang", "dojo/_base/declare", "dojo/_base/array", "dojo/data/util/simpleFetch", "dojo/io/script", 
+define("dojox/data/FlickrStore", ["dojo/_base/lang", "dojo/_base/declare", "dojo/_base/array", "dojo/data/util/simpleFetch", "dojo/io/script", 
 		"dojo/_base/connect", "dojo/date/stamp", "dojo/AdapterRegistry"], 
   function(lang, declare, array, simpleFetch, scriptIO, connect, dateStamp, AdapterRegistry) {
 

@@ -1,4 +1,4 @@
-define(["dojo/_base/array", "dojo/dom","dojo/_base/declare", "dojox/gfx", "dojox/gfx3d"],
+define("dojox/charting/Chart3D", ["dojo/_base/array", "dojo/dom","dojo/_base/declare", "dojox/gfx", "dojox/gfx3d"],
 	function(arr, dom, declare, gfx, gfx3d){
 	// module:
 	//		dojox/charting/Chart3D

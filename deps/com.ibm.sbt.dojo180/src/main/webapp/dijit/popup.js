@@ -1,4 +1,4 @@
-define([
+define("dijit/popup", [
 	"dojo/_base/array", // array.forEach array.some
 	"dojo/aspect",
 	"dojo/_base/connect",	// connect._keypress

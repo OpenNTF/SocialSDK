@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/ja/Smiley", ({
 	smiley: "顔文字の挿入",
 	emoticonSmile: "笑顔",
 	emoticonLaughing: "大笑い",

@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/ar/AutoSave", ({
 	"saveLabel": "حفظ",
 	"saveSettingLabelOn": "تحديد الفترة الزمنية للحفظ الآلي...",
 	"saveSettingLabelOff": "ايقاف الحفظ الآلي",

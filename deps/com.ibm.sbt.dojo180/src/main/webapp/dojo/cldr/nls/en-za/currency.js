@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/en-za/currency", //begin v1.x content
 {
 	"ZAR_symbol": "R",
 	"USD_symbol": "US$"

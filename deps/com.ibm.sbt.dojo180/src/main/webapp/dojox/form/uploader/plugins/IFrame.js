@@ -1,4 +1,4 @@
-define([
+define("dojox/form/uploader/plugins/IFrame", [
 	"dojo/dom-construct",
 	"dojo/_base/declare",
 	"dojo/_base/lang",

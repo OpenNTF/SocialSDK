@@ -1,4 +1,4 @@
-define(["dojo/_base/declare"], 
+define("dojox/data/XmlItem", ["dojo/_base/declare"], 
   function(declare) {
 
 return declare("dojox.data.XmlItem", null, {

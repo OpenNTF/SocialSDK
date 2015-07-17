@@ -1,4 +1,4 @@
-define(["dojo/_base/declare", "./ScaleIndicatorBase", "./_circularUtils", "dojo/_base/event"],
+define("dojox/dgauges/CircularRangeIndicator", ["dojo/_base/declare", "./ScaleIndicatorBase", "./_circularUtils", "dojo/_base/event"],
 	function(declare, ScaleIndicatorBase, _circularUtils, eventUtil){
 	return declare("dojox.dgauges.CircularRangeIndicator", ScaleIndicatorBase, {
 		// summary:

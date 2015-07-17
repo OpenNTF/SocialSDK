@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/ru/commands", ({
 	'bold': 'Полужирный',
 	'copy': 'Копировать',
 	'cut': 'Вырезать',

@@ -1,4 +1,4 @@
-define([
+define("dojox/mvc/_atBindingMixin", [
 	"dojo/_base/array",
 	"dojo/_base/lang",
 	"dojo/_base/declare",

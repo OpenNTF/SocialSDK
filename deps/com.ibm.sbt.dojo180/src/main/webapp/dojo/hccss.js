@@ -1,4 +1,4 @@
-define([
+define("dojo/hccss", [
 	"require",			// require.toUrl
 	"./_base/config", // config.blankGif
 	"./dom-class", // domClass.add

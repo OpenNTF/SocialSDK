@@ -1,4 +1,4 @@
-define(["dojo/_base/kernel", "dojo/_base/lang", "dojo/_base/declare", "dojo/_base/html", "dojo/_base/connect",
+define("dojox/charting/DataChart", ["dojo/_base/kernel", "dojo/_base/lang", "dojo/_base/declare", "dojo/_base/html", "dojo/_base/connect",
 	 "dojo/_base/array", "./Chart2D", "./themes/PlotKit/blue", "dojo/dom"], 
 	 function(kernel, lang, declare, html, hub, arr, Chart, blue, dom){
 	// FIXME: This module drags in all Charting modules because of the Chart2D dependency...it is VERY heavy

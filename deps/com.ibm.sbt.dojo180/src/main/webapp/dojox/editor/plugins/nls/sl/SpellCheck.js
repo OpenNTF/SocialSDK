@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/sl/SpellCheck", ({
 	widgetLabel: "Paketno preverjanje črkovanja ",
 	unfound: "Ni najdeno ",
 	skip: "Preskoči",

@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/kea/currency", //begin v1.x content
 {
 	"TND_displayName": "Dinar tunizianu",
 	"EUR_symbol": "€",

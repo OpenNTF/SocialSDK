@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/sv/number", //begin v1.x content
 {
 	"scientificFormat": "#E0",
 	"currencyDecimal": ":",

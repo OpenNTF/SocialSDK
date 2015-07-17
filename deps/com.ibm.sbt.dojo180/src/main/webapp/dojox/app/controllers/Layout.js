@@ -1,4 +1,4 @@
-define(["dojo/_base/lang", "dojo/_base/declare", "dojo/sniff", "dojo/on", "dojo/_base/window", "dojo/_base/array", "dojo/_base/config",
+define("dojox/app/controllers/Layout", ["dojo/_base/lang", "dojo/_base/declare", "dojo/sniff", "dojo/on", "dojo/_base/window", "dojo/_base/array", "dojo/_base/config",
 	"dojo/topic", "dojo/query", "dojo/dom-style", "dojo/dom-attr", "dojo/dom-geometry", "dijit/registry", "../Controller", "../layout/utils"],
 function(lang, declare, has, on, win, array, config, topic, query, domStyle, domAttr, domGeom, registry, Controller, layoutUtils){
 	// module:

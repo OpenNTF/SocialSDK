@@ -1,4 +1,4 @@
-define([
+define("dijit/BackgroundIframe", [
 	"require",			// require.toUrl
 	"./main",	// to export dijit.BackgroundIframe
 	"dojo/_base/config",

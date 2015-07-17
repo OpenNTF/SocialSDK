@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/en-ph/currency", //begin v1.x content
 {
 	"PHP_symbol": "₱",
 	"PHP_displayName": "Peso",

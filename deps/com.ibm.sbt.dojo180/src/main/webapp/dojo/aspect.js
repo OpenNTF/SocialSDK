@@ -1,4 +1,4 @@
-define([], function(){
+define("dojo/aspect", [], function(){
 
 	// module:
 	//		dojo/aspect

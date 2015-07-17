@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/sv/commands", ({
 	'bold': 'Halvfet',
 	'copy': 'Kopiera',
 	'cut': 'Klipp ut',

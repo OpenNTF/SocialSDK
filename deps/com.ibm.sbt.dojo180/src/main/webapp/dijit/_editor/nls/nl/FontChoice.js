@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/nl/FontChoice", ({
 	fontSize: "Grootte",
 	fontName: "Lettertype",
 	formatBlock: "Opmaak",

@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/be/currency", //begin v1.x content
 {
 	"NOK_displayName": "нарвэская крона",
 	"BYR_displayName": "беларускі рубель",

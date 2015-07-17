@@ -1,4 +1,4 @@
-define([
+define("dojo/promise/all", [
 	"../_base/array",
 	"../Deferred",
 	"../when"

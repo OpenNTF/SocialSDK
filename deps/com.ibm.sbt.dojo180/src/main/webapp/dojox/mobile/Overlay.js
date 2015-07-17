@@ -1,4 +1,4 @@
-define([
+define("dojox/mobile/Overlay", [
 	"dojo/_base/declare",
 	"dojo/_base/lang",
 	"dojo/_base/sniff",

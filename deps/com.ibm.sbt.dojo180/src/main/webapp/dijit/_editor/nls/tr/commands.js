@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/tr/commands", ({
 	'bold': 'Kalın',
 	'copy': 'Kopyala',
 	'cut': 'Kes',

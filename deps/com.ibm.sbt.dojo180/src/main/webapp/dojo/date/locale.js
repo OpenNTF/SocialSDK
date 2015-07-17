@@ -1,4 +1,4 @@
-define([
+define("dojo/date/locale", [
 	"../_base/lang",
 	"../_base/array",
 	"../date",

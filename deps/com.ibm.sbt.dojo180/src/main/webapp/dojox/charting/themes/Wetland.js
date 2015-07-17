@@ -1,4 +1,4 @@
-define(["../SimpleTheme", "./common"], function(SimpleTheme, themes){
+define("dojox/charting/themes/Wetland", ["../SimpleTheme", "./common"], function(SimpleTheme, themes){
 	themes.Wetland = new SimpleTheme({
 		colors: [
 			"#bfbc64",

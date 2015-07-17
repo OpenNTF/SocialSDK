@@ -1,4 +1,4 @@
-define([
+define("dojox/calendar/CalendarBase", [
 "dojo/_base/declare", 
 "dojo/_base/sniff", 
 "dojo/_base/event", 

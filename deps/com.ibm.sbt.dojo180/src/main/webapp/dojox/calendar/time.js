@@ -1,4 +1,4 @@
-define(["dojo/_base/lang", "dojo/date", "dojo/cldr/supplemental", "dojo/date/stamp"], function(lang, date, cldr, stamp) {
+define("dojox/calendar/time", ["dojo/_base/lang", "dojo/date", "dojo/cldr/supplemental", "dojo/date/stamp"], function(lang, date, cldr, stamp) {
 
 // summary: Advanced date manipulation utilities.
 

@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/ewo/currency", //begin v1.x content
 {
 	"USD_displayName": "Dolár yá amɛ́rəkə",
 	"TZS_displayName": "Silíŋ yá Tanazaní",

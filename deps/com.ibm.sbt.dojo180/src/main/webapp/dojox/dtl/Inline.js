@@ -1,4 +1,4 @@
-define([
+define("dojox/dtl/Inline", [
 	"dojo/_base/lang",
 	"./_base",
 	"dijit/_WidgetBase",

@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/bg/FontChoice", ({
 	fontSize: "Размер",
 	fontName: "Шрифт",
 	formatBlock: "Формат",

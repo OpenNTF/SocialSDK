@@ -1,4 +1,4 @@
-define([
+define("dojox/mobile/ScreenSizeAware", [
 	"dojo/_base/kernel",
 	"dojo/_base/array",
 	"dojo/_base/config",

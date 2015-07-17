@@ -1,4 +1,4 @@
-define(["./dom-geometry", "./_base/lang", "./ready", "./sniff", "./_base/window"],
+define("dojo/uacss", ["./dom-geometry", "./_base/lang", "./ready", "./sniff", "./_base/window"],
 	function(geometry, lang, ready, has, baseWindow){
 
 	// module:

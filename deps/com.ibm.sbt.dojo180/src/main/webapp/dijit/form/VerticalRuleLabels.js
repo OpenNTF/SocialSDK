@@ -1,4 +1,4 @@
-define([
+define("dijit/form/VerticalRuleLabels", [
 	"dojo/_base/declare", // declare
 	"./HorizontalRuleLabels"
 ], function(declare, HorizontalRuleLabels){

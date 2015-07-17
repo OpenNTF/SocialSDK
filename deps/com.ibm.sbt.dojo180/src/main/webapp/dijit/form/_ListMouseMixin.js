@@ -1,4 +1,4 @@
-define([
+define("dijit/form/_ListMouseMixin", [
 	"dojo/_base/declare", // declare
 	"dojo/mouse",
 	"dojo/on",

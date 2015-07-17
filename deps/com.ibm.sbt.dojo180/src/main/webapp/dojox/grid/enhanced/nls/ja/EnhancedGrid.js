@@ -1,5 +1,5 @@
 define(
-({
+"dojox/grid/enhanced/nls/ja/EnhancedGrid", ({
 	singleSort: "単一ソート",
 	nestedSort: "入れ子ソート",
 	ascending: "クリックすると昇順でソート",

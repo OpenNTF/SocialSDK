@@ -1,4 +1,4 @@
-define([
+define("dojox/data/OpenSearchStore", [
 	"dojo/_base/kernel", // dojo.experimental
 	"dojo/_base/lang", // dojo.extend
 	"dojo/_base/declare", // declare

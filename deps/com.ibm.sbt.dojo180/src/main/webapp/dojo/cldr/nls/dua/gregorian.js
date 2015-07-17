@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/dua/gregorian", //begin v1.x content
 {
 	"dateFormatItem-yM": "M/y",
 	"field-dayperiod": "epasi a búnyá",

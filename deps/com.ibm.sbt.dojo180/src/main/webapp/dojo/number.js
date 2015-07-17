@@ -1,4 +1,4 @@
-define([/*===== "./_base/declare", =====*/ "./_base/lang", "./i18n", "./i18n!./cldr/nls/number", "./string", "./regexp"],
+define("dojo/number", [/*===== "./_base/declare", =====*/ "./_base/lang", "./i18n", "./i18n!./cldr/nls/number", "./string", "./regexp"],
 	function(/*===== declare, =====*/ lang, i18n, nlsNumber, dstring, dregexp){
 
 // module:

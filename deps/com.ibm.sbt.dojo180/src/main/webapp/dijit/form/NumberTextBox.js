@@ -1,4 +1,4 @@
-define([
+define("dijit/form/NumberTextBox", [
 	"dojo/_base/declare", // declare
 	"dojo/_base/lang", // lang.hitch lang.mixin
 	"dojo/number", // number._realNumberRegexp number.format number.parse number.regexp

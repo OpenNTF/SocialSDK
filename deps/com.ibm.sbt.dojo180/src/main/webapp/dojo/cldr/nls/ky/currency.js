@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/ky/currency", //begin v1.x content
 {
 	"KGS_symbol": "сом"
 }

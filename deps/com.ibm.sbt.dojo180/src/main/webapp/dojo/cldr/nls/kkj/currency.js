@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/kkj/currency", //begin v1.x content
 {
 	"XAF_symbol": "FCFA",
 	"XAF_displayName": "Franc CFA"

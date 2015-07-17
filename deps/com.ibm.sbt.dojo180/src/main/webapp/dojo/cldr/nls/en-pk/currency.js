@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/en-pk/currency", //begin v1.x content
 {
 	"INR_symbol": "INRs",
 	"PKR_symbol": "₨"

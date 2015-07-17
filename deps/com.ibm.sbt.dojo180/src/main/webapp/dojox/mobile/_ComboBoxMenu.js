@@ -1,4 +1,4 @@
-define([
+define("dojox/mobile/_ComboBoxMenu", [
 	"dojo/_base/kernel",
 	"dojo/_base/declare",
 	"dojo/dom-class",

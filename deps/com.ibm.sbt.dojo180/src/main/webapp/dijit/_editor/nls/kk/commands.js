@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/kk/commands", ({
 	'bold': 'Қалың',
 	'copy': 'Көшіру',
 	'cut': 'Қиып алу',

@@ -1,4 +1,4 @@
-define([
+define("dojox/mobile/SimpleDialog", [
 	"dojo/_base/declare",
 	"dojo/_base/window",
 	"dojo/dom-class",

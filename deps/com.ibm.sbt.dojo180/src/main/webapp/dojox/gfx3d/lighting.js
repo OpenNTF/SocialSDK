@@ -1,4 +1,4 @@
-define([
+define("dojox/gfx3d/lighting", [
 	"dojo/_base/lang",
 	"dojo/_base/Color",	// dojo.Color
 	"dojo/_base/declare",	// declare

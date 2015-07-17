@@ -1,4 +1,4 @@
-define([
+define("dojox/mobile/dh/HtmlScriptContentHandler", [
 	"dojo/_base/declare",
 	"./HtmlContentHandler",
 	"../_ExecScriptMixin"

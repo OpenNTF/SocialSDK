@@ -1,4 +1,4 @@
-define([
+define("dojox/geo/openlayers/JsonImport", [
 	"dojo/_base/declare",
 	"dojo/_base/xhr",
 	"dojo/_base/lang",

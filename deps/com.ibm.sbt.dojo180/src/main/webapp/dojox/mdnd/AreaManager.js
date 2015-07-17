@@ -1,4 +1,4 @@
-define(["dojo/_base/kernel",
+define("dojox/mdnd/AreaManager", ["dojo/_base/kernel",
 	"dojo/_base/declare",
 	"dojo/_base/connect",
 	"dojo/_base/window",

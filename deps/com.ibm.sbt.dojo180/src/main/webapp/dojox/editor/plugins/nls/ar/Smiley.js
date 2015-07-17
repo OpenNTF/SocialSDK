@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/ar/Smiley", ({
 	smiley: "ادراج شكل متحرك",
 	emoticonSmile: "ابتسامة",
 	emoticonLaughing: "ضاحك",

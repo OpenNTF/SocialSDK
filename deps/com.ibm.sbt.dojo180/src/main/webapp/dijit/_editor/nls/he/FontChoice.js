@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/he/FontChoice", ({
 	fontSize: "גודל",
 	fontName: "גופן",
 	formatBlock: "עיצוב",

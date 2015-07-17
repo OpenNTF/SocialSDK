@@ -1,4 +1,4 @@
-define([
+define("dojox/gfx/svgext", [
 	"./_base",
 	"./svg"], 
 	function(g, svg){

@@ -1,4 +1,4 @@
-define([
+define("dojox/widget/DialogSimple", [
 	"dojo/_base/declare", "dijit/Dialog", "dojox/layout/ContentPane"
 ], function(declare, Dialog, ContentPane){
 

@@ -1,3 +1,5 @@
+// wrapped by build app
+define("dojox/mobile/app/AlertDialog", ["dijit","dojo","dojox","dojo/require!dijit/_WidgetBase"], function(dijit,dojo,dojox){
 dojo.provide("dojox.mobile.app.AlertDialog");
 dojo.experimental("dojox.mobile.app.AlertDialog");
 dojo.require("dijit._WidgetBase");
@@ -179,4 +181,5 @@ dojo.declare("dojox.mobile.app.AlertDialog", dijit._WidgetBase, {
 	onClick: function(){
 
 	}
+});
 });

@@ -1,4 +1,4 @@
-define(["dojo/_base/lang"], function(lang) {
+define("dojox/encoding/easy64", ["dojo/_base/lang"], function(lang) {
 	var easy64 = lang.getObject("dojox.encoding.easy64", true);
 	var c = function(input, length, result){
 		for(var i = 0; i < length; i += 3){

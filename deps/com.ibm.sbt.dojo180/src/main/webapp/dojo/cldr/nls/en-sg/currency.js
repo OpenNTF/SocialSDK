@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/en-sg/currency", //begin v1.x content
 {
 	"SGD_symbol": "$",
 	"USD_symbol": "US$"

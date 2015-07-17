@@ -1,4 +1,4 @@
-define(["../../_base", "../xml"], function(dh){
+define("dojox/highlight/languages/pygments/xml", ["../../_base", "../xml"], function(dh){
 
 	var dxml = dh.languages.xml = {
 		defaultMode: {

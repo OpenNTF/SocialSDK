@@ -1,5 +1,5 @@
 define(
-({
+"dojox/grid/enhanced/nls/zh/EnhancedGrid", ({
 	singleSort: "单一排序",
 	nestedSort: "嵌套排序",
 	ascending: "单击以按升序排序",

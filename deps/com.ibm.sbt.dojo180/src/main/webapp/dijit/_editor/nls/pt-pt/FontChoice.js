@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/pt-pt/FontChoice", ({
 	fontSize: "Tamanho",
 	fontName: "Tipo de letra",
 	formatBlock: "Formato",

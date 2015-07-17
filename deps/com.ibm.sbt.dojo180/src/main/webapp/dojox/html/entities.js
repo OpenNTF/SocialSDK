@@ -1,4 +1,4 @@
-define(["dojo/_base/lang"], function(lang) {
+define("dojox/html/entities", ["dojo/_base/lang"], function(lang) {
 	// dojox.html.entities.html [public] Array
 	//		Entity characters for HTML, represented as an array of
 	//		character code, entity name (minus & and ; wrapping.

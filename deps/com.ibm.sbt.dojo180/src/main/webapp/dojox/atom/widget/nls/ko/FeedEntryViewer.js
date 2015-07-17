@@ -1,5 +1,5 @@
 define(
-({
+"dojox/atom/widget/nls/ko/FeedEntryViewer", ({
 	displayOptions: "[옵션 표시]",
 	title: "제목",
 	authors: "작성자",

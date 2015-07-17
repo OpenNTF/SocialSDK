@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/th/TableDialog", ({
 	insertTableTitle: "แทรกตาราง",
 	modifyTableTitle: "แก้ไขตาราง",
 	rows: "แถว:",

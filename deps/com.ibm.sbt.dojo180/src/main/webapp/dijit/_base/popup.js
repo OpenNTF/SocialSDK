@@ -1,4 +1,4 @@
-define([
+define("dijit/_base/popup", [
 	"dojo/dom-class", // domClass.contains
 	"dojo/_base/window",
 	"../popup",

@@ -1,4 +1,4 @@
-define(["dojo/_base/lang","./matrix","./vector"], 
+define("dojox/gfx3d/gradient", ["dojo/_base/lang","./matrix","./vector"], 
 	function(lang,m,v){
 
 	var gfx3d = lang.getObject("dojox.gfx3d",true);

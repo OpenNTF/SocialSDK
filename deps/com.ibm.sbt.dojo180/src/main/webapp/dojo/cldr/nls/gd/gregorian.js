@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/gd/gregorian", //begin v1.x content
 {
 	"field-day-relative+-1": "An-dè",
 	"field-day-relative+0": "An-diugh",

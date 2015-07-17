@@ -1,5 +1,5 @@
 define(
-({
+"dojox/grid/enhanced/nls/fr/EnhancedGrid", ({
 	singleSort: "Tri simple",
 	nestedSort: "Tri imbriqué",
 	ascending: "Cliquer pour trier par ordre croissant",

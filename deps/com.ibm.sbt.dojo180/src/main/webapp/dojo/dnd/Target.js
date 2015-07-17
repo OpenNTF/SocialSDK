@@ -1,4 +1,4 @@
-define([ "../_base/declare", "../dom-class", "./Source" ], function(declare, domClass, Source){
+define("dojo/dnd/Target", [ "../_base/declare", "../dom-class", "./Source" ], function(declare, domClass, Source){
 	return declare("dojo.dnd.Target", Source, {
 		// summary:
 		//		a Target object, which can be used as a DnD target

@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/ti/currency", //begin v1.x content
 {
 	"RUB_displayName": "የራሻ ሩብል",
 	"ETB_symbol": "Br",

@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/zh/islamic", //begin v1.x content
 {
 	"dateFormatItem-yM": "y年M月",
 	"dateFormatItem-yQ": "y年第Q季度",

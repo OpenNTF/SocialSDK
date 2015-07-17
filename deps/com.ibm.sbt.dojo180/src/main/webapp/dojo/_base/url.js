@@ -1,4 +1,4 @@
-define(["./kernel"], function(dojo){
+define("dojo/_base/url", ["./kernel"], function(dojo){
 	// module:
 	//		dojo/url
 

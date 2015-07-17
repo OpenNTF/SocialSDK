@@ -1,4 +1,4 @@
-define(["dojo/_base/lang", "./_base"], function(lang, validate){
+define("dojox/validate/creditCard", ["dojo/_base/lang", "./_base"], function(lang, validate){
 
 /*=====
 	return {

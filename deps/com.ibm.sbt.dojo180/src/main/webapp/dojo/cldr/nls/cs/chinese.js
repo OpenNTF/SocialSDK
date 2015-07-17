@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/cs/chinese", //begin v1.x content
 {
 	"dateFormat-short": "d. M. y",
 	"dateFormat-medium": "d. M. y",

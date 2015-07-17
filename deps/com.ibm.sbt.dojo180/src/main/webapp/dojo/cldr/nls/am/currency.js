@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/am/currency", //begin v1.x content
 {
 	"KHR_displayName": "የካምቦዲያ ሬል",
 	"FJD_displayName": "የፊጂ ዶላር",

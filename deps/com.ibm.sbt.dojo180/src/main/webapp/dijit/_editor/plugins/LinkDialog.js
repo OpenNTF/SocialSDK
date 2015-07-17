@@ -1,4 +1,4 @@
-define([
+define("dijit/_editor/plugins/LinkDialog", [
 	"require",
 	"dojo/_base/declare", // declare
 	"dojo/dom-attr", // domAttr.get

@@ -1,4 +1,4 @@
-define([
+define("dojox/mobile/dh/SuffixFileTypeMap", [
 	"dojo/_base/lang"
 ], function(lang){
 

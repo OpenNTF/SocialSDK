@@ -1,4 +1,4 @@
-define({
+define("dojox/drawing/library/icons", {
 	// summary:
 	//		A collection of icon Stencils for use with the buttons in the ui/Toolbar.
 	// description:

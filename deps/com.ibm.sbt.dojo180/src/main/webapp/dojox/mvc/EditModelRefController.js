@@ -1,4 +1,4 @@
-define([
+define("dojox/mvc/EditModelRefController", [
 	"dojo/_base/declare",
 	"dojo/_base/lang",
 	"./getPlainValue",

@@ -120,7 +120,7 @@ bookmarkable
 
 */
 
-define([
+define("dojox/mobile/migrationAssist", [
 	"dojo/_base/declare",
 	"dojo/_base/lang",
 	"dojo/_base/window",

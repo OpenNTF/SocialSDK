@@ -1,4 +1,4 @@
-define([
+define("dijit/_editor/range", [
 	"dojo/_base/array", // array.every
 	"dojo/_base/declare", // declare
 	"dojo/_base/lang", // lang.isArray

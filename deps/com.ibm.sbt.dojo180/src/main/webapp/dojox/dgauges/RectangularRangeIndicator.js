@@ -1,4 +1,4 @@
-define(["dojo/_base/declare", "dojox/gfx", "./ScaleIndicatorBase", "dojo/_base/event", "dojo/dom-geometry"],
+define("dojox/dgauges/RectangularRangeIndicator", ["dojo/_base/declare", "dojox/gfx", "./ScaleIndicatorBase", "dojo/_base/event", "dojo/dom-geometry"],
 	function(declare, gfx, ScaleIndicatorBase, eventUtil, domGeom){
 	return declare("dojox.dgauges.RectangularRangeIndicator", ScaleIndicatorBase, {
 		// summary:

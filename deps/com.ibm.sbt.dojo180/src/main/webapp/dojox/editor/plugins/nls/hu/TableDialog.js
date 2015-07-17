@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/hu/TableDialog", ({
 	insertTableTitle: "Táblázat beszúrása",
 	modifyTableTitle: "Táblázat módosítása",
 	rows: "Sorok:",

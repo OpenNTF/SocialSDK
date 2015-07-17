@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/aa-er/currency", //begin v1.x content
 {
 	"ERN_symbol": "Nfk"
 }

@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/vo/gregorian", //begin v1.x content
 {
 	"field-month-relative+0": "amulo",
 	"field-year-relative+0": "ayelo",

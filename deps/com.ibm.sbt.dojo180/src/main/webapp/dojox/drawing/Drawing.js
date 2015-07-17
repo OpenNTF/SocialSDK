@@ -1,4 +1,4 @@
-define(["dojo", "./defaults", "./manager/_registry", "./manager/keys", "./manager/Mouse",
+define("dojox/drawing/Drawing", ["dojo", "./defaults", "./manager/_registry", "./manager/keys", "./manager/Mouse",
 "./manager/Canvas","./manager/Undo","./manager/Anchors","./manager/Stencil","./manager/StencilUI",
   "./util/common"], 
 function(dojo, defaults, registry, keys, Mouse, Canvas, Undo, Anchors, Stencil, StencilUI, utilCommon){

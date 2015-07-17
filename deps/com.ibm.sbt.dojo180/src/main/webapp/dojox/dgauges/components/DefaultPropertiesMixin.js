@@ -1,4 +1,4 @@
-define(["dojo/_base/declare", "dojo/_base/Color"], function(declare, Color){
+define("dojox/dgauges/components/DefaultPropertiesMixin", ["dojo/_base/declare", "dojo/_base/Color"], function(declare, Color){
 	return declare("dojox.dgauges.components.DefaultPropertiesMixin", null, {
 		// summary:
 		//		This class defines default properties of predefined gauges.

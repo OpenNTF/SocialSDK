@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/ro/SpellCheck", ({
 	widgetLabel: "Verificare ortografică batch",
 	unfound: "Nu a fost găsit",
 	skip: "Salt peste",

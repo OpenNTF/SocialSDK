@@ -1,4 +1,4 @@
-define([
+define("dojox/mobile/dh/UrlDataSource", [
 	"dojo/_base/declare",
 	"dojo/_base/lang",
 	"dojo/_base/xhr"

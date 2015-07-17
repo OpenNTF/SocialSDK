@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/fi/SpellCheck", ({
 	widgetLabel: "Eräoikoluku",
 	unfound: "Ei löydy",
 	skip: "Ohita",

@@ -1,4 +1,4 @@
-define([
+define("dojox/mobile/SpinWheel", [
 	"dojo/_base/declare",
 	"dojo/dom-construct",
 	"./_PickerBase",

@@ -1,4 +1,4 @@
-define(["dojo/_base/array","dojo/dom-style","dojo/DeferredList","./transition"],
+define("dojox/css3/transit", ["dojo/_base/array","dojo/dom-style","dojo/DeferredList","./transition"],
 	function(darray, domStyle, DeferredList, transition){
 	// module: 
 	//		dojox/css3/transit

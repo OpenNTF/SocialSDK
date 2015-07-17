@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/th/SpellCheck", ({
 	widgetLabel: "ตรวจสอบการสะกดคำแบบแบตช์",
 	unfound: "ไม่พบ",
 	skip: "ข้าม",

@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/th/currency", //begin v1.x content
 {
 	"BRE_displayName": "ครูเซโรบราซิล (1990-1993)",
 	"DEM_displayName": "มาร์กเยอรมัน",

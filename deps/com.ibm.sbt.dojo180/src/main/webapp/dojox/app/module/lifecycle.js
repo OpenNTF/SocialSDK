@@ -1,4 +1,4 @@
-define(["dojo/_base/declare", "dojo/topic"], function(declare, topic){
+define("dojox/app/module/lifecycle", ["dojo/_base/declare", "dojo/topic"], function(declare, topic){
     return declare(null, {
     
         lifecycle: {

@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/zh-hant/chinese", //begin v1.x content
 {
 	"dateFormatItem-yMd": "U年M月d日",
 	"dateFormat-medium": "U年MMMd日",

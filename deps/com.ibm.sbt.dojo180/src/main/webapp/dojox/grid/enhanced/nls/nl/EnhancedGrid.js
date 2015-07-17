@@ -1,5 +1,5 @@
 define(
-({
+"dojox/grid/enhanced/nls/nl/EnhancedGrid", ({
 	singleSort: "Enkelvoudig sorteren",
 	nestedSort: "Genest sorteren",
 	ascending: "Klik hier voor oplopend sorteren",

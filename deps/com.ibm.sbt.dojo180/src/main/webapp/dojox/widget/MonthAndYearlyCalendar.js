@@ -1,4 +1,4 @@
-define([
+define("dojox/widget/MonthAndYearlyCalendar", [
 	"dojo/_base/declare",
 	"./_CalendarBase",
 	"./_CalendarMonthYear"

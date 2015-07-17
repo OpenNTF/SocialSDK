@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/fi/commands", ({
 	'bold': 'Lihavointi',
 	'copy': 'Kopioi',
 	'cut': 'Leikkaa',

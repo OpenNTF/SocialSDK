@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/ko/currency", //begin v1.x content
 {
 	"KHR_displayName": "캄보디아 리얄",
 	"FJD_displayName": "피지 달러",

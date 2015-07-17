@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/it/SpellCheck", ({
 	widgetLabel: "Controllo ortografico batch",
 	unfound: "Non trovato",
 	skip: "Ignora",

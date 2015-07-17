@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/el/FontChoice", ({
 	fontSize: "Μέγεθος",
 	fontName: "Γραμματοσειρά",
 	formatBlock: "Μορφή",

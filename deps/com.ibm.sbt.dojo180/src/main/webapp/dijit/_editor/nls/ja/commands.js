@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/ja/commands", ({
 	'bold': '太字',
 	'copy': 'コピー',
 	'cut': '切り取り',

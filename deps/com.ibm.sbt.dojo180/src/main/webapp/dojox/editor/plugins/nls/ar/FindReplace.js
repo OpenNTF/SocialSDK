@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/ar/FindReplace", ({
 	"findLabel": "ايجاد:",
 	"findTooltip": "ادخال نص لايجاد",
 	"replaceLabel": "استبدال بالآتي:",

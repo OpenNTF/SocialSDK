@@ -1,4 +1,4 @@
-define(["dojo/_base/kernel",
+define("dojox/widget/Standby", ["dojo/_base/kernel",
 	"dojo/_base/declare",
 	"dojo/_base/array",
 	"dojo/_base/event",

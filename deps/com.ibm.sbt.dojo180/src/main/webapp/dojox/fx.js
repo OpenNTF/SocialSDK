@@ -1,4 +1,4 @@
-define(["./fx/_base"], function(DojoxFx){
+define("dojox/fx", ["./fx/_base"], function(DojoxFx){
 	/*=====
 	 return {
 	 // summary:

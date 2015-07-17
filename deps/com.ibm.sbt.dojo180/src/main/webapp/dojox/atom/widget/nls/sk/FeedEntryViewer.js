@@ -1,5 +1,5 @@
 define(
-({
+"dojox/atom/widget/nls/sk/FeedEntryViewer", ({
 	displayOptions: "[voľby zobrazenia]",
 	title: "Nadpis",
 	authors: "Autori",

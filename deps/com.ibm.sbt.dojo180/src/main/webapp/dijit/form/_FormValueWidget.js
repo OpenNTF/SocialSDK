@@ -1,4 +1,4 @@
-define([
+define("dijit/form/_FormValueWidget", [
 	"dojo/_base/declare", // declare
 	"dojo/sniff", // has("ie")
 	"./_FormWidget",

@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/bo/gregorian", //begin v1.x content
 {
 	"dateFormat-medium": "y ལོ་འི་MMMཙེས་d",
 	"field-second": "སྐར་ཆ།",

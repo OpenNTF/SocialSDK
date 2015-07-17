@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/bn-in/currency", //begin v1.x content
 {
 	"CUC_displayName": "কিউবান রূপান্তরযোগ্য পেসো",
 	"CRC_displayName": "কোস্টা রিকা কোলোন",

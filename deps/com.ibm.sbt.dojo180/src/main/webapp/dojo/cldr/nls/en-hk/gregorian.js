@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/en-hk/gregorian", //begin v1.x content
 {
 	"dateFormatItem-yMMMEd": "E, d MMM, y",
 	"field-year-relative+0": "This Year",

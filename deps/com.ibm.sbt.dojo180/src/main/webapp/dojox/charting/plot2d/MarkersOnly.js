@@ -1,4 +1,4 @@
-define(["dojo/_base/declare", "./Default"], function(declare, Default){
+define("dojox/charting/plot2d/MarkersOnly", ["dojo/_base/declare", "./Default"], function(declare, Default){
 
 	return declare("dojox.charting.plot2d.MarkersOnly", Default, {
 		// summary:

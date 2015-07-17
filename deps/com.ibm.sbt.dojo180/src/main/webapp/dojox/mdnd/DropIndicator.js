@@ -1,4 +1,4 @@
-define(["dojo/_base/kernel",
+define("dojox/mdnd/DropIndicator", ["dojo/_base/kernel",
 	"dojo/_base/declare",
 	"dojo/dom-class",
 	"dojo/dom-construct",

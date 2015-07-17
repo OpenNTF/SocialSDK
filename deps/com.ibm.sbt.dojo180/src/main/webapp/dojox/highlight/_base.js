@@ -1,4 +1,4 @@
-define([
+define("dojox/highlight/_base", [
 	"dojo/_base/lang", 
 	"dojo/_base/array", 
 	"dojo/dom", 

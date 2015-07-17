@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/ne/currency", //begin v1.x content
 {
 	"KHR_displayName": "कम्बोडिनेयाली रियल",
 	"FJD_displayName": "फिजीयाली डलर",

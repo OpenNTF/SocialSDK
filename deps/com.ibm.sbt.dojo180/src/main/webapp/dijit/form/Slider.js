@@ -1,4 +1,4 @@
-define([
+define("dijit/form/Slider", [
 	"dojo/_base/kernel", // kernel.deprecated
 	"./HorizontalSlider",
 	"./VerticalSlider",

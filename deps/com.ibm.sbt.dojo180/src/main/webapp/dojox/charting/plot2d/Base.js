@@ -1,4 +1,4 @@
-define(["dojo/_base/declare",
+define("dojox/charting/plot2d/Base", ["dojo/_base/declare",
 		"../Element", "dojo/_base/array",
 	    "./common"],
 	function(declare, Element, arr,  common){

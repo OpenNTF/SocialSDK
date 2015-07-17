@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/ca/FontChoice", ({
 	fontSize: "Mida",
 	fontName: "Tipus de lletra",
 	formatBlock: "Format",

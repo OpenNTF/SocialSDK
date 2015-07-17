@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/sr-latn/currency", //begin v1.x content
 {
 	"KHR_displayName": "Kambodžijski riel (KHR)",
 	"FJD_displayName": "Fidži dolar",

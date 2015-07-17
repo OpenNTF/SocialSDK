@@ -1,5 +1,5 @@
 define(
-({
+"dojox/grid/enhanced/nls/ro/EnhancedGrid", ({
 	singleSort: "Sortare singură",
 	nestedSort: "Sortare imbricată",
 	ascending: "Faceţi clic pentru a sorta Crescător",

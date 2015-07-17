@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/fa-af/currency", //begin v1.x content
 {
 	"NLG_displayName": "گیلدر هالند",
 	"NOK_displayName": "کرون ناروی",

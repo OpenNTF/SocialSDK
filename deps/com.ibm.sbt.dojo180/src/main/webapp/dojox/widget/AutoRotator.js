@@ -1,4 +1,4 @@
-define([
+define("dojox/widget/AutoRotator", [
 	"dojo/_base/declare",
 	"dojo/_base/array",
 	"dojo/_base/lang",

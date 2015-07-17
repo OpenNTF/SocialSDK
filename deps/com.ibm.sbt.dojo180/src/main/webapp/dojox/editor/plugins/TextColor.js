@@ -1,4 +1,4 @@
-define([
+define("dojox/editor/plugins/TextColor", [
 	"dojo",
 	"dijit",
 	"dojox",

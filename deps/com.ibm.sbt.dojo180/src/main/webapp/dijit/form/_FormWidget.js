@@ -1,4 +1,4 @@
-define([
+define("dijit/form/_FormWidget", [
 	"dojo/_base/declare",	// declare
 	"dojo/has",				// has("dijit-legacy-requires")
 	"dojo/_base/kernel",	// kernel.deprecated

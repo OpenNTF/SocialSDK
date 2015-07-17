@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/bm/currency", //begin v1.x content
 {
 	"USD_displayName": "ameriki Dolar",
 	"TZS_displayName": "tanzani Siling",

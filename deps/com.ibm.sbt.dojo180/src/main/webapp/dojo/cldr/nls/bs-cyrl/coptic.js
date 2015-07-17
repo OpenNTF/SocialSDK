@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/bs-cyrl/coptic", //begin v1.x content
 {
 	"months-format-wide": [
 		"Таут",

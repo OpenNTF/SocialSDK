@@ -1,4 +1,4 @@
-define(['./create', './RequestError'], function(create, RequestError){
+define("dojo/errors/RequestTimeoutError", ['./create', './RequestError'], function(create, RequestError){
 	// module:
 	//		dojo/errors/RequestTimeoutError
 

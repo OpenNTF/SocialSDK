@@ -1,4 +1,4 @@
-define([
+define("dijit/form/FilteringSelect", [
 	"dojo/data/util/filter", // filter.patternToRegExp
 	"dojo/_base/declare", // declare
 	"dojo/_base/lang", // lang.mixin

@@ -1,4 +1,4 @@
-define(["../SimpleTheme", "./common"], function(SimpleTheme, themes){
+define("dojox/charting/themes/Ireland", ["../SimpleTheme", "./common"], function(SimpleTheme, themes){
 	themes.Ireland = new SimpleTheme({
 		colors: [
 			"#abdbcb",

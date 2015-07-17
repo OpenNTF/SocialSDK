@@ -1,4 +1,4 @@
-define(["../_base"], function(dh){
+define("dojox/highlight/languages/sql", ["../_base"], function(dh){
 
 	var SQL_KEYWORDS = {
 		'all': 1, 'partial': 1, 'global': 1, 'month': 1,

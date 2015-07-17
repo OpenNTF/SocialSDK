@@ -1,4 +1,4 @@
-define(["dojo", "dojo/fx/easing", "../util/oo", "../annotations/BoxShadow", 
+define("dojox/drawing/stencil/_Base", ["dojo", "dojo/fx/easing", "../util/oo", "../annotations/BoxShadow", 
   "../annotations/Angle", "../annotations/Label", "../defaults"], 
 function(dojo, easing, oo, BoxShadow, Angle, LabelExports, defaults){
 

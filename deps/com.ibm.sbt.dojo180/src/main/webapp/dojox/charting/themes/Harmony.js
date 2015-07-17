@@ -1,4 +1,4 @@
-define(["../SimpleTheme", "./common"], function(SimpleTheme, themes){
+define("dojox/charting/themes/Harmony", ["../SimpleTheme", "./common"], function(SimpleTheme, themes){
 	themes.Harmony = new SimpleTheme({
 		colors: [
 			"#497c91",

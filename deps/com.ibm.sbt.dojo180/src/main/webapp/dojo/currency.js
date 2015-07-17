@@ -1,4 +1,4 @@
-define([
+define("dojo/currency", [
 	"./_base/array",
 	"./_base/lang",
 	/*===== "./_base/declare", =====*/

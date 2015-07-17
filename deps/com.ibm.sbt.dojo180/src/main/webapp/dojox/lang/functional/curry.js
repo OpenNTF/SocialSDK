@@ -1,3 +1,5 @@
+// wrapped by build app
+define("dojox/lang/functional/curry", ["dijit","dojo","dojox","dojo/require!dojox/lang/functional/lambda"], function(dijit,dojo,dojox){
 dojo.provide("dojox.lang.functional.curry");
 
 dojo.require("dojox.lang.functional.lambda");
@@ -96,3 +98,5 @@ dojo.require("dojox.lang.functional.lambda");
 		}
 	});
 })();
+
+});

@@ -1,5 +1,5 @@
 define(
-({
+"dojox/grid/enhanced/nls/sk/EnhancedGrid", ({
 	singleSort: "Jednoduché triedenie",
 	nestedSort: "Vnorené triedenie",
 	ascending: "Kliknite pre vzostupné triedenie",

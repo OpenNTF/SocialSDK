@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/lt/currency", //begin v1.x content
 {
 	"BRE_displayName": "Brazilijos kruzeiras (1990-1993)",
 	"DEM_displayName": "Vokietijos markė",

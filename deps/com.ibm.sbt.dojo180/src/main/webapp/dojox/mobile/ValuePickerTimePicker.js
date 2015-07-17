@@ -1,4 +1,4 @@
-define([
+define("dojox/mobile/ValuePickerTimePicker", [
 	"dojo/_base/declare",
 	"dojo/dom-class",
 	"./_TimePickerMixin",

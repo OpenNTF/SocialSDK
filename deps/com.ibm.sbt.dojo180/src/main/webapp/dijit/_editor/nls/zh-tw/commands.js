@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/zh-tw/commands", ({
 	'bold': '粗體',
 	'copy': '複製',
 	'cut': '剪下',

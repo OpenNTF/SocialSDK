@@ -1,5 +1,5 @@
 define(
-({
+"dojox/grid/enhanced/nls/ru/Filter", ({
 	"clearFilterDialogTitle": "Очистить фильтр",
 	"filterDefDialogTitle": "Фильтр",
 	"ruleTitleTemplate": "Правило ${0}",

@@ -1,4 +1,4 @@
-define({ root:
+define("dojo/cldr/nls/persian", { root:
 
 //begin v1.x content
 {

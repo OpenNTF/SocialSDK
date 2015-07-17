@@ -1,4 +1,4 @@
-define([
+define("dojo/dnd/move", [
 	"../_base/declare",
 	"../dom-geometry", "../dom-style",
 	"./common", "./Mover", "./Moveable"

@@ -1,3 +1,5 @@
+// wrapped by build app
+define("dojox/mobile/app/_event", ["dijit","dojo","dojox"], function(dijit,dojo,dojox){
 dojo.provide("dojox.mobile.app._event");
 dojo.experimental("dojox.mobile.app._event.js");
 
@@ -117,3 +119,4 @@ dojo._connect = function(obj, event, context, method, dontFix){
 
 	return dojo._oldConnect(obj, event, context, method, dontFix);
 };
+});

@@ -1,4 +1,4 @@
-define([
+define("dijit/_editor/plugins/EnterKeyHandling", [
 	"dojo/_base/declare", // declare
 	"dojo/dom-construct", // domConstruct.destroy domConstruct.place
 	"dojo/_base/event", // event.stop

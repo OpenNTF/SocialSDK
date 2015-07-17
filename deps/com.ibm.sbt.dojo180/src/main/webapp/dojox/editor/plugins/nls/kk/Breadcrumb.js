@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/kk/Breadcrumb", ({
 	"nodeActions": "${nodeName} Әрекеттер",
 	"selectContents": "Мазмұнын таңдау",
 	"selectElement": "Элементті таңдау",

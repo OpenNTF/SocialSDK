@@ -1,4 +1,4 @@
-define(["dojo", "dijit/registry", "../util/oo", "../manager/_registry", "../stencil/Text"],
+define("dojox/drawing/tools/TextBlock", ["dojo", "dijit/registry", "../util/oo", "../manager/_registry", "../stencil/Text"],
 function(dojo, dijit, oo, registry, StencilText){
 
 	var conEdit;

@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/fo/number", //begin v1.x content
 {
 	"group": ".",
 	"percentFormat": "#,##0 %",

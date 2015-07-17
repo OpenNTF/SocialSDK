@@ -1,4 +1,4 @@
-define([
+define("dojox/mvc/EditStoreRefListController", [
 	"dojo/_base/declare",
 	"dojo/_base/lang",
 	"./getPlainValue",

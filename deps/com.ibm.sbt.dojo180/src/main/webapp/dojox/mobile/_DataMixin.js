@@ -1,4 +1,4 @@
-define([
+define("dojox/mobile/_DataMixin", [
 	"dojo/_base/array",
 	"dojo/_base/declare",
 	"dojo/_base/lang",

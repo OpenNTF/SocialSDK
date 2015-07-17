@@ -1,5 +1,5 @@
 define(
-// used by both the editor and textarea widgets to provide information to screen reader users
+"dijit/form/nls/zh-tw/Textarea", // used by both the editor and textarea widgets to provide information to screen reader users
 ({
 	iframeEditTitle: '編輯區',  // primary title for editable IFRAME, for screen readers when focus is in the editing area
 	iframeFocusTitle: '編輯區框'  // secondary title for editable IFRAME when focus is on outer container

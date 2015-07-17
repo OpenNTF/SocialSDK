@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/gl/currency", //begin v1.x content
 {
 	"KHR_displayName": "Riel camboxano",
 	"FJD_displayName": "Dólar fixiano",

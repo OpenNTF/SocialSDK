@@ -1,4 +1,4 @@
-define([
+define("dijit/Destroyable", [
 	"dojo/_base/array", // array.forEach array.map
 	"dojo/aspect",
 	"dojo/_base/declare"

@@ -1,4 +1,4 @@
-define([
+define("dojo/request/util", [
 	'exports',
 	'../errors/RequestError',
 	'../errors/CancelError',

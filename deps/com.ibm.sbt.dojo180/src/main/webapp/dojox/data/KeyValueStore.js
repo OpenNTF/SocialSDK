@@ -1,4 +1,4 @@
-define(["dojo/_base/declare", "dojo/_base/lang", "dojo/_base/xhr", "dojo/_base/kernel",
+define("dojox/data/KeyValueStore", ["dojo/_base/declare", "dojo/_base/lang", "dojo/_base/xhr", "dojo/_base/kernel",
 		"dojo/data/util/simpleFetch", "dojo/data/util/filter"], 
   function(declare, lang, xhr, kernel, simpleFetch, filterUtil) {
 

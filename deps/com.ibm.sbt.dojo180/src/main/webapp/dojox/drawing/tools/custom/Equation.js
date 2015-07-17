@@ -1,4 +1,4 @@
-define(["dojo/_base/lang", "../../util/oo", "../../manager/_registry", "../TextBlock"],
+define("dojox/drawing/tools/custom/Equation", ["dojo/_base/lang", "../../util/oo", "../../manager/_registry", "../TextBlock"],
 function(lang, oo, registry, TextBlock){
 
 var Equation = oo.declare(

@@ -1,4 +1,4 @@
-define([
+define("dojox/form/manager/_Mixin", [
 	"dojo/_base/window",
 	"dojo/_base/lang",
 	"dojo/_base/array",

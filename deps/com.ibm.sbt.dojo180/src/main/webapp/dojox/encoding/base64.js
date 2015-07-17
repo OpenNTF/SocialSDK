@@ -1,4 +1,4 @@
-define(["dojo/_base/lang"], function(lang) {
+define("dojox/encoding/base64", ["dojo/_base/lang"], function(lang) {
 	
 	var base64 = lang.getObject("dojox.encoding.base64", true);
 

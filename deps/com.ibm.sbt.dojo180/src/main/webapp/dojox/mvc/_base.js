@@ -1,4 +1,4 @@
-define([
+define("dojox/mvc/_base", [
 	"dojo/_base/kernel",
 	"dojo/_base/lang",
 	"./getStateful",

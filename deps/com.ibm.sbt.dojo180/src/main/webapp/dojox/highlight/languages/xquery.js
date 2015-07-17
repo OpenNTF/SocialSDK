@@ -1,4 +1,4 @@
-define(["../_base"], function(dh){
+define("dojox/highlight/languages/xquery", ["../_base"], function(dh){
 
 	// Very simple XQuery language file.  Would be nice
 	// to eventually handle more of the enclosed expressions

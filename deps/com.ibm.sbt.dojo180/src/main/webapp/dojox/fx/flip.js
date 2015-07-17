@@ -1,4 +1,4 @@
-define([
+define("dojox/fx/flip", [
 	"dojo/_base/kernel",
 	"dojo/_base/html",
 	"dojo/dom",

@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/pa-pk/gregorian", //begin v1.x content
 {
 	"quarters-standAlone-wide": [
 		"چوتھاي پہلاں",

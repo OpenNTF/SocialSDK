@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/pl/FindReplace", ({
 	"findLabel": "Znajdź:",
 	"findTooltip": "Wprowadź szukany tekst",
 	"replaceLabel": "Zastąp przez:",

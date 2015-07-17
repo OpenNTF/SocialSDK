@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/zh-tw/LinkDialog", ({
 	createLinkTitle: "鏈結內容",
 	insertImageTitle: "影像內容",
 	url: "URL：",

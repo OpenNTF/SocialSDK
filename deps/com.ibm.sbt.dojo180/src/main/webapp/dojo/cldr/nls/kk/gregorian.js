@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/kk/gregorian", //begin v1.x content
 {
 	"dateFormat-medium": "dd.MM.yyyy",
 	"field-day-relative+-1": "кеше",

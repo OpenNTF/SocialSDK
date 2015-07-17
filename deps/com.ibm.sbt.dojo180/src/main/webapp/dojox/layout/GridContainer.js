@@ -1,4 +1,4 @@
-define([
+define("dojox/layout/GridContainer", [
 	"dojo/_base/kernel",
 	"dojo/_base/declare", // declare 
 	"dojo/_base/array",

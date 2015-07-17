@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/da/Breadcrumb", ({
 	"nodeActions": "Handlinger for ${nodeName}",
 	"selectContents": "Vælg indhold",
 	"selectElement": "Vælg element",

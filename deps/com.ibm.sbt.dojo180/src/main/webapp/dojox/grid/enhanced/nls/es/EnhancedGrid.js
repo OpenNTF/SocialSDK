@@ -1,5 +1,5 @@
 define(
-({
+"dojox/grid/enhanced/nls/es/EnhancedGrid", ({
 	singleSort: "Orden único",
 	nestedSort: "Orden anidado",
 	ascending: "Pulse para ordenar de forma ascendente",

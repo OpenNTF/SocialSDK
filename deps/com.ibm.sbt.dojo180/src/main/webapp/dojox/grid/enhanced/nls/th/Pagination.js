@@ -1,5 +1,5 @@
 define(
-({
+"dojox/grid/enhanced/nls/th/Pagination", ({
 	"descTemplate": "${2} - ${3} จาก ${1} ${0}",
 	"firstTip": "หน้าแรก",
 	"lastTip": "หน้าสุดท้าย",

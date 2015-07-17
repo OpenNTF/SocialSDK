@@ -1,4 +1,4 @@
-define(["dojo/_base/kernel", "./entities", "dojo/_base/array", "dojo/_base/window", "dojo/_base/sniff"], 
+define("dojox/html/format", ["dojo/_base/kernel", "./entities", "dojo/_base/array", "dojo/_base/window", "dojo/_base/sniff"], 
 	function(lang, Entities, ArrayUtil, Window, has) {
 	var dhf = lang.getObject("dojox.html.format",true);
 	

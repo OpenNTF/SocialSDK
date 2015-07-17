@@ -1,3 +1,5 @@
+// wrapped by build app
+define("dojox/layout/dnd/PlottedDnd", ["dijit","dojo","dojox","dojo/require!dojo/dnd/Source,dojo/dnd/Manager,dojox/layout/dnd/Avatar"], function(dijit,dojo,dojox){
 dojo.provide("dojox.layout.dnd.PlottedDnd");
 
 dojo.require("dojo.dnd.Source");
@@ -532,3 +534,5 @@ if(dojo.isIE){
 		dojo.forEach(dojox.layout.dnd.handdleIE, dojo.unsubscribe);
 	});
 }
+
+});

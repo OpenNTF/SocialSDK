@@ -1,4 +1,4 @@
-define([
+define("dojox/mobile/ProgressBar", [
 	"dojo/_base/declare",
 	"dojo/dom-class",
 	"dojo/dom-construct",

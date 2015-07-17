@@ -1,3 +1,5 @@
+// wrapped by build app
+define("dojox/wire/ml/Transfer", ["dijit","dojo","dojox","dojo/require!dijit/_Widget,dijit/_Container,dojox/wire/_base,dojox/wire/ml/Action"], function(dijit,dojo,dojox){
 dojo.provide("dojox.wire.ml.Transfer");
 
 dojo.require("dijit._Widget");
@@ -359,4 +361,6 @@ dojo.declare("dojox.wire.ml.SegmentWire", dojox.wire.ml.ChildWire, {
 			args.delimiter = parent.delimiter;
 		}
 	}
+});
+
 });

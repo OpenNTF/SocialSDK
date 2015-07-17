@@ -1,4 +1,4 @@
-define([
+define("dojox/mobile/scrollable", [
 	"dojo/_base/kernel",
 	"dojo/_base/connect",
 	"dojo/_base/event",

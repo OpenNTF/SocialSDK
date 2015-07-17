@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/ksf/currency", //begin v1.x content
 {
 	"USD_displayName": "mɔni mǝ á amɛrika",
 	"TZS_displayName": "mɔni mǝ á tanzaní",

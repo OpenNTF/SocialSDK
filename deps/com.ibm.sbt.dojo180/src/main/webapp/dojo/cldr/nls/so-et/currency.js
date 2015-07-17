@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/so-et/currency", //begin v1.x content
 {
 	"ETB_symbol": "Br"
 }

@@ -1,4 +1,4 @@
-define([
+define("dojox/mobile/Audio", [
 	"dojo/_base/declare",
 	"dojo/dom-construct",
 	"dojo/_base/sniff",

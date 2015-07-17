@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/mt/gregorian", //begin v1.x content
 {
 	"dayPeriods-format-wide-pm": "WN",
 	"field-minute": "Minuta",

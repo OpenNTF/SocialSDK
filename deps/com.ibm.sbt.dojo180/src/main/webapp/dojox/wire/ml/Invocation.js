@@ -1,3 +1,5 @@
+// wrapped by build app
+define("dojox/wire/ml/Invocation", ["dijit","dojo","dojox","dojo/require!dojox/wire/ml/Action"], function(dijit,dojo,dojox){
 dojo.provide("dojox.wire.ml.Invocation");
 
 dojo.require("dojox.wire.ml.Action");
@@ -170,4 +172,6 @@ dojo.declare("dojox.wire.ml.Invocation", dojox.wire.ml.Action, {
 		}
 		return parameters; //Array
 	}
+});
+
 });

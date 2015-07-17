@@ -1,4 +1,4 @@
-define([
+define("dijit/_PaletteMixin", [
 	"dojo/_base/declare", // declare
 	"dojo/dom-attr", // domAttr.set
 	"dojo/dom-class", // domClass.add domClass.remove

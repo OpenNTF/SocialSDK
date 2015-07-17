@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/en-gb/gregorian", //begin v1.x content
 {
 	"dateFormatItem-yM": "MM/y",
 	"field-dayperiod": "am/pm",

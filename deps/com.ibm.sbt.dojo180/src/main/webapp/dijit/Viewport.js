@@ -1,4 +1,4 @@
-define([
+define("dijit/Viewport", [
 	"dojo/Evented",
 	"dojo/on",
 	"dojo/ready",

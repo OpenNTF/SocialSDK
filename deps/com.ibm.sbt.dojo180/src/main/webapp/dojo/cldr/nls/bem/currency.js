@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/bem/currency", //begin v1.x content
 {
 	"ZMK_symbol": "ZK"
 }

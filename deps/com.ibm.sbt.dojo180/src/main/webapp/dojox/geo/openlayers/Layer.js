@@ -1,4 +1,4 @@
-define([
+define("dojox/geo/openlayers/Layer", [
 	"dojo/_base/declare", 
 	"dojo/_base/lang", 
 	"dojo/_base/array", 

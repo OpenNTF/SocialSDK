@@ -1,5 +1,5 @@
 // This module is modified from dojox/mobile/_ScrollableMixin and dojox/mobile/ScrollableView
-define([
+define("dojox/app/widgets/_ScrollableMixin", [
 	"dojo/_base/declare",
 	"dojo/_base/lang",
 	"dojo/dom-class",

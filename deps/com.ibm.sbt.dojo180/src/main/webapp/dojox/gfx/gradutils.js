@@ -1,6 +1,6 @@
 // Various generic utilities to deal with a linear gradient
 
-define(["./_base", "dojo/_base/lang", "./matrix", "dojo/_base/Color"], 
+define("dojox/gfx/gradutils", ["./_base", "dojo/_base/lang", "./matrix", "dojo/_base/Color"], 
   function(g, lang, m, Color){
   
 	var gradutils = g.gradutils = {};

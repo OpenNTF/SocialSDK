@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/pt-pt/SpellCheck", ({
 	widgetLabel: "Verificação ortográfica por grupo",
 	unfound: "Não localizado",
 	skip: "Ignorar",

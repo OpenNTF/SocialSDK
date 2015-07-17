@@ -1,3 +1,5 @@
+// wrapped by build app
+define("dojox/widget/Loader", ["dijit","dojo","dojox","dojo/require!dijit/_Widget,dijit/_Templated"], function(dijit,dojo,dojox){
 dojo.provide("dojox.widget.Loader");
 dojo.deprecated("dojox.widget.Loader", "", "2.0");
 
@@ -108,5 +110,7 @@ dojo.declare("dojox.widget.Loader", [dijit._Widget,dijit._Templated], {
 			}).play();
 		}
 	}
+
+});
 
 });

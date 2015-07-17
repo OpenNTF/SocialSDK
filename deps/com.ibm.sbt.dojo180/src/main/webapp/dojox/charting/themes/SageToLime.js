@@ -1,4 +1,4 @@
-define(["../SimpleTheme", "./common"], function(SimpleTheme, themes){
+define("dojox/charting/themes/SageToLime", ["../SimpleTheme", "./common"], function(SimpleTheme, themes){
 	themes.SageToLime = new SimpleTheme({
 		colors: [
 			"#abdbcb",

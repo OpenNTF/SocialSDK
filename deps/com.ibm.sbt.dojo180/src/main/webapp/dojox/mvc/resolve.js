@@ -1,4 +1,4 @@
-define([
+define("dojox/mvc/resolve", [
 	"dojo/_base/lang",
 	"dijit/registry",
 	"dojo/Stateful"

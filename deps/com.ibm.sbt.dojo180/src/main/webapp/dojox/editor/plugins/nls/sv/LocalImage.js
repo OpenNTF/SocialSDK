@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/sv/LocalImage", ({
 	insertImageTitle: "Infoga bild",
 	url: "Bild",
 	browse: "Bläddra...",

@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/nb/SpellCheck", ({
 	widgetLabel: "Satsvis stavekontroll",
 	unfound: "Ikke funnet",
 	skip: "Hopp over",

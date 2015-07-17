@@ -1,4 +1,4 @@
-define(["dojo/_base/array", "dojo/_base/declare", "dojo/query",
+define("dojox/charting/widget/SelectableLegend", ["dojo/_base/array", "dojo/_base/declare", "dojo/query",
 		"dojo/_base/connect", "dojo/_base/Color", "./Legend", "dijit/form/CheckBox", "../action2d/Highlight",
 		"dojox/lang/functional", "dojox/gfx/fx", "dojo/keys", "dojo/dom-construct",
 		"dojo/dom-prop"], 

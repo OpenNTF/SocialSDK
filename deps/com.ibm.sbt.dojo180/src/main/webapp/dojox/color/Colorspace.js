@@ -1,4 +1,4 @@
-define(["./_base", "dojo/_base/lang", "dojox/math/matrix"],
+define("dojox/color/Colorspace", ["./_base", "dojo/_base/lang", "dojox/math/matrix"],
 	function(dcolor, lang, dxm){
 
 dcolor.Colorspace = new (function(){

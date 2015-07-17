@@ -1,4 +1,4 @@
-define([
+define("dijit/form/SimpleTextarea", [
 	"dojo/_base/declare", // declare
 	"dojo/dom-class", // domClass.add
 	"dojo/sniff", // has("ie") has("opera")

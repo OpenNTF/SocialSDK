@@ -1,4 +1,4 @@
-define({ root:
+define("dojox/atom/widget/nls/FeedEntryEditor", { root:
 //begin v1.x content
 ({
 	doNew: "[new]",

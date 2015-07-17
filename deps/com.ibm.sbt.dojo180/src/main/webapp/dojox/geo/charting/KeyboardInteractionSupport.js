@@ -1,4 +1,4 @@
-define([
+define("dojox/geo/charting/KeyboardInteractionSupport", [
 	"dojo/_base/lang",
 	"dojo/_base/declare",
 	"dojo/_base/event",

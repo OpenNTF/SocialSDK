@@ -1,4 +1,4 @@
-define([
+define("dojox/mobile/Container", [
 	"dojo/_base/declare",
 	"dijit/_Container",
 	"./Pane"

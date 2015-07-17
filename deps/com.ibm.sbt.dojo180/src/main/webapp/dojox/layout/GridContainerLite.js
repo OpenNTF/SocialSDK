@@ -1,4 +1,6 @@
-define([
+require({cache:{
+'url:dojox/layout/resources/GridContainer.html':"<div id=\"${id}\" class=\"gridContainer\" dojoAttachPoint=\"containerNode\" tabIndex=\"0\" dojoAttachEvent=\"onkeypress:_selectFocus\">\n\t<div dojoAttachPoint=\"gridContainerDiv\">\n\t\t<table class=\"gridContainerTable\" dojoAttachPoint=\"gridContainerTable\" cellspacing=\"0\" cellpadding=\"0\">\n\t\t\t<tbody>\n\t\t\t\t<tr dojoAttachPoint=\"gridNode\" >\n\t\t\t\t\t\n\t\t\t\t</tr>\n\t\t\t</tbody>\n\t\t</table>\n\t</div>\n</div>"}});
+define("dojox/layout/GridContainerLite", [
 	"dojo/_base/kernel",
 	"dojo/text!./resources/GridContainer.html",
 	"dojo/_base/declare", // declare 

@@ -1,3 +1,5 @@
+// wrapped by build app
+define("dojox/data/ItemExplorer", ["dijit","dojo","dojox","dojo/require!dijit/Tree,dijit/Dialog,dijit/Menu,dijit/form/ValidationTextBox,dijit/form/Textarea,dijit/form/Button,dijit/form/RadioButton,dijit/form/FilteringSelect"], function(dijit,dojo,dojox){
 dojo.provide("dojox.data.ItemExplorer");
 dojo.require("dijit.Tree");
 dojo.require("dijit.Dialog");
@@ -623,3 +625,5 @@ dojo.declare("dojox.data.ItemExplorer", dijit.Tree, {
 });
 })();
 
+
+});

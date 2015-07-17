@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/el/Smiley", ({
 	smiley: "Εισαγωγή εικονιδίου συναισθήματος",
 	emoticonSmile: "Χαμόγελο",
 	emoticonLaughing: "Γέλιο",

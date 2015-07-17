@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/gu/gregorian", //begin v1.x content
 {
 	"days-standAlone-short": [
 		"ર",

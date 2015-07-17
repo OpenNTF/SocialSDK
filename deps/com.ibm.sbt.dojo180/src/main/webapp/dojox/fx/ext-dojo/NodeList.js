@@ -1,4 +1,4 @@
-define(["dojo/_base/kernel", "dojo/_base/lang", "dojo/_base/fx", "dojox/fx","dojo/NodeList-fx"],
+define("dojox/fx/ext-dojo/NodeList", ["dojo/_base/kernel", "dojo/_base/lang", "dojo/_base/fx", "dojox/fx","dojo/NodeList-fx"],
 	function(kernel, lang, baseFx, CoreFx, NodeList){
 kernel.experimental("dojox.fx.ext-dojo.NodeList");
 

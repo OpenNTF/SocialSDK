@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/sh/number", //begin v1.x content
 {
 	"group": ".",
 	"decimalFormat-long": "000 трилиона",

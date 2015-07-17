@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/hu/commands", ({
 	'bold': 'Félkövér',
 	'copy': 'Másolás',
 	'cut': 'Kivágás',

@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/zh-hant/indian", //begin v1.x content
 {
 	"months-format-abbr": [
 		"制檀邏月",

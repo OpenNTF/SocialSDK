@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/it/commands", ({
 	'bold': 'Grassetto',
 	'copy': 'Copia',
 	'cut': 'Taglia',

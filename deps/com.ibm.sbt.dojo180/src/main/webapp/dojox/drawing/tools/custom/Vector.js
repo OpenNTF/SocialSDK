@@ -1,4 +1,4 @@
-define(["dojo", "../../util/oo", "../../manager/_registry", "../../util/positioning", "../Arrow"],
+define("dojox/drawing/tools/custom/Vector", ["dojo", "../../util/oo", "../../manager/_registry", "../../util/positioning", "../Arrow"],
 function(dojo, oo, registry, positioning, Arrow){
 
 var Vector = oo.declare(

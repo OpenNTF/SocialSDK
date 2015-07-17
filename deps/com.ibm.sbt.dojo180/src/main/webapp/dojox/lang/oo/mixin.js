@@ -1,3 +1,5 @@
+// wrapped by build app
+define("dojox/lang/oo/mixin", ["dijit","dojo","dojox","dojo/require!dojox/lang/oo/Filter,dojox/lang/oo/Decorator"], function(dijit,dojo,dojox){
 dojo.provide("dojox.lang.oo.mixin");
 
 dojo.experimental("dojox.lang.oo.mixin");
@@ -129,3 +131,5 @@ dojo.require("dojox.lang.oo.Decorator");
 		return target;	// Object
 	};
 })();
+
+});

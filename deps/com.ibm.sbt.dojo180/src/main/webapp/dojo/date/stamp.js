@@ -1,4 +1,4 @@
-define(["../_base/lang", "../_base/array"], function(lang, array){
+define("dojo/date/stamp", ["../_base/lang", "../_base/array"], function(lang, array){
 
 // module:
 //		dojo/date/stamp

@@ -1,4 +1,4 @@
-define({ root:
+define("dojox/editor/plugins/nls/PasteFromWord", { root:
 //begin v1.x content
 ({
 	"pasteFromWord": "Paste From Word",

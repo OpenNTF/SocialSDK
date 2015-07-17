@@ -1,4 +1,4 @@
-define([
+define("dojo/request/node", [
    'require',
    './util',
    './handlers',

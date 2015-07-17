@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/lag/currency", //begin v1.x content
 {
 	"USD_displayName": "Dóola ya Amerɨ́ka",
 	"TZS_displayName": "Shilíingi ya Taansanía",

@@ -1,4 +1,4 @@
-define([
+define("dojox/sketch/Figure", [
 	"dojo/_base/kernel",
 	"dojo/_base/lang",
 	"dojo/_base/connect",

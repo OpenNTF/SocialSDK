@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/zh-tw/SpellCheck", ({
 	widgetLabel: "批次拼字檢查",
 	unfound: "找不到",
 	skip: "跳過",

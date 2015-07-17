@@ -1,3 +1,5 @@
+// wrapped by build app
+define("dojox/xmpp/util", ["dijit","dojo","dojox","dojo/require!dojox/string/Builder,dojox/encoding/base64"], function(dijit,dojo,dojox){
 dojo.provide("dojox.xmpp.util");
 dojo.require("dojox.string.Builder");
 dojo.require("dojox.encoding.base64");
@@ -145,3 +147,5 @@ dojox.xmpp.util.Base64.decode = function(input){
 	};
 	return b2s(dojox.encoding.base64.decode(input));
 };
+
+});

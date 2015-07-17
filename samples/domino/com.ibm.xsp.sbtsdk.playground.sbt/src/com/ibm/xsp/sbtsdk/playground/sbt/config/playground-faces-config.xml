@@ -54,33 +54,7 @@
 		</managed-property>
 	</managed-bean>
 	
-	<!-- SmartCloud Form based auth -->	
-	<managed-bean>
-		<managed-bean-name>smartcloudForm</managed-bean-name>
-		<managed-bean-class>
-			com.ibm.sbt.services.endpoints.SmartCloudFormEndpoint
-		</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
-<!-- Doesn't work with BSS as the use doesn't have this service available 		
-		<managed-property>
-			<property-name>authenticationService
-			</property-name>
-			<value>communities/service/atom/communities/my
-			</value>
-		</managed-property>
--->		
-		<managed-property>
-			<property-name>authenticationPage</property-name>
-			<value>/xsp/.ibmxspres/.sbtsdk/loginForm.html?endpoint=smartcloudForm
-			</value>
-		</managed-property>
- 		<!-- Trust the connection -->
-		<managed-property>
-			<property-name>forceTrustSSLCertificate
-			</property-name>
-			<value>true</value>
-		</managed-property>
-	</managed-bean>
+	
 
 	<!-- SmartCloud OAuth 1.0 -->
 	<managed-bean>

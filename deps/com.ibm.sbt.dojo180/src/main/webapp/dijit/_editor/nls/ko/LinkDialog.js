@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/ko/LinkDialog", ({
 	createLinkTitle: "링크 특성",
 	insertImageTitle: "이미지 특성",
 	url: "URL:",

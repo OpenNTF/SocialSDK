@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/vai/gregorian", //begin v1.x content
 {
 	"dateFormatItem-yM": "M/yyyy",
 	"dateFormatItem-yQ": "Q yyyy",

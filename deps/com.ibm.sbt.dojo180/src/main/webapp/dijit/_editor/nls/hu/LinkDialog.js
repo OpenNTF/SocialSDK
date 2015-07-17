@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/hu/LinkDialog", ({
 	createLinkTitle: "Hivatkozás tulajdonságai",
 	insertImageTitle: "Kép tulajdonságai",
 	url: "URL:",

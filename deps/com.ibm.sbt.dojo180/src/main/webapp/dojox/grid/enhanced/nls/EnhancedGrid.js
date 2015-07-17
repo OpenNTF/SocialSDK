@@ -1,4 +1,4 @@
-define({ root:
+define("dojox/grid/enhanced/nls/EnhancedGrid", { root:
 //begin v1.x content
 ({
 	singleSort: "Single Sort",

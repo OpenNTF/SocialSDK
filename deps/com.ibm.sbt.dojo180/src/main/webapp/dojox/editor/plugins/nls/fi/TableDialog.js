@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/fi/TableDialog", ({
 	insertTableTitle: "Lisää taulukko",
 	modifyTableTitle: "Muokkaa taulukkoa",
 	rows: "Rivit:",

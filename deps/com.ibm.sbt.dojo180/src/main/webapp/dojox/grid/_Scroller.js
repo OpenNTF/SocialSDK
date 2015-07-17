@@ -1,4 +1,4 @@
-define([
+define("dojox/grid/_Scroller", [
 	"dijit/registry",
 	"dojo/_base/declare",
 	"dojo/_base/lang",

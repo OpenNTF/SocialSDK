@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/seh/currency", //begin v1.x content
 {
 	"USD_displayName": "Dólar norte-americano",
 	"TZS_displayName": "Xelim da Tanzânia",

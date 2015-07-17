@@ -1,4 +1,4 @@
-define(["../_base/lang","../_base/declare","../_base/fx", "../_base/connect"], 
+define("dojo/fx/Toggler", ["../_base/lang","../_base/declare","../_base/fx", "../_base/connect"], 
   function(lang, declare, baseFx, connectUtil){
 	// module:
 	//		dojo/fx/Toggler

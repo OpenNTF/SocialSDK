@@ -1,4 +1,4 @@
-define(["dojo", "dojox/main", "dojox/image/Badge", "dojox/data/FlickrRestStore"], function(dojo, dojox){
+define("dojox/image/FlickrBadge", ["dojo", "dojox/main", "dojox/image/Badge", "dojox/data/FlickrRestStore"], function(dojo, dojox){
 	
 	dojo.getObject("image", true, dojox);
 	return dojo.declare("dojox.image.FlickrBadge", dojox.image.Badge, {

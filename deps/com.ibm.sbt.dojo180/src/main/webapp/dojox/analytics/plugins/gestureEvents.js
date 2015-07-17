@@ -1,4 +1,4 @@
-define(["dojo/_base/lang","../_base", "dojo/_base/window", "dojo/on", "dojo/_base/config", "dojo/touch",
+define("dojox/analytics/plugins/gestureEvents", ["dojo/_base/lang","../_base", "dojo/_base/window", "dojo/on", "dojo/_base/config", "dojo/touch",
 		"dojox/gesture/tap", "dojox/gesture/swipe"
 
 ], function(lang, dxa, window, on, config, touch, tap, swipe){

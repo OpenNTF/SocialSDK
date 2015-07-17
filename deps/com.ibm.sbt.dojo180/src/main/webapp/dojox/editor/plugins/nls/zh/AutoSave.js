@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/zh/AutoSave", ({
 	"saveLabel": "保存",
 	"saveSettingLabelOn": "设置自动保存时间间隔...",
 	"saveSettingLabelOff": "关闭自动保存",

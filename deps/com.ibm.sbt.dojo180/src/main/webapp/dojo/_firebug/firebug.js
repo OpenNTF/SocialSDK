@@ -1,4 +1,4 @@
-define([
+define("dojo/_firebug/firebug", [
 	"../_base/kernel",
 	"require",
 	"../_base/html",

@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/ne-in/gregorian", //begin v1.x content
 {
 	"quarters-standAlone-wide": [
 		"पहिलो पाउ",

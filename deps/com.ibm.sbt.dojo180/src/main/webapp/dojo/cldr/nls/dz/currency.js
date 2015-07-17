@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/dz/currency", //begin v1.x content
 {
 	"COP_displayName": "ཀོ་ལོམ་བྷི་ཡ་གི་དངུལ་ པེ་སོ",
 	"EUR_symbol": "€",

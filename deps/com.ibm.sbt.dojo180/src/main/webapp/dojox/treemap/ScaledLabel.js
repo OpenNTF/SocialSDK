@@ -1,4 +1,4 @@
-define(["dojo/_base/declare", "dojo/dom-geometry", "dojo/dom-construct", "dojo/dom-style"],
+define("dojox/treemap/ScaledLabel", ["dojo/_base/declare", "dojo/dom-geometry", "dojo/dom-construct", "dojo/dom-style"],
 	function(declare, domGeom, domConstruct, domStyle) {
 
 	return declare("dojox.treemap.ScaledLabel", null, {

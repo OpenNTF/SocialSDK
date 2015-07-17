@@ -1,4 +1,4 @@
-define(["dojo/_base/kernel","dojo/_base/declare","dojo/_base/html","dojo/_base/lang","dojo/_base/query",
+define("dojox/layout/RadioGroup", ["dojo/_base/kernel","dojo/_base/declare","dojo/_base/html","dojo/_base/lang","dojo/_base/query",
 		"dijit/_Widget","dijit/_Templated","dijit/_Contained","dijit/layout/StackContainer",
 		"dojo/fx/easing","dojo/_base/fx","dojo/dom-construct","dojo/dom-class"],function(
 	kernel,declare,html,lang,query,Widget,Templated,Contained,StackContainer,easing,baseFx,domConstruct,domClass){

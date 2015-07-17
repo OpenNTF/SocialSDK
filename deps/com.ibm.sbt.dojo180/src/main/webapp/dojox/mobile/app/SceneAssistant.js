@@ -1,3 +1,5 @@
+// wrapped by build app
+define("dojox/mobile/app/SceneAssistant", ["dijit","dojo","dojox"], function(dijit,dojo,dojox){
 dojo.provide("dojox.mobile.app.SceneAssistant");
 dojo.experimental("dojox.mobile.app.SceneAssistant");
 
@@ -54,3 +56,5 @@ dojo.declare("dojox.mobile.app.SceneAssistant", null, {
 	}
 });
 
+
+});

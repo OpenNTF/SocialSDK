@@ -1,4 +1,4 @@
-define([
+define("dojox/editor/plugins/_SpellCheckParser", [
 	"dojo",
 	"dojox",
 	"dojo/_base/connect",

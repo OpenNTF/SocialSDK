@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/ak/currency", //begin v1.x content
 {
 	"USD_displayName": "Amɛrika Dɔla",
 	"TZS_displayName": "Tanzania Hyelen",

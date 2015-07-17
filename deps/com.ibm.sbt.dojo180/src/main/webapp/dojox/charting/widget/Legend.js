@@ -1,4 +1,4 @@
-define(["dojo/_base/lang", "dojo/_base/declare", "dijit/_WidgetBase", "dojox/gfx","dojo/_base/array",
+define("dojox/charting/widget/Legend", ["dojo/_base/lang", "dojo/_base/declare", "dijit/_WidgetBase", "dojox/gfx","dojo/_base/array",
 		"dojox/lang/functional", "dojox/lang/functional/array", "dojox/lang/functional/fold",
 		"dojo/dom", "dojo/dom-construct", "dojo/dom-class","dijit/registry"],
 		function(lang, declare, _WidgetBase, gfx, arrayUtil, df, dfa, dff,

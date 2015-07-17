@@ -1,4 +1,4 @@
-define(["dojo/_base/lang"], function(lang){
+define("dojox/geo/openlayers/_base", ["dojo/_base/lang"], function(lang){
 	
 	var openlayers = lang.getObject("dojox.geo.openlayers", true);
 	/*===== openlayers = dojox.geo.openlayers; =====*/

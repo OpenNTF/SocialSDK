@@ -1,4 +1,4 @@
-define([
+define("dijit/_WidgetBase", [
 	"require",			// require.toUrl
 	"dojo/_base/array", // array.forEach array.map
 	"dojo/aspect",

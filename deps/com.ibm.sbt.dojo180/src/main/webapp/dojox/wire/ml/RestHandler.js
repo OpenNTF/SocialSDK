@@ -1,3 +1,5 @@
+// wrapped by build app
+define("dojox/wire/ml/RestHandler", ["dijit","dojo","dojox","dojo/require!dojox/wire/_base,dojox/wire/ml/util"], function(dijit,dojo,dojox){
 dojo.provide("dojox.wire.ml.RestHandler");
 
 dojo.require("dojox.wire._base");
@@ -140,4 +142,6 @@ dojo.declare("dojox.wire.ml.RestHandler", null, {
 		//		A result object
 		return data; //anything
 	}
+});
+
 });

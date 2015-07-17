@@ -1,4 +1,4 @@
-define([
+define("dojox/mobile/ToggleButton", [
 	"dojo/_base/declare",
 	"dojo/dom-class",
 	"dijit/form/_ToggleButtonMixin",

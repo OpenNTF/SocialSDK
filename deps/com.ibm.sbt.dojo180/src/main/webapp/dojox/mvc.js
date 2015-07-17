@@ -1,4 +1,4 @@
-define(["./mvc/_base"], function(dxmvc){
+define("dojox/mvc", ["./mvc/_base"], function(dxmvc){
 	// module:
 	//		dojox/mvc
 

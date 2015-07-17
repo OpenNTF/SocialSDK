@@ -1,4 +1,4 @@
-define(["dojo", "../util/oo", "../defaults"], 
+define("dojox/drawing/manager/Stencil", ["dojo", "../util/oo", "../defaults"], 
 function(dojo, oo, defaults){
 
 	var surface, surfaceNode;

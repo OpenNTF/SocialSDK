@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/ebu/currency", //begin v1.x content
 {
 	"KES_symbol": "Ksh",
 	"USD_displayName": "Dola ya Marekani",

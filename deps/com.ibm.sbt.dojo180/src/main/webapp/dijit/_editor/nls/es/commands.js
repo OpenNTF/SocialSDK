@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/es/commands", ({
 	'bold': 'Negrita',
 	'copy': 'Copiar',
 	'cut': 'Cortar',

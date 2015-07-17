@@ -10,7 +10,7 @@
  * parser, "XMLDate" by Philippe Goetz (philippe.goetz@wanadoo.fr)
  *****************************************************************************/
 
-define(["dojo", "dojo/date", "dojo/date/locale", "dojo/_base/array", "dojo/_base/xhr"],
+define("dojox/date/timezone", ["dojo", "dojo/date", "dojo/date/locale", "dojo/_base/array", "dojo/_base/xhr"],
 	function(dojo, _dd, _ddl){
 
 	dojo.experimental("dojox.date.timezone");

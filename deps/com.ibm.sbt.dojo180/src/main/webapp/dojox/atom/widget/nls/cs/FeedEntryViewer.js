@@ -1,5 +1,5 @@
 define(
-({
+"dojox/atom/widget/nls/cs/FeedEntryViewer", ({
 	displayOptions: "[volby zobrazení]",
 	title: "Název",
 	authors: "Autoři",

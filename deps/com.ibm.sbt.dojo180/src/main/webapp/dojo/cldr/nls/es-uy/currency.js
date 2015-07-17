@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/es-uy/currency", //begin v1.x content
 {
 	"UYU_symbol": "$"
 }

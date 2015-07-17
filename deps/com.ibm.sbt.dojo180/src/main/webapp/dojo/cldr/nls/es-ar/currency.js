@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/es-ar/currency", //begin v1.x content
 {
 	"ARS_symbol": "$"
 }

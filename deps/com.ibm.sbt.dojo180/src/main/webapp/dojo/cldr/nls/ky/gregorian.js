@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/ky/gregorian", //begin v1.x content
 {
 	"field-year-relative+-1": "Өткөн жылы",
 	"field-month-relative+-1": "Өткөн айда",

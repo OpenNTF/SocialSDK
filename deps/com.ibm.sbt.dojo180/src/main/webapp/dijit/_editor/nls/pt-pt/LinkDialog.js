@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/pt-pt/LinkDialog", ({
 	createLinkTitle: "Propriedades da ligação",
 	insertImageTitle: "Propriedades da imagem",
 	url: "URL:",

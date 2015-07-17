@@ -1,4 +1,4 @@
-define([
+define("dijit/_WidgetsInTemplateMixin", [
 	"dojo/_base/array", // array.forEach
 	"dojo/_base/declare", // declare
 	"dojo/parser" // parser.parse

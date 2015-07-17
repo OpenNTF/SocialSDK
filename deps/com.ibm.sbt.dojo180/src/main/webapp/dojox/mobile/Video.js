@@ -1,4 +1,4 @@
-define([
+define("dojox/mobile/Video", [
 	"dojo/_base/declare",
 	"dojo/_base/sniff",
 	"./Audio"

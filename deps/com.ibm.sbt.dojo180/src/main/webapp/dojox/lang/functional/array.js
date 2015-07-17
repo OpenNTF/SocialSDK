@@ -1,4 +1,4 @@
-define(["dojo/_base/kernel", "dojo/_base/lang", "dojo/_base/array", "./lambda"],
+define("dojox/lang/functional/array", ["dojo/_base/kernel", "dojo/_base/lang", "dojo/_base/array", "./lambda"],
 	function(kernel, lang, arr, df){
 
 // This module adds high-level functions and related constructs:

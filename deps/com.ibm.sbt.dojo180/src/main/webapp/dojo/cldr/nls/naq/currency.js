@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/naq/currency", //begin v1.x content
 {
 	"USD_displayName": "US Dollari",
 	"TZS_displayName": "Tanzanian Shillings",

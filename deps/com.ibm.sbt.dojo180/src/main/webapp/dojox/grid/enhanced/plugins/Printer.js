@@ -1,4 +1,4 @@
-define([
+define("dojox/grid/enhanced/plugins/Printer", [
 	"dojo/_base/declare",
 	"dojo/_base/html",
 	"dojo/_base/Deferred",

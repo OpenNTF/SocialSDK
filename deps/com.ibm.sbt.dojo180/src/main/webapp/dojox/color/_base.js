@@ -1,4 +1,4 @@
-define(["../main", "dojo/_base/lang", "dojo/_base/Color", "dojo/colors"],
+define("dojox/color/_base", ["../main", "dojo/_base/lang", "dojo/_base/Color", "dojo/colors"],
 	function(dojox, lang, Color, colors){
 
 var cx = lang.getObject("color", true, dojox);

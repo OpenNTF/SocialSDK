@@ -1,4 +1,4 @@
-define([
+define("dojo/when", [
 	"./Deferred",
 	"./promise/Promise"
 ], function(Deferred, Promise){

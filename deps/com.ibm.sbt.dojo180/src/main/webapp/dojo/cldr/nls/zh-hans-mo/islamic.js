@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/zh-hans-mo/islamic", //begin v1.x content
 {
 	"quarters-standAlone-wide": [
 		"第一季度",

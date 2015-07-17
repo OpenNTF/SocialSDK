@@ -1,4 +1,4 @@
-define(["./_WidgetBase"], function(_WidgetBase){
+define("dijit/_BidiSupport", ["./_WidgetBase"], function(_WidgetBase){
 
 	// module:
 	//		dijit/_BidiSupport

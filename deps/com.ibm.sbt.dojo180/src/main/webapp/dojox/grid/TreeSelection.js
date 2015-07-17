@@ -1,4 +1,4 @@
-define([
+define("dojox/grid/TreeSelection", [
 	"../main",
 	"dojo/_base/declare",
 	"dojo/_base/array",

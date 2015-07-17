@@ -1,4 +1,4 @@
-define(["dojo/_base/declare", "dojo/_base/lang", "dojo/dom-style", "dojo/dom-class", "dojo/Stateful"],
+define("dojox/calendar/_RendererMixin", ["dojo/_base/declare", "dojo/_base/lang", "dojo/dom-style", "dojo/dom-class", "dojo/Stateful"],
 	 
 	function(declare, lang, domStyle, domClass, Stateful){
 	

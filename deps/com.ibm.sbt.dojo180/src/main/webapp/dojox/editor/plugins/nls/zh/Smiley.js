@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/zh/Smiley", ({
 	smiley: "插入表情图标",
 	emoticonSmile: "微笑",
 	emoticonLaughing: "大笑",

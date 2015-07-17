@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/ta-sg/currency", //begin v1.x content
 {
 	"MYR_symbol": "RM",
 	"SGD_symbol": "S$",

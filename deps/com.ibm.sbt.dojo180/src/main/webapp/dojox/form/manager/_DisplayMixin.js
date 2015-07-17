@@ -1,4 +1,4 @@
-define([
+define("dojox/form/manager/_DisplayMixin", [
 	"dojo/_base/kernel",
 	"dojo/dom-style",
 	"dojo/_base/declare"

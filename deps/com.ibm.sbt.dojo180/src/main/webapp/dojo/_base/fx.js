@@ -1,4 +1,4 @@
-define(["./kernel", "./config", /*===== "./declare", =====*/ "./lang", "../Evented", "./Color", "./connect", "./sniff", "../dom", "../dom-style"],
+define("dojo/_base/fx", ["./kernel", "./config", /*===== "./declare", =====*/ "./lang", "../Evented", "./Color", "./connect", "./sniff", "../dom", "../dom-style"],
 	function(dojo, config, /*===== declare, =====*/ lang, Evented, Color, connect, has, dom, style){
 	// module:
 	//		dojo/_base/fx
@@ -660,7 +660,7 @@ define(["./kernel", "./config", /*===== "./declare", =====*/ "./lang", "../Event
 	};
 
 
-	if(has("extend-dojo")){
+	if( 1 ){
 		_mixin(dojo, basefx);
 		// Alias to drop come 2.0:
 		dojo._Animation = Animation;

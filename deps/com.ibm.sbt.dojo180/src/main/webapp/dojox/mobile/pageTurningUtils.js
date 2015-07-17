@@ -1,4 +1,4 @@
-define([
+define("dojox/mobile/pageTurningUtils", [
 	"dojo/_base/kernel",
 	"dojo/_base/array",
 	"dojo/_base/connect",

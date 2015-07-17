@@ -1,4 +1,4 @@
-define(["dojo", "../util/oo", "../plugins/_Plugin", "../manager/_registry"], 
+define("dojox/drawing/ui/Tooltip", ["dojo", "../util/oo", "../plugins/_Plugin", "../manager/_registry"], 
 function(dojo, oo, Plugin, registry){
 	
 	var master = null;

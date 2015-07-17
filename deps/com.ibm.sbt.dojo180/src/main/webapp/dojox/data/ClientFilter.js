@@ -1,4 +1,4 @@
-define(["dojo/_base/declare", "dojo/_base/lang", "dojo/_base/array", "dojo/_base/Deferred", "dojo/data/util/filter"], 
+define("dojox/data/ClientFilter", ["dojo/_base/declare", "dojo/_base/lang", "dojo/_base/array", "dojo/_base/Deferred", "dojo/data/util/filter"], 
   function(declare, lang, array, Deferred, filter) {
 
 // This is an abstract data store module for adding updatable result set functionality to an existing data store class

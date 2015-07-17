@@ -1,4 +1,4 @@
-define([
+define("dojox/mobile/Badge", [
 	"dojo/_base/declare",
 	"dojo/_base/lang",
 	"dojo/dom-class",

@@ -1,4 +1,4 @@
-define([
+define("dojox/widget/rotator/Wipe", [
 	"dojo/_base/lang",
 	"dojo/_base/fx",
 	"dojo/dom-style"

@@ -1,4 +1,4 @@
-define(["dojo/_base/lang", "dojo/_base/declare", "dojo/_base/connect", "dojo/_base/Color", "dojo/dom", 
+define("dojox/gfx/canvasWithEvents", ["dojo/_base/lang", "dojo/_base/declare", "dojo/_base/connect", "dojo/_base/Color", "dojo/dom", 
 		"dojo/dom-geometry", "./_base","./canvas", "./shape", "./matrix"], 
 function(lang, declare, hub, Color, dom, domGeom, g, canvas, shapeLib, m){
 	var canvasWithEvents = g.canvasWithEvents = {

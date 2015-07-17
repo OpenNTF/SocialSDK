@@ -1,4 +1,4 @@
-define([
+define("dojox/form/YearTextBox", [
 	"dojo/_base/kernel",
 	"dojo/_base/lang",
 	"dojox/widget/YearlyCalendar",

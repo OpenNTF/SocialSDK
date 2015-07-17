@@ -1,4 +1,4 @@
-define(["dojo/_base/lang", "dojo/_base/declare", "dojo/on", "../Controller"],
+define("dojox/app/controllers/History", ["dojo/_base/lang", "dojo/_base/declare", "dojo/on", "../Controller"],
 function(lang, declare, on, Controller){
 	// module:
 	//		dojox/app/controllers/History

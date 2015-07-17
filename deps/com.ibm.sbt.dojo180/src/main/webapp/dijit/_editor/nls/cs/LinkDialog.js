@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/cs/LinkDialog", ({
 	createLinkTitle: "Vlastnosti odkazu",
 	insertImageTitle: "Vlastnosti obrázku",
 	url: "Adresa URL:",

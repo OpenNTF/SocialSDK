@@ -1,3 +1,5 @@
+// wrapped by build app
+define("dojox/mobile/app/StageController", ["dijit","dojo","dojox","dojo/require!dojox/mobile/app/SceneController"], function(dijit,dojo,dojox){
 dojo.provide("dojox.mobile.app.StageController");
 dojo.experimental("dojox.mobile.app.StageController");
 
@@ -130,3 +132,5 @@ dojo.declare("dojox.mobile.app.StageController", null,{
 
 });
 
+
+});

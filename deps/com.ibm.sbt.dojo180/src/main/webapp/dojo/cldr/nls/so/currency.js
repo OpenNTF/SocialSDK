@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/so/currency", //begin v1.x content
 {
 	"SOS_displayName": "Shilin soomaali",
 	"EUR_displayName": "Yuuroo",

@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/fr/AutoSave", ({
 	"saveLabel": "Enregistrer",
 	"saveSettingLabelOn": "Définir l'intervalle d'enregistrement automatique...",
 	"saveSettingLabelOff": "Désactiver l'enregistrement automatique",

@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/sl/Smiley", ({
 	smiley: "Vstavi čustveni simbol",
 	emoticonSmile: "smeško",
 	emoticonLaughing: "smeško z odprtimi usti",

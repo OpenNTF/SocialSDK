@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/pt-pt/currency", //begin v1.x content
 {
 	"TND_displayName": "Dinar tunisiano",
 	"UGX_displayName": "Xelim ugandense",

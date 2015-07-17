@@ -1,4 +1,4 @@
-define([
+define("dijit/PopupMenuItem", [
 	"dojo/_base/declare", // declare
 	"dojo/dom-style", // domStyle.set
 	"dojo/query", // query

@@ -1,5 +1,5 @@
 define(
-({
+"dojox/grid/enhanced/nls/tr/Filter", ({
 	"clearFilterDialogTitle": "Süzgeci Kaldır",
 	"filterDefDialogTitle": "Süzgeç",
 	"ruleTitleTemplate": "Kural ${0}",

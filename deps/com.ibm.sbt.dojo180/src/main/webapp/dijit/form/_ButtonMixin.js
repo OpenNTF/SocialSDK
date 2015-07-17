@@ -1,4 +1,4 @@
-define([
+define("dijit/form/_ButtonMixin", [
 	"dojo/_base/declare", // declare
 	"dojo/dom", // dom.setSelectable
 	"dojo/_base/event", // event.stop

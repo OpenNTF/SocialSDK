@@ -1,4 +1,4 @@
-define(["dojo/_base/lang", "../../util/oo", "../_Plugin", "../../manager/_registry"],
+define("dojox/drawing/plugins/tools/Zoom", ["dojo/_base/lang", "../../util/oo", "../_Plugin", "../../manager/_registry"],
 function(lang, oo, Plugin, registry){
 
 	// zoomInc: Float

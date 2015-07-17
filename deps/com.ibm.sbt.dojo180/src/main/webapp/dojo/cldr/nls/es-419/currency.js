@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/es-419/currency", //begin v1.x content
 {
 	"EUR_displayName": "euro",
 	"GBP_displayName": "libra esterlina británica",

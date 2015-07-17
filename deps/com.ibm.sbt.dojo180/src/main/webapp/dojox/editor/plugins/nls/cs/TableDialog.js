@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/cs/TableDialog", ({
 	insertTableTitle: "Vložit tabulku",
 	modifyTableTitle: "Upravit tabulku",
 	rows: "Řádky:",

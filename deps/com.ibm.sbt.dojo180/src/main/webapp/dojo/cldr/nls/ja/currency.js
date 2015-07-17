@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/ja/currency", //begin v1.x content
 {
 	"BRE_displayName": "ブラジル クルゼイロ (1990-1993)",
 	"DEM_displayName": "ドイツ マルク",

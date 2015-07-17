@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/es-ec/gregorian", //begin v1.x content
 {
 	"timeFormat-medium": "H:mm:ss",
 	"timeFormat-short": "H:mm",

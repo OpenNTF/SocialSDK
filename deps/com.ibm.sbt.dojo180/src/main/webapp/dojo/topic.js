@@ -1,4 +1,4 @@
-define(["./Evented"], function(Evented){
+define("dojo/topic", ["./Evented"], function(Evented){
 
 	// module:
 	//		dojo/topic

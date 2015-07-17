@@ -1,5 +1,5 @@
 define(
-({
+"dojox/atom/widget/nls/kk/FeedEntryViewer", ({
 	displayOptions: "[көрсету параметрлері]",
 	title: "Тақырып",
 	authors: "Авторлар",

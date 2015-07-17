@@ -1,4 +1,4 @@
-define([
+define("dojox/socket/Reconnect", [
 	"dojox/socket",
 	"dojo/aspect"
 ], function(dxSocket, aspect) {

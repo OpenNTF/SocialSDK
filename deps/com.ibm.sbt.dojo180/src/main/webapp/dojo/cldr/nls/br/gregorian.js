@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/br/gregorian", //begin v1.x content
 {
 	"field-second": "eilenn",
 	"field-week": "sizhun",

@@ -1,4 +1,4 @@
-define([
+define("dojox/mvc/Element", [
 	"dojo/_base/declare",
 	"dijit/_WidgetBase"
 ], function(declare, _WidgetBase){

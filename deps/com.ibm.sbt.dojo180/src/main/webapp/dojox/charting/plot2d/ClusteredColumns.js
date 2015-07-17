@@ -1,4 +1,4 @@
-define(["dojo/_base/declare", "./Columns", "./common"], 
+define("dojox/charting/plot2d/ClusteredColumns", ["dojo/_base/declare", "./Columns", "./common"], 
 	function(declare, Columns, dc){
 
 	return declare("dojox.charting.plot2d.ClusteredColumns", Columns, {

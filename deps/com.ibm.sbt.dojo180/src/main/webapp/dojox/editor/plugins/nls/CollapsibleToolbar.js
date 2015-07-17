@@ -1,4 +1,4 @@
-define({ root:
+define("dojox/editor/plugins/nls/CollapsibleToolbar", { root:
 //begin v1.x content
 ({
 	"collapse": "Collapse Editor Toolbar",

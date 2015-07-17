@@ -1,4 +1,4 @@
-define([
+define("dojox/grid/EnhancedGrid", [
 	"dojo/_base/kernel",
 	"../main",
 	"dojo/_base/declare",

@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/yo/currency", //begin v1.x content
 {
 	"USD_displayName": "Dọla ti Orílẹ́ède Amerika",
 	"TZS_displayName": "Sile ti Orílẹ́ède Tansania",

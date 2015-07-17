@@ -1,4 +1,4 @@
-define(["dojo/_base/lang"], function(lang){
+define("dojox/charting/scaler/common", ["dojo/_base/lang"], function(lang){
 
 	var eq = function(/*Number*/ a, /*Number*/ b){
 		// summary:

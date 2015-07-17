@@ -1,4 +1,4 @@
-define(["dojo/_base/declare", "dojo/data/ItemFileWriteStore", "./AndOrReadStore"],
+define("dojox/data/AndOrWriteStore", ["dojo/_base/declare", "dojo/data/ItemFileWriteStore", "./AndOrReadStore"],
   function(declare, ItemFileWriteStore, AndOrReadStore){
 
 // module:

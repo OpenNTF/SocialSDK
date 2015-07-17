@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/cgg/currency", //begin v1.x content
 {
 	"USD_displayName": "Doora ya America",
 	"TZS_displayName": "Eshiringi ya Tanzania",

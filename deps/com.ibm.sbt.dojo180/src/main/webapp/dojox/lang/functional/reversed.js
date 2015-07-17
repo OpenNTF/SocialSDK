@@ -1,4 +1,4 @@
-define(["dojo/_base/lang", "dojo/_base/kernel" ,"./lambda"],
+define("dojox/lang/functional/reversed", ["dojo/_base/lang", "dojo/_base/kernel" ,"./lambda"],
 	function(lang, kernel, df){
 // This module adds high-level functions and related constructs:
 //	- reversed versions of array-processing functions similar to standard JS functions

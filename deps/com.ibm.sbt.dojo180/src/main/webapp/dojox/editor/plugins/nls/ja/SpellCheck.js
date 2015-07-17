@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/ja/SpellCheck", ({
 	widgetLabel: "一括スペル・チェック",
 	unfound: "未検出",
 	skip: "スキップ",

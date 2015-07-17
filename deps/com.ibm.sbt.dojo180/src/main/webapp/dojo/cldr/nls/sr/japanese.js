@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/sr/japanese", //begin v1.x content
 {
 	"eraAbbr": [
 		"Таика (645-650)",

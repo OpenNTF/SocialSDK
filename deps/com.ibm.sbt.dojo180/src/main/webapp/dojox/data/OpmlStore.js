@@ -1,4 +1,4 @@
-define(["dojo/_base/declare", "dojo/_base/lang", "dojo/_base/xhr", "dojo/data/util/simpleFetch", "dojo/data/util/filter",
+define("dojox/data/OpmlStore", ["dojo/_base/declare", "dojo/_base/lang", "dojo/_base/xhr", "dojo/data/util/simpleFetch", "dojo/data/util/filter",
 		"dojo/_base/kernel"],
   function(declare, lang, xhr, simpleFetch, filterUtil, kernel) {
 

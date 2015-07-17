@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/teo/currency", //begin v1.x content
 {
 	"USD_displayName": "edola lok' Amareka",
 	"TZS_displayName": "Ango'otol lok' Tanzania",

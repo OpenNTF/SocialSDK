@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/ar-tn/gregorian", //begin v1.x content
 {
 	"dateFormatItem-Md": "M/d",
 	"months-format-narrow": [

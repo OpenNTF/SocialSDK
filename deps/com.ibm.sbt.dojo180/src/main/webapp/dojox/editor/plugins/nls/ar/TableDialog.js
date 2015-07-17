@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/ar/TableDialog", ({
 	insertTableTitle: "‏ادراج جدول‏",
 	modifyTableTitle: "تعديل جدول",
 	rows: "الصفوف:",

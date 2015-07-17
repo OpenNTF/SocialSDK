@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/zh-hant-hk/gregorian", //begin v1.x content
 {
 	"dateFormat-medium": "y年M月d日",
 	"field-year-relative+-1": "上年",

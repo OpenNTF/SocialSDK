@@ -1,5 +1,5 @@
 define(
-({
+"dojox/grid/enhanced/nls/kk/Pagination", ({
 	"descTemplate": "${1} ${0} элементтің ${2} - ${3} элементі",
 	"firstTip": "Бірінші бет",
 	"lastTip": "Соңғы бет",

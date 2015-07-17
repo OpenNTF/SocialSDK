@@ -1,4 +1,4 @@
-define([
+define("dojox/dtl/ext-dojo/NodeList", [
 	"dojo/_base/lang",
 	"dojo/query",
 	"../_base"

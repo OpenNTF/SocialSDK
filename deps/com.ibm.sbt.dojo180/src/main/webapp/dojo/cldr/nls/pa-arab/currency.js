@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/pa-arab/currency", //begin v1.x content
 {
 	"INR_symbol": "ر [INR]",
 	"INR_displayName": "روپئیہ [INR]",

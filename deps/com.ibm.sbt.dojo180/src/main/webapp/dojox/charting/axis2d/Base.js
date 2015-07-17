@@ -1,4 +1,4 @@
-define(["dojo/_base/declare", "../Element"],
+define("dojox/charting/axis2d/Base", ["dojo/_base/declare", "../Element"],
 	function(declare, Element){
 	/*=====
 	var __BaseAxisCtorArgs = {

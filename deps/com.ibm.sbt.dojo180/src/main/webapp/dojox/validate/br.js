@@ -1,4 +1,4 @@
-define(["dojo/_base/lang", "./_base"], function(lang, validate){
+define("dojox/validate/br", ["dojo/_base/lang", "./_base"], function(lang, validate){
 
 var br = lang.getObject("br", true, validate);
 br.isValidCnpj = function(/*String*/value){

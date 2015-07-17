@@ -1,4 +1,4 @@
-define(["dojo/_base/declare", "dojo/_base/lang", "dojo/_base/kernel", "dojo/_base/json", "dojo/_base/xhr"],
+define("dojox/data/FileStore", ["dojo/_base/declare", "dojo/_base/lang", "dojo/_base/kernel", "dojo/_base/json", "dojo/_base/xhr"],
   function(declare, lang, kernel, jsonUtil, xhr) {
 
 return declare("dojox.data.FileStore", null, {

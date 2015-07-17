@@ -1,4 +1,4 @@
-define([
+define("dijit/_editor/RichText", [
 	"dojo/_base/array", // array.forEach array.indexOf array.some
 	"dojo/_base/config", // config
 	"dojo/_base/declare", // declare

@@ -1,4 +1,4 @@
-define([
+define("dojo/promise/instrumentation", [
 	"./tracer",
 	"../has",
 	"../_base/lang",

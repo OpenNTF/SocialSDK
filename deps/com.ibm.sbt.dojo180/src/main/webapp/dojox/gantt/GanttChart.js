@@ -1,5 +1,5 @@
 // FIXME: documentation
-define([
+define("dojox/gantt/GanttChart", [
     "./GanttProjectItem",
     "./GanttResourceItem",
     "./GanttProjectControl",

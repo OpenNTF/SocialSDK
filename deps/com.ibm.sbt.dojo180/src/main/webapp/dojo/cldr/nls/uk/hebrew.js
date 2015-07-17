@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/uk/hebrew", //begin v1.x content
 {
 	"quarters-standAlone-wide": [
 		"1-й квартал",

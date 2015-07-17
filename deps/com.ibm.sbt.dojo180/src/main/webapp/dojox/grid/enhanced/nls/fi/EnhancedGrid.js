@@ -1,5 +1,5 @@
 define(
-({
+"dojox/grid/enhanced/nls/fi/EnhancedGrid", ({
 	singleSort: "Yksinkertainen lajittelu",
 	nestedSort: "Sisäkkäinen lajittelu",
 	ascending: "Lajittele nousevaan järjestykseen napsauttamalla",

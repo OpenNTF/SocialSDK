@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/cs/Breadcrumb", ({
 	"nodeActions": "Akce uzlu ${nodeName}",
 	"selectContents": "Vybrat obsah",
 	"selectElement": "Vybrat prvek",

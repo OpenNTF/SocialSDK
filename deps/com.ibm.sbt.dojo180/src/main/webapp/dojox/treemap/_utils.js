@@ -1,4 +1,4 @@
-define(["dojo/_base/array"], function(arr){
+define("dojox/treemap/_utils", ["dojo/_base/array"], function(arr){
 	var utils = {
 		group: function(/*Array*/items, /*Array*/groupingFunctions,  /*Function*/measureFunction){
 			var response = {

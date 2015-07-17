@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/el/currency", //begin v1.x content
 {
 	"KHR_displayName": "Ρίελ Καμπότζης",
 	"FJD_displayName": "Δολάριο Φίτζι",

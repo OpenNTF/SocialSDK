@@ -1,4 +1,4 @@
-define(["dojo/_base/array","dojo/_base/lang", "dojo/_base/fx", "dojo/fx", "dojo/dom", "dojo/dom-style",
+define("dojox/fx/_base", ["dojo/_base/array","dojo/_base/lang", "dojo/_base/fx", "dojo/fx", "dojo/dom", "dojo/dom-style",
 	    "dojo/dom-geometry", "dojo/_base/connect", "dojo/_base/html"],
 	function(arrayUtil, lang, baseFx, coreFx, dom, domStyle, domGeom, connectUtil, htmlUtil){
 

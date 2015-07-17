@@ -1,4 +1,4 @@
-define([
+define("dojox/mvc/StoreRefController", [
 	"dojo/_base/declare",
 	"dojo/_base/lang",
 	"dojo/when",

@@ -1,4 +1,4 @@
-define(["dojo/_base/lang","dojo/_base/declare", "dojo/_base/connect", "dojo/io/script", "dojo/data/util/simpleFetch", "dojo/date/stamp"], 
+define("dojox/data/PicasaStore", ["dojo/_base/lang","dojo/_base/declare", "dojo/_base/connect", "dojo/io/script", "dojo/data/util/simpleFetch", "dojo/date/stamp"], 
   function(lang, declare, connect, scriptIO, simpleFetch, dateStamp) {
 
 var PicasaStore = declare("dojox.data.PicasaStore", null, {

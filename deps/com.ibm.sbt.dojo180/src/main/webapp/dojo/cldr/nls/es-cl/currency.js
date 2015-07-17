@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/es-cl/currency", //begin v1.x content
 {
 	"CLP_symbol": "$"
 }

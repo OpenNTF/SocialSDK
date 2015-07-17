@@ -1,4 +1,4 @@
-define(["dojo/_base/lang", "dojo/_base/Color", "../../Theme", "../common"],
+define("dojox/charting/themes/PlotKit/base", ["dojo/_base/lang", "dojo/_base/Color", "../../Theme", "../common"],
 	function(lang, Color, Theme, themes){
 
 	// the baseline theme for all PlotKIt themes

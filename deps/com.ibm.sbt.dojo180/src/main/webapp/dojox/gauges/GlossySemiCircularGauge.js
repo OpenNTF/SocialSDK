@@ -1,4 +1,4 @@
-define(["dojo/_base/declare","dojo/_base/Color","./GlossyCircularGaugeBase"],
+define("dojox/gauges/GlossySemiCircularGauge", ["dojo/_base/declare","dojo/_base/Color","./GlossyCircularGaugeBase"],
   function(declare, Color, GlossyCircularGaugeBase) {
 
 return declare("dojox.gauges.GlossySemiCircularGauge", [GlossyCircularGaugeBase], {

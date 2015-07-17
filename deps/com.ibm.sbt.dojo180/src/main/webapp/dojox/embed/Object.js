@@ -1,4 +1,4 @@
-define([
+define("dojox/embed/Object", [
 	"dojo/_base/kernel",
 	"dojo/_base/declare",	// dojo.declare
 	"dojo/dom-geometry",

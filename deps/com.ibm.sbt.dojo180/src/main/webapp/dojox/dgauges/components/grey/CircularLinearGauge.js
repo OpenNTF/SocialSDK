@@ -1,4 +1,4 @@
-define([
+define("dojox/dgauges/components/grey/CircularLinearGauge", [
 		"dojo/_base/lang",
 		"dojo/_base/declare",
 		"dojo/_base/Color",

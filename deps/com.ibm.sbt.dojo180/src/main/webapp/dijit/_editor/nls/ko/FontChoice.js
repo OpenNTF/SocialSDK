@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/ko/FontChoice", ({
 	fontSize: "크기",
 	fontName: "글꼴",
 	formatBlock: "서식",

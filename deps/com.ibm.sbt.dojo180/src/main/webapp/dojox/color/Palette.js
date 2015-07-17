@@ -1,4 +1,4 @@
-define(["dojo/_base/lang", "dojo/_base/array", "./_base"],
+define("dojox/color/Palette", ["dojo/_base/lang", "dojo/_base/array", "./_base"],
 	function(lang, arr, dxc){
 
 	/***************************************************************

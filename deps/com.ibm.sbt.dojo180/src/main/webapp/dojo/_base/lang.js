@@ -1,4 +1,4 @@
-define(["./kernel", "../has", "../sniff"], function(dojo, has){
+define("dojo/_base/lang", ["./kernel", "../has", "../sniff"], function(dojo, has){
 	// module:
 	//		dojo/_base/lang
 
@@ -598,7 +598,7 @@ define(["./kernel", "../has", "../sniff"], function(dojo, has){
 		}
 	};
 
-	has("extend-dojo") && lang.mixin(dojo, lang);
+	 1  && lang.mixin(dojo, lang);
 
 	return lang;
 });

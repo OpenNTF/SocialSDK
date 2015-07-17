@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/pt-ao/currency", //begin v1.x content
 {
 	"AOA_symbol": "Kz"
 }

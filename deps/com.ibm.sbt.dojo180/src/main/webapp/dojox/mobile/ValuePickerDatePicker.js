@@ -1,4 +1,4 @@
-define([
+define("dojox/mobile/ValuePickerDatePicker", [
 	"dojo/_base/declare",
 	"dojo/dom-class",
 	"./_DatePickerMixin",

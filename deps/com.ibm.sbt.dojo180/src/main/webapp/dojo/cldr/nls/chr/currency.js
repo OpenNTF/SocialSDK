@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/chr/currency", //begin v1.x content
 {
 	"RUB_displayName": "ᏲᏂᎢ ᎠᏕᎳ",
 	"CAD_displayName": "ᎧᎾᏓ ᎠᏕᎳ",

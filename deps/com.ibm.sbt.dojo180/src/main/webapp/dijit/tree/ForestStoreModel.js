@@ -1,4 +1,4 @@
-define([
+define("dijit/tree/ForestStoreModel", [
 	"dojo/_base/array", // array.indexOf array.some
 	"dojo/_base/declare", // declare
 	"dojo/_base/kernel", // global

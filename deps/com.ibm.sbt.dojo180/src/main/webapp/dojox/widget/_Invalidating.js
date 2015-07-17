@@ -1,4 +1,4 @@
-define(["dojo/_base/declare", "dojo/_base/lang", "dojo/Stateful"], 
+define("dojox/widget/_Invalidating", ["dojo/_base/declare", "dojo/_base/lang", "dojo/Stateful"], 
 	function(declare, lang, Stateful){
 		
 	return declare("dojox.widget._Invalidating", Stateful, {

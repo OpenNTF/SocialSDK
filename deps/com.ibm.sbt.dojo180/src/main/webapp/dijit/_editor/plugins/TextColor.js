@@ -1,4 +1,4 @@
-define([
+define("dijit/_editor/plugins/TextColor", [
 	"require",
 	"dojo/colors", // colors.fromRgb
 	"dojo/_base/declare", // declare

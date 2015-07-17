@@ -1,4 +1,4 @@
-define(["../library/greek"], function(greeks){
+define("dojox/drawing/util/typeset", ["../library/greek"], function(greeks){
 // summary:
 //		Singleton used for converting characters and typsetting.  Required by _base.
 // description:

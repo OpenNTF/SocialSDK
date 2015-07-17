@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/uk/commands", ({
 	'bold': 'Напівжирний',
 	'copy': 'Копіювати',
 	'cut': 'Вирізати',

@@ -1,4 +1,4 @@
-define(["dojo/_base/lang","../_base", "dojo/_base/config", "dojo/ready"
+define("dojox/analytics/plugins/dojo", ["dojo/_base/lang","../_base", "dojo/_base/config", "dojo/ready"
 ], function(lang, dxa, config, ready){
 	var plugins = lang.getObject("dojox.analytics.plugins", true);
 

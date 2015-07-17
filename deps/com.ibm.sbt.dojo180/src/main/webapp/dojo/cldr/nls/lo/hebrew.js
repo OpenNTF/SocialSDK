@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/lo/hebrew", //begin v1.x content
 {
 	"quarters-standAlone-wide": [
 		"ໄຕມາດ1",

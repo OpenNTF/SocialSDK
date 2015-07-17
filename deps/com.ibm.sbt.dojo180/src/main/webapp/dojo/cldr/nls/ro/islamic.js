@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/ro/islamic", //begin v1.x content
 {
 	"quarters-standAlone-wide": [
 		"trimestrul I",

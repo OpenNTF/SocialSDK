@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/fo/currency", //begin v1.x content
 {
 	"DKK_symbol": "kr"
 }

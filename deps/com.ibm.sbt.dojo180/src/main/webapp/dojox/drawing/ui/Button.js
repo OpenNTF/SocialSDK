@@ -1,4 +1,4 @@
-define(["dojo", "../util/oo", "../stencil/Rect", "../stencil/Ellipse",
+define("dojox/drawing/ui/Button", ["dojo", "../util/oo", "../stencil/Rect", "../stencil/Ellipse",
 "../stencil/Text", "../manager/_registry"],
   function(dojo, oo, Rect, Ellipse, Text, registry){
 

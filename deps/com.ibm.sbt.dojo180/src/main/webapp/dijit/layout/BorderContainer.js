@@ -1,4 +1,4 @@
-define([
+define("dijit/layout/BorderContainer", [
 	"dojo/_base/array", // array.filter array.forEach array.map
 	"dojo/cookie", // cookie
 	"dojo/_base/declare", // declare

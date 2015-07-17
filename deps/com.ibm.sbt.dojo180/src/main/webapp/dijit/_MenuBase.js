@@ -1,4 +1,4 @@
-define([
+define("dijit/_MenuBase", [
 	"dojo/_base/array",	// array.indexOf
 	"dojo/_base/declare", // declare
 	"dojo/dom", // dom.isDescendant domClass.replace

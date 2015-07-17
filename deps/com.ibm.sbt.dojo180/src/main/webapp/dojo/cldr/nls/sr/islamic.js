@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/sr/islamic", //begin v1.x content
 {
 	"dayPeriods-format-wide-pm": "поподне",
 	"eraNames": [

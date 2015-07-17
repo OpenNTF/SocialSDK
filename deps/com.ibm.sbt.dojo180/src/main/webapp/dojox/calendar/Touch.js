@@ -1,4 +1,4 @@
-define(["dojo/_base/array", "dojo/_base/lang", "dojo/_base/declare", "dojo/dom", "dojo/dom-geometry", "dojo/_base/window", "dojo/on", "dojo/_base/event", "dojo/keys"],
+define("dojox/calendar/Touch", ["dojo/_base/array", "dojo/_base/lang", "dojo/_base/declare", "dojo/dom", "dojo/dom-geometry", "dojo/_base/window", "dojo/on", "dojo/_base/event", "dojo/keys"],
 
 	function(arr, lang, declare, dom, domGeometry, win, on, event, keys){
 			

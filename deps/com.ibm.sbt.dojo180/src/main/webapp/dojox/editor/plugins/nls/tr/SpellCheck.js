@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/tr/SpellCheck", ({
 	widgetLabel: "Toplu Yazım Denetimi",
 	unfound: "Bulunamadı",
 	skip: "Atla",

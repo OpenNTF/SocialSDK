@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/ca/AutoSave", ({
 	"saveLabel": "Desa",
 	"saveSettingLabelOn": "Estableix l'interval per desar automàticament...",
 	"saveSettingLabelOff": "Deshabilita el desat automàtic",

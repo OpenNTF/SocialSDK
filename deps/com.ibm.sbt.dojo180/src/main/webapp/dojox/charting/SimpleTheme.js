@@ -1,4 +1,4 @@
-define(["dojo/_base/lang", "dojo/_base/array","dojo/_base/declare","dojo/_base/Color", "dojox/lang/utils", "dojox/gfx/gradutils"],
+define("dojox/charting/SimpleTheme", ["dojo/_base/lang", "dojo/_base/array","dojo/_base/declare","dojo/_base/Color", "dojox/lang/utils", "dojox/gfx/gradutils"],
 	function(lang, arr, declare, Color, dlu, dgg){
 	
 	var SimpleTheme = declare("dojox.charting.SimpleTheme", null, {

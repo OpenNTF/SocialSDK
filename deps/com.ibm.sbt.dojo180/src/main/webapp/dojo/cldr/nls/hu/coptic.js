@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/hu/coptic", //begin v1.x content
 {
 	"months-format-abbr": [
 		"Tout",

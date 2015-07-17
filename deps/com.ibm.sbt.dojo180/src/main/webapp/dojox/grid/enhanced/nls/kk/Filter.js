@@ -1,5 +1,5 @@
 define(
-({
+"dojox/grid/enhanced/nls/kk/Filter", ({
 	"clearFilterDialogTitle": "Сүзгіні тазалау",
 	"filterDefDialogTitle": "Сүзгі",
 	"ruleTitleTemplate": "${0} ережесі",

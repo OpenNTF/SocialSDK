@@ -1,4 +1,4 @@
-define(["./validate/_base"], function(validate){
+define("dojox/validate", ["./validate/_base"], function(validate){
 
 	/*=====
 	 return {

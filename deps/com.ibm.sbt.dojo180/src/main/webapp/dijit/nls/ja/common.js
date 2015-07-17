@@ -1,5 +1,5 @@
 define(
-({
+"dijit/nls/ja/common", ({
 	buttonOk: "OK",
 	buttonCancel: "キャンセル",
 	buttonSave: "保存",

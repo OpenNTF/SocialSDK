@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/uk/FontChoice", ({
 	fontSize: "Розмір",
 	fontName: "Шрифт",
 	formatBlock: "Формат",

@@ -1,4 +1,4 @@
-define(["dojo", "dojox", "dojo/io/script", "dojo/data/util/sorter"], function(dojo, dojox) {
+define("dojox/data/SnapLogicStore", ["dojo", "dojox", "dojo/io/script", "dojo/data/util/sorter"], function(dojo, dojox) {
 
 dojo.declare("dojox.data.SnapLogicStore", null, {
 	Parts: {

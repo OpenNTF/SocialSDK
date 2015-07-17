@@ -1,4 +1,4 @@
-define(["dojo/_base/kernel", "dojo/_base/lang"], function(dojo){
+define("dojox/timing/_base", ["dojo/_base/kernel", "dojo/_base/lang"], function(dojo){
 	dojo.experimental("dojox.timing");
 	dojo.getObject("timing", true, dojox);
 

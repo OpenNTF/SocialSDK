@@ -1,4 +1,4 @@
-define([
+define("dijit/PopupMenuBarItem", [
 	"dojo/_base/declare", // declare
 	"./PopupMenuItem",
 	"./MenuBarItem"

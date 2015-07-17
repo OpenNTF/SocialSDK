@@ -1,5 +1,5 @@
 define(
-({
+"dojox/widget/nls/de/ColorPicker", ({
 redLabel: "r",
 greenLabel: "g",
 blueLabel: "b",

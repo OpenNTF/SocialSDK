@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/lo/currency", //begin v1.x content
 {
 	"BRE_displayName": "ກຣູເຊໂຣ ບາຊິ ກຣູໂຊ ບາຊິວ (1993-1994)",
 	"DEM_displayName": "ມາກ ເຢຍລະມັນ",

@@ -1,4 +1,4 @@
-define([
+define("dojo/dnd/Selector", [
 	"../_base/array", "../_base/declare", "../_base/event", "../_base/kernel", "../_base/lang",
 	"../dom", "../dom-construct", "../mouse", "../_base/NodeList", "../on", "../touch", "./common", "./Container"
 ], function(array, declare, event, kernel, lang, dom, domConstruct, mouse, NodeList, on, touch, dnd, Container){

@@ -1,4 +1,4 @@
-define([
+define("dojox/mobile/Switch", [
 	"dojo/_base/array",
 	"dojo/_base/connect",
 	"dojo/_base/declare",

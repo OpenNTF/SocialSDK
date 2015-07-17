@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/bez/currency", //begin v1.x content
 {
 	"USD_displayName": "Lupila lwa Humalekani",
 	"TZS_displayName": "Shilingi ya Hutanzania",

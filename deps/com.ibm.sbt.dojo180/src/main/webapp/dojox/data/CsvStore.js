@@ -1,4 +1,4 @@
-define(["dojo/_base/lang", "dojo/_base/declare", "dojo/_base/xhr", "dojo/_base/kernel","dojo/data/util/filter", "dojo/data/util/simpleFetch"],
+define("dojox/data/CsvStore", ["dojo/_base/lang", "dojo/_base/declare", "dojo/_base/xhr", "dojo/_base/kernel","dojo/data/util/filter", "dojo/data/util/simpleFetch"],
   function(lang, declare, xhr, kernel, filterUtil, simpleFetch) {
 
 var CsvStore = declare("dojox.data.CsvStore", null, {

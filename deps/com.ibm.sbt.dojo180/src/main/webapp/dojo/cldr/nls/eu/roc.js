@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/eu/roc", //begin v1.x content
 {
 	"eraAbbr": [
 		"R.O.C. aurretik",

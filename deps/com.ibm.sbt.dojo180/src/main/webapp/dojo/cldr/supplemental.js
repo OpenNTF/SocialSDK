@@ -1,4 +1,4 @@
-define(["../_base/lang", "../i18n"], function(lang, i18n){
+define("dojo/cldr/supplemental", ["../_base/lang", "../i18n"], function(lang, i18n){
 
 // module:
 //		dojo/cldr/supplemental

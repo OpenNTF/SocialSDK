@@ -1,4 +1,4 @@
-define(["dojo", "../util/oo", "./_Base", "../manager/_registry"], 
+define("dojox/drawing/stencil/Image", ["dojo", "../util/oo", "./_Base", "../manager/_registry"], 
 function(dojo, oo, Base, registry){
 
 var Image = oo.declare(

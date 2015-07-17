@@ -1,4 +1,4 @@
-define([
+define("dijit/form/RangeBoundTextBox", [
 	"dojo/_base/declare", // declare
 	"dojo/i18n", // i18n.getLocalization
 	"./MappedTextBox"

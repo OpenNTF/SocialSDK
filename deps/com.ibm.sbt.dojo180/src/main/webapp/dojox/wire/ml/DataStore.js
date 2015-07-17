@@ -1,3 +1,5 @@
+// wrapped by build app
+define("dojox/wire/ml/DataStore", ["dijit","dojo","dojox","dojo/require!dijit/_Widget,dojox/wire/_base"], function(dijit,dojo,dojox){
 dojo.provide("dojox.wire.ml.DataStore");
 
 dojo.require("dijit._Widget");
@@ -109,4 +111,6 @@ dojo.declare("dojox.wire.ml.DataStore", dijit._Widget, {
 		//		A boolean
 		return this.store.revert(); //Boolean
 	}
+});
+
 });

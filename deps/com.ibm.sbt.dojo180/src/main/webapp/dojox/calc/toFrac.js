@@ -1,4 +1,4 @@
-define([
+define("dojox/calc/toFrac", [
 	"dojo/_base/lang",
 	"dojox/calc/_Executor"
 ], function(lang, calc) {

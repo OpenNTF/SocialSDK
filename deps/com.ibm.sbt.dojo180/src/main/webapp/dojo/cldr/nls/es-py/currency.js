@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/es-py/currency", //begin v1.x content
 {
 	"PYG_symbol": "₲"
 }

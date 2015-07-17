@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/hu/roc", //begin v1.x content
 {
 	"dateFormatItem-h": "a h",
 	"eraAbbr": [

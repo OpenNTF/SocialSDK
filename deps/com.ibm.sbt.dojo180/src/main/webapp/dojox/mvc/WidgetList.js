@@ -1,4 +1,4 @@
-define([
+define("dojox/mvc/WidgetList", [
 	"require",
 	"dojo/_base/array",
 	"dojo/_base/lang",

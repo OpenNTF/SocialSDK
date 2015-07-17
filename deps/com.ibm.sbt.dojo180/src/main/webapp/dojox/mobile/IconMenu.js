@@ -1,4 +1,4 @@
-define([
+define("dojox/mobile/IconMenu", [
 	"dojo/_base/declare",
 	"dojo/_base/sniff",
 	"dojo/dom-class",

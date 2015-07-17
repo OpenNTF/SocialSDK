@@ -1,4 +1,4 @@
-define([
+define("dojox/grid/enhanced/plugins/_RowMapLayer", [
 	"dojo/_base/array",
 	"dojo/_base/declare",
 	"dojo/_base/kernel",

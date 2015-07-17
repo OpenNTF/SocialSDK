@@ -1,4 +1,4 @@
-define(["dojo/_base/declare", "dojo/_base/array", "dojo/_base/lang", "dojo/Stateful"], 
+define("dojox/widget/Selection", ["dojo/_base/declare", "dojo/_base/array", "dojo/_base/lang", "dojo/Stateful"], 
 	function(declare, arr, lang, Stateful){
 		
 	return declare("dojox.widget.Selection", Stateful, {

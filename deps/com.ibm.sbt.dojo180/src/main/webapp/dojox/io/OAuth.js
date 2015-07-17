@@ -1,4 +1,4 @@
-define([
+define("dojox/io/OAuth", [
 	"dojo/_base/kernel", // dojo
 	"dojo/_base/lang", // mixin
 	"dojo/_base/array", // isArray, map

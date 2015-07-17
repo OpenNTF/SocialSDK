@@ -1,4 +1,4 @@
-define([
+define("dojox/charting/plot2d/commonStacked", [
 	"dojo/_base/lang",
 	"./common"
 ], function(lang, common){

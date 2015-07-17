@@ -1,4 +1,4 @@
-define(["dojo/_base/lang", "dojo/_base/declare", "dojo/_base/xhr", "dojo/data/util/simpleFetch", 
+define("dojox/data/XmlStore", ["dojo/_base/lang", "dojo/_base/declare", "dojo/_base/xhr", "dojo/data/util/simpleFetch", 
 		"dojo/_base/query", "dojo/_base/array", "dojo/_base/kernel", "dojo/data/util/filter", "dojox/xml/parser",
 		"dojox/data/XmlItem"], 
   function(lang, declare, xhr, simpleFetch, domQuery, array, kernel, filter, xmlParser, XmlItem) {

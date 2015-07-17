@@ -1,4 +1,4 @@
-define(["../_base"], function(dh){
+define("dojox/highlight/languages/xml", ["../_base"], function(dh){
 
 	var XML_COMMENT = {
 		className: 'comment',

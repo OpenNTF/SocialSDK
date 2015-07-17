@@ -1,4 +1,4 @@
-define(["../_base", "./xml"], function(dh){
+define("dojox/highlight/languages/html", ["../_base", "./xml"], function(dh){
 
 	var HTML_TAGS = {
 		'code': 1, 'kbd': 1, 'font': 1, 'noscript': 1, 'style': 1, 'img': 1,

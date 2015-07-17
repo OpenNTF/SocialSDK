@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/ja/persian", //begin v1.x content
 {
 	"months-format-abbr": [
 		"ファルヴァルディーン",

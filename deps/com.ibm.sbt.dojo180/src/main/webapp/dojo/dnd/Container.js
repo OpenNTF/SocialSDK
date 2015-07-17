@@ -1,4 +1,4 @@
-define([
+define("dojo/dnd/Container", [
 	"../_base/array",
 	"../_base/declare",
 	"../_base/event",

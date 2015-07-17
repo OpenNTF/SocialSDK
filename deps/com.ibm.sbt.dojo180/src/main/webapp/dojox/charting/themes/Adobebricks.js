@@ -1,4 +1,4 @@
-define(["../SimpleTheme", "./common"], function(SimpleTheme, themes){
+define("dojox/charting/themes/Adobebricks", ["../SimpleTheme", "./common"], function(SimpleTheme, themes){
 	themes.Adobebricks = new SimpleTheme({
 		colors: [
 			"#7f2518",

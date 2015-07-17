@@ -1,4 +1,4 @@
-define(["dojo/_base/kernel", "dojo/_base/lang", "dojo/_base/Color", "dojo/_base/sniff", "dojo/_base/window",
+define("dojox/gfx/_base", ["dojo/_base/kernel", "dojo/_base/lang", "dojo/_base/Color", "dojo/_base/sniff", "dojo/_base/window",
 	    "dojo/_base/array","dojo/dom", "dojo/dom-construct","dojo/dom-geometry"],
 function(kernel, lang, Color, has, win, arr, dom, domConstruct, domGeom){
 	// module:

@@ -1,9 +1,9 @@
-define([
+define("dojo/Deferred", [
 	"./has",
 	"./_base/lang",
 	"./errors/CancelError",
 	"./promise/Promise",
-	"./has!config-deferredInstrumentation?./promise/instrumentation"
+	"./promise/instrumentation"
 ], function(has, lang, CancelError, Promise, instrumentation){
 	"use strict";
 
@@ -18,7 +18,7 @@ define([
 	var freezeObject = Object.freeze || function(){};
 
 	var signalWaiting = function(waiting, type, result, rejection, deferred){
-		if(has("config-deferredInstrumentation")){
+		if( 1 ){
 			if(type === REJECTED && Deferred.instrumentRejected && waiting.length === 0){
 				Deferred.instrumentRejected(result, false, rejection, deferred);
 			}
@@ -58,7 +58,7 @@ define([
 			signalDeferred(deferred, type, result);
 		}
 
-		if(has("config-deferredInstrumentation")){
+		if( 1 ){
 			if(type === REJECTED && Deferred.instrumentRejected){
 				Deferred.instrumentRejected(result, !!func, rejection, deferred.promise);
 			}
@@ -111,7 +111,7 @@ define([
 		var canceled = false;
 		var waiting = [];
 
-		if(has("config-deferredInstrumentation") && Error.captureStackTrace){
+		if( 1  && Error.captureStackTrace){
 			Error.captureStackTrace(deferred, Deferred);
 			Error.captureStackTrace(promise, Deferred);
 		}
@@ -213,7 +213,7 @@ define([
 			//		Returns the original promise for the deferred.
 
 			if(!fulfilled){
-				if(has("config-deferredInstrumentation") && Error.captureStackTrace){
+				if( 1  && Error.captureStackTrace){
 					Error.captureStackTrace(rejection = {}, reject);
 				}
 				signalWaiting(waiting, fulfilled = REJECTED, result = error, rejection, deferred);

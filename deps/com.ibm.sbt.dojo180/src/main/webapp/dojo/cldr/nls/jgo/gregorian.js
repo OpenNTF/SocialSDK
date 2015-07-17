@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/jgo/gregorian", //begin v1.x content
 {
 	"dayPeriods-format-wide-pm": "ŋka mbɔ́t nji",
 	"eraNames": [

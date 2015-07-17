@@ -1,4 +1,4 @@
-define(["dojo/_base/kernel", "dojo/_base/lang", "dojo/_base/array"], 
+define("dojox/collections/_base", ["dojo/_base/kernel", "dojo/_base/lang", "dojo/_base/array"], 
   function(dojo, lang, arr){
 	var collections = lang.getObject("dojox.collections", true);
 

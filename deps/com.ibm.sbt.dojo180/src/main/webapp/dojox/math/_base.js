@@ -1,5 +1,5 @@
 // AMD-ID "dojox/math/_base"
-define(["dojo", "dojox"], function(dojo, dojox) {
+define("dojox/math/_base", ["dojo", "dojox"], function(dojo, dojox) {
 	dojo.getObject("math", true, dojox);
 
 	var m = dojox.math;

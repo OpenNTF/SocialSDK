@@ -1,4 +1,4 @@
-define(["dojo/_base/declare","./AnalogIndicatorBase"],
+define("dojox/gauges/AnalogCircleIndicator", ["dojo/_base/declare","./AnalogIndicatorBase"],
   function(declare, AnalogIndicatorBase) {
 
 return declare("dojox.gauges.AnalogCircleIndicator", [AnalogIndicatorBase], {

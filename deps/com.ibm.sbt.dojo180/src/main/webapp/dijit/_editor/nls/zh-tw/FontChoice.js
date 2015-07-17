@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/zh-tw/FontChoice", ({
 	fontSize: "大小",
 	fontName: "字型",
 	formatBlock: "格式",

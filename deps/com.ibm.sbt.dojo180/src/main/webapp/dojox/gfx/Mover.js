@@ -1,4 +1,4 @@
-define(["dojo/_base/lang","dojo/_base/array", "dojo/_base/declare", "dojo/on", "dojo/has", "dojo/_base/event"],
+define("dojox/gfx/Mover", ["dojo/_base/lang","dojo/_base/array", "dojo/_base/declare", "dojo/on", "dojo/has", "dojo/_base/event"],
   function(lang, arr, declare, on, has, event){
 	return declare("dojox.gfx.Mover", null, {
 		constructor: function(shape, e, host){

@@ -1,4 +1,4 @@
-define(["dojo/_base/lang",
+define("dojox/css3/transition", ["dojo/_base/lang",
 		"dojo/_base/array",
 		"dojo/_base/Deferred",
 		"dojo/DeferredList",

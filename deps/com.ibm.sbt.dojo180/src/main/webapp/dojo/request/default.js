@@ -1,4 +1,4 @@
-define([
+define("dojo/request/default", [
 	'exports',
 	'require',
 	'../has'
@@ -6,12 +6,12 @@ define([
 	var defId = has('config-requestProvider'),
 		platformId;
 
-	if(has('host-browser')){
+	if( 1 ){
 		platformId = './xhr';
-	}else if(has('host-node')){
+	}else if( 0 ){
 		platformId = './node';
 	/* TODO:
-	}else if(has('host-rhino')){
+	}else if( 0 ){
 		platformId = './rhino';
    */
 	}

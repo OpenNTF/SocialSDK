@@ -1,5 +1,5 @@
 define(
-({
+"dojox/grid/enhanced/nls/el/Filter", ({
 	"clearFilterDialogTitle": "Εκκαθάριση φίλτρου",
 	"filterDefDialogTitle": "Φίλτρο",
 	"ruleTitleTemplate": "Κανόνας ${0}",

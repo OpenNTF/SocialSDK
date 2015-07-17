@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/ar/SpellCheck", ({
 	widgetLabel: "فحص هجاء دفعي",
 	unfound: "غير موجودة",
 	skip: "تخطي",

@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/as/gregorian", //begin v1.x content
 {
 	"quarters-standAlone-wide": [
 		"প্ৰথম প্ৰহৰ",

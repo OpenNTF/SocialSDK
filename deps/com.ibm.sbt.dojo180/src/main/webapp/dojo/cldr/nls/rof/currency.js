@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/rof/currency", //begin v1.x content
 {
 	"USD_displayName": "heleri sa Marekani",
 	"TZS_displayName": "heleri sa Tanzania",

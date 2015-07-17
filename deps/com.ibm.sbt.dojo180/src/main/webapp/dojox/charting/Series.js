@@ -1,4 +1,4 @@
-define(["dojo/_base/lang", "dojo/_base/declare", "./Element"], 
+define("dojox/charting/Series", ["dojo/_base/lang", "dojo/_base/declare", "./Element"], 
 	function(lang, declare, Element){ 
 	/*=====
 	var __SeriesCtorArgs = {

@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/ca/InsertAnchor", ({
 	insertAnchor: "Insereix una àncora",
 	title: "Propietats de l'àncora",
 	anchor: "Nom:",

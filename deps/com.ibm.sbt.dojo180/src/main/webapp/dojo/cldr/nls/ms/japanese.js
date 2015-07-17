@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/ms/japanese", //begin v1.x content
 {
 	"dateFormatItem-yyyyMMM": "MMM y G",
 	"dateFormatItem-Md": "d/M",

@@ -1,4 +1,4 @@
-define([
+define("dojox/mobile/uacss", [
 	"dojo/_base/kernel",
 	"dojo/_base/lang",
 	"dojo/_base/window",

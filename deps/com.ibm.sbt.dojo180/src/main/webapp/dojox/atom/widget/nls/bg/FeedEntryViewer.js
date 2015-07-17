@@ -1,5 +1,5 @@
 define(
-({
+"dojox/atom/widget/nls/bg/FeedEntryViewer", ({
 	displayOptions: "[опция за показване]",
 	title: "Заглавие",
 	authors: "Автори",

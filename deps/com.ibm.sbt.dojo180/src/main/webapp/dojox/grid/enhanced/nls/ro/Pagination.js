@@ -1,5 +1,5 @@
 define(
-({
+"dojox/grid/enhanced/nls/ro/Pagination", ({
 	"descTemplate": "${2} - ${3} din ${1} ${0}",
 	"firstTip": "Prima pagină",
 	"lastTip": "Ultima pagină",

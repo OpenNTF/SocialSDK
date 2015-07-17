@@ -1,4 +1,4 @@
-define(["../_base/lang","../_base/Deferred" /*=====, "../_base/declare", "./api/Store" =====*/],
+define("dojo/store/Cache", ["../_base/lang","../_base/Deferred" /*=====, "../_base/declare", "./api/Store" =====*/],
 function(lang, Deferred /*=====, declare, Store =====*/){
 
 // module:

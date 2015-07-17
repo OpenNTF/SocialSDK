@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/zh-hans-sg/roc", //begin v1.x content
 {
 	"dateFormat-short": "Gd/M/yy",
 	"dateFormat-medium": "Gy年M月d日",

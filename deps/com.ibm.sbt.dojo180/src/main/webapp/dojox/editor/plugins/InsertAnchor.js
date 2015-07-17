@@ -1,4 +1,4 @@
-define([
+define("dojox/editor/plugins/InsertAnchor", [
 	"dojo",
 	"dijit",
 	"dojox",

@@ -1,4 +1,4 @@
-define(["dojo/_base/kernel", "dojo/_base/array", "./_base"], function(dojo, darray, dxc){
+define("dojox/collections/Stack", ["dojo/_base/kernel", "dojo/_base/array", "./_base"], function(dojo, darray, dxc){
 
 	dxc.Stack=function(/*array?*/ arr){
 		// summary:

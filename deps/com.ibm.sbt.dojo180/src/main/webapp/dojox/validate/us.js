@@ -1,4 +1,4 @@
-define(["dojo/_base/lang", "./_base", "./regexp"], 
+define("dojox/validate/us", ["dojo/_base/lang", "./_base", "./regexp"], 
  function(lang, validate, xregexp){
 
 var us = lang.getObject("us", true, validate);

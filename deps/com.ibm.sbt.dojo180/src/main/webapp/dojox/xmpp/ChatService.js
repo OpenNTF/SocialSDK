@@ -1,3 +1,5 @@
+// wrapped by build app
+define("dojox/xmpp/ChatService", ["dijit","dojo","dojox"], function(dijit,dojo,dojox){
 dojo.provide("dojox.xmpp.ChatService");
 
 dojox.xmpp.chat = {
@@ -138,4 +140,6 @@ dojo.declare("dojox.xmpp.ChatService", null, {
 	//EVENTS
 	onNewMessage: function(msg){},
 	onInvite: function(contact){}
+});
+
 });

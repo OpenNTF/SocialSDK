@@ -1,4 +1,4 @@
-define({ root:
+define("dojox/editor/plugins/nls/TableDialog", { root:
 //begin v1.x content
 ({
 	insertTableTitle: "Insert Table",

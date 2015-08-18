@@ -200,7 +200,7 @@ define([ "../../../declare", "../../../lang", "../../../dom", "../../../stringUt
 				this.errorTemplate = stringUtil.transform(nls.addTagsError, { label : files[0].getLabel(), tags : tags });
 			} else {
 				this.errorTemplate = "<div>" + 
-					this.errorTemplate, stringUtil.transform(nls.addTagsErrorMulti, { length : files.length, tags : tags }) +
+					stringUtil.transform(nls.addTagsErrorMulti, { length : files.length, tags : tags }) +
 					this._getNotTaggedList(files, tags) +
 					"</div>";
 			}

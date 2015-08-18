@@ -19,12 +19,12 @@
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.commons</artifactId>
-			<version>9.0.0</version>
+			<version>1.1.6.20150817-1200</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.commons.xml</artifactId>
-			<version>9.0.0</version>
+			<version>1.1.6.20150817-1200</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>

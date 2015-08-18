@@ -16,7 +16,7 @@
 	<parent>
 		<groupId>com.ibm.sbt</groupId>
 		<artifactId>com.ibm.sbt</artifactId>
-		<version>1.1.6-SNAPSHOT</version>
+		<version>1.1.6.20150817-1200</version>
 	</parent>
 
 	<build>
@@ -320,28 +320,30 @@
 								<delete
 									dir="${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.61/webapps/ROOT" />
 
-
-
 								<copy
 									todir="${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.61/conf"
-									file="./../samples/config/sbt.properties" />
-
+									file="./../samples/config/sbt.properties"  overwrite="true" />
 
 								<copy
 									file="./../libraries/com.ibm.sbt.libs.java/lib/com.ibm.sbt.javamail-1.4.5.jar"
-									todir="${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.61/lib" />
-
+									todir="${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.61/lib"  overwrite="true"/>
 
 								<copy
-									todir="${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.61/conf">
-									<fileset dir="platform/tomcat">
-										<include name="keystore" />
-										<include name="context.xml" />
-										<include name="tomcat-users.xml" />
-										<include name="server.xml" />
-									</fileset>
-								</copy>
+									file="./../assembly/platform/tomcat/keystore"
+									todir="${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.61/conf"  overwrite="true"/>
 
+								<copy
+									file="./../assembly/platform/tomcat/context.xml"
+									todir="${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.61/conf"  overwrite="true"/>
+
+								<copy
+									file="./../assembly/platform/tomcat/tomcat-users.xml"
+									todir="${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.61/conf" overwrite="true" />
+									
+								<copy
+									file="./../assembly/platform/tomcat/server.xml"
+									todir="${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.61/conf" overwrite="true" />
+								
 								<path id="source_folder_name">
 									<dirset dir="${project.build.directory}/sources/SocialSDK">
 										<include name="SocialSDK*" />
@@ -419,28 +421,28 @@
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>sbt.dojo180</artifactId>
 
-			<version>1.1.6-SNAPSHOT</version>
+			<version>1.1.6.20150817-1200</version>
 			<type>war</type>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>sbt.jquery182</artifactId>
 
-			<version>1.1.6-SNAPSHOT</version>
+			<version>1.1.6.20150817-1200</version>
 			<type>war</type>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>sbt.bootstrap211</artifactId>
 
-			<version>1.1.6-SNAPSHOT</version>
+			<version>1.1.6.20150817-1200</version>
 			<type>war</type>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>sbt.sample.web</artifactId>
 
-			<version>1.1.6-SNAPSHOT</version>
+			<version>1.1.6.20150817-1200</version>
 			<type>war</type>
 		</dependency>
 
@@ -450,7 +452,7 @@
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.sbt.landing</artifactId>
 
-			<version>1.1.6-SNAPSHOT</version>
+			<version>1.1.6.20150817-1200</version>
 			<type>war</type>
 		</dependency>
 
@@ -458,21 +460,21 @@
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>acme.social.sample.dataapp</artifactId>
 
-			<version>1.1.6-SNAPSHOT</version>
+			<version>1.1.6.20150817-1200</version>
 			<type>war</type>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>acme.social.sample.webapp</artifactId>
 
-			<version>1.1.6-SNAPSHOT</version>
+			<version>1.1.6.20150817-1200</version>
 			<type>war</type>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>helloworld.webapp</artifactId>
 
-			<version>1.1.6-SNAPSHOT</version>
+			<version>1.1.6.20150817-1200</version>
 			<type>war</type>
 		</dependency>
 
@@ -485,21 +487,21 @@
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>smartcloud.webapp</artifactId>
 
-			<version>1.1.6-SNAPSHOT</version>
+			<version>1.1.6.20150817-1200</version>
 			<type>war</type>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>grantaccess.webapp</artifactId>
 
-			<version>1.1.6-SNAPSHOT</version>
+			<version>1.1.6.20150817-1200</version>
 			<type>war</type>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>acme.sample.webapp</artifactId>
 
-			<version>1.1.6-SNAPSHOT</version>
+			<version>1.1.6.20150817-1200</version>
 			<type>war</type>
 		</dependency>
 
@@ -512,30 +514,30 @@
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.sbt.web</artifactId>
 
-			<version>1.1.6-SNAPSHOT</version>
+			<version>1.1.6.20150817-1200</version>
 			<type>war</type>
 		</dependency>
 
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.commons</artifactId>
-			<version>9.0.0</version>
+			<version>1.1.6.20150817-1200</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.commons.runtime</artifactId>
-			<version>1.1.6-SNAPSHOT</version>
+			<version>1.1.6.20150817-1200</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.commons.xml</artifactId>
-			<version>9.0.0</version>
+			<version>1.1.6.20150817-1200</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>bss.provisioning.sample.app</artifactId>
-			<version>1.1.6-SNAPSHOT</version>
+			<version>1.1.6.20150817-1200</version>
 			
 		</dependency>
 		
@@ -543,19 +545,19 @@
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.sbt.php.wordpress</artifactId>
-			<version>1.1.6-SNAPSHOT</version>
+			<version>1.1.6.20150817-1200</version>
 			<type>zip</type>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.sbt.php.core</artifactId>
-			<version>1.1.6-SNAPSHOT</version>
+			<version>1.1.6.20150817-1200</version>
 			<type>zip</type>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.sbt.php.moodle</artifactId>
-			<version>1.1.6-SNAPSHOT</version>
+			<version>1.1.6.20150817-1200</version>
 			<type>zip</type>
 		</dependency>
 	</dependencies>

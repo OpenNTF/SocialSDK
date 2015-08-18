@@ -3,6 +3,10 @@
   <artifactId>com.ibm.sbt.libs.java</artifactId>
   <packaging>eclipse-plugin</packaging>
 
+  <properties>
+    <maven.javadoc.skip>true</maven.javadoc.skip>
+  </properties>
+  
   <parent>
     <groupId>com.ibm.sbt</groupId>
     <artifactId>com.ibm.sbt.libraries</artifactId>

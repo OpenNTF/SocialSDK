@@ -17,7 +17,7 @@ public class CommunityTest extends BaseRhinoTest {
 		System.out.println(new CommunityService().getPublicCommunities()); 
 	}
 
-		@Test
+	@Ignore
 	public void testPublicCommunity() throws Exception {
 		String script;
 		script = IOUtils.toString(getClass().getResourceAsStream(

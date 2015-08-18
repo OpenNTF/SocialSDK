@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: ICS SBT Specific Fragment
 Bundle-SymbolicName: com.ibm.xsp.sbtsdk.playground.sbt;singleton:=true
-Bundle-Version: 1.1.6.qualifier
+Bundle-Version: 1.1.6.20150817-1200
 Bundle-Vendor: IBM
 Fragment-Host: com.ibm.xsp.sbtsdk.playground
 Export-Package: com.ibm.xsp.sbtsdk.playground.sbt,com.ibm.xsp.sbtsdk.p

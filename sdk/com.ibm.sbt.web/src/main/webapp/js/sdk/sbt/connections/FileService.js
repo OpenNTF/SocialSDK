@@ -921,9 +921,20 @@ define(
 		 */
 		constructor : function(args) {
 			var endpointName = args ? (args.endpoint ? args.endpoint : this.getDefaultEndpointName()) : this.getDefaultEndpointName();
-			if (!this.endpoint) {
-				this.endpoint = config.findEndpoint(endpointName);
-			}
+			
+			args = args || {};
+        	
+            // set endpoint if specified in args
+            if (args.endpoint) {
+            	if (lang.isString(args.endpoint)) {
+            		this.endpoint = config.findEndpoint(args.endpoint);
+            	} else {
+            		this.endpoint = args.endpoint;
+            	}
+            }else{
+            	this.endpoint = config.findEndpoint(this.getDefaultEndpointName());
+            }
+			
 		},
 
 		/**

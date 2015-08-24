@@ -205,7 +205,7 @@ public class ForumService extends ConnectionsService {
 	 */
 	public EntityList<ForumTopic> getForumTopics(String forumUuid,
 			Map<String, String> parameters) throws ClientServicesException {
-		String myTopicsUrl = ForumUrls.FORUM.format(this, ForumUrls.forumPart(forumUuid));
+		String myTopicsUrl = ForumUrls.FORUM_TOPICS.format(this, ForumUrls.forumPart(forumUuid));
 		return getForumTopicEntityList(myTopicsUrl, parameters);
 	}
 

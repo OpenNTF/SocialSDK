@@ -2,10 +2,32 @@
   <modelVersion>4.0.0</modelVersion>
   <artifactId>com.ibm.sbt.libs.j2ee</artifactId>
   <packaging>eclipse-plugin</packaging>
-
+  
+  <properties>
+    <maven.javadoc.skip>true</maven.javadoc.skip>
+	<maven.javadoc.failOnError>false</maven.javadoc.failOnError>
+  </properties>
+  
   <parent>
     <groupId>com.ibm.sbt</groupId>
     <artifactId>com.ibm.sbt.libraries</artifactId>
-    <version>1.1.6-SNAPSHOT</version>
+    <version>1.1.7-SNAPSHOT</version>
   </parent>
+  
+  <build>
+  <plugins>
+   <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+            </executions>
+    </plugin>
+   </plugins>
+   </build>
 </project>

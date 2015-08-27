@@ -307,7 +307,7 @@ public abstract class ClientService {
 	 * @param args
 	 * @throws ClientServicesException
 	 */
-	protected void forceAuthentication(Args args) throws ClientServicesException {
+	protected void forceAuthentication(Args args) throws ClientServicesException, ClassNotFoundException {
 		if (endpoint != null) {
 			endpoint.authenticate(true);
 		} else {
@@ -1313,8 +1313,12 @@ public abstract class ClientService {
 		}
 		
 		if(isResponseRequireAuthentication(httpResponse)){
-			forceAuthentication(args);
-			throw new ClientServicesException(new AuthenticationException());
+			try {
+				forceAuthentication(args);
+			} catch (ClassNotFoundException e) {
+				throw new ClientServicesException(new AuthenticationException(), "Force Authentication Failed: Check Username and UserId "+ e.getMessage());
+			}
+			throw new ClientServicesException(new AuthenticationException(), "Wrong username or password");
 		}
 		
 		Handler format = findHandler(httpRequestBase, httpResponse, args.handler);

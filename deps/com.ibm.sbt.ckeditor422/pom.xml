@@ -7,6 +7,6 @@
 	<parent>
 		<groupId>com.ibm.sbt</groupId>
 		<artifactId>com.ibm.sbt.dependencies</artifactId>
-		<version>1.1.6-SNAPSHOT</version>
+		<version>1.1.7-SNAPSHOT</version>
 	</parent>
 </project>

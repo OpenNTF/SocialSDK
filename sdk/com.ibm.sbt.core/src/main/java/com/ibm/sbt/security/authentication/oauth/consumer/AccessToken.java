@@ -105,13 +105,13 @@ public class AccessToken implements Serializable {
      */
     public boolean isExpired(int threshold) {
     	
-    	logger.log(Level.INFO, " auth expires in " + authorizationExpiresIn.getTime());
-    	logger.log(Level.INFO,expiresIn.getTime() + " " + threshold * 1000);
+    	logger.log(Level.ALL, " auth expires in " + authorizationExpiresIn.getTime());
+    	logger.log(Level.ALL,expiresIn.getTime() + " " + threshold * 1000);
         if(expiresIn!=null) {
         	// threshold is in seconds and need to add to millisecond time
             long exp = authorizationExpiresIn.getTime() + threshold * 1000; 
             long now = System.currentTimeMillis();
-            logger.log(Level.INFO,"exp : " + exp + " - now " + now  + " " + (exp<=now)); //Add logging to Level.ALL
+            logger.log(Level.ALL,"exp : " + exp + " - now " + now  + " " + (exp<=now)); //Add logging to Level.ALL
             return exp<=now; 
         }
         return false;

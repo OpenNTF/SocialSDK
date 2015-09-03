@@ -28,7 +28,7 @@ define(['./declare'],function(declare) {
 		constructor: function(xpath, nsArray){
 		     this.xpath = xpath;    
 		     this.nsArray = nsArray || {};
-		     if (!document.evaluate) {
+		     if (!document.evaluate && !navigator.getUserMedia) { 
 		    	 this.ie = true;
 		         this.nsString = "";
 		         if (this.nsArray) {

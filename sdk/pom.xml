@@ -7,7 +7,7 @@
 	<parent>
 		<artifactId>com.ibm.sbt</artifactId>
 		<groupId>com.ibm.sbt</groupId>
-		<version>1.1.7-SNAPSHOT</version>
+		<version>1.1.7.20150908-1400</version>
 	</parent>
 	<modules>
 		<module>com.ibm.sbt.core</module>

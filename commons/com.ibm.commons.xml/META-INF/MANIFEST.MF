@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: XML utilities Plug-in
 Bundle-SymbolicName: com.ibm.commons.xml;singleton:=true
-Bundle-Version: 1.1.7.20150908-1400
+Bundle-Version: 1.1.8.qualifier
 Bundle-Vendor: IBM
 Eclipse-LazyStart: true
 Require-Bundle: com.ibm.commons,

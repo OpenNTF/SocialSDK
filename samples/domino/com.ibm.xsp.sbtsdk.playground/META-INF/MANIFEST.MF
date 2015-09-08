@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Domino Playground
 Bundle-SymbolicName: com.ibm.xsp.sbtsdk.playground;singleton:=true
-Bundle-Version: 1.1.7.20150908-1400
+Bundle-Version: 1.1.8.qualifier
 Eclipse-ExtensibleAPI: true 
 Bundle-Vendor: IBM
 Require-Bundle: org.eclipse.core.runtime,

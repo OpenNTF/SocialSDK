@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/com.ibm.sbt.domino.playground.feature_1.1.8.qualifier.jar" id="com.ibm.sbt.domino.playground.feature" version="1.1.8.qualifier"/>
+   <feature url="features/com.ibm.sbt.domino.playground.feature_1.1.8.20150911-1400.jar" id="com.ibm.sbt.domino.playground.feature" version="1.1.8.20150911-1400"/>
 </site>

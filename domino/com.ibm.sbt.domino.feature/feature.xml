@@ -2,7 +2,7 @@
 <feature
       id="com.ibm.sbt.domino.feature"
       label="Domino SBT Feature"
-      version="1.1.9.qualifier"
+      version="1.1.10.qualifier"
       provider-name="IBM">
 
    <license url="http://www.apache.org/licenses/LICENSE-2.0">

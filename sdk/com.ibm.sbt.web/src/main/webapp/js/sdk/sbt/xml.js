@@ -40,13 +40,13 @@ define(['./lang'], function(lang) {
 		parse: function(xml) {
 			var xmlDoc=null;
 			try {
-				if(window.DOMParser){
-					parser=new DOMParser();
-					xmlDoc=parser.parseFromString(xml,"text/xml");
-				} else {
-					xmlDoc=new ActiveXObject("Microsoft.XMLDOM");
+				if(window.ActiveXObject !== undefined){
+					xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
 					xmlDoc.async="false";
 					xmlDoc.loadXML(xml);
+				} else if (window.DOMParser){
+					parser=new DOMParser();
+					xmlDoc=parser.parseFromString(xml,"text/xml");
 				}
 			}catch(ex){
 				console.log(ex.message);

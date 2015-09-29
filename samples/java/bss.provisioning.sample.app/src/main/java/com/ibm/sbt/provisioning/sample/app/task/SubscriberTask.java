@@ -351,26 +351,33 @@ public class SubscriberTask implements Runnable {
 	  * <p>
 	  * @return <code>true</code> if the subscriber is entitled, <code>false</code> otherwise
 	  */
-	private boolean entitleSubscriber(){
-		Boolean suscriberEntitled = false ;
-		logger.info("Entitling subscriber...");
-	    String subscriberState = getSubscriberState();
-	    if(!"ACTIVE".equals(subscriberState)){
-	      return suscriberEntitled;
-	    }
-	    for(SubscriptionEntitlement entitlement:entitlements){
-	    	WeightedBSSCall<Boolean> entitleSubscriber = new EntitleSubscriber(this.subscriberId, entitlement.getSubscriptionId(), this.subscriberEmail);
-	    	try{
-	    		suscriberEntitled = entitleSubscriber.call();
-				if( suscriberEntitled == null ){
-					suscriberEntitled = false ;
-				}
-			} catch (Exception e) {
-	    		logger.severe(e.getClass()+" : " + e.getMessage());
-			}
-		}
-		return suscriberEntitled ;
-	}
+  private boolean entitleSubscriber() {
+    Boolean subscriberEntitled = false;
+    logger.info("Entitling subscriber...");
+    String subscriberState = getSubscriberState();
+    if (!"ACTIVE".equals(subscriberState)) {
+      return subscriberEntitled;
+    }
+    for (SubscriptionEntitlement entitlement : entitlements) {
+      WeightedBSSCall<Boolean> entitleSubscriber = new EntitleSubscriber(
+          this.subscriberId, entitlement.getSubscriptionId(),
+          this.subscriberEmail);
+      try {
+        subscriberEntitled = entitleSubscriber.call();
+        if (subscriberEntitled == null) {
+          subscriberEntitled = false;
+        }
+        if (!subscriberEntitled) {
+          // stop when any entitle subscriber fails
+          logger.severe("Unable to entitle subscriber: " + subscriberState + " to subscription: " + entitlement.getPartNumber());
+          break;
+        }
+      } catch (Exception e) {
+        logger.severe(e.getClass() + " : " + e.getMessage());
+      }
+    }
+    return subscriberEntitled;
+  }
 	
 	/**
 	 * This method will trigger the retrieval of the subscriber by mean of invocation of the <code>call()</code> method of the <code>abstract

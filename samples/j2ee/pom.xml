@@ -9,9 +9,14 @@
 		<groupId>com.ibm.sbt</groupId>
 		<version>1.1.11-SNAPSHOT</version>
 	</parent>
+	<!--
+	     PBastide: removed the acme/templates modules to reduce the amount of binaries
 	<modules>
 		<module>acme</module>
 		<module>templates</module>
+		<module>snippets</module>
+	</modules>
+	--><modules>
 		<module>snippets</module>
 	</modules>
 

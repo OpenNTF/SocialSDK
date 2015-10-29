@@ -181,7 +181,9 @@
 								</artifactItem>
 
 
-
+								<!--
+								PBastide: Reduce total deliverable size
+								
 								<artifactItem>
 									<groupId>com.ibm.sbt</groupId>
 									<artifactId>com.ibm.sbt.landing</artifactId>
@@ -246,7 +248,7 @@
 									<destFileName>acme.sample.webapp.war</destFileName>
 								</artifactItem>
 
-
+								-->
 
 
 
@@ -279,13 +281,6 @@
 									<overWrite>true</overWrite>
 									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.61/lib</outputDirectory>
 								</artifactItem>
-
-
-
-
-
-
-
 							</artifactItems>
 							<outputDirectory>${project.build.directory}/wars</outputDirectory>
 							<overWriteReleases>false</overWriteReleases>
@@ -447,7 +442,8 @@
 		</dependency>
 
 
-
+		<!--
+		PBastide: Reduce package size
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.sbt.landing</artifactId>
@@ -478,11 +474,7 @@
 			<type>war</type>
 		</dependency>
 
-
-
-
-
-
+		
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>smartcloud.webapp</artifactId>
@@ -504,7 +496,7 @@
 			<version>1.1.11-SNAPSHOT</version>
 			<type>war</type>
 		</dependency>
-
+		-->
 
 	
 
@@ -534,13 +526,15 @@
 			<version>1.1.11-SNAPSHOT</version>
 		</dependency>
 
+		<!-- 
+		PBastide: Reduce package size
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>bss.provisioning.sample.app</artifactId>
 			<version>1.1.11-SNAPSHOT</version>
 			
 		</dependency>
-		
+		-->
 		
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>

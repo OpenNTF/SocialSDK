@@ -66,8 +66,11 @@
 		<moduleSet>
 			<useAllReactorProjects>true</useAllReactorProjects>
 			<includes>
+				<!--
+				PBastide: Removed Projects to reduce deliverable size
 				<include>com.ibm.sbt:sbt.sample.portlets</include>
 				<include>com.ibm.sbt:acme.social.sample</include>
+				-->
 			</includes>
 			<binaries>
 				<outputDirectory>sbtsdk/samples/ear</outputDirectory>
@@ -104,7 +107,10 @@
 				<include>com.ibm.sbt:com.ibm.commons.runtime</include>
 				<include>com.ibm.sbt:com.ibm.commons.xml</include>
 				<include>com.ibm.sbt:com.ibm.sbt.core</include>
+				<!--
+				PBastide: updates
 				<include>com.ibm.sbt:sbt.sample.app</include>
+				-->
 			</includes>
 			<binaries>
 				<dependencySets>

@@ -163,6 +163,8 @@
 		</moduleSet>
 	</moduleSets>
 	<dependencySets>
+		<!-- PBastide: removed samples -->
+		<!--
 		<dependencySet>
 			<includes>
 				<include>commons-logging:commons-logging</include>
@@ -171,6 +173,7 @@
 			</includes>
 			<outputDirectory>sbtsdk/samples/jar</outputDirectory>
 		</dependencySet>
+		-->
 		<dependencySet>
 			<includes>
 				<include>com.ibm.sbt:com.ibm.sbt.php.core:zip:*</include>
@@ -201,6 +204,7 @@
 	</dependencySets>
 
 	<fileSets>
+		<!-- removed the sbt.properties from the filesets
 		<fileSet>
 			<directory>../samples/java/sbt.sample.app</directory>
 			<outputDirectory>sbtsdk/samples/jar</outputDirectory>
@@ -208,6 +212,7 @@
 				<include>sbt.properties</include>
 			</includes>
 		</fileSet>
+		-->
 		<fileSet>
 			<directory>${build.target}/doc/jsdoc</directory>
 			<outputDirectory>sbtsdk/doc/jsdoc</outputDirectory>
@@ -226,6 +231,7 @@
 			</includes>
 		</fileSet>
 		-->
+		
 		<fileSet>
 			<directory>../samples/config</directory>
 			<outputDirectory>sbtsdk/config</outputDirectory>
@@ -242,7 +248,7 @@
 				<include>*</include>
 			</includes>
 		</fileSet>
-
+		
 		<fileSet>
 			<directory>../samples/scripts</directory>
 			<outputDirectory>sbtsdk/scripts</outputDirectory>

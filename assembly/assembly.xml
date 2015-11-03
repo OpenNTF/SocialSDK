@@ -102,17 +102,19 @@
 				<unpack>false</unpack>
 			</binaries>
 		</moduleSet>
-		<moduleSet>
+		<!--
+				PBastide: remove samples / updates
+				<include>com.ibm.sbt:sbt.sample.app</include>
+		-->
+		<!--
+		moduleSet>
 			<useAllReactorProjects>true</useAllReactorProjects>
 			<includes>
 				<include>com.ibm.sbt:com.ibm.commons</include>
 				<include>com.ibm.sbt:com.ibm.commons.runtime</include>
 				<include>com.ibm.sbt:com.ibm.commons.xml</include>
 				<include>com.ibm.sbt:com.ibm.sbt.core</include>
-				<!--
-				PBastide: updates
-				<include>com.ibm.sbt:sbt.sample.app</include>
-				-->
+				
 			</includes>
 			<binaries>
 				<dependencySets>
@@ -122,6 +124,7 @@
 				<unpack>false</unpack>
 			</binaries>
 		</moduleSet>
+		-->
 		<moduleSet>
 			<useAllReactorProjects>true</useAllReactorProjects>
 			<includes>
@@ -213,7 +216,8 @@
 			</includes>
 		</fileSet>
 
-
+		<!-- PBastide: Removed Tomcat --> 
+		<!--
 		<fileSet>
 			<directory>${project.build.directory}/tomcat</directory>
 			<outputDirectory>sbtsdk/tomcat</outputDirectory>
@@ -221,6 +225,7 @@
 				<include>**/apache-tomcat-7.0.61-sbt.zip</include>
 			</includes>
 		</fileSet>
+		-->
 		<fileSet>
 			<directory>../samples/config</directory>
 			<outputDirectory>sbtsdk/config</outputDirectory>

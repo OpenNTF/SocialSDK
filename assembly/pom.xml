@@ -72,11 +72,14 @@
 					<runOnlyAtExecutionRoot>false</runOnlyAtExecutionRoot>
 				</configuration>
 			</plugin>
+			
 			<plugin>
 				<groupId>com.googlecode.maven-download-plugin</groupId>
 				<artifactId>maven-download-plugin</artifactId>
 				<version>1.1.0</version>
 				<executions>
+					<!-- PBastide: Removing Tomcat from Deliverable Package -->
+					<!--
 					<execution>
 						<id>download-tomcat-7</id>
 						<phase>generate-resources</phase>
@@ -90,6 +93,7 @@
 							<md5>e34610f342045a817b3a100c07c3d1a3</md5>
 						</configuration>
 					</execution>
+					-->
 					<execution>
 						<id>download-sources</id>
 						<phase>generate-resources</phase>
@@ -127,6 +131,9 @@
 					</dependency>
 				</dependencies>
 			</plugin>
+			
+			<!-- PBastide - Reduce Total Deliverable Size -->
+			<!--
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
@@ -181,8 +188,8 @@
 								</artifactItem>
 
 
-								<!--
-								PBastide: Reduce total deliverable size
+								
+								
 								
 								<artifactItem>
 									<groupId>com.ibm.sbt</groupId>
@@ -248,7 +255,7 @@
 									<destFileName>acme.sample.webapp.war</destFileName>
 								</artifactItem>
 
-								-->
+								
 
 
 
@@ -289,6 +296,7 @@
 					</execution>
 				</executions>
 			</plugin>
+			-->
 			<plugin>
 				<artifactId>maven-antrun-plugin</artifactId>
 				<version>1.7</version>
@@ -299,7 +307,9 @@
 						<configuration>
 							<target>
 								<!-- Remove Tomcat -->
+								<!-- Not Used - 
 								<delete dir="${project.build.directory}/tomcat/unzip" />
+								-->
 								<!-- Remove Other Sources -->
 								<delete dir="${project.build.directory}/sources" />
 
@@ -312,6 +322,8 @@
 						<configuration>
 							<target>
 								<!-- Package Tomcat -->
+								<!-- PBastide: Removed Tomcat -->
+								<!--
 								<delete
 									dir="${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.61/webapps/ROOT" />
 
@@ -338,7 +350,7 @@
 								<copy
 									file="./../assembly/platform/tomcat/server.xml"
 									todir="${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.61/conf" overwrite="true" />
-								
+								-->
 								<path id="source_folder_name">
 									<dirset dir="${project.build.directory}/sources/SocialSDK">
 										<include name="SocialSDK*" />
@@ -365,10 +377,12 @@
 								</move>
 								<delete dir="${psource_folder_name_ios}" />
 
-
+								<!-- PBastide - Removed Tomcat -->
+								<!--
 								<zip basedir="${project.build.directory}/tomcat/unzip"
 									destfile="${project.build.directory}/tomcat/apache-tomcat-7.0.61-sbt.zip"
 									compress="true" />
+								-->
 
 								<zip basedir="${project.build.directory}/sources/SocialSDK"
 									destfile="${project.build.directory}/sources/SocialSDK.zip"

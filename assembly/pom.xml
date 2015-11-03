@@ -383,12 +383,12 @@
 									destfile="${project.build.directory}/tomcat/apache-tomcat-7.0.61-sbt.zip"
 									compress="true" />
 								-->
-
+								<!-- PBastide: Changed the Zip File to Kit -->
 								<zip basedir="${project.build.directory}/sources/SocialSDK"
-									destfile="${project.build.directory}/sources/SocialSDK.zip"
+									destfile="${workingDir}/kit/SocialSDK-${project.version}.zip"
 									compress="true" />
 								<zip basedir="${project.build.directory}/sources/SocialSDK-iOS"
-									destfile="${project.build.directory}/sources/SocialSDK-iOS.zip"
+									destfile="${workingDir}/kit/SocialSDK-iOS-${project.version}.zip"
 									compress="true" />
 							</target>
 						</configuration>

@@ -359,6 +359,10 @@
 			</includes>
 			<outputDirectory>sbtsdk</outputDirectory>
 		</fileSet>
+		<!-- PBastide: Removed the Inclusion of the Sources in the Downloadable 
+			sources are now included in the release page as a separate downloadable
+		-->
+		<!--
 		<fileSet>
 			<directory>${project.build.directory}/sources</directory>
 			<includes>
@@ -366,6 +370,7 @@
 			</includes>
 			<outputDirectory>sbtsdk/sources</outputDirectory>
 		</fileSet>
+		-->
 		<fileSet>
 			<directory>${project.build.directory}/sources/SocialSDK-iOS/library</directory>
 			<includes>

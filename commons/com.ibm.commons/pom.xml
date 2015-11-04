@@ -23,6 +23,11 @@
 							<placement>a</placement>
 							<head>IBM API</head>
 						</tag>
+						<tag>
+							<name>ibm-not-published</name>
+							<placement>a</placement>
+							<head>IBM API</head>
+						</tag>
 					</tags>
 				</configuration>
 			</plugin>

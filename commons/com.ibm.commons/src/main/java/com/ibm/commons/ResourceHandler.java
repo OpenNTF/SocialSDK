@@ -30,7 +30,7 @@ public class ResourceHandler {
     
 
     /**
-     * @return
+     * @return ResourceBundle
      */
     private static ResourceBundle getResourceBundle(String bundle) {
         try {
@@ -47,7 +47,7 @@ public class ResourceHandler {
     
    /**
      * @param name
-     * @return
+     * @return String
      */
     private static String buildResourcePath(String name) {
         String clName = ResourceHandler.class.getName();
@@ -56,7 +56,7 @@ public class ResourceHandler {
 
     /**
      * @param key
-     * @return
+     * @return String
      */
     public static String getString(String key) {
         if (_resourceBundle == null) {
@@ -69,7 +69,7 @@ public class ResourceHandler {
     
     /**
      * @param key
-     * @return
+     * @return String
      */
     public static String getLoggingString(String key) {
         if (_loggingResourceBundle == null) {

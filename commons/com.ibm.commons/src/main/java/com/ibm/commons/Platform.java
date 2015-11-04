@@ -178,7 +178,7 @@ public abstract class Platform {
     
     /**
      * Get the Log manager factory used for this platform.
-     * @return
+     * @return LogMgrFactory
      * @ibm-api
      */
     public final LogMgrFactory getLogMgrFactory() {
@@ -188,14 +188,14 @@ public abstract class Platform {
     
     /**
      * Get the output stream for this platform.
-     * @return
+     * @return PrintStream
      * @ibm-api
      */
     public abstract PrintStream getOutputStream();
     
     /**
      * Get the error stream for this platform.
-     * @return
+     * @return PrintStream
      * @ibm-api
      */
     public abstract PrintStream getErrorStream();
@@ -230,7 +230,6 @@ public abstract class Platform {
      * Register a platform service.
      * @param serviceId unique id 
      * @param platformService
-     * @return
      * @ibm-not-published
      */
     public void registerPlatformService( String serviceId, IPlatformService platformService ){
@@ -298,7 +297,7 @@ public abstract class Platform {
 
     /**
      * Get an object cached by the platform.
-     * @return
+     * @return Object
      * @ibm-api
      */
     public Object getObject(String key) {

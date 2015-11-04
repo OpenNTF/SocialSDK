@@ -3107,7 +3107,6 @@ public class FileService extends ConnectionsService {
 	 *      =Updating_a_file_ic45&content=pdcontent
 	 * @param iStream
 	 * @param fileId
-	 * @param length
 	 * @param title
 	 * @param communityId
 	 * @param params

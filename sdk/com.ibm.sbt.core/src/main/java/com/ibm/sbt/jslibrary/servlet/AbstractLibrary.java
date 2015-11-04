@@ -347,9 +347,12 @@ abstract public class AbstractLibrary {
 	}
 
 	/**
+	 * @param request
 	 * @param endpoint
-	 * @param sameDomain
-	 *            TODO Need a unit test for this method
+	 * @param endpointAlias
+	 * @param endpointName
+	 *
+	 * TODO: Need a unit test for this method
 	 */
 	protected JsonObject createJsonForEndpoint(LibraryRequest request, Endpoint endpoint,
 			String endpointAlias, String endpointName) throws LibraryException {
@@ -749,8 +752,8 @@ abstract public class AbstractLibrary {
 	}
 
 	/**
-	 * @param dependModules
-	 * @return
+	 * @param modules
+	 * @return module names String[]
 	 */
 	protected String[] getModuleNames(String[] modules) {
 		List<String> names = new ArrayList<String>();
@@ -1201,8 +1204,8 @@ abstract public class AbstractLibrary {
 	/**
 	 * Utility for changing a string so that its compatbile in javascript and does not prevent backslashes
 	 * 
-	 * @param StringBuilder
-	 * @param string
+	 * @param b
+	 * @param s
 	 *            converted to comply with javascript
 	 */
 	public static void appendJavaScriptString(StringBuilder b, String s) {
@@ -1212,9 +1215,9 @@ abstract public class AbstractLibrary {
 	/**
 	 * Utility for changing a string so that its compatbile in javascript
 	 * 
-	 * @param buildingString
+	 * @param b
 	 *            String being constructed
-	 * @param string
+	 * @param s
 	 *            converted to comply with javascript
 	 * @param preventBackslash
 	 */
@@ -1255,7 +1258,7 @@ abstract public class AbstractLibrary {
 	/**
 	 * Utility for changing a string so that its compatbile in javascript
 	 * 
-	 * @param String
+	 * @param s
 	 *            to convert
 	 * @return string converted to comply with javascript
 	 */

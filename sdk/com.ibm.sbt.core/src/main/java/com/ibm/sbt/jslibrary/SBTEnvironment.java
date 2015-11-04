@@ -309,7 +309,7 @@ public class SBTEnvironment {
 	
 	/**
 	 * Read a list of properties from a string and create an array if non empty.
-	 * @param sEndpoints
+	 * @param sProperty
 	 * @return Array of Property
 	 * @throws IOException
 	 */

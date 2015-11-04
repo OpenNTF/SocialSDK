@@ -236,7 +236,7 @@ public class LibraryRequest {
     /**
      * 
      * @param name
-     * @return
+     * @return a parameter
      */
     public String getParameter(String name) {
     	if (httpRequest != null) {
@@ -247,15 +247,16 @@ public class LibraryRequest {
 
     /**
      * 
-     * @return
+     * @return true, if there is a proxy domain
      */
     public boolean isProxyDomain() {
+		//TODO: Always returns True.  This code is not used. 
         return true;
     }
 
     /**
      * 
-     * @return
+     * @return the service url 
      */
     public String getServiceUrl() {
         return serviceUrl;
@@ -263,7 +264,7 @@ public class LibraryRequest {
     
     /**
      * 
-     * @return
+     * @return the library url
      */
     public String getLibraryUrl() {
         return libraryUrl;
@@ -271,7 +272,7 @@ public class LibraryRequest {
 
     /**
      * 
-     * @return
+     * @return the js library url
      */
     public String getJsLibraryUrl() {
         return jsLibraryUrl;
@@ -279,9 +280,10 @@ public class LibraryRequest {
     
     /**
      * 
-     * @return
+     * @return use Iframe
      */
     public boolean useIFrame() {
+		//TODO: Always returns false. This code is not used.
         return false;
     }
 
@@ -301,7 +303,7 @@ public class LibraryRequest {
     
     /**
      * 
-     * @return
+     * @return if debug
      */
     public boolean isDebug() {
         return debug;
@@ -316,7 +318,7 @@ public class LibraryRequest {
 
     /**
      * 
-     * @return
+     * @return the layer
      */
     public boolean isLayer() {
         return layer;
@@ -324,7 +326,7 @@ public class LibraryRequest {
 
     /**
      * 
-     * @return
+     * @return registration path
      */
     public boolean isRegPath() {
         return regPath;
@@ -340,7 +342,7 @@ public class LibraryRequest {
 
     /**
      * 
-     * @return
+     * @return debug transport
      */
     public boolean isDebugTransport() {
         return debugTransport;
@@ -348,7 +350,7 @@ public class LibraryRequest {
 
     /**
      * 
-     * @return
+     * @return mocktransport
      */
     public boolean isMockTransport() {
         return mockTransport;
@@ -356,7 +358,7 @@ public class LibraryRequest {
 
     /**
      * 
-     * @return
+     * @return the iframe url 
      */
     public String getIFrameUrl() {
         return iframeUrl;
@@ -414,14 +416,14 @@ public class LibraryRequest {
     /**
      * Return the specified header
      * 
-     * @return
+     * @return the header
      */
     public String getHeader(String name) {
         return httpRequest.getHeader(name);
     }
 
 	/**
-	 * @return
+	 * @return the server url 
 	 */
 	protected String getServerUrl(LibraryRequestParams params) {
 		if (httpRequest != null) {
@@ -432,7 +434,7 @@ public class LibraryRequest {
 	}
 
 	/**
-	 * @return
+	 * @return the context url
 	 */
 	protected String getContextUrl(LibraryRequestParams params) {
 		if (httpRequest != null) {
@@ -443,7 +445,7 @@ public class LibraryRequest {
 	}
 
 	/**
-	 * @return
+	 * @return the context path
 	 */
 	protected String getContextPath(LibraryRequestParams params) {
 		if (httpRequest != null) {
@@ -454,7 +456,7 @@ public class LibraryRequest {
 	}
 
 	/**
-	 * @return
+	 * @return the request url
 	 */
 	protected String getRequestUrl(LibraryRequestParams params) {
 		if (httpRequest != null) {
@@ -547,7 +549,7 @@ public class LibraryRequest {
      * @param paramName
      * @param defValue
      * 
-     * @return
+     * @return the value of the given parameter
      * 
      * @throws ServletException
      * @throws IOException
@@ -571,7 +573,7 @@ public class LibraryRequest {
      * @param source
      * @param values
      * @param replace
-     * @return
+     * @return string with updated value
      */
     private String replace(String source, String[] values, String[] replaces) {
         if (StringUtil.isEmpty(source) || values == null || replaces == null) {

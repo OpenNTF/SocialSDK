@@ -26,14 +26,11 @@ import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.connections.blogs.model.BaseBlogEntity;
 import com.ibm.sbt.services.client.connections.blogs.model.BlogXPath;
 
-
 /**
  * BlogComment model object
  * 
  * @author Swati Singh
  */
-
-
 public class Comment extends BaseBlogEntity {
 	
 	private final String POSTID = "urn:lsid:ibm.com:blogs:entry-";
@@ -41,7 +38,7 @@ public class Comment extends BaseBlogEntity {
 	 /**
      * Constructor
      *
-     * @param BlogService
+     * @param blogService
      * @param id
      */
 	public Comment(BlogService blogService, String id) {
@@ -49,10 +46,10 @@ public class Comment extends BaseBlogEntity {
 	}
 	/**
      * Constructor
-     * @param BaseService
-     * @param Node
-     * @param NamespaceContext
-     * @param XPathExpression
+     * @param service
+     * @param node
+     * @param namespaceCtx
+     * @param xpathExpression
      */
 	public Comment(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
 		super(service, node, namespaceCtx, xpathExpression);
@@ -72,7 +69,7 @@ public class Comment extends BaseBlogEntity {
 	* Sets blog post id of IBM Connections blog post comment.
 	*
 	* @method setBlogPostUuid
-	* @param {String} blogPostUuid of the comment's blog post
+	* @param postUuid of the comment's blog post
 	*/
 	public void setPostUuid(String postUuid) {
 		this.postUuid = postUuid;

@@ -50,8 +50,8 @@ public class Tag extends AtomEntity {
 	 * 
 	 * @param service
 	 * @param node
-	 * @param nameSpaceCtx
-	 * @param xpath
+	 * @param namespaceCtx
+	 * @param xpathExpression
 	 */
 	public Tag(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
 		super(service, new XmlDataHandler(node, namespaceCtx, xpathExpression));
@@ -62,7 +62,7 @@ public class Tag extends AtomEntity {
 	/**
 	 * The tag.
 	 * 
-	 * @return
+	 * @return {String}
 	 */
 	public String getTerm() {
 		return getAsString(CommonXPath.term);
@@ -71,7 +71,7 @@ public class Tag extends AtomEntity {
 	/**
 	 * The number of posts or entries to which the tag has been assigned.
 	 * 
-	 * @return
+	 * @return {long}
 	 */
 	public long getFrequency() {
 		return getAsLong(CommonXPath.frequency);
@@ -79,7 +79,7 @@ public class Tag extends AtomEntity {
 	
 	/**
 	 * 
-	 * @return
+	 * @return {boolean}
 	 */
 	public boolean isVisible() {
 		return getAsBoolean(CommonXPath.visibility);

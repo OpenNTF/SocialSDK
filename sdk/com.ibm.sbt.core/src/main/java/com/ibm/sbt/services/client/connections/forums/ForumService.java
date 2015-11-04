@@ -54,7 +54,6 @@ import com.ibm.sbt.services.endpoints.Endpoint;
  * @author Carlos Manias
  * @author Paul Bastide <pbastide@us.ibm.com>
  */
-
 public class ForumService extends ConnectionsService {
 
 	private static final long serialVersionUID = -4926901916081556236L;
@@ -188,9 +187,9 @@ public class ForumService extends ConnectionsService {
 	 * @return EntityList&lt;ForumTopic&gt;
 	 * @throws ClientServicesException
 	 */
-	public EntityList<ForumTopic> getForumTopics(String forumUid)
+	public EntityList<ForumTopic> getForumTopics(String forumUuid)
 			throws ClientServicesException {
-		return getForumTopics(forumUid, null);
+		return getForumTopics(forumUuid, null);
 	}
 
 	/**
@@ -198,7 +197,7 @@ public class ForumService extends ConnectionsService {
 	 * can narrow down the topics that are returned by passing parameters to the
 	 * request that you use to retrieve the feed.
 	 * 
-	 * @param forumuuid
+	 * @param forumUuid
 	 * @param parameters
 	 * @return EntityList&lt;ForumTopic&gt;
 	 * @throws ClientServicesException
@@ -399,7 +398,7 @@ public class ForumService extends ConnectionsService {
 	 * forum entry document to the root collection resource. See Authenticating
 	 * requests for information about how to authenticate the request.
 	 * 
-	 * @param Forum
+	 * @param forum
 	 * @return Forum
 	 * @throws ClientServicesException
 	 */
@@ -443,8 +442,7 @@ public class ForumService extends ConnectionsService {
 	 * See Authenticating requests for information about how to authenticate the
 	 * request.
 	 * 
-	 * @param Forum
-	 * @return Response
+	 * @param forum
 	 * @throws ClientServicesException
 	 */
 	public void updateForum(Forum forum) throws ClientServicesException {
@@ -469,7 +467,7 @@ public class ForumService extends ConnectionsService {
 	 * See Authenticating requests for information about how to authenticate the
 	 * request.
 	 * 
-	 * @param Forum
+	 * @param forum
 	 *            forum which is to be deleted
 	 * @throws CommunityServiceException
 	 */
@@ -485,8 +483,7 @@ public class ForumService extends ConnectionsService {
 	 * See Authenticating requests for information about how to authenticate the
 	 * request.
 	 * 
-	 * @param String
-	 *            forumUuid which is to be deleted
+	 * @param forumUuid which is to be deleted
 	 * @throws ClientServicesException
 	 */
 	public void deleteForum(String forumUuid) throws ClientServicesException {
@@ -588,7 +585,7 @@ public class ForumService extends ConnectionsService {
 	 * See Authenticating requests for information about how to authenticate the
 	 * request.
 	 * 
-	 * @param ForumTopic
+	 * @param topic
 	 * @throws ClientServicesException
 	 */
 	public void updateForumTopic(ForumTopic topic)
@@ -613,7 +610,7 @@ public class ForumService extends ConnectionsService {
 	 * See Authenticating requests for information about how to authenticate the
 	 * request.
 	 * 
-	 * @param ForumTopic
+	 * @param topic
 	 *            forum topic which is to be deleted
 	 * @throws ClientServicesException
 	 */
@@ -629,8 +626,7 @@ public class ForumService extends ConnectionsService {
 	 * See Authenticating requests for information about how to authenticate the
 	 * request.
 	 * 
-	 * @param String
-	 *            topicUuid which is to be deleted
+	 * @param topicUuid which is to be deleted
 	 * @throws ClientServicesException
 	 */
 	public void deleteForumTopic(String topicUuid)
@@ -651,7 +647,7 @@ public class ForumService extends ConnectionsService {
 	 * See Authenticating requests for information about how to authenticate the
 	 * request.
 	 * 
-	 * @param ForumReply
+	 * @param reply
 	 * @return ForumReply
 	 * @throws ClientServicesException
 	 */
@@ -666,8 +662,8 @@ public class ForumService extends ConnectionsService {
 	 * See Authenticating requests for information about how to authenticate the
 	 * request.
 	 * 
-	 * @param ForumReply
 	 * @param topicUuid
+	 * @param reply
 	 * @return ForumReply
 	 * @throws ClientServicesException
 	 */
@@ -747,8 +743,7 @@ public class ForumService extends ConnectionsService {
 	 * See Authenticating requests for information about how to authenticate the
 	 * request.
 	 * 
-	 * @param ForumReply
-	 * @return void
+	 * @param reply
 	 * @throws ClientServicesException
 	 */
 	public void updateForumReply(ForumReply reply)
@@ -777,7 +772,7 @@ public class ForumService extends ConnectionsService {
 	 * Only the owner of a stand-alone forum can delete a forum reply from it.
 	 * Deleted replies cannot be restored. <br>
 	 * 
-	 * @param ForumReply
+	 * @param reply
 	 *            reply which is to be deleted
 	 * @throws CommunityServiceException
 	 */
@@ -797,8 +792,7 @@ public class ForumService extends ConnectionsService {
 	 * Only the owner of a stand-alone forum can delete a forum reply from it.
 	 * Deleted replies cannot be restored. <br>
 	 * 
-	 * @param String
-	 *            replyUuid which is to be deleted
+	 * @param replyUuid which is to be deleted
 	 * @throws ClientServicesException
 	 */
 	public void deleteForumReply(String replyUuid)
@@ -866,7 +860,6 @@ public class ForumService extends ConnectionsService {
 	 * 
 	 * @since 4.5
 	 * @param postUuid
-	 * @return boolean
 	 * @throws ClientServicesException
 	 */
 	public void deleteRecommendation(String postUuid)
@@ -885,7 +878,7 @@ public class ForumService extends ConnectionsService {
 	 * <p>
 	 * User should be authenticated to call this method
 	 * 
-	 * @param ForumTopic
+	 * @param topic
 	 * @param communityUuid
 	 * @return Topic
 	 * @throws ClientServicesException
@@ -983,7 +976,7 @@ public class ForumService extends ConnectionsService {
 	 * @param isFeed
 	 *            true if the response is a feed, false if the response contains
 	 *            one entry.
-	 * @return
+	 * @return {IFeedHandler<Forum>}
 	 */
 	public IFeedHandler<Forum> getForumFeedHandler(boolean isFeed) {
 		return new AtomFeedHandler<Forum>(this, isFeed) {
@@ -998,7 +991,7 @@ public class ForumService extends ConnectionsService {
 	/**
 	 * Returns a ForumTopicFeedHandler
 	 * 
-	 * @return
+	 * @return {IFeedHandler<ForumTopic>}
 	 */
 	public IFeedHandler<ForumTopic> getForumTopicFeedHandler() {
 		return getForumTopicFeedHandler(true);
@@ -1010,7 +1003,7 @@ public class ForumService extends ConnectionsService {
 	 * @param isFeed
 	 *            true if the response is a feed, false if the response contains
 	 *            one entry.
-	 * @return
+	 * @return {IFeedHandler<ForumTopic>}
 	 */
 	public IFeedHandler<ForumTopic> getForumTopicFeedHandler(boolean isFeed) {
 		return new AtomFeedHandler<ForumTopic>(this, isFeed) {
@@ -1025,7 +1018,7 @@ public class ForumService extends ConnectionsService {
 	/**
 	 * Returns a ForumReplyFeedHandler
 	 * 
-	 * @return
+	 * @return {IFeedHandler<ForumReply>}
 	 */
 	public IFeedHandler<ForumReply> getForumReplyFeedHandler() {
 		return getForumReplyFeedHandler(true);
@@ -1037,7 +1030,7 @@ public class ForumService extends ConnectionsService {
 	 * @param isFeed
 	 *            true if the response is a feed, false if the response contains
 	 *            one entry.
-	 * @return
+	 * @return {IFeedHandler<ForumReply>}
 	 */
 	public IFeedHandler<ForumReply> getForumReplyFeedHandler(boolean isFeed) {
 		return new AtomFeedHandler<ForumReply>(this, isFeed) {
@@ -1052,7 +1045,7 @@ public class ForumService extends ConnectionsService {
 	/**
 	 * Returns a RecommendationFeedHandler
 	 * 
-	 * @return
+	 * @return {IFeedHandler<Recommendation>}
 	 */
 	public IFeedHandler<Recommendation> getRecommendationFeedHandler() {
 		return new AtomFeedHandler<Recommendation>(this) {
@@ -1067,7 +1060,7 @@ public class ForumService extends ConnectionsService {
 	/**
 	 * Returns a TagFeedHandler
 	 * 
-	 * @return
+	 * @return {IFeedHandler<Tag>}
 	 */
 	public IFeedHandler<Tag> getTagFeedHandler() {
 		return new AtomFeedHandler<Tag>(this) {

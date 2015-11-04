@@ -353,7 +353,7 @@ public class BlogService extends ConnectionsService {
 	/**
 	 * Create a blog by sending an Atom entry document containing the new blog to the user's blog feed.
 	 * 
-	 * @param Blog
+	 * @param blog
 	 * @return Blog
 	 * @throws ClientServicesException
 	 */
@@ -364,9 +364,9 @@ public class BlogService extends ConnectionsService {
 	/**
 	 * Create a blog by sending an Atom entry document containing the new blog to the user's blog feed.
 	 * 
-	 * @param activity
+	 * @param blog
 	 * @param parameters
-	 * @return
+	 * @return {Blog}
 	 * @throws ClientServicesException 
 	 */
 	public Blog createBlog(Blog blog, Map<String, String> parameters) throws ClientServicesException {
@@ -385,7 +385,7 @@ public class BlogService extends ConnectionsService {
 	/**
 	 * Gets a single blog identified by the blog Uuid
 	 * 
-	 * @param Blog
+	 * @param blogUuid {String}
 	 * @throws ClientServicesException
 	 */
 	public Blog getBlog(String blogUuid) throws ClientServicesException {
@@ -396,7 +396,7 @@ public class BlogService extends ConnectionsService {
 	/**
 	 * Wrapper method to update a Blog 
 	 * 
-	 * @param Blog
+	 * @param blog {Blog}
 	 * @throws ClientServicesException
 	 */
 	public void updateBlog(Blog blog) throws ClientServicesException {
@@ -422,8 +422,7 @@ public class BlogService extends ConnectionsService {
 	 * Wrapper method to delete a post
 	 * User should be logged in as a owner of the Blog to call this method.
 	 * 
-	 * @param String
-	 * 				blogUuid which is to be deleted
+	 * @param blogUuid {String} which is to be deleted
 	 * @throws ClientServicesException
 	 */
 	public void deleteBlog(String blogUuid) throws ClientServicesException {
@@ -437,7 +436,7 @@ public class BlogService extends ConnectionsService {
 	 * 
 	 * @param blogHandle
 	 * @param entryid
-	 * @return BlogPost
+	 * @return {BlogPost}
 	 * @throws ClientServicesException
 	 */
 	public BlogPost getBlogPost(String blogHandle, String entryid) throws ClientServicesException {
@@ -451,7 +450,6 @@ public class BlogService extends ConnectionsService {
 	 * 
 	 * @param blogHandle
 	 * @param postUuid
-	 * @return BlogPost
 	 * @throws ClientServicesException
 	 */
 	public void recommendPost(String blogHandle, String postUuid) throws ClientServicesException {
@@ -465,7 +463,6 @@ public class BlogService extends ConnectionsService {
 	 * 
 	 * @param blogHandle
 	 * @param postUuid
-	 * @return BlogPost
 	 * @throws ClientServicesException
 	 */
 	public void unrecommendPost(String blogHandle, String postUuid) throws ClientServicesException {
@@ -478,7 +475,7 @@ public class BlogService extends ConnectionsService {
 	 * 
 	 * @param blogHandle
 	 * @param commentUuid
-	 * @return Comment
+	 * @return {Comment}
 	 * @throws ClientServicesException
 	 */
 	public Comment getBlogComment(String blogHandle, String commentUuid) throws ClientServicesException {
@@ -490,7 +487,7 @@ public class BlogService extends ConnectionsService {
 	 * Wrapper method to create a Blog Post
 	 * User should be authenticated to call this method
 	 * 
-	 * @param BlogPost
+	 * @param post {BlogPost}
 	 * @param blogHandle
 	 * @return BlogPost
 	 * @throws ClientServicesException
@@ -512,7 +509,7 @@ public class BlogService extends ConnectionsService {
 	/**
 	 * Wrapper method to update a Blog Post
 	 * 
-	 * @param BlogPost
+	 * @param post {BlogPost}
 	 * @param blogHandle
 	 * @throws ClientServicesException
 	 */
@@ -541,8 +538,7 @@ public class BlogService extends ConnectionsService {
 	 * Wrapper method to delete a post
 	 * User should be logged in as a owner of the Blog to call this method.
 	 * 
-	 * @param String
-	 * 				postUuid which is to be deleted
+	 * @param postUuid which is to be deleted
 	 * @param blogHandle
 	 * @throws ClientServicesException
 	 */
@@ -557,8 +553,10 @@ public class BlogService extends ConnectionsService {
 	 * User should be authenticated to call this method
 	 * 
 	 * 
-	 * @param Comment
-	 * @return Comment
+	 * @param comment 
+	 * @param blogHandle
+	 * @param postUuid
+	 * @return {Comment}
 	 * @throws ClientServicesException
 	 */
 	public Comment createBlogComment(Comment comment, String blogHandle, String postUuid) throws ClientServicesException {
@@ -584,7 +582,6 @@ public class BlogService extends ConnectionsService {
 	 * 
 	 * @param blogHandle
 	 * @param commentUuid
-	 * @return Comment
 	 * @throws ClientServicesException
 	 */
 	public void deleteBlogComment(String blogHandle, String commentUuid) throws ClientServicesException {
@@ -599,7 +596,7 @@ public class BlogService extends ConnectionsService {
 	
 	/**
 	 * 
-	 * @return The blog homepage currently being used in requests to the blog service.
+	 * @return {String| The blog homepage currently being used in requests to the blog service.
 	 */
 	public String getHomepageHandle() {
 		return defaultHomepageHandle;
@@ -649,7 +646,7 @@ public class BlogService extends ConnectionsService {
 	
 	/**
 	 * Factory method to instantiate a FeedHandler for Tags
-	 * @return IFeedHandler<Tag>
+	 * @return {IFeedHandler<Tag>} 
 	 */
 	public IFeedHandler<Tag> getTagFeedHandler() {
 		return new AtomFeedHandler<Tag>(this, false) {

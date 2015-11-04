@@ -541,7 +541,7 @@ public class ProfileService extends ConnectionsService {
 	 * See Authenticating requests for information about how to authenticate the request. <br>
 	 *  
 	 * @param file File - image to be uploaded as profile photo
-	 * @param userid
+	 * @param userId
 	 * @throws ClientServicesException
 	 */
 	public void updateProfilePhoto(File file, String userId) throws ClientServicesException {
@@ -834,7 +834,6 @@ public class ProfileService extends ConnectionsService {
 	 *        unique identifier of the user whose profile is going to be tagged
 	 * @param profile
 	 *        profile to be tagged, containing all the tags, both existing and new
-	 * @param tags Comma-separated list of tags to add to the profile
 	 * @throws ClientServicesException 
 	 */
 	public void addTags(String sourceId, String targetId, Profile profile) throws ClientServicesException{

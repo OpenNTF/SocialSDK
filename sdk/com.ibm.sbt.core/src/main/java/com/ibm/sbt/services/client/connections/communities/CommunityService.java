@@ -134,7 +134,7 @@ public class CommunityService extends ConnectionsService {
 	 * Get the All Communities feed to see a list of all public communities to which the authenticated user 
 	 * has access or pass in parameters to search for communities that match a specific criteria.
 	 * 
-	 * @return
+	 * @return {EntityList<Community>}
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Community> getPublicCommunities() throws ClientServicesException {
@@ -146,7 +146,7 @@ public class CommunityService extends ConnectionsService {
 	 * has access or pass in parameters to search for communities that match a specific criteria. 
 	 * 
 	 * @param parameters
-	 * @return
+	 * @return {EntityList<Community>}
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Community> getPublicCommunities(Map<String, String> parameters) throws ClientServicesException {
@@ -158,7 +158,7 @@ public class CommunityService extends ConnectionsService {
 	 * Retrieve the members feed to view a list of the members who belong to a given community.
 	 * 
 	 * @param communityUuid
-	 * @return MemberList
+	 * @return {EntityList<Member}
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Member> getMembers(String communityUuid) throws ClientServicesException {
@@ -169,8 +169,8 @@ public class CommunityService extends ConnectionsService {
 	 * Retrieve the members feed to view a list of the members who belong to a given community.
 	 * 
 	 * @param communityUuid
-	 * @param query parameters
-	 * @return MemberList
+	 * @param parameters - query parameters to add to the request for members
+	 * @return {EntityList<Member}
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Member> getMembers(String communityUuid, Map<String, String> parameters) throws ClientServicesException {
@@ -182,7 +182,7 @@ public class CommunityService extends ConnectionsService {
 	 * Get the My Communities feed to see a list of the communities to which the authenticated user is a member 
 	 * or pass in parameters to search for a subset of those communities that match a specific criteria.
 	 * 
-	 * @return
+	 * @return {EntityList<Community>}
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Community> getMyCommunities() throws ClientServicesException {
@@ -193,7 +193,7 @@ public class CommunityService extends ConnectionsService {
 	 * Get the My Communities feed to see a list of the communities to which the authenticated user is a member 
 	 * or pass in parameters to search for a subset of those communities that match a specific criteria.
 	 * 
-	 * @return A list of communities of which the user is a member or owner
+	 * @return {EntityList<Community>} A list of communities of which the user is a member or owner
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Community> getMyCommunities(Map<String, String> parameters) throws ClientServicesException {
@@ -206,7 +206,7 @@ public class CommunityService extends ConnectionsService {
 	 * 
 	 * @param communityUuid 
 	 * 				 community Id of which SubCommunities are to be fetched
-	 * @return A list of communities
+	 * @return {EntityList<Community>} A list of communities
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Community> getSubCommunities(String communityUuid) throws ClientServicesException {
@@ -218,7 +218,7 @@ public class CommunityService extends ConnectionsService {
 	 * 
 	 * @param communityUuid 
 	 * 				 community Id of which SubCommunities are to be fetched
-	 * @return A list of communities
+	 * @return {EntityList<Community>} A list of communities
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Community> getSubCommunities(String communityUuid, Map<String, String> parameters) throws ClientServicesException {
@@ -231,7 +231,7 @@ public class CommunityService extends ConnectionsService {
 	 * user or provide parameters to search for a subset of those invitations.
 	 * 
 	 * @method getMyInvites
-	 * @return pending invites for the authenticated user
+	 * @return {EntityList<Invite>} pending invites for the authenticated user
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Invite> getMyInvites() throws ClientServicesException {
@@ -245,7 +245,7 @@ public class CommunityService extends ConnectionsService {
 	 * @param parameters
 	 * 				 Various parameters that can be passed to get a feed of members of a community. 
 	 * 				 The parameters must be exactly as they are supported by IBM Connections like ps, sortBy etc.
-	 * @return pending invites for the authenticated user
+	 * @return {EntityList<Invite>} pending invites for the authenticated user
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Invite> getMyInvites(Map<String, String> parameters) throws ClientServicesException {
@@ -284,9 +284,11 @@ public class CommunityService extends ConnectionsService {
 	 * In headers Location has the id to newly created community, we use this to return the communityid.
 	 * Location: https://server/communities/service/atom/community/instance?communityUuid=c93bfb43-0bf2-4125-a8a4-7acd4
 	 * 
-	 * @param Community
-	 * @return String
-	 * 			communityid of newly created Community
+	 * @param title
+	 * @param content
+	 * @param type 
+	 * 
+	 * @return {String}	communityid of newly created Community
 	 * @throws ClientServicesException
 	 */
 	public String createCommunity(String title, String content, String type) throws ClientServicesException {
@@ -307,9 +309,8 @@ public class CommunityService extends ConnectionsService {
 	 * In headers Location has the id to newly created community, we use this to return the communityid.
 	 * Location: https://server/communities/service/atom/community/instance?communityUuid=c93bfb43-0bf2-4125-a8a4-7acd4
 	 * 
-	 * @param Community
-	 * @return String
-	 * 			communityid of newly created Community
+	 * @param community
+	 * @return {String} communityid of newly created Community
 	 * @throws ClientServicesException
 	 */
 	public String createCommunity(Community community) throws ClientServicesException {
@@ -353,7 +354,7 @@ public class CommunityService extends ConnectionsService {
 	 *
 	 * @param communityUuid
 	 *			   id of community
-	 * @return A Community
+	 * @return {Community} A Community
 	 * @throws ClientServicesException
 	 */
 	public Community getCommunity(String communityUuid) throws ClientServicesException {
@@ -368,7 +369,7 @@ public class CommunityService extends ConnectionsService {
 	 *
 	 * @param communityUuid
 	 *			   id of community
-	 * @return A Community
+	 * @return {Community} A Community
 	 * @throws ClientServicesException
 	 */
 	public Community getCommunity(String communityUuid, Map<String, String> parameters) throws ClientServicesException {
@@ -414,7 +415,7 @@ public class CommunityService extends ConnectionsService {
 	/**
 	 * Update Community Logo, supported for connections
 	 * 
-	 * @param File
+	 * @param file
 	 * 			image to be uploaded as Community Logo
 	 * @param communityId
 	 * @throws ClientServicesException
@@ -446,8 +447,7 @@ public class CommunityService extends ConnectionsService {
 	 * <p>
 	 * User should be logged in as a owner of the community to call this method.
 	 * 
-	 * @param String
-	 * 				communityUuid which is to be deleted
+	 * @param communityUuid which is to be deleted
 	 * @throws ClientServicesException
 	 */
 	public void deleteCommunity(String communityUuid) throws ClientServicesException {
@@ -459,8 +459,7 @@ public class CommunityService extends ConnectionsService {
 	 * <p>
 	 * User should be logged in as a owner of the community to call this method.
 	 * 
-	 * @param String
-	 * 				communityUuid which is to be deleted
+	 * @param communityUuid	communityUuid which is to be deleted
 	 * @throws ClientServicesException
 	 */
 	public void deleteCommunity(String communityUuid, Map<String, String> parameters) throws ClientServicesException {
@@ -480,10 +479,7 @@ public class CommunityService extends ConnectionsService {
 	 * Creates a community invitation, user should be authenticated to perform this operation
 	 * 
 	 * @method createInvite
-	 * @param communityUuid 
-	 * 				 community Id for which invite is to be sent
-	 * @param contributorId
-	 *				 user id of contributor
+	 * @param invite object that is to be created
 	 * @return pending invites for the authenticated user
 	 * @throws ClientServicesException
 	 */
@@ -496,10 +492,7 @@ public class CommunityService extends ConnectionsService {
 	 * Creates a community invitation, user should be authenticated to perform this operation
 	 * 
 	 * @method createInvite
-	 * @param communityUuid 
-	 * 				 community Id for which invite is to be sent
-	 * @param contributorId
-	 *				 user id of contributor
+	 * @param invite
 	 * @return pending invites for the authenticated user
 	 * @throws ClientServicesException
 	 */
@@ -529,10 +522,8 @@ public class CommunityService extends ConnectionsService {
 	 * 				 community Id for which invite is sent
 	 * @param contributorId
 	 *				 user id of contributor
-	 * @return boolean
 	 * @throws ClientServicesException
 	 */
-
 	public void acceptInvite(String communityUuid, String contributorId) throws ClientServicesException {
 		acceptInvite(communityUuid, contributorId, null);
 	}
@@ -545,10 +536,8 @@ public class CommunityService extends ConnectionsService {
 	 * 				 community Id for which invite is sent
 	 * @param contributorId
 	 *				 user id of contributor
-	 * @return boolean
 	 * @throws ClientServicesException
 	 */
-
 	public void acceptInvite(String communityUuid, String contributorId, Map<String, String> parameters) throws ClientServicesException {
 		if (StringUtil.isEmpty(communityUuid)){
 			throw new ClientServicesException(null, Messages.NullCommunityIdException);
@@ -571,10 +560,8 @@ public class CommunityService extends ConnectionsService {
 	 * 				 community Id for which invite is sent
 	 * @param contributorId
 	 *				 user id of contributor
-	 * @return boolean
 	 * @throws ClientServicesException
 	 */
-	
 	public void declineInvite(String communityUuid, String contributorId) throws ClientServicesException {
 		declineInvite(communityUuid, contributorId, null);
 	}
@@ -587,10 +574,8 @@ public class CommunityService extends ConnectionsService {
 	 * 				 community Id for which invite is sent
 	 * @param contributorId
 	 *				 user id of contributor
-	 * @return boolean
 	 * @throws ClientServicesException
 	 */
-
 	public void declineInvite(String communityUuid, String contributorId, Map<String, String> parameters) throws ClientServicesException {
 
 		if (StringUtil.isEmpty(communityUuid)){
@@ -611,8 +596,8 @@ public class CommunityService extends ConnectionsService {
 	 * Retrieve a community invite.
 	 * 
 	 * @method getInvite
-	 * @param {String} communityUuid
-	 * @param (String} inviteUuid
+	 * @param communityUuid
+	 * @param inviteUuid
 	 * @throws ClientServicesException
 	 */
 	public Invite getInvite(String communityUuid, String inviteUuid) throws ClientServicesException{
@@ -623,8 +608,8 @@ public class CommunityService extends ConnectionsService {
 	 * Retrieve a community invite.
 	 * 
 	 * @method getInvite
-	 * @param {String} communityUuid
-	 * @param (String} inviteUuid
+	 * @param communityUuid
+	 * @param inviteUuid
 	 * @throws ClientServicesException
 	 */
 	public Invite getInvite(String communityUuid, String inviteUuid, Map<String, String> parameters) throws ClientServicesException{
@@ -648,10 +633,9 @@ public class CommunityService extends ConnectionsService {
 	 * 				 Id of Community
 	 * @param memberId
 	 * 				 Id of Member 
-	 * @return Member
+	 * @return {Member}
 	 * @throws ClientServicesException
 	 */
-
 	public Member getMember(String communityUuid, String memberId) throws ClientServicesException {
 		if (StringUtil.isEmpty(communityUuid)||StringUtil.isEmpty(memberId)){
 			throw new ClientServicesException(null, Messages.NullCommunityIdOrUserIdException);
@@ -676,8 +660,8 @@ public class CommunityService extends ConnectionsService {
 	 * 
 	 * @param communityUuid 
 	 * 				 Id of Community to which the member needs to be added
-	 * @param memberId
-	 * 				 Id of Member which is to be added
+	 * @param member
+	 * 				 Member object which is to be added
 	 * @throws ClientServicesException
 	 */
 	public void addMember(String communityUuid, Member member) throws ClientServicesException {
@@ -691,8 +675,8 @@ public class CommunityService extends ConnectionsService {
 	 * 
 	 * @param communityUuid 
 	 * 				 Id of Community to which the member needs to be added
-	 * @param memberId
-	 * 				 Id of Member which is to be added
+	 * @param member
+	 * 				 Member object which is to be added
 	 * @throws ClientServicesException
 	 */
 	public void addMember(String communityUuid, Member member, Map<String, String> parameters) throws ClientServicesException {
@@ -725,10 +709,10 @@ public class CommunityService extends ConnectionsService {
 	 * <p> 
 	 * User should be logged in as a owner of the community to call this method
 	 * 
-	 * @param community 
+	 * @param communityUuid 
 	 * 				 Id of Community 
-	 * @param memberId
-	 * 				 Id of Member 
+	 * @param member
+	 * 				 Member object
 	 * @throws ClientServicesException
 	 */
 	public void updateMember(String communityUuid, Member member) throws ClientServicesException {
@@ -761,7 +745,7 @@ public class CommunityService extends ConnectionsService {
 	 * <p> 
 	 * User should be logged in as a owner of the community to call this method
 	 * 
-	 * @param community 
+	 * @param communityUuid 
 	 * 				 Id of Community from which the member is to be removed
 	 * @param memberId
 	 * 				 Id of Member who is to be removed
@@ -835,7 +819,7 @@ public class CommunityService extends ConnectionsService {
 	 * To retrieve a list of remote applications associated with a community, use the remote applications link in the community entry Atom document.
 	 * 
 	 * @param communityUuid
-	 * @return
+	 * @return {EntityList<RemoteApplication>}
 	 */
 	public EntityList<RemoteApplication> getRemoteApplications(String communityUuid) {
 		return getRemoteApplications(communityUuid, null);
@@ -846,7 +830,7 @@ public class CommunityService extends ConnectionsService {
 	 * 
 	 * @param communityUuid
 	 * @param parameters
-	 * @return
+	 * @return {EntityList<RemoteApplication>}
 	 */
 	public EntityList<RemoteApplication> getRemoteApplications(String communityUuid, Map<String, String> parameters) {
 		String url = CommunityUrls.COMMUNITY_INSTANCE.format(this, CommunityUrls.getCommunityUuid(communityUuid));
@@ -891,7 +875,7 @@ public class CommunityService extends ConnectionsService {
 
 	/**
 	 * Factory method to instantiate a FeedHandler for Communities
-	 * @return IFeedHandler<Community>
+	 * @return {IFeedHandler<Community>}
 	 */
 	protected IFeedHandler<Community> getCommunityFeedHandler() {
 		return new AtomFeedHandler<Community>(this, false) {
@@ -904,7 +888,7 @@ public class CommunityService extends ConnectionsService {
 
 	/**
 	 * Factory method to instantiate a FeedHandler for Members
-	 * @return IFeedHandler<Member>
+	 * @return {IFeedHandler<Member>}
 	 */
 	protected IFeedHandler<Member> getMemberFeedHandler() {
 		return new AtomFeedHandler<Member>(this) {
@@ -917,7 +901,7 @@ public class CommunityService extends ConnectionsService {
 	
 	/**
 	 * Factory method to instantiate a FeedHandler for Members
-	 * @return IFeedHandler<Member>
+	 * @return {IFeedHandler<Member>}
 	 */
 	protected IFeedHandler<Member> getMemberHandler() {
 		return new AtomFeedHandler<Member>(this,false) {
@@ -930,7 +914,7 @@ public class CommunityService extends ConnectionsService {
 
 	/**
 	 * Factory method to instantiate a FeedHandler for Invites
-	 * @return IFeedHandler<Invite>
+	 * @return {IFeedHandler<Invite>}
 	 */
 	protected IFeedHandler<Invite> getInviteFeedHandler() {
 		return new AtomFeedHandler<Invite>(this) {
@@ -944,7 +928,7 @@ public class CommunityService extends ConnectionsService {
 
 	/**
 	 * Factory method to instantiate a FeedHandler for Remote Applications
-	 * @return IFeedHandler<Invite>
+	 * @return {IFeedHandler<Invite>}
 	 */
 	protected IFeedHandler<RemoteApplication> getRemoteApplicationFeedHandler() {
 		return new AtomFeedHandler<RemoteApplication>(this) {

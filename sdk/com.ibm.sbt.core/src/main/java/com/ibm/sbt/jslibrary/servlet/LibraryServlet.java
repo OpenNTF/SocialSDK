@@ -91,7 +91,7 @@ public class LibraryServlet extends BaseToolkitServlet {
 	/**
 	 * 
 	 * @param application
-	 * @return
+	 * @return {List<Object>}
 	 */
     protected List<Object> readLibraries(Application application) {
         return application.findServices(LIBRARY_SERVICE_TYPE);
@@ -142,7 +142,7 @@ public class LibraryServlet extends BaseToolkitServlet {
      * 
      * @param req
      * @param resp
-     * @return
+     * @return {LibraryRequest}
      * @throws IOException
      * @throws ServletException
      */
@@ -153,9 +153,8 @@ public class LibraryServlet extends BaseToolkitServlet {
     /**
      * Create a default environment.
      * 
-     * @param config
-     * @param application
-     * @return
+     * @param context
+     * @return {SBTEnvironment}
      */
     protected SBTEnvironment getDefaultEnvironment(Context context) {
         if (defaultParams.getEnvironment() != null) {
@@ -192,7 +191,7 @@ public class LibraryServlet extends BaseToolkitServlet {
      * Create a library instance which can handle this request.
      * 
      * @param request
-     * @return
+     * @return {AbstractLibrary}
      */
     protected AbstractLibrary createLibrary(LibraryRequest request) {
         if (!request.isInited()) {

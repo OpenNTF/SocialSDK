@@ -68,9 +68,8 @@ import com.ibm.sbt.services.endpoints.Endpoint;
  * repository of files. The Files API allows application programs to add files
  * to a collection and to read and modify existing files.
  * 
- * @see <a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.5+API+Documentation#action=openDocument&res_title=Files_API_ic45&content=pdcontent">Files API </a>
  * 
- * @Represents Connections FileService
+ * IBM Connections FileService API 
  * @author Vimal Dhupar
  * @author Carlos Manias
  */
@@ -269,7 +268,7 @@ public class FileService extends ConnectionsService {
 	/**
 	 * Get a feed that lists public file folders.
 	 * 
-	 * @param parameters
+	 * @param params
 	 *            list of query string parameters to pass to API
 	 * @return EntityList&lt;File&gt;
 	 * @throws ClientServicesException
@@ -377,8 +376,6 @@ public class FileService extends ConnectionsService {
 	 * instance in which access that has been given to a file. This returns a
 	 * feed of shares to which the authenticated user has access.
 	 * 
-	 * @param parameters
-	 *            list of query string parameters to pass to API
 	 * @return EntityList&lt;File&gt;
 	 * @throws ClientServicesException
 	 */
@@ -415,8 +412,6 @@ public class FileService extends ConnectionsService {
 	 * instance in which access that has been given to a file. This returns a
 	 * feed of shares to which the authenticated user has access.
 	 * 
-	 * @param parameters
-	 *            list of query string parameters to pass to API
 	 * @return EntityList&lt;File&gt;
 	 * @throws ClientServicesException
 	 */
@@ -429,7 +424,7 @@ public class FileService extends ConnectionsService {
 	 * instance in which access that has been given to a file. This returns a
 	 * feed of shares to which the authenticated user has access.
 	 * 
-	 * @param parameters
+	 * @param params
 	 *            list of query string parameters to pass to API
 	 * @return EntityList&lt;File&gt;
 	 * @throws ClientServicesException
@@ -459,6 +454,7 @@ public class FileService extends ConnectionsService {
 	/**
 	 * Get a feed that lists all of the comments associated with a file.
 	 * 
+	 * @param fileId the file identifier 
 	 * @param parameters
 	 *            list of query string parameters to pass to API
 	 * @return EntityList&lt;File&gt;
@@ -478,6 +474,8 @@ public class FileService extends ConnectionsService {
 	/**
 	 * Get a feed that lists all of the comments associated with a file.
 	 * 
+	 * @param fileId the file identifier 
+	 * @param userId 
 	 * @return EntityList&lt;Comment&gt;
 	 * @throws ClientServicesException
 	 */
@@ -539,7 +537,7 @@ public class FileService extends ConnectionsService {
 	 * Get a feed that lists all of the files in your recycle bin.
 	 * 
 	 * @param fileId
-	 * @return
+	 * @return {File}
 	 * @throws ClientServicesException
 	 */
 	public File getFileFromRecycleBin(String fileId)
@@ -593,7 +591,7 @@ public class FileService extends ConnectionsService {
 	 * against replay attacks. See RFC 2617 for more information about these
 	 * keys.
 	 * 
-	 * @return String - nonce value
+	 * @return {String} - nonce value
 	 * @throws ClientServicesException
 	 */
 	public String getNonce() throws ClientServicesException {
@@ -676,13 +674,13 @@ public class FileService extends ConnectionsService {
 	 *            the title to be used for uploading the file
 	 * @param length
 	 *            the length of the file
-	 * @param p
+	 * @param parameters
 	 *            parameters
 	 * @return File
 	 * @throws ClientServicesException
 	 */
 	public File uploadFile(InputStream stream, final String title, long length,
-			Map<String, String> p) throws ClientServicesException {
+			Map<String, String> parameters) throws ClientServicesException {
 		if (stream == null) {
 			throw new ClientServicesException(null, Messages.Invalid_Stream);
 		}
@@ -704,7 +702,7 @@ public class FileService extends ConnectionsService {
 																// in header for
 																// all upload
 																// requests.
-		Response response = createData(requestUri, p, headers, contentFile);
+		Response response = createData(requestUri, parameters, headers, contentFile);
 		checkResponseCode(response, HTTPCode.CREATED);
 
 		return getFileFeedHandler().createEntity(response);
@@ -764,15 +762,10 @@ public class FileService extends ConnectionsService {
 	 * the Files application. To add a file to a folder you must be an editor of
 	 * the folder.
 	 * 
+	 * @param fileId
 	 * @param folderId
 	 *            ID of the Collection / Folder to which File(s) need to be
 	 *            added.
-	 * @param listOfFileIds
-	 *            A list of file ids, which need to be added to the collection.
-	 * @param params
-	 *            - Map of Parameters. See {@link FileRequestParams} for
-	 *            possible values.
-	 * @return EntityList&lt;File&gt;
 	 * @throws ClientServicesException
 	 * @throws TransformerException
 	 */
@@ -887,7 +880,7 @@ public class FileService extends ConnectionsService {
 	 *            Id/Ids of the communities with which the file needs to be
 	 *            shared
 	 * @param params
-	 * @return
+	 *
 	 * @throws ClientServicesException
 	 * @throws TransformerException
 	 */
@@ -927,7 +920,7 @@ public class FileService extends ConnectionsService {
 	 * @param file
 	 * @param params
 	 * 
-	 * @return long - no of bytes
+	 * @return long - number of bytes
 	 * @throws ClientServicesException
 	 */
 	public long downloadFile(OutputStream ostream, File file,
@@ -968,7 +961,7 @@ public class FileService extends ConnectionsService {
 	 * @param ostream
 	 *            - output stream which contains the binary content of the file
 	 * @param fileId
-	 * @return long - no of bytes
+	 * @return long - number of bytes
 	 * @throws ClientServicesException
 	 */
 	public long downloadFile(OutputStream ostream, final String fileId)
@@ -982,10 +975,8 @@ public class FileService extends ConnectionsService {
 	 * @param ostream
 	 *            - output stream which contains the binary content of the file
 	 * @param fileId
-	 * @param libraryId
-	 *            - required in case of public file
 	 * @param params
-	 * @return long - no of bytes
+	 * @return long - number of bytes
 	 * @throws ClientServicesException
 	 */
 	public long downloadFile(OutputStream ostream, final String fileId,
@@ -1023,7 +1014,7 @@ public class FileService extends ConnectionsService {
 	 * @param params
 	 * @param isPublic
 	 *            - flag to indicate public file
-	 * @return long - no of bytes
+	 * @return long - number of bytes
 	 * @throws ClientServicesException
 	 */
 	public long downloadFile(OutputStream ostream, final String fileId,
@@ -1075,7 +1066,7 @@ public class FileService extends ConnectionsService {
 	 * @param libraryId
 	 *            - Library Id of which the file is a part. This value can be
 	 *            obtained by using File's getLibraryId method.
-	 * @return
+	 * @return {long} number of bytes
 	 * @throws ClientServicesException
 	 */
 	public long downloadCommunityFile(OutputStream ostream,
@@ -1196,9 +1187,8 @@ public class FileService extends ConnectionsService {
 	 * metadata associated with the file, pass new values for the document
 	 * elements using input parameters.
 	 * 
-	 * @param iStream
-	 * @param fileId
-	 * @param title
+	 * @param inputStream
+	 * @param file
 	 * @param params
 	 * @return File
 	 * @throws ClientServicesException
@@ -1231,15 +1221,11 @@ public class FileService extends ConnectionsService {
 	 * Update the Atom document representation of the metadata for a file from
 	 * your library.
 	 * 
-	 * @param FileId
-	 *            - pass the fileID of the file to be updated
+	 * @param file
+	 *            - the file to be updated
 	 * @param params
 	 *            - Map of Parameters. See {@link FileRequestParams} for
 	 *            possible values.possible values.
-	 * @param requestBody
-	 *            - Document which is passed directly as requestBody to the
-	 *            execute request. This method is used to update the
-	 *            metadata/content of File in Connections.
 	 * @return File
 	 * @throws ClientServicesException
 	 */
@@ -1333,7 +1319,7 @@ public class FileService extends ConnectionsService {
 	 * Retrieve an Atom document representation of a file folder.
 	 * 
 	 * @param folderId
-	 * @return
+	 * @return {File}
 	 * @throws ClientServicesException
 	 */
 	public File getFolder(String folderId) throws ClientServicesException {
@@ -1365,7 +1351,7 @@ public class FileService extends ConnectionsService {
 	 * Update the Atom document representation of the file folder.
 	 * 
 	 * @param folder
-	 * @return
+	 * @return {File}
 	 * @throws ClientServicesException
 	 */
 	public File updateFolder(File folder) throws ClientServicesException {
@@ -1392,7 +1378,7 @@ public class FileService extends ConnectionsService {
 	 * @param title
 	 * @param label
 	 * @param summary
-	 * @return
+	 * @return {File}
 	 * @throws ClientServicesException
 	 */
 	public File updateFolder(String folderId, String title, String label,
@@ -1526,8 +1512,8 @@ public class FileService extends ConnectionsService {
 	 *            possible values.
 	 * @param comment
 	 *            - Comment to be added to the File
-	 * @param libraryId
-	 *            - Id of the library the file is present
+	 * @param userId
+	 *            - Id of the user
 	 * @return Comment the comment to create
 	 * @throws ClientServicesException
 	 * @throws TransformerException
@@ -1535,7 +1521,7 @@ public class FileService extends ConnectionsService {
 	public Comment addCommentToFile(String fileId, Comment comment,
 			String userId, Map<String, String> params)
 			throws ClientServicesException, TransformerException {
-		// FIX: DUPLICATE METHOD see createComment()
+		//FIXME: DUPLICATE METHOD see createComment()
 		if (StringUtil.isEmpty(fileId)) {
 			throw new ClientServicesException(null, Messages.Invalid_FileId);
 		}
@@ -1798,7 +1784,7 @@ public class FileService extends ConnectionsService {
 	 * @param fileId
 	 * @param comment
 	 * @param userId
-	 * @return
+	 * @return Comment
 	 * @throws ClientServicesException
 	 * @throws TransformerException
 	 */
@@ -1857,7 +1843,6 @@ public class FileService extends ConnectionsService {
 	 * Rest API Used :
 	 * /files/basic/api/myuserlibrary/view/recyclebin/{document-id}/entry
 	 * 
-	 * @param fileId
 	 * @throws ClientServicesException
 	 */
 	public void deleteAllFilesFromRecycleBin() throws ClientServicesException {
@@ -1871,7 +1856,6 @@ public class FileService extends ConnectionsService {
 	 * Rest API Used :
 	 * /files/basic/api/userlibrary/{userid}/view/recyclebin/feed
 	 * 
-	 * @param fileId
 	 * @param userId
 	 * @throws ClientServicesException
 	 */
@@ -1936,7 +1920,7 @@ public class FileService extends ConnectionsService {
 	 * 
 	 * @param fileId
 	 * @param commentId
-	 * @return
+	 *
 	 * @throws ClientServicesException
 	 */
 	public void deleteComment(String fileId, String commentId)
@@ -1951,10 +1935,11 @@ public class FileService extends ConnectionsService {
 	 * /files/basic/api/userlibrary/{userid}/document/{document-id
 	 * }/comment/{comment-id}/entry
 	 * 
-	 * @param File
+	 * @param fileId
 	 *            specifies the file for which the comment needs to be deleted.
 	 * @param commentId
 	 *            Id of the comment to be deleted.
+	 * @param userId id of the user which is deleting the comment
 	 * @throws ClientServicesException
 	 */
 	public void deleteComment(String fileId, String commentId, String userId)
@@ -2086,7 +2071,7 @@ public class FileService extends ConnectionsService {
 	 * 
 	 * @param fileId
 	 * @param communityId
-	 * @return CommentList
+	 * @return EntityList<Comment>
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Comment> getAllCommunityFileComments(String fileId,
@@ -2104,7 +2089,7 @@ public class FileService extends ConnectionsService {
 	 * @param fileId
 	 * @param communityId
 	 * @param parameters
-	 * @return CommentList
+	 * @return EntityList<Comment>
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Comment> getAllCommunityFileComments(String fileId,
@@ -2125,7 +2110,7 @@ public class FileService extends ConnectionsService {
 
 	/**
 	 * 
-	 * @return
+	 * @return {IFeedHandler<Comment>}
 	 */
 	public IFeedHandler<Comment> getCommentFeedHandler() {
 		return new AtomFeedHandler<Comment>(this, false) {
@@ -2183,7 +2168,7 @@ public class FileService extends ConnectionsService {
 	 * Method to get a list of Community Files
 	 * 
 	 * @param communityId
-	 * @return
+	 * @return {EntityList<File>}
 	 * @throws ClientServicesException
 	 */
 	public EntityList<File> getCommunityFiles(String communityId)
@@ -2196,7 +2181,7 @@ public class FileService extends ConnectionsService {
 	 * 
 	 * @param communityId
 	 * @param params
-	 * @return FileList
+	 * @return {EntityList<File>}
 	 * @throws CommunityServiceException
 	 */
 	public EntityList<File> getCommunityFiles(String communityId,
@@ -2213,7 +2198,7 @@ public class FileService extends ConnectionsService {
 	 * Method to get a list of Files shared with the Community
 	 * 
 	 * @param communityId
-	 * @return FileList
+	 * @return {EntityList<File>}
 	 * @throws ClientServicesException
 	 */
 	public EntityList<File> getCommunitySharedFiles(String communityId)
@@ -2226,7 +2211,7 @@ public class FileService extends ConnectionsService {
 	 * 
 	 * @param communityId
 	 * @param params
-	 * @return FileList
+	 * @return {EntityList<File>}
 	 * @throws ClientServicesException
 	 */
 	public EntityList<File> getCommunitySharedFiles(String communityId,
@@ -2287,8 +2272,8 @@ public class FileService extends ConnectionsService {
 	 * @param commentId
 	 * @param parameters
 	 *            a map of paramters; can be generated using the
-	 *            {@link FileCommentsParameterBuilder}
-	 * @return
+	 *            FileCommentsParameterBuilder
+	 * @return {EntityList<Comment>}
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Comment> getFileComment(String fileId, String commentId,
@@ -2311,7 +2296,7 @@ public class FileService extends ConnectionsService {
 
 	/**
 	 * 
-	 * @return
+	 * @return {IFeedHandler<File>}
 	 */
 	public IFeedHandler<File> getFileFeedHandler() {
 		return new AtomFeedHandler<File>(this, false) {
@@ -2330,7 +2315,7 @@ public class FileService extends ConnectionsService {
 	 * 
 	 * @param fileId
 	 * @param userId
-	 * @return
+	 * @return {File}
 	 * @throws ClientServicesException
 	 */
 	public File getFileFromRecycleBin(String fileId, String userId)
@@ -2355,12 +2340,12 @@ public class FileService extends ConnectionsService {
 		return getFileEntity(requestUri, params);
 	}
 
-	// /files/basic/api/approval/documents
 	/**
 	 * getFilesAwaitingApproval
-	 * 
+	 * REST API: /files/basic/api/approval/documents
+	 *
 	 * @param params
-	 * @return
+	 * @return {EntityList<File>}
 	 * @throws ClientServicesException
 	 */
 	public EntityList<File> getFilesAwaitingApproval(Map<String, String> params)
@@ -2378,7 +2363,7 @@ public class FileService extends ConnectionsService {
 	 * instance in which access that has been given to a file. <br>
 	 * Rest API used : /files/basic/api/documents/shared/feed
 	 * 
-	 * @return
+	 * @return {EntityList<File>}
 	 * @throws ClientServicesException
 	 */
 	public EntityList<File> getFileShares() throws ClientServicesException {
@@ -2393,7 +2378,7 @@ public class FileService extends ConnectionsService {
 	 * Rest API used : /files/basic/api/documents/shared/feed
 	 * 
 	 * @param params
-	 * @return
+	 * @return {EntityList<File>}
 	 * @throws ClientServicesException
 	 */
 	public EntityList<File> getFileShares(Map<String, String> params)
@@ -2407,7 +2392,7 @@ public class FileService extends ConnectionsService {
 	/**
 	 * getFilesInMyRecycleBin
 	 * 
-	 * @return
+	 * @return {EntityList<File>}
 	 * @throws ClientServicesException
 	 */
 	public EntityList<File> getFilesInMyRecycleBin()
@@ -2423,10 +2408,9 @@ public class FileService extends ConnectionsService {
 	 * @param params
 	 *            - Map of Parameters. See {@link FileRequestParams} for
 	 *            possible values.
-	 * @return FileList
+	 * @return {EntityList<File>}
 	 * @throws ClientServicesException
 	 */
-
 	public EntityList<File> getFilesInMyRecycleBin(Map<String, String> params)
 			throws ClientServicesException {
 		String accessType = AccessType.AUTHENTICATED.getText();
@@ -2440,7 +2424,7 @@ public class FileService extends ConnectionsService {
 	 * <p>
 	 * Rest API Used : /files/basic/api/introspection
 	 * 
-	 * @return
+	 * @return Document
 	 * @throws ClientServicesException
 	 */
 	public Document getFilesServiceDocument() throws ClientServicesException {
@@ -2452,15 +2436,6 @@ public class FileService extends ConnectionsService {
 				ClientService.FORMAT_XML);
 		return (Document) result;
 	}
-
-	/**
-	 * getFilesSharedWithMe
-	 * <p>
-	 * calls getFilesSharedWithMe(Map<String, String> params) with null params
-	 * 
-	 * @return FileList
-	 * @throws ClientServicesException
-	 */
 
 	/**
 	 * getFileWithGivenVersion
@@ -2540,7 +2515,7 @@ public class FileService extends ConnectionsService {
 	 *            included in the content element of the returned Atom document.
 	 *            Options are true or false. The default value is false.
 	 * @param headers
-	 *            {@link FileReuestHeaders}<br>
+	 *            FileRequestHeaders<br>
 	 *            > If-Modified-Since : Used to validate the local cache of the
 	 *            feed and entry documents retrieved previously. If the feed or
 	 *            entry has not been modified since the specified date, HTTP
@@ -2549,7 +2524,7 @@ public class FileService extends ConnectionsService {
 	 *            server in a previous request to the same URL. If the ETag is
 	 *            still valid for the specified resource, HTTP response code 304
 	 *            (Not Modified) is returned.
-	 * @return File
+	 * @return {File}
 	 * @throws ClientServicesException
 	 */
 	public File getFileWithGivenVersion(String fileId, String versionId,
@@ -2642,10 +2617,9 @@ public class FileService extends ConnectionsService {
 	 * @param parameters
 	 *            a map of paramters; can be generated using the
 	 *            {@link FileCommentParameterBuilder}
-	 * @return
+	 * @return {EntityList<Comment>}
 	 * @throws ClientServicesException
 	 */
-
 	public EntityList<Comment> getUserFileComment(String fileId, String userId,
 			String commentId, boolean anonymousAccess,
 			Map<String, String> parameters, Map<String, String> headers)
@@ -2752,7 +2726,7 @@ public class FileService extends ConnectionsService {
 	 * /files/basic/api/myuserlibrary/view/recyclebin/{document-id}/entry
 	 * 
 	 * @param fileId
-	 * @return
+	 * @return {File}
 	 * @throws ClientServicesException
 	 */
 	public File restoreFileFromRecycleBin(String fileId)
@@ -2770,7 +2744,7 @@ public class FileService extends ConnectionsService {
 	 * 
 	 * @param fileId
 	 * @param userId
-	 * @return
+	 * @return {File}
 	 * @throws ClientServicesException
 	 */
 	public File restoreFileFromRecycleBin(String fileId, String userId)
@@ -2853,7 +2827,7 @@ public class FileService extends ConnectionsService {
 	 * @param commentId
 	 * @param params
 	 * @param comment
-	 * @return
+	 * @return {Comment}
 	 * @throws ClientServicesException
 	 * @throws TransformerException
 	 */
@@ -2870,7 +2844,7 @@ public class FileService extends ConnectionsService {
 	 * @param fileId
 	 * @param commentId
 	 * @param comment
-	 * @return
+	 * @return {Comment}
 	 * @throws ClientServicesException
 	 * @throws TransformerException
 	 */
@@ -2887,7 +2861,7 @@ public class FileService extends ConnectionsService {
 	 * @param commentId
 	 * @param comment
 	 * @param userId
-	 * @return
+	 * @return {Comment}
 	 * @throws ClientServicesException
 	 * @throws TransformerException
 	 */
@@ -2905,13 +2879,14 @@ public class FileService extends ConnectionsService {
 	 * }/comment/{comment-id}/entry <br>
 	 * Updates comment from someone else's file whose userid is specified
 	 * 
-	 * @param File
-	 *            File for which the comment needs to be updated.
+	 * @param fileId
+	 *            File ID for which the comment needs to be updated.
 	 * @param commentId
 	 *            Id of the comment to be updated.
-	 * @param params
-	 * @param comment
-	 *            New comment String.
+	 * @param comment new comment string
+	 * @param userId
+	 * @param params  
+	 *
 	 * @return Comment
 	 * @throws ClientServicesException
 	 * @throws TransformerException
@@ -3144,7 +3119,6 @@ public class FileService extends ConnectionsService {
 	 * @see <a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.5+API+Documentation#action=openDocument&res_title=Updating_a_file_ic45&content=pdcontent">Updating a File</a>
 	 * @param iStream
 	 * @param fileId
-	 * @param length
 	 * @param title
 	 * @param params
 	 * @return File
@@ -3185,9 +3159,9 @@ public class FileService extends ConnectionsService {
 	protected Comment getCommentEntity(String requestUrl,
 			Map<String, String> parameters) throws ClientServicesException {
 		if (parameters == null) {
-			// TODO parameters = getCommentParams();
+			// TODO: parameters = getCommentParams();
 		} else {
-			// TODO parameters.putAll(getCommentParams());
+			// TODO: parameters.putAll(getCommentParams());
 		}
 		return getEntity(requestUrl, parameters, getCommentFeedHandler());
 	}
@@ -3224,7 +3198,7 @@ public class FileService extends ConnectionsService {
 	 * <p>
 	 * Rest API Used : /files/basic/api/moderation/atomsvc
 	 * 
-	 * @return
+	 * @return {Document}
 	 * @throws ClientServicesException
 	 */
 	protected Document getFilesModerationServiceDocument()

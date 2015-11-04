@@ -79,8 +79,8 @@ public class NodeEntity extends AtomEntity {
 	 * 
 	 * @param service
 	 * @param node
-	 * @param nameSpaceCtx
-	 * @param xpath
+	 * @param namespaceCtx
+	 * @param xpathExpression
 	 */
 	public NodeEntity(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
 		super(service, node, namespaceCtx, xpathExpression);
@@ -97,7 +97,7 @@ public class NodeEntity extends AtomEntity {
 	
 	/**
 	 * 
-	 * @return
+	 * @return {ActivityService}
 	 */
 	public ActivityService getActivityService() {
 		return (ActivityService)getService();
@@ -106,7 +106,7 @@ public class NodeEntity extends AtomEntity {
 	/**
 	 * Returns the activity ID.
 	 * 
-	 * @return activityUuid
+	 * @return {String} activityUuid
 	 */
 	public String getActivityUuid() {
 		return getAsString(ActivityXPath.activity);
@@ -133,7 +133,7 @@ public class NodeEntity extends AtomEntity {
 	/**
 	 * Return the type
 	 * 
-	 * @return
+	 * @return {String}
 	 */
 	public String getType() {
 		return getAsString(ActivityXPath.type);
@@ -142,7 +142,7 @@ public class NodeEntity extends AtomEntity {
 	/**
 	 * Sets the flags
 	 * 
-	 * @param type
+	 * @param flags
 	 */
 	public void setFlags(String flags) {
 		setAsString(ActivityXPath.flags, flags);
@@ -151,7 +151,7 @@ public class NodeEntity extends AtomEntity {
 	/**
 	 * Return the flags
 	 * 
-	 * @return
+	 * @return {String}
 	 */
 	public String getFlags() {
 		return getAsString(ActivityXPath.flags);
@@ -160,7 +160,7 @@ public class NodeEntity extends AtomEntity {
 	/**
 	 * Returns permissions.
 	 * 
-	 * @return permissions
+	 * @return {String} permissions
 	 */
 	public String getPermissions() {
 		return getAsString(ActivityXPath.permissions);
@@ -169,7 +169,7 @@ public class NodeEntity extends AtomEntity {
 	/**
 	 * Returns the depth of the activity.
 	 * 
-	 * @return depth
+	 * @return {int} depth
 	 */
 	public int getDepth() {
 		return getAsInt(ActivityXPath.depth);
@@ -178,7 +178,7 @@ public class NodeEntity extends AtomEntity {
 	/**
 	 * Returns the position of the activity.
 	 * 
-	 * @return position
+	 * @return {long} position
 	 */
 	public long getPosition() {
 		return getAsLong(ActivityXPath.position);
@@ -196,7 +196,7 @@ public class NodeEntity extends AtomEntity {
 	/**
 	 * Returns the date on which the activity is due to be completed.
 	 * 
-	 * @return due date
+	 * @return {Date} due date
 	 */
 	public Date getDuedate() {
 		return getAsDate(ActivityXPath.duedate);
@@ -205,7 +205,7 @@ public class NodeEntity extends AtomEntity {
 	/**
 	 * Set the date on which the activity is due to be completed.
 	 * 
-	 * @param due date
+	 * @param duedate
 	 */
 	public void setDuedate(Date duedate) {
 		setAsDate(ActivityXPath.duedate, duedate);
@@ -214,7 +214,7 @@ public class NodeEntity extends AtomEntity {
 	/**
 	 * Returns the tags on the node.
 	 * 
-	 * @return
+	 * @return {List<String>}
 	 */
 	public List<String> getTags() {
 		return super.getBaseTags();
@@ -234,7 +234,7 @@ public class NodeEntity extends AtomEntity {
 	 * 
 	 * Flag that is only present on an node that is a reply.
 	 * 
-	 * @return
+	 * @return {boolean}
 	 */
 	public boolean isReply() {
 		return exists(ActivityXPath.reply);
@@ -245,7 +245,7 @@ public class NodeEntity extends AtomEntity {
 	 * 
 	 * Flag that is only present on an node that is deleted, meaning it is in the Trash view and has not been removed from the system.
 	 * 
-	 * @return
+	 * @return {boolean}
 	 */
 	public boolean isDeleted() {
 		return exists(ActivityXPath.deleted);
@@ -262,7 +262,7 @@ public class NodeEntity extends AtomEntity {
 	
 	/**
 	 * 
-	 * @return
+	 * @return {Field[]}
 	 */
 	public Field[] getFields() {
 		if (fields == null) {
@@ -293,8 +293,8 @@ public class NodeEntity extends AtomEntity {
 	/**
 	 * Return the first field with the specified name.
 	 * 
-	 * @param fid
-	 * @return
+	 * @param name
+	 * @return {Field}
 	 */
 	public Field getFieldByName(String name) {
 	    getFields();
@@ -312,7 +312,7 @@ public class NodeEntity extends AtomEntity {
 	 * Return the field with the specified id.
 	 * 
 	 * @param fid
-	 * @return
+	 * @return {Field}
 	 */
 	public Field getFieldById(String fid) {
 		if (fields != null) {
@@ -341,7 +341,7 @@ public class NodeEntity extends AtomEntity {
 	
 	/**
 	 * 
-	 * @param field
+	 * @param updatedField
 	 */
 	public void updateField(Field updatedField) {
 		for (Field field : fields) {
@@ -395,7 +395,7 @@ public class NodeEntity extends AtomEntity {
 	/**
 	 * Return copy of attachments
 	 * 
-	 * @return
+	 * @return {List<ActivityAttachment>}
 	 */
 	public List<ActivityAttachment> getAttachments() {
 		if (attachments.isEmpty()) {
@@ -409,7 +409,7 @@ public class NodeEntity extends AtomEntity {
 	/**
 	 * Return the link.
 	 * 
-	 * @return link
+	 * @return {Link} link
 	 */
 	public Link getEnclosureLink() {
 		if (enclosureLink == null && getDataHandler() != null) {

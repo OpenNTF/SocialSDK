@@ -313,7 +313,6 @@ public class SubscriptionManagementService extends BssService {
      * 
      *  @param subscriptionId The ID of the subscription for which quota is to be changed.
      *  @param seatId The ID of the seat for which quota is to be changed.
-     *  @param seatObject The seat in JSON format
      * 
      * @throws BssException
      * @throws {@link IllegalArgumentException}

@@ -33,7 +33,7 @@ public class ColleagueConnection extends AtomEntity{
 
 	/**
 	 * Constructor
-	 * @param BaseService
+	 * @param svc BaseService
 	 * @param handler
 	 */
 	public ColleagueConnection(BaseService svc, XmlDataHandler handler) {
@@ -42,10 +42,10 @@ public class ColleagueConnection extends AtomEntity{
 
 	/**
 	 * Constructor
-	 * @param BaseService
-	 * @param Node
-	 * @param NamespaceContext
-	 * @param XPathExpression
+	 * @param service BaseService
+	 * @param node Node
+	 * @param namespaceCtx NamespaceContext
+	 * @param xpathExpression XPathExpression
 	 */
 	public ColleagueConnection(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
 		super(service, node, namespaceCtx, xpathExpression);

@@ -381,7 +381,6 @@ public class WikiService extends ConnectionsService {
 	 * For example, if you want to add a new tag to a wiki definition entry, retrieve the existing tags, 
 	 * and send them all back with the new tag in the update request. 
 	 * 
-	 * @param wikiLabel
 	 * @param wiki
 	 * @throws ClientServicesException
 	 */
@@ -396,7 +395,6 @@ public class WikiService extends ConnectionsService {
 	 * For example, if you want to add a new tag to a wiki definition entry, retrieve the existing tags, 
 	 * and send them all back with the new tag in the update request. 
 	 * 
-	 * @param wikiLabel
 	 * @param wiki
 	 * @param parameters
 	 * @throws ClientServicesException
@@ -518,7 +516,7 @@ public class WikiService extends ConnectionsService {
 	 * Only the owner of a wiki page can delete it. Deleted wiki pages cannot be restored.
 	 * 
 	 * @param wikiLabel
-	 * @param wikiPageLable
+	 * @param wikiPageLabel
 	 * @throws ClientServicesException
 	 */
 	public void deleteWikiPage(String wikiLabel, String wikiPageLabel) throws ClientServicesException {

@@ -89,7 +89,7 @@ public class CustomerManagementService extends BssService {
      * Return customer id for the specified JSON object.
      * 
      * @param customerObject
-     * @return
+     * @return {String}
      */
     public String getCustomerId(JsonJavaObject customerObject) {
     	return getId(customerObject, PROPERTY_CUSTOMER);

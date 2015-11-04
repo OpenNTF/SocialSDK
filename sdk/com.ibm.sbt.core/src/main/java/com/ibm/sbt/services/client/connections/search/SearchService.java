@@ -204,8 +204,7 @@ public class SearchService extends ConnectionsService {
 	 * entry to make it easier to find the content later. The format of the tags document 
 	 * is an Atom publishing protocol (APP) categories document.
 	 * 
-	 * @param {tags} List
-	 *            of Tags to searched for
+	 * @param tags List of Tags to searched for
 	 * @return EntityList<Result>
 	 * @throws ClientServicesException
 	 */
@@ -263,10 +262,8 @@ public class SearchService extends ConnectionsService {
 	}
 	
 	/**
-	 * 
-	 * @param query
-	 *            Text to search for
-	 * @param EntityList<FacetValue>
+	 * get people by search query
+	 * @param query Text to search for
 	 * @throws ClientServicesException
 	 */
 	public EntityList<FacetValue> getPeople(String query) throws ClientServicesException {

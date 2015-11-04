@@ -16,7 +16,6 @@ import com.ibm.sbt.services.client.connections.communities.model.CommunityXPath;
 
  * @author Swati Singh
  */
-
 public class Invite extends AtomEntity{
 	 /**
      * The UUID of the community associated with this Invite
@@ -87,7 +86,7 @@ public class Invite extends AtomEntity{
      * Sets id of IBM Connections invite.
      * 
      * @method setInviteUuid
-     * @param {String} inviteUuid Id of the invite
+     * @param inviteUuid Id of the invite
      */
     public void setInviteUuid(String inviteUuid) {
         setAsString(CommunityXPath.id, inviteUuid);
@@ -139,7 +138,6 @@ public class Invite extends AtomEntity{
      * Set the user id of the invitee.
      * 
      * @method setUserid
-     * @return {String} userid
      */
     public void setUserid(String userid) {
         setAsString(CommunityXPath.contributorUserid, userid);
@@ -160,7 +158,6 @@ public class Invite extends AtomEntity{
      * Set the email of the invitee.
      * 
      * @method setEmail
-     * @return {String} email
      */
     public void setEmail(String email) {
     	setAsString(CommunityXPath.contributorEmail, email);
@@ -193,7 +190,7 @@ public class Invite extends AtomEntity{
 	}
 
 	/**
-	 * Method sets the Invite title
+	 * sets the Invite title
 	 */	
 	public void setTitle(String title) {
 		setAsString(CommunityXPath.title, title);
@@ -207,7 +204,7 @@ public class Invite extends AtomEntity{
 		return getAsString(CommunityXPath.content);
 	}
 	/**
-	 * @sets the content
+	 * sets the content
 	 * 
 	 * @param content
 	 */
@@ -236,7 +233,6 @@ public class Invite extends AtomEntity{
      * Save this invite
      * 
      * @method remove
-     * @param {Object} [args] Argument object
      * @throws ClientServicesException
      */
     public Invite save() throws ClientServicesException{
@@ -245,10 +241,8 @@ public class Invite extends AtomEntity{
 	/**
 	 * This method removes or revokes the invite on the server
 	 * 
-	 * @return
 	 * @throws ClientServicesException
 	 */
-
 	public void remove() throws ClientServicesException {
 	   	getService().declineInvite(communityUuid, inviteeUuid);
 	}

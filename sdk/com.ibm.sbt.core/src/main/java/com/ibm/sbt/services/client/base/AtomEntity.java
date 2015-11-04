@@ -44,7 +44,7 @@ public class AtomEntity extends BaseEntity {
 	 * Construct an AtomEntity instance.
 	 * 
 	 * @param service
-	 * @param data
+	 * @param node
 	 * @param namespaceCtx
 	 * @param xpathExpression
 	 */
@@ -105,7 +105,9 @@ public class AtomEntity extends BaseEntity {
 	/**
 	 * Set the data for the entity from the specified response.
 	 * 
-	 * @param response
+	 * @param node
+	 * @param namespaceCtx
+	 * @param xpathExpression
 	 */
 	public void setData(Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
 		dataHandler = new XmlDataHandler(node, namespaceCtx, xpathExpression);
@@ -125,7 +127,7 @@ public class AtomEntity extends BaseEntity {
      * Sets Id of ATOM entry.
      * 
      * @method setId
-     * @param {String} ID of the ATOM entry
+     * @param id {String} ID of the ATOM entry
      */
     public void setId(String id) {
         setAsString(AtomXPath.id, id);
@@ -145,7 +147,7 @@ public class AtomEntity extends BaseEntity {
      * Sets title of ATOM entry.
      * 
      * @method setTitle
-     * @param {String} title ATOM entry title
+     * @param title {String} title ATOM entry title
      */
     public void setTitle(String title) {
         this.setAsString(AtomXPath.title, title);
@@ -165,7 +167,7 @@ public class AtomEntity extends BaseEntity {
      * Sets summary of ATOM entry.
      * 
      * @method setSummary
-     * @param {String} title ATOM entry summary
+     * @param summary title ATOM entry summary
      */
     public void setSummary(String summary) {
         this.setAsString(AtomXPath.summary, summary);
@@ -185,7 +187,7 @@ public class AtomEntity extends BaseEntity {
      * Sets subtitle of ATOM entry.
      * 
      * @method setSummary
-     * @param {String} title ATOM entry subtitle
+     * @param subtitle {String} title ATOM entry subtitle
      */
     public void setSubtitle(String subtitle) {
         this.setAsString(AtomXPath.subtitle, subtitle);
@@ -205,7 +207,7 @@ public class AtomEntity extends BaseEntity {
      * Sets content of ATOM entry.
      * 
      * @method setContent
-     * @param {String} content
+     * @param content {String} content
      */
     public void setContent(String content) {
         this.setAsString(AtomXPath.content, content);
@@ -249,7 +251,7 @@ public class AtomEntity extends BaseEntity {
 	 * Sets the contributor from ATOM entry document.
 	 * 
 	 * @method setContributor
-	 * @param {Person} contributor of the ATOM entry document
+	 * @param person {Person} contributor of the ATOM entry document
 	 */
 	public void setContributor(Person person) {
 		this.setAsObject(AtomXPath.contributor, person);
@@ -308,7 +310,7 @@ public class AtomEntity extends BaseEntity {
     /**
      * Create ATOM entry XML
      * 
-     * @returns
+     * @return {String}
      */
     public String createPostData() {
         return "";
@@ -317,7 +319,7 @@ public class AtomEntity extends BaseEntity {
     /**
      * Return extra entry data to be included in post data for this entity.
      * 
-     * @returns {String}
+     * @return {String}
      */
     public String createEntryData() {
     	return "";
@@ -325,7 +327,7 @@ public class AtomEntity extends BaseEntity {
     
     /**
      * Return the list of category terms that do not have a scheme attribute
-     * @return
+     * @return {List<String>}
      */
 	public List<String> getBaseTags() {
 		return getAsList(AtomXPath.tags);
@@ -351,7 +353,7 @@ public class AtomEntity extends BaseEntity {
 	/**
 	 * Return XML string for the Atom entity.
 	 * 
-	 * @return
+	 * @return {String}
 	 * @throws XMLException
 	 */
 	public String toXmlString() throws XMLException {

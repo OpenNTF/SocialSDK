@@ -152,7 +152,7 @@ public class LibraryRequest {
      * optional param on the request. Currently the only valid value is
      * <code>gadget</code>.
      * 
-     * @see GADGET_CONTEXT
+     * Refer to GADGET_CONTEXT
      */
     public static final String PARAM_CONTEXT = "context";
     
@@ -288,7 +288,7 @@ public class LibraryRequest {
     }
 
     /**
-	 * @param initJS the initJs to set
+	 * @param initJs the initJs to set
 	 */
 	public void setInitJs(boolean initJs) {
 		this.initJs = initJs;
@@ -468,7 +468,8 @@ public class LibraryRequest {
 
     /**
      * 
-     * @param req
+     * @param params
+	 * @param defaultEnvironment
      * 
      * @throws ServletException
      * @throws IOException

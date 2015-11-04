@@ -110,8 +110,7 @@ public class AuthenticationService extends BssService {
      * Change the password of a subscriber. 
      * The current password must be available to perform this action.
      * 
-     * @param customerObject
-     * @return JSON object containing 
+     * @param userCredentialObject
      * @throws BssException
      * @throws IOException 
      */

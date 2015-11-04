@@ -160,8 +160,7 @@ public class LibraryRequestParams {
     }
 
     /**
-     * @param defaultEnvironment
-     *            the defaultEnvironment to set
+     * @param environment  the defaultEnvironment to set
      */
     public void setEnvironment(SBTEnvironment environment) {
         this.environment = environment;

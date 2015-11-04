@@ -71,7 +71,6 @@ public class JsonEntity extends BaseEntity {
 	/**
 	 * Returns the value of a field as an Object
 	 * 
-	 * @param fieldName
 	 * @return returns false, if the field doesn't exist
 	 */
 	public JsonJavaObject getJsonObject(){
@@ -85,7 +84,7 @@ public class JsonEntity extends BaseEntity {
 	/**
 	 * Returns the value of a field as an Object
 	 * 
-	 * @param fieldName
+	 * @param path
 	 * @return returns false, if the field doesn't exist
 	 */
 	public Object getAsObject(String path){
@@ -101,7 +100,7 @@ public class JsonEntity extends BaseEntity {
 	/**
 	 * Return JSON string representation of current data.
 	 * 
-	 * @return
+	 * @return {String} 
 	 */
 	public String toJsonString() {
 		JsonDataHandler jsonHandler = (JsonDataHandler)getDataHandler();
@@ -111,7 +110,7 @@ public class JsonEntity extends BaseEntity {
 	/**
 	 * Return JSON string representation of current data.
 	 * @param compact
-	 * @return
+	 * @return {String}
 	 */
 	public String toJsonString(boolean compact) {
 		try {
@@ -125,7 +124,7 @@ public class JsonEntity extends BaseEntity {
 	/**
 	 * Build a JSON object using the current fields
 	 * 
-	 * @return
+	 * @return {JsonJavaObject}
 	 * @throws AbstractException 
 	 */
 	public JsonJavaObject buildJsonObject() throws AbstractException {
@@ -135,7 +134,7 @@ public class JsonEntity extends BaseEntity {
 	/**
 	 * Build a JSON object using the current fields
 	 * 
-	 * @return
+	 * @return {JsonJavaObject}
 	 * @throws AbstractException 
 	 */
 	public JsonJavaObject buildJsonObject(String jsonString) throws AbstractException {
@@ -156,7 +155,7 @@ public class JsonEntity extends BaseEntity {
 
 	/**
 	 * @param jsonObject
-	 * @param key
+	 * @param path
 	 * @param value
 	 * @throws AbstractException 
 	 */

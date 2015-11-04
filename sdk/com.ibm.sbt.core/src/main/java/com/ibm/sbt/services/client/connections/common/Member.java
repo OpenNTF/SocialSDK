@@ -80,8 +80,8 @@ public class Member extends AtomEntity {
 	 * 
 	 * @param service
 	 * @param node
-	 * @param nameSpaceCtx
-	 * @param xpath
+	 * @param namespaceCtx
+	 * @param xpathExpression
 	 */
 	public Member(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
 		super(service, node, namespaceCtx, xpathExpression);
@@ -104,7 +104,7 @@ public class Member extends AtomEntity {
 	/**
 	 * Returns the name of the member.
 	 * 
-	 * @return
+	 * @return {String}
 	 */
 	public String getName() {
 		return getTitle();
@@ -133,7 +133,7 @@ public class Member extends AtomEntity {
 	}
 	
 	/**
-	 * @return the component
+	 * @return {String} the component
 	 */
 	public String getComponent() {
 		return component;
@@ -142,7 +142,7 @@ public class Member extends AtomEntity {
 	/**
 	 * Specifies the member's role in the component.
 	 * 
-	 * @return
+	 * @return {String} role
 	 */
 	public String getRole() {
 		return getAsString(CommonXPath.role);
@@ -160,7 +160,7 @@ public class Member extends AtomEntity {
 	/**
 	 * Returns the member type.
 	 * 
-	 * @return
+	 * @return {String}
 	 */
 	public String getType() {
 		return getAsString(CommonXPath.type);
@@ -169,7 +169,7 @@ public class Member extends AtomEntity {
 	/**
 	 * Specifies the member type.
 	 * 
-	 * @param role
+	 * @param type
 	 */
 	public void setType(String type) {
 		setAsString(CommonXPath.type, type);

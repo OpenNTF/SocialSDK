@@ -427,7 +427,7 @@ public class SubscriberManagementService extends BssService {
     /**
      * Wait for the subscriber to change to the specified state and then call the state change listener.
      * 
-     * @param customerId
+     * @param subscriberId
      * @param state
      * @param maxAttempts
      * @param waitInterval
@@ -461,7 +461,7 @@ public class SubscriberManagementService extends BssService {
     /**
      * Wait for the subscriber seat to change to the specified state and then call the state change listener.
      * 
-     * @param customerId
+     * @param subscriberId
      * @param state
      * @param maxAttempts
      * @param waitInterval

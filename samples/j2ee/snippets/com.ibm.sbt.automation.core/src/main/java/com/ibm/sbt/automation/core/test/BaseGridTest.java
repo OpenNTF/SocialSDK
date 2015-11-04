@@ -29,7 +29,7 @@ import com.ibm.sbt.automation.core.test.pageobjects.ResultPage;
 /**
  * @author mwallace
  *  
- * @date 5 Mar 2013
+ * @since 5 Mar 2013
  */
 public class BaseGridTest extends BaseTest {
 	
@@ -39,7 +39,7 @@ public class BaseGridTest extends BaseTest {
     
     /**
      * Return true if a Grid was created on the page i.e. could find table, tbody and multiple tr's
-     * @return
+     * @return {boolean} 
      */
     protected boolean checkGrid(String snippetId) {
         return checkGrid(snippetId, false, false);
@@ -51,7 +51,7 @@ public class BaseGridTest extends BaseTest {
     }
     /**
      * Return true if a Grid was created on the page i.e. could find table, tbody and multiple tr's
-     * @return
+     * @return {boolean} 
      */
     protected boolean checkGrid(String snippetId, boolean hasPager) {
         return checkGrid(snippetId, hasPager, false);
@@ -65,7 +65,7 @@ public class BaseGridTest extends BaseTest {
     
     /**
      * Return true if a Grid was created on the page i.e. could find table, tbody and multiple tr's
-     * @return
+     * @return  {boolean} 
      */
     protected boolean checkGrid(GridResultPage resultPage, boolean hasPager, boolean hasSorter, String snippetId) {
 
@@ -127,7 +127,7 @@ public class BaseGridTest extends BaseTest {
         
     /**
      * @param resultPage
-     * @return
+     * @return {boolean} 
      */
     protected boolean checkPager(GridResultPage gridPage,String[] rows) {
         GridPagerPage gridPager = gridPage.getGridPager();
@@ -187,7 +187,7 @@ public class BaseGridTest extends BaseTest {
 
     /**
      * @param resultPage
-     * @return
+     * @return {boolean} 
      */
     protected boolean checkSorter(GridResultPage resultPage, String[] rows) {
     	boolean sortingIsOkay = true;
@@ -218,7 +218,7 @@ public class BaseGridTest extends BaseTest {
      * Launch the grid snippet and return a GridResultPage
      * 
      * @param snippetId
-     * @return
+     * @return {GridResultPage} 
      */
     protected GridResultPage launchGrid(String snippetId) {
         ResultPage resultPage = super.launchSnippet(snippetId, authType);
@@ -229,7 +229,7 @@ public class BaseGridTest extends BaseTest {
      * Wrap the environment result page in a GridResultPage
      * 
      * @param resultPage
-     * @return
+     * @return {GridResultPage} 
      */
     protected GridResultPage wrapResultPage(ResultPage resultPage) {
         return new GridResultPage(resultPage);

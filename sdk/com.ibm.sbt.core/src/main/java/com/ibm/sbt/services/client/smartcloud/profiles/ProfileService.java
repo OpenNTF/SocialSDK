@@ -33,7 +33,6 @@ import com.ibm.sbt.services.endpoints.Endpoint;
  * ProfileService can be used to perform Profile Related operations. This is a dedicated Service for
  * SmartCloud Profiles.
  * 
- * @Represents SmartCloud ProfileService
  * @author Vimal Dhupar
  */
 public class ProfileService extends BaseService {
@@ -143,7 +142,7 @@ public class ProfileService extends BaseService {
 	 * <p>
 	 * Fetches the contact information of the user based on the input GUID.
 	 * 
-	 * @param userId
+	 * @param userGUId
 	 *            contact Guid of the profile to be fetched
 	 * @return Profile
 	 * @throws ProfileServiceException
@@ -165,7 +164,7 @@ public class ProfileService extends BaseService {
 	 * <p>
 	 * Fetches the contact information of the user based on the input GUID.
 	 * 
-	 * @param userId
+	 * @param userGUId
 	 *            contact Guid of the profile to be fetched
 	 * @return Profile
 	 * @throws ProfileServiceException

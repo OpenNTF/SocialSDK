@@ -68,7 +68,6 @@ public class WorkflowService extends BssService {
      * Constructor
      * 
      * @param endpoint
-     * @param cacheSize
      */
     public WorkflowService(Endpoint endpoint) {
         super(endpoint);
@@ -89,7 +88,7 @@ public class WorkflowService extends BssService {
      * 
      * @param customerId
      * 
-     * @return
+     * @return {EntityList<JsonEntity>}
      * @throws BssException
      */
     public EntityList<JsonEntity> getWorkflowsByCustomerId(String customerId, int pageNumber, int pageSize) throws BssException {
@@ -109,7 +108,7 @@ public class WorkflowService extends BssService {
      * 
      * @param workflowStatus
      * 
-     * @return
+     * @return {EntityList<JsonEntity>}
      * @throws BssException
      */
     public EntityList<JsonEntity> getWorkflowsByStatus(String workflowStatus, int pageNumber, int pageSize) throws BssException {
@@ -129,7 +128,7 @@ public class WorkflowService extends BssService {
      * 
      * @param subscriberId
      * 
-     * @return
+     * @return {EntityList<JsonEntity>}
      * @throws BssException
      */
     public EntityList<JsonEntity> getWorkflowsBySubscriberId(String subscriberId, int pageNumber, int pageSize) throws BssException {

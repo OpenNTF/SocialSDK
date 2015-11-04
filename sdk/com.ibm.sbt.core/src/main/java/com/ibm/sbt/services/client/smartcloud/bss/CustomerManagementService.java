@@ -70,7 +70,6 @@ public class CustomerManagementService extends BssService {
      * Constructor
      * 
      * @param endpoint
-     * @param cacheSize
      */
     public CustomerManagementService(Endpoint endpoint) {
         super(endpoint);
@@ -100,7 +99,7 @@ public class CustomerManagementService extends BssService {
      * Get details about a single customer, such as current status and contact information. 
      * 
      * @param customerId
-     * @return
+     * @return {JsonEntity}
      * @throws BssException
      */
     public JsonEntity getCustomerById(String customerId) throws BssException {
@@ -149,7 +148,6 @@ public class CustomerManagementService extends BssService {
      * The customer must be owned by the organization of the authenticated user.
      * 
      * @param customerId
-     * @return
      * @throws BssException
      */
     public void unregisterCustomer(String customerId) throws BssException {
@@ -172,7 +170,6 @@ public class CustomerManagementService extends BssService {
      * A customer who is suspended cannot use any services. 
      * 
      * @param customerId
-     * @return
      * @throws BssException
      */
     public void suspendCustomer(String customerId) throws BssException {
@@ -195,7 +192,6 @@ public class CustomerManagementService extends BssService {
      * Only active customers can use services.
      * 
      * @param customerId
-     * @return
      * @throws BssException
      */
     public void unsuspendCustomer(String customerId) throws BssException {
@@ -216,7 +212,7 @@ public class CustomerManagementService extends BssService {
     /**
      * Get a list of all customers who are part of the vendor's organization.
      * 
-     * @return
+     * @return {EntityList<JsonEntity>}
      * @throws BssException
      */
     public EntityList<JsonEntity> getCustomers() throws BssException {
@@ -233,7 +229,7 @@ public class CustomerManagementService extends BssService {
      * 
      * @param pageNumber
      * @param pageSize
-     * @return
+     * @return {EntityList<JsonEntity>}
      * @throws BssException
      */
     public EntityList<JsonEntity> getCustomers(int pageNumber, int pageSize) throws BssException {
@@ -252,7 +248,7 @@ public class CustomerManagementService extends BssService {
      * Get a customer list by the email address of the contact person.
      * 
      * @param contactEmail
-     * @return
+     * @return {EntityList<JsonEntity>}
      * @throws BssException
      * @throws {@link IllegalArgumentException}
      */
@@ -272,7 +268,7 @@ public class CustomerManagementService extends BssService {
      * Get a customer list by the email address of the subscriber.
      * 
      * @param subscriberEmail
-     * @return
+     * @return {EntityList<JsonEntity>}
      * @throws BssException
      * @throws {@link IllegalArgumentException}
      */
@@ -292,7 +288,7 @@ public class CustomerManagementService extends BssService {
      * Get a customer list by the organization name.
      * 
      * @param orgName
-     * @return
+     * @return {EntityList<JsonEntity>}
      * @throws BssException
      * @throws {@link IllegalArgumentException}
      */
@@ -312,7 +308,7 @@ public class CustomerManagementService extends BssService {
      * Create a customer organization with a contact person.
      * 
      * @param customer
-     * @return
+     * @return {JsonJavaObject}
      * @throws BssException
      * @throws JsonException
      * @throws IOException 
@@ -325,7 +321,7 @@ public class CustomerManagementService extends BssService {
      * Create a customer organization with a contact person.
      * 
      * @param customerJson
-     * @return
+     * @return {JsonJavaObject}
      * @throws BssException
      * @throws JsonException
      * @throws IOException 

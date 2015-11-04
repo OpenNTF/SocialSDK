@@ -65,7 +65,7 @@ import com.ibm.sbt.services.endpoints.EndpointFactory;
  * @author mkataria
  * @author mwallace
  * 
- * @date Jan 10, 2013
+ * @since Jan 10, 2013
  */
 public abstract class TestEnvironment extends com.ibm.sbt.test.lib.TestEnvironment{
 
@@ -210,7 +210,7 @@ public abstract class TestEnvironment extends com.ibm.sbt.test.lib.TestEnvironme
 	 * Return the specified test property
 	 * 
 	 * @param name
-	 * @return
+	 * @return {String}
 	 */
     public static String getProperty(String name) {
         TestEnvironment environment = TestEnvironmentFactory.getEnvironment();
@@ -252,7 +252,7 @@ public abstract class TestEnvironment extends com.ibm.sbt.test.lib.TestEnvironme
 	/**
 	 * Return true if SmartCloud environment is enabled.
 	 * 
-	 * @return
+	 * @return {boolean}
 	 */
 	public boolean isSmartCloud() {
 		return smartCloud;
@@ -261,7 +261,7 @@ public abstract class TestEnvironment extends com.ibm.sbt.test.lib.TestEnvironme
 	/**
 	 * Return true if mock transport is being used.
 	 * 
-	 * @return
+	 * @return {boolean}
 	 */
 	public boolean isMockTransport() {
 		return properties.getProperty(PROP_ENABLE_MOCKTRANSPORT, "false")
@@ -271,7 +271,7 @@ public abstract class TestEnvironment extends com.ibm.sbt.test.lib.TestEnvironme
 	/**
 	 * Return true if debug transport is being used.
 	 * 
-	 * @return
+	 * @return {boolean}
 	 */
 	public boolean isDebugTransport() {
 		return properties.getProperty(PROP_ENABLE_DEBUGTRANSPORT, "false")
@@ -281,7 +281,7 @@ public abstract class TestEnvironment extends com.ibm.sbt.test.lib.TestEnvironme
 	/**
 	 * Return true if test data should be overwritten.
 	 * 
-	 * @return
+	 * @return {boolean}
 	 */
 	public boolean isOverwriteTestdata() {
 		return properties.getProperty(PROP_ENABLE_OVERWRITETESTDATA, "false")
@@ -322,7 +322,7 @@ public abstract class TestEnvironment extends com.ibm.sbt.test.lib.TestEnvironme
 	/**
 	 * Return the WebDriver
 	 * 
-	 * @return
+	 * @return {WebDriver}
 	 */
 	public WebDriver getWebDriver() {
 		// browser to test with
@@ -647,7 +647,7 @@ public abstract class TestEnvironment extends com.ibm.sbt.test.lib.TestEnvironme
 	 * 
 	 * @param form
 	 * 
-	 * @return
+	 * @return {AuthType}
 	 */
 	public AuthType detectAuthType(BaseTest baseTest, WebElement loginForm) {
 		// if results are available then no need to check for authentication
@@ -1146,7 +1146,7 @@ public abstract class TestEnvironment extends com.ibm.sbt.test.lib.TestEnvironme
 	 * @param lib
 	 *            a library version, using non dotted format (i.e. 182 for
 	 *            jquery 1.8.2, 143 for dojo 1.4.3)
-	 * @return
+	 * @return {boolean}
 	 */
 	public boolean isLibraryVersionGreatherThan(String version) {
 		if (jsLib == null || version == null)
@@ -1169,7 +1169,7 @@ public abstract class TestEnvironment extends com.ibm.sbt.test.lib.TestEnvironme
 	/**
 	 * Return true if screenshots should be taken.
 	 * 
-	 * @return
+	 * @return {boolean}
 	 */
 	public boolean isTakeScreenshots() {
 		return takeScreenshot;
@@ -1178,7 +1178,7 @@ public abstract class TestEnvironment extends com.ibm.sbt.test.lib.TestEnvironme
 	/**
 	 * Return the path where screenshots should be stored.
 	 * 
-	 * @return
+	 * @return {String}
 	 */
 	public String getScreenshotsPath() {
 		return screenshotsPath;
@@ -1230,7 +1230,7 @@ public abstract class TestEnvironment extends com.ibm.sbt.test.lib.TestEnvironme
 	/**
 	 * @param baseTest
 	 * @param url
-	 * @return
+	 * @return {String}
 	 */
 	protected String addSnippetParams(BaseTest baseTest, String url) {
 		Map<String, String> params = baseTest.getSnippetParams();
@@ -1350,14 +1350,14 @@ public abstract class TestEnvironment extends com.ibm.sbt.test.lib.TestEnvironme
 	 * Compute the launch URL for the specified test
 	 * 
 	 * @param baseTest
-	 * @return
+	 * @return {String}
 	 */
 	abstract public String computeLaunchUrl(BaseTest baseTest);
 
 	/**
 	 * Return the result page for the current web driver
 	 * 
-	 * @return
+	 * @return {ResultPage}
 	 */
 	public ResultPage getPageObject() {
 		return getPageObject(getCurrentDriver());
@@ -1367,7 +1367,7 @@ public abstract class TestEnvironment extends com.ibm.sbt.test.lib.TestEnvironme
 	 * Return the result page for the specified web driver
 	 * 
 	 * @param webDriver
-	 * @return
+	 * @return {ResultPage}
 	 */
 	abstract public ResultPage getPageObject(WebDriver webDriver);
 

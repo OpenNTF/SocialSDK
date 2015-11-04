@@ -46,7 +46,7 @@ import com.ibm.sbt.services.endpoints.Endpoint;
  * 	ActivityStreamEntityList _entries = (List) _service.getUpdatesFromMyNetwork();
  * }
  * </pre>
- * @see http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=IBM_Connections_Activity_Stream_API&content=pdcontent
+ * @see <a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=IBM_Connections_Activity_Stream_API&content=pdcontent">Activity Stream API</a>
  */
 
 public class ActivityStreamService extends ConnectionsService {
@@ -515,7 +515,7 @@ public class ActivityStreamService extends ConnectionsService {
 	 * 
 	 * @param id
 	 * 			  Application type ( blogs/wikis etc. ) 
-	 * 			  {@see http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Support_for_Saved_and_Actionable_events&content=pdcontent}
+	 * 			  {@see <a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Support_for_Saved_and_Actionable_events&content=pdcontent">Saved and Actionable Events API</a>}
 	 *            
 	 * @param params
 	 *            Additional parameters used for constructing URL's
@@ -561,7 +561,7 @@ public class ActivityStreamService extends ConnectionsService {
 	 * 
 	 * @param id
 	 * 			  Application type ( blogs/wikis etc. ) 
-	 * 			  {@see http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Support_for_Saved_and_Actionable_events&content=pdcontent}
+	 * 			  {@see <a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Support_for_Saved_and_Actionable_events&content=pdcontent">Saved and Actionable Content</a>}
 	 *            
 	 * @param params
 	 *            Additional parameters used for constructing URL's

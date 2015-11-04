@@ -39,10 +39,7 @@ public class AtomEntry {
 	/**
 	 * Construct an AtomEntity instance.
 	 * 
-	 * @param service
-	 * @param data
-	 * @param namespaceCtx
-	 * @param xpathExpression
+	 * @param node
 	 */
 	public AtomEntry(Node node) {
 		XPathExpression xpath = (node instanceof Document) ? (XPathExpression)AtomXPath.singleEntry.getPath() : null;
@@ -54,7 +51,7 @@ public class AtomEntry {
 	 * 
 	 * @method getAsString
 	 * @param xpath
-	 * @return
+	 * @return {String}
 	 */
 	public String getAsString(String xpath){
 		return dataHandler.getAsString(xpath);
@@ -65,7 +62,7 @@ public class AtomEntry {
 	 * 
 	 * @method getAsLong
 	 * @param xpath
-	 * @return
+	 * @return {Long}
 	 */
 	public Long getAsLong(String xpath){
 		return dataHandler.getAsLong(xpath);
@@ -76,7 +73,7 @@ public class AtomEntry {
 	 * 
 	 * @method getAsInt
 	 * @param xpath
-	 * @return
+	 * @return {int}
 	 */
 	public int getAsInt(String xpath){
 		return dataHandler.getAsInt(xpath);
@@ -87,7 +84,7 @@ public class AtomEntry {
 	 * 
 	 * @method getAsFloat
 	 * @param xpath
-	 * @return
+	 * @return {Float}
 	 */
 	public Float getAsFloat(String xpath){
 		return dataHandler.getAsFloat(xpath);
@@ -98,7 +95,7 @@ public class AtomEntry {
 	 * 
 	 * @method getAsArray
 	 * @param xpath
-	 * @return
+	 * @return {String[]} array
 	 */
 	public String[] getAsArray(String xpath){
 		return dataHandler.getAsArray(xpath);
@@ -109,7 +106,7 @@ public class AtomEntry {
 	 * 
 	 * @method getAsDate
 	 * @param xpath
-	 * @return
+	 * @return {Date}
 	 */
 	public Date getAsDate(String xpath){
 		return dataHandler.getAsDate(xpath);
@@ -120,7 +117,7 @@ public class AtomEntry {
 	 * 
 	 * @method getAsBoolean
 	 * @param xpath
-	 * @return
+	 * @return {boolean}
 	 */
 	public boolean getAsBoolean(String xpath){
 		return dataHandler.getAsBoolean(xpath);
@@ -259,7 +256,7 @@ public class AtomEntry {
 	/**
 	 * Return XML string for the Atom entity.
 	 * 
-	 * @return
+	 * @return {String}
 	 * @throws XMLException
 	 */
 	public String toXmlString() throws XMLException {

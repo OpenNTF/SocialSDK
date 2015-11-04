@@ -45,7 +45,7 @@ import com.ibm.sbt.services.endpoints.EndpointFactory;
 /**
  * @author mwallace
  *  
- * @date 5 Mar 2013
+ * @since 5 Mar 2013
  */
 public class BaseApiTest extends BaseTest {
 	
@@ -96,7 +96,7 @@ public class BaseApiTest extends BaseTest {
     
     /**
      * @param snippetId
-     * @return
+     * @return {JavaScriptPreviewPage}
      */
     public JavaScriptPreviewPage executeSnippet(String snippetId) {
         return executeSnippet(snippetId, 0);
@@ -104,7 +104,7 @@ public class BaseApiTest extends BaseTest {
     
     /**
      * @param snippetId
-     * @return
+     * @return {JavaScriptPreviewPage}
      */
     public JavaScriptPreviewPage executeSnippet(String snippetId, long delay) {
     	this.snippetId = snippetId;

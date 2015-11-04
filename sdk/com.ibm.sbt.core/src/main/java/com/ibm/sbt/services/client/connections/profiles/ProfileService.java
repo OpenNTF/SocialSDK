@@ -540,8 +540,7 @@ public class ProfileService extends ConnectionsService {
 	 * You can only replace a photo if you are the profile owner or an administrator.
 	 * See Authenticating requests for information about how to authenticate the request. <br>
 	 *  
-	 * @param File
-	 * 			image to be uploaded as profile photo
+	 * @param file File - image to be uploaded as profile photo
 	 * @param userid
 	 * @throws ClientServicesException
 	 */
@@ -698,7 +697,7 @@ public class ProfileService extends ConnectionsService {
 	 * See Inviting a person to become your colleague for more information.<br>
 	 * See Authenticating requests for information about how to authenticate the request.
 	 * 
-	 * @param ColleagueConnection 
+	 * @param connection ColleagueConnection 
 	 * @throws ClientServicesException 
 	 * 
 	 */
@@ -764,7 +763,7 @@ public class ProfileService extends ConnectionsService {
 	 * Users can only update their own profiles. 
 	 * See Authenticating requests for information about how to authenticate the request.<br>
 	 * 
-	 * @param Profile
+	 * @param profile Profile
 	 * @throws ClientServicesException 
 	 */
 	public void updateProfile(Profile profile) throws ClientServicesException {
@@ -872,7 +871,7 @@ public class ProfileService extends ConnectionsService {
 	/**
 	 * Returns the userid of the currently connected user
 	 * 
-	 * @return
+	 * @return {String}
 	 * @throws ClientServicesException 
 	 */
 	public String getMyUserId() throws ClientServicesException{
@@ -892,7 +891,7 @@ public class ProfileService extends ConnectionsService {
 	/**
 	 * Returns the profile of the currently connected user
 	 * 
-	 * @return
+	 * @return {Profile}
 	 * @throws ClientServicesException
 	 */
 	public Profile getMyProfile() throws ClientServicesException {
@@ -905,7 +904,7 @@ public class ProfileService extends ConnectionsService {
 
 	/**
 	 * Factory method to instantiate a FeedHandler for Profiles
-	 * @return IFeedHandler<Profile>
+	 * @return {IFeedHandler<Profile>}
 	 */
 	public IFeedHandler<Profile> getProfileFeedHandler() {
 		return new AtomFeedHandler<Profile>(this) {
@@ -918,7 +917,7 @@ public class ProfileService extends ConnectionsService {
 
 	/**
 	 * Factory method to instantiate a FeedHandler for ColleagueConnections
-	 * @return IFeedHandler<ColleagueConnection>
+	 * @return {IFeedHandler<ColleagueConnection>}
 	 */
 	public IFeedHandler<ColleagueConnection> getColleagueFeedHandler() {
 		return new AtomFeedHandler<ColleagueConnection>(this, false) {
@@ -931,7 +930,7 @@ public class ProfileService extends ConnectionsService {
 
 	/**
 	 * Factory method to instantiate a FeedHandler for Tags
-	 * @return IFeedHandler<Tag>
+	 * @return {IFeedHandler<Tag>}
 	 */
 	public IFeedHandler<Tag> getTagFeedHandler() {
 		return new AtomFeedHandler<Tag>(this) {

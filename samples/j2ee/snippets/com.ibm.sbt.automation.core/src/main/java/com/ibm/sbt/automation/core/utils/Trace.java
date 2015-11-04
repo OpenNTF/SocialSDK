@@ -20,7 +20,7 @@ import com.ibm.sbt.automation.core.environment.TestEnvironmentFactory;
 
 /**
  * @author mkataria
- * @date Feb 6, 2013
+ * @since Feb 6, 2013
  */
 public class Trace {
 

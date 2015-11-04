@@ -90,7 +90,6 @@ public class WikiService extends ConnectionsService {
 	 * Get a feed that lists all of the wikis.
 	 * This returns a feed of wikis to which the authenticated user has access.
 	 * 
-	 * @param parameters 
 	 * @return EntityList&lt;Wiki&gt;
 	 * @throws ClientServicesException
 	 */
@@ -116,7 +115,6 @@ public class WikiService extends ConnectionsService {
 	 * Get a feed that lists all of the public wikis.
 	 * This returns a feed of wikis to which everyone who can log into the Wikis application has access.
 	 *
-	 * @param parameters
 	 * @return EntityList&lt;Wiki&gt;
 	 * @throws ClientServicesException
 	 */

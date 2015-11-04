@@ -185,7 +185,7 @@ abstract public class AbstractLibrary {
 	/**
 	 * 
 	 * @param request
-	 * @return
+	 * @return String
 	 * @throws LibraryException
 	 */
 	public String generateJavaScript(LibraryRequest request) throws LibraryException {
@@ -244,7 +244,7 @@ abstract public class AbstractLibrary {
 
 	/**
 	 * 
-	 * @return
+	 * @return String
 	 */
 	protected String newLine(){
 		return nl;
@@ -310,7 +310,7 @@ abstract public class AbstractLibrary {
 
 	/**
 	 * @param request
-	 * @return
+	 * @return JsonObject
 	 * @throws ServletException
 	 * @throws IOException
 	 */
@@ -472,7 +472,7 @@ abstract public class AbstractLibrary {
 	 * @param endpoints
 	 * @param properties
 	 * @param indentationLevel
-	 * @return
+	 * @return StringBuilder
 	 * @throws LibraryException
 	 */
 	protected StringBuilder generateSbtConfigDefine(LibraryRequest request,
@@ -654,7 +654,7 @@ abstract public class AbstractLibrary {
 	/**
 	 * @param request
 	 * @param endpoints
-	 * @return
+	 * @return String[]
 	 */
 	protected String[] getDependModules(LibraryRequest request, Map<String, JsonObject> endpoints) {
 		List<String> modules = new ArrayList<String>();
@@ -737,7 +737,7 @@ abstract public class AbstractLibrary {
 	}
 	/**
 	 * @param properties
-	 * @return
+	 * @return String
 	 * @throws LibraryException
 	 */
 	protected String toJson(JsonObject properties) throws LibraryException {
@@ -762,7 +762,7 @@ abstract public class AbstractLibrary {
 
 	/**
 	 * @param module
-	 * @return
+	 * @return String
 	 */
 	protected String getModuleParamName(String module) {
 		int index = module.lastIndexOf('/');
@@ -775,7 +775,7 @@ abstract public class AbstractLibrary {
 	/**
 	 * @param array
 	 * @param delim
-	 * @return
+	 * @return String
 	 */
 	protected String toQuotedString(String[] array, String delim) {
 		StringBuilder sb = new StringBuilder();
@@ -793,7 +793,7 @@ abstract public class AbstractLibrary {
 	/**
 	 * @param array
 	 * @param delim
-	 * @return
+	 * @return String
 	 */
 	protected String toString(String[] array, String delim) {
 		StringBuilder sb = new StringBuilder();
@@ -812,7 +812,7 @@ abstract public class AbstractLibrary {
 	 * Convert the endpoint json to a new object which can be used to create endpoint parameters
 	 * 
 	 * @param jsonObject
-	 * @return
+	 * @return JsonObject
 	 */
 	protected JsonObject removeModuleProperties(JsonObject jsonObject) {
 		JsonObject params = new JsonJavaObject();
@@ -830,7 +830,7 @@ abstract public class AbstractLibrary {
 	/**
 	 * @param endpoint
 	 * @param logicalName
-	 * @return
+	 * @return JsonReference
 	 * @throws LibraryException
 	 */
 	protected JsonReference createAuthenticatorRef(LibraryRequest request, Endpoint endpoint,
@@ -864,7 +864,7 @@ abstract public class AbstractLibrary {
 	 * @param request
 	 * @param endpoint
 	 * @param logicalName
-	 * @return
+	 * @return JsonReference
 	 * @throws LibraryException
 	 */
 	protected JsonReference createTransportRef(LibraryRequest request, Endpoint endpoint, String logicalName)
@@ -983,7 +983,7 @@ abstract public class AbstractLibrary {
 	/**
 	 * @param request
 	 * @param endpoint
-	 * @return
+	 * @return JsonReference
 	 * @throws LibraryException
 	 */
 	protected JsonReference createProxyRef(LibraryRequest request, Endpoint endpoint, String logicalName)
@@ -1021,7 +1021,7 @@ abstract public class AbstractLibrary {
 
 	/**
 	 * @param endpoints
-	 * @return
+	 * @return boolean
 	 */
 	protected boolean invalidEndpoints(Map<String, JsonObject> endpoints) {
 		Collection<JsonObject> jsonObjects = endpoints.values();
@@ -1036,7 +1036,7 @@ abstract public class AbstractLibrary {
 
 	/**
 	 * @param endpoints
-	 * @return
+	 * @return boolean
 	 */
 	protected boolean validEndpoints(Map<String, JsonObject> endpoints) {
 		Collection<JsonObject> jsonObjects = endpoints.values();
@@ -1109,14 +1109,14 @@ abstract public class AbstractLibrary {
 	}
 
 	/**
-	 * @return
+	 * @return String[][]
 	 */
 	protected String[][] getRegisterExtModules(LibraryRequest request) {
 		return REGISTER_EXT_MODULES;
 	}
 
 	/**
-	 * @return
+	 * @return String[][]
 	 */
 	protected String[][] getRegisterExtModulesAmd(LibraryRequest request) {
 		return REGISTER_EXT_MODULES;
@@ -1139,49 +1139,49 @@ abstract public class AbstractLibrary {
 	abstract public String getName();
 
 	/**
-	 * @return
+	 * @return String[][]
 	 */
 	abstract protected String[][] getRegisterModules(LibraryRequest request);
 
 	/**
-	 * @return
+	 * @return String[][]
 	 */
 	abstract protected String[][] getRegisterModulesAmd(LibraryRequest request);
 
 	/**
-	 * @return
+	 * @return String
 	 */
 	abstract protected String getDefineModule();
 
 	/**
-	 * @return
+	 * @return String
 	 */
 	abstract protected String getDefineModuleLayer();
 
 	/**
-	 * @return
-	 */
+	 * @return String[]
+	 */ 
 	abstract protected String[] getRequireModules();
 
 	/**
-	 * @return
+	 * @return String[]
 	 */
 	abstract protected String[] getRequireModulesAmd();
 
 	/**
 	 * @param request
 	 *            TODO
-	 * @return
+	 * @return String
 	 */
 	abstract protected String generateRegisterModulePath(LibraryRequest request, String moduleName, String moduleUrl);
 
 	/**
-	 * @return
+	 * @return String
 	 */
 	abstract protected String generateRequire(String module);
 
 	/**
-	 * @return
+	 * @return String
 	 */
 	abstract protected String generateProvide();
 

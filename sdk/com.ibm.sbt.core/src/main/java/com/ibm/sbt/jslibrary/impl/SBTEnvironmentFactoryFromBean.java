@@ -32,7 +32,7 @@ public class SBTEnvironmentFactoryFromBean extends SBTEnvironmentFactory {
 	 * Get the a environment from its name.
 	 * 
 	 * @param name
-	 * @return
+	 * @return SBTEnvironment
 	 */
 	@Override
 	public SBTEnvironment getEnvironment(String name) {

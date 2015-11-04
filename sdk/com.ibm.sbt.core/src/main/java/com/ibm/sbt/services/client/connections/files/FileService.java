@@ -68,9 +68,7 @@ import com.ibm.sbt.services.endpoints.Endpoint;
  * repository of files. The Files API allows application programs to add files
  * to a collection and to read and modify existing files.
  * 
- * @see <href a=
- *      "http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.5+API+Documentation#action=openDocument&res_title=Files_API_ic45&content=pdcontent"
- *      />
+ * @see <a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.5+API+Documentation#action=openDocument&res_title=Files_API_ic45&content=pdcontent">Files API </a>
  * 
  * @Represents Connections FileService
  * @author Vimal Dhupar
@@ -2951,11 +2949,7 @@ public class FileService extends ConnectionsService {
 	 * version of a community file, and to simultaneously update the file's
 	 * metadata. Supported Parameters :
 	 * 
-	 * @see http
-	 *      ://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName
-	 *      =IBM+Connections+4.5+API+Documentation
-	 *      #action=openDocument&res_title
-	 *      =Updating_a_file_ic45&content=pdcontent
+	 * @see <a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.5+API+Documentation#action=openDocument&res_title=Updating_a_file_ic45&content=pdcontent">Updating a File</a>
 	 * @param iStream
 	 * @param fileId
 	 * @param title
@@ -3100,11 +3094,7 @@ public class FileService extends ConnectionsService {
 	 * <p>
 	 * Supported parameters :
 	 * 
-	 * @see http
-	 *      ://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName
-	 *      =IBM+Connections+4.5+API+Documentation
-	 *      #action=openDocument&res_title
-	 *      =Updating_a_file_ic45&content=pdcontent
+	 * @see <a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.5+API+Documentation#action=openDocument&res_title=Updating_a_file_ic45&content=pdcontent">Updating a File </a>
 	 * @param iStream
 	 * @param fileId
 	 * @param title
@@ -3151,15 +3141,11 @@ public class FileService extends ConnectionsService {
 	 * <p>
 	 * Supported parameters :
 	 * 
-	 * @see http
-	 *      ://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName
-	 *      =IBM+Connections+4.5+API+Documentation
-	 *      #action=openDocument&res_title
-	 *      =Updating_a_file_ic45&content=pdcontent
-	 * @param content
+	 * @see <a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.5+API+Documentation#action=openDocument&res_title=Updating_a_file_ic45&content=pdcontent">Updating a File</a>
+	 * @param iStream
 	 * @param fileId
 	 * @param length
-	 * @param fileName
+	 * @param title
 	 * @param params
 	 * @return File
 	 * @throws ClientServicesException

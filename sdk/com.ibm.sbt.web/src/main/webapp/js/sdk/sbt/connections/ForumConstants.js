@@ -101,7 +101,8 @@ define([ "../lang", "./ConnectionsConstants" ], function(lang,conn) {
             answered: "a:category[@term='answered' and @scheme='http://www.ibm.com/xmlns/prod/sn/flags']",
             notRecommendedByCurrentUser: "a:category[@term='NotRecommendedByCurrentUser']",
             threadRecommendationCount: "a:category[@term='ThreadRecommendationCount']/@label",
-            recommendationsUrl : "a:link[@rel='recommendations']/@href"
+            recommendationsUrl : "a:link[@rel='recommendations']/@href",
+			replyCount : "a:feed/opensearch:totalResults"
         }, conn.AtomEntryXPath),
         
         /**

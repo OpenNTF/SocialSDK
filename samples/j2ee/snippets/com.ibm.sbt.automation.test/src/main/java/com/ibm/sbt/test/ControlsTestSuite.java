@@ -36,7 +36,7 @@ import com.ibm.sbt.test.controls.WrapperTestSuite;
 /**
  * @author mwallace
  * 
- * @date 12 Mar 2013
+ * @since 12 Mar 2013
  */
 @RunWith(Suite.class)
 @SuiteClasses({ GridTestSuite.class, ActivitiesGridTestSuite.class,BookmarksGridTestSuite.class,CommunitiesGridTestSuite.class,

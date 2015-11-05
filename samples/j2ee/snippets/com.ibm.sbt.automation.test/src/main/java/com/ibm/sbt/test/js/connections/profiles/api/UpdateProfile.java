@@ -27,7 +27,7 @@ import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 /**
  * @author projsaha
  *  
- * @date 3 May 2013
+ * @since 3 May 2013
  */
 public class UpdateProfile extends BaseProfilesTest {
     

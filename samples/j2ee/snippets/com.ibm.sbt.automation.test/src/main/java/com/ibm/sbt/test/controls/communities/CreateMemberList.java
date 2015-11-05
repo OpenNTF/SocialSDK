@@ -27,7 +27,7 @@ import com.ibm.sbt.automation.core.test.pageobjects.ResultPage;
 /**
  * @author Benjamin Jakobus
  * 
- * @date Nov 15, 2013
+ * @since Nov 15, 2013
  */
 public class CreateMemberList extends BaseTest {
 

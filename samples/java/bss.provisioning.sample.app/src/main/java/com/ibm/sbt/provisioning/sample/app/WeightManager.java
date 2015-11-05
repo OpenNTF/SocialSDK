@@ -197,7 +197,7 @@ public class WeightManager {
 	}
 	
 	/**
-	 * {@link #weightPerBSSCall} getter method
+	 * weightPerBSSCall getter method
 	 */
 	public Weight getWeightPerBSSCall(String url, Rest method){
 		return BSSProvisioning.getWeights().getWeight(url, method);

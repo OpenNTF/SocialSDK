@@ -25,7 +25,7 @@ import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 /**
  * @author Vimal Dhupar
  *  
- * @date 11th June, 2013
+ * @since 11th June, 2013
  */
 public class TestNumberJsonDataHandler extends BaseApiTest {
     

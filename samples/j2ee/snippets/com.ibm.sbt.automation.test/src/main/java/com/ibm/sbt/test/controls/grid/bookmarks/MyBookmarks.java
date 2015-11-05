@@ -24,7 +24,7 @@ import com.ibm.sbt.automation.core.test.BaseGridTest;
 /**
  * @author David Ryan
  * 
- * @date 15 November 2013
+ * @since 15 November 2013
  */
 public class MyBookmarks extends BaseGridTest {
 

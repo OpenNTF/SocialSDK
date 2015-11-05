@@ -28,7 +28,7 @@ import com.ibm.sbt.services.client.connections.communities.Member;
 /**
  * @author Benjamin Jakobus
  * 
- * @date 24 Oct 2013
+ * @since 24 Oct 2013
  */
 public class CommunityMembersGrid extends BaseCommunitiesGridTest {
 

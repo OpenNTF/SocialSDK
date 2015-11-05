@@ -12,7 +12,16 @@
 	<build>
 
 		<plugins>
-
+			<!-- PBastide: Added to show the deprecation / unchecked details - -Xlint:deprecation -Xlint:unchecked -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<compilerArgs>
+					<arg>-Xlint:deprecation</arg>
+					<arg>-Xlint:unchecked</arg>
+				</compilerArgs>
+			</plugin>
+			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>

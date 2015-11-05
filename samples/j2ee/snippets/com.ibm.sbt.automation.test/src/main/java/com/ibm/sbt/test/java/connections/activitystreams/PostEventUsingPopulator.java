@@ -24,7 +24,7 @@ import com.ibm.sbt.automation.core.test.BaseAuthJavaServiceTest;
 
 /**
  * @author mkataria
- * @date Jan 10, 2013
+ * @since Jan 10, 2013
  */
 public class PostEventUsingPopulator extends BaseAuthJavaServiceTest {
 

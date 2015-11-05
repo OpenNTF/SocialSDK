@@ -56,7 +56,7 @@ import com.ibm.sbt.test.java.connections.activities.UpdateMember;
 /**
  * @author Vimal Dhupar
  * 
- * @date 15 Nov 2013
+ * @since 15 Nov 2013
  */
 @RunWith(Suite.class)
 @SuiteClasses({ AddMember.class, ChangeActivityNodeType.class, CreateActivity.class, CreateChatNode.class, CreateEmailNode.class

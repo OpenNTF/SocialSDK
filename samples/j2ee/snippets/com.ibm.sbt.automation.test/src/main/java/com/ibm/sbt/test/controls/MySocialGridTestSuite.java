@@ -27,7 +27,7 @@ import com.ibm.sbt.test.sample.app.mySocial.MyFiles;
 /**
  * @author David Ryan
  * 
- * @date 19 June 2013
+ * @since 19 June 2013
  */
 @RunWith(Suite.class)
 @SuiteClasses({ MyFiles.class, MyColleagues.class, MyCommunities.class })

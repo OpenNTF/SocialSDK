@@ -35,7 +35,7 @@ import com.ibm.sbt.test.js.connections.activitystreams.api.PostEntryWithEmbedded
 /**
  * @author rajmeetbal
  * 
- * @date 6 Mar 2013
+ * @since 6 Mar 2013
  */
 @RunWith(Suite.class)
 @SuiteClasses({ 

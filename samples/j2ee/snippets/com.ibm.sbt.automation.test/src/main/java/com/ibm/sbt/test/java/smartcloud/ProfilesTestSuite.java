@@ -29,7 +29,7 @@ import com.ibm.sbt.test.java.smartcloud.profiles.OAuth1SmartCloudProfiles;
 /**
  * @author mwallace
  * 
- * @date 6 Mar 2013
+ * @since 6 Mar 2013
  */
 @RunWith(Suite.class)
 @SuiteClasses({ GetContactByGUID.class, GetMyContacts.class, OAuth1SmartCloudProfiles.class })

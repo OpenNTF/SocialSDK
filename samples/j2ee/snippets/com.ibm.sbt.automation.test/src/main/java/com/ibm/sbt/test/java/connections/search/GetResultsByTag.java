@@ -23,7 +23,7 @@ import com.ibm.sbt.automation.core.test.BaseAuthJavaServiceTest;
 
 /**
  * @author mkataria
- * @date Nov 14, 2013
+ * @since Nov 14, 2013
  */
 public class GetResultsByTag extends BaseAuthJavaServiceTest {
 

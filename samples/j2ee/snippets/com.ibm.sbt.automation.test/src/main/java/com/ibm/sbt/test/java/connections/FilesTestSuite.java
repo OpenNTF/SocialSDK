@@ -43,7 +43,7 @@ import com.ibm.sbt.test.java.connections.files.UploadPublicFile;
 /**
  * @author mwallace
  * 
- * @date 6 Mar 2013
+ * @since 6 Mar 2013
  */
 @RunWith(Suite.class)
 @SuiteClasses({ AddCommentToFile.class, AddGetCommunityFileComments.class, AddRemoveTag.class, CreateDeleteFile.class, GetFileComments.class, GetFilesSharedByMe.class, GetFilesSharedWithMe.class,

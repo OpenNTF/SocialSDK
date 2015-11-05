@@ -44,7 +44,7 @@ import com.ibm.sbt.test.js.connections.blogs.api.UpdatePost;
 /**
  * @author rajmeetbal
  * 
- * @date 1 Oct 2013
+ * @since 1 Oct 2013
  */
 @RunWith(Suite.class)
 @SuiteClasses({ 

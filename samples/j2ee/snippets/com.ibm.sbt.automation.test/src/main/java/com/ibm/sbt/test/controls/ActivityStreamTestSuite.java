@@ -30,7 +30,7 @@ import com.ibm.sbt.test.controls.activitystream.SimpleStreamAllExtensions;
 /**
  * @author Francis
  * 
- * @date 15 Apr 2013
+ * @since 15 Apr 2013
  */
 @RunWith(Suite.class)
 @SuiteClasses({ HomepageConfig.class, CommunityRecentUpdates.class, CommunityStatusUpdates.class, MultipleViews.class, SimpleConfig.class, SimpleStream.class, SimpleStreamAllExtensions.class})

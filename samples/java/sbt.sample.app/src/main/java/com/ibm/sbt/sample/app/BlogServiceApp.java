@@ -26,7 +26,7 @@ import com.ibm.sbt.services.endpoints.ConnectionsBasicEndpoint;
 
 /**
  * @author mwallace
- * @date 28 January 2014
+ * @since 28 January 2014
  */
 public class BlogServiceApp {
 

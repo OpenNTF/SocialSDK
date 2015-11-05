@@ -40,7 +40,7 @@ import com.ibm.sbt.test.java.connections.profiles.UpdateProfilePhoto;
 /**
  * @author mwallace
  * 
- * @date 6 Mar 2013
+ * @since 6 Mar 2013
  */
 @RunWith(Suite.class)
 @SuiteClasses({ CheckColleague.class, GetColleaguesByProfileEntity.class, GetColleagues.class, GetMyProfile.class, GetPhoneNumber.class, GetName.class,

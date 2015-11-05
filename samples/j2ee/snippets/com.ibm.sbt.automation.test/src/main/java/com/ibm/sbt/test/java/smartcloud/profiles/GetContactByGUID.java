@@ -21,7 +21,7 @@ import com.ibm.sbt.automation.core.test.BaseJavaServiceTest;
 
 /**
  * @author Francis 
- * @date 15 Aug 2013
+ * @since 15 Aug 2013
  */
 public class GetContactByGUID extends BaseJavaServiceTest{
 

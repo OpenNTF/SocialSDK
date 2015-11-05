@@ -43,7 +43,7 @@ import com.ibm.sbt.services.endpoints.EndpointFactory;
 
 /**
  * @author mwallace
- * @date 14 January 2014
+ * @since 14 January 2014
  */
 public class ExportBlog {
 

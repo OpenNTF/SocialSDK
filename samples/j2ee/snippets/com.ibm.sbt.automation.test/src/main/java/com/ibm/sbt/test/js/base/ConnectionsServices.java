@@ -35,7 +35,7 @@ import com.ibm.sbt.services.client.connections.communities.CommunityService;
 /**
  * @author mwallace
  *  
- * @date 25 Mar 2013
+ * @since 25 Mar 2013
  */
 public class ConnectionsServices extends FlexibleTest {
 	

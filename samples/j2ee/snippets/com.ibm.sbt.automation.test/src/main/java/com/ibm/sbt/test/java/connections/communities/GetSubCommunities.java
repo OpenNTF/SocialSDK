@@ -23,7 +23,7 @@ import com.ibm.sbt.automation.core.test.BaseAuthJavaServiceTest;
 
 /**
  * @author swati singh
- * @date nov 15, 2013
+ * @since nov 15, 2013
  */
 public class GetSubCommunities extends BaseAuthJavaServiceTest {
 

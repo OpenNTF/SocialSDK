@@ -99,7 +99,7 @@ public class TwitterEntry extends AbstractViewRowData {
     }
 
     /**
-     * @param set the authorLink
+     * @param authorLink set the authorLink
      */
     public void setAuthorLink(String authorLink) {
         this.authorLink = authorLink;
@@ -113,7 +113,7 @@ public class TwitterEntry extends AbstractViewRowData {
     }
 
     /**
-     * @param set the tweetLink
+     * @param tweetLink set the tweetLink
      */
     public void setTweetLink(String tweetLink) {
         this.tweetLink = tweetLink;
@@ -128,7 +128,7 @@ public class TwitterEntry extends AbstractViewRowData {
     }
 
     /**
-     * @param set the content
+     * @param content set the content
      */
     @Deprecated
     public void setTweetContent(String content) {

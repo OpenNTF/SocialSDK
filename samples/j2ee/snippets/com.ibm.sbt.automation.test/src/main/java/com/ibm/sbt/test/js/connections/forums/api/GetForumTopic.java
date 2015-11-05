@@ -26,7 +26,7 @@ import com.ibm.sbt.services.client.connections.forums.ForumTopic;
 /**
  * @author mwallace
  *  
- * @date 25 Mar 2013
+ * @since 25 Mar 2013
  */
 public class GetForumTopic extends BaseForumsTest {
     

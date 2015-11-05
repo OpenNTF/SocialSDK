@@ -26,7 +26,7 @@ import com.ibm.sbt.services.client.connections.forums.Forum;
 /**
  * @author mwallace
  *  
- * @date 25 Mar 2013
+ * @since 25 Mar 2013
  */
 public class GetForum extends BaseForumsTest {
     

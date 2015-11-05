@@ -46,7 +46,7 @@ import com.ibm.sbt.test.java.connections.blogs.UpdateBlogPost;
 /**
 * @author ssingh
 *
-* @date 19 Nov 2013
+* @since 19 Nov 2013
 */
 @RunWith(Suite.class)
 @SuiteClasses({ AllBlogs.class, AllComments.class, AllPosts.class, AllTags.class, BlogComments.class, BlogTags.class, CreateBlog.class, CreateBlogComment.class,

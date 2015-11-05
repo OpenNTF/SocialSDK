@@ -24,7 +24,7 @@ import com.ibm.sbt.services.client.connections.communities.Community;
 /**
  * @author mwallace
  *  
- * @date 29 Jul 2013
+ * @since 29 Jul 2013
  */
 public class ValidateBaseCommunitiesTest extends BaseCommunitiesTest {
 	

@@ -31,7 +31,7 @@ import com.ibm.sbt.test.js.connections.bookmarks.api.UpdateBookmark;
 /**
  * @author rajmeetbal
  * 
- * @date 30 Oct 2013
+ * @since 30 Oct 2013
  */
 @RunWith(Suite.class)
 @SuiteClasses({ 

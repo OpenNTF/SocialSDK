@@ -34,7 +34,7 @@ import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 
 /**
  * @author mwallace, Francis
- * @date 11 April 2013
+ * @since 11 April 2013
  */
 public class GetAllCommunitiesApp {
 

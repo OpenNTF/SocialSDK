@@ -28,7 +28,7 @@ import com.ibm.sbt.test.js.connections.common.api.GetSupportedDisplayLanguages;
 /**
  * @author rajmeetbal
  * 
- * @date 30 Oct 2013
+ * @since 30 Oct 2013
  */
 @RunWith(Suite.class)
 @SuiteClasses({ 

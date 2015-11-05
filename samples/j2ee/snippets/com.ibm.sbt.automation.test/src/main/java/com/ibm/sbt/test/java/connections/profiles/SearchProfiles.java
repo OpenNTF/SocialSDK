@@ -24,7 +24,7 @@ import com.ibm.sbt.automation.core.test.BaseJavaServiceTest;
 
 /**
  * @author swati singhh
- * @date Nov 15, 2013
+ * @since Nov 15, 2013
  */
 public class SearchProfiles extends BaseJavaServiceTest {
 

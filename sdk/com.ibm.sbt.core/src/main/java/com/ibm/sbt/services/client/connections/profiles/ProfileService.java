@@ -69,6 +69,7 @@ import com.ibm.sbt.services.client.base.NamedUrlPart;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.base.datahandlers.JsonDataHandler;
 import com.ibm.sbt.services.client.connections.common.Tag;
+import com.ibm.sbt.services.client.base.CategoryFeedHandler;
 import com.ibm.sbt.services.client.connections.profiles.model.ProfileXPath;
 import com.ibm.sbt.services.client.connections.profiles.serializers.ColleagueConnectionSerializer;
 import com.ibm.sbt.services.client.connections.profiles.serializers.ProfileSerializer;
@@ -929,14 +930,22 @@ public class ProfileService extends ConnectionsService {
 
 	/**
 	 * Factory method to instantiate a FeedHandler for Tags
-	 * @return {IFeedHandler<Tag>}
+	 * @return {IFeedHandler<Tag>} instance of tag handler
 	 */
 	public IFeedHandler<Tag> getTagFeedHandler() {
-		return new AtomFeedHandler<Tag>(this) {
+		//Git Issue 1719: Fixed the Category Handler with the proper node level
+		return new CategoryFeedHandler<Tag>(this) {
 			@Override
-			protected Tag entityInstance(BaseService service, Node node, XPathExpression xpath) {
-				System.out.println("Here it is :" + xpath.getExpression());
-				return new Tag(service, node, nameSpaceCtx, xpath);
+			protected Tag newEntity(BaseService svc, Node node) {
+				
+				XPathExpression xpathExpr = null;
+				try {
+					xpathExpr = com.ibm.commons.xml.DOMUtil.createXPath(".");
+				} catch (com.ibm.commons.xml.XMLException e) {
+					e.printStackTrace();
+				}
+				
+				return new Tag(svc, node, nameSpaceCtx, xpathExpr);
 			}
 		};
 	}

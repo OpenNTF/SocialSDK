@@ -236,11 +236,14 @@ public class ProfileServiceTest extends BaseUnitTest {
 
 		EntityList<Tag> tags = profileService.getTags(TestEnvironment.getSecondaryUserEmail());
 		for(Tag tag : tags){
+			
+			System.out.println(tag.getFrequency());
 			assertNotNull(tag.getTerm());
 		}
 
 		profileService.getEndpoint().logout();
 	}
+	
 
 	/**
 	 * Updating Profile of a user with credentials of some other user

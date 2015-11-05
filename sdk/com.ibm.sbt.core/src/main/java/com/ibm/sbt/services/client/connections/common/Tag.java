@@ -34,7 +34,10 @@ import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
  *		<a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.5+API+Documentation#action=openDocument&res_title=Tags_category_document_ic45&content=pdcontent">
  *			Tags category content</a>
  * 
+ * Example data is:<br/><code><atom:category term="bug" snx:frequency="1"  snx:bin="1" snx:visibility></code>
+ * 
  * @author mwallace
+ * @author pbastide
  *
  */
 public class Tag extends AtomEntity {
@@ -57,8 +60,6 @@ public class Tag extends AtomEntity {
 		super(service, new XmlDataHandler(node, namespaceCtx, xpathExpression));
 	}
 	
-	// term="bug" snx:frequency="1"  snx:bin="1" snx:visibility
-
 	/**
 	 * The tag.
 	 * 

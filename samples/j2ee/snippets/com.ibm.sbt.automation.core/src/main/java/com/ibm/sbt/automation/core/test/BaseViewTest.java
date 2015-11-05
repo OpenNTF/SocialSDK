@@ -17,7 +17,7 @@ package com.ibm.sbt.automation.core.test;
 
 /**
  * @author Francis 
- * @date 16 Jul 2013
+ * @since 16 Jul 2013
  */
 public class BaseViewTest extends BaseApiTest {
     /**

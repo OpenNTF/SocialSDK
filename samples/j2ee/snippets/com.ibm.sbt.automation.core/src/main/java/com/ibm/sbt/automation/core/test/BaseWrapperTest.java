@@ -22,7 +22,7 @@ import com.ibm.sbt.automation.core.test.pageobjects.WrapperResultPage;
 
 /**
  * @author Francis 
- * @date 16 Jul 2013
+ * @since 16 Jul 2013
  */
 public class BaseWrapperTest extends BaseTest {
     /**
@@ -50,7 +50,7 @@ public class BaseWrapperTest extends BaseTest {
     /**
      * Check if the VCard is present inside the iframe.
      * @param snippetId
-     * @return
+     * @return {boolean}
      */
     protected boolean checkProfileCardWrapper(String snippetId){
         WrapperResultPage resultPage = launchSnippet(snippetId);

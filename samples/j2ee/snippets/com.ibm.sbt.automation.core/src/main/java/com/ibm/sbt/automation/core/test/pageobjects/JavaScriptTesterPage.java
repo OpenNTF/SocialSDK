@@ -23,7 +23,7 @@ import com.ibm.commons.util.StringUtil;
 /**
  * @author mwallace
  *  
- * @date 5 Mar 2013
+ * @since 5 Mar 2013
  */
 public class JavaScriptTesterPage extends BaseResultPage {
     

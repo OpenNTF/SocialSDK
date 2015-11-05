@@ -65,7 +65,7 @@ public class Weight{
   /**
    * Returns the current amount of throttling used for this call
    * 
-   * @return
+   * @return {int} current throttling limit
    */
   public int getCounter(){
     return this.counter.addAndGet(0);
@@ -75,7 +75,7 @@ public class Weight{
    * Increments the current level of throttling used for this call and returns it
    * 
    * @param amount
-   * @return
+   * @return {int} current throttling level
    */
   public int incrementCounter(int amount){
     return this.counter.addAndGet(amount);

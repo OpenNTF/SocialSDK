@@ -297,7 +297,7 @@ public class FileEntry extends AbstractViewRowData {
     }
 
     /**
-    * @param _repository the _repository to set
+    * @param repository the _repository to set
     */
     public void setRepository(String repository) {
         this._repository = repository;

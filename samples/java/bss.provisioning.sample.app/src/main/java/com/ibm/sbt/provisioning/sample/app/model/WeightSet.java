@@ -55,7 +55,7 @@ public class WeightSet{
    * 
    * @param url
    * @param method
-   * @return
+   * @return {Weight}
    */
   public Weight getWeight(String url, Rest method){
     return weights.get(url).get(method);
@@ -81,7 +81,7 @@ public class WeightSet{
   /**
    * Returns the limit
    * 
-   * @return
+   * @return {long}
    */
   public long getLimit(){
     return limit;
@@ -90,7 +90,7 @@ public class WeightSet{
   /**
    * Returns all the urls
    * 
-   * @return
+   * @return {Set<String>}
    */
   public Set<String> getUrls(){
     return weights.keySet();
@@ -100,7 +100,7 @@ public class WeightSet{
    * Returns everything for a URL
    * 
    * @param url
-   * @return
+   * @return {HashMap<Rest, Weight>}
    */
   public HashMap<Rest, Weight> getAllFromUrl(String url){
     return weights.get(url);

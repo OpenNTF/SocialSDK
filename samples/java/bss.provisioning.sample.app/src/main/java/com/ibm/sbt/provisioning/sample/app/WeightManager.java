@@ -126,7 +126,8 @@ public class WeightManager {
 	 * on the call being made.
 	 * <p>
 	 * 
-	 * @param key a String identifying the call being made<br>
+	 * @param url
+	 * @param method
 	 * @return <code>true</code> if the call is permitted because the {@link #threshold} has not been
 	 *         reached after the {@link #currentWeight} update , <code>false</code> otherwise
 	 */

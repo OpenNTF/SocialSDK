@@ -26,7 +26,7 @@ import com.ibm.sbt.automation.core.test.pageobjects.ResultPage;
 /**
  * @author David Ryan
  * 
- * @date 27 Mar 2013
+ * @since 27 Mar 2013
  */
 public class AcmeResultPage extends BaseResultPage {
 

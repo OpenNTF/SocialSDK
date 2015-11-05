@@ -80,7 +80,6 @@ public class BaseFileLister {
 	/**
 	 * Get a RootNode object which allows JavaSnippets to be searched and manipulated.
 	 * 
-	 * @param context
 	 * @return {RootNode} of the local JavaSnippets.
 	 */
 	public static RootNode getJavaSnippets(){
@@ -145,7 +144,7 @@ public class BaseFileLister {
 	/**
 	 * A method which will, for a given root folder and NodeFactory, return the corresponding RootNode of Snippets.
 	 * 
-	 * @param {VFSFile} file 
+	 * @param file 
 	 * @param nodeFactory The NodeFactory corresponding to the snippet type.
 	 * @return RootNode of snippets, which allows search and manipulation of snippets.
 	 * @throws IOException

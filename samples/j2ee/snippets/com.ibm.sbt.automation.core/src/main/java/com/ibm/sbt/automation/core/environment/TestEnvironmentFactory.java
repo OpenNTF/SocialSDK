@@ -19,7 +19,7 @@ package com.ibm.sbt.automation.core.environment;
  * @author mkataria
  * @author mwallace
  * 
- * @date Jan 14, 2013
+ * @since Jan 14, 2013
  */
 public class TestEnvironmentFactory {
     

@@ -313,7 +313,7 @@ public abstract class TestEnvironment extends com.ibm.sbt.test.lib.TestEnvironme
 	 * invoked
 	 * 
 	 * @param key
-	 * @param value
+	 * @param values
 	 */
 	public void addSnippetParam(String key, String[] values) {
 		snippetParams.put(key, StringUtil.concatStrings(values, ',', true));
@@ -405,7 +405,7 @@ public abstract class TestEnvironment extends com.ibm.sbt.test.lib.TestEnvironme
 	/**
 	 * Launch the specified snippet
 	 * 
-	 * @param snippetId
+	 * @param baseTest
 	 * 
 	 * @return true if the snippet could be launched
 	 */
@@ -645,8 +645,8 @@ public abstract class TestEnvironment extends com.ibm.sbt.test.lib.TestEnvironme
 	/**
 	 * Detect what type of authentication is being used
 	 * 
-	 * @param form
-	 * 
+	 * @param baseTest
+	 * @param loginForm
 	 * @return {AuthType}
 	 */
 	public AuthType detectAuthType(BaseTest baseTest, WebElement loginForm) {
@@ -1127,7 +1127,7 @@ public abstract class TestEnvironment extends com.ibm.sbt.test.lib.TestEnvironme
 	/**
 	 * tests the version identifier of the current library
 	 * 
-	 * @param lib
+	 * @param version
 	 *            a library version, using non dotted format (i.e. 182 for
 	 *            jquery 1.8.2, 143 for dojo 1.4.3)
 	 * @return true if the environment is using the specified library
@@ -1143,7 +1143,7 @@ public abstract class TestEnvironment extends com.ibm.sbt.test.lib.TestEnvironme
 	/**
 	 * tests the version identifier of the current library
 	 * 
-	 * @param lib
+	 * @param version
 	 *            a library version, using non dotted format (i.e. 182 for
 	 *            jquery 1.8.2, 143 for dojo 1.4.3)
 	 * @return {boolean}

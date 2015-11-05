@@ -22,7 +22,7 @@ import org.openqa.selenium.support.How;
 /**
  * @author mwallace 
  * 
- * @date 5 Mar 2013
+ * @since 5 Mar 2013
  */
 public class PlaygroundResultPage extends BaseResultPage {
 

@@ -23,7 +23,7 @@ import com.ibm.sbt.test.js.SmartCloudTestSuite;
 
 /**
  * @author Lorenzo Boccaccia 
- * @date May 31, 2013
+ * @since May 31, 2013
  */
 @RunWith(Suite.class)
 @SuiteClasses({ CheckinTestSuite.class, SbtTestSuite.class, SbtxTestSuite.class, AcmeTestSuite.class, SmartCloudTestSuite.class })

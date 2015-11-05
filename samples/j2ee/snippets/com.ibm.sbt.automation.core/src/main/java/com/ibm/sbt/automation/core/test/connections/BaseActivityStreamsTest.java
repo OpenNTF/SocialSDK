@@ -42,7 +42,7 @@ import com.ibm.sbt.test.lib.MockEndpoint;
 /**
  * @author rajmeetbal
  *  
- * @date 10 May 2013
+ * @since 10 May 2013
  */
 
 public class BaseActivityStreamsTest extends FlexibleTest {

@@ -23,7 +23,7 @@ import com.ibm.sbt.automation.core.test.BaseApiTest;
 /**
  * @author mwallace
  *  
- * @date 15 Jun 2013
+ * @since 15 Jun 2013
  */
 public class BaseSearchTest extends BaseApiTest {
     

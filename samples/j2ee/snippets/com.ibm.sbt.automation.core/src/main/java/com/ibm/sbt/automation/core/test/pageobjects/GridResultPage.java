@@ -23,7 +23,7 @@ import org.openqa.selenium.WebElement;
 /**
  * @author mwallace
  *  
- * @date 5 Mar 2013
+ * @since 5 Mar 2013
  */
 public class GridResultPage extends BaseResultPage {
     
@@ -67,7 +67,7 @@ public class GridResultPage extends BaseResultPage {
     /**
      * Return the table WebElement for the Grid that was created on this page
      * 
-     * @return
+     * @return {WebElement}
      */
     public WebElement getTable() {
         WebElement resultEl = getWebElement();
@@ -77,7 +77,7 @@ public class GridResultPage extends BaseResultPage {
     /**
      * Return the tbody WebElement for the Grid that was created on this page
      * 
-     * @return
+     * @return {WebElement}
      */
     public WebElement getTableBody() {
         WebElement resultEl = getWebElement();
@@ -87,7 +87,7 @@ public class GridResultPage extends BaseResultPage {
     /**
      * Return a list of tr WebElement for the Grid that was created on this page
      * 
-     * @return
+     * @return {List<WebElement>}
      */
     public List<WebElement> getTableRows() {
         WebElement resultEl = getWebElement();
@@ -97,7 +97,7 @@ public class GridResultPage extends BaseResultPage {
     /**
      * Return a WebElement for the pager div that was created on this page
      * 
-     * @return
+     * @return {GridPagerPage}
      */
     public GridPagerPage getGridPager() {
         return new GridPagerPage(this);
@@ -106,7 +106,7 @@ public class GridResultPage extends BaseResultPage {
     /**
      * Return a WebElement for the sort div that was created on this page
      * 
-     * @return
+     * @return {GridSorterPage}
      */
     public GridSorterPage getSortingPager() {
         return new GridSorterPage(this);

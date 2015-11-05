@@ -126,7 +126,8 @@ public class BaseGridTest extends BaseTest {
     }
         
     /**
-     * @param resultPage
+     * @param gridPage
+	 * @param rows
      * @return {boolean} 
      */
     protected boolean checkPager(GridResultPage gridPage,String[] rows) {

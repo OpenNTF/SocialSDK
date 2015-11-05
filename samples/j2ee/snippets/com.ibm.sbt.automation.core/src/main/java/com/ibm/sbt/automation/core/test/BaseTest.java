@@ -123,7 +123,7 @@ public abstract class BaseTest {
 	 * 
 	 * </p>
 	 * 
-	 * @return
+	 * @return {boolean}
 	 */
 	protected boolean isEnvironmentValid() {
 		return true;
@@ -273,7 +273,7 @@ public abstract class BaseTest {
 	 * invoked
 	 * 
 	 * @param key
-	 * @param value
+	 * @param values
 	 */
 	public void addSnippetParam(String key, String[] values) {
 		snippetParams.put(key, StringUtil.concatStrings(values, ',', true));

@@ -9,17 +9,20 @@
 		<artifactId>com.ibm.sbt.sdk</artifactId>
 		<version>1.1.11-SNAPSHOT</version>
 	</parent>
+	
 	<build>
-
 		<plugins>
 			<!-- PBastide: Added to show the deprecation / unchecked details - -Xlint:deprecation -Xlint:unchecked -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<compilerArgs>
-					<arg>-Xlint:deprecation</arg>
-					<arg>-Xlint:unchecked</arg>
-				</compilerArgs>
+				<version>3.3</version>
+				<configuration>
+					<compilerArgs>
+						<arg>-Xlint:deprecation</arg>
+						<arg>-Xlint:unchecked</arg>
+					</compilerArgs>
+				</configuration>
 			</plugin>
 			
 			<plugin>

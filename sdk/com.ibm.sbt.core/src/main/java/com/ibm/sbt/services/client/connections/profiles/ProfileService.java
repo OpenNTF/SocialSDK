@@ -935,6 +935,7 @@ public class ProfileService extends ConnectionsService {
 		return new AtomFeedHandler<Tag>(this) {
 			@Override
 			protected Tag entityInstance(BaseService service, Node node, XPathExpression xpath) {
+				System.out.println("Here it is :" + xpath.getExpression());
 				return new Tag(service, node, nameSpaceCtx, xpath);
 			}
 		};

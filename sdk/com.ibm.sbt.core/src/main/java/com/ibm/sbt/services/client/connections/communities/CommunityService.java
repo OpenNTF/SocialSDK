@@ -833,7 +833,7 @@ public class CommunityService extends ConnectionsService {
 	 * @return {EntityList<RemoteApplication>}
 	 */
 	public EntityList<RemoteApplication> getRemoteApplications(String communityUuid, Map<String, String> parameters) {
-		String url = CommunityUrls.COMMUNITY_INSTANCE.format(this, CommunityUrls.getCommunityUuid(communityUuid));
+		String url = CommunityUrls.COMMUNITY_REMOTE_APPLICATIONS.format(this, CommunityUrls.getCommunityUuid(communityUuid));
 		return getRemoteApplications(url, parameters);
 	}
 	

@@ -319,7 +319,7 @@ public class BlogService extends ConnectionsService {
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Comment> getBlogComments(String blogHandle, Map<String, String> parameters) throws ClientServicesException {
-		String url = BlogUrls.BLOG_COMMENTS.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle));
+		String url = BlogUrls.BLOG_COMMENTS.format(this, BlogUrlParts.blogHandle.get(blogHandle));
 		return getCommentEntityList(url, parameters);
 	}
 	
@@ -333,7 +333,7 @@ public class BlogService extends ConnectionsService {
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Comment> getEntryComments(String blogHandle, String entryAnchor, Map<String, String> parameters) throws ClientServicesException {
-		String url = BlogUrls.BLOG_ENTRYCOMMENTS.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle));
+		String url = BlogUrls.BLOG_ENTRYCOMMENTS.format(this, BlogUrlParts.blogHandle.get(blogHandle));
 		return getCommentEntityList(url, parameters);
 	}
 	
@@ -346,7 +346,7 @@ public class BlogService extends ConnectionsService {
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Tag> getBlogTags(String blogHandle) throws ClientServicesException {
-		String url = BlogUrls.BLOG_TAGS.format(this, BlogUrlParts.blogHandle.get(defaultHomepageHandle));
+		String url = BlogUrls.BLOG_TAGS.format(this, BlogUrlParts.blogHandle.get(blogHandle));
 		return getTagEntityList(url, null);
 	}
 	

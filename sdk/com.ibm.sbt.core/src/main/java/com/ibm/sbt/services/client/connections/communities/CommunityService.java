@@ -820,8 +820,9 @@ public class CommunityService extends ConnectionsService {
 	 * 
 	 * @param communityUuid
 	 * @return {EntityList<RemoteApplication>}
+	 * @throws ClientServicesException
 	 */
-	public EntityList<RemoteApplication> getRemoteApplications(String communityUuid) {
+	public EntityList<RemoteApplication> getRemoteApplications(String communityUuid) throws ClientServicesException {
 		return getRemoteApplications(communityUuid, null);
 	}
 	
@@ -831,8 +832,9 @@ public class CommunityService extends ConnectionsService {
 	 * @param communityUuid
 	 * @param parameters
 	 * @return {EntityList<RemoteApplication>}
+	 * @throws ClientServicesException
 	 */
-	public EntityList<RemoteApplication> getRemoteApplications(String communityUuid, Map<String, String> parameters) {
+	public EntityList<RemoteApplication> getRemoteApplications(String communityUuid, Map<String, String> parameters) throws ClientServicesException {
 		//Issue 1728: Fixed issue with OutOfMemory
 		String requestUrl = CommunityUrls.COMMUNITY_REMOTE_APPLICATIONS.format(this, CommunityUrls.getCommunityUuid(communityUuid));
 		return getRemoteApplicationsEntityList(requestUrl, parameters);

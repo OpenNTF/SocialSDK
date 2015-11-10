@@ -833,6 +833,7 @@ public class CommunityService extends ConnectionsService {
 	 * @return {EntityList<RemoteApplication>}
 	 */
 	public EntityList<RemoteApplication> getRemoteApplications(String communityUuid, Map<String, String> parameters) {
+		//Issue 1728: Fixed issue with OutOfMemory
 		String url = CommunityUrls.COMMUNITY_REMOTE_APPLICATIONS.format(this, CommunityUrls.getCommunityUuid(communityUuid));
 		return getRemoteApplications(url, parameters);
 	}

@@ -96,6 +96,14 @@ public class Community extends AtomEntity {
 	public String getCommunityUuid() {
 		return getAsString(CommunityXPath.communityUuid);
 	}
+	
+	/**
+	 * returns the isExternal value 
+	 * @return {String} external
+	 */
+	 public String getExternalCommunity(){
+		 return getAsString(CommunityXPath.externalCommunity);
+	 }
 
 	/**
 	 * sets the communityUuid

@@ -416,8 +416,15 @@ public class WikiService extends ConnectionsService {
 	public void deleteWiki(String wikiLabel) throws ClientServicesException {
 		String requestUrl = WikiUrls.WIKI.format(this, WikiUrls.getWikiLabel(wikiLabel));
 		Response response = deleteData(requestUrl);
+		
 		//FIX: According to documentation should return 204 but returns 200
-		checkResponseCode(response, HTTPCode.OK);
+		try{
+			checkResponseCode(response, HTTPCode.OK);			
+		}catch(ClientServicesException cse){
+			//The Wiki does not exist/is not found
+			checkResponseCode(response, HTTPCode.NOT_FOUND);
+			throw new ClientServicesException(new Exception("Wiki Not Found"));
+		}
 	}
 	
 	/***************************************************************
@@ -522,7 +529,15 @@ public class WikiService extends ConnectionsService {
 	public void deleteWikiPage(String wikiLabel, String wikiPageLabel) throws ClientServicesException {
 		String requestUrl = WikiUrls.WIKI_PAGE.format(this, WikiUrls.getWikiLabel(wikiLabel), WikiUrls.getWikiPage(wikiPageLabel));
 		Response response = deleteData(requestUrl);
-		checkResponseCode(response, HTTPCode.NO_CONTENT);
+		
+		try{
+			checkResponseCode(response, HTTPCode.NO_CONTENT);		
+		}catch(ClientServicesException cse){
+			//The Wiki does not exist/is not found
+			checkResponseCode(response, HTTPCode.NOT_FOUND);
+			throw new ClientServicesException(new Exception("Wiki Not Found"));
+		}
+		
 	}
 
 	/***************************************************************

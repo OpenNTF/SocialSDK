@@ -58,6 +58,7 @@ import com.ibm.sbt.services.endpoints.Endpoint;
  * @author Swati Singh
  * @author Manish Kataria
  * @author Carlos Manias
+ * @author Paul Bastide
  */
 
 public class CommunityService extends ConnectionsService {
@@ -380,7 +381,7 @@ public class CommunityService extends ConnectionsService {
 		
 		IFeedHandler<Community> handler = getCommunityFeedHandler();
 		
-		String url = CommunityUrls.COMMUNITY_INSTANCE.format(this,CommunityUrls.getCommunityUuid(communityUuid));
+		String requestUrl = CommunityUrls.COMMUNITY_INSTANCE.format(this,CommunityUrls.getCommunityUuid(communityUuid));
 		Response response = getClientService().get(requestUrl,parameters);
 		
 		try{

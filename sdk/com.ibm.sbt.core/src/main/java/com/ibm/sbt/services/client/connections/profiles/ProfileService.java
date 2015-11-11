@@ -959,6 +959,8 @@ public class ProfileService extends ConnectionsService {
 	}
 
 	protected ColleagueConnection getColleagueConnectionEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
+		Response response = get(requestUrl,parameters);
+		
 		return getEntity(requestUrl, parameters, getColleagueFeedHandler());
 	}
 
@@ -967,7 +969,20 @@ public class ProfileService extends ConnectionsService {
 	}
 
 	protected EntityList<ColleagueConnection> getColleagueConnectionEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
-		return getEntities(requestUrl, parameters, getColleagueFeedHandler());
+		//Issue 1579: Fixes issue with the NOT_FOUND
+		ColleagueConnection result = null;
+		IFeedHandler<ColleagueConnection> handler = getColleagueFeedHandler();
+		
+		Response response = getClientService().get(requestUrl,parameters);
+		
+		try{
+			checkResponseCode(response,HTTPCode.OK);
+			result = handler.createEntity(response);
+		}catch(ClientServicesException cse){
+			checkResponseCode(response,HTTPCode.NOT_FOUND);
+		}
+		
+		return result;
 	}
 
 	protected EntityList<Tag> getTagEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {

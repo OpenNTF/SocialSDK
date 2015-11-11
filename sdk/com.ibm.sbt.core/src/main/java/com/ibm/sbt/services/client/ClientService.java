@@ -1530,7 +1530,7 @@ public abstract class ClientService {
 			(statusCode != HttpStatus.SC_CREATED) && 
 			(statusCode != HttpStatus.SC_ACCEPTED) && 
 			(statusCode != HttpStatus.SC_NO_CONTENT) &&
-			(statusCode != HttpStatus.SC_NOT_FOUND);
+			(statusCode != HttpStatus.SC_NOT_FOUND) && (statusCode != 404);
 	}
 
 	/**

@@ -63,7 +63,7 @@ public class PanelResultPage extends BaseResultPage {
     /**
      * Return the ul WebElement for the Grid that was created on this page
      * 
-     * @return
+     * @return {WebElement} 
      */
     public WebElement getPanel() {
         WebElement resultEl = getWebElement();

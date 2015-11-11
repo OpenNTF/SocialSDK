@@ -25,7 +25,7 @@ import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 /**
  * @author rajmeetbal
  *  
- * @date 30 Oct 2013
+ * @since 30 Oct 2013
  */
 public class GetBookmarksTags extends BaseApiTest {
     

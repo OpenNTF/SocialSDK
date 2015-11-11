@@ -22,7 +22,7 @@ import com.ibm.sbt.automation.core.test.BaseAuthJavaServiceTest;
 
 /**
  * @author mkataria
- * @date Jan 24, 2013
+ * @since Jan 24, 2013
  */
 public class CommunitiesIFollow extends BaseAuthJavaServiceTest {
 

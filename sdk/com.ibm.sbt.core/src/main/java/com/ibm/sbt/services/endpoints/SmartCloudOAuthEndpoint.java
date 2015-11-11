@@ -101,7 +101,7 @@ public class SmartCloudOAuthEndpoint extends OAuthEndpoint {
     /**
      * Convenience method to set the consumerKey property.
      * 
-     * @param clientID
+     * @param oAuthKey
      */
     public void setOAuthKey(String oAuthKey) {
     	setConsumerKey(oAuthKey);
@@ -110,7 +110,7 @@ public class SmartCloudOAuthEndpoint extends OAuthEndpoint {
     /**
      * Convenience method to set the consumerSecret property.
      * 
-     * @param clientSecret
+     * @param oAuthSecret
      */
     public void setOAuthSecret(String oAuthSecret) {
     	setConsumerSecret(oAuthSecret);

@@ -53,7 +53,7 @@ public class MyProfilePanel extends BaseTest {
      * Check the panel
      * 
      * @param snippetId
-     * @return
+     * @return {boolean}
      */
     protected boolean checkPanel(String snippetId) {
     	PanelResultPage resultPage = launchPanel(snippetId);
@@ -65,7 +65,7 @@ public class MyProfilePanel extends BaseTest {
      * Launch the list snippet and return a PanelResultPage
      * 
      * @param snippetId
-     * @return
+     * @return {PanelResultPage}
      */
     protected PanelResultPage launchPanel(String snippetId) {
         ResultPage resultPage = super.launchSnippet(snippetId, authType);
@@ -74,7 +74,7 @@ public class MyProfilePanel extends BaseTest {
     
     /**
      * Return true if a Panel was created on the page i.e. could find ul, multiple li's
-     * @return
+     * @return {boolean}
      */
     protected boolean checkPanel(PanelResultPage resultPage, String snippetId) {
        Trace.log("Panel result page: " + resultPage.getText());

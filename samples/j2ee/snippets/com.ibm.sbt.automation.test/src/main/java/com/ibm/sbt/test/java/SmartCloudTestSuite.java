@@ -31,7 +31,7 @@ import com.ibm.sbt.test.java.smartcloud.ProfilesTestSuite;
 /**
  * @author fmoloney
  * 
- * @date 12 Mar 2013
+ * @since 12 Mar 2013
  */
 @RunWith(Suite.class)
 @SuiteClasses({ CommunitiesTestSuite.class, FilesTestSuite.class, ProfilesTestSuite.class, ActivitiesTestSuite.class})

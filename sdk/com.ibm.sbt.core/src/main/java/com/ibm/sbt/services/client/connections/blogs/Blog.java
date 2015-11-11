@@ -25,21 +25,18 @@ import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.connections.blogs.model.BaseBlogEntity;
 import com.ibm.sbt.services.client.connections.blogs.model.BlogXPath;
 
-
 /**
  * Blog object
  * 
  * @author Swati Singh
  */
-
-
 public class Blog extends BaseBlogEntity {
 	
 	/**
 	 * Constructor
 	 *  
-	 * @param BlogService
-	 * @param BlogId
+	 * @param blogService
+	 * @param id
 	 */
 	public Blog(BlogService blogService, String id) {
 		super(blogService,id);
@@ -49,10 +46,10 @@ public class Blog extends BaseBlogEntity {
 	
 	/**
      * Constructor
-     * @param BaseService
-     * @param Node
-     * @param NamespaceContext
-     * @param XPathExpression
+     * @param service
+     * @param node
+     * @param namespaceCtx
+     * @param xpathExpression
      */
 	public Blog(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
 		super(service, node, namespaceCtx, xpathExpression);
@@ -83,7 +80,7 @@ public class Blog extends BaseBlogEntity {
 	* Returns the Blog handle
 	*
 	* @method getHandle
-	* @return Blog handle
+	* @return {String} Blog handle
 	*/
 	public String getHandle() {
 		return getAsString(BlogXPath.handle);
@@ -135,14 +132,14 @@ public class Blog extends BaseBlogEntity {
 	* @method setTimeZone
 	* @param timeZone
 	*/
-	public void setTimeZone(String handle) {
-        setAsString(BlogXPath.timeZone, handle);
+	public void setTimeZone(String timeZone) {
+        setAsString(BlogXPath.timeZone, timeZone);
     }
 	
 	/**
 	 * This method creates the blog on the server
 	 * 
-	 * @return Blog
+	 * @return {Blog} blog object
 	 * @throws ClientServicesException
 	 */
 	public Blog save() throws ClientServicesException {

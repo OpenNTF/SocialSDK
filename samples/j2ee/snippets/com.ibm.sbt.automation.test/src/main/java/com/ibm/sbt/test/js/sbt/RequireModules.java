@@ -25,7 +25,7 @@ import com.ibm.sbt.automation.core.test.BaseServiceTest;
 /**
  * @author mwallace
  *  
- * @date 25 Mar 2013
+ * @since 25 Mar 2013
  */
 public class RequireModules extends BaseServiceTest {
     

@@ -23,7 +23,7 @@ import com.ibm.sbt.automation.core.test.BaseAuthJavaServiceTest;
 
 /**
  * @author Vimal Dhupar
- * @date 14th Nov, 2013
+ * @since 14th Nov, 2013
  */
 public class DeleteActivityNode extends BaseAuthJavaServiceTest {
 

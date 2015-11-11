@@ -31,7 +31,7 @@ import com.ibm.sbt.services.client.ClientService.HandlerRaw;
 /**
  * REST services related exception.
  * 
- * @Philippe Riand
+ * @author Philippe Riand
  */
 public class ClientServicesException extends AbstractException {
 

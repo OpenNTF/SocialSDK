@@ -68,7 +68,6 @@ abstract public class AtomService extends BaseService {
      * Constructor
      * 
      * @param endpoint
-     * @param cacheSize
      */
     public AtomService(Endpoint endpoint) {
         super(endpoint);

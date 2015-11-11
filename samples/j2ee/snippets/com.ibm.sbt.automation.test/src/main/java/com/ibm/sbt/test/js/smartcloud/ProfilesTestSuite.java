@@ -33,7 +33,7 @@ import com.ibm.sbt.test.js.smartcloud.profiles.GetProfileByGUID;
 /**
  * @author mwallace
  * 
- * @date 12 Mar 2013
+ * @since 12 Mar 2013
  */
 @RunWith(Suite.class)
 @SuiteClasses({ GetConnections.class, GetContactByGUID.class, GetContacts.class, GetContactsByIndex.class, GetProfileByGUID.class, GetMyProfile.class })

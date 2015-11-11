@@ -29,7 +29,7 @@ public interface ClientServiceListener {
 	 * @param method
 	 * @param args
 	 * @param content
-	 * @return
+	 * @return {boolean}
 	 * @throws ClientServicesException
 	 */
 	public boolean preXhr(String method, Args args, Object content) throws ClientServicesException;
@@ -41,7 +41,7 @@ public interface ClientServiceListener {
 	 * @param args
 	 * @param content
 	 * @param response
-	 * @return
+	 * @return {Response}
 	 * @throws ClientServicesException
 	 */
 	public Response postXhr(String method, Args args, Object content, Response response) throws ClientServicesException;

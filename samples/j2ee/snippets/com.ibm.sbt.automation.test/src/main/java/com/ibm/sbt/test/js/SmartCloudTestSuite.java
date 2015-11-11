@@ -34,7 +34,7 @@ import com.ibm.sbt.test.sample.SampleFrameworkTestSuite;
 /**
  * @author mwallace
  * 
- * @date 6 Mar 2013
+ * @since 6 Mar 2013
  */
 @RunWith(Suite.class)
 @SuiteClasses({ CommunitiesTestSuite.class, FilesTestSuite.class,

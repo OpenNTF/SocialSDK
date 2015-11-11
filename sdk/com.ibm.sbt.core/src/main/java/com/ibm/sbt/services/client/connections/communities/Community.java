@@ -38,7 +38,7 @@ import com.ibm.sbt.services.client.connections.communities.serializers.Community
 /**
  * This class represents a Connections Community entity
  * 
- * @Represents Connections Community
+ * IBM Connections Community Object
  * @author Swati Singh
  * @author Manish Kataria
  * @author Carlos Manias
@@ -91,14 +91,22 @@ public class Community extends AtomEntity {
 	/**
 	 * Returns the communityUuid
 	 * 
-	 * @return communityUuid
+	 * @return {String} communityUuid
 	 */
 	public String getCommunityUuid() {
 		return getAsString(CommunityXPath.communityUuid);
 	}
+	
+	/**
+	 * returns the isExternal value 
+	 * @return {String} external
+	 */
+	 public String getExternalCommunity(){
+		 return getAsString(CommunityXPath.externalCommunity);
+	 }
 
 	/**
-	 * @sets the communityUuid
+	 * sets the communityUuid
 	 * 
 	 * @param communityUuid
 	 */
@@ -109,14 +117,14 @@ public class Community extends AtomEntity {
 	/**
 	 * Returns the Title
 	 * 
-	 * @return title
+	 * @return {String} title
 	 */
 	public String getTitle() {
 		return getAsString(CommunityXPath.title);
 	}
 
 	/**
-	 * @sets the title
+	 * sets the title
 	 * 
 	 * @param title
 	 */
@@ -127,7 +135,7 @@ public class Community extends AtomEntity {
 	/**
 	 * Returns the content
 	 * 
-	 * @return content
+	 * @return {String} content
 	 */
 	public String getContent() {
 		return getAsString(CommunityXPath.content);
@@ -136,7 +144,7 @@ public class Community extends AtomEntity {
 	/**
 	 * Returns the communityUrl
 	 * 
-	 * @return communityUrl
+	 * @return {String} communityUrl
 	 */
 	public String getCommunityUrl() {
 		return getAsString(CommunityXPath.communityUrl);
@@ -145,7 +153,7 @@ public class Community extends AtomEntity {
 	/**
 	 * Returns the logoUrl
 	 * 
-	 * @return logoUrl
+	 * @return {String} logoUrl
 	 */
 	public String getLogoUrl() {
 		return getAsString(CommunityXPath.logoUrl);
@@ -154,14 +162,14 @@ public class Community extends AtomEntity {
 	/**
 	 * Returns the Summary
 	 * 
-	 * @return summary
+	 * @return {String} summary
 	 */
 	public String getSummary() {
 		return getAsString(CommunityXPath.summary);
 	}
 
 	/**
-	 * @sets the content
+	 * sets the content
 	 * 
 	 * @param content
 	 */
@@ -170,7 +178,7 @@ public class Community extends AtomEntity {
 	}
 
 	/**
-	 * @return the list of Tags
+	 * @return {List<String>} the list of Tags
 	 */
 
 	public List<String> getTags() {
@@ -178,14 +186,14 @@ public class Community extends AtomEntity {
 	}
 
 	/**
-	 * @sets the tags
+	 * sets the tags
 	 */
 	public void setTags(List<String> tags) {
 		super.setBaseTags(tags);
 	}
 
 	/**
-	 * @sets the tags
+	 * sets the tags
 	 */
 	@Deprecated
 	public void setTags(String tags) {
@@ -195,20 +203,20 @@ public class Community extends AtomEntity {
 	}
 
 	/**
-	 * @return the memberCount
+	 * @return {int} the memberCount
 	 */
 	public int getMemberCount(){
 		return getAsInt(CommunityXPath.memberCount);
 	}
 	/**
-	 * @return the communityType
+	 * @return {String} the communityType
 	 */
 	public String getCommunityType(){
 		return getAsString(CommunityXPath.communityType);		
 	}
 
 	/**
-	 * @set the communityType
+	 * sets the communityType
 	 */
 	public void setCommunityType(String communityType){
 		setAsString(CommunityXPath.communityType, communityType);	
@@ -216,7 +224,7 @@ public class Community extends AtomEntity {
 	
 	/**
 	 * checks if a community is a sub community
-	 * @return true if the community is a sub community else false
+	 * @return {boolean} true if the community is a sub community else false
 	 */
 	public boolean isSubCommunity(){
 		return exists(CommunityXPath.parentCommunityUrl);
@@ -224,7 +232,7 @@ public class Community extends AtomEntity {
 	
 	/**
 	 * gets the url of of the parent community if the community is a sub community
-	 * @return The url of the parent community or null, if the community is not a sub community.
+	 * @return {String} The url of the parent community or null, if the community is not a sub community.
 	 */
 	public String getParentCommunityUrl(){
 		if(isSubCommunity()){
@@ -239,14 +247,14 @@ public class Community extends AtomEntity {
 	}
 
 	/**
-	 * @return the published date of community
+	 * @return {Date} the published date of community
 	 */
 	public Date getPublished(){
 		return getAsDate(CommunityXPath.published);
 	}
 
 	/**
-	 * @return the community theme
+	 * @return {String} the community theme
 	 */
 	public String getCommunityTheme(){
 		return getAsString(CommunityXPath.communityTheme);
@@ -256,7 +264,7 @@ public class Community extends AtomEntity {
 		setAsString(CommunityXPath.communityTheme, theme);
 	}
 	/**
-	 * @return the update date of community
+	 * @return {Date} the update date of community
 	 */
 	public Date getUpdated(){
 		return getAsDate(CommunityXPath.updated);
@@ -264,7 +272,7 @@ public class Community extends AtomEntity {
 
 
 	/**
-	 * @return the authorUid
+	 * @return {Member} the authorUid
 	 */
 	public Member getAuthor(){
 		Member author = new Member(getService(), getAsString(CommunityXPath.authorUserid));
@@ -274,7 +282,7 @@ public class Community extends AtomEntity {
 	}
 
 	/**
-	 * @return the ContributorId
+	 * @return {Member} the ContributorId
 	 */
 	public Member getContributor(){
 		Member contributor = new Member(getService(), getAsString(CommunityXPath.contributorUserid));
@@ -284,7 +292,7 @@ public class Community extends AtomEntity {
 	}
 
 	/**
-	 * @return the membersUrl
+	 * @return {String} the membersUrl
 	 */
 	public String getMembersUrl() {
 		return getAsString(CommunityXPath.membersUrl);
@@ -292,7 +300,7 @@ public class Community extends AtomEntity {
 
 	/**
 	 * This method is used by communityService wrapper methods to construct request body for Add/Update operations
-	 * @return Object
+	 * @return {Object}
 	 */
 	public Object constructCreateRequestBody() throws ClientServicesException {
 		return createCommunityRequestPayload();
@@ -305,21 +313,18 @@ public class Community extends AtomEntity {
 	/**
 	 * This method loads the community 
 	 * 
-	 * @return
+	 * @return {Community}
 	 * @throws ClientServicesException
 	 */
-
 	public Community load() throws ClientServicesException {
 		return getService().getCommunity(getCommunityUuid());
-    	}
+    }
 
 	/**
 	 * This method updates the community 
 	 * 
-	 * @return
 	 * @throws ClientServicesException
 	 */
-
 	public void update() throws ClientServicesException {
 		getService().updateCommunity(this);
     	}
@@ -327,17 +332,15 @@ public class Community extends AtomEntity {
 	/**
 	 * This method deletes the community on the server
 	 * 
-	 * @return
 	 * @throws ClientServicesException
 	 */
-
 	public void remove() throws ClientServicesException {
 	   	getService().deleteCommunity(getCommunityUuid());
 	}
 	/**
 	 * This method updates the community on the server
 	 * 
-	 * @return
+	 * @return {Community} the object of the saved community
 	 * @throws ClientServicesException
 	 */
 	public Community save() throws ClientServicesException {
@@ -353,7 +356,7 @@ public class Community extends AtomEntity {
 	/**
 	 * This method gets Community member
 	 * 
-	 * @return
+	 * @return {Member} 
 	 * @throws ClientServicesException
 	 */
 	public Member getMember(String memberID) throws ClientServicesException {
@@ -363,7 +366,6 @@ public class Community extends AtomEntity {
 	/**
 	 * This method adds Community member
 	 * 
-	 * @return
 	 * @throws ClientServicesException
 	 */
 	public void addMember(Member member) throws ClientServicesException {
@@ -373,7 +375,6 @@ public class Community extends AtomEntity {
 	/**
 	 * This method removes Community member
 	 * 
-	 * @return
 	 * @throws ClientServicesException
 	 */
 	public void removeMember(String memberID) throws ClientServicesException {
@@ -383,7 +384,7 @@ public class Community extends AtomEntity {
 	/**
 	 * This method gets the subcommunities of a community
 	 * 
-	 * @return list of sub-communities
+	 * @return {EntityList<Community>} list of sub-communities
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Community> getSubCommunities() throws ClientServicesException {
@@ -396,7 +397,7 @@ public class Community extends AtomEntity {
 	 * @param parameters
      * 				 Various parameters that can be passed to get a feed of members of a community. 
      * 				 The parameters must be exactly as they are supported by IBM Connections like ps, sortBy etc.
-   	 * @return list of sub-communities
+   	 * @return {EntityList<Community>} list of sub-communities
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Community> getSubCommunities(Map<String, String> parameters) throws ClientServicesException {
@@ -406,7 +407,7 @@ public class Community extends AtomEntity {
 	/**
 	 * This method gets the members of a community
 	 * 
-	 * @return list of members
+	 * @return {EntityList<Member>} list of members
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Member> getMembers() throws ClientServicesException {
@@ -420,7 +421,7 @@ public class Community extends AtomEntity {
      * 				 Various parameters that can be passed to get a feed of members of a community. 
      * 				 The parameters must be exactly as they are supported by IBM Connections like ps, sortBy etc.
  
-	 * @return list of members
+	 * @return {EntityList<Member>} list of members
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Member> getMembers(Map<String, String> parameters) throws ClientServicesException {

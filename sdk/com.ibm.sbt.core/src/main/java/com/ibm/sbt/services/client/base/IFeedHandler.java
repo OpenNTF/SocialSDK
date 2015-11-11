@@ -29,7 +29,7 @@ public interface IFeedHandler<T extends BaseEntity> {
 	/**
 	 * Returns a new entity from the data on the RequestData object
 	 * @param dataHolder
-	 * @return
+	 * @return T
 	 * @throws SBTServiceException
 	 */
 	public T createEntity(Response dataHolder);
@@ -37,7 +37,7 @@ public interface IFeedHandler<T extends BaseEntity> {
 	/**
 	 * Return a new entity from a data object
 	 * @param data
-	 * @return
+	 * @return T
 	 * @throws SBTServiceException
 	 */
 	public T createEntityFromData(Object data);
@@ -45,7 +45,7 @@ public interface IFeedHandler<T extends BaseEntity> {
 	/**
 	 * Returns a Collection of entities from the data on the RequestData object
 	 * @param dataHolder
-	 * @return
+	 * @return {EntityList<T>}
 	 * @throws SBTServiceException
 	 */
 	public EntityList<T> createEntityList(Response dataHolder);

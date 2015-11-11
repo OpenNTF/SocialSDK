@@ -24,7 +24,7 @@ import com.ibm.sbt.automation.core.test.BaseGridTest;
 
 /**
  * @author Francis 
- * @date 25 Jun 2013
+ * @since 25 Jun 2013
  */
 public class SearchBlogsPublic extends BaseGridTest {
     @Test

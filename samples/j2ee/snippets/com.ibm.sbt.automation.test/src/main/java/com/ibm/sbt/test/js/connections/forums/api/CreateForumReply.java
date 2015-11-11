@@ -26,7 +26,7 @@ import com.ibm.sbt.services.client.connections.forums.ForumTopic;
 /**
  * @author mwallace
  *  
- * @date 19 Mar 2013
+ * @since 19 Mar 2013
  */
 public class CreateForumReply extends BaseForumsTest {
     

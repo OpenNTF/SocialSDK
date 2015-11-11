@@ -27,7 +27,7 @@ import com.ibm.sbt.automation.core.test.pageobjects.ResultPage;
 /**
  * @author mwallace
  * 
- * @date 7 Mar 2013
+ * @since 7 Mar 2013
  */
 public class CreateUpdateDeleteCommunity extends BaseTest {
 

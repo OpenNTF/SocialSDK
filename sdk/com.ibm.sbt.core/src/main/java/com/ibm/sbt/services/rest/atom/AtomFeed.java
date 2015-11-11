@@ -41,10 +41,7 @@ public class AtomFeed {
 	/**
 	 * Construct an AtomEntity instance.
 	 * 
-	 * @param service
-	 * @param data
-	 * @param namespaceCtx
-	 * @param xpathExpression
+	 * @param node
 	 */
 	public AtomFeed(Node node) {
 		dataHandler = new XmlDataHandler(node, nameSpaceCtx, (XPathExpression)AtomXPath.feed.getPath());
@@ -55,7 +52,7 @@ public class AtomFeed {
 	 * 
 	 * @method getAsString
 	 * @param xpath
-	 * @return
+	 * @return String
 	 */
 	public String getAsString(String xpath){
 		return dataHandler.getAsString(xpath);
@@ -66,7 +63,7 @@ public class AtomFeed {
 	 * 
 	 * @method getAsLong
 	 * @param xpath
-	 * @return
+	 * @return Long
 	 */
 	public Long getAsLong(String xpath){
 		return dataHandler.getAsLong(xpath);
@@ -77,7 +74,7 @@ public class AtomFeed {
 	 * 
 	 * @method getAsInt
 	 * @param xpath
-	 * @return
+	 * @return int
 	 */
 	public int getAsInt(String xpath){
 		return dataHandler.getAsInt(xpath);
@@ -88,7 +85,7 @@ public class AtomFeed {
 	 * 
 	 * @method getAsFloat
 	 * @param xpath
-	 * @return
+	 * @return Float
 	 */
 	public Float getAsFloat(String xpath){
 		return dataHandler.getAsFloat(xpath);
@@ -99,7 +96,7 @@ public class AtomFeed {
 	 * 
 	 * @method getAsArray
 	 * @param xpath
-	 * @return
+	 * @return String[]
 	 */
 	public String[] getAsArray(String xpath){
 		return dataHandler.getAsArray(xpath);
@@ -110,7 +107,7 @@ public class AtomFeed {
 	 * 
 	 * @method getAsDate
 	 * @param xpath
-	 * @return
+	 * @return Date
 	 */
 	public Date getAsDate(String xpath){
 		return dataHandler.getAsDate(xpath);
@@ -121,7 +118,7 @@ public class AtomFeed {
 	 * 
 	 * @method getAsBoolean
 	 * @param xpath
-	 * @return
+	 * @return boolean
 	 */
 	public boolean getAsBoolean(String xpath){
 		return dataHandler.getAsBoolean(xpath);
@@ -276,7 +273,7 @@ public class AtomFeed {
 	/**
 	 * Return XML string for the Atom feed.
 	 * 
-	 * @return
+	 * @return {String} 
 	 * @throws XMLException
 	 */
 	public String toXmlString() throws XMLException {

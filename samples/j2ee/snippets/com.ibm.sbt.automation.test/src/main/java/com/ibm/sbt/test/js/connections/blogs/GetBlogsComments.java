@@ -24,7 +24,7 @@ import com.ibm.sbt.automation.core.test.BaseServiceTest;
 /**
  * @author rajmeetbal
  * 
- * @date 26 september 2013
+ * @since 26 september 2013
  */
 public class GetBlogsComments extends BaseServiceTest {
 

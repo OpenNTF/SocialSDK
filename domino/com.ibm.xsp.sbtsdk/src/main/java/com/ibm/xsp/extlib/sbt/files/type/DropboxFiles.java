@@ -73,7 +73,7 @@ public class DropboxFiles extends AbstractType {
      * https://api-content.dropbox.com/<VERSION>/files/dropbox
      * @param path
      *          path to the file to be downloaded
-     * @return
+     * @return {String}
      */
     public String buildHref(String path, Endpoint bean) {
         try {

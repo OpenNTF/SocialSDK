@@ -13,7 +13,7 @@ import com.ibm.sbt.test.controls.vcard.ProfileVCards;
 
 /**
  * @author sberrybyrne
- * @date 20 Mar 2013
+ * @since 20 Mar 2013
  * 
  * Need to further extend classes to test more than just a controls existence.
  */

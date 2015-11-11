@@ -25,7 +25,7 @@ import com.ibm.sbt.test.sample.framework.SampleFrameworkJavaScript;
 
 /**
  * @author Francis
- * @date 24 May 2013
+ * @since 24 May 2013
  */
 @RunWith(Suite.class)
 @SuiteClasses({ SampleFrameworkJava.class, SampleFrameworkJavaScript.class })

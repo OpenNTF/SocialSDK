@@ -26,7 +26,7 @@ import com.ibm.sbt.automation.core.environment.TestEnvironmentFactory;
 /**
  * @author Vimal Dhupar
  * 
- * @date 15 Nov 2013
+ * @since 15 Nov 2013
  */
 @RunWith(Suite.class)
 @SuiteClasses({ com.ibm.sbt.test.java.connections.ActivitiesTestSuite.class})

@@ -39,7 +39,7 @@ import com.ibm.sbt.test.controls.view.forums.CreateForumWidget;
 /**
  * @author mwallace
  * 
- * @date 12 Dec 2013
+ * @since 12 Dec 2013
  */
 @RunWith(Suite.class)
 @SuiteClasses({ 

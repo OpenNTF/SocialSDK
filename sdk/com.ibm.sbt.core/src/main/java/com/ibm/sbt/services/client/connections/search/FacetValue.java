@@ -29,15 +29,13 @@ import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
  * 
  * @author Mark Wallace 
  */
-
-
 public class FacetValue extends AtomEntity{
 	
 	/**
 	 * Constructor
 	 *  
-	 * @param SearchService
-	 * @param FacetId
+	 * @param searchService SearchService
+	 * @param id FacetId
 	 */
 	public FacetValue(SearchService searchService, String id) {
 		setService(searchService);

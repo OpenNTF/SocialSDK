@@ -22,16 +22,13 @@ import com.ibm.commons.xml.NamespaceContext;
 import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.base.AtomEntity;
 import com.ibm.sbt.services.client.base.BaseService;
-
+/**
+ * Scope model object
+ * 
+ * @author Manish Kataria 
+ */
 public class Scope extends AtomEntity{
 	
-	/**
-	 * Scope model object
-	 * 
-	 * @author Manish Kataria 
-	 */
-	
-
 	public Scope(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
 		super(service, node, namespaceCtx, xpathExpression);
 	}
@@ -40,7 +37,7 @@ public class Scope extends AtomEntity{
 	
 	/**
 	 * Link to use to display the search result in the IBM Connections user interface. Not provided for bookmarks
-	 * @return String
+	 * @return {String}
 	 */
 	public String getLink(){
 		String id = getAsString(SearchXPath.searchLink);

@@ -35,7 +35,7 @@ public class Version implements Serializable, Comparable<Version> {
 	/**
 	 * Parses a string containing a dot separated version of Connections with the format Major.Minor.Subversion and returns a Version object
 	 * @param s
-	 * @return
+	 * @return {Version}
 	 */
 	public static Version parse(String s) {
 		if (StringUtil.isEmpty(s)) {
@@ -86,7 +86,7 @@ public class Version implements Serializable, Comparable<Version> {
 
 	/**
 	 * Returns major version
-	 * @return
+	 * @return {int}
 	 */
 	public int getMajor() {
 		return major;
@@ -94,7 +94,7 @@ public class Version implements Serializable, Comparable<Version> {
 
 	/**
 	 * Returns minor version
-	 * @return
+	 * @return {int}
 	 */
 	public int getMinor() {
 		return minor;
@@ -102,7 +102,7 @@ public class Version implements Serializable, Comparable<Version> {
 
 	/**
 	 * Returns subversion
-	 * @return
+	 * @return {int}
 	 */
 	public int getSubversion() {
 		return subversion;
@@ -144,8 +144,8 @@ public class Version implements Serializable, Comparable<Version> {
 
 	/**
 	 * Returns true if the current version is at least the version in parameter
-	 * @param _major
-	 * @return
+	 * @param version
+	 * @return {boolean}
 	 */
 	public boolean isAtLeast(Version version) {
 		return isAtLeast(version.getMajor(), version.getMinor(), version.getSubversion());
@@ -154,7 +154,7 @@ public class Version implements Serializable, Comparable<Version> {
 	/**
 	 * Returns true if the current version is at least the version in parameter
 	 * @param _major
-	 * @return
+	 * @return {boolean}
 	 */
 	public boolean isAtLeast(int _major) {
 		return isAtLeast(_major, 0, 0);
@@ -164,7 +164,7 @@ public class Version implements Serializable, Comparable<Version> {
 	 * Returns true if the current version is at least the version in parameters
 	 * @param _major
 	 * @param _minor
-	 * @return
+	 * @return {boolean}
 	 */
 	public boolean isAtLeast(int _major, int _minor) {
 		return isAtLeast(_major, _minor, 0);
@@ -175,7 +175,7 @@ public class Version implements Serializable, Comparable<Version> {
 	 * @param _major
 	 * @param _minor
 	 * @param _subversion
-	 * @return
+	 * @return {boolean}
 	 */
 	public boolean isAtLeast(int _major, int _minor, int _subversion) {
 		if (this.major > _major) {
@@ -197,7 +197,7 @@ public class Version implements Serializable, Comparable<Version> {
 	/**
 	 * Returns true if the current version is greater than the parameter
 	 * @param v
-	 * @return
+	 * @return {boolean}
 	 */
 	public boolean greaterThan(Version v) {
 		if (major > v.major) {
@@ -219,7 +219,7 @@ public class Version implements Serializable, Comparable<Version> {
 	/**
 	 * Returns true if the current version is less than the parameter
 	 * @param v
-	 * @return
+	 * @return {boolean}
 	 */
 	public boolean lessThan(Version v) {
 		if (major < v.major) {

@@ -80,7 +80,7 @@ public abstract class BlogBaseEntity extends AtomEntity {
 	
 	/**
 	 * 
-	 * @return
+	 * @return {Person} person who modified the blog entry
 	 */
 	public Person getModifier() {
 		return new Person(getService(), new XmlDataHandler((Node)this.getDataHandler().getData(), 

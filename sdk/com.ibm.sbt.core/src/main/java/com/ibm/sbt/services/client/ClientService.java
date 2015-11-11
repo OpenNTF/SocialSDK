@@ -165,7 +165,7 @@ public abstract class ClientService {
 	/**
 	 * Construct a ClientService with the Endpoint with the specified name
 	 * 
-	 * @param endpoint
+	 * @param endpointName
 	 */
 	public ClientService(String endpointName) {
 		this.endpoint = EndpointFactory.getEndpoint(endpointName);
@@ -174,7 +174,7 @@ public abstract class ClientService {
 	/**
 	 * Return the associated Endpoint
 	 * 
-	 * @return
+	 * @return {Endpoint}
 	 */
 	public Endpoint getEndpoint() {
 		return endpoint;
@@ -231,7 +231,7 @@ public abstract class ClientService {
 	/**
 	 * Return the URL from the associated endpoint.
 	 * 
-	 * @return
+	 * @return {String}
 	 */
 	public String getBaseUrl() {
 		if (endpoint != null) {
@@ -257,7 +257,7 @@ public abstract class ClientService {
 	/**
 	 * Return true if force trust SSL certificate is set for the associated Endpoint.
 	 * 
-	 * @return
+	 * @return {boolean}
 	 * @throws ClientServicesException
 	 */
 	protected boolean isForceTrustSSLCertificate() throws ClientServicesException {
@@ -270,7 +270,7 @@ public abstract class ClientService {
 	/**
 	 * Return true if force trust SSL certificate is set for the associated Endpoint.
 	 * 
-	 * @return
+	 * @return {boolean}
 	 * @throws ClientServicesException
 	 */
 	protected boolean isForceDisableExpectedContinue() throws ClientServicesException {
@@ -284,7 +284,7 @@ public abstract class ClientService {
 	/**
 	 * Return the proxy info from the associated Endpoint or an empty string
 	 * 
-	 * @return
+	 * @return {String}
 	 * @throws ClientServicesException
 	 */
 	protected String getHttpProxy() throws ClientServicesException {
@@ -1131,7 +1131,7 @@ public abstract class ClientService {
 	 * @param method
 	 * @param args
 	 * @param content
-	 * @return
+	 * @return {Response}
 	 * @throws ClientServicesException
 	 */
 	public Response xhr(String method, Args args, Object content) throws ClientServicesException {
@@ -1183,7 +1183,7 @@ public abstract class ClientService {
 	 * @param httpRequestBase
 	 * @param args
 	 * @param content
-	 * @return
+	 * @return {Response}
 	 * @throws ClientServicesException
 	 */
 	protected Response execRequest(HttpRequestBase httpRequestBase, Args args, Object content) throws ClientServicesException {
@@ -1202,7 +1202,7 @@ public abstract class ClientService {
 	}
 
 	/**
-	 * Allows clients to override the process content section of {@link #_xhr(HttpRequestBase, Args)}. <br/>
+	 * Allows clients to override the process content section of _xhr(HttpRequestBase, Args). <br/>
 	 * 
 	 * @param httpRequestBase
 	 *            the base HTTP request created by the service
@@ -1262,7 +1262,7 @@ public abstract class ClientService {
 	 * @param httpClient
 	 * @param httpRequestBase
 	 * @param args
-	 * @return
+	 * @return {HttpResponse}
 	 * @throws ClientServicesException
 	 */
 	protected HttpResponse executeRequest(HttpClient httpClient, HttpRequestBase httpRequestBase, 
@@ -1292,7 +1292,7 @@ public abstract class ClientService {
 	 * @param httpRequestBase
 	 * @param httpResponse
 	 * @param args
-	 * @return
+	 * @return {Response}
 	 * @throws ClientServicesException
 	 */
 	protected Response processResponse(HttpClient httpClient, HttpRequestBase httpRequestBase,
@@ -1332,7 +1332,8 @@ public abstract class ClientService {
 	}
 
 	private boolean checkStatus(int statusCode) {
-		if (statusCode >= 200 && statusCode < 300) {
+		//Issue 1579: Added Status Code 404 as valid status code
+		if ((statusCode >= 200 && statusCode < 300) || statusCode == 404) {
 			return true;
 		}
 		return false;
@@ -1478,8 +1479,8 @@ public abstract class ClientService {
 	 * 
 	 * @param request
 	 * @param response
-	 * @param DateFormat
-	 * @return
+	 * @param handler
+	 * @return {Handler}
 	 * @throws ClientServicesException
 	 */
 	protected Handler findHandler(HttpRequestBase request, HttpResponse response, Handler handler)
@@ -1522,13 +1523,14 @@ public abstract class ClientService {
 
 	/**
 	 * @param statusCode
-	 * @return
+	 * @return {boolean}
 	 */
 	protected boolean isErrorStatusCode(int statusCode) {
 		return (statusCode != HttpStatus.SC_OK) && 
 			(statusCode != HttpStatus.SC_CREATED) && 
 			(statusCode != HttpStatus.SC_ACCEPTED) && 
-			(statusCode != HttpStatus.SC_NO_CONTENT);
+			(statusCode != HttpStatus.SC_NO_CONTENT) &&
+			(statusCode != HttpStatus.SC_NOT_FOUND) && (statusCode != 404);
 	}
 
 	/**

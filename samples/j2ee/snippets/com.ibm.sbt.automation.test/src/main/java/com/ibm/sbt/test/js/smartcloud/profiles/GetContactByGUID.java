@@ -24,7 +24,7 @@ import com.ibm.sbt.automation.core.test.smartcloud.BaseProfilesTest;
 
 /**
  * @author Vimal Dhupar
- * @date 22 May 2013
+ * @since 22 May 2013
  */
 public class GetContactByGUID extends BaseProfilesTest {
 

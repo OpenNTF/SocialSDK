@@ -90,7 +90,6 @@ public class WikiService extends ConnectionsService {
 	 * Get a feed that lists all of the wikis.
 	 * This returns a feed of wikis to which the authenticated user has access.
 	 * 
-	 * @param parameters 
 	 * @return EntityList&lt;Wiki&gt;
 	 * @throws ClientServicesException
 	 */
@@ -116,7 +115,6 @@ public class WikiService extends ConnectionsService {
 	 * Get a feed that lists all of the public wikis.
 	 * This returns a feed of wikis to which everyone who can log into the Wikis application has access.
 	 *
-	 * @param parameters
 	 * @return EntityList&lt;Wiki&gt;
 	 * @throws ClientServicesException
 	 */
@@ -346,8 +344,21 @@ public class WikiService extends ConnectionsService {
 	 * @throws ClientServicesException
 	 */
 	public Wiki getWiki(String wikiLabel, Map<String, String> parameters) throws ClientServicesException {
+		Wiki result = null;
+		IFeedHandler<Wiki> handler = getWikiFeedHandler();
+		
 		String requestUrl = WikiUrls.WIKI.format(this, WikiUrls.getWikiLabel(wikiLabel)); 
-		return getWikiEntity(requestUrl, parameters);
+		Response response = getClientService().get(requestUrl,parameters);
+		
+		try{
+			checkResponseCode(response,HTTPCode.OK);
+			result = handler.createEntity(response);
+		}catch(ClientServicesException cse){
+			checkResponseCode(response,HTTPCode.NOT_FOUND);
+			throw new ClientServicesException(new Exception("Wiki Not Found"));
+		}
+		
+		return result;		
 	}
 
 	/**
@@ -383,7 +394,6 @@ public class WikiService extends ConnectionsService {
 	 * For example, if you want to add a new tag to a wiki definition entry, retrieve the existing tags, 
 	 * and send them all back with the new tag in the update request. 
 	 * 
-	 * @param wikiLabel
 	 * @param wiki
 	 * @throws ClientServicesException
 	 */
@@ -398,7 +408,6 @@ public class WikiService extends ConnectionsService {
 	 * For example, if you want to add a new tag to a wiki definition entry, retrieve the existing tags, 
 	 * and send them all back with the new tag in the update request. 
 	 * 
-	 * @param wikiLabel
 	 * @param wiki
 	 * @param parameters
 	 * @throws ClientServicesException
@@ -420,8 +429,15 @@ public class WikiService extends ConnectionsService {
 	public void deleteWiki(String wikiLabel) throws ClientServicesException {
 		String requestUrl = WikiUrls.WIKI.format(this, WikiUrls.getWikiLabel(wikiLabel));
 		Response response = deleteData(requestUrl);
+		
 		//FIX: According to documentation should return 204 but returns 200
-		checkResponseCode(response, HTTPCode.OK);
+		try{
+			checkResponseCode(response, HTTPCode.OK);			
+		}catch(ClientServicesException cse){
+			//The Wiki does not exist/is not found
+			checkResponseCode(response, HTTPCode.NOT_FOUND);
+			throw new ClientServicesException(new Exception("Wiki Not Found"));
+		}
 	}
 	
 	/***************************************************************
@@ -458,8 +474,21 @@ public class WikiService extends ConnectionsService {
 	 * @throws ClientServicesException
 	 */
 	public WikiPage getWikiPage(String wikiLabel, String pageLabel, Map<String, String> parameters) throws ClientServicesException {
+		WikiPage result = null;
+		IFeedHandler<WikiPage> handler = getWikiPageFeedHandler();
+		
 		String requestUrl = WikiUrls.WIKI_PAGE.format(this, WikiUrls.getWikiLabel(wikiLabel), WikiUrls.getWikiPage(pageLabel));
-		return getWikiPageEntity(requestUrl, parameters);
+		Response response = getClientService().get(requestUrl,parameters);
+		
+		try{
+			checkResponseCode(response,HTTPCode.OK);
+			result = handler.createEntity(response);
+		}catch(ClientServicesException cse){
+			checkResponseCode(response,HTTPCode.NOT_FOUND);
+			throw new ClientServicesException(new Exception("Wiki Page Not Found"));
+		}
+		
+		return result;
 	}
 
 	/**
@@ -520,13 +549,21 @@ public class WikiService extends ConnectionsService {
 	 * Only the owner of a wiki page can delete it. Deleted wiki pages cannot be restored.
 	 * 
 	 * @param wikiLabel
-	 * @param wikiPageLable
+	 * @param wikiPageLabel
 	 * @throws ClientServicesException
 	 */
 	public void deleteWikiPage(String wikiLabel, String wikiPageLabel) throws ClientServicesException {
 		String requestUrl = WikiUrls.WIKI_PAGE.format(this, WikiUrls.getWikiLabel(wikiLabel), WikiUrls.getWikiPage(wikiPageLabel));
 		Response response = deleteData(requestUrl);
-		checkResponseCode(response, HTTPCode.NO_CONTENT);
+		
+		try{
+			checkResponseCode(response, HTTPCode.NO_CONTENT);		
+		}catch(ClientServicesException cse){
+			//The Wiki Page does not exist/is not found
+			checkResponseCode(response, HTTPCode.NOT_FOUND);
+			throw new ClientServicesException(new Exception("Wiki Page Not Found"));
+		}
+		
 	}
 
 	/***************************************************************

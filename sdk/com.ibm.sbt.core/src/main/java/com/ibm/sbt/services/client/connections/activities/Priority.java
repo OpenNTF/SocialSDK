@@ -81,7 +81,7 @@ public class Priority extends BaseEntity {
 	
 	/**
 	 * 
-	 * @param label
+	 * @param term
 	 */
 	public void setTerm(long term) {
 		setAsLong(ActivityXPath.attr_term, term);

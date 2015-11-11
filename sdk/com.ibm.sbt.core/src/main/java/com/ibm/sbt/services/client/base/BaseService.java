@@ -90,7 +90,6 @@ public abstract class BaseService implements Serializable {
      * Constructor
      * 
      * @param endpoint
-     * @param cacheSize
      */
     public BaseService(Endpoint endpoint) {
         this(endpoint, DEFAULT_CACHE_SIZE);
@@ -111,13 +110,14 @@ public abstract class BaseService implements Serializable {
      * Add a default header
      * 
      * @param name
+	 * @param value
      */
     public void addDefaultHeader(String name, String value) {
     	headers.put(name, value);
     }
 
 	/**
-	 * @return dataFormat
+	 * @return {Handler} dataFormat
 	 */
 	public Handler getDataFormat() {
 		return this.dataFormat;
@@ -144,7 +144,7 @@ public abstract class BaseService implements Serializable {
 
     /**
      * Get authentication type for the endpoint. like basicAuth, oauth etc.
-     * @return
+     * @return {NamedUrlPart}
      */
 	public NamedUrlPart getAuthType(){
 		return new NamedUrlPart("authType",AuthType.getAuthTypePart(endpoint));
@@ -152,7 +152,7 @@ public abstract class BaseService implements Serializable {
 	
 	/**
 	 * Returns a Version object with the API version of the Endpoint
-	 * @return
+	 * @return {Version}
 	 */
 	public Version getApiVersion(){
 		return Version.parse(endpoint.getApiVersion());
@@ -160,7 +160,7 @@ public abstract class BaseService implements Serializable {
 	
 	/**
 	 * Subclasses must list the context roots of the Connections APIs they use.
-	 * @return
+	 * @return {String[]}
 	 */
 	public String[] getServiceMappingKeys(){
 		return serviceMappingKeys;
@@ -168,7 +168,7 @@ public abstract class BaseService implements Serializable {
 	
 	/**
 	 * Returns either the configured or the default serviceMappings for the service 
-	 * @return
+	 * @return {NamedUrlPart[]}
 	 */
 	public NamedUrlPart[] getServiceMappings(){
 		String[] serviceMappingKeys = getServiceMappingKeys();
@@ -249,8 +249,7 @@ public abstract class BaseService implements Serializable {
 	 * @param parameters
 	 * @param headers
 	 * @param content
-	 * @param DateFormat
-	 * @return
+	 * @return {Response}
 	 * @throws ClientServicesException
 	 */
     public Response createData(String serviceUrl, Map<String, String> parameters, Map<String,String> headers, Object content) throws ClientServicesException {
@@ -265,7 +264,7 @@ public abstract class BaseService implements Serializable {
      * @param headers
      * @param content
      * @param format
-     * @return
+     * @return {Response}
      * @throws ClientServicesException
      */
     public Response createData(String serviceUrl, Map<String, String> parameters, Map<String,String> headers, Object content, Handler format) throws ClientServicesException {
@@ -276,11 +275,11 @@ public abstract class BaseService implements Serializable {
 	/**
 	 * Creates data and returns the result
 	 * 
-	 * @param clientService
 	 * @param serviceUrl
 	 * @param parameters
 	 * @param content
-	 * @return the result of the creation operations
+	 * @param format
+	 * @return {Response} the result of the creation operations
 	 * @throws ClientServicesException
 	 *             when the creation fails, as null/false return may have other meaning here
 	 */
@@ -294,7 +293,7 @@ public abstract class BaseService implements Serializable {
 	 * @param serviceUrl
 	 * @param parameters
 	 * @param content
-	 * @return
+	 * @return {Response}
 	 * @throws ClientServicesException
 	 */
 	public Response createData(String serviceUrl, Map<String, String> parameters, Object content) throws ClientServicesException {
@@ -304,7 +303,7 @@ public abstract class BaseService implements Serializable {
 	/**
 	 * This method encapsulate the access to the Endpoint client service.
 	 * 
-	 * @return the client serivce associated with the current Endpoint
+	 * @return {ClientService} the client serivce associated with the current Endpoint
 	 * @throws ClientServicesException
 	 */
 	public ClientService getClientService() throws ClientServicesException {
@@ -315,11 +314,10 @@ public abstract class BaseService implements Serializable {
 	/**
 	 * Returns true if delete completed successfully and false if an error happened
 	 * 
-	 * @param clientService
 	 * @param serviceUrl
 	 * @param parameters
 	 * @param nameParameterId
-	 * @return
+	 * @return {Response}
 	 * @throws ClientServicesException
 	 */
 	public Response deleteData(String serviceUrl, Map<String, String> parameters, String nameParameterId)
@@ -333,7 +331,7 @@ public abstract class BaseService implements Serializable {
 	 * @param parameters
 	 * @param headers
 	 * @param nameParameterId
-	 * @return
+	 * @return {Response}
 	 * @throws ClientServicesException
 	 */
     public Response deleteData(String serviceUrl, Map<String, String> parameters, Map<String, String> headers, String nameParameterId)
@@ -369,10 +367,9 @@ public abstract class BaseService implements Serializable {
 	/**
 	 * retrieveData
 	 * 
-	 * @param clientService
 	 * @param url
 	 * @param parameters
-	 * @return Convenience method for retrieving multiple JsonObjects from the server
+	 * @return {Response} Convenience method for retrieving multiple JsonObjects from the server
 	 * @throws ClientServicesException
 	 */
 	public Response retrieveData(String url, Map<String, String> parameters) throws ClientServicesException {
@@ -386,7 +383,7 @@ public abstract class BaseService implements Serializable {
 	 * @param parameters
 	 * @param headers
 	 * @param nameParameterId
-	 * @return
+	 * @return {Response}
 	 * @throws ClientServicesException
 	 */
 	public Response retrieveData(String url, Map<String, String> parameters, Map<String, String> headers, String nameParameterId)
@@ -414,33 +411,31 @@ public abstract class BaseService implements Serializable {
 	/**
 	 * retrieveData()
 	 * 
-	 * @param clientService
 	 * @param url
 	 * @param parameters
 	 * @param nameParameterId
-	 * @return Method to retrieve a single Object from the server
+	 * @return {Response} Method to retrieve a single Object from the server
 	 * @throws ClientServicesException
 	 */
-	//TODO Fix cache with DataHolder object
 	public Response retrieveData(String url, Map<String, String> parameters, String nameParameterId) throws ClientServicesException {
-			return retrieveData(url, parameters, getDefaultHeaders(), nameParameterId);
+		//TODO: Fix cache with DataHolder object
+		return retrieveData(url, parameters, getDefaultHeaders(), nameParameterId);
 	}
 	
 	/**
 	 * Returns true if update completed successfully and false if an error happened
 	 * 
-	 * @param clientService
 	 * @param serviceUrl
 	 * @param parameters
 	 * @param content
 	 * @param nameParameterId - only used to distinguish between cache entries, 
 	 *     must be a valid key of the parameters map
-	 * @return
+	 * @return {Response}
 	 * @throws ClientServicesException
 	 */
-	//TODO: Use Args pattern to pass the headers and avoid hard-coding the content-type
 	public Response updateData(String serviceUrl, Map<String, String> parameters, Object content,
 			String nameParameterId) throws ClientServicesException {
+		//TODO: Use Args pattern to pass the headers and avoid hard-coding the content-type
 	    return updateData(serviceUrl, parameters, getDefaultHeaders(), content, nameParameterId);
 	}
 
@@ -452,7 +447,7 @@ public abstract class BaseService implements Serializable {
 	 * @param headers
 	 * @param content
 	 * @param nameParameterId
-	 * @return
+	 * @return {Response}
 	 * @throws ClientServicesException
 	 */
    public Response updateData(String serviceUrl, Map<String, String> parameters, Map<String, String> headers, Object content, String nameParameterId) throws ClientServicesException {
@@ -496,10 +491,10 @@ public abstract class BaseService implements Serializable {
    }
 	
 	/**
-	 * findInCache()
+	 * finds the object in the cache
 	 * 
-	 * @param userId
-	 * @return Method to search the cache
+	 * @param key
+	 * @return {Object} 
 	 */
 	private Object findInCache(String key) {
 
@@ -539,7 +534,7 @@ public abstract class BaseService implements Serializable {
 	 * Returns a valid parameters HashMap even if null is passed
 	 * 
 	 * @param parameters
-	 * @return
+	 * @return {Map<String, String>}
 	 */
 	protected Map<String, String> getParameters(Map<String, String> parameters) {
 		if(parameters == null) return new HashMap<String, String>();
@@ -549,7 +544,7 @@ public abstract class BaseService implements Serializable {
 	/**
 	 * Return default headers
 	 *  
-	 * @return
+	 * @return {Map<String, String>}
 	 */
 	protected Map<String, String> getDefaultHeaders() {
 		Map<String, String> defaultHeaders = new HashMap<String, String>();
@@ -561,7 +556,7 @@ public abstract class BaseService implements Serializable {
 	 * Return true if the id as email address
 	 * 
 	 * @param id
-	 * @return
+	 * @return {boolean}
 	 */
 	protected boolean isEmail(String id) {
 		return (id == null) ? false : id.contains(AT);

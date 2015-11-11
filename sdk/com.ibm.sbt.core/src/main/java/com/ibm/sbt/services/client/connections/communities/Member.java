@@ -29,7 +29,7 @@ import com.ibm.sbt.services.client.connections.communities.model.CommunityXPath;
 /**
  * This class represents a Connections Community Member entity
  * 
- * @Represents Connections Community Member
+ * IBM Connections Community Member
  * @author Manish Kataria
  * @author Carlos Manias
  */
@@ -84,7 +84,7 @@ public class Member extends Person {
 	}
 	/**
 	 * 
-	 * @return id
+	 * @return {String} id
 	 */
 	public String getUserid() {
 		return getAsString(CommunityXPath.contributorUserid);
@@ -92,7 +92,7 @@ public class Member extends Person {
 
 	/**
 	 * 
-	 * @return name
+	 * @return {String} name
 	 */
 	public String getName() {
 		return getAsString(CommunityXPath.contributorName);
@@ -100,14 +100,14 @@ public class Member extends Person {
 
 	/**
 	 * 
-	 * @return email
+	 * @return {String}email
 	 */
 	public String getEmail() {
 		return getAsString(CommunityXPath.contributorEmail);
 	}
 	
 	/**
-	 * @set name
+	 * sets the name
 	 */
 	public void setName(String name) {
 		setAsString(CommunityXPath.contributorName, name);
@@ -115,7 +115,7 @@ public class Member extends Person {
 
 	/**
 	 * 
-	 * @set id
+	 * sets the id
 	 */
 	public void setUserid(String id) {
 		setAsString(CommunityXPath.contributorUserid, id);
@@ -123,7 +123,7 @@ public class Member extends Person {
 	
 	/**
 	 * 
-	 * @set email
+	 * sets the email
 	 */
 	public void setEmail(String email) {
 		setAsString(CommunityXPath.contributorEmail, email);
@@ -131,14 +131,14 @@ public class Member extends Person {
 	
 	/**
 	 * 
-	 * @return role
+	 * @return {String} role
 	 */
 	public String getRole() {
 		return getAsString(CommunityXPath.role);
 	}
 	
 	/**
-	 * @set role
+	 * sets the role
 	 */
 	public void setRole(String role){
 		setAsString(CommunityXPath.role, role);

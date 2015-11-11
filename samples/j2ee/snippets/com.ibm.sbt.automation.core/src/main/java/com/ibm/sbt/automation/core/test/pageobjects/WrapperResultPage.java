@@ -62,7 +62,7 @@ public class WrapperResultPage extends BaseResultPage{
 	/**
 	 * Get the frame that this page wraps.
 	 * @param by
-	 * @return
+	 * @return {WebElement}
 	 */
 	public WebElement getFrame(By by){
 	    return getWebElement().findElement(by);
@@ -78,7 +78,7 @@ public class WrapperResultPage extends BaseResultPage{
 	
 	/**
 	 * Return the ul WebElement containing the list of news items on the page, switch to the iframe context first.
-	 * @return
+	 * @return {WebElement}
 	 */
 	public WebElement getNewsFeedNode() {
 		return getWebElement().findElement(By.cssSelector("[dojoattachpoint=\"newsFeedNode\"]"));

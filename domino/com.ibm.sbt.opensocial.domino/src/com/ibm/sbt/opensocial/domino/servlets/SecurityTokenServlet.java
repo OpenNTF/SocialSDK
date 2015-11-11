@@ -36,7 +36,7 @@ import com.ibm.sbt.opensocial.domino.internal.OpenSocialPlugin;
  * query parameters.
  * 
  * Parameters in the request to this servlet should be keyed by
- * {@link AbstractSecurityToken.Keys}
+ * link AbstractSecurityToken.Keys
  * 
  * The response, if there was no error, will be JSON of the form
  * 

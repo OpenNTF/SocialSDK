@@ -538,7 +538,7 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
      * <p>when enabled, the endpoint store the connection cookies so the server doesn't create
      * a new session for every connection made increasing response performance for single requests.</p>
      * <p>enable only when endpoint are maintained in a session</p>
-     * @param cookies
+     * @param enableCookies
      */
     public void enableStatefulCookies(boolean enableCookies) {
         this.enableCookies = enableCookies;

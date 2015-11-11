@@ -23,7 +23,7 @@ import com.ibm.sbt.automation.core.utils.Trace;
 /**
  * @author mwallace
  *  
- * @date 5 Mar 2013
+ * @since 5 Mar 2013
  */
 public class BaseServiceTest extends BaseTest {
     
@@ -44,7 +44,7 @@ public class BaseServiceTest extends BaseTest {
     
     /**
      * 
-     * @return
+     * @return {boolean}
      */
     protected boolean checkNoError(String snippetId, boolean allowEmpty) {
         String text = executeSnippet(snippetId);
@@ -54,7 +54,7 @@ public class BaseServiceTest extends BaseTest {
 
     /**
      * 
-     * @return
+     * @return {boolean}
      */
     protected boolean checkNoError(String snippetId) {
         return checkNoError(snippetId, false);
@@ -62,7 +62,7 @@ public class BaseServiceTest extends BaseTest {
 
     /**
      * 
-     * @return
+     * @return {boolean}
      */
     protected boolean checkExpected(String snippetId, String expected) {
         String text = executeSnippet(snippetId);
@@ -128,8 +128,8 @@ public class BaseServiceTest extends BaseTest {
     
     /**
      * @param snippetId
-     * @return
-     */
+     * @return {JavaScriptPreviewPage}
+     */ 
     protected JavaScriptPreviewPage executeSnippet1(String snippetId) {
     	 ResultPage resultPage = launchSnippet(snippetId, authType, 0);
          JavaScriptPreviewPage previewPage = new JavaScriptPreviewPage(resultPage);
@@ -139,7 +139,7 @@ public class BaseServiceTest extends BaseTest {
 
     /**
      * @param snippetId
-     * @return
+     * @return {String}
      */
     protected String executeSnippet(String snippetId) {
         ResultPage resultPage = launchSnippet(snippetId, authType);

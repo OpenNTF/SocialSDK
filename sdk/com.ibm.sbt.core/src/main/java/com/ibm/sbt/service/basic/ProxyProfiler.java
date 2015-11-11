@@ -49,7 +49,7 @@ public class ProxyProfiler {
 
 	/**
 	 * Use this to avoid constructing costly log message when profiler not in use
-	 * @return
+	 * @return {boolean}
 	 */
 	static public boolean enabled() {
 		return statLogger.isLoggable(LOG_LEVEL);

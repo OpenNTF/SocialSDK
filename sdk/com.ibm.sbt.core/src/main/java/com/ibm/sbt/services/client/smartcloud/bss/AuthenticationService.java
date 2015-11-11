@@ -64,7 +64,6 @@ public class AuthenticationService extends BssService {
      * Constructor
      * 
      * @param endpoint
-     * @param cacheSize
      */
     public AuthenticationService(Endpoint endpoint) {
         super(endpoint);
@@ -85,7 +84,6 @@ public class AuthenticationService extends BssService {
      * The current password must be available to perform this action.
      * 
      * @param userCredential
-     * @return
      * @throws BssException
      * @throws JsonException
      * @throws IOException 
@@ -99,7 +97,6 @@ public class AuthenticationService extends BssService {
      * The current password must be available to perform this action.
      * 
      * @param userCredentialJson
-     * @return
      * @throws BssException
      * @throws JsonException
      * @throws IOException 
@@ -113,8 +110,7 @@ public class AuthenticationService extends BssService {
      * Change the password of a subscriber. 
      * The current password must be available to perform this action.
      * 
-     * @param customerObject
-     * @return JSON object containing 
+     * @param userCredentialObject
      * @throws BssException
      * @throws IOException 
      */

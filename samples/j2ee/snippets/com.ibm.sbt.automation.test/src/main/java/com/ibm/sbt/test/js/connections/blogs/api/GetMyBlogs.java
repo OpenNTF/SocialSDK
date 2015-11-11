@@ -26,7 +26,7 @@ import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 /**
  * @author rajmeetbal
  *  
- * @date 08 May 2013
+ * @since 08 May 2013
  */
 public class GetMyBlogs extends BaseApiTest {
     

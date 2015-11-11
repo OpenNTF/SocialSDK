@@ -42,7 +42,7 @@ import com.ibm.sbt.services.client.connections.files.model.FileCreationParameter
 /**
  * @author mwallace
  * 
- * @date 13 Mar 2013
+ * @since 13 Mar 2013
  */
 public class BaseFilesTest extends BaseApiTest {
 
@@ -284,7 +284,7 @@ public class BaseFilesTest extends BaseApiTest {
 		}
 	}
 
-	/** @return */
+	/** @return {boolean} */
 	protected boolean checkNoError(String snippetId) {
 		String text = executeSnippet1(snippetId);
 		return containsNoError(text);
@@ -292,7 +292,7 @@ public class BaseFilesTest extends BaseApiTest {
 
 	/**
 	 * @param snippetId
-	 * @return
+	 * @return {String}
 	 */
 	protected String executeSnippet1(String snippetId) {
 		ResultPage resultPage = launchSnippet(snippetId, authType);

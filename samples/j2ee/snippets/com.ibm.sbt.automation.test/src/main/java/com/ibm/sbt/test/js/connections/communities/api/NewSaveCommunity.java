@@ -25,7 +25,7 @@ import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 /**
  * @author mwallace
  *  
- * @date 19 Mar 2013
+ * @since 19 Mar 2013
  */
 public class NewSaveCommunity extends BaseCommunitiesTest {
     

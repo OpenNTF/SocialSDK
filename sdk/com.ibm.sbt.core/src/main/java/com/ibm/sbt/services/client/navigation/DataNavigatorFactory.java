@@ -23,7 +23,7 @@ import com.ibm.sbt.util.JsonNavigator;
 import com.ibm.sbt.util.XmlNavigator;
 
 /**
- * @Represents SmartCloud Community Member
+ * Data Navigator Factory generates a single instance of the handler for a given format
  * @author Carlos Manias
  */
 public class DataNavigatorFactory {
@@ -32,7 +32,7 @@ public class DataNavigatorFactory {
 	 * Static factory method to return the appropriate instance to handle each data format.
 	 * @param data
 	 * @param dataFormat
-	 * @return
+	 * @return {DataNavigator}
 	 */
 	public static DataNavigator getNavigator(Object data, Handler dataFormat) {
 		if (dataFormat == ClientService.FORMAT_XML) {

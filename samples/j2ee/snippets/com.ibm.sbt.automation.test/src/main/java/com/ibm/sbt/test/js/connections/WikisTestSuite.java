@@ -28,7 +28,7 @@ import com.ibm.sbt.test.js.connections.wikis.api.GetPublicWikis;
 /**
  * @author mark wallace
  * 
- * @date 1 Oct 2013
+ * @since 1 Oct 2013
  */
 @RunWith(Suite.class)
 @SuiteClasses({ 

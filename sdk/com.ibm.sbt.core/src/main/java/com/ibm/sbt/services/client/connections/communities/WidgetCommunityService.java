@@ -81,7 +81,7 @@ public class WidgetCommunityService extends CommunityService {
 	 * @param tags
 	 * @param content
 	 * @param type
-	 * @return
+	 * @return {WidgetCommunity}
 	 */
 	public WidgetCommunity createSubCommunity(Community parentCommunity, String title, Collection<String> tags, String content, String type) throws ClientServicesException {
 		

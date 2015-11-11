@@ -88,7 +88,7 @@ public class WikiPage extends WikiBaseEntity {
 	
 	/**
 	 * Make a request to get the HTML markup of the wiki page.
-	 * @return
+	 * @return {String}
 	 * @throws ClientServicesException
 	 */
 	public String getHtmlMarkup() throws ClientServicesException{
@@ -121,7 +121,7 @@ public class WikiPage extends WikiBaseEntity {
 	
 	/**
 	 * Unique version identifier.
-	 * @return
+	 * @return {String}
 	 */
 	public String getVersionUuid() {
 		return getAsString(WikiXPath.versionUuid);
@@ -129,7 +129,7 @@ public class WikiPage extends WikiBaseEntity {
 
 	/**
 	 * Incremental version number, starting at 1.
-	 * @return
+	 * @return {String}
 	 */
 	public String getVersionLabel() {
 		return getAsString(WikiXPath.versionLabel);
@@ -137,7 +137,7 @@ public class WikiPage extends WikiBaseEntity {
 	
 	/**
 	 * Total number of recommendations of this page.
-	 * @return
+	 * @return {int}
 	 */
 	public int getNumberOfRecomendations() {
 		return getAsInt(WikiXPath.recommendationsCount);
@@ -145,7 +145,7 @@ public class WikiPage extends WikiBaseEntity {
 	
 	/**
 	 * Total number of comments to this page.
-	 * @return
+	 * @return {int}
 	 */
 	public int getNumberOfComments() {
 		return getAsInt(WikiXPath.commentsCount);
@@ -153,7 +153,7 @@ public class WikiPage extends WikiBaseEntity {
 	
 	/**
 	 * Total number of views of this page.
-	 * @return
+	 * @return {int}
 	 */
 	public int getNumberOfViews() {
 		return getAsInt(WikiXPath.viewCount);
@@ -161,7 +161,7 @@ public class WikiPage extends WikiBaseEntity {
 	
 	/**
 	 * Total number of anonymous views of this page.
-	 * @return
+	 * @return {int}
 	 */
 	public int getNumberOfAnonymousViews() {
 		return getAsInt(WikiXPath.anonymousViewsCount);
@@ -169,7 +169,7 @@ public class WikiPage extends WikiBaseEntity {
 	
 	/**
 	 * Total number of attachments to this page.
-	 * @return
+	 * @return {int}
 	 */
 	public int getNumberOfAttachments() {
 		return getAsInt(WikiXPath.attachmentsCount);
@@ -177,7 +177,7 @@ public class WikiPage extends WikiBaseEntity {
 	
 	/**
 	 * Total number of versions of this page.
-	 * @return
+	 * @return {int}
 	 */
 	public int getNumberOfVersions() {
 		return getAsInt(WikiXPath.versionsCount);

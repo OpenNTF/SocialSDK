@@ -24,7 +24,7 @@ import com.ibm.sbt.automation.core.test.BaseServiceTest;
 /**
  * @author rajmeetbal
  * 
- * @date 23 september 2013
+ * @since 23 september 2013
  */
 public class GetFeaturedPosts extends BaseServiceTest {
 

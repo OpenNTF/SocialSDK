@@ -67,7 +67,6 @@ public class AuthorizationService extends BssService {
      * Constructor
      * 
      * @param endpoint
-     * @param cacheSize
      */
     public AuthorizationService(Endpoint endpoint) {
         super(endpoint);
@@ -86,7 +85,7 @@ public class AuthorizationService extends BssService {
     /**
      * Get a list of authorization roles for a subscriber.
      * 
-     * @return
+     * @return {String[]}
      * @throws BssException
      */
     public String[] getRoles(String loginName) throws BssException {

@@ -31,7 +31,7 @@ import com.ibm.sbt.services.endpoints.EndpointFactory;
 
 /**
  * @author mwallace, Francis
- * @date 10 Dec 2012
+ * @since 10 Dec 2012
  */
 public class GetProfileXml {
 

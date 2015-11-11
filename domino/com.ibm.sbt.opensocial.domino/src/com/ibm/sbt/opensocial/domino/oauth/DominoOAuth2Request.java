@@ -77,7 +77,7 @@ public class DominoOAuth2Request implements OAuth2Request {
 	private final Logger log;
 
 	/**
-	 * @param fetcherConfig
+	 * @param tokenStore
 	 *          configuration options for the fetcher
 	 * @param fetcher
 	 *          fetcher to use for actually making requests

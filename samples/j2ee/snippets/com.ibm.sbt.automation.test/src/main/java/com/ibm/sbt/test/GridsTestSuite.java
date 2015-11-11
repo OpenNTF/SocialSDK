@@ -33,7 +33,7 @@ import com.ibm.sbt.test.controls.widget.WidgetBaseClassTest;
 /**
  * @author mwallace
  * 
- * @date 12 Mar 2013
+ * @since 12 Mar 2013
  */
 @RunWith(Suite.class)
 @SuiteClasses({ WidgetBaseClassTest.class,GridTestSuite.class, CommunitiesGridTestSuite.class, FilesGridTestSuite.class, ForumGridTestSuite.class, ProfilesGridTestSuite.class, MySocialGridTestSuite.class})

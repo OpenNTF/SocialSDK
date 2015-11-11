@@ -48,7 +48,7 @@ import com.ibm.sbt.services.endpoints.EndpointFactory;
  * It accomplishes this using the "to:" field in the template, which specifies users to forward the post to. Admin privileges allow forwarding to any user.
  * 
  * @author Carlos Manias, Francis Moloney
- * @date 13 May 2013
+ * @since 13 May 2013
  */
 public class AdminPublishActivityStream {
     
@@ -125,7 +125,7 @@ public class AdminPublishActivityStream {
      * Post the json template to the user's stream. User specified by the endpoint's login.
      * 
      * @param template The JSON template
-     * @return
+     * @return {String}
      * @throws SBTServiceException
      */
     public String postToStream(JsonJavaObject template) throws SBTServiceException {
@@ -141,7 +141,7 @@ public class AdminPublishActivityStream {
     /**
      * 
      * @param template
-     * @return
+     * @return {String}
      * @throws JsonException
      * @throws AuthenticationException
      * @throws SBTServiceException

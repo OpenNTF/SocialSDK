@@ -32,7 +32,7 @@ import com.ibm.sbt.services.endpoints.EndpointFactory;
 
 /**
  * @author mwallace, Francis
- * @date 11 April 2013
+ * @since 11 April 2013
  */
 public class DownloadFileApp {
 

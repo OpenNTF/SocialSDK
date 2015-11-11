@@ -32,7 +32,7 @@ import com.ibm.sbt.test.java.connections.search.GetScopes;
 /**
  * @author mkataria
  * 
- * @date Nov 14 2013
+ * @since Nov 14 2013
  */
 @RunWith(Suite.class)
 @SuiteClasses({ BlogConstraint.class, CommunityFullText.class, CommunityTagSearch.class, GetPeople.class, GetResults.class, GetResultsByTag.class,

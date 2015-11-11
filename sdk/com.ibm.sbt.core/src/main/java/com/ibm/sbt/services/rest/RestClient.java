@@ -59,7 +59,6 @@ public class RestClient {
 	 * @param url The URL of the target server.
 	 * @param user The username to authenticate with.
 	 * @param password The Password to authenticate with.
-	 * @return RestClient An instance of the RestClient
 	 */
 	public RestClient(String url, String user, String password) {
 		BasicEndpoint endpoint = createBasicEndpoint(url, user, password);
@@ -69,8 +68,7 @@ public class RestClient {
 	/**
 	 * Construct a RestClient instance which uses the specified endpoint.
 	 * 
-	 * @param String endpointName The name of the endpoint in Strinf format.
-	 * @return RestClient An instance of the RestClient
+	 * @param endpointName The name of the endpoint in Strinf format.
 	 */
 	public RestClient(String endpointName) {
 		initContext();
@@ -80,8 +78,7 @@ public class RestClient {
 	/**
 	 * Construct a RestClient instance which uses the specified endpoint.
 	 * 
-	 * @param Endpoint The endpoint which the rest client will use
-	 * @return RestClient An instance of the RestClient
+	 * @param endpoint The endpoint which the rest client will use
 	 */
 	public RestClient(Endpoint endpoint) {
 		restService = new RestService(endpoint);
@@ -89,8 +86,6 @@ public class RestClient {
 
 	/**
 	 * Construct a RestClient instance.
-	 * 
-	 * @return RestClient - An instance of the RestClient
 	 */
 	public RestClient() {
 		//FIX: #1664 - RestClient Endpoint Exception

@@ -33,7 +33,7 @@ public enum AuthType {
     /**
      * Get authentication type for the endpoint. like basicAuth, oauth etc.
      * 
-     * @return
+     * @return {String}
      */
     public static String getAuthTypePart(Endpoint endpoint) {
         //TODO: Add support for SSO authentication

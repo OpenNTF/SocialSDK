@@ -43,7 +43,7 @@ import com.ibm.sbt.test.java.connections.activitystreams.UpdatesFromUser;
 /**
  * @author mwallace
  * 
- * @date 6 Mar 2013
+ * @since 6 Mar 2013
  */
 @RunWith(Suite.class)
 @SuiteClasses({ ActionableView.class, AllUpdates.class, CommunitiesIFollow.class, GetStreamEntities.class,MyNetworkUpdates.class, NotificationsForMe.class, NotificationsFromMe.class, 

@@ -23,7 +23,7 @@ import java.util.Map;
 
 /**
  * @author Lorenzo Boccaccia 
- * @date May 28, 2013
+ * @since May 28, 2013
  */
 public class FileCreationParameters {
     

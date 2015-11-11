@@ -72,11 +72,14 @@
 					<runOnlyAtExecutionRoot>false</runOnlyAtExecutionRoot>
 				</configuration>
 			</plugin>
+			
 			<plugin>
 				<groupId>com.googlecode.maven-download-plugin</groupId>
 				<artifactId>maven-download-plugin</artifactId>
 				<version>1.1.0</version>
 				<executions>
+					<!-- PBastide: Removing Tomcat from Deliverable Package -->
+					<!--
 					<execution>
 						<id>download-tomcat-7</id>
 						<phase>generate-resources</phase>
@@ -90,6 +93,7 @@
 							<md5>e34610f342045a817b3a100c07c3d1a3</md5>
 						</configuration>
 					</execution>
+					-->
 					<execution>
 						<id>download-sources</id>
 						<phase>generate-resources</phase>
@@ -127,6 +131,9 @@
 					</dependency>
 				</dependencies>
 			</plugin>
+			
+			<!-- PBastide - Reduce Total Deliverable Size -->
+			<!--
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
@@ -181,7 +188,9 @@
 								</artifactItem>
 
 
-
+								
+								
+								
 								<artifactItem>
 									<groupId>com.ibm.sbt</groupId>
 									<artifactId>com.ibm.sbt.landing</artifactId>
@@ -246,7 +255,7 @@
 									<destFileName>acme.sample.webapp.war</destFileName>
 								</artifactItem>
 
-
+								
 
 
 
@@ -279,13 +288,6 @@
 									<overWrite>true</overWrite>
 									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.61/lib</outputDirectory>
 								</artifactItem>
-
-
-
-
-
-
-
 							</artifactItems>
 							<outputDirectory>${project.build.directory}/wars</outputDirectory>
 							<overWriteReleases>false</overWriteReleases>
@@ -294,6 +296,7 @@
 					</execution>
 				</executions>
 			</plugin>
+			-->
 			<plugin>
 				<artifactId>maven-antrun-plugin</artifactId>
 				<version>1.7</version>
@@ -304,7 +307,9 @@
 						<configuration>
 							<target>
 								<!-- Remove Tomcat -->
+								<!-- Not Used - 
 								<delete dir="${project.build.directory}/tomcat/unzip" />
+								-->
 								<!-- Remove Other Sources -->
 								<delete dir="${project.build.directory}/sources" />
 
@@ -317,6 +322,8 @@
 						<configuration>
 							<target>
 								<!-- Package Tomcat -->
+								<!-- PBastide: Removed Tomcat -->
+								<!--
 								<delete
 									dir="${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.61/webapps/ROOT" />
 
@@ -343,7 +350,7 @@
 								<copy
 									file="./../assembly/platform/tomcat/server.xml"
 									todir="${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.61/conf" overwrite="true" />
-								
+								-->
 								<path id="source_folder_name">
 									<dirset dir="${project.build.directory}/sources/SocialSDK">
 										<include name="SocialSDK*" />
@@ -370,16 +377,18 @@
 								</move>
 								<delete dir="${psource_folder_name_ios}" />
 
-
+								<!-- PBastide - Removed Tomcat -->
+								<!--
 								<zip basedir="${project.build.directory}/tomcat/unzip"
 									destfile="${project.build.directory}/tomcat/apache-tomcat-7.0.61-sbt.zip"
 									compress="true" />
-
+								-->
+								<!-- PBastide: Changed the Zip File to Kit -->
 								<zip basedir="${project.build.directory}/sources/SocialSDK"
-									destfile="${project.build.directory}/sources/SocialSDK.zip"
+									destfile="${workingDir}/kit/SocialSDK-${project.version}.zip"
 									compress="true" />
 								<zip basedir="${project.build.directory}/sources/SocialSDK-iOS"
-									destfile="${project.build.directory}/sources/SocialSDK-iOS.zip"
+									destfile="${workingDir}/kit/SocialSDK-iOS-${project.version}.zip"
 									compress="true" />
 							</target>
 						</configuration>
@@ -447,7 +456,8 @@
 		</dependency>
 
 
-
+		<!--
+		PBastide: Reduce package size
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.sbt.landing</artifactId>
@@ -478,11 +488,7 @@
 			<type>war</type>
 		</dependency>
 
-
-
-
-
-
+		
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>smartcloud.webapp</artifactId>
@@ -504,7 +510,7 @@
 			<version>1.1.11-SNAPSHOT</version>
 			<type>war</type>
 		</dependency>
-
+		-->
 
 	
 
@@ -534,13 +540,15 @@
 			<version>1.1.11-SNAPSHOT</version>
 		</dependency>
 
+		<!-- 
+		PBastide: Reduce package size
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>bss.provisioning.sample.app</artifactId>
 			<version>1.1.11-SNAPSHOT</version>
 			
 		</dependency>
-		
+		-->
 		
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>

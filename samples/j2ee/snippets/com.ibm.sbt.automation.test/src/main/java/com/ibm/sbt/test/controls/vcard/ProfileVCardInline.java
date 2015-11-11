@@ -21,7 +21,7 @@ import com.ibm.sbt.automation.core.test.BaseVCardTest;
 
 /**
  * @author sberrybyrne
- * @date 20 Mar 2013
+ * @since 20 Mar 2013
  */
 public class ProfileVCardInline extends BaseVCardTest{
 

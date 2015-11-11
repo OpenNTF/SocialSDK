@@ -33,7 +33,7 @@ import com.ibm.sbt.test.java.connections.ForumsTestSuite;
 /**
  * @author mwallace
  * 
- * @date 12 Mar 2013
+ * @since 12 Mar 2013
  */
 @RunWith(Suite.class)
 @SuiteClasses({ ActivityStreamsTestSuite.class, BlogsTestSuite.class, CommunitiesTestSuite.class, FilesTestSuite.class, ProfilesTestSuite.class, ActivitiesTestSuite.class, SearchTestSuite.class,ForumsTestSuite.class })

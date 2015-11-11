@@ -26,7 +26,7 @@ import com.ibm.sbt.services.client.connections.communities.Community;
 /**
  * @author mwallace
  * 
- * @date 5 Mar 2013
+ * @since 5 Mar 2013
  */
 public class UpdateCommunity extends BaseCommunitiesTest {
 

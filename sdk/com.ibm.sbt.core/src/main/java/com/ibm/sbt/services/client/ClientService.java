@@ -1332,7 +1332,8 @@ public abstract class ClientService {
 	}
 
 	private boolean checkStatus(int statusCode) {
-		if (statusCode >= 200 && statusCode < 300) {
+		//Issue 1579: Added Status Code 404 as valid status code
+		if ((statusCode >= 200 && statusCode < 300) || statusCode == 404) {
 			return true;
 		}
 		return false;
@@ -1528,7 +1529,8 @@ public abstract class ClientService {
 		return (statusCode != HttpStatus.SC_OK) && 
 			(statusCode != HttpStatus.SC_CREATED) && 
 			(statusCode != HttpStatus.SC_ACCEPTED) && 
-			(statusCode != HttpStatus.SC_NO_CONTENT);
+			(statusCode != HttpStatus.SC_NO_CONTENT) &&
+			(statusCode != HttpStatus.SC_NOT_FOUND);
 	}
 
 	/**

@@ -373,8 +373,24 @@ public class CommunityService extends ConnectionsService {
 	 * @throws ClientServicesException
 	 */
 	public Community getCommunity(String communityUuid, Map<String, String> parameters) throws ClientServicesException {
+		/**
+		 * Issue with 404's being returned. 
+		 */
+		Community comm = null;
+		
+		IFeedHandler<Community> handler = getCommunityFeedHandler();
+		
 		String url = CommunityUrls.COMMUNITY_INSTANCE.format(this,CommunityUrls.getCommunityUuid(communityUuid));
-		return getCommunityEntity(url, parameters);
+		Response response = getClientService().get(requestUrl,parameters);
+		
+		try{
+			checkResponseCode(response,HTTPCode.OK);
+			comm = handler.createEntity(response);
+		}catch(ClientServicesException cse){
+			throw new ClientServicesException(null, "Issue getting community");
+		}
+		
+		return comm;
 	}
 
 	/**

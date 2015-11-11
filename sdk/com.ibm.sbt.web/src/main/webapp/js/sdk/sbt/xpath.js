@@ -24,24 +24,27 @@ define(['./declare'],function(declare) {
 	 * @class sbt.xpath.XPathExpr
 	 */
 	var XPathExpr = declare(null, {
-		ie:		false,
+
 		constructor: function(xpath, nsArray){
 		     this.xpath = xpath;    
 		     this.nsArray = nsArray || {};
-		     if (!document.evaluate && !navigator.getUserMedia) { 
-		    	 this.ie = true;
-		         this.nsString = "";
-		         if (this.nsArray) {
-		             for(var ns in this.nsArray) {
-		                 this.nsString += ' xmlns:' + ns + '="' + this.nsArray[ns] + '"';
-		             }
-		         }
-		     }
 		},
-	
+		
+		setNsString : function() {
+		    this.nsString = "";
+		    if (this.nsArray) {
+			    for(var ns in this.nsArray) {
+			        this.nsString += ' xmlns:' + ns + '="' + this.nsArray[ns] + '"';
+			    }
+		    }
+        },
+
 		selectSingleNode : function(xmlDomCtx) {
 			var doc = xmlDomCtx.ownerDocument || xmlDomCtx;
-			if (this.ie) {
+			if (!doc.evaluate) {
+		        if (!this.nsString) {
+		          this.setNsString();
+		        }
 				try {
 					doc.setProperty("SelectionLanguage", "XPath");
 					doc.setProperty("SelectionNamespaces", this.nsString);
@@ -64,8 +67,11 @@ define(['./declare'],function(declare) {
 		
         selectNumber : function(xmlDomCtx){
             var doc = xmlDomCtx.ownerDocument || xmlDomCtx;
-            if (this.ie) {
-            	return this.selectText(xmlDomCtx);
+            if (!doc.evaluate) {
+                if (!this.nsString) {
+                  this.setNsString();
+                }
+                return this.selectText(xmlDomCtx);
             } else {
                 var _this = this;
                 var result = doc.evaluate(this.xpath, xmlDomCtx,
@@ -78,7 +84,10 @@ define(['./declare'],function(declare) {
 		
 		selectNodes : function(xmlDomCtx) {
 			var doc = xmlDomCtx.ownerDocument || xmlDomCtx;
-			if (this.ie) {
+			if (!doc.evaluate) {
+		        if (!this.nsString) {
+		          this.setNsString();
+		        }
 				try {
 					doc.setProperty("SelectionLanguage", "XPath");
 					doc.setProperty("SelectionNamespaces", this.nsString);

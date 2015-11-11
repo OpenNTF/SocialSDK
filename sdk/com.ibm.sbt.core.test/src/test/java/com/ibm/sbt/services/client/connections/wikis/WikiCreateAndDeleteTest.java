@@ -60,9 +60,13 @@ public class WikiCreateAndDeleteTest extends BaseWikiServiceTest {
 		assertEquals(createdWiki.getLabel(), wikiGot.getLabel());
 		
 		//Checks when the Label for the Wiki Doesn't exist
-		wikiService.deleteWiki(createdWiki.getLabel());
 		thrown.expect(ClientServicesException.class);
 		thrown.expectMessage("Wiki Not Found");
-		wikiService.getWiki(createdWiki.getLabel(), null);
+		wikiService.deleteWiki(createdWiki.getLabel()+"INVALID");
+		
+		// Checks when the Label for the Wiki Doesn't Exist 
+		thrown.expect(ClientServicesException.class);
+		thrown.expectMessage("Wiki Not Found");
+		wikiService.getWiki(createdWiki.getLabel()+"INVALID", null);
 	}
 }

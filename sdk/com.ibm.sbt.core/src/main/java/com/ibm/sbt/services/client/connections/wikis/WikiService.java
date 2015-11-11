@@ -344,8 +344,21 @@ public class WikiService extends ConnectionsService {
 	 * @throws ClientServicesException
 	 */
 	public Wiki getWiki(String wikiLabel, Map<String, String> parameters) throws ClientServicesException {
+		Wiki result = null;
+		IFeedHandler<Wiki> handler = getWikiFeedHandler();
+		
 		String requestUrl = WikiUrls.WIKI.format(this, WikiUrls.getWikiLabel(wikiLabel)); 
-		return getWikiEntity(requestUrl, parameters);
+		Response response = getClientService().get(requestUrl,parameters);
+		
+		try{
+			checkResponseCode(response,HTTPCode.OK);
+			result = handler.createEntity(response);
+		}catch(ClientServicesException cse){
+			checkResponseCode(response,HTTPCode.NOT_FOUND);
+			throw new ClientServicesException(new Exception("Wiki Not Found"));
+		}
+		
+		return result;		
 	}
 
 	/**
@@ -461,8 +474,21 @@ public class WikiService extends ConnectionsService {
 	 * @throws ClientServicesException
 	 */
 	public WikiPage getWikiPage(String wikiLabel, String pageLabel, Map<String, String> parameters) throws ClientServicesException {
+		WikiPage result = null;
+		IFeedHandler<WikiPage> handler = getWikiPageFeedHandler();
+		
 		String requestUrl = WikiUrls.WIKI_PAGE.format(this, WikiUrls.getWikiLabel(wikiLabel), WikiUrls.getWikiPage(pageLabel));
-		return getWikiPageEntity(requestUrl, parameters);
+		Response response = getClientService().get(requestUrl,parameters);
+		
+		try{
+			checkResponseCode(response,HTTPCode.OK);
+			result = handler.createEntity(response);
+		}catch(ClientServicesException cse){
+			checkResponseCode(response,HTTPCode.NOT_FOUND);
+			throw new ClientServicesException(new Exception("Wiki Page Not Found"));
+		}
+		
+		return result;
 	}
 
 	/**
@@ -533,9 +559,9 @@ public class WikiService extends ConnectionsService {
 		try{
 			checkResponseCode(response, HTTPCode.NO_CONTENT);		
 		}catch(ClientServicesException cse){
-			//The Wiki does not exist/is not found
+			//The Wiki Page does not exist/is not found
 			checkResponseCode(response, HTTPCode.NOT_FOUND);
-			throw new ClientServicesException(new Exception("Wiki Not Found"));
+			throw new ClientServicesException(new Exception("Wiki Page Not Found"));
 		}
 		
 	}

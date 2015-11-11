@@ -238,6 +238,7 @@ public class CommunityService extends ConnectionsService {
 	public EntityList<Invite> getMyInvites() throws ClientServicesException {
 		return getMyInvites(null);
 	}
+	
 	/**
 	 * Get a list of the outstanding community invitations of the currently authenticated 
 	 * user or provide parameters to search for a subset of those invitations.
@@ -251,6 +252,22 @@ public class CommunityService extends ConnectionsService {
 	 */
 	public EntityList<Invite> getMyInvites(Map<String, String> parameters) throws ClientServicesException {
 		String url = CommunityUrls.COMMUNITY_MYINVITES.format(this);
+		return getInviteEntityList(url, parameters);
+	}
+	
+	/**
+	 * Get a list of the invitations of a community 
+	 * 
+	 * @method getCommunityInvites
+	 * @param communityUuid
+	 * @param parameters
+	 * 				 Various parameters that can be passed to get a feed of members of a community. 
+	 * 				 The parameters must be exactly as they are supported by IBM Connections like ps, sortBy etc.
+	 * @return {EntityList<Invite>} pending invites for the authenticated user
+	 * @throws ClientServicesException
+	 */
+	public EntityList<Invite> getCommunityInvites(String communityUuid, Map<String, String> parameters) throws ClientServicesException {
+		String url = CommunityUrls.COMMUNITY_INVITES.format(this, CommunityUrls.getCommunityUuid(communityUuid));
 		return getInviteEntityList(url, parameters);
 	}
 	

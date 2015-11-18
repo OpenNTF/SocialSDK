@@ -53,6 +53,8 @@ import com.ibm.sbt.util.SBTException;
  */
 public abstract class AbstractEndpoint implements Endpoint, Cloneable {
 
+    private String appKey;
+
     private Map<String, String> serviceMappings = new HashMap<String, String>();
     private String url;
     private String name;
@@ -179,6 +181,23 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
     public void setUrl(String url) {
         this.url = url;
     }
+	
+	/**
+	 * returns the appkey from the managed-bean or endpoint. 
+	 * @return {String} 
+	 */
+	public String getAppKey(){
+		return appKey;
+	}
+	
+	/**
+	 * sets the given appKey for the Endpoint 
+	 * @param appKey the given appKey that is to be used in the ClientService
+	 */
+	public void setAppKey(String appKey){
+		this.appKey = appKey;
+	}
+	
     /**
      * returns the Endpoint bean name
      * 

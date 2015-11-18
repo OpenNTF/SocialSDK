@@ -15,6 +15,7 @@
  */
 package com.ibm.sbt.services.client;
 
+import static com.ibm.sbt.services.client.base.CommonConstants.APPKEY;
 import static com.ibm.sbt.services.client.base.CommonConstants.APPLICATION_JSON;
 import static com.ibm.sbt.services.client.base.CommonConstants.APPLICATION_OCTET_STREAM;
 import static com.ibm.sbt.services.client.base.CommonConstants.APPLICATION_XML;
@@ -1235,11 +1236,23 @@ public abstract class ClientService {
 		return processResponse(httpClient, httpRequestBase, response, args);
 	}
 
+	/**
+	 * prepares the request and adds custom/required headers
+	 */
 	protected void prepareRequest(HttpClient httpClient, HttpRequestBase httpRequestBase, Args args,
 			Content content) throws ClientServicesException {
 		// TODO: add support for gzip content
 		// httpClient.addRequestHeader("Accept-Encoding", "gzip");
 
+		//Sets the AppKey Header for the Given Request APPKEY
+		if(endpoint != null){
+			String appKey = endpoint.getAppKey();
+			if(appKey != null){
+				httpClient.addRequestHeader(APPKEY,appKey);
+			}
+		}
+		
+		
 		if (args.getHeaders() != null) {
 			addHeaders(httpClient, httpRequestBase, args);
 		}

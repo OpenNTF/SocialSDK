@@ -100,7 +100,7 @@ public class OAuth2Handler extends OAuthHandler {
     private static final ProfilerType profilerDeleteToken = new ProfilerType("OAuth: Delete a token from the store"); //$NON-NLS-1$
     
 	//for logging 
-	private static final String sourceClass = OAuth1Handler.class.getName();
+	private static final String sourceClass = OAuth2Handler.class.getName();
     private static final Logger logger = Logger.getLogger(sourceClass);
 
 	public OAuth2Handler() {

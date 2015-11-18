@@ -408,7 +408,16 @@ public interface Endpoint {
      * This is to be used in development/debug mode only, when we want to capture all network traffic from SDK.
      */
     public String getHttpProxy();
-
+	
+	/**
+	 * gets the application key
+	 */
+	public String getAppKey();
+	
+	/**
+	 * gets the given appkey 
+	 */
+	 public void setAppKey(String appKey);
     
     /**
      * Allows an endpoint to append query args to a proxied request.

@@ -1246,9 +1246,9 @@ public abstract class ClientService {
 
 		//Sets the AppKey Header for the Given Request APPKEY
 		if(endpoint != null){
-			String appKey = endpoint.getAppKey();
+			String appKey = ((com.ibm.sbt.services.endpoints.AbstractEndpoint) endpoint).getAppKey();
 			if(appKey != null){
-				httpClient.addRequestHeader(APPKEY,appKey);
+				httpRequestBase.addHeader(APPKEY,appKey);
 			}
 		}
 		

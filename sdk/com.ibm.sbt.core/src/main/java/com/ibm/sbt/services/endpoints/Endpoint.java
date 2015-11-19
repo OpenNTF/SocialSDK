@@ -412,12 +412,12 @@ public interface Endpoint {
 	/**
 	 * gets the application key
 	 */
-	public String getAppKey();
+	//public String getAppKey();
 	
 	/**
 	 * gets the given appkey 
 	 */
-	 public void setAppKey(String appKey);
+	 //public void setAppKey(String appKey);
     
     /**
      * Allows an endpoint to append query args to a proxied request.

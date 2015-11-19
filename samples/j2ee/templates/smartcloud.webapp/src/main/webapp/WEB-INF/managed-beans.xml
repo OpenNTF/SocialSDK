@@ -59,6 +59,12 @@
 			<property-name>forceTrustSSLCertificate</property-name>
 			<value>true</value>
 		</managed-property>
+		
+		<!-- Application Key -->
+		<managed-property>
+			<property-name>appKey</property-name>
+			<value>app_123456789_1234560</value>
+		</managed-property>
 	</managed-bean>	
         
 	<!--  SmartCloud OAuth 1.0 -->	

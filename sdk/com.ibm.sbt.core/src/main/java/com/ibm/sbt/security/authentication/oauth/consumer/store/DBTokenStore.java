@@ -54,6 +54,8 @@ public class DBTokenStore implements TokenStore {
 	private String			defaultJndiName = "jdbc/ibmsbt-dbtokenstore";
 	private TokenStoreEncryptor encryptorClass;
 	
+	final static String TYPE = "DBTOKENSTORE";
+	
 	public DBTokenStore() {
 //		setJdbcDriverClass("org.apache.derby.jdbc.EmbeddedDriver");
 	}
@@ -180,8 +182,10 @@ public class DBTokenStore implements TokenStore {
 		try {
 			Connection connection = getConnectionUsingJNDI();
 			try {
+					//Issue 1478: Resolving issue with the Access Token
+					// Changed SELECT ACCESSTOKEN FROM USERTOKEN WHERE APPID = ? AND SERVICENAME = ? AND USERID = ? to the proper query
 					PreparedStatement stmt = connection
-							.prepareStatement("SELECT ACCESSTOKEN FROM USERTOKEN WHERE APPID = ? AND SERVICENAME = ? AND USERID = ?");
+							.prepareStatement("SELECT SBTKREP.CREDENTIALTOKEN FROM SBTKREP WHERE APPID = ? AND SERVICENAME = ? AND USERID = ?");
 					try {
 						stmt.setString(1, appId);
 						stmt.setString(2, serviceName);
@@ -216,20 +220,25 @@ public class DBTokenStore implements TokenStore {
 	private void setConsumerToken(String appId, String serviceName, String consumerKey, String moduleId,
 			String tokenName, String userId, Object token) throws OAuthException {
 
+		
 		try {
 			Connection connection = getConnectionUsingJNDI();
 			try {
+				//Issue 1478: Resolving issue with the Access Token
+				// Change INSERT INTO USERTOKEN VALUES (?, ?, ?, ?) 
 				PreparedStatement ps = connection
-						.prepareStatement("INSERT INTO USERTOKEN VALUES (?, ?, ?, ?)");
+						.prepareStatement("INSERT INTO SBTKREP (APPID,SERVICENAME,TYPE,USERID,CREDENTIALTOKEN) VALUES (?, ?, ?, ?, ?)");
 				try {
 					ps.setString(1, appId);
 					ps.setString(2, serviceName);
-					ps.setString(3, userId);
-
+					ps.setString(3, TYPE); //added value for DBTokenStore
+					ps.setString(4, userId);
+					
+					//Converts the AccessToken to a ByteStream and Encrypts it
 					byte[] data = convertToBytes(token);
 					data = getEncryptorClass().encrypt(data);
 					
-					ps.setObject(4, data);
+					ps.setObject(5, data);
 					ps.executeUpdate();
 				} finally {
 					ps.close();
@@ -251,7 +260,7 @@ public class DBTokenStore implements TokenStore {
 			Connection connection = getConnectionUsingJNDI();
 			try {
 				PreparedStatement ps = connection
-						.prepareStatement("DELETE FROM USERTOKEN WHERE APPID = ? AND SERVICENAME = ? AND USERID = ?");
+						.prepareStatement("DELETE FROM SBTKREP WHERE APPID = ? AND SERVICENAME = ? AND USERID = ?");
 				try {
 					ps.setString(1, appId);
 					ps.setString(2, serviceName);

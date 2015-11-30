@@ -90,9 +90,39 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
     protected static final String PLATFORM_SAMETIME = "sametime";
     protected static final String PLATFORM_DROPBOX = "dropbox";
     protected static final String PLATFORM_TWITTER = "twitter";
+	
+	//Adds support for the API Management feature 
+	private static final String HEADER_APIM_SESSION_ID = "apim-session-id";
+	private String apiSessionId = "";
     
     public AbstractEndpoint() {
     }
+	
+	/** 
+	 * sets the api session id 
+	 */
+	public void setSessionId(String sessionId){
+		this.apiSessionId = sessionId;
+	}
+	
+	/**
+	 * gets the session id for the given endpoint and the user
+	 * @return {String} the session id for the given user
+	 */
+	 public String getSessionId(){
+		 return apiSessionId;
+	 }
+	 /**
+	  * checks for a given api-session-id on a response, and updates the endpoint with the given id. 
+	  * @return {Response} the Response from the API call, and updates the Endpoint
+	  */
+	 public Response processSessionId(Response response){
+		 String val = getResponseHeader(HEADER_APIM_SESSION_ID);
+		 if(val != null){
+			 this.setSessionId(val);
+		 }
+		 return response;
+	 }
     
     /* (non-Javadoc)
      * @see com.ibm.sbt.services.endpoints.Endpoint#setListener(com.ibm.sbt.services.client.ClientServiceListener)
@@ -420,7 +450,8 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
     @Override
 	public Response xhr(String method, ClientService.Args args, Object content) throws ClientServicesException {
     	ClientService srv = getClientService();
-    	return srv.xhr(method,args,content);
+		Response res = srv.xhr(method,args,content);
+    	return processSessionId(res);
     }
     @Override
 	public ClientService getClientService() throws ClientServicesException {
@@ -457,70 +488,86 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
 
     @Override
 	public Response xhrGet(String serviceUrl) throws ClientServicesException {
-    	return getClientService().get(serviceUrl);
+		Response res = getClientService().get(serviceUrl); 
+    	return processSessionId(res);
     }
     @Override
 	public Response xhrGet(String serviceUrl, Map<String, String> parameters) throws ClientServicesException {
-    	return getClientService().get(serviceUrl, parameters);
+		Response res = getClientService().get(serviceUrl, parameters);
+    	return processSessionId(res);
     }
     @Override
 	public Response xhrGet(String serviceUrl, Map<String, String> parameters, Handler format) throws ClientServicesException {
-    	return getClientService().get(serviceUrl, parameters, format);
+		Response res = getClientService().get(serviceUrl, parameters, format);
+    	return processSessionId(res);
     }
     @Override
     public Response xhrGet(Args args) throws ClientServicesException {
-    	return getClientService().get(args);
+		Response res = getClientService().get(args);
+    	return processSessionId(res);
     }
     
     @Override
 	public Response xhrPost(String serviceUrl, Object content) throws ClientServicesException {
-    	return getClientService().post(serviceUrl, content);
+		Response res = getClientService().post(serviceUrl, content);
+    	return processSessionId(res);
     }
     @Override
 	public Response xhrPost(String serviceUrl, Map<String, String> parameters, Object content) throws ClientServicesException {
-    	return getClientService().post(serviceUrl, parameters, content);
+    	Response res = getClientService().post(serviceUrl, parameters, content);
+		return processSessionId(res);
     }
     @Override
 	public Response xhrPost(String serviceUrl, Map<String, String> parameters, Object content, Handler format) throws ClientServicesException {
-    	return getClientService().post(serviceUrl, parameters, content, format);
+		Response res = getClientService().post(serviceUrl, parameters, content, format);
+    	return processSessionId(res);
     }
     @Override
     public Response xhrPost(Args args, Object content) throws ClientServicesException {
-    	return getClientService().post(args, content);
+		Response res = getClientService().post(args, content);
+    	return processSessionId(res);
     }
 
     @Override
 	public Response xhrPut(String serviceUrl, Object content) throws ClientServicesException {
-    	return getClientService().put(serviceUrl, content);
+    	Response res = getClientService().put(serviceUrl, content);
+		return processSessionId(res);
     }
     @Override
 	public Response xhrPut(String serviceUrl, Map<String, String> parameters, Object content) throws ClientServicesException {
-    	return getClientService().put(serviceUrl, parameters, content);
+		Response res = getClientService().put(serviceUrl, parameters, content);
+    	return processSessionId(res);
     }
     @Override
 	public Response xhrPut(String serviceUrl, Map<String, String> parameters, Object content, Handler format) throws ClientServicesException {
-    	return getClientService().put(serviceUrl, parameters, content, format);
+    	Response res = getClientService().put(serviceUrl, parameters, content, format);
+		return processSessionId(res);
     }
     @Override
     public Response xhrPut(Args args, Object content) throws ClientServicesException {
-    	return getClientService().put(args, content);
+    	Response res = getClientService().put(args, content);
+		return processSessionId(res);
     }
 
     @Override
 	public Response xhrDelete(String serviceUrl) throws ClientServicesException {
-    	return getClientService().delete(serviceUrl);
+    	Response res = getClientService().delete(serviceUrl);
+		return processSessionId(res);
     }
     @Override
 	public Response xhrDelete(String serviceUrl, Map<String, String> parameters) throws ClientServicesException {
-    	return getClientService().delete(serviceUrl, parameters);
+    	Response res = getClientService().delete(serviceUrl, parameters);
+		return processSessionId(res);
     }
     @Override
 	public Response xhrDelete(String serviceUrl, Map<String, String> parameters, Handler format) throws ClientServicesException {
-    	return getClientService().delete(serviceUrl, parameters, format);
+    	Response res = getClientService().delete(serviceUrl, parameters, format);
+		return processSessionId(res);
     }
     @Override
     public Response xhrDelete(Args args) throws ClientServicesException {
-    	return getClientService().delete(args);
+		Response res = getClientService().delete(args);
+    	return processSessionId(res);
     }
     @Override
     public String getProxyQueryArgs() {

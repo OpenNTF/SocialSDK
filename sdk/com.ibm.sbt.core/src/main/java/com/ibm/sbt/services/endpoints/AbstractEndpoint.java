@@ -94,9 +94,44 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
 	//Adds support for the API Management feature 
 	private static final String HEADER_APIM_SESSION_ID = "apim-session-id";
 	private String apiSessionId = "";
+	
+	//Adds support for the X-LConn-RunAs header
+	public static final String HEADER_X_LCONN_RUNAS = "X-LConn-RunAs";
+	prviate static final int AVG_HEADER_COUNT = 2;
+	private java.util.HashMap<String,String> headers = new java.util.HashMap<String,String>(AVG_HEADER_COUNT);
     
     public AbstractEndpoint() {
     }
+	
+	/**
+	 * clears the headers which are used to make requests for the endpoint
+	 */
+	public void clearHeaders(){
+		headers.clear();
+	}
+	
+	/**
+	 * the map with the headers
+	 * 
+	 * @return {java.util.HashMap<String,String>} header 
+	 */
+	public java.util.HashMap<String,String> getHeaders(){
+		return headers;
+	}
+	
+	/**
+	 * add the header with the name:value to the headers map
+	 */
+	 public void addHeader(String headerName, String headerValue){
+		 headers.put(headerName,headerValue);
+	 }
+	
+	/**
+	 * removes the header with the given name
+	 */
+	public void remove(String headerName){
+		headers.remove(headerName);
+	}
 	
 	/** 
 	 * sets the api session id 

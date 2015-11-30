@@ -1250,6 +1250,14 @@ public abstract class ClientService {
 			if(appKey != null){
 				httpRequestBase.addHeader(APPKEY,appKey);
 			}
+			
+			//Adds the Headers to the httpRequestBase
+			java.util.HashMap<String,String> headers = ((com.ibm.sbt.services.endpoints.AbstractEndpoint) endpoint).getHeaders();
+			Set<String> headerNames = headers.keySet();
+			for(String headerName : headerNames){
+				String headerVal = headers.get(headerName);
+				httpRequestBase.addHeader(headerName,headerVal);
+			}
 		}
 		
 		

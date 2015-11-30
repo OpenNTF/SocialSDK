@@ -117,7 +117,7 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
 	  * @return {Response} the Response from the API call, and updates the Endpoint
 	  */
 	 public Response processSessionId(Response response){
-		 String val = getResponseHeader(HEADER_APIM_SESSION_ID);
+		 String val = response.getResponseHeader(HEADER_APIM_SESSION_ID);
 		 if(val != null){
 			 this.setSessionId(val);
 		 }

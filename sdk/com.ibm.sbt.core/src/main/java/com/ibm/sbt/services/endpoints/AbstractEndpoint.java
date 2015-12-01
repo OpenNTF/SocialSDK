@@ -97,7 +97,7 @@ public abstract class AbstractEndpoint implements Endpoint, Cloneable {
 	
 	//Adds support for the X-LConn-RunAs header
 	public static final String HEADER_X_LCONN_RUNAS = "X-LConn-RunAs";
-	prviate static final int AVG_HEADER_COUNT = 2;
+	private static final int AVG_HEADER_COUNT = 2;
 	private java.util.HashMap<String,String> headers = new java.util.HashMap<String,String>(AVG_HEADER_COUNT);
     
     public AbstractEndpoint() {

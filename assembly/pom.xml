@@ -417,6 +417,31 @@
 					</execution>
 				</executions>
 			</plugin>
+			
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.8</version>
+				<executions>
+					<!-- Automates the movement of the js files to the approved assembly 
+						location -->
+					<execution>
+						<id>move-cdnjs</id>
+						
+						<!-- phase selected is deploy - ONLY EXECUTED WHEN DEPLOY/INSTALL to Nexus.  to debug use clean -->
+						<phase>deploy</phase> 
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target>
+								<ant antfile="deploy-cdnjs.xml" />
+								<echo message="Finished Calling Target" />
+							</target>
+							
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 
 	</build>

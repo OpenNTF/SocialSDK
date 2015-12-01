@@ -303,21 +303,33 @@
 				<artifactId>maven-antrun-plugin</artifactId>
 				<version>1.7</version>
 				<executions>
-					<execution>
+					<!-- Optimization for Deploy only downloads - generates dummy files and directories for the assembly portion -->
+					<!--execution>
+						<id>make-source-directory</id>
+						<phase>generate-sources</phase>
+						<configuration>
+							<target>
+								<mkdir dir="${project.build.directory}/sources/SocialSDK-iOS"/>
+								<touch file="${project.build.directory}/sources/SocialSDK-iOS/blank"/>
+								<mkdir dir="${project.build.directory}/sources/SocialSDK"/>
+								<touch file="${project.build.directory}/sources/SocialSDK/blank"/>
+							</target>
+						</configuration>
+					</execution-->
+					<!-- Set the Execution to Ignore -->
+					<!-- Remove Other Sources -->
+					<!--execution>
+					
 						<id>removedownloads</id>
 						<phase>generate-sources</phase>
 						<configuration>
 							<target>
-								<!-- Remove Tomcat -->
-								<!-- Not Used - 
-								<delete dir="${project.build.directory}/tomcat/unzip" />
-								-->
-								<!-- Remove Other Sources -->
 								<delete dir="${project.build.directory}/sources" />
 
 							</target>
 						</configuration>
 					</execution>
+					-->
 					<execution>
 						<id>tomcat</id>
 						<phase>package</phase>
@@ -352,13 +364,27 @@
 								<copy
 									file="./../assembly/platform/tomcat/server.xml"
 									todir="${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.61/conf" overwrite="true" />
+								
 								-->
+								
+								<!-- Creates an Empty Directory -->
+								<!-- Package Only Execution
 								<path id="source_folder_name">
 									<dirset dir="${project.build.directory}/sources/SocialSDK">
 										<include name="SocialSDK*" />
 									</dirset>
 								</path>
 								<property name="psource_folder_name" refid="source_folder_name" />
+								
+								
+								<mkdir dir="/assembly/target/sources/SocialSDK"/>
+								<mkdir dir="/assembly/target/sources/SocialSDK-iOS"/>
+								<touch file="/assembly/target/sources/SocialSDK-iOS/dummy"/>
+								<touch file="/assembly/target/sources/SocialSDK/dummy"/>
+								<touch file="/assembly/target/sources/SocialSDK-iOS/SocialSDK-dummy"/>
+								<touch file="/assembly/target/sources/SocialSDK/SocialSDK-dummy"/>
+								
+								
 								<move todir="${project.build.directory}/sources/SocialSDK">
 									<fileset dir="${psource_folder_name}">
 										<include name="**/*" />
@@ -378,7 +404,8 @@
 									</fileset>
 								</move>
 								<delete dir="${psource_folder_name_ios}" />
-
+								-->
+								
 								<!-- PBastide - Removed Tomcat -->
 								<!--
 								<zip basedir="${project.build.directory}/tomcat/unzip"
@@ -386,12 +413,15 @@
 									compress="true" />
 								-->
 								<!-- PBastide: Changed the Zip File to Kit -->
-								<zip basedir="${project.build.directory}/sources/SocialSDK"
+								<!--zip basedir="${project.build.directory}/sources/SocialSDK"
 									destfile="${workingDir}/kit/SocialSDK-${project.version}.zip"
 									compress="true" />
 								<zip basedir="${project.build.directory}/sources/SocialSDK-iOS"
 									destfile="${workingDir}/kit/SocialSDK-iOS-${project.version}.zip"
-									compress="true" />
+									compress="true" /-->
+									
+								<move file="${project.build.directory}/sources/SocialSDK-iOS/SocialSDK-iOS.zip" tofile="${workingDir}/kit/SocialSDK-iOS-${project.version}.zip" quiet="true" failonerror="false"/>
+								<move file="${project.build.directory}/sources/SocialSDK/SocialSDK.zip" tofile="${workingDir}/kit/SocialSDK-${project.version}.zip" quiet="true" failonerror="false"/>
 							</target>
 						</configuration>
 						<goals>

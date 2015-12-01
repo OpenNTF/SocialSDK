@@ -96,7 +96,8 @@
 					-->
 					<execution>
 						<id>download-sources</id>
-						<phase>generate-resources</phase>
+						<!-- generate-resources was the original --> 
+						<phase>deploy</phase>
 						<goals>
 							<goal>wget</goal>
 						</goals>
@@ -110,7 +111,8 @@
 					</execution>
 					<execution>
 						<id>download-sources-ios</id>
-						<phase>generate-resources</phase>
+						<!-- generate-resources was the original --> 
+						<phase>deploy</phase>
 						<goals>
 							<goal>wget</goal>
 						</goals>

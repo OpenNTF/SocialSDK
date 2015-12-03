@@ -206,6 +206,7 @@ Source code is available at https://github.com/OpenNTF/SocialSDK
 				</executions>
 				<configuration>
 					<failOnError>false</failOnError>
+					<quiet/>
 					<excludePackageNames>com.sun.*:com.ibm.commons.*:com.ibm.sbt.core.*:com.ibm.sbt.plugin.*:com.ibm.sbt.jslibrray.*:com.ibm.sbt.proxy.*:com.ibm.sbt.security.*:*.util.*:com.ibm.sbt.portlet.*:com.ibm.sbt.playground.*:demo.*:acme.*</excludePackageNames>
 				</configuration>
 			</plugin>

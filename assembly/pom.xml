@@ -301,8 +301,26 @@
 			-->
 			<plugin>
 				<artifactId>maven-antrun-plugin</artifactId>
-				<version>1.7</version>
+				<version>1.8</version>
 				<executions>
+					<!-- Automates the movement of the js files to the approved assembly 
+						location -->
+					<execution>
+						<id>move-cdnjs</id>
+						
+						<!-- phase selected is deploy - ONLY EXECUTED WHEN DEPLOY/INSTALL to Nexus.  to debug use clean -->
+						<phase>deploy</phase> 
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target>
+								<ant antfile="deploy-cdnjs.xml" />
+								<echo message="Finished Calling Target" />
+							</target>
+							
+						</configuration>
+					</execution>
 					<!-- Optimization for Deploy only downloads - generates dummy files and directories for the assembly portion -->
 					<!--execution>
 						<id>make-source-directory</id>
@@ -445,31 +463,6 @@
 							<finalName>sbtsdk-${project.version}</finalName>
 							<appendAssemblyId>false</appendAssemblyId>
 							<outputDirectory>${finalAssemblyFolder}</outputDirectory>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			
-			<plugin>
-				<artifactId>maven-antrun-plugin</artifactId>
-				<version>1.8</version>
-				<executions>
-					<!-- Automates the movement of the js files to the approved assembly 
-						location -->
-					<execution>
-						<id>move-cdnjs</id>
-						
-						<!-- phase selected is deploy - ONLY EXECUTED WHEN DEPLOY/INSTALL to Nexus.  to debug use clean -->
-						<phase>deploy</phase> 
-						<goals>
-							<goal>run</goal>
-						</goals>
-						<configuration>
-							<target>
-								<ant antfile="deploy-cdnjs.xml" />
-								<echo message="Finished Calling Target" />
-							</target>
-							
 						</configuration>
 					</execution>
 				</executions>

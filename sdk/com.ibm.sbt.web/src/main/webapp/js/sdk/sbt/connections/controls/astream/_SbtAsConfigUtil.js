@@ -13,7 +13,7 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-define(["../../../declare", "../../../config", "../../../url", "../../../Promise"], function(declare, config, Url, Promise){
+define(["../../../declare", "../../../config", "../../../url", "../../../Promise","../../../connections/ActivityStreamConstants"], function(declare, config, Url, Promise, consts){
     /*
      * @class sbt.controls.astream._SbtAsConfigUtil A helper module for building ActivityStream config objects.
      */
@@ -44,10 +44,11 @@ define(["../../../declare", "../../../config", "../../../url", "../../../Promise
          */
         getUserInfo: function() {
             var promise = new Promise();
-            var microbloggingUrl = lconn.core.config.services.microblogging.secureUrl;
-            microbloggingUrl = microbloggingUrl.replace(this.xhrHandler.getEndpoint().getProxyUrl(), "");
-            relativeUrl = microbloggingUrl.indexOf("/") === 0 ? microbloggingUrl : new Url(microbloggingUrl).getPath();
-            var serviceUrl = relativeUrl + "/" + this.xhrHandler.endpoint.authType + "/rest/people/@me/@self";
+            //var microbloggingUrl = lconn.core.config.services.microblogging.secureUrl;
+            //microbloggingUrl = microbloggingUrl.replace(this.xhrHandler.getEndpoint().getProxyUrl(), "");
+            //relativeUrl = microbloggingUrl.indexOf("/") === 0 ? microbloggingUrl : new Url(microbloggingUrl).getPath();
+			//PBastide: removed relativeUrl as it is call a private API
+            var serviceUrl = consts.ActivityStreamUrls.activityStreamBaseUrl + "/" + this.xhrHandler.endpoint.authType + "/rest/people/@me/@self";
             serviceUrl = this.xhrHandler.correctUrlAuth(serviceUrl); // ensure correct url for given auth type.
             
             this.xhrHandler.xhrGet({

@@ -58,7 +58,9 @@ var profile = {
 				"sbt/_config"
 			],
 			customBase: true,
-			boot: false 
+			boot: false,
+			resourceName : "SBT Core Dojo AMD", 
+			name: "sbt-core-dojo-amd"
 		},
 		"sbt-extra-controls-dojo-amd": {
 			include: [
@@ -68,7 +70,9 @@ var profile = {
 				"sbt/_config"
 			],
 			customBase: true,
-			boot: false 
+			boot: false,
+			resourceName : "SBT Core Dojo AMD Controls",
+			name: "sbt-extra-controls-dojo-amd"
 		}
 	}
 };

@@ -16,7 +16,7 @@
 	<parent>
 		<groupId>com.ibm.sbt</groupId>
 		<artifactId>com.ibm.sbt</artifactId>
-		<version>1.1.11-SNAPSHOT</version>
+		<version>1.1.11.20151208-1200</version>
 	</parent>
 
 	<build>
@@ -480,28 +480,28 @@
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>sbt.dojo180</artifactId>
 
-			<version>1.1.11-SNAPSHOT</version>
+			<version>1.1.11.20151208-1200</version>
 			<type>war</type>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>sbt.jquery182</artifactId>
 
-			<version>1.1.11-SNAPSHOT</version>
+			<version>1.1.11.20151208-1200</version>
 			<type>war</type>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>sbt.bootstrap211</artifactId>
 
-			<version>1.1.11-SNAPSHOT</version>
+			<version>1.1.11.20151208-1200</version>
 			<type>war</type>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>sbt.sample.web</artifactId>
 
-			<version>1.1.11-SNAPSHOT</version>
+			<version>1.1.11.20151208-1200</version>
 			<type>war</type>
 		</dependency>
 
@@ -570,24 +570,24 @@
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.sbt.web</artifactId>
 
-			<version>1.1.11-SNAPSHOT</version>
+			<version>1.1.11.20151208-1200</version>
 			<type>war</type>
 		</dependency>
 
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.commons</artifactId>
-			<version>1.1.11-SNAPSHOT</version>
+			<version>1.1.11.20151208-1200</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.commons.runtime</artifactId>
-			<version>1.1.11-SNAPSHOT</version>
+			<version>1.1.11.20151208-1200</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.commons.xml</artifactId>
-			<version>1.1.11-SNAPSHOT</version>
+			<version>1.1.11.20151208-1200</version>
 		</dependency>
 
 		<!-- 
@@ -603,19 +603,19 @@
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.sbt.php.wordpress</artifactId>
-			<version>1.1.11-SNAPSHOT</version>
+			<version>1.1.11.20151208-1200</version>
 			<type>zip</type>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.sbt.php.core</artifactId>
-			<version>1.1.11-SNAPSHOT</version>
+			<version>1.1.11.20151208-1200</version>
 			<type>zip</type>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.sbt.php.moodle</artifactId>
-			<version>1.1.11-SNAPSHOT</version>
+			<version>1.1.11.20151208-1200</version>
 			<type>zip</type>
 		</dependency>
 	</dependencies>

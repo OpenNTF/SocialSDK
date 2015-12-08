@@ -13,7 +13,7 @@
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
-define(["../../../declare", "../../../config", "../../../url", "../../../Promise","../../../connections/ActivityStreamConstants"], function(declare, config, Url, Promise, consts){
+define(["../../../declare", "../../../config", "../../../url", "../../../Promise", "../../../connections/ActivityStreamConstants"], function(declare, config, Url, Promise, consts){
     /*
      * @class sbt.controls.astream._SbtAsConfigUtil A helper module for building ActivityStream config objects.
      */
@@ -44,13 +44,9 @@ define(["../../../declare", "../../../config", "../../../url", "../../../Promise
          */
         getUserInfo: function() {
             var promise = new Promise();
-            //var microbloggingUrl = lconn.core.config.services.microblogging.secureUrl;
-            //microbloggingUrl = microbloggingUrl.replace(this.xhrHandler.getEndpoint().getProxyUrl(), "");
-            //relativeUrl = microbloggingUrl.indexOf("/") === 0 ? microbloggingUrl : new Url(microbloggingUrl).getPath();
-			//PBastide: removed relativeUrl as it is call a private API
+            //PBastide: removed relativeUrl as it is call a private API
             var serviceUrl = consts.ActivityStreamUrls.activityStreamBaseUrl + "/" + this.xhrHandler.endpoint.authType + "/rest/people/@me/@self";
-            serviceUrl = this.xhrHandler.correctUrlAuth(serviceUrl); // ensure correct url for given auth type.
-            
+            serviceUrl = this.xhrHandler.correctUrlAuth(serviceUrl); // ensure correct url for given auth type.            
             this.xhrHandler.xhrGet({
                 serviceUrl: serviceUrl,
                 handleAs: "json",
@@ -92,7 +88,11 @@ define(["../../../declare", "../../../config", "../../../url", "../../../Promise
             var i;
             for(i = 0; i < extensionsArray.length; i++){
                 var ext = extensionsArray[i];
-                dojo.require(ext);
+                //PBastide: Removed the dojo.require in order to be pure AMD. 
+                //dojo.require(ext);
+                var re = /\./;
+                var ext_u = str.replace(re, '\/');
+                require([ext_u], function(Ext){});
             }
         },
         

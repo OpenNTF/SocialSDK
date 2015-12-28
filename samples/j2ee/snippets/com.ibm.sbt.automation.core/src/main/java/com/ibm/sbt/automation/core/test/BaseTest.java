@@ -48,7 +48,7 @@ import com.ibm.sbt.automation.core.utils.Trace;
  * @author mkataria
  * @author mwallace
  * 
- * @date Jan 23, 2013
+ * @since Jan 23, 2013
  */
 public abstract class BaseTest {
 
@@ -123,7 +123,7 @@ public abstract class BaseTest {
 	 * 
 	 * </p>
 	 * 
-	 * @return
+	 * @return {boolean}
 	 */
 	protected boolean isEnvironmentValid() {
 		return true;
@@ -191,7 +191,7 @@ public abstract class BaseTest {
 	 * Return the specified property from the test environment
 	 * 
 	 * @param name
-	 * @return
+	 * @return {String} 
 	 */
 	public String getProperty(String name) {
 		return environment.getProperty(name);
@@ -210,6 +210,7 @@ public abstract class BaseTest {
 	 * Set the authentication type to use for this test
 	 * 
 	 * @param authType
+	 * @param forcedReauth
 	 */
 	public void setAuthType(AuthType authType, boolean forcedReauth) {
 		this.authType = authType;
@@ -251,7 +252,7 @@ public abstract class BaseTest {
 	/**
 	 * Return the snippet id
 	 * 
-	 * @return
+	 * @return {String}
 	 */
 	public String getSnippetId() {
 		return snippetId;
@@ -272,7 +273,7 @@ public abstract class BaseTest {
 	 * invoked
 	 * 
 	 * @param key
-	 * @param value
+	 * @param values
 	 */
 	public void addSnippetParam(String key, String[] values) {
 		snippetParams.put(key, StringUtil.concatStrings(values, ',', true));
@@ -282,7 +283,7 @@ public abstract class BaseTest {
 	 * Return a map of parameters which should be passed from the test to the
 	 * snippet
 	 * 
-	 * @return
+	 * @return {Map<String, String>}
 	 */
 	public Map<String, String> getSnippetParams() {
 		return snippetParams;
@@ -291,7 +292,7 @@ public abstract class BaseTest {
 	/**
 	 * Return the current test environment
 	 * 
-	 * @return
+	 * @return {TestEnvironment}
 	 */
 	public TestEnvironment getTestEnvironment() {
 		return environment;

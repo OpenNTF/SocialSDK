@@ -43,7 +43,7 @@ public class InReplyTo extends BaseEntity {
 	/**
 	 * Construct InReplyTo based on the specified node
 	 * 
-	 * @param service
+	 * @param svc
 	 * @param dataHandler
 	 */
 	public InReplyTo(BaseService svc, DataHandler<?> dataHandler) {

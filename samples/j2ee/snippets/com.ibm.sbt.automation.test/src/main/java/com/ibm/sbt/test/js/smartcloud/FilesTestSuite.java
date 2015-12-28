@@ -27,7 +27,7 @@ import com.ibm.sbt.automation.core.environment.TestEnvironmentFactory;
 /**
  * @author mwallace
  * 
- * @date 6 Mar 2013
+ * @since 6 Mar 2013
  */
 @RunWith(Suite.class)
 @SuiteClasses({ com.ibm.sbt.test.js.connections.FilesTestSuite.class })

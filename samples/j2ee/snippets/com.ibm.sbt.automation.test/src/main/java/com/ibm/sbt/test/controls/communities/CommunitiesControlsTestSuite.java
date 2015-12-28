@@ -22,7 +22,7 @@ import org.junit.runners.Suite.SuiteClasses;
 /**
  * @author Benjamin Jakobus
  * 
- * @date 15 Nov 2013
+ * @since 15 Nov 2013
  */
 @RunWith(Suite.class)
 @SuiteClasses({CreateMemberList.class})

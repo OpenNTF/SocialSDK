@@ -46,7 +46,7 @@ import com.ibm.sbt.services.client.connections.communities.Member;
 /**
  * @author mwallace
  *  
- * @date 13 Mar 2013
+ * @since 13 Mar 2013
  */
 public class BaseCommunitiesTest extends FlexibleTest {
     

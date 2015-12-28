@@ -190,7 +190,6 @@ public class BssService extends JsonService {
      * Constructor
      * 
      * @param endpoint
-     * @param cacheSize
      */
     public BssService(Endpoint endpoint) {
         super(endpoint);
@@ -223,7 +222,7 @@ public class BssService extends JsonService {
      * Return id for the specified JSON object.
      * 
      * @param jsonObject
-     * @return
+     * @return {String}
      */
     public String getId(JsonJavaObject jsonObject, String propertyName) {
     	if (jsonObject == null) {

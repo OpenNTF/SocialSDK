@@ -21,7 +21,7 @@ import org.openqa.selenium.WebElement;
 
 /**
  * @author Francis
- * @date 24 May 2013
+ * @since 24 May 2013
  */
 public class SampleFrameworkResultPage extends BaseResultPage {
 
@@ -113,7 +113,7 @@ public class SampleFrameworkResultPage extends BaseResultPage {
     
     /**
      * Return a leaf node. Useful for testing if a click on the leaf node works.
-     * @return
+     * @return {WebElement}
      */
     public WebElement getTreeLeaf() {
         List<WebElement> leafNodes = getWebElement().findElements(By.className(LEAFNODECLASS));

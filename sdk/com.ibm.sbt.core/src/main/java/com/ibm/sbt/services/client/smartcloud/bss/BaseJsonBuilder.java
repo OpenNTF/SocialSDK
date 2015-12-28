@@ -41,7 +41,7 @@ abstract public class BaseJsonBuilder {
 	
 	/**
 	 * 
-	 * @return
+	 * @return {String}
 	 */
 	public String getTemplate() {
 		return template;
@@ -57,7 +57,7 @@ abstract public class BaseJsonBuilder {
 		
 	/**
 	 * Return a string representation of this Customer instance
-	 * @return
+	 * @return {String}
 	 */
 	public String toJson() {
 		

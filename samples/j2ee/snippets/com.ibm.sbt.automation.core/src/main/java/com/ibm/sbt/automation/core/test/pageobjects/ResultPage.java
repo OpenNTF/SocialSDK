@@ -21,27 +21,27 @@ import org.openqa.selenium.WebElement;
 /**
  * @author mwallace
  *  
- * @date 5 Mar 2013
+ * @since 5 Mar 2013
  */
 public interface ResultPage {
 
     /**
      * Return the page content as a string
      * 
-     * @return
+     * @return {String}
      */
     public String getText();
     
     /**
      * Return the page content as a web element
-     * @return
+     * @return {WebElement}
      */
     public WebElement getWebElement();
     
     /**
      * Return the web driver
      * 
-     * @return
+     * @return {WebDriver}
      */
     public WebDriver getWebDriver();
 

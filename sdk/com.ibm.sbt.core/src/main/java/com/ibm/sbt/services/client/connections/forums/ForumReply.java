@@ -35,14 +35,13 @@ import com.ibm.sbt.services.client.connections.forums.model.FlagType;
  * @author Manish Kataria
  * @author Swati Singh
  */
-
 public class ForumReply extends BaseForumEntity{
 
 	/**
 	 * To get Uuid of Topic to which the Reply is posted
 	 *
 	 * @method getTopicUuid
-	 * @return String
+	 * @return {String}
 	 */
 	public String getTopicUuid(){
 		String topicId = "";
@@ -59,7 +58,6 @@ public class ForumReply extends BaseForumEntity{
 	 * Sets TopicUuid of the Reply
 	 *
 	 * @method getTopicUuid
-	 * @return String
 	 */
 	public void setTopicUuid(String topicId) {
 		fields.put("topicUuid", topicId);
@@ -68,8 +66,10 @@ public class ForumReply extends BaseForumEntity{
 	/**
 	 * Constructor
 	 *  
-	 * @param BaseService
-	 * @param DataHandler
+	 * @param service
+	 * @param node
+	 * @param namespaceCtx 
+	 * @param xpathExpression
 	 */
 	public ForumReply(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
 		super(service, node, namespaceCtx, xpathExpression);
@@ -80,7 +80,7 @@ public class ForumReply extends BaseForumEntity{
 	/**
 	 * Constructor
 	 *  
-	 * @param ForumService
+	 * @param forumsService
 	 * @param id
 	 */
 	public ForumReply(ForumService forumsService, String id) {
@@ -89,7 +89,7 @@ public class ForumReply extends BaseForumEntity{
 	/**
      * Constructor
      *
-     * @param ForumService
+     * @param forumsService
      */
     public ForumReply(ForumService forumsService) {
             super(forumsService);
@@ -109,7 +109,7 @@ public class ForumReply extends BaseForumEntity{
 	 * Sets the Uuid of Forum Reply
 	 *
 	 * @method setReplyUuid
-	 * @param {String} Uuid of forum
+	 * @param forumUuid {String} Uuid of forum
 	 */
 	public void setReplyUuid(String forumUuid) {
 		setAsString(ForumsXPath.uid, forumUuid);
@@ -117,7 +117,7 @@ public class ForumReply extends BaseForumEntity{
 	/**
 	 * This method returns Recommendations for the IBM Connections forum Reply
 	 *
-	 * @return RecommendationList
+	 * @return {EntityList<Recommendation>}
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Recommendation> getRecommendations() throws ClientServicesException
@@ -128,7 +128,7 @@ public class ForumReply extends BaseForumEntity{
      * Return the value of id of the post that this is a reply to.
      * 
      * @method getReplyToPostUuid
-     * @returns {String} postUuid Id of the forum post
+     * @return {String} postUuid Id of the forum post
      */
 	public String getReplyToPostUuid() throws ClientServicesException {
     	return extractForumUuid(getAsString(ForumsXPath.inReplyTo));
@@ -138,7 +138,7 @@ public class ForumReply extends BaseForumEntity{
      * Sets the value of id of the post that this is a reply to.
      * 
      * @method setReplyToPostUuid
-     * @param {String} postUuid Id of the forum post
+     * @param postUuid Id of the forum post
      */
     public void setReplyToPostUuid(String postUuid) {
     	setAsString(ForumsXPath.inReplyTo, postUuid);
@@ -166,7 +166,6 @@ public class ForumReply extends BaseForumEntity{
 	 * to unLike/unRecommend a Reply, supported on Connections 4.5 or above
 	 *
 	 * @method unLike
-	 * @return boolean
 	 */
 	public void unLike() throws ClientServicesException {
 		getService().deleteRecommendation(getReplyUuid());
@@ -243,7 +242,7 @@ public class ForumReply extends BaseForumEntity{
 	/**
 	 * This method updates the IBM Connections Forum Reply on the server
 	 *
-	 * @return ForumReply
+	 * @return {ForumReply}
 	 * @throws ClientServicesException
 	 */
 	public ForumReply save() throws ClientServicesException{
@@ -252,7 +251,8 @@ public class ForumReply extends BaseForumEntity{
 	/**
 	 * This method creates/updates the IBM Connections Forum Topic on the server
 	 *
-	 * @return ForumReply
+	 * @param topicId
+	 * @return {ForumReply}
 	 * @throws ClientServicesException
 	 */
 	public ForumReply save(String topicId) throws ClientServicesException{

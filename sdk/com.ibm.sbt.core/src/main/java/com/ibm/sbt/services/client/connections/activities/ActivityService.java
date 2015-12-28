@@ -116,7 +116,7 @@ public class ActivityService extends ConnectionsService {
 	/**
 	 * Get a feed of all active activities that match a specific criteria.
 	 * 
-	 * @return
+	 * @return {EntityList<Activity>}
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Activity> getMyActivities() throws ClientServicesException {
@@ -127,7 +127,7 @@ public class ActivityService extends ConnectionsService {
 	 * Get a feed of all active activities that match a specific criteria.
 	 * 
 	 * @param parameters
-	 * @return
+	 * @return {EntityList<Activity>}
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Activity> getMyActivities(Map<String, String> parameters) throws ClientServicesException {
@@ -138,7 +138,7 @@ public class ActivityService extends ConnectionsService {
 	/**
 	 * Search for a set of completed activities that match a specific criteria.
 	 * 
-	 * @return
+	 * @return {EntityList<Activity>}
 	 */
 	public EntityList<Activity> getCompletedActivities() throws ClientServicesException {
 		return getCompletedActivities(null);
@@ -148,7 +148,7 @@ public class ActivityService extends ConnectionsService {
 	 * Search for a set of completed activities that match a specific criteria.
 	 * 
 	 * @param parameters
-	 * @return
+	 * @return {EntityList<Activity>}
 	 */
 	public EntityList<Activity> getCompletedActivities(Map<String, String> parameters) throws ClientServicesException {
 		String requestUrl = ActivityUrls.COMPLETED_ACTIVITIES.format(this);
@@ -159,7 +159,7 @@ public class ActivityService extends ConnectionsService {
 	 * Search for content in all of the activities, both completed and active,
 	 * that matches a specific criteria.
 	 * 
-	 * @return
+	 * @return {EntityList<Activity>}
 	 */
 	public EntityList<Activity> getAllActivities() throws ClientServicesException {
 		return getAllActivities(null);
@@ -170,7 +170,7 @@ public class ActivityService extends ConnectionsService {
 	 * that matches a specific criteria.
 	 * 
 	 * @param parameters
-	 * @return
+	 * @return {EntityList<Activity>}
 	 */
 	public EntityList<Activity> getAllActivities(Map<String, String> parameters) throws ClientServicesException {
 		String requestUrl = ActivityUrls.ALL_ACTIVITIES.format(this);
@@ -180,7 +180,7 @@ public class ActivityService extends ConnectionsService {
 	/**
 	 * Search for a set of to-do items that match a specific criteria.
 	 * 
-	 * @return
+	 * @return {EntityList<ActivityNode>}
 	 */
 	public EntityList<ActivityNode> getToDos() throws ClientServicesException {
 		return getToDos(null);
@@ -190,7 +190,7 @@ public class ActivityService extends ConnectionsService {
 	 * Search for a set of to-do items that match a specific criteria.
 	 * 
 	 * @param parameters
-	 * @return
+	 * @return {EntityList<ActivityNode>}
 	 */
 	public EntityList<ActivityNode> getToDos(Map<String, String> parameters) throws ClientServicesException {
 		String requestUrl = ActivityUrls.TODO_ENTRIES.format(this);
@@ -201,7 +201,7 @@ public class ActivityService extends ConnectionsService {
 	 * Get a category document that lists the tags that have been assigned to
 	 * all of the activities hosted by the Activities application.
 	 * 
-	 * @return
+	 * @return {EntityList<Tag>}
 	 */
 	public EntityList<Tag> getActivityTags() throws ClientServicesException {
 		return getActivityTags(null);
@@ -212,7 +212,7 @@ public class ActivityService extends ConnectionsService {
 	 * all of the activities hosted by the Activities application.
 	 * 
 	 * @param parameters
-	 * @return
+	 * @return {EntityList<Tag>}
 	 */
 	public EntityList<Tag> getActivityTags(Map<String, String> parameters) throws ClientServicesException {
 		String requestUrl = ActivityUrls.ACTIVITY_TAGS.format(this);
@@ -221,7 +221,7 @@ public class ActivityService extends ConnectionsService {
 
 	/**
 	 * 
-	 * @return
+	 * @return {EntityList<Category>}
 	 */
 	public EntityList<Category> getActivityCategories() throws ClientServicesException {
 		return getActivityCategories(null);
@@ -230,7 +230,7 @@ public class ActivityService extends ConnectionsService {
 	/**
 	 * 
 	 * @param parameters
-	 * @return
+	 * @return {EntityList<Category>}
 	 */
 	public EntityList<Category> getActivityCategories(Map<String, String> parameters) throws ClientServicesException {
 		String requestUrl = ActivityUrls.ACTIVITY_CATEGORIES.format(this);
@@ -239,7 +239,7 @@ public class ActivityService extends ConnectionsService {
 
 	/**
 	 * 
-	 * @return
+	 * @return {EntityList<ActivityNode>}
 	 */
 	public EntityList<ActivityNode> getActivityDescendants(String activityUuid) throws ClientServicesException {
 		return getActivityDescendants(activityUuid, null);
@@ -248,7 +248,7 @@ public class ActivityService extends ConnectionsService {
 	/**
 	 * 
 	 * @param parameters
-	 * @return
+	 * @return {EntityList<ActivityNode>}
 	 */
 	public EntityList<ActivityNode> getActivityDescendants(String activityUuid, Map<String, String> parameters) throws ClientServicesException {
 		String requestUrl = ActivityUrls.ACTIVITY_DESCENDANTS.format(this, ActivityUrls.activityPart(activityUuid));
@@ -257,7 +257,7 @@ public class ActivityService extends ConnectionsService {
 
 	/**
 	 * 
-	 * @return
+	 * @return {EntityList<ActivityNode>}
 	 */
 	public EntityList<ActivityNode> getActivityNodeChildren(String activityNodeUuid) throws ClientServicesException {
 		return getActivityNodeChildren(activityNodeUuid, null);
@@ -266,7 +266,7 @@ public class ActivityService extends ConnectionsService {
 	/**
 	 * 
 	 * @param parameters
-	 * @return
+	 * @return {EntityList<ActivityNode>}
 	 */
 	public EntityList<ActivityNode> getActivityNodeChildren(String activityNodeUuid, Map<String, String> parameters) throws ClientServicesException {
 		String requestUrl = ActivityUrls.ACTIVITY_NODECHILDREN.format(this, ActivityUrls.activityNodePart(activityNodeUuid));
@@ -277,7 +277,7 @@ public class ActivityService extends ConnectionsService {
 	 * Get a feed of all active activities that the currently authenticated user
 	 * has tuned out.
 	 * 
-	 * @return
+	 * @return {EntityList<Activity>}
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Activity> getTunedOutActivities() throws ClientServicesException {
@@ -289,7 +289,7 @@ public class ActivityService extends ConnectionsService {
 	 * has tuned out.
 	 * 
 	 * @param parameters
-	 * @return
+	 * @return {EntityList<Activity>}
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Activity> getTunedOutActivities(Map<String, String> parameters) throws ClientServicesException {
@@ -300,7 +300,7 @@ public class ActivityService extends ConnectionsService {
 	/**
 	 * Get a feed of all activities that are in the trash.
 	 * 
-	 * @return
+	 * @return {EntityList<Activity>}
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Activity> getThrashedActivities() throws ClientServicesException {
@@ -311,7 +311,7 @@ public class ActivityService extends ConnectionsService {
 	 * Get a feed of all activities that are in the trash.
 	 * 
 	 * @param parameters
-	 * @return
+	 * @return {EntityList<Activity>}
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Activity> getThrashedActivities(Map<String, String> parameters) throws ClientServicesException {
@@ -322,7 +322,7 @@ public class ActivityService extends ConnectionsService {
 	/**
 	 * Get a feed of all activity nodes that are in the trash.
 	 * 
-	 * @return
+	 * @return {EntityList<ActivityNode>}
 	 * @throws ClientServicesException
 	 */
 	public EntityList<ActivityNode> getThrashedActivityNodes(String activityUuid) throws ClientServicesException {
@@ -333,7 +333,7 @@ public class ActivityService extends ConnectionsService {
 	 * Get a feed of all activity nodes that are in the trash.
 	 * 
 	 * @param parameters
-	 * @return
+	 * @return {EntityList<ActivityNode>}
 	 * @throws ClientServicesException
 	 */
 	public EntityList<ActivityNode> getTrashedActivityNodes(String activityUuid, Map<String, String> parameters) throws ClientServicesException {
@@ -343,7 +343,7 @@ public class ActivityService extends ConnectionsService {
 
 	/**
 	 * 
-	 * @return
+	 * @return {EntityList<Member>}
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Member> getMembers(String activityUuid) throws ClientServicesException {
@@ -353,7 +353,7 @@ public class ActivityService extends ConnectionsService {
 	/**
 	 * 
 	 * @param parameters
-	 * @return
+	 * @return {EntityList<Member>}
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Member> getMembers(String activityUuid, Map<String, String> parameters) throws ClientServicesException {
@@ -363,7 +363,7 @@ public class ActivityService extends ConnectionsService {
 
 	/**
 	 * 
-	 * @return
+	 * @return {EntityList<ActivityUpdate>}
 	 * @throws ClientServicesException
 	 */
 	public EntityList<ActivityUpdate> getHistory(String activityUuid) throws ClientServicesException {
@@ -373,7 +373,7 @@ public class ActivityService extends ConnectionsService {
 	/**
 	 * 
 	 * @param parameters
-	 * @return
+	 * @return {EntityList<ActivityUpdate>}
 	 * @throws ClientServicesException
 	 */
 	public EntityList<ActivityUpdate> getHistory(String activityUuid, Map<String, String> parameters) throws ClientServicesException {
@@ -390,7 +390,7 @@ public class ActivityService extends ConnectionsService {
 	 * activity to the user's My Activities feed.
 	 * 
 	 * @param activity
-	 * @return
+	 * @return {Activity}
 	 * @throws ClientServicesException
 	 */
 	public Activity createActivity(Activity activity) throws ClientServicesException {
@@ -403,7 +403,7 @@ public class ActivityService extends ConnectionsService {
 	 * 
 	 * @param activity
 	 * @param parameters
-	 * @return
+	 * @return {Activity}
 	 * @throws ClientServicesException
 	 */
 	public Activity createActivity(Activity activity, Map<String, String> parameters) throws ClientServicesException {
@@ -419,7 +419,7 @@ public class ActivityService extends ConnectionsService {
 	 * to performing an update.
 	 * 
 	 * @param activityUuid
-	 * @return
+	 * @return {Activity}
 	 * @throws ClientServicesException
 	 */
 	public Activity getActivity(String activityUuid) throws ClientServicesException {
@@ -435,7 +435,7 @@ public class ActivityService extends ConnectionsService {
 	 * 
 	 * @param activityUuid
 	 * @param parameters
-	 * @return
+	 * @return {Activity}
 	 * @throws ClientServicesException
 	 */
 	public Activity getActivity(String activityUuid, Map<String, String> parameters) throws ClientServicesException {
@@ -453,7 +453,6 @@ public class ActivityService extends ConnectionsService {
 	 * it all back with the new tag in the update request.
 	 * 
 	 * @param activity
-	 * @return
 	 * @throws ClientServicesException
 	 */
 	public void updateActivity(Activity activity) throws ClientServicesException {
@@ -471,7 +470,6 @@ public class ActivityService extends ConnectionsService {
 	 * 
 	 * @param activity
 	 * @param parameters
-	 * @return
 	 * @throws ClientServicesException
 	 */
 	public void updateActivity(Activity activity, Map<String, String> parameters) throws ClientServicesException {
@@ -484,7 +482,7 @@ public class ActivityService extends ConnectionsService {
 	 * activities are moved to the trash collection and can be restored.
 	 * 
 	 * @param activity
-	 * @return
+	 * @return {String}
 	 * @throws ClientServicesException
 	 */
 	public String deleteActivity(Activity activity) throws ClientServicesException {
@@ -495,8 +493,8 @@ public class ActivityService extends ConnectionsService {
 	 * To delete an existing activity, use the HTTP DELETE method. Deleted
 	 * activities are moved to the trash collection and can be restored.
 	 * 
-	 * @param activity
-	 * @return
+	 * @param activityUuid
+	 * @return {String}
 	 * @throws ClientServicesException
 	 */
 	public String deleteActivity(String activityUuid) throws ClientServicesException {
@@ -509,7 +507,7 @@ public class ActivityService extends ConnectionsService {
 	 * 
 	 * @param activityUuid
 	 * @param parameters
-	 * @return
+	 * @return {String}
 	 * @throws ClientServicesException
 	 */
 	public String deleteActivity(String activityUuid, Map<String, String> parameters) throws ClientServicesException {
@@ -523,7 +521,6 @@ public class ActivityService extends ConnectionsService {
 	 * activity from the trash feed to the user's My Activities feed.
 	 * 
 	 * @param activity
-	 * @return
 	 * @throws ClientServicesException
 	 */
 	public void restoreActivity(Activity activity) throws ClientServicesException {
@@ -536,7 +533,6 @@ public class ActivityService extends ConnectionsService {
 	 * 
 	 * @param activity
 	 * @param parameters
-	 * @return
 	 * @throws ClientServicesException
 	 */
 	public void restoreActivity(Activity activity, Map<String, String> parameters) throws ClientServicesException {
@@ -547,7 +543,7 @@ public class ActivityService extends ConnectionsService {
 
 	/**
 	 * 
-	 * @param activity
+	 * @param activityNode
 	 * @param fileName
 	 * @param fileContent
 	 * @param mimeType
@@ -559,7 +555,7 @@ public class ActivityService extends ConnectionsService {
 
 	/**
 	 * 
-	 * @param activity
+	 * @param activityNodeUuid
 	 * @param fileName
 	 * @param fileContent
 	 * @param mimeType
@@ -590,7 +586,7 @@ public class ActivityService extends ConnectionsService {
 	/**
 	 * 
 	 * @param activityNode
-	 * @return
+	 * @return {ActivityNode}
 	 * @throws ClientServicesException
 	 */
 	public ActivityNode createActivityNode(ActivityNode activityNode) throws ClientServicesException {
@@ -601,7 +597,7 @@ public class ActivityService extends ConnectionsService {
 	 * 
 	 * @param activityNode
 	 * @param parameters
-	 * @return
+	 * @return {ActivityNode}
 	 * @throws ClientServicesException
 	 */
 	public ActivityNode createActivityNode(ActivityNode activityNode, Map<String, String> parameters) throws ClientServicesException {
@@ -612,7 +608,7 @@ public class ActivityService extends ConnectionsService {
 	/**
 	 * 
 	 * @param activityNodeUuid
-	 * @return
+	 * @return {ActivityNode}
 	 * @throws ClientServicesException
 	 */
 	public ActivityNode getActivityNode(String activityNodeUuid) throws ClientServicesException {
@@ -623,7 +619,7 @@ public class ActivityService extends ConnectionsService {
 	 * 
 	 * @param activityNodeUuid
 	 * @param parameters
-	 * @return
+	 * @return {ActivityNode}
 	 * @throws ClientServicesException
 	 */
 	public ActivityNode getActivityNode(String activityNodeUuid, Map<String, String> parameters) throws ClientServicesException {
@@ -634,7 +630,6 @@ public class ActivityService extends ConnectionsService {
 	/**
 	 * 
 	 * @param activityNode
-	 * @return
 	 * @throws ClientServicesException
 	 */
 	public void updateActivityNode(ActivityNode activityNode) throws ClientServicesException {
@@ -645,7 +640,6 @@ public class ActivityService extends ConnectionsService {
 	 * 
 	 * @param activityNode
 	 * @param parameters
-	 * @return
 	 * @throws ClientServicesException
 	 */
 	public void updateActivityNode(ActivityNode activityNode, Map<String, String> parameters) throws ClientServicesException {
@@ -656,7 +650,7 @@ public class ActivityService extends ConnectionsService {
 	/**
 	 * 
 	 * @param activityNode
-	 * @return
+	 * @return {String}
 	 * @throws ClientServicesException
 	 */
 	public String deleteActivityNode(ActivityNode activityNode) throws ClientServicesException {
@@ -665,8 +659,8 @@ public class ActivityService extends ConnectionsService {
 
 	/**
 	 * 
-	 * @param activityNode
-	 * @return
+	 * @param activityNodeUuid
+	 * @return {String}
 	 * @throws ClientServicesException
 	 */
 	public String deleteActivityNode(String activityNodeUuid) throws ClientServicesException {
@@ -677,7 +671,7 @@ public class ActivityService extends ConnectionsService {
 	 * 
 	 * @param activityNodeUuid
 	 * @param parameters
-	 * @return
+	 * @return {String}
 	 * @throws ClientServicesException
 	 */
 	public String deleteActivityNode(String activityNodeUuid, Map<String, String> parameters) throws ClientServicesException {
@@ -689,7 +683,6 @@ public class ActivityService extends ConnectionsService {
 	/**
 	 * 
 	 * @param activityNode
-	 * @return
 	 * @throws ClientServicesException
 	 */
 	public void restoreActivityNode(ActivityNode activityNode) throws ClientServicesException {
@@ -700,7 +693,6 @@ public class ActivityService extends ConnectionsService {
 	 * 
 	 * @param activityNode
 	 * @param parameters
-	 * @return
 	 * @throws ClientServicesException
 	 */
 	public void restoreActivityNode(ActivityNode activityNode, Map<String, String> parameters) throws ClientServicesException {
@@ -770,7 +762,7 @@ public class ActivityService extends ConnectionsService {
 	 * 
 	 * @param activity
 	 * @param member
-	 * @return
+	 * @return {Member}
 	 */
 	public Member addMember(Activity activity, Member member) throws ClientServicesException {
 		return addMember(activity, member, null);
@@ -781,7 +773,7 @@ public class ActivityService extends ConnectionsService {
 	 * 
 	 * @param activityUuid
 	 * @param member
-	 * @return
+	 * @return {Member}
 	 */
 	public Member addMember(String activityUuid, Member member) throws ClientServicesException {
 		return addMember(activityUuid, member, null);
@@ -793,7 +785,7 @@ public class ActivityService extends ConnectionsService {
 	 * @param activity
 	 * @param member
 	 * @param parameters
-	 * @return
+	 * @return {Member}
 	 */
 	public Member addMember(Activity activity, Member member, Map<String, String> parameters) throws ClientServicesException {
 		return addMember(activity.getActivityUuid(), member, parameters);
@@ -805,7 +797,7 @@ public class ActivityService extends ConnectionsService {
 	 * @param activityUuid
 	 * @param member
 	 * @param parameters
-	 * @return
+	 * @return {Member}
 	 */
 	public Member addMember(String activityUuid, Member member, Map<String, String> parameters) throws ClientServicesException {
 		String requestUrl = ActivityUrls.ACTIVITY_ACL.format(this, ActivityUrls.activityPart(activityUuid));
@@ -838,7 +830,7 @@ public class ActivityService extends ConnectionsService {
 	 * Retrieve an activity member.
 	 * 
 	 * @param activity
-	 * @return
+	 * @return {Member}
 	 */
 	public Member getMember(Activity activity, String memberId) throws ClientServicesException {
 		return getMember(activity, memberId, null);
@@ -847,8 +839,9 @@ public class ActivityService extends ConnectionsService {
 	/**
 	 * Retrieve an activity member.
 	 * 
-	 * @param activity
-	 * @return
+	 * @param activityUuid
+	 * @param memberId
+	 * @return {Member}
 	 */
 	public Member getMember(String activityUuid, String memberId) throws ClientServicesException {
 		return getMember(activityUuid, memberId, null);
@@ -859,7 +852,7 @@ public class ActivityService extends ConnectionsService {
 	 * 
 	 * @param activity
 	 * @param parameters
-	 * @return
+	 * @return {Member}
 	 */
 	public Member getMember(Activity activity, String memberId, Map<String, String> parameters) throws ClientServicesException {
 		return getMember(activity.getActivityUuid(), memberId, parameters);
@@ -868,9 +861,9 @@ public class ActivityService extends ConnectionsService {
 	/**
 	 * Retrieve an activity member.
 	 * 
-	 * @param activity
+	 * @param activityUuid
 	 * @param parameters
-	 * @return
+	 * @return {Member}
 	 */
 	public Member getMember(String activityUuid, String memberId, Map<String, String> parameters) throws ClientServicesException {
 		String requestUrl = ActivityUrls.ACTIVITY_MEMBER.format(this, ActivityUrls.activityPart(activityUuid), ActivityUrls.memberPart(memberId));
@@ -882,7 +875,7 @@ public class ActivityService extends ConnectionsService {
 	 * 
 	 * @param activity
 	 * @param member
-	 * @return
+	 * @return {Member}
 	 */
 	public Member updateMember(Activity activity, Member member) throws ClientServicesException {
 		return updateMember(activity, member, null);
@@ -893,7 +886,7 @@ public class ActivityService extends ConnectionsService {
 	 * 
 	 * @param activityUuid
 	 * @param member
-	 * @return
+	 * @return {Member}
 	 */
 	public Member updateMember(String activityUuid, Member member) throws ClientServicesException {
 		return updateMember(activityUuid, member, null);
@@ -905,7 +898,7 @@ public class ActivityService extends ConnectionsService {
 	 * @param activity
 	 * @param member
 	 * @param parameters
-	 * @return
+	 * @return {Member}
 	 */
 	public Member updateMember(Activity activity, Member member, Map<String, String> parameters) throws ClientServicesException {
 		return updateMember(activity.getActivityUuid(), member, parameters);
@@ -917,7 +910,7 @@ public class ActivityService extends ConnectionsService {
 	 * @param activityUuid
 	 * @param member
 	 * @param parameters
-	 * @return
+	 * @return {Member}
 	 */
 	public Member updateMember(String activityUuid, Member member, Map<String, String> parameters) throws ClientServicesException {
 		String requestUrl = ActivityUrls.ACTIVITY_MEMBER.format(this, ActivityUrls.activityPart(activityUuid), ActivityUrls.memberPart(member.getId()));
@@ -929,7 +922,7 @@ public class ActivityService extends ConnectionsService {
 	 * 
 	 * @param activity
 	 * @param member
-	 * @return
+	 * @return {String}
 	 */
 	public String deleteMember(Activity activity, Member member) throws ClientServicesException {
 		return deleteMember(activity, member, null);
@@ -940,7 +933,7 @@ public class ActivityService extends ConnectionsService {
 	 * 
 	 * @param activityUuid
 	 * @param member
-	 * @return
+	 * @return {String}
 	 */
 	public String deleteMember(String activityUuid, Member member) throws ClientServicesException {
 		return deleteMember(activityUuid, member, null);
@@ -952,7 +945,7 @@ public class ActivityService extends ConnectionsService {
 	 * @param activity
 	 * @param member
 	 * @param parameters
-	 * @return
+	 * @return {String}
 	 */
 	public String deleteMember(Activity activity, Member member, Map<String, String> parameters) throws ClientServicesException {
 		return deleteMember(activity.getActivityUuid(), member, parameters);
@@ -964,7 +957,7 @@ public class ActivityService extends ConnectionsService {
 	 * @param activityUuid
 	 * @param member
 	 * @param parameters
-	 * @return
+	 * @return {String}
 	 */
 	public String deleteMember(String activityUuid, Member member, Map<String, String> parameters) throws ClientServicesException {
 		return deleteMember(activityUuid, member.getId(), parameters);
@@ -974,9 +967,9 @@ public class ActivityService extends ConnectionsService {
 	 * Delete an activity member.
 	 * 
 	 * @param activityUuid
-	 * @param member
+	 * @param memberId
 	 * @param parameters
-	 * @return
+	 * @return {String}
 	 */
 	public String deleteMember(String activityUuid, String memberId, Map<String, String> parameters) throws ClientServicesException {
 		String requestUrl = ActivityUrls.ACTIVITY_MEMBER.format(this, ActivityUrls.activityPart(activityUuid), ActivityUrls.memberPart(memberId));
@@ -1023,7 +1016,7 @@ public class ActivityService extends ConnectionsService {
 	 * 
 	 * @param destinationUuid
 	 * @param fieldUuid
-	 * @return
+	 * @return {ActivityNode}
 	 * @throws ClientServicesException
 	 */
 	public ActivityNode moveFieldToEntry(String destinationUuid, String fieldUuid) throws ClientServicesException {
@@ -1035,7 +1028,7 @@ public class ActivityService extends ConnectionsService {
 	 * @param destinationUuid
 	 * @param fieldUuid
 	 * @param position
-	 * @return
+	 * @return {ActivityNode}
 	 * @throws ClientServicesException
 	 */
 	public ActivityNode moveFieldToEntry(String destinationUuid, String fieldUuid, int position) throws ClientServicesException {
@@ -1049,7 +1042,7 @@ public class ActivityService extends ConnectionsService {
 	 * @param destinationUuid
 	 * @param fieldUuid
 	 * @param parameters
-	 * @return
+	 * @return {ActivityNode}
 	 * @throws ClientServicesException
 	 */
 	public ActivityNode moveFieldToEntry(String destinationUuid, String fieldUuid, Map<String, String> parameters) throws ClientServicesException {
@@ -1064,7 +1057,7 @@ public class ActivityService extends ConnectionsService {
 	 * 
 	 * @param nodeUuid
 	 * @param destinationUuid
-	 * @return
+	 * @return {ActivityNode}
 	 * @throws ClientServicesException
 	 */
 	public ActivityNode moveNode(String nodeUuid, String destinationUuid) throws ClientServicesException {
@@ -1076,7 +1069,7 @@ public class ActivityService extends ConnectionsService {
 	 * @param nodeUuid
 	 * @param destinationUuid
 	 * @param parameters
-	 * @return
+	 * @return {ActivityNode}
 	 * @throws ClientServicesException
 	 */
 	public ActivityNode moveNode(String nodeUuid, String destinationUuid, Map<String, String> parameters) throws ClientServicesException {
@@ -1091,7 +1084,7 @@ public class ActivityService extends ConnectionsService {
 	 * 
 	 * @param nodeUuid
 	 * @param destinationUuid
-	 * @return
+	 * @return {ActivityNode}
 	 * @throws ClientServicesException
 	 */
 	public ActivityNode copyNode(String nodeUuid, String destinationUuid) throws ClientServicesException {
@@ -1103,7 +1096,7 @@ public class ActivityService extends ConnectionsService {
 	 * @param nodeUuid
 	 * @param destinationUuid
 	 * @param parameters
-	 * @return
+	 * @return {ActivityNode}
 	 * @throws ClientServicesException
 	 */
 	public ActivityNode copyNode(String nodeUuid, String destinationUuid, Map<String, String> parameters) throws ClientServicesException {

@@ -26,7 +26,7 @@ import com.ibm.sbt.test.samples.acme.TestAcmeSampleApp;
 /**
  * @author David Ryan
  * 
- * @date 30 May 2013
+ * @since 30 May 2013
  */
 @RunWith(Suite.class)
 @SuiteClasses({ TestAcmeSampleApp.class })

@@ -34,7 +34,7 @@ import com.ibm.sbt.services.client.connections.files.Comment;
 
 /**
  * @author Lorenzo Boccaccia 
- * @date 8 May 2014
+ * @since 8 May 2014
  */
 public class CommentSerializer extends AtomEntitySerializer<Comment> {
 

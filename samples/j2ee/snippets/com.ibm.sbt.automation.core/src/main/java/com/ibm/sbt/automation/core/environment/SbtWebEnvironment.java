@@ -28,7 +28,7 @@ import com.ibm.sbt.automation.core.test.pageobjects.SbtWebResultPage;
  * @author mkataria
  * @author mwallace
  * 
- * @date Jan 10, 2013
+ * @since Jan 10, 2013
  */
 public class SbtWebEnvironment extends TestEnvironment {
    

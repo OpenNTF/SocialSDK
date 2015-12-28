@@ -25,7 +25,7 @@ import com.ibm.sbt.automation.core.test.BaseGridTest;
 /**
  * @author David Ryan
  * 
- * @date May 2013
+ * @since May 2013
  */
 public class OneClickToJoin extends BaseGridTest {
 

@@ -183,7 +183,7 @@ public class Request {
 	 * @param name 
 	 * @param body
 	 * @param mimeType
-	 * @return
+	 * @return {Request}
 	 * @throws UnsupportedEncodingException
 	 */
 	public Request bodyPart(String name, String body, String mimeType) throws UnsupportedEncodingException {
@@ -196,7 +196,7 @@ public class Request {
 	 * @param name
 	 * @param file
 	 * @param mimeType
-	 * @return
+	 * @return {Request}
 	 * @throws UnsupportedEncodingException
 	 */
 	public Request bodyPart(String name, File file, String mimeType) throws UnsupportedEncodingException {
@@ -209,7 +209,7 @@ public class Request {
 	 * @param name
 	 * @param inputStream
 	 * @param mimeType
-	 * @return
+	 * @return {Request}
 	 * @throws UnsupportedEncodingException
 	 */
 	public Request bodyPart(String name, InputStream inputStream, String mimeType) throws UnsupportedEncodingException {
@@ -222,7 +222,7 @@ public class Request {
 	 * @param name
 	 * @param byteArrayData
 	 * @param mimeType
-	 * @return
+	 * @return {Request}
 	 * @throws UnsupportedEncodingException
 	 */
 	/*

@@ -9,29 +9,29 @@
 	<parent>
 		<groupId>com.ibm.sbt</groupId>
 		<artifactId>com.ibm.samples.templates</artifactId>
-		<version>1.1.7-SNAPSHOT</version>
+		<version>1.1.12-SNAPSHOT</version>
 	</parent>
 
 	<dependencies>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.sbt.core</artifactId>
-			<version>1.1.7-SNAPSHOT</version>
+			<version>1.1.12-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.commons</artifactId>
-			<version>1.1.7-SNAPSHOT</version>
+			<version>1.1.12-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.commons.xml</artifactId>
-			<version>1.1.7-SNAPSHOT</version>
+			<version>1.1.12-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.commons.runtime</artifactId>
-			<version>1.1.7-SNAPSHOT</version>
+			<version>1.1.12-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 </project>

@@ -31,7 +31,7 @@ import com.ibm.sbt.test.js.authentication.OAuth10Popup;
 /**
  * @author mwallace
  * 
- * @date 6 Mar 2013
+ * @since 6 Mar 2013
  */
 @RunWith(Suite.class)
 @SuiteClasses({ Authentication.class, 

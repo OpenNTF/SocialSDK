@@ -30,7 +30,7 @@ import com.ibm.sbt.services.client.connections.activities.Activity;
 /**
  * @author mwallace
  * 
- * @date 6 Mar 2013
+ * @since 6 Mar 2013
  */
 public class GetAllActivities extends BaseActivitiesTest {
 

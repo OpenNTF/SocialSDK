@@ -21,7 +21,7 @@ import com.ibm.commons.util.AbstractException;
  * Exception to group al SDK Checked exceptions; as such, constructors are protected.
  * 
  * @author Lorenzo Boccaccia
- * @date Dec 6, 2012
+ * @since Dec 6, 2012
  */
 
 public class SBTServiceException extends AbstractException {

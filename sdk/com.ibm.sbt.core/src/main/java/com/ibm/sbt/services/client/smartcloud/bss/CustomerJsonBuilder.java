@@ -416,7 +416,7 @@ public class CustomerJsonBuilder extends BaseJsonBuilder {
 	}
 
 	/**
-	 * @param customerAccountPaymentMethodType the customerAccountPaymentMethodType to set
+	 * @param paymentMethodType the customerAccountPaymentMethodType to set
 	 */
 	public CustomerJsonBuilder setCustomerAccountPaymentMethodType(CustomerManagementService.PaymentMethodType paymentMethodType) {
 		CustomerAccountPaymentMethodType.setValue(paymentMethodType.name());
@@ -476,7 +476,7 @@ public class CustomerJsonBuilder extends BaseJsonBuilder {
 	}
 
 	/**
-	 * @param organizationAddressType the organizationAddressType to set
+	 * @param addressType the organizationAddressType to set
 	 */
 	public CustomerJsonBuilder setOrganizationAddressType(CustomerManagementService.AddressType addressType) {
 		OrganizationAddressType.setValue(addressType.name());
@@ -551,7 +551,7 @@ public class CustomerJsonBuilder extends BaseJsonBuilder {
 	}
 
 	/**
-	 * @param customerIdentifierType the customerIdentifierType to set
+	 * @param customerIdType the customerIdentifierType to set
 	 */
 	public CustomerJsonBuilder setCustomerIdentifierType(CustomerManagementService.CustomerIdType customerIdType) {
 		CustomerIdentifierType.setValue(customerIdType.name());

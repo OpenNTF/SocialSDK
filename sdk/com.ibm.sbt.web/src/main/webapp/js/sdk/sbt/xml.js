@@ -40,15 +40,13 @@ define(['./lang'], function(lang) {
 		parse: function(xml) {
 			var xmlDoc=null;
 			try {
-				if(!document.evaluate){
-					xmlDoc=new ActiveXObject("Microsoft.XMLDOM");
+				if(window.ActiveXObject !== undefined){
+					xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
 					xmlDoc.async="false";
 					xmlDoc.loadXML(xml);
-				}else{
-					if(window.DOMParser){
-						parser=new DOMParser();
-						xmlDoc=parser.parseFromString(xml,"text/xml");
-					}
+				} else if (window.DOMParser){
+					parser=new DOMParser();
+					xmlDoc=parser.parseFromString(xml,"text/xml");
 				}
 			}catch(ex){
 				console.log(ex.message);
@@ -65,10 +63,10 @@ define(['./lang'], function(lang) {
 			}
 		},
 		getText : function (xmlElement){
-			if(!document.evaluate){
-				return xmlElement.text;
-			}else{
+			if(xmlElement.textContent){
 				return xmlElement.textContent;
+			}else{
+				return xmlElement.text;
 			}
 		},
 		encodeXmlEntry: function(string) {

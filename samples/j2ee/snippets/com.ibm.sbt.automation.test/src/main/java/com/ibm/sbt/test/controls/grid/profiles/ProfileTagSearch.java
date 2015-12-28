@@ -24,7 +24,7 @@ import com.ibm.sbt.automation.core.test.BaseGridTest;
 
 /**
  * @author sberrybyrne
- * @date 6 Mar 2013
+ * @since 6 Mar 2013
  */
 public class ProfileTagSearch extends BaseGridTest {
 

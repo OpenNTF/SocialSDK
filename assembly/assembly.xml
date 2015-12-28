@@ -10,8 +10,6 @@
 	<baseDirectory>target</baseDirectory>
 	<includeBaseDirectory>false</includeBaseDirectory>
 
-
-
 	<moduleSets>
 		<moduleSet>
 			<useAllReactorProjects>true</useAllReactorProjects>
@@ -65,22 +63,29 @@
 				<unpack>false</unpack>
 			</binaries>
 		</moduleSet>
-		<moduleSet>
-			<useAllReactorProjects>true</useAllReactorProjects>
-			<includes>
+		<!--
+				PBastide: Removed Projects to reduce deliverable size
 				<include>com.ibm.sbt:sbt.sample.portlets</include>
 				<include>com.ibm.sbt:acme.social.sample</include>
+				-->
+		<!--<moduleSet>
+			<useAllReactorProjects>true</useAllReactorProjects>
+			<includes>
+				
 			</includes>
 			<binaries>
 				<outputDirectory>sbtsdk/samples/ear</outputDirectory>
 				<outputFileNameMapping>${module.artifactId}-${project.version}.${module.extension}</outputFileNameMapping>
 				<unpack>false</unpack>
 			</binaries>
-		</moduleSet>
+		</moduleSet> 
+		-->
 		<moduleSet>
 			<useAllReactorProjects>true</useAllReactorProjects>
 			<includes>
 				<include>com.ibm.sbt:sbt.sample.web</include>
+				<!--
+				PBastide: Removed Projects to reduce deliverable size
 				<include>com.ibm.sbt:com.ibm.sbt.landing</include>
 				<include>com.ibm.sbt:acme.social.sample.dataapp</include>
 				<include>com.ibm.sbt:acme.social.sample.webapp</include>
@@ -89,6 +94,7 @@
 				<include>com.ibm.sbt:smartcloud.webapp</include>
 				<include>com.ibm.sbt:grantaccess.webapp</include>
 				<include>com.ibm.sbt:sso.sample.webapp</include>
+				-->
 			</includes>
 			<binaries>
 				<outputDirectory>sbtsdk/samples/war</outputDirectory>
@@ -96,14 +102,19 @@
 				<unpack>false</unpack>
 			</binaries>
 		</moduleSet>
-		<moduleSet>
+		<!--
+				PBastide: remove samples / updates
+				<include>com.ibm.sbt:sbt.sample.app</include>
+		-->
+		<!--
+		moduleSet>
 			<useAllReactorProjects>true</useAllReactorProjects>
 			<includes>
 				<include>com.ibm.sbt:com.ibm.commons</include>
 				<include>com.ibm.sbt:com.ibm.commons.runtime</include>
 				<include>com.ibm.sbt:com.ibm.commons.xml</include>
 				<include>com.ibm.sbt:com.ibm.sbt.core</include>
-				<include>com.ibm.sbt:sbt.sample.app</include>
+				
 			</includes>
 			<binaries>
 				<dependencySets>
@@ -113,6 +124,7 @@
 				<unpack>false</unpack>
 			</binaries>
 		</moduleSet>
+		-->
 		<moduleSet>
 			<useAllReactorProjects>true</useAllReactorProjects>
 			<includes>
@@ -151,6 +163,8 @@
 		</moduleSet>
 	</moduleSets>
 	<dependencySets>
+		<!-- PBastide: removed samples -->
+		<!--
 		<dependencySet>
 			<includes>
 				<include>commons-logging:commons-logging</include>
@@ -159,6 +173,7 @@
 			</includes>
 			<outputDirectory>sbtsdk/samples/jar</outputDirectory>
 		</dependencySet>
+		-->
 		<dependencySet>
 			<includes>
 				<include>com.ibm.sbt:com.ibm.sbt.php.core:zip:*</include>
@@ -189,6 +204,7 @@
 	</dependencySets>
 
 	<fileSets>
+		<!-- removed the sbt.properties from the filesets
 		<fileSet>
 			<directory>../samples/java/sbt.sample.app</directory>
 			<outputDirectory>sbtsdk/samples/jar</outputDirectory>
@@ -196,6 +212,7 @@
 				<include>sbt.properties</include>
 			</includes>
 		</fileSet>
+		-->
 		<fileSet>
 			<directory>${build.target}/doc/jsdoc</directory>
 			<outputDirectory>sbtsdk/doc/jsdoc</outputDirectory>
@@ -204,7 +221,8 @@
 			</includes>
 		</fileSet>
 
-
+		<!-- PBastide: Removed Tomcat --> 
+		<!--
 		<fileSet>
 			<directory>${project.build.directory}/tomcat</directory>
 			<outputDirectory>sbtsdk/tomcat</outputDirectory>
@@ -212,6 +230,8 @@
 				<include>**/apache-tomcat-7.0.61-sbt.zip</include>
 			</includes>
 		</fileSet>
+		-->
+		
 		<fileSet>
 			<directory>../samples/config</directory>
 			<outputDirectory>sbtsdk/config</outputDirectory>
@@ -228,7 +248,7 @@
 				<include>*</include>
 			</includes>
 		</fileSet>
-
+		
 		<fileSet>
 			<directory>../samples/scripts</directory>
 			<outputDirectory>sbtsdk/scripts</outputDirectory>
@@ -339,6 +359,10 @@
 			</includes>
 			<outputDirectory>sbtsdk</outputDirectory>
 		</fileSet>
+		<!-- PBastide: Removed the Inclusion of the Sources in the Downloadable 
+			sources are now included in the release page as a separate downloadable
+		-->
+		<!--
 		<fileSet>
 			<directory>${project.build.directory}/sources</directory>
 			<includes>
@@ -346,6 +370,7 @@
 			</includes>
 			<outputDirectory>sbtsdk/sources</outputDirectory>
 		</fileSet>
+		-->
 		<fileSet>
 			<directory>${project.build.directory}/sources/SocialSDK-iOS/library</directory>
 			<includes>

@@ -28,7 +28,7 @@ import com.ibm.sbt.services.client.connections.profiles.ProfileService;
  * @author mwallace
  * @author Vimal Dhupar
  *  
- * @date 19 Mar 2013
+ * @since 19 Mar 2013
  */
 public class BaseProfilesTest extends BaseApiTest {
     

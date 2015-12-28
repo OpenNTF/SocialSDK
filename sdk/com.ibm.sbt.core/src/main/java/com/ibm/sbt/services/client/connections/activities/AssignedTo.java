@@ -42,7 +42,7 @@ public class AssignedTo extends BaseEntity {
 	/**
 	 * Construct InReplyTo based on the specified node
 	 * 
-	 * @param service
+	 * @param svc
 	 * @param dataHandler
 	 */
 	public AssignedTo(BaseService svc, DataHandler<?> dataHandler) {

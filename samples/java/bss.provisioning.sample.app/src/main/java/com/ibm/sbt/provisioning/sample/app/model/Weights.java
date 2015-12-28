@@ -68,7 +68,7 @@ public class Weights{
   /**
    * Returns the default weightSet
    * 
-   * @return
+   * @return {WeightSet}
    */
   public WeightSet getDefaultSet(){
     return this.defaultSet;
@@ -88,7 +88,7 @@ public class Weights{
    * 
    * @param url
    * @param method
-   * @return
+   * @return {Weight}
    */
   public Weight getWeight(String url, Rest method){
     return this.defaultSet.getWeight(url, method);

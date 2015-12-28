@@ -38,16 +38,14 @@ import com.ibm.sbt.services.endpoints.Endpoint;
 /**
  * CMISFileService can be used to expose file application data using the Content Management Interoperability Services (CMIS)
  * 
- * @Represents CMIS FileService
+ * IBM Connections Files Service - CMIS API
  * @author Vimal Dhupar
- * @see http://www-10.lotus.com/ldd/appdevwiki.nsf/xpAPIViewer.xsp?lookupName=API+Reference#action=openDocument&res_title=Files_CMIS_API_sbar&content=apicontent
+ * @see <a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpAPIViewer.xsp?lookupName=API+Reference#action=openDocument&res_title=Files_CMIS_API_sbar&content=apicontent">CMIS Files API</A>
  */
 public class CMISFileService extends ConnectionsService {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -337041873140937439L;
+
 	private String repositoryId;
 
     /**
@@ -85,7 +83,7 @@ public class CMISFileService extends ConnectionsService {
 	/**
 	 * Gets a feed that lists the files in your library.
 	 * 
-	 * @return EntityList<CMISFile>
+	 * @return {EntityList<CMISFile>}
 	 * @throws ClientServicesException
 	 */
 	public EntityList<CMISFile> getMyFiles() throws ClientServicesException {
@@ -96,7 +94,7 @@ public class CMISFileService extends ConnectionsService {
 	 * Gets a feed that lists the files in your library.
 	 * 
 	 * @param parameters
-	 * @return EntityList<CMISFile>
+	 * @return {EntityList<CMISFile>}
 	 * @throws ClientServicesException
 	 */
 	public EntityList<CMISFile> getMyFiles(Map<String, String> parameters) throws ClientServicesException {
@@ -108,7 +106,7 @@ public class CMISFileService extends ConnectionsService {
 	/**
 	 * Retrieves an Atom document representation of a file shared with the user.
 	 * 
-	 * @return EntityList<CMISFile>
+	 * @return {EntityList<CMISFile>}
 	 * @throws ClientServicesException
 	 */
 	public EntityList<CMISFile> getFilesSharedWithMe() throws ClientServicesException {
@@ -119,7 +117,7 @@ public class CMISFileService extends ConnectionsService {
 	 * Retrieves an Atom document representation of a file shared with the user.
 	 * 
 	 * @param parameters
-	 * @return EntityList<CMISFile>
+	 * @return {EntityList<CMISFile>}
 	 * @throws ClientServicesException
 	 */
 	public EntityList<CMISFile> getFilesSharedWithMe(Map<String, String> parameters) throws ClientServicesException {
@@ -131,7 +129,7 @@ public class CMISFileService extends ConnectionsService {
 	/**
 	 * Retrieves an Atom document representation of the user's file collection.
 	 * 
-	 * @return EntityList<CMISFile>
+	 * @return {EntityList<CMISFile>}
 	 * @throws ClientServicesException
 	 */
 	public EntityList<CMISFile> getMyCollections() throws ClientServicesException {
@@ -142,7 +140,7 @@ public class CMISFileService extends ConnectionsService {
 	 * Retrieves an Atom document representation of the user's file collection.
 	 * 
 	 * @param parameters
-	 * @return EntityList<CMISFile>
+	 * @return {EntityList<CMISFile>}
 	 * @throws ClientServicesException
 	 */
 	public EntityList<CMISFile> getMyCollections(Map<String, String> parameters) throws ClientServicesException {
@@ -154,7 +152,7 @@ public class CMISFileService extends ConnectionsService {
 	/**
 	 * Retrieves an Atom document representation of a file collection shared with the user.
 	 * 
-	 * @return EntityList<CMISFile>
+	 * @return {EntityList<CMISFile>}
 	 * @throws CMISFileServiceException
 	 */
 	public EntityList<CMISFile> getCollectionsSharedWithMe() throws ClientServicesException {
@@ -165,7 +163,7 @@ public class CMISFileService extends ConnectionsService {
 	 * Retrieves an Atom document representation of a file collection shared with the user.
 	 * 
 	 * @param parameters
-	 * @return EntityList<CMISFile>
+	 * @return {EntityList<CMISFile>}
 	 * @throws ClientServicesException
 	 */
 	public EntityList<CMISFile> getCollectionsSharedWithMe(Map<String, String> parameters) throws ClientServicesException {
@@ -177,7 +175,7 @@ public class CMISFileService extends ConnectionsService {
 	/**
 	 * Retrieves an Atom document representation of a file shared by the user.
 	 * 
-	 * @return EntityList<CMISFile>
+	 * @return {EntityList<CMISFile>}
 	 * @throws CMISFileServiceException
 	 */
 	public EntityList<CMISFile> getMyShares() throws ClientServicesException {
@@ -188,7 +186,7 @@ public class CMISFileService extends ConnectionsService {
 	 * Retrieves an Atom document representation of a file shared by the user.
 	 * 
 	 * @param parameters
-	 * @return EntityList<CMISFile>
+	 * @return {EntityList<CMISFile>}
 	 * @throws ClientServicesException
 	 */
 	public EntityList<CMISFile> getMyShares(Map<String, String> parameters) throws ClientServicesException {
@@ -203,7 +201,7 @@ public class CMISFileService extends ConnectionsService {
 
 	/**
 	 * Factory method to instantiate a FeedHandler for Profiles
-	 * @return IFeedHandler<Profile>
+	 * @return {IFeedHandler<Profile>}
 	 */
 	public IFeedHandler<CMISFile> getFileFeedHandler() {
 		return new AtomFeedHandler<CMISFile>(this, false) {
@@ -223,7 +221,7 @@ public class CMISFileService extends ConnectionsService {
 	
     /**
      * Method to get the Default endpoint to be used with the service
-     * @return
+     * @return {String}
      */
     protected static String getDefaultEndpoint() {
 		return "connections";

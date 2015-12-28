@@ -45,8 +45,7 @@ public interface IFileType {
     
     /**
      * Add the URL parameters specific to this service.
-     * @param url
-     * @return
+     * @param map
      */
     public void addUrlParameters(Map<String, String> map, int index, int blockSize) throws ClientServicesException;
 
@@ -85,11 +84,10 @@ public interface IFileType {
      * 
      * @param svc
      *          the service where the files are to be read from
-     * @param accessor TODO
+     * @param accessor 
      * @param params
      *          a list of parameters that are to be added to the URL 
-     * @return
-     *          a list of FileEntry objects, whereby each item in the List maps to a file stored within the service
+     * @return a list of FileEntry objects, whereby each item in the List maps to a file stored within the service
      * @throws ClientServicesException
      * 
      */
@@ -113,7 +111,7 @@ public interface IFileType {
     public void uploadFile(Endpoint authBean, File serverFile, FileServiceData dataSource, HashMap<String, String> params) throws CloneNotSupportedException;
 
     /**
-     * @return
+     * @return {boolean}
      */
     public boolean useFolders();
     

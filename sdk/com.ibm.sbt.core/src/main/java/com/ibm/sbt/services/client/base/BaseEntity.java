@@ -60,7 +60,7 @@ public class BaseEntity implements Externalizable {
 	 *	Otherwise it delegates to the data handler the task to retrieve the field from the data object. 
 	 *
 	 * @param field
-	 * @return
+	 * @return {String}
 	 */
 	public String getAsString(FieldEntry field){
 		if (fields.containsKey(field.getName())){
@@ -78,7 +78,7 @@ public class BaseEntity implements Externalizable {
 	 *	Otherwise it delegates to the data handler the task to retrieve the field from the data object. 
 	 *
 	 * @param fieldName
-	 * @return
+	 * @return {String}
 	 */
 	public String getAsString(String fieldName){
 		if (fields.containsKey(fieldName)){
@@ -94,7 +94,7 @@ public class BaseEntity implements Externalizable {
 	/**
 	 * This method updates the value of a field by modifying an internal map. Used to create or update an entity.
 	 * 
-	 * @param fieldName
+	 * @param field
 	 * @param value
 	 */
 	public void setAsString(FieldEntry field, String value) {
@@ -107,7 +107,6 @@ public class BaseEntity implements Externalizable {
 	 * @param field
 	 * @param value
 	 */
-	
 	public void setAsString(String field, String value) {
 		fields.put(field , value);
 	}
@@ -115,8 +114,7 @@ public class BaseEntity implements Externalizable {
 	 * Returns the value of a field as an int
 	 * 
 	 * @param field
-	 * @return int
-	 * 			returns -1, if the field doesn't exist
+	 * @return {int} returns -1, if the field doesn't exist
 	 */
 	public int getAsInt(FieldEntry field){
 		if (fields.containsKey(field.getName())){
@@ -132,7 +130,7 @@ public class BaseEntity implements Externalizable {
 	 * Returns the value of a field as a long
 	 * 
 	 * @param field
-	 * @return returns null, if the field doesn't exist
+	 * @return null, if the field doesn't exist
 	 */
 	public Long getAsLong(FieldEntry field){
 		if (fields.containsKey(field.getName())){
@@ -147,8 +145,8 @@ public class BaseEntity implements Externalizable {
 	/**
 	 * Returns the value of a field as a long
 	 * 
-	 * @param field
-	 * @return returns null, if the field doesn't exist
+	 * @param fieldName
+	 * @return null, if the field doesn't exist
 	 */
 	public Long getAsLong(String fieldName){
 		if (fields.containsKey(fieldName)){
@@ -230,7 +228,7 @@ public class BaseEntity implements Externalizable {
 	/**
 	 * Returns the value of a field as a date
 	 * 
-	 * @param field
+	 * @param fieldName
 	 * @return returns null, if the field doesn't exist
 	 */
 	public Date getAsDate(String fieldName){
@@ -249,8 +247,8 @@ public class BaseEntity implements Externalizable {
 	/**
 	 * Returns the value of a field as a map
 	 * 
-	 * @param field
-	 * @return
+	 * @param fields
+	 * @return {Map<String, String>}
 	 */
 	public Map<String, String> getAsMap(FieldEntry[] fields){
 		Map<String, String> map = new HashMap<String, String>();
@@ -263,8 +261,8 @@ public class BaseEntity implements Externalizable {
 	/**
 	 * Returns the value of a field as a map
 	 * 
-	 * @param field
-	 * @return
+	 * @param fieldNames
+	 * @return {Map<String, String>}
 	 */
 	public Map<String, String> getAsMap(String[] fieldNames){
 		Map<String, String> map = new HashMap<String, String>();
@@ -278,7 +276,7 @@ public class BaseEntity implements Externalizable {
 	 * Returns the value of a field as a map
 	 * 
 	 * @param field
-	 * @return
+	 * @return {String[]}
 	 */
 	public String[] getAsArray(FieldEntry field){
 		if (fields.containsKey(field.getName())){
@@ -293,8 +291,8 @@ public class BaseEntity implements Externalizable {
 	/**
 	 * Returns the value of a field as a map
 	 * 
-	 * @param field
-	 * @return
+	 * @param fieldName
+	 * @return {String[]}
 	 */
 	public String[] getAsArray(String fieldName){
 		if (fields.containsKey(fieldName)){
@@ -310,7 +308,7 @@ public class BaseEntity implements Externalizable {
 	 * Returns true if a field exists
 	 * 
 	 * @param field
-	 * @return
+	 * @return {boolean}
 	 */
 	public boolean exists(FieldEntry field){
 		if (fields.containsKey(field.getName())){
@@ -325,7 +323,7 @@ public class BaseEntity implements Externalizable {
 	/**
 	 * Receives an int as the value of a field and stores it as an Integer on the internal map 
 	 * 
-	 * @param fieldName
+	 * @param field
 	 * @param value
 	 */
 	public void setAsInt(FieldEntry field, int value){
@@ -355,7 +353,7 @@ public class BaseEntity implements Externalizable {
 	/**
 	 * Receives a boolean as the value of a field and stores it as a Boolean on the internal map 
 	 * 
-	 * @param fieldName
+	 * @param field
 	 * @param value
 	 */
 	public void setAsBoolean(FieldEntry field, boolean value){
@@ -375,7 +373,7 @@ public class BaseEntity implements Externalizable {
 	/**
 	 * Receives a long as the value of a field and stores it as a Boolean on the internal map 
 	 * 
-	 * @param fieldName
+	 * @param field
 	 * @param value
 	 */
 	public void setAsLong(FieldEntry field, long value){
@@ -425,7 +423,7 @@ public class BaseEntity implements Externalizable {
 	/**
 	 * Receives an array as the value of a field and stores it as an array on the internal map 
 	 * 
-	 * @param fieldName
+	 * @param field
 	 * @param value
 	 */
 	public void setAsArray(FieldEntry field, String[] value){
@@ -435,7 +433,7 @@ public class BaseEntity implements Externalizable {
 	/**
 	 * Receives an object as the value of a field and stores it as an object on the internal map 
 	 * 
-	 * @param fieldName
+	 * @param field
 	 * @param value
 	 */
 	public void setAsObject(FieldEntry field, Object value){
@@ -477,7 +475,7 @@ public class BaseEntity implements Externalizable {
 	
 	/**
 	 * 
-	 * @set service
+	 * sets the service
 	 */
 	public void setService(BaseService service){
 		this.svc = service;
@@ -485,7 +483,7 @@ public class BaseEntity implements Externalizable {
 	
 	/**
 	 * 
-	 * @return dataHandler
+	 * @return {DataHandler<?>} dataHandler
 	 */
 	public DataHandler<?> getDataHandler(){
 		return dataHandler;

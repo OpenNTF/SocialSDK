@@ -99,7 +99,7 @@ public class TwitterEntry extends AbstractViewRowData {
     }
 
     /**
-     * @param set the authorLink
+     * @param authorLink set the authorLink
      */
     public void setAuthorLink(String authorLink) {
         this.authorLink = authorLink;
@@ -113,7 +113,7 @@ public class TwitterEntry extends AbstractViewRowData {
     }
 
     /**
-     * @param set the tweetLink
+     * @param tweetLink set the tweetLink
      */
     public void setTweetLink(String tweetLink) {
         this.tweetLink = tweetLink;
@@ -128,7 +128,7 @@ public class TwitterEntry extends AbstractViewRowData {
     }
 
     /**
-     * @param set the content
+     * @param content set the content
      */
     @Deprecated
     public void setTweetContent(String content) {
@@ -143,7 +143,7 @@ public class TwitterEntry extends AbstractViewRowData {
     }
 
     /**
-     * @param set the title
+     * @param title set the title
      */
     public void setTitle(String title) {
         this.title = title;
@@ -157,7 +157,7 @@ public class TwitterEntry extends AbstractViewRowData {
     }
 
     /**
-     * @param set the content
+     * @param content set the content
      */
     public void setContent(String content) {
         this.content = content;
@@ -172,7 +172,7 @@ public class TwitterEntry extends AbstractViewRowData {
     }
 
     /**
-     * @param set the publishedDate
+     * @param tweetDate set the publishedDate
      */
     @Deprecated
     public void setTweetDate(Date tweetDate) {
@@ -187,7 +187,7 @@ public class TwitterEntry extends AbstractViewRowData {
     }
 
     /**
-     * @param set the publishedDate
+     * @param publishedDate set the publishedDate
      */
     public void setPublishedDate(String publishedDate) {
         this.publishedDate = publishedDate;
@@ -201,7 +201,7 @@ public class TwitterEntry extends AbstractViewRowData {
     }
 
     /**
-     * @param set the updatedDate
+     * @param updatedDate set the updatedDate
      */
     public void setUpdatedDate(String updatedDate) {
         this.updatedDate = updatedDate;
@@ -215,7 +215,7 @@ public class TwitterEntry extends AbstractViewRowData {
     }
 
     /**
-     * @param set the image
+     * @param image set the image
      */
     public void setImage(String image) {
         this.image = image;

@@ -24,7 +24,7 @@ import com.ibm.sbt.automation.core.test.BaseServiceTest;
 /**
  * @author mwallace
  * 
- * @date 6 Mar 2013
+ * @since 6 Mar 2013
  */
 public class BasicMainWindow extends BaseServiceTest {
 

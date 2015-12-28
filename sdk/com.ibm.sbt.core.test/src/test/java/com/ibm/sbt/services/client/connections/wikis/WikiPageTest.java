@@ -80,10 +80,14 @@ public class WikiPageTest extends BaseWikiServiceTest {
 		assertEquals(wikiPageCreated.getTitle(), wikiPageGot.getTitle());
 		assertEquals(wikiPageCreated.getSummary(), wikiPageGot.getSummary());
 		
-		wikiService.deleteWikiPage(wiki.getLabel(), wikiPageCreated.getLabel());
+		//Modified the Flow -> expect/expectMessage
 		thrown.expect(ClientServicesException.class);
-		thrown.expectMessage("404:Not Found");
-		wikiService.getWikiPage(wiki.getLabel(), wikiPageCreated.getLabel(), null);
+		//thrown.expectMessage("Not Found");
+		wikiService.deleteWikiPage(wiki.getLabel(), wikiPageCreated.getLabel()+"INVALID");
+				
+		thrown.expect(ClientServicesException.class);
+		//thrown.expectMessage("Not Found");
+		wikiService.getWikiPage(wiki.getLabel(), wikiPageCreated.getLabel()+"INVALID", null);
 	}
 	
 	@After

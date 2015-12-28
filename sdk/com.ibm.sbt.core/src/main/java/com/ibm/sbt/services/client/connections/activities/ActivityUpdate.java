@@ -55,8 +55,8 @@ public class ActivityUpdate extends AtomEntity {
 	 * 
 	 * @param service
 	 * @param node
-	 * @param nameSpaceCtx
-	 * @param xpath
+	 * @param namespaceCtx
+	 * @param xpathExpression
 	 */
 	public ActivityUpdate(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
 		super(service, node, namespaceCtx, xpathExpression);
@@ -64,7 +64,7 @@ public class ActivityUpdate extends AtomEntity {
 	
 	/**
 	 * 
-	 * @return
+	 * @return {ActivityService}
 	 */
 	public ActivityService getActivityService() {
 		return (ActivityService)getService();
@@ -100,7 +100,7 @@ public class ActivityUpdate extends AtomEntity {
 	/**
 	 * Return the type
 	 * 
-	 * @return
+	 * @return {String}
 	 */
 	public String getType() {
 		return getAsString(ActivityXPath.type);

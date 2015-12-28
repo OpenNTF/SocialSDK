@@ -42,7 +42,7 @@ public class PersonSerializer extends BaseEntitySerializer<Person> {
      * Returns a full or partial xml representation of a Person,
      * depending on the fields with data
      * @param nodeName
-     * @return
+     * @return {Node}
      */
     public Node xmlNode(String nodeName) {
         return xmlNode(nodeName, null);
@@ -53,7 +53,7 @@ public class PersonSerializer extends BaseEntitySerializer<Person> {
 	 * depending on the fields with data
 	 * @param nodeName
 	 * @param namespaceUri
-	 * @return
+	 * @return {Node}
 	 */
 	public Node xmlNode(String nodeName, String namespaceUri) {
 		Element[] textElements = new Element[getNumFields()];

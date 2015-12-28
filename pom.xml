@@ -5,7 +5,7 @@
 	<packaging>pom</packaging>
 
 	<groupId>com.ibm.sbt</groupId>
-	<version>1.1.7-SNAPSHOT</version>
+	<version>1.1.12-SNAPSHOT</version>
 
 	<parent>
 		<groupId>org.sonatype.oss</groupId>
@@ -194,7 +194,8 @@ Source code is available at https://github.com/OpenNTF/SocialSDK
 				<!-- javadoc configuration -->
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.9</version>
+				<!-- PBastide: Updated version from 2.9 to 2.10.3 -->
+				<version>2.10.3</version>
 				<executions>
 					<execution>
 						<id>attach-javadocs</id>
@@ -205,6 +206,7 @@ Source code is available at https://github.com/OpenNTF/SocialSDK
 				</executions>
 				<configuration>
 					<failOnError>false</failOnError>
+					<quiet/>
 					<excludePackageNames>com.sun.*:com.ibm.commons.*:com.ibm.sbt.core.*:com.ibm.sbt.plugin.*:com.ibm.sbt.jslibrray.*:com.ibm.sbt.proxy.*:com.ibm.sbt.security.*:*.util.*:com.ibm.sbt.portlet.*:com.ibm.sbt.playground.*:demo.*:acme.*</excludePackageNames>
 				</configuration>
 			</plugin>

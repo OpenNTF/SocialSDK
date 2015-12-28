@@ -27,7 +27,7 @@ import com.ibm.sbt.test.java.authentication.GetMyProfile;
 /**
  * @author mwallace
  * 
- * @date 12 Mar 2013
+ * @since 12 Mar 2013
  */
 @RunWith(Suite.class)
 @SuiteClasses({ GetMyCommunities.class, GetMyProfile.class })

@@ -29,7 +29,7 @@ import com.ibm.sbt.services.client.connections.activitystreams.ActivityStreamSer
 /**
  * @author rajmeetbal
  *  
- * @date 08 May 2013
+ * @since 08 May 2013
  */
 public class GetMySavedView extends BaseActivityStreamsTest {
     

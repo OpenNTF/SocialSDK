@@ -155,7 +155,7 @@ public class BaseGridTestSetup extends BaseApiTest{
 	 * @param content
 	 * @param tags
 	 * @param retry
-	 * @return
+	 * @return {Community} the created community
 	 */
 	public Community createCommunity(String title, String type, String content, ArrayList<String> tags, boolean retry) {
         Community community = null;

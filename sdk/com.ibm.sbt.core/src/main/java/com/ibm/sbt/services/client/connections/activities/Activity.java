@@ -71,8 +71,8 @@ public class Activity extends NodeEntity {
 	 * 
 	 * @param service
 	 * @param node
-	 * @param nameSpaceCtx
-	 * @param xpath
+	 * @param namespaceCtx
+	 * @param xpathExpression
 	 */
 	public Activity(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
 		super(service, node, namespaceCtx, xpathExpression);
@@ -110,7 +110,7 @@ public class Activity extends NodeEntity {
 	 * 
 	 * Use this URI to view or update the list of activity members and change their levels of access to the activity.
 	 * 
-	 * @return
+	 * @return {String}
 	 */
 	public String getMemberListUrl() {
 		return getAsString(ActivityXPath.memberListHref);
@@ -137,7 +137,7 @@ public class Activity extends NodeEntity {
 	/**
 	 * Return the activity goal.
 	 * 
-	 * @return
+	 * @return {String}
 	 */
 	public String getGoal() {
 		return getSubtitle();
@@ -148,7 +148,6 @@ public class Activity extends NodeEntity {
 	 * Set the activity goal.
 	 * 
 	 * @param goal
-	 * @return
 	 */
 	public void setGoal(String goal) {
 		setSubtitle(goal);
@@ -189,7 +188,7 @@ public class Activity extends NodeEntity {
 	 * outline. This is the default value.
 	 * todo
 	 *  
-	 * @return defaultView
+	 * @return {String} defaultView
 	 */
 	public String getDefaultView() {
 		return getAsString(ActivityXPath.defaultView);
@@ -216,7 +215,7 @@ public class Activity extends NodeEntity {
 	 * Identifies the priority of the activity. Options are High=3000, Medium=2000, or Normal=1. 
 	 * Prioritization settings are not global, but are unique to each user; no other members can see these collections.
 	 *  
-	 * @return priority
+	 * @return {int} priority
 	 */
 	public int getPriority() {
 		return getAsInt(ActivityXPath.priority);
@@ -237,7 +236,7 @@ public class Activity extends NodeEntity {
 	/**
 	 * Returns true if the activity is external.
 	 * 
-	 * @return
+	 * @return {boolean}
 	 */
 	public boolean isExternal() {
 		return exists(ActivityXPath.external);
@@ -258,7 +257,7 @@ public class Activity extends NodeEntity {
 	 * Flag that identifies a completed activity. To complete an activity, add this flag. 
 	 * If it is not present, the activity is not completed.
 	 * 
-	 * @return
+	 * @return {boolean}
 	 */
 	public boolean isCompleted() {
 		return exists(ActivityXPath.completed);
@@ -280,7 +279,7 @@ public class Activity extends NodeEntity {
 	 * Add this flag to make an activity appear as a template. 
 	 * The API does not provide any applications that use activity templates.
 	 * 
-	 * @return
+	 * @return {boolean}
 	 */
 	public boolean isTemplate() {
 		return exists(ActivityXPath.template);
@@ -289,7 +288,7 @@ public class Activity extends NodeEntity {
 	/**
 	 * Set flag to indicate this activity is a template.
 	 * 
-	 * @param template
+	 * @param external
 	 */
 	public void setTemplate(boolean external) {
 		setAsBoolean(ActivityXPath.template, external);
@@ -297,7 +296,7 @@ public class Activity extends NodeEntity {
 
 	/**
 	 * 
-	 * @return
+	 * @return {String}
 	 */
 	public String getInReplyTo() {
 		return getAsString(ActivityXPath.in_reply_to);
@@ -305,7 +304,6 @@ public class Activity extends NodeEntity {
 	
 	/**
 	 * 
-	 * @return
 	 */
 	public void setInReplyTo(String inReplyTo) {
 		setAsString(ActivityXPath.in_reply_to, inReplyTo);
@@ -313,7 +311,7 @@ public class Activity extends NodeEntity {
 	
 	/**
 	 * 
-	 * @return
+	 * @return {Person}
 	 */
 	public Person getAssignedTo() {
 		return null;
@@ -332,7 +330,7 @@ public class Activity extends NodeEntity {
 	/**
 	 * 
 	 * 
-	 * @return
+	 * @return {EntityList<Category>}
 	 * @throws ClientServicesException 
 	 */
 	public EntityList<Category> getCategories() throws ClientServicesException {
@@ -343,7 +341,7 @@ public class Activity extends NodeEntity {
 	/**
 	 * 
 	 * 
-	 * @return
+	 * @return {EntityList<ActivityNode>}
 	 * @throws ClientServicesException 
 	 */
 	public EntityList<ActivityNode> getDescendants() throws ClientServicesException {
@@ -359,7 +357,6 @@ public class Activity extends NodeEntity {
 	 * To delete an existing activity, use the HTTP DELETE method.
 	 * Deleted activities are moved to the trash collection and can be restored.  
 	 * 
-	 * @return
 	 * @throws ClientServicesException 
 	 * @throws {@link NullPointerException} If there is no service associated with this Activity
 	 */
@@ -369,9 +366,8 @@ public class Activity extends NodeEntity {
 	}
 	
 	/**
-	 * @see ActivityService.updateActivity  
+	 * updates the given activity via the activity service
 	 * 
-	 * @return
 	 * @throws ClientServicesException 
 	 * @throws {@link NullPointerException} If there is no service associated with this Activity
 	 */
@@ -387,7 +383,7 @@ public class Activity extends NodeEntity {
 	/**
 	 * Return list of the members for this Activity.
 	 * 
-	 * @return
+	 * @return {EntityList<Member>}
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Member> getMembers() throws ClientServicesException {
@@ -401,10 +397,10 @@ public class Activity extends NodeEntity {
 	/**
 	 * Add an activity member.
 	 * 
-	 * @param member
-	 * @param role
 	 * @param type
-	 * @return
+	 * @param memberId
+	 * @param role
+	 * @return {Member}
 	 */
 	public Member addMember(String type, String memberId, String role) throws ClientServicesException {
 		Member member = new Member();
@@ -419,7 +415,7 @@ public class Activity extends NodeEntity {
 	 * Add an activity member.
 	 * 
 	 * @param member
-	 * @return
+	 * @return {Member}
 	 */
 	public Member addMember(Member member) throws ClientServicesException {
 		ActivityService activityService = getActivityService();
@@ -433,7 +429,6 @@ public class Activity extends NodeEntity {
 	 * Add activity members.
 	 * 
 	 * @param members
-	 * @return
 	 */
 	public void addMembers(List<Member> members) throws ClientServicesException {
 		ActivityService activityService = getActivityService();
@@ -446,7 +441,7 @@ public class Activity extends NodeEntity {
 	/**
 	 * Retrieve an activity member.
 	 * 
-	 * @return
+	 * @return {Member}
 	 */
 	public Member getMember(String memberId) throws ClientServicesException {
 		ActivityService activityService = getActivityService();
@@ -460,7 +455,7 @@ public class Activity extends NodeEntity {
 	 * Update an activity member.
 	 * 
 	 * @param member
-	 * @return
+	 * @return {Member}
 	 */
 	public Member updateMember(Member member) throws ClientServicesException {
 		ActivityService activityService = getActivityService();
@@ -474,7 +469,7 @@ public class Activity extends NodeEntity {
 	 * Delete an activity member.
 	 * 
 	 * @param member
-	 * @return
+	 * @return {String}
 	 */
 	public String deleteMember(Member member) throws ClientServicesException {
 		ActivityService activityService = getActivityService();
@@ -487,8 +482,8 @@ public class Activity extends NodeEntity {
 	/**
 	 * Delete an activity member.
 	 * 
-	 * @param member
-	 * @return
+	 * @param memberId
+	 * @return {String}
 	 */
 	public String deleteMember(String memberId) throws ClientServicesException {
 		ActivityService activityService = getActivityService();

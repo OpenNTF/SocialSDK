@@ -88,7 +88,7 @@ public class Wiki extends WikiBaseEntity {
 	
 	/**
 	 * Set of permissions available for the wiki.
-	 * @return
+	 * @return {Set<String>}
 	 */
 	@SuppressWarnings("unchecked")
 	public Set<String> getPermissions() {
@@ -123,10 +123,10 @@ public class Wiki extends WikiBaseEntity {
 	
 	/**
 	 * List of users who can access the wiki. 
-	 * @return
+	 * @return {List<Member>}
 	 */
 	public List<Member> getSharedWith() {
-		throw new UnsupportedOperationException(); // FIXME
+		throw new UnsupportedOperationException(); //FIXME: Needs to be implemented
 	}
 	
 	/**
@@ -134,13 +134,13 @@ public class Wiki extends WikiBaseEntity {
 	 * @param members
 	 */
 	public void setSharedWith(List<Member> members) {
-		throw new UnsupportedOperationException(); // FIXME
+		throw new UnsupportedOperationException(); //FIXME: Needs to be implemented
 	}
 
 	/**
 	 * Returns the tags on the wiki page.
 	 * 
-	 * @return
+	 * @return {List<String>}
 	 */
 	public List<String> getTags() {
 		return super.getBaseTags();

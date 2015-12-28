@@ -26,7 +26,7 @@ import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 /**
  * @author rajmeetbal
  *  
- * @date 18 Sep 2013
+ * @since 18 Sep 2013
  */
 public class GetColleaguesConnectionEntries extends BaseApiTest {
     

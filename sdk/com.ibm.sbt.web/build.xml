@@ -11,7 +11,7 @@
 		<condition property="dojo.build" value="${scriptsFolder}/${dojo.build.nix}">
 			<os family="unix" />
 		</condition>
-		<!-- if you have mixed path separators in the release dir shrinksafe die with a out of memory: heap exception -->
+		<!-- if you have mixed path separators in the release dir shrinksafe dies with an out of memory: heap exception -->
 		<echo message="Dojo Build Tool executable: ${dojo.build}" />
 		<path id="release.tmp">
 			<pathelement location="${release.path}" />

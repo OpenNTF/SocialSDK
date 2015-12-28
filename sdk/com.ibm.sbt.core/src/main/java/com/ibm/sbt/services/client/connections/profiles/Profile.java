@@ -33,7 +33,7 @@ import com.ibm.sbt.services.client.base.datahandlers.XmlDataHandler;
 import com.ibm.sbt.services.client.connections.profiles.model.ProfileXPath;
 
 /**
- * @Represents Connections Profile
+ * IBM Connections Profiles - Profile Abstraction
  *
  */
 public class Profile extends AtomEntity {
@@ -44,8 +44,8 @@ public class Profile extends AtomEntity {
 	/**
 	 * Constructor
 	 *  
-	 * @param communityService
-	 * @param communityUuid
+	 * @param profileService
+	 * @param id
 	 */
 	public Profile(ProfileService profileService, String id) {
 		setService(profileService);
@@ -65,7 +65,7 @@ public class Profile extends AtomEntity {
 	
 	/**
 	 * 
-	 * @return
+	 * @return {Profile}
 	 * @throws ProfileServiceException
 	 * @throws ClientServicesException 
 	 */
@@ -95,7 +95,7 @@ public class Profile extends AtomEntity {
     
     /**
      * 
-     * @return
+     * @return {EntityList<Profile>}
      * @throws ProfileServiceException
      * @throws ClientServicesException 
      */
@@ -107,7 +107,6 @@ public class Profile extends AtomEntity {
 	 * Returns a mapping containing the extended attributes for the entry.<bt/>
 	 * This method execute a xhr call to the back end for every attribute.
 	 * 
-	 * @param p the profile to use. has to be a full profile, to obtain all the extended attributes links
 	 * @return a map containing the id of the attribute as key and the attribute value as value
 	 * @throws ProfileServiceException
 	 */
@@ -117,7 +116,7 @@ public class Profile extends AtomEntity {
  
 	/**
 	 * 
-	 * @return
+	 * @return {String}
 	 */
     public String getUserid() {
     	return getAsString(ProfileXPath.uid);
@@ -143,7 +142,6 @@ public class Profile extends AtomEntity {
     /**
      * @return the Title
      */
-      
     public String getJobTitle() {
     	return getAsString(ProfileXPath.jobTitle);
     }
@@ -206,7 +204,6 @@ public class Profile extends AtomEntity {
     /**
      * @return the address
      */
-   
     public Object getAddress() {
     	 HashMap<String, String> AddressMap = new HashMap<String, String>();
     	 AddressMap.put("countryName", getAsString(ProfileXPath.countryName));

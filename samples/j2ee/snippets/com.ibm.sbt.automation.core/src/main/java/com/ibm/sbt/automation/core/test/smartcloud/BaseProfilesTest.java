@@ -27,7 +27,7 @@ import com.ibm.sbt.services.client.smartcloud.profiles.ProfileServiceException;
  * @author mwallace
  * @author Vimal Dhupar
  *  
- * @date 19 Mar 2013
+ * @since 19 Mar 2013
  */
 public class BaseProfilesTest extends BaseApiTest {
     

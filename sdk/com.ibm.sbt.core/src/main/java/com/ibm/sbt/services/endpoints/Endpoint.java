@@ -66,9 +66,9 @@ public interface Endpoint {
     public String getProxyPath(String endpointName);
     
     /**
-     * TODO Can this be combined with the proxyPath
+     * TODO: Can this be combined with the proxyPath
      * 
-     * @return
+     * @return {String}
      */
     public String getProxyHandlerPath();
     
@@ -89,7 +89,7 @@ public interface Endpoint {
 
     /**
      * Get the endpoint label, for the login dialog. 
-     * @return
+     * @return {String}
      */
     public String getLabel();
     
@@ -107,62 +107,62 @@ public interface Endpoint {
     
     /**
      * Gets the error code for authentication failure.
-     * @return
+     * @return {int} error code
      */
     public int getAuthenticationErrorCode();
     
     /**
      * Get page for the login popup and main window. 
-     * @return
+     * @return {String} login page url 
      */
     public String getLoginPage();
     
     /**
      * Get page for the login dialog. 
-     * @return
+     * @return {String} 
      */
     public String getDialogLoginPage();
     
     /**
      * Get login UI mode. 
-     * @return
+     * @return {String} 
      */
     public String getLoginUi();
     
     /**
      * Get information whether default Authentication will be triggered or not.. 
-     * @return
+     * @return {String} 
      */
     public String getAutoAuthenticate();
 
     /**
      * Get authentication type for the endpoint. like basicAuth, oauth etc.
-     * @return
+     * @return {String} 
      */
     public String getAuthType();
     
     /**
      * Get API version for the endpoint
-     * @return
+     * @return {String} 
      */
     public String getApiVersion();
     
     /**
      * Get map, used to map default service urls to custom urls. e.g. /files to /myfiles
-     * @return
+     * @return {Map<String, String>}
      */
     public Map<String, String> getServiceMappings();
     
     /**
      * Get platform for the endpoint
-     * @return
+     * @return {String}
      */
     public String getPlatform();
     
     /**
      * Return a collection of client parameters that should be emitted with the 
      * endpoint when valid.
-     * @return
+     * @return {Map<String, Object>}
      */
     public Map<String, Object> getClientParams();
     
@@ -176,7 +176,7 @@ public interface Endpoint {
     /**
      * Return true if endpoint requires authentication.
      * 
-     * @return
+     * @return {boolean}
      * @throws ClientServicesException
      */
     public boolean isRequiresAuthentication() throws ClientServicesException;
@@ -184,7 +184,7 @@ public interface Endpoint {
     /**
      * Return true if endpoint is autenticated.
      * 
-     * @return
+     * @return {boolean}
      * @throws ClientServicesException
      */
     public boolean isAuthenticated() throws ClientServicesException;
@@ -192,7 +192,7 @@ public interface Endpoint {
     /**
      * Return true if authentication is valid.
      * 
-     * @return
+     * @return {boolean} 
      * @throws ClientServicesException
      */
     public boolean isAuthenticationValid() throws ClientServicesException;
@@ -231,7 +231,7 @@ public interface Endpoint {
      * @param method
      * @param args
      * @param content
-     * @return
+     * @return {Response}
      * @throws ClientServicesException
      */
     public Response xhr(String method, ClientService.Args args, Object content) throws ClientServicesException;
@@ -239,7 +239,7 @@ public interface Endpoint {
     /**
      * 
      * @param serviceUrl
-     * @return
+     * @return {Response}
      * @throws ClientServicesException
      */
     public Response xhrGet(String serviceUrl) throws ClientServicesException;
@@ -248,7 +248,7 @@ public interface Endpoint {
      * 
      * @param serviceUrl
      * @param parameters
-     * @return
+     * @return {Response}
      * @throws ClientServicesException
      */
     public Response xhrGet(String serviceUrl, Map<String, String> parameters) throws ClientServicesException;
@@ -258,7 +258,7 @@ public interface Endpoint {
      * @param serviceUrl
      * @param parameters
      * @param format
-     * @return
+     * @return {Response}
      * @throws ClientServicesException
      */
     public Response xhrGet(String serviceUrl, Map<String, String> parameters, Handler format) throws ClientServicesException;
@@ -266,7 +266,7 @@ public interface Endpoint {
     /**
      * 
      * @param args
-     * @return
+     * @return {Response}
      * @throws ClientServicesException
      */
     public Response xhrGet(Args args) throws ClientServicesException;
@@ -275,7 +275,7 @@ public interface Endpoint {
      * 
      * @param serviceUrl
      * @param content
-     * @return
+     * @return {Response}
      * @throws ClientServicesException
      */
     public Response xhrPost(String serviceUrl, Object content) throws ClientServicesException;
@@ -285,7 +285,7 @@ public interface Endpoint {
      * @param serviceUrl
      * @param parameters
      * @param content
-     * @return
+     * @return {Response}
      * @throws ClientServicesException
      */
     public Response xhrPost(String serviceUrl, Map<String, String> parameters, Object content) throws ClientServicesException;
@@ -296,7 +296,7 @@ public interface Endpoint {
      * @param parameters
      * @param content
      * @param format
-     * @return
+     * @return {Response}
      * @throws ClientServicesException
      */
     public Response xhrPost(String serviceUrl, Map<String, String> parameters, Object content, Handler format) throws ClientServicesException;
@@ -305,7 +305,7 @@ public interface Endpoint {
      * 
      * @param args
      * @param content
-     * @return
+     * @return {Response}
      * @throws ClientServicesException
      */
     public Response xhrPost(Args args, Object content) throws ClientServicesException;
@@ -314,7 +314,7 @@ public interface Endpoint {
      * 
      * @param serviceUrl
      * @param content
-     * @return
+     * @return {Response}
      * @throws ClientServicesException
      */
     public Response xhrPut(String serviceUrl, Object content) throws ClientServicesException;
@@ -324,7 +324,7 @@ public interface Endpoint {
      * @param serviceUrl
      * @param parameters
      * @param content
-     * @return
+     * @return {Response}
      * @throws ClientServicesException
      */
     public Response xhrPut(String serviceUrl, Map<String, String> parameters, Object content) throws ClientServicesException;
@@ -335,7 +335,7 @@ public interface Endpoint {
      * @param parameters
      * @param content
      * @param format
-     * @return
+     * @return {Response}
      * @throws ClientServicesException
      */
     public Response xhrPut(String serviceUrl, Map<String, String> parameters, Object content, Handler format) throws ClientServicesException;
@@ -344,7 +344,7 @@ public interface Endpoint {
      * 
      * @param args
      * @param content
-     * @return
+     * @return {Response}
      * @throws ClientServicesException
      */
     public Response xhrPut(Args args, Object content) throws ClientServicesException;
@@ -352,7 +352,7 @@ public interface Endpoint {
     /**
      * 
      * @param serviceUrl
-     * @return
+     * @return {Response}
      * @throws ClientServicesException
      */
     public Response xhrDelete(String serviceUrl) throws ClientServicesException;
@@ -361,7 +361,7 @@ public interface Endpoint {
      * 
      * @param serviceUrl
      * @param parameters
-     * @return
+     * @return {Response}
      * @throws ClientServicesException
      */
     public Response xhrDelete(String serviceUrl, Map<String, String> parameters) throws ClientServicesException;
@@ -371,7 +371,7 @@ public interface Endpoint {
      * @param serviceUrl
      * @param parameters
      * @param format
-     * @return
+     * @return {Response}
      * @throws ClientServicesException
      */
     public Response xhrDelete(String serviceUrl, Map<String, String> parameters, Handler format) throws ClientServicesException;
@@ -379,14 +379,14 @@ public interface Endpoint {
     /**
      * 
      * @param args
-     * @return
+     * @return {Response}
      * @throws ClientServicesException
      */
     public Response xhrDelete(Args args) throws ClientServicesException;
     
     /**
      * 
-     * @return
+     * @return {Response}
      * @throws ClientServicesException
      */
     public ClientService getClientService() throws ClientServicesException;
@@ -408,7 +408,16 @@ public interface Endpoint {
      * This is to be used in development/debug mode only, when we want to capture all network traffic from SDK.
      */
     public String getHttpProxy();
-
+	
+	/**
+	 * gets the application key
+	 */
+	//public String getAppKey();
+	
+	/**
+	 * gets the given appkey 
+	 */
+	 //public void setAppKey(String appKey);
     
     /**
      * Allows an endpoint to append query args to a proxied request.

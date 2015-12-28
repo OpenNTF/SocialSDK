@@ -20,8 +20,6 @@ import java.util.List;
 import com.ibm.commons.runtime.Application;
 import com.ibm.commons.runtime.Context;
 
-
-
 /**
  * SBT Environment Factory.
  * 
@@ -55,7 +53,7 @@ public abstract class SBTEnvironmentFactory {
 	 * Get the a environment from its name.
 	 * 
 	 * @param name
-	 * @return
+	 * @return SBTEnvironment
 	 */
 	public abstract SBTEnvironment getEnvironment(String name);
 }

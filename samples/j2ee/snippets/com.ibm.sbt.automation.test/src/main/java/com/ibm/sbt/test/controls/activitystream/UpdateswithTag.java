@@ -23,7 +23,7 @@ import com.ibm.sbt.automation.core.test.BaseActivityStreamTest;
 
 /**
  * @author Francis 
- * @date 26 Mar 2013
+ * @since 26 Mar 2013
  */
 public class UpdateswithTag extends BaseActivityStreamTest {
 	

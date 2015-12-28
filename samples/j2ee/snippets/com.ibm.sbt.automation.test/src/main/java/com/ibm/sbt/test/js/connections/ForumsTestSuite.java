@@ -46,7 +46,7 @@ import com.ibm.sbt.test.js.connections.forums.api.UpdateForumTopic;
 /**
  * @author mwallace
  * 
- * @date 6 Mar 2013
+ * @since 6 Mar 2013
  */
 @RunWith(Suite.class)
 @SuiteClasses({ 

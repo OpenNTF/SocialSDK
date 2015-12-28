@@ -25,7 +25,7 @@ import com.ibm.sbt.services.endpoints.EndpointFactory;
 /**
  * @author mwallace
  *  
- * @date 5 Mar 2013
+ * @since 5 Mar 2013
  */
 public class BaseAuthServiceTest extends BaseServiceTest {
     

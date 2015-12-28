@@ -1,14 +1,3 @@
-package com.ibm.sbt.services.client.connections.files;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import org.w3c.dom.Document;
-
-import com.ibm.commons.xml.DOMUtil;
-import com.ibm.commons.xml.XMLException;
-import com.ibm.sbt.services.client.connections.files.util.Messages;
-
 /*
  * © Copyright IBM Corp. 2012
  * 
@@ -24,12 +13,24 @@ import com.ibm.sbt.services.client.connections.files.util.Messages;
  * implied. See the License for the specific language governing 
  * permissions and limitations under the License.
  */
+ package com.ibm.sbt.services.client.connections.files;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import org.w3c.dom.Document;
+
+import com.ibm.commons.xml.DOMUtil;
+import com.ibm.commons.xml.XMLException;
+import com.ibm.sbt.services.client.connections.files.util.Messages;
+
+
 
 /**
  * @author Vimal Dhupar
- * @Represents Class to represent the Service Document for Files Moderation Service. To be Used by the
+ * the Class to represent the Service Document for Files Moderation Service. To be Used by the
  *             Moderators for Moderating community files/comments.
- * @date Apr 18, 2013
+ * @since Apr 18, 2013
  */
 public class FilesModerationDocumentEntry {
 
@@ -51,7 +52,7 @@ public class FilesModerationDocumentEntry {
 	}
 
 	/**
-	 * get
+	 * get the field name
 	 * 
 	 * @param fieldName
 	 * @return String

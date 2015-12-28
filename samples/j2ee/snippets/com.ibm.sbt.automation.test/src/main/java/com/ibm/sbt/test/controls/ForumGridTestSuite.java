@@ -30,7 +30,7 @@ import com.ibm.sbt.test.controls.grid.forum.PublicForums;
 /**
  * @author David Ryan	
  * 
- * @date 20 August 2013
+ * @since 20 August 2013
  */
 @RunWith(Suite.class)
 @SuiteClasses({ PublicForums.class, MyForums.class })

@@ -23,7 +23,7 @@ import com.ibm.sbt.automation.core.test.BaseAuthJavaServiceTest;
 
 /**
  * @author mkataria
- * @date Feb 8, 2013
+ * @since Feb 8, 2013
  */
 public class GetMyFiles extends BaseAuthJavaServiceTest {
 

@@ -49,7 +49,6 @@ public class BaseFileLister {
 	/**
 	 * Get a RootNode object which allows JSSnippets to be searched and manipulated.
 	 * 
-	 * @param context
 	 * @return RootNode of the local JSSnippets.
 	 */
 	public static RootNode getJsSnippets(){
@@ -59,9 +58,7 @@ public class BaseFileLister {
 	/**
 	 * Get JS snippets in JSON format, including sbtx.sample.web's JS snippets.
 	 * 
-	 * @param context
-	 * @param request
-	 * @return JSSnippets in JSON format. 
+	 * @return {String} JSSnippets in JSON format. 
 	 */
 	public static String getJsSnippetsAsJson() {
 	    RootNode root = getJsSnippets();
@@ -72,10 +69,8 @@ public class BaseFileLister {
 	/**
 	 * Get a JavaSnippet by name.
 	 * 
-	 * @param context
-	 * @param request
 	 * @param snippetName
-	 * @return JavaSnippet corresponding to snippetName 
+	 * @return {JavaSnippet} corresponding to snippetName 
 	 */
 	public static JavaSnippet getJavaSnippet(String snippetName) {
 		JavaSnippet result = (JavaSnippet) getAsset(snippetName, new JavaSnippetNodeFactory(), javaRootPath);
@@ -85,8 +80,7 @@ public class BaseFileLister {
 	/**
 	 * Get a RootNode object which allows JavaSnippets to be searched and manipulated.
 	 * 
-	 * @param context
-	 * @return RootNode of the local JavaSnippets.
+	 * @return {RootNode} of the local JavaSnippets.
 	 */
 	public static RootNode getJavaSnippets(){
 		return getSnippets(new JavaSnippetNodeFactory(), javaRootPath);
@@ -95,8 +89,7 @@ public class BaseFileLister {
 	/**
 	 * Returns the root VFSFile for JS Samples.
 	 * 
-	 * @param context
-	 * @return
+	 * @return {VFSFile}
 	 */
 	public static VFSFile getJsRootFile(){
 		return getRootFile(jsRootPath);
@@ -105,12 +98,10 @@ public class BaseFileLister {
 	/**
 	 * Returns an Asset based on its name, NodeFactory type and root path.
 	 * 
-	 * @param context
-	 * @param request
 	 * @param assetName
 	 * @param nodeFactory
 	 * @param rootPath
-	 * @return
+	 * @return {Asset}
 	 */
 	private static Asset getAsset(String assetName, NodeFactory nodeFactory, String rootPath){
 		try {
@@ -124,7 +115,6 @@ public class BaseFileLister {
 	/**
 	 * Returns a VFSFile for the given path and context.
 	 * 
-	 * @param context
 	 * @param relPath The folder path.
 	 * @return VFSFile from the relPath and context.
 	 */
@@ -136,7 +126,6 @@ public class BaseFileLister {
 	/**
 	 * Get a RootNode object corresponding to the NodeFactory type and ServletContext
 	 * 
-	 * @param context
 	 * @param nodeFactory The NodeFactory of the type of snippet to be retrieved.
 	 * @param path The path to the root of the snippets to be retrieved.
 	 * @return RootNode of the Snippets.
@@ -155,8 +144,7 @@ public class BaseFileLister {
 	/**
 	 * A method which will, for a given root folder and NodeFactory, return the corresponding RootNode of Snippets.
 	 * 
-	 * @param context
-	 * @param file The root folder of the snippets.
+	 * @param file 
 	 * @param nodeFactory The NodeFactory corresponding to the snippet type.
 	 * @return RootNode of snippets, which allows search and manipulation of snippets.
 	 * @throws IOException

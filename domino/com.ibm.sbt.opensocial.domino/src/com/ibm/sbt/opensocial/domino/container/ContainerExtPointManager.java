@@ -26,13 +26,13 @@ import com.ibm.sbt.opensocial.domino.internal.OpenSocialPlugin;
 
 /**
  * Class that manages container extension points.  If an application wishes to add a container to the 
- * OpenSocial implementation they first need to implement {@link com.ibm.sbt.opensocial.domino.container.ContainerExtPoint}.
+ * OpenSocial implementation they first need to implement link com.ibm.sbt.opensocial.domino.container.ContainerExtPoint.
  * Applications can contribute information about their containers via two mechanisms.
  * 
  * <ol>
  * 	<li>Via the OSGi extension point com.ibm.sbt.opensocial.domino.container.</li>
- *  <li>Via {@link #registerContainer(ContainerExtPoint)}.  When using {@link #registerContainer(ContainerExtPoint)}
- *  make sure you also call {@link #unregisterContainer(ContainerExtPoint)} when the app is terminated.</li>
+ *  <li>Via link #registerContainer(ContainerExtPoint).  When using link #registerContainer(ContainerExtPoint)
+ *  make sure you also call link #unregisterContainer(ContainerExtPoint) when the app is terminated.</li>
  * </ol>
  *
  */

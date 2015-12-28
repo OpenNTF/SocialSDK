@@ -23,7 +23,7 @@ import com.ibm.commons.util.StringUtil;
 /**
  * @author mwallace
  *  
- * @date 5 Mar 2013
+ * @since 5 Mar 2013
  */
 public class GridPagerPage {
     
@@ -77,7 +77,7 @@ public class GridPagerPage {
     /**
      * Return a WebElement for the pager div that was created on this page
      * 
-     * @return
+     * @return {WebElement}
      */
     public WebElement getPagerDiv() {
         return pagerDiv;
@@ -86,7 +86,7 @@ public class GridPagerPage {
     /**
      * Return a WebElement for the pager result div that was created on this page
      * 
-     * @return
+     * @return {WebElement}
      */
     public WebElement getPagerResultDiv() {
         return pagerResultDiv;
@@ -95,7 +95,7 @@ public class GridPagerPage {
     /**
      * Return true if you should be able to page forward
      * 
-     * @return
+     * @return {boolean}
      */
     public boolean canPageNext() {
         return (end < count);
@@ -104,7 +104,7 @@ public class GridPagerPage {
     /**
      * Return true if you should be able to page backward
      * 
-     * @return
+     * @return {boolean}
      */
     public boolean canPagePrevious() {
         return (count > 0);
@@ -130,10 +130,10 @@ public class GridPagerPage {
     
     // Internals
     
-    /*
+    /**
      * This will be a string like this "0 - 5 of 29"
      * 
-     * TODO need to handle localized versions of the pager results
+     * TODO: need to handle localized versions of the pager results
      */
     private int[] parsePagerResult() {
         String pagerResult = pagerResultDiv.getText();

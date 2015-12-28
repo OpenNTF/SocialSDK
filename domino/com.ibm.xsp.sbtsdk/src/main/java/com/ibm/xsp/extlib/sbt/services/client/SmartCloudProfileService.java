@@ -29,7 +29,6 @@ public class SmartCloudProfileService extends ClientService {
 
     /**
      * @param endpoint
-     * @param serviceUrl
      */
     public SmartCloudProfileService(Endpoint endpoint) {
         super(endpoint);

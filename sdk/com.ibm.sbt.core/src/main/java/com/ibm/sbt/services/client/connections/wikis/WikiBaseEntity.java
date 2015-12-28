@@ -80,7 +80,7 @@ public abstract class WikiBaseEntity extends AtomEntity {
 	
 	/**
 	 * 
-	 * @return
+	 * @return {Person}
 	 */
 	public Person getModifier() {
 		return new Person(getService(), new XmlDataHandler((Node)this.getDataHandler().getData(), 
@@ -89,7 +89,7 @@ public abstract class WikiBaseEntity extends AtomEntity {
 	
 	/**
 	 * Return the date the wiki was created.
-	 * @return
+	 * @return {Date}
 	 */
 	public Date getCreated() {
 		return this.getAsDate(WikiXPath.created);
@@ -97,7 +97,7 @@ public abstract class WikiBaseEntity extends AtomEntity {
 	
 	/**
 	 * Date of the last modification
-	 * @return
+	 * @return {Date}
 	 */
 	public Date getModified() {
 		return this.getAsDate(WikiXPath.modified);

@@ -46,9 +46,8 @@ import com.ibm.sbt.services.endpoints.Endpoint;
  * 	ActivityStreamEntityList _entries = (List) _service.getUpdatesFromMyNetwork();
  * }
  * </pre>
- * @see http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=IBM_Connections_Activity_Stream_API&content=pdcontent
+ * @see <a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=IBM_Connections_Activity_Stream_API&content=pdcontent">Activity Stream API</a>
  */
-
 public class ActivityStreamService extends ConnectionsService {
 	private static final long serialVersionUID = -1169787598206507188L;
 	private final ActivityStreamFeedHandler activityStreamFeedHandler = new ActivityStreamFeedHandler(this);
@@ -85,8 +84,6 @@ public class ActivityStreamService extends ConnectionsService {
 	 * <p>
 	 * Assumes {@link ASUser} as PUBLIC, {@link ASGroup} as ALL and {@link ASApplication} as STATUS
 	 * 
-	 * @param params
-	 *            Additional parameters used for constructing URL's
 	 * @return ActivityStreamEntityList
 	 * @throws ActivityStreamServiceException
 	 */
@@ -99,11 +96,11 @@ public class ActivityStreamService extends ConnectionsService {
 	/**
 	 * Returns updates from ActivityStream service
 	 * 
-	 * @param User
+	 * @param user
 	 *            see {@link ASUser} for possible values
-	 * @param Group
+	 * @param group
 	 *            see {@link ASGroup} for possible values
-	 * @param User
+	 * @param app
 	 *            see {@link ASApplication} for possible values
 	 * @param params
 	 *            Additional parameters used for constructing URL's
@@ -121,11 +118,11 @@ public class ActivityStreamService extends ConnectionsService {
 	/**
 	 * Returns updates from ActivityStream service
 	 * 
-	 * @param User
+	 * @param user
 	 *            see {@link ASUser} for possible values
-	 * @param Group
+	 * @param group
 	 *            see {@link ASGroup} for possible values
-	 * @param User
+	 * @param app
 	 *            see {@link ASApplication} for possible values
 	 * @param params
 	 *            Additional parameters used for constructing URL's
@@ -183,7 +180,6 @@ public class ActivityStreamService extends ConnectionsService {
 	 * @return ActivityStreamEntityList
 	 * @throws ActivityStreamServiceException
 	 */
-
 	public ActivityStreamEntityList getUpdatesFromMyNetwork() throws ActivityStreamServiceException {
 		return getUpdatesFromMyNetwork(null);
 	}
@@ -256,7 +252,6 @@ public class ActivityStreamService extends ConnectionsService {
 		return getMyStatusUpdates(null);
 	}
 	
-	
 	/**
 	 * Wrapper method to get all status updates for logged in user
 	 * <p>
@@ -275,7 +270,6 @@ public class ActivityStreamService extends ConnectionsService {
 		String url = ActivityStreamUrls.AS_ME_ALL_STATUS.format(this);
 		return getActivityStreamEntities(url, params);
 	}
-	
 	
 	/**
 	 * Wrapper method to get all updates for all user's logged in user follows from Activity Streams
@@ -348,13 +342,12 @@ public class ActivityStreamService extends ConnectionsService {
 		return getActivityStreamEntities(url, params);
 	}
 	
-	
 	/**
 	 * Wrapper method to get Updates for a specific User from Activity Streams
 	 * <p>
 	 * Assumes {@link ASUser} as userid in parameter, {@link ASGroup} as INVOLVED and {@link ASApplication} as ALL
 	 * 
-	 * @param id
+	 * @param userId
 	 *            Userid of the user whom updates are required
 	 * @return ActivityStreamEntityList
 	 * @throws ActivityStreamServiceException
@@ -370,7 +363,7 @@ public class ActivityStreamService extends ConnectionsService {
 	 * <p>
 	 * Assumes {@link ASUser} as userid in parameter, {@link ASGroup} as INVOLVED and {@link ASApplication} as ALL
 	 * 
-	 * @param id
+	 * @param userId
 	 *            Userid of the user whose updates are required
 	 * @param params
 	 *            Additional parameters used for constructing URL's
@@ -389,7 +382,7 @@ public class ActivityStreamService extends ConnectionsService {
 	 * <p>
 	 * Assumes {@link ASUser} as communityId in parameter, {@link ASGroup} as ALL and {@link ASApplication} as NOAPP
 	 * 
-	 * @param id
+	 * @param communityId
 	 *            Community of the community for which updates are required
 	 * @return ActivityStreamEntityList
 	 * @throws ActivityStreamServiceException
@@ -404,7 +397,7 @@ public class ActivityStreamService extends ConnectionsService {
 	 * <p>
 	 * Assumes {@link ASUser} as communityId in parameter, {@link ASGroup} as ALL and {@link ASApplication} as NOAPP
 	 * 
-	 * @param id
+	 * @param communityId
 	 *            Community of the community for which updates are required
 	 * @param params
 	 *            Additional parameters used for constructing URL's
@@ -513,9 +506,9 @@ public class ActivityStreamService extends ConnectionsService {
 	 * <p>
 	 * Assumes {@link ASUser} as ME in parameter, {@link ASGroup} as ACTION
 	 * 
-	 * @param id
+	 * @param application
 	 * 			  Application type ( blogs/wikis etc. ) 
-	 * 			  {@see http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Support_for_Saved_and_Actionable_events&content=pdcontent}
+	 * 			  @see <a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Support_for_Saved_and_Actionable_events&content=pdcontent">Saved and Actionable Events API</a>
 	 *            
 	 * @param params
 	 *            Additional parameters used for constructing URL's
@@ -559,9 +552,9 @@ public class ActivityStreamService extends ConnectionsService {
 	 * <p>
 	 * Assumes {@link ASUser} as ME in parameter, {@link ASGroup} as SAVED
 	 * 
-	 * @param id
+	 * @param application
 	 * 			  Application type ( blogs/wikis etc. ) 
-	 * 			  {@see http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Support_for_Saved_and_Actionable_events&content=pdcontent}
+	 * 			  @see <a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Support_for_Saved_and_Actionable_events&content=pdcontent">Saved and Actionable Content</a>
 	 *            
 	 * @param params
 	 *            Additional parameters used for constructing URL's
@@ -632,7 +625,7 @@ public class ActivityStreamService extends ConnectionsService {
 	 * <p>
 	 * Assumes {@link ASUser} as PUBLIC , {@link ASGroup} as ALL and {@link ASApplication} as ALL
 	 * 
-	 * @param query
+	 * @param tags
 	 *            Tag to be searched for ( in case of multiple tags, provide comma separated String )
 	 * @return ActivityStreamEntityList
 	 * @throws ActivityStreamServiceException
@@ -646,7 +639,7 @@ public class ActivityStreamService extends ConnectionsService {
 	 * <p>
 	 * Assumes {@link ASUser} as PUBLIC , {@link ASGroup} as ALL and {@link ASApplication} as ALL
 	 * 
-	 * @param query
+	 * @param tags
 	 *            Tag to be searched for ( in case of multiple tags, provide comma separated String )
 	 * @param params
 	 *            Additional parameters used for constructing URL's
@@ -694,8 +687,8 @@ public class ActivityStreamService extends ConnectionsService {
 	 * <p>
 	 * Assumes {@link ASUser} as PUBLIC , {@link ASGroup} as ALL and {@link ASApplication} as ALL
 	 * 
-	 * @param query
-	 *            FilterType to be searched for
+	 * @param filterType the fitler type that is used
+	 * @param query query to be used
 	 * @return ActivityStreamEntityList
 	 * @throws ActivityStreamServiceException
 	 */
@@ -709,6 +702,7 @@ public class ActivityStreamService extends ConnectionsService {
 	 * <p>
 	 * Assumes {@link ASUser} as PUBLIC , {@link ASGroup} as ALL and {@link ASApplication} as ALL
 	 * 
+	 * @param filterType the fitler type that is used
 	 * @param query
 	 *            FilterType to be searched for
 	 * @param params
@@ -762,7 +756,7 @@ public class ActivityStreamService extends ConnectionsService {
 	 * <p>
 	 * Assumes {@link ASUser} as PUBLIC , {@link ASGroup} as ALL and {@link ASApplication} as ALL
 	 * 
-	 * @param Complete
+	 * @param searchpattern
 	 *            search pattern, check Connections documentation for generating Search patterns
 	 * @return ActivityStreamEntityList
 	 * @throws ActivityStreamServiceException
@@ -812,8 +806,7 @@ public class ActivityStreamService extends ConnectionsService {
 	 * @param user
 	 * @param group
 	 * @param application
-	 * @param jsondata
-	 * @param header
+	 * @param postPayload
 	 * @return JsonJavaObject
 	 * @throws ActivityStreamServiceException
 	 */
@@ -840,8 +833,8 @@ public class ActivityStreamService extends ConnectionsService {
 	/**
 	 * postEntry Creates Activity Stream entry
 	 * 
-	 * @param JsonJavaObject
-	 * @return String ( Id of the newly created entry )
+	 * @param postPayload
+	 * @return {String} Id of the newly created entry
 	 * @throws ActivityStreamServiceException
 	 */
 
@@ -864,7 +857,7 @@ public class ActivityStreamService extends ConnectionsService {
 	/**
 	 * postEntry Creates Activity Stream entry
 	 * 
-	 * @param ASDataPopulator
+	 * @param populator
 	 * @return String ( Id of the newly created entry )
 	 * @throws ActivityStreamServiceException
 	 */
@@ -889,8 +882,8 @@ public class ActivityStreamService extends ConnectionsService {
 	 * @param user
 	 * @param group
 	 * @param application
-	 * @param ASDataPopulator
-	 * @return String ( Id of the newly created entry )
+	 * @param populator
+	 * @return {String} Id of the newly created entry 
 	 * @throws ActivityStreamServiceException
 	 */
 	
@@ -956,8 +949,7 @@ public class ActivityStreamService extends ConnectionsService {
 	 * @param user
 	 * @param group
 	 * @param application
-	 * @param jsondata
-	 * @param header
+	 * @param postPayload
 	 * @return JsonJavaObject
 	 * @throws ActivityStreamServiceException
 	 */

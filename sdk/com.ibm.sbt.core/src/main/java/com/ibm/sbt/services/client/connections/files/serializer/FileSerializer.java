@@ -37,7 +37,7 @@ import com.ibm.sbt.services.client.connections.files.File;
 
 /**
  * @author Lorenzo Boccaccia
- * @date 8 May 2014
+ * @since 8 May 2014
  */
 public class FileSerializer extends AtomEntitySerializer<File> {
 

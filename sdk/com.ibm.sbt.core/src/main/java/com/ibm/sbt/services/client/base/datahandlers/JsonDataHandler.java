@@ -58,7 +58,7 @@ public class JsonDataHandler implements DataHandler<JsonJavaObject>{
 	/**
 	 * Constructor
 	 *  
-	 * @param jsonObject
+	 * @param jsonString
 	 * @throws JsonException 
 	 */
 	public JsonDataHandler(String jsonString) throws JsonException {
@@ -83,9 +83,9 @@ public class JsonDataHandler implements DataHandler<JsonJavaObject>{
 		return path.indexOf("/")==-1 ? data.get(path) : getNested(path);
 	}
 	
-	/*
+	/**
 	 * @param path
-	 * @return
+	 * @return {Object}
 	 */
 	private Object getNested(String path){
 		Object value = null;
@@ -113,9 +113,9 @@ public class JsonDataHandler implements DataHandler<JsonJavaObject>{
 		return path.indexOf("/")==-1 ? data.getString(path) : getNestedField(path);
 	}
 	
-	/*
+	/**
 	 * @param path
-	 * @return
+	 * @return {String}
 	 */
 	private String getNestedField(String path){
 		String value = "";
@@ -170,7 +170,7 @@ public class JsonDataHandler implements DataHandler<JsonJavaObject>{
 	
 	/**
 	 * @param field
-	 * @return list of entries
+	 * @return {List<JsonJavaObject>} list of entries
 	 */
 	@Override
 	public List<JsonJavaObject> getEntries(FieldEntry field) {
@@ -255,7 +255,7 @@ public class JsonDataHandler implements DataHandler<JsonJavaObject>{
 	}
 	
 	/**
-	 * @set data
+	 * sets the data
 	 */
 	@Override
 	public void setData(final Object data) {
@@ -335,7 +335,6 @@ public class JsonDataHandler implements DataHandler<JsonJavaObject>{
 	@Override
 	public int getAsInt(FieldEntry field) {
 		return Integer.parseInt(getAsString(field));
-//		return data.getAsInt((String)field.getPath());
 	}
 
     /**

@@ -42,7 +42,7 @@ import com.ibm.sbt.services.endpoints.BasicEndpoint;
 
 /**
  * @author mwallace
- * @date 14 January 2014
+ * @since 14 January 2014
  */
 public class ExportWiki {
 
@@ -70,7 +70,7 @@ public class ExportWiki {
     
     /**
      * 
-     * @return
+     * @return {BasicEndpoint}
      */
     public BasicEndpoint getEndpoint(){
         return endpoint;
@@ -99,7 +99,7 @@ public class ExportWiki {
      * @param jsonObject - The json object to append fields to. If null, it will
      * be instantiated.
      * 
-     * @return
+     * @return {JsonJavaObject}
      */
     private JsonJavaObject entityToJsonObject(BaseEntity entity,
             FieldEntry[] xpathValues, JsonJavaObject jsonObject) {
@@ -151,7 +151,7 @@ public class ExportWiki {
     /**
      * 
      * @param wikiLabel
-     * @param outputFolder
+     * @param outputFile
      * @throws ClientServicesException
      * @throws IOException
      * @throws JsonException

@@ -47,7 +47,7 @@ public class BaseBlogEntity extends AtomEntity {
 	 /**
      * Constructor
      *
-     * @param BlogService
+     * @param blogService
      * @param id
      */
 	public BaseBlogEntity(BlogService blogService, String id) {
@@ -59,18 +59,18 @@ public class BaseBlogEntity extends AtomEntity {
 	public BaseBlogEntity(){}
 	/**
      * Constructor
-     * @param BaseService
-     * @param Node
-     * @param NamespaceContext
-     * @param XPathExpression
+     * @param service
+     * @param node
+     * @param namespaceCtx
+     * @param xpathExpression
      */
 	public BaseBlogEntity(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
 		super(service, node, namespaceCtx, xpathExpression);
 	}
 	/**
-	* Returns the Uuid of the Blog,post or comment
+	* Returns the Uuid of the blog, post or comment
 	*
-	* @return uuid
+	* @return {String} uuid
 	*/
 	public String getUid(){
 		String id = getAsString(BlogXPath.uid);
@@ -91,7 +91,7 @@ public class BaseBlogEntity extends AtomEntity {
 	/**
 	* Gets an author of IBM Connections Blog.
 	*
-	* @return Author
+	* @return {Author}
 	*/
 	@Override
 	public Person getAuthor(){
@@ -102,7 +102,7 @@ public class BaseBlogEntity extends AtomEntity {
 	/**
 	* Gets a contributor of IBM Connections Blog.
 	*
-	* @return Author
+	* @return {Author}
 	*/
 	@Override
 	public Person getContributor(){
@@ -121,14 +121,14 @@ public class BaseBlogEntity extends AtomEntity {
 	
 	/**Returns the list of Tags
     *
-    * @return the list of Tags
+    * @return {List<String>} the list of Tags
     */
 	public List<String> getTags() {
 		return super.getBaseTags();
 	}
 	/**sets the tags
     *
-    * @param List of Tags
+    * @param tags List of Tags
     */
 	public void setTags(List<String> tags) {
 		super.setBaseTags(tags);

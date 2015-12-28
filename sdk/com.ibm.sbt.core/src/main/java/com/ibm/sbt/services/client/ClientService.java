@@ -15,6 +15,7 @@
  */
 package com.ibm.sbt.services.client;
 
+import static com.ibm.sbt.services.client.base.CommonConstants.APPKEY;
 import static com.ibm.sbt.services.client.base.CommonConstants.APPLICATION_JSON;
 import static com.ibm.sbt.services.client.base.CommonConstants.APPLICATION_OCTET_STREAM;
 import static com.ibm.sbt.services.client.base.CommonConstants.APPLICATION_XML;
@@ -165,7 +166,7 @@ public abstract class ClientService {
 	/**
 	 * Construct a ClientService with the Endpoint with the specified name
 	 * 
-	 * @param endpoint
+	 * @param endpointName
 	 */
 	public ClientService(String endpointName) {
 		this.endpoint = EndpointFactory.getEndpoint(endpointName);
@@ -174,7 +175,7 @@ public abstract class ClientService {
 	/**
 	 * Return the associated Endpoint
 	 * 
-	 * @return
+	 * @return {Endpoint}
 	 */
 	public Endpoint getEndpoint() {
 		return endpoint;
@@ -231,7 +232,7 @@ public abstract class ClientService {
 	/**
 	 * Return the URL from the associated endpoint.
 	 * 
-	 * @return
+	 * @return {String}
 	 */
 	public String getBaseUrl() {
 		if (endpoint != null) {
@@ -257,7 +258,7 @@ public abstract class ClientService {
 	/**
 	 * Return true if force trust SSL certificate is set for the associated Endpoint.
 	 * 
-	 * @return
+	 * @return {boolean}
 	 * @throws ClientServicesException
 	 */
 	protected boolean isForceTrustSSLCertificate() throws ClientServicesException {
@@ -270,7 +271,7 @@ public abstract class ClientService {
 	/**
 	 * Return true if force trust SSL certificate is set for the associated Endpoint.
 	 * 
-	 * @return
+	 * @return {boolean}
 	 * @throws ClientServicesException
 	 */
 	protected boolean isForceDisableExpectedContinue() throws ClientServicesException {
@@ -284,7 +285,7 @@ public abstract class ClientService {
 	/**
 	 * Return the proxy info from the associated Endpoint or an empty string
 	 * 
-	 * @return
+	 * @return {String}
 	 * @throws ClientServicesException
 	 */
 	protected String getHttpProxy() throws ClientServicesException {
@@ -1131,7 +1132,7 @@ public abstract class ClientService {
 	 * @param method
 	 * @param args
 	 * @param content
-	 * @return
+	 * @return {Response}
 	 * @throws ClientServicesException
 	 */
 	public Response xhr(String method, Args args, Object content) throws ClientServicesException {
@@ -1183,7 +1184,7 @@ public abstract class ClientService {
 	 * @param httpRequestBase
 	 * @param args
 	 * @param content
-	 * @return
+	 * @return {Response}
 	 * @throws ClientServicesException
 	 */
 	protected Response execRequest(HttpRequestBase httpRequestBase, Args args, Object content) throws ClientServicesException {
@@ -1202,7 +1203,7 @@ public abstract class ClientService {
 	}
 
 	/**
-	 * Allows clients to override the process content section of {@link #_xhr(HttpRequestBase, Args)}. <br/>
+	 * Allows clients to override the process content section of _xhr(HttpRequestBase, Args). <br/>
 	 * 
 	 * @param httpRequestBase
 	 *            the base HTTP request created by the service
@@ -1235,11 +1236,31 @@ public abstract class ClientService {
 		return processResponse(httpClient, httpRequestBase, response, args);
 	}
 
+	/**
+	 * prepares the request and adds custom/required headers
+	 */
 	protected void prepareRequest(HttpClient httpClient, HttpRequestBase httpRequestBase, Args args,
 			Content content) throws ClientServicesException {
 		// TODO: add support for gzip content
 		// httpClient.addRequestHeader("Accept-Encoding", "gzip");
 
+		//Sets the AppKey Header for the Given Request APPKEY
+		if(endpoint != null){
+			String appKey = ((com.ibm.sbt.services.endpoints.AbstractEndpoint) endpoint).getAppKey();
+			if(appKey != null){
+				httpRequestBase.addHeader(APPKEY,appKey);
+			}
+			
+			//Adds the Headers to the httpRequestBase
+			java.util.HashMap<String,String> headers = ((com.ibm.sbt.services.endpoints.AbstractEndpoint) endpoint).getHeaders();
+			java.util.Set<String> headerNames = headers.keySet();
+			for(String headerName : headerNames){
+				String headerVal = headers.get(headerName);
+				httpRequestBase.addHeader(headerName,headerVal);
+			}
+		}
+		
+		
 		if (args.getHeaders() != null) {
 			addHeaders(httpClient, httpRequestBase, args);
 		}
@@ -1262,7 +1283,7 @@ public abstract class ClientService {
 	 * @param httpClient
 	 * @param httpRequestBase
 	 * @param args
-	 * @return
+	 * @return {HttpResponse}
 	 * @throws ClientServicesException
 	 */
 	protected HttpResponse executeRequest(HttpClient httpClient, HttpRequestBase httpRequestBase, 
@@ -1292,7 +1313,7 @@ public abstract class ClientService {
 	 * @param httpRequestBase
 	 * @param httpResponse
 	 * @param args
-	 * @return
+	 * @return {Response}
 	 * @throws ClientServicesException
 	 */
 	protected Response processResponse(HttpClient httpClient, HttpRequestBase httpRequestBase,
@@ -1332,7 +1353,8 @@ public abstract class ClientService {
 	}
 
 	private boolean checkStatus(int statusCode) {
-		if (statusCode >= 200 && statusCode < 300) {
+		//Issue 1579: Added Status Code 404 as valid status code
+		if ((statusCode >= 200 && statusCode < 300) || statusCode == 404) {
 			return true;
 		}
 		return false;
@@ -1478,8 +1500,8 @@ public abstract class ClientService {
 	 * 
 	 * @param request
 	 * @param response
-	 * @param DateFormat
-	 * @return
+	 * @param handler
+	 * @return {Handler}
 	 * @throws ClientServicesException
 	 */
 	protected Handler findHandler(HttpRequestBase request, HttpResponse response, Handler handler)
@@ -1522,13 +1544,14 @@ public abstract class ClientService {
 
 	/**
 	 * @param statusCode
-	 * @return
+	 * @return {boolean}
 	 */
 	protected boolean isErrorStatusCode(int statusCode) {
 		return (statusCode != HttpStatus.SC_OK) && 
 			(statusCode != HttpStatus.SC_CREATED) && 
 			(statusCode != HttpStatus.SC_ACCEPTED) && 
-			(statusCode != HttpStatus.SC_NO_CONTENT);
+			(statusCode != HttpStatus.SC_NO_CONTENT) &&
+			(statusCode != HttpStatus.SC_NOT_FOUND) && (statusCode != 404);
 	}
 
 	/**

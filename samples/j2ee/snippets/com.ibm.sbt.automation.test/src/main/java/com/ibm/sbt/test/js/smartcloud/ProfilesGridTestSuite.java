@@ -28,7 +28,7 @@ import com.ibm.sbt.test.js.smartcloud.profiles.controls.Colleagues;
 /**
  * @author mwallace
  * 
- * @date 12 Mar 2013
+ * @since 12 Mar 2013
  */
 @RunWith(Suite.class)
 @SuiteClasses({ Colleagues.class })

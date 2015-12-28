@@ -28,7 +28,7 @@ import com.ibm.sbt.services.endpoints.BasicEndpoint;
 
 /**
  * @author Lorenzo Boccaccia
- * @date 13 May 2014
+ * @since 13 May 2014
  */
 public class ThreadedActivityCreator {
 

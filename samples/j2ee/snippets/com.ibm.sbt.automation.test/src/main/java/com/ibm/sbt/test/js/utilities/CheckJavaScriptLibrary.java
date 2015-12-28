@@ -39,7 +39,7 @@ public class CheckJavaScriptLibrary extends BaseTest {
     
     /**
      * @param snippetId
-     * @return
+     * @return {String}
      */
     protected String executeSnippet(String snippetId) {
         ResultPage resultPage = launchSnippet(snippetId, authType);

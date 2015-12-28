@@ -28,7 +28,7 @@ import com.ibm.sbt.test.js.connections.ideationBlog.api.VoteIdea;
 /**
  * @author rajmeetbal
  * 
- * @date 23 Dec 2013
+ * @since 23 Dec 2013
  */
 @RunWith(Suite.class)
 @SuiteClasses({ 

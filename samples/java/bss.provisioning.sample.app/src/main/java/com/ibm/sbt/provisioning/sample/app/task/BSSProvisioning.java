@@ -21,6 +21,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -115,6 +116,14 @@ public class BSSProvisioning implements Runnable {
 	 * number of currently provisioned subscribers
 	 */
 	protected static AtomicInteger subscribersProvisioned = new AtomicInteger(0);
+	/**
+	 * number of currently failed subscribers
+	 */
+	protected static AtomicInteger subscribersFailed = new AtomicInteger(0);
+	/**
+	 * list of failed subscribers
+	 */
+	protected static List<SubscriberTask> failedSubscriptions = new ArrayList<SubscriberTask>();
 	/**
 	 * <code>Map</code> associating each subscribers with a String array, containing a timestamp for each 
 	 * state transition of the corresponding subscriber
@@ -302,7 +311,7 @@ public class BSSProvisioning implements Runnable {
 																	.getAsString("EmailAddress");
 															SubscriberTask subscriberTask = 
 																	new SubscriberTask(subscriber, customerId, subscriptionId,
-																			SubscriberTask.State.SUBSCRIBER_NON_EXISTENT );	
+																			SubscriberTask.State.SUBSCRIBER_NON_EXISTENT, 10);	
 															subscriberTasks.add(subscriberTask);
 															stateTransitionReport.put(suscriberEmail, new String[6]);
 															subscriberWeightReport.put(suscriberEmail, new int[3]);
@@ -376,7 +385,7 @@ public class BSSProvisioning implements Runnable {
 				Thread.currentThread().setName("Provisioning");
 			}
 
-			if(BSSProvisioning.getSubscribersQuantity().get() > BSSProvisioning.getSubscribersProvisioned().get()){
+			if(BSSProvisioning.getSubscribersQuantity().get() > (BSSProvisioning.getSubscribersProvisioned().get() + BSSProvisioning.getSubscribersFailed().get())){
 				// stop submitting when the threshold has been reached and the queue has been emptied
 				while( !WeightManager.getInstance().isThresholdReached() && subscriberTasks != null && !subscriberTasks.isEmpty() ){
 					SubscriberTask subscriberTask = subscriberTasks.poll();
@@ -387,11 +396,24 @@ public class BSSProvisioning implements Runnable {
 							subscriberReport[0] = sdf.format(new Date());
 						}
 						threadpool.submit(subscriberTask);
+						
+						if(subscriberTask.getStatus() == SubscriberTask.State.SUBSCRIBE_FAILED){
+							logger.info("Subscriber task for " +subscriberTask.getSubscriberId()+ " failed due to exceeded attempts");
+						}
 					}
 					//sleeping 250 millisec between one submit and the other with the goal of 
 					//avoiding to overwhelm the server with requests
 					Thread.sleep(250);
 				}
+			}else{
+				if(BSSProvisioning.getSubscribersFailed().get()>0){
+					logger.warning("Provisioned Subscribers: "+ BSSProvisioning.getSubscribersProvisioned().get() +"\nFailed Subscribers: "+ BSSProvisioning.getSubscribersFailed().get());
+					
+				}else{		        				
+					logger.finest("ALL SUBSCRIBERS PROVISIONED !!!");
+				}
+				logger.info("Provisioning finished");
+				WeightManager.getInstance().shutdown();
 			}
 		}catch(Exception e){
 			logger.severe("Catched Exception in the BSSProvisioning run() method : "+e.getMessage() );
@@ -742,8 +764,29 @@ public class BSSProvisioning implements Runnable {
 	/**
 	 * {@link #subscribersProvisioned} getter method
 	 */
-  public static synchronized AtomicInteger getSubscribersProvisioned(){
+	public static synchronized AtomicInteger getSubscribersProvisioned(){
 		return subscribersProvisioned ;
+	}
+  
+  	/**
+	 * {@link #subscribersFailed} incrementation method
+	 */
+	public static synchronized void incrementSubscribersFailed(){
+		subscribersFailed.incrementAndGet();
+	}
+
+	/**
+	 * {@link #subscribersFailed} getter method
+	 */
+	public static synchronized AtomicInteger getSubscribersFailed(){
+		return subscribersFailed ;
+	}
+	
+	/**
+	 * {@link #failedSubscriptions} getter method
+	 */
+	public static synchronized List<SubscriberTask> getFailedSubscriptions(){
+		return failedSubscriptions ;
 	}
 
 	/**

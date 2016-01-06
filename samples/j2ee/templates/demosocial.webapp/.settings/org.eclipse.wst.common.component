@@ -4,16 +4,16 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
-        <dependent-module archiveName="com.ibm.sbt.core-1.1.3-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/com.ibm.sbt.core/com.ibm.sbt.core">
+        <dependent-module archiveName="com.ibm.sbt.core-1.1.12-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/com.ibm.sbt.core/com.ibm.sbt.core">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="com.ibm.commons-9.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/com.ibm.commons/com.ibm.commons">
+        <dependent-module archiveName="com.ibm.commons-1.1.12-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/com.ibm.commons/com.ibm.commons">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="com.ibm.commons.xml-9.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/com.ibm.commons.xml/com.ibm.commons.xml">
+        <dependent-module archiveName="com.ibm.commons.xml-1.1.12-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/com.ibm.commons.xml/com.ibm.commons.xml">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="com.ibm.commons.runtime-1.1.3-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/com.ibm.commons.runtime/com.ibm.commons.runtime">
+        <dependent-module archiveName="com.ibm.commons.runtime-1.1.12-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/com.ibm.commons.runtime/com.ibm.commons.runtime">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <property name="context-root" value="demosocial.webapp"/>

@@ -2,19 +2,19 @@
     <wb-module deploy-name="sbt.sample-2.0.0-SNAPSHOT">
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/ear-resources"/>
         <wb-resource deploy-path="/" source-path="/src/main/application" tag="defaultRootSource"/>
-        <dependent-module archiveName="sbt.sample.web-1.1.3-SNAPSHOT.war" deploy-path="/" handle="module:/resource/com.ibm.sbt.sample.web/com.ibm.sbt.sample.web">
+        <dependent-module archiveName="sbt.sample.web-1.1.12-SNAPSHOT.war" deploy-path="/" handle="module:/resource/sbt.sample.web/sbt.sample.web">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="com.ibm.sbt.web-1.1.3-SNAPSHOT.war" deploy-path="/" handle="module:/resource/com.ibm.sbt.web/com.ibm.sbt.web">
+        <dependent-module archiveName="com.ibm.sbt.web-1.1.12-SNAPSHOT.war" deploy-path="/" handle="module:/resource/com.ibm.sbt.web/com.ibm.sbt.web">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="sbt.dojo180-1.1.3-SNAPSHOT.war" deploy-path="/" handle="module:/resource/com.ibm.sbt.dojo180/com.ibm.sbt.dojo180">
+        <dependent-module archiveName="sbt.dojo180-1.1.12-SNAPSHOT.war" deploy-path="/" handle="module:/resource/sbt.dojo180/sbt.dojo180">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="sbt.bootstrap211-1.1.3-SNAPSHOT.war" deploy-path="/" handle="module:/resource/com.ibm.sbt.bootstrap211/com.ibm.sbt.bootstrap211">
+        <dependent-module archiveName="sbt.bootstrap211-1.1.12-SNAPSHOT.war" deploy-path="/" handle="module:/resource/sbt.bootstrap211/sbt.bootstrap211">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="sbt.jquery182-1.1.3-SNAPSHOT.war" deploy-path="/" handle="module:/resource/com.ibm.sbt.jquery182/com.ibm.sbt.jquery182">
+        <dependent-module archiveName="sbt.jquery182-1.1.12-SNAPSHOT.war" deploy-path="/" handle="module:/resource/sbt.jquery182/sbt.jquery182">
             <dependency-type>uses</dependency-type>
         </dependent-module>
     </wb-module>

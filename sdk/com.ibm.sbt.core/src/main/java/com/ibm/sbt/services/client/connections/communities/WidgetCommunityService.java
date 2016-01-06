@@ -22,6 +22,7 @@ import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.base.util.EntityUtil;
 import com.ibm.sbt.services.client.connections.communities.model.CommunityXPath;
 import com.ibm.sbt.services.client.connections.communities.util.Messages;
+import com.ibm.sbt.services.endpoints.Endpoint;
 
 
 /**
@@ -44,6 +45,51 @@ public class WidgetCommunityService extends CommunityService {
 	public static final String	WidgetDefIdException				= "Missing Widget type definition";
 	
 	public static final String WIDGET_DEF_ID = "widgetDefId";
+
+	/**
+	 * Constructor Creates WidgetCommunityService Object with default endpoint and default CacheSize
+	 */
+	public WidgetCommunityService() {
+		super(DEFAULT_ENDPOINT_NAME, DEFAULT_CACHE_SIZE);
+	}
+
+	/**
+	 * Constructor - Creates WidgetCommunityService Object with a specified endpoint and default CacheSize
+	 * 
+	 * @param endpoint
+	 */
+	public WidgetCommunityService(String endpoint) {
+		super(endpoint, DEFAULT_CACHE_SIZE);
+	}
+
+	/**
+	 * Constructor - Creates WidgetCommunityService Object with specified endpoint and CacheSize
+	 * 
+	 * @param endpoint
+	 * @param cacheSize
+	 */
+	public WidgetCommunityService(String endpoint, int cacheSize) {
+		super(endpoint, cacheSize);
+	}
+
+	/**
+	 * Constructor - Creates WidgetCommunityService Object with a specified endpoint and default CacheSize
+	 * 
+	 * @param endpoint
+	 */
+	public WidgetCommunityService(Endpoint endpoint) {
+		super(endpoint, DEFAULT_CACHE_SIZE);
+	}
+
+	/**
+	 * Constructor - Creates WidgetCommunityService Object with specified endpoint and CacheSize
+	 * 
+	 * @param endpoint
+	 * @param cacheSize
+	 */
+	public WidgetCommunityService(Endpoint endpoint, int cacheSize) {
+		super(endpoint, cacheSize);
+	}
 
 	/**
 	 * Wrapper method to get a "Widget enabled" Community
@@ -194,7 +240,7 @@ public class WidgetCommunityService extends CommunityService {
 		EntityList<Widget> widgetList = getCommunityWidgets(community.getCommunityUuid(), widgetDefId);
 		if (null != widgetList && widgetList.size() > 0) {
 			communityWidget = widgetList.get(0);
-			// TODO Check if an EntityList<Widget> entry is complete (or if fields are missing). CommunityList does NOT contain all entry data!
+			// TODO Check if an EntityList<Widget> entry is complete (or if fields are missing). EntityList<Community> does NOT contain all entry data!
 		}
 		
 		return communityWidget;

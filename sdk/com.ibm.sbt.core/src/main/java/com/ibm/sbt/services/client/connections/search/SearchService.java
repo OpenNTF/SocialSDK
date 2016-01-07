@@ -35,7 +35,6 @@ import org.w3c.dom.Node;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.xml.xpath.XPathExpression;
 import com.ibm.sbt.services.client.ClientServicesException;
-import com.ibm.sbt.services.client.ClientService.Args;
 import com.ibm.sbt.services.client.base.AtomFeedHandler;
 import com.ibm.sbt.services.client.base.BaseService;
 import com.ibm.sbt.services.client.base.ConnectionsService;
@@ -102,11 +101,13 @@ public class SearchService extends ConnectionsService {
 	/**
 	 * Lists the elements in an Atom entry representing the result returned by a search.
 	 * 
+	 * Queries public (neither private nor restricted) content.
+	 * 
 	 * @param query
 	 *            Text to search for
-	 * @param parameters
+	 * @param parameters Map
 	 *            for additional parameters
-	 * @return EntityList<Result>
+	 * @return EntityList&lt;Result&gt;
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Result> getResults(String query,Map<String, String> parameters) throws ClientServicesException {
@@ -125,11 +126,13 @@ public class SearchService extends ConnectionsService {
 	/**
 	 * Lists the elements in an Atom entry representing the result returned by a search.
 	 * 
+	 * Queries public (neither private nor restricted) content.
+	 * 
 	 * @param query
 	 *            Text to search for
-	 * @param parameters
-	 *            for additional parameters
-	 * @return EntityList<Result>
+	 * @param parameters Map
+	 *            for additional multi-valued parameters
+	 * @return EntityList&lt;Result&gt;
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Result> getResultsList(String query,Map<String, List<String>> parameters) throws ClientServicesException {
@@ -186,9 +189,11 @@ public class SearchService extends ConnectionsService {
 	 * entry to make it easier to find the content later. The format of the tags document 
 	 * is an Atom publishing protocol (APP) categories document.
 	 * 
+	 * Queries public (neither private nor restricted) content.
+	 * 
 	 * @param tag {String}
-	 *            Single tag to be search for, for multiple tags use other overloaded method
-	 * @return EntityList<Result>
+	 *            Single tag to search for, for multiple tags use other overloaded method
+	 * @return EntityList&lt;Result&gt;
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Result> getResultsByTag(String tag) throws ClientServicesException {
@@ -204,8 +209,10 @@ public class SearchService extends ConnectionsService {
 	 * entry to make it easier to find the content later. The format of the tags document 
 	 * is an Atom publishing protocol (APP) categories document.
 	 * 
-	 * @param tags List of Tags to searched for
-	 * @return EntityList<Result>
+	 * Queries public (neither private nor restricted) content.
+	 * 
+	 * @param tags List of Tags to search for
+	 * @return EntityList&lt;Result&gt;
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Result> getResultsByTag(List<String> tags) throws ClientServicesException {
@@ -219,8 +226,11 @@ public class SearchService extends ConnectionsService {
 	 * entry to make it easier to find the content later. The format of the tags document 
 	 * is an Atom publishing protocol (APP) categories document.
 	 * 
-	 * @param tags List of Tags to searched for
-	 * @return EntityList<Result>
+	 * Queries public (neither private nor restricted) content.
+	 * 
+	 * @param tags List of Tags to search for
+	 * @param parameters Map for additional parameters
+	 * @return EntityList&lt;Result&gt;
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Result> getResultsByTag(List<String> tags,
@@ -238,9 +248,13 @@ public class SearchService extends ConnectionsService {
 	}
 	
 	/**
+	 * Lists the elements in an Atom entry representing the result returned by a search.
+	 * 
+	 * Queries non-public (private and restricted) content owned by or visible for the authenticated user.
+	 * Requires authentication!
 	 * 
 	 * @param query  Text to search for
-	 * @return ResultList
+	 * @return EntityList&lt;Result&gt;
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Result> getMyResults(String query) throws ClientServicesException {
@@ -248,12 +262,16 @@ public class SearchService extends ConnectionsService {
 	}
 	
 	/**
+	 * Lists the elements in an Atom entry representing the result returned by a search.
+	 * 
+	 * Queries non-public (private and restricted) content owned by or visible for the authenticated user.
+	 * Requires authentication!
 	 * 
 	 * @param query
 	 *            Text to search for
 	 * @param parameters Map
 	 *            for additional parameters
-	 * @return EntityList<Result>
+	 * @return EntityList&lt;Result&gt;
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Result> getMyResults(String query, Map<String, String> parameters) throws ClientServicesException {		
@@ -262,7 +280,106 @@ public class SearchService extends ConnectionsService {
 	}
 	
 	/**
+	 * Lists the elements in an Atom entry representing the result returned by a search.
+	 * 
+	 * Queries non-public (private and restricted) content owned by or visible for the authenticated user.
+	 * Requires authentication!
+	 * 
+	 * @param query
+	 *            Text to search for
+	 * @param parameters Map
+	 *            for additional multi-valued parameters
+	 * @return EntityList&lt;Result&gt;
+	 * @throws ClientServicesException
+	 * @see {@link #getMyResults(String, Map)}
+	 */
+	public EntityList<Result> getMyResultsList(String query,Map<String, List<String>> parameters) throws ClientServicesException {
+		if(parameters==null){
+			parameters= new HashMap<String,List<String>>();
+		}
+
+		// The MYSEARCH URL already contains a {query} part which must be referred to here.
+		// The SEARCH URL (for public entities) requires the query to be added explicitly.
+		// See getMyResults(String, Map) for the same kind of usage.
+		StringBuilder searchQry = new StringBuilder(SearchUrls.MYSEARCH.format(this, 
+				SearchUrls.getQuery(query)));
+		addUrlParameters(searchQry, parameters);
+		return getResultEntityList(searchQry.toString(), new HashMap<String,String>());
+	}
+	
+	/**
+	 * The category document identifies the tags that have been assigned to particular 
+	 * items, such as blog posts or community entries. Tags are single-word keywords that 
+	 * categorize a posting or entry. A tag classifies the information in the posting or 
+	 * entry to make it easier to find the content later. The format of the tags document 
+	 * is an Atom publishing protocol (APP) categories document.
+	 * 
+	 * Queries non-public (private and restricted) content owned by or visible for the authenticated user.
+	 * Requires authentication!
+	 * 
+	 * @param tag {String}
+	 *            Single tag to search for, for multiple tags use other overloaded method
+	 * @return EntityList&lt;Result&gt;
+	 * @throws ClientServicesException
+	 */
+	public EntityList<Result> getMyResultsByTag(String tag) throws ClientServicesException {
+		List<String> taglist = new ArrayList<String>();
+		taglist.add(tag);
+		return getMyResultsByTag(taglist,null);
+	}
+	
+	/**
+	 * The category document identifies the tags that have been assigned to particular 
+	 * items, such as blog posts or community entries. Tags are single-word keywords that 
+	 * categorize a posting or entry. A tag classifies the information in the posting or 
+	 * entry to make it easier to find the content later. The format of the tags document 
+	 * is an Atom publishing protocol (APP) categories document.
+	 * 
+	 * Queries non-public (private and restricted) content owned by or visible for the authenticated user.
+	 * Requires authentication!
+	 * 
+	 * @param tags List of Tags to search for
+	 * @return EntityList&lt;Result&gt;
+	 * @throws ClientServicesException
+	 */
+	public EntityList<Result> getMyResultsByTag(List<String> tags) throws ClientServicesException {
+		return getMyResultsByTag(tags,null);
+	}
+	
+	/**
+	 * The category document identifies the tags that have been assigned to particular 
+	 * items, such as blog posts or community entries. Tags are single-word keywords that 
+	 * categorize a posting or entry. A tag classifies the information in the posting or 
+	 * entry to make it easier to find the content later. The format of the tags document 
+	 * is an Atom publishing protocol (APP) categories document.
+	 * 
+	 * Queries non-public (private and restricted) content owned by or visible for the authenticated user.
+	 * Requires authentication!
+	 * 
+	 * @param tags List of Tags to search for
+	 * @param parameters Map for additional parameters
+	 * @return EntityList&lt;Result&gt;
+	 * @throws ClientServicesException
+	 */
+	public EntityList<Result> getMyResultsByTag(List<String> tags,
+			Map<String, String> parameters) throws ClientServicesException {
+		// High level wrapper, provides a convenient mechanism for search for
+		// tags, uses constraints internally
+		List<String> formattedTags = new ArrayList<String>();
+		List<Constraint> constraints = new ArrayList<Constraint>();
+		formattedTags = createTagConstraint(tags);
+		Constraint constraint = new Constraint();
+		constraint.setType("category");
+		constraint.setValues(formattedTags);
+		constraints.add(constraint);
+		return getMyResultsWithConstraint("", constraints,parameters);
+	}
+	
+	/**
 	 * get people by search query
+	 * 
+	 * Queries public (neither private nor restricted) content.
+	 * 
 	 * @param query Text to search for
 	 * @throws ClientServicesException
 	 */
@@ -271,12 +388,15 @@ public class SearchService extends ConnectionsService {
 	}
 	
 	/**
+	 * get people by search query
+	 * 
+	 * Queries public (neither private nor restricted) content.
 	 * 
 	 * @param query
 	 *            Text to search for
 	 * @param parameters Map
 	 *            for additional parameters
-	 * @return EntityList<FacetValue>
+	 * @return EntityList&lt;FacetValue&gt;
 	 * @throws ClientServicesException
 	 */
 	public EntityList<FacetValue> getPeople(String query,Map<String, String> parameters) throws ClientServicesException {
@@ -293,10 +413,14 @@ public class SearchService extends ConnectionsService {
 	}
 	
 	/**
+	 * get my people by search query
+	 * 
+	 * Queries non-public (private and restricted) content owned by or visible for the authenticated user.
+	 * Requires authentication!
 	 * 
 	 * @param query
 	 *            Text to search for
-	 * @return EntityList<FacetValue>
+	 * @return EntityList&lt;FacetValue&gt;
 	 * @throws ClientServicesException
 	 */
 	public EntityList<FacetValue> getMyPeople(String query) throws ClientServicesException {
@@ -304,12 +428,16 @@ public class SearchService extends ConnectionsService {
 	}
 	
 	/**
+	 * get my people by search query
+	 * 
+	 * Queries non-public (private and restricted) content owned by or visible for the authenticated user.
+	 * Requires authentication!
 	 * 
 	 * @param query
 	 *            Text to search for
 	 * @param parameters Map
 	 *            for additional parameters
-	 * @return EntityList<FacetValue>
+	 * @return EntityList&lt;FacetValue&gt;
 	 * @throws ClientServicesException
 	 */
 	public EntityList<FacetValue> getMyPeople(String query,Map<String, String> parameters) throws ClientServicesException {		
@@ -317,22 +445,31 @@ public class SearchService extends ConnectionsService {
 			parameters= new HashMap<String,String>();
 		}
 		
-		parameters.put("query", query);	
 		parameters.put("pageSize", "0");
 		parameters.put("facet", "{\"id\": \"Person\"}");
 		
-		String searchQry = SearchUrls.MYSEARCH.format(this);
+		// The MYSEARCH URL already contains a {query} part which must be referred to here.
+		// The SEARCH URL (for public entities) requires the query to be added explicitly.
+		// See getMyResults(String, Map) for the same kind of usage.
+		String searchQry = SearchUrls.MYSEARCH.format(this, SearchUrls.getQuery(query));
 		return getFacetValueEntityList(searchQry, parameters);
 	}
 	
     /**
+     * Lists the elements in an Atom entry representing the result returned by a search using constraints.
+     * Constraints may refer to field, category and range metadata.
+     * The Connections Search API also supports "not-constraints" to search for data NOT matching a constraint, 
+     * but this is not yet supported directly.
+     * 
+	 * Queries public (neither private nor restricted) content.
+     * 
      * @param query Text to search for
      * @param constraint Constraint
      * 
-     * @return EntityList<Result>
+     * @return EntityList&lt;Result&gt;
      * @throws ClientServicesException
      * 
-	 * @see <a href="http://www-10.IBM.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Constraints&content=pdcontent">Search API</a>
+	 * @see <a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Constraints&content=pdcontent">Search API</a>
      */
 	public EntityList<Result> getResultsWithConstraint(String query, Constraint constraint) throws ClientServicesException {
 		List<Constraint> constraintList = new ArrayList<Constraint>();
@@ -341,27 +478,41 @@ public class SearchService extends ConnectionsService {
 	}
 	
     /**
-     * @param query Text to search for
-     * @param constraints List<Constraint>
+     * Lists the elements in an Atom entry representing the result returned by a search using constraints.
+     * Constraints may refer to field, category and range metadata.
+     * The Connections Search API also supports "not-constraints" to search for data NOT matching a constraint, 
+     * but this is not yet supported directly.
      * 
-     * @return EntityList<Scope>
+	 * Queries public (neither private nor restricted) content.
+     * 
+     * @param query Text to search for
+     * @param constraints List&lt;Constraint&gt;
+     * 
+     * @return EntityList&lt;Result&gt;
      * @throws ClientServicesException
      * 
-	 * @see <a href="http://www-10.IBM.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Constraints&content=pdcontent">Search API</a>
+	 * @see <a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Constraints&content=pdcontent">Search API</a>
      */
 	public EntityList<Result> getResultsWithConstraint(String query, List<Constraint> constraints) throws ClientServicesException {
 		return getResultsWithConstraint(query, constraints,null);
 	}
     
     /**
+     * Lists the elements in an Atom entry representing the result returned by a search using constraints.
+     * Constraints may refer to field, category and range metadata.
+     * The Connections Search API also supports "not-constraints" to search for data NOT matching a constraint, 
+     * but this is not yet supported directly.
+     * 
+	 * Queries public (neither private nor restricted) content.
+     * 
      * @param query Text to search for
-     * @param constraints List<Constraint>
-     * @param parameters 
+     * @param constraints List&lt;Constraint&gt;
+     * @param parameters Map for additional parameters
 	 * 
-     * @return EntityList<Result>
+     * @return EntityList&lt;Result&gt;
      * @throws ClientServicesException
      * 
-	   *http://www-10.IBM.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Constraints&content=pdcontent  
+	 * @see <a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Constraints&content=pdcontent">Search API</a>  
      */
 	public EntityList<Result> getResultsWithConstraint(String query, List<Constraint> constraints, Map<String, String> parameters) throws ClientServicesException{
 		
@@ -380,12 +531,90 @@ public class SearchService extends ConnectionsService {
 		return getResultsList(query, params);
 	}
 
+    /**
+     * Lists the elements in an Atom entry representing the result returned by a search using constraints.
+     * Constraints may refer to field, category and range metadata.
+     * The Connections Search API also supports "not-constraints" to search for data NOT matching a constraint, 
+     * but this is not yet supported directly.
+     * 
+	 * Queries non-public (private and restricted) content owned by or visible for the authenticated user.
+	 * Requires authentication!
+     * 
+     * @param query Text to search for
+     * @param constraint Constraint
+     * 
+     * @return EntityList&lt;Result&gt;
+     * @throws ClientServicesException
+     * 
+	 * @see <a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Constraints&content=pdcontent">Search API</a>
+     */
+	public EntityList<Result> getMyResultsWithConstraint(String query, Constraint constraint) throws ClientServicesException {
+		List<Constraint> constraintList = new ArrayList<Constraint>();
+		constraintList.add(constraint);
+		return getMyResultsWithConstraint(query, constraintList,null);
+	}
+	
+    /**
+     * Lists the elements in an Atom entry representing the result returned by a search using constraints.
+     * Constraints may refer to field, category and range metadata.
+     * The Connections Search API also supports "not-constraints" to search for data NOT matching a constraint, 
+     * but this is not yet supported directly.
+     * 
+	 * Queries non-public (private and restricted) content owned by or visible for the authenticated user.
+	 * Requires authentication!
+     * 
+     * @param query Text to search for
+     * @param constraints List&lt;Constraint&gt;
+     * 
+     * @return EntityList&lt;Result&gt;
+     * @throws ClientServicesException
+     * 
+	 * @see <a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Constraints&content=pdcontent">Search API</a>
+     */
+	public EntityList<Result> getMyResultsWithConstraint(String query, List<Constraint> constraints) throws ClientServicesException {
+		return getMyResultsWithConstraint(query, constraints,null);
+	}
+    
+    /**
+     * Lists the elements in an Atom entry representing the result returned by a search using constraints.
+     * Constraints may refer to field, category and range metadata.
+     * The Connections Search API also supports "not-constraints" to search for data NOT matching a constraint, 
+     * but this is not yet supported directly.
+     * 
+	 * Queries non-public (private and restricted) content owned by or visible for the authenticated user.
+	 * Requires authentication!
+     * 
+     * @param query Text to search for
+     * @param constraints List&lt;Constraint&gt;
+     * @param parameters Map for additional parameters
+	 * 
+     * @return EntityList&lt;Result&gt;
+     * @throws ClientServicesException
+     * 
+	 * @see <a href="http://www-10.lotus.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Constraints&content=pdcontent">Search API</a>  
+     */
+	public EntityList<Result> getMyResultsWithConstraint(String query, List<Constraint> constraints, Map<String, String> parameters) throws ClientServicesException{
+		
+		Map<String, List<String>> params = new HashMap<String, List<String>>();
+		// We can not use a map of constraints, since there could be multiple constraints but map can have only one key named constraint
+		List<String> formattedConstraints = generateConstraintParameter(constraints);
+		if(parameters == null){
+			parameters = new HashMap<String,String>();
+		}
+		for(Map.Entry<String, String> entry : parameters.entrySet()){
+			List<String> valueList = new ArrayList<String>();
+			valueList.add(entry.getValue());
+			params.put(entry.getKey(), valueList);
+		}
+		params.put("constraint", formattedConstraints);
+		return getMyResultsList(query, params);
+	}
+	
 	/**
      * Search IBM Connection for available scopes ( Applications in which search can be executed )
      * 
-     * @method getScopes
-     * @return EntityList<Scope>
-	 * @throws SearchServiceException 
+     * @return EntityList&lt;Scope&gt;
+	 * @throws ClientServicesException 
      */
      public EntityList<Scope> getScopes() throws ClientServicesException {
     	Map<String,String> params = new HashMap<String,String>();
@@ -397,8 +626,10 @@ public class SearchService extends ConnectionsService {
      /**
       * Lists the elements in an Atom entry representing the result returned by a search.
       * 
+      * Queries public (neither private nor restricted) content.
+      * 
       * @param query Text to search for
-      * @return ResultList
+      * @return EntityList&lt;Result&gt;
       * @throws ClientServicesException
       */
  	public EntityList<Result> getResults(String query) throws ClientServicesException {
@@ -411,7 +642,7 @@ public class SearchService extends ConnectionsService {
 
  	/**
  	 * 
- 	 * @return {IFeedHandler<Result>}
+ 	 * @return IFeedHandler&lt;Result&gt;
  	 */
  	public IFeedHandler<Result> getResultFeedHandler() {
  		return new AtomFeedHandler<Result>(this) {
@@ -424,7 +655,7 @@ public class SearchService extends ConnectionsService {
 
  	/**
  	 * 
- 	 * @return {IFeedHandler<Scope>}
+ 	 * @return IFeedHandler&lt;Scope&gt;
  	 */
  	public IFeedHandler<Scope> getScopeFeedHandler() {
  		return new AtomFeedHandler<Scope>(this) {
@@ -437,7 +668,7 @@ public class SearchService extends ConnectionsService {
 
  	/**
  	 * 
- 	 * @return {IFeedHandler<FacetValue>}
+ 	 * @return IFeedHandler&lt;FacetValue&gt;
  	 */
  	public IFeedHandler<FacetValue> getFacetValueFeedHandler(final String facetId) {
  		return new AtomFeedHandler<FacetValue>(this) {

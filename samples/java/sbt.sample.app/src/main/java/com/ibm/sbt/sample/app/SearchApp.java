@@ -54,6 +54,18 @@ public class SearchApp extends BaseApp {
     	return getSearchService().getResultsWithConstraint(query, constraint);
     }
     
+    EntityList<Result> getMyResults(String query) throws ClientServicesException {
+    	return getSearchService().getMyResults(query);
+    }
+    
+    EntityList<Result> getMyResults(String query, Map<String, String> parameters) throws ClientServicesException {
+    	return getSearchService().getMyResults(query, parameters);
+    }
+    
+    EntityList<Result> getMyResultsWithConstraint(String query, Constraint constraint) throws ClientServicesException {
+    	return getSearchService().getMyResultsWithConstraint(query, constraint);
+    }
+    
 	/**
 	 * Demo.
 	 * 
@@ -74,7 +86,14 @@ public class SearchApp extends BaseApp {
 		try {
 			sa = new SearchApp(url, user, password);
 			
+			System.out.println("*** Public entities:");
 			EntityList<Result> results = sa.getResults(query);
+			for (Result result : results) {
+				System.out.println(result.getTitle() + " " + result.getUpdated());
+			}
+						
+			System.out.println("*** Non-public entities accessible by given user:");
+			results = sa.getMyResults(query);
 			for (Result result : results) {
 				System.out.println(result.getTitle() + " " + result.getUpdated());
 			}

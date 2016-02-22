@@ -48,7 +48,7 @@ public enum FileUrls implements URLContainer {
     COMMUNITY_FILE_COMMENT(new VersionedUrl(v4_0, 				"{files}/{authType}/{accessType}/communitylibrary/{communityId}/document/{fileId}/feed")),
     GET_COMMUNITY_FILE(new VersionedUrl(v4_0, 					"{files}/{authType}/{accessType}/communitylibrary/{communityId}/document/{fileId}/entry")),
     USERLIBRARY_DOCUMENT_FEED(new VersionedUrl(v4_0, 			"{files}/{authType}/{accessType}/userlibrary/{userId}/document/{fileId}/feed")),
-    UPLOAD_NEW_VERSION_COMMUNITY_FILE(new VersionedUrl(v4_0, 	"{files}/{authType}/{accessType}/library/{communityId}/document/{fileId}/entry")),
+    UPLOAD_NEW_VERSION_COMMUNITY_FILE(new VersionedUrl(v4_0, 	"{files}/{authType}/{accessType}/communitylibrary/{communityId}/document/{fileId}/entry")), //Git Issue: 1702 - changed library to communitylibrary
     USERLIBRARY_DOCUMENT_COMMENT_ENTRY(new VersionedUrl(v4_0, 	"{files}/{authType}/{accessType}/userlibrary/{userId}/document/{fileId}/comment/{commentId}/entry")),
     MYUSERLIBRARY_DOCUMENT_COMMENT_ENTRY(new VersionedUrl(v4_0, "{files}/{authType}/{accessType}/myuserlibrary/document/{fileId}/comment/{commentId}/entry")),
     GET_COMMUNITY_COLLECTION(new VersionedUrl(v4_0, 			"{files}/{authType}/{accessType}/communitycollection/{communityId}/feed")),

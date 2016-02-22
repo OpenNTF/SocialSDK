@@ -24,7 +24,7 @@ import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 /**
  * @author projsaha
  *  
- * @date 15 Nov 2013
+ * @since 15 Nov 2013
  */
 public class ProfileCreatePostData extends BaseProfileEntryTest {
     

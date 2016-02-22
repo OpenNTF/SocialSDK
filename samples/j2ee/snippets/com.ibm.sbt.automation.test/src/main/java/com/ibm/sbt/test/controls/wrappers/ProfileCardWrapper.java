@@ -21,7 +21,7 @@ import com.ibm.sbt.automation.core.test.BaseWrapperTest;
 
 /**
  * @author Francis 
- * @date 16 Jul 2013
+ * @since 16 Jul 2013
  */
 public class ProfileCardWrapper extends BaseWrapperTest {
     @Test

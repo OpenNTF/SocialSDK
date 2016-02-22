@@ -1,4 +1,4 @@
-define([
+define("dojox/mvc/sync", [
 	"dojo/_base/lang",
 	"dojo/_base/config",
 	"dojo/_base/array",

@@ -1,4 +1,4 @@
-define(["./_base","dojo/_base/lang", "dojo/_base/sniff", "dojo/_base/window", "dojo/_base/config"],
+define("dojox/gfx/renderer", ["./_base","dojo/_base/lang", "dojo/_base/sniff", "dojo/_base/window", "dojo/_base/config"],
   function(g, lang, has, win, config){
   //>> noBuildResolver
 	var currentRenderer = null;

@@ -28,7 +28,7 @@ import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 /**
  * @author Vimal Dhupar
  *  
- * @date 10th June, 2013
+ * @since 10th June, 2013
  */
 public class ProfileFeedJsonDataHandler extends BaseApiTest {
     

@@ -1,4 +1,4 @@
-define(["../has", "./config", "require", "module"], function(has, config, require, module){
+define("dojo/_base/kernel", ["../has", "./config", "require", "module"], function(has, config, require, module){
 	// module:
 	//		dojo/_base/kernel
 
@@ -77,7 +77,7 @@ define(["../has", "./config", "require", "module"], function(has, config, requir
 
 	// FIXME: dojo.baseUrl and dojo.config.baseUrl should be deprecated
 	dojo.baseUrl = dojo.config.baseUrl = require.baseUrl;
-	dojo.isAsync = !has("dojo-loader") || require.async;
+	dojo.isAsync = ! 1  || require.async;
 	dojo.locale = config.locale;
 
 	var rev = "$Rev: c874130 $".match(/[0-9a-f]{7,}/);
@@ -101,11 +101,11 @@ define(["../has", "./config", "require", "module"], function(has, config, requir
 		}
 	};
 
-	// If has("extend-dojo") is truthy, then as a dojo module is defined it should push it's definitions
+	// If  1  is truthy, then as a dojo module is defined it should push it's definitions
 	// into the dojo object, and conversely. In 2.0, it will likely be unusual to augment another object
 	// as a result of defining a module. This has feature gives a way to force 2.0 behavior as the code
 	// is migrated. Absent specific advice otherwise, set extend-dojo to truthy.
-	has.add("extend-dojo", 1);
+	 1 || has.add("extend-dojo", 1);
 
 
 	(Function("d", "d.eval = function(){return d.global.eval ? d.global.eval(arguments[0]) : eval(arguments[0]);}"))(dojo);
@@ -137,7 +137,7 @@ define(["../has", "./config", "require", "module"], function(has, config, requir
 	=====*/
 
 
-	if(has("host-rhino")){
+	if( 0 ){
 		dojo.exit = function(exitcode){
 			quit(exitcode);
 		};
@@ -146,11 +146,11 @@ define(["../has", "./config", "require", "module"], function(has, config, requir
 		};
 	}
 
-	has.add("dojo-guarantee-console",
+	 1 || has.add("dojo-guarantee-console",
 		// ensure that console.log, console.warn, etc. are defined
 		1
 	);
-	if(has("dojo-guarantee-console")){
+	if( 1 ){
 		typeof console != "undefined" || (console = {});
 		//	Be careful to leave 'log' always at the end
 		var cn = [
@@ -229,11 +229,11 @@ define(["../has", "./config", "require", "module"], function(has, config, requir
 		};
 	}
 
-	has.add("dojo-modulePaths",
+	 1 || has.add("dojo-modulePaths",
 		// consume dojo.modulePaths processing
 		1
 	);
-	if(has("dojo-modulePaths")){
+	if( 1 ){
 		// notice that modulePaths won't be applied to any require's before the dojo/_base/kernel factory is run;
 		// this is the v1.6- behavior.
 		if(config.modulePaths){
@@ -246,11 +246,11 @@ define(["../has", "./config", "require", "module"], function(has, config, requir
 		}
 	}
 
-	has.add("dojo-moduleUrl",
+	 1 || has.add("dojo-moduleUrl",
 		// include dojo.moduleUrl
 		1
 	);
-	if(has("dojo-moduleUrl")){
+	if( 1 ){
 		dojo.moduleUrl = function(/*String*/module, /*String?*/url){
 			// summary:
 			//		Returns a URL relative to a module.

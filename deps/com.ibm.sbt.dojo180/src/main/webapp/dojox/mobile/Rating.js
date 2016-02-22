@@ -1,4 +1,4 @@
-define([
+define("dojox/mobile/Rating", [
 	"dojo/_base/declare",
 	"dojo/_base/lang",
 	"dojo/dom-construct",

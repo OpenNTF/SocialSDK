@@ -1,4 +1,4 @@
-define([
+define("dojox/editor/plugins/CollapsibleToolbar", [
 	"dojo",
 	"dijit",
 	"dojox",

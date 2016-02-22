@@ -20,7 +20,7 @@ import java.util.Map;
 
 /**
  * @author Lorenzo Boccaccia 
- * @date Jun 14, 2013
+ * @since Jun 14, 2013
  */
 public class FileCommentParameterBuilder {
 

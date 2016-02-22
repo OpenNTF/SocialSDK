@@ -1,4 +1,4 @@
-define(["../../_base/lang"], function(lang){
+define("dojo/data/util/sorter", ["../../_base/lang"], function(lang){
 	// module:
 	//		dojo/data/util/sorter
 	// summary:

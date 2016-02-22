@@ -1,3 +1,5 @@
+// wrapped by build app
+define("dojox/rails", ["dijit","dojo","dojox","dojo/require!dojo/NodeList-traverse"], function(dijit,dojo,dojox){
 dojo.provide("dojox.rails");
 dojo.require("dojo.NodeList-traverse");
 
@@ -141,3 +143,5 @@ dojo.ready((function(d, dr, dg){
 		live("form", "submit", handleFormSubmit);
 	};
 })(dojo, dojox.rails, dojo.global));
+
+});

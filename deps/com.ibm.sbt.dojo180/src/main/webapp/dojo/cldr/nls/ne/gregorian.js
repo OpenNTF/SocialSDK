@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/ne/gregorian", //begin v1.x content
 {
 	"field-dayperiod": "पूर्व मध्यान्ह/उत्तर मध्यान्ह",
 	"dayPeriods-format-wide-pm": "उत्तर मध्यान्ह",

@@ -30,7 +30,7 @@ import com.ibm.sbt.automation.core.utils.Trace;
 
 /**
  * @author mwallace
- * @date 14 Aug 2013
+ * @since 14 Aug 2013
  */
 public class ProfileTags extends BaseTest {
 
@@ -57,7 +57,7 @@ public class ProfileTags extends BaseTest {
      * Check the list
      * 
      * @param snippetId
-     * @return
+     * @return {boolean}
      */
     protected boolean checkList(String snippetId) {
     	ListResultPage resultPage = launchList(snippetId);
@@ -69,7 +69,7 @@ public class ProfileTags extends BaseTest {
      * Launch the list snippet and return a ListResultPage
      * 
      * @param snippetId
-     * @return
+     * @return {ListResultPage}
      */
     protected ListResultPage launchList(String snippetId) {
         ResultPage resultPage = super.launchSnippet(snippetId, authType);
@@ -78,7 +78,7 @@ public class ProfileTags extends BaseTest {
     
     /**
      * Return true if a List was created on the page i.e. could find ul, multiple li's
-     * @return
+     * @return {boolean}
      */
     protected boolean checkList(ListResultPage resultPage, String snippetId) {
        Trace.log("List result page: " + resultPage.getText());

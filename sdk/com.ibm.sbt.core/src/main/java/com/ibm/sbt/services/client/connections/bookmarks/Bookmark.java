@@ -35,7 +35,7 @@ public class Bookmark extends AtomEntity {
 	 * Construct a Bookmark instance.
 	 * 
 	 * @param service
-	 * @param data
+	 * @param node
 	 * @param namespaceCtx
 	 * @param xpathExpression
 	 */
@@ -47,7 +47,7 @@ public class Bookmark extends AtomEntity {
 	
 	/**
 	 * Return the Bookmark universal id.
-	 * @return
+	 * @return {String}
 	 */
 	public String getBookmarkUuid() {
 		return getAsString(BookmarkXPath.linkid);
@@ -56,7 +56,7 @@ public class Bookmark extends AtomEntity {
 	/**
 	 * Return the href.
 	 * 
-	 * @return
+	 * @return {String}
 	 */
 	public String getHref() {
 		return getAsString(BookmarkXPath.href);
@@ -65,7 +65,7 @@ public class Bookmark extends AtomEntity {
 	/**
 	 * Return the click count.
 	 * 
-	 * @return
+	 * @return {long}
 	 */
 	public long getClickCount() {
 		return getAsLong(BookmarkXPath.clickCount);
@@ -74,7 +74,7 @@ public class Bookmark extends AtomEntity {
 	/**
 	 * Return the link count.
 	 * 
-	 * @return
+	 * @return {long}
 	 */
 	public long getLinkCount() {
 		return getAsLong(BookmarkXPath.linkCount);

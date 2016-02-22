@@ -1,10 +1,10 @@
-define([
+define("dijit/a11y", [
 	"dojo/_base/array", // array.forEach array.map
 	"dojo/dom",			// dom.byId
 	"dojo/dom-attr", // domAttr.attr domAttr.has
 	"dojo/dom-style", // domStyle.style
 	"dojo/_base/lang", // lang.mixin()
-	"dojo/sniff", // has("ie") has("extend-dojo")
+	"dojo/sniff", // has("ie")  1 
 	"./main"	// for exporting methods to dijit namespace
 ], function(array, dom, domAttr, domStyle, lang, has, dijit){
 
@@ -185,7 +185,7 @@ define([
 		}
 	};
 
-	has("extend-dojo") && lang.mixin(dijit, a11y);
+	 1  && lang.mixin(dijit, a11y);
 
 	return a11y;
 });

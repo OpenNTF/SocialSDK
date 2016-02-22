@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/fi/FontChoice", ({
 	fontSize: "Koko",
 	fontName: "Fontti",
 	formatBlock: "Muotoile",

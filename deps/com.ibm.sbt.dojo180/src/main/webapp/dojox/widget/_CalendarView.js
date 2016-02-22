@@ -1,4 +1,4 @@
-define([
+define("dojox/widget/_CalendarView", [
 	"dojo/_base/declare",
 	"dijit/_WidgetBase",
 	"dojo/dom-construct",

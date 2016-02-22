@@ -1,4 +1,4 @@
-define([
+define("dojo/dnd/Source", [
 	"../_base/array", "../_base/connect", "../_base/declare", "../_base/kernel", "../_base/lang",
 	"../dom-class", "../dom-geometry", "../mouse", "../ready", "../topic",
 	"./common", "./Selector", "./Manager"

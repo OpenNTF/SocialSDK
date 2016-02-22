@@ -1,4 +1,4 @@
-define(["dojo/_base/lang", "dojo/_base/declare", "dojo/dom-geometry", "dijit/registry", "dijit/_WidgetBase", "dojo/_base/html", 
+define("dojox/dgauges/GaugeBase", ["dojo/_base/lang", "dojo/_base/declare", "dojo/dom-geometry", "dijit/registry", "dijit/_WidgetBase", "dojo/_base/html", 
 		"dojo/_base/event", "dojox/gfx", "dojox/widget/_Invalidating","./ScaleBase", "dojox/gfx/matrix"],
 	function(lang, // lang.extend
 		declare, domGeom,  WidgetRegistry, _WidgetBase, html, event, gfx, _Invalidating, ScaleBase, matrix){

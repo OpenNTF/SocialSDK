@@ -1,4 +1,4 @@
-define([
+define("dojox/widget/Toaster", [
 	"dojo/_base/declare", // declare
         "dojo/_base/lang", // lang.getObject...
 	"dojo/_base/connect", // connect.connect, connect.subscribe

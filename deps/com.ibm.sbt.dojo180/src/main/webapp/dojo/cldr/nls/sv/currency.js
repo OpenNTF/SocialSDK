@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/sv/currency", //begin v1.x content
 {
 	"BRE_displayName": "brasiliansk cruzeiro (1990-1993)",
 	"DEM_displayName": "tysk mark",

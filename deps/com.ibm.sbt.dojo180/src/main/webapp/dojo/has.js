@@ -1,4 +1,4 @@
-define(["require", "module"], function(require, module){
+define("dojo/has", ["require", "module"], function(require, module){
 	// module:
 	//		dojo/has
 	// summary:
@@ -16,7 +16,7 @@ define(["require", "module"], function(require, module){
 	// if using a foreign loader, then the has cache may be initialized via the config object for this module
 	// WARNING: if a foreign loader defines require.has to be something other than the has.js API, then this implementation fail
 	var has = require.has || function(){};
-	if(!has("dojo-has-api")){
+	if(! 1 ){
 		var
 			isBrowser =
 				// the most fundamental decision: are we in the browser?
@@ -89,15 +89,15 @@ define(["require", "module"], function(require, module){
 		// since we're operating under a loader that doesn't provide a has API, we must explicitly initialize
 		// has as it would have otherwise been initialized by the dojo loader; use has.add to the builder
 		// can optimize these away iff desired
-		has.add("host-browser", isBrowser);
-		has.add("host-node", (typeof process == "object" && process.versions && process.versions.node && process.versions.v8));
-		has.add("host-rhino", (typeof load == "function" && (typeof Packages == "function" || typeof Packages == "object")));
-		has.add("dom", isBrowser);
-		has.add("dojo-dom-ready-api", 1);
-		has.add("dojo-sniff", 1);
+		 1 || has.add("host-browser", isBrowser);
+		 0 && has.add("host-node", (typeof process == "object" && process.versions && process.versions.node && process.versions.v8));
+		 0 && has.add("host-rhino", (typeof load == "function" && (typeof Packages == "function" || typeof Packages == "object")));
+		 1 || has.add("dom", isBrowser);
+		 1 || has.add("dojo-dom-ready-api", 1);
+		 1 || has.add("dojo-sniff", 1);
 	}
 
-	if(has("host-browser")){
+	if( 1 ){
 		// Common application level tests
 		has.add("dom-addeventlistener", !!document.addEventListener);
 		has.add("touch", "ontouchstart" in document || window.navigator.msMaxTouchPoints > 0);

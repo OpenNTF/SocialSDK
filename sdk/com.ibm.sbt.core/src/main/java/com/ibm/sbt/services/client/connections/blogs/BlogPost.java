@@ -36,14 +36,13 @@ import com.ibm.sbt.services.client.connections.blogs.model.BlogXPath;
  * 
  * @author Swati Singh
  */
-
 public class BlogPost extends BaseBlogEntity {
 
 	/**
 	 * Constructor
 	 * 
-	 * @param BlogService
-	 * @param BlogId
+	 * @param blogService
+	 * @param id
 	 */
 	public BlogPost(BlogService blogService, String id) {
 		super(blogService, id);
@@ -52,10 +51,10 @@ public class BlogPost extends BaseBlogEntity {
 	/**
 	 * Constructor
 	 * 
-	 * @param BaseService
-	 * @param Node
-	 * @param NamespaceContext
-	 * @param XPathExpression
+	 * @param service
+	 * @param node
+	 * @param namespaceCtx
+	 * @param xpathExpression
 	 */
 	public BlogPost(BaseService service, Node node,
 			NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
@@ -142,7 +141,7 @@ public class BlogPost extends BaseBlogEntity {
 	 * Sets blog handle of IBM Connections blog post.
 	 * 
 	 * @method setBlogHandle
-	 * @param {String} blogHandle of the blog post's blog
+	 * @param handle of the blog post's blog
 	 */
 	public void setBlogHandle(String handle) {
 		setAsString(BlogXPath.handle, handle);
@@ -152,7 +151,6 @@ public class BlogPost extends BaseBlogEntity {
 	 * Save this blog post
 	 * 
 	 * @method save
-	 * @param blogHandle
 	 * @throws ClientServicesException
 	 */
 	public BlogPost save() throws ClientServicesException {
@@ -170,8 +168,6 @@ public class BlogPost extends BaseBlogEntity {
 	 * in the blog post object.
 	 * 
 	 * @method load
-	 * @param blogHandle
-	 * @param postUuid
 	 * @throws ClientServicesException
 	 */
 	public BlogPost load() throws ClientServicesException {

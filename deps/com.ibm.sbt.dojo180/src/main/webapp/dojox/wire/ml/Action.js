@@ -1,3 +1,5 @@
+// wrapped by build app
+define("dojox/wire/ml/Action", ["dijit","dojo","dojox","dojo/require!dijit/_Widget,dijit/_Container,dojox/wire/Wire,dojox/wire/ml/util"], function(dijit,dojo,dojox){
 dojo.provide("dojox.wire.ml.Action");
 
 dojo.require("dijit._Widget");
@@ -217,4 +219,6 @@ dojo.declare("dojox.wire.ml.ActionFilter", dijit._Widget, {
 		}
 		return false; //Boolean
 	}
+});
+
 });

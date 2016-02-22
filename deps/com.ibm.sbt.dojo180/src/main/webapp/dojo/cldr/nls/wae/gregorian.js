@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/wae/gregorian", //begin v1.x content
 {
 	"field-day-relative+-1": "Gešter",
 	"field-day-relative+0": "Hitte",

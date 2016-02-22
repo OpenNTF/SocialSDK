@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/ksh/currency", //begin v1.x content
 {
 	"CZK_displayName": "tschäschesche Kruhne",
 	"TZS_displayName": "tansaanesche Schillenge",

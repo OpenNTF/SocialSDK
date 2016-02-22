@@ -1,4 +1,4 @@
-define([
+define("dojox/grid/enhanced/plugins/exporter/CSVWriter", [
 	"dojo/_base/declare",
 	"dojo/_base/array",
 	"./_ExportWriter",

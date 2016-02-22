@@ -1,4 +1,6 @@
-define(["dojo/_base/kernel","dojo/_base/declare","dojo/_base/html","dojo/_base/fx",
+require({cache:{
+'url:dojox/layout/resources/ScrollPane.html':"<div class=\"dojoxScrollWindow\" dojoAttachEvent=\"onmouseenter: _enter, onmouseleave: _leave\">\n    <div class=\"dojoxScrollWrapper\" style=\"${style}\" dojoAttachPoint=\"wrapper\" dojoAttachEvent=\"onmousemove: _calc\">\n\t<div class=\"dojoxScrollPane\" dojoAttachPoint=\"containerNode\"></div>\n    </div>\n    <div dojoAttachPoint=\"helper\" class=\"dojoxScrollHelper\"><span class=\"helperInner\">|</span></div>\n</div>"}});
+define("dojox/layout/ScrollPane", ["dojo/_base/kernel","dojo/_base/declare","dojo/_base/html","dojo/_base/fx",
 		"dijit/_Templated","dijit/layout/ContentPane","dojo/dom-class",
 		"dojo/text!./resources/ScrollPane.html"],
 function(kernel,declare,html,baseFx,Templated,ContentPane,domClass,template){

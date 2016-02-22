@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/bs-cyrl/hebrew", //begin v1.x content
 {
 	"quarters-format-abbr": [
 		"К1",

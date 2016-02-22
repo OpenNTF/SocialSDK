@@ -29,7 +29,6 @@ import com.ibm.commons.util.io.json.JsonJavaObject;
  * JSON implementation for a JsonObject in Java that has its properties case insensitive.
  * <p>
  * </p>  
- * @ibm-api
  */
 public class JsonJavaObjectI extends JsonJavaObject {
 

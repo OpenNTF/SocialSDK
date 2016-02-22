@@ -1,4 +1,4 @@
-define([
+define("dojox/mobile/TimePicker", [
 	"dojo/_base/lang",
 	"./_PickerChooser!TimePicker"
 ], function(lang, TimePicker){

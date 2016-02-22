@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/pl/FontChoice", ({
 	fontSize: "Rozmiar",
 	fontName: "Czcionka",
 	formatBlock: "Format",

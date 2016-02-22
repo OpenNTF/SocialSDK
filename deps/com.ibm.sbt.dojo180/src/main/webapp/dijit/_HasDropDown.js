@@ -1,4 +1,4 @@
-define([
+define("dijit/_HasDropDown", [
 	"dojo/_base/declare", // declare
 	"dojo/_base/Deferred",
 	"dojo/_base/event", // event.stop

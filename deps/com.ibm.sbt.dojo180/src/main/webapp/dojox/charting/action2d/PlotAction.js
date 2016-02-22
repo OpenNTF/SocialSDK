@@ -1,4 +1,4 @@
-define(["dojo/_base/connect", "dojo/_base/declare", "./Base", "dojo/fx/easing", "dojox/lang/functional", 
+define("dojox/charting/action2d/PlotAction", ["dojo/_base/connect", "dojo/_base/declare", "./Base", "dojo/fx/easing", "dojox/lang/functional", 
 		"dojox/lang/functional/object"], 
 	function(hub, declare, Base, dfe, df, dlfo){
 	

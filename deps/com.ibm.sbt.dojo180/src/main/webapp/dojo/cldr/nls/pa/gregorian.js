@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/pa/gregorian", //begin v1.x content
 {
 	"dayPeriods-format-wide-pm": "ਬਾਅਦ ਦੁਪਹਿਰ",
 	"field-minute": "ਮਿੰਟ",

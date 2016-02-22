@@ -1,4 +1,4 @@
-define(["dojo", "../library/icons", "../util/common", "../Drawing", "../manager/_registry"], 
+define("dojox/drawing/ui/Toolbar", ["dojo", "../library/icons", "../util/common", "../Drawing", "../manager/_registry"], 
 function(dojo, icons, utilCommon, Drawing, registry){
 
 return dojo.declare("dojox.drawing.ui.Toolbar", [], {

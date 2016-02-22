@@ -1,4 +1,4 @@
-define(["../SimpleTheme", "./common"], function(SimpleTheme, themes){
+define("dojox/charting/themes/WatersEdge", ["../SimpleTheme", "./common"], function(SimpleTheme, themes){
 	themes.WatersEdge = new SimpleTheme({
 		colors: [
 			"#437cc0",

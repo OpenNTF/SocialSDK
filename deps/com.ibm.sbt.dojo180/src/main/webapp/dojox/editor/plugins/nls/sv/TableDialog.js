@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/sv/TableDialog", ({
 	insertTableTitle: "Infoga tabell",
 	modifyTableTitle: "Ändra tabell",
 	rows: "Rader:",

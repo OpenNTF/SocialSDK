@@ -1,4 +1,4 @@
-define([
+define("dojox/form/DropDownStack", [
 	"dijit/form/Select",
 	"./_SelectStackMixin",
 	"dojo/_base/declare"

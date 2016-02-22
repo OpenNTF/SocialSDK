@@ -25,7 +25,7 @@ import com.ibm.sbt.services.client.connections.communities.Community;
 import com.ibm.sbt.services.client.connections.communities.CommunityService;
 /**
  * @author Francis 
- * @date 26 Mar 2013
+ * @since 26 Mar 2013
  */
 public class BaseActivityStreamTest extends BaseWrapperTest{
 
@@ -34,7 +34,7 @@ public class BaseActivityStreamTest extends BaseWrapperTest{
 	
     /**
      * creates community, initialising context if needed.
-     * @return
+     * @return {String}
      * @throws CommunityServiceException
      */
 	public String createCommunity(){

@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/he/SpellCheck", ({
 	widgetLabel: "בדיקת איות באצווה ",
 	unfound: "לא נמצא ",
 	skip: "דילוג",

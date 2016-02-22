@@ -1,4 +1,4 @@
-define(["dojo/_base/kernel", "dojo/_base/declare", "dojo/_base/lang", "dojo/dom", "dojo/_base/array",
+define("dojox/data/HtmlTableStore", ["dojo/_base/kernel", "dojo/_base/declare", "dojo/_base/lang", "dojo/dom", "dojo/_base/array",
 		"dojo/_base/xhr", "dojo/_base/sniff", "dojo/data/util/simpleFetch",
 		"dojo/data/util/filter", "dojox/xml/parser"], 
   function(kernel, declare, lang, dom, array, xhr, has, simpleFetch, filter, xmlParser) {

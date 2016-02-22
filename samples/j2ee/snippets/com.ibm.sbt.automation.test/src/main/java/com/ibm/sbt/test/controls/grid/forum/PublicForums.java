@@ -23,7 +23,7 @@ import com.ibm.sbt.automation.core.test.BaseGridTest;
 
 /**
  * @author David Ryan
- * @date 20 August 2013
+ * @since 20 August 2013
  */
 public class PublicForums extends BaseGridTest {
 

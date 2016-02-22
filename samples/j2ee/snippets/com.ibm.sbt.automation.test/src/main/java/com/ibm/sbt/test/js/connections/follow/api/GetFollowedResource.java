@@ -26,7 +26,7 @@ import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 /**
  * @author mwallace
  *  
- * @date 27 Nov 2013
+ * @since 27 Nov 2013
  */
 public class GetFollowedResource extends BaseCommunitiesTest {
     

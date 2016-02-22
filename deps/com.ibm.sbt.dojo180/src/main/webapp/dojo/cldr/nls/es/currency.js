@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/es/currency", //begin v1.x content
 {
 	"KHR_displayName": "riel camboyano",
 	"FJD_displayName": "dólar de las Islas Fiyi",

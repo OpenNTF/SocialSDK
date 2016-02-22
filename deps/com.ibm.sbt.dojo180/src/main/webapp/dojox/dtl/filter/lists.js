@@ -1,4 +1,4 @@
-define([
+define("dojox/dtl/filter/lists", [
 	"dojo/_base/lang",
 	"../_base"
 ], function(lang,dd){

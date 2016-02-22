@@ -100,7 +100,7 @@ public class OAuth2Handler extends OAuthHandler {
     private static final ProfilerType profilerDeleteToken = new ProfilerType("OAuth: Delete a token from the store"); //$NON-NLS-1$
     
 	//for logging 
-	private static final String sourceClass = OAuth1Handler.class.getName();
+	private static final String sourceClass = OAuth2Handler.class.getName();
     private static final Logger logger = Logger.getLogger(sourceClass);
 
 	public OAuth2Handler() {
@@ -269,11 +269,12 @@ public class OAuth2Handler extends OAuthHandler {
 			// add parameters to the post method  
 			method = new HttpPost(getAccessTokenURL());
 			List <NameValuePair> parameters = new ArrayList <NameValuePair>();   
-			parameters.add(new BasicNameValuePair(Configuration.OAUTH2_CALLBACK_URI, URLEncoder.encode(client_uri, "UTF-8")));   
-			parameters.add(new BasicNameValuePair(Configuration.OAUTH2_CLIENT_ID, URLEncoder.encode(consumerKey, "UTF-8")));   
-			parameters.add(new BasicNameValuePair(Configuration.OAUTH2_CLIENT_SECRET, URLEncoder.encode(consumerSecret, "UTF-8")));   
+			// Issue 1597 - Removed Duplicate Encoding
+			parameters.add(new BasicNameValuePair(Configuration.OAUTH2_CALLBACK_URI, client_uri));   
+			parameters.add(new BasicNameValuePair(Configuration.OAUTH2_CLIENT_ID, consumerKey));   
+			parameters.add(new BasicNameValuePair(Configuration.OAUTH2_CLIENT_SECRET, consumerSecret));   
 			parameters.add(new BasicNameValuePair(Configuration.OAUTH2_GRANT_TYPE, Configuration.OAUTH2_AUTHORIZATION_CODE));   
-			parameters.add(new BasicNameValuePair(Configuration.OAUTH2_CODE, URLEncoder.encode(authorization_code, "UTF-8")));   
+			parameters.add(new BasicNameValuePair(Configuration.OAUTH2_CODE, authorization_code));   
 			UrlEncodedFormEntity sendentity = new UrlEncodedFormEntity(parameters, HTTP.UTF_8);  
 			method.setEntity(sendentity);   
 			HttpResponse httpResponse =client.execute(method);

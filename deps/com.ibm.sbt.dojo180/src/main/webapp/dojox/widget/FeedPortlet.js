@@ -1,3 +1,5 @@
+// wrapped by build app
+define("dojox/widget/FeedPortlet", ["dijit","dojo","dojox","dojo/require!dojox/widget/Portlet,dijit/Tooltip,dijit/form/TextBox,dijit/form/Button,dojox/data/GoogleFeedStore"], function(dijit,dojo,dojox){
 dojo.provide("dojox.widget.FeedPortlet");
 dojo.require("dojox.widget.Portlet");
 dojo.require("dijit.Tooltip");
@@ -438,4 +440,5 @@ dojo.declare("dojox.widget.PortletFeedSettings",
 	_getFeedPortletUrlAttr: function(){
 		return this.text.value;
 	}
+});
 });

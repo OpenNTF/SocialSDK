@@ -1,5 +1,5 @@
 // AMD-ID "dojox/math/random/Secure"
-define(["dojo"], function(dojo) {
+define("dojox/math/random/Secure", ["dojo"], function(dojo) {
 
 // Copyright (c) 2005  Tom Wu
 // All Rights Reserved.

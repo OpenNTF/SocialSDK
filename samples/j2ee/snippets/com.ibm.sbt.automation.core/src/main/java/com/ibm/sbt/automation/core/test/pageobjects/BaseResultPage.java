@@ -20,7 +20,7 @@ import org.openqa.selenium.WebDriver;
 /**
  * @author mwallace
  *  
- * @date 6 Mar 2013
+ * @since 6 Mar 2013
  */
 public abstract class BaseResultPage implements ResultPage {
     
@@ -34,7 +34,7 @@ public abstract class BaseResultPage implements ResultPage {
     }
     
     /**
-     * @return the webDriver
+     * @return {WebDriver} the webDriver
      */
     public WebDriver getWebDriver() {
         return webDriver;

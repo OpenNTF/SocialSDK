@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/lu/currency", //begin v1.x content
 {
 	"USD_displayName": "Ndola wa Ameriki",
 	"TZS_displayName": "Nshili wa Tanzani",

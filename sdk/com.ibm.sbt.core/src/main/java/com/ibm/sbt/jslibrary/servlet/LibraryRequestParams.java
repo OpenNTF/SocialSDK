@@ -26,7 +26,7 @@ import com.ibm.sbt.jslibrary.SBTEnvironmentFactory;
 
 /**
  * @author Mark Wallace
- * @date 16 Jan 2013
+ * @since 16 Jan 2013
  */
 public class LibraryRequestParams {
 
@@ -160,8 +160,7 @@ public class LibraryRequestParams {
     }
 
     /**
-     * @param defaultEnvironment
-     *            the defaultEnvironment to set
+     * @param environment  the defaultEnvironment to set
      */
     public void setEnvironment(SBTEnvironment environment) {
         this.environment = environment;
@@ -358,7 +357,7 @@ public class LibraryRequestParams {
 	/**
 	 * 
 	 * @param name
-	 * @return
+	 * @return the parameter value
 	 */
 	public String getParameter(String name) {
 		return parameters.get(name);
@@ -378,7 +377,7 @@ public class LibraryRequestParams {
 	 * @param application
 	 * @param name
 	 * @param defaultValue
-	 * @return
+	 * @return the app parameter
 	 */
 	protected String getAppParameter(Application application, String name, String defaultValue) {
 		String value = application.getProperty(name);

@@ -1,4 +1,4 @@
-define([
+define("dijit/registry", [
 	"dojo/_base/array", // array.forEach array.map
 	"dojo/sniff", // has("ie")
 	"dojo/_base/unload", // unload.addOnWindowUnload

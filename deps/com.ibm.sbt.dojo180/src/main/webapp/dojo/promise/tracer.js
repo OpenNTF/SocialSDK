@@ -1,4 +1,4 @@
-define([
+define("dojo/promise/tracer", [
 	"../_base/lang",
 	"./Promise",
 	"../Evented"

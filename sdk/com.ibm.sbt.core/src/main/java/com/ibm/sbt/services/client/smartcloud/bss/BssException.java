@@ -65,7 +65,7 @@ public class BssException extends AbstractException {
 	/**
 	 * Return JSON object returned by the server if available and otherwise returns null.
 	 *  
-	 * @return
+	 * @return {JsonJavaObject}
 	 */
 	public JsonJavaObject getResponseJson() {
 		ClientServicesException cse = getClientServicesException(this);
@@ -107,7 +107,7 @@ public class BssException extends AbstractException {
 	/**
 	 * Helper method to return the response status code if the cause is a ClientServicesException.
 	 * 
-	 * @return
+	 * @return {int}
 	 */
 	public int getResponseStatusCode() {
 		ClientServicesException cse = getClientServicesException(this);

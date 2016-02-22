@@ -1,4 +1,4 @@
-define(["dojo", "dojox/math/round"], function(dojo, round){
+define("dojox/drawing/util/common", ["dojo", "dojox/math/round"], function(dojo, round){
 
 	var uidMap = {};
 	var start = 0;

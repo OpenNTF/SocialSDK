@@ -126,7 +126,8 @@ public class WeightManager {
 	 * on the call being made.
 	 * <p>
 	 * 
-	 * @param key a String identifying the call being made<br>
+	 * @param url
+	 * @param method
 	 * @return <code>true</code> if the call is permitted because the {@link #threshold} has not been
 	 *         reached after the {@link #currentWeight} update , <code>false</code> otherwise
 	 */
@@ -196,7 +197,7 @@ public class WeightManager {
 	}
 	
 	/**
-	 * {@link #weightPerBSSCall} getter method
+	 * weightPerBSSCall getter method
 	 */
 	public Weight getWeightPerBSSCall(String url, Rest method){
 		return BSSProvisioning.getWeights().getWeight(url, method);

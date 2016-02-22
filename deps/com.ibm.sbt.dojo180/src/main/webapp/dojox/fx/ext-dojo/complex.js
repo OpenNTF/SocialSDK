@@ -1,4 +1,4 @@
-define(["dojo/_base/kernel", "dojo/_base/lang", "dojo/_base/array","dojo/_base/declare", "dojo/_base/connect", 
+define("dojox/fx/ext-dojo/complex", ["dojo/_base/kernel", "dojo/_base/lang", "dojo/_base/array","dojo/_base/declare", "dojo/_base/connect", 
 	"dojo/_base/Color", "dojo/_base/fx", "dojo/fx"], 
 	function(dojo, lang, arrayUtil, declare, connectUtil, Color, baseFx, coreFx){
 	lang.getObject("dojox.fx.ext-dojo.complex", true);

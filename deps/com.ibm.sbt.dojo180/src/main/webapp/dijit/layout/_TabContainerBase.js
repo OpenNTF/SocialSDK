@@ -1,4 +1,6 @@
-define([
+require({cache:{
+'url:dijit/layout/templates/TabContainer.html':"<div class=\"dijitTabContainer\">\n\t<div class=\"dijitTabListWrapper\" data-dojo-attach-point=\"tablistNode\"></div>\n\t<div data-dojo-attach-point=\"tablistSpacer\" class=\"dijitTabSpacer ${baseClass}-spacer\"></div>\n\t<div class=\"dijitTabPaneWrapper ${baseClass}-container\" data-dojo-attach-point=\"containerNode\"></div>\n</div>\n"}});
+define("dijit/layout/_TabContainerBase", [
 	"dojo/text!./templates/TabContainer.html",
 	"./StackContainer",
 	"./utils",	// marginBox2contextBox, layoutChildren

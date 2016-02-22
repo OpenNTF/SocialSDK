@@ -41,7 +41,7 @@ public class URLBuilder {
 	 * Returns an entry for a version of Connections less than or equal the version requested
 	 * </p>
 	 * @param version
-	 * @return
+	 * @return {URLPattern}
 	 */
 	public URLPattern getPattern(Version version){
 		Entry<Version, URLPattern> entry = urlVersions.floorEntry(version);
@@ -55,7 +55,7 @@ public class URLBuilder {
 	 * Returns the formatted URL for the specified version of Connections
 	 * @param service
 	 * @param args
-	 * @return
+	 * @return {String}
 	 */
 	public String format(BaseService service, NamedUrlPart... args) {
 		URLPattern urlPattern = getPattern(service.getApiVersion());

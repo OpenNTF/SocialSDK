@@ -24,7 +24,7 @@ import com.ibm.sbt.automation.core.test.BaseServiceTest;
 /**
  * @author mwallace
  * 
- * @date 5 Mar 2013
+ * @since 5 Mar 2013
  */
 public class GetPublicCommunities extends BaseServiceTest {
 

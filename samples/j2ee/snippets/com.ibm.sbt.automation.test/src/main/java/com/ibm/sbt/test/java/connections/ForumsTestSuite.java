@@ -27,7 +27,7 @@ import com.ibm.sbt.test.java.connections.forums.*;
 /**
  * @author mkataria
  * 
- * @date Nov 14 2013
+ * @since Nov 14 2013
  */
 @RunWith(Suite.class)
 @SuiteClasses({ CreateCommunityForumReply.class, CreateCommunityForumTopic.class, CreateForum.class, CreateReply.class, CreateTopic.class, ForumById.class,

@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/sr/roc", //begin v1.x content
 {
 	"eraAbbr": [
 		"Пре РК",

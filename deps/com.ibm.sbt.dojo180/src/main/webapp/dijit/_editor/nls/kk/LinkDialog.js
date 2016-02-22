@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/kk/LinkDialog", ({
 	createLinkTitle: "Сілтеме сипаттары",
 	insertImageTitle: "Сурет сипаттары",
 	url: "URL:",

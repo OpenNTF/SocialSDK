@@ -22,11 +22,11 @@ import com.ibm.commons.util.AbstractException;
  * Exception used to flag invalid inputs to Service api's.
  * 
  * @author mkataria
- * @date Dec 10, 2012
+ * @since Dec 10, 2012
  */
 public class InvalidInputException extends AbstractException {
 
-	String						msg;
+	String msg;
 
 	private static final long	serialVersionUID	= 1L;
 

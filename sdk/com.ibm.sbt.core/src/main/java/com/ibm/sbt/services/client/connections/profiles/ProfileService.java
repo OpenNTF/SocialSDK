@@ -69,6 +69,7 @@ import com.ibm.sbt.services.client.base.NamedUrlPart;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.client.base.datahandlers.JsonDataHandler;
 import com.ibm.sbt.services.client.connections.common.Tag;
+import com.ibm.sbt.services.client.base.CategoryFeedHandler;
 import com.ibm.sbt.services.client.connections.profiles.model.ProfileXPath;
 import com.ibm.sbt.services.client.connections.profiles.serializers.ColleagueConnectionSerializer;
 import com.ibm.sbt.services.client.connections.profiles.serializers.ProfileSerializer;
@@ -540,9 +541,8 @@ public class ProfileService extends ConnectionsService {
 	 * You can only replace a photo if you are the profile owner or an administrator.
 	 * See Authenticating requests for information about how to authenticate the request. <br>
 	 *  
-	 * @param File
-	 * 			image to be uploaded as profile photo
-	 * @param userid
+	 * @param file File - image to be uploaded as profile photo
+	 * @param userId
 	 * @throws ClientServicesException
 	 */
 	public void updateProfilePhoto(File file, String userId) throws ClientServicesException {
@@ -698,7 +698,7 @@ public class ProfileService extends ConnectionsService {
 	 * See Inviting a person to become your colleague for more information.<br>
 	 * See Authenticating requests for information about how to authenticate the request.
 	 * 
-	 * @param ColleagueConnection 
+	 * @param connection ColleagueConnection 
 	 * @throws ClientServicesException 
 	 * 
 	 */
@@ -764,7 +764,7 @@ public class ProfileService extends ConnectionsService {
 	 * Users can only update their own profiles. 
 	 * See Authenticating requests for information about how to authenticate the request.<br>
 	 * 
-	 * @param Profile
+	 * @param profile Profile
 	 * @throws ClientServicesException 
 	 */
 	public void updateProfile(Profile profile) throws ClientServicesException {
@@ -835,7 +835,6 @@ public class ProfileService extends ConnectionsService {
 	 *        unique identifier of the user whose profile is going to be tagged
 	 * @param profile
 	 *        profile to be tagged, containing all the tags, both existing and new
-	 * @param tags Comma-separated list of tags to add to the profile
 	 * @throws ClientServicesException 
 	 */
 	public void addTags(String sourceId, String targetId, Profile profile) throws ClientServicesException{
@@ -872,7 +871,7 @@ public class ProfileService extends ConnectionsService {
 	/**
 	 * Returns the userid of the currently connected user
 	 * 
-	 * @return
+	 * @return {String}
 	 * @throws ClientServicesException 
 	 */
 	public String getMyUserId() throws ClientServicesException{
@@ -892,7 +891,7 @@ public class ProfileService extends ConnectionsService {
 	/**
 	 * Returns the profile of the currently connected user
 	 * 
-	 * @return
+	 * @return {Profile}
 	 * @throws ClientServicesException
 	 */
 	public Profile getMyProfile() throws ClientServicesException {
@@ -905,7 +904,7 @@ public class ProfileService extends ConnectionsService {
 
 	/**
 	 * Factory method to instantiate a FeedHandler for Profiles
-	 * @return IFeedHandler<Profile>
+	 * @return {IFeedHandler<Profile>}
 	 */
 	public IFeedHandler<Profile> getProfileFeedHandler() {
 		return new AtomFeedHandler<Profile>(this) {
@@ -918,7 +917,7 @@ public class ProfileService extends ConnectionsService {
 
 	/**
 	 * Factory method to instantiate a FeedHandler for ColleagueConnections
-	 * @return IFeedHandler<ColleagueConnection>
+	 * @return {IFeedHandler<ColleagueConnection>}
 	 */
 	public IFeedHandler<ColleagueConnection> getColleagueFeedHandler() {
 		return new AtomFeedHandler<ColleagueConnection>(this, false) {
@@ -931,13 +930,22 @@ public class ProfileService extends ConnectionsService {
 
 	/**
 	 * Factory method to instantiate a FeedHandler for Tags
-	 * @return IFeedHandler<Tag>
+	 * @return {IFeedHandler<Tag>} instance of tag handler
 	 */
 	public IFeedHandler<Tag> getTagFeedHandler() {
-		return new AtomFeedHandler<Tag>(this) {
+		//Git Issue 1719: Fixed the Category Handler with the proper node level
+		return new CategoryFeedHandler<Tag>(this) {
 			@Override
-			protected Tag entityInstance(BaseService service, Node node, XPathExpression xpath) {
-				return new Tag(service, node, nameSpaceCtx, xpath);
+			protected Tag newEntity(BaseService svc, Node node) {
+				
+				XPathExpression xpathExpr = null;
+				try {
+					xpathExpr = com.ibm.commons.xml.DOMUtil.createXPath(".");
+				} catch (com.ibm.commons.xml.XMLException e) {
+					e.printStackTrace();
+				}
+				
+				return new Tag(svc, node, nameSpaceCtx, xpathExpr);
 			}
 		};
 	}
@@ -951,7 +959,20 @@ public class ProfileService extends ConnectionsService {
 	}
 
 	protected ColleagueConnection getColleagueConnectionEntity(String requestUrl, Map<String, String> parameters) throws ClientServicesException {
-		return getEntity(requestUrl, parameters, getColleagueFeedHandler());
+		//Issue 1579: Fixes issue with the NOT_FOUND
+		ColleagueConnection result = null;
+		IFeedHandler<ColleagueConnection> handler = getColleagueFeedHandler();
+		
+		Response response = getClientService().get(requestUrl,parameters);
+		
+		try{
+			checkResponseCode(response,HTTPCode.OK);
+			result = handler.createEntity(response);
+		}catch(ClientServicesException cse){
+			checkResponseCode(response,HTTPCode.NOT_FOUND);
+		}
+		
+		return result;
 	}
 
 	protected EntityList<Profile> getProfileEntityList(String requestUrl, Map<String, String> parameters) throws ClientServicesException {

@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/nr/number", //begin v1.x content
 {
 	"decimalFormat": "#,##0.###",
 	"group": " ",

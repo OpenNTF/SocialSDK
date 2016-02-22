@@ -81,7 +81,8 @@ public class MockService extends ClientService {
 			throws ClientServicesException {
 		if (TestEnvironment.getRequiresAuthentication()) {
 			if (StringUtil.isEmpty(((BasicEndpoint)endpoint).getPassword())){
-				logger.warning("configure the endpoint " + endpoint.getLabel() + " password - TEST WILL WORK ONLY IN MOCK MODE");
+				//PBastide: Commented out as it generates needless data in the log of the build
+				//logger.warning("configure the endpoint " + endpoint.getLabel() + " password - TEST WILL WORK ONLY IN MOCK MODE");
 			}
 			super.initialize(httpClient);
 		}

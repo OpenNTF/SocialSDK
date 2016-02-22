@@ -1,4 +1,4 @@
-define(["../_base"], function(dh){
+define("dojox/highlight/languages/delphi", ["../_base"], function(dh){
 
 	var DELPHI_KEYWORDS = {
 		'and': 1, 'safecall': 1, 'cdecl': 1, 'then': 1, 'string': 1,

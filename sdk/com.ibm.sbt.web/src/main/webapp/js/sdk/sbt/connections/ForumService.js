@@ -620,6 +620,17 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
         getReplies : function(args) {
         	return this.service.getForumTopicReplies(this.getTopicUuid(), args);
         },
+		
+		/**
+         * Returns the count of the number of replies to a given topic
+		 * Fix in lieu of Git Pull 1725
+         * 
+         * @method getReplyCount
+         * @return {int} total number of replies for the given topic
+         */
+        getReplyCount : function() {
+            return this.getAsString("replyCount");
+        },
         
         /**
          * To like this topic in a stand-alone forum, create forum recommendation to the forum topic resources.

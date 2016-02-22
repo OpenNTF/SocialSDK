@@ -1,4 +1,4 @@
-define([
+define("dojox/form/_SelectStackMixin", [
 	"dojo/_base/lang",
 	"dojo/_base/array",
 	"dijit/_base/manager",

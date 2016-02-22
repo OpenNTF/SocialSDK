@@ -41,7 +41,7 @@ import com.ibm.sbt.services.client.connections.common.Person;
 import com.ibm.sbt.services.client.connections.files.model.FileEntryXPath;
 
 /**
- * @Represents Connections File
+ * IBM Connections File Service - SDK representation of an ATOM Entry for the File Object
  * @author Vimal Dhupar
  */
 public class File extends AtomEntity {
@@ -98,7 +98,6 @@ public class File extends AtomEntity {
 	}
     /**
      * Method to get the FileId of the File
-     * @return String 
      */
     public void setFileId(String id) {
        super.setId((id==null || id.startsWith("urn:lsid:ibm.com:td:"))? id : "urn:lsid:ibm.com:td:"+id);
@@ -216,7 +215,6 @@ public class File extends AtomEntity {
 
 	/**
 	 * Method to return the Modifier details
-	 * @see Person.java
 	 * @return Person
 	 */
 	public Person getModifier() {
@@ -232,7 +230,7 @@ public class File extends AtomEntity {
 	 * <p>
 	 * Indicates whether the currently authenticated user wants to receive notifications as people edit the document. Options are on or off.
 	 * 
-	 * @return
+	 * @return {String}
 	 */
 	public String getNotification() {
 		return getAsString(FileEntryXPath.Notification);
@@ -242,7 +240,7 @@ public class File extends AtomEntity {
      * <p>
      * returns the visibility status of the file, whether private, public or shared?
      * 
-     * @return
+     * @return {String}
      */
     public String getVisibility() {
         return getAsString(FileEntryXPath.Visibility);

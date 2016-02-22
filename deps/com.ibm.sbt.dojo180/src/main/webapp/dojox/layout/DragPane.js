@@ -1,4 +1,4 @@
-define(["dojo/_base/declare", "dijit/_Widget", "dojo/_base/html", "dojo/dom-style"],
+define("dojox/layout/DragPane", ["dojo/_base/declare", "dijit/_Widget", "dojo/_base/html", "dojo/dom-style"],
   function(declare, Widget, htmlUtil, domStyle){
 return declare("dojox.layout.DragPane", Widget, {
 	// summary:

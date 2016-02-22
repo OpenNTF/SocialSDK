@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/ta-lk/currency", //begin v1.x content
 {
 	"LKR_symbol": "Rs."
 }

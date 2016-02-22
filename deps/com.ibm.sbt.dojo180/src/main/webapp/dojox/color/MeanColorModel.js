@@ -1,4 +1,4 @@
-define(["dojo/_base/array", "dojo/_base/declare", "./NeutralColorModel"],
+define("dojox/color/MeanColorModel", ["dojo/_base/array", "dojo/_base/declare", "./NeutralColorModel"],
 	function(arr, declare, NeutralColorModel){
 	
 	return declare("dojox.color.MeanColorModel", NeutralColorModel, {

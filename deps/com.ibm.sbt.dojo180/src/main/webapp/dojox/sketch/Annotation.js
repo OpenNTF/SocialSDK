@@ -1,4 +1,4 @@
-define([
+define("dojox/sketch/Annotation", [
 	"dojo/_base/kernel",
 	"dojo/_base/lang",
 	"dojo/_base/declare",

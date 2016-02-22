@@ -1,4 +1,4 @@
-define({ root:
+define("dojox/atom/widget/nls/FeedEntryViewer", { root:
 //begin v1.x content
 ({
 	displayOptions: "[display options]",

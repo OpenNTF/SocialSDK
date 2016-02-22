@@ -26,7 +26,7 @@ import com.ibm.sbt.test.js.connections.activities.rest.GetMyActivitiesXml;
 /**
  * @author mwallace
  * 
- * @date 6 Mar 2013
+ * @since 6 Mar 2013
  */
 @RunWith(Suite.class)
 @SuiteClasses({ GetMyActivities.class, GetMyActivitiesXml.class })

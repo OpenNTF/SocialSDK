@@ -17,7 +17,7 @@
 package com.ibm.commons;
 
 /**
- * @ibm-not-published
+ * IPlatformService Interface 
  */
 public interface IPlatformService {
 

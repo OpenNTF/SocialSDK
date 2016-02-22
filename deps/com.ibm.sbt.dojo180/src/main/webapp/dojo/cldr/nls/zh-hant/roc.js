@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/zh-hant/roc", //begin v1.x content
 {
 	"dateFormat-medium": "Gy/M/d",
 	"dateFormatItem-MMMEd": "M月d日E",

@@ -1,4 +1,4 @@
-define(["./has"], function(has){
+define("dojo/json", ["./has"], function(has){
 	"use strict";
 	var hasJSON = typeof JSON != "undefined";
 	has.add("json-parse", hasJSON); // all the parsers work fine

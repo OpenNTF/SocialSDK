@@ -24,7 +24,7 @@ import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 /**
  * @author mwallace
  *  
- * @date 25 Mar 2013
+ * @since 25 Mar 2013
  */
 public class GetSubCommunities extends BaseApiTest {
     

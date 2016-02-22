@@ -1,4 +1,4 @@
-define([
+define("dojox/css3/fx", [
 	"dojo/_base/lang",
 	"dojo/_base/connect",	// dojo.connect
 	"dojo/dom-style",	// dojo.style

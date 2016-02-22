@@ -38,6 +38,7 @@ public class WikiCreateAndDeleteTest extends BaseWikiServiceTest {
 
 	@Test
 	public void createWikiTest() throws Exception {
+		//FIXME: Describe what the test is doing
 		Wiki wiki = newWiki();
 		
 		Map<String,String> params = new HashMap<String, String>();
@@ -51,15 +52,21 @@ public class WikiCreateAndDeleteTest extends BaseWikiServiceTest {
 	
 	@Test
 	public void deleteWikiTest() throws Exception {
+		//FIXME: Describe what the test is doing
 		if (TestEnvironment.isSmartCloudEnvironment()) return;
 		Wiki createdWiki = createWiki();
 		
 		Wiki wikiGot = wikiService.getWiki(createdWiki.getLabel(), null);
 		assertEquals(createdWiki.getLabel(), wikiGot.getLabel());
 		
-		wikiService.deleteWiki(createdWiki.getLabel());
+		//Checks when the Label for the Wiki Doesn't exist
 		thrown.expect(ClientServicesException.class);
-		thrown.expectMessage("404:Not Found");
-		wikiService.getWiki(createdWiki.getLabel(), null);
+		thrown.expectMessage("Wiki Not Found");
+		wikiService.deleteWiki(createdWiki.getLabel()+"INVALID");
+		
+		// Checks when the Label for the Wiki Doesn't Exist 
+		thrown.expect(ClientServicesException.class);
+		thrown.expectMessage("Wiki Not Found");
+		wikiService.getWiki(createdWiki.getLabel()+"INVALID", null);
 	}
 }

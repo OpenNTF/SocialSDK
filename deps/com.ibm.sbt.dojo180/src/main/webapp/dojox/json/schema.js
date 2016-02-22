@@ -1,4 +1,4 @@
-define(["dojo/_base/kernel", "dojox", "dojo/_base/array"], function(dojo, dojox){
+define("dojox/json/schema", ["dojo/_base/kernel", "dojox", "dojo/_base/array"], function(dojo, dojox){
 
 dojo.getObject("json.schema", true, dojox);
 

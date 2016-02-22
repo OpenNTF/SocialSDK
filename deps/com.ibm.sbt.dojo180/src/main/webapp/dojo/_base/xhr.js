@@ -1,4 +1,4 @@
-define([
+define("dojo/_base/xhr", [
 	"./kernel",
 	"./sniff",
 	"require",

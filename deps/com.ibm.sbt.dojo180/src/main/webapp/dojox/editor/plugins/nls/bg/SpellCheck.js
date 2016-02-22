@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/bg/SpellCheck", ({
 	widgetLabel: "Проверка на правопис на групи",
 	unfound: "Не е намерено",
 	skip: "Пропусни",

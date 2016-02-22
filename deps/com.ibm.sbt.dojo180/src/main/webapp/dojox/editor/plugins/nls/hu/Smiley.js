@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/hu/Smiley", ({
 	smiley: "Hangulatjel beszúrása",
 	emoticonSmile: "mosoly",
 	emoticonLaughing: "nevetés",

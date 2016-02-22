@@ -1,4 +1,4 @@
-define(["../_base", "./xml", "./html"], function(dh){
+define("dojox/highlight/languages/django", ["../_base", "./xml", "./html"], function(dh){
 
 	var dhc = dh.constants, dhl = dh.languages, x = dhl.xml, h = dhl.html;
 	dhl.django = {

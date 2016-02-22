@@ -1,4 +1,4 @@
-define([
+define("dojox/mobile/_StoreMixin", [
 	"dojo/_base/Deferred",
 	"dojo/_base/declare"
 ], function(Deferred, declare){

@@ -82,14 +82,16 @@ define(["./declare","./log"], function(declare,log) {
         },
 
         /*
-         * Checks whether the promise has been rejected.
+         * Checks whether the promise is in the rejected state.
          */
         isRejected: function() {
             return this._isRejected;
         },
 
         /*
-         * Checks whether the promise has been resolved or rejected.
+         * Checks whether the promise is in the fulfilled state. 
+         * true - fulfilled
+         * false - not fulfilled
          */
         isFulfilled: function() {
             return this._isFulfilled;

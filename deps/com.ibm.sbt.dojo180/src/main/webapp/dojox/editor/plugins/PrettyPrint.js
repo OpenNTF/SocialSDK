@@ -1,4 +1,4 @@
-define([
+define("dojox/editor/plugins/PrettyPrint", [
 	"dojo",
 	"dijit",
 	"dojox",

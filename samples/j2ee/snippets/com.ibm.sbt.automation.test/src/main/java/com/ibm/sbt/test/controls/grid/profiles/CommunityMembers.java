@@ -22,7 +22,7 @@ import com.ibm.sbt.automation.core.test.BaseGridTest;
 
 /**
  * @author Benjamin Jakobus
- * @date 08 Oct 2013
+ * @since 08 Oct 2013
  */
 public class CommunityMembers extends BaseGridTest {
 	

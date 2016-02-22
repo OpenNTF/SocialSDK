@@ -1,4 +1,4 @@
-define(["dojo/_base/connect", "dojo/_base/declare", "./PlotAction", 
+define("dojox/charting/action2d/Shake", ["dojo/_base/connect", "dojo/_base/declare", "./PlotAction", 
 	"dojo/fx", "dojo/fx/easing", "dojox/gfx/matrix", "dojox/gfx/fx"], 
 	function(hub, declare, PlotAction, df, dfe, m, gf){
 

@@ -1,4 +1,4 @@
-define([
+define("dojox/widget/_FisheyeFX", [
 	"dojo/_base/declare",
 	"dojo/query",
 	// TODO: FisheyeLite still needs AMD conversion

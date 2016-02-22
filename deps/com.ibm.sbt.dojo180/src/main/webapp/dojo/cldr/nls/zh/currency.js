@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/zh/currency", //begin v1.x content
 {
 	"BRE_displayName": "巴西克鲁塞罗 (1990-1993)",
 	"DEM_displayName": "德国马克",

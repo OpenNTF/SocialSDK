@@ -14,27 +14,6 @@
  * permissions and limitations under the License.
  */
 
-/**
- * Use the Search API to perform searches across the installed Connections applications.
- * 
- * Returns a list of results with the specified text in the title, description, or content. Encode the strings. By default, spaces are treated as an AND operator. The following operators are supported:
- *
- *  AND or &&: Searches for items that contain both words. For example: query=red%20AND%20test returns items that contain both the word red and the word test. AND is the default operator.
- *  NOT or !: Excludes the word that follows the operator from the search. For example: query=test%20NOT%20red returns items that contain the word test, but not the word red.
- *  OR: Searches for items that contain either of the words. For example: query=test%20OR%20red
- *  To search for a phrase, enclose the phrase in quotation marks (" ").
- *  +: The plus sign indicates that the word must be present in the result. For example: query=+test%20red returns only items that contain the word test and many that also contain red, but none that contain only the word red.
- *  ?: Use a question mark to match individual characters. For example: query=te%3Ft returns items that contain the words test, text, tent, and others that begin with te.
- *  -: The dash prohibits the return of a given word. This operator is similar to NOT. For example: query=test%20-red returns items that contains the word test, but not the word red.
- *
- * Note: Wildcard searches are permitted, but wildcard only searches (*) are not.
- * For more details about supported operators, see Advanced search options in the Using section of the product documentation.
- * 
- * @author Manish Kataria
- * @author Carlos Manias
- */
-
-
 package com.ibm.sbt.services.client.connections.search;
 
 import static com.ibm.sbt.services.client.base.CommonConstants.COMMA;
@@ -64,6 +43,25 @@ import com.ibm.sbt.services.client.base.IFeedHandler;
 import com.ibm.sbt.services.client.base.datahandlers.EntityList;
 import com.ibm.sbt.services.endpoints.Endpoint;
 
+/**
+ * Use the Search API to perform searches across the installed Connections applications.
+ * 
+ * Returns a list of results with the specified text in the title, description, or content. Encode the strings. By default, spaces are treated as an AND operator. The following operators are supported:
+ *
+ *  AND or &&: Searches for items that contain both words. For example: query=red%20AND%20test returns items that contain both the word red and the word test. AND is the default operator.
+ *  NOT or !: Excludes the word that follows the operator from the search. For example: query=test%20NOT%20red returns items that contain the word test, but not the word red.
+ *  OR: Searches for items that contain either of the words. For example: query=test%20OR%20red
+ *  To search for a phrase, enclose the phrase in quotation marks (" ").
+ *  +: The plus sign indicates that the word must be present in the result. For example: query=+test%20red returns only items that contain the word test and many that also contain red, but none that contain only the word red.
+ *  ?: Use a question mark to match individual characters. For example: query=te%3Ft returns items that contain the words test, text, tent, and others that begin with te.
+ *  -: The dash prohibits the return of a given word. This operator is similar to NOT. For example: query=test%20-red returns items that contains the word test, but not the word red.
+ *
+ * Note: Wildcard searches are permitted, but wildcard only searches (*) are not.
+ * For more details about supported operators, see Advanced search options in the Using section of the product documentation.
+ * 
+ * @author Manish Kataria
+ * @author Carlos Manias
+ */
 public class SearchService extends ConnectionsService {
 	
 	private static final long serialVersionUID = -8445895408209299706L;
@@ -106,7 +104,7 @@ public class SearchService extends ConnectionsService {
 	 * 
 	 * @param query
 	 *            Text to search for
-	 * @param Map
+	 * @param parameters
 	 *            for additional parameters
 	 * @return EntityList<Result>
 	 * @throws ClientServicesException
@@ -129,7 +127,7 @@ public class SearchService extends ConnectionsService {
 	 * 
 	 * @param query
 	 *            Text to search for
-	 * @param Map
+	 * @param parameters
 	 *            for additional parameters
 	 * @return EntityList<Result>
 	 * @throws ClientServicesException
@@ -188,7 +186,7 @@ public class SearchService extends ConnectionsService {
 	 * entry to make it easier to find the content later. The format of the tags document 
 	 * is an Atom publishing protocol (APP) categories document.
 	 * 
-	 * @param String
+	 * @param tag {String}
 	 *            Single tag to be search for, for multiple tags use other overloaded method
 	 * @return EntityList<Result>
 	 * @throws ClientServicesException
@@ -206,8 +204,7 @@ public class SearchService extends ConnectionsService {
 	 * entry to make it easier to find the content later. The format of the tags document 
 	 * is an Atom publishing protocol (APP) categories document.
 	 * 
-	 * @param List
-	 *            of Tags to searched for
+	 * @param tags List of Tags to searched for
 	 * @return EntityList<Result>
 	 * @throws ClientServicesException
 	 */
@@ -222,8 +219,7 @@ public class SearchService extends ConnectionsService {
 	 * entry to make it easier to find the content later. The format of the tags document 
 	 * is an Atom publishing protocol (APP) categories document.
 	 * 
-	 * @param List
-	 *            of Tags to searched for
+	 * @param tags List of Tags to searched for
 	 * @return EntityList<Result>
 	 * @throws ClientServicesException
 	 */
@@ -243,8 +239,7 @@ public class SearchService extends ConnectionsService {
 	
 	/**
 	 * 
-	 * @param query
-	 *            Text to search for
+	 * @param query  Text to search for
 	 * @return ResultList
 	 * @throws ClientServicesException
 	 */
@@ -256,7 +251,7 @@ public class SearchService extends ConnectionsService {
 	 * 
 	 * @param query
 	 *            Text to search for
-	 * @param Map
+	 * @param parameters Map
 	 *            for additional parameters
 	 * @return EntityList<Result>
 	 * @throws ClientServicesException
@@ -267,10 +262,8 @@ public class SearchService extends ConnectionsService {
 	}
 	
 	/**
-	 * 
-	 * @param query
-	 *            Text to search for
-	 * @param EntityList<FacetValue>
+	 * get people by search query
+	 * @param query Text to search for
 	 * @throws ClientServicesException
 	 */
 	public EntityList<FacetValue> getPeople(String query) throws ClientServicesException {
@@ -281,7 +274,7 @@ public class SearchService extends ConnectionsService {
 	 * 
 	 * @param query
 	 *            Text to search for
-	 * @param Map
+	 * @param parameters Map
 	 *            for additional parameters
 	 * @return EntityList<FacetValue>
 	 * @throws ClientServicesException
@@ -314,7 +307,7 @@ public class SearchService extends ConnectionsService {
 	 * 
 	 * @param query
 	 *            Text to search for
-	 * @param Map
+	 * @param parameters Map
 	 *            for additional parameters
 	 * @return EntityList<FacetValue>
 	 * @throws ClientServicesException
@@ -334,12 +327,12 @@ public class SearchService extends ConnectionsService {
 	
     /**
      * @param query Text to search for
-     * @param Constraint
+     * @param constraint Constraint
      * 
      * @return EntityList<Result>
      * @throws ClientServicesException
      * 
-	   *http://www-10.IBM.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Constraints&content=pdcontent  
+	 * @see <a href="http://www-10.IBM.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Constraints&content=pdcontent">Search API</a>
      */
 	public EntityList<Result> getResultsWithConstraint(String query, Constraint constraint) throws ClientServicesException {
 		List<Constraint> constraintList = new ArrayList<Constraint>();
@@ -349,12 +342,12 @@ public class SearchService extends ConnectionsService {
 	
     /**
      * @param query Text to search for
-     * @param List<Constraint>
+     * @param constraints List<Constraint>
      * 
      * @return EntityList<Scope>
      * @throws ClientServicesException
      * 
-	   *http://www-10.IBM.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Constraints&content=pdcontent  
+	 * @see <a href="http://www-10.IBM.com/ldd/appdevwiki.nsf/xpDocViewer.xsp?lookupName=IBM+Connections+4.0+API+Documentation#action=openDocument&res_title=Constraints&content=pdcontent">Search API</a>
      */
 	public EntityList<Result> getResultsWithConstraint(String query, List<Constraint> constraints) throws ClientServicesException {
 		return getResultsWithConstraint(query, constraints,null);
@@ -362,8 +355,9 @@ public class SearchService extends ConnectionsService {
     
     /**
      * @param query Text to search for
-     * @param List<Constraint>
-     * 
+     * @param constraints List<Constraint>
+     * @param parameters 
+	 * 
      * @return EntityList<Result>
      * @throws ClientServicesException
      * 
@@ -417,7 +411,7 @@ public class SearchService extends ConnectionsService {
 
  	/**
  	 * 
- 	 * @return
+ 	 * @return {IFeedHandler<Result>}
  	 */
  	public IFeedHandler<Result> getResultFeedHandler() {
  		return new AtomFeedHandler<Result>(this) {
@@ -430,7 +424,7 @@ public class SearchService extends ConnectionsService {
 
  	/**
  	 * 
- 	 * @return
+ 	 * @return {IFeedHandler<Scope>}
  	 */
  	public IFeedHandler<Scope> getScopeFeedHandler() {
  		return new AtomFeedHandler<Scope>(this) {
@@ -443,7 +437,7 @@ public class SearchService extends ConnectionsService {
 
  	/**
  	 * 
- 	 * @return
+ 	 * @return {IFeedHandler<FacetValue>}
  	 */
  	public IFeedHandler<FacetValue> getFacetValueFeedHandler(final String facetId) {
  		return new AtomFeedHandler<FacetValue>(this) {

@@ -26,7 +26,7 @@ import com.ibm.sbt.test.js.connections.bookmarks.rest.GetAllBookmarksXml;
 /**
  * @author mwallace
  * 
- * @date 6 Mar 2013
+ * @since 6 Mar 2013
  */
 @RunWith(Suite.class)
 @SuiteClasses({ GetAllBookmarksList.class, GetAllBookmarksXml.class })

@@ -1,4 +1,4 @@
-define([
+define("dojox/mobile/View", [
 	"dojo/_base/array",
 	"dojo/_base/config",
 	"dojo/_base/connect",

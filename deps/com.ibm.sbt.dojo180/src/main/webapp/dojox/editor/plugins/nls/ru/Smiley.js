@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/ru/Smiley", ({
 	smiley: "Вставить значок настроения",
 	emoticonSmile: "улыбка",
 	emoticonLaughing: "смех",

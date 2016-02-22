@@ -1,5 +1,5 @@
 define(
-({
+"dojox/atom/widget/nls/fi/FeedEntryViewer", ({
 	displayOptions: "[näyttöasetukset]",
 	title: "Otsikko",
 	authors: "Tekijät",

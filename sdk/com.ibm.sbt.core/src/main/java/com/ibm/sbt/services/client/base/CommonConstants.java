@@ -113,6 +113,9 @@ public final class CommonConstants {
 	public static final String X_IBM_UPLOAD_TOKEN = "X-IBM-UPLOAD-TOKEN";
 	public static final String UPLOAD_METHOD_PHASES = "phases";
 
+	// The Header Name for the AppKey 
+	public static final String APPKEY = "AppKey";
+	
 	/**
 	 * General Services
 	 */

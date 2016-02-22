@@ -32,7 +32,7 @@ import com.ibm.sbt.test.controls.grid.profiles.ProfileSearch;
 
 /**
  * @author sberrybyrne
- * @date 6 Mar 2013
+ * @since 6 Mar 2013
  */
 // TODO ConnectionsInCommon, DirectReports. Getting 'Empty' on local environment
 

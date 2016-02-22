@@ -1,4 +1,4 @@
-define([
+define("dojox/widget/Calendar2Pane", [
 	"dojo/_base/declare",
 	"./_CalendarBase",
 	"./_CalendarDay",

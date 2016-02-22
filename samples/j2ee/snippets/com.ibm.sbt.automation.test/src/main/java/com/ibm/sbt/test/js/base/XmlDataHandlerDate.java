@@ -28,7 +28,7 @@ import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 /**
  * @author mwallace
  *  
- * @date 29 Nov 2013
+ * @since 29 Nov 2013
  */
 public class XmlDataHandlerDate extends FlexibleTest {
     

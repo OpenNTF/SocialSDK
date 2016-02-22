@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/kk/Smiley", ({
 	smiley: "Эмограмма енгізу",
 	emoticonSmile: "күлімсіреу",
 	emoticonLaughing: "күлу",

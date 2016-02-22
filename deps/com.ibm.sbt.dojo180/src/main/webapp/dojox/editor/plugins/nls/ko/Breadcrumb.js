@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/ko/Breadcrumb", ({
 	"nodeActions": "${nodeName} 조치",
 	"selectContents": "컨텐츠 선택",
 	"selectElement": "요소 선택",

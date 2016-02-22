@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/ko/AutoSave", ({
 	"saveLabel": "저장",
 	"saveSettingLabelOn": "자동 저장 간격 설정...",
 	"saveSettingLabelOff": "자동 저장 끄기",

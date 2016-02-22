@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/ar/FontChoice", ({
 	fontSize: "الحجم",
 	fontName: "طاقم طباعة",
 	formatBlock: "النسق",

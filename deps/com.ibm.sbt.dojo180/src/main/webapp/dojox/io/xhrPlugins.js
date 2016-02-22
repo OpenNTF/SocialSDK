@@ -1,4 +1,4 @@
-define(["dojo/_base/kernel", "dojo/_base/xhr", "dojo/AdapterRegistry"], function(dojo, xhr, AdapterRegistry){
+define("dojox/io/xhrPlugins", ["dojo/_base/kernel", "dojo/_base/xhr", "dojo/AdapterRegistry"], function(dojo, xhr, AdapterRegistry){
 	dojo.getObject("io.xhrPlugins", true, dojox);
 
 	var registry;

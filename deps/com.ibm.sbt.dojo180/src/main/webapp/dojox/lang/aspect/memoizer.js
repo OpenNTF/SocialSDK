@@ -1,3 +1,5 @@
+// wrapped by build app
+define("dojox/lang/aspect/memoizer", ["dijit","dojo","dojox"], function(dijit,dojo,dojox){
 dojo.provide("dojox.lang.aspect.memoizer");
 
 (function(){
@@ -43,3 +45,4 @@ dojo.provide("dojox.lang.aspect.memoizer");
 		return arguments.length == 0 ? memoize1 : memoizeN(keyMaker);	// Object
 	};
 })();
+});

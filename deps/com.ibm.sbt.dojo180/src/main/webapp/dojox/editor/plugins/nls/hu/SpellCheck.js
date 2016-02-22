@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/hu/SpellCheck", ({
 	widgetLabel: "Kötegelt helyesírás-ellenőrzés",
 	unfound: "Nem található",
 	skip: "Kihagyja",

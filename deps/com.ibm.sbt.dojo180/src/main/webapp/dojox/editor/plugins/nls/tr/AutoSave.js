@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/tr/AutoSave", ({
 	"saveLabel": "Kaydet",
 	"saveSettingLabelOn": "Otomatik Kaydetme Aralığını Ayarla...",
 	"saveSettingLabelOff": "Otomatik Kaydetmeyi Kapat",

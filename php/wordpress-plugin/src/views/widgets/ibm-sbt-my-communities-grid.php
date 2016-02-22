@@ -1,9 +1,10 @@
-<div id="<?php echo (isset($instance['ibm-sbtk-element-id']) ? $instance['ibm-sbtk-element-id'] : $this->elID); ?>"></div>
-<?php 
+<div
+	id="<?php echo (isset($instance['ibm-sbtk-element-id']) ? $instance['ibm-sbtk-element-id'] : $this->elID); ?>"></div>
+<?php
 // Ensure that element IDs are unique
-$timestamp = time();
+$timestamp = time ();
 
-if ((isset($instance['ibm-sbtk-template']) && $instance['ibm-sbtk-template'] != "")) {
+if ((isset ( $instance ['ibm-sbtk-template'] ) && $instance ['ibm-sbtk-template'] != "")) {
 	require_once BASE_PATH . "{$instance['ibm-sbtk-template']}";
 } else {
 	require_once 'templates/ibm-sbt-communities-grid-row.php';

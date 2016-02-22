@@ -1,4 +1,4 @@
-define([
+define("dojox/mobile/_TimePickerMixin", [
 	"dojo/_base/declare",
 	"dojo/dom-class",
 	"dojo/date/locale"

@@ -1,5 +1,5 @@
 define(
-({
+"dojox/grid/enhanced/nls/ar/EnhancedGrid", ({
 	singleSort: "فرز منفرد",
 	nestedSort: "فرز متداخل",
 	ascending: "اضغط للفرز تصاعديا",

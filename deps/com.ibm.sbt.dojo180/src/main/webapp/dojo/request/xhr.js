@@ -1,4 +1,4 @@
-define([
+define("dojo/request/xhr", [
 	'../errors/RequestError',
 	'./watch',
 	'./handlers',

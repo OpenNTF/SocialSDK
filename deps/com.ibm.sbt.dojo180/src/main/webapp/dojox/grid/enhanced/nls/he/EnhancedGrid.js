@@ -1,5 +1,5 @@
 define(
-({
+"dojox/grid/enhanced/nls/he/EnhancedGrid", ({
 	singleSort: "מיון יחיד",
 	nestedSort: "מיון מקונן",
 	ascending: "לחצו כדי למיין בסדר עולה",

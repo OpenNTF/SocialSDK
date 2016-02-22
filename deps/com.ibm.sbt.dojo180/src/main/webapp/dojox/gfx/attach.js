@@ -1,4 +1,4 @@
-define(["dojox/gfx"], function(){
+define("dojox/gfx/attach", ["dojox/gfx"], function(){
 	// TODO: the current implementation is not functional, please implement correctly
 	/*
 	dojo.getObject("dojox.gfx.arc", true);

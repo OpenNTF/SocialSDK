@@ -1,4 +1,4 @@
-define([
+define("dojo/request/script", [
 	'module',
 	'./watch',
 	'./util',

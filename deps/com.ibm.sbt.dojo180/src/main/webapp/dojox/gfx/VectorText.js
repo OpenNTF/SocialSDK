@@ -1,4 +1,4 @@
-define(["dojo/_base/lang","dojo/_base/declare","dojo/_base/array", "dojo/_base/loader" /* dojo._getText */,
+define("dojox/gfx/VectorText", ["dojo/_base/lang","dojo/_base/declare","dojo/_base/array", "dojo/_base/loader" /* dojo._getText */,
 	    "dojo/_base/xhr","./_base", "dojox/xml/DomParser", "dojox/html/metrics","./matrix"],
 function (lang,declare,arr,loader,xhr,gfx,xmlDomParser,HtmlMetrics,Matrix){
 	var _getText = function(url){

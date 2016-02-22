@@ -25,7 +25,7 @@ import com.ibm.sbt.automation.core.test.BaseGridTest;
 /**
  * @author mwallace
  * 
- * @date 5 Mar 2013
+ * @since 5 Mar 2013
  */
 public class MyCommunitiesGrid extends BaseGridTest {
 

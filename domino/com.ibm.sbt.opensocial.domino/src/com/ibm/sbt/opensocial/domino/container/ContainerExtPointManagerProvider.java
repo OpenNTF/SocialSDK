@@ -9,7 +9,7 @@ import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
 /**
- * Provides the {@link com.ibm.sbt.opensocial.domino.container.ContatinerExtPointManager}.
+ * Provides the link com.ibm.sbt.opensocial.domino.container.ContatinerExtPointManager.
  *
  */
 @Singleton

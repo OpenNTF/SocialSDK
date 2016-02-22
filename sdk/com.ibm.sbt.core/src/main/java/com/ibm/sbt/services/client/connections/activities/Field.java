@@ -119,7 +119,7 @@ public class Field extends BaseEntity {
 	 * Use numbers separated by large increments to allow for repositioning. 
 	 * For example, use 1000, 2000, 3000, and so on.
 	 * 
-	 * @return
+	 * @return {long}
 	 */
 	public long getPosition() {
 		return getAsLong(ActivityXPath.field_position);
@@ -142,7 +142,7 @@ public class Field extends BaseEntity {
 	 *    person
 	 *    text
 	 * 
-	 * @return
+	 * @return {String}
 	 */
 	public String getType() {
 		return getAsString(ActivityXPath.field_type);

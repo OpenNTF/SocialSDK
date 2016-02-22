@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/sk/AutoSave", ({
 	"saveLabel": "Uložiť",
 	"saveSettingLabelOn": "Nastaviť interval automatického ukladania...",
 	"saveSettingLabelOff": "Vypnúť automatické ukladanie",

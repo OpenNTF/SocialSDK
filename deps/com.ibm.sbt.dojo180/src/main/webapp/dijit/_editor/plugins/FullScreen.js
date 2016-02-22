@@ -1,4 +1,4 @@
-define([
+define("dijit/_editor/plugins/FullScreen", [
 	"dojo/aspect",
 	"dojo/_base/declare", // declare
 	"dojo/dom-class", // domClass.add domClass.remove

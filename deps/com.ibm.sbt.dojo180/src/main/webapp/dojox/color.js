@@ -1,4 +1,4 @@
-define(["./color/_base"], function(dxcolor){
+define("dojox/color", ["./color/_base"], function(dxcolor){
 	/*=====
 	 return {
 	 // summary:

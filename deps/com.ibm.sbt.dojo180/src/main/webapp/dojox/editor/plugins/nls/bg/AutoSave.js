@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/bg/AutoSave", ({
 	"saveLabel": "Запази",
 	"saveSettingLabelOn": "Задай интервал за автоматично запазване...",
 	"saveSettingLabelOff": "Изключи автоматичното запазване",

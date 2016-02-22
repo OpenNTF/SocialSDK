@@ -1,4 +1,4 @@
-define([
+define("dijit/form/_ListBase", [
 	"dojo/_base/declare",	// declare
 	"dojo/on",
 	"dojo/window" // winUtils.scrollIntoView

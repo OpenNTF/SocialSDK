@@ -1,4 +1,4 @@
-define([
+define("dojox/editor/plugins/Save", [
 	"dojo",
 	"dijit",
 	"dojox",

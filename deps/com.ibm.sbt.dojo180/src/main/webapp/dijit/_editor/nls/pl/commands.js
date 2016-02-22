@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/pl/commands", ({
 	'bold': 'Pogrubienie',
 	'copy': 'Kopiuj',
 	'cut': 'Wytnij',

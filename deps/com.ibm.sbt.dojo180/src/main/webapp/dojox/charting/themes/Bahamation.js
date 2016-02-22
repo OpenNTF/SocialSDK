@@ -1,4 +1,4 @@
-define(["../SimpleTheme", "./common"], function(SimpleTheme, themes){
+define("dojox/charting/themes/Bahamation", ["../SimpleTheme", "./common"], function(SimpleTheme, themes){
 	themes.Bahamation = new SimpleTheme({
 		colors: [
 			"#3f9998",

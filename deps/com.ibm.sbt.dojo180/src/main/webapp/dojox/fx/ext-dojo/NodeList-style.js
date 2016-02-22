@@ -1,4 +1,4 @@
-define(["dojo/_base/lang", "dojo/query", "dojo/NodeList-fx", "dojo/fx", "../style"],
+define("dojox/fx/ext-dojo/NodeList-style", ["dojo/_base/lang", "dojo/query", "dojo/NodeList-fx", "dojo/fx", "../style"],
 	function(lang, query, NodeListFx, coreFx, styleX){
 
 /*=====

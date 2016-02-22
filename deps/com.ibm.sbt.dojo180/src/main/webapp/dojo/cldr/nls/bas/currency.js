@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/bas/currency", //begin v1.x content
 {
 	"USD_displayName": "Dɔla àmerkà",
 	"TZS_displayName": "Silîŋ tànzànià",

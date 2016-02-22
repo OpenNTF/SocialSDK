@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/mt/currency", //begin v1.x content
 {
 	"EUR_displayName": "Ewro",
 	"MTL_displayName": "Lira Maltija",

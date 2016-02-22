@@ -1,4 +1,4 @@
-define([
+define("dijit/form/_TextBoxMixin", [
 	"dojo/_base/array", // array.forEach
 	"dojo/_base/declare", // declare
 	"dojo/dom", // dom.byId

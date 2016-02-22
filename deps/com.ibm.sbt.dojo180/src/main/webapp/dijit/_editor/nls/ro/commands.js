@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/ro/commands", ({
 	'bold': 'Aldin',
 	'copy': 'Copiere',
 	'cut': 'Tăiere',

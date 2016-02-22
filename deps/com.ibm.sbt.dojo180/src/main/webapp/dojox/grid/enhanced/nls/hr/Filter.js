@@ -1,5 +1,5 @@
 define(
-({
+"dojox/grid/enhanced/nls/hr/Filter", ({
 	"clearFilterDialogTitle": "Brisanje filtera",
 	"filterDefDialogTitle": "Filter",
 	"ruleTitleTemplate": "Pravilo ${0}",

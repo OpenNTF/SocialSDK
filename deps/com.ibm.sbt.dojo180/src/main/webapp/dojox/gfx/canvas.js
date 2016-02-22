@@ -1,4 +1,4 @@
-define(["./_base", "dojo/_base/lang", "dojo/_base/array", "dojo/_base/declare", "dojo/_base/window", "dojo/dom-geometry", 
+define("dojox/gfx/canvas", ["./_base", "dojo/_base/lang", "dojo/_base/array", "dojo/_base/declare", "dojo/_base/window", "dojo/dom-geometry", 
 		"dojo/dom", "./_base", "./shape", "./path", "./arc", "./matrix", "./decompose"], 
 function(g, lang, arr, declare, win, domGeom, dom, gfxBase, gs, pathLib, ga, m, decompose ){
 	var canvas = g.canvas = {

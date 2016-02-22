@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/ff/currency", //begin v1.x content
 {
 	"USD_displayName": "Dolaar Dowlaaji Dentuɗi",
 	"TZS_displayName": "Siling Tansanii",

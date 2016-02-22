@@ -1,4 +1,4 @@
-define([
+define("dojo/dnd/Avatar", [
 	"../_base/declare",
 	"../_base/window",
 	"../dom",

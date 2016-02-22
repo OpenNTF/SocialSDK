@@ -1,4 +1,4 @@
-define([
+define("dojox/grid/enhanced/plugins/Selector", [
 	"dojo/_base/kernel",
 	"dojo/_base/lang",
 	"dojo/_base/declare",

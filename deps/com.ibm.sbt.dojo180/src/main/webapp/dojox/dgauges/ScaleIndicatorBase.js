@@ -1,4 +1,4 @@
-define(["dojo/_base/lang", "dojo/_base/declare", "dojo/_base/window", "dojo/on", "dojo/_base/connect", "dojo/_base/fx", "dojox/gfx", "dojox/widget/_Invalidating", "./IndicatorBase"],
+define("dojox/dgauges/ScaleIndicatorBase", ["dojo/_base/lang", "dojo/_base/declare", "dojo/_base/window", "dojo/on", "dojo/_base/connect", "dojo/_base/fx", "dojox/gfx", "dojox/widget/_Invalidating", "./IndicatorBase"],
 	function(lang, declare, win, on, connect, fx, gfx, _Invalidating, IndicatorBase){
 	return declare("dojox.dgauges.ScaleIndicatorBase", IndicatorBase, {
 		// summary:

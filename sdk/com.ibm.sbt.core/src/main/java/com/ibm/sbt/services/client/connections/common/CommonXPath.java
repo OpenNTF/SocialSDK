@@ -27,8 +27,9 @@ import com.ibm.sbt.services.client.base.datahandlers.FieldEntry;
  */
 public enum CommonXPath implements FieldEntry {
 	
-	term("@term"),
-	frequency("@snx:frequency"),
+	//PBastide: Changed to local node via .
+	term("./@term"),
+	frequency("./@snx:frequency"),
 	visibility("@snx:visibility"),
 	href("@href"),
 	title("@title"),

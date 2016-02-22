@@ -1,4 +1,4 @@
-define([
+define("dijit/_editor/selection", [
 	"dojo/dom", // dom.byId
 	"dojo/_base/lang",
 	"dojo/sniff", // has("ie") has("opera")

@@ -10,14 +10,18 @@ import com.ibm.javascript.units.BaseRhinoTest;
 
 import com.ibm.sbt.services.client.connections.communities.CommunityService;
 
+/**
+ * PBastide: This class may be a dead code path, and should be removed
+ * FIXME: Unused Code Path
+ */
 public class CommunityTest extends BaseRhinoTest {
 
 	@Test
 	public void testEverythingWorks() throws Throwable {
-		System.out.println(new CommunityService().getPublicCommunities()); 
+		//System.out.println(new CommunityService().getPublicCommunities()); 
 	}
 
-		@Test
+	@Ignore
 	public void testPublicCommunity() throws Exception {
 		String script;
 		script = IOUtils.toString(getClass().getResourceAsStream(

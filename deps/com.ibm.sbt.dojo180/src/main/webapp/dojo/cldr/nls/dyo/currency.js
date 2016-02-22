@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/dyo/currency", //begin v1.x content
 {
 	"BIF_displayName": "fraaŋ yati Burundi",
 	"EGP_displayName": "liiverey yati Esípt",

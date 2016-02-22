@@ -1,5 +1,5 @@
 define(
-({
+"dojo/nls/az/colors", ({
 	"lightsteelblue":"açıq metal mavi",
 	"orangered" :"narıncı qırmızı",
 	"midnightblue" :"gecə mavisi",

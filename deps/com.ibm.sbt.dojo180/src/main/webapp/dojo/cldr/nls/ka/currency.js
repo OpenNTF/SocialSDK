@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/ka/currency", //begin v1.x content
 {
 	"FJD_displayName": "ფიჯი დოლარი",
 	"KPW_displayName": "ჩრდილოეთ კორეული ვონი",

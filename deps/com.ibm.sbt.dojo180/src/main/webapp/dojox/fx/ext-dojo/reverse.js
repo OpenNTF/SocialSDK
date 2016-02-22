@@ -1,4 +1,4 @@
-define(["dojo/_base/fx",
+define("dojox/fx/ext-dojo/reverse", ["dojo/_base/fx",
 		"dojo/fx",
 		"dojo/_base/lang",
 		"dojo/fx/easing",

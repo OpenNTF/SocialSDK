@@ -1,4 +1,4 @@
-define(["./_base","dojo/_base/lang"], 
+define("dojox/gfx/matrix", ["./_base","dojo/_base/lang"], 
   function(g, lang){
 	var m = g.matrix = {};
 

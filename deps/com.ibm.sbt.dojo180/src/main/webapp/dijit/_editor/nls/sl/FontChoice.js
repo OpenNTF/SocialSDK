@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/sl/FontChoice", ({
 	fontSize: "Velikost",
 	fontName: "Pisava",
 	formatBlock: "Oblika",

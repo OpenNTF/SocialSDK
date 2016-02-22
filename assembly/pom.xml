@@ -16,7 +16,7 @@
 	<parent>
 		<groupId>com.ibm.sbt</groupId>
 		<artifactId>com.ibm.sbt</artifactId>
-		<version>1.1.6-SNAPSHOT</version>
+		<version>1.1.12-SNAPSHOT</version>
 	</parent>
 
 	<build>
@@ -72,11 +72,14 @@
 					<runOnlyAtExecutionRoot>false</runOnlyAtExecutionRoot>
 				</configuration>
 			</plugin>
+			
 			<plugin>
 				<groupId>com.googlecode.maven-download-plugin</groupId>
 				<artifactId>maven-download-plugin</artifactId>
 				<version>1.1.0</version>
 				<executions>
+					<!-- PBastide: Removing Tomcat from Deliverable Package -->
+					<!--
 					<execution>
 						<id>download-tomcat-7</id>
 						<phase>generate-resources</phase>
@@ -90,9 +93,11 @@
 							<md5>e34610f342045a817b3a100c07c3d1a3</md5>
 						</configuration>
 					</execution>
+					-->
 					<execution>
 						<id>download-sources</id>
-						<phase>generate-resources</phase>
+						<!-- generate-resources was the original --> 
+						<phase>deploy</phase>
 						<goals>
 							<goal>wget</goal>
 						</goals>
@@ -106,7 +111,8 @@
 					</execution>
 					<execution>
 						<id>download-sources-ios</id>
-						<phase>generate-resources</phase>
+						<!-- generate-resources was the original --> 
+						<phase>deploy</phase>
 						<goals>
 							<goal>wget</goal>
 						</goals>
@@ -127,6 +133,9 @@
 					</dependency>
 				</dependencies>
 			</plugin>
+			
+			<!-- PBastide - Reduce Total Deliverable Size -->
+			<!--
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
@@ -181,7 +190,9 @@
 								</artifactItem>
 
 
-
+								
+								
+								
 								<artifactItem>
 									<groupId>com.ibm.sbt</groupId>
 									<artifactId>com.ibm.sbt.landing</artifactId>
@@ -246,7 +257,7 @@
 									<destFileName>acme.sample.webapp.war</destFileName>
 								</artifactItem>
 
-
+								
 
 
 
@@ -279,13 +290,6 @@
 									<overWrite>true</overWrite>
 									<outputDirectory>${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.61/lib</outputDirectory>
 								</artifactItem>
-
-
-
-
-
-
-
 							</artifactItems>
 							<outputDirectory>${project.build.directory}/wars</outputDirectory>
 							<overWriteReleases>false</overWriteReleases>
@@ -294,60 +298,111 @@
 					</execution>
 				</executions>
 			</plugin>
+			-->
 			<plugin>
 				<artifactId>maven-antrun-plugin</artifactId>
-				<version>1.7</version>
+				<version>1.8</version>
 				<executions>
+					<!-- Automates the movement of the js files to the approved assembly 
+						location -->
 					<execution>
+						<id>move-cdnjs</id>
+						
+						<!-- phase selected is deploy - ONLY EXECUTED WHEN DEPLOY/INSTALL to Nexus.  to debug use clean -->
+						<phase>deploy</phase> 
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target>
+								<ant antfile="deploy-cdnjs.xml" />
+								<echo message="Finished Calling Target" />
+							</target>
+							
+						</configuration>
+					</execution>
+					<!-- Optimization for Deploy only downloads - generates dummy files and directories for the assembly portion -->
+					<!--execution>
+						<id>make-source-directory</id>
+						<phase>generate-sources</phase>
+						<configuration>
+							<target>
+								<mkdir dir="${project.build.directory}/sources/SocialSDK-iOS"/>
+								<touch file="${project.build.directory}/sources/SocialSDK-iOS/blank"/>
+								<mkdir dir="${project.build.directory}/sources/SocialSDK"/>
+								<touch file="${project.build.directory}/sources/SocialSDK/blank"/>
+							</target>
+						</configuration>
+					</execution-->
+					<!-- Set the Execution to Ignore -->
+					<!-- Remove Other Sources -->
+					<!--execution>
+					
 						<id>removedownloads</id>
 						<phase>generate-sources</phase>
 						<configuration>
 							<target>
-								<!-- Remove Tomcat -->
-								<delete dir="${project.build.directory}/tomcat/unzip" />
-								<!-- Remove Other Sources -->
 								<delete dir="${project.build.directory}/sources" />
 
 							</target>
 						</configuration>
 					</execution>
+					-->
 					<execution>
 						<id>tomcat</id>
 						<phase>package</phase>
 						<configuration>
 							<target>
 								<!-- Package Tomcat -->
+								<!-- PBastide: Removed Tomcat -->
+								<!--
 								<delete
 									dir="${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.61/webapps/ROOT" />
 
-
-
 								<copy
 									todir="${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.61/conf"
-									file="./../samples/config/sbt.properties" />
-
+									file="./../samples/config/sbt.properties"  overwrite="true" />
 
 								<copy
 									file="./../libraries/com.ibm.sbt.libs.java/lib/com.ibm.sbt.javamail-1.4.5.jar"
-									todir="${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.61/lib" />
-
+									todir="${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.61/lib"  overwrite="true"/>
 
 								<copy
-									todir="${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.61/conf">
-									<fileset dir="platform/tomcat">
-										<include name="keystore" />
-										<include name="context.xml" />
-										<include name="tomcat-users.xml" />
-										<include name="server.xml" />
-									</fileset>
-								</copy>
+									file="./../assembly/platform/tomcat/keystore"
+									todir="${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.61/conf"  overwrite="true"/>
 
+								<copy
+									file="./../assembly/platform/tomcat/context.xml"
+									todir="${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.61/conf"  overwrite="true"/>
+
+								<copy
+									file="./../assembly/platform/tomcat/tomcat-users.xml"
+									todir="${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.61/conf" overwrite="true" />
+									
+								<copy
+									file="./../assembly/platform/tomcat/server.xml"
+									todir="${project.build.directory}/tomcat/unzip/apache-tomcat-7.0.61/conf" overwrite="true" />
+								
+								-->
+								
+								<!-- Creates an Empty Directory -->
+								<!-- Package Only Execution
 								<path id="source_folder_name">
 									<dirset dir="${project.build.directory}/sources/SocialSDK">
 										<include name="SocialSDK*" />
 									</dirset>
 								</path>
 								<property name="psource_folder_name" refid="source_folder_name" />
+								
+								
+								<mkdir dir="/assembly/target/sources/SocialSDK"/>
+								<mkdir dir="/assembly/target/sources/SocialSDK-iOS"/>
+								<touch file="/assembly/target/sources/SocialSDK-iOS/dummy"/>
+								<touch file="/assembly/target/sources/SocialSDK/dummy"/>
+								<touch file="/assembly/target/sources/SocialSDK-iOS/SocialSDK-dummy"/>
+								<touch file="/assembly/target/sources/SocialSDK/SocialSDK-dummy"/>
+								
+								
 								<move todir="${project.build.directory}/sources/SocialSDK">
 									<fileset dir="${psource_folder_name}">
 										<include name="**/*" />
@@ -367,18 +422,24 @@
 									</fileset>
 								</move>
 								<delete dir="${psource_folder_name_ios}" />
-
-
+								-->
+								
+								<!-- PBastide - Removed Tomcat -->
+								<!--
 								<zip basedir="${project.build.directory}/tomcat/unzip"
 									destfile="${project.build.directory}/tomcat/apache-tomcat-7.0.61-sbt.zip"
 									compress="true" />
-
-								<zip basedir="${project.build.directory}/sources/SocialSDK"
-									destfile="${project.build.directory}/sources/SocialSDK.zip"
+								-->
+								<!-- PBastide: Changed the Zip File to Kit -->
+								<!--zip basedir="${project.build.directory}/sources/SocialSDK"
+									destfile="${workingDir}/kit/SocialSDK-${project.version}.zip"
 									compress="true" />
 								<zip basedir="${project.build.directory}/sources/SocialSDK-iOS"
-									destfile="${project.build.directory}/sources/SocialSDK-iOS.zip"
-									compress="true" />
+									destfile="${workingDir}/kit/SocialSDK-iOS-${project.version}.zip"
+									compress="true" /-->
+									
+								<move file="${project.build.directory}/sources/SocialSDK-iOS/SocialSDK-iOS.zip" tofile="${workingDir}/kit/SocialSDK-iOS-${project.version}.zip" quiet="true" failonerror="false"/>
+								<move file="${project.build.directory}/sources/SocialSDK/SocialSDK.zip" tofile="${workingDir}/kit/SocialSDK-${project.version}.zip" quiet="true" failonerror="false"/>
 							</target>
 						</configuration>
 						<goals>
@@ -419,38 +480,39 @@
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>sbt.dojo180</artifactId>
 
-			<version>1.1.6-SNAPSHOT</version>
+			<version>1.1.12-SNAPSHOT</version>
 			<type>war</type>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>sbt.jquery182</artifactId>
 
-			<version>1.1.6-SNAPSHOT</version>
+			<version>1.1.12-SNAPSHOT</version>
 			<type>war</type>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>sbt.bootstrap211</artifactId>
 
-			<version>1.1.6-SNAPSHOT</version>
+			<version>1.1.12-SNAPSHOT</version>
 			<type>war</type>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>sbt.sample.web</artifactId>
 
-			<version>1.1.6-SNAPSHOT</version>
+			<version>1.1.12-SNAPSHOT</version>
 			<type>war</type>
 		</dependency>
 
 
-
+		<!--
+		PBastide: Reduce package size
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.sbt.landing</artifactId>
 
-			<version>1.1.6-SNAPSHOT</version>
+			<version>1.1.11-SNAPSHOT</version>
 			<type>war</type>
 		</dependency>
 
@@ -458,51 +520,47 @@
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>acme.social.sample.dataapp</artifactId>
 
-			<version>1.1.6-SNAPSHOT</version>
+			<version>1.1.11-SNAPSHOT</version>
 			<type>war</type>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>acme.social.sample.webapp</artifactId>
 
-			<version>1.1.6-SNAPSHOT</version>
+			<version>1.1.11-SNAPSHOT</version>
 			<type>war</type>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>helloworld.webapp</artifactId>
 
-			<version>1.1.6-SNAPSHOT</version>
+			<version>1.1.11-SNAPSHOT</version>
 			<type>war</type>
 		</dependency>
 
-
-
-
-
-
+		
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>smartcloud.webapp</artifactId>
 
-			<version>1.1.6-SNAPSHOT</version>
+			<version>1.1.11-SNAPSHOT</version>
 			<type>war</type>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>grantaccess.webapp</artifactId>
 
-			<version>1.1.6-SNAPSHOT</version>
+			<version>1.1.11-SNAPSHOT</version>
 			<type>war</type>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>acme.sample.webapp</artifactId>
 
-			<version>1.1.6-SNAPSHOT</version>
+			<version>1.1.11-SNAPSHOT</version>
 			<type>war</type>
 		</dependency>
-
+		-->
 
 	
 
@@ -512,50 +570,52 @@
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.sbt.web</artifactId>
 
-			<version>1.1.6-SNAPSHOT</version>
+			<version>1.1.12-SNAPSHOT</version>
 			<type>war</type>
 		</dependency>
 
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.commons</artifactId>
-			<version>9.0.0</version>
+			<version>1.1.12-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.commons.runtime</artifactId>
-			<version>1.1.6-SNAPSHOT</version>
+			<version>1.1.12-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.commons.xml</artifactId>
-			<version>9.0.0</version>
+			<version>1.1.12-SNAPSHOT</version>
 		</dependency>
 
+		<!-- 
+		PBastide: Reduce package size
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>bss.provisioning.sample.app</artifactId>
-			<version>1.1.6-SNAPSHOT</version>
+			<version>1.1.11-SNAPSHOT</version>
 			
 		</dependency>
-		
+		-->
 		
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.sbt.php.wordpress</artifactId>
-			<version>1.1.6-SNAPSHOT</version>
+			<version>1.1.12-SNAPSHOT</version>
 			<type>zip</type>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.sbt.php.core</artifactId>
-			<version>1.1.6-SNAPSHOT</version>
+			<version>1.1.12-SNAPSHOT</version>
 			<type>zip</type>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.sbt.php.moodle</artifactId>
-			<version>1.1.6-SNAPSHOT</version>
+			<version>1.1.12-SNAPSHOT</version>
 			<type>zip</type>
 		</dependency>
 	</dependencies>

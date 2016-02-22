@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/he/commands", ({
 	'bold': 'מודגש',
 	'copy': 'העתקה',
 	'cut': 'גזירה',

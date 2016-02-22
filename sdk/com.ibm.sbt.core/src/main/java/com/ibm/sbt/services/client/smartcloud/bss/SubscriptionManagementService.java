@@ -71,7 +71,6 @@ public class SubscriptionManagementService extends BssService {
      * Constructor
      * 
      * @param endpoint
-     * @param cacheSize
      */
     public SubscriptionManagementService(Endpoint endpoint) {
         super(endpoint);
@@ -91,7 +90,7 @@ public class SubscriptionManagementService extends BssService {
      * Return subscription id for the specified JSON object.
      * 
      * @param subscriptionObject
-     * @return
+     * @return {String}
      */
     public String getSubscriptionId(JsonJavaObject subscriptionObject) {
     	return getId(subscriptionObject, PROPERTY_SUBSCRIPTION);
@@ -101,7 +100,7 @@ public class SubscriptionManagementService extends BssService {
      * Create one or more subscriptions for a given customer.
      * 
      * @param order
-     * @return
+     * @return {EntityList<JsonEntity>}
      * @throws BssException
      * @throws IOException
      * @throws JsonException
@@ -114,7 +113,7 @@ public class SubscriptionManagementService extends BssService {
      * Create one or more subscriptions for a given customer.
      * 
      * @param orderJson
-     * @return
+     * @return {EntityList<JsonEntity>}
      * @throws BssException
      * @throws JsonException
      * @throws IOException
@@ -128,7 +127,7 @@ public class SubscriptionManagementService extends BssService {
      * Create one or more subscriptions for a given customer.
      * 
      * @param orderObject
-     * @return
+     * @return {EntityList<JsonEntity>}
      * @throws BssException
      */
     public EntityList<JsonEntity> createSubscription(JsonJavaObject orderObject) throws BssException {
@@ -147,7 +146,7 @@ public class SubscriptionManagementService extends BssService {
      * Use the subscription ID to locate a subscription and get details about that subscription. 
      * 
      * @param subscriptionId
-     * @return
+     * @return {JsonEntity}
      * @throws BssException
      */
     public JsonEntity getSubscriptionById(String subscriptionId) throws BssException {
@@ -163,7 +162,7 @@ public class SubscriptionManagementService extends BssService {
      * Get a list of subscriptions that belong to a particular customer.
      * 
      * @param customerId
-     * @return
+     * @return {EntityList<JsonEntity>}
      * @throws BssException
      * @throws {@link IllegalArgumentException}
      */
@@ -183,7 +182,7 @@ public class SubscriptionManagementService extends BssService {
     /**
      * Get a list of subscriptions for all the vendor's customers.
      * 
-     * @return
+     * @return {EntityList<JsonEntity>}
      * @throws BssException
      * @throws {@link IllegalArgumentException}
      */
@@ -201,7 +200,7 @@ public class SubscriptionManagementService extends BssService {
      * 
      * @param pageNumber
      * @param pageSize
-     * @return
+     * @return {EntityList<JsonEntity>}
      * @throws BssException
      * @throws {@link IllegalArgumentException}
      */
@@ -223,7 +222,6 @@ public class SubscriptionManagementService extends BssService {
      * However, any seat that is assigned to subscriptions of the subscription remain in the assigned state.
      * 
      * @param subscriptionId
-     * @return
      * @throws BssException
      */
     public void suspendSubscription(String subscriptionId) throws BssException {
@@ -247,7 +245,6 @@ public class SubscriptionManagementService extends BssService {
      * If the subscription is a pooled child subscription, the parent subscription is also moved to active state.
      * 
      * @param subscriptionId
-     * @return
      * @throws BssException
      */
     public void unsuspendSubscription(String subscriptionId) throws BssException {
@@ -271,7 +268,6 @@ public class SubscriptionManagementService extends BssService {
      * See the Delete customer topic for more details. 
      * 
      * @param subscriptionId
-     * @return
      * @throws BssException
      */
     public void cancelSubscription(String subscriptionId) throws BssException {
@@ -317,9 +313,7 @@ public class SubscriptionManagementService extends BssService {
      * 
      *  @param subscriptionId The ID of the subscription for which quota is to be changed.
      *  @param seatId The ID of the seat for which quota is to be changed.
-     *  @param seatObject The seat in JSON format
      * 
-     * @return
      * @throws BssException
      * @throws {@link IllegalArgumentException}
      */
@@ -340,7 +334,6 @@ public class SubscriptionManagementService extends BssService {
      *  @param seatId The ID of the seat for which quota is to be changed.
      *  @param seatObject The seat in JSON format
      * 
-     * @return
      * @throws BssException
      * @throws {@link IllegalArgumentException}
      */

@@ -1,4 +1,4 @@
-define([
+define("dojox/widget/rotator/PanFade", [
 	"dojo/_base/array",
 	"dojo/_base/connect",
 	"dojo/_base/lang",

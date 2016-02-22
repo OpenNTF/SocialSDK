@@ -29,7 +29,7 @@ import com.ibm.sbt.services.client.connections.communities.Invite;
 /**
  * @author mwallace
  *  
- * @date 25 Mar 2013
+ * @since 25 Mar 2013
  */
 public class GetAllInvites extends BaseCommunitiesTest {
     

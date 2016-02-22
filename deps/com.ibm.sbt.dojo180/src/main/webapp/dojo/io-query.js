@@ -1,4 +1,4 @@
-define(["./_base/lang"], function(lang){
+define("dojo/io-query", ["./_base/lang"], function(lang){
 
 // module:
 //		dojo/io-query

@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/eu/buddhist", //begin v1.x content
 {
 	"quarters-format-abbr": [
 		"1Hh",

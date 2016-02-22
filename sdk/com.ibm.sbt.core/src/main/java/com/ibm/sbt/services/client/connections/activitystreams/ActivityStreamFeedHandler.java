@@ -61,7 +61,7 @@ public class ActivityStreamFeedHandler implements IFeedHandler {
 	}
 
 	/**
-	 * @param data object
+	 * @param requestData data object
 	 * @return Collection of activityStreams
 	 */
 	@Override

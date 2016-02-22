@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/el/SpellCheck", ({
 	widgetLabel: "Συνολικός ορθογραφικός έλεγχος",
 	unfound: "Δεν εντοπίστηκε",
 	skip: "Παράλειψη",

@@ -1,4 +1,4 @@
-define(["../_base/kernel", "../_base/lang"], function(dojo, lang){
+define("dojo/cldr/monetary", ["../_base/kernel", "../_base/lang"], function(dojo, lang){
 
 // module:
 //		dojo/cldr/monetary

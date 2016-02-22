@@ -1,4 +1,4 @@
-define([
+define("dojox/atom/io/Connection", [
 	"dojo/_base/declare",
 	"dojo/_base/kernel",
 	"dojo/_base/xhr",

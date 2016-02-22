@@ -1,4 +1,4 @@
-define([
+define("dojox/mobile/Opener", [
 	"dojo/_base/declare",
 	"dojo/_base/Deferred",
 	"dojo/_base/lang",

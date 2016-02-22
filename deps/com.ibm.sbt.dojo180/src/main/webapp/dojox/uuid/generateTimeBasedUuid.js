@@ -1,4 +1,4 @@
-define([ 'dojo/_base/lang', './_base'], function(lang){
+define("dojox/uuid/generateTimeBasedUuid", [ 'dojo/_base/lang', './_base'], function(lang){
 
 dojox.uuid.generateTimeBasedUuid = function(/*String?*/ node){
 	// summary:

@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/ksb/currency", //begin v1.x content
 {
 	"USD_displayName": "dola ya Malekani",
 	"TZS_displayName": "shilingi ya Tanzania",

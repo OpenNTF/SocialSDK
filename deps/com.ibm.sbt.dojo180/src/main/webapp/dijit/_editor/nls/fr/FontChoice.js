@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/fr/FontChoice", ({
 	fontSize: "Taille",
 	fontName: "Police",
 	formatBlock: "Mise en forme",

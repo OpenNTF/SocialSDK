@@ -101,7 +101,7 @@ public class XmlDataHandler implements DataHandler<Node> {
 	 * This method gets a list of Nodes for a particular field
 	 * 
 	 * @param path
-	 * @return
+	 * @return {List<Node>}
 	 */
 	@Override
 	public List<Node> getEntries(FieldEntry path) {
@@ -112,7 +112,7 @@ public class XmlDataHandler implements DataHandler<Node> {
 	 * This method gets a list of Nodes for a particular field
 	 * 
 	 * @param path
-	 * @return
+	 * @return {List<Node>}
 	 */
 	@Override
 	public List<Node> getEntries(String path) {
@@ -183,8 +183,9 @@ public class XmlDataHandler implements DataHandler<Node> {
 	/**
 	 * This method gets Node for a particular field
 	 * 
-	 * @param path
-	 * @return
+	 * @param data
+	 * @param xpathExpression
+	 * @return {Node}
 	 * @throws DataHandlerException
 	 */
 	public Node getEntry(Node data, XPathExpression xpathExpression) {
@@ -196,7 +197,7 @@ public class XmlDataHandler implements DataHandler<Node> {
 		return node;
 	}
 
-	/*
+	/**
 	 * This method returns an XResult object evaluating an XPathExpression
 	 * against a Node
 	 * 
@@ -209,7 +210,7 @@ public class XmlDataHandler implements DataHandler<Node> {
 		return xresult;
 	}
 
-	/*
+	/**
 	 * @return xpath query for specified field. Field names follow IBM
 	 * Connections naming convention
 	 * 
@@ -327,7 +328,7 @@ public class XmlDataHandler implements DataHandler<Node> {
 	}
 
 	/**
-	 * @set data
+	 * set data
 	 */
 	@Override
 	public void setData(final Object data) {
@@ -459,7 +460,7 @@ public class XmlDataHandler implements DataHandler<Node> {
 	}
 
 	/**
-	 * @param fieldName
+	 * @param field
 	 * @return value as Date
 	 */
 	@Override

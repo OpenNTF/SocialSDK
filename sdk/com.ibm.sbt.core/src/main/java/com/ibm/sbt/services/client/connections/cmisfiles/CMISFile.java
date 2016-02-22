@@ -33,7 +33,7 @@ import com.ibm.sbt.services.client.connections.cmisfiles.model.CMISFileXPath;
 import com.ibm.sbt.services.client.connections.cmisfiles.model.CMISModifier;
 
 /**
- * @Represents Connections CMIS File
+ * IBM Connections Files Service - CMIS API
  * @author Vimal Dhupar
  */
 public class CMISFile extends AtomEntity {
@@ -77,7 +77,7 @@ public class CMISFile extends AtomEntity {
 	}
 	/**
 	 * Method to get the FileId of the File
-	 * @return String 
+	 * @return {String }
 	 */
 	public String getId() {
 		String id = super.getId();

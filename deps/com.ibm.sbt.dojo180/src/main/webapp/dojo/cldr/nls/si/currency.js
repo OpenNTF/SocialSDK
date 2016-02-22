@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/si/currency", //begin v1.x content
 {
 	"COP_displayName": "කොලොම්බියානු පැසෝ",
 	"CZK_displayName": "චෙක් රිපබ්ලික් කොරූනා",

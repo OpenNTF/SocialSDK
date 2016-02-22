@@ -1,4 +1,4 @@
-define(['./has'], function(has){
+define("dojo/domReady", ['./has'], function(has){
 	var global = (function () { return this; })(),
 		doc = document,
 		readyStates = { 'loaded': 1, 'complete': 1 },

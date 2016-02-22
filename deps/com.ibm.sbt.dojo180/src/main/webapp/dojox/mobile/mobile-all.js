@@ -1,4 +1,4 @@
-define([
+define("dojox/mobile/mobile-all", [
 	"./_base",
 	"./_EditableIconMixin",
 	"./_EditableListMixin",

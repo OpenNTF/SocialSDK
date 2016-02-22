@@ -1,4 +1,4 @@
-define([
+define("dojox/widget/Rotator", [
 	"dojo/aspect",
 	"dojo/_base/declare",
 	"dojo/_base/Deferred",

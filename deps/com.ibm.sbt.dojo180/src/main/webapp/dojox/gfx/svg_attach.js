@@ -1,4 +1,4 @@
-define(["dojo/_base/kernel", "dojo/_base/lang", "dojo/_base/array","dojo/_base/Color", "./_base","./svg","./matrix"], 
+define("dojox/gfx/svg_attach", ["dojo/_base/kernel", "dojo/_base/lang", "dojo/_base/array","dojo/_base/Color", "./_base","./svg","./matrix"], 
   function(kernel, lang, arr, Color, g, svg, Matrix){
 
 	kernel.experimental("dojox.gfx.svg_attach");

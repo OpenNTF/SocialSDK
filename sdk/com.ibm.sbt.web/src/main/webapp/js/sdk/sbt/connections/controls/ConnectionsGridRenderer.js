@@ -27,7 +27,6 @@ define([ "../../declare", "../../controls/grid/GridRenderer",
         "../../i18n!./nls/ConnectionsGridRenderer",
         "../../text!../../controls/grid/templates/GridFooter.html",
         "../../text!../../controls/grid/bootstrap/templates/GridFooter.html",
-
         "../../lang"],
         function(declare, GridRenderer, GridPager,BootstrapGridPager, 
         		GridSorter,BootstrapGridSorter, SortAnchor,BootstrapSortAnchor, 

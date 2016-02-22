@@ -1,4 +1,4 @@
-define(["dojo/_base/array", "dojo/_base/lang", "dojo/_base/event", "dojo/_base/declare", "dojo/on", "dojo/keys", "dojo/dom-attr",
+define("dojox/treemap/Keyboard", ["dojo/_base/array", "dojo/_base/lang", "dojo/_base/event", "dojo/_base/declare", "dojo/on", "dojo/keys", "dojo/dom-attr",
 	"./_utils", "dijit/_FocusMixin"],
 	function(arr, lang, event, declare, on, keys, domAttr, utils, _FocusMixin){
 

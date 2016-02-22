@@ -1,4 +1,4 @@
-define([
+define("dojo/io/iframe", [
 	"../_base/config", "../_base/json", "../_base/kernel", /*===== "../_base/declare", =====*/ "../_base/lang",
 	"../_base/xhr", "../sniff", "../_base/window",
 	"../dom", "../dom-construct", "../query", "require", "../aspect", "../request/iframe"

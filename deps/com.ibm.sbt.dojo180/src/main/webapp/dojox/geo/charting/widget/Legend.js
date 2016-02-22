@@ -1,4 +1,4 @@
-define([
+define("dojox/geo/charting/widget/Legend", [
 	"dojo/_base/kernel",
 	"dojo/_base/lang",
 	"dojo/_base/array",

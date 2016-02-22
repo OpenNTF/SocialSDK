@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/ro/Smiley", ({
 	smiley: "Inserare emoticoane",
 	emoticonSmile: "zâmbet",
 	emoticonLaughing: "râs",

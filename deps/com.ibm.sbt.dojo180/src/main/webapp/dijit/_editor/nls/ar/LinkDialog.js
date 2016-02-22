@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/ar/LinkDialog", ({
 	createLinkTitle: "خصائص الوصلة",
 	insertImageTitle: "خصائص الصورة",
 	url: "‏عنوان URL:‏",

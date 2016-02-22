@@ -1,4 +1,4 @@
-define([
+define("dojo/selector/acme", [
 	"../dom", "../sniff", "../_base/array", "../_base/lang", "../_base/window"
 ], function(dom, has, array, lang, win){
 

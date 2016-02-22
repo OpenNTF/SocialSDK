@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/ar/commands", ({
 	'bold': 'عريض',
 	'copy': 'نسخ',
 	'cut': 'قص',

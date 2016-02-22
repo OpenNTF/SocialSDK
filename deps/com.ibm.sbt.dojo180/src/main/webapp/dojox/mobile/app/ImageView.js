@@ -1,3 +1,5 @@
+// wrapped by build app
+define("dojox/mobile/app/ImageView", ["dijit","dojo","dojox","dojo/require!dojox/mobile/app/_Widget,dojo/fx/easing"], function(dijit,dojo,dojox){
 dojo.provide("dojox.mobile.app.ImageView");
 dojo.experimental("dojox.mobile.app.ImageView");
 dojo.require("dojox.mobile.app._Widget");
@@ -713,4 +715,6 @@ dojo.declare("dojox.mobile.app.ImageView", dojox.mobile.app._Widget, {
 		//		True if it is a small version of the image that has loaded,
 		//		false otherwise.
 	}
+});
+
 });

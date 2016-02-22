@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/da/AutoSave", ({
 	"saveLabel": "Gem",
 	"saveSettingLabelOn": "Angiv interval for automatisk lagring...",
 	"saveSettingLabelOff": "Deaktivér automatisk lagring",

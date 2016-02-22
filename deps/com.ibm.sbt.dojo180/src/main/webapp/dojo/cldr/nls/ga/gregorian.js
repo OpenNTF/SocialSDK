@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/ga/gregorian", //begin v1.x content
 {
 	"quarters-standAlone-wide": [
 		"1ú ráithe",

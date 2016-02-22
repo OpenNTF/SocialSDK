@@ -1,5 +1,5 @@
 define(
-({
+"dojox/grid/enhanced/nls/zh-tw/Filter", ({
 	"clearFilterDialogTitle": "清除過濾器",
 	"filterDefDialogTitle": "過濾器",
 	"ruleTitleTemplate": "規則 ${0}",

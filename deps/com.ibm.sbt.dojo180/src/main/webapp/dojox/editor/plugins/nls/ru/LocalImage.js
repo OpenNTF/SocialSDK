@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/ru/LocalImage", ({
 	insertImageTitle: "Вставить изображение",
 	url: "Изображение",
 	browse: "Обзор...",

@@ -21,7 +21,7 @@ import com.ibm.sbt.automation.core.test.BaseGridTest;
 
 /**
  * @author David Ryan
- * @date 19 June 2013
+ * @since 19 June 2013
  */
 public class MyColleagues extends BaseGridTest {
 

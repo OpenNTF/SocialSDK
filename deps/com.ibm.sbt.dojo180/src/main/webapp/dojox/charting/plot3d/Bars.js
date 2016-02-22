@@ -1,4 +1,4 @@
-define(["dojox/gfx3d", "dojo/_base/kernel", "dojo/_base/declare", "dojo/_base/Color", "./Base"],
+define("dojox/charting/plot3d/Bars", ["dojox/gfx3d", "dojo/_base/kernel", "dojo/_base/declare", "dojo/_base/Color", "./Base"],
 	function(gfx3d, kernel, declare, Color, Base) {
 
 	// reduce function borrowed from dojox.fun

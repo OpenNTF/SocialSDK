@@ -29,7 +29,7 @@ import com.ibm.sbt.automation.core.environment.TestEnvironmentFactory;
 /**
  * @author mwallace
  *  
- * @date 5 Mar 2013
+ * @since 5 Mar 2013
  */
 public class JavaScriptPreviewPage extends BaseResultPage {
     

@@ -1,4 +1,4 @@
-define(["dojo/_base/declare", "dojo/dom-geometry", "dojo/dom-style", "dojo/parser", "dijit/_WidgetBase", "dijit/_TemplatedMixin"],
+define("dojox/widget/PagerItem", ["dojo/_base/declare", "dojo/dom-geometry", "dojo/dom-style", "dojo/parser", "dijit/_WidgetBase", "dijit/_TemplatedMixin"],
     function(declare, geometry, style, parser, _WidgetBase, _TemplatedMixin){
 
 return declare("dojox.widget._PagerItem",

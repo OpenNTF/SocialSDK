@@ -1,4 +1,4 @@
-define(["dojo/_base/lang", "../_base", "dojo/_base/config", "dojo/_base/window", "dojo/on", "dojo/touch"
+define("dojox/analytics/plugins/touchMove", ["dojo/_base/lang", "../_base", "dojo/_base/config", "dojo/_base/window", "dojo/on", "dojo/touch"
 ], function(lang, dxa, config, window, on, touch){
 
 

@@ -1,4 +1,4 @@
-define([
+define("dojo/io/script", [
 	"../_base/connect", /*===== "../_base/declare", =====*/ "../_base/kernel", "../_base/lang",
 	"../sniff", "../_base/window","../_base/xhr",
 	"../dom", "../dom-construct", "../request/script", "../aspect"

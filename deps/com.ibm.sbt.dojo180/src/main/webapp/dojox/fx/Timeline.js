@@ -1,4 +1,4 @@
-define(["dojo/_base/lang","dojo/fx/easing","dojo/_base/fx","dojo/dom","./_base","dojo/_base/connect",
+define("dojox/fx/Timeline", ["dojo/_base/lang","dojo/fx/easing","dojo/_base/fx","dojo/dom","./_base","dojo/_base/connect",
 		"dojo/_base/html", "dojo/_base/array","dojo/_base/Color"],
  function(lang, easingUtil, baseFx, dom, dojoxFx, connectUtil, htmlUtil, arrayUtil, Color){
 

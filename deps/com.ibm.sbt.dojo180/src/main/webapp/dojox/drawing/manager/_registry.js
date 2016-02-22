@@ -1,4 +1,4 @@
-define([], function(){
+define("dojox/drawing/manager/_registry", [], function(){
 	var _registered = {
 		tool:{},
 		stencil:{},

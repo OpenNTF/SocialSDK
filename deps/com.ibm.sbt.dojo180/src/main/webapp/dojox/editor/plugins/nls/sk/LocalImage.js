@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/sk/LocalImage", ({
 	insertImageTitle: "Vložiť obrázok",
 	url: "Obrázok",
 	browse: "Prehľadať...",

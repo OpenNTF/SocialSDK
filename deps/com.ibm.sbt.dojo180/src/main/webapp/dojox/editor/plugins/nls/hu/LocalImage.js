@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/hu/LocalImage", ({
 	insertImageTitle: "Kép beszúrása",
 	url: "Kép",
 	browse: "Tallózás...",

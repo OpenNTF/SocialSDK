@@ -1,4 +1,4 @@
-define(["dojo/_base/lang", "dojo/_base/declare", "dojo/_base/sniff", "dojo/_base/array", "dojo/on", "dojox/gfx", "./IndicatorBase"],
+define("dojox/dgauges/TextIndicator", ["dojo/_base/lang", "dojo/_base/declare", "dojo/_base/sniff", "dojo/_base/array", "dojo/on", "dojox/gfx", "./IndicatorBase"],
 	function(lang, declare, has, array, on, gfx, IndicatorBase){
 	return declare("dojox.dgauges.TextIndicator", IndicatorBase, {
 		// summary:

@@ -19,16 +19,16 @@ import com.ibm.sbt.provisioning.sample.app.model.Rest;
 
 /**
  * Each call to the BSS API has to be associated with a key needed for retrieving that call's weight 
- * from the {@link com.ibm.sbt.provisioning.sample.app.WeightManager#getWeightPerBSSCall()} <code>Map</code>.
+ * from the com.ibm.sbt.provisioning.sample.app.WeightManager#getWeightPerBSSCall() <code>Map</code>.
  * The key is going to be a String made up by the endpoint as specified in the 
- * {@link com.ibm.sbt.provisioning.sample.app.util.BSSEndpoints} <code>enum</code>,
+ * link com.ibm.sbt.provisioning.sample.app.util.BSSEndpoints <code>enum</code>,
  * a column and the HTTP method being used ( in upper case letters ).
  * This interface is needed for giving the possibility to the implementing classes to specify that key.
  * */
 public interface BSSCall {
 	/**
 	 * Each call to the BSS API has to be associated with a key needed for retrieving that call's weight 
-	 * from the {@link com.ibm.sbt.provisioning.sample.app.WeightManager#getWeightPerBSSCall()} <code>Map</code>.
+	 * from the link com.ibm.sbt.provisioning.sample.app.WeightManager#getWeightPerBSSCall() <code>Map</code>.
 	 * The key is going to be a String made up by the endpoint as specified in the 
 	 * {@link com.ibm.sbt.provisioning.sample.app.util.BSSEndpoints} <code>enum</code>,
 	 * a column and the HTTP method being used ( in upper case letters ).

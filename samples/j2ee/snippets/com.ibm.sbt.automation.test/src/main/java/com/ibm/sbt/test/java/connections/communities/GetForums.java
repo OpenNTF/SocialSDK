@@ -24,7 +24,7 @@ import com.ibm.sbt.automation.core.test.BaseAuthJavaServiceTest;
 
 /**
  * @author swati singh
- * @date Nov 15, 2013
+ * @since Nov 15, 2013
  */
 public class GetForums extends BaseAuthJavaServiceTest {
 

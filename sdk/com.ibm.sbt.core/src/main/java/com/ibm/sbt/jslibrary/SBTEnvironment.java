@@ -247,7 +247,7 @@ public class SBTEnvironment {
 	/**
 	 * Parse a list of endpoints from a comma delimited string and create an array if non empty.
 	 * @param sEndpoints
-	 * @return
+	 * @return Endpoint
 	 * @throws IOException
 	 */
 	public static Endpoint[] parseEndpoints(String sEndpoints) {
@@ -281,7 +281,7 @@ public class SBTEnvironment {
 	/**
 	 * Read a list of endpoints from a string and create an array if non empty.
 	 * @param sEndpoints
-	 * @return
+	 * @return Array of Endpoint
 	 * @throws IOException
 	 */
 	public static Endpoint[] readEndpoints(String sEndpoints) throws IOException {
@@ -309,8 +309,8 @@ public class SBTEnvironment {
 	
 	/**
 	 * Read a list of properties from a string and create an array if non empty.
-	 * @param sEndpoints
-	 * @return
+	 * @param sProperty
+	 * @return Array of Property
 	 * @throws IOException
 	 */
 	public static Property[] parseProperties(String sProperty) throws IOException {

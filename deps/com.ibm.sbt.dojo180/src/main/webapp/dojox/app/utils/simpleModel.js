@@ -1,4 +1,4 @@
-define(["dojo/_base/lang", "dojo/Deferred", "dojo/when", "dojo/_base/config",
+define("dojox/app/utils/simpleModel", ["dojo/_base/lang", "dojo/Deferred", "dojo/when", "dojo/_base/config",
 		"dojo/store/DataStore"],
 function(lang, Deferred, when, config, DataStore){
 	return function(/*Object*/config, /*Object*/params, /*String*/item){

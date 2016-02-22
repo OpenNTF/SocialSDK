@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/ko/InsertAnchor", ({
 	insertAnchor: "기준 위치 삽입",
 	title: "기준 위치 특성",
 	anchor: "이름:",

@@ -1,5 +1,5 @@
 define(
-({
+"dojox/atom/widget/nls/ar/FeedEntryViewer", ({
 	displayOptions: "[اختيارات العرض]",
 	title: "العنوان",
 	authors: "المؤلفين",

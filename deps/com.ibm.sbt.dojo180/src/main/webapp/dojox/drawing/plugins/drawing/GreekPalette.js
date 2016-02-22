@@ -1,4 +1,4 @@
-define(["dojo","dijit/popup","../../library/greek","dijit/focus","dijit/_Widget","dijit/_TemplatedMixin",
+define("dojox/drawing/plugins/drawing/GreekPalette", ["dojo","dijit/popup","../../library/greek","dijit/focus","dijit/_Widget","dijit/_TemplatedMixin",
 "dijit/_PaletteMixin","dojo/i18n!dojox/editor/plugins/nls/latinEntities"],
 function(dojo, popup, greek, focus, Widget, TemplatedMixin, PaletteMixin, latinEntities){
 

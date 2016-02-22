@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/ne-in/currency", //begin v1.x content
 {
 	"INR_displayName": "भारतीय रूपिँया"
 }

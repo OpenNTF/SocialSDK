@@ -51,7 +51,8 @@ public enum CommunityXPath implements FieldEntry {
 	role("./snx:role"),
 	inviteCommunityUrl("./a:link[@rel='http://www.ibm.com/xmlns/prod/sn/community']/@href"),
 	parentCommunityUrl("a:link[@rel='http://www.ibm.com/xmlns/prod/sn/parentcommunity']/@href"),
-	inviteUrl("./a:link[@rel='edit']/@href");
+	inviteUrl("./a:link[@rel='edit']/@href"),
+	externalCommunity("./snx:isExternal"); //Issue 1637: adds isExternal is missing
 	
 	private final XPathExpression path;
 	

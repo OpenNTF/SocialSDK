@@ -1,5 +1,5 @@
 // AMD-ID "dojox/math/round"
-define(["dojo", "dojox"], function(dojo, dojox) {
+define("dojox/math/round", ["dojo", "dojox"], function(dojo, dojox) {
 
 	dojo.getObject("math.round", true, dojox);
 	dojo.experimental("dojox.math.round");

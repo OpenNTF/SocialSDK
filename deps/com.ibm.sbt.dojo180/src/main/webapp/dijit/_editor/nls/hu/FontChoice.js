@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/hu/FontChoice", ({
 	fontSize: "Méret",
 	fontName: "Betűtípus",
 	formatBlock: "Formátum",

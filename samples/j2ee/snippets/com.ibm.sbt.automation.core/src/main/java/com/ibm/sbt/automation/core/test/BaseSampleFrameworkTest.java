@@ -24,7 +24,7 @@ import com.ibm.sbt.automation.core.test.pageobjects.SampleFrameworkResultPage;
 
 /**
  * @author Francis
- * @date 24 May 2013
+ * @since 24 May 2013
  */
 public class BaseSampleFrameworkTest extends BaseTest {
 
@@ -35,7 +35,6 @@ public class BaseSampleFrameworkTest extends BaseTest {
     /**
      * Launch the Sample Framework
      * 
-     * @param snippetId
      * @return the result page
      */
     protected SampleFrameworkResultPage launchSampleFramework() {

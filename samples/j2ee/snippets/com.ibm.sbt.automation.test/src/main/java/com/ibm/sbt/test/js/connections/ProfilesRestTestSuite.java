@@ -28,7 +28,7 @@ import com.ibm.sbt.test.js.connections.profiles.rest.ReadResponseHeaders;
 /**
  * @author mwallace
  * 
- * @date 6 Mar 2013
+ * @since 6 Mar 2013
  */
 @RunWith(Suite.class)
 @SuiteClasses({ ReadNameAndEmail.class, ReadProfilePhoto.class, ReadProfileXml.class, ReadResponseHeaders.class })

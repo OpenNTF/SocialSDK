@@ -1,4 +1,4 @@
-define(["dojo/_base/kernel","dojo/_base/lang", "dojo/_base/sniff", "dojo/ready", "dojo/_base/unload",
+define("dojox/html/metrics", ["dojo/_base/kernel","dojo/_base/lang", "dojo/_base/sniff", "dojo/ready", "dojo/_base/unload",
 		"dojo/_base/window", "dojo/dom-geometry"],
   function(kernel,lang,has,ready,UnloadUtil,Window,DOMGeom){
 	var dhm = lang.getObject("dojox.html.metrics",true);

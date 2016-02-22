@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/rw/gregorian", //begin v1.x content
 {
 	"quarters-standAlone-wide": [
 		"igihembwe cya mbere",

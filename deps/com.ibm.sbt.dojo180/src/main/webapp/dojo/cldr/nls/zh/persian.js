@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/zh/persian", //begin v1.x content
 {
 	"months-format-abbr": [
 		"1月",

@@ -1,4 +1,4 @@
-define(["dojo/_base/lang"],function(lang){
+define("dojox/fx/_arg", ["dojo/_base/lang"],function(lang){
 var fxArg = lang.getObject("dojox.fx._arg",true);
 fxArg.StyleArgs = function(/*Object*/ args){
 	// summary:

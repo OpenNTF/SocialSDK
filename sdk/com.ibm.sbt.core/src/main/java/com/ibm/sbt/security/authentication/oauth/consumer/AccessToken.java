@@ -18,6 +18,9 @@ package com.ibm.sbt.security.authentication.oauth.consumer;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import com.ibm.commons.util.StringUtil;
 
 
@@ -62,10 +65,16 @@ public class AccessToken implements Serializable {
 	    this.expiresIn = expiresIn;
 	    this.authorizationExpiresIn = authorizationExpiresIn;
 	    this.sessionHandle = sessionHandle;
+	    setAuthorization(new Date());
     }
+	
+	private void setAuthorization(Date d){
+		this.authorizationExpiresIn = d;
+	}
 	
     public AccessToken(String appId, String serviceName, String consumerKey, String accessToken, String tokenSecret, String userId, Date expiresIn, Date authorizationExpiresIn, String sessionHandle) {
         this(appId, serviceName, consumerKey, accessToken, tokenSecret, userId, null, null, expiresIn, authorizationExpiresIn, sessionHandle);
+        
     }
     
     // This is consumed with OAuth2.0
@@ -78,16 +87,31 @@ public class AccessToken implements Serializable {
         this.userId = userId;
 	    this.expiresIn = expiresIn;
 	    this.refreshToken = refreshToken;
+	    setAuthorization(new Date());
     }
     
 	public boolean isExpired() {
 	    return isExpired(0);
 	}
     
+	//Add to Top of Class
+	private static final String sourceClass = AccessToken.class.getName();
+    private static final Logger logger = Logger.getLogger(sourceClass);
+	
+    /**
+     * changed to match the actual renew isExpired 
+     * @param threshold
+     * @return
+     */
     public boolean isExpired(int threshold) {
+    	
+    	logger.log(Level.ALL, " auth expires in " + authorizationExpiresIn.getTime());
+    	logger.log(Level.ALL,expiresIn.getTime() + " " + threshold * 1000);
         if(expiresIn!=null) {
-            long exp = expiresIn.getTime()-threshold*1000;
+        	// threshold is in seconds and need to add to millisecond time
+            long exp = authorizationExpiresIn.getTime() + threshold * 1000; 
             long now = System.currentTimeMillis();
+            logger.log(Level.ALL,"exp : " + exp + " - now " + now  + " " + (exp<=now)); //Add logging to Level.ALL
             return exp<=now; 
         }
         return false;

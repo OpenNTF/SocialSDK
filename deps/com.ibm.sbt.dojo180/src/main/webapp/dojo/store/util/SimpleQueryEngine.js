@@ -1,4 +1,4 @@
-define(["../../_base/array" /*=====, "../api/Store" =====*/], function(arrayUtil /*=====, Store =====*/){
+define("dojo/store/util/SimpleQueryEngine", ["../../_base/array" /*=====, "../api/Store" =====*/], function(arrayUtil /*=====, Store =====*/){
 
 // module:
 //		dojo/store/util/SimpleQueryEngine

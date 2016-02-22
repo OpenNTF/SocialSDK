@@ -1,4 +1,4 @@
-define(['dojo', 'dijit', 'dijit/_Widget', 'dijit/_TemplatedMixin'],function(dojo, dijit, _Widget, _TemplatedMixin){
+define("dojox/av/widget/ProgressSlider", ['dojo', 'dijit', 'dijit/_Widget', 'dijit/_TemplatedMixin'],function(dojo, dijit, _Widget, _TemplatedMixin){
 
 return dojo.declare("dojox.av.widget.ProgressSlider", [_Widget, _TemplatedMixin], {
 	// summary:

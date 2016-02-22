@@ -1,4 +1,4 @@
-define([
+define("dojox/mobile/TabBarButton", [
 	"dojo/_base/connect",
 	"dojo/_base/declare",
 	"dojo/_base/event",

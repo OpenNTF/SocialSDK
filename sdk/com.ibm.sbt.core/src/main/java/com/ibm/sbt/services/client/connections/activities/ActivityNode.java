@@ -54,6 +54,7 @@ public class ActivityNode extends NodeEntity {
 	 * Construct ActivityNode associated with the specified service
 	 * 
 	 * @param service
+	 * @param activityUuid
 	 */
 	public ActivityNode(ActivityService service, String activityUuid) {
 		setService(service);
@@ -65,8 +66,8 @@ public class ActivityNode extends NodeEntity {
 	 * 
 	 * @param service
 	 * @param node
-	 * @param nameSpaceCtx
-	 * @param xpath
+	 * @param namespaceCtx
+	 * @param xpathExpression
 	 */
 	public ActivityNode(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
 		super(service, node, namespaceCtx, xpathExpression);
@@ -75,7 +76,7 @@ public class ActivityNode extends NodeEntity {
 	/**
 	 * Returns the activity node ID.
 	 * 
-	 * @return activityNodeUuid
+	 * @return {String} activityNodeUuid
 	 */
 	public String getActivityNodeUuid() {
 		String id = getId();
@@ -88,7 +89,7 @@ public class ActivityNode extends NodeEntity {
 	/**
 	 * Returns the activity ID.
 	 * 
-	 * @return activityUuid
+	 * @return {String} activityUuid
 	 */
 	public String getActivityUuid() {
 		return getAsString(ActivityXPath.activity);
@@ -96,7 +97,7 @@ public class ActivityNode extends NodeEntity {
 	
 	/**
 	 * Returns the details of the node this node is in reply to
-	 * @return
+	 * @return {InReplyTo}
 	 */
 	public InReplyTo getInReplyTo() {
 		if (inReplyTo == null && getDataHandler() != null) {
@@ -108,7 +109,7 @@ public class ActivityNode extends NodeEntity {
 	/**
 	 * Sets the details of the node this node is in reply to
 	 * 
-	 * @param href
+	 * @param node
 	 */
 	public void setInReplyTo(ActivityNode node) {
 		this.inReplyTo = new InReplyTo(node);
@@ -117,7 +118,7 @@ public class ActivityNode extends NodeEntity {
 	/**
 	 * Sets the details of the node this node is in reply to
 	 * 
-	 * @param href
+	 * @param inReplyTo
 	 */
 	public void setInReplyTo(InReplyTo inReplyTo) {
 		this.inReplyTo = inReplyTo;
@@ -125,7 +126,7 @@ public class ActivityNode extends NodeEntity {
 	
 	/**
 	 * Returns the details of the person this node is assigned to
-	 * @return
+	 * @return {AssignedTo}
 	 */
 	public AssignedTo getAssignedTo() {
 		if (assignedTo == null && getDataHandler() != null) {
@@ -137,7 +138,7 @@ public class ActivityNode extends NodeEntity {
 	/**
 	 * Sets the details of the person this node is assigned to
 	 * 
-	 * @param href
+	 * @param assignedTo
 	 */
 	public void setAssignedTo(AssignedTo assignedTo) {
 		this.assignedTo = assignedTo;
@@ -159,9 +160,8 @@ public class ActivityNode extends NodeEntity {
 	
 	
 	/**
-	 * @see ActivityService.updateActivityNode  
+	 * related to ActivityService.updateActivityNode  
 	 * 
-	 * @return
 	 * @throws ClientServicesException 
 	 * @throws {@link NullPointerException} If there is no service associated with this ActivityNode
 	 */

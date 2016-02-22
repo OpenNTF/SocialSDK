@@ -1,4 +1,4 @@
-define([
+define("dojox/io/xhrMultiPart", [
 	"dojo/_base/kernel",
 	"dojo/_base/array",
 	"dojo/_base/xhr",

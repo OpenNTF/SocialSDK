@@ -64,7 +64,6 @@ abstract public class JsonService extends BaseService {
      * Constructor
      * 
      * @param endpoint
-     * @param cacheSize
      */
     public JsonService(Endpoint endpoint) {
         super(endpoint);

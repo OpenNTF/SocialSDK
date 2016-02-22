@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/ml/indian", //begin v1.x content
 {
 	"months-format-wide": [
 		"ചൈത്രം",

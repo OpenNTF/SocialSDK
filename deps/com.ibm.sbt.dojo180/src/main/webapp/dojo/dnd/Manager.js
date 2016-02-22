@@ -1,4 +1,4 @@
-define([
+define("dojo/dnd/Manager", [
 	"../_base/array",  "../_base/declare", "../_base/event", "../_base/lang", "../_base/window",
 	"../dom-class", "../Evented", "../has", "../keys", "../on", "../topic", "../touch",
 	"./common", "./autoscroll", "./Avatar"

@@ -23,8 +23,7 @@ import com.ibm.sbt.services.client.base.datahandlers.DataHandler;
 import com.ibm.sbt.services.client.smartcloud.profiles.model.ProfileJsonPath;
 
 /**
- * This Class creates a Profile Object from Profile Service
- * @Represents SmartCloud Profile
+ * This Class creates a Profile Object from Profile Service - Specific to the IBM Connections Cloud - SmartCloud Profiles
  * @author Vimal Dhupar
  */
 public class Profile extends BaseEntity {

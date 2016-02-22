@@ -25,8 +25,8 @@ function plugins_url() {
 </script>
 
 <script src="<?php echo $js_library; ?>"></script>
-<link rel="stylesheet" type="text/css" title="Style" href="//ajax.googleapis.com/ajax/libs/dojo/1.8.0/dojox/grid/enhanced/resources/claro/EnhancedGrid.css">
-<link rel="stylesheet" type="text/css" title="Style" href="//ajax.googleapis.com/ajax/libs/dojo/1.8.0/dojox/grid/enhanced/resources/EnhancedGrid_rtl.css">
+<link rel="stylesheet" type="text/css" title="Style" href="//ajax.googleapis.com/ajax/libs/dojo/1.8.10/dojox/grid/enhanced/resources/claro/EnhancedGrid.css">
+<link rel="stylesheet" type="text/css" title="Style" href="//ajax.googleapis.com/ajax/libs/dojo/1.8.10/dojox/grid/enhanced/resources/EnhancedGrid_rtl.css">
 
 <script>
 	if (typeof _sbt == "undefined" || window._sbt_bridge_compat) {

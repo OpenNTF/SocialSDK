@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/ii/gregorian", //begin v1.x content
 {
 	"field-dayperiod": "ꎸꄑ/ꁯꋒ",
 	"dayPeriods-format-wide-pm": "ꁯꋒ",

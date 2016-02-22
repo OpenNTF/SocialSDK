@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/ca/chinese", //begin v1.x content
 {
 	"months-format-narrow": [
 		"1",

@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/kk/FontChoice", ({
 	fontSize: "Өлшемі",
 	fontName: "Қаріп",
 	formatBlock: "Пішім",

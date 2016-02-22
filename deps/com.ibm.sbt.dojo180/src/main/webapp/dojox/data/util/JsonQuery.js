@@ -1,4 +1,4 @@
-define(["dojo", "dojox"], function(dojo, dojox) {
+define("dojox/data/util/JsonQuery", ["dojo", "dojox"], function(dojo, dojox) {
 
 // this is a mixin to convert object attribute queries to
 // JSONQuery/JSONPath syntax to be sent to the server.

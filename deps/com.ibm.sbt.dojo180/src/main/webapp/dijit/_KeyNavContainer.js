@@ -1,4 +1,4 @@
-define([
+define("dijit/_KeyNavContainer", [
 	"dojo/_base/kernel", // kernel.deprecated
 	"./_Container",
 	"./_FocusMixin",

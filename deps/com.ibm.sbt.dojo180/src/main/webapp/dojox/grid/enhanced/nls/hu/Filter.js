@@ -1,5 +1,5 @@
 define(
-({
+"dojox/grid/enhanced/nls/hu/Filter", ({
 	"clearFilterDialogTitle": "Szűrő törlése",
 	"filterDefDialogTitle": "Szűrő",
 	"ruleTitleTemplate": "${0} szabály",

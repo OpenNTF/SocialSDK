@@ -1,4 +1,4 @@
-define(["dojo/_base/declare","dijit/_Widget"], 
+define("dojox/gauges/Range", ["dojo/_base/declare","dijit/_Widget"], 
   function(declare, Widget) {
 	
 return declare("dojox.gauges.Range", [Widget], {

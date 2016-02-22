@@ -1,4 +1,4 @@
-define([
+define("dojox/geo/openlayers/WidgetFeature", [
 	"dojo/_base/declare",
 	"dojo/dom-style",
 	"dojo/_base/lang",

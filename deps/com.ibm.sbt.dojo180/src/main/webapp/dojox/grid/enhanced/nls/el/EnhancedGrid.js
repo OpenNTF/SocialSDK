@@ -1,5 +1,5 @@
 define(
-({
+"dojox/grid/enhanced/nls/el/EnhancedGrid", ({
 	singleSort: "Απλή ταξινόμηση",
 	nestedSort: "Ένθετη ταξινόμηση",
 	ascending: "Πατήστε εδώ για ταξινόμηση σε αύξουσα σειρά",

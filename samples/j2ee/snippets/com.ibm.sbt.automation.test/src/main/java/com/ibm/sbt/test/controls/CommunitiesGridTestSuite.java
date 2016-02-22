@@ -40,7 +40,7 @@ import com.ibm.sbt.test.controls.grid.communities.PublicCommunitiesGrid;
 /**
  * @author mwallace
  * 
- * @date 6 Mar 2013
+ * @since 6 Mar 2013
  */
 @RunWith(Suite.class)
 @SuiteClasses({BootstrapCommunitiesGrid.class, CommunityMembersGrid.class, CommunityActionGrid.class, CustomTemplateCommunity.class, MyCommunitiesGrid.class,OneClickToJoin.class, PublicCommunitiesDijit.class,

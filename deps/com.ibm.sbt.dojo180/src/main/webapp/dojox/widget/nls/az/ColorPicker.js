@@ -1,5 +1,5 @@
 define(
-({
+"dojox/widget/nls/az/ColorPicker", ({
 	"redLabel" : "q",
 	"valueLabel" : "d",
 	"hexLabel" : "onaltılıq",

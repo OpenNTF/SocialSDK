@@ -23,7 +23,7 @@ import com.ibm.commons.util.AbstractException;
  * <p>
  * This exception is thrown when something wrong happens when accessing a proxy config. 
  * </p>
- * @Manish Kataria
+ * @author Manish Kataria
  */
 public class ProxyConfigException extends AbstractException {
 

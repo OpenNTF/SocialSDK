@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/rn/currency", //begin v1.x content
 {
 	"USD_displayName": "Idolari ry'abanyamerika",
 	"TZS_displayName": "Ishilingi rya Tanzaniya",

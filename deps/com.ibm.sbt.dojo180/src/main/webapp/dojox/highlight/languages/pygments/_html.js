@@ -1,4 +1,4 @@
-define(["dojo/_base/lang", "dojox/main", "../../_base"], function(lang, dojox){
+define("dojox/highlight/languages/pygments/_html", ["dojo/_base/lang", "dojox/main", "../../_base"], function(lang, dojox){
 
 	lang.getObject("highlight.languages.pygments._html", true, dojox);
 

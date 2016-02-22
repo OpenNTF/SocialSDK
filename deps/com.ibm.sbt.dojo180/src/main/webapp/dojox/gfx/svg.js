@@ -1,4 +1,4 @@
-define(["dojo/_base/lang", "dojo/_base/sniff", "dojo/_base/window", "dojo/dom", "dojo/_base/declare", "dojo/_base/array",
+define("dojox/gfx/svg", ["dojo/_base/lang", "dojo/_base/sniff", "dojo/_base/window", "dojo/dom", "dojo/_base/declare", "dojo/_base/array",
   "dojo/dom-geometry", "dojo/dom-attr", "dojo/_base/Color", "./_base", "./shape", "./path"],
 function(lang, has, win, dom, declare, arr, domGeom, domAttr, Color, g, gs, pathLib){
 

@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/es-gq/number", //begin v1.x content
 {
 	"currencyFormat": "¤#,##0.00"
 }

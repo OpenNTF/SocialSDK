@@ -1,4 +1,4 @@
-define(["../_base/lang", "../sniff", "../_base/window", "../dom-geometry", "../dom-style", "../window"],
+define("dojo/dnd/autoscroll", ["../_base/lang", "../sniff", "../_base/window", "../dom-geometry", "../dom-style", "../window"],
 	function(lang, has, win, domGeom, domStyle, winUtils){
 
 // module:

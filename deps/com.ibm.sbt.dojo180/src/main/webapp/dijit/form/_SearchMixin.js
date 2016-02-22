@@ -1,4 +1,4 @@
-define([
+define("dijit/form/_SearchMixin", [
 	"dojo/data/util/filter", // patternToRegExp
 	"dojo/_base/declare", // declare
 	"dojo/_base/event", // event.stop

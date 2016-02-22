@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/nl-aw/currency", //begin v1.x content
 {
 	"AWG_symbol": "Afl."
 }

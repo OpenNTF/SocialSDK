@@ -16,15 +16,11 @@
 <!-- permissions and limitations under the License.                      -->
 <!--                                                                     -->
 <!-- ******************************************************************* -->
-
 <?eclipse version="3.2"?>
 <plugin>
-   <extension-point id="PlatformFactory" name="Platform Factory" schema="schema/Platform.exsd"/>
-   <extension-point id="GlobalResourceFactory" name="Global Resource Factory" schema="schema/GlobalResource.exsd"/>
-   <extension-point id="ServiceFactory" name="Platform Service Factory" schema="schema/Service.exsd"/>
-
-   <extension-point id="Extension" name="Extension Service" schema="schema/Extension.exsd"/>
-
-<extension-point id="ExtensionBundle" name="Extension Service" schema="schema/ExtensionBundle.exsd"/>
-
+	<extension-point id="PlatformFactory" name="Platform Factory" schema="schema/Platform.exsd"/>
+	<extension-point id="GlobalResourceFactory" name="Global Resource Factory" schema="schema/GlobalResource.exsd"/>
+	<extension-point id="ServiceFactory" name="Platform Service Factory" schema="schema/Service.exsd"/>
+	<extension-point id="Extension" name="Extension Service" schema="schema/Extension.exsd"/>
+	<extension-point id="ExtensionBundle" name="Extension Service" schema="schema/ExtensionBundle.exsd"/>
 </plugin>

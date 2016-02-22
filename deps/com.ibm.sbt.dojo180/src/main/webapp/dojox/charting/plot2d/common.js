@@ -1,4 +1,4 @@
-define(["dojo/_base/lang", "dojo/_base/array", "dojo/_base/Color", 
+define("dojox/charting/plot2d/common", ["dojo/_base/lang", "dojo/_base/array", "dojo/_base/Color", 
 		"dojox/gfx", "dojox/lang/functional", "../scaler/common"], 
 	function(lang, arr, Color, g, df, sc){
 	

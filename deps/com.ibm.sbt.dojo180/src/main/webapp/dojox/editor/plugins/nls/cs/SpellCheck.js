@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/cs/SpellCheck", ({
 	widgetLabel: "Dávková kontrola pravopisu",
 	unfound: "Nenalezeno",
 	skip: "Přeskočit",

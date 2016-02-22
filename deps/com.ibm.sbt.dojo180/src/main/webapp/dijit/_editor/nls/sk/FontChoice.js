@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/sk/FontChoice", ({
 	fontSize: "Veľkosť",
 	fontName: "Písmo",
 	formatBlock: "Formát",

@@ -1,3 +1,5 @@
+// wrapped by build app
+define("dojox/widget/RollingList", ["dijit","dojo","dojox","dojo/i18n!dijit/nls/common","dojo/require!dojo/window,dijit/layout/ContentPane,dijit/_Templated,dijit/_Contained,dijit/layout/_LayoutWidget,dijit/Menu,dijit/form/Button,dijit/focus,dijit/_base/focus,dojox/html/metrics,dojo/i18n"], function(dijit,dojo,dojox){
 dojo.provide("dojox.widget.RollingList");
 dojo.experimental("dojox.widget.RollingList");
 
@@ -580,7 +582,7 @@ dojo.declare("dojox.widget.RollingList",
 		
 	// templateString: String
 	//		The template to be used to construct the widget.
-	templateString: dojo.cache("dojox.widget", "RollingList/RollingList.html"),
+	templateString: dojo.cache("dojox.widget", "RollingList/RollingList.html", "<div class=\"dojoxRollingList ${className}\"\n\t><div class=\"dojoxRollingListContainer\" dojoAttachPoint=\"containerNode\" dojoAttachEvent=\"onkeypress:_onKey\"\n\t></div\n\t><div class=\"dojoxRollingListButtons\" dojoAttachPoint=\"buttonsNode\"\n        ><button dojoType=\"dijit.form.Button\" dojoAttachPoint=\"okButton\"\n\t\t\t\tdojoAttachEvent=\"onClick:_onExecute\">${okButtonLabel}</button\n        ><button dojoType=\"dijit.form.Button\" dojoAttachPoint=\"cancelButton\"\n\t\t\t\tdojoAttachEvent=\"onClick:_onCancel\">${cancelButtonLabel}</button\n\t></div\n></div>\n"),
 	widgetsInTemplate: true,
 	
 	// className: string
@@ -1253,4 +1255,6 @@ dojo.declare("dojox.widget.RollingList",
 		//		called when the value of this widget has changed
 	}
 	
+});
+
 });

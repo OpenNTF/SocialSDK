@@ -1,4 +1,4 @@
-define(["./kernel", "../has", "require", "module", "./json", "./lang", "./array"], function(dojo, has, require, thisModule, json, lang, array) {
+define("dojo/_base/loader", ["./kernel", "../has", "require", "module", "./json", "./lang", "./array"], function(dojo, has, require, thisModule, json, lang, array) {
 	// module:
 	//		dojo/_base/loader
 
@@ -7,12 +7,12 @@ define(["./kernel", "../has", "require", "module", "./json", "./lang", "./array"
 	// signal the loader in sync mode...
 	//>>pure-amd
 
-	if (!has("dojo-loader")){
+	if (! 1 ){
 		console.error("cannot load the Dojo v1.x loader with a foreign loader");
 		return 0;
 	}
 
-	has.add("dojo-fast-sync-require", 1);
+	 1 || has.add("dojo-fast-sync-require", 1);
 
 
 	var makeErrorToken = function(id){
@@ -38,7 +38,7 @@ define(["./kernel", "../has", "require", "module", "./json", "./lang", "./array"
 			checkDojoRequirePlugin();
 		},
 
-		checkDojoRequirePlugin = (has("dojo-fast-sync-require") ?
+		checkDojoRequirePlugin = ( 1  ?
 			// This version of checkDojoRequirePlugin makes the observation that all dojoRequireCallbacks can be released
 			// when all *non-dojo/require!, dojo/loadInit!* modules are either executed, not requested, or arrived. This is
 			// the case since there are no more modules the loader is waiting for, therefore, dojo/require! must have

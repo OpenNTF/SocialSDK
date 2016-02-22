@@ -71,7 +71,7 @@ public class WidgetCommunity extends Community {
 	/**
 	 * This method loads the "widget enabled" community 
 	 * 
-	 * @return
+	 * @return {WidgetCommunity}
 	 * @throws ClientServicesException
 	 */
 	
@@ -83,7 +83,7 @@ public class WidgetCommunity extends Community {
 	/**
 	 * This method updates the "widget enabled" community on the server
 	 * 
-	 * @return
+	 * @return {WidgetCommunity}
 	 * @throws ClientServicesException
 	 */
 	public WidgetCommunity save() throws ClientServicesException{

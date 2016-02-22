@@ -1,4 +1,4 @@
-define({ root:
+define("dojox/form/nls/PasswordValidator", { root:
 //begin v1.x content
 ({
         nomatchMessage: "Passwords do not match.",

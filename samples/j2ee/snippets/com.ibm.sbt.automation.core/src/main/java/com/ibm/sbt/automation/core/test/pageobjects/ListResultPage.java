@@ -63,7 +63,7 @@ public class ListResultPage extends BaseResultPage {
     /**
      * Return the ul WebElement for the Grid that was created on this page
      * 
-     * @return
+     * @return {WebElement}
      */
     public WebElement getList() {
         WebElement resultEl = getWebElement();
@@ -73,7 +73,7 @@ public class ListResultPage extends BaseResultPage {
     /**
      * Return a list of li WebElement for the Grid that was created on this page
      * 
-     * @return
+     * @return {List<WebElement>}
      */
     public List<WebElement> getListItems() {
         WebElement resultEl = getWebElement();

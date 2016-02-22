@@ -1,5 +1,5 @@
 define(
-({
+"dojox/grid/enhanced/nls/hu/EnhancedGrid", ({
 	singleSort: "Egyszerű rendezés",
 	nestedSort: "Beágyazott rendezés",
 	ascending: "Kattintson ide a növekvő rendezéshez",

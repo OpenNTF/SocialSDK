@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/zh-mo/currency", //begin v1.x content
 {
 	"KHR_displayName": "柬埔寨瑞爾",
 	"FJD_displayName": "斐濟元",

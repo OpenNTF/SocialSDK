@@ -1,0 +1,17 @@
+<project default="manage-cdnjs">
+	<target name="snapshotstatus">
+		<condition property="notSnapshot" value="false" else="true">
+			<matches string="${project.version}" pattern="SNAPSHOT$" />
+		</condition>
+		<echo message="This is version - ${project.version}"/>
+		<echo message="The not snapshot status is - ${notSnapshot}" />
+	</target>
+	
+	<target name="manage-cdnjs" if="${notSnapshot}" depends="snapshotstatus">
+		<copy file="./sdk/com.ibm.sbt.web/src/main/webapp/js/sdk/_layers/sbt-core-dojo-amd.js.uncompressed.js" todir="./assembly/cdnjs" overwrite="true"/>
+		<copy file="./sdk/com.ibm.sbt.web/src/main/webapp/js/sdk/_layers/sbt-core-dojo-amd.js" todir="./assembly/cdnjs" overwrite="true"/>
+		<copy file="./sdk/com.ibm.sbt.web/src/main/webapp/js/sdk/_layers/sbt-extra-controls-dojo-amd.js.uncompressed.js" todir="./assembly/cdnjs" overwrite="true"/>
+		<copy file="./sdk/com.ibm.sbt.web/src/main/webapp/js/sdk/_layers/sbt-extra-controls-dojo-amd.js" todir="./assembly/cdnjs" overwrite="true"/>
+	</target>
+	
+</project>

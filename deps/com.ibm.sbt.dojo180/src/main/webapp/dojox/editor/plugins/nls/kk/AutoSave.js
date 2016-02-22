@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/kk/AutoSave", ({
 	"saveLabel": "Сақтау",
 	"saveSettingLabelOn": "Автосақтау аралығын орнату...",
 	"saveSettingLabelOff": "Автосақтауды өшіру",

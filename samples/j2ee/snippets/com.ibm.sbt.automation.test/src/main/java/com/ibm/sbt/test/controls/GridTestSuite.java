@@ -32,7 +32,7 @@ import com.ibm.sbt.test.controls.grid.TemplatedGridRow;
 /**
  * @author mwallace
  * 
- * @date 6 Mar 2013
+ * @since 6 Mar 2013
  */
 @RunWith(Suite.class)
 @SuiteClasses({ CommunityRenderer.class, ConnectionsRenderer.class, Grid.class, TemplatedGridRow.class })

@@ -1,4 +1,4 @@
-define(["dojo/_base/kernel","dojo/_base/lang", "dojo/_base/fx", "dojox/fx/_base","dojox/fx/_core","dojo/dom-geometry","dojo/_base/sniff"],
+define("dojox/fx/scroll", ["dojo/_base/kernel","dojo/_base/lang", "dojo/_base/fx", "dojox/fx/_base","dojox/fx/_core","dojo/dom-geometry","dojo/_base/sniff"],
 	function (kernel, lang, baseFx, fxExt, Line, domGeom, has){
 	kernel.experimental("dojox.fx.scroll");
 	var fx = lang.getObject("dojox.fx",true);

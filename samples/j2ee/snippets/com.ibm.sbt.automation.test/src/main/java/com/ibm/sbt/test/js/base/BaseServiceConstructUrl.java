@@ -26,7 +26,7 @@ import com.ibm.sbt.automation.core.test.pageobjects.JavaScriptPreviewPage;
 /**
  * @author mwallace
  * 
- * @date 9 May 2013
+ * @since 9 May 2013
  */
 public class BaseServiceConstructUrl extends FlexibleTest {
 

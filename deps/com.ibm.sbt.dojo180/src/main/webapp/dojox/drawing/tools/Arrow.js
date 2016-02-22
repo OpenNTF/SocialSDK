@@ -1,4 +1,4 @@
-define(["dojo/_base/lang", "../util/oo", "../manager/_registry", "./Line", 
+define("dojox/drawing/tools/Arrow", ["dojo/_base/lang", "../util/oo", "../manager/_registry", "./Line", 
 "../annotations/Arrow", "../util/positioning"],
 function(lang, oo, registry, Line, AnnotationArrow, positioning){
 

@@ -1,4 +1,4 @@
-define(["dojo/_base/lang", "dojo/Deferred", "dojo/when", "dojo/_base/config",
+define("dojox/app/utils/mvcModel", ["dojo/_base/lang", "dojo/Deferred", "dojo/when", "dojo/_base/config",
 		"dojo/store/DataStore", "dojox/mvc/getStateful", "dojo/has"],
 function(lang, Deferred, when, config, dataStore, getStateful, has){
 	return function(/*Object*/config, /*Object*/params, /*String*/item){

@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/fi/AutoSave", ({
 	"saveLabel": "Tallenna",
 	"saveSettingLabelOn": "Aseta automaattisen tallennuksen väli...",
 	"saveSettingLabelOff": "Ota automaattinen tallennus pois käytöstä",

@@ -1,4 +1,4 @@
-define(["./_base/kernel", "./has", "require"], function(kernel, has, require){
+define("dojo/node", ["./_base/kernel", "./has", "require"], function(kernel, has, require){
 	var nodeRequire = kernel.global.require && kernel.global.require.nodeRequire;
 
 	if (!nodeRequire) {

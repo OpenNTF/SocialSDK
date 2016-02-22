@@ -60,7 +60,7 @@ public class ProfileFeedHandler implements IFeedHandler{
 	}
 
 	/**
-	 * @param data object
+	 * @param requestData object
 	 * @return Collection of profiles
 	 */
 	@Override

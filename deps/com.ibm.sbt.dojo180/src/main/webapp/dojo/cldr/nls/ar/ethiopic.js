@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/ar/ethiopic", //begin v1.x content
 {
 	"months-format-wide": [
 		"مسكريم",

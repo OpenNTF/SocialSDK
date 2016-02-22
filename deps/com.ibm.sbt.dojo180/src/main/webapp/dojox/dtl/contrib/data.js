@@ -1,4 +1,4 @@
-define([
+define("dojox/dtl/contrib/data", [
 	"dojo/_base/kernel",
 	"dojo/_base/lang",
 	"../_base",

@@ -1,4 +1,4 @@
-define([
+define("dijit/focus", [
 	"dojo/aspect",
 	"dojo/_base/declare", // declare
 	"dojo/dom", // domAttr.get dom.isDescendant

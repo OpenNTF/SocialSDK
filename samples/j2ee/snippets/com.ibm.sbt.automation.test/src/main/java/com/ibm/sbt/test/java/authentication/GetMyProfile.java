@@ -25,7 +25,7 @@ import com.ibm.sbt.automation.core.test.BaseAuthJavaServiceTest;
 /**
  * @author mwallace
  * 
- * @date 9 Mar 2013
+ * @since 9 Mar 2013
  */
 public class GetMyProfile extends BaseAuthJavaServiceTest {
 

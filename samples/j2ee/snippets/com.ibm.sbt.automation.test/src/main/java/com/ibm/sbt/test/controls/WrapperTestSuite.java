@@ -24,7 +24,7 @@ import com.ibm.sbt.test.controls.wrappers.ProfileCardWrapper;
 
 /**
  * @author Francis 
- * @date 16 Jul 2013
+ * @since 16 Jul 2013
  */
 @RunWith(Suite.class)
 @SuiteClasses({ FileGridWrapper.class, ProfileCardWrapper.class})

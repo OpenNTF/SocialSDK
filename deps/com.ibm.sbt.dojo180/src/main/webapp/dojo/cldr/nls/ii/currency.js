@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/ii/currency", //begin v1.x content
 {
 	"XXX_displayName": "ꅉꀋꐚꌠꌋꆀꎆꃀꀋꈁꀐꌠ"
 }

@@ -24,7 +24,7 @@ import com.ibm.sbt.services.client.SBTServiceException;
 
 /**
  * @author Lorenzo Boccaccia
- * @date 22 May 2013
+ * @since 22 May 2013
  */
 public class GetMyProfile extends BaseProfilesTest {
 

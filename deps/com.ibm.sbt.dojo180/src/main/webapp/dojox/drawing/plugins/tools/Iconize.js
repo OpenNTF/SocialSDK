@@ -1,4 +1,4 @@
-define(["dojo", "../../util/oo", "../_Plugin", "../../manager/_registry"],
+define("dojox/drawing/plugins/tools/Iconize", ["dojo", "../../util/oo", "../_Plugin", "../../manager/_registry"],
 function(dojo, oo, Plugin, registry){
 
 //dojox.drawing.plugins.tools.Iconize = 

@@ -29,7 +29,7 @@ import com.ibm.sbt.test.js.ToolkitTestSuite;
 /**
  * @author mwallace
  * 
- * @date 12 Mar 2013
+ * @since 12 Mar 2013
  */
 @RunWith(Suite.class)
 @SuiteClasses({ AuthenticationTestSuite.class, BaseTestSuite.class, ToolkitTestSuite.class, ConnectionsTestSuite.class })

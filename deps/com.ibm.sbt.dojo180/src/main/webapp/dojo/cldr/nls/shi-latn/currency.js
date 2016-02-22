@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/shi-latn/currency", //begin v1.x content
 {
 	"USD_displayName": "adular n iwunak imunn",
 	"TZS_displayName": "acilin n ṭanẓanya",

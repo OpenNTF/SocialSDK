@@ -71,7 +71,6 @@ public class SubscriberManagementService extends BssService {
      * Constructor
      * 
      * @param endpoint
-     * @param cacheSize
      */
     public SubscriberManagementService(Endpoint endpoint) {
         super(endpoint);
@@ -91,7 +90,7 @@ public class SubscriberManagementService extends BssService {
      * Return subscriber id for the specified JSON object.
      * 
      * @param subscriberObject
-     * @return
+     * @return {JsonJavaObject}
      */
     public String getSubscriberId(JsonJavaObject subscriberObject) {
     	return getId(subscriberObject, PROPERTY_SUBSCRIBER);
@@ -100,8 +99,8 @@ public class SubscriberManagementService extends BssService {
     /**
      * Add a subscriber either to the vendor's organization or to the organization of one of the vendor's customers.
      * 
-     * @param customerJson
-     * @return
+     * @param subscriber
+     * @return {JsonJavaObject}
      * @throws BssException
      * @throws JsonException
      * @throws IOException 
@@ -114,7 +113,7 @@ public class SubscriberManagementService extends BssService {
      * Add a subscriber either to the vendor's organization or to the organization of one of the vendor's customers.
      * 
      * @param subscriberJson
-     * @return
+     * @return {JsonJavaObject}
      * @throws BssException
      * @throws JsonException
      * @throws IOException 
@@ -146,7 +145,7 @@ public class SubscriberManagementService extends BssService {
      * Get details about a single subscriber. 
      * 
      * @param subscriberId
-     * @return
+     * @return {JsonEntity}
      * @throws BssException
      */
     public JsonEntity getSubscriberById(String subscriberId) throws BssException {
@@ -185,7 +184,6 @@ public class SubscriberManagementService extends BssService {
      * The subscriber must be owned by the organization of the authenticated user.
      * 
      * @param subscriberId
-     * @return
      * @throws BssException
      */
     public void deleteSubscriber(String subscriberId) throws BssException {
@@ -231,7 +229,7 @@ public class SubscriberManagementService extends BssService {
      * Get a list of subscribers who are in the same organization as the API caller. 
      * Subscribers from the caller's immediate organization and subscribers from all child organizations are returned in a single list.
      * 
-     * @return
+     * @return {EntityList<JsonEntity>}
      * @throws BssException
      */
     public EntityList<JsonEntity> getSubscribers() throws BssException {
@@ -249,7 +247,7 @@ public class SubscriberManagementService extends BssService {
      * 
      * @param pageNumber
      * @param pageSize
-     * @return
+     * @return {EntityList<JsonEntity>}
      * @throws BssException
      */
     public EntityList<JsonEntity> getSubscribers(int pageNumber, int pageSize) throws BssException {
@@ -268,7 +266,7 @@ public class SubscriberManagementService extends BssService {
      * Get a list of subscribers with a given email address.
      * 
      * @param email
-     * @return
+     * @return {EntityList<JsonEntity>}
      * @throws BssException
      * @throws {@link IllegalArgumentException}
      */
@@ -280,7 +278,7 @@ public class SubscriberManagementService extends BssService {
      * Get a list of subscribers with a given email address.
      * 
      * @param email
-     * @return
+     * @return {EntityList<JsonEntity>}
      * @throws BssException
      * @throws {@link IllegalArgumentException}
      */
@@ -300,7 +298,7 @@ public class SubscriberManagementService extends BssService {
      * Get a list of all subscribers for a customer with a given ID.
      * 
      * @param customerId
-     * @return
+     * @return {EntityList<JsonEntity>}
      * @throws BssException
      * @throws {@link IllegalArgumentException}
      */
@@ -313,7 +311,7 @@ public class SubscriberManagementService extends BssService {
      * 
      * @param customerId
      * @param params
-     * @return
+     * @return {EntityList<JsonEntity>}
      * @throws BssException
      * @throws {@link IllegalArgumentException}
      */
@@ -335,7 +333,6 @@ public class SubscriberManagementService extends BssService {
      * 
      * @param subscriberId
      * @param force
-     * @return
      * @throws BssException
      */
     public void suspendSubscriber(String subscriberId, boolean force) throws BssException {
@@ -360,7 +357,6 @@ public class SubscriberManagementService extends BssService {
      * This action returns subscribers to active state so they can use the services to which they are entitled.
      * 
      * @param subscriberId
-     * @return
      * @throws BssException
      */
     public void unsuspendSubscriber(String subscriberId) throws BssException {
@@ -431,7 +427,7 @@ public class SubscriberManagementService extends BssService {
     /**
      * Wait for the subscriber to change to the specified state and then call the state change listener.
      * 
-     * @param customerId
+     * @param subscriberId
      * @param state
      * @param maxAttempts
      * @param waitInterval
@@ -465,7 +461,7 @@ public class SubscriberManagementService extends BssService {
     /**
      * Wait for the subscriber seat to change to the specified state and then call the state change listener.
      * 
-     * @param customerId
+     * @param subscriberId
      * @param state
      * @param maxAttempts
      * @param waitInterval

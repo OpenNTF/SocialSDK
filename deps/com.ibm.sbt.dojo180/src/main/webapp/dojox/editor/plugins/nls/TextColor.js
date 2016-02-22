@@ -1,4 +1,4 @@
-define({ root:
+define("dojox/editor/plugins/nls/TextColor", { root:
 //begin v1.x content
 ({
 	"setButtonText": "Set",

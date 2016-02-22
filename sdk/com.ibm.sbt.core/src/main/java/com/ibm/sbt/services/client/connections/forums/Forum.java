@@ -35,15 +35,13 @@ import com.ibm.sbt.services.client.connections.forums.model.BaseForumEntity;
  * @author Manish Kataria 
  * @author Swati Singh
  */
-
-
 public class Forum extends BaseForumEntity {
 	
 	/**
 	 * Constructor
 	 *  
-	 * @param ForumService
-	 * @param ForumId
+	 * @param forumsService
+	 * @param id
 	 */
 	public Forum(ForumService forumsService, String id) {
 		super(forumsService,id);
@@ -52,7 +50,7 @@ public class Forum extends BaseForumEntity {
 	/**
      * Constructor
      *
-     * @param ForumService
+     * @param forumsService
      */
     public Forum(ForumService forumsService) {
             super(forumsService);
@@ -123,7 +121,7 @@ public class Forum extends BaseForumEntity {
 	/**
 	 * This method updates the forum on the server
 	 * 
-	 * @return
+	 * @return {Forum}
 	 * @throws ClientServicesException
 	 */
 	public Forum save() throws ClientServicesException{
@@ -139,10 +137,8 @@ public class Forum extends BaseForumEntity {
 	/**
 	 * This method deletes the forum on the server
 	 * 
-	 * @return
 	 * @throws ClientServicesException
 	 */
-
 	public void remove() throws ClientServicesException {
 	   	getService().deleteForum(getUid());
 	}
@@ -150,14 +146,11 @@ public class Forum extends BaseForumEntity {
 	/**
 	 * This method loads the forum 
 	 * 
-	 * @return
 	 * @throws ClientServicesException
 	 */
-	
 	public Forum load() throws ClientServicesException
     {
 		return getService().getForum(getUid());
     }
-
 
 }

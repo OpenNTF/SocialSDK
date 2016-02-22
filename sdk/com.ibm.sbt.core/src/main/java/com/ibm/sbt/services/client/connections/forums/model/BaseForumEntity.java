@@ -48,8 +48,8 @@ public class BaseForumEntity extends AtomEntity {
 	/**
 	 * Constructor
 	 *  
-	 * @param ForumService
-	 * @param ForumId
+	 * @param forumsService
+	 * @param id
 	 */
 	public BaseForumEntity(ForumService forumsService, String id) {
 		super(forumsService,id);
@@ -58,7 +58,7 @@ public class BaseForumEntity extends AtomEntity {
 	}
 	/**
      * Constructor
-     * @param ForumService
+     * @param forumsService ForumService
      */
     public BaseForumEntity(ForumService forumsService) {
             super(forumsService);
@@ -68,10 +68,10 @@ public class BaseForumEntity extends AtomEntity {
     
 	/**
      * Constructor
-     * @param BaseService
-     * @param Node
-     * @param NamespaceContext
-     * @param XPathExpression
+     * @param service BaseService
+     * @param node Node
+     * @param namespaceCtx NamespaceContext
+     * @param xpathExpression XPathExpression
      */
 	public BaseForumEntity(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
 		super(service, node, namespaceCtx, xpathExpression);
@@ -109,14 +109,14 @@ public class BaseForumEntity extends AtomEntity {
 	}
 
 	/**
-	 * @sets the tags
+	 * sets the tags
 	 */
 	public void setTags(List<String> tags) {
 		super.setBaseTags(tags);
 	}
 
 	/**
-	 * @sets the tags
+	 * sets the tags
 	 */
 	@Deprecated
 	public void setTags(String tags) {

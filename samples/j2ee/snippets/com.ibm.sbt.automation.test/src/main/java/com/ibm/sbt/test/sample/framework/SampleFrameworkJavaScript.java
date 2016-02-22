@@ -31,7 +31,7 @@ import com.ibm.sbt.automation.core.test.pageobjects.SampleFrameworkResultPage;
 
 /**
  * @author Francis
- * @date 24 May 2013
+ * @since 24 May 2013
  */
 public class SampleFrameworkJavaScript extends BaseSampleFrameworkTest {
 

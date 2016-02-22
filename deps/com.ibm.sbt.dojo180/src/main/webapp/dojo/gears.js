@@ -1,4 +1,4 @@
-define(["./_base/lang", "./sniff"], function(lang, has){
+define("dojo/gears", ["./_base/lang", "./sniff"], function(lang, has){
 
 // module:
 //		dojo/gears

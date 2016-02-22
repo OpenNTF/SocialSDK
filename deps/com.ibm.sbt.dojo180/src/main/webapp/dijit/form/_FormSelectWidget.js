@@ -1,4 +1,4 @@
-define([
+define("dijit/form/_FormSelectWidget", [
 	"dojo/_base/array", // array.filter array.forEach array.map array.some
 	"dojo/_base/Deferred",
 	"dojo/aspect", // aspect.after

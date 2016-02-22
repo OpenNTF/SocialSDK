@@ -1,4 +1,4 @@
-define(["./_base", "dojo/_base/lang","dojo/_base/declare", "./matrix", "./shape"], 
+define("dojox/gfx/path", ["./_base", "dojo/_base/lang","dojo/_base/declare", "./matrix", "./shape"], 
 	function(g, lang, declare, matrix, shapeLib){
 // summary:
 //		This module contains the core graphics Path API.

@@ -1,4 +1,4 @@
-define([
+define("dojox/calendar/Mouse", [
 	"dojo/_base/array", 
 	"dojo/_base/declare",
 	"dojo/_base/event",

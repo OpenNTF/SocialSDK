@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/es-hn/currency", //begin v1.x content
 {
 	"HNL_symbol": "L"
 }

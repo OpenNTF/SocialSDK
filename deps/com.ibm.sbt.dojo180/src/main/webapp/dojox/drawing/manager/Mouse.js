@@ -1,4 +1,4 @@
-define(["dojo", "../util/oo", "../defaults"], 
+define("dojox/drawing/manager/Mouse", ["dojo", "../util/oo", "../defaults"], 
 function(dojo, oo, defaults){
 
 //dojox.drawing.manager.Mouse = 

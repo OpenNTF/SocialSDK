@@ -1,4 +1,4 @@
-define(["dojo/_base/kernel", "dojo/_base/array", "./_base"], function(dojo, darray, dxc){
+define("dojox/collections/Queue", ["dojo/_base/kernel", "dojo/_base/array", "./_base"], function(dojo, darray, dxc){
 
 	dxc.Queue=function(/*array?*/ arr){
 		// summary:

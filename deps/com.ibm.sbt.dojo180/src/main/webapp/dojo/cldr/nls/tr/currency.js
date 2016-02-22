@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/tr/currency", //begin v1.x content
 {
 	"BRE_displayName": "Brezilya Kruzeirosu (1990-1993)",
 	"DEM_displayName": "Alman Markı",

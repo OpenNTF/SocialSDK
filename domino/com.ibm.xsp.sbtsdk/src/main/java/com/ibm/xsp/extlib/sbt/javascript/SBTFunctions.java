@@ -188,7 +188,7 @@ public class SBTFunctions extends FBSDefaultObject {
 		 *            the JavaScript execution context (global variables, function...)
 		 * @param args
 		 *            the arguments passed to the function
-		 * @params _this the "this" object when the method is called as a "this" member
+		 * @param _this the "this" object when the method is called as a "this" member
 		 */
 		@Override
 		public FBSValue call(IExecutionContext context, FBSValueVector args, FBSObject _this)

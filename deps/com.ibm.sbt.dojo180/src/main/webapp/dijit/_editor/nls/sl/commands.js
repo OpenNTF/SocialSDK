@@ -1,5 +1,5 @@
 define(
-({
+"dijit/_editor/nls/sl/commands", ({
 	'bold': 'Krepko',
 	'copy': 'Prekopiraj',
 	'cut': 'Izreži',

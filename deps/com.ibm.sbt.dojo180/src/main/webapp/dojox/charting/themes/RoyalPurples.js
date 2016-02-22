@@ -1,4 +1,4 @@
-define(["../SimpleTheme", "./common"], function(SimpleTheme, themes){
+define("dojox/charting/themes/RoyalPurples", ["../SimpleTheme", "./common"], function(SimpleTheme, themes){
 	themes.RoyalPurples = new SimpleTheme({
 		colors: [
 			"#473980",

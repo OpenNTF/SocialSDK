@@ -1,4 +1,4 @@
-define(["dojo/_base/lang", "dojo/_base/array" ,"dojo/_base/declare", 
+define("dojox/charting/plot2d/Pie", ["dojo/_base/lang", "dojo/_base/array" ,"dojo/_base/declare", 
 		"./Base", "./_PlotEvents", "./common", "../axis2d/common",
 		"dojox/gfx", "dojox/gfx/matrix", "dojox/lang/functional", "dojox/lang/utils"],
 	function(lang, arr, declare, Base, PlotEvents, dc, da, g, m, df, du){

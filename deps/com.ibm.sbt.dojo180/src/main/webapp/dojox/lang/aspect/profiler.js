@@ -1,3 +1,5 @@
+// wrapped by build app
+define("dojox/lang/aspect/profiler", ["dijit","dojo","dojox"], function(dijit,dojo,dojox){
 dojo.provide("dojox.lang.aspect.profiler");
 
 (function(){
@@ -31,3 +33,4 @@ dojo.provide("dojox.lang.aspect.profiler");
 		return new Profiler(title);	// Object
 	};
 })();
+});

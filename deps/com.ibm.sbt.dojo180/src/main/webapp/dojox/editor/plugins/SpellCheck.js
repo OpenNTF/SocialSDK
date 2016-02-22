@@ -1,3 +1,5 @@
+// wrapped by build app
+define("dojox/editor/plugins/SpellCheck", ["dijit","dojo","dojox","dojo/i18n!dojox/editor/plugins/nls/SpellCheck","dojo/require!dijit/_base/popup,dijit/_Widget,dijit/_Templated,dijit/form/TextBox,dijit/form/DropDownButton,dijit/TooltipDialog,dijit/form/MultiSelect,dojo/io/script,dijit/Menu"], function(dijit,dojo,dojox){
 dojo.provide("dojox.editor.plugins.SpellCheck");
 
 dojo.require("dijit._base.popup");
@@ -1405,4 +1407,6 @@ dojo.subscribe(dijit._scopeName + ".Editor.getPlugin",null,function(o){
 			exArgs: o.args
 		});
 	}
+});
+
 });

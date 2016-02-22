@@ -1,4 +1,4 @@
-define([
+define("dojo/router/RouterBase", [
 	"dojo/_base/declare",
 	"dojo/hash",
 	"dojo/topic"

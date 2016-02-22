@@ -1,4 +1,6 @@
-define([
+require({cache:{
+'url:dijit/form/templates/CheckBox.html':"<div class=\"dijit dijitReset dijitInline\" role=\"presentation\"\n\t><input\n\t \t${!nameAttrSetting} type=\"${type}\" role=\"${type}\" aria-checked=\"false\" ${checkedAttrSetting}\n\t\tclass=\"dijitReset dijitCheckBoxInput\"\n\t\tdata-dojo-attach-point=\"focusNode\"\n\t \tdata-dojo-attach-event=\"onclick:_onClick\"\n/></div>\n"}});
+define("dijit/form/CheckBox", [
 	"require",
 	"dojo/_base/declare", // declare
 	"dojo/dom-attr", // domAttr.set

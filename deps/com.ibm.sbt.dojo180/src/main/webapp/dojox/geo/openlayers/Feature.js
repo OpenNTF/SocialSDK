@@ -1,4 +1,4 @@
-define([
+define("dojox/geo/openlayers/Feature", [
 	"dojo/_base/kernel",
 	"dojo/_base/declare",
 	"./_base"

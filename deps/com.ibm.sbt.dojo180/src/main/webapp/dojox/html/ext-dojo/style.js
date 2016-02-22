@@ -1,4 +1,4 @@
-define(["dojo/_base/kernel", "dojo/dom-style", "dojo/_base/lang", "dojo/_base/html", "dojo/_base/sniff",
+define("dojox/html/ext-dojo/style", ["dojo/_base/kernel", "dojo/dom-style", "dojo/_base/lang", "dojo/_base/html", "dojo/_base/sniff",
 		"dojo/_base/window", "dojo/dom", "dojo/dom-construct", "dojo/dom-style", "dojo/dom-attr"], 
 	function(kernel, domStyle, lang, Html, has, win, DOM, DOMConstruct, DOMStyle, DOMAttr){
 	kernel.experimental("dojox.html.ext-dojo.style");

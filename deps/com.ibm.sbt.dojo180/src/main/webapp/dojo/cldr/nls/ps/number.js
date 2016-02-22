@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/ps/number", //begin v1.x content
 {
 	"exponential": "E",
 	"group": ".",

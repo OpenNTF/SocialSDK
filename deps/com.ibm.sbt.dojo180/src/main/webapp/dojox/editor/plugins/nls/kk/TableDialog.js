@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/kk/TableDialog", ({
 	insertTableTitle: "Кесте кірістіру",
 	modifyTableTitle: "Кестені өзгерту",
 	rows: "Жолдар:",

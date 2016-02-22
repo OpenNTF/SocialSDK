@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/en-bw/currency", //begin v1.x content
 {
 	"BWP_symbol": "P"
 }

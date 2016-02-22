@@ -1,4 +1,4 @@
-define([
+define("dojox/widget/_CalendarMonthYear", [
 	"dojo/_base/declare",
 	"./_CalendarMonthYearView"
 ], function(declare, _CalendarMonthYearView){

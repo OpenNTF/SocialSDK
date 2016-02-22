@@ -1,4 +1,4 @@
-define([
+define("dojox/mvc/_TextBoxExtensions", [
 	"dojo/_base/lang",
 	"dijit/_WidgetBase",
 	"dijit/form/ValidationTextBox",

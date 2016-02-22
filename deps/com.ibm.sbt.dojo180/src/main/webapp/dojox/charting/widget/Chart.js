@@ -1,4 +1,4 @@
-define(["dojo/_base/kernel", "dojo/_base/lang", "dojo/_base/array","dojo/dom-attr","dojo/_base/declare", "dojo/query",
+define("dojox/charting/widget/Chart", ["dojo/_base/kernel", "dojo/_base/lang", "dojo/_base/array","dojo/dom-attr","dojo/_base/declare", "dojo/query",
 	"dijit/_WidgetBase", "../Chart", "dojox/lang/utils", "dojox/lang/functional","dojox/lang/functional/lambda"],
 	function(kernel, lang, arr, domAttr, declare, query, _WidgetBase, Chart, du, df, dfl){
 

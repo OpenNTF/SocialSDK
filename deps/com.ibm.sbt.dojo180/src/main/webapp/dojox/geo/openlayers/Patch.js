@@ -1,4 +1,4 @@
-define([
+define("dojox/geo/openlayers/Patch", [
 	"dojo/_base/kernel",
 	"dojo/_base/lang",	// dojo.extend getObject
 	"dojo/_base/sniff",	// dojo.isIE

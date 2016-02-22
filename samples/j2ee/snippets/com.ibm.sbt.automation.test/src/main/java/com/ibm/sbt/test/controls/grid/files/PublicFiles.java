@@ -21,7 +21,7 @@ import com.ibm.sbt.automation.core.test.BaseGridTest;
 
 /**
  * @author sberrybyrne
- * @date 7 Mar 2013
+ * @since 7 Mar 2013
  */
 public class PublicFiles extends BaseGridTest {
 

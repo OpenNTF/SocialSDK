@@ -47,10 +47,10 @@ public class ForumTopic extends BaseForumEntity{
 	/**
 	 * Constructor
 	 *  
-	 * @param BaseService
-	 * @param Node
-	 * @param NamespaceContext
-	 * @param XPathExpression 
+	 * @param service
+	 * @param node
+	 * @param namespaceCtx
+	 * @param xpathExpression 
 	 */
 	
 	public ForumTopic(BaseService service, Node node, NamespaceContext namespaceCtx, XPathExpression xpathExpression) {
@@ -59,7 +59,7 @@ public class ForumTopic extends BaseForumEntity{
 	/**
 	 * Constructor
 	 *  
-	 * @param ForumService
+	 * @param forumsService
 	 * @param id
 	 */
 	public ForumTopic(ForumService forumsService, String id) {
@@ -70,8 +70,7 @@ public class ForumTopic extends BaseForumEntity{
 	/**
      * Constructor
      *
-     * @param ForumService
-     * @param id
+     * @param forumsService
      */
     public ForumTopic(ForumService forumsService) {
             super(forumsService);
@@ -121,7 +120,6 @@ public class ForumTopic extends BaseForumEntity{
 	 *
 	 * @throws ClientServicesException
 	 */
-
 	public void remove() throws ClientServicesException {
 		getService().deleteForumTopic(getUid());
 	}
@@ -132,7 +130,6 @@ public class ForumTopic extends BaseForumEntity{
 	 * @return ForumTopic
 	 * @throws ClientServicesException
 	 */
-
 	public ForumTopic load() throws ClientServicesException
 	{
 		return getService().getForumTopic(getUid());
@@ -142,10 +139,9 @@ public class ForumTopic extends BaseForumEntity{
 	/**
 	 * This method returns Replies for this IBM Connections forum Topic
 	 *
-	 * @return ReplyList
+	 * @return {EntityList<ForumReply>}
 	 * @throws ClientServicesException
 	 */
-
 	public EntityList<ForumReply> getReplies() throws ClientServicesException
 	{
 		return getService().getForumTopicReplies(getUid());
@@ -154,7 +150,7 @@ public class ForumTopic extends BaseForumEntity{
 	/**
 	 * This method returns Recommendations for the IBM Connections forum Topic
 	 *
-	 * @return RecommendationList
+	 * @return {EntityList<Recommendation>}
 	 * @throws ClientServicesException
 	 */
 	public EntityList<Recommendation> getRecommendations() throws ClientServicesException
@@ -165,7 +161,7 @@ public class ForumTopic extends BaseForumEntity{
 	 * Return the permissions of the IBM Connections forum topic from forum ATOM
 	 * entry document.
 	 *
-	 * @return String
+	 * @return {String}
 	 * @throws ClientServicesException
 	 */
 
@@ -196,7 +192,7 @@ public class ForumTopic extends BaseForumEntity{
 	 * Sets id of IBM Connections forum.
 	 *
 	 * @method setForumUuid
-	 * @param {String} forumUuid Id of the forum
+	 * @param forumUuid Id of the forum
 	 */
 	public void setForumUuid(String forumUuid) {
 		fields.put("forumUuid", forumUuid);
@@ -272,7 +268,6 @@ public class ForumTopic extends BaseForumEntity{
 	 * to unLike/unRecommend a Topic, supported on Connections 4.5 or above
 	 *
 	 * @method unLike
-	 * @return boolean
 	 */
 	public void unLike() throws ClientServicesException {
 		getService().deleteRecommendation(getTopicUuid());
@@ -379,7 +374,7 @@ public class ForumTopic extends BaseForumEntity{
 	
 	/**
 	 * 
-	 * @return
+	 * @return {List<String>}
 	 */
 	public List<String> getTags() {
 		return getBaseTags();
@@ -387,7 +382,7 @@ public class ForumTopic extends BaseForumEntity{
 	
 	/**
 	 * 
-	 * @return
+	 * @return {Person}
 	 */
 	public Person getContentModifiedBy() {
 		return new Person(getService(), new XmlDataHandler((Node)getDataHandler().getData(), 
@@ -396,7 +391,7 @@ public class ForumTopic extends BaseForumEntity{
 
 	/**
 	 * 
-	 * @return
+	 * @return {Date}
 	 */
     public Date getContentModifiedWhen() {
         return this.getAsDate(ForumsXPath.contentModifiedWhen);

@@ -238,13 +238,13 @@ public abstract class FormEndpoint extends AbstractEndpoint {
 	
 
 	/*
-	 * Should be overriden by specific endpoints like Smartcloud form endpoint or Connections form endpoint etc.
+	 * Should be overriden by specific endpoints like Connections form endpoint etc.
 	 * Implementation should provide specific parameters which need to be passed along with authentication request.
 	 */
 	public abstract List<NameValuePair> getLoginFormParameters();
 	
 	/*
-	 * Should be overriden by specific endpoints like Smartcloudformendpoint or Connectionsformendpoint etc.
+	 * Should be overriden by specific endpoints like  or Connectionsformendpoint etc.
 	 * Implementation should provide Url where the form needs to be submitted.
 	 */
 	

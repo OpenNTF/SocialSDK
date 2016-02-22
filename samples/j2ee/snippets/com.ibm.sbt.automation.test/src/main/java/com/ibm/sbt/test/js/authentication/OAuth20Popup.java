@@ -24,7 +24,7 @@ import com.ibm.sbt.automation.core.test.BaseAuthServiceTest;
 /**
  * @author mwallace
  * 
- * @date 6 Mar 2013
+ * @since 6 Mar 2013
  */
 public class OAuth20Popup extends BaseAuthServiceTest {
 

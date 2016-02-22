@@ -47,7 +47,7 @@ public class URLPattern {
 	/**
 	 * Formats the Url pattern contained on this object with the provided NamedUrlParts
 	 * @param args
-	 * @return
+	 * @return {String}
 	 */
 	public String format(NamedUrlPart... args){
 		List<NamedUrlPart> namedParts = Arrays.asList(args);

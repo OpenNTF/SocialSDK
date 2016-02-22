@@ -1,4 +1,6 @@
-define([
+require({cache:{
+'url:dijit/layout/templates/_TabButton.html':"<div role=\"presentation\" data-dojo-attach-point=\"titleNode,innerDiv,tabContent\" class=\"dijitTabInner dijitTabContent\">\n\t<img src=\"${_blankGif}\" alt=\"\" class=\"dijitIcon dijitTabButtonIcon\" data-dojo-attach-point='iconNode'/>\n\t<span data-dojo-attach-point='containerNode,focusNode' class='tabLabel'></span>\n\t<span class=\"dijitInline dijitTabCloseButton dijitTabCloseIcon\" data-dojo-attach-point='closeNode'\n\t\t  role=\"presentation\">\n\t\t<span data-dojo-attach-point='closeText' class='dijitTabCloseText'>[x]</span\n\t\t\t\t></span>\n</div>\n"}});
+define("dijit/layout/TabController", [
 	"dojo/_base/declare", // declare
 	"dojo/dom", // dom.setSelectable
 	"dojo/dom-attr", // domAttr.attr

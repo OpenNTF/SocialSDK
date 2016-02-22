@@ -1,4 +1,4 @@
-define([
+define("dojox/mobile/_PickerBase", [
 	"dojo/_base/array",
 	"dojo/_base/declare",
 	"dijit/_Contained",

@@ -1,5 +1,5 @@
 define(
-//begin v1.x content
+"dojo/cldr/nls/it/currency", //begin v1.x content
 {
 	"KHR_displayName": "Riel Cambogiano",
 	"FJD_displayName": "Dollaro delle Figi",

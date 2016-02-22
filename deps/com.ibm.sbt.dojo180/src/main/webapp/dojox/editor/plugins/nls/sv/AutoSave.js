@@ -1,5 +1,5 @@
 define(
-({
+"dojox/editor/plugins/nls/sv/AutoSave", ({
 	"saveLabel": "Spara ",
 	"saveSettingLabelOn": "Intervall för Spara automatiskt...",
 	"saveSettingLabelOff": "Stäng av Spara automatiskt",

@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.sbt.provisioning.sample.app.model.Rest;
-import com.ibm.sbt.provisioning.sample.app.services.GRTESubscriber;
+import com.ibm.sbt.provisioning.sample.app.services.Subscriber;
 import com.ibm.sbt.provisioning.sample.app.task.BSSProvisioning;
 import com.ibm.sbt.provisioning.sample.app.util.BSSEndpoints;
 import com.ibm.sbt.provisioning.sample.app.weightedBSSCall.WeightedBSSCall;
@@ -45,7 +45,7 @@ public class AddSubscriberSuppressEmail extends WeightedBSSCall<String>{
 		String subscriberId = null ;
 		try {     
       logger.fine("triggering call : " + this.getUrl() + " " + getMethod());
-			JsonJavaObject subscriber = GRTESubscriber.getInstance().getService().addSubscriberSuppressEmail(this.subscriberJson);
+			JsonJavaObject subscriber = Subscriber.getInstance().getService().addSubscriberSuppressEmail(this.subscriberJson);
 			subscriberId = String.valueOf(subscriber.getAsLong("Long"));
       BSSProvisioning.getStateTransitionReport().get(email)[1] =
           new SimpleDateFormat(BSSProvisioning.DATE_FORMAT).format(new Date());

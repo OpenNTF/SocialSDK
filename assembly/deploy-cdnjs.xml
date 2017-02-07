@@ -8,10 +8,10 @@
 	</target>
 	
 	<target name="manage-cdnjs" if="${notSnapshot}" depends="snapshotstatus">
-		<copy file="./sdk/com.ibm.sbt.web/src/main/webapp/js/sdk/_layers/sbt-core-dojo-amd.js.uncompressed.js" todir="./assembly/cdnjs" overwrite="true"/>
-		<copy file="./sdk/com.ibm.sbt.web/src/main/webapp/js/sdk/_layers/sbt-core-dojo-amd.js" todir="./assembly/cdnjs" overwrite="true"/>
-		<copy file="./sdk/com.ibm.sbt.web/src/main/webapp/js/sdk/_layers/sbt-extra-controls-dojo-amd.js.uncompressed.js" todir="./assembly/cdnjs" overwrite="true"/>
-		<copy file="./sdk/com.ibm.sbt.web/src/main/webapp/js/sdk/_layers/sbt-extra-controls-dojo-amd.js" todir="./assembly/cdnjs" overwrite="true"/>
+		<copy file="../sdk/com.ibm.sbt.web/src/main/webapp/js/sdk/_layers/sbt-core-dojo-amd.js.uncompressed.js" todir="../assembly/cdnjs" overwrite="true"/>
+		<copy file="../sdk/com.ibm.sbt.web/src/main/webapp/js/sdk/_layers/sbt-core-dojo-amd.js" todir="../assembly/cdnjs" overwrite="true"/>
+		<copy file="../sdk/com.ibm.sbt.web/src/main/webapp/js/sdk/_layers/sbt-extra-controls-dojo-amd.js.uncompressed.js" todir="../assembly/cdnjs" overwrite="true"/>
+		<copy file="../sdk/com.ibm.sbt.web/src/main/webapp/js/sdk/_layers/sbt-extra-controls-dojo-amd.js" todir="../assembly/cdnjs" overwrite="true"/>
 	</target>
 	
 </project>

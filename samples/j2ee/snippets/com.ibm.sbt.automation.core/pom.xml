@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>com.ibm.sbt</groupId>
 		<artifactId>com.ibm.samples.snippets</artifactId>
-		<version>1.1.12.20161007-1200</version>
+		<version>1.1.13-SNAPSHOT</version>
 	</parent>
 
 
@@ -20,22 +20,22 @@
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.sbt.core</artifactId>
-			<version>1.1.12.20161007-1200</version>
+			<version>1.1.13-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.commons</artifactId>
-			<version>1.1.12.20161007-1200</version>
+			<version>1.1.13-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.commons.xml</artifactId>
-			<version>1.1.12.20161007-1200</version>
+			<version>1.1.13-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.commons.runtime</artifactId>
-			<version>1.1.12.20161007-1200</version>
+			<version>1.1.13-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.mozilla</groupId>
@@ -72,12 +72,12 @@
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.sbt.core.test</artifactId>
-			<version>1.1.12.20161007-1200</version>
+			<version>1.1.13-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.sbt.samples.commons</artifactId>
-			<version>1.1.12.20161007-1200</version>
+			<version>1.1.13-SNAPSHOT</version>
 			<type>eclipse-plugin</type>
 		</dependency>
 	</dependencies>

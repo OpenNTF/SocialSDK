@@ -33,6 +33,7 @@ import com.ibm.sbt.provisioning.sample.app.weightedBSSCall.authentication.Change
 import com.ibm.sbt.provisioning.sample.app.weightedBSSCall.authentication.SetOneTimePassword;
 import com.ibm.sbt.provisioning.sample.app.weightedBSSCall.subscriber.ActivateSubscriber;
 import com.ibm.sbt.provisioning.sample.app.weightedBSSCall.subscriber.AddSubscriber;
+import com.ibm.sbt.provisioning.sample.app.weightedBSSCall.subscriber.AddSubscriberSuppressEmail;
 import com.ibm.sbt.provisioning.sample.app.weightedBSSCall.subscriber.EntitleSubscriber;
 import com.ibm.sbt.provisioning.sample.app.weightedBSSCall.subscriber.GetSubscriber;
 import com.ibm.sbt.provisioning.sample.app.weightedBSSCall.subscriber.UpdateNotesSubscriber;
@@ -59,6 +60,7 @@ public class SubscriberTask implements Runnable {
 		SUBSCRIBER_PASSWORD_CHANGED, 
 		SUBSCRIBER_UPDATED, 
 		SUBSCRIBER_ENTITLED,
+		SUBSCRIBE_FAILED,
 		SEAT_ASSIGNED
 	}
 	
@@ -70,6 +72,10 @@ public class SubscriberTask implements Runnable {
 	private String subscriberId ;
   	private String oneTimePassword;
   	private String newPassword;
+  	private int attemptCount = 0;
+  	private int attempts;
+  	private boolean attemptsFlag = false;
+  	private boolean suppressEmail = false;
 
 	/**
 	 * Each subscriberTask has a key made up by the subscriberEmail, column, subscriptionId
@@ -87,8 +93,22 @@ public class SubscriberTask implements Runnable {
 		this.subscriberEmail = this.subscriber.getAsObject("Subscriber").getAsObject("Person").getAsString("EmailAddress");
 		this.taskKey = this.subscriberEmail;
 	}
+	
+	public SubscriberTask(JsonJavaObject subscriber, String customerId, List<SubscriptionEntitlement> entitlements, 
+			State initialStatus, String newPassword, int attempts){
+		this.subscriber = subscriber;
+		this.customerId = customerId;
+		this.entitlements = entitlements;
+		this.status = initialStatus;
+		this.oneTimePassword = "onet1me!";
+		this.newPassword = newPassword;
+		this.subscriberEmail = this.subscriber.getAsObject("Subscriber").getAsObject("Person").getAsString("EmailAddress");
+		this.taskKey = this.subscriberEmail;
+		this.attempts = attempts;
+		this.attemptsFlag = true;
+	}
 
-	public SubscriberTask( JsonJavaObject subscriber, String customerId, String subscriptionId , State initialStatus ) {
+	public SubscriberTask(JsonJavaObject subscriber, String customerId, String subscriptionId, State initialStatus) {
 		this.subscriber = subscriber ;
 		this.customerId = customerId ;
 		this.status = initialStatus ;
@@ -97,6 +117,16 @@ public class SubscriberTask implements Runnable {
     	this.taskKey = this.subscriberEmail;
 	}
 	
+	public SubscriberTask(JsonJavaObject subscriber, String customerId, String subscriptionId, State initialStatus, int attempts) {
+		this.subscriber = subscriber ;
+		this.customerId = customerId ;
+		this.status = initialStatus ;
+    	this.oneTimePassword = "onet1me!";
+		this.subscriberEmail = this.subscriber.getAsObject("Subscriber").getAsObject("Person").getAsString("EmailAddress");
+    	this.taskKey = this.subscriberEmail;
+    	this.attempts = attempts;
+    	this.attemptsFlag = true;
+	}
 	/**
 	 * Business logic of the task 
 	 * <p>
@@ -113,7 +143,11 @@ public class SubscriberTask implements Runnable {
 		boolean success = true ;
 		while( success == true ){
 			if (this.status == State.SUBSCRIBER_NON_EXISTENT) {
-				this.subscriberId = addSubscriber();
+				if(suppressEmail){
+					this.subscriberId = addSubscriberSuppressEmail();
+				}else{
+					this.subscriberId = addSubscriber();
+				}
 				if( this.subscriberId != null ) {
 					this.status = State.SUBSCRIBER_ADDED ;
 				}else{
@@ -134,14 +168,14 @@ public class SubscriberTask implements Runnable {
 			} else if ( this.status == State.SUBSCRIBER_ACTIVE ) {
 		    	  if (setOneTimePassword()){
 		    		  this.status = State.SUBSCRIBER_ONE_TIME_PWD_SET ;
-		    	  } else{
+		    	  }else{
 		    		  success = false ;
 		    	  }
 			} else if(this.newPassword == null){
 				// If the new password is null, we don't change it, the user will change it on first login
         		// If the new password is not null, we change it
 		        this.status = State.SUBSCRIBER_PASSWORD_CHANGED;
-					}else if( this.status == State.SUBSCRIBER_ONE_TIME_PWD_SET ){
+			} else if( this.status == State.SUBSCRIBER_ONE_TIME_PWD_SET ){
 		        if(changePassword()){
 		          this.status = State.SUBSCRIBER_PASSWORD_CHANGED;
 		        }else{
@@ -159,12 +193,39 @@ public class SubscriberTask implements Runnable {
 		    	  }else{
 		    		  success = false ;
 		    	  }
-		    } else if( this.status == State.SEAT_ASSIGNED ){
+		    } else if( this.status == State.SEAT_ASSIGNED){
 		    	  success = false ;
+		    	  attemptsFlag = false;
+		    } else if( this.status == State.SUBSCRIBE_FAILED){
+		    	  success = false ;
+		    	  attemptsFlag = false;
+		    	  logger.info("Checking for task completion...");
+		    	  logger.info("Completed: "+checkForFinish());  
 		    }
 		}
-		logger.info("Task execution exiting with status:"+ this.status.name() );
-		if( this.status != State.SEAT_ASSIGNED ){
+		if(attemptsFlag){
+			if(success==false){
+				attemptCount++;
+				logger.info("Attempts = " + attemptCount+"/"+attempts);
+				logger.info("Waiting 30 seconds before retrying task...");
+				try {
+					Thread.sleep(1000*30);
+				} catch (InterruptedException e) {
+					logger.severe(e.getMessage());
+				}
+			}
+			if(attemptCount>=attempts&&this.status != State.SEAT_ASSIGNED){
+				this.status = State.SUBSCRIBE_FAILED;
+				BSSProvisioning.failedSubscriptions.add(this);
+				BSSProvisioning.incrementSubscribersFailed();
+				logger.info("Checking for task completion...");
+				logger.info("Completed: "+checkForFinish());  
+			}
+		}
+		logger.info("Task execution exiting with status: "+ this.status.name() );
+		if( this.status == State.SEAT_ASSIGNED ){
+			logger.info("Task exited." );
+		}else{
 			BSSProvisioning.getSubscribersTasks().add(this);
 			logger.info("Re-queuing it..." );
 		}
@@ -214,6 +275,31 @@ public class SubscriberTask implements Runnable {
 			logger.info("Adding subscriber...");
 			try{
 				subscriberId = addSubscriber.call();
+			} catch (Exception e) {
+	    		logger.severe(e.getClass()+" : " + e.getMessage());
+	    		String responseBody = ((ClientServicesException) e.getCause()).getResponseBody();
+	    		if(emailAlreadyExists(responseBody)){
+	    			subscriberId = identifySubscriberState();
+	    		}
+			}
+		}
+		return subscriberId ;
+	}
+	
+	/**
+	 * This method will trigger the adding of a subscriber w/ suppress email to an organization by mean of invocation of the <code>call()</code> method of the <code>abstract
+	 *  class WeightedBSSCall</code> on an instance of the <code>AddSubscriber</code> class
+	 * <p>
+	 * @return the BSS subscriber identifier
+	 */
+	private String addSubscriberSuppressEmail(){
+		String subscriberId = null ;
+		if( this.subscriber != null ){
+			((JsonJavaObject)this.subscriber.get("Subscriber")).putString("CustomerId", customerId);
+			WeightedBSSCall<String> addSubscriberSuppressEmail = new AddSubscriberSuppressEmail(this.subscriber);
+			logger.info("Adding subscriber with suppressed email...");
+			try{
+				subscriberId = addSubscriberSuppressEmail.call();
 			} catch (Exception e) {
 	    		logger.severe(e.getClass()+" : " + e.getMessage());
 	    		String responseBody = ((ClientServicesException) e.getCause()).getResponseBody();
@@ -422,8 +508,12 @@ public class SubscriberTask implements Runnable {
 		        				BSSProvisioning.incrementSubscribersProvisioned();
 		        				seatsAssigned = true;
 		        			}
-		        			if(BSSProvisioning.getSubscribersQuantity().get() == BSSProvisioning.getSubscribersProvisioned().get()){
-		        				logger.finest("ALL SUBSCRIBERS PROVISIONED !!!");
+		        			if(BSSProvisioning.getSubscribersQuantity().get() == (BSSProvisioning.getSubscribersProvisioned().get() + BSSProvisioning.getSubscribersFailed().get())){
+		        				if(BSSProvisioning.getSubscribersFailed().get()>0){
+		        					logger.warning("Provisioned Subscribers: "+ BSSProvisioning.getSubscribersProvisioned().get() +"\nFailed Subscribers: "+ BSSProvisioning.getSubscribersFailed().get());
+		        				}else{		        				
+		        					logger.finest("ALL SUBSCRIBERS PROVISIONED !!!");
+		        				}
 		        				BSSProvisioning.generateStateTransitionReport();
 		        				BSSProvisioning.generateSubscriberWeightReport();
 		        				BSSProvisioning.generateCallsCounterReport();
@@ -437,6 +527,27 @@ public class SubscriberTask implements Runnable {
 			}
 		}
     	return seatsAssigned;
+	}
+	
+	/**
+	 * This method checks for completion of task
+	 * @return <code>true</code> if complete, <code>false</code> otherwise
+	 */
+	private boolean checkForFinish(){
+		boolean completed = false;
+		if(BSSProvisioning.getSubscribersQuantity().get() == (BSSProvisioning.getSubscribersProvisioned().get() + BSSProvisioning.getSubscribersFailed().get())){
+			completed = true;
+			if(BSSProvisioning.getSubscribersFailed().get()>0){
+				logger.warning("Provisioned Subscribers: "+ BSSProvisioning.getSubscribersProvisioned().get() +"\nFailed Subscribers: "+ BSSProvisioning.getSubscribersFailed().get());
+			}else{		        				
+				logger.finest("ALL SUBSCRIBERS PROVISIONED !!!");
+			}
+			BSSProvisioning.generateStateTransitionReport();
+			BSSProvisioning.generateSubscriberWeightReport();
+			BSSProvisioning.generateCallsCounterReport();
+			WeightManager.getInstance().shutdown();
+		}
+		return completed;
 	}
 	
 	/**
@@ -479,5 +590,9 @@ public class SubscriberTask implements Runnable {
 	
 	public String getSubscriberTaskKey() {
 		return taskKey;
+	}
+	
+	public void setSuppressEmail(boolean suppress){
+		suppressEmail = suppress;
 	}
 }

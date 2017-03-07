@@ -137,6 +137,7 @@ public class WeightManager {
 			logger.finest("currentWeight = " + this.currentWeight);
       		this.currentWeight = this.currentWeight + getWeightValuePerBSSCall(url, method);
 			logger.finest("currentWeight updated = " + this.currentWeight);
+			logger.finest("Threshold = " + threshold);
 			if( currentWeight >= threshold ){
 				callPermitted = false ;
 				logger.warning("THRESHOLD REACHED OR EXCEEDED !!!");

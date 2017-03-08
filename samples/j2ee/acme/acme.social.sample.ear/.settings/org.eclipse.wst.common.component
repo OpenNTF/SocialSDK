@@ -2,19 +2,19 @@
     <wb-module deploy-name="acme.social.sample-2.0.0-SNAPSHOT">
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/ear-resources"/>
         <wb-resource deploy-path="/" source-path="/src/main/application" tag="defaultRootSource"/>
-        <dependent-module archiveName="acme.social.sample.dataapp-1.1.3-SNAPSHOT.war" deploy-path="/" handle="module:/resource/acme.social.sample.dataapp/acme.social.sample.dataapp">
+        <dependent-module archiveName="acme.social.sample.dataapp-1.1.12-SNAPSHOT.war" deploy-path="/" handle="module:/resource/acme.social.sample.dataapp/acme.social.sample.dataapp">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="acme.social.sample.webapp-1.1.3-SNAPSHOT.war" deploy-path="/" handle="module:/resource/acme.social.sample.webapp/acme.social.sample.webapp">
+        <dependent-module archiveName="acme.social.sample.webapp-1.1.12-SNAPSHOT.war" deploy-path="/" handle="module:/resource/acme.social.sample.webapp/acme.social.sample.webapp">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="acme.sample.webapp-1.1.3-SNAPSHOT.war" deploy-path="/" handle="module:/resource/acme.sample.webapp/acme.sample.webapp">
+        <dependent-module archiveName="acme.sample.webapp-1.1.12-SNAPSHOT.war" deploy-path="/" handle="module:/resource/acme.sample.webapp/acme.sample.webapp">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="com.ibm.sbt.web-1.1.3-SNAPSHOT.war" deploy-path="/" handle="module:/resource/com.ibm.sbt.web/com.ibm.sbt.web">
+        <dependent-module archiveName="com.ibm.sbt.web-1.1.12-SNAPSHOT.war" deploy-path="/" handle="module:/resource/com.ibm.sbt.web/com.ibm.sbt.web">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="sbt.dojo180-1.1.3-SNAPSHOT.war" deploy-path="/" handle="module:/resource/com.ibm.sbt.dojo180/com.ibm.sbt.dojo180">
+        <dependent-module archiveName="sbt.dojo180-1.1.12-SNAPSHOT.war" deploy-path="/" handle="module:/resource/sbt.dojo180/sbt.dojo180">
             <dependency-type>uses</dependency-type>
         </dependent-module>
     </wb-module>

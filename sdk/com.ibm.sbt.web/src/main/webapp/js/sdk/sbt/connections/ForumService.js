@@ -632,6 +632,29 @@ define([ "../declare", "../config", "../lang", "../stringUtil", "../Promise", ".
             return this.getAsString("replyCount");
         },
         
+                
+        /**
+         * Get the number of replies for this topic
+         * 
+         * @method getReplyCount
+         */
+        
+        getReplyCount: function(){
+        	var links = this.data.getElementsByTagName("link");
+        	var replyCount = 0;
+        	for(var j = 0; j < links.length;j++){
+        		var link =links[j];
+        		if(link.getAttribute("rel") == "replies"){
+        			var count = link.getAttribute("thr:count");
+        			if(count!=null){
+        				replyCount = parseInt(count);
+        				break;
+        			}
+        		}
+        	}
+        	return replyCount;
+        },
+        
         /**
          * To like this topic in a stand-alone forum, create forum recommendation to the forum topic resources.
          * 

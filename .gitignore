@@ -41,3 +41,9 @@ Desktop.ini
 
 # Desktop Services Store for the Mac
 .DS_Store
+assembly/.settings/
+sdk/com.ibm.sbt.core.test/.settings/
+sdk/com.ibm.sbt.core/.settings/
+samples/java/sbt.sample.app/.settings/
+samples/java/bss.provisioning.sample.app/.settings/org.sonar.ide.eclipse.core.prefs
+commons/com.ibm.commons.runtime/.settings/

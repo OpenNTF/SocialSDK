@@ -4,6 +4,10 @@
 	<artifactId>com.ibm.sbt.web</artifactId>
 	<packaging>eclipse-plugin</packaging>
 
+	<properties>
+		<sbt.timestamp>${maven.build.timestamp}</sbt.timestamp>
+		<maven.build.timestamp.format>yyyyMMddHHmm</maven.build.timestamp.format>
+	</properties>
 	<parent>
 		<groupId>com.ibm.sbt</groupId>
 		<artifactId>com.ibm.sbt.sdk</artifactId>
@@ -20,6 +24,19 @@
 				<executions>
 					<execution>
 						<phase>none</phase>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>1.8</version>
+				<executions>
+					<execution>
+						<id>parse-version</id>
+						<goals>
+							<goal>parse-version</goal>
+						</goals>
 					</execution>
 				</executions>
 			</plugin>
@@ -52,7 +69,18 @@
 							<appendAssemblyId>false</appendAssemblyId>
 							<outputDirectory>${project.build.directory}</outputDirectory>
 							<archive>
-								<manifestFile>META-INF\MANIFEST.MF</manifestFile>
+								<manifestEntries>
+									<Bundle-Version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.${sbt.timestamp}</Bundle-Version>
+									<Bundle-ManifestVersion>2</Bundle-ManifestVersion>
+									<Bundle-Name>Web</Bundle-Name>
+									<Bundle-SymbolicName>com.ibm.sbt.web;singleton:=true</Bundle-SymbolicName>
+									<Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
+									<Bundle-Activator>com.ibm.sbt.web.SbtWebActivator</Bundle-Activator>
+									<Require-Bundle>org.eclipse.core.runtime</Require-Bundle>
+									<Bundle-ClassPath>.</Bundle-ClassPath>
+									<Export-Package>com.ibm.sbt.web</Export-Package>
+									<Import-Package>javax.servlet, javax.servlet.http</Import-Package>
+								</manifestEntries>
 							</archive>
 						</configuration>
 					</execution>

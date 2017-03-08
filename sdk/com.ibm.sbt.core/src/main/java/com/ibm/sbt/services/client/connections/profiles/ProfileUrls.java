@@ -50,7 +50,7 @@ public enum ProfileUrls implements URLContainer {
 	MESSAGE_BOARD_ENTRIES(new VersionedUrl(v4_0, 	"{profiles}/{authType}/atom/mv/theboard/entries.do")),
 	MESSAGE_BOARD_COMMENTS(new VersionedUrl(v4_0, 	"{profiles}/{authType}/atom/mv/theboard/comments.do")),
 	MESSAGES_COLLEAGUES(new VersionedUrl(v4_0, 		"{profiles}/{authType}/atom/mv/theboard/entries/related.do")),
-	MY_USER_ID(new VersionedUrl(v4_0, 				"{connections}/opensocial/basic/rest/people/@me/")),
+	MY_USER_ID(new VersionedUrl(v4_0, 				"{connections}/opensocial/{authType}/rest/people/@me/")),
 
 	/**
 	 * ADMIN URLS

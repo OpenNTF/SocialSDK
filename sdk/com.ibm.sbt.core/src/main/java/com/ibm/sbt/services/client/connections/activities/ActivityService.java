@@ -1013,6 +1013,19 @@ public class ActivityService extends ConnectionsService {
 	}
 
 	/**
+	 * Change the completion status of the specified TodoNode
+	 * 
+	 * @param activity
+	 * @param completed
+	 * @throws ClientServicesException
+	 */
+	public void setCompletion(ActivityNode activityNode, boolean completed) throws ClientServicesException {
+		String requestUrl = ActivityUrls.SET_COMPLETION.format(this, ActivityUrls.activityNodePart(activityNode.getActivityNodeUuid()), ActivityUrls.completedPart(completed));
+		updateActivityEntity(requestUrl, null, null, HTTPCode.NO_CONTENT);
+	}
+
+	
+	/**
 	 * 
 	 * @param destinationUuid
 	 * @param fieldUuid

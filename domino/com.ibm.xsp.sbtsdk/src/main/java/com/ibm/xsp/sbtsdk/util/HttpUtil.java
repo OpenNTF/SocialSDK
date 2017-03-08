@@ -44,7 +44,7 @@ public class HttpUtil {
 						Object port = result.get(0);
 						if(port instanceof Number) {
 							httpsPort = ((Number)port).intValue();
-						} else if(port instanceof Number) {
+						} else if(port instanceof String) {
 							httpsPort = Integer.parseInt((String)port);
 						}
 					}

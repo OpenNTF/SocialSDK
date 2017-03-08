@@ -16,7 +16,7 @@
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.sbt.core</artifactId>
-			<version>1.0.1</version>
+			<version>1.1.12-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
@@ -31,7 +31,7 @@
 		<dependency>
 			<groupId>com.ibm.sbt</groupId>
 			<artifactId>com.ibm.commons.runtime</artifactId>
-			<version>1.0.1</version>
+			<version>1.1.12-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 </project>

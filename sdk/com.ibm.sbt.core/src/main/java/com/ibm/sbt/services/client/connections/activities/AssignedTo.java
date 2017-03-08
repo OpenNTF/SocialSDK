@@ -62,7 +62,7 @@ public class AssignedTo extends BaseEntity {
 	 * @param name
 	 */
 	public void setName(String name) {
-		setAsString(ActivityXPath.attr_userid, name);
+		setAsString(ActivityXPath.attr_name, name);
 	}
 	
 	/**

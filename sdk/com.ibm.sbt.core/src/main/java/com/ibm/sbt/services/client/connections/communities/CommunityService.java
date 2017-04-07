@@ -728,7 +728,6 @@ public class CommunityService extends ConnectionsService {
 		if(StringUtil.isEmpty(member.getRole())){
 			member.setRole("member"); //default role is member
 		}
-		member.setRole("member"); 
 		
 		Object communityPayload;
 		CommunityMemberSerializer serializer = new CommunityMemberSerializer(member);

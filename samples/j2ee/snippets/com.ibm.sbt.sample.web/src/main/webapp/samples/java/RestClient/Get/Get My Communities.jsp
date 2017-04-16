@@ -50,6 +50,8 @@
 			out.println("<pre>");
 			out.println("Problem Occurred while fetching my communities: " + e.getMessage());
 			out.println("</pre>");
+		} catch (NullPointerException e){
+		
 		}
 	%>
 	</div>

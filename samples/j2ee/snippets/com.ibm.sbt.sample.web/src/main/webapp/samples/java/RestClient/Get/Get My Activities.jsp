@@ -50,6 +50,8 @@
 			out.println("<pre>");
 			out.println("Problem Occurred while fetching my activities: " + e.getMessage());
 			out.println("</pre>");
+		} catch(NullPointerException e){
+			
 		}
 	%>
 	</div>

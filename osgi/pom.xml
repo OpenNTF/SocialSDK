@@ -8,7 +8,7 @@
 		<repository>
 			<id>notes</id>
 			<layout>p2</layout>
-			<url>http://dubgsa.ibm.com/gsa/dubgsa/home/l/o/lorenzob/web/public/updateSite/notes900/</url>
+			<url>https://dubgsa.ibm.com/gsa/dubgsa/home/l/o/lorenzob/web/public/updateSite/notes900/</url>
 		</repository>
 	</repositories>
 	
